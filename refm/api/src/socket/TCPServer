@@ -1,0 +1,116 @@
+= TCPServer
+
+TCP/IPストリーム型接続のサーバ側のソケットのクラス。このクラ
+スによって簡単にソケットを利用したサーバのプログラミングがで
+きます。例えばechoサーバは以下のようになります。
+
+  require "socket"
+
+  gs = TCPServer.open(0)
+  socks = [gs]
+  addr = gs.addr
+  addr.shift
+  printf("server is on %s\n", addr.join(":"))
+
+  while true
+    nsock = select(socks)
+    next if nsock == nil
+    for s in nsock[0]
+      if s == gs
+        socks.push(s.accept)
+        print(s, " is accepted\n")
+      else
+        if s.eof?
+          print(s, " is gone\n")
+          s.close
+          socks.delete(s)
+        else
+          str = s.gets
+          s.write(str)
+        end
+      end
+    end
+  end
+
+(({Thread}))を使えばもっと短くなります。
+
+  require "socket"
+
+  gs = TCPServer.open(0)
+  addr = gs.addr
+  addr.shift
+  printf("server is on %s\n", addr.join(":"))
+
+  while true
+    Thread.start(gs.accept) do |s|       # save to dynamic variable
+      print(s, " is accepted\n")
+      while s.gets
+        s.write($_)
+      end
+      print(s, " is gone\n")
+      s.close
+    end
+  end
+
+== スーパークラス:
+
+* ((<TCPSocket>))
+
+== クラスメソッド:
+
+--- TCPServer.new([host, ]service)
+--- TCPServer.open([host, ]service)
+    新しいサーバー接続をオープンします。((|service|))は
+    (({/etc/services}))(またはNIS)に登録されているサービ
+    ス名かポート番号で指定します。((|host|))を指定した時は
+    指定したホストに対しての接続だけを受け付けます。省略時は全てのホ
+    スト(インタフェース)への接続要求を受け付けることになります。
+
+    ((|host|))に指定できる形式は((<socket/ホスト指定形式>))を見てください。
+
+== メソッド:
+
+--- accept
+
+    クライアントからの接続要求を受け付け、接続した
+    ((<TCPSocket>))のインスタンスを返します。
+
+      TCPServer.open("", 0) {|serv|
+        c = TCPSocket.new(*serv.addr.values_at(3,1))
+        s = serv.accept
+        c.write "foo"  
+        p s.recv(10)  #=> "foo"
+      }
+
+--- accept_nonblock
+    ((<ruby 1.8.5 feature>))
+
+    ソケットをノンブロッキングモードに設定した後、
+    (({accept(2)}))を呼び出します。
+
+    引数、返り値は ((<TCPServer/accept>)) と同じです。
+
+    (({accept(2)}))がエラーになった場合、
+    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。
+
+--- listen(backlog)       ((<ruby 1.7 feature>))
+
+    ((<listen(2)|manual page>)) を実行します。
+    (((<Socket/listen>))と同じ)
+
+    ((|backlog|)) は、クライアントからの接続要求を保留できる数です。
+    TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
+
+    ((<listen(2)|manual page>)) が成功すれば 0 を返します。
+    失敗すれば 例外 ((<Errno::EXXX>)) が発生します。
+
+--- sysaccept           ((<ruby 1.7 feature>))
+
+    接続したクライアントのソケットをファイル記述子で返すことを除けば 
+    ((<TCPServer/accept>)) と同じです。
+
+      TCPServer.open("", 0) {|serv|
+        c = TCPSocket.new(*serv.addr.values_at(3,1))
+        p serv.sysaccept        #=> 6
+      }
+

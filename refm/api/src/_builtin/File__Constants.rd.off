@@ -1,0 +1,42 @@
+= File::Constants
+
+((<File>)) クラスに関る定数を集めたモジュール。
+
+(({File})) クラスはこのモジュールをインクルードしているので、以下に挙
+げる定数は (({File})) クラスの定数のように扱うことができます。
+
+== 定数
+
+以下の定数は、((<File#flock|File/flock>)) で使用します。
+
+--- LOCK_SH
+    共有ロック。複数のプロセスが同時にロックを共有できます。
+--- LOCK_EX
+    排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
+--- LOCK_UN
+    アンロック。
+--- LOCK_NB
+    ロックの際にブロックしない。他の指定と (({or})) することで指定します。
+
+以下の定数は、((<File/File.open>))で使用します。
+
+--- RDONLY
+--- WRONLY
+--- RDWR
+--- APPEND
+--- CREAT
+--- EXCL
+--- NONBLOCK
+--- TRUNC
+--- NOCTTY
+--- BINARY
+--- SYNC
+
+以下の定数は、((<File/File.fnmatch>)), ((<Dir/Dir.glob>))で使用します。
+((<ruby 1.7 feature>))
+
+--- FNM_NOESCAPE
+--- FNM_PATHNAME
+--- FNM_PERIOD
+--- FNM_CASEFOLD
+--- FNM_DOTMATCH

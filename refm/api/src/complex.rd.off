@@ -1,0 +1,124 @@
+= complex
+
+== Functions
+
+: Complex(x, y)
+
+== class Numeric
+
+=== Instance Methods
+
+: im
+    虚数単位倍を返します。
+: real
+    実部。
+: image
+    虚部。
+: arg
+    複素数としての偏角を返します。
+: polar
+    極座標表示を返します。
+: conjugate
+    共役複素数を返します。
+
+
+#@# imported by aamine
+= Complex
+
+[2002-04-03]  by ((<すす|URL:mailto:sugawah@attglobal.net>))
+
+複素数を扱うクラス
+
+== 使い方 Usage
+Complexを使うためにはrequire 'complex'する必要がある。
+このライブラリをrequireすると、さらにMathモジュールが複素数対応に拡張される。
+
+    require 'complex'
+
+また、添付ライブラリのベクトルクラス((<Vector>))、および、
+行列クラス((<Matrix>))を読み込んでいるとき、
+VectorやMatrixの要素として、複素数を使うことができる。
+VectorおよびMatrixのそれぞれの項目を参照せよ。
+
+    require 'matrix'
+    require 'complex'
+
+
+== スーパークラス:
+
+* ((<Numeric>))
+
+== クラスメソッド:
+--- Complex.new(r,i)
+--- Complex(r,i=0)
+--- Complex.new!(r,i=0)
+
+    実部がr、虚部iが複素数を生成する。
+
+== メソッド:
+
+--- Complex#+ c
+    複素数cを加えた結果を返す。
+
+--- Complex#- c
+    複素数cを減じた結果を返す。
+
+--- Complex#* c
+    複素数cを乗じた結果を返す。
+
+--- Complex#/ c
+    複素数cで除した結果を返す。
+
+--- Complex#% c
+    複素数cで除した余り(実部同士、虚部同士の演算結果)を返す。
+
+--- Complex#** c
+    複素数cでべき乗した結果を返す。
+
+--- Complex#divmod -- obsolete
+    このメソッドは廃止された。
+
+--- Complex#abs
+    複素数の絶対値を返す。
+
+--- Complex#abs2
+    複素数の絶対値の2乗を返す。
+
+--- Complex#arg
+    複素数の偏角を返す。(値域は?）
+
+--- Complex#polar
+    複素数の極座標表示、すなわち、配列[self.abs,self.arg]を返す。
+
+--- Complex#conjugate
+    共役複素数を返す。
+
+--- Complex#real
+    実部を返す。
+
+--- Complex#image
+    虚部を返す。
+
+--- Complex#<=> c
+    cとの比較結果を返す。
+
+--- Complex#== c
+    cと等しければ、真を返す。
+
+--- Complex#to_i
+    整数((<Integer>))に変換する。
+
+--- Complex#to_f
+    浮動小数点数((<Float>))に変換する。
+
+--- Complex#to_r
+    有理数((<Rational>))に変換する。
+
+== 定数
+: I
+    虚数単位。
+
+== ChangeLog
+
+*[2002-04-03] 初版 by ((<すす|URL:mailto:sugawah@attglobal.net>))
+*[2003-04-29] Complex#polarの記述を正しい配列リテラルの表記に修正 by ((<pastor|URL:mailto:pastor@fmc.rikkyo.ne.jp>))

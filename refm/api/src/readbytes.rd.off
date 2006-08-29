@@ -1,0 +1,22 @@
+= readbytes
+
+== メソッド:
+
+--- IO#readbytes(size)
+     ((<IO#read|IO/read>))と同様に((|size|))バイト読み込みますが、
+     EOFに到達した時に例外 ((<EOFError>)) を発生させます。
+     ((|size|))バイト未満しか読み込めなかった時には
+     例外 ((<readbytes/TruncatedDataError>)) を発生させます。
+
+== TruncatedDataError
+
+IO#readbytes が発生させる例外
+
+=== スーパークラス:
+
+* ((<IOError>))
+
+=== メソッド:
+
+--- TruncatedDataError#data
+    例外が発生するまでに読み込んだデータを文字列で返します。

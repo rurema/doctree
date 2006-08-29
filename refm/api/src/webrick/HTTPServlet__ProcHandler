@@ -1,0 +1,16 @@
+= WEBrick::HTTPServlet::ProcHandler
+
+((<Proc>)) を扱うためのサーブレット。
+
+((<WEBrick::HTTPServer#mount|WEBrick::HTTPServer/mount>)) に引数として与えることは
+出来ない。((<WEBrick::HTTPServer#mount_proc|WEBrick::HTTPServer/mount_proc>))を使う。
+
+== クラスメソッド
+
+--- WEBrick::HTTPServlet::ProcHandler.new(proc)
+    proc には呼び出したい ((<Proc>)) オブジェクトを与える。proc はクライアントからの
+    リクエストがあった時、proc.call(request, response) のように呼び出される。
+    ((<WEBrick::HTTPResponse>)) オブジェクトと ((<WEBrick::HTTPRequest>)) オブジェクト。
+
+== スーパークラス
+((<WEBrick::HTTPServlet::AbstractServlet>))

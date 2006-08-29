@@ -1,0 +1,71 @@
+= SystemExit
+
+(({ruby})) を終了させます。((-exitとは少し違いがあります。((<ruby-dev:12785>))-))
+
+== スーパークラス:
+
+* ((<Exception>))
+
+== クラスメソッド:
+
+--- SystemExit.new([status], [error_message])
+
+    ((<ruby 1.7 feature>))
+
+    SystemExit 例外を生成して返します。
+
+    第一引数が整数の場合、引数 ((|status|)) を指定したものとみなされま
+    す。このことを除けば、引数の扱いは ((<Exception/Exception.new>)) 
+    と同じです。
+
+    引数 ((|status|)) が指定された場合、終了ステータスとして生成したオ
+    ブジェクトの ((<SystemExit/status>)) 属性に設定されます(省略時は 
+    0 が設定されます)。
+
+        e = SystemExit.new(1)
+        p e.status
+
+        => 1
+
+== メソッド:
+
+--- status ((<ruby 1.7 feature>))
+
+    終了ステータスを返します。終了ステータスは ((<組み込み関数/exit>)) や
+    ((<SystemExit/SystemExit.new>)) などで設定されます。
+
+        begin
+          exit(1)
+        rescue SystemExit
+          p $!
+          p $!.status
+        end
+
+        => #<SystemExit: exit>
+           1
+
+        begin
+          raise SystemExit.new(1, "bogus exit")
+        rescue SystemExit
+          p $!
+          p $!.status
+        end
+
+        => #<SystemExit: bogus exit>
+           1
+
+--- success? ((<ruby 1.8 feature>))
+
+    終了ステータスが正常終了を示すなら true を返します。
+
+        begin
+          exit(false)
+        rescue SystemExit
+          p $!
+          p $!.status
+          p $!.success?
+        end
+
+        # => #<SystemExit: exit>
+             1
+             false

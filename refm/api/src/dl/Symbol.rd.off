@@ -1,0 +1,34 @@
+= DL::Symbol
+
+((<DL>))
+
+== クラスメソッド
+--- Symbol.new(addr, type = nil, name = nil)
+    type が nil でないなら 型 type の Symbol オブジェクト sym を作成する。
+    関数が割り当てられているなら addr はそのアドレス。type が nil なら
+    ((<DL::PtrData>)) オブジェクトを返す。
+
+--- Symbol.char2type(char)
+    型に相当する文字 char を取り、C 言語の型修飾を返す。
+
+== メソッド
+--- proto()
+    関数のプロトタイプを返す。
+
+--- Symbol#name()
+    関数名を返す。
+
+--- cproto(),
+--- to_s()
+    C 言語形式のプロトタイプを返す。
+
+--- Symbol#inspect()
+    人間が読みやすい形式の文字列を返す(訳注:意訳)。
+
+--- call(arg1,arg2,...,argN),
+--- self[](arg1,arg2,...,argN)
+    パラメータ arg1, arg2, ... argN で関数を呼び出す。結果は、戻り値 r 
+    やパラメータrs からなる。rs は配列。
+
+--- to_ptr
+    対応する ((<DL::PtrData>)) オブジェクト ptr を返す。

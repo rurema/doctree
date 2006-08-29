@@ -1,0 +1,144 @@
+= OpenSSL::SSL::SSLSocket
+
+SSLSocket クラス
+
+== 例
+
+SSL/TLS サーバに接続して write する。
+
+ require 'socket'
+ require 'openssl'
+ include OpenSSL
+ 
+ soc = TCPSocket.new('www.example.com', 443)
+ ssl = SSL::SSLSocket.new(soc)
+ ssl.connect
+ ssl.write('hoge')
+ print ssl.peer_cert.to_text
+ ssl.close
+ soc.close
+
+== クラスメソッド
+
+--- SSLSocket.new(socket)
+--- SSLSocket.new(socket, context)
+    SSLSocket オブジェクトを生成する。socket には ((<TCPSocket>)) オブジェクトを与える。context には ((<OpenSSL::SSL::SSLContext>)) オブジェクトを与える。
+
+== メソッド
+
+--- io
+--- to_io
+    SSLSocket オブジェクトを生成する時に渡されたソケットを返す。
+
+--- context
+    SSLSocket オブジェクトを生成する時に渡されたコンテクストを返す。  
+    ((<OpenSSL::SSL::SSLContext>)) オブジェクト。 
+
+--- sync_close
+--- sync_close=(true or false)
+    SSLSocket を close するときに TCPSocket も close するかどうかを設定する。
+
+--- peer_cert
+    接続相手の X509 証明書 ((<OpenSSL::X509::Certificate>)) オブジェクトを返す。
+    検証結果は別途知る必要がある。
+
+--- peer_cert_chain
+    接続相手の証明書チェーンすなわち ((<OpenSSL::X509::Certificate>)) オブジェクトの配列を返す。接続相手の証明書からルート CA の証明書までのリスト。順序は以下のとおり。
+
+  [接続相手の証明書, 下位CAの証明書,... 中間CAの証明書]
+
+--- state
+    現在の状態を6文字の文字列で返す。
+
+--- cipher
+    現在実際に使われている暗号の情報を配列で返す。 TLS/SSL ハンドシェイクが行われる前の接続されていない状態では nil を返す。
+    返される配列の形式は以下の例のように [暗号名, TLS/SSLのバージョン, 鍵長, アルゴリズムで使われる bit 数] となる。
+
+  ["DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168]
+
+--- pending
+    読み取り可能なバイト数を返す。
+
+--- <<
+    ((<IO>))#<< と同様。
+
+--- accept
+    TLS/SSL クライアントから接続を受け付け、 TLS/SSL ハンドシェイクを実行し、自分自身を返す。
+
+--- addr
+    ((<IPSocket#addr|IPSocket/addr>)) と同様。
+
+--- close
+    接続を閉じる。flush を呼んでから閉じる。
+
+--- closed?
+    close していたら true を返す。
+
+--- connect
+    接続相手との TLS/SSL ハンドシェイクを実行する。
+
+--- do_not_reverse_lookup=(flag)
+    ((<BasicSocket#do_not_reverse_lookup|BasicSocket/do_not_reverse_lookup>)) と同様。
+
+--- each
+    ((<IO#each|IO/each>)) と同様。
+
+--- each_byte
+    ((<IO#each_byte|IO/each_byte>)) と同様。
+
+--- eof?
+    ((<IO#eof?|IO/eof?>)) と同様。
+
+--- fcntl(cmd[, arg])
+    ((<IO#fcntl|IO/fcntl>)) と同様。
+
+--- flush
+    ((<IO#flush|IO/flush>)) と同様。
+
+--- getc 
+    ((<IO#getc|IO/getc>)) と同様。
+
+--- gets([rs])
+    ((<IO#gets|IO/gets>)) と同様。
+
+--- getsockopt(level, optname)
+    ((<BasicSocket#getsockopt|BasicSocket/getsockopt>)) と同様。
+
+--- peeraddr
+    ((<IPSocket#peeraddr|IPSocket/peeraddr>)) と同様。
+
+--- print([arg[, ...]]) 
+    ((<IO#print|IO/print>)) と同様。
+
+--- printf(format[, arg[, ...]])
+    ((<IO#printf|IO/printf>)) と同様。
+
+--- puts([obj[, ...]]) 
+    ((<IO#puts|IO/puts>)) と同様。
+
+--- read([length[, buf]])
+    ((<IO#read|IO/read>)) と同様。
+
+--- readchar
+    ((<IO#readchar|IO/readchar>)) と同様。
+
+--- readlines([rs])
+    ((<IO#readlines|IO/readlines>)) と同様。
+
+--- setsockopt(level, optname, optval)
+    ((<BasicSocket#setsockopt|BasicSocket/setsockopt>)) と同様。
+
+--- sysclose
+    接続を閉じる。相手に'close notify'を送る。 
+
+--- sysread(length[, buf])
+    ((<IO#sysread|IO/sysread>)) と同様。
+
+--- syswrite(string)
+    ((<IO#syswrite|IO/syswrite>)) と同様。
+
+--- ungetc(char)
+    ((<IO#ungetc|IO/ungetc>)) と同様。
+
+--- write(str)
+    ((<IO#write|IO/write>)) と同様。

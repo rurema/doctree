@@ -1,0 +1,58 @@
+= ftools
+
+=== 注意
+
+1.8 以降では、ftools の利用は推奨しません。ファイル操作をするには((<fileutils>))を使ってください。
+
+== 概要
+require 'ftools' とすると、ファイルのコピーや削除などのメソッドが追加される。
+to は新たなファイル名かディレクトリ名。
+verbose が真のとき、標準エラー出力に処理の経過が出る。
+
+== メソッド
+--- File.copy(from, to[, verbose = false]) => true or false
+--- File.cp(from, to[, verbose = false]) => true or false
+
+      ファイルをコピーする。より正確には ((|from|)) を読んで ((|to|)) 
+      に書き、モードを変更する。ファイルの更新時刻はコピーした時刻に更
+      新される。
+
+      例えば、更新時刻を保持したい場合は
+
+        File.copy(from, to)
+        stat = File.stat(from)
+        File.utime(stat.atime, stat.mtime, to)
+
+      などとする。
+
+--- File.move(from, to[, verbose = false]) => true or false
+--- File.mv(from, to[, verbose = false]) => true or false
+      ファイルを移動する。((<File.rename|File>)) と異なりパーティション
+      をまたがる移動もできる。
+
+--- File.compare(from, to[, verbose = false]) => true or false
+--- File.cmp(from, to[, verbose = false]) => true or false
+      2つのファイルを比較する。
+      同じなら true、異なるなら false を返す。
+
+--- File.safe_unlink(files[, ...][, verbose = false])
+--- File.rm_f(files[, ...][, verbose = false])
+      (複数の)ファイルを可能な限り削除する。削除できたファイルの数を
+      返す。(({rm -f}))(((<rm(1)|manual page>)))に相当。
+
+--- File.makedirs(dirs[, ...][, verbose = false])
+--- File.mkpath(dirs[, ...][, verbose = false])
+      (複数の)ディレクトリを作成する。多階層のパスを一度に作成することも可能。
+      ディレクトリが既にあれば何もしない。
+      (({mkdir -p}))(((<mkdir(1)|manual page>)))に相当。
+
+--- File.chmod(mode, files[, ...][, verbose = false])
+      (複数の)ファイルの属性を変える。
+      オリジナルの ((<File.chmod|File>)) に ((|verbose|)) の指定が
+      追加されるだけ。
+
+--- File.install(from, to[, mode = nil[, verbose = false]])
+      ファイルをコピーし、モードを設定する。
+      コピー先が存在する場合は一旦削除されるので、コピー先のファイルが
+      他のファイルにハードリンクされていれば、そのリンクは切れる。
+      install (((<install(1)|manual page>)))コマンドに相当。

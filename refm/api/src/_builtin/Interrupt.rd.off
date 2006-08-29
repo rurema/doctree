@@ -1,0 +1,10 @@
+= Interrupt
+
+((<組み込み関数/trap>)) されていない (({SIGINT})) を受け取ると発生します。
+(({SIGINT})) 以外のシグナル受信による例外は ((<SignalException>)) を参
+照してください。
+
+== スーパークラス:
+
+* ((<Exception>))  (((<version 1.6 以前|ruby 1.7 feature>)))
+* ((<SignalException>))  (((<version 1.7 以降|ruby 1.7 feature>)))

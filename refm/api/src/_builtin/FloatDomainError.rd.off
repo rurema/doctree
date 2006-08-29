@@ -1,0 +1,9 @@
+= FloatDomainError
+
+正負の無限大や (({NaN}))(Not a Number) を ((<Bignum>)) に変換しようと
+したり、(({NaN})) との比較を行ったときに発生します。
+((-NaN は、(({p 0.0/0 #=> NaN})) で得られます。((<Float>))参照-))
+
+== スーパークラス:
+
+* ((<RangeError>))

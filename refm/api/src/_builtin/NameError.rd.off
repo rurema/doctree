@@ -1,0 +1,36 @@
+= NameError
+
+未定義のローカル変数や定数を使用したときに発生します。
+
+== スーパークラス:
+
+* ((<ScriptError>))  (((<version 1.6 以前|ruby 1.7 feature>)))
+* ((<StandardError>))  (((<version 1.7 以降|ruby 1.7 feature>)))
+
+== クラスメソッド:
+
+--- NameError.new(error_message[, name])  ((<ruby 1.8 feature>))
+
+    例外オブジェクトを生成して返します。((|name|))は未定義だったシンボルです。
+
+        err = NameError.new("message", "foo")
+        p err
+        p err.name
+
+        # => #<NameError: message>
+             "foo"
+
+== メソッド:
+
+--- NameError#name
+
+    未定義だったシンボルを返します。
+
+        begin
+          foobar
+        rescue NameError
+          p $!
+          p $!.name
+        end
+        # => #<NameError: undefined local variable or method `foobar' for main:Object>
+             :foobar

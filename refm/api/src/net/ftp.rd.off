@@ -1,0 +1,306 @@
+= net/ftp
+
+== Net::FTP
+
+=== スーパークラス
+
+(({Object}))
+
+=== クラスメソッド
+
+--- Net::FTP.new(host=nil, user=nil, passwd=nil, acct=nil)
+
+    新しいインスタンスを生成します。 
+
+    hostが指定された場合、生成されたインスタンスに対して connectを呼び出し、
+    さらにuserが指定された場合は loginを呼び出します。 
+
+--- Net::FTP.open(host, user=nil, passwd=nil, acct=nil)
+
+    hostを省略できない以外は newと同じです。 
+
+=== メソッド
+
+--- Net::FTP#connect(host, port = FTP_PORT)
+
+    hostで指定されたホストに接続します。 
+
+--- Net::FTP#sendcmd(cmd)
+
+    cmdで指定されたコマンドをサーバーに送り、 サーバーからの応答を返します。 
+
+    応答コードが4xxの場合は例外FTPTermErrorが、5xxの場合は
+    例外FTPPermErrorが発生します。
+    応答コードの最初の数字が1から5のどれでもない場合は
+    例外FTPProtoErrorが発生します。 
+
+--- Net::FTP#voidcmd(cmd)
+
+    sendcmdと同様にサーバーにコマンドを送りますが、nilを返す点と、
+    応答コードが2xx以外の場合、例外FTPReplyErrorが発生する点が異なります。 
+
+--- Net::FTP#login(user = "anonymous", passwd = nil, acct = nil)
+
+    ログイン処理を行ないます。 
+
+    userが省略された場合、anonymousでログインします。 
+
+--- Net::FTP#retrbinary(cmd, blocksize, rest_offset = nil, callback = Proc.new)
+
+    サーバーにcmdで指定されたコマンドを送り、バイナリデータを 取り寄せます。
+    blocksizeで指定されたバイト単位でデータを
+    読み込み、callbackで指定されたProcオブジェクトまたは
+    ブロックに読み込んだデータを渡します。 
+
+--- Net::FTP#retrlines(cmd, callback = nil)
+
+    サーバーにcmdで指定されたコマンドを送り、テキストデータを
+    取り寄せます。一行ずつテキストを読み込み、callbackで指定された
+    Procオブジェクトまたはブロックに読み込んだ行を渡します。 
+
+    callbackもブロックも省略された場合は読み込んだ行をprintします。 
+
+--- Net::FTP#storbinary(cmd, file, blocksize, rest_offset = nil, callback = nil)
+
+    サーバーにcmdで指定されたコマンドを送り、バイナリデータを
+    送ります。blocksizeで指定されたバイト単位で
+    fileからデータを読み込み、サーバーに送ります。 
+
+    callbackやブロックが指定された場合はデータが
+    送信されるごとにそれを呼び出します。 
+
+--- Net::FTP#storlines(cmd, file, callback = nil)
+
+    サーバーにcmdで指定されたコマンドを送り、テキストデータを
+    送ります。一行ずつでfileからテキストを読み込み、
+    サーバーに送ります。 
+
+    callbackやブロックが指定された場合はデータが
+    送信されるごとにそれを呼び出します。 
+
+
+--- Net::FTP#getbinaryfile(remotefile, localfile, blocksize = DEFAULT_BLOCKSIZE, callback = nil)
+
+    サーバー上のバイナリファイルをgetします。 
+
+    callbackやブロックが指定された場合は
+    データが送信されるごとにそれを呼び出します。 
+
+    ((<ruby 1.7 feature>)): localfile は省略可能になりました。
+    File.basename(remotefile) が省略時の値になります。
+
+--- Net::FTP#gettextfile(remotefile, localfile, callback = nil)
+
+    サーバー上のテキストファイルをgetします。 
+
+    callbackやブロックが指定された場合は
+    データが送信されるごとにそれを呼び出します。 
+
+
+--- Net::FTP#putbinaryfile(localfile, remotefile, blocksize = DEFAULT_BLOCKSIZE, callback = nil)
+
+    サーバーにバイナリファイルをputします。 
+
+    callbackやブロックが指定された場合は
+    データが送信されるごとにそれを呼び出します。 
+
+--- Net::FTP#puttextfile(localfile, remotefile, callback = nil)
+
+    サーバーにテキストファイルをputします。 
+
+    callbackやブロックが指定された場合は
+    データが送信されるごとにそれを呼び出します。 
+
+--- Net::FTP#acct(account)
+
+    サーバーにアカウント情報を送ります。 
+
+--- Net::FTP#nlst(dir = nil)
+
+    dirで指定したディレクトリのファイルの配列を返します。
+    dirを省略した場合カレントディレクトリが指定されます。 
+
+--- Net::FTP#list(*args, &block)
+--- Net::FTP#ls(*args, &block)
+--- Net::FTP#dir(*args, &block)
+
+    LISTコマンドを送信し、結果を返します。 
+
+    ブロックとともに呼び出された場合は各行に対してブロックを
+    実行します。 
+
+--- Net::FTP#rename(fromname, toname)
+
+    ファイルをリネームします。 
+
+--- Net::FTP#delete(filename)
+
+    ファイルを削除します。 
+
+--- Net::FTP#chdir(dirname)
+
+    カレントディレクトリをdirnameに変更します。 
+
+--- Net::FTP#size(filename)
+
+    ファイルのサイズを返します。 
+
+--- Net::FTP#mtime(filename, local = false)
+
+    filenameの更新時刻をTimeオブジェクトで返します。
+    localは、更新時刻をローカル時刻とみなすかどうかの
+    フラグです。(省略したときのデフォルト値はfalseです)。 
+
+--- Net::FTP#mkdir(dirname)
+
+    ディレクトリを作成します。 
+
+--- Net::FTP#rmdir(dirname)
+
+    ディレクトリを削除します。 
+
+--- Net::FTP#pwd
+--- Net::FTP#getdir
+
+    カレントディレクトリを返します。 
+
+--- Net::FTP#system
+
+    サーバーのOSのタイプを返します。 
+
+--- Net::FTP#abort
+
+    データの転送を中止します。 
+
+--- Net::FTP#status
+
+    現在の状態を返します。 
+
+--- Net::FTP#mdtm(filename)
+
+    MDTMコマンドを送信し、結果を返します。 
+
+--- Net::FTP#passive
+
+    passive モードの状態を真偽値で返します。
+
+--- Net::FTP#passive = bool
+
+    passive モードの状態を設定します。新しい状態を返します。
+
+--- Net::FTP#return_code
+
+    現在のセッションの改行コードを返します。
+
+--- Net::FTP#return_code = string
+
+    現在のセッションの改行コードを設定します。新しい改行コードを返します。
+
+--- Net::FTP#lastresp
+
+    サーバからの最後の応答を返します(string)。
+
+    (例): ファイルが正常に転送された時は、"226"。数字の意味は((<RFC:959>))参照。
+
+--- Net::FTP#welcome
+
+    サーバのウェルカムメッセージを返します。
+
+--- Net::FTP#help(arg = nil)
+
+    help情報を返します。 
+
+--- Net::FTP#quit
+
+    ログアウトします。
+
+--- Net::FTP#close
+
+    接続を切ります。 
+
+--- Net::FTP#closed?
+
+    接続が切れている時に真を返します。
+
+--- Net::FTP#resume
+
+    現在のリジュームモードを返します。リジュームモードとは途中で中断された
+    データ転送を再開するためのものです。デフォルトの値は (({false})) です。
+    この値が真であるとき、いくつかの転送メソッドは事前に REST コマンドを
+    発行することによって転送元と転送元のオフセットをセットします。
+    これにより、すでに転送されたデータは転送されなくなります。
+    具体的には以下のメソッドが影響を受けます。
+
+    (({getbinaryfile})) はローカルファイルのサイズをオフセットとします。
+
+    (({putbinaryfile})) はリモートファイルのサイズをオフセットとします。
+
+--- Net::FTP#resume = boolean
+
+    (({resume})) の値を設定します。
+
+--- Net::FTP#debug_mode
+
+    デバッグモードであるか否かを表す真偽値です。
+    値が真であるとき、送受信の記録と ABOR, STAT の結果が標準出力に
+    随時表示されます。
+
+--- Net::FTP#debug_mode = boolean
+
+    デバッグモードの値を設定します。
+
+--- Net::FTP#set_socket(sock, get_greeting = true)
+
+    通信先を (({TCPSocket})) オブジェクト ((|sock|)) に設定します。
+    省略可能な第2引数 ((|get_greeting|)) に偽が与えられると、
+    (({set_socket})) は通信先を設定するだけで ((|sock|)) に対する操作を
+    何も行ないません。このとき値として (({nil})) を返します。
+    ((|get_greeting|)) が真(デフォルト)ならば、通信先を ((|sock|)) に
+    設定したあと、通常FTPサーバが接続時に送ってくるメッセージを読み込み、
+    このメッセージを値として返します。 
+
+--- Net::FTP#get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE)
+--- Net::FTP#get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... }
+
+    (({binary}))の値に従ってリモートファイルを取得し、
+    ((|localfile|))をファイル名とするローカルファイルに保存します。
+    ((|remotefile|))が省略されると((|localfile|))のベースネームが
+    仮定されます。
+    ((|block_size|))が省略されると(({DEFAULT_BLOCLSIZE}))が仮定されます。
+    この値は (({binary})) が真であるときのみ有効です。
+
+    ブロックが与えられた場合はそのデータをファイルに書きこむごとに、
+    書き込んだデータを ((|data|)) に代入してブロックが評価されます。
+    ブロックを最後に評価したときに得られた値が (({get})) の値になります。
+
+    ブロックが与えられなかった場合の (({get})) の値は (({nil})) です。
+
+--- Net::FTP#put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE)
+--- Net::FTP#put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... }
+
+    (({binary}))の値に従ってローカルファイル ((|localfile|)) を送信し、
+    ((|remotefile|)) をファイル名とするリモートファイルに保存します。
+    ((|remotefile|))が省略されると((|localfile|))のベースネームが
+    仮定されます。
+    ((|block_size|))が省略されると(({DEFAULT_BLOCLSIZE}))が仮定されます。
+    この値は (({binary})) が真であるときのみ有効です。
+
+    ブロックが与えられた場合はそのデータを送信するごとに、
+    送信したデータを ((|data|)) に代入してブロックが評価されます。
+    ブロックを最後に評価したときに得られた値が (({put})) の値になります。
+
+    ブロックが与えられなかった場合の (({put})) の値は (({nil})) です。
+
+--- Net::FTP#binary
+
+    表現タイプがバイナリ(IMAGE)であるか否かを表す真偽値です。
+    (({get})) と (({put})) が影響を受けます。
+    デフォルトの値は (({true})) です。
+    偽の場合、ASCIIが仮定されます。
+    EBCDIC や LOCAL など他の表現タイプはサポートされていません。
+
+--- Net::FTP#binary = bool
+
+    表現タイプがバイナリ(IMAGE)であるか否かを設定します。
+
+    ((<執筆者募集>))

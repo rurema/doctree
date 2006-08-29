@@ -1,0 +1,101 @@
+= socket
+
+socket はプロセス外部との通信 (プロセス間通信、ホスト間通信) を実現します。
+
+== クラス
+
+* ((<IO>))
+  * ((<BasicSocket>)): ソケットを表す抽象クラス
+    * ((<IPSocket>)): インターネットドメインソケットの抽象クラス
+      * ((<TCPSocket>)): インターネットドメインのストリーム型ソケットのクラス
+        * ((<TCPServer>)): TCP/IPストリーム型接続のサーバ側のソケットのクラス
+        * ((<SOCKSSocket>)): TCPSocket を SOCKS 対応したクラス
+      * ((<UDPSocket>)): インターネットドメインのデータグラム型ソケットのクラス
+    * ((<UNIXSocket>)): Unixドメインのストリーム型ソケットのクラス
+      * ((<UNIXServer>)): Unixストリーム型接続のサーバ側のソケットのクラス
+    * ((<Socket>)): 低レベルソケットインターフェース
+
+== モジュール
+
+* ((<Socket::Constants>))
+
+== ソケットアドレス
+
+ソケットというのは通信路の末端です。
+たとえば 1対1 の通信では、まず通信路の両端にひとつずつソケットをつくり、
+それらのソケットを接続することによって通信路が確立し、相互に通信できるようになります。
+この接続時に、一方のソケットにもう一方のソケットの場所を教えてやる必要がありますが、
+この場所を指定するものがソケットアドレスです。
+
+ソケットアドレスはソケットの種類によって中身が異なります。
+たとえば TCP では IPアドレスとポート番号ですし、
+Unixドメインソケットではソケットファイルを指すパス名です。
+
+((<IPSocket>)) および ((<UNIXSocket>)) 以下のクラス階層では、
+わざわざソケットアドレスという形式にまとめなくてもよいよう、
+ソケットアドレスの中身を直接扱えるメソッドが用意されています。
+
+また、((<IPSocket>)) 以下でのIPアドレスとポート番号の指定は、
+数値で表現するだけでなく、ホスト名やサービス名が使えます。
+これについては((<socket/ホスト指定形式>))と((<socket/サービス指定形式>))を参照してください。
+
+また、C のレベルの((<socket/ソケットアドレス構造体を pack した文字列>))も使用できます。
+これは主に低レベルソケットインターフェース (((<Socket>))) で用いられます。
+
+=== ホスト指定形式
+
+AF_INETなソケットにおいてホストを指定するには以下のいずれか
+の形式を指定します。
+
+* ホスト名 (例: "localhost")
+* octet decimalによるIPアドレス(文字列) (例: "127.0.0.1")
+* 空文字列 (""), 文字列 (({"<any>"})) - (({INADDR_ANY}))に相当
+* 文字列 (({"<broadcast>"})) - (({INADDR_BROADCAST}))に相当
+* IPアドレスを表す 32bit の整数 (例: 0x7f000001)
+
+=== サービス指定形式
+
+サービスを指定するには以下のいずれかの形式を指定します。
+
+* ポート番号(整数または文字列) (例: 21, "21")
+* サービス名 (例: "ftp")
+
+=== ソケットアドレス構造体を pack した文字列
+
+ソケットアドレス構造体とは、C 言語の構造体 struct sockaddr_in (IPv4) 
+や struct sockaddr_un (Unix ドメイン)を指します。
+((<Socket>)) クラスなどソケットの低レベルインタフェースで利用されます。
+
+((<ruby 1.7 feature>)):
+((<Socket/Socket.pack_sockaddr_in>)),
+((<Socket/Socket.unpack_sockaddr_in>)) といったメソッドにより、
+例えば、以下のようにしてこの文字列を得ることが出来ます
+
+    require 'socket'
+    p Socket.pack_sockaddr_in("echo", "127.0.0.1")
+    => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
+
+また、ruby 1.6 以前では、以下のように ((<Array/pack>)) を使用できます。
+
+    require 'socket'
+    p [Socket::AF_INET,
+       Socket.getservbyname('echo'),
+       127, 0, 0, 1].pack("s n C4 x8")
+    => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
+
+== ホスト名と IP アドレスの変換
+
+ホスト名から IP アドレスへの変換 (正引き) を行うメソッドは以下のものが用意されています。
+
+* ((<IPSocket.getaddress|IPSocket/IPSocket.getaddress>))("www.ruby-lang.org") => "210.163.138.100"
+* ((<TCPSocket.gethostbyname|TCPSocket/TCPSocket.gethostbyname>))("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
+* ((<Socket.gethostbyname|Socket/Socket.gethostbyaddr>))("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "\322\243\212d"]
+* ((<Socket.getaddrinfo|Socket/Socket.getaddrinfo>))("www.ruby-lang.org", "http") => [["AF_INET", 80, "beryllium.ruby-lang.org", "210.163.138.100", 2, 1, 6]]
+
+逆に IP アドレスからホスト名への変換 (逆引き) を行うメソッドは以下のものが用意されています。
+
+#* TCPSocket.gethostbyname("210.163.138.100") => ["210.163.138.100", [], 2, "210.163.138.100"]
+#* Socket.gethostbyaddr(host[, type])
+* ((<Socket.getnameinfo|Socket/Socket.getnameinfo>))([Socket::AF_INET, "http", "210.163.138.100"]) => ["beryllium.ruby-lang.org", "www"]
+
+また、((<resolv>)) ライブラリも使用できます。

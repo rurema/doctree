@@ -1,0 +1,42 @@
+= Rinda::TupleSpace
+
+((<執筆者募集>))
+
+((<Rinda>))
+
+Tuple Space のためのクラスです。普通は ((<Rinda::TupleSpaceProxy>)) を介して使います。
+
+== インクルードしているモジュール
+
+((<MonitorMixin>)), DRbUndumped
+
+== クラスメソッド
+
+--- TupleSpace.new(period=60)
+    TupleSpace オブジェクトを生成します。
+
+== メソッド
+
+--- move(port, tuple, sec=nil)
+
+--- notify(event, tuple, sec=nil)
+
+--- read(tuple, sec=nil)
+
+--- read_all(tuple)
+
+--- take(tuple, sec=nil)
+--- take(tuple, sec=nil){|template| ... }
+    ((|tuple|)) にマッチするタプルをタプルスペースから取り出して返します。
+    マッチするタプルが存在しない場合は、マッチするタプルがタプルスペースに
+    投入されるまで待ちます。
+
+    待ち時間が ((|sec|)) 秒を過ぎた時には take をあきらめ   
+    例外 RequestExpiredError を投げます。
+   
+--- write(tuple, sec=nil)
+    与えられた ((<Rinda::Tuple>)) オブジェクト ((|tuple|)) をタプルスペースに加えます。
+    ((|tuple|)) を管理するための ((<Rinda::TupleEntry>)) オブジェクトを返します。
+= Rinda::TupleEntry
+
+((<執筆者募集>))

@@ -1,0 +1,21 @@
+= thread
+
+((<Thread>))を拡張するライブラリです．rubyインタプリタを
+デバッグオプション付き(((<$DEBUG|組み込み変数>))を真)で実行したときには，
+((<Thread.abort_on_exception|Thread>))をtrueにします((-あらい: 2001-02-11 
+$DEBUGが真の場合、rubyインタプリタの方で abort_on_exception を true にした
+ときと同じ動作にするので、この機能は必要ないのではないか？-))．
+
+以下のクラスが定義されています．
+
+* ((<ConditionVariable>))
+* ((<Mutex>))
+* ((<Queue>))
+  * ((<SizedQueue>))
+
+また，((<Thread>))クラスに以下のクラスメソッドを追加定義します。
+
+== Thread
+=== クラスメソッド
+--- Thread.exclusive { ... }
+     ブロック実行中、Threadの切り替えを行いません。

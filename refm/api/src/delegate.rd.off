@@ -1,0 +1,105 @@
+== 目的・概要
+
+メソッドの委譲 (delegation) を行う。
+
+Delegator クラスは指定したオブジェクトにメソッドの実行を委譲する。
+Delegator クラスを利用する場合はこれを継承して
+(({__getobj__})) メソッドを再定義して委譲先のオブジェクトを指定する。
+
+SimpleDelegator は Delegator の利用例の一つであり、コンストラクタに
+渡されたオブジェクトにメソッドの実行を委譲する。
+
+関数 DelegateClass(((|supperclass|))) は ((|superclass|)) クラスの
+オブジェクトをひとつとり、そのオブジェクトにインスタンスメソッドを委譲す
+るクラスを定義して返す。
+
+see also: Object#method_missing
+
+//ex{
+require 'delegate'
+
+foo = Object.new
+def foo.test
+  p 25
+end
+foo2 = SimpleDelegator.new(foo)
+foo2.test # => 25
+
+class ExtArray < DelegateClass(Array)
+  def initialize
+    super([])
+  end
+end
+a = ExtArray.new
+p a.class  # => ExtArray
+a.push 25
+p a       # => [25]
+//}
+
+
+= class Delegator
+
+与えられたオブジェクトの持つメソッドに関して委譲用のメソッド定義を
+提供するクラス。
+
+コンストラクタで指定されたオブジェクトのもつインスタンスメソッドのうち、
+自分の持たないメソッドについて、
+(({__getobj__})) が返すオブジェクトに実行を委譲するようメソッドを定義する。
+
+=== Instance Methods
+
+--- Delegator#initialize(obj)
+
+        ((|obj|))のもつインスタンスメソッドのうち、
+        自分の持たないメソッドについて、
+        (({__getobj__}))が返すオブジェクトに実行を委譲する
+        ようインスタンスメソッドを定義する。
+
+--- Delegator#__getobj__
+
+        委譲先のオブジェクトを返す。
+        デフォルトでは NotImplementError を発生するので、
+        サブクラスで再定義する必要がある。
+
+== SimpleDelegator
+
+Delegator クラスをそのまま利用した、
+指定したオブジェクトにメソッドを委譲するクラス。
+
+=== Super Class
+
+Delegator
+
+=== Class Methods
+
+--- SimpleDelegator.new(obj)
+
+        ((|obj|))がもつメソッドについて、実行を((|obj|))に委譲する
+        オブジェクトを生成する。
+
+=== Instance Methods
+
+--- SimpleDelegator#__getobj__
+
+        委譲先のオブジェクトを返す。
+
+--- SimpleDelegator#__setobj__(obj)
+
+        委譲先のオブジェクトを((|obj|))に変更する。
+
+        委譲するメソッドの定義は生成時にのみ行われるため、
+        以前の委譲先オブジェクトと((|obj|))の間でインスタンスメソッドに
+        違いがあっても、
+        委譲するインスタンスメソッドの再設定は行われないことに注意。
+
+== 関数
+
+--- function#DelegateClass(superclass)
+
+        クラス((|superclass|))のインスタンスへメソッドを委譲するクラスを
+        定義し、そのクラスを返す。
+
+== 参考
+
+* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
+  * ((<標準添付ライブラリ紹介【第 6 回】委譲|URL:http://jp.rubyist.net/magazine/?0012-BundledLibraries>))

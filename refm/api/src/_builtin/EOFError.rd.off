@@ -1,0 +1,7 @@
+= EOFError
+
+EOF(End Of File)に達したときに発生します。
+
+== スーパークラス:
+
+* ((<IOError>))

@@ -1,0 +1,56 @@
+= UDPSocket
+
+UDP/IPデータグラム型ソケットのクラス。
+
+== スーパークラス:
+
+* ((<IPSocket>))
+
+== クラスメソッド:
+
+--- UDPSocket.open([socktype])
+--- UDPSocket.new([socktype])
+    新しいUDPソケットを返します。
+
+== メソッド:
+
+--- bind(host, port)
+    ソケットを((|host|))の((|port|))に結合します。
+
+--- connect(host, port)
+    ソケットを((|host|))の((|port|))にconnectします。
+
+--- send(mesg, flags[, dest_sockaddr])
+--- send(mesg, flags, host, port)
+
+    ソケットを介してデータを送ります。((|flags|)) に関しては
+    (({send(2)})) を参照してください。(({connect})) していないソケット
+    に対しては送り先を指定するため ((|dest_sockaddr|)) あるいは、((|host|)) と 
+    ((|port|)) を指定する必要があります。実際に送ったデータの長さを返
+    します。
+
+    ((|dest_sockaddr|)) には((<socket/ソケットアドレス構造体を pack した文字列>))
+    を指定します。
+
+    ((|host|)), ((|port|)) に関しては ((<socket/ホスト指定形式>))、
+    ((<socket/サービス指定形式>))を参照してください。
+
+    2 引数、3 引数の形式の場合の動作は、
+    ((<BasicSocket#send|BasicSocket/send>)) と同じです。
+
+    4 引数の形式で、指定したホストが複数のアドレスを持つ場合、いずれか
+    のアドレスへの送信が成功するまで(あるいはすべての送信が失敗するま
+    で)、各アドレスへの送信を順に試みます。
+
+    データの送信に失敗した場合は例外 ((<Errno::EXXX>)) が発生します。
+
+--- recvfrom_nonblock(maxlen[, flags])
+    ((<ruby 1.8.5 feature>))
+
+    ソケットをノンブロッキングモードに設定した後、
+    (({recvfrom(2)}))でソケットからデータを受け取ります。 
+
+    引数、返り値は ((<"IPSocket#recvfrom"|IPSocket/recvfrom>)) と同じです。
+
+    (({recvfrom(2)}))がエラーになった場合、
+    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。

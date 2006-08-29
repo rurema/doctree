@@ -1,0 +1,12 @@
+= ArgumentError
+
+引数の数があっていないときや、値が正しくないときに発生します。
+
+  Time.at       # => wrong number of arguments (0 for 1) (ArgumentError)
+  Array.new(-1) # => negative array size (ArgumentError)
+
+など
+
+== スーパークラス:
+
+* ((<StandardError>))

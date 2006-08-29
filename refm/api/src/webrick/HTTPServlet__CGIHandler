@@ -1,0 +1,12 @@
+= WEBrick::HTTPServlet::CGIHandler
+
+CGI を扱うためのサーブレット。
+
+== クラスメソッド
+
+--- CGIHandler.new(server, name)
+    name は実行したいローカルの CGI ファイルを文字列で与える。
+
+== スーパークラス
+
+((<WEBrick::HTTPServlet::AbstractServlet>))

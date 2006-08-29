@@ -1,0 +1,80 @@
+= Zlib::GzipFile
+
+((<zlib>))
+
+gzip 形式の圧縮ファイルを扱う抽象クラス。
+具体的な読み込み/書き込み操作は、それぞれサブクラスの
+((<Zlib::GzipReader>)), ((<Zlib::GzipWriter>)) で定義されています。
+
+IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
+持つオブジェクト) と関連付けて使用します。
+
+== スーパークラス:
+
+* ((<Object>))
+
+== クラスメソッド:
+
+--- GzipFile.new(args...)
+
+    ((<Zlib::GzipReader.new|Zlib::GzipReader/GzipReader.new>)) 及び ((<Zlib::GzipWriter.new|Zlib::GzipWriter/GzipWriter.new>)) を参照。
+
+--- GzipFile.wrap(args...) {|gz| ... }
+
+    ((<Zlib::GzipReader.wrap|Zlib::GzipReader/GzipReader.wrap>)) 及び ((<Zlib::GzipWriter.wrap|Zlib::GzipWriter/GzipWriter.wrap>)) を参照。
+
+--- Zlib::GzipFile.open(args...) {|gz| ... }
+
+    ((<Zlib::GzipReader.open|Zlib::GzipReader/GzipReader.open>)) 及び ((<Zlib::GzipWriter.open|Zlib::GzipWriter/GzipWriter.open>)) を参照。
+
+== メソッド:
+
+--- closed?
+--- to_io
+
+    IO クラスの同名メソッドと同じ。
+
+--- close
+
+    GzipFile オブジェクトをクローズします。このメソッドは
+    関連付けられている IO オブジェクトの close メソッドを呼び出します。
+    関連付けられている IO オブジェクトを返します。
+
+--- finish
+
+    GzipFile オブジェクトをクローズします。((<Zlib::GzipFile/close>))と違い、
+    このメソッドは関連付けられている IO オブジェクトの close メソッドを
+    呼び出しません。関連付けられている IO オブジェクトを返します。
+
+--- crc
+
+    圧縮されていないデータの CRC 値を返します。
+
+--- Zlib::GzipFile#level
+
+    圧縮レベルを返します。
+
+--- mtime
+
+    gzip ファイルのヘッダーに記録されている最終更新時間を返します。
+
+--- os_code
+
+    gzip ファイルのヘッダーに記録されている OS コード番号を返します。
+
+--- orig_name
+
+    gzip ファイルのヘッダーに記録されている元ファイル名を返します。
+    ファイル名が記録されていない場合は nil を返します。
+
+--- comment
+
+    gzip ファイルのヘッダーに記録されているコメントを返します。
+    コメントが存在しない場合は nil を返します。
+
+--- sync
+--- sync= flag
+
+    IO クラスと同じ。((|flag|)) が真の時、関連付けられている
+    IO オブジェクトが flush メソッドを持っていなければなりません。
+    また、true にすると圧縮率が著しく低下します。

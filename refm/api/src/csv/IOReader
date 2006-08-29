@@ -1,0 +1,10 @@
+= CSV::IOReader < CSV::Reader
+
+== Class Methods
+
+--- CSV::IOReader.new(io[, fs = ','[, rs = nil]])
+
+== Instance Methods
+
+--- CSV::IOReader#close_on_terminate
+

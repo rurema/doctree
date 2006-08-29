@@ -1,0 +1,311 @@
+= CGI::Session
+
+== 概要
+
+CGIのセッション管理を行うライブラリ。
+セッションとは、HTTPの一連のリクエストとレスポンスが属するべきコンテクスト(状況)の
+ことをいう。セッション管理には従来通り、((<cgi>))ライブラリが提供するクッキーを使用しても
+いいが、このcgi/sessionを使用した方がよりわかりやすい。
+セッション情報はHashライクなインターフェースである。
+
+セッションはセッション ID とプログラムが記録したセッション情報から構成される。
+デフォルトでは CGI::Session::FileStore が使用され、記録できるのは文字列のみである。
+
+セッション情報は CGI::Session::FileStore か CGI::Session::PStore を使用した場合は
+サーバのローカルファイルに記録され、次回のリクエスト時に利用される。
+デフォルトでは明示的に操作を行なわなくてもプログラム終了時にセッション情報は
+ファイルに保存される。セッション毎に新しいファイルが作成される。
+
+クライアントにはセッション情報に対応するセッションIDをクッキーあるいは form の hidden
+inputとして渡すことになる。クッキーはデフォルトではexpiresが指定されていない
+ために、ブラウザを終了した時点で消滅する。
+
+== 使い方
+=== 生成
+  require 'cgi/session'
+  cgi = CGI.new
+  session = CGI::Session.new(cgi)
+
+((<CGI::Session|"cgi/session">)).newに((<CGI|cgi>))オブジェクトを渡す。クライアントから渡された
+セッションIDはクッキーかクエリーとして cgi に格納されているため、意識する必要はない。
+
+=== セッション情報を記録する
+  session['name'] = "value"
+
+CGI::SessionオブジェクトはHashのようなものであり、キーに対応する値を記録する。
+デフォルトではプログラム終了時にセッション情報はファイルに記録される。
+
+=== セッション情報を得る。
+  name = session['name']
+
+別なCGIでこのセッション情報を取り出すときは、このようにする。
+
+=== ヘッダ出力
+ヘッダ出力はCGI#out、CGI#headerを使っている限り、通常通りで構わない。
+cgi/sessionは内部的にクッキーを使用しているが、これらのメソッドが面倒を見てくれるので、意識をする必要はない。
+
+=== umask値
+umask値が0022ならばセッション情報ファイルのパーミッションが644になるので、任意のユーザがそのセッション情報ファイルを見ることができる。
+それが嫌な場合はCGI::Sessionオブジェクト生成前にumask値を設定しておこう。
+
+((<ruby 1.8.2 feature>)): セッション情報ファイルは 0600 で作成されるようになった。
+
+== class CGI::Session
+
+=== クラスメソッド
+
+--- CGI::Session.new(cgi[, aHash])
+
+    セッションオブジェクトを新しく作成し返します。
+    オプションとして ((<Hash>)) オブジェクト ((|aHash|)) を与えることができる。
+    以下の文字列が aHash のキーとして認識される。
+
+      CGI::Session.new(cgi, {"new_session" => true})
+
+    : "session_path"
+    
+      クッキーのpathとして使われる。
+      (default: (({File.dirname(ENV["SCRIPT_NAME"])})), 
+      スクリプトのURIのpath部の最後のスラッシュまで)
+    
+    : "session_key"
+    
+      クッキーと<FORM type=hidden>のnameとして使われる。
+      (default: (({"_session_id"})))
+    
+    : "session_id"
+    
+      セッションIDとして使われる。
+      デフォルトのデータベースである(({FileStore}))を用いる場合, 
+      値は英数字だけからなる文字列で無ければならない。
+      このオプションが指定するとリクエストにセッションIDが含まれても無視される。
+      (default: ランダムに生成される)
+    
+    : "new_session"
+    
+      値がtrueのときは強制的に新しいセッションを始める
+    
+      以下は ((<ruby 1.8.2 feature>)) です。
+    
+      値がfalseのときは、リクエストにセッションIDが含まれていない場合に
+      例外ArgumentErrorが発生する。
+    
+      値がないときは、リクエストにセッションIDが
+      含まれている場合はそれを使用し、含まれていない場合は新しいセッションを始める.
+    
+      (default: 値なし)
+      
+    : "database_manager"
+      
+      データベースクラス。
+      (defalut: (({CGI::Session::FileStore})))
+    
+       : CGI::Session::FileStore
+         テキストファイルを使う。文字列データしか扱えない。
+    
+       : CGI::Session::MemoryStore
+         メモリ上のハッシュを使う。Ruby インタプリタの生存期間中のみ有効
+         ((-mod_ruby用って事かな...-))。
+    
+       : CGI::Session::PStore
+         Marshal フォーマットを使い、あらゆる型のデータを保存できる。
+         cgi/session/pstore によって提供される機能のため、このライブラリを読み込まなければ利用できない。
+    
+    : "tmpdir"
+    
+      (({CGI::Session::FileStore})) がセッションデータを作成するディレクトリの名前
+      (default: (({ENV["TMP"] || "/tmp"})))
+
+      ((<ruby 1.8 feature>)): default は ((<tmpdir/Dir.tmpdir>)) になりました。
+    
+    : "prefix"
+    
+      (({CGI::Session::FileStore})) がセッションデータのファイル名に与えるプレフィックス。
+      (default: (({""})))
+    
+    : "suffix"
+    
+      (({CGI::Session::FileStore})) がセッションデータのファイル名に与えるサフィックス。
+      (default: (({""}))) ((<ruby 1.8.2 feature>))
+    
+    : "no_hidden"
+    
+      ((<執筆者募集>))
+    
+    : "no_cookies"
+    
+      ((<執筆者募集>))
+    
+    : "session_expires"
+    
+      セッションの有効期間。
+      ((<Time>))オブジェクトを与えると、セッションはその日時まで破棄されずに残る。
+      (default: ブラウザの終了と同時に破棄される)
+    
+    : "session_domain"
+    
+      ((<執筆者募集>))
+    
+    : "session_secure"
+    
+      ((<執筆者募集>))
+    
+    : "session_path"
+    
+      ((<執筆者募集>))
+
+=== インスタンスメソッド
+
+--- CGI::Session#[](key)
+
+    指定されたキーの値を返します。
+
+    値が設定されていなければ nil を返します。
+
+--- CGI::Session#[]=(key, val)
+
+    指定されたキーの値を設定します。
+
+--- CGI::Session#update
+
+    データベースクラスの(({update}))メソッドを呼び出して、
+    セッション情報をサーバに保存します。
+
+    (({MemoryStore}))の場合は何もしません。
+
+--- CGI::Session#close
+
+    データベースクラスの(({close}))メソッドを呼び出して、
+    セッション情報をサーバに保存し、セッションストレージをクローズします。((- mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。　参照→((<URL:http://www.modruby.net/doc/faq.ja.jis.html#label-13>)) -))
+
+--- CGI::Session#delete
+
+    データベースクラスの(({delete}))メソッドを呼び出して、
+    セッションをストレージから削除します。
+
+    (({FileStore}))の場合はセッションファイルを削除します。
+    セッションファイルは明示的に削除しなければ残っています。
+
+== class CGI::Session::FileStore
+== class CGI::Session::MemoryStore
+== class CGI::Session::PStore
+((<執筆者募集>))
+
+== CGI::HtmlExtension#form の出力
+
+(({CGI::Session.new}))後の(({CGI::HtmlExtension#form}))は、セッションIDを埋め込んだ隠しフィールドを自動出力するようになります。(({CGI::Session.new}))は、これによって生成されたフォームフィールド値を、セッションIDとして自動認識します。
+
+(({CGI::HtmlExtension#form}))を使い、(({<INPUT TYPE="submit">}))でページ遷移をするようにすれば、クッキーが使えない環境でのセッション維持に利用できます。
+
+  #!/usr/bin/ruby
+  require 'cgi'
+  require 'cgi/session'
+
+  cgi = CGI.new('html3')
+  File.umask(0077)
+  session = CGI::Session.new(cgi)
+  cgi.out('charset'=>'euc-jp') {
+    html = cgi.html {
+      cgi.head { cgi.title {'Form Demo'} }
+      cgi.body {
+        cgi.form('action'=>"#{CGI.escapeHTML(cgi.script_name)}") {
+          cgi.p {
+            'あなたの名前は？' +
+            cgi.text_field('name') +
+            cgi.hidden('cmd', 'hello') +
+            cgi.submit('です。')
+          }
+        }
+      }
+    }
+    CGI.pretty(html)
+  }
+  #=>
+  <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+  <HTML>
+    <BODY>
+      <FORM METHOD="post" ENCTYPE="application/x-www-form-urlencoded" action="/sample.rb">
+        <P>
+          あなたの名前は？
+          <INPUT NAME="name" SIZE="40" TYPE="text">
+          <INPUT NAME="cmd" TYPE="hidden" VALUE="hello">
+          <INPUT TYPE="submit" VALUE="です。">
+        </P>
+        <INPUT TYPE="HIDDEN" NAME="_session_id" VALUE="bc315cc069266e21">    # これ
+      </FORM>
+    </BODY>
+  </HTML>
+
+== 使用例
+ただ、名前を入力するとあいさつをするだけのつまらないCGIスクリプト。
+
+=== ソースコード
+  #!/usr/bin/ruby
+  require 'kconv'
+  require 'cgi'
+  require 'cgi/session'
+
+  class SessionDemo
+    def initialize
+      @cgi = CGI.new
+      File.umask(0077)                                # セッションファイルは誰にも読まれたくないよ
+      @session = CGI::Session.new(@cgi)               # セッションはこうして生成する。
+      @cmd = "#{@cgi['cmd'].first}"                   # ruby 1.8 でも動くように(warning は出ます)
+      @cmd = 'start' if @cmd.empty?
+      @header = { "type" => "text/html", "charset" => "euc-jp" }
+
+      __send__("cmd_#{@cmd}")
+    end
+
+    def cmd_start
+      @cgi.out(@header) {
+        <<-END
+        <html><head><title>CGI::Session Demo</title></head>
+        <body>
+         <form action="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}" method="get">
+         <p>
+         あなたの名前は？
+         <input type="text" name="name">
+         <input type="hidden" name="cmd" value="hello">
+         <input type="submit" value="です。">
+         </p>
+         </form>
+        </body></html>
+        END
+      }
+    end
+
+    def cmd_hello
+      name = Kconv.toeuc(@cgi['name'].first)
+      @session['name'] = name                         # セッションに記憶
+      @cgi.out(@header) {                             # セッション情報は隠れクッキーで保持されるため、CGI#outで出力
+        <<-END
+        <html><head><title>CGI::Session Demo</title></head>
+        <body>
+         <p>こんにちは、#{CGI.escapeHTML(name)}さん</p>
+         <p><a href="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}?cmd=bye">[次へ]</a></p>
+        </body></html>
+        END
+      }
+    end
+
+    def cmd_bye
+      name = @session['name']                         # セッションデータから取り出し
+      @cgi.out(@header) {
+        <<-END
+        <html><head><title>CGI::Session Demo</title></head>
+        <body>
+         <p>#{CGI.escapeHTML(name)}さん、さようなら</p>
+         <p><a href="#{CGI.escapeHTML(ENV['SCRIPT_NAME'])}">[戻る]</a></p>
+        </body></html>
+        END
+      }
+    end
+  end
+
+  SessionDemo.new
+
+== 参考URL
+* ((<URL:http://www.shugo.net/article/webdb2/#label:13>))
+* ((<URL:http://www.modruby.net/doc/faq.ja.jis.html#label-13>))
+* ((<rdoc|URL:http://www.ruby-doc.org/stdlib/libdoc/cgi/rdoc/index.html>))

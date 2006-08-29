@@ -1,0 +1,20 @@
+= SOCKSSocket
+
+((<TCPSocket>)) を ((<SOCKS|URL:http://www.sw.nec.co.jp/middle/socks/>)) 対応したクラスです。
+
+== スーパークラス:
+
+* ((<TCPSocket>))
+
+== クラスメソッド:
+--- SOCKSSocket.open(host, service)
+--- SOCKSSocket.new(host, service)
+    hostで指定したホストのserviceで指定したポートと接続したソケッ
+    トを返します。((|host|))はホスト名、またはoctet decimal
+    によるインターネットアドレスを示す文字列、((|service|))
+    は(({/etc/services}))(またはNIS)に登録されているサー
+    ビス名かポート番号です。
+
+== インスタンスメソッド:
+--- SOCKSSocket#close
+    ソケットを閉じます。

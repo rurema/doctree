@@ -1,0 +1,80 @@
+= Symbol
+
+シンボルを表すクラス。シンボルは任意の文字列と一対一に対応するオブジェ
+クトです。Ruby スクリプトからは
+
+  * (({:symbol}))
+  * (({'symbol'.intern}))
+
+のようにして得られます。リテラルでシンボルを表す場合、`(({:}))' の後に
+は識別子、メソッド名(`(({!}))',`(({?}))' などの接尾辞を含む)、変数名
+(`(({$}))'などの接頭辞を含む)、再定義できる演算子のいずれかに適合する
+ものしか書くことはできません(そうでなければ文法エラーになります)。
+
+((<ruby 1.7 feature>)):
+
+        p :"foo#{"bar"}"
+          => :foobar
+        p :'foo#{"bar"}'
+          => :"foo\#{\"bar\"}"
+        p %s{foo#{"bar"}}
+          => :"foo\#{\"bar\"}"
+
+== スーパークラス:
+
+* ((<Object>))
+
+== クラスメソッド:
+
+--- Symbol.all_symbols
+
+    ((<ruby 1.7 feature>))
+
+    定義済みの全てのシンボルオブジェクトの配列を返します。
+
+        p Symbol.all_symbols  # => [:RUBY_PLATFORM, :RUBY_VERSION, ...]
+
+    シンボルの生成はコンパイル時に行われるので以下のようにしても結果に
+    差はありません。
+
+        a = Symbol.all_symbols
+        :foo
+        b = Symbol.all_symbols
+        p b - a
+        # => []
+
+== メソッド:
+
+--- to_sym
+
+    ((<ruby 1.7 feature>)):
+    (({self})) を返します。
+
+--- id2name()
+--- to_s
+
+    シンボルに対応する文字列を返します。
+
+    逆に、文字列に対応するシンボルを得るには 
+    ((<String#intern|String/intern>)) を使います。
+
+         p :foo.id2name.intern == :foo
+         => true
+
+--- to_i
+
+    シンボルに対応する整数を返します。
+
+    逆にこの整数から対応するシンボルを得るには 
+    ((<Fixnum#id2name|Fixnum/id2name>)) を使って一旦文字列を得る必要が
+    あります。(((<ruby 1.7 feature>)): 直接シンボルを得るには 
+    ((<Fixnum#to_sym|Fixnum/to_sym>)) が使えます)
+
+         id = :foo.to_i
+         p id                  # => 8881
+         p id.id2name.intern   # => :foo
+         p id.to_sym           # => :foo  (version 1.7)
+
+    Rubyの実装では予約語、変数名、メソッド名などをこの整数で管理してい
+    ます。オブジェクトに対応する整数(((<Object#__id__|Object/__id__>)) で得ら
+    れます)と Symbol に対応する整数は別のものです。

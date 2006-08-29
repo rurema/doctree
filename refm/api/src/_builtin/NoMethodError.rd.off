@@ -1,0 +1,49 @@
+= NoMethodError
+
+((<ruby 1.7 feature>)):
+定義されていないメソッドの呼び出しが行われたときに発生します。
+
+        self.bar
+        => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
+
+メソッド呼び出しの形式でなければ ((<NameError>)) 例外が発生します。
+
+        bar
+        => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
+
+== スーパークラス:
+
+* ((<NameError>))
+
+== クラスメソッド:
+
+--- NoMethodError.new(error_message[, name[, args]])  ((<ruby 1.8 feature>))
+
+    例外オブジェクトを生成して返します。
+    ((|args|))は、メソッド呼び出しに使われた引数です。
+
+
+        nom = NoMethodError.new("message", "foo", [1,2,3])
+        p nom.name
+        p nom.args
+
+        # => "foo"
+             [1, 2, 3]
+
+== メソッド:
+
+--- args  ((<ruby 1.8 feature>))
+
+    メソッド呼び出しに使われた引数を配列で返します。
+
+        begin
+          foobar(1,2,3)
+        rescue NoMethodError
+          p $!
+          p $!.name
+          p $!.args
+        end
+
+        # => #<NoMethodError: undefined method `foobar' for main:Object>
+             :foobar
+             [1, 2, 3]

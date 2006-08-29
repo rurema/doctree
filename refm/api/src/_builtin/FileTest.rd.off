@@ -1,0 +1,128 @@
+= FileTest
+
+(({FileTest})) はファイルの検査関数を集めたモジュールです。このモジュー
+ルはインクルードしても使えます。
+
+== モジュール関数:
+
+--- FileTest.blockdev?(filename)
+
+    ((|filename|)) がブロックスペシャルファイルである時、真を返します。
+
+--- FileTest.chardev?(filename)
+
+    ((|filename|)) がキャラクタスペシャルファイルの時、真を返します。
+
+--- FileTest.executable?(filename)
+
+    ((|filename|)) が実効ユーザ/グループ ID で実行できる時、真を返しま
+    す。
+
+--- FileTest.executable_real?(filename)
+
+    ((|filename|)) が実ユーザ/グループ ID で実行できる時、真を返します。
+
+--- FileTest.exist?(filename)
+
+    ((|filename|)) が存在する時、真を返します。
+
+--- FileTest.grpowned?(filename)
+
+    ((|filename|)) のグループ ID が実行グループ ID と等しい時、真を返
+    します。
+
+--- FileTest.directory?(filename)
+
+    ((|filename|)) がディレクトリの時、真を返します。
+
+--- FileTest.file?(filename)
+
+    ((|filaname|)) が通常ファイルである時、真を返します。
+
+--- FileTest.identical?(filename1, filename2)    ((<ruby 1.8.4 feature>))
+
+    ((|filaname1|)) と ((|filename2|)) が同じファイルを指している時、真を返します。
+    (ruby 1.8.3 以前では(({((<組み込み関数/test>))(?-, filename1, filename2)}))を使ってください。)
+
+       open("a", "w") {}
+       p File.identical?("a", "a")      #=> true
+       p File.identical?("a", "./a")    #=> true
+       File.link("a", "b")
+       p File.identical?("a", "b")      #=> true
+       File.symlink("a", "c")
+       p File.identical?("a", "c")      #=> true
+       open("d", "w") {}
+       p File.identical?("a", "d")      #=> false
+
+--- FileTest.pipe?(filename)
+
+    ((|filename|)) が名前つきパイプ(FIFO)である時、真を返します。
+
+--- FileTest.socket?(filename)
+
+    ((|filename|)) がソケットである時、真を返します。
+
+--- FileTest.owned?(filename)
+
+    ((|filename|)) が自分のものである時に真を返します。
+
+--- FileTest.readable?(filename)
+
+    ((|filename|)) を読み込み可能な時に真を返します。
+
+--- FileTest.readable_real?(filename)
+
+    ((|filename|)) が実ユーザ/実グループによって読み込み可能な時に真を
+    返します。
+
+--- FileTest.setuid?(filename)
+
+    ((|filename|)) が ((<setuid(2)|manual page>)) されている時に真を返
+    します。
+
+--- FileTest.setgid?(filename)
+
+    ((|filename|)) が ((<setgid(2)|manual page>)) されている時に真を返
+    します。
+
+--- FileTest.size(filename)
+
+    ((|filename|)) のサイズを返します。((|filename|)) が存在しなければ
+    例外 ((<Errno::EXXX>))(おそらく (({Errno::ENOENT})))が発生します。
+
+    ((<FileTest/FileTest.size?>)), ((<FileTest/FileTest.zero?>)) も参
+    照してください。
+
+--- FileTest.size?(filename)
+
+    ((|filename|)) のサイズを返します。((|filename|)) が存在しない時や 
+    ((|filename|)) のサイズが0の時には (({nil})) を返します。
+
+    ((<FileTest/FileTest.size>)), ((<FileTest/FileTest.zero?>)) も参照
+    してください。
+
+--- FileTest.sticky?(filename)
+
+    ((|filename|)) の sticky ビット(((<chmod(2)|manual page>)) 参照)が
+    立っている時に真を返します。
+
+--- FileTest.symlink?(filename)
+
+    ((|filename|)) がシンボリックリンクである時、真を返します。
+
+--- FileTest.writable?(filename)
+
+    ((|filename|)) が書き込み可である時、真を返します。
+
+--- FileTest.writable_real?(filename)
+
+    ((|filename|)) が実ユーザ/実グループによって書き込み可である時、真
+    を返します。
+
+--- FileTest.zero?(filename)
+
+    ((|filename|)) が存在して、そのサイズが 0 である時、真を返します。
+    ((|filename|)) が存在しない場合は (({false})) を返します。
+
+    ((<FileTest/FileTest.size>)), ((<FileTest/FileTest.size?>)), も参
+    照してください。

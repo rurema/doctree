@@ -1,0 +1,62 @@
+= LocalJumpError
+
+スコープを出てしまった ((<Proc>)) からの 
+((<制御構造/return>)),
+((<制御構造/break>)),
+((<制御構造/retry>)) で発生します。
+
+((<Proc>)) の例を参照してください。
+
+== スーパークラス:
+
+* ((<StandardError>))
+
+== メソッド
+
+--- exit_value  ((<ruby 1.8 feature>))
+
+    例外 (({LocalJumpError})) を発生させた break や return に指定した
+    戻り値を返します。
+
+        def foo
+          proc { return 10 }
+        end
+
+        begin
+          foo.call
+        rescue LocalJumpError
+          p $!
+          p $!.reason
+          p $!.exit_value
+        end
+
+        => ruby 1.8.0 (2003-06-09) [i586-linux]
+           #<LocalJumpError: return from block-closure>
+           :return
+           10
+
+        begin
+          Block.new { break 5 }.call
+        rescue LocalJumpError
+          p $!
+          p $!.reason
+          p $!.exit_value
+        end
+
+        => ruby 1.8.0 (2003-06-09) [i586-linux]
+           #<LocalJumpError: break from block-closure>
+           :break
+           5
+
+--- reason ((<ruby 1.8 feature>))
+
+    例外を発生させた原因をシンボルで返します。返す値は、
+
+        * :break
+        * :redo
+        * :retry
+        * :next
+        * :return
+#       * :noreason
+
+    のいずれかです。((<LocalJumpError/exit_value>)) の例を参照してください。

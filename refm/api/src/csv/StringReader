@@ -1,0 +1,6 @@
+= CSV::StringReader < CSV::Reader
+
+== Class Methods
+
+--- CSV::StringReader.new(string[, fs = ','[, rs = nil]])
+

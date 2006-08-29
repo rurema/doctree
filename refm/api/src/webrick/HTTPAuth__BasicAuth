@@ -1,0 +1,58 @@
+= WEBrick::HTTPAuth::BasicAuth
+
+HTTP の Basic 認証のためのクラスです。
+
+== 例
+    
+    realm = "WEBrick's realm"
+    srv = HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
+
+    htpd = HTTPAuth::Htpasswd.new('dot.htpasswd')
+    htpd.set_passwd(nil, 'username', 'supersecretpass')
+
+    authenticator = HTTPAuth::BasicAuth.new(:UserDB => htpd, :Realm => realm)
+    srv.mount_proc('/basic_auth') {|req, res|
+      authenticator.authenticate(req, res)
+      res.body = "hoge"
+    }
+
+== クラスメソッド
+
+--- BasicAuth.make_passwd(realm, user, pass)
+    ((|pass|)) をランダムなソルトで crypt した文字列を返します。
+
+--- BasicAuth.new(config, default=Config::BasicAuth)
+    BasicAuth オブジェクトを生成します。((|config|)) は設定を保存したハッシュです。
+
+    config で有効なハッシュキーは以下の通りです。 
+     #
+     :Realm            => 
+     :UserDB           =>
+     :Logger           =>
+     :AutoReloadUserDB =>
+
+    realm を表す文字列 :Realm には与えます。:UserDB
+    には ((<WEBrick::HTTPAuth::Htpasswd>)) オブジェクトを与えます。:Logger には
+    ロガーオブジェクトを与えます。また、:AutoReloadUserDB には 
+    ((<Htpasswd#get_passwd|WEBrick::HTTPAuth::Htpasswd/get_passwd>)) の
+    reload_db に渡す引数を与えます。    
+
+== メソッド
+
+--- authenticate(req, res)
+    クライアントから送られてきたユーザ名とパスワードを認証します。
+    認証に失敗した場合は challenge を呼びます。
+
+--- challenge(req, res)
+    クライアントにパスワードを要求するために res に WWW-Authenticate ヘッダを
+    設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
+
+--- logger
+    ロガーオブジェクトを返します。
+
+--- realm
+    realm を文字列で返します。
+
+--- userdb
+    ユーザ名とパスワードを保存した ((<WEBrick::HTTPAuth::Htpasswd>)) オブジェクトを
+    返します。

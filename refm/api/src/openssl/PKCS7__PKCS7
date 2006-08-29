@@ -1,0 +1,76 @@
+= OpenSSL::PKCS7::PKCS7
+
+注意。
+
+((<OpenSSL::PKCS7>)) も参照。read_smime, write_smime, sign そして encrypt は ((<OpenSSL::PKCS7>)) モジュールのモジュールメソッドとして定義されている。
+
+PKCS #7 は暗号技術とともに用いられるデータのフォーマットの仕様です。
+データやそれに対する署名、証明した日時など任意の属性を含むことができ、S/MIME などに使用されています。
+((<rfc:2315>))
+
+== クラスメソッド
+
+--- PKCS7.new()
+--- PKCS7.new(str)
+--- PKCS7.new(io)
+    PKCS7 オブジェクトを生成する。
+
+== メソッド
+
+--- type
+--- type=
+    タイプを ((<Symbol>)) オブジェクトで返す。次のうちのいずれか。
+      ::signed, :encrypted, :enveloped, :signedAndEnveloped, :data
+
+--- detached
+--- detached=
+    平文に署名を付ける形式(multipart/signed)かどうか。 type では :signed にあたる。
+
+--- detached?
+    実際に署名されていてかつ平文に署名を付ける形式(multipart/signed)かどうか。
+
+--- cipher=
+    使用する暗号アルゴリズムを指定する。
+
+--- add_signer(singer)
+    署名者を加える。
+
+--- signers
+    メッセージの署名者 OpenSSL::PKCS7::Signer オブジェクトの配列を返す。
+
+--- add_recipient
+
+--- add_certificate
+
+--- certificates
+--- certificates=
+    署名に付ける証明書を指定する。
+
+--- add_crl(s)
+    CRL に加える。
+
+--- crls
+--- crls=
+    CRL を返す。
+
+--- add_data(data)
+    署名の対象となるデータに data を加える。
+
+--- data
+--- data=
+    署名の対象となるデータを返す。
+
+--- verify(certs, store, indata=nil, flags=0)
+    署名を検証する。
+
+--- decrypt(pkey, cert, flags=0)
+    復号化する。
+
+--- to_pem
+--- to_s
+    PEM 形式に変換する。
+
+--- to_der
+    DER 形式に変換する。
+
+--- error_string

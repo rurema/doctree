@@ -1,0 +1,69 @@
+= OpenSSL::PKey::DH
+
+Diffie-Hellman 暗号クラス
+
+== スーパークラス:
+
+((<OpenSSL::PKey::PKey>))
+
+== クラスメソッド
+
+--- DH.generate(size, generator=2)
+    Diffie-Hellman 鍵交換の最初のステップである秘密鍵と公開鍵の生成を行ないDH オブジェクトを返す。size は安全な素数のサイズ。単位はビット。generator は1より大きい小さな数で、大抵は2か5。
+
+--- DH.new(size, generator=2)
+    DH.generate(size, generator) と同じ。
+
+--- DH.new(str)
+--- DH.new(io)
+--- DH.new()
+    DH オブジェクトを生成する。
+
+== メソッド
+
+--- compute_key(num)
+--- compute_key(str)
+--- compute_key(bn)
+    Diffie-Hellman 鍵交換の第2ステップ。共有暗号鍵を自分の秘密鍵と相手の公開鍵(num, str, bn)から計算して文字列として返す。これで鍵交換は完了する。
+
+--- public?
+    公開鍵を持っているかどうか判定する。
+
+--- private?
+    秘密鍵を持っているかどうか判定する。
+
+--- to_text
+    人間が読める形式に変換する。
+
+--- export()
+--- to_pem()
+--- to_s()
+    鍵ペアを PEM 形式で出力する。
+
+--- to_der
+    DER 形式に変換する。
+
+--- public_key
+    公開鍵を複製して DH オブジェクトとして返す。
+
+--- params_ok?
+    パラメータ p と g が安全かどうかを判定する。
+
+--- generate_key!
+    新たに公開鍵と秘密鍵を生成しなおす。
+
+--- params
+    パラメータの入った ((<Hash>)) オブジェクトを返す。
+
+--- sign(digest, data)
+--- verify(digest, sign, data)
+    ((<OpenSSL::PKey::PKey>)) で定義された sign と verify を呼び出すことができるが、
+    Diffie-Hellman 暗号の性質から、呼び出しても全て PKeyError になる。
+
+--- p
+--- g
+--- pub_key
+--- pub_key=
+--- priv_key
+--- priv_key=
+

@@ -1,0 +1,92 @@
+= module DL::Importable
+
+== 概要
+
+DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与える。
+
+== Instance Methods
+
+--- define_struct(contents)
+--- struct(contents)
+
+    構造体を定義する。
+    ((|contents|))については ((<DL::Importable::Struct.new|"dl/struct"/Struct.new>))
+    を参照せよ。
+
+--- define_union(contents)
+--- union(contents)
+
+    共用体を定義する。
+    ((|contents|))については上記(({define_struct}))と同様である。
+
+
+
+= class DL::Importable::Memory
+
+== 概要
+
+(({DL::PtrData})) のラッパー用クラス。
+ドット形式で構造体や共用体の要素へアクセスできるようになる。
+Struct,Unionのインスタンスのmalloc,newメソッドを呼ぶことによって、
+Memoryクラスのインスタンスが生成できる。
+そのため、通常、直接生成する必要はない。
+
+== Class Methods
+
+--- Memory.new(ptr, names, ty, len, enc, dec)
+
+    DL::PtrDataオブジェクト((|ptr|))の各メンバへアクセスするためのメソッドを
+    動的に定義する。Struct,Unionのインスタンスがこれらの情報を保持する。
+
+== Instance Method
+
+--- to_ptr
+
+    保持しているDL::PtrDataオブジェクトを返す。
+
+--- size
+
+    DL::PtrData#sizeを呼ぶ。
+
+
+
+== class DL::Importable::Struct
+
+=== クラスメソッド
+
+--- Struct.new(types, contents)
+
+    ((|types|))にはDL::Typesのインスタンス、((|contents|))には構造体の定義を
+    以下のようにして与える。
+
+      ["int size",
+       "char *str"]
+
+    このようにして生成されたStructオブジェクトは、以下の構造体のように振舞う。
+
+      struct {
+        int size;
+        char *str;
+      }
+
+=== メソッド
+
+--- new(ptr)
+
+    ((<DL::PtrData>)) オブジェクト ((|ptr|)) を保持する Memory オブジェクトを返す。
+
+--- malloc(size = nil)
+
+    ((|size|))バイトの領域を確保してDL::PtrDataオブジェクトを生成し、その
+    DL::PtrDataオブジェクトを保持するMemoryオブジェクトを返す。
+
+
+
+== class DL::Importable::Union
+
+共用体に対するクラスである以外は、Struct とほぼ同じ。
+
+== 補足
+
+上記メソッドやクラスは、
+実際には DL::Importable::Internal に定義されている。

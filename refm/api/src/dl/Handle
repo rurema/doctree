@@ -1,0 +1,26 @@
+= class DL::Handle
+
+== Class Methods
+
+--- Handle.new(lib)
+--- Handle.new(lib) {|handle| ... }
+
+    ライブラリ lib をオープンし、Handle オブジェクト handle を返す。
+
+    ブロックを指定すれば、
+    オープンしたハンドルをブロック引数に渡してブロックを実行する.
+    ハンドルはブロックの終りで自動的にクローズされる。
+
+== Instance Methods
+
+--- close
+
+    Handle.new(lib) によってオープンされたハンドルをクローズする。
+
+--- sym(func, prototype = "0"),
+--- self[func, prototype = nil]
+
+    関数 func (訳注: やグローバル変数？) へのポインタを取得し、
+    ((<DL::Symbol>)) オブジェクトや ((<DL::PtrData>)) オブジェクトを返す。
+    prototype は型修飾からなる文字列で関数のプロトタイプを示す。
+    ((<DL/Type specifiers>)) も参照。

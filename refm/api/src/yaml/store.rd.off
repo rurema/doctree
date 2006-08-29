@@ -1,0 +1,45 @@
+= YAML::Store
+
+((<ruby 1.8 feature>)):
+((<PStore>)) の ((<YAML>)) 版です。((<Marshal.dump|Marshal/Marshal.dump>)) したバイナリ形式の
+代わりに YAML 形式でファイルに保存します。
+
+使い方は ((<PStore>)) とほとんど同じです。((<執筆者募集>))
+
+== スーパークラス:
+
+* ((<PStore>))
+
+== 例
+ 
+ require "yaml/store"
+ 
+ db = YAML::Store.new("sample.yml")
+ db.transaction do
+   db["hoge"] = {1 => 100, "bar" => 101}
+ end
+
+ # sample.yml
+ hoge:
+   1: 100
+   bar: 101
+
+((<PStore>)) 同様、ユーザが定義したクラスのオブジェクトを保存することもできます。
+
+ require "yaml/store"
+ 
+ class Foo
+   attr_accessor :foo
+ end
+ 
+ db = YAML::Store.new("sample.yml")
+ db.transaction do
+   f = Foo.new
+   f.foo = 777
+   db["bar"] = f
+ end
+  
+ # sample.yml
+ bar: !ruby/object:Foo
+   foo: 777
+

@@ -1,0 +1,7 @@
+= rubyunit
+
+単体テストフレームワーク用のライブラリは ((<Test::Unit>)) が標準配布として採
+用されました。添付の rubyunit は、((<RAA:RubyUnit>)) の互換ライブラ
+リで ((<Test::Unit>)) で実装されています。
+
+((<RUNIT::Assert>))

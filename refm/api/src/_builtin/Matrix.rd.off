@@ -1,0 +1,324 @@
+= Matrix
+[2002-04-03]  by ((<すす|URL:mailto:sugawah@attglobal.net>))
+
+(数((<Numeric>))を要素とする)行列を扱うクラス
+
+== 行列
+
+m×n個の数a(i,j)を
+
+    [ a(0,0) a(0,1) a(0,2)  a(0,3) ... a(0,n-1)   ]
+    [ a(1,0) a(1,1) a(1,2)  a(1,3) ... a(1,n-1)   ]
+    [ a(2,0) a(2,1) a(2,2)  a(2,3) ... a(2,n-1)   ]
+    [                                             ]
+    [ a(m-1,0)                         a(m-1,n-1) ]
+
+のように、縦横の表にあらわしたものを(m,n)型の行列という。
+m=nの行列をm次の正方行列(square matrix)という。
+
+上からi番目の横の数の並びを第i行(the i-th row)、
+左からj番目の縦の数の並びを第j列(the j-th column)という。
+
+(m,n)型行列は、
+大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできるし、
+大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできる。
+
+第i行、第j列にある数a(i,j)を(i,j)要素((-elementという語には、数学では「成分」、物理では「要素」という訳をあてる。数学の「要素」はcomponentという語に当たる-))(the (i,j)-th element)という。
+
+i=jの要素a(i,j)を対角要素(diagonal element)、
+それ以外の要素を非対角要素(nondiagonal element)という。
+
+
+== 使い方　Usage
+
+Matrixクラスを使うためには、require 'matrix'する必要がある。
+
+    require 'matrix'
+
+
+== インスタンス生成  Instance Creation
+--- Matrix.[](rows)
+#    creates a matrix where `rows' indicates rows.
+#    The parameter `rows' is an array of arrays,
+#    e.g, Matrix[[11, 12], [21, 22]]
+
+    rowsを要素とする行列を生成する。
+    ただし、引数rowsはネストした配列(=配列の配列)である。
+    例 Matrix[[11, 12], [21, 22]]
+
+--- Matrix.rows(rows, copy = true)
+#    creates a matrix where `rows' indicates rows.
+#    If optional argument `copy' is false, use the array as
+#    internal structure of the metrix without copying.
+
+    rowsを要素とする行列を生成する。
+    ただし、引数rowsはネストした配列(=配列の配列)である。
+    また、オプション引数 copy が偽(false)ならば、複製を行わない。
+
+--- Matrix.columns(columns)
+#    creates a new matrix using `columns` as set of colums vectors.
+
+    columnsを列ベクトルの集合とする行列を生成する。
+
+--- Matrix.diagonal(values)
+#    creates a matrix where `values' indicates columns.
+
+    対角要素がvalues(オブジェクトの並び)で、非対角要素が全て0であるような正方行列を生成する。
+
+    (注:) valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素とした1×1の行列ができる。
+
+--- Matrix.scalar(n, value)
+#    creates a diagonal matrix such that the diagal compornents is given by `values'.
+
+    対角要素が全てvalue(数)で、非対角要素が全て0であるようなn次の正方行列を生成する。
+
+--- Matrix.identity(n)
+--- Matrix.unit(n)
+--- Matrix.I(n)
+#    creates an n-by-n unit matrix.
+
+    n次の単位行列を生成する。
+
+    単位行列とは、対角要素が全て1で、非対角要素が全て0であるような行列である。
+
+--- Matrix.zero(n)
+#    creates an n-by-n zero matrix.
+
+    n次の零行列を生成する。
+    零行列とは、要素が全て0の行列である。
+
+--- Matrix.row_vector(row)
+#    creates a 1-by-n matrix such the row vector is `row'.
+#    The parameter `row' is given as a Vector or an Array.
+
+    要素がrowの(1,n)型の行列(行ベクトル)を生成する。
+    ここで、引数rowは、((<Vector>))または((<Array>))で与えられる。
+
+--- Matrix.column_vector(column)
+#    creates a n-by-1((-原文に1-by-nと書いてあるのは誤り-)) matrix such that column vector is `column'.
+#    The pameter `column' is given as a Vector or an Array.
+
+    要素がcolumnの(n,1)型の行列(列ベクトル)を生成する。
+    ここで、引数columnは、((<Vector>))または((<Array>))で与えられる。
+
+
+== 読み出し書き込み Accessing
+--- Matrix#[](i, j)
+#    returns the (i,j)th-component
+
+    (i,j)要素を返す。
+
+--- Matrix#row_size
+#    returns the number of rows
+
+    行の大きさを返す。
+
+--- Matrix#column_size
+#    returns the number of columns
+
+    列の大きさを返す。
+
+--- Matrix#minor(from_row,row_size,from_col,col_size)
+--- Matrix#minor(from_row..to_row,from_col..to_col)
+#    returns sub matrix. parameter is specified as the following:
+#    (1) from_row, row_size, from_col, size_col
+#    (2) from_row..to_row, from_col..to_col
+
+    部分行列を返す。たたし、パラメータは、次の方法で指定する。
+    (1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
+    (2) 開始行番号..終了行番号, 開始列番号..終了列番号
+
+--- Matrix#[]=(i,j,x)
+    (i,j)要素をxに変更する。
+
+このメソッドは、matrix.rbに定義されていない。
+以下に、その定義と使用例を示す。
+
+    require 'matrix'
+
+    class Matrix
+      def []=(i,j,x)
+        @rows[i][j]=x
+      end
+    end
+
+    m=Matrix[[11,12],[21,22]]
+    m[1,1]=-1
+    p m #=> Matrix[[11,12],[21,-1]]
+
+
+== 演算 Arithmatics
+--- Matrix#* m
+#    times
+
+    行列mを右から乗じた行列を返す。
+
+--- Matrix#+ m
+#    plus
+
+    行列mを加えた行列を返す。
+
+--- Matrix#- m
+#    minus
+
+    行列mを減じた行列を返す。
+
+--- Matrix#/ m
+#    self * m.inv
+
+    行列mの逆行列を右から乗じた行列を返す。
+
+--- Matrix#inverse
+--- Matrix#inv
+#    inverse
+
+    逆行列を返す。
+
+--- Matrix#** n
+--- Matrix#power(n)
+#    power
+
+    スカラーnに対するべき乗を返す。
+
+--- Matrix#** m
+--- Matrix#power(m)
+#    power
+
+    行列mに対するべき乗を返す。
+
+== 行列に対する関数 Matrix functions
+--- Matrix#determinant
+--- Matrix#det
+#    returns the determinant
+
+    行列式(determinant) ((-線形代数の教科書を見よ-))を返す。
+
+--- Matrix#rank
+#    returns the rank
+
+    階数(rank) ((-線形代数の教科書を見よ-))を返す。
+
+--- Matrix#trace
+--- Matrix#tr
+#    returns the trace
+
+    トレース(trace)を返す。
+    行列のトレース(trace)とは、対角要素の和である。
+
+--- Matrix#transpose
+--- Matrix#t
+#    returns the transposed
+
+    転置行列(transpose matrix)を返す。
+    冒頭に掲げた行列に対して、a(j,i)を(i,j)要素とする(n,m)型行列を転置行列という。
+
+
+== イテレータ Iterators
+
+--- Matrix#row(i)
+#    returns the i-th row vector.
+#    When the block is supplied for the method, the block is iterated over all row vectors.
+
+    第i番目の行ベクトルを返す。
+    ブロックが与えられたときは、各行ベクトルについて、ブロックを繰り返す。
+
+--- Matrix#column(j)
+#    returns the j-th column vector. 
+#    When the block is supplied for the method, the block is iterated over all column vectors.
+
+    第j番目の列ベクトルを返す。
+    ブロックが与えられたときは、各列ベクトルについて、ブロックを繰り返す。
+
+--- Matrix#collect {|x| ... } 
+--- Matrix#map {|x| ... }
+#    creates a matrix which is the result of iteration of given block over all components.
+
+    行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成する。
+
+
+== 判定 Testing
+--- Matrix#regular?
+#    Is regular?
+
+    正則(regular)なら真を返す。
+
+    行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することである。
+
+--- Matrix#singular?
+#    Is singular? i.e. Is non-regular?
+
+    特異(singular)である、すなわち、正則でないなら真を返す。
+
+--- Matrix#square?
+#    Is square?
+
+    正方行列であるなら、真を返す。
+
+== 型変換 Converting
+--- Matrix#row_vectors
+#    array of row vectors
+
+    列ベクトルの配列を返す。
+
+--- Matrix#column_vectors
+#    array of column vectors
+
+    行ベクトルの配列を返す。
+
+--- Matrix#to_a
+#    converts to Array
+
+    ((<Array>))に変換する。
+    結果は、ネストした配列(配列の配列)となる。
+
+--- Matrix#to_f
+#    converts each element to Float
+
+    各要素を浮動小数点数((<Float>))に変換する。
+
+--- Matrix#to_i
+#    converts each element to Integer
+
+    各要素を整数((<Integer>))に変換する。
+
+--- Matrix#to_r
+#    converts each element to Rational
+
+    各要素を有理数((<Rational>))に変換する。
+
+
+== Complexクラスとの併用 Working with Complex class
+
+#"require 'complex'" extends every elements of Matrix object to Complex class.
+#Most of the methods of Matrix class works as expected in this extended Matrix class.
+
+require 'complex'することによって、
+Matrixオブジェクトの要素は((<Complex>))クラスに拡張される。
+多くのメソッドは、この拡張されたMatrixクラスでも、期待通りに動作する。
+
+#The following example illustrates Matrix#conjugate method which replaces every elements into its conjugate.
+
+次の例は、各要素を共役複素数に置換するメソッド(Matrix#conjugate)である。
+
+    require 'matrix'
+    require 'complex'
+
+    class Matrix
+      def conjugate
+        collect{|e| e.conjugate }
+      end
+    end
+
+
+== ChangeLog
+
+*[2004-04-23] by ((<坂野|URL:mailto:mas@star.le.ac.uk>))
+    * Matrix.diagonalに注意書を加える。
+*[2002-04-03] by ((<すす|URL:mailto:sugawah@attglobal.net>))
+    * 使い方の節を追加
+    * Working with Complex classの節を追加
+    * []=メソッドを追加
+    * イテレータ関係を同じ節にまとめた
+    * 誤りを訂正し、説明を直した。
+    * 他クラスへのリンクを追加 Numeric, Vector
+*[2002-04-02] 初版 by ((<すす|URL:mailto:sugawah@attglobal.net>))

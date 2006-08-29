@@ -1,0 +1,45 @@
+= Tempfile
+テンポラリファイルを操作するためのクラスです。
+
+ * テンポラリファイルを作成します。ファイルは "w+" モードで 
+   "basename.pid.n" という名前になります。
+ * Tempfile オブジェクトは IO オブジェクトと同じように使うことができます。
+ * Tempfile#close(true) により、作成したテンポラリファイルは削除されます。
+ * スクリプトが終了するときにも削除されます。
+ * Tempfile#open により、テンポラリファイルを再オープンすることができます。
+ * テンポラリファイルのモードは 0600 です。
+
+== super class:
+((<(({SimpleDelegator}))>))
+
+== delegating class:
+((<(({File}))>))
+
+== class methods:
+--- Tempfile.new(basename[, tempdir])
+--- Tempfile.open(basename[, tempdir])
+      "((|basename|))((|pid|)).((|n|))" というファイル名で
+      テンポラリファイルを作成します。
+
+      テンポラリファイルは、ディレクトリ ((|tempdir|)) に作成されます。
+      このデフォルト値は、
+        ENV['TMPDIR'] || ENV['TMP'] || ENV['TEMP'] || '/tmp'
+      です。
+
+== methods:
+--- Tempfile#close([real])
+      テンポラリファイルをクローズします。
+      ((|real|))が偽でなければ、テンポラリファイルはすぐに削除されます。
+      そうでなければ、GC によって削除されます。((|real|))のデフォルト値は
+      (({false})) です。
+
+--- Tempfile#open
+      クローズしたテンポラリファイルを再オープンします。
+      "r+" でオープンされるので、クローズ前の内容を再度読む
+      ことができます。
+
+--- Tempfile#path
+      テンポラリファイルのパス名を返します。
+
+--- Tempfile#size              ((<ruby 1.7 feature>))
+      テンポラリファイルのサイズを返します。

@@ -1,0 +1,225 @@
+= StringIO
+
+((<IO>)) と同じインタフェースを持った文字列クラスです。
+
+((<執筆者募集>))
+
+== スーパークラス:
+
+* ((<Data>))
+
+== 例外
+StringIO オブジェクトは大抵の場合 IO オブジェクトと同じ例外を発生させます。
+例えば次の例では write は IOError を発生させます。
+
+  require "stringio"
+  sio = StringIO.new("hoge")
+  sio.close
+  sio.write("a")
+  # => in `write': not opened for writing (IOError)
+
+== クラスメソッド:
+
+--- StringIO.new(string = '', mode = 'r+')
+--- StringIO.open(string = '', mode = 'r+')
+--- StringIO.open(string = '', mode = 'r+') {|io| ... }
+
+    StringIO オブジェクトを生成します。((|mode|)) はデフォルトでは読み書き可能に
+    設定されます。与えられた ((|string|)) がフリーズされている場合には、
+    mode はデフォルトでは読み取りのみに設定されます。
+
+    ブロックを与えた場合は StringIO オブジェクトを引数としてブロックを評価します。
+
+        require 'stringio'
+
+        io = StringIO.new("foo")
+        p io.getc       # => 102
+        p io.pos        # => 1
+        p io.size       # => 3
+        io << "bar"
+        p io.size       # => 4
+        io.rewind
+        p io.gets       # => "fbar"
+        
+        StringIO.open("hoge"){|io| 
+          p io.string   # => "hoge"
+        }
+
+== メソッド:
+
+--- string
+    IOバッファ(文字列)を返します。
+
+--- string= buf
+    IOバッファを ((|buf|)) に変更し、((|buf|)) を返します。これ以前の
+    バッファは捨てられます。StringIO は読み書き両用になります。
+    ((|buf|)) がフリーズされている場合には、読み取り専用になります。
+    pos と lineno は 0 にセットされます。
+
+    ((<ruby 1.8.3 feature>)): ruby 1.8.3 からは ((|buf|)) が (({nil})) の場合には、例外 TypeError が
+    発生します。
+
+    ruby 1.8.2 まで: ((|buf|)) が (({nil})) の場合は、StringIO への読み書きは禁止されます。
+
+
+--- self << obj
+    ((<IO#<<|IO/self << object>)) と同様です。obj を pos の位置に書き込みます。 必要なら obj.to_s を呼んで
+    文字列に変換します。 self を返します。
+
+--- binmode
+    何もせずに (({self})) を返します。
+
+--- close
+    close します。IO#close と同じように読み書きが禁止されます。
+
+--- close_read
+    ((<IO#close_read|IO/close_read>)) と同様です。読み取りを禁止します。
+
+--- close_write
+    ((<IO#close_write|IO/close_write>)) と同様です。書き込みが禁止されます。
+
+--- closed?
+    ((<IO#closed?|IO/closed?>)) と同様です。
+
+      sio = StringIO.open("hoge")
+      p sio.closed? # => false
+      sio.close_read
+      p sio.closed? # => false
+      sio.close_write
+      sio.closed?   # => true
+
+--- closed_read?
+    読み取りが禁止されているなら true を返します。
+
+--- closed_write?
+    書き込みが禁止されているなら true を返します。
+
+--- each(sep_string=$/){|line| ... }
+--- each_line(sep_string=$/){|line| ... }
+    ((<IO#each|IO/each>)) と同様です。
+
+--- each_byte{|byte| ... }
+    ((<IO#each_byte|IO/each_byte>)) と同様です。
+
+--- eof
+--- eof?
+    pos が文字列の終端にあれば true を返します。
+
+--- fcntl
+
+    例外 ((<NotImplementedError>)) が発生します。
+
+--- fileno
+    何もせず (({nil})) を返します。
+
+--- flush
+    何もせずに (({self})) を返します。
+
+--- fsync
+    何もせずに 0 を返します。
+
+--- getc
+    ((<IO#getc|IO/getc>)) と同様です。
+
+--- gets(sep_string = $/)
+    ((<IO#gets|IO/gets>)) と同様です。$_ に読み込んだ行がセットされます。
+
+--- isatty
+    何もせず (({false})) を返します。
+
+--- lineno
+--- lineno=
+    ((<IO#lineno|IO/lineno>)) と同様です。
+
+--- path
+    StringIOには対応するパスはないので (({nil})) を返します。
+
+--- pid
+    何もせず (({nil})) を返します。
+
+--- pos
+--- tell
+--- pos = (n)
+    ((<IO#pos|IO/pos>)) と同様です。
+
+--- print([obj, ...])
+    ((<IO#print|IO/print>)) と同様です。
+
+--- printf(format_string [, obj, ...] )
+    ((<IO#printf|IO/printf>)) と同様です。
+
+--- putc(obj)
+    ((<IO#putc|IO/putc>)) と同様です。与えられた ((|obj|)) を返します。
+
+--- puts(obj, ...)
+    ((<IO#puts|IO/puts>)) と同様です。
+
+--- read([integer [, buffer]])
+    ((<IO#read|IO/read>)) と同様です。
+
+--- readchar
+    ((<IO#readchar|IO/readchar>)) と同様です。
+
+--- readline(sep_string = $/)
+    ((<IO#readline|IO/readline>)) と同様です。
+
+--- readlines(sep_string = $/)
+    ((<IO#readlines|IO/readlines>)) と同様です。
+
+--- readpartial([integer [, buffer]])
+    ((<IO#readpartial|IO/readpartial>)) と同様です。
+
+--- reopen
+    例外 ((<NotImplementedError>)) が発生します。
+
+--- rewind
+    ((<IO#rewind|IO/rewind>)) と同様です。
+
+--- seek(n, whence)
+    ((<IO#seek|IO/seek>)) と同様です。
+
+--- size
+--- length
+    文字列の長さを返します。
+
+--- sync
+    何もせずに 0 を返します。
+
+--- sync= bool
+    何もせずに ((|bool|)) を返します。
+
+--- sysread([integer [, buffer]])
+    StringIO#read と同じです。
+
+--- syswrite(obj)
+    StringIO#write と同じです。
+
+--- truncate(n)
+    n が self.size より小さい場合にはバッファのサイズを n に切り詰めます。
+    n が self.size より大きい場合にはバッファのサイズを n に拡大します。
+
+--- tty?
+    何もせず (({false})) を返します。
+
+--- ungetc(c)
+    c は Fixnum です。
+    pos を 1 減らしてからキャラクターコードが c の文字を書き込みます。この時
+    pos は 1 増えません。
+    pos が size よりも大きい場合は、リサイズして新しく加えられたバッファを 0 で
+    埋めてから pos を 1 減らしてキャラクターコードが c の文字を書き込みます。
+    この時も pos は 1 増えません。nil を返します。
+
+      s = StringIO.new("hoge")
+      s.pos = 1
+      s.ungetc(0x48)
+      p s.string   #=> "Hoge"
+      p.pos        #=> 0
+
+      s = StringIO.new("hoge")
+      s.pos = 8
+      s.ungetc(0x41)
+      p s.string   #=> "hoge\000\000\000A"
+      p.pos        #=> 7
+
+--- write(obj)
+    ((<IO#write|IO/write>)) と同様です。書き込まれた文字列の長さを返します。

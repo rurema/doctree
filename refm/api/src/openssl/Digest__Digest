@@ -1,0 +1,60 @@
+= OpenSSL::Digest::Digest
+
+ハッシュ関数のための抽象的なインターフェースを提供するクラス。
+((<digest>)) も参照のこと。
+
+実装されているクラスは以下の通り。
+
+* OpenSSL::Digest::DSS1
+* OpenSSL::Digest::MD2
+* OpenSSL::Digest::MD4
+* OpenSSL::Digest::MD5
+* OpenSSL::Digest::MDC2
+* OpenSSL::Digest::RIPEMD160
+* OpenSSL::Digest::SHA
+
+((<ruby 1.8.3 feature>)):
+システムにインストールされている openssl が 0.9.8 以降ならば以下のアルゴリズムも利用できます。
+* OpenSSL::Digest::SHA224
+* OpenSSL::Digest::SHA256
+* OpenSSL::Digest::SHA384
+* OpenSSL::Digest::SHA512
+
+
+== クラスメソッド
+
+--- Digest.digest(name, str)
+    name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を文字列で返す。 
+
+--- Digest.hexdigest(name, str)
+    name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を、ASCIIコードを使って 16進数の列を示す文字列にエンコードして返す。
+
+--- Digest.new(name)
+    オブジェクトを生成する。name でハッシュアルゴリズムを指定する。
+
+
+== メソッド
+
+--- reset
+    いままで入力された文字列をリセットする。
+
+--- digest
+    ハッシュ値を計算して文字列を返す。
+
+--- hexdigest
+--- inspect
+--- to_s
+    文字列に対するハッシュ値を、ASCIIコードを使って 16進数の列を示す文字列にエンコードして返す。
+
+--- update(str)
+--- <<(str)
+    文字列を追加する。複数回updateを呼ぶことは文字列を連結して updateを呼ぶことと等しい。
+
+--- ==(digest)
+    与えられた Digest オブジェクトと等しいかどうか。
+
+--- name
+    ハッシュアルゴリズムを返す。
+
+--- size
+    digest で返す文字列のバイト長。

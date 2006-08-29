@@ -1,0 +1,100 @@
+= Zlib
+
+((<zlib>))
+
+zlib ライブラリに含まれている雑多な機能を提供するモジュール。
+各モジュール関数の詳細は zlib.h を参照して下さい。
+
+== モジュール関数
+
+--- Zlib.zlib_version
+
+    zlib ライブラリのバージョンを表す文字列を返します。
+
+--- Zlib.adler32([string[, adler]])
+
+    ((|string|)) の Adler-32 チェックサムを計算し、((|adler|)) を
+    更新した値を返します。((|string|)) が省略された場合は
+    Adler-32 チェックサムの初期値を返します。((|adler|)) が
+    省略された場合は ((|adler|)) に初期値が与えらたものとして
+    計算します。
+
+--- Zlib.crc32([string[, crc]])
+
+    ((|string|)) の CRC チェックサムを計算し、((|crc|)) を
+    更新した値を返します。((|string|)) が省略された場合は
+    CRC チェックサムの初期値を返します。((|crc|)) が
+    省略された場合は ((|crc|)) に初期値が与えらたものとして
+    計算します。
+
+--- Zlib.crc_table
+
+    CRC チェックサムの計算に用いるテーブルを配列で返します。
+
+== 定数
+
+--- Zlib::VERSION
+
+    Ruby/zlib のバージョンを表す文字列。
+
+--- Zlib::ZLIB_VERSION
+
+    zlib.h のバージョンを表す文字列。
+
+--- Zlib::BINARY
+--- Zlib::ASCII
+--- Zlib::UNKNOWN
+
+    ((<Zlib::ZStream#data_type|Zlib::ZStream/data_type>)) の返す、データタイプを表す整数。
+
+--- Zlib::NO_COMPRESSION
+--- Zlib::BEST_SPEED
+--- Zlib::BEST_COMPRESSION
+--- Zlib::DEFAULT_COMPRESSION
+
+    ((<Zlib::Deflate.new|Zlib::Deflate/Deflate.new>)) や ((<Zlib::Deflate#deflate|Zlib::Deflate/deflate>)) 等に渡す、
+    圧縮レベルを表す整数。
+
+--- Zlib::FILTERED
+--- Zlib::HUFFMAN_ONLY
+--- Zlib::DEFAULT_STRATEGY
+
+    ((<Zlib::Deflate.new|Zlib::Deflate/Deflate.new>)) や ((<Zlib::Deflate#params|Zlib::Deflate/params>)) に渡す、
+    圧縮方法を表す整数。
+
+--- Zlib::DEF_MEM_LEVEL
+--- Zlib::MAX_MEM_LEVEL
+
+    ((<Zlib::Deflate.new|Zlib::Deflate/Deflate.new>)) 等に渡す、memory level を表す整数。
+
+--- Zlib::MAX_WBITS
+
+    ((<Zlib::Deflate.new|Zlib::Deflate/Deflate.new>)) や ((<Zlib::Inflate.new|Zlib::Inflate/Inflate.new>)) での
+    ((|windowBits|)) のデフォルト値。
+
+--- Zlib::NO_FLUSH
+--- Zlib::SYNC_FLUSH
+--- Zlib::FULL_FLUSH
+--- Zlib::FINISH
+
+    ((<Zlib::Deflate#deflate|Zlib::Deflate/deflate>)) 等に渡す、ストリームの出力を
+    制御するための整数。
+
+--- Zlib::OS_CODE
+--- Zlib::OS_MSDOS
+--- Zlib::OS_AMIGA
+--- Zlib::OS_VMS
+--- Zlib::OS_UNIX
+--- Zlib::OS_VMCMS
+--- Zlib::OS_ATARI
+--- Zlib::OS_OS2
+--- Zlib::OS_MACOS
+--- Zlib::OS_ZSYSTEM
+--- Zlib::OS_CPM
+--- Zlib::OS_TOPS20
+--- Zlib::OS_WIN32
+--- Zlib::OS_QDOS
+--- Zlib::OS_RISCOS
+--- Zlib::OS_UNKNOWN
+
+    ((<Zlib::GzipFile#os_code|Zlib::GzipFile/os_code>)) メソッドの返す値。

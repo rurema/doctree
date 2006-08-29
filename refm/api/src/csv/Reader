@@ -1,0 +1,19 @@
+= class CSV::Reader < Object
+
+include Enumerable
+
+CSVの読み込み時のベースとなるクラス
+
+== Class Methods
+
+--- CSV::Reader.parse(str_or_readable[, fs = ','[, rs = nil]]) { ... }
+
+--- CSV::Reader.create(str_or_readable[, fs = ','[, rs = nil]])
+
+== Instance Methods
+
+--- CSV::Reader#each
+
+--- CSV::Reader#shift
+
+--- CSV::Reader#close

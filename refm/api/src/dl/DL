@@ -1,0 +1,93 @@
+= DL
+
+((<dl>))も参照。また、現在((<dl2|URL:http://rubyforge.net/projects/ruby-dl2/>))のruby-1.8
+版も開発されており、 また、ruby-1.9にはすでにdl2がdlとして添付されている。
+dl2のドキュメントは、((<ruby-dl2のdoc|URL:http://rubyforge.org/cgi-bin/viewcvs.cgi/ruby-dl2/doc/?root=ruby-dl2>))を参照。
+
+モジュール DL は数個のモジュール関数と定数を持つ 3 つのクラスから成っ
+ている。クラス ((<DL::Symbol>)) は呼び出す事ができるシンボルに相当する。クラス 
+((<DL::PtrData>)) は、C のポインタのようなメモリブロックを示す。
+クラス ((<DL::Handle>)) から具体化されたオブジェクトはオープンしたライブラリの
+操作を持つ。
+
+* ((<DL::Handle>))
+* ((<DL::Symbol>))
+* ((<DL::PtrData>))
+
+== 定数
+
+* RTLD_GLOBAL
+* RTLD_LAZY
+* RTLD_NOW
+* MAX_ARG
+* MAX_CBARG
+* MAX_CBENT
+
+== モジュール関数
+
+--- DL.dlopen(lib){|handle| ... }
+    ((<DL::Handle.new(lib)|DL::Handle/Handle.new>)) と等価。
+
+== メソッド
+--- set_callback(cbtype, entry){|args| ... }
+--- set_callback(cbtype, entry, proc)
+    proc や指定したブロックを呼ぶ entry-th pre-defined function を作成
+    する。entry-th pre-defined function は cbtype と entry で指定され
+    る。((|cbtype|)) はコールバックのプロトタイプ。((|cbtype|)) については
+    ((<DL/Type specifiers>)) も参照。
+
+--- get_callback(cbtype, entry)
+    上記 set_callback 関数によって与えられた ((<Proc>)) オブジェクトを返す。
+
+--- malloc(size, [free = nil])
+    ((|size|)) バイトのメモリ領域を割り当て、PtrData オブジェクトを ptr とし
+    て返す。
+
+--- strdup(str)
+    文字列 ((|str|)) を複製した新しい文字列へのポインタに相当する PtrData オ
+    ブジェクトを返す。
+
+--- sizeof(type)
+    型のサイズを返す。 sizeof("C") + sizeof("L") は、
+    sizeof("CL") と等価ではない。後者は構造体 struct foo { char c;
+    long l; } の十分なサイズを返すと推定されるが、そのサイズは C の 
+    sizeof(foo) と同じではないかもしれない。
+
+    (訳注: sizeof メソッドは独自にアラインメントを考慮してサイズを決定
+    するが C 言語のそれとは異なるかもしれないということを言っている)
+
+    (訳注: sizeof("L3") のように型の後に数字を付けることもできる。指定
+    できる型については ((<DL/Type specifiers>)) を参照)
+
+== Type specifiers
+
+プロトタイプは以下の型修飾子から成る。プロトタイプの最初の要素は戻り値
+の型を意味する。残りの要素は各引数の型を意味する。
+
+    C : 文字 (char)
+    c : 文字を指すポインタ (char *)
+    H : short 整数  (short)
+    h : short 整数を指すポインタ (short *)
+    I : 整数 (char, short, int)
+    i : 整数を指すポインタ (char *, short *, int *)
+    L : long 整数 (long)
+    l : long 整数へのポインタ (long *)
+    F : 実数 (float)
+    f : 実数へのポインタ (float *)
+    D : 実数 (double)
+    d : 実数へのポインタ(double *)
+    S : 不変(immutable)の文字列 (const char *)
+    s : 変更可能(mutable)な文字列 (char *)
+    A : 配列 (const type[])
+    a : 変更可能(mutable)な配列 (type[])
+    P : ポインタ (void *)
+    p : 変更可能(mutable)なポインタ (void *)
+    0 : void 関数(これはプロトタイプの最初の文字でなければならない)
+
+cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成る。例えば:
+
+    DL.callback('IPP'){|ptr1,ptr2|
+      str1 = ptr1.ptr.to_s
+      str2 = ptr2.ptr.to_s
+      str1 <=> str2
+    }

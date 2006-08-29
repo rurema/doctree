@@ -1,0 +1,30 @@
+= OpenSSL::X509::ExtensionFactory
+
+((<執筆者募集>))
+
+((<openssl>))
+
+== クラスメソッド
+
+--- ExtensionFactory.new([issuer_cert [, subject_cert [, subject_req [, crl]]]])
+    ExtensionFactory オブジェクトを生成します。
+
+== メソッド
+
+--- create_ext(oid, value, critical = false)
+    OpenSSL::X509::Extension を生成して返します。
+
+--- issuer_certificate
+--- issuer_certificate=
+    issuer の証明書を設定します。
+
+--- subject_certificate
+--- subject_certificate=
+    subject の証明書を設定します。
+
+--- subject_request
+--- subject_request=
+--- crl
+--- crl=
+--- config
+--- config=

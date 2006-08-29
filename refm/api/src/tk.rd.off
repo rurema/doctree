@@ -1,0 +1,12 @@
+= tk
+
+((<執筆者募集>))
+
+* multi-tk        複数の Tcl インタープリタをサポートする Ruby/Tk ((<ruby-dev:20949>)) (((<ruby 1.8 feature>)))
+* tcltk           Tcl/Tk ライブラリ tk とは異なり直接 Tcl/Tk を呼び出すインタフェース)
+* tk              Ruby/Tk ((<URL:http://ns103.net/~arai/ruby/rubytk.html.gz>)) を参照のこと
+
+== 参考
+
+* ((<Ruby(('/'))Tk FAQ|RubyTkFAQ>))
+* ((<"Rubyist Magazine - 0003-Ruby/Tk の動向"|URL:http://jp.rubyist.net/magazine/?0003-RubyTkMovement>))

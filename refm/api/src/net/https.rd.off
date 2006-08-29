@@ -1,0 +1,95 @@
+= net/https
+
+SSL/TLS enhancement for Net::HTTP.
+
+== class Net::HTTP
+
+((<"net/http">)) も参照。
+
+注意。net/https は RFC2818 の 3.1 に定められた 「サーバーの証明書に記載された身元のチェック」を自らはしない。接続しているはずのサーバのホスト名と証明書に記載されているホスト名が一致するかをライブラリの使用者が各自実装する必要がある。
+
+((<URL:http://www.ipa.go.jp/security/rfc/RFC2818JA.html#31>))
+
+((<ruby-dev:25254>))
+
+== Example
+
+簡単な例。verify_mode に指定する定数に関しては ((<OpenSSL::SSL>)) を参照。
+必ず use_ssl = true を呼ばなければいけないところに注意。
+
+ require 'net/https'
+ https = Net::HTTP.new('www.example.com',443)
+ https.use_ssl = true
+ https.ca_file = '/usr/share/ssl/cert.pem'
+ https.verify_mode = OpenSSL::SSL::VERIFY_PEER
+ https.verify_depth = 5
+ https.start { |w|
+   response = w.get('/')
+   puts response.body
+ }
+
+proxy 経由でアクセス。proxy 経由でも通信路は暗号化される。((<WWWプロキシにおけるSSLトンネリング|URL:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt>))を参照。
+
+ require 'net/https'
+ proxy_addr = 'proxy.example.com'
+ proxy_port = 3128
+ https = Net::HTTP::Proxy(proxy_addr, proxy_port).new('www.example.com',443)
+ https.use_ssl = true
+ https.ca_file = '/usr/share/ssl/cert.pem'
+ https.verify_mode = OpenSSL::SSL::VERIFY_PEER
+ https.verify_depth = 5
+ https.start {|w|
+   response = w.get('/')
+   puts response.body
+ }
+
+== インスタンスメソッド
+
+--- use_ssl?
+    HTTP で SSL/TLS を使うなら true を返す。
+
+--- use_ssl=(true_or_false)
+    HTTP で SSL/TLS を使うかどうかを設定する。使う場合は true を代入する。デフォルトでは false。つまり SSL/TLS を有効にするには必ず use_ssl = true を呼ぶ必要がある。
+
+--- peer_cert
+    サーバが送ってきた X.509 証明書を OpenSSL::X509::Certificate オブジェクトとして返す。
+
+--- key
+--- key=(key)
+    ((<OpenSSL::PKey::RSA>)) オブジェクトか ((<OpenSSL::PKey::DSA>)) オブジェクトを設定する。
+    (This method is appeared in Michal Rokos's OpenSSL extention.)
+
+--- cert
+--- cert=(cert)
+    クライアント証明書として ((<OpenSSL::X509::Certificate>)) オブジェクトを設定する。
+    (This method is appeared in Michal Rokos's OpenSSL extention.)
+
+--- ca_file
+--- ca_file=(path)
+    PEM 形式で保存された CA 証明書ファイルのパスを設定する。
+    ファイルには複数の CA 証明書が含まれていても良い。
+
+--- ca_path
+--- ca_path=(path)
+    PEM 形式で保存された CA 証明書ファイルが存在するディレクトリを設定する。
+
+--- verify_mode
+--- verify_mode=(mode)
+    サーバ証明書に対する検証モードを設定する。
+    OpenSSL::SSL::VERIFY_NONE か OpenSSL::SSL::VERIFY_PEER が設定可能。
+    ((<OpenSSL::SSL>)) も参照。
+
+--- verify_callback
+--- verify_callback=(proc)
+    通常のサーバ証明書の検証に加えてさらに適用される
+    ((<Proc>)) オブジェクトを設定する。
+
+--- verify_depth
+--- verify_depth=(num)
+    サーバ証明書を検証する時の証明書チェーンの最大の深さを設定する。
+
+--- cert_store
+--- cert_store=(store)
+    サーバ証明書の検証のために使う信頼している CA 証明書のストレージ
+    ((<OpenSSL::X509::Store>)) オブジェクトを設定する。
+    通常は ca_path=(path) や ca_file=(path) を使う。

@@ -1,0 +1,25 @@
+= Zlib::Error
+
+((<zlib>))
+
+== スーパークラス
+
+* StandardError
+
+== Zlib::Error
+
+Ruby/zlib の発行する全ての例外のスーパークラス。
+
+以下の例外が Zlib::Error のサブクラスとして定義されています。
+それぞれ zlib ライブラリ関数の返すエラーと対応しています。
+
+  * Zlib::StreamEnd
+  * Zlib::NeedDict
+  * Zlib::DataError
+  * Zlib::StreamError
+  * Zlib::MemError
+  * Zlib::BufError
+  * Zlib::VersionError
+
+
+

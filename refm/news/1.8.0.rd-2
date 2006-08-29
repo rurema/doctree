@@ -1,0 +1,2738 @@
+= ruby 1.8 feature
+
+ruby version 1.8 は安定版です。1.8.0 (2003-08-04) 以降、バグ修正がメイ
+ンになります。
+
+記号について(特に重要なものは大文字(主観))
+
+* カテゴリ
+  * [ruby]: ruby インタプリタの変更
+  * [api]: 拡張ライブラリ API
+  * [lib]: ライブラリ
+  * [parser]: 文法の変更
+  * [regexp]: 正規表現の機能拡張
+  * [marshal]: Marshal ファイルのフォーマット変更
+* レベル
+  * [bug]: バグ修正
+  * [new]: 追加されたクラス／メソッドなど
+  * [compat]: 変更されたクラス／メソッドなど(互換性のある変更) (only backward-compatibility) (影響の範囲が小さいと思われる変更もこちら)
+  * [change]: 変更されたクラス／メソッドなど(互換性のない変更)
+  * [experimental]: 変更の中でも特に実験的なもの(将来再考して欲しいもの？)
+  * [obsolete]: 廃止された(される予定の)機能
+  * [platform]: 対応プラットフォームの追加
+
+
+== 1.8.3 (2005-09-21) -> ((<snapshot|URL:ftp://ftp.netlab.co.jp/pub/lang/ruby/snapshot.tar.gz>))
+
+((<ruby 1.8.4 feature>)) を参照して下さい。
+
+== 1.8.2 (2004-12-25) -> 1.8.3 (2005-09-21)
+
+((<ruby 1.8.3 feature>)) を参照して下さい。
+
+== 1.8.1 (2003-12-25) -> 1.8.2 (2004-12-25) 
+
+((<ruby 1.8.2 feature>)) を参照して下さい。
+
+== 1.8.0 (2003-08-04) -> 1.8.1 (2003-12-25)
+
+=== 2003-12-05
+
+: ((<Module#extended|Module/extended>)) [new]
+
+  追加 ((<ruby-list:38866>))
+
+  extend されたときに呼ばれる hook です。
+
+        module Foo
+          def self.extended(m)
+            p m
+          end
+        end
+
+        module Bar
+          extend Foo
+        end
+
+        # => ruby 1.8.1 (2003-12-25) [i586-linux]
+             Bar
+        # => ruby 1.8.2 (2004-07-17) [i586-linux]
+             Bar
+        # => ruby 1.9.0 (2004-07-17) [i586-linux]
+             Bar
+
+=== 2003-12-01
+
+: (({Numeric#singleton_method_added}))
+
+  Bignum に特異メソッドを定義できなくなりました(Fixnum と同様)。この抑
+  制は、Numeric#singleton_method_added によって行われます。
+
+    a = 10 ** 10
+    p a
+    def a.foo
+    end
+
+    # => ruby 1.8.0 (2003-08-04) [i586-linux]
+         10000000000
+    # => ruby 1.8.1 (2003-12-25) [i586-linux]
+         10000000000
+         -:3: can't define singleton method "foo" for Bignum (TypeError)
+    # => ruby 1.8.2 (2004-07-17) [i586-linux]
+         10000000000
+         -:3: can't define singleton method "foo" for Bignum (TypeError)
+    # => ruby 1.9.0 (2004-07-17) [i586-linux]
+         10000000000
+         -:3: can't define singleton method "foo" for Bignum (TypeError)
+
+=== 2003-11-28
+
+: ((<Time#succ|Time/succ>)) [new]
+
+  追加
+
+=== 2003-10-29
+
+: ((<Regexp/Regexp.union>))  [new]
+
+  追加 ((<ruby-dev:21751>))
+
+
+=== 2003-10-13
+
+: autoload [change]
+
+  autoload におけるセキュリティチェックが以下のようになりました。
+
+    * 指定したライブラリ名(文字列)が tainted かどうか？
+    * load するパスが安全かどうか
+
+  最初のチェックは autoload 実行時に、次のチェックはライブラリのロード
+  時に行われますr。また、ライブラリのロードは require 同様、＄SAFE = 0 
+  で実行されます。
+
+: [ruby] [bug]
+
+  untaint した string をパターンマッチしたときに $` が tainted になる
+  場合がありました。((<ruby-dev:21601>))
+
+=== 2003-10-10
+
+: defined? [bug]
+
+  以下の場合に defined? super が nil を返していました。
+
+        module M1
+          def foo
+          end
+        end
+
+        module M2
+          def foo
+            defined?(super)
+          end
+        end
+
+        class C
+          include M1
+          include M2
+        end
+
+        p C.new.foo
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             nil
+        # => ruby 1.8.0 (2003-10-10) [i586-linux]
+             "super"
+
+=== 2003-10-09
+
+: [ruby] [bug]
+
+  $SAFE == 1 のときに at_exit で登録したブロックが $SAFE == 0 で実行さ
+  れていました。
+
+        $SAFE = 1
+        at_exit { p $SAFE }
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             0
+        # => ruby 1.8.0 (2003-10-10) [i586-linux]
+             1
+
+: [ruby] [bug]
+
+  Thread 内で break すると Thread の戻り値が false になっていました。
+  ((<ruby-dev:21552>))
+
+  1.8.1 で、また false を返すようになってます？？
+
+        p Thread.start{break 10}.value
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             false
+        # => ruby 1.8.0 (2003-10-10) [i586-linux]
+             10
+        # => ruby 1.8.1 (2003-12-25) [i586-linux]
+             false
+
+
+=== 2003-10-06
+
+: ((<制御構造/END>)) [ruby] [change]
+
+  メソッド定義内での END ブロックの登録は警告が出るようになりました。
+  ((<ruby-dev:21519>))
+
+        def foo
+          END { }
+        end
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+
+        # => -:2: warning: END in method; use at_exit
+             ruby 1.8.0 (2003-10-10) [i586-linux]
+
+
+  特に以前は eval 内ではエラーになっていたのが警告に変わっています。
+
+        eval '
+        def foo
+          END { }
+        end'
+
+        # => -:4: (eval):4: compile error (SyntaxError)
+             (eval):3: END in method; use at_exitruby 1.8.0 (2003-08-04) [i586-linux]
+        # => (eval):3: warning: END in method; use at_exit
+             ruby 1.8.0 (2003-10-10) [i586-linux]
+
+
+=== 2003-10-03
+
+: [ruby] [bug]
+
+  メソッドの引数 *rest, &proc の評価順序が不定でした。(&proc は先？)
+  ((<ruby-list:38431>))
+
+        def m(*)
+        end
+
+        m((p 0), (p 1), *(p 2), &(p 3))
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             3
+             2
+             0
+             1
+        # => ruby 1.8.0 (2003-10-05) [i586-linux]
+             3
+             0
+             1
+             2
+
+  また、左辺が動的なRegexpのマッチの評価順序が不定でした。
+
+        /#{p 1;"a"}/ =~ (p 2)
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             2
+             1
+        # => ruby 1.8.0 (2003-10-05) [i586-linux]
+             1
+             2
+
+=== 2003-10-02
+
+: ((<Object#marshal_dump|Object/marshal_dump>)) [change]
+: ((<Object#marshal_load|Object/marshal_load>)) [change]
+
+  インスタンス変数を dump/load するようになりました。((<ruby-dev:21474>))
+  (が、後にまた dump/load されなくなったようですインスタンス変数を 
+  dump/load したいときの例が time.c にあり、解説が
+  ((<ruby-list:38484>))にあります)
+
+        class Foo
+          def marshal_dump
+          end
+          def marshal_load(dump)
+          end
+        end
+
+        obj = Foo.new
+        obj.instance_eval { @foo = 1 }
+
+        p obj
+        obj = Marshal.load(Marshal.dump(obj))
+        p obj
+        p obj.instance_eval { @foo }
+
+        # => ruby 1.8.0 (2003-09-27) [i586-linux]
+             #<Foo:0x401cae94 @foo=1>
+             #<Foo:0x401cad7c>
+             -:14: warning: instance variable @foo not initialized
+             nil
+        # => ruby 1.8.0 (2003-10-02) [i586-linux]
+             #<Foo:0x401cae6c @foo=1>
+             #<Foo:0x401cad54 @foo=1>
+             1
+        # => ruby 1.8.0 (2003-10-10) [i586-linux]
+             #<Foo:0x401cae6c @foo=1>
+             #<Foo:0x401cad54>
+             -:14: warning: instance variable @foo not initialized
+             nil
+
+=== 2003-09-29
+
+: ((<Process::Status#inspect|Process::Status/inspect>)) [new]
+
+  inspect で、プロセスの終了ステータス等を詳細に表示するようになりました。
+
+        pid = fork { Process.kill "STOP", $$ }
+        Process.waitpid(pid, Process::WUNTRACED)
+        Process.kill "CONT", pid
+        p $?
+
+        # => ruby 1.8.0 (2003-09-27) [i586-linux]
+             4991
+             ruby 1.8.0 (2003-09-27) [i586-linux]
+        # => ruby 1.8.0 (2003-10-02) [i586-linux]
+             #<Process::Status: pid=17999,stopped(SIGSTOP=19)>
+             ruby 1.8.0 (2003-10-02) [i586-linux]
+
+=== 2003-09-23
+
+: ((<組み込み関数/warn>)) [change]
+
+  ((<-W0|Rubyの起動/-W[level]>)) 指定時に何も出力しなくなりました。
+
+        $VERBOSE = nil
+        warn "warn"
+
+        # => warn
+             ruby 1.8.0 (2003-08-04) [i586-linux]
+        # => ruby 1.8.1 (2003-12-25) [i586-linux]
+
+=== 2003-09-22
+
+: ((<String#to_f|String/to_f>)) [bug]
+
+  以下の結果が 1.8 で 0 になる場合があったようです(が再現できませんでした)
+  ((<ruby-bugs:1181>))
+
+        p "00000016,78".to_f
+
+        # => ruby 1.6.8 (2002-12-24) [i586-linux]
+             16.0
+        # => ruby 1.8.0 (2003-09-18) [i586-linux]
+             16.0
+        # => ruby 1.8.0 (2003-09-27) [i586-linux]
+             16.0
+
+=== 2003-09-18
+
+: ((<組み込み関数/`>))
+
+  バッククォートでのバックスラッシュの解釈に問題がありました。
+  ((<ruby-list:38409>)) (以下の例はシェルが \ を解釈しているので分かり
+  にくいが、(1) と (2) は同じ結果にならなくてはならない)
+
+
+        # (1)
+        p `echo \\a`
+        p `echo \\\\a`
+
+        # (2)
+        p `echo #{"\\"}a`
+        p `echo #{"\\\\"}a`
+
+        # => ruby 1.6.8 (2003-10-15) [i586-linux]
+             "\\a\n"
+             "\\\\a\n"
+             "a\n"
+             "\\a\n"
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             "\\a\n"
+             "\\\\a\n"
+             "a\n"
+             "\\a\n"
+        # => ruby 1.8.1 (2004-02-22) [i586-linux]
+             "a\n"
+             "\\a\n"
+             "a\n"
+             "\\a\n"
+
+
+=== 2003-09-17
+
+: [parser] [bug]
+
+  ((<ruby-talk:82206>))
+
+       "#{ "\"" }"
+
+        # => -:1: syntax error
+             ruby 1.8.0 (2003-09-16) [i586-linux]
+        # => -:1: warning: useless use of a literal in void context
+             ruby 1.8.0 (2003-09-18) [i586-linux]
+
+=== 2003-09-16
+
+: [regexp] [bug]
+
+  ((<ruby-list:38393>))
+
+        p "A" =~ /[!-_]/i
+
+        # => ruby 1.8.0 (2003-08-04) [i586-linux]
+             nil
+        # => ruby 1.8.1 (2004-02-22) [i586-linux]
+             0
+
+=== 2003-09-04
+
+: [parser]
+
+  シングルクォートで囲まれた文字列では行末の \ は \ そのものとして解釈
+  されるようになりました。((<ruby-dev:21339>))
+
+        p "a\
+        b"
+        p 'a\
+        b'
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           "ab"
+           "ab"
+        => ruby 1.8.0 (2003-09-04) [i586-linux]
+           "ab"
+           "a\\\nb"
+
+=== 2003-08-28
+
+: autoload [bug]
+
+  既にロード済のファイルを autoload し、そのファイルで該当の定数が定義
+  されてない場合 ((<Module/const_missing>)) が呼ばれませんでした。
+
+        File.open("/tmp/foo.rb","w").close
+
+        require "/tmp/foo.rb"
+
+        def Object.const_missing(name)
+          p "const_missing called"
+        end
+
+        autoload :Foo, "/tmp/foo.rb"
+
+        p Foo
+
+        => -:11: uninitialized constant Foo (NameError)
+           ruby 1.8.0 (2003-08-04) [i586-linux]
+        => ruby 1.8.0 (2003-09-04) [i586-linux]
+           "const_missing called"
+           "const_missing called"
+           nil
+
+: ((<クラス／メソッドの定義/defined?>)) [bug]
+
+  ((<クラス／メソッドの定義/defined?>)) が :: 演算子を考慮していませんでした。
+
+        Foo = 1
+        p defined? Foo
+        p defined? ::Foo
+
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           "constant"
+           "expression"
+        => ruby 1.8.0 (2003-09-04) [i586-linux]
+           "constant"
+           "constant"
+
+: 多重代入 [ruby] [CHANGE]
+
+  以前の以下の変更で、scan などの動作に不整合がありました。
+  ((<ruby-dev:21207>))
+
+        #
+        *a = [1]
+        p a
+        => ruby 1.6.8 (2003-08-03) [i586-linux]
+           [1]
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           [[1]]
+        => ruby 1.8.0 (2003-09-04) [i586-linux]
+           [[1]]
+
+        "a".scan(/(.)/)     {|*v| p v}
+        "ab".scan(/(.)(.)/) {|*v| p v}
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           [["a"]]
+           ["a", "b"]
+
+  多重代入の以下の変更により一貫性を保つよう変更されました。
+  ((<ruby-dev:21277>)) も参照。
+
+        #
+        *a = [1,2]
+        p a
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           [1, 2]
+        => ruby 1.8.0 (2003-09-04) [i586-linux]
+           [[1, 2]]
+
+        "a".scan(/(.)/)     {|*v| p v}
+        "ab".scan(/(.)(.)/) {|*v| p v}
+        => ruby 1.8.0 (2003-09-04) [i586-linux]
+           [["a"]]
+           [["a", "b"]]
+
+: [bug]
+
+  ((<ruby-talk:79302>))
+
+        module Foo
+          class Bar
+          end
+        end
+
+        include Foo
+
+        class Bar
+        end
+
+        => -:8: uninitialized constant Bar (NameError)
+           ruby 1.8.0 (2003-08-04) [i586-linux]
+        => ruby 1.8.0 (2003-08-28) [i586-linux]
+
+=== 2003-08-15
+
+: [ruby] [bug]
+
+  st_ino や、errno が 64 bit である環境で問題があったそうです。
+  ((<ruby-dev:21194>))
+
+=== 2003-08-14
+
+: ((<ObjectSpace/ObjectSpace._id2ref>))
+
+  _id2ref で SEGV することがありました。((<ruby-core:1408>))
+
+: ((<Continuation#[]|Continuation/[]>))
+
+  Proc に合わせるため追加。call と同じ。((<ruby-talk:79028>))
+
+: [parser] [bug]?
+
+  (({::})) 演算子でトップレベルを明示した定数に対して代入ができませんでした。
+
+        #
+        ::Foo = 1
+        p Foo
+        => -:1: warning: useless use of :: in void context
+           -:1: syntax error
+              ::Foo = 1
+                     ^
+           ruby 1.8.0 (2003-08-04) [i586-linux]
+        => ruby 1.8.0 (2003-08-17) [i586-linux]
+           1
+
+  同様に、class 定義に使用できませんでした。((<ruby-talk:78918>))
+
+        class ::Foo
+        end
+
+        => -:1: syntax error
+                   class ::Foo
+                           ^
+           -:1: warning: useless use of a constant in void context
+           ruby 1.8.0 (2003-08-04) [i586-linux]
+        => ruby 1.8.0 (2003-08-17) [i586-linux]
+
+=== 2003-08-12
+
+: Linux/IA64  [bug]
+
+  fixed segv bug. ((<ruby-bugs:1086>))
+
+=== 2003-08-11
+
+: super  [bug]
+
+  super で、ブロック引数に nil を渡した場合に、ブロックが指定されてい
+  ると判断されていました。
+
+        class A
+          def foo x
+            p block_given?
+          end
+        end
+
+        class B < A
+          def foo x
+            super(x, &nil)
+            super(x)
+          end
+        end
+
+        B.new.foo(3) {}
+
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           true
+        => ruby 1.8.0 (2003-08-17) [i586-linux]
+           false
+
+=== 2003-08-09
+
+: ((<Marshal/Object#marshal_dump>)) [marshal] [bug]
+
+  marshal_dump が定義された Array, String 等の組込みクラス(あるいはそ
+  のサブクラス)のインスタンスを dump するとインスタンス変数がダンプさ
+  れていました。
+  (marshal_dump が定義されているとインスタンス変数はダンプされない
+  仕様です)
+
+        class Array
+          def initialize
+            @foo = 1
+          end
+          def marshal_dump
+          end
+        end
+        p Marshal.dump(Array.new)
+        => -:2: warning: method redefined; discarding old initialize
+           ruby 1.8.0 (2003-08-04) [i586-linux]
+           "\004\010IU:\nArray0\006:\t@fooi\006"
+        => -:2: warning: method redefined; discarding old initialize
+           ruby 1.8.0 (2003-08-10) [i586-linux]
+           "\004\010IU:\nArray0\000"
+
+=== 2003-08-07
+
+: Cygwin [compat]
+
+  ruby インタプリタ の dll 名が Cygwin のルールに従うようになりました
+  ((<ruby-bugs:1077>)), ((<ruby-dev:21134>))
+
+: ((<組み込み関数/at_exit>)) [bug]
+
+  at_exit に対して以下のようにブロックを渡すと、ブロックが伝搬していま
+  した。
+
+        def foo
+          at_exit
+        end
+        foo { p :exited }
+
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           :exited
+
+        => -:2:in `at_exit': called without a block (ArgumentError)
+                from -:2:in `foo'
+                from -:4
+           ruby 1.8.0 (2003-08-07) [i586-linux]
+
+: [ruby] [bug]
+
+  メソッド定義のネストにより定義されたメソッドが Object のインスタンス
+  メソッドになっていました。((<ruby-bugs-ja:540>))
+
+        class Foo
+          def foo
+            def bar
+            end
+          end
+        end
+
+        p Foo.method_defined?(:bar)
+        Foo.new.foo
+        p Foo.method_defined?(:bar)
+        p Object.method_defined?(:bar)
+
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           false
+           true
+           true
+        => ruby 1.8.0 (2003-08-07) [i586-linux]
+           false
+           true
+           false
+
+=== 2003-08-06
+
+: Module#clone [bug]
+
+    Module#clone が initialize_copy を呼んでいませんでした((<ruby-core:1352>))
+
+    class C
+      def self.initialize_copy(orig)
+        puts "class initialize_copy called"
+      end
+      def initialize_copy(orig)
+        puts "instance initialize_copy called"
+      end
+    end
+
+    C.clone     # initialize_copy is not called
+    C.new.clone # instance initialize_copy called
+    => ruby 1.8.0 (2003-08-04) [i586-linux]
+       instance initialize_copy called
+
+
+    => ruby 1.8.0 (2003-08-07) [i586-linux]
+       class initialize_copy called
+       instance initialize_copy called
+
+: ((<Array#fill|Array/fill>)) [bug]
+
+  ブロック付きの Array#fill が正常に機能していませんでした
+  ((<ruby-list:38029>))。
+
+        p [0,1,2].fill(3,5) {|i| i}
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           [4, 6, 8, 10, 12, 14, 16, 18]
+
+        => ruby 1.8.0 (2003-08-07) [i586-linux]
+           [0, 1, 2, 3, 4, 5, 6, 7]
+
+: ((<Marshal>)) [marshal] [compat]
+
+  nil, true, false, Symbol, Fixnum のインスタンス変数をダンプするよう
+  になりました。
+
+        nil.instance_eval {@foo = 1}
+        p Marshal.dump(nil)
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           "\004\0100"
+        => ruby 1.8.0 (2003-08-07) [i586-linux] <- (applied patch [ruby-dev:21171])
+           "\004\010I0\006:\t@fooi\006"
+
+  マーシャルデータのバージョンは変わりません(1.8.0 2003-08-04 で読むこ
+  とができます)
+
+        nil.instance_eval {@foo = 1}
+        p Marshal.dump(nil, File.open("/tmp/foo", "w"))
+        => ruby 1.8.0 (2003-08-07) [i586-linux]
+           #<File:/tmp/foo>
+
+        p Marshal.load(File.open("/tmp/foo"))
+        p nil.instance_eval { @foo }
+        => ruby 1.8.0 (2003-08-04) [i586-linux]
+           nil
+           1
+
+=== 2003-08-05
+
+: fileutils [lib] [bug]
+
+  FileUtils.install メソッドが、ファイル所有者等の情報を保持したままファ
+  イルをインストールしていました。ruby をソースからコンパイルした場合、
+  make install に影響があります。((<ruby-dev:21139>))
+
+: Shell.rmdir [lib] [bug]
+
+  Shell.rmdir が動作しませんでした。((<ruby-talk:78045>))
+
+: [ruby] [bug]
+
+  拡張ライブラリからスクリプトをロードしたあとで、ソースファイル
+  名が保存されませんでした。((<ruby-dev:21135>))
+
+
+: [ruby] [BUG]
+
+  空文字列のGCでSEGVすることありました。((<ruby-core:1342>))
+
+== 1.8.0 preview4 (2003-07-24) -> 1.8.0 (2003-08-04)
+
+=== 2003-07-30
+
+: ((<組み込み変数/$;>))   [compat]
+: ((<組み込み変数/$-F>))  [compat]
+: ((<Rubyの起動/-F((*regexp*))>))    [compat]
+
+  $; の指定に正規表現が許されるようになりました。これに伴い、文字列以
+  外を設定しても例外 ((<TypeError>)) は発生しないようになりました。
+  ((<ruby-talk:77381>))
+
+        $; = /bar/
+        p "foobarbaz".split
+
+        => -:1: value of $; must be String (TypeError)
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-08-01) [i586-linux]
+           ["foo", "baz"]
+
+  オプション -F に渡される文字列は正規表現として解釈されます(結果的に
+  は同じことですが、以前は指定された文字列の正規表現へのコンパイルを
+  split が行っていました)
+
+  (細かい事ではあるが、1.6 の split は 1文字のパターンを正規表現でなく
+  その文字で分割していたので以下は結果が異なる)
+
+        echo 'a*b*c' | ruby-1.6 -F'*' -nae 'p $F' 
+        => ["a", "b", "c\n"]
+
+        echo 'a*b*c' | ruby-1.8 -F'*' -pae 'p $F' 
+        =. ruby-1.8: invalid regular expression; there's no previous pattern, to which '*' would define cardinality at 1: /*/ (RegexpError)
+
+: ((<Marshal/Object#marshal_load>))  [new]
+: ((<Marshal/Object#marshal_dump>))  [new]
+
+  追加 ((<ruby-dev:21016>))
+
+: ((<組み込み変数/$VERBOSE>))
+
+  三段階のレベルを持つようになりました。
+  * nil: 警告を出力しない   (-W0 新しい警告レベル)
+  * false: 重要な警告のみ出力  (-W1 デフォルト)
+  * true: すべての警告を出力する (-W2 or -W or -v or -w or --verbose)
+
+=== 2003-07-29
+
+: ((<un>)) [lib] [new]
+
+  追加
+
+=== 2003-07-28
+
+: ((<File::Constants>))
+
+  File::Constants は、File クラスでなく IO クラスが include するように
+  なりました。((<ruby-dev:20964>))
+
+        p File.ancestors
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [File, File::Constants, IO, Enumerable, Object, Kernel]
+        => ruby 1.8.0 (2003-08-01) [i586-linux]
+           [File, IO, File::Constants, Enumerable, Object, Kernel]
+
+: ((<ARGF#to_s|ARGF/to_s>)) [change]
+
+  結果は "ARGF" 固定になりました。ファイル名は ARGF.path で取得します。
+
+        puts ARGF
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           -
+        => ruby 1.8.0 (2003-08-01) [i586-linux]
+           ARGF
+
+: ((<組み込み変数/$defout>)) [obsolete]
+: ((<組み込み変数/$deferr>)) [obsolete]
+: ((<組み込み変数/$stdout>)) [change]
+: ((<組み込み変数/$stderr>)) [change]
+: ((<組み込み変数/$stdin>))  [change]
+
+  $stdout, $stderr は、$defout, $deferr の別名になり
+  $defout, $deferr は ((<obsolete>)) になりました
+
+  $stdin は、普通のグローバル変数となりました(STDINをリダイレクトする
+  動作はなくなりました)
+
+  $defout や $deferr に代入を行うと警告がでます。
+  (注：1.6 に $deferr はありません)
+  ((<ruby-dev:2096>))
+
+        p $defout = STDOUT
+        p $deferr = STDERR
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           #<IO:0x401a60a4>
+           #<IO:0x401a6090>
+        => -:1: warning: $defout is obslete; use $stdout instead
+           ruby 1.8.0 (2003-08-01) [i586-linux]
+           #<IO:0x401a526c>
+           -:2: warning: $deferr is obslete; use $stderr instead
+           #<IO:0x401a5258>
+
+  $stdin にオブジェクトを代入すると標準入力からの入力メソッド(gets 等)
+  はそのオブジェクトにメソッドを投げます。
+  (リダイレクトしなくなった点を除けば、1.6 とそれほど違いはないようです)
+
+        class Foo
+          def gets
+            "dummy"
+          end
+        end
+
+        $stdin = Foo.new
+
+        p gets
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "dummy"
+        => ruby 1.8.0 (2003-08-01) [i586-linux]
+           "dummy"
+
+== 1.8.0 preview3 (2003-06-23) -> 1.8.0 preview4 (2003-07-24)
+
+=== 2003-07-24
+
+: ((<mkmf>)) [lib] [new]
+
+  新しい判定メソッド have_type(), check_sizeof() が追加されました。
+
+: ((<Thread#group|Thread/group>)) [new]
+
+  追加
+
+: ((<pathname>))        [lib] [new]
+
+  追加
+
+: ((<resolv>))       [lib] [compat]
+
+  Win32 に対応しました。
+
+: ((<webrick>))      [lib] [new]
+
+  追加
+
+: ((<openssl>))      [lib] [new]
+
+  追加
+
+=== 2003-07-23
+
+: ((<Process::UID>))  [new]
+: ((<Process::GID>))  [new]
+: ((<Process::Sys>))  [new]
+: ((<Process/Process.initgroups>))  [new]
+
+  追加 ((<ruby-dev:20803>)),((<ruby-list:37906>))
+
+: ((<String#split|String/split>))    [bug]
+
+  空文字列に対する split が空文字列を要素に持つ配列を返していました。
+
+        p "".split(//)
+        p "".split(//, 0)
+        p "".split(//, 1)
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           []
+           []
+           [""]
+        => ruby 1.8.0 (2003-07-25) [i586-linux]
+           []
+           []
+           []
+
+: ((<erb>))           [lib] [new]
+
+  追加
+
+: ((<"io/wait">))     [lib] [new]
+
+  追加
+
+: ((<String/strip>))     [compat]
+: ((<String/strip!>))    [compat]
+: ((<String/rstrip>))    [compat]
+: ((<String/rstrip!>))   [compat]
+
+  空白類だけでなく "\0" も strip するようになりました。((<ruby-talk:76659>))
+
+        p "\0foo\0".strip
+        p "\0foo\0".lstrip
+        p "\0foo\0".rstrip
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "\000foo\000"
+           -:2: undefined method `lstrip' for "\000foo\000":String (NameError)
+        => ruby 1.8.0 (2003-07-25) [i586-linux]
+           "foo"
+           "foo\000"
+           "\000foo"
+
+  2003-07-28: その後、左側の "\0" は strip されなくなりました
+  (lstrip の変更はなくなりました)
+
+        => ruby 1.8.0 (2003-07-29) [i586-linux]
+           "\000foo"
+           "\000foo\000"
+           "\000foo"
+
+=== 2003-07-22
+
+: ((<Module#const_missing|Module/const_missing>))  [new]
+
+   定義されていない定数を使用したときに const_missing という名のメソッドを
+   呼ぶようになりました。デフォルトでは NameError 例外を発生させます。
+   ((<ruby-core:00441>))
+
+: ((<String#==|String/==>))    [change]
+: ((<Numeric#==|Numeric/==>))  [change]
+
+  Comparable の変更と合わせて <=> が nil を返すとき == が nil を返すよ
+  うになりました。((<ruby-dev:20759>))
+
+        p "foo" <=> []
+
+        => -:1:in `<=>': failed to convert Array into String (TypeError)
+                from -:1
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-07-22) [i586-linux]
+           nil
+
+        p "foo" == []
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           false
+        => ruby 1.8.0 (2003-07-22) [i586-linux]
+           nil
+
+        p 1 <=> []
+
+        => -:1:in `<=>': Array can't be coerced into Fixnum (TypeError)
+                from -:1
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-07-22) [i586-linux]
+           nil
+
+        p 1 == []
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           false
+        => ruby 1.8.0 (2003-07-22) [i586-linux]
+           false
+
+: ((<tmpdir>)) [new]
+
+  テンポラリディレクトリを取得するためのライブラリが追加されました。
+  Windows などで利用されるライブラリは、/tmp をハードコードせずに(ま
+  た 環境変数 TEMP などを参照せずに)このライブラリを使用するべきです。
+  (tempfile などが tmpdir を使用するようになりました。
+  ((*tmp*))dir と ((*temp*))file というのがまたなんとも・・・)
+
+=== 2003-07-19
+
+: ((<String#~|String/~>))  [obsolete]
+
+  ((<ruby 1.8 feature/2003-05-26>)) の String#=~ の変更と同様に
+  String#~ で警告が出るようになりました。(1.8.1 以降使用できなくなる
+  かもしれません)
+
+        $_ = "foobar"
+        p ~"foo"
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           0
+        => -:2: warning: ~string will be obsolete; use explicit regexp
+           ruby 1.8.0 (2003-07-22) [i586-linux]
+           0
+
+: ((<XMLRPC>)) [lib] [new]
+  追加。
+
+=== 2003-07-16
+
+: ((<ThreadGroup#enclose|ThreadGroup/enclose>)) [new]
+: ((<ThreadGroup#enclosed?|ThreadGroup/enclosed?>)) [new]
+
+  追加 ((<ruby-dev:20655>))
+
+  ThreadGroup への Thread 追加/削除を(freeze せずに)禁止します。
+
+        thg = ThreadGroup.new.enclose
+        thg.add Thread.new {}
+
+        => -:2:in `add': can't move to the enclosed thread group (ThreadError)
+                from -:2
+           ruby 1.8.0 (2003-08-01) [i586-linux]
+
+        thg1 = ThreadGroup.new
+        thg2 = ThreadGroup.new
+
+        th = Thread.new {sleep 1}
+
+        thg1.add th
+        thg1.enclose
+        thg2.add th
+
+        => -:8:in `add': can't move from the enclosed thread group (ThreadError)
+                from -:8
+           ruby 1.8.0 (2003-08-01) [i586-linux]
+
+: ((<ThreadGroup#freeze|ThreadGroup/freeze>)) [change]
+
+  freeze された ThreadGroup に Thread を追加/削除できなくなりました。
+
+        thg = ThreadGroup.new.freeze
+        thg.add Thread.new {}
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+        => -:2:in `add': can't move to the frozen thread group (ThreadError)
+                from -:2
+           ruby 1.8.0 (2003-08-01) [i586-linux]
+
+        thg1 = ThreadGroup.new
+        thg2 = ThreadGroup.new
+
+        th = Thread.new {sleep 1}
+
+        thg1.add th
+        thg1.freeze
+        thg2.add th
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+        => -:8:in `add': can't move from the frozen thread group (ThreadError)
+                from -:8
+           ruby 1.8.0 (2003-08-01) [i586-linux]
+
+: rb_enable_super [api]
+: rb_disable_super [api]
+
+  ChangeLog によると、これらの関数は必要なくなったようです。
+
+  (rb_enable_super() を呼ぶと warning が出ます)。以前は、拡張ライブラ
+  リのレベルで、rb_call_super() (Ruby の super にあたる) を呼ぶメソッ
+  ドは rb_enable_super() しておかなければなりませんでした。
+
+=== 2003-07-09
+
+: ((<組み込み関数/load>)) [bug]
+
+  ((<組み込み関数/load>)) がスレッドセーフになりました。((<ruby-dev:20490>))
+
+=== 2003-07-03
+
+: ((<Struct#inspect|Struct>)) [compat]
+
+  出力形式が少しだけ変わりました。
+
+        p Struct.new('Foo', :a, :b, :c, :d).new
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           #<Struct::Foo a=nil, b=nil, c=nil, d=nil>
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           #<struct Struct::Foo a=nil, b=nil, c=nil, d=nil>
+
+        p Struct.new(:a, :b, :c, :d).new
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           #<#<Class 0lx401a19dc> a=nil, b=nil, c=nil, d=nil>
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           #<struct #<Class:0x4019ff38> a=nil, b=nil, c=nil, d=nil>
+
+: ((<組み込み関数/sprintf>)) [new]
+
+  "%p" が追加されました。inspect の結果が利用されます。((<RCR#69>))
+
+        printf("%s\n", [1,2,3])
+        printf("%p\n", [1,2,3])
+        printf("%3.3p\n", [1,2,3])
+
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           123
+           [1, 2, 3]
+           [1,
+
+: ((<Module#undef_method|Module/undef_method>)) [compat]
+: ((<Module#remove_method|Module/remove_method>)) [compat]
+
+  一度に複数のメソッドを指定できるようになりました。((<RCR#146>))
+
+        class Foo
+          def foo; end
+          def bar; end
+
+          p undef_method :foo, :bar
+        end
+        => -:5:in `undef_method': wrong # of arguments(2 for 1) (ArgumentError)
+                from -:5
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => -:5: warning: parenthesize argument(s) for future version
+           ruby 1.8.0 (2003-07-03) [i586-linux]
+           Foo
+
+  remove_method も同様に複数のメソッドを指定できるようになりました。
+  (2003-07-05)
+
+        class Foo
+          def foo; end
+          def bar; end
+
+          p remove_method :foo, :bar
+        end
+        => -:5:in `remove_method': wrong # of arguments(2 for 1) (ArgumentError)
+                from -:5
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => -:5: warning: parenthesize argument(s) for future version
+           ruby 1.8.0 (2003-07-12) [i586-linux]
+           Foo
+
+: ((<Timeout/Timeout.timeout>)) [lib] [new]
+: ((<Timeout::Error|Timeout/Error>)) [lib] [new]
+
+  timeout に Timeout モジュールが定義されました。((<RCR#121>))
+
+  関数 ((<timeout/timeout>)) は、モジュール関数 Timeout.timeout の別名に、
+  例外 ((<TimeoutError>)) は Timout::Error の別名になりました。
+
+: ((<MatchData#captures|MatchData/captures>)) [new]
+
+  追加。((<RCR#139>))
+  (2003-07-17: ((<ruby-dev:20703>)) で、MatchData#groups から 
+  MatchData#captures に変更)
+
+=== 2003-06-28
+
+: ((<String#split|String/split>)) [bug]
+
+  以下の例のように、第一引数に ' ' (awk split)を指定してかつ、第二引数
+  を指定した場合に最後の要素の先頭に余分な空白が残っていました。
+
+        p "a  b  c".split(' ',3)
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           ["a", "b", " c"]
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           ["a", "b", "c"]
+
+== 1.8.0 preview2 (2003-03-03) -> 1.8.0 preview3 (2003-06-23)
+
+=== 2003-06-23
+
+: ((<String#rindex|String/rindex>)) [bug]
+
+  文字コード \0 が文字列末尾にマッチしていました。
+
+        p "abc".rindex(0)
+        p "abc".index(0)
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           3
+           nil
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           nil
+           nil
+
+: ((<String#upto|String/upto>)) [bug]
+
+  String#upto の範囲チェックが辞書順だったバグが修正されました。
+  現在は、((<String/succ>)) の動作と一致します。
+
+        p(('a'..'aa').to_a)
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           ["a"]
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           ["a", "b", "c", ..., "y", "z", "aa"]
+
+        'a'.upto('aa') {|c| p c}
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "a"
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           "a"
+           "b"
+           "c"
+            :
+           "y"
+           "z"
+           "aa"
+
+  以前の実装では以下が 'aa' を含まないとか
+
+        'a'.upto('b') {|c| p c}
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "a"
+           "b"
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           "a"
+           "b"
+
+  以下の結果と順序関係が一致していませんでした。
+
+        p(('a'..'zz').to_a)
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           ["a", "b", "c", ..., "x", "y", "z", "aa", ..., "zx", "zy", "zz"]
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           ["a", "b", "c", ..., "x", "y", "z", "aa", ..., "zx", "zy", "zz"]
+
+  なお、<=> の順序は辞書順であることに注意する必要があります。
+        p 'a' < 'b'    # => true
+        p 'aa' < 'b'   # => true
+
+=== 2003-06-22
+
+: ((<IO/IO.new>)) [compat]
+
+  ((<File/File.open>)) と同様に mode を数値(つまり、
+  ((<File::Constants>)) の定数) で指定できるようになりました。
+
+        p IO.new(0, File::RDONLY)
+        => -:1:in `initialize': wrong argument type Fixnum (expected String) (TypeError)
+                from -:1:in `new'
+                from -:1
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-06-28) [i586-linux]
+           #<IO:0x4019ffc4>
+
+=== 2003-06-19
+
+: ((<csv>)) [lib], [new]
+
+  追加。
+
+: ENV["PATH"]    [ruby], [bug?]
+
+  Windows などのプラットフォームで環境変数名 PATH (セキュリティチェッ
+  ク時などに判断)の大文字と小文字を区別しないようになりました。
+  ((<ruby-dev:20374>))
+
+: ((<tk>)) [lib], [change]
+
+  Ruby/Tk に多数の修正が入りました。((<ruby-list:37798>))
+
+    tk :
+     * small bug fix
+     * rename 'no_create' option to 'without_creating'
+     * add TkWindow#pack_in,  TkWindow#grid_in,  TkWindow#place_in
+     * add TkWindow#bind_class and TkWindow#database_class
+       If defined specific_class (@db_class), bind_class returns @db_class.
+       In other case, bind_class returns TkWinow#class().
+       It is useful for binding.
+       TkWindow#database_class is defined for querying the option database.
+       It's same to TkWinfo.classname(self).
+     * add TkBindTag.new_by_name and TkDatabaseClass for binding to database class
+     * check varname whether already exsist or not. (TkVarAccess.new)
+     * TkTextWin#bbox returns an array of four numbers
+     * autoload TkDialog2, TkWarning2
+     * scan event callback arguments and convert to proper type
+     * TkBindTag.new accepts a block ( TkBindTag.new(context){callback} )
+     * If given taglist, TkWindow#bindtags(taglist) returns taglist
+     * add TkWindow#bindtags=(taglist)
+     * Tk.focue and Tk.focus_lastfor return nil if there is no target widget.
+     * Tk::Wm.client returns the argument string when setting name
+     * TkGrid.columnconfiginfo and rowconfiginfo given a slot return a number.
+     * TkWindow.grid_columnconfiginfo and grid_rowconfiginfo :: ditto
+     * rename and define alias :: TkOption ==> TkOptionDB
+     * define alias :: TkTimer ==> TkAfter
+     * some instance methods change from public to private
+     * some TkComm methods change to module functions
+       (help to treat return values from Tk)
+     * add support for -displayof option to some TkWinfo methods
+     * bind, bind_append and bind_remove :: returns the target of event-binding
+     * add Tk8.4 features
+     * add TkPaneWindow
+
+    tkdialog:
+     * classes without showing at initialize : TkDialog2, TkWarning2
+     * add show method to reuse TkDialog object
+     * some instance methods change from public to private
+     * add new features for configuration
+
+    tktext :
+     * small bug fix
+     * some methods return self
+     * add TkTextMark#+(mod) and TkTextMark#-(mod) (e.g. mark + '3 chars')
+     * add some methods
+
+    tkcanvas :
+     * small bug fix
+     * some methods return self
+
+    tkentry :
+     * some methods return self
+     * TkEntry#bbox returns an array of four numbers
+     * scan validatecommand arguments and convert to proper type
+
+    tkbgerror :
+     * support to define a error handler by user
+
+    tcltklib :
+     * reported by Ferenc Engard <engard@all.hu> on [ruby-talk:60759]
+
+=== 2003-06-16
+
+: ((<drb>)) [lib] [new]
+
+  dRuby 追加。((<ruby-dev:20363>))
+
+: ((<Proc/Proc.new>)) [change]
+: ((<組み込み関数/lambda>))   [change]
+: ((<組み込み関数/proc>))     [change]
+
+  以下のように変更されました。((<ruby-dev:20358>))
+
+      * Proc.new およびブロック引数で与えられる Proc は
+        引数チェックがゆるい。break が例外になる。
+
+            Proc.new {|a,b,c| p [a,b,c]}.call(1,2)
+                => -:1: wrong # of arguments (2 for 3) (ArgumentError)
+                        from -:1:in `call'
+                        from -:1
+                   ruby 1.6.8 (2002-12-24) [i586-linux]
+                => ruby 1.8.0 (2003-06-21) [i586-linux]
+                   [1, 2, nil]
+
+            Proc.new { break }.call
+
+                => ruby 1.6.8 (2002-12-24) [i586-linux]
+
+                => -:1:in `call': break from proc-closure (LocalJumpError)
+                        from -:1
+                   ruby 1.8.0 (2003-06-21) [i586-linux]
+
+      * lambda および proc が返す Proc は引数チェックが厳しい。
+        break は実行を中断する。
+
+            lambda {|a,b,c| p [a,b,c]}.call(1,2)
+                => -:1: wrong # of arguments (2 for 3) (ArgumentError)
+                        from -:1:in `call'
+                        from -:1
+                   ruby 1.6.8 (2002-12-24) [i586-linux]
+                => -:1: wrong number of arguments (2 for 3) (ArgumentError)
+                        from -:1:in `call'
+                        from -:1
+                   ruby 1.8.0 (2003-06-21) [i586-linux]
+
+            lambda { break }.call
+                => ruby 1.6.8 (2002-12-24) [i586-linux]
+                => ruby 1.8.0 (2003-06-21) [i586-linux]
+
+
+  以下のようにイテレータブロックと、Procをブロックとして引数で渡したと
+  きの挙動が同じになっています。
+
+        def foo
+          yield 1,2,3,4
+        end
+
+        foo {|a,b,c| p [a,b,c]; break }
+
+        foo( &proc {|a,b,c| p [a,b,c]; break } )
+
+        foo( &Proc.new {|a,b,c| p [a,b,c]; break } )
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1, 2, 3]
+           [1, 2, 3]
+           -:2: break from proc-closure (LocalJumpError)
+        => ruby 1.8.0 (2003-06-21) [i586-linux]
+           [1, 2, 3]
+           [1, 2, 3]
+           [1, 2, 3]
+
+=== 2003-06-14
+
+: [bug]
+
+  ((<ruby-talk:73481>))
+
+        p 'mike stok' =~ /^(?i-mx:mike) (?i-mx:stok)$/
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+        => ruby 1.8.0 (2003-06-16) [i586-linux]
+           0
+
+  ((<ruby-talk:73549>))
+
+        p "Mike" =~ /(?-i)[Mm]ike/
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+        => ruby 1.8.0 (2003-06-16) [i586-linux]
+           0
+
+=== 2003-06-10
+
+: ((<rexml>)) [lib],[new]
+
+  追加
+
+=== 2003-06-06
+
+: ((<Process/Process.groups>)) [new]
+: ((<Process/Process.groups=>)) [new]
+: ((<Process/Process.maxgroups>)) [new]
+: ((<Process/Process.maxgroups=>)) [new]
+ 
+  追加
+
+: ((<セキュリティモデル>)), ((<組み込み変数/$SAFE>)) [bug], [change]
+
+  ((<終了処理>))直前に $SAFE が 0 になるように変更されました。
+  ((<ruby-core:01119>))
+
+        $SAFE = 1
+        END { p $SAFE }
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           1
+        => ruby 1.8.0 (2003-06-09) [i586-linux]
+           0
+
+: ((<ENV/ENV[]>)) [change]
+: ((<ENV/ENV.delete>)) [change]
+: ((<ENV/ENV.fetch>)) [change]
+: ((<ENV/ENV.keys>)) [change]
+: ((<ENV/ENV.each_key>)) [change]
+: ((<ENV/ENV.values>)) [change]
+: ((<ENV/ENV.each_value>)) [change]
+: ((<ENV/ENV.each>)) [change]
+: ((<ENV/ENV.select>)) [change]
+: ((<ENV/ENV.to_a>)) [change]
+: ((<ENV/ENV.index>)) [change]
+: ((<ENV/ENV.indexes>)) [change]
+: ((<ENV/ENV.to_hash>)) [change]
+: ((<ENV/ENV.shift>)) [change]
+
+  ENV が生成する文字列はすべて ((<Object/freeze>)) されるようになりました。
+  ((<ruby-talk:72732>))
+
+        ENV['environ'] = 'value'
+        ENV['environ'].sub!(/value/, 'VALUE')
+        p ENV['environ']
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "value"
+
+  この例のように sub! のような破壊的メソッドの効果がないため混乱すると
+  いうのが理由です(ENVが返す文字列を変更しても環境変数自体に影響がない)。
+
+        => -:2:in `sub!': can't modify frozen string (TypeError)
+                from -:2
+           ruby 1.8.0 (2003-06-09) [i586-linux]
+
+: ((<Array#first|Array/first>)) [compat]
+: ((<Array#last|Array/last>)) [compat]
+
+  省略可能な引数を追加
+
+        p [1,2,3].first(2)
+        p [1,2,3].last(2)
+        => -:1:in `first': wrong # of arguments(1 for 0) (ArgumentError)
+                from -:1
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-06-09) [i586-linux]
+           [1, 2]
+           [2, 3]
+
+        p [1,2,3].first(0)
+        p [1,2,3].last(0)
+        => -:1:in `first': wrong # of arguments(1 for 0) (ArgumentError)
+                from -:1
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-06-09) [i586-linux]
+           []
+           []
+
+=== 2003-06-05
+
+: ((<Math/Math.erf>)) [new]
+: ((<Math/Math.erfc>)) [new]
+
+  追加 ((<ruby-list:37753>))
+
+=== 2003-05-29
+
+: ((<組み込み関数/autoload>))  [change]
+: ((<組み込み関数/autoload?>))  [new]
+: ((<Module#autoload|Module/autoload>))  [new]
+: ((<Module#autoload?|Module/autoload>))  [new]
+
+  ネストしたクラス/モジュールに対する autoload 指定が可能になりました。
+  ((<ruby-dev:16159>)), ((<ruby-dev:16165>)) ((<ruby-dev:18103>)),
+  ((<ruby-dev:19686>))
+
+        File.open("/tmp/foo.rb", "w") {|io|
+          io.puts 'class Foo; class Bar; end; end'
+        }
+
+        class Foo
+          autoload :Bar, '/tmp/foo.rb'
+        end
+
+        p Foo::Bar
+
+        => -:7: uninitialized constant Bar (NameError)
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-05-29) [i586-linux]
+           Foo::Bar
+
+
+        File.open("/tmp/foo.rb", "w") {|io|
+          io.puts 'class Foo; class Bar; end; end'
+        }
+
+        class Foo
+        end
+        Foo.autoload :Bar, '/tmp/foo.rb'
+        p Foo.autoload?(:Bar)
+        p Foo::Bar
+        p Foo.autoload?(:Bar)
+
+        => -:7: private method `autoload' called for Foo:Class (NameError)
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-06-03) [i586-linux]
+           "/tmp/foo.rb"
+           Foo::Bar
+           nil
+
+  以下のように、autoload したライブラリがネストした定数を定義しない場合、
+  一見、正常に動作しているように見える事に注意(警告メッセージを参照のこと)。
+
+        File.open("/tmp/foo.rb", "w") {|io|
+          io.puts 'class Bar; end'
+        }
+
+        class Foo
+          autoload :Bar, '/tmp/foo.rb'
+        end
+        p Foo::Bar
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           Bar
+        => -:8: warning: toplevel constant Bar referenced by Foo::Bar
+           ruby 1.8.0 (2003-07-12) [i586-linux]
+           Bar
+
+  これは以下のようにネストせずに定義したのと同じことです。
+
+        class Foo
+        end
+        class Bar
+        end
+        p Foo::Bar
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           Bar
+        => -:5: warning: toplevel constant Bar referenced by Foo::Bar
+           ruby 1.8.0 (2003-07-12) [i586-linux]
+           Bar
+
+=== 2003-05-28
+
+: ((<組み込み関数/syscall>)) [bug]
+
+  第二引数以降に文字列か Fixnum しか受け付けないために、long の範囲の
+  数値を指定することができませんでした。((<ruby-talk:72257>))
+
+        syscall(1, 2**30)
+
+        => -:1:in `syscall': wrong argument type Bignum (expected String) (TypeError)
+                from -:1
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+
+=== 2003-05-26
+
+: ((<String#=~|String/=~>)) [obsolete]
+
+  string =~ string に対して警告が出るようになりました。明示的に string
+  =~ regexp あるいは regexp =~ string を使うことが推奨されます。
+  (1.8.1 以降使用できなくなるかもしれません) ((<ruby-list:37662>))
+
+        p('foo' =~ 'o+')
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           1
+        => -:1: warning: string =~ string will be obsolete; use explicit regexp
+           ruby 1.8.0 (2003-05-29) [i586-linux]
+           1
+
+: ((<Proc#yield|Proc/yield>))
+
+  なくなりました。((<ruby-dev:20180>))
+
+
+=== 2003-05-22
+
+: [ruby] [bug]
+
+  ruby 1.7.3 (2002-09-20) あたりから、"#{str}" が新しいオブジェクトを
+  生成していませんでした。
+
+        a = 'foo'
+        p a.id == "#{a}".id
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           false
+        => ruby 1.7.3 (2002-09-13) [i586-linux]
+           false
+        => ruby 1.7.3 (2002-09-20) [i586-linux]
+           true
+        => -:2: warning: Object#id will be deprecated; use Object#object_id
+           -:2: warning: Object#id will be deprecated; use Object#object_id
+           ruby 1.8.0 (2003-05-29) [i586-linux]
+           false
+
+=== 2003-05-20
+
+: ((<NameError/NameError.new>))(msg[, name])            [compat]
+: ((<NoMethodError/NoMethodError.new>))(msg, name, args)    [compat]
+: ((<SystemCallError/SystemCallError.new>))(msg, err)         [compat]
+: ((<Errno::EXXX>)).new(msg)                   [compat]
+
+  内部の実装でインスタンス変数を初期化していなかったために warning が
+  出ていたのを修正しました。そして、new のパラメータでその値を指定でき
+  るように変更されました。
+
+        p NameError.new("message", "foo")
+        p NoMethodError.new("message", "foo", [1,2,3])
+        p SystemCallError.new("message", 2)
+        p Errno::ENOENT.new("message")
+
+        => ruby 1.8.0 (2003-05-29) [i586-linux]
+           #<NameError: message>
+           #<NoMethodError: message>
+           #<Errno::ENOENT: No such file or directory - message>
+           #<Errno::ENOENT: No such file or directory - message>
+
+
+: ((<NameError#name|NameError/name>))                [new]
+: ((<NoMethodError#args|NoMethodError/args>))        [new]
+
+  追加
+
+        p NameError.new("message", "foo").name
+        => ruby 1.8.0 (2003-05-29) [i586-linux]
+           "foo"
+
+        p NoMethodError.new("message", "foo", [1,2,3]).args
+        => ruby 1.8.0 (2003-05-29) [i586-linux]
+           [1, 2, 3]
+
+: ((<yield|メソッド呼び出し/yield>))
+
+  ブロックパラメータの数が一つの場合、ブロックに複数の値を渡すと警告が
+  出るようになりました。
+
+  以前は |var| は一つの引数を受けるときと、複数の引数を受けるときの両
+  方で利用されていましたが、将来は「一つの引数を受ける」ことを意味する
+  ようになります。((<ruby-dev:20358>))
+
+        def foo
+          yield 1,2,3
+        end
+        foo {|args| p args}
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1, 2, 3]
+        => -:2: warning: multiple values for a block parameter (3 for 1)
+           ruby 1.8.0 (2003-06-21) [i586-linux]
+           [1, 2, 3]
+
+  将来この結果は (({1})) かエラーになると思われます。移行期間中は 
+  |var,| や |*vars| を明示的に使い分けることで警告を避ける必要がありま
+  す。
+
+        def foo
+          yield 1,2,3
+        end
+        foo {|var,| p var}
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           1
+        => ruby 1.8.0 (2003-06-21) [i586-linux]
+           1
+
+        def foo
+          yield 1,2,3
+        end
+        foo {|*vars| p vars}
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1, 2, 3]
+        => ruby 1.8.0 (2003-06-21) [i586-linux]
+           [1, 2, 3]
+
+  あるいは
+
+        def foo
+          yield [1,2,3]
+        end
+        foo {|vars| p vars}
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1, 2, 3]
+        => ruby 1.8.0 (2003-06-21) [i586-linux]
+           [1, 2, 3]
+
+: ((<Module#include|Module/include>)) [change]
+
+  トップレベルの include は、第二引数に true を指定した load でロード
+  されるスクリプトのもとではモジュールの機能を self に 
+  ((<Object/extend>)) するように変更されました。
+
+        module Foo
+          def foo
+            "foo"
+          end
+        end
+
+        open("/tmp/foo.rb", "w") {|io|
+          io.print <<-END
+            include Foo
+            p self
+            p self.foo
+          END
+        }
+        load("/tmp/foo.rb", true)
+
+        p self
+        foo
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           main
+           "foo"
+           main
+        => /tmp/foo.rb:1: warning: main#include in the wrapped load is effective only for toplevel
+           ruby 1.8.0 (2003-05-29) [i586-linux]
+           main
+           "foo"
+           main
+           -:17: undefined local variable or method `foo' for main:Object (NameError)
+
+
+=== 2003-05-19
+: ((<LocalJumpError#exit_value|LocalJumpError/exit_value>)) [change]
+: ((<LocalJumpError#reason|LocalJumpError/reason>)) [new]
+
+  追加。exit_value は 1.7 で追加された exitstatus からの名称変更です。
+
+: ((<ARGF/ARGF.path>)) [new]
+
+  追加 (ARGF.filename の別名) ((<ruby-dev:20197>))
+
+: ((<Object#initialize_copy|Object/initialize_copy>)) [change]
+
+  ((<1.7|ruby 1.7 feature>)) で追加された copy_object メソッドは、
+  initialize_copy に名称変更されました。
+
+  このメソッドは initialize と同様、自動的に private method になります。
+
+=== 2003-05-16
+: ruby interpreter [bug]
+
+  以下のバグが修正されました((<ruby-list:37677>))
+  (イテレータの中で block を他のメソッドに & で渡した時のそのメソッド
+  の引数のコンテキストの扱い？)
+
+        def foo
+          p(block_given?)
+          p(block_given?,&proc)
+          p(yield,&proc)
+        end
+
+        foo { }
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           true
+           false
+           -:4: [BUG] Segmentation fault
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+
+        => ruby 1.6.8 (2003-05-15) [i586-linux]
+           true
+           false
+           -:4:in `foo': no block given (LocalJumpError)
+                from -:7
+
+        => ruby 1.8.0 (2003-05-17) [i586-linux]
+           true
+           true
+           nil
+
+
+=== 2003-05-15
+: ((<Module/Module#>>)) [change]
+: ((<Module/Module#<>)) [change]
+: ((<Module/Module#<=>)) [change]
+
+  継承関係にないクラス同士の比較で nil を返すようになりました。
+  ((<ruby-dev:20190>))
+
+  ((<Module/Module#<=>)) は、1.7 で nil を返すように変更されていました
+  が、その後、-1 に、その後再度 nil におさまりました。
+
+        p Integer < Numeric
+        p Integer <=> Numeric
+        p String < Array
+        p String > Array
+        p String <=> Array
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           true
+           -1
+           false
+           false
+           1
+        => ruby 1.8.0 (2003-05-17) [i586-linux]
+           true
+           -1
+           nil
+           nil
+           -1
+        => ruby 1.8.0 (2003-05-29) [i586-linux]
+           true
+           -1
+           nil
+           nil
+           nil
+
+: ((<組み込み変数/$stdin>))  [change]
+: ((<組み込み変数/$stdout>)) [change]
+: ((<組み込み変数/$stderr>)) [change]
+
+  注: この変更は、((<ruby 1.8 feature/2003-07-28>)) でさらに変更されま
+  した。
+
+  これらの変数への代入は以前は代入元 IO へのリダイレクトの動作をしてい
+  ましたが、これらの変数は read-only に変更されました(代入を行うと例外
+  ((<NameError>)) が発生します)。以前の挙動は複雑で混乱を来すためです。
+
+  もはや、$stdin、$stdout, $stderr は互換性のため以外で使用する意味は
+  ないはずです(STDIN, STDOUT, STDERR と同じなので。むしろ $ 付きの方が
+  ((*定数*))になってしまってますが...)。
+
+  リダイレクトを行いたい場合は、((<IO#reopen|IO/reopen>)) を使用します。
+  例えば、
+
+        $stdout = File.open("/tmp/foo", "w")
+
+  は、
+        STDOUT.reopen("/tmp/foo")
+
+  とします。リダイレクトを戻したい場合は、
+
+        stdout_sv = STDOUT.dup          # STDOUT を保存
+        STDOUT.reopen("/tmp/foo")       # STDOUT を /tmp/foo にリダイレクト
+
+        puts "foo"                      # /tmp/foo に出力
+
+        STDOUT.flush                    # 必要っぽい (1.8.0 2003-05-17 から 2003-05-29 の間のとこかで必要なくなった)
+        STDOUT.reopen(stdout_sv)        # 元に戻す
+
+  とします。ただし、子プロセスにもリダイレクトの影響を与えたいという要
+  件がないなら
+
+        # 出力メソッドのデフォルトの出力先を置き換え
+        $defout = File.open("/tmp/foo", "w")
+
+        puts "foo"
+
+        # 出力メソッドのデフォルトの出力先を戻す。
+        $defout = STDOUT
+
+  でも十分です。
+
+: ((<Process/Process.kill>)) [compat]
+
+  ChangeLog によると win32 でも、シグナル 0 がサポートされたそうです。
+  多くの Unix で、シグナル 0 の送信は、プロセスの存在チェックに使用で
+  きますので、それと同じ動作をするのだと思います。
+
+=== 2003-05-13
+: ((<正規表現>)) [regexp]
+
+  ((<ruby 1.8 feature/2003-05-01>)) の $ の変更と同様に、正規表現 \Z
+  が改行の前だけでなく、常に文字列の末尾にもマッチするようになりました。
+  これは、perl や python と同じ挙動です。((<ruby-dev:20187>))
+
+        p(/\n\Z/ =~ "\n")
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+        => ruby 1.8.0 (2003-05-17) [i586-linux]
+           0
+
+        p "\n".gsub(/$/, ":")
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           ":\n"
+        => ruby 1.8.0 (2003-05-17) [i586-linux]
+           ":\n:"
+
+=== 2003-05-12
+: ((<組み込み関数/warn>))  [new]
+: ((<組み込み変数/$deferr>)) [new]
+
+  追加
+
+  以前は、ruby インタプリタが出力する error/warning メッセージは STDERR
+  固定でしたが、$deferr に変更されました。($deferr はすぐに obsolete に
+  なりました。$stderr を使ってください)
+
+=== 2003-05-09
+: ((<yaml|YAML>)) [new]
+
+  追加。YAML は、YAML Ain't Markup Language だそうです。
+  ((<URL:http://yaml4r.sourceforge.net/>))
+  ((<URL:http://yaml.org/>))
+
+: ((<IO#reopen|IO/reopen>)) [compat]
+
+  第二引数を省略したときレシーバのモードをそのまま引き継ぐようになりま
+  した。以前は、第二引数のデフォルト値は "r" 固定でした。
+
+    STDOUT.reopen("/tmp/hoge")
+    puts "foo"
+
+    => ruby 1.6.8 (2002-12-24) [i586-linux]
+       -:1:in `reopen': No such file or directory - "/tmp/hoge" (Errno::ENOENT)
+            from -:1
+    => ruby 1.8.0 (2003-05-09) [i586-linux]
+
+=== 2003-05-05
+: ((<Object#methods|Object/methods>)) [compat]
+: ((<Object#public_methods|Object/public_methods>)) [compat]
+: ((<Object#private_methods|Object/private_methods>)) [compat]
+: ((<Object#protected_methods|Object/protected_methods>)) [compat]
+
+  スーパークラスのメソッドも探索するかどうかを引数で指定できるようにな
+  りました。((<Module#instance_methods|Module/instance_methods>)) など
+  と同じですが、過去との互換性のため引数のデフォルト値が Module のもの
+  とは逆です。(Module#instance_methods などのデフォルト値は将来(1.8.1)
+  変更される予定のようです)
+
+    class Foo
+      private;   def private_foo()   end
+      protected; def protected_foo() end
+      public;    def public_foo()    end
+    end
+
+    class Bar < Foo
+    end
+
+    p Bar.new.methods           - Object.new.methods
+    p Bar.new.public_methods    - Object.new.public_methods
+    p Bar.new.private_methods   - Object.new.private_methods
+    p Bar.new.protected_methods - Object.new.protected_methods
+
+    p Bar.new.methods(false)
+    p Bar.new.public_methods(false)
+    p Bar.new.private_methods(false)
+    p Bar.new.protected_methods(false)
+    => ruby 1.6.8 (2002-12-24) [i586-linux]
+       ["public_foo"]
+       ["public_foo"]
+       ["private_foo"]
+       ["protected_foo"]
+       -:15:in `methods': wrong # of arguments(1 for 0) (ArgumentError)
+            from -:15
+    => ruby 1.8.0 (2003-05-05) [i586-linux]
+       ["public_foo", "protected_foo"]
+       ["public_foo"]
+       ["private_foo"]
+       ["protected_foo"]
+       []
+       []
+       []
+       []
+
+  ((<Object#methods|Object/methods>)) は引数が false の場合にそのオブ
+  ジェクトの特異メソッドのリストを返します。つまり、
+  ((<Object#singleton_methods(false)|Object/singleton_methods>)) と同
+  じです。
+
+    obj = Object.new
+    class << obj
+      def foo
+      end
+    end
+
+    p obj.methods(false)
+    p obj.singleton_methods(false)
+    p obj.public_methods(false)
+    => ruby 1.8.0 (2003-05-06) [i586-linux]
+       ["foo"]
+       ["foo"]
+       ["foo"]
+
+  Object#methods 以外の Object#public_methods などは引数が false のときは
+  * 特異メソッドを持つオブジェクトでは特異メソッドのリスト
+  * そうでなオブジェクトではクラスで定義されているメソッドのリスト
+  という動作をします。(これは実装の都合でそうなっているだけらしいので
+  将来変わる可能性があります 2003-08-04: 変わりました。以下の例を参照)
+
+    obj = String.new
+
+    p obj.methods(false)
+    p obj.singleton_methods(false)
+    p obj.public_methods(false)
+
+    def obj.foo
+    end
+
+    p obj.methods(false)
+    p obj.singleton_methods(false)
+    p obj.public_methods(false)
+    => ruby 1.8.0 (2003-05-06) [i586-linux]
+       []
+       []
+       ["rjust", "squeeze", ...]
+       ["foo"]
+       ["foo"]
+       ["foo"]                 # <= 注意
+
+    => ruby 1.8.0 (2003-08-04) [i586-linux]
+       []
+       []
+       ["crypt", "index", "rstrip", ...]
+       ["foo"]
+       ["foo"]
+       ["crypt", "index", "foo", "rstrip", ...]
+
+  1.7 の変更点も含めて仕様をまとめると
+
+        Object#methods,           Module#instance_methods,
+        Object#public_methods,    Module#public_instance_methods,
+        Object#private_methods,   Module#private_instance_methods,
+        Object#protected_methods, Module#protected_instance_methods
+        Object#singleton_methods
+
+  * 引数が true の場合は、モジュールやスーパークラスを探索する。
+
+  * public_xxx, private_xxx, protected_xxx はそれぞれpublic, private,
+    protected メソッドのみを返す。public_, private_, protected_ がつか
+    ない、methods, instance_methods は、public メソッドと protected
+    メソッドを返す。
+
+  * Object#methods(false) は Object#singleton_methods(false) と同じ。
+
+  * 将来これらのメソッドの引数のデフォルト値は true になる予定だが、
+    Module#xxx_instance_methods と Object#singleton_methods は現状デフォ
+    ルト値が false(過去との互換のため。なお、省略したままだと警告が出る)。
+    デフォルトに頼らないようにするべき、1.6 で使用していたスクリプトを
+    書き換える場合は、false を明示的に指定する。
+
+: ((<Array#values_at|Array/values_at>)) [new]
+: ((<Hash#values_at|Hash/values_at>)) [new]
+: ((<ENV/ENV.values_at>)) [new]
+: ((<MatchData#values_at|MatchData/values_at>)) [new]
+: ((<Struct#values_at|Struct/values_at>)) [new]
+
+  ruby 1.6 の ((<indexes|Array/indexes>)) は、values_at というメソッド
+  名になりました(ruby 1.7 では block なし ((<select|Array/select>)) が
+  indexes の代わりでしたが、こちらも使用すると警告が出ます)。
+
+        p [0,1,2,3,4,5].values_at(1,3,5,7)
+        p [0,1,2,3,4,5].values_at
+        => ruby 1.8.0 (2003-05-05) [i586-linux]
+           [1, 3, 5, nil]
+           []
+
+  (2003-06-02: Array#values_at だけは引数に Range を指定できます)
+  (2003-07-03: その後、MatchData#values_at, Struct::XXXX#values_at も 
+  Range を指定できるようになりました)
+
+        p [0,1,2,3].values_at(0..3)
+
+        => ruby 1.8.0 (2003-06-03) [i586-linux]
+           [0, 1, 2, 3]
+
+        p "abcd".match(/(.)(.)(.)(.)/).values_at(0..3)
+
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           ["abcd", "a", "b", "c"]
+
+        p Struct.new(:a, :b, :c, :d).new(1,2,3,4).values_at(0..3)
+        => ruby 1.8.0 (2003-07-03) [i586-linux]
+           [1, 2, 3, 4]
+
+: ((<MatchData#select|MatchData/select>)) [new]
+
+  ((<MatchData>)) は、Enumerable ではありませんが、Enumerable#select
+  と同じメソッドが定義されました。
+
+    /(foo)(bar)(baz)/ =~ "foobarbaz"
+    p $~.select {|v| p v }
+
+=== 2003-05-02
+: ((<Comparable>)) [change]
+
+  obj#<=> が nil を返すような引数に対して、>, >=, <, <= が例外
+  ((<ArgumentError>)) を起こすようになりました。また、== は、nil を返
+  すようになりました。
+
+        class Foo
+          include Comparable
+          def <=>(o)
+            nil
+          end
+        end
+        p(Foo.new == nil)
+        p(Foo.new > nil)
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           false
+           false
+        => ruby 1.8.0 (2003-05-02) [i586-linux]
+           nil
+           -:8:in `>': comparison failed (ArgumentError)
+                from -:8
+
+# 戻った。将来この変更が入る予定なのでコメント
+#
+# === 2003-05-02
+# : ((<Module#instance_methods|Module/instance_methods>)) [change]
+# : ((<Module#public_instance_methods|Module/public_instance_methods>)) [change]
+# : ((<Module#private_instance_methods|Module/private_instance_methods>)) [change]
+# : ((<Module#protected_instance_methods|Module/protected_instance_methods>)) [change]
+#
+#   引数のデフォルト値が変更されました。デフォルトではスーパークラスを辿
+#   るようになりました。これは、((<Object#methods|Object/methods>)) など
+#   と同じということになります。
+#
+#     class Foo
+#       private;   def private_foo()   end
+#       protected; def protected_foo() end
+#       public;    def public_foo()    end
+#     end
+#
+#     class Bar < Foo
+#     end
+#
+#     p Bar.instance_methods           - Object.instance_methods
+#     p Bar.public_instance_methods    - Object.public_instance_methods
+#     p Bar.private_instance_methods   - Object.private_instance_methods
+#     p Bar.protected_instance_methods - Object.protected_instance_methods
+#     => ruby 1.6.8 (2002-12-24) [i586-linux]
+#        []
+#        []
+#        []
+#        []
+#     => -:10: warning: instance_methods() default to true; specify false explicitly
+#        -:10: warning: instance_methods() default to true; specify false explicitly
+#        ruby 1.8.0 (2003-05-02) [i586-linux]
+#        ["protected_foo", "public_foo"]
+#        -:11: warning: public_instance_methods() default to true; specify false explicitly
+#        -:11: warning: public_instance_methods() default to true; specify false explicitly
+#        ["public_foo"]
+#        -:12: warning: private_instance_methods() default to true; specify false explicitly
+#        -:12: warning: private_instance_methods() default to true; specify false explicitly
+#        ["private_foo"]
+#        -:13: warning: protected_instance_methods() default to true; specify false explicitly
+#        -:13: warning: protected_instance_methods() default to true; specify false explicitly
+#        ["protected_foo"]
+
+=== 2003-05-02
+: ((<String#center|String/center>)) [compat]
+: ((<String#ljust|String/ljust>)) [compat]
+: ((<String#rjust|String/rjust>)) [compat]
+
+  空白の代わりに詰め込む文字列を第二引数で指定できるようになりました。
+
+        p " foo ".center(10, "-")
+        => ruby 1.8.0 (2003-05-02) [i586-linux]
+           "-- foo ---"
+
+=== 2003-05-02
+: ((<Module#method_added|Module/method_added>)) [compat]
+: ((<Module#singleton_method_added|Module/singleton_method_added>)) [compat]
+
+  拡張ライブラリからメソッドが定義されたときも呼ばれるようになりました。
+  ((<ruby-talk:70471>))
+
+=== 2003-05-02
+: ((<Array#push|Array/push>)) [compat]
+: ((<Array#unshift|Array/unshift>)) [compat]
+: ((<Array#insert|Array/insert>)) [compat]
+
+  引数が指定されない場合に、ArgumentError 例外が発生しなくなりました。
+  (何もせずに self を返すだけです)
+
+        p [1].push  rescue nil
+        p [1].unshift rescue nil
+
+        => Exception `ArgumentError' at -:1 - wrong # of arguments(at least 1)
+           Exception `ArgumentError' at -:2 - wrong # of arguments(at least 1)
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-08-01) [i586-linux]
+           [1]
+           [1]
+
+        p [1].insert(5)
+
+        => Exception `ArgumentError' at -:1 - wrong number of arguments (at least 2)
+           ruby 1.7.3 (2002-12-11) [i586-linux]
+           nil
+        => ruby 1.8.0 (2003-08-01) [i586-linux]
+           [1]
+
+: ((<Array#reverse!|Array/reverse!>)) [change]
+
+  サイズが 1 以下の配列に対して以前は nil を返していましたが、self を
+  返すようになりました。((<String#reverse!|String/reverse!>)) の挙動と
+  同じです。((<ruby-dev:20135>))
+
+        p "".reverse!
+        p [].reverse!
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           ""
+           nil
+        => ruby 1.8.0 (2003-05-02) [i586-linux]
+           ""
+           []
+
+=== 2003-05-01
+: ((<正規表現>)) [regexp]
+
+  正規表現 $ が改行の前だけでなく、常に文字列の末尾にもマッチするよう
+  になりました。これは、perl や python と同じ挙動です。((<ruby-dev:20104>))
+
+        p(/\n$/ =~ "\n")
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+        => ruby 1.8.0 (2003-05-01) [i586-linux]
+           0
+
+        p "\n".gsub(/$/, ":")
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           ":\n"
+        => ruby 1.8.0 (2003-05-01) [i586-linux]
+           ":\n:"
+
+=== 2003-04-25
+: ((<Proc#yield|Proc/yield>)) [change]
+
+  ((<ruby-bugs-ja:PR#98>)), ((<ruby-dev:19799>)), ((<ruby-talk:70034>))
+
+=== 2003-04-15
+: ((<Struct>)) [compat]
+
+   Struct が適切なハッシュ値を持つよう Struct#hash, Struct#eql? が定義
+   されました。((<ruby-bugs:PR#758>))
+
+        s = Struct.new(:a, :b)
+        x = s.new(1, 2)
+        y = s.new(1, 2)
+        puts(x.hash == y.hash)
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           false
+        => ruby 1.8.0 (2003-04-25) [i586-linux]
+           true
+
+=== 2003-04-14
+: ((<String#split|String/split>)) [bug]
+
+  String#split で第2引数が -1 のとき、空文字列に対して空文字列を要素と
+  する配列を返すバグが修正されました。((<ruby-bugs-ja:PR#426>))
+
+        p "".split(//)
+        p "".split(//, -1)
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           []
+           [""]
+        => ruby 1.8.0 (2003-04-25) [i586-linux]
+           []
+           []
+
+=== 2003-04-14
+: ((<String#to_i|String/to_i>)) [compat]
+: ((<Integer#to_s|Integer/to_s>)) [compat]
+
+  基数変換で、2, 8, 10, 16 進だけでなく、2 .. 36進数までの任意の基数へ
+  の変換をサポートしました。((<ruby-dev:20021>))
+
+        p "1212".to_i(3)
+        p 50.to_s(3)
+
+        => ruby 1.8.0 (2003-04-25) [i586-linux]
+           50
+           "1212"
+
+=== 2003-04-09
+: ((<Module#include|Module/include>)) [change], [experimental]
+
+  wrapper モジュールで評価される file (load(file, true)) 中で、トップ
+  レベルの include を行ったとき、Module を include する対象が Object で
+  なく、wrapper モジュールになりました。
+  つまり、load(file, true) で、file をロードしたときに file 中で
+  include を実行していても呼び出し元に影響しなくなりました。
+
+  ((*これは実験的な変更です*))
+
+        module Foo
+          def foo
+            "foo"
+          end
+        end
+
+        open("/tmp/foo.rb", "w") {|io|
+          io.print <<-END
+            include Foo
+          END
+        }
+        load("/tmp/foo.rb", true)
+        p Object.foo
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "foo"
+        => -:13: undefined method `foo' for #<Object:0x4019eda8> (NoMethodError)
+           ruby 1.8.0 (2003-04-25) [i586-linux]
+
+        => /tmp/foo.rb:1: warning: main#include in the wrapped load is effective only for toplevel
+           -:13: undefined local variable or method `foo' for main:Object (NameError)
+           ruby 1.8.0 (2003-05-29) [i586-linux]
+
+=== 2003-04-08
+: ((<UnboundMethod>)) [compat]
+
+  UnboundMethod クラスは Method クラスのサブクラスではなくなりました。
+  UnboundMethod#call, UnboundMethod#unbind はなくなりました。
+  ((<ruby-core:00927>))
+
+=== 2003-04-08
+: parser [compat]
+
+  数字で始まるグローバル変数は特殊変数 $1, $2, ... 以外に許されなくな
+  りました。
+
+        p $1v
+        => -:1: warning: global variable `$1a' not initialized
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+        => -:1: syntax error
+           ruby 1.8.0 (2003-04-25) [i586-linux]
+
+=== 2003-03-29
+: [parser], [change]
+
+  `*' による配列展開が、多重代入の右辺で行われた場合、to_ary だけでな
+  く、to_a も配列展開のための配列化に利用されるようになりました(ただし、
+  Object#to_a は対象外。Object#to_a は将来削除される予定です)。
+
+  これに伴い、1.7 で定義された Range#to_ary, MatchData#to_ary がなくな
+  りました。
+
+        a,b,c = (1..3)
+        p [a,b,c]
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1..3, nil, nil]
+        => ruby 1.7.3 (2002-12-11) [i586-linux]
+           [1, 2, 3]
+        => ruby 1.8.0 (2003-05-17) [i586-linux]
+           [1..3, nil, nil]
+  は、
+        a,b,c = *(1..3)
+        p [a,b,c]
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1..3, nil, nil]
+        => ruby 1.7.3 (2002-12-11) [i586-linux]
+           [1, 2, 3]
+        => ruby 1.8.0 (2003-05-17) [i586-linux]
+           [1, 2, 3]
+
+  と書きます。
+
+: ((<zlib>)) [lib] [new]
+
+  追加
+
+=== 2003-03-28
+: ((<bigdecimal>)) [lib] [new]
+
+  追加
+
+=== 2003-03-25
+: ((<組み込み関数/trap>)) [compat]
+
+  あるシグナルに対して、SIG_DFL や SIG_IGN が割り当てられていた場合、
+  文字列 "DEFAULT" や "IGNORE" を返すようになりました(以前は、nil を返
+  していました) ((<ruby-talk:67860>))
+
+        p trap(:INT, "SIG_IGN")
+        p trap(:INT, "SIG_DFL")
+        p trap(:INT, "IGNORE")
+        p trap(:INT, "DEFAULT")
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+           nil
+           nil
+           nil
+        => ruby 1.8.0 (2003-03-26) [i586-linux]
+           "DEFAULT"
+           "IGNORE"
+           "DEFAULT"
+           "IGNORE"
+
+: ((<組み込み定数/ARGV>)) [change]
+
+  ARGV の各要素は freeze されるようになりました。
+
+        ruby -v -e 'p ARGV.collect {|v| v.frozen?}' a b c
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [false, false, false]
+        => ruby 1.8.0 (2003-08-11) [i586-linux]
+           [true, true, true]
+
+=== 2003-03-22
+: ((<正規表現>)) [regexp]
+
+  文字クラス [] 内の [, ], - をエスケープなしで使用すると warning が出
+  るようになりました。((<ruby-dev:19868>))
+
+        p(/[][-]/)       # "]", "[" or "-"
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           /[][-]/
+        => -:1: warning: character class has `]' without escape
+           -:1: warning: character class has `[' without escape
+           -:1: warning: character class has `-' without escape
+           ruby 1.8.0 (2003-03-23) [i586-linux]
+           /[][-]/
+
+=== 2003-03-07
+: ((<Process/Process.detach>)) [new]
+
+  追加
+
+=== 2003-03-04
+: ((<Array#[]|Array/[]>)) [compat]
+: ((<Array#[]=|Array/[]=>)) [compat]
+
+  配列のインデックスとして Symbol を指定した場合、Symbol#to_int を呼ば
+  す、例外 ((<TypeError>)) が発生するようになりました。
+  ((<ruby-list:37217>))
+
+        p [1,2,3][:foo]
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           nil
+        => -:1:in `[]': Symbol as array index (TypeError)
+                from -:1
+           ruby 1.8.0 (2003-05-02) [i586-linux]
+
+== 1.8.0 preview1 (2002-12-24) ->  1.8.0 preview2 (2003-03-03)
+
+=== 2003-03-01
+: win32: map OS error to errno. [change]
+
+=== 2003-02-21
+: ((<String#<=>|String/<=>>)) [change]
+: ((<Comparable>)) [change]
+
+  string <=> other は、((|other|)) が文字列でない場合、
+  ((|other|)).to_str と ((|other|)).<=> が定義されていれば (({0 -
+  (other <=> string)})) の結果を返します。そうでなければ nil を返します。
+  ((<ruby-dev:19625>))
+
+        class Foo
+          def to_str
+            "foo"
+          end
+          def <=>(o)
+            p "<=> called"
+            self.to_str <=> o
+          end
+        end
+
+        p "foo" <=> Foo.new
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           0
+        => ruby 1.8.0 (2003-05-02) [i586-linux]
+           "<=> called"
+           0
+
+  その上で((<Comparable>))の >, >=, <, <= の定義が
+    <=> がnilを返したときnilを返す
+  に変更されました。(2003-05-02: 例外が発生するようになりました)
+
+=== 2003-02-20
+: [parser]
+
+  スコープ演算子 `::' を伴う定数代入を許すようになりました。
+
+        p Object::Foo = 1
+
+        => -:1: parse error
+                   p Object::Foo = 1
+                                  ^
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-03-12) [i586-linux]
+           1
+
+  また、"class Foo::Bar; end" という定義も可能になりました。
+
+        class Foo
+        end
+
+        class Foo::Bar
+        end
+
+        => -:4: parse error
+                   class Foo::Bar
+                              ^
+           ruby 1.6.8 (2002-12-24) [i586-linux]
+        => ruby 1.8.0 (2003-03-09) [i586-linux]
+
+=== 2003-02-17
+: ((<File/File.link>)) [new]
+
+  Win32(Win2k以降のみ)でNTFS上でのハードリンクの作成(CreateHardLink)に
+  対応しました。
+
+=== 2003-02-17
+: ((<File/File.utime>)) [new]
+
+  Win32(NT系のみ)でディレクトリに対するutimeが出来るようになりました。
+
+=== 2003-02-16
+: ((<File/File.dirname>)) [CHANGE]
+
+  File.dirname の動作が ((<SUSv3|URL:http://www.unix-systems.org/version3/online.html>)) に従うようになりました。
+
+  ((<ruby-dev:19548>)) [PATCH] file.c for ((<ruby-bugs-ja:PR#389>))
+  and ((<ruby-bugs-ja:PR#390>))
+
+        p File.dirname("foo/bar/")
+        p File.dirname("foo//bar")
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           "foo/bar"
+           "foo/"
+        => ruby 1.8.0 (2003-05-02) [i586-linux]
+           "foo"
+           "foo"
+
+=== 2003-02-16
+
+cygwinでは常にバイナリモードになりました(((<ruby-dev:19583>)))
+
+=== 2003-02-12
+: ((<"test/unit"|Test::Unit>)) [new]
+
+  Test::Unit 追加
+
+=== 2003-02-08
+: ((<Object#instance_variable_get|Object/instance_variable_get>)) [new]
+: ((<Object#instance_variable_set|Object/instance_variable_set>)) [new]
+
+  追加
+
+        class Foo
+          def initialize
+            @foo = 1
+          end
+        end
+
+        obj = Foo.new
+        p obj.instance_variable_get("@foo")     # => 1
+        p obj.instance_variable_get(:@foo)      # => 1
+        p obj.instance_variable_get(:@bar)      # => nil
+        p obj.instance_variable_set(:@bar, 1)   # => 1
+        p obj.instance_variable_get(:@bar)      # => 1
+
+=== 2003-02-05
+: [parser]
+
+  (({.<digit>}))はFloatのリテラルではなくなりました。
+
+=== 2003-02-03
+
+: ((<Regexp/Regexp.new>)) [change]
+
+  第一引数に正規表現を与えた時に引数のオプションを無視し、元のオプショ
+  ンを保持した複製を返すようになりました。
+
+        p Regexp.new(//is, Regexp::EXTENDED, "e")
+
+        => ruby 1.6.8 (2003-08-03) [i586-linux]
+           //xe
+        => -:1: warning: flags and encoding ignored
+           ruby 1.8.0 (2003-02-16) [i586-linux]
+           //is
+
+: ((<Array#-|Array/->)) [change]
+
+  差を求めるときに重複した値は取り除かなくなりました。
+
+        p([1, 2, 1, 3, 1, 4, 1, 5] - [2, 3, 4, 5])
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           [1]
+        => ruby 1.8.0 (2003-02-16) [i586-linux]
+           [1, 1, 1, 1]
+
+=== 2003-02-01
+: ((<Hash#merge|Hash/merge>)) [new]
+: ((<Hash#merge!|Hash/merge!>)) [new]
+
+  追加。Hash#merge は、hash.dup.update と同じ。
+  Hash#merge! は、Hash#update の別名 ((<ruby-talk:59777>)), ((<ruby-dev:19463>))
+
+=== 2003-01-23
+: ((<Numeric#quo|Numeric/quo>)) [new]
+
+  追加  ((<ruby-dev:19423>))
+
+=== 2003-01-14
+: ((<Enumerable#all?|Enumerable/all?>)) [compat]
+: ((<Enumerable#any?|Enumerable/any?>)) [compat]
+
+  ブロックを省略できるようになりました。
+
+=== 2003-01-08
+: ((<"win32/registry">)) [new]
+  Win32でレジストリにアクセスするためのライブラリが追加されました。
+
+=== 2003-01-07
+: ((<ENV/ENV.clear>)) [new]
+: ((<ENV/ENV.shift>)) [new]
+: ((<ENV/ENV.invert>)) [new]
+: ((<ENV/ENV.replace>)) [new]
+: ((<ENV/ENV.update>)) [new]
+
+  ((<Hash>)) との互換性のために定義されました。
+
+=== 2003-01-06
+: ((<組み込み関数/exec>)) [compat]
+
+  systemと同じように、第一引数が配列の場合、その一つ目の要素のファイルを
+  環境変数PATHから検索するようになりました。
+
+  また、mswin32・mingw32・bccwin32でも、他のプラットフォームと同様に、
+  引数として配列が与えられた場合はシェルを経由しないようになりました。
+  以前は常にシェルを経由していました。
+
+: ((<File/File.dirname>)) [CHANGE]
+: ((<File/File.expand_path>)) [CHANGE]
+: ((<File/File.join>)) [CHANGE]
+
+  DOSISHなプラットフォームでのドライブレター対応が強化されました。
+  ((<DOSISH 対応>))を参照。
+
+=== 2003-01-04
+: ((<IO>)) (win32) [bug]
+
+  mswin32・mingw32で、更新モード(w+,r+)でオープンされたファイルに対する
+  読み書きの切り替えがうまくいっていなかった問題が修正されました。
+  bccwin32にも同様の問題がありますが、こちらは未修正です。
+  ((<ruby-dev:19299>))
+
+: ((<UnboundMethod#bind|UnboundMethod/bind>)) [compat]
+
+  UnboundMethod オブジェクトをそれが定義されたクラスのサブクラスへ
+  bind しても良いことになりました。
+
+        class Foo
+          def foo
+            :foo
+          end
+        end
+
+        class Bar <Foo
+        end
+
+        p m = Foo.instance_method(:foo)
+        p m.bind(Bar.new).call
+
+        => ruby 1.6.8 (2002-12-24) [i586-linux]
+           #<UnboundMethod: Foo(Foo)#foo>
+           -:11:in `bind': bind argument must be an instance of Foo (TypeError)
+                from -:11
+        => ruby 1.8.0 (2003-03-23) [i586-linux]
+           #<UnboundMethod: Foo#foo>
+           :foo
+
+=== 2002-12-31
+: ((<組み込み関数/system>)) [compat]
+
+  第一引数が配列の場合、その一つ目の要素のファイルを環境変数PATHから
+  検索するようになりました。
+
+  また、msdosdjgpp・mswin32・mingw32・bccwin32でも、他のプラットフォームと
+  同様に、引数として配列が与えられた場合はシェルを経由しないようになりました。
+  以前は常にシェルを経由していました(win32系portは2003-01-04に変更)。
+  ((<ruby-dev:19107>))
+
+=== 2002-12-24
+: ((<Float::DIG|Float/DIG>)) [new]
+: ((<Float::EPSILON|Float/EPSILON>)) [new]
+: ((<Float::MANT_DIG|Float/MANT_DIG>)) [new]
+: ((<Float::MAX|Float/MAX>)) [new]
+: ((<Float::MAX_10_EXP|Float/MAX_10_EXP>)) [new]
+: ((<Float::MAX_EXP|Float/MAX_EXP>)) [new]
+: ((<Float::MIN|Float/MIN>)) [new]
+: ((<Float::MIN_10_EXP|Float/MIN_10_EXP>)) [new]
+: ((<Float::MIN_EXP|Float/MIN_EXP>)) [new]
+: ((<Float::RADIX|Float/RADIX>)) [new]
+: ((<Float::ROUNDS|Float/ROUNDS>)) [new]
+
+  追加 ((<ruby-math:0773>))

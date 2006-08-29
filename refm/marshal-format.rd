@@ -1,0 +1,942 @@
+= Marshalフォーマット
+
+2002-04-04 ドラフトのドラフトのドラフトの....
+
+* フォーマットバージョン 4.8 (1.8仕様)を元に記述
+
+    # 2003-05-02 現在のフォーマットバージョンは以下
+    p Marshal.dump(Object.new).unpack("cc").join(".")
+        => ruby 1.6.0 (2000-09-19) [i586-linux]
+           "4.4"
+        => ruby 1.6.1 (2000-09-27) [i586-linux]
+           "4.4"
+        => ruby 1.6.2 (2000-12-25) [i586-linux]
+           "4.5"
+        => ruby 1.6.3 (2001-03-19) [i586-linux]
+           "4.5"
+        => ruby 1.6.4 (2001-06-04) [i586-linux]
+           "4.5"
+        => ruby 1.6.5 (2001-09-19) [i586-linux]
+           "4.6"
+        => ruby 1.6.6 (2001-12-26) [i586-linux]
+           "4.6"
+        => ruby 1.6.7 (2002-03-01) [i586-linux]
+           "4.6"
+        => ruby 1.6.7 (2002-09-06) [i586-linux]
+           "4.6"
+        => ruby 1.7.3 (2002-09-06) [i586-linux]
+           "4.7"
+        => ruby 1.7.3 (2002-09-20) [i586-linux]
+           "4.8"
+        => ruby 1.8.0 (2003-08-03) [i586-linux]
+           "4.8"
+
+* 過去バージョンについても触れる。互換性についても
+* Ruby の Marshal のバグについてもここで触れる(?)
+
+: nil
+: true
+: false
+  それぞれ、'0', 'T', 'F'
+
+    p Marshal.dump(nil).unpack("x2 a*")
+    # => ["0"]
+
+  インスタンス変数を設定しても dump されません。
+
+    class NilClass
+      attr_accessor :foo
+    end
+    nil.foo = 1
+    p nil.foo                           # => 1
+    p Marshal.dump(nil).unpack("x2 a*") # => ["0"]
+
+: Fixnum
+
+  'i' に続けて Fixnum を表すデータ構造が続きます。
+
+  数値部分を表す形式(これは Fixnum に限らず他の箇所でも使われます)は、
+  数値 n に対して
+
+  形式 1:
+      n == 0:       0
+      0 < n < 123:  n + 5
+      -124 < n < 0: n - 5
+
+  という数値(1 byte)を格納します。5 を足したり引いたりするのは下記の
+  形式との区別のためです。
+
+  例:
+
+    p Marshal.dump(-1).unpack("x2 a*") # => "i\372"
+    p Marshal.dump(0).unpack("x2 a*")  # => "i\000"
+    p Marshal.dump(1).unpack("x2 a*")  # => "i\006"
+    p Marshal.dump(2).unpack("x2 a*")  # => "i\a"   ("i\007")
+
+  形式 1 の範囲を超える数値 N に対しては、以下の形式になります。
+
+  形式 2:
+
+    | len | n1 | n2 | n3 | n4 |
+     <-1-> <-     len       ->
+     byte        bytes
+
+  len の値は -4 〜 -1, 1 〜 4 で。符号と後続のデータが n1 〜 n|len| ま
+  であることを示します。
+
+    # もっとうまい式を...
+    def foo(len, n1, n2 = 0, n3 = 0, n4 = 0)
+
+        case len
+        when -3;           n4 = 255
+        when -2;      n3 = n4 = 255
+        when -1; n2 = n3 = n4 = 255
+        end
+
+        n = (0xffffff00 | n1) &
+            (0xffff00ff | n2 * 0x100) &
+            (0xff00ffff | n3 * 0x10000) &
+            (0x00ffffff | n4 * 0x1000000)
+        # p "%x" % n
+        n = -((n ^ 0xffff_ffff) + 1) if len < 0
+        n
+    end
+
+    p Marshal.dump(-125).unpack("x2 acC*") # => ["i", -1, 131]
+    p foo(-1, 131)
+    p Marshal.dump(-255).unpack("x2 acC*") # => ["i", -1, 1]
+    p foo(-1, 1)
+    p Marshal.dump(-256).unpack("x2 acC*") # => ["i", -1, 0]
+    p foo(-1, 0)
+    p Marshal.dump(-257).unpack("x2 acC*") # => ["i", -2, 255, 254]
+    p foo(-2, 255, 254)
+    p Marshal.dump(124).unpack("x2 acC*") # => ["i", 1, 124]
+    p foo(1, 124)
+    p Marshal.dump(256).unpack("x2 acC*") # => ["i", 2, 0, 1]
+    p foo(2, 0, 1)
+
+  インスタンス変数を設定しても dump されません。
+
+    class Fixnum
+      attr_accessor :foo
+    end
+    99.foo = 1
+    p 99.foo                           # => 1
+    p 999.foo                          # => nil
+    p Marshal.dump(99).unpack("x2 ac") # => ["i", 104]
+
+: instance of the user class
+
+  'C': String, Regexp, Array, Hash のサブクラスのインスタンス変数
+
+    | 'C' | クラス名(Symbol)の dump | 親クラスのインスタンスの dump |
+
+  例 1:
+
+    class Foo < String # (or Regexp, Array, Hash)
+    end
+    p Marshal.dump(Foo.new("foo")).unpack("x2 a a c a3 aca*")
+    # => ["C", ":", 8, "Foo", "\"", 8, "foo"]
+                              ^^^ (or '/', '[', '{')
+
+  例 2: インスタンス変数あり(((<Marshalフォーマット/instance variable>)) 参照)
+
+    class Foo < String # (or Regexp, Array, Hash)
+      def initialize(obj)
+        @foo = obj
+        super(obj)
+      end
+    end
+    p Marshal.dump(Foo.new("foo")).unpack("x2 a a a c a3 aca3 caca4 aca*")
+    # => ["I", "C", ":", 8, "Foo", "\"", 8, "foo", 6, ":", 9, "@foo", "\"", 8, "foo"]
+
+
+  上記以外では、'o' になる。これは、実装上内部構造が異なるため
+  (((<Marshalフォーマット/Object>)) 参照)
+
+  例:
+    class Foo
+    end
+    p Marshal.dump(Foo.new).unpack("x2 a a c a*")
+    # => ["o", ":", 8, "Foo\000"]
+
+  'u'
+
+  _dump、_load を定義していれば 'u' になる。
+  インスタンス変数は dump されなくなるので、_dump/_load で対応する必要
+  がある。
+
+    | 'u' | クラス名(Symbol)の dump | _dump の結果の長さ(Fixnum形式) |
+    | _dump が返す値 |
+
+  例:
+    class Foo
+      def self._load
+      end
+      def _dump(obj)
+        "hogehoge"
+      end
+    end
+    p Marshal.dump(Foo.new).unpack("x2 a aca3 c a*")
+    # => ["u", ":", 8, "Foo", 13, "hogehoge"]
+
+  'U'  ((<ruby 1.8 feature>))
+
+  marshal_dump、marshal_load を定義していれば 'U' になる。
+  インスタンス変数は dump されなくなるので、marshal_dump/marshal_load
+  で対応する必要がある。
+
+    | 'U' | クラス名(Symbol)の dump | marshal_dump メソッドの戻り値の dump |
+
+  例:
+    class Foo
+      def marshal_dump
+        "hogehoge"
+      end
+      def marshal_load(obj)
+      end
+    end
+    p Marshal.dump(Foo.new).unpack("x2 a aca3 a c a*")
+
+    # => ["U", ":", 8, "Foo", "\"", 13, "hogehoge"]
+
+: Object
+
+  'o'
+
+    | 'o' | クラス名(Symbol)の dump | インスタンス変数の数(Fixnum形式) |
+    | インスタンス変数名(Symbol) のdump(1) | 値(1) |
+              :
+              :
+    | インスタンス変数名(Symbol) のdump(n) | 値(n) |
+
+  例 1:
+    p Marshal.dump(Object.new).unpack("x2 a a c a*")
+    # => ["o", ":", 11, "Object\000"]
+
+  例 2: インスタンス変数あり
+    class Foo
+      def initialize
+        @foo = "foo"
+        @bar = "bar"
+      end
+    end
+    p Marshal.dump(Foo.new).unpack("x2 a a c a3 c aca4 aca3 aca4 aca3")
+    # => ["o", ":", 8, "Foo", 7,
+          ":", 9, "@bar", "\"", 8, "bar",
+          ":", 9, "@foo", "\"", 8, "foo"]
+
+: Float
+
+  'f'
+
+   | 'f' | 数値列の長さ(Fixnum形式) | "%.16g" の文字列 |
+
+  例:
+    p Marshal.dump(Math::PI).unpack("x2 a c a*")
+    # => ["f", 22, "3.141592653589793"]
+
+    p Marshal.dump(0.0/0).unpack("x2 a c a*")  # => ["f", 8, "nan"]
+    p Marshal.dump(1.0/0).unpack("x2 a c a*")  # => ["f", 8, "inf"]
+    p Marshal.dump(-1.0/0).unpack("x2 a c a*") # => ["f", 9, "-inf"]
+    p Marshal.dump(-0.0).unpack("x2 a c a*")   # => ["f", 9, "-0"]
+
+  ((-((<ruby 1.7 feature>)): version 1.6 では、nan などの出力は 
+  ((<sprintf(3)|manual page>)) に依存している。読み込みは現在のとこ
+  ろ "nan", "inf", "-inf" 以外は ((<strtod(3)|manual page>)) に依存
+  している。-> 1.7 では、sprintf(3)/strtod(3) への依存はなくなった-))
+
+: Bignum
+
+  'l'
+
+    | 'l' | '+'/'-' | shortの個数(Fixnum形式) | ... |
+
+  例:
+    p Marshal.dump(2**32).unpack("x2 a a c a*")
+    # => ["l", "+", 8, "\000\000\000\000\001\000"]
+
+    # => ["l", "+", 8, "\000\000\001\000"]  <- BUG: ruby version 1.6.3
+
+: String
+
+  '"'
+    | '"' | 長さ(Fixnum形式) | 文字列 |
+
+  例:
+    p Marshal.dump("hogehoge").unpack("x2 a c a*")
+    # => ["\"", 13, "hogehoge"]
+
+: Regexp
+
+  '/'
+
+    | '/' | 長さ(Fixnum形式) | ソース文字列 | オプション |
+
+  オプションは、((<Regexp/options>))の結果 + 漢字コードのフラグ値。
+
+  例:
+    p Marshal.dump(/(hoge)*/).unpack("x2 a c a7 c")
+    # => ["/", 12, "(hoge)*", 0]
+
+    p Marshal.dump(/hogehoge/m).unpack("x2 a c a8 c")
+    # => ["/", 13, "hogehoge", 4]
+
+    p Marshal.dump(/hogehoge/e).unpack("x2 a c a8 c")
+
+    # => ["/", 13, "hogehoge", 32]
+
+: Array
+
+  '['
+
+    | '[' | 要素数(Fixnum形式) | 要素の dump | ... |
+
+  例:
+    p Marshal.dump(["hogehoge", /hogehoge/]).unpack("x2 a c aca8 aca*")
+    # => ["[", 7, "\"", 13, "hogehoge", "/", 13, "hogehoge\000"]
+
+: Hash
+
+  '{'
+
+    | '{' | 要素数(Fixnum形式) | キーの dump | 値の dump | ... |
+
+  例:
+    p Marshal.dump({"hogehoge", /hogehoge/}).unpack("x2 a c aca8 aca*")
+    # => ["{", 6, "\"", 13, "hogehoge", "/", 13, "hogehoge\000"]
+
+: Hash with default value ( not Proc )
+
+  '}'
+
+    | '}' | 要素数(Fixnum形式) | キーの dump | 値の dump | ... | デフォルト値 |
+
+  例:
+    h = Hash.new(true)
+    h["foo"] = "bar"
+    p Marshal.dump(h).unpack("x2 a c aca3 aca*")
+    # => ["}", 6, "\"", 8, "foo", "\"", 8, "barT"]
+
+  デフォルトオブジェクトが Proc である Hash は dump できない
+
+    h = Hash.new { }
+    Marshal.dump(h)
+    => -:2:in `dump': cannot dump hash with default proc (TypeError)
+
+: Struct
+
+  'S': 構造体クラスのインスタンスのダンプ
+
+    | 'S' | クラス名(Symbol) の dump | メンバの数(Fixnum形式) |
+    | メンバ名(Symbol) の dump | 値 | ... |
+
+  例:
+    Struct.new("XXX", :foo, :bar)
+    p Marshal.dump(Struct::XXX.new).unpack("x2 a ac a11 c aca3a aca3a")
+    # => ["S", ":", 16, "Struct::XXX", 7,
+          ":", 8, "foo", "0",
+          ":", 8, "bar", "0"]
+
+: Class/Module (old format)
+
+  'M'
+
+    | 'M' | 長さ(Fixnum形式) | モジュール/クラス名 |
+
+  例: もはやこの形式を dump することはできないので load で例を示している。
+    class Mod
+    end
+    p Marshal.load([4,7, 'M', 3+5, 'Mod'].pack("ccaca*"))
+    # => Mod
+
+: Class/Module
+
+  'c', 'm'
+
+    | 'c'/'m' | クラス名の長さ(Fixnum 形式) | クラス名 |
+
+  例:
+    class Foo
+    end
+    p Marshal.dump(Foo).unpack("x2 a c a*") # => ["c", 8, "Foo"]
+
+  例 2: クラス/モジュールのインスタンス変数は dump されない
+
+    module Bar
+      @bar = 1
+    end
+    p Bar.instance_eval { @bar }
+    Marshal.dump(Bar, open("/tmp/foo", "w"))
+    # => 1
+
+    module Bar
+    end
+    p bar = Marshal.load(open("/tmp/foo"))
+    p bar.instance_eval { @bar }
+    # => nil
+
+  例 3: クラス変数は dump されない
+
+    module Baz
+      @@baz = 1
+      def self.baz
+        @@baz
+      end
+    end
+    p Baz.baz
+    Marshal.dump(Baz, open("/tmp/foo", "w"))
+    # => 1
+
+    module Baz
+      def self.baz
+        @@baz
+      end
+    end
+    p baz = Marshal.load(open("/tmp/foo"))
+    baz.baz
+    # => Baz
+         -:3:in `baz': uninitialized class variable @@baz in Baz (NameError)
+                 from -:7
+
+: Symbol
+
+  ':'
+
+    | ':' | シンボル名の長さ(Fixnum形式) | シンボル名 |
+
+  例:
+    p Marshal.dump(:foo).unpack("x2 a c a*")
+    # => [":", 8, "foo"]
+
+: Symbol (link)
+
+  ';'
+
+    | ';' | Symbolの実態を指す番号(Fixnum形式) |
+
+  対応するシンボル名が既に dump/load されている場合に使用される。番号
+  は内部管理のもの。(dump/load 時に Symbol 管理用にハッシュテーブルが
+  作られる。そのレコード位置)
+
+  例:
+    p Marshal.dump([:foo, :foo]).unpack("x2 ac aca3 aC*")
+    # => ["[", 7, ":", 8, "foo", ";", 0]
+
+    p Marshal.dump([:foo, :foo, :bar, :bar]).
+        unpack("x2 ac aca3 aC aca3 aC*")
+    # => ["[", 9, ":", 8, "foo", ";", 0, ":", 8, "bar", ";", 6]
+
+: instance variable
+
+  'I': Object, Class, Module のインスタンス以外
+
+    | 'I' | オブジェクトの dump | インスタンス変数の数(Fixnum形式) |
+    | インスタンス変数名(Symbol) のdump(1) | 値(1) |
+              :
+              :
+    | インスタンス変数名(Symbol) のdump(n) | 値(n) |
+
+  Object のインスタンスはそれ自身がインスタンス変数の構造を持つので
+  別形式で dump される (((<Marshalフォーマット/Object>)) 参照)
+  この形式は、Array や String のインスタンス用。
+
+  例:
+    obj = String.new
+    obj.instance_eval { @foo = "bar" }
+    p Marshal.dump(obj).unpack("x2 a ac c a c a4 aca*")
+    # => ["I", "\"", 0, 6, ":", 9, "@foo", "\"", 8, "bar"]
+
+  クラスやモジュール(Class/Module のインスタンス)は、
+  インスタンス変数の情報を dump しない。
+  (((<Marshalフォーマット/"Class/Module">)) 参照)
+
+: link
+
+  '@'
+
+    | '@' | オブジェクトの実態を指す番号(Fixnum形式 |
+
+  対応するオブジェクトが既に dump/load されている場合に使用される。番
+  号は内部管理のもの。(dump/load 時に オブジェクト管理用にハッシュテー
+  ブルが作られる。そのレコード位置)
+
+  例:
+    obj = Object.new
+    p Marshal.dump([obj, obj]).unpack("x2 ac aaca6c aca*")
+    # => ["[", 7, "o", ":", 11, "Object", 0, "@", 6, ""]
+
+    ary = []
+    ary.push ary
+    p Marshal.dump(ary).unpack("x2 acac")
+
+    # => ["[", 6, "@", 0]
+
+== Marshal のバグ
+
+過去の ruby version 1.6 には、それぞれのバージョンで以下のバグがありま
+した。括弧()内の記述は本来の挙動(1.7 の振るまい)です。
+
+: <= 1.6.7
+    * クラスを clone したもののインスタンスはダンプできるが、ロー
+      ドできない(無名クラスのオブジェクトになるのでダンプできない)
+    * 無名 Module の include/extend により特異メソッドが定義された
+      オブジェクトをダンプ、ロードできる(無名モジュールを include
+      したオブジェクトはダンプできない)
+
+: 1.6.6, 1.6.7
+
+    * インスタンス変数を持つ Array や String はダンプできるが、
+      ロードできない(ダンプ、ロードできる)
+
+: <= 1.6.5
+    * クラスを clone したもののインスタンスはダンプできるが、ロー
+      ドすると変なオブジェクトができる(?)
+    * 特異クラスは、特異でないクラスにダンプされる(特異クラスはダンプできない)
+    * 無名クラスは、ダンプできるがロードできない(無名クラスはダンプできない)
+
+: <= 1.6.4
+    * モジュールはダンプできるがロードできない(ロードできる)
+    * 無名モジュールは、ダンプできるがロードできない(無名モジュー
+      ルはダンプできない)
+
+: <= 1.6.3
+    * Float をダンプしたときに保存する精度が低い
+
+: <= 1.6.2
+    * 正規表現の /m, /x オプションの有無がダンプ時に保存されない
+
+: 1.6.2, 1.6.3
+    * 1.6.2, 1.6.3のみBignum をダンプしたものをロードできない
+      この関連バグは他にもあったと思うが再現スクリプトが不明。
+
+: <= 1.6.1
+    * Range が終端を含むかどうかのフラグがダンプ時に保存されない
+
+以下は、テストスクリプトです(要 ((<RAA:RubyUnit>)))
+
+    # test for Marshal for ruby version 1.6
+    require 'rubyunit'
+
+    $version_dependent_behavior = true
+    # for test_userClass, test_userModule
+    module UserModule
+      def foo
+      end
+    end
+    class UserClass
+      def foo
+      end
+    end
+
+    class TestMarshal < RUNIT::TestCase
+
+      def assert_no_dumpable(obj)
+        ex = assert_exception(TypeError) {
+          begin
+            # Marshal.dump will cause TypeError or ArgumentError
+            Marshal.dump obj
+          rescue ArgumentError
+            case $!.message
+            when /can't dump anonymous/,
+                 /cannot dump hash with default proc/
+              raise TypeError
+            else
+              raise "unknown error"
+            end
+          end
+        }
+      end
+      def assert_dumpable_but_not_equal(obj)
+        obj2 = Marshal.load(Marshal.dump(obj))
+        assert(obj != obj2)
+        assert_equals(obj.class, obj2.class)
+      end
+      def assert_dumpable_and_equal(obj)
+        obj2 = Marshal.load(Marshal.dump(obj))
+        assert_equals(obj, obj2)
+        assert_equals(obj.class, obj2.class)
+
+        # check values of instance variable
+        ivars = obj.instance_variables
+        ivars2 = obj2.instance_variables
+        assert_equals(ivars, ivars2)
+        while ivars.size != 0
+          assert_equals(obj.instance_eval(ivars.shift),
+                        obj2.instance_eval(ivars2.shift))
+        end
+      end
+
+      def test_Object
+        assert_dumpable_but_not_equal Object.new
+      end
+
+      # object with singleton method
+      def test_Object_with_singleton_method
+        obj = Object.new
+        # On ruby version 1.6.0 - 1.6.2, cause parse error (nested method)
+        class <<obj
+          def foo
+          end
+        end
+
+        # object has singleton method can't be dumped
+        assert_no_dumpable obj
+      end
+
+      # object with singleton method (with named module)
+      def test_Object_with_singleton_method2
+        obj = Object.new
+        # On ruby version 1.6.0 - 1.6.2, cause parse error (nested method)
+        class <<obj
+          include UserModule
+        end
+
+        # On ruby version 1.6.0 - 1.6.7, no consider the singleton
+        # method with Mix-in.
+        # On ruby version 1.7, dumpable object which is extended by
+        # named module.
+        assert_dumpable_but_not_equal obj
+      end
+
+      # object with singleton method (with anonymous module)
+      def test_Object_with_singleton_method3
+        obj = Object.new
+        # On ruby version 1.6.0 - 1.6.2, cause parse error (nested method)
+        class <<obj
+          include Module.new
+        end
+
+        if $version_dependent_behavior and RUBY_VERSION <= "1.6.7"
+          # On ruby version 1.6.0 - 1.6.7, no consider the singleton method with Mix-in.
+          assert_dumpable_but_not_equal obj
+        else
+          # object has singleton method (with anonymous module) can't be dumped
+          assert_no_dumpable obj
+        end
+      end
+
+      # singleton class
+      def test_singletonClass
+        obj = Object.new
+        # On ruby version 1.6.0 - 1.6.2, cause parse error (nested method)
+        singleton_class = class <<obj
+                            def foo
+                            end
+                            self
+                          end
+
+        # singleton class can't be dumped
+        # On ruby version 1.6.0 - 1.6.5, singleton class be able to dumped
+        # as normal class.
+        if $version_dependent_behavior and RUBY_VERSION <= "1.6.5"
+          assert_equals(Object, Marshal.load(Marshal.dump(singleton_class)))
+        else
+          assert_no_dumpable singleton_class
+        end
+      end
+
+      def test_Array
+        assert_dumpable_and_equal [1,"foo", :foo]
+      end
+
+      def test_Array_with_instance_variable
+        ary = [1,"foo", :foo]
+        ary.instance_eval{ @var = 1 }
+
+        if $version_dependent_behavior and %w(1.6.6 1.6.7).member?(RUBY_VERSION)
+          # On ruby version 1.6.6 - 1.6.7, Array(or String ...) has instance
+          # variable is able to be dumped, but can't load it.
+          dump = Marshal.dump(ary)
+          ex = assert_exception(ArgumentError) {
+            Marshal.load(dump)
+          }
+        else
+          assert_dumpable_and_equal ary
+        end
+      end
+
+      def test_Binding
+        assert_no_dumpable binding
+      end
+
+      def test_Continuation
+        assert_no_dumpable callcc {|c| c}
+      end
+
+      def test_Data
+        # assert_fail("")
+      end
+
+      def test_Exception
+        assert_dumpable_but_not_equal Exception.new("hoge")
+      end
+
+      def test_Dir
+        assert_no_dumpable Dir.open("/")
+      end
+
+      def test_FalseClass
+        assert_dumpable_and_equal false
+      end
+
+      def test_File__Stat
+        assert_no_dumpable File.stat("/")
+      end
+
+      def test_Hash
+        assert_dumpable_and_equal(1=>"1",2=>"2")
+
+        # 1.7 feature.
+        if $version_dependent_behavior and RUBY_VERSION >= '1.7.0'
+          # On ruby version 1.7, hash with default Proc cannot be dumped.
+          # see [ruby-dev:15417]
+          assert_no_dumpable(Hash.new { })
+        end
+      end
+
+      def test_IO
+        assert_no_dumpable IO.new(0)
+      end
+
+      def test_File
+        assert_no_dumpable File.open("/")
+      end
+
+      def test_MatchData
+        assert_no_dumpable(/foo/ =~ "foo" && $~)
+      end
+
+      def test_Method
+        assert_no_dumpable Object.method(:method)
+      end
+
+      def test_UnboundMethod
+        assert_no_dumpable Object.instance_method(:id)
+      end
+
+      def test_Module
+        # On ruby version 1.6.0 - 1.6.4, loaded module is not a module.
+        if $version_dependent_behavior and RUBY_VERSION <= '1.6.4'
+          dump = Marshal.dump Enumerable
+          ex = assert_exception(TypeError) {
+            Marshal.load dump
+          }
+          assert_matches(ex.message, /is not a module/)
+        else
+          assert_dumpable_and_equal Enumerable
+        end
+      end
+
+      def test_userModule
+        # On ruby version 1.6.0 - 1.6.4, loaded module is not a module.
+        if $version_dependent_behavior and RUBY_VERSION <= '1.6.4'
+          # same as test_Module
+        else
+          # Note: this module must be defineed for Marshal.load.
+          assert_dumpable_and_equal(UserModule)
+        end
+      end
+
+      def test_anonymousModule
+        # On ruby version 1.6.0 - 1.6.4, anonymous class is able to be dumped,
+        # but loaded object is not identical.
+        if $version_dependent_behavior and RUBY_VERSION <= '1.6.4'
+          dump = Marshal.dump(Module.new)
+          ex = assert_exception(ArgumentError) {
+            Marshal.load dump
+          }
+          assert_matches(ex.message, /can\'t retrieve anonymous class/)
+        else
+          assert_no_dumpable Module.new
+        end
+      end
+
+      def test_Class
+        assert_dumpable_and_equal Class
+      end
+
+      def test_userClass
+        # Note: this class must be defineed for Marshal.load.
+        assert_dumpable_and_equal(UserClass)
+      end
+      def test_anonymousClass
+        # On ruby version 1.6.0 - 1.6.5, anonymous class able to be dumped,
+        # but can't load it.
+        if $version_dependent_behavior and RUBY_VERSION <= '1.6.5'
+          dump = Marshal.dump(Class.new)
+          ex = assert_exception(ArgumentError) {
+            Marshal.load(dump)
+          }
+          assert_matches(ex.message, /can\'t retrieve anonymous class/)
+        else
+          assert_no_dumpable Class.new
+        end
+      end
+
+      def test_clonedClass
+        # On ruby version 1.6.0 - 1.6.7, instance of cloned class is able to
+        # dumped, but loaded object is not identical.
+        # see [ruby-dev:14961]
+        if $version_dependent_behavior
+          if RUBY_VERSION <= '1.6.5'
+            obj = String.clone.new("foo")
+            dump = Marshal.dump(obj)
+            obj2 = Marshal.load dump
+            assert(obj == obj2)
+            assert(obj.class != obj2.class)
+            assert(obj.class.inspect == obj2.class.inspect)
+          elsif RUBY_VERSION <= '1.6.7'
+            dump = Marshal.dump(String.clone.new("foo"))
+            assert_exception(ArgumentError) {
+              Marshal.load dump
+            }
+          else
+            assert_no_dumpable String.clone.new("foo")
+          end
+        else
+          # anonymous class can't be dumped
+          assert_no_dumpable String.clone.new("foo")
+        end
+      end
+
+      def test_Numeric
+        # assert_fail("")
+      end
+
+      def test_Integer
+        # assert_fail("")
+      end
+
+      def test_Fixnum
+        assert_dumpable_and_equal 100
+      end
+
+      def test_Bignum
+        # derived from Rubicon
+        assert_dumpable_and_equal 123456789012345678901234567890
+        assert_dumpable_and_equal -123**99
+        if $version_dependent_behavior and %w(1.6.2 1.6.3).member?(RUBY_VERSION)
+          dump = Marshal.dump 2**32
+          ex = assert_exception(ArgumentError) {
+            Marshal.load(dump)
+          }
+          assert_matches(ex.message, /marshal data too short/)
+        else
+          assert_dumpable_and_equal 2**32
+        end
+      end
+
+      def test_Float
+        assert_dumpable_and_equal 1.41421356
+
+        # On ruby version 1.6.4, dumped format changed from "%.12g" to "%.16g"
+        if $version_dependent_behavior and RUBY_VERSION <= '1.6.3'
+          assert_dumpable_but_not_equal Math::PI
+        else
+          assert_dumpable_and_equal Math::PI
+        end
+      end
+
+      def test_Proc
+        assert_no_dumpable proc { }
+      end
+
+      def test_Process__Status
+        assert_dumpable_and_equal system("true") && $?
+      end
+
+      def test_Range
+        # Range#== is changed from 1.6.2
+        # On ruby version 1.6.0 - 1.6.1, Range.new(1,2) != Range.new(1,2)
+        # assert_dumpable_and_equal 1..2
+        # assert_dumpable_and_equal 1...2
+
+        obj = Marshal.load(Marshal.dump 1..2)
+        assert_equals(1, obj.begin)
+        assert_equals(2, obj.end)
+        assert_equals(false, obj.exclude_end?)
+
+        obj = Marshal.load(Marshal.dump 1...2)
+        assert_equals(1, obj.begin)
+        assert_equals(2, obj.end)
+
+        # On ruby version 1.6.0 - 1.6.1, the attribute exclude_end? is not saved.
+        if $version_dependent_behavior and RUBY_VERSION <= '1.6.1'
+          assert_equals(false, obj.exclude_end?)
+        else
+          assert_equals(true, obj.exclude_end?)
+        end
+      end
+
+      def test_Regexp
+        # this test is no consider the /foo/p
+        assert_dumpable_and_equal /foo/
+        assert_dumpable_and_equal /foo/i
+        assert_dumpable_and_equal /foo/m
+        assert_dumpable_and_equal /foo/x
+        assert_dumpable_and_equal /foo/e
+        assert_dumpable_and_equal /foo/s
+        assert_dumpable_and_equal /foo/u
+
+        # On ruby version 1.6.0 - 1.6.2, Regexp#== is ignore the option.
+        for obj in [/foo/, /foo/i, /foo/m, /foo/x, /foo/e, /foo/s, /foo/u]
+          obj2 = Marshal.load(Marshal.dump obj)
+
+          if $version_dependent_behavior and RUBY_VERSION <= '1.6.2' and
+              %w(/foo/m /foo/x).member?(obj.inspect)
+            # On ruby version 1.6.0 - 1.6.2,
+            # //m options is not saved.
+            assert_equals('/foo/', obj2.inspect)
+          else
+            assert_equals(obj.inspect, obj2.inspect)
+          end
+        end
+      end
+
+      def test_String
+        assert_dumpable_and_equal "foo"
+      end
+
+      def test_Struct
+        assert_dumpable_and_equal Struct.new("Foo", :foo, :bar)
+
+        Object.const_set('Foo', Struct.new(:foo, :bar))
+        assert_dumpable_and_equal Foo
+      end
+
+      def test_aStruct
+        assert_dumpable_and_equal Struct.new("Bar", :foo, :bar).new("foo", "bar")
+
+        # see [ruby-dev:14961]
+      end
+
+      def test_Symbol
+        assert_dumpable_and_equal :foo
+      end
+
+      def test_Thread
+        assert_no_dumpable Thread.new { sleep }
+      end
+
+      def test_ThreadGroup
+        assert_no_dumpable ThreadGroup::Default
+      end
+
+      def test_Time
+        assert_dumpable_and_equal Time.now
+        assert_dumpable_and_equal Time.now.gmtime
+
+        # time zone is not saved.
+        assert_equals(false, Marshal.load(Marshal.dump(Time.now)).utc?)
+        assert_equals(false, Marshal.load(Marshal.dump(Time.now.gmtime)).utc?)
+      end
+
+      def test_TrueClass
+        assert_dumpable_and_equal true
+      end
+
+      def test_NilClass
+        assert_dumpable_and_equal nil
+      end
+    end

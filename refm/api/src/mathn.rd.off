@@ -1,0 +1,124 @@
+= mathn
+
+((<rational>))と((<complex>))をシームレスに利用するようにするライブラリ。
+
+Integer や Float に比べ Rational は誤差無しで表現できる範囲が大きいため、
+数値の演算において Rational をシームレスに利用したいことがあります。
+
+  1/2 -> Rational(1,2)
+  2 * Rational(1,2) -> 1 (Fixnum)
+
+また、Complex も演算結果の表現範囲を広げるのに利用できます。
+
+  Complex(0,-1)**2 -> -1 (Fixnum)
+  Complex(1,-1) - Complex(0,-1) -> 1 (Fixnum)
+
+require 'mathn' すると上の様な動作を行なうようになります。
+つまり、Rational(やRationalを含むComplex)とInteger(FixnumとBignum)との間の関係を、
+ちょうどBignumとFixnumとの間のような関係にします。
+具体的には、Rationalのインスタンスが整数ならば、それは自動的にInteger
+(FixnumまたはBignum)となり、また、(({整数/整数}))の結果、
+割り切れない時はRationalが返るようになります。
+後者は、整数のメソッド「/」が整商(.div)でなく、
+商(.quo)を返すようになる、ということを意味します。
+
+なお、この挙動は、グローバルに影響を与えます。
+つまり、(Rubyで書かれた)汎用ライブラリをrequireしていた場合、
+ライブラリ中の動作も、上のように変更されることになります。
+他人の書いたライブラリを使う時は、ご注意下さい
+(逆に、汎用ライブラリの作者の方々は、この((<mathn>))がrequire
+される可能性を留意して書いて下されば、親切だと思います)。
+
+== Integer
+=== クラスメソッド:
+--- Integer.from_prime_division(pd)
+      素因数分解の配列((|pd|))から数を求める。
+      ((|pd|))は(({[素因数, 指数]}))組の配列である。
+
+      例:
+        Integer.from_prime_division [[2,3],[3,2]]
+        -> 72 # == 2**3 * 3**2
+
+=== メソッド:
+--- Integer#gcd2(int)
+      ((|self|))と((|int|))の最大公約数を求める。
+
+      例:
+        12.gcd2 8
+        -> 4
+      
+--- Integer#prime_division
+      ((|self|))の素因数分解(の配列)を求める。
+
+      例:
+        72.prime_division
+        -> [[2, 3], [3, 2]]
+
+== Fixnum
+* Fixnum#/がFixnum#quoと同じ働きをするようになる(有理数または整数を返す)。
+#* Fixnum#divmodの商が小数点以下まで求まるようになる。
+#* もともとのFixnum#divmodはFixnum#divmod!となる。
+
+== Bignum
+* Bignum#/がBignum#quoと同じ働きをするようになる(有理数または整数を返す)。
+#* もともとのBignum#divmodはBignum#divmod!となる。
+
+== Rational
+--- Rational#**
+      べき乗。 RationalになるようであればRationalで返す。
+--- Rational#power2
+      作りかけ(^^;;
+--- Rational#inspect
+      「3/5」などの形で返す。
+
+== Math
+--- Math.sqrt(a)
+      aの正の平方根。
+      aがComplexの時は、Complexを返す。
+      aが負の時は、aを正にして、その平方根をComplexの虚数部に入れて返す。
+      それ以外は、Math.rsqrtに丸投げ。
+--- Math.rsqrt(a)
+      複素数を考慮しないので、負の数やComplexをあたえてはいけない。
+      
+      aがFloatの時は、Floatを返す。
+      それ以外の時、平方根が有理数であれば、RationalまたはIntergerを返す。
+      無理数であれば、Floatを返す。
+
+== Prime
+=== インクルードしているモジュール:
+* ((<Enumerable>))
+
+=== クラスメソッド:
+--- Prime.new
+      素数を生成するクラスを作る。
+
+=== メソッド:
+--- Prime#succ
+--- Prime#next
+      次の素数を返す。
+
+      例:
+        q = Prime.new
+        q.succ # => 2
+        q.succ # => 3
+        q.succ # => 5
+
+--- Prime#each
+      素数について繰り返し。
+      これは((*無限ループ*))になるので必ずbreakを入れること。
+
+      例:
+        > q=Prime.new; i = 0; q.each  {|x| break if i > 5; puts x; i+=1;}
+        2
+        3
+        5
+        7
+        11
+        13
+
+--- Prime#primes  ((<ruby 1.9 feature>))
+      それまでに求めた素数の配列を返す。
+
+== 参考
+
+* ((<ruby-list:1174>))

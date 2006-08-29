@@ -1,0 +1,38 @@
+= finalize
+
+Finalizerとは, あるオブジェクト obj がGCされる時に obj に依存しているオブジェクトに対
+してメッセージを送る機能です.
+
+== 使いかた
+
+  require 'finalize'
+
+((<執筆者募集>))
+
+((<ruby-list:3465>))
+
+== モジュール関数
+
+--- Finalizer.add(obj, dependant, method = :finalize, *opt)
+--- Finalizer.add_dependency(obj, dependant, method = :finalize, *opt)
+
+--- Finalizer.delete(id, dependant, method = :finalize)
+--- Finalizer.delete_dependency(id, dependant, method = :finalize)
+
+--- Finalizer.delete_all_dependency(id, dependant)
+
+--- Finalizer.delete_by_dependant(dependant, method = :finalize)
+
+--- Finalizer.delete_all_by_dependant(dependant)
+
+--- Finalizer.finalize_dependency(id, dependant, method = :finalize)
+
+--- Finalizer.finalize_all_dependency(id, dependant)
+
+--- Finalizer.finalize_by_dependant(dependant, method = :finalize)
+
+--- Finalizer.finalize_all_by_dependant(dependant)
+
+--- Finalizer.finalize_all
+
+--- Finalizer.safe

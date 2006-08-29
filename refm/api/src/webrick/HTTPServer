@@ -1,0 +1,119 @@
+= WEBrick::HTTPServer
+
+((<執筆者募集>))
+
+HTTP サーバのためのクラス。
+
+簡単な例。
+
+ require 'webrick'
+ srv = WEBrick::HTTPServer.new({:DocumentRoot => '/home/username/public_html/',
+                                :BindAddress => '127.0.0.1',
+                                :Port => 10080})
+ srv.mount('/hoge.pl', WEBrick::HTTPServlet::CGIHandler, 'really_executed_script.rb')
+ srv.start
+
+== スーパークラス
+
+((<WEBrick::GenericServer>))
+
+== クラスメソッド
+
+--- HTTPServer.new(config={}, default=Config::HTTP)
+    HTTPServer オブジェクトを生成する。config は設定を保存したハッシュ。 
+    default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は 
+    ((<WEBrick::HTTPServer/WEBrick::Config::HTTP>))
+
+== インスタンスメソッド
+
+--- mount(dir, servlet, *options)
+    サーバ上のディレクトリ dir にサーブレット servlet を対応させる。
+    dir はディレクトリをあらわす文字列。servlet は
+    ((<WEBrick::HTTPServlet::AbstractServlet>)) のサブクラス。*options を引数としてサーブレットのコンストラクタ new(*options) が呼び出される。
+
+--- mount_proc(dir, proc)
+--- mount_proc(dir){|req, res| ...}
+    サーバ上のディレクトリ dir に ((<Proc>)) オブジェクト proc を対応させる。
+    proc は ((<WEBrick::HTTPResponse>)) オブジェクトと ((<WEBrick::HTTPRequest>))
+    オブジェクトを引数として proc.call(request, response) の引数の順で呼び出される。
+
+--- unmount(dir)
+    サーバ上のディレクトリ dir とサーブレットとの対応を解消する。
+
+--- virtual_host(server)
+    サーバの保持しているバーチャルホストのリストに server を加える。 
+    server は HTTPServer オブジェクト。
+    クライアントからのリクエストのうち server へのものは server に委譲される
+    ようになる。
+
+== WEBrick::Config::HTTP
+HTTPServer.new(config) に与えた時に有効な設定とそのデフォルト値。
+((<WEBrick::GenericServer/WEBrick::Config::General>))も参照。
+((<URL:http://shogo.homelinux.org/~ysantoso/webrickguide/html/Server_Configuration.html>))
+も参照。
+
+    HTTP = {
+      :ServerName     => Utils.getservername,
+      :BindAddress    => nil,   # "0.0.0.0" or "::" or nil
+      :Port           => 80,
+      :MaxClients     => 100,   # maximum number of the concurrent connections
+      :ServerType     => nil,   # default: WEBrick::SimpleServer
+      :Logger         => nil,   # default: WEBrick::Log.new
+      :ServerSoftware => "WEBrick/#{WEBrick::VERSION} " +
+                         "(Ruby/#{RUBY_VERSION}/#{RUBY_RELEASE_DATE})",
+      :TempDir        => ENV['TMPDIR']||ENV['TMP']||ENV['TEMP']||'/tmp',
+      :DoNotListen    => false,
+      :StartCallback  => nil,
+      :StopCallback   => nil,
+      :AcceptCallback => nil,
+      :DoNotReverseLookup => nil,
+
+      :RequestTimeout => 30,
+      :HTTPVersion    => HTTPVersion.new("1.1"),
+      :AccessLog      => nil,
+      :MimeTypes      => HTTPUtils::DefaultMimeTypes,
+      :DirectoryIndex => ["index.html","index.htm","index.cgi","index.rhtml"],
+      :DocumentRoot   => nil,
+      :DocumentRootOptions => { :FancyIndexing => true },
+      :RequestCallback => nil,
+      :ServerAlias    => nil,
+
+      :CGIInterpreter => nil,
+      :CGIPathEnv     => nil,
+
+      # workaround: if Request-URIs contain 8bit chars,
+      # they should be escaped before calling of URI.parse().
+      :Escape8bitURI  => false
+    }
+
+: :RequestTimeout
+    どれだけの時間 クライアントからの入力を待つかを整数か ((<Float>)) で指定する。
+    単位は秒。
+: :HTTPVersion
+    使用する HTTP のバージョン。((<WEBrick::HTTPVersion>)) オブジェクトで指定する。
+: :AccessLog
+    アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような
+    配列で指定する。io は ((<IO>)) オブジェクト。format は文字列。フォーマットの
+    形式は Apache のそれに準拠。以下を参照。デフォルトでは標準エラー出力に出力する。
+    ((<URL:http://httpd.apache.org/docs/mod/mod_log_config.html#formats>))
+: :MimeTypes
+    拡張子と mime-type との対応をハッシュで指定する。
+: :DirectoryIndex
+    ディレクトリのインデックスとなるファイル名を配列で指定する。
+: :DocumentRoot
+    サーバ上のルートディレクトリに対応させる、ローカルのファイルシステムの
+    ディレクトリを文字列で指定する。
+: :DocumentRootOptions
+    ((<WEBrick::HTTPServlet::FileHandler>)) のコンストラクタに渡されるオプションを
+    ハッシュで指定する。
+: :RequestCallback
+    クライアントからのリクエストを受け付けた時に呼ばれる ((<Proc>)) オブジェクトを
+    指定する。callback.call(req, res) のように呼ばれる。
+: :ServerAlias
+    サーバのホスト名の別名を配列で指定する。
+: :CGIInterpreter
+    CGI を実行するインタプリタを文字列で指定する。
+: :CGIPathEnv
+    CGI に渡される PATH 環境変数を文字列で指定する。
+: :Escape8bitURI
+    ((<執筆者募集>))

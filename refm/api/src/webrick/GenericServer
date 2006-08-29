@@ -1,0 +1,107 @@
+= WEBrick::GenericServer
+
+((<執筆者募集>))
+
+((<WEBrick::HTTPServer>)) のスーパークラス
+
+== クラスメソッド
+
+--- GenericServer.new(config={}, default=WEBrick::Config::General)
+    GenericServer オブジェクトを生成する。config は設定を保存したハッシュ。
+    default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
+    WEBrick::Config::General。
+
+== インスタンスメソッド
+
+--- [](key)
+    self.config[key] と同値。
+
+--- config
+    サーバの設定を保存したハッシュを返す。
+
+--- listen(address, port)
+    与えられたアドレスとポートで listen を開始し listeners に加える。
+    address は文字列。port は整数。listeners を返す。
+
+--- listeners
+    listen している ((<TCPServer>)) オブジェクトの配列を返す。
+
+--- logger
+    ((<WEBrick::Log>)) のインスタンスを返す。
+
+--- shutdown
+    stop を呼び、全ての listeners を close する。
+
+--- start()
+--- start(){|soc| ... }
+    サーバをスタートする。
+    block が与えられた場合、block が実際のクライアントとの応答を担う。
+    block は ((<TCPSocket>)) オブジェクトを引数として呼び出される。
+
+--- status
+    現在のサーバのステータスを ((<Symbol>)) オブジェクトで返す。値は :Running, :Stop, :Shutdown のいずれか。
+
+--- stop
+    サーバを停止する。
+
+--- tokens
+    MaxClient の設定のために使われる ((<SizedQueue>)) オブジェクトを返す。 
+    ((<SizedQueue>)) オブジェクトのサイズは現在受け付けることのできるクライアントの数。
+
+    MaxClient を知りたい場合は self.tokens.max。self.tokens.max - self.tokens.length が現在のクライアントの接続数。
+
+
+== WEBrick::Config::General
+GenericServer.new(config) に与えた時に有効な設定とそのデフォルト値。
+
+((<URL:http://shogo.homelinux.org/~ysantoso/webrickguide/html/Server_Configuration.html>))
+
+    WEBrick::Config::General = {
+      :ServerName     => Utils.getservername,
+      :BindAddress    => nil,   # "0.0.0.0" or "::" or nil
+      :Port           => nil,   # users MUST specifiy this!!
+      :MaxClients     => 100,   # maximum number of the concurrent connections
+      :ServerType     => nil,   # default: WEBrick::SimpleServer
+      :Logger         => nil,   # default: WEBrick::Log.new
+      :ServerSoftware => "WEBrick/#{WEBrick::VERSION} " +
+                         "(Ruby/#{RUBY_VERSION}/#{RUBY_RELEASE_DATE})",
+      :TempDir        => ENV['TMPDIR']||ENV['TMP']||ENV['TEMP']||'/tmp',
+      :DoNotListen    => false,
+      :StartCallback  => nil,
+      :StopCallback   => nil,
+      :AcceptCallback => nil,
+      :DoNotReverseLookup => nil,
+    }
+
+: :ServerName
+    サーバのホスト名を表す文字列。デフォルトの Utils.getservername は /etc/hostname
+    に書かれている文字列を設定する。
+: :BindAddress
+    サーバのアドレスを指定する。デフォルトの nil や "0.0.0.0", "::" などを指定した
+    場合は使用可能なすべてのネットワークインターフェースに対して listen を開始する。
+    ((<socket/ホスト指定形式>))を参照。
+: :Port
+    サーバのポートを指定する。((<socket/サービス指定形式>))を参照。
+: :MaxClients
+    クライアントの最大接続数を表す整数。
+: :ServerType
+    ((<執筆者募集>))
+: :Logger
+    ログをとるオブジェクト。Logger オブジェクトに定義されているべきメソッドに関しては
+    ((<WEBrick::Log>)) を参照。一般的には WEBrick::Log.new(log_file, level) と
+    log_file と level を設定し直すだけで十分。
+: :DoNotListen
+    true の場合、GenericServer オブジェクトを生成しただけでは listen を開始しない。
+: :StartCallback
+     start 開始時に呼ばれる ((<Proc>)) オブジェクト。呼ばれる時に引数は
+     特に与えられない。
+: :StopCallback
+     サーバを stop した時に呼ばれる ((<Proc>)) オブジェクト。呼ばれる時に引数は
+     特に与えられない。
+: :AcceptCallback
+     クライアントからの接続を accept したときに呼ばれる ((<Proc>)) オブジェクト。
+     クライアントと接続された ((<TCPSocket>)) オブジェクトを引数として呼ばれる。
+: :DoNotReverseLookup
+     true の場合、ホスト名への逆引きを行わなくなる。
+     ((<BasicSocket#do_not_reverse_lookup|BasicSocket/BasicSocket.do_not_reverse_lookup>))
+     も参照。

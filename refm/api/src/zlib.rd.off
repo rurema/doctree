@@ -1,0 +1,14 @@
+Ruby/zlib は zlib を Ruby から使うための拡張ライブラリです。
+gzip ファイルの読み書きもサポートします。
+
+see also: ((<ruby-src:ext/zlib/doc/zlib.rd>))
+
+#@include(zlib/Zlib)
+#@include(Zlib__Error)
+#@include(Zlib__ZStream)
+#@include(Zlib__Deflate)
+#@include(Zlib__Infrate)
+#@include(Zlib__GzipFile)
+#@include(Zlib__GzipFile__Error)
+#@include(Zlib__GzipWriter)
+#@include(Zlib__GzipReader)

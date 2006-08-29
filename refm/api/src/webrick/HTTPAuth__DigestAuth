@@ -1,0 +1,25 @@
+= WEBrick::HTTPAuth::DigestAuth
+
+((<執筆者募集>))
+
+Digest 認証のためのクラス。
+
+== クラスメソッド
+
+--- DigestAuth.new(config, default=Config::DigestAuth)
+
+== メソッド
+
+--- algorithm
+
+--- authenticate(req, res)
+
+--- challenge(req, res, stale=false)
+
+--- logger
+
+--- qop
+
+--- realm
+
+--- userdb

@@ -1,0 +1,24 @@
+= OpenSSL::X509::Revoked
+
+失効した証明書のクラス。((<OpenSSL::X509::CRL>)) クラスから使われる。
+
+== クラスメソッド
+
+--- Revoked.new
+
+== メソッド
+
+--- serial
+--- serial=
+    失効した証明書のシリアル。
+
+--- time
+--- time=
+    失効した日時。((<Time>)) オブジェクト。
+
+--- extensions
+--- extensions=
+    拡張領域。((<OpenSSL::X509::Extension>)) の配列。
+
+--- add_extension(ex)
+    拡張領域に値を加える。

@@ -1,0 +1,281 @@
+= win32/registry
+
+win32/registry は Win32 プラットフォームでレジストリをアクセスするための
+ライブラリです。Win32 API の呼び出しに ((<Win32API>)) を使います。
+
+//ex{
+Win32::Registry::HKEY_CURRENT_USER.open('SOFTWARE\foo') do |reg|
+  value = reg['foo']                               # 値の読み込み
+  value = reg['foo', Win32::Registry::REG_SZ]      # 型を限定した読み込み
+  type, value = reg.read('foo')                    # 値の読み込み
+  reg['foo'] = 'bar'                               # 値の書き込み
+  reg['foo', Win32::Registry::REG_SZ] = 'bar'      # 型指定付き値の書き込み
+  reg.write('foo', Win32::Registry::REG_SZ, 'bar') # 値の書き込み
+  
+  reg.each_value { |name, type, data| ... }        # 値の列挙
+  reg.each_key { |key, wtime| ... }                # サブキーの列挙
+  
+  reg.delete_value('foo')                          # 値の削除
+  reg.delete_key('foo')                            # サブキーの削除
+  reg.delete_key('foo', true)                      # サブキーの再帰削除
+end
+//}
+
+== WSH を用いたレジストリアクセス
+
+レジストリをアクセスするには ((<WIN32OLE>)) を使って ((<WScript.Shell|URL:http://msdn.microsoft.com/library/en-us/script56/html/wsObjWshShell.asp>)) オブジェクト経由でアクセスする方法もあります。
+
+ wsh = WIN32OLE.new('WScript.Shell')
+ value = wsh.RegRead 'HKLM\Software\Microsoft\Windows\...'
+ wsh.RegWrite 'HKCR\foofile\shell\open\command\', 'REG_SZ', '"C:\..." "%1"'
+
+ただし，キーを列挙したり，自由なバイナリ値を読み書きすることができません。
+
+
+
+= class Win32::Registry
+
+include Enumerable
+include Win32::Registry::Constants
+
+== Class Methods
+
+--- Registry.new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+--- Registry.new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) { |reg| ... }
+--- Registry.open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+--- Registry.open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) { |reg| ... }
+    レジストリキー ((|key|)) 下のキー ((|subkey|)) を開き，
+    開いたキーを表す Win32::Registry オブジェクトを返します。
+    ((|key|)) は親のキーを Win32::Registry オブジェクトで指定します。
+    親のキーには定義済キー HKEY_* を使用できます (⇒((<Win32::Registry/constants>)))
+    
+    ((|desired|)) はアクセスマスクです。((|opt|)) はキーのオプションです。
+    詳細は ((<MSDN Library|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp>)) を参照してください。
+    
+    ブロックが与えられると，キーは自動的に閉じられます。
+
+--- Registry.create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
+--- Registry.create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) { |reg| ... }
+    レジストリキー ((|key|)) 下にキー ((|subkey|)) を作成し，
+    開いたキーを表す Win32::Registry オブジェクトを返します。
+    ((|key|)) は親のキーを Win32::Registry オブジェクトで指定します。
+    親のキーには定義済キー HKEY_* を使用できます (⇒((<Win32::Registry/constants>)))
+    
+    サブキーが既に存在していればキーはただ開かれ，(({((<created?|Win32::Registry/created?>))}))
+    メソッドが false を返します。
+    
+    ブロックが与えられると，キーは自動的に閉じられます。
+
+--- Registry.expand_environ(str)
+    ((|str|)) の (({%\w+%})) という並びを環境変数に置換します。
+    REG_EXPAND_SZ で用いられます。
+    
+    詳細は ((<ExpandEnvironmentStrings|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp>)) Win32 API を参照してください。
+
+--- Registry.type2name(type)
+    レジストリ値の型を整数から可読文字列に変換します。
+
+--- Registry.wtime2time(wtime)
+    64bit の ((<FILETIME|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp>)) を Time オブジェクトに変換します。
+
+--- Registry.time2wtime(time)
+    Time オブジェクトまたは Integer オブジェクトを受け取り，
+    64bit の FILETIME に変換します。
+
+== Instance Methods
+
+--- open(subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+    (({((<Win32::Registry.open|Win32::Registry/Registry.open>))(self, subkey, desired, opt)})) と同じです。
+
+--- create(subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
+    (({((<Win32::Registry.create|Win32::Registry/Registry.create>))(self, subkey, desired, opt)})) と同じです。
+
+--- close
+    開かれているキーを閉じます。
+    
+    閉じられた後では，多くのメソッドは例外を発生します。
+
+--- read(name, *rtype)
+    レジストリ値 ((|name|)) を読み，[ ((|type|)), ((|data|)) ] 
+    の配列で返します。
+    ((|name|)) が nil の場合，(標準) レジストリ値が読み込まれます。
+    
+    ((|type|)) はレジストリ値の型です。(⇒((<Registry::Constants module|Win32::Registry/Registry::Constants module>)))
+    ((|data|)) はレジストリ値のデータで，クラスは以下の通りです:
+    :REG_SZ, REG_EXPAND_SZ
+       String
+    :REG_MULTI_SZ
+       String の配列
+    :REG_DWORD, REG_DWORD_BIG_ENDIAN, REG_QWORD
+       Integer
+    :REG_BINARY
+       String (バイナリデータを含みます)
+    
+    オプション引数 ((|rtype|)) が指定されていた場合，レジストリ値の型が
+    与えられた ((|rtype|)) の配列に存在するかチェックされ，存在しない場合に
+    ((<TypeError>)) が発生します。
+
+--- self[name, *rtype]
+    レジストリ値 ((|name|)) を読み，その値を返します。クラスは
+    (({((<read|Win32::Registry/read>))})) に準じます。
+    
+    レジストリ値の型が REG_EXPAND_SZ だった場合，環境変数が置換されます。
+    レジストリ値の型が REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,
+    REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生します。
+    
+    オプション引数 ((|rtype|)) の意味は (({read})) と同じです。
+
+--- read_s(name)
+--- read_i(name)
+--- read_bin(name)
+    型がそれぞれ REG_SZ(read_s), REG_DWORD(read_i), REG_BINARY(read_bin)
+    であるレジストリ値 ((|name|)) を読み，その値を返します。
+    
+    型がマッチしなかった場合，TypeError が発生します。
+
+--- read_s_expand(name)
+    型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 ((|name|)) を読み，
+    その値を返します。
+    
+    型が REG_EXPAND_SZ だった場合，環境変数が置換された値が返ります。
+    REG_SZ または REG_EXPAND_SZ 以外だった場合，TypeError が発生します。
+
+--- write(name, type, data)
+    レジストリ値 ((|name|)) に型 ((|type|)) で ((|data|)) を書き込みます。
+    ((|name|)) が nil の場合，(標準) レジストリ値に書き込みます。
+    
+    ((|type|)) はレジストリ値の型です。(⇒((<Registry::Constants module|Win32::Registry/Registry::Constants module>)))
+    ((|data|)) のクラスは (({((<read|Win32::Registry/read>))}))
+    メソッドに準じていなければなりません。
+
+--- self[name, wtype = nil] = value
+    レジストリ値 ((|name|)) に ((|value|)) を書き込みます。
+    
+    オプション引数 ((|wtype|)) を指定した場合は，その型で書き込みます。
+    指定しなかった場合，((|value|)) のクラスに応じて次の型で書き込みます:
+    :Integer
+      REG_DWORD
+    :String
+      REG_SZ
+    :Array
+      REG_MULTI_SZ
+
+--- write_s(name, value)
+--- write_i(name, value)
+--- write_bin(name, value)
+    レジストリ値 ((|name|)) に ((|value|)) を書き込みます。
+    
+    レジストリ値の型はそれぞれ REG_SZ(write_s), REG_DWORD(write_i),
+    REG_BINARY(write_bin) です。
+
+--- each { |name, type, value| ... }
+--- each_value { |name, type, value| ... }
+    キーが持つレジストリ値を列挙します。
+
+--- each_key { |subkey, wtime| ... }
+    キーのサブキーを列挙します。
+    
+    ((|subkey|)) はサブキーの名前を表す String です。
+    ((|wtime|)) は最終更新時刻を表す FILETIME (64-bit 整数) です。
+    (⇒(({((<Registry.wtime2time|Win32::Registry/Registry.wtime2time>))})))
+
+--- delete(name)
+--- delete_value(name)
+    レジストリ値 ((|name|)) を削除します。
+    (標準) レジストリ値を削除することはできません。
+
+--- delete_key(name, recursive = false)
+    サブキー ((|name|)) とそのキーが持つすべての値を削除します。
+    
+    ((|recursive|)) が false の場合，そのサブキーはサブキーを持っていてはなりません。
+    true の場合，キーは再帰的に削除されます。
+
+--- flush
+    キーの全てのデータをレジストリファイルに書き込みます。
+
+--- created?
+    キーが((*新しく*))作成された場合，真を返します。
+    (⇒(({((<Registry.create|Win32::Registry/Registry.create>))})))
+
+--- opened?
+    キーがまだ閉じられていない場合，真を返します。
+
+--- parent
+    親のキーを表す Win32::Registry オブジェクトを返します。
+    定義済キーでは nil を返します。
+
+--- keyname
+    (({((<Registry.open|Win32::Registry/Registry.open>))})) または (({((<Registry.create|Win32::Registry/Registry.create>))})) に指定された
+    ((|subkey|)) の値を返します。
+
+--- disposition
+    キーの disposition 値を返します。
+    (REG_CREATED_NEW_KEY または REG_OPENED_EXISTING_KEY)
+
+--- name
+--- to_s
+    キーのフルパスを (({'HKEY_CURRENT_USER\SOFTWARE\foo\bar'}))
+    のような形で返します。
+
+--- info
+    キー情報を以下の値の配列で返します:
+    :num_keys
+      サブキーの個数
+    :max_key_length
+      サブキー名の最大長
+    :num_values
+      値の個数
+    :max_value_name_length
+      値の名前の最大長
+    :max_value_length
+      値の最大長
+    :descriptor_length
+      セキュリティ記述子の長さ
+    :wtime
+      最終更新時刻 (FILETIME)
+    
+    詳細は ((<RegQueryInfoKey|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/regqueryinfokey.asp>)) Win32 API を参照してください。
+
+--- num_keys
+--- max_key_length
+--- num_values
+--- max_value_name_length
+--- max_value_length
+--- descriptor_length
+--- wtime
+    キー情報の個々の値を返します。
+
+=== constants
+
+--- HKEY_CLASSES_ROOT
+--- HKEY_CURRENT_USER
+--- HKEY_LOCAL_MACHINE
+--- HKEY_PERFORMANCE_DATA
+--- HKEY_CURRENT_CONFIG
+--- HKEY_DYN_DATA
+    それぞれの定義済キーを表す Win32::Registry オブジェクトです。
+    詳細は ((<MSDN Library|URL:httphttp://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp>)) を参照してください。
+
+
+
+= module Registry::Constants
+
+詳細は ((<MSDN Library|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp>)) を参照してください。
+
+--- HKEY_*
+    定義済キー((*値*)).
+    これらは Integer で，Win32::Registry オブジェクトではありません。
+
+--- REG_*
+    レジストリ値の型
+
+--- KEY_*
+    セキュリティアクセスマスク
+
+--- KEY_OPTIONS_*
+    キーオプション
+
+--- REG_CREATED_NEW_KEY
+--- REG_OPENED_EXISTING_KEY
+    キーが新しく作られたか，既存キーが開かれたか。
+    (({((<disposition|Win32::Registry/disposition>))})) メソッドも参照してください。

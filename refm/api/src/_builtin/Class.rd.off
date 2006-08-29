@@ -1,0 +1,92 @@
+= Class
+
+クラスのクラス。より正確に言えば、個々のクラスはそれぞれメタクラスと呼
+ばれる名前のないクラスをクラスとして持っていて、(({Class})) はそのメタ
+クラスのクラスです。この関係は少し複雑ですが、Ruby を利用するにあたっ
+ては特に重要ではありません。
+
+クラスは、モジュールとは
+
+* インスタンスを作成できる
+* ((<Module/include>)) による Mix-in ができない
+
+という違いがありますが、それ以外のほとんどの機能は ((<Module>)) から継
+承されています。(({Module})) のメソッドのうち
+
+* ((<Module#module_function|Module/module_function>))
+* ((<Module#extend_object|Module/extend_object>))
+* ((<Module#append_features|Module/append_features>))
+
+は (({Class})) では未定義にされています。
+
+== スーパークラス:
+
+* ((<Module>))
+
+== クラスメソッド:
+
+--- Class.new([superclass])
+--- Class.new([superclass]) {|klass| ... }
+
+    新しく名前の付いていない ((|superclass|)) のサブクラスを生成します。
+    ((|superclass|)) が省略された時には(({Object})) のサブクラスを生成
+    します。
+
+    名前のないクラスは、最初に名前を求める際に代入されている定数名を検
+    索し、見つかった定数名をクラス名とします。
+
+      p foo = Class.new   # => #<Class:0x401b90f8>
+      p foo.name          # => ""
+      Foo = foo           # ここで p foo すれば "Foo" 固定
+      Bar = foo
+      p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
+
+    ((<ruby 1.7 feature>)):
+    ブロックが与えられると生成したクラスをブロックの引数に渡し、クラス
+    のコンテキストでブロックを実行します。この場合も生成したクラスを返
+    します。
+
+      klass = Class.new(super)
+      klass.module_eval {|m| ... }
+      klass
+
+    と同じです。ブロックの実行は Module#initialize が行います。
+
+== メソッド:
+
+--- allocate    ((<ruby 1.7 feature>))
+
+    クラスのインスタンスを生成して返します。生成したオブジェクトは
+    (通常)クラスのインスタンスであること以外には何も特性を持ちません。
+
+--- new( ... )
+
+    クラスのインスタンスを生成して返します。このメソッドの引数はブロック引数も
+    含め ((<Object/initialize>)) に渡されます。
+
+    ((<ruby 1.7 feature>)): version 1.7 では、new は、allocate でイン
+    スタンスを生成し、initialize で初期化を行うメソッドです。
+
+--- superclass
+
+    クラスのスーパークラスを返します。
+
+== プライベートメソッド:
+
+--- inherited(subclass)
+
+    クラスのサブクラスが定義された時、新しく生成されたサブクラスを引数
+    にインタプリタから呼び出されます。このメソッドが呼ばれるタイミングは
+    クラス定義文の実行直前です。
+
+        class Foo
+          def Foo.inherited(subclass)
+            puts "class \"#{self}\" was inherited by \"#{subclass}\""
+          end
+        end
+        class Bar < Foo
+          puts "executing class body"
+        end
+
+        # => class "Foo" was inherited by "Bar"
+             executing class body

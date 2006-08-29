@@ -1,0 +1,62 @@
+= UNIXServer
+
+UNIXストリーム型接続のサーバ側のソケットのクラス。
+
+== スーパークラス:
+
+* ((<UNIXSocket>))
+
+== クラスメソッド:
+
+--- UNIXServer.open(path)
+--- UNIXServer.new(path)
+    ((|path|))で指定したパス名を用いて接続を受け付けるソケットを返
+    します。
+
+== メソッド:
+
+--- accept
+
+    クライアントからの接続要求を受け付け、接続した
+    ((<UNIXSocket>))のインスタンスを返します。
+
+      UNIXServer.open("/tmp/s") {|serv|
+        c = UNIXSocket.open("/tmp/s")
+        s = serv.accept
+        s.write "from server"
+        c.write "from client"
+        p c.recv(20)    #=> "from server"
+        p s.recv(20)    #=> "from client"
+      }
+
+--- accept_nonblock
+    ((<ruby 1.8.5 feature>))
+
+    ソケットをノンブロッキングモードに設定した後、
+    (({accept(2)}))を呼び出します。
+
+    引数、返り値は ((<UNIXServer/accept>)) と同じです。
+
+    (({accept(2)}))がエラーになった場合、
+    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。
+
+--- listen(backlog)       ((<ruby 1.7 feature>))
+
+    ((<listen(2)|manual page>)) を実行します。
+    (((<Socket/listen>))と同じ)
+
+    ((|backlog|)) は、クライアントからの接続要求を保留できる数です。
+    UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
+
+    ((<listen(2)|manual page>)) が成功すれば 0 を返します。
+    失敗すれば 例外 ((<Errno::EXXX>)) が発生します。
+
+--- sysaccept           ((<ruby 1.7 feature>))
+
+    接続したクライアントのソケットをファイル記述子で返すことを除けば 
+    ((<UNIXServer/accept>)) と同じです。
+
+      UNIXServer.open("/tmp/s") {|serv|
+        c = UNIXSocket.open("/tmp/s")
+        p serv.sysaccept        #=> 6
+      }

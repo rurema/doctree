@@ -1,0 +1,44 @@
+= OpenSSL::ASN1::ObjectId
+
+ASN.1のオブジェクトIDを操作するクラス
+
+== スーパークラス
+
+((<OpenSSL::ASN1::Primitive>))
+
+== クラスメソッド
+
+--- ObjectId.new(str)
+    ASN.1のオブジェクト ID を生成する。
+
+  require "openssl"
+  include OpenSSL
+  p ASN1::ObjectId.new("1.2.840.10040.4.3").long_name # => "dsaWithSHA1"
+  p ASN1::ObjectId.new("dsaWithSHA1").oid             # => "1.2.840.10040.4.3"
+  
+--- ObjectId.register(oid, short_name, long_name)
+    オブジェクトIDに対応する名前を登録する。登録した名前は((<OpenSSL::X509::Extension>))などで利用できるようになる。
+
+  require "openssl"
+  OpenSSL::ASN1::ObjectId.register(
+    "2.5.29.9", "subjectDirAttrs", "X509v3 Subject Directory Attributes")
+
+== メソッド
+
+--- oid
+    オブジェクトIDのドット区切り数値を文字列で返す。
+
+--- sn
+--- short_name
+    オブジェクトIDに対応する短い形式の名前を返す。
+
+--- ln
+--- long_name
+    オブジェクトIDに対応する長い形式の名前を返す。
+
+
+  require "openssl"
+  oid = OpenSSL::ObjectId.new("subjectAltName")
+  p oid.oid   #=> "2.5.29.17"
+  p oid.sn    #=> "subjectAltName"
+  p oid.ln    #=> "X509v3 Subject Alternative Name"

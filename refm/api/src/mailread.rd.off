@@ -1,0 +1,53 @@
+= mailread
+
+Unix mbox 形式のメールファイルを解析するライブラリ
+
+== mailread の使い方
+
+        require 'mailread'
+
+        m = Mail.new('/var/mail/foo')
+        puts 'From: ' + m['From'],
+             'Subject: ' + m['Subject'],
+             '--',
+             m.body[0,5]
+
+== クラスメソッド:
+
+--- Mail.new(f)
+      メールを解析する。
+      ((|f|)) はファイル名か ((<IO>)) オブジェクト。
+      このメソッドを実行した時点でヘッダと本文が切り分けられ、
+      ヘッダのハッシュ(ヘッダフィールド単位)と本文の配列(行単位)が作られる。
+
+      1ファイル複数メールの形式(Unix mbox 形式)に対応しており
+      (この場合 open 済みの IO を渡す必要があることに注意)、
+      例えば以下のようにして各メールの Subject を表示できる。
+
+        require 'mailread'
+        require 'nkf'
+
+        mailbox = File.open('/var/mail/foo')
+        until (m = Mail.new(mailbox)).header.empty?
+          puts NKF.nkf('-me', m['subject'])
+        end
+
+== メソッド:
+
+--- Mail#header
+      ヘッダを ((<Hash>)) で返す。
+      キーは 'From'、'Subject' などのフィールド名で、すべてのキーは 
+      ((<String#capitalize|String>)) されている。
+
+      値の末尾の改行は削除される。
+      複数行に分かれている場合、間に改行をはさむ(継続行を表す空白は削除される)。
+      MIME encoded-word のデコードなどを行いたい場合は ((<nkf>)) などを使用すること。
+
+--- Mail#body
+      本文を行単位の ((<Array>)) で返す。
+
+--- Mail#[](field)
+      ヘッダの ((|field|)) の値を返す。
+      m.header[((|field|)).capitalize] と同じなので値取得の際は、
+      フィールド名のアルファベットの大小を気にする必要はない。
+      

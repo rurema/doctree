@@ -1,0 +1,66 @@
+= OpenSSL::SSL::SSLServer
+
+SSL サーバーのためのクラス。((<TCPServer>)) に対応する。
+
+以下はクライアントからの入力を出力するだけの echo サーバーの例。
+
+  require 'socket'
+  require 'openssl'
+  
+  include OpenSSL
+  
+  ctx = SSL::SSLContext.new()
+  ctx.cert = X509::Certificate.new(File.read('cert.pem'))
+  ctx.key = PKey::RSA.new(File.read('privkey.pem'))
+  svr = TCPServer.new(2007)
+  serv = SSL::SSLServer.new(svr, ctx)
+  
+  loop do
+    while soc = serv.accept
+      puts soc.read
+    end
+  end
+
+== クラスメソッド
+
+--- SSLServer.new(svr, ctx)
+    svr には ((<TCPServer>)) オブジェクトを、ctx には ((<OpenSSL::SSL::SSLContext>)) オブジェクトを取る。
+
+== メソッド
+
+--- to_io
+    ((<TCPServer>)) オブジェクトを返す。
+
+--- accept
+    TLS/SSL クライアントから接続を受け付け、((<OpenSSL::SSL::SSLSocket>)) オブジェクトを返す。start_immediately が真なら SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから SSLSocket オブジェクトを返す。
+
+--- addr
+    ((<IPSocket#addr|IPSocket/addr>)) と同様。
+
+--- close
+    接続を閉じる。
+
+--- closed?
+    close していたら true を返す。
+
+--- do_not_reverse_lookup=
+    ((<BasicSocket#do_not_reverse_lookup|BasicSocket/do_not_reverse_lookup>)) と同様。
+
+--- fcntl(cmd[, arg])
+    ((<IO#fcntl|IO/fcntl>)) と同様。
+
+--- getsockopt(level, optname)
+    ((<BasicSocket#getsockopt|BasicSocket/getsockopt>)) と同様。
+
+--- listen
+    ((<TCPServer#listen|TCPServer/listen>)) と同様。
+
+--- peeraddr
+    ((<IPSocket#peeraddr|IPSocket/peeraddr>)) と同様。
+
+--- setsockopt
+    ((<BasicSocket#setsockopt|BasicSocket/setsockopt>)) と同様。
+
+--- start_immediately
+--- start_immediately=(true || false)
+    accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定する。デフォルトでは true。

@@ -1,0 +1,44 @@
+= OpenSSL::X509::Store
+
+証明書のストレージクラス。
+
+== クラスメソッド
+
+--- Store.new()
+
+== メソッド
+
+--- verify_callback=(proc)
+
+--- error_string
+    verify を呼び出した時のエラー内容を述べた文字列。エラーでない場合は、"ok" がセットされる。verify を一度も呼び出していない時は nil。
+
+--- error
+    ((<OpenSSL::X509>)) を参照。
+
+--- flags=
+
+--- chain
+    最後に verify(cert) した証明書を出発点とするルート CA 証明書までの証明書のチェーン。OpenSSL::X509::Certificate オブジェクトの配列。verify を一度も呼び出していない時は nil を返す。証明書の順序は以下のとおり。
+
+  [証明書, 下位 CA 証明書, 中間 CA 証明書, ... , ルート CA 証明書]
+--- purpose=
+    証明書の使用目的を設定する。verify では検証対象の証明書がこの目的に使えるかどうかも検証する。((<OpenSSL::X509>)) の定数を参照。
+
+--- trust=
+    ((<OpenSSL::X509>)) の定数を参照。
+
+--- add_path(path)
+    パスに含まれる証明書を信頼する証明書としてストレージに加える。 
+
+--- add_file(file)
+    ファイルに含まれる証明書を信頼する証明書としてストレージに加える。 
+
+--- add_cert(cert)
+    証明書を信頼する証明書としてストレージに加える。 
+
+--- add_crl(crl)
+    信頼する CRL(証明書失効リスト) ((<OpenSSL::X509::CRL>)) オブジェクトをストレージに加える。 
+
+--- verify(cert, chain=nil)
+    証明書 cert をストレージに存在する CA 証明書で検証する。

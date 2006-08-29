@@ -1,0 +1,59 @@
+= Socket::Constants
+
+ソケット操作の指定のための定数を定義したモジュール。このモジュー
+ルをインクルードすれば、定数(AF_INETなど)を直接参照できます。
+
+これらの定数は((<Socket>))の定数としても定義されています。
+
+== アドレスファミリー
+
+--- AF_INET
+--- AF_UNSPEC
+--- AF_INET6
+--- AF_UNIX
+--- AF_AX25
+--- AF_IPX
+--- AF_APPLETALK
+
+== ソケットタイプ
+
+--- SOCK_STREAM
+--- SOCK_DGRAM
+--- SOCK_RAW
+--- SOCK_RDM
+--- SOCK_SEQPACKET
+--- SOCK_PACKET
+
+== プロトコル
+
+--- IPPROTO_IP
+--- IPPROTO_ICMP
+--- IPPROTO_TCP
+--- IPPROTO_UDP
+--- IPPROTO_RAW
+--- IPPROTO_IGMP
+--- IPPROTO_GGP
+--- IPPROTO_EGP
+--- IPPROTO_PUP
+--- IPPROTO_IDP
+--- IPPROTO_HELLO
+--- IPPROTO_ND
+--- IPPROTO_TP
+--- IPPROTO_XTP
+--- IPPROTO_EON
+--- IPPROTO_BIP
+--- IPPROTO_MAX
+
+== フラグ
+
+--- AI_PASSIVE
+--- AI_CANONNAME
+--- AI_NUMERICHOST
+
+    ((<Socket/Socket.getaddrinfo>)) の flags
+
+== shutdown の how
+
+--- SHUT_RD
+--- SHUT_RDWR
+--- SHUT_WR

@@ -1,0 +1,10 @@
+= YAML::Stream
+
+
+((<ruby 1.8 feature>)):
+((<執筆者募集>))
+
+== 参考
+
+* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
+  * ((<プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML>))

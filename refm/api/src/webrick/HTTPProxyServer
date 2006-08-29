@@ -1,0 +1,23 @@
+= WEBrick::HTTPProxyServer
+
+プロクシのためのクラス。CONNECT メソッドにも対応。
+
+* ((<Rubyist Magazine - 0002-WEBrickでプロキシサーバを作って遊ぶ|URL:http://jp.rubyist.net/magazine/?0002-WEBrickProxy>))
+
+==  スーパークラス
+
+((<WEBrick::HTTPServer>))
+
+== クラスメソッド
+
+--- HTTPProxyServer.new(config)
+    プロクシオブジェクトを生成する。config には設定を保存したハッシュを与える。解釈されるハッシュのキーとそのデフォルト値は以下の通り。
+ 
+ #
+ :ProxyAuthProc  => nil,
+ :ProxyContentHandler => nil,
+ :ProxyVia       => true,
+ :ProxyTimeout   => true,
+ :ProxyURI       => nil,
+
+プロクシで認証を行いたい場合は、:ProxyAuthProc に ((<Proc>)) オブジェクトを与える。proc は WEBrick::HTTPResponse オブジェクトと WEBrick::HTTPRequest オブジェクトを引数として呼び出される。

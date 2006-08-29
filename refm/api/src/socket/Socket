@@ -1,0 +1,343 @@
+= Socket
+
+ソケットそのものに対するシステムコールレベルのアクセスを提供
+するクラス。Perlのソケットに対するアクセスと同レベルの機能を
+提供してます。このクラスではソケットアドレスは ((<Array/pack>)) 
+された文字列で指定します
+(((<socket/ソケットアドレス構造体を pack した文字列>))を参照)。
+
+一般的なソケットプログラミングはより高レベルの
+((<TCPSocket>))クラスや
+((<TCPServer>))クラスを用い
+て行われることが多く、このクラスはあまり用いられません。
+
+== スーパークラス:
+
+* ((<BasicSocket>))
+
+== クラスメソッド:
+
+--- Socket.open(domain, type, protocol)
+--- Socket.new(domain, type, protocol)
+
+    新しいソケットを生成します。((|domain|))、((|type|))、
+    ((|protocol|)) はインクルードファイルにある定数で指定しま
+    す。ほとんどの定数は (({Socket::AF_INET})) のように 
+    Socket クラスの定数として定義されています。((|domain|)) 
+    と((|type|)) に関しては、(({"AF_INET"})),
+    (({"SOCK_STREAM"})) のように文字列でも指定できますが、文
+    字列ですべての機能を指定できる保証はありません。
+
+    例えば、IPv4 の TCP ソケットは以下のように生成されます。
+
+      s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
+
+    なお、socket(2) の domain 引数において AF_ と PF_ のどちらの定数を使用するかについては混乱がありますが、
+    Stevens の「UNIX ネットワークプログラミング第2版 Vol.1」4.2節に述べられているように、
+    現実的にはどちらでも問題なく、また、既存のコーディング習慣として AF_ が用いられることが多いため、
+    ここでは AF_ を使用しています。
+
+--- Socket.for_fd(fd)
+
+    ファイルディスクリプタ ((|fd|)) に対する新しいソケットを生成します。
+
+    ((<ruby 1.7 feature>)):
+    このメソッドは ((<BasicSocket>)) に移動しました。
+
+--- Socket.getaddrinfo(nodename, servname[, family[, socktype[, protocol[, flags]]]])
+
+    ((<RFC:2553>))で定義された
+    (({getaddrinfo()}))の機能を提供するクラスメソッド。この関数は
+    (({gethostbyname()}))や(({getservbyname()}))の代わりとして用意されており、
+    IPのバージョンに依存しないプログラムを書くための標準的なAPIです。
+
+    アドレス情報の配列を返します。アドレス情報とは7つの要素からなる次の
+    形の配列です。
+
+      * 第0要素 - アドレスファミリー(String)。
+      * 第1要素 - ポート番号(Integer)。
+      * 第2要素 - ホスト名(String)。
+      * 第3要素 - アドレス(String)。
+      * 第4要素 - アドレスファミリーに対応するInteger。
+      * 第5要素 - ソケットタイプに対応するInteger。
+      * 第6要素 - プロトコルに対応するInteger。
+
+    必須引数の意味は以下の通りです。
+
+      * ((|nodename|)) - ホスト名。
+        (((<socket/ホスト指定形式>))を参照)
+      * ((|servname|)) - サービス名。
+        (((<socket/サービス指定形式>))を参照)
+
+    残りの引数は省略可能です。
+
+      * ((|family|)) - アドレスファミリー。
+        (({Socket::AF_INET})) など、
+        ((<Socket::Constants/アドレスファミリー>))にある定数を指定します。
+      * ((|socktype|)) - ソケットタイプ。
+        (({Socket::SOCK_STREAM})) など、
+        ((<Socket::Constants/ソケットタイプ>))にある定数を指定します。
+      * ((|protocol|)) - プロトコル。
+        (({Socket::IPPROTO_IP})) など、
+        ((<Socket::Constants/プロトコル>))にある定数を指定します。
+      * ((|flags|)) - getaddrinfo(3)の第3引数に指定するaddrinfo構造体の
+        ai_flags メンバに相当するFixnum。
+        (({Socket::AI_PASSIVE}))、
+        (({Socket::AI_CANONNAME}))、
+        (({Socket::AI_NUMERICHOST}))
+        が用意されている場合があります。
+
+    引数に指定できる定数の意味については
+    ((<getaddrinfo(3)|manual page>)) を参照して下さい。
+
+    例:
+    ((- Linuxではservnameにポート番号(0や21や"0"や"21"など)は
+    getaddrinfo: Servname not supported for ai_socktype (SocketError)に
+    なって使えないようです。 -))
+      p Socket.getaddrinfo(Socket.gethostname, "ftp")
+      #=> [["AF_INET", 21, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6]]
+
+      pp Socket.getaddrinfo(Socket.gethostname, nil)
+      #=> [["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 1, 6],
+      #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 2, 17],
+      #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 3, 0]]
+
+--- Socket.getnameinfo(sa[, flags])
+
+    ((<RFC:2553>)) で定義された(({getnameinfo()})) の機能を提供するク
+    ラスメソッド。 (({gethostbyaddr()})) や (({getservbyport()})) の代
+    わりとして用意されています。IPのバージョンに依存しないプログラムを
+    書くための標準的なAPIです。
+
+    配列を返し、その要素はアドレスとポートを表す文字列です。
+
+    引数 ((|sa|)) には文字列か配列を与えます。文字列の場合は sockaddr 構造体
+    のパック文字列を与えます。具体的には ((<BasicSocket/getsockaddr>)) 
+    の値が利用できます。配列を与える場合には、要素が3つの場合と4つの場合
+    があります。
+
+    * 要素が3つの場合:
+         [アドレスファミリー, サービス, ホスト]
+    * 要素が4つの場合:
+         [アドレスファミリー, サービス, 任意, アドレスを表す文字列]
+
+    アドレスファミリーには (({Socket::AF_INET})) 等の定数の他に文字列
+    で (({"AF_INET"})) もしくは (({"AF_INET6"})) もしくは (({nil})) が
+    指定できます。ただしIPv6が使えないようにコンパイルされている場合は 
+    (({"AF_INET6"})) は無効な指定となります。アドレスファミリーに 
+    (({nil})) を指定することは (({Socket::AF_UNSPEC})) を指定すること
+    と等価です。
+
+    サービス、ホストの指定に関しては ((<socket/サービス指定形式>))、
+    ((<socket/ホスト指定形式>))を参照してください。
+
+    要素が3つの場合でも、ホストにはアドレスを指定できますが、要素が4つ
+    の場合には、最後の要素を名前解決しないことが保証されます。((-4つの
+    場合の3番目の引数ってなんだか変なインタフェースですね。4番目の引数
+    が nil の場合は要素3つと同じ扱いになるんですね。どういうわけでこう
+    なってるのかがよくわかりません。ホスト指定は常に3番目の要素にして
+    [アドレスファミリー, サービス, ホスト, フラグ] として4番目の要素で
+    名前解決うんぬんを指定するんじゃダメだったんでしょうかね？-あらい 
+    2002-01-01-))
+
+    省略可能な第2引数 ((|flags|)) には ((<getnameinfo(3)|manual page>)) 
+    の第7番目の引数に指定する flags に相当する ((<Fixnum>)) を与えます。
+
+    引数((|flags|))を構成するための定数として
+    (({Socket::NI_MAXHOST}))、
+    (({Socket::NI_MAXSERV}))、
+    (({Socket::NI_NOFQDN}))、
+    (({Socket::NI_NUMERICHOST}))、
+    (({Socket::NI_NAMEREQD}))、
+    (({Socket::NI_NUMERICSERV}))、
+    (({Socket::NI_DGRAM}))
+    が用意されている場合があります。
+
+    これらの定数の意味については ((<getnameinfo(3)|manual page>))を参照
+    して下さい。
+
+    例:
+      Socket.getnameinfo(Socket.sockaddr_in('21','127.0.0.1'))
+      #=> ["localhost", "ftp"]
+
+      Socket.getnameinfo([nil, 21,'127.0.0.1'])
+      #=> ["localhost", "ftp"]
+
+
+--- Socket.gethostbyaddr(host[, type])
+
+    sockaddr 構造体をパックした文字列からホスト情報を返します。
+    ホスト情報の構造は ((<Socket/Socket.gethostbyname>))と同じです。
+    ((|type|)) には、アドレスタイプ(デフォルトは 
+    (({Socket::AF_INET})))を指定します。
+
+--- Socket.gethostbyname(host)
+    ホスト名またはIPアドレス(指定方法に関しては
+    ((<socket/ホスト指定形式>))を参照)
+    からホストの情報を返します。
+    ホスト情報は以下の 4 要素の配列で表現されています。
+
+      * ホスト名
+      * ホストの別名の配列
+      * ホストのアドレスタイプ (整数定数)
+      * ホストのアドレス
+
+    第四要素のホストのアドレスは、各アドレスタイプに対応する
+    C のアドレス構造体を pack した文字列として表現されています。
+    例えばアドレスタイプが AF_INET (定数 2) ならば
+    Socket.unpack_sockaddr_in で unpack できます。
+
+      例:
+      irb(main):009:0> Socket.gethostbyname("210.251.121.214")
+      ["helium.ruby-lang.org", ["helium"], 2, "\322\373y\326"]
+
+      irb(main):009:0> Socket.unpack_sockaddr_in(Socket.gethostbyname("210.251.121.214")[3])[1]
+      "210.251.121.214"
+
+--- Socket.gethostname
+    システムの標準のホスト名を取得します。
+    ホストの別名やアドレスなど他の情報を得るには
+    ((<Socket/Socket.getaddrinfo>)) を使ってください。
+
+      p Socket.gethostname   #=> "helium.ruby-lang.org"
+
+--- Socket.getservbyname(service[, proto])
+    ((|service|)), ((|proto|))に対応するポート番号を返
+    します。((|proto|))の省略値は(({"tcp"}))です。
+
+--- Socket.sockaddr_in(port, host)       ((<ruby 1.7 feature>))
+--- Socket.pack_sockaddr_in(port, host)  ((<ruby 1.7 feature>))
+
+    指定したアドレスを((<socket/ソケットアドレス構造体を pack した文字列>))
+    で返します。((|port|)) は、ポート番号を表す ((<Fixnum>)) あるいは、ポート
+    番号、サービス名を表す文字列です。
+
+        require 'socket'
+        p Socket.sockaddr_in("echo", "localhost")
+        => "\002\000\000\a\177\000\000\001\000\000\000\000\000\000\000\000"
+        p Socket.sockaddr_in("echo", "::1")
+        => "\n\000\000\a\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\001\000\000\000\000"
+
+--- Socket.sockaddr_un(path)             ((<ruby 1.7 feature>))
+--- Socket.pack_sockaddr_un(path)        ((<ruby 1.7 feature>))
+
+    指定したアドレスを((<socket/ソケットアドレス構造体を pack した文字列>))
+    で返します。
+
+        require 'socket'
+        p Socket.sockaddr_un("/tmp/.X11-unix/X0")
+        => "\001\000/tmp/.X11-unix/X0\000...."
+
+--- Socket.pair(domain, type, protocol)
+--- Socket.socketpair(domain, type, protocol)
+    相互に結合されたソケットのペアを含む2要素の配列を返します。
+    引数の指定は(({Socket.open}))と同じです。
+
+--- Socket.unpack_sockaddr_in(sockaddr)      ((<ruby 1.7 feature>))
+
+    ((<socket/ソケットアドレス構造体を pack した文字列>))を 
+    unpack したアドレスを返します。返される値は (({[port, ipaddr]})) 
+    の配列です。
+
+        require 'socket'
+        p Socket.unpack_sockaddr_in(Socket.sockaddr_in("echo", "localhost"))
+        => [7, "127.0.0.1"]
+        p Socket.unpack_sockaddr_in(Socket.sockaddr_in("echo", "::1"))
+        => [7, "::1"]
+
+--- Socket.unpack_sockaddr_un(sockaddr)      ((<ruby 1.7 feature>))
+
+    ((<socket/ソケットアドレス構造体を pack した文字列>))を 
+    unpack したソケットパス名をを返します。
+
+        require 'socket'
+        p Socket.unpack_sockaddr_un(Socket.sockaddr_un("/tmp/.X11-unix/X0"))
+        => "/tmp/.X11-unix/X0"
+
+== メソッド:
+
+--- accept
+    新しい接続を受け付けて、新しい接続に対するソケットとアドレスの
+    ペアを返します。(({accept(2)}))を参照。
+
+    たとえば IPv4 の TCP サーバソケットを生成し、accept でクライアントからの接続を受け付けるには以下のようにします。
+
+      serv = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
+      sockaddr = Socket.sockaddr_in(8080, "0.0.0.0")
+      serv.bind(sockaddr)
+      serv.listen(5)
+      sock = serv.accept
+
+--- accept_nonblock
+    ((<ruby 1.8.5 feature>))
+
+    ソケットをノンブロッキングモードに設定した後、
+    (({accept(2)}))を呼び出します。
+
+    引数、返り値は ((<Socket/accept>)) と同じです。
+
+    (({accept(2)}))がエラーになった場合、
+    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。
+
+--- bind(my_sockaddr)
+    ソケットを((|my_sockaddr|))に結合します。(({bind(2)}))
+    と同じ働きをします。((|my_sockaddr|))は 
+    ((<socket/ソケットアドレス構造体を pack した文字列>))
+    です。
+
+--- connect(server_sockaddr)
+    (({connect(2)}))と同じ働きをします。((|server_sockaddr|)) は、
+    ((<socket/ソケットアドレス構造体を pack した文字列>))
+    です。
+
+    たとえば IPv4 の TCP ソケットを生成し、connect で www.ruby-lang.org:80 に接続するには以下のようにします。
+
+      s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
+      sockaddr = Socket.sockaddr_in(80, "www.ruby-lang.org")
+      s.connect(sockaddr)
+      s.write "GET / HTTP/1.0\r\n\r\n"
+      print s.read
+
+--- connect_nonblock(server_sockaddr)
+    ((<ruby 1.8.5 feature>))
+
+    ソケットをノンブロッキングモードに設定した後、
+    (({connect(2)}))を呼び出します。
+    
+    引数、返り値は ((<Socket/connect>)) と同じです。
+
+    (({connect(2)}))がエラーになった場合、
+    EINPROGRESS を含め例外 ((<Errno::EXXX>)) が発生します。
+
+--- listen(backlog)
+    (({listen(2)}))と同じ働きをします。
+
+--- recvfrom(maxlen[, flags])
+    (({recv}))と同様にソケットからデータを受け取りますが、
+    戻り値は文字列と相手ソケットのアドレスのペアです。引数につい
+    てはrecvと同様です。
+
+      s1 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
+      s2 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
+      s1.bind(Socket.sockaddr_in(0, "0.0.0.0"))
+      s2.send("foo", 0, s1.getsockname)
+      mesg, sockaddr = s1.recvfrom(10)
+      p mesg                                    #=> "foo"
+      p sockaddr                                #=> "\002\000\200r\177\000\000\001\000\000\000\000\000\000\000\000"
+      p Socket.unpack_sockaddr_in(sockaddr)     #=> [32882, "127.0.0.1"]
+
+--- recvfrom_nonblock(maxlen[, flags])
+    ((<ruby 1.8.5 feature>))
+
+    ソケットをノンブロッキングモードに設定した後、
+    (({recvfrom(2)}))を呼び出します。
+
+    引数、返り値は ((<Socket/recvfrom>)) と同じです。
+
+    (({recvfrom(2)}))がエラーになった場合、
+    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。
+
+--- sysaccept           ((<ruby 1.7 feature>))
+
+    接続したクライアントのファイル記述子とアドレスのペアを返すことを除
+    けば ((<Socket/accept>)) と同じです。

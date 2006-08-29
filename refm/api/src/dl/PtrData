@@ -1,0 +1,82 @@
+= DL::PtrData
+
+((<DL>))
+
+== クラスメソッド
+--- PtrData.new(addr, [size = 0, free = nil])
+    アドレス ((|addr|)) を指すポインタに相当する PtrData オブジェクトを返す。
+    GC は ((|free|)) 関数を使用してメモリを解放する。
+
+== メソッド
+--- free=(sym)
+    シンボルオブジェクト ((|sym|)) を指定した場合、GC は sym に相当する関数
+    を使ってメモリを解放する。
+
+--- free
+    GC がメモリを解放するのに使用するシンボルオブジェクト sym を返す。
+    sym は普通 PtrData#free= や PtrData.new によって設定される。
+
+--- size
+--- size=(size)
+    サイズ ((|size|)) を割り当てたメモリを取得および設定する。
+
+--- to_a(type, [size])
+    ((|type|)) で指定された型の配列を返す。type は 'S','P','I','L','D' そし
+    て 'F' のいずれか。
+
+--- to_s([len])
+    長さ ((|len|)) の文字列を返す。len を省略した場合は、文字列の終りは '\0'。
+
+--- ptr
+--- + self
+#   * returns the pointed value as a PtrData object ptr.
+
+  * ポインタが指す値を PtrData オブジェクト ptr で返す。(訳注:？)
+    (訳注:PtrDataが指す値をポインタであるとして、PtrData にして返す(？))
+
+--- ref
+--- - self
+#   * returns the reference as a PtrData object ptr.
+
+    参照を PtrData オブジェクト ptr で返す。(訳注:？)
+    (訳注:PtrDataへの参照を、PtrData にして返す(？))
+    (訳注:PtrDataを指すポインタを、PtrData にして返す(？))
+
+--- self + n
+#   * returns the PtrData object
+
+    PtrData オブジェクトを返す。(訳注: 引数バイトを足した新しい 
+    PtrData オブジェクトを返す)
+
+--- self - n
+#   * returns the PtrData object
+
+    PtrData オブジェクトを返す。(訳注: 引数バイトを引いた新しい 
+    PtrData オブジェクトを返す)
+
+--- struct!(type, *members)
+#   * defines the data type to get access to a structure member with a symbol.
+#     (see also PtrData#[])
+
+    構造体メンバをシンボルでアクセスするデータ型を定義する(PtrData#[]
+    も参照)
+
+--- union!(type, *members)
+#   * defines the data type to get access to a union member with a symbol. (see
+#     also PtrData#[])
+
+    共用体メンバをシンボルでアクセスするデータ型を定義する(PtrData#[]
+    も参照)
+
+--- self[key]
+--- self[key, num = 0]
+    ((|key|)) が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
+    を返す。それは PtrData#{struct!,union!} によって定義された型を持つ。
+    ((|key|)) が整数でこのオブジェクトがポインタ ptr に相当するなら、
+    (ptr + key).to_s(num) の値を返す。
+
+--- self[key, num]= val
+--- self[key]= val
+    ((|key|)) が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
+    を val にする。((|key|)) が整数で ((|val|)) が文字列なら memcpy(3) を使ってメ
+    モリ領域 ptr への値の ((|num|)) バイトをコピーする。

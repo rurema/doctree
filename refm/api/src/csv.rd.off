@@ -1,0 +1,68 @@
+CSV (Comma Separated Value) を扱うライブラリです。
+
+
+= class CSV < Object
+
+CSV (Comma Separated Value) を扱うクラスです。
+
+== Class Methods
+
+: mode 
+     'r', 'w', 'rb', 'wb' から指定可能。
+     
+     - 'r' 読み込み
+     - 'w' 書き込み
+     - 'b' バイナリモード
+: fs
+     フィールドの区切り文字
+     デフォルトは ','
+: rs
+     行区切り文字。nil (デフォルト) で CrLf / Lf。 
+     Cr で区切りたい場合は ?\r を渡す。
+
+--- CSV.open(path, mode[, fs = nil[, rs = nil]]) { ... }
+
+    読み込み：path にあるファイルを開き各行を配列として
+    ブロックに渡す
+     
+       CSV.open("/temp/test.csv", 'r') do |row|
+         puts row.join("<>")
+       end
+
+    ブロックを渡さなかった場合 CSV::Reader を返す
+
+    書き込み：path にあるファイルを開き CSV::Writer をブロックに渡す。
+     
+       CSV.open("/temp/test.csv", 'w') do |writer|
+         writer << ["ruby", "perl", "python"]
+         writer << ["java", "C", "C++"]
+       end
+
+    ブロック未指定の場合 CSV::Writer を返す
+
+--- CSV.foreach(path[, rs = nil]) { ... }
+
+    読み込みモードでファイルを開き、各行を配列でブロックに渡す
+   
+     CSV.foreach('test.csv'){|row|
+       puts row.join('<>')
+     }
+
+--- CSV.read(path[, length = nil[, offset = nil]])
+--- CSV.readlines(path[, rs = nil])
+
+    path で指定されたCSVファイルを読み込み 配列の配列でデータを返す
+   
+--- CSV.generate(path[, fs = nil[, rs = nil]]) { ... }
+--- CSV.parse(str_or_readable[, fs = nil[, rs = nil]])
+--- CSV.parse_line(src[, fs = nil[, rs = nil]])
+--- CSV.generate_line(row[, fs = nil[, rs = nil]])
+--- CSV.parse_row(src, index, out_dev[, fs = nil[, rs = nil]])
+--- CSV.generate_row(src, cells, out_dev[, fs = nil[, rs = nil]])
+
+
+#@include(csv/BasicWriter)
+#@include(csv/IOReader)
+#@include(csv/Reader)
+#@include(csv/StringReader)
+#@include(csv/Writer)

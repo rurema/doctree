@@ -1,0 +1,56 @@
+= Sync_m
+
+スレッド同期機構である再入可能な reader/writer ロック機能を Mix-in により提供する。
+
+includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
+(((<ruby 1.7 feature>)))
+
+== ロック状態
+--- Sync_m::UN
+    ロックされていない状態。
+
+--- Sync_m::EX
+    排他ロック。
+    オブジェクトの状態を更新する場合のように、
+    1つのスレッドがオブジェクトを独占的に使用したい場合に用いる。
+    排他ロック中に他のスレッドはオブジェクトを共有/排他ロックできない。
+
+--- Sync_m::SH
+    共有ロック。
+    複数のスレッドが同時にオブジェクトを使用できる場合に用いる。
+    複数のスレッドが共有ロックしている場合、
+    どのスレッドもオブジェクトを排他ロックできない。
+
+== モジュールメソッド
+--- sync_mode
+     現在のロック状態を返す。
+
+--- sync_locked?
+--- locked?
+     ロックされているかどうかを返す。
+
+--- sync_shared?
+--- shared?
+      共有ロックされているかどうかを返す。
+
+--- sync_exclusive?
+--- exclusive?
+      排他ロックされているかどうかを返す。
+
+--- sync_try_lock(mode = EX)
+--- try_lock(mode = EX)
+      ロック状態を変更する。
+      変更できたかどうかをtrueかfalseで返し、ブロックしない。
+
+--- sync_lock(mode = EX)
+--- lock(mode = EX)
+      ロック状態を変更する。
+      変更できるまで現在のスレッドの実行をブロックする。
+
+--- sync_unlock(mode = EX)
+--- unlock(mode = EX)
+      ロックを解除する。
+
+--- sync_synchronize(mode = EX) {...}
+--- synchronize(mode = EX) {...}
+      ロック状態を変更してブロックを実行する。

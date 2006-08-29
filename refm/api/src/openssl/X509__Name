@@ -1,0 +1,44 @@
+= OpenSSL::X509::Name
+
+== クラスメソッド
+
+--- Name.parse(str)
+    名前をパースして Name オブジェクトを返す。
+
+--- Name.new([[oid1, val1], [oid2, val2] ...], template=OBJECT_TYPE_TEMPLATE)
+--- Name.new()
+    Name オブジェクトを生成する。
+
+== メソッド
+
+--- add_entry(oid, value, type=nil)
+    エントリー oid に value を設定する。type を指定することも出来る。type を指定しない場合は oid より自動的に判別する。
+
+--- to_s
+    人間の読める形式にして返す。
+
+--- to_a
+    配列にして返す。
+
+--- cmp(name)
+--- <=>
+    他の Name オブジェクトと比較する。
+
+--- to_der
+    DER 形式を返す。
+
+== 定数
+
+--- OBJECT_TYPE_TEMPLATE
+    エントリーのタイプを収納したハッシュ。エントリーをキーとして、値にタイプが収納されている。キーは次の文字列、
+
+  'C', 'countryName', 'serialNumber', 'dnQualifier',
+  'DC', 'domainComponent', 'emailAddress'
+
+--- DEFAULT_OBJECT_TYPE
+    エントリーのデフォルトのタイプ。UTF8文字列。
+
+--- COMPAT
+--- RFC2253
+--- ONELINE
+--- MULTILINE

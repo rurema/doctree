@@ -1,0 +1,37 @@
+= RUNIT::Assert
+
+標準配布の runit/assert (など)は、((<RAA:RubyUnit>)) の互換ライブラリ
+で、((<Test::Unit>)) により実装されています。
+
+== モジュールメソッド
+
+--- assert(condition[, message])
+
+--- assert_equal(expected, actual[, message])
+--- assert_equals(expected, actual[, message])
+
+--- assert_operator(obj1, op, obj2[, message])
+
+--- assert_equal_float(expected, actual, e[, message])
+
+--- assert_same(expected, actual[, message])
+
+--- assert_send(obj, method, *args)
+
+--- assert_nil(obj[, message])
+--- assert_not_nil(obj[, message])
+
+--- assert_respond_to(method, obj[, message])
+
+--- assert_kind_of(c, obj[, message])
+
+--- assert_instance_of(c, obj[, message])
+
+--- assert_match(str, re[, message])
+--- assert_matches(str, re[, message])
+--- assert_not_match(str, re[, message])
+
+--- assert_exception(exception[, message]) { ... }
+--- assert_no_exception(exceptions, ...[, message]) { ... }
+
+--- assert_fail(message)

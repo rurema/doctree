@@ -1,0 +1,47 @@
+= Abbrev
+
+与えられた文字列の短縮形を生成するモジュールです。組み込みクラス ((<Array>)) に
+メソッド abbrev を新たに定義します。
+
+== 例
+
+   require 'abbrev'
+   require 'pp'
+
+   pp Abbrev.abbrev(%w[ruby rules]).sort
+
+   [["rub", "ruby"],
+    ["ruby", "ruby"],
+    ["rul", "rules"],
+    ["rule", "rules"],
+    ["rules", "rules"]]
+
+== モジュールメソッド
+
+--- Abbrev.abbrev(words, pattern = nil)
+    ((|words|)) は文字列の配列です。短縮形と元の文字列の配列の配列を返します。
+    上の例のように短縮形からは必ず元の文字列が一意に決まるようになっています。
+    もし ((|words|)) に同じ文字列が含まれている場合は以下のようにその文字列しか
+    返しません。
+
+      pp Abbrev.abbrev(%w[ruby ruby]).sort
+      # => [["ruby", "ruby"]]
+
+    空白が含まれていても適切に処理します。
+
+      pp Abbrev.abbrev(['ru by']).sort" 
+
+      # => 
+        [["r", "ru by"],
+         ["ru", "ru by"],
+         ["ru ", "ru by"],
+         ["ru b", "ru by"],
+         ["ru by", "ru by"]]
+
+== Array
+
+=== メソッド
+
+--- abbrev(pattern = nil)
+    Abbrev.abbrev(self, pattern) と同じです。
+

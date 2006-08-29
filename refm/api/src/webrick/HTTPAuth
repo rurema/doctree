@@ -1,0 +1,33 @@
+= WEBrick::HTTPAuth
+
+((<執筆者募集>))
+
+((<URL:http://shogo.homelinux.org/~ysantoso/webrickguide/html/HTTP_Authentication.html>))
+
+*((<WEBrick::HTTPAuth::BasicAuth>))
+*((<WEBrick::HTTPAuth::DigestAuth>))
+*((<WEBrick::HTTPAuth::Htpasswd>))
+*((<WEBrick::HTTPAuth::Htdigest>))
+*((<WEBrick::HTTPAuth::Htgroup>))
+
+== モジュール関数
+
+--- HTTPAuth.basic_auth(req, res, realm){|user, pass| ... }
+    Basic 認証を行う。ブロックは user, pass を引数として呼ばれ、
+    ブロックが true を返すとユーザを認証したことになる。
+    ブロックが false を返すと認証に失敗し、
+    例外 WEBrick::HTTPStatus::Unauthorized を投げる。
+
+      srv.mount_proc('/basic_auth') {|req, res| 
+        HTTPAuth.basic_auth(req, res, "WEBrick's realm") {|user, pass|
+          user == 'webrick' && pass == 'supersecretpassword'
+        }     
+        res.body = "hoge"
+      }
+
+--- HTTPAuth.proxy_basic_auth(req, res, realm){|user, pass| ... }
+    プロクシー ((<WEBrick::HTTPProxyServer>)) のための Basic 認証を行う。
+    ブロックは user, pass を引数として呼ばれ、
+    ブロックが true を返すとユーザを認証したことになる。
+    ブロックが false を返すと認証に失敗し、例外
+    WEBrick::HTTPStatus::ProxyAuthenticationRequired を投げる。

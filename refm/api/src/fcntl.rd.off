@@ -1,0 +1,31 @@
+= fcntl
+
+Unix のシステムコール ((<fcntl(2)|manual page>)) (つまり 
+((<IO#fcntl|IO/fcntl>)))で使用できる定数 を集めたモジュールです。
+定義される定数は以下の通りです
+
+== 定数:
+
+--- Fcntl::F_DUPFD
+--- Fcntl::F_GETFD
+--- Fcntl::F_GETLK
+--- Fcntl::F_SETFD
+--- Fcntl::F_GETFL
+--- Fcntl::F_SETFL
+--- Fcntl::F_SETLK
+--- Fcntl::F_SETLKW
+--- Fcntl::FD_CLOEXEC
+--- Fcntl::F_RDLCK
+--- Fcntl::F_UNLCK
+--- Fcntl::F_WRLCK
+--- Fcntl::O_CREAT
+--- Fcntl::O_EXCL
+--- Fcntl::O_NOCTTY
+--- Fcntl::O_TRUNC
+--- Fcntl::O_APPEND
+--- Fcntl::O_NONBLOCK
+--- Fcntl::O_NDELAY
+--- Fcntl::O_RDONLY
+--- Fcntl::O_RDWR
+--- Fcntl::O_WRONLY
+--- Fcntl::O_ACCMODE   ((<ruby 1.8 feature>)) version 1.8.1 以降

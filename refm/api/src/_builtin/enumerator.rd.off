@@ -1,0 +1,101 @@
+= enumerator
+
+((<Enumerable::Enumerator>)) も参照してください。
+
+このモジュールをrequireすることによって ((<Object>)) クラスと
+((<Enumerable>)) モジュールに以下のメソッドが追加されます。
+
+--- Object#to_enum(method = :each, *args)
+--- Object#enum_for(method = :each, *args)
+
+(({Enumerable::Enumerator.new(self, method, *args)}))を返す。
+
+//ex{
+str = "xyz"
+
+enum = str.enum_for(:each_byte)
+a = enum.map {|b| '%02x' % b } #=> ["78", "79", "7a"]
+
+# protects an array from being modified
+a = [1, 2, 3]
+some_method(a.to_enum)
+//}
+
+--- Enumerable#each_slice(n) {...}
+
+n 要素ずつにわけてブロックに渡して繰り返す。
+
+//ex{
+(1..10).each_slice(3) {|a| p a}
+# outputs below
+[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]
+[10]
+//}
+
+--- Enumerable#enum_slice(n)
+
+(({Enumerable::Enumerator.new(self, :each_slice, n)})) を返す。
+
+--- Enumerable#each_cons(n) {...}
+
+連続した n 要素ずつの配列をブロックに渡して繰り返す。
+
+//ex{
+(1..10).each_cons(3) {|a| p a}
+# outputs below
+[1, 2, 3]
+[2, 3, 4]
+[3, 4, 5]
+[4, 5, 6]
+[5, 6, 7]
+[6, 7, 8]
+[7, 8, 9]
+[8, 9, 10]
+//}
+
+--- Enumerable#enum_cons(n)
+
+(({Enumerable::Enumerator.new(self, :each_cons, n)}))を返す。
+
+--- Enumerable#enum_with_index
+
+(({Enumerable::Enumerator.new(self, :each_with_index)}))を返す。
+
+== 参考
+
+* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
+  * ((<標準添付ライブラリ紹介【第 5 回】 enumerator|URL:http://jp.rubyist.net/magazine/?0011-BundledLibraries>))
+
+
+
+= class Enumerable::Enumerator < Object
+
+include Enumerable
+
+each 以外のメソッド、つまり each_byte 等も enumerate できる
+ようにするためのラッパークラス。
+
+((<enumerator>)) も参照してください。
+
+== クラスメソッド
+
+--- Enumerable::Enumerator.new(obj, method = :each, *args)
+
+オブジェクト obj について、 each の代わりに method という
+名前のメソッドを使って繰り返すオブジェクトを生成して返す。
+args を指定すると、 method の呼び出し時に渡される。
+
+//ex{
+str = "xyz"
+
+enum = Enumerable::Enumerator.new(str, :each_byte)
+p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
+//}
+
+== メソッド
+
+--- each {...}
+
+生成時のパラメータに従って繰り返す。

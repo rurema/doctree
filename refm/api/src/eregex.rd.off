@@ -1,0 +1,33 @@
+= eregex
+== 目的・概要
+2つの正規表現によるAND/ORを提供する。
+
+Regexpクラスに&と|のメソッドを定義し、それぞれ
+2つの正規表現の両方にマッチすれば真となるもの(RegAnd)と
+いずれかにマッチすれば真となるもの(RegOr)を返す。
+RegAnd、RegOrは=~のみサポートしている。
+== サンプルコード
+     require 'eregex'
+     p "abc" =~ /b/|/c/
+     p "abc" =~ /b/&/c/
+== class Regexp
+組み込みクラスRegexpを拡張して次のメソッドを定義している。
+=== インスタンスメソッド
+--- Regexp#&(other)
+          (({RegAnd(self,((|other|)))}))を返す
+--- Regexp#|(other)
+          (({RegOr(self,((|other|)))}))を返す
+== class RegAnd
+=== インスタンスメソッド
+--- RegAnd#initialize(reg1,reg2)
+          コンストラクタ
+--- RegAnd#=~(str)
+          ((|str|))が((|reg1|))と((|reg2|))の両方にマッチすれば真を返す
+
+== class RegOr
+=== インスタンスメソッド
+--- RegOr#initialize(reg1,reg2)
+          コンストラクタ
+--- RegOr#=~(str)
+          ((|str|))が((|reg1|))か((|reg2|))のいずれかにマッチすれば真を返す
+

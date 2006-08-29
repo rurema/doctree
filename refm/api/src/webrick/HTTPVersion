@@ -1,0 +1,31 @@
+= WEBrick::HTTPVersion
+
+HTTP のバージョンのための小さなクラス。
+
+== インクルードしているモジュール
+((<Comparable>))
+
+== クラスメソッド
+--- HTTPVersion.new(version)
+    HTTPVersion オブジェクトを生成する。version は文字列か HTTPVersion オブジェクト。
+
+--- HTTPVersion.convert(version)
+    version が文字列の場合は HTTPVersion.new(version) を返す。
+    version が HTTPVersion オブジェクトの場合はそのまま version を返す。
+    
+== メソッド
+
+--- <=>(other)
+    HTTPVersion オブジェクト other とのバージョンを比較する。
+    other より新しいなら 1、同じなら 0、古いなら -1 を返す。
+
+--- major
+--- major=
+    HTTP バージョンのメジャーを整数で設定する。
+
+--- minor
+--- minor=
+    HTTP バージョンのマイナーを整数で設定する。
+
+--- to_s
+    文字列に変換する。

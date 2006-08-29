@@ -1,0 +1,22 @@
+= TrueClass
+
+(({true})) のクラス。(({true})) は (({TrueClass})) クラスの唯一のイン
+スタンスです。(({true})) は真を表す代表のオブジェクトです。
+
+== スーパークラス:
+
+* ((<Object>))
+
+== メソッド:
+
+--- self & other
+
+    ((|other|)) が真なら (({true})) を偽なら (({false})) を返します。
+
+--- self | other
+
+    常に (({true})) を返します。
+
+--- self ^ other
+
+    ((|other|)) が真なら (({false})) を偽なら (({true})) を返します。

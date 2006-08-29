@@ -1,0 +1,67 @@
+= OpenSSL::PKey::DSA
+
+簡単な例。data に署名し、署名をもとに data を検証する。
+
+ require "openssl"
+ dsa512 = OpenSSL::PKey::DSA.new(512)
+ dss1 = OpenSSL::Digest::DSS1.new
+ data = 'hoge'
+ sign = dsa512.sign(dss1, data)
+ p dsa512.verify(dss1, sign, data)
+
+== スーパークラス:
+
+((<OpenSSL::PKey::PKey>))
+
+== クラスメソッド
+
+--- DSA.generate(size)
+--- DSA.new(size)
+    DSA オブジェクトを生成する。size は鍵長。
+
+--- DSA.new()
+--- DSA.new(str)
+--- DSA.new(io)
+    DSA オブジェクトを生成する。
+
+== インスタンスメソッド
+
+--- export
+--- to_pem
+--- to_s
+    PEM 形式に変換して返す。
+
+--- private?
+    秘密鍵をもっている場合に true を返す。
+
+--- public?
+    公開鍵をもっている場合に true を返す。
+
+--- public_key
+    公開鍵を返す。
+
+--- to_der
+    DER 形式にして返す。
+
+--- to_text
+    人間が読める形式にして返す。
+
+--- sign(digest, data)
+    data に関して digest を使って署名を作成して文字列として返す。
+    digest は OpenSSL::PKey::DSS1 のインスタンス。
+
+--- verify(digest, sign, data)
+    digest には DSA の性質から OpenSSL::PKey::DSS1 のインスタンスのみ受け付ける。他は 
+    例外 OpenSSL::PKey::PKeyError を投げる。
+
+--- p
+--- p=
+--- q
+--- q=
+--- g
+--- g=
+--- pub_key
+--- pub_key=
+--- priv_key
+--- priv_key=
+    パラメータ。

@@ -1,0 +1,49 @@
+= webrick
+
+((<執筆者募集>))
+
+汎用HTTPサーバーフレームワーク。HTTPサーバが簡単に作れます。
+
+WEBrick はサーブレットによって機能します。サーブレットとは何か。クライアントがアクセスしてきた時にHTTPサーバが実際に行なうことは ファイルを読み込んで返す・forkしてスクリプトを実行する・テンプレートを適用する など様々です。この「サーバが行なっている様々なこと」を抽象化したのがサーブレットです。
+
+サーブレットはRubyのオブジェクトとして実装されます。具体的には((<WEBrick::HTTPServlet::AbstractServlet>))のサブクラスのインスタンスです。
+
+WEBrick はセッション管理の機能を提供しません。
+
+== Components
+
+* WEBrick
+  * ((<WEBrick::GenericServer>))
+  * ((<WEBrick::HTTPServer>))
+  * ((<WEBrick::HTTPProxyServer>))
+  * ((<WEBrick::HTTPResponse>))
+  * ((<WEBrick::HTTPRequest>))
+  * WEBrick::HTTPStatus
+  * ((<WEBrick::HTTPAuth>))
+    *((<WEBrick::HTTPAuth::BasicAuth>))
+    *((<WEBrick::HTTPAuth::DigestAuth>))
+    *((<WEBrick::HTTPAuth::Htpasswd>))
+    *((<WEBrick::HTTPAuth::Htdigest>))
+    *((<WEBrick::HTTPAuth::Htgroup>))
+  * WEBrick::HTTPUtils
+  * WEBrick::HTTPUtils::FormData
+  * ((<WEBrick::HTTPVersion>))
+  * ((<WEBrick::Cookie>))
+  * ((<WEBrick::Log>))
+  * WEBrick::AccessLog
+* WEBrick::HTTPServlet
+  * ((<WEBrick::HTTPServlet::AbstractServlet>))
+    * ((<WEBrick::HTTPServlet::FileHandler>))
+    * ((<WEBrick::HTTPServlet::CGIHandler>))
+    * ((<WEBrick::HTTPServlet::ProcHandler>))
+    * WEBrick::HTTPServlet::ERBHandler
+* ((<"webrick/ssl">))
+* ((<"webrick/cgi">))
+
+== 参考
+
+* ((<URL:http://www.webrick.org/>))
+* ((<URL:http://shogo.homelinux.org/~ysantoso/WebWiki/WEBrick.html>)) 
+* ((<URL:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=WEBrick>))
+* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
+  * ((<WEBrickでプロキシサーバを作って遊ぶ|URL:http://jp.rubyist.net/magazine/?0002-WEBrickProxy>))

@@ -1,0 +1,58 @@
+= ri
+
+((<執筆者募集>))
+
+コマンドラインから RDoc で書かれた Ruby のリファレンスを引くことができます。
+リファレンスは英語で書かれています。似たようなものに ((<ReFe>)) があります。
+
+== インストール
+
+ソースから Ruby をインストールしている場合は、デフォルトでインストールされているはずです。特に以下のように実行すると必要なものが全てインストールされます。
+
+ $ make install-doc
+
+ソースからでなくパッケージからインストールしている場合は、各パッケージに依存します。
+
+== 使い方
+
+以下のようにクラス名やモジュール名の完全な文字列を入力しなくても、リファレンスを引くことができます。当てはまる候補が複数ある場合は、当てはまる候補のリストを表示します。
+
+   $ ri  File
+   $ ri  File.new
+   $ ri  F.n
+   $ ri  zip
+   $ ri  String\#gsub
+   $ ri  String.gsub
+
+メソッドを参照するにはクラス名とメソッドの間に # をいれます。 . で代用することもできます。
+
+== オプション
+
+  --help, -h   you're looking at it
+  
+  --classes, -c   Display the names of classes and modules we
+                  know about
+ 
+  --doc-dir, -d <dirname>
+                  A directory to search for documentation. If not
+                  specified, we search the standard rdoc/ri directories.
+ 
+   --format, -f <name>
+                  Format to use when displaying output:
+                     ansi, bs, html, plain, simple
+                  Use 'bs' (backspace) with most pager programs.
+                  To use ANSI, either also use the -T option, or
+                  tell your pager to allow control characters
+                  (for example using the -R option to less)
+  
+  --list-names, -l  List all the names known to RDoc, one per line
+  
+  --no-pager, -T   Send output directly to stdout.
+  
+    --width, -w output width
+                  Set the width of the output
+  
+  --version, -v   Display the version of ri
+
+== zsh 補完
+

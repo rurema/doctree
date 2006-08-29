@@ -1,0 +1,7 @@
+= ZeroDivisionError
+
+0 で除算を行ったときに発生します。
+
+== スーパークラス:
+
+* ((<StandardError>))

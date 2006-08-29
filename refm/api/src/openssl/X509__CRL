@@ -1,0 +1,60 @@
+= OpenSSL::X509::CRL
+
+CRL(証明書失効リスト) クラス。
+
+== クラスメソッド
+
+--- CRL.new()
+--- CRL.new(str)
+--- CRL.new(io)
+
+== メソッド
+
+--- version
+--- version=
+    CRL のバージョン。
+
+--- signature_algorithm
+    署名に使ったアルゴリズム。
+
+--- issuer
+--- issuer=
+    CRL の発行者。
+
+--- last_update
+--- last_update=
+    最後に更新された日時。
+
+--- next_update
+--- next_update=
+    次に更新する日時。
+
+--- revoked
+--- revoked=
+    失効した証明書の配列。((<OpenSSL::X509::Revoked>)) オブジェクトの ((<Array>))。
+
+--- add_revoked(rev)
+    CRL に失効した証明書を加える。rev は ((<OpenSSL::X509::Revoked>)) オブジェクト。
+
+--- sign(pkey, chain=nil)
+    CRL に署名する。
+
+--- verify(key)
+    発行者の公開鍵で CRL に記載されている署名を検証する。
+
+--- to_der
+    DER 形式に変換する。
+
+--- to_pem
+--- to_s
+    PEM 形式に変換する。
+
+--- to_text
+    人間が読める形式に変換する。
+
+--- extensions
+--- extensions=
+    CRL の拡張領域。((<OpenSSL::X509::Extension>)) の配列。
+
+--- add_extension(ex)
+    拡張領域に値を加える。

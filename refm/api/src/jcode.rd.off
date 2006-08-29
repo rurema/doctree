@@ -1,0 +1,197 @@
+= jcode
+
+== 概要
+
+((<String>))クラスのメソッドを追加、再定義し、
+日本語を意識した文字列処理を提供します。
+
+== 使用例 
+
+   require 'jcode'
+   $KCODE='e' # 漢字コードをEUC-JPに。Windowsで Shift_JIS なら 's' にする
+   print 'abcdef'.tr( 'a-z', 'Ａ-Ｚ' ), "\n"
+
+$KCODE はこのスクリプト自体の文字コードあわせて設定します。
+
+== 追加メソッド
+
+: each_char
+: each_char {|char| ... }
+    文字列中の各文字に対して繰り返します。
+    ブロックを指定せずに呼び出された時には、各文字の配列を返します。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      require 'jcode'
+      zstr='ＡＢＣＤＥＦ'
+      p zstr.each_char
+      zstr.each_char do |x|
+        print "+#{x}+"
+      end                     # => +Ａ++Ｂ++Ｃ++Ｄ++Ｅ++Ｆ+
+
+: end_regexp
+    最後の文字が多バイト文字である文字列にマッチする正規表現を返します。
+    再定義された((<String#succ|String>))で内部的に使われます。
+
+: jcount(str)
+    ((<String#count|String>))の日本語対応版です。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＢＣＤＥＦ'
+      hogehoge='hogehoge'
+
+      p zstr.count 'Ａ' # => 7 ←これは正しくない
+      p hogehoge.count "g" # => 2
+
+      require 'jcode'
+
+      p zstr.jcount 'Ａ' # => 1
+
+      p hogehoge.jcount "g" # => 2
+
+: jlength
+: jsize
+    ((<String#length|String>))の日本語対応版です。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＢＣＤＥＦ'
+      hogehoge='hogehoge'
+      
+      p zstr.size # => 12
+      p hogehoge.size # => 8
+
+      require 'jcode'
+
+      p zstr.jsize # => 6
+
+      p hogehoge.jsize # => 8
+
+: mbchar?
+    (({self}))に多バイト文字が最初に現れる位置を返します。
+    多バイト文字が含まれていなければ(({nil}))を返します。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＢＣＤＥＦ'
+      hoge='hogehoge'
+
+      require 'jcode'
+
+      p zstr.mbchar? # => 0
+      p hoge.mbchar? # => nil
+  
+
+== 再定義メソッド
+それぞれのメソッドに(({!}))がついているものは破壊的メソッドです。
+
+: chop
+: chop!
+    ((<String#chop|String>))の日本語対応版です。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＢＣＤＥＦ'
+      hogehoge='hogehoge'
+
+      p zstr.chop                     # => ＡＢＣＤＥ\243
+      p hogehoge.chop                 # => hogehog
+
+      require 'jcode'
+
+      p zstr.chop                     # => ＡＢＣＤＥ
+      p hogehoge.chop                 # => hogehog
+
+: delete(str)
+: delete!(str)
+    ((<String#delete|String>))の日本語対応版です。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＢＣＤＥＦ'
+      hogehoge='hogehoge'
+
+      p zstr.delete "Ａ"                    # => 唾津\306
+      p hogehoge.delete "e"                # => hoghog
+
+      require 'jcode'
+
+      p zstr.delete "Ａ"                    # => ＢＣＤＥＦ
+      p hogehoge.delete "e"                # => hoghog
+    
+: squeeze([str])
+: squeeze!([str])
+    ((<String#squeeze|String>))の日本語対応版です。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＡＢＢＣＣ'
+      hogehoge='hhoge'
+
+      p zstr.squeeze                   # => ＡＡＢＢＣＣ
+      p hogehoge.squeeze                # => hoge
+
+      require 'jcode'
+
+      p zstr.squeeze                    # => ＡＢＣ
+      p hogehoge.squeeze                # => hoge
+    
+: succ
+: succ!
+    ((<String#succ|String>))の日本語対応版です。
+
+    以下のような((*次*))の文字列を返します。
+
+      "あaあ".succ => "あaぃ"
+      "rｂ".succ => "rｃ"
+      "_紅玉".succ => "_紅桐"
+
+    従来の((<String#succ|String>))は、
+    多バイト文字と半角文字が混在している文字列を
+    意図通りに処理することができません。
+    例えば上記のコードは、それぞれ
+    (({"あbあ"}))、(({"sｂ"}))、(({"_紘玉"}))を返します。
+
+    なお、(({"99"}))の次は(({"100"}))になるのに対し、
+    (({"９９"}))の次は(({"１００"}))にはならないことに注意。
+    (({"Ａｚ"}))や(({"ｚｚ"}))も同様です。 ((-CozoH: このあたり、もっと正確で分かりやすい説明が欲しいです。私自身、よく分かっていないので。-))
+
+: tr(search, replace)
+: tr!(search, replace)
+    ((<String#tr|String>))の日本語対応版です。
+
+    例：
+      #!/usr/bin/env ruby
+      $KCODE='e'
+      zstr='ＡＡＢＢＣＣ'
+      hogehoge='hhoge'
+
+      p zstr.tr('Ａ-Ｚ','A-Z')        # => A疏疏汰汰蛋\303
+      p hogehoge.tr('a-z','Ａ-Ｚ')    # => 旙旙\332
+
+      require 'jcode'
+
+      p zstr.tr('Ａ-Ｚ','A-Z')        # => AABBCC
+      p hogehoge.tr('a-z','Ａ-Ｚ')    # => ＨＨＯＧＥ
+
+
+
+: tr_s(search, replace)
+: tr_s!(search, replace)
+    ((<String#tr_s|String>))の日本語対応版です。
+      irb(main):009:0> "foo".tr_s("o", "f")
+      "ff"
+      irb(main):010:0> require 'jcode'; $KCODE='e'
+      "e"
+      irb(main):011:0> "ｆｏｏ".tr_s("ｏ","ｆ")
+      "ｆｆ"
+      irb(main):012:0> "foo".tr_s("o", "f")
+      "ff"

@@ -1,0 +1,32 @@
+= weakref
+== 目的・概要
+WeakRefクラスによりweak referenceを実現する。
+
+WeakRefオブジェクトは与えられたオブジェクトをポイントするが、
+ポイント先のオブジェクトはGCされる可能性がある。
+アクセスしようとしたときにオブジェクトがGCされていれば
+WeakRef::RefErrorが発生する。
+== サンプルコード
+     require 'weakref'
+     foo = Object.new
+     ref = WeakRef.new(foo)
+     ref.some_method_of_foo
+== class WeakRef
+weak referenceを提供するクラス。
+
+:上位クラス
+            ((<Delegator>))
+=== クラスメソッド
+--- WeakRef.new(obj)
+            ((|obj|))へのweak referenceを生成する
+=== インスタンスメソッド
+--- WeakRef#weakref_alive?
+            参照先のオブジェクトがまだ生きていればtrueを返す
+
+== class WeakRef::RefError
+GCされたオブジェクトを参照しようとしたときに発生する例外。
+:上位クラス
+            ((<StandardError>))
+== see also
+* ((<delegate>))
+

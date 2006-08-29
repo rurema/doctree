@@ -1,0 +1,78 @@
+特殊変数 $! などに英語名の別名 ($ERROR_INFO など)をつけます。
+
+== 使い方
+
+  require 'English'
+
+== 特殊変数
+
+定義される別名とその対応は以下の通りです。
+
+--- $ERROR_INFO
+    ((<組み込み変数/$!>)) の別名
+
+--- $ERROR_POSITION
+    ((<組み込み変数/$@>)) の別名
+
+--- $LOADED_FEATURES
+    ((<組み込み変数/$">)) の別名
+
+--- $FS
+--- $FIELD_SEPARATOR
+    ((<組み込み変数/$;>)) の別名
+
+--- $OFS
+--- $OUTPUT_FIELD_SEPARATOR
+    ((<組み込み変数/$,>)) の別名
+
+--- $RS
+--- $INPUT_RECORD_SEPARATOR
+    ((<組み込み変数/"$/">)) の別名
+
+--- $ORS
+--- $OUTPUT_RECORD_SEPARATOR
+    ((<組み込み変数/$\>)) の別名
+
+--- $INPUT_LINE_NUMBER
+--- $NR
+    ((<組み込み変数/$.>)) の別名
+
+--- $LAST_READ_LINE
+    ((<組み込み変数/$_>)) の別名
+
+--- $DEFAULT_OUTPUT
+    ((<組み込み変数/$>>)) の別名
+
+--- $DEFAULT_INPUT
+    ((<組み込み変数/$<>)) の別名
+
+--- $PID
+--- $PROCESS_ID
+    ((<組み込み変数/$$>)) の別名
+
+--- $CHILD_STATUS
+    ((<組み込み変数/$?>)) の別名
+
+--- $LAST_MATCH_INFO
+    ((<組み込み変数/$~>)) の別名
+
+--- $IGNORECASE
+    ((<組み込み変数/$=>)) の別名
+
+--- $PROGRAM_NAME
+    ((<組み込み変数/$0>)) の別名
+
+--- $ARGV
+    ((<組み込み変数/$*>)) の別名
+
+--- $MATCH
+    ((<組み込み変数/$&>)) の別名
+
+--- $PREMATCH
+    ((<組み込み変数/$`>)) の別名
+
+--- $POSTMATCH
+    ((<組み込み変数/$'>)) の別名
+
+--- $LAST_PAREN_MATCH
+    ((<組み込み変数/$+>)) の別名

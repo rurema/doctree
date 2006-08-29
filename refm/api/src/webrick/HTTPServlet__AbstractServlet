@@ -1,0 +1,29 @@
+= WEBrick::HTTPServlet::AbstractServlet
+
+サーブレットの抽象クラス。実装はサブクラスで行なう。
+
+== クラスメソッド
+
+--- AbstractServlet.new(server, *options)
+--- AbstractServlet.get_instance(config, *options)
+
+== メソッド
+
+--- service(req, res)
+    最初にサーバーから呼び出されるメソッド。この service メソッドが
+    クライアントの HTTP リクエストメソッドに応じて、
+    do_GET, do_HEAD, do_POST, do_OPTIONS... などを呼ぶ。
+
+以下はサーブレットが実装すべきメソッド。返り値は特に規定されていない。何でも良い。
+クライアントからのリクエストに使われないと分かっているメソッドは実装しなくても良い。
+クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要がある。
+
+--- do_GET(req, res)
+
+--- do_HEAD(req, res)
+
+--- do_POST(req, res)
+
+--- do_OPTIONS(req, res)
+
+など。

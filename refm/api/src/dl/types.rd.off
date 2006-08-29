@@ -1,0 +1,37 @@
+= class DL::Types
+
+型の定義を保持するオブジェクトのクラス。
+
+== 型を定義する
+
+    ["alias name", "type name",
+     encoding_method, decoding_method,   # for function prototypes
+     encoding_method, decoding_method]   # for structures (not implemented)
+
+という形式の配列を内部に持ち。エイリアス名と実際の型、エンコーディング、
+デコーディングの方法を定義する。DL::Types::TYPES はデフォルトで持って
+いる定義。
+
+== メソッド
+
+--- typealias(alias, type, enc, dec, struct_enc, struct_dec)
+
+    型定義の追加を行う。インスタンス変数(({@TYDEFS}))の先頭に
+
+      [alias, type,
+       enc, dec, struct_end, struct_dec]
+
+    の組を追加する。
+
+--- encode_type(alias)
+
+    DLモジュールで用いる型定義とRubyのオブジェクトをDLモジュールで用いるデータへの
+    エンコード用Procオブジェクトと、DLモジュールのデータからRubyオブジェクト
+    へのデコード用のProcオブジェクトの組を次の通りのArrayとして返す。
+
+      [ty,enc,dec,senc,sdec]
+      ty : DLでの型指定子
+      enc : エンコード用Proc
+      dec : デコード用Proc
+      senc : エンコード用Proc(dl/structで使用)
+      sdec : デコード用Proc(dl/structで使用)
