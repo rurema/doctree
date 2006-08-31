@@ -5,11 +5,7 @@
 - リファレンスの最新版をとってくる
 - man-rd-ja を種類ごとに分類する
 - 標準添付ライブラリのクラスごとのファイルを整理する
-* ファイル refm/api/src/_builtin/* をコミット
-    * Object
-    * String
-    * Enumerable
-    * Comparable
+- ファイル refm/api/src/_builtin/* をコミット
 * ファイル単位でコンパイルできるようにする
 * CGI にする
 * ファイル単位で見えるようにする
