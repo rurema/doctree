@@ -1,3 +1,5 @@
+status: (none) -> converted -> syntax ok -> verified
+
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 _builtin/ARGF
@@ -134,6 +136,9 @@ finalize
 find
 forwardable
 ftools
+
+LIBRARY_NAME                    OWNER           STATUS
+---------------------------------------------------------------
 gdbm
 generator
 getoptlong
@@ -145,7 +150,7 @@ io/nonblock
 io/wait
 ipaddr
 irb
-jcode
+jcode                           aamine
 kconv
 logger
 mailread
@@ -182,6 +187,9 @@ profile
 profiler
 pstore
 pty
+
+LIBRARY_NAME                    OWNER           STATUS
+---------------------------------------------------------------
 racc/parser
 rational
 rbconfig
