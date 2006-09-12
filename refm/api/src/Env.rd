@@ -1,2 +1,2 @@
 このライブラリは obsolete です。
-((<importenv>)) を参照してください。
+[[lib:importenv]] を参照してください。
