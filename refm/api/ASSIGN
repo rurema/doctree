@@ -6,13 +6,13 @@ _builtin/Array
 _builtin/Bignum
 _builtin/Binding
 _builtin/Class
-_builtin/Comparable
+_builtin/Comparable             aamine
 _builtin/Continuation
 _builtin/Data
 _builtin/Dir
 _builtin/ENV
 _builtin/EOFError
-_builtin/Enumerable
+_builtin/Enumerable             aamine
 _builtin/Errno
 _builtin/Exception
 _builtin/FalseClass
@@ -46,7 +46,7 @@ _builtin/NoMemoryError
 _builtin/NoMethodError
 _builtin/NotImplementedError
 _builtin/Numeric
-_builtin/Object
+_builtin/Object                 aamine
 _builtin/ObjectSpace
 _builtin/Precision
 _builtin/Proc
@@ -65,7 +65,7 @@ _builtin/SecurityError
 _builtin/Signal
 _builtin/SignalException
 _builtin/StandardError
-_builtin/String
+_builtin/String                 aamine
 _builtin/Struct
 _builtin/Symbol
 _builtin/SyntaxError
@@ -80,11 +80,14 @@ _builtin/TrueClass
 _builtin/TypeError
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError
-_builtin/constants
+_builtin/constants              aamine
 _builtin/enumerator
 _builtin/fatal
-_builtin/functions
-_builtin/specialvars
+_builtin/functions              aamine
+_builtin/specialvars            aamine
+
+LIBRARY_NAME                    OWNER           STATUS
+---------------------------------------------------------------
 English
 Env
 Win32API
