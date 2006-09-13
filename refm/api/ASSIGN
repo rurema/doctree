@@ -11,13 +11,13 @@ _builtin/Class
 _builtin/Comparable             aamine
 _builtin/Continuation
 _builtin/Data
-_builtin/Dir                    date
-_builtin/ENV
-_builtin/EOFError
+_builtin/Dir                    date            converted
+_builtin/ENV                    date
+_builtin/EOFError               date
 _builtin/Enumerable             aamine
-_builtin/Errno
-_builtin/Exception
-_builtin/FalseClass
+_builtin/Errno                  date
+_builtin/Exception              date
+_builtin/FalseClass             date
 _builtin/File
 _builtin/FileTest
 _builtin/File__Constants
