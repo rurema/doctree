@@ -21,8 +21,8 @@ _builtin/FalseClass             date            converted
 _builtin/File
 _builtin/FileTest               date
 _builtin/File__Constants        date
-_builtin/File__Stat             date
-_builtin/Fixnum                 date
+_builtin/File__Stat             date            converted
+_builtin/Fixnum                 date            converted
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
