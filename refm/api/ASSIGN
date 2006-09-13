@@ -159,7 +159,7 @@ matrix
 md5
 mkmf
 monitor
-mutex_m
+mutex_m                         iwadon
 net/ftp
 net/ftptls
 net/http
@@ -173,10 +173,10 @@ nkf
 observable
 obsolete
 open-uri
-open3
+open3                           iwadon
 openssl
 optparse
-ostruct
+ostruct                         iwadon
 parsearg
 parsedate
 pathname
