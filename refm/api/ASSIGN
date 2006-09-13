@@ -214,7 +214,7 @@ singleton
 soap
 socket
 stringio
-strscan
+strscan                         iwadon
 sync
 syslog
 tempfile
