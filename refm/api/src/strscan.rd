@@ -61,25 +61,27 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 == Class Methods
 
 --- new(str, dup = false)
-    新しい StringScanner オブジェクトを生成します。
-    str はスキャン対象の文字列です。
+
+新しい StringScanner オブジェクトを生成します。
+str はスキャン対象の文字列です。
 
 #@if (version <= "1.8.0")
-    dup が true の時は文字列を複製して freeze します。
-    dup が false なら複製せずに freeze します。
+dup が true の時は文字列を複製して freeze します。
+dup が false なら複製せずに freeze します。
 #@end
 
 #@if (version >= "1.8.1")
-    dup は単に無視します。
-    引数の文字列は複製も freeze もされず、そのまま使います。
+dup は単に無視します。
+引数の文字列は複製も freeze もされず、そのまま使います。
 #@end
 
 == Instance Methods
 
 --- [](nth)
-    前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
-    返します。インデックス 0 はマッチした部分全体です。前回のマッチが
-    失敗していると常に nil を返します。
+
+前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
+返します。インデックス 0 はマッチした部分全体です。前回のマッチが
+失敗していると常に nil を返します。
 
       s = StringScanner.new('test string')
       s.scan(/\w(\w)(\w*)/) # => "test"
@@ -102,10 +104,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 #@if (version >= "1.8.1")
 --- <<(s)
 --- concat(str)
-    操作対象の文字列に対し str を破壊的に連結します。
-    マッチ記録は変更されません。
 
-    selfを返します。
+操作対象の文字列に対し str を破壊的に連結します。
+マッチ記録は変更されません。
+
+selfを返します。
 
       s = StringScanner.new('test') # => #<StringScanner 0/4 @ "test">
       s.match(/\w(\w*)/)            # => "test"
@@ -117,7 +120,7 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.match(/\s+/)                # => " "
       s.match(/\w+/)                # => "string"
 
-    この操作は StringScanner.new に渡した文字列にも影響することがあります。
+この操作は StringScanner.new に渡した文字列にも影響することがあります。
 
       str = 'test'
       s = StringScanner.new(str) # => #<StringScanner 0/4 @ "test">
@@ -128,11 +131,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 #@if (version >= "1.8.1")
 --- beginning_of_line?
 --- bol?
-    スキャンポインタが行頭を指しているなら true を、
-    行頭以外を指しているなら false を返します。
+スキャンポインタが行頭を指しているなら true を、
+行頭以外を指しているなら false を返します。
 
-    行頭の定義は、文字列先頭かまたは \n の直後を指していることです。
-    文字列末尾は必ずしも行頭ではありません。
+行頭の定義は、文字列先頭かまたは \n の直後を指していることです。
+文字列末尾は必ずしも行頭ではありません。
 
       s = StringScanner.new('test\nstring')
       s.bol?        # => true
@@ -145,11 +148,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 #@end
 
 --- check(regexp)
-    現在位置から regexp とのマッチを試みます。
-    マッチに成功したらマッチした部分文字列を返します。
-    マッチに失敗したら nil を返します。
+現在位置から regexp とのマッチを試みます。
+マッチに成功したらマッチした部分文字列を返します。
+マッチに失敗したら nil を返します。
 
-    このメソッドはマッチが成功してもスキャンポインタを進めません。
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
       s = StringScanner.new('test string')
       s.check(/\w+/) # => "test"
@@ -159,11 +162,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.matched      # => nil
 
 --- check_until(regexp)
-    regexp が一致するまで文字列をスキャンします。
-    マッチに成功したらスキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
-    マッチに失敗したら nil を返します。
+regexp が一致するまで文字列をスキャンします。
+マッチに成功したらスキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
+マッチに失敗したら nil を返します。
 
-    このメソッドはマッチが成功してもスキャンポインタを進めません。
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
       s = StringScanner.new('test string')
       s.check_until(/str/) # => "test str"
@@ -173,8 +176,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 --- eos?
 --- empty?
-    スキャンポインタが文字列の末尾を指しているなら true を、
-    末尾以外を指しているなら false を返します。
+スキャンポインタが文字列の末尾を指しているなら true を、
+末尾以外を指しているなら false を返します。
 
       s = StringScanner.new('test string')
       s.eos?        # => false
@@ -183,20 +186,20 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.scan(/\w+/)
       s.eos?        # => true
 
-    [[m:strscan#empty?]] は将来のバージョンで削除される予定です。
-    代わりに [[m:strscan#eos?]] を使ってください。
+[[m:strscan#empty?]] は将来のバージョンで削除される予定です。
+代わりに [[m:strscan#eos?]] を使ってください。
 
 --- exist?(regexp)
 #@if (version <= "1.8.5")
-    [注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
-    Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
+[注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
+Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 #@end
 
-    スキャンポインタの位置の文字列から regexp がマッチする位置を返します。
-    この位置はスキャンポインタからの相対位置です。
-    マッチしなければ nil を返します。
+スキャンポインタの位置の文字列から regexp がマッチする位置を返します。
+この位置はスキャンポインタからの相対位置です。
+マッチしなければ nil を返します。
 
-    このメソッドはマッチが成功してもスキャンポインタを進めません。
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
       s = StringScanner.new('test string')
       s.exist?(/s/) # => 3
@@ -206,10 +209,10 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.exist?(/e/) # => nil
 
 --- getch
-    一文字スキャンして文字列で返します。
-    一文字の定義は $KCODE に依存します。
-    スキャンポインタをその後ろに進めます。
-    スキャンポインタが文字列の末尾を指すならnilを返します。
+一文字スキャンして文字列で返します。
+一文字の定義は $KCODE に依存します。
+スキャンポインタをその後ろに進めます。
+スキャンポインタが文字列の末尾を指すならnilを返します。
 
       s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
       $KCODE = 'n'                    # 単なるバイト列として認識されます
@@ -223,9 +226,9 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 --- get_byte
 --- getbyte
-    $KCODE に関らず 1 バイトスキャンして文字列で返します。
-    スキャンポインタをその後ろに進めます。
-    スキャンポインタが文字列の末尾を指すなら nil を返します。
+$KCODE に関らず 1 バイトスキャンして文字列で返します。
+スキャンポインタをその後ろに進めます。
+スキャンポインタが文字列の末尾を指すなら nil を返します。
 
       s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
       $KCODE = 'n'                    # 単なるバイト列として認識されます
@@ -238,11 +241,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.get_byte                      # => "\244"
       s.get_byte                      # => nil
 
-    [[m:strscan#getbyte]] は将来のバージョンで削除される予定です。
-    代わりに [[m:strscan#get_byte]] を使ってください。
+[[m:strscan#getbyte]] は将来のバージョンで削除される予定です。
+代わりに [[m:strscan#get_byte]] を使ってください。
 
 --- inspect
-    StringScannerオブジェクトを表す文字列を返します。
+StringScannerオブジェクトを表す文字列を返します。
 
       s = StringScanner.new('test string')
       s.inspect                            # => "#<StringScanner 0/11 @ \"test ...\">"
@@ -253,17 +256,17 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.scan(/\w+/)                        # => "string"
       s.inspect                            # => "#<StringScanner fin>"
 
-    文字列にはクラス名の他、以下の情報が含まれます。
+文字列にはクラス名の他、以下の情報が含まれます。
 
     * スキャナポインタの現在位置。
     * スキャン対象の文字列の長さ。
     * スキャンポインタの前後にある文字。上記実行例の @ がスキャンポインタを表します。
 
 --- match?(regexp)
-    スキャンポインタの地点だけで regexp と文字列のマッチを試します。
-    マッチしたら、スキャンポインタは進めずにマッチした
-    部分文字列の長さを返します。マッチしなかったら nil を
-    返します。
+スキャンポインタの地点だけで regexp と文字列のマッチを試します。
+マッチしたら、スキャンポインタは進めずにマッチした
+部分文字列の長さを返します。マッチしなかったら nil を
+返します。
 
         s = StringScanner.new('test string')
         p s.match?(/\w+/)   #=> 4
@@ -271,8 +274,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
         p s.match?(/\s+/)   #=> nil
 
 --- matched
-    前回マッチした部分文字列を返します。
-    前回のマッチに失敗していると nil を返します。
+前回マッチした部分文字列を返します。
+前回のマッチに失敗していると nil を返します。
 
       s = StringScanner.new('test string')
       s.matched     # => nil
@@ -284,8 +287,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.matched     # => " "
 
 --- matched?
-    前回のマッチが成功していたら true を、
-    失敗していたら false を返します。
+前回のマッチが成功していたら true を、
+失敗していたら false を返します。
 
       s = StringScanner.new('test string')
       s.matched?    # => false
@@ -297,8 +300,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.matched?    # => true
 
 --- matched_size
-    前回マッチした部分文字列の長さを返します。
-    前回マッチに失敗していたら nil を返します。
+前回マッチした部分文字列の長さを返します。
+前回マッチに失敗していたら nil を返します。
 
       s = StringScanner.new('test string')
       s.matched_size # => nil
@@ -309,16 +312,16 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 --- peek(bytes)
 --- peep(bytes)
-    スキャンポインタから長さ bytes バイト分だけ文字列を返します。
+スキャンポインタから長さ bytes バイト分だけ文字列を返します。
 
       s = StringScanner.new('test string')
       s.peek(4)   # => "test"
 
-    bytes は 0 以上の整数です。
-    ただし、スキャン対象の文字列の長さを超える分は無視されます。
-    また、負数を与えると例外 ArgumentError が発生します。
-    bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
-    指しているときは空文字列 ("") を返します。
+bytes は 0 以上の整数です。
+ただし、スキャン対象の文字列の長さを超える分は無視されます。
+また、負数を与えると例外 ArgumentError が発生します。
+bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
+指しているときは空文字列 ("") を返します。
 
       s = StringScanner.new('test string')
       s.peek(4)     # => "test"
@@ -330,7 +333,7 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.scan(/\w+/) # => "string"
       s.peek(4)     # => ""
 
-    このメソッドを実行してもスキャンポインタは移動しません。
+このメソッドを実行してもスキャンポインタは移動しません。
 
       s = StringScanner.new('test string')
       s.peek(4)     # => "test"
@@ -339,12 +342,12 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.peek(4)     # => " str"
       s.peek(4)     # => " str"
 
-    [[m:strscan#peep]] は将来のバージョンでは削除される予定です。
-    代わりに [[m:strscan#peek]] を使ってください。
+[[m:strscan#peep]] は将来のバージョンでは削除される予定です。
+代わりに [[m:strscan#peek]] を使ってください。
 
 --- pointer
 --- pos
-    現在のスキャンポインタのインデックスを返します。
+現在のスキャンポインタのインデックスを返します。
 
       s = StringScanner.new('test string')
       s.pos         # => 0
@@ -357,13 +360,13 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 --- pointer=(n)
 --- pos=(n)
-    スキャンポインタのインデックスを n にセットします。
+スキャンポインタのインデックスを n にセットします。
 
-    n は整数で、バイト単位で指定します。
-    マッチ対象の文字列の長さを超える値を指定すると例外 RangeError が発生します。
-    負数を指定すると文字列の末尾からのオフセットとして扱います。
+n は整数で、バイト単位で指定します。
+マッチ対象の文字列の長さを超える値を指定すると例外 RangeError が発生します。
+負数を指定すると文字列の末尾からのオフセットとして扱います。
 
-    n を返します。
+n を返します。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -376,13 +379,13 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.scan(/\w+/) # => "ring"
 
 #@if (version <= "1.8.0")
-   このメソッドはマッチ記録を捨てます。
+このメソッドはマッチ記録を捨てます。
 #@end
 
 --- post_match
-    前回マッチを行った文字列のうち、マッチしたところよりも後ろの
-    部分文字列を返します。前回のマッチが失敗していると常に nil を
-    返します。
+前回マッチを行った文字列のうち、マッチしたところよりも後ろの
+部分文字列を返します。前回のマッチが失敗していると常に nil を
+返します。
 
       s = StringScanner.new('test string')
       s.post_match  # => nil
@@ -398,9 +401,9 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.post_match  # => nil
 
 --- pre_match
-    前回マッチを行った文字列のうち、マッチしたところよりも前の
-    部分文字列を返します。前回のマッチが失敗していると常に nil を
-    返します。
+前回マッチを行った文字列のうち、マッチしたところよりも前の
+部分文字列を返します。前回のマッチが失敗していると常に nil を
+返します。
 
       s = StringScanner.new('test string')
       s.pre_match   # => nil
@@ -416,12 +419,12 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.pre_match   # => nil
 
 --- reset
-    スキャンポインタを文字列の先頭 (インデックス 0) に戻し、
-    マッチ記録を捨てます。
+スキャンポインタを文字列の先頭 (インデックス 0) に戻し、
+マッチ記録を捨てます。
 
-    self を返します。
+self を返します。
 
-    pos = 0と同じ動作です。
+pos = 0と同じ動作です。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -434,9 +437,9 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.pos         # => 0
 
 --- rest
-    文字列の残り (rest) を返します。
-    具体的には、スキャンポインタが指す位置からの文字列を返します。
-    スキャンポインタが文字列の末尾を指していたら空文字列 ("") を返します。
+文字列の残り (rest) を返します。
+具体的には、スキャンポインタが指す位置からの文字列を返します。
+スキャンポインタが文字列の末尾を指していたら空文字列 ("") を返します。
 
       s = StringScanner.new('test string')
       s.rest         # => "test string"
@@ -448,10 +451,10 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.rest         # => ""
 
 --- rest?
-    文字列が残っているならば trueを、
-    残っていないならば false を返します。
+文字列が残っているならば trueを、
+残っていないならば false を返します。
 
-    [[m:strscan#eos?]] と逆の結果を返します。
+[[m:strscan#eos?]] と逆の結果を返します。
 
       s = StringScanner.new('test string')
       s.eos?        # => false
@@ -462,25 +465,25 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.eos?        # => true
       s.rest?       # => false
 
-    [[m:strscan#rest?]] は将来のバージョンで削除される予定です。
-    代わりに [[m:strscan#eos?]] を使ってください。
+[[m:strscan#rest?]] は将来のバージョンで削除される予定です。
+代わりに [[m:strscan#eos?]] を使ってください。
 
 --- rest_size
 --- restsize
-    文字列の残りの長さを返します。
-    stringscanner.rest.size と同じです。
+文字列の残りの長さを返します。
+stringscanner.rest.size と同じです。
 
       s = StringScanner.new('test string')
       s.rest_size # => 11
       s.rest.size # => 11
 
-    [[m:strscan#restsize]] は将来のバージョンで削除される予定です。
-    代わりに[[m:strscan#rest_size]] を使ってください。
+[[m:strscan#restsize]] は将来のバージョンで削除される予定です。
+代わりに[[m:strscan#rest_size]] を使ってください。
 
 --- scan(regexp)
-    スキャンポインタの地点だけで regexp と文字列のマッチを試します。
-    マッチしたら、スキャンポインタを進めて正規表現にマッチした
-    部分文字列を返します。マッチしなかったら nil を返します。
+スキャンポインタの地点だけで regexp と文字列のマッチを試します。
+マッチしたら、スキャンポインタを進めて正規表現にマッチした
+部分文字列を返します。マッチしなかったら nil を返します。
 
         s = StringScanner.new('test string')
         p s.scan(/\w+/)   #=> "test"
@@ -490,18 +493,18 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
         p s.scan(/./)     #=> nil
 
 --- scan_full(regexp, s, f)
-    スキャンポインタの位置から regexp と文字列のマッチを試します。
-    マッチに成功すると、s と f の値によって以下のように動作します。
+スキャンポインタの位置から regexp と文字列のマッチを試します。
+マッチに成功すると、s と f の値によって以下のように動作します。
 
     * s が true ならばスキャンポインタを進めます。
     * s が false ならばスキャンポインタを進めません。
     * f が true ならばマッチした部分文字列を返します。
     * f が false ならばマッチした部分文字列の長さを返します。
 
-    マッチに失敗すると s や f に関係なく nil を返します。
+マッチに失敗すると s や f に関係なく nil を返します。
 
-    このメソッドは s と f の組み合わせにより、
-    他のメソッドと同等の動作になります。
+このメソッドは s と f の組み合わせにより、
+他のメソッドと同等の動作になります。
 
     * scan_full(regexp, true, true) は [[m:strscan#scan]] と同等。
     * scan_full(regexp, true, false) は [[m:strscan#skip]] と同等。
@@ -509,10 +512,10 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
     * scan_full(regexp, false, false) は [[m:strscan#match]] と同等。
 
 --- scan_until(regexp)
-    regexp が一致するまで文字列をスキャンします。
-    マッチに成功したらスキャンポインタを進めて、
-    スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
-    マッチに失敗したら nil を返します。
+regexp が一致するまで文字列をスキャンします。
+マッチに成功したらスキャンポインタを進めて、
+スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
+マッチに失敗したら nil を返します。
 
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => "test str"
@@ -521,18 +524,18 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.pre_match         # => "test "
 
 --- search_full(regexp, s, f)
-    regexp が一致するまで文字列をスキャンします。
-    マッチに成功すると、s と f の値によって以下のように動作します。
+regexp が一致するまで文字列をスキャンします。
+マッチに成功すると、s と f の値によって以下のように動作します。
 
     * s が true ならばスキャンポインタを進めます。
     * s が false ならばスキャンポインタを進めません。
     * f が true ならばマッチした部分文字列を返します。
     * f が false ならばマッチした部分文字列の長さを返します。
 
-    マッチに失敗すると s や f に関係なく nil を返します。
+マッチに失敗すると s や f に関係なく nil を返します。
 
-    このメソッドは s と f の組み合わせにより、
-    他のメソッドと同等の動作になります。
+このメソッドは s と f の組み合わせにより、
+他のメソッドと同等の動作になります。
 
     * search_full(regexp, true, true) は [[m:strscan#scan_until]] と同等。
     * search_full(regexp, true, false) は [[m:strscan#skip_until]] と同等。
@@ -540,11 +543,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
     * search_full(regexp, false, false) は [[m:strscan#exist?]] と同等。
 
 --- skip(regexp)
-    スキャンポインタの地点だけで regexp と文字列のマッチを試します。
-    マッチしたらスキャンポインタを進めマッチした部分文字列の
-    長さを返します。マッチしなかったら nil を返します。
+スキャンポインタの地点だけで regexp と文字列のマッチを試します。
+マッチしたらスキャンポインタを進めマッチした部分文字列の
+長さを返します。マッチしなかったら nil を返します。
 
-    このメソッドはマッチが成功してもスキャンポインタを進めません。
+このメソッドはマッチが成功してもスキャンポインタを進めません。
 
         s = StringScanner.new('test string')
         p s.skip(/\w+/)   #=> 4
@@ -554,10 +557,10 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
         p s.skip(/./)     #=> nil
 
 --- skip_until(regexp)
-    regexp が一致するまで文字列をスキャンします。
-    マッチに成功したらスキャンポインタを進めて、
-    スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
-    マッチに失敗したら nil を返します。
+regexp が一致するまで文字列をスキャンします。
+マッチに成功したらスキャンポインタを進めて、
+スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
+マッチに失敗したら nil を返します。
 
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => 8
@@ -566,36 +569,36 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.pre_match         # => "test "
 
 --- string
-    スキャン対象にしている文字列を返します。
+スキャン対象にしている文字列を返します。
 
       s = StringScanner.new('test string')
       s.string # => "test string"
 
 #@if (version <= "1.8.0")
-    Ruby 1.8.0 では返り値は freeze されています。
+Ruby 1.8.0 では返り値は freeze されています。
 
       s = StringScanner.new('test string')
       s.string.frozen? # => true
 #@end
 
 #@if (version >= "1.8.1")
-    Ruby 1.8.1 以降では返り値は freeze されていません。
+Ruby 1.8.1 以降では返り値は freeze されていません。
 
       s = StringScanner.new('test string')
       s.string.frozen? # => false
 
-    なお、このメソッドは StringScanner.new に渡した
-    文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。
-    この仕様に依存したコードを書かないようにしましょう。
+なお、このメソッドは StringScanner.new に渡した
+文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。
+この仕様に依存したコードを書かないようにしましょう。
 
       str = 'test string'
       s = StringScanner.new(str)
       s.string == str    # => true
       s.string.eql?(str) # => true (将来は false になる可能性がある)
 
-    また、返り値の文字列に対して破壊的な変更もできますが、
-    この操作がスキャン対象の文字列を変更することも保証されません。
-    この仕様に依存したコードを書かないでください。
+また、返り値の文字列に対して破壊的な変更もできますが、
+この操作がスキャン対象の文字列を変更することも保証されません。
+この仕様に依存したコードを書かないでください。
 
       str = 'test string'
       s = StringScanner.new(str)
@@ -605,8 +608,8 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 #@end
 
 --- string=(str)
-    スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
-    str を返します。
+スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
+str を返します。
 
       str = '0123'
       s = StringScanner.new('test string')
@@ -615,11 +618,11 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 --- terminate
 --- clear
-    スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
+スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
 
-    self を返します。
+self を返します。
 
-    pos = self.string.size と同じ動作です。
+pos = self.string.size と同じ動作です。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -631,21 +634,21 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s[0]          # => nil
       s.pos         # => 11
 
-    [[m:strscan#clear]] は将来のバージョンで削除される予定です。
-    代わりに [[m:strscan#terminate]] を使ってください。
+[[m:strscan#clear]] は将来のバージョンで削除される予定です。
+代わりに [[m:strscan#terminate]] を使ってください。
 
 --- unscan
-    スキャンポインタを前回のマッチの前の位置に戻します。
+スキャンポインタを前回のマッチの前の位置に戻します。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
       s.unscan
       s.scan(/\w+/) # => "test"
 
-    このメソッドでポインタを戻せるのは 1 回分だけです。
-    2 回分以上戻そうとしたときは例外 StringScanner::Error が発生します。
-    また、まだマッチを一度も行っていないときや、
-    前回のマッチが失敗していたときも例外 StringScanner::Error が発生します。
+このメソッドでポインタを戻せるのは 1 回分だけです。
+2 回分以上戻そうとしたときは例外 StringScanner::Error が発生します。
+また、まだマッチを一度も行っていないときや、
+前回のマッチが失敗していたときも例外 StringScanner::Error が発生します。
 
       s = StringScanner.new('test string')
       s.unscan      # StringScanner::Error: can't unscan: prev match had failed
@@ -656,13 +659,13 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
       s.scan(/\w+/) # => nil
       s.unscan      # StringScanner::Error: can't unscan: prev match had failed
 
-    selfを返します。
+selfを返します。
 
 == Constants
 
 --- Version
-    StringScannerクラスのバージョンを文字列で返します。
-    この文字列はfreezeされています。
+StringScannerクラスのバージョンを文字列で返します。
+この文字列はfreezeされています。
 
       StringScanner::Version           # => "0.7.0"
       StringScanner::Version.frozen?   # => true
