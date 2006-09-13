@@ -13,16 +13,16 @@ _builtin/Continuation
 _builtin/Data
 _builtin/Dir                    date            converted
 _builtin/ENV                    date
-_builtin/EOFError               date
+_builtin/EOFError               date            converted
 _builtin/Enumerable             aamine
-_builtin/Errno                  date
-_builtin/Exception              date
-_builtin/FalseClass             date
+_builtin/Errno
+_builtin/Exception              date            converted
+_builtin/FalseClass             date            converted
 _builtin/File
-_builtin/FileTest
-_builtin/File__Constants
-_builtin/File__Stat
-_builtin/Fixnum
+_builtin/FileTest               date
+_builtin/File__Constants        date
+_builtin/File__Stat             date
+_builtin/Fixnum                 date
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
