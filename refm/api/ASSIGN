@@ -11,7 +11,7 @@ _builtin/Class
 _builtin/Comparable             aamine
 _builtin/Continuation
 _builtin/Data
-_builtin/Dir
+_builtin/Dir                    date
 _builtin/ENV
 _builtin/EOFError
 _builtin/Enumerable             aamine
