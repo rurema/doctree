@@ -1,20 +1,16 @@
-= FalseClass
+= class FalseClass < Object
 
-(({false})) のクラス。(({false})) は (({FalseClass})) クラスの唯一のイ
-ンスタンスです。(({false})) は (({nil})) オブジェクトとともに偽を表し、
+false のクラス。false は FalseClass クラスの唯一のイ
+ンスタンスです。false は nil オブジェクトとともに偽を表し、
 その他の全てのオブジェクトは真です。
 
-== スーパークラス:
+== Instance Methods
 
-* ((<Object>))
+--- &(o)
 
-== メソッド:
+常に false を返します。
 
---- self & other
+--- |(o)
+--- ^(o)
 
-    常に (({false})) を返します。
-
---- self | other
---- self ^ other
-
-    ((|other|)) が真なら (({true})) を偽なら (({false})) を返します。
+other が真なら true を偽なら false を返します。

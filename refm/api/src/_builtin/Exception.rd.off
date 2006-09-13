@@ -1,55 +1,48 @@
-= Exception
+= class Exception < Object
 
 全ての例外の祖先のクラスです。
 
-== スーパークラス:
+== Class Methods
 
-* ((<Object>))
+--- new([error_message])
+--- exception([error_message])
 
-== クラスメソッド:
+例外オブジェクトを生成して返します。引数としてエラーメッセージを表
+す文字列を与えることができます。このメッセージは属性
+[[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示
+されます。
 
---- Exception.new([error_message])
---- Exception.exception([error_message])
-
-    例外オブジェクトを生成して返します。引数としてエラーメッセージを表
-    す文字列を与えることができます。このメッセージは属性 
-    ((<Exception/message>)) の値になり、デフォルトの例外ハンドラで表示
-    されます。
-
-== メソッド:
+== Instance Methods
 
 --- exception([error_message])
 
-    引数を指定しない場合は self を返します。そうでなければ、自身のコピー
-    を生成し、((<Exception/message>)) 属性を ((|error_message|)) にし
-    て返します。
+引数を指定しない場合は self を返します。そうでなければ、自身のコピー
+を生成し、[[m:Exception#message]] 属性を error_message にし
+て返します。
 
-    ((<組み込み関数/raise>)) は、実質的に、例外オブジェクトの (({exception})) 
-    メソッドの呼び出しです。
+[[m:Kernel#raise]] は、実質的に、例外オブジェクトの exception
+メソッドの呼び出しです。
 
 --- backtrace
 
-    バックトレース情報を返します。
+バックトレース情報を返します。
 
-    * (({"#{sourcefile}:#{sourceline}:in `#{method}'"}))
+  * "#{sourcefile}:#{sourceline}:in `#{method}'"
+    (メソッド内の場合)
+  * "#{sourcefile}:#{sourceline}"
+    (トップレベルの場合)
 
-      (メソッド内の場合)
-
-    * (({"#{sourcefile}:#{sourceline}"}))
-
-      (トップレベルの場合)
-
-    という形式(デフォルトでは)の ((<String>)) の配列です。
+という形式(デフォルトでは)の [[c:String]] の配列です。
 
 --- message
 --- to_s
 --- to_str
 
-    エラーメッセージをあらわす文字列を返します。
+エラーメッセージをあらわす文字列を返します。
 
 --- set_backtrace(errinfo)
 
-    バックトレース情報に ((|errinfo|)) を設定し、設定されたバックトレース
-    情報を返します。((|errinfo|)) は 
-    (({nil}))、((<String>)) あるいは ((<String>)) の配列のいずれかでな
-    くてはなりません。
+バックトレース情報に errinfo を設定し、設定されたバックトレース
+情報を返します。errinfo は
+nil、[[c:String]] あるいは [[c:String]] の配列のいずれかでな
+くてはなりません。
