@@ -43,7 +43,7 @@ _builtin/Matrix
 _builtin/Method
 _builtin/Module
 _builtin/NameError              date
-_builtin/NilClass               sheepman  
+_builtin/NilClass               sheepman        converted
 _builtin/NoMemoryError          date
 _builtin/NoMethodError          date
 _builtin/NotImplementedError    date
@@ -51,7 +51,7 @@ _builtin/Numeric
 _builtin/Object                 aamine          converted
 _builtin/ObjectSpace            sheepman
 _builtin/Precision
-_builtin/Proc                   sheepman
+_builtin/Proc                   sheepman        converted
 _builtin/Process
 _builtin/Process__GID
 _builtin/Process__Status
