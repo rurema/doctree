@@ -1,25 +1,21 @@
-= Digest::RMD160
+= class Digest::RMD160 < Digest::Base
 
-Hans Dobbertin, Antoon Bosselaers, Bart Preneel によって設計された 
+Hans Dobbertin, Antoon Bosselaers, Bart Preneel によって設計された
 RIPEMD-160 ハッシュ関数を実装するクラス。
 
-== 使いかた
+#@# == 使いかた
 
   require 'digest/rmd160'
 
-== スーパークラス:
+== Class Methods
 
-* ((<Digest::Base>))
+--- new([str])
+--- digest(str)
+--- hexdigest(str)
 
-== クラスメソッド:
+[[c:Digest::Base]] のページを参照のこと。
 
---- Digest::RMD160.new([str])
---- Digest::RMD160.digest(str)
---- Digest::RMD160.hexdigest(str)
-
-    ((<Digest::Base>)) のページを参照のこと。
-
-== メソッド:
+== Instance Methods
 
 --- dup
 --- clone
@@ -27,8 +23,8 @@ RIPEMD-160 ハッシュ関数を実装するクラス。
 --- hexdigest
 --- to_s
 --- update(str)
---- self << str
---- self == md
---- self == str
+--- <<(str)
+--- ==(md)
+--- ==(str)
 
-    ((<Digest::Base>)) のページを参照のこと。
+[[c:Digest::Base]] のページを参照のこと。

@@ -112,9 +112,9 @@ date2
 dbm
 debug
 delegate
-digest                          iwadon
-digest/md5                      iwadon
-digest/rmd160                   iwadon
+digest                          iwadon          converted
+digest/md5                      iwadon          converted
+digest/rmd160                   iwadon          converted
 digest/sha1                     iwadon
 digest/sha2                     iwadon
 dl
