@@ -115,7 +115,7 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 ((<ruby 1.8 feature>))
 
-self.to_a.[[unknown:select|Enumerable/select]] { ... } と同じです。
+self.to_a.[[m:Enumerable#select]] { ... } と同じです。
 #@end
 
 --- string
