@@ -18,14 +18,14 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 第二引数が [[c:Fixnum]] であった場合、その値は
 
-  * [[c:Regexp::IGNORECASE]]
-  * [[c:Regexp::MULTILINE]]
-  * [[c:Regexp::EXTENDED]]
+  * [[m:Regexp::IGNORECASE]]
+  * [[m:Regexp::MULTILINE]]
+  * [[m:Regexp::EXTENDED]]
 
 の論理和でなければなりません。
 
 第二引数が [[c:Fixnum]] 以外であれば真偽値の指定として見なされ、真
-(nil, false 以外)であれば [[c:Regexp::IGNORECASE]]
+(nil, false 以外)であれば [[m:Regexp::IGNORECASE]]
 の指定と同じになります。
 
 第三引数が与えられた時には、[[m:$KCODE]] の値にかかわ
@@ -119,7 +119,7 @@ ArgumentError が発生します。
 コードが固定されている Regexp とコードが固定されていない Regexp を混ぜた場合、
 結果の Regexp は固定されているコードに対応するものになります。
 
-      p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
+  p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
 #@end
 
 == Instance Methods
