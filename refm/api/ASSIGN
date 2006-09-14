@@ -37,7 +37,7 @@ _builtin/KeyError               date
 _builtin/LoadError              date
 _builtin/LocalJumpError         date
 _builtin/Marshal
-_builtin/MatchData              sheepman
+_builtin/MatchData              sheepman        converted
 _builtin/Math
 _builtin/Matrix
 _builtin/Method
@@ -57,9 +57,9 @@ _builtin/Process__GID
 _builtin/Process__Status
 _builtin/Process__Sys
 _builtin/Process__UID
-_builtin/Range                  sheepman 
+_builtin/Range                  sheepman        converted 
 _builtin/RangeError             date
-_builtin/Regexp                 sheepman
+_builtin/Regexp                 sheepman        converted 
 _builtin/RegexpError            date
 _builtin/RuntimeError           date
 _builtin/ScriptError            date
