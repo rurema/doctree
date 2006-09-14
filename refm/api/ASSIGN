@@ -20,7 +20,7 @@ _builtin/Exception              date            converted
 _builtin/FalseClass             date            converted
 _builtin/File
 _builtin/FileTest               date
-_builtin/File__Constants        date
+_builtin/File__Constants        date            converted
 _builtin/File__Stat             date            converted
 _builtin/Fixnum                 date            converted
 _builtin/Float
