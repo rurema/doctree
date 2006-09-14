@@ -1,9 +1,8 @@
-= ostruct
+= class OpenStruct
 
 手軽な構造体クラス。
-(({method_missing}))の使い方の例でもある。
+method_missingの使い方の例でもある。
 
-== 使い方
   require 'ostruct'
   s = OpenStruct.new
   s.foo = 25
@@ -20,12 +19,12 @@
   t.baz = "fobar"
   p t.baz         # => "fobar"
   
-== クラスメソッド
---- OpenStruct.new(hash = nil)
-      (({OpenStruct}))オブジェクトを生成。
-      ((|hash|))が与えられたとき、
+== Class Methods
+--- new(hash = nil)
+OpenStructオブジェクトを生成。
+hashが与えられたとき、
 
-== メソッド
---- OpenStruct#delete_field(name)
-      ((|name|))で指定された要素を削除。
-      その後その要素を参照したら(({nil}))が返る。
+== Instance Methods
+--- delete_field(name)
+nameで指定された要素を削除。
+その後その要素を参照したらnilが返る。

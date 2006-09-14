@@ -173,10 +173,10 @@ nkf
 observable
 obsolete
 open-uri
-open3                           iwadon
+open3                           iwadon          converted
 openssl
 optparse
-ostruct                         iwadon
+ostruct                         iwadon          converted
 parsearg
 parsedate
 pathname
