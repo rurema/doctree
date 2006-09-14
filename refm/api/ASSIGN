@@ -3,7 +3,7 @@ status: (none) -> converted -> syntax ok -> verified
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 _builtin/ARGF
-_builtin/ArgumentError          date
+_builtin/ArgumentError          date            converted
 _builtin/Array
 _builtin/Bignum
 _builtin/Binding
@@ -24,29 +24,29 @@ _builtin/File__Constants        date
 _builtin/File__Stat             date            converted
 _builtin/Fixnum                 date            converted
 _builtin/Float
-_builtin/FloatDomainError       date
+_builtin/FloatDomainError       date            converted
 _builtin/GC
 _builtin/Hash
 _builtin/IO
-_builtin/IOError                date
-_builtin/IndexError             date
+_builtin/IOError                date            converted
+_builtin/IndexError             date            converted
 _builtin/Integer
-_builtin/Interrupt              date
+_builtin/Interrupt              date            converted
 _builtin/Kernel
-_builtin/KeyError               date
-_builtin/LoadError              date
-_builtin/LocalJumpError         date
+_builtin/KeyError               date            converted
+_builtin/LoadError              date            converted
+_builtin/LocalJumpError         date            converted
 _builtin/Marshal
 _builtin/MatchData              sheepman        converted
 _builtin/Math
 _builtin/Matrix
 _builtin/Method
 _builtin/Module
-_builtin/NameError              date
+_builtin/NameError              date            converted
 _builtin/NilClass               sheepman        converted
-_builtin/NoMemoryError          date
-_builtin/NoMethodError          date
-_builtin/NotImplementedError    date
+_builtin/NoMemoryError          date            converted
+_builtin/NoMethodError          date            converted
+_builtin/NotImplementedError    date            converted
 _builtin/Numeric
 _builtin/Object                 aamine          converted
 _builtin/ObjectSpace            sheepman
@@ -58,33 +58,33 @@ _builtin/Process__Status
 _builtin/Process__Sys
 _builtin/Process__UID
 _builtin/Range                  sheepman        converted 
-_builtin/RangeError             date
+_builtin/RangeError             date            converted
 _builtin/Regexp                 sheepman        converted 
-_builtin/RegexpError            date
-_builtin/RuntimeError           date
-_builtin/ScriptError            date
-_builtin/SecurityError          date
+_builtin/RegexpError            date            converted
+_builtin/RuntimeError           date            converted
+_builtin/ScriptError            date            converted
+_builtin/SecurityError          date            converted
 _builtin/Signal
-_builtin/SignalException        date
-_builtin/StandardError          date
+_builtin/SignalException        date            converted
+_builtin/StandardError          date            converted
 _builtin/String                 aamine          converted
 _builtin/Struct
 _builtin/Symbol
-_builtin/SyntaxError            date
-_builtin/SystemCallError        date
-_builtin/SystemExit             date
-_builtin/SystemStackError       date
+_builtin/SyntaxError            date            converted
+_builtin/SystemCallError        date            converted
+_builtin/SystemExit             date            converted
+_builtin/SystemStackError       date            converted
 _builtin/Thread
-_builtin/ThreadError            date
+_builtin/ThreadError            date            converted
 _builtin/ThreadGroup
 _builtin/Time
 _builtin/TrueClass
-_builtin/TypeError              date
+_builtin/TypeError              date            converted
 _builtin/UnboundMethod
-_builtin/ZeroDivisionError      date
+_builtin/ZeroDivisionError      date            converted
 _builtin/constants              aamine
 _builtin/enumerator
-_builtin/fatal                  date
+_builtin/fatal                  date            converted
 _builtin/functions              aamine
 _builtin/specialvars            aamine
 
