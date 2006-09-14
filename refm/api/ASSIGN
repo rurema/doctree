@@ -112,11 +112,11 @@ date2
 dbm
 debug
 delegate
-digest
-digest/md5
-digest/rmd160
-digest/sha1
-digest/sha2
+digest                          iwadon
+digest/md5                      iwadon
+digest/rmd160                   iwadon
+digest/sha1                     iwadon
+digest/sha2                     iwadon
 dl
 dl/Symbol
 dl/import
