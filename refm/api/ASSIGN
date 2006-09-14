@@ -59,7 +59,7 @@ _builtin/Process__Sys
 _builtin/Process__UID
 _builtin/Range
 _builtin/RangeError             date
-_builtin/Regexp
+_builtin/Regexp                 sheepman
 _builtin/RegexpError            date
 _builtin/RuntimeError           date
 _builtin/ScriptError            date
