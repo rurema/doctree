@@ -96,7 +96,9 @@ include Enumerable
   #@end
 
 --- chdir([path])
+#@if (version >= "1.7.0")
 --- chdir([path]) {|path| ... }
+#@end
 
 カレントディレクトリを path に変更します。
 path を省略した場合、環境変数 HOME または LOGDIR
@@ -189,7 +191,9 @@ mode で指定された値(デフォルトは 0777)に umask をかけた
 
 --- new(path)
 --- open(path)
+#@if (version >= "1.7.0")
 --- open(path) {|dir| ...}
+#@end
 
 pathに対するディレクトリストリームをオープンして返します。
 オープンに失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
@@ -218,9 +222,9 @@ open()はブロックを指定することができます。
 ディレクトリの各要素に対してブロックを評価します。
 self を返します。
 
+#@if (version >= "1.7.0")
 --- path
 
-#@if (version >= "1.7.0")
 オープンしているディレクトリのパス名を文字列で返します。
 #@end
 
