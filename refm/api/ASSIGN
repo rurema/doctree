@@ -3,7 +3,7 @@ status: (none) -> converted -> syntax ok -> verified
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 _builtin/ARGF
-_builtin/ArgumentError
+_builtin/ArgumentError          date
 _builtin/Array
 _builtin/Bignum
 _builtin/Binding
@@ -12,7 +12,7 @@ _builtin/Comparable             aamine
 _builtin/Continuation
 _builtin/Data
 _builtin/Dir                    date            converted
-_builtin/ENV                    date
+_builtin/ENV                    date            converted
 _builtin/EOFError               date            converted
 _builtin/Enumerable             aamine
 _builtin/Errno
@@ -24,29 +24,29 @@ _builtin/File__Constants        date
 _builtin/File__Stat             date            converted
 _builtin/Fixnum                 date            converted
 _builtin/Float
-_builtin/FloatDomainError
+_builtin/FloatDomainError       date
 _builtin/GC
 _builtin/Hash
 _builtin/IO
-_builtin/IOError
-_builtin/IndexError
+_builtin/IOError                date
+_builtin/IndexError             date
 _builtin/Integer
-_builtin/Interrupt
+_builtin/Interrupt              date
 _builtin/Kernel
-_builtin/KeyError
-_builtin/LoadError
-_builtin/LocalJumpError
+_builtin/KeyError               date
+_builtin/LoadError              date
+_builtin/LocalJumpError         date
 _builtin/Marshal
 _builtin/MatchData
 _builtin/Math
 _builtin/Matrix
 _builtin/Method
 _builtin/Module
-_builtin/NameError
+_builtin/NameError              date
 _builtin/NilClass
-_builtin/NoMemoryError
-_builtin/NoMethodError
-_builtin/NotImplementedError
+_builtin/NoMemoryError          date
+_builtin/NoMethodError          date
+_builtin/NotImplementedError    date
 _builtin/Numeric
 _builtin/Object                 aamine          converted
 _builtin/ObjectSpace
@@ -58,33 +58,33 @@ _builtin/Process__Status
 _builtin/Process__Sys
 _builtin/Process__UID
 _builtin/Range
-_builtin/RangeError
+_builtin/RangeError             date
 _builtin/Regexp
-_builtin/RegexpError
-_builtin/RuntimeError
-_builtin/ScriptError
-_builtin/SecurityError
+_builtin/RegexpError            date
+_builtin/RuntimeError           date
+_builtin/ScriptError            date
+_builtin/SecurityError          date
 _builtin/Signal
-_builtin/SignalException
-_builtin/StandardError
+_builtin/SignalException        date
+_builtin/StandardError          date
 _builtin/String                 aamine          converted
 _builtin/Struct
 _builtin/Symbol
-_builtin/SyntaxError
-_builtin/SystemCallError
-_builtin/SystemExit
-_builtin/SystemStackError
+_builtin/SyntaxError            date
+_builtin/SystemCallError        date
+_builtin/SystemExit             date
+_builtin/SystemStackError       date
 _builtin/Thread
-_builtin/ThreadError
+_builtin/ThreadError            date
 _builtin/ThreadGroup
 _builtin/Time
 _builtin/TrueClass
-_builtin/TypeError
+_builtin/TypeError              date
 _builtin/UnboundMethod
-_builtin/ZeroDivisionError
+_builtin/ZeroDivisionError      date
 _builtin/constants              aamine
 _builtin/enumerator
-_builtin/fatal
+_builtin/fatal                  date
 _builtin/functions              aamine
 _builtin/specialvars            aamine
 
