@@ -1,7 +1,3 @@
-= TypeError
+= class TypeError < StandardError
 
 不正な型を使用したときに発生します。
-
-== スーパークラス:
-
-* ((<StandardError>))

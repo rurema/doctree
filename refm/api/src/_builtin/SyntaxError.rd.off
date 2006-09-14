@@ -1,7 +1,3 @@
-= SyntaxError
+= class SyntaxError < ScriptError
 
 シンタックスエラーがあったときに発生します。
-
-== スーパークラス:
-
-* ((<ScriptError>))

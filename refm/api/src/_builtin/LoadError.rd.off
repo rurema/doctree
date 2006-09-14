@@ -1,7 +1,3 @@
-= LoadError
+= class LoadError < ScriptError
 
-((<組み込み関数/require>)) や ((<組み込み関数/load>)) が失敗したときに発生します。
-
-== スーパークラス:
-
-* ((<ScriptError>))
+[[m:Kernel#require]] や [[m:Kernel#load]] が失敗したときに発生します。

@@ -1,71 +1,78 @@
-= SystemExit
+= class SystemExit < Exception
 
-(({ruby})) を終了させます。((-exitとは少し違いがあります。((<ruby-dev:12785>))-))
+ruby を終了させます。
+#@# exitとは少し違いがあります。[[ruby-dev:12785]]
 
-== スーパークラス:
+== Class Methods
 
-* ((<Exception>))
+#@if (version >= "1.7.0")
+--- new([status], [error_message])
 
-== クラスメソッド:
+SystemExit 例外を生成して返します。
 
---- SystemExit.new([status], [error_message])
+第一引数が整数の場合、引数 status を指定したものとみなされま
+す。このことを除けば、引数の扱いは [[m:Exception#Exception.new]]
+と同じです。
 
-    ((<ruby 1.7 feature>))
+引数 status が指定された場合、終了ステータスとして生成したオ
+ブジェクトの [[m:SystemExit#status]] 属性に設定されます(省略時は
+0 が設定されます)。
 
-    SystemExit 例外を生成して返します。
+例:
 
-    第一引数が整数の場合、引数 ((|status|)) を指定したものとみなされま
-    す。このことを除けば、引数の扱いは ((<Exception/Exception.new>)) 
-    と同じです。
+  e = SystemExit.new(1)
+  p e.status
+  
+  => 1
+#@end
 
-    引数 ((|status|)) が指定された場合、終了ステータスとして生成したオ
-    ブジェクトの ((<SystemExit/status>)) 属性に設定されます(省略時は 
-    0 が設定されます)。
+== Instance Methods
 
-        e = SystemExit.new(1)
-        p e.status
+#@if (version >= "1.7.0")
+--- status
 
-        => 1
+終了ステータスを返します。終了ステータスは [[m:Kernel#exit]] や
+[[m:SystemExit#SystemExit.new]] などで設定されます。
 
-== メソッド:
+例:
 
---- status ((<ruby 1.7 feature>))
+  begin
+    exit(1)
+  rescue SystemExit
+    p $!
+    p $!.status
+  end
+  
+  => #<SystemExit: exit>
+     1
+  
+  begin
+    raise SystemExit.new(1, "bogus exit")
+  rescue SystemExit
+    p $!
+    p $!.status
+  end
+  
+  => #<SystemExit: bogus exit>
+     1
+#@end
 
-    終了ステータスを返します。終了ステータスは ((<組み込み関数/exit>)) や
-    ((<SystemExit/SystemExit.new>)) などで設定されます。
+#@if (version >= "1.8.0")
+--- success?
 
-        begin
-          exit(1)
-        rescue SystemExit
-          p $!
-          p $!.status
-        end
+終了ステータスが正常終了を示すなら true を返します。
 
-        => #<SystemExit: exit>
-           1
+例:
 
-        begin
-          raise SystemExit.new(1, "bogus exit")
-        rescue SystemExit
-          p $!
-          p $!.status
-        end
-
-        => #<SystemExit: bogus exit>
-           1
-
---- success? ((<ruby 1.8 feature>))
-
-    終了ステータスが正常終了を示すなら true を返します。
-
-        begin
-          exit(false)
-        rescue SystemExit
-          p $!
-          p $!.status
-          p $!.success?
-        end
-
-        # => #<SystemExit: exit>
-             1
-             false
+  begin
+    exit(false)
+  rescue SystemExit
+    p $!
+    p $!.status
+    p $!.success?
+  end
+  
+  # => #<SystemExit: exit>
+       1
+       false
+#@end

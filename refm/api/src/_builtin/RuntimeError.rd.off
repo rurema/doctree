@@ -1,8 +1,4 @@
-= RuntimeError
+= class RuntimeError < StandardError
 
-実行時例外です。例外を指定しない ((<組み込み関数/raise>)) の呼び出しはこ
+実行時例外です。例外を指定しない [[m:Kernel#raise]] の呼び出しはこ
 の例外を発生させます。
-
-== スーパークラス:
-
-* ((<StandardError>))

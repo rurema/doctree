@@ -1,49 +1,58 @@
-= NoMethodError
+#@if (version >= "1.7.0")
+= class NoMethodError < NameError
 
-((<ruby 1.7 feature>)):
 定義されていないメソッドの呼び出しが行われたときに発生します。
 
-        self.bar
-        => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
+例:
 
-メソッド呼び出しの形式でなければ ((<NameError>)) 例外が発生します。
+  self.bar
+  => -:1: undefined method `bar' for #<Object:0x401a6c40> (NoMethodError)
 
-        bar
-        => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
+メソッド呼び出しの形式でなければ [[c:NameError]] 例外が発生します。
 
-== スーパークラス:
+例:
 
-* ((<NameError>))
+  bar
+  => -:1: undefined local variable or method `bar' for #<Object:0x401a6c40> (NameError)
 
-== クラスメソッド:
+== Class Methods
 
---- NoMethodError.new(error_message[, name[, args]])  ((<ruby 1.8 feature>))
+#@if (version >= "1.8.0")
+--- new(error_message[, name[, args]])
 
-    例外オブジェクトを生成して返します。
-    ((|args|))は、メソッド呼び出しに使われた引数です。
+例外オブジェクトを生成して返します。
+argsは、メソッド呼び出しに使われた引数です。
 
 
-        nom = NoMethodError.new("message", "foo", [1,2,3])
-        p nom.name
-        p nom.args
+例:
 
-        # => "foo"
-             [1, 2, 3]
+  nom = NoMethodError.new("message", "foo", [1,2,3])
+  p nom.name
+  p nom.args
+  
+  # => "foo"
+  [1, 2, 3]
+#@end
 
-== メソッド:
+== Instance Methods
 
---- args  ((<ruby 1.8 feature>))
+#@if (version >= "1.8.0")
+--- args
 
-    メソッド呼び出しに使われた引数を配列で返します。
+メソッド呼び出しに使われた引数を配列で返します。
 
-        begin
-          foobar(1,2,3)
-        rescue NoMethodError
-          p $!
-          p $!.name
-          p $!.args
-        end
+例:
 
-        # => #<NoMethodError: undefined method `foobar' for main:Object>
-             :foobar
-             [1, 2, 3]
+  begin
+    foobar(1,2,3)
+  rescue NoMethodError
+    p $!
+    p $!.name
+    p $!.args
+  end
+  
+  # => #<NoMethodError: undefined method `foobar' for main:Object>
+       :foobar
+       [1, 2, 3]
+#@end
+#@end

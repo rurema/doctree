@@ -1,20 +1,16 @@
-= SignalException
+= class SignalException < Exception
 
-((<組み込み関数/trap>)) されていないシグナル(((<signal(2)|manual page>)) 
+[[m:Kernel#trap]] されていないシグナル([[man:signal(2)]]
 参照)を受け取ったときに発生します。
 
 実際に発生したシグナル名は、
-((<SignalException#message|Exception/message>)) から
-"(({SIG((|name|))}))"という形で得られます。
+[[m:SignalException#message]] から
+"SIGname"という形で得られます。
 
-# 2001/04/03 00:17 中田
-デフォルトの状態では、以下のシグナルが (({SignalException})) を発生さ
+#@# 2001/04/03 00:17 中田
+デフォルトの状態では、以下のシグナルが SignalException を発生さ
 せます。
 
   SIGHUP, SIGQUIT, SIGALRM, SIGUSR1, SIGUSR2
 
-また、(({SIGINT})) は 例外 ((<Interrupt>)) を発生させます。
-
-== スーパークラス:
-
-* ((<Exception>))
+また、SIGINT は 例外 [[c:Interrupt]] を発生させます。

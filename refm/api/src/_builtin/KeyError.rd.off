@@ -1,11 +1,8 @@
-= KeyError
+#@if (version >= "1.9.0")
+= class KeyError < IndexError
 
-((<ruby 1.9 feature|ruby 1.9 feature/2004-09-22>)):
-((<Hash#fetch|Hash/fetch>)) などで key に対応する value がない場合に発生します。
+[[m:Hash#fetch]] などで key に対応する value がない場合に発生します。
 
-1.8以前は ((<IndexError>)) が発生します。
-互換性のため、((<KeyError>)) は ((<IndexError>)) のサブクラスになっています。
-
-== スーパークラス:
-
-* ((<IndexError>))
+1.8以前は [[c:IndexError]] が発生します。
+互換性のため、[[c:KeyError]] は [[c:IndexError]] のサブクラスになっています。
+#@end
