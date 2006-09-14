@@ -5,9 +5,9 @@ LIBRARY_NAME                    OWNER           STATUS
 _builtin/ARGF
 _builtin/ArgumentError          date            converted
 _builtin/Array
-_builtin/Bignum
-_builtin/Binding
-_builtin/Class
+_builtin/Bignum                 date
+_builtin/Binding                date
+_builtin/Class                  date
 _builtin/Comparable             aamine
 _builtin/Continuation
 _builtin/Data
