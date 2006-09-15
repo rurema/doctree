@@ -456,10 +456,14 @@ privateメソッドを呼び出す必要がある場合は
 
 #@if (version < "1.8.0")
 --- singleton_methods
-#@elsif (version == "1.8.0")
+#@else
+#@if (version == "1.8.0")
 --- singleton_methods(inherited_too = false)
-#@elsif (version >= "1.8.0")
+#@else
+#@if (version >= "1.8.0")
 --- singleton_methods(inherited_too = true)
+#@end
+#@end
 #@end
 
 そのオブジェクトに対して定義されている特異メソッド名
@@ -625,7 +629,7 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 
 オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
 
-== プライベートメソッド:
+== Private Methods
 
 --- initialize
 
