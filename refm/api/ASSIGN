@@ -47,7 +47,7 @@ _builtin/NilClass               sheepman        converted
 _builtin/NoMemoryError          date            converted
 _builtin/NoMethodError          date            converted
 _builtin/NotImplementedError    date            converted
-_builtin/Numeric
+_builtin/Numeric                sheepman
 _builtin/Object                 aamine          converted
 _builtin/ObjectSpace            sheepman
 _builtin/Precision              sheepman
