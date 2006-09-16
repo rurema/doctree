@@ -9,7 +9,7 @@ _builtin/Bignum                 date            converted
 _builtin/Binding                date            converted
 _builtin/Class                  date
 _builtin/Comparable             aamine          converted
-_builtin/Continuation
+_builtin/Continuation           sheepman
 _builtin/Data
 _builtin/Dir                    date            converted
 _builtin/ENV                    date            converted
@@ -47,7 +47,7 @@ _builtin/NilClass               sheepman        converted
 _builtin/NoMemoryError          date            converted
 _builtin/NoMethodError          date            converted
 _builtin/NotImplementedError    date            converted
-_builtin/Numeric                sheepman
+_builtin/Numeric                sheepman        converted
 _builtin/Object                 aamine          converted
 _builtin/ObjectSpace            sheepman
 _builtin/Precision              sheepman
