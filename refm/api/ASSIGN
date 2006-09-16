@@ -10,7 +10,7 @@ _builtin/Binding                date            converted
 _builtin/Class                  date
 _builtin/Comparable             aamine          converted
 _builtin/Continuation           sheepman        converted
-_builtin/Data
+_builtin/Data                   date
 _builtin/Dir                    date            converted
 _builtin/ENV                    date            converted
 _builtin/EOFError               date            converted
@@ -27,7 +27,7 @@ _builtin/Float                  sheepman        converted
 _builtin/FloatDomainError       date            converted
 _builtin/GC                     sheepman        
 _builtin/Hash                   sheepman        converted
-_builtin/IO                    
+_builtin/IO                     date
 _builtin/IOError                date            converted
 _builtin/IndexError             date            converted
 _builtin/Integer                sheepman 
@@ -41,7 +41,7 @@ _builtin/MatchData              sheepman        converted
 _builtin/Math                   sheepman
 _builtin/Matrix                 sheepman        converted
 _builtin/Method                 sheepman        converted
-_builtin/Module
+_builtin/Module                 date
 _builtin/NameError              date            converted
 _builtin/NilClass               sheepman        converted
 _builtin/NoMemoryError          date            converted
@@ -64,12 +64,12 @@ _builtin/RegexpError            date            converted
 _builtin/RuntimeError           date            converted
 _builtin/ScriptError            date            converted
 _builtin/SecurityError          date            converted
-_builtin/Signal
+_builtin/Signal                 date
 _builtin/SignalException        date            converted
 _builtin/StandardError          date            converted
 _builtin/String                 aamine          converted
 _builtin/Struct
-_builtin/Symbol
+_builtin/Symbol                 date
 _builtin/SyntaxError            date            converted
 _builtin/SystemCallError        date            converted
 _builtin/SystemExit             date            converted
@@ -77,8 +77,8 @@ _builtin/SystemStackError       date            converted
 _builtin/Thread
 _builtin/ThreadError            date            converted
 _builtin/ThreadGroup
-_builtin/Time
-_builtin/TrueClass
+_builtin/Time                   date
+_builtin/TrueClass              date
 _builtin/TypeError              date            converted
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      date            converted
