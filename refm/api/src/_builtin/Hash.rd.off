@@ -361,6 +361,7 @@ nil を、デフォルト値を持つならその値を返します(このとき、
   h1.each {|v| p v}       # =>
   p h1.to_a               # => []
 
+#@if (version >= "1.7.0")
   # ruby 1.7 feature
   h2 = Hash.new {|arg| arg}
   p h2.empty?             # => true
@@ -369,6 +370,7 @@ nil を、デフォルト値を持つならその値を返します(このとき、
   p h2.default            # => [{}, nil]
   h2.each {|v| p v}       # =>
   p h2.to_a               # => []
+#@end
 
 --- to_a
 
