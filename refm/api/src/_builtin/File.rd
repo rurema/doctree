@@ -157,7 +157,7 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
 れています)を論理和で指定することでパターンマッチの動作を変更する
 ことができます。flags のデフォルト値は0(フラグ指定なし)です。
 
---- FNM_NOESCAPE
+FNM_NOESCAPE
 エスケープ文字 `\' を普通の文字とみなします。
 
   # デフォルトでは \ を伴う任意の文字はその文字にマッチしますが、
@@ -175,7 +175,7 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
   p File.fnmatch('\\', '\\')                      # => true
   p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
 
---- FNM_PATHNAME
+FNM_PATHNAME
 ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
 シェルのパターンマッチにはこのフラグが使用されています。
 
@@ -183,12 +183,12 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
   p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
   p File.fnmatch('[/]', '/', File::FNM_PATHNAME) # => false
 
---- FNM_CASEFOLD
+FNM_CASEFOLD
 アルファベットの大小文字を区別せずにパターンマッチを行います。
 
   p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
 
---- FNM_DOTMATCH
+FNM_DOTMATCH
 ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
 
   p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
@@ -452,35 +452,31 @@ nil または -1 を指定することでオーナーやグループを現在
 定されていて、ブロックされそうな場合には false を返します。
 有効な operation は以下の通りです。
 
---- LOCK_SH
+LOCK_SH
 
 共有ロック。複数のプロセスが同時にロックを共有できます。
-
 システムによってはロック対象のファイルは読み込みモード
 ("r", "r+" など)でオープンされている必要があります。そのよ
 うなシステムでは読み込み可能でないファイルに対するロックは例外
 [[unknown:Errno::EBADF|Errno::EXXX]] が発生するかもしれません。
 
---- LOCK_EX
+LOCK_EX
 
 排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
-
 システムによってはロック対象のファイルは書き込みモード
 ("w", "r+" など)でオープンされている必要があります。そのよ
 うなシステムでは書き込み可能でないファイルに対するロックは例外
 [[unknown:Errno::EBADF|Errno::EXXX]] が発生するかもしれません。
 
---- LOCK_UN
+LOCK_UN
 
 アンロック。
-
 この明示的なアンロック以外に、Rubyインタプリタの終了
 (プロセスの終了)によっても自動的にロック状態は解除されます。
 
---- LOCK_NB
+LOCK_NB
 
 ノンブロックモード。
-
 File::LOCK_SH | File::LOCK_NB のように他の指定と or することで指
 定します。この指定がない場合、ブロックされる条件での flock
 の呼び出しはロックが解除されるまでブロックされます。
