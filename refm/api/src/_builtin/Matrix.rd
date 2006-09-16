@@ -1,5 +1,5 @@
 = class Matrix < Object
-[2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#@#[2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 (数[[c:Numeric]]を要素とする)行列を扱うクラス
 
@@ -166,11 +166,10 @@ n次の零行列を生成する。
 
 --- **(n)
 --- power(n)
-
-スカラーnに対するべき乗を返す。
-
 --- **(m)
 --- power(m)
+
+スカラーnに対するべき乗を返す。
 
 行列mに対するべき乗を返す。
 
