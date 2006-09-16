@@ -23,14 +23,14 @@ _builtin/FileTest               date
 _builtin/File__Constants        date            converted
 _builtin/File__Stat             date            converted
 _builtin/Fixnum                 date            converted
-_builtin/Float
+_builtin/Float                  sheepman
 _builtin/FloatDomainError       date            converted
 _builtin/GC                     sheepman        
 _builtin/Hash                   sheepman        converted
 _builtin/IO
 _builtin/IOError                date            converted
 _builtin/IndexError             date            converted
-_builtin/Integer
+_builtin/Integer                sheepman 
 _builtin/Interrupt              date            converted
 _builtin/Kernel                 sheepman        converted
 _builtin/KeyError               date            converted
