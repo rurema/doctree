@@ -1,48 +1,45 @@
-= Continuation
+= class Continuation < Object
 
-((<組み込み関数>)) (({((<組み込み関数/callcc>)) { |cont| ... }})) の呼び出し
-は、直前の状態(ローカル変数の定義、スタックフレーム)を ((|cont|)) に記憶
-してブロックを実行します。((|cont|)) は、Continuation クラスのインスタ
-ンスで、((<Continuation#call|Continuation/call>)) メソッドを実行するこ
+[[unknown:組み込み関数]] [[m:Kernel#callcc]] { |cont| ... } の呼び出し
+は、直前の状態(ローカル変数の定義、スタックフレーム)を cont に記憶
+してブロックを実行します。cont は、Continuation クラスのインスタ
+ンスで、[[m:Continuation#call]] メソッドを実行するこ
 とでいつでも記憶した状態を継続することができます。
 
 C 言語の setjmp()/longjmp() がわかる人は
-        setjmp() == callcc {|c| }
-        longjmp() == c.call
+  setjmp() == callcc {|c| }
+  longjmp() == c.call
 と考えれば、わかりやすいかも知れません(ただし、callcc はスタックが深く
 なる方向にもジャンプ出来るという違いがあります)
 
-callcc() は、ブロックの戻り値を返しますが、Continuation#call(((|args|)))
-が呼び出されたときは ((|args|)) を返します。
+callcc() は、ブロックの戻り値を返しますが、Continuation#call(args)
+が呼び出されたときは args を返します。
 
-: 例：((-よりコアな例は ((<ruby-list:34943>)) を参照のこと-))
+: 例：((-よりコアな例は [[unknown:ruby-list:34943]] を参照のこと-))
+
   以下は、Continuationによる無限ループの例
-
-        def LOOP
-          c = nil
-          yield callcc {|c| true}
-          c.call(false)
-        end
-
-        LOOP {|v| p v}
-
-        => true
-           false
-           false
-           false
-             :
-             :
+  
+  def LOOP
+    c = nil
+    yield callcc {|c| true}
+    c.call(false)
+  end
+  
+  LOOP {|v| p v}
+  
+  => true
+     false
+     false
+     false
+       :
+       :
 
 callcc とは、call-with-current-continuation の略です。
 
-== スーパークラス:
+== Instance Methods
 
-* ((<Object>))
-
-== メソッド:
-
---- self[ret[,ret2[,...]]]      ((<ruby 1.8 feature>))
+--- [](ret[,ret2[,...]])
 --- call(ret[,ret2[,...]])
 
-    (({self})) が記憶した状態を継続します。引数は そのまま 
-    ((<組み込み関数/callcc>)) の戻り値になります。
+self が記憶した状態を継続します。引数は そのまま
+[[m:Kernel#callcc]] の戻り値になります。
