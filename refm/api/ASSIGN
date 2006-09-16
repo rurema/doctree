@@ -39,8 +39,8 @@ _builtin/LocalJumpError         date            converted
 _builtin/Marshal                sheepman
 _builtin/MatchData              sheepman        converted
 _builtin/Math                   sheepman
-_builtin/Matrix                 sheepman
-_builtin/Method                 sheepman
+_builtin/Matrix                 sheepman        converted
+_builtin/Method                 sheepman        converted
 _builtin/Module
 _builtin/NameError              date            converted
 _builtin/NilClass               sheepman        converted
