@@ -18,7 +18,7 @@ _builtin/Enumerable             aamine          converted
 _builtin/Errno
 _builtin/Exception              date            converted
 _builtin/FalseClass             date            converted
-_builtin/File                   sheepman
+_builtin/File                   sheepman        converted
 _builtin/FileTest               date
 _builtin/File__Constants        date            converted
 _builtin/File__Stat             date            converted
@@ -30,7 +30,7 @@ _builtin/Hash                   sheepman        converted
 _builtin/IO                     date
 _builtin/IOError                date            converted
 _builtin/IndexError             date            converted
-_builtin/Integer                sheepman 
+_builtin/Integer                sheepman        converted
 _builtin/Interrupt              date            converted
 _builtin/Kernel                 sheepman        converted
 _builtin/KeyError               date            converted
@@ -74,7 +74,7 @@ _builtin/SyntaxError            date            converted
 _builtin/SystemCallError        date            converted
 _builtin/SystemExit             date            converted
 _builtin/SystemStackError       date            converted
-_builtin/Thread
+_builtin/Thread                 sheepman 
 _builtin/ThreadError            date            converted
 _builtin/ThreadGroup
 _builtin/Time                   date
