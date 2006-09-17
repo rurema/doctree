@@ -64,12 +64,12 @@ _builtin/RegexpError            date            converted
 _builtin/RuntimeError           date            converted
 _builtin/ScriptError            date            converted
 _builtin/SecurityError          date            converted
-_builtin/Signal                 date
+_builtin/Signal                 date            converted
 _builtin/SignalException        date            converted
 _builtin/StandardError          date            converted
 _builtin/String                 aamine          converted
 _builtin/Struct
-_builtin/Symbol                 date
+_builtin/Symbol                 date            converted
 _builtin/SyntaxError            date            converted
 _builtin/SystemCallError        date            converted
 _builtin/SystemExit             date            converted
@@ -77,8 +77,8 @@ _builtin/SystemStackError       date            converted
 _builtin/Thread                 sheepman        converted
 _builtin/ThreadError            date            converted
 _builtin/ThreadGroup
-_builtin/Time                   date
-_builtin/TrueClass              date
+_builtin/Time                   date            converted
+_builtin/TrueClass              date            converted
 _builtin/TypeError              date            converted
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      date            converted
