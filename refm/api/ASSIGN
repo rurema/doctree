@@ -7,7 +7,7 @@ _builtin/ArgumentError          date            converted
 _builtin/Array                  sheepman        converted
 _builtin/Bignum                 date            converted
 _builtin/Binding                date            converted
-_builtin/Class                  date
+_builtin/Class                  date            converted
 _builtin/Comparable             aamine          converted
 _builtin/Continuation           sheepman        converted
 _builtin/Data                   date            converted
@@ -18,7 +18,7 @@ _builtin/Enumerable             aamine          converted
 _builtin/Exception              date            converted
 _builtin/FalseClass             date            converted
 _builtin/File                   sheepman        converted
-_builtin/FileTest               date
+_builtin/FileTest               date            converted
 _builtin/File__Constants        date            converted
 _builtin/File__Stat             date            converted
 _builtin/Fixnum                 date            converted
