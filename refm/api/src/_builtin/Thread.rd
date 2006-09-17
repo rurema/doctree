@@ -127,11 +127,11 @@ false になります。
 
 カレントスレッドを返します。
 
-((-あらい 2001-10-14:
-p (Thread.new { Thread.exit }.value)
-は、false を表示します。Thread.exit や Thread#kill ではス
-レッドの終了結果を設定していないためです
-[[unknown:ruby-dev:14904]]-))
+#@#((-あらい 2001-10-14:
+#@#p (Thread.new { Thread.exit }.value)
+#@#は、false を表示します。Thread.exit や Thread#kill ではス
+#@#レッドの終了結果を設定していないためです
+#@#[[unknown:ruby-dev:14904]]-))
 
 カレントスレッドが唯一のスレッドであるなら、[[m:Kernel#exit]](0)
 により終了します。
