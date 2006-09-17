@@ -1,80 +1,90 @@
-= Symbol
+= class Symbol < Object
 
 シンボルを表すクラス。シンボルは任意の文字列と一対一に対応するオブジェ
 クトです。Ruby スクリプトからは
 
-  * (({:symbol}))
-  * (({'symbol'.intern}))
+  * :symbol
+  * 'symbol'.intern
 
-のようにして得られます。リテラルでシンボルを表す場合、`(({:}))' の後に
-は識別子、メソッド名(`(({!}))',`(({?}))' などの接尾辞を含む)、変数名
-(`(({$}))'などの接頭辞を含む)、再定義できる演算子のいずれかに適合する
+のようにして得られます。リテラルでシンボルを表す場合、`:' の後に
+は識別子、メソッド名(`!',`?' などの接尾辞を含む)、変数名
+(`$'などの接頭辞を含む)、再定義できる演算子のいずれかに適合する
 ものしか書くことはできません(そうでなければ文法エラーになります)。
 
-((<ruby 1.7 feature>)):
+#@if (version >= "1.7.0")
+例:
 
-        p :"foo#{"bar"}"
-          => :foobar
-        p :'foo#{"bar"}'
-          => :"foo\#{\"bar\"}"
-        p %s{foo#{"bar"}}
-          => :"foo\#{\"bar\"}"
+  p :"foo#{"bar"}"
+    => :foobar
+  p :'foo#{"bar"}'
+    => :"foo\#{\"bar\"}"
+  p %s{foo#{"bar"}}
+    => :"foo\#{\"bar\"}"
+#@end
 
-== スーパークラス:
+== Class Methods
 
-* ((<Object>))
+#@if (version >= "1.7.0")
+--- all_symbols
 
-== クラスメソッド:
+定義済みの全てのシンボルオブジェクトの配列を返します。
 
---- Symbol.all_symbols
+例:
 
-    ((<ruby 1.7 feature>))
+  p Symbol.all_symbols  # => [:RUBY_PLATFORM, :RUBY_VERSION, ...]
 
-    定義済みの全てのシンボルオブジェクトの配列を返します。
+シンボルの生成はコンパイル時に行われるので以下のようにしても結果に
+差はありません。
 
-        p Symbol.all_symbols  # => [:RUBY_PLATFORM, :RUBY_VERSION, ...]
+  a = Symbol.all_symbols
+  :foo
+  b = Symbol.all_symbols
+  p b - a
+  # => []
+#@end
 
-    シンボルの生成はコンパイル時に行われるので以下のようにしても結果に
-    差はありません。
+== Instance Methods
 
-        a = Symbol.all_symbols
-        :foo
-        b = Symbol.all_symbols
-        p b - a
-        # => []
-
-== メソッド:
-
+#@if (version >= "1.7.0")
 --- to_sym
 
-    ((<ruby 1.7 feature>)):
-    (({self})) を返します。
+self を返します。
+#@end
 
 --- id2name()
 --- to_s
 
-    シンボルに対応する文字列を返します。
+シンボルに対応する文字列を返します。
 
-    逆に、文字列に対応するシンボルを得るには 
-    ((<String#intern|String/intern>)) を使います。
+逆に、文字列に対応するシンボルを得るには
+[[m:String#intern]] を使います。
 
-         p :foo.id2name.intern == :foo
-         => true
+例:
+
+  p :foo.id2name.intern == :foo
+  => true
 
 --- to_i
 
-    シンボルに対応する整数を返します。
+シンボルに対応する整数を返します。
 
-    逆にこの整数から対応するシンボルを得るには 
-    ((<Fixnum#id2name|Fixnum/id2name>)) を使って一旦文字列を得る必要が
-    あります。(((<ruby 1.7 feature>)): 直接シンボルを得るには 
-    ((<Fixnum#to_sym|Fixnum/to_sym>)) が使えます)
+逆にこの整数から対応するシンボルを得るには
+[[m:Fixnum#id2name]] を使って一旦文字列を得る必要が
+あります。
+#@if (version >= "1.7.0")
+直接シンボルを得るには
+[[m:Fixnum#to_sym]] が使えます)
+#@end
 
-         id = :foo.to_i
-         p id                  # => 8881
-         p id.id2name.intern   # => :foo
-         p id.to_sym           # => :foo  (version 1.7)
+例:
 
-    Rubyの実装では予約語、変数名、メソッド名などをこの整数で管理してい
-    ます。オブジェクトに対応する整数(((<Object#__id__|Object/__id__>)) で得ら
-    れます)と Symbol に対応する整数は別のものです。
+   id = :foo.to_i
+   p id                  # => 8881
+   p id.id2name.intern   # => :foo
+#@if (version >= "1.7.0")
+   p id.to_sym           # => :foo  (version 1.7)
+#@end
+
+Rubyの実装では予約語、変数名、メソッド名などをこの整数で管理してい
+ます。オブジェクトに対応する整数([[m:Object#__id__]] で得ら
+れます)と Symbol に対応する整数は別のものです。
