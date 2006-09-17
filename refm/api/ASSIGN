@@ -4,7 +4,7 @@ LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 _builtin/ARGF
 _builtin/ArgumentError          date            converted
-_builtin/Array                  sheepman
+_builtin/Array                  sheepman        converted
 _builtin/Bignum                 date            converted
 _builtin/Binding                date            converted
 _builtin/Class                  date
