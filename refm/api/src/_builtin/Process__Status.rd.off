@@ -1,111 +1,11 @@
-= Process::Status
+#@if (version >= "1.7.0")
+= module Process::Status
 
 ((<ruby 1.7 feature>))
-
-((<Process/Process.wait>)) などで生成されるオブジェクト。プロセスの終
+[[m:Process#Process.wait]] などで生成されるオブジェクト。プロセスの終
 了ステータスを表現します。
 
-== メソッド
-
---- self == other
-
-    同じステータスの場合に真を返します。
-
-    ((|other|)) が数値の場合、(({self.to_i})) との比較が行われます。こ
-    れは後方互換性のためです。
-
---- self & other
-
-    (({to_i & other})) と同じです。
-
-    このメソッドは後方互換性のためにあります。
-
---- pid
-
-    終了したプロセスのプロセス ID を返します。
-
---- to_i
-
-    C 言語での終了ステータス表現の整数を返します。
-
-    多くのシステムの実装では、この値の上位 8 bit に ((<exit(2)|manual page>)) 
-    に渡した終了ステータスが、下位 8 bit にシグナル等で終了した等の情
-    報が入っています。
-
---- to_int
-
-    (({to_i})) と同じです。このメソッドにより (({$?})) が ((<Fixnum>)) 
-    として扱われるようになります(暗黙の型変換)。これは後方互換性のため
-    です。
-
-      fork { exit 1 }
-      Process.wait
-      p $? # => 256
-
---- to_s
-
-    (({to_i.to_s})) と同じです。
-
---- exited?
-
-    プロセスが ((<exit(2)|manual page>)) により自分で終了した(他のプロ
-    セスに止められたのではない)場合、真を返します。
-
---- exitstatus
-
-    (({exited?})) が真の場合プロセスが返した終了ステータスの整数を、そ
-    うでない場合は (({nil})) を返します。
-
---- inspect     ((<ruby 1.8 feature>))
-
-    プロセスの状態を以下のフォーマットで出力します。
-
-        正常終了のとき
-
-        #<Process::Status: pid=18262,exited(nnn)>
-
-        シグナルによる停止のとき
-
-        #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
-
-        シグナルによる終了のとき
-
-        #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
-
-        コアダンプしたとき(このステータスの表示はシステムに依存します)
-
-        #<Process::Status: pid=18262,coredumped>
-
-
---- stopped?
-
-    プロセスが現在停止(終了ではない)している場合に真を返します。
-    (({Process.waitpid})) に (({Process::WUNTRACED})) フラグを設定した
-    場合にだけ真になりえます。
-
---- stopsig
-
-    (({stopped?})) が真の場合そのシグナルの番号を、そうでない場合は 
-    (({nil})) を返します。
-
---- signaled?
-
-    プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
-    を返します。
-
---- termsig
-
-    (({signaled?})) が真の場合プロセスを終了させたシグナル番号を、
-    そうでない場合は (({nil})) を返します。
-
---- coredump?
-
-    終了時にコアダンプしていたら真を返します。
-
-    (このメソッドはシステムに依存します。サポートしないプラットフォー
-    ムでは常に false を返します)
-
-== 使用例
+使用例
 
 wait を使用した例
 
@@ -170,3 +70,106 @@ SIGCHLD を trap する例
      interrupted by signal 17 at -:30:in `sleep'
         child 12964 exited normaly. status=0
      done
+
+
+== Instance Methods
+
+--- ==(other)
+
+同じステータスの場合に真を返します。
+
+other が数値の場合、self.to_i との比較が行われます。こ
+れは後方互換性のためです。
+
+--- &(other)
+
+to_i & other と同じです。
+
+このメソッドは後方互換性のためにあります。
+
+--- pid
+
+終了したプロセスのプロセス ID を返します。
+
+--- to_i
+
+C 言語での終了ステータス表現の整数を返します。
+
+多くのシステムの実装では、この値の上位 8 bit に [[man:exit(2)]]
+に渡した終了ステータスが、下位 8 bit にシグナル等で終了した等の情
+報が入っています。
+
+--- to_int
+
+to_i と同じです。このメソッドにより $? が [[c:Fixnum]]
+として扱われるようになります(暗黙の型変換)。これは後方互換性のため
+です。
+
+  fork { exit 1 }
+  Process.wait
+  p $? # => 256
+
+--- to_s
+
+to_i.to_s と同じです。
+
+--- exited?
+
+プロセスが [[man:exit(2)]] により自分で終了した(他のプロ
+セスに止められたのではない)場合、真を返します。
+
+--- exitstatus
+
+exited? が真の場合プロセスが返した終了ステータスの整数を、そ
+うでない場合は nil を返します。
+
+--- inspect
+
+プロセスの状態を以下のフォーマットで出力します。
+
+    正常終了のとき
+
+    #<Process::Status: pid=18262,exited(nnn)>
+
+    シグナルによる停止のとき
+
+    #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
+
+    シグナルによる終了のとき
+
+    #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
+
+    コアダンプしたとき(このステータスの表示はシステムに依存します)
+
+    #<Process::Status: pid=18262,coredumped>
+
+
+--- stopped?
+
+プロセスが現在停止(終了ではない)している場合に真を返します。
+Process.waitpid に Process::WUNTRACED フラグを設定した
+場合にだけ真になりえます。
+
+--- stopsig
+
+stopped? が真の場合そのシグナルの番号を、そうでない場合は
+nil を返します。
+
+--- signaled?
+
+プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
+を返します。
+
+--- termsig
+
+signaled? が真の場合プロセスを終了させたシグナル番号を、
+そうでない場合は nil を返します。
+
+--- coredump?
+
+終了時にコアダンプしていたら真を返します。
+
+(このメソッドはシステムに依存します。サポートしないプラットフォー
+ムでは常に false を返します)
+
+#@end
