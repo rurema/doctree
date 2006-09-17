@@ -62,6 +62,8 @@
 いくつ書いても構いません。
 
 続いてクラス自身のドキュメントを書きます。省略可能です。
+クラスのドキュメントでヘッドラインを使いたいときは
+レベル 3 (===) 以上にしてください。
 
 最後に「レベル 2 ブロック」を任意の回数だけ書きます。
 「レベル 2 ブロック」はメソッドのグループです。
@@ -80,13 +82,24 @@
 
 レベル 2 ヘッダ (「==」) には以下の種類があります。
 
-  * Singleton Methods
-  * Private Singleton Methods
-  * Instance Methods
-  * Private Instance Methods
-  * Module Functions
-  * Constants
-  * Special Variables
+: Singleton Methods または Class Methods
+    public な特異メソッド
+: Private Singleton Methods
+    private な特異メソッド   
+: Protected Singleton Methods
+    protected な特異メソッド
+: Instance Methods
+    public なインスタンスメソッド
+: Private Instance Methods
+    private なインスタンスメソッド
+: Protected Instance Methods
+    protected なインスタンスメソッド
+: Module Functions
+    モジュール関数
+: Constants
+     定数
+: Special Variables
+     特殊定数 (Kernel 限定)
 
 
 == メソッドエントリの文法
@@ -106,6 +119,9 @@
 旧リファレンスマニュアルでは「self + other」や
 「self[key] = value」のような書きかたも許容されていましたが、
 新マニュアルでは認められません。
+
+メソッドのドキュメント内でヘッドラインを使いたいときは
+レベル 3 (===) 以上を使ってください。
 
 
 == 通常のテキストの文法
@@ -165,16 +181,18 @@
 
 以下のようなハイパーリンク記法が使えます。
 
-  * [[c:String]]       クラス String にリンク
-  * [[m:String.new]]   メソッド String.new にリンク
-  * [[m:String#dump]]  メソッド String#dump にリンク
-  * [[m:String#[] ]]   メソッド String#[] にリンク
-  * [[m:$~]]           特殊変数 $~ にリンク
-  * [[lib:jcode]]      ライブラリ jcode にリンク
-  * [[man:tr(1)]]      man ページ tr(1) にリンク
+  * [[c:String]]          クラス String にリンク
+  * [[c:File::Stat]]      クラス File::Stat にリンク
+  * [[m:String.new]]      メソッド String.new にリンク
+  * [[m:String#dump]]     メソッド String#dump にリンク
+  * [[m:String#[] ]]      メソッド String#[] にリンク (空白必須)
+  * [[m:File::SEPARATOR]] 定数 File::SEPARATOR にリンク
+  * [[m:$~]]              特殊変数 $~ にリンク
+  * [[lib:jcode]]         ライブラリ jcode にリンク
+  * [[man:tr(1)]]         man ページ tr(1) にリンク
   * [[url:http://i.loveruby.net]]  URL http://i.loveruby.net にリンク
 
-=== 削除された項目
+=== 既存リファレンスから削除された機能
 
 RD の (({...})), ((|...|)) はサポートしません。
 bc-convert.rb を使うと自動的にすべて削除されます。
