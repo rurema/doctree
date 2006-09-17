@@ -2,7 +2,7 @@ status: (none) -> converted -> syntax ok -> verified
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-_builtin/ARGF
+_builtin/ARGF                   aamine
 _builtin/ArgumentError          date            converted
 _builtin/Array                  sheepman        converted
 _builtin/Bignum                 date            converted
@@ -95,11 +95,11 @@ Win32API
 abbrev
 base64
 benchmark
-bigdecimal
-bigdecimal/jacobian
-bigdecimal/ludcmp
-bigdecimal/newton
-bigdecimal/utils
+bigdecimal                      aamine          converted
+bigdecimal/jacobian             aamine          converted
+bigdecimal/ludcmp               aamine          converted
+bigdecimal/newton               aamine          converted
+bigdecimal/utils                aamine          converted
 cgi
 cgi-lib
 cgi/session
