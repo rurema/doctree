@@ -98,12 +98,14 @@ filename の一番後ろのスラッシュより前を文
 
 [[m:File#File.basename]], [[m:File#File.extname]] も参照。
 
+#@if (version >= "1.8.0")
 ((<ruby 1.8 feature>))
 
 File.dirname の動作は [[unknown:SUSv3|URL:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
 
     p File.dirname("foo/bar/")      # => "foo"  以前は、"foo/bar"
     p File.dirname("foo//bar")      # => "foo"  以前は、"foo/"
+#@end
 
 --- expand_path(path[, default_dir])
 
