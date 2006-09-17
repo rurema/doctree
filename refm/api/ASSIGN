@@ -50,7 +50,7 @@ _builtin/NotImplementedError    date            converted
 _builtin/Numeric                sheepman        converted
 _builtin/Object                 aamine          converted
 _builtin/ObjectSpace            sheepman        converted
-_builtin/Precision              sheepman
+_builtin/Precision              sheepman        converted
 _builtin/Proc                   sheepman        converted
 _builtin/Process                sheepman
 _builtin/Process__GID           sheepman
