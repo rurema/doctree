@@ -68,7 +68,7 @@ _builtin/Signal                 date            converted
 _builtin/SignalException        date            converted
 _builtin/StandardError          date            converted
 _builtin/String                 aamine          converted
-_builtin/Struct
+_builtin/Struct                 aamine
 _builtin/Symbol                 date            converted
 _builtin/SyntaxError            date            converted
 _builtin/SystemCallError        date            converted
