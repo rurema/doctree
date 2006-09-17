@@ -41,7 +41,7 @@ _builtin/MatchData              sheepman        converted
 _builtin/Math                   sheepman        converted
 _builtin/Matrix                 sheepman        converted
 _builtin/Method                 sheepman        converted
-_builtin/Module                 date
+_builtin/Module                 date            converted
 _builtin/NameError              date            converted
 _builtin/NilClass               sheepman        converted
 _builtin/NoMemoryError          date            converted
