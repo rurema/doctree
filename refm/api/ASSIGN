@@ -10,7 +10,7 @@ _builtin/Binding                date            converted
 _builtin/Class                  date
 _builtin/Comparable             aamine          converted
 _builtin/Continuation           sheepman        converted
-_builtin/Data                   date
+_builtin/Data                   date            converted
 _builtin/Dir                    date            converted
 _builtin/ENV                    date            converted
 _builtin/EOFError               date            converted
@@ -27,7 +27,7 @@ _builtin/Float                  sheepman        converted
 _builtin/FloatDomainError       date            converted
 _builtin/GC                     sheepman        converted
 _builtin/Hash                   sheepman        converted
-_builtin/IO                     date
+_builtin/IO                     date            converted
 _builtin/IOError                date            converted
 _builtin/IndexError             date            converted
 _builtin/Integer                sheepman        converted
