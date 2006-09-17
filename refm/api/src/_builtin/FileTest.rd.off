@@ -1,128 +1,132 @@
-= FileTest
+= module FileTest
 
-(({FileTest})) はファイルの検査関数を集めたモジュールです。このモジュー
+FileTest はファイルの検査関数を集めたモジュールです。このモジュー
 ルはインクルードしても使えます。
 
-== モジュール関数:
+== Module Functions
 
---- FileTest.blockdev?(filename)
+--- blockdev?(filename)
 
-    ((|filename|)) がブロックスペシャルファイルである時、真を返します。
+filename がブロックスペシャルファイルである時、真を返します。
 
---- FileTest.chardev?(filename)
+--- chardev?(filename)
 
-    ((|filename|)) がキャラクタスペシャルファイルの時、真を返します。
+filename がキャラクタスペシャルファイルの時、真を返します。
 
---- FileTest.executable?(filename)
+--- executable?(filename)
 
-    ((|filename|)) が実効ユーザ/グループ ID で実行できる時、真を返しま
-    す。
+filename が実効ユーザ/グループ ID で実行できる時、真を返しま
+す。
 
---- FileTest.executable_real?(filename)
+--- executable_real?(filename)
 
-    ((|filename|)) が実ユーザ/グループ ID で実行できる時、真を返します。
+filename が実ユーザ/グループ ID で実行できる時、真を返します。
 
---- FileTest.exist?(filename)
+--- exist?(filename)
 
-    ((|filename|)) が存在する時、真を返します。
+filename が存在する時、真を返します。
 
---- FileTest.grpowned?(filename)
+--- grpowned?(filename)
 
-    ((|filename|)) のグループ ID が実行グループ ID と等しい時、真を返
-    します。
+filename のグループ ID が実行グループ ID と等しい時、真を返
+します。
 
---- FileTest.directory?(filename)
+--- directory?(filename)
 
-    ((|filename|)) がディレクトリの時、真を返します。
+filename がディレクトリの時、真を返します。
 
---- FileTest.file?(filename)
+--- file?(filename)
 
-    ((|filaname|)) が通常ファイルである時、真を返します。
+filaname が通常ファイルである時、真を返します。
 
---- FileTest.identical?(filename1, filename2)    ((<ruby 1.8.4 feature>))
+--- identical?(filename1, filename2)
 
-    ((|filaname1|)) と ((|filename2|)) が同じファイルを指している時、真を返します。
-    (ruby 1.8.3 以前では(({((<組み込み関数/test>))(?-, filename1, filename2)}))を使ってください。)
+filaname1 と filename2 が同じファイルを指している時、真を返します。
+#@if (version <= "1.8.3")
+(ruby 1.8.3 以前では[[m:Kernel#test]](?-, filename1, filename2)を使ってください。)
+#@end
 
-       open("a", "w") {}
-       p File.identical?("a", "a")      #=> true
-       p File.identical?("a", "./a")    #=> true
-       File.link("a", "b")
-       p File.identical?("a", "b")      #=> true
-       File.symlink("a", "c")
-       p File.identical?("a", "c")      #=> true
-       open("d", "w") {}
-       p File.identical?("a", "d")      #=> false
+例:
 
---- FileTest.pipe?(filename)
+  open("a", "w") {}
+  p File.identical?("a", "a")      #=> true
+  p File.identical?("a", "./a")    #=> true
+  File.link("a", "b")
+  p File.identical?("a", "b")      #=> true
+  File.symlink("a", "c")
+  p File.identical?("a", "c")      #=> true
+  open("d", "w") {}
+  p File.identical?("a", "d")      #=> false
 
-    ((|filename|)) が名前つきパイプ(FIFO)である時、真を返します。
+--- pipe?(filename)
 
---- FileTest.socket?(filename)
+filename が名前つきパイプ(FIFO)である時、真を返します。
 
-    ((|filename|)) がソケットである時、真を返します。
+--- socket?(filename)
 
---- FileTest.owned?(filename)
+filename がソケットである時、真を返します。
 
-    ((|filename|)) が自分のものである時に真を返します。
+--- owned?(filename)
 
---- FileTest.readable?(filename)
+filename が自分のものである時に真を返します。
 
-    ((|filename|)) を読み込み可能な時に真を返します。
+--- readable?(filename)
 
---- FileTest.readable_real?(filename)
+filename を読み込み可能な時に真を返します。
 
-    ((|filename|)) が実ユーザ/実グループによって読み込み可能な時に真を
-    返します。
+--- readable_real?(filename)
 
---- FileTest.setuid?(filename)
+filename が実ユーザ/実グループによって読み込み可能な時に真を
+返します。
 
-    ((|filename|)) が ((<setuid(2)|manual page>)) されている時に真を返
-    します。
+--- setuid?(filename)
 
---- FileTest.setgid?(filename)
+filename が [[man:setuid(2)]] されている時に真を返
+します。
 
-    ((|filename|)) が ((<setgid(2)|manual page>)) されている時に真を返
-    します。
+--- setgid?(filename)
 
---- FileTest.size(filename)
+filename が [[man:setgid(2)]] されている時に真を返
+します。
 
-    ((|filename|)) のサイズを返します。((|filename|)) が存在しなければ
-    例外 ((<Errno::EXXX>))(おそらく (({Errno::ENOENT})))が発生します。
+--- size(filename)
 
-    ((<FileTest/FileTest.size?>)), ((<FileTest/FileTest.zero?>)) も参
-    照してください。
+filename のサイズを返します。filename が存在しなければ
+例外 [[c:Errno::EXXX]](おそらく Errno::ENOENT)が発生します。
 
---- FileTest.size?(filename)
+[[m:FileTest#FileTest.size?]], [[m:FileTest#FileTest.zero?]] も参
+照してください。
 
-    ((|filename|)) のサイズを返します。((|filename|)) が存在しない時や 
-    ((|filename|)) のサイズが0の時には (({nil})) を返します。
+--- size?(filename)
 
-    ((<FileTest/FileTest.size>)), ((<FileTest/FileTest.zero?>)) も参照
-    してください。
+filename のサイズを返します。filename が存在しない時や
+filename のサイズが0の時には nil を返します。
 
---- FileTest.sticky?(filename)
+[[m:FileTest#FileTest.size]], [[m:FileTest#FileTest.zero?]] も参照
+してください。
 
-    ((|filename|)) の sticky ビット(((<chmod(2)|manual page>)) 参照)が
-    立っている時に真を返します。
+--- sticky?(filename)
 
---- FileTest.symlink?(filename)
+filename の sticky ビット([[man:chmod(2)]] 参照)が
+立っている時に真を返します。
 
-    ((|filename|)) がシンボリックリンクである時、真を返します。
+--- symlink?(filename)
 
---- FileTest.writable?(filename)
+filename がシンボリックリンクである時、真を返します。
 
-    ((|filename|)) が書き込み可である時、真を返します。
+--- writable?(filename)
 
---- FileTest.writable_real?(filename)
+filename が書き込み可である時、真を返します。
 
-    ((|filename|)) が実ユーザ/実グループによって書き込み可である時、真
-    を返します。
+--- writable_real?(filename)
 
---- FileTest.zero?(filename)
+filename が実ユーザ/実グループによって書き込み可である時、真
+を返します。
 
-    ((|filename|)) が存在して、そのサイズが 0 である時、真を返します。
-    ((|filename|)) が存在しない場合は (({false})) を返します。
+--- zero?(filename)
 
-    ((<FileTest/FileTest.size>)), ((<FileTest/FileTest.size?>)), も参
-    照してください。
+filename が存在して、そのサイズが 0 である時、真を返します。
+filename が存在しない場合は false を返します。
+
+[[m:FileTest#FileTest.size]], [[m:FileTest#FileTest.size?]], も参
+照してください。
