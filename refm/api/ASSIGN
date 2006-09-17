@@ -230,9 +230,9 @@ tsort
 un
 uri
 weakref
-webrick
-webrick/cgi
-webrick/ssl
+webrick                         sheepman 
+webrick/cgi                     sheepman
+webrick/ssl                     sheepman
 win32/registry
 win32ole
 xmlrpc
