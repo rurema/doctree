@@ -76,11 +76,11 @@ _builtin/SystemExit             date            converted
 _builtin/SystemStackError       date            converted
 _builtin/Thread                 sheepman        converted
 _builtin/ThreadError            date            converted
-_builtin/ThreadGroup
+_builtin/ThreadGroup            sheepman
 _builtin/Time                   date            converted
 _builtin/TrueClass              date            converted
 _builtin/TypeError              date            converted
-_builtin/UnboundMethod
+_builtin/UnboundMethod          sheepman
 _builtin/ZeroDivisionError      date            converted
 _builtin/constants              aamine          converted
 _builtin/enumerator             aamine          converted
