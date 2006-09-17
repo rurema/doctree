@@ -2,7 +2,7 @@ status: (none) -> converted -> syntax ok -> verified
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-_builtin/ARGF                   aamine
+_builtin/ARGF                   aamine          converted
 _builtin/ArgumentError          date            converted
 _builtin/Array                  sheepman        converted
 _builtin/Bignum                 date            converted
