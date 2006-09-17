@@ -52,11 +52,11 @@ _builtin/Object                 aamine          converted
 _builtin/ObjectSpace            sheepman        converted
 _builtin/Precision              sheepman        converted
 _builtin/Proc                   sheepman        converted
-_builtin/Process                sheepman
-_builtin/Process__GID           sheepman
-_builtin/Process__Status        sheepman
-_builtin/Process__Sys           sheepman
-_builtin/Process__UID           sheepman
+_builtin/Process                sheepman        converted
+_builtin/Process__GID           sheepman        converted
+_builtin/Process__Status        sheepman        converted
+_builtin/Process__Sys           sheepman        converted
+_builtin/Process__UID           sheepman        converted
 _builtin/Range                  sheepman        converted 
 _builtin/RangeError             date            converted
 _builtin/Regexp                 sheepman        converted 
