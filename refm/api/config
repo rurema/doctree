@@ -13,7 +13,7 @@ def bitclust_context
   db = BitClust::Database.new("#{vardir}/1.9.0")
   manager = BitClust::ScreenManager.new(
     :base_url    => baseurl,
-    :cgi_url     => "#{baseurl}/#{File.basename($0)}",
+    :cgi_url     => "#{baseurl}/view",
     :templatedir => "#{srcdir}/template"
   )
   BitClust::RequestHandler.new(db, manager)
