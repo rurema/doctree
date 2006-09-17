@@ -3,7 +3,7 @@
 GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 するモジュールです。
 
-== Module Functions
+== Singleton Methods
 
 --- disable
 
