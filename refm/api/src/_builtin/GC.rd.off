@@ -1,43 +1,45 @@
-= GC
+= module GC
 
-(({GC})) は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
+GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 するモジュールです。
 
-== モジュールメソッド:
+== Module Functions
 
---- GC.disable
+--- disable
 
-    ガーベージコレクトを禁止します。
+ガーベージコレクトを禁止します。
 
-    前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、 
-    false)。
+前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
+false)。
 
---- GC.enable
+--- enable
 
-    ガーベージコレクトを許可します。
+ガーベージコレクトを許可します。
 
-    前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、 
-    false)。
+前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
+false)。
 
---- GC.start
+--- start
 
-    ガーベージコレクトを開始します。
+ガーベージコレクトを開始します。
 
-    (({nil})) を返します。
+nil を返します。
 
---- GC.stress
---- GC.stress = bool
+#@if (version >= "1.9.0")
+--- stress
+--- stress=(bool)
 
-    ((<ruby 1.9 feature>))
+((<ruby 1.9 feature>))
 
-    GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
+GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
+#@end
 
-== メソッド:
+== Instance Methods
 
 --- garbage_collect
 
-    ガーベージコレクトを開始します。以下と同じ働きをします。
+ガーベージコレクトを開始します。以下と同じ働きをします。
 
-      GC.start
+  GC.start
 
-    (({nil})) を返します。
+nil を返します。
