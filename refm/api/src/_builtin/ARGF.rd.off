@@ -1,74 +1,132 @@
-= ARGF
+= object ARGF
 
-スクリプトに指定した引数 (((<組み込み定数/ARGV>)) を参照) をファイル名と
-みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェ
-クトです。(({ARGV})) が空なら標準入力を対象とします。(({ARGV})) を変更
-すればこのオブジェクトの動作に影響します。
+extend Enumerable
 
-        while line = ARGF.gets
-          ..
-        end
+スクリプトに指定した引数
+([[m:Kernel::ARGV]] を参照) をファイル名とみなして、
+それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。
+ARGV が空なら標準入力を対象とします。
+ARGV を変更すればこのオブジェクトの動作に影響します。
+
+    while line = ARGF.gets
+      ....
+    end
 
 は、
 
-        while argv = ARGV.shift
-          File.open(argv) {|file|
-            while line = file.gets
-              ..
-            end
-          }
+    while argv = ARGV.shift
+      File.open(argv) {|file|
+        while line = file.gets
+          ....
         end
+      }
+    end
 
 のように動作します。
 
-(({ARGF})) を処理するごとに (({ARGV})) の要素は一つずつ取り除かれます。
-最後まで (({ARGF})) を読み込んだ後、再度 (({ARGF})) から内容を読むと
-((({ARGV})) が空なので)標準入力からの読み込みとなります。
+ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます。
+最後まで ARGF を読み込んだ後、再度 ARGF から内容を読むと
+(ARGV が空なので)標準入力からの読み込みとなります。
 
     ARGV.replace %w(/tmp/foo /tmp/bar)
     ARGF.each {|line|
         # 処理中の ARGV の内容を表示
-        p [ARGF.filename, ARGV];
+        p [ARGF.filename, ARGV]
         ARGF.skip
     }
-    # 最後まで読んだ後(ARGVが空)の動作
-    p ARGF.gets
-    p ARGF.filename
+        # => ["/tmp/foo", ["/tmp/bar"]]
+        #    ["/tmp/bar", []]
+    # 最後まで読んだ後 (ARGV が空) の動作
+    p ARGF.gets      # => nil
+    p ARGF.filename  # => "-"
 
-    # => ["/tmp/foo", ["/tmp/bar"]]
-         ["/tmp/bar", []]
-         nil
-         "-"
+[[m:Kernel#gets]] など一部の[[unknown:組み込み関数]]は
+ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
-((<組み込み関数/gets>)) など一部の((<組み込み関数>))は (({ARGF.gets})) な
-どこのオブジェクトをレシーバとしたメソッドの省略形です。
+#@if (version >= "1.8.0")
+--- ARGF.filename
+--- ARGF.path
 
-== メソッド:
-
-((<IO>)) オブジェクトのメソッドに加えて、以下のメソッドを持ちます。
+処理対象のファイル名を返します。
+標準入力に対しては - を返します。
+組み込み変数 [[m:$FILENAME]] と同じです。
 
 --- ARGF.to_s
+
+常に文字列 "ARGF" を返します。
+#@else
+
 --- ARGF.filename
---- ARGF.path   ((<ruby 1.8 feature>))
+--- ARGF.to_s
 
-    処理対象のファイル名を返します。標準入力に対しては (({-})) を返し
-    ます。組み込み変数 ((<組み込み変数/$FILENAME>)) と同じです。
-
-    ((<ruby 1.8 feature>)):
-    to_s は、常に文字列 "ARGF" を返します。
+処理対象のファイル名を返します。
+標準入力に対しては - を返します。
+組み込み変数 [[m:$FILENAME]] と同じです。
+#@end
 
 --- ARGF.file
 
-    処理対象の ((<File>)) オブジェクト(または ((<IO>)) オブジェクト)を
-    返します。
+処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
+返します。
 
 --- ARGF.lineno
+--- ARGF.lineno=
 
-    全引数ファイルを一つのファイルとみなしたときの現在の行番号を返しま
-    す。個々の引数ファイル毎の行番号を得るには (({ARGF.file.lineno})) 
-    とします。
+全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
+個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
 
 --- ARGF.skip
 
-    処理対象のファイルをクローズします。次回の読み込みは次の引数が処理
-    対象になります。(({self})) を返します。
+処理対象のファイルをクローズします。
+次回の読み込みは次の引数が処理対象になります。
+
+self を返します。
+
+--- binmode
+
+--- close
+
+--- closed?
+
+--- dup
+
+--- each
+
+--- each_byte
+
+--- each_line
+
+--- eof
+--- eof?
+
+--- fileno
+
+--- getc
+
+--- gets
+
+--- pos
+--- pos=
+
+--- read
+
+--- readchar
+
+--- readline
+
+--- readlines
+
+--- readpartial
+
+--- rewind
+
+--- seek
+
+--- tell
+
+--- to_a
+
+--- to_i
+
+--- to_io
+
