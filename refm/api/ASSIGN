@@ -15,7 +15,7 @@ _builtin/Dir                    date            converted
 _builtin/ENV                    date            converted
 _builtin/EOFError               date            converted
 _builtin/Enumerable             aamine          converted
-_builtin/Errno
+_builtin/Errno                  aamine
 _builtin/Exception              date            converted
 _builtin/FalseClass             date            converted
 _builtin/File                   sheepman        converted
