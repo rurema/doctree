@@ -1,15 +1,12 @@
-= DateTime
+= class DateTime < Date
 
-日付だけでなく時間も扱える ((<Date>)) のサブクラスです。
+日付だけでなく時間も扱える [[c:Date]] のサブクラスです。
 
-== 使い方
+=== 使い方
+
   require 'date'
 
-== スーパークラス
-
-((<Date>))
-
-== クラスメソッド
+== Class Methods
 
 --- civil([year[, mon[, mday[, hour[, min[, sec[, offset[, start]]]]]]]])
 --- new([year[, mon[, mday[, hour[, min[, sec[, offset[, start]]]]]]]])
@@ -27,7 +24,7 @@
 --- ordinal([year[, yday[, hour[, min[, sec[, offset[, start]]]]]]])
     年日付に相当する日時オブジェクトを生成します。
 
-== メソッド
+== Methods
 
 --- hour
     時間を返します (0-23)。

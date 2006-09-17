@@ -1,16 +1,12 @@
-= YAML::Store
+= class YAML::Store < PStore
 
-((<ruby 1.8 feature>)):
-((<PStore>)) の ((<YAML>)) 版です。((<Marshal.dump|Marshal/Marshal.dump>)) したバイナリ形式の
+((<PStore>)) の ((<YAML>)) 版です。
+((<Marshal.dump|Marshal/Marshal.dump>)) したバイナリ形式の
 代わりに YAML 形式でファイルに保存します。
 
 使い方は ((<PStore>)) とほとんど同じです。((<執筆者募集>))
 
-== スーパークラス:
-
-* ((<PStore>))
-
-== 例
+=== 例
  
  require "yaml/store"
  
