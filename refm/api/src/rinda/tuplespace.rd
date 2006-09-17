@@ -1,7 +1,7 @@
 = class Rinda::TupleSpace
 
-include [[c:MonitorMixin]]
-include [[c:DRbUndumped]]
+include MonitorMixin
+include DRbUndumped
 
 ((<¼¹É®¼ÔÊç½¸>))
 
