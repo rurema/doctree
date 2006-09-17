@@ -74,7 +74,7 @@ _builtin/SyntaxError            date            converted
 _builtin/SystemCallError        date            converted
 _builtin/SystemExit             date            converted
 _builtin/SystemStackError       date            converted
-_builtin/Thread                 sheepman 
+_builtin/Thread                 sheepman        converted
 _builtin/ThreadError            date            converted
 _builtin/ThreadGroup
 _builtin/Time                   date
