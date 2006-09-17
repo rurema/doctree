@@ -1,4 +1,4 @@
-= Struct < Object
+= class Struct < Object
 
 include Enumerable
 
