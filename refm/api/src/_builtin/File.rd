@@ -2,8 +2,8 @@
 #@if (version >= "1.8.0")
 ((<ruby 1.8 feature>)): File::Constants は、[[c:IO]] でインクルードさ
 れるようになりました。
-#@# else
-#@#include File::Constant
+#@else
+include File::Constant
 #@end
 
 ファイルアクセスのためのクラス。通常 [[m:Kernel#open]]
