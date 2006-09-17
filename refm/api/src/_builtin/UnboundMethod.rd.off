@@ -1,152 +1,162 @@
-= UnboundMethod
+#@if (version >= "1.8.0")
+= class UnboundMethod < Object
+#@else
+= class UnboundMethod < Method
+#@end
 
 レシーバを持たないメソッドオブジェクトのクラスです。
-((<Module#instance_method|Module/instance_method>)) や 
-((<Method#unbind|Method/unbind>)) により生成し、後で
-((<UnboundMethod#bind|UnboundMethod/bind>)) によりレシーバを
-割り当てた ((<Method>)) オブジェクトを作ることができます。
+[[m:Module#instance_method]] や
+[[m:Method#unbind]] により生成し、後で
+[[m:UnboundMethod#bind]] によりレシーバを
+割り当てた [[c:Method]] オブジェクトを作ることができます。
 
-例: ((<Method>)) クラスの冒頭にある例を UnboundMethod で書くと以下のようになる
+例: [[c:Method]] クラスの冒頭にある例を UnboundMethod で書くと以下のようになる
 
-        class Foo
-          def foo() "foo" end
-          def bar() "bar" end
-          def baz() "baz" end
-        end
+  class Foo
+    def foo() "foo" end
+    def bar() "bar" end
+    def baz() "baz" end
+  end
 
-        # 任意のキーとメソッドの関係をハッシュに保持しておく
-        # レシーバの情報がここにはないことに注意
-        methods = {1 => Foo.instance_method(:foo),
-                   2 => Foo.instance_method(:bar),
-                   3 => Foo.instance_method(:baz)}
+  # 任意のキーとメソッドの関係をハッシュに保持しておく
+  # レシーバの情報がここにはないことに注意
+  methods = {1 => Foo.instance_method(:foo),
+             2 => Foo.instance_method(:bar),
+             3 => Foo.instance_method(:baz)}
 
-        # キーを使って関連するメソッドを呼び出す
-        # レシーバは任意(Foo クラスのインスタンスでなければならない)
-        p methods[1].bind(Foo.new).call      # => "foo"
-        p methods[2].bind(Foo.new).call      # => "bar"
-        p methods[3].bind(Foo.new).call      # => "baz"
+  # キーを使って関連するメソッドを呼び出す
+  # レシーバは任意(Foo クラスのインスタンスでなければならない)
+  p methods[1].bind(Foo.new).call      # => "foo"
+  p methods[2].bind(Foo.new).call      # => "bar"
+  p methods[3].bind(Foo.new).call      # => "baz"
 
 例: メソッドの再定義を UnboundMethod を使って行う方法(普通は、
-((<クラス／メソッドの定義/alias>)) や ((<メソッド呼び出し/super>)) を使う)
+[[unknown:クラス／メソッドの定義/alias]] や [[unknown:メソッド呼び出し/super]] を使う)
 
-    class Foo
-      def foo
-        p :foo
-      end
-      @@orig_foo = instance_method :foo
-      def foo
-        p :bar
-        @@orig_foo.bind(self).call
-      end
+  class Foo
+    def foo
+      p :foo
     end
+    @@orig_foo = instance_method :foo
+    def foo
+      p :bar
+      @@orig_foo.bind(self).call
+    end
+  end
 
-    Foo.new.foo
+  Foo.new.foo
 
-    => :bar
-       :foo
+  => :bar
+     :foo
 
-== スーパークラス:
+== Instance Methods
 
-* ((<Method>))  version 1.6 以前
-* ((<Object>))  (((<version 1.8 以降|ruby 1.8 feature>)))
-
-== メソッド:
-
---- self[args, ...]
+#@if (version >= "1.8.0")
+#@else
+--- [](args, ...)
 --- call(args, ...)
 --- call(args, ...) { ... }
 
-    (({UnboundMethod})) は ((<UnboundMethod/bind>)) しなければ起動できません。
-    常に例外 ((<TypeError>)) が発生します。
+UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
+常に例外 [[c:TypeError]] が発生します。
 
-        class Foo
-          def foo
-          end
-        end
-        Foo.instance_method(:foo).call
+    class Foo
+      def foo
+      end
+    end
+    Foo.instance_method(:foo).call
 
-        # => -:5:in `call': you cannot call unbound method; bind first (TypeError)
+    # => -:5:in `call': you cannot call unbound method; bind first (TypeError)
 
-    ((<ruby 1.8 feature>)): このメソッドはなくなりました。
+#@#    ((<ruby 1.8 feature>)): このメソッドはなくなりました。
+#@end
 
 --- bind(obj)
 
-    (({self})) を ((|obj|)) にバインドして bound method オブジェクト
-    (つまり ((<Method>)) オブジェクト) を生成し返します。ただしバイン
-    ドできるのは、unbind したオブジェクトのクラスのインスタンスか、メ
-    ソッド定義元のモジュールをインクルードしたクラスのインスタンスだけ
-    です。そうでなければ例外 ((<TypeError>)) が発生します。
+self を obj にバインドして bound method オブジェクト
+(つまり [[c:Method]] オブジェクト) を生成し返します。ただしバイン
+ドできるのは、unbind したオブジェクトのクラスのインスタンスか、メ
+ソッド定義元のモジュールをインクルードしたクラスのインスタンスだけ
+です。そうでなければ例外 [[c:TypeError]] が発生します。
 
-    例:
+例:
 
-        # クラスのインスタンスメソッドの UnboundMethod の場合
+    # クラスのインスタンスメソッドの UnboundMethod の場合
 
-        class Foo
-          def foo
-            "foo"
-          end
-        end
+    class Foo
+      def foo
+        "foo"
+      end
+    end
 
-        # UnboundMethod `m' を生成
-        p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
+    # UnboundMethod `m' を生成
+    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
 
-        # Foo のインスタンスをレシーバとする Method オブジェクトを生成
-        p m.bind(Foo.new)               # => #<Method: Foo(Foo)#foo>
+    # Foo のインスタンスをレシーバとする Method オブジェクトを生成
+    p m.bind(Foo.new)               # => #<Method: Foo(Foo)#foo>
 
-        # Foo のサブクラス Bar のインスタンスをレシーバとする Method 
-        # オブジェクトを生成(これは許されない)
-        #  ruby 1.8 feature: 許されるようになりました
+    # Foo のサブクラス Bar のインスタンスをレシーバとする Method
+#@if (version >= "1.8.0")
+#@else
+    # オブジェクトを生成(これは許されない)
+#@end
+    #@#  ruby 1.8 feature: 許されるようになりました
 
-        class Bar < Foo
-        end
-        # p m.bind(Bar.new)               # => -18:in `bind': bind argument must be an instance of Foo (TypeError)
+    class Bar < Foo
+    end
+    # p m.bind(Bar.new)               # => -18:in `bind': bind argument must be an instance of Foo (TypeError)
 
-        # 同名の特異メソッドが定義されているとダメ
-        class << obj = Foo.new
-          def foo
-          end
-        end
-        p m.bind(obj)                   # => -:25:in `bind': method `foo' overridden (TypeError)
+    # 同名の特異メソッドが定義されているとダメ
+    class << obj = Foo.new
+      def foo
+      end
+    end
+    p m.bind(obj)                   # => -:25:in `bind': method `foo' overridden (TypeError)
 
-        # モジュールのインスタンスメソッドの UnboundMethod の場合
+    # モジュールのインスタンスメソッドの UnboundMethod の場合
 
-        module Foo
-          def foo
-            "foo"
-          end
-        end
+    module Foo
+      def foo
+        "foo"
+      end
+    end
 
-        # UnboundMethod `m' を生成
-        p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
+    # UnboundMethod `m' を生成
+    p m = Foo.instance_method(:foo) # => #<UnboundMethod: Foo(Foo)#foo>
 
-        # Foo をインクルードしたクラス Bar のインスタンスをレシーバと
-        # する Method オブジェクトを生成
-        class Bar
-          include Foo
-        end
-        p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
+    # Foo をインクルードしたクラス Bar のインスタンスをレシーバと
+    # する Method オブジェクトを生成
+    class Bar
+      include Foo
+    end
+    p m.bind(Bar.new)               # => #<Method: Bar(Foo)#foo>
 
-        # Bar のサブクラスは Foo をインクルードしているのと同等なのでよい
-        class Baz <Bar
-        end
-        p m.bind(Baz.new)               # => #<Method: Baz(Foo)#foo>
+    # Bar のサブクラスは Foo をインクルードしているのと同等なのでよい
+    class Baz <Bar
+    end
+    p m.bind(Baz.new)               # => #<Method: Baz(Foo)#foo>
 
-        # 同名の特異メソッドが定義されているとダメ
-        class << obj = Baz.new
-          def foo
-          end
-        end
-        p m.bind(obj)                   # => -:27:in `bind': method `foo' overridden (TypeError)
+    # 同名の特異メソッドが定義されているとダメ
+    class << obj = Baz.new
+      def foo
+      end
+    end
+    p m.bind(obj)                   # => -:27:in `bind': method `foo' overridden (TypeError)
 
+#@if (version >= "1.7.0")
+#@else
 --- to_proc
 
-    (({self})) を (({call})) する ((<Proc>)) オブジェクトを生成して返します。
+self を call する [[c:Proc]] オブジェクトを生成して返します。
 
-    ((<ruby 1.7 feature>)): このメソッドはなくなりました。
+#@#    ((<ruby 1.7 feature>)): このメソッドはなくなりました。
+#@end
 
-
+#@if (version >= "1.8.0")
+#@else
 --- unbind
 
-    (({self})) を返します。
+self を返します。
 
-    ((<ruby 1.8 feature>)): このメソッドはなくなりました。
+#@#    ((<ruby 1.8 feature>)): このメソッドはなくなりました。
+#@end
