@@ -7,3 +7,7 @@
 
 [[c:Object]] クラスのメソッドは実際にはこのモジュールで定義されていま
 す。これはトップレベルでのメソッドの再定義に対応するためです。
+
+#@include(functions)
+#@include(constants)
+#@include(specialvars)

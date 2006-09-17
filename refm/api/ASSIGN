@@ -82,11 +82,11 @@ _builtin/TrueClass              date            converted
 _builtin/TypeError              date            converted
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      date            converted
-_builtin/constants              aamine
-_builtin/enumerator
+_builtin/constants              aamine          converted
+_builtin/enumerator             aamine          converted
 _builtin/fatal                  date            converted
-_builtin/functions              aamine
-_builtin/specialvars            aamine
+_builtin/functions              aamine          converted
+_builtin/specialvars            aamine          converted
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
