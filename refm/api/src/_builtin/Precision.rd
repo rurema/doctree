@@ -4,7 +4,7 @@
 の良さを意味します。抽象数値クラスや複素数、行列などそれら自身が実数に
 含まれないような クラスにインクルードすべきではありません。
 
-== Module Functions
+== Singleton Methods
 
 #@if (version >= "1.7.0")
 --- included(module_or_class)
