@@ -1,424 +1,460 @@
-= Process
+= module Process
 
 UNIX のプロセスを管理するモジュール。
 
-(({Process})) がプロセスを表現するクラスではなく、プロセスに対する操作
+Process がプロセスを表現するクラスではなく、プロセスに対する操作
 をまとめたモジュールであることに注意してください。
 
-== モジュールメソッド:
+== Singleton Methods
 
---- Process.abort([message])
+#@if (version >= "1.7.0")
+--- abort([message])
 
-    ((<ruby 1.7 feature>))
+((<ruby 1.7 feature>))
 
-    関数 ((<組み込み関数/abort>)) と同じです。
+関数 [[m:Kernel#abort]] と同じです。
+#@end
 
---- Process.daemon(nochdir=nil,noclose=nil)
+#@if (version >= "1.9.0")
+--- daemon(nochdir=nil,noclose=nil)
 
-    ((<ruby 1.9 feature>))
+((<ruby 1.9 feature>))
 
-    プロセスから制御端末を切り離し、
-    バックグラウンドにまわってデーモンとして動作させます。
+プロセスから制御端末を切り離し、
+バックグラウンドにまわってデーモンとして動作させます。
 
-    カレントディレクトリを / に移動します。
-    ただし ((|nochdir|)) に真を指定したときにはこの動作は抑制され、
-    カレントディレクトリは移動しません。
+カレントディレクトリを / に移動します。
+ただし nochdir に真を指定したときにはこの動作は抑制され、
+カレントディレクトリは移動しません。
 
-    標準入力・標準出力・標準エラー出力を /dev/null にリダイレクトします。
-    ただし ((|noclose|)) に真を指定したときにはこの動作は抑制され、
-    リダイレクトは行なわれません。
+標準入力・標準出力・標準エラー出力を /dev/null にリダイレクトします。
+ただし noclose に真を指定したときにはこの動作は抑制され、
+リダイレクトは行なわれません。
 
-    0を返します。
+0を返します。
+#@end
 
---- Process.detach(pid)
+#@if (version >= "1.8.0")
+--- detach(pid)
 
-    ((<ruby 1.8 feature>))
+((<ruby 1.8 feature>))
 
-    子プロセス ((|pid|)) の終了を監視するスレッドを生成して返します。
-    生成したスレッドは子プロセスが終了した後に (({nil})) で終了します。
-    (指定した子プロセスが存在しなければ即座に nil で終了します)。
+子プロセス pid の終了を監視するスレッドを生成して返します。
+生成したスレッドは子プロセスが終了した後に nil で終了します。
+(指定した子プロセスが存在しなければ即座に nil で終了します)。
 
-        pid = fork {
-          # child
-          sleep 3
-        }
+    pid = fork {
+      # child
+      sleep 3
+    }
 
-        th = Process.detach(pid)
-        p th.value
+    th = Process.detach(pid)
+    p th.value
 
-        # => nil
+    # => nil
+#@end
 
---- Process.exit([status])
+#@if (version >= "1.7.0")
+--- exit([status])
 
-    ((<ruby 1.7 feature>))
+((<ruby 1.7 feature>))
+関数 [[m:Kernel#exit]] と同じです。
+#@end
 
-    関数 ((<組み込み関数/exit>)) と同じです。
+--- exit!([status])
 
---- Process.exit!([status])
+関数 [[m:Kernel#exit!]] と同じです。
 
-    関数 ((<組み込み関数/exit!>)) と同じです。
+--- fork
+--- fork { ... }
 
---- Process.fork
---- Process.fork { ... }
+関数 [[m:Kernel#fork]] と同じです。
 
-    関数 ((<組み込み関数/fork>)) と同じです。
+#@if (version >= "1.8.5")
+--- getrlimit(resource)
+--- setrlimit(resource, cur_limit, max_limit)
+--- setrlimit(resource, limit)
 
---- Process.getrlimit(resource)                         ((<ruby 1.8.5 feature>))
---- Process.setrlimit(resource, cur_limit, max_limit)   ((<ruby 1.8.5 feature>))
---- Process.setrlimit(resource, limit)                  ((<ruby 1.8.5 feature>))
+resource で示すプロセスリソースの制限値の取得、設定を行います。
 
-    ((|resource|)) で示すプロセスリソースの制限値の取得、設定を行います。
+Process.setrlimit において単一の limit が指定された場合には、
+cur_limit, max_limit の両方がその値として指定されたものとして扱います。
+これらの引数には、resource によって決まる意味を持つ何らかの整数もしくは
+[[m:Process::RLIM_INFINITY]],
+[[m:Process::RLIM_SAVED_CUR]],
+[[m:Process::RLIM_SAVED_MAX]] のいずれかを指定します。
 
-    Process.setrlimit において単一の ((|limit|)) が指定された場合には、
-    ((|cur_limit|)), ((|max_limit|)) の両方がその値として指定されたものとして扱います。
-    これらの引数には、((|resource|)) によって決まる意味を持つ何らかの整数もしくは
-    ((<Process::RLIM_INFINITY|Process/Process::RLIM_INFINITY>)),
-    ((<Process::RLIM_SAVED_CUR|Process/Process::RLIM_SAVED_CUR>)),
-    ((<Process::RLIM_SAVED_MAX|Process/Process::RLIM_SAVED_MAX>)) のいずれかを指定します。
+resource に指定する値は環境によりますが、以下のいずれかです。
+システムによってはこれらのいくつかは存在しない場合があります。
+詳細は、[[man:setrlimit(2)]] を参照してください。
 
-    ((|resource|)) に指定する値は環境によりますが、以下のいずれかです。
-    システムによってはこれらのいくつかは存在しない場合があります。
-    詳細は、((<setrlimit(2)|manual page>)) を参照してください。
+  * [[m:Process::RLIMIT_CORE]] core ファイルのサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_CPU]] プロセスの CPU 時間 (秒) (SUSv3)
+  * [[m:Process::RLIMIT_DATA]] プロセスのデータ領域のサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_FSIZE]] プロセスが生成するファイルのサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_NOFILE]] プロセスがオープンできるファイルの数 (SUSv3)
+  * [[m:Process::RLIMIT_STACK]] プロセスのスタック領域のサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_AS]] プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
+  * [[m:Process::RLIMIT_MEMLOCK]] mlock(2) でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
+  * [[m:Process::RLIMIT_NPROC]] そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
+  * [[m:Process::RLIMIT_RSS]] 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
+  * [[m:Process::RLIMIT_SBSIZE]] ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
-    * ((<Process::RLIMIT_CORE|Process/Process::RLIMIT_CORE>)) core ファイルのサイズ (バイト) (SUSv3)
-    * ((<Process::RLIMIT_CPU|Process/Process::RLIMIT_CPU>)) プロセスの CPU 時間 (秒) (SUSv3)
-    * ((<Process::RLIMIT_DATA|Process/Process::RLIMIT_DATA>)) プロセスのデータ領域のサイズ (バイト) (SUSv3)
-    * ((<Process::RLIMIT_FSIZE|Process/Process::RLIMIT_FSIZE>)) プロセスが生成するファイルのサイズ (バイト) (SUSv3)
-    * ((<Process::RLIMIT_NOFILE|Process/Process::RLIMIT_NOFILE>)) プロセスがオープンできるファイルの数 (SUSv3)
-    * ((<Process::RLIMIT_STACK|Process/Process::RLIMIT_STACK>)) プロセスのスタック領域のサイズ (バイト) (SUSv3)
-    * ((<Process::RLIMIT_AS|Process/Process::RLIMIT_AS>)) プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
-    * ((<Process::RLIMIT_MEMLOCK|Process/Process::RLIMIT_CORE>)) mlock(2) でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
-    * ((<Process::RLIMIT_NPROC|Process/Process::RLIMIT_NPROC>)) そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
-    * ((<Process::RLIMIT_RSS|Process/Process::RLIMIT_RSS>)) 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
-    * ((<Process::RLIMIT_SBSIZE|Process/Process::RLIMIT_SBSIZE>)) ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
+getrlimit は、2値の配列 [cur_limit, max_limit]
+を返します。
+setrlimit は、引数に指定した値を設定し、nil を返します。
 
-    (({getrlimit})) は、2値の配列 [((|cur_limit|)), ((|max_limit|))] 
-    を返します。
-    (({setrlimit})) は、引数に指定した値を設定し、(({nil})) を返します。
+リソースの制限値の取得、設定に失敗した場合、例外 [[c:Errno::EXXX]]
+が発生します。
 
-    リソースの制限値の取得、設定に失敗した場合、例外 ((<Errno::EXXX>)) 
-    が発生します。
+以下の例は RLIMIT_CORE の制限を hard limit (max limit) まで引き上げ、可能なら core を残すようにします。
 
-    以下の例は RLIMIT_CORE の制限を hard limit (max limit) まで引き上げ、可能なら core を残すようにします。
+  Process.setrlimit(Process::RLIMIT_CORE, 
+                    Process.getrlimit(Process::RLIMIT_CORE)[1])
 
-      Process.setrlimit(Process::RLIMIT_CORE, Process.getrlimit(Process::RLIMIT_CORE)[1])
+#@end
 
---- Process.spawn(cmd, [, arg, ...])    ((<ruby 1.9 feature>))
+#@if (version >= "1.9.0")
+--- spawn(cmd, [, arg, ...])
 
-    関数 ((<組み込み関数/spawn>)) と同じです。
+関数 [[m:Kernel#spawn]] と同じです。
+#@end
 
-== モジュール属性:
+== Module Functions
 
-これらは、((<Ruby用語集/モジュール関数>))です。
+--- egid
 
---- Process.egid
+カレントプロセスの実効グループ ID を返します。
 
-    カレントプロセスの実効グループ ID を返します。
+--- egid=(gid)
 
---- Process.egid=gid
+カレントプロセスの実効グループ ID を設定します。gid を返します。
 
-    カレントプロセスの実効グループ ID を設定します。((|gid|)) を返します。
+--- euid
 
---- Process.euid
+カレントプロセスの実効ユーザ ID を返します。
 
-    カレントプロセスの実効ユーザ ID を返します。
+--- euid=(uid)
 
---- Process.euid=uid
+カレントプロセスの実効ユーザ ID を設定します。uid を返します。
 
-    カレントプロセスの実効ユーザ ID を設定します。((|uid|)) を返します。
+--- gid
 
---- Process.gid
+カレントプロセスの実グループ ID を返します。
 
-    カレントプロセスの実グループ ID を返します。
+--- gid=(gid)
 
---- Process.gid=gid
+カレントプロセスの実グループ ID を設定します。gid を返します。
 
-    カレントプロセスの実グループ ID を設定します。((|gid|)) を返します。
+--- groups
 
---- Process.groups
+補助グループ ID の配列を返します(実効グループ ID を含むかも知れません)。
 
-    補助グループ ID の配列を返します(実効グループ ID を含むかも知れません)。
+返される配列の最大要素数は 32 固定です(たぶんbug)。
 
-    返される配列の最大要素数は 32 固定です(たぶんbug)。
+--- groups=(gid_ary)
 
---- Process.groups=gid_ary
+補助グループを設定します。右辺の配列の要素はグループ ID かグループ
+名を指定します。Process.groups の結果を返します。
 
-    補助グループを設定します。右辺の配列の要素はグループ ID かグループ
-    名を指定します。Process.groups の結果を返します。
+設定する補助グループ ID の数が [[m:Process#Process.maxgroups]] の
+数を越えている場合、例外 [[c:ArgumentError]] が発生します。
 
-    設定する補助グループ ID の数が ((<Process/Process.maxgroups>)) の
-    数を越えている場合、例外 ((<ArgumentError>)) が発生します。
+--- maxgroups
+--- maxgroups=(num)
 
---- Process.maxgroups
---- Process.maxgroups=num
+設定できる補助グループ ID の数を指定します。実際に返される補助グルー
+プ ID の数よりも少ない値を設定していると、
+[[m:Process#Process.groups]] で例外が発生します。
 
-    設定できる補助グループ ID の数を指定します。実際に返される補助グルー
-    プ ID の数よりも少ない値を設定していると、
-    ((<Process/Process.groups>)) で例外が発生します。
+--- pid
 
---- Process.pid
+カレントプロセスのプロセス ID を返します。変数 [[m:$$]]
+の値と同じです。
 
-    カレントプロセスのプロセス ID を返します。変数 ((<組み込み変数/$$>)) 
-    の値と同じです。
+--- ppid
 
---- Process.ppid
+親プロセスのプロセス ID を返します。UN*X では実際の親プロセスが終
+了した後は ppid は 1 (initの pid)になります。
 
-    親プロセスのプロセス ID を返します。UN*X では実際の親プロセスが終
-    了した後は (({ppid})) は 1 ((({init}))の pid)になります。
+--- uid
 
---- Process.uid
+プロセスの実ユーザ ID を返します。
 
-    プロセスの実ユーザ ID を返します。
+--- uid=(uid)
 
---- Process.uid=uid
+プロセスの実ユーザ ID を設定します。uid を返します。
 
-    プロセスの実ユーザ ID を設定します。((|uid|)) を返します。
+--- getpgid(pid)
+--- getpgrp([pid])
 
-== モジュール関数:
+pid のプロセスのプロセスグループを返します。pid が 0
+の時や省略された時はカレントプロセスを意味します。
 
---- Process.getpgid(pid)
---- Process.getpgrp([pid])
+プロセスグループの取得に失敗した場合は、例外 [[c:Errno::EXXX]] が
+発生します。
+#@#((-1.6.7 までは、getpgid() は例外を発生させていませんでした。
+#@#p Process.getpgid(1000000) # => -1
+#@#-))。
 
-    ((|pid|)) のプロセスのプロセスグループを返します。((|pid|)) が 0 
-    の時や省略された時はカレントプロセスを意味します。
+--- getpriority(which, who)
 
-    プロセスグループの取得に失敗した場合は、例外 ((<Errno::EXXX>)) が
-    発生します。
-    ((-1.6.7 までは、getpgid() は例外を発生させていませんでした。
-    p Process.getpgid(1000000) # => -1
-    -))。
+プロセス、プロセスグループ、ユーザの現在のプライオリティを返
+します([[man:getpriority(2)]] 参照)。
 
---- Process.getpriority(which, who)
+Process モジュールは which として指定できる定数
+[[m:Process::PRIO_PROCESS]], [[m:Process::PRIO_PGRP]],
+[[m:Process::PRIO_USER]] を定義しています。
 
-    プロセス、プロセスグループ、ユーザの現在のプライオリティを返
-    します(((<getpriority(2)|manual page>)) 参照)。
+who には、which の値にしたがってプロセス ID、プロセス
+グループ ID、ユーザ ID のいずれかを指定します。
 
-    (({Process})) モジュールは ((|which|)) として指定できる定数 
-    ((<Process/Process::PRIO_PROCESS>)), ((<Process/Process::PRIO_PGRP>)),
-    ((<Process/Process::PRIO_USER>)) を定義しています。
+プライオリティの取得に失敗した場合は、例外 [[c:Errno::EXXX]] が発
+生します。
 
-    ((|who|)) には、((|which|)) の値にしたがってプロセス ID、プロセス
-    グループ ID、ユーザ ID のいずれかを指定します。
+#@if (version >= "1.8.0")
+--- initgroups(user, group)
 
-    プライオリティの取得に失敗した場合は、例外 ((<Errno::EXXX>)) が発
-    生します。
+((<ruby 1.8 feature>))
 
---- Process.initgroups(user, group)
+[[unknown:執筆者募集]]
 
-    ((<ruby 1.8 feature>))
+([[man:initgroups(3)]] 参照)
+#@end
 
-    ((<執筆者募集>))
+--- kill(signal, pid ... )
 
-    (((<initgroups(3)|manual page>)) 参照)
+pid で指定されたプロセスにシグナルを送ります。signal
+はシグナル番号か名前(文字列または[[c:Symbol]])で指定します。
 
---- Process.kill(signal, pid ... )
+負の値を持つシグナル(あるいはシグナル名の前に-)もしくは
+負の値を持つプロセス番号を与えるとプロセスではなくプロセスグループにシグナルを送ります。
+負の値のプロセス番号はプロセスグループ番号を符号反転したものと見なされます。
 
-    ((|pid|)) で指定されたプロセスにシグナルを送ります。((|signal|)) 
-    はシグナル番号か名前(文字列または((<Symbol>)))で指定します。
+全てのシグナル送信に成功した場合、指定した pid の数を返します。
+失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-    負の値を持つシグナル(あるいはシグナル名の前に(({-})))もしくは
-    負の値を持つプロセス番号を与えるとプロセスではなくプロセスグループにシグナルを送ります。
-    負の値のプロセス番号はプロセスグループ番号を符号反転したものと見なされます。
+存在しないシグナルを指定した場合は、例外 [[c:ArgumentError]] が発
+生します。
 
-    全てのシグナル送信に成功した場合、指定した pid の数を返します。
-    失敗した場合は例外 ((<Errno::EXXX>)) が発生します。
+#@#なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
+#@#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
+#@#KILL も指定できます
 
-    存在しないシグナルを指定した場合は、例外 ((<ArgumentError>)) が発
-    生します((-なお、Windows (((<mswin32>)), ((<mingw32>)))では、INT
-    ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
-    KILL も指定できます-))
+[[m:Kernel#trap]]も参照してください。
 
-    ((<組み込み関数/trap>))も参照してください。
+--- setpgrp(pid, pgrp)
+#@if (version >= "1.7.0")
+--- setpgrp
+#@end
+--- setpgid(pid, pgrp)
 
---- Process.setpgrp(pid, pgrp)
---- Process.setpgrp               ((<ruby 1.7 feature>))
---- Process.setpgid(pid, pgrp)
+pid のプロセスグループを設定します。pid が 0 の時はカ
+レントプロセスを意味します。
 
-    ((|pid|)) のプロセスグループを設定します。((|pid|)) が 0 の時はカ
-    レントプロセスを意味します。
+プロセスグループの設定に成功した場合は 0 を返します。失敗した場合
+は、例外 [[c:Errno::EXXX]] が発生します。
 
-    プロセスグループの設定に成功した場合は 0 を返します。失敗した場合
-    は、例外 ((<Errno::EXXX>)) が発生します。
+#@if (version >= "1.7.0")
+((<ruby 1.7 feature>)):
+version 1.7 では、Process.setpgrp は、引数を取りません。
+#@end
 
-    ((<ruby 1.7 feature>)):
-    version 1.7 では、Process.setpgrp は、引数を取りません。
+--- setpriority(which, who, prio)
 
---- Process.setpriority(which, who, prio)
+プロセス、プロセスグループ、ユーザの現在のプライオリティを設
+定します([[man:setpriority(2)]] 参照)。
 
-    プロセス、プロセスグループ、ユーザの現在のプライオリティを設
-    定します(((<setpriority(2)|manual page>)) 参照)。
+Process モジュールは which として指定できる定数
+[[m:Process::PRIO_PROCESS]], [[m:Process::PRIO_PGRP]],
+[[m:Process::PRIO_USER]] を定義しています。
 
-    (({Process})) モジュールは ((|which|)) として指定できる定数 
-    ((<Process/Process::PRIO_PROCESS>)), ((<Process/Process::PRIO_PGRP>)),
-    ((<Process/Process::PRIO_USER>)) を定義しています。
+who には、which の値にしたがってプロセス ID、プロセス
+グループ ID、ユーザ ID のいずれかを指定します。
 
-    ((|who|)) には、((|which|)) の値にしたがってプロセス ID、プロセス
-    グループ ID、ユーザ ID のいずれかを指定します。
+prio には、-20 から 20 の値を設定します。
+小さな値はプライオリティが高いことを意味し、
+大きな値はプライオリティが低いことを意味します。
 
-    ((|prio|)) には、-20 から 20 の値を設定します。
-    小さな値はプライオリティが高いことを意味し、
-    大きな値はプライオリティが低いことを意味します。
+プライオリティの設定に成功した場合は 0 を返します。失敗した場合は、
+例外 [[c:Errno::EXXX]] が発生します。
 
-    プライオリティの設定に成功した場合は 0 を返します。失敗した場合は、
-    例外 ((<Errno::EXXX>)) が発生します。
+以下の例は呼び出したプロセス自身のプライオリティを 10 に下げます。
+(すでに 10 よりもプライオリティが低く、Errno::EACCES となった場合には無視して実行を続けます)
 
-    以下の例は呼び出したプロセス自身のプライオリティを 10 に下げます。
-    (すでに 10 よりもプライオリティが低く、Errno::EACCES となった場合には無視して実行を続けます)
+  begin
+    Process.setpriority(Process::PRIO_PROCESS, 0, 10)
+  rescue Errno::EACCES
+  end
 
-      begin
-        Process.setpriority(Process::PRIO_PROCESS, 0, 10)
-      rescue Errno::EACCES
-      end
+--- setsid()
 
---- Process.setsid()
+新しいセッションを作成して、tty を切り離します。デーモンを簡単に作
+ることができます。セッション ID を返します。
 
-    新しいセッションを作成して、tty を切り離します。デーモンを簡単に作
-    ることができます。セッション ID を返します。
+セッションの作成に失敗した場合は、例外 [[c:Errno::EXXX]] が発生します。
 
-    セッションの作成に失敗した場合は、例外 ((<Errno::EXXX>)) が発生します。
+#@if (version >= "1.7.0")
+--- times
 
---- Process.times     ((<ruby 1.7 feature>))
+自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の
+積算を [[c:Struct]]::Tms のオブジェクトとして返します。
+Struct::Tms は以下のメンバを持つ構造体クラスです。
 
-    自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の
-    積算を ((<Struct>))::Tms のオブジェクトとして返します。
-    (({Struct::Tms})) は以下のメンバを持つ構造体クラスです。
+  utime           # user time
+  stime           # system time
+  cutime          # user time of children
+  cstime          # system time of children
 
-      utime           # user time
-      stime           # system time
-      cutime          # user time of children
-      cstime          # system time of children
+時間の単位は秒で、浮動小数点数で与えられます。詳細は
+[[man:times(3)]] を参照してください。
+#@end
 
-    時間の単位は秒で、浮動小数点数で与えられます。詳細は 
-    ((<times(3)|manual page>)) を参照してください。
+--- wait
+--- wait2
 
---- Process.wait
---- Process.wait2
+子プロセスが終了するのを待ち、終了した子プロセスの pid を返します。
+子プロセスが一つもなければ例外 [[c:Errno::ECHILD]] が
+発生します。
 
-    子プロセスが終了するのを待ち、終了した子プロセスの pid を返します。
-    子プロセスが一つもなければ例外 ((<Errno::ECHILD|Errno::EXXX>)) が
-    発生します。
+wait2 は、その戻り値が pid と [[m:$?]] の配列であ
+る点だけが異なります。
 
-    (({wait2})) は、その戻り値が pid と ((<組み込み変数/$?>)) の配列であ
-    る点だけが異なります。
+#@if (version >= "1.7.0")
+((<ruby 1.7 feature>)):
+version 1.7 からは $? は[[c:Process::Status]] オブジェクトで
+す。
+Process.wait と Process.waitpid の実体は同じものになりました。
+Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+#@end
 
-    ((<ruby 1.7 feature>)):
-    version 1.7 からは (({$?})) は((<Process::Status>)) オブジェクトで
-    す。
-    Process.wait と Process.waitpid の実体は同じものになりました。
-    Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+#@if (version >= "1.7.0")
+--- waitall
 
---- Process.waitall ((<ruby 1.7 feature>))
+全ての子プロセスが終了するのを待ちます。
 
-    全ての子プロセスが終了するのを待ちます。
+終了した子プロセスの pid と終了ステータス([[c:Process::Status]])の
+配列を要素に持つ配列を返します。子プロセスがいない状態でこのメソッ
+ドを呼び出すと空の配列を返します。
 
-    終了した子プロセスの pid と終了ステータス(((<Process::Status>)))の
-    配列を要素に持つ配列を返します。子プロセスがいない状態でこのメソッ
-    ドを呼び出すと空の配列を返します。
+[[m:$?]] には最後に終了した子プロセスの終了ステータスが
+設定されます。
 
-    ((<組み込み変数/$?>)) には最後に終了した子プロセスの終了ステータスが
-    設定されます。
+例:
+    3.times {|n|
+      Process.fork() { exit n }
+    }
+    p ret = Process.waitall
+    p ret[-1][1]  , ret[-1][1].class
+    p $?          , $?.class
+    => [[5245, 256], [5244, 0], [5243, 512]]
+       512
+       Process::Status
+       512
+       Process::Status
+#@end
 
-    例:
-        3.times {|n|
-          Process.fork() { exit n }
-        }
-        p ret = Process.waitall
-        p ret[-1][1]  , ret[-1][1].class 
-        p $?          , $?.class
-        => [[5245, 256], [5244, 0], [5243, 512]]
-           512
-           Process::Status
-           512
-           Process::Status
+--- waitpid(pid[, flags])
+--- waitpid2(pid[, flags])
 
---- Process.waitpid(pid[, flags])
---- Process.waitpid2(pid[, flags])
+pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
+終了した時に pid を返します。子プロセスが存在しなければ例外
+[[c:Errno::ECHILD]] が発生します。
 
-    ((|pid|)) で指定される特定の子プロセスの終了を待ち、そのプロセスが
-    終了した時に (({pid})) を返します。子プロセスが存在しなければ例外 
-    ((<Errno::ECHILD|Errno::EXXX>)) が発生します。
+flags には、Process モジュールの定数
+[[m:Process::WNOHANG]](ノンブロッキングモード)と
+[[m:Process::WUNTRACED]] の論理和を指定します。省略したときの値は 0
+です。
 
-    ((|flags|)) には、(({Process})) モジュールの定数 
-    ((<Process/Process::WNOHANG>))(ノンブロッキングモード)と
-    ((<Process/Process::WUNTRACED>)) の論理和を指定します。省略したときの値は 0 
-    です。
+ノンブロッキングモードで子プロセスがまだ終了していない時には
+nil を返します。[[man:waitpid(2)]] か
+[[man:wait4(2)]] の実装されていないマシンでは
+flags はいつも nil または 0 を指定する必要があります。
 
-    ノンブロッキングモードで子プロセスがまだ終了していない時には 
-    (({nil})) を返します。((<waitpid(2)|manual page>)) か 
-    ((<wait4(2)|manual page>)) の実装されていないマシンでは 
-    ((|flags|)) はいつも (({nil})) または 0 を指定する必要があります。
+waitpid2 は、その戻り値が pid と [[m:$?]] の配列
+である点だけが異なります。
 
-    (({waitpid2})) は、その戻り値が pid と ((<組み込み変数/$?>)) の配列
-    である点だけが異なります。
+((<ruby 1.7 feature>)):
+version 1.7 からは $? は [[c:Process::Status]] オブジェクト
+です。
+Process.wait と Process.waitpid の実体は同じものになりました。
+Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 
-    ((<ruby 1.7 feature>)):
-    version 1.7 からは (({$?})) は ((<Process::Status>)) オブジェクト
-    です。
-    Process.wait と Process.waitpid の実体は同じものになりました。
-    Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+== Constants
 
-== 定数:
+--- PRIO_PROCESS
 
---- Process::PRIO_PROCESS
+[[m:Process#Process.getpriority]] または
+[[m:Process#Process.setpriority]] のプロセスプライオリティ指定。
 
-    ((<Process/Process.getpriority>)) または 
-    ((<Process/Process.setpriority>)) のプロセスプライオリティ指定。
+--- PRIO_PGRP
 
---- Process::PRIO_PGRP
+プロセスグループプライオリティ。
 
-    プロセスグループプライオリティ。
+--- PRIO_USER
 
---- Process::PRIO_USER
+ユーザプライオリティ。
 
-    ユーザプライオリティ。
+--- RLIMIT_AS
+[[m:Process#Process.getrlimit]] 参照。
 
---- Process::RLIMIT_AS
---- Process::RLIMIT_CORE
---- Process::RLIMIT_CPU
---- Process::RLIMIT_DATA
---- Process::RLIMIT_FSIZE
---- Process::RLIMIT_MEMLOCK
---- Process::RLIMIT_NOFILE
---- Process::RLIMIT_NPROC
---- Process::RLIMIT_RSS
---- Process::RLIMIT_SBSIZE
---- Process::RLIMIT_STACK
---- Process::RLIM_INFINITY
---- Process::RLIM_SAVED_CUR
---- Process::RLIM_SAVED_MAX
+--- RLIMIT_CORE
+[[m:Process#Process.getrlimit]] 参照。
 
-    ((<Process/Process.getrlimit>)) 参照。
-    ((<執筆者募集>))
+--- RLIMIT_CPU
+[[m:Process#Process.getrlimit]] 参照。
 
---- Process::WNOHANG
+--- RLIMIT_DATA
+[[m:Process#Process.getrlimit]] 参照。
 
-    ((<Process#waitpid|Process/waitpid>)) の第二引数に指定するフラグで
-    す。終了した子プロセスがない時に (({waitpid})) がブロックしません。
+--- RLIMIT_FSIZE
+[[m:Process#Process.getrlimit]] 参照。
 
---- Process::WUNTRACED
+--- RLIMIT_MEMLOCK
+[[m:Process#Process.getrlimit]] 参照。
 
-    ((<Process#waitpid|Process/waitpid>)) の第二引数に指定するフラグで
-    す。子プロセスの停止によりステータスを報告していない子プロセスがあ
-    る時に (({waitpid})) がブロックしません。
+--- RLIMIT_NOFILE
+[[m:Process#Process.getrlimit]] 参照。
 
-== 内部クラス:
+--- RLIMIT_NPROC
+[[m:Process#Process.getrlimit]] 参照。
 
---- Status  ((<ruby 1.7 feature>))
+--- RLIMIT_RSS
+[[m:Process#Process.getrlimit]] 参照。
 
-    プロセスの終了ステータスを表現するクラスです。
-    ((<Process::Status>)) を参照してください。
+--- RLIMIT_SBSIZE
+[[m:Process#Process.getrlimit]] 参照。
 
-== 内部モジュール:
+--- RLIMIT_STACK
+[[m:Process#Process.getrlimit]] 参照。
 
---- UID         ((<ruby 1.8 feature>))
---- GID         ((<ruby 1.8 feature>))
---- Sys         ((<ruby 1.8 feature>))
+--- RLIM_INFINITY
+[[m:Process#Process.getrlimit]] 参照。
 
-    プロセスのユーザ/グループ属性に関する操作をまとめたモジュール。モ
-    ジュール UID、GID は各種 Unix システム間の違いを吸収したインタフェー
-    スを提供します。
+--- RLIM_SAVED_CUR
+[[m:Process#Process.getrlimit]] 参照。
 
-    モジュール Sys は、システムコール相当のメソッドを提供します。
+--- RLIM_SAVED_MAX
+[[m:Process#Process.getrlimit]] 参照。
+[[unknown:執筆者募集]]
 
-    それぞれ、((<Process::UID>)), ((<Process::GID>)), ((<Process::Sys>)) 
-    を参照してください。
+--- WNOHANG
+
+[[m:Process#waitpid]] の第二引数に指定するフラグで
+す。終了した子プロセスがない時に waitpid がブロックしません。
+
+--- WUNTRACED
+
+[[m:Process#waitpid]] の第二引数に指定するフラグで
+す。子プロセスの停止によりステータスを報告していない子プロセスがあ
+る時に waitpid がブロックしません。
+
+#@if (version >= "1.7.0")
+#@include(Process__Status.rd)
+#@end
+
+#@if (version >= "1.8.0")
+#@include(Process__UID.rd)
+#@include(Process__GID.rd)
+#@include(Process__Sys.rd)
+#@end
