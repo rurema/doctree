@@ -89,12 +89,12 @@ _builtin/specialvars            aamine          converted
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-English                         date
-Env                             date
-Win32API                        date
+English                         date            converted
+Env
+Win32API                        date            converted
 abbrev
-base64                          date
-benchmark                       date
+base64                          date            converted
+benchmark                       date            converted
 bigdecimal                      aamine          converted
 bigdecimal/jacobian             aamine          converted
 bigdecimal/ludcmp               aamine          converted
