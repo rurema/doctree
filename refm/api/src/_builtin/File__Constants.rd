@@ -50,8 +50,6 @@ File クラスはこのモジュールをインクルードしているので、以下に挙
 [[m:File#open]]で使用します。
 
 #@if (version >= "1.7.0")
-以下の定数は、[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
-
 --- FNM_NOESCAPE
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
