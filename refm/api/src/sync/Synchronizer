@@ -1,4 +1,4 @@
-= Synchronizer
+= class Synchronizer
 
-((<Sync_m>))を(({include}))したクラス((<Sync>)) の別名。
-使い方は((<Sync_m>))を参照してください。
+[[c:Sync_m]]をincludeしたクラス[[c:Sync]] の別名。
+使い方は[[c:Sync_m]]を参照してください。

@@ -214,7 +214,7 @@ soap
 socket
 stringio
 strscan                         iwadon          converted
-sync                            iwadon
+sync                            iwadon          converted
 syslog                          iwadon
 tempfile                        iwadon
 test/unit
