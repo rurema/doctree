@@ -1,3 +1,4 @@
+#@if (version >= "1.8.0")
 = class GServer < Object
 
 サーバを実装するためのクラスです。GServer を継承した新しいクラスを定義して使います。
@@ -156,3 +157,4 @@ audit が true に設定されているなら、サーバ停止時に呼ばれます。
 --- stopped?
 
 GServer が停止しているなら真を返します。
+#@end

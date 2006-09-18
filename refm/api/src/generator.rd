@@ -1,3 +1,4 @@
+#@if (version >= "1.8.0")
 = class Generator < Object
 
 include Enumerable
@@ -185,3 +186,4 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 --- size
 
 与えられた Enumerable オブジェクトの数を返します。
+#@end
