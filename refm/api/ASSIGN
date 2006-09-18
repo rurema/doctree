@@ -138,11 +138,11 @@ ftools                          date            converted
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-gdbm                            date
-generator                       date
-getoptlong                      date
-getopts                         date
-gserver                         date
+gdbm                            date            converted
+generator                       date            converted
+getoptlong                      date            converted
+getopts                         date            converted
+gserver                         date            converted
 iconv
 importenv
 io/nonblock
