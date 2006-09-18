@@ -1,19 +1,14 @@
-= class ThreadsWait
+= class ThreadsWait < Object
 
 provides synchronization for multiple threads.
-
-== Constants
-
---- ThWait
-  ((<ThreadsWait>)) の別名
 
 == Class Methods
 
 --- ThreadsWait.all_waits(thread1,...)
 
-    waits until all of specified threads are terminated.
-    if a block is supplied for the method, evaluates it for
-    each thread termination.
+waits until all of specified threads are terminated.
+if a block is supplied for the method, evaluates it for
+each thread termination.
 
         require 'thwait'
 
@@ -35,36 +30,43 @@ provides synchronization for multiple threads.
 
 --- ThreadsWait.new(thread1,...)
 
-    creates synchronization object, specifying thread(s) to wait.
+creates synchronization object, specifying thread(s) to wait.
 
 == Instance Methods
 
 --- ThreadsWait#threads
 
-    list threads to be synchronized
+list threads to be synchronized
 
 --- ThreadsWait#empty?
 
-    is there any thread to be synchronized.
+is there any thread to be synchronized.
 
 --- ThreadsWait#finished?
 
-    is there already terminated thread.
+is there already terminated thread.
 
---- ThreadsWait#join(thread1,...) 
+--- ThreadsWait#join(thread1,...)
 
-    wait for specified thread(s).
+wait for specified thread(s).
 
 --- ThreadsWait#join_nowait(threa1,...)
 
-    specifies thread(s) to wait.  non-blocking.
+specifies thread(s) to wait.  non-blocking.
 
 --- ThreadsWait#next_wait
 
-    waits until any of specified threads is terminated.
+waits until any of specified threads is terminated.
 
 --- ThreadsWait#all_waits
 
-    waits until all of specified threads are terminated.
-    if a block is supplied for the method, evaluates it for
-    each thread termination.
+waits until all of specified threads are terminated.
+if a block is supplied for the method, evaluates it for
+each thread termination.
+
+= reopen Kernel
+
+== Constants
+
+--- ThWait
+[[c:ThreadsWait]] の別名

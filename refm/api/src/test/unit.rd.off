@@ -1,13 +1,6 @@
-= Test::Unit
+¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¹Ô¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
-¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¹Ô¤¦¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
-
-((<URL:http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html>))
-
-*((<Test::Unit/»È¤¤Êý>))
-*((<Test::Unit/Test::Unit::TestCase>))
-*((<Test::Unit/Test::Unit::Assertions>))
-*((<Test::Unit/Test::Unit::AutoRunner>))
+[[m:URL:http:#/www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
 
 == »È¤¤Êý
 
@@ -116,121 +109,127 @@ console ¤ò»È¤¦ (default)
  require 'test_foo.rb'
  require 'test_bar.rb'
 
-¤â¤¦¾¯¤·¹âÅÙ¤Ê¥Æ¥¹¥È¤Î¼Â¹ÔÊýË¡¤Ë´Ø¤·¤Æ¤Ï ((<Test::Unit/Test::Unit::AutoRunner>)) ¤ò
+¤â¤¦¾¯¤·¹âÅÙ¤Ê¥Æ¥¹¥È¤Î¼Â¹ÔÊýË¡¤Ë´Ø¤·¤Æ¤Ï [[c:Test::Unit::AutoRunner]] ¤ò
 »²¾È¤·¤Æ²¼¤µ¤¤¡£
 
-== Test::Unit::TestCase
+== RubyUnit ¤«¤é¤Î°Ü¹Ô
+
+assertion ¥á¥½¥Ã¥É¤Î°ã¤¤¤Ï [[unknown:"ruby-src:lib/runit/assert.rb"]] ¤ò»²¾È¡£
+[[c:RUNIT::Assert]] ¤â»²¾È¡£
+
+= class Test::Unit::TestCase
+include Test::Unit::Assertions
 
 ¥Æ¥¹¥È¤Ï¤³¤Î¥¯¥é¥¹¤Î¥µ¥Ö¥¯¥é¥¹¤È¤·¤ÆÄêµÁ¤·¤Þ¤¹¡£
 
-=== ¥á¥½¥Ã¥É
+== Instance Methods
 
 --- setup
-    ³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤ëÁ°¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
+³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤ëÁ°¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
 
 --- teardown
-    ³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤¿¸å¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
+³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤¿¸å¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
 
-== Test::Unit::Assertions
+= module Test::Unit::Assertions
 
 Test::Unit::TestCase ¤Ë include ¤µ¤ì¤Æ»È¤ï¤ì¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£assert ¥á¥½¥Ã¥É¤òÄêµÁ¤·¤Æ
 ¤¤¤Þ¤¹¡£
 
-=== ¥á¥½¥Ã¥É
+³Æ assert ¥á¥½¥Ã¥É¤ÎºÇ¸å¤Î°ú¿ô message ¤Ï¥Æ¥¹¥È¤¬¼ºÇÔ¤·¤¿¤È¤­¤ËÉ½¼¨¤µ¤ì¤ë
+¥á¥Ã¥»¡¼¥¸¤Ç¤¹¡£
 
-³Æ assertion ¤ÎºÇ¸å¤Î°ú¿ô message ¤Ï¥Æ¥¹¥È¤¬¼ºÇÔ¤·¤¿¤È¤­¤ËÉ½¼¨¤µ¤ì¤ë
-¥á¥Ã¥»¡¼¥¸
+== Instance Methods
 
 --- assert(boolean, message=nil)
 
-    boolean ¤¬¿¿¤Ê¤é pass
+boolean ¤¬¿¿¤Ê¤é pass
 
 --- assert_equal(expected, actual, message=nil)
 
-    expected == actual ¤Ê¤é¤Ð pass
+expected == actual ¤Ê¤é¤Ð pass
 
 --- assert_not_equal(expected, actual, message="")
 
-    expected != actual ¤Ê¤é¤Ð pass
+expected != actual ¤Ê¤é¤Ð pass
 
 --- assert_instance_of(klass, object, message="")
 
-    klass == object.class ¤¬¿¿¤Ê¤é pass
+klass == object.class ¤¬¿¿¤Ê¤é pass
 
 --- assert_nil(object, message="")
 
-    object.nil? ¤Ê¤é¤Ð pass
+object.nil? ¤Ê¤é¤Ð pass
 
 --- assert_not_nil(object, message="")
 
-    !object.nil? ¤Ê¤é¤Ð pass
+!object.nil? ¤Ê¤é¤Ð pass
 
 --- assert_kind_of(klass, object, message="")
 
-    object.kind_of?(klass) ¤¬¿¿¤Ê¤é pass
+object.kind_of?(klass) ¤¬¿¿¤Ê¤é pass
 
 --- assert_respond_to(object, method, message="")
 
-    object.respond_to?(method) ¤¬¿¿¤Ê¤é pass
+object.respond_to?(method) ¤¬¿¿¤Ê¤é pass
 
 --- assert_match(pattern, string, message="")
 
-    string =~ pattern ¤¬¿¿¤Ê¤é¤Ð pass
+string =~ pattern ¤¬¿¿¤Ê¤é¤Ð pass
 
 --- assert_no_match(regexp, string, message="")
 
-    regexp !~ string ¤¬¿¿¤Ê¤é¤Ð pass
+regexp !~ string ¤¬¿¿¤Ê¤é¤Ð pass
 
 --- assert_same(expected, actual, message="")
 
-    actual.equal?(expected) ¤¬¿¿¤Ê¤é pass
+actual.equal?(expected) ¤¬¿¿¤Ê¤é pass
 
 --- assert_not_same(expected, actual, message="")
 
-    !actual.equal?(expected) ¤¬¿¿¤Ê¤é pass
+!actual.equal?(expected) ¤¬¿¿¤Ê¤é pass
 
 --- assert_operator(object1, operator, object2, message="")
 
-    object1.send(operator, object2) ¤¬¿¿¤Ê¤é pass
+object1.send(operator, object2) ¤¬¿¿¤Ê¤é pass
 
 --- assert_raise(expected_exception_klass, message="") { ... }
 
-    ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬È¯À¸¤·¡¢¤½¤ÎÎã³°¤¬
-    expected_exception_klass ¥¯¥é¥¹¤Ê¤é¤Ð pass
+¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬È¯À¸¤·¡¢¤½¤ÎÎã³°¤¬
+expected_exception_klass ¥¯¥é¥¹¤Ê¤é¤Ð pass
 
 --- assert_nothing_raised(*args) { ... }
 
-    ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬µ¯¤­¤Ê¤±¤ì¤Ð pass
+¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬µ¯¤­¤Ê¤±¤ì¤Ð pass
 
 --- flunk(message="Flunked")
 
-    ¾ï¤Ë¼ºÇÔ
+¾ï¤Ë¼ºÇÔ
 
 --- assert_throws(expected_symbol, message="") { ... }
 
-    ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ :expected_symbol ¤¬ throw ¤µ¤ì¤¿¤é pass
+¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ :expected_symbol ¤¬ throw ¤µ¤ì¤¿¤é pass
 
 --- assert_nothing_thrown(message="") { ... }
 
-    ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ throw ¤¬µ¯¤³¤é¤Ê¤±¤ì¤Ð pass
+¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ throw ¤¬µ¯¤³¤é¤Ê¤±¤ì¤Ð pass
 
 --- assert_in_delta(expected_float, actual_float, delta, message="")
 
-    (expected_float.to_f - actual_float.to_f).abs <= delta.to_f 
-    ¤¬¿¿¤Ê¤é pass
+(expected_float.to_f - actual_float.to_f).abs <= delta.to_f 
+¤¬¿¿¤Ê¤é pass
 
-    delta ¤ÏÀµ¤Î¿ô¤Ç¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¡£
+delta ¤ÏÀµ¤Î¿ô¤Ç¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¡£
 
 --- assert_send(send_array, message="")
 
-    send_array[0].__send__(send_array[1], *send_array[2..-1])
-    ¤¬¿¿¤Ê¤é pass
+send_array[0].__send__(send_array[1], *send_array[2..-1])
+¤¬¿¿¤Ê¤é pass
 
 --- assert_block(message="assert_block failed.") { ... }
 
-    block ¤Î·ë²Ì¤¬¿¿¤Ê¤é pass
+block ¤Î·ë²Ì¤¬¿¿¤Ê¤é pass
 
-== Test::Unit::AutoRunner
+= class Test::Unit::AutoRunner
 
 ¥Æ¥¹¥È¤Î¼Â¹Ô¤òÁàºî¤·¤¿¤¤¤È¤­¤Ë¤³¤Î AutoRunner ¥¯¥é¥¹¤ò»È¤¤¤Þ¤¹¡£
 ÂçÎÌ¤Î¥Æ¥¹¥È¤ÎÃæ¤«¤éÆÃÄê¤Î¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤Î¤ß¤ò¼Â¹Ô¤·¤¿¤¤¾ì¹ç¡¢
@@ -239,21 +238,24 @@ AutoRunner ¤Ï Collector::Dir ¥ª¥Ö¥¸¥§¥¯¥È¤Ê¤É¤Î Collector ¤Ë
 ¥Æ¥¹¥È¤ò½¸¤á¤µ¤»¤Æ¡¢UI::Console::TestRunner ¥ª¥Ö¥¸¥§¥¯¥È¤Ê¤É¤Î
 Runner ¤Ë¥Æ¥¹¥È¤ò¼Â¹Ô¤µ¤»¤Æ¤¤¤ë¥¯¥é¥¹¤Ç¤¹¡£
 
-=== Îã
+#@# === Îã
 
 ¥Ç¥£¥ì¥¯¥È¥ê ./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤¿¤¤¾ì¹ç¤Ï¼¡¤Î¤è¤¦¤Ê¥Õ¥¡¥¤¥ë(runner.rb)¤òÍÑ°Õ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£¥Æ¥¹¥È¤Ï test_*.rb ¤È¤¤¤¦¥Õ¥¡¥¤¥ëÌ¾¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
 
-((<ruby 1.8.3 feature>)): 
-ruby 1.8.3 °Ê¹ß¤Ç¤Ï AutoRunner.run ¤ÎÂè°ì°ú¿ô¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£
-Âè°ì°ú¿ô¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
+#@# ruby 1.8.3 °Ê¹ß¤Ç¤Ï AutoRunner.run ¤ÎÂè°ì°ú¿ô¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£
+#@# Âè°ì°ú¿ô¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
 
-  # ruby 1.8.2 ¤Þ¤Ç
+#@#  # ruby 1.8.2 ¤Þ¤Ç
+#@if (version <= "1.8.2")
   require 'test/unit'
   Test::Unit::AutoRunner.run(false, './somedir')
+#@end
 
-  # ruby 1.8.3 °Ê¹ß
+#@#  # ruby 1.8.3 °Ê¹ß
+#@if (version >= "1.8.3")
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir')
+#@end
 
 Ã±¤Ë¼Â¹Ô¤·¤Þ¤¹¡£
 
@@ -274,29 +276,32 @@ ruby 1.8.3 °Ê¹ß¤Ç¤Ï AutoRunner.run ¤ÎÂè°ì°ú¿ô¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir', ['--pattern=/test_.*\.rbx\Z/'])
 
-=== ¥¯¥é¥¹¥á¥½¥Ã¥É
+== Class Methods
 
---- AutoRunner.run(force_standalone = false, dir = nil, argv = ARGV)
-    ¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
+--- run(force_standalone = false, dir = nil, argv = ARGV)
+¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
         
-    ((<ruby 1.8.3 feature>)):
-    ruby 1.8.3 °Ê¹ß¤Ç¤Ï ((|force_standalone|)) ¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£        
-    ((|force_standalone|)) ¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢dir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
-    false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤ÎÃæ¤«¤é¥Æ¥¹¥È¤òÃµ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
-    ¥Ç¥Õ¥©¥ë¥È¤Ï false ¤Ç¤¹¡£
+#@if (version >= "1.8.3")
+ruby 1.8.3 °Ê¹ß¤Ç¤Ï force_standalone ¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£        
+force_standalone ¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢dir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
+false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤ÎÃæ¤«¤é¥Æ¥¹¥È¤òÃµ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
+¥Ç¥Õ¥©¥ë¥È¤Ï false ¤Ç¤¹¡£
+#@end
 
-    ruby 1.8.2 ¤Þ¤Ç: ((|force_standalone|)) ¤Ë¤Ï $0 ¤« false ¤òÍ¿¤¨¤Þ¤¹¡£
-    $0 ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤ÎÃæ¤«¤é¥Æ¥¹¥È¤òÃµ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
-    false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢((|dir|)) ¤ÎÃæ¤«¤é¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤òºÆµ¢Åª¤ËÃµºº¤·¤Æ
-    ¼Â¹Ô¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï¥Õ¥¡¥¤¥ëÌ¾¤¬ test_*.rb ¤Î¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤·¤«Ãµºº
-    ¤·¤Þ¤»¤ó¡£
-    false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ç¤â¡¢´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤Ï¼Â¹Ô¤¹¤ë¥Æ¥¹¥È¤Ë´Þ¤Þ¤ì¤Þ¤¹¡£
+#@if (version <= "1.8.2")
+ruby 1.8.2 ¤Þ¤Ç: force_standalone ¤Ë¤Ï $0 ¤« false ¤òÍ¿¤¨¤Þ¤¹¡£
+$0 ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤ÎÃæ¤«¤é¥Æ¥¹¥È¤òÃµ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
+false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢dir ¤ÎÃæ¤«¤é¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤òºÆµ¢Åª¤ËÃµºº¤·¤Æ
+¼Â¹Ô¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï¥Õ¥¡¥¤¥ëÌ¾¤¬ test_*.rb ¤Î¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤·¤«Ãµºº
+¤·¤Þ¤»¤ó¡£
+false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ç¤â¡¢´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤Ï¼Â¹Ô¤¹¤ë¥Æ¥¹¥È¤Ë´Þ¤Þ¤ì¤Þ¤¹¡£
+#@end
 
-    ((|dir|)) ¤Ë¤Ï ((|force_standalone|)) ¤Ë true ¤òÍ¿¤¨¤¿»þ¤ËºÆµ¢Åª¤ËÃµºº¤¹¤ë¥Ç¥£¥ì¥¯¥È¥êÌ¾¤ò
-    Í¿¤¨¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤òºÆµ¢Åª¤ËÃµºº¤·¤Þ¤¹¡£
+dir ¤Ë¤Ï force_standalone ¤Ë true ¤òÍ¿¤¨¤¿»þ¤ËºÆµ¢Åª¤ËÃµºº¤¹¤ë¥Ç¥£¥ì¥¯¥È¥êÌ¾¤ò
+Í¿¤¨¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï¥«¥ì¥ó¥È¥Ç¥£¥ì¥¯¥È¥ê¤òºÆµ¢Åª¤ËÃµºº¤·¤Þ¤¹¡£
 
-    ((|argv|)) ¤Ë¤Ï¥ª¥×¥·¥ç¥ó¤òÇÛÎó¤È¤·¤ÆÍ¿¤¨¤Þ¤¹¡£²ò¼á¤¹¤ë¥ª¥×¥·¥ç¥ó¤ÏÀè¤Ë
-    ½Ð¤Æ¤­¤¿¤â¤Î¤ÈÆ±¤¸¤Ç¤¹¡£
+argv ¤Ë¤Ï¥ª¥×¥·¥ç¥ó¤òÇÛÎó¤È¤·¤ÆÍ¿¤¨¤Þ¤¹¡£²ò¼á¤¹¤ë¥ª¥×¥·¥ç¥ó¤ÏÀè¤Ë
+½Ð¤Æ¤­¤¿¤â¤Î¤ÈÆ±¤¸¤Ç¤¹¡£
 
       -r, --runner=RUNNER              Use the given RUNNER.
                                        (c[onsole], f[ox], g[tk], g[tk]2, t[k])
@@ -311,30 +316,25 @@ ruby 1.8.3 °Ê¹ß¤Ç¤Ï AutoRunner.run ¤ÎÂè°ì°ú¿ô¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤
                                        test.
       -h, --help                       Display this help.
 
-    ((|force_standalone|)) ¤Ë true ¤òÍ¿¤¨¤¿»þ¤Ë¤Ï¼¡¤Î¥ª¥×¥·¥ç¥ó¤¬ÄÉ²Ã¤µ¤ì¤Þ¤¹¡£
+force_standalone ¤Ë true ¤òÍ¿¤¨¤¿»þ¤Ë¤Ï¼¡¤Î¥ª¥×¥·¥ç¥ó¤¬ÄÉ²Ã¤µ¤ì¤Þ¤¹¡£
 
       -a, --add=TORUN                  Add TORUN to the list of things to run;
                                        can be a file or a directory.
       -p, --pattern=PATTERN            Match files to collect against PATTERN.
       -x, --exclude=PATTERN            Ignore files to collect against PATTERN.
 
-    Îã
+Îã
 
       require 'test/unit'
       Test::Unit::AutoRunner.run(true, './', ['--runner=tk', '-v',
                                                '--exclude=/test_hoge.*\.rb\Z/i'])
     
-    ((|argv|)) ¤Ë¥Ç¥Õ¥©¥ë¥È¤Î¤Þ¤Þ ARGV ¤òÅÏ¤·¤Æ¤ª¤±¤Ð¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é¥ª¥×¥·¥ç¥ó¤ò
-    »ØÄê¤Ç¤­¤Þ¤¹¡£
+argv ¤Ë¥Ç¥Õ¥©¥ë¥È¤Î¤Þ¤Þ ARGV ¤òÅÏ¤·¤Æ¤ª¤±¤Ð¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é¥ª¥×¥·¥ç¥ó¤ò
+»ØÄê¤Ç¤­¤Þ¤¹¡£
 
       require 'test/unit'
       Test::Unit::AutoRunner.run(true, './')
 
-    ¤È¡¢runner.rb ¤Ë½ñ¤¤¤Æ¤ª¤¤¤Æ¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é°Ê²¼¤Î¤è¤¦¤Ë¼Â¹Ô¡£
+¤È¡¢runner.rb ¤Ë½ñ¤¤¤Æ¤ª¤¤¤Æ¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é°Ê²¼¤Î¤è¤¦¤Ë¼Â¹Ô¡£
    
       $ ruby runner.rb --runner=tk -v --exclude=/test_hoge.\*\\.rb\\Z/i
-
-== RubyUnit ¤«¤é¤Î°Ü¹Ô
-
-assertion ¥á¥½¥Ã¥É¤Î°ã¤¤¤Ï ((<"ruby-src:lib/runit/assert.rb">)) ¤ò»²¾È¡£
-((<RUNIT::Assert>)) ¤â»²¾È¡£

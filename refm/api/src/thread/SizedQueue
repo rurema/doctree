@@ -1,23 +1,24 @@
-= SizedQueue
+= class SizedQueue < Queue
 
-サイズの最大値を指定できる ((<Queue>)) です。
+サイズの最大値を指定できる [[c:Queue]] です。
 
-== 例
+#@# == 例
+例:
 
-((<ruby-list:283>))より。(({q})) をサイズ 1 の SizedQueue オブジェクトに
+[[unknown:ruby-list:283]]より。q をサイズ 1 の SizedQueue オブジェクトに
 することによって、入力される行と出力される行が同じ順序になります。
 q = [] にすると入力と違った順序で行が出力されます。
 
   require 'thread'
-  
+
   q = SizedQueue.new(1)
-  
+
   th = Thread.start {
     while line = q.pop
       print line
     end
   }
-  
+
   while l = gets
     q.push(l)
   end
@@ -25,33 +26,29 @@ q = [] にすると入力と違った順序で行が出力されます。
 
   th.join
 
-== スーパークラス:
+== Class Methods
 
-* ((<Queue>))
+--- new(max)
+SizedQueue オブジェクトを生成します。
+max は queue のサイズの最大値です。
 
-== クラスメソッド:
-
---- SizedQueue.new(max)
-    SizedQueue オブジェクトを生成します。
-    max は queue のサイズの最大値です。
-
-== メソッド:
+== Instance Methods
 
 --- max
---- max= n
-    queue の最大サイズを設定します。
-    
+--- max=(n)
+queue の最大サイズを設定します。
+
 --- push(obj)
-    queue に ((|obj|)) を追加します。
+queue に obj を追加します。
 
-    queue のサイズが max に達している場合は、
-    queue のサイズが max より小さくなるまで他のスレッドに実行を譲ります。その後、
-    queue に ((|obj|)) を追加します。
+queue のサイズが max に達している場合は、
+queue のサイズが max より小さくなるまで他のスレッドに実行を譲ります。その後、
+queue に obj を追加します。
 
-    あとは ((<Queue#push|Queue/push>)) と同じです。
+あとは [[m:Queue#push]] と同じです。
 
 --- pop
-    queue からひとつ値を取り出します。
-    queue に push しようと待っているスレッドがあれば、実行を再開させます。
+queue からひとつ値を取り出します。
+queue に push しようと待っているスレッドがあれば、実行を再開させます。
 
-    あとは ((<Queue#pop|Queue/pop>)) と同じです。
+あとは [[m:Queue#pop]] と同じです。

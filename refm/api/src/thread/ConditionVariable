@@ -1,12 +1,13 @@
-= ConditionVariable
+= class ConditionVariable < Object
 
 スレッドの同期機構の一つである状態変数を実現するクラスです。
 
 以下も ConditionVariable を理解するのに参考になります。
 
-((<URL:http://www.ruby-doc.org/docs/ProgrammingRuby/html/tut_threads.html#UF>))
+[[m:URL:http:#/www.ruby-doc.org/docs/ProgrammingRuby/html/tut_threads.html#UF]]
 
-== Condition Variable とは
+#@# == Condition Variable とは
+Condition Variable とは:
 
 あるスレッド A が排他領域で動いていたとします。スレッド A は現在空いていない
 リソースが必要になったので空くまで待つことにしたとします。これはうまくいきません。
@@ -41,11 +42,11 @@
         }
     }
 
-以下は ((<ruby-list:14445>)) で紹介されている例です。(({@q})) が空になった場合、
+以下は [[unknown:ruby-list:14445]] で紹介されている例です。@q が空になった場合、
 あるいは満たんになった場合に Condition Variable を使って wait しています。
 
   require 'thread'
-  
+
   class TinyQueue
     def initialize(max=2)
       @max = max
@@ -54,54 +55,54 @@
       @mutex = Mutex.new
       @q = []
     end
-  
+
     def count
       @q.size
     end
-  
+
     def enq(v)
       @mutex.synchronize{
-        @full.wait(@mutex) if count == @max 
+        @full.wait(@mutex) if count == @max
         @q.push v
-        @empty.signal if count == 1 
+        @empty.signal if count == 1
       }
     end
-  
-    def deq    
+
+    def deq
       @mutex.synchronize{
-        @empty.wait(@mutex) if count == 0 
+        @empty.wait(@mutex) if count == 0
         v = @q.shift
         @full.signal if count == (@max - 1)
         v
       }
     end
-  
+
     alias send enq
     alias recv deq
   end
-    
+
   if __FILE__ == $0
     q = TinyQueue.new(1)
     foods = 'Apple Banana Strawberry Udon Rice Milk'.split
     l = []
-  
+
     th = Thread.new {
       for obj in foods
-        q.send(obj) 
+        q.send(obj)
         print "sent ", obj, "\n"
       end
       q.send nil
     }
-  
+
     l.push th
-  
+
     th = Thread.new {
       while obj = q.recv
         print "recv ", obj, "\n"
       end
     }
     l.push th
-  
+
     l.each do |t|
       t.join
     end
@@ -123,36 +124,32 @@
   sent Milk
   recv Milk
 
-== スーパークラス:
-
-* ((<Object>))
-
-== クラスメソッド:
+== Class Methods
 
 --- ConditionVariable.new
-    状態変数を生成して返します。
+状態変数を生成して返します。
 
-== メソッド:
+== Instance Methods
 
 --- broadcast
-    状態変数を待っているスレッドをすべて再開します。再開された
-    スレッドは ((<ConditionVariable#wait|ConditionVariable>))
-    で指定した mutex のロックを試みます。
+状態変数を待っているスレッドをすべて再開します。再開された
+スレッドは [[m:ConditionVariable#wait]]
+で指定した mutex のロックを試みます。
 
-    実行待ちしていたスレッドの配列を返します。
+実行待ちしていたスレッドの配列を返します。
 
 --- signal
-    状態変数を待っているスレッドを1つ再開します。再開された
-    スレッドは ((<ConditionVariable#wait|ConditionVariable>))
-    で指定した mutex のロックを試みます。
+状態変数を待っているスレッドを1つ再開します。再開された
+スレッドは [[m:ConditionVariable#wait]]
+で指定した mutex のロックを試みます。
 
-    状態を待っているスレッドがあった場合は、そのスレッドを返します。
-    そうでなければ (({nil})) を返します。
+状態を待っているスレッドがあった場合は、そのスレッドを返します。
+そうでなければ nil を返します。
 
 --- wait(mutex)
-    mutex のロックを解放し、カレントスレッドを停止します。
-    ((<ConditionVariable#signal|ConditionVariable>))または、
-    ((<ConditionVariable#broadcast|ConditionVariable>))で送られたシグナルを
-    受け取ると、mutexのロックを取得し、実行状態となります。
+mutex のロックを解放し、カレントスレッドを停止します。
+[[m:ConditionVariable#signal]]または、
+[[m:ConditionVariable#broadcast]]で送られたシグナルを
+受け取ると、mutexのロックを取得し、実行状態となります。
 
-    (({self})) を返します。
+self を返します。
