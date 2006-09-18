@@ -108,9 +108,9 @@ csv                             date            converted
 curses                          date            converted
 date
 date2
-dbm
+dbm                             date
 debug
-delegate
+delegate                        date
 digest                          iwadon          converted
 digest/md5                      iwadon          converted
 digest/rmd160                   iwadon          converted
@@ -122,9 +122,9 @@ dl/import
 dl/struct
 dl/types
 dl/win32
-drb
-e2mmap
-erb
+drb                             date
+e2mmap                          date
+erb                             date
 eregex
 etc
 expect
