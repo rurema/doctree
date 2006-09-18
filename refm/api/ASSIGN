@@ -114,7 +114,7 @@ delegate                        date            converted
 digest                          iwadon          converted
 digest/md5                      iwadon          converted
 digest/rmd160                   iwadon          converted
-digest/sha1                     iwadon
+digest/sha1                     iwadon          converted
 digest/sha2                     iwadon
 dl
 dl/Symbol
