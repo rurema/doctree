@@ -1,125 +1,130 @@
-= e2mmap -- Exception2MessageMapper
+e2mmap -- Exception2MessageMapper
 
 例外クラスに特定のエラーメッセージ用フォーマットを関連づけます。
 
-== Usage
+=== Usage
 
-1. クラス定義の中で、Exception2MessageMapperをextendすれば、
-def_e2messageメソッドやdef_exceptionメソッドが使えます。
+1. クラス定義の中で、Exception2MessageMapper を extend すれば、
+def_e2message メソッドや def_exception メソッドが使えます。
 これらで例外クラスとメッセージを関連づけることができます。
 
-   class Foo
-     extend Exception2MessageMapper
-     def_e2message ExistingExceptionClass, "message..."
-     def_exception :NewExceptionClass, "message...", StandardError
-     ...
-   end
+例:
 
-   foo = Foo.new
-   foo.Fail ....
+  class Foo
+    extend Exception2MessageMapper
+    def_e2message ExistingExceptionClass, "message..."
+    def_exception :NewExceptionClass, "message...", StandardError
+    ...
+  end
+
+  foo = Foo.new
+  foo.Fail ....
 
 2. 何度も使いたい例外クラスは、クラスの代わりにモジュールで定義して、
-それをincludeして使います。
+それを include して使います。
 
-   module ErrorMod
-     extend Exception2MessageMapper
-     def_e2meggage ExistingExceptionClass, "message..."
-     def_exception :NewExceptionClass, "message...", StandardError
-     ...
-   end
-   class Foo
-     include ErrorMod
-     ...
-   end
+例:
 
-   foo = Foo.new
-   foo.Fail ....
+  module ErrorMod
+    extend Exception2MessageMapper
+    def_e2meggage ExistingExceptionClass, "message..."
+    def_exception :NewExceptionClass, "message...", StandardError
+    ...
+  end
+  class Foo
+    include ErrorMod
+    ...
+  end
+  
+  foo = Foo.new
+  foo.Fail ....
 
 3. 例外を設定したクラスのインスタンス以外から例外を呼ぶこともできます。
 
-   module ErrorMod
-     extend Exception2MessageMapper
-     def_e2message ExistingExceptionClass, "message..."
-     def_exception :NewExceptionClass, "message...", StandardError
-     ...
-   end
-   class Foo
-     extend Exception2MessageMapper
-     include ErrorMod
-     ...
-   end
+例:
 
-   Foo.Fail NewExceptionClass, arg...
-   Foo.Fail ExistingExceptionClass, arg...
+  module ErrorMod
+    extend Exception2MessageMapper
+    def_e2message ExistingExceptionClass, "message..."
+    def_exception :NewExceptionClass, "message...", StandardError
+    ...
+  end
+  class Foo
+    extend Exception2MessageMapper
+    include ErrorMod
+    ...
+  end
+  
+  Foo.Fail NewExceptionClass, arg...
+  Foo.Fail ExistingExceptionClass, arg...
 
-
-== モジュール関数
-
-# --- E2MM.extend_object(cl)
-# ??
-
---- def_e2message(exception, message_form)
-
-    すでに存在する例外クラスexceptionに、
-    エラーメッセージ用フォーマット message_form を関連づけます。
-    message_formの形式は sprintf() のformat文字列と同じです。
-    
-    このフォーマットはRaise(またはその別名のFail)で使われます。
-
---- def_exception(exception_name, message_form, superclass)
-
-    exception_nameという名前の例外クラスを作ります(exception_name
-    はシンボルで与えられます)。
-    このクラスは、superclassが設定されていればそのクラスの
-    サブクラスに、設定されていない場合はStandardErrorのサブ
-    クラスになります。
-    
-    そして、そのクラスにmessage_formで指定されたフォーマットを
-    関連づけます。
-    これはRaise(またはその別名のFail)で使われます。
-
-== メソッド
+== Private Instance Methods
 
 --- Raise(error, [args [,args2...]])
 
-    errorクラスのエラーを発生させます。
+error クラスのエラーを発生させます。
+
+error の後に続く引数 args 群は、例外クラスに関連づけられたエラー
+メッセージ用フォーマットと合わせて、エラーメッセージの一部に
+なります。例えば、
+
+  class Foo
+    extend Exception2MessageMapper
+    def_exception :NewExceptionClass, "message...%d, %d and %d"
     
-    errorの後に続く引数 args群は、例外クラスに関連づけられたエラー
-    メッセージ用フォーマットと合わせて、エラーメッセージの一部に
-    なります。例えば、
+    def foo
+      Raise NewExceptionClass, 1, 2, 3
+    end
+  end
 
-      class Foo
-        extend Exception2MessageMapper
-        def_exception :NewExceptionClass, "message...%d, %d and %d"
-        
-        def foo
-          Raise NewExceptionClass, 1, 2, 3
-        end
-      end
+という定義があれば、
 
-    という定義があれば、
+  Foo.new().foo()
 
-      Foo.new().foo()
+というメソッドで、
 
-    というメソッドで、
+  in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
 
-      in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)  
+というエラーが発生します。
 
-    というエラーが発生します。
-    
-    また、
+また、
 
-      Foo.Raise Foo::NewExceptionClass, 1, 3, 5
+  Foo.Raise Foo::NewExceptionClass, 1, 3, 5
 
-    というメソッドでも、
+というメソッドでも、
 
-      in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)  
+  in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
 
-    という例外が発生します。
+という例外が発生します。
 
 
 --- Fail(error, [args [,args2...]])
 
-    Raise の別名です。
- 
+Raise の別名です。
 
+= module E2MM
+
+== Module Functions
+
+#@# --- E2MM.extend_object(cl)
+#@# ??
+
+--- def_e2message(exception, message_form)
+
+すでに存在する例外クラス exception に、
+エラーメッセージ用フォーマット message_form を関連づけます。
+message_form の形式は sprintf() の format 文字列と同じです。
+
+このフォーマットは Raise (またはその別名の Fail)で使われます。
+
+--- def_exception(exception_name, message_form, superclass)
+
+exception_name という名前の例外クラスを作ります(exception_name
+はシンボルで与えられます)。
+このクラスは、superclass が設定されていればそのクラスの
+サブクラスに、設定されていない場合は StandardError のサブ
+クラスになります。
+
+そして、そのクラスに message_form で指定されたフォーマットを
+関連づけます。
+これは Raise(またはその別名の Fail)で使われます。
