@@ -1,31 +1,60 @@
-= fcntl
+fcntl
 
-Unix のシステムコール ((<fcntl(2)|manual page>)) (つまり 
-((<IO#fcntl|IO/fcntl>)))で使用できる定数 を集めたモジュールです。
+Unix のシステムコール [[man:fcntl(2)]] (つまり
+[[m:IO#fcntl]]) で使用できる定数 を集めたモジュールです。
 定義される定数は以下の通りです
 
-== 定数:
+= module Fcntl
 
---- Fcntl::F_DUPFD
---- Fcntl::F_GETFD
---- Fcntl::F_GETLK
---- Fcntl::F_SETFD
---- Fcntl::F_GETFL
---- Fcntl::F_SETFL
---- Fcntl::F_SETLK
---- Fcntl::F_SETLKW
---- Fcntl::FD_CLOEXEC
---- Fcntl::F_RDLCK
---- Fcntl::F_UNLCK
---- Fcntl::F_WRLCK
---- Fcntl::O_CREAT
---- Fcntl::O_EXCL
---- Fcntl::O_NOCTTY
---- Fcntl::O_TRUNC
---- Fcntl::O_APPEND
---- Fcntl::O_NONBLOCK
---- Fcntl::O_NDELAY
---- Fcntl::O_RDONLY
---- Fcntl::O_RDWR
---- Fcntl::O_WRONLY
---- Fcntl::O_ACCMODE   ((<ruby 1.8 feature>)) version 1.8.1 以降
+== Constants
+
+--- F_DUPFD
+
+--- F_GETFD
+
+--- F_GETLK
+
+--- F_SETFD
+
+--- F_GETFL
+
+--- F_SETFL
+
+--- F_SETLK
+
+--- F_SETLKW
+
+--- FD_CLOEXEC
+
+--- F_RDLCK
+
+--- F_UNLCK
+
+--- F_WRLCK
+
+--- O_CREAT
+
+--- O_EXCL
+
+--- O_NOCTTY
+
+--- O_TRUNC
+
+--- O_APPEND
+
+--- O_NONBLOCK
+
+--- O_NDELAY
+
+--- O_RDONLY
+
+--- O_RDWR
+
+--- O_WRONLY
+
+#@if (version >= "1.8.1")
+--- O_ACCMODE    version 1.8.1 以降
+
+((<ruby 1.8 feature>))
+#@end
+
