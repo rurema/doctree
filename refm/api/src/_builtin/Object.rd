@@ -129,8 +129,10 @@ other が self 自身の時、真を返します。
 extend の機能は、「特異クラスに対する [[m:Module#include]]」
 と言い替えることもできます。
 
+#@if (version >= "1.7.0")
 ((<ruby 1.7 feature>)): 引数に複数のモジュールを指定した場合、最後
 の引数から逆順に extend を行います。
+#@end
 
 --- freeze
 
@@ -263,6 +265,7 @@ obj.kind_of?(c) も成立します。
 
 [[m:Object#kind_of?]] も参照してください。
 
+#@if (version >= "1.8.0")
 --- instance_variable_get(var)
 
 ((<ruby 1.8 feature>))
@@ -284,7 +287,9 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
     p obj.instance_variable_get("@foo")     # => 1
     p obj.instance_variable_get(:@foo)      # => 1
     p obj.instance_variable_get(:@bar)      # => nil
+#@end
 
+#@if (version >= "1.8.0")
 --- instance_variable_set(var, val)
 
 ((<ruby 1.8 feature>))
@@ -302,6 +307,7 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
     p obj.instance_variable_set("@foo", 1)  # => 1
     p obj.instance_variable_set(:@foo, 2)   # => 2
     p obj.instance_variable_get(:@foo)      # => 2
+#@end
 
 --- instance_variables
 
