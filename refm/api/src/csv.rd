@@ -1,3 +1,4 @@
+#@if (version >= "1.8.0")
 CSV (Comma Separated Value) を扱うライブラリです。
 
 = class CSV < Object
@@ -77,3 +78,4 @@ path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 #@include(csv/Reader)
 #@include(csv/StringReader)
 #@include(csv/Writer)
+#@end
