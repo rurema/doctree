@@ -9,7 +9,7 @@ Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
 4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
 ング法です。[[unknown:RFC:2045]]で定義されています。
 
-使用方法:
+=== 使用方法
 
   irb> require 'base64'
   true
