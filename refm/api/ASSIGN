@@ -143,11 +143,11 @@ generator                       date            converted
 getoptlong                      date            converted
 getopts                         date            converted
 gserver                         date            converted
-iconv
-importenv
-io/nonblock
-io/wait
-ipaddr
+iconv                           date
+importenv                       date
+io/nonblock                     date
+io/wait                         date
+ipaddr                          date
 irb
 jcode                           aamine
 kconv
