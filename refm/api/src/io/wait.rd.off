@@ -1,17 +1,20 @@
-= io/wait
+#@if (version >= "1.8.0")
+= reopen IO
 
---- IO#ready?
+== Instance Methods
 
-    ブロックせずに読み込み可能なら真を返す。そうでなければ nil を返す。
-    self が EOF に達していれば false を返す。
+--- ready?
 
---- IO#wait([timeout = nil])
+ブロックせずに読み込み可能なら真を返します。そうでなければ nil を返します。
+self が EOF に達していれば false を返します。
 
-    self が読み込み可能になるまでブロックし、読み込み可能になったら 
-    self を返す。
+--- wait([timeout = nil])
 
-    ((|timeout|)) を指定した場合は、指定秒数経過するまでブロックし、タ
-    イムアウトした場合は nil を返す。
+self が読み込み可能になるまでブロックし、読み込み可能になったら
+self を返します。
 
-    self が EOF に達していれば false を返す。
+timeout を指定した場合は、指定秒数経過するまでブロックし、タ
+イムアウトした場合は nil を返します。
 
+self が EOF に達していれば false を返します。
+#@end

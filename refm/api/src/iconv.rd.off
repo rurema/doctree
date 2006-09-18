@@ -1,41 +1,42 @@
-= iconv
-
-Iconv д╧ UNIX 95 д╬ (({iconv()})) ┤╪┐Їд╬еще├е╤б╝д╟бв
+#@if (version >= "1.7.0")
+Iconv д╧ UNIX 95 д╬ iconv() ┤╪┐Їд╬еще├е╤б╝д╟бв
 д╡д▐д╢д▐д╩╩╕╗·е│б╝е╔┬╬╖╧┤╓д╟╩╕╗·╬єд╬╩╤┤╣дЄ╣╘д╩ддд▐д╣бг
 
-╛▄║┘д╧((<Open Group|URL:http://www.opengroup.org/>)) д╬екеєещедеєе╔енехесеєе╚дЄ
+╛▄║┘д╧[[unknown:Open Group|URL:http://www.opengroup.org/]] д╬екеєещедеєе╔енехесеєе╚дЄ
 ╗▓╛╚д╖д╞▓╝д╡ддбг
-* ((<iconv.h|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.h.html>))
-* ((<iconv_open()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_open.html>))
-* ((<iconv()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.html>))
-* ((<iconv_close()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_close.html>))
+
+  * [[unknown:iconv.h]]
+  * [[unknown:iconv_open()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_open.html]]
+  * [[unknown:iconv()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.html]]
+  * [[unknown:iconv_close()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_close.html]]
 
 д╔д╬╩╕╗·е│б╝е╔┬╬╖╧дм═°═╤д╟дндыдлд╧е╫еще├е╚е╒ейб╝ер░═┬╕д╟д╣бгд╡дщд╦еиеєе│б╝е╟егеєе░╠╛дЄдвдщдяд╣╩╕╗·╬єдте╫еще├е╚е╒ейб╝ер░═┬╕д╟д╣бг╞№╦▄╕ь EUC дЄдвдщдяд╣╩╕╗·╬єдм EUC-JP, euc-jp, eucJP д╩д╔░█д╩ды╛ь╣чдмдвдъд▐д╣бгд│д╬е╫еще├е╚е╒ейб╝ерд╦дшды░удддЄ╡█╝¤д╣дыд┐дсд╦бв
-((<"ruby-src:ext/iconv/charset_alias.rb">)) дм═╤░╒д╡дьд╞ддд▐д╣бг 
-GNU е╜е╒е╚ежезев ((<texinfo|URL:http://www.gnu.org/software/texinfo/>)) д╦┤▐д▐дьдые╒ебедеы config.charset дЄ░╩▓╝д╬е▀ещб╝е╡еде╚длдщ╝ъд╦╞■дьд╞
+[[unknown:"ruby-src:ext/iconv/charset_alias.rb"]] дм═╤░╒д╡дьд╞ддд▐д╣бг
+GNU е╜е╒е╚ежезев [[unknown:texinfo|URL:http://www.gnu.org/software/texinfo/]] д╦┤▐д▐дьдые╒ебедеы config.charset дЄ░╩▓╝д╬е▀ещб╝е╡еде╚длдщ╝ъд╦╞■дьд╞
 
-((<URL:http://ring.pwd.ne.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset>))
+[[url:http:#/ring.pwd.ne.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
 
 ext/iconv/ д╦├╓днбвext/iconv/ д╟╝бд╬дшджд╦╝┬╣╘д╣дыд╚
 
- ruby extconf.rb
- make
+  ruby extconf.rb
+  make
 
 iconv.rb дм└╕└од╡дьд▐д╣бгд│д╬ iconv.rb дме╫еще├е╚е╒ейб╝ерд╦дшдыеиеєе│б╝е╟егеєе░╠╛дЄдвдщдяд╣╩╕╗·╬єд╬░удддЄ╡█╝¤д╖д▐д╣бг
 
-config.charset д╬ещеде╗еєе╣д╧ LGPL д╩д╬д╟бв└╕└од╡дьд┐ iconv.rb д╦дт LGPL дм┼м═╤д╡дьд▐д╣бг((-═╫─┤║║-))
+config.charset д╬ещеде╗еєе╣д╧ LGPL д╩д╬д╟бв└╕└од╡дьд┐ iconv.rb д╦дт LGPL дм┼м═╤д╡дьд▐д╣бг
+#@# ═╫─┤║║
 
-== ╬у
+=== ╬у
 
- require 'iconv'
- euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # двдддждидк
- sjis = ["82a082a282a482a682a8"].pack("H*")
- iconv = Iconv.new('SHIFT_JIS', 'EUC-JP')  # EUC-JP длдщ SHIFT_JIS д╪╩╤┤╣
- str = iconv.iconv(euc) 
- str << iconv.iconv(nil) 
- p( str == sjis )
- 
-(1) ┐╖д╖дп ((<iconv>)) д╬едеєе╣е┐еєе╣дЄ║юдъ, ((<iconv/Iconv#iconv>)) есе╜е├е╔дЄ╗╚дж
+  require 'iconv'
+  euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # двдддждидк
+  sjis = ["82a082a282a482a682a8"].pack("H*")
+  iconv = Iconv.new('SHIFT_JIS', 'EUC-JP')  # EUC-JP длдщ SHIFT_JIS д╪╩╤┤╣
+  str = iconv.iconv(euc)
+  str << iconv.iconv(nil)
+  p( str == sjis )
+
+  (1) ┐╖д╖дп [[c:Iconv]] д╬едеєе╣е┐еєе╣дЄ║юдъ, [[m:Iconv#iconv]] есе╜е├е╔дЄ╗╚дж
       cd = Iconv.new(to, from)
       begin
         input.each {|s| output << cd.iconv(s)}
@@ -43,173 +44,167 @@ config.charset д╬ещеде╗еєе╣д╧ LGPL д╩д╬д╟бв└╕└од╡дьд┐ iconv.rb д╦дт LGPL дм┼м═╤д
       ensure
         cd.close
       end
-
-(2) ((<iconv/Iconv.open>)) дЄе╓еэе├епд─днд╟╕╞д╙╜╨д╣
+  (2) [[m:Iconv.open]] дЄе╓еэе├епд─днд╟╕╞д╙╜╨д╣
       Iconv.open(to, from) do |cd|
         input.each {|s| output << cd.iconv(s)}
         output << cd.iconv(nil)
       end
-
-(3) (2) д╬├╗╜╠╖╧
+  (3) (2) д╬├╗╜╠╖╧
       Iconv.iconv(to, from, *input.to_a)
 
-== Iconv епеще╣
+=== ╗▓╣═
 
-=== епеще╣есе╜е├е╔
+  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
+  * [[unknown:"╔╕╜р┼║╔╒ещеде╓ещеъ╛╥▓Ёб┌┬ш 3 ▓єб█ Kconv/NKF/Iconv"|URL:http://jp.rubyist.net/magazine/?0009-BundledLibraries]]
 
---- Iconv.new(to, from)
-    ((|from|)) длдщ ((|to|)) д╪д╬┐╖д╖дд╩╤┤╣┤ядЄ║юдъбвд╜дьдЄ╩╓д╖д▐д╣бг
-    ((|to|)) д╚ ((|from|)) д╧╩╤┤╣└шд╚╩╤┤╣┴░д╬╩╕╗·е│б╝е╔┬╬╖╧д╟д╣бг
+= class Iconv < Data
 
-    д│д╬есе╜е├е╔дм╡пд│д╣╬у│░д╧╝бд╬─╠дъд╟д╣бг
-     *((|to|)) дф ((|from|)) дм String д╟д╩ддд╚дн (({TypeError}))бг
-     *((|to|)) дф ((|from|)) д╟╗╪─ъд╡дьд┐╩╤┤╣┤ядм╕лд─длдщд╩ддд╚дн
-      (({ArgumentError}))бг
-     *(({iconv_open(3)})) дм╝║╟╘д╖д┐д╚дн(({SystemCallError}))бг
-        
+== Class Methods
 
---- Iconv.open(to, from) {|cd| ...}
-    е╓еэе├епдм═┐дидщдьд╩дд╛ь╣чд╧ ((<iconv/Iconv.new>)) д╚┼∙▓┴д╟д╣бг
-    е╓еэе├епдм═┐дидщдьдыд╚бв╩╤┤╣┤ядЄ░·┐Їд╚д╖д╞е╓еэе├епдЄ╕╞д╙бв╩╤┤╣┤ядЄ╩─д╕д╞бв
-    е╓еэе├епд╬├═дЄ╩╓д╖д▐д╣бг
+--- new(to, from)
 
---- Iconv.iconv(to, from, *strs)
-    ╝бд╬╛╩╬м╖┴д╟д╣бг
-      Iconv.open(to, from) {|cd| (strs + [nil]).collect {|s| cd.iconv(s)}}
+from длдщ to д╪д╬┐╖д╖дд╩╤┤╣┤ядЄ║юдъбвд╜дьдЄ╩╓д╖д▐д╣бг
+to д╚ from д╧╩╤┤╣└шд╚╩╤┤╣┴░д╬╩╕╗·е│б╝е╔┬╬╖╧д╟д╣бг
 
-    ((|to|)), ((|from|)) д╬░╒╠гд╧ ((<iconv/Iconv.new>)) д╚╞▒д╕д╟д╣бг
+д│д╬есе╜е├е╔дм╡пд│д╣╬у│░д╧╝бд╬─╠дъд╟д╣бг
+  * to дф from дм String д╟д╩ддд╚дн TypeErrorбг
+  * to дф from д╟╗╪─ъд╡дьд┐╩╤┤╣┤ядм╕лд─длдщд╩ддд╚дн
+    ArgumentErrorбг
+  * iconv_open(3) дм╝║╟╘д╖д┐д╚днSystemCallErrorбг
 
-    ((|strs|)) д╧╩╤┤╣д╡дьды╩╕╗·╬єд╟д╣бг
+--- open(to, from) {|cd| ...}
 
-    д│д╬есе╜е├е╔д╧
-    ((<iconv/Iconv.new>)), ((<iconv/Iconv.open>)) дкдшд╙ ((<iconv/Iconv#iconv>)) д╬╬у│░
-    дЄ╡пд│д╖д▐д╣бг
+е╓еэе├епдм═┐дидщдьд╩дд╛ь╣чд╧ [[m:Iconv.new]] д╚┼∙▓┴д╟д╣бг
+е╓еэе├епдм═┐дидщдьдыд╚бв╩╤┤╣┤ядЄ░·┐Їд╚д╖д╞е╓еэе├епдЄ╕╞д╙бв╩╤┤╣┤ядЄ╩─д╕д╞бв
+е╓еэе├епд╬├═дЄ╩╓д╖д▐д╣бг
 
---- Iconv.conv(to, from, str)
-    ╝бд╬╛╩╬м╖┴д╟д╣бг
-      Iconv.iconv(to, from, str).join
+--- iconv(to, from, *strs)
 
-    ((<iconv/Iconv.iconv>))╗▓╛╚бг
+╝бд╬╛╩╬м╖┴д╟д╣бг
 
---- Iconv.list {|*aliases| ... }    ((<ruby 1.9 feature>))
-    Iterates each alias sets.
-    е╓еэе├епдм╗╪─ъд╡дьд╞ддд╩д▒дьд╨еиеєе│б╝е╟егеєе░╠╛д╬еъе╣е╚дЄ╩╓д╣бг
-    Iconv ╔╕╜рд╬╡б╟╜д╟д╧д╩ддд╬д╟е╡е▌б╝е╚д╡дьдыдлд╧е╫еще├е╚е╒ейб╝ерд╦░═┬╕д╣дыбг
-    е╡е▌б╝е╚д╡дьд╞ддд╩дд╛ь╣чд╧╬у│░ NotImplementedError дЄ┼ъд▓дыбг
+  Iconv.open(to, from) {|cd| (strs + [nil]).collect {|s| cd.iconv(s)}}
 
-=== едеєе╣е┐еєе╣есе╜е├е╔
+to, from д╬░╒╠гд╧ [[m:Iconv.new]] д╚╞▒д╕д╟д╣бг
 
---- Iconv#close
-    ╩╤┤╣дЄ╜к╬╗д╖д▐д╣бг
+strs д╧╩╤┤╣д╡дьды╩╕╗·╬єд╟д╣бг
 
-    д│д╬есе╜е├е╔дм╕╞д╨дьд┐двд╚д╟ ((<iconv/Iconv#iconv>)) дм╕╞д╨дьдыд╚╬у│░дм
-    ╡пднд▐д╣дмбв(({close})) ╝л┬╬д╧╖л╩╓д╖╕╞д╨дьд╞дт└о╕∙д╖д▐д╣бг
+д│д╬есе╜е├е╔д╧
+[[m:Iconv.new]], [[m:Iconv.open]] дкдшд╙ [[m:Iconv#iconv]] д╬╬у│░
+дЄ╡пд│д╖д▐д╣бг
 
-    ├═д╚д╖д╞бв
-    ╜╨╬╧е╨е├е╒ебдЄ╜щ┤№е╖е╒е╚╛ї┬╓д╦╠сд╣д┐дсд╬е╨еде╚╬єдЄ┤▐др╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+--- conv(to, from, str)
 
-       i = Iconv.open("ISO-2022-JP", "EUC-JP")
-       i.iconv("\264\301")     #=> "\e$B4A"
-       i.iconv("\273\372")     #=> ";z"
-       i.close                 #=> "\e(B"
+╝бд╬╛╩╬м╖┴д╟д╣бг
 
---- Iconv#iconv(str, [ start = 0, [ length = -1 ] ])
-    ╩╕╗·╬єд╬╩╤┤╣дЄ│л╗╧д╖бв╩╤┤╣╕хд╬╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
-    ((|str|)) дм╩╕╗·╬єд╬╛ь╣чбв(({str[start, length]})) дЄ╩╤┤╣д╖бв
-    ╩╤┤╣╕хд╬╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+  Iconv.iconv(to, from, str).join
 
-    ((|str|)) д╧╩╤┤╣д╡дьды╩╕╗·╬єд▐д┐д╧ (({nil})) д╟д╣бг
-    ((|start|)) д╧ ((|str|)) д╬джд┴╩╤┤╣дЄ│л╗╧д╣дыеке╒е╗е├е╚дЄ╗╪─ъд╖д▐д╣бг
-    ((|length|)) д╧ ((|str|)) д╬джд┴╩╤┤╣д╣ды─╣д╡д╟бв
-    (({nil})) дл (({-1})) д╬д╚днд╧бв(({start})) ░╩╣▀┴┤╔ЇдЄ░╒╠гд╖д▐д╣бг
+╛▄д╖дпд╧ [[m:Iconv.iconv]] дЄ╗▓╛╚д╖д╞дпд└д╡ддбг
 
-    ((|str|)) дм (({nil})) д╬╛ь╣чбв╩╤┤╣┤ядЄд╜д╬╜щ┤№е╖е╒е╚╛ї┬╓д╦д╖бв
-    ╜╨╬╧е╨е├е╒ебдЄ╜щ┤№е╖е╒е╚╛ї┬╓д╦╠сд╣д┐дсд╬е╨еде╚╬єдлдщд╩ды╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+#@if (version >= "1.9.0")
+--- list {|*aliases| ... }
 
-    д╜д╬┬╛д╬╛ь╣чд╧╬у│░дЄ╡пд│д╖д▐д╣бг
+((<ruby 1.9 feature>))
 
-    д│д╬есе╜е├е╔д╧╡пд│д╣╬у│░д╧
-    ((<iconv/Iconv::IllegalSequence>))бв
-    ((<iconv/Iconv::InvalidCharacter>))бв
-    дкдшд╙ ((<iconv/Iconv::OutOfRange>))
-    д╟д╣бг
+│╞еиедеъеве╣е╗е├е╚д┤д╚д╦╖лдъ╩╓д╣еде╞еьб╝е┐д╟д╣бг
+#@# Iterates each alias sets.
+е╓еэе├епдм╗╪─ъд╡дьд╞ддд╩д▒дьд╨еиеєе│б╝е╟егеєе░╠╛д╬еъе╣е╚дЄ╩╓д╖д▐д╣бг
+Iconv ╔╕╜рд╬╡б╟╜д╟д╧д╩ддд╬д╟е╡е▌б╝е╚д╡дьдыдлд╧е╫еще├е╚е╒ейб╝ерд╦░═┬╕д╖д▐д╣бг
+е╡е▌б╝е╚д╡дьд╞ддд╩дд╛ь╣чд╧╬у│░ NotImplementedError дЄ┼ъд▓д▐д╣бг
+#@end
 
-== Iconv::Failure ете╕ехб╝еы
+== Instance Methods
 
-((<iconv>)) дм╡пд│д╣╬у│░д╬д┐дсд╬ете╕ехб╝еыд╟д╣бг
+--- close
 
-=== едеєе╣е┐еєе╣есе╜е├е╔
+╩╤┤╣дЄ╜к╬╗д╖д▐д╣бг
 
---- Iconv::Failure#success
+д│д╬есе╜е├е╔дм╕╞д╨дьд┐двд╚д╟ [[m:Iconv#iconv]] дм╕╞д╨дьдыд╚╬у│░дм
+╡пднд▐д╣дмбвclose ╝л┬╬д╧╖л╩╓д╖╕╞д╨дьд╞дт└о╕∙д╖д▐д╣бг
 
-    ╬у│░дм╡пд│дыд▐д╟д╦╩╤┤╣д╦└о╕∙д╖д┐╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+├═д╚д╖д╞бв
+╜╨╬╧е╨е├е╒ебдЄ╜щ┤№е╖е╒е╚╛ї┬╓д╦╠сд╣д┐дсд╬е╨еде╚╬єдЄ┤▐др╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
 
-    ((<iconv/Iconv.iconv>)) д╟д│д╬╬у│░дм╡пд│д├д┐д╚днд╦╩╓д╡дьды├═д╧бв
-    ░╩┴░д╬╬у│░дм╬у│░дм╡пд│дыд▐д╟д╦╩╤┤╣д╦└о╕∙д╖д┐╩╕╗·╬єдЄ═╫┴╟д╚д╣ды╟█╬єд╟д╣бг
-    ║╟╕хд╬═╫┴╟д╧╩╤┤╣├цд╬╩╕╗·╬єд╟д╣бг
+╬у:
 
---- Iconv::Failure#failed
+  i = Iconv.open("ISO-2022-JP", "EUC-JP")
+  i.iconv("\264\301")     #=> "\e$B4A"
+  i.iconv("\273\372")     #=> ";z"
+  i.close                 #=> "\e(B"
 
-    ((<iconv/Iconv>)) д╦┼╧д╡дьд┐╩╕╗·╬єд╬джд┴бв
-    ╬у│░дм╡пд│д├д┐░╠├╓длдщд╧д╕д▐ды╔Ї╩мдЄ╩╓д╖д▐д╣бг
+--- iconv(str, [ start = 0, [ length = -1 ] ])
 
---- Iconv::Failure#inspect
+╩╕╗·╬єд╬╩╤┤╣дЄ│л╗╧д╖бв╩╤┤╣╕хд╬╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+str дм╩╕╗·╬єд╬╛ь╣чбвstr[start, length] дЄ╩╤┤╣д╖бв
+╩╤┤╣╕хд╬╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
 
-    #<(({type})): "(({success}))", "(({failed}))"> д╬дшджд╩╖┴дЄд╖д┐
-    ╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+str д╧╩╤┤╣д╡дьды╩╕╗·╬єд▐д┐д╧ nil д╟д╣бг
+start д╧ str д╬джд┴╩╤┤╣дЄ│л╗╧д╣дыеке╒е╗е├е╚дЄ╗╪─ъд╖д▐д╣бг
+length д╧ str д╬джд┴╩╤┤╣д╣ды─╣д╡д╟бв
+nil дл -1 д╬д╚днд╧бвstart ░╩╣▀┴┤╔ЇдЄ░╒╠гд╖д▐д╣бг
 
-== Iconv::BrokenLibrary епеще╣  ((<ruby 1.8.4 feature>))
+str дм nil д╬╛ь╣чбв╩╤┤╣┤ядЄд╜д╬╜щ┤№е╖е╒е╚╛ї┬╓д╦д╖бв
+╜╨╬╧е╨е├е╒ебдЄ╜щ┤№е╖е╒е╚╛ї┬╓д╦╠сд╣д┐дсд╬е╨еде╚╬єдлдщд╩ды╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
 
-iconv ещеде╓ещеъд╬е╨е░д╩д╔д╦дшдъбв((<errno|manual page>)) дм└▀─ъд╡дьд╩длд├д┐╛ь╣чд╦╚п└╕д╖д▐д╣бг
+д╜д╬┬╛д╬╛ь╣чд╧╬у│░дЄ╡пд│д╖д▐д╣бг
+
+д│д╬есе╜е├е╔д╧╡пд│д╣╬у│░д╧
+[[m:Iconv::IllegalSequence]]бв
+[[m:Iconv::InvalidCharacter]]бв
+дкдшд╙ [[m:Iconv::OutOfRange]]
+д╟д╣бг
+
+= module Iconv::Failure
+
+[[c:Iconv]] дм╡пд│д╣╬у│░д╬д┐дсд╬ете╕ехб╝еыд╟д╣бг
+
+== Instance Methods
+
+--- success
+
+╬у│░дм╡пд│дыд▐д╟д╦╩╤┤╣д╦└о╕∙д╖д┐╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+
+[[m:Iconv.iconv]] д╟д│д╬╬у│░дм╡пд│д├д┐д╚днд╦╩╓д╡дьды├═д╧бв
+░╩┴░д╬╬у│░дм╬у│░дм╡пд│дыд▐д╟д╦╩╤┤╣д╦└о╕∙д╖д┐╩╕╗·╬єдЄ═╫┴╟д╚д╣ды╟█╬єд╟д╣бг
+║╟╕хд╬═╫┴╟д╧╩╤┤╣├цд╬╩╕╗·╬єд╟д╣бг
+
+--- failed
+
+[[c:Iconv]] д╦┼╧д╡дьд┐╩╕╗·╬єд╬джд┴бв
+╬у│░дм╡пд│д├д┐░╠├╓длдщд╧д╕д▐ды╔Ї╩мдЄ╩╓д╖д▐д╣бг
+
+--- inspect
+
+#<type: "success", "failed"> д╬дшджд╩╖┴дЄд╖д┐
+╩╕╗·╬єдЄ╩╓д╖д▐д╣бг
+
+#@if (version >= "1.8.4")
+= class Iconv::BrokenLibrary < RuntimeError
+
+include Iconv::Failure
+
+((<ruby 1.8.4 feature>))
+
+iconv ещеде╓ещеъд╬е╨е░д╩д╔д╦дшдъбв[[man:errno]] дм└▀─ъд╡дьд╩длд├д┐╛ь╣чд╦╚п└╕д╖д▐д╣бг
 (Windows д╟ iconv.dll д╬╗╚═╤д╣ды MSVC runtime DLL д╬е╨б╝е╕ечеєдмбвruby ╦▄┬╬дм╗╚═╤д╣дыдтд╬д╚░ь├╫д╖д╞ддд╩дд╛ь╣чдт┤▐д▀д▐д╣бг)
+#@end
 
-=== е╣б╝е╤б╝епеще╣
+= class Iconv::IllegalSequence < ArgumentError
 
-(({RuntimeError}))
-
-=== едеєепеыб╝е╔д╖д╞дддыете╕ехб╝еы
-
-((<iconv/Iconv::Failure>))
-
-== Iconv::IllegalSequence епеще╣
+include Iconv::Failure
 
 ╞■╬╧дл╜╨╬╧д╬╩╕╗·дм╗╪╝ид╡дьд┐╩╕╗·╜╕╣чд╦┤▐д▐дьд╩ддд┐дсд╦╩╤┤╣дм─ф╗▀д╖д┐д│д╚
 дЄ╔╜д╖д▐д╣бг
 
-=== е╣б╝е╤б╝епеще╣
+= class Iconv::InvalidCharacter < ArgumentError
 
-(({ArgumentError}))
-
-=== едеєепеыб╝е╔д╖д╞дддыете╕ехб╝еы
-
-((<iconv/Iconv::Failure>))
-
-== Iconv::InvalidCharacter епеще╣
+include Iconv::Failure
 
 ╞■╬╧д╬║╟╕хдм╔╘┤░┴┤д╩╩╕╗·дле╖е╒е╚д╟╜кд├д╞дддыд┐дсд╦╩╤┤╣дм─ф╗▀д╖д┐д│д╚
 дЄ╔╜д╖д▐д╣бг
 
-=== е╣б╝е╤б╝епеще╣
+= class Iconv::OutOfRange < RuntimeError
 
-(({ArgumentError}))
-
-=== едеєепеыб╝е╔д╖д╞дддыепеще╣
-
-((<iconv/Iconv::Failure>))
-
-== Iconv::OutOfRange епеще╣
+include Iconv::Failure
 
 Iconv ещеде╓ещеъд╬╞т╔Їеиещб╝д╟д╣бгд│д╬╬у│░д╧╡пд│дщд╩ддд╧д║д╟д╣бг
-
-=== е╣б╝е╤б╝епеще╣
-
-(({RuntimeError}))
-
-=== едеєепеыб╝е╔д╖д╞дддыете╕ехб╝еы
-
-((<iconv/Iconv::Failure>))
-
-== ╗▓╣═
-
-* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
-  * ((<"╔╕╜р┼║╔╒ещеде╓ещеъ╛╥▓Ёб┌┬ш 3 ▓єб█ Kconv/NKF/Iconv"|URL:http://jp.rubyist.net/magazine/?0009-BundledLibraries>))
+#@end

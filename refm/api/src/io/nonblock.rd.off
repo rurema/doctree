@@ -1,15 +1,19 @@
-= io/nonblock
+#@if (version >= "1.8.0")
+= reopen IO
 
---- IO#nonblock?
+== Instance Methods
 
-    self がノンブロックモードならば真を、ブロックモードなら偽を返す。
+--- nonblock?
 
---- IO#nonblock = bool
+self がノンブロックモードならば真を、ブロックモードなら偽を返す。
 
-    ((|bool|)) が真なら self をノンブロックモードに、偽ならブロックモー
-    ドにする。
+--- nonblock=(bool)
 
---- IO#nonblock(bool=true) { ... }
+bool が真なら self をノンブロックモードに、偽ならブロックモー
+ドにする。
 
-    ブロック実行中、一時的に self のブロックモードを変更する。
-    ((|bool|)) が真ならノンブロックモード、偽ならブロックモードになる。
+--- nonblock(bool = true) { ... }
+
+ブロック実行中、一時的に self のブロックモードを変更する。
+bool が真ならノンブロックモード、偽ならブロックモードになる。
+#@end
