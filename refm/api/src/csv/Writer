@@ -1,16 +1,16 @@
-= CSV::Writer < Object
+= class CSV::Writer < Object
 
 == Class Methods
 
---- CSV::Writer.generate(str_or_writable[, fs = ','[, rs = nil]]) { ... }
+--- generate(str_or_writable[, fs = ','[, rs = nil]]) { ... }
 
---- CSV::Writer.create(str_or_writable[, fs = ','[, rs = nil]])
+--- create(str_or_writable[, fs = ','[, rs = nil]])
 
 == Instance Methods
 
---- CSV::Writer#<<(row)
+--- <<(row)
 
---- CSV::Writer#add_row(row)
+--- add_row(row)
 
---- CSV::Writer#close
+--- close
 

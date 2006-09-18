@@ -2,8 +2,8 @@
 
 == Class Methods
 
---- CSV::BasicWriter.new(str_or_writable[, fs = ','[, rs = nil]])
+--- new(str_or_writable[, fs = ','[, rs = nil]])
 
-== Methods
+== Instance Methods
 
---- CSV::BasicWriter#close_on_terminate
+--- close_on_terminate

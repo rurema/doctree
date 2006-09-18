@@ -1,65 +1,76 @@
 CSV (Comma Separated Value) を扱うライブラリです。
 
-
 = class CSV < Object
 
 CSV (Comma Separated Value) を扱うクラスです。
 
-== Class Methods
+メソッドの共通パラメタ
 
-: mode 
-     'r', 'w', 'rb', 'wb' から指定可能。
-     
+  mode
+     'r', 'w', 'rb', 'wb' から指定可能です。
+
      - 'r' 読み込み
      - 'w' 書き込み
      - 'b' バイナリモード
-: fs
+  fs
      フィールドの区切り文字
      デフォルトは ','
-: rs
-     行区切り文字。nil (デフォルト) で CrLf / Lf。 
-     Cr で区切りたい場合は ?\r を渡す。
+  rs
+     行区切り文字。nil (デフォルト) で CrLf / Lf。
+     Cr で区切りたい場合は ?\r を渡します。
 
---- CSV.open(path, mode[, fs = nil[, rs = nil]]) { ... }
+== Class Methods
 
-    読み込み：path にあるファイルを開き各行を配列として
-    ブロックに渡す
-     
-       CSV.open("/temp/test.csv", 'r') do |row|
-         puts row.join("<>")
-       end
+--- open(path, mode[, fs = nil[, rs = nil]]) { ... }
 
-    ブロックを渡さなかった場合 CSV::Reader を返す
+読み込みモード時には path にあるファイルを開き各行を配列として
+ブロックに渡します。
 
-    書き込み：path にあるファイルを開き CSV::Writer をブロックに渡す。
-     
-       CSV.open("/temp/test.csv", 'w') do |writer|
-         writer << ["ruby", "perl", "python"]
-         writer << ["java", "C", "C++"]
-       end
+例:
 
-    ブロック未指定の場合 CSV::Writer を返す
+  CSV.open("/temp/test.csv", 'r') do |row|
+    puts row.join("<>")
+  end
 
---- CSV.foreach(path[, rs = nil]) { ... }
+ブロックを渡さなかった場合 CSV::Reader を返します。
 
-    読み込みモードでファイルを開き、各行を配列でブロックに渡す
-   
-     CSV.foreach('test.csv'){|row|
-       puts row.join('<>')
-     }
+書き込みモード時には path にあるファイルを開き CSV::Writer をブロックに渡します。
 
---- CSV.read(path[, length = nil[, offset = nil]])
---- CSV.readlines(path[, rs = nil])
+例:
 
-    path で指定されたCSVファイルを読み込み 配列の配列でデータを返す
-   
---- CSV.generate(path[, fs = nil[, rs = nil]]) { ... }
---- CSV.parse(str_or_readable[, fs = nil[, rs = nil]])
---- CSV.parse_line(src[, fs = nil[, rs = nil]])
---- CSV.generate_line(row[, fs = nil[, rs = nil]])
---- CSV.parse_row(src, index, out_dev[, fs = nil[, rs = nil]])
---- CSV.generate_row(src, cells, out_dev[, fs = nil[, rs = nil]])
+  CSV.open("/temp/test.csv", 'w') do |writer|
+    writer << ["ruby", "perl", "python"]
+    writer << ["java", "C", "C++"]
+  end
 
+ブロック未指定の場合 CSV::Writer を返します。
+
+--- foreach(path[, rs = nil]) { ... }
+
+読み込みモードでファイルを開き、各行を配列でブロックに渡します。
+
+例:
+
+  CSV.foreach('test.csv'){|row|
+    puts row.join('<>')
+  }
+
+--- read(path[, length = nil[, offset = nil]])
+--- readlines(path[, rs = nil])
+
+path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
+
+--- generate(path[, fs = nil[, rs = nil]]) { ... }
+
+--- parse(str_or_readable[, fs = nil[, rs = nil]])
+
+--- parse_line(src[, fs = nil[, rs = nil]])
+
+--- generate_line(row[, fs = nil[, rs = nil]])
+
+--- parse_row(src, index, out_dev[, fs = nil[, rs = nil]])
+
+--- generate_row(src, cells, out_dev[, fs = nil[, rs = nil]])
 
 #@include(csv/BasicWriter)
 #@include(csv/IOReader)

@@ -6,14 +6,14 @@ CSVの読み込み時のベースとなるクラス
 
 == Class Methods
 
---- CSV::Reader.parse(str_or_readable[, fs = ','[, rs = nil]]) { ... }
+--- parse(str_or_readable[, fs = ','[, rs = nil]]) { ... }
 
---- CSV::Reader.create(str_or_readable[, fs = ','[, rs = nil]])
+--- create(str_or_readable[, fs = ','[, rs = nil]])
 
 == Instance Methods
 
---- CSV::Reader#each
+--- each
 
---- CSV::Reader#shift
+--- shift
 
---- CSV::Reader#close
+--- close

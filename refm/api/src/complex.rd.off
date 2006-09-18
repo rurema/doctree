@@ -1,124 +1,101 @@
-= complex
+complex
 
-== Functions
+=== ChangeLog
 
-: Complex(x, y)
+*[2002-04-03] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+*[2003-04-29] Complex#polarの記述を正しい配列リテラルの表記に修正 by [[unknown:pastor|URL:mailto:pastor@fmc.rikkyo.ne.jp]]
 
-== class Numeric
+#@#@# imported by aamine
+= class Complex < Numeric
 
-=== Instance Methods
-
-: im
-    虚数単位倍を返します。
-: real
-    実部。
-: image
-    虚部。
-: arg
-    複素数としての偏角を返します。
-: polar
-    極座標表示を返します。
-: conjugate
-    共役複素数を返します。
-
-
-#@# imported by aamine
-= Complex
-
-[2002-04-03]  by ((<すす|URL:mailto:sugawah@attglobal.net>))
+#@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 複素数を扱うクラス
 
-== 使い方 Usage
-Complexを使うためにはrequire 'complex'する必要がある。
-このライブラリをrequireすると、さらにMathモジュールが複素数対応に拡張される。
+使い方 Usage
 
-    require 'complex'
+Complex を使うためには require 'complex' する必要があります。
+このライブラリを require すると、さらに Math モジュールが複素数対応に拡張されます。
 
-また、添付ライブラリのベクトルクラス((<Vector>))、および、
-行列クラス((<Matrix>))を読み込んでいるとき、
-VectorやMatrixの要素として、複素数を使うことができる。
-VectorおよびMatrixのそれぞれの項目を参照せよ。
+  require 'complex'
 
-    require 'matrix'
-    require 'complex'
+また、添付ライブラリのベクトルクラス [[c:Vector]]、および、
+行列クラス [[c:Matrix]] を読み込んでいるとき、
+Vector や Matrix の要素として、複素数を使うことができます。
+Vector および Matrix のそれぞれの項目を参照してください。
 
+  require 'matrix'
+  require 'complex'
 
-== スーパークラス:
+== Class Methods
 
-* ((<Numeric>))
+--- new(r,i)
+--- r,i=0)
+--- new!(r,i=0)
 
-== クラスメソッド:
---- Complex.new(r,i)
---- Complex(r,i=0)
---- Complex.new!(r,i=0)
+実部が r、虚部 i が複素数を生成します。
 
-    実部がr、虚部iが複素数を生成する。
+== Instance Methods
 
-== メソッド:
+--- +(c)
+複素数 c を加えた結果を返します。
 
---- Complex#+ c
-    複素数cを加えた結果を返す。
+--- -(c)
+複素数 c を減じた結果を返します。
 
---- Complex#- c
-    複素数cを減じた結果を返す。
+--- *(c)
+複素数 c を乗じた結果を返します。
 
---- Complex#* c
-    複素数cを乗じた結果を返す。
+--- /(c)
+複素数 c で除した結果を返す。
 
---- Complex#/ c
-    複素数cで除した結果を返す。
+--- %(c)
+複素数 c で除した余り(実部同士、虚部同士の演算結果)を返します。
 
---- Complex#% c
-    複素数cで除した余り(実部同士、虚部同士の演算結果)を返す。
+--- **(c)
+複素数 c でべき乗した結果を返します。
 
---- Complex#** c
-    複素数cでべき乗した結果を返す。
+--- divmod -- obsolete
+このメソッドは廃止されました。
 
---- Complex#divmod -- obsolete
-    このメソッドは廃止された。
+--- abs
+複素数の絶対値を返します。
 
---- Complex#abs
-    複素数の絶対値を返す。
+--- abs2
+複素数の絶対値の 2 乗を返します。
 
---- Complex#abs2
-    複素数の絶対値の2乗を返す。
+--- arg
+複素数の偏角を返します。
+#@# (値域は?）
 
---- Complex#arg
-    複素数の偏角を返す。(値域は?）
+--- polar
+複素数の極座標表示、すなわち、配列 [self.abs,self.arg] を返します。
 
---- Complex#polar
-    複素数の極座標表示、すなわち、配列[self.abs,self.arg]を返す。
+--- conjugate
+共役複素数を返します。
 
---- Complex#conjugate
-    共役複素数を返す。
+--- real
+実部を返します。
 
---- Complex#real
-    実部を返す。
+--- image
+虚部を返します。
 
---- Complex#image
-    虚部を返す。
+--- <=>(c)
+c との比較結果を返します。
 
---- Complex#<=> c
-    cとの比較結果を返す。
+--- ==(c)
+c と等しければ、真を返します。
 
---- Complex#== c
-    cと等しければ、真を返す。
+--- to_i
+整数 [[c:Integer]] に変換します。
 
---- Complex#to_i
-    整数((<Integer>))に変換する。
+--- to_f
+浮動小数点数 [[c:Float]] に変換します。
 
---- Complex#to_f
-    浮動小数点数((<Float>))に変換する。
+--- to_r
+有理数 [[c:Rational]] に変換します。
 
---- Complex#to_r
-    有理数((<Rational>))に変換する。
+== Constants
 
-== 定数
-: I
-    虚数単位。
-
-== ChangeLog
-
-*[2002-04-03] 初版 by ((<すす|URL:mailto:sugawah@attglobal.net>))
-*[2003-04-29] Complex#polarの記述を正しい配列リテラルの表記に修正 by ((<pastor|URL:mailto:pastor@fmc.rikkyo.ne.jp>))
+--- I
+虚数単位。
