@@ -217,9 +217,9 @@ strscan                         iwadon          converted
 sync                            iwadon          converted
 syslog                          iwadon          converted
 tempfile                        iwadon          converted
-test/unit                       iwadon
-thread                          iwadon
-thwait                          iwadon
+test/unit                       iwadon          converted
+thread                          iwadon          converted
+thwait                          iwadon          converted
 time
 timeout
 tk
