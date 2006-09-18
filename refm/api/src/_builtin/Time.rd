@@ -49,19 +49,19 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
 [[unknown:time]] ライブラリによって、[[m:time#Time.parse]], [[m:time#Time.rfc2822]], [[m:time#Time.httpdate]], [[m:time#Time.iso8601]] 等が拡張されます。
 
 メソッド
-[[c:Time#sec]], 
-[[c:Time#min]], 
-[[c:Time#hour]], 
-[[c:Time#mday]], 
-[[c:Time#day]](mday の別名), 
-[[c:Time#mon]], 
-[[c:Time#month]](mon の別名)
-[[c:Time#year]], 
-[[c:Time#wday]], 
-[[c:Time#yday]], 
-[[c:Time#isdst]], 
-[[c:Time#dst?]](isdst の別名), 
-[[c:Time#zone]]
+[[m:Time#sec]], 
+[[m:Time#min]], 
+[[m:Time#hour]], 
+[[m:Time#mday]], 
+[[m:Time#day]](mday の別名), 
+[[m:Time#mon]], 
+[[m:Time#month]](mon の別名)
+[[m:Time#year]], 
+[[m:Time#wday]], 
+[[m:Time#yday]], 
+[[m:Time#isdst]], 
+[[m:Time#dst?]](isdst の別名), 
+[[m:Time#zone]]
 時刻の要素を参照できます。
 
 [[man:localtime(3)]] も参照しください。
