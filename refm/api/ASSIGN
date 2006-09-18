@@ -102,10 +102,10 @@ bigdecimal/newton               aamine          converted
 bigdecimal/utils                aamine          converted
 cgi
 cgi-lib
-cgi/session                     date
-complex                         date
-csv                             date
-curses                          date
+cgi/session                     date            converted
+complex                         date            converted
+csv                             date            converted
+curses                          date            converted
 date
 date2
 dbm
