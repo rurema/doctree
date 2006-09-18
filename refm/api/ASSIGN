@@ -130,11 +130,11 @@ etc                             date            converted
 expect                          date            converted
 fcntl                           date            converted
 fileutils                       date            converted
-final                           date
-finalize                        date
-find                            date
-forwardable                     date
-ftools                          date
+final                           date            converted
+finalize                        date            converted
+find                            date            converted
+forwardable                     date            converted
+ftools                          date            converted
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
