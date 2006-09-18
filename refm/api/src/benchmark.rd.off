@@ -1,10 +1,11 @@
+#@if (version >= "1.7.0")
 -> [[unknown:"ruby-src:lib/benchmark.rb"]]
 
 [[unknown:執筆者募集]]
 
 ベンチマークを取るためのクラスです。
 
-= Benchmark
+= module Benchmark
 
 == Module Functions
 
@@ -143,3 +144,4 @@ fmtstr を省略したときは Benchmark::FMTSTR が使用されます。
   "%10.6u %10.6y %10.6t %10.6r\n"
 
 です。
+#@end
