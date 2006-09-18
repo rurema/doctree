@@ -125,11 +125,11 @@ dl/win32
 drb                             date            converted
 e2mmap                          date            converted
 erb                             date            converted
-eregex
-etc
-expect
-fcntl
-fileutils
+eregex                          date
+etc                             date
+expect                          date
+fcntl                           date
+fileutils                       date
 final
 finalize
 find
