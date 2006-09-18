@@ -215,7 +215,7 @@ socket
 stringio
 strscan                         iwadon          converted
 sync                            iwadon          converted
-syslog                          iwadon
+syslog                          iwadon          converted
 tempfile                        iwadon
 test/unit
 thread
