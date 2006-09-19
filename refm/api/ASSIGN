@@ -200,7 +200,7 @@ rexml
 ri
 rinda/rinda                     aamine          syntaxok
 rinda/tuplespace                aamine          syntaxok
-ripper
+ripper                          aamine
 rss
 rubyunit
 scanf
