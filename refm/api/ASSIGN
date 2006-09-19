@@ -1,120 +1,120 @@
-status: (none) -> converted -> syntax ok -> verified
+status: (none) -> converted -> syntaxok -> verified
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-_builtin/ARGF                   aamine          converted
-_builtin/ArgumentError          date            converted
-_builtin/Array                  sheepman        converted
-_builtin/Bignum                 date            converted
-_builtin/Binding                date            converted
-_builtin/Class                  date            converted
-_builtin/Comparable             aamine          converted
-_builtin/Continuation           sheepman        converted
-_builtin/Data                   date            converted
-_builtin/Dir                    date            converted
-_builtin/ENV                    date            converted
-_builtin/EOFError               date            converted
-_builtin/Enumerable             aamine          converted
-_builtin/Exception              date            converted
-_builtin/FalseClass             date            converted
-_builtin/File                   sheepman        converted
-_builtin/FileTest               date            converted
-_builtin/File__Constants        date            converted
-_builtin/File__Stat             date            converted
-_builtin/Fixnum                 date            converted
-_builtin/Float                  sheepman        converted
-_builtin/FloatDomainError       date            converted
-_builtin/GC                     sheepman        converted
-_builtin/Hash                   sheepman        converted
-_builtin/IO                     date            converted
-_builtin/IOError                date            converted
-_builtin/IndexError             date            converted
-_builtin/Integer                sheepman        converted
-_builtin/Interrupt              date            converted
-_builtin/Kernel                 sheepman        converted
-_builtin/KeyError               date            converted
-_builtin/LoadError              date            converted
-_builtin/LocalJumpError         date            converted
-_builtin/Marshal                sheepman        converted
-_builtin/MatchData              sheepman        converted
-_builtin/Math                   sheepman        converted
-_builtin/Matrix                 sheepman        converted
-_builtin/Method                 sheepman        converted
-_builtin/Module                 date            converted
-_builtin/NameError              date            converted
-_builtin/NilClass               sheepman        converted
-_builtin/NoMemoryError          date            converted
-_builtin/NoMethodError          date            converted
-_builtin/NotImplementedError    date            converted
-_builtin/Numeric                sheepman        converted
-_builtin/Object                 aamine          converted
-_builtin/ObjectSpace            sheepman        converted
-_builtin/Precision              sheepman        converted
-_builtin/Proc                   sheepman        converted
-_builtin/Process                sheepman        converted
-_builtin/Process__GID           sheepman        converted
-_builtin/Process__Status        sheepman        converted
-_builtin/Process__Sys           sheepman        converted
-_builtin/Process__UID           sheepman        converted
-_builtin/Range                  sheepman        converted 
-_builtin/RangeError             date            converted
-_builtin/Regexp                 sheepman        converted 
-_builtin/RegexpError            date            converted
-_builtin/RuntimeError           date            converted
-_builtin/ScriptError            date            converted
-_builtin/SecurityError          date            converted
-_builtin/Signal                 date            converted
-_builtin/SignalException        date            converted
-_builtin/StandardError          date            converted
-_builtin/String                 aamine          converted
-_builtin/Struct                 aamine          converted
-_builtin/Symbol                 date            converted
-_builtin/SyntaxError            date            converted
-_builtin/SystemCallError        date            converted
-_builtin/SystemExit             date            converted
-_builtin/SystemStackError       date            converted
-_builtin/Thread                 sheepman        converted
-_builtin/ThreadError            date            converted
-_builtin/ThreadGroup            sheepman        converted
-_builtin/Time                   date            converted
-_builtin/TrueClass              date            converted
-_builtin/TypeError              date            converted
-_builtin/UnboundMethod          sheepman        converted
-_builtin/ZeroDivisionError      date            converted
-_builtin/constants              aamine          converted
-_builtin/enumerator             aamine          converted
-_builtin/fatal                  date            converted
-_builtin/functions              aamine          converted
-_builtin/specialvars            aamine          converted
+_builtin/ARGF                   aamine          syntaxok
+_builtin/ArgumentError          date            syntaxok
+_builtin/Array                  sheepman        syntaxok
+_builtin/Bignum                 date            syntaxok
+_builtin/Binding                date            syntaxok
+_builtin/Class                  date            syntaxok
+_builtin/Comparable             aamine          syntaxok
+_builtin/Continuation           sheepman        syntaxok
+_builtin/Data                   date            syntaxok
+_builtin/Dir                    date            syntaxok
+_builtin/ENV                    date            syntaxok
+_builtin/EOFError               date            syntaxok
+_builtin/Enumerable             aamine          syntaxok
+_builtin/Exception              date            syntaxok
+_builtin/FalseClass             date            syntaxok
+_builtin/File                   sheepman        syntaxok
+_builtin/FileTest               date            syntaxok
+_builtin/File__Constants        date            syntaxok
+_builtin/File__Stat             date            syntaxok
+_builtin/Fixnum                 date            syntaxok
+_builtin/Float                  sheepman        syntaxok
+_builtin/FloatDomainError       date            syntaxok
+_builtin/GC                     sheepman        syntaxok
+_builtin/Hash                   sheepman        syntaxok
+_builtin/IO                     date            syntaxok
+_builtin/IOError                date            syntaxok
+_builtin/IndexError             date            syntaxok
+_builtin/Integer                sheepman        syntaxok
+_builtin/Interrupt              date            syntaxok
+_builtin/Kernel                 sheepman        syntaxok
+_builtin/KeyError               date            syntaxok
+_builtin/LoadError              date            syntaxok
+_builtin/LocalJumpError         date            syntaxok
+_builtin/Marshal                sheepman        syntaxok
+_builtin/MatchData              sheepman        syntaxok
+_builtin/Math                   sheepman        syntaxok
+_builtin/Matrix                 sheepman        syntaxok
+_builtin/Method                 sheepman        syntaxok
+_builtin/Module                 date            syntaxok
+_builtin/NameError              date            syntaxok
+_builtin/NilClass               sheepman        syntaxok
+_builtin/NoMemoryError          date            syntaxok
+_builtin/NoMethodError          date            syntaxok
+_builtin/NotImplementedError    date            syntaxok
+_builtin/Numeric                sheepman        syntaxok
+_builtin/Object                 aamine          syntaxok
+_builtin/ObjectSpace            sheepman        syntaxok
+_builtin/Precision              sheepman        syntaxok
+_builtin/Proc                   sheepman        syntaxok
+_builtin/Process                sheepman        syntaxok
+_builtin/Process__GID           sheepman        syntaxok
+_builtin/Process__Status        sheepman        syntaxok
+_builtin/Process__Sys           sheepman        syntaxok
+_builtin/Process__UID           sheepman        syntaxok
+_builtin/Range                  sheepman        syntaxok 
+_builtin/RangeError             date            syntaxok
+_builtin/Regexp                 sheepman        syntaxok 
+_builtin/RegexpError            date            syntaxok
+_builtin/RuntimeError           date            syntaxok
+_builtin/ScriptError            date            syntaxok
+_builtin/SecurityError          date            syntaxok
+_builtin/Signal                 date            syntaxok
+_builtin/SignalException        date            syntaxok
+_builtin/StandardError          date            syntaxok
+_builtin/String                 aamine          syntaxok
+_builtin/Struct                 aamine          syntaxok
+_builtin/Symbol                 date            syntaxok
+_builtin/SyntaxError            date            syntaxok
+_builtin/SystemCallError        date            syntaxok
+_builtin/SystemExit             date            syntaxok
+_builtin/SystemStackError       date            syntaxok
+_builtin/Thread                 sheepman        syntaxok
+_builtin/ThreadError            date            syntaxok
+_builtin/ThreadGroup            sheepman        syntaxok
+_builtin/Time                   date            syntaxok
+_builtin/TrueClass              date            syntaxok
+_builtin/TypeError              date            syntaxok
+_builtin/UnboundMethod          sheepman        syntaxok
+_builtin/ZeroDivisionError      date            syntaxok
+_builtin/constants              aamine          syntaxok
+_builtin/enumerator             aamine          syntaxok
+_builtin/fatal                  date            syntaxok
+_builtin/functions              aamine          syntaxok
+_builtin/specialvars            aamine          syntaxok
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-English                         date            converted
+English                         date            syntaxok
 Env
-Win32API                        date            converted
+Win32API                        date            syntaxok
 abbrev
-base64                          date            converted
-benchmark                       date            converted
-bigdecimal                      aamine          converted
-bigdecimal/jacobian             aamine          converted
-bigdecimal/ludcmp               aamine          converted
-bigdecimal/newton               aamine          converted
-bigdecimal/utils                aamine          converted
+base64                          date            syntaxok
+benchmark                       date            syntaxok
+bigdecimal                      aamine          syntaxok
+bigdecimal/jacobian             aamine          syntaxok
+bigdecimal/ludcmp               aamine          syntaxok
+bigdecimal/newton               aamine          syntaxok
+bigdecimal/utils                aamine          syntaxok
 cgi
 cgi-lib
-cgi/session                     date            converted
-complex                         date            converted
-csv                             date            converted
-curses                          date            converted
+cgi/session                     date            syntaxok
+complex                         date            syntaxok
+csv                             date            syntaxok
+curses                          date            syntaxok
 date
 date2
-dbm                             date            converted
+dbm                             date            syntaxok
 debug
-delegate                        date            converted
-digest                          iwadon          converted
-digest/md5                      iwadon          converted
-digest/rmd160                   iwadon          converted
-digest/sha1                     iwadon          converted
+delegate                        date            syntaxok
+digest                          iwadon          syntaxok
+digest/md5                      iwadon          syntaxok
+digest/rmd160                   iwadon          syntaxok
+digest/sha1                     iwadon          syntaxok
 digest/sha2                     iwadon
 dl
 dl/Symbol
@@ -122,43 +122,43 @@ dl/import
 dl/struct
 dl/types
 dl/win32
-drb                             date            converted
-e2mmap                          date            converted
-erb                             date            converted
-eregex                          date            converted
-etc                             date            converted
-expect                          date            converted
-fcntl                           date            converted
-fileutils                       date            converted
-final                           date            converted
-finalize                        date            converted
-find                            date            converted
-forwardable                     date            converted
-ftools                          date            converted
+drb                             date            syntaxok
+e2mmap                          date            syntaxok
+erb                             date            syntaxok
+eregex                          date            syntaxok
+etc                             date            syntaxok
+expect                          date            syntaxok
+fcntl                           date            syntaxok
+fileutils                       date            syntaxok
+final                           date            syntaxok
+finalize                        date            syntaxok
+find                            date            syntaxok
+forwardable                     date            syntaxok
+ftools                          date            syntaxok
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
-gdbm                            date            converted
-generator                       date            converted
-getoptlong                      date            converted
-getopts                         date            converted
-gserver                         date            converted
-iconv                           date            converted
-importenv                       date            converted
-io/nonblock                     date            converted
-io/wait                         date            converted
-ipaddr                          date            converted
+gdbm                            date            syntaxok
+generator                       date            syntaxok
+getoptlong                      date            syntaxok
+getopts                         date            syntaxok
+gserver                         date            syntaxok
+iconv                           date            syntaxok
+importenv                       date            syntaxok
+io/nonblock                     date            syntaxok
+io/wait                         date            syntaxok
+ipaddr                          date            syntaxok
 irb
 jcode                           aamine
-kconv                           date            converted
-logger                          date            converted
-mailread                        date            converted
-mathn                           date            converted
-matrix                          date            converted
+kconv                           date            syntaxok
+logger                          date            syntaxok
+mailread                        date            syntaxok
+mathn                           date            syntaxok
+matrix                          date            syntaxok
 md5
 mkmf
 monitor
-mutex_m                         iwadon          converted
+mutex_m                         iwadon          syntaxok
 net/ftp
 net/ftptls
 net/http
@@ -172,10 +172,10 @@ nkf
 observable
 obsolete
 open-uri
-open3                           iwadon          converted
+open3                           iwadon          syntaxok
 openssl
 optparse
-ostruct                         iwadon          converted
+ostruct                         iwadon          syntaxok
 parsearg
 parsedate
 pathname
@@ -198,8 +198,8 @@ resolv
 resolv-replace
 rexml
 ri
-rinda/rinda                     aamine          converted
-rinda/tuplespace                aamine          converted
+rinda/rinda                     aamine          syntaxok
+rinda/tuplespace                aamine          syntaxok
 ripper
 rss
 rubyunit
@@ -213,13 +213,13 @@ singleton
 soap
 socket
 stringio
-strscan                         iwadon          converted
-sync                            iwadon          converted
-syslog                          iwadon          converted
-tempfile                        iwadon          converted
-test/unit                       iwadon          converted
-thread                          iwadon          converted
-thwait                          iwadon          converted
+strscan                         iwadon          syntaxok
+sync                            iwadon          syntaxok
+syslog                          iwadon          syntaxok
+tempfile                        iwadon          syntaxok
+test/unit                       iwadon          syntaxok
+thread                          iwadon          syntaxok
+thwait                          iwadon          syntaxok
 time
 timeout
 tk
