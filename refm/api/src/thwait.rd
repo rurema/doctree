@@ -1,10 +1,11 @@
 = class ThreadsWait < Object
+#@# alias ThWait
 
 provides synchronization for multiple threads.
 
 == Class Methods
 
---- ThreadsWait.all_waits(thread1,...)
+--- ThreadsWait.all_waits(thread1, ...)
 
 waits until all of specified threads are terminated.
 if a block is supplied for the method, evaluates it for
@@ -28,7 +29,7 @@ each thread termination.
            #<Thread:0x401a13ec dead>
            #<Thread:0x401a17d4 dead>
 
---- ThreadsWait.new(thread1,...)
+--- ThreadsWait.new(thread1, ...)
 
 creates synchronization object, specifying thread(s) to wait.
 
@@ -46,11 +47,11 @@ is there any thread to be synchronized.
 
 is there already terminated thread.
 
---- ThreadsWait#join(thread1,...)
+--- ThreadsWait#join(thread1, ...)
 
 wait for specified thread(s).
 
---- ThreadsWait#join_nowait(threa1,...)
+--- ThreadsWait#join_nowait(threa1, ...)
 
 specifies thread(s) to wait.  non-blocking.
 
@@ -63,10 +64,3 @@ waits until any of specified threads is terminated.
 waits until all of specified threads are terminated.
 if a block is supplied for the method, evaluates it for
 each thread termination.
-
-= reopen Kernel
-
-== Constants
-
---- ThWait
-[[c:ThreadsWait]] §Œ ÃÃæ
