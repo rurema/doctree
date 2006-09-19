@@ -150,11 +150,11 @@ io/wait                         date            converted
 ipaddr                          date            converted
 irb
 jcode                           aamine
-kconv                           date
-logger                          date
-mailread                        date
-mathn                           date
-matrix                          date
+kconv                           date            converted
+logger                          date            converted
+mailread                        date            converted
+mathn                           date            converted
+matrix                          date            converted
 md5
 mkmf
 monitor
