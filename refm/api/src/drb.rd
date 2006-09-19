@@ -1,27 +1,26 @@
-drb
+dRuby -- 分散オブジェクトプログラミングのためのライブラリ
 
 [[unknown:執筆者募集]]
 
-dRuby --- 分散オブジェクトプログラミングのためのライブラリ
+  * [[url:http://www2a.biglobe.ne.jp/~seki/ruby/druby.html]]
+  * [[url:http://www.ruby-doc.org/stdlib/libdoc/drb/rdoc/index.html]]
 
-[[m:URL:http:#/www2a.biglobe.ne.jp/~seki/ruby/druby.html]]
-
-[[m:URL:http:#/www.ruby-doc.org/stdlib/libdoc/drb/rdoc/index.html]]
-
-#@#* ((<ACL>))
-#@#  * ((<ACL::ACLEntry>))
-#@#  * ((<ACL::ACLList>))
-#@#* ((<DRb>))
-#@#  * ((<DRb::DRbIdConv>))
-#@#  * ((<DRb::DRbObject>))
-#@#  * ((<DRb::DRbObservable>))
-#@#  * ((<DRb::DRbProtocol>))
-#@#  * ((<DRb::DRbSSLSocket>))
-#@#  * ((<DRb::DRbServer>))
-#@#  * ((<DRb::DRbUndumped>))
-#@#  * ((<DRb::DRbUnknown>))
-#@#  * ((<DRb::ExtServ>))
-#@#  * ((<DRb::ExtServManager>))
-#@#  * ((<DRb::GW>))
-#@#  * ((<DRb::GWIdConv>))
-#@#  * ((<DRb::TimerIdConv>))
+//emlist{
+ACL
+    ACL::ACLEntry
+    ACL::ACLList
+DRb
+    DRb::DRbIdConv
+    DRb::DRbObject
+    DRb::DRbObservable
+    DRb::DRbProtocol
+    DRb::DRbSSLSocket
+    DRb::DRbServer
+    DRb::DRbUndumped
+    DRb::DRbUnknown
+    DRb::ExtServ
+    DRb::ExtServManager
+    DRb::GW
+    DRb::GWIdConv
+    DRb::TimerIdConv
+//}
