@@ -1,4 +1,3 @@
-= sync
 #@include(sync/Sync)
 #@include(sync/Sync_m)
 #@include(sync/Synchronizer)

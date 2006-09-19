@@ -1,4 +1,4 @@
-= class dbm < Object
+= class DBM < Object
 
 include Enumerable
 

@@ -1,4 +1,4 @@
-= class gdbm < Object
+= class GDBM < Object
 
 include Enumerable
 
