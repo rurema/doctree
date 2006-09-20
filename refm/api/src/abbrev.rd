@@ -19,7 +19,7 @@
 
 == Module Functions
 
---- Abbrev.abbrev(words, pattern = nil)
+--- abbrev(words, pattern = nil)
 
 words は文字列の配列です。短縮形と元の文字列の配列の配列を返します。
 上の例のように短縮形からは必ず元の文字列が一意に決まるようになっています。
