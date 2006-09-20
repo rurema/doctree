@@ -170,7 +170,6 @@ net/telnet
 net/telnets
 nkf                             date
 observable                      date
-obsolete
 open-uri                        date
 open3                           iwadon          syntaxok
 openssl
