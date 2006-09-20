@@ -90,7 +90,7 @@ _builtin/specialvars            aamine          syntaxok
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 English                         date            syntaxok
-Env
+Env                             aamine          converted
 Win32API                        date            syntaxok
 abbrev                          aamine          converted
 base64                          date            syntaxok
