@@ -92,7 +92,7 @@ LIBRARY_NAME                    OWNER           STATUS
 English                         date            syntaxok
 Env
 Win32API                        date            syntaxok
-abbrev
+abbrev                          aamine          converted
 base64                          date            syntaxok
 benchmark                       date            syntaxok
 bigdecimal                      aamine          syntaxok
