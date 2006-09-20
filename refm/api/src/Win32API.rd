@@ -45,7 +45,7 @@ MessageBox (Win32API のクラスメソッドにしてみた)
   p Win32API.MessageBox(0, "てすと", "テスト")
   p Win32API.MessageBoxEx(0, "てすと", "テスト")
 
-[[c:Cygwin]] の uname コマンドの代わり
+Cygwin の uname コマンドの代わり
 
   require 'Win32API'
   
@@ -106,13 +106,9 @@ Cygwin の cygpath コマンドの代わり
     module_function :cygpath
   end
   
-  p Cygwin.cygpath("-u", 'c:\\')
-  p Cygwin.cygpath("-w", '/cygdrive/c')
-  p Cygwin.cygpath("-wa", '.')
-  
-  => "/cygdrive/c"
-     "c:\\"
-     "d:\\home\\arai"
+  p Cygwin.cygpath("-u", 'c:\\')         # => "/cygdrive/c"
+  p Cygwin.cygpath("-w", '/cygdrive/c')  # => "c:\\"
+  p Cygwin.cygpath("-wa", '.')           # => "d:\\home\\arai"
 
 == Class Methods
 
@@ -124,35 +120,38 @@ export には proc の戻り値の型を指定します。
 
 型の指定は以下の文字列または配列です。
 
-  * "p" ポインタ
+: "p"
+    ポインタ
 #@# あらい: 2001-03-23 本当?
-  * "n", "l" long
-  * "i" int
-  * "v" void
+: "n", "l"
+    long
+: "i"
+    int
+: "v"
+    void
 
-import が nil の場合は引数なしと見なされます。また、
-export が nil の場合は戻り値なし(void)と見なさ
-れます。
+import が nil の場合は引数なしと見なされます。
+また、export が nil の場合は戻り値なし (void) と見なされます。
 
 == Instance Methods
 
 --- call([args ...])
 --- Call([args ...])
 
-API関数 をコールします。指定する引数と戻り値は new の引数の
+API 関数をコールします。指定する引数と戻り値は new の引数の
 指定に従います。特にポインタを渡してそのポインタの指す領域に値が
 設定される場合はその領域をあらかじめ確保しておく必要があります。
 
 例えば、文字列が返る関数をコールする場合は以下のようにします。
 
-  obj = Win32API.new 'dllname.dll', 'foo', 'p', 'v'
+  obj = Win32API.new('dllname.dll', 'foo', 'p', 'v')
   arg = "\0" * 256
   obj.call(arg)
 
-    ポインタの配列を渡す場合は以下のようにします。
+ポインタの配列を渡す場合は以下のようにします。
 #@# あらい: 2001-03-23 まだ試してない。あってるかな？
 #@# バグ？: 2004-01-29 obj.call([args.pack("p3")].pack("P"))のような？
 
-  obj = Win32API.new 'dllname.dll', 'foo', 'p', 'v'
+  obj = Win32API.new('dllname.dll', 'foo', 'p', 'v')
   args = ["\0" * 256, "\0" * 256, "\0" * 256,]
   obj.call(args.pack("p3"))
