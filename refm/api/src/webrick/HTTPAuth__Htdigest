@@ -1,8 +1,9 @@
-= WEBrick::HTTPAuth::Htdigest
+= class WEBrick::HTTPAuth::Htdigest < Object
 
 Apache の htdigest 互換のクラス。
 
-== 例
+例
+
  require 'webrick'
  include WEBrick
  htd = HTTPAuth::Htdigest.new('dot.htdigest')
@@ -10,29 +11,29 @@ Apache の htdigest 互換のクラス。
  htd.flush
  htd2 = HTTPAuth::Htdigest.new('dot.htdigest')
  p htd2.get_passwd('realm', 'username', false) == '65fe03e5b0a199462186848cc7fda42b'
- 
-== クラスメソッド
 
---- Htdigest.new(path)
-    Htdigest オブジェクトを生成する。.htdigest ファイルのパスを ((|path|)) で与える。
+== Class Methods
 
-== メソッド
+--- new(path)
+Htdigest オブジェクトを生成する。.htdigest ファイルのパスを path で与える。
+
+== Instance Methods
 
 --- delete_passwd(realm, user)
-    ((|realm|)) に属するユーザ ((|user|)) のパスワードを削除する。
+realm に属するユーザ user のパスワードを削除する。
 
 --- each{|user, realm, pass| ...}
-    各ユーザ、((|realm|)) とパスワードに関してブロックを評価する。
+各ユーザ、realm とパスワードに関してブロックを評価する。
 
 --- flush(path=nil)
-    ファイルに書き込む。ファイル名 ((|path|)) を与えた場合は、((|path|)) に書き込む。
+ファイルに書き込む。ファイル名 path を与えた場合は、path に書き込む。
 
 --- get_passwd(realm, user, reload_db)
-    ((|realm|)) からユーザのパスワードの MD5 ハッシュ値を取得し文字列として返す。
-    ((|reload_db|)) が true の場合、reload を呼んでからハッシュ値を返す。
+realm からユーザのパスワードの MD5 ハッシュ値を取得し文字列として返す。
+reload_db が true の場合、reload を呼んでからハッシュ値を返す。
 
 --- reload
-    ファイルから再度読み込む。
+ファイルから再度読み込む。
 
 --- set_passwd(realm, user, pass)
-    ((|realm|)) に対応させてユーザ ((|user|)) とパスワード ((|pass|)) を保存する。
+realm に対応させてユーザ user とパスワード pass を保存する。
