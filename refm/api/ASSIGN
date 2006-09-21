@@ -109,7 +109,7 @@ curses                          date            syntaxok
 date
 date2
 dbm                             date            syntaxok
-debug
+debug                           iwadon
 delegate                        date            syntaxok
 digest                          iwadon          syntaxok
 digest/md5                      iwadon          syntaxok
