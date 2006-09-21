@@ -100,7 +100,7 @@ bigdecimal/jacobian             aamine          syntaxok
 bigdecimal/ludcmp               aamine          syntaxok
 bigdecimal/newton               aamine          syntaxok
 bigdecimal/utils                aamine          syntaxok
-cgi
+cgi                             iwadon
 cgi-lib
 cgi/session                     date            syntaxok
 complex                         date            syntaxok
