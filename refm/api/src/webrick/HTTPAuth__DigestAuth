@@ -1,25 +1,33 @@
-= WEBrick::HTTPAuth::DigestAuth
+= class WEBrick::HTTPAuth::DigestAuth < Object
 
-((<ºπ…Æº‘ ÁΩ∏>))
+[[unknown:ºπ…Æº‘ ÁΩ∏]]
 
 Digest «ßæ⁄§Œ§ø§·§Œ•Ø•È•π°£
 
-== •Ø•È•π•·•Ω•√•…
+== Class Methods
 
---- DigestAuth.new(config, default=Config::DigestAuth)
+--- new(config, default=Config::DigestAuth)
+ºπ…Æº‘ ÁΩ∏
 
-== •·•Ω•√•…
+== Instance Methods
 
 --- algorithm
+ºπ…Æº‘ ÁΩ∏
 
 --- authenticate(req, res)
+ºπ…Æº‘ ÁΩ∏
 
 --- challenge(req, res, stale=false)
+ºπ…Æº‘ ÁΩ∏
 
 --- logger
+ºπ…Æº‘ ÁΩ∏
 
 --- qop
+ºπ…Æº‘ ÁΩ∏
 
 --- realm
+ºπ…Æº‘ ÁΩ∏
 
 --- userdb
+ºπ…Æº‘ ÁΩ∏
