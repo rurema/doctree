@@ -1,45 +1,31 @@
-= CGI
+cgi
 
 CGI ¥×¥í¥°¥é¥à¤Î»Ù±ç¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 CGI ¥×¥í¥È¥³¥ë¤Î¾ÜºÙ¤Ë¤Ä¤¤¤Æ¤Ï°Ê²¼¤ÎÊ¸½ñ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
   * http://Web.Golux.Com/coar/cgi/draft-coar-cgi-v11-03.txt
-  * ((<RFC:3875>)): The Common Gateway Interface (CGI) Version 1.1
+  * [[c:RFC:3875]]: The Common Gateway Interface (CGI) Version 1.1
 
-* ((<cgi/»ÈÍÑÎã>))
-  * ((<cgi/¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤òÆÀ¤ë>))
-  * ((<cgi/¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¥Ï¥Ã¥·¥å¤È¤·¤ÆÆÀ¤ë>))
-  * ((<cgi/¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¥Õ¥¡¥¤¥ë¤ËÊÝÂ¸¤¹¤ë>))
-  * ((<cgi/¥Þ¥ë¥Á¥Ñ¡¼¥È¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¼èÆÀ¤¹¤ë¡Ê¥Õ¥¡¥¤¥ëÁ÷¿®¡Ë>))
-  * ((<cgi/¥¯¥é¥¤¥¢¥ó¥È¤Ë¥¯¥Ã¥­¡¼¤òÅÏ¤¹>))
-  * ((<cgi/¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥¯¥Ã¥­¡¼¤òÆÀ¤ë>))
-  * ((<cgi/CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤ÎÃÍ¤ò¼èÆÀ¤¹¤ë>))
-  * ((<cgi/É¸½à½ÐÎÏ¤Ë HTTP ¥Ø¥Ã¥À¤È HTML ¤ò½ÐÎÏ¤¹¤ë>))
-* ((<cgi/¥ª¥Õ¥é¥¤¥ó¥â¡¼¥É>))
-* ((<cgi/class CGI>))
-* ((<cgi/class CGI::Cookie>))
-* ((<cgi/HTML¥¨¥ì¥á¥ó¥È½ÐÎÏÍÑ¥á¥½¥Ã¥É>))
+=== »ÈÍÑÎã
 
-== »ÈÍÑÎã
-
-=== ¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤òÆÀ¤ë
+==== ¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤òÆÀ¤ë
 
   require "cgi"
   cgi = CGI.new
   values = cgi['field_name']   # <== 'field_name' ¤ÎÇÛÎó
     # 'field_name' ¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¤é¡¢ []¤òÊÖ¤¹¡£ (1.6)
     # 'field_name' ¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ê¤«¤Ã¤¿¤é¡¢ ""¤òÊÖ¤¹¡£(1.8)
-#
+#@#
   fields = cgi.keys            # <== field name¤ÎÇÛÎó
 
-# returns true if form has 'field_name'
+#@# returns true if form has 'field_name'
   # ¥Õ¥©¡¼¥à¤Ë 'field_name' ¤È¤¤¤¦field name¤¬¤¢¤ë¤È¤­¤Ë¿¿
   cgi.has_key?('field_name')
   cgi.include?('field_name')
 
-=== ¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¥Ï¥Ã¥·¥å¤È¤·¤ÆÆÀ¤ë
+==== ¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¥Ï¥Ã¥·¥å¤È¤·¤ÆÆÀ¤ë
 
-¥Õ¥©¡¼¥à¤ÎÃÍ¤ò¥Ï¥Ã¥·¥å¤È¤·¤ÆÆÀ¤ë¤Ë¤Ï (({CGI#params})) ¤ò»È¤¤¤Þ¤¹¡£
+¥Õ¥©¡¼¥à¤ÎÃÍ¤ò¥Ï¥Ã¥·¥å¤È¤·¤ÆÆÀ¤ë¤Ë¤Ï CGI#params ¤ò»È¤¤¤Þ¤¹¡£
 
   Îã
   require "cgi"
@@ -54,7 +40,7 @@ CGI ¥×¥í¥È¥³¥ë¤Î¾ÜºÙ¤Ë¤Ä¤¤¤Æ¤Ï°Ê²¼¤ÎÊ¸½ñ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
   cgi.params.delete('field_name')           # ¥Ñ¥é¥á¡¼¥¿¤ò¾Ãµî
   cgi.params.clear                          # Á´¥Ñ¥é¥á¡¼¥¿¤ò¾Ãµî
 
-=== ¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¥Õ¥¡¥¤¥ë¤ËÊÝÂ¸¤¹¤ë
+==== ¥Õ¥©¡¼¥à¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¥Õ¥¡¥¤¥ë¤ËÊÝÂ¸¤¹¤ë
 
 PStore ¤ò»È¤¦¤Î¤¬ºÇ¤â´ÊÃ±¤Ç¤¹¡£
 
@@ -76,9 +62,9 @@ PStore ¤ò»È¤¦¤Î¤¬ºÇ¤â´ÊÃ±¤Ç¤¹¡£
 ¤Ê¤¯¤Ê¤ë¤³¤È¤¬¤¢¤ë¤Î¤Ç¡¢Ä¹¤¤´ü´Ö¥Ç¡¼¥¿¤òÊÝÂ¸¤¹¤ë¤³¤È¤¬¤¢¤ë
 ¾ì¹ç¤Ë¤Ï¸¡Æ¤¤¬É¬Í×¤Ç¤¹¡£
 
-((<PStore>)) ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[c:PStore]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-=== ¥Þ¥ë¥Á¥Ñ¡¼¥È¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¼èÆÀ¤¹¤ë¡Ê¥Õ¥¡¥¤¥ëÁ÷¿®¡Ë
+==== ¥Þ¥ë¥Á¥Ñ¡¼¥È¥Õ¥£¡¼¥ë¥É¤ÎÃÍ¤ò¼èÆÀ¤¹¤ë¡Ê¥Õ¥¡¥¤¥ëÁ÷¿®¡Ë
 
   require "cgi"
   cgi = CGI.new
@@ -90,7 +76,7 @@ PStore ¤ò»È¤¦¤Î¤¬ºÇ¤â´ÊÃ±¤Ç¤¹¡£
 
 
 
-=== ¥¯¥é¥¤¥¢¥ó¥È¤Ë¥¯¥Ã¥­¡¼¤òÅÏ¤¹
+==== ¥¯¥é¥¤¥¢¥ó¥È¤Ë¥¯¥Ã¥­¡¼¤òÅÏ¤¹
 
   require "cgi"
   cgi = CGI.new
@@ -106,7 +92,7 @@ PStore ¤ò»È¤¦¤Î¤¬ºÇ¤â´ÊÃ±¤Ç¤¹¡£
   cgi.cookies['name'].expires = Time.now + 30
   cgi.out("cookie" => cgi.cookies['name']){"string"}
 
-=== ¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥¯¥Ã¥­¡¼¤òÆÀ¤ë
+==== ¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥¯¥Ã¥­¡¼¤òÆÀ¤ë
 
   require "cgi"
   cgi = CGI.new
@@ -114,7 +100,7 @@ PStore ¤ò»È¤¦¤Î¤¬ºÇ¤â´ÊÃ±¤Ç¤¹¡£
                                 # name ¥¯¥Ã¥­¡¼¤¬Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ï¶õÇÛÎó¤òÊÖ¤¹¡£
   names = cgi.cookies.keys      # Á´¤Æ¤Î¥¯¥Ã¥­¡¼¤ÎÌ¾Á°¤ÎÇÛÎó
 
-=== CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤ÎÃÍ¤ò¼èÆÀ¤¹¤ë
+==== CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤ÎÃÍ¤ò¼èÆÀ¤¹¤ë
 
 CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤ÎÃÍ¤ÏÄ¾ÀÜ ENV ¤«¤éÆÀ¤ëÂ¾¤Ë¡¢
 CGI ¥¯¥é¥¹¤Î¥á¥½¥Ã¥É¤ÇÆÀ¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
@@ -145,11 +131,13 @@ CGI ¥¯¥é¥¹¤Î¥á¥½¥Ã¥É¤ÇÆÀ¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
   * SERVER_PROTOCOL
   * SERVER_SOFTWARE
 
-(({#content_length})) ¤È (({#server_port}))
+#content_length ¤È #server_port
+@if (version == "1.8.0")
 ((- 1.8.1¤ËÅºÉÕ¤Îcgi¤Ë¤Ï¡ÖCGI#server_port¤¬¾ï¤Ë0¤òÊÖ¤¹¡×¤È¤¤¤¦¥Ð¥°¤¬¤¢¤ê¤Þ¤¹¡£ -))
+@end
 ¤ÏÀ°¿ô¤ò¡¢¤½¤ÎÂ¾¤Î¥á¥½¥Ã¥É¤ÏÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-((|HTTP_COOKIE|)) ¤È ((|HTTP_COOKIE2|)) ¤Ë¤Ï
+HTTP_COOKIE ¤È HTTP_COOKIE2 ¤Ë¤Ï
 ¤½¤ì¤¾¤ì raw_cookie ¤È raw_cookie2 ¤¬ÂÐ±þ¤·¤Þ¤¹¡£
 
   value = cgi.raw_cookie      # ENV["HTTP_COOKIE"]
@@ -177,12 +165,12 @@ CGI ¥¯¥é¥¹¤Î¥á¥½¥Ã¥É¤ÇÆÀ¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
   * HTTP_USER_AGENT
 
 CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤Ë´Ø¤·¤Æ¤Ï
-((<URL:http://www.w3.org/CGI/>)) ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[m:URL:http:#/www.w3.org/CGI/]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-=== É¸½à½ÐÎÏ¤Ë HTTP ¥Ø¥Ã¥À¤È HTML ¤ò½ÐÎÏ¤¹¤ë
+==== É¸½à½ÐÎÏ¤Ë HTTP ¥Ø¥Ã¥À¤È HTML ¤ò½ÐÎÏ¤¹¤ë
 
   require "cgi"
-#  cgi = CGI.new("html3")  # add HTML generation methods
+#@#  cgi = CGI.new("html3")  # add HTML generation methods
   cgi = CGI.new("html3")  # HTMLÀ¸À®¥á¥½¥Ã¥É¤òÄÉ²Ã
   cgi.out() do
     cgi.html() do
@@ -212,22 +200,22 @@ CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤Ë´Ø¤·¤Æ¤Ï
   CGI.new("html4Tr")  # html4.0 Transitional
   CGI.new("html4Fr")  # html4.0 Frameset
 
-=== ¥Õ¥¡¥¤¥ë¤Î¥¢¥Ã¥×¥í¡¼¥É
+==== ¥Õ¥¡¥¤¥ë¤Î¥¢¥Ã¥×¥í¡¼¥É
 
-((<¼¹É®¼ÔÊç½¸>))
+[[unknown:¼¹É®¼ÔÊç½¸]]
 
-((<ruby-list:25399>)) ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[unknown:ruby-list:25399]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-== ¥ª¥Õ¥é¥¤¥ó¥â¡¼¥É
+=== ¥ª¥Õ¥é¥¤¥ó¥â¡¼¥É
 
-((<¼¹É®¼ÔÊç½¸>))
+[[unknown:¼¹É®¼ÔÊç½¸]]
 
 cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥É¡Ë¤¬¤¢¤ê¤Þ¤¹¡£
 ¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é°Ê²¼¤Î¤è¤¦¤Ë¼Â¹Ô¤¹¤ë¤È¡¢
 
   $ ruby -r cgi some_script.rb
   (offline mode: enter name=value pairs on standard input)
-  
+
 ¤ÈÊ¹¤¤¤Æ¤¯¤ë¤Î¤Ç¡¢
 
   q=hoge&v=foo
@@ -236,40 +224,62 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 
 ¤Ê¤ª¡¢Windows ´Ä¶­¤Î¾ì¹ç¡¢¤¿¤ÀÃÍ¤òÆþÎÏ¤·¤Æ Enter ¤ò²¡¤¹¤À¤±¤Ç¤Ï¼Â¹Ô¤µ¤ì¤Þ¤»¤ó¡£¥­¡¼¥Ü¡¼¥É¤«¤é Ctrl + Z ¤òÆþÎÏ¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
 
-  
 
-== class CGI
+=== HTML¥¨¥ì¥á¥ó¥È½ÐÎÏÍÑ¥á¥½¥Ã¥É
+¿·¤¿¤Ê CGI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ëºÝ¡¢°ú¿ô¤È¤·¤ÆÆÃÄê¤ÎÊ¸»úÎó¤òÍ¿¤¨¤ë¤³¤È¤Ë¤è¤Ã¤Æ¡¢¤½¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ë HTML À¸À®ÍÑ¤Î¥á¥½¥Ã¥É¤òÄÉ²Ã¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£¤³¤ì¤é¤Î¥á¥½¥Ã¥É¤òÍøÍÑ¤¹¤ë¤³¤È¤Ë¤è¤ê¡¢¡Ö¤è¤êRubyÅª¤Ë¡×HTML Ê¸½ñ¤ò½ÐÎÏ¤¹¤ë¤³¤È¤¬²ÄÇ½¤Ë¤Ê¤ê¤Þ¤¹¡£
 
-=== ¥¯¥é¥¹¥á¥½¥Ã¥É
+  Îã¡§
+#@#  cgi = CGI.new("html3")  # add HTML generation methods (for HTML3.2)
+  cgi = CGI.new("html3")  # HTML3.2¤Ë½àµò¤·¤¿HTMLÀ¸À®¥á¥½¥Ã¥É¤òÄÉ²Ã
+  cgi.h1
+    # <H1></h1>
+  cgi.h1{ "content" }
+    # <H1>content</H1>
+  cgi.h1({ "class" => "foo", "attr" => "bar" }){ "content" }
+    # <H1 class="foo" attr="bar">content</H1>
 
---- CGI.escape(string)
+#@#  # add HTML generation methods
+  # HTMLÀ¸À®¥á¥½¥Ã¥É¤òÄÉ²Ã
+  CGI.new("html3")    # html3.2
+  CGI.new("html4")    # html4.0 (Strict)
+  CGI.new("html4Tr")  # html4.0 Transitional
+  CGI.new("html4Fr")  # html4.0 Frameset
 
-    string ¤ò URL ¥¨¥ó¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤Ï²¿¤âÍ¿¤¨¤é¤ì¤Ê¤¤¡Ë¤Ù¤­¤Ç¤¹¡£¤¿¤À¤·°Ê²¼¤ËÎóµó¤µ¤ì¤¿¥á¥½¥Ã¥É¤Ç¤Ï¡¢³Æ¥á¥½¥Ã¥É¤Î°ú¿ô¤Î·Á¼°¤Ë½¾¤Ã¤Æ¡¢ Hash ¥ª¥Ö¥¸¥§¥¯¥È°Ê³°¤Î¤â¤Î¤òÅÏ¤¹¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
+
+
+= class CGI
+
+== Class Methods
+
+--- escape(string)
+
+string ¤ò URL ¥¨¥ó¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
 
         p CGI.escape('@##')   #=> "%40%23%23"
 
---- CGI.unescape(string)
+--- unescape(string)
 
-    string ¤ò URL ¥Ç¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+string ¤ò URL ¥Ç¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
 
         p CGI.unescape('%40%23%23')   #=> "@##"
 
---- CGI.escapeHTML(string)
+--- escapeHTML(string)
 
-    string Ãæ¤Î &"<> ¤ò¼ÂÂÎ»²¾È¤Ë¥¨¥ó¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
+string Ãæ¤Î &"<> ¤ò¼ÂÂÎ»²¾È¤Ë¥¨¥ó¥³¡¼¥É¤·¤¿Ê¸»úÎó¤ò¿·¤·¤¯ºîÀ®¤·ÊÖ¤·¤Þ¤¹¡£
 
         p CGI.escapeHTML("3 > 1")   #=> "3 &gt; 1"
 
---- CGI.unescapeHTML(string)
+--- unescapeHTML(string)
 
-    string Ãæ¤Î¼ÂÂÎ»²¾È¤Î¤¦¤Á¡¢&amp; &gt; &lt; &quot;
-    ¤È¿ôÃÍ»ØÄê¤¬¤µ¤ì¤Æ¤¤¤ë¤â¤Î (&#0ffff ¤Ê¤É) ¤À¤±¤ò³°¤·¤Þ¤¹¡£
+string Ãæ¤Î¼ÂÂÎ»²¾È¤Î¤¦¤Á¡¢&amp; &gt; &lt; &quot;
+¤È¿ôÃÍ»ØÄê¤¬¤µ¤ì¤Æ¤¤¤ë¤â¤Î (&#0ffff ¤Ê¤É) ¤À¤±¤ò³°¤·¤Þ¤¹¡£
 
         p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 
---- CGI.escapeElement(string, *elements)
+--- escapeElement(string, *elements)
 
-    elements ¤Ë»ØÄê¤·¤¿¥¨¥ì¥á¥ó¥È¤Î¥¿¥°¤À¤±¤ò¼ÂÂÎ»²¾È¤ËÃÖ´¹¤·¤Þ¤¹¡£
+elements ¤Ë»ØÄê¤·¤¿¥¨¥ì¥á¥ó¥È¤Î¥¿¥°¤À¤±¤ò¼ÂÂÎ»²¾È¤ËÃÖ´¹¤·¤Þ¤¹¡£
 
         Îã¡§
         p CGI.escapeElement('<BR><A HREF="url"></A>', "A", "IMG")
@@ -278,37 +288,37 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
         p CGI.escapeElement('<BR><A HREF="url"></A>', ["A", "IMG"])
              # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 
---- CGI.unescapeElement(string, *element)
-      ÆÃÄê¤ÎÍ×ÁÇ¤À¤±¤òHTML¥¨¥¹¥±¡¼¥×¤«¤éÌá¤¹¡£
+--- unescapeElement(string, *element)
+ÆÃÄê¤ÎÍ×ÁÇ¤À¤±¤òHTML¥¨¥¹¥±¡¼¥×¤«¤éÌá¤¹¡£
 
-        Îã¡§          
+        Îã¡§
         print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', "A", "IMG")
           # => "&lt;BR&gt;<A HREF="url"></A>"
 
         print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
           # => "&lt;BR&gt;<A HREF="url"></A>"
 
---- CGI.rfc1123_date(time)
+--- rfc1123_date(time)
 
-    »þ¹ï time ¤ò ((<RFC:1123>)) ¥Õ¥©¡¼¥Þ¥Ã¥È¤Ë½àµò¤·¤¿Ê¸»úÎó¤ËÊÑ´¹¤·¤Þ¤¹¡£
+»þ¹ï time ¤ò [[c:RFC:1123]] ¥Õ¥©¡¼¥Þ¥Ã¥È¤Ë½àµò¤·¤¿Ê¸»úÎó¤ËÊÑ´¹¤·¤Þ¤¹¡£
 
         Îã¡§
         CGI.rfc1123_date(Time.now)
           # => Sat, 1 Jan 2000 00:00:00 GMT
 
---- CGI.parse(query)
+--- parse(query)
 
-      QUERY_STRING ¤ò¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
+QUERY_STRING ¤ò¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
 
-        Îã¡§    
+        Îã¡§
         params = CGI.parse("query_string")
           # {"name1" => ["value1", "value2", ...],
           #  "name2" => ["value1", "value2", ...], ... }
-# module QueryExtension ¤É¤¦¤·¤è
+#@# module QueryExtension ¤É¤¦¤·¤è
 
---- CGI.pretty(string, shift = "  ")
+--- pretty(string, shift = "  ")
 
-      HTML ¤ò¿Í´Ö¤Ë¸«¤ä¤¹¤¯À°·Á¤·¤Þ¤¹¡£
+HTML ¤ò¿Í´Ö¤Ë¸«¤ä¤¹¤¯À°·Á¤·¤Þ¤¹¡£
 
         Îã¡§
         print CGI.pretty("<HTML><BODY></BODY></HTML>")
@@ -323,39 +333,41 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
           #         </BODY>
           # </HTML>
 
-=== ¥á¥½¥Ã¥É
---- self[key]
-    Ê¸»úÎó key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
-    key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢nil ¤òÊÖ¤·¤Þ¤¹¡£¡Ê((<CGI#params|cgi/params>))¤ÈÅù²Á¤Ç¤¹¡Ë
+== Instance Methods
+--- [](key)
+Ê¸»úÎó key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢nil ¤òÊÖ¤·¤Þ¤¹¡£¡Ê[[m:CGI#params]]¤ÈÅù²Á¤Ç¤¹¡Ë
 
-    ¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL ¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
+¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL ¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
 
-    ((<ruby 1.8 feature>)): µóÆ°¤¬ 1.6 °ÊÁ°¤Î cgi ¤ÈÂç¤­¤¯ÊÑ²½¤·¤Æ¤¤¤Þ¤¹ ((- ¤³¤ÎµóÆ°¤ÏÎ®Æ°Åª¤Ç¡¢1.8.0, 1.8.1, 1.8.2 ¤ÎµóÆ°¤Ï¤¹¤Ù¤Æ°Û¤Ê¤ê¤Þ¤¹¡Ê1.9.0¤ÎµóÆ°¤Ï1.8.2¤ÈÆ±ÍÍ¤Ç¤¹¡Ë¡£ -)) ¡£¥á¥½¥Ã¥É¤ÎÊÖ¤êÃÍ¤ÏÇÛÎó¤Ç¤Ê¤¯¡¢Ê¸»úÎó ((- 1.8.1 ¤Þ¤Ç¤Ï¡¢Àµ³Î¤Ë¸À¤¦¤È String ¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£ -)) ¤Ë¤Ê¤ê¡¢¤½¤ì¤ËÈ¼¤Ã¤Æ cgi[key][0] ¤Î¤è¤¦¤Ê½ñ¤­Êý¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£¤Þ¤¿ key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬Â¸ºß¤·¤Ê¤«¤Ã¤¿¾ì¹ç¡¢nil ¤Ç¤Ï¤Ê¤¯ "" ¤òÊÖ¤¹¤è¤¦¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡£ ruby 1.6 ¤ÈÆ±¤¸µóÆ°¤òË¾¤à¾ì¹ç¤Ï¡¢((<CGI#params|cgi/params>))¤òÍøÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£ 
+@if (version >= "1.8.0")
+((<ruby 1.8 feature>)): µóÆ°¤¬ 1.6 °ÊÁ°¤Î cgi ¤ÈÂç¤­¤¯ÊÑ²½¤·¤Æ¤¤¤Þ¤¹ ((- ¤³¤ÎµóÆ°¤ÏÎ®Æ°Åª¤Ç¡¢1.8.0, 1.8.1, 1.8.2 ¤ÎµóÆ°¤Ï¤¹¤Ù¤Æ°Û¤Ê¤ê¤Þ¤¹¡Ê1.9.0¤ÎµóÆ°¤Ï1.8.2¤ÈÆ±ÍÍ¤Ç¤¹¡Ë¡£ -)) ¡£¥á¥½¥Ã¥É¤ÎÊÖ¤êÃÍ¤ÏÇÛÎó¤Ç¤Ê¤¯¡¢Ê¸»úÎó ((- 1.8.1 ¤Þ¤Ç¤Ï¡¢Àµ³Î¤Ë¸À¤¦¤È String ¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£ -)) ¤Ë¤Ê¤ê¡¢¤½¤ì¤ËÈ¼¤Ã¤Æ cgi[key][0] ¤Î¤è¤¦¤Ê½ñ¤­Êý¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£¤Þ¤¿ key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬Â¸ºß¤·¤Ê¤«¤Ã¤¿¾ì¹ç¡¢nil ¤Ç¤Ï¤Ê¤¯ "" ¤òÊÖ¤¹¤è¤¦¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡£ ruby 1.6 ¤ÈÆ±¤¸µóÆ°¤òË¾¤à¾ì¹ç¤Ï¡¢[[m:CGI#params]]¤òÍøÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-    ¤³¤Î·ë²Ì¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¬¤É¤¦ÊÑ¤ï¤Ã¤¿¤Î¤«¤Ë¤Ä¤¤¤Æ¤Ï¡¢°Ê²¼¤ÎÎã¤ò»²¹Í¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
-    
+¤³¤Î·ë²Ì¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¬¤É¤¦ÊÑ¤ï¤Ã¤¿¤Î¤«¤Ë¤Ä¤¤¤Æ¤Ï¡¢°Ê²¼¤ÎÎã¤ò»²¹Í¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
+
       # with ruby 1.6 ---------------------------
       cgi = CGI.new
       cgi['developer']     # => ["Matz"] (Array)
       cgi['developer'][0]  # => "Matz" (String)
       cgi['']              # => nil
-      
+
       # with ruby 1.8 ---------------------------
       cgi = CGI.new
       cgi['developer']     # => "Matz"
       cgi['developer'][0]  # => obsolete¡Ê·Ù¹ð¤¬½Ð¤Þ¤¹¡Ë
       cgi['']              # => ""
-      
-      cgi['developer'].is_a?(String) # => 1.8.1¤Þ¤Ç¤Ïfalse¡¢1.8.2°Ê¹ß¤Ïtrue
 
-    ((<¼¹É®¼ÔÊç½¸>))
+cgi['developer'].is_a?(String) # => 1.8.1¤Þ¤Ç¤Ïfalse¡¢1.8.2°Ê¹ß¤Ïtrue
+@end
+
+    [[unknown:¼¹É®¼ÔÊç½¸]]
 
 --- header(headers = "text/html")
 
-    HTTP ¥Ø¥Ã¥À¤ò headers ¤Ë½¾¤Ã¤ÆÀ¸À®¤·¤Þ¤¹¡£¡Ê ((<cgi/out>)) ¤È°ã¤¤¡¢É¸½à½ÐÎÏ¤Ë¤Ï½ÐÎÏ¤·¤Þ¤»¤ó¡Ë
-    ((<cgi/out>)) ¤ò»È¤ï¤º¤Ë¼«ÎÏ¤Ç HTML ¤ò½ÐÎÏ¤·¤¿¤¤¾ì¹ç¤Ê¤É¤Ë»È¤¤¤Þ¤¹¡£
-    ¤³¤Î¥á¥½¥Ã¥É¤ÏÊ¸»úÎó¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÑ´¹¤·¤Þ¤»¤ó¡£
-#((<ruby-list:35911>))
+HTTP ¥Ø¥Ã¥À¤ò headers ¤Ë½¾¤Ã¤ÆÀ¸À®¤·¤Þ¤¹¡£¡Ê [[m:cgi#out]] ¤È°ã¤¤¡¢É¸½à½ÐÎÏ¤Ë¤Ï½ÐÎÏ¤·¤Þ¤»¤ó¡Ë
+[[m:cgi#out]] ¤ò»È¤ï¤º¤Ë¼«ÎÏ¤Ç HTML ¤ò½ÐÎÏ¤·¤¿¤¤¾ì¹ç¤Ê¤É¤Ë»È¤¤¤Þ¤¹¡£
+¤³¤Î¥á¥½¥Ã¥É¤ÏÊ¸»úÎó¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÑ´¹¤·¤Þ¤»¤ó¡£
+#@#((<ruby-list:35911>))
 
         Îã¡§
         header
@@ -378,7 +390,7 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
                 "my_header1" => "my_value"
                 "my_header2" => "my_value"})
 
-    status ¥Ñ¥é¥á¡¼¥¿¤Ë¤Ï°Ê²¼¤ÎÊ¸»úÎó¤¬»È¤¨¤Þ¤¹¡£
+status ¥Ñ¥é¥á¡¼¥¿¤Ë¤Ï°Ê²¼¤ÎÊ¸»úÎó¤¬»È¤¨¤Þ¤¹¡£
 
         "OK"                  --> "200 OK"
         "PARTIAL_CONTENT"     --> "206 Partial Content"
@@ -399,7 +411,7 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
         "BAD_GATEWAY"         --> "502 Bad Gateway"
         "VARIANT_ALSO_VARIES" --> "506 Variant Also Negotiates"
 
-   Îã
+Îã
 
         cgi = CGI.new('html3')
         print cgi.header({"charset" => "shift_jis"})
@@ -408,7 +420,7 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 
 --- out(options = "text/html") { .... }
 
-    HTTP ¥Ø¥Ã¥À¤È¡¢¥Ö¥í¥Ã¥¯¤ÇÍ¿¤¨¤é¤ì¤¿Ê¸»úÎó¤òÉ¸½à½ÐÎÏ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
+HTTP ¥Ø¥Ã¥À¤È¡¢¥Ö¥í¥Ã¥¯¤ÇÍ¿¤¨¤é¤ì¤¿Ê¸»úÎó¤òÉ¸½à½ÐÎÏ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
 
         cgi = CGI.new
         cgi.out{ "string" }
@@ -436,16 +448,16 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
                  "my_header1" => "my_value",
                  "my_header2" => "my_value"}){ "string" }
 
-    HEAD¥ê¥¯¥¨¥¹¥È ((({REQUEST_METHOD == "HEAD"}))) ¤Î¾ì¹ç¤Ï HTTP ¥Ø¥Ã¥À¤Î¤ß¤ò½ÐÎÏ¤·¤Þ¤¹¡£
-      
-    ((|charset|)) ¤¬ (({"iso-2022-jp"}))¡¦(({"euc-jp"}))¡¦(({"shift_jis"})) ¤Î¤¤¤º¤ì¤«¤Ç
-    ¤¢¤ë¾ì¹ç¤ÏÊ¸»úÎó¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò¼«Æ°ÊÑ´¹¤·¡¢((|language|)) ¤ò (({"ja"}))¤Ë¤·¤Þ¤¹¡£
-#((<ruby-list:35911>))
+HEAD¥ê¥¯¥¨¥¹¥È (REQUEST_METHOD == "HEAD") ¤Î¾ì¹ç¤Ï HTTP ¥Ø¥Ã¥À¤Î¤ß¤ò½ÐÎÏ¤·¤Þ¤¹¡£
+
+charset ¤¬ "iso-2022-jp"¡¦"euc-jp"¡¦"shift_jis" ¤Î¤¤¤º¤ì¤«¤Ç
+¤¢¤ë¾ì¹ç¤ÏÊ¸»úÎó¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò¼«Æ°ÊÑ´¹¤·¡¢language ¤ò "ja"¤Ë¤·¤Þ¤¹¡£
+#@#((<ruby-list:35911>))
 
 --- params
-    ¥Ñ¥é¥á¡¼¥¿¤ò³ÊÇ¼¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
+¥Ñ¥é¥á¡¼¥¿¤ò³ÊÇ¼¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
 
-    ¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
+¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
 
       cgi = CGI.new
       cgi.params['developer']     # => ["Matz"] (Array)
@@ -454,7 +466,7 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 
 --- print(*strings)
 
-    °ú¿ô¤ÎÊ¸»úÎó¤òÉ¸½à½ÐÎÏ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
+°ú¿ô¤ÎÊ¸»úÎó¤òÉ¸½à½ÐÎÏ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
 
        Îã¡§
        cgi = CGI.new
@@ -462,7 +474,7 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 
 --- multipart?
 
-    ¥Þ¥ë¥Á¥Ñ¡¼¥È¥Õ¥©¡¼¥à¤Î¾ì¹ç¤Ëtrue¤¬ÊÖ¤ê¤Þ¤¹¡£
+¥Þ¥ë¥Á¥Ñ¡¼¥È¥Õ¥©¡¼¥à¤Î¾ì¹ç¤Ëtrue¤¬ÊÖ¤ê¤Þ¤¹¡£
 
        Îã¡§
        cgi = CGI.new
@@ -474,132 +486,132 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 
 --- auth_type
 
-  ENV['AUTH_TYPE']
+ENV['AUTH_TYPE']
 
 --- content_length
 
-  ENV['CONTENT_LENGTH']
+ENV['CONTENT_LENGTH']
 
 --- content_type
 
-  ENV['CONTENT_TYPE']
+ENV['CONTENT_TYPE']
 
 --- gateway_interface
 
-  ENV['GATEWAY_INTERFACE']
+ENV['GATEWAY_INTERFACE']
 
 --- path_info
 
-  ENV['PATH_INFO']
+ENV['PATH_INFO']
 
 --- path_translated
 
-  ENV['PATH_TRANSLATED']
+ENV['PATH_TRANSLATED']
 
 --- query_string
 
-  ENV['QUERY_STRING']
+ENV['QUERY_STRING']
 
 --- remote_addr
 
-  ENV['REMOTE_ADDR']
+ENV['REMOTE_ADDR']
 
 --- remote_host
 
-  ENV['REMOTE_HOST']
+ENV['REMOTE_HOST']
 
 --- remote_ident
 
-  ENV['REMOTE_IDENT']
+ENV['REMOTE_IDENT']
 
 --- remote_user
 
-  ENV['REMOTE_USER']
+ENV['REMOTE_USER']
 
 --- request_method
 
-  ENV['REQUEST_METHOD']
+ENV['REQUEST_METHOD']
 
 --- script_name
 
-  ENV['SCRIPT_NAME']
+ENV['SCRIPT_NAME']
 
 --- server_name
 
-  ENV['SERVER_NAME']
+ENV['SERVER_NAME']
 
 --- server_port
 
-  ENV['SERVER_PORT']
+ENV['SERVER_PORT']
 
 --- server_protocol
 
-  ENV['SERVER_PROTOCOL']
+ENV['SERVER_PROTOCOL']
 
 --- server_software
 
-  ENV['SERVER_SOFTWARE']
+ENV['SERVER_SOFTWARE']
 
 --- raw_cookie
 
-  ENV["HTTP_COOKIE"]
+ENV["HTTP_COOKIE"]
 
 --- raw_cookie2
 
-  ENV["HTTP_COOKIE2"]
+ENV["HTTP_COOKIE2"]
 
 --- accept
 
-  ENV['HTTP_ACCEPT']
+ENV['HTTP_ACCEPT']
 
 --- accept_charset
 
-  ENV['HTTP_ACCEPT_CHARSET']
+ENV['HTTP_ACCEPT_CHARSET']
 
 --- accept_encoding
 
-  ENV['HTTP_ACCEPT_ENCODING']
+ENV['HTTP_ACCEPT_ENCODING']
 
 --- accept_language
 
-  ENV['HTTP_ACCEPT_LANGUAGE']
+ENV['HTTP_ACCEPT_LANGUAGE']
 
 --- cache_control
 
-  ENV['HTTP_CACHE_CONTROL']
+ENV['HTTP_CACHE_CONTROL']
 
 --- from
 
-  ENV['HTTP_FROM']
+ENV['HTTP_FROM']
 
 --- host
 
-  ENV['HTTP_HOST']
+ENV['HTTP_HOST']
 
 --- negotiate
 
-  ENV['HTTP_NEGOTIATE']
+ENV['HTTP_NEGOTIATE']
 
 --- pragma
 
-  ENV['HTTP_PRAGMA']
+ENV['HTTP_PRAGMA']
 
 --- referer
 
-  ENV['HTTP_REFERER']
+ENV['HTTP_REFERER']
 
 --- user_agent
 
-  ENV['HTTP_USER_AGENT']
+ENV['HTTP_USER_AGENT']
 
 
-== class CGI::Cookie
+= class CGI::Cookie
 
-=== ¥¯¥é¥¹¥á¥½¥Ã¥É
+== Class Methods
 
---- CGI::Cookie.new(name = "", *value)
+--- new(name = "", *value)
 
-    ¥¯¥Ã¥­¡¼¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Þ¤¹¡£
+¥¯¥Ã¥­¡¼¥ª¥Ö¥¸¥§¥¯¥È¤òºîÀ®¤·¤Þ¤¹¡£
 
         Îã¡§
         cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
@@ -630,26 +642,28 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 
 --- CGI::Cookie.parse(raw_cookie)
 
-      ¥¯¥Ã¥­¡¼Ê¸»úÎó¤ò¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
+¥¯¥Ã¥­¡¼Ê¸»úÎó¤ò¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
 
         Îã¡§
         cookies = CGI::Cookie.parse("raw_cookie_string")
           # { "name1" => cookie1, "name2" => cookie2, ... }
 
---- CGI::Cookie#name
---- CGI::Cookie#name=
---- CGI::Cookie#value
---- CGI::Cookie#value=
---- CGI::Cookie#path
---- CGI::Cookie#path=
---- CGI::Cookie#domain
---- CGI::Cookie#domain=
---- CGI::Cookie#expires
---- CGI::Cookie#expires=
---- CGI::Cookie#secure
---- CGI::Cookie#secure=
+== Instance Methods
 
-    Cookie ¥ª¥Ö¥¸¥§¥¯¥È¤Î¥¢¥È¥ê¥Ó¥å¡¼¥È¤Ç¤¹¡£
+--- name
+--- name=()
+--- value
+--- value=()
+--- path
+--- path=()
+--- domain
+--- domain=()
+--- expires
+--- expires=()
+--- secure
+--- secure=()
+
+Cookie ¥ª¥Ö¥¸¥§¥¯¥È¤Î¥¢¥È¥ê¥Ó¥å¡¼¥È¤Ç¤¹¡£
 
         Îã¡§
         cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
@@ -678,54 +692,36 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
         cookie1.expires = Time.now + 30
         cookie1.secure  = true
 
-== HTML¥¨¥ì¥á¥ó¥È½ÐÎÏÍÑ¥á¥½¥Ã¥É
-¿·¤¿¤Ê CGI ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ëºÝ¡¢°ú¿ô¤È¤·¤ÆÆÃÄê¤ÎÊ¸»úÎó¤òÍ¿¤¨¤ë¤³¤È¤Ë¤è¤Ã¤Æ¡¢¤½¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ë HTML À¸À®ÍÑ¤Î¥á¥½¥Ã¥É¤òÄÉ²Ã¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£¤³¤ì¤é¤Î¥á¥½¥Ã¥É¤òÍøÍÑ¤¹¤ë¤³¤È¤Ë¤è¤ê¡¢¡Ö¤è¤êRubyÅª¤Ë¡×HTML Ê¸½ñ¤ò½ÐÎÏ¤¹¤ë¤³¤È¤¬²ÄÇ½¤Ë¤Ê¤ê¤Þ¤¹¡£
+= class CGI::HtmlExtension
 
-  Îã¡§
-#  cgi = CGI.new("html3")  # add HTML generation methods (for HTML3.2)
-  cgi = CGI.new("html3")  # HTML3.2¤Ë½àµò¤·¤¿HTMLÀ¸À®¥á¥½¥Ã¥É¤òÄÉ²Ã
-  cgi.h1
-    # <H1></h1>
-  cgi.h1{ "content" }
-    # <H1>content</H1>
-  cgi.h1({ "class" => "foo", "attr" => "bar" }){ "content" }
-    # <H1 class="foo" attr="bar">content</H1>
+== Instance Methods
 
-#  # add HTML generation methods
-  # HTMLÀ¸À®¥á¥½¥Ã¥É¤òÄÉ²Ã
-  CGI.new("html3")    # html3.2
-  CGI.new("html4")    # html4.0 (Strict)
-  CGI.new("html4Tr")  # html4.0 Transitional
-  CGI.new("html4Fr")  # html4.0 Frameset
-
-HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤Ï²¿¤âÍ¿¤¨¤é¤ì¤Ê¤¤¡Ë¤Ù¤­¤Ç¤¹¡£¤¿¤À¤·°Ê²¼¤ËÎóµó¤µ¤ì¤¿¥á¥½¥Ã¥É¤Ç¤Ï¡¢³Æ¥á¥½¥Ã¥É¤Î°ú¿ô¤Î·Á¼°¤Ë½¾¤Ã¤Æ¡¢ Hash ¥ª¥Ö¥¸¥§¥¯¥È°Ê³°¤Î¤â¤Î¤òÅÏ¤¹¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
-
---- CGI::HtmlExtension#a(href = "")
-      (({ }))
+--- a(href = "")
+       
         Îã¡§
         a("url")
           # = a({ "HREF" => "url" })
 
---- CGI::HtmlExtension#base(href = "")
-      (({ }))
+--- base(href = "")
+       
         Îã¡§
         base("url")
           # = base({ "HREF" => "url" })
 
---- CGI::HtmlExtension#blockquote(cite = nil)
-      (({ }))
+--- blockquote(cite = nil)
+       
         Îã¡§
         blockquote("url"){ "string" }
           # = blockquote({ "CITE" => "url" }){ "string" }
 
---- CGI::HtmlExtension#caption(align = nil)
-      (({ }))
+--- caption(align = nil)
+       
         Îã¡§
         caption("align"){ "string" }
           # = caption({ "ALIGN" => "align" }){ "string" }
 
---- CGI::HtmlExtension#checkbox(name = "", value = nil, checked = nil)
-      (({ }))
+--- checkbox(name = "", value = nil, checked = nil)
+       
         Îã¡§
         checkbox("name")
           # = checkbox({ "NAME" => "name" })
@@ -736,8 +732,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         checkbox("name", "value", true)
           # = checkbox({ "NAME" => "name", "VALUE" => "value", "CHECKED" => true })
 
---- CGI::HtmlExtension#checkbox_group(name = "", *values)
-      (({ }))
+--- checkbox_group(name = "", *values)
+       
         Îã¡§
         checkbox_group("name", "foo", "bar", "baz")
           # <INPUT TYPE="checkbox" NAME="name" VALUE="foo">foo
@@ -763,8 +759,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         checkbox_group({ "NAME" => "name",
                          "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
---- CGI::HtmlExtension#file_field(name = "", size = 20, maxlength = nil)
-      (({ }))
+--- file_field(name = "", size = 20, maxlength = nil)
+       
         Îã¡§
         file_field("name")
           # <INPUT TYPE="file" NAME="name" SIZE="20">
@@ -778,8 +774,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         file_field({ "NAME" => "name", "SIZE" => 40 })
           # <INPUT TYPE="file" NAME="name" SIZE="40">
 
---- CGI::HtmlExtension#form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded")
-      (({ }))
+--- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded")
+       
         Îã¡§
         form{ "string" }
           # <FORM METHOD="post" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
@@ -793,8 +789,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         form({"METHOD" => "post", ENCTYPE => "enctype"}){ "string" }
           # <FORM METHOD="post" ENCTYPE="enctype">string</FORM>
 
---- CGI::HtmlExtension#hidden(name = "", value = nil)
-      (({ }))
+--- hidden(name = "", value = nil)
+       
         Îã¡§
         hidden("name")
           # <INPUT TYPE="hidden" NAME="name">
@@ -805,8 +801,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         hidden({ "NAME" => "name", "VALUE" => "reset", "ID" => "foo" })
           # <INPUT TYPE="hidden" NAME="name" VALUE="value" ID="foo">
 
---- CGI::HtmlExtension#html(attributes = {})
-      (({ }))
+--- html(attributes = {})
+       
         Îã¡§
 
         html{ "string" }
@@ -840,8 +836,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
 
         html(if $VERBOSE then "PRETTY" end){ "HTML string" }
 
---- CGI::HtmlExtension#image_button(src = "", name = nil, alt = nil)
-      (({ }))
+--- image_button(src = "", name = nil, alt = nil)
+       
         Îã¡§
         image_button("url")
           # <INPUT TYPE="image" SRC="url">
@@ -852,8 +848,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         image_button({ "SRC" => "url", "ATL" => "strng" })
           # <INPUT TYPE="image" SRC="url" ALT="string">
 
---- CGI::HtmlExtension#img(src = "", alt = "", width = nil, height = nil)
-      (({ }))
+--- img(src = "", alt = "", width = nil, height = nil)
+       
         Îã¡§
         img("src", "alt", 100, 50)
           # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
@@ -861,8 +857,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         img({ "SRC" => "src", "ALT" => "alt", "WIDTH" => 100, "HEIGHT" => 50 })
           # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
 
---- CGI::HtmlExtension#multipart_form(action = nil, enctype = "multipart/form-data")
-      (({ }))
+--- multipart_form(action = nil, enctype = "multipart/form-data")
+       
         Îã¡§
         multipart_form{ "string" }
           # <FORM METHOD="post" ENCTYPE="multipart/form-data">string</FORM>
@@ -870,8 +866,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         multipart_form("url"){ "string" }
           # <FORM METHOD="post" ACTION="url" ENCTYPE="multipart/form-data">string</FORM>
 
---- CGI::HtmlExtension#password_field(name = "", value = nil, size = 40, maxlength = nil)
-      (({ }))
+--- password_field(name = "", value = nil, size = 40, maxlength = nil)
+       
         Îã¡§
         password_field("name")
           # <INPUT TYPE="password" NAME="name" SIZE="40">
@@ -885,8 +881,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         password_field({ "NAME" => "name", "VALUE" => "value" })
           # <INPUT TYPE="password" NAME="name" VALUE="value">
 
---- CGI::HtmlExtension#popup_menu(name = "", *values)
-      (({ }))
+--- popup_menu(name = "", *values)
+       
         Îã¡§
         popup_menu("name", "foo", "bar", "baz")
           # <SELECT NAME="name">
@@ -917,8 +913,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
           #   <OPTION VALUE="Baz">Baz</OPTION>
           # </SELECT>
 
---- CGI::HtmlExtension#radio_button(name = "", value = nil, checked = nil)
-      (({ }))
+--- radio_button(name = "", value = nil, checked = nil)
+       
         Îã¡§
         radio_button("name", "value")
           # <INPUT TYPE="radio" NAME="name" VALUE="value">
@@ -929,8 +925,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         radio_button({ "NAME" => "name", "VALUE" => "value", "ID" => "foo" })
           # <INPUT TYPE="radio" NAME="name" VALUE="value" ID="foo">
 
---- CGI::HtmlExtension#radio_group(name = "", *values)
-      (({ }))
+--- radio_group(name = "", *values)
+       
         Îã¡§
         radio_group("name", "foo", "bar", "baz")
           # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
@@ -956,8 +952,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         radio_group({ "NAME" => "name",
                       "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
---- CGI::HtmlExtension#reset(value = nil, name = nil)
-      (({ }))
+--- reset(value = nil, name = nil)
+       
         Îã¡§
         reset
           # <INPUT TYPE="reset">
@@ -968,8 +964,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         reset({ "VALUE" => "reset", "ID" => "foo" })
           # <INPUT TYPE="reset" VALUE="reset" ID="foo">
 
---- CGI::HtmlExtension#scrolling_list(name = "", *values)
-      (({ }))
+--- scrolling_list(name = "", *values)
+       
         Îã¡§
 
         scrolling_list({"NAME" => "name", "SIZE" => 2, "MULTIPLE" => true,
@@ -980,8 +976,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
           #   <OPTION VALUE="Baz">Baz</OPTION>
           # </SELECT>
 
---- CGI::HtmlExtension#submit(value = nil, name = nil)
-      (({ }))
+--- submit(value = nil, name = nil)
+       
         Îã¡§
         submit
           # <INPUT TYPE="submit">
@@ -995,8 +991,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         submit({ "VALUE" => "ok", "NAME" => "button1", "ID" => "foo" })
           # <INPUT TYPE="submit" VALUE="ok" NAME="button1" ID="foo">
 
---- CGI::HtmlExtension#text_field(name = "", value = nil, size = 40, maxlength = nil)
-      (({ }))
+--- text_field(name = "", value = nil, size = 40, maxlength = nil)
+       
         Îã¡§
         text_field("name")
           # <INPUT TYPE="text" NAME="name" SIZE="40">
@@ -1013,8 +1009,8 @@ HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤
         text_field({ "NAME" => "name", "VALUE" => "value" })
           # <INPUT TYPE="text" NAME="name" VALUE="value">
 
---- CGI::HtmlExtension#textarea(name = "", cols = 70, rows = 10)
-      (({ }))
+--- textarea(name = "", cols = 70, rows = 10)
+       
         Îã¡§
         textarea("name")
           # = textarea({ "NAME" => "name", "COLS" => 70, "ROWS" => 10 })
