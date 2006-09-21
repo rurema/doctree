@@ -1,92 +1,93 @@
-= WEBrick::HTTPRequest
+= class WEBrick::HTTPRequest < Object
 
-((<URL:http://shogo.homelinux.org/~ysantoso/webrickguide/html/HTTPRequest.html>))
+[[url:http://shogo.homelinux.org/~ysantoso/webrickguide/html/HTTPRequest.html]]
 
-== インスタンスメソッド
+== Instance Methods
 
 --- [](header_name)
+リクエストのヘッダの該当する内容を文字列で返す。
 
 --- accept
-    Accept ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされたメディアタイプの文字列の配列。
+Accept ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされたメディアタイプの文字列の配列。
 
 --- accept_charset
-    Accept-Charset  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされた文字セットの文字列の配列。
+Accept-Charset  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされた文字セットの文字列の配列。
 
 --- accept_encoding
-    Accept-Encoding  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされたコーディングの文字列の配列。
+Accept-Encoding  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされたコーディングの文字列の配列。
 
 --- accept_language
-    Accept-Language  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされた自然言語の文字列の配列。
+Accept-Language  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされた自然言語の文字列の配列。
 
 --- addr
-    ((<IPSocket#addr|IPSocket/addr>))と同様。
+[[m:IPSocket#addr]]と同様。
 
---- attributes
+#@#--- attributes
 
 --- content_length
-    content-length を整数で返す。
+content-length を整数で返す。
 
 --- content_type
-    content-type ヘッダを文字列で返す。
+content-type ヘッダを文字列で返す。
 
 --- cookies
-    ((<WEBrick::Cookie>)) の配列を返す。
+[[c:WEBrick::Cookie]] の配列を返す。
 
 --- each{|key, val| ... }
-    ヘッダ名を key、内容を val としてブロックを評価します。
+ヘッダ名を key、内容を val としてブロックを評価します。
 
 --- header
-    ヘッダ名を key、内容を val とするハッシュを返す。key も val も文字列。
+ヘッダ名を key、内容を val とするハッシュを返す。key も val も文字列。
 
 --- host
-    host を文字列で返す。
+host を文字列で返す。
 
 --- http_version
-    ((<WEBrick::HTTPVersion>)) オブジェクトを返す。
+[[c:WEBrick::HTTPVersion]] オブジェクトを返す。
 
 --- keep_alive
 --- keep_alive?
-    Keep-Alive かどうかを返す。
+Keep-Alive かどうかを返す。
 
 --- meta_vars
 
 --- path
-    path を文字列で返す。
+path を文字列で返す。
 
 --- path_info
---- path_info=
-    path と同値。
-      
+--- path_info=()
+path と同値。
+
 --- peeraddr
-    ((<IPSocket#peeraddr|IPSocket/peeraddr>))と同様。
+[[m:IPSocket#peeraddr]]と同様。
 
 --- port
-    サーバのポートを文字列で返す。
+サーバのポートを文字列で返す。
 
 --- query
-    ハッシュを返す。key も val も unescape されている。
+ハッシュを返す。key も val も unescape されている。
 
 --- query_string
-    request_uri.query と同値。
+request_uri.query と同値。
 
 --- raw_header
 
 --- request_line
-    クライアントのリクエストの最初の行(GET / HTTP/1.1)を文字列で返す。
+クライアントのリクエストの最初の行(GET / HTTP/1.1)を文字列で返す。
 
 --- request_method
-    クライアントのリクエストの HTTP メソッド(GET, POST,...)を文字列で返す。
+クライアントのリクエストの HTTP メソッド(GET, POST,...)を文字列で返す。
 
 --- request_time
-    リクエストされた時刻を Time オブジェクトで返す。
+リクエストされた時刻を Time オブジェクトで返す。
 
 --- request_uri
-    ((<URI>)) オブジェクトを返す。
+[[c:URI]] オブジェクトを返す。
 
 --- script_name
---- script_name=
+--- script_name=()
 
 --- unparsed_uri
 
 --- user
---- user=
+--- user=()
