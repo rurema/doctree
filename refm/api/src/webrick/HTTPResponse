@@ -1,50 +1,50 @@
-= WEBrick::HTTPResponse
+= class WEBrick::HTTPResponse < Object
 
-== クラスメソッド
+== Class Methods
 
---- HTTPResponse.new(config)
-    HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを与える。
+--- new(config)
+HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを与える。
 
-== インスタンスメソッド
+== Instance Methods
 
 --- [](field)
-    レスポンスのヘッダの該当する内容を文字列で返す。
+レスポンスのヘッダの該当する内容を文字列で返す。
 
 --- []=(field, val)
-    レスポンスの該当するヘッダに val を設定する。val は文字列。
+レスポンスの該当するヘッダに val を設定する。val は文字列。
 
 --- body
---- body=val
-    クライアントに返す内容を設定する。val は文字列。
+--- body=(val)
+クライアントに返す内容を設定する。val は文字列。
 
 --- chunked?
---- chunked=(true or false)
-    レスポンスを chunk に分けてクライアントに返すかどうかを設定する。
+--- chunked=()
+レスポンスを chunk に分けてクライアントに返すかどうかを設定する。
 
 --- content_type
---- content_type=val
-    content-type ヘッダを設定する。val は文字列。
+--- content_type=(val)
+content-type ヘッダを設定する。val は文字列。
 
 --- cookies
-    ((<WEBrick::Cookie>)) の配列を返す。
+[[c:WEBrick::Cookie]] の配列を返す。
 
 --- each{|key, val| ... }
-    ヘッダ名を key、内容を val としてブロックを評価します。
+ヘッダ名を key、内容を val としてブロックを評価します。
 
 --- header
-    ヘッダ名を key、内容を val とするハッシュを返す。key も val も文字列。
+ヘッダ名を key、内容を val とするハッシュを返す。key も val も文字列。
 
 --- http_version
-    HTTP のバージョンを ((<WEBrick::HTTPVersion>)) オブジェクトで返す。 
+HTTP のバージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで返す。
 
 --- keep_alive?
 --- keep_alive
---- keep_alive=(true or false)
-    keep_alive をオンにするかどうかを設定する。
+--- keep_alive=()
+keep_alive をオンにするかどうかを設定する。
 
 --- reason_phrase
---- reason_phrase=val
-    HTTP のレスポンスの最初の行の reason phrase を設定する。val は文字列。
+--- reason_phrase=(val)
+HTTP のレスポンスの最初の行の reason phrase を設定する。val は文字列。
 
 --- status
-    status コードを整数で返す。
+status コードを整数で返す。
