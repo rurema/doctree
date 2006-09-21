@@ -1,9 +1,9 @@
-= WEBrick::HTTPAuth::BasicAuth
+= class WEBrick::HTTPAuth::BasicAuth < Object
 
 HTTP の Basic 認証のためのクラスです。
 
-== 例
-    
+例
+
     realm = "WEBrick's realm"
     srv = HTTPServer.new({ :BindAddress => '127.0.0.1', :Port => 10080})
 
@@ -16,43 +16,43 @@ HTTP の Basic 認証のためのクラスです。
       res.body = "hoge"
     }
 
-== クラスメソッド
+== Class Methods
 
---- BasicAuth.make_passwd(realm, user, pass)
-    ((|pass|)) をランダムなソルトで crypt した文字列を返します。
+--- make_passwd(realm, user, pass)
+pass をランダムなソルトで crypt した文字列を返します。
 
---- BasicAuth.new(config, default=Config::BasicAuth)
-    BasicAuth オブジェクトを生成します。((|config|)) は設定を保存したハッシュです。
+--- new(config, default=Config::BasicAuth)
+BasicAuth オブジェクトを生成します。config は設定を保存したハッシュです。
 
-    config で有効なハッシュキーは以下の通りです。 
-     #
-     :Realm            => 
-     :UserDB           =>
-     :Logger           =>
-     :AutoReloadUserDB =>
+config で有効なハッシュキーは以下の通りです。
+ #
+ :Realm            =>
+ :UserDB           =>
+ :Logger           =>
+ :AutoReloadUserDB =>
 
-    realm を表す文字列 :Realm には与えます。:UserDB
-    には ((<WEBrick::HTTPAuth::Htpasswd>)) オブジェクトを与えます。:Logger には
-    ロガーオブジェクトを与えます。また、:AutoReloadUserDB には 
-    ((<Htpasswd#get_passwd|WEBrick::HTTPAuth::Htpasswd/get_passwd>)) の
-    reload_db に渡す引数を与えます。    
+realm を表す文字列 :Realm には与えます。:UserDB
+には [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを与えます。:Logger には
+ロガーオブジェクトを与えます。また、:AutoReloadUserDB には
+[[m:Htpasswd#get_passwd]] の
+reload_db に渡す引数を与えます。
 
-== メソッド
+== Instance Methods
 
 --- authenticate(req, res)
-    クライアントから送られてきたユーザ名とパスワードを認証します。
-    認証に失敗した場合は challenge を呼びます。
+クライアントから送られてきたユーザ名とパスワードを認証します。
+認証に失敗した場合は challenge を呼びます。
 
 --- challenge(req, res)
-    クライアントにパスワードを要求するために res に WWW-Authenticate ヘッダを
-    設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
+クライアントにパスワードを要求するために res に WWW-Authenticate ヘッダを
+設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
 
 --- logger
-    ロガーオブジェクトを返します。
+ロガーオブジェクトを返します。
 
 --- realm
-    realm を文字列で返します。
+realm を文字列で返します。
 
 --- userdb
-    ユーザ名とパスワードを保存した ((<WEBrick::HTTPAuth::Htpasswd>)) オブジェクトを
-    返します。
+ユーザ名とパスワードを保存した [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを
+返します。
