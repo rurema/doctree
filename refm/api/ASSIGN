@@ -222,11 +222,11 @@ thwait                          iwadon          syntaxok
 time
 timeout
 tk
-tmpdir                          iwadon
-tracer                          iwadon
-tsort                           iwadon
-un                              iwadon
-uri                             iwadon
+tmpdir                          iwadon          converted
+tracer                          iwadon          converted
+tsort                           iwadon          converted
+un                              iwadon          converted
+uri                             iwadon          converted
 weakref
 webrick                         sheepman 
 webrick/cgi                     sheepman

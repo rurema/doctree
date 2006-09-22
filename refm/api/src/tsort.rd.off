@@ -1,10 +1,10 @@
-= tsort
+tsort
 
-#tsort provides a module for topological sorting and
-#strongly connected components.
+#@#tsort provides a module for topological sorting and
+#@#strongly connected components.
 tsort はトポロジカルソートと強連結成分に関するモジュールを提供します。
 
-== Example
+=== Example
 
   require 'tsort'
 
@@ -22,119 +22,7 @@ tsort はトポロジカルソートと強連結成分に関するモジュールを提供します。
   {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}.strongly_connected_components
   #=> [[4], [2, 3], [1]]
 
-== TSort module
-#TSort implements topological sorting using Tarjan's algorithm for
-#strongly connected components.
-
-TSort は強連結成分に関する Tarjan のアルゴリズムを用いた
-トポロジカルソートの実装です。
-
-#TSort is designed to be able to use with any object which can be interpreted
-#as a directed graph.
-#TSort requires two methods to interpret a object as a graph:
-#tsort_each_node and tsort_each_child.
-
-TSort は任意のオブジェクトを有向グラフとして解釈できるように設計されています。
-TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
-すなわち、(({tsort_each_node})) と (({tsort_each_child})) です。
-
-# * tsort_each_node is used to iterate for all nodes over a graph.
-# * tsort_each_child is used to iterate for child nodes of a given node.
-
- * (({tsort_each_node})) はグラフ上のすべての頂点を巡回するのに用いられます。
- * (({tsort_each_child})) は与えられた頂点の子を巡回するのに用いられます。
-
-#The equality of nodes are defined by eql? and hash since
-#TSort uses Hash internally.
-
-頂点同士の等価性は eql? と hash によって定義されます。
-これは TSort が内部でハッシュを用いているからです。
-
-=== methods
---- tsort 
-#    returns a topologically sorted array of nodes.
-#    The array is sorted from children to parents:
-#    I.e. the first element has no child and the last node has no parent.
-
-    頂点をトポロジカルソートして得られる配列を返します。
-    この配列は子から親に向かってソートされています。
-    すなわち、最初の要素は子を持たず、最後の要素は親を持ちません。
-
-#    If there is a cycle, (({TSort::Cyclic})) is raised.
-
-    閉路が存在するとき、例外 (({TSort::Cyclic})) を起こします。
-
---- tsort_each {|node| ...}
-#    is the iterator version of the (({tsort})) method.
-#    (({((|obj|)).tsort_each})) is similar to (({((|obj|)).tsort.each})) but
-#    modification of ((|obj|)) during the iteration may cause unexpected result.
-
-    (({tsort})) メソッドのイテレータ版です。
-    (({((|obj|)).tsort_each})) は (({((|obj|)).tsort.each})) と似ていますが、
-    ブロックの評価中に ((|obj|)) が変更された場合は予期しない結果になる
-    ことがあります。
-
-#    (({tsort_each})) returns (({nil})).
-#    If there is a cycle, (({TSort::Cyclic})) is raised.
-
-    (({tsort_each})) は (({nil})) を返します。
-    閉路が存在するとき、例外 (({TSort::Cyclic})) を起こします。
-
---- strongly_connected_components
-#    returns strongly connected components as an array of array of nodes.
-#    The array is sorted from children to parents.
-#    Each elements of the array represents a strongly connected component.
-
-    強連結成分の集まりを配列の配列として返します。
-    この配列は子から親に向かってソートされています。
-    各要素は強連結成分を表す配列です。
-
---- each_strongly_connected_component {|nodes| ...}
-#    is the iterator version of the (({strongly_connected_components})) method.
-#    (({((|obj|)).each_strongly_connected_component})) is similar to
-#    (({((|obj|)).strongly_connected_components.each})) but
-#    modification of ((|obj|)) during the iteration may cause unexpected result.
-
-    (({strongly_connected_components})) メソッドのイテレータ版です。
-    (({((|obj|)).each_strongly_connected_component})) は
-    (({((|obj|)).strongly_connected_components.each})) に似ていますが、
-    ブロックの評価中に ((|obj|)) が変更された場合は予期しない結果になる
-    ことがあります。
-
-#    (({each_strongly_connected_component})) returns (({nil})).
-
-    (({each_strongly_connected_component})) は (({nil})) を返します。
-
---- each_strongly_connected_component_from(node) {|nodes| ...}
-#    iterates over strongly connected component in the subgraph reachable from 
-#    ((|node|)).
-
-    ((|node|)) から到達可能な強連結成分についてのイテレータです。
-
-#    Return value is unspecified.
-    返す値は規定されていません。
-
-#    (({each_strongly_connected_component_from})) doesn't call
-#    (({tsort_each_node})).
-    (({each_strongly_connected_component_from})) は
-    (({tsort_each_node})) を呼びません。
-
---- tsort_each_node {|node| ...}
-#    should be implemented by a extended class.
-    TSort で拡張されるクラスで定義されていなければならないメソッドです。
-
-    (({tsort_each_node})) is used to iterate for all nodes over a graph.
-
---- tsort_each_child(node) {|child| ...}
-#    should be implemented by a extended class.
-    TSort で拡張されるクラスで定義されていなければならないメソッドです。
-
-    (({tsort_each_child})) is used to iterate for child nodes of ((|node|)).
-
-#== More Realistic Example
-#Very simple `make' like tool can be implemented as follows:
-
-== より現実的な例
+=== より現実的な例
 
 非常に単純な `make' に似たツールは以下のように実装できます。
 
@@ -195,33 +83,145 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
   m.rule(%w[t5], %w[t4 t2]) { command 'cat t4 t2 > t5' }
   m.build('t5')
 
-== Bugs
+=== Bugs
 
-#* (('tsort')) is wrong name because this library uses
-#  Tarjan's algorithm for strongly connected components.
-#  Although (('strongly_connected_components')) is correct but too long,
+#@#* (('tsort')) is wrong name because this library uses
+#@#  Tarjan's algorithm for strongly connected components.
+#@#  Although (('strongly_connected_components')) is correct but too long,
 
 * (('tsort')) という名前は正確ではありません。なぜなら
   このライブラリは Tarjan の強連結成分に関するアルゴリズムを使っているからです。
   とはいえ (('strongly_connected_components')) という正確な名前は長過ぎます。
 
-== References
-R. E. Tarjan, 
+=== References
+R. E. Tarjan,
 Depth First Search and Linear Graph Algorithms,
 SIAM Journal on Computing, Vol. 1, No. 2, pp. 146-160, June 1972.
 
-#@Article{Tarjan:1972:DFS,
-#  author =       "R. E. Tarjan",
-#  key =          "Tarjan",
-#  title =        "Depth First Search and Linear Graph Algorithms",
-#  journal =      j-SIAM-J-COMPUT,
-#  volume =       "1",
-#  number =       "2",
-#  pages =        "146--160",
-#  month =        jun,
-#  year =         "1972",
-#  CODEN =        "SMJCAT",
-#  ISSN =         "0097-5397 (print), 1095-7111 (electronic)",
-#  bibdate =      "Thu Jan 23 09:56:44 1997",
-#  bibsource =    "Parallel/Multi.bib, Misc/Reverse.eng.bib",
-#}
+#@#@Article{Tarjan:1972:DFS,
+#@#  author =       "R. E. Tarjan",
+#@#  key =          "Tarjan",
+#@#  title =        "Depth First Search and Linear Graph Algorithms",
+#@#  journal =      j-SIAM-J-COMPUT,
+#@#  volume =       "1",
+#@#  number =       "2",
+#@#  pages =        "146--160",
+#@#  month =        jun,
+#@#  year =         "1972",
+#@#  CODEN =        "SMJCAT",
+#@#  ISSN =         "0097-5397 (print), 1095-7111 (electronic)",
+#@#  bibdate =      "Thu Jan 23 09:56:44 1997",
+#@#  bibsource =    "Parallel/Multi.bib, Misc/Reverse.eng.bib",
+#@#}
+
+= module TSort
+#@#TSort implements topological sorting using Tarjan's algorithm for
+#@#strongly connected components.
+
+TSort は強連結成分に関する Tarjan のアルゴリズムを用いた
+トポロジカルソートの実装です。
+
+#@#TSort is designed to be able to use with any object which can be interpreted
+#@#as a directed graph.
+#@#TSort requires two methods to interpret a object as a graph:
+#@#tsort_each_node and tsort_each_child.
+
+TSort は任意のオブジェクトを有向グラフとして解釈できるように設計されています。
+TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
+すなわち、tsort_each_node と tsort_each_child です。
+
+#@# * tsort_each_node is used to iterate for all nodes over a graph.
+#@# * tsort_each_child is used to iterate for child nodes of a given node.
+
+ * tsort_each_node はグラフ上のすべての頂点を巡回するのに用いられます。
+ * tsort_each_child は与えられた頂点の子を巡回するのに用いられます。
+
+#@#The equality of nodes are defined by eql? and hash since
+#@#TSort uses Hash internally.
+
+頂点同士の等価性は eql? と hash によって定義されます。
+これは TSort が内部でハッシュを用いているからです。
+
+== Instance Methods
+--- tsort
+#@#    returns a topologically sorted array of nodes.
+#@#    The array is sorted from children to parents:
+#@#    I.e. the first element has no child and the last node has no parent.
+
+頂点をトポロジカルソートして得られる配列を返します。
+この配列は子から親に向かってソートされています。
+すなわち、最初の要素は子を持たず、最後の要素は親を持ちません。
+
+#@#    If there is a cycle, (({TSort::Cyclic})) is raised.
+
+閉路が存在するとき、例外 TSort::Cyclic を起こします。
+
+--- tsort_each {|node| ...}
+#@#    is the iterator version of the (({tsort})) method.
+#@#    (({((|obj|)).tsort_each})) is similar to (({((|obj|)).tsort.each})) but
+#@#    modification of ((|obj|)) during the iteration may cause unexpected result.
+
+tsort メソッドのイテレータ版です。
+obj.tsort_each は obj.tsort.each と似ていますが、
+ブロックの評価中に obj が変更された場合は予期しない結果になる
+ことがあります。
+
+#@#    (({tsort_each})) returns (({nil})).
+#@#    If there is a cycle, (({TSort::Cyclic})) is raised.
+
+tsort_each は nil を返します。
+閉路が存在するとき、例外 TSort::Cyclic を起こします。
+
+--- strongly_connected_components
+#@#    returns strongly connected components as an array of array of nodes.
+#@#    The array is sorted from children to parents.
+#@#    Each elements of the array represents a strongly connected component.
+
+強連結成分の集まりを配列の配列として返します。
+この配列は子から親に向かってソートされています。
+各要素は強連結成分を表す配列です。
+
+--- each_strongly_connected_component {|nodes| ...}
+#@#    is the iterator version of the (({strongly_connected_components})) method.
+#@#    (({((|obj|)).each_strongly_connected_component})) is similar to
+#@#    (({((|obj|)).strongly_connected_components.each})) but
+#@#    modification of ((|obj|)) during the iteration may cause unexpected result.
+
+strongly_connected_components メソッドのイテレータ版です。
+obj.each_strongly_connected_component は
+obj.strongly_connected_components.each に似ていますが、
+ブロックの評価中に obj が変更された場合は予期しない結果になる
+ことがあります。
+
+#@#    (({each_strongly_connected_component})) returns (({nil})).
+
+each_strongly_connected_component は nil を返します。
+
+--- each_strongly_connected_component_from(node) {|nodes| ...}
+#@#    iterates over strongly connected component in the subgraph reachable from 
+#@#    ((|node|)).
+
+node から到達可能な強連結成分についてのイテレータです。
+
+#@#    Return value is unspecified.
+返す値は規定されていません。
+
+#@#    (({each_strongly_connected_component_from})) doesn't call
+#@#    (({tsort_each_node})).
+each_strongly_connected_component_from は
+tsort_each_node を呼びません。
+
+--- tsort_each_node {|node| ...}
+#@#    should be implemented by a extended class.
+TSort で拡張されるクラスで定義されていなければならないメソッドです。
+
+tsort_each_node is used to iterate for all nodes over a graph.
+
+--- tsort_each_child(node) {|child| ...}
+#@#    should be implemented by a extended class.
+TSort で拡張されるクラスで定義されていなければならないメソッドです。
+
+tsort_each_child is used to iterate for child nodes of node.
+
+#@#== More Realistic Example
+#@#Very simple `make' like tool can be implemented as follows:

@@ -1,15 +1,13 @@
-= un
-
 Unix の基本コマンドの代替となるユーティリティ。
 
 Makefile 内でシステムに依存しないように用意されました。
-((<mkmf>)) が使用します。
+[[unknown:mkmf]] が使用します。
 
-Windows などワイルドカードを認識しないシステム(シェル)のために引数は 
-unがワイルドカード展開(((<Dir/Dir.glob>))参照)します(Unix ではシェ
+Windows などワイルドカードを認識しないシステム(シェル)のために引数は
+unがワイルドカード展開([[m:Dir#Dir.glob]]参照)します(Unix ではシェ
 ルとunにより二重にワイルドカード展開されます)。
 
-== 使い方:
+=== 使い方:
 
         ruby -run -e cp -- [-prv] SOURCE DEST
         ruby -run -e ln -- [-sfv] TARGET LINK_NAME

@@ -1,5 +1,5 @@
-= tmpdir
+= reopen Dir
 
-== クラスメソッド:
---- Dir.tmpdir
-    テンポラリディレクトリを返す。
+== Class methods
+--- tmpdir
+テンポラリディレクトリを返す。
