@@ -1,9 +1,9 @@
-((<webrick>))
-
 一般の CGI 環境で WEBrick のサーブレットと同じように CGI スクリプトを書くための
 クラス。サーバが WEBrick でなくても使うことが出来る。
 
-((<WEBrick::HTTPServlet::AbstractServlet>)) と同じようにメソッド do_GET や
+[[lib:webrick]]
+
+[[c:WEBrick::HTTPServlet::AbstractServlet]] と同じようにメソッド do_GET や
 do_POST を再定義することによって CGI スクリプトを書く。
 
 普通は WEBrick::CGI のサブクラスを定義して、そのクラスに対してメソッド do_XXX を
@@ -19,18 +19,18 @@ do_POST を再定義することによって CGI スクリプトを書く。
      res.body = ret
    end
  end
- 
+
  MyCGI.new.start()
 
-== class WEBrick::CGI
+= class WEBrick::CGI < Object
 
-== クラスメソッド
+== Class Methods
 
---- CGI.new(config={}, *options)
-    CGI オブジェクトを生成する。
+--- new(config={}, *options)
+CGI オブジェクトを生成する。
 
-== メソッド
+== Instance Methods
 
 --- start(env=ENV, stdin=$stdin, stdout=$stdout)
-    スクリプトを実行する。env にはスクリプトが受け取るべき環境変数、stdin には
-    スクリプトの入力元、stdout には出力先を指定する。
+スクリプトを実行する。env にはスクリプトが受け取るべき環境変数、stdin には
+スクリプトの入力元、stdout には出力先を指定する。
