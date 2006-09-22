@@ -219,9 +219,9 @@ tempfile                        iwadon          syntaxok
 test/unit                       iwadon          syntaxok
 thread                          iwadon          syntaxok
 thwait                          iwadon          syntaxok
-time
-timeout
-tk
+time                            iwadon
+timeout                         iwadon
+tk                              iwadon
 tmpdir                          iwadon          converted
 tracer                          iwadon          converted
 tsort                           iwadon          converted
