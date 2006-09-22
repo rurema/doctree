@@ -1,8 +1,8 @@
 ユニットテストを行うためのライブラリです。
 
-[[m:URL:http:#/www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
+[[url:http::/www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
 
-== 使い方
+=== 使い方
 
 Test::Unit は以下のように使います。
 
@@ -112,7 +112,7 @@ console を使う (default)
 もう少し高度なテストの実行方法に関しては [[c:Test::Unit::AutoRunner]] を
 参照して下さい。
 
-== RubyUnit からの移行
+=== RubyUnit からの移行
 
 assertion メソッドの違いは [[unknown:"ruby-src:lib/runit/assert.rb"]] を参照。
 [[c:RUNIT::Assert]] も参照。
@@ -238,7 +238,7 @@ AutoRunner は Collector::Dir オブジェクトなどの Collector に
 テストを集めさせて、UI::Console::TestRunner オブジェクトなどの
 Runner にテストを実行させているクラスです。
 
-#@# === 例
+=== 例
 
 ディレクトリ ./somedir 以下にある全てのテストを実行したい場合は次のようなファイル(runner.rb)を用意して実行します。テストは test_*.rb というファイル名である必要があります。
 
