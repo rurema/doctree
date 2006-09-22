@@ -1,6 +1,6 @@
 = class WEBrick::Cookie < Object
 
-備考
+=== 備考
 
 [[c:WEBrick::Cookie]]クラスは設定された値が正しいものかどうかを厳密に確認しない。
 
@@ -8,7 +8,7 @@
 RFC2109はRFC2965により破棄されたが、
 [[c:WEBrick::Cookie]]クラスはRFC2965の全てに対応していない。
 
-参考
+=== 参考
 
  *[[url:http://www.mars.dti.ne.jp/~torao/rfc/rfc2109-ja.txt]]
   RFC2109の日本語訳。
