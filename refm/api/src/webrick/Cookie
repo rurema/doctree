@@ -1,76 +1,93 @@
-= WEBrick::Cookie
+= class WEBrick::Cookie < Object
 
-== クラスメソッド
+備考
 
---- WEBrick::Cookie.new(name, value)
-    新しい((<WEBrick::Cookie>))オブジェクトを生成する。
-    ((|name|))にクッキーの名前を、((|value|))にクッキーで保持する値を与える。
+[[c:WEBrick::Cookie]]クラスは設定された値が正しいものかどうかを厳密に確認しない。
 
---- WEBrick::Cookie.parse(str)
-    与えられた文字列((|str|))を解釈、新しく((<WEBrick::Cookie>))オブジェクトを生成し、配列として返す。
+[[c:WEBrick::Cookie]]クラスはRFC2109の実装である。
+RFC2109はRFC2965により破棄されたが、
+[[c:WEBrick::Cookie]]クラスはRFC2965の全てに対応していない。
 
-== インスタンスメソッド
+参考
+
+ *[[url:http://www.mars.dti.ne.jp/~torao/rfc/rfc2109-ja.txt]]
+  RFC2109の日本語訳。
+ *[[url:http://www.studyinghttp.net/translations#RFC2965]]
+  RFC2965の日本語訳。
+ *[[url:http://www.studyinghttp.net/cookies]]
+  クッキーの使い方。
+ *[[url:http://shogo.homelinux.org/~ysantoso/webrickguide/html/Cookie.html]]
+  WEBrick::Cookieの解説(英語)。
+
+== Class Methods
+
+--- new(name, value)
+新しい[[c:WEBrick::Cookie]]オブジェクトを生成する。
+nameにクッキーの名前を、valueにクッキーで保持する値を与える。
+
+--- parse(str)
+与えられた文字列strを解釈、新しく[[c:WEBrick::Cookie]]オブジェクトを生成し、配列として返す。
+
+== Instance Methods
 
 --- comment
-    コメントを返す。
---- comment = value
-    コメントを設定する。
-    ((|value|))は文字列。
+コメントを返す。
+
+--- comment=(value)
+コメントを設定する。
+valueは文字列。
+
 --- domain
-    ドメイン名を返す。
---- domain = value
-    ドメイン名を設定する。
-    ((|value|))は文字列。
+ドメイン名を返す。
+
+--- domain=(value)
+ドメイン名を設定する。
+valueは文字列。
+
 --- expires
-    有効期限を((<Time>))オブジェクトで返す。
---- expires = value
-    有効期限を設定する。
-    ((|value|))は((<Time>))オブジェクトまたは文字列。
+有効期限を[[c:Time]]オブジェクトで返す。
+
+--- expires=(value)
+有効期限を設定する。
+valueは[[c:Time]]オブジェクトまたは文字列。
+
 --- max_age
-    クッキーの寿命を返す。
---- max_age = value
-    クッキーの寿命を秒単位で設定する。
-    ((|value|))は正の整数。0は直ちに破棄される事を意味する。
+クッキーの寿命を返す。
+
+--- max_age=(value)
+クッキーの寿命を秒単位で設定する。
+valueは正の整数。0は直ちに破棄される事を意味する。
+
 --- name
-    名前を返す。
+名前を返す。
+
 --- path
-    パス名を返す。
---- path = value
-    パス名を設定する。
-    ((|value|))は文字列。
+パス名を返す。
+
+--- path=(value)
+パス名を設定する。
+valueは文字列。
+
 --- secure
-    クッキーのSecure属性を返す。
---- secure = value
-    クッキーのSecure属性を設定する。
-    ((|value|))は真偽値。
+クッキーのSecure属性を返す。
+
+--- secure=(value)
+クッキーのSecure属性を設定する。
+valueは真偽値。
+
 --- to_s
-    クッキーを文字列化する。
+クッキーを文字列化する。
+
 --- value
-    クッキーが保持する値を返す。
---- value = str
-    クッキーが保持する値を設定する。
-    ((|str|))は文字列。
+クッキーが保持する値を返す。
+
+--- value=(str)
+クッキーが保持する値を設定する。
+strは文字列。
+
 --- version
-    バージョン番号を返す。
---- version = value
-    バージョン番号を設定する。
-    ((|value|))は整数。
+バージョン番号を返す。
 
-== 備考
-
-((<WEBrick::Cookie>))クラスは設定された値が正しいものかどうかを厳密に確認しない。
-
-((<WEBrick::Cookie>))クラスはRFC2109の実装である。
-RFC2109はRFC2965により破棄されたが、
-((<WEBrick::Cookie>))クラスはRFC2965の全てに対応していない。
-
-== 参考
-
-: ((<URL:http://www.mars.dti.ne.jp/~torao/rfc/rfc2109-ja.txt>))
-  RFC2109の日本語訳。
-: ((<HTTP State Management Mechanism|URL:http://www.studyinghttp.net/translations#RFC2965>))
-  RFC2965の日本語訳。
-: ((<HTTP Cookies|URL:http://www.studyinghttp.net/cookies>))
-  クッキーの使い方。
-: ((<URL:http://shogo.homelinux.org/~ysantoso/webrickguide/html/Cookie.html>))
-  WEBrick::Cookieの解説(英語)。
+--- version=(value)
+バージョン番号を設定する。
+valueは整数。
