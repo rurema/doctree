@@ -1,22 +1,20 @@
-= WEBrick::HTTPServlet::FileHandler
+= class WEBrick::HTTPServlet::FileHandler < WEBrick::HTTPServlet::AbstractServlet
 
 通常のファイルサーバとしての機能を提供するためのサーブレット。
 
-== クラスメソッド
+== Class Methods
 
---- FileHandler.new(server, root, options={}, default=Config::FileHandler)
-    FileHandler サーブレットを生成する。root はサーブレットにルートディレクトリ
-    として認識させる、ローカルのファイルシステムのディレクトリを文字列で与える。
+--- new(server, root, options={}, default=Config::FileHandler)
+FileHandler サーブレットを生成する。root はサーブレットにルートディレクトリ
+として認識させる、ローカルのファイルシステムのディレクトリを文字列で与える。
 
-    ((|config|))は設定を保存したハッシュ、
-    ((|default|))にはデフォルトの設定を保存したハッシュを与える。
-    デフォルト値はそれぞれ{}と((<WEBrick::HTTPServlet::FileHandler/WEBrick::Config::FileHandler>))。
-== スーパークラス
+configは設定を保存したハッシュ、
+defaultにはデフォルトの設定を保存したハッシュを与える。
+デフォルト値はそれぞれ{}と[[m:WEBrick::Config::FileHandler]]。
 
-((<WEBrick::HTTPServlet::AbstractServlet>))
-
-== WEBrick::Config::FileHandler
-
+= reopen WEBrick::Config
+== Constants
+--- FileHandler
 WEBrick::HTTPServlet::FileHandler.newに与えるオプションの初期値。
 
   FileHandler = {
@@ -31,35 +29,38 @@ WEBrick::HTTPServlet::FileHandler.newに与えるオプションの初期値。
   }
 
 : :AcceptableLanguages
-  コンテンツの言語を選択するオプション。設定値は文字列の配列。
 
-  クライアントからのリクエストに含まれるAccept-Languageの内容がfrで、
-  かつ:AcceptableLanguagesには['ja', 'en']が設定されている場合、
-  WEBrick::HTTPServlet::FileHandlerは以下の順番でファイルを探す。
-  (1) index.html
-  (2) index.html.fr
-  (3) index.html.ja
-  (4) index.html.en
+コンテンツの言語を選択するオプション。設定値は文字列の配列。
+
+クライアントからのリクエストに含まれるAccept-Languageの内容がfrで、
+かつ:AcceptableLanguagesには['ja', 'en']が設定されている場合、
+WEBrick::HTTPServlet::FileHandlerは以下の順番でファイルを探す。
+(1) index.html
+(2) index.html.fr
+(3) index.html.ja
+(4) index.html.en
+
 : :FancyIndexing
-  クライアントがディレクトリをリクエストしたが表示するファイルが無い場合の挙動を決める。
-  値は真偽値。
+クライアントがディレクトリをリクエストしたが表示するファイルが無い場合の挙動を決める。
+値は真偽値。
 
-  trueならば、代わりにファイル一覧を表示する。
-  falseならばエラー(403 Forbidden)となる。
+trueならば、代わりにファイル一覧を表示する。
+falseならばエラー(403 Forbidden)となる。
+
 : :DirectoryCallback
 : :FileCallback
 : :HandlerCallback
 : :HandlerTable
 : :NonDisclosureName
-  インデックスに表示したくないファイルの指定。値は文字列の配列。
+インデックスに表示したくないファイルの指定。値は文字列の配列。
+表示したくないファイルをワイルドカードで指定する。
 
-  表示したくないファイルをワイルドカードで指定する。
 : :UserDir
-  ユーザ毎のドキュメントルートのディレクトリ名。値は文字列。
+ユーザ毎のドキュメントルートのディレクトリ名。値は文字列。
 
-  ユーザfooのホームディレクトリが/home/fooで、:UserDirにpublic_htmlを設定した場合、
-  クライアントから/~foo/index.htmlがリクエストされると/home/foo/public_html/index.htmlの内容を表示される。
+ユーザfooのホームディレクトリが/home/fooで、:UserDirにpublic_htmlを設定した場合、
+クライアントから/~foo/index.htmlがリクエストされると/home/foo/public_html/index.htmlの内容を表示される。
 
-  この設定を有効にするには以下の条件が必要。
-  * ((<etc>))ライブラリが使える状態である。
+この設定を有効にするには以下の条件が必要。
+  * [[unknown:etc]]ライブラリが使える状態である。
   * 環境変数SCRIPT_NAMEが空(空文字列)である。
