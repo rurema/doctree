@@ -460,6 +460,14 @@ URI オブジェクトからメールテキスト文字列を生成します。
          Subject: subscribe
          Cc: myaddr
 
+= reopen Kernel
+
+== Private Instance Methods
+
+--- URI(uri_str)
+
+[[m:URI.parse]]と同じです。
+
 #@#== 例外クラス
 
 #@#* URI::Error
