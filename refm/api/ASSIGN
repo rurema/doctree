@@ -202,11 +202,11 @@ rinda/tuplespace                aamine          syntaxok
 ripper                          aamine
 rss
 rubyunit
-scanf                           
-sdbm
-set
-sha1
-shell
+scanf                           sheepman
+sdbm                            sheepman
+set                             sheepman
+sha1                            sheepman
+shell                           sheepman
 shellwords                      sheepman        converted
 singleton
 soap
