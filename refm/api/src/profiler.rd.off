@@ -1,9 +1,7 @@
-= profiler
-
 Profiler__.start_profile 実行から、Profiler__.stop_profile までの
 区間の実行コードのプロファイルを取得する。
 
-現在、((<profile>)) は、profiler を利用して実装されている。
+現在、[[lib:profile]] は、profiler を利用して実装されている。
 
     require 'profiler'
 
@@ -32,17 +30,19 @@ Profiler__.start_profile 実行から、Profiler__.stop_profile までの
        :
     <snip>
 
-== モジュール関数:
+= module Profiler__
 
---- Profiler__.start_profile
+== Module Functions
 
-    プロファイルの取得を開始する。
+--- start_profile
 
---- Profiler__.stop_profile
+プロファイルの取得を開始する。
 
-    プロファイルの取得を停止する。
+--- stop_profile
 
---- Profiler__.print_profile(file)
+プロファイルの取得を停止する。
 
-    stop_profile を実行し、プロファイルの結果を ((|file|)) に出力する。
-    ((|file|)).(({printf})) が定義されている必要がある。
+--- print_profile(file)
+
+stop_profile を実行し、プロファイルの結果を file に出力する。
+file.printf が定義されている必要がある。
