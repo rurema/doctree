@@ -155,9 +155,9 @@ logger                          date            syntaxok
 mailread                        date            syntaxok
 mathn                           date            syntaxok
 matrix                          date            syntaxok
-md5                             date
+md5                             date            converted
 mkmf
-monitor                         date
+monitor                         date            converted
 mutex_m                         iwadon          syntaxok
 net/ftp
 net/ftptls
@@ -168,9 +168,9 @@ net/pop
 net/smtp
 net/telnet
 net/telnets
-nkf                             date
-observable                      date
-open-uri                        date
+nkf                             date            converted
+observable                      date            converted
+open-uri                        date            converted
 open3                           iwadon          syntaxok
 openssl
 optparse                        sheepman        converted
