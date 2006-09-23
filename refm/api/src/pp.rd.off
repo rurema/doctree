@@ -1,13 +1,11 @@
-= pp
-
 Pretty-printer
 
-== どちらが読みやすいでしょうか?
+=== どちらが読みやすいでしょうか?
 
-(({p})) による pretty-print されてない出力:
+p による pretty-print されてない出力:
   #<PP:0x81a0d10 @stack=[], @genspace=#<Proc:0x81a0cc0>, @nest=[0], @newline="\n", @buf=#<PrettyPrint::Group:0x81a0c98 @group=0, @tail=0, @buf=[#<PrettyPrint::Group:0x81a0ba8 @group=1, @tail=0, @buf=[#<PrettyPrint::Text:0x81a0b30 @tail=2, @width=1, @text="[">, #<PrettyPrint::Group:0x81a0a68 @group=2, @tail=1, @buf=[#<PrettyPrint::Text:0x81a09f0 @tail=1, @width=1, @text="1">], @singleline_width=1>, #<PrettyPrint::Text:0x81a0a7c @tail=0, @width=1, @text=",">, #<PrettyPrint::Breakable:0x81a0a2c @group=2, @genspace=#<Proc:0x81a0cc0>, @newline="\n", @indent=1, @tail=2, @sep=" ", @width=1>, #<PrettyPrint::Group:0x81a09c8 @group=2, @tail=1, @buf=[#<PrettyPrint::Text:0x81a0950 @tail=1, @width=1, @text="2">], @singleline_width=1>, #<PrettyPrint::Text:0x81a0af4 @tail=0, @width=1, @text="]">], @singleline_width=6>], @singleline_width=6>, @sharing_detection=false>
 
-(({pp})) による pretty-print された出力:
+pp による pretty-print された出力:
   #<PP:0x40d0688
    @buf=
     #<PrettyPrint::Group:0x40d064c
@@ -47,133 +45,101 @@ Pretty-printer
    @sharing_detection=false,
    @stack=[]>
 
-#I like the latter.  If you do too, this library is for you.
 
-== 使い方
-
---- pp(obj)
-#    output ((|obj|)) to (({$>})) in pretty printed format.
-    ((|obj|)) を (({$>})) に pretty print で出力します。
-
-#    It returns (({nil})).
-    (({nil})) を返します。
-
---- Object#pretty_inspect
-    ((<ruby 1.8.5 feature>))
-
-    self を pp で表示したときの結果を文字列として返します。
-
-== 出力のカスタマイズ
-#To define your customized pretty printing function for your classes,
-#redefine a method (({pretty_print(((|pp|)))})) in the class.
-#It takes an argument ((|pp|)) which is an instance of the class ((<PP>)).
-#The method should use PP#text, PP#breakable, PP#nest, PP#group and
-#PP#pp to print the object.
+=== 出力のカスタマイズ
 
 あなたのクラスについて pritty print するカスタマイズ機能を定義するには、
-そのクラスで (({pretty_print(((|pp|)))})) を再定義します。
-このメソッドのがとる引数 ((|pp|)) は ((<PP>)) クラスのインスタンスです。
-このメソッドは出力に際して PP#text, PP#breakable, PP#nest, PP#group および
-PP#pp を使います。
+そのクラスで pretty_print(pp) を再定義します。
+このメソッドのがとる引数 pp は [[c:PP]] クラスのインスタンスです。
+このメソッドは出力に際して [[m:PP#text]], [[m:PP#breakable]], [[m:PP#nest]], [[m:PP#group]] および
+[[m:PP#pp]] を使います。
 
 
-
-#@# imported by aamine
-= PP
-
-== super class
-((<PrettyPrint|prettyprint>))
-
-== class methods
---- PP.pp(obj[, out[, width]])
-#    outputs ((|obj|)) to ((|out|)) in pretty printed format of
-#    ((|width|)) columns in width.
-    ((|obj|)) を ((|out|)) に幅 ((|width|)) で pretty print します。
-
-#    If ((|out|)) is ommitted, (({$>})) is assumed.
-#    If ((|width|)) is ommitted, 79 is assumed.
-    ((|out|)) を省略した場合は、(({$>})) が指定されたものとみなされます。
-    ((|width|)) を省略した場合は、79 が指定されたものとみなされます。
-
-#    PP.pp returns ((|out|)).
-    PP.pp は ((|out|)) を返します。
-
---- PP.sharing_detection
-#    returns the sharing detection flag as a boolean value.
-#    It is false by default.
-    共有検出フラグを boolean すなわち true か false で返します。
-    デフォルトは false です。
-
---- PP.sharing_detection = boolean_value
-#    sets the sharing detection flag.
-    共有検出フラグを設定します。
-
-== methods
+= reopen Kernel
+== Module Functions
 --- pp(obj)
-#    adds ((|obj|)) to the pretty printing buffer
-#    using Object#pretty_print or Object#pretty_print_cycle.
-    Object#pretty_print や Object#pretty_print_cycle を使って、
-    ((|obj|)) を pretty print バッファに追加します。
+obj を $> に pretty print で出力します。
+nil を返します。
 
-#    Object#pretty_print_cycle is used when ((|obj|)) is already
-#    printed, a.k.a the object reference chain has a cycle.
-    ((|obj|)) がすでに出力されていたときには Object#pretty_print_cycle 
-    が使われます。これはオブジェクトの参照の連鎖がループしていることを
-    意味します。
+#@since 1.8.5 
+= reopen Object
+== Instance Methods
+--- pretty_inspect
+((<ruby 1.8.5 feature>))
+
+self を pp で表示したときの結果を文字列として返します。
+#@end
+
+= class PP < PrettyPrint
+
+== Class Methods
+--- pp(obj[, out[, width]])
+obj を out に幅 width で pretty print します。
+
+out を省略した場合は、$> が指定されたものとみなされます。
+width を省略した場合は、79 が指定されたものとみなされます。
+
+PP.pp は out を返します。
+
+--- sharing_detection
+
+共有検出フラグを boolean すなわち true か false で返します。
+デフォルトは false です。
+
+--- sharing_detection=(boolean_value)
+
+共有検出フラグを設定します。
+
+== Instance Methods
+--- pp(obj)
+
+Object#pretty_print や Object#pretty_print_cycle を使って、
+obj を pretty print バッファに追加します。
+
+obj がすでに出力されていたときには Object#pretty_print_cycle
+が使われます。これはオブジェクトの参照の連鎖がループしていることを
+意味します。
 
 --- object_group(obj) { ... }
-#    is a convenience method which is same as follows:
 
-    以下と等価な働きをするもので簡便のために用意されています。
- 
-      group(1, '#<' + obj.class.name, '>') { ... }
+以下と等価な働きをするもので簡便のために用意されています。
+
+  group(1, '#<' + obj.class.name, '>') { ... }
 
 --- comma_breakable
-#    is a convenience method which is same as follows:
 
-    以下と等価な働きをするもので簡便のために用意されています。
+以下と等価な働きをするもので簡便のために用意されています。
 
-      text ','
-      breakable
+  text ','
+  breakable
 
-= Object
+= reopen Object
+== Instance Methods
+
 --- pretty_print(pp)
-#    is a default pretty printing method for general objects.
-#    It calls (({pretty_print_instance_variables})) to list instance variables.
 
-    一般のオブジェクトのためのデフォルトの pretty print メソッドです。
-    このメソッドはインスタンス変数を列挙するために
-    (({pretty_print_instance_variables})) を呼びます。
+一般のオブジェクトのためのデフォルトの pretty print メソッドです。
+このメソッドはインスタンス変数を列挙するために
+pretty_print_instance_variables を呼びます。
 
-#    If (({self})) has a customized (redefined) (({inspect})) method,
-#    the result of (({self.inspect})) is used but it obviously has no
-#    line break hints.
+カスタマイズ(再定義)された inspect を self が持つ場合、
+self.inspect の結果が使われますが、これは改行のヒントを持ちません。
 
-    カスタマイズ(再定義)された (({inspect})) を (({self})) が持つ場合、
-    (({self.inspect})) の結果が使われますが、これは改行のヒントを持ちません。
-
-#    This module provides predefined pretty_print() methods for some of
-#    the most commonly used built-in classes for convenience.
-
-    もっともよく使われるいくつかの組み込みクラスについて、
-    PP モジュールはあらかじめ定義された pretty_print() メソッドを
-    簡便のために提供しています。
+もっともよく使われるいくつかの組み込みクラスについて、
+PP モジュールはあらかじめ定義された pretty_print() メソッドを
+簡便のために提供しています。
 
 --- pretty_print_cycle(pp)
-#    is a default pretty printing method for general objects that are
-#    detected as part of a cycle.
 
-    一般のオブジェクトがサイクルの一部であることが検出されたときのための
-    デフォルトの pretty print メソッドです。
+一般のオブジェクトがサイクルの一部であることが検出されたときのための
+デフォルトの pretty print メソッドです。
 
 --- pretty_print_instance_variables
-#    returns a sorted array of instance variable names.
 
-    ソートされたインスタンス変数の名前の配列を返します。
+ソートされたインスタンス変数の名前の配列を返します。
 
-#    This method should return an array of names of instance variables as symbols or strings as:
-
-    このメソッドはインスタンス変数の名前をシンボルか文字列として要素に持つ
-    配列を返さなければなりません。
-    (({[:@a, :@b]})).
+このメソッドはインスタンス変数の名前をシンボルか文字列として要素に持つ
+配列を返さなければなりません。
+ 
+ [:@a, :@b]
 
