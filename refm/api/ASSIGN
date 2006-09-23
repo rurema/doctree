@@ -181,9 +181,9 @@ pathname                        sheepman        converted
 ping                            sheepman        converted      
 pp                              sheepman        converted
 prettyprint                     sheepman        converted
-profile                         sheepman 
-profiler                        sheepman
-pstore                          sheepman
+profile                         sheepman        converted
+profiler                        sheepman        converted
+pstore                          sheepman        converted
 pty
 
 LIBRARY_NAME                    OWNER           STATUS
