@@ -1,60 +1,74 @@
-= OpenSSL::Digest::Digest
+#@if (version >= "1.8.0")
+= class OpenSSL::Digest::Digest < Object
 
-ハッシュ関数のための抽象的なインターフェースを提供するクラス。
-((<digest>)) も参照のこと。
+ハッシュ関数のための抽象的なインターフェースを提供するクラスです。
+[[lib:digest]] も参照してください。
 
-実装されているクラスは以下の通り。
+実装されているクラスは以下の通りです。
 
-* OpenSSL::Digest::DSS1
-* OpenSSL::Digest::MD2
-* OpenSSL::Digest::MD4
-* OpenSSL::Digest::MD5
-* OpenSSL::Digest::MDC2
-* OpenSSL::Digest::RIPEMD160
-* OpenSSL::Digest::SHA
+  * OpenSSL::Digest::DSS1
+  * OpenSSL::Digest::MD2
+  * OpenSSL::Digest::MD4
+  * OpenSSL::Digest::MD5
+  * OpenSSL::Digest::MDC2
+  * OpenSSL::Digest::RIPEMD160
+  * OpenSSL::Digest::SHA
 
+#@if (version >= "1.8.3")
 ((<ruby 1.8.3 feature>)):
 システムにインストールされている openssl が 0.9.8 以降ならば以下のアルゴリズムも利用できます。
-* OpenSSL::Digest::SHA224
-* OpenSSL::Digest::SHA256
-* OpenSSL::Digest::SHA384
-* OpenSSL::Digest::SHA512
+  * OpenSSL::Digest::SHA224
+  * OpenSSL::Digest::SHA256
+  * OpenSSL::Digest::SHA384
+  * OpenSSL::Digest::SHA512
+#@end
 
 
-== クラスメソッド
+== Class Methods
 
---- Digest.digest(name, str)
-    name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を文字列で返す。 
+--- digest(name, str)
 
---- Digest.hexdigest(name, str)
-    name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を、ASCIIコードを使って 16進数の列を示す文字列にエンコードして返す。
+name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を文字列で返します。
 
---- Digest.new(name)
-    オブジェクトを生成する。name でハッシュアルゴリズムを指定する。
+--- hexdigest(name, str)
+
+name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を、ASCIIコードを使って 16進数の列を示す文字列にエンコードして返します。
+
+--- new(name)
+
+オブジェクトを生成します。name でハッシュアルゴリズムを指定します。
 
 
-== メソッド
+== Instance Methods
 
 --- reset
-    いままで入力された文字列をリセットする。
+
+いままで入力された文字列をリセットします。
 
 --- digest
-    ハッシュ値を計算して文字列を返す。
+
+ハッシュ値を計算して文字列を返します。
 
 --- hexdigest
 --- inspect
 --- to_s
-    文字列に対するハッシュ値を、ASCIIコードを使って 16進数の列を示す文字列にエンコードして返す。
+
+文字列に対するハッシュ値を、ASCII コードを使って 16 進数の列を示す文字列にエンコードして返します。
 
 --- update(str)
 --- <<(str)
-    文字列を追加する。複数回updateを呼ぶことは文字列を連結して updateを呼ぶことと等しい。
+
+文字列を追加します。複数回 update を呼ぶことは文字列を連結して update を呼ぶことと同じです。
 
 --- ==(digest)
-    与えられた Digest オブジェクトと等しいかどうか。
+
+与えられた Digest オブジェクトと等しいかどうか。
 
 --- name
-    ハッシュアルゴリズムを返す。
+
+ハッシュアルゴリズムを返す。
 
 --- size
-    digest で返す文字列のバイト長。
+
+digest で返す文字列のバイト長。
+#@end

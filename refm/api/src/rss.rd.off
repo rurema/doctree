@@ -1,6 +1,8 @@
-= rss
+#@if (version >= "1.8.2")
+#@# = rss
 
-((<ºπ…Æº‘ ÁΩ∏>))
+[[unknown:ºπ…Æº‘ ÁΩ∏]]
 
-== ª≤πÕ
-* ((<URL:http://www.cozmixng.org/~rwiki/?cmd=view;name=RSS+Parser>))
+=== ª≤πÕ
+  * [[m:URL:http:#/www.cozmixng.org/~rwiki/?cmd=view;name=RSS+Parser]]
+#@end

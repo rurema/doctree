@@ -1,23 +1,26 @@
-= OpenSSL::PKey::PKey
+#@if (version >= "1.8.0")
+= class OpenSSL::PKey::PKey < Object
 
 公開鍵暗号のための抽象クラス
 
- require "openssl"
- dsa512 = OpenSSL::PKey::DSA.new(512)
- dss1 = OpenSSL::Digest::DSS1.new
- data = 'hoge'
- sign = dsa512.sign(dss1, data)
- p dsa512.verify(dss1, sign, data)
+例:
 
-== インスタンスメソッド
+  require "openssl"
+  dsa512 = OpenSSL::PKey::DSA.new(512)
+  dss1 = OpenSSL::Digest::DSS1.new
+  data = 'hoge'
+  sign = dsa512.sign(dss1, data)
+  p dsa512.verify(dss1, sign, data)
+
+== Instance Methods
 
 --- sign(digest, data)
-    digest を使って、data に署名し、文字列を返す。digest は 
-    ((<OpenSSL::Digest::Digest>)) のサブクラスのインスタンス。data は文字列。
+
+digest を使って、data に署名し、文字列を返します。digest は
+[[c:OpenSSL::Digest::Digest]] のサブクラスのインスタンスです。data は文字列です。
 
 --- verify(digest, sign, data)
-    digest と sign を使って、data を検証する。digest は 
-    ((<OpenSSL::Digest::Digest>)) のサブクラスのインスタンス。sign と data は文字列。
 
-
-
+digest と sign を使って、data を検証します。digest は
+[[c:OpenSSL::Digest::Digest]] のサブクラスのインスタンスです。sign と data は文字列です。
+#@end

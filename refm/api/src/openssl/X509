@@ -1,67 +1,117 @@
-= OpenSSL::X509
+#@if (version >= "1.8.0")
+= module OpenSSL::X509
 
-* ((<OpenSSL::X509::Certificate>))
-* ((<OpenSSL::X509::Store>))
+  * [[c:OpenSSL::X509::Certificate]]
+  * [[c:OpenSSL::X509::Store]]
 
+以下は OpenSSL::X509::Store#purpose にセットされる値です。
 
-== 定数
-
-以下は OpenSSL::X509::Store#purpose にセットされる値。
+== Constants
 
 --- PURPOSE_ANY
-    どんな目的に対しても使えるか。
---- PURPOSE_CRL_SIGN
-    CRL の署名をするのに使えるか。
---- PURPOSE_NS_SSL_SERVER
-    Netscape SSL server の証明書として使えるか。
---- PURPOSE_SMIME_ENCRYPT
-    S/MIME の暗号化をするのに使えるか。
---- PURPOSE_SMIME_SIGN
-    S/MIME の署名をするのに使えるか。
---- PURPOSE_SSL_CLIENT
-    SSL のクライアントサイドの証明書として使えるか。
---- PURPOSE_SSL_SERVER
-    SSL のサーバサイドの証明書として使えるか。
 
-以下は OpenSSL::X509::Store#trust にセットされる値。
+どんな目的に対しても使えるか。
+
+--- PURPOSE_CRL_SIGN
+
+CRL の署名をするのに使えるか。
+
+--- PURPOSE_NS_SSL_SERVER
+
+Netscape SSL server の証明書として使えるか。
+
+--- PURPOSE_SMIME_ENCRYPT
+
+S/MIME の暗号化をするのに使えるか。
+
+--- PURPOSE_SMIME_SIGN
+
+S/MIME の署名をするのに使えるか。
+
+--- PURPOSE_SSL_CLIENT
+
+SSL のクライアントサイドの証明書として使えるか。
+
+--- PURPOSE_SSL_SERVER
+
+SSL のサーバサイドの証明書として使えるか。
+
+以下は OpenSSL::X509::Store#trust にセットされる値です。
 
 --- TRUST_COMPAT
+
 --- TRUST_EMAIL
+
 --- TRUST_OBJECT_SIGN
+
 --- TRUST_SSL_CLIENT
+
 --- TRUST_SSL_SERVER
 
-以下は OpenSSL::X509::Store#error にセットされる値。
+以下は OpenSSL::X509::Store#error にセットされる値です。
 
 --- V_OK
+
 --- V_ERR_AKID_SKID_MISMATCH
+
 --- V_ERR_APPLICATION_VERIFICATION
+
 --- V_ERR_CERT_CHAIN_TOO_LONG
+
 --- V_ERR_CERT_HAS_EXPIRED
+
 --- V_ERR_CERT_NOT_YET_VALID
+
 --- V_ERR_CERT_REJECTED
+
 --- V_ERR_CERT_REVOKED
+
 --- V_ERR_CERT_SIGNATURE_FAILURE
+
 --- V_ERR_CERT_UNTRUSTED
+
 --- V_ERR_CRL_HAS_EXPIRED
+
 --- V_ERR_CRL_NOT_YET_VALID
+
 --- V_ERR_CRL_SIGNATURE_FAILURE
+
 --- V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT
+
 --- V_ERR_ERROR_IN_CERT_NOT_AFTER_FIELD
+
 --- V_ERR_ERROR_IN_CERT_NOT_BEFORE_FIELD
+
 --- V_ERR_ERROR_IN_CRL_LAST_UPDATE_FIELD
+
 --- V_ERR_ERROR_IN_CRL_NEXT_UPDATE_FIELD
+
 --- V_ERR_INVALID_CA
+
 --- V_ERR_INVALID_PURPOSE
+
 --- V_ERR_KEYUSAGE_NO_CERTSIGN
+
 --- V_ERR_OUT_OF_MEM
+
 --- V_ERR_PATH_LENGTH_EXCEEDED
+
 --- V_ERR_SELF_SIGNED_CERT_IN_CHAIN
+
 --- V_ERR_SUBJECT_ISSUER_MISMATCH
+
 --- V_ERR_UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY
+
 --- V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE
+
 --- V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE
+
 --- V_ERR_UNABLE_TO_GET_CRL
+
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT
+
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+
 --- V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE
+
+#@end

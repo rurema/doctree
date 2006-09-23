@@ -1,35 +1,35 @@
-= OpenSSL::SSL::SSLContext
+#@if (version >= "1.8.0")
+= class OpenSSL::SSL::SSLContext < Object
 
 SSL コンテクストクラス
 
-== クラスメソッド:
 
---- SSLContext.new(ssl_method)
---- SSLContext.new()
-    SSLContext オブジェクトを生成する。ssl_method で TLS/SSL method を指定する。ssl_method は文字列かシンボル。指定できるのは以下のいずれか。SSL_CTX_new 参照。
+=== Constants
+verify_mode= と options= で指定できる定数に関しては [[c:OpenSSL::SSL]] を参照してください。
+
+== Class Methods
+
+--- new(ssl_method)
+--- new
+
+SSLContext オブジェクトを生成します。ssl_method で TLS/SSL method を指定します。ssl_method は文字列かシンボルを与えます。指定できるのは以下のいずれかです。SSL_CTX_new を参照してください。
 
   'TLSv1', 'TLSv1_server', 'TLSv1_client', 'SSLv2', 'SSLv2_server', 'SSLv2_client',
   'SSLv3', 'SSLv3_server', 'SSLv3_client', 'SSLv23', 'SSLv23_server', 'SSLv23_client'
-   
-== メソッド:
+
+== Instance Methods
 
 --- ciphers
---- ciphers=
+--- ciphers=(ciphers)
 
-    使用可能な暗号の配列。以下のような形式。
+使用可能な暗号の配列です。以下のような形式です。
 
   [["EDH-RSA-DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168], ...]
 
 --- ca_file
---- ca_file=(path)
+--- ca_file=(ca)
 
-    接続相手の検証のために使う、信頼している CA 証明書ファイルのパス。以下のように複数の証明書を含んでいてもかまわない。
-
-  (ここに証明書の説明)
-
-  -----BEGIN CERTIFICATE-----
-  ... (CA certificate in base64 encoding) ...
-  -----END CERTIFICATE-----
+接続相手の検証のために使う、信頼している CA 証明書ファイルのパスです。以下のように複数の証明書を含んでいても構いません。
 
   (ここに証明書の説明)
 
@@ -37,61 +37,70 @@ SSL コンテクストクラス
   ... (CA certificate in base64 encoding) ...
   -----END CERTIFICATE-----
 
-    
+  (ここに証明書の説明)
+
+  -----BEGIN CERTIFICATE-----
+  ... (CA certificate in base64 encoding) ...
+  -----END CERTIFICATE-----
 
 --- ca_path
---- ca_path=(path)
+--- ca_path=(ca)
 
-    接続相手の証明書の検証のために使う、信頼している CA 証明書ファイルを含むディレクトリ。
+接続相手の証明書の検証のために使う、信頼している CA 証明書ファイルを含むディレクトリです。
 
 --- cert
---- cert=
+--- cert=(certificate)
 
-    所有している証明書。 ((<OpenSSL::X509::Certificate>)) オブジェクト。
+所有している証明書です。 [[c:OpenSSL::X509::Certificate]] オブジェクトです。
 
 --- cert_store
---- cert_store=
+--- cert_store=(store)
 
-    接続相手の証明書の検証のために使う、信頼している CA 証明書のストレージ。 ((<OpenSSL::X509::Store>)) オブジェクト。通常は ca_path=(path) や ca_file=(path) を使う。
+接続相手の証明書の検証のために使う、信頼している CA 証明書のストレージです。 [[c:OpenSSL::X509::Store]] オブジェクトです。通常は ca_path=(path) や ca_file=(path) を使います。
 
 --- client_ca
---- client_ca=
-    クライアント証明書を要求する時にクライアントに送る CA のリスト。CA の Certificate オブジェクトの配列。このリストに含まれる CA ―あるはその下位の CA―に署名された証明書をクライアントは送り返すことになっている。
+--- client_ca=(ca)
+
+クライアント証明書を要求する時にクライアントに送る CA のリストです。CA の Certificate オブジェクトの配列です。このリストに含まれる CA ―あるはその下位の CA―に署名された証明書をクライアントは送り返すことになっています。
 
 --- extra_chain_cert
---- extra_chain_cert=
-    証明書チェーン。所有している証明書からルート CA までの証明書のリスト。これを指定しない場合、ca_file や ca_path で指定した信頼されている証明書のストレージから証明書チェーンを構成しようとする。 順序は以下のとおり。
+--- extra_chain_cert=(certificates)
+
+証明書チェーンです。所有している証明書からルート CA までの証明書のリストです。これを指定しない場合、ca_file や ca_path で指定した信頼されている証明書のストレージから証明書チェーンを構成しようとします。 順序は以下の通りです。
 
   [所有している証明書, 下位 CA 証明書, ... 中間 CA 証明書]
 
-
 --- key
---- key=
-    所有している証明書に記載されている公開鍵に対応する秘密鍵。
+--- key=(key)
+
+所有している証明書に記載されている公開鍵に対応する秘密鍵です。
 
 --- options
---- options=
-    オプション。定数 OP_* のビットマスクで指定する。
+--- options=(options)
+
+オプション。定数 OP_* のビットマスクで指定します。
 
 --- timeout
---- timeout=
-    タイムアウトするまでの時間。単位は秒。
+--- timeout=(seconds)
+
+タイムアウトするまでの時間です。単位は秒です。
 
 --- verify_callback
---- verify_callback=
-    通常の証明書の検証に加えてさらに適用される ((<Proc>)) オブジェクト。この Proc オブジェクトは preverify_ok と ctx 二つの引数をとる。preverify_ok は true か false の値をとり、verify_mode で設定した通常の証明書の検証が成功したかどうかで決まる。ctx は SSLContext オブジェクト。この Proc オブジェクトは true か false を返す必要がある。
+--- verify_callback=(proc)
+
+通常の証明書の検証に加えてさらに適用される [[c:Proc]] オブジェクトです。この Proc オブジェクトは preverify_ok と ctx 二つの引数をとります。preverify_ok は true か false の値をとり、verify_mode で設定した通常の証明書の検証が成功したかどうかで決まります。ctx は SSLContext オブジェクトです。この Proc オブジェクトは true か false を返す必要があります。
 
   lambda{|preverify_ok, ctx|
     return true # or false
   }
 
 --- verify_depth
---- verify_depth=
-    証明書を検証する深さ。
+--- verify_depth=(depth)
+
+証明書を検証する深さです。
 
 --- verify_mode
---- verify_mode=
-    検証モード。デフォルトは nil。つまり検証しない。下の定数の項を参照。定数 VERIFY_* のビットマスクで指定する。
+--- verify_mode=(mode)
 
-== 定数
-verify_mode= と options= で指定できる定数に関しては ((<OpenSSL::SSL>)) を参照。
+検証モードです。デフォルトは nil、つまり検証しません。定数の項を参照してください。定数 VERIFY_* のビットマスクで指定します。
+#@end

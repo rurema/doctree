@@ -1,9 +1,11 @@
-(({((<BasicSocket>))#send}))、
-(({((<IPSocket>)).getaddress}))、
-(({((<TCPSocket>)).new}))、
-(({((<TCPSocket>)).open}))、
-(({((<UDPSocket>))#connect}))、
-(({((<UDPSocket>))#send}))
-の名前解決に ((<resolv>)) ライブラリを使うようにメソッドを書き換える。
+#@if (version >= "1.6.0")
+[[m:BasicSocket#send]]、
+[[m:IPSocket.getaddress]]、
+[[m:TCPSocket.new]]、
+[[m:TCPSocket.open]]、
+[[m:UDPSocket#connect]]、
+[[m:UDPSocket#send]]
+の名前解決に [[lib:resolv]] ライブラリを使うようにメソッドを書き換えます。
 
-((<執筆者募集>)) 一応書いただけなので適当に書き直してください。
+[[unknown:執筆者募集]] 一応書いただけなので適当に書き直してください。
+#@end

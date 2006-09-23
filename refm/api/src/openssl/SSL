@@ -1,12 +1,11 @@
-= OpenSSL::SSL
+#@if (version >= "1.8.0")
+= module OpenSSL::SSL
 
-*((<OpenSSL::SSL::SSLContext>))
-*((<OpenSSL::SSL::SSLServer>))
-*((<OpenSSL::SSL::SSLSocket>))
+  *[[c:OpenSSL::SSL::SSLContext]]
+  *[[c:OpenSSL::SSL::SSLServer]]
+  *[[c:OpenSSL::SSL::SSLSocket]]
 
-== 定数
-
-((<OpenSSL::SSL::SSLContext#options=|OpenSSL::SSL::SSLContext/options=>)) に指定できるもの。
+== Constants
 
 --- OP_ALL
 --- OP_EPHEMERAL_RSA
@@ -20,25 +19,37 @@
 --- OP_SINGLE_DH_USE
 --- OP_TLS_ROLLBACK_BUG
 
-
-((<OpenSSL::SSL::SSLContext#verify_mode=|OpenSSL::SSL::SSLContext/verify_mode=>)) に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなる。
+[[m:OpenSSL::SSL::SSLContext#options=]] に指定できるもの。
 
 --- VERIFY_CLIENT_ONCE
-    サーバーモード: 最初の TLS/SSL ハンドシェイクの時だけクライアントに証明書を要求する。このフラグは VERIFY_PEER フラグとともに使われなければいけない。
 
-    クライアントモード: 無視される。
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
+
+サーバーモード: 最初の TLS/SSL ハンドシェイクの時だけクライアントに証明書を要求します。このフラグは VERIFY_PEER フラグとともに使われなければなりません。
+
+クライアントモード: 無視されます。
 
 --- VERIFY_FAIL_IF_NO_PEER_CERT
-    サーバーモード: クライアントが証明書を返さない場合に TLS/SSL ハンドシェイクを即座に終了させる。このフラグは VERIFY_PEER フラグとともに使われなければいけない。
 
-    クライアントモード: 無視される。
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
+
+サーバーモード: クライアントが証明書を返さない場合に TLS/SSL ハンドシェイクを即座に終了させます。このフラグは VERIFY_PEER フラグとともに使われなければなりません。
+
+クライアントモード: 無視されます。
 
 --- VERIFY_NONE
-    サーバーモード: クライアントに証明書を要求しない。
 
-    クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってくる。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできる。証明書の検証の結果によらずハンドシェイクは継続する。
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
+
+サーバーモード: クライアントに証明書を要求しません。
+
+クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってきます。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできます。証明書の検証の結果によらずハンドシェイクは継続します。
 
 --- VERIFY_PEER
-    サーバーモード: サーバーはクライアントに証明書を要求する。送られてきた証明書は検証される。検証が失敗した場合、TLS/SSL ハンドシェイクを即座に終了させる。
 
-    クライアントモード: サーバーの証明書を検証する。検証が失敗した場合、TLS/SSL ハンドシェイクを即座に終了させる。サーバーが証明書を返さずに、anonymous cipher を用いる場合、VERIFY_PEER は無視される。
+[[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
+
+サーバーモード: サーバーはクライアントに証明書を要求します。送られてきた証明書は検証されます。検証が失敗した場合、TLS/SSL ハンドシェイクを即座に終了させます。
+
+クライアントモード: サーバーの証明書を検証します。検証が失敗した場合、TLS/SSL ハンドシェイクを即座に終了させます。サーバーが証明書を返さずに、anonymous cipher を用いる場合、VERIFY_PEER は無視されます。
+#@end

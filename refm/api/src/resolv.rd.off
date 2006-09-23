@@ -1,179 +1,259 @@
-= Resolv
-Rubyで書かれたリゾルバ(名前解決)ライブラリ。
-Rubyで書かれているためthread-awareであり、
+#@if (version >= "1.6.0")
+= class Resolv < Object
+
+Ruby で書かれたリゾルバ(名前解決)ライブラリ。
+Ruby で書かれているため thread-aware であり、
 並列に多くのホスト名を解決することができます。
 
-DNSモジュールを使うことで、さまざまなリソースを直接ルックアップできます。
+DNS モジュールを使うことで、さまざまなリソースを直接ルックアップできます。
 
 なお、単にホスト名から IP アドレスを得たいだけであれば、
-((<socket>)) ライブラリの ((<IPSocket.getaddress など|socket/ホスト名と IP アドレスの変換>)) が使用できます。
+[[lib:socket]] ライブラリの [[m:IPSocket.getaddress]] などが使用できます。
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
-== 例:
+=== 例:
   Resolv.getaddress("www.ruby-lang.org")
   Resolv.getname("210.251.121.214").to_s
   Resolv::DNS.new.getresources("www.ruby-lang.org", Resolv::DNS::Resource::IN::A).collect {|r| r.address}
   Resolv::DNS.new.getresources("ruby-lang.org", Resolv::DNS::Resource::IN::MX).collect {|r| [r.exchange.to_s, r.preference]}
 
-== クラスメソッド:
---- Resolv.getaddress(name)
---- Resolv.getaddresses(name)
---- Resolv.each_address(name) {|address| ...}
-    Stringのホスト名 ((|name|)) のIPアドレスをルックアップします
 
-    getaddress はルックアップ結果の最初のアドレスを返します。
-    getaddresses はルックアップ結果のアドレスリストを返します。
-    each_address はルックアップ結果のアドレスに対するイテレータ
+=== Bugs
+#@#NIS is not supported.
+NIS はサポートされていません。
 
-    例:
-      Resolv.getaddress("www.ruby-lang.org").to_s #=> "210.251.121.214"
+== Class Methods
+--- getaddress(name)
+--- getaddresses(name)
+--- each_address(name) {|address| ...}
 
---- Resolv.getname(address)
---- Resolv.getnames(address)
---- Resolv.each_name(address) {|name| ...}
-    StringのIPアドレス ((|address|)) のホスト名をルックアップします。
+String のホスト名 name の IP アドレスをルックアップします
 
-    getname はルックアップ結果の最初のホスト名を返します。
-    getnames はルックアップ結果のホスト名リストを返します。
-    each_names はルックアップ結果のアドレスに対するイテレータ
+getaddress はルックアップ結果の最初のアドレスを返します。
+getaddresses はルックアップ結果のアドレスリストを返します。
+each_address はルックアップ結果のアドレスに対するイテレータです。
 
-    例:
-      Resolv.getname("210.251.121.214").to_s #=> "helium.ruby-lang.org"
+例:
+  Resolv.getaddress("www.ruby-lang.org").to_s #=> "210.251.121.214"
 
+--- getname(address)
+--- getnames(address)
+--- each_name(address) {|name| ...}
 
-== Resolv::Hosts
+String の IP アドレス address のホスト名をルックアップします。
+
+getname はルックアップ結果の最初のホスト名を返します。
+getnames はルックアップ結果のホスト名リストを返します。
+each_names はルックアップ結果のアドレスに対するイテレータです。
+
+例:
+  Resolv.getname("210.251.121.214").to_s #=> "helium.ruby-lang.org"
+
+= class Resolv::Hosts < Object
+
 /etc/hosts を使用するホスト名リゾルバです。
 
-=== クラスメソッド:
---- Resolv::Hosts.new(hosts='/etc/hosts')
+== Class Methods
 
-=== メソッド:
---- Resolv::Hosts#getaddress(name)
---- Resolv::Hosts#getaddresses(name)
---- Resolv::Hosts#each_address(name) {|address| ...}
-    address lookup methods.
+--- new(hosts = '/etc/hosts')
 
---- Resolv::Hosts#getname(address)
---- Resolv::Hosts#getnames(address)
---- Resolv::Hosts#each_name(address) {|name| ...}
-    hostnames lookup methods.
+== Instance Methods
+--- getaddress(name)
+--- getaddresses(name)
+--- each_address(name) {|address| ...}
 
-== Resolv::DNS
+address lookup methods.
+
+--- getname(address)
+--- getnames(address)
+--- each_name(address) {|name| ...}
+
+hostnames lookup methods.
+
+= class Resolv::DNS < Object
+
 DNS stub resolver.
 
-=== クラスメソッド:
---- Resolv::DNS.new(resolv_conf='/etc/resolv.conf')
+== Class Methods
+--- new(resolv_conf = '/etc/resolv.conf')
 
-=== メソッド:
---- Resolv::DNS#getaddress(name)
---- Resolv::DNS#getaddresses(name)
---- Resolv::DNS#each_address(name) {|address| ...}
-    address lookup methods.
+== Instance Methods
+--- getaddress(name)
+--- getaddresses(name)
+--- each_address(name) {|address| ...}
 
-    ((|name|)) は Resolv::Name または String でなければなりません。
-    ルックアップ結果は Resolv::IPv4 または Resolv::IPv6 のインスタンスとなります。
+address lookup methods.
 
---- Resolv::DNS#getname(address)
---- Resolv::DNS#getnames(address)
---- Resolv::DNS#each_name(address) {|name| ...}
-    hostnames lookup methods.
+name は Resolv::Name または String でなければなりません。
+ルックアップ結果は Resolv::IPv4 または Resolv::IPv6 のインスタンスとなります。
 
-    ((|address|)) は Resolv::IPv4, Resolv::IPv6, String のいずれかでなければなりません。
-    ルックアップ結果は Resolv::Name のインスタンスとなります。
+--- getname(address)
+--- getnames(address)
+--- each_name(address) {|name| ...}
 
---- Resolv::DNS#getresource(name, typeclass)
---- Resolv::DNS#getresources(name, typeclass)
---- Resolv::DNS#each_resource(name, typeclass) {|resource| ...}
-    They lookup DNS resources of ((|name|)).
-    ((|name|)) は Resolv::Name または String でなければなりません。
+hostnames lookup methods.
 
-    ((|typeclass|)) は以下のいずれかです。
-    * Resolv::DNS::Resource::IN::ANY
-    * Resolv::DNS::Resource::IN::NS
-    * Resolv::DNS::Resource::IN::CNAME
-    * Resolv::DNS::Resource::IN::SOA
-    * Resolv::DNS::Resource::IN::HINFO
-    * Resolv::DNS::Resource::IN::MINFO
-    * Resolv::DNS::Resource::IN::MX
-    * Resolv::DNS::Resource::IN::TXT
-    * Resolv::DNS::Resource::IN::ANY
-    * Resolv::DNS::Resource::IN::A
-    * Resolv::DNS::Resource::IN::WKS
-    * Resolv::DNS::Resource::IN::PTR
-    * Resolv::DNS::Resource::IN::AAAA
+address は Resolv::IPv4, Resolv::IPv6, String のいずれかでなければなりません。
+ルックアップ結果は Resolv::Name のインスタンスとなります。
 
-    ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+--- getresource(name, typeclass)
+--- getresources(name, typeclass)
+--- each_resource(name, typeclass) {|resource| ...}
 
-== Resolv::DNS::Resource::IN::NS
+They lookup DNS resources of name.
+name は Resolv::Name または String でなければなりません。
+
+typeclass は以下のいずれかです。
+  * Resolv::DNS::Resource::IN::ANY
+  * Resolv::DNS::Resource::IN::NS
+  * Resolv::DNS::Resource::IN::CNAME
+  * Resolv::DNS::Resource::IN::SOA
+  * Resolv::DNS::Resource::IN::HINFO
+  * Resolv::DNS::Resource::IN::MINFO
+  * Resolv::DNS::Resource::IN::MX
+  * Resolv::DNS::Resource::IN::TXT
+  * Resolv::DNS::Resource::IN::ANY
+  * Resolv::DNS::Resource::IN::A
+  * Resolv::DNS::Resource::IN::WKS
+  * Resolv::DNS::Resource::IN::PTR
+  * Resolv::DNS::Resource::IN::AAAA
+
+ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+
+= class Resolv::DNS::Resource::IN::NS < Resolv::DNS::Resource::NS
+
+== Instance Methods
+
 --- name
-== Resolv::DNS::Resource::IN::CNAME
+
+= class Resolv::DNS::Resource::IN::CNAME < Resolv::DNS::Resource::CNAME
+
+== Instance Methods
+
 --- name
-== Resolv::DNS::Resource::IN::SOA
+
+= class Resolv::DNS::Resource::IN::SOA < Resolv::DNS::Resource::SOA
+
+== Instance Methods
+
 --- mname
+
 --- rname
+
 --- serial
+
 --- refresh
+
 --- retry
+
 --- expire
+
 --- minimum
-== Resolv::DNS::Resource::IN::HINFO
+
+= class Resolv::DNS::Resource::IN::HINFO < Resolv::DNS::Resource::HINFO
+
+== Instance Methods
+
 --- cpu
+
 --- os
-== Resolv::DNS::Resource::IN::MINFO
+
+= class Resolv::DNS::Resource::IN::MINFO < Resolv::DNS::Resource::MINFO
+
+== Instance Methods
+
 --- rmailbx
+
 --- emailbx
-== Resolv::DNS::Resource::IN::MX
+
+= class Resolv::DNS::Resource::IN::MX < Resolv::DNS::Resource::MX
+
+== Instance Methods
+
 --- preference
+
 --- exchange
-== Resolv::DNS::Resource::IN::TXT
+
+= class Resolv::DNS::Resource::IN::TXT < Resolv::DNS::Resource::TXT
+
+== Instance Methods
+
 --- data
-== Resolv::DNS::Resource::IN::A
+
+= class Resolv::DNS::Resource::IN::A < Resolv::DNS::Resource::A
+
+== Instance Methods
+
 --- address
-== Resolv::DNS::Resource::IN::WKS
+
+= class Resolv::DNS::Resource::IN::WKS < Resolv::DNS::Resource::WKS
+
+== Instance Methods
+
 --- address
+
 --- protocol
+
 --- bitmap
-== Resolv::DNS::Resource::IN::PTR
+
+= class Resolv::DNS::Resource::IN::PTR < Resolv::DNS::Resource::PTR
+
+== Instance Methods
+
 --- name
-== Resolv::DNS::Resource::IN::AAAA
+
+= class Resolv::DNS::Resource::IN::AAAA < Resolv::DNS::Resource::AAAA
+
+== Instance Methods
+
 --- address
 
-== Resolv::DNS::Name
-=== クラスメソッド:
---- Resolv::DNS::Name.create(name)
+= class Resolv::DNS::Name < Object
 
-=== メソッド:
---- Resolv::DNS::Name#to_s
+== Class Methods
 
-== Resolv::DNS::Resource
+--- create(name)
 
-== Resolv::IPv4
-=== クラスメソッド:
---- Resolv::IPv4.create(address)
+== Instance Methods
 
-=== メソッド:
---- Resolv::IPv4#to_s
---- Resolv::IPv4#to_name
+--- to_s
 
-=== 定数:
---- Resolv::IPv4::Regex
-#    regular expression for IPv4 address.
-    IPv4のアドレスの正規表現。
+= class Resolv::DNS::Resource < Object
 
-== Resolv::IPv6
-=== クラスメソッド:
---- Resolv::IPv6.create(address)
+= class Resolv::IPv4 < Object
 
-=== メソッド:
---- Resolv::IPv6#to_s
---- Resolv::IPv6#to_name
+== Class Methods
 
-=== 定数:
---- Resolv::IPv6::Regex
-#    regular expression for IPv6 address.
-    IPv6のアドレスの正規表現。
+--- create(address)
 
-== Bugs
-#NIS is not supported.
-NISはサポートされていません。
+== Instance Methods
+
+--- to_s
+--- to_name
+
+== Constants
+
+--- Regex
+#@#    regular expression for IPv4 address.
+
+IPv4 のアドレスの正規表現です。
+
+= class Resolv::IPv6 < Object
+
+== Class Methods
+
+--- reate(address)
+
+== Instance Methods
+
+--- to_s
+--- to_name
+
+== Constants
+
+--- Regex
+#@#    regular expression for IPv6 address.
+IPv6のアドレスの正規表現です。
+
+#@end

@@ -1,8 +1,9 @@
-= OpenSSL::SSL::SSLServer
+#@if (version >= "1.8.0")
+= class OpenSSL::SSL::SSLServer < Object
 
-SSL サーバーのためのクラス。((<TCPServer>)) に対応する。
+SSL サーバーのためのクラス。[[c:TCPServer]] に対応します。
 
-以下はクライアントからの入力を出力するだけの echo サーバーの例。
+以下はクライアントからの入力を出力するだけの echo サーバーの例です。
 
   require 'socket'
   require 'openssl'
@@ -21,46 +22,59 @@ SSL サーバーのためのクラス。((<TCPServer>)) に対応する。
     end
   end
 
-== クラスメソッド
+== Class Methods
 
---- SSLServer.new(svr, ctx)
-    svr には ((<TCPServer>)) オブジェクトを、ctx には ((<OpenSSL::SSL::SSLContext>)) オブジェクトを取る。
+--- new(svr, ctx)
 
-== メソッド
+svr には [[c:TCPServer]] オブジェクトを、ctx には [[c:OpenSSL::SSL::SSLContext]] オブジェクトを取ります。
+
+== Instance Methods
 
 --- to_io
-    ((<TCPServer>)) オブジェクトを返す。
+
+[[c:TCPServer]] オブジェクトを返します。
 
 --- accept
-    TLS/SSL クライアントから接続を受け付け、((<OpenSSL::SSL::SSLSocket>)) オブジェクトを返す。start_immediately が真なら SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから SSLSocket オブジェクトを返す。
+
+TLS/SSL クライアントから接続を受け付け、[[c:OpenSSL::SSL::SSLSocket]] オブジェクトを返します。start_immediately が真なら SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから SSLSocket オブジェクトを返します。
 
 --- addr
-    ((<IPSocket#addr|IPSocket/addr>)) と同様。
+
+[[m:IPSocket#addr]] と同様です。
 
 --- close
-    接続を閉じる。
+
+接続を閉じます。
 
 --- closed?
-    close していたら true を返す。
 
---- do_not_reverse_lookup=
-    ((<BasicSocket#do_not_reverse_lookup|BasicSocket/do_not_reverse_lookup>)) と同様。
+close していたら true を返します。
+
+--- do_not_reverse_lookup=(bool)
+
+[[m:BasicSocket#do_not_reverse_lookup]] と同様です。
 
 --- fcntl(cmd[, arg])
-    ((<IO#fcntl|IO/fcntl>)) と同様。
+
+[[m:IO#fcntl]] と同様です。
 
 --- getsockopt(level, optname)
-    ((<BasicSocket#getsockopt|BasicSocket/getsockopt>)) と同様。
+
+[[m:BasicSocket#getsockopt]] と同様です。
 
 --- listen
-    ((<TCPServer#listen|TCPServer/listen>)) と同様。
+
+[[m:TCPServer#listen]] と同様です。
 
 --- peeraddr
-    ((<IPSocket#peeraddr|IPSocket/peeraddr>)) と同様。
+
+[[m:IPSocket#peeraddr]] と同様です。
 
 --- setsockopt
-    ((<BasicSocket#setsockopt|BasicSocket/setsockopt>)) と同様。
+    [[m:BasicSocket#setsockopt]] と同様です。
 
 --- start_immediately
---- start_immediately=(true || false)
-    accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定する。デフォルトでは true。
+--- start_immediately=(bool)
+
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。デフォルトでは true です。
+#@end

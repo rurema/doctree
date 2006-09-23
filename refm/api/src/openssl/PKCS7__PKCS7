@@ -1,76 +1,96 @@
-= OpenSSL::PKCS7::PKCS7
+#@if (version >= "1.8.0")
+= class OpenSSL::PKCS7::PKCS7 < Object
 
-注意。
+=== 注意
 
-((<OpenSSL::PKCS7>)) も参照。read_smime, write_smime, sign そして encrypt は ((<OpenSSL::PKCS7>)) モジュールのモジュールメソッドとして定義されている。
+[[c:OpenSSL::PKCS7]] も参照してください。read_smime, write_smime, sign そして encrypt は [[c:OpenSSL::PKCS7]] モジュールのモジュールメソッドとして定義されています。
 
 PKCS #7 は暗号技術とともに用いられるデータのフォーマットの仕様です。
 データやそれに対する署名、証明した日時など任意の属性を含むことができ、S/MIME などに使用されています。
-((<rfc:2315>))
+[[unknown:rfc:2315]]
 
-== クラスメソッド
+== Class Methods
 
---- PKCS7.new()
---- PKCS7.new(str)
---- PKCS7.new(io)
-    PKCS7 オブジェクトを生成する。
+--- new
+--- new(str)
+--- new(io)
 
-== メソッド
+PKCS7 オブジェクトを生成します。
+
+== Instance Methods
 
 --- type
---- type=
-    タイプを ((<Symbol>)) オブジェクトで返す。次のうちのいずれか。
-      ::signed, :encrypted, :enveloped, :signedAndEnveloped, :data
+--- type=(type)
+
+タイプを [[c:Symbol]] オブジェクトで返します。次のうちのいずれかの値をとります。
+
+:signed, :encrypted, :enveloped, :signedAndEnveloped, :data
 
 --- detached
---- detached=
-    平文に署名を付ける形式(multipart/signed)かどうか。 type では :signed にあたる。
+--- detached=(bool)
+
+平文に署名を付ける形式(multipart/signed)かどうかを表します。 type では :signed にあたります。
 
 --- detached?
-    実際に署名されていてかつ平文に署名を付ける形式(multipart/signed)かどうか。
 
---- cipher=
-    使用する暗号アルゴリズムを指定する。
+実際に署名されていてかつ平文に署名を付ける形式(multipart/signed)かどうかを返します。
+
+--- cipher=(cipher)
+
+使用する暗号アルゴリズムを指定します。
 
 --- add_signer(singer)
-    署名者を加える。
+
+署名者を加えます。
 
 --- signers
-    メッセージの署名者 OpenSSL::PKCS7::Signer オブジェクトの配列を返す。
+
+メッセージの署名者 OpenSSL::PKCS7::Signer オブジェクトの配列を返します。
 
 --- add_recipient
 
 --- add_certificate
 
 --- certificates
---- certificates=
-    署名に付ける証明書を指定する。
+--- certificates=(certificates)
+
+署名に付ける証明書を指定します。
 
 --- add_crl(s)
-    CRL に加える。
+
+CRL に加えます。
 
 --- crls
---- crls=
-    CRL を返す。
+--- crls=(s)
+
+CRL を返します。
 
 --- add_data(data)
-    署名の対象となるデータに data を加える。
+
+署名の対象となるデータに data を加えます。
 
 --- data
---- data=
-    署名の対象となるデータを返す。
+--- data=(data)
 
---- verify(certs, store, indata=nil, flags=0)
-    署名を検証する。
+署名の対象となるデータを返します。
 
---- decrypt(pkey, cert, flags=0)
-    復号化する。
+--- verify(certs, store, indata = nil, flags = 0)
+
+署名を検証します。
+
+--- decrypt(pkey, cert, flags = 0)
+
+復号化します。
 
 --- to_pem
 --- to_s
-    PEM 形式に変換する。
+
+PEM 形式に変換します。
 
 --- to_der
-    DER 形式に変換する。
+
+DER 形式に変換します。
 
 --- error_string
+
+#@end

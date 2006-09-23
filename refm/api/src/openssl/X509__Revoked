@@ -1,24 +1,30 @@
-= OpenSSL::X509::Revoked
+#@if (version >= "1.8.0")
+= class OpenSSL::X509::Revoked < Object
 
-失効した証明書のクラス。((<OpenSSL::X509::CRL>)) クラスから使われる。
+失効した証明書のクラス。[[c:OpenSSL::X509::CRL]] クラスから使われます。
 
-== クラスメソッド
+== Class Methods
 
---- Revoked.new
+--- new
 
-== メソッド
+== Instance Methods
 
 --- serial
---- serial=
-    失効した証明書のシリアル。
+--- serial=(serial)
+
+失効した証明書のシリアルです。
 
 --- time
---- time=
-    失効した日時。((<Time>)) オブジェクト。
+--- time=(time)
+
+失効した日時です。[[c:Time]] オブジェクトです。
 
 --- extensions
---- extensions=
-    拡張領域。((<OpenSSL::X509::Extension>)) の配列。
+--- extensions=(extensions)
+
+拡張領域です。[[c:OpenSSL::X509::Extension]] の配列です。
 
 --- add_extension(ex)
-    拡張領域に値を加える。
+
+拡張領域に値を加えます。
+#@end

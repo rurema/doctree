@@ -1,9 +1,20 @@
-= OpenSSL::ASN1
+#@if (version >= "1.8.0")
+= module OpenSSL::ASN1
 
-== モジュール関数
+=== 参照
 
---- ASN1.decode(der)
-    DER表現の文字列を解析し、((<OpenSSL::ASN1::ASN1Data>)) のサブクラスのインスタンスを返す。ASN.1 オブジェクトが Constructive である場合は、それを構成する要素も再帰的に解析する。((|der|)) に複数の ASN.1 オブジェクトが含まれる場合は最初の ASN.1 オブジェクトだけを返す。
+  * [RFC 3279] [[unknown:Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html]]
+  * [RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html]]
+  * [ASN.1:2002] [[unknown:"Abstract Syntax Notation One (ASN.1) Specification of Basic Notation ITU-T Rec. X.680 (2002) | ISO/IEC 8824-1:2002"|URL:http://asn1.elibel.tm.fr/en/standards/index.htm#asn1]]
+#@end
+
+== Module Functions
+
+--- decode(der)
+
+DER 表現の文字列を解析し、[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタンスを返します。ASN.1 オブジェクトが Constructive である場合は、それを構成する要素も再帰的に解析します。der に複数の ASN.1 オブジェクトが含まれる場合は最初の ASN.1 オブジェクトだけを返します。
+
+例:
 
   ruby -e '
   require "openssl"
@@ -33,136 +44,209 @@
             @value=2>]>,
             ...
 
---- ASN1.decode_all(der)
-    ASN1.decode と違い、((|der|)) に含まれる全てのオブジェクトを再帰的に解析し
-    配列として返す。
+--- decode_all(der)
 
---- ASN1.traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...}
-    ((|der|)) に含まれる全てのオブジェクトを再帰的に解析して、
-    そのプロパティを引数として与えられたブロックを評価する。
-    
-    * ((|depth|)) は再帰の深さ
-    * ((|off|)) は対象の ASN.1 オブジェクトの開始の
-      ((|der|)) の始めからのオフセット。
-    * ((|hlen|)) は ASN.1 オブジェクトのヘッダの長さ。
-    * ((|len|)) は ASN.1 オブジェクトの値フィールドの長さ。
-    * ((|constructed|)) は対象の ASN.1 オブジェクトが Constructive なら真である。  
-    * ((|tag_class|)) はタグクラスを表す ((<Symbol>)) オブジェクト 
-      (:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION)。
-    * ((|tag|)) はタグ番号。
+ASN1.decode と違って、der に含まれる全てのオブジェクトを再帰的に解析し
+配列として返します。
 
-    ASN1.decode_all と同じように ((|der|)) に含まれる全ての ASN.1 オブジェクトを
-    再帰的に解析する。
+--- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...}
 
-以下のようなモジュール関数も定義されている。メソッドと同じ名前のクラスの
-コンストラクター new と同じ。
+der に含まれる全てのオブジェクトを再帰的に解析して、
+そのプロパティを引数として与えられたブロックを評価します。
 
---- ASN1.Boolean(value [, tag [, tagging [, tag_class]]])
---- ASN1.Integer(value ... )
---- ASN1.Enumerated(value ... )
---- ASN1.BitString(value ... )
---- ASN1.OctetString(value ... )
---- ASN1.UTF8String(value ... )
---- ASN1.NumericString(value ... )
---- ASN1.PrintableString(value ... )
---- ASN1.T61String(value ... )
---- ASN1.VideotexString(value ... )
---- ASN1.IA5String(value ... )
---- ASN1.GraphicString(value ... )
---- ASN1.ISO64String(value ... )
---- ASN1.GeneralString(value ... )
---- ASN1.UniversalString(value ... )
---- ASN1.BMPString(value ... )
---- ASN1.Null(value ... )
---- ASN1.ObjectId(value ... )
---- ASN1.UTCTime(value ... )
---- ASN1.GeneralizedTime(value ... )
+  * depth は再帰の深さ
+   * off は対象の ASN.1 オブジェクトの開始の
+     der の始めからのオフセット
+   * hlen は ASN.1 オブジェクトのヘッダの長さ
+   * len は ASN.1 オブジェクトの値フィールドの長さ
+   * constructed は対象の ASN.1 オブジェクトが Constructive なら真
+   * tag_class はタグクラスを表す [[c:Symbol]] オブジェクト
+     (:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION)
+   * tag はタグ番号
 
---- ASN1.Sequence(value ... )
---- ASN1.Set(value ... )
+ASN1.decode_all と同じように der に含まれる全ての ASN.1 オブジェクトを
+再帰的に解析します。
 
-== 定数
+以下のようなモジュール関数も定義されています。メソッドと同じ名前のクラスの
+コンストラクター new と同じです。
+
+--- Boolean(value [, tag [, tagging [, tag_class]]])
+
+--- Integer(value ... )
+
+--- Enumerated(value ... )
+
+--- BitString(value ... )
+
+--- OctetString(value ... )
+
+--- UTF8String(value ... )
+
+--- NumericString(value ... )
+
+--- PrintableString(value ... )
+
+--- T61String(value ... )
+
+--- VideotexString(value ... )
+
+--- IA5String(value ... )
+
+--- GraphicString(value ... )
+
+--- ISO64String(value ... )
+
+--- GeneralString(value ... )
+
+--- UniversalString(value ... )
+
+--- BMPString(value ... )
+
+--- Null(value ... )
+
+--- ObjectId(value ... )
+
+--- UTCTime(value ... )
+
+--- GeneralizedTime(value ... )
+
+--- Sequence(value ... )
+
+--- Set(value ... )
+
+== Constants
 
 --- UNIVERSAL_TAG_NAME
-    タグ番号が表すASN.1 オブジェクト名を収録した配列。
 
-      require 'openssl'
-      p OpenSSL::ASN1::UNIVERSAL_TAG_NAME[0]  # => "EOC"
-      p OpenSSL::ASN1::UNIVERSAL_TAG_NAME[12] # => "UTF8STRING"
+タグ番号が表す ASN.1 オブジェクト名を収録した配列です。
 
-ASN.1 オブジェクトのタグ番号を表す定数が以下のように定義されている。
+例:
+
+  require 'openssl'
+  p OpenSSL::ASN1::UNIVERSAL_TAG_NAME[0]  # => "EOC"
+  p OpenSSL::ASN1::UNIVERSAL_TAG_NAME[12] # => "UTF8STRING"
+
+ASN.1 オブジェクトのタグ番号を表す定数が以下のように定義されています。
 
   require 'openssl'
   p OpenSSL::ASN1::UTF8STRING # => 12
 
---- EOC 
-    EOC のタグ番号 0 を表す定数。
---- BOOLEAN 
-    BOOLEAN のタグ番号 1 を表す定数。
---- INTEGER 
-    INTEGER のタグ番号 2 を表す定数。
---- BIT_STRING 
-    BIT_STRING のタグ番号 3 を表す定数。
---- OCTET_STRING 
-    OCTET_STRING のタグ番号 4 を表す定数。
+--- EOC
+
+EOC のタグ番号 0 を表す定数です。
+
+--- BOOLEAN
+
+BOOLEAN のタグ番号 1 を表す定数です。
+
+--- INTEGER
+
+INTEGER のタグ番号 2 を表す定数です。
+
+--- BIT_STRING
+
+BIT_STRING のタグ番号 3 を表す定数です。
+
+--- OCTET_STRING
+
+OCTET_STRING のタグ番号 4 を表す定数です。
+
 --- NULL
-    NULL のタグ番号 5 を表す定数。
---- OBJECT 
-    OBJECT のタグ番号 6 を表す定数。
---- OBJECT_DESCRIPTOR 
-    OBJECT_DESCRIPTOR のタグ番号 7 を表す定数。
---- EXTERNAL 
-    EXTERNAL のタグ番号 8 を表す定数。
---- REAL 
-    REAL のタグ番号 9 を表す定数。
---- ENUMERATED 
-    ENUMERATED のタグ番号 10 を表す定数。
---- EMBEDDED_PDV 
-    EMBEDDED_PDV のタグ番号 11 を表す定数。
---- UTF8STRING 
-    UTF8STRING のタグ番号 12 を表す定数。
---- RELATIVE_OID 
-    RELATIVE_OID のタグ番号 13 を表す定数。
---- SEQUENCE 
-    SEQUENCE のタグ番号 16 を表す定数。
---- SET 
-    SET のタグ番号 17 を表す定数。
---- NUMERICSTRING 
-    NUMERICSTRING のタグ番号 18 を表す定数。
---- PRINTABLESTRING 
-    PRINTABLESTRING のタグ番号 19 を表す定数。 
---- T61STRING 
-    T61STRING のタグ番号 20 を表す定数。
---- VIDEOTEXSTRING 
-    VIDEOTEXSTRING のタグ番号 21 を表す定数。 
---- IA5STRING 
-    IA5STRING のタグ番号 22 を表す定数。 
---- UTCTIME 
-    UTCTIME のタグ番号 23 を表す定数。 
---- GENERALIZEDTIME 
-    GENERALIZEDTIME のタグ番号 24 を表す定数。 
---- GRAPHICSTRING 
-    GRAPHICSTRING のタグ番号 25 を表す定数。 
---- ISO64STRING 
-    ISO64STRING のタグ番号 26 を表す定数。
---- GENERALSTRING 
-    GENERALSTRING のタグ番号 27 を表す定数。
---- UNIVERSALSTRING 
-    UNIVERSALSTRING のタグ番号 28 を表す定数。
---- CHARACTER_STRING 
-    CHARACTER_STRING のタグ番号 29 を表す定数。
---- BMPSTRING 
-    BMPSTRING のタグ番号 30 を表す定数。
 
-== 例外
+NULL のタグ番号 5 を表す定数です。
 
---- ASN1Error
-    OpenSSL::OpenSSLError を継承している。
+--- OBJECT
 
-== 参照
+OBJECT のタグ番号 6 を表す定数です。
 
-* [RFC 3279] ((<Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html>))
+--- OBJECT_DESCRIPTOR
 
-* [RFC 3280] ((<Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html>))
+OBJECT_DESCRIPTOR のタグ番号 7 を表す定数です。
 
-* [ASN.1:2002] ((<"Abstract Syntax Notation One (ASN.1) Specification of Basic Notation ITU-T Rec. X.680 (2002) | ISO/IEC 8824-1:2002"|URL:http://asn1.elibel.tm.fr/en/standards/index.htm#asn1>))
+--- EXTERNAL
+
+EXTERNAL のタグ番号 8 を表す定数です。
+
+--- REAL
+
+REAL のタグ番号 9 を表す定数です。
+
+--- ENUMERATED
+
+ENUMERATED のタグ番号 10 を表す定数です。
+
+--- EMBEDDED_PDV
+
+EMBEDDED_PDV のタグ番号 11 を表す定数です。
+
+--- UTF8STRING
+
+UTF8STRING のタグ番号 12 を表す定数です。
+
+--- RELATIVE_OID
+
+RELATIVE_OID のタグ番号 13 を表す定数です。
+
+--- SEQUENCE
+
+SEQUENCE のタグ番号 16 を表す定数です。
+
+--- SET
+
+SET のタグ番号 17 を表す定数です。
+
+--- NUMERICSTRING
+
+NUMERICSTRING のタグ番号 18 を表す定数です。
+
+--- PRINTABLESTRING
+
+PRINTABLESTRING のタグ番号 19 を表す定数です。
+
+--- T61STRING
+
+T61STRING のタグ番号 20 を表す定数です。
+
+--- VIDEOTEXSTRING
+
+VIDEOTEXSTRING のタグ番号 21 を表す定数です。
+
+--- IA5STRING
+
+IA5STRING のタグ番号 22 を表す定数です。
+
+--- UTCTIME
+
+UTCTIME のタグ番号 23 を表す定数です。
+
+--- GENERALIZEDTIME
+
+GENERALIZEDTIME のタグ番号 24 を表す定数です。
+
+--- GRAPHICSTRING
+
+GRAPHICSTRING のタグ番号 25 を表す定数です。
+
+--- ISO64STRING
+
+ISO64STRING のタグ番号 26 を表す定数です。
+
+--- GENERALSTRING
+
+GENERALSTRING のタグ番号 27 を表す定数です。
+
+--- UNIVERSALSTRING
+
+UNIVERSALSTRING のタグ番号 28 を表す定数です。
+
+--- CHARACTER_STRING
+
+CHARACTER_STRING のタグ番号 29 を表す定数です。
+
+--- BMPSTRING
+
+BMPSTRING のタグ番号 30 を表す定数です。
+
+= class ASN1Error < OpenSSL::OpenSSLError
+
+OpenSSL::OpenSSLError を継承した例外です。

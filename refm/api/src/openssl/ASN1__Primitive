@@ -1,16 +1,16 @@
-= OpenSSL::ASN1::Primitive
+#@if (version >= "1.8.0")
+= class OpenSSL::ASN1::Primitive < OpenSSL::ASN1::ASN1Data
 
-== スーパークラス
+== Class Methods
 
-((<OpenSSL::ASN1::ASN1Data>))
+--- new(value, tag, tagging, tag_class)
 
-== クラスメソッド
+Primitive オブジェクトを生成します。
 
---- Primitive.new(value, tag, tagging, tag_class)
-    Primitive オブジェクトを生成する。
-
-== メソッド
+== Instance Methods
 
 --- tagging
---- tagging=
-    ((<Symbol>)) オブジェクト :IMPLICIT または :EXPLICIT のいずれか。
+--- tagging=(tag)
+
+[[c:Symbol]] オブジェクト :IMPLICIT または :EXPLICIT のいずれかをとります。
+#@end

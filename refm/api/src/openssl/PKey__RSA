@@ -1,69 +1,80 @@
-= OpenSSL::PKey::RSA
+#@if (version >= "1.8.0")
+= class OpenSSL::PKey::RSA < OpenSSL::PKey::PKey
 
 RSA 暗号鍵クラス
 
-== スーパークラス:
+== Class Methods
 
-((<OpenSSL::PKey::PKey>))
+--- generate(size, exponent = 65537)
 
-== クラスメソッド
+RSA 公開鍵と秘密鍵のペアを生成して、RSA オブジェクトを返します。size (単位はビット) で鍵の modulus つまりは 鍵のサイズを指定します。size < 1024 では小さ過ぎると考えられています。exponent で public exponent を指定します。exponent には奇数を指定し、大抵の場合、3、17 あるいは 65537 を指定します。
 
---- RSA.generate(size, exponent=65537)
-    RSA 公開鍵と秘密鍵のペアを生成して、RSA オブジェクトを返す。size (単位はビット)で鍵の modulus つまりは 鍵のサイズを指定する。size < 1024 では小さ過ぎると考えられている。exponent で public exponent を指定する。exponent には奇数を指定し、大抵の場合、3、17あるいは65537を指定する。
+--- new(size, exponent = 65537)
 
---- RSA.new(size, exponent=65537)
-    RSA 暗号鍵オブジェクトを生成する。RSA.generate(size, exponent) と同じ。
+RSA 暗号鍵オブジェクトを生成します。RSA.generate(size, exponent) と同じです。
 
---- RSA.new(str, pass=nil)
---- RSA.new(io, pass=nil)
---- RSA.new()
-    RSA 暗号鍵オブジェクトを生成する。pass が指定された場合は、秘密鍵を pass を使って復号化する。
+--- new(str, pass = nil)
+--- new(io, pass = nil)
+--- new
 
-== メソッド
+RSA 暗号鍵オブジェクトを生成します。pass が指定された場合は、秘密鍵を pass を使って復号化します。
+
+== Instance Methods
 
 --- public?
-    公開鍵を持っているかどうか判定する。
+
+公開鍵を持っているかどうか判定します。
 
 --- private?
-    秘密鍵を持っているかどうか判定する。
+
+秘密鍵を持っているかどうか判定します。
 
 --- to_text
-    人間が読める形式に変換する。
 
---- export(cipher=nil, pass=nil)
---- export()
---- to_pem()
---- to_s()
-    鍵ペアを PEM 形式で出力する。cipher と pass が指定された場合、秘密鍵を暗号 cipher ((<OpenSSL::Cipher::Cipher>)) とパスワード pass を使って暗号化する。
+人間が読める形式に変換します。
+
+--- export(cipher = nil, pass = nil)
+--- export
+--- to_pem
+--- to_s
+
+鍵ペアを PEM 形式で出力します。cipher と pass が指定された場合、秘密鍵を暗号 cipher [[c:OpenSSL::Cipher::Cipher]] とパスワード pass を使って暗号化します。
 
 --- to_der
-    DER 形式に変換する。
+
+DER 形式に変換します。
 
 --- public_key
-    公開鍵を複製して RSA オブジェクトとして返す。
 
---- public_encrypt(str, mode=OpenSSL::PKey::RSA::PKCS1_PADDING)
-    文字列 str を公開鍵で暗号化する。
+公開鍵を複製して RSA オブジェクトとして返します。
 
---- public_decrypt(str, mode=OpenSSL::PKey::RSA::PKCS1_PADDING)
-    文字列 str を公開鍵で復号化する。
+--- public_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
 
---- private_encrypt(str, mode=OpenSSL::PKey::RSA::PKCS1_PADDING)
-    文字列 str を秘密鍵で暗号化する。
+文字列 str を公開鍵で暗号化します。
 
---- private_decrypt(str, mode=OpenSSL::PKey::RSA::PKCS1_PADDING)
-    文字列 str を秘密鍵で復号化する。
+--- public_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
 
-== 定数
+文字列 str を公開鍵で復号化します。
 
-((<OpenSSL::PKey::RSA#public_encrypt|OpenSSL::PKey::RSA/public_encrypt>))、
-((<OpenSSL::PKey::RSA#public_decrypt|OpenSSL::PKey::RSA/public_decrypt>))、
-((<OpenSSL::PKey::RSA#private_encrypt|OpenSSL::PKey::RSA/private_encrypt>))、
-((<OpenSSL::PKey::RSA#private_decrypt|OpenSSL::PKey::RSA/private_decrypt>))の
-第二引数に指定できるパディングモード。
+--- private_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+
+文字列 str を秘密鍵で暗号化します。
+
+--- private_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+
+文字列 str を秘密鍵で復号化します。
+
+== Constants
 
 --- PKCS1_PADDING
 --- SSLV23_PADDING
 --- NO_PADDING
 --- PKCS1_OAEP_PADDING
 
+[[m:OpenSSL::PKey::RSA#public_encrypt]]、
+[[m:OpenSSL::PKey::RSA#public_decrypt]]、
+[[m:OpenSSL::PKey::RSA#private_encrypt]]、
+[[m:OpenSSL::PKey::RSA#private_decrypt]] の
+第二引数に指定できるパディングモード。
+
+#@end

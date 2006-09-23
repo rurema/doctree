@@ -1,75 +1,93 @@
-= OpenSSL::X509::Certificate
+#@if (version >= "1.8.0")
+= class OpenSSL::X509::Certificate < Object
 
 X509 証明書クラス
 
-== クラスメソッド:
+== Class Methods
 
---- Certificate.new()
---- Certificate.new(str)
---- Certificate.new(io)
-    証明書オブジェクトを生成する。
+--- new
+--- new(str)
+--- new(io)
 
-== メソッド
+証明書オブジェクトを生成します。
+
+== Instance Methods
 
 --- to_der
 
-    DER 形式に変換する。
+DER 形式に変換します。
 
 --- to_pem
 --- to_s
-    PEM 形式に変換する。
+
+PEM 形式に変換します。
 
 --- to_text
-    人間が読める形式に変換する。
+
+人間が読める形式に変換します。
 
 --- version
---- version=
-    X509 証明書の version。 v1の場合は 0 、v3 の場合は 2 となる。
+--- version=(version)
+
+X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
 
 --- signature_algorithm
-    発行者(CA)が証明書に署名するのに使ったアルゴリズム。
+
+発行者 (CA) が証明書に署名するのに使ったアルゴリズムです。
 
 --- serial
---- serial=
-    発行者(CA)が証明書に付ける識別番号。
+--- serial=(serial)
+
+発行者 (CA) が証明書に付ける識別番号です。
 
 --- subject
---- subject=
-    証明書の所有者の名前 ((<OpenSSL::X509::Name>)) オブジェクト。
-    http://www.ipa.go.jp/security/pki/033.html#_Toc3020767
+--- subject=(name)
+
+証明書の所有者の名前 [[c:OpenSSL::X509::Name]] オブジェクトです。
+http://www.ipa.go.jp/security/pki/033.html#_Toc3020767
 
 --- issuer
---- issuer=
-    証明書の発行者(CA)の名前 ((<OpenSSL::X509::Name>)) オブジェクト。
+--- issuer=(name)
+
+証明書の発行者 (CA) の名前 [[c:OpenSSL::X509::Name]] オブジェクトです。
 
 --- not_before
---- not_before=
-    証明書が有効になる時刻 ((<Time>)) オブジェクト。
+--- not_before=(time)
+
+証明書が有効になる時刻 [[c:Time]] オブジェクトです。
 
 --- not_after
---- not_after=
-    証明書が無効になる時刻 ((<Time>)) オブジェクト。
+--- not_after=(time)
+
+証明書が無効になる時刻 [[c:Time]] オブジェクトです。
 
 --- extensions
---- extensions=
-    証明書の拡張領域 ((<OpenSSL::X509::Extension>)) オブジェクトの ((<Array>))。
+--- extensions=(extensions)
+
+証明書の拡張領域 [[c:OpenSSL::X509::Extension]] オブジェクトの [[c:Array]] です。
 
 --- add_extension(ext)
-    拡張領域に値を加える。ext は ((<OpenSSL::X509::Extension>)) オブジェクト。
+
+拡張領域に値を加えます。ext は [[c:OpenSSL::X509::Extension]] オブジェクトです。
 
 --- public_key
---- public_key=
-    証明書に記載された公開鍵 ((<OpenSSL::PKey::RSA>)) オブジェクト。
+--- public_key=(pkeu)
+
+証明書に記載された公開鍵 [[c:OpenSSL::PKey::RSA]] オブジェクトです。
 
 --- sign(pkey, digest)
-    証明書に署名する。pkey は発行者の秘密鍵。digest は        
-    ((<OpenSSL::Digest::Digest>)) オブジェクト。秘密鍵オブジェクトが   
-    ((<OpenSSL::PKey::DSA>)) のインスタンスである場合、 digest は OpenSSL::Digest::DSS1 
-    オブジェクトでなければいけない。逆も同じ。OpenSSL::Digest::DSS1 は 
-    OpenSSL::PKey::DSA 以外のダイジェストとして使えない。
+
+証明書に署名します。pkey は発行者の秘密鍵です。digest は
+[[c:OpenSSL::Digest::Digest]] オブジェクトです。秘密鍵オブジェクトが
+[[c:OpenSSL::PKey::DSA]] のインスタンスである場合、 digest は OpenSSL::Digest::DSS1
+オブジェクトでなければなりません。逆も同じです。OpenSSL::Digest::DSS1 は
+OpenSSL::PKey::DSA 以外のダイジェストとして使えません。
 
 --- verify(key)
-    key は証明書の発行者の公開鍵。 key で証明書の署名を検証する。
+
+key は証明書の発行者の公開鍵です。 key で証明書の署名を検証します。
 
 --- check_private_key(pkey)
-    与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめる。
+
+与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめます。
+#@end

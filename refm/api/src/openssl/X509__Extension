@@ -1,55 +1,64 @@
-= OpenSSL::X509::Extension
+#@if (version >= "1.8.0")
+= class OpenSSL::X509::Extension < Object
 
-X.509 v3 証明書の拡張領域のためのクラス。((<OpenSSL::X509::Certificate>)) オブジェクトは
-その拡張領域を Extension オブジェクトの配列として保持している。
+X.509 v3 証明書の拡張領域のためのクラスです。[[c:OpenSSL::X509::Certificate]] オブジェクトは
+その拡張領域を Extension オブジェクトの配列として保持しています。
 
-*((<OpenSSL::X509::ExtensionFactory>))
+  * [[c:OpenSSL::X509::ExtensionFactory]]
 
-== 例
+=== 例
 
- require 'openssl'
- require 'open-uri'
- 
- der = open('http://csrc.nist.gov/pki/pkixtools/cert1.der').read
- cert = OpenSSL::X509::Certificate.new(der)
- p cert.extensions.class # => Array
- p cert.extensions 
- # => [subjectKeyIdentifier = 86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56, 
-       basicConstraints = critical, CA:TRUE]
- p cert.extensions[0].class # => OpenSSL::X509::Extension
+  require 'openssl'
+  require 'open-uri'
+  
+  der = open('http://csrc.nist.gov/pki/pkixtools/cert1.der').read
+  cert = OpenSSL::X509::Certificate.new(der)
+  p cert.extensions.class # => Array
+  p cert.extensions
+  # => [subjectKeyIdentifier = 86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56,
+        basicConstraints = critical, CA:TRUE]
+  p cert.extensions[0].class # => OpenSSL::X509::Extension
 
-== クラスメソッド
+=== 参照
 
---- Extension.new(oid, value, critical)
-    Extension オブジェクトを生成する。((|oid|)) には拡張領域の OID をあらわす
-    ((<OpenSSL::ASN1::ObjectId>)) オブジェクト、あるいは OID の short name か
-    long name である文字列を与える。((|value|)) にはその値を表す DER 形式の文字列か
-    ((<OpenSSL::ASN1::ASN1Data>)) のサブクラスのインスタンスを与える。
+  *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
 
-      require 'openssl'
-      include OpenSSL
-      oid = "subjectKeyIdentifier"
-      val = "\004\024\206\312\245\"\201b\357\255\n\211\274\255rA,)I\364\206V"
-      ex = X509::Extension.new(oid, val)
-      p ex.value # => "86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56"
+== Class Methods
 
-== インスタンスメソッド
+--- new(oid, value, critical)
+Extension オブジェクトを生成します。oid には拡張領域の OID をあらわす
+[[c:OpenSSL::ASN1::ObjectId]] オブジェクト、あるいは OID の short name か
+long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
+[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタンスを与えます。
 
----critical=
+例;
+
+  require 'openssl'
+  include OpenSSL
+  oid = "subjectKeyIdentifier"
+  val = "\004\024\206\312\245\"\201b\357\255\n\211\274\255rA,)I\364\206V"
+  ex = X509::Extension.new(oid, val)
+  p ex.value # => "86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56"
+
+== Instance Methods
+
+---critical=(bool)
 ---critical?
-   クリティカルかどうかを設定する。
+
+クリティカルかどうかを設定します。
 
 ---oid
----oid=
-   OID を文字列で設定する。
-     
+---oid=(oid)
+
+OID を文字列で設定します。
+
 ---to_der
-   DER形式に変換する。
+
+DER 形式に変換します。
 
 ---value
----value=
-   値を設定する。
+---value=(value)
 
-== 参照
+値を設定します。
 
-*[RFC 3280] ((<Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42>))
+#@end

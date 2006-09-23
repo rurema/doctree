@@ -1,67 +1,79 @@
-= OpenSSL::PKey::DSA
+#@if (version >= "1.8.0")
+= class OpenSSL::PKey::DSA < OpenSSL::PKey::PKey
 
-簡単な例。data に署名し、署名をもとに data を検証する。
+以下は、data に署名し、署名をもとに data を検証する簡単な例です。
 
- require "openssl"
- dsa512 = OpenSSL::PKey::DSA.new(512)
- dss1 = OpenSSL::Digest::DSS1.new
- data = 'hoge'
- sign = dsa512.sign(dss1, data)
- p dsa512.verify(dss1, sign, data)
+  require "openssl"
+  dsa512 = OpenSSL::PKey::DSA.new(512)
+  dss1 = OpenSSL::Digest::DSS1.new
+  data = 'hoge'
+  sign = dsa512.sign(dss1, data)
+  p dsa512.verify(dss1, sign, data)
 
-== スーパークラス:
+== Class Methods
 
-((<OpenSSL::PKey::PKey>))
+--- generate(size)
+--- new(size)
 
-== クラスメソッド
+DSA オブジェクトを生成します。size は鍵長です。
 
---- DSA.generate(size)
---- DSA.new(size)
-    DSA オブジェクトを生成する。size は鍵長。
+--- new
+--- new(str)
+--- new(io)
 
---- DSA.new()
---- DSA.new(str)
---- DSA.new(io)
-    DSA オブジェクトを生成する。
+DSA オブジェクトを生成します。
 
-== インスタンスメソッド
+== Instance Methods
 
 --- export
 --- to_pem
 --- to_s
-    PEM 形式に変換して返す。
+
+PEM 形式に変換して返します。
 
 --- private?
-    秘密鍵をもっている場合に true を返す。
+
+秘密鍵をもっている場合に true を返します。
 
 --- public?
-    公開鍵をもっている場合に true を返す。
+
+公開鍵をもっている場合に true を返します。
 
 --- public_key
-    公開鍵を返す。
+
+公開鍵を返します。
 
 --- to_der
-    DER 形式にして返す。
+
+DER 形式にして返します。
 
 --- to_text
-    人間が読める形式にして返す。
+
+人間が読める形式にして返します。
 
 --- sign(digest, data)
-    data に関して digest を使って署名を作成して文字列として返す。
-    digest は OpenSSL::PKey::DSS1 のインスタンス。
+
+data に関して digest を使って署名を作成して文字列として返します。
+digest は OpenSSL::PKey::DSS1 のインスタンスです。
 
 --- verify(digest, sign, data)
-    digest には DSA の性質から OpenSSL::PKey::DSS1 のインスタンスのみ受け付ける。他は 
-    例外 OpenSSL::PKey::PKeyError を投げる。
+
+digest には DSA の性質から OpenSSL::PKey::DSS1 のインスタンスのみ受け付けます。他は
+例外 OpenSSL::PKey::PKeyError を投げます。
 
 --- p
---- p=
+--- p=(p)
+
 --- q
---- q=
+--- q=(q)
+
 --- g
---- g=
+--- g=(g)
+
 --- pub_key
---- pub_key=
+--- pub_key=(public_key)
+
 --- priv_key
---- priv_key=
+--- priv_key=(private_key)
     パラメータ。
+#@end

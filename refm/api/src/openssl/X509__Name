@@ -1,44 +1,59 @@
-= OpenSSL::X509::Name
+#@if (version >= "1.8.0")
+= class OpenSSL::X509::Name < Object
 
-== クラスメソッド
+== Class Methods
 
---- Name.parse(str)
-    名前をパースして Name オブジェクトを返す。
+--- parse(str)
 
---- Name.new([[oid1, val1], [oid2, val2] ...], template=OBJECT_TYPE_TEMPLATE)
---- Name.new()
-    Name オブジェクトを生成する。
+名前をパースして Name オブジェクトを返します。
 
-== メソッド
+--- new([[oid1, val1], [oid2, val2] ...], template = OBJECT_TYPE_TEMPLATE)
+--- new
 
---- add_entry(oid, value, type=nil)
-    エントリー oid に value を設定する。type を指定することも出来る。type を指定しない場合は oid より自動的に判別する。
+Name オブジェクトを生成します。
+
+== Instance Methods
+
+--- add_entry(oid, value, type = nil)
+
+エントリー oid に value を設定します。type を指定することも出来ます。type を指定しない場合は oid より自動的に判別します。
 
 --- to_s
-    人間の読める形式にして返す。
+
+人間の読める形式にして返します。
 
 --- to_a
-    配列にして返す。
+
+配列にして返します。
 
 --- cmp(name)
 --- <=>
-    他の Name オブジェクトと比較する。
+
+他の Name オブジェクトと比較します。
 
 --- to_der
-    DER 形式を返す。
 
-== 定数
+DER 形式を返します。
+
+== Constants
 
 --- OBJECT_TYPE_TEMPLATE
-    エントリーのタイプを収納したハッシュ。エントリーをキーとして、値にタイプが収納されている。キーは次の文字列、
+
+エントリーのタイプを収納したハッシュです。エントリーをキーとして、値にタイプが収納されています。キーは次の文字列、
 
   'C', 'countryName', 'serialNumber', 'dnQualifier',
   'DC', 'domainComponent', 'emailAddress'
 
 --- DEFAULT_OBJECT_TYPE
-    エントリーのデフォルトのタイプ。UTF8文字列。
+
+エントリーのデフォルトのタイプです。UTF8文字列です。
 
 --- COMPAT
+
 --- RFC2253
+
 --- ONELINE
+
 --- MULTILINE
+
+#@end

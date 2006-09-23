@@ -1,4 +1,5 @@
-= OpenSSL::ASN1::ASN1Data
+#@if (version >= "1.8.0")
+= class OpenSSL::ASN1::ASN1Data < Object
 
 ASN.1データ型のスーパークラス
 
@@ -30,26 +31,32 @@ ASN.1データ型のスーパークラス
              +-> OpenSSL::ASN1::Set
              `-> OpenSSL::ASN1::Sequence
 
-== クラスメソッド
---- ASN1Data.new(value, tag, tag_class)
-    ASN1Data オブジェクトを生成する。
+== Class Methods
+--- new(value, tag, tag_class)
 
-== メソッド
+ASN1Data オブジェクトを生成します。
+
+== Instance Methods
 
 --- value
---- values=
-    ASN.1データの表現する値。
+--- value=(value)
+
+ASN.1 データの表現する値です。
 
 --- tag
---- tag=
-    タグ番号。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 のいずれか。
-    あらかじめ定義されているタグ番号の定数に関しては ((<OpenSSL::ASN1>)) の
-    定数の項を参照。
+--- tag=(tag)
+
+タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 のいずれかの値をとります。
+あらかじめ定義されているタグ番号の定数に関しては [[c:OpenSSL::ASN1]] の
+定数の項を参照してください。
 
 --- tag_class
---- tag_class=
-    ((<Symbol>)) オブジェクト :UNIVERSAL、:ONTEXT_SPECIFIC、:APPLICATION
-    のいずれか。
+--- tag_class=(tag_class)
+
+[[c:Symbol]] オブジェクト :UNIVERSAL、:ONTEXT_SPECIFIC、:APPLICATION
+のいずれかをとります。
 
 --- to_der
-    ASN.1 データの DER 表現。
+
+ASN.1 データの DER 表現を返します。
+#@end

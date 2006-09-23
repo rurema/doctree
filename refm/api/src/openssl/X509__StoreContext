@@ -1,3 +1,5 @@
-= OpenSSL::X509::StoreContext
+#@if (version >= "1.8.0")
+= class OpenSSL::X509::StoreContext < Object
 
-((<ºπ…Æº‘ ÁΩ∏>))
+[[unknown:ºπ…Æº‘ ÁΩ∏]]
+#@end

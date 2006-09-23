@@ -1,15 +1,15 @@
-= OpenSSL::ASN1::Constructive
+#@if (version >= "1.8.0")
+= class OpenSSL::ASN1::Constructive < OpenSSL::ASN1::ASN1Data
 
-== スーパークラス
+== Class Methods
+--- new(value, tag, tagging, tag_class)
 
-((<OpenSSL::ASN1::ASN1Data>))
+Constructive オブジェクトを生成します。
 
-== クラスメソッド
---- Constructive.new(value, tag, tagging, tag_class)
-    Constructive オブジェクトを生成する。
-
-== メソッド
+== Instance Methods
 
 --- tagging
---- tagging=
-    ((<Symbol>)) オブジェクト :IMPLICIT または :EXPLICIT のいずれか。
+--- tagging=(tag)
+
+[[c:Symbol]] オブジェクト :IMPLICIT または :EXPLICIT のいずれかをとります。
+#@end

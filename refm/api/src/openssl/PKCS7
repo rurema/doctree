@@ -1,51 +1,71 @@
-= OpenSSL::PKCS7
+#@if (version >= "1.8.0")
+= module OpenSSL::PKCS7
 
-PKCS #7 モジュール 
+PKCS #7 モジュール
 
-((<OpenSSL::PKCS7::PKCS7>)) も参照。
+[[c:OpenSSL::PKCS7::PKCS7]] も参照してください。
 
-== モジュールメソッド
+== Module Functions
 
---- PKCS7.read_smime(str)
---- PKCS7.read_smime(io)
-    S/MIME 形式を読み込み、PKCS7 オブジェクトを返す。
+--- read_smime(str)
+--- read_smime(io)
 
---- PKCS7.write_smime(p7sig)
---- PKCS7.write_smime(p7sig, data, flags=DETACHED)
-    PKCS7 オブジェクトから S/MIME 形式の文字列を返す。
-    multipart/signed による平文署名である場合、署名されたデータを data として与えなければいけない。
+S/MIME 形式を読み込み、PKCS7 オブジェクトを返します。
 
-      data = "hoge"
-      p7 = PKCS7.sign( X509::Certificate.new(File.read('cert.pem')), 
-                       PKey::RSA.new(File.read('privkey.pem')), 
-                       data)
-      smime = PKCS7.write_smime(p7, data)
+--- write_smime(p7sig)
+--- write_smime(p7sig, data, flags = DETACHED)
 
---- PKCS7.sign(cert, key, data, []=nil, flags=0)
-    data に証明書 cert を付けて key で署名する。
+PKCS7 オブジェクトから S/MIME 形式の文字列を返します。
+multipart/signed による平文署名である場合、署名されたデータを data として与えなければなりません。
 
---- PKCS7.encrypt([rcpt], smime)
-    S/MIME 形式の文字列をメッセージの受け取り手の公開鍵 rcpt を使って暗号化する。
+例:
 
-== 定数
+  data = "hoge"
+  p7 = PKCS7.sign( X509::Certificate.new(File.read('cert.pem')),
+                   PKey::RSA.new(File.read('privkey.pem')),
+                   data)
+  smime = PKCS7.write_smime(p7, data)
+
+--- sign(cert, key, data, []= nil, flags = 0)
+
+data に証明書 cert を付けて key で署名します。
+
+--- encrypt([rcpt], smime)
+
+S/MIME 形式の文字列をメッセージの受け取り手の公開鍵 rcpt を使って暗号化します。
+
+== Constants
 
 --- DETACHED
-    平文に署名を付ける形式(multipart/signed)で行う。 PKCS7.sign() において DETACHED がセットされていた時にだけ意味をもつ。
+
+平文に署名を付ける形式 (multipart/signed) で行います。 PKCS7.sign において DETACHED がセットされていた時にだけ意味をもちます。
 
 --- TEXT
-    text/plain のためのコンテンツに MIME ヘッダーを加える。DETACHED ビットが立っている時だけ意味をもつ。
+
+text/plain のためのコンテンツに MIME ヘッダーを加えます。DETACHED ビットが立っている時だけ意味をもちます。
 
 --- BINARY
-    MIME canonical format への変換を行わない。
+
+MIME canonical format への変換を行いません。
 
 --- NOATTR
-    署名した時間などの情報を省略。
+
+署名した時間などの情報を省略します。
+
 --- NOCERTS
-    署名者の証明書を署名に含めない。送り先がすでに証明書をもっている場合、データの量を減らすことができる。
+
+署名者の証明書を署名に含めません。送り先がすでに証明書をもっている場合、データの量を減らすことができます。
 
 --- NOCHAIN
+
 --- NOINTERN
+
 --- NOSIGS
+
 --- NOSMIMECAP
-    署名者が使用可能な暗号アルゴリズムの情報などを省略。
+
+署名者が使用可能な暗号アルゴリズムの情報などを省略します。
+
 --- NOVERIFY
+
+#@end

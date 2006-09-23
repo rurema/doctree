@@ -1,69 +1,84 @@
-= OpenSSL::PKey::DH
+#@if (version >= "1.8.0")
+= class OpenSSL::PKey::DH < OpenSSL::PKey::PKey
 
 Diffie-Hellman 暗号クラス
 
-== スーパークラス:
+== Class Methods
 
-((<OpenSSL::PKey::PKey>))
+--- generate(size, generator = 2)
 
-== クラスメソッド
+Diffie-Hellman 鍵交換の最初のステップである秘密鍵と公開鍵の生成を行ない DH オブジェクトを返します。size は安全な素数のサイズで、単位はビットです。generator は 1 より大きい小さな数で、大抵は 2 か 5 を指定します。
 
---- DH.generate(size, generator=2)
-    Diffie-Hellman 鍵交換の最初のステップである秘密鍵と公開鍵の生成を行ないDH オブジェクトを返す。size は安全な素数のサイズ。単位はビット。generator は1より大きい小さな数で、大抵は2か5。
+--- new(size, generator = 2)
 
---- DH.new(size, generator=2)
-    DH.generate(size, generator) と同じ。
+DH.generate(size, generator) と同じです。
 
---- DH.new(str)
---- DH.new(io)
---- DH.new()
-    DH オブジェクトを生成する。
+--- new(str)
+--- new(io)
+--- new()
 
-== メソッド
+DH オブジェクトを生成します。
+
+== Instance Methods
 
 --- compute_key(num)
 --- compute_key(str)
 --- compute_key(bn)
-    Diffie-Hellman 鍵交換の第2ステップ。共有暗号鍵を自分の秘密鍵と相手の公開鍵(num, str, bn)から計算して文字列として返す。これで鍵交換は完了する。
+
+Diffie-Hellman 鍵交換の第2ステップです。共有暗号鍵を自分の秘密鍵と相手の公開鍵 (num, str, bn) から計算して文字列として返します。これで鍵交換は完了します。
 
 --- public?
-    公開鍵を持っているかどうか判定する。
+
+公開鍵を持っているかどうか判定します。
 
 --- private?
-    秘密鍵を持っているかどうか判定する。
+
+秘密鍵を持っているかどうか判定します。
 
 --- to_text
-    人間が読める形式に変換する。
 
---- export()
---- to_pem()
---- to_s()
-    鍵ペアを PEM 形式で出力する。
+人間が読める形式に変換します。
+
+--- export
+--- to_pem
+--- to_s
+
+鍵ペアを PEM 形式で出力します。
 
 --- to_der
-    DER 形式に変換する。
+
+DER 形式に変換します。
 
 --- public_key
-    公開鍵を複製して DH オブジェクトとして返す。
+
+公開鍵を複製して DH オブジェクトとして返します。
 
 --- params_ok?
-    パラメータ p と g が安全かどうかを判定する。
+
+パラメータ p と g が安全かどうかを判定します。
 
 --- generate_key!
-    新たに公開鍵と秘密鍵を生成しなおす。
+
+新たに公開鍵と秘密鍵を生成し直します。
 
 --- params
-    パラメータの入った ((<Hash>)) オブジェクトを返す。
+
+パラメータの入った [[c:Hash]] オブジェクトを返します。
 
 --- sign(digest, data)
 --- verify(digest, sign, data)
-    ((<OpenSSL::PKey::PKey>)) で定義された sign と verify を呼び出すことができるが、
-    Diffie-Hellman 暗号の性質から、呼び出しても全て PKeyError になる。
+
+[[c:OpenSSL::PKey::PKey]] で定義された sign と verify を呼び出すことができますが、
+Diffie-Hellman 暗号の性質から、呼び出しても全て PKeyError になります。
 
 --- p
---- g
---- pub_key
---- pub_key=
---- priv_key
---- priv_key=
 
+--- g
+
+--- pub_key
+--- pub_key=(public_key)
+
+--- priv_key
+--- priv_key=(private_key)
+
+#@end
