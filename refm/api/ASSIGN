@@ -172,7 +172,7 @@ nkf                             date            converted
 observable                      date            converted
 open-uri                        date            converted
 open3                           iwadon          syntaxok
-openssl                         date
+openssl                         date            converted
 optparse                        sheepman        converted
 ostruct                         iwadon          syntaxok
 parsearg                        sheepman        converted
@@ -193,15 +193,15 @@ rational                        sheepman        converted
 rbconfig
 readbytes                       sheepman        converted
 readline                        sheepman        converted
-resolv                          date
-resolv-replace                  date
+resolv                          date            converted
+resolv-replace                  date            converted
 rexml
 ri
 rinda/rinda                     aamine          syntaxok
 rinda/tuplespace                aamine          syntaxok
 ripper                          aamine
-rss                             date
-rubyunit                        date
+rss                             date            converted
+rubyunit                        date            converted
 scanf                           sheepman
 sdbm                            sheepman
 set                             sheepman
