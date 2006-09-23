@@ -530,11 +530,11 @@ OptionParser の例外クラスの基底クラスです。
 
 
 
-= class OptionParser::Arguable
+= module OptionParser::Arguable
 
 Extends command line arguments array to parse itself.
 
-== Class Methods
+== Instance Methods
 
 --- options=()
 
@@ -544,7 +544,6 @@ nil, methods [[m:OptionParser::Arguable#options]] and
 is no ways to access the [[c:OptionParser]] object via the
 receiver object.
 
-== Instance Methods
 --- options
 
 Actual [[c:OptionParser]] object, automatically created if not
@@ -565,3 +564,9 @@ error message to STDERR and returns nil.
 
 Parses self destructively, and returns self just contains
 rest arguments left without parsed.
+
+= redefine Kernel
+== Constants
+--- ARGV
+optparse を require することにより、ARGV は 
+[[c:OptionParser::Arguable]] を extend します。
