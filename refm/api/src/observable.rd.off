@@ -1,51 +1,66 @@
-= Observable
-== 目的・概要
-Mix-inによりobserverパターンを提供する。
+= module Observable
 
-Observableモジュールをincludeしたクラスは
-Observable#changedメソッドにより更新フラグを立て、
-Observable#notify_observers()が呼び出されると
-更新フラグが立っている場合はオブザーバに通知する
-(オブザーバのupdateメソッドを呼び出す)。
-Observable#notify_observers()の引数は
-そのままオブザーバのupdateメソッドに渡される。
+=== 目的・概要
+Mix-in により observer パターンを提供します。
 
-== サンプルコード
-      require 'observer'
-      class AObservable
-        include Observable
-        ...
-      end
-      class AObserver
-        def update(arg)
-          ...
-        end
-        ...
-      end
-      obj = AObservable.new
-      observer = AObserver.new
-      obj.add_observer(observer)
-      obj.changed
-      obj.notify_observers(args)
+Observable モジュールを include したクラスは
+Observable#changed メソッドにより更新フラグを立て、
+Observable#notify_observers が呼び出されると
+更新フラグが立っている場合はオブザーバに通知します
+(オブザーバの update メソッドを呼び出す)。
+Observable#notify_observers の引数は
+そのままオブザーバの update メソッドに渡されます。
 
-== モジュールメソッド
---- Observable#add_observer(observer)
-            オブザーバを追加する。
-            オブザーバは(({update}))メソッドを備えている必要がある。
+=== サンプルコード
+  require 'observer'
+  class AObservable
+    include Observable
+    ...
+  end
+  class AObserver
+    def update(arg)
+      ...
+    end
+    ...
+  end
+  obj = AObservable.new
+  observer = AObserver.new
+  obj.add_observer(observer)
+  obj.changed
+  obj.notify_observers(args)
 
-            ((|observer|))が(({update}))メソッドを持たないときは
-            例外NoMethodErrorを発生する。
---- Observable#delete_observer(observer)
-            オブザーバを削除する。
---- Observable#delete_observers
-            オブザーバをすべて削除する。
---- Observable#count_observers
-            オブザーバの数を返す。
---- Observable#changed(state=true)
-            更新フラグを立てる。
---- Observable#changed?
-            更新フラグの状態を返す。
---- Observable#notify_observers(*arg)
-            更新フラグが立っていたら、オブザーバの(({update}))メソッドを呼び出す。
-            与えられた引数はその(({update}))メソッドに渡される。
-            更新フラグは(({false}))になる。
+== Instance Methods
+
+--- add_observer(observer)
+
+オブザーバを追加します。
+オブザーバは update メソッドを備えている必要があります。
+
+observer が update メソッドを持たないときは
+例外 NoMethodError が発生します。
+
+--- delete_observer(observer)
+
+オブザーバを削除します。
+
+--- delete_observers
+
+オブザーバをすべて削除します。
+
+--- count_observers
+
+オブザーバの数を返します。
+
+--- changed(state = true)
+
+更新フラグを立てます。
+
+--- changed?
+
+更新フラグの状態を返します。
+
+--- notify_observers(*arg)
+
+更新フラグが立っていたら、オブザーバの update メソッドを呼び出します。
+与えられた引数はその update メソッドに渡されます。
+更新フラグは false になります。

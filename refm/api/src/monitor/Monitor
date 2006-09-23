@@ -1,11 +1,11 @@
-= class Monitor
+= class Monitor < Object
 
 include MonitorMixin
 
 スレッドの同期機構としてのモニター機能を提供するクラスです。
 また同じスレッドから何度も lock できる Mutex としての機能も提供します。
 
-== 例
+=== 例
 
   require 'monitor'
   
@@ -32,7 +32,7 @@ include MonitorMixin
   end
 
 2回ロックしてもデッドロックにならない例です。
-   
+
    require 'monitor'
    mon = Monitor.new
    mon.synchronize {
@@ -41,41 +41,47 @@ include MonitorMixin
      }
    }
 
-((<Mutex>)) ではデッドロックになります。
+[[c:Mutex]] ではデッドロックになります。
 
    require 'thread'
    mx = Mutex.new
    mx.synchronize {
      mx.synchronize{
-     
+
      }
    }
    # => deadlock; recursive locking (ThreadError)
 
-== クラスメソッド
+== Class Methods
 
---- Monitor.new
-    Monitor オブジェクトを生成します。
+--- new
 
-== メソッド
+Monitor オブジェクトを生成します。
+
+== Instance Methods
 
 --- mon_enter
---- enter 
-    モニターをロックします。((<MonitorMixin#mon_enter|MonitorMixin/mon_enter>)) を
-    参照して下さい。
+--- enter
+
+モニターをロックします。[[m:MonitorMixin#mon_enter]] を
+参照して下さい。
 
 --- mon_exit
---- exit 
-    モニターを解放します。((<MonitorMixin#mon_exit|MonitorMixin/mon_exit>)) を
-    参照して下さい。
+--- exit
+
+モニターを解放します。[[m:MonitorMixin#mon_exit]] を
+参照して下さい。
 
 --- mon_synchronize { ... }
 --- synchronize     { ... }
-    ((<MonitorMixin#mon_synchronize|MonitorMixin/mon_synchronize>)) を参照して下さい。
+
+[[m:MonitorMixin#mon_synchronize]] を参照して下さい。
 
 --- mon_try_enter
---- try_enter 
-    ((<MonitorMixin#mon_try_enter|MonitorMixin/mon_try_enter>)) を参照して下さい。
+--- try_enter
+
+[[m:MonitorMixin#mon_try_enter]] を参照して下さい。
 
 --- new_cond
-    ((<MonitorMixin#new_cond|MonitorMixin/new_cond>)) を参照して下さい。
+
+[[m:MonitorMixin#new_cond]] を参照して下さい。

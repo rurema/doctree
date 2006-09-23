@@ -1,36 +1,37 @@
-= nkf
+= module NKF
 
-((<nkf(1)|URL:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/>))
+[[unknown:nkf(1)|URL:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/]]
 (Network Kanji code conversion Filter version 1.7)
 を ruby から使うためのモジュールです。
 
+#@if (version >= "1.8.2.")
 ruby 1.8.2 以降では
-((<nkf Network Kanji Filter|URL:http://sourceforge.jp/projects/nkf/>))
+[[unknown:nkf Network Kanji Filter|URL:http://sourceforge.jp/projects/nkf/]]
 の 2.0 以降が取り込まれています。
 (((<ruby 1.8.2 feature>)))
+#@end
 
-
-== 使い方
+=== 使い方
 以下は、漢字コード変換コマンドの例です。
 
   #!/usr/local/bin/ruby
-
+  
   require 'nkf'
-
+  
   opt = ''
   opt = ARGV.shift if ARGV[0][0] == ?-
-
+  
   while line = ARGF.gets
     print NKF.nkf(opt, line)
   end
 
 以下は、漢字コード判別コマンドの例です。
-(1.8.2 以降の NKF.guess では、以下の5種類以外の値になる可能性があります ((<trap::NKF>)))
+(ruby 1.8.2 以降の NKF.guess では、以下の5種類以外の値になる可能性があります [[trap:NKF]])
 
   #!/usr/local/bin/ruby
-
+  
   require 'nkf'
-
+  
   CODES = {
     NKF::JIS      => "JIS",
     NKF::EUC      => "EUC",
@@ -38,10 +39,10 @@ ruby 1.8.2 以降では
     NKF::BINARY   => "BINARY",
     NKF::UNKNOWN  => "UNKNOWN(ASCII)",
   }
-
+  
   while file = ARGV.shift
     str = open(file) {|io| io.gets(nil) }
-
+    
     printf "%-10s ", file
     if str.nil?
       puts "EMPTY"
@@ -50,77 +51,13 @@ ruby 1.8.2 以降では
     end
   end
 
-== モジュール関数
+=== オプション文字列
 
---- NKF.nkf(opt, str)
-    文字列 ((|str|)) の文字コードを変換し、変換結果の文字列を返します。
-
-    ((|opt|)) には、
-    ((<nkf(1)|URL:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/>)) 
-    と同じコマンドラインオプションを指定します(((<後述|nkf/オプション文字列>)))。
-    複数指定する場合は、(({NKF.nkf('-Se', str)})) や
-    (({NKF.nkf('-S -e', str)})) などとします。((|opt|))は、必ず (({'-'}))
-    で始めなければいけないことに注意してください。
-
-    : 注意
-      このメソッドは(nkf コマンドがそうであるように)、MIME Base64 の
-      デコード処理がデフォルトでオンになっています。この動作を無効にしたけ
-      れば ((|opt|)) に '-m0' を含めるようにしてください。
-
---- NKF.guess(str)
-    文字列 ((|str|)) の漢字コードを判別して返します。
-    返される値は、NKF モジュールのモジュール定数です(下記参照)。
-    ruby 1.8.2 より前は現在の NKF.guess1 と同じものです。
-    ruby 1.8.2 以降では NKF.guess2 と同じものです。
-
---- NKF.guess1(str)
-    ((<ruby 1.8.2 feature>))
-
-    Ruby1.8.1以前のNKF.guessと同じものです。
-
---- NKF.guess2(str)
-    ((<ruby 1.8.2 feature>))
-
-    nkf2の漢字コード自動判定ルーチンを利用したものです。
-
-== 定数
-
---- JIS
-    JISコードを表します。
-
---- EUC
-    EUCコードを表します。
-
---- SJIS
-    SJISコードを表します。
-
---- BINARY
-    入力が binary であることを表します。
-
---- UNKNOWN
-    コード判定に失敗したことを表します。
-
---- ASCII
-    ((<ruby 1.8.2 feature>))
-
-    ASCIIコードを表します。
-
---- UTF8
-    ((<ruby 1.8.2 feature>))
-
-    UTF-8コードを表します。
-
---- UTF16
-    ((<ruby 1.8.2 feature>))
-
-    UTF-16コードを表します。
-
-== オプション文字列
-
-=== ruby 1.8.2 以降
+#@if (version >= "1.8.2")
+==== ruby 1.8.2 以降
 ((<ruby 1.8.2 feature>))
 
-NKF2.0.5相当です。
+NKF2.0.5 相当です。
 
   b,u      Output is buffered (DEFAULT),Output is unbuffered
   j,s,e,w  Outout code is JIS 7 bit (DEFAULT), Shift JIS, AT&T JIS (EUC), UTF-8
@@ -153,8 +90,10 @@ NKF2.0.5相当です。
    --cp932inv        convert Shift_JIS EDxx-EFxx to equivalnet CP932 FAxx-FCxx
    --ms-ucs-map      Microsoft UCS Mapping Compatible
 
-=== ruby 1.8.2 より前のバージョン
-NKF1.7相当です((-中には、ruby では無意味なオプションもあるかもしれません-))。
+#@else
+
+==== ruby 1.8.2 より前のバージョン
+NKF1.7 相当です((-中には、ruby では無意味なオプションもあるかもしれません-))。
 
   指定できるオプションは、以下の通り。-mu のように続けることができる。
 
@@ -211,8 +150,96 @@ NKF1.7相当です((-中には、ruby では無意味なオプションもあるかもしれません-))。
 
   -c   行末にCRコード(0D)を追加(拡張機能 -T と併用不可)
   -d   行末からCRコード(0D)を削除(拡張機能 -T と併用不可)
+#@end
 
-== 参考
+=== 参考
 
-* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
-  * ((<"標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv"|URL:http://jp.rubyist.net/magazine/?0009-BundledLibraries>))
+  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
+  * [[unknown:"標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv"|URL:http://jp.rubyist.net/magazine/?0009-BundledLibraries]]
+
+== Module Functions
+
+--- nkf(opt, str)
+
+文字列 str の文字コードを変換し、変換結果の文字列を返します。
+
+opt には、
+[[unknown:nkf(1)|URL:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/]]
+と同じコマンドラインオプションを指定します([[unknown:後述|nkf/オプション文字列]])。
+複数指定する場合は、NKF.nkf('-Se', str) や
+NKF.nkf('-S -e', str) などとします。optは、必ず '-'
+で始めなければいけないことに注意してください。
+
+: 注意
+このメソッドは(nkf コマンドがそうであるように)、MIME Base64 の
+デコード処理がデフォルトでオンになっています。この動作を無効にしたけ
+れば opt に '-m0' を含めるようにしてください。
+
+--- guess(str)
+
+文字列 str の漢字コードを判別して返します。
+返される値は、NKF モジュールのモジュール定数です(下記参照)。
+ruby 1.8.2 より前は現在の NKF.guess1 と同じものです。
+ruby 1.8.2 以降では NKF.guess2 と同じものです。
+
+#@if (version >= "1.8.2")
+--- guess1(str)
+
+((<ruby 1.8.2 feature>))
+
+ruby 1.8.1 以前の NKF.guess と同じものです。
+#@end
+
+#@if (version >= "1.8.2")
+--- guess2(str)
+
+((<ruby 1.8.2 feature>))
+
+nkf2の漢字コード自動判定ルーチンを利用したものです。
+#@end
+
+== Constants
+
+--- JIS
+
+JIS コードを表します。
+
+--- EUC
+
+EUC コードを表します。
+
+--- SJIS
+
+SJIS コードを表します。
+
+--- BINARY
+
+入力が binary であることを表します。
+
+--- UNKNOWN
+
+コード判定に失敗したことを表します。
+
+#@if (version >= "1.8.2")
+--- ASCII
+
+((<ruby 1.8.2 feature>))
+
+ASCII コードを表します。
+#@end
+
+#@if (version >= "1.8.2")
+--- UTF8
+
+((<ruby 1.8.2 feature>))
+
+UTF-8 コードを表します。
+#@end
+
+#@if (version >= "1.8.2")
+--- UTF16
+
+((<ruby 1.8.2 feature>))
+
+UTF-16 コードを表します。
+#@end

@@ -1,35 +1,41 @@
-= class MonitorMixin::ConditionVariable
+= class MonitorMixin::ConditionVariable < Object
 
-((<MonitorMixin>)) と ((<Monitor>)) のための ConditionVariable クラスです。
-((<MonitorMixin#new_cond|MonitorMixin/new_cond>)) が返します。ユーザが
+[[c:MonitorMixin]] と [[c:Monitor]] のための ConditionVariable クラスです。
+[[m:MonitorMixin#new_cond]] が返します。ユーザが
 MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 
-== メソッド
+== Instance Methods
 
 --- broadcast
-    待っている全てのスレッドの実行を再開します。nil を返します。
+
+待っている全てのスレッドの実行を再開します。nil を返します。
 
 --- count_waiters
-    待っているスレッドの数を返します。
+
+待っているスレッドの数を返します。
 
 --- signal
-    待っているスレッドがあれば実行を再開させます。nil を返します。
+
+待っているスレッドがあれば実行を再開させます。nil を返します。
 
 --- wait(timeout = nil)
-    現在のスレッドを停止します。((|timeout|)) を与えない場合、
-    ConditionVariable#signal で起こされるまでスレッドは停止し続けます。
-    ((|timeout|)) を与えた場合は最大 ((|timeout|)) 秒まで停止した後にスレッドを
-    再開します。
 
-    true を返します。((|timeout|)) が与えられていて待ち時間が ((|timeout|)) を
-    越えた場合は false を返します。
+現在のスレッドを停止します。timeout を与えない場合、
+ConditionVariable#signal で起こされるまでスレッドは停止し続けます。
+timeout を与えた場合は最大 timeout 秒まで停止した後にスレッドを
+再開します。
+
+true を返します。timeout が与えられていて待ち時間が timeout を
+越えた場合は false を返します。
 
 --- wait_while { ... }
-    block が真を返している間は ConditionVariable#signal で起こされても
-    スレッドを停止し続けます。 block が偽を返すとスレッドを再開します。
-    true を返します。
+
+block が真を返している間は ConditionVariable#signal で起こされても
+スレッドを停止し続けます。 block が偽を返すとスレッドを再開します。
+true を返します。
 
 --- wait_until { ... }
-    block が偽を返している間は ConditionVariable#signal で起こされても
-    スレッドを停止し続けます。block が真を返すとスレッドを再開します。
-    true を返します。
+
+block が偽を返している間は ConditionVariable#signal で起こされても
+スレッドを停止し続けます。block が真を返すとスレッドを再開します。
+true を返します。
