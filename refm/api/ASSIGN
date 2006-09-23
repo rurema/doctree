@@ -177,10 +177,10 @@ optparse                        sheepman        converted
 ostruct                         iwadon          syntaxok
 parsearg                        sheepman        converted
 parsedate                       sheepman        converted
-pathname
-ping
-pp
-prettyprint
+pathname                        sheepman 
+ping                            sheepman                      
+pp                              sheepman
+prettyprint                     sheepman
 profile
 profiler
 pstore
