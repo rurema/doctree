@@ -192,7 +192,7 @@ racc/parser                     aamine          converted
 rational
 rbconfig
 readbytes
-readline                        sheepman 
+readline                        sheepman        converted
 resolv
 resolv-replace
 rexml
@@ -207,7 +207,7 @@ sdbm
 set
 sha1
 shell
-shellwords                      sheepman
+shellwords                      sheepman        converted
 singleton
 soap
 socket
@@ -228,9 +228,9 @@ tsort                           iwadon          converted
 un                              iwadon          converted
 uri                             iwadon          converted
 weakref
-webrick                         sheepman 
-webrick/cgi                     sheepman
-webrick/ssl                     sheepman
+webrick                         sheepman        converted 
+webrick/cgi                     sheepman        converted
+webrick/ssl                     sheepman        converted
 win32/registry
 win32ole
 xmlrpc
