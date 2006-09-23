@@ -184,14 +184,14 @@ prettyprint                     sheepman        converted
 profile                         sheepman        converted
 profiler                        sheepman        converted
 pstore                          sheepman        converted
-pty                             sheepman
+pty                             sheepman        converted
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 racc/parser                     aamine          converted
-rational                        sheepman
+rational                        sheepman        converted
 rbconfig
-readbytes                       sheepman
+readbytes                       sheepman        converted
 readline                        sheepman        converted
 resolv
 resolv-replace
@@ -202,7 +202,7 @@ rinda/tuplespace                aamine          syntaxok
 ripper                          aamine
 rss
 rubyunit
-scanf
+scanf                           
 sdbm
 set
 sha1
