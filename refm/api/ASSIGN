@@ -106,8 +106,8 @@ cgi/session                     date            syntaxok
 complex                         date            syntaxok
 csv                             date            syntaxok
 curses                          date            syntaxok
-date
-date2
+date                            sheepman 
+date2                           sheepman
 dbm                             date            syntaxok
 debug                           iwadon          converted
 delegate                        date            syntaxok
