@@ -12,11 +12,11 @@ require 'getopts'
 
 `$USAGE'に`usage()'(名前は何でもよい)をセットします．
 
-        def usage()
-          printf("Usage:\n")
-                :
-        end
-        $USAGE='usage'
+  def usage()
+    printf("Usage:\n")
+          :
+  end
+  $USAGE='usage'
 
 === 参照:
 
