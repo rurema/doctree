@@ -173,10 +173,10 @@ observable                      date
 open-uri                        date
 open3                           iwadon          syntaxok
 openssl
-optparse                        sheepman
+optparse                        sheepman        converted
 ostruct                         iwadon          syntaxok
-parsearg                        sheepman
-parsedate                       sheepman
+parsearg                        sheepman        converted
+parsedate                       sheepman        converted
 pathname
 ping
 pp
