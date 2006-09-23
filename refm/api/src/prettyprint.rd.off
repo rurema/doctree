@@ -1,179 +1,121 @@
-= PrettyPrint
-#The class implements pretty printing algorithm.
-#It finds line breaks and nice indentations for grouped structure.
+= class PrettyPrint < Object
 
 このクラスは pretty printing アルゴリズムの実装です。
 改行の位置を探し、構造のまとまりのためにきれいなインデントを施します。
-
-#By default, the class assumes that primitive elements are strings and
-#each byte in the strings have single column in width.
-#But it can be used for other situasions
-#by giving suitable arguments for some methods:
-#newline object and space generation block for (({PrettyPrint.new})),
-#optional width argument for (({PrettyPrint#text})),
-#(({PrettyPrint#breakable})), etc.
-#There are several candidates to use them:
-#text formatting using proportional fonts,
-#multibyte characters which has columns diffrent to number of bytes,
-#non-string formatting, etc.
 
 デフォルトでは、このクラスは最も基本的な要素は文字列であり、
 その1バイトが出力幅の中で1カラムを占めると仮定しています。
 しかし、いくつかのメソッドに対して適切な引数を与えることで、
 そうでない状況にも利用できます:
-(({PrettyPrint.new})) には改行オブジェクトと空白の生成を表すブロックを、
-(({PrettyPrint#text})) や (({PrettyPrint#breakable})) には幅といった具合に。
+PrettyPrint.new には改行オブジェクトと空白の生成を表すブロックを、
+PrettyPrint#text や PrettyPrint#breakable には幅といった具合に。
 これらを使ういくつかの候補は例えば次のようなものでしょう。
 proportional font を使ったテキストの整形、
 出力幅とバイト数が異なるような多バイト文字、
 文字以外の出力などです。
 
-== class methods
---- PrettyPrint.new([output[, maxwidth[, newline]]]) [{|width| ...}]
-#    creates a buffer for pretty printing.
-
-    pretty printing のためのバッファを生成します。
-
-#    ((|output|)) is an output target.
-#    If it is not specified, (({''})) is assumed.
-#    It should have a (({<<})) method which accepts
-#    the first argument ((|obj|)) of (({PrettyPrint#text})),
-#    the first argument ((|sep|)) of (({PrettyPrint#breakable})),
-#    the first argument ((|newline|)) of (({PrettyPrint.new})),
-#    and
-#    the result of a given block for (({PrettyPrint.new})).
-    ((|output|)) は出力先で、
-    もし指定されなければ (({''})) が仮定されます。
-    このオブジェクトは次のものを受け付ける (({<<})) 
-    メソッドを持っていなければなりません。それは、
-    (({PrettyPrint#text})) の第1引数 ((|obj|))、
-    (({PrettyPrint#breakable})) の第1引数 ((|sep|))、
-    (({PrettyPrint.new})) の第1引数 ((|newline|))
-    および
-    (({PrettyPrint.new})) に与えられたブロックを評価した結果です。
-
-#    ((|maxwidth|)) specifies maximum line length.
-#    If it is not specified, 79 is assumed.
-#    However actual outputs may overflow ((|maxwidth|)) if
-#    long non-breakable texts are provided.
-
-    ((|maxwidth|)) は行の最大幅を指定します。
-    与えられない場合は 79 が仮定されます。
-    ただし、改行できないものが渡された場合は
-    実際の出力幅は ((|maxwidth|)) を越えることがあります。
-
-#    ((|newline|)) is used for line breaks.
-#    (({"\n"})) is used if it is not specified.
-    ((|newline|)) は改行に使われます。
-    指定されない場合は (({"\n"})) が仮定されます。
-
-#    The block is used to generate spaces.
-#    (({{|width| ' ' * width}})) is used if it is not given.
-    ブロックは空白を生成します。
-    指定されない場合は (({{|width| ' ' * width}})) が使われます。
-
---- PrettyPrint.format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
-#    is a convenience method which is same as follows:
-    以下と同じ働きをするもので簡便のために用意されています。
-
-      begin
-        pp = PrettyPrint.new(output, maxwidth, newline, &genspace)
-        ...
-        pp.flush
-        output
-      end
-
---- PrettyPrint.singleline_format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
-#     is similar to (({PrettyPrint.format})) but the result has no breaks.
-# 
-#     ((|maxwidth|)), ((|newline|)) and ((|genspace|)) are ignored.
-#     The invocation of (({breakable})) in the block doesn't break a line and
-#     treated as just an invocation of (({text})).
-
-    (({PrettyPrint.format})) に似ていますが、改行しません。引数 
-    ((|maxwidth|)), ((|newline|)) と ((|genspace|)) は無視されます。ブロッ
-    ク中の (({breakable})) の実行は、改行せずに (({text})) の実行であるか
-    のように扱います。
-
-== methods
---- text(obj[, width])
-#    adds ((|obj|)) as a text of ((|width|)) columns in width.
-    ((|obj|)) を ((|width|)) カラムのテキストとして追加します。
-
-#    If ((|width|)) is not specified, (({((|obj|)).length})) is used.
-    ((|width|)) が指定されなかった場合、(({((|obj|)).length})) が利用されます。
-
---- breakable([sep[, width]])
-#    tells "you can break a line here if necessary", and a
-#    ((|width|))-column text ((|sep|)) is inserted if a line is not
-#    broken at the point.
-    「必要ならここで改行出来る」ということを通知します。
-    もしその位置で改行されなければ、
-    ((|width|))カラムのテキスト ((|sep|)) がそこに挿入されます。
-
-#    If ((|sep|)) is not specified, (({" "})) is used.
-    ((|sep|)) が指定されなければ (({" "})) が利用されます。
-
-#    If ((|width|)) is not specified, (({((|sep|)).length})) is used.
-#    You will have to specify this when ((|sep|)) is a multibyte
-#    character, for example.
-    ((|width|)) が指定されなければ、(({((|sep|)).length})) が利用されます。
-    例えば ((|sep|)) が多バイト文字の際に指定する必要があるかも知れません。
-
---- nest(indent) {...}
-#    increases left margin after newline with ((|indent|)) for line breaks added
-#    in the block.
-    ブロックの中で追加された改行の後の左マージンを ((|indent|)) ぶんだけ
-    増加させます。
-
---- group([indent[, open_obj[, close_obj[, open_width[, close_width]]]]]) {...}
-#    groups line break hints added in the block.
-#    The line break hints are all to be breaked or not.
-    ブロック内で追加された改行のヒントをグループ化します。
-
-#    If ((|indent|)) is specified, the method call is regarded as nested by
-#    (({nest(((|indent|))) { ... }})).
-    ((|indent|)) が指定された場合、このメソッド呼び出しは
-    (({nest(((|indent|))) { ... }})) でネストしているものとして扱われます。
-
-#    If ((|open_obj|)) is specified, (({text open_obj, open_width})) is called
-#    at first.
-#    If ((|close_obj|)) is specified, (({text close_obj, close_width})) is
-#    called at last.
-    ((|open_obj|)) が指定された場合、(({text open_obj, open_width})) が
-    最初に呼ばれます。
-    ((|close_obj|)) が指定された場合、(({text close_obj, close_width})) が
-    最後に呼ばれます。
-
---- flush
-#    outputs buffered data.
-    バッファされたデータを出力します。
-
---- first?
-#    is a predicate to test the call is a first call to (({first?})) with
-#    current group.
-#    It is useful to format comma separated values as:
-    現在のグループで (({first?})) に対する最初の呼び出しかどうかを判定する
-    述語です。
-    これはカンマで区切られた値を整形するのに有用です。
-
-      pp.group(1, '[', ']') {
-        xxx.each {|yyy|
-          unless pp.first?
-            pp.text ','
-            pp.breakable
-          end
-          ... pretty printing yyy ...
-        }
-      }
-
-== Bugs
-#* Box based formatting?  Other (better) model/algorithm?
-* 箱指向の整形? 他のアルゴリズム?
-
-== References
+=== References
 Christian Lindig, Strictly Pretty, March 2000,
-((<URL:http://www.st.cs.uni-sb.de/~lindig/papers/pretty/strictly-pretty.html>))
+[[url:http://www.st.cs.uni-sb.de/~lindig/papers/pretty/strictly-pretty.html]]
 
 Philip Wadler, A prettier printer, March 1998,
-((<URL:http://homepages.inf.ed.ac.uk/wadler/topics/language-design.html#prettier>))
+[[url:http://homepages.inf.ed.ac.uk/wadler/topics/language-design.html#prettier]]
+
+
+== Class Methods
+--- new([output[, maxwidth[, newline]]]) [{|width| ...}]
+
+pretty printing のためのバッファを生成します。
+output は出力先で、
+もし指定されなければ '' が仮定されます。
+このオブジェクトは次のものを受け付ける <<
+メソッドを持っていなければなりません。それは、
+PrettyPrint#text の第1引数 obj、
+PrettyPrint#breakable の第1引数 sep、
+PrettyPrint.new の第1引数 newline
+および
+PrettyPrint.new に与えられたブロックを評価した結果です。
+
+maxwidth は行の最大幅を指定します。
+与えられない場合は 79 が仮定されます。
+ただし、改行できないものが渡された場合は
+実際の出力幅は maxwidth を越えることがあります。
+
+newline は改行に使われます。
+指定されない場合は "\n" が仮定されます。
+
+ブロックは空白を生成します。
+指定されない場合は {|width| ' ' * width} が使われます。
+
+--- format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
+
+以下と同じ働きをするもので簡便のために用意されています。
+
+  begin
+    pp = PrettyPrint.new(output, maxwidth, newline, &genspace)
+    ...
+    pp.flush
+    output
+  end
+
+--- singleline_format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
+
+PrettyPrint.format に似ていますが、改行しません。引数
+maxwidth, newline と genspace は無視されます。ブロッ
+ク中の breakable の実行は、改行せずに text の実行であるか
+のように扱います。
+
+== Instance Methods
+--- text(obj[, width])
+
+obj を width カラムのテキストとして追加します。
+
+width が指定されなかった場合、obj.length が利用されます。
+
+--- breakable([sep[, width]])
+
+「必要ならここで改行出来る」ということを通知します。
+もしその位置で改行されなければ、
+widthカラムのテキスト sep がそこに挿入されます。
+
+sep が指定されなければ " " が利用されます。
+
+width が指定されなければ、sep.length が利用されます。
+例えば sep が多バイト文字の際に指定する必要があるかも知れません。
+
+--- nest(indent) {...}
+
+ブロックの中で追加された改行の後の左マージンを indent ぶんだけ
+増加させます。
+
+--- group([indent[, open_obj[, close_obj[, open_width[, close_width]]]]]) {...}
+
+ブロック内で追加された改行のヒントをグループ化します。
+
+indent が指定された場合、このメソッド呼び出しは
+nest(indent) { ... } でネストしているものとして扱われます。
+
+open_obj が指定された場合、text open_obj, open_width が
+最初に呼ばれます。
+close_obj が指定された場合、text close_obj, close_width が
+最後に呼ばれます。
+
+--- flush
+
+バッファされたデータを出力します。
+
+--- first?
+
+現在のグループで first? に対する最初の呼び出しかどうかを判定する
+述語です。
+これはカンマで区切られた値を整形するのに有用です。
+
+  pp.group(1, '[', ']') {
+    xxx.each {|yyy|
+      unless pp.first?
+        pp.text ','
+        pp.breakable
+      end
+      ... pretty printing yyy ...
+    }
+  }
