@@ -1,62 +1,76 @@
-= UNIXServer
+= class UNIXServer < UNIXSocket
 
 UNIXストリーム型接続のサーバ側のソケットのクラス。
 
-== スーパークラス:
+== Class Methods
 
-* ((<UNIXSocket>))
+--- open(path)
+--- new(path)
 
-== クラスメソッド:
+path で指定したパス名を用いて接続を受け付けるソケットを返
+します。
 
---- UNIXServer.open(path)
---- UNIXServer.new(path)
-    ((|path|))で指定したパス名を用いて接続を受け付けるソケットを返
-    します。
-
-== メソッド:
+== Instance Methods
 
 --- accept
 
-    クライアントからの接続要求を受け付け、接続した
-    ((<UNIXSocket>))のインスタンスを返します。
+クライアントからの接続要求を受け付け、接続した
+[[c:UNIXSocket]] のインスタンスを返します。
 
-      UNIXServer.open("/tmp/s") {|serv|
-        c = UNIXSocket.open("/tmp/s")
-        s = serv.accept
-        s.write "from server"
-        c.write "from client"
-        p c.recv(20)    #=> "from server"
-        p s.recv(20)    #=> "from client"
-      }
+例:
 
+  UNIXServer.open("/tmp/s") {|serv|
+    c = UNIXSocket.open("/tmp/s")
+    s = serv.accept
+    s.write "from server"
+    c.write "from client"
+    p c.recv(20)    #=> "from server"
+    p s.recv(20)    #=> "from client"
+  }
+
+#@if (version >= "1.8.5")
 --- accept_nonblock
-    ((<ruby 1.8.5 feature>))
 
-    ソケットをノンブロッキングモードに設定した後、
-    (({accept(2)}))を呼び出します。
+((<ruby 1.8.5 feature>))
 
-    引数、返り値は ((<UNIXServer/accept>)) と同じです。
+ソケットをノンブロッキングモードに設定した後、
+[[man:accept(2)]] を呼び出します。
 
-    (({accept(2)}))がエラーになった場合、
-    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。
+引数、返り値は [[m:UNIXServer#accept]] と同じです。
 
---- listen(backlog)       ((<ruby 1.7 feature>))
+[[man:accept(2)]] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
+#@end
 
-    ((<listen(2)|manual page>)) を実行します。
-    (((<Socket/listen>))と同じ)
+#@if (version >= "1.7.0")
+--- listen(backlog)
 
-    ((|backlog|)) は、クライアントからの接続要求を保留できる数です。
-    UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
+((<ruby 1.7 feature>))
 
-    ((<listen(2)|manual page>)) が成功すれば 0 を返します。
-    失敗すれば 例外 ((<Errno::EXXX>)) が発生します。
 
---- sysaccept           ((<ruby 1.7 feature>))
+[[man:listen(2)]] を実行します。
+([[m:Socket#listen]]と同じ)
 
-    接続したクライアントのソケットをファイル記述子で返すことを除けば 
-    ((<UNIXServer/accept>)) と同じです。
+backlog は、クライアントからの接続要求を保留できる数です。
+UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
-      UNIXServer.open("/tmp/s") {|serv|
-        c = UNIXSocket.open("/tmp/s")
-        p serv.sysaccept        #=> 6
-      }
+[[man:listen(2)]] が成功すれば 0 を返します。
+失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
+#@end
+
+#@if (version >= "1.7.0")
+--- sysaccept
+
+((<ruby 1.7 feature>))
+
+
+接続したクライアントのソケットをファイル記述子で返すことを除けば
+[[m:UNIXServer#accept]] と同じです。
+
+例:
+
+  UNIXServer.open("/tmp/s") {|serv|
+    c = UNIXSocket.open("/tmp/s")
+    p serv.sysaccept        #=> 6
+  }
+#@end

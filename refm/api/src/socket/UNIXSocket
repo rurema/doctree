@@ -1,80 +1,111 @@
-= UNIXSocket
+= class UNIXSocket < BasicSocket
 
-UNIXドメインのストリーム型ソケットのクラス。通常の
-((<IO>))クラスのサブクラスと同様の
+UNIX ドメインのストリーム型ソケットのクラス。通常の
+[[c:IO]] クラスのサブクラスと同様の
 入出力ができます。
 
-== スーパークラス:
+== Class Methods
 
-* ((<BasicSocket>))
+--- open(path)
+--- new(path)
 
-== クラスメソッド:
+path で指定したパス名を用いて接続したソケットを返
+します。
 
---- UNIXSocket.open(path)
---- UNIXSocket.new(path)
-    ((|path|))で指定したパス名を用いて接続したソケットを返
-    します。
+#@if (version >= "1.7.0")
+--- pair([type[, protocol]])
 
---- UNIXSocket.pair([type[, protocol]])  ((<ruby 1.7 feature>))
---- UNIXSocket.socketpair([type[, protocol]])  ((<ruby 1.7 feature>))
-    相互に結合されたUNIXソケットのペアを含む2要素の配列を返します。
-    ((|type|)) が省略された場合、Socket::SOCK_STREAM が使われます。
-    ((|protocol|)) が省略された場合、0 が使われます。
+((<ruby 1.7 feature>))
+#@end
 
-== メソッド:
+#@if (version >= "1.7.0")
+--- socketpair([type[, protocol]])
+
+((<ruby 1.7 feature>))
+
+相互に結合された UNIX ソケットのペアを含む2要素の配列を返します。
+type が省略された場合、Socket::SOCK_STREAM が使われます。
+protocol が省略された場合、0 が使われます。
+#@end
+
+== Instance Methods
 
 --- addr
-    ソケットの接続情報を表す配列を返します。配列の各要素は第1要
-    素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
 
-      UNIXServer.open("/tmp/s") {|serv|
-        p serv.addr     #=> ["AF_UNIX", "/tmp/s"]
-      }
+ソケットの接続情報を表す配列を返します。配列の各要素は第1要
+素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
+
+例:
+
+  UNIXServer.open("/tmp/s") {|serv|
+    p serv.addr     #=> ["AF_UNIX", "/tmp/s"]
+  }
 
 --- path
-    UNIXソケットのパスを返します。
 
-      UNIXServer.open("/tmp/s") {|serv|
-        p serv.path     #=> "/tmp/s"
-      }
+UNIX ソケットのパスを返します。
+
+例:
+
+  UNIXServer.open("/tmp/s") {|serv|
+    p serv.path     #=> "/tmp/s"
+  }
 
 --- peeraddr
-    接続相手先ソケットの情報を表す配列を返します。配列の各要素は
-    ((<UNIXSocket#addr|UNIXSocket/addr>))メソッドが返す配列
-    と同じです。
 
-      UNIXServer.open("/tmp/s") {|serv|
-        c = UNIXSocket.open("/tmp/s")
-        p c.peeraddr    #=> ["AF_UNIX", "/tmp/s"]
-      }
+接続相手先ソケットの情報を表す配列を返します。配列の各要素は
+[[m:UNIXSocket#addr]] メソッドが返す配列
+と同じです。
+
+例:
+
+  UNIXServer.open("/tmp/s") {|serv|
+    c = UNIXSocket.open("/tmp/s")
+    p c.peeraddr    #=> ["AF_UNIX", "/tmp/s"]
+  }
 
 --- recvfrom(maxlen[, flags])
-    (({recv}))と同様にソケットからデータを受け取りますが、
-    戻り値は文字列と相手ソケットのパスのペアです。引数につい
-    てはrecvと同様です。
 
-      UNIXServer.open("/tmp/s") {|serv|
-        c = UNIXSocket.open("/tmp/s")
-        s = serv.accept
-        s.send "a", 0
-        p c.recvfrom(10)[0]     #=> "a"
-      }
+recv と同様にソケットからデータを受け取りますが、
+戻り値は文字列と相手ソケットのパスのペアです。引数につい
+ては recv と同様です。
 
---- recv_io([klass[, mode]])  ((<ruby 1.7 feature>))
-    ソケットの接続先からファイルディスクリプタを受け取ります。
+例:
 
-    ((|klass|)) が nil の場合、ファイルディスクリプタが Fixnum として
-    返されます。
+  UNIXServer.open("/tmp/s") {|serv|
+    c = UNIXSocket.open("/tmp/s")
+    s = serv.accept
+    s.send "a", 0
+    p c.recvfrom(10)[0]     #=> "a"
+  }
 
-    ((|klass|)) が nil でない場合、
-    (({((|klass|)).for_fd(fd[, ((|mode|))])})) が呼ばれ、その値が返されます。
-    ((|klass|)) が省略された場合は (({IO})) が指定されたものとみなされ、
-    (({IO.for_fd(fd[, ((|mode|))])})) が呼ばれます。
+#@if (version >= "1.7.0")
+--- recv_io([klass[, mode]])
 
-      s1, s2 = UNIXSocket.pair         
-      s1.send_io STDOUT
-      io = s2.recv_io
-      p File.identical?(io, STDOUT)     #=> true
+((<ruby 1.7 feature>))
 
---- send_io(io)  ((<ruby 1.7 feature>))
-    IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
+ソケットの接続先からファイルディスクリプタを受け取ります。
+
+klass が nil の場合、ファイルディスクリプタが Fixnum として
+返されます。
+
+klass が nil でない場合、
+klass.for_fd(fd[, mode]) が呼ばれ、その値が返されます。
+klass が省略された場合は IO が指定されたものとみなされ、
+IO.for_fd(fd[, mode]) が呼ばれます。
+
+例:
+
+  s1, s2 = UNIXSocket.pair
+  s1.send_io STDOUT
+  io = s2.recv_io
+  p File.identical?(io, STDOUT)     #=> true
+#@end
+
+#@if (version >= "1.7.0")
+--- send_io(io)
+
+((<ruby 1.7 feature>))
+
+IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
+#@end

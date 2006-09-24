@@ -1,150 +1,180 @@
-= BasicSocket
+= class BasicSocket < IO
 
-ソケットを表す抽象クラス。具体的なソケット操作はサブクラスで
+ソケットを表す抽象クラスです。具体的なソケット操作はサブクラスで
 定義されます。
 例えばインターネットドメインストリームソケットの場合は
-((<TCPSocket>))を用います。
+[[c:TCPSocket]] を用います。
 
-== スーパークラス:
+== Class Methods
 
-* ((<IO>))
+--- do_not_reverse_lookup
+--- do_not_reverse_lookup=(bool)
 
-== クラスメソッド:
+この値が真ならアドレスからホスト名への逆引きを行わなくなります。
+デフォルトは false です。この設定は大域的に作用します。
 
---- BasicSocket.do_not_reverse_lookup
---- BasicSocket.do_not_reverse_lookup = bool
-    この値が真ならアドレスからホスト名への逆引きを行わなくなります。
-    デフォルトは false です。この設定は大域的に作用します。
+以下のメソッドの動作に影響します。
 
-    以下のメソッドの動作に影響します。
+  * [[m:BasicSocket#recv]]
+  * [[m:IPSocket#recvfrom]]
+  * [[m:UNIXSocket#recvfrom]]
+  * [[m:Socket#recvfrom]]
+  * [[m:IPSocket#addr]]
+  * [[m:IPSocket#peeraddr]]
+  * [[m:Socket#Socket.getaddrinfo]]
 
-    ((<BasicSocket#recv|BasicSocket/recv>)),
-    ((<IPSocket#recvfrom|IPSocket/recvfrom>)),
-    ((<UNIXSocket#recvfrom|UNIXSocket/recvfrom>)),
-    ((<Socket#recvfrom|Socket/recvfrom>)),
-    ((<IPSocket#addr|IPSocket/addr>)),
-    ((<IPSocket#peeraddr|IPSocket/peeraddr>)),
-    ((<Socket/Socket.getaddrinfo>))
+例:
 
-    例:
+  require 'socket'
+  
+  p TCPSocket.new('localhost', 'telnet').addr
+  TCPSocket.do_not_reverse_lookup = true
+  p TCPSocket.new('localhost', 'telnet').addr
+  
+  => ["AF_INET", 2253, "localhost", "127.0.0.1"]
+     ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
 
-        require 'socket'
+#@if (version >= "1.7.0")
+--- for_fd(fd)
 
-        p TCPSocket.new('localhost', 'telnet').addr
-        TCPSocket.do_not_reverse_lookup = true
-        p TCPSocket.new('localhost', 'telnet').addr
+((<ruby 1.7 feature>))
 
-        => ["AF_INET", 2253, "localhost", "127.0.0.1"]
-           ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
 
---- BasicSocket.for_fd(fd)           ((<ruby 1.7 feature>))
+ファイルディスクリプタ fd に対する新しいソケットを生成します。
 
-    ファイルディスクリプタ ((|fd|)) に対する新しいソケットを生成します。
+((<ruby 1.7 feature>)):
+このメソッドは [[c:Socket]] クラスからこのクラスに移動しました。
+これにより、任意のソケットである fd から対応するソケッ
+トクラスを作ることができます。
+#@end
 
-    ((<ruby 1.7 feature>)):
-    このメソッドは ((<Socket>)) クラスからこのクラスに移動しました。
-    これにより、任意のソケットである fd から対応するソケッ
-    トクラスを作ることができます。
+== Instance Methods
 
-== メソッド:
+#@if (version >= "1.9.0")
+--- do_not_reverse_lookup
 
---- do_not_reverse_lookup               ((<ruby 1.9 feature>))
---- do_not_reverse_lookup=              ((<ruby 1.9 feature>))
-    アドレスからホスト名への逆引きの設定をソケットごとに設定します。
-    初期値はソケットを生成したときの 
-    BasicSocket.do_not_reverse_lookup になります。
+((<ruby 1.9 feature>))
+#@end
+
+#@if (version >= "1.9.0")
+--- do_not_reverse_lookup=(bool)
+
+((<ruby 1.9 feature>))
+
+アドレスからホスト名への逆引きの設定をソケットごとに設定します。
+初期値はソケットを生成したときの
+BasicSocket.do_not_reverse_lookup になります。
+#@end
 
 --- getpeername
-    接続の相手先のソケットの情報を取得します。sockaddr構造体をパッ
-    クした文字列を返します。(({getpeername(2)}))を参照の
-    こと。
 
-      serv = TCPServer.open("", 0)
-      c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
-      s = serv.accept
-      addr = c.getpeername 
-      p addr      #=> "\002\000\267\214\177\000\000\001\000\000\000\000\000\000\000\000"
-      p Socket.unpack_sockaddr_in(addr)   #=> [46988, "127.0.0.1"]
-      p addr == s.getsockname     #=> true
+接続の相手先のソケットの情報を取得します。sockaddr 構造体をパッ
+クした文字列を返します。[[man:getpeername(2)]] を参照してください。
+
+例:
+
+  serv = TCPServer.open("", 0)
+  c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
+  s = serv.accept
+  addr = c.getpeername
+  p addr      #=> "\002\000\267\214\177\000\000\001\000\000\000\000\000\000\000\000"
+  p Socket.unpack_sockaddr_in(addr)   #=> [46988, "127.0.0.1"]
+  p addr == s.getsockname     #=> true
 
 --- getsockname
-    ソケットの情報を取得します。sockaddr構造体をパックした
-    文字列を返します。(({getsockname(2)}))を参照のこと。
 
-      serv = TCPServer.open("", 0)
-      p serv.getsockname        #=> "\002\000\236C\000\000\000\000\000\000\000\000\000\000\000\000"
-      p Socket.unpack_sockaddr_in(serv.getsockname)     #=> [40515, "0.0.0.0"]
-      c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
-      s = serv.accept
+ソケットの情報を取得します。sockaddr 構造体をパックした
+文字列を返します。[[man:getsockname(2)]] を参照してください。
+
+例:
+
+  serv = TCPServer.open("", 0)
+  p serv.getsockname        #=> "\002\000\236C\000\000\000\000\000\000\000\000\000\000\000\000"
+  p Socket.unpack_sockaddr_in(serv.getsockname)     #=> [40515, "0.0.0.0"]
+  c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
+  s = serv.accept
 
 --- getsockopt(level, optname)
-    ソケットのオプションを取得します。(({getsockopt(2)}))
-    を参照のこと。取得したオプションのデータをパックした文字列を
-    返します。
 
-      serv = TCPServer.open("", 0)
-      c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
-      s = serv.accept
-      p c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)  #=> "\000\000\000\000"
-      p opt.unpack("i")[0]                                      #=> 0   (Nagle アルゴリズム有効)
+ソケットのオプションを取得します。[[man:getsockopt(2)]]
+を参照してください。取得したオプションのデータをパックした文字列を
+返します。
+
+例:
+
+  serv = TCPServer.open("", 0)
+  c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
+  s = serv.accept
+  p c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)  #=> "\000\000\000\000"
+  p opt.unpack("i")[0]                                      #=> 0   (Nagle アルゴリズム有効)
 
 --- recv(maxlen[, flags])
-    ソケットからデータを受け取り、文字列として返します。
-    ((|maxlen|))は受け取る最大の長さを指定します。
-    ((|flags|))についてはrecv(2)を参照。((|flags|))の
-    デフォルト値は0です。((|flags|))の指定に必要な定数は
-    Socketクラスで定義されています。(例: Socket::MSG_PEEK)
 
-    内部で呼び出す recv(2) が 0 を返した場合、このメソッドは "" を返します。
-    この意味はソケットによって異なります。
-    たとえば TCP では EOF を意味しますし、
-    UDP では空のパケットを読み込んだことを意味します。
+ソケットからデータを受け取り、文字列として返します。
+maxlen は受け取る最大の長さを指定します。
+flags については [[man:recv(2)]] を参照してください。flags の
+デフォルト値は 0 です。flags の指定に必要な定数は
+Socket クラスで定義されています。(例: Socket::MSG_PEEK)
 
-      s1, s2 = UNIXSocket.pair
-      s1.write "a"
-      s1.close
-      p s2.recv(10, Socket::MSG_PEEK)   #=> "a"
-      p s2.recv(10)                     #=> "a"
-      p s2.recv(10)                     #=> ""
+内部で呼び出す [[man:recv(2)]] が 0 を返した場合、このメソッドは "" を返します。
+この意味はソケットによって異なります。
+たとえば TCP では EOF を意味しますし、
+UDP では空のパケットを読み込んだことを意味します。
 
+例:
+
+  s1, s2 = UNIXSocket.pair
+  s1.write "a"
+  s1.close
+  p s2.recv(10, Socket::MSG_PEEK)   #=> "a"
+  p s2.recv(10)                     #=> "a"
+  p s2.recv(10)                     #=> ""
+
+#@if (version >= "1.8.5")
 --- recv_nonblock(maxlen[, flags])
     ((<ruby 1.8.5 feature>))
 
-    ソケットをノンブロッキングモードに設定した後、
-    (({recvfrom(2)}))でソケットからデータを受け取ります。
+ソケットをノンブロッキングモードに設定した後、
+[[man:recvfrom(2)]] でソケットからデータを受け取ります。
 
-    引数、返り値は ((<BasicSocket/recv>)) と同じです。
+引数、返り値は [[m:BasicSocket#recv]] と同じです。
 
-    (({recvfrom(2)}))がエラーになった場合、
-    EAGAIN, EINTR を含め例外 ((<Errno::EXXX>)) が発生します。
+[[man:recvfrom(2)]] がエラーになった場合、
+EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
+#@end
 
 --- send(mesg, flags[, dest_sockaddr])
 
-    ソケットを介してデータを送ります。((|flags|)) に関しては 
-    (({send(2)})) を参照してください。(({connect})) していないソケット
-    に対しては送り先である ((|dest_sockaddr|)) を指定する必要があります。実際に送っ
-    たデータの長さを返します。
+ソケットを介してデータを送ります。flags に関しては
+[[man:send(2)]] を参照してください。connect していないソケット
+に対しては送り先である dest_sockaddr を指定する必要があります。実際に送っ
+たデータの長さを返します。
 
-    ((|dest_sockaddr|)) には((<socket/ソケットアドレス構造体を pack した文字列>))
-    を指定します。
+dest_sockaddr には[[m:socket#ソケットアドレス構造体を pack した文字列]]
+を指定します。
 
-    データの送信に失敗した場合は例外 ((<Errno::EXXX>)) が発生します。
+データの送信に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-      s = UDPSocket.new
-      sockaddr = Socket.sockaddr_in("discard", "localhost")
-      s.send("The king has donkey ears!", 0, sockaddr)
+例:
+
+  s = UDPSocket.new
+  sockaddr = Socket.sockaddr_in("discard", "localhost")
+  s.send("The king has donkey ears!", 0, sockaddr)
 
 --- setsockopt(level, optname, optval)
-    ソケットのオプションを設定します。((<setsockopt(2)|manual page>))
-    を参照のこと。((-より高レベルなものとして((<RAA:Sockopt>))があります-))
+
+ソケットのオプションを設定します。[[man:setsockopt(2)]]
+を参照してください。
+#@# より高レベルなものとして[[c:RAA:Sockopt]]があります
 
 --- shutdown([how])
-    ソケットの以降の接続を終了させます。
-    ((|how|)) の値によって以下のように接続が終了します。
 
-    * Socket::SHUT_RD: それ以降の受信が拒否されます
-    * Socket::SHUT_WR: それ以降の送信が拒否されます
-    * Socket::SHUT_RDWR: それ以降の送信、受信ともに拒否されます
+ソケットの以降の接続を終了させます。
+how の値によって以下のように接続が終了します。
 
-    ((|how|))を省略すると Socket::SHUT_RDWR を指定したことになります。
-    (({shutdown(2)}))を参照。
+  * Socket::SHUT_RD: それ以降の受信が拒否されます
+  * Socket::SHUT_WR: それ以降の送信が拒否されます
+  * Socket::SHUT_RDWR: それ以降の送信、受信ともに拒否されます
+
+how を省略すると Socket::SHUT_RDWR を指定したことになります。
+[[man:shutdown(2)]] を参照してください。

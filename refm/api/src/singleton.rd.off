@@ -1,27 +1,32 @@
-= Singleton
-== 目的・概要
-Mix-inによりsingletonパターンを提供する。
+= module Singleton
+=== 目的・概要
+Mix-in により singleton パターンを提供します。
 
-Singletonモジュールをincludeすることにより、クラスは
-高々ひとつのインスタンスしか持たないことが保証される。
+Singleton モジュールを include することにより、クラスは
+高々ひとつのインスタンスしか持たないことが保証されます。
 
-Singletonをmix-inしたクラスの
-クラスメソッド(({instance}))はその唯一のインスタンスを返す。
+Singleton を mix-in したクラスの
+クラスメソッド instance はその唯一のインスタンスを返します。
 
-(({new}))はprivateメソッドに移され、外部から呼び出そうとするとエラーになる。
-== サンプルコード
-       class SomeSingletonClass
-         include Singleton
-        #....
-       end
-       a = SomeSingletonClass.instance
-       b = SomeSingletonClass.instance  # a and b are same object
-       p [a,b]
-       a = SomeSingletonClass.new               # error (`new' is private)
-== モジュールメソッド
---- Singleton#instance
-            そのクラスの唯一のインスタンスを返す。
-            最初に呼ばれたときはそのインスタンスを生成する。
+new は private メソッドに移され、外部から呼び出そうとするとエラーになります。
 
-            Singletonをincludeしたクラスで定義されるので、
-            正確にはSingletonモジュールのメソッドではない。
+=== サンプルコード
+
+  class SomeSingletonClass
+    include Singleton
+   #....
+  end
+  a = SomeSingletonClass.instance
+  b = SomeSingletonClass.instance  # a and b are same object
+  p [a,b]
+  a = SomeSingletonClass.new               # error (`new' is private)
+
+== Instance Methods
+
+--- instance
+
+そのクラスの唯一のインスタンスを返します。
+最初に呼ばれたときはそのインスタンスを生成します。
+
+Singleton を include したクラスで定義されますので、
+正確には Singleton モジュールのメソッドではありません。

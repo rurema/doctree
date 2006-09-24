@@ -1,48 +1,50 @@
-= TCPSocket
+= class TCPSocket < IPSocket
 
 インターネットドメインのストリーム型ソケットのクラス。通常の
-((<IO>))クラスのサブクラスと同
+[[c:IO]] クラスのサブクラスと同
 様の入出力ができます。このクラスによってソケットを用いたクラ
 イアントを簡単に記述できるようになります。ユーザの入力をその
 ままサーバに転送するプログラムは以下のようになります。
 
   require "socket"
-
+  
   port = if ARGV.size > 0 then ARGV.shift else 4444 end
   print port, "\n"
-
+  
   s = TCPSocket.open("localhost", port)
-
+  
   while gets
     s.write($_)
     print(s.gets)
   end
   s.close
 
-== スーパークラス:
+== Class Methods
 
-* ((<IPSocket>))
+--- open(host, service [, local_host, local_service])
+--- new(host, service [, local_host, local_service])
 
-==  クラスメソッド:
+host で指定したホストの service で指定したポートと接続したソケッ
+トを返します。host はホスト名、または octet decimal
+によるインターネットアドレスを示す文字列、service
+は /etc/services (または NIS) に登録されているサー
+ビス名かポート番号です。
 
---- TCPSocket.open(host, service [, local_host, local_service])
---- TCPSocket.new(host, service [, local_host, local_service])
-    hostで指定したホストのserviceで指定したポートと接続したソケッ
-    トを返します。((|host|))はホスト名、またはoctet decimal
-    によるインターネットアドレスを示す文字列、((|service|))
-    は(({/etc/services}))(またはNIS)に登録されているサー
-    ビス名かポート番号です。
+#@if (version >= "1.7.0")
+((<ruby 1.7 feature>)):
+引数 local_host, local_service を指定した場合、そのアドレス
+に対して [[man:bind(2)]] します。
+#@end
 
-    ((<ruby 1.7 feature>)):
-    引数 ((|local_host|)), ((|local_service|)) を指定した場合、そのアドレス
-    に対して((<bind(2)|manual page>))します。
+--- gethostbyname(host)
 
---- TCPSocket.gethostbyname(host)
-    ホスト名またはIPアドレス(整数または(({"127.0.0.1"}))
-    のような文字列)からホストの情報を返します。ホスト情報は、ホ
-    スト名、ホストの別名の配列、ホストのアドレスタイプ、ホストの
-    アドレスを各要素とする配列です。ホストのアドレスはoctet
-    decimalの文字列((({"127.0.0.1"}))のような文字列)です。
+ホスト名または IP アドレス (整数または"127.0.0.1"
+のような文字列)からホストの情報を返します。ホスト情報は、ホ
+スト名、ホストの別名の配列、ホストのアドレスタイプ、ホストの
+アドレスを各要素とする配列です。ホストのアドレスは octet
+decimal の文字列 ("127.0.0.1"のような文字列) です。
 
-      p TCPSocket.gethostbyname("www.ruby-lang.org")
-      #=> ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
+例:
+
+  p TCPSocket.gethostbyname("www.ruby-lang.org")
+  #=> ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
