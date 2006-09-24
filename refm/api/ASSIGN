@@ -195,7 +195,7 @@ readbytes                       sheepman        converted
 readline                        sheepman        converted
 resolv                          date            converted
 resolv-replace                  date            converted
-rexml
+rexml                           date
 ri
 rinda/rinda                     aamine          syntaxok
 rinda/tuplespace                aamine          syntaxok
@@ -208,9 +208,9 @@ set                             sheepman
 sha1                            sheepman
 shell                           sheepman
 shellwords                      sheepman        converted
-singleton
-soap
-socket
+singleton                       date
+soap                            date
+socket                          date
 stringio                        iwadon          converted
 strscan                         iwadon          syntaxok
 sync                            iwadon          syntaxok
@@ -227,7 +227,7 @@ tracer                          iwadon          converted
 tsort                           iwadon          converted
 un                              iwadon          converted
 uri                             iwadon          converted
-weakref
+weakref                         date
 webrick                         sheepman        converted 
 webrick/cgi                     sheepman        converted
 webrick/ssl                     sheepman        converted
