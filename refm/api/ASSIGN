@@ -231,9 +231,9 @@ weakref                         date            converted
 webrick                         sheepman        converted 
 webrick/cgi                     sheepman        converted
 webrick/ssl                     sheepman        converted
-win32/registry
-win32ole
-xmlrpc
-yaml
-yaml/store
-zlib
+win32/registry                  date
+win32ole                        date
+xmlrpc                          date
+yaml                            date
+yaml/store                      date
+zlib                            date
