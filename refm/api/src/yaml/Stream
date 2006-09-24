@@ -1,4 +1,4 @@
-= class YAML::Stream
+= class YAML::Stream < Object
 
 ((<¼¹É®¼ÔÊç½¸>))
 

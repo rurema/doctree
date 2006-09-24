@@ -1,75 +1,71 @@
-= Zlib::GzipWriter
+= class Zlib::GzipWriter < Zlib::GzipFile
 
-((<zlib>))
+[[lib:zlib]]
 
 gzip 形式の圧縮ファイルを書き出すラッパークラス。
 IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 持つオブジェクト) と関連付けて使用します。
 
-    Zlib::GzipWriter.open('hoge.gz') {|gz|
-      gz.write 'jugemu jugemu gokou no surikire...'
-    }
-
-    f = File.open('hoge.gz', 'w')
-    gz = Zlib::GzipWriter.new(f)
+  Zlib::GzipWriter.open('hoge.gz') {|gz|
     gz.write 'jugemu jugemu gokou no surikire...'
-    gz.close
+  }
+  
+  f = File.open('hoge.gz', 'w')
+  gz = Zlib::GzipWriter.new(f)
+  gz.write 'jugemu jugemu gokou no surikire...'
+  gz.close
 
 なお、Ruby の finalizer の制約のため、GzipWriter オブジェクトは必ず
-((<Zlib::GzipWriter#close|Zlib::GzipWriter/close>)) 等を用いてクローズしてください。
+[[m:Zlib::GzipWriter#close]] 等を用いてクローズしてください。
 そうしなければフッターを書き出すことができず、壊れた gzip ファイルを
 生成してしまう可能性があります。
 
-== スーパークラス:
+== Class Methods
 
-* ((<Zlib::GzipFile>))
+--- new(io[, level[, strategy]])
 
-== クラスメソッド:
+io と関連付けられた GzipWriter オブジェクトを作成します。
+level, strategy は [[m:Zlib::Deflate.new]] と同じです。
+GzipWriter オブジェクトは io に gzip 形式のデータを
+逐次ライトします。io には少なくとも、IO#write と
+同じ動作をする write メソッドが定義されている必要があります。
 
---- GzipWriter.new(io[, level[, strategy]])
+--- wrap(io[, level[, strategy]]) {|gz| ... }
 
-    ((|io|)) と関連付けられた GzipWriter オブジェクトを作成します。
-    ((|level|)), ((|strategy|)) は ((<Zlib::Deflate.new|Zlib::Deflate/Deflate.new>)) と同じです。
-    GzipWriter オブジェクトは ((|io|)) に gzip 形式のデータを
-    逐次ライトします。((|io|)) には少なくとも、IO#write と
-    同じ動作をする write メソッドが定義されている必要があります。
+io と関連付けられた GzipWriter オブジェクトを作成し、
+それを引数としてブロックを実行します。
+ブロックの実行が終了すると、GzipWriter オブジェクトは自動的に
+クローズされます。関連付けられている IO オブジェクトまで
+クローズしたくない時は、ブロック中で [[m:Zlib::GzipFile#finish]]
+メソッドを呼び出して下さい。
 
---- GzipWriter.wrap(io[, level[, strategy]]) {|gz| ... }
+--- open(filename[, level[, strategy]])
+--- open(filename[, level[, strategy]]) {|gz| ... }
 
-    ((|io|)) と関連付けられた GzipWriter オブジェクトを作成し、
-    それを引数としてブロックを実行します。
-    ブロックの実行が終了すると、GzipWriter オブジェクトは自動的に
-    クローズされます。関連付けられている IO オブジェクトまで
-    クローズしたくない時は、ブロック中で ((<Zlib::GzipFile#finish|Zlib::GzipFile/finish>))
-    メソッドを呼び出して下さい。
-
---- GzipWriter.open(filename[, level[, strategy]])
---- GzipWriter.open(filename[, level[, strategy]]) {|gz| ... }
-
-    ((|filename|)) で指定されるファイルを gzip 圧縮データの
-    書き出し用にオープンします。GzipWriter オブジェクトを返します。
-    その他詳細は ((<GzipWriter.new|Zlib::GzipWriter/GzipWriter.new>)) や ((<GzipWriter.wrap|Zlib::GzipWriter/GzipWriter.wrap>)) と
-    同じです。
+filename で指定されるファイルを gzip 圧縮データの
+書き出し用にオープンします。GzipWriter オブジェクトを返します。
+その他詳細は [[m:GzipWriter.new]] や [[m:GzipWriter.wrap]] と
+同じです。
 
 
-== メソッド:
+== Instance Methods
 
 --- close
 --- finish
 
-    フッターを書き出し、GzipWriter オブジェクトをクローズします。close と
-    finish の違いは ((<Zlib::GzipFile#close|Zlib::GzipFile/close>)), ((<Zlib::GzipFile#finish|Zlib::GzipFile/finish>)) を
-    参照して下さい。
+フッターを書き出し、GzipWriter オブジェクトをクローズします。close と
+finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
+参照して下さい。
 
-    ((*注意: Ruby の finalizer の制約のため、GzipWriter オブジェクトは
-    必ずクローズしてください。そうしなければフッターを書き出すことが
-    できず、壊れた gzip ファイルを生成してしまう可能性があります。*))
+注意: Ruby の finalizer の制約のため、GzipWriter オブジェクトは
+必ずクローズしてください。そうしなければフッターを書き出すことが
+できず、壊れた gzip ファイルを生成してしまう可能性があります。
 
 --- pos
 --- tell
 
-    現在までに圧縮したデータの長さの合計を返します。
-    ファイルポインタの位置ではないことに注意して下さい。
+現在までに圧縮したデータの長さの合計を返します。
+ファイルポインタの位置ではないことに注意して下さい。
 
 --- << str
 --- putc(ch)
@@ -78,32 +74,32 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 --- printf(format, arg...)
 --- write(str)
 
-    IO クラスの同名メソッドと同じ。
+IO クラスの同名メソッドと同じ。
 
 --- flush([flush])
 
-    まだ書き出されていないデータをフラッシュします。
-    ((|flush|)) は ((<Zlib::Deflate#deflate|Zlib::Deflate/deflate>)) と同じです。
-    省略時は Zlib::SYNC_FLUSH が使用されます。
-    ((|flush|)) に Zlib::NO_FLUSH を指定することは無意味です。
+まだ書き出されていないデータをフラッシュします。
+flush は [[m:Zlib::Deflate#deflate]] と同じです。
+省略時は Zlib::SYNC_FLUSH が使用されます。
+flush に Zlib::NO_FLUSH を指定することは無意味です。
 
---- mtime= time
+--- mtime=(time)
 
-    gzip ファイルのヘッダーに記録する最終更新時間を指定します。
-    ((<Zlib::GzipWriter#write|Zlib::GzipWriter/write>)) 等の書き込み系メソッドを
-    呼んだ後で指定しようとすると ((<Zlib::GzipFile::Error>)) 例外が
-    発生します。
+gzip ファイルのヘッダーに記録する最終更新時間を指定します。
+[[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
+呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
+発生します。
 
---- orig_name= filename
+--- orig_name=(filename)
 
-    gzip ファイルのヘッダーに記録する元ファイル名を指定します。
-    ((<Zlib::GzipWriter#write|Zlib::GzipWriter/write>)) 等の書き込み系メソッドを
-    呼んだ後で指定しようとすると ((<Zlib::GzipFile::Error>)) 例外が
-    発生します。
+gzip ファイルのヘッダーに記録する元ファイル名を指定します。
+[[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
+呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
+発生します。
 
---- comment= string
+--- comment=(string)
 
-    gzip ファイルのヘッダーに記録するコメントを指定します。
-    ((<Zlib::GzipWriter#write|Zlib::GzipWriter/write>)) 等の書き込み系メソッドを
-    呼んだ後で指定しようとすると ((<Zlib::GzipFile::Error>)) 例外が
-    発生します。
+gzip ファイルのヘッダーに記録するコメントを指定します。
+[[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
+呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
+発生します。

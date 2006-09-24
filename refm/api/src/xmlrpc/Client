@@ -1,53 +1,58 @@
-= XMLRPC::Client
+#@if (version >= "1.8.0")
+= class XMLRPC::Client < Object
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
-((<XMLRPC>))
+[[c:XMLRPC]]
 
 XML-RPC サーバにプロシジャを実行させるためのクラスです。
 
-== クラスメソッド
+== Class Methods
 
---- Client.new( host = "localhost", path = "/RPC2", port = 80 or 443, proxy_host = nil, proxy_port = nil, user = nil, password = nil, use_ssl = false, timeout = 30)
-    Client オブジェクトを生成します。
+--- new(host = "localhost", path = "/RPC2", port = 80 or 443, proxy_host = nil, proxy_port = nil, user = nil, password = nil, use_ssl = false, timeout = 30)
 
---- Client.new2( uri, proxy = nil, timeout = 30)
-    Client オブジェクトを生成します。((|uri|)) は文字列です。((|proxy|)) は
-    "proxy.eample.com:8080" のような文字列です。
-    
-      require 'xmlrpc/client'
-      serv = XMLRPC::Client.new2('http://www.example.com/RPC2')
-      serv.call("sample.sumAndDifference", 5, 3)
+Client オブジェクトを生成します。
 
---- Client.new3( hash = {} )
-    
-    ((<Hash>)) オブジェクト ((|hash|)) から Client オブジェクトを生成します。
-    有効なハッシュのキーはそれぞれ文字列     
-      * host
-      * path
-      * port
-      * proxy_host
-      * proxy_port
-      * user
-      * password
-      * use_ssl
-      * timeout 
-    です。
+--- new2(uri, proxy = nil, timeout = 30)
+
+Client オブジェクトを生成します。uri は文字列です。proxy は
+"proxy.eample.com:8080" のような文字列です。
+
+例:
+
+  require 'xmlrpc/client'
+  serv = XMLRPC::Client.new2('http://www.example.com/RPC2')
+  serv.call("sample.sumAndDifference", 5, 3)
+
+--- new3(hash = {})
+
+[[c:Hash]] オブジェクト hash から Client オブジェクトを生成します。
+有効なハッシュのキーはそれぞれ文字列
+  * host
+  * path
+  * port
+  * proxy_host
+  * proxy_port
+  * user
+  * password
+  * use_ssl
+  * timeout
+です。
 
 
-== メソッド
+== Instance Methods
 
---- call( method, *args )
+--- call(method, *args)
 
---- call2( method, *args )
+--- call2(method, *args)
 
---- multicall( *methods )
+--- multicall(*methods)
 
---- multicall2( *methods )
+--- multicall2(*methods)
 
---- proxy( prefix, *args )
+--- proxy(prefix, *args)
 
---- proxy2( prefix, *args )
+--- proxy2(prefix, *args)
 
 --- call_async(...)
 --- call2_async(...)
@@ -57,22 +62,23 @@ XML-RPC サーバにプロシジャを実行させるためのクラスです。
 --- proxy2_async(...)
 
 --- timeout
---- timeout=
+--- timeout=(seconds)
 
 --- user
---- user=
+--- user=(user)
 
 --- password
---- password=
+--- password=(password)
 
---- set_writer( writer )
+--- set_writer(writer)
 
---- set_parser( parser )
+--- set_parser(parser)
 
 --- cookie
---- cookie=
+--- cookie=(cookie)
 
 --- http_header_extra
---- http_header_extra=
+--- http_header_extra=(header)
 
 --- http_last_response
+#@end

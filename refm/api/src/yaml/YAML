@@ -5,39 +5,39 @@ YAML (YAML Ain't Markup Language) を扱うクラスです。
 === 参考
 
 * YAML Specification
-  * ((<URL:http://www.yaml.org/spec/>))
-  * ((<URL:http://www.yaml.org/type/>))
+  * [[m:URL:http:#/www.yaml.org/spec/]]
+  * [[m:URL:http:#/www.yaml.org/type/]]
 * YAML4R
-  * ((<URL:http://yaml4r.sourceforge.net/>))
-  * ((<URL:http://yaml4r.sourceforge.net/cookbook/>))
-  * ((<URL:http://yaml4r.sourceforge.net/doc/>))
-* ((<Ruby with YAML|URL:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html>))
-* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
-  * ((<プログラマーのための YAML 入門 (初級編)|URL:http://jp.rubyist.net/magazine/?0009-YAML>)) 
-  * ((<プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML>))
-  * ((<プログラマーのための YAML 入門 (実践編)|URL:http://jp.rubyist.net/magazine/?0011-YAML>))
-  * ((<プログラマーのための YAML 入門 (検証編)|URL:http://jp.rubyist.net/magazine/?0012-YAML>))
-  * ((<プログラマーのための YAML 入門 (探索編)|URL:http://jp.rubyist.net/magazine/?0013-YAML>))
+  * [[m:URL:http:#/yaml4r.sourceforge.net/]]
+  * [[m:URL:http:#/yaml4r.sourceforge.net/cookbook/]]
+  * [[m:URL:http:#/yaml4r.sourceforge.net/doc/]]
+* [[unknown:Ruby with YAML|URL:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
+* [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
+  * [[unknown:プログラマーのための YAML 入門 (初級編)|URL:http://jp.rubyist.net/magazine/?0009-YAML]]
+  * [[unknown:プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML]]
+  * [[unknown:プログラマーのための YAML 入門 (実践編)|URL:http://jp.rubyist.net/magazine/?0011-YAML]]
+  * [[unknown:プログラマーのための YAML 入門 (検証編)|URL:http://jp.rubyist.net/magazine/?0012-YAML]]
+  * [[unknown:プログラマーのための YAML 入門 (探索編)|URL:http://jp.rubyist.net/magazine/?0013-YAML]]
 
 == Module Functions
 
 --- add_builtin_type
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 --- add_domain_type
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 --- add_private_type
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 --- add_ruby_type
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
---- dump( obj, io = nil )
+--- dump(obj, io = nil)
 
 与えられた obj を YAML フォーマットに変換し、io に書き込みます。
 io が与えられていない場合は、YAML フォーマットの文字列を返します。
@@ -49,44 +49,44 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
 
 与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
 
-    require "yaml"
-    puts YAML.dump_stream( "hoge\nfoo", [1,2], {"foo" => "bar"} )
-    --- |-
-    hoge
-    foo
-    ---
-    - 1
-    - 2
-    ---
-    foo: bar
+  require "yaml"
+  puts YAML.dump_stream( "hoge\nfoo", [1,2], {"foo" => "bar"} )
+  --- |-
+  hoge
+  foo
+  ---
+  - 1
+  - 2
+  ---
+  foo: bar
 
---- each_document(io){|obj| ...}
---- load_documents(io){|obj| ...}
+--- each_document(io) {|obj| ...}
+--- load_documents(io) {|obj| ...}
 
 与えられた io から YAML フォーマットの文書をすべて順に読み込み
 Ruby のオブジェクトに変換し、
 生成したオブジェクトを引数としてブロックを評価していきます。
-  
-    # sample.yml
-    - apple 
-    - banana 
-    - carrot 
-    ---
-    foo: bar
 
-    #!/usr/bin/env ruby
-    require "yaml"
-    File.open( 'sample.yml' ) do |io|
-      YAML.load_documents(io){|y|
-        p y
-      }
-    end
-    #=>   ["apple", "banana", "carrot"]
-    #=>   {"foo"=>"bar"}
+  # sample.yml
+  - apple
+  - banana
+  - carrot
+  ---
+  foo: bar
+  
+  #!/usr/bin/env ruby
+  require "yaml"
+  File.open( 'sample.yml' ) do |io|
+    YAML.load_documents(io){|y|
+      p y
+    }
+  end
+  #=>   ["apple", "banana", "carrot"]
+  #=>   {"foo"=>"bar"}
 
 --- each_node
 
-    ((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 --- load(io)
 --- load(str)
@@ -96,16 +96,16 @@ YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 io や 文字列が複数の YAML ドキュメントを含んでいても、最初のものしか
 Ruby のオブジェクトに変換しません。
 
-    $ ruby-1.8 -ryaml -e '
-    p YAML.load(<<HERE)
-    - apple
-    - banana
-    - carrot
-    --- 
-    foo: bar
-    HERE
-    '
-    ["apple", "banana", "carrot"]
+  $ ruby-1.8 -ryaml -e '
+  p YAML.load(<<HERE)
+  - apple
+  - banana
+  - carrot
+  ---
+  foo: bar
+  HERE
+  '
+  ["apple", "banana", "carrot"]
 
 --- load_file(file)
 
@@ -114,7 +114,7 @@ Ruby のオブジェクトを生成して返します。
 ファイルが複数の YAML ドキュメントを含んでいても、
 最初のものしか Ruby のオブジェクトに変換しません。
 
---- load_stream(io) 
+--- load_stream(io)
 
 与えられた io から YAML フォーマットの文書を
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
@@ -122,12 +122,12 @@ Ruby のオブジェクトを生成して返します。
 
 --- parse
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 --- parse_documents
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 --- parse_file
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]

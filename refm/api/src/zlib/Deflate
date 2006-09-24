@@ -1,75 +1,71 @@
-= Zlib::Deflate
+= class Zlib::Deflate < Zlib::ZStream
 
-((<zlib>))
+[[lib:zlib]]
 
-== スーパークラス:
+== Class Methods
 
-* ((<Zlib::ZStream>))
+--- deflate(string[, level])
 
-== クラスメソッド:
+string を圧縮します。level の有効な値は
+Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
+Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
+及び 0 から 9 の整数です。
 
---- Deflate.deflate(string[, level])
+ちなみに、このメソッドは以下のコードとほぼ同じです:
 
-    ((|string|)) を圧縮します。((|level|)) の有効な値は
-    Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
-    Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
-    及び 0 から 9 の整数です。
+  def deflate(string, level)
+    z = Zlib::Deflate.new(level)
+    dst = z.deflate(string, Zlib::FINISH)
+    z.close
+    dst
+  end
 
-    ちなみに、このメソッドは以下のコードとほぼ同じです:
+--- new([level[, windowBits[, memlevel[, strategy]]]])
 
-      def deflate(string, level)
-        z = Zlib::Deflate.new(level)
-        dst = z.deflate(string, Zlib::FINISH)
-        z.close
-        dst
-      end
+圧縮ストリームを作成します。各引数の詳細は zlib.h を
+参照して下さい。nil の場合はデフォルトの値を使用します。
 
---- Deflate.new([level[, windowBits[, memlevel[, strategy]]]])
-
-    圧縮ストリームを作成します。各引数の詳細は zlib.h を
-    参照して下さい。nil の場合はデフォルトの値を使用します。
-
-== メソッド:
+== Instance Methods
 
 --- clone
 
-    圧縮ストリームを複製します。
+圧縮ストリームを複製します。
 
 --- deflate(string[, flush])
 
-    ((|string|)) を圧縮ストリームに入力します。処理後、ストリームからの
-    出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
-    空になります。((|string|)) が nil の場合はストリームへの入力を
-    終了します。(((<Zlib::ZStream#finish|Zlib::ZStream/finish>)) と同じ)。
-    ((|flush|)) には Zlib::NO_FLUSH, Zlib::SYNC_FLUSH,
-    Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
-    詳しくは zlib.h を参照して下さい。
+string を圧縮ストリームに入力します。処理後、ストリームからの
+出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
+空になります。string が nil の場合はストリームへの入力を
+終了します。([[m:Zlib::ZStream#finish]] と同じ)。
+flush には Zlib::NO_FLUSH, Zlib::SYNC_FLUSH,
+Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
+詳しくは zlib.h を参照して下さい。
 
 --- << string
 
-    ((<Zlib::Deflate#deflate|Zlib::Deflate/deflate>)) と同じように ((|string|)) を
-    圧縮ストリームに入力しますが、Zlib::Deflate オブジェクト
-    そのものを返します。圧縮ストリームからの出力は、
-    出力バッファに保存されます。
+[[m:Zlib::Deflate#deflate]] と同じように string を
+圧縮ストリームに入力しますが、Zlib::Deflate オブジェクト
+そのものを返します。圧縮ストリームからの出力は、
+出力バッファに保存されます。
 
 --- flush([flush])
 
-    (({deflate('', ((|flush|)))})) と同じです。((|flush|)) が
-    省略された時は ((<Zlib::SYNC_FLUSH|Zlib/Zlib::SYNC_FLUSH>)) が使用されます。
-    このメソッドはスクリプトの可読性のために提供されています。
+deflate('', flush) と同じです。flush が
+省略された時は [[unknown:Zlib::SYNC_FLUSH|Zlib/Zlib::SYNC_FLUSH]] が使用されます。
+このメソッドはスクリプトの可読性のために提供されています。
 
 --- finish
 
-    圧縮ストリームを終了します。(({deflate('', Zlib::FINISH)})) と同じです。
+圧縮ストリームを終了します。deflate('', Zlib::FINISH) と同じです。
 
 --- params(level, strategy)
 
-    圧縮ストリームの設定を変更します。詳しくは zlib.h を
-    参照して下さい。設定の変更に伴うストリームからの出力は
-    出力バッファに保存されます。
+圧縮ストリームの設定を変更します。詳しくは zlib.h を
+参照して下さい。設定の変更に伴うストリームからの出力は
+出力バッファに保存されます。
 
 --- set_dictionary(string)
 
-    圧縮に用いる辞書を指定します。((|string|)) を返します。
-    このメソッドは ((<Zlib::Deflate.new|Zlib::Deflate/new>)), ((<Zlib::ZStream#reset|Zlib::ZStream/reset>))
-    を呼び出した直後にのみ有効です。詳細は zlib.h を参照して下さい。
+圧縮に用いる辞書を指定します。string を返します。
+このメソッドは [[m:Zlib::Deflate.new]], [[m:Zlib::ZStream#reset]]
+を呼び出した直後にのみ有効です。詳細は zlib.h を参照して下さい。

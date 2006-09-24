@@ -1,26 +1,22 @@
-= Zlib::GzipFile::Error
+= class Zlib::GzipFile::Error < Zlib::Error
 
-((<zlib>))
+[[lib:zlib]]
 
 gzip ファイルを処理している間にエラーが生じた時に発生する全ての例外の
 スーパークラス。
 
 次の例外が Zlib::GzipFile::Error のサブクラスとして定義されています。
 
-: Zlib::GzipFile::NoFooter
+= class Zlib::GzipFile::NoFooter < Zlib::GzipFile::Error
 
-    gzip ファイルにフッターが無い時に発生します。
+gzip ファイルにフッターが無い時に発生します。
 
-: Zlib::GzipFile::CRCError
+= class Zlib::GzipFile::CRCError < Zlib::GzipFile::Error
 
-    フッターに記録されている CRC 値と実際に展開したデータの CRC 値が
-    異なる時に発生します。
+フッターに記録されている CRC 値と実際に展開したデータの CRC 値が
+異なる時に発生します。
 
-: Zlib::GzipFile::LengthError
+= class Zlib::GzipFile::LengthError < Zlib::GzipFile::Error
 
-    フッターに記録されているデータ長と実際に展開したデータの
-    長さが異なる時に発生します。
-
-== スーパークラス:
-
-* ((<Zlib::Error>))
+フッターに記録されているデータ長と実際に展開したデータの
+長さが異なる時に発生します。

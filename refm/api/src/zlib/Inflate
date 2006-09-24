@@ -1,83 +1,79 @@
-= Zlib::Inflate
+= class Zlib::Inflate < Zlib::ZStream
 
 入力データを展開するストリームのクラス。Zlib::Deflate と違い、
 このクラスのインスタンスを複製 (clone, dup) することはできません。
 
-== スーパークラス:
-
-* ((<Zlib::ZStream>))
-
-== クラスメソッド:
-
---- Inflate.inflate(string)
-
-    ((|string|)) を展開します。展開に辞書が必要な場合には
-    Zlib::NeedDict 例外が発生します。
-
-    ちなみに、このメソッドは以下のコードとほぼ同じです:
-
-      def inflate(string)
-        zstream = Zlib::Inflate.new
-        buf = zstream.inflate(string)
-        zstream.finish
-        zstream.close
-        buf
-      end
-
---- Inflate.new([windowBits])
-
-    展開ストリームを作成します。引数の詳細は zlib.h を参照して下さい。
-    nil の場合はデフォルトの値を使用します。
-
-== メソッド:
+== Class Methods
 
 --- inflate(string)
 
-    ((|string|)) を展開ストリームに入力します。処理後、ストリームからの
-    出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
-    空になります。((|string|)) が nil の場合はストリームへの入力を
-    終了します。(((<Zlib::ZStream#finish|Zlib::ZStream/finish>)) と同じ)。
+string を展開します。展開に辞書が必要な場合には
+Zlib::NeedDict 例外が発生します。
 
-    展開に辞書が必要な場合には Zlib::NeedDict 例外が発生します。
-    ((<Zlib::Inflate/set_dictionary>)) メソッドで辞書をセットした
-    後で、空文字列と共にこのメソッドを再度呼び出して下さい。
+ちなみに、このメソッドは以下のコードとほぼ同じです:
+
+  def inflate(string)
+    zstream = Zlib::Inflate.new
+    buf = zstream.inflate(string)
+    zstream.finish
+    zstream.close
+    buf
+  end
+
+--- new([windowBits])
+
+展開ストリームを作成します。引数の詳細は zlib.h を参照して下さい。
+nil の場合はデフォルトの値を使用します。
+
+== Instance Methods
+
+--- inflate(string)
+
+string を展開ストリームに入力します。処理後、ストリームからの
+出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
+空になります。string が nil の場合はストリームへの入力を
+終了します。([[m:Zlib::ZStream#finish]] と同じ)。
+
+展開に辞書が必要な場合には Zlib::NeedDict 例外が発生します。
+[[m:Zlib::Inflate#set_dictionary]] メソッドで辞書をセットした
+後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
 --- << string
 
-    ((<Zlib::Inflate/inflate>)) と同じように ((|string|)) を
-    展開ストリームに入力しますが、Zlib::Inflate オブジェクト
-    そのものを返します。展開ストリームからの出力は、
-    出力バッファに保存されます。
+[[m:Zlib::Inflate#inflate]] と同じように string を
+展開ストリームに入力しますが、Zlib::Inflate オブジェクト
+そのものを返します。展開ストリームからの出力は、
+出力バッファに保存されます。
 
 --- finish
 
-    展開ストリームを終了します。
-    ストリーム内に残っていたデータ (つまり圧縮データの後についていた
-    ゴミデータ) を返します。
-    ((<Zlib::ZStream#finished?|Zlib::ZStream/finished?>)) が真でない時に finish を呼ぶと
-    例外が発生します。
+展開ストリームを終了します。
+ストリーム内に残っていたデータ (つまり圧縮データの後についていた
+ゴミデータ) を返します。
+[[m:Zlib::ZStream#finished?]] が真でない時に finish を呼ぶと
+例外が発生します。
 
-    展開ストリームは圧縮データ内に終了コードを発見した時点で
-    自ら終了するため、明示的に finish を呼ぶ必要は必ずしも
-    ありませんが、このメソッドは圧縮データが正しく終了しているかを
-    確認するのに便利です。
+展開ストリームは圧縮データ内に終了コードを発見した時点で
+自ら終了するため、明示的に finish を呼ぶ必要は必ずしも
+ありませんが、このメソッドは圧縮データが正しく終了しているかを
+確認するのに便利です。
 
 --- set_dictionary(string)
 
-    展開に用いる辞書を指定します。((|string|)) を返します。
-    このメソッドは Zlib::NeedDict 例外が発生した直後のみ
-    有効です。詳細は zlib.h を参照して下さい。
+展開に用いる辞書を指定します。string を返します。
+このメソッドは Zlib::NeedDict 例外が発生した直後のみ
+有効です。詳細は zlib.h を参照して下さい。
 
 --- sync(string)
 
-    ((|string|)) を入力バッファの末尾に追加し、次の full flush
-    point まで読み飛ばします。入力バッファ内に full flush point
-    が存在しない場合は、入力バッファを空にし false を返します。
-    入力バッファ内に full flush point が見つかった場合は
-    true を返し、残りのデータは入力バッファ内に保持されます。
+string を入力バッファの末尾に追加し、次の full flush
+point まで読み飛ばします。入力バッファ内に full flush point
+が存在しない場合は、入力バッファを空にし false を返します。
+入力バッファ内に full flush point が見つかった場合は
+true を返し、残りのデータは入力バッファ内に保持されます。
 
 --- sync_point?
 
-    What is this?
-    ((- ((<原文|"ruby-src:ext/zlib/doc/zlib.rd">))のまま。 -))
-    (((<執筆者募集>)))
+What is this?
+#@# [[unknown:原文|"ruby-src:ext/zlib/doc/zlib.rd"]]のまま。
+([[unknown:執筆者募集]])
