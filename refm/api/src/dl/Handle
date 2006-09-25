@@ -1,26 +1,26 @@
-= class DL::Handle
+= class DL::Handle < Object
 
 == Class Methods
 
---- Handle.new(lib)
---- Handle.new(lib) {|handle| ... }
+--- new(lib)
+--- new(lib) {|handle| ... }
 
-    ライブラリ lib をオープンし、Handle オブジェクト handle を返す。
+ライブラリ lib をオープンし、Handle オブジェクト handle を返します。
 
-    ブロックを指定すれば、
-    オープンしたハンドルをブロック引数に渡してブロックを実行する.
-    ハンドルはブロックの終りで自動的にクローズされる。
+ブロックを指定すれば、
+オープンしたハンドルをブロック引数に渡してブロックを実行します。
+ハンドルはブロックの終りで自動的にクローズされます。
 
 == Instance Methods
 
 --- close
 
-    Handle.new(lib) によってオープンされたハンドルをクローズする。
+Handle.new(lib) によってオープンされたハンドルをクローズします。
 
 --- sym(func, prototype = "0"),
---- self[func, prototype = nil]
+--- [](func, prototype = nil)
 
-    関数 func (訳注: やグローバル変数？) へのポインタを取得し、
-    ((<DL::Symbol>)) オブジェクトや ((<DL::PtrData>)) オブジェクトを返す。
-    prototype は型修飾からなる文字列で関数のプロトタイプを示す。
-    ((<DL/Type specifiers>)) も参照。
+関数 func (訳注: やグローバル変数？) へのポインタを取得し、
+[[c:DL::Symbol]] オブジェクトや [[c:DL::PtrData]] オブジェクトを返します。
+prototype は型修飾からなる文字列で関数のプロトタイプを示します。
+[[m:DL#Type specifiers]] も参照。

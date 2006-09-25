@@ -1,82 +1,90 @@
-= DL::PtrData
+= class DL::PtrData < Object
 
-((<DL>))
+[[c:DL]]
 
-== クラスメソッド
---- PtrData.new(addr, [size = 0, free = nil])
-    アドレス ((|addr|)) を指すポインタに相当する PtrData オブジェクトを返す。
-    GC は ((|free|)) 関数を使用してメモリを解放する。
+== Class Methods
+--- new(addr, [size = 0, free = nil])
 
-== メソッド
+アドレス addr を指すポインタに相当する PtrData オブジェクトを返します。
+GC は free 関数を使用してメモリを解放します。
+
+== Instance Methods
 --- free=(sym)
-    シンボルオブジェクト ((|sym|)) を指定した場合、GC は sym に相当する関数
-    を使ってメモリを解放する。
+
+シンボルオブジェクト sym を指定した場合、GC は sym に相当する関数
+を使ってメモリを解放します。
 
 --- free
-    GC がメモリを解放するのに使用するシンボルオブジェクト sym を返す。
-    sym は普通 PtrData#free= や PtrData.new によって設定される。
+
+GC がメモリを解放するのに使用するシンボルオブジェクト sym を返します。
+sym は普通 PtrData#free= や PtrData.new によって設定されます。
 
 --- size
 --- size=(size)
-    サイズ ((|size|)) を割り当てたメモリを取得および設定する。
+
+サイズ size を割り当てたメモリを取得および設定します。
 
 --- to_a(type, [size])
-    ((|type|)) で指定された型の配列を返す。type は 'S','P','I','L','D' そし
-    て 'F' のいずれか。
+
+type で指定された型の配列を返します。type は 'S','P','I','L','D' そし
+て 'F' のいずれかです。
 
 --- to_s([len])
-    長さ ((|len|)) の文字列を返す。len を省略した場合は、文字列の終りは '\0'。
+
+長さ len の文字列を返します。len を省略した場合は、文字列の終りは '\0'。
 
 --- ptr
---- + self
-#   * returns the pointed value as a PtrData object ptr.
+--- +@
+#@#   * returns the pointed value as a PtrData object ptr.
 
-  * ポインタが指す値を PtrData オブジェクト ptr で返す。(訳注:？)
-    (訳注:PtrDataが指す値をポインタであるとして、PtrData にして返す(？))
+ポインタが指す値を PtrData オブジェクト ptr で返します。(訳注:？)
+(訳注:PtrDataが指す値をポインタであるとして、PtrData にして返す(？))
 
 --- ref
---- - self
-#   * returns the reference as a PtrData object ptr.
+--- -@
+#@#   * returns the reference as a PtrData object ptr.
 
-    参照を PtrData オブジェクト ptr で返す。(訳注:？)
-    (訳注:PtrDataへの参照を、PtrData にして返す(？))
-    (訳注:PtrDataを指すポインタを、PtrData にして返す(？))
+参照を PtrData オブジェクト ptr で返します。(訳注:？)
+(訳注:PtrDataへの参照を、PtrData にして返す(？))
+(訳注:PtrDataを指すポインタを、PtrData にして返す(？))
 
---- self + n
-#   * returns the PtrData object
+--- +(n)
+#@#   * returns the PtrData object
 
-    PtrData オブジェクトを返す。(訳注: 引数バイトを足した新しい 
-    PtrData オブジェクトを返す)
+PtrData オブジェクトを返します。(訳注: 引数バイトを足した新しい
+PtrData オブジェクトを返す)
 
---- self - n
-#   * returns the PtrData object
+--- -(n)
+#@#   * returns the PtrData object
 
-    PtrData オブジェクトを返す。(訳注: 引数バイトを引いた新しい 
-    PtrData オブジェクトを返す)
+PtrData オブジェクトを返します。(訳注: 引数バイトを引いた新しい
+PtrData オブジェクトを返す)
 
 --- struct!(type, *members)
-#   * defines the data type to get access to a structure member with a symbol.
-#     (see also PtrData#[])
+#@#   * defines the data type to get access to a structure member with a symbol.
+#@#     (see also PtrData#[])
 
-    構造体メンバをシンボルでアクセスするデータ型を定義する(PtrData#[]
-    も参照)
+構造体メンバをシンボルでアクセスするデータ型を定義します (PtrData#[]
+も参照)。
 
 --- union!(type, *members)
-#   * defines the data type to get access to a union member with a symbol. (see
-#     also PtrData#[])
+#@#   * defines the data type to get access to a union member with a symbol. (see
+#@#     also PtrData#[])
 
-    共用体メンバをシンボルでアクセスするデータ型を定義する(PtrData#[]
-    も参照)
+共用体メンバをシンボルでアクセスするデータ型を定義します (PtrData#[]
+も参照)。
 
---- self[key]
---- self[key, num = 0]
-    ((|key|)) が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
-    を返す。それは PtrData#{struct!,union!} によって定義された型を持つ。
-    ((|key|)) が整数でこのオブジェクトがポインタ ptr に相当するなら、
-    (ptr + key).to_s(num) の値を返す。
+--- [](key)
+--- [](key, num = 0)
 
---- self[key, num]= val
---- self[key]= val
-    ((|key|)) が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
-    を val にする。((|key|)) が整数で ((|val|)) が文字列なら memcpy(3) を使ってメ
-    モリ領域 ptr への値の ((|num|)) バイトをコピーする。
+key が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
+を返します。それは PtrData#{struct!,union!} によって定義された型を持ちます。
+key が整数でこのオブジェクトがポインタ ptr に相当するなら、
+(ptr + key).to_s(num) の値を返します。
+
+--- []=(key, num, val)
+--- []=(key, val)
+
+key が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
+を val にします。key が整数で val が文字列なら [[man:memcpy(3)] を使ってメ
+モリ領域 ptr への値の num バイトをコピーします。
