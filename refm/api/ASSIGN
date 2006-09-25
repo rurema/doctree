@@ -116,12 +116,12 @@ digest/md5                      iwadon          syntaxok
 digest/rmd160                   iwadon          syntaxok
 digest/sha1                     iwadon          syntaxok
 digest/sha2                     iwadon          converted
-dl
-dl/Symbol
-dl/import
-dl/struct
-dl/types
-dl/win32
+dl                              date
+dl/Symbol                       date
+dl/import                       date
+dl/struct                       date
+dl/types                        date
+dl/win32                        date
 drb                             date            syntaxok
 e2mmap                          date            syntaxok
 erb                             date            syntaxok
