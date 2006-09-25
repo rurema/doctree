@@ -1,308 +1,16 @@
-= shell
+require "e2mmap"
+require "thread"
 
-Author: Keiju ISHITSUKA
+#@# Author: Keiju ISHITSUKA
 
-*((<shell/目的>))
-*((<shell/主なクラス一覧>))
-  *((<shell/Shell>))
-  *((<shell/Filter>))
-*((<shell/主なメソッド一覧>))
-  *((<shell/コマンド定義>))
-  *((<shell/生成>))
-  *((<shell/プロセス管理>))
-  *((<shell/カレントディレクトリ操作>))
-  *((<shell/"ファイル/ディレクトリ操作">))
-  *((<shell/コマンド実行>))
-  *((<shell/内部コマンド>))
-  *((<shell/組込みコマンド>))
-*((<shell/サンプル>))
-
-== 目的
+=== 目的
 
 ruby上でsh/cshのようにコマンドの実行及びフィルタリングを手軽に行う.
 sh/cshの制御文はrubyの機能を用いて実現する.
 
-== 主なクラス一覧
+=== サンプル
 
-=== Shell
-
-Shellオブジェクトはカレントディレクトリを持ち, コマンド実行はそこからの
-相対パスになります.
-
---- Shell#cwd
---- Shell#dir
---- Shell#getwd
---- Shell#pwd
-
-      カレントディレクトリを返す。
-
---- Shell#system_path
-
-      コマンドサーチパスの配列を返す。
-
---- Shell#umask
-
-      umaskを返す。
-
-=== Filter
-
-コマンドの実行結果はすべてFilterとしてかえります. Enumerableをincludeし
-ています.
-
-== 主なメソッド一覧
-
-=== コマンド定義
-
-OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
-
-注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
-
---- Shell.def_system_command(command, path = command)
-
-      Shellのメソッドとしてcommandを登録します. 
-
-      例)
-      Shell.def_system_command "ls"
-        ls を定義
-
-      Shell.def_system_command "sys_sort", "sort"
-        sortコマンドをsys_sortとして定義
-
---- Shell.undef_system_command(command)
-
-      commandを削除します.
-
---- Shell.alias_command(ali, command, *opts) {...}
-
-      commandのaliasをします. 
-
-      例)
-        Shell.alias_command "lsC", "ls", "-CBF", "--show-control-chars"
-        Shell.alias_command("lsC", "ls"){|*opts| ["-CBF", "--show-control-chars", *opts]}
-
---- Shell.unalias_command(ali)
-
-      commandのaliasを削除します.
-
---- Shell.install_system_commands(pre = "sys_")
-
-      system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
-      ド名は元のファイル名の頭にpreをつけたものとなる.
-
-=== 生成
-
---- Shell.new
-
-      プロセスのカレントディレクトリをカレントディレクトリとするShellオ
-      ブジェクトを生成します.
-
---- Shell.cd(path)
-
-      pathをカレントディレクトリとするShellオブジェクトを生成します.
-
-=== プロセス管理
-
---- Shell#jobs
-
-      スケジューリングされているjobの一覧を返す.
-
---- Shell#kill(sig, job)
-
-      jobにシグナルsigを送る
-
-=== カレントディレクトリ操作
-
---- Shell#cd(path, &block)
---- Shell#chdir
-
-      カレントディレクトリをpathにする. イテレータとして呼ばれたときには
-      ブロック実行中のみカレントディレクトリを変更する.
-
---- Shell#pushd(path = nil, &block)
---- Shell#pushdir
-
-      カレントディレクトリをディレクトリスタックにつみ, カレントディレク
-      トリをpathにする. pathが省略されたときには, カレントディレクトリと
-      ディレクトリスタックのトップを交換する. イテレータとして呼ばれたと
-      きには, ブロック実行中のみpushdする.
-
---- Shell#popd
---- Shell#popdir
-
-      ディレクトリスタックからポップし, それをカレントディレクトリにする.
-
-=== ファイル/ディレクトリ操作
-
---- Shell#foreach(path = nil, &block)
-
-      pathがファイルなら, File#foreach
-      pathがディレクトリなら, Dir#foreach
-
---- Shell#open(path, mode)
-
-      pathがファイルなら, File#open
-      pathがディレクトリなら, Dir#open
-
---- Shell#unlink(path)
-
-      pathがファイルなら, File#unlink
-      pathがディレクトリなら, Dir#unlink
-
---- Shell#test(command, file1, file2)
---- Shell#[](command, file1, file2)
-
-      ファイルテスト関数testと同じ. 
-      例)
-          sh[?e, "foo"]
-          sh[:e, "foo"]
-          sh["e", "foo"]
-          sh[:exists?, "foo"]
-          sh["exists?", "foo"]
-
---- Shell#mkdir(*path)
-
-      Dir.mkdirと同じ(複数可)
-
---- Shell#rmdir(*path)
-
-      Dir.rmdirと同じ(複数可)
-
-=== コマンド実行
-
---- System#system(command, *opts)
-
-      commandを実行する.
-      例)
-        print sh.system("ls", "-l")
-        sh.system("ls", "-l") | sh.head > STDOUT
-
---- System#rehash
-
-      リハッシュする
-
---- Shell#transact{ ... }
-
-      ブロック中ではshellをselfとして実行する.
-      例)
-        sh.transact{system("ls", "-l") | head > STDOUT}
-
---- Shell#out(dev = STDOUT, &block)
-
-      transactを呼び出しその結果をdevに出力する.
-
-=== 内部コマンド
-
---- Shell#echo(*strings)
---- Shell#cat(*files)
---- Shell#glob(patten)
---- Shell#tee(file)
-
-      これらは実行すると, それらを内容とするFilterオブジェクトを返します. 
-
---- Filter#each
-
-      フィルタの一行ずつをblockに渡す.
-
---- Filter#<(src)
-
-      srcをフィルタの入力とする. srcが, 文字列ならばファイルを, IOであれ
-      ばそれをそのまま入力とする.
-
---- Filter#>(to)
-
-      srcをフィルタの出力とする. toが, 文字列ならばファイルに, IOであれ
-      ばそれをそのまま出力とする.
-
---- Filter#>>(to)
-
-      srcをフィルタに追加する. toが, 文字列ならばファイルに, IOであれば
-      それをそのまま出力とする.
-
---- Filter#|(filter)
-
-      パイプ結合
-
---- Filter#+(filter)
-
-      filter1 + filter2 は filter1の出力の後, filter2の出力を行う.
-
---- Filter#to_a
---- Filter#to_s
-
-=== 組込みコマンド
-
---- Shell#atime(file)
---- Shell#basename(file, *opt)
---- Shell#chmod(mode, *files)
---- Shell#chown(owner, group, *file)
---- Shell#ctime(file)
---- Shell#delete(*file)
---- Shell#dirname(file)
---- Shell#ftype(file)
---- Shell#join(*file)
---- Shell#link(file_from, file_to)
---- Shell#lstat(file)
---- Shell#mtime(file)
---- Shell#readlink(file)
---- Shell#rename(file_from, file_to)
---- Shell#split(file)
---- Shell#stat(file)
---- Shell#symlink(file_from, file_to)
---- Shell#truncate(file, length)
---- Shell#utime(atime, mtime, *file)
-
-      これらはFileクラスにある同名のクラスメソッドと同じです.
-
---- Shell#blockdev?(file)
---- Shell#chardev?(file)
---- Shell#directory?(file)
---- Shell#executable?(file)
---- Shell#executable_real?(file)
---- Shell#exist?(file)/Shell#exists?(file)
---- Shell#file?(file)
---- Shell#grpowned?(file)
---- Shell#owned?(file)
---- Shell#pipe?(file)
---- Shell#readable?(file)
---- Shell#readable_real?(file)
---- Shell#setgid?(file)
---- Shell#setuid?(file)
---- Shell#size(file)/Shell#size?(file)
---- Shell#socket?(file)
---- Shell#sticky?(file)
---- Shell#symlink?(file)
---- Shell#writable?(file)
---- Shell#writable_real?(file)
---- Shell#zero?(file)
-
-      これらはFileTestクラスにある同名のクラスメソッドと同じです.
-
---- Shell#syscopy(filename_from, filename_to)
---- Shell#copy(filename_from, filename_to)
---- Shell#move(filename_from, filename_to)
---- Shell#compare(filename_from, filename_to)
---- Shell#safe_unlink(*filenames)
---- Shell#makedirs(*filenames)
---- Shell#install(filename_from, filename_to, mode)
-
-      これらはFileToolsクラスにある同名のクラスメソッドと同じです.
-
-      その他, 以下のものがエイリアスされています.
-
---- Shell#cmp    
-    Shell#compare と同じです。
---- Shell#mv     
-    Shell#move と同じです。
---- Shell#cp     
-    Shell#copy と同じです。
---- Shell#rm_f   
-    Shell#safe_unlink と同じです。
---- Shell#mkpath 
-    Shell#makedirs と同じです。
-
-== サンプル
-
-=== ex1
+==== ex1
 
   sh = Shell.cd("/tmp")
   sh.mkdir "shell-test-1" unless sh.exists?("shell-test-1")
@@ -319,7 +27,7 @@ OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
     end
   end
 
-=== ex2
+==== ex2
 
   sh = Shell.cd("/tmp")
   sh.transact do
@@ -338,13 +46,330 @@ OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
     end
   end
 
-=== ex3
+==== ex3
 
   sh.cat("/etc/printcap") | sh.tee("tee1") > "tee2"
   (sh.cat < "/etc/printcap") | sh.tee("tee11") > "tee12"
   sh.cat("/etc/printcap") | sh.tee("tee1") >> "tee2"
   (sh.cat < "/etc/printcap") | sh.tee("tee11") >> "tee12"
 
-=== ex4
+==== ex4
 
   print sh.cat("/etc/passwd").head.collect{|l| l =~ /keiju/}
+
+
+= class Shell::Filter < Object
+include Enumerable
+
+コマンドの実行結果はすべてFilterとしてかえります. 
+
+== Instance Methods
+
+--- each
+
+フィルタの一行ずつをblockに渡す.
+
+--- <(src)
+
+srcをフィルタの入力とする. srcが, 文字列ならばファイルを, IOであれ
+ばそれをそのまま入力とする.
+
+--- >(to)
+
+srcをフィルタの出力とする. toが, 文字列ならばファイルに, IOであれ
+ばそれをそのまま出力とする.
+
+--- >>(to)
+
+srcをフィルタに追加する. toが, 文字列ならばファイルに, IOであれば
+それをそのまま出力とする.
+
+--- |(filter)
+
+パイプ結合
+
+--- +(filter)
+
+filter1 + filter2 は filter1の出力の後, filter2の出力を行う.
+
+--- to_a
+--- to_s
+
+= class Shell < Object
+
+Shellオブジェクトはカレントディレクトリを持ち, コマンド実行はそこからの
+相対パスになります.
+
+== Class Methods
+
+#@#=== コマンド定義
+#@#OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
+#@#注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
+
+--- def_system_command(command, path = command)
+
+Shellのメソッドとしてcommandを登録します.
+
+OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
+注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
+
+例)
+Shell.def_system_command "ls"
+  ls を定義
+
+Shell.def_system_command "sys_sort", "sort"
+  sortコマンドをsys_sortとして定義
+
+--- undef_system_command(command)
+
+commandを削除します.
+
+--- alias_command(ali, command, *opts) {...}
+
+commandのaliasをします.
+
+例)
+  Shell.alias_command "lsC", "ls", "-CBF", "--show-control-chars"
+  Shell.alias_command("lsC", "ls"){|*opts| ["-CBF", "--show-control-chars", *opts]}
+
+--- unalias_command(ali)
+
+commandのaliasを削除します.
+
+--- install_system_commands(pre = "sys_")
+
+system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
+ド名は元のファイル名の頭にpreをつけたものとなる.
+
+--- new
+
+プロセスのカレントディレクトリをカレントディレクトリとするShellオ
+ブジェクトを生成します.
+
+--- cd(path)
+
+pathをカレントディレクトリとするShellオブジェクトを生成します.
+
+== Instance Methods
+#@#=== プロセス管理
+
+--- cwd
+--- dir
+--- getwd
+--- pwd
+
+カレントディレクトリを返す。
+
+--- system_path
+
+コマンドサーチパスの配列を返す。
+
+--- umask
+
+umaskを返す。
+
+--- jobs
+
+スケジューリングされているjobの一覧を返す.
+
+--- kill(sig, job)
+
+jobにシグナルsigを送る
+
+#@#=== カレントディレクトリ操作
+
+--- cd(path, &block)
+--- chdir
+
+カレントディレクトリをpathにする. イテレータとして呼ばれたときには
+ブロック実行中のみカレントディレクトリを変更する.
+
+--- pushd(path = nil, &block)
+--- pushdir
+
+カレントディレクトリをディレクトリスタックにつみ, カレントディレク
+トリをpathにする. pathが省略されたときには, カレントディレクトリと
+ディレクトリスタックのトップを交換する. イテレータとして呼ばれたと
+きには, ブロック実行中のみpushdする.
+
+--- popd
+--- popdir
+
+ディレクトリスタックからポップし, それをカレントディレクトリにする.
+
+#@#=== ファイル/ディレクトリ操作
+--- foreach(path = nil, &block)
+
+pathがファイルなら, File#foreach
+pathがディレクトリなら, Dir#foreach
+
+--- open(path, mode)
+
+pathがファイルなら, File#open
+pathがディレクトリなら, Dir#open
+
+--- unlink(path)
+
+pathがファイルなら, File#unlink
+pathがディレクトリなら, Dir#unlink
+
+--- test(command, file1, file2)
+--- [](command, file1, file2)
+
+ファイルテスト関数testと同じ.
+例)
+    sh[?e, "foo"]
+    sh[:e, "foo"]
+    sh["e", "foo"]
+    sh[:exists?, "foo"]
+    sh["exists?", "foo"]
+
+--- mkdir(*path)
+
+Dir.mkdirと同じ(複数可)
+
+--- rmdir(*path)
+
+Dir.rmdirと同じ(複数可)
+
+--- system(command, *opts)
+
+commandを実行する.
+例)
+  print sh.system("ls", "-l")
+  sh.system("ls", "-l") | sh.head > STDOUT
+
+--- rehash
+
+リハッシュする
+
+--- transact{ ... }
+
+ブロック中ではshellをselfとして実行する.
+例)
+  sh.transact{system("ls", "-l") | head > STDOUT}
+
+--- out(dev = STDOUT, &block)
+
+transactを呼び出しその結果をdevに出力する.
+
+#@#=== 内部コマンド
+
+--- echo(*strings)
+--- cat(*files)
+--- glob(patten)
+--- tee(file)
+
+これらは実行すると, それらを内容とするFilterオブジェクトを返します.
+
+#@#=== 組込みコマンド
+
+--- atime(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- basename(file, *opt)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- chmod(mode, *files)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- chown(owner, group, *file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- ctime(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- delete(*file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- dirname(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- ftype(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- join(*file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- link(file_from, file_to)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- lstat(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- mtime(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- readlink(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- rename(file_from, file_to)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- split(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- stat(file)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- symlink(file_from, file_to)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- truncate(file, length)
+Fileクラスにある同名のクラスメソッドと同じです.
+--- utime(atime, mtime, *file)
+Fileクラスにある同名のクラスメソッドと同じです.
+
+--- blockdev?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- chardev?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- directory?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- executable?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- executable_real?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- exist?(file)
+--- exists?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- file?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- grpowned?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- owned?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- pipe?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- readable?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- readable_real?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- setgid?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- setuid?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- size(file)
+--- size?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- socket?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- sticky?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- symlink?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- writable?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- writable_real?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+--- zero?(file)
+FileTestクラスにある同名のクラスメソッドと同じです.
+
+--- syscopy(filename_from, filename_to)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+--- copy(filename_from, filename_to)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+--- move(filename_from, filename_to)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+--- compare(filename_from, filename_to)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+--- safe_unlink(*filenames)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+--- makedirs(*filenames)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+--- install(filename_from, filename_to, mode)
+FileToolsクラスにある同名のクラスメソッドと同じです.
+
+--- cmp
+[[m:Shell#compare]] と同じです。
+--- mv
+[[m:Shell#move]] と同じです。
+--- cp
+[[m:Shell#copy]] と同じです。
+--- rm_f
+[[m:Shell#safe_unlink]] と同じです。
+--- mkpath
+[[m:Shell#makedirs]] と同じです。
