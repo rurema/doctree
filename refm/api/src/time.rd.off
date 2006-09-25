@@ -1,40 +1,44 @@
-組み込みの ((<Time>)) クラスを拡張します。
-日時を表す文字列をパースして ((<Time>)) オブジェクトに変換したり、
-逆に ((<Time>)) オブジェクトを RFC などで定められた文字列に
+組み込みの [[c:Time]] クラスを拡張します。
+日時を表す文字列をパースして [[c:Time]] オブジェクトに変換したり、
+逆に [[c:Time]] オブジェクトを RFC などで定められた文字列に
 変換する機能を提供します。
 
-* date-time は ((<RFC:2822>)) で定義されています。
-* HTTP-date は ((<RFC:2616>)) で定義されています。
-* dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
-* 文字列から ((<Time>)) オブジェクトへの変換では ((<parsedate>)) により様々な形式を扱えます。
+ * date-time は [[c:RFC:2822]] で定義されています。
+ * HTTP-date は [[c:RFC:2616]] で定義されています。
+ * dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
+ * 文字列から [[c:Time]] オブジェクトへの変換では [[unknown:parsedate]] により様々な形式を扱えます。
 
---- Time.parse(date, now=Time.now)
---- Time.parse(date, now=Time.now) {|year| year}
+= reopen Time
 
-((|date|))を((<parsedate/ParseDate.parsedate>)) によって
-パースして((<Time>))オブジェクトに変換します。
+== Class Methods
 
-ブロック付きで呼ばれた場合、((|date|))の年はブロックによって変換されます。
+--- parse(date, now=Time.now)
+--- parse(date, now=Time.now) {|year| year}
+
+dateを[[m:parsedate#ParseDate.parsedate]] によって
+パースして[[c:Time]]オブジェクトに変換します。
+
+ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
 //ex{
 Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 //}
 
-与えられた時刻に上位の要素がなかったり壊れていた場合、((|now|))の
+与えられた時刻に上位の要素がなかったり壊れていた場合、nowの
 該当要素が使われます。
 下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
 
 //ex{
-# 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
-# タイムゾーンがGMTとすると:
+#@# 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
+#@# タイムゾーンがGMTとすると:
 Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
 Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
 Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
 //}
 
-((<parsedate>))が((|date|))から情報を取り出せないとき、
-または ((<Time>)) クラスが指定された日時を表現できないときに
-((<ArgumentError>)) が発生します。
+[[unknown:parsedate]]がdateから情報を取り出せないとき、
+または [[c:Time]] クラスが指定された日時を表現できないときに
+[[c:ArgumentError]] が発生します。
 
 このメソッドは他のパース用メソッドのフェイルセーフとして
 以下のように使用できます:
@@ -45,47 +49,45 @@ Time.httpdate(date) rescue Time.parse(date)
 Time.xmlschema(date) rescue Time.parse(date)
 //}
 
-従って ((<Time.parse|time/Time.parse>)) の失敗はチェックすべきです。
+従って [[m:Time.parse]] の失敗はチェックすべきです。
 
-== Class Methods
+--- rfc2822(date)
+--- rfc822(date)
 
---- Time.rfc2822(date)
---- Time.rfc822(date)
-
-((<RFC:2822>))で定義されているdate-timeとして((|date|))をパースして
-((<Time>))オブジェクトに変換します。
-この形式は((<RFC:822>))で定義されて((<RFC:1123>))で更新された形式と
+[[c:RFC:2822]]で定義されているdate-timeとしてdateをパースして
+[[c:Time]]オブジェクトに変換します。
+この形式は[[c:RFC:822]]で定義されて[[c:RFC:1123]]で更新された形式と
 同じです。
 
-((|date|))が((<RFC:2822>))に準拠していない、または
-((<Time>))クラスが指定された日時を表現できないときに((<ArgumentError>))が
+dateが[[c:RFC:2822]]に準拠していない、または
+[[c:Time]]クラスが指定された日時を表現できないときに[[c:ArgumentError]]が
 発生します。
 
---- Time.httpdate(date)
+--- httpdate(date)
 
-((<RFC:2616>))で定義されているHTTP-dateとして((|date|))をパースして
-((<Time>))オブジェクトに変換します。
+[[c:RFC:2616]]で定義されているHTTP-dateとしてdateをパースして
+[[c:Time]]オブジェクトに変換します。
 
-((|date|))が((<RFC:2616>))に準拠していない、または
-((<Time>))クラスが指定された日時を表現できないときに((<ArgumentError>))が
+dateが[[c:RFC:2616]]に準拠していない、または
+[[c:Time]]クラスが指定された日時を表現できないときに[[c:ArgumentError]]が
 発生します。
 
---- Time.xmlschema(date)
---- Time.iso8601(date)
+--- xmlschema(date)
+--- iso8601(date)
 
 XML Schema で定義されている dateTime として
-((|date|)) をパースして ((<Time>)) オブジェクトに変換します。
+date をパースして [[c:Time]] オブジェクトに変換します。
 
-((|date|)) がISO 8601で定義されている形式に準拠していない、
-または ((<Time>)) クラスが指定された日時を表現できないときに
-((<ArgumentError>)) が発生します。
+date がISO 8601で定義されている形式に準拠していない、
+または [[c:Time]] クラスが指定された日時を表現できないときに
+[[c:ArgumentError]] が発生します。
 
 == Instance Methods
 
---- Time#rfc2822
---- Time#rfc822
+--- rfc2822
+--- rfc822
 
-((<RFC:2822>)) で定義されている date-time として表現される
+[[c:RFC:2822]] で定義されている date-time として表現される
 以下の形式の文字列を返します:
 
 //emlist{
@@ -96,9 +98,9 @@ day-of-week, DD month-name CCYY hh:mm:ss zone
 
 self が UTC time の場合、zone は +0000 になります。
 
---- Time#httpdate
+--- httpdate
 
-((<RFC:2616>))で定義されているHTTP-dateのrfc1123-dateとして
+[[c:RFC:2616]]で定義されているHTTP-dateのrfc1123-dateとして
 表現される以下の形式の文字列を返します:
 
 //emlist{
@@ -107,8 +109,8 @@ day-of-week, DD month-name CCYY hh:mm:ss GMT
 
 注意: 結果はいつも UTC (GMT) です。
 
---- Time#xmlschema([fractional_seconds])
---- Time#iso8601([fractional_seconds])
+--- xmlschema([fractional_seconds])
+--- iso8601([fractional_seconds])
 
 XML Schema で定義されている dateTime として
 表現される以下の形式の文字列を返します:
@@ -123,5 +125,5 @@ CCYY-MM-DDThh:mm:ss.sssTZD
 If self is a UTC time, Z is used as TZD.
 [+-]hh:mm is used otherwise.
 
-((|fractional_seconds|)) は小数点以下の秒を指定します。
-((|fractional_seconds|)) のデフォルト値は 0 です。
+fractional_seconds は小数点以下の秒を指定します。
+fractional_seconds のデフォルト値は 0 です。

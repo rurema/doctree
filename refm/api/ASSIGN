@@ -115,7 +115,7 @@ digest                          iwadon          syntaxok
 digest/md5                      iwadon          syntaxok
 digest/rmd160                   iwadon          syntaxok
 digest/sha1                     iwadon          syntaxok
-digest/sha2                     iwadon
+digest/sha2                     iwadon          converted
 dl
 dl/Symbol
 dl/import
@@ -219,9 +219,9 @@ tempfile                        iwadon          syntaxok
 test/unit                       iwadon          syntaxok
 thread                          iwadon          syntaxok
 thwait                          iwadon          syntaxok
-time                            iwadon
-timeout                         iwadon
-tk                              iwadon
+time                            iwadon          converted
+timeout                         iwadon          converted
+tk                              iwadon          converted
 tmpdir                          iwadon          converted
 tracer                          iwadon          converted
 tsort                           iwadon          converted
