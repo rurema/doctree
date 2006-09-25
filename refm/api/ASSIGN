@@ -202,11 +202,11 @@ rinda/tuplespace                aamine          syntaxok
 ripper                          aamine
 rss                             date            converted
 rubyunit                        date            converted
-scanf                           sheepman
-sdbm                            sheepman
-set                             sheepman
-sha1                            sheepman
-shell                           sheepman
+scanf                           sheepman        converted
+sdbm                            sheepman        converted
+set                             sheepman        converted
+sha1                            sheepman        converted
+shell                           sheepman        converted
 shellwords                      sheepman        converted
 singleton                       date            converted
 soap                            date            converted
