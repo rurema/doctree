@@ -1,34 +1,42 @@
-= DL::Symbol
+= class DL::Symbol < Object
 
-((<DL>))
+[[c:DL]]
 
-== クラスメソッド
+== Class Methods
 --- Symbol.new(addr, type = nil, name = nil)
-    type が nil でないなら 型 type の Symbol オブジェクト sym を作成する。
-    関数が割り当てられているなら addr はそのアドレス。type が nil なら
-    ((<DL::PtrData>)) オブジェクトを返す。
+
+type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
+関数が割り当てられているなら addr はそのアドレス。type が nil なら
+[[c:DL::PtrData]] オブジェクトを返します。
 
 --- Symbol.char2type(char)
-    型に相当する文字 char を取り、C 言語の型修飾を返す。
 
-== メソッド
---- proto()
-    関数のプロトタイプを返す。
+型に相当する文字 char を取り、C 言語の型修飾を返します。
 
---- Symbol#name()
-    関数名を返す。
+== Instance Methods
+--- proto
 
---- cproto(),
---- to_s()
-    C 言語形式のプロトタイプを返す。
+関数のプロトタイプを返します。
+
+--- Symbol#name
+
+関数名を返します。
+
+--- cproto
+--- to_s
+
+C 言語形式のプロトタイプを返します。
 
 --- Symbol#inspect()
-    人間が読みやすい形式の文字列を返す(訳注:意訳)。
+
+人間が読みやすい形式の文字列を返します(訳注:意訳)。
 
 --- call(arg1,arg2,...,argN),
---- self[](arg1,arg2,...,argN)
-    パラメータ arg1, arg2, ... argN で関数を呼び出す。結果は、戻り値 r 
-    やパラメータrs からなる。rs は配列。
+--- []()
+
+パラメータ arg1, arg2, ... argN で関数を呼び出します。結果は、戻り値 r
+やパラメータ rs からなります。rs は配列。
 
 --- to_ptr
-    対応する ((<DL::PtrData>)) オブジェクト ptr を返す。
+
+対応する [[c:DL::PtrData]] オブジェクト ptr を返します。
