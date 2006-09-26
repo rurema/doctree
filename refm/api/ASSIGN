@@ -101,7 +101,7 @@ bigdecimal/ludcmp               aamine          syntaxok
 bigdecimal/newton               aamine          syntaxok
 bigdecimal/utils                aamine          syntaxok
 cgi                             iwadon          converted
-cgi-lib
+cgi-lib                         date
 cgi/session                     date            syntaxok
 complex                         date            syntaxok
 csv                             date            syntaxok
@@ -190,7 +190,7 @@ LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------------
 racc/parser                     aamine          converted
 rational                        sheepman        converted
-rbconfig
+rbconfig                        date
 readbytes                       sheepman        converted
 readline                        sheepman        converted
 resolv                          date            converted
