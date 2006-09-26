@@ -1,30 +1,37 @@
-= rbconfig
+= module Config
 
-((<執筆者募集>))
+[[unknown:執筆者募集]]
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 Config モジュールを定義します。
 
+#@if (version >= "1.8.5")
 ((<ruby 1.8.5 feature>)): RbConfig モジュールを Config と同じものとして定義します。
+#@end
 
-== 使いかた
+=== 使いかた
 
   require 'rbconfig'
 
-== モジュールメソッド:
+== Module Functions
 
---- Config.expand(val)
---- RbConfig.expand(val)        ((<ruby 1.8.5 feature>))
-    ((<rbconfig/MAKEFILE_CONFIG>)) 参照
+#@if (version >= "1.8.5")
+--- expand(val)
 
-== 定数
+((<ruby 1.8.5 feature>))
+
+[[m:rbconfig#MAKEFILE_CONFIG]] 参照
+#@end
+
+== Constants
 
 --- DESTDIR
 
 --- TOPDIR
 
 --- CONFIG
-    設定値を格納したハッシュです。以下のキーと値を持ちます。
+
+設定値を格納したハッシュです。以下のキーと値を持ちます。
 
     : srcdir
       Ruby をコンパイルしたソースディレクトリ
@@ -181,29 +188,30 @@ Config モジュールを定義します。
       ビルド時の作業ディレクトリ。
 
 --- MAKEFILE_CONFIG
-    ((<rbconfig/CONFIG>)) と同じですが、その値は以下のような形
-    で他の変数への参照を含みます。
-        MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
-    これは、Makefile の変数参照の形式で MAKEFILE_CONFIG は、
-    Makefile 作成の際に利用されることを想定しています。
 
-        require 'rbconfig'
+[[m:rbconfig#CONFIG]] と同じですが、その値は以下のような形
+で他の変数への参照を含みます。
+  MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
+これは、Makefile の変数参照の形式で MAKEFILE_CONFIG は、
+Makefile 作成の際に利用されることを想定しています。
 
-        print <<-END_OF_MAKEFILE
-        prefix = #{Config::MAKEFILE_CONFIG['prefix']}
-        exec_prefix = #{Config::MAKEFILE_CONFIG['exec_prefix']}
-        bindir = #{Config::MAKEFILE_CONFIG['bindir']}
-        END_OF_MAKEFILE
+  require 'rbconfig'
+  
+  print <<-END_OF_MAKEFILE
+  prefix = #{Config::MAKEFILE_CONFIG['prefix']}
+  exec_prefix = #{Config::MAKEFILE_CONFIG['exec_prefix']}
+  bindir = #{Config::MAKEFILE_CONFIG['bindir']}
+  END_OF_MAKEFILE
+  
+  => prefix = /usr/local
+     exec_prefix = $(prefix)
+     bindir = $(exec_prefix)/bin
 
-        => prefix = /usr/local
-           exec_prefix = $(prefix)
-           bindir = $(exec_prefix)/bin
+[[m:rbconfig#Config.expand]] は、このような参照を解決する
+メソッドとして rbconfig 内部で利用されています。
+(CONFIG 変数は、MAKEFILE_CONFIG の内容から
+[[m:rbconfig#Config.expand]] を使って生成されています)
 
-    ((<rbconfig/Config.expand>)) は、このような参照を解決する
-    メソッドとして rbconfig 内部で利用されています。
-    (CONFIG 変数は、MAKEFILE_CONFIG の内容から 
-    ((<rbconfig/Config.expand>)) を使って生成されています)
-
-        require 'rbconfig'
-        p Config.expand(Config::MAKEFILE_CONFIG["bindir"])
-        # => "/usr/local/bin"
+  require 'rbconfig'
+  p Config.expand(Config::MAKEFILE_CONFIG["bindir"])
+  # => "/usr/local/bin"
