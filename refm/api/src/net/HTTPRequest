@@ -1,18 +1,18 @@
-= Net::HTTPRequest
+= class Net::HTTPRequest < Object
 
-((<"net/http">))
+[[lib:"net/http"]]
 
 HTTP リクエストを抽象化するクラスです。Net::HTTPRequest は抽象クラス
-なので実際にはサブクラスの 
+なので実際にはサブクラスの
 
-* Net::HTTP::Get
-* Net::HTTP::Post
-* Net::HTTP::Head
-* Net::HTTP::Put 
+  * Net::HTTP::Get
+  * Net::HTTP::Post
+  * Net::HTTP::Head
+  * Net::HTTP::Put
 
 を使用してください。
 
-== 例
+=== 例
 
   require 'net/http'
   http = Net::HTTP.new('www.example.com', 80)
@@ -20,70 +20,109 @@ HTTP リクエストを抽象化するクラスです。Net::HTTPRequest は抽象クラス
   res = http.request(req)
   print res.body
 
-== クラスメソッド
+== Class Methods
 
---- HTTPRequest.new(path)
-    HTTP リクエストオブジェクトを生成します。リクエストする path を文字列で与える。
+--- new(path)
 
-== メソッド
+HTTP リクエストオブジェクトを生成します。リクエストする path を文字列で与える。
 
---- self[ key ]
-    key ヘッダフィールドの文字列。
-    key は大文字小文字を区別しません。
+== Instance Methods
 
---- self[ key ] = val
-    key ヘッダフィールドに val をセットします。
-    key は大文字小文字を区別しません。
+--- []( key )
 
---- add_header(key, val) ((<ruby 1.9 feature>))
-    key ヘッダフィールドに val をセットします。
+key ヘッダフィールドの文字列。
+key は大文字小文字を区別しません。
+
+--- []( key )
+
+key ヘッダフィールドに val をセットします。
+key は大文字小文字を区別しません。
+
+#@if (version >= "1.9.0")
+--- add_header(key, val)
+
+((<ruby 1.9 feature>))
+
+key ヘッダフィールドに val をセットします。
+#@end
 
 --- basic_auth( account, password )
-    Authrization: ヘッダを basic auth 用にセットします。
 
---- body ((<ruby 1.9 feature>))
---- body=(str) ((<ruby 1.9 feature>))
-    サーバに送るリクエストのエンティティボディを文字列で設定します。
+Authrization: ヘッダを basic auth 用にセットします。
 
---- body_stream ((<ruby 1.9 feature>))
---- body_stream= ((<ruby 1.9 feature>))
-    サーバに送るリクエストのエンティティボディを ((<IO>)) オブジェクトなどの
-    ストリームで設定します。read(size) メソッドが定義されている必要があります。
+#@if (version >= "1.9.0")
+--- body
+
+((<ruby 1.9 feature>))
+#@end
+
+#@if (version >= "1.9.0")
+--- body=(body)
+
+((<ruby 1.9 feature>))
+
+サーバに送るリクエストのエンティティボディを文字列で設定します。
+#@end
+
+#@if (version >= "1.9.0")
+--- body_stream
+
+((<ruby 1.9 feature>))
+#@end
+
+#@if (version >= "1.9.0")
+--- body_stream=()
+
+((<ruby 1.9 feature>))
+
+サーバに送るリクエストのエンティティボディを [[c:IO]] オブジェクトなどの
+ストリームで設定します。read(size) メソッドが定義されている必要があります。
+#@end
 
 --- content_length
-    Content-Length: ヘッダの値 (整数)。
+
+Content-Length: ヘッダの値 (整数)。
 
 --- content_range
-    Content-Range: ヘッダの値 (Range)。
+
+Content-Range: ヘッダの値 (Range)。
 
 --- delete(key)
-    key ヘッダフィールドを削除します。
+
+key ヘッダフィールドを削除します。
 
 --- each {|name, val| .... }
-    ヘッダ名とその値に対するくりかえし。ヘッダ名は小文字で統一されます。
+
+ヘッダ名とその値に対するくりかえし。ヘッダ名は小文字で統一されます。
 
 --- method
-    リクエストの HTTP メソッドを文字列で返します。
+
+リクエストの HTTP メソッドを文字列で返します。
 
 --- path
-    リクエストする path を文字列で返します。
+
+リクエストする path を文字列で返します。
 
 --- proxy_basic_auth(account, password)
-    Proxy-Authrization: ヘッダを Proxy 認証のためにセットします。
+
+Proxy-Authrization: ヘッダを Proxy 認証のためにセットします。
 
 --- range
-    Range: ヘッダの示す範囲を Range オブジェクトで返します。
 
---- range = r
+Range: ヘッダの示す範囲を Range オブジェクトで返します。
+
+--- range=(r)
 --- set_range( i, len )
-    範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
-    r は Range オブジェクト、i, len は始点と長さです。
+
+範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
+r は Range オブジェクト、i, len は始点と長さです。
 
 --- request_body_permitted?
-    リクエストにエンティティボディを一緒に送ることが許されている HTTP メソッド
-    (POST など)の場合真を返します。
+
+リクエストにエンティティボディを一緒に送ることが許されている HTTP メソッド
+(POST など)の場合真を返します。
 
 --- response_body_permitted?
-    サーバからのレスポンスにエンティティボディを含むことが許されている HTTP メソッド
-    (GET, POST など)の場合真を返します。
 
+サーバからのレスポンスにエンティティボディを含むことが許されている HTTP メソッド
+(GET, POST など)の場合真を返します。

@@ -159,15 +159,15 @@ md5                             date            converted
 mkmf
 monitor                         date            converted
 mutex_m                         iwadon          syntaxok
-net/ftp                         date
-net/ftptls                      date
-net/http                        date
-net/https                       date
-net/imap                        date
-net/pop                         date
-net/smtp                        date
-net/telnet                      date
-net/telnets                     date
+net/ftp                         date            converted
+net/ftptls                      date            converted
+net/http                        date            converted
+net/https                       date            converted
+net/imap                        date            converted
+net/pop                         date            converted
+net/smtp                        date            converted
+net/telnet                      date            converted
+net/telnets                     date            converted
 nkf                             date            converted
 observable                      date            converted
 open-uri                        date            converted

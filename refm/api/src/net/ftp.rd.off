@@ -1,306 +1,302 @@
-= net/ftp
+= class Net::FTP < Object
 
-== Net::FTP
+== Class Methods
 
-=== スーパークラス
+--- new(host = nil, user = nil, passwd = nil, acct = nil)
 
-(({Object}))
+新しいインスタンスを生成します。
 
-=== クラスメソッド
+host が指定された場合、生成されたインスタンスに対して connect を呼び出し、
+さらに user が指定された場合は login を呼び出します。
 
---- Net::FTP.new(host=nil, user=nil, passwd=nil, acct=nil)
+--- open(host, user = nil, passwd = nil, acct = nil)
 
-    新しいインスタンスを生成します。 
+host を省略できない以外は new と同じです。
 
-    hostが指定された場合、生成されたインスタンスに対して connectを呼び出し、
-    さらにuserが指定された場合は loginを呼び出します。 
+== Instance Methods
 
---- Net::FTP.open(host, user=nil, passwd=nil, acct=nil)
+--- connect(host, port = FTP_PORT)
 
-    hostを省略できない以外は newと同じです。 
+host で指定されたホストに接続します。
 
-=== メソッド
+--- sendcmd(cmd)
 
---- Net::FTP#connect(host, port = FTP_PORT)
+cmd で指定されたコマンドをサーバーに送り、 サーバーからの応答を返します。
 
-    hostで指定されたホストに接続します。 
+応答コードが 4xx の場合は例外 FTPTermError が、5xx の場合は
+例外 FTPPermError が発生します。
+応答コードの最初の数字が 1 から 5 のどれでもない場合は
+例外 FTPProtoError が発生します。
 
---- Net::FTP#sendcmd(cmd)
+--- voidcmd(cmd)
 
-    cmdで指定されたコマンドをサーバーに送り、 サーバーからの応答を返します。 
+sendcmdと同様にサーバーにコマンドを送りますが、nil を返す点と、
+応答コードが 2xx 以外の場合、例外 FTPReplyError が発生する点が異なります。
 
-    応答コードが4xxの場合は例外FTPTermErrorが、5xxの場合は
-    例外FTPPermErrorが発生します。
-    応答コードの最初の数字が1から5のどれでもない場合は
-    例外FTPProtoErrorが発生します。 
+--- login(user = "anonymous", passwd = nil, acct = nil)
 
---- Net::FTP#voidcmd(cmd)
+ログイン処理を行ないます。
 
-    sendcmdと同様にサーバーにコマンドを送りますが、nilを返す点と、
-    応答コードが2xx以外の場合、例外FTPReplyErrorが発生する点が異なります。 
+user が省略された場合、anonymous でログインします。
 
---- Net::FTP#login(user = "anonymous", passwd = nil, acct = nil)
+--- retrbinary(cmd, blocksize, rest_offset = nil, callback = Proc.new)
 
-    ログイン処理を行ないます。 
+サーバーに cmd で指定されたコマンドを送り、バイナリデータを 取り寄せます。
+blocksize で指定されたバイト単位でデータを
+読み込み、callback で指定された Proc オブジェクトまたは
+ブロックに読み込んだデータを渡します。
 
-    userが省略された場合、anonymousでログインします。 
+--- retrlines(cmd, callback = nil)
 
---- Net::FTP#retrbinary(cmd, blocksize, rest_offset = nil, callback = Proc.new)
+サーバーに cmd で指定されたコマンドを送り、テキストデータを
+取り寄せます。一行ずつテキストを読み込み、callback で指定された
+Proc オブジェクトまたはブロックに読み込んだ行を渡します。
 
-    サーバーにcmdで指定されたコマンドを送り、バイナリデータを 取り寄せます。
-    blocksizeで指定されたバイト単位でデータを
-    読み込み、callbackで指定されたProcオブジェクトまたは
-    ブロックに読み込んだデータを渡します。 
+callback もブロックも省略された場合は読み込んだ行を print します。
 
---- Net::FTP#retrlines(cmd, callback = nil)
+--- storbinary(cmd, file, blocksize, rest_offset = nil, callback = nil)
 
-    サーバーにcmdで指定されたコマンドを送り、テキストデータを
-    取り寄せます。一行ずつテキストを読み込み、callbackで指定された
-    Procオブジェクトまたはブロックに読み込んだ行を渡します。 
+サーバーに cmd で指定されたコマンドを送り、バイナリデータを
+送ります。blocksize で指定されたバイト単位で
+file からデータを読み込み、サーバーに送ります。
 
-    callbackもブロックも省略された場合は読み込んだ行をprintします。 
+callback やブロックが指定された場合はデータが
+送信されるごとにそれを呼び出します。
 
---- Net::FTP#storbinary(cmd, file, blocksize, rest_offset = nil, callback = nil)
+--- storlines(cmd, file, callback = nil)
 
-    サーバーにcmdで指定されたコマンドを送り、バイナリデータを
-    送ります。blocksizeで指定されたバイト単位で
-    fileからデータを読み込み、サーバーに送ります。 
+サーバーに cmd で指定されたコマンドを送り、テキストデータを
+送ります。一行ずつで file からテキストを読み込み、
+サーバーに送ります。
 
-    callbackやブロックが指定された場合はデータが
-    送信されるごとにそれを呼び出します。 
+callback やブロックが指定された場合はデータが
+送信されるごとにそれを呼び出します。
 
---- Net::FTP#storlines(cmd, file, callback = nil)
 
-    サーバーにcmdで指定されたコマンドを送り、テキストデータを
-    送ります。一行ずつでfileからテキストを読み込み、
-    サーバーに送ります。 
+--- getbinaryfile(remotefile, localfile, blocksize = DEFAULT_BLOCKSIZE, callback = nil)
 
-    callbackやブロックが指定された場合はデータが
-    送信されるごとにそれを呼び出します。 
+サーバー上のバイナリファイルを get します。
 
+callback やブロックが指定された場合は
+データが送信されるごとにそれを呼び出します。
 
---- Net::FTP#getbinaryfile(remotefile, localfile, blocksize = DEFAULT_BLOCKSIZE, callback = nil)
+#@if (version >= "1.7.0")
+((<ruby 1.7 feature>)): localfile は省略可能になりました。
+File.basename(remotefile) が省略時の値になります。
+#@end
 
-    サーバー上のバイナリファイルをgetします。 
+--- gettextfile(remotefile, localfile, callback = nil)
 
-    callbackやブロックが指定された場合は
-    データが送信されるごとにそれを呼び出します。 
+サーバー上のテキストファイルを get します。
 
-    ((<ruby 1.7 feature>)): localfile は省略可能になりました。
-    File.basename(remotefile) が省略時の値になります。
+callback やブロックが指定された場合は
+データが送信されるごとにそれを呼び出します。
 
---- Net::FTP#gettextfile(remotefile, localfile, callback = nil)
 
-    サーバー上のテキストファイルをgetします。 
+--- putbinaryfile(localfile, remotefile, blocksize = DEFAULT_BLOCKSIZE, callback = nil)
 
-    callbackやブロックが指定された場合は
-    データが送信されるごとにそれを呼び出します。 
+サーバーにバイナリファイルを put します。
 
+callback やブロックが指定された場合は
+データが送信されるごとにそれを呼び出します。
 
---- Net::FTP#putbinaryfile(localfile, remotefile, blocksize = DEFAULT_BLOCKSIZE, callback = nil)
+--- puttextfile(localfile, remotefile, callback = nil)
 
-    サーバーにバイナリファイルをputします。 
+サーバーにテキストファイルを put します。
 
-    callbackやブロックが指定された場合は
-    データが送信されるごとにそれを呼び出します。 
+callback やブロックが指定された場合は
+データが送信されるごとにそれを呼び出します。
 
---- Net::FTP#puttextfile(localfile, remotefile, callback = nil)
+--- acct(account)
 
-    サーバーにテキストファイルをputします。 
+サーバーにアカウント情報を送ります。
 
-    callbackやブロックが指定された場合は
-    データが送信されるごとにそれを呼び出します。 
+--- nlst(dir = nil)
 
---- Net::FTP#acct(account)
+dir で指定したディレクトリのファイルの配列を返します。
+dir を省略した場合カレントディレクトリが指定されます。
 
-    サーバーにアカウント情報を送ります。 
+--- list(*args, &block)
+--- ls(*args, &block)
+--- dir(*args, &block)
 
---- Net::FTP#nlst(dir = nil)
+LIST コマンドを送信し、結果を返します。
 
-    dirで指定したディレクトリのファイルの配列を返します。
-    dirを省略した場合カレントディレクトリが指定されます。 
+ブロックとともに呼び出された場合は各行に対してブロックを
+実行します。
 
---- Net::FTP#list(*args, &block)
---- Net::FTP#ls(*args, &block)
---- Net::FTP#dir(*args, &block)
+--- rename(fromname, toname)
 
-    LISTコマンドを送信し、結果を返します。 
+ファイルをリネームします。
 
-    ブロックとともに呼び出された場合は各行に対してブロックを
-    実行します。 
+--- delete(filename)
 
---- Net::FTP#rename(fromname, toname)
+ファイルを削除します。
 
-    ファイルをリネームします。 
+--- chdir(dirname)
 
---- Net::FTP#delete(filename)
+カレントディレクトリを dirname に変更します。
 
-    ファイルを削除します。 
+--- size(filename)
 
---- Net::FTP#chdir(dirname)
+ファイルのサイズを返します。
 
-    カレントディレクトリをdirnameに変更します。 
+--- mtime(filename, local = false)
 
---- Net::FTP#size(filename)
+filename の更新時刻を Time オブジェクトで返します。
+local は、更新時刻をローカル時刻とみなすかどうかの
+フラグです。(省略したときのデフォルト値は false です)。
 
-    ファイルのサイズを返します。 
+--- mkdir(dirname)
 
---- Net::FTP#mtime(filename, local = false)
+ディレクトリを作成します。
 
-    filenameの更新時刻をTimeオブジェクトで返します。
-    localは、更新時刻をローカル時刻とみなすかどうかの
-    フラグです。(省略したときのデフォルト値はfalseです)。 
+--- rmdir(dirname)
 
---- Net::FTP#mkdir(dirname)
+ディレクトリを削除します。
 
-    ディレクトリを作成します。 
+--- pwd
+--- getdir
 
---- Net::FTP#rmdir(dirname)
+カレントディレクトリを返します。
 
-    ディレクトリを削除します。 
+--- system
 
---- Net::FTP#pwd
---- Net::FTP#getdir
+サーバーの OS のタイプを返します。
 
-    カレントディレクトリを返します。 
+--- abort
 
---- Net::FTP#system
+データの転送を中止します。
 
-    サーバーのOSのタイプを返します。 
+--- status
 
---- Net::FTP#abort
+現在の状態を返します。
 
-    データの転送を中止します。 
+--- mdtm(filename)
 
---- Net::FTP#status
+MDTM コマンドを送信し、結果を返します。
 
-    現在の状態を返します。 
+--- passive
 
---- Net::FTP#mdtm(filename)
+passive モードの状態を真偽値で返します。
 
-    MDTMコマンドを送信し、結果を返します。 
+--- passive=(bool)
 
---- Net::FTP#passive
+passive モードの状態を設定します。新しい状態を返します。
 
-    passive モードの状態を真偽値で返します。
+--- return_code
 
---- Net::FTP#passive = bool
+現在のセッションの改行コードを返します。
 
-    passive モードの状態を設定します。新しい状態を返します。
+--- return_code=(string)
 
---- Net::FTP#return_code
+現在のセッションの改行コードを設定します。新しい改行コードを返します。
 
-    現在のセッションの改行コードを返します。
+--- lastresp
 
---- Net::FTP#return_code = string
+サーバからの最後の応答を返します(string)。
 
-    現在のセッションの改行コードを設定します。新しい改行コードを返します。
+(例): ファイルが正常に転送された時は、"226"。数字の意味は [[unknown:RFC:959]] 参照。
 
---- Net::FTP#lastresp
+--- welcome
 
-    サーバからの最後の応答を返します(string)。
+サーバのウェルカムメッセージを返します。
 
-    (例): ファイルが正常に転送された時は、"226"。数字の意味は((<RFC:959>))参照。
+--- help(arg = nil)
 
---- Net::FTP#welcome
+help 情報を返します。
 
-    サーバのウェルカムメッセージを返します。
+--- quit
 
---- Net::FTP#help(arg = nil)
+ログアウトします。
 
-    help情報を返します。 
+--- close
 
---- Net::FTP#quit
+接続を切ります。
 
-    ログアウトします。
+--- closed?
 
---- Net::FTP#close
+接続が切れている時に真を返します。
 
-    接続を切ります。 
+--- resume
 
---- Net::FTP#closed?
+現在のリジュームモードを返します。リジュームモードとは途中で中断された
+データ転送を再開するためのものです。デフォルトの値は false です。
+この値が真であるとき、いくつかの転送メソッドは事前に REST コマンドを
+発行することによって転送元と転送元のオフセットをセットします。
+これにより、すでに転送されたデータは転送されなくなります。
+具体的には以下のメソッドが影響を受けます。
 
-    接続が切れている時に真を返します。
+getbinaryfile はローカルファイルのサイズをオフセットとします。
 
---- Net::FTP#resume
+putbinaryfile はリモートファイルのサイズをオフセットとします。
 
-    現在のリジュームモードを返します。リジュームモードとは途中で中断された
-    データ転送を再開するためのものです。デフォルトの値は (({false})) です。
-    この値が真であるとき、いくつかの転送メソッドは事前に REST コマンドを
-    発行することによって転送元と転送元のオフセットをセットします。
-    これにより、すでに転送されたデータは転送されなくなります。
-    具体的には以下のメソッドが影響を受けます。
+--- resume=(boolean)
 
-    (({getbinaryfile})) はローカルファイルのサイズをオフセットとします。
+resume の値を設定します。
 
-    (({putbinaryfile})) はリモートファイルのサイズをオフセットとします。
+--- debug_mode
 
---- Net::FTP#resume = boolean
+デバッグモードであるか否かを表す真偽値です。
+値が真であるとき、送受信の記録と ABOR, STAT の結果が標準出力に
+随時表示されます。
 
-    (({resume})) の値を設定します。
+--- debug_mode=(boolean)
 
---- Net::FTP#debug_mode
+デバッグモードの値を設定します。
 
-    デバッグモードであるか否かを表す真偽値です。
-    値が真であるとき、送受信の記録と ABOR, STAT の結果が標準出力に
-    随時表示されます。
+--- set_socket(sock, get_greeting = true)
 
---- Net::FTP#debug_mode = boolean
+通信先を TCPSocket オブジェクト sock に設定します。
+省略可能な第2引数 get_greeting に偽が与えられると、
+set_socket は通信先を設定するだけで sock に対する操作を
+何も行ないません。このとき値として nil を返します。
+get_greeting が真(デフォルト)ならば、通信先を sock に
+設定したあと、通常FTPサーバが接続時に送ってくるメッセージを読み込み、
+このメッセージを値として返します。
 
-    デバッグモードの値を設定します。
+--- get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE)
+--- get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... }
 
---- Net::FTP#set_socket(sock, get_greeting = true)
+binary の値に従ってリモートファイルを取得し、
+localfile をファイル名とするローカルファイルに保存します。
+remotefile が省略されると localfile のベースネームが
+仮定されます。
+block_size が省略されると DEFAULT_BLOCLSIZE が仮定されます。
+この値は binary が真であるときのみ有効です。
 
-    通信先を (({TCPSocket})) オブジェクト ((|sock|)) に設定します。
-    省略可能な第2引数 ((|get_greeting|)) に偽が与えられると、
-    (({set_socket})) は通信先を設定するだけで ((|sock|)) に対する操作を
-    何も行ないません。このとき値として (({nil})) を返します。
-    ((|get_greeting|)) が真(デフォルト)ならば、通信先を ((|sock|)) に
-    設定したあと、通常FTPサーバが接続時に送ってくるメッセージを読み込み、
-    このメッセージを値として返します。 
+ブロックが与えられた場合はそのデータをファイルに書きこむごとに、
+書き込んだデータを data に代入してブロックが評価されます。
+ブロックを最後に評価したときに得られた値が get の値になります。
 
---- Net::FTP#get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE)
---- Net::FTP#get(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... }
+ブロックが与えられなかった場合の get の値は nil です。
 
-    (({binary}))の値に従ってリモートファイルを取得し、
-    ((|localfile|))をファイル名とするローカルファイルに保存します。
-    ((|remotefile|))が省略されると((|localfile|))のベースネームが
-    仮定されます。
-    ((|block_size|))が省略されると(({DEFAULT_BLOCLSIZE}))が仮定されます。
-    この値は (({binary})) が真であるときのみ有効です。
+--- put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE)
+--- put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... }
 
-    ブロックが与えられた場合はそのデータをファイルに書きこむごとに、
-    書き込んだデータを ((|data|)) に代入してブロックが評価されます。
-    ブロックを最後に評価したときに得られた値が (({get})) の値になります。
+binary の値に従ってローカルファイル localfile を送信し、
+remotefile をファイル名とするリモートファイルに保存します。
+remotefile が省略されると localfile のベースネームが
+仮定されます。
+block_size が省略されると DEFAULT_BLOCLSIZE が仮定されます。
+この値は binary が真であるときのみ有効です。
 
-    ブロックが与えられなかった場合の (({get})) の値は (({nil})) です。
+ブロックが与えられた場合はそのデータを送信するごとに、
+送信したデータを data に代入してブロックが評価されます。
+ブロックを最後に評価したときに得られた値が put の値になります。
 
---- Net::FTP#put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE)
---- Net::FTP#put(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) { |data| .... }
+ブロックが与えられなかった場合の put の値は nil です。
 
-    (({binary}))の値に従ってローカルファイル ((|localfile|)) を送信し、
-    ((|remotefile|)) をファイル名とするリモートファイルに保存します。
-    ((|remotefile|))が省略されると((|localfile|))のベースネームが
-    仮定されます。
-    ((|block_size|))が省略されると(({DEFAULT_BLOCLSIZE}))が仮定されます。
-    この値は (({binary})) が真であるときのみ有効です。
+--- binary
 
-    ブロックが与えられた場合はそのデータを送信するごとに、
-    送信したデータを ((|data|)) に代入してブロックが評価されます。
-    ブロックを最後に評価したときに得られた値が (({put})) の値になります。
+表現タイプがバイナリ(IMAGE)であるか否かを表す真偽値です。
+get と put が影響を受けます。
+デフォルトの値は true です。
+偽の場合、ASCII が仮定されます。
+EBCDIC や LOCAL など他の表現タイプはサポートされていません。
 
-    ブロックが与えられなかった場合の (({put})) の値は (({nil})) です。
+--- binary=(bool)
 
---- Net::FTP#binary
+表現タイプがバイナリ(IMAGE)であるか否かを設定します。
 
-    表現タイプがバイナリ(IMAGE)であるか否かを表す真偽値です。
-    (({get})) と (({put})) が影響を受けます。
-    デフォルトの値は (({true})) です。
-    偽の場合、ASCIIが仮定されます。
-    EBCDIC や LOCAL など他の表現タイプはサポートされていません。
-
---- Net::FTP#binary = bool
-
-    表現タイプがバイナリ(IMAGE)であるか否かを設定します。
-
-    ((<執筆者募集>))
+[[unknown:執筆者募集]]
