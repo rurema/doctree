@@ -8,8 +8,7 @@
 
 == Private Instance Methods
 
-@since 1.7.0
-
+#@since 1.7.0
 --- timeout(sec) {|i| .... }
 --- timeout(sec, exception_class) {|i| .... }
 
@@ -34,8 +33,7 @@ DNSの名前解決に時間がかかった場合割り込めません。
 timeout は無力です。その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
 [[unknown:timeoutの落し穴|trap::timeout]]も参照
-
-@end
+#@end
 
 = module Timeout
 
