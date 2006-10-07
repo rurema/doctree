@@ -14,9 +14,9 @@ Digest::Base と同じインタフェースを持つ。
 例えば、MD5 値を得るには以下のようにする。
 
         require 'digest/md5'
-        p Digest::MD5.hexdigest(File.read("ruby-1.8.0.tar.gz"))
+        p Digest::MD5.hexdigest(File.open('ruby-1.8.5.tar.gz','rb').read)
 
-        # => "582a65e52598a4a1e9fce523e16e67d6"
+        # => "3fbb02294a8ca33d4684055adba5ed6f"
 
 あるいは(大きな文字列を生成しない方法)
 
@@ -26,7 +26,7 @@ Digest::Base と同じインタフェースを持つ。
           def self.open(path)
             obj = new
 
-            File.open(path) {|f|
+            File.open(path, 'rb') {|f|
               buf = ""
               while f.read(256, buf)
                 obj << buf
@@ -36,9 +36,9 @@ Digest::Base と同じインタフェースを持つ。
           end
         end
 
-        p Digest::MD5.open("ruby-1.8.0.tar.gz").hexdigest
+        p Digest::MD5.open("ruby-1.8.5.tar.gz").hexdigest
 
-        # => "582a65e52598a4a1e9fce523e16e67d6"
+        # => "3fbb02294a8ca33d4684055adba5ed6f"
 
 すべての Digest::XXX クラスは以下の共通インタフェースを持つ。
 
