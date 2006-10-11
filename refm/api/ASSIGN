@@ -149,7 +149,7 @@ io/nonblock                     date            syntaxok
 io/wait                         date            syntaxok
 ipaddr                          date            syntaxok
 irb
-jcode                           aamine
+jcode                           aamine          converted
 kconv                           date            syntaxok
 logger                          date            syntaxok
 mailread                        date            syntaxok
