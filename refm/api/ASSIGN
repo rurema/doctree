@@ -148,7 +148,7 @@ importenv                       date            syntaxok
 io/nonblock                     date            syntaxok
 io/wait                         date            syntaxok
 ipaddr                          date            syntaxok
-irb                             aamine
+irb                             aamine          syntaxok
 jcode                           aamine          syntaxok
 kconv                           date            syntaxok
 logger                          date            syntaxok
@@ -156,7 +156,7 @@ mailread                        date            syntaxok
 mathn                           date            syntaxok
 matrix                          date            syntaxok
 md5                             date            syntaxok
-mkmf                            aamine
+mkmf                            aamine          syntaxok
 monitor                         date            syntaxok
 mutex_m                         iwadon          syntaxok
 net/ftp                         date            syntaxok
@@ -196,7 +196,7 @@ readline                        sheepman        syntaxok
 resolv                          date            syntaxok
 resolv-replace                  date            syntaxok
 rexml                           date            syntaxok
-ri                              aamine
+ri                              aamine          syntaxok
 rinda/rinda                     aamine          syntaxok
 rinda/tuplespace                aamine          syntaxok
 ripper                          aamine          syntaxok
