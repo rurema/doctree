@@ -1,12 +1,11 @@
-tracer
-=== 目的・概要
 実行トレース出力をとる機能を提供する。
 
 使い方は大きく分けて2通り。
-:((%ruby -rtracer hoge.rb%))
+
+: ((%ruby -rtracer hoge.rb%))
         hoge.rbの実行をすべてトレース出力する。
 
-:require 'tracer'
+: require 'tracer'
         Tracer.on
         によりトレース出力を有効にする。
 
@@ -15,62 +14,80 @@ tracer
 
         また、ブロック付きで Tracer.on を呼び出すと、そのブロック内のみ
         トレースを出力する。
+
 === サンプルコード
+
 なし
+
 === SEE ALSO
-* [[m:Kernel#set_trace_func]]
+
+[[m:Kernel#set_trace_func]]
+
+
+
 = class Tracer < Object
+
 == Class Methods
+
 --- on
 --- on {...}
+
 トレース出力を開始。
 ブロックを与えられた場合はそのブロック内のみトレース出力を行う。
+
 --- off
+
 トレース出力を中断。
+
 --- set_get_line_procs(filename, proc)
---- set_get_line_procs(filename) { |line| ...}
+--- set_get_line_procs(filename) {|line| .... }
+
 あるファイルについて利用する、行番号からソースのその行の内容を返す
 手続きを指定する。何も指定しなければデフォルトの動作が利用される。
 指定する手続きは行番号を唯一の引数として呼び出される。
+
 --- add_filter(proc)
---- add_filter { |event,file,line,id,binding| ...}
+--- add_filter {|event, file, line, id, binding| .... }
+
 トレース出力するかどうかを決定するフィルタを追加する。
 何もフィルタを与えない場合はすべての行についてトレース情報が出力される。
 与えられた手続き(ブロックまたはProcオブジェクト)が真を返せば
 トレースは出力される。
-フィルタは複数追加でき、そのうち一つでも偽を返すとトレースの出力は
-抑制される。
-フィルタ手続きは引数として event,file,line,id,binding の5つ
-をとる(組み込み関数set_trace_funcで指定するものとほぼ同じ)。
-set_trace_funcに関してはRuby本 p.391を参照。
 
-:フィルタ手続きのパラメータ
-  Ruby本 p.391より。
-  :event
+フィルタは複数追加でき、
+そのうち一つでも偽を返すとトレースの出力は抑制される。
+
+フィルタ手続きは引数として event, file, line, id, binding の
+5 つをとる ([[m:Kernel#set_trace_func]] で指定するものとほぼ同じ)。
+
+[フィルタ手続きのパラメータ]
+
+: event
     イベントを表す文字列。
-     以下の種類がある。カッコ内はtracerの出力での表記。
-    :line (-)
+    以下の種類がある。カッコ内は tracer の出力での表記。
+
+    : line (-)
         ある行を実行
-    :call (>)
+    : call (>)
         メソッド呼び出し
-    :return (<)
+    : return (<)
         メソッドからのリターン
-    :class (C)
+    : class (C)
         クラスコンテキストに入った
-    :end (E)
+    : end (E)
         クラスコンテキストから出た
-    :raise
+    : raise
         例外が発生した
-    :c-call
+    : c-call
         Cで記述されたメソッドが呼ばれた
-    :c-return
+    : c-return
         Cで記述されたメソッドからreturn
-  :file
+: file
     現在処理しているファイルの名前
-  :line
+: line
     現在処理している行番号
-  :id
+: id
     最後に呼び出されたメソッドのメソッド名(のシンボル)
     そのようなメソッドがなければ0になる。
-  :binding
+: binding
     現在のコンテキスト
