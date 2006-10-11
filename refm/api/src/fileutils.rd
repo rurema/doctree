@@ -1,7 +1,4 @@
-#@if (version >= "1.7.0")
-fileutils
-
-((<ruby 1.7 feature>))
+#@since 1.8.0
 
 = module FileUtils
 
@@ -18,8 +15,8 @@ fileutils
 
 options には :verbose が指定できます。
 
-#@if (version >= "1.8.3")
-((<ruby 1.8.3 feature>)) :noop オプションは廃止されました。
+#@since 1.8.3
+:noop オプションは廃止されました。
 #@end
 
 例:
@@ -38,10 +35,8 @@ options には :noop と :verbose が指定可能です。
   FileUtils.chmod(0755, 'somecommand')
   FileUtils.chmod(0755, '/usr/bin/ruby', {:verbose => true})
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- chmod_R(mode, list, options = {})
-
-((<ruby 1.8.3 feature>))
 
 ファイル list[0], list[1], …… のパーミッションを再帰的に mode へ変更します。
 
@@ -52,10 +47,8 @@ options には :noop と :verbose が指定可能です。
   FileUtils.chmod_R(0700, '/tmp/removing')
 #@end
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- chown(user, group, list, options = {})
-
-((<ruby 1.8.3 feature>))
 
 ファイル list[0], list[1], ... の
 所有ユーザと所有グループを user と group に変更します。
@@ -69,10 +62,8 @@ options には :noop と :verbose が指定可能です。
   FileUtils.chown nil, 'bin', Dir.glob('/usr/bin/*'), :verbose => true
 #@end
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- chown_R(user, group, list, options = {})
-
-((<ruby 1.8.3 feature>))
 
 list[0], list[1], ... 以下のファイルの所有ユーザと所有グループを
 user と group へ再帰的に変更します。
@@ -104,38 +95,34 @@ options には :noop と :verbose が指定可能です。
 
 [[c:IO]] オブジェクト a と b の内容が同じなら真を返します。
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- copy_entry(src, dest, preserve = false, dereference_root = false)
-
-((<ruby 1.8.3 feature>))
 
 ファイル src を dest にコピーします。src が普通のファイルでない場合は
 その種別まで含めて完全にコピーします。src がディレクトリの場合はその
 中身を再帰的にコピーします。
 
-preserve が真のときは更新時刻と、可能なら所有ユーザ・所有グループもコピーします。
+preserve が真のときは更新時刻と、
+可能なら所有ユーザ・所有グループもコピーします。
 
 dereference_root が真のときは src についてだけシンボリックリンクの指す
 内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 #@end
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- copy_file(src, dest, preserve = false, dereference_root = true)
-
-((<ruby 1.8.3 feature>))
 
 ファイル src の内容を dest にコピーします。
 
-preserve が真のときは更新時刻と、可能なら所有ユーザ・所有グループもコピーします。
+preserve が真のときは更新時刻と、
+可能なら所有ユーザ・所有グループもコピーします。
 
 dereference_root が真のときは src についてだけシンボリックリンクの指す
 内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
 #@end
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- copy_stream(src, dest)
-
-((<ruby 1.8.3 feature>))
 
 src を dest にコピーします。
 src には read メソッド、dest には write メソッドが必要です。
@@ -455,15 +442,21 @@ newer が、older_list に含まれるすべてのファイルより新しいとき真。
 
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
+
+
 = module FileUtils::Verbose
 
 FileUtils と同じメソッドが定義されており全く同じ動作をしますが、
 しようとしていることを実行前に表示します。
 
+
+
 = module FileUtils::NoWrite
 
 FileUtils と同じメソッドが定義されていますが、
 実際にファイルを変更する操作は実行しません。
+
+
 
 = module FileUtils::DryRun
 
