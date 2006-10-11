@@ -9,7 +9,9 @@
 
 $KCODE はこのスクリプト自体の文字コードあわせて設定します。
 
-== reopen String
+= reopen String
+
+== Methods
 
 --- each_char
 --- each_char {|char| ... }
@@ -92,7 +94,9 @@ self に多バイト文字が最初に現れる位置を返します。
   p hoge.mbchar?   # => nil
   
 
-== redefine String
+= redefine String
+
+== Methods
 
 --- chop
 --- chop!
