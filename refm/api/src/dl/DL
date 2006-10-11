@@ -1,45 +1,63 @@
-#@# = DL
+= module DL
 
-[[lib:dl]] も参照。また、現在 [[unknown:dl2|URL:http://rubyforge.net/projects/ruby-dl2/]] の ruby-1.8
-版も開発されています。ruby-1.9 にはすでに dl2 が dl として添付されています。
-dl2 のドキュメントは、[[unknown:ruby-dl2のdoc|URL:http://rubyforge.org/cgi-bin/viewcvs.cgi/ruby-dl2/doc/?root=ruby-dl2]] を参照。
+モジュール DL は 3 つのクラスから成っています。
+クラス [[c:DL::Symbol]] は呼び出す事ができるシンボルに相当します。
+クラス [[c:DL::PtrData]] は C のポインタのようなメモリブロックを示します。
+クラス [[c:DL::Handle]] から具体化されたオブジェクトは
+オープンしたライブラリの操作を持ちます。
 
-モジュール DL は数個のモジュール関数と定数を持つ 3 つのクラスから成っ
-ています。クラス [[c:DL::Symbol]] は呼び出す事ができるシンボルに相当します。クラス
-[[c:DL::PtrData]] は、C のポインタのようなメモリブロックを示します。
-クラス [[c:DL::Handle]] から具体化されたオブジェクトはオープンしたライブラリの
-操作を持ちます。
-
-* [[c:DL::Handle]]
-* [[c:DL::Symbol]]
-* [[c:DL::PtrData]]
+また、現在 dl2 の Ruby 1.8 版も開発されています。
+Ruby 1.9 にはすでに dl2 が dl として添付されています。
+dl2 のドキュメントは、
+[[url:http://rubyforge.org/cgi-bin/viewcvs.cgi/ruby-dl2/doc/?root=ruby-dl2]]
+を参照。
 
 === Type specifiers
 
 プロトタイプは以下の型修飾子から成ります。プロトタイプの最初の要素は戻り値
 の型を意味します。残りの要素は各引数の型を意味します。
 
-    C : 文字 (char)
-    c : 文字を指すポインタ (char *)
-    H : short 整数  (short)
-    h : short 整数を指すポインタ (short *)
-    I : 整数 (char, short, int)
-    i : 整数を指すポインタ (char *, short *, int *)
-    L : long 整数 (long)
-    l : long 整数へのポインタ (long *)
-    F : 実数 (float)
-    f : 実数へのポインタ (float *)
-    D : 実数 (double)
-    d : 実数へのポインタ(double *)
-    S : 不変(immutable)の文字列 (const char *)
-    s : 変更可能(mutable)な文字列 (char *)
-    A : 配列 (const type[])
-    a : 変更可能(mutable)な配列 (type[])
-    P : ポインタ (void *)
-    p : 変更可能(mutable)なポインタ (void *)
-    0 : void 関数(これはプロトタイプの最初の文字でなければならない)
+: C
+    文字 (char)
+: c
+    文字を指すポインタ (char *)
+: H
+    short 整数  (short)
+: h
+    short 整数を指すポインタ (short *)
+: I
+    整数 (char, short, int)
+: i
+    整数を指すポインタ (char *, short *, int *)
+: L
+    long int
+: l
+    long int へのポインタ (long *)
+: F
+    実数 (float)
+: f
+    実数へのポインタ (float *)
+: D
+    実数 (double)
+: d
+    実数へのポインタ(double *)
+: S
+    不変 (immutable) の文字列 (const char *)
+: s
+    変更可能(mutable)な文字列 (char *)
+: A
+    配列 (const type[])
+: a
+    変更可能 (mutable) な配列 (type[])
+: P
+    ポインタ (void *)
+: p
+    変更可能 (mutable) なポインタ (void *)
+: 0
+    void 関数 (これはプロトタイプの最初の文字でなければならない)
 
-cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。例えば:
+cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
+例えば,
 
   DL.callback('IPP'){|ptr1,ptr2|
     str1 = ptr1.ptr.to_s
@@ -50,51 +68,60 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。例えば:
 == Constants
 
 --- RTLD_GLOBAL
+
 --- RTLD_LAZY
+
 --- RTLD_NOW
+
 --- MAX_ARG
+
 --- MAX_CBARG
+
 --- MAX_CBENT
 
 == Module Functions
 
 --- dlopen(lib) {|handle| ... }
 
-[[m:DL::Handle.new(lib)]] と等価。
+[[m:DL::Handle.new]](lib) と等価。
 
 == Instance Methods
 
 --- set_callback(cbtype, entry) {|args| ... }
 --- set_callback(cbtype, entry, proc)
 
-proc や指定したブロックを呼ぶ entry-th pre-defined function を作成
-します。entry-th pre-defined function は cbtype と entry で指定され
-ます。cbtype はコールバックのプロトタイプ。cbtype については
-[[m:DL#Type specifiers]] も参照。
+proc や指定したブロックを呼ぶ
+entry-th pre-defined function を作成します。
+entry-th pre-defined function は cbtype と entry で指定されます。
+
+cbtype はコールバックのプロトタイプ。
+cbtype については class [[c:DL]] "Type specifiers" も参照。
 
 --- get_callback(cbtype, entry)
 
 上記 set_callback 関数によって与えられた [[c:Proc]] オブジェクトを返します。
 
---- malloc(size, [free = nil])
+--- malloc(size, [free])
 
-size バイトのメモリ領域を割り当て、PtrData オブジェクトを ptr とし
-て返します。
+size バイトのメモリ領域を割り当て、
+[[c:DL::PtrData]] オブジェクトを ptr として返します。
 
 --- strdup(str)
 
-文字列 str を複製した新しい文字列へのポインタに相当する PtrData オ
-ブジェクトを返します。
+文字列 str を複製した新しい文字列へのポインタに相当する
+[[c:DL::PtrData]] オブジェクトを返します。
 
 --- sizeof(type)
 
-型のサイズを返します。 sizeof("C") + sizeof("L") は、
-sizeof("CL") と等価ではありません。後者は構造体 struct foo { char c;
-long l; } の十分なサイズを返すと推定されますが、そのサイズは C の
-sizeof(foo) と同じではないかもしれません。
+型のサイズを返します。
 
-(訳注: sizeof メソッドは独自にアラインメントを考慮してサイズを決定
-しますが C 言語のそれとは異なるかもしれないということを言っています)
+sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
+後者は構造体 struct foo { char c; long l; } の
+十分なサイズを返すと推定されますが、
+そのサイズは C の sizeof(foo) と同じではないかもしれません。
 
-(訳注: sizeof("L3") のように型の後に数字を付けることもできます。指定
-できる型については [[m:DL#Type specifiers]] を参照)
+訳注1: sizeof メソッドは独自にアラインメントを考慮してサイズを決定
+しますが C 言語のそれとは異なるかもしれないということを言っています
+
+訳注2: sizeof("L3") のように型の後に数字を付けることもできます。
+指定できる型については [[m:DL#Type specifiers]] を参照

@@ -1,8 +1,4 @@
-e2mmap -- Exception2MessageMapper
-
 例外クラスに特定のエラーメッセージ用フォーマットを関連づけます。
-
-=== Usage
 
 1. クラス定義の中で、Exception2MessageMapper を extend すれば、
 def_e2message メソッドや def_exception メソッドが使えます。
@@ -58,9 +54,14 @@ def_e2message メソッドや def_exception メソッドが使えます。
   Foo.Fail NewExceptionClass, arg...
   Foo.Fail ExistingExceptionClass, arg...
 
+
+
+= reopen Kernel
+
 == Private Instance Methods
 
---- Raise(error, [args [,args2...]])
+--- Raise(error, *args)
+--- Fail(error, *args)
 
 error クラスのエラーを発生させます。
 
@@ -98,9 +99,6 @@ error の後に続く引数 args 群は、例外クラスに関連づけられたエラー
 という例外が発生します。
 
 
---- Fail(error, [args [,args2...]])
-
-Raise の別名です。
 
 = module E2MM
 
@@ -119,12 +117,13 @@ message_form の形式は sprintf() の format 文字列と同じです。
 
 --- def_exception(exception_name, message_form, superclass)
 
-exception_name という名前の例外クラスを作ります(exception_name
-はシンボルで与えられます)。
-このクラスは、superclass が設定されていればそのクラスの
-サブクラスに、設定されていない場合は StandardError のサブ
-クラスになります。
+exception_name という名前の例外クラスを作ります。
+exception_name はシンボルで与えられます。
 
-そして、そのクラスに message_form で指定されたフォーマットを
-関連づけます。
-これは Raise(またはその別名の Fail)で使われます。
+このクラスは、superclass が設定されていれば
+そのクラスのサブクラスに、
+設定されていない場合は StandardError のサブクラスになります。
+
+そして、そのクラスに message_form で指定された
+フォーマットを関連づけます。
+これは Raise (またはその別名の Fail) で使われます。

@@ -1,19 +1,23 @@
 = class NilClass < Object
 
-nil のクラス。偽変数(の値) nil は NilClass クラスの
-唯一のインスタンスです。nil は false オブジェクトとともに
-偽を表し、その他の全てのオブジェクトは真です。
+nil のクラス。
+nil は NilClass クラスの唯一のインスタンスです。
+nil は false オブジェクトとともに偽を表し、
+その他の全てのオブジェクトは真です。
 
-== Class Methods
+== Methods
 
---- &(o)
+--- &(other)
 
 常に false を返します。
 
---- |(o)
---- ^(o)
+--- |(other)
 
-other が真なら true を偽なら false を返します。
+other が真なら true を, 偽なら false を返します。
+
+--- ^(other)
+
+other が真なら true を, 偽なら false を返します。
 
 --- nil?
 
@@ -21,7 +25,7 @@ other が真なら true を偽なら false を返します。
 
 --- to_a
 
-空の配列[]を返します。
+空配列 [] を返します。
 
 --- to_f
 

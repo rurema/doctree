@@ -1,10 +1,3 @@
-getopts
-
-                                          Author: <jammy@shljapan.co.jp>
-
-Note: Ruby 1.8.2 以降では、getopts は推奨されません。
-引数の解析には、[[lib:OptionParser]] の利用を推奨します。
-
 オプションを解析し、$OPT_xxx に値を設定します。
 
 典型的な使い方は以下のようになります。
@@ -26,6 +19,14 @@ Note: Ruby 1.8.2 以降では、getopts は推奨されません。
     # ...
   end
 
+Note: Ruby 1.8.2 以降では、getopts は推奨されません。
+引数の解析には、[[lib:optparse]] を推奨します。
+
+Author: <jammy@shljapan.co.jp>
+
+
+
+= reopen Kernel
 
 == Private Instance Methods
 

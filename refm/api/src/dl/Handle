@@ -17,10 +17,11 @@
 
 Handle.new(lib) によってオープンされたハンドルをクローズします。
 
---- sym(func, prototype = "0"),
+--- sym(func, prototype = "0")
 --- [](func, prototype = nil)
 
-関数 func (訳注: やグローバル変数？) へのポインタを取得し、
+関数やグローバル変数 func へのポインタを取得し、
 [[c:DL::Symbol]] オブジェクトや [[c:DL::PtrData]] オブジェクトを返します。
 prototype は型修飾からなる文字列で関数のプロトタイプを示します。
-[[m:DL#Type specifiers]] も参照。
+
+class [[c:DL]] "Type Specifiers" も参照。

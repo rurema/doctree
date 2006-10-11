@@ -1,13 +1,16 @@
 #@since 1.8.5
-= module Kernel
-== Instance Methods
+= reopen Kernel
+
+== Private Instance Methods
+
 --- Pathname(path)
-    ((<ruby 1.8.5 feature>))
 
-    Ê¸»úÎó path ¤ò¸µ¤Ë Pathname ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¡£
+Ê¸»úÎó path ¤ò¸µ¤Ë Pathname ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¡£
 
-    Pathanme.new(string) ¤ÈÆ±¤¸¡£
+Pathanme.new(string) ¤ÈÆ±¤¸¡£
 #@end
+
+
 
 = class Pathname < Object
 
@@ -30,8 +33,8 @@ Pathname.new(Dir.getwd) ¤ÈÆ±¤¸¡£
 --- glob(pattern[, flags])
 --- glob(pattern[, flags]) {|pathname| ...}
 
-
-¥ï¥¤¥ë¥É¥«¡¼¥É¤ÎÅ¸³«¤ò¹Ô¤Ê¤Ã¤¿·ë²Ì¤ò¡¢Pathname ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤¹¡£
+¥ï¥¤¥ë¥É¥«¡¼¥É¤ÎÅ¸³«¤ò¹Ô¤Ê¤Ã¤¿·ë²Ì¤ò¡¢
+Pathname ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤¹¡£
 
 °ú¿ô¤Î°ÕÌ£¤Ï¡¢[[m:Dir.glob]] ¤ÈÆ±¤¸¡£
 
@@ -246,176 +249,289 @@ base_directory ¤âÀäÂÐ¥Ñ¥¹¤Ç¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¡£
 base_directory ¤Ï Pathname ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¡£
 
 --- each_line(*args, &block)
+
+Equivalent to:
 IO.foreach(self.to_s, *args, &block)
 
 --- read(*args)
+
+Equivalent to:
 IO.read(self.to_s, *args)
 
 --- readlines(*args)
+
+Equivalent to:
 IO.readlines(self.to_s, *args)
 
 --- sysopen(*args)
+
+Equivalent to:
 IO.sysopen(self.to_s, *args)
 
---- atime()
+--- atime
+
+Equivalent to:
 File.atime(self.to_s)
 
---- ctime()
+--- ctime
+
+Equivalent to:
 File.ctime(self.to_s)
 
---- mtime()
+--- mtime
+
+Equivalent to:
 File.mtime(self.to_s)
 
 --- chmod(mode)
+
+Equivalent to:
 File.chmod(mode, self.to_s)
 
 --- lchmod(mode)
+
+Equivalent to:
 File.chmod(mode, self.to_s)
 
 --- chown(owner, group)
+
+Equivalent to:
 File.chown(owner, group, self.to_s)
 
 --- lchown(owner, group)
+
+Equivalent to:
 File.lchown(owner, group, self.to_s)
 
 --- fnmatch(pattern, *args)
+
+Equivalent to:
 File.fnmatch(pattern, self.to_s, *args)
 
 --- fnmatch?(pattern, *args)
+
+Equivalent to:
 File.fnmatch?(pattern, self.to_s, *args)
 
---- ftype()
+--- ftype
+
+Equivalent to:
 File.ftype(self.to_s)
 
 --- link(old)
+
+Equivalent to:
 File.link(old, self.to_s)
 
 --- open(*args, &block)
+
+Equivalent to:
 File.open(self.to_s, *args, &block)
 
---- readlink()
+--- readlink
+
+Equivalent to:
 Pathname.new(File.readlink(self.to_s))
 
 --- rename(to)
+
+Equivalent to:
 File.rename(self.to_s, to)
 
---- stat()
+--- stat
+
+Equivalent to:
 File.stat(self.to_s)
 
---- lstat()
+--- lstat
+
+Equivalent to:
 File.lstat(self.to_s)
 
 --- symlink(old)
+
+Equivalent to:
 File.symlink(old, self.to_s)
 
 --- truncate(length)
+
+Equivalent to:
 File.truncate(self.to_s, length)
 
 --- utime(atime, mtime)
+
+Equivalent to:
 File.utime(atime, mtime, self.to_s)
 
 --- basename(*args)
+
+Equivalent to:
 Pathname.new(File.basename(self.to_s, *args))
 
---- dirname()
+--- dirname
+
+Equivalent to:
 Pathname.new(File.dirname(self.to_s))
 
---- extname()
+--- extname
+
+Equivalent to:
 File.extname(self.to_s)
 
 --- expand_path(*args)
+
+Equivalent to:
 Pathname.new(File.expand_path(self.to_s, *args))
 
 --- join(*args)
+
+Equivalent to:
 Pathname.new(File.join(self.to_s, *args))
 
---- split()
+--- split
+
+Equivalent to:
 File.split(self.to_s)
 
---- blockdev?()
+--- blockdev?
+
+Equivalent to:
 FileTest.blockdev?(self.to_s)
 
---- chardev?()
+--- chardev?
+
+Equivalent to:
 FileTest.chardev?(self.to_s)
 
---- executable?()
+--- executable?
+
+Equivalent to:
 FileTest.executable?(self.to_s)
 
---- executable_real?()
+--- executable_real?
+
+Equivalent to:
 FileTest.executable_real?(self.to_s)
 
---- exist?()
+--- exist?
+
+Equivalent to:
 FileTest.exist?(self.to_s)
 
---- grpowned?()
+--- grpowned?
+
+Equivalent to:
 FileTest.grpowned?(self.to_s)
 
---- directory?()
+--- directory?
+
+Equivalent to:
 FileTest.directory?(self.to_s)
 
---- file?()
+--- file?
+
+Equivalent to:
 FileTest.file?(self.to_s)
 
---- pipe?()
+--- pipe?
+
+Equivalent to:
 FileTest.pipe?(self.to_s)
 
---- socket?()
+--- socket?
+
+Equivalent to:
 FileTest.socket?(self.to_s)
 
---- owned?()
+--- owned?
+
+Equivalent to:
 FileTest.owned?(self.to_s)
 
---- readable?()
+--- readable?
+
+Equivalent to:
 FileTest.readable?(self.to_s)
 
---- readable_real?()
+--- readable_real?
+
+Equivalent to:
 FileTest.readable_real?(self.to_s)
 
---- setuid?()
+--- setuid?
+
+Equivalent to:
 FileTest.setuid?(self.to_s)
 
---- setgid?()
+--- setgid?
+
+Equivalent to:
 FileTest.setgid?(self.to_s)
 
---- size()
+--- size
+
+Equivalent to:
 FileTest.size(self.to_s)
 
---- size?()
+--- size?
+
+Equivalent to:
 FileTest.size?(self.to_s)
 
---- sticky?()
+--- sticky?
+
+Equivalent to:
 FileTest.sticky?(self.to_s)
 
---- symlink?()
+--- symlink?
+
+Equivalent to:
 FileTest.symlink?(self.to_s)
 
---- writable?()
+--- writable?
+
+Equivalent to:
 FileTest.writable?(self.to_s)
 
---- writable_real?()
+--- writable_real?
+
+Equivalent to:
 FileTest.writable_real?(self.to_s)
 
---- zero?()
+--- zero?
+
+Equivalent to:
 FileTest.zero?(self.to_s)
 
---- rmdir()
+--- rmdir
+
+Equivalent to:
 Dir.rmdir(self.to_s)
 
---- entries()
+--- entries
+
+Equivalent to:
 Dir.entries(self.to_s)
 
---- each_entry(&block)
+--- each_entry {|pathname| ... }
+
+Equivalent to:
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) }
 
 --- mkdir(*args)
+
+Equivalent to:
 Dir.mkdir(self.to_s, *args)
 
 --- opendir(&block)
+
+Equivalent to:
 Dir.open(self.to_s, &block)
 
 --- find {|pathname| ...}
 
-self ÇÛ²¼¤Î¤¹¤Ù¤Æ¤Î¥Õ¥¡¥¤¥ë¤ä¥Ç¥£¥ì¥¯¥È¥ê¤ò°ì¤Ä¤º¤Ä°ú¿ô pathname ¤ËÅÏ¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤¹¤ë¡£
+self ÇÛ²¼¤Î¤¹¤Ù¤Æ¤Î¥Õ¥¡¥¤¥ë¤ä¥Ç¥£¥ì¥¯¥È¥ê¤ò
+°ì¤Ä¤º¤Ä°ú¿ô pathname ¤ËÅÏ¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤¹¤ë¡£
 
   require 'find'
   Find.find(self.to_s) {|f| yield Pathname.new(f)}
@@ -423,13 +539,16 @@ self ÇÛ²¼¤Î¤¹¤Ù¤Æ¤Î¥Õ¥¡¥¤¥ë¤ä¥Ç¥£¥ì¥¯¥È¥ê¤ò°ì¤Ä¤º¤Ä°ú¿ô pathname ¤ËÅÏ¤·¤Æ¥Ö¥í¥Ã¥
 ¤ÈÆ±¤¸¡£
 
 --- mkpath
-require 'fileutils'
+
+Equivalent to:
 FileUtils.mkpath(self.to_s)
 
 --- rmtree
-require 'fileutils'
+
+Equivalent to:
 FileUtils.rm_r(self.to_s)
 
 --- unlink
 --- delete
+
 self ¤¬»Ø¤¹¥Ç¥£¥ì¥¯¥È¥ê¤¢¤ë¤¤¤Ï¥Õ¥¡¥¤¥ë¤òºï½ü¤¹¤ë¡£

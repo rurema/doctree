@@ -1,14 +1,8 @@
 = module DL::Importable
 
-=== 概要
-
 DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与える。
 
-
-=== 補足
-
-メソッドやクラスは、
-実際には DL::Importable::Internal に定義されている。
+メソッドやクラスは、実際には DL::Importable::Internal に定義されている。
 
 == Instance Methods
 
@@ -16,8 +10,7 @@ DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与える。
 --- struct(contents)
 
 構造体を定義します。
-contentsについては [[m:DL::Importable::Struct.new]]
-を参照せよ。
+contentsについては [[m:DL::Importable::Struct.new]] を参照せよ。
 
 --- define_union(contents)
 --- union(contents)
@@ -26,9 +19,8 @@ contentsについては [[m:DL::Importable::Struct.new]]
 contents については上記 define_struct と同様です。
 
 
-= class DL::Importable::Memory < Object
 
-=== 概要
+= class DL::Importable::Memory < Object
 
 DL::PtrData のラッパー用クラス。
 ドット形式で構造体や共用体の要素へアクセスできるようになります。

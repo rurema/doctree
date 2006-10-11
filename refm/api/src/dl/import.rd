@@ -11,7 +11,7 @@ Importable モジュールによって提供されます。
 
 == Instance Methods
 
---- dlload(lib,...)
+--- dlload(lib, ...)
 
 [[m:DL.dlopen]] を用いてライブラリをロードし、extend した
 モジュール内でそのライブラリで定義されている参照可能なシンボルを取得できるよ
@@ -34,7 +34,7 @@ newtype 型を oldtype 型のエイリアスとして定義する。
 newtype で与えた型は extern や callback メソッド
 のプロトタイプを与えるときに利用します。
 
---- symbol(sym[, typespec])
+--- symbol(sym, [typespec])
 
 シンボル名が sym のシンボルを取り出す。
 typespec には型情報を与えて、[[c:DL::Symbol]]オブジェクトを返します。

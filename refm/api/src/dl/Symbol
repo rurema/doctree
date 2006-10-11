@@ -1,8 +1,7 @@
 = class DL::Symbol < Object
 
-[[c:DL]]
-
 == Class Methods
+
 --- new(addr, type = nil, name = nil)
 
 type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
@@ -14,6 +13,7 @@ type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
 型に相当する文字 char を取り、C 言語の型修飾を返します。
 
 == Instance Methods
+
 --- proto
 
 関数のプロトタイプを返します。

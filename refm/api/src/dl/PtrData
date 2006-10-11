@@ -1,14 +1,14 @@
 = class DL::PtrData < Object
 
-[[c:DL]]
-
 == Class Methods
---- new(addr, [size = 0, free = nil])
+
+--- new(addr, size = 0, free = nil)
 
 アドレス addr を指すポインタに相当する PtrData オブジェクトを返します。
 GC は free 関数を使用してメモリを解放します。
 
 == Instance Methods
+
 --- free=(sym)
 
 シンボルオブジェクト sym を指定した場合、GC は sym に相当する関数
@@ -64,15 +64,15 @@ PtrData オブジェクトを返す)
 #@#   * defines the data type to get access to a structure member with a symbol.
 #@#     (see also PtrData#[])
 
-構造体メンバをシンボルでアクセスするデータ型を定義します (PtrData#[]
-も参照)。
+構造体メンバをシンボルでアクセスするデータ型を定義します
+(PtrData#[] も参照)。
 
 --- union!(type, *members)
 #@#   * defines the data type to get access to a union member with a symbol. (see
 #@#     also PtrData#[])
 
-共用体メンバをシンボルでアクセスするデータ型を定義します (PtrData#[]
-も参照)。
+共用体メンバをシンボルでアクセスするデータ型を定義します
+(PtrData#[] も参照)。
 
 --- [](key)
 --- [](key, num = 0)

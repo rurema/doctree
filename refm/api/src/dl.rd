@@ -1,25 +1,12 @@
-#@if (version >= "1.7.0")
-#@# = dl
-
-Ruby/DL ¤Ï¡¢UNIX ¤Î [[man:dlopen(3)]] ¤ä Windows ¤Î
-LoadLibrary() ¤Ê¤É¤Î¥À¥¤¥Ê¥ß¥Ã¥¯¥ê¥ó¥«¤Ø¤Î¥¤¥ó¥¿¥Õ¥§¡¼¥¹¤òÄó¶¡¤¹
-¤·¤Þ¤¹¡£¤Þ¤¿¡¢¸½ºß[[unknown:dl2|URL:http://rubyforge.net/projects/ruby-dl2/]]¤Îruby-1.8
-ÈÇ¤â³«È¯¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
-
-=== Libraries
-
-* [[c:DL]]
-  * [[c:DL::Handle]]
-  * [[c:DL::Symbol]]
-  * [[c:DL::PtrData]]
-* [[unknown:DL::Importable|"dl/import"]]
-  * [[unknown:"dl/struct"]]
-* [[unknown:DL::Types|"dl/types"]]
-* [[unknown:"dl/win32"]]
+#@since 1.8.0
+Ruby/DL ¤Ï¡¢UNIX ¤Î [[man:dlopen(3)]] ¤ä
+Windows ¤Î LoadLibrary() ¤Ê¤É¤Î
+¥À¥¤¥Ê¥ß¥Ã¥¯¥ê¥ó¥«¤Ø¤Î¥¤¥ó¥¿¥Õ¥§¡¼¥¹¤òÄó¶¡¤·¤Þ¤¹¡£
+¤Þ¤¿¡¢¸½ºß dl2 ¤Î Ruby 1.8 ÈÇ¤â³«È¯¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 
 === Using Ruby/DL
 
-ÄÌ¾ï¤Ï¡¢[[unknown:DL::Importable|"dl/import"]] ¥â¥¸¥å¡¼¥ë¤ò»ÈÍÑ¤·¤Þ¤¹¡£
+ÄÌ¾ï¤Ï¡¢[[c:DL::Importable]] ¥â¥¸¥å¡¼¥ë¤ò»ÈÍÑ¤·¤Þ¤¹¡£
 ¤³¤ì¤Ï¥é¥¤¥Ö¥é¥ê´Ø¿ô¤Ë¥¢¥¯¥»¥¹¤¹¤ë¤¿¤á¤Î¹â¿å½à¤Î´Ø¿ô¤ò»ý¤Ã¤Æ¤¤¤Þ¤¹¡£
 ¤¢¤ë¥â¥¸¥å¡¼¥ë¤ò³ÈÄ¥¤¹¤ë¤Ë¤Ï°Ê²¼¤Î¤è¤¦¤Ë DL::Importable ¤ò»ÈÍÑ¤·¤Þ¤¹¡£
 
@@ -28,9 +15,10 @@ LoadLibrary() ¤Ê¤É¤Î¥À¥¤¥Ê¥ß¥Ã¥¯¥ê¥ó¥«¤Ø¤Î¥¤¥ó¥¿¥Õ¥§¡¼¥¹¤òÄó¶¡¤¹
     extend DL::Importable
   end
 
-°Ê¸å¡¢¤³¤Î¥â¥¸¥å¡¼¥ë¤Î dlload ¤È extern ¥á¥½¥Ã¥É¤ò»ÈÍÑ¤Ç¤­¤Þ¤¹¡£°Ê²¼¤Î¤è
-¤¦¤Ë dlload »È¤Ã¤Æ¥é¥¤¥Ö¥é¥ê¤ò¥í¡¼¥É¤·¡¢¤½¤ì¤¾¤ì¤Î¥é¥¤¥Ö¥é¥ê´Ø¿ô¤ËÂÐ¤·
-¤Æ extern ¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ç¥é¥Ã¥Ñ¡¼¥á¥½¥Ã¥É¤òÄêµÁ¤·¤Þ¤¹¡£
+°Ê¸å¡¢¤³¤Î¥â¥¸¥å¡¼¥ë¤Î dlload ¤È extern ¥á¥½¥Ã¥É¤ò»ÈÍÑ¤Ç¤­¤Þ¤¹¡£
+°Ê²¼¤Î¤è¤¦¤Ë dlload »È¤Ã¤Æ¥é¥¤¥Ö¥é¥ê¤ò¥í¡¼¥É¤·¡¢
+¤½¤ì¤¾¤ì¤Î¥é¥¤¥Ö¥é¥ê´Ø¿ô¤ËÂÐ¤·¤Æ extern ¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ç
+¥é¥Ã¥Ñ¡¼¥á¥½¥Ã¥É¤òÄêµÁ¤·¤Þ¤¹¡£
 
   module LIBC
     extend DL::Importable
@@ -49,11 +37,13 @@ LIBC.strlen ¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ç¡¢¥é¥¤¥Ö¥é¥ê´Ø¿ô strlen() ¤ò»ÈÍÑ¤Ç¤­¤Þ¤¹¡£Í¿
 ¤¨¤é¤ì¤¿´Ø¿ôÌ¾¤ÎºÇ½é¤ÎÊ¸»ú¤¬ÂçÊ¸»ú¤Ê¤é¡¢ÄêµÁ¤µ¤ì¤ë¥á¥½¥Ã¥ÉÌ¾¤ÎºÇ½é¤ÎÊ¸
 »ú¤Ï¾®Ê¸»ú¤Ë¤Ê¤ê¤Þ¤¹¡£
 
-°Ê²¼¤Î¤è¤¦¤Ë [[unknown:"dl/struct"]] ¤ÇÄêµÁ¤µ¤ì¤ë struct ¤ä union ´Ø¿ô¤ò»ÈÍÑ¤¹
-¤ë¤³¤È¤Ç¹½Â¤ÂÎ¤ä¶¦ÍÑÂÎ¤Î¥á¥â¥ê¥¤¥á¡¼¥¸¤òºîÀ®¤¹¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
+°Ê²¼¤Î¤è¤¦¤Ë [[lib:"dl/struct"]] ¤ÇÄêµÁ¤µ¤ì¤ë
+struct ¤ä union ´Ø¿ô¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ç
+¹½Â¤ÂÎ¤ä¶¦ÍÑÂÎ¤Î¥á¥â¥ê¥¤¥á¡¼¥¸¤òºîÀ®¤¹¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
 
   require "dl/import"
   require "dl/struct"
+
   module LIBC
     extend DL::Importable
     Timeval = struct [       # define timeval structure.
@@ -68,7 +58,8 @@ LIBC.strlen ¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ç¡¢¥é¥¤¥Ö¥é¥ê´Ø¿ô strlen() ¤ò»ÈÍÑ¤Ç¤­¤Þ¤¹¡£Í¿
 #@# an object, PtrData, which has already been created.
 
 ¾å¤ÎÎã¤Ç¡¢¥á¥â¥ê¤Î³ä¤êÅö¤Æ¤Ë LIBC::Timeval.new ¤Ç¤Ï¤Ê¤¯¡¢
-LIBC::Timeval.malloc ¤ò»ÈÍÑ¤·¤Æ¤¤¤ë¤³¤È¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£LIBC::Timeval.new ¤Ï¡¢
+LIBC::Timeval.malloc ¤ò»ÈÍÑ¤·¤Æ¤¤¤ë¤³¤È¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£
+LIBC::Timeval.new ¤Ï¡¢
 ºîÀ®ºÑ¤ß¤Î PtrData ¥ª¥Ö¥¸¥§¥¯¥È¤ò¥é¥Ã¥×¤¹¤ë¤¿¤á¤Î¤â¤Î¤Ç¤¹¡£
 
 #@# We can define a callback using the module function "callback" as follows:
@@ -91,11 +82,11 @@ LIBC::Timeval.malloc ¤ò»ÈÍÑ¤·¤Æ¤¤¤ë¤³¤È¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£LIBC::Timeval.new ¤Ï¡
 #@# that we must directly use low-level functions such as dlsym(). In such case,
 #@# we would use DL module functions. They are described in next section.
 
-DL::Importable ¥â¥¸¥å¡¼¥ë¤Ï¤È¤Æ¤âÊØÍø¤Ç¤¹¡£¤·¤«¤·¡¢¤È¤­¤Ë¤Ïdlsym() ¤Î¤è
-¤¦¤ÊÄã¥ì¥Ù¥ë´Ø¿ô¤òÄ¾ÀÜ»È¤ï¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¾ìÌÌ¤ËÁø¶ø¤·¤Þ¤¹¡£¤³¤Î¤è¤¦¤Ê¾ì
-¹ç¤Ë¤Ï DL ¥â¥¸¥å¡¼¥ë¤Î´Ø¿ô¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ë¤Ê¤ë¤Ç¤·¤ç¤¦¡£¤³¤ì¤Ë¤Ä¤¤¤Æ¤Ï
-[[c:DL]] ¤ÇÀâÌÀ¤·¤Þ¤¹¡£
-
+DL::Importable ¥â¥¸¥å¡¼¥ë¤Ï¤È¤Æ¤âÊØÍø¤Ç¤¹¡£
+¤·¤«¤·¡¢¤È¤­¤Ë¤Ïdlsym() ¤Î¤è¤¦¤ÊÄã¥ì¥Ù¥ë´Ø¿ô¤ò
+Ä¾ÀÜ»È¤ï¤Ê¤±¤ì¤Ð¤Ê¤é¤Ê¤¤¾ìÌÌ¤ËÁø¶ø¤·¤Þ¤¹¡£
+¤³¤Î¤è¤¦¤Ê¾ì¹ç¤Ë¤Ï DL ¥â¥¸¥å¡¼¥ë¤Î´Ø¿ô¤ò»ÈÍÑ¤¹¤ë¤³¤È¤Ë¤Ê¤ë¤Ç¤·¤ç¤¦¡£
+¤³¤ì¤Ë¤Ä¤¤¤Æ¤Ï [[c:DL]] ¤ÇÀâÌÀ¤·¤Þ¤¹¡£
 
 #@include(dl/DL)
 #@include(dl/Handle)

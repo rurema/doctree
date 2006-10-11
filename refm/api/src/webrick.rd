@@ -1,25 +1,18 @@
-require etc
-require fcntl
-require net/http
-require socket
-require thread
-require time
-require timeout
-require uri
-
 汎用HTTPサーバーフレームワーク。HTTPサーバが簡単に作れます。
 
 WEBrick はサーブレットによって機能します。サーブレットとは何か。クライアントがアクセスしてきた時にHTTPサーバが実際に行なうことは ファイルを読み込んで返す・forkしてスクリプトを実行する・テンプレートを適用する など様々です。この「サーバが行なっている様々なこと」を抽象化したのがサーブレットです。
 
-サーブレットはRubyのオブジェクトとして実装されます。具体的には[[c:WEBrick::HTTPServlet::AbstractServlet]]のサブクラスのインスタンスです。
+サーブレットはRubyのオブジェクトとして実装されます。
+具体的には [[c:WEBrick::HTTPServlet::AbstractServlet]] の
+サブクラスのインスタンスです。
 
 WEBrick はセッション管理の機能を提供しません。
 
- * [[m:URL:http:#/www.webrick.org/]]
- * [[m:URL:http:#/shogo.homelinux.org/~ysantoso/WebWiki/WEBrick.html]]
- * [[m:URL:http:#/pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=WEBrick]]
- * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-   * [[unknown:WEBrickでプロキシサーバを作って遊ぶ|URL:http://jp.rubyist.net/magazine/?0002-WEBrickProxy]]
+ * [[url:http://www.webrick.org/]]
+ * [[url:http://shogo.homelinux.org/~ysantoso/WebWiki/WEBrick.html]]
+ * [[url:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=WEBrick]]
+ * Rubyist Magazine http://jp.rubyist.net/magazine/
+   * WEBrickでプロキシサーバを作って遊ぶ http://jp.rubyist.net/magazine/?0002-WEBrickProxy
  * [[lib:webrick/ssl]]
  * [[lib:webrick/cgi]]
 

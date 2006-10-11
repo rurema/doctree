@@ -16,7 +16,9 @@
 
 --- typealias(alias, type, enc, dec, struct_enc, struct_dec)
 
-型定義の追加を行う。インスタンス変数 @TYDEFS の先頭に
+型定義の追加を行う。
+
+インスタンス変数 @TYDEFS の先頭に
 
   [alias, type,
    enc, dec, struct_end, struct_dec]
@@ -25,13 +27,14 @@
 
 --- encode_type(alias)
 
-DL モジュールで用いる型定義と Ruby のオブジェクトを DL モジュールで用いるデータへの
-エンコード用 Proc オブジェクトと、DL モジュールのデータから Ruby オブジェクト
-へのデコード用の Proc オブジェクトの組を次の通りの Array として返す。
+DL モジュールで用いる型定義と Ruby のオブジェクトを
+DL モジュールで用いるデータへのエンコード用 Proc オブジェクトと、
+DL モジュールのデータから Ruby オブジェクトへのデコード用の
+Proc オブジェクトの組を次の通りの Array として返す。
 
-      [ty,enc,dec,senc,sdec]
-      ty : DLでの型指定子
-      enc : エンコード用Proc
-      dec : デコード用Proc
-      senc : エンコード用Proc(dl/structで使用)
-      sdec : デコード用Proc(dl/structで使用)
+  [ty,enc,dec,senc,sdec]
+  ty : DLでの型指定子
+  enc : エンコード用Proc
+  dec : デコード用Proc
+  senc : エンコード用Proc(dl/structで使用)
+  sdec : デコード用Proc(dl/structで使用)

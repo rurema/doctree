@@ -1,8 +1,5 @@
 端末操作ライブラリ curses の Ruby インターフェイスです。
 
-*[[m:Curses モジュール]]
-*[[c:Curses::Window クラス]]
-
 = module Curses
 
 == Module Functions
@@ -27,6 +24,7 @@ curses スクリーンを閉じます。これ以後 Curses モジュール
 stdscr の表示を更新します。
 
 --- doupdate
+
 ？
 
 --- clear
@@ -151,7 +149,9 @@ stdscr のカーソルがある行を削除し、後の行を上に詰めます。
 
 stdscr のカーソル位置から 1 バイト読みとって返します。
 
-= class Curses::Window  < Object
+
+
+= class Curses::Window < Object
 
 == Class Methods
 
@@ -172,8 +172,8 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 
 --- close
 
-ウィンドウを閉じます。以降のこのウィンドウオブジェクトに
-対する操作は例外を発生します。
+ウィンドウを閉じます。
+以降のこのウィンドウオブジェクトに対する操作は例外を発生します。
 
 --- clear
 

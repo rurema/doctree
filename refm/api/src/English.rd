@@ -8,11 +8,11 @@
   require 'English'
   p $RS #=> "\n"
 
+
+
 = reopen Kernel
 
 == Special Variables
-
-定義される別名とその対応は以下の通りです。
 
 --- $ERROR_INFO
 
