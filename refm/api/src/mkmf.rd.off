@@ -1,19 +1,17 @@
-= mkmf
+Ruby の拡張ライブラリのための Makefile を作成するライブラリです。
+このライブラリは通常、extconf.rb という名前の ruby スクリプトから require されます。
+この extconf.rb を実行して Makefile を作成するのが慣習です。
 
-Ruby の拡張ライブラリのための Makefile を作成するライブラリです。通常 
-extconf.rb という名の ruby スクリプトの中で require され、このスクリプ
-トを実行することで Makefile を作成するのが慣習となっています。
+extconf.rb の書きかたについては、
+Ruby のアーカイブに含まれる README.EXT (日本語版は README.EXT.ja)
+も参照してください。
 
-拡張ライブラリの作り方(extconf.rbの書き方)に関しては ruby のアーカイブ
-に含まれる ((<"ruby-src:README.EXT">)) (日本語版は 
-((<"ruby-src:README.EXT.ja">)))も参照してください。
+=== 使い方
 
-== 使い方
-
-架空の拡張ライブラリ foo.so を作成することを考えます。この拡張ライブラ
-リを作成するためには、ヘッダファイル bar.h とライブラリ libbar.a の関
-数 baz() が必要だとします。このための extconf.rb は以下のように書きま
-す。
+架空の拡張ライブラリ foo.so を作成することを考えます。
+この拡張ライブラリを作成するためには、
+ヘッダファイル bar.h とライブラリ libbar.a の関数 baz() が必要だとします。
+このための extconf.rb は以下のように書きます。
 
   require 'mkmf'
 
@@ -22,395 +20,481 @@ extconf.rb という名の ruby スクリプトの中で require され、このスクリプ
     create_makefile('foo')
   end
 
-そして、拡張ライブラリを作成、インストールするには以下のようにします。
+拡張ライブラリ foo.so を作成、インストールするには以下のようにします。
 
   $ ruby extconf.rb
   $ make
   $ make site-install
 
-(({dir_config('bar')})) により、ヘッダファイルのパス、ライブラリのパス
-を以下のように指定できます。
+foo.so の extconf.rb では dir_config('bar') を実行しているので、
+ユーザは以下のようにコマンドラインオプション --with-bar-dir
+などを使って、ヘッダファイルのパスやライブラリのパスを指定できます。
 
   $ ruby extconf.rb --with-bar-include=/usr/local/include \
                     --with-bar-lib=/usr/local/lib
 
-  あるいは
+  または
 
   $ ruby extconf.rb --with-bar-dir=/usr/local
 
-詳細は ((<mkmf/dir_config>)) を参照してください。
+dir_config 関数の詳細については
+[[m:Kernel#dir_config]] を参照してください。
 
-== configure オプション
+=== configure オプション
 
-ここでの configure オプションとは ruby インタプリタ作成時に指定された 
-configure スクリプトのオプション、または extconf.rb 実行時のオプショ
-ンのことです。extconf.rb の作成者は任意のオプションを定義できます。
-(((<mkmf/arg_config>)) を参照)。
+configure オプションとは Ruby インタプリタのコンパイル時に指定された
+configure スクリプトのオプション、
+または extconf.rb 実行時のオプションのことです。
+extconf.rb の作成者は任意のオプションを定義できます。
+[[m:Kernel#arg_config]] も参照してください。
 
 また、以下のオプションがデフォルトで利用可能です。
 
-: --with-opt-include=((|directory|))
-  ヘッダファイルを探索するディレクトリ ((|directory|)) を追加します。
+: --with-opt-include=DIR
+    ヘッダファイルを探索するディレクトリ DIR を追加します。
 
-: --with-opt-lib=((|directory|))
-  ライブラリファイルを探索するディレクトリ ((|directory|)) を追加します。
+: --with-opt-lib=DIR
+    ライブラリファイルを探索するディレクトリ DIR を追加します。
 
-: --with-opt-dir=((|directory|))
-  ヘッダファイル、ライブラリファイルを探索するディレクトリ 
-  ((|directory|))/include、((|directory|))/lib をそれぞれ追加します。
+: --with-opt-dir=DIR
 
-: --with-((|target|))-include=((|directory|))
-  extconf.rb の中で ((<mkmf/dir_config>))(((|target|))) を実行していればこ
-  のオプションを指定できます。
+    ヘッダファイル、ライブラリファイルを探索するディレクトリ
+    DIR/include、DIR/lib をそれぞれ追加します。
 
-  ヘッダファイルを探索するディレクトリ ((|directory|)) を追加します。
+: --with-TARGET-include=DIR
 
-: --with-((|target|))-lib=((|directory|))
-  extconf.rb の中で ((<mkmf/dir_config>))(((|target|))) を実行していればこ
-  のオプションを指定できます。
+    ヘッダファイルを探索するディレクトリ DIR を追加します。
 
-  ライブラリを探索するディレクトリ ((|directory|)) を追加します。
+    extconf.rb の中で dir_config(TARGET)
+    を実行していればこのオプションを指定できます。
 
-: --with-((|target|))-dir=((|directory|))
-  extconf.rb の中で ((<mkmf/dir_config>))(((|target|))) を実行していればこ
-  のオプションを指定できます。
+: --with-TARGET-lib=DIR
 
-  ヘッダファイル、ライブラリファイルを探索するディレクトリ 
-  ((|directory|))/include、((|directory|))/lib をそれぞれ追加します。
+    ライブラリを探索するディレクトリ DIR を追加します。
 
-== depend ファイル
-カレントディレクトリに depend という名前のファイルがあればこの内容は生
-成される Makefile の最後に追加されます。
+    extconf.rb の中で dir_config(TARGET)
+    を実行していればこのオプションを指定できます。
 
-このファイルは、ソースファイルの依存関係を記述するために使用します。例
-えば、拡張ライブラリのソース foo.c が foo.h をインクルードしていれば
-foo.h が更新されたときにも foo.c を再コンパイルしたくなります。
+: --with-TARGET-dir=DIR
 
-このような依存関係を記述するには depend ファイルに以下を書きます。
+    ヘッダファイル、ライブラリファイルを探索するディレクトリ
+    DIR/include、DIR/lib をそれぞれ追加します。
+
+    extconf.rb の中で dir_config(TARGET)
+    を実行していればこのオプションを指定できます。
+
+=== depend ファイル
+
+カレントディレクトリに depend という名前のファイルがある場合、
+生成される Makefile の最後に depend ファイルの内容が追加されます。
+
+depend ファイルはソースファイルの依存関係を記述するために使います。
+例えば拡張ライブラリのソースコード foo.c が foo.h をインクルードしている場合、
+foo.h が更新されたときにも foo.c を再コンパイルしたいでしょう。
+このような依存関係を記述するには depend ファイルに以下の 1 行を書きます。
 
   foo.o: foo.c foo.h
 
-これは、foo.o が foo.c と foo.h に依存し、これらが更新されれば foo.o 
-は再作成されることを示します。
+このように書くと、foo.o が foo.c と foo.h に依存していることを示します。
+つまり、foo.c か foo.h のどちらかが更新された場合に
+foo.o がリコンパイルされるようになります。
 
-C コンパイラによっては、このような出力を自動生成することができます。こ
-のためのオプションは -M として知られています。
+C コンパイラによっては、このような記述を自動生成できます。
+一般に、このためのオプションは「-M」です。
+「-M」オプションを持つ C コンパイラを使っている場合は、
+以下のコマンドを実行するだけで適切な depend が生成できます。
 
-  cc -M *.c > depend
+  $ cc -M *.c > depend
 
-は、上記の出力を得ます。
+gcc には、-M オプションを改善した -MM というオプションもあります。
+このオプションは、通常更新することのない stdio.h など、
+システムのヘッダファイルを依存関係に含めません。
+この -MM オプションでは、「#include <...>」の形式で参照される
+ヘッダファイルをシステムのヘッダファイルとみなしているようです。
 
-gcc では、さらに -MM というオプションがあります。これは(通常更新するこ
-とのないstdio.hなど)システムのヘッダファイルを依存ファイルとみなしませ
-ん。(#include <...> の形式で参照されるヘッダファイルをシステムのヘッダ
-ファイルとみなすようです)
+gcc の -MM オプションを使う場合は、
+以下のコマンドを実行すれば適切な depend が生成できます。
 
-   gcc -MM *.c > depend
+  $ gcc -MM *.c > depend
 
-のように使います。
+なお、depend ファイルを依存関係の記述以外に使うべきではありません。
+mkmf.rb が depend ファイルを Makefile に連結するときに、
+その内容を加工する場合があるからです。
 
-depend ファイルを他の用途で使用しては行けません。mkmf はこの内容を 
-Makefile に出力する際に多少の加工を行う場合があります。
+=== extconf.rb が生成する make ターゲット
 
-== make ターゲット
-
-extconf.rb が生成した Makefile には以下のターゲットが定義されています。
+extconf.rb が生成する Makefile には以下のターゲットが定義されています。
 
 : all
-  拡張ライブラリを作成します。
+    拡張ライブラリを作成します。
 
 : clean
-  作成した拡張ライブラリ、オブジェクトファイルなどを削除します。
+    作成した拡張ライブラリ、オブジェクトファイルなどを削除します。
 
 : distclean
 : realclean
-  clean に加えて Makefile extconf.h(((<mkmf/create_header>))参照) core ruby 
-  などを削除します。
+    clean ターゲットが削除するファイルに加えて、
+    Makefile, extconf.h, core, ruby なども削除します。
 
 : install
 : site-install
-  作成した拡張ライブラリを ((<mkmf/$archdir>)) にインストールします。カレン
-  トディレクトリにディレクトリ lib があればその配下の ruby スクリプト
-  (.rb ファイル)をディレクトリ階層ごと ((<mkmf/$libdir>)) にインストールし
-  ます。
+    作成した拡張ライブラリを $sitearchdir にインストールします。
+    カレントディレクトリにディレクトリ lib があれば
+    その配下の ruby スクリプト (*.rb ファイル) を、
+    ディレクトリ階層を保ったまま $sitelibdir にインストールします。
 
-  独立したライブラリとしてコンパイルされた場合、拡張ライブラリは ((<mkmf/$sitearchdir>)) に、
-  ruby スクリプトは ((<mkmf/$sitelibdir>)) にインストールされます。
 
-== 関数
 
-以下は、extconf.rb を記述するのに有用な関数です。ヘッダファイルの存在
-チェック、ライブラリの存在チェックなど、システム間の差異を調べシステム
-に適した Makefile を生成するためにこれらの関数が必要となります。
+= reopen Kernel
 
-# --- rm_f(files...)
-#     ファイル ((|files|)) を削除します。((|files|)) には 
-#     ((<Dir.glob|Dir>)) のワイルドカードを指定することができ
-#     ます。
-# 
-# --- xsystem(command)
-#     ruby の組み込み関数 ((<system|組み込み関数>))() と同じです
-#     が、コマンドの出力は(標準出力、標準エラー出力ともに)ログ
-#     ファイルに出力されます。ログファイル名は mkmf.log です。
-# 
-#     ruby をデバッグオプション((({-d})))付きで実行した場合は、コマンド
-#     を表示した後に((<system|組み込み関数>))(((|command|))) を実行します。
-# 
-# --- try_link0(src[, opt])
-#     ((<mkmf/try_link>)) の実体です。
+== Private Instance Methods
+#@# 以下は、extconf.rb を記述するのに有用な関数です。
+#@# ヘッダファイルの存在チェック、ライブラリの存在チェックなど、
+#@# システム間の差異を調べシステムに適した Makefile を生成するために
+#@# これらの関数が必要となります。
+
+#@# --- rm_f(files...)
+#@#     ファイル ((|files|)) を削除します。((|files|)) には 
+#@#     ((<Dir.glob|Dir>)) のワイルドカードを指定することができ
+#@#     ます。
+#@# 
+#@# --- xsystem(command)
+#@#     ruby の組み込み関数 ((<system|組み込み関数>))() と同じです
+#@#     が、コマンドの出力は(標準出力、標準エラー出力ともに)ログ
+#@#     ファイルに出力されます。ログファイル名は mkmf.log です。
+#@# 
+#@#     ruby をデバッグオプション((({-d})))付きで実行した場合は、コマンド
+#@#     を表示した後に((<system|組み込み関数>))(((|command|))) を実行します。
+#@# 
+#@# --- try_link0(src[, opt])
+#@#     ((<mkmf/try_link>)) の実体です。
 
 --- try_link(src[, opt])
-    C ソース ((|src|)) をコンパイル、リンクします。リンクの結果が正常
-    かどうかを true または false で返します。
 
-    ((|opt|))が指定されていればリンク時のコマンド引数として渡されます。
-    このメソッドは、((<mkmf/$CFLAGS>))、((<mkmf/$LDFLAGS>)) の値もコンパイラ、リ
-    ンカに渡します。
+C プログラムのソースコード src をコンパイル、リンクします。
+問題なくリンクできたら true を返します。
+コンパイルとリンクに失敗したら false を返します。
 
-    ((|src|)) には直接 C ソースを文字列で書きます。
+第 2 引数 opt が指定されたときは、リンカにコマンド引数として渡します。
+また、このメソッドは [[m:$CFLAGS]] と [[m:$LDFLAGS]] の値も
+コンパイラまたはリンカに渡します。
+
+例：
+
+  if try_link("int main() { sin(0.0); }", '-lm')
+    $stderr.puts "sin() exists"
+  end
 
 --- try_cpp(src[, opt])
-    C ソース ((|src|)) をプリプロセスし、その結果が正常かどうかを true 
-    または false で返します。
 
-    (({((<mkmf/$CFLAGS>)) ((|opt|))})) をプリプロセッサの引数に渡します。
+C プログラムのソースコード src をプリプロセスします。
+問題なくプリプロセスできたら true を返します。
+プリプロセスに失敗したら false を返します。
 
-    ((|src|)) には直接 C ソースを文字列で書きます。
+第 1 引数 src は文字列で渡します。
 
-    このメソッドはヘッダファイルの存在チェックなどに使用します。
+第 2 引数 opt と [[m:$CFLAGS]] の値を
+プリプロセッサにコマンドライン引数として渡します。
+
+このメソッドはヘッダファイルの存在チェックなどに使用します。
+
+例：
+
+  if try_cpp("#include <stdio.h>")
+    $stderr.puts "stdio.h exists"
+  end
 
 --- egrep_cpp(pat, src[, opt])
-    C ソース ((|src|)) をプリプロセスし、その結果が正規表現 ((|pat|)) 
-    にマッチするかどうかを判定します。((|pat|)) には、((*egrepの*))正
-    規表現を文字列で指定します。
 
-    (({ ((<mkmf/CPP>)) ((<mkmf/$CFLAGS>)) ((|opt|)) (({| egrep})) ((|pat|)) }))
+C プログラムのソースコード src をプリプロセスし、
+その結果が正規表現 pat にマッチするかどうかを判定します。
 
-    を実行し、その結果が正常かどうかを true または false で返します。
+  CPP $CFLAGS opt | egrep pat
 
-    ((|src|)) には直接 C ソースを文字列で書きます。
+を実行し、その結果が正常かどうかを true または false で返します。
 
-    このメソッドはヘッダファイルに関数などの宣言があるかどうかを検
-    査するのに使用します。
+第 1 引数 pat には「egrep の」正規表現を文字列で指定します。
+Ruby の正規表現ではありません。
+
+第 2 引数 src には C 言語のソースコードを文字列で記述します。
+
+このメソッドはヘッダファイルに関数などの宣言があるかどうか
+検査するために使用します。
 
 --- try_run(src[, opt])
-    C ソース ((|src|)) をコンパイルし、生成された実行ファイルを実行し
-    た結果が正常かどうかを true または false で返します。
 
-    ((|src|)) には直接 C ソースを文字列で書きます。
+C プログラムのソースコード src をコンパイルし、
+生成された実行ファイルを実行します。
+正常に実行できれば true を返します。
+実行が失敗した場合は false を返します。
 
---- install_rb(mfile, dest[, srcdir])
-    ((* このメソッドは、((<mkmf/create_makefile>)) が使用します *))
+第 1 引数 src には C 言語のソースコードを文字列で記述します。
 
-    ディレクトリ ((|srcdir|))(({/lib})) 配下の ruby スクリプト
-    ((({.rb}))ファイル)を((|dest|)) にインストールするための Makefile 
-    規則を ((|mfile|)) に出力します。((|mfile|)) は ((<IO>)) クラスの
-    インスタンスです。
+第 2 引数 opt には C コンパイラのオプションを指定します。
 
-    ((|srcdir|))(({/lib})) のディレクトリ構造はそのまま ((|dest|)) 配
-    下に反映されます。
+--- install_rb(mfile, dest, srcdir = '.')
+#@# このメソッドは create_makefile が使用します
 
-    引数 ((|srcdir|)) のデフォルトは "." です。
+ディレクトリ srcdir/lib 配下の Ruby スクリプト (*.rb ファイル)
+を dest にインストールするための Makefile 規則を mfile に出力します。
+mfile は [[c:IO]] クラスのインスタンスです。
+
+srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 
 --- append_library(libs, lib)
-    ライブラリ ((|lib|)) をライブラリのリスト ((|libs|)) の先頭に追加
-    した結果を返します。
 
-    引数 ((|libs|)) とこのメソッドの戻り値はリンカに渡す引数形式の文字
-    列です。これは UNIX では、
+ライブラリのリスト libs の先頭にライブラリ lib を追加し、
+その結果を返します。
 
-      "-lfoo -lbar"
+引数 libs とこのメソッドの戻り値は
+リンカに渡す引数形式の文字列です。
+すなわち、UNIX 系 OS では
 
-    であり、MS-Windows などでは
+  "-lfoo -lbar"
 
-      "foo.lib bar.lib"
+であり、MS Windows などでは
 
-    です。引数 ((|lib|)) は、この例での (({"foo"})) や (({"bar"})) に
-    あたります。
+  "foo.lib bar.lib"
+
+です。
+第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
 --- have_library(lib[, func])
-    ライブラリ ((|lib|)) がシステムに存在し、関数 ((|func|)) が定義され
-    ているかどうかを検査します。検査に成功すれば ((<mkmf/$libs>)) に 
-    ((|lib|)) を追加し true を返します。そうでなければ false を返しま
-    す。
 
-    ((|func|)) の指定を省略した場合、関数の存在は検査しません。
+ライブラリ lib がシステムに存在し、
+関数 func が定義されているかどうかをチェックします。
+チェックが成功すれば [[m:$libs]] に lib を追加し true を返します。
+チェックが失敗したら false を返します。
 
-    ((|func|)) が nil または空文字列("") であれば特に何も検査をせずに、
-    無条件で ((|lib|)) を追加します。
+第 2 引数 func を省略した場合、関数の存在までは検査せず、
+ライブラリが存在するかどうかだけをチェックします。
 
---- find_library(lib, func[, path1[, path2[, ...]]])
-    関数 ((|func|)) が定義されたライブラリ ((|lib|)) を探します。最初
-    にパス指定なしで検査し、次に((|path1|))を指定、ダメなら((|path2|)) 
-    を指定・・・といったように順にリンク可能なライブラリを探索します。
+第 2 引数 func が nil または空文字列 ("") のときは、
+何も検査をせず、無条件で lib を追加します。
 
-    検査に成功すれば ((|lib|)) を ((<mkmf/$libs>)) に追加し、見つかったパス
-    を ((<mkmf/$LDFLAGS>)) に追加して true を返します。指定されたすべての
-    パスを検査してもライブラリ ((|lib|)) が見つからなければ false を返
-    します。
+--- find_library(lib, func, *pathes)
 
-    ((|path|)) の指定がなければ((<mkmf/have_library>))と同じです。
+関数 func が定義されたライブラリ lib を探します。
+最初はパスを指定せずに探し、
+それに失敗したら pathes[0] を指定して探し、
+それにも失敗したら pathes[1] を指定して探し……
+というように、リンク可能なライブラリを探索します。
+
+上記の探索でライブラリ lib を発見できた場合は lib を [[m:mkmf#$libs]] に追加し、
+見つかったパスを [[m:$LDFLAGS]] に追加して true を返します。
+指定されたすべてのパスを検査してもライブラリ lib が見つからないときは、
+変数を変更せず false を返します。
+
+pathes を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
 
 --- have_func(func[, header])
-    関数 ((|func|)) が存在するかどうかを検査します。
 
-    ((|func|)) が存在すれば ((<mkmf/$defs>)) に (({-DHAVE_((|func|))}))
-    (((|func|)) は大文字に変換されます)を追加して true を返します。そ
-    うでなければ false を返します。
+関数 func がシステムに存在するかどうかを検査します。
 
-    ((|header|)) には、関数((|func|))を使用するのに必要なヘッダファイ
-    ル名を指定します。これは引数の型チェックのためではなく(そのような
-    検査はこのメソッドでは行われません)関数が実際にはマクロで定義され
-    ている場合などのために使用します。
+関数 func が存在すれば [[m:$defs]] に
+"-DHAVE_func" (func は大文字に変換されます) を追加して true を返します。
+関数 func が見つからないときはグローバル変数を変更せず false を返します。
+
+第 2 引数 header には、
+関数 func を使用するのに必要なヘッダファイル名を指定します。
+これは関数の型をチェックするためではなく、
+関数が実際にはマクロで定義されている場合などのために使用します。
 
 --- have_header(header)
-    ヘッダファイル ((|header|)) が存在するかどうかを検査します。
 
-    ((|header|)) が存在すれば ((<mkmf/$defs>)) に、
-    (({-DHAVE_((|header|))})) (((|header|)) は実際には大文字に変換され 
-    文字 "-", "."  が、"_" に置き換えられます)を追加して true を返しま
-    す。そうでなければ false を返します。
+ヘッダファイル header がシステムに存在するかどうか調べます。
+
+ヘッダファイル header が存在すれば
+グローバル変数 [[m:$defs]] に "-DHAVE_header" を追加して true を返します。
+ヘッダファイル header が存在しないときは $defs は変更せず false を返します。
+なお、-DAHVE_header の header には、
+実際には header.upcase.tr('-.', '_') が使われます。
 
 --- arg_config(config[, default])
-    ((<mkmf/configure オプション>)) --((|config|)) の値を返します。値が設定
-    されていなければ ((|default|)) を返します。
 
-    extconf.rb の場合、
-        ruby extconf.rb --foo --bar=baz
-    と実行すれば
-    arg_config("foo") の値は true、arg_config("bar") の値は "baz" 
-    です。
+configure オプション --config の値を返します。
+オプションが指定されていないときは第 2 引数 default を返します。
+
+例えば extconf.rb で arg_config メソッドを使う場合、
+
+  $ ruby extconf.rb --foo --bar=baz
+
+と実行したとき、arg_config("foo") の値は true、
+arg_config("bar") の値は "baz" です。
 
 --- with_config(config[, default])
-    ((<mkmf/arg_config>)) と同じですが、(({--with-((|config|))})) オプショ
-    ンの値だけを参照します。
+
+[[m:Kernel#arg_config]] と同じですが、
+--with-config オプションの値だけを参照します。
 
 --- enable_config(config[, default])
-    ((<mkmf/arg_config>)) と同じですが、(({--enable-((|config|))})) オプショ
-    ン、または(({--disable-((|config|))})) オプションの値だけを参照しま
-    す。
 
---- create_header()
-    ((<mkmf/have_func>))などの検査結果を元に
-      #define HAVE_FUNC 1
-      #define HAVE_HEADER_H 1
-    などを定義した extconf.h ファイルを生成します。
+[[m:Kernel#arg_config]] と同じですが、
+--enable-config オプション、
+または--disable-config オプションの値だけを参照します。
+
+--- create_header
+
+[[m:Kernel#have_func]] などの検査結果を元に、
+
+  #define HAVE_FUNC 1
+  #define HAVE_HEADER_H 1
+
+のように定数を定義した extconf.h ファイルを生成します。
 
 --- dir_config(target[, default])
 --- dir_config(target[, idefault, ldefault])
-    システムに標準では存在しないヘッダファイルやライブラリがあるディレ
-    クトリを extconf.rb の利用者が指定できるようにします。
 
-    最初の形式では、((<mkmf/configure オプション>)) 
-    (({--with-((|target|))-dir=((|path|))})) が指定されていれば、
-    ((<mkmf/$CFLAGS>)) に "-I((|path|))/include" を ((<mkmf/$LDFLAGS>)) に 
-    "-L((|path|))/lib" を追加します。
+configure オプション
+--with-TARGET-dir,
+--with-TARGET-include,
+--with-TARGET-lib
+をユーザが extconf.rb に指定できるようにします。
 
-    (({--with-((|target|))-dir})) の代わりに ((<mkmf/configure オプション>)) 
-    (({--with-((|target|))-include}))、(({--with-((|target|))-lib})) 
-    が指定されていれば、これらの値を (({$CFLAGS}))、(({$LDFLAGS})) に
-    それぞれ追加します。
+--with-TARGET-dir オプションは
+システム標準ではない、
+ヘッダファイルやライブラリがあるディレクトリをまとめて指定するために使います。
+ユーザが extconf.rb に --with-TARGET-dir=PATH を指定したときは
+[[m:$CFLAGS]] に "-IPATH/include" を、
+[[m:$LDFLAGS]] に "-LPATH/lib" を、
+それぞれ追加します。
 
-    ((<mkmf/configure オプション>))がいずれも指定されていなければ、省略可能な引数
-    ((|deafult|))、((|idefault|))、((|ldefault|)) が使用されます。最初
-    の形式では、(({"-I((|default|))/include"}))、
-    (({"-L((|default|))/lib"})) をそれぞれ追加し、二番目の形式では 
-    (({"-I((|idefault|))"}))、(({"-L((|ldefault|))"})) をそれぞれ追加
-    します。
+--with-TARGET-include オプションは
+システム標準ではないヘッダファイルのディレクトリを指定するために使います。
+ユーザが extconf.rb に --with-TARGET-include=PATH を指定したときは
+[[m:$CFLAGS]] に PATH を追加します。
+
+--with-TARGET-lib オプションは
+システム標準ではないライブラリのディレクトリを指定するために使います。
+ユーザが extconf.rb に --with-TARGET-lib=PATH を指定したときは
+[[m:$CFLAGS]] に PATH を追加します。
+
+以上 3 つの configure オプションがいずれも指定されていないときは、
+デフォルト値として引数 default、idefault、ldefault の値が使われます。
+第 2 引数のみ与えた場合は "-Idefault/include" と "-Ldefault/lib" をそれぞれ追加し、
+第 3 引数も与えた場合は "-Iidefault" と "-Lldefault" をそれぞれ追加します。
 
 --- create_makefile(target[, srcdir])
-    ((<mkmf/have_library>))などの各種検査の結果を元に 
-    拡張ライブラリ ((|target|)).so を作成する Makefile を生成します。
 
-    ((|srcdir|)) は make 変数 srcdir の値になり、これにはソー
-    スがあるディレクトリ名を指定します。省略した場合は、
-    extconf.rb があるディレクトリです。
+[[m:Kernel#have_library]] などの各種検査の結果を元に、
+拡張ライブラリ TARGET.so をビルドするための Makefile を生成します。
 
-    extconf.rb は普通このメソッドの呼び出しで終ります。
+第 2 引数 srcdir は make 変数 srcdir の値を指定します。
+この変数には、ソースコードがあるディレクトリ名を指定します。
+この引数を省略した場合は、extconf.rb があるディレクトリが使われます。
 
-== 定数
+extconf.rb は普通このメソッドの呼び出しで終ります。
+
+== Constants
+
 --- CONFIG
-    ((<Config::MAKEFILE_CONFIG|rbconfig/MAKEFILE_CONFIG>)) と同じです。
+
+[[m:Config::MAKEFILE_CONFIG]] と同じです。
 
 --- CFLAGS
-    この値は、Makefileにも反映されます。
+
+C コンパイラに渡されるコマンドラインオプションです。
+この値は Makefile にも反映されます。
 
 --- LINK
-    リンクを検査するときのコマンドラインのフォーマットです。
-    ((<mkmf/try_link>))などが使用します。
+
+リンカを起動するときのコマンドラインのフォーマットです。
+[[m:Kernel#try_link]] などが使用します。
 
 --- CPP
-    プリプロセスを検査するときのコマンドラインのフォーマットです。
-    ((<mkmf/try_cpp>))などが使用します。
 
-== グローバル変数
+プリプロセッサを起動するときのコマンドラインのフォーマットです。
+[[m:Kernel#try_cpp]] などが使用します。
 
-# --- $config_cache
-#     この変数は obsolete です。現在使用されていません。
+== Special Variables
 
+#@# --- $config_cache
+#@#     この変数は obsolete です。現在使用されていません。
 --- $srcdir
-    ruby インタプリタを make したときのソースディレクトリです。
+
+Ruby インタプリタを make したときのソースディレクトリです。
 
 --- $libdir
-    ruby のライブラリを置くディレクトリです。
-    通常 (({/usr/local/lib/ruby/((|version|))})) です。
+
+Ruby のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/バージョン" です。
 
 --- $archdir
-    マシン固有のライブラリを置くディレクトリです。
-    通常 (({/usr/local/lib/ruby/((|version|))/((|arch|))})) です。
+
+マシン固有のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $sitelibdir
-    サイト固有のライブラリを置くディレクトリです。
-    通常 (({/usr/local/lib/ruby/site_ruby/((|version|))})) です。
+
+サイト固有のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/site_ruby/バージョン" です。
 
 --- $sitearchdir
-    サイト固有でかつマシン固有のライブラリを置くディレクトリです。
-    通常 (({/usr/local/lib/ruby/site_ruby/((|version|))/((|arch|))})) です。
+
+サイト固有でかつマシン固有のライブラリを置くディレクトリです。
+通常は "/usr/local/lib/ruby/site_ruby/バージョン/arch" です。
 
 --- $hdrdir
-    ruby のヘッダファイル (({ruby.h})) が存在するディレクトリです。
-    通常 (({/usr/local/lib/ruby/((|version|))/((|arch|))})) です。
 
---- $topdir 
-    拡張ライブラリを make するためのヘッダファイル、ライブラリ等が存在
-    するディレクトリです。
+Ruby のヘッダファイル ruby.h が存在するディレクトリです。
+通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
-    通常 (({/usr/local/lib/ruby/((|version|))/((|arch|))})) です。
+--- $topdir
+
+拡張ライブラリを make するためのヘッダファイル、
+ライブラリ等が存在するディレクトリです。
+通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $defs
-    拡張ライブラリをコンパイルするときのマクロ定義を指定する配列です。
 
-    ((<mkmf/have_func>))、((<mkmf/have_header>)) の検査結果はこの配列の要素になり
-      ["-DHAVE_FUNC", "-DHAVE_HEADER_H"]
-    といった値になります。
+拡張ライブラリをコンパイルするときのマクロ定義を指定する配列です。
 
-    ((<mkmf/create_header>)) は、この変数の値を参照してヘッダファイルを生成
-    します。
+この変数の値は、例えば
+
+  ["-DHAVE_FUNC", "-DHAVE_HEADER_H"]
+
+のような形式の配列です。
+
+[[m:Kernel#have_func]] または [[m:Kernel#have_header]]
+を呼び出すと、その検査結果が $defs に追加されます。
+
+[[m:Kernel#create_header]]
+はこの変数の値を参照してヘッダファイルを生成します。
 
 --- $libs
-    拡張ライブラリをリンクするときに一緒にリンクされるライブラリを指定
-    する文字列です。
 
-    ((<mkmf/have_library>))、((<mkmf/find_library>)) の検査結果はこの文字列に
-      "-lfoo -lbar"
-    のように間に空白を置いて連結されます。
+拡張ライブラリをリンクするときに
+一緒にリンクされるライブラリを指定する文字列です。
+
+この変数の値は、例えば
+
+  "-lfoo -lbar"
+
+のような形式の文字列です。
+
+[[m:mkmf#have_library]] または [[m:mkmf#find_library]]
+を呼び出すと、その検査結果が
+間に空白をはさみつつ $libs に連結されます。
 
 --- $CFLAGS
-    拡張ライブラリをコンパイルするときの C コンパイラのオプション、ヘッ
-    ダファイルのディレクトリを指定する文字列です。
 
-    ((<mkmf/dir_config>)) はこの変数に値 "-Idir" を追加します。
+拡張ライブラリをコンパイルするときの C コンパイラのオプションや、
+ヘッダファイルのディレクトリを指定する文字列です。
+
+[[m:Kernel#dir_config]] の検査が成功すると、
+この変数の値に " -Idir" が追加されます。
 
 --- $LDFLAGS
-    拡張ライブラリをリンクするときのリンカのオプション、ライブラリファ
-    イルのディレクトリを指定する文字列です。
 
-    ((<mkmf/find_library>))、((<mkmf/dir_config>)) はこの変数に値 "-Ldir" を追加
-    します。
+拡張ライブラリをリンクするときのリンカのオプション、
+ライブラリファイルのディレクトリを指定する文字列です。
 
-# *おそらくユーザに解放されていない変数です*
-# --- $LOCAL_LIBS
-#     ライブラリを指定する文字列です。
-# 
-# --- $local_flags
-#     リンカオプションを指定する文字列です。
+[[m:mkmf#find_library]] または [[m:mkmf#dir_config]]
+の検査が成功すると、$LDFLAGS の値に "-Ldir" を追加します。
+
+#@# おそらくユーザに解放されていない変数
+#@# --- $LOCAL_LIBS
+#@#     ライブラリを指定する文字列です。
+#@# 
+#@# --- $local_flags
+#@#     リンカオプションを指定する文字列です。

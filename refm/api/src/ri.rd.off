@@ -1,34 +1,36 @@
-= ri
-
-((<執筆者募集>))
-
 コマンドラインから RDoc で書かれた Ruby のリファレンスを引くことができます。
-リファレンスは英語で書かれています。似たようなものに ((<ReFe>)) があります。
+リファレンスは英語で書かれています。似たようなものに ReFe があります。
 
-== インストール
+=== インストール
 
-ソースから Ruby をインストールしている場合は、デフォルトでインストールされているはずです。特に以下のように実行すると必要なものが全てインストールされます。
+ソースから Ruby をインストールしている場合は、
+デフォルトでインストールされているはずです。
+特に以下のように実行すると必要なものが全てインストールされます。
 
- $ make install-doc
+  $ make install-doc
 
-ソースからでなくパッケージからインストールしている場合は、各パッケージに依存します。
+ソースからでなくパッケージからインストールしている場合は、
+各パッケージに依存します。
 
-== 使い方
+=== 使い方
 
-以下のようにクラス名やモジュール名の完全な文字列を入力しなくても、リファレンスを引くことができます。当てはまる候補が複数ある場合は、当てはまる候補のリストを表示します。
+クラス名やモジュール名の完全な文字列を入力しなくても、以下のように
+リファレンスを引くことができます。当てはまる候補が複数ある場合は、
+当てはまる候補のリストを表示します。
 
-   $ ri  File
-   $ ri  File.new
-   $ ri  F.n
-   $ ri  zip
-   $ ri  String\#gsub
-   $ ri  String.gsub
+   $ ri File
+   $ ri File.new
+   $ ri F.n
+   $ ri zip
+   $ ri String\#gsub
+   $ ri String.gsub
 
-メソッドを参照するにはクラス名とメソッドの間に # をいれます。 . で代用することもできます。
+メソッドを参照するにはクラス名とメソッドの間に # をいれます。
+"." で代用することもできます。
 
-== オプション
+=== オプション
 
-  --help, -h   you're looking at it
+  --help, -h      Print this message and quit.
   
   --classes, -c   Display the names of classes and modules we
                   know about
@@ -49,10 +51,8 @@
   
   --no-pager, -T   Send output directly to stdout.
   
-    --width, -w output width
+  --width, -w output width
                   Set the width of the output
   
   --version, -v   Display the version of ri
-
-== zsh 補完
 
