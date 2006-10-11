@@ -82,7 +82,7 @@ _builtin/TypeError              date            syntaxok
 _builtin/UnboundMethod          sheepman        syntaxok
 _builtin/ZeroDivisionError      date            syntaxok
 _builtin/constants              aamine          syntaxok
-_builtin/enumerator             aamine          syntaxok
+_builtin/Enumerable__Enumerator aamine          syntaxok
 _builtin/fatal                  date            syntaxok
 _builtin/functions              aamine          syntaxok
 _builtin/specialvars            aamine          syntaxok
