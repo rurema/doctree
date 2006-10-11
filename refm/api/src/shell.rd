@@ -1,33 +1,28 @@
-require "e2mmap"
-require "thread"
-
 #@# Author: Keiju ISHITSUKA
 
-=== 目的
-
-ruby上でsh/cshのようにコマンドの実行及びフィルタリングを手軽に行う.
-sh/cshの制御文はrubyの機能を用いて実現する.
+Ruby 上で sh/csh のようにコマンドの実行及びフィルタリングを手軽に行う.
+sh/csh の制御文は Ruby の機能を用いて実現する.
 
 === サンプル
 
-==== ex1
+==== Example 1:
 
   sh = Shell.cd("/tmp")
   sh.mkdir "shell-test-1" unless sh.exists?("shell-test-1")
   sh.cd("shell-test-1")
   for dir in ["dir1", "dir3", "dir5"]
-    if !sh.exists?(dir)
+    unless sh.exists?(dir)
       sh.mkdir dir
       sh.cd(dir) do
         f = sh.open("tmpFile", "w")
-        f.print "TEST\n"
+        f.puts "TEST"
         f.close
       end
       print sh.pwd
     end
   end
 
-==== ex2
+==== Example 2:
 
   sh = Shell.cd("/tmp")
   sh.transact do
@@ -46,19 +41,21 @@ sh/cshの制御文はrubyの機能を用いて実現する.
     end
   end
 
-==== ex3
+==== Example 3: Using Pipe
 
   sh.cat("/etc/printcap") | sh.tee("tee1") > "tee2"
   (sh.cat < "/etc/printcap") | sh.tee("tee11") > "tee12"
   sh.cat("/etc/printcap") | sh.tee("tee1") >> "tee2"
   (sh.cat < "/etc/printcap") | sh.tee("tee11") >> "tee12"
 
-==== ex4
+==== Example 4:
 
-  print sh.cat("/etc/passwd").head.collect{|l| l =~ /keiju/}
+  print sh.cat("/etc/passwd").head.collect {|line| /keiju/ =~ line }
+
 
 
 = class Shell::Filter < Object
+
 include Enumerable
 
 コマンドの実行結果はすべてFilterとしてかえります. 
@@ -95,10 +92,12 @@ filter1 + filter2 は filter1の出力の後, filter2の出力を行う.
 --- to_a
 --- to_s
 
+
+
 = class Shell < Object
 
-Shellオブジェクトはカレントディレクトリを持ち, コマンド実行はそこからの
-相対パスになります.
+Shellオブジェクトはカレントディレクトリを持ち, 
+コマンド実行はそこからの相対パスになります.
 
 == Class Methods
 
@@ -217,7 +216,9 @@ pathがディレクトリなら, Dir#unlink
 --- [](command, file1, file2)
 
 ファイルテスト関数testと同じ.
-例)
+
+例:
+
     sh[?e, "foo"]
     sh[:e, "foo"]
     sh["e", "foo"]
@@ -226,16 +227,18 @@ pathがディレクトリなら, Dir#unlink
 
 --- mkdir(*path)
 
-Dir.mkdirと同じ(複数可)
+Dir.mkdirと同じ (複数可)
 
 --- rmdir(*path)
 
-Dir.rmdirと同じ(複数可)
+Dir.rmdirと同じ (複数可)
 
 --- system(command, *opts)
 
 commandを実行する.
-例)
+
+例:
+
   print sh.system("ls", "-l")
   sh.system("ls", "-l") | sh.head > STDOUT
 
@@ -243,15 +246,17 @@ commandを実行する.
 
 リハッシュする
 
---- transact{ ... }
+--- transact { ... }
 
-ブロック中ではshellをselfとして実行する.
-例)
+ブロック中では shell を self として実行する.
+
+例:
+
   sh.transact{system("ls", "-l") | head > STDOUT}
 
 --- out(dev = STDOUT, &block)
 
-transactを呼び出しその結果をdevに出力する.
+[[m:Shell#transact]] を呼び出しその結果を dev に出力する.
 
 #@#=== 内部コマンド
 
@@ -260,116 +265,216 @@ transactを呼び出しその結果をdevに出力する.
 --- glob(patten)
 --- tee(file)
 
-これらは実行すると, それらを内容とするFilterオブジェクトを返します.
+実行すると, それらを内容とする Filter オブジェクトを返します.
 
 #@#=== 組込みコマンド
 
 --- atime(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- basename(file, *opt)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- chmod(mode, *files)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- chown(owner, group, *file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- ctime(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- delete(*file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- dirname(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- ftype(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- join(*file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- link(file_from, file_to)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- lstat(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- mtime(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- readlink(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- rename(file_from, file_to)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- split(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- stat(file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- symlink(file_from, file_to)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- truncate(file, length)
+
 Fileクラスにある同名のクラスメソッドと同じです.
+
 --- utime(atime, mtime, *file)
+
 Fileクラスにある同名のクラスメソッドと同じです.
 
 --- blockdev?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- chardev?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- directory?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- executable?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- executable_real?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- exist?(file)
 --- exists?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- file?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- grpowned?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- owned?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- pipe?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- readable?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- readable_real?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- setgid?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- setuid?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- size(file)
 --- size?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- socket?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- sticky?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- symlink?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- writable?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- writable_real?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
+
 --- zero?(file)
+
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 --- syscopy(filename_from, filename_to)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
+
 --- copy(filename_from, filename_to)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
+
 --- move(filename_from, filename_to)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
+
 --- compare(filename_from, filename_to)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
+
 --- safe_unlink(*filenames)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
+
 --- makedirs(*filenames)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
+
 --- install(filename_from, filename_to, mode)
+
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
 --- cmp
+
 [[m:Shell#compare]] と同じです。
+
 --- mv
+
 [[m:Shell#move]] と同じです。
+
 --- cp
+
 [[m:Shell#copy]] と同じです。
+
 --- rm_f
+
 [[m:Shell#safe_unlink]] と同じです。
+
 --- mkpath
+
 [[m:Shell#makedirs]] と同じです。
