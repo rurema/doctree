@@ -199,7 +199,7 @@ rexml                           date            converted
 ri
 rinda/rinda                     aamine          syntaxok
 rinda/tuplespace                aamine          syntaxok
-ripper                          aamine
+ripper                          aamine          converted
 rss                             date            converted
 rubyunit                        date            converted
 scanf                           sheepman        converted
