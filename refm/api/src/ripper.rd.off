@@ -1,32 +1,33 @@
-= Ripper
+#@since 1.9
+= class Ripper
 
-((<ruby 1.9 feature>)) ((<執筆者募集>))
+((<執筆者募集>))
 
 以下を参照して下さい。
 
-*((<URL:http://i.loveruby.net/w/RipperTutorial.html>)) 
-*((<URL:http://i.loveruby.net/w/RipperTutorial.TokenStreamInterface.html>))
+  * [[url:http://i.loveruby.net/w/RipperTutorial.html]]
+  * [[url:http://i.loveruby.net/w/RipperTutorial.TokenStreamInterface.html]]
 
-== クラスメソッド
+== Class Methods
 
---- Ripper.new(src, filename="(ripper)", lineno=1)
+--- new(src, filename = "(ripper)", lineno = 1)
 
---- Ripper.lex(src, filename = '-', lineno = 1)
+--- lex(src, filename = '-', lineno = 1)
 
---- Ripper.parse(src, filename = '(ripper)', lineno = 1)
+--- parse(src, filename = '(ripper)', lineno = 1)
 
---- Ripper.sexp(src, filename = '-', lineno = 1)
+--- sexp(src, filename = '-', lineno = 1)
 
---- Ripper.slice(src, pattern, n = 0)
+--- slice(src, pattern, n = 0)
 
---- Ripper.token_match(src, pattern)
+--- token_match(src, pattern)
 
---- Ripper.tokenize(src, filename = '-', lineno = 1)
+--- tokenize(src, filename = '-', lineno = 1)
 
---- Ripper.yydebug
---- Ripper.yydebug=
+--- yydebug
+--- yydebug=
 
-== メソッド
+== Instance Methods
 
 --- parse
 
@@ -34,12 +35,13 @@
 
 --- lineno
 
-== 定数
+== Constants
 
 --- Version
 
 --- EVENTS 
-    PARSER_EVENTS + SCANNER_EVENTS
+
+PARSER_EVENTS + SCANNER_EVENTS
 
 --- PARSER_EVENTS
 
@@ -49,3 +51,4 @@
 
 --- SCANNER_EVENT_TABLE
 
+#@end
