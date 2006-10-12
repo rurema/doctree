@@ -8,6 +8,7 @@ Rubyのオブジェクトを外部ファイルに格納するためのクラス。
 
 === 使い方
 
+  require 'pstore'
   db = PStore.new("/tmp/foo")
   db.transaction do
     p db.roots
