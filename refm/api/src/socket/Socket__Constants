@@ -15,7 +15,8 @@
 --- AF_IPX
 --- AF_APPLETALK
 
-アドレスファミリー
+アドレスファミリー:
+[[m:Socket.open]] の第一引数 domain に使用します。
 
 --- SOCK_STREAM
 --- SOCK_DGRAM
@@ -24,7 +25,8 @@
 --- SOCK_SEQPACKET
 --- SOCK_PACKET
 
-ソケットタイプ
+ソケットタイプ:
+[[m:Socket.open]] の第二引数 type に使用します。
 
 --- IPPROTO_IP
 --- IPPROTO_ICMP
@@ -44,17 +46,29 @@
 --- IPPROTO_BIP
 --- IPPROTO_MAX
 
-プロトコル
+IPプロトコル:
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
+使用します。
+
+また、[[m:Socket.open]] の
+第一引数 domain に AF_INET もしくは AF_INET6,
+第二引数 type に SOCK_RAW を指定した場合の、
+第三引数 protocol にも使用します。
+
+なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
+その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
+AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 
 --- AI_PASSIVE
 --- AI_CANONNAME
 --- AI_NUMERICHOST
 
-フラグ
- [[m:Socket#Socket.getaddrinfo]] の flags
+フラグ:
+[[m:Socket.getaddrinfo]] の flags 引数に使用します。
 
 --- SHUT_RD
 --- SHUT_RDWR
 --- SHUT_WR
 
-shutdown の how
+shutdown の how:
+[[m:BasicSocket#shutdown]] の how 引数に使用します。
