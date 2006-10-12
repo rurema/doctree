@@ -12,6 +12,7 @@ new は private メソッドに移され、外部から呼び出そうとするとエラーになります。
 
 === サンプルコード
 
+  require 'singleton'
   class SomeSingletonClass
     include Singleton
    #....
