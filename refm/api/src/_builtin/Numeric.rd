@@ -486,7 +486,25 @@ modulo は、メソッド % の呼び出しとして定義されています。
 
 --- nonzero?
 
-ゼロの時nilを返し、非ゼロの時 self を返します。
+ゼロの時 nil を返し、非ゼロの時 self を返します。
+
+sort のブロックの中で、複数の要素を <=> で比較するときに使用できます。
+以下の例では、使用しているシェル毎にユーザをソートしています。
+
+  require 'etc'
+  ary = []
+  Etc.passwd {|v| ary << v }
+  p ary.sort {|a, b| a.shell <=> b.shell or a.name <=> b.name }
+
+なお、[[m:Array#<=>]] を利用して、次のように書くこともできます。
+
+  require 'etc'
+  ary = []
+  Etc.passwd {|v| ary << v }
+  p ary.sort {|a, b| [a.shell, a.name] <=> [b.shell, b.name] }
+  # もしくは
+  p ary.sort_by {|a| [a.shell, a.name] }
+
 
 --- to_int
 
