@@ -25,6 +25,39 @@ ruby version 1.9.0 は開発版です。
 
 == 1.9.0
 
+=== 2006-09-16
+
+: Struct#inspect
+
+=== 2006-09-14
+
+: digest.rb
+: Digest::Base.file
+
+=== 2006-09-13
+
+: Hash#compare_by_identity
+: Hash#compare_by_identity?
+: Hash#identical
+: Hash#identical?
+
+=== 2006-09-12
+
+: Hash#compare_by_identity
+: Hash#compare_by_identity?
+
+=== 2006-09-11
+
+: Hash#identical
+: Hash#identical?
+
+=== 2006-08-31
+
+: Array#shuffle
+: Array#shuffle!
+
+  追加
+
 === 2006-07-26
 
 : __send
