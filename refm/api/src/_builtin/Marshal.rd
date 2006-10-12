@@ -141,7 +141,7 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
 
 #@if (version >= "1.8.0")
 --- marshal_dump
---- marshal_load
+--- marshal_load(obj)
 
 ((-((<ruby 1.8 feature>)): marshal_dump/marshal_load の仕組みは
 ruby 1.8.0 から導入されました。_dump/_load よりも使いやすいので、
