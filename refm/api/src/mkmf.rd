@@ -319,8 +319,8 @@ configure オプション --config の値を返します。
 
   $ ruby extconf.rb --foo --bar=baz
 
-と実行したとき、arg_config("foo") の値は true、
-arg_config("bar") の値は "baz" です。
+と実行したとき、arg_config("--foo") の値は true、
+arg_config("--bar") の値は "baz" です。
 
 --- with_config(config[, default])
 
