@@ -112,7 +112,7 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 配列を返し、その要素はアドレスとポートを表す文字列です。
 
 引数 sa には文字列か配列を与えます。文字列の場合は sockaddr 構造体
-のパック文字列を与えます。具体的には [[m:BasicSocket#getsockaddr]]
+のパック文字列を与えます。具体的には [[m:BasicSocket#getsockname]]
 の値が利用できます。配列を与える場合には、要素が3つの場合と4つの場合
 があります。
 
@@ -200,8 +200,10 @@ Socket.unpack_sockaddr_in で unpack できます。
 --- gethostname
 
 システムの標準のホスト名を取得します。
+
 ホストの別名やアドレスなど他の情報を得るには
 [[m:Socket#Socket.getaddrinfo]] を使ってください。
+ただし、これは不可能な場合もあります。
 
 例:
 
@@ -338,11 +340,15 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 [[m:socket#ソケットアドレス構造体を pack した文字列]]
 です。
 
+0 を返します。
+
 --- connect(server_sockaddr)
 
 [[man:connect(2)]] と同じ働きをします。server_sockaddr は、
 [[m:socket#ソケットアドレス構造体を pack した文字列]]
 です。
+
+0 を返します。
 
 たとえば IPv4 の TCP ソケットを生成し、connect で www.ruby-lang.org:80 に接続するには以下のようにします。
 
@@ -371,6 +377,8 @@ EINPROGRESS を含め例外 [[c:Errno::EXXX]] が発生します。
 --- listen(backlog)
 
 [[man:listen(2)]] と同じ働きをします。
+
+0 を返します。
 
 --- recvfrom(maxlen[, flags])
 
