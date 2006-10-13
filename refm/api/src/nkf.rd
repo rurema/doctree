@@ -1,17 +1,15 @@
 = module NKF
 
-[[unknown:nkf(1)|URL:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/]]
-(Network Kanji code conversion Filter version 1.7)
-を ruby から使うためのモジュールです。
+[[unknown:a:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/|nkf]]
+(Network Kanji code conversion Filter) を
+Ruby から使うためのモジュールです。
 
-#@if (version >= "1.8.2.")
-ruby 1.8.2 以降では
-[[unknown:nkf Network Kanji Filter|URL:http://sourceforge.jp/projects/nkf/]]
-の 2.0 以降が取り込まれています。
-(((<ruby 1.8.2 feature>)))
+#@since 1.8.2
+Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
 #@end
 
 === 使い方
+
 以下は、漢字コード変換コマンドの例です。
 
   #!/usr/local/bin/ruby
@@ -26,7 +24,8 @@ ruby 1.8.2 以降では
   end
 
 以下は、漢字コード判別コマンドの例です。
-(ruby 1.8.2 以降の NKF.guess では、以下の5種類以外の値になる可能性があります [[trap:NKF]])
+(Ruby 1.8.2 以降の NKF.guess では、
+以下の5種類以外の値になる可能性があります [[trap:NKF]])
 
   #!/usr/local/bin/ruby
   
@@ -53,11 +52,10 @@ ruby 1.8.2 以降では
 
 === オプション文字列
 
-#@if (version >= "1.8.2")
-==== ruby 1.8.2 以降
-((<ruby 1.8.2 feature>))
+#@since 1.8.2
+==== Ruby 1.8.2 以降
 
-NKF2.0.5 相当です。
+NKF 2.0.5 相当です。
 
   b,u      Output is buffered (DEFAULT),Output is unbuffered
   j,s,e,w  Outout code is JIS 7 bit (DEFAULT), Shift JIS, AT&T JIS (EUC), UTF-8
@@ -91,11 +89,10 @@ NKF2.0.5 相当です。
    --ms-ucs-map      Microsoft UCS Mapping Compatible
 
 #@else
+==== Ruby 1.8.2 より前のバージョン
 
-==== ruby 1.8.2 より前のバージョン
-NKF1.7 相当です((-中には、ruby では無意味なオプションもあるかもしれません-))。
-
-  指定できるオプションは、以下の通り。-mu のように続けることができる。
+NKF 1.7 相当です。
+#@# Ruby では無意味なオプションもあるかもしれません
 
   -b   バッファリング出力を行う。(デフォルト)
   -u   出力時に、バッファリングしない。
@@ -152,10 +149,12 @@ NKF1.7 相当です((-中には、ruby では無意味なオプションもあるかもしれません-))。
   -d   行末からCRコード(0D)を削除(拡張機能 -T と併用不可)
 #@end
 
-== BUGS
+=== BUGS
 
-1.8.2 に添付されいてる NKF は Unicode 入力時の自動判定の精度が落ちています。
-1.8.3 以降にバージョンアップするか、できるだけ明示的に文字コードを指定するようにしましょう。
+Ruby 1.8.2 に添付されている NKF は
+Unicode 入力時の自動判定の精度が落ちています。
+Ruby 1.8.3 以降にバージョンアップするか、
+できるだけ明示的に文字コードを指定するようにしましょう。
 
 === 参考
 
@@ -225,26 +224,20 @@ SJIS コードを表します。
 
 コード判定に失敗したことを表します。
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- ASCII
-
-((<ruby 1.8.2 feature>))
 
 ASCII コードを表します。
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- UTF8
-
-((<ruby 1.8.2 feature>))
 
 UTF-8 コードを表します。
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- UTF16
-
-((<ruby 1.8.2 feature>))
 
 UTF-16 コードを表します。
 #@end
