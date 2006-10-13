@@ -183,8 +183,8 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
 
 === 参考URL
 
-  * [[url:http:#/www.shugo.net/article/webdb2/#label:13]]
-  * [[url:http:#/www.modruby.net/doc/faq.ja.jis.html#label-13]]
+  * [[url:http://www.shugo.net/article/webdb2/#label:13]]
+  * [[url:http://www.modruby.net/doc/faq.ja.jis.html#label-13]]
   * [[url:http://www.ruby-doc.org/stdlib/libdoc/cgi/rdoc/index.html]]
 
 
@@ -310,7 +310,7 @@ MemoryStore の場合は何もしません。
 
 データベースクラスの close メソッドを呼び出して、
 セッション情報をサーバに保存し、セッションストレージをクローズします。
-#@# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。　参照→[[m:URL:http:#/www.modruby.net/doc/faq.ja.jis.html#label-13]]
+#@# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。　参照 http://www.modruby.net/doc/faq.ja.jis.html#label-13
 
 --- delete
 
@@ -323,17 +323,14 @@ FileStoreの場合はセッションファイルを削除します。
 
 
 = class CGI::Session::FileStore < Object
-
-[[unknown:執筆者募集]]
+#@todo
 
 
 
 = class CGI::Session::MemoryStore < Object
-
-[[unknown:執筆者募集]]
+#@todo
 
 
 
 = class CGI::Session::PStore < Object
-
-[[unknown:執筆者募集]]
+#@todo
