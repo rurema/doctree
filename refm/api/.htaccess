@@ -1,10 +1,11 @@
 Options +ExecCGI -MultiViews
 AddHandler cgi-script .cgi
+RewriteEngine on
 
 DirectoryIndex view.cgi/library/
-
-RewriteEngine on
 RewriteRule ^.*view(/.*$) view.cgi$1
+#DirectoryIndex view.fcgi/library/
+#RewriteRule ^.*view(/.*$) view.fcgi$1
 
 <Files config>
     deny from all
