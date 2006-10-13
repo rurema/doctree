@@ -7,18 +7,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 == Singleton Methods
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- abort([message])
-
-((<ruby 1.7 feature>))
 
 関数 [[m:Kernel#abort]] と同じです。
 #@end
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- daemon(nochdir=nil,noclose=nil)
-
-((<ruby 1.9 feature>))
 
 プロセスから制御端末を切り離し、
 バックグラウンドにまわってデーモンとして動作させます。
@@ -34,10 +30,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 0を返します。
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- detach(pid)
-
-((<ruby 1.8 feature>))
 
 子プロセス pid の終了を監視するスレッドを生成して返します。
 生成したスレッドは子プロセスが終了した後に nil で終了します。
@@ -54,10 +48,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
     # => nil
 #@end
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- exit([status])
 
-((<ruby 1.7 feature>))
 関数 [[m:Kernel#exit]] と同じです。
 #@end
 
@@ -70,7 +63,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 関数 [[m:Kernel#fork]] と同じです。
 
-#@if (version >= "1.8.5")
+#@since 1.8.5
 --- getrlimit(resource)
 --- setrlimit(resource, cur_limit, max_limit)
 --- setrlimit(resource, limit)
@@ -114,7 +107,7 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 #@end
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- spawn(cmd, [, arg, ...])
 
 関数 [[m:Kernel#spawn]] と同じです。
@@ -193,14 +186,13 @@ pid のプロセスのプロセスグループを返します。pid が 0
 
 プロセスグループの取得に失敗した場合は、例外 [[c:Errno::EXXX]] が
 発生します。
-#@#((-1.6.7 までは、getpgid() は例外を発生させていませんでした。
-#@#p Process.getpgid(1000000) # => -1
-#@#-))。
+#@# 1.6.7 までは、getpgid() は例外を発生させていませんでした。
+#@# p Process.getpgid(1000000) # => -1
 
 --- getpriority(which, who)
 
 プロセス、プロセスグループ、ユーザの現在のプライオリティを返
-します([[man:getpriority(2)]] 参照)。
+します ([[man:getpriority(2)]] 参照)。
 
 Process モジュールは which として指定できる定数
 [[m:Process::PRIO_PROCESS]], [[m:Process::PRIO_PGRP]],
@@ -212,14 +204,11 @@ who には、which の値にしたがってプロセス ID、プロセス
 プライオリティの取得に失敗した場合は、例外 [[c:Errno::EXXX]] が発
 生します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- initgroups(user, group)
+#@todo
 
-((<ruby 1.8 feature>))
-
-[[unknown:執筆者募集]]
-
-([[man:initgroups(3)]] 参照)
+[[man:initgroups(3)]] 参照
 #@end
 
 --- kill(signal, pid ... )
@@ -234,8 +223,8 @@ pid で指定されたプロセスにシグナルを送ります。signal
 全てのシグナル送信に成功した場合、指定した pid の数を返します。
 失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-存在しないシグナルを指定した場合は、例外 [[c:ArgumentError]] が発
-生します。
+存在しないシグナルを指定した場合は
+例外 [[c:ArgumentError]] が発生します。
 
 #@#なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
 #@#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
@@ -243,27 +232,28 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 [[m:Kernel#trap]]も参照してください。
 
---- setpgrp(pid, pgrp)
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- setpgrp
+#@else
+--- setpgrp(pid, pgrp)
 #@end
 --- setpgid(pid, pgrp)
 
-pid のプロセスグループを設定します。pid が 0 の時はカ
-レントプロセスを意味します。
+pid のプロセスグループを設定します。
+pid が 0 の時はカレントプロセスを意味します。
 
-プロセスグループの設定に成功した場合は 0 を返します。失敗した場合
-は、例外 [[c:Errno::EXXX]] が発生します。
+プロセスグループの設定に成功した場合は 0 を返します。
+失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
-version 1.7 では、Process.setpgrp は、引数を取りません。
+#@since 1.8.0
+Process.setpgrp は、引数を取りません。
 #@end
 
 --- setpriority(which, who, prio)
 
-プロセス、プロセスグループ、ユーザの現在のプライオリティを設
-定します([[man:setpriority(2)]] 参照)。
+プロセス、プロセスグループ、
+ユーザの現在のプライオリティを設定します
+([[man:setpriority(2)]] 参照)。
 
 Process モジュールは which として指定できる定数
 [[m:Process::PRIO_PROCESS]], [[m:Process::PRIO_PGRP]],
@@ -276,25 +266,26 @@ prio には、-20 から 20 の値を設定します。
 小さな値はプライオリティが高いことを意味し、
 大きな値はプライオリティが低いことを意味します。
 
-プライオリティの設定に成功した場合は 0 を返します。失敗した場合は、
-例外 [[c:Errno::EXXX]] が発生します。
+プライオリティの設定に成功した場合は 0 を返します。
+失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
 以下の例は呼び出したプロセス自身のプライオリティを 10 に下げます。
-(すでに 10 よりもプライオリティが低く、Errno::EACCES となった場合には無視して実行を続けます)
+すでに 10 よりもプライオリティが低く、
+Errno::EACCES となった場合には無視して実行を続けます。
 
   begin
     Process.setpriority(Process::PRIO_PROCESS, 0, 10)
   rescue Errno::EACCES
   end
 
---- setsid()
+--- setsid
 
 新しいセッションを作成して、tty を切り離します。デーモンを簡単に作
 ることができます。セッション ID を返します。
 
 セッションの作成に失敗した場合は、例外 [[c:Errno::EXXX]] が発生します。
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- times
 
 自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の
@@ -320,22 +311,20 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 wait2 は、その戻り値が pid と [[m:$?]] の配列であ
 る点だけが異なります。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
-version 1.7 からは $? は[[c:Process::Status]] オブジェクトで
-す。
+#@since 1.8.0
+Ruby 1.8 からは $? は[[c:Process::Status]] オブジェクトです。
 Process.wait と Process.waitpid の実体は同じものになりました。
 Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 #@end
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- waitall
 
 全ての子プロセスが終了するのを待ちます。
 
-終了した子プロセスの pid と終了ステータス([[c:Process::Status]])の
-配列を要素に持つ配列を返します。子プロセスがいない状態でこのメソッ
-ドを呼び出すと空の配列を返します。
+終了した子プロセスの pid と終了ステータス
+([[c:Process::Status]]) の配列を要素に持つ配列を返します。
+子プロセスがいない状態でこのメソッドを呼び出すと空の配列を返します。
 
 [[m:$?]] には最後に終了した子プロセスの終了ステータスが
 設定されます。
@@ -363,8 +352,8 @@ pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
 
 flags には、Process モジュールの定数
 [[m:Process::WNOHANG]](ノンブロッキングモード)と
-[[m:Process::WUNTRACED]] の論理和を指定します。省略したときの値は 0
-です。
+[[m:Process::WUNTRACED]] の論理和を指定します。
+省略したときの値は 0 です。
 
 ノンブロッキングモードで子プロセスがまだ終了していない時には
 nil を返します。[[man:waitpid(2)]] か
@@ -374,11 +363,11 @@ flags はいつも nil または 0 を指定する必要があります。
 waitpid2 は、その戻り値が pid と [[m:$?]] の配列
 である点だけが異なります。
 
-((<ruby 1.7 feature>)):
-version 1.7 からは $? は [[c:Process::Status]] オブジェクト
-です。
+#@since 1.8.0
+Ruby 1.8.0 からは $? は [[c:Process::Status]] オブジェクトです。
 Process.wait と Process.waitpid の実体は同じものになりました。
 Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+#@end
 
 == Constants
 
@@ -396,64 +385,75 @@ Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 ユーザプライオリティ。
 
 --- RLIMIT_AS
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_CORE
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_CPU
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_DATA
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_FSIZE
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_MEMLOCK
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_NOFILE
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_NPROC
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_RSS
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_SBSIZE
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_STACK
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIM_INFINITY
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIM_SAVED_CUR
+
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIM_SAVED_MAX
+#@todo
+
 [[m:Process#Process.getrlimit]] 参照。
-[[unknown:執筆者募集]]
 
 --- WNOHANG
 
-[[m:Process#waitpid]] の第二引数に指定するフラグで
-す。終了した子プロセスがない時に waitpid がブロックしません。
+[[m:Process#waitpid]] の第二引数に指定するフラグです。
+終了した子プロセスがない時に waitpid がブロックしません。
 
 --- WUNTRACED
 
-[[m:Process#waitpid]] の第二引数に指定するフラグで
-す。子プロセスの停止によりステータスを報告していない子プロセスがあ
-る時に waitpid がブロックしません。
+[[m:Process#waitpid]] の第二引数に指定するフラグです。
+子プロセスの停止によりステータスを報告していない
+子プロセスがある時に waitpid がブロックしません。
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 #@include(Process__Status.rd)
-#@end
-
-#@if (version >= "1.8.0")
 #@include(Process__UID.rd)
 #@include(Process__GID.rd)
 #@include(Process__Sys.rd)
