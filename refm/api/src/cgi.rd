@@ -1,10 +1,9 @@
-cgi
-
 CGI プログラムの支援ライブラリです。
+
 CGI プロトコルの詳細については以下の文書を参照してください。
 
-  * http://Web.Golux.Com/coar/cgi/draft-coar-cgi-v11-03.txt
-  * [[c:RFC:3875]]: The Common Gateway Interface (CGI) Version 1.1
+  * [[url:http://Web.Golux.Com/coar/cgi/draft-coar-cgi-v11-03.txt]]
+  * [[RFC:3875]]: The Common Gateway Interface (CGI) Version 1.1
 
 === 使用例
 
