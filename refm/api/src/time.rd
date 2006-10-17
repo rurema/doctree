@@ -20,7 +20,7 @@ dateを[[m:parsedate#ParseDate.parsedate]] によって
 
 ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
-//ex{
+//emlist{
 Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 //}
 
@@ -28,9 +28,9 @@ Time.parse(...) {|y| y < 100 ? (y >= 69 ? y + 1900 : y + 2000) : y}
 該当要素が使われます。
 下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
 
-//ex{
-#@# 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
-#@# タイムゾーンがGMTとすると:
+//emlist{
+# 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
+# タイムゾーンがGMTとすると:
 Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
 Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
 Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
