@@ -1,6 +1,8 @@
+Win32 API を呼び出すためのライブラリです。
+
 = class Win32API < Object
 
-Win32 API をコールするためのクラスです。
+Win32 API を呼び出すためのクラスです。
 
 === 使用例
 
