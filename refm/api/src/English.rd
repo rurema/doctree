@@ -39,7 +39,7 @@
 --- $RS
 --- $INPUT_RECORD_SEPARATOR
 
-[[m:"$/"]] の別名
+[[m:$/]] の別名
 
 --- $ORS
 --- $OUTPUT_RECORD_SEPARATOR
