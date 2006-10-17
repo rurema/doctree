@@ -143,11 +143,11 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
 --- marshal_dump
 --- marshal_load(obj)
 
-((-((<ruby 1.8 feature>)): marshal_dump/marshal_load の仕組みは
+marshal_dump/marshal_load の仕組みは
 ruby 1.8.0 から導入されました。_dump/_load よりも使いやすいので、
 こちらの利用が推奨されます。_dump/_load はまだ obsolete にはなって
 いませんが、遠い将来そうなるかもしれません。
-[[unknown:ruby-dev:21088]]-))
+[[ruby-dev:21088]]
 
 Marshal.dump において、出力するオブジェクトがメソッド
 `marshal_dump' を定義している場合には、その戻り値が dump されます。
