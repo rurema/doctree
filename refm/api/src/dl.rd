@@ -2,7 +2,8 @@
 Ruby/DL は、UNIX の [[man:dlopen(3)]] や
 Windows の LoadLibrary() などの
 ダイナミックリンカへのインタフェースを提供します。
-また、現在 dl2 の Ruby 1.8 版も開発されています。
+
+現在 dl2 の Ruby 1.8 版も開発されています。
 
 === Using Ruby/DL
 
@@ -33,12 +34,12 @@ Windows の LoadLibrary() などの
 #@# We can also construct memory images of structures and unions using functions
 #@# struct and union which are defined in "dl/struct" as follows:
 
-LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。与
-えられた関数名の最初の文字が大文字なら、定義されるメソッド名の最初の文
-字は小文字になります。
+LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
+与えられた関数名の最初の文字が大文字なら、
+定義されるメソッド名の最初の文字は小文字になります。
 
-以下のように [[lib:"dl/struct"]] で定義される
-struct や union 関数を使用することで
+以下のように [[lib:dl/struct]] で定義される
+struct メソッドや union メソッドを使用することで
 構造体や共用体のメモリイメージを作成することもできます。
 
   require "dl/import"
