@@ -82,7 +82,7 @@ _builtin/TypeError
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError
 _builtin/constants
-_builtin/Enumerable__Enumerator moriq
+_builtin/Enumerable__Enumerator moriq           done
 _builtin/fatal
 _builtin/functions
 _builtin/specialvars
