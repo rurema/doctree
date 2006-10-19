@@ -93,3 +93,17 @@ Enumerable::Enumerator.new(self, :each_cons, n) を返します。
 --- enum_with_index
 
 Enumerable::Enumerator.new(self, :each_with_index) を返します。
+
+#@since 1.9.0
+#@# bc-rdoc: detected missing name: to_splat
+--- to_splat
+#@# => array
+
+Convert this enumerator object to an array to splat.
+
+#@# bc-rdoc: detected missing name: with_index
+--- with_index {|(*args), idx| ... }
+
+Iterates the given block for each elements with an index, which
+start from 0.
+#@end
