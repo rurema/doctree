@@ -181,7 +181,7 @@ LIBRARY_NAME                    OWNER           STATUS
 parsearg
 parsedate
 pathname
-ping                            aamine
+ping                            aamine          complete
 pp
 prettyprint
 profile
