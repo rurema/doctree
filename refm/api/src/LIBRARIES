@@ -1,0 +1,182 @@
+_builtin
+English
+Env
+Win32API
+#@since 1.8.0
+abbrev
+#@end
+base64
+#@since 1.8.0
+benchmark
+bigdecimal
+bigdecimal/jacobian
+bigdecimal/ludcmp
+bigdecimal/newton
+bigdecimal/utils
+#@end
+cgi-lib
+cgi
+cgi/session
+complex
+#@since 1.8.0
+csv
+#@end
+curses
+date
+date2
+dbm
+debug
+delegate
+digest
+digest/md5
+digest/rmd160
+digest/sha1
+digest/sha2
+#@since 1.8.0
+dl
+dl/import
+dl/struct
+dl/types
+dl/win32
+#@end
+drb
+e2mmap
+erb
+eregex
+etc
+expect
+fcntl
+fileutils
+final
+finalize
+find
+forwardable
+ftools
+gdbm
+#@since 1.8.0
+generator
+#@end
+getoptlong
+getopts
+#@since 1.8.0
+gserver
+iconv
+#@end
+importenv
+#@since 1.8.0
+io/nonblock
+io/wait
+ipaddr
+#@end
+irb
+irb/completion
+irb/frame
+irb/xmp
+jcode
+kconv
+logger
+mailread
+mathn
+matrix
+md5
+mkmf
+monitor
+mutex_m
+net/ftp
+net/ftptls
+net/http
+net/https
+net/imap
+net/pop
+net/smtp
+net/telnet
+net/telnets
+nkf
+observable
+open-uri
+open3
+openssl
+optparse
+ostruct
+parsearg
+parsedate
+#@since 1.8.0
+pathname
+#@end
+ping
+#@since 1.8.0
+pp
+prettyprint
+#@end
+profile
+#@since 1.8.0
+profiler
+#@end
+pstore
+pty
+#@since 1.8.0
+racc/parser
+#@end
+rational
+rbconfig
+readbytes
+readline
+resolv-replace
+resolv
+#@since 1.8.0
+rexml
+rinda/rinda
+rinda/tuplespace
+ripper
+rss
+rubyunit
+scanf
+#@end
+sdbm
+#@since 1.8.0
+set
+sha1
+#@end
+shell
+shellwords
+singleton
+#@since 1.8.0
+soap
+#@end
+socket
+stringio
+#@since 1.8.0
+strscan
+#@end
+sync
+syslog
+tempfile
+#@since 1.8.0
+test/unit
+#@end
+thread
+thwait
+time
+timeout
+tk
+#@since 1.8.0
+tmpdir
+#@end
+tracer
+#@since 1.8.0
+tsort
+un
+#@end
+uri
+weakref
+#@since 1.8.0
+webrick
+webrick/cgi
+webrick/ssl
+win32/registry
+win32ole
+xmlrpc
+yaml
+yaml/store
+zlib
+#@end
