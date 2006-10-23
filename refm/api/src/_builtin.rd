@@ -1,6 +1,6 @@
-$BAH$_9~$_%i%$%V%i%j$O(B Ruby $BK\BN$KAH$_9~$^$l$F$$$k%i%$%V%i%j$G$9!#(B
-$B$3$N%i%$%V%i%j$K4^$^$l$k%/%i%9$d%b%8%e!<%k$O!"(B
-require $B$r=q$+$J$/$F$b;H$&$3$H$,$G$-$^$9!#(B
+ÁÈ¤ß¹þ¤ß¥é¥¤¥Ö¥é¥ê¤Ï Ruby ËÜÂÎ¤ËÁÈ¤ß¹þ¤Þ¤ì¤Æ¤¤¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ë´Þ¤Þ¤ì¤ë¥¯¥é¥¹¤ä¥â¥¸¥å¡¼¥ë¤Ï¡¢
+require ¤ò½ñ¤«¤Ê¤¯¤Æ¤â»È¤¦¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
 #@include(_builtin/ARGF.rd)
 #@include(_builtin/ArgumentError.rd)
