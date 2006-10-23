@@ -1,3 +1,7 @@
+組み込みライブラリは Ruby 本体に組み込まれているライブラリです。
+このライブラリに含まれるクラスやモジュールは、
+require を書かなくても使うことができます。
+
 #@include(_builtin/ARGF.rd)
 #@include(_builtin/ArgumentError.rd)
 #@include(_builtin/Array.rd)
