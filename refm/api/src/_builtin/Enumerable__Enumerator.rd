@@ -1,3 +1,4 @@
+#@since 1.8.4
 = class Enumerable::Enumerator < Object
 
 include Enumerable
@@ -105,3 +106,4 @@ Enumerable::Enumerator.new(self, :each_cons, n) を返します。
 --- enum_with_index
 
 Enumerable::Enumerator.new(self, :each_with_index) を返します。
+#@end
