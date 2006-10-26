@@ -1,4 +1,4 @@
-= class Class < module
+= class Class < Module
 
 クラスのクラス。より正確に言えば、個々のクラスはそれぞれメタクラスと呼
 ばれる名前のないクラスをクラスとして持っていて、Class はそのメタ
@@ -76,7 +76,7 @@ version 1.7 では、new は、allocate でイン
 
 クラスのスーパークラスを返します。
 
-== Private Class Methods
+== Private Instance Methods
 
 --- inherited(subclass)
 
