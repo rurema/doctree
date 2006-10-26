@@ -17,12 +17,12 @@ _builtin/EOFError
 _builtin/Enumerable
 _builtin/Exception
 _builtin/FalseClass
-_builtin/File
-_builtin/FileTest
-_builtin/File__Constants
-_builtin/File__Stat
-_builtin/Fixnum
-_builtin/Float                  sheepman       done
+_builtin/File                   sheepman
+_builtin/FileTest               sheepman
+_builtin/File__Constants        sheepman
+_builtin/File__Stat             sheepman
+_builtin/Fixnum                 sheepman
+_builtin/Float                  sheepman        done
 _builtin/FloatDomainError
 _builtin/GC
 _builtin/Hash
