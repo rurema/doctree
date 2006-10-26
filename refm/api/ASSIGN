@@ -7,7 +7,7 @@ _builtin/ArgumentError
 _builtin/Array
 _builtin/Bignum
 _builtin/Binding
-_builtin/Class
+_builtin/Class                  sheepman
 _builtin/Comparable
 _builtin/Continuation
 _builtin/Data
@@ -22,7 +22,7 @@ _builtin/FileTest
 _builtin/File__Constants
 _builtin/File__Stat
 _builtin/Fixnum
-_builtin/Float
+_builtin/Float                  sheepman
 _builtin/FloatDomainError
 _builtin/GC
 _builtin/Hash
