@@ -341,6 +341,7 @@ umask を変更します。変更前の umask の値を返します。umask を
 [[m:FileTest#FileTest.executable_real?]] と同じです。
 
 --- exist?(path)
+--- exists?(path)
 
 [[m:FileTest#FileTest.exist?]] と同じです。
 

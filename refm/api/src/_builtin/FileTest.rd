@@ -23,6 +23,7 @@ filename が実効ユーザ/グループ ID で実行できる時、真を返しま
 filename が実ユーザ/グループ ID で実行できる時、真を返します。
 
 --- exist?(filename)
+--- exists?(filename)
 
 filename が存在する時、真を返します。
 
