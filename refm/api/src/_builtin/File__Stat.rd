@@ -4,12 +4,15 @@ include Comparable
 
 ファイルの情報を格納したオブジェクトのクラス。
 
+[[c:FileTest]] に同名のモジュール関数がある場合はそれと同じ働きをします。ただ、
+ファイル名を引数に取るかわりに Stat 自身について判定する点が違います。
+
 == Class Methods
 
 --- new(path)
 
 path に関する File::Stat オブジェクトを生成して返します。
-[[m:File#File.stat]] と同じです。
+[[m:File.stat]] と同じです。
 
 == Instance Methods
 
@@ -38,15 +41,19 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
 #@if (version >= "1.8.0")
-1.7 では nil が返ります。
+1.8.0 以降では nil が返ります。
 #@end
 
 --- dev
 デバイス番号(ファイルシステム)
+
+#@since 1.8.2
 --- dev_major
 dev の major 番号部
 --- dev_minor
 dev の minor 番号部
+#@end
+
 --- ino
 i-node 番号
 --- mode
@@ -76,9 +83,6 @@ rdev の minor 番号部
 --- ctime
 最終状態変更時刻
 (状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
-
-以下の判定メソッドは、[[c:FileTest]] の同名のモジュール関数と同じですが、
-ファイル名を引数に取るかわりに Stat 自身について判定します。
 
 --- directory?
 ディレクトリの時に真
@@ -123,3 +127,10 @@ setuidされている時に真
 setgidされている時に真
 --- sticky?
 stickyビットが立っている時に真
+
+#@since 1.9.0
+--- world_readable?
+#@todo
+--- world_writable? 
+#@todo
+#@end

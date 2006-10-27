@@ -49,7 +49,7 @@ File クラスはこのモジュールをインクルードしているので、以下に挙
 --- SYNC
 [[m:File#open]]で使用します。
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- FNM_NOESCAPE
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
@@ -64,4 +64,9 @@ File クラスはこのモジュールをインクルードしているので、以下に挙
 
 --- FNM_DOTMATCH
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+#@end
+
+#@since 1.8.5
+--- FNM_SYSCASE
+#@todo
 #@end

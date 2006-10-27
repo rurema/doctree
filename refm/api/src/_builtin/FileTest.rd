@@ -23,9 +23,14 @@ filename が実効ユーザ/グループ ID で実行できる時、真を返しま
 filename が実ユーザ/グループ ID で実行できる時、真を返します。
 
 --- exist?(filename)
+
+filename が存在する時、真を返します。
+
 --- exists?(filename)
 
 filename が存在する時、真を返します。
+このメソッドはobsoleteです。
+[[m:FileTest.exist?]]を使って下さい。
 
 --- grpowned?(filename)
 
@@ -40,12 +45,12 @@ filename がディレクトリの時、真を返します。
 
 filaname が通常ファイルである時、真を返します。
 
+#@since 1.8.4
 --- identical?(filename1, filename2)
 
 filaname1 と filename2 が同じファイルを指している時、真を返します。
-#@if (version <= "1.8.3")
+
 (ruby 1.8.3 以前では[[m:Kernel#test]](?-, filename1, filename2)を使ってください。)
-#@end
 
 例:
 
@@ -58,7 +63,7 @@ filaname1 と filename2 が同じファイルを指している時、真を返します。
   p File.identical?("a", "c")      #=> true
   open("d", "w") {}
   p File.identical?("a", "d")      #=> false
-
+#@end
 --- pipe?(filename)
 
 filename が名前つきパイプ(FIFO)である時、真を返します。
@@ -95,7 +100,7 @@ filename が [[man:setgid(2)]] されている時に真を返
 filename のサイズを返します。filename が存在しなければ
 例外 [[c:Errno::EXXX]](おそらく Errno::ENOENT)が発生します。
 
-[[m:FileTest#FileTest.size?]], [[m:FileTest#FileTest.zero?]] も参
+[[m:FileTest.size?]], [[m:FileTest.zero?]] も参
 照してください。
 
 --- size?(filename)
@@ -103,7 +108,7 @@ filename のサイズを返します。filename が存在しなければ
 filename のサイズを返します。filename が存在しない時や
 filename のサイズが0の時には nil を返します。
 
-[[m:FileTest#FileTest.size]], [[m:FileTest#FileTest.zero?]] も参照
+[[m:FileTest.size]], [[m:FileTest.zero?]] も参照
 してください。
 
 --- sticky?(filename)
@@ -129,5 +134,12 @@ filename が実ユーザ/実グループによって書き込み可である時、真
 filename が存在して、そのサイズが 0 である時、真を返します。
 filename が存在しない場合は false を返します。
 
-[[m:FileTest#FileTest.size]], [[m:FileTest#FileTest.size?]], も参
+[[m:FileTest.size]], [[m:FileTest.size?]], も参
 照してください。
+
+#@since 1.9.0
+--- world_readable?(filename)
+#@todo
+--- world_writable?(filename)
+#@todo
+#@end
