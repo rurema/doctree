@@ -322,96 +322,101 @@ umask を変更します。変更前の umask の値を返します。umask を
 
 --- blockdev?(path)
 
-[[m:FileTest#FileTest.blockdev?]] と同じです。
+[[m:FileTest.blockdev?]] と同じです。
 
 --- chardev?(path)
 
-[[m:FileTest#FileTest.chardev?]] と同じです。
+[[m:FileTest.chardev?]] と同じです。
 
 --- directory?(path)
 
-[[m:FileTest#FileTest.directory?]] と同じです。
+[[m:FileTest.directory?]] と同じです。
 
 --- executable?(path)
 
-[[m:FileTest#FileTest.executable?]] と同じです。
+[[m:FileTest.executable?]] と同じです。
 
 --- executable_real?(path)
 
-[[m:FileTest#FileTest.executable_real?]] と同じです。
+[[m:FileTest.executable_real?]] と同じです。
 
 --- exist?(path)
+
+[[m:FileTest.exist?]] と同じです。
+
 --- exists?(path)
 
-[[m:FileTest#FileTest.exist?]] と同じです。
+[[m:FileTest.#exist?]] と同じです。
+このメソッドはobsoleteです。
+[[m:File#exist?]]を使って下さい。
 
 --- file?(path)
 
-[[m:FileTest#FileTest.file?]] と同じです。
+[[m:FileTest.file?]] と同じです。
 
 --- grpowned?(path)
 
-[[m:FileTest#FileTest.grpowned?]] と同じです。
+[[m:FileTest.grpowned?]] と同じです。
 
 --- owned?(path)
 
-[[m:FileTest#FileTest.owned?]] と同じです。
+[[m:FileTest.owned?]] と同じです。
 
 --- identical?(filename1, filename2)
 
-[[m:FileTest#FileTest.identical?]] と同じです。
+[[m:FileTest.identical?]] と同じです。
 
 --- pipe?(path)
 
-[[m:FileTest#FileTest.pipe?]] と同じです。
+[[m:FileTest.pipe?]] と同じです。
 
 --- readable?(path)
 
-[[m:FileTest#FileTest.readable?]] と同じです。
+[[m:FileTest.readable?]] と同じです。
 
 --- readable_real?(path)
 
-[[m:FileTest#FileTest.readable_real?]] と同じです。
+[[m:FileTest.readable_real?]] と同じです。
 
 --- setgid?(path)
 
-[[m:FileTest#FileTest.setgid?]] と同じです。
+[[m:FileTest.setgid?]] と同じです。
 
 --- setuid?(path)
 
-[[m:FileTest#FileTest.setuid?]] と同じです。
+[[m:FileTest.setuid?]] と同じです。
 
 --- size(path)
 
-[[m:FileTest#FileTest.size]] と同じです。
+[[m:FileTest.size]] と同じです。
 
 --- size?(path)
 
-[[m:FileTest#FileTest.size?]] と同じです。
+[[m:FileTest.size?]] と同じです。
 
 --- socket?(path)
 
-[[m:FileTest#FileTest.socket?]] と同じです。
+[[m:FileTest.socket?]] と同じです。
 
 --- sticky?(path)
 
-[[m:FileTest#FileTest.sticky?]] と同じです。
+[[m:FileTest.sticky?]] と同じです。
 
 --- symlink?(path)
 
-[[m:FileTest#FileTest.symlink?]] と同じです。
+[[m:FileTest.symlink?]] と同じです。
 
 --- writable?(path)
 
-[[m:FileTest#FileTest.writable?]] と同じです。
+[[m:FileTest.writable?]] と同じです。
 
 --- writable_real?(path)
 
-[[m:FileTest#FileTest.writable_real?]] と同じです。
+[[m:FileTest.writable_real?]] と同じです。
 
 --- zero?(path)
 
-[[m:FileTest#FileTest.zero?]] と同じです。
+[[m:FileTest.zero?]] と同じです。
 
 == Instance Methods
 
@@ -461,7 +466,7 @@ LOCK_SH
 システムによってはロック対象のファイルは読み込みモード
 ("r", "r+" など)でオープンされている必要があります。そのよ
 うなシステムでは読み込み可能でないファイルに対するロックは例外
-[[unknown:Errno::EBADF|Errno::EXXX]] が発生するかもしれません。
+[[c:Errno::EXXX]] が発生するかもしれません。
 
 LOCK_EX
 
@@ -469,7 +474,7 @@ LOCK_EX
 システムによってはロック対象のファイルは書き込みモード
 ("w", "r+" など)でオープンされている必要があります。そのよ
 うなシステムでは書き込み可能でないファイルに対するロックは例外
-[[unknown:Errno::EBADF|Errno::EXXX]] が発生するかもしれません。
+[[c:Errno::EXXX]] が発生するかもしれません。
 
 LOCK_UN
 
@@ -538,8 +543,8 @@ lstat は、シンボリックリンクに関してリンクそのものの
 [[m:IO#stat]]と同じです。
 
 [[m:IO#stat]],
-[[m:File#File.stat]],
-[[m:File#File.lstat]] も参照してください。
+[[m:File.stat]],
+[[m:File.lstat]] も参照してください。
 
 --- truncate(length)
 
