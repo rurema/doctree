@@ -129,7 +129,7 @@ eregex
 etc
 expect
 fcntl
-fileutils
+fileutils                       aamine
 final
 finalize
 find
@@ -161,11 +161,11 @@ monitor
 mutex_m
 net/ftp
 net/ftptls
-net/http
-net/https
+net/http                        aamine
+net/https                       aamine
 net/imap
-net/pop
-net/smtp
+net/pop                         aamine
+net/smtp                        aamine
 net/telnet
 net/telnets
 nkf
