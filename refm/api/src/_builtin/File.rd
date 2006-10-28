@@ -429,9 +429,24 @@ umask を変更します。変更前の umask の値を返します。umask を
 
 #@since 1.9.0
 --- world_readable?(path)
-#@todo
---- world_writable?(path
-#@todo
+If _file_name_ is readable by others, returns an integer
+representing the file permission bits of _file_name_. Returns +nil+
+otherwise. The meaning of the bits is platform dependent; on Unix
+systems, see +stat(2)+.
+
+        File.world_readable?("/etc/passwd")           # => 420
+        m = File.world_readable?("/etc/passwd")
+        sprintf("%o", m)                              # => "644"
+
+--- world_writable?(path)
+If _file_name_ is writable by others, returns an integer
+representing the file permission bits of _file_name_. Returns +nil+
+otherwise. The meaning of the bits is platform dependent; on Unix
+systems, see +stat(2)+.
+
+        File.world_writable?("/tmp")                  #=> 511
+        m = File.world_writable?("/tmp")
+        sprintf("%o", m)                              #=> "777"
 #@end
 
 == Instance Methods
