@@ -34,7 +34,7 @@ filename が存在する時、真を返します。
 
 --- grpowned?(filename)
 
-filename のグループ ID が実行グループ ID と等しい時、真を返
+filename のグループ ID が実効グループ ID と等しい時、真を返
 します。
 
 --- directory?(filename)
