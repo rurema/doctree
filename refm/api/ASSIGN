@@ -14,9 +14,9 @@ _builtin/Data
 _builtin/Dir
 _builtin/ENV
 _builtin/EOFError
-_builtin/Enumerable
-_builtin/Exception
-_builtin/FalseClass
+_builtin/Enumerable             sheepman
+_builtin/Exception              sheepman
+_builtin/FalseClass             sheepman
 _builtin/File                   sheepman
 _builtin/FileTest               sheepman
 _builtin/File__Constants        sheepman
