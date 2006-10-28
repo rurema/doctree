@@ -164,7 +164,7 @@ net/ftptls
 net/http                        aamine
 net/https                       aamine
 net/imap
-net/pop                         aamine
+net/pop                         aamine          complete
 net/smtp                        aamine
 net/telnet
 net/telnets
