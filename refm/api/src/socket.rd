@@ -1,23 +1,21 @@
-#@# = socket
-
 socket はプロセス外部との通信 (プロセス間通信、ホスト間通信) を実現します。
 
 === クラス
 
-  * [[c:IO]]
-    * [[c:BasicSocket]]: ソケットを表す抽象クラス
-      * [[c:IPSocket]]: インターネットドメインソケットの抽象クラス
-        * [[c:TCPSocket]]: インターネットドメインのストリーム型ソケットのクラス
-          * [[c:TCPServer]]: TCP/IPストリーム型接続のサーバ側のソケットのクラス
-          * [[c:SOCKSSocket]]: TCPSocket を SOCKS 対応したクラス
-        * [[c:UDPSocket]]: インターネットドメインのデータグラム型ソケットのクラス
-      * [[c:UNIXSocket]]: Unixドメインのストリーム型ソケットのクラス
-        * [[c:UNIXServer]]: Unixストリーム型接続のサーバ側のソケットのクラス
-      * [[c:Socket]]: 低レベルソケットインターフェース
+ * [[c:IO]]
+ * [[c:BasicSocket]]: ソケットを表す抽象クラス
+ * [[c:IPSocket]]: インターネットドメインソケットの抽象クラス
+ * [[c:TCPSocket]]: インターネットドメインのストリーム型ソケットのクラス
+ * [[c:TCPServer]]: TCP/IPストリーム型接続のサーバ側のソケットのクラス
+ * [[c:SOCKSSocket]]: TCPSocket を SOCKS 対応したクラス
+ * [[c:UDPSocket]]: インターネットドメインのデータグラム型ソケットのクラス
+ * [[c:UNIXSocket]]: Unixドメインのストリーム型ソケットのクラス
+ * [[c:UNIXServer]]: Unixストリーム型接続のサーバ側のソケットのクラス
+ * [[c:Socket]]: 低レベルソケットインターフェース
 
 === モジュール
 
-  * [[c:Socket::Constants]]
+ * [[c:Socket::Constants]]
 
 === ソケットアドレス
 
@@ -37,9 +35,9 @@ Unix ドメインソケットではソケットファイルを指すパス名です。
 
 また、[[c:IPSocket]] 以下での IP アドレスとポート番号の指定は、
 数値で表現するだけでなく、ホスト名やサービス名が使えます。
-これについては [[m:socket#ホスト指定形式]] と [[m:socket#サービス指定形式]] を参照してください。
+これについては以下の「ホスト指定形式」と「サービス指定形式」を参照してください。
 
-また、C のレベルの [[m:socket#ソケットアドレス構造体を pack した文字列]] も使用できます。
+また、C のレベルの「ソケットアドレス構造体を pack した文字列」も使用できます。
 これは主に低レベルソケットインターフェース ([[c:Socket]]) で用いられます。
 
 ==== ホスト指定形式
@@ -66,10 +64,9 @@ AF_INET なソケットにおいてホストを指定するには以下のいずれか
 や struct sockaddr_un (Unix ドメイン)を指します。
 [[c:Socket]] クラスなどソケットの低レベルインタフェースで利用されます。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
-[[m:Socket#Socket.pack_sockaddr_in]],
-[[m:Socket#Socket.unpack_sockaddr_in]] といったメソッドにより、
+#@if (version >= "1.8.0")
+[[m:Socket.pack_sockaddr_in]],
+[[m:Socket.unpack_sockaddr_in]] といったメソッドにより、
 例えば、以下のようにしてこの文字列を得ることが出来ます
 
   require 'socket'
@@ -104,3 +101,14 @@ AF_INET なソケットにおいてホストを指定するには以下のいずれか
 
 
 また、[[lib:resolv]] ライブラリも使用できます。
+
+#@include(socket/BasicSocket)
+#@include(socket/IPSocket)
+#@include(socket/SOCKSSocket)
+#@include(socket/Socket)
+#@include(socket/Socket__Constants)
+#@include(socket/TCPServer)
+#@include(socket/TCPSocket)
+#@include(socket/UDPSocket)
+#@include(socket/UNIXServer)
+#@include(socket/UNIXSocket)
