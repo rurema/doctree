@@ -7,7 +7,12 @@ include File::Constant
 #@end
 
 ファイルアクセスのためのクラス。通常 [[m:Kernel#open]]
-または [[m:File#File.open]] を使って生成します。
+または [[m:File.open]] を使って生成します。
+
+Fileクラスがインクルードしている[[c:File::Constants]]はFileクラスに関係する定数を
+格納したモジュールです。[[c:File::Constants]]を参照してください。
+また[[c:File::Stat]]はstat構造体([[man:stat(2)]]参照)を表すクラスです。
+[[c:File::Stat]]を参照してください。
 
 == Class Methods
 
@@ -37,13 +42,12 @@ filename の一番後ろのスラッシュに続く要素を返します。もし、
   p File.basename("ruby/ruby.c", ".*")  #=> "ruby"
   p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
 
-[[m:File#File.dirname]], [[m:File#File.extname]] も参照。
+[[m:File.dirname]], [[m:File.extname]] も参照。
 
-[[unknown:1.6.8から1.8.0への変更点(まとめ)]]
-
-File.basename の動作は [[unknown:SUSv3|URL:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
-
-    p File.basename("foo/bar/")      # => "bar"  以前は、""
+#@since 1.8.0
+ruby 1.8.0 からはFile.basenameの動作は [[url:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
+  p File.basename("foo/bar/")      # => "bar"  以前は、""
+#@end
 
 --- chmod(mode[, filename[, ...]])
 --- lchmod(mode[, filename[, ...]])
@@ -83,7 +87,7 @@ lchown は、シンボリックリンクに関してリンクそのもののオーナー、
 た場合は例外 [[c:Errno::EXXX]] が発生します。
 
 このメソッドは通常ファイルの削除用で、ディレクトリの削除には
-[[m:Dir#Dir.rmdir]] を使います。
+[[m:Dir.rmdir]] を使います。
 
 --- dirname(filename)
 
@@ -96,12 +100,12 @@ filename の一番後ろのスラッシュより前を文
     p File.dirname("dir/file.ext")    # => "dir"
     p File.dirname("file.ext")        # => "."
 
-[[m:File#File.basename]], [[m:File#File.extname]] も参照。
+[[m:File.basename]], [[m:File.extname]] も参照。
 
 #@if (version >= "1.8.0")
 ((<ruby 1.8 feature>))
 
-File.dirname の動作は [[unknown:SUSv3|URL:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
+File.dirname の動作は [[url:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
 
     p File.dirname("foo/bar/")      # => "foo"  以前は、"foo/bar"
     p File.dirname("foo//bar")      # => "foo"  以前は、"foo/"
@@ -137,7 +141,7 @@ default_dir が nil かまたは与えられなかった時にはカ
   p File.extname(".foo")            # => ""
 
 
-[[m:File#File.basename]], [[m:File#File.dirname]] も参照。
+[[m:File.basename]], [[m:File.dirname]] も参照。
 
 --- fnmatch(pattern, path[, flags])
 --- fnmatch?(pattern, path[, flags])
@@ -251,6 +255,11 @@ open() はブロックを指定することができます。
 
 ブロックが指定されたときのこのメソッドの戻り値はブロックの実行結果
 です。
+
+#@since 1.9.0
+--- path(filename)
+#@todo
+#@end
 
 --- readlink(path)
 
@@ -417,6 +426,13 @@ umask を変更します。変更前の umask の値を返します。umask を
 --- zero?(path)
 
 [[m:FileTest.zero?]] と同じです。
+
+#@since 1.9.0
+--- world_readable?(path)
+#@todo
+--- world_writable?(path
+#@todo
+#@end
 
 == Instance Methods
 
