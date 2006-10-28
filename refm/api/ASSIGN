@@ -209,11 +209,11 @@ shell
 shellwords
 singleton
 soap
-socket
-stringio                        
-strscan
-sync
-syslog
+socket                         sheepman
+stringio                       sheepman 
+strscan                        sheepman
+sync                           sheepman
+syslog                         sheepman
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------
