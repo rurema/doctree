@@ -95,11 +95,8 @@ host に指定できる形式は[[m:socket#ホスト指定形式]]を見てください。
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- listen(backlog)
-
-((<ruby 1.7 feature>))
-
 
 [[man:listen(2)]] を実行します。
 ([[m:Socket#listen]]と同じ)
@@ -111,11 +108,8 @@ TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
 失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- sysaccept
-
-((<ruby 1.7 feature>))
-
 
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [[m:TCPServer#accept]] と同じです。

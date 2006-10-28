@@ -30,8 +30,7 @@ host で指定したホストの service で指定したポートと接続したソケッ
 は /etc/services (または NIS) に登録されているサー
 ビス名かポート番号です。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
+#@if (version >= "1.8.0")
 引数 local_host, local_service を指定した場合、そのアドレス
 に対して [[man:bind(2)]] します。
 #@end

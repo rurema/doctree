@@ -46,12 +46,10 @@ host, port に関しては [[m:socket#ホスト指定形式]]、
 #@if (version >= "1.8.5")
 --- recvfrom_nonblock(maxlen[, flags])
 
-((<ruby 1.8.5 feature>))
-
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] でソケットからデータを受け取ります。
 
-引数、返り値は [[unknown:"IPSocket#recvfrom"|IPSocket/recvfrom]] と同じです。
+引数、返り値は [[m:IPSocket#recvfrom]] と同じです。
 
 [[man:recvfrom(2)]] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。

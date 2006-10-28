@@ -34,15 +34,10 @@
   => ["AF_INET", 2253, "localhost", "127.0.0.1"]
      ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- for_fd(fd)
 
-((<ruby 1.7 feature>))
-
-
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
-
-((<ruby 1.7 feature>)):
 このメソッドは [[c:Socket]] クラスからこのクラスに移動しました。
 これにより、任意のソケットである fd から対応するソケッ
 トクラスを作ることができます。
@@ -52,14 +47,7 @@
 
 #@if (version >= "1.9.0")
 --- do_not_reverse_lookup
-
-((<ruby 1.9 feature>))
-#@end
-
-#@if (version >= "1.9.0")
 --- do_not_reverse_lookup=(bool)
-
-((<ruby 1.9 feature>))
 
 アドレスからホスト名への逆引きの設定をソケットごとに設定します。
 初期値はソケットを生成したときの
@@ -150,7 +138,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 に対しては送り先である dest_sockaddr を指定する必要があります。実際に送っ
 たデータの長さを返します。
 
-dest_sockaddr には[[m:socket#ソケットアドレス構造体を pack した文字列]]
+dest_sockaddr には「ソケットアドレス構造体を pack した文字列」
 を指定します。
 
 データの送信に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
