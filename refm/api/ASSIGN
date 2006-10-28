@@ -13,15 +13,15 @@ _builtin/Continuation
 _builtin/Data
 _builtin/Dir
 _builtin/ENV
-_builtin/EOFError
-_builtin/Enumerable             sheepman
-_builtin/Exception              sheepman
-_builtin/FalseClass             sheepman
-_builtin/File                   sheepman
-_builtin/FileTest               sheepman
-_builtin/File__Constants        sheepman
-_builtin/File__Stat             sheepman
-_builtin/Fixnum                 sheepman
+_builtin/EOFError               
+_builtin/Enumerable             sheepman        done
+_builtin/Exception              sheepman        done
+_builtin/FalseClass             sheepman        done
+_builtin/File                   sheepman        done
+_builtin/FileTest               sheepman        done
+_builtin/File__Constants        sheepman        done
+_builtin/File__Stat             sheepman        done
+_builtin/Fixnum                 sheepman        done
 _builtin/Float                  sheepman        done
 _builtin/FloatDomainError
 _builtin/GC
@@ -210,7 +210,7 @@ shellwords
 singleton
 soap
 socket
-stringio
+stringio                        
 strscan
 sync
 syslog
