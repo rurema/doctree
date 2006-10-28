@@ -138,8 +138,27 @@ filename が存在しない場合は false を返します。
 照してください。
 
 #@since 1.9.0
---- world_readable?(filename)
-#@todo
---- world_writable?(filename)
-#@todo
+#@# bc-rdoc: detected missing name: world_readable?
+--- world_readable?(file_name)   => fixnum or nil
+
+If file_name is readable by others, returns an integer representing
+the file permission bits of file_name. Returns nil otherwise.
+The meaning of the bits is platform dependent; on Unix systems,
+see stat(2).
+
+   File.world_readable?("/etc/passwd")           # => 420
+   m = File.world_readable?("/etc/passwd")
+   sprintf("%o", m)                              # => "644"
+
+#@# bc-rdoc: detected missing name: world_writable?
+--- world_writable?(file_name)   => fixnum or nil
+
+If file_name is writable by others, returns an integer representing
+the file permission bits of file_name. Returns nil otherwise.
+The meaning of the bits is platform dependent; on Unix systems,
+see stat(2).
+
+   File.world_writable?("/tmp")                  #=> 511
+   m = File.world_writable?("/tmp")
+   sprintf("%o", m)                              #=> "777"
 #@end

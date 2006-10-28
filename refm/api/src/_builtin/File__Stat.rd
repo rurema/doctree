@@ -129,8 +129,26 @@ setgidされている時に真
 stickyビットが立っている時に真
 
 #@since 1.9.0
---- world_readable?
-#@todo
---- world_writable? 
-#@todo
+#@# bc-rdoc: detected missing name: world_readable?
+--- world_readable? => fixnum or nil
+
+If stat is readable by others, returns an integer representing
+the file permission bits of stat. Returns nil otherwise. The
+meaning of the bits is platform dependent; on Unix systems, see
+stat(2).
+
+   m = File.stat("/etc/passwd").world_readable?  # => 420
+   sprintf("%o", m)                              # => "644"
+
+#@# bc-rdoc: detected missing name: world_writable?
+--- world_writable? => fixnum or nil
+
+If stat is writable by others, returns an integer representing
+the file permission bits of stat. Returns nil otherwise. The
+meaning of the bits is platform dependent; on Unix systems, see
+stat(2).
+
+   m = File.stat("/tmp").world_writable?         # => 511
+   sprintf("%o", m)                              # => "777"
+
 #@end
