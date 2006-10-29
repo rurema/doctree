@@ -36,7 +36,23 @@ false です。
 --- path
 テンポラリファイルのパス名を返します。
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
+#@todo
+#@# このバージョン情報は正しいか?
+--- length
 --- size
 テンポラリファイルのサイズを返します。
 #@end
+
+--- close!
+
+Closes and unlinks the file.
+
+--- delete
+--- unlink
+
+Unlinks the file. On UNIX-like systems, it is often a good idea
+to unlink a temporary file immediately after creating and opening
+it, because it leaves other programs zero chance to access the
+file.
+
