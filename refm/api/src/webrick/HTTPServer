@@ -16,7 +16,7 @@ HTTP サーバのためのクラス。
 --- new(config={}, default=Config::HTTP)
 HTTPServer オブジェクトを生成する。config は設定を保存したハッシュ。
 default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
-[[m:WEBrick::HTTPServer#WEBrick::Config::HTTP]]
+[[m:WEBrick::Config::HTTP]]
 
 == Instance Methods
 
@@ -44,7 +44,7 @@ server は HTTPServer オブジェクト。
 == Constants
 --- HTTP
 HTTPServer.new(config) に与えた時に有効な設定とそのデフォルト値。
-[[m:WEBrick::GenericServer#WEBrick::Config::General]]も参照。
+[[m:WEBrick::Config::General]]も参照。
 [[m:URL:http:#/shogo.homelinux.org/~ysantoso/webrickguide/html/Server_Configuration.html]]
 も参照。
 

@@ -39,14 +39,14 @@ GNU Readline によるコマンドライン入力インタフェースを提供するモジュー
 は ^D)を入力すると nil を返します。
 
 入力時には行内編集が可能で、vi モードと Emacs モードが用意されています。
-([[m:readline#Readline.vi_editing_mode]]、[[m:readline#Readline.emacs_editing_mode]]
+([[m:Readline.vi_editing_mode]]、[[m:Readline.emacs_editing_mode]]
 を参照)。デフォルトは Emacs モードです。
 
 文字列 prompt を指定するとカーソルの前にこの文字列を表示します。
 
 add_hist が真ならば、入力した文字列はヒストリに記録されます。
 Emacs モードなら ^P を入力することで前に入力した文字列を呼び出した
-り、[[m:readline#Readline::HISTORY]] モジュールによりヒストリの内容を操作す
+り、[[m:Readline::HISTORY]] モジュールによりヒストリの内容を操作す
 ることができます。このデフォルト値は nil です。
 
 : 注意
