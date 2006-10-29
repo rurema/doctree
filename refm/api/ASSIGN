@@ -2,7 +2,7 @@ status: (none) -> complete
 
 LIBRARY_NAME                    OWNER           STATUS
 --------------------------------------------------------
-_builtin/ARGF
+_builtin/ARGF                   date
 _builtin/ArgumentError
 _builtin/Array
 _builtin/Bignum
