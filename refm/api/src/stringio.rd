@@ -52,13 +52,13 @@ IOバッファを buf に変更し、buf を返します。これ以前の
 buf がフリーズされている場合には、読み取り専用になります。
 pos と lineno は 0 にセットされます。
 
-@if (version >= "1.8.3")
+#@if (version >= "1.8.3")
 ruby 1.8.3 からは 
 buf が nil の場合には、例外 TypeError が発生します。
-@else
+#@else
 ruby 1.8.2 まで: 
 buf が nil の場合は、StringIO への読み書きは禁止されます。
-@end
+#@end
 
 
 --- <<(obj)
