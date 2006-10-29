@@ -2,7 +2,7 @@
 
 [[c:IO]] と同じインタフェースを持った文字列クラスです。
 
-[[unknown:執筆者募集]]
+#@todo
 
 === 例外
 StringIO オブジェクトは大抵の場合 IO オブジェクトと同じ例外を発生させます。
@@ -53,10 +53,11 @@ buf がフリーズされている場合には、読み取り専用になります。
 pos と lineno は 0 にセットされます。
 
 @if (version >= "1.8.3")
-((<ruby 1.8.3 feature>)): ruby 1.8.3 からは buf が nil の場合には、例外 TypeError が
-発生します。
+ruby 1.8.3 からは 
+buf が nil の場合には、例外 TypeError が発生します。
 @else
-ruby 1.8.2 まで: buf が nil の場合は、StringIO への読み書きは禁止されます。
+ruby 1.8.2 まで: 
+buf が nil の場合は、StringIO への読み書きは禁止されます。
 @end
 
 
@@ -168,8 +169,10 @@ StringIOには対応するパスはないので nil を返します。
 --- readlines(sep_string = $/)
 [[m:IO#readlines]] と同様です。
 
+#@since 1.9.0
 --- readpartial([integer [, buffer]])
 [[m:IO#readpartial]] と同様です。
+#@end
 
 --- reopen
 例外 [[c:NotImplementedError]] が発生します。
@@ -205,11 +208,12 @@ n が self.size より大きい場合にはバッファのサイズを n に拡大します。
 
 --- ungetc(c)
 c は Fixnum です。
-pos を 1 減らしてからキャラクターコードが c の文字を書き込みます。この時
-pos は 1 増えません。
+pos を 1 減らしてからキャラクターコードが c の文字を書き込みます。
+#@#この時posは 1 増えません。
 pos が size よりも大きい場合は、リサイズして新しく加えられたバッファを 0 で
 埋めてから pos を 1 減らしてキャラクターコードが c の文字を書き込みます。
-この時も pos は 1 増えません。nil を返します。
+#@#この時も pos は 1 増えません。
+nil を返します。
 
       s = StringIO.new("hoge")
       s.pos = 1
