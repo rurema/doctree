@@ -382,6 +382,8 @@ n は数値でなければなりません。
 --- os?
 #@end
 
+--- ld
+
 --- leap?
 閏年なら真を返します。
 
@@ -416,17 +418,17 @@ self を複製して、その改暦日を設定しなおします。
 [[m:Date.new]] も参照してください。
 
 #@since 1.9.0
---- next_day
+--- next_day([n])
 
---- next_month
+--- next_month([n])
 
---- next_year
+--- next_year([n])
 
---- prev_day
+--- prev_day([n])
 
---- prev_month
+--- prev_month([n])
 
---- prev_year
+--- prev_year([n])
 #@end
 
 #@since 1.9.0
@@ -463,6 +465,8 @@ limit は日付オブジェクトでなければなりません、
 1.8.5 以降では、%L, %N, %Q もつかえます。
 #@# %:{1,3}z も?
 また、GNU 版にあるような幅指定などもできます。
+##else
+#@# %[123]?
 #@end
 
 [[man:strftime(3)]]、および [[m:Date.strptime]] も参照してください。
