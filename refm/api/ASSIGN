@@ -210,10 +210,10 @@ shellwords
 singleton
 soap
 socket                         sheepman
-stringio                       sheepman 
-strscan                        sheepman
-sync                           sheepman
-syslog                         sheepman
+stringio                       sheepman         done
+strscan                        sheepman         done
+sync                           sheepman         done
+syslog                         sheepman         done
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------
