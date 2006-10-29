@@ -73,6 +73,10 @@ dup は単に無視します。
 引数の文字列は複製も freeze もされず、そのまま使います。
 #@end
 
+#@# bc-rdoc: detected missing name: must_C_version 
+---  StringScanner.must_C_version 
+This method is defined for backward compatibility.
+
 == Instance Methods
 
 --- [](nth)
@@ -659,6 +663,13 @@ pos = self.string.size と同じ動作です。
       s.unscan      # StringScanner::Error: can't unscan: prev match had failed
 
 selfを返します。
+
+#@# bc-rdoc: detected missing name: matchedsize
+--- matchedsize
+
+Equivalent to #matched_size. This method is obsolete; use #matched_size
+instead.
+
 
 == Constants
 

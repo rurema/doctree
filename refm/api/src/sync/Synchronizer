@@ -1,4 +1,6 @@
 = class Synchronizer
+include Sync_m
 
-[[c:Sync_m]]をincludeしたクラス[[c:Sync]] の別名。
+[[c:Sync_m]]をincludeしたクラス[[c:Sync]] の別名です。
 使い方は[[c:Sync_m]]を参照してください。
+
