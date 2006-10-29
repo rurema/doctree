@@ -4,10 +4,9 @@
 
 以下も ConditionVariable を理解するのに参考になります。
 
-[[m:URL:http:#/www.ruby-doc.org/docs/ProgrammingRuby/html/tut_threads.html#UF]]
+[[url:http://www.ruby-doc.org/docs/ProgrammingRuby/html/tut_threads.html#UF]]
 
-#@# == Condition Variable とは
-Condition Variable とは:
+=== Condition Variable とは
 
 あるスレッド A が排他領域で動いていたとします。スレッド A は現在空いていない
 リソースが必要になったので空くまで待つことにしたとします。これはうまくいきません。

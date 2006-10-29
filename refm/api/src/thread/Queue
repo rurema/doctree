@@ -4,11 +4,9 @@ Queueはスレッド間のFIFO(first in first out)の通信路です。ス
 レッドが空のqueueを読み出そうとすると停止します。queueになんら
 かの情報が書き込まれると実行は再開されます。
 
-#@# : [[c:SizedQueue]]
-#@#   最大サイズが指定できる Queue のサブクラスです。
+最大サイズが指定できるQueueのサブクラス[[c:SizedQueue]]も提供されています。
 
-#@# == 例
-例
+=== 例
 
   require 'thread'
 
