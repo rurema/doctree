@@ -217,12 +217,12 @@ syslog                         sheepman         done
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------
-tempfile
-test/unit
-thread
-thwait
-time
-timeout
+tempfile                        sheepman
+test/unit 
+thread                          sheepman
+thwait                          sheepman
+time                            sheepman
+timeout                         sheepman
 tk
 tmpdir
 tracer
