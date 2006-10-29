@@ -44,38 +44,38 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます。
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 #@if (version >= "1.8.0")
---- ARGF.filename
---- ARGF.path
+--- filename
+--- path
 
 処理対象のファイル名を返します。
 標準入力に対しては - を返します。
 組み込み変数 [[m:$FILENAME]] と同じです。
 
---- ARGF.to_s
+--- to_s
 
 常に文字列 "ARGF" を返します。
 #@else
 
---- ARGF.filename
---- ARGF.to_s
+--- filename
+--- to_s
 
 処理対象のファイル名を返します。
 標準入力に対しては - を返します。
 組み込み変数 [[m:$FILENAME]] と同じです。
 #@end
 
---- ARGF.file
+--- file
 
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
 返します。
 
---- ARGF.lineno
---- ARGF.lineno=
+--- lineno
+--- lineno=
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
 個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
 
---- ARGF.skip
+--- skip
 
 処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
@@ -115,8 +115,6 @@ self を返します。
 --- readline
 
 --- readlines
-
---- readpartial
 
 --- rewind
 
