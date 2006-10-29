@@ -1,4 +1,4 @@
-#@if (version >= "1.7.0")
+#@since 1.8.0
 
 = class StringScanner < Object
 
@@ -68,9 +68,7 @@ str はスキャン対象の文字列です。
 #@if (version <= "1.8.0")
 dup が true の時は文字列を複製して freeze します。
 dup が false なら複製せずに freeze します。
-#@end
-
-#@if (version >= "1.8.1")
+#@else
 dup は単に無視します。
 引数の文字列は複製も freeze もされず、そのまま使います。
 #@end
@@ -186,14 +184,14 @@ regexp が一致するまで文字列をスキャンします。
       s.scan(/\w+/)
       s.eos?        # => true
 
-[[m:strscan#empty?]] は将来のバージョンで削除される予定です。
-代わりに [[m:strscan#eos?]] を使ってください。
+[[m:StringScanner#empty?]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#eos?]] を使ってください。
 
 --- exist?(regexp)
 #@if (version <= "1.8.5")
 [注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
-Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
-#@end
+#@else
+#@#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 
 スキャンポインタの位置の文字列から regexp がマッチする位置を返します。
 この位置はスキャンポインタからの相対位置です。
@@ -207,6 +205,7 @@ Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
       s.scan(/\w+/) # => "test"
       s.exist?(/s/) # => 2
       s.exist?(/e/) # => nil
+#@end
 
 --- getch
 一文字スキャンして文字列で返します。
@@ -241,8 +240,8 @@ $KCODE に関らず 1 バイトスキャンして文字列で返します。
       s.get_byte                      # => "\244"
       s.get_byte                      # => nil
 
-[[m:strscan#getbyte]] は将来のバージョンで削除される予定です。
-代わりに [[m:strscan#get_byte]] を使ってください。
+[[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#get_byte]] を使ってください。
 
 --- inspect
 StringScannerオブジェクトを表す文字列を返します。
@@ -342,8 +341,8 @@ bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
       s.peek(4)     # => " str"
       s.peek(4)     # => " str"
 
-[[m:strscan#peep]] は将来のバージョンでは削除される予定です。
-代わりに [[m:strscan#peek]] を使ってください。
+[[m:StringScanner#peep]] は将来のバージョンでは削除される予定です。
+代わりに [[m:StringScanner#peek]] を使ってください。
 
 --- pointer
 --- pos
@@ -454,7 +453,7 @@ pos = 0と同じ動作です。
 文字列が残っているならば trueを、
 残っていないならば false を返します。
 
-[[m:strscan#eos?]] と逆の結果を返します。
+[[m:StringScanner#eos?]] と逆の結果を返します。
 
       s = StringScanner.new('test string')
       s.eos?        # => false
@@ -465,8 +464,8 @@ pos = 0と同じ動作です。
       s.eos?        # => true
       s.rest?       # => false
 
-[[m:strscan#rest?]] は将来のバージョンで削除される予定です。
-代わりに [[m:strscan#eos?]] を使ってください。
+[[m:StringScanner#rest?]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#eos?]] を使ってください。
 
 --- rest_size
 --- restsize
@@ -477,8 +476,8 @@ stringscanner.rest.size と同じです。
       s.rest_size # => 11
       s.rest.size # => 11
 
-[[m:strscan#restsize]] は将来のバージョンで削除される予定です。
-代わりに[[m:strscan#rest_size]] を使ってください。
+[[m:StringScanner#restsize]] は将来のバージョンで削除される予定です。
+代わりに[[m:StringScanner#rest_size]] を使ってください。
 
 --- scan(regexp)
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
@@ -506,10 +505,10 @@ stringscanner.rest.size と同じです。
 このメソッドは s と f の組み合わせにより、
 他のメソッドと同等の動作になります。
 
-    * scan_full(regexp, true, true) は [[m:strscan#scan]] と同等。
-    * scan_full(regexp, true, false) は [[m:strscan#skip]] と同等。
-    * scan_full(regexp, false, true) は [[m:strscan#check]] と同等。
-    * scan_full(regexp, false, false) は [[m:strscan#match]] と同等。
+    * scan_full(regexp, true, true) は [[m:StringScanner#scan]] と同等。
+    * scan_full(regexp, true, false) は [[m:StringScanner#skip]] と同等。
+    * scan_full(regexp, false, true) は [[m:StringScanner#check]] と同等。
+    * scan_full(regexp, false, false) は [[m:StringScanner#match]] と同等。
 
 --- scan_until(regexp)
 regexp が一致するまで文字列をスキャンします。
@@ -537,10 +536,10 @@ regexp が一致するまで文字列をスキャンします。
 このメソッドは s と f の組み合わせにより、
 他のメソッドと同等の動作になります。
 
-    * search_full(regexp, true, true) は [[m:strscan#scan_until]] と同等。
-    * search_full(regexp, true, false) は [[m:strscan#skip_until]] と同等。
-    * search_full(regexp, false, true) は [[m:strscan#check_until]] と同等。
-    * search_full(regexp, false, false) は [[m:strscan#exist?]] と同等。
+    * search_full(regexp, true, true) は [[m:StringScanner#scan_until]] と同等。
+    * search_full(regexp, true, false) は [[m:StringScanner#skip_until]] と同等。
+    * search_full(regexp, false, true) は [[m:StringScanner#check_until]] と同等。
+    * search_full(regexp, false, false) は [[m:StringScanner#exist?]] と同等。
 
 --- skip(regexp)
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
@@ -575,17 +574,18 @@ regexp が一致するまで文字列をスキャンします。
       s.string # => "test string"
 
 #@if (version <= "1.8.0")
-Ruby 1.8.0 では返り値は freeze されています。
+#@#Ruby 1.8.0 では
+返り値は freeze されています。
 
       s = StringScanner.new('test string')
       s.string.frozen? # => true
-#@end
-
-#@if (version >= "1.8.1")
-Ruby 1.8.1 以降では返り値は freeze されていません。
+#@else
+#@#Ruby 1.8.1 以降では
+返り値は freeze されていません。
 
       s = StringScanner.new('test string')
       s.string.frozen? # => false
+#@end
 
 なお、このメソッドは StringScanner.new に渡した
 文字列をそのまま返しますが、この仕様が将来に渡って保証されるわけではありません。
@@ -605,7 +605,6 @@ Ruby 1.8.1 以降では返り値は freeze されていません。
       s.string.replace("0123")
       s.scan(/\w+/)     # => "0123" (将来は "test" が返る可能性あり)
       str               # => "0123" (将来は "test string" が返る可能性あり)
-#@end
 
 --- string=(str)
 スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
@@ -634,8 +633,8 @@ pos = self.string.size と同じ動作です。
       s[0]          # => nil
       s.pos         # => 11
 
-[[m:strscan#clear]] は将来のバージョンで削除される予定です。
-代わりに [[m:strscan#terminate]] を使ってください。
+[[m:StringScanner#clear]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#terminate]] を使ってください。
 
 --- unscan
 スキャンポインタを前回のマッチの前の位置に戻します。
