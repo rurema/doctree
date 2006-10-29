@@ -91,11 +91,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 == Class Methods
 
 #@since 1.8.0
---- ajd_to_amjd(ajd) #@# ?
+#@#? --- ajd_to_amjd(ajd)
 
---- ajd_to_jd(ajd, [offset=0]) #@# ?
+#@#?--- ajd_to_jd(ajd, [offset=0])
 
---- amjd_to_ajd(amjd) #@# ?
+#@#? --- amjd_to_ajd(amjd)
 #@end
 
 #@since 1.8.0
@@ -133,12 +133,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 このメソッドに改暦前の日付を与えることはできません。
 
-[[m:Date.jd]、および [[m:Date.new]] も参照してください。
+[[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
 --- commercial_to_jd([cwyear[, cweek[, cwday[, start]]]])
 
 #@since 1.8.0
---- day_fraction_to_time(fr) #@# ?
+#@#? --- day_fraction_to_time(fr)
 #@end
 
 #@since 1.8.5
@@ -163,20 +163,20 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.new]] も参照してください。
 
 #@since 1.8.0
---- jd_to_ajd(jd, fraction, [offset]) #@# ?
+#@#? --- jd_to_ajd(jd, fraction, [offset])
 #@end
 
 --- jd_to_civil(jd, [start])
 
 --- jd_to_commercial(jd, [start])
 
---- jd_to_ld(jd) #@# ?
+#@#? --- jd_to_ld(jd)
 
---- jd_to_mjd(jd) #@# ?
+#@#? --- jd_to_mjd(jd)
 
 --- jd_to_ordinal(jd, [start])
 
---- jd_to_wday(jd) #@# ?
+#@#? --- jd_to_wday(jd)
 
 #@since 1.8.5
 --- jd_to_weeknum(jd, [k, [start]])
@@ -190,11 +190,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 --- julian_leap? (year)
 
---- ld_to_jd(ld) #@# ?
+#@#? --- ld_to_jd(ld)
 
---- mjd_to_jd(mjd) #@# ?
+#@#? --- mjd_to_jd(mjd)
 
---- new0([ajd[, offset[, start]]]) #@# ?
+#@#? --- new0([ajd[, offset[, start]]])
 
 #@since 1.8.0
 --- ordinal([year[, yday[, start]]])
@@ -240,7 +240,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@end
 
 #@since 1.8.0
---- time_to_day_fraction(hour, minute, second) #@# ?
+#@#? --- time_to_day_fraction(hour, minute, second)
 #@end
 
 --- today([start])
@@ -266,7 +266,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 正しい暦週日付であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
 
-[[m:Date.jd]、および [[m:Date.commercial]] も参照してください。
+[[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
 
 #@since 1.8.0
 --- valid_jd? (jd[, start])
@@ -294,7 +294,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@end
 
 #@since 1.8.0
---- zone_to_diff(zone) #@# ?
+#@#? --- zone_to_diff(zone)
 #@end
 
 == Instance Methods
@@ -332,7 +332,7 @@ n は数値でなければなりません。
 
 --- asctime
 --- ctime
-asctime(3) 書式の文字列を返します (ただし、末尾の "\n\0" は除く)。
+[[man:asctime(3)]] 書式の文字列を返します (ただし、末尾の "\n\0" は除く)。
 
 --- cwday
 暦週の日 (曜日) を返します (1-7、月曜は1)。

@@ -21,7 +21,7 @@
 年日付に相当する日時オブジェクトを生成します。
 
 #@since 1.8.0
---- valid_time? #@# ?
+#@#? --- valid_time?
 #@end
 
 == Instance Methods
