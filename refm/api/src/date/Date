@@ -4,7 +4,7 @@ include Comparable
 
 日付を扱うクラスです。この文書のオリジナル (の html 版) は、
 [[url:http://www.funaba.org/date2/manual.html]],
-[[url:http:#/www.funaba.org/en/date2/manual.html]]
+[[url:http://www.funaba.org/en/date2/manual.html]]
 です。
 
 [[c:DateTime]] は日付だけでなく時間も扱える Date のサブクラスです。
@@ -80,9 +80,29 @@ ABBR_MONTHNAMES[0] == nil で ABBR_MONTHNAMES[1] == "Jan" です。
 
 ABBR_DAYNAMES[0] == "Sun" です。
 
+--- ENGLAND
+
+--- GREGORIAN
+
+--- ITALY
+
+--- JULIAN
+
 == Class Methods
 
+#@since 1.8.0
+--- ajd_to_amjd(ajd) #@# ?
+
+--- ajd_to_jd(ajd, [offset=0]) #@# ?
+
+--- amjd_to_ajd(amjd) #@# ?
+#@end
+
+#@since 1.8.0
 --- civil([year[, mon[, mday[, start]]]])
+#@else
+--- new3([year[, mon[, mday[, start]]]])
+#@end
 --- new([year[, mon[, mday[, start]]]])
 暦日付に相当する日付オブジェクトを生成します。
 
@@ -93,12 +113,18 @@ ABBR_DAYNAMES[0] == "Sun" です。
 零であってはなりません。
 
 最後の引数は、グレゴリオ暦をつかい始めた日をあらわすユリウス日です。
+#@if (version < "1.8.5")
 グレゴリオ暦の指定として真、ユリウス暦の指定として偽を与えることもできます。
-省略した場合は、Date::ITALY (1582年10月15日) になります。
+#@end
+省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
-jd も参照してください。
+[[m:Date.jd]] も参照してください。
 
+#@since 1.8.0
 --- commercial([cwyear[, cweek[, cwday[, start]]]])
+#@else
+--- neww([cwyear[, cweek[, cwday[, start]]]])
+#@end
 暦週日付に相当する日付オブジェクトを生成します。
 
 週、および週の日 (曜日) は負、
@@ -107,24 +133,86 @@ jd も参照してください。
 
 このメソッドに改暦前の日付を与えることはできません。
 
-jd、および new も参照してください。
+[[m:Date.jd]、および [[m:Date.new]] も参照してください。
 
+--- commercial_to_jd([cwyear[, cweek[, cwday[, start]]]])
+
+#@since 1.8.0
+--- day_fraction_to_time(fr) #@# ?
+#@end
+
+#@since 1.8.5
+--- gregorian? (jd, start)
+#@else
+--- ns? (jd, start)
+#@end
+
+--- gregorian_leap? (year)
+--- leap? (year)
+
+#@since 1.8.5
 --- jd([jd[, start]])
+#@else
+--- new1([jd[, start]])
+#@end
 ユリウス日に相当する日付オブジェクトを生成します。
 
 このクラスのいくつかの重要なメソッドで、
 負のユリウス日は保証されません。
 
-new も参照してください。
+[[m:Date.new]] も参照してください。
 
+#@since 1.8.0
+--- jd_to_ajd(jd, fraction, [offset]) #@# ?
+#@end
+
+--- jd_to_civil(jd, [start])
+
+--- jd_to_commercial(jd, [start])
+
+--- jd_to_ld(jd) #@# ?
+
+--- jd_to_mjd(jd) #@# ?
+
+--- jd_to_ordinal(jd, [start])
+
+--- jd_to_wday(jd) #@# ?
+
+#@since 1.8.5
+--- jd_to_weeknum(jd, [k, [start]])
+#@end
+
+#@since 1.8.5
+--- julian? (jd, start)
+#@else
+--- os? (jd, start)
+#@end
+
+--- julian_leap? (year)
+
+--- ld_to_jd(ld) #@# ?
+
+--- mjd_to_jd(mjd) #@# ?
+
+--- new0([ajd[, offset[, start]]]) #@# ?
+
+#@since 1.8.0
 --- ordinal([year[, yday[, start]]])
+#@else
+--- new2([year[, yday[, start]]])
+#@end
 年間通算日 (年日付) に相当する日付オブジェクトを生成します。
 
 月の日は負、
 または正の数でなければなりません (負のときは最後からの序数)。
 零であってはなりません。
 
-jd、および new も参照してください。
+[[m:Date.jd]]、および [[m:Date.new]] も参照してください。
+
+--- oridinal_to_jd(year, yday[, start])
+
+#@since 1.8.0
+--- _parse(str[, complete])
 
 --- parse(str[, complete[, start]])
 与えられた日付表現を解析し、
@@ -134,48 +222,80 @@ jd、および new も参照してください。
 年の下2桁表現であるとみなしこれを補います。
 なお、省略した場合は、偽とみなします。
 
-_parse も利用できます。
+[[m:Date._parse]] も利用できます。
 このメソッドは parse と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
+
+--- _strptime(str[, format])
 
 --- strptime(str[, format[, start]])
 与えられた雛型で日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
-_strptime も利用できます。
+[[m:Date._strptime]] も利用できます。
 このメソッドは strptime と似ていますが、日付オブジェクト生成せずに、
 見いだした要素をハッシュで返します。
 
-strptime(3)、および strftime も参照してください。
+[[man:strptime(3)]]、および [[m:Date#strftime]] も参照してください。
+#@end
+
+#@since 1.8.0
+--- time_to_day_fraction(hour, minute, second) #@# ?
+#@end
 
 --- today([start])
 現在の日付に相当する日付オブジェクトを生成します。
 
+#@since 1.8.0
 --- valid_civil? (year, mon, mday[, start])
 --- valid_date? (year, mon, mday[, start])
+#@else
+--- exist? (year, mon, mday[, start])
+--- exist3? (year, mon, mday[, start])
+#@end
 正しい暦日付であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
 
-jd、および civil も参照してください。
+[[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
 
+#@since 1.8.0
 --- valid_commercial? (cwyear, cweek, cwday[, start])
+#@else
+--- existw? (cwyear, cweek, cwday[, start])
+#@end
 正しい暦週日付であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
 
-jd、および commercial も参照してください。
+[[m:Date.jd]、および [[m:Date.commercial]] も参照してください。
 
+#@since 1.8.0
 --- valid_jd? (jd[, start])
+#@else
+--- exist1? (jd[, start])
+#@end
 ひとつ目の引数をそのまま返します。
 
 対称性のため用意されていますが、実際的に意味はありません。
 
-jd も参照してください。
+[[m:Date.jd]] も参照してください。
 
+#@since 1.8.0
 --- valid_ordinal? (year, yday[, start])
+#@else
+--- exist2? (year, yday[, start])
+#@end
 正しい年間通算日 (年日付) であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
 
-jd、および ordinal も参照してください。
+[[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
+
+#@since 1.8.5
+--- weeknum_to_jd(year, week, day[, k[, start]])
+#@end
+
+#@since 1.8.0
+--- zone_to_diff(zone) #@# ?
+#@end
 
 == Instance Methods
 
@@ -204,6 +324,12 @@ other は日付オブジェクトか、
 self から n ヶ月後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
+#@since 1.8.0
+--- ajd
+
+--- amjd
+#@end
+
 --- asctime
 --- ctime
 asctime(3) 書式の文字列を返します (ただし、末尾の "\n\0" は除く)。
@@ -223,8 +349,18 @@ asctime(3) 書式の文字列を返します (ただし、末尾の "\n\0" は除く)。
 --- england
 このメソッドは、new_start(Date::ENGLAND) と等価です。
 
+#@since 1.9.0
+--- friday?
+#@end
+
 --- gregorian
 このメソッドは、new_start(Date::GREGORIAN) と等価です。
+
+#@since 1.8.5
+--- gregorian?
+#@else
+--- ns?
+#@end
 
 --- italy
 このメソッドは、new_start(Date::ITALY) と等価です。
@@ -233,12 +369,18 @@ asctime(3) 書式の文字列を返します (ただし、末尾の "\n\0" は除く)。
 ユリウス日を返します。
 時刻を含みません。
 
-ajd も利用できます。
+[[m:Date#ajd]] も利用できます。
 このメソッドは jd と似ていますが、天文学的なユリウス日を返します。
 時刻を含みます。
 
 --- julian
 このメソッドは、new_start(Date::JULIAN) と等価です。
+
+#@since 1.8.5
+--- julian?
+#@else
+--- os?
+#@end
 
 --- leap?
 閏年なら真を返します。
@@ -251,7 +393,7 @@ ajd も利用できます。
 修正ユリウス日を返します。
 時刻の情報を含みません。
 
-amjd も利用できます。
+[[m:Date#amjd]] も利用できます。
 このメソッドは mjd と似ていますが、天文学的な修正ユリウス日を返します。
 時刻を含みます。
 
@@ -259,21 +401,55 @@ amjd も利用できます。
 --- month
 月を返します (1-12)。
 
+#@since 1.9.0
+--- monday?
+#@end
+
+#@since 1.8.0
 --- new_start([start])
+#@else
+--- newsg([start])
+#@end
 self を複製して、その改暦日を設定しなおします。
-引数を省略した場合は、Date::ITALY (1582年10月15日) になります。
+引数を省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
-new も参照してください。
+[[m:Date.new]] も参照してください。
 
+#@since 1.9.0
+--- next_day
+
+--- next_month
+
+--- next_year
+
+--- prev_day
+
+--- prev_month
+
+--- prev_year
+#@end
+
+#@since 1.9.0
+--- saturday?
+#@end
+
+#@since 1.8.0
 --- start
+#@else
+--- sg
+#@end
 改暦日をあらわすユリウス日を返します。
 
-new も参照してください。
+[[m:Date.new]] も参照してください。
 
 --- step(limit, step){|date| ...}
 ブロックの評価を繰り返します。ブロックは日付オブジェクトをとります。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
+
+#@since 1.9.0
+--- sunday?
+#@end
 
 --- strftime([format])
 与えられた雛型で日付を書式づけます。
@@ -283,20 +459,44 @@ limit は日付オブジェクトでなければなりません、
 %M, %m, %n, %P, %p, %R, %r, %S, %s, %T, %t, %U, %u, %V, %v, %W, %w, %X,
 %x, %Y, %y, %Z, %z, %%, %+
 
-[[man:strftime(3)]]、および [[man:strptime]] も参照してください。
+#@since 1.8.5
+1.8.5 以降では、%L, %N, %Q もつかえます。
+#@# %:{1,3}z も?
+また、GNU 版にあるような幅指定などもできます。
+#@end
+
+[[man:strftime(3)]]、および [[m:Date.strptime]] も参照してください。
 
 --- succ
 --- next
 翌日の日付オブジェクトを返します。
 
+#@since 1.9.0
+--- thursday?
+
+--- to_date
+
+--- to_datetime
+#@end
+
 --- to_s
 ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
+
+#@since 1.9.0
+--- to_time
+
+--- tuesday?
+#@end
 
 --- upto(max){|date| ...}
 このメソッドは、step(max, 1){|date| ...} と等価です。
 
 --- wday
 曜日を返します (0-6、日曜日は零)。
+
+#@since 1.9.0
+--- wednesday?
+#@end
 
 --- yday
 年の日を返します (1-366)。

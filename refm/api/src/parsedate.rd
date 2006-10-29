@@ -2,14 +2,11 @@ require date/format
 
 日付を解析します。
 
-
-
 = module ParseDate
 
 == Module Functions
 
---- parsedate(str, complete = false)
-
+--- parsedate(str[, complete])
 str で与えられた日付表現を解析し、見いだした要素を
 配列 (年、月、日、時、分、秒、タイムゾーン、曜日) で返します。
 
@@ -17,19 +14,20 @@ complete が真で、年が0から99の範囲であれば、
 年の下2桁の表現であるとみなし上2桁を補います。
 69 以上なら 1900 年代とみなします。
 69 未満なら 2000 年代とみなします。
+complete の既定値は偽です。
 
   require 'parsedate'
 
-  p ParseDate.parsedate('Sat Aug 28 21:45:09 1999')
+  ParseDate.parsedate('Sat Aug 28 21:45:09 1999')
       # => [1999, 8, 28, 21, 45, 9, nil, 6]
 
-  p ParseDate.parsedate('Saturday, 28-Aug-99 21:45:09 GMT')
+  ParseDate.parsedate('Saturday, 28-Aug-99 21:45:09 GMT')
       # => [99, 8, 28, 21, 45, 9, "GMT", 6]
 
-  p ParseDate.parsedate('99-08-28', true)
+  ParseDate.parsedate('99-08-28', true)
       # => [1999, 8, 28, nil, nil, nil, nil, nil]
 
-  p ParseDate.parsedate('01-08-28', true)
+  ParseDate.parsedate('01-08-28', true)
       # => [2001, 8, 28, nil, nil, nil, nil, nil]
 
 parsedate はいろいろな書式をあつかえます。
@@ -52,8 +50,8 @@ parsedate はいろいろな書式をあつかえます。
 
 日付解析し直ちに [[c:Date]]、
 あるいは [[c:DateTime]] オブジェクトを生成するには、
-[[lib:date]] で提供される [[m:Date.parse]],
-[[m:DateTime.parse]], [[m:Date.strptime]],
+[[lib:date]] で提供される [[m:Date.parse]]、
+[[m:DateTime.parse]] や [[m:Date.strptime]]、
 [[m:DateTime.strptime]] などをつかうことができます。
 
 日付解析し直ちに [[c:Time]] オブジェクトを生成するには、

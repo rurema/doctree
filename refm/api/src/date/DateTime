@@ -20,6 +20,10 @@
 --- ordinal([year[, yday[, hour[, min[, sec[, offset[, start]]]]]]])
 年日付に相当する日時オブジェクトを生成します。
 
+#@since 1.8.0
+--- valid_time? #@# ?
+#@end
+
 == Instance Methods
 
 --- hour
@@ -28,17 +32,27 @@
 --- min
 分を返します (0-59)。
 
+#@since 1.8.0
 --- new_offset([offset])
+#@else
+--- newof
+#@end
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
 
 new も参照してください。
 
+#@since 1.8.0
 --- offset
+#@else
+--- of
+#@end
 時差を返します。
 
 --- sec
 秒を返します (0-59)。
+
+--- sec_fraction
 
 --- zone
 タイムゾーンを返します。
