@@ -219,13 +219,13 @@ nil を返します。
       s.pos = 1
       s.ungetc(0x48)
       p s.string   #=> "Hoge"
-      p.pos        #=> 0
+      p s.pos        #=> 0
 
       s = StringIO.new("hoge")
       s.pos = 8
       s.ungetc(0x41)
       p s.string   #=> "hoge\000\000\000A"
-      p.pos        #=> 7
+      p s.pos        #=> 7
 
 --- write(obj)
 [[m:IO#write]] と同様です。書き込まれた文字列の長さを返します。
