@@ -3,10 +3,10 @@ status: (none) -> complete
 LIBRARY_NAME                    OWNER           STATUS
 --------------------------------------------------------
 _builtin/ARGF                   date            done
-_builtin/ArgumentError          date
-_builtin/Array                  date
-_builtin/Bignum                 date
-_builtin/Binding                date
+_builtin/ArgumentError          date            done
+_builtin/Array                  date            done
+_builtin/Bignum                 date            done
+_builtin/Binding                date            done
 _builtin/Class                  sheepman        done
 _builtin/Comparable
 _builtin/Continuation

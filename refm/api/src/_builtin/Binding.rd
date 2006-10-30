@@ -9,7 +9,7 @@
 
 == Instance Methods
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- eval(expr[, fname[, lineno=1]])
 
 組み込み関数 eval を使って

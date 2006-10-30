@@ -15,7 +15,7 @@ include Enumerable
 引数を要素として持つ配列を生成します。
 
 --- new([size[, val]])
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- new(ary)
 #@end
 --- new(size) {|index| ... }
@@ -26,7 +26,7 @@ include Enumerable
 (要素毎に val が複製されるわけではないことに注意してください。
 全要素が同じオブジェクト val を参照します[[trap:Array]])。
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 二番目の形式では引数に指定した配列を複製し
 て返します。
 
@@ -164,7 +164,7 @@ times が文字列なら、[[m:Array#join]](times) と同じ
 other が配列でなければ to_ary メソッドによる
 暗黙の型変換を試みます。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 要素の同一性は [[m:Object#===]] ではなく、[[m:Object#eql?]] による評価に変更されました。
 
 self中で重複していて、other中に存在していなかった要素は、その重複が保持されます。
@@ -438,7 +438,7 @@ Array#[nth] は、Array#fetch(nth, nil) と同じです。
 --- fill(val)
 --- fill(val, start[, length])
 --- fill(val, start..end)
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- fill {|index| ... }
 --- fill(start[, length]) {|index| ... }
 --- fill(start..end) {|index| ... }
@@ -452,7 +452,7 @@ Array#[nth] は、Array#fetch(nth, nil) と同じです。
 このメソッドが val のコピーでなく val 自身をセットする
 ことに注意してください([[trap:Array]])。
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 val の代わりにブロックを指定するとブロックの評価結果を値とし
 ます。ブロックは要素毎に実行されるので、セットする値のそれぞれをあ
 るオブジェクトの複製にすることができます。
@@ -465,7 +465,7 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
     p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 version 1.8.0 には、ブロックに渡されるパラ
 メータが仕様と異なる不具合がありました。
 
@@ -477,7 +477,7 @@ version 1.8.0 には、ブロックに渡されるパラ
 #@end
 
 --- first
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- first(n)
 #@end
 配列の先頭の要素を返します。要素がなければ nil を返します。
@@ -487,7 +487,7 @@ version 1.8.0 には、ブロックに渡されるパラ
     p [0, 1, 2].first   #=> 0
     p [].first          #=> nil
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 省略可能な引数 n を指定した場合、先頭の n 要素を配列で
 返します。n は 0 以上でなければなりません。
 
@@ -526,13 +526,13 @@ version 1.8.0 には、ブロックに渡されるパラ
 ます。
 
 --- index(val)
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- index {|item| ...}
 #@end
 最初の形式では、val と == で等しい最初の要素の位置を返
 します。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 二番目の形式では、ブロックが真を返した最初の要素の位置を返します。
 ブロック引数には、要素が順に渡されます。
 #@end
@@ -543,7 +543,7 @@ version 1.8.0 には、ブロックに渡されるパラ
     p [1, 0, 0, 1, 0].index(1)   #=> 0
     p [1, 0, 0, 0, 0].index(1)   #=> 0
     p [0, 0, 0, 0, 0].index(1)   #=> nil
-#@if (version >= "1.9.0")
+#@since 1.9.0
     p [0, 1, 0, 1, 0].index {|v| v > 0}   #=> 1
 #@end
 [[m:Array#rindex]] も参照してください。
@@ -560,13 +560,13 @@ version 1.8.0 には、ブロックに渡されるパラ
     p ary.indexes( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil]
     p ary.indexes( 0, -1, -2 )        #=> ["a", "e", "d"]
     p ary.indexes( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
-#@if (version >= "1.8.0")
+#@since 1.8.0
 このメソッドは version 1.8 では、((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 代わりに [[m:Array#values_at]] を使用します。
 #@end
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- insert(nth, val[, val2 ...])
 --- insert(nth, [val[, val2 ...]])
 
@@ -585,7 +585,7 @@ self を返します。以下のように定義されます。
     ary.insert 2, 'a', 'b'
     p ary                  # => ["foo", "bar", "a", "b", "baz"]
 #@end
-#@if (version >= "1.8.0")
+#@since 1.8.0
 引数 val を一つも指定しなければ何もしません。
 #@end
 
@@ -611,7 +611,7 @@ sep が nil のときは空文字列を使います。
     p ary.join      # => "123123[...]"
 
 --- last
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- last(n)
 #@end
 配列の末尾の要素を返します。配列が空のときは nil を返します。
@@ -619,7 +619,7 @@ sep が nil のときは空文字列を使います。
     p [0, 1, 2].last   #=> 2
     p [].last          #=> nil
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 省略可能な引数 n を指定した場合、末尾の n 要素を配列で
 返します。n は 0 以上でなければなりません。
 
@@ -689,7 +689,7 @@ self を返します。
       array.push [5, 6]
       array.push 7, 8
       p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
-#@if (version >= "1.8.0")
+#@since 1.8.0
 引数を指定しなければ何もしません。
 #@end
 
@@ -726,7 +726,7 @@ reverse! は配列の要素を逆順に(破壊的に)並べ替えます。
 reverse は、常に新しい配列を返しますが、reverse!  は、
 1 要素の配列に対して nil を返しそれ以外では self を返
 します
-#@if (version >= "1.8.0")
+#@since 1.8.0
 常に self を返します。
 #@end
 --- reverse_each {|item| ... }
@@ -734,13 +734,13 @@ reverse は、常に新しい配列を返しますが、reverse!  は、
 各要素に対して逆順にブロックを評価します。self を返します。
 
 --- rindex(val)
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- rindex {|item| ... }
 #@end
 最初の形式では、val と == で等しい((*最後*))の要素の位
 置を返します。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 二番目の形式では、ブロックが真を返した((*最後*))の要素の位置を返し
 ます。ブロック引数には、要素が順に渡されます。
 #@end
@@ -786,7 +786,7 @@ reverse は、常に新しい配列を返しますが、reverse!  は、
 sort はソートされた新しい配列を返し、sort! は
 self を破壊的に変更します。
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 sort! は、バージョン 1.6 以前には要素の数が 2 より小さい場合には
 nil を返していました。一方バージョン 1.7 では常に self を
 返します。
@@ -801,7 +801,11 @@ self をそのまま返します。
 
 [[m:Array#join]]([[m:$,]]) と同じです。
 
-#@if (version >= "1.7.0")
+#@since 1.9.0
+--- to_splat
+#@end
+
+#@since 1.8.0
 --- transpose
 
 self を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
@@ -861,11 +865,11 @@ obj1, obj2 ... を順番に配列の先頭に挿入します。self を返します。
     arr.unshift 1, 2
     p arr             #=> [1, 2, [0], 0, 1, 2, 3]
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 引数を指定しなければ何もしません。
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- values_at(index_1, ... , index_n)
 
 引数で指定されたインデックスに対応する要素を配列で返します。インデッ
