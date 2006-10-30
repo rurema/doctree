@@ -60,6 +60,10 @@ include Enumerable
 
 コマンドの実行結果はすべてFilterとしてかえります. 
 
+== Class Methods
+
+--- new
+
 == Instance Methods
 
 --- each
@@ -92,7 +96,8 @@ filter1 + filter2 は filter1の出力の後, filter2の出力を行う.
 --- to_a
 --- to_s
 
-
+--- input
+--- input=
 
 = class Shell < Object
 
@@ -113,10 +118,10 @@ OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
 注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
 
 例)
-Shell.def_system_command "ls"
+  Shell.def_system_command "ls"
   ls を定義
 
-Shell.def_system_command "sys_sort", "sort"
+  Shell.def_system_command "sys_sort", "sort"
   sortコマンドをsys_sortとして定義
 
 --- undef_system_command(command)
@@ -149,6 +154,28 @@ system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
 
 pathをカレントディレクトリとするShellオブジェクトを生成します.
 
+#@# bc-rdoc: detected missing name: debug=
+--- debug
+--- debug?
+--- debug=(val)
+
+
+#@# bc-rdoc: detected missing name: default_record_separator
+--- default_record_separator
+--- default_record_separator=(rs)
+
+
+
+#@# bc-rdoc: detected missing name: default_system_path
+--- default_system_path
+--- default_system_path=(path)
+
+
+--- verbose   
+--- verbose?  
+--- verbose=  
+
+
 == Instance Methods
 #@#=== プロセス管理
 
@@ -160,6 +187,7 @@ pathをカレントディレクトリとするShellオブジェクトを生成します.
 カレントディレクトリを返す。
 
 --- system_path
+--- system_path=(path)
 
 コマンドサーチパスの配列を返す。
 
@@ -478,3 +506,17 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 --- mkpath
 
 [[m:Shell#makedirs]] と同じです。
+
+#@# bc-rdoc: detected missing name: debug=
+--- debug
+--- debug?
+--- debug=(val)
+
+--- verbose   
+--- verbose?  
+--- verbose=  
+
+#@# bc-rdoc: detected missing name: expand_path
+--- expand_path(path)
+
+
