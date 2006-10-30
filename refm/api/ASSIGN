@@ -205,9 +205,9 @@ scanf
 sdbm
 set
 sha1
-shell                          sheepman
-shellwords                     sheepman
-singleton                      sheepman
+shell                          sheepman         done
+shellwords                     sheepman         done
+singleton                      sheepman         done
 soap
 socket                         sheepman
 stringio                       sheepman         done
