@@ -74,8 +74,7 @@ include Enumerable
 応する値が存在しない時のデフォルト値です。
 デフォルト値の扱いには注意が必要です( [[trap:Hash]] )。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
+#@if (version >= "1.8.0")
 ブロックを指定した場合は、ブロックの評価結果がデフォルト値になりま
 す。値が設定されていないハッシュ要素を参照するとその都度ブロックを
 実行し、その結果を返します。ブロックにはそのハッシュとハッシュを参
@@ -137,8 +136,7 @@ dup は内容の等しいフリーズされていないハッシュを返します。
 
 ハッシュのデフォルト値を返します。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
+#@if (version >= "1.8.0")
 2 番目の形式はハッシュがデフォルト値としてブロックを持つ場合
 ([[m:Hash#Hash.new]]参照)に指定できます。self と 引数
 key を引数にブロックを実行してその結果を返します。
@@ -202,7 +200,6 @@ self を返します。
        [:b, 2]
 
 #@if (version >= "1.8.0")
-((<ruby 1.8 feature>)):
 
 each と each_pair ではブロックパラメータの受渡し方が異なります。
 
@@ -245,7 +242,6 @@ key に関連づけられた値を返します。該当するキーが登録されてい
 でもなければ例外 [[c:IndexError]] が発生します。
 
 #@if (version >= "1.9.0")
-(((<ruby 1.9 feature|ruby 1.9 feature/2004-09-22>)):
 [[c:IndexError]] の代わりに [[c:IndexError]] のサブクラスの
 [[c:KeyError]] が発生します。)
 #@end
@@ -264,7 +260,9 @@ key に関連づけられた値を返します。該当するキーが登録されてい
 値の一致判定は == で行われます。
 
 --- index(val)
+#@since 1.9.0
 --- key(val)
+#@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
@@ -272,21 +270,21 @@ nil を返します。
 該当するキーが複数存在する場合、どのキーを返すかは不定です。
 
 #@if (version >= "1.9.0")
-((<ruby 1.9 feature|ruby 1.9 feature/2004-09-22>)):
 Hash#index は version 1.9 では、((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 #@end
 
---- indexes(key_1, ... , key_n)         ((<obsolete>))
---- indices(key_1, ... , key_n)         ((<obsolete>))
+#@if (version < "1.9.0")
+--- indexes(key_1, ... , key_n)
+--- indices(key_1, ... , key_n)
 
 引数で指定されたキーを持つ値の配列を返します。
 
 #@if (version >= "1.8.0")
-((<ruby 1.8 feature>)):
 このメソッドは version 1.8 では、((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 代わりに [[m:Hash#values_at]] を使用します。
+#@end
 #@end
 
 --- invert
@@ -313,8 +311,6 @@ Hash#index は version 1.9 では、((<obsolete>)) です。
 --- merge(other) {|key, self_val, other_val| ... }
 --- merge!(other)
 --- merge!(other) {|key, self_val, other_val| ... }
-
-((<ruby 1.8 feature>))
 
 Hash#merge は、hash.dup.[[m:Hash#update]] と同じです。
 Hash#merge! は、[[m:Hash#update]] の別名です。
@@ -361,8 +357,8 @@ nil を、デフォルト値を持つならその値を返します(このとき、
   h1.each {|v| p v}       # =>
   p h1.to_a               # => []
 
-#@if (version >= "1.7.0")
-  # ruby 1.7 feature
+#@if (version >= "1.8.0")
+  # ruby 1.8 feature
   h2 = Hash.new {|arg| arg}
   p h2.empty?             # => true
   p h2[0]                 # => [{}, 0]
@@ -386,8 +382,7 @@ self を返します。
 ハッシュの内容をマージします。重複するキーに対応する値は
 other の内容で上書きされます。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
+#@if (version >= "1.8.0")
 ブロックが与えられた場合は、重複するキーごとにブロックを評価してそ
 の結果をそのキーに対応する値にします。ブロックには引数としてキーと
 self[key] 、other[key] が渡されます。
@@ -407,12 +402,34 @@ self を返します。
 #@if (version >= "1.8.0")
 --- values_at(key_1, ... , key_n)
 
-((<ruby 1.8 feature>))
-
 引数で指定されたキーに対応する値の配列を返します。キーに対応する値
 がなければ [[m:Hash#default]] の戻り値が使用されます。
 [[m:Hash#indexes]] と [[m:Hash#indices]] と同じです。
 
   h = {1=>"a", 2=>"b", 3=>"c"}
   p h.values_at(1,3,4)               # => ["a", "c", nil]
+#@end
+
+#@since 1.9.0
+#@# bc-rdoc: detected missing name: compare_by_identity
+--- compare_by_identity
+#@# => hsh
+
+Makes hsh to compare its keys by their identity, i.e. it will
+consider exact same objects as same keys.
+
+   h1 = { "a" => 100, "b" => 200, :c => "c" }
+   h1["a"]        #=> 100
+   h1.compare_by_identity
+   h1.compare_by_identity? #=> true
+   h1["a"]        #=> nil  # different objects.
+   h1[:c]         #=> "c"  # same symbols are all same.
+
+#@# bc-rdoc: detected missing name: compare_by_identity?
+--- compare_by_identity?
+#@# => true or false
+
+Returns true if hsh will compare its keys by their identity.
+Also see Hash#compare_by_identity.
+
 #@end
