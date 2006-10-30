@@ -16,7 +16,7 @@ File::Constants は、[[c:File]] から移動しました。
 == class methods
 
 --- new(fd[, mode])
-#@if (version >="1.7.0")
+#@if (version >="1.8.0")
 --- for_fd(fd[, mode])
 --- open(fd[, mode])
 --- open(fd[, mode]) {|io| ... }
@@ -31,7 +31,7 @@ mode には、[[m:File#File.open]] と同じ形式で IO のモードを指
 を参照してください。
 mode のデフォルト値は "r" です。
 
-#@if (version >="1.7.0")
+#@if (version >="1.8.0")
 IO.for_fd は、IO.new と同じです。IO.open はブロックを持てる
 点だけが異なります(ブロックの終了とともに fd はクローズされます)。
 
@@ -160,7 +160,7 @@ command が配列の場合は、シェルを経由せずに子プロセスを実行し
 ます。
 #@end
 
-#@if (version >="1.7.0")
+#@if (version >="1.8.0")
 --- read(path,[length,[offset]])
 
 path で指定されたファイルを offset 位置から
@@ -229,7 +229,7 @@ timeout は整数、[[c:Float]] または nil(省略
 
 [[m:Kernel#select]] と同じです。
 
-#@if (version >="1.7.0")
+#@if (version >="1.8.0")
 --- sysopen(path[, mode [, perm]])
 
 pathで指定されるファイルをオープンし、ファイル記述子を返しま
@@ -359,7 +359,7 @@ cmd に対して指定できる値は、添付ライブラリ [[unknown:fcntl]] が提供しています。
 fcntl(2) が返した数値を返します。fcntl(2) の実行に失敗
 した場合は例外 [[c:Errno::EXXX]] が発生します。
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- fsync
 
 書き込み用の IO に対して、システムコール[[man:fsync(2)]]
@@ -431,7 +431,7 @@ true に対しては 1 を ioctl に渡します。
 
 --- pid
 
-[[m:IO#IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
+[[m:IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
 返します。それ以外は nil を返します。
 
 --- pos
@@ -481,7 +481,7 @@ ch を返します。
 nil を返します。
 
 --- read([length])
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- read([length[, outbuf]])
 #@end
 
@@ -496,7 +496,7 @@ IO が既に EOF に達している場合 "" を返します。
 データの読み込みに失敗した場合は例外 [[c:Errno::EXXX]] が発生しま
 す。length が負の場合、例外 [[c:ArgumentError]] が発生します。
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 第二引数として文字列を指定すると、読み込ん
 だデータをその文字列オブジェクトに上書きして返します。指定した文字
 列オブジェクトがあらかじめ length 長の領域であれば、余計なメ
@@ -673,8 +673,8 @@ offset 位置への移動が成功すれば 0 を返します。
 します。
 
 [[m:File#lstat]],
-[[m:File#File.stat]],
-[[m:File#File.lstat]] も参照してください。
+[[m:File.stat]],
+[[m:File.lstat]] も参照してください。
 
 --- sync
 
@@ -688,7 +688,7 @@ newstate が真なら同期モード、偽なら非同期モードになります。
 newstate を返します。
 
 --- sysread(maxlen)
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- sysread(maxlen[, outbuf])
 #@end
 
@@ -701,7 +701,7 @@ gets や getc や eof? などと混用すると思わぬ動作
 データの読み込みに失敗した場合は例外 [[c:Errno::EXXX]] が発生しま
 す。
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 第二引数として文字列を指定すると、読み込ん
 だデータをその文字列オブジェクトに上書きして返します。指定した文字
 列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメ
@@ -723,7 +723,7 @@ outbuf は空文字列になります。
      ""
 #@end
 
-#@if (version >="1.7.0")
+#@if (version >="1.8.0")
 --- sysseek(offset[, whence])
 
 [[man:lseek(2)]] と同じです。[[m:IO#seek]] では、
@@ -781,7 +781,7 @@ IOポートに対して str を出力します。str が文字列でなけ
 [[m:IO#syswrite]] を除く全ての出力メソッドは、最終的に
 "write" という名のメソッドを呼び出すので、このメソッドを置き換える
 ことで出力関数の挙動を変更することができます。
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 以前は[[m:Kernel#putc]],
 [[m:IO#putc]] に対してだけこのことは適用されませんでした
 [[unknown:ruby-dev:16305]]が、修正されました[[unknown:ruby-dev:18038]]-))
@@ -800,6 +800,25 @@ write(2) が成功した場合、返り値は書き込んだ長さとなります。
 
 write(2) が失敗した場合、例外 [[c:Errno::EXXX]] が発生します。
 ここで、EAGAIN, EINTR なども単に例外として呼出元に報告されます。
+#@end
+
+#@since 1.9.0
+#@# bc-rdoc: detected missing name: bytes
+--- bytes   
+#@#=> anEnumerator
+
+Returns an enumerator that gives each byte in the string.
+
+   "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
+
+#@# bc-rdoc: detected missing name: lines
+--- lines(separator=$/)   
+#@#=> anEnumerator
+
+Returns an enumerator that gives each line in the string.
+
+   "foo\nbar\n".lines.to_a   #=> ["foo\n", "bar\n"]
+   "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
 #@end
 
 == Constants
