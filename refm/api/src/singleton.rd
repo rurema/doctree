@@ -22,7 +22,7 @@ new は private メソッドに移され、外部から呼び出そうとするとエラーになります。
   p [a,b]
   a = SomeSingletonClass.new               # error (`new' is private)
 
-== Instance Methods
+== Singleton Methods
 
 --- instance
 
