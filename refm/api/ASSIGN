@@ -24,9 +24,9 @@ _builtin/File__Stat             sheepman        done
 _builtin/Fixnum                 sheepman        done
 _builtin/Float                  sheepman        done
 _builtin/FloatDomainError
-_builtin/GC
-_builtin/Hash
-_builtin/IO
+_builtin/GC                     sheepman
+_builtin/Hash                   sheepman
+_builtin/IO                     sheepman
 _builtin/IOError
 _builtin/IndexError
 _builtin/Integer
@@ -218,7 +218,7 @@ syslog                         sheepman         done
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------
 tempfile                        sheepman        done
-test/unit 
+test/unit                       sheepman
 thread                          sheepman        done
 thwait                          sheepman        done
 time                            sheepman        done
