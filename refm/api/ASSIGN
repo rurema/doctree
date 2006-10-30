@@ -8,12 +8,12 @@ _builtin/Array                  date            done
 _builtin/Bignum                 date            done
 _builtin/Binding                date            done
 _builtin/Class                  sheepman        done
-_builtin/Comparable
-_builtin/Continuation
-_builtin/Data
-_builtin/Dir
-_builtin/ENV
-_builtin/EOFError               
+_builtin/Comparable             date
+_builtin/Continuation           date
+_builtin/Data                   date
+_builtin/Dir                    date
+_builtin/ENV                    date
+_builtin/EOFError               date
 _builtin/Enumerable             sheepman        done
 _builtin/Exception              sheepman        done
 _builtin/FalseClass             sheepman        done
