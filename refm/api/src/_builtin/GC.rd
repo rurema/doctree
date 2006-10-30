@@ -29,8 +29,6 @@ nil を返します。
 --- stress
 --- stress=(bool)
 
-((<ruby 1.9 feature>))
-
 GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 #@end
 
