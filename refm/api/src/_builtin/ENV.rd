@@ -20,7 +20,7 @@ ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
   p path.tainted?
   # => false
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
 例:
@@ -41,7 +41,7 @@ key に対応する環境変数の値を value にします。
 value が nil の時、key に対応する環境変数を取り
 除きます。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- clear
 
 環境変数をすべてクリアします。self を返します。
@@ -109,14 +109,14 @@ val で指定される環境変数が存在する時真を返します。
 value を値として持つ環境変数が存在する時真を返します。
 
 --- index(val)
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- key(val)
 #@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 ENV.index は version 1.9 では、((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 #@end
@@ -126,13 +126,15 @@ ENV.index は version 1.9 では、((<obsolete>)) です。
 
 引数で指定された名前の環境変数の値の配列を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 このメソッドは version 1.8 では、((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 代わりに [[m:ENV#ENV.values_at]] を使用します。
 #@end
 
-#@if (version >= "1.8.0")
+--- inspect
+
+#@since 1.8.0
 --- invert
 
 環境変数の値をキー、名前を値とした [[c:Hash]] を生成して返します。
@@ -151,13 +153,17 @@ ENV.index は version 1.9 では、((<obsolete>)) です。
 
 何もしません。nilを返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- replace(hash)
 
 環境変数を hash に設定します。self を返します。
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
+--- select
+#@end
+
+#@since 1.8.0
 --- shift
 
 環境変数を一つ取り除いて、それを名前と値の組の配列で返します。
@@ -172,7 +178,9 @@ ENV.index は version 1.9 では、((<obsolete>)) です。
 
 環境変数の名前と値のハッシュを返します。
 
-#@if (version >= "1.8.0")
+--- to_s
+
+#@since 1.8.0
 --- update(other)
 
 ハッシュ other の内容を環境変数にマージします。重複するキー
@@ -185,7 +193,7 @@ self を返します。
 
 環境変数の全値の配列を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- values_at(key_1, ..., key_n)
 
 引数で指定されたキー(環境変数名)に対応する値の配列を返します。存在

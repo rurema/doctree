@@ -15,7 +15,8 @@ C 言語の setjmp()/longjmp() がわかる人は
 callcc() は、ブロックの戻り値を返しますが、Continuation#call(args)
 が呼び出されたときは args を返します。
 
-: 例：((-よりコアな例は [[unknown:ruby-list:34943]] を参照のこと-))
+例:
+#@# よりコアな例は [[ruby-list:34943]] を参照のこと
 
   以下は、Continuationによる無限ループの例
   

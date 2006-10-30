@@ -10,38 +10,40 @@
 
 self と other が等しい時真を返します。
 
-((<ruby 1.8 feature>)):
+#@since 1.8.0
 <=> が nil を返したとき nil を返します。
+#@end
 
 --- >(other)
 
 self が other より大きい時真を返します。
 
-#@if (version >= "1.8.0")
-<=> が nil を返したとき例外[[c:ArgumentError]] が発生します。
+#@since 1.8.0
+<=> が nil を返したとき例外 [[c:ArgumentError]] が発生します。
 #@end
 
 --- >=(other)
 
 self が other より大きいか等しい時真を返します。
 
-((<ruby 1.8 feature>)):
-<=> が nil を返したとき例外[[c:ArgumentError]] が発生します。
+#@since 1.8.0
+<=> が nil を返したとき例外 [[c:ArgumentError]] が発生します。
+#@end
 
 --- <(other)
 
 self が other より小さい時真を返します。
 
-#@if (version >= "1.8.0")
-<=> が nil を返したとき例外[[c:ArgumentError]] が発生します。
+#@since 1.8.0
+<=> が nil を返したとき例外 [[c:ArgumentError]] が発生します。
 #@end
 
 --- <=(other)
 
 self が other より小さいか等しい時真を返します。
 
-#@if (version >= "1.8.0")
-<=> が nil を返したとき例外[[c:ArgumentError]] が発生します。
+#@since 1.8.0
+<=> が nil を返したとき例外 [[c:ArgumentError]] が発生します。
 #@end
 
 --- between?(min, max)
@@ -49,7 +51,7 @@ self が other より小さいか等しい時真を返します。
 self が min と max の範囲内(min, max
 を含みます)にある時真を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 self <=> min か、self <=> max が nil を返
 したとき例外 [[c:ArgumentError]] が発生します。
 #@end
