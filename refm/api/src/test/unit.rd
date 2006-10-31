@@ -117,18 +117,22 @@ console ¤ò»È¤¦ (default)
 assertion ¥á¥½¥Ã¥É¤Î°ã¤¤¤Ï [[unknown:"ruby-src:lib/runit/assert.rb"]] ¤ò»²¾È¡£
 [[c:RUNIT::Assert]] ¤â»²¾È¡£
 
-= class Test::Unit::TestCase
-include Test::Unit::Assertions
+= module Test::Unit
 
-¥Æ¥¹¥È¤Ï¤³¤Î¥¯¥é¥¹¤Î¥µ¥Ö¥¯¥é¥¹¤È¤·¤ÆÄêµÁ¤·¤Þ¤¹¡£
+== Singleton Methods
 
-== Instance Methods
+#@since 1.8.1
+--- run?
+--- run=(flag)
 
---- setup
-³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤ëÁ°¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
+#@#Ã±¤Ê¤ë¥Ð¥°¤«¤âÃÎ¤ì¤Ê¤¤¡£
+true¤ò¥»¥Ã¥È¤¹¤ë¤È[[c:Test::Unit]]¤Ï¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¼«Æ°¼Â¹Ô``¤·¤Ê¤¯¤Ê¤ê¤Þ¤¹''¡£
+run¤Ï²áµîÊ¬»ì¤Îrun¤Ç¤¹¡£true¤Ë¤¹¤ë¤È¥Æ¥¹¥È¤ò¼Â¹Ô¤·½ª¤¨¤¿¤È¤¤¤¦°ÕÌ£¤Ë¤Ê¤ê¤Þ¤¹¡£
 
---- teardown
-³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤¿¸å¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
+#@end
+
+= class AssertionFailedError < StandardError
+Thrown by Test::Unit::Assertions when an assertion fails.
 
 = module Test::Unit::Assertions
 
@@ -137,6 +141,15 @@ Test::Unit::TestCase ¤Ë include ¤µ¤ì¤Æ»È¤ï¤ì¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£assert ¥á¥½¥Ã¥É¤òÄ
 
 ³Æ assert ¥á¥½¥Ã¥É¤ÎºÇ¸å¤Î°ú¿ô message ¤Ï¥Æ¥¹¥È¤¬¼ºÇÔ¤·¤¿¤È¤­¤ËÉ½¼¨¤µ¤ì¤ë
 ¥á¥Ã¥»¡¼¥¸¤Ç¤¹¡£
+
+== Singleton Methods
+
+--- use_pp=(value)
+
+Select whether or not to use the pretty-printer. If this option
+is set to false before any assertions are made, pp.rb will not
+be required.
+
 
 == Instance Methods
 
@@ -192,10 +205,25 @@ actual.equal?(expected) ¤¬¿¿¤Ê¤é pass
 
 object1.send(operator, object2) ¤¬¿¿¤Ê¤é pass
 
+#@since 1.8.1
 --- assert_raise(expected_exception_klass, message="") { ... }
 
 ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤ÆÎã³°¤¬È¯À¸¤·¡¢¤½¤ÎÎã³°¤¬
 expected_exception_klass ¥¯¥é¥¹¤Ê¤é¤Ð pass
+#@end
+
+#@# bc-rdoc: detected missing name: assert_raises
+--- assert_raises(*args, &block)
+
+Alias of assert_raise.
+
+Will be deprecated in 1.9, and removed in 2.0.
+
+#@# bc-rdoc: detected missing name: build_message
+--- build_message(head, template=nil, *arguments)
+
+Builds a failure message. head is added before the template and
+arguments replaces the '?'s positionally in the template.
 
 --- assert_nothing_raised(*args) { ... }
 
@@ -229,7 +257,10 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
 
 block ¤Î·ë²Ì¤¬¿¿¤Ê¤é pass
 
+#@since 1.8.1
 = class Test::Unit::AutoRunner
+
+#@todo
 
 ¥Æ¥¹¥È¤Î¼Â¹Ô¤òÁàºî¤·¤¿¤¤¤È¤­¤Ë¤³¤Î AutoRunner ¥¯¥é¥¹¤ò»È¤¤¤Þ¤¹¡£
 ÂçÎÌ¤Î¥Æ¥¹¥È¤ÎÃæ¤«¤éÆÃÄê¤Î¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤Î¤ß¤ò¼Â¹Ô¤·¤¿¤¤¾ì¹ç¡¢
@@ -243,16 +274,15 @@ Runner ¤Ë¥Æ¥¹¥È¤ò¼Â¹Ô¤µ¤»¤Æ¤¤¤ë¥¯¥é¥¹¤Ç¤¹¡£
 ¥Ç¥£¥ì¥¯¥È¥ê ./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤¿¤¤¾ì¹ç¤Ï¼¡¤Î¤è¤¦¤Ê¥Õ¥¡¥¤¥ë(runner.rb)¤òÍÑ°Õ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£¥Æ¥¹¥È¤Ï test_*.rb ¤È¤¤¤¦¥Õ¥¡¥¤¥ëÌ¾¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
 
 #@# ruby 1.8.3 °Ê¹ß¤Ç¤Ï AutoRunner.run ¤ÎÂè°ì°ú¿ô¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£
-#@# Âè°ì°ú¿ô¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
 
-#@#  # ruby 1.8.2 ¤Þ¤Ç
 #@if (version <= "1.8.2")
+Âè°ì°ú¿ô¤Ë false ¤òÍ¿¤¨¤ë¤È¡¢./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
   require 'test/unit'
   Test::Unit::AutoRunner.run(false, './somedir')
 #@end
 
-#@#  # ruby 1.8.3 °Ê¹ß
 #@if (version >= "1.8.3")
+Âè°ì°ú¿ô¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢./somedir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir')
 #@end
@@ -282,14 +312,15 @@ Runner ¤Ë¥Æ¥¹¥È¤ò¼Â¹Ô¤µ¤»¤Æ¤¤¤ë¥¯¥é¥¹¤Ç¤¹¡£
 ¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
         
 #@if (version >= "1.8.3")
-ruby 1.8.3 °Ê¹ß¤Ç¤Ï force_standalone ¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£        
+#@#ruby 1.8.3 °Ê¹ß¤Ç¤Ï force_standalone ¤Î°ÕÌ£¤¬ÊÑ¤ï¤ê¡¢º£¤Þ¤Ç¤È¿¿µ¶¤¬µÕ¤Ë¤Ê¤ê¤Þ¤·¤¿¡£        
 force_standalone ¤Ë true ¤òÍ¿¤¨¤ë¤È¡¢dir °Ê²¼¤Ë¤¢¤ëÁ´¤Æ¤Î¥Æ¥¹¥È¤ò¼Â¹Ô¤·¤Þ¤¹¡£
 false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤ÎÃæ¤«¤é¥Æ¥¹¥È¤òÃµ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
 ¥Ç¥Õ¥©¥ë¥È¤Ï false ¤Ç¤¹¡£
 #@end
 
 #@if (version <= "1.8.2")
-ruby 1.8.2 ¤Þ¤Ç: force_standalone ¤Ë¤Ï $0 ¤« false ¤òÍ¿¤¨¤Þ¤¹¡£
+#@#ruby 1.8.2 ¤Þ¤Ç: 
+force_standalone ¤Ë¤Ï $0 ¤« false ¤òÍ¿¤¨¤Þ¤¹¡£
 $0 ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤¿¥Õ¥¡¥¤¥ë¤ÎÃæ¤«¤é¥Æ¥¹¥È¤òÃµ¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
 false ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢dir ¤ÎÃæ¤«¤é¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤òºÆµ¢Åª¤ËÃµºº¤·¤Æ
 ¼Â¹Ô¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï¥Õ¥¡¥¤¥ëÌ¾¤¬ test_*.rb ¤Î¥Æ¥¹¥È¥¹¥¯¥ê¥×¥È¤·¤«Ãµºº
@@ -305,6 +336,10 @@ argv ¤Ë¤Ï¥ª¥×¥·¥ç¥ó¤òÇÛÎó¤È¤·¤ÆÍ¿¤¨¤Þ¤¹¡£²ò¼á¤¹¤ë¥ª¥×¥·¥ç¥ó¤ÏÀè¤Ë
 
       -r, --runner=RUNNER              Use the given RUNNER.
                                        (c[onsole], f[ox], g[tk], g[tk]2, t[k])
+#@since 1.8.6
+      -b, --basedir=DIR                Base directory of test suites.
+      -w, --workdir=DIR                Working directory to run tests.
+#@end
       -n, --name=NAME                  Runs tests matching NAME.
                                        (patterns may be used).
       -t, --testcase=TESTCASE          Runs tests in TestCases matching TESTCASE.
@@ -315,13 +350,17 @@ argv ¤Ë¤Ï¥ª¥×¥·¥ç¥ó¤òÇÛÎó¤È¤·¤ÆÍ¿¤¨¤Þ¤¹¡£²ò¼á¤¹¤ë¥ª¥×¥·¥ç¥ó¤ÏÀè¤Ë
                                        remaining options will be passed to the
                                        test.
       -h, --help                       Display this help.
-
+#@if (version <= "1.8.2")
+force_standalone ¤Ë false ¤òÍ¿¤¨¤¿»þ¤Ë¤Ï¼¡¤Î¥ª¥×¥·¥ç¥ó¤¬ÄÉ²Ã¤µ¤ì¤Þ¤¹¡£
+#@else
 force_standalone ¤Ë true ¤òÍ¿¤¨¤¿»þ¤Ë¤Ï¼¡¤Î¥ª¥×¥·¥ç¥ó¤¬ÄÉ²Ã¤µ¤ì¤Þ¤¹¡£
-
+#@end
       -a, --add=TORUN                  Add TORUN to the list of things to run;
                                        can be a file or a directory.
       -p, --pattern=PATTERN            Match files to collect against PATTERN.
+#@since 1.8.2
       -x, --exclude=PATTERN            Ignore files to collect against PATTERN.
+#@end
 
 Îã
 
@@ -338,3 +377,261 @@ argv ¤Ë¥Ç¥Õ¥©¥ë¥È¤Î¤Þ¤Þ ARGV ¤òÅÏ¤·¤Æ¤ª¤±¤Ð¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é¥ª¥×¥·¥ç¥ó¤ò
 ¤È¡¢runner.rb ¤Ë½ñ¤¤¤Æ¤ª¤¤¤Æ¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é°Ê²¼¤Î¤è¤¦¤Ë¼Â¹Ô¡£
    
       $ ruby runner.rb --runner=tk -v --exclude=/test_hoge.\*\\.rb\\Z/i
+
+--- standalone?
+
+#@end
+
+
+= module Test::Unit::UI
+
+== Constants
+
+#@since 1.8.1
+--- SILENT
+--- PROGRESS_ONLY
+--- NORMAL
+--- VERBOSE
+#@end
+
+= module Test::Unit::UI::Console
+
+= class Test::Unit::UI::Console::TestRunner < Object
+
+Runs a Test::Unit::TestSuite on the console.
+
+== Class Methods
+
+#@# bc-rdoc: detected missing name: new
+--- new(suite, output_level=NORMAL, io=STDOUT)
+
+Creates a new TestRunner for running the passed suite. If quiet_mode
+is true, the output while running is limited to progress dots,
+errors and failures, and the final result. io specifies where
+runner output should go to; defaults to STDOUT.
+
+== Instance Methods
+#@# bc-rdoc: detected missing name: start
+--- start
+
+Begins the test run.
+
+
+= class Test::Unit::TestCase < Object
+include Test::Unit::Assertions
+include Test::Unit::Util::BacktraceFilter
+
+¥Æ¥¹¥È¤Ï¤³¤Î¥¯¥é¥¹¤Î¥µ¥Ö¥¯¥é¥¹¤È¤·¤ÆÄêµÁ¤·¤Þ¤¹¡£
+
+Ties everything together. If you subclass and add your own test methods, it takes care of making them into tests and wrapping those tests into a suite. It also does the nitty-gritty of actually running an individual test and collecting its results into a [[c:Test::Unit::TestResult]] object.
+
+== Class Methods
+
+#@# bc-rdoc: detected missing name: new
+--- new(test_method_name)
+
+Creates a new instance of the fixture for running the test represented
+by test_method_name.
+
+#@# bc-rdoc: detected missing name: suite
+--- suite
+
+Rolls up all of the test* methods in the fixture into one suite,
+creating a new instance of the fixture for each method.
+
+== Instance Methods
+
+--- setup
+³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤ëÁ°¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
+
+--- teardown
+³Æ¥Æ¥¹¥È¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤¿¸å¤ËÉ¬¤º¸Æ¤Ð¤ì¤Þ¤¹¡£
+
+#@# bc-rdoc: detected missing name: name
+--- name
+
+Returns a human-readable name for the specific test that this
+instance of TestCase represents.
+
+#@# bc-rdoc: detected missing name: run
+--- run(result) {|STARTED, name| ...}
+
+Runs the individual test method represented by this instance
+of the fixture, collecting statistics, failures and errors in
+result.
+
+#@# bc-rdoc: detected missing name: size
+--- size
+
+#@# bc-rdoc: detected missing name: default_test
+--- default_test
+
+= class Test::Unit::Failure < Object
+Encapsulates a test failure. Created by [[c:Test::Unit::TestCase]] when an assertion fails.
+
+== Class Methods
+--- new(test_name, location, message)
+
+Creates a new Failure with the given location and message.
+
+== Instance Methods
+#@# bc-rdoc: detected missing name: long_display
+--- long_display
+
+Returns a verbose version of the error description.
+
+#@# bc-rdoc: detected missing name: short_display
+--- short_display
+
+Returns a brief version of the error description.
+
+#@# bc-rdoc: detected missing name: single_character_display
+--- single_character_display
+
+Returns a single character representation of a failure.
+
+#@# bc-rdoc: detected missing name: to_s
+--- to_s
+
+Overridden to return long_display.
+
+= class Test::Unit::Error < Object
+
+== Class Methods
+#@# bc-rdoc: detected missing name: new
+--- new(test_name, exception)
+
+Creates a new Error with the given test_name and exception.
+
+== Instance Methods
+#@# bc-rdoc: detected missing name: long_display
+--- long_display
+
+Returns a verbose version of the error description.
+
+#@# bc-rdoc: detected missing name: message
+--- message
+
+Returns the message associated with the error.
+
+#@# bc-rdoc: detected missing name: short_display
+--- short_display
+
+Returns a brief version of the error description.
+
+#@# bc-rdoc: detected missing name: single_character_display
+--- single_character_display
+
+Returns a single character representation of an error.
+
+#@# bc-rdoc: detected missing name: to_s
+--- to_s
+
+Overridden to return long_display.
+
+= class Test::Unit::TestResult < Object
+include Test::Unit::Util::Observable
+
+Collects [[c:Test::Unit::Failure]] and [[c:Test::Unit::Error]] so that they can be displayed to the user. To this end, observers can be added to it, allowing the dynamic updating of, say, a UI.
+
+== Class Methods
+#@# bc-rdoc: detected missing name: new
+--- new
+
+Constructs a new, empty TestResult.
+
+== Instance Methods
+#@# bc-rdoc: detected missing name: add_assertion
+--- add_assertion
+
+Records an individual assertion.
+
+#@# bc-rdoc: detected missing name: add_error
+--- add_error(error)
+
+Records a Test::Unit::Error.
+
+#@# bc-rdoc: detected missing name: add_failure
+--- add_failure(failure)
+
+Records a Test::Unit::Failure.
+
+#@# bc-rdoc: detected missing name: add_run
+--- add_run
+
+Records a test run.
+
+#@# bc-rdoc: detected missing name: error_count
+--- error_count
+
+Returns the number of errors this TestResult has recorded.
+#@# bc-rdoc: detected missing name: failure_count
+--- failure_count
+
+Returns the number of failures this TestResult has recorded.
+
+#@# bc-rdoc: detected missing name: passed?
+--- passed?
+
+Returns whether or not this TestResult represents successful
+completion.
+
+#@# bc-rdoc: detected missing name: to_s
+--- to_s
+
+Returns a string contain the recorded runs, assertions, failures
+and errors in this TestResult.
+
+= class Test::Unit::TestSuite < Object
+
+A collection of tests which can be run.
+
+Note: It is easy to confuse a TestSuite instance with something that has a static suite method; I know because I have trouble keeping them straight. Think of something that has a suite method as simply providing a way to get a meaningful TestSuite instance.
+
+
+== Class Methods
+
+#@# bc-rdoc: detected missing name: new
+--- new(name="Unnamed TestSuite")
+
+Creates a new TestSuite with the given name.
+
+== Instance Methods
+
+#@# bc-rdoc: detected missing name: <<
+--- <<(test)
+
+Adds the test to the suite.
+
+#@# bc-rdoc: detected missing name: ==
+--- ==(other)
+
+It's handy to be able to compare TestSuite instances.
+
+#@# bc-rdoc: detected missing name: delete
+--- delete(test)
+
+
+
+#@# bc-rdoc: detected missing name: empty?
+--- empty?
+
+
+
+#@# bc-rdoc: detected missing name: run
+--- run(result, &progress_block) {|STARTED, name| ...}
+
+Runs the tests and/or suites contained in this TestSuite.
+
+#@# bc-rdoc: detected missing name: size
+--- size
+
+Retuns the rolled up number of tests in this suite; i.e. if the
+suite contains other suites, it counts the tests within those
+suites, not the suites themselves.
+
+#@# bc-rdoc: detected missing name: to_s
+--- to_s
+
+Overridden to return the name given the suite at creation.
+
