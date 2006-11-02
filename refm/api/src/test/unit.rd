@@ -1,6 +1,6 @@
 ユニットテストを行うためのライブラリです。
 
-[[url:http::/www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
+[[url:http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
 
 === 使い方
 
