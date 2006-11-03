@@ -45,9 +45,6 @@
 Vector や Matrix の要素として、複素数を使うことができます。
 Vector および Matrix のそれぞれの項目を参照してください。
 
-  require 'matrix'
-  require 'complex'
-
 === 例
 
  require 'complex'
@@ -67,7 +64,7 @@ Vector および Matrix のそれぞれの項目を参照してください。
 --- new(r,i)
 --- new!(r,i=0)
 
-実部が r、虚部 i が複素数を生成します。
+実部が r、虚部 i がである複素数を生成します。
 
 --- polar(r, theta)
 
