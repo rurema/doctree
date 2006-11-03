@@ -241,6 +241,7 @@ self.class.component です。
 
 path が真なら真です。
 
+--- absolute
 --- absolute?
 
 scheme が真なら真です。
@@ -249,6 +250,8 @@ scheme が真なら真です。
 
 scheme が偽なら真です。
 
+--- merge!(rel)
+#@todo
 --- merge(rel)
 --- +(rel)
 
@@ -271,7 +274,7 @@ srcからの相対パスを返します。
 
 --- route_to(dst)
 
-dstへの相対パスを返します。
+引数dstには文字列かURIオブジェクトを与えます。dstへの相対パスを返します。
 
         require 'uri'
         p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
@@ -298,6 +301,23 @@ URI を返します。
 --- to_ary
 
 URI オブジェクトの構成要素の配列を返します。
+
+--- select(*components)
+Args
+
+components: Multiple Symbol arguments defined in URI::HTTP
+
+Description
+
+Selects specified components from URI
+
+Usage
+
+  require 'uri'
+
+  uri = URI.parse('http://myuser:mypass@my.example.com/test.rbx')
+  p uri.select(:userinfo, :host, :path)
+  # => ["myuser:mypass", "my.example.com", "/test.rbx"]
 
 = class URI::FTP < URI::Generic
 
