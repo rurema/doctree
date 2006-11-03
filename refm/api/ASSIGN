@@ -224,10 +224,10 @@ thwait                          sheepman        done
 time                            sheepman        done
 timeout                         sheepman        done
 tk
-tmpdir                          
-tracer                          
-tsort                           
-un 
+tmpdir                          sheepman
+tracer                          sheepman
+tsort                           sheepman
+un  
 uri
 weakref
 webrick
