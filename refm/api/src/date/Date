@@ -93,7 +93,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@since 1.8.0
 #@#? --- ajd_to_amjd(ajd)
 
-#@#?--- ajd_to_jd(ajd, [offset=0])
+#@#? --- ajd_to_jd(ajd[, offset=0])
 
 #@#? --- amjd_to_ajd(amjd)
 #@end
@@ -120,6 +120,8 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]] も参照してください。
 
+#@#? --- civil_to_jd(year, mon, mday[, start])
+
 #@since 1.8.0
 --- commercial([cwyear[, cweek[, cwday[, start]]]])
 #@else
@@ -135,7 +137,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
---- commercial_to_jd([cwyear[, cweek[, cwday[, start]]]])
+#@#? --- commercial_to_jd(cwyear, cweek, cwday[, start])
 
 #@since 1.8.0
 #@#? --- day_fraction_to_time(fr)
@@ -163,23 +165,23 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.new]] も参照してください。
 
 #@since 1.8.0
-#@#? --- jd_to_ajd(jd, fraction, [offset])
+#@#? --- jd_to_ajd(jd, fraction[, offset])
 #@end
 
---- jd_to_civil(jd, [start])
+#@#? --- jd_to_civil(jd[, start])
 
---- jd_to_commercial(jd, [start])
+#@#? --- jd_to_commercial(jd[, start])
 
 #@#? --- jd_to_ld(jd)
 
 #@#? --- jd_to_mjd(jd)
 
---- jd_to_ordinal(jd, [start])
+#@#? --- jd_to_ordinal(jd[, start])
 
 #@#? --- jd_to_wday(jd)
 
 #@since 1.8.5
---- jd_to_weeknum(jd, [k, [start]])
+#@#? --- jd_to_weeknum(jd[, k[, start]])
 #@end
 
 #@since 1.8.5
@@ -209,7 +211,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
---- oridinal_to_jd(year, yday[, start])
+#@#? --- ordinal_to_jd(year, yday[, start])
 
 #@since 1.8.0
 --- _parse(str[, complete])
@@ -290,7 +292,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
 #@since 1.8.5
---- weeknum_to_jd(year, week, day[, k[, start]])
+#@#? --- weeknum_to_jd(year, week, day[, k[, start]])
 #@end
 
 #@since 1.8.0
@@ -342,6 +344,8 @@ n は数値でなければなりません。
 
 --- cwyear
 暦週における年を返します。
+
+#@#? --- day_fraction
 
 --- downto(min){|date| ...}
 このメソッドは、step(min, -1){|date| ...} と等価です。
@@ -507,3 +511,15 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 
 --- year
 年を返します。
+
+#@since 1.9.0
+= reopen Time
+
+== Instance Methods
+
+--- to_date
+
+--- to_datetime
+
+--- to_time
+#@end

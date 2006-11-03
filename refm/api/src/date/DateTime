@@ -20,6 +20,9 @@
 --- ordinal([year[, yday[, hour[, min[, sec[, offset[, start]]]]]]])
 年日付に相当する日時オブジェクトを生成します。
 
+--- today([start])
+DateTime では undef されている。
+
 #@since 1.8.0
 #@#? --- valid_time?
 #@end
@@ -52,7 +55,7 @@ new も参照してください。
 --- sec
 秒を返します (0-59)。
 
---- sec_fraction
+#@#? --- sec_fraction
 
 --- zone
 タイムゾーンを返します。
