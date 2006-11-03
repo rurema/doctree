@@ -1,7 +1,6 @@
 複素数を扱うためのライブラリです。
 
-=== ChangeLog
-
+#@#=== ChangeLog
 #@# *[2002-04-03] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 #@# *[2003-04-29] Complex#polarの記述を正しい配列リテラルの表記に修正 by [[unknown:pastor|URL:mailto:pastor@fmc.rikkyo.ne.jp]]
 
@@ -10,14 +9,36 @@
 
 #@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
-複素数を扱うクラス
+複素数を扱うためのクラスです。
 
-使い方 Usage
+このライブラリを require すると、Math モジュールが複素数対応に拡張されます。
+#@#= redefine Math
+#@#複素数対応に拡張されます。
+必要であるなら、対象となる複素数を極座標表示した時の
+  z = a + b * i = r * exp(i * t)
+偏角 t は[-π,π]の範囲であると考えて関数は定義されます。
+[[m:Complex#arg]]を参照して下さい。
+以下が複素関数の定義です。
 
-Complex を使うためには require 'complex' する必要があります。
-このライブラリを require すると、さらに Math モジュールが複素数対応に拡張されます。
-
-  require 'complex'
+  abs(z)  = r
+  sqrt(z) = sqrt(r) * exp(i * t/2)
+  exp(z)  = exp(a) * exp(i * b)
+  log(z)  = log(r) + i * t
+  
+  sin(z)  = (exp(i * z) - exp(-i * z)) / 2i
+  cos(z)  = (exp(i * z) + exp(-i * z)) / 2
+  tan(z)  = sin(z) / cos(z)
+  sinh(z) = (exp(z) - exp(-z)) / 2
+  cosh(z) = (exp(z) + exp(-z)) / 2
+  tanh(z) = sinh(z) / cosh(z)
+  
+  asin(z) = -i * log(i*z + sqrt(1-z*z))
+  acos(z) = -i * log(z + i*sqrt(1-z*z))
+  atan(z) = i/2 * log((i+z) / (i-z))
+  atan2(y, x) = -i * log( (x + i * y) / sqrt( x*x + y*y ) )
+  asinh(z) = log(z + sqrt(z*z+1))
+  acosh(z) = log(z + sqrt(z*z-1))
+  atanh(z) = 1/2 * log((1+z) / (1-z))
 
 また、添付ライブラリのベクトルクラス [[c:Vector]]、および、
 行列クラス [[c:Matrix]] を読み込んでいるとき、
@@ -113,12 +134,12 @@ Complex.new(m1, m2)にして返します。
 --- angle
 --- arg
 複素数の偏角を[-π,π]の範囲で返します。
-以下の例のように虚部が 0.0 と -0.0 では値が変わります。
 
   p Complex.new(0, 1).arg == Math::PI/2 #=> true
   p Complex.new(0, -1).arg              #=> -1.5707963267949
 
 非正の実軸付近での挙動に注意してください。
+以下の例のように虚部が 0.0 と -0.0 では値が変わります。
 
   p Complex.new(-1, 0).arg              #=>  3.14159265358979
   p Complex.new(-1, -0).arg             #=>  3.14159265358979
@@ -194,33 +215,3 @@ The imaginary part of a complex number, i.e. 0.
 --- conjugate
 共役をかえします。実数の場合はselfを返します。
 
-
-= reopen Math
-
-複素数対応に拡張されます。
-
-必要であるなら、対象となる複素数を極座標表示した時の
-  z = a + b * i = r * exp(i * t)
-偏角 t は[-π,π]の範囲であると考えて関数は定義されます。
-[[m:Complex#arg]]を参照して下さい。
-以下が複素関数の定義です。
-
-  abs(z)  = r
-  sqrt(z) = sqrt(r) * exp(i * t/2)
-  exp(z)  = exp(a) * exp(i * b)
-  log(z)  = log(r) + i * t
-  
-  sin(z)  = (exp(i * z) - exp(-i * z)) / 2i
-  cos(z)  = (exp(i * z) + exp(-i * z)) / 2
-  tan(z)  = sin(z) / cos(z)
-  sinh(z) = (exp(z) - exp(-z)) / 2
-  cosh(z) = (exp(z) + exp(-z)) / 2
-  tanh(z) = sinh(z) / cosh(z)
-  
-  asin(z) = -i * log(i*z + sqrt(1-z*z))
-  acos(z) = -i * log(z + i*sqrt(1-z*z))
-  atan(z) = i/2 * log((i+z) / (i-z))
-  atan2(y, x) = -i * log( (x + i * y) / sqrt( x*x + y*y ) )
-  asinh(z) = log(z + sqrt(z*z+1))
-  acosh(z) = log(z + sqrt(z*z-1))
-  atanh(z) = 1/2 * log((1+z) / (1-z))
