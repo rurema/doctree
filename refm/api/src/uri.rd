@@ -2,26 +2,15 @@ URI (Uniform Resource Identifier) サポートライブラリ
 
 === 関連 RFC
 
-    * [[c:RFC:1738]] Uniform Resource Locators (URL)
-    * [[c:RFC:1808]] Relative Uniform Resource Locators
-    * [[c:RFC:2255]] The LDAP URL Format
-    * [[c:RFC:2368]] The mailto URL scheme
-    * [[c:RFC:2373]] IP Version 6 Addressing Architecture
-    * [[c:RFC:2396]] Uniform Resource Identifiers (URI): Generic Syntax
-    * [[c:RFC:2732]] Format for Literal IPv6 Addresses in URL's
+    * [[RFC:1738]] Uniform Resource Locators (URL)
+    * [[RFC:1808]] Relative Uniform Resource Locators
+    * [[RFC:2255]] The LDAP URL Format
+    * [[RFC:2368]] The mailto URL scheme
+    * [[RFC:2373]] IP Version 6 Addressing Architecture
+    * [[RFC:2396]] Uniform Resource Identifiers (URI): Generic Syntax
+    * [[RFC:2732]] Format for Literal IPv6 Addresses in URL's
 
 = module URI
-
-#@#== クラス階層
-
-#@#  * [[c:URI]] Module
-
-#@#  * [[m:URI#URI::Generic]] Class
-#@#    * [[m:URI#URI::FTP]] Class
-#@#    * [[m:URI#URI::HTTP]] Class
-#@#      * [[m:URI#URI::HTTPS]] Class
-#@#    * [[m:URI#URI::LDAP]] Class
-#@#    * [[m:URI#URI::MailTo]] Class
 
 #@#== Class Variables
 
@@ -32,7 +21,7 @@ URI (Uniform Resource Identifier) サポートライブラリ
 #@#    URI::Genericを継承する場合にこのハッシュにエントリを追加すると
 #@#    そのクラスが URI.parse によってサポートされます。
 
-== Module Functions
+== Singleton Methods
 
 --- split(url)
 
@@ -54,10 +43,6 @@ URI を以下の要素に分割した配列を返します。
         # => ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
 
 --- parse(uri_str)
-#@#--- URI(uri_str)
-
-((<ruby 1.8.2 feature>))
-
 
 与えられた URI から該当する URI サブクラスのインスタンスを生成して
 返します。
@@ -90,13 +75,6 @@ URIオブジェクトを返します。
 --- extract(str[, schemes])
 --- extract(str[, schemes]) {|uri_str| ... }
 
-#@#    文字列 ((|str|)) から URI(文字列) を抽出して、その配列を返します。
-#@#    ブロックを与えたときは抽出した各URI(文字列)ごとにブロックを実行し
-#@#    ます。
-
-#@#    スキームの配列 ((|schemes|)) を与えた場合は該当するスキームのURIだ
-#@#    けを抽出します。
-
 文字列 str に対してパターンマッチングを試み、
 絶対URIにマッチした部分文字列からなる配列として返します。
 抽出する URI がなければ空の配列を返します。
@@ -118,9 +96,8 @@ URIオブジェクトを返します。
         p URI.extract(str, %w(http))
         => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
 
+#@since 1.8.1
 --- regexp([match_schemes])
-
-((<ruby 1.8.1 feature>)):
 
 URIにマッチする正規表現を返します。
 
@@ -132,6 +109,7 @@ URIにマッチする正規表現を返します。
 (括弧) を含みます。この括弧の数はバージョンによって変動
 する可能性があるので、それに依存したコードを書くべきでは
 ありません。
+#@end
 
 --- escape(str[, unsafe])
 --- encode(str[, unsafe])
@@ -161,6 +139,7 @@ URI 文字列をデコードした文字列を返します。
 
 
 = class URI::Generic
+include URI
 
 すべての URI クラスの基底クラスです。
 
@@ -346,6 +325,12 @@ FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
       => #<URI::FTP:0x2010029c URL:ftp://ftp.ruby-lang.org/pub/ruby/;type=d>
          "d"
 
+
+#@# bc-rdoc: detected missing name: new2
+--- new2(user, password, host, port, path, typecode = nil, arg_check = true)
+
+== Instance Methods
+
 --- typecode
 --- typecode=()
 
@@ -379,7 +364,7 @@ path + '?' + query を返します。
 
 = class URI::LDAP < URI::Generic
 
-LDAP URI SCHEMA (described in [[c:RFC:2255]])
+LDAP URI SCHEMA (described in [[RFC:2255]])
 
   ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
 
@@ -392,29 +377,29 @@ LDAP URI SCHEMA (described in [[c:RFC:2255]])
 
 == Instance Methods
 
---- URI::LDAP#dn
+--- dn
 
 --- dn=()
 
---- URI::LDAP#attributes
+--- attributes
 
 --- attributes=()
 
---- URI::LDAP#scope
+--- scope
 
 --- scope=()
 
---- URI::LDAP#filter
+--- filter
 
 --- filter=()
 
---- URI::LDAP#extensions
+--- extensions
 
 --- extensions=()
 
 = class URI::MailTo < URI::Generic
 
-[[c:RFC:2368]], The mailto URL scheme
+[[RFC:2368]], The mailto URL scheme
 
 == Class Methods
 
@@ -460,6 +445,7 @@ URI オブジェクトからメールテキスト文字列を生成します。
          Subject: subscribe
          Cc: myaddr
 
+#@since 1.8.2
 = reopen Kernel
 
 == Private Instance Methods
@@ -467,13 +453,7 @@ URI オブジェクトからメールテキスト文字列を生成します。
 --- URI(uri_str)
 
 [[m:URI.parse]]と同じです。
-
-#@#== 例外クラス
-
-#@#* URI::Error
-#@#  * URI::InvalidURIError
-#@#  * URI::InvalidComponentError
-#@#  * URI::BadURIError
+#@end
 
 = class URI::Error < StandardError
 
