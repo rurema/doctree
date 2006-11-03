@@ -227,9 +227,9 @@ tk
 tmpdir                          sheepman        done
 tracer                          sheepman        done
 tsort                           sheepman        done
-un  
-uri
-weakref
+un                              sheepman
+uri                             sheepman
+weakref                         sheepman
 webrick
 webrick/cgi
 webrick/ssl
