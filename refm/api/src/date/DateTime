@@ -21,7 +21,7 @@
 年日付に相当する日時オブジェクトを生成します。
 
 --- today([start])
-DateTime では undef されている。
+DateTime では undef されています。
 
 #@since 1.8.0
 #@#? --- valid_time?
@@ -38,12 +38,12 @@ DateTime では undef されている。
 #@since 1.8.0
 --- new_offset([offset])
 #@else
---- newof
+--- newof([offset])
 #@end
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
 
-new も参照してください。
+[[m:Date.new]] も参照してください。
 
 #@since 1.8.0
 --- offset
@@ -59,3 +59,5 @@ new も参照してください。
 
 --- zone
 タイムゾーンを返します。
+
+実際には、時差をあらわす文字列です。
