@@ -106,7 +106,7 @@ cgi/session
 complex                         sheepman        done
 csv
 curses
-date                            tadf
+date                            tadf            done
 date2
 dbm
 debug
@@ -179,7 +179,7 @@ ostruct
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------
 parsearg
-parsedate                       tadf
+parsedate                       tadf            done
 pathname
 ping                            aamine          complete
 pp
