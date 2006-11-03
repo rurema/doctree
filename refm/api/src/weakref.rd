@@ -31,8 +31,12 @@ obj への weak reference を生成します。
 --- weakref_alive?
 
 参照先のオブジェクトがまだ生きていれば true を返します。
+GCされていれば false を返します。
 
-
+--- __getobj__
+Return the object this WeakRef references. Raises WeakRef::RefError if the object has been
+garbage collected. The object returned is the object to which method calls are 
+delegated (see [[c:Delegator]]).
 
 = class WeakRef::RefError < StandardError
 
