@@ -224,9 +224,9 @@ thwait                          sheepman        done
 time                            sheepman        done
 timeout                         sheepman        done
 tk
-tmpdir                          sheepman
-tracer                          sheepman
-tsort                           sheepman
+tmpdir                          sheepman        done
+tracer                          sheepman        done
+tsort                           sheepman        done
 un  
 uri
 weakref
