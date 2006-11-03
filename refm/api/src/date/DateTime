@@ -1,6 +1,20 @@
 = class DateTime < Date
 
-日付だけでなく時間も扱える [[c:Date]] のサブクラスです。
+日付だけでなく時刻も扱える [[c:Date]] のサブクラスです。
+
+=== 簡単なつかいかた
+
+  require 'date'
+
+  d1 = DateTime.new(1993, 2, 24, 12, 30, 45)
+  d2 = DateTime.parse('1993-02-24T12:30:45')
+  d2 += 10
+
+  d2 - d1           #=> 10
+  d2.year           #=> 1993
+  d2.strftime('%a') #=> "Sat"
+
+  yesterday = DateTime.now - 1
 
 == Class Methods
 

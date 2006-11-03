@@ -7,7 +7,21 @@ include Comparable
 [[url:http://www.funaba.org/en/date2/manual.html]]
 です。
 
-[[c:DateTime]] は日付だけでなく時間も扱える Date のサブクラスです。
+日付だけでなく時刻も扱える Date のサブクラス [[c:DateTime]] も利用できます。
+
+=== 簡単なつかいかた
+
+  require 'date'
+
+  d1 = Date.new(1993, 2, 24)
+  d2 = Date.parse('1993-02-24')
+  d2 += 10
+
+  d2 - d1           #=> 10
+  d2.year           #=> 1993
+  d2.strftime('%a') #=> "Sat"
+
+  yesterday = Date.today - 1
 
 === 用語の定義
 
@@ -85,6 +99,8 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 ちなみに、本実装で英国の改暦日を尊重する姿勢がみられるのは前実装からの影響です。
 前実装が英国の改暦日を尊重していたのは、おそらく [[man:cal(1)]] の影響です。
+もっとも本実装で一番に尊重されているのは、伊国の改暦日であり、多くの場合、
+改暦日の既定値は [[m:Date::ITALY]] です。
 
 --- GREGORIAN
 常にグレゴリオ暦であることを示します。
