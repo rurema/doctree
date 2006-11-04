@@ -189,10 +189,10 @@ profiler
 pstore
 pty
 racc/parser
-rational
+rational                       sheepman
 rbconfig
-readbytes
-readline
+readbytes                      sheepman
+readline                       sheepman
 resolv
 resolv-replace
 rexml
