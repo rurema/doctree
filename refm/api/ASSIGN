@@ -56,7 +56,7 @@ _builtin/Process__GID
 _builtin/Process__Status
 _builtin/Process__Sys
 _builtin/Process__UID
-_builtin/Range                  okkez
+_builtin/Range                  okkez           done
 _builtin/RangeError
 _builtin/Regexp
 _builtin/RegexpError
