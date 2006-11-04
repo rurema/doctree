@@ -5,7 +5,7 @@ nil は NilClass クラスの唯一のインスタンスです。
 nil は false オブジェクトとともに偽を表し、
 その他の全てのオブジェクトは真です。
 
-== Methods
+== Instance Methods
 
 --- &(other)
 
