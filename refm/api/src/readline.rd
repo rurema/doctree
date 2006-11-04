@@ -130,7 +130,7 @@ rl_complete_internal() で使われる、補完時の単語同士の区切りを指定する
 --- completion_proc
 補完時の動作を決定する[[c:Proc]]オブジェクトを返します。
 
---- completion_case_fold=(s)
+--- completion_case_fold=(bool)
 --- completion_case_fold
 入力補完時に大文字／小文字の区別をするかどうかを決定します。
 bool が真ならば区別しません。
