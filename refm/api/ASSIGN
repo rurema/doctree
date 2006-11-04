@@ -191,8 +191,8 @@ pty
 racc/parser
 rational                       sheepman
 rbconfig
-readbytes                      sheepman
-readline                       sheepman
+readbytes                      sheepman         done
+readline                       sheepman         done
 resolv
 resolv-replace
 rexml
