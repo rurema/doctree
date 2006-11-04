@@ -103,26 +103,26 @@ procは引数に入力文字列を取り、候補文字列の配列を返すようにしてください。
     end
 
 #@since 1.8.0
---- basic_word_break_characters=()
+--- basic_word_break_characters=(s)
 --- basic_word_break_characters
 補完時の単語同士の区切りを指定する basic な文字列。デフォルトでは
 Bash用の文字列 " \t\n\"\\'`@$><=;|&{(" (スペース含む)になっています。
 
---- completer_word_break_characters=()
+--- completer_word_break_characters=(s)
 --- completer_word_break_characters
 rl_complete_internal() で使われる、補完時の単語同士の区切りを指定する
 文字列です。デフォルトでは Readline.basic_word_break_characters です。
 
---- basic_quote_characters=()
+--- basic_quote_characters=(s)
 --- basic_quote_characters
 引用符を指定します。デフォルトでは、/"'/ です。
 
---- completer_quote_characters=()
+--- completer_quote_characters=(s)
 --- completer_quote_character
 補完時の引用符を指定します。この引用符の間では、completer_word_break_characters
 も、普通の文字列として扱われます。
 
---- filename_quote_characters=()
+--- filename_quote_characters=(s)
 --- filename_quote_characters
 補完時のファイル名の引用符を指定します。デフォルトでは nil です。
 #@end
@@ -130,7 +130,7 @@ rl_complete_internal() で使われる、補完時の単語同士の区切りを指定する
 --- completion_proc
 補完時の動作を決定する[[c:Proc]]オブジェクトを返します。
 
---- completion_case_fold=()
+--- completion_case_fold=(s)
 --- completion_case_fold
 入力補完時に大文字／小文字の区別をするかどうかを決定します。
 bool が真ならば区別しません。
@@ -143,6 +143,9 @@ bool が真ならば区別しません。
 編集モードを Emacs モードにします。デフォルトは Emacs モードです。
 
 詳細は、GNU Readline のマニュアルを参照してください。
+
+--- completion_append_character
+--- completion_append_character=
 
 == Constants
 
@@ -180,3 +183,5 @@ Readlineモジュールで入力した内容は入力履歴として記録されます(有効にし
     # p Readline::HISTORY.to_a
     print "-> ", buf, "\n"
   end
+
+--- VERSION
