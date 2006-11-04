@@ -201,9 +201,9 @@ rinda/tuplespace
 ripper
 rss
 rubyunit
-scanf                          sheepman
+scanf                          sheepman         done
 sdbm                           sheepman
-set                            sheepman
+set                            sheepman         done
 sha1                           sheepman
 shell                          sheepman         done
 shellwords                     sheepman         done
