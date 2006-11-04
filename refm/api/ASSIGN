@@ -67,7 +67,7 @@ _builtin/Signal
 _builtin/SignalException
 _builtin/StandardError
 _builtin/String
-_builtin/Struct                 okkez
+_builtin/Struct                 okkez           done
 _builtin/Symbol
 _builtin/SyntaxError
 _builtin/SystemCallError
