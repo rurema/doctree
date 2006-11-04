@@ -24,9 +24,9 @@ _builtin/File__Stat             sheepman        done
 _builtin/Fixnum                 sheepman        done
 _builtin/Float                  sheepman        done
 _builtin/FloatDomainError
-_builtin/GC                     sheepman
-_builtin/Hash                   sheepman
-_builtin/IO                     sheepman
+_builtin/GC                     sheepman        done
+_builtin/Hash                   sheepman        done
+_builtin/IO                     sheepman        done
 _builtin/IOError
 _builtin/IndexError
 _builtin/Integer
@@ -227,9 +227,9 @@ tk
 tmpdir                          sheepman        done
 tracer                          sheepman        done
 tsort                           sheepman        done
-un                              sheepman
+un                              sheepman        done
 uri                             sheepman
-weakref                         sheepman
+weakref                         sheepman        done
 webrick
 webrick/cgi
 webrick/ssl
