@@ -50,12 +50,12 @@ _builtin/Numeric
 _builtin/Object
 _builtin/ObjectSpace
 _builtin/Precision
-_builtin/Proc
-_builtin/Process
-_builtin/Process__GID
-_builtin/Process__Status
-_builtin/Process__Sys
-_builtin/Process__UID
+_builtin/Proc                   okkez
+_builtin/Process                okkez
+_builtin/Process__GID           okkez
+_builtin/Process__Status        okkez
+_builtin/Process__Sys           okkez
+_builtin/Process__UID           okkez
 _builtin/Range                  okkez           done
 _builtin/RangeError
 _builtin/Regexp                 okkez           done
