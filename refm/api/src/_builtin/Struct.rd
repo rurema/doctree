@@ -121,7 +121,7 @@ nth が文字列かシンボルなら例外 [[c:NameError]] が発生します。
 
 self を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- each_pair {|member, value| ... }
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
@@ -165,7 +165,7 @@ passwd のエントリ([[unknown:etc]] 参照)を出力できます。
   require 'etc'
   print Etc.getpwuid.values.join(":"), "\n"
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- values_at(member_1, ... member_n)
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
