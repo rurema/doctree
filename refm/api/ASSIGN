@@ -228,7 +228,7 @@ tmpdir                          sheepman        done
 tracer                          sheepman        done
 tsort                           sheepman        done
 un                              sheepman        done
-uri                             sheepman
+uri                             sheepman        done
 weakref                         sheepman        done
 webrick
 webrick/cgi
