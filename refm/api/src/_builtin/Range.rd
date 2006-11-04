@@ -43,7 +43,7 @@ first から last までの範囲オブジェクトを生成して返しま
 other が範囲内に含まれている時に真を返します。=== は
 主に [[unknown:制御構造/case]] 文での比較に用いられます。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 include? が、[[m:Enumerable#include?]],
 [[m:Enumerable#member?]] と異なり <=> メソッド
 による演算により範囲内かどうかを判定することに注意する必要がありま
@@ -66,7 +66,7 @@ include? が、[[m:Enumerable#include?]],
 
 範囲内の要素に対して繰り返します。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 ((<ruby 1.7 feature>)): Range#each は各要素の succ メソッドを使用
 してイテレーションするようになりました。1.6 までは、Numeric オブ
 ジェクトは、特別に算術演算で行われていました。この変更により Float
@@ -102,7 +102,7 @@ include? が、[[m:Enumerable#include?]],
         (last - first + (exclude_end? ? 0 : 1))
 です。それ以外では、each が実行され範囲の長さを数えます。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 ((<ruby 1.7 feature>)): length, size メソッドはなくなりました。
 必要なら
   p ("a" .. "z").to_a.size
@@ -110,7 +110,7 @@ include? が、[[m:Enumerable#include?]],
 などとする必要があります。
 #@end
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- step([s]) {|item| ... }
 
 ((<ruby 1.7 feature>))
