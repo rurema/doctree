@@ -58,7 +58,7 @@ _builtin/Process__Sys
 _builtin/Process__UID
 _builtin/Range                  okkez           done
 _builtin/RangeError
-_builtin/Regexp
+_builtin/Regexp                 okkez
 _builtin/RegexpError
 _builtin/RuntimeError
 _builtin/ScriptError
