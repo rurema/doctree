@@ -1,11 +1,11 @@
-#@if (version >= "1.7.0")
+#@since 1.7.0
 = module Signal
 
 UNIX のシグナル関連の操作を行うモジュールです。
 
 == Module Functions
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- list
 
 シグナル名とシグナル番号を対応づけた [[c:Hash]] オブジェクトを返し
@@ -16,7 +16,7 @@ UNIX のシグナル関連の操作を行うモジュールです。
   p Signal.list   # => {"WINCH"=>28, "PROF"=>27, ...}
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- trap(signal, command)
 --- trap(signal) { ... }
 
