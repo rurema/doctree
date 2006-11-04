@@ -109,14 +109,29 @@ flatten と同じですが、
 集合のすべての要素に対して1度ずつブロックを実行します。
 ブロック変数 o にはその要素が渡されます。
 
+--- map! {|o| ...}
+--- collect! {|o| ...}
+
+Do collect() destructively.
+
 --- add(o)
 --- << o
 
 集合にオブジェクト o を加え、その集合自身を返します。
 
+--- add?(o)
+
+Adds the given object to the set and returns self. If the object
+is already in the set, returns nil.
+
 --- delete(o)
 
 集合からオブジェクト o を削除し、その集合自身を返します。
+
+--- delete?(o)
+
+Deletes the given object from the set and returns self. If the
+object is not in the set, returns nil.
 
 --- delete_if { |o| ... }
 
@@ -135,17 +150,20 @@ enum で与えられた Enumerable の要素を追加し、その集合自身を返します。
 
 enum で与えられた Enumerable の要素を削除し、その集合自身を返します。
 
---- +@
+--- union(enum)
+--- +(enum)
 --- |(enum)
 
 和集合、すなわち、2つの集合の少なくともどちらか一方に属するすべて
 の要素からなる新しい集合を作りそれを返します。
 
---- -@
+--- difference(enum)
+--- -(enum)
 
 差集合、すなわち、前者に属し後者に属さないすべての要素からなる
 新しい集合を作りそれを返します。
 
+--- intersection(enum)
 --- &(enum)
 
 共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる
