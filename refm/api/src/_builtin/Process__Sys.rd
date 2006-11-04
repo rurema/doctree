@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = module Process::Sys
 
 ((<ruby 1.8 feature>))
