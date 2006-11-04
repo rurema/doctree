@@ -37,7 +37,7 @@ $KCODE への代入と同様に文字列引数の最初の一文字で決定されま
 リアされた)正規表現を複製して返します。このとき、複製した正規表現
 に対して、第二、第三引数の指定が設定されます。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 ((<ruby 1.8 feature>)): 第一引数が正規表現であれば第一引数を複製し
 て返します。第二、第三引数は警告の上無視されます。
 #@end
@@ -88,7 +88,7 @@ Regexp.last_match はnil を返すため、
 last_match[1] の形式では例外 [[c:NameError]] が発生します。
 対して、last_match(1) は nil を返します。
 
-#@if (version >= "1.8.1")
+#@since 1.8.1
 --- union([pattern, ...])
 
 引数として与えた patttern を選択 | で連結し、Regexp として返します。
@@ -137,7 +137,7 @@ ArgumentError が発生します。
 string がnil でも [[c:String]] オブジェクトでもなけれ
 ば例外 [[c:TypeError]] が発生します。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 ((<ruby 1.7 feature>)): Regexp#=== は、真偽値を返します。引数が文
 字列でないか、マッチしなければ false を、マッチすれば
 true を返します。
@@ -176,7 +176,7 @@ true を返します。
 
 のように使用できます。(to_a は、マッチに失敗した場合を考慮しています。)
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 ((<ruby 1.8 feature>)):
 1.8 の多重代入の規則では右辺が配列でない一つのオブジェクトで to_a
 メソッドを持つ場合、右辺に * を付けることで to_a の結果を利用でき
@@ -198,7 +198,7 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生して
   # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
 #@end
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 ((<ruby 1.9 feature>)):
 省略可能な第二引数 pos を指定すると、マッチの開始位置を pos から行
 うよう制御できます(pos のデフォルト値は 0)。
