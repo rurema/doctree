@@ -153,11 +153,11 @@ bool が真ならば区別しません。
 --- USERNAME_COMPLETION_PROC
 ライブラリに組み込みで用意された補完用 [[c:Proc]] オブジェクトです。
 それぞれファイル名、ユーザ名の補完を行います。
-[[m:readline#Readline.completion_proc=]] で使用します。
+[[m:Readline.completion_proc=]] で使用します。
 
 --- HISTORY
 Readlineモジュールで入力した内容は入力履歴として記録されます(有効にし
-ていればですが。[[m:readline#Readline.readline]] を参照)
+ていればですが。[[m:Readline.readline]] を参照)
 
 この定数により、入力履歴の内容にアクセスすることができます。おおよそ、
 [[c:Array]] クラスのインスタンスのように振舞います。
