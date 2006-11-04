@@ -1,4 +1,4 @@
-#@if (version >= "1.7.0")
+#@since 1.7.0
 = module Process::Status
 
 ((<ruby 1.7 feature>))
@@ -171,5 +171,26 @@ signaled? が真の場合プロセスを終了させたシグナル番号を、
 
 (このメソッドはシステムに依存します。サポートしないプラットフォー
 ムでは常に false を返します)
+
+#@end
+
+#@since 1.7.0
+#@# 追加されたバージョンは不明
+--- stat >> num
+#@# => fixnum
+
+Shift the bits in stat right num places.
+
+   fork { exit 99 }   #=> 26563
+   Process.wait       #=> 26563
+   $?.to_i            #=> 25344
+   $? >> 8            #=> 99
+
+#@since 1.8.2
+--- stat.success?
+#@# => true, false or nil
+
+Returns true if stat is successful, false if not. Returns nil
+if exited? is not true.
 
 #@end
