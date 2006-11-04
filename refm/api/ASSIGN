@@ -68,7 +68,7 @@ _builtin/SignalException
 _builtin/StandardError
 _builtin/String
 _builtin/Struct                 okkez           done
-_builtin/Symbol
+_builtin/Symbol                 okkez
 _builtin/SyntaxError
 _builtin/SystemCallError
 _builtin/SystemExit
