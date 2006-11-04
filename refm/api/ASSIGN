@@ -182,11 +182,11 @@ parsearg
 parsedate                       tadf            done
 pathname
 ping                            aamine          complete
-pp
-prettyprint
+pp                              sheepman
+prettyprint                     sheepman
 profile
 profiler
-pstore
+pstore                          sheepman
 pty
 racc/parser
 rational                       sheepman
