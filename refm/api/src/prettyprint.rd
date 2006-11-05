@@ -1,18 +1,19 @@
 = class PrettyPrint < Object
 
 このクラスは pretty printing アルゴリズムの実装です。
-改行の位置を探し、構造のまとまりのためにきれいなインデントを施します。
+改行の位置を探し、きれいなインデントを施します。
 
-デフォルトでは、このクラスは最も基本的な要素は文字列であり、
-その1バイトが出力幅の中で1カラムを占めると仮定しています。
-しかし、いくつかのメソッドに対して適切な引数を与えることで、
-そうでない状況にも利用できます:
-PrettyPrint.new には改行オブジェクトと空白の生成を表すブロックを、
-PrettyPrint#text や PrettyPrint#breakable には幅といった具合に。
-これらを使ういくつかの候補は例えば次のようなものでしょう。
-proportional font を使ったテキストの整形、
-出力幅とバイト数が異なるような多バイト文字、
-文字以外の出力などです。
+デフォルトでは、このクラスは文字列を扱います。
+また、文字1バイトが出力幅の中で1カラムを占めると仮定しています。
+しかし、以下のメソッドに対して適切な引数を与えることで、
+そうでない場合にも利用できます。
+ * [[m:PrettyPrint.new]]: 空白の生成をするブロックや改行オブジェクトを設定できます。
+ * [[m:PrettyPrint#text]]: 幅を設定できます。
+ * [[m:PrettyPrint#breakable]] 
+ですので、このクラスは以下のようなことにも応用が可能です。
+ * proportional font を使ったテキストの整形
+ * 出力幅とバイト数が異なるような多バイト文字
+ * 文字以外の整形
 
 === References
 Christian Lindig, Strictly Pretty, March 2000,
@@ -23,18 +24,18 @@ Philip Wadler, A prettier printer, March 1998,
 
 
 == Class Methods
---- new([output[, maxwidth[, newline]]]) [{|width| ...}]
+--- new(output = '', maxwidth = 79, newline = "\n") [{|width| ...}]
 
 pretty printing のためのバッファを生成します。
 output は出力先で、
 もし指定されなければ '' が仮定されます。
-このオブジェクトは次のものを受け付ける <<
-メソッドを持っていなければなりません。それは、
-PrettyPrint#text の第1引数 obj、
-PrettyPrint#breakable の第1引数 sep、
-PrettyPrint.new の第1引数 newline
-および
-PrettyPrint.new に与えられたブロックを評価した結果です。
+output は << メソッドを持っていなければなりません。
+<< メソッドには
+ * [[m:PrettyPrint#text]] の第1引数 obj 
+ * [[m:PrettyPrint#breakable]] の第1引数 sep 
+ * [[m:PrettyPrint.new]] の第1引数 newline 
+ * [[m:PrettyPrint.new]] 与えられたブロックを評価した結果
+のどれかひとつが引数として与えられます。
 
 maxwidth は行の最大幅を指定します。
 与えられない場合は 79 が仮定されます。
@@ -60,7 +61,7 @@ newline は改行に使われます。
 
 --- singleline_format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
 
-PrettyPrint.format に似ていますが、改行しません。引数
+[[m:PrettyPrint.format]] に似ていますが、改行しません。引数
 maxwidth, newline と genspace は無視されます。ブロッ
 ク中の breakable の実行は、改行せずに text の実行であるか
 のように扱います。
