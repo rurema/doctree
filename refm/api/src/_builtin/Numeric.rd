@@ -296,10 +296,10 @@ self を整数に丸めた結果を返します。
 self を返します。
 
 #@since 1.7.0
-((<ruby 1.7 feature>)): version 1.7 では数値などの immutable なオ
-ブジェクトは clone や dup が禁止されています。
+数値などの immutable なオブジェクトは clone や dup が禁止されています。
 
   1.dup   # => in `clone': can't clone Fixnum (TypeError)
+
 #@end
 
 --- coerce(number)
@@ -527,7 +527,7 @@ step に 0 を指定した場合は例外 [[c:ArgumentError]] が発生します。
 self を返します。
 
 #@since 1.7.0
-((<ruby 1.7 feature>)): このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
+このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
 た。これにより [[c:Float]] も step できるようになりました。
 
     1.1.step(1.5, 0.1) {|n| p n}
