@@ -48,6 +48,8 @@
 --- today([start])
 このクラスでは利用できません。
 
+[[m:DateTime.now]] を参照してください。
+
 #@since 1.8.0
 #@#? --- valid_time?
 #@end
