@@ -1,7 +1,7 @@
 require rational
 require date/format
 
-$BF|IU$r$"$D$+$&$?$a$N%i%$%V%i%j$G$9!#(B
+ÆüÉÕ¤ò¤¢¤Ä¤«¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 #@include(date/Date)
 #@include(date/DateTime)
