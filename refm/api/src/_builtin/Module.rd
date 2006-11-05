@@ -43,7 +43,7 @@
   # => [Foo::Bar::Baz, Foo::Bar, Foo]
 
 --- new
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- new {|mod| ... }
 #@end
 
@@ -60,7 +60,7 @@
   Bar = foo
   p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 ブロックが与えられると生成したモジュールをブロックの引数に渡し、モ
 ジュールのコンテキストでブロックを実行します。この場合も生成したモ
 ジュールを返します。
@@ -85,14 +85,14 @@ self が other の先祖であるとき 1
 を返します。
 
 親子関係にないクラス同士の比較では
-#@if (version >= "1.7.0")
+#@since 1.7.0
 nil を返します。
 #@else
 その動作は不定です。
 #@end
 
 other がクラスやモジュールでなければ
-#@if (version >= "1.8.0")
+#@since 1.8.0
 nil を返します。
 #@else
 例外 [[c:TypeError]] が発生します。
@@ -112,11 +112,11 @@ nil を返します。
   p Bar <=> Foo     # => -1
   p Baz <=> Bar     # => -1
   p Baz <=> Foo     # => -1
-#@if (version >= "1.8.0")
+#@since 1.8.0
   p Baz <=> Qux     # => -1
   p Qux <=> Baz     # => -1
 #@end
-#@if (version >= "1.7.0")
+#@since 1.7.0
   p Baz <=> Qux     # => nil
   p Qux <=> Baz     # => nil
 #@else
@@ -124,7 +124,7 @@ nil を返します。
   p Qux <=> Baz     # => 1
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
   p Baz <=> Object.new  # => nil
 #@else
   p Baz <=> Object.new  # => :in `<=>': <=> requires Class or Module (Object given) (TypeError)
@@ -139,7 +139,7 @@ nil を返します。
 self < other が成立します。
 
 親子関係にないクラス同士の比較ではいずれの関係も
-#@if (version >= "1.8.0")
+#@since 1.8.0
 nil を返します。
 #@else
 false を返します。
@@ -162,7 +162,7 @@ other がクラスやモジュールでなければ例外 [[c:TypeError]] が
   p Bar < Foo     # => true
   p Baz < Bar     # => true
   p Baz < Foo     # => true
-#@if (version >= "1.8.0")
+#@since 1.8.0
   p Baz < Qux     # => nil
   p Baz > Qux     # => nil
 #@else
@@ -208,7 +208,7 @@ obj が self と [[m:Object#kind_of?]]
   # => [Foo, Kernel]
   # => Bar
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- autoload(const_name, feature)
 --- autoload?(const_name)
 
@@ -274,7 +274,7 @@ obj が self と [[m:Object#kind_of?]]
 発生します。
 name は [[c:Symbol]] か文字列で指定します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- const_missing(name)
 
 定義されていない定数を参照したときに Ruby がこのメソッドを呼び
@@ -345,7 +345,7 @@ name は [[c:Symbol]] か文字列で指定します。
     end
   end
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- include?(mod)
 
 self が モジュール mod をインクルードしていれば
@@ -407,7 +407,7 @@ self になるということです。つまり、そのモジュールの定義文の
 
 ただし、ローカル変数は module_eval の外側のスコープと共有し
 ます。
-#@if (version >= "1.6.8")
+#@since 1.6.8
 version 1.6.8 以降でブロックが与えられた場合は、定数とクラス変数
 のスコープも外側のスコープになります。
 #@end
@@ -453,14 +453,14 @@ version 1.6.8 以降でブロックが与えられた場合は、定数とクラス変数
 の一覧を配列で返します。
 
 instance_methods は、public_instance_methods と同じです。
-#@if (version >= "1.7.0")
+#@since 1.7.0
 instance_methods は、public および
 protected メソッド名の一覧を配列で返します。
 #@end
 
 inherited_too が真であれば、スーパークラスのメソッドも探索し
 ます。デフォルトは偽です。
-#@if (version >= "1.8.0")
+#@since 1.8.0
 引数のデフォルトは真に変わる予定です。
 引数を省略すると警告が出るので、変更までは引数を明示することが望ま
 れます)
@@ -501,7 +501,7 @@ inherited_too が真であれば、スーパークラスのメソッドも探索し
   p Bar.protected_instance_methods(true) - Object.protected_instance_methods(true)
 
   => 例1:
-#@if (version >= "1.7.0")
+#@since 1.7.0
      ["protected_foo", "public_foo"]
 #@else
      ["public_foo"]
@@ -510,7 +510,7 @@ inherited_too が真であれば、スーパークラスのメソッドも探索し
      ["private_foo"]
      ["protected_foo"]
      例2:
-#@if (version >= "1.7.0")
+#@since 1.7.0
      ["protected_foo", "public_foo"]
 #@else
      ["protected_foo"]
@@ -527,7 +527,7 @@ name で指定したクラスメソッド(クラスの特異メソッド) の可視性
 
 self を返します。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- private_method_defined?(name)
 --- protected_method_defined?(name)
 --- public_method_defined?(name)
@@ -550,7 +550,7 @@ self を返します。
 
   * メソッド名は文字列または [[c:Symbol]] で指定する
   * グローバル変数の別名をつけることはできない
-#@if (version < "1.7.3")
+#@since 1.7.3
 #@#see [ruby-dev:17894]
   * alias は構文なのでメソッドの中では使えない
 #@end
@@ -570,7 +570,7 @@ Ruby で書くと以下のように定義できます。
       # append_features はプライベートメソッドなので
       # 直接 mod.append_features(self) とは書けない
       mod.__send__ :append_features, self
-#@if (version >= "1.7.0")
+#@since 1.7.0
       # mod.__send__ :included, self
 #@end
     }
@@ -637,7 +637,7 @@ nil です。
     @name = val
   end
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- class_variable_get(name)
 
 クラス／モジュールに定義されているクラス変数 name の値を返します。
@@ -660,7 +660,7 @@ name は [[c:Symbol]] か文字列で指定します。
   p Fred.foo #=> 99
 #@end
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- class_variable_set(name, val)
 
 クラス／モジュールにクラス変数 name を定義して、その値として
@@ -742,7 +742,7 @@ extend_object のデフォルトの実装では、self に定義されて
 
 object を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- extended(class_or_module)
 
 self が他のオブジェクト に [[m:Object#extend]] されたときに
@@ -809,12 +809,12 @@ include は多重継承の代わりに用いられる Mix-in を実現するため
           from -:3:in `include'
           from -:3
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 引数に複数のモジュールを指定した場合、最後
 の引数から逆順に include を行います。
 #@end
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- included(class_or_module)
 
 self が include されたときに対象のクラスまたはモジュー
@@ -857,7 +857,7 @@ name には追加されたメソッドの名前が [[c:Symbol]] で渡されます。
 [[m:Object#singleton_method_added]]
 を使います。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- method_removed(name)
 
 メソッドが [[m:Module#remove_method]] により削
@@ -883,7 +883,7 @@ name には削除されたメソッド名が [[c:Symbol]] で渡されます。
 を使います。
 #@end
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- method_undefined(name)
 
 メソッドが [[m:Module#undef_method]] または
@@ -1064,7 +1064,7 @@ name で指定した定数を取り除き、その定数に設定されていた値を
 も参照してください。
 
 --- remove_method(name)
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- remove_method(name[, name2, ...])
 #@end
 
@@ -1079,7 +1079,7 @@ name で指定したインスタンスメソッドをモジュールから取り除き
     remove_method(:foo)
   end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 複数のメソッドを一度に指定することができます。
 #@end
 
@@ -1088,7 +1088,7 @@ self を返します。
 [[m:Module#undef_method]] の例も参照してください。
 
 --- undef_method(name)
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- undef_method(name[, name2, ...])
 #@end
 
@@ -1096,12 +1096,12 @@ self を返します。
 します。もし指定したメソッドが定義されていないときには例外
 [[c:NameError]] が発生します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 複数のメソッドを一度に指定することができます。
 #@end
 
 [[unknown:クラス／メソッドの定義/undef]] との違いは、メソッド名を文字列または
-#@if (version >= "1.7.3")
+#@since 1.7.3
 #@#see [ruby-dev:17894]
 [[c:Symbol]] で与える点です。
 #@else
