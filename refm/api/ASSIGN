@@ -182,14 +182,14 @@ parsearg
 parsedate                       tadf            done
 pathname
 ping                            aamine          complete
-pp                              sheepman
-prettyprint                     sheepman
+pp                              sheepman        done
+prettyprint                     sheepman        done
 profile
 profiler
-pstore                          sheepman
+pstore                          sheepman        done
 pty
 racc/parser
-rational                       sheepman
+rational                       sheepman         
 rbconfig
 readbytes                      sheepman         done
 readline                       sheepman         done
