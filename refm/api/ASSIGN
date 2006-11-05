@@ -29,7 +29,7 @@ _builtin/Hash                   sheepman        done
 _builtin/IO                     sheepman        done
 _builtin/IOError
 _builtin/IndexError
-_builtin/Integer                okkez
+_builtin/Integer                okkez           done
 _builtin/Interrupt
 _builtin/Kernel
 _builtin/KeyError
@@ -46,10 +46,10 @@ _builtin/NilClass
 _builtin/NoMemoryError
 _builtin/NoMethodError
 _builtin/NotImplementedError
-_builtin/Numeric                okkez
+_builtin/Numeric                okkez           done
 _builtin/Object
 _builtin/ObjectSpace
-_builtin/Precision              okkez
+_builtin/Precision              okkez           done
 _builtin/Proc                   okkez           done
 _builtin/Process                okkez           done
 _builtin/Process__GID           okkez           done
