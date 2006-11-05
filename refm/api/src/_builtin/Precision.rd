@@ -9,8 +9,6 @@
 #@since 1.7.0
 --- included(module_or_class)
 
-    ((<ruby 1.7 feature>))
-
 Precision がインクルードされた時に呼ばれます。詳細は
 [[m:Module#included]] を参照してください。
 
