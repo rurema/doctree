@@ -2,7 +2,7 @@
 
 正規表現のマッチに関する情報を扱うためのクラス。
 このクラスのインスタンスは、
-* [[m:Regexp#Regexp.last_match]]
+* [[m:Regexp#last_match]]
 * [[m:Regexp#match]], [[m:String#match]]
 * [[m:$~]]
 などにより得られます。
@@ -110,10 +110,8 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
   /(bar)(BAZ)?/ =~ "foobarbaz"
   p $~.pre_match  # => "foo"
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- select { ... }
-
-((<ruby 1.8 feature>))
 
 self.to_a.[[m:Enumerable#select]] { ... } と同じです。
 #@end
@@ -140,10 +138,8 @@ self.to_a.[[m:Enumerable#select]] { ... } と同じです。
   p $~            # => #<MatchData:0x401b1be4>
   p $~.to_s       # => "bar"
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- values_at(index1, index2, ...)
-
-((<ruby 1.8 feature>))
 
 正規表現中の indexN 番目の括弧にマッチした部分文字列の配列を
 返します。0 番目は [[m:$&]] のようにマッチした文字列全
