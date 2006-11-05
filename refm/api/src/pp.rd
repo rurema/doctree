@@ -1,3 +1,5 @@
+require prettyprint
+
 Pretty-printer
 
 === どちらが読みやすいでしょうか?
@@ -48,12 +50,10 @@ pp による pretty-print された出力:
 
 === 出力のカスタマイズ
 
-あなたのクラスについて pritty print するカスタマイズ機能を定義するには、
-そのクラスで pretty_print(pp) を再定義します。
-このメソッドのがとる引数 pp は [[c:PP]] クラスのインスタンスです。
-このメソッドは出力に際して [[m:PP#text]], [[m:PP#breakable]], [[m:PP#nest]], [[m:PP#group]] および
-[[m:PP#pp]] を使います。
-
+あなたのクラスの pritty print をカスタマイズしたい場合は、
+そのクラスで pretty_print(pp) メソッドを再定義します。
+このメソッドは引数をひとつ取ります。引数 pp は [[c:PP]] クラスのインスタンスです。
+このメソッドは出力に際して [[m:PP#text]], [[m:PP#breakable]], [[m:PP#nest]], [[m:PP#group]] および [[m:PP#pp]] を使います。前の4メソッドに関してはPPの親クラスのPrettyPrintで定義されています。[[m:PrettyPrint#text]], [[m:PrettyPrint#breakable]], [[m:PrettyPrint#nest]], [[m:PrettyPrint#group]] を参照してください。
 
 = reopen Kernel
 == Module Functions
@@ -65,7 +65,6 @@ nil を返します。
 = reopen Object
 == Instance Methods
 --- pretty_inspect
-((<ruby 1.8.5 feature>))
 
 self を pp で表示したときの結果を文字列として返します。
 #@end
@@ -81,6 +80,15 @@ width を省略した場合は、79 が指定されたものとみなされます。
 
 PP.pp は out を返します。
 
+  str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
+  puts str
+  #=>
+  [[:a, :b],
+   [:a,
+    [[:a,
+      [:a, [:a, :b]]],
+     [:a, :b]]]]
+
 --- sharing_detection
 
 共有検出フラグを boolean すなわち true か false で返します。
@@ -89,6 +97,12 @@ PP.pp は out を返します。
 --- sharing_detection=(boolean_value)
 
 共有検出フラグを設定します。
+
+--- singleline_pp(obj, out=$>)
+Outputs +obj+ to +out+ like PP.pp but with no indent and
+newline.
+
+PP.singleline_pp returns +out+.
 
 == Instance Methods
 --- pp(obj)
