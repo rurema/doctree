@@ -35,10 +35,10 @@ _builtin/Kernel
 _builtin/KeyError
 _builtin/LoadError
 _builtin/LocalJumpError
-_builtin/Marshal
-_builtin/MatchData
-_builtin/Math
-_builtin/Matrix
+_builtin/Marshal                okkez
+_builtin/MatchData              okkez
+_builtin/Math                   okkez
+_builtin/Matrix                 okkez
 _builtin/Method                 okkez           done
 _builtin/Module                 okkez           done
 _builtin/NameError
