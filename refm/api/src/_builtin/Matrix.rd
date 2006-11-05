@@ -23,19 +23,21 @@ m=nの行列をm次の正方行列(square matrix)という。
 大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできるし、
 大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできる。
 
-第i行、第j列にある数a(i,j)を(i,j)要素((-elementという語には、数学では「成分」、物理では「要素」という訳をあてる。数学の「要素」はcomponentという語に当たる-))(the (i,j)-th element)という。
+第i行、第j列にある数a(i,j)を(i,j)要素((-elementという語には、数学では
+「成分」、物理では「要素」という訳をあてる。数学の「要素」はcomponent
+という語に当たる-))(the (i,j)-th element)という。
 
 i=jの要素a(i,j)を対角要素(diagonal element)、
 それ以外の要素を非対角要素(nondiagonal element)という。
 
 
-使い方　Usage
+使い方 Usage
 
-Matrixクラスを使うためには、require 'matrix'する必要がある。
+[[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
 
   require 'matrix'
 
-Complexクラスとの併用 
+[[c:Complex]]クラスとの併用
 
 require 'complex'することによって、
 Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
@@ -43,7 +45,7 @@ Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
 
 
 
-次の例は、各要素を共役複素数に置換するメソッド(Matrix#conjugate)である。
+次の例は、各要素を共役複素数に置換するメソッド([[m:Matrix#conjugate]])である。
 
   require 'matrix'
   require 'complex'
@@ -60,7 +62,9 @@ Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
 
 rowsを要素とする行列を生成する。
 ただし、引数rowsはネストした配列(=配列の配列)である。
-例 Matrix[[11, 12], [21, 22]]
+例
+
+  Matrix[[11, 12], [21, 22]]
 
 --- rows(rows, copy = true)
 
@@ -74,9 +78,11 @@ columnsを列ベクトルの集合とする行列を生成する。
 
 --- diagonal(values)
 
-対角要素がvalues(オブジェクトの並び)で、非対角要素が全て0であるような正方行列を生成する。
+対角要素がvalues(オブジェクトの並び)で、非対角要素が全て0であるような
+正方行列を生成する。
 
-(注:) valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素とした1×1の行列ができる。
+(注:) valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素とした1×1の
+行列ができる。
 
 --- scalar(n, value)
 
@@ -122,8 +128,8 @@ n次の零行列を生成する。
 --- minor(from_row..to_row,from_col..to_col)
 
 部分行列を返す。たたし、パラメータは、次の方法で指定する。
-(1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
-(2) 開始行番号..終了行番号, 開始列番号..終了列番号
+  (1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
+  (2) 開始行番号..終了行番号, 開始列番号..終了列番号
 
 --- []=(i,j,x)
 (i,j)要素をxに変更する。
@@ -176,23 +182,25 @@ n次の零行列を生成する。
 --- determinant
 --- det
 
-行列式(determinant) ((-線形代数の教科書を見よ-))を返す。
+行列式 (determinant) を返す。
+#@# ((-線形代数の教科書を見よ-))
 
 --- rank
 
-階数(rank) ((-線形代数の教科書を見よ-))を返す。
+階数 (rank) を返す。
+#@# ((-線形代数の教科書を見よ-))
 
 --- trace
 --- tr
 
-トレース(trace)を返す。
-行列のトレース(trace)とは、対角要素の和である。
+トレース (trace) を返す。
+行列のトレース (trace) とは、対角要素の和である。
 
 --- transpose
 --- t
 
-転置行列(transpose matrix)を返す。
-冒頭に掲げた行列に対して、a(j,i)を(i,j)要素とする(n,m)型行列を転置行列という。
+転置行列 (transpose matrix) を返す。
+冒頭に掲げた行列に対して、 a(j,i) を (i,j) 要素とする (n,m) 型行列を転置行列という。
 
 --- row(i)
 
@@ -248,6 +256,29 @@ n次の零行列を生成する。
 --- to_r
 
 各要素を有理数[[c:Rational]]に変換する。
+
+#@# bc-rdoc: detected missing name: new
+#@# --- new(init_method, *argv)
+#@# 
+#@# This method is used by the other methods that create matrices,
+#@# and is of no use to general users.
+#@# bc-methods -r matrix Matrix で見つからなかった。okkez
+
+#@# bc-rdoc: detected missing name: coerce
+--- coerce(other)
+
+FIXME: describe #coerce.
+
+#@# bc-rdoc: detected missing name: compare_by_row_vectors
+--- compare_by_row_vectors(rows)
+
+Not really intended for general consumption.
+
+#@# bc-rdoc: detected missing name: inverse_from
+--- inverse_from(src)
+
+Not for public consumption?
+
 
 
 #@#== ChangeLog
