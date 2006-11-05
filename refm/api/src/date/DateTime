@@ -6,13 +6,13 @@
 
   require 'date'
 
-  d1 = DateTime.new(1993, 2, 24, 12, 30, 45)
-  d2 = DateTime.parse('1993-02-24T12:30:45')
-  d2 += 10
+  a = DateTime.new(1993, 2, 24, 12, 30, 45)
+  b = DateTime.parse('1993-02-24T12:30:45')
+  b += 10
 
-  d2 - d1           #=> 10
-  d2.year           #=> 1993
-  d2.strftime('%a') #=> "Sat"
+  b - a            #=> 10
+  b.year           #=> 1993
+  b.strftime('%a') #=> "Sat"
 
   yesterday = DateTime.now - 1
 
@@ -22,11 +22,20 @@
 --- new([year[, mon[, mday[, hour[, min[, sec[, offset[, start]]]]]]]])
 暦日付に相当する日時オブジェクトを生成します。
 
+時差の単位は日です。
+#@since 1.8.6
+1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
+#@end
+
 --- commercial([cwyear[, cweek[, cwday[, hour[, min[, sec[, offset[, start]]]]]]]])
 暦週日付に相当する日時オブジェクトを生成します。
 
+[[m:DateTime.new]] も参照してください。
+
 --- jd([jd[, hour[, min[, sec[, offset[, start]]]]]])
 ユリウス日に相当する日時オブジェクトを生成します。
+
+[[m:DateTime.new]] も参照してください。
 
 --- now([start])
 現在の時刻に相当する日時オブジェクトを生成します。
@@ -34,8 +43,10 @@
 --- ordinal([year[, yday[, hour[, min[, sec[, offset[, start]]]]]]])
 年日付に相当する日時オブジェクトを生成します。
 
+[[m:DateTime.new]] も参照してください。
+
 --- today([start])
-DateTime では undef されています。
+このクラスでは利用できません。
 
 #@since 1.8.0
 #@#? --- valid_time?
@@ -74,4 +85,4 @@ self を複製して、その時差を設定しなおします。
 --- zone
 タイムゾーンを返します。
 
-実際には、時差をあらわす文字列です。
+これは、正確には時差をあらわす文字列です。

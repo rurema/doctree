@@ -13,13 +13,13 @@ include Comparable
 
   require 'date'
 
-  d1 = Date.new(1993, 2, 24)
-  d2 = Date.parse('1993-02-24')
-  d2 += 10
+  a = Date.new(1993, 2, 24)
+  b = Date.parse('1993-02-24')
+  b += 10
 
-  d2 - d1           #=> 10
-  d2.year           #=> 1993
-  d2.strftime('%a') #=> "Sat"
+  b - a            #=> 10
+  b.year           #=> 1993
+  b.strftime('%a') #=> "Sat"
 
   yesterday = Date.today - 1
 
@@ -394,8 +394,17 @@ n は数値でなければなりません。
 --- downto(min){|date| ...}
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
+[[m:Date#step]] を参照してください。
+
+#@since 1.8.6
+1.8.6 以降では、ブロックが与えられない場合、
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
+
 --- england
 このメソッドは、new_start(Date::ENGLAND) と等価です。
+
+[[m:Date#new_start]]、および [[m:Date::ENGLAND]] を参照してください。
 
 #@since 1.9.0
 --- friday?
@@ -404,6 +413,8 @@ n は数値でなければなりません。
 
 --- gregorian
 このメソッドは、new_start(Date::GREGORIAN) と等価です。
+
+[[m:Date#new_start]]、および [[m:Date::GREGORIAN]] を参照してください。
 
 #@since 1.8.6
 --- gregorian?
@@ -415,6 +426,8 @@ n は数値でなければなりません。
 --- italy
 このメソッドは、new_start(Date::ITALY) と等価です。
 
+[[m:Date#new_start]]、および [[m:Date::ITALY]] を参照してください。
+
 --- jd
 ユリウス日を返します。
 時刻を含みません。
@@ -423,6 +436,8 @@ n は数値でなければなりません。
 
 --- julian
 このメソッドは、new_start(Date::JULIAN) と等価です。
+
+[[m:Date#new_start]]、および [[m:Date::JULIAN]] を参照してください。
 
 #@since 1.8.6
 --- julian?
@@ -511,6 +526,11 @@ n 年前を返します。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
 
+#@since 1.8.6
+1.8.6 以降では、ブロックが与えられない場合、
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
+
 #@since 1.9.0
 --- sunday?
 日曜日なら真を返します。
@@ -543,10 +563,10 @@ limit は日付オブジェクトでなければなりません、
 木曜日なら真を返します。
 
 --- to_date
-対応するもっともふさわしいと思われる Date オブジェクトを返します。
+対応するもっともふさわしいと思われる [[c:Date]] オブジェクトを返します。
 
 --- to_datetime
-対応するもっともふさわしいと思われる DateTime オブジェクトを返します。
+対応するもっともふさわしいと思われる [[c:DateTime]] オブジェクトを返します。
 #@end
 
 --- to_s
@@ -554,7 +574,7 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 
 #@since 1.9.0
 --- to_time
-対応するもっともふさわしいと思われる Time オブジェクトを返します。
+対応するもっともふさわしいと思われる [[c:Time]] オブジェクトを返します。
 
 --- tuesday?
 火曜日なら真を返します。
@@ -562,6 +582,13 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 
 --- upto(max){|date| ...}
 このメソッドは、step(max, 1){|date| ...} と等価です。
+
+[[m:Date#step]] を参照してください。
+
+#@since 1.8.6
+1.8.6 以降では、ブロックが与えられない場合、
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 
 --- wday
 曜日を返します (0-6、日曜日は零)。
@@ -583,11 +610,11 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 == Instance Methods
 
 --- to_date
-対応するもっともふさわしいと思われる Date オブジェクトを返します。
+対応するもっともふさわしいと思われる [[c:Date]] オブジェクトを返します。
 
 --- to_datetime
-対応するもっともふさわしいと思われる DateTime オブジェクトを返します。
+対応するもっともふさわしいと思われる [[c:DateTime]] オブジェクトを返します。
 
 --- to_time
-対応するもっともふさわしいと思われる Time オブジェクトを返します。
+対応するもっともふさわしいと思われる [[c:Time]] オブジェクトを返します。
 #@end
