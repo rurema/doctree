@@ -6,7 +6,7 @@
 
 == Singleton Methods
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- included(module_or_class)
 
     ((<ruby 1.7 feature>))
