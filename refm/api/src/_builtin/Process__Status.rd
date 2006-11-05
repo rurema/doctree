@@ -1,8 +1,7 @@
-#@since 1.7.0
+#@since 1.8.0
 = module Process::Status
 
-((<ruby 1.7 feature>))
-[[m:Process#Process.wait]] などで生成されるオブジェクト。プロセスの終
+[[m:Process.wait]] などで生成されるオブジェクト。プロセスの終
 了ステータスを表現します。
 
 使用例
@@ -174,7 +173,7 @@ signaled? が真の場合プロセスを終了させたシグナル番号を、
 
 #@end
 
-#@since 1.7.0
+#@since 1.8.0
 #@# 追加されたバージョンは不明
 --- stat >> num
 #@# => fixnum
@@ -192,5 +191,7 @@ Shift the bits in stat right num places.
 
 Returns true if stat is successful, false if not. Returns nil
 if exited? is not true.
+
+#@end
 
 #@end
