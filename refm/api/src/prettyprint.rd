@@ -27,14 +27,14 @@ Philip Wadler, A prettier printer, March 1998,
 --- new(output = '', maxwidth = 79, newline = "\n") [{|width| ...}]
 
 pretty printing のためのバッファを生成します。
-output は出力先で、
+output は出力先です。
 もし指定されなければ '' が仮定されます。
 output は << メソッドを持っていなければなりません。
 << メソッドには
  * [[m:PrettyPrint#text]] の第1引数 obj 
  * [[m:PrettyPrint#breakable]] の第1引数 sep 
  * [[m:PrettyPrint.new]] の第1引数 newline 
- * [[m:PrettyPrint.new]] 与えられたブロックを評価した結果
+ * [[m:PrettyPrint.new]] に与えたブロックを評価した結果
 のどれかひとつが引数として与えられます。
 
 maxwidth は行の最大幅を指定します。
