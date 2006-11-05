@@ -111,8 +111,8 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 
   #<Method: klass1(klass2)#method>                (形式1)
 
-klass1 は、Method#inspect では、レシーバのクラス名、
-[[c:UnboundMethod]]#inspect では、UnboundMethod オブジェクトの生成
+klass1 は、[[m::Method#inspect]] では、レシーバのクラス名、
+[[m:UnboundMethod#inspect]] では、[[c:UnboundMethod]] オブジェクトの生成
 元となったクラス／モジュール名です。
 
 klass2 は、実際にそのメソッドを定義しているクラス／モジュール名、
@@ -132,12 +132,10 @@ method は、メソッド名を表します。
   p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
   p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)):
+#@since 1.7.0
 klass1 と klass2 が同じ場合は以下の形式になります。
   #<Method: klass1#method>                        (形式2)
 
-((<ruby 1.7 feature>)):
 特異メソッドに対しては、
   #<Method: obj.method>                           (形式3)
   #<Method: klass1(klass2).method>                (形式4)
