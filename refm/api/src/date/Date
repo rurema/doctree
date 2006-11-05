@@ -138,7 +138,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 零であってはなりません。
 
 最後の引数は、グレゴリオ暦をつかい始めた日をあらわすユリウス日です。
-#@if (version < "1.8.5")
+#@if (version < "1.8.6")
 グレゴリオ暦の指定として真、ユリウス暦の指定として偽を与えることもできます。
 #@end
 省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
@@ -168,7 +168,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@#? --- day_fraction_to_time(fr)
 #@end
 
-#@since 1.8.5
+#@since 1.8.6
 --- gregorian? (jd, start)
 #@else
 --- ns? (jd, start)
@@ -178,7 +178,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- leap? (year)
 グレゴリオ暦の閏年なら真を返します。
 
-#@since 1.8.5
+#@since 1.8.6
 --- jd([jd[, start]])
 #@else
 --- new1([jd[, start]])
@@ -206,11 +206,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 #@#? --- jd_to_wday(jd)
 
-#@since 1.8.5
+#@since 1.8.6
 #@#? --- jd_to_weeknum(jd[, k[, start]])
 #@end
 
-#@since 1.8.5
+#@since 1.8.6
 #@#? --- julian? (jd, start)
 #@else
 #@#? --- os? (jd, start)
@@ -323,7 +323,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
-#@since 1.8.5
+#@since 1.8.6
 #@#? --- weeknum_to_jd(year, week, day[, k[, start]])
 #@end
 
@@ -405,7 +405,7 @@ n は数値でなければなりません。
 --- gregorian
 このメソッドは、new_start(Date::GREGORIAN) と等価です。
 
-#@since 1.8.5
+#@since 1.8.6
 --- gregorian?
 #@else
 --- ns?
@@ -424,7 +424,7 @@ n は数値でなければなりません。
 --- julian
 このメソッドは、new_start(Date::JULIAN) と等価です。
 
-#@since 1.8.5
+#@since 1.8.6
 --- julian?
 #@else
 --- os?
@@ -524,8 +524,8 @@ limit は日付オブジェクトでなければなりません、
 %M, %m, %n, %P, %p, %R, %r, %S, %s, %T, %t, %U, %u, %V, %v, %W, %w, %X,
 %x, %Y, %y, %Z, %z, %%, %+
 
-#@since 1.8.5
-1.8.5 以降では、%L, %N, %Q もつかえます。
+#@since 1.8.6
+1.8.6 以降では、%L, %N, %Q もつかえます。
 #@# %:{1,3}z も?
 また、GNU 版にあるような幅指定などもできます。
 #@else
