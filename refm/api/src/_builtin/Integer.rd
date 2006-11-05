@@ -29,7 +29,7 @@ immutable であるためです。
 --- %(other)
 --- **(other)
 
-算術演算子。それぞれ和、差、積、商、剰余、冪を計算します。
+算術演算子。それぞれ和、差、積、商、剰余、冪(べき乗)を計算します。
 
 --- <=>(other)
 
@@ -104,8 +104,8 @@ self を返します。
 
 [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#times]] も参照。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)): Numeric#[[m:Numeric#step]] も参照。
+#@since 1.7.0
+[[m:Numeric#step]] も参照。
 #@end
 
 --- times {|n| ... }
@@ -139,14 +139,14 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
 値を浮動小数点数([[c:Float]])に変換します。
 
 --- to_s
-#@if (version >= "1.7.0")
+#@since 1.7.0
 --- to_s(base)
 #@end
 
 整数を 10 進文字列表現に変換します。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)): 引数を指定すれば、それを基数とした文字列表
+#@since 1.7.0
+引数を指定すれば、それを基数とした文字列表
 現に変換します。基数として 2 〜 36 以外を指定した場合は例外
 [[c:ArgumentError]] が発生します。
 
