@@ -39,10 +39,10 @@ _builtin/Marshal
 _builtin/MatchData
 _builtin/Math
 _builtin/Matrix
-_builtin/Method
-_builtin/Module
+_builtin/Method                 okkez
+_builtin/Module                 okkez
 _builtin/NameError
-_builtin/NilClass
+_builtin/NilClass               okkez
 _builtin/NoMemoryError
 _builtin/NoMethodError
 _builtin/NotImplementedError
