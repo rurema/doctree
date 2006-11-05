@@ -295,7 +295,7 @@ self を整数に丸めた結果を返します。
 
 self を返します。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 ((<ruby 1.7 feature>)): version 1.7 では数値などの immutable なオ
 ブジェクトは clone や dup が禁止されています。
 
@@ -526,7 +526,7 @@ step に 0 を指定した場合は例外 [[c:ArgumentError]] が発生します。
 
 self を返します。
 
-#@if (version >= "1.7.0")
+#@since 1.7.0
 ((<ruby 1.7 feature>)): このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
 た。これにより [[c:Float]] も step できるようになりました。
 
@@ -552,4 +552,11 @@ self を返します。
        1.3
        1.4   <- 1.5 が表示されない
 #@end
+
+#@# bc-rdoc: detected missing name: <=>
+#@# 追加されたバージョンは不明
+--- <=> other
+#@# -> 0 or nil
+
+Returns zero if num equals other, nil otherwise.
 
