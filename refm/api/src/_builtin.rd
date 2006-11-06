@@ -68,6 +68,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/StandardError.rd)
 #@include(_builtin/String.rd)
 #@include(_builtin/Struct.rd)
+#@include(_builtin/Struct__Tms.rd)
 #@include(_builtin/Symbol.rd)
 #@include(_builtin/SyntaxError.rd)
 #@include(_builtin/SystemCallError.rd)
