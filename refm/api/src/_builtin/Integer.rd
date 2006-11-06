@@ -104,7 +104,7 @@ self を返します。
 
 [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#times]] も参照。
 
-#@since 1.7.0
+#@since 1.8.0
 [[m:Numeric#step]] も参照。
 #@end
 
@@ -139,13 +139,13 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
 値を浮動小数点数([[c:Float]])に変換します。
 
 --- to_s
-#@since 1.7.0
+#@since 1.8.0
 --- to_s(base)
 #@end
 
 整数を 10 進文字列表現に変換します。
 
-#@since 1.7.0
+#@since 1.8.0
 引数を指定すれば、それを基数とした文字列表
 現に変換します。基数として 2 〜 36 以外を指定した場合は例外
 [[c:ArgumentError]] が発生します。

@@ -43,7 +43,7 @@
   # => [Foo::Bar::Baz, Foo::Bar, Foo]
 
 --- new
-#@since 1.7.0
+#@since 1.8.0
 --- new {|mod| ... }
 #@end
 
@@ -60,7 +60,7 @@
   Bar = foo
   p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
 
-#@since 1.7.0
+#@since 1.8.0
 ブロックが与えられると生成したモジュールをブロックの引数に渡し、モ
 ジュールのコンテキストでブロックを実行します。この場合も生成したモ
 ジュールを返します。
@@ -85,7 +85,7 @@ self が other の先祖であるとき 1
 を返します。
 
 親子関係にないクラス同士の比較では
-#@since 1.7.0
+#@since 1.8.0
 nil を返します。
 #@else
 その動作は不定です。
@@ -116,7 +116,7 @@ nil を返します。
   p Baz <=> Qux     # => -1
   p Qux <=> Baz     # => -1
 #@end
-#@since 1.7.0
+#@since 1.8.0
   p Baz <=> Qux     # => nil
   p Qux <=> Baz     # => nil
 #@else
@@ -226,10 +226,10 @@ obj が self と [[m:Object#kind_of?]]
 列を返します。スーパークラスやインクルードしているモジュールのクラ
 ス変数も含みます。
 
+[[m:Module.constants]],
 [[m:Kernel#local_variables]],
 [[m:Kernel#global_variables]],
 [[m:Object#instance_variables]],
-[[m:Module#Module.constants]],
 [[m:Module#constants]]
 も参照してください。
 
@@ -311,7 +311,7 @@ name は [[c:Symbol]] か文字列で指定します。
 します。
 スーパークラスやインクルードしているモジュールの定数も含みます。
 
-[[m:Module#Module.constants]] や
+[[m:Module.constants]] や
 [[m:Kernel#local_variables]],
 [[m:Kernel#global_variables]],
 [[m:Object#instance_variables]],
@@ -345,7 +345,7 @@ name は [[c:Symbol]] か文字列で指定します。
     end
   end
 
-#@since 1.7.0
+#@since 1.8.0
 --- include?(mod)
 
 self が モジュール mod をインクルードしていれば
@@ -407,10 +407,10 @@ self になるということです。つまり、そのモジュールの定義文の
 
 ただし、ローカル変数は module_eval の外側のスコープと共有し
 ます。
-#@since 1.6.8
-version 1.6.8 以降でブロックが与えられた場合は、定数とクラス変数
-のスコープも外側のスコープになります。
-#@end
+
+ブロックが与えられた場合は、定数とクラス変数のスコープも外側のスコープに
+なります。
+
 
 注: module_eval のブロック中でメソッドを定義する場合、
 [[m:Object#instance_eval]] と同様の制限があります。詳細はそちらの
@@ -418,7 +418,7 @@ version 1.6.8 以降でブロックが与えられた場合は、定数とクラス変数
 
 [[m:Object#instance_eval]],
 [[m:Module#class_eval]]
-[[m:Module#Module.new]] も参照してください。
+[[m:Module.new]] も参照してください。
 
 --- name
 --- to_s
@@ -453,7 +453,7 @@ version 1.6.8 以降でブロックが与えられた場合は、定数とクラス変数
 の一覧を配列で返します。
 
 instance_methods は、public_instance_methods と同じです。
-#@since 1.7.0
+#@since 1.8.0
 instance_methods は、public および
 protected メソッド名の一覧を配列で返します。
 #@end
@@ -501,7 +501,7 @@ inherited_too が真であれば、スーパークラスのメソッドも探索し
   p Bar.protected_instance_methods(true) - Object.protected_instance_methods(true)
 
   => 例1:
-#@since 1.7.0
+#@since 1.8.0
      ["protected_foo", "public_foo"]
 #@else
      ["public_foo"]
@@ -510,7 +510,7 @@ inherited_too が真であれば、スーパークラスのメソッドも探索し
      ["private_foo"]
      ["protected_foo"]
      例2:
-#@since 1.7.0
+#@since 1.8.0
      ["protected_foo", "public_foo"]
 #@else
      ["protected_foo"]
@@ -527,7 +527,7 @@ name で指定したクラスメソッド(クラスの特異メソッド) の可視性
 
 self を返します。
 
-#@since 1.7.0
+#@since 1.8.0
 --- private_method_defined?(name)
 --- protected_method_defined?(name)
 --- public_method_defined?(name)
@@ -539,6 +539,20 @@ self を返します。
 
 [[m:Module#method_defined?]]
 も参照してください。
+#@end
+
+#@since 1.8.6
+--- class_variable_defined?(symbol)
+#@# => true or false
+
+Returns true if the given class variable is defined in obj.
+
+   class Fred
+     @@foo = 99
+   end
+   Fred.class_variable_defined?(:@@foo)    #=> true
+   Fred.class_variable_defined?(:@@bar)    #=> false
+
 #@end
 
 == Private Instance Methods
@@ -570,7 +584,7 @@ Ruby で書くと以下のように定義できます。
       # append_features はプライベートメソッドなので
       # 直接 mod.append_features(self) とは書けない
       mod.__send__ :append_features, self
-#@since 1.7.0
+#@since 1.8.0
       # mod.__send__ :included, self
 #@end
     }
@@ -809,12 +823,12 @@ include は多重継承の代わりに用いられる Mix-in を実現するため
           from -:3:in `include'
           from -:3
 
-#@since 1.7.0
+#@since 1.8.0
 引数に複数のモジュールを指定した場合、最後
 の引数から逆順に include を行います。
 #@end
 
-#@since 1.7.0
+#@since 1.8.0
 --- included(class_or_module)
 
 self が include されたときに対象のクラスまたはモジュー
@@ -857,7 +871,7 @@ name には追加されたメソッドの名前が [[c:Symbol]] で渡されます。
 [[m:Object#singleton_method_added]]
 を使います。
 
-#@since 1.7.0
+#@since 1.8.0
 --- method_removed(name)
 
 メソッドが [[m:Module#remove_method]] により削
@@ -883,7 +897,7 @@ name には削除されたメソッド名が [[c:Symbol]] で渡されます。
 を使います。
 #@end
 
-#@since 1.7.0
+#@since 1.8.0
 --- method_undefined(name)
 
 メソッドが [[m:Module#undef_method]] または
@@ -1101,7 +1115,7 @@ self を返します。
 #@end
 
 [[unknown:クラス／メソッドの定義/undef]] との違いは、メソッド名を文字列または
-#@since 1.7.3
+#@since 1.8.0
 #@#see [ruby-dev:17894]
 [[c:Symbol]] で与える点です。
 #@else

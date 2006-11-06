@@ -1,7 +1,6 @@
 #@since 1.8.0
 = module Process::UID
 
-((<ruby 1.8 feature>))
 ユーザ ID を操作するメソッドを集めたモジュール。
 [[c:Process::GID]] と同じメソッドが定義されています。
 

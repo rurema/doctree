@@ -77,7 +77,7 @@ name を省略した場合 (第一引数が [[c:Symbol]] の場合)、
     Foo = Struct.new(:foo, :bar)
     p Foo.members      # => ["foo", "bar"]
 
-== Methods
+== Instance Methods
 
 --- [](nth)
 

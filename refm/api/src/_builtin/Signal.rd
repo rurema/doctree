@@ -1,11 +1,10 @@
-#@since 1.7.0
+#@since 1.8.0
 = module Signal
 
 UNIX のシグナル関連の操作を行うモジュールです。
 
 == Module Functions
 
-#@since 1.8.0
 --- list
 
 シグナル名とシグナル番号を対応づけた [[c:Hash]] オブジェクトを返し
@@ -74,5 +73,5 @@ trap は前回の trap で設定したハンドラを返します。
 例外 [[c:ArgumentError]] が発生します。例えばネイティブな
 Windows システム (mswin32, mingw など) で動く ruby では
 INT ILL FPE SEGV TERM BREAK ABRT EXIT しか定義されていません。
-#@end
+
 #@end

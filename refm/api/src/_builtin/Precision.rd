@@ -6,7 +6,7 @@
 
 == Singleton Methods
 
-#@since 1.7.0
+#@since 1.8.0
 --- included(module_or_class)
 
 Precision がインクルードされた時に呼ばれます。詳細は

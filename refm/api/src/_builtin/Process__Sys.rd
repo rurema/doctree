@@ -1,8 +1,6 @@
 #@since 1.8.0
 = module Process::Sys
 
-((<ruby 1.8 feature>))
-
 [[c:Process::UID]], [[c:Process::GID]] と異なり、
 ユーザ ID・グループ ID を操作するシステムコールを
 集めたモジュール。
