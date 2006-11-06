@@ -39,7 +39,6 @@ require を書かなくても使うことができます。
 #@include(_builtin/Marshal.rd)
 #@include(_builtin/MatchData.rd)
 #@include(_builtin/Math.rd)
-#@include(_builtin/Matrix.rd)
 #@include(_builtin/Method.rd)
 #@include(_builtin/Module.rd)
 #@include(_builtin/NameError.rd)
