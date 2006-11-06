@@ -1,4 +1,4 @@
-status: (none) -> complete
+status: (none) -> done
 
 LIBRARY_NAME                    OWNER           STATUS
 --------------------------------------------------------
@@ -68,6 +68,7 @@ _builtin/SignalException
 _builtin/StandardError
 _builtin/String
 _builtin/Struct                 okkez           done
+_builtin/Struct__Tms            aamine          done
 _builtin/Symbol                 okkez           done
 _builtin/SyntaxError
 _builtin/SystemCallError
@@ -164,7 +165,7 @@ net/ftptls
 net/http                        aamine
 net/https                       aamine
 net/imap
-net/pop                         aamine          complete
+net/pop                         aamine          done
 net/smtp                        aamine
 net/telnet
 net/telnets
@@ -181,7 +182,7 @@ LIBRARY_NAME                    OWNER           STATUS
 parsearg
 parsedate                       tadf            done
 pathname
-ping                            aamine          complete
+ping                            aamine          done
 pp                              sheepman        done
 prettyprint                     sheepman        done
 profile
