@@ -12,11 +12,9 @@
 複素数を扱うためのクラスです。
 
 このライブラリを require すると、Math モジュールが複素数対応に拡張されます。
-#@#= redefine Math
-#@#複素数対応に拡張されます。
-必要であるなら、対象となる複素数を極座標表示した時の
+対象となる複素数を以下のように極座標表示した時の
   z = a + b * i = r * exp(i * t)
-偏角 t は[-π,π]の範囲であると考えて関数は定義されます。
+偏角 t は[-π,π]の範囲であると考えて、関数は定義されます。
 [[m:Complex#arg]]を参照して下さい。
 以下が複素関数の定義です。
 
@@ -100,8 +98,8 @@ Vector および Matrix のそれぞれの項目を参照してください。
   
 
 --- %(c)
-複素数 c で除した余り(実部同士の演算結果 m1、虚部同士の演算結果 m2 )を複素数に
-Complex.new(m1, m2)にして返します。
+実部同士の演算結果 m1 と虚部同士の演算結果 m2 を複素数
+Complex.new(m1, m2)にして返します。つまり、
 
   z1 = a + b * i
   z2 = c + d * i
@@ -212,3 +210,39 @@ The imaginary part of a complex number, i.e. 0.
 --- conjugate
 共役をかえします。実数の場合はselfを返します。
 
+= redefine Math
+== Module Functions
+
+--- sqrt(z)
+
+--- exp(z)
+
+--- log(z)
+
+--- log10(z)
+
+--- cos(z)
+
+--- sin(z)
+
+--- tan(z)
+
+--- cosh(z)
+
+--- sinh(z)
+
+--- tanh(z)
+
+--- acos(z)
+
+--- asin(z)
+
+--- atan(z)
+
+--- atan2(z)
+
+--- acosh(z)
+
+--- asinh(z)
+
+--- atanh(z)
