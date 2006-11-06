@@ -288,8 +288,8 @@ Errno::EACCES となった場合には無視して実行を続けます。
 #@since 1.8.0
 --- times
 
-自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の
-積算を [[c:Struct]]::Tms のオブジェクトとして返します。
+自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の積算を
+[[c:Struct::Tms]] オブジェクトで返します。
 Struct::Tms は以下のメンバを持つ構造体クラスです。
 
   utime           # user time
@@ -297,8 +297,8 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
   cutime          # user time of children
   cstime          # system time of children
 
-時間の単位は秒で、浮動小数点数で与えられます。詳細は
-[[man:times(3)]] を参照してください。
+時間の単位は秒で、浮動小数点数で与えられます。
+詳細は [[c:Struct::Tms]] を参照してください。
 #@end
 
 --- wait
