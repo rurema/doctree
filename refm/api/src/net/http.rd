@@ -1,6 +1,5 @@
 汎用データ転送プロトコル HTTP を扱うライブラリです。
-実装は [RFC2616] [[m:URL:http:#/www.ietf.org/rfc/rfc2616.txt]]
-に基きます。
+実装は [[RFC:2616]] に基きます。
 
 === 使用例
 
@@ -28,7 +27,7 @@
                          'querytype=subject&target=ruby')
   }
 
-(参照: [[unknown:"net/http"/フォームの値の区切り文字について]])
+(参照: フォームの値の区切り文字について)
 
 ==== プロクシ経由のアクセス
 
@@ -59,7 +58,7 @@ limit 回数以上リダイレクトしたらエラーにします。
   require 'net/http'
   Net::HTTP.version_1_2    # おまじない
   
-  def fetch( uri_str, limit = 10 )
+  def fetch(uri_str, limit = 10)
     # 適切な例外クラスに変えるべき
     raise ArgumentError, 'http redirect too deep' if limit == 0
     
@@ -70,35 +69,6 @@ limit 回数以上リダイレクトしたらエラーにします。
     else
       response.error!
     end
-  end
-  
-  print fetch('http://www.ruby-lang.org')
-
-Ruby 1.6.7 未満には URI クラスが標準添付されていないので、別途調達するか、
-あるいはいいかげんながら以下のようにしてください。
-
-  require 'net/http'
-  Net::HTTP.version_1_2   # おまじない
-  
-  def fetch( uri_str, limit = 10 )
-    # 適切な例外クラスに変えるべき
-    raise ArgumentError, 'http redirect too deep' if limit == 0
-    
-    response = Net::HTTP.get_response(*split_uri(uri_str))
-    case response
-    when Net::HTTPSuccess     then response
-    when Net::HTTPRedirection then fetch(response['location'], limit - 1)
-    else
-      response.error!
-    end
-  end
-  
-  def split_uri( uri_str )
-    m = %r<http://([^/]+)>.match(uri_str) or raise ArgumentError, "cannot parse URI: #{uri_str}"
-    host = m[1].strip
-    path = m.post_match
-    path = '/' if path.empty?
-    return host, path
   end
   
   print fetch('http://www.ruby-lang.org')
@@ -156,25 +126,18 @@ get、head、post メソッドで発生する HTTP プロトコル関連の例外として、
 response メソッドによってエラーの原因となったレスポンスオブジェクトを
 得ることができます。
 
-  * ProtoRetriableError
-
+: ProtoRetriableError
     HTTP ステータスコード 3xx を受け取った時に発生します。
     リソースが移動したなどの理由により、リクエストを完了させるには更な
     るアクションが必要になります。
-
-  * ProtoFatalError
-
+: ProtoFatalError
     HTTP ステータスコード 4xx を受け取った時に発生します。
     クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
     れた(認証が必要、リソースが存在しないなどで)ことを示します。
-
-  * ProtoServerError
-
+: ProtoServerError
     HTTP ステータスコード 5xx を受け取った時に発生します。
     サーバがリクエストを処理中にエラーが発生したことを示します。
-
-  * ProtoUnknownError
-
+: ProtoUnknownError
     プロトコルのバージョンが上がった、あるいはライブラリのバグなどで、
     ライブラリが対応していない状況が発生しました。
 
@@ -182,22 +145,21 @@ response メソッドによってエラーの原因となったレスポンスオブジェクトを
 
 POSTで application/x-www-form-urlencoded として複数のフォームの値を送る場合、
 現在広く行なわれているのは、 name0=value0&name1=value1 のようにアンパサンド
-`&' で区切るやりかたです。
+(`&') で区切るやりかたです。
 この方法は、RFC1866 Hypertext Markup Language - 2.0 で初めて公式に登場し、
-HTML 4.01 Specification の
-[[unknown:17.13.4 Form content types]]
+HTML 4.01 Specification の 17.13.4 Form content types
 でもそのように書かれています。
 
 ところが、同じ HTML 4.01 Specification の
-[[unknown:B.2.2 Ampersands in URI attribute values]]
-では、この `&' がSGMLの文字実体参照で用いられることが指摘されており、
+B.2.2 Ampersands in URI attribute values では、
+この `&' がSGMLの文字実体参照で用いられることが指摘されており、
 CGIやサーバの実装者に対し `&' の代わりに
 セミコロン `;' をサポートすることを奨めています。
 
 しかし、実際には `;' を解釈しないCGIやサーバもまだまだ見受けられるため
 このリファレンスマニュアルでは例として `&' を用いました。
 
-なお Ruby 標準の [[lib:cgi]] ライブラリでは & と ; の両方サポートしていますので、
+なお Ruby 標準の [[lib:cgi]] ライブラリでは '&' と ';' の両方サポートしていますので、
 [[lib:cgi]] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする
 必要はありません。
 

@@ -1,14 +1,12 @@
 = class Net::HTTPRequest < Object
 
-[[lib:"net/http"]]
+HTTP リクエストを抽象化するクラスです。
+Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
 
-HTTP リクエストを抽象化するクラスです。Net::HTTPRequest は抽象クラス
-なので実際にはサブクラスの
-
-  * Net::HTTP::Get
-  * Net::HTTP::Post
-  * Net::HTTP::Head
-  * Net::HTTP::Put
+  * [[c:Net::HTTP::Get]]
+  * [[c:Net::HTTP::Post]]
+  * [[c:Net::HTTP::Head]]
+  * [[c:Net::HTTP::Put]]
 
 を使用してください。
 
@@ -28,55 +26,40 @@ HTTP リクエストオブジェクトを生成します。リクエストする path を文字列で与える。
 
 == Instance Methods
 
---- []( key )
+--- [](key)
 
 key ヘッダフィールドの文字列。
 key は大文字小文字を区別しません。
 
---- []( key )
+--- [](key)
 
 key ヘッダフィールドに val をセットします。
 key は大文字小文字を区別しません。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- add_header(key, val)
-
-((<ruby 1.9 feature>))
 
 key ヘッダフィールドに val をセットします。
 #@end
 
---- basic_auth( account, password )
+--- basic_auth(account, password)
 
 Authrization: ヘッダを basic auth 用にセットします。
 
-#@if (version >= "1.9.0")
+#@since 1.8.0
 --- body
-
-((<ruby 1.9 feature>))
-#@end
-
-#@if (version >= "1.9.0")
 --- body=(body)
-
-((<ruby 1.9 feature>))
 
 サーバに送るリクエストのエンティティボディを文字列で設定します。
 #@end
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- body_stream
+--- body_stream=(f)
 
-((<ruby 1.9 feature>))
-#@end
-
-#@if (version >= "1.9.0")
---- body_stream=()
-
-((<ruby 1.9 feature>))
-
-サーバに送るリクエストのエンティティボディを [[c:IO]] オブジェクトなどの
-ストリームで設定します。read(size) メソッドが定義されている必要があります。
+サーバに送るリクエストのエンティティボディを
+[[c:IO]] オブジェクトなどのストリームで設定します。
+read(size) メソッドが定義されている必要があります。
 #@end
 
 --- content_length
@@ -105,24 +88,33 @@ key ヘッダフィールドを削除します。
 
 --- proxy_basic_auth(account, password)
 
-Proxy-Authrization: ヘッダを Proxy 認証のためにセットします。
+Proxy 認証のために Proxy-Authrization: ヘッダをセットします。
 
 --- range
 
 Range: ヘッダの示す範囲を Range オブジェクトで返します。
 
 --- range=(r)
---- set_range( i, len )
+--- set_range(i, len)
 
 範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
 r は Range オブジェクト、i, len は始点と長さです。
 
 --- request_body_permitted?
 
-リクエストにエンティティボディを一緒に送ることが許されている HTTP メソッド
-(POST など)の場合真を返します。
+リクエストにエンティティボディを一緒に送ることが許されている
+HTTP メソッド (POST など)の場合真を返します。
 
 --- response_body_permitted?
 
-サーバからのレスポンスにエンティティボディを含むことが許されている HTTP メソッド
-(GET, POST など)の場合真を返します。
+サーバからのレスポンスにエンティティボディを含むことが許されている
+HTTP メソッド (GET, POST など)の場合真を返します。
+
+
+= class Net::HTTP::Head < Net::HTTPRequest
+
+= class Net::HTTP::Get < Net::HTTPRequest
+
+= class Net::HTTP::Post < Net::HTTPRequest
+
+= class Net::HTTP::Put < Net::HTTPRequest

@@ -1,36 +1,34 @@
 = class Net::HTTP < Object
 
-[[lib:"net/http"]]
-
 HTTP のクライアントのためのクラスです。
 
 == Class Methods
 
---- new( address, port = 80, proxy_addr = nil, proxy_port = nil )
+--- new(address, port = 80, proxy_addr = nil, proxy_port = nil)
 
 新しい HTTP オブジェクトを生成します。address は HTTP サーバーの FQDN で、
 port は接続するポート番号です。このメソッドではまだ接続はしません。
 
 proxy_addr を与えるとプロクシを介して接続するオブジェクトを生成します。
 
---- start( address, port = 80, proxy_addr = nil, proxy_port = nil )
---- start( address, port = 80, proxy_addr = nil, proxy_port = nil ) {|http| .... }
+--- start(address, port = 80, proxy_addr = nil, proxy_port = nil)
+--- start(address, port = 80, proxy_addr = nil, proxy_port = nil) {|http| .... }
 
 以下と同じです。
 
   Net::HTTP.new(address, port, proxy_addr, proxy_port).start(&block)
 
---- get( address, path, port = 80 )
+--- get(address, path, port = 80)
 
 ホスト address の port 番ポートに接続して path の表現する
 エンティティボディを取得し、文字列で返します。
 
---- get_print( address, path, port = 80 )
+--- get_print(address, path, port = 80)
 
 ホスト address の port 番ポートに接続して path の表現する
 エンティティボディを取得したうえ、$stdout に << で出力します。
 
---- Proxy( address, port = 80 )
+--- Proxy(address, port = 80)
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 このクラスは Net::HTTP を継承しているので Net::HTTP と全く
@@ -40,8 +38,8 @@ Proxy 経由で http サーバに接続するためのクラスを作成し返します。
   address が nil のときは Net::HTTP クラスをそのまま返します。
 
   require 'net/http'
-  proxy_class = Net::HTTP::Proxy( 'proxy.example.com', 8080 )
-  http = proxy_class.new( 'www.ruby-lang.org' )
+  proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
+  http = proxy_class.new('www.ruby-lang.org')
   http.start {|h|
     h.get('/ja/') # proxy.example.com 経由で接続します。
   }
@@ -86,7 +84,7 @@ HTTP セッションが開始されていたら真。
 --- read_timeout
 --- read_timeout=(seconds)
 
-読みこみ (read(1) 一回) でブロックしてよい最大秒数。
+読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数。
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
 --- finish
@@ -108,8 +106,8 @@ HTTP セッションを終了します。セッション開始前にこのメソッドが
 プロクシ経由で接続する HTTP オブジェクトならプロクシのポート。
 そうでないなら nil。
 
---- get( path, header = nil )
---- get( path, header = nil ) {|str| .... }
+--- get(path, header = nil)
+--- get(path, header = nil) {|str| .... }
 
 サーバ上の path にあるエンティティを取得します。また header が nil
 でなければ、リクエストを送るときにその内容を HTTP ヘッダとして書き
@@ -127,24 +125,24 @@ HTTP セッションを終了します。セッション開始前にこのメソッドが
 HTTPResponse は例外オブジェクトから err.response で得ることができます。
 一方 1.2 では全く例外を発生しません。
 
-  # version 1.1 (bundled with Ruby 1.6)
+  # net/http version 1.1 (Ruby 1.6.x)
   response, body = http.get( '/index.html' )
   
-  # version 1.2 (bundled with Ruby 1.7 or later)
-  response = http.get( '/index.html' )
+  # net/http version 1.2 (Ruby 1.8.x or later)
+  response = http.get('/index.html')
   
   # compatible in both version
-  response , = http.get( '/index.html' )
+  response , = http.get('/index.html')
   response.body
   
-  # using block
-  File.open( 'save.txt', 'w' ) {|f|
-      http.get( '/~foo/', nil ) do |str|
-        f.write str
-      end
+  # compatible, using block
+  File.open('save.txt', 'w') {|f|
+    http.get('/~foo/', nil) do |str|
+      f.write str
+    end
   }
 
---- head( path, header = nil )
+--- head(path, header = nil)
 
 サーバ上の path にあるエンティティのヘッダのみを取得します。
 また header が nil でなければリクエストを送るときにその内容を
@@ -158,20 +156,21 @@ HTTPResponse は例外オブジェクトから err.response で得ることができます。
 一方 1.2 では全く例外を発生しません。
 
   response = nil
-  Net::HTTP.start( 'some.www.server', 80 ) {|http|
-      response = http.head( '/index.html' )
+  Net::HTTP.start('some.www.server', 80) {|http|
+    response = http.head('/index.html')
   }
   p response['content-type']
 
---- post( path, data, header = nil, dest = nil )
---- post( path, data, header = nil ) {|str| .... }
+--- post(path, data, header = nil, dest = nil)
+--- post(path, data, header = nil) {|str| .... }
 
 サーバ上の path にあるエンティティに対し文字列 data を
 送ります。
 
-戻り値は get と同じように、バージョン 1.1 では HTTPResponse と
-エンティティボディ文字列の 二要素の配列です。1.2 では HTTPResponse
-ただひとつのみです。この場合、エンティティボディは response.body で得られます。
+戻り値は get と同じように、net/http バージョン 1.1 では HTTPResponse と
+エンティティボディ文字列の二要素の配列です。
+net/http 1.2 では HTTPResponse ただひとつのみです。
+この場合、エンティティボディは response.body で得られます。
 
 header は get メソッドと同じです。
 
@@ -191,25 +190,24 @@ dest とブロックを同時に与えてはいけません。同時に与えた場合は例外 ArgumentError
 HTTPResponse は例外オブジェクトから err.response で得ることができます。
 一方 1.2 では全く例外を発生しません。
 
-  # version 1.1
-  response, body = http.post( '/cgi-bin/search.rb', 'query=subject&target=ruby' )
+  # net/http version 1.1 (Ruby 1.6.x)
+  response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
-  # version 1.2
-  response = http.post( '/cgi-bin/search.rb', 'query=subject&target=ruby' )
+  # version 1.2 (Ruby 1.8.x or later)
+  response = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
   # compatible in both version
-  response , = http.post( '/cgi-bin/search.rb', 'query=subject&target=ruby' )
+  response , = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
-  # using block
-  File.open( 'save.html', 'w' ) {|f|
-      http.post( '/cgi-bin/search.rb',
-           'query=subject&target=ruby' ) do |str|
-        f.write str
-      end
+  # compatible, using block
+  File.open('save.html', 'w') {|f|
+    http.post('/cgi-bin/search.rb', 'query=subject&target=ruby') do |str|
+      f.write str
+    end
   }
 
---- request_get( path, header = nil )
---- request_get( path, header = nil ) {|response| .... }
+--- request_get(path, header = nil)
+--- request_get(path, header = nil) {|response| .... }
 
 path にあるエンティティを取得します。HTTPResponse
 オブジェクトを返します。
@@ -220,23 +218,23 @@ path にあるエンティティを取得します。HTTPResponse
 このメソッドは HTTP プロトコルに関連した例外は発生させません。
 
   # example
-  response = http.request_get( '/index.html' )
+  response = http.request_get('/index.html')
   p response['content-type']
   puts response.body          # body is already read
   
   # using block
-  http.request_get( '/index.html' ) {|response|
-      p response['content-type']
-      response.read_body do |str|   # read body now
-        print str
-      end
+  http.request_get('/index.html') {|response|
+    p response['content-type']
+    response.read_body do |str|   # read body now
+      print str
+    end
   }
 
---- request_post( path, data, header = nil )
---- request_post( path, data, header = nil ) {|response| .... }
+--- request_post(path, data, header = nil)
+--- request_post(path, data, header = nil) {|response| .... }
 
-path にあるエンティティを取得します。HTTPResponse
-オブジェクトを返します。
+path にあるエンティティを取得します。
+HTTPResponse オブジェクトを返します。
 
 ブロックとともに呼び出されたときは、ボディを読みこむ前に
 HTTPResponse オブジェクトをブロックに渡します。
@@ -244,12 +242,12 @@ HTTPResponse オブジェクトをブロックに渡します。
 このメソッドは HTTP プロトコルに関連した例外は発生させません。
 
   # example
-  response = http.post2( '/cgi-bin/nice.rb', 'datadatadata...' )
+  response = http.post2('/cgi-bin/nice.rb', 'datadatadata...')
   p response.status
   puts response.body          # body is already read
   
   # using block
-  http.post2( '/cgi-bin/nice.rb', 'datadatadata...' ) {|response|
+  http.post2('/cgi-bin/nice.rb', 'datadatadata...') {|response|
     p response.status
     p response['content-type']
     response.read_body do |str|   # read body now
@@ -257,8 +255,8 @@ HTTPResponse オブジェクトをブロックに渡します。
     end
   }
 
---- request( request [, data] )
---- request( request [, data] ) {|response| .... }
+--- request(request [, data])
+--- request(request [, data]) {|response| .... }
 
 HTTPResquest オブジェクト request を送信します。POST/PUT の時は data も
 与えられます (POST/PUT 以外で data を与えると ArgumentError を発生します)。
