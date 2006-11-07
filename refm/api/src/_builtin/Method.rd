@@ -132,7 +132,7 @@ method は、メソッド名を表します。
   p Bar.new.method(:foo)        # => #<Method: Bar(Foo)#foo>
   p Bar.new.method(:bar)        # => #<Method: Bar(Bar)#bar>
 
-#@since 1.7.0
+#@since 1.8.0
 klass1 と klass2 が同じ場合は以下の形式になります。
   #<Method: klass1#method>                        (形式2)
 
