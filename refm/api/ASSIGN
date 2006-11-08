@@ -73,11 +73,11 @@ _builtin/SyntaxError
 _builtin/SystemCallError
 _builtin/SystemExit
 _builtin/SystemStackError
-_builtin/Thread
-_builtin/ThreadError
-_builtin/ThreadGroup
-_builtin/Time
-_builtin/TrueClass
+_builtin/Thread                 sheepman
+_builtin/ThreadError            sheepman
+_builtin/ThreadGroup            sheepman
+_builtin/Time                   
+_builtin/TrueClass              
 _builtin/TypeError
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError
