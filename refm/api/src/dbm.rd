@@ -6,13 +6,16 @@ NDBM ファイルをアクセスするクラス。キー、データともに文字列でなければな
 らないという制限と、データがファイルに保存されるという点を除いては
 Hash クラスと全く同様に扱うことがでます。
 
-=== 使いかた
+#@#=== 使いかた
 
-  require 'dbm'
+#@#  require 'dbm'
 
 == Class Methods
 
 --- open(dbname[, mode[, flags]])
+--- open(dbname[, mode[, flags]]) {|db| ...}
+
+#@todo
 
 dbname で指定したデータベースをモードを
 mode に設定してオープンします。mode の省
@@ -21,7 +24,6 @@ mode に設定してオープンします。mode の省
 nil を返します。
 
 #@if (version >= "1.8.2")
-((<ruby 1.8.2 feature>)):
 flags 引数を指定できます。
 flags には以下のいずれかを指定します。
   * DBM::READER : データベースの読み込みのみを行う
@@ -50,13 +52,25 @@ DBM ファイルを空にします。
 
 DBM ファイルをクローズします。以後の操作は例外を発生させます。
 
+#@since 1.8.3
+--- closed?
+
+#@todo
+
+#@end
+
 --- delete(key)
 
 key をキーとする項目を削除します。
 
+--- reject! { |key, value|  ...  }
 --- delete_if { |key, value|  ...  }
 
 ブロックを評価した値が真であれば該当する項目を削除します。
+
+--- reject
+
+#@todo
 
 --- each {|key, value|  ...  }
 --- each_pair {|key, value|  ...  }
@@ -78,6 +92,7 @@ key をキーとする項目を削除します。
 --- has_key?(key)
 --- key?(key)
 --- include?(key)
+--- member?(key)
 
 key がデータベース中に存在する時、真を返します。
 
@@ -86,15 +101,15 @@ key がデータベース中に存在する時、真を返します。
 
 value を値とする組がデータベース中に存在する時、真を返します。
 
+#@if (version < "1.9.0")
 --- indexes(key_1, ... )
-
-((<obsolete>))
-
 --- indices(key_1, ... )
 
-((<obsolete>))
+このメソッドは obsolete です。
 
 各引数の値をキーとする要素を含む配列を返します。
+
+#@end
 
 --- keys
 
@@ -114,12 +129,30 @@ value を値とする組がデータベース中に存在する時、真を返します。
 
 データベース中に存在する値全てを含む配列を返します。
 
+--- replace(other)
+
+#@todo
+
+--- fetch
+
+--- store
+
+--- select
+
+--- values_at
+
+--- invert
+
+--- update
+
+--- to_a
+
+--- to_hash
+
 == Constants
 
 #@if (version >= "1.8.2")
 --- READER
-
-((<ruby 1.8.2 feature>))
 
 読み込みモードでオープンします．
 #@end
@@ -127,15 +160,11 @@ value を値とする組がデータベース中に存在する時、真を返します。
 #@if (version >= "1.8.2")
 --- WRITER
 
-((<ruby 1.8.2 feature>))
-
 書き込みモードでオープンします．
 #@end
 
 #@if (version >= "1.8.2")
 --- WRCREAT
-
-((<ruby 1.8.2 feature>))
 
 書き込みモードで、すでにファイルが存在しなかったら作ります．
 #@end
@@ -143,7 +172,8 @@ value を値とする組がデータベース中に存在する時、真を返します。
 #@if (version >= "1.8.2")
 --- NEWDB
 
-((<ruby 1.8.2 feature>))
-
 書き込みモードで、すでにファイルが存在したら削除して作り直します．
 #@end
+
+--- VERSION
+#@todo
