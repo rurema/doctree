@@ -73,9 +73,9 @@ _builtin/SyntaxError
 _builtin/SystemCallError
 _builtin/SystemExit
 _builtin/SystemStackError
-_builtin/Thread                 sheepman
-_builtin/ThreadError            sheepman
-_builtin/ThreadGroup            sheepman
+_builtin/Thread                 sheepman        done
+_builtin/ThreadError            sheepman        done
+_builtin/ThreadGroup            sheepman        done
 _builtin/Time                   
 _builtin/TrueClass              
 _builtin/TypeError
