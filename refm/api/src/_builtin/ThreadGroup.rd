@@ -21,7 +21,7 @@ ThreadGroup クラスによりグループに属する Thread をまとめて
     puts "all threads finished"
 
 対象の Thread が Thread を起こす可能性がある場合
-([[m:thread#Thread.exclusive]]参照)
+([[m:Thread.exclusive]]参照)
 
     Thread.exclusive do
       (ThreadGroup::Default.list - [Thread.current]).each {|th| th.join}
@@ -41,11 +41,8 @@ ThreadGroup クラスによりグループに属する Thread をまとめて
 
 self を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- enclose
-
-((<ruby 1.8 feature>))
-
 
 ThreadGroup への Thread の追加/削除を(freeze せずに)禁止します。
 (追加/削除を行うと例外 [[c:ThreadError]] が発生します)
@@ -73,11 +70,8 @@ self を返します。
   => -:8:in `add': can't move from the enclosed thread group (ThreadError)
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- enclosed?
-
-((<ruby 1.8 feature>))
-
 
 [[m:ThreadGroup#enclose]] の状態を真偽値で返します。
 freeze された ThreadGroup に Thread の追加/削除はできなくなりますが、
@@ -96,12 +90,12 @@ enclosed? は false を返します。
 --- list
 
 self に属するスレッドの配列を返します。
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)): version 1.7 では、aborting 状態であるスレッド
+#@since 1.8.0
+version 1.8 では、aborting 状態であるスレッド
 も要素に含まれます。つまり「生きている」スレッドの配列を返します。
 #@else
 終了処理中(aborting)、や終了状態(dead)であるスレッドは要素に含まれ
-ません([[m:Thread#Thread.list]]と同じです)。
+ません([[m:Thread.list]]と同じです)。
 #@end
 
 == Constants
