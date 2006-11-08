@@ -7,7 +7,7 @@ Thread を使うことで並行プログラミングが可能になります。スレッド
 装では Ruby インタプリタは時分割でスレッドを実行しますので、スレッドを
 使うことで実行速度が速くなることはありません。
 
-プログラムの開始と同時に生成されるスレッドを((*メインスレッド*)) と呼
+プログラムの開始と同時に生成されるスレッドを「メインスレッド」と呼
 びます。なんらかの理由でメインスレッドが終了する時には、他の全てのスレッ
 ドもプログラム全体も終了します。ユーザからの割込みによって発生した例外
 はメインスレッドに送られます。
@@ -20,11 +20,11 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 リングが行われ、その時点で実行可能なスレッドのうち最も優先順位が高いも
 のにコンテキストが移ります。
 
-スレッドと例外
+=== スレッドと例外
 
 あるスレッドで例外が発生し、そのスレッド内で rescue で捕捉されなかっ
 た場合、通常はそのスレッドだけがなにも警告なしに終了されます。ただ
-しその例外で終了するスレッドを Thread#join で待っている他の
+しその例外で終了するスレッドを [[m:Thread#join]] で待っている他の
 スレッドがある場合、その待っているスレッドに対して、同じ例外が再度
 発生します。
 
@@ -44,7 +44,7 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 
   * 組み込み変数 [[m:$DEBUG]] を真に設定する(デバッグモード)
     ruby インタプリタを [[unknown:Rubyの起動/-d]] 付きで起動した場合も同様。
-  * [[m:Thread#Thread.abort_on_exception]] でフラグを設定する。
+  * [[m:Thread.abort_on_exception]] でフラグを設定する。
   * [[m:Thread#abort_on_exception]] で指定
     したスレッドのフラグを設定する。
 
@@ -69,7 +69,7 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 
 : sleep (停止状態)
 
-[[m:Thread#Thread.stop]] や [[m:Thread#join]] により停止されたスレッ
+[[m:Thread.stop]] や [[m:Thread#join]] により停止されたスレッ
 ドはこの状態になります。
 
 この状態のスレッドは「生きて」います。
@@ -107,13 +107,13 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 (stop)した場合やシグナルに割り込まれた場合には、自動的に
 false になります。
 
-ただし、[[m:Thread#Thread.new]] によりスレッドを生成した場合にはそ
-のスレッドは実行されます。また、[[m:Thread#Thread.pass]] により明
+ただし、[[m:Thread.new]] によりスレッドを生成した場合にはそ
+のスレッドは実行されます。また、[[m:Thread.pass]] により明
 示的に切替えることもできます。
 
 参照の場合は真偽値を、代入形式では右辺 newstate を、返します。
 
-((*注意*)): I/O や GC、拡張ライブラリがからむとこのフラグは無視さ
+注意: I/O や GC、拡張ライブラリがからむとこのフラグは無視さ
 れることもあります。排他制御を行うにはこのメソッドに頼らず
 [[c:Mutex]] や [[c:Monitor]] を使うべきです。
 
@@ -148,8 +148,8 @@ thread を返します。 exit と同様 Thread の終了結果を設定しません
 生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
 の配列を返します。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)): version 1.7 では、aborting 状態であるスレッド
+#@since 1.8.0
+version 1.8 では、aborting 状態であるスレッド
 も要素に含まれます。つまり「生きている」スレッドの配列を返します
 #@end
 
@@ -238,6 +238,20 @@ val を返します。
 
 self を返します。
 
+#@since 1.8.6
+--- thr.exit!
+--- thr.kill!
+--- thr.terminate!
+#@#   => thr
+
+Terminates thr without calling ensure clauses and schedules another
+thread to be run, returning the terminated Thread. If this is
+the main thread, or the last thread, exits the process.
+
+See [[m:Thread#exit]] for the safer version.
+
+#@end
+
 --- group
 
 スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
@@ -258,8 +272,8 @@ self を返します。
 
 self を返します。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)): 引数 limit を指定すると、limit 秒でタイム
+#@since 1.8.0
+引数 limit を指定すると、limit 秒でタイム
 アウトし、nil を返します。
 #@end
 
