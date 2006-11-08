@@ -108,7 +108,7 @@ csv
 curses
 date                            tadf            done
 date2
-dbm                             sheepman
+dbm                             sheepman        done
 debug
 delegate
 digest
@@ -138,7 +138,7 @@ ftools
 
 LIBRARY_NAME                    OWNER           STATUS
 ---------------------------------------------------------
-gdbm                            sheepman
+gdbm                            sheepman        done
 generator
 getoptlong
 getopts
