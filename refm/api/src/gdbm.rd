@@ -22,7 +22,6 @@ flags には、GDBM::FAST, GDBM::SYNC, GDBM::NOLOCK を
 の論理和を指定します。デフォルト値は指定なし(つまり0)です。
 
 #@if (version >= "1.8.2")
-((<ruby 1.8.2 feature>)):
 flags に
 GDBM::READER, GDBM::WRITER, GDBM::WRCREAT, GDBM::NEWDB
 のどれかを与えて読み書きのモードを指定できます。
@@ -63,6 +62,10 @@ DBM ファイルを空にします。
 --- close
 
 DBM ファイルをクローズします。以後の操作は例外を発生させます。
+
+#@since 1.8.3
+--- closed?
+#@end
 
 --- delete(key)
 --- delete(key) {|key| ... }
@@ -121,15 +124,14 @@ value を値とする組がデータベース中に存在する時、真を返します。
 
 [[m:Hash#index]] と同じです。
 
+#@if (version < "1.9.0")
 --- indexes(key_1, ... )
-
-((<obsolete>))
-
 --- indices(key_1, ... )
 
-((<obsolete>))
+このメソッドはobsoleteです。
 
 各引数の値をキーとする要素を含む配列を返します。
+#@end
 
 --- invert
 
@@ -163,6 +165,8 @@ GDBM では、要素の削除を行っても DB ファイルのサイズは減少しません(削
 DBM の内容を other の内容で置き換えます。
 other は each_pair メソッドを持つオブジェクトで
 なければなりません。
+
+--- select
 
 --- shift
 
@@ -240,9 +244,6 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 --- READER
 
 [[m:GDBM.open]] の第3引数に指定します。
-
-((<ruby 1.8.2 feature>))
-
 読み込みモードでオープンします。
 #@end
 
@@ -250,9 +251,6 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 --- WRITER
 
 [[m:GDBM.open]] の第3引数に指定します。
-
-((<ruby 1.8.2 feature>))
-
 書き込みモードでオープンします。
 #@end
 
@@ -260,9 +258,6 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 --- WRCREAT
 
 [[m:GDBM.open]] の第3引数に指定します。
-
-((<ruby 1.8.2 feature>))
-
 書き込みモードで、すでにファイルが存在しなかったら作ります。
 #@end
 
@@ -270,8 +265,5 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 --- NEWDB
 
 [[m:GDBM.open]] の第3引数に指定します。
-
-((<ruby 1.8.2 feature>))
-
 書き込みモードで、すでにファイルが存在したら削除してから作り直します。
 #@end
