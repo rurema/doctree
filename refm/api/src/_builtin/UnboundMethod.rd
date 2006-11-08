@@ -36,7 +36,7 @@
   class Foo
     def foo
       p :foo
-    end
+      end
     @@orig_foo = instance_method :foo
     def foo
       p :bar
@@ -51,8 +51,7 @@
 
 == Instance Methods
 
-#@if (version >= "1.8.0")
-#@else
+#@if (version < "1.8.0")
 --- [](args, ...)
 --- call(args, ...)
 --- call(args, ...) { ... }
@@ -67,8 +66,6 @@ UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
     Foo.instance_method(:foo).call
 
     # => -:5:in `call': you cannot call unbound method; bind first (TypeError)
-
-#@#    ((<ruby 1.8 feature>)): このメソッドはなくなりました。
 #@end
 
 --- bind(obj)
@@ -96,8 +93,7 @@ self を obj にバインドして bound method オブジェクト
     p m.bind(Foo.new)               # => #<Method: Foo(Foo)#foo>
 
     # Foo のサブクラス Bar のインスタンスをレシーバとする Method
-#@if (version >= "1.8.0")
-#@else
+#@if (version < "1.8.0")
     # オブジェクトを生成(これは許されない)
 #@end
     #@#  ruby 1.8 feature: 許されるようになりました
@@ -143,20 +139,46 @@ self を obj にバインドして bound method オブジェクト
     end
     p m.bind(obj)                   # => -:27:in `bind': method `foo' overridden (TypeError)
 
-#@if (version >= "1.7.0")
-#@else
+#@if (version < "1.8.0")
 --- to_proc
 
 self を call する [[c:Proc]] オブジェクトを生成して返します。
-
-#@#    ((<ruby 1.7 feature>)): このメソッドはなくなりました。
 #@end
 
-#@if (version >= "1.8.0")
-#@else
+#@if (version < "1.8.0")
 --- unbind
 
 self を返します。
-
-#@#    ((<ruby 1.8 feature>)): このメソッドはなくなりました。
 #@end
+
+--- arity   
+#@# => fixnum
+
+Returns an indication of the number of arguments accepted by
+a method. Returns a nonnegative integer for methods that take
+a fixed number of arguments. For Ruby methods that take a variable
+number of arguments, returns -n-1, where n is the number of required
+arguments. For methods written in C, returns -1 if the call takes
+a variable number of arguments.
+
+   class C
+     def one;    end
+     def two(a); end
+     def three(*a);  end
+     def four(a, b); end
+     def five(a, b, *c);    end
+     def six(a, b, *c, &d); end
+   end
+   c = C.new
+   c.method(:one).arity     #=> 0
+   c.method(:two).arity     #=> 1
+   c.method(:three).arity   #=> -1
+   c.method(:four).arity    #=> 2
+   c.method(:five).arity    #=> -3
+   c.method(:six).arity     #=> -3
+
+   "cat".method(:size).arity      #=> 0
+   "cat".method(:replace).arity   #=> 1
+   "cat".method(:squeeze).arity   #=> -1
+   "cat".method(:count).arity     #=> -1
+
