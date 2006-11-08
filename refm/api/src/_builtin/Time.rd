@@ -2,7 +2,7 @@
 
 include Comparable
 
-時刻オブジェクト。[[m:Time#Time.now]] は現在の時刻を返します。
+時刻オブジェクト。[[m:Time.now]] は現在の時刻を返します。
 [[m:File#stat]] の返すファイルのタイムスタンプは Time
 オブジェクトです。
 
@@ -27,7 +27,7 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
 
 また、Time オブジェクトは協定世界時と地方時のどちらのタイムゾー
 ンを使用するかのフラグを内部に保持しています。ただし、この情報は
-[[m:Marshal#Marshal.dump]] では保存されず、[[m:Marshal#Marshal.load]]
+[[m:Marshal.dump]] では保存されず、[[m:Marshal.load]]
 で読み込んだ Time オブジェクトのタイムゾーンは常に地方時になりま
 す。
 
@@ -46,7 +46,7 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
   # => "UTC"
 #@end
 
-[[unknown:time]] ライブラリによって、[[m:time#Time.parse]], [[m:time#Time.rfc2822]], [[m:time#Time.httpdate]], [[m:time#Time.iso8601]] 等が拡張されます。
+[[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
 
 メソッド
 [[m:Time#sec]], 
@@ -117,17 +117,19 @@ isdst には夏時間(Daylight Saving Time (Summer Time))があるか
 --- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
 
 引数で指定した地方時の Time オブジェクトを返します。引数の扱
-いは [[m:Time#Time.gm]] と同じです。
+いは [[m:Time.gm]] と同じです。
 
 --- new
 --- now
 
 現在時刻の Time オブジェクトを返します。
 
---- times  ((<obsolete>))
+--- times  
+
+このメソッドは obsolete です。
 
 自身のプロセスとその子プロセスが消費したユーザ/システム CPU
-時間の積算を [[c:Struct]]::Tms のオブジェクトとして返します。
+時間の積算を [[c:Struct::Tms]] のオブジェクトとして返します。
 Struct::Tms は以下のメンバを持つ構造体クラスです。
 
   utime           # user time
@@ -138,7 +140,7 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 時間の単位は秒で、浮動小数点数で与えられます。詳細は
 [[man:times(3)]] を参照してください。
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 このメソッドは [[c:Process]] に移動しました。Time.times も使えます
 が、警告メッセージが出力されます。
 #@end
@@ -172,7 +174,7 @@ other が Time オブジェクトである時、ふたつの時刻の差を
 self のタイムゾーンが協定世界時に設定されていれば真を返しま
 す。
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- getgm
 --- getutc
 
@@ -180,7 +182,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 生成して返します。
 #@end
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- getlocal
 
 タイムゾーンを地方時に設定した Time オブジェクトを新しく生成
@@ -299,7 +301,7 @@ self に 1 秒足した Time オブジェクトを生成して返します。
        Sun Jul 18 01:41:23 JST 2004
 #@end
 
-#@if (version >= "1.6.7")
+#@#if (version >= "1.6.7")
 --- utc_offset
 --- gmt_offset
 --- gmtoff
@@ -323,8 +325,8 @@ self に 1 秒足した Time オブジェクトを生成して返します。
   p Time.now.getgm.utc_offset
   # => 0
 
-このメソッドは Ruby 1.6.7 で導入されました。
-#@end
+#@#このメソッドは Ruby 1.6.7 で導入されました。
+#@#end
 
 --- to_a
 
