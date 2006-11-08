@@ -5,7 +5,7 @@
   * カレントスレッドを [[m:Thread#join]] しようとしたとき
   * [[m:Thread#join]] でデッドロックしそうになったとき
   * 終了したスレッドを [[m:Thread#wakeup]] しようとしたとき
-  * スレッドが一つしかないのに [[m:Thread#Thread.stop]] しようとしたとき
+  * スレッドが一つしかないのに [[m:Thread.stop]] しようとしたとき
   * イテレータを与えずにスレッドを生成しようとしたとき
   * [[m:Kernel#throw]] がスレッド内で
     [[m:Kernel#catch]] されないとき
