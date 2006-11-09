@@ -161,24 +161,25 @@ number of arguments, returns -n-1, where n is the number of required
 arguments. For methods written in C, returns -1 if the call takes
 a variable number of arguments.
 
-   class C
-     def one;    end
-     def two(a); end
-     def three(*a);  end
-     def four(a, b); end
-     def five(a, b, *c);    end
-     def six(a, b, *c, &d); end
-   end
-   c = C.new
-   c.method(:one).arity     #=> 0
-   c.method(:two).arity     #=> 1
-   c.method(:three).arity   #=> -1
-   c.method(:four).arity    #=> 2
-   c.method(:five).arity    #=> -3
-   c.method(:six).arity     #=> -3
-
-   "cat".method(:size).arity      #=> 0
-   "cat".method(:replace).arity   #=> 1
-   "cat".method(:squeeze).arity   #=> -1
-   "cat".method(:count).arity     #=> -1
-
+  
+  class C
+    def one;    end
+    def two(a); end
+    def three(*a);  end
+    def four(a, b); end
+    def five(a, b, *c);    end
+    def six(a, b, *c, &d); end
+  end
+  
+  p C.instance_method(:one).arity     #=> 0
+  p C.instance_method(:two).arity     #=> 1
+  p C.instance_method(:three).arity   #=> -1
+  p C.instance_method(:four).arity    #=> 2
+  p C.instance_method(:five).arity    #=> -3
+  p C.instance_method(:six).arity     #=> -3
+  
+  
+  String.instance_method(:size).arity      #=> 0
+  String.instance_method(:replace).arity   #=> 1
+  String.instance_method(:squeeze).arity   #=> -1
+  String.instance_method(:count).arity     #=> -1
