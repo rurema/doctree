@@ -76,10 +76,10 @@ _builtin/SystemStackError
 _builtin/Thread                 sheepman        done
 _builtin/ThreadError            sheepman        done
 _builtin/ThreadGroup            sheepman        done
-_builtin/Time                   sheepman
-_builtin/TrueClass              sheepman
+_builtin/Time                   sheepman        done
+_builtin/TrueClass              sheepman        done
 _builtin/TypeError
-_builtin/UnboundMethod          sheepman
+_builtin/UnboundMethod          sheepman        done
 _builtin/ZeroDivisionError
 _builtin/constants
 _builtin/Enumerable__Enumerator moriq           done
