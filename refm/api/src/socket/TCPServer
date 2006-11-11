@@ -84,8 +84,6 @@ host に指定できる形式は[[m:socket#ホスト指定形式]]を見てください。
 #@if (version >= "1.8.5")
 --- accept_nonblock
 
-((<ruby 1.8.5 feature>))
-
 ソケットをノンブロッキングモードに設定した後、
 [[man:accept(2)]] を呼び出します。
 

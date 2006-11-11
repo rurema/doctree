@@ -120,7 +120,6 @@ UDP では空のパケットを読み込んだことを意味します。
 
 #@if (version >= "1.8.5")
 --- recv_nonblock(maxlen[, flags])
-    ((<ruby 1.8.5 feature>))
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] でソケットからデータを受け取ります。

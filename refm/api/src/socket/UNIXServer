@@ -31,8 +31,6 @@ path で指定したパス名を用いて接続を受け付けるソケットを返
 #@if (version >= "1.8.5")
 --- accept_nonblock
 
-((<ruby 1.8.5 feature>))
-
 ソケットをノンブロッキングモードに設定した後、
 [[man:accept(2)]] を呼び出します。
 
@@ -42,11 +40,8 @@ path で指定したパス名を用いて接続を受け付けるソケットを返
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- listen(backlog)
-
-((<ruby 1.7 feature>))
-
 
 [[man:listen(2)]] を実行します。
 ([[m:Socket#listen]]と同じ)
@@ -58,11 +53,8 @@ UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
 失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- sysaccept
-
-((<ruby 1.7 feature>))
-
 
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [[m:UNIXServer#accept]] と同じです。

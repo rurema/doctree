@@ -80,8 +80,7 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
     Socket::AI_PASSIVE、
     Socket::AI_CANONNAME、
     Socket::AI_NUMERICHOST
-
-が用意されている場合があります。
+    が用意されている場合があります。
 
 引数に指定できる定数の意味については
 [[man:getaddrinfo(3)]] を参照して下さい。
