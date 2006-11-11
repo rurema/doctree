@@ -1,0 +1,85 @@
+= class RSS::Maker::ChannelBase < Object
+
+channel要素の値を設定します．
+
+RSS 1.0を生成する場合はabout，title，link，
+descriptionを設定しなければいけません．
+
+RSS 0.91を生成する場合はtitle，link，
+description，languageを設定しなければいけません．
+
+RSS 2.0を生成する場合はtitle，link，
+descriptionを設定しなければいけません．
+
+maker.channelになんらかの値を設定しておきながら，上記
+のmaker.channelが要求する値を設定していない場合は
+RSS::NotSetError例外が発生します．どの値も設定していな
+い場合は例外は発生しません．
+
+== Instance Methods
+
+--- about
+--- about=()
+
+--- title
+--- title=()
+
+--- link
+--- link=()
+
+--- description
+--- description=()
+
+--- language
+--- language=()
+
+--- copyright
+--- copyright=()
+
+--- managingEditor
+--- managingEditor=()
+
+--- webMaster
+--- webMaster=()
+
+--- rating
+--- rating=()
+
+--- docs
+--- docs=()
+
+--- date
+--- date=()
+
+--- pubDate
+     maker.channel.dateの別名です．
+
+--- pubDate=()
+     maker.channel.date=の別名です．
+
+--- lastBuildDate
+--- lastBuildDate=()
+
+--- generator
+--- generator=()
+
+--- ttl
+--- ttl=()
+
+--- categories
+     categoriesを返します．
+
+--- cloud
+     cloudを返します．
+
+--- skipDays
+     skipDaysを返します．
+
+--- skipHours
+     skipHoursを返します．
+
+= class RSS::Maker::RSS09::Channel < RSS::Maker::ChannelBase
+
+= class RSS::Maker::RSS10::Channel < RSS::Maker::ChannelBase
+
+= class RSS::Maker::RSS20::Channel < RSS::Maker::RSS09::Channel
