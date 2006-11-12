@@ -235,7 +235,7 @@ webrick/cgi
 webrick/ssl
 win32/registry
 win32ole
-xmlrpc
-yaml
-yaml/store
-zlib
+xmlrpc                          date
+yaml                            date
+yaml/store                      date
+zlib                            date
