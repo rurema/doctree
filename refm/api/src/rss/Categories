@@ -1,4 +1,4 @@
-= class RSS::Maker::ChannelBase::CategoriesBase < Object
+= class RSS::Maker::RSS20::Channel::Categories < RSS::Maker::RSS09::Channel::Categories
 
 include Enumerable
 
@@ -11,7 +11,7 @@ RSS 2.0を生成するときだけ利用されます．
 categoryはcategoryリストの最後
 に追加されています．
 
-= class RSS::Maker::ChannelBase::CategoriesBase::CategoryBase < Object
+= class RSS::Maker::RSS20::Channel::Categories::Category < RSS::Maker::RSS09::Channel::Categories::Category
 
 categoryは
 maker.channel.categories.new_categoryで作成されたオ
@@ -26,7 +26,3 @@ contentを指定する必要があります．
 
 --- content
 --- content=()
-
-= class RSS::Maker::RSS09::Channel::Categories::Category < RSS::Maker::ChannelBase::CategoriesBase::CategoryBase
-
-= class RSS::Maker::RSS20::Channel::Categories::Category < RSS::Maker::RSS09::Channel::Categories::Category

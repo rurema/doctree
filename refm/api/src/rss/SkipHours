@@ -10,7 +10,6 @@ hourはhourリストの最後
 
 
 = class RSS::Maker::RSS09::Channel::SkipHours < RSS::Maker::ChannelBase::SkipHoursBase
-= class RSS::Maker::RSS10::Channel::SkipHours < RSS::Maker::ChannelBase::SkipHoursBase
 = class RSS::Maker::RSS20::Channel::SkipHours < RSS::Maker::RSS09::Channel::SkipHours
 
 = class RSS::Maker::ChannelBase::SkipHoursBase::HourBase < Object
@@ -27,5 +26,4 @@ contentを指定する必要があります．
 --- hour.content=()
 
 = class RSS::Maker::RSS09::Channel::SkipHours::Hour < RSS::Maker::ChannelBase::SkipHoursBase::HourBase
-= class RSS::Maker::RSS10::Channel::SkipHours::Hour < RSS::Maker::ChannelBase::SkipHoursBase::HourBase
 = class RSS::Maker::RSS20::Channel::SkipHours::Hour < RSS::Maker::RSS09::Channel::SkipHours::Hour
