@@ -1,7 +1,7 @@
-status: (none) -> done
-
-LIBRARY_NAME                    OWNER           STATUS
---------------------------------------------------------
+# status: (none) -> done
+ 
+# LIBRARY_NAME                  OWNER           STATUS
+#--------------------------------------------------------
 _builtin/ARGF                   date            done
 _builtin/ArgumentError          date            done
 _builtin/Array                  date            done
@@ -87,8 +87,8 @@ _builtin/fatal
 _builtin/functions
 _builtin/specialvars
 
-LIBRARY_NAME                    OWNER           STATUS
----------------------------------------------------------
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 English
 Env
 Win32API
@@ -136,8 +136,8 @@ find
 forwardable
 ftools
 
-LIBRARY_NAME                    OWNER           STATUS
----------------------------------------------------------
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 gdbm                            sheepman        done
 generator
 getoptlong
@@ -176,8 +176,8 @@ openssl
 optparse
 ostruct
 
-LIBRARY_NAME                    OWNER           STATUS
----------------------------------------------------------
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 parsearg
 parsedate                       tadf            done
 pathname
@@ -189,34 +189,34 @@ profiler
 pstore                          sheepman        done
 pty
 racc/parser
-rational                       sheepman         
+rational                        sheepman         
 rbconfig
-readbytes                      sheepman         done
-readline                       sheepman         done
+readbytes                       sheepman        done
+readline                        sheepman        done
 resolv
 resolv-replace
 rexml
 rinda/rinda
 rinda/tuplespace
 ripper
-rss                            sheepman
+rss                             sheepman
 rubyunit
-scanf                          sheepman         done
-sdbm                           sheepman
-set                            sheepman         done
-sha1                           sheepman
-shell                          sheepman         done
-shellwords                     sheepman         done
-singleton                      sheepman         done
+scanf                           sheepman        done
+sdbm                            sheepman
+set                             sheepman        done
+sha1                            sheepman
+shell                           sheepman        done
+shellwords                      sheepman        done
+singleton                       sheepman        done
 soap
-socket                         sheepman
-stringio                       sheepman         done
-strscan                        sheepman         done
-sync                           sheepman         done
-syslog                         sheepman         done
+socket                          sheepman
+stringio                        sheepman        done
+strscan                         sheepman        done
+sync                            sheepman        done
+syslog                          sheepman        done
 
-LIBRARY_NAME                    OWNER           STATUS
----------------------------------------------------------
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 tempfile                        sheepman        done
 test/unit                       sheepman
 thread                          sheepman        done
