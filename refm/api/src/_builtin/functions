@@ -99,7 +99,7 @@ arg が文字列の場合、何もせず arg を返します。
 
 #@if (version >= "1.8.0")
 --- abort(message = $!.message)
-#else
+#@else
 --- abort
 #@end
 
@@ -312,6 +312,7 @@ tag と同じ名前の [[m:Kernel#throw]] が行われた
     end
   }
 
+#@if (version < "1.9.0")
 --- chop
 --- chop!
 
@@ -340,6 +341,7 @@ $_.chomp と関数 chomp では以下の点で違いがあります。
 
 * chomp は $_ の値をコピーして、コピーの方を更新し、
   $_ に((*再代入*))します。
+#@end
 
 --- eval(expr[, binding[, fname[, lineno=1]]])
 
@@ -380,8 +382,10 @@ program の引数に渡されます。
 起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
 グラム名になります。
 
-((<ruby 1.8 feature>)): このとき、第1要素をフルパスで指定しなくても
+#@since 1.8.0
+このとき、第1要素をフルパスで指定しなくても
 環境変数 PATH から探します。
+#@end
 
 コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
 以下のように exec を呼び出します。
@@ -398,10 +402,12 @@ exit は例外 [[c:SystemExit]] を発生させ
 ることによってプログラムの実行を終了させますので、
 必要に応じて [[unknown:rescue|制御構造/begin]] 節で捕捉することができます。
 
-((<ruby 1.8 feature>)): statusがtrueの場合、EXIT_SUCCESSを
+#@since 1.8.0
+statusがtrueの場合、EXIT_SUCCESSを
 終了ステータスとします。statusがfalseの場合、EXIT_FAILUREを
 終了ステータスとします。デフォルトの終了ステータスはEXIT_SUCCESSに
 変更されています。
+#@end
 
 --- exit!([status])
 
@@ -412,10 +418,12 @@ exit! は exit とは違って、例外処理などは一切行ないませ
 ん。[[m:Kernel#fork]]の後、子プロセスを終了させる時などに用
 いられます。
 
-((<ruby 1.8 feature>)): statusがtrueの場合、EXIT_SUCCESSを
+#@since 1.8.0
+statusがtrueの場合、EXIT_SUCCESSを
 終了ステータスとします。statusがfalseの場合、EXIT_FAILUREを
 終了ステータスとします。デフォルトの終了ステータスはEXIT_FAILUREに
 変更されています。
+#@end
 
 --- fork
 --- fork { ... }
@@ -425,8 +433,9 @@ exit! は exit とは違って、例外処理などは一切行ないませ
 nil を返します。ブロックを指定して呼び出した場合には、生成し
 た子プロセスでブロックを評価します。
 
-((<ruby 1.8.2 feature>)): fork 前に STDOUT と STDERR を
-[[m:IO#flush]] します。
+#@since 1.8.2
+fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
+#@end
 
 --- gets([rs])
 --- readline([rs])
@@ -455,11 +464,12 @@ readline は gets と同じ働きをしますが、
 
 [[m:Kernel#local_variables]],
 [[m:Object#instance_variables]],
-[[m:Module#Module.constants]],
+[[m:Module.constants]],
 [[m:Module#constants]],
 [[m:Module#class_variables]]
 も参照してください。
 
+#@if (version < "1.9.0")
 --- gsub(pattern[, replace])
 --- gsub!(pattern[, replace])
 --- gsub(pattern) {|matched| ... }
@@ -483,6 +493,7 @@ String#gsub と関数 gsub では以下の点で違いがあります。
 
 * gsubメソッドは $_ の値をコピーして、コピーの方を更新し、
   $_ に((*再代入*))します。
+#@end
 
 --- iterator?
 
@@ -533,7 +544,7 @@ load 'filename' とするのは不適切です。必ず絶対パスを
 
 [[m:Kernel#global_variables]],
 [[m:Object#instance_variables]],
-[[m:Module#Module.constants]],
+[[m:Module.constants]],
 [[m:Module#constants]],
 [[m:Module#class_variables]]
 も参照してください。
@@ -597,8 +608,8 @@ mode は、以下の文字列か整数([[c:File::Constants]] モジュール
 
 ファイル名が "|-" である時、open は Ruby の子プロセス
 を生成し、その子プロセスとの間のパイプ([[c:IO]]オブジェクト)を返し
-ます。(このときの動作は、[[m:IO#IO.popen]] と同じです。
-[[m:File#File.open]] にはパイプラインを生成する機能はありません)。
+ます。(このときの動作は、[[m:IO.popen]] と同じです。
+[[m:File.open]] にはパイプラインを生成する機能はありません)。
 
 ((*注意*)): Perlと異なりコマンドは常に `|' で始まります。
 
@@ -667,7 +678,7 @@ nil を返します。
 --- lambda
 
 与えられたブロックから手続きオブジェクト ([[c:Proc]] のインスタンス)
-を生成して返します。[[m:Proc#Proc.new]]と同じです。
+を生成して返します。[[m:Proc.new]]と同じです。
 
 ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
 を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
@@ -923,11 +934,13 @@ sec が省略された場合、他スレッドからの [[m:Thread#run]]
 と同じです。生成した子プロセスのプロセスIDを返します。
 #@end
 
+#@if (version < "1.9.0")
 --- split([sep[, limit]])
 
 [[m:$_]] の示す文字列をパターン sep によって
 limit 個の文字列に分割し、その配列を返します。
 詳細は [[m:String#split]] を参照してください。
+#@end
 
 --- sprintf(format ... )
 --- format(format ... )
@@ -956,6 +969,7 @@ Ruby 1.8.3 からは、seed として
 unsigned long よりも大きな値を与えることが出来ます。
 #@end
 
+#@if (version < "1.9.0")
 --- sub(pattern[, replace])
 --- sub!(pattern[, replace])
 --- sub(pattern) {|matched| ... }
@@ -973,6 +987,7 @@ String#sub と関数 sub では以下の点で違いがあります。
 
 subメソッドは $_ の値をコピーして、コピーの方を更新し、
 $_ に((*再代入*))します。
+#@end
 
 --- syscall(num, arg ... )
 
@@ -1132,7 +1147,7 @@ hook の配列を返します(ブロックで登録されていれば
 --- trap(signal, command)
 --- trap(signal) { ... }
 
-※ Ruby 1.8 以降では [[m:Signal#Signal.trap]] を推奨します。
+※ Ruby 1.8 以降では [[m:Signal.trap]] を推奨します。
 
 signal で指定された割り込みにたいするハンドラとして
 command を登録します。signal はシグナル名の
@@ -1213,3 +1228,6 @@ mesg と改行を順番に [[m:$stderr]] に出力します。
 
 と同じです。nil を返します。
 #@end
+
+--- getc
+obsolete; use STDIN.getc instead
