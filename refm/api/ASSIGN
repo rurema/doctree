@@ -81,11 +81,11 @@ _builtin/TrueClass              sheepman        done
 _builtin/TypeError
 _builtin/UnboundMethod          sheepman        done
 _builtin/ZeroDivisionError
-_builtin/constants
+_builtin/constants              sheepman        done
 _builtin/Enumerable__Enumerator moriq           done
-_builtin/fatal
-_builtin/functions
-_builtin/specialvars
+_builtin/fatal 
+_builtin/functions              sheepman        done
+_builtin/specialvars            sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
