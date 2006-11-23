@@ -39,9 +39,9 @@ nil と同じ。
 --- ARGF
 
 引数 (なければ標準入力) で構成される仮想ファイル (詳細は [[c:ARGF]] を参照)。
-つまり [[m:Kernel#gets]] は [[m:ARGF#ARGF.gets]] と同じ意味です。
-[[m:ARGF#ARGF.file]] で現在読み込み中のファイルオブジェクトが、
-[[m:ARGF#ARGF.filename]] で現在読み込み中のファイル名が得られます。
+つまり [[m:Kernel#gets]] は [[m:ARGF.gets]] と同じ意味です。
+[[m:ARGF.file]] で現在読み込み中のファイルオブジェクトが、
+[[m:ARGF.filename]] で現在読み込み中のファイル名が得られます。
 
 --- ARGV
 
