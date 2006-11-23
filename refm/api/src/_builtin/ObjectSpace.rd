@@ -40,7 +40,7 @@ ID([[m:Object#__id__]]) が渡されます。
 これは、渡された proc の self が obj を参照しつ
 づけるため。そのオブジェクトが GC の対象になりません。
 
-[[unknown:"ruby-src:lib/tempfile.rb"]] は、ファイナライザの使い方の
+[[lib:tempfile]] は、ファイナライザの使い方の
 良い例になっています。これは、クラスのコンテキストで [[c:Proc]] を
 生成することで上記の問題を回避しています。
 
@@ -93,7 +93,7 @@ class_or_module と [[m:Object#kind_of?]] の関係にある全ての
 
 とくに、class_or_module に [[c:Fixnum]] や [[c:Symbol]] などのクラスを指定した場合は、
 何も繰り返さないことになります。
-なお、[[c:Symbol]] については、かわりに [[m:Symbol#Symbol.all_symbols]] が使用できます。
+なお、[[c:Symbol]] については、かわりに [[m:Symbol.all_symbols]] が使用できます。
 繰り返した数を返します。
 
 --- garbage_collect
@@ -115,14 +115,14 @@ obj を返します。
 
 proc をファイナライザとして設定します。
 
-[[m:ObjectSpace#ObjectSpace.call_finalizer]] で指定したオブジェクトが解放され
+[[m:ObjectSpace.call_finalizer]] で指定したオブジェクトが解放され
 る時、そのオブジェクトの ID(c.f [[m:Object#__id__]])を引数に
 ファイナライザが評価されます。
 
 proc を返します。
 
 このメソッドは、obsolete です。代わりに
-[[m:ObjectSpace#ObjectSpace.define_finalizer]] を使用してください
+[[m:ObjectSpace.define_finalizer]] を使用してください
 
 --- call_finalizer(obj)     ((<obsolete>))
 
@@ -143,5 +143,5 @@ obj を返します。
 proc を返します。
 
 このメソッドは、obsolete です。代わりに
-[[m:ObjectSpace#ObjectSpace.undefine_finalizer]] を使用してくださ
+[[m:ObjectSpace.undefine_finalizer]] を使用してくださ
 い。
