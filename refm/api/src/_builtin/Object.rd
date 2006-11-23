@@ -5,6 +5,9 @@ include Kernel
 全てのクラスのスーパークラス。
 オブジェクトの一般的な振舞いを定義します。
 
+== Class Methods
+--- new
+
 == Instance Methods
 
 --- ==(other)
@@ -33,12 +36,14 @@ self と other が等しければ真を返します。
 は正常に false を返します。
 
 --- class
---- type        ((<obsolete>))
+#@if (version < "1.9.0")
+--- type
+#@end
 
 レシーバのクラスを返します。
 
-#@if (version >= "1.8.0")
-Ruby 1.7 では type は ((<obsolete>)) となりました。
+#@if (version < "1.9.0")
+Ruby 1.8 では type は obsolete となりました。
 #@end
 
 --- clone
@@ -53,10 +58,11 @@ clone は freeze、taint、特異メソッドなどの情報も
 clone や dup は「浅い(shallow)」コピーであることに注意
 してください。オブジェクト自身を複製するだけで、オブジェクトの指し
 ている先(たとえば配列の要素など)までは複製しません。
-((-深い(deep)コピーが必要な場合には、
-Marshal.load(Marshal.dump(obj)を
+
+深い(deep)コピーが必要な場合には、
+Marshal.load(Marshal.dump(obj))を
 使ってください。ただしMarshal出来ないオブジェクトが
-含まれている場合には使えません。-))
+含まれている場合には使えません。
 
 また複製したオブジェクトに対して
 
@@ -72,7 +78,8 @@ true, false, nil, [[c:Symbol]] オブジェクトなど
 を複製しようとすると例外 [[c:TypeError]] が発生します。
 
 #@if (version >= "1.8.0")
-Ruby 1.7 では、[[c:Numeric]] オブジェクトなど immutable
+#@#Ruby 1.8 では、
+[[c:Numeric]] オブジェクトなど immutable
 (内容不変)であるオブジェクトを複製しようとすると
 例外 [[c:TypeError]] が発生します。
 #@end
@@ -129,8 +136,8 @@ other が self 自身の時、真を返します。
 extend の機能は、「特異クラスに対する [[m:Module#include]]」
 と言い替えることもできます。
 
-#@if (version >= "1.7.0")
-((<ruby 1.7 feature>)): 引数に複数のモジュールを指定した場合、最後
+#@if (version >= "1.8.0")
+引数に複数のモジュールを指定した場合、最後
 の引数から逆順に extend を行います。
 #@end
 
@@ -160,7 +167,9 @@ A.eql?(B) が成立する時は必ず A.hash == B.hash も成立し
 hash を再定義する場合は、一様に分布する任意の整数を返すようにしま
 す。
 
---- id                  ((<obsolete>))
+#@if (version < "1.9.0")
+--- id
+#@end
 --- __id__
 --- object_id
 
@@ -171,8 +180,8 @@ id メソッドの再定義に備えて別名 __id__ が用意されて
 おり、ライブラリでは後者の利用が推奨されます。また __id__ を
 再定義すべきではありません。
 
-#@if (version >= "1.8.0")
-id は Ruby 1.8 では ((<obsolete>)) となりました。
+#@if (version < "1.9.0")
+id は Ruby 1.8 では obsolete となりました。
 #@end
 
 --- inspect
@@ -204,7 +213,8 @@ self が渡されます。
 ただし、ローカル変数だけは instance_eval の外側のスコープと
 共有します。
 
-((*注*)): メソッド定義の中で instance_eval のブロックを使用してメ
+#@if (version < "1.8.0")
+メソッド定義の中で instance_eval のブロックを使用してメ
 ソッド定義を行うと、"nested method definition" とコンパイルエラー
 になります。これは、現在の ruby パーサの制限です。
 
@@ -234,7 +244,6 @@ self が渡されます。
     p bar
     # => "bar"
 
-#@if (version >= "1.8.0")
 メソッド定義のネストに関して、この制限はなくなっています。
 さらに、Ruby 1.7 以降, instance_eval を使わなく
 ても以下で同じことができます (厳密には異なります。
@@ -268,8 +277,6 @@ obj.kind_of?(c) も成立します。
 #@if (version >= "1.8.0")
 --- instance_variable_get(var)
 
-((<ruby 1.8 feature>))
-
 オブジェクトのインスタンス変数の値を取得して返します。
 
 var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
@@ -291,8 +298,6 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
 
 #@if (version >= "1.8.0")
 --- instance_variable_set(var, val)
-
-((<ruby 1.8 feature>))
 
 オブジェクトのインスタンス変数に値 val を設定して val
 を返します。
@@ -321,10 +326,27 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
 
 [[m:Kernel#local_variables]],
 [[m:Kernel#global_variables]],
-[[m:Module#Module.constants]],
+[[m:Module.constants]],
 [[m:Module#constants]],
 [[m:Module#class_variables]]
 も参照してください。
+
+#@since 1.8.6
+--- instance_variable_defined?(symbol)
+#@#    => true or false
+
+Returns true if the given instance variable is defined in obj.
+
+   class Fred
+     def initialize(p1, p2)
+       @a, @b = p1, p2
+     end
+   end
+   fred = Fred.new('cat', 99)
+   fred.instance_variable_defined?(:@a)    #=> true
+   fred.instance_variable_defined?("@b")   #=> true
+   fred.instance_variable_defined?("@c")   #=> fal
+#@end
 
 --- is_a?(mod)
 --- kind_of?(mod)
@@ -544,6 +566,7 @@ singleton_methods(false) は、
 
 オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
 
+#@if (version < "1.9.0")
 --- to_a        ((<obsolete>))
 
 オブジェクトを配列に変換してその配列を返します。
@@ -580,7 +603,7 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 
     # => [1, 2, 3]
 #@end
-
+#@end
 --- to_ary
 
 オブジェクトを配列に変換してその配列を返します。
