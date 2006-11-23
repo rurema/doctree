@@ -31,7 +31,7 @@ _builtin/IOError
 _builtin/IndexError
 _builtin/Integer                okkez           done
 _builtin/Interrupt
-_builtin/Kernel                 sheepman
+_builtin/Kernel                 sheepman        done
 _builtin/KeyError
 _builtin/LoadError
 _builtin/LocalJumpError
@@ -46,8 +46,8 @@ _builtin/NoMemoryError
 _builtin/NoMethodError
 _builtin/NotImplementedError
 _builtin/Numeric                okkez           done
-_builtin/Object                 sheepman 
-_builtin/ObjectSpace            sheepman
+_builtin/Object                 sheepman        done
+_builtin/ObjectSpace            sheepman        done
 _builtin/Precision              okkez           done
 _builtin/Proc                   okkez           done
 _builtin/Process                okkez           done
