@@ -31,9 +31,8 @@ $USAGE に "usage" (名前は何でもよい) をセットします．
 
 
 
-= reopen Object
-
-== Instance Methods
+= reopen Kernel
+== Private Instance Methods
 
 --- parseArgs(min_argc，check_opts，single_opts，*opts)
 
