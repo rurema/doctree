@@ -169,7 +169,7 @@ net/smtp                        aamine
 net/telnet
 net/telnets
 nkf
-observable                      sheepman
+observer                      sheepman
 open-uri                        sheepman
 open3
 openssl                         sheepman
