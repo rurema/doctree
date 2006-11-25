@@ -1,0 +1,51 @@
+#@since 1.8.1
+= class OpenSSL::Engine < Object
+
+== Class Methods
+
+--- by_id
+
+--- cleanup
+
+--- engines
+
+--- load
+
+== Instance Methods
+
+--- cipher
+
+#@since 1.8.3
+--- cmds
+
+--- ctrl_cmd
+#@end
+
+--- digest
+
+--- finish
+
+--- id
+
+--- load_private_key
+
+--- load_public_key
+
+--- name
+
+--- set_default
+
+== Constants
+
+--- METHOD_ALL
+--- METHOD_CIPHERS
+--- METHOD_DH
+--- METHOD_DIGESTS
+--- METHOD_DSA
+--- METHOD_NONE
+--- METHOD_RAND
+--- METHOD_RSA
+
+= class OpenSSL::Engine::EngineError < OpenSSL::OpenSSLError
+
+#@end
