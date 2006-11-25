@@ -1,0 +1,98 @@
+#@since 1.8.0
+= class OpenSSL::BN < Object
+include Comparable
+
+== Class Methods
+
+--- generate_prime 
+
+--- pseudo_rand
+
+--- pseudo_rand_range 
+
+--- rand
+
+--- rand_range
+
+== Instance Methods
+
+--- %
+
+--- *
+
+--- **
+
+--- +
+
+--- -
+
+--- /
+
+--- <<
+
+--- <=>
+
+--- ==
+
+--- ===
+
+--- >>
+
+--- bit_set?
+
+--- clear_bit!
+
+--- cmp
+
+--- coerce
+
+--- copy
+
+--- eql?
+
+--- gcd
+
+--- mask_bits!
+
+--- mod_add
+
+--- mod_exp
+
+--- mod_inverse
+
+--- mod_mul
+
+--- mod_sqr
+
+--- mod_sub
+
+--- num_bits
+
+--- num_bytes
+
+--- odd?
+
+--- one?
+
+--- prime?
+
+--- prime_fasttest?
+
+--- set_bit!
+
+--- sqr
+
+--- to_bn
+
+--- to_i
+
+--- to_int
+
+--- to_s
+
+--- ucmp
+
+--- zero?
+
+= class OpenSSL::BNError < OpenSSL::OpenSSLError
+#@end
