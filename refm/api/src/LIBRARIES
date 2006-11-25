@@ -92,7 +92,7 @@ net/smtp
 net/telnet
 net/telnets
 nkf
-observable
+observer
 open-uri
 open3
 openssl
