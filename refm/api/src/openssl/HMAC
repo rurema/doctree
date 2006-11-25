@@ -1,0 +1,25 @@
+#@since 1.8.0
+
+= class OpenSSL::HMAC < Object
+
+== Class Methods
+
+--- digest
+
+--- hexdigest
+
+== Instance Methods
+
+--- <<
+
+--- digest
+
+--- hexdigest
+
+--- to_s
+
+--- update
+
+= class OpenSSL::HMACError < OpenSSL::OpenSSLError
+
+#@end
