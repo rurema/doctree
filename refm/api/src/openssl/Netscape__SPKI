@@ -1,0 +1,24 @@
+#@since 1.8.0
+
+= class OpenSSL::Netscape::SPKI < Object
+
+== Instance Methods
+
+--- challenge
+--- challenge=
+
+--- public_key
+--- public_key=
+
+--- sign
+
+--- to_der
+--- to_pem
+
+--- to_s
+--- to_text
+
+--- verify
+
+= class OpenSSL::Netscape::SPKIError < OpenSSL::OpenSSLError
+#@end
