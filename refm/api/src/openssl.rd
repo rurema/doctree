@@ -107,24 +107,6 @@
   cer.sign(key, digest) # <= 署名するのに使う秘密鍵とハッシュ関数
   print cer.to_text
 
-=== 例外
-
-  * OpenSSL::OpenSSLError
-    * OpenSSL::ASN1::ASN1Error
-    * OpenSSL::Cipher::CipherError
-    * OpenSSL::Digest::DigestError
-    * OpenSSL::PKey::PKeyError
-    * OpenSSL::Random::RandomError
-    * OpenSSL::SSL::SSLError
-    * OpenSSL::X509::AttributeError
-    * OpenSSL::X509::CertificateError
-    * OpenSSL::X509::CRLError
-    * OpenSSL::X509::ExtensionError
-    * OpenSSL::X509::NameError
-    * OpenSSL::X509::RequestError
-    * OpenSSL::X509::RevokedError
-    * OpenSSL::X509::StoreError
-
 = module OpenSSL
 
 このページは定数と例外のみを説明しています。
@@ -156,7 +138,11 @@ Ruby/OpenSSL のバージョンです。
 #@include(openssl/BN)
 #@include(openssl/Cipher__Cipher)
 #@include(openssl/Digest__Digest)
+#@include(openssl/Engine) 
 #@include(openssl/HMAC)
+#@include(openssl/Netscape__SPKI)
+#@include(openssl/OCSP)
+#@include(openssl/PKCS12)
 #@include(openssl/PKCS7)
 #@include(openssl/PKCS7__PKCS7)
 #@include(openssl/PKey__DH)
