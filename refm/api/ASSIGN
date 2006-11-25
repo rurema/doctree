@@ -169,11 +169,11 @@ net/smtp                        aamine
 net/telnet
 net/telnets
 nkf
-observable
-open-uri
+observable                      sheepman
+open-uri                        sheepman
 open3
-openssl
-optparse
+openssl                         sheepman
+optparse                        sheepman
 ostruct
 
 # LIBRARY_NAME                  OWNER           STATUS
