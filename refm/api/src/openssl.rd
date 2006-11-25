@@ -1,7 +1,7 @@
 #@if (version >= "1.8.0")
 #@# = openssl
 
-[[unknown:OpenSSL|URL:http://www.openssl.org]] support library for Ruby.
+[[url:http://www.openssl.org]] support library for Ruby.
 動作や使える暗号方式は
 
 [[unknown:執筆者募集]]
@@ -142,6 +142,37 @@ Ruby/OpenSSL のバージョンです。
 --- OPENSSL_VERSION_NUMBER
 
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
-[[m:URL:http:#/www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
+[[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
 も参照してください。
 #@end
+
+= class OpenSSL::OpenSSLError < StandardError
+
+#@include(openssl/ASN1)
+#@include(openssl/ASN1__ASN1Data)
+#@include(openssl/ASN1__Constructive)
+#@include(openssl/ASN1__ObjectId)
+#@include(openssl/ASN1__Primitive)
+#@include(openssl/BN)
+#@include(openssl/Cipher__Cipher)
+#@include(openssl/Digest__Digest)
+#@include(openssl/HMAC)
+#@include(openssl/PKCS7)
+#@include(openssl/PKCS7__PKCS7)
+#@include(openssl/PKey__DH)
+#@include(openssl/PKey__DSA)
+#@include(openssl/PKey__PKey)
+#@include(openssl/PKey__RSA)
+#@include(openssl/SSL)
+#@include(openssl/SSL__SSLContext)
+#@include(openssl/SSL__SSLServer)
+#@include(openssl/SSL__SSLSocket)
+#@include(openssl/X509)
+#@include(openssl/X509__CRL)
+#@include(openssl/X509__Certificate)
+#@include(openssl/X509__Extension)
+#@include(openssl/X509__ExtensionFactory)
+#@include(openssl/X509__Name)
+#@include(openssl/X509__Revoked)
+#@include(openssl/X509__Store)
+#@include(openssl/X509__StoreContext)
