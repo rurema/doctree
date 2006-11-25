@@ -1,0 +1,133 @@
+#@since 1.8.0
+
+= module OpenSSL::OCSP
+
+== Constants
+
+--- NOCASIGN
+
+--- NOCERTS
+
+--- NOCHAIN
+
+--- NOCHECKS
+
+--- NODELEGATED
+
+--- NOEXPLICIT
+
+--- NOINTERN
+
+--- NOSIGS
+
+--- NOTIME
+
+--- NOVERIFY
+
+--- RESPID_KEY
+
+--- RESPONSE_STATUS_INTERNALERROR
+
+--- RESPONSE_STATUS_MALFORMEDREQUEST
+
+--- RESPONSE_STATUS_SIGREQUIRED
+
+--- RESPONSE_STATUS_SUCCESSFUL
+
+--- RESPONSE_STATUS_TRYLATER
+
+--- RESPONSE_STATUS_UNAUTHORIZED
+
+--- REVOKED_STATUS_AFFILIATIONCHANGED
+
+--- REVOKED_STATUS_CACOMPROMISE
+
+--- REVOKED_STATUS_CERTIFICATEHOLD
+
+--- REVOKED_STATUS_CESSATIONOFOPERATION
+
+--- REVOKED_STATUS_KEYCOMPROMISE
+
+--- REVOKED_STATUS_NOSTATUS
+
+--- REVOKED_STATUS_REMOVEFROMCRL
+
+--- REVOKED_STATUS_SUPERSEDED
+
+--- REVOKED_STATUS_UNSPECIFIED
+
+--- TRUSTOTHER
+
+--- V_CERTSTATUS_GOOD
+
+--- V_CERTSTATUS_REVOKED
+
+--- V_CERTSTATUS_UNKNOWN
+
+--- V_RESPID_KEY
+
+--- V_RESPID_NAME
+
+= class OpenSSL::OCSP::OCSPError < Object
+
+= class OpenSSL::OCSP::BasicResponse < Object
+
+== Instance Methods
+
+--- add_nonce
+
+--- add_status
+
+--- copy_nonce
+
+--- sign
+
+--- status
+
+--- verify
+
+= class OpenSSL::OCSP::CertificateId < Object
+
+== Instance Methods
+
+--- cmp
+
+--- cmp_issuer
+
+--- serial
+
+= class OpenSSL::OCSP::Request < Object
+
+== Instance Methods
+
+--- add_certid
+
+--- add_nonce
+
+--- certid 
+
+--- check_nonce
+
+--- sign
+
+--- to_der
+
+--- verify
+
+= class OpenSSL::OCSP::Response < Object
+
+== Class Methods
+
+--- create
+
+== Instance Methods
+
+--- basic
+
+--- status 
+
+--- status_string
+
+--- to_der
+
+#@end
