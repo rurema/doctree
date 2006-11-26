@@ -97,6 +97,10 @@ open-uri
 open3
 openssl
 optparse
+optparse/date
+optparse/shellwords
+optparse/time
+optparse/uri
 ostruct
 parsearg
 parsedate
