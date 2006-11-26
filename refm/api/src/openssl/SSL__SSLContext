@@ -63,12 +63,19 @@ SSLContext オブジェクトを生成します。ssl_method で TLS/SSL method を指定します。
 
 クライアント証明書を要求する時にクライアントに送る CA のリストです。CA の Certificate オブジェクトの配列です。このリストに含まれる CA ―あるはその下位の CA―に署名された証明書をクライアントは送り返すことになっています。
 
+#@since 1.8.3
+--- client_cert_cb
+--- client_cert_cb=
+#@end
+
+#@since 1.8.1
 --- extra_chain_cert
 --- extra_chain_cert=(certificates)
 
 証明書チェーンです。所有している証明書からルート CA までの証明書のリストです。これを指定しない場合、ca_file や ca_path で指定した信頼されている証明書のストレージから証明書チェーンを構成しようとします。 順序は以下の通りです。
 
   [所有している証明書, 下位 CA 証明書, ... 中間 CA 証明書]
+#@end
 
 --- key
 --- key=(key)
@@ -103,4 +110,14 @@ SSLContext オブジェクトを生成します。ssl_method で TLS/SSL method を指定します。
 --- verify_mode=(mode)
 
 検証モードです。デフォルトは nil、つまり検証しません。定数の項を参照してください。定数 VERIFY_* のビットマスクで指定します。
+#@end
+
+#@since 1.8.3
+--- tmp_dh_callback
+--- tmp_dh_callback=
+#@end
+
+#@since 1.8.3
+--- session_id_context 
+--- session_id_context=
 #@end

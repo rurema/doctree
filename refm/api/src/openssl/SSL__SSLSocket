@@ -1,5 +1,9 @@
 #@if (version >= "1.8.0")
 = class OpenSSL::SSL::SSLSocket < Object
+include Enumerable
+include SocketForwarder 
+#@todo
+#@# IO と同じメソッドはこのモジュールで定義されているので、下のいくつかのエントリーはこちらにまわす
 
 SSLSocket クラス
 
@@ -48,11 +52,13 @@ SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 接続相手の X509 証明書 [[c:OpenSSL::X509::Certificate]] オブジェクトを返します。
 検証結果は別途知る必要があります。
 
+#@since 1.8.1
 --- peer_cert_chain
 
 接続相手の証明書チェーンすなわち [[c:OpenSSL::X509::Certificate]] オブジェクトの配列を返します。接続相手の証明書からルート CA の証明書までのリストで、順序は以下の通りです。
 
   [接続相手の証明書, 下位CAの証明書,... 中間CAの証明書]
+#@end
 
 --- state
 
@@ -65,9 +71,11 @@ SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 
   ["DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168]
 
+#@since 1.8.2
 --- pending
 
 読み取り可能なバイト数を返します。
+#@end
 
 --- <<
 
@@ -77,17 +85,21 @@ SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 
 TLS/SSL クライアントから接続を受け付け、 TLS/SSL ハンドシェイクを実行し、自分自身を返します。
 
+#@if (version < "1.8.1")
 --- addr
 
 [[m:IPSocket#addr]] と同様です。
+#@end
 
 --- close
 
 接続を閉じます。flush を呼んでから閉じます。
 
+#@if (version < "1.8.1")
 --- closed?
 
 close していたら true を返します。
+#@end
 
 --- connect
 
@@ -129,9 +141,15 @@ close していたら true を返します。
 
 [[m:BasicSocket#getsockopt]] と同様です。
 
+#@if (version < "1.8.1")
 --- peeraddr
 
 [[m:IPSocket#peeraddr]] と同様です。
+#@end
+
+#@since 1.8.3
+--- post_connection_check
+#@end
 
 --- print([arg[, ...]])
 
@@ -161,6 +179,11 @@ close していたら true を返します。
 
 [[m:BasicSocket#setsockopt]] と同様です。
 
+#@since 1.8.1
+--- sync_close
+--- sync_close=
+#@end
+
 --- sysclose
 
 接続を閉じます。相手に'close notify'を送ります。
@@ -180,5 +203,9 @@ close していたら true を返します。
 --- write(str)
 
 [[m:IO#write]] と同様です。
+
+== Constants
+
+--- BLOCK_SIZE
 
 #@end
