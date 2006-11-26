@@ -92,8 +92,8 @@ _builtin/specialvars            sheepman        done
 English
 Env
 Win32API
-abbrev
-base64
+abbrev                          okkez
+base64                          okkez
 benchmark
 bigdecimal
 bigdecimal/jacobian
