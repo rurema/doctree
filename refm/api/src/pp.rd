@@ -56,7 +56,7 @@ pp による pretty-print された出力:
 このメソッドは出力に際して [[m:PP#text]], [[m:PP#breakable]], [[m:PP#nest]], [[m:PP#group]] および [[m:PP#pp]] を使います。前の4メソッドに関してはPPの親クラスのPrettyPrintで定義されています。[[m:PrettyPrint#text]], [[m:PrettyPrint#breakable]], [[m:PrettyPrint#nest]], [[m:PrettyPrint#group]] を参照してください。
 
 = reopen Kernel
-== Module Functions
+== Private Instance Methods
 --- pp(obj)
 obj を $> に pretty print で出力します。
 nil を返します。
