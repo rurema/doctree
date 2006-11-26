@@ -12,7 +12,7 @@ http/ftp の URL を、普通のファイルのように開けます。
     f.each_line {|line| p line}
   }
 
-開いたファイルオブジェクトは StringIO もしくは Tempfile ですが [[unknown:OpenURI::Meta|open-uri/OpenURI::Meta モジュール]] で拡張されていて、
+開いたファイルオブジェクトは StringIO もしくは Tempfile ですが [[c:OpenURI::Meta]] モジュールで拡張されていて、
 メタ情報を獲得するメソッドが使えます。
   open("http://www.ruby-lang.org/en") {|f|
     f.each_line {|line| p line}
@@ -35,17 +35,20 @@ http_proxy や ftp_proxy などの環境変数は、デフォルトで有効になっています。
     :proxy => nil) {|f|
     ...
   }
+
+また、open-uri を読み込むと [[c:URI::HTTP]] と [[c:URI::FTP]] が
+[[c:OpenURI::OpenRead]] モジュールをインクルードします。ですので、
 URI オブジェクトも似たような方法で開けます。
   uri = URI.parse("http://www.ruby-lang.org/en/")
   uri.open {|f|
     ...
   }
 URI オブジェクトは直接読み込むことができます。
-戻り値の文字列は、OpenURI::Meta で拡張されています。
+戻り値の文字列は、[[c:OpenURI::Meta]] で拡張されています。
   str = uri.read
   p str.base_uri
 
-= reopen Kernel
+= redefine Kernel
 
 == Module Functions
 
@@ -56,9 +59,9 @@ URI オブジェクトは直接読み込むことができます。
 
 name が http:// や ftp:// で始まっている文字列なら URI のリソースを
 取得した上で [[c:StringIO]] オブジェクトとして返します。この [[c:StringIO]]
-オブジェクトは [[unknown:OpenURI::Meta|open-uri/OpenURI::Meta]] で拡張されています。
+オブジェクトは [[c:OpenURI::Meta]] モジュールで拡張されています。
 *rest で受け付けるオプションに関しては、
-[[unknown:open-uri/OpenURI.open_uri]] を参照して下さい。
+[[m:OpenURI.open_uri]] を参照して下さい。
 
 name に open メソッドが定義されている場合は、*rest を引数として渡し
 name.open(*rest, &block) のように name の open メソッドが呼ばれます。
@@ -77,7 +80,7 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれます。
 
 = reopen URI::HTTP
 
-#@# OpenURI::OpenRead モジュール をインクルードします。
+#@# [[c:OpenURI::OpenRead]] モジュール をインクルードします。
 
 = reopen URI::FTP
 
@@ -85,7 +88,7 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれます。
 
 = module OpenURI
 
-== Module Functions
+== Singleton Methods
 
 --- open_uri(name [, mode [, perm]] [, options])
 --- open_uri(name [, mode [, perm]] [, options]) {|sio| ... }
@@ -147,7 +150,7 @@ OpenURI.open_uri(self, *rest, &block) と同じです。
 --- read(options={})
 
 self.open(options={}).read と同じです。
-このメソッドによって返される文字列は [[unknown:OpenURI::Meta|open-uri/OpenURI::Meta]]
+このメソッドによって返される文字列は [[c:OpenURI::Meta]]
 によって拡張されています。
 
   require 'open-uri'
