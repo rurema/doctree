@@ -5,9 +5,9 @@
 [[m:OptionParser#on]] メソッドで登録していきます。
 つまり、OptionParser を使う場合、基本的には
 
-(1) OptionParser オブジェクト opt を生成する。
-(2) オプションを取り扱うブロックを opt に登録する。
-(3) opt.parse(ARGV) でコマンドラインを実際に parse する。
+ * (1) OptionParser オブジェクト opt を生成する。
+ * (2) オプションを取り扱うブロックを opt に登録する。
+ * (3) opt.parse(ARGV) でコマンドラインを実際に parse する。
 
 というような流れになります。
 
@@ -23,51 +23,12 @@
 出てきません。
 
 : --help
-    オプションサマリを表示します。
+
+オプションサマリを表示します。
+
 : --version
-    定数 ::Version が定義されていたら、それを表示します。
 
-
-=== デフォルトで利用可能な引数クラス
-
-: Object
-  any string, and no conversion. this is fall-back.
-
-: String
-  any none-empty string, and no conversion.
-
-: Integer
-  Ruby/C-like integer, octal for 0-7 sequence, binary for
-  0b, hexadecimal for 0x, and decimal for others; with
-  optional sign prefix. Converts to Integer.
-
-: Float
-  Float number format, and converts to Float.
-
-: Numeric
-  Generic numeric format, and converts to Integer for integer
-  format, Float for float format.
-
-: OptionParser::DecimalInteger
-  Decimal integer format, to be converted to Integer.
-
-: OptionParser::OctalInteger
-  Ruby/C like octal/hexadecimal/binary integer format, to be converted
-  to Integer.
-
-: OptionParser::DecimalNumeric
-  Decimal integer/float number format, to be converted to
-  Integer for integer format, Float for float format.
-
-: TrueClass
-  Boolean switch, which means whether it is present or not, whether it
-  is absent or not with prefix no-, or it takes an argument
-  yes/no/true/false/+/-.
-: FalseClass
-  Similar to [[m:optparse#TrueClass]], but defaulted to false.
-
-: Array
-  List of strings separated by ","
+定数 ::Version が定義されていたら、それを表示します。
 
 === 例
 
@@ -251,6 +212,10 @@ OptionParser#on で登録したブロックに渡されます。
 
 #accept で登録したブロックを削除します。
 
+#@since 1.8.5
+--- getopts
+see [[m:OptionParser#getopts]].
+#@end
 
 == Instance Methods
 
@@ -358,7 +323,7 @@ long にはロングオプションを表す文字列を与えます。ショートオプショ
 
 klass にはクラスを与えます。
 どのようなクラスを受け付けるかは、
-[[m:OptionParser#デフォルトで利用可能な引数クラス]]を参照して下さ
+以下の「デフォルトで利用可能な引数クラス」を参照して下さ
 い。OptionParser.accept や OptionParser#accept によって、受け付け
 るクラスを増やすことができます。登録されていないクラスが指定された
 場合、例外 ArgumentError を投げます。
@@ -398,6 +363,60 @@ pat にはオプションの引数に許すパターンを表す正規表現で与えます。
 
 desc にはオプションの説明を文字列で与えます。
 サマリに表示されます。
+
+=== デフォルトで利用可能な引数クラス
+
+: Object
+
+any string, and no conversion. this is fall-back.
+
+: String
+
+any none-empty string, and no conversion.
+
+: Integer
+
+Ruby/C-like integer, octal for 0-7 sequence, binary for
+0b, hexadecimal for 0x, and decimal for others; with
+optional sign prefix. Converts to Integer.
+
+: Float
+
+Float number format, and converts to Float.
+
+: Numeric
+
+Generic numeric format, and converts to Integer for integer
+format, Float for float format.
+
+: OptionParser::DecimalInteger
+
+Decimal integer format, to be converted to Integer.
+
+: OptionParser::OctalInteger
+
+Ruby/C like octal/hexadecimal/binary integer format, to be converted
+to Integer.
+
+: OptionParser::DecimalNumeric
+
+Decimal integer/float number format, to be converted to
+Integer for integer format, Float for float format.
+
+: TrueClass
+
+Boolean switch, which means whether it is present or not, whether it
+is absent or not with prefix no-, or it takes an argument
+yes/no/true/false/+/-.
+
+: FalseClass
+
+Similar to TrueClass, but defaulted to false.
+
+: Array
+
+List of strings separated by ","
+
 
 --- on_head(short [, long [, klass [, pat [, desc]]]]) {...}
 --- on_tail(short [, long [, klass [, pat [, desc]]]]) {...}
@@ -495,9 +514,34 @@ file を読み込んで各行に対して parse を行ないます。
 --- environment(env)
 
 環境変数 env に対して
-[[m:shellwords#Shellwords.shellwords]] を呼
+[[m:Shellwords.shellwords]] を呼
 んで配列にしてから parse を行ないます。
 
+--- add_banner(to)
+
+--- match_nonswitch?(str)
+
+--- switch_name
+
+Main name of the switch.
+
+#@since 1.8.3
+--- default_argv
+--- default_argv=
+Strings to be parsed in default. ARGV is default.
+#@end
+
+#@since 1.8.5
+--- getopts
+Wrapper method for getopts.rb.
+
+ params = ARGV.getopts("ab:", "foo", "bar:")
+ # params[:a] = true   # -a
+ # params[:b] = "1"    # -b1
+ # params[:foo] = "1"  # --foo
+ # params[:bar] = "x"  # --bar x
+
+#@end
 
 = class OptionParser::ParseError < StandardError
 
@@ -527,7 +571,6 @@ OptionParser の例外クラスの基底クラスです。
 = class OptionParser::AmbiguousArgument < OptionParser::ParseError
 
 オプションの引数が曖昧にしか補完できない場合に投げられます。
-
 
 
 = module OptionParser::Arguable
@@ -564,6 +607,21 @@ error message to STDERR and returns nil.
 
 Parses self destructively, and returns self just contains
 rest arguments left without parsed.
+
+#@since 1.8.5
+--- getopts
+
+Substitution of getopts is possible as follows. Also see
+[[m:OptionParser#getopts]].
+
+  def getopts(*args)
+    ($OPT = ARGV.getopts(*args)).each do |opt, val|
+      eval "$OPT_#{opt.gsub(/[^A-Za-z0-9_]/, '_')} = val"
+    end
+  rescue OptionParser::ParseError
+  end
+
+#@end
 
 = redefine Kernel
 == Constants
