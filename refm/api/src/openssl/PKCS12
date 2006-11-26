@@ -1,0 +1,23 @@
+#@since 1.8.1
+= module OpenSSL::PKCS12
+
+== Module Functions
+
+--- create
+
+= class OpenSSL::PKCS12::PKCS12Error < OpenSSL::OpenSSLError
+
+= class OpenSSL::PKCS12::PKCS12 < Object
+
+== Instance Methods
+
+--- ca_certs
+
+--- certificate
+
+--- key
+
+--- to_der
+
+#@end
+                                   
