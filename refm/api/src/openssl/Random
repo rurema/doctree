@@ -1,0 +1,23 @@
+#@since 1.8.0
+
+= module OpenSSL::Random
+
+= Module Functions
+
+--- egd
+
+--- egd_bytes
+
+--- load_random_file
+
+--- pseudo_bytes
+
+--- random_bytes
+
+--- seed
+
+--- write_random_file
+
+= class OpenSSL::Random::RandomError < OpenSSL::OpenSSLError
+
+#@end
