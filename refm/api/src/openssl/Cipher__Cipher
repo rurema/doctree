@@ -16,7 +16,7 @@
 AES も OpenSSL::Cipher::Cipher.new('aes256') などとすれば利用可能です。
 
 #@if (version >= "1.8.3")
-((<ruby 1.8.3 feature>)): Cast5 と Idea が CAST5 と IDEA に改名されました。
+ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 #@end
 
 === 使用例
@@ -158,8 +158,34 @@ pkcs5_keyivgen を使用してください。
 pass から key と iv を生成し key= と iv= に設定します。
 salt は 8-octet string でないといけません。nil を返します。
 
+--- random_iv
+--- random_key
+
+= class OpenSSL::Cipher::AES < OpenSSL::Cipher::Cipher
+#@since 1.8.5
+= class OpenSSL::Cipher::AES128 < OpenSSL::Cipher::Cipher
+= class OpenSSL::Cipher::AES192 < OpenSSL::Cipher::Cipher
+= class OpenSSL::Cipher::AES256 < OpenSSL::Cipher::Cipher
+#@end
+= class OpenSSL::Cipher::BF < OpenSSL::Cipher::Cipher
+#@since 1.8.3
+= class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher::Cipher
+#@end
+#@if (version < "1.8.3")
+= class OpenSSL::Cipher::Cast5 < OpenSSL::Cipher::Cipher
+#@end
+= class OpenSSL::Cipher::DES < OpenSSL::Cipher::Cipher
+#@since 1.8.3
+= class OpenSSL::Cipher::IDEA < OpenSSL::Cipher::Cipher
+#@end
+#@if (version < "1.8.3")
+= class OpenSSL::Cipher::Idea < OpenSSL::Cipher::Cipher
+#@end
+= class OpenSSL::Cipher::RC2 < OpenSSL::Cipher::Cipher
+= class OpenSSL::Cipher::RC4 < OpenSSL::Cipher::Cipher
+= class OpenSSL::Cipher::RC5 < OpenSSL::Cipher::Cipher
+
 #@# == エラー
 
 = class OpenSSL::CipherError < OpenSSL::OpenSSLError
-
 #@end

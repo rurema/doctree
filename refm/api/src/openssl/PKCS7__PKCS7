@@ -87,10 +87,17 @@ CRL を返します。
 
 PEM 形式に変換します。
 
+#@since 1.8.1
 --- to_der
 
 DER 形式に変換します。
+#@end
 
 --- error_string
+--- error_string=
+
+#@since 1.8.3
+--- recipients
+#@end
 
 #@end

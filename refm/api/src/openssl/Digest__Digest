@@ -71,4 +71,22 @@ name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を
 --- size
 
 digest で返す文字列のバイト長。
+
+= class OpenSSL::Digest::DSS < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::DSS1 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MD2 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MD4 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MD5 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MDC2 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::RIPEMD160 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA1 < OpenSSL::Digest::Digest
+#@since 1.8.3
+= class OpenSSL::Digest::SHA224 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA256 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA384 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA512 < OpenSSL::Digest::Digest
+#@end
+
+= class OpenSSL::Digest::DigestError < OpenSSL::OpenSSLError
 #@end

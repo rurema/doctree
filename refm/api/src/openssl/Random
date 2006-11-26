@@ -2,7 +2,7 @@
 
 = module OpenSSL::Random
 
-= Module Functions
+== Module Functions
 
 --- egd
 

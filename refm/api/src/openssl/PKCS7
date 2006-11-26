@@ -68,4 +68,44 @@ MIME canonical format への変換を行いません。
 
 --- NOVERIFY
 
+#@since 1.8.3
+= class OpenSSL::PKCS7::RecipientInfo < Object
+
+== Instance Methods
+
+--- enc_key
+
+--- issuer
+
+--- serial
+#@end
+
+= class OpenSSL::PKCS7::Signer < Object
+
+== Instance Methods
+
+#@since 1.8.3
+--- issuer
+#@end
+
+--- name
+
+--- serial
+
+--- signed_time
+
+#@since 1.8.3
+= class OpenSSL::PKCS7::SignerInfo < Object
+
+== Instance Methods
+
+--- issuer
+
+--- name
+
+--- serial
+
+--- signed_time
+#@end
+
 #@end
