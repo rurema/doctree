@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.1
 = module OpenSSL::ASN1
 
 === 参照
@@ -6,7 +6,6 @@
   * [RFC 3279] [[unknown:Algorithms and Identifiers for the Internet X.509 Public Key InfrastructureCertificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3279EN.html]]
   * [RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and CRL Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-00EN.html]]
   * [ASN.1:2002] [[unknown:"Abstract Syntax Notation One (ASN.1) Specification of Basic Notation ITU-T Rec. X.680 (2002) | ISO/IEC 8824-1:2002"|URL:http://asn1.elibel.tm.fr/en/standards/index.htm#asn1]]
-#@end
 
 == Module Functions
 
@@ -247,6 +246,8 @@ CHARACTER_STRING のタグ番号 29 を表す定数です。
 
 BMPSTRING のタグ番号 30 を表す定数です。
 
-= class ASN1Error < OpenSSL::OpenSSLError
+= class OpenSSL::ASN1::ASN1Error < OpenSSL::OpenSSLError
 
 OpenSSL::OpenSSLError を継承した例外です。
+
+#@end

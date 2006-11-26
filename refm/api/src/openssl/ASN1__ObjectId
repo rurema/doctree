@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.1
 = class OpenSSL::ASN1::ObjectId < OpenSSL::ASN1::Primitive
 
 ASN.1 のオブジェクト ID を操作するクラス

@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.1
 = class OpenSSL::ASN1::Primitive < OpenSSL::ASN1::ASN1Data
 
 == Class Methods
@@ -13,4 +13,26 @@ Primitive オブジェクトを生成します。
 --- tagging=(tag)
 
 [[c:Symbol]] オブジェクト :IMPLICIT または :EXPLICIT のいずれかをとります。
+
+
+= class OpenSSL::ASN1::Boolean < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::Integer < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::Enumerated < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::BitString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::OctetString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::UTF8String < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::NumericString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::PrintableString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::T61String < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::VideotexString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::IA5String < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::GraphicString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::ISO64String < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::GeneralString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::UniversalString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::BMPString < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::Null < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::UTCTime < OpenSSL::ASN1::Primitive
+= class OpenSSL::ASN1::GeneralizedTime < OpenSSL::ASN1::Primitive
+
 #@end
