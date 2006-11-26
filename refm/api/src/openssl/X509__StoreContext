@@ -1,5 +1,36 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class OpenSSL::X509::StoreContext < Object
 
-[[unknown:¼¹É®¼ÔÊç½¸]]
+== Class Methods
+---new
+
+== Instance Methods
+
+--- chain
+
+--- cleanup
+
+--- current_cert
+
+--- current_crl
+
+--- error
+--- error=
+
+--- error_depth
+
+--- error_string
+
+--- flags=
+
+--- purpose=
+
+#@since 1.8.2
+--- time=
+#@end
+
+--- trust=
+
+--- verify
+
 #@end

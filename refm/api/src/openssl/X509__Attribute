@@ -1,0 +1,20 @@
+#@since 1.8.1
+
+= class OpenSSL::X509::Attribute < Object
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- oid 
+--- oid=
+
+--- value
+--- value=
+
+--- to_der
+
+= class OpenSSL::X509::AttributeError < OpenSSL::OpenSSLError
+#@end

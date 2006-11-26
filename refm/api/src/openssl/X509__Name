@@ -1,11 +1,19 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class OpenSSL::X509::Name < Object
 
 == Class Methods
 
+#@since 1.8.1
 --- parse(str)
 
 名前をパースして Name オブジェクトを返します。
+#@end
+
+#@since 1.8.2
+--- parse_openssl
+
+--- parse_rfc2253
+#@end
 
 --- new([[oid1, val1], [oid2, val2] ...], template = OBJECT_TYPE_TEMPLATE)
 --- new
@@ -35,6 +43,7 @@ Name オブジェクトを生成します。
 
 DER 形式を返します。
 
+#@since 1.8.2
 == Constants
 
 --- OBJECT_TYPE_TEMPLATE
@@ -52,8 +61,12 @@ DER 形式を返します。
 
 --- RFC2253
 
+--- RFC2253DN
+
 --- ONELINE
 
 --- MULTILINE
+#@end
 
+= class OpenSSL::X509::NameError < OpenSSL::OpenSSLError
 #@end

@@ -74,4 +74,5 @@ CRL の拡張領域。[[c:OpenSSL::X509::Extension]] の配列。
 
 拡張領域に値を加えます。
 
+= class OpenSSL::X509::CRLError < OpenSSL::OpenSSLError
 #@end

@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class OpenSSL::X509::Store < Object
 
 証明書のストレージクラス。
@@ -9,6 +9,7 @@
 
 == Instance Methods
 
+--- verify_callback
 --- verify_callback=(proc)
 
 --- error_string
@@ -55,4 +56,13 @@ verify を呼び出した時のエラー内容を述べた文字列です。エラーでない場合は、"ok" が
 
 証明書 cert をストレージに存在する CA 証明書で検証します。
 
+#@since 1.8.2
+--- time=
+#@end
+
+#@since 1.8.3
+--- set_default_paths
+#@end
+
+= class OpenSSL::X509::Store < OpenSSL::OpenSSLError
 #@end

@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class OpenSSL::X509::ExtensionFactory < Object
 
 [[unknown:執筆者募集]]
@@ -13,26 +13,43 @@ ExtensionFactory オブジェクトを生成します。
 
 == Instance Methods
 
+#@since 1.8.1
 --- create_ext(oid, value, critical = false)
 
 OpenSSL::X509::Extension を生成して返します。
+#@end
 
 --- issuer_certificate
 --- issuer_certificate=(name)
 
 issuer の証明書を設定します。
 
+#@since 1.8.1
 --- subject_certificate
+#@end
 --- subject_certificate=(name)
     subject の証明書を設定します。
 
+#@since 1.8.1
 --- subject_request
+#@end
 --- subject_request=(name)
 
+#@since 1.8.1
 --- crl
+#@end
 --- crl=(crl)
 
+#@since 1.8.1
 --- config
 --- config=(config)
+#@end
+
+--- create_ext_from_array
+
+--- create_ext_from_hash
+
+--- create_ext_from_string
+
 
 #@end

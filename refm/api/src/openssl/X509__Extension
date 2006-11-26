@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class OpenSSL::X509::Extension < Object
 
 X.509 v3 証明書の拡張領域のためのクラスです。[[c:OpenSSL::X509::Certificate]] オブジェクトは
@@ -42,13 +42,17 @@ long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
 
 == Instance Methods
 
+#@since 1.8.1
 ---critical=(bool)
+#@end
 ---critical?
 
 クリティカルかどうかを設定します。
 
 ---oid
+#@since 1.8.1
 ---oid=(oid)
+#@end
 
 OID を文字列で設定します。
 
@@ -57,8 +61,18 @@ OID を文字列で設定します。
 DER 形式に変換します。
 
 ---value
+#@since 1.8.1
 ---value=(value)
+#@end
 
 値を設定します。
+
+--- to_a
+
+--- to_h
+
+--- to_s
+
+= class OpenSSL::X509::ExtensionError < OpenSSL::OpenSSLError
 
 #@end

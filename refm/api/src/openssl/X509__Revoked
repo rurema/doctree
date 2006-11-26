@@ -27,4 +27,6 @@
 --- add_extension(ex)
 
 拡張領域に値を加えます。
+
+= class OpenSSL::X509::RevokedError < OpenSSL::OpenSSLError
 #@end

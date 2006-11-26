@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class OpenSSL::X509::Certificate < Object
 
 X509 証明書クラス
@@ -90,4 +90,7 @@ key は証明書の発行者の公開鍵です。 key で証明書の署名を検証します。
 --- check_private_key(pkey)
 
 与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめます。
+
+= class OpenSSL::X509::CertificateError < OpenSSL::OpenSSLError
+
 #@end
