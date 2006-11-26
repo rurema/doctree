@@ -40,9 +40,11 @@ RSA °Å¹æ¸°¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£pass ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤Ï¡¢ÈëÌ©¸°¤ò pass ¤ò»È¤
 
 ¸°¥Ú¥¢¤ò PEM ·Á¼°¤Ç½ÐÎÏ¤·¤Þ¤¹¡£cipher ¤È pass ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¡¢ÈëÌ©¸°¤ò°Å¹æ cipher [[c:OpenSSL::Cipher::Cipher]] ¤È¥Ñ¥¹¥ï¡¼¥É pass ¤ò»È¤Ã¤Æ°Å¹æ²½¤·¤Þ¤¹¡£
 
+#@since 1.8.2
 --- to_der
 
 DER ·Á¼°¤ËÊÑ´¹¤·¤Þ¤¹¡£
+#@end
 
 --- public_key
 
@@ -64,6 +66,24 @@ DER ·Á¼°¤ËÊÑ´¹¤·¤Þ¤¹¡£
 
 Ê¸»úÎó str ¤òÈëÌ©¸°¤ÇÉü¹æ²½¤·¤Þ¤¹¡£
 
+--- e
+--- e=
+
+--- iqmp 
+--- iqmp=
+
+--- n
+--- n=
+
+--- p
+--- p=
+
+--- q
+--- q=
+
+--- params
+
+#@since 1.8.2
 == Constants
 
 --- PKCS1_PADDING
@@ -76,5 +96,7 @@ DER ·Á¼°¤ËÊÑ´¹¤·¤Þ¤¹¡£
 [[m:OpenSSL::PKey::RSA#private_encrypt]]¡¢
 [[m:OpenSSL::PKey::RSA#private_decrypt]] ¤Î
 ÂèÆó°ú¿ô¤Ë»ØÄê¤Ç¤­¤ë¥Ñ¥Ç¥£¥ó¥°¥â¡¼¥É¡£
+#@end
 
+class OpenSSL::PKey::RSAError < OpenSSL::PKey::PKeyError
 #@end

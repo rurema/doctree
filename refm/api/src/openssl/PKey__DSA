@@ -43,9 +43,11 @@ PEM ·Á¼°¤ËÊÑ´¹¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 ¸ø³«¸°¤òÊÖ¤·¤Þ¤¹¡£
 
+#@since 1.8.2
 --- to_der
 
 DER ·Á¼°¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+#@end
 
 --- to_text
 
@@ -61,6 +63,7 @@ digest ¤Ï OpenSSL::PKey::DSS1 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¹¡£
 digest ¤Ë¤Ï DSA ¤ÎÀ­¼Á¤«¤é OpenSSL::PKey::DSS1 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Î¤ß¼õ¤±ÉÕ¤±¤Þ¤¹¡£Â¾¤Ï
 Îã³° OpenSSL::PKey::PKeyError ¤òÅê¤²¤Þ¤¹¡£
 
+#@since 1.8.2
 --- p
 --- p=(p)
 
@@ -76,4 +79,6 @@ digest ¤Ë¤Ï DSA ¤ÎÀ­¼Á¤«¤é OpenSSL::PKey::DSS1 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Î¤ß¼õ¤±ÉÕ¤±¤Þ¤¹¡£Â
 --- priv_key
 --- priv_key=(private_key)
     ¥Ñ¥é¥á¡¼¥¿¡£
+#@end
+
 #@end

@@ -45,9 +45,11 @@ Diffie-Hellman 鍵交換の第2ステップです。共有暗号鍵を自分の秘密鍵と相手の公開鍵 (
 
 鍵ペアを PEM 形式で出力します。
 
+#@since 1.8.2
 --- to_der
 
 DER 形式に変換します。
+#@end
 
 --- public_key
 
@@ -71,14 +73,19 @@ DER 形式に変換します。
 [[c:OpenSSL::PKey::PKey]] で定義された sign と verify を呼び出すことができますが、
 Diffie-Hellman 暗号の性質から、呼び出しても全て PKeyError になります。
 
+#@since 1.8.2
 --- p
+--- p=
 
 --- g
+--- g=
 
 --- pub_key
 --- pub_key=(public_key)
 
 --- priv_key
 --- priv_key=(private_key)
+#@end
 
+class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
 #@end
