@@ -79,8 +79,7 @@ See DRb::DRbServer.default_acl.
 --- install_id_conv(idconv)
 
 Set the default id conv object.
-
-See DRbServer#default_id_conv.
+See [[m:DRbServer#default_id_conv]].
 
 #@# bc-rdoc: detected missing name: regist_server
 --- regist_server(server)
@@ -148,7 +147,22 @@ Get the URI defining the local dRuby space.
 
 This is the URI of the current server. See #current_server.
 
+= class DRb::DRbError < RuntimeError
+
+= class DRb::DRbServerNotFound < DRb::DRbError
+
+Error raised by the DRb module when an attempt is made to refer to the context's current
+drb server but the context does not have one. See current_server.
+
+= class DRb::DRbRemoteError < DRb::DRbError
+
+An exception wrapping an error object
+
+
+
 #@include(drb/DRbIdConv)
 #@include(drb/DRbObject)
 #@include(drb/DRbServer)
+#@include(drb/DRbUnknown)
+#@include(drb/DRbUndumped)
 

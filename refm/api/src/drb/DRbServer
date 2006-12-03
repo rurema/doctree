@@ -18,6 +18,11 @@ See new(). The initial default value is nil.
 Set the default value for the :argc_limit option.
 See new(). The initial default value is 256.  
 
+--- default_id_conv(idconv)
+
+Set the default value for the :id_conv option.
+See #new(). The initial default value is a [[c:DRbIdConv]] instance.
+
 --- default_load_limit(sz)
 
 Set the default value for the :load_limit option.
@@ -99,10 +104,35 @@ Stop this server.
 
 Convert a local object to a dRuby reference. 
 
+--- to_obj(ref)
+
+Convert a dRuby reference to the local object it refers to.
+
 --- verbose
 --- verbose=
 
 Get whether the server is in verbose mode.
 In verbose mode, failed calls are logged to stdout.
 
+--- config 
+The configuration of this DRbServer
 
+--- front
+The front object of the DRbServer.
+
+This object receives remote method calls made on the server¡Çs URI alone, with an object id.
+--- safe_level
+
+--- thread
+The main thread of this DRbServer.
+
+This is the thread that listens for and accepts connections from clients, not that handles each client¡Çs request-response session.
+
+--- uri
+The URI of this DRbServer.
+
+== Constants
+
+--- INSECURE_METHOD
+List of insecure methods.
+These methods are not callable via dRuby. 
