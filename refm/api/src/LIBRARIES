@@ -40,6 +40,15 @@ dl/types
 dl/win32
 #@end
 drb
+drb/acl
+drb/eq
+drb/extserv
+drb/extservm
+drb/gw
+drb/observer
+drb/ssl
+drb/timeridconv
+drb/unix
 e2mmap
 erb
 eregex

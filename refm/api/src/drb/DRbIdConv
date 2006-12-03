@@ -1,0 +1,28 @@
+= class DRb::DRbIdConv < Object
+
+Class responsible for converting between an object and its id.
+
+This, the default implementation, uses an object's local ObjectSpace
+id as its id. This means that an object's identification over drb
+remains valid only while that object instance remains alive within the
+server runtime.
+
+For alternative mechanisms, see [[c:DRb::TimerIdConv]] in [[lib:rdb/timeridconv]]
+and DRbNameIdConv in sample/name.rb in the full drb distribution.
+
+== Instance Methods
+
+#@# bc-rdoc: detected missing name: to_id
+--- to_id(obj)
+
+Convert an object into a reference id.
+This implementation returns the object's id in the local object
+space.
+
+#@# bc-rdoc: detected missing name: to_obj
+--- to_obj(ref)
+
+Convert an object reference id to an object.
+This implementation looks up the reference id in the local object
+space and returns the object it refers to.
+

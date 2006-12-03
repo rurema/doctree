@@ -1,0 +1,108 @@
+= class DRb::DRbServer < Object
+
+Class representing a drb server instance.
+
+A DRbServer must be running in the local process before any incoming dRuby calls can be accepted, or any local objects can be passed as dRuby references to remote processes, even if those local objects are never actually called remotely. You do not need to start a DRbServer in the local process if you are only making outgoing dRuby calls passing marshalled parameters.
+
+Unless multiple servers are being used, the local DRbServer is normally started by calling DRb.start_service.
+
+== Class Methods
+
+--- default_acl(acl)
+
+Set the default value for the :acl option.
+See new(). The initial default value is nil. 
+
+--- default_argc_limit(argc)
+
+Set the default value for the :argc_limit option.
+See new(). The initial default value is 256.  
+
+--- default_load_limit(sz)
+
+Set the default value for the :load_limit option.
+See new(). The initial default value is 25 MB. 
+
+--- default_safe_level(level)   
+
+--- new(uri=nil, front=nil, config_or_acl=nil)
+
+Create a new DRbServer instance.
+
+uri is the URI to bind to. This is normally of the form 
+¡Ædruby://<hostname>:<port>¡Ç where <hostname> is a hostname of the
+local machine. If nil, then the system¡Çs default hostname will be
+bound to, on a port selected by the system; these value can be
+retrieved from the uri attribute. ¡Ædruby:¡Ç specifies the default
+dRuby transport protocol: another protocol, such as ¡Ædrbunix:¡Ç, can
+be specified instead.
+
+front is the front object for the server, that is, the object to which
+remote method calls on the server will be passed. If nil, then the
+server will not accept remote method calls.
+
+If config_or_acl is a hash, it is the configuration to use for this server. 
+The following options are recognised:
+
+: idconv
+
+an id-to-object conversion object. This defaults to an instance of the class DRb::DRbIdConv.
+
+: verbose
+if true, all unsuccessful remote calls on objects in the server will be logged to $stdout. false by default.
+
+: tcp_acl
+the access control list for this server. See the ACL class from the main dRuby distribution.
+
+: load_limit
+the maximum message size in bytes accepted by the server. Defaults to 25 MB (26214400).
+
+: argc_limit
+the maximum number of arguments to a remote method accepted by the server. Defaults to 256.
+
+The default values of these options can be modified on a class-wide
+basis by the class methods default_argc_limit, default_load_limit,
+default_acl, default_id_conv, and verbose=
+
+If config_or_acl is not a hash, but is not nil, it is assumed to be
+the access control list for this server. See the :tcp_acl option for
+more details.
+
+If no other server is currently set as the primary server, this will
+become the primary server.
+
+The server will immediately start running in its own thread.
+
+--- verbose
+--- verbose= 
+Get the default value of the :verbose option. 
+See new(). The initial default value is false.
+
+
+== Instance Methods
+
+--- alive?
+
+Is this server alive? 
+
+--- check_insecure_method(obj, msg_id)
+
+Check that a method is callable via dRuby.
+obj is the object we want to invoke the method on. msg_id is the method name, as a Symbol.
+If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
+
+--- stop_service()
+
+Stop this server. 
+
+--- to_id(obj)
+
+Convert a local object to a dRuby reference. 
+
+--- verbose
+--- verbose=
+
+Get whether the server is in verbose mode.
+In verbose mode, failed calls are logged to stdout.
+
+
