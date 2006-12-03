@@ -1,4 +1,4 @@
-
+#@since 1.8.0
 = class CSV::IOBuf < CSV::StreamBuf
 
 == Instance Methods
@@ -12,3 +12,4 @@
 --- read(size)
 
 --- terminate
+#@end

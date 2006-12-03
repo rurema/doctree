@@ -1,3 +1,4 @@
+#@since 1.8.0
 = class CSV::BasicWriter < CSV::Writer
 
 == Class Methods
@@ -7,3 +8,5 @@
 == Instance Methods
 
 --- close_on_terminate
+
+#@end

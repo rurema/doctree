@@ -1,3 +1,4 @@
+#@since 1.8.0
 = class CSV::IOReader < CSV::Reader
 
 == Class Methods
@@ -14,3 +15,4 @@
 
 --- terminate
 
+#@end
