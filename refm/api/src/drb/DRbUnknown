@@ -1,0 +1,43 @@
+= class DRb::DRbUnknown < Object
+
+Class wrapping a marshalled object whose type is unknown locally.
+
+If an object is returned by a method invoked over drb, but the class
+of the object is unknown in the client namespace, or the object is a
+constant unknown in the client namespace, then the still-marshalled
+object is returned wrapped in a DRbUnknown instance.
+
+If this object is passed as an argument to a method invoked over drb,
+then the wrapped object is passed instead.
+
+The class or constant name of the object can be read from the name
+attribute. The marshalled object is held in the buf attribute.
+
+== Class Methods
+
+--- new(err, buf)
+
+Create a new DRbUnknown object.
+
+buf is a string containing a marshalled object that could not be
+unmarshalled. err is the error message that was raised when the
+unmarshalling failed. It is used to determine the name of the
+unmarshalled object.
+
+== Instance Methods
+
+--- exception()
+
+Create a DRbUnknownError exception containing this object. 
+
+--- reload()
+
+Attempt to load the wrapped marshalled object again.
+
+If the class of the object is now known locally, the object will be
+unmarshalled and returned. Otherwise, a new but identical DRbUnknown
+object will be returned.
+
+= class DRb::DRbUnknownError < DRb::DRbError
+
+An exception wrapping a [[c:DRb::DRbUnknown]] object
