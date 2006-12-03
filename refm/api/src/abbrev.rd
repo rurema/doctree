@@ -48,6 +48,6 @@ words は文字列の配列です。短縮形と元の文字列の配列の配列を返します。
 
 --- abbrev(pattern = nil)
 
-Abbrev.abbrev(self, pattern) と同じです。
+[[m:Abbrev.abbrev]](self, pattern) と同じです。
 
 #@end
