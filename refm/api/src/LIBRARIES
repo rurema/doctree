@@ -41,7 +41,6 @@ dl/win32
 #@end
 drb
 drb/acl
-drb/eq
 drb/extserv
 drb/extservm
 drb/gw
