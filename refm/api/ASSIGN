@@ -93,7 +93,7 @@ English
 Env
 Win32API
 abbrev                          okkez
-base64                          okkez
+base64                          okkez           done
 benchmark
 bigdecimal
 bigdecimal/jacobian
