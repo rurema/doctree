@@ -5,7 +5,7 @@ Object wrapping a reference to a remote drb object.
 Method calls on this object are relayed to the remote object 
 that this object is a stub for.
 
-= Class Methods
+== Class Methods
 #@# bc-rdoc: detected missing name: _load
 --- _load(s)
 
