@@ -104,13 +104,13 @@ cgi
 cgi-lib
 cgi/session
 complex                         sheepman        done
-csv
+csv                             okkez
 curses
 date                            tadf            done
 date2
 dbm                             sheepman        done
 debug
-delegate
+delegate                        okkez
 digest
 digest/md5
 digest/rmd160
