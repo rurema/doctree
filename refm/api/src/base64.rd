@@ -1,3 +1,7 @@
+require kconv
+require nkf
+
+
 MIME Base64のデコード/エンコードを行うメソッドが定義されています。
 このライブラリは Base64 エンコーディングの
 サンプルスクリプトとして書かれました。
@@ -19,7 +23,7 @@ ASCII 文字のうちの 65 文字 ([A-Za-z0-9+/] の 64 文字と '=')
                              # => "C 言語ポインタ完全制覇"
 
 
-
+#@since 1.8.2
 = module Base64
 
 == Module Functions
@@ -59,3 +63,34 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 文字列 bin をエンコードし、len の長さで折り返し、表示します。
 
 表示までしてしまうのはサンプルだからです。
+
+#@include(base64/Base64__Deprecated)
+
+= reopen Kernel
+
+== Module Functions
+
+--- decode64(str)
+
+--- encode64(str)
+
+--- decode_b(str)
+
+--- b64encode(bin, len = 60)
+
+#@end
+
+#@if (version <= "1.8.1")
+= reopen Kernel
+
+== Private Instance Methods
+
+--- decode64(str)
+
+--- encode64(str)
+
+--- decode_b(str)
+
+--- b64encode(bin, len = 60)
+
+#@end

@@ -1,0 +1,15 @@
+#@since 1.8.2
+
+= module Base64::Deprecated
+
+== Module Functions
+
+--- decode64(str)
+
+--- encode64(str)
+
+--- decode_b(str)
+
+--- b64encode(bin, len = 60)
+
+#@end
