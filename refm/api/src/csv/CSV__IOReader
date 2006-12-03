@@ -8,3 +8,9 @@
 
 --- close_on_terminate
 
+== Private Instance Methods
+
+--- get_row(row)
+
+--- terminate
+

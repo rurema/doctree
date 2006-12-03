@@ -1,0 +1,14 @@
+
+= class CSV::IOBuf < CSV::StreamBuf
+
+== Instance Methods
+
+--- new(s)
+
+--- close
+
+== Private Instance Methods
+
+--- read(size)
+
+--- terminate

@@ -1,0 +1,45 @@
+#@if (version <= '1.8.5')
+
+= class CSV::Cell < String
+
+#@# deprecated
+
+== Class Methods
+
+--- new([data = '', is_null = false])
+
+== Instance Methods
+
+#@if (version <= '1.8.1')
+
+--- ==
+
+#@end
+
+#@if (version <= '1.8.5')
+
+--- data
+
+#@end
+
+#@if (version <= '1.8.1')
+
+--- data=
+
+--- is_null
+
+--- is_null=
+
+--- match
+
+#@end
+
+#@if (version == '1.8.1')
+
+--- to_s
+
+--- to_str
+
+#@end
+
+#@end

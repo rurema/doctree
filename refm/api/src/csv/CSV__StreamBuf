@@ -1,0 +1,38 @@
+#@since 1.8.0
+
+= class CSV::StreamBuf
+
+== Constants
+
+--- BufSize
+1024 * 8
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- [](idx[, n = nil])
+
+--- drop(n)
+
+--- is_eos?
+
+== Protected Instance Methods
+
+--- terminate
+
+--- read(size)
+
+== Private Instance Methods
+
+--- buf_size(idx)
+
+--- add_buf
+
+--- rel_buf
+
+--- idx_is_eos?(idx)
+
+#@end

@@ -1,3 +1,5 @@
+#@since 1.8.0
+
 = class CSV::Reader < Object
 
 include Enumerable
@@ -17,3 +19,14 @@ CSVの読み込み時のベースとなるクラス
 --- shift
 
 --- close
+
+== Private Instance Methods
+
+--- initialize(dev)
+#@# ここじゃないような気がします。okkez
+
+--- get_row(row)
+
+--- terminate
+
+#@end

@@ -1,6 +1,13 @@
+#@since 1.8.0
+
 = class CSV::StringReader < CSV::Reader
 
 == Class Methods
 
 --- new(string[, fs = ','[, rs = nil]])
 
+== Private Instance Methods
+
+--- get_row(row)
+
+#@end

@@ -1,3 +1,5 @@
+#@since 1.8.0
+
 = class CSV::Writer < Object
 
 == Class Methods
@@ -9,8 +11,12 @@
 == Instance Methods
 
 --- <<(row)
-
 --- add_row(row)
 
 --- close
 
+== Private Instance Methods
+
+--- terminate
+
+#@end

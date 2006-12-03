@@ -1,0 +1,16 @@
+#@if (version <= '1.8.5')
+= class Row < Array
+
+#@# deprecated
+
+== Instance Methods
+
+#@if (version <= '1.8.1')
+
+--- match
+
+--- to_a
+
+#@end
+
+#@end

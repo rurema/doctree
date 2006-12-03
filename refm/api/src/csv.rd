@@ -46,6 +46,8 @@ CSV (Comma Separated Value) を扱うクラスです。
 
 ブロック未指定の場合 CSV::Writer を返します。
 
+#@since 1.8.2
+
 --- foreach(path[, rs = nil]) { ... }
 
 読み込みモードでファイルを開き、各行を配列でブロックに渡します。
@@ -61,6 +63,8 @@ CSV (Comma Separated Value) を扱うクラスです。
 
 path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
+#@end
+
 --- generate(path[, fs = nil[, rs = nil]]) { ... }
 
 --- parse(str_or_readable[, fs = nil[, rs = nil]])
@@ -73,9 +77,14 @@ path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
 --- generate_row(src, cells, out_dev[, fs = nil[, rs = nil]])
 
-#@include(csv/BasicWriter)
-#@include(csv/IOReader)
-#@include(csv/Reader)
-#@include(csv/StringReader)
-#@include(csv/Writer)
+#@include(csv/CSV__BasicWriter)
+#@include(csv/CSV__Cell)
+#@include(csv/CSV__IOBuf)
+#@include(csv/CSV__IOReader)
+#@include(csv/CSV__IllegalFormatError)
+#@include(csv/CSV__Reader)
+#@include(csv/CSV__Row)
+#@include(csv/CSV__StreamBuf)
+#@include(csv/CSV__StringReader)
+#@include(csv/CSV__Writer)
 #@end
