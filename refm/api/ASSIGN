@@ -165,7 +165,7 @@ net/http                        aamine
 net/https                       aamine
 net/imap
 net/pop                         aamine          done
-net/smtp                        aamine
+net/smtp                        aamine          done
 net/telnet
 net/telnets
 nkf

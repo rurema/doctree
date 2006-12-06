@@ -13,7 +13,7 @@ SMTP を使ってメールを送るにはまず SMTP.start でセッションを開きます。
 
   require 'net/smtp'
   Net::SMTP.start( 'your.smtp.server', 25 ) {|smtp|
-      # use smtp object only in this block
+    # use smtp object only in this block
   }
 
 your.smtp.server は適切な SMTP サーバのアドレスに読みかえてください。
@@ -141,6 +141,8 @@ Example:
 The default SMTP port number, 25.
 
 #@since 1.9.0
+--- default_ssl_context
+
 --- default_ssl_port
 
 The default SMTP/SSL port number, 465.
@@ -149,23 +151,21 @@ The default SMTP/SSL port number, 465.
 
 The default SMTP/TLS port number, 587.
 
+--- disable_ssl
+
+--- disable_tls
+
 --- enable_ssl(context = SMTP.default_ssl_context)
 
 Enable SMTP/SSL.
 
---- disable_ssl
-
---- use_ssl?
-
 --- enable_tls
-
---- disable_tls
-
---- use_tls?
 
 --- ssl_context
 
---- default_ssl_context
+--- use_ssl?
+
+--- use_tls?
 #@end
 
 == Instance Methods
@@ -174,18 +174,6 @@ Enable SMTP/SSL.
 
 --- esmtp
 --- esmtp=(bool)
-
---- use_ssl?
-
---- use_tls?
-
---- enable_ssl
-
---- disable_ssl
-
---- enable_tls
-
---- disable_tls
 
 --- set_debug_output(f)
 #@since 1.9.0
@@ -205,7 +193,6 @@ authtype は使用する認証のタイプで、
 シンボルで :plain か :cram_md5 を指定します。
 
 --- started?
---- active?
 
 SMTP セッションが開始されていたら真。
 
@@ -277,6 +264,18 @@ to_addrs は宛先のメールボックスです。
   }
 
 #@since 1.9.0
+--- use_ssl?
+
+--- use_tls?
+
+--- disable_ssl
+
+--- disable_tls
+
+--- enable_ssl
+
+--- enable_tls
+
 --- authenticate(user, secret, authtype)
 
 --- auth_plain(user, secret)
@@ -324,3 +323,9 @@ Dispatch DATA command.
 
 Dispatch QUIT command.
 #@end
+
+== Constants
+
+--- Revision
+
+File revision.  You cannot assume any specific format.
