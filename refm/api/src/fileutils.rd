@@ -1,5 +1,3 @@
-#@since 1.8.0
-
 = module FileUtils
 
 基本的なファイル操作を集めたモジュールです。
@@ -8,6 +6,8 @@
 
 --- cd(dir, options = {})
 --- cd(dir, options = {}) {|dir| .... }
+--- chdir(dir, options = {})
+--- chdir(dir, options = {}) {|dir| .... }
 
 プロセスのカレントディレクトリを dir に変更します。
 ブロックとともに呼び出された時はブロック終了後に
@@ -142,6 +142,7 @@ options には :preserve, :noop, :verbose が指定できます。
   FileUtils.cp 'eval.c', 'eval.c.org'
 
 --- cp(list, dir, options = {})
+--- copy(list, dir, options = {})
 
 file1 を dir/file1 にコピー、file2 を dir/file2 にコピー、
 というように、ディレクトリ dir の中にファイル file1、file2 …を
@@ -370,10 +371,8 @@ options には :noop, :verbose が指定できます。
   # does not remove directory really, outputing message.
   FileUtils.rmdir('somedir', {:verbose => true, :noop => true})
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 --- remove_entry(path, force = false)
-
-((<ruby 1.8.3 feature>))
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
@@ -387,6 +386,7 @@ force が真のときは削除中に発生した StandardError を無視します。
 詳しくは remove_entry_secure の項を参照してください。
 #@end
 
+#@since 1.8.3
 --- remove_entry_secure(path, force = false)
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
@@ -413,10 +413,17 @@ rm_r および remove_entry は以下の条件が満たされるときにはセキュリティ
     その場合 / や /var が全ユーザから書き込み可能であってはなりません。
 
 この条件が満たされない場合 remove_entry_secure は安全ではありません。
+#@end
 
 --- remove_file(path, force = false)
 
 ファイル path を削除します。
+
+force が真のときは削除中に発生した StandardError を無視します。
+
+--- remove_dir(path, force = false)
+
+ディレクトリ path を削除します。
 
 force が真のときは削除中に発生した StandardError を無視します。
 
@@ -462,4 +469,3 @@ FileUtils と同じメソッドが定義されていますが、
 
 FileUtils と同じメソッドが定義されていますが、
 実際にファイルを変更する操作は実行せず、操作を表示します。
-#@end

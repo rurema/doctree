@@ -54,7 +54,9 @@ eregex
 etc
 expect
 fcntl
+#@since 1.8.0
 fileutils
+#@end
 final
 finalize
 find
