@@ -1,0 +1,81 @@
+= module DRb::DRbProtocol
+
+Module managing the underlying network protocol(s) used by drb.
+
+By default, drb uses the [[c:DRbTCPSocket protocol]]. Other protocols can be defined. 
+
+A new protocol is registered with the DRbProtocol module using the add_protocol method.
+
+For examples of other protocols, see [[c:DRb::DRbUNIXSocket]] in [[lib:drb/unix]], and HTTP0 in sample/http0.rb and sample/http0serv.rb in the full drb distribution.
+
+All of these methods should raise a [[c:DRb::DRbBadScheme]] error if
+the URI does not identify the protocol they support (e.g. "druby:" for
+the standard Ruby protocol). This is how the [[c:DRb::DRbProtocol]] module, given
+a URI, determines which protocol implementation serves that protocol.
+
+== Module Functions
+
+--- add_protocol(prot)
+
+Add a new protocol to the DRbProtocol module. 
+
+A protocol must define the following class methods:
+
+: open(uri, config)
+ Open a client connection to the server at uri, using configuration config.  Return a protocol instance for this connection.
+
+: open_server(uri, config)
+ Open a server listening at uri, using configuration config.  Return a protocol instance for this listener.
+
+: uri_option(uri, config)
+ Take a URI, possibly containing an option component (e.g. a trailing '?param=val'), and return a [uri, option] tuple.
+
+The DRbProtocol module asks each registered protocol in turn to try to open the URI. Each protocol signals that it does not handle that URI by raising a [[c:DRb::DRbBadScheme]] error. If no protocol recognises the URI, then a [[c:DRb::DRbBadURI]] error is raised. If a protocol accepts the URI, but an error occurs in opening it, a [[c:DRb::DRbConnError]] is raised.
+==== open_server
+The protocol instance returned by open_server must have the following methods:
+
+: accept
+ Accept a new connection to the server. Returns a protocol instance capable of communicating with the client. 
+
+: close
+ Close the server connection. 
+
+: uri
+ Get the URI for this server. 
+
+==== open
+The protocol instance returned by open must have the following methods:
+
+: send_request (ref, msg_id, arg, b)
+ Send a request to ref with the given message id and arguments. This is most easily implemented by calling DRbMessage.send_request, providing a stream that sits on top of the current protocol. 
+
+: recv_reply
+ Receive a reply from the server and return it as a [success-boolean, reply-value] pair. This is most easily implemented by calling DRb.recv_reply, providing a stream that sits on top of the current protocol. 
+
+: alive?
+ Is this connection still alive? 
+
+: close
+ Close this connection. 
+
+==== open_server().accept()
+The protocol instance returned by open_server().accept() must have the following methods:
+
+: recv_request
+ Receive a request from the client and return a [object, message, args, block] tuple. This is most easily implemented by calling DRbMessage.recv_request, providing a stream that sits on top of the current protocol. 
+
+: send_reply(succ, result)
+ Send a reply to the client. This is most easily implemented by calling DRbMessage.send_reply, providing a stream that sits on top of the current protocol. 
+
+: close
+ Close this connection. 
+
+= class DRb::DRbConnError < DRb::DRbError
+
+Error raised when an error occurs on the underlying communication protocol.
+
+= class DRb::DRbBadScheme < DRb::DRbError 
+Error raised by a dRuby protocol when it doesn't support the scheme specified in a URI. See DRb::DRbProtocol.
+
+= class DRb::DRbBadURI < DRb::DRbError 
+Error raised by the DRbProtocol module when it cannot find any protocol implementation support the scheme specified in a URI.

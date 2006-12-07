@@ -41,7 +41,7 @@ error is raised.
 Get the front object of the current server.
 
 This raises a DRbServerNotFound error if there is no current
-server. See #current_server.
+server. See [[m:DRb.current_server]].
 
 #@# bc-rdoc: detected missing name: here?
 --- here?(uri)
@@ -53,13 +53,13 @@ Is uri the URI for the current local server?
 
 Set the default acl.
 
-See DRb::DRbServer.default_acl.
+See [[m:DRb::DRbServer.default_acl]].
 
 #@# bc-rdoc: detected missing name: install_id_conv
 --- install_id_conv(idconv)
 
 Set the default id conv object.
-See [[m:DRbServer#default_id_conv]].
+See [[m:DRb::DRbServer.default_id_conv]].
 
 #@# bc-rdoc: detected missing name: regist_server
 --- regist_server(server)
@@ -138,11 +138,19 @@ drb server but the context does not have one. See current_server.
 
 An exception wrapping an error object
 
+= class DRbObject < Object
+DRb::DRbObject のエイリアスです。
 
+= class DRbIdConv < Object
+DRb::DRbIdConv のエイリアスです。
+
+= class DRbUndumped < Object
+DRb::DRbUndumped のエイリアスです。
 
 #@include(drb/DRbIdConv)
 #@include(drb/DRbObject)
 #@include(drb/DRbServer)
 #@include(drb/DRbUnknown)
 #@include(drb/DRbUndumped)
+#@include(drb/DRbProtocol)
 

@@ -7,7 +7,7 @@ id as its id. This means that an object's identification over drb
 remains valid only while that object instance remains alive within the
 server runtime.
 
-For alternative mechanisms, see [[c:DRb::TimerIdConv]] in [[lib:rdb/timeridconv]]
+For alternative mechanisms, see [[c:DRb::TimerIdConv]] in [[lib:drb/timeridconv]]
 and DRbNameIdConv in sample/name.rb in the full drb distribution.
 
 == Instance Methods

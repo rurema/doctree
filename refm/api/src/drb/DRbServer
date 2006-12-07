@@ -21,7 +21,7 @@ See new(). The initial default value is 256.
 --- default_id_conv(idconv)
 
 Set the default value for the :id_conv option.
-See #new(). The initial default value is a [[c:DRbIdConv]] instance.
+See #new(). The initial default value is a [[c:DRb::DRbIdConv]] instance.
 
 --- default_load_limit(sz)
 
