@@ -122,7 +122,7 @@ dl/import
 dl/struct
 dl/types
 dl/win32
-drb                             sheepman  
+drb                             sheepman        done
 e2mmap
 erb
 eregex
@@ -154,7 +154,7 @@ kconv
 logger
 mailread
 mathn
-matrix                          sheepman
+matrix                          sheepman        done
 md5
 mkmf
 monitor
