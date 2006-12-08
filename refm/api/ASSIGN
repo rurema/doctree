@@ -230,9 +230,9 @@ tsort                           sheepman        done
 un                              sheepman        done
 uri                             sheepman        done
 weakref                         sheepman        done
-webrick                         iwadon
-webrick/cgi                     iwadon
-webrick/ssl                     iwadon
+webrick                         iwadon          done
+webrick/cgi                     iwadon          done
+webrick/ssl                     iwadon          done
 win32/registry
 win32ole
 xmlrpc                          date
