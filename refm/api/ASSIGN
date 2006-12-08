@@ -147,7 +147,7 @@ iconv
 importenv
 io/nonblock
 io/wait
-ipaddr
+ipaddr                          iwadon
 irb
 jcode                           iwadon          done
 kconv                           iwadon          done
