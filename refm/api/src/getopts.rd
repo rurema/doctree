@@ -61,17 +61,16 @@ Author: <jammy@shljapan.co.jp>
 
   * シングルオプションや引数を伴わないオプションが使用された場合は、
     `true' がセットされます。
-
-  `-f'→`$OPT_f = true' `--version'→`$OPT_version = true'
-
+//emlist{
+      `-f'→`$OPT_f = true' `--version'→`$OPT_version = true'
+//}
   * その他はそのオプションの引数がセットされます。
-
-  `-d pengo:0.0'→`$OPT_d = pengo:0.0' `--geometry 80x25'→
-  `$OPT_geometry = 80x25'
-
+//emlist{
+    `-d pengo:0.0'→`$OPT_d = pengo:0.0' `--geometry 80x25'→
+    `$OPT_geometry = 80x25'
+//}
   * `-' もしくは `--' を指定した場合、それ以降の解析を行ないません。
 
 戻り値:
 
-実際にセットされたオプションの数を返します。また、間違ったオプショ
-ンを指定した場合は、`nil' を返します。
+実際にセットされたオプションの数を返します。また、間違ったオプションを指定した場合は、`nil' を返します。
