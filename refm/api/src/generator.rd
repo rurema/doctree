@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.1
 = class Generator < Object
 
 include Enumerable
