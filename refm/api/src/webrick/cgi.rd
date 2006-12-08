@@ -1,3 +1,4 @@
+#@since 1.8.1
 一般の CGI 環境で WEBrick のサーブレットと同じように CGI スクリプトを書くための
 クラス。サーバが WEBrick でなくても使うことが出来る。
 
@@ -31,6 +32,53 @@ CGI オブジェクトを生成する。
 
 == Instance Methods
 
+#@since 1.8.3
+--- [](key)
+#@end
+
+#@since 1.8.3
+--- config
+#@end
+
+#@since 1.8.3
+--- logger
+#@end
+
+--- service(req, res)
+
 --- start(env=ENV, stdin=$stdin, stdout=$stdout)
 スクリプトを実行する。env にはスクリプトが受け取るべき環境変数、stdin には
 スクリプトの入力元、stdout には出力先を指定する。
+
+= class WEBrick::CGI::CGIError < StandardError
+
+= class WEBrick::CGI::Socket
+include Enumerable
+
+== Class Methods
+
+--- new(config, env, stdin, stdout)
+
+== Instance Methods
+
+--- <<(data)
+
+--- addr
+
+--- cert
+
+--- cipher
+
+--- each {|line| ... }
+
+--- gets(eol = WEBrick::LF)
+
+--- peeraddr
+
+--- peer_cert
+
+--- peer_cert_chain
+
+--- read(size = nil)
+
+#@end
