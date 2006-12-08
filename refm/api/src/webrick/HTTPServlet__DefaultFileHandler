@@ -1,0 +1,15 @@
+= class WEBrick::HTTPServlet::DefaultFileHandler < WEBrick::HTTPServlet::AbstractServlet
+
+== Class Methods
+
+--- new(server, local_path)
+
+== Instance Methods
+
+--- do_GET(req, res)
+
+--- not_modified?(req, res, mtime, etag)
+
+--- make_partial_content(req, res, filename, filesize)
+
+--- prepare_range(range, filesize)

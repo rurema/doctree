@@ -1,0 +1,33 @@
+= module WEBrick::HTTPAuth::Authenticator
+
+== Instance Methods
+
+--- logger
+
+--- realm
+
+--- userdb
+
+== Constants
+
+--- RequestField
+
+--- ResponseField
+
+--- ResponseInfoField
+
+--- AuthException
+
+--- AuthScheme
+
+= module WEBrick::HTTPAuth::ProxyAuthenticator
+
+== Constants
+
+--- RequestField
+
+--- ResponseField
+
+--- InfoField
+
+--- AuthException

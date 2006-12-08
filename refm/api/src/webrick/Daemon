@@ -1,0 +1,6 @@
+= class WEBrick::Daemon < Object
+
+== Singleton Methods
+
+--- start
+--- start { ... }

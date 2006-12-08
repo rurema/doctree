@@ -1,0 +1,48 @@
+= class WEBrick::BasicLog < Object
+
+== Class Methods
+
+--- new(log_file = nil, level = nil)
+
+== Instance Methods
+
+--- level
+--- level=(level)
+
+--- close
+
+--- log(level, data)
+
+--- <<(obj)
+
+--- fatal(msg)
+
+--- error(msg)
+
+--- warn(msg)
+
+--- info(msg)
+
+--- debug(msg)
+
+--- fatal?
+
+--- error?
+
+--- warn?
+
+--- info?
+
+--- debug?
+
+== Constants
+
+--- FATAL
+
+--- ERROR
+
+--- WARN
+
+--- INFO
+
+--- DEBUG

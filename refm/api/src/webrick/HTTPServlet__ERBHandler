@@ -1,0 +1,10 @@
+= class WEBrick::HTTPServlet::ERBHandler < WEBrick::HTTPServlet::AbstractServlet
+
+== Class Methods
+
+--- new(server, name)
+
+== Instance Methods
+
+--- do_GET(req, res)
+--- do_POST(req, res)
