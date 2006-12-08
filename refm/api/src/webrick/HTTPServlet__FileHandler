@@ -4,6 +4,10 @@
 
 == Class Methods
 
+--- add_handler(suffix, handler)
+
+--- remove_handler(suffix)
+
 --- new(server, root, options={}, default=Config::FileHandler)
 FileHandler サーブレットを生成する。root はサーブレットにルートディレクトリ
 として認識させる、ローカルのファイルシステムのディレクトリを文字列で与える。
@@ -11,6 +15,20 @@ FileHandler サーブレットを生成する。root はサーブレットにルートディレクトリ
 configは設定を保存したハッシュ、
 defaultにはデフォルトの設定を保存したハッシュを与える。
 デフォルト値はそれぞれ{}と[[m:WEBrick::Config::FileHandler]]。
+
+== Instance Methods
+
+--- service(req, res)
+
+--- do_GET(req, res)
+
+--- do_POST(req, res)
+
+--- do_OPTIONS(req, res)
+
+== Constants
+
+--- HandlerTable
 
 = reopen WEBrick::Config
 == Constants
