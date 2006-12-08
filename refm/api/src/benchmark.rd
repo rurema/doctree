@@ -260,3 +260,24 @@ Label
 --- CAPTION
 
 --- FMTSTR
+
+= class Benchmark::Job < Object
+== Instance Methods
+--- item(label = "", &blk)
+--- report(label = "", &blk)
+Registers the given label and block pair in the job list.
+
+--- list
+An array of 2-element arrays, consisting of label and block pairs.
+
+--- width
+Length of the widest label in the #list, plus one.  
+
+
+= class Benchmark::Report < Object
+== Instance Methods
+--- item(label = "", *fmt, &blk)
+--- report(label = "", *fmt, &blk)
+Prints the label and measured time for the block,
+formatted by fmt. See Tms#format for the
+formatting rules.
