@@ -187,8 +187,14 @@ uri
 weakref
 #@since 1.8.0
 webrick
+#@since 1.8.1
 webrick/cgi
+#@end
+webrick/https
+webrick/httpservlet
+#@since 1.8.1
 webrick/ssl
+#@end
 win32/registry
 win32ole
 xmlrpc
