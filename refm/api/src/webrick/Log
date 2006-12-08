@@ -18,32 +18,32 @@ level には Log オブジェクトのログレベルを定数で指定する。
 
 == Instance Methods
 
---- <<(data)
-data をログレベル INFO でログに記録する。
+#@# --- <<(data)
+#@# data をログレベル INFO でログに記録する。
 
---- close
-Log オブジェクトを閉じる。
+#@# --- close
+#@# Log オブジェクトを閉じる。
 
---- fatal(data)
---- error(data)
---- warn(data)
---- info(data)
---- debug(data)
-該当するログレベルで log(level, data）を呼ぶ。
+#@# --- fatal(data)
+#@# --- error(data)
+#@# --- warn(data)
+#@# --- info(data)
+#@# --- debug(data)
+#@# 該当するログレベルで log(level, data）を呼ぶ。
 
---- fatal?
---- error?
---- warn?
---- info?
---- debug?
-Log オブジェクトが log(level,data) を呼んだ時に
-該当するログレベルの data を記録するなら true を返す。
+#@# --- fatal?
+#@# --- error?
+#@# --- warn?
+#@# --- info?
+#@# --- debug?
+#@# Log オブジェクトが log(level,data) を呼んだ時に
+#@# 該当するログレベルの data を記録するなら true を返す。
 
---- level
-ログレベルを返す。
+#@# --- level
+#@# ログレベルを返す。
 
---- level=()
-ログレベルを指定する。
+#@# --- level=()
+#@# ログレベルを指定する。
 
 --- log(level, data)
 data をログに記録する。level は data のログレベル。
