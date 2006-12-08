@@ -103,14 +103,16 @@ strs は変換される文字列です。
 #@if (version >= "1.9.0")
 --- list {|*aliases| ... }
 
-((<ruby 1.9 feature>))
-
 各エイリアスセットごとに繰り返すイテレータです。
 #@# Iterates each alias sets.
 ブロックが指定されていなければエンコーディング名のリストを返します。
 Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 サポートされていない場合は例外 NotImplementedError を投げます。
 #@end
+
+--- charset_map
+
+Returns the map from canonical name to system dependent name.
 
 == Instance Methods
 
@@ -182,8 +184,6 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 include Iconv::Failure
 
-((<ruby 1.8.4 feature>))
-
 iconv ライブラリのバグなどにより、[[man:errno]] が設定されなかった場合に発生します。
 (Windows で iconv.dll の使用する MSVC runtime DLL のバージョンが、ruby 本体が使用するものと一致していない場合も含みます。)
 #@end
@@ -201,6 +201,11 @@ include Iconv::Failure
 
 入力の最後が不完全な文字かシフトで終っているために変換が停止したこと
 を表します。
+
+#@since 1.8.3
+= class Iconv::InvalidEncoding < ArgumentError
+include Iconv::Failure
+#@end
 
 = class Iconv::OutOfRange < RuntimeError
 
