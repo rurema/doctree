@@ -1,4 +1,5 @@
 = class WEBrick::HTTPAuth::Htdigest < Object
+include WEBrick::HTTPAuth::UserDB
 
 Apache の htdigest 互換のクラス。
 
