@@ -1,4 +1,5 @@
 = class WEBrick::HTTPAuth::BasicAuth < Object
+include WEBrick::HTTPAuth::Authenticator
 
 HTTP の Basic 認証のためのクラスです。
 
@@ -56,3 +57,6 @@ realm を文字列で返します。
 --- userdb
 ユーザ名とパスワードを保存した [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを
 返します。
+
+= class WEBrick::HTTPAuth::ProxyBasicAuth < WEBrick::HTTPAuth::BasicAuth
+include WEBrick::HTTPAuth::ProxyAuthenticator
