@@ -23,21 +23,19 @@ m=nの行列をm次の正方行列(square matrix)という。
 大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできるし、
 大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできる。
 
-第i行、第j列にある数a(i,j)を(i,j)要素((-elementという語には、数学では
-「成分」、物理では「要素」という訳をあてる。数学の「要素」はcomponent
-という語に当たる-))(the (i,j)-th element)という。
+第i行、第j列にある数a(i,j)を(i,j)要素(the (i,j)-th element)という。
 
 i=jの要素a(i,j)を対角要素(diagonal element)、
 それ以外の要素を非対角要素(nondiagonal element)という。
 
 
-使い方 Usage
+#@#使い方 Usage
 
-[[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
+#@# [[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
 
-  require 'matrix'
+#@#  require 'matrix'
 
-[[c:Complex]]クラスとの併用
+=== Complex クラスとの併用
 
 require 'complex'することによって、
 Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
@@ -104,12 +102,12 @@ n次の零行列を生成する。
 --- row_vector(row)
 
 要素がrowの(1,n)型の行列(行ベクトル)を生成する。
-ここで、引数rowは、[[c:Vector]]または[[c:Array]]で与えられる。
+ここで、引数rowは、[[c:Vector]] または [[c:Array]] で与えられる。
 
 --- column_vector(column)
 
 要素がcolumnの(n,1)型の行列(列ベクトル)を生成する。
-ここで、引数columnは、[[c:Vector]]または[[c:Array]]で与えられる。
+ここで、引数columnは、[[c:Vector]] または [[c:Array]] で与えられる。
 
 == Instance Methods
 --- [](i, j)
@@ -131,23 +129,23 @@ n次の零行列を生成する。
   (1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
   (2) 開始行番号..終了行番号, 開始列番号..終了列番号
 
---- []=(i,j,x)
-(i,j)要素をxに変更する。
-
-このメソッドは、matrix.rbに定義されていない。
-以下に、その定義と使用例を示す。
-
-  require 'matrix'
-
-  class Matrix
-    def []=(i,j,x)
-      @rows[i][j]=x
-    end
-  end
-
-  m=Matrix[[11,12],[21,22]]
-  m[1,1]=-1
-  p m #=> Matrix[[11,12],[21,-1]]
+#@#--- []=(i,j,x)
+#@#(i,j)要素をxに変更する。
+#@#
+#@#このメソッドは、matrix.rbに定義されていない。
+#@#以下に、その定義と使用例を示す。
+#@#
+#@#  require 'matrix'
+#@#
+#@#  class Matrix
+#@#    def []=(i,j,x)
+#@#      @rows[i][j]=x
+#@#    end
+#@#  end
+#@#
+#@#  m=Matrix[[11,12],[21,22]]
+#@#  m[1,1]=-1
+#@#  p m #=> Matrix[[11,12],[21,-1]]
 
 --- *(m)
 
@@ -183,12 +181,24 @@ n次の零行列を生成する。
 --- det
 
 行列式 (determinant) を返す。
-#@# ((-線形代数の教科書を見よ-))
+
+#@if (version < "1.9.0")
+注意:
+
+全ての要素が整数である場合、正しい答を返さないかも知れません。
+その場合は [[lib:mathn]] を require して下さい。
+
+ p Matrix[[2, 1], [-1, 2]].det #=> 6
+ 
+ p Matrix[[2.0, 1.0], [-1.0, 2.0]].det #=> 5.0
+
+ require 'mathn'
+ p Matrix[[2, 1], [-1, 2]].det #=> 5
+#@end
 
 --- rank
 
 階数 (rank) を返す。
-#@# ((-線形代数の教科書を見よ-))
 
 --- trace
 --- tr
@@ -247,15 +257,15 @@ n次の零行列を生成する。
 
 --- to_f
 
-各要素を浮動小数点数[[c:Float]]に変換する。
+各要素を浮動小数点数 [[c:Float]] に変換する。
 
 --- to_i
 
-各要素を整数[[c:Integer]]に変換する。
+各要素を整数 [[c:Integer]] に変換する。
 
 --- to_r
 
-各要素を有理数[[c:Rational]]に変換する。
+各要素を有理数 [[c:Rational]] に変換する。
 
 #@# bc-rdoc: detected missing name: new
 #@# --- new(init_method, *argv)
@@ -279,6 +289,12 @@ Not really intended for general consumption.
 
 Not for public consumption?
 
+
+= class Matrix::ErrDimensionMismatch < StandardError
+
+= class Matrix::ErrNotRegular < StandardError
+
+= class Matrix::ErrOperationNotDefined < StandardError
 
 
 #@#== ChangeLog

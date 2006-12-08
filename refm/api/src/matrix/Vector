@@ -6,22 +6,17 @@
 
 #@# ((-Vectorクラスには英語のドキュメントがほとんどないので、英語の方も補ってみました。とりあえず対訳にしておいて、そのうち、英語版を分離します。-))
 
-=== 使い方　Usage
+#@#=== 使い方　Usage
 
-Vectorクラスを使うためには、require 'matrix'する必要があります。
+#@#Vectorクラスを使うためには、require 'matrix'する必要があります。
 
-  require 'matrix'
+#@#  require 'matrix'
 
 === Complexクラスとの併用 Working with Complex class
-
-#@#"require 'complex'" extends every elements of Vector object to Complex class.
-#@#Most of the methods of Matrix class works as expeced in this extended Vector class.
 
 require 'complex' することによって、
 Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されます。
 多くのメソッドは、この拡張されたVectorクラスでも、期待通りに動作します。
-
-#@#The following example illustrates Vector#conjugate method which replaces every lements into its conjugate.
 
 次の例は、各要素を共役複素数に置換するメソッド (Vector#conjugate)です。
 
@@ -40,16 +35,12 @@ Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されます。
   v3 = v1+v2
   p v3 #=> Vector[Complex(1,0),Complex(2,0),Complex(3,0)]
 
-#@#Some methods, however, fails work as expected in this extendend class.
-#@#For instance, Vector#r method, which returns the absolute value (norm) of `self', may raise exception when it invokes Math#square method to the sum of the square of each element.  
 
 しかし、Complex 要素に拡張された Vector クラスで、
 期待通りに動作しないメソッドもあります。
 例えば、ベクトルの絶対値を求める [[m:Vector#r]] メソッドは、
 各要素の2乗和の平方根 [[m:Math#sqrt]] を求めますが、
 このとき例外を発生させる可能性があります。
-
-#@#Vector#abs method defined in the following list shows the right way to give the absolute value of `self', where Math#square method is applied to the sum of the square of the absolute value of each element.
 
 複素数を要素とするベクトルの絶対値を求めるためには、
 各要素の絶対値の2乗和をとらなくてはなりません(次の例 Vector#absメソッド）。
@@ -69,122 +60,97 @@ Vector オブジェクトの要素は [[c:Complex]] クラスに拡張されます。
   p v.abs #=> 5.291502622 # Math.sqrt(28)
   p v.r   #=> 'sqrt': undefined method `Rational'
 
-=== ChangeLog
-
-  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
-    * 使い方の節を追加
-    * Working with Complex classの節を追加
-    * []=メソッドを追加
-    * イテレータ関係を同じ節にまとめた collect, map, each2, collect2, map2
-    * 誤りを訂正し、説明を直した。 とくにeach2, collect2, map2
-    * 他クラスへのリンクを追加 Numeric, Matrix
-  *[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#@#=== ChangeLog
+#@#
+#@#  *[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#@#    * 使い方の節を追加
+#@#    * Working with Complex classの節を追加
+#@#    * []=メソッドを追加
+#@#    * イテレータ関係を同じ節にまとめた collect, map, each2, collect2, map2
+#@#    * 誤りを訂正し、説明を直した。 とくにeach2, collect2, map2
+#@#    * 他クラスへのリンクを追加 Numeric, Matrix
+#@#  *[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 == Class Methods
 
-#@# == インスタンス生成 Instance Creation
-
 --- [](a)
-#@#    Creates a new vector object, populated by elements of `a'.
 
 配列 a を要素とするベクトルを生成します。
 
 --- elements(a, copy = true)
-#@#    Creates a vector object, populated by elements of `a'.
-#@#    A new object is created if `copy' is false.
 
 配列 a を要素とするベクトルを生成します。
 ただし、オプション引数 copy が偽 (false) ならば、複製を行いません。
 
 == Instance Methods
 
-#@# == 読み出し書き込み Accessing
-
 --- [](i)
-#@#    Returns the i-th element. The index starts from 0.
 
 i 番目の要素を返します。インデックスは 0 から開始します。
 
 --- size
-#@#    Returns the size of the vector
 
 ベクトルの大きさを返します。
 
---- []=(i, x)
-
-i 番目の要素を x に変更します。
-
-このメソッドは、matrix.rb に定義されていません。
-以下に、その定義と使用例を示します。
-
-  require 'matrix'
-  
-  class Vector
-    def []=(i,x)
-      @elements[i]=x
-    end
-  end
-  
-  v=Vector[1,2,3]
-  v[2]=-1
-  p v #=> Vector[1,2,-1]
-
-#@# == 演算 Arithmatics
+#@#--- []=(i, x)
+#@#
+#@#i 番目の要素を x に変更します。
+#@#
+#@#このメソッドは、matrix.rb に定義されていません。
+#@#以下に、その定義と使用例を示します。
+#@#
+#@#  require 'matrix'
+#@#  
+#@#  class Vector
+#@#    def []=(i,x)
+#@#      @elements[i]=x
+#@#    end
+#@#  end
+#@#  
+#@#  v=Vector[1,2,3]
+#@#  v[2]=-1
+#@#  p v #=> Vector[1,2,-1]
 
 --- *(a)
-#@#    returns a vector multiplied by scalar `a'
 
 数 a を乗じたベクトルを返します。
 
 --- *(m)
-#@#    returns a vector multiplied by matrix `m' from right side.
 
 列ベクトル(行列)に変換して (実際には [[m:Matrix#column_vector]](self) を適用) から、行列 m を右から乗じた行列 ([[c:Matrix]] クラス) を返します。
 
 --- +(v)
-#@#    plus
 
 ベクトル v を加えたベクトルを返します。
 
 --- -(v)
-#@#    minus
 
 ベクトル v を減じたベクトルを返します。
 
-#@# == ベクトルに対する関数 Vector Functions
-
 --- inner_product(v)
-#@#    Returns an inner product with `v'
 
 ベクトル v との内積を返します。
 
 --- r
-#@#    Returns the absolute value.
 
 ベクトルの絶対値を返します。
 ベクトルの絶対値は、各要素の２乗の和の平方根を取ったものです。
 
-#@# == イテレータ Iterators
-
 --- collect {|x| ... }
 --- map {|x| ... }
-#@#    returns a new vector with the results of running block once for every elements.
 
 ベクトルの各要素に対してブロックを評価した結果を、要素として持つベクトルを生成します。
 
 --- each2(v) {|x, y| ... }
-#@#    Calls dyadic((-=of two parameters-)) block once for each correspoding elements of `self' and `v'.
 
 ベクトルの各要素と、それに対応するインデックスを持つ引数 v の要素との組に対して (2引数の) ブロックを繰返し評価します。`v' は size メソッドと [] メソッドを持つオブジェクトです。
 #@# sizeメソッドと[]メソッドを持つことをもってArrayクラスの定義としてよいのでしょうか?  単純に配列クラスと書けるとうれしいです。
 
 --- collect2(v) {|x, y| ... }
-#@#    Applies dyadic block to corresponding elements of `self' and `v', and returns a new Array object of the results.
 
 ベクトルの各要素と、それに対応するインデックスを持つ引数 v の要素との組に対して (2引数の) ブロックを評価し、その結果を要素として持つ配列を生成します。
 
 --- map2(v) {|x, y| ... }
-#@#    Applies dyadic block to corresponding elements of `self' and `v', and returns a new Vector object of the results.
 
 ベクトルの各要素と、それに対応するインデックスを持つ引数 (配列) の要素との組に対して (2引数の) ブロックを評価した結果を、要素として持つベクトルを返します。
 
@@ -200,31 +166,27 @@ i 番目の要素を x に変更します。
   p z1 #=> [14, 27, 55]
   p z2 #=> Vector[14, 27, 55]
 
-
-#@# == 型変換 Converting
-
 --- covector
-#@#    Converts to the column vector, i.e., n-by-1 matrix.
 
 列ベクトル (行列)、すなわち、(n,1) 型の行列に変換します。
 実際には [[m:Matrix#row_vector]](self) を適用します。
 
 --- to_a
-#@#    Converts to Array
 
 配列 ([[c:Array]]) に変換します。
 
 --- to_f
-#@#    Converts each element to Float
 
 各要素を浮動小数点数 ([[c:Float]]) に変換します。
 
 --- to_i
-#@#    Converts each element to Integer
 
 各要素を整数 ([[c:Integer]]) に変換します。
 
 --- to_r
-#@#    Converts each element to Rational
 
 各要素を有理数 ([[c:Rational]]) に変換します。
+
+= class Vector::ErrDimensionMismatch < StandardError
+= class Vector::ErrNotRegular < StandardError
+= class Vector::ErrOperationNotDefined < StandardError
