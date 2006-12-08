@@ -1,10 +1,13 @@
 = class WEBrick::HTTPAuth::DigestAuth < Object
+include WEBrick::HTTPAuth::Authenticator
 
 [[unknown:¼¹É®¼ÔÊç½¸]]
 
 Digest Ç§¾Ú¤Î¤¿¤á¤Î¥¯¥é¥¹¡£
 
 == Class Methods
+
+--- make_passwd(realm, user, pass)
 
 --- new(config, default=Config::DigestAuth)
 ¼¹É®¼ÔÊç½¸
@@ -31,3 +34,10 @@ Digest Ç§¾Ú¤Î¤¿¤á¤Î¥¯¥é¥¹¡£
 
 --- userdb
 ¼¹É®¼ÔÊç½¸
+
+= class WEBrick::HTTPAuth::ProxyDigestAuth < WEBrick::HTTPAuth::DigestAuth
+include WEBrick::HTTPAuth::ProxyAuthenticator
+
+== Instance Methods
+
+--- check_uri(req, auth_req)
