@@ -82,6 +82,7 @@ IPAddr オブジェクト同士が等しいかを比較します。
 (e.g. 8, 64, "255.255.255.0")。
 
 --- include?(ipaddr)
+--- ===(ipaddr)
 
 与えられた IPAddr オブジェクトが自身の範囲に入っているかを判定します。
 
@@ -163,4 +164,23 @@ IPv4 の場合は例外を発生します。
 
 IPv6 なら RFC1886 互換形式で DNS 逆引きのための文字列を返します。
 IPv4 の場合は例外を発生します。
+
+--- inspect
+
+--- family
+
+== Protected Instance Methods
+
+--- set(addr, *family)
+
+--- mask!(mask)
+
+== Constants
+
+--- IN4MASK
+
+--- IN6MASK
+
+--- IN6FORMAT
+
 #@end
