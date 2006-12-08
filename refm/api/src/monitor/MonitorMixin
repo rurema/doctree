@@ -106,7 +106,10 @@ Mutex#lock ではデッドロックが起きます。
 
 モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
 
+#@since 1.8.1
 --- mon_try_enter
+#@end
+--- try_mon_enter
 
 モニターを開始しようとして成功した場合、true を返します。
 つまりモニターしているスレッドがいないか、モニターしているのがスレッドが
@@ -115,3 +118,27 @@ Mutex#lock ではデッドロックが起きます。
 --- new_cond
 
 新しい [[c:MonitorMixin::ConditionVariable]] を生成して返します。
+
+#@if (version <= "1.8.0")
+= module MonitorMixin::Accesible
+
+== Protected Instance Methods
+
+--- mon_owner
+--- mon_owner=(owner)
+
+--- mon_count
+--- mon_count=(count)
+
+--- mon_entering_queue
+
+--- mon_waiting_queue
+#@end
+
+#@if (version <= "1.8.0")
+= module MonitorMixin::Initializable
+
+== Protected Instance Methods
+
+--- mon_initialize
+#@end

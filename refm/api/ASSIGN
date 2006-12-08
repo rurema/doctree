@@ -157,8 +157,8 @@ mathn
 matrix                          sheepman        done
 md5
 mkmf
-monitor                         iwadon
-mutex_m                         iwadon
+monitor                         iwadon          done
+mutex_m                         iwadon          done
 net/ftp
 net/ftptls
 net/http                        aamine
