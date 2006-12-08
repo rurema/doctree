@@ -21,6 +21,11 @@ HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを与える。
 --- chunked=()
 レスポンスを chunk に分けてクライアントに返すかどうかを設定する。
 
+--- config
+
+--- content_length
+--- content_length=(len)
+
 --- content_type
 --- content_type=(val)
 content-type ヘッダを設定する。val は文字列。
@@ -30,6 +35,9 @@ content-type ヘッダを設定する。val は文字列。
 
 --- each{|key, val| ... }
 ヘッダ名を key、内容を val としてブロックを評価します。
+
+--- filename
+--- filename=(filename)
 
 --- header
 ヘッダ名を key、内容を val とするハッシュを返す。key も val も文字列。
@@ -46,5 +54,33 @@ keep_alive をオンにするかどうかを設定する。
 --- reason_phrase=(val)
 HTTP のレスポンスの最初の行の reason phrase を設定する。val は文字列。
 
+--- request_http_version
+--- request_http_version=(version)
+
+--- request_method
+--- request_method=(method)
+
+--- request_uri
+--- request_uri=(uri)
+
+--- send_body(socket)
+
+--- send_header(socket)
+
+--- send_response(socket)
+
+--- sent_size
+
+--- set_error(ex, backtrace = false)
+
+--- set_redirect(status, url)
+
+--- setup_header
+
 --- status
+--- status=(status)
 status コードを整数で返す。
+
+--- status_line
+
+--- to_s
