@@ -2,6 +2,7 @@ eRuby スクリプトを処理するクラス。
 従来 ERbLight と呼ばれていたもので、
 標準出力への印字が文字列の挿入とならない点が eruby と異なります。
 
+ * [[url:http://jp.rubyist.net/magazine/?0017-BundledLibraries]]
 
 === 使い方
 
@@ -129,6 +130,11 @@ trim_mode に指定できる値は次の通りです。
     eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
     普通、変更する必要はありません。)を指定できます。
 
+--- version
+
+Returns revision information for the erb.rb module.
+
+
 == Instance Methods
 
 --- run(b=TOPLEVEL_BINDING)
@@ -162,6 +168,20 @@ fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 #@# 使い途がなさそうだ…。
+
+--- set_eoutvar(compiler, eoutvar = '_erbout')
+
+Can be used to set eoutvar as described in ERB#new. It's probably
+easier to just use the constructor though, since calling this
+method requires the setup of an ERB compiler object.
+
+#@since 1.8.1
+--- filename
+--- filename=
+
+The optional filename argument passed to [[m:Kernel#eval]] when the ERB code
+is run.
+#@end
 
 = module ERB::Util
 
