@@ -22,7 +22,10 @@ Accept-Language  ¥Ø¥Ã¥À¤ÎÆâÍÆ¤òÇÛÎó¤ÇÊÖ¤¹¡£ÇÛÎó¤ÏÉÊ¼Á·¸¿ô(qvalue)¤Ç¥½¡¼¥È¤µ¤ì¤¿¼
 --- addr
 [[m:IPSocket#addr]]¤ÈÆ±ÍÍ¡£
 
-#@#--- attributes
+--- attributes
+
+--- body
+--- body { ... }
 
 --- content_length
 content-length ¤òÀ°¿ô¤ÇÊÖ¤¹¡£
@@ -35,6 +38,8 @@ content-type ¥Ø¥Ã¥À¤òÊ¸»úÎó¤ÇÊÖ¤¹¡£
 
 --- each{|key, val| ... }
 ¥Ø¥Ã¥ÀÌ¾¤ò key¡¢ÆâÍÆ¤ò val ¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Ş¤¹¡£
+
+--- fixup
 
 --- header
 ¥Ø¥Ã¥ÀÌ¾¤ò key¡¢ÆâÍÆ¤ò val ¤È¤¹¤ë¥Ï¥Ã¥·¥å¤òÊÖ¤¹¡£key ¤â val ¤âÊ¸»úÎó¡£
@@ -50,6 +55,8 @@ host ¤òÊ¸»úÎó¤ÇÊÖ¤¹¡£
 Keep-Alive ¤«¤É¤¦¤«¤òÊÖ¤¹¡£
 
 --- meta_vars
+
+--- parse(socket = nil)
 
 --- path
 path ¤òÊ¸»úÎó¤ÇÊÖ¤¹¡£
@@ -68,6 +75,7 @@ path ¤ÈÆ±ÃÍ¡£
 ¥Ï¥Ã¥·¥å¤òÊÖ¤¹¡£key ¤â val ¤â unescape ¤µ¤ì¤Æ¤¤¤ë¡£
 
 --- query_string
+--- query_string=
 request_uri.query ¤ÈÆ±ÃÍ¡£
 
 --- raw_header
@@ -86,6 +94,8 @@ request_uri.query ¤ÈÆ±ÃÍ¡£
 
 --- script_name
 --- script_name=()
+
+--- to_s
 
 --- unparsed_uri
 
