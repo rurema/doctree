@@ -84,7 +84,9 @@ irb/frame
 irb/xmp
 jcode
 kconv
+#@since 1.8.1
 logger
+#@end
 mailread
 mathn
 matrix

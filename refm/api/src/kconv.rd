@@ -133,6 +133,9 @@ out_code in_code は定数で指定します。
 文字列 str のエンコーディングを判定します。戻り値は
 Kconv の定数です。
 
+#@since 1.8.2
+--- guess_old(str)
+#@end
 
 #@if (version >= "1.8.2")
 --- toutf8(str)
@@ -235,6 +238,13 @@ UTF16 を表します。
 #@end
 
 #@if (version >= "1.8.2")
+--- UTF32
+
+((<ruby 1.8.2 feature>)):
+UTF32 を表します。
+#@end
+
+#@if (version >= "1.8.2")
 --- RegexpShiftjis
 
 ((<ruby 1.8.2 feature>)):
@@ -253,4 +263,16 @@ EUCJP にマッチする正規表現です。
 
 ((<ruby 1.8.2 feature>)):
 UTF8 にマッチする正規表現です。
+#@end
+
+#@since 1.8.5
+--- REVISION
+#@end
+
+#@if (version >= "1.8.2")
+#@if (version <= "1.8.4")
+--- Iconv_EUC_JP
+--- Iconv_Shift_JIS
+--- Iconv_UTF8
+#@end
 #@end

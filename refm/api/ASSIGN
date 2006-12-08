@@ -149,9 +149,9 @@ io/nonblock
 io/wait
 ipaddr
 irb
-jcode                           iwadon
-kconv                           iwadon
-logger                          iwadon
+jcode                           iwadon          done
+kconv                           iwadon          done
+logger                          iwadon          done
 mailread
 mathn
 matrix                          sheepman        done

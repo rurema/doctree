@@ -1,3 +1,6 @@
+#@since 1.8.1
+ログを記録するためのライブラリです。
+
 = class Logger < Object
 
 ログを記録するためのクラスです。
@@ -86,8 +89,10 @@ shift_size は shift_age に [[c:Integer]] を与えた場合にのみ
 
 == Instance Methods
 
---- add(severity, message = nil, progname = @progname)
---- add(severity) { ... }
+--- <<(msg)
+
+--- add(severity, message = nil, progname = nil) { ... }
+--- log(severity, message = nil, progname = nil) { ... }
 
 メッセージをログに記録します。message は文字列か例外オブジェクトです。
 severity にはメッセージの
@@ -100,6 +105,8 @@ progname にはログにメッセージと一緒に記録するプログラム名を与えます。
 ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
 
 ユーザがこのメソッドを直接使うことはあまりありません。
+
+--- close
 
 --- datetime_format
 --- datetime_format=(format)
@@ -177,6 +184,10 @@ ERROR 情報を記録します。debug を参照して下さい。
 
 FATAL 情報を記録します。debug を参照して下さい。
 
+--- unknown(progname = nil) { ... }
+--- unknown(message = nil)
+--- unknown { ... }
+
 --- level
 --- level=(level)
 
@@ -193,6 +204,9 @@ level の別名です。
 
 ログに記録するプログラム名を設定します。
 
+--- formatter
+--- formatter=(formatter)
+
 == Constants
 
 --- DEBUG
@@ -204,6 +218,86 @@ level の別名です。
 
 重要度を表す定数です。
 
+#@if (version <= "1.8.2")
+--- Format
+#@end
+
+--- ProgName
+
+--- VERSION
+
+--- SEV_LABEL
+
+= class Logger::Application < Object
+
+== Class Methods
+
+--- new(appname = nil)
+
+== Instance Methods
+
+--- appname
+
+--- level=(level)
+
+--- log(severity, message = nil) { ... }
+
+--- log=(logdev)
+
+--- logdev
+
+--- set_log(logdev, shift_age = 0, shift_size = 1024000)
+
+--- start
+
 = class Logger::Error < RuntimeError
 
+= class Logger::Formatter < Object
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- call(severity, time, progname, msg)
+
+--- datetime_format
+--- datetime_format=(format)
+
+== Constants
+
+--- Format
+
+= class Logger::LogDevice < Object
+
+== Class Methods
+
+--- new(log = nil, opt = {})
+
+== Instance Methods
+
+--- close
+
+--- dev
+
+--- filename
+
+--- write(message)
+
+= class Logger::LogDevice::LogDeviceMutex < Object
+include MonitorMixin
+
+= module Logger::Severity
+
+== Constants
+
+--- DEBUG
+--- INFO
+--- WARN
+--- ERROR
+--- FATAL
+--- UNKNOWN
+
 = class Logger::ShiftingError < Logger::Error
+#@end
