@@ -6,7 +6,7 @@ include Enumerable
 内部イテレータを外部イテレータに変えるためのクラスです。
 実装に callcc を使っているので遅いです。
 
-* [[c:SyncEnumerator]]
+ * [[c:SyncEnumerator]]
 
 例:
 
