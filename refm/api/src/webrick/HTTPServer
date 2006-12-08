@@ -20,6 +20,12 @@ default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
 
 == Instance Methods
 
+--- access_log(config, req, res)
+
+--- do_OPTIONS(req, res)
+
+--- lookup_server(req)
+
 --- mount(dir, servlet, *options)
 サーバ上のディレクトリ dir にサーブレット servlet を対応させる。
 dir はディレクトリをあらわす文字列。servlet は
@@ -31,7 +37,14 @@ dir はディレクトリをあらわす文字列。servlet は
 proc は [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]]
 オブジェクトを引数として proc.call(request, response) の引数の順で呼び出される。
 
+--- run(sock)
+
+--- search_servlet(path)
+
+--- service(req, res)
+
 --- unmount(dir)
+--- umount(dir)
 サーバ上のディレクトリ dir とサーブレットとの対応を解消する。
 
 --- virtual_host(server)
@@ -124,3 +137,5 @@ CGI に渡される PATH 環境変数を文字列で指定する。
 
 : :Escape8bitURI
 [[unknown:執筆者募集]]
+
+= class WEBrick::HTTPServerError < WEBrick::ServerError
