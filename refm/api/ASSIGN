@@ -89,12 +89,12 @@ _builtin/specialvars            sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-English                         sheepman
-Env                             sheepman
+English                         sheepman        done
+Env                             sheepman        done
 Win32API
 abbrev                          okkez           done
 base64                          okkez           done
-benchmark                       sheepman
+benchmark                       sheepman        done
 bigdecimal
 bigdecimal/jacobian
 bigdecimal/ludcmp
@@ -124,7 +124,7 @@ dl/types
 dl/win32
 drb                             sheepman        done
 e2mmap
-erb                             sheepman
+erb                             sheepman        done
 eregex
 etc                             iwadon          done
 expect
