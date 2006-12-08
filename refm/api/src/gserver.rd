@@ -1,4 +1,6 @@
 #@if (version >= "1.8.0")
+サーバを実装するためのライブラリです。
+
 = class GServer < Object
 
 サーバを実装するためのクラスです。GServer を継承した新しいクラスを定義して使います。
@@ -35,7 +37,7 @@ fork ではなくスレッドを使っています。
   # もちろん server.stop でも可能です。
 
 === 参照
-[[url:http:#/www.ruby-doc.org/stdlib/libdoc/gserver/rdoc/]]
+[[url:http://www.ruby-doc.org/stdlib/libdoc/gserver/rdoc/]]
 
 == Constants
 
