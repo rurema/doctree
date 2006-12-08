@@ -10,35 +10,34 @@
 
 == Module Functions
 
-#@if (version >= "1.8.0")
+#@if (version >= "1.8.1")
 --- endgrent
 
 #@end
 
-#@if (version >= "1.8.0")
+#@if (version >= "1.8.1")
 --- endpwent
 
 #@end
 
-#@if (version >= "1.8.0")
+#@if (version >= "1.8.1")
 --- getgrent
 
 #@end
 
-#@if (version >= "1.8.0")
+#@if (version >= "1.8.1")
 --- getpwent
 
 #@end
 
-#@if (version >= "1.8.0")
+#@if (version >= "1.8.1")
 --- setgrent
 
 #@end
 
-#@if (version >= "1.8.0")
+#@if (version >= "1.8.1")
 --- setpwent
 
-    ((<ruby 1.8 feature>))
 #@end
 
 --- getlogin
