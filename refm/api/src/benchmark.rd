@@ -1,9 +1,8 @@
-#@if (version >= "1.7.0")
--> [[unknown:"ruby-src:lib/benchmark.rb"]]
-
-[[unknown:執筆者募集]]
+#@since 1.8.0
 
 ベンチマークを取るためのクラスです。
+
+[[unknown:執筆者募集]]
 
 = module Benchmark
 
@@ -145,3 +144,119 @@ fmtstr を省略したときは Benchmark::FMTSTR が使用されます。
 
 です。
 #@end
+
+
+== Constants
+
+--- CAPTION
+
+--- FMTSTR
+
+--- BENCHMARK_VERSION
+
+= class Benchmark::Tms < Object
+== Class Methods
+#@# bc-rdoc: detected missing name: new
+--- new(u = 0.0, s = 0.0, cu = 0.0, cs = 0.0, real = 0.0, l = nil)
+
+Returns an initialized Tms object which has u as the user CPU
+time, s as the system CPU time, cu as the children's user CPU
+time, cs as the children's system CPU time, real as the elapsed
+real time and l as the label.
+
+== Instance Methods
+#@# bc-rdoc: detected missing name: *
+--- *(x)
+
+Returns a new Tms object obtained by memberwise multiplication
+of the individual times for this Tms object by x.
+
+#@# bc-rdoc: detected missing name: +
+--- +(other)
+
+Returns a new Tms object obtained by memberwise summation of
+the individual times for this Tms object with those of the other
+Tms object. This method and #/() are useful for taking statistics.
+
+#@# bc-rdoc: detected missing name: -
+--- -(other)
+
+Returns a new Tms object obtained by memberwise subtraction of
+the individual times for the other Tms object from those of this
+Tms object.
+
+#@# bc-rdoc: detected missing name: /
+--- /(x)
+
+Returns a new Tms object obtained by memberwise division of the
+individual times for this Tms object by x. This method and #+()
+are useful for taking statistics.
+
+#@# bc-rdoc: detected missing name: add
+--- add {|| ...}
+
+Returns a new Tms object whose times are the sum of the times
+for this Tms object, plus the time required to execute the code
+block (blk).
+
+#@# bc-rdoc: detected missing name: add!
+--- add!
+
+An in-place version of #add.
+
+
+--- format(arg0 = nil, *args)
+
+Returns the contents of this Tms object as a formatted string, according to a format string like that passed to Kernel.format. In addition, format accepts the following extensions:
+
+: %u
+ Replaced by the user CPU time, as reported by Tms#utime.
+: %y
+ Replaced by the system CPU time, as reported by stime (Mnemonic: y of "s*y*stem")
+: %U
+ Replaced by the children’s user CPU time, as reported by Tms#cutime
+: %Y
+ Replaced by the children’s system CPU time, as reported by Tms#cstime
+: %t
+ Replaced by the total CPU time, as reported by Tms#total
+: %r
+ Replaced by the elapsed real time, as reported by Tms#real
+: %n
+ Replaced by the label string, as reported by Tms#label (Mnemonic: n of "*n*ame")
+
+If fmtstr is not given, FMTSTR is used as default value, detailing the user, system and real elapsed time. 
+
+--- to_a()
+
+Returns a new 6-element array, consisting of the label, user CPU time, system CPU time, children’s user CPU time, children’s system CPU time and elapsed real time.
+
+--- to_s()
+
+Same as format. 
+
+--- utime
+User CPU time
+
+--- stime
+System CPU time
+
+--- cutime
+User CPU time of children
+
+--- cstime
+System CPU time of children
+
+--- real
+Elapsed real time
+
+--- total
+Total time, that is _utime_ + _stime_ + _cutime_ + _cstime_ 
+
+--- label
+Label
+
+== Constants
+
+--- CAPTION
+
+--- FMTSTR
