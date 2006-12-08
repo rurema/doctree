@@ -28,6 +28,10 @@ nameにクッキーの名前を、valueにクッキーで保持する値を与える。
 --- parse(str)
 与えられた文字列strを解釈、新しく[[c:WEBrick::Cookie]]オブジェクトを生成し、配列として返す。
 
+#@since 1.8.4
+--- parse_set_cookie(str)
+#@end
+
 == Instance Methods
 
 --- comment
