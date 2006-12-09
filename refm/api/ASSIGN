@@ -168,13 +168,13 @@ net/pop                         aamine          done
 net/smtp                        aamine          done
 net/telnet
 net/telnets
-nkf
+nkf                             sheepman
 observer                        sheepman        done
 open-uri                        sheepman        done
-open3
+open3                           sheepman
 openssl                         sheepman        done
 optparse                        sheepman        done
-ostruct
+ostruct                         sheepman
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
