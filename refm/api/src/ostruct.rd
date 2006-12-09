@@ -1,4 +1,4 @@
-= class OpenStruct
+= class OpenStruct < Object
 
 手軽な構造体クラス。
 method_missingの使い方の例でもある。
@@ -23,6 +23,7 @@ method_missingの使い方の例でもある。
 --- new(hash = nil)
 OpenStructオブジェクトを生成。
 hashが与えられたとき、
+#@todo
 
 == Instance Methods
 --- delete_field(name)
