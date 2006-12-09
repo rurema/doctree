@@ -168,13 +168,13 @@ net/pop                         aamine          done
 net/smtp                        aamine          done
 net/telnet
 net/telnets
-nkf                             sheepman
+nkf                             sheepman        done
 observer                        sheepman        done
 open-uri                        sheepman        done
-open3                           sheepman
+open3                           sheepman        done
 openssl                         sheepman        done
 optparse                        sheepman        done
-ostruct                         sheepman
+ostruct                         sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
@@ -204,12 +204,12 @@ rubyunit
 scanf                           sheepman        done
 sdbm                            sheepman
 set                             sheepman        done
-sha1                            sheepman
+sha1                            sheepman        done
 shell                           sheepman        done
 shellwords                      sheepman        done
 singleton                       sheepman        done
 soap
-socket                          sheepman
+socket                          sheepman        done
 stringio                        sheepman        done
 strscan                         sheepman        done
 sync                            sheepman        done
