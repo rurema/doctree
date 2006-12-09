@@ -114,6 +114,9 @@
 プロトコルファミリー:
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
+--- IPPORT_RESERVED
+--- IPPORT_USERRESERVED
+
 --- IPPROTO_BIP
 --- IPPROTO_EGP
 --- IPPROTO_EON
