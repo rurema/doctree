@@ -1,4 +1,4 @@
-#@if (version >= "1.7.0")
+#@since 1.8.0
 Iconv ¤Ï UNIX 95 ¤Î iconv() ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¤Ç¡¢
 ¤µ¤Þ¤¶¤Þ¤ÊÊ¸»ú¥³¡¼¥ÉÂÎ·Ï´Ö¤ÇÊ¸»úÎó¤ÎÊÑ´¹¤ò¹Ô¤Ê¤¤¤Þ¤¹¡£
 
@@ -6,15 +6,16 @@ Iconv ¤Ï UNIX 95 ¤Î iconv() ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¤Ç¡¢
 »²¾È¤·¤Æ²¼¤µ¤¤¡£
 
   * [[unknown:iconv.h]]
-  * [[unknown:iconv_open()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_open.html]]
-  * [[unknown:iconv()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv.html]]
-  * [[unknown:iconv_close()|URL:http://www.opengroup.org/onlinepubs/007908799/xsh/iconv_close.html]]
+  * [[man:iconv(3)]]
+  * [[man:iconv_open(3)]]
+  * [[man:iconv_close(3)]]
 
 ¤É¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤¬ÍøÍÑ¤Ç¤­¤ë¤«¤Ï¥×¥é¥Ã¥È¥Õ¥©¡¼¥à°ÍÂ¸¤Ç¤¹¡£¤µ¤é¤Ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°Ì¾¤ò¤¢¤é¤ï¤¹Ê¸»úÎó¤â¥×¥é¥Ã¥È¥Õ¥©¡¼¥à°ÍÂ¸¤Ç¤¹¡£ÆüËÜ¸ì EUC ¤ò¤¢¤é¤ï¤¹Ê¸»úÎó¤¬ EUC-JP, euc-jp, eucJP ¤Ê¤É°Û¤Ê¤ë¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£¤³¤Î¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ë¤è¤ë°ã¤¤¤òµÛ¼ý¤¹¤ë¤¿¤á¤Ë¡¢
 [[unknown:"ruby-src:ext/iconv/charset_alias.rb"]] ¤¬ÍÑ°Õ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 GNU ¥½¥Õ¥È¥¦¥§¥¢ [[unknown:texinfo|URL:http://www.gnu.org/software/texinfo/]] ¤Ë´Þ¤Þ¤ì¤ë¥Õ¥¡¥¤¥ë config.charset ¤ò°Ê²¼¤Î¥ß¥é¡¼¥µ¥¤¥È¤«¤é¼ê¤ËÆþ¤ì¤Æ
 
-[[url:http:#/ring.pwd.ne.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
+ *[[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
+ *[[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
 
 ext/iconv/ ¤ËÃÖ¤­¡¢ext/iconv/ ¤Ç¼¡¤Î¤è¤¦¤Ë¼Â¹Ô¤¹¤ë¤È
 
@@ -54,8 +55,7 @@ config.charset ¤Î¥é¥¤¥»¥ó¥¹¤Ï LGPL ¤Ê¤Î¤Ç¡¢À¸À®¤µ¤ì¤¿ iconv.rb ¤Ë¤â LGPL ¤¬Å¬ÍÑ¤
 
 === »²¹Í
 
-  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-  * [[unknown:"É¸½àÅºÉÕ¥é¥¤¥Ö¥é¥ê¾Ò²ð¡ÚÂè 3 ²ó¡Û Kconv/NKF/Iconv"|URL:http://jp.rubyist.net/magazine/?0009-BundledLibraries]]
+  * É¸½àÅºÉÕ¥é¥¤¥Ö¥é¥ê¾Ò²ð¡ÚÂè 3 ²ó¡Û Kconv/NKF/Iconv ([[url:http://jp.rubyist.net/magazine/?0009-BundledLibraries#l30]])
 
 = class Iconv < Data
 
@@ -70,7 +70,7 @@ to ¤È from ¤ÏÊÑ´¹Àè¤ÈÊÑ´¹Á°¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤Ç¤¹¡£
   * to ¤ä from ¤¬ String ¤Ç¤Ê¤¤¤È¤­ TypeError¡£
   * to ¤ä from ¤Ç»ØÄê¤µ¤ì¤¿ÊÑ´¹´ï¤¬¸«¤Ä¤«¤é¤Ê¤¤¤È¤­
     ArgumentError¡£
-  * iconv_open(3) ¤¬¼ºÇÔ¤·¤¿¤È¤­SystemCallError¡£
+  * [[man:iconv_open(3)]] ¤¬¼ºÇÔ¤·¤¿¤È¤­SystemCallError¡£
 
 --- open(to, from) {|cd| ...}
 
@@ -100,7 +100,7 @@ strs ¤ÏÊÑ´¹¤µ¤ì¤ëÊ¸»úÎó¤Ç¤¹¡£
 
 ¾Ü¤·¤¯¤Ï [[m:Iconv.iconv]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- list {|*aliases| ... }
 
 ³Æ¥¨¥¤¥ê¥¢¥¹¥»¥Ã¥È¤´¤È¤Ë·«¤êÊÖ¤¹¥¤¥Æ¥ì¡¼¥¿¤Ç¤¹¡£
@@ -179,7 +179,7 @@ str ¤¬ nil ¤Î¾ì¹ç¡¢ÊÑ´¹´ï¤ò¤½¤Î½é´ü¥·¥Õ¥È¾õÂÖ¤Ë¤·¡¢
 #<type: "success", "failed"> ¤Î¤è¤¦¤Ê·Á¤ò¤·¤¿
 Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-#@if (version >= "1.8.4")
+#@since 1.8.4
 = class Iconv::BrokenLibrary < RuntimeError
 
 include Iconv::Failure
