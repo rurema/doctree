@@ -1,7 +1,6 @@
 = module NKF
 
-[[unknown:a:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/|nkf]]
-(Network Kanji code conversion Filter) を
+nkf(Network Kanji code conversion Filter, [[url:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/]]) を
 Ruby から使うためのモジュールです。
 
 #@since 1.8.2
@@ -158,8 +157,7 @@ Ruby 1.8.3 以降にバージョンアップするか、
 
 === 参考
 
-  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-  * [[unknown:"標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv"|URL:http://jp.rubyist.net/magazine/?0009-BundledLibraries]]
+  * "標準添付ライブラリ紹介【第 3 回】 Kconv/NKF/Iconv" [[url:http://jp.rubyist.net/magazine/?0009-BundledLibraries#l15]]
 
 == Module Functions
 
@@ -167,9 +165,7 @@ Ruby 1.8.3 以降にバージョンアップするか、
 
 文字列 str の文字コードを変換し、変換結果の文字列を返します。
 
-opt には、
-[[unknown:nkf(1)|URL:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/]]
-と同じコマンドラインオプションを指定します([[unknown:後述|nkf/オプション文字列]])。
+opt には、nkf と同じコマンドラインオプションを指定します([[unknown:後述|nkf/オプション文字列]])。
 複数指定する場合は、NKF.nkf('-Se', str) や
 NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 で始めなければいけないことに注意してください。
@@ -186,18 +182,14 @@ NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 ruby 1.8.2 より前は現在の NKF.guess1 と同じものです。
 ruby 1.8.2 以降では NKF.guess2 と同じものです。
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- guess1(str)
-
-((<ruby 1.8.2 feature>))
 
 ruby 1.8.1 以前の NKF.guess と同じものです。
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- guess2(str)
-
-((<ruby 1.8.2 feature>))
 
 nkf2の漢字コード自動判定ルーチンを利用したものです。
 #@end
