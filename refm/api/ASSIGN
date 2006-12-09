@@ -139,11 +139,11 @@ ftools
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 gdbm                            sheepman        done
-generator                       sheepman
-getoptlong                      sheepman
-getopts                         sheepman
-gserver                         sheepman
-iconv                           sheepman
+generator                       sheepman        done
+getoptlong                      sheepman        done
+getopts                         sheepman        done
+gserver                         sheepman        done
+iconv                           sheepman        done
 importenv
 io/nonblock
 io/wait
