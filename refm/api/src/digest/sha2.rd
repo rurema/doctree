@@ -1,3 +1,5 @@
+require digest
+
 = class Digest::SHA256 < Digest::Base
 
 FIPS PUB 180-2に記述されているNIST (the US' National Institute of
@@ -17,3 +19,4 @@ Standards and Technology) の SHA-384 Secure Hash Algorithmを
 FIPS PUB 180-2に記述されているNIST (the US' National Institute of
 Standards and Technology) の SHA-512 Secure Hash Algorithmを
 実装するクラス。
+

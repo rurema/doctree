@@ -1,3 +1,7 @@
+#@since 1.8.6
+require digest/sha2
+#@end
+
 メッセージダイジェストライブラリ。
 基本的な使い方はどのアルゴリズムでも同じです。
 [[c:Digest::Base]]を参照。
@@ -5,9 +9,28 @@
 すべてのメッセージダイジェストの実装クラスは基底クラスである
 Digest::Base と同じインタフェースを持つ。
 
+= module Digest
 
+#@since 1.8.6
+== Module Functions
 
+--- hexencode(string)
+
+Generates a hex-encoded version of a given string. 
+#@end
+
+#@if(version >= "1.8.6")
+= class Digest::Class < Object
+
+= module Digest::Instance
+
+= class Digest::Base < Digest::Class
+include Digest::Instance
+
+#@else
 = class Digest::Base < Object
+
+#@end
 
 すべての Digest::XXX クラスの基底クラス。
 
@@ -60,6 +83,14 @@ new(str).digest と等価。
 16進数の列を示す文字列にエンコードして返す。
 new(str).hexdigest と等価。
 
+#@since 1.8.6
+--- file(file)
+creates a digest object and reads a given file, _name_.
+
+  p Digest::SHA256.file("X11R6.8.2-src.tar.bz2").hexdigest
+  # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
+#@end
+
 == Instance Methods
 
 --- dup
@@ -73,6 +104,12 @@ new(str).hexdigest と等価。
 16バイト長、SHA1およびRMD160では20バイト長、SHA256では32バイト長、
 SHA384では48バイト長、SHA512では64バイト長となる。
 
+#@since 1.8.6
+--- digest!
+
+Returns the resulting hash value and resets the digest to the initial state. 
+#@end
+
 --- hexdigest
 --- to_s
 
@@ -84,6 +121,12 @@ SHA1およびRMD160では40バイト長、SHA256では64バイト長、SHA384では
         def hexdigest
           digest.unpack("H*")[0]
         end
+
+#@since 1.8.6
+--- hexdigest!
+Returns the resulting hash value and resets the digest to the
+initial state.
+#@end
 
 --- update(str)
 --- <<(str)
@@ -104,3 +147,28 @@ self を返す。
 与えられた文字列を digest 値、もしくは hexdigest 値と比較する。
 いずれの値と見るかは与えられた文字列の長さによって自動判別
 される。
+
+#@since 1.8.6
+--- file 
+updates the digest with the contents of a given file _name_ and
+returns self.
+
+--- block_length
+
+Returns the block length of the digest.
+
+This method is overridden by each implementation subclass. 
+
+--- digest_length 
+
+Returns the length of the hash value of the digest.
+
+This method should be overridden by each implementation subclass.
+If not, digest_obj.digest().length() is returned. 
+#@end
+
+#@since 1.8.6
+= reopen Kernel
+== Private Instance Methods
+--- Digest(name)
+#@end

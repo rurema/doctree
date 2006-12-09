@@ -1,11 +1,9 @@
+require digest
+
 = class Digest::MD5 < Digest::Base
 
 RFC1321に記述されているRSA Data Security, Inc. の MD5 Message-Digest
 Algorithmを実装するクラス。
-
-#@# == 使いかた
-
-  require 'digest/md5'
 
 == Class Methods
 

@@ -28,6 +28,9 @@ dbm
 debug
 delegate
 digest
+#@since 1.8.6
+digest/bubblebabble
+#@end
 digest/md5
 digest/rmd160
 digest/sha1
