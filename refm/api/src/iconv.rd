@@ -14,8 +14,8 @@ Iconv は UNIX 95 の iconv() 関数のラッパーで、
 [[unknown:"ruby-src:ext/iconv/charset_alias.rb"]] が用意されています。
 GNU ソフトウェア [[unknown:texinfo|URL:http://www.gnu.org/software/texinfo/]] に含まれるファイル config.charset を以下のミラーサイトから手に入れて
 
- *[[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
- *[[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
+ * [[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
+ * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
 
 ext/iconv/ に置き、ext/iconv/ で次のように実行すると
 
