@@ -198,7 +198,7 @@ Socket.unpack_sockaddr_in で unpack できます。
 システムの標準のホスト名を取得します。
 
 ホストの別名やアドレスなど他の情報を得るには
-[[m:Socket#Socket.getaddrinfo]] を使ってください。
+[[m:Socket.getaddrinfo]] を使ってください。
 ただし、これは不可能な場合もあります。
 
 例:
@@ -385,3 +385,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 接続したクライアントのファイル記述子とアドレスのペアを返すことを除
 けば [[m:Socket#accept]] と同じです。
 #@end
+
+== Constants
+
+#@include(constants)

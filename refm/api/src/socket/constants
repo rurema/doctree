@@ -1,0 +1,318 @@
+
+--- AF_APPLETALK
+#@since 1.8.3
+--- AF_ATM
+#@end
+--- AF_AX25
+#@since 1.8.3
+--- AF_CCITT
+--- AF_CHAOS
+--- AF_CNT
+--- AF_COIP
+--- AF_DATAKIT
+--- AF_DEC
+--- AF_DLI
+--- AF_E164
+--- AF_ECMA
+--- AF_HYLINK
+#@end
+--- AF_IMPLINK
+--- AF_INET
+--- AF_INET6
+--- AF_IPX
+#@since 1.8.3
+--- AF_ISDN
+#@end
+--- AF_ISO
+#@since 1.8.3
+--- AF_LAT
+--- AF_LINK
+#@end
+--- AF_LOCAL
+#@since 1.8.3
+--- AF_MAX
+--- AF_NATM
+--- AF_NDRV
+--- AF_NETBIOS
+--- AF_NETGRAPH
+#@end
+--- AF_NS
+#@since 1.8.3
+--- AF_OSI
+--- AF_PPP
+--- AF_PUP
+--- AF_ROUTE
+--- AF_SIP
+--- AF_SNA
+--- AF_SYSTEM
+#@end
+--- AF_UNIX
+--- AF_UNSPEC
+
+アドレスファミリー:
+[[m:Socket.open]] の第一引数 domain に使用します。
+
+--- SOCK_DGRAM
+--- SOCK_PACKET
+--- SOCK_RAW
+--- SOCK_RDM
+--- SOCK_SEQPACKET
+--- SOCK_STREAM
+
+ソケットタイプ:
+[[m:Socket.open]] の第二引数 type に使用します。
+
+--- PF_APPLETALK
+#@since 1.8.3
+--- PF_ATM
+#@end
+--- PF_AX25
+#@since 1.8.3
+--- PF_CCITT
+--- PF_CHAOS
+--- PF_CNT
+--- PF_COIP
+--- PF_DATAKIT
+--- PF_DEC
+--- PF_DLI
+--- PF_ECMA
+--- PF_HYLINK
+#@end
+--- PF_IMPLINK
+--- PF_INET
+--- PF_INET6
+--- PF_IPX
+#@since 1.8.3
+--- PF_ISDN
+--- PF_ISO
+--- PF_KEY
+--- PF_LAT
+--- PF_LINK
+--- PF_LOCAL
+--- PF_MAX
+--- PF_NATM
+--- PF_NDRV
+--- PF_NETBIOS
+--- PF_NETGRAPH
+--- PF_NS
+--- PF_OSI
+--- PF_PIP
+--- PF_PPP
+--- PF_PUP
+--- PF_ROUTE
+--- PF_RTIP
+--- PF_SIP
+--- PF_SNA
+--- PF_SYSTEM
+#@end
+--- PF_UNIX
+--- PF_UNSPEC
+#@since 1.8.3
+--- PF_XTP
+#@end
+
+プロトコルファミリー:
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+--- IPPROTO_BIP
+--- IPPROTO_EGP
+--- IPPROTO_EON
+--- IPPROTO_GGP
+--- IPPROTO_HELLO
+--- IPPROTO_ICMP
+--- IPPROTO_IDP
+--- IPPROTO_IGMP
+--- IPPROTO_IP
+--- IPPROTO_MAX
+--- IPPROTO_ND
+--- IPPROTO_PUP
+--- IPPROTO_RAW
+--- IPPROTO_TCP
+--- IPPROTO_TP
+--- IPPROTO_UDP
+--- IPPROTO_XTP
+
+IPプロトコル:
+[[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
+使用します。
+
+また、[[m:Socket.open]] の
+第一引数 domain に AF_INET もしくは AF_INET6,
+第二引数 type に SOCK_RAW を指定した場合の、
+第三引数 protocol にも使用します。
+
+なお、AF_INET で SOCK_STREAM な場合には IPPROTO_TCP を使用できますが、
+その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
+AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
+
+--- AI_ADDRCONFIG
+--- AI_ALL
+--- AI_CANONNAME
+--- AI_DEFAULT
+--- AI_MASK
+--- AI_NUMERICHOST
+--- AI_PASSIVE
+--- AI_V4MAPPED
+--- AI_V4MAPPED_CFG
+
+フラグ:
+[[m:Socket.getaddrinfo]] の flags 引数に使用します。
+[[man:getaddrinfo(3)]]も参照して下さい。
+
+--- EAI_ADDRFAMILY
+--- EAI_AGAIN
+--- EAI_BADFLAGS
+--- EAI_BADHINTS
+--- EAI_FAIL
+--- EAI_FAMILY
+--- EAI_MAX
+--- EAI_MEMORY
+--- EAI_NODATA
+--- EAI_NONAME
+--- EAI_PROTOCOL
+--- EAI_SERVICE
+--- EAI_SOCKTYPE
+--- EAI_SYSTEM
+
+[[m:Socket.getaddrinfo]]が失敗したときに返すエラーコードです。
+[[man:getaddrinfo(3)]]も参照して下さい。
+
+--- INADDR_ALLHOSTS_GROUP
+--- INADDR_ANY
+--- INADDR_BROADCAST
+--- INADDR_LOOPBACK
+--- INADDR_MAX_LOCAL_GROUP
+--- INADDR_NONE
+--- INADDR_UNSPEC_GROUP
+
+#@todo
+
+--- NI_DGRAM
+--- NI_MAXHOST
+--- NI_MAXSERV
+--- NI_NAMEREQD
+--- NI_NOFQDN
+--- NI_NUMERICHOST
+--- NI_NUMERICSERV
+
+Socket.getnameinfoの第2引数 flags に与える定数です。
+[[man:getnameinfo(3)]]も参照して下さい。
+
+--- IP_ADD_MEMBERSHIP
+--- IP_DEFAULT_MULTICAST_LOOP
+--- IP_DEFAULT_MULTICAST_TTL
+--- IP_DROP_MEMBERSHIP
+--- IP_HDRINCL
+--- IP_MAX_MEMBERSHIPS
+--- IP_MULTICAST_IF
+--- IP_MULTICAST_LOOP
+--- IP_MULTICAST_TTL
+--- IP_OPTIONS
+--- IP_RECVDSTADDR
+--- IP_RECVOPTS
+--- IP_RECVRETOPTS
+--- IP_RETOPTS
+--- IP_TOS
+--- IP_TTL
+
+#@todo
+
+#@since 1.8.3
+--- MSG_COMPAT
+#@end
+--- MSG_CTRUNC
+--- MSG_DONTROUTE
+--- MSG_DONTWAIT
+#@since 1.8.3
+--- MSG_EOF
+#@end
+--- MSG_EOR
+#@since 1.8.3
+--- MSG_FLUSH
+--- MSG_HAVEMORE
+--- MSG_HOLD
+#@end
+--- MSG_OOB
+--- MSG_PEEK
+#@since 1.8.3
+--- MSG_RCVMORE
+--- MSG_SEND
+#@end
+--- MSG_TRUNC
+--- MSG_WAITALL
+
+#@todo
+
+--- SHUT_RD
+--- SHUT_RDWR
+--- SHUT_WR
+
+shutdown の how:
+[[m:BasicSocket#shutdown]] の how 引数に使用します。
+
+#@since 1.8.3
+--- SO_ACCEPTCONN
+--- SO_ACCEPTFILTER
+#@end
+--- SO_ATTACH_FILTER
+--- SO_BINDTODEVICE
+--- SO_BROADCAST
+--- SO_DEBUG
+--- SO_DETACH_FILTER
+--- SO_DONTROUTE
+#@since 1.8.3
+--- SO_DONTTRUNC
+#@end
+--- SO_ERROR
+--- SO_KEEPALIVE
+--- SO_LINGER
+#@since 1.8.3
+--- SO_NKE
+--- SO_NOSIGPIPE
+#@end
+--- SO_NO_CHECK
+#@since 1.8.3
+--- SO_NREAD
+#@end
+--- SO_OOBINLINE
+--- SO_PASSCRED
+--- SO_PEERCRED
+--- SO_PEERNAME
+--- SO_PRIORITY
+--- SO_RCVBUF
+--- SO_RCVLOWAT
+--- SO_RCVTIMEO
+--- SO_REUSEADDR
+#@since 1.8.3
+--- SO_REUSEPORT
+#@end
+--- SO_SECURITY_AUTHENTICATION
+--- SO_SECURITY_ENCRYPTION_NETWORK
+--- SO_SECURITY_ENCRYPTION_TRANSPORT
+--- SO_SNDBUF
+--- SO_SNDLOWAT
+--- SO_SNDTIMEO
+--- SO_TIMESTAMP
+--- SO_TYPE
+#@since 1.8.3
+--- SO_USELOOPBACK
+--- SO_WANTMORE
+--- SO_WANTOOBFLAG
+#@end
+
+#@todo
+
+--- SOL_ATALK
+--- SOL_AX25
+--- SOL_IP
+--- SOL_IPX
+--- SOL_SOCKET
+--- SOL_TCP
+--- SOL_UDP
+
+--- SOPRI_BACKGROUND
+--- SOPRI_INTERACTIVE
+--- SOPRI_NORMAL
+
+--- TCP_MAXSEG
+--- TCP_NODELAY
