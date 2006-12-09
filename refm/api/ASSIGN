@@ -111,11 +111,11 @@ date2
 dbm                             sheepman        done
 debug
 delegate                        okkez
-digest
-digest/md5
-digest/rmd160
-digest/sha1
-digest/sha2
+digest                          sheepman
+digest/md5                      sheepman
+digest/rmd160                   sheepman
+digest/sha1                     sheepman
+digest/sha2                     sheepman
 dl
 dl/Symbol
 dl/import
