@@ -364,58 +364,47 @@ pat にはオプションの引数に許すパターンを表す正規表現で与えます。
 desc にはオプションの説明を文字列で与えます。
 サマリに表示されます。
 
-=== デフォルトで利用可能な引数クラス
+==== デフォルトで利用可能な引数クラス
 
 : Object
-
-any string, and no conversion. this is fall-back.
+ any string, and no conversion. this is fall-back.
 
 : String
-
-any none-empty string, and no conversion.
+ any none-empty string, and no conversion.
 
 : Integer
-
-Ruby/C-like integer, octal for 0-7 sequence, binary for
-0b, hexadecimal for 0x, and decimal for others; with
-optional sign prefix. Converts to Integer.
+ Ruby/C-like integer, octal for 0-7 sequence, binary for
+ 0b, hexadecimal for 0x, and decimal for others; with
+ optional sign prefix. Converts to Integer.
 
 : Float
-
-Float number format, and converts to Float.
+ Float number format, and converts to Float.
 
 : Numeric
-
-Generic numeric format, and converts to Integer for integer
-format, Float for float format.
+ Generic numeric format, and converts to Integer for integer
+ format, Float for float format.
 
 : OptionParser::DecimalInteger
-
-Decimal integer format, to be converted to Integer.
+ Decimal integer format, to be converted to Integer.
 
 : OptionParser::OctalInteger
-
-Ruby/C like octal/hexadecimal/binary integer format, to be converted
-to Integer.
+ Ruby/C like octal/hexadecimal/binary integer format, to be converted
+ to Integer.
 
 : OptionParser::DecimalNumeric
-
-Decimal integer/float number format, to be converted to
-Integer for integer format, Float for float format.
+ Decimal integer/float number format, to be converted to
+ Integer for integer format, Float for float format.
 
 : TrueClass
-
-Boolean switch, which means whether it is present or not, whether it
-is absent or not with prefix no-, or it takes an argument
-yes/no/true/false/+/-.
+ Boolean switch, which means whether it is present or not, whether it
+ is absent or not with prefix no-, or it takes an argument
+ yes/no/true/false/+/-.
 
 : FalseClass
-
-Similar to TrueClass, but defaulted to false.
+ Similar to TrueClass, but defaulted to false.
 
 : Array
-
-List of strings separated by ","
+ List of strings separated by ","
 
 
 --- on_head(short [, long [, klass [, pat [, desc]]]]) {...}
