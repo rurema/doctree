@@ -55,7 +55,7 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
   ret = str.scanf("%s%d") { |s, n| [s, n] }
   p ret #=> [["123", nil], ["abc", 456], ["def", nil]]
 
-scanfフォーマット文字列
+==== scanfフォーマット文字列
 
 There may be an optional maximum field width, expressed as a decimal
 integer, between the % and the conversion. If no width is given, a
@@ -72,43 +72,43 @@ against the field width.
   p str.scanf("%1s%3d")  #=> [["1", 234]]
 
 : space
-フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。
-
+ フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。
+//emlist{
   p "a           10".scanf("%s %d")  # => ["a", 10]
   p "a10".scanf("%1s %d")            # => ["a", 10]
-
+//}
 : %%
-% そのもの
+ % そのもの
 
 : %d
 : %u
-符号付き10進数
+ 符号付き10進数
 
 : %i
-[[m:Kernel#Integer]]のように接頭辞を受け付ける符号付き整数
+ [[m:Kernel#Integer]]のように接頭辞を受け付ける符号付き整数
 
 : %o
-符号付き8進数
+ 符号付き8進数
 
 : %x
 : %X
-符号付き16進数
+ 符号付き16進数
 
 : %f
 : %g
 : %e
 : %E
-符号付き浮動小数点数
+ 符号付き浮動小数点数
 
 : %s
-空白文字を含まない文字列
-(幅が指定されているときは指定された文字数か空白文字の直前までの短い方)
+ 空白文字を含まない文字列
+ (幅が指定されているときは指定された文字数か空白文字の直前までの短い方)
 
 : %c
-1文字(幅が指定されているときは指定された文字数)
+ 1文字(幅が指定されているときは指定された文字数)
 
 : [...]
-[[unknown:正規表現/文字クラス]]
+ [[unknown:正規表現/文字クラス]]
 
 = reopen IO
 == Instance Methods
