@@ -6,6 +6,16 @@ rational を require すると [[c:Integer]] のメソッドが以下のように再定義される。
 --- Rational(a, b)
 [[c:Rational]] オブジェクトを生成する。
 
+Creates a Rational number (i.e. a fraction).  +a+ and +b+ should be Integers:
+ 
+  Rational(1,3)           # -> 1/3
+
+Note: trying to construct a Rational with floating point or real values
+produces errors:
+
+  Rational(1.1, 2.3)      # -> NoMethodError
+
+
 = redefine Integer
 
 == Instance Methods
@@ -28,9 +38,17 @@ rational を require すると [[c:Integer]] のメソッドが以下のように再定義される。
   * otherが負の整数(Integer)ならば、有理数(Rational)を返す。
   * otherが有理数(Rational)や浮動小数(Float)ならば、浮動小数(Float)を返す。
 
+  2 **  3          #=> 8
+  2 ** -3          #=> Rational(1, 8)
+  2 ** Rational(3) #=> 8.0
+
+= reopen Integer
+
+== Instance Methods
+
 --- power!(other)
 
-[[m:Integer#**]]と同じ。
+[[lib:rational]]で再定義される前の[[m:Integer#**]]の別名。
 other が正または 0 の整数 (Integer) ならば、
 整数 (Integer) を、それ以外なら、浮動小数 (Float) を返す。
 
@@ -43,23 +61,80 @@ Rational(self, 1) と同じ。
 self と n の最大公約数を Fixnum として返す。
 self や n が負の場合は、正に変換してから計算する。
 
+   72.gcd 168           # -> 24
+   19.gcd 36            # -> 1
+
 --- lcm(n)
 
 self と n の最小公倍数を返す。
 self や n が負の場合は、正に変換してから計算する。
 
+   6.lcm 7        # -> 42
+   6.lcm 9        # -> 18
+
 --- gcdlcm(int)
 
 最大公約数と最小公倍数の配列 [self.gcd, self.lcm] を返します。
 
+   6.gcdlcm 9     # -> [3, 18]
+
+--- numerator
+In an integer, the value is the numerator of its rational equivalent.
+Therefore, this method returns self.
+
+--- denominator
+In an integer, the denominator is 1.  Therefore, this method returns 1.
+
+
+= redefine Fixnum
+== Instance Methods
+
+--- quo(other)
+If Rational is defined, returns a Rational number instead of a Fixnum.
+
+--- **(other)
+--- rpower (other)
+Returns a Rational number if the result is in fact rational (i.e. other < 0).
+
+= reopen Fixnum
+== Instance Methods
+--- power!(other)
+
+= redefine Bignum
+== Instance Methods
+--- quo(other)
+If Rational is defined, returns a Rational number instead of a Bignum.
+
+--- **(other)
+--- rpower(other)
+Returns a Rational number if the result is in fact rational (i.e. +other+ < 0).
+
+= reopen  Bignum
+== Instance Methods
+--- power!(other)
 
 = class Rational < Numeric
 
-include Comparable
+#@#ソースを見ても include してないようだ
+#@#include Comparable
 
 Integer < Rational < Float の順に強いです。つまり other が Float なら、
 self を Float に変換してから演算子を適用します。other が Integer なら other を
 Rational に変換してから演算子を適用します。冪乗は例外です。
+
+== Class Methods
+--- new!(num, den = 1)
+
+Implements the constructor. This method does not reduce to lowest
+terms or check for division by zero. Therefore #Rational() should
+be preferred in normal use.
+
+  puts Rational.new!(6,10) #=> 6/10
+
+--- reduce(num, den = 1)
+
+Reduces the given numerator and denominator to their lowest terms.
+Use Rational() instead.
 
 == Instance Methods
 
@@ -86,6 +161,12 @@ Rational に変換してから演算子を適用します。冪乗は例外です。
 --- *(other)
 
 積を計算します。
+
+  r = Rational(3,4)    # -> Rational(3,4)
+  r * 2                # -> Rational(3,2)
+  r * 4                # -> Rational(3,1)
+  r * 0.5              # -> 0.375
+  r * Rational(1,2)    # -> Rational(3,8)
 
 --- /(other)
 
