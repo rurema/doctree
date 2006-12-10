@@ -24,11 +24,15 @@ DNS モジュールを使うことで、さまざまなリソースを直接ルックアップできます。
 NIS はサポートされていません。
 
 == Class Methods
+--- new(resolvers = [Hosts.new, DNS.new])
+
+#@todo
+
 --- getaddress(name)
 --- getaddresses(name)
 --- each_address(name) {|address| ...}
 
-String のホスト名 name の IP アドレスをルックアップします
+String のホスト名 name の IP アドレスをルックアップします。
 
 getaddress はルックアップ結果の最初のアドレスを返します。
 getaddresses はルックアップ結果のアドレスリストを返します。
@@ -45,10 +49,30 @@ String の IP アドレス address のホスト名をルックアップします。
 
 getname はルックアップ結果の最初のホスト名を返します。
 getnames はルックアップ結果のホスト名リストを返します。
-each_names はルックアップ結果のアドレスに対するイテレータです。
+each_name はルックアップ結果のアドレスに対するイテレータです。
 
 例:
   Resolv.getname("210.251.121.214").to_s #=> "helium.ruby-lang.org"
+
+== Instance Methods
+
+--- getaddress(name)
+--- getaddresses(name)
+--- each_address(name) {|name| ...}
+
+String のホスト名 name の IP アドレスをルックアップします。
+
+それぞれ[[m:Resolv.getaddress]], [[m:Resolv.getaddresses]], 
+[[m:Resolv.each_address]] と同じ機能です。
+
+--- getname(address)
+--- getnames(address)
+--- each_name(address) {|name| ...}
+
+String の IP アドレス address のホスト名をルックアップします。
+
+それぞれ[[m:Resolv.getname]], [[m:Resolv.getnames]], 
+[[m:Resolv.each_name]] と同じ機能です。
 
 = class Resolv::Hosts < Object
 
@@ -243,7 +267,7 @@ IPv4 のアドレスの正規表現です。
 
 == Class Methods
 
---- reate(address)
+--- create(address)
 
 == Instance Methods
 
