@@ -183,6 +183,11 @@ This method should be overridden by each implementation subclass.
 If not, digest_obj.digest().length() is returned. 
 #@end
 
+--- reset
+Resets the digest to the initial state and returns self.
+
+This method is overridden by each implementation subclass.
+
 #@since 1.8.6
 = reopen Kernel
 == Private Instance Methods
