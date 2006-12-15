@@ -1,5 +1,8 @@
 #@since 1.8.6
-require digest/sha2
+digest/md5
+digest/rmd160
+digest/sha1
+digest/sha2
 #@end
 
 メッセージダイジェストライブラリ。
@@ -35,7 +38,12 @@ include Digest::Instance
 すべての Digest::XXX クラスの基底クラス。
 
 例えば、MD5 値を得るには以下のようにする。
+#@if(version >= "1.8.6")
+  require 'digest/md5'
 
+  p Digest::MD5.hexdigest('abc')               #=> '900150983cd24fb0d6963f7d28e17f72'
+  p Digest::MD5.file('ruby-1.8.5.tar.gz').to_s #=> '3fbb02294a8ca33d4684055adba5ed6f'
+#@else
         require 'digest/md5'
         p Digest::MD5.hexdigest(File.open('ruby-1.8.5.tar.gz','rb').read)
 
@@ -62,15 +70,21 @@ include Digest::Instance
         p Digest::MD5.open("ruby-1.8.5.tar.gz").hexdigest
 
         # => "3fbb02294a8ca33d4684055adba5ed6f"
+#@end
 
 すべての Digest::XXX クラスは以下の共通インタフェースを持つ。
 
 == Class Methods
 
+#@if(version < "1.8.6")
 --- new([str])
 
 新しいダイジェストオブジェクトを生成する。文字列引数が与えられると
 それを追加する([[m:Digest::Base#update]] 参照)。
+#@else
+--- new
+新しいダイジェストオブジェクトを生成する。
+#@end
 
 --- digest(str)
 
@@ -85,7 +99,7 @@ new(str).hexdigest と等価。
 
 #@since 1.8.6
 --- file(file)
-creates a digest object and reads a given file, _name_.
+creates a digest object and reads a given file, name.
 
   p Digest::SHA256.file("X11R6.8.2-src.tar.bz2").hexdigest
   # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
@@ -160,6 +174,8 @@ Returns the block length of the digest.
 This method is overridden by each implementation subclass. 
 
 --- digest_length 
+--- length 
+--- size
 
 Returns the length of the hash value of the digest.
 
