@@ -100,12 +100,22 @@ error の後に続く引数 args 群は、例外クラスに関連づけられたエラー
 
 
 
-= module E2MM
+= module Exception2MessageMapper
 
-== Module Functions
+== Singleton Methods
+--- def_e2message(k, c, m)
 
-#@# --- E2MM.extend_object(cl)
-#@# ??
+--- def_exception(k, n, m, s = StandardError)
+
+--- Raise(klass = E2MM, err = nil, *rest)
+--- Fail(klass = E2MM, err = nil, *rest)
+
+== Instance Methods
+
+--- Raise(err = nil, *rest)
+--- Fail(err  = nil, *rest)
+
+--- fail(err = nil, *rest)
 
 --- def_e2message(exception, message_form)
 
@@ -127,3 +137,8 @@ exception_name はシンボルで与えられます。
 そして、そのクラスに message_form で指定された
 フォーマットを関連づけます。
 これは Raise (またはその別名の Fail) で使われます。
+
+= module Exception2MessageMapper::E2MM
+Exception2MessageMapper の別名です。
+
+= class Exception2MessageMapper::ErrNotRegisteredException < StandardError
