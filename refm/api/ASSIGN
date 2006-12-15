@@ -124,12 +124,12 @@ dl/struct
 dl/types
 dl/win32
 drb                             sheepman        done
-e2mmap
+e2mmap                          sheepman
 erb                             sheepman        done
-eregex
+eregex                          sheepman
 etc                             iwadon          done
-expect
-fcntl
+expect                          sheepman
+fcntl                           sheepman
 fileutils                       aamine          done
 final
 finalize
