@@ -1,5 +1,3 @@
-expect
-
 Author: A. Ito
 
 Expect ¥é¥¤¥Ö¥é¥ê¤Ï¡¢tcl ¤Î expect ¥Ñ¥Ã¥±¡¼¥¸¤È»÷¤¿¤è¤¦¤Êµ¡Ç½¤ò IO ¥¯¥é¥¹¤ËÄÉ²Ã¤·¤Þ¤¹¡£
@@ -9,6 +7,7 @@ Expect ¥é¥¤¥Ö¥é¥ê¤Ï¡¢tcl ¤Î expect ¥Ñ¥Ã¥±¡¼¥¸¤È»÷¤¿¤è¤¦¤Êµ¡Ç½¤ò IO ¥¯¥é¥¹¤ËÄÉ²Ã¤
 = reopen IO
 == Instance Methods
 --- expect(pat, [timeout])
+--- expect(pat, [timeout]) {|arry| ... }
 
 pattern ¤Ï String ¤« Regexp ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¡¢timeout ¤Ï Fixnum
 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¹¡£timeout ¤Ï¾ÊÎ¬¤Ç¤­¤Þ¤¹¡£
