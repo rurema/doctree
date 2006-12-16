@@ -1,18 +1,10 @@
-finalize
-
 Finalizer とは, あるオブジェクト obj が GC される時に obj に依存しているオブジェクトに対
 してメッセージを送る機能です。
-
-=== 使いかた
-
-  require 'finalize'
-
-[[unknown:執筆者募集]]
 
 [[unknown:ruby-list:3465]]
 
 = module Finalizer
-== module Functions
+== Singleton Methods
 
 --- add(obj, dependant, method = :finalize, *opt)
 --- add_dependency(obj, dependant, method = :finalize, *opt)
