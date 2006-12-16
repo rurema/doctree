@@ -28,5 +28,5 @@ digest と sign を使って、data を検証します。digest は
 --- to_der
 #@end
 
-class OpenSSL::PKey::PKeyError < OpenSSL::OpenSSLError
+= class OpenSSL::PKey::PKeyError < OpenSSL::OpenSSLError
 #@end
