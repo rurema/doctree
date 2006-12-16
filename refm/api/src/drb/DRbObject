@@ -42,5 +42,10 @@ Routes method calls to the referenced object.
 [[c:DRb::DRbObject]] オブジェクト同士の同値判定は、
 オブジェクトが参照している URI と識別子が等しいかどうかでします。
 
+--- __drburi 
 
+Get the URI of the remote object.
 
+--- __drbref
+
+Get the reference of the object, if local.
