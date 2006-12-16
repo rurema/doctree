@@ -124,18 +124,18 @@ dl/struct
 dl/types
 dl/win32
 drb                             sheepman        done
-e2mmap                          sheepman
+e2mmap                          sheepman        done
 erb                             sheepman        done
-eregex                          sheepman
+eregex                          sheepman        done
 etc                             iwadon          done
-expect                          sheepman
-fcntl                           sheepman
+expect                          sheepman        done
+fcntl                           sheepman        done
 fileutils                       aamine          done
-final
-finalize
-find
-forwardable
-ftools
+final                           sheepman
+finalize                        sheepman
+find                            sheepman
+forwardable                     sheepman
+ftools                          sheepman
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
