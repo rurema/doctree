@@ -1,15 +1,15 @@
 クラスに対してメソッドの委譲機能を定義します。
-以下のモジュールが定義されます。
 
-  * [[c:Forwardable]]
-  * [[c:SingleForwardable]]
+#@#以下のモジュールが定義されます。
 
-詳細は [[unknown:"ruby-src:doc/forwardable.rd.ja"]] を参照してください。
+#@#  * [[c:Forwardable]]
+#@#  * [[c:SingleForwardable]]
+
+#@#詳細は [[unknown:"ruby-src:doc/forwardable.rd.ja"]] を参照してください。
 
 === 参考
 
-  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-  * [[unknown:標準添付ライブラリ紹介【第 6 回】委譲|URL:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
+  * Rubyist Magazine 0012 号 標準添付ライブラリ紹介【第 6 回】委譲 ([[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]])
 
 = module Forwardable
 
@@ -33,34 +33,28 @@
   f.gets
   f.content_at(1)
 
+== Singleton Methods
+
+--- debug
+--- debug=
+
+委譲したメソッドをバックトレースに含めるかどうかを設定します。
+(デフォルトは表示しません。)
+
 == Instance Methods
 
 --- def_instance_delegators(accessor, *methods)
+--- def_delegators(accessor, *methods)
 
 methods で渡されたメソッドのリストを accessor に委譲する
 ようにします。
 
 --- def_instance_delegator(accessor, method, ali = method)
+--- def_delegator(accessor, method, ali = method)
 
 method で渡されたメソッドを accessor に委譲するようにし
 ます。aliが引数として渡されたときは、メソッドaliが呼ば
 れたときには、accessor に対し method を呼び出します。
-
---- def_delegators(accessor, *methods)
-
-def_instance_delegators の 別名です。
-
---- def_delegator(accessor, method, ali = method)
-
-def_instance_delegator の別名です。
-
-== Module Functions
-
---- debug
---- debug=()
-
-委譲したメソッドをバックトレースに含めるかどうかを設定します。
-(デフォルトは表示しません。)
 
 = module SingleForwardable
 
@@ -80,20 +74,15 @@ def_instance_delegator の別名です。
 == Instance Methods
 
 --- def_singleton_delegators(accessor, *methods)
+--- def_delegators(accessor, *methods)
 
 methods で渡されたメソッドのリストを accessor に委譲する
 ようにします。
 
 --- def_singleton_delegator(accessor, method, ali = method)
+--- def_delegator(accessor, method, ali = method)
 
 method で渡されたメソッドを accessor に委譲するようにしま
 す。ali が引数として渡されたときは, メソッド ali が呼ばれ
 たときには、accessor に対し method を呼び出します。
 
---- def_delegators(accessor, *methods)
-
-def_singleton_delegators の別名です。
-
---- def_delegator(accessor, method, ali = method)
-
-def_singleton_delegator の別名です。
