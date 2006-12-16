@@ -1,7 +1,6 @@
-ftools
+ファイル操作のためのライブラリです。
 
 === 注意
-
 1.8 以降では、ftools の利用は推奨しません。ファイル操作をするには [[lib:fileutils]] を使ってください。
 
 === 概要
@@ -56,15 +55,32 @@ verbose が真のとき、標準エラー出力に処理の経過が出ます。
 ディレクトリが既にあれば何もしません。
 mkdir -p([[man:mkdir(1)]])に相当します。
 
---- chmod(mode, files[, ...][, verbose = false])
-
-(複数の)ファイルの属性を変えます。
-オリジナルの [[m:File.chmod]] に verbose の指定が
-追加されるだけです。
-
 --- install(from, to[, mode = nil[, verbose = false]])
 
 ファイルをコピーし、モードを設定します。
 コピー先が存在する場合は一旦削除されますので、コピー先のファイルが
 他のファイルにハードリンクされていれば、そのリンクは切れます。
 install ([[man:install(1)]])コマンドに相当します。
+
+#@# bc-rdoc: detected missing name: catname
+--- catname(from, to)
+
+If to is a valid directory, from will be appended to to, adding
+and escaping backslashes as necessary. Otherwise, to will be
+returned. Useful for appending from to to only if the filename
+was not specified in to.
+
+#@# bc-rdoc: detected missing name: syscopy
+--- syscopy(from, to)
+
+Copies a file from to to. If to is a directory, copies from to
+to/from.
+
+= redefine File
+== Class Methods
+
+--- chmod(mode, files[, ...][, verbose = false])
+
+(複数の)ファイルの属性を変えます。
+オリジナルの [[m:File.chmod]] に verbose の指定が
+追加されるだけです。
