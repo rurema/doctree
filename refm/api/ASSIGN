@@ -194,7 +194,7 @@ rational                        sheepman
 rbconfig                        sheepman
 readbytes                       sheepman        done
 readline                        sheepman        done
-resolv                          kimuraw
+resolv                          kimuraw         done
 resolv-replace
 rexml
 rinda/rinda
