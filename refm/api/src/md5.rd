@@ -1,4 +1,4 @@
-digest/md5 をロードして  MD5 を Digest::MD5 に置き換えます
+digest/md5 をロードして  MD5 を Digest::MD5 に置き換えます。
 このライブラリは obsolete です。
 
 = class MD5
