@@ -153,10 +153,10 @@ irb                             sheepman
 jcode                           iwadon          done
 kconv                           iwadon          done
 logger                          iwadon          done
-mailread                        sheepman
-mathn                           sheepman
+mailread                        sheepman        done
+mathn                           sheepman        done
 matrix                          sheepman        done
-md5                             sheepman
+md5                             sheepman        done
 mkmf                            sheepman
 monitor                         iwadon          done
 mutex_m                         iwadon          done
@@ -191,7 +191,7 @@ pstore                          sheepman        done
 pty
 racc/parser
 rational                        sheepman         
-rbconfig
+rbconfig                        
 readbytes                       sheepman        done
 readline                        sheepman        done
 resolv                          kimuraw
