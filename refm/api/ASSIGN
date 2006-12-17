@@ -95,17 +95,17 @@ Win32API
 abbrev                          okkez           done
 base64                          okkez           done
 benchmark                       sheepman        done
-bigdecimal
-bigdecimal/jacobian
-bigdecimal/ludcmp
-bigdecimal/newton
-bigdecimal/utils
+bigdecimal                      okkez
+bigdecimal/jacobian             okkez
+bigdecimal/ludcmp               okkez
+bigdecimal/newton               okkez
+bigdecimal/utils                okkez
 cgi
 cgi-lib
 cgi/session
 complex                         sheepman        done
 csv                             okkez           done
-curses
+curses                          okkez
 date                            tadf            done
 date2
 dbm                             sheepman        done
