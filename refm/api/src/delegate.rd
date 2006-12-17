@@ -1,10 +1,11 @@
+#@since 1.8.0
 メソッドの委譲 (delegation) を行う。
 
-Delegator クラスは指定したオブジェクトにメソッドの実行を委譲する。
-Delegator クラスを利用する場合はこれを継承して
-__getobj__ メソッドを再定義して委譲先のオブジェクトを指定する。
+[[c:Delegator]] クラスは指定したオブジェクトにメソッドの実行を委譲する。
+[[c:Delegator]] クラスを利用する場合はこれを継承して
+[[m:Delegator#__getobj__]] メソッドを再定義して委譲先のオブジェクトを指定する。
 
-SimpleDelegator は Delegator の利用例の一つであり、コンストラクタに
+[[c:SimpleDelegator]] は [[c:Delegator]] の利用例の一つであり、コンストラクタに
 渡されたオブジェクトにメソッドの実行を委譲する。
 
 関数 DelegateClass(supperclass) は superclass クラスの
@@ -36,8 +37,8 @@ p a         # => [25]
 
 === 参考
 
-  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-  * [[unknown:標準添付ライブラリ紹介【第 6 回】委譲|URL:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
+  * Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
+  * 標準添付ライブラリ紹介【第 6 回】委譲[[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
 
 
 
@@ -54,53 +55,66 @@ p a         # => [25]
 
 = class Delegator < Object
 
+#@since 1.9.0
+
+include Delegator::MethodDelegation
+
+#@end
+
 与えられたオブジェクトの持つメソッドに関して
 委譲用のメソッド定義を提供するクラス。
 
 コンストラクタで指定されたオブジェクトのもつインスタンスメソッドのうち、
 自分の持たないメソッドについて、
-__getobj__ が返すオブジェクトに実行を委譲するようメソッドを定義する。
-
-== Instance Methods
-
---- initialize(obj)
-
-obj のもつインスタンスメソッドのうち、
-自分の持たないメソッドについて、
-__getobj__ が返すオブジェクトに実行を委譲する
-ようインスタンスメソッドを定義する。
-
---- __getobj__
-
-委譲先のオブジェクトを返す。
-デフォルトでは NotImplementError を発生するので、
-サブクラスで再定義する必要がある。
-
-
-
-= class SimpleDelegator < Delegator
-
-Delegator クラスをそのまま利用した、
-指定したオブジェクトにメソッドを委譲するクラス。
+[[m:Delegator#__getobj__]] が返すオブジェクトに実行を委譲するようメソッドを定義する。
 
 == Class Methods
 
+#@if (version <= '1.8.6')
+
 --- new(obj)
 
-obj がもつメソッドについて、実行を obj に委譲する
-オブジェクトを生成する。
+obj のもつインスタンスメソッドのうち、
+自分の持たないメソッドについて、
+[[m:Delegator#__getobj__]] が返すオブジェクトに実行を委譲する
+ようインスタンスメソッドを定義する。
+
+#@end
 
 == Instance Methods
+
+#@since 1.8.0
 
 --- __getobj__
 
 委譲先のオブジェクトを返す。
+デフォルトでは [[c:NotImplementError]] を発生するので、
+サブクラスで再定義する必要がある。
 
---- __setobj__(obj)
+#@end
 
-委譲先のオブジェクトを obj に変更する。
+#@since 1.8.1
+#@if (version < "1.9.0")
+--- marshal_dump
 
-委譲するメソッドの定義は生成時にのみ行われるため、
-以前の委譲先オブジェクトと obj の間で
-インスタンスメソッドに違いがあっても、
-委譲するインスタンスメソッドの再設定は行われないことに注意。
+--- marshal_load(obj)
+
+#@end
+#@end
+
+#@since 1.8.3
+#@if (version < "1.9.0")
+--- method_missing(m, *args)
+
+--- respond_to?(m)
+
+#@end
+#@end
+
+#@include(delegate/SimpleDelegator)
+
+#@since 1.9.0
+#@include(delegate/Delegator__MethodDelegation)
+#@end
+
+#@end

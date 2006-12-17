@@ -1,0 +1,67 @@
+#@since 1.9.0
+= module Delegator::MethodDelegation
+
+== Class Methods
+
+#@# bc-rdoc: detected missing name: new
+--- new(obj)
+
+Pass in the obj to delegate method calls to. All methods supported
+by obj will be delegated to.
+
+== Instance Methods
+
+#@# bc-rdoc: detected missing name: ==
+--- ==(obj)
+
+Returns true if two objects are considered same.
+
+#@# bc-rdoc: detected missing name: __getobj__
+--- __getobj__
+
+This method must be overridden by subclasses and should return
+the object method calls are being delegated to.
+
+#@# bc-rdoc: detected missing name: __setobj__
+--- __setobj__(obj)
+
+This method must be overridden by subclasses and change the object
+delegate to obj.
+
+#@# bc-rdoc: detected missing name: clone
+--- clone
+
+Clone support for the object returned by __getobj__.
+
+#@# bc-rdoc: detected missing name: dup
+--- dup
+
+Duplication support for the object returned by __getobj__.
+
+#@# bc-rdoc: detected missing name: equal?
+--- equal?(obj)
+
+Returns true only if two objects are identical.
+
+#@# bc-rdoc: detected missing name: marshal_dump
+--- marshal_dump
+
+Serialization support for the object returned by __getobj__.
+
+#@# bc-rdoc: detected missing name: marshal_load
+--- marshal_load(obj)
+
+Reinitializes delegation from a serialized object.
+
+#@# bc-rdoc: detected missing name: method_missing
+--- method_missing(m, *args, &block)
+
+Handles the magic of delegation through __getobj__.
+
+#@# bc-rdoc: detected missing name: respond_to?
+--- respond_to?(m)
+
+Checks for a method provided by this the delegate object by fowarding
+the call through __getobj__.
+
+#@end

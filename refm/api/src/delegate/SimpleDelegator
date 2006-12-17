@@ -1,0 +1,39 @@
+#@since 1.8.0
+
+= class SimpleDelegator < Delegator
+
+Delegator クラスをそのまま利用した、
+指定したオブジェクトにメソッドを委譲するクラス。
+
+== Class Methods
+
+--- new(obj)
+
+obj がもつメソッドについて、実行を obj に委譲する
+オブジェクトを生成する。
+
+== Instance Methods
+
+--- __getobj__
+
+委譲先のオブジェクトを返す。
+
+--- __setobj__(obj)
+
+委譲先のオブジェクトを obj に変更する。
+
+委譲するメソッドの定義は生成時にのみ行われるため、
+以前の委譲先オブジェクトと obj の間で
+インスタンスメソッドに違いがあっても、
+委譲するインスタンスメソッドの再設定は行われないことに注意。
+
+#@end
+
+#@since 1.8.2
+#@if (version <= '1.8.6')
+
+--- clone(obj)
+--- dup(obj)
+
+#@end
+#@end
