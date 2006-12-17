@@ -18,7 +18,7 @@
 
 この関数によって作られたサブプロセスが動いている間，子プロセス
 の状態を監視するために SIGCHLD シグナルを捕捉します．子プロセス
-が終了したり停止した場合には，例外が発生します．この間，すべての
+が終了したり停止した場合には，例外[[c:PTY::ChildExited]]が発生します．この間，すべての
 SIGCHLD が PTY モジュールのシグナルハンドラに捕捉されるので，
 サブプロセスを生成する他の関数(system() とか IO.popen()など)を
 使うと，予期しない例外が発生することがあります．これを防ぐため
@@ -32,9 +32,11 @@ SIGCHLD が PTY モジュールのシグナルハンドラに捕捉されるので，
 
 --- protect_signal
 
+#@# These functions are obsolete in this version of pty. (see README)
+
 この関数はイテレータです．ここで指定されたブロックの中では，
 子プロセスが終了しても例外を発生しません．この関数を使うことで，
-PTYの子プロセスが動いている間でも，system()や IO.popen()などの
+PTYの子プロセスが動いている間でも，system()や [[m:IO.popen]]などの
 関数を安全に使うことができます．例えば，
 
   PTY.spawn("command_foo") do |r,w|
@@ -51,5 +53,18 @@ PTYの子プロセスが動いている間でも，system()や IO.popen()などの
 
 --- reset_signal
 
+#@# These functions are obsolete in this version of pty. (see README)
+
 PTY の子プロセスが動いていても，そのプロセスの終了時に例外が発生
 しないようにします．
+
+= class PTY::ChildExited
+
+== Instance Methods
+
+--- status
+
+@since 1.8.0
+子プロセスの終了ステータスを[[c:Process::Status]]オブジェクトで返します。
+@end
+
