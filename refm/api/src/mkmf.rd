@@ -259,6 +259,12 @@ srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 です。
 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
+--- have_macro(macro, headers = nil, opt = "", &b)
+Returns whether or not +macro+ is defined either in the common header
+files or within any +headers+ you provide.
+
+Any options you pass to +opt+ are passed along to the compiler.
+
 --- have_library(lib[, func])
 
 ライブラリ lib がシステムに存在し、
@@ -280,12 +286,19 @@ srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 それにも失敗したら pathes[1] を指定して探し……
 というように、リンク可能なライブラリを探索します。
 
-上記の探索でライブラリ lib を発見できた場合は lib を [[m:mkmf#$libs]] に追加し、
+上記の探索でライブラリ lib を発見できた場合は lib を [[m:$libs]] に追加し、
 見つかったパスを [[m:$LDFLAGS]] に追加して true を返します。
 指定されたすべてのパスを検査してもライブラリ lib が見つからないときは、
 変数を変更せず false を返します。
 
 pathes を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
+
+--- find_header(header, *paths)
+Instructs mkmf to search for the given +header+ in any of the +paths+
+provided, and returns whether or not it was found in those paths.
+
+If the header is found then the path it was found on is added to the list
+of included directories that are sent to the compiler (via the -I switch).
 
 --- have_func(func[, header])
 
@@ -309,6 +322,40 @@ pathes を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
 ヘッダファイル header が存在しないときは $defs は変更せず false を返します。
 なお、-DAHVE_header の header には、
 実際には header.upcase.tr('-.', '_') が使われます。
+
+--- have_type(type, headers = nil, opt = "", &b)
+Returns whether or not the static type +type+ is defined.  You may
+optionally pass additional +headers+ to check against in addition to the
+common header files.
+
+You may also pass additional flags to +opt+ which are then passed along to
+the compiler.
+
+If found, a macro is passed as a preprocessor constant to the compiler using
+the type name, in uppercase, prepended with 'HAVE_TYPE_'.
+
+For example, if have_type('foo') returned true, then the HAVE_TYPE_FOO
+preprocessor macro would be passed to the compiler.
+
+--- have_var(var, headers = nil, &b)
+Returns whether or not the variable +var+ can be found in the common
+header files, or within any +headers+ that you provide.  If found, a
+macro is passed as a preprocessor constant to the compiler using the
+variable name, in uppercase, prepended with 'HAVE_'.
+
+For example, if have_var('foo') returned true, then the HAVE_FOO
+preprocessor macro would be passed to the compiler.
+
+--- check_sizeof(type, headers = nil, &b)
+Returns the size of the given +type+.  You may optionally specify additional
++headers+ to search in for the +type+.
+
+If found, a macro is passed as a preprocessor constant to the compiler using
+the type name, in uppercase, prepended with 'SIZEOF_', followed by the type
+name, followed by '=X' where 'X' is the actual size.
+
+For example, if check_sizeof('mystruct') returned 12, then the
+SIZEOF_MYSTRUCT=12 preprocessor macro would be passed to the compiler.
 
 --- arg_config(config[, default])
 
@@ -384,6 +431,8 @@ configure オプション
 この引数を省略した場合は、extconf.rb があるディレクトリが使われます。
 
 extconf.rb は普通このメソッドの呼び出しで終ります。
+
+--- pkg_config(pkg)
 
 == Constants
 
@@ -472,7 +521,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 
 のような形式の文字列です。
 
-[[m:mkmf#have_library]] または [[m:mkmf#find_library]]
+[[m:Kernel#have_library]] または [[m:Kernel#find_library]]
 を呼び出すと、その検査結果が
 間に空白をはさみつつ $libs に連結されます。
 
@@ -489,7 +538,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 拡張ライブラリをリンクするときのリンカのオプション、
 ライブラリファイルのディレクトリを指定する文字列です。
 
-[[m:mkmf#find_library]] または [[m:mkmf#dir_config]]
+[[m:Kernel#find_library]] または [[m:Kernel#dir_config]]
 の検査が成功すると、$LDFLAGS の値に "-Ldir" を追加します。
 
 #@# おそらくユーザに解放されていない変数
