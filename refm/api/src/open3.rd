@@ -32,7 +32,7 @@ nroff プロセスの標準出力から処理結果を受け取る。
 
 外部プログラム cmd を実行し、そのプロセスの標準入力、
 標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返す。
-cmd は組み込み関数 [[m:Kernel.exec]] と同じ規則で解釈される。
+cmd は組み込み関数 [[m:Kernel#exec]] と同じ規則で解釈される。
 
         stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
 
