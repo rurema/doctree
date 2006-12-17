@@ -145,19 +145,19 @@ getoptlong                      sheepman        done
 getopts                         sheepman        done
 gserver                         sheepman        done
 iconv                           sheepman        done
-importenv                       sheepman
-io/nonblock                     sheepman
-io/wait                         sheepman
+importenv                       sheepman        done
+io/nonblock                     sheepman        done
+io/wait                         sheepman        done
 ipaddr                          iwadon          done
-irb
+irb                             sheepman
 jcode                           iwadon          done
 kconv                           iwadon          done
 logger                          iwadon          done
-mailread
-mathn
+mailread                        sheepman
+mathn                           sheepman
 matrix                          sheepman        done
-md5
-mkmf
+md5                             sheepman
+mkmf                            sheepman
 monitor                         iwadon          done
 mutex_m                         iwadon          done
 net/ftp
