@@ -191,7 +191,7 @@ pstore                          sheepman        done
 pty
 racc/parser
 rational                        sheepman         
-rbconfig                        
+rbconfig                        sheepman
 readbytes                       sheepman        done
 readline                        sheepman        done
 resolv                          kimuraw
