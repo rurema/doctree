@@ -1,4 +1,6 @@
-mathn
+require complex
+require rational
+require matrix
 
 [[lib:rational]] と [[lib:complex]] をシームレスに利用するようにするライブラリです。
 
@@ -169,7 +171,13 @@ include Enumerable
 #@if (version >= "1.9.0")
 --- primes
 
-((<ruby 1.9 feature>))
-
 それまでに求めた素数の配列を返します。
 #@end
+
+= reopen Rational
+== Constants
+--- Unify
+
+= reopen Complex
+== Constants
+--- Unify
