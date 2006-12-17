@@ -131,11 +131,11 @@ etc                             iwadon          done
 expect                          sheepman        done
 fcntl                           sheepman        done
 fileutils                       aamine          done
-final                           sheepman
-finalize                        sheepman
-find                            sheepman
-forwardable                     sheepman
-ftools                          sheepman
+final                           sheepman        done
+finalize                        sheepman        done
+find                            sheepman        done    
+forwardable                     sheepman        done
+ftools                          sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
@@ -145,9 +145,9 @@ getoptlong                      sheepman        done
 getopts                         sheepman        done
 gserver                         sheepman        done
 iconv                           sheepman        done
-importenv
-io/nonblock
-io/wait
+importenv                       sheepman
+io/nonblock                     sheepman
+io/wait                         sheepman
 ipaddr                          iwadon          done
 irb
 jcode                           iwadon          done
