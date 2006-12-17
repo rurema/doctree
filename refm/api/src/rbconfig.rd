@@ -18,7 +18,7 @@ RbConfig モジュールを Config と同じものとして定義します。
 
 #@#  require 'rbconfig'
 
-== Module Functions
+== Singleton Methods
 
 #@if (version >= "1.8.5")
 --- expand(val)
