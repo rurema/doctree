@@ -11,8 +11,10 @@ benchmark
 bigdecimal
 bigdecimal/jacobian
 bigdecimal/ludcmp
+#@since 1.8.2
 bigdecimal/newton
-bigdecimal/utils
+#@end
+bigdecimal/util
 #@end
 cgi-lib
 cgi
