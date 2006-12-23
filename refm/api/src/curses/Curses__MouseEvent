@@ -1,0 +1,16 @@
+
+= class Curses::MouseEvent < Object
+
+== Instance Methods
+
+--- bstate
+
+--- eid
+
+--- x
+
+--- y
+
+--- z
+
+

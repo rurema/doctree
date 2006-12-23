@@ -1,0 +1,165 @@
+
+
+= class Curses::Window < Object
+
+== Class Methods
+
+--- new(height, width, y, x)
+
+画面の座標 (x,y) を左上端とし、幅 width
+高さ height とする curses のトップレベルウィンドウを
+作成し、それを表現する Curses::Window オブジェクトを
+返します。
+
+== Instance Methods
+
+--- subwin(height, width, y, x)
+
+画面の座標 (x,y) を左上端とし、幅 width
+高さ height とするサブウィンドウを作成し、
+それを表現する Curses::Window オブジェクトを返します。
+
+--- close
+
+ウィンドウを閉じます。
+以降のこのウィンドウオブジェクトに対する操作は例外を発生します。
+
+--- clear
+
+ウィンドウの表示を消去します。
+この操作は即座に実行されます。
+
+--- refresh
+
+ウィンドウの表示を更新します。
+
+--- box(ver_char, hor_char)
+
+縦の線に ver_char、横の線に hor_char を使い
+ウィンドウに沿って箱を書きます。線は普通にウィンドウ内に
+書かれるだけなので上書きしないよう注意してください。
+
+--- move(y, x)
+
+ウィンドウを (x,y) に移動します。
+
+親ウィンドウからはみだす位置を指定すると無視されます。
+
+--- setpos(y, x)
+
+ウィンドウ内の (x,y) にカーソルを移動します。
+
+--- cury
+
+ウィンドウ内におけるカーソルの行番号を返します。
+一行目が 0 です。
+
+--- curx
+
+ウィンドウ内におけるカーソルの桁番号を返します。
+一桁目が 0 です。
+
+--- maxy
+
+移動可能な最大の y 座標を返します。
+表示可能な行 + 1 です。
+
+--- maxx
+
+移動可能な最大の x 座標を返します。
+表示可能なバイト数 + 1 です。
+
+--- begy
+
+親ウィンドウの中でウィンドウの左上がある y 座標を返します。
+始点は 0 です。
+
+--- begx
+
+親ウィンドウの中でウィンドウの左上がある x 座標を返します。
+始点は 0 です。
+
+--- standout
+
+以後書き込む文字を強調表示します。
+
+--- standend
+
+強調書き込みを終了します。
+
+--- inch
+
+ウィンドウのカーソル位置から 1 バイト読みとって返します。
+
+--- addch(ch)
+
+ウィンドウのカーソル位置に ch (1 バイト) を上書きします。
+
+--- insch(ch)
+
+ウィンドウのカーソル位置に ch (1 バイト) を挿入します。
+
+--- addstr(str)
+--- <<(str)
+
+ウィンドウのカーソル位置に文字列 str を上書きします。
+
+--- getch
+
+ウィンドウへの入力から 1 バイト読みこみます。
+
+--- getstr
+
+ウィンドウへの入力から一行読みこみます。
+
+--- delch
+
+ウィンドウのカーソル位置から 1 バイト消去します。
+
+--- deleteln
+
+ウィンドウの、カーソルがある行を消去します。
+
+
+#@# 以下、引数の数はあってるはず
+
+--- attroff(attrs)
+
+--- attron(attrs)
+
+--- attrset(attrs)
+
+--- bkgd(ch)
+
+--- bkgdset(ch)
+
+--- clrtoeol(color)
+
+--- color_set(color)
+
+--- getbkgd
+
+--- idlok(bf)
+
+--- insertln
+
+--- keypad(val)
+
+--- keypad=(val)
+
+--- nodelay=(val)
+
+--- noutrefresh
+
+--- resize(lin, col)
+
+--- scrl(n)
+
+--- scroll
+
+--- scrollok(bf)
+
+--- setscrreg(top, bottom)
+
+--- timeout=(delay)
+

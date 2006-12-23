@@ -1,6 +1,479 @@
+#@since 1.8.0
+
 端末操作ライブラリ curses の Ruby インターフェイスです。
 
 = module Curses
+
+== Constants
+
+--- REPORT_MOUSE_POSITION
+
+--- ALL_MOUSE_EVENTS
+
+--- A_ALTCHARSET
+
+--- A_ATTRIBUTES
+
+--- A_BLINK
+
+--- A_BOLD
+
+--- A_CHARTEXT
+
+--- A_COLOR
+
+--- A_DIM
+
+--- A_HORIZONTAL
+
+--- A_INVIS
+
+--- A_LEFT
+
+--- A_LOW
+
+--- A_NORMAL
+
+--- A_PROTECT
+
+--- A_REVERSE
+
+--- A_RIGHT
+
+--- A_STANDOUT
+
+--- A_TOP
+
+--- A_UNDERLINE
+
+--- A_VERTICAL
+
+--- BUTTON1_CLICKED
+
+--- BUTTON1_DOUBLE_CLICKED
+
+--- BUTTON1_PRESSED
+
+--- BUTTON1_RELEASED
+
+--- BUTTON1_TRIPLE_CLICKED
+
+--- BUTTON2_CLICKED
+
+--- BUTTON2_DOUBLE_CLICKED
+
+--- BUTTON2_PRESSED
+
+--- BUTTON2_RELEASED
+
+--- BUTTON2_TRIPLE_CLICKED
+
+--- BUTTON3_CLICKED
+
+--- BUTTON3_DOUBLE_CLICKED
+
+--- BUTTON3_PRESSED
+
+--- BUTTON3_RELEASED
+
+--- BUTTON3_TRIPLE_CLICKED
+
+--- BUTTON4_CLICKED
+
+--- BUTTON4_DOUBLE_CLICKED
+
+--- BUTTON4_PRESSED
+
+--- BUTTON4_RELEASED
+
+--- BUTTON4_TRIPLE_CLICKED
+
+--- BUTTON_ALT
+
+--- BUTTON_CTRL
+
+--- BUTTON_SHIFT
+
+--- COLOR_BLACK
+
+--- COLOR_BLUE
+
+--- COLOR_CYAN
+
+--- COLOR_GREEN
+
+--- COLOR_MAGENTA
+
+--- COLOR_RED
+
+--- COLOR_WHITE
+
+--- COLOR_YELLOW
+
+--- KEY_A1
+
+--- KEY_A3
+
+--- KEY_B2
+
+--- KEY_BACKSPACE
+
+--- KEY_BEG
+
+--- KEY_BREAK
+
+--- KEY_BTAB
+
+--- KEY_C1
+
+--- KEY_C3
+
+--- KEY_CANCEL
+
+--- KEY_CATAB
+
+--- KEY_CLEAR
+
+--- KEY_CLOSE
+
+--- KEY_COMMAND
+
+--- KEY_COPY
+
+--- KEY_CREATE
+
+--- KEY_CTAB
+
+--- KEY_CTRL_A
+
+--- KEY_CTRL_B
+
+--- KEY_CTRL_C
+
+--- KEY_CTRL_D
+
+--- KEY_CTRL_E
+
+--- KEY_CTRL_F
+
+--- KEY_CTRL_G
+
+--- KEY_CTRL_H
+
+--- KEY_CTRL_I
+
+--- KEY_CTRL_J
+
+--- KEY_CTRL_K
+
+--- KEY_CTRL_L
+
+--- KEY_CTRL_M
+
+--- KEY_CTRL_N
+
+--- KEY_CTRL_O
+
+--- KEY_CTRL_P
+
+--- KEY_CTRL_Q
+
+--- KEY_CTRL_R
+
+--- KEY_CTRL_S
+
+--- KEY_CTRL_T
+
+--- KEY_CTRL_U
+
+--- KEY_CTRL_V
+
+--- KEY_CTRL_W
+
+--- KEY_CTRL_X
+
+--- KEY_CTRL_Y
+
+--- KEY_CTRL_Z
+
+--- KEY_DC
+
+--- KEY_DL
+
+--- KEY_DOWN
+
+--- KEY_EIC
+
+--- KEY_END
+
+--- KEY_ENTER
+
+--- KEY_EOL
+
+--- KEY_EOS
+
+--- KEY_EXIT
+
+--- KEY_F0
+
+--- KEY_F1
+
+--- KEY_F10
+
+--- KEY_F11
+
+--- KEY_F12
+
+--- KEY_F13
+
+--- KEY_F14
+
+--- KEY_F15
+
+--- KEY_F16
+
+--- KEY_F17
+
+--- KEY_F18
+
+--- KEY_F19
+
+--- KEY_F2
+
+--- KEY_F20
+
+--- KEY_F21
+
+--- KEY_F22
+
+--- KEY_F23
+
+--- KEY_F24
+
+--- KEY_F25
+
+--- KEY_F26
+
+--- KEY_F27
+
+--- KEY_F28
+
+--- KEY_F29
+
+--- KEY_F3
+
+--- KEY_F30
+
+--- KEY_F31
+
+--- KEY_F32
+
+--- KEY_F33
+
+--- KEY_F34
+
+--- KEY_F35
+
+--- KEY_F36
+
+--- KEY_F37
+
+--- KEY_F38
+
+--- KEY_F39
+
+--- KEY_F4
+
+--- KEY_F40
+
+--- KEY_F41
+
+--- KEY_F42
+
+--- KEY_F43
+
+--- KEY_F44
+
+--- KEY_F45
+
+--- KEY_F46
+
+--- KEY_F47
+
+--- KEY_F48
+
+--- KEY_F49
+
+--- KEY_F5
+
+--- KEY_F50
+
+--- KEY_F51
+
+--- KEY_F52
+
+--- KEY_F53
+
+--- KEY_F54
+
+--- KEY_F55
+
+--- KEY_F56
+
+--- KEY_F57
+
+--- KEY_F58
+
+--- KEY_F59
+
+--- KEY_F6
+
+--- KEY_F60
+
+--- KEY_F61
+
+--- KEY_F62
+
+--- KEY_F63
+
+--- KEY_F7
+
+--- KEY_F8
+
+--- KEY_F9
+
+--- KEY_FIND
+
+--- KEY_HELP
+
+--- KEY_HOME
+
+--- KEY_IC
+
+--- KEY_IL
+
+--- KEY_LEFT
+
+--- KEY_LL
+
+--- KEY_MARK
+
+--- KEY_MAX
+
+--- KEY_MESSAGE
+
+--- KEY_MIN
+
+--- KEY_MOUSE
+
+--- KEY_MOVE
+
+--- KEY_NEXT
+
+--- KEY_NPAGE
+
+--- KEY_OPEN
+
+--- KEY_OPTIONS
+
+--- KEY_PPAGE
+
+--- KEY_PREVIOUS
+
+--- KEY_PRINT
+
+--- KEY_REDO
+
+--- KEY_REFERENCE
+
+--- KEY_REFRESH
+
+--- KEY_REPLACE
+
+--- KEY_RESET
+
+--- KEY_RESIZE
+
+--- KEY_RESTART
+
+--- KEY_RESUME
+
+--- KEY_RIGHT
+
+--- KEY_SAVE
+
+--- KEY_SBEG
+
+--- KEY_SCANCEL
+
+--- KEY_SCOMMAND
+
+--- KEY_SCOPY
+
+--- KEY_SCREATE
+
+--- KEY_SDC
+
+--- KEY_SDL
+
+--- KEY_SELECT
+
+--- KEY_SEND
+
+--- KEY_SEOL
+
+--- KEY_SEXIT
+
+--- KEY_SF
+
+--- KEY_SFIND
+
+--- KEY_SHELP
+
+--- KEY_SHOME
+
+--- KEY_SIC
+
+--- KEY_SLEFT
+
+--- KEY_SMESSAGE
+
+--- KEY_SMOVE
+
+--- KEY_SNEXT
+
+--- KEY_SOPTIONS
+
+--- KEY_SPREVIOUS
+
+--- KEY_SPRINT
+
+--- KEY_SR
+
+--- KEY_SREDO
+
+--- KEY_SREPLACE
+
+--- KEY_SRESET
+
+--- KEY_SRIGHT
+
+--- KEY_SRSUME
+
+--- KEY_SSAVE
+
+--- KEY_SSUSPEND
+
+--- KEY_STAB
+
+--- KEY_SUNDO
+
+--- KEY_SUSPEND
+
+--- KEY_UNDO
+
+--- KEY_UP
+
 
 == Module Functions
 
@@ -149,124 +622,82 @@ stdscr のカーソルがある行を削除し、後の行を上に詰めます。
 
 stdscr のカーソル位置から 1 バイト読みとって返します。
 
+#@since 1.8.3
 
+--- clrtoeol
 
-= class Curses::Window < Object
+--- insertln
 
-== Class Methods
+#@end
 
---- new(height, width, y, x)
+#@since 1.8.1
 
-画面の座標 (x,y) を左上端とし、幅 width
-高さ height とする curses のトップレベルウィンドウを
-作成し、それを表現する Curses::Window オブジェクトを
-返します。
+--- def_prog_mode
 
-=== メソッド
+--- reset_prog_mode
 
---- subwin(height, width, y, x)
+--- timeout=
 
-画面の座標 (x,y) を左上端とし、幅 width
-高さ height とするサブウィンドウを作成し、
-それを表現する Curses::Window オブジェクトを返します。
+#@end
 
---- close
+--- attroff(attrs)
 
-ウィンドウを閉じます。
-以降のこのウィンドウオブジェクトに対する操作は例外を発生します。
+--- attron(attron)
 
---- clear
+--- attrset(attrs)
 
-ウィンドウの表示を消去します。
-この操作は即座に実行されます。
+--- bkgd(ch)
 
---- refresh
+--- bkgdset(ch)
 
-ウィンドウの表示を更新します。
+--- can_change_color?
 
---- box(ver_char, hor_char)
+--- closed?
 
-縦の線に ver_char、横の線に hor_char を使い
-ウィンドウに沿って箱を書きます。線は普通にウィンドウ内に
-書かれるだけなので上書きしないよう注意してください。
+--- color_content(color)
 
---- move(y, x)
+--- color_pair(attr)
 
-ウィンドウを (x,y) に移動します。
-
-親ウィンドウからはみだす位置を指定すると無視されます。
-
---- setpos(y, x)
-
-ウィンドウ内の (x,y) にカーソルを移動します。
-
---- cury
-
-ウィンドウ内におけるカーソルの行番号を返します。
-一行目が 0 です。
-
---- curx
-
-ウィンドウ内におけるカーソルの桁番号を返します。
-一桁目が 0 です。
-
---- maxy
-
-移動可能な最大の y 座標を返します。
-表示可能な行 + 1 です。
-
---- maxx
-
-移動可能な最大の x 座標を返します。
-表示可能なバイト数 + 1 です。
-
---- begy
-
-親ウィンドウの中でウィンドウの左上がある y 座標を返します。
-始点は 0 です。
-
---- begx
-
-親ウィンドウの中でウィンドウの左上がある x 座標を返します。
-始点は 0 です。
-
---- standout
-
-以後書き込む文字を強調表示します。
-
---- standend
-
-強調書き込みを終了します。
-
---- inch
-
-ウィンドウのカーソル位置から 1 バイト読みとって返します。
-
---- addch(ch)
-
-ウィンドウのカーソル位置に ch (1 バイト) を上書きします。
-
---- insch(ch)
-
-ウィンドウのカーソル位置に ch (1 バイト) を挿入します。
-
---- addstr(str)
---- <<(str)
-
-ウィンドウのカーソル位置に文字列 str を上書きします。
-
---- getch
-
-ウィンドウへの入力から 1 バイト読みこみます。
-
---- getstr
-
-ウィンドウへの入力から一行読みこみます。
+--- curs_set(visibility)
 
 --- delch
 
-ウィンドウのカーソル位置から 1 バイト消去します。
+--- getmouse
 
---- deleteln
+--- has_colors?
 
-ウィンドウの、カーソルがある行を消去します。
+--- init_color(color, r, g, b)
+
+--- init_pair(pair, f, b)
+
+--- keyname(c)
+
+--- mouseinterval(interval)
+
+--- mousemask(mask)
+
+--- pair_content(pair)
+
+--- pair_number(attrs)
+
+--- resize(lin, col)
+--- resizeterm(lin, col)
+
+#@# 実体は resizeterm
+
+--- scrl(n)
+
+--- setscrreg(top, bottom)
+
+--- start_color
+
+--- ungetmouse(mevent)
+
+
+
+
+#@include(curses/Curses__Key)
+#@include(curses/Curses__MouseEvent)
+#@include(curses/Curses__Window)
+
+#@end
