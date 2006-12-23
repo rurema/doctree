@@ -1,18 +1,16 @@
-((<¼¹É®¼ÔÊç½¸>))
+#@since 1.8.0
 
-http://www.ruby-doc.org/stdlib/libdoc/bigdecimal/rdoc/classes/LUSolve.html
 
 
 = module LUSolve
 
-((<¼¹É®¼ÔÊç½¸>))
 
 == Instance Methods
 
 --- ludecomp(a, n, zero = 0, one = 1)
 
-((<¼¹É®¼ÔÊç½¸>))
 
 --- lusolve(a, b, ps, zero = 0.0)
 
-((<¼¹É®¼ÔÊç½¸>))
+
+#@end
