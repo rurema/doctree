@@ -323,6 +323,20 @@ of included directories that are sent to the compiler (via the -I switch).
 なお、-DAHVE_header の header には、
 実際には header.upcase.tr('-.', '_') が使われます。
 
+--- have_struct_member(type, member, headers = nil, &b)
+
+Returns whether or not the struct of type +type+ contains +member+.  If
+it does not, or the struct type can't be found, then false is returned.  You
+may optionally specify additional +headers+ in which to look for the struct
+(in addition to the common header files).
+
+If found, a macro is passed as a preprocessor constant to the compiler using
+the member name, in uppercase, prepended with 'HAVE_ST_'.
+
+For example, if have_struct_member('foo', 'bar') returned true, then the
+HAVE_ST_BAR preprocessor macro would be passed to the compiler.
+ 
+
 --- have_type(type, headers = nil, opt = "", &b)
 Returns whether or not the static type +type+ is defined.  You may
 optionally pass additional +headers+ to check against in addition to the
@@ -433,6 +447,18 @@ configure オプション
 extconf.rb は普通このメソッドの呼び出しで終ります。
 
 --- pkg_config(pkg)
+
+--- what_type?
+
+--- create_header
+
+--- checking_for
+
+--- try_run
+
+--- try_compile
+
+--- try_static_assert
 
 == Constants
 
