@@ -105,7 +105,7 @@ cgi-lib
 cgi/session
 complex                         sheepman        done
 csv                             okkez           done
-curses                          okkez
+curses                          okkez           done
 date                            tadf            done
 date2
 dbm                             sheepman        done
