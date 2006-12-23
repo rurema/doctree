@@ -558,4 +558,13 @@ self を返します。
 #@# -> 0 or nil
 
 Returns zero if num equals other, nil otherwise.
+
+--- eql?
+
+#@end
+
+#@since 1.9.0
+
+--- scalar?
+
 #@end
