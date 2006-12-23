@@ -1,20 +1,18 @@
-((<¼¹É®¼ÔÊç½¸>))
+#@since 1.8.0
 
 
 = module Jacobian
 
-((<¼¹É®¼ÔÊç½¸>))
 
-== Methods
+== Instance Methods
 
 --- isEqual(a, b, zero = 0.0, e = 1.0e-8)
 
-((<¼¹É®¼ÔÊç½¸>))
 
 --- dfdxi(f, fx, x, i)
 
-((<¼¹É®¼ÔÊç½¸>))
 
 --- jacobian(f, fx, x)
 
-((<¼¹É®¼ÔÊç½¸>))
+
+#@end
