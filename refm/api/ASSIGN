@@ -96,10 +96,10 @@ abbrev                          okkez           done
 base64                          okkez           done
 benchmark                       sheepman        done
 bigdecimal                      okkez
-bigdecimal/jacobian             okkez
-bigdecimal/ludcmp               okkez
-bigdecimal/newton               okkez
-bigdecimal/utils                okkez
+bigdecimal/jacobian             okkez           done
+bigdecimal/ludcmp               okkez           done
+bigdecimal/newton               okkez           done
+bigdecimal/util                 okkez
 cgi
 cgi-lib
 cgi/session
