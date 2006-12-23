@@ -157,7 +157,7 @@ mailread                        sheepman        done
 mathn                           sheepman        done
 matrix                          sheepman        done
 md5                             sheepman        done
-mkmf                            sheepman
+mkmf                            sheepman        done
 monitor                         iwadon          done
 mutex_m                         iwadon          done
 net/ftp
