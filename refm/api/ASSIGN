@@ -99,7 +99,7 @@ bigdecimal                      okkez
 bigdecimal/jacobian             okkez           done
 bigdecimal/ludcmp               okkez           done
 bigdecimal/newton               okkez           done
-bigdecimal/util                 okkez
+bigdecimal/util                 okkez           done
 cgi
 cgi-lib
 cgi/session
