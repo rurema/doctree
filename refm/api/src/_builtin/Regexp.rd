@@ -216,8 +216,8 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 --- options
 
 正規表現の生成時に指定されたオプションを返します。戻り値は、
-Regexp::EXTENDED, Regexp::IGNORECASE,
-Regexp::MULTILINE の論理和です。
+[[m:Regexp::EXTENDED]], [[m:Regexp::IGNORECASE]],
+[[m:Regexp::MULTILINE]] の論理和です。
 
   p Regexp::IGNORECASE # => 1
   p //i.options        # => 1
@@ -245,6 +245,14 @@ Regexp::MULTILINE の論理和です。
   p /(baz)#{re}/          # \1 は、baz
   
   # => /(baz)(?-mix:(foo|bar)\1)/
+
+--- ==(other)
+
+--- eql?(other)
+
+--- hash
+
+--- inspect
 
 == Constants
 
