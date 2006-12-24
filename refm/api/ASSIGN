@@ -181,7 +181,7 @@ ostruct                         sheepman        done
 #---------------------------------------------------------
 parsearg
 parsedate                       tadf            done
-pathname
+pathname                        okkez
 ping                            aamine          done
 pp                              sheepman        done
 prettyprint                     sheepman        done
@@ -197,8 +197,8 @@ readline                        sheepman        done
 resolv                          kimuraw         done
 resolv-replace                  kimuraw
 rexml
-rinda/rinda
-rinda/tuplespace
+rinda/rinda                     okkez
+rinda/tuplespace                okkez
 ripper
 rss                             sheepman
 rubyunit
