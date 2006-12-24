@@ -65,7 +65,7 @@ _builtin/SecurityError
 _builtin/Signal                 okkez           done
 _builtin/SignalException
 _builtin/StandardError
-_builtin/String
+_builtin/String                 okkez
 _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            aamine          done
 _builtin/Symbol                 okkez           done
