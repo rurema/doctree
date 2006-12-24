@@ -16,6 +16,15 @@ Pathanme.new(string) と同じ。
 
 パス名クラス
 
+== Constants
+
+#@since 1.8.5
+--- SEPARATOR_PAT
+
+--- TO_PATH
+
+#@end
+
 == Class Methods
 
 --- new(path)
@@ -92,7 +101,7 @@ other は Pathname オブジェクトでなければならない。
 
 パス名を文字列で返す。
 
-to_str は、File.open などの引数にそのまま Pathname オブジェクトを
+to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジェクトを
 渡せるように用意してある。
 
     require 'pathname'
@@ -210,6 +219,8 @@ other が絶対パスなら単に other を Pathname オブジェクトとして返す。
 
 other は文字列か Pathname オブジェクト。
 
+#@since 1.8.1
+
 --- children
 
 self 配下にあるパス名(Pathnameオブジェクト)の配列を返す。
@@ -224,6 +235,10 @@ self 配下にあるパス名(Pathnameオブジェクト)の配列を返す。
 
 self が存在しないパスであったりディレクトリでなければ例外
 [[c:Errno::EXXX]] が発生する。
+
+#@end
+
+#@since 1.8.1
 
 --- relative_path_from(base_directory)
 
@@ -248,10 +263,16 @@ base_directory も絶対パスでなければならない。
 
 base_directory は Pathname オブジェクトでなければならない。
 
+#@end
+
+#@since 1.8.1
+
 --- each_line(*args, &block)
 
 Equivalent to:
 IO.foreach(self.to_s, *args, &block)
+
+#@end
 
 --- read(*args)
 
@@ -513,10 +534,14 @@ Dir.rmdir(self.to_s)
 Equivalent to:
 Dir.entries(self.to_s)
 
+#@since 1.8.1
+
 --- each_entry {|pathname| ... }
 
 Equivalent to:
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) }
+
+#@end
 
 --- mkdir(*args)
 
@@ -552,3 +577,80 @@ FileUtils.rm_r(self.to_s)
 --- delete
 
 self が指すディレクトリあるいはファイルを削除する。
+
+#@since 1.8.5
+
+--- ascend
+
+#@end
+
+--- chdir
+
+--- chroot
+
+#@if(version <= "1.8.1")
+
+--- cleanpath_aggressive
+
+--- cleanpath_conservative
+
+#@end
+
+#@since 1.8.5
+--- descend
+
+#@end
+
+--- dir_foreach
+
+--- foreach
+
+--- foreachline
+
+#@since 1.8.2
+--- freeze
+
+#@end
+
+--- inspect
+
+#@since 1.8.1
+--- make_link
+
+
+--- make_symlink
+
+#@end
+
+#@if(version <= "1.8.0")
+--- realpath_rec
+
+--- realpath_root?
+
+#@end
+
+
+#@since 1.8.5
+--- sub
+
+#@end
+
+#@since 1.8.2
+--- taint
+
+--- untaint
+
+#@end
+
+#@since 1.9.0
+--- to_path
+
+#@end
+
+#@since 1.8.5
+
+--- world_readable?
+
+--- world_writable?
+
+#@end
