@@ -181,7 +181,7 @@ ostruct                         sheepman        done
 #---------------------------------------------------------
 parsearg
 parsedate                       tadf            done
-pathname                        okkez
+pathname                        okkez           done
 ping                            aamine          done
 pp                              sheepman        done
 prettyprint                     sheepman        done
