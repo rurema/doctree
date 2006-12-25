@@ -209,7 +209,7 @@ sha1                            sheepman        done
 shell                           sheepman        done
 shellwords                      sheepman        done
 singleton                       sheepman        done
-soap
+soap                            iwadon
 socket                          sheepman        done
 stringio                        sheepman        done
 strscan                         sheepman        done
