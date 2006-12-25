@@ -1,0 +1,9 @@
+= class SOAP::SOAPAttachment < SOAP::SOAPExternalReference
+
+== Class Methods
+
+--- new(value)
+
+== Instance Methods
+
+--- data
