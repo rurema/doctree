@@ -5,7 +5,7 @@
 
 # soap/attachment.rb
 #@include(soap/SOAPAttachment)
-#@#@include(soap/Attachment)
+#@include(soap/Attachment)
 #@#@include(soap/Mapping__AttachmentFactory)
 
 # soap/baseData.rb

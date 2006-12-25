@@ -1,0 +1,29 @@
+= class SOAP::Attachment
+
+== Class Methods
+
+--- new(string_or_readable = nil)
+
+--- contentid(obj)
+
+--- mime_contentid(obj)
+
+== Instance Methods
+
+--- content
+
+--- contentid
+--- contentid=(contentid)
+
+--- contentype
+--- contentype=(contenttype)
+
+--- io
+
+--- mime_contentid
+
+--- save(filename)
+
+--- to_s
+
+--- write(out)
