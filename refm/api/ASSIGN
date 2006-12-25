@@ -189,7 +189,7 @@ profile
 profiler
 pstore                          sheepman        done
 pty                             kimuraw
-racc/parser
+racc/parser                     aamine
 rational                        sheepman         
 rbconfig                        sheepman        done
 readbytes                       sheepman        done
@@ -236,7 +236,9 @@ webrick/cgi                     iwadon          done
 webrick/ssl                     iwadon          done
 win32/registry                  iwadon
 win32ole                        iwadon
+wsdl
 xmlrpc                          date
+xsd
 yaml                            date
 yaml/store                      date
 zlib                            date
