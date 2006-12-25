@@ -234,8 +234,8 @@ weakref                         sheepman        done
 webrick                         iwadon          done
 webrick/cgi                     iwadon          done
 webrick/ssl                     iwadon          done
-win32/registry
-win32ole
+win32/registry                  iwadon
+win32ole                        iwadon
 xmlrpc                          date
 yaml                            date
 yaml/store                      date
