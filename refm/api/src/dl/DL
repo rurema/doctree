@@ -67,17 +67,31 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 == Constants
 
+--- FuncTable
+
 --- RTLD_GLOBAL
 
 --- RTLD_LAZY
 
 --- RTLD_NOW
 
+--- ALIGN_INT
+
+--- ALIGN_LONG
+
+--- ALIGN_FLOAT
+
+--- ALIGN_SHORT
+
+--- ALIGN_DOUBLE
+
+--- ALIGN_VOIDP
+
 --- MAX_ARG
 
---- MAX_CBARG
+--- DLSTACK
 
---- MAX_CBENT
+--- FREE
 
 == Module Functions
 
@@ -85,31 +99,15 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 [[m:DL::Handle.new]](lib) と等価。
 
-== Instance Methods
+--- callback
+--- define_callback
 
---- set_callback(cbtype, entry) {|args| ... }
---- set_callback(cbtype, entry, proc)
-
-proc や指定したブロックを呼ぶ
-entry-th pre-defined function を作成します。
-entry-th pre-defined function は cbtype と entry で指定されます。
-
-cbtype はコールバックのプロトタイプ。
-cbtype については class [[c:DL]] "Type specifiers" も参照。
-
---- get_callback(cbtype, entry)
-
-上記 set_callback 関数によって与えられた [[c:Proc]] オブジェクトを返します。
+--- remove_callback(sym)
 
 --- malloc(size, [free])
 
 size バイトのメモリ領域を割り当て、
 [[c:DL::PtrData]] オブジェクトを ptr として返します。
-
---- strdup(str)
-
-文字列 str を複製した新しい文字列へのポインタに相当する
-[[c:DL::PtrData]] オブジェクトを返します。
 
 --- sizeof(type)
 
@@ -125,3 +123,32 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 
 訳注2: sizeof("L3") のように型の後に数字を付けることもできます。
 指定できる型については [[m:DL#Type specifiers]] を参照
+
+--- strdup(str)
+
+文字列 str を複製した新しい文字列へのポインタに相当する
+[[c:DL::PtrData]] オブジェクトを返します。
+
+#@if (version >= "1.9.0")
+
+#@# おそらく1.6以前のメソッド。
+#@# 1.9 に同名のメソッドがあったので残してあります。詳細未確認。
+
+== Instance Methods
+
+--- set_callback(cbtype, entry) {|args| ... }
+--- set_callback(cbtype, entry, proc)
+
+proc や指定したブロックを呼ぶ
+entry-th pre-defined function を作成します。
+entry-th pre-defined function は cbtype と entry で指定されます。
+
+cbtype はコールバックのプロトタイプ。
+cbtype については class [[c:DL]] "Type specifiers" も参照。
+
+#@end
+
+= class DL::DLError < StandardError
+
+= class DL::DLTypeError < DL::DLError
+
