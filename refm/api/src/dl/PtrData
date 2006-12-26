@@ -7,6 +7,8 @@
 アドレス addr を指すポインタに相当する PtrData オブジェクトを返します。
 GC は free 関数を使用してメモリを解放します。
 
+--- malloc
+
 == Instance Methods
 
 --- free=(sym)
@@ -29,9 +31,13 @@ sym は普通 PtrData#free= や PtrData.new によって設定されます。
 type で指定された型の配列を返します。type は 'S','P','I','L','D' そし
 て 'F' のいずれかです。
 
+--- to_i
+
 --- to_s([len])
 
 長さ len の文字列を返します。len を省略した場合は、文字列の終りは '\0'。
+
+--- to_str
 
 --- ptr
 --- +@
@@ -88,3 +94,16 @@ key が整数でこのオブジェクトがポインタ ptr に相当するなら、
 key が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
 を val にします。key が整数で val が文字列なら [[man:memcpy(3)] を使ってメ
 モリ領域 ptr への値の num バイトをコピーします。
+
+--- data_type
+--- define_data_type
+
+= module DL::MemorySpace
+
+== Constants
+
+--- DL::MemorySpace::DLMemoryTable
+
+== Module Functions
+
+--- each
