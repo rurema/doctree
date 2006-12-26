@@ -31,7 +31,7 @@ C 言語形式のプロトタイプを返します。
 
 人間が読みやすい形式の文字列を返します(訳注:意訳)。
 
---- call(arg1,arg2,...,argN),
+--- call(arg1,arg2,...,argN)
 --- []()
 
 パラメータ arg1, arg2, ... argN で関数を呼び出します。結果は、戻り値 r
@@ -40,3 +40,14 @@ C 言語形式のプロトタイプを返します。
 --- to_ptr
 
 対応する [[c:DL::PtrData]] オブジェクト ptr を返します。
+
+= reopen DL
+
+== Singleton Methods
+
+--- last_error
+--- last_error=
+
+--- win32_last_error
+--- win32_last_error=
+
