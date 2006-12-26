@@ -188,14 +188,14 @@ prettyprint                     sheepman        done
 profile
 profiler
 pstore                          sheepman        done
-pty                             kimuraw
+pty                             kimuraw         done
 racc/parser                     aamine
 rational                        sheepman         
 rbconfig                        sheepman        done
 readbytes                       sheepman        done
 readline                        sheepman        done
 resolv                          kimuraw         done
-resolv-replace                  kimuraw
+resolv-replace                  kimuraw         done
 rexml
 rinda/rinda                     okkez
 rinda/tuplespace                okkez
