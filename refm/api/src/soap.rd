@@ -11,9 +11,9 @@
 #@end
 
 # soap/baseData.rb
-#@include(soap/SOAPModuleUtils)
-#@include(soap/SOAPType)
-#@include(soap/SOAPBasetype)
+#@#@include(soap/SOAPModuleUtils)
+#@#@include(soap/SOAPType)
+#@#@include(soap/SOAPBasetype)
 #@#@include(soap/SOAPCompoundtype)
 #@#@include(soap/SOAPReference)
 #@#@include(soap/SOAPExternalReference)
@@ -239,6 +239,8 @@
 #@#@include(soap/StreamHandler__ConnectionData)
 #@#@include(soap/HTTPStreamHandler)
 
+#@since 1.8.1
 #@include(soap/wsdlDriver.rd)
+#@end
 
 #@end
