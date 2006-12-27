@@ -165,6 +165,9 @@ shellwords
 singleton
 #@since 1.8.0
 soap
+#@since 1.8.1
+soap/wsdlDriver
+#@end
 #@end
 socket
 stringio
