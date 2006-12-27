@@ -1,0 +1,80 @@
+#@since 1.8.1
+= class SOAP::WSDLDriver::Servant__
+
+== Class Methods
+
+--- new(host, wsdl, port, logdev)
+
+== Instance Methods
+
+--- options
+
+--- port
+
+#@since 1.8.2
+--- soapaction
+--- soapaction=(value)
+#@end
+
+--- default_encodingstyle
+--- default_encodingstyle=(value)
+
+--- allow_unqualified_element
+--- allow_unqualified_element=(value)
+
+--- generate_explicit_type
+--- generate_explicit_type=(value)
+
+--- mapping_registry
+--- mapping_registry=(value)
+
+--- wsdl_mapping_registry
+--- wsdl_mapping_registry=(value)
+
+#@since 1.8.2
+--- inspect
+#@end
+
+--- endpoint_url
+--- endpoint_url=(endpoint_url)
+
+#@since 1.8.2
+--- headerhandler
+#@end
+
+--- streamhandler
+
+#@since 1.8.2
+--- test_loopback_response
+
+--- reset_stream
+
+--- rpc_call(name, *values)
+#@end
+
+#@if (version == "1.8.1")
+--- rpc_send(method_name, *params)
+#@end
+
+#@if (version == "1.8.2")
+--- document_call(name, param)
+#@end
+
+--- document_send(name, header_obj, body_obj)
+#@end
+
+
+
+#@if (version == "1.8.1")
+= class SOAP::WSDLDriver::Servant__::Mapper
+
+== Class Methods
+
+--- new(elements, types)
+
+== Instance Methods
+
+--- obj2ele(obj, name)
+
+--- ele2obj(obj, name)
+#@end
