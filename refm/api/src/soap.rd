@@ -3,15 +3,17 @@
 
 #@# [[unknown:ºπ…Æº‘ ÁΩ∏]]
 
+#@since 1.8.2
 # soap/attachment.rb
 #@include(soap/SOAPAttachment)
 #@include(soap/Attachment)
 #@include(soap/Mapping__AttachmentFactory)
+#@end
 
 # soap/baseData.rb
-#@#@include(soap/SOAPModuleUtils)
-#@#@include(soap/SOAPType)
-#@#@include(soap/SOAPBasetype)
+#@include(soap/SOAPModuleUtils)
+#@include(soap/SOAPType)
+#@include(soap/SOAPBasetype)
 #@#@include(soap/SOAPCompoundtype)
 #@#@include(soap/SOAPReference)
 #@#@include(soap/SOAPExternalReference)
@@ -237,10 +239,6 @@
 #@#@include(soap/StreamHandler__ConnectionData)
 #@#@include(soap/HTTPStreamHandler)
 
-# soap/wsdlDriver.rb
-#@#@include(soap/WSDLDriverFactory)
-#@#@include(soap/WSDLDriverFactory__FactoryError)
-#@#@include(soap/WSDLDriver)
-#@#@include(soap/WSDLDriver__Servant__)
+#@include(soap/wsdlDriver.rd)
 
 #@end
