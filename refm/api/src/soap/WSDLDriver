@@ -10,11 +10,13 @@
 
 --- options
 
+#@since 1.8.2
 --- headerhandler
 
 --- streamhandler
 
 --- test_loopback_response
+#@end
 
 --- endpoint_url
 --- endpoint_url=(value)
