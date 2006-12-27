@@ -26,6 +26,8 @@ sym は普通 PtrData#free= や PtrData.new によって設定されます。
 
 サイズ size を割り当てたメモリを取得および設定します。
 
+--- null?
+
 --- to_a(type, [size])
 
 type で指定された型の配列を返します。type は 'S','P','I','L','D' そし
@@ -102,8 +104,9 @@ key が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
 
 == Constants
 
---- DL::MemorySpace::DLMemoryTable
+--- MemoryTable
 
 == Module Functions
 
 --- each
+

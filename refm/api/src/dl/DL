@@ -65,6 +65,14 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
     str1 <=> str2
   }
 
+== Singleton Methods
+
+--- last_error
+--- last_error=
+
+--- win32_last_error
+--- win32_last_error=
+
 == Constants
 
 --- FuncTable
