@@ -1,0 +1,52 @@
+= class SOAP::WSDLDriver < Object
+
+== Class Methods
+
+--- __attr_proxy(symbol, assignable = false)
+
+--- new(wsdl, port, logdev)
+
+== Instance Methods
+
+--- options
+
+--- headerhandler
+
+--- streamhandler
+
+--- test_loopback_response
+
+--- endpoint_url
+--- endpoint_url=(value)
+
+--- mapping_registry
+--- mapping_registry=(value)
+
+--- wsdl_mapping_registry
+--- wsdl_mapping_registry=(value)
+
+--- default_encodingstyle
+--- default_encodingstyle=(value)
+
+--- generate_explicit_type
+--- generate_explicit_type=(value)
+--- generateEncodeType=(value)
+
+--- allow_unqualified_element
+--- allow_unqualified_element=(value)
+
+--- httpproxy
+--- httpproxy=(httpproxy)
+
+--- wiredump_dev
+--- wiredump_dev=(wire_dump_dev)
+
+--- mandatorycharset
+--- mandatorycharset=(mandatorycharset)
+
+--- wiredump_file_base
+--- wiredump_file_base=(wiredump_file_base)
+
+--- inspect
+
+--- reset_stream
