@@ -119,7 +119,7 @@ digest/sha1                     sheepman        done
 digest/sha2                     sheepman        done
 dl                              kimuraw         done
 dl/Symbol                       kimuraw         done
-dl/import                       kimuraw
+dl/import                       kimuraw         done
 dl/struct                       kimuraw
 dl/types                        kimuraw
 dl/win32
