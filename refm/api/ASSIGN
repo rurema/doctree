@@ -119,9 +119,9 @@ digest/sha1                     sheepman        done
 digest/sha2                     sheepman        done
 dl                              kimuraw         done
 dl/Symbol                       kimuraw         done
-dl/import
-dl/struct
-dl/types
+dl/import                       kimuraw
+dl/struct                       kimuraw
+dl/types                        kimuraw
 dl/win32
 drb                             sheepman        done
 e2mmap                          sheepman        done
