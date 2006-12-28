@@ -160,3 +160,21 @@ cbtype については class [[c:DL]] "Type specifiers" も参照。
 
 = class DL::DLTypeError < DL::DLError
 
+= reopen String
+
+== Instance Methods
+
+--- to_ptr
+
+= reopen Array
+
+== Instance Methods
+
+--- to_ptr
+
+= reopen IO
+
+== Instance Methods
+
+--- to_ptr
+

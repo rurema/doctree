@@ -48,6 +48,15 @@ type で指定された型の配列を返します。type は 'S','P','I','L','D' そし
 ポインタが指す値を PtrData オブジェクト ptr で返します。(訳注:？)
 (訳注:PtrDataが指す値をポインタであるとして、PtrData にして返す(？))
 
+--- ==
+--- eql?
+
+ポインタの指すアドレスが同一かどうかを判定します。
+
+--- <=>
+
+ポインタの指すアドレスの大小を比較します。
+
 --- ref
 --- -@
 #@#   * returns the reference as a PtrData object ptr.
