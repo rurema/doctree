@@ -117,8 +117,8 @@ digest/md5                      sheepman        done
 digest/rmd160                   sheepman        done
 digest/sha1                     sheepman        done
 digest/sha2                     sheepman        done
-dl                              kimuraw
-dl/Symbol
+dl                              kimuraw         done
+dl/Symbol                       kimuraw         done
 dl/import
 dl/struct
 dl/types
