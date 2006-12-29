@@ -12,15 +12,8 @@
 
 #@since 1.8.1
 #@include(soap/baseData.rd)
+#@include(soap/element.rd)
 #@end
-
-# soap/element.rb
-#@#@include(soap/SOAPEnvelopeElement)
-#@#@include(soap/SOAPFault)
-#@#@include(soap/SOAPBody)
-#@#@include(soap/SOAPHeaderItem)
-#@#@include(soap/SOAPHeader)
-#@#@include(soap/SOAPEnvelope)
 
 # soap/encodingstype/aspDotNetHandler.rb
 #@#@include(soap/EncodingStyle__ASPDotnetHandler)
