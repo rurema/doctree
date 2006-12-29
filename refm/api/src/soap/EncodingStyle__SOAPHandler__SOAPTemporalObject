@@ -1,0 +1,23 @@
+#@since 1.8.1
+
+= class SOAP::EncodingStyle::SOAPHandler::SOAPTemporalObject < Object
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- parent
+--- parent=(value)
+
+--- position
+--- position=(value)
+
+--- id
+--- id=(value)
+
+--- root
+--- root=(value)
+
+#@end

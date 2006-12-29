@@ -1,0 +1,24 @@
+#@since 1.8.1
+
+= class SOAP::EncodingStyle::SOAPHandler::SOAPUnknown < SOAP::EncodingStyle::SOAPHandler::SOAPTemporalObject
+
+== Class Methods
+
+--- new(handler, elename, type, extraattr)
+
+== Instance Methods
+
+--- type
+
+--- definedtype
+--- definedtype=(value)
+
+--- extraattr
+
+--- as_struct
+
+--- as_string
+
+--- as_nil
+
+#@end
