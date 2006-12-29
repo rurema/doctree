@@ -14,9 +14,9 @@
 #@include(soap/element.rd)
 
 #@# soap/encodingstype/aspDotNetHandler.rb
-#@#@include(soap/EncodingStyle__ASPDotnetHandler)
-#@#@include(soap/EncodingStyle__ASPDotnetHandler__SOAPTemporalObject)
-#@#@include(soap/EncodingStyle__ASPDotnetHandler__SOAPUnknown)
+#@include(soap/EncodingStyle__ASPDotNetHandler)
+#@include(soap/EncodingStyle__ASPDotNetHandler__SOAPTemporalObject)
+#@include(soap/EncodingStyle__ASPDotNetHandler__SOAPUnknown)
 
 #@# soap/encodingstype/handler.rb
 #@#@include(soap/EncodingStyle__Handler)
