@@ -1,3 +1,4 @@
+#@since 1.8.2
 = class SOAP::Attachment
 
 == Class Methods
@@ -27,3 +28,4 @@
 --- to_s
 
 --- write(out)
+#@end
