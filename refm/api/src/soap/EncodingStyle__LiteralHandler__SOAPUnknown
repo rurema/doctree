@@ -1,0 +1,23 @@
+#@since 1.8.1
+
+= class SOAP::EncodingStyle::LiteralHandler::SOAPUnknown < SOAP::EncodingStyle::LiteralHandler::SOAPTemporalObject
+
+== Class Methods
+
+--- new(handler, elename, extraattr)
+
+== Instance Methods
+
+#@since 1.8.2
+--- as_element
+#@end
+
+--- as_string
+
+--- as_nil
+
+#@if (version == "1.8.1")
+--- as_struct
+#@end
+
+#@end
