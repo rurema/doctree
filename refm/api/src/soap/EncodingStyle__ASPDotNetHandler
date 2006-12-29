@@ -1,0 +1,27 @@
+= class SOAP::EncodingStyle::ASPDotNetHandler < SOAP::EncodingStyle::Handler
+
+== Class Methods
+
+--- new(charset = nil)
+
+== Instance Methods
+
+--- encode_data(generator, ns, data, parent)
+
+--- encode_data_end(generator, ns, data, parent)
+
+--- decode_tag(ns, elename, attrs, parent)
+
+--- decode_tag_end(ns, node)
+
+--- decode_text(ns, text)
+
+--- decode_prologue
+
+--- decode_epilogue
+
+--- decode_parent(parent, node)
+
+== Constants
+
+--- Namespace

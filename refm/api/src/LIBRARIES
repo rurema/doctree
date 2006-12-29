@@ -169,12 +169,10 @@ sha1
 shell
 shellwords
 singleton
-#@since 1.8.0
-soap
 #@since 1.8.1
+soap
 soap/baseData
 soap/wsdlDriver
-#@end
 #@end
 socket
 stringio

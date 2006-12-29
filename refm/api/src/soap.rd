@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.1
 #@# = soap
 
 #@# [[unknown:ºπ…Æº‘ ÁΩ∏]]
@@ -10,10 +10,8 @@
 #@include(soap/Mapping__AttachmentFactory)
 #@end
 
-#@since 1.8.1
 #@include(soap/baseData.rd)
 #@include(soap/element.rd)
-#@end
 
 #@# soap/encodingstype/aspDotNetHandler.rb
 #@#@include(soap/EncodingStyle__ASPDotnetHandler)
@@ -191,8 +189,6 @@
 #@#@include(soap/StreamHandler__ConnectionData)
 #@#@include(soap/HTTPStreamHandler)
 
-#@since 1.8.1
 #@include(soap/wsdlDriver.rd)
-#@end
 
 #@end

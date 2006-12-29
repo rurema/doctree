@@ -1,0 +1,10 @@
+= class SOAP::EncodingStyle::ASPDotNetHandler::SOAPTemporalObject
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- parent
+--- parent=(value)
