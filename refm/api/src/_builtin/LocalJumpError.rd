@@ -1,19 +1,18 @@
 = class LocalJumpError < StandardError
 
-スコープを出てしまった [[c:Proc]] からの
-[[unknown:制御構造/return]],
-[[unknown:制御構造/break]],
-[[unknown:制御構造/retry]] で発生します。
+ある [[c:Proc]] オブジェクトの作成元スコープがすでに終了しているとき、
+その Proc オブジェクト内で
+return, break, retry のいずれかを実行すると発生します。
 
 [[c:Proc]] の例を参照してください。
 
 == Instance Methods
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- exit_value
 
-例外 LocalJumpError を発生させた break や return に指定した
-戻り値を返します。
+例外 LocalJumpError を発生する原因となった
+break や return に渡した値を返します。
 
 例:
 
@@ -23,33 +22,24 @@
   
   begin
     foo.call
-  rescue LocalJumpError
-    p $!
-    p $!.reason
-    p $!.exit_value
+  rescue LocalJumpError => err
+    p err              # => #<LocalJumpError: return from block-closure>
+    p err.reason       # => :return
+    p err.exit_value   # => 10
   end
-  
-  => ruby 1.8.0 (2003-06-09) [i586-linux]
-     #<LocalJumpError: return from block-closure>
-     :return
-     10
-  
+
   begin
     Block.new { break 5 }.call
-  rescue LocalJumpError
-    p $!
-    p $!.reason
-    p $!.exit_value
+  rescue LocalJumpError => err
+    p err              # => #<LocalJumpError: break from block-closure>
+    p err.reason       # => :break
+    p err.exit_value   # => 5
   end
-  
-  => ruby 1.8.0 (2003-06-09) [i586-linux]
-     #<LocalJumpError: break from block-closure>
-     :break
-     5
 
 --- reason
 
-例外を発生させた原因をシンボルで返します。返す値は、
+例外を発生させた原因をシンボルで返します。
+返す値は以下のいずれかです。
 
   * :break
   * :redo
@@ -58,5 +48,26 @@
   * :return
 #@#       * :noreason
 
-のいずれかです。[[m:LocalJumpError#exit_value]] の例を参照してください。
+例:
+
+  def foo
+    proc { return 10 }
+  end
+  
+  begin
+    foo.call
+  rescue LocalJumpError => err
+    p err              # => #<LocalJumpError: return from block-closure>
+    p err.reason       # => :return
+    p err.exit_value   # => 10
+  end
+
+  begin
+    Block.new { break 5 }.call
+  rescue LocalJumpError => err
+    p err              # => #<LocalJumpError: break from block-closure>
+    p err.reason       # => :break
+    p err.exit_value   # => 5
+  end
+
 #@end

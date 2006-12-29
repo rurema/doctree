@@ -1,4 +1,4 @@
-#@if (version >= "1.7.0")
+#since 1.9.0
 = class NameError < StandardError
 #@else
 = class NameError < ScriptError
@@ -8,7 +8,7 @@
 
 == Class Methods
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- new(error_message[, name])
 
 例外オブジェクトを生成して返します。nameは未定義だったシンボルです。
@@ -16,26 +16,28 @@
 例:
 
   err = NameError.new("message", "foo")
-  p err
-  p err.name
-
-  # => #<NameError: message>
-             "foo"
+  p err       # => #<NameError: message>
+  p err.name  # => "foo"
 #@end
 
 == Instance Methods
 
 --- name
 
-未定義だったシンボルを返します。
+この例外オブジェクトを発生させる原因となった
+変数や定数、メソッドの名前をシンボルで返します。
 
 例:
 
   begin
     foobar
-  rescue NameError
-    p $!
-    p $!.name
+  rescue NameError => err
+    p err       # => #<NameError: undefined local variable or method `foobar' for main:Object>
+    p err.name  # => :foobar
   end
-  # => #<NameError: undefined local variable or method `foobar' for main:Object>
-       :foobar
+
+#@since 1.8.1
+--- to_s
+
+例外オブジェクトを文字列に変換して返します。
+#@end

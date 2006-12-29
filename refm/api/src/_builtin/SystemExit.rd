@@ -1,78 +1,66 @@
 = class SystemExit < Exception
 
-ruby を終了させます。
-#@# exitとは少し違いがあります。[[ruby-dev:12785]]
+Ruby インタプリタを終了させるときに発生します。
+#@# exit と raise SystemExit の違い： [[ruby-dev:12785]]
 
 == Class Methods
 
-#@if (version >= "1.7.0")
---- new([status], [error_message])
+#@since 1.8.0
+--- new(status = 0, error_message = "")
 
-SystemExit 例外を生成して返します。
+SystemExit オブジェクトを生成して返します。
 
-第一引数が整数の場合、引数 status を指定したものとみなされま
-す。このことを除けば、引数の扱いは [[m:Exception#Exception.new]]
-と同じです。
-
-引数 status が指定された場合、終了ステータスとして生成したオ
-ブジェクトの [[m:SystemExit#status]] 属性に設定されます(省略時は
-0 が設定されます)。
+第 1 引数 status には終了ステータスを整数で指定します。
+第 2 引数 error_message にはエラーメッセージを文字列で指定します。
 
 例:
 
-  e = SystemExit.new(1)
-  p e.status
-  
-  => 1
+  ex = SystemExit.new(1)
+  p ex.status   # => 1
 #@end
 
 == Instance Methods
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- status
 
-終了ステータスを返します。終了ステータスは [[m:Kernel#exit]] や
-[[m:SystemExit#SystemExit.new]] などで設定されます。
+例外オブジェクトに保存された終了ステータスを返します。
+
+終了ステータスは [[m:Kernel#exit]] や [[m:SystemExit.new]] などで設定されます。
 
 例:
 
   begin
-    exit(1)
-  rescue SystemExit
-    p $!
-    p $!.status
+    exit 1
+  rescue SystemExit => err
+    p err.status   # => 1
   end
-  
-  => #<SystemExit: exit>
-     1
-  
+
   begin
-    raise SystemExit.new(1, "bogus exit")
-  rescue SystemExit
-    p $!
-    p $!.status
+    raise SystemExit.new(1, "dummy exit")
+  rescue SystemExit => err
+    p err.status   # => 1
   end
-  
-  => #<SystemExit: bogus exit>
-     1
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.2
 --- success?
 
-終了ステータスが正常終了を示すなら true を返します。
+終了ステータスが正常終了を示す値ならば true を返します。
+
+大半のシステムでは、ステータス 0 が正常終了を表します。
 
 例:
 
   begin
-    exit(false)
-  rescue SystemExit
-    p $!
-    p $!.status
-    p $!.success?
+    exit true
+  rescue SystemExit => err
+    p err.success?  # => true
   end
-  
-  # => #<SystemExit: exit>
-       1
-       false
+
+  begin
+    exit false
+  rescue SystemExit => err
+    p err.success?  # => false
+  end
 #@end

@@ -1,4 +1,6 @@
 = class StandardError < Exception
 
-この例外クラスとそのサブクラスは、[[unknown:rescue節|制御構造/begin]]でクラ
-スを省略したときにも捕捉できます。
+通常のプログラムで発生する可能性の高い
+例外クラスを束ねるためのクラスです。
+StandardError とそのサブクラスは、
+rescue 節でクラスを省略したときにも捕捉できます。

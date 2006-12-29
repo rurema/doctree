@@ -23,28 +23,28 @@ _builtin/File__Constants        sheepman        done
 _builtin/File__Stat             sheepman        done
 _builtin/Fixnum                 sheepman        done
 _builtin/Float                  sheepman        done
-_builtin/FloatDomainError       aamine
+_builtin/FloatDomainError       aamine          done
 _builtin/GC                     sheepman        done
 _builtin/Hash                   sheepman        done
 _builtin/IO                     sheepman        done
-_builtin/IOError                aamine
-_builtin/IndexError             aamine
+_builtin/IOError                aamine          done
+_builtin/IndexError             aamine          done
 _builtin/Integer                okkez           done
-_builtin/Interrupt              aamine
+_builtin/Interrupt              aamine          done
 _builtin/Kernel                 sheepman        done
-_builtin/KeyError               aamine
-_builtin/LoadError              aamine
-_builtin/LocalJumpError         aamine
+_builtin/KeyError               aamine          done
+_builtin/LoadError              aamine          done
+_builtin/LocalJumpError         aamine          done
 _builtin/Marshal                okkez           done
 _builtin/MatchData              okkez           done
 _builtin/Math                   okkez           done
 _builtin/Method                 okkez           done
 _builtin/Module                 okkez           done
-_builtin/NameError              aamine
+_builtin/NameError              aamine          done
 _builtin/NilClass               okkez           done
-_builtin/NoMemoryError          aamine
-_builtin/NoMethodError          aamine
-_builtin/NotImplementedError    aamine
+_builtin/NoMemoryError          aamine          done
+_builtin/NoMethodError          aamine          done
+_builtin/NotImplementedError    aamine          done
 _builtin/Numeric                okkez           done
 _builtin/Object                 sheepman        done
 _builtin/ObjectSpace            sheepman        done
@@ -56,34 +56,34 @@ _builtin/Process__Status        okkez           done
 _builtin/Process__Sys           okkez           done
 _builtin/Process__UID           okkez           done
 _builtin/Range                  okkez           done
-_builtin/RangeError             aamine
+_builtin/RangeError             aamine          done
 _builtin/Regexp                 okkez           done
-_builtin/RegexpError            aamine
-_builtin/RuntimeError           aamine
-_builtin/ScriptError            aamine
-_builtin/SecurityError          aamine
+_builtin/RegexpError            aamine          done
+_builtin/RuntimeError           aamine          done
+_builtin/ScriptError            aamine          done
+_builtin/SecurityError          aamine          done
 _builtin/Signal                 okkez           done
-_builtin/SignalException        aamine
-_builtin/StandardError          aamine
+_builtin/SignalException        aamine          done
+_builtin/StandardError          aamine          done
 _builtin/String                 okkez           done
 _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            aamine          done
 _builtin/Symbol                 okkez           done
-_builtin/SyntaxError            aamine
-_builtin/SystemCallError        aamine
-_builtin/SystemExit             aamine
-_builtin/SystemStackError       aamine
+_builtin/SyntaxError            aamine          done
+_builtin/SystemCallError        aamine          done
+_builtin/SystemExit             aamine          done
+_builtin/SystemStackError       aamine          done
 _builtin/Thread                 sheepman        done
 _builtin/ThreadError            sheepman        done
 _builtin/ThreadGroup            sheepman        done
 _builtin/Time                   sheepman        done
 _builtin/TrueClass              sheepman        done
-_builtin/TypeError              aamine
+_builtin/TypeError              aamine          done
 _builtin/UnboundMethod          sheepman        done
-_builtin/ZeroDivisionError      aamine
+_builtin/ZeroDivisionError      aamine          done
 _builtin/constants              sheepman        done
 _builtin/Enumerable__Enumerator moriq           done
-_builtin/fatal                  aamine
+_builtin/fatal                  aamine          done
 _builtin/functions              sheepman        done
 _builtin/specialvars            sheepman        done
 

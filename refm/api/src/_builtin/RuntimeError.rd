@@ -1,4 +1,5 @@
 = class RuntimeError < StandardError
 
-実行時例外です。例外を指定しない [[m:Kernel#raise]] の呼び出しはこ
-の例外を発生させます。
+特定の例外クラスには該当しないエラーが起こったときに発生します。
+また [[m:Kernel#raise]] で例外クラスを指定しなかった場合も
+RuntimeError が発生します。

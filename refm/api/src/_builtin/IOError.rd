@@ -1,3 +1,3 @@
 = class IOError < StandardError
 
-I/O でエラーが起きたときに発生します。
+入出力でエラーが起きると発生します。

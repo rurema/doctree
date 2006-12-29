@@ -1,9 +1,11 @@
 = class RegexpError < StandardError
 
-正規表現のコンパイルに失敗した場合に発生します。
+正規表現のコンパイルに失敗したときに発生します。
 
 例:
 
-  Regexp.new("*")
-  => in `initialize': invalid regular expression; there's no previous \
-     pattern, to which '*' would define cardinality at 1: /*/ (RegexpError)
+  $ ruby -e 'Regexp.compile("*")'
+  -e:1:in `initialize': target of repeat operator is not specified: /*/ (RegexpError)
+          from -e:1:in `Regexp#compile'
+          from -e:1
+

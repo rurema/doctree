@@ -1,9 +1,10 @@
-#@if (version >= "1.7.0")
+#@since 1.8.0
 = class Interrupt < SignalException
 #@else
 = class Interrupt < Exception
 #@end
 
-[[m:Kernel#trap]] されていない SIGINT を受け取ると発生します。
-SIGINT 以外のシグナル受信による例外は [[c:SignalException]] を参
-照してください。
+SIGINT シグナルを捕捉していないときに
+SIGINT シグナルを受け取ると発生します。
+SIGINT 以外のシグナルを受信したときに発生する例外については
+[[c:SignalException]] を参照してください。
