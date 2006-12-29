@@ -171,7 +171,6 @@ shellwords
 singleton
 #@since 1.8.1
 soap
-soap/baseData
 soap/wsdlDriver
 #@end
 socket
