@@ -1,3 +1,5 @@
+#@since 1.8.1
+
 = class SOAP::SOAPArray < XSD::NSDBase
 include SOAPCompoundtype
 include Enumerable
@@ -56,6 +58,10 @@ include Enumerable
 
 == Constants
 
+#@since 1.8.3
 --- ITEM_NAME
+#@end
 
 --- TypeParseRegexp
+
+#@end

@@ -1,3 +1,5 @@
+#@since 1.8.1
+
 = class SOAP::EncodingStyle::ASPDotNetHandler::SOAPTemporalObject
 
 == Class Methods
@@ -8,3 +10,5 @@
 
 --- parent
 --- parent=(value)
+
+#@end

@@ -1,3 +1,5 @@
+#@since 1.8.1
+
 = class SOAP::SOAPBase64 < XSD::XSDBase64Binary
 include SOAPBasetype
 extend SOAPModuleUtils
@@ -13,3 +15,5 @@ extend SOAPModuleUtils
 == Constants
 
 --- Type
+
+#@end
