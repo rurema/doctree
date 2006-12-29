@@ -153,8 +153,10 @@ rexml
 rinda/rinda
 rinda/tuplespace
 #@end
-#@since 1.8.0
+#@since 1.9.0
 ripper
+#@end
+#@since 1.8.0
 rss
 rubyunit
 scanf
