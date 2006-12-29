@@ -1,10 +1,10 @@
-#@if (version >= "1.8.0")
+(version >= "1.8.0")
 #@# = soap
 
 #@# [[unknown:ºπ…Æº‘ ÁΩ∏]]
 
 #@since 1.8.2
-# soap/attachment.rb
+#@# soap/attachment.rb
 #@include(soap/SOAPAttachment)
 #@include(soap/Attachment)
 #@include(soap/Mapping__AttachmentFactory)
@@ -15,42 +15,42 @@
 #@include(soap/element.rd)
 #@end
 
-# soap/encodingstype/aspDotNetHandler.rb
+#@# soap/encodingstype/aspDotNetHandler.rb
 #@#@include(soap/EncodingStyle__ASPDotnetHandler)
 #@#@include(soap/EncodingStyle__ASPDotnetHandler__SOAPTemporalObject)
 #@#@include(soap/EncodingStyle__ASPDotnetHandler__SOAPUnknown)
 
-# soap/encodingstype/handler.rb
+#@# soap/encodingstype/handler.rb
 #@#@include(soap/EncodingStyle__Handler)
 #@#@include(soap/EncodingStyle__Handler__EncodingStyleError)
 
-# soap/encodingstype/literalHandler.rb
+#@# soap/encodingstype/literalHandler.rb
 #@#@include(soap/EncodingStyle__LiteralHandler)
 #@#@include(soap/EncodingStyle__LiteralHandler__SOAPTemporalObject)
 #@#@include(soap/EncodingStyle__LiteralHandler__SOAPUnknown)
 
-# soap/encodingstype/soapHandler.rb
+#@# soap/encodingstype/soapHandler.rb
 #@#@include(soap/EncodingStyle__SOAPHandler)
 #@#@include(soap/EncodingStyle__SOAPHandler__SOAPTemporalObject)
 #@#@include(soap/EncodingStyle__SOAPHandler__SOAPUnknown)
 
-# soap/generator.rb
+#@# soap/generator.rb
 #@#@include(soap/SOAPGenerator)
 #@#@include(soap/SOAPGenerator__FormatEncodingError)
 
-# soap/header/handler.rb
+#@# soap/header/handler.rb
 #@#@include(soap/Header__Handler)
 
-# soap/header/handlerset.rb
+#@# soap/header/handlerset.rb
 #@#@include(soap/Header__HandlerSet)
 
-# soap/header/simplehandler.rb
+#@# soap/header/simplehandler.rb
 #@#@include(soap/Header__SimpleHandler)
 
-# soap/httpconfigloader.rb
+#@# soap/httpconfigloader.rb
 #@#@include(soap/HTTPConfigLoader)
 
-# soap/mapping/factory.rb
+#@# soap/mapping/factory.rb
 #@#@include(soap/Mapping/Factory)
 #@#@include(soap/Mapping/StringFactory_)
 #@#@include(soap/Mapping/BasetypeFactory_)
@@ -62,11 +62,11 @@
 #@#@include(soap/Mapping/TypedStructFactory_)
 #@#@include(soap/Mapping/HashFactory_)
 
-# soap/mapping/mapping.rb
+#@# soap/mapping/mapping.rb
 #@#@include(soap/Mapping)
 #@#@include(soap/Mapping__TraverseSupport)
 
-# soap/mapping.rb
+#@# soap/mapping.rb
 #@#@include(soap/Marshallable)
 #@#@include(soap/Mapping__MappedExceptin)
 #@#@include(soap/Mapping__SOAPException)
@@ -75,34 +75,34 @@
 #@#@include(soap/Mapping__Registry)
 #@#@include(soap/Mapping__Registry__Map)
 
-# soap/mapping/rubytypeFactory.rb
+#@# soap/mapping/rubytypeFactory.rb
 #@#@include(soap/Mapping__RubytypeFactory)
 
-# soap/mapping/typeMap.rb
+#@# soap/mapping/typeMap.rb
 
-# soap/mapping/wsdlencodedregistry.rb
+#@# soap/mapping/wsdlencodedregistry.rb
 #@#@include(soap/Mapping__WSDLEncodedRegistry)
 
-# soap/mapping/wsdlliteralregistry.rb
+#@# soap/mapping/wsdlliteralregistry.rb
 #@#@include(soap/Mapping__WSDLLiteralRegistry)
 
-# soap/mapping.rb
+#@# soap/mapping.rb
 
-# soap/marshal.rb
+#@# soap/marshal.rb
 #@#@include(soap/Marshal)
 
-# soap/mimemessage.rb
+#@# soap/mimemessage.rb
 #@#@include(soap/MIMEMessage)
 #@#@include(soap/MIMEMessage__MIMEMessageError)
 #@#@include(soap/MIMEMessage__Headers)
 #@#@include(soap/MIMEMessage__Part)
 
-# soap/netHttpClient.rb
+#@# soap/netHttpClient.rb
 #@#@include(soap/NetHttpClient)
 #@#@include(soap/NetHttpClient__SessionManager)
 #@#@include(soap/NetHttpClient__Response)
 
-# soap/parser.rb
+#@# soap/parser.rb
 #@#@include(soap/Parser)
 #@#@include(soap/Parser__ParserError)
 #@#@include(soap/Parser__FormatDecodeError)
@@ -110,24 +110,24 @@
 #@#@include(soap/Parser__ParseFrame)
 #@#@include(soap/Parser__ParseFrame__NodeContainer)
 
-# soap/processor.rb
+#@# soap/processor.rb
 #@#@include(soap/Processor)
 
-# soap/property.rb
+#@# soap/property.rb
 #@#@include(soap/Property)
 #@#@include(soap/Property__Util)
-# add Enumerable#inject
+#@# add Enumerable#inject
 
-# soap/rpc/cgistab.rb
+#@# soap/rpc/cgistab.rb
 #@#@include(soap/RPC__CGIStab)
 #@#@include(soap/RPC__CGIStab__SOAPRequest)
 #@#@include(soap/RPC__CGIStab__SOAPStdinRequest)
 #@#@include(soap/RPC__CGIStab__SOAPCGIRequest)
 
-# soap/rpc/driver.rb
+#@# soap/rpc/driver.rb
 #@#@include(soap/RPC__Driver)
 
-# soap/rpc/element.rb
+#@# soap/rpc/element.rb
 #@#@include(soap/SOAPBody)
 #@#@include(soap/RPC__RPCError)
 #@#@include(soap/RPC__MethodDefinitionError)
@@ -137,31 +137,31 @@
 #@#@include(soap/RPC__SOAPMethodResponse)
 #@#@include(soap/RPC__SOAPVoid)
 
-# soap/rpc/httpserver.rb
+#@# soap/rpc/httpserver.rb
 #@#@include(soap/RPC__HTTPServer)
 
-# soap/rpc/proxy.rb
+#@# soap/rpc/proxy.rb
 #@#@include(soap/RPC__Proxy)
 #@#@include(soap/RPC__Proxy__Operation)
 
-# soap/rpc/router.rb
+#@# soap/rpc/router.rb
 #@#@include(soap/RPC__Router)
 #@#@include(soap/RPC__Router__Operation)
 #@#@include(soap/RPC__Router__ApplicationScopeOperation)
 #@#@include(soap/RPC__Router__RequestScopeOperation)
 
-# soap/rpc/rpc.rb
+#@# soap/rpc/rpc.rb
 #@#@include(soap/RPC)
 
-# soap/rpc/soaplet.rb
-# WEBrick::Log#debug
+#@# soap/rpc/soaplet.rb
+#@# WEBrick::Log#debug
 #@#@include(soap/RPC__SOAPlet)
 
-# soap/rpc/standaloneServer.rb
+#@# soap/rpc/standaloneServer.rb
 #@#@include(soap/RPC__StandaloneServer)
 
-# soap/soap.rb
-# SOAP
+#@# soap/soap.rb
+#@# SOAP
 #@#@include(soap/Error)
 
 #@#@include(soap/StreamError)
@@ -182,11 +182,11 @@
 
 #@#@include(soap/Env)
 
-# Object#instance_variable_get
-# Object#instance_variable_set
-# Kernel#warn
+#@# Object#instance_variable_get
+#@# Object#instance_variable_set
+#@# Kernel#warn
 
-# soap/streamHandler.rb
+#@# soap/streamHandler.rb
 #@#@include(soap/StreamHandler)
 #@#@include(soap/StreamHandler__ConnectionData)
 #@#@include(soap/HTTPStreamHandler)
