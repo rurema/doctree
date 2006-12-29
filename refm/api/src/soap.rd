@@ -19,72 +19,41 @@
 #@include(soap/EncodingStyle__ASPDotNetHandler__SOAPUnknown)
 
 #@# soap/encodingstype/handler.rb
-#@#@include(soap/EncodingStyle__Handler)
-#@#@include(soap/EncodingStyle__Handler__EncodingStyleError)
+#@include(soap/EncodingStyle__Handler)
 
 #@# soap/encodingstype/literalHandler.rb
-#@#@include(soap/EncodingStyle__LiteralHandler)
-#@#@include(soap/EncodingStyle__LiteralHandler__SOAPTemporalObject)
-#@#@include(soap/EncodingStyle__LiteralHandler__SOAPUnknown)
+#@include(soap/EncodingStyle__LiteralHandler)
+#@include(soap/EncodingStyle__LiteralHandler__SOAPTemporalObject)
+#@include(soap/EncodingStyle__LiteralHandler__SOAPUnknown)
 
 #@# soap/encodingstype/soapHandler.rb
-#@#@include(soap/EncodingStyle__SOAPHandler)
-#@#@include(soap/EncodingStyle__SOAPHandler__SOAPTemporalObject)
-#@#@include(soap/EncodingStyle__SOAPHandler__SOAPUnknown)
+#@include(soap/EncodingStyle__SOAPHandler)
+#@include(soap/EncodingStyle__SOAPHandler__SOAPTemporalObject)
+#@include(soap/EncodingStyle__SOAPHandler__SOAPUnknown)
 
 #@# soap/generator.rb
-#@#@include(soap/SOAPGenerator)
-#@#@include(soap/SOAPGenerator__FormatEncodingError)
+#@include(soap/SOAPGenerator)
 
+#@since 1.8.2
 #@# soap/header/handler.rb
-#@#@include(soap/Header__Handler)
+#@include(soap/Header__Handler)
 
 #@# soap/header/handlerset.rb
-#@#@include(soap/Header__HandlerSet)
+#@include(soap/Header__HandlerSet)
 
 #@# soap/header/simplehandler.rb
-#@#@include(soap/Header__SimpleHandler)
+#@include(soap/Header__SimpleHandler)
+#@end
 
+#@since 1.8.3
 #@# soap/httpconfigloader.rb
-#@#@include(soap/HTTPConfigLoader)
+#@include(soap/HTTPConfigLoader)
+#@end
 
-#@# soap/mapping/factory.rb
-#@#@include(soap/Mapping/Factory)
-#@#@include(soap/Mapping/StringFactory_)
-#@#@include(soap/Mapping/BasetypeFactory_)
-#@#@include(soap/Mapping/DateTimeFactory_)
-#@#@include(soap/Mapping/Base64Factory_)
-#@#@include(soap/Mapping/URIFactory_)
-#@#@include(soap/Mapping/ArrayFactory_)
-#@#@include(soap/Mapping/TypedFactory_)
-#@#@include(soap/Mapping/TypedStructFactory_)
-#@#@include(soap/Mapping/HashFactory_)
-
-#@# soap/mapping/mapping.rb
-#@#@include(soap/Mapping)
-#@#@include(soap/Mapping__TraverseSupport)
-
-#@# soap/mapping.rb
-#@#@include(soap/Marshallable)
-#@#@include(soap/Mapping__MappedExceptin)
-#@#@include(soap/Mapping__SOAPException)
-#@#@include(soap/Mapping__Object)
-#@#@include(soap/Mapping__MappingError)
-#@#@include(soap/Mapping__Registry)
-#@#@include(soap/Mapping__Registry__Map)
-
-#@# soap/mapping/rubytypeFactory.rb
-#@#@include(soap/Mapping__RubytypeFactory)
-
-#@# soap/mapping/typeMap.rb
-
-#@# soap/mapping/wsdlencodedregistry.rb
-#@#@include(soap/Mapping__WSDLEncodedRegistry)
-
-#@# soap/mapping/wsdlliteralregistry.rb
-#@#@include(soap/Mapping__WSDLLiteralRegistry)
-
-#@# soap/mapping.rb
+#@include(soap/mapping.rd)
+#@include(soap/mapping/typeMap.rd)
+#@include(soap/mapping/wsdlencodedregistry.rd)
+#@include(soap/mapping/wsdlliteralregistry.rd)
 
 #@# soap/marshal.rb
 #@#@include(soap/Marshal)
@@ -188,7 +157,5 @@
 #@#@include(soap/StreamHandler)
 #@#@include(soap/StreamHandler__ConnectionData)
 #@#@include(soap/HTTPStreamHandler)
-
-#@include(soap/wsdlDriver.rd)
 
 #@end
