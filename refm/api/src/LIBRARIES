@@ -148,8 +148,12 @@ resolv-replace
 resolv
 #@since 1.8.0
 rexml
+#@end
+#@since 1.8.1
 rinda/rinda
 rinda/tuplespace
+#@end
+#@since 1.8.0
 ripper
 rss
 rubyunit
