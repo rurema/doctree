@@ -91,7 +91,7 @@ _builtin/specialvars            sheepman        done
 #---------------------------------------------------------
 English                         sheepman        done
 Env                             sheepman        done
-Win32API
+Win32API                        aamine
 abbrev                          okkez           done
 base64                          okkez           done
 benchmark                       sheepman        done
@@ -101,15 +101,15 @@ bigdecimal/ludcmp               okkez           done
 bigdecimal/newton               okkez           done
 bigdecimal/util                 okkez           done
 cgi
-cgi-lib
+cgi-lib                         (obsolete)
 cgi/session
 complex                         sheepman        done
 csv                             okkez           done
 curses                          okkez           done
 date                            tadf            done
-date2
+date2                           aamine          done
 dbm                             sheepman        done
-debug
+debug                           aamine
 delegate                        okkez           done
 digest                          sheepman        done
 digest/bubblebabble             sheepman        done
@@ -179,14 +179,14 @@ ostruct                         sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-parsearg
+parsearg                        (obsolete)
 parsedate                       tadf            done
 pathname                        okkez           done
 ping                            aamine          done
 pp                              sheepman        done
 prettyprint                     sheepman        done
-profile
-profiler
+profile                         aamine
+profiler                        aamine
 pstore                          sheepman        done
 pty                             kimuraw         done
 racc/parser                     aamine
@@ -199,9 +199,9 @@ resolv-replace                  kimuraw         done
 rexml
 rinda/rinda                     okkez           done
 rinda/tuplespace                okkez           done
-ripper
+ripper                          aamine
 rss                             sheepman
-rubyunit
+rubyunit                        (obsolete)
 scanf                           sheepman        done
 sdbm                            sheepman
 set                             sheepman        done
@@ -235,6 +235,7 @@ webrick                         iwadon          done
 webrick/cgi                     iwadon          done
 webrick/ssl                     iwadon          done
 win32/registry                  iwadon
+win32/resolv
 win32ole                        iwadon
 wsdl                            okkez
 xmlrpc                          date
