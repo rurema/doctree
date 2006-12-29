@@ -1,0 +1,18 @@
+#@since 1.8.1
+
+= class SOAP::Mapping::SOAPException
+include SOAP::Marshallable
+
+== Class Methods
+
+--- new(e)
+
+== Instance Methods
+
+--- excn_type_name
+
+--- cause
+
+--- to_e
+
+#@end

@@ -1,0 +1,25 @@
+#@since 1.8.1
+
+= class SOAP::Mapping::Registry::Map < Object
+
+== Class Methods
+
+--- new(registry)
+
+== Instance Methods
+
+--- obj2soap(obj)
+
+--- soap2obj(node, klass = nil)
+
+--- init(init_map = [])
+
+--- add(obj_class, soap_class, factory, info)
+
+--- clear
+
+--- find_mapped_soap_class(target_obj_class)
+
+--- find_mapped_obj_class(target_soap_class)
+
+#@end

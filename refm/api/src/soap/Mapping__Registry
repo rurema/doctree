@@ -1,0 +1,55 @@
+#@since 1.8.1
+
+= class SOAP::Mapping::Registry < Object
+
+== Class Methods
+
+--- new(config = {})
+
+== Instance Methods
+
+--- default_factory
+--- default_factory=(value)
+
+--- excn_handler_obj2soap
+--- excn_handler_obj2soap=(value)
+
+--- excn_handler_soap2obj
+--- excn_handler_soap2obj=(value)
+
+--- add(obj_class, soap_class, factory, info = nil)
+--- set(obj_class, soap_class, factory, info = nil)
+
+--- obj2soap(obj, type_qname = nil)
+
+--- soap2obj(node, klass = nil)
+
+--- find_mapped_soap_class(obj_class)
+
+--- find_mapped_obj_class(soap_class)
+
+== Constants
+
+--- StringFactory
+
+--- BasetypeFactory
+
+--- DateTimeFactory
+
+--- ArrayFactory
+
+--- Base64Factory
+
+--- URIFactory
+
+--- TypedArrayFactory
+
+--- TypedStructFactory
+
+--- HashFactory
+
+--- SOAPBaseMap
+
+--- RubyOriginalMap
+
+#@end

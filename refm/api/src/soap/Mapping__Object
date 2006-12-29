@@ -1,0 +1,24 @@
+#@since 1.8.1
+
+= class SOAP::Mapping::Object < Object
+include SOAP::Marshal
+
+== Class Methods
+
+--- initialize
+
+== Instance Methods
+
+--- inspect
+
+--- __xmlattr
+
+--- __xmlele
+
+--- [](qname)
+
+--- []=(qname, value)
+
+--- __add_xmlele_value(qname, value)
+
+#@end

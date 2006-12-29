@@ -1,0 +1,34 @@
+#@since 1.8.1
+
+= class SOAP::Mapping::Factory < Object
+include SOAP::Mapping::TraverseSupport
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- obj2soap(soap_class, obj, info, map)
+
+--- soap2obj(obj_class, node, info, map)
+
+--- setiv2obj(obj, node, map)
+
+--- setiv2soap(node, obj, map)
+
+#@if (version == "1.8.1")
+--- capitalize(taget)
+
+--- create_empty_object(klass)
+
+--- name2typename(name)
+#@end
+
+#@if (version <= "1.8.2")
+--- mark_marshalled_obj(obj, soap_obj)
+
+--- mark_unmarshalled_obj(node, obj)
+#@end
+
+#@end

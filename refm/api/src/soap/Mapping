@@ -1,0 +1,83 @@
+#@since 1.8.1
+
+= module SOAP::Mapping
+
+== Class Methods
+
+--- obj2soap(obj, registry = nil, type = nil, opt = EMPTY_OPT)
+
+--- soap2obj(node, registry = nil, klass = nil, opt = EMPTY_OPT)
+
+--- ary2soap(ary, type_ns = XSD::Namespace, typename = XSD::AnyTypeLiteral, registry = nil, opt = EMPTY_OPT)
+
+--- ary2md(ary, rank, type_ns = XSD::Namespace, typename = XSD::AnyTypeLiteral, registry = nil, opt = EMPTY_OPT)
+
+--- fault2exception(fault, registry = nil)
+
+--- _obj2soap(obj, registry, type = nil)
+
+--- _soap2obj(node, registry, klass = nil)
+
+#@since 1.8.2
+--- create_empty_object(klass)
+#@end
+
+--- name2elename(name)
+
+--- elename2name(name)
+
+#@since 1.8.3
+--- const_from_name(name, lenient = false)
+#@end
+
+--- class_from_name(name, lenient = false)
+
+#@since 1.8.3
+--- module_from_name(name, lenient = false)
+#@end
+
+--- class2qname(klass)
+
+--- class2element(klass)
+
+--- obj2element(obj)
+
+#@since 1.8.3
+--- define_singleton_method(obj, name) { ... }
+
+--- get_attribute(obj, attr_name)
+
+--- set_attributes(obj, values)
+
+--- define_attr_accessor(obj, name, getterproc, setterproc = nil)
+
+--- schema_type_definition(klass)
+
+--- schema_ns_definition(klass)
+
+--- schema_element_definition(klass)
+
+--- schema_attribute_definition(klass)
+#@end
+
+#@if (version == "1.8.2")
+--- find_attribute(obj, attr_name)
+#@end
+
+#@if (version <= "1.8.2")
+--- set_instance_vars(obj, values)
+#@end
+
+== Constants
+
+--- RubyTypeNamespace
+
+--- RubyTypeInstanceNamespace
+
+--- RubyCustomTypeNamespace
+
+--- ApacheSOAPTypeNamespace
+
+--- EMPTY_OPT
+
+#@end
