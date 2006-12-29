@@ -197,8 +197,8 @@ readline                        sheepman        done
 resolv                          kimuraw         done
 resolv-replace                  kimuraw         done
 rexml
-rinda/rinda                     okkez
-rinda/tuplespace                okkez
+rinda/rinda                     okkez           done
+rinda/tuplespace                okkez           done
 ripper
 rss                             sheepman
 rubyunit
