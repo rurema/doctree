@@ -23,28 +23,28 @@ _builtin/File__Constants        sheepman        done
 _builtin/File__Stat             sheepman        done
 _builtin/Fixnum                 sheepman        done
 _builtin/Float                  sheepman        done
-_builtin/FloatDomainError
+_builtin/FloatDomainError       aamine
 _builtin/GC                     sheepman        done
 _builtin/Hash                   sheepman        done
 _builtin/IO                     sheepman        done
-_builtin/IOError
-_builtin/IndexError
+_builtin/IOError                aamine
+_builtin/IndexError             aamine
 _builtin/Integer                okkez           done
-_builtin/Interrupt
+_builtin/Interrupt              aamine
 _builtin/Kernel                 sheepman        done
-_builtin/KeyError
-_builtin/LoadError
-_builtin/LocalJumpError
+_builtin/KeyError               aamine
+_builtin/LoadError              aamine
+_builtin/LocalJumpError         aamine
 _builtin/Marshal                okkez           done
 _builtin/MatchData              okkez           done
 _builtin/Math                   okkez           done
 _builtin/Method                 okkez           done
 _builtin/Module                 okkez           done
-_builtin/NameError
+_builtin/NameError              aamine
 _builtin/NilClass               okkez           done
-_builtin/NoMemoryError
-_builtin/NoMethodError
-_builtin/NotImplementedError
+_builtin/NoMemoryError          aamine
+_builtin/NoMethodError          aamine
+_builtin/NotImplementedError    aamine
 _builtin/Numeric                okkez           done
 _builtin/Object                 sheepman        done
 _builtin/ObjectSpace            sheepman        done
@@ -56,34 +56,34 @@ _builtin/Process__Status        okkez           done
 _builtin/Process__Sys           okkez           done
 _builtin/Process__UID           okkez           done
 _builtin/Range                  okkez           done
-_builtin/RangeError
+_builtin/RangeError             aamine
 _builtin/Regexp                 okkez           done
-_builtin/RegexpError
-_builtin/RuntimeError
-_builtin/ScriptError
-_builtin/SecurityError
+_builtin/RegexpError            aamine
+_builtin/RuntimeError           aamine
+_builtin/ScriptError            aamine
+_builtin/SecurityError          aamine
 _builtin/Signal                 okkez           done
-_builtin/SignalException
-_builtin/StandardError
+_builtin/SignalException        aamine
+_builtin/StandardError          aamine
 _builtin/String                 okkez           done
 _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            aamine          done
 _builtin/Symbol                 okkez           done
-_builtin/SyntaxError
-_builtin/SystemCallError
-_builtin/SystemExit
-_builtin/SystemStackError
+_builtin/SyntaxError            aamine
+_builtin/SystemCallError        aamine
+_builtin/SystemExit             aamine
+_builtin/SystemStackError       aamine
 _builtin/Thread                 sheepman        done
 _builtin/ThreadError            sheepman        done
 _builtin/ThreadGroup            sheepman        done
 _builtin/Time                   sheepman        done
 _builtin/TrueClass              sheepman        done
-_builtin/TypeError
+_builtin/TypeError              aamine
 _builtin/UnboundMethod          sheepman        done
-_builtin/ZeroDivisionError
+_builtin/ZeroDivisionError      aamine
 _builtin/constants              sheepman        done
 _builtin/Enumerable__Enumerator moriq           done
-_builtin/fatal 
+_builtin/fatal                  aamine
 _builtin/functions              sheepman        done
 _builtin/specialvars            sheepman        done
 
