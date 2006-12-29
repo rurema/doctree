@@ -1,0 +1,38 @@
+#@since 1.8.1
+= module SOAP::SOAPType
+
+== Instance Methods
+
+--- definedtype
+--- definedtype=(value)
+
+--- elename
+--- elename=(value)
+
+--- encodingstyle
+--- encodingstyle=(value)
+
+--- extraattr
+
+--- id
+--- id=(value)
+
+--- initialize(*args)
+
+#@since 1.8.3
+--- inspect
+#@end
+
+--- parent
+--- parent=(value)
+
+--- position
+--- position=(value)
+
+--- precedents
+
+--- root
+--- root=(value)
+
+--- rootnode
+#@end
