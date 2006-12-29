@@ -1,0 +1,31 @@
+= class Rinda::TupleSpaceProxy < Object
+
+ TupleSpaceProxy allows a remote Tuplespace to appear as local.
+
+== Class Methods
+
+--- new(ts)
+
+Creates a new TupleSpaceProxy to wrap +ts+.
+
+== Instance Methods
+
+--- notify(ev, tuple, sec = nil)
+
+詳細は [[m:TupleSpace#notify]] 参照
+
+--- read(tuple, sec = nil){|template| ... }
+
+詳細は [[m:TupleSpace#read]] 参照
+
+--- read_all(tuple)
+
+詳細は [[m:TupleSpace#read_all]] 参照
+
+--- take(tuple, sec = nil){|template| ... }
+
+詳細は [[m:TupleSpace#take]] 参照
+
+--- write(tuple, sec = nil)
+
+詳細は [[m:TupleSpace#write]] 参照

@@ -1,0 +1,5 @@
+
+= class Rinda::RequestExpiredError < ThreadError
+
+Raised when trying to use an expired tuple.
+

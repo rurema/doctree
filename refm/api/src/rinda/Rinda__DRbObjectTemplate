@@ -1,0 +1,21 @@
+#@since 1.8.2
+
+= class Rinda::DRbObjectTemplate < Object
+
+== Class Methods
+
+--- new(uri = nil, ref = nil)
+
+Creates a new DRbObjectTemplate that will match against +uri+ and
++ref+.
+
+
+== Instance Methods
+
+--- ===(ro)
+
+This DRbObjectTemplate matches +ro+ if the remote object's drburi
+and drbref are the same. +nil+ is used as a wildcard.
+
+
+#@end

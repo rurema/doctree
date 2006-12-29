@@ -1,0 +1,62 @@
+= class Rinda::TupleSpace < Object
+
+include MonitorMixin
+include DRbUndumped
+
+Tuple Space のためのクラスです。
+普通は [[c:Rinda::TupleSpaceProxy]] を介して使います。
+
+== Class Methods
+
+--- new(period = 60)
+
+[[c:Rinda::TupleSpace]] オブジェクトを生成します。
+
+== Instance Methods
+
+--- move(port, tuple, sec = nil)
+
+Moves +tuple+ to +port+.
+
+--- notify(event, tuple, sec = nil)
+
+Registers for notifications of +event+. Returns a
+NotifyTemplateEntry. See NotifyTemplateEntry for examples of how to
+listen for notifications.
+
++event+ can be:
+
+'write':  A tuple was added
+
+'take':   A tuple was taken or moved
+
+'delete': A tuple was lost after being overwritten or expiring
+
+The TupleSpace will also notify you of the 'close' event when the
+NotifyTemplateEntry has expired.
+
+
+--- read(tuple, sec=nil)
+
+Reads +tuple+, but does not remove it.
+
+--- read_all(tuple)
+
+Returns all tuples matching +tuple+. Does not remove the found
+tuples.
+
+
+--- take(tuple, sec = nil)
+--- take(tuple, sec = nil) {|template| ... }
+
+tuple にマッチするタプルをタプルスペースから取り出して返します。
+マッチするタプルが存在しない場合は、マッチするタプルがタプルスペースに
+投入されるまで待ちます。
+
+待ち時間が sec 秒を過ぎた時には take をあきらめ
+例外 [[c:Rinda::RequestExpiredError]] を投げます。
+
+--- write(tuple, sec = nil)
+
+[[c:Rinda::Tuple]] オブジェクト tuple をタプルスペースに加えます。
+tuple を管理するための [[c:Rinda::TupleEntry]] オブジェクトを返します。

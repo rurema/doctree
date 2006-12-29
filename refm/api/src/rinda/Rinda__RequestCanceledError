@@ -1,0 +1,5 @@
+
+= class Rinda::RequestCanceledError < ThreadError
+
+Raised when trying to use a canceled tuple.
+

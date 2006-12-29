@@ -1,0 +1,5 @@
+
+= class Rinda::RindaError < RuntimeError
+
+Rinda error base class
+

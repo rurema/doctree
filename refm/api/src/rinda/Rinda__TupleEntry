@@ -1,0 +1,93 @@
+#@since 1.8.1
+
+= class Rinda::TupleEntry
+include DRbUndumped
+
+A TupleEntry is a Tuple (i.e. a possible entry in some Tuplespace)
+together with expiry and cancellation data.
+
+== Class Methods
+
+--- new(ary, sec = nil)
+
+Creates a TupleEntry based on +ary+ with an optional renewer or
+expiry time +sec+.
+
+A renewer must implement the +renew+ method which returns a
+Numeric, nil, or true to indicate when the tuple has expired.
+
+== Instance Methods
+
+--- [](key)
+
+Retrieves key from the tuple.
+
+--- alive?
+
+A TupleEntry is dead when it is canceled or expired.
+
+--- cancel
+
+Marks this TupleEntry as canceled.
+
+--- canceled?
+
+Returns the canceled status.
+
+--- expired?
+
+Has this tuple expired? (true/false).
+
+A tuple has expired when its expiry timer based on the sec argument
+to #initialize runs out.
+
+--- expires
+
+--- expires=(expires)
+
+#@since 1.8.2
+--- fetch(key)
+
+Fetches key from the tuple.
+
+#@end
+
+--- make_expires(sec = nil)
+
+Returns an expiry Time based on +sec+ which can be one of:
+
+Numeric: +sec+ seconds into the future
+
++true+:  the expiry time is the start of 1970 (i.e. expired)
+
++nil+:   it is Tue Jan 19 03:14:07 GMT Standard Time 2038 (i.e.
+         when UNIX clocks will die)
+
+--- make_tuple(ary)
+
+Creates a Rinda::Tuple for +ary+.
+
+--- renew(sec_or_renewer)
+
+Reset the expiry time according to +sec_or_renewer+.
+
++nil+:   it is set to expire in the far future.
+
++false+: it has expired.
+
+Numeric: it will expire in that many seconds.
+
+Otherwise the argument refers to some kind of renewer object which
+will reset its expiry time.
+
+--- size
+
+The size of the tuple.
+
+--- value
+
+Return the object which makes up the tuple itself: the Array or
+Hash.
+
+
+#@end

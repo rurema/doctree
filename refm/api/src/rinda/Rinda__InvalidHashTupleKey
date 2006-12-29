@@ -1,0 +1,5 @@
+
+= class Rinda::InvalidHashTupleKey < Rinda::RindaError
+
+Raised when a hash-based tuple has an invalid key.
+
