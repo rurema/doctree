@@ -95,7 +95,7 @@ Win32API
 abbrev                          okkez           done
 base64                          okkez           done
 benchmark                       sheepman        done
-bigdecimal                      okkez
+bigdecimal                      okkez           done
 bigdecimal/jacobian             okkez           done
 bigdecimal/ludcmp               okkez           done
 bigdecimal/newton               okkez           done
