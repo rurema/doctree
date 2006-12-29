@@ -1,0 +1,33 @@
+#@since 1.8.1
+= class SOAP::SOAPStruct < XSD::NSDBase
+include SOAPCompoundtype
+include Enumerable
+
+== Class Methods
+
+--- new(type = nil)
+
+--- decode(elename, type)
+
+== Instance Methods
+
+--- to_s
+
+--- add(name, value)
+
+--- [](idx)
+
+--- []=(idx, data)
+
+--- key?(name)
+
+--- members
+
+#@since 1.8.3
+--- to_obj
+#@end
+
+--- each
+
+--- replace
+#@end

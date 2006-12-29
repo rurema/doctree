@@ -1,0 +1,70 @@
+= class SOAP::SOAPElement
+include Enumerable
+
+== Class Methods
+
+--- new(elename, text = nil)
+
+--- decode(elename)
+
+--- from_obj(obj, namespace = nil
+
+#@since 1.8.3
+--- to_elename(obj, namespace = nil)
+#@end
+
+== Instance Methods
+
+--- encodingstyle
+--- encodingstyle=(value)
+
+--- elename
+--- elename=(value)
+
+#@since 1.8.2
+--- id
+--- id=(value)
+#@end
+
+--- precedents
+
+#@since 1.8.2
+--- root
+--- root=(value)
+
+--- parent
+--- parent=(value)
+
+--- position
+--- position=(value)
+#@end
+
+--- extraattr
+--- extraattr=(value)
+
+--- qualified
+--- qualified=(value)
+
+#@since 1.8.3
+--- inspect
+#@end
+
+--- text
+--- text=(value)
+#@since 1.8.2
+--- data
+#@end
+
+--- add(value)
+
+--- [](idx)
+
+--- []=(idx, data)
+
+--- key?(name)
+
+--- members
+
+--- to_obj
+
+--- each {|key, value| ... }

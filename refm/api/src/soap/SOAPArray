@@ -1,0 +1,61 @@
+= class SOAP::SOAPArray < XSD::NSDBase
+include SOAPCompoundtype
+include Enumerable
+
+== Class Methods
+
+--- new(type = nil, rank = 1, arytype = nil)
+
+--- decode(elename, type, arytype)
+
+--- create_arytype(typename, rank)
+#@# private class method?
+
+--- parse_type(string)
+#@# private class method?
+
+== Instance Methods
+
+--- sparse
+--- sparse=(value)
+
+--- offset
+--- offset=(var)
+
+--- rank
+
+--- size
+--- size=(value)
+
+--- size_fixed
+--- size_fixed=(value)
+
+--- arytype
+
+--- add(value)
+
+--- [](*idxary)
+
+--- []=(*idxary)
+
+--- each {|data| ... }
+
+--- to_a
+
+--- replace {|ele| ... }
+
+--- deep_map(ary) {|ele| ... }
+
+--- include?(var)
+
+--- traverse {|v, *rank| ... }
+
+--- soap2array(ary)
+
+--- position
+
+== Constants
+
+--- ITEM_NAME
+
+--- TypeParseRegexp

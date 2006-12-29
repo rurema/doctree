@@ -1,0 +1,16 @@
+#@since 1.8.2
+= class SOAP::SOAPExternalReference < XSD::NSDBase
+include SOAPBasetype
+include SOAPModuleUtils
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- referred
+
+--- refidstr
+
+#@end

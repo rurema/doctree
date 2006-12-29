@@ -1,0 +1,34 @@
+#@since 1.8.1
+= class SOAP::SOAPReference < XSD::NSDBase
+include SOAPBasetype
+extend SOAPModuleUtils
+
+== Class Methods
+
+--- new(obj = nil)
+
+--- create_refid(obj)
+
+--- decode(elename, refidstr)
+
+== Instance Methods
+
+--- __getobj__
+
+--- __setobj__(obj)
+
+--- method_missing(msg_id, *params)
+
+--- refid
+--- refid=(value)
+
+#@since 1.8.2
+--- refidstr
+#@end
+
+#@if (version == "1.8.1")
+--- elename
+--- elename=(value)
+#@end
+
+#@end
