@@ -1,3 +1,4 @@
+#@since 1.8.1
 = class SOAP::WSDLDriver < Object
 
 == Class Methods
@@ -52,3 +53,4 @@
 --- inspect
 
 --- reset_stream
+#@end

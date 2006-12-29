@@ -1,0 +1,22 @@
+#@since 1.8.1
+= class SOAP::WSDLDriverFactory < Object
+
+== Class Methods
+
+--- new(wsdl)
+
+== Instance Methods
+
+--- wsdl
+
+--- inspect
+
+#@since 1.8.3
+--- create_rpc_driver(servicename = nil, portname = nil)
+#@end
+
+--- create_driver(service = nil, port = nil)
+--- createDriver(service = nil, port = nil)
+
+= class SOAP::WSDLDriverFactory::FactoryError < StandardError
+#@end
