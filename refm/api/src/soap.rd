@@ -14,7 +14,7 @@
 #@include(soap/SOAPModuleUtils)
 #@include(soap/SOAPType)
 #@include(soap/SOAPBasetype)
-#@#@include(soap/SOAPCompoundtype)
+#@include(soap/SOAPCompoundtype)
 #@#@include(soap/SOAPReference)
 #@#@include(soap/SOAPExternalReference)
 #@#@include(soap/SOAPNil)

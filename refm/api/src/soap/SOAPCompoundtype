@@ -1,0 +1,37 @@
+#@since 1.8.1
+= module SOAP::SOAPCompoundtype
+include SOAPType
+include SOAP
+
+== Instance Methods
+
+--- initialize(*args)
+
+#@if (version == "1.8.1")
+--- definedtype
+--- definedtype=(value)
+
+--- elename
+--- elename=(value)
+
+--- encodingstyle
+--- encodingstyle=(value)
+
+--- extraattr
+
+--- id
+--- id=
+
+--- parent
+--- parent=(value)
+
+--- position
+--- position=(value)
+
+--- precedents
+
+--- root
+--- root=(value)
+#@end
+
+#@end
