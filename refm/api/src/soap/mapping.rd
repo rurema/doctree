@@ -21,7 +21,7 @@
 --- MapQName
 
 #@# soap/mapping/mapping.rb
-#@include(Mapping)
+#@include(Mapping__)
 #@include(Mapping__TraverseSupport)
 
 #@# soap/mapping/registry.rb
