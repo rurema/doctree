@@ -1,4 +1,4 @@
-#since 1.9.0
+#@since 1.9.0
 = class NameError < StandardError
 #@else
 = class NameError < ScriptError
