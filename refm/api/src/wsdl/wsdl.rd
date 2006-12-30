@@ -12,7 +12,7 @@ require xsd/qname
 
 --- Version
 
-$B$3$N%i%$%V%i%j$N%P!<%8%g%s$rI=$9Dj?t!#(B
+¤³¤Î¥é¥¤¥Ö¥é¥ê¤Î¥Ð¡¼¥¸¥ç¥ó¤òÉ½¤¹Äê¿ô¡£
 
 
 = class WSDL::Error < StandardError
