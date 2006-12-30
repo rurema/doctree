@@ -211,6 +211,26 @@ webrick/ssl
 #@end
 win32/registry
 win32ole
+#@since 1.8.1
+wsdl/binding
+wsdl/data
+wsdl/definitions
+wsdl/documentation
+wsdl/import
+wsdl/importer
+wsdl/info
+wsdl/message
+wsdl/operation
+wsdl/operation_binding
+wsdl/param
+wsdl/parser
+wsdl/part
+wsdl/port
+wsdl/port_type
+wsdl/service
+wsdl/types
+wsdl/wsdl
+#@end
 xmlrpc
 yaml
 yaml/store
