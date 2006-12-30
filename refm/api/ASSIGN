@@ -91,7 +91,7 @@ _builtin/specialvars            sheepman        done
 #---------------------------------------------------------
 English                         sheepman        done
 Env                             sheepman        done
-Win32API                        aamine
+Win32API                        aamine          done
 abbrev                          okkez           done
 base64                          okkez           done
 benchmark                       sheepman        done
@@ -109,7 +109,7 @@ curses                          okkez           done
 date                            tadf            done
 date2                           aamine          done
 dbm                             sheepman        done
-debug                           aamine
+debug                           aamine          done
 delegate                        okkez           done
 digest                          sheepman        done
 digest/bubblebabble             sheepman        done
@@ -185,11 +185,11 @@ pathname                        okkez           done
 ping                            aamine          done
 pp                              sheepman        done
 prettyprint                     sheepman        done
-profile                         aamine
+profile                         aamine          done
 profiler                        aamine
 pstore                          sheepman        done
 pty                             kimuraw         done
-racc/parser                     aamine
+racc/parser                     aamine          done
 rational                        sheepman         
 rbconfig                        sheepman        done
 readbytes                       sheepman        done

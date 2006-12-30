@@ -4,9 +4,8 @@ Win32 API を呼び出すためのライブラリです。
 
 Win32 API を呼び出すためのクラスです。
 
-=== 使用例
-
-MessageBox (Win32API のクラスメソッドにしてみた)
+=== 使用例 1: MessageBox
+#@# Win32API のクラスメソッドにしてみた
 
   require 'Win32API'
   # require 'dl/win32'
@@ -47,7 +46,7 @@ MessageBox (Win32API のクラスメソッドにしてみた)
   p Win32API.MessageBox(0, "てすと", "テスト")
   p Win32API.MessageBoxEx(0, "てすと", "テスト")
 
-Cygwin の uname コマンドの代わり
+=== 使用例 2: Cygwin の uname コマンドの代わり
 
   require 'Win32API'
   
@@ -66,7 +65,7 @@ Cygwin の uname コマンドの代わり
   
   => ["CYGWIN_98-4.10", "hoge", "1.1.7(0.31/3/2)", "2000-12-25 12:39", "i586"]
 
-Cygwin の cygpath コマンドの代わり
+=== 使用例 3: Cygwin の cygpath コマンドの代わり
 
   require 'Win32API'
   
@@ -101,7 +100,6 @@ Cygwin の cygpath コマンドの代わり
       if func.Call(path, buf) == -1
         raise "cannot convert path name"
       end
-      
       buf.delete!("\0")
       buf
     end
@@ -114,13 +112,18 @@ Cygwin の cygpath コマンドの代わり
 
 == Class Methods
 
---- new(dllname, proc, import, export)
+--- new(dllname, func, import, export)
 
-DLL dllname をロードし、API関数 proc のオブジェクトを
-生成します。import には proc の引数の型のリストを、
-export には proc の戻り値の型を指定します。
+DLL dllname をロードし、API func のオブジェクトを生成します。
 
-型の指定は以下の文字列または配列です。
+第 3 引数 import には func の引数の型のリストを指定します。
+nil の場合は引数なしと見なされます。
+
+第 4 引数 export には func の戻り値の型を指定します。
+nil の場合は戻り値なし (void) と見なされます。
+
+第 3 引数 import と第 4 引数 export で
+型を指定するには以下の文字列を用います。
 
 : "p"
     ポインタ
@@ -132,28 +135,26 @@ export には proc の戻り値の型を指定します。
 : "v"
     void
 
-import が nil の場合は引数なしと見なされます。
-また、export が nil の場合は戻り値なし (void) と見なされます。
-
 == Instance Methods
 
---- call([args ...])
---- Call([args ...])
+--- call(*args)
+--- Call(*args)
 
-API 関数をコールします。指定する引数と戻り値は new の引数の
-指定に従います。特にポインタを渡してそのポインタの指す領域に値が
-設定される場合はその領域をあらかじめ確保しておく必要があります。
+API を呼び出します。
+指定する引数と戻り値は [[Win32API.new]] の引数の指定に従います。
+特にポインタを渡してそのポインタの指す領域に値が設定される場合は
+その領域をあらかじめ確保しておく必要があります。
 
-例えば、文字列が返る関数をコールする場合は以下のようにします。
+例えば、引数のバッファに書き込む関数を呼び出すには以下のようにします。
 
-  obj = Win32API.new('dllname.dll', 'foo', 'p', 'v')
-  arg = "\0" * 256
-  obj.call(arg)
+  api = Win32API.new('foo.dll', 'foo', 'p', 'v')
+  buf = "\0" * 256
+  api.call(buf)
 
 ポインタの配列を渡す場合は以下のようにします。
 #@# あらい: 2001-03-23 まだ試してない。あってるかな？
 #@# バグ？: 2004-01-29 obj.call([args.pack("p3")].pack("P"))のような？
 
-  obj = Win32API.new('dllname.dll', 'foo', 'p', 'v')
-  args = ["\0" * 256, "\0" * 256, "\0" * 256,]
-  obj.call(args.pack("p3"))
+  api = Win32API.new('foo.dll', 'foo', 'p', 'v')
+  args = ["\0" * 256, "\0" * 256, "\0" * 256]
+  api.call(args.pack("p3"))

@@ -1,25 +1,23 @@
-debug
+Ruby デバッガです。Ruby スクリプトのソースコードデバッグに使用します。
 
-Ruby デバッガです。ruby スクリプトのソースデバッグに使用します。
-
-Emacs を使用したインタフェースruby/misc/rubydb[23]x.elも ruby の
-アーカイブの中にあります。
-
-rubydb2x.el は、Emacs 19.2x 以前用、
-rubydb3x.el は、Emacs 19.3x 以降用です。
+また、Emacs を使用したインタフェース rubydb[23]x.el が
+Ruby のアーカイブの misc/ にあるので、活用してください。
+rubydb2x.el は Emacs 19.2x 以前用、
+rubydb3x.el は Emacs 19.3x 以降用です。
 
 === 使い方
 
   $ ruby -rdebug foo.rb
 
 または、Emacs から
+
     M-x load-library rubydb3x.el
     M-x rubydb
 
 === デバッグコマンド
 
-以下は、デバッガで使用できるコマンド名とその用法の一覧です。各コマンド
-名には省略形があります。
+以下は、デバッガで使用できるコマンド名とその用法の一覧です。
+各コマンド名には省略形があります。
 
 ここに挙げたもの以外を入力した場合、その入力を ruby の式として評価します。
 
