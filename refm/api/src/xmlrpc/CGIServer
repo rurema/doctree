@@ -2,6 +2,8 @@
 = class XMLRPC::CGIServer < XMLRPC::BasicServer
 == class methods
 --- new(*args)
+
 == instance methods
---- XMLRPC::CGIServer#serve
+--- serve
+
 #@end

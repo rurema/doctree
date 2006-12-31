@@ -2,6 +2,8 @@
 = class XMLRPC::ModRubyServer < XMLRPC::BasicServer
 == class methods
 --- new(*args)
+
 == instance methods
 --- serve
+
 #@end

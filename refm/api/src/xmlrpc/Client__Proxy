@@ -2,4 +2,5 @@
 = class XMLRPC::Client::Proxy < XMLRPC::Client
 == class methods
 --- new(server, prefix, args=[], meth=:call, delim=".")
+
 #@end

@@ -1,8 +1,6 @@
 #@since 1.8.0
 = class XMLRPC::Client < Object
 
-[[unknown:執筆者募集]]
-
 [[c:XMLRPC]]
 
 XML-RPC サーバにプロシジャを実行させるためのクラスです。
@@ -55,10 +53,15 @@ Client オブジェクトを生成します。uri は文字列です。proxy は
 --- proxy2(prefix, *args)
 
 --- call_async(...)
+
 --- call2_async(...)
+
 --- multicall_async(...)
+
 --- multicall2_async(...)
+
 --- proxy_async(...)
+
 --- proxy2_async(...)
 
 --- timeout
