@@ -755,7 +755,7 @@ Cookie オブジェクトのアトリビュートです。
 
 --- nO_element_def(element)
 
-= class CGI::HtmlExtension
+= module CGI::HtmlExtension
 
 == Instance Methods
 
