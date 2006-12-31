@@ -1,0 +1,10 @@
+#@since 1.8.1
+= module XSD::FloatConstants
+== constants
+--- NaN
+
+--- POSITIVE_INF
+
+--- NEGATIVE_INF
+
+#@end

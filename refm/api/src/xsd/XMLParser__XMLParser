@@ -1,0 +1,11 @@
+#@since 1.8.1
+= class XSD::XMLParser::XMLParser < XSD::XMLParser::Parser
+require 'xml/parser'
+
+== class methods
+--- new
+
+== instance methods
+--- do_parse(string_or_readable)
+
+#@end

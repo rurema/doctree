@@ -1,0 +1,31 @@
+#@since 1.8.1
+= module XSD::Charset
+== module functions
+--- charset_label(encoding)
+
+--- charset_str(label)
+
+--- encoding
+--- encoding=(encoding)
+
+--- encoding_conv(str, enc_from, enc_to)
+
+--- encoding_from_xml(str, charset)
+
+--- encoding_label
+
+--- encoding_to_xml(str, charset)
+
+--- init
+
+--- is_ces(str, code = $KCODE)
+
+--- is_euc(str)
+
+--- is_sjis(str)
+
+--- is_us_ascii(str)
+
+--- is_utf8(str)
+
+#@end

@@ -239,7 +239,7 @@ win32/resolv                    date            done
 win32ole
 wsdl                            okkez
 xmlrpc                          date            done
-xsd                             date
+xsd                             date            date
 yaml                            date            done
 yaml/store                      date            done
 zlib                            date            done

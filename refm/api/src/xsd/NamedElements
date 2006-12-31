@@ -1,0 +1,26 @@
+#@since 1.8.1
+= class XSD::NamedElements
+include Enumerable
+
+== class methods
+--- new
+
+== instance methods
+--- [](idx)
+
+--- <<(rhs)
+
+--- +(rhs)
+
+--- concat(rhs)
+
+--- delete(rhs)
+
+--- dup
+
+--- each {|element| ...}
+
+--- find_name(name)
+
+--- size
+#@end

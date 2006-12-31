@@ -1,0 +1,52 @@
+#@since 1.8.1
+= class XSD::XMLParser::XMLScanner < XSD::XMLParser::Parser
+require 'xmlscan/scanner'
+
+include XMLScan::Visitor
+
+== class methods
+--- new
+
+== instance methods
+--- do_parse(string_or_readable)
+
+--- on_attr_charref(code)
+
+--- on_attr_charref_hex(code)
+
+--- on_attr_entityref(ref)
+
+--- on_attr_value(str)
+
+--- on_attribute(name)
+
+--- on_chardata(str)
+
+--- on_charref(code)
+
+--- on_charref_hex(code)
+
+--- on_entityref(ref)
+
+--- on_etag(name)
+
+--- on_stag(name)
+
+--- on_stag_end(name)
+
+--- on_stag_end_empty(name)
+
+--- on_xmldecl_encoding(str)
+
+--- on_xmldecl_version(str)
+
+--- parse_error(msg)
+
+--- scanner_kcode=(charset)
+
+--- valid_error(msg)
+
+--- warning(msg)
+
+--- wellformed_error(msg)
+#@end

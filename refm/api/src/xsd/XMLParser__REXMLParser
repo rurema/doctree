@@ -1,0 +1,24 @@
+#@since 1.8.1
+= class XSD::XMLParser::REXMLParser < XSD::XMLParser::Parser
+require 'rexml/streamlistener'
+require 'rexml/document'
+
+include REXML::StreamListener
+
+== class methods
+--- new
+
+== instance methods
+--- do_parse(string_or_readable)
+
+--- epilogue
+
+--- tag_start(name, attrs)
+
+--- tag_end(name)
+
+--- text(text)
+
+--- xmldecl(version, encoding, standalone)
+
+#@end

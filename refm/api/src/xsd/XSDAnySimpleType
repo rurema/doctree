@@ -1,0 +1,18 @@
+#@since 1.8.1
+= class XSD::XSDAnySimpleType < XSD::NSDBase
+include XSD
+
+== class methods
+--- new(value = nil)
+
+== instance methods
+--- data
+
+--- is_nil
+--- is_nil=(bool)
+
+--- set(value)
+
+--- to_s
+
+#@end

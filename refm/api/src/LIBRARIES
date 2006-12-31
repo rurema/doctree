@@ -232,6 +232,9 @@ wsdl/types
 wsdl/wsdl
 #@end
 xmlrpc
+#@since 1.8.1
+xsd
+#@end
 yaml
 yaml/store
 zlib

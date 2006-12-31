@@ -1,0 +1,24 @@
+#@since 1.8.1
+= module XSD::NS
+== instance methods
+--- initialize(tag2ns = {})
+
+--- assign(ns, tag = nil)
+
+--- assigned?(ns)
+
+--- assigned_tag?(tag)
+
+--- clone_ns
+
+--- defalut_namespace
+
+--- name(name)
+
+--- compare(ns, name, rhs)
+
+--- parse(elem)
+
+--- each_ns {|ns, tag| ...}
+
+#@end

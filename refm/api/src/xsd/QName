@@ -1,0 +1,26 @@
+#@since 1.8.1
+= class XSD::QName
+== class methods
+--- new(namespace = nil, name = nil)
+
+== instance methods
+--- ==(rhs)
+
+--- ===(rhs)
+--- eql?(rhs)
+
+--- dup_name(name)
+
+--- hash
+
+--- match(rhs)
+
+--- namespace
+
+--- name
+
+--- parse(str)
+
+--- to_s
+
+#@end
