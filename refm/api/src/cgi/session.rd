@@ -287,6 +287,12 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
   * "session_path"
     [[unknown:執筆者募集]]
 
+--- callback(dbman)
+
+#@if (version <= "1.8.1")
+--- create_new_id
+#@end
+
 == Instance Methods
 
 --- [](key)
@@ -320,6 +326,15 @@ MemoryStore の場合は何もしません。
 FileStoreの場合はセッションファイルを削除します。
 セッションファイルは明示的に削除しなければ残っています。
 
+--- session_id
+
+#@since 1.8.2
+--- new_session
+#@end
+
+#@since 1.8.2
+= class CGI::Session::NoSession < RuntimeError
+#@end
 
 
 = class CGI::Session::FileStore < Object

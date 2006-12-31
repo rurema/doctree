@@ -102,7 +102,7 @@ bigdecimal/newton               okkez           done
 bigdecimal/util                 okkez           done
 cgi                             iwadon          done
 cgi-lib                         (obsolete)
-cgi/session                     iwadon
+cgi/session                     iwadon          done
 complex                         sheepman        done
 csv                             okkez           done
 curses                          okkez           done
