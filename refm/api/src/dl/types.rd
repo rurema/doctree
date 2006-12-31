@@ -1,3 +1,5 @@
+improt dl
+
 = class DL::Types < Object
 
 型の定義を保持するオブジェクトのクラス。
@@ -38,3 +40,26 @@ Proc オブジェクトの組を次の通りの Array として返す。
   dec : デコード用Proc
   senc : エンコード用Proc(dl/structで使用)
   sdec : デコード用Proc(dl/structで使用)
+
+#@if (version >= "1.8.2")
+--- encode_argument_type(alias_type)
+
+--- encode_return_type(ty)
+
+--- encode_struct_type(alias_type)
+
+#@end
+
+#@if (version <= "1.8.1")
+--- encode_type(ty)
+
+#@end
+
+--- init_types
+
+== Constants
+
+--- TYPES
+
+インスタンス変数 @TYDEFS の初期値。
+
