@@ -235,7 +235,7 @@ webrick                         iwadon          done
 webrick/cgi                     iwadon          done
 webrick/ssl                     iwadon          done
 win32/registry                  iwadon
-win32/resolv                    date
+win32/resolv                    date            done
 win32ole                        iwadon
 wsdl                            okkez
 xmlrpc                          date            done
