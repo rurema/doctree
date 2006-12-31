@@ -1,0 +1,14 @@
+#@since 1.8.0
+= class XMLRPC::BasicServer < Object
+== class methods
+--- new(class_delim = ".")
+== instance methods
+--- add_handler(prefix, obj_or_signature = nil, help = nil, &block)
+--- add_introspection
+--- add_multicall
+--- get_default_handler
+--- get_service_hook
+--- process(data)
+--- set_default_handler(&handler)
+--- set_service_hook(&handler)
+#@end

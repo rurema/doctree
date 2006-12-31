@@ -1,0 +1,11 @@
+#@since 1.8.0
+= class XMLRPC::WEBrickServlet < XMLRPC::BasicServer
+== class methods
+--- new(*args)
+== instance methods
+--- get_instance(config, *options)
+--- get_valid_ip
+--- require_path_info?
+--- service(request, response)
+--- set_valid_ip(*ip_addr)
+#@end

@@ -1,0 +1,7 @@
+#@since 1.8.0
+= class XMLRPC::ModRubyServer < XMLRPC::BasicServer
+== class methods
+--- new(*args)
+== instance methods
+--- serve
+#@end

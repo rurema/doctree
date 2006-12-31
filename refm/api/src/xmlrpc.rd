@@ -1,15 +1,14 @@
-#@if (version >= "1.8.0")
-#@# = xmlrpc
+#@since 1.8.0
 
 [[unknown:ºπ…Æº‘ ÁΩ∏]]
 
-#@#* ((<XMLRPC::BasicServer>))
-#@#* ((<XMLRPC::CGIServer>))
-#@#* ((<XMLRPC::ModRubyServer>))
-#@#* ((<XMLRPC::Server>))
-#@#* ((<XMLRPC::WEBrickServlet>))
-  * [[c:XMLRPC::Client]]
-#@#* ((<XMLRPC::Client::Proxy>))
+@include(xmlrpc/BasicServer)
+@include(xmlrpc/CGIServer)
+@include(xmlrpc/ModRubyServer)
+@include(xmlrpc/Server)
+@include(xmlrpc/WEBrickServlet)
+@include(xmlrpc/Client)
+@include(xmlrpc/Client__Proxy)
 
 === ª≤πÕ
 

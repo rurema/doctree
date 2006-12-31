@@ -1,0 +1,8 @@
+#@since 1.8.0
+= class XMLRPC::Server < XMLRPC::WEBrickServlet
+== class methods
+--- new(*args)
+== instance methods
+--- serve
+--- shutdown
+#@end
