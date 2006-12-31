@@ -46,7 +46,7 @@ GzipFile オブジェクトをクローズします。[[m:Zlib::GzipFile#close]]と違い、
 
 圧縮されていないデータの CRC 値を返します。
 
---- Zlib::GzipFile#level
+--- level
 
 圧縮レベルを返します。
 

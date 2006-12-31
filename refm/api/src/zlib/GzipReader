@@ -66,12 +66,14 @@ filename で指定されるファイルを gzip ファイルとして
 --- gets([rs])
 --- getc
 --- lineno
---- lineno=()
+--- lineno=(num)
 --- read([length])
 --- readchar
 --- readline([rs])
 --- readlines([rs])
+#@since 1.9.0
 --- readpartial(maxlen[, outbuf])
+#@end
 --- ungetc(char)
 
 IO クラスの同名メソッドと同じですが、gzip ファイル中に
