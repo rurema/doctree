@@ -238,7 +238,7 @@ win32/registry                  iwadon
 win32/resolv
 win32ole                        iwadon
 wsdl                            okkez
-xmlrpc                          date
+xmlrpc                          date            done
 xsd
 yaml                            date
 yaml/store                      date
