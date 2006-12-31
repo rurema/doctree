@@ -1,8 +1,8 @@
 #@since 1.8.1
-#@include(xsd/XMLParser__Parser)
-#@include(xsd/XMLParser__REXMLParser)
-#@include(xsd/XMLParser__XMLParser)
-#@include(xsd/XMLParser__XMLScanner)
+#@include(XMLParser__Parser)
+#@include(XMLParser__REXMLParser)
+#@include(XMLParser__XMLParser)
+#@include(XMLParser__XMLScanner)
 
 = module XSD::XMLParser
 == module function

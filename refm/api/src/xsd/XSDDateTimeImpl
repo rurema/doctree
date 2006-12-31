@@ -7,6 +7,14 @@
 
 --- of2tz(offset)
 
+#@since 1.8.3
+--- to_date
+
+--- to_datetime
+
+--- to_obj(klass)
+#@end
+
 --- to_time
 
 --- tz2of(str)

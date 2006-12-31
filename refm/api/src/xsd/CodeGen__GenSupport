@@ -1,0 +1,27 @@
+#@since 1.8.2
+= module XSD::CodeGen::GenSupport
+
+== module functions
+--- capitalize(target)
+
+#@since 1.8.3
+--- keyword?(word)
+#@end
+
+--- uncapitalize(target)
+
+--- safeconstname(name)
+
+--- safeconstname?(name)
+
+--- safemethodname(name)
+
+--- safemethodname?(name)
+
+--- safevarname(name)
+
+--- safevarname?(name)
+
+--- format(str, indent = nil)
+
+#@end

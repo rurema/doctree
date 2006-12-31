@@ -232,8 +232,13 @@ wsdl/types
 wsdl/wsdl
 #@end
 xmlrpc
+#@since 1.8.2
+xsd/codegen
+#@end
 #@since 1.8.1
-xsd
+xsd/datatypes
+xsd/datatypes1999
+xsd/xmlparser
 #@end
 yaml
 yaml/store

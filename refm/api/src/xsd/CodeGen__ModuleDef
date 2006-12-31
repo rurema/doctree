@@ -1,0 +1,26 @@
+#@since 1.8.2
+= class XSD::CodeGen::ModuleDef
+include XSD::CodeGen::GenSupport
+include XSD::CodeGen::CommentDef
+
+== class methods
+--- new(name)
+
+== instance methods
+--- def_require(path)
+
+--- def_const(const, value)
+
+--- def_code(code)
+
+--- def_method(name, *params) { ... }
+
+--- def_protectedmethod(name, *params) { ... }
+
+--- def_privatemethod(name, *params) { ... }
+
+--- add_method(m, visibility = :public)
+
+--- dump
+
+#@end

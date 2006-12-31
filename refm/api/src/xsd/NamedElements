@@ -20,7 +20,17 @@ include Enumerable
 
 --- each {|element| ...}
 
+#@since 1.8.2
+--- empty?
+#@end
+
 --- find_name(name)
+
+#@since 1.8.3
+--- freeze
+
+--- keys
+#@end
 
 --- size
 #@end

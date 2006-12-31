@@ -11,14 +11,18 @@
 
 --- clone_ns
 
+--- compare(ns, name, rhs)
+
 --- defalut_namespace
+
+--- each_ns {|ns, tag| ...}
 
 --- name(name)
 
---- compare(ns, name, rhs)
-
 --- parse(elem)
 
---- each_ns {|ns, tag| ...}
+#@since 1.8.2
+--- parse_local(elem)
+#@end
 
 #@end

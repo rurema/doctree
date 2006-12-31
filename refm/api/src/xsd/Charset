@@ -12,7 +12,9 @@
 
 --- encoding_from_xml(str, charset)
 
+#@if (version <= "1.8.2")
 --- encoding_label
+#@end
 
 --- encoding_to_xml(str, charset)
 
@@ -27,5 +29,9 @@
 --- is_us_ascii(str)
 
 --- is_utf8(str)
+
+#@since 1.8.3
+--- xml_encoding_label
+#@end
 
 #@end

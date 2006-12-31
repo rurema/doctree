@@ -6,6 +6,10 @@ include XSD
 --- new(value = nil)
 
 == instance methods
+#@since 1.8.2
+--- check_lexical_format(value)
+#@end
+
 --- data
 
 --- is_nil

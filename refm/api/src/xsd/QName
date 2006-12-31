@@ -9,17 +9,32 @@
 --- ===(rhs)
 --- eql?(rhs)
 
+#@since 1.8.3
+--- dump
+#@end
+
 --- dup_name(name)
 
 --- hash
 
+#@since 1.8.2
+--- inspect
+#@end
+
 --- match(rhs)
 
 --- namespace
+--- namespace=(namespace)
 
 --- name
+--- name=(name)
 
 --- parse(str)
+
+#@since 1.8.2
+--- source
+--- source=(source)
+#@end
 
 --- to_s
 
