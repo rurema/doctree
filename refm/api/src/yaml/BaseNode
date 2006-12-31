@@ -1,0 +1,22 @@
+= module YAML::BaseNode
+== instance methods
+--- [](*key)
+
+--- at(segment)
+
+--- children
+
+--- children_with_index
+
+--- emit
+
+--- match_path(ypath_str)
+
+--- match_segment(ypath, depth)
+
+--- search(ypath_str)
+
+--- select(ypath_str)
+
+--- select!(ypath_str)
+

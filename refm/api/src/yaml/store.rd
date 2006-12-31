@@ -1,11 +1,25 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class YAML::Store < PStore
 
 [[c:PStore]] の [[c:YAML]] 版です。
 [[m:Marshal.dump]] したバイナリ形式の
 代わりに YAML 形式でファイルに保存します。
 
-使い方は [[c:PStore]] とほとんど同じです。[[unknown:執筆者募集]]
+使い方は [[c:PStore]] とほとんど同じです。
+
+== class methods
+--- new(*options)
+== instance methods
+--- [](name)
+--- fetch
+--- []=(name, value)
+--- delete(name)
+--- roots
+--- root?(name)
+--- path
+--- commit
+--- abort
+--- transaction
 
 === 例
 

@@ -1,0 +1,17 @@
+= class YAML::YamlNode
+include YAML::BaseNode
+
+== class methods
+--- new(type, val)
+
+== instance methods
+--- anchor
+
+--- kind
+
+--- transform
+
+--- type_id
+
+--- value
+

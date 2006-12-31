@@ -1,6 +1,13 @@
 = class YAML::Stream < Object
-
-((<¼¹É®¼ÔÊç½¸>))
+== class methods
+--- new(opts = {})
+== instance methods
+--- [](i)
+--- add(doc)
+--- edit(doc_num, doc)
+--- emit(io = nil)
+--- documents
+--- options
 
 === »²¹Í
 

@@ -1,0 +1,5 @@
+= class YAML::Error < StandardError
+
+= class YAML::ParseError < YAML::Error
+
+= class YAML::TypeError < StandardError

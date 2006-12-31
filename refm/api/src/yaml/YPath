@@ -1,0 +1,13 @@
+= class YAML::YPath
+== class methods
+--- new(str)
+
+--- each_path(str) {|YPath.new(path)| ...}
+
+== instance methods
+--- segments
+
+--- predicates
+
+--- flags
+

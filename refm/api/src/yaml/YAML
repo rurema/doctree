@@ -21,21 +21,15 @@ YAML (YAML Ain't Markup Language) を扱うクラスです。
 
 == Module Functions
 
---- add_builtin_type
+--- add_builtin_type(type_re){|obj| ...}
 
-[[unknown:執筆者募集]]
+--- add_domain_type(domain, type_re){|obj| ...}
 
---- add_domain_type
+--- add_private_type(type_re){|obj| ...}
 
-[[unknown:執筆者募集]]
+--- add_ruby_type(type){|obj| ...}
 
---- add_private_type
-
-[[unknown:執筆者募集]]
-
---- add_ruby_type
-
-[[unknown:執筆者募集]]
+--- detect_implicit(val)
 
 --- dump(obj, io = nil)
 
@@ -45,6 +39,7 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
   YAML.dump( ['badger', 'elephant', 'tiger'],
              File.open('sample.yml', 'w')    )
 
+#@since 1.8.2
 --- dump_stream(*objs)
 
 与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
@@ -59,6 +54,7 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
   - 2
   ---
   foo: bar
+#@end
 
 --- each_document(io) {|obj| ...}
 --- load_documents(io) {|obj| ...}
@@ -84,9 +80,7 @@ Ruby のオブジェクトに変換し、
   #=>   ["apple", "banana", "carrot"]
   #=>   {"foo"=>"bar"}
 
---- each_node
-
-[[unknown:執筆者募集]]
+--- each_node(io) {|obj| ...}
 
 --- load(io)
 --- load(str)
@@ -107,12 +101,14 @@ Ruby のオブジェクトに変換しません。
   '
   ["apple", "banana", "carrot"]
 
+#@since 1.8.2
 --- load_file(file)
 
 与えられた名前のファイルから YAML フォーマットの文書を読み込み
 Ruby のオブジェクトを生成して返します。
 ファイルが複数の YAML ドキュメントを含んでいても、
 最初のものしか Ruby のオブジェクトに変換しません。
+#@end
 
 --- load_stream(io)
 
@@ -120,14 +116,52 @@ Ruby のオブジェクトを生成して返します。
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
 それらオブジェクトを含んだ [[c:YAML::Stream]] を返します。
 
---- parse
+--- object_maker(obj_class, val, is_attr = false)
 
-[[unknown:執筆者募集]]
+--- parse(io)
 
---- parse_documents
+--- parse_documents(io) {|obj| ...}
 
-[[unknown:執筆者募集]]
-
+#@since 1.8.2
 --- parse_file
+#@end
 
-[[unknown:執筆者募集]]
+--- quick_emit(oid, opts={}) {|obj| ...}
+
+--- read_type_class(type, obj_class)
+
+#@since 1.8.3
+--- tagurize(val)
+#@end
+
+--- transfer
+
+--- try_implicit(obj)
+
+= reopen Kernel
+== private instance methods
+--- y(obj)
+
+= reopen Class
+== instance methods
+--- to_yaml(opts = {})
+
+= reopen Ojbect
+== instance methods
+--- to_yaml(opts = {})
+
+--- to_yaml_style
+
+--- to_yaml_properties
+
+= reopen Struct
+== class methods
+--- yaml_tag_class_name
+
+--- yaml_tag_read_class(name)
+
+= reopen String
+== instance methods
+--- is_complex_yaml?
+
+--- is_binary_data?
