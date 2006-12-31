@@ -240,6 +240,6 @@ win32ole                        iwadon
 wsdl                            okkez
 xmlrpc                          date            done
 xsd
-yaml                            date
-yaml/store                      date
+yaml                            date            done
+yaml/store                      date            done
 zlib                            date            done
