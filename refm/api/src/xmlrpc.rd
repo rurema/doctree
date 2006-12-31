@@ -2,13 +2,13 @@
 
 [[unknown:ºπ…Æº‘ ÁΩ∏]]
 
-@include(xmlrpc/BasicServer)
-@include(xmlrpc/CGIServer)
-@include(xmlrpc/ModRubyServer)
-@include(xmlrpc/Server)
-@include(xmlrpc/WEBrickServlet)
-@include(xmlrpc/Client)
-@include(xmlrpc/Client__Proxy)
+#@include(xmlrpc/BasicServer)
+#@include(xmlrpc/CGIServer)
+#@include(xmlrpc/ModRubyServer)
+#@include(xmlrpc/Server)
+#@include(xmlrpc/WEBrickServlet)
+#@include(xmlrpc/Client)
+#@include(xmlrpc/Client__Proxy)
 
 === ª≤πÕ
 
