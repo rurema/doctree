@@ -37,8 +37,8 @@
 
 --- add_rpc_request_operation(factory, qname, soapaction, name, param_def, opt = {})
 
---- add_documetn_operation(receiver, soapaction, name, param_def, opt = {})
---- add_documetn_method(receiver, soapaction, name, param_def, opt = {})
+--- add_document_operation(receiver, soapaction, name, param_def, opt = {})
+--- add_document_method(receiver, soapaction, name, param_def, opt = {})
 
 --- add_document_request_operation(factory, soapaction, name, param_def, opt = {})
 

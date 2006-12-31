@@ -30,11 +30,11 @@ include WEBrick
 --- add_rpc_method_as(obj, name, name_as, *param)
 --- add_method_as(obj, name, name_as, *param)
 
---- add_rpc_methods_with_namespace(namespace, obj, name, *param)
---- add_methods_with_namespace(namespace, obj, name, *param)
+--- add_rpc_method_with_namespace(namespace, obj, name, *param)
+--- add_method_with_namespace(namespace, obj, name, *param)
 
---- add_rpc_methods_with_namespace_as(namespace, obj, name, name_as, *param)
---- add_methods_with_namespace_as(namespace, obj, name, name_as, *param)
+--- add_rpc_method_with_namespace_as(namespace, obj, name, name_as, *param)
+--- add_method_with_namespace_as(namespace, obj, name, name_as, *param)
 
 --- add_rpc_operation(receiver, qname, soapaction, name, param_def, opt = {})
 
@@ -42,8 +42,24 @@ include WEBrick
 
 --- set_fcgi_request(request)
 
+#@if (version <= "1.8.2")
+--- create_fault_response(e)
+
+--- mediatype
+--- mediatype=(value)
+
+--- route(request_string, charset)
+
+--- 
+#@end
+
 == Constants
 
 --- HTTPVersion
+
+
+#@if (version <= "1.8.2")
+= class SOAP::RPC::CGIStub::CGIError < SOAP::Error
+#@end
 
 #@end

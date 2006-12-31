@@ -31,7 +31,7 @@ include SOAP
 
 --- end_element(name)
 
-= class SOAP::Parser::ParserError < SOAP::Error
+= class SOAP::Parser::ParseError < SOAP::Error
 
 = class SOAP::Parser::FormatDecodeError < SOAP::Parser::ParserError
 

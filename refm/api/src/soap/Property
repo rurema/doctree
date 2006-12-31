@@ -7,6 +7,10 @@ include Enumerable
 
 --- load(stream)
 
+#@if (version == "1.8.1")
+--- open(filename)
+#@end
+
 --- loadproperty(propname)
 
 --- new
@@ -49,7 +53,7 @@ include Enumerable
 
 --- local_hook(key, dirent)
 
---- loacl_assign_hook(key, cascade, &hook)
+--- local_assign_hook(key, cascade, &hook)
 
 == Constants
 

@@ -91,12 +91,7 @@
 #@# soap/rpc/driver.rb
 #@include(soap/RPC__Driver)
 
-#@# soap/rpc/element.rb
-#@include(soap/SOAPBody)
-#@include(soap/RPC__SOAPMethod)
-#@include(soap/RPC__SOAPMethodRequest)
-#@include(soap/RPC__SOAPMethodResponse)
-#@include(soap/RPC__SOAPVoid)
+#@include(soap/rpc/element.rd)
 
 #@# soap/rpc/httpserver.rb
 #@include(soap/RPC__HTTPServer)

@@ -6,10 +6,6 @@
 
 --- new(send_string = nil)
 
---- parse_media_type(str)
-
---- create_media_type(charset)
-
 == Instance Methods
 
 --- send_string

@@ -15,11 +15,11 @@
 
 --- body
 --- body=(value)
+--- content
 
 --- parse(str)
 
 --- contentid
---- body
 
 --- to_s
 

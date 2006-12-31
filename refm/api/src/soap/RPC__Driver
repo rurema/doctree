@@ -59,7 +59,7 @@
 
 --- loadproperty(propertyname)
 
---- add_rpc_methods(name, *params)
+--- add_rpc_method(name, *params)
 --- add_method(name, *params)
 
 --- add_rpc_method_as(name, name_as, *params)
