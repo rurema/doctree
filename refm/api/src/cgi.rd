@@ -164,7 +164,7 @@ HTTP_COOKIE ¤È HTTP_COOKIE2 ¤Ë¤Ï
   * HTTP_USER_AGENT
 
 CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤Ë´Ø¤·¤Æ¤Ï
-[[m:URL:http:#/www.w3.org/CGI/]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[url:http://www.w3.org/CGI/]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 ==== É¸½à½ÐÎÏ¤Ë HTTP ¥Ø¥Ã¥À¤È HTML ¤ò½ÐÎÏ¤¹¤ë
 
@@ -203,7 +203,7 @@ CGI ¤Ë´ØÏ¢¤¹¤ë´Ä¶­ÊÑ¿ô¤Ë´Ø¤·¤Æ¤Ï
 
 [[unknown:¼¹É®¼ÔÊç½¸]]
 
-[[unknown:ruby-list:25399]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+[[ruby-list:25399]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 === ¥ª¥Õ¥é¥¤¥ó¥â¡¼¥É
 
@@ -247,7 +247,8 @@ cgi ¤Ë¤Ï¡¢¥³¥Þ¥ó¥É¥é¥¤¥ó¤«¤é CGI ¥¹¥¯¥ê¥×¥È¤òÆ°¤«¤¹¤¿¤á¤Î»ÅÁÈ¤ß¡Ê¥ª¥Õ¥é¥¤¥ó¥â¡¼¥
 HTML À¸À®¥á¥½¥Ã¥É¤Î°ú¿ô¤È¤·¤Æ¤Ï¡¢´ðËÜÅª¤Ë Hash ¥ª¥Ö¥¸¥§¥¯¥È¤¬Í¿¤¨¤é¤ì¤ë¡Ê¤¢¤ë¤¤¤Ï²¿¤âÍ¿¤¨¤é¤ì¤Ê¤¤¡Ë¤Ù¤­¤Ç¤¹¡£¤¿¤À¤·°Ê²¼¤ËÎóµó¤µ¤ì¤¿¥á¥½¥Ã¥É¤Ç¤Ï¡¢³Æ¥á¥½¥Ã¥É¤Î°ú¿ô¤Î·Á¼°¤Ë½¾¤Ã¤Æ¡¢ Hash ¥ª¥Ö¥¸¥§¥¯¥È°Ê³°¤Î¤â¤Î¤òÅÏ¤¹¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
 
 
-= class CGI
+= class CGI < Object
+include CGI::QueryExtension
 
 == Class Methods
 
@@ -299,7 +300,7 @@ elements ¤Ë»ØÄê¤·¤¿¥¨¥ì¥á¥ó¥È¤Î¥¿¥°¤À¤±¤ò¼ÂÂÎ»²¾È¤ËÃÖ´¹¤·¤Þ¤¹¡£
 
 --- rfc1123_date(time)
 
-»þ¹ï time ¤ò [[c:RFC:1123]] ¥Õ¥©¡¼¥Þ¥Ã¥È¤Ë½àµò¤·¤¿Ê¸»úÎó¤ËÊÑ´¹¤·¤Þ¤¹¡£
+»þ¹ï time ¤ò [[RFC:1123]] ¥Õ¥©¡¼¥Þ¥Ã¥È¤Ë½àµò¤·¤¿Ê¸»úÎó¤ËÊÑ´¹¤·¤Þ¤¹¡£
 
         Îã¡§
         CGI.rfc1123_date(Time.now)
@@ -333,40 +334,13 @@ HTML ¤ò¿Í´Ö¤Ë¸«¤ä¤¹¤¯À°·Á¤·¤Þ¤¹¡£
           # </HTML>
 
 == Instance Methods
---- [](key)
-Ê¸»úÎó key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
-key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢nil ¤òÊÖ¤·¤Þ¤¹¡£¡Ê[[m:CGI#params]]¤ÈÅù²Á¤Ç¤¹¡Ë
-
-¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL ¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
-
-@if (version >= "1.8.0")
-((<ruby 1.8 feature>)): µóÆ°¤¬ 1.6 °ÊÁ°¤Î cgi ¤ÈÂç¤­¤¯ÊÑ²½¤·¤Æ¤¤¤Þ¤¹ ((- ¤³¤ÎµóÆ°¤ÏÎ®Æ°Åª¤Ç¡¢1.8.0, 1.8.1, 1.8.2 ¤ÎµóÆ°¤Ï¤¹¤Ù¤Æ°Û¤Ê¤ê¤Þ¤¹¡Ê1.9.0¤ÎµóÆ°¤Ï1.8.2¤ÈÆ±ÍÍ¤Ç¤¹¡Ë¡£ -)) ¡£¥á¥½¥Ã¥É¤ÎÊÖ¤êÃÍ¤ÏÇÛÎó¤Ç¤Ê¤¯¡¢Ê¸»úÎó ((- 1.8.1 ¤Þ¤Ç¤Ï¡¢Àµ³Î¤Ë¸À¤¦¤È String ¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£ -)) ¤Ë¤Ê¤ê¡¢¤½¤ì¤ËÈ¼¤Ã¤Æ cgi[key][0] ¤Î¤è¤¦¤Ê½ñ¤­Êý¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£¤Þ¤¿ key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬Â¸ºß¤·¤Ê¤«¤Ã¤¿¾ì¹ç¡¢nil ¤Ç¤Ï¤Ê¤¯ "" ¤òÊÖ¤¹¤è¤¦¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡£ ruby 1.6 ¤ÈÆ±¤¸µóÆ°¤òË¾¤à¾ì¹ç¤Ï¡¢[[m:CGI#params]]¤òÍøÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
-
-¤³¤Î·ë²Ì¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¬¤É¤¦ÊÑ¤ï¤Ã¤¿¤Î¤«¤Ë¤Ä¤¤¤Æ¤Ï¡¢°Ê²¼¤ÎÎã¤ò»²¹Í¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
-
-      # with ruby 1.6 ---------------------------
-      cgi = CGI.new
-      cgi['developer']     # => ["Matz"] (Array)
-      cgi['developer'][0]  # => "Matz" (String)
-      cgi['']              # => nil
-
-      # with ruby 1.8 ---------------------------
-      cgi = CGI.new
-      cgi['developer']     # => "Matz"
-      cgi['developer'][0]  # => obsolete¡Ê·Ù¹ð¤¬½Ð¤Þ¤¹¡Ë
-      cgi['']              # => ""
-
-cgi['developer'].is_a?(String) # => 1.8.1¤Þ¤Ç¤Ïfalse¡¢1.8.2°Ê¹ß¤Ïtrue
-@end
-
-    [[unknown:¼¹É®¼ÔÊç½¸]]
 
 --- header(headers = "text/html")
 
-HTTP ¥Ø¥Ã¥À¤ò headers ¤Ë½¾¤Ã¤ÆÀ¸À®¤·¤Þ¤¹¡£¡Ê [[m:cgi#out]] ¤È°ã¤¤¡¢É¸½à½ÐÎÏ¤Ë¤Ï½ÐÎÏ¤·¤Þ¤»¤ó¡Ë
-[[m:cgi#out]] ¤ò»È¤ï¤º¤Ë¼«ÎÏ¤Ç HTML ¤ò½ÐÎÏ¤·¤¿¤¤¾ì¹ç¤Ê¤É¤Ë»È¤¤¤Þ¤¹¡£
+HTTP ¥Ø¥Ã¥À¤ò headers ¤Ë½¾¤Ã¤ÆÀ¸À®¤·¤Þ¤¹¡£¡Ê [[m:CGI#out]] ¤È°ã¤¤¡¢É¸½à½ÐÎÏ¤Ë¤Ï½ÐÎÏ¤·¤Þ¤»¤ó¡Ë
+[[m:CGI#out]] ¤ò»È¤ï¤º¤Ë¼«ÎÏ¤Ç HTML ¤ò½ÐÎÏ¤·¤¿¤¤¾ì¹ç¤Ê¤É¤Ë»È¤¤¤Þ¤¹¡£
 ¤³¤Î¥á¥½¥Ã¥É¤ÏÊ¸»úÎó¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÑ´¹¤·¤Þ¤»¤ó¡£
-#@#((<ruby-list:35911>))
+[[ruby-list:35911]]
 
         Îã¡§
         header
@@ -453,16 +427,6 @@ charset ¤¬ "iso-2022-jp"¡¦"euc-jp"¡¦"shift_jis" ¤Î¤¤¤º¤ì¤«¤Ç
 ¤¢¤ë¾ì¹ç¤ÏÊ¸»úÎó¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò¼«Æ°ÊÑ´¹¤·¡¢language ¤ò "ja"¤Ë¤·¤Þ¤¹¡£
 #@#((<ruby-list:35911>))
 
---- params
-¥Ñ¥é¥á¡¼¥¿¤ò³ÊÇ¼¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
-
-¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
-
-      cgi = CGI.new
-      cgi.params['developer']     # => ["Matz"] (Array)
-      cgi.params['developer'][0]  # => "Matz"
-      cgi.params['']              # => nil
-
 --- print(*strings)
 
 °ú¿ô¤ÎÊ¸»úÎó¤òÉ¸½à½ÐÎÏ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
@@ -470,6 +434,112 @@ charset ¤¬ "iso-2022-jp"¡¦"euc-jp"¡¦"shift_jis" ¤Î¤¤¤º¤ì¤«¤Ç
        Îã¡§
        cgi = CGI.new
        cgi.print "This line is a part of content body.\r\n"
+
+== Constants
+
+--- CR
+
+--- LF
+
+--- EOL
+
+--- REVISION
+
+--- NEEDS_BINMODE
+
+--- PATH_SEPARATOR
+
+--- HTTP_STATUS
+
+--- RFC822_DAYS
+
+--- RFC822_MONTHS
+
+= module CGI::QueryExtension
+
+== Instance Methods
+
+--- [](key)
+
+Ê¸»úÎó key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢nil ¤òÊÖ¤·¤Þ¤¹¡£¡Ê[[m:CGI#params]]¤ÈÅù²Á¤Ç¤¹¡Ë
+
+¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL ¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
+
+@if (version >= "1.8.0")
+((<ruby 1.8 feature>)): µóÆ°¤¬ 1.6 °ÊÁ°¤Î cgi ¤ÈÂç¤­¤¯ÊÑ²½¤·¤Æ¤¤¤Þ¤¹ ((- ¤³¤ÎµóÆ°¤ÏÎ®Æ°Åª¤Ç¡¢1.8.0, 1.8.1, 1.8.2 ¤ÎµóÆ°¤Ï¤¹¤Ù¤Æ°Û¤Ê¤ê¤Þ¤¹¡Ê1.9.0¤ÎµóÆ°¤Ï1.8.2¤ÈÆ±ÍÍ¤Ç¤¹¡Ë¡£ -)) ¡£¥á¥½¥Ã¥É¤ÎÊÖ¤êÃÍ¤ÏÇÛÎó¤Ç¤Ê¤¯¡¢Ê¸»úÎó ((- 1.8.1 ¤Þ¤Ç¤Ï¡¢Àµ³Î¤Ë¸À¤¦¤È String ¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£ -)) ¤Ë¤Ê¤ê¡¢¤½¤ì¤ËÈ¼¤Ã¤Æ cgi[key][0] ¤Î¤è¤¦¤Ê½ñ¤­Êý¤ÏÇÑ»ß¤µ¤ì¤Þ¤·¤¿¡£¤Þ¤¿ key ¤ËÂÐ±þ¤¹¤ë¥Ñ¥é¥á¡¼¥¿¤¬Â¸ºß¤·¤Ê¤«¤Ã¤¿¾ì¹ç¡¢nil ¤Ç¤Ï¤Ê¤¯ "" ¤òÊÖ¤¹¤è¤¦¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡£ ruby 1.6 ¤ÈÆ±¤¸µóÆ°¤òË¾¤à¾ì¹ç¤Ï¡¢[[m:CGI#params]]¤òÍøÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+¤³¤Î·ë²Ì¡¢¥¤¥ó¥¿¡¼¥Õ¥§¡¼¥¹¤¬¤É¤¦ÊÑ¤ï¤Ã¤¿¤Î¤«¤Ë¤Ä¤¤¤Æ¤Ï¡¢°Ê²¼¤ÎÎã¤ò»²¹Í¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+      # with ruby 1.6 ---------------------------
+      cgi = CGI.new
+      cgi['developer']     # => ["Matz"] (Array)
+      cgi['developer'][0]  # => "Matz" (String)
+      cgi['']              # => nil
+
+      # with ruby 1.8 ---------------------------
+      cgi = CGI.new
+      cgi['developer']     # => "Matz"
+      cgi['developer'][0]  # => obsolete¡Ê·Ù¹ð¤¬½Ð¤Þ¤¹¡Ë
+      cgi['']              # => ""
+
+cgi['developer'].is_a?(String) # => 1.8.1¤Þ¤Ç¤Ïfalse¡¢1.8.2°Ê¹ß¤Ïtrue
+@end
+
+    [[unknown:¼¹É®¼ÔÊç½¸]]
+
+--- accept
+
+ENV['HTTP_ACCEPT']
+
+--- accept_charset
+
+ENV['HTTP_ACCEPT_CHARSET']
+
+--- accept_encoding
+
+ENV['HTTP_ACCEPT_ENCODING']
+
+--- accept_language
+
+ENV['HTTP_ACCEPT_LANGUAGE']
+
+--- auth_type
+
+ENV['AUTH_TYPE']
+
+--- cache_control
+
+ENV['HTTP_CACHE_CONTROL']
+
+--- content_length
+
+ENV['CONTENT_LENGTH']
+
+--- content_type
+
+ENV['CONTENT_TYPE']
+
+--- cookies
+--- cookies=(value)
+
+--- from
+
+ENV['HTTP_FROM']
+
+--- gateway_interface
+
+ENV['GATEWAY_INTERFACE']
+
+--- has_key?(*args)
+--- key?(*args)
+--- include?(*args)
+
+--- host
+
+ENV['HTTP_HOST']
+
+--- keys(*args)
 
 --- multipart?
 
@@ -483,21 +553,22 @@ charset ¤¬ "iso-2022-jp"¡¦"euc-jp"¡¦"shift_jis" ¤Î¤¤¤º¤ì¤«¤Ç
          field1=cgi['field1']
        end
 
---- auth_type
+--- negotiate
 
-ENV['AUTH_TYPE']
+ENV['HTTP_NEGOTIATE']
 
---- content_length
+--- params
 
-ENV['CONTENT_LENGTH']
+¥Ñ¥é¥á¡¼¥¿¤ò³ÊÇ¼¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
 
---- content_type
+¥Õ¥©¡¼¥à¤«¤éÆþÎÏ¤µ¤ì¤¿ÃÍ¤ä¡¢URL¤ËËä¤á¹þ¤Þ¤ì¤¿ QUERY_STRING ¤Î¥Ñ¡¼¥¹·ë²Ì¤Î¼èÆÀ¤Ê¤É¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
 
-ENV['CONTENT_TYPE']
+      cgi = CGI.new
+      cgi.params['developer']     # => ["Matz"] (Array)
+      cgi.params['developer'][0]  # => "Matz"
+      cgi.params['']              # => nil
 
---- gateway_interface
-
-ENV['GATEWAY_INTERFACE']
+--- params=(hash)
 
 --- path_info
 
@@ -507,9 +578,25 @@ ENV['PATH_INFO']
 
 ENV['PATH_TRANSLATED']
 
+--- pragma
+
+ENV['HTTP_PRAGMA']
+
 --- query_string
 
 ENV['QUERY_STRING']
+
+--- raw_cookie
+
+ENV["HTTP_COOKIE"]
+
+--- raw_cookie2
+
+ENV["HTTP_COOKIE2"]
+
+--- referer
+
+ENV['HTTP_REFERER']
 
 --- remote_addr
 
@@ -551,60 +638,25 @@ ENV['SERVER_PROTOCOL']
 
 ENV['SERVER_SOFTWARE']
 
---- raw_cookie
-
-ENV["HTTP_COOKIE"]
-
---- raw_cookie2
-
-ENV["HTTP_COOKIE2"]
-
---- accept
-
-ENV['HTTP_ACCEPT']
-
---- accept_charset
-
-ENV['HTTP_ACCEPT_CHARSET']
-
---- accept_encoding
-
-ENV['HTTP_ACCEPT_ENCODING']
-
---- accept_language
-
-ENV['HTTP_ACCEPT_LANGUAGE']
-
---- cache_control
-
-ENV['HTTP_CACHE_CONTROL']
-
---- from
-
-ENV['HTTP_FROM']
-
---- host
-
-ENV['HTTP_HOST']
-
---- negotiate
-
-ENV['HTTP_NEGOTIATE']
-
---- pragma
-
-ENV['HTTP_PRAGMA']
-
---- referer
-
-ENV['HTTP_REFERER']
-
 --- user_agent
 
 ENV['HTTP_USER_AGENT']
 
+= module CGI::QueryExtension::Value
 
-= class CGI::Cookie
+== Instance Methods
+
+--- [](idx, *args)
+
+--- first
+--- last
+
+--- set_params(params)
+
+--- to_a
+--- to_ary
+
+= class CGI::Cookie < DelegateClass(Array)
 
 == Class Methods
 
@@ -639,7 +691,7 @@ ENV['HTTP_USER_AGENT']
         cookie1.expires = Time.now + 30
         cookie1.secure  = true
 
---- CGI::Cookie.parse(raw_cookie)
+--- parse(raw_cookie)
 
 ¥¯¥Ã¥­¡¼Ê¸»úÎó¤ò¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
 
@@ -650,17 +702,17 @@ ENV['HTTP_USER_AGENT']
 == Instance Methods
 
 --- name
---- name=()
+--- name=(value)
 --- value
---- value=()
+--- value=(value)
 --- path
---- path=()
+--- path=(value)
 --- domain
---- domain=()
+--- domain=(value)
 --- expires
---- expires=()
+--- expires=(value)
 --- secure
---- secure=()
+--- secure=(val)
 
 Cookie ¥ª¥Ö¥¸¥§¥¯¥È¤Î¥¢¥È¥ê¥Ó¥å¡¼¥È¤Ç¤¹¡£
 
@@ -690,6 +742,18 @@ Cookie ¥ª¥Ö¥¸¥§¥¯¥È¤Î¥¢¥È¥ê¥Ó¥å¡¼¥È¤Ç¤¹¡£
         cookie1.domain  = 'domain'
         cookie1.expires = Time.now + 30
         cookie1.secure  = true
+
+--- to_s
+
+= module CGI::TagMaker
+
+== Instance Methods
+
+--- nn_element_def(element)
+
+--- nOE_element_def(element, append = nil)
+
+--- nO_element_def(element)
 
 = class CGI::HtmlExtension
 
@@ -1016,3 +1080,35 @@ Cookie ¥ª¥Ö¥¸¥§¥¯¥È¤Î¥¢¥È¥ê¥Ó¥å¡¼¥È¤Ç¤¹¡£
 
         textarea("name", 40, 5)
           # = textarea({ "NAME" => "name", "COLS" => 40, "ROWS" => 5 })
+
+= module CGI::Html3
+
+== Instance Methods
+
+--- doctype
+
+--- element_init
+
+= module CGI::Html4
+
+== Instance Methods
+
+--- doctype
+
+--- element_init
+
+= module CGI::Html4Fr
+
+== Instance Methods
+
+--- doctype
+
+--- element_init
+
+= module CGI::Html4Tr
+
+== Instance Methods
+
+--- doctype
+
+--- element_init

@@ -100,7 +100,7 @@ bigdecimal/jacobian             okkez           done
 bigdecimal/ludcmp               okkez           done
 bigdecimal/newton               okkez           done
 bigdecimal/util                 okkez           done
-cgi                             iwadon
+cgi                             iwadon          done
 cgi-lib                         (obsolete)
 cgi/session
 complex                         sheepman        done
