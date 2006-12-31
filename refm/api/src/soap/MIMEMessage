@@ -1,0 +1,43 @@
+#@since 1.8.2
+
+= class SOAP::MIMEMessage < Object
+
+== Class Methods
+
+--- new
+
+--- parse(head, str)
+
+== Instance Methods
+
+--- parts
+
+--- headers
+
+--- close
+
+--- parse(head, str)
+
+--- root
+
+--- boundary
+
+--- add_part(content)
+
+--- add_attachment(attach)
+
+--- has_parts?
+
+--- headers_str
+
+--- content_str
+
+--- to_s
+
+== Constants
+
+--- MultipartContentType
+
+= class SOAP::MIMEMessage::MIMEMessageError < StandardError
+
+#@end

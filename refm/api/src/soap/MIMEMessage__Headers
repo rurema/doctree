@@ -1,0 +1,21 @@
+#@since 1.8.2
+
+= class SOAP::MIMEMessage::Headers < Hash
+
+== Class Methods
+
+--- parse(str)
+
+=== Instance Methods
+
+--- parse(str)
+
+--- parse_line(line)
+
+--- parse_rhs(str)
+
+--- add(key, value)
+
+--- to_s
+
+#@end

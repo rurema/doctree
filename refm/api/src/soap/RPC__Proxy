@@ -1,0 +1,66 @@
+#@since 1.8.1
+
+= class SOAP::RPC::Proxy < Object
+
+== Class Methods
+
+--- new(endpoint_url, soapaction, options)
+
+== Instance Methods
+
+--- soapaction
+--- soapaction=(value)
+
+--- mandatorycharset
+--- mandatorycharset=(value)
+
+--- allow_unqualified_element
+--- allow_unqualified_element=(value)
+
+--- default_encodingstyle
+--- default_encodingstyle=(value)
+
+--- generate_explicit_type
+--- generate_explicit_type=(value)
+
+--- headerhandler
+
+--- streamhandler
+
+--- mapping_registry
+--- mapping_registry=(value)
+
+--- literal_mapping_registry
+--- literal_mapping_registry=(value)
+
+--- operation
+
+--- inspect
+
+--- endpoint_url
+--- endpoint_url=(endpoint_url)
+
+--- reset_stream
+
+--- set_wiredump_file_base(wiredump_file_base)
+
+--- test_loopback_response)
+
+--- add_rpc_operation(qname, soapaction, name, param_def, opt = {})
+--- add_method(qname, soapaction, name, param_def, opt = {})
+--- add_rpc_method(qname, soapaction, name, param_def, opt = {})
+
+--- add_document_operation(soapaction, name, param_def, opt = {})
+--- add_document_method(soapaction, name, param_def, opt = {})
+
+--- invoke(req_header, req_body, opt = nil)
+
+--- call(name, *params)
+
+--- route(req_header, req_body, reqopt, resopt)
+
+--- check_fault(body)
+
+
+
+#@end

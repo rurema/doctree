@@ -1,0 +1,13 @@
+#@since 1.8.1
+
+= class SOAP::RPC::CGIStub::SOAPRequest < Object
+
+== Instance Methods
+
+--- body
+
+--- [](var)
+
+--- meta_vars
+
+#@end

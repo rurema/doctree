@@ -1,0 +1,17 @@
+#@since 1.8.1
+
+= class SOAP::RPC::CGIStub::SOAPFCGIRequest < SOAP::RPC::CGIStub::SOAPRequest
+
+== Class Methods
+
+--- new(request)
+
+== Instance Methods
+
+--- body
+
+--- [](var)
+
+--- meta_vars
+
+#@end

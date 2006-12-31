@@ -1,0 +1,49 @@
+#@since 1.8.1
+
+= class SOAP::RPC::CGIStub < Logger::Application
+include SOAP
+include WEBrick
+
+== Class Methods
+
+--- new(appname, default_namespace)
+
+== Instance Methods
+
+--- on_init
+
+--- mapping_registry
+--- mapping_registry=(value)
+
+--- generate_explicit_type
+--- generate_explicit_type=(generate_explicit_type)
+
+--- add_rpc_servant(obj, namespace = @default_namespace)
+--- add_servant
+
+--- add_headerhandler(obj)
+--- add_rpc_headerhandler(obj)
+
+--- add_rpc_method(obj, name, *param)
+--- add_method
+
+--- add_rpc_method_as(obj, name, name_as, *param)
+--- add_method_as(obj, name, name_as, *param)
+
+--- add_rpc_methods_with_namespace(namespace, obj, name, *param)
+--- add_methods_with_namespace(namespace, obj, name, *param)
+
+--- add_rpc_methods_with_namespace_as(namespace, obj, name, name_as, *param)
+--- add_methods_with_namespace_as(namespace, obj, name, name_as, *param)
+
+--- add_rpc_operation(receiver, qname, soapaction, name, param_def, opt = {})
+
+--- add_document_operation(receiver, soapaction, name, param_def, opt = {})
+
+--- set_fcgi_request(request)
+
+== Constants
+
+--- HTTPVersion
+
+#@end

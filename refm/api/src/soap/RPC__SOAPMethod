@@ -1,0 +1,55 @@
+#@since 1.8.1
+
+= class SOAP::RPC::RPCError < SOAP::Error
+
+= class SOAP::RPC::MethodDefinitionError < SOAP::RPC::RPCError
+
+= class SOAP::RPC::ParameterError < SOAP::RPC::RPCError
+
+= class SOAP::RPC::SOAPMethod < SOAP::SOAPStruct
+
+== Class Methods
+
+--- new(qname, param_def = nil)
+
+--- param_count(paramdef, *type)
+
+--- derive_rpc_param_def(obj, name, *param)
+
+--- create_rpc_param_def(param_names)
+
+--- create_doc_param_def(req_qnames, res_qnames)
+
+== Instance Methods
+
+--- param_def
+
+--- inparam
+
+--- outparam
+
+--- retval_name
+
+--- retval_class_name
+
+--- have_outparam?
+
+--- input_params
+
+--- output_params
+
+--- set_param(params)
+
+--- set_outparam(params)
+
+== Constants
+
+--- RETVAL
+
+--- IN
+
+--- OUT
+
+--- INOUT
+
+#@end

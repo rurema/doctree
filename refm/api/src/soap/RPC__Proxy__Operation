@@ -1,0 +1,35 @@
+#@since 1.8.1
+
+= class SOAP::RPC::Proxy::Operation < Object
+
+== Class Methods
+
+--- new(soapaction, param_def, opt)
+
+== Instance Methods
+
+--- soapaction
+
+--- request_style
+
+--- response_style
+
+--- request_use
+
+--- response_use
+
+--- elementformdefault
+
+--- attributeformdefault
+
+--- request_default_encodingstyle
+
+--- response_default_encodingstyle
+
+--- request_body(values, mapping_registry, literal_mapping_registry, opt)
+
+--- response_obj(body, mapping_registry, literal_mapping_registry, opt)
+
+--- raise_fault(mapping_registry, literal_mapping_registry)
+
+#@end

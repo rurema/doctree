@@ -1,0 +1,70 @@
+#@since 1.8.1
+
+= class SOAP::Property < Object
+include Enumerable
+
+== Class Methods
+
+--- load(stream)
+
+--- loadproperty(propname)
+
+--- new
+
+== Instance Methods
+
+--- load(stream)
+
+--- loadproperty(propname)
+
+--- [](name)
+
+--- []=(name, value)
+
+--- <<(value)
+
+--- add_hook(name = nil, cascade = false, &hook)
+
+--- each {|key, value| ... }
+
+--- empty?
+
+--- keys
+
+--- values
+
+--- lock(cascade = false)
+
+--- unlock(cascade = false)
+
+--- locked?
+
+== Protected Instance Methods
+
+--- deref_key(key)
+
+--- local_referent(key)
+
+--- local_assign(key, value)
+
+--- local_hook(key, dirent)
+
+--- loacl_assign_hook(key, cascade, &hook)
+
+== Constants
+
+--- FrozenError
+
+--- KEY_REGSRC
+
+--- DEF_REGSRC
+
+--- COMMENT_REGEXP
+
+--- CATDEF_REGEXP
+
+--- LINE_REGEXP
+
+--- NO_HOOK
+
+#@end

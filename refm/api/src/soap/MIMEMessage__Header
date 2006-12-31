@@ -1,0 +1,27 @@
+#@since 1.8.2
+
+= class SOAP::MIMEMessage::Header < Object
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- str
+--- str=(value)
+
+--- key
+--- key=(value)
+
+--- root
+--- root=(value)
+
+--- [](key)
+
+--- []=(key, value)
+
+--- to_s
+
+#@end
+>

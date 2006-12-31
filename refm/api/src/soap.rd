@@ -55,61 +55,55 @@
 #@include(soap/mapping/wsdlencodedregistry.rd)
 #@include(soap/mapping/wsdlliteralregistry.rd)
 
-#@# soap/marshal.rb
-#@#@include(soap/Marshal)
+#@include(soap/marshal.rd)
 
+#@since 1.8.2
 #@# soap/mimemessage.rb
-#@#@include(soap/MIMEMessage)
-#@#@include(soap/MIMEMessage__MIMEMessageError)
-#@#@include(soap/MIMEMessage__Headers)
-#@#@include(soap/MIMEMessage__Part)
+#@include(soap/MIMEMessage)
+#@include(soap/MIMEMessage__Headers)
+#@include(soap/MIMEMessage__Part)
+#@end
 
 #@# soap/netHttpClient.rb
-#@#@include(soap/NetHttpClient)
-#@#@include(soap/NetHttpClient__SessionManager)
-#@#@include(soap/NetHttpClient__Response)
+#@include(soap/NetHttpClient)
+#@include(soap/NetHttpClient__SessionManager)
+#@include(soap/NetHttpClient__Response)
 
 #@# soap/parser.rb
-#@#@include(soap/Parser)
-#@#@include(soap/Parser__ParserError)
-#@#@include(soap/Parser__FormatDecodeError)
-#@#@include(soap/Parser__UnexpectedElementError)
-#@#@include(soap/Parser__ParseFrame)
-#@#@include(soap/Parser__ParseFrame__NodeContainer)
+#@include(soap/Parser)
+#@include(soap/Parser__ParseFrame)
+#@include(soap/Parser__ParseFrame__NodeContainer)
 
 #@# soap/processor.rb
-#@#@include(soap/Processor)
+#@include(soap/Processor)
 
 #@# soap/property.rb
-#@#@include(soap/Property)
-#@#@include(soap/Property__Util)
+#@include(soap/Property)
+#@include(soap/Property__Util)
 #@# add Enumerable#inject
 
-#@# soap/rpc/cgistab.rb
-#@#@include(soap/RPC__CGIStab)
-#@#@include(soap/RPC__CGIStab__SOAPRequest)
-#@#@include(soap/RPC__CGIStab__SOAPStdinRequest)
-#@#@include(soap/RPC__CGIStab__SOAPCGIRequest)
+#@# soap/rpc/cgistub.rb
+#@include(soap/RPC__CGIStub)
+#@include(soap/RPC__CGIStub__SOAPRequest)
+#@include(soap/RPC__CGIStub__SOAPStdinRequest)
+#@include(soap/RPC__CGIStub__SOAPFCGIRequest)
 
 #@# soap/rpc/driver.rb
-#@#@include(soap/RPC__Driver)
+#@include(soap/RPC__Driver)
 
 #@# soap/rpc/element.rb
-#@#@include(soap/SOAPBody)
-#@#@include(soap/RPC__RPCError)
-#@#@include(soap/RPC__MethodDefinitionError)
-#@#@include(soap/RPC__ParameterError)
-#@#@include(soap/RPC__SOAPMethod)
-#@#@include(soap/RPC__SOAPMethodRequest)
-#@#@include(soap/RPC__SOAPMethodResponse)
-#@#@include(soap/RPC__SOAPVoid)
+#@include(soap/SOAPBody)
+#@include(soap/RPC__SOAPMethod)
+#@include(soap/RPC__SOAPMethodRequest)
+#@include(soap/RPC__SOAPMethodResponse)
+#@include(soap/RPC__SOAPVoid)
 
 #@# soap/rpc/httpserver.rb
-#@#@include(soap/RPC__HTTPServer)
+#@include(soap/RPC__HTTPServer)
 
 #@# soap/rpc/proxy.rb
-#@#@include(soap/RPC__Proxy)
-#@#@include(soap/RPC__Proxy__Operation)
+#@include(soap/RPC__Proxy)
+#@include(soap/RPC__Proxy__Operation)
 
 #@# soap/rpc/router.rb
 #@#@include(soap/RPC__Router)

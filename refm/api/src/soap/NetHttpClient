@@ -1,0 +1,34 @@
+#@since 1.8.1
+
+= class SOAP::NetHttpClient < Object
+
+== Instance Methods
+
+--- proxy
+
+--- no_proxy
+--- no_proxy=(value)
+
+--- debug_dev
+--- debug_dev=(value)
+
+--- ssl_config
+--- ssl_config=(value)
+
+--- protocol_version
+--- protocol_version=(value)
+
+--- connect_timeout
+--- connect_timeout=(value)
+
+--- send_timeout
+--- send_timeout=(value)
+
+--- receive_timeout
+--- receive_timeout=(value)
+
+== Constants
+
+--- SSLEnabled
+
+#@end

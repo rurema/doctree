@@ -1,0 +1,19 @@
+#@since 1.8.1
+
+= class SOAP::NetHttpClient::Response
+
+== Class Methods
+
+--- new(res)
+
+== Instance Methods
+
+--- content
+
+--- status
+
+--- reason
+
+--- contenttype
+
+#@end

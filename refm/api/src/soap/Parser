@@ -1,0 +1,40 @@
+#@since 1.8.1
+
+= class SOAP::Parser < Object
+include SOAP
+
+== Class Methods
+
+--- new(opt = {})
+
+== Instance Methods
+
+--- envelopenamespace
+--- envelopenamespace=(value)
+
+--- default_encodingstyle
+--- default_encodingstyle=(value)
+
+--- decode_typemap
+--- decode_typemap=(value)
+
+--- allow_unqualified_element
+--- allow_unqualified_element=(value)
+
+--- charset
+
+--- parse(string_or_readable)
+
+--- start_element(name, attrs)
+
+--- characters(text)
+
+--- end_element(name)
+
+= class SOAP::Parser::ParserError < SOAP::Error
+
+= class SOAP::Parser::FormatDecodeError < SOAP::Parser::ParserError
+
+= class SOAP::Parser::UnexpectedElementError < SOAP::Parser::ParserError
+
+#@end
