@@ -3,6 +3,7 @@
 
 == class methods
 --- new(*options)
+
 == instance methods
 --- [](key)
 
@@ -44,4 +45,5 @@
 --- values
 
 --- values_at(*keys)
+
 #@end

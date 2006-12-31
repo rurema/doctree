@@ -6,12 +6,17 @@ include YAML::BaseNode
 
 == instance methods
 --- anchor
+--- anchor=(val)
 
 --- kind
+--- kind=(val)
 
 --- transform
+--- transform=(val)
 
 --- type_id
+--- type_id=(val)
 
 --- value
+--- value=(val)
 

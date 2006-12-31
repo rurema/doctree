@@ -6,8 +6,11 @@
 
 == instance methods
 --- segments
+--- segments=(val)
 
 --- predicates
+--- predicates=(val)
 
 --- flags
+--- flags=(val)
 
