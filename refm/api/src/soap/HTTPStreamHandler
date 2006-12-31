@@ -1,0 +1,34 @@
+#@since 1.8.1
+
+= class SOAP::HTTPStreamHandler < SOAP::StreamHandler
+
+== Class Methods
+
+--- new(options)
+
+== Instance Methods
+
+--- client
+
+--- wiredump_file_base
+--- wiredump_file_base=(value)
+
+--- test_loopback_response
+
+--- accept_encoding_gzip=(allow)
+
+--- inspect
+
+--- send(endpoint_url, conn_data, soapaction = nil, charset = @charset)
+
+--- reset(endpoint_url = nil)
+
+== Constants
+
+--- Client
+
+--- RETRYABLE
+
+--- MAX_RETRY_COUNT
+
+#@end

@@ -1,0 +1,33 @@
+#@since 1.8.1
+
+= class SOAP::StreamHandler::ConnectionData < Object
+
+== Class Methods
+
+--- new(send_string = nil)
+
+--- parse_media_type(str)
+
+--- create_media_type(charset)
+
+== Instance Methods
+
+--- send_string
+--- send_string=(value)
+
+--- send_contenttype
+--- send_contenttype=(value)
+
+--- receive_string
+--- receive_string=(value)
+
+--- receive_contenttype
+--- receive_contenttype=(value)
+
+--- is_fault
+--- is_fault=(value)
+
+--- soapaction
+--- soapaction=(value)
+
+#@end

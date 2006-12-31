@@ -106,50 +106,27 @@
 #@include(soap/RPC__Proxy__Operation)
 
 #@# soap/rpc/router.rb
-#@#@include(soap/RPC__Router)
-#@#@include(soap/RPC__Router__Operation)
-#@#@include(soap/RPC__Router__ApplicationScopeOperation)
-#@#@include(soap/RPC__Router__RequestScopeOperation)
+#@include(soap/RPC__Router)
+#@include(soap/RPC__Router__Operation)
+#@include(soap/RPC__Router__ApplicationScopeOperation)
+#@include(soap/RPC__Router__RequestScopeOperation)
 
 #@# soap/rpc/rpc.rb
-#@#@include(soap/RPC)
+#@include(soap/RPC__)
 
-#@# soap/rpc/soaplet.rb
-#@# WEBrick::Log#debug
-#@#@include(soap/RPC__SOAPlet)
+#@include(soap/rpc/soaplet.rd)
 
 #@# soap/rpc/standaloneServer.rb
-#@#@include(soap/RPC__StandaloneServer)
+#@include(soap/RPC__StandaloneServer)
 
-#@# soap/soap.rb
-#@# SOAP
-#@#@include(soap/Error)
-
-#@#@include(soap/StreamError)
-#@#@include(soap/HTTPStreamError)
-#@#@include(soap/PostUnavailableError)
-#@#@include(soap/MPostUnavailableError)
-
-#@#@include(soap/ArrayIndexOutOfBoundsError)
-#@#@include(soap/ArrayStoreError)
-
-#@#@include(soap/RPCRoutingError)
-#@#@include(soap/EmptyResponseError)
-#@#@include(soap/ResponseFormatError)
-
-#@#@include(soap/UnhandledMustUnderstandHeaderError)
-
-#@#@include(soap/FaultError)
-
-#@#@include(soap/Env)
-
-#@# Object#instance_variable_get
-#@# Object#instance_variable_set
-#@# Kernel#warn
+#@include(soap/soap.rd)
+#@# add Object#instance_variable_get
+#@# add Object#instance_variable_set
+#@# add Kernel#warn
 
 #@# soap/streamHandler.rb
-#@#@include(soap/StreamHandler)
-#@#@include(soap/StreamHandler__ConnectionData)
-#@#@include(soap/HTTPStreamHandler)
+#@include(soap/StreamHandler)
+#@include(soap/StreamHandler__ConnectionData)
+#@include(soap/HTTPStreamHandler)
 
 #@end

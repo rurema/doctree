@@ -1,0 +1,29 @@
+#@since 1.8.1
+
+= class SOAP::RPC::Router::Operation < Object
+
+== Class Methods
+
+--- new(soapaction, name, param_def, opt)
+
+== Instance Methods
+
+--- name
+
+--- soapaction
+
+--- request_style
+
+--- response_style
+
+--- request_use
+
+--- response_use
+
+--- request_default_encodingstyle
+
+--- response_default_encodingstyle
+
+--- call(body,mapping_registry, literal_mapping_registry, opt)
+
+#@end

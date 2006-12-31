@@ -1,0 +1,22 @@
+#@since 1.8.1
+
+= class SOAP::FaultError < SOAP::Error
+
+== Class Methods
+
+--- new(fault)
+
+== Instance Methods
+
+--- faultcode
+
+--- faultstring
+
+--- faultactor
+
+--- detail
+--- detail=(value)
+
+--- to_s
+
+#@end

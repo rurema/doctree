@@ -1,0 +1,55 @@
+#@since 1.8.1
+
+= class SOAP::RPC::Router < Object
+
+== Class Methods
+
+--- new(actor)
+
+== Instance Methods
+
+--- actor
+
+--- mapping_registry
+--- mapping_registry=(value)
+
+--- literal_mapping_registry
+--- literal_mapping_registry=(value)
+
+--- generate_explicit_type
+--- generate_explicit_type=(value)
+
+--- external_ces
+--- external_ces=(value)
+
+--- add_request_headerhandler(factory)
+
+--- add_headerhandler(handler)
+
+--- add_rpc_request_servant(factory, namespace)
+
+--- add_rpc_servant(obj, namespace)
+--- add_servant(obj, namespace)
+
+--- add_rpc_operation(receiver, qname, soapaction, name, param_def, opt = {})
+--- add_method(receiver, qname, soapaction, name, param_def, opt = {})
+--- add_rpc_method(receiver, qname, soapaction, name, param_def, opt = {})
+
+--- add_rpc_request_operation(factory, qname, soapaction, name, param_def, opt = {})
+
+--- add_documetn_operation(receiver, soapaction, name, param_def, opt = {})
+--- add_documetn_method(receiver, soapaction, name, param_def, opt = {})
+
+--- add_document_request_operation(factory, soapaction, name, param_def, opt = {})
+
+--- route(conn_data)
+
+--- create_fault_response(e)
+
+
+
+
+
+
+
+#@end

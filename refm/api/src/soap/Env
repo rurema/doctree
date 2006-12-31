@@ -1,0 +1,15 @@
+#@since 1.8.1
+
+= module SOAP::Env
+
+== Class Methods
+
+--- getenv(name)
+
+== Constants
+
+--- HTTP_PROXY
+
+--- NO_PROXY
+
+#@end
