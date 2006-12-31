@@ -171,6 +171,9 @@ shellwords
 singleton
 #@since 1.8.1
 soap
+soap/marshal
+soap/rpc/cgistub
+soap/rpc/standaloneServer
 soap/wsdlDriver
 #@end
 socket

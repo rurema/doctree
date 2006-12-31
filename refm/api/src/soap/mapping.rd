@@ -39,8 +39,8 @@
 
 --- RubyIVarName
 
-#@#@include(Mapping__SOAPException)
-#@#@include(Mapping__Object)
+#@include(Mapping__SOAPException)
+#@include(Mapping__Object)
 
 = class SOAP::Mapping::MappingError < SOAP::Error
 

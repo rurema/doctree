@@ -55,8 +55,6 @@
 #@include(soap/mapping/wsdlencodedregistry.rd)
 #@include(soap/mapping/wsdlliteralregistry.rd)
 
-#@include(soap/marshal.rd)
-
 #@since 1.8.2
 #@# soap/mimemessage.rb
 #@include(soap/MIMEMessage)
@@ -82,12 +80,6 @@
 #@include(soap/Property__Util)
 #@# add Enumerable#inject
 
-#@# soap/rpc/cgistub.rb
-#@include(soap/RPC__CGIStub)
-#@include(soap/RPC__CGIStub__SOAPRequest)
-#@include(soap/RPC__CGIStub__SOAPStdinRequest)
-#@include(soap/RPC__CGIStub__SOAPFCGIRequest)
-
 #@# soap/rpc/driver.rb
 #@include(soap/RPC__Driver)
 
@@ -110,9 +102,6 @@
 #@include(soap/RPC__)
 
 #@include(soap/rpc/soaplet.rd)
-
-#@# soap/rpc/standaloneServer.rb
-#@include(soap/RPC__StandaloneServer)
 
 #@include(soap/soap.rd)
 #@# add Object#instance_variable_get
