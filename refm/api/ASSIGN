@@ -122,7 +122,7 @@ dl/Symbol                       kimuraw         done
 dl/import                       kimuraw         done
 dl/struct                       kimuraw         done
 dl/types                        kimuraw         done
-dl/win32
+dl/win32                        kimuraw
 drb                             sheepman        done
 e2mmap                          sheepman        done
 erb                             sheepman        done
