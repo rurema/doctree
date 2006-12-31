@@ -19,6 +19,7 @@ bigdecimal/util
 cgi-lib
 cgi
 cgi/session
+cgi/session/pstore
 complex
 #@since 1.8.0
 csv
