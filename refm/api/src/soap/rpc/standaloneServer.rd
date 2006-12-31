@@ -1,3 +1,3 @@
 #@since 1.8.1
-#@include(soap/RPC__StandaloneServer)
+#@include(../RPC__StandaloneServer)
 #@end
