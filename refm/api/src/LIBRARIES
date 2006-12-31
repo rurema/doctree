@@ -233,6 +233,42 @@ wsdl/port_type
 wsdl/service
 wsdl/types
 wsdl/wsdl
+wsdl/xml_schema/all
+wsdl/xml_schema/annotation
+wsdl/xml_schema/any
+wsdl/xml_schema/attribute
+wsdl/xml_schema/choice
+wsdl/xml_schema/complex_content
+wsdl/xml_schema/complex_type
+wsdl/xml_schema/content
+wsdl/xml_schema/content
+wsdl/xml_schema/data
+wsdl/xml_schema/element
+wsdl/xml_schema/enumeration
+wsdl/xml_schema/import
+#@since 1.8.3
+wsdl/xml_schema/importer
+wsdl/xml_schema/include
+wsdl/xml_schema/length
+#@end
+wsdl/xml_schema/parser
+wsdl/xml_schema/pattern
+wsdl/xml_schema/schema
+wsdl/xml_schema/sequence
+#@since 1.8.2
+wsdl/xml_schema/simple_content
+#@end
+#@since 1.8.3
+wsdl/xml_schema/simple_extension
+#@end
+#@since 1.8.2
+wsdl/xml_schema/simple_restriction
+wsdl/xml_schema/simple_type
+#@end
+wsdl/xml_schema/unique
+#@since 1.8.3
+wsdl/xml_schema/xsd2ruby
+#@end
 #@end
 xmlrpc
 #@since 1.8.2
