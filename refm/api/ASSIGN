@@ -164,7 +164,7 @@ net/ftp                         yanagi          done
 net/ftptls                      yanagi          done
 net/http                        aamine          done
 net/https                       aamine          done
-net/imap
+net/imap                        aamine
 net/pop                         aamine          done
 net/smtp                        aamine          done
 net/telnet                      yanagi          done
