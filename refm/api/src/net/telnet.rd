@@ -135,3 +135,82 @@ string を改行を付けてリモートホストに送ります。
 --- sock
 
 リモートホストに接続している IO オブジェクトを返します。
+
+
+--- preprocess(string)
+
+--- print(string)
+
+--- write(string)
+
+
+== Constants
+
+--- IAC
+--- DONT
+--- DO
+--- WONT
+--- WILL
+--- SB
+--- GA
+--- EL
+--- EC
+--- AYT
+--- AO
+--- IP
+--- BREAK
+--- DM
+--- NOP
+--- SE
+--- EOR
+--- ABORT
+--- SUSP
+--- EOF
+--- SYNCH
+--- OPT_BINARY
+--- OPT_ECHO
+--- OPT_RCP
+--- OPT_SGA
+--- OPT_NAMS
+--- OPT_STATUS
+--- OPT_TM
+--- OPT_RCTE
+--- OPT_NAOL
+--- OPT_NAOP
+--- OPT_NAOCRD
+--- OPT_NAOHTS
+--- OPT_NAOHTD
+--- OPT_NAOFFD
+--- OPT_NAOVTS
+--- OPT_NAOVTD
+--- OPT_NAOLFD
+--- OPT_XASCII
+--- OPT_LOGOUT
+--- OPT_BM
+--- OPT_DET
+--- OPT_SUPDUP
+--- OPT_SUPDUPOUTPUT
+--- OPT_SNDLOC
+--- OPT_TTYPE
+--- OPT_EOR
+--- OPT_TUID
+--- OPT_OUTMRK
+--- OPT_TTYLOC
+--- OPT_3270REGIME
+--- OPT_X3PAD
+--- OPT_NAWS
+--- OPT_TSPEED
+--- OPT_LFLOW
+--- OPT_LINEMODE
+--- OPT_XDISPLOC
+--- OPT_OLD_ENVIRON
+--- OPT_AUTHENTICATION
+--- OPT_ENCRYPT
+--- OPT_NEW_ENVIRON
+--- OPT_EXOPL
+--- NULL
+--- CR
+--- LF
+--- EOL
+--- REVISION
+
