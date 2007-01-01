@@ -1,3 +1,6 @@
-#@# = net/ftptls
+= class Net::FTPTLS < Net::FTP
 
-[[unknown:¼¹É®¼ÔÊç½¸]]
+== Instance Methods
+
+--- login(user = "anonymous", passwd = nil, acct = nil)
+
