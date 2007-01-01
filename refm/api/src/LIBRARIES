@@ -156,6 +156,9 @@ rinda/tuplespace
 #@end
 #@since 1.9.0
 ripper
+ripper/filter
+ripper/lexer
+ripper/sexp
 #@end
 #@since 1.8.0
 rss

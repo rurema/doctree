@@ -1,31 +1,43 @@
-#@since 1.9
-= class Ripper
+require ripper/filter
+require ripper/lexer
+require ripper/sexp
 
-((<╝╣╔о╝╘╩ч╜╕>))
+Ruby е╫еэе░ещердЄ▓Є└╧д╣дыд┐дсд╬ещеде╓ещеъд╟д╣бг
+
+= class Ripper
 
 ░╩▓╝дЄ╗▓╛╚д╖д╞▓╝д╡ддбг
 
   * [[url:http://i.loveruby.net/w/RipperTutorial.html]]
   * [[url:http://i.loveruby.net/w/RipperTutorial.TokenStreamInterface.html]]
 
-Ruby е╫еэе░ещердЄе╞ене╣е╚д╚д╖д╞░╖ддд┐дд╛ь╣чбв╬удид╨е╜б╝е╣┐з╔╒д▒дЄ╣╘ддд┐дд╛ь╣чд╧бв
-[[c:Ripper::Filter]] д╬═°═╤дЄ╕б╞дд╣дыд╚дшддд╟д╖дчджбг
+Ruby е╫еэе░ещердЄе╞ене╣е╚д╚д╖д╞░╖ддд┐дд╛ь╣чбв
+╬удид╨е╜б╝е╣┐з╔╒д▒дЄ╣╘ддд┐дд╛ь╣чд╧бв
+[[c:Ripper::Filter]] епеще╣дЄ╗╚джд╚дшддд╟д╖дчджбг
 
 == Class Methods
 
 --- new(src, filename = "(ripper)", lineno = 1)
 
---- lex(src, filename = '-', lineno = 1)
---- lex(src, filename = '-', lineno = 1)
-вк [((Integer,Integer), Symbol, String)] 
+Ripper еке╓е╕езепе╚дЄ║ю└од╖д▐д╣бг
 
-Ruby е╫еэе░ещер str дЄе╚б╝епеєд╦╩м│фд╖бвд╜д╬еъе╣е╚дЄ╩╓д╣бгд┐д└д╖ tokenize д╚░уддбве╚б╝епеєд╬╝я╬рд╚░╠├╓╛Ё╩єдм╔╒┬╙д╣дыбг 
+┬ш░ь░·┐Ї src д╦д╧ Ruby е╫еэе░ещер (╩╕╗·╬є)бв
+┬ш╞є░·┐Ї filename д╦д╧ src д╬е╒ебедеы╠╛бв
+┬ш╗░░·┐Ї lineno д╦д╧ src д╬│л╗╧╣╘╚╓╣цдЄбвд╜дьд╛дь═┐дид▐д╣бг
+
+--- lex(src, filename = '-', lineno = 1)
+--- lex(src, filename = '-', lineno = 1)
+#@# вк [((Integer,Integer), Symbol, String)] 
+
+Ruby е╫еэе░ещер str дЄе╚б╝епеєд╦╩м│фд╖бвд╜д╬еъе╣е╚дЄ╩╓д╖д▐д╣бг
+д┐д└д╖ tokenize д╚░уддбве╚б╝епеєд╬╝я╬рд╚░╠├╓╛Ё╩єдт╔╒┬░д╖д▐д╣бг
 
 ╗╚═╤╬у
+
   require 'ripper'
   require 'pp'
 
-  pp Ripper.scan("def m(a) nil end")
+  pp Ripper.lex("def m(a) nil end")
       #=> [[[1, 0], :on_kw, "def"],
            [[1, 3], :on_sp, " "],
            [[1, 4], :on_ident, "m"],
@@ -37,35 +49,45 @@ Ruby е╫еэе░ещер str дЄе╚б╝епеєд╦╩м│фд╖бвд╜д╬еъе╣е╚дЄ╩╓д╣бгд┐д└д╖ tokenize д╚░удд
            [[1, 12], :on_sp, " "],
            [[1, 13], :on_kw, "end"]]
 
-Ripper.scan д╧╩м│фд╖д┐е╚б╝епеєдЄ╛▄д╖дд╛Ё╩єд╚д╚дтд╦╩╓д╖д▐д╣бг╩╓дъ├═д╬╟█╬єд╬═╫┴╟д╧ 3 ═╫┴╟д╬╟█╬є (│╡╟░┼кд╦д╧е┐е╫еы) д╟д╣бгд╜д╬╞т╠їдЄ░╩▓╝д╦╝ид╖д▐д╣бг
+Ripper.lex д╧╩м│фд╖д┐е╚б╝епеєдЄ╛▄д╖дд╛Ё╩єд╚д╚дтд╦╩╓д╖д▐д╣бг
+╩╓дъ├═д╬╟█╬єд╬═╫┴╟д╧ 3 ═╫┴╟д╬╟█╬є (│╡╟░┼кд╦д╧е┐е╫еы) д╟д╣бг
+д╜д╬╞т╠їдЄ░╩▓╝д╦╝ид╖д▐д╣бг
 
 :░╠├╓╛Ё╩є (Integer,Integer) 
-  е╚б╝епеєдм├╓длдьд╞ддды╣╘ (1-origin) д╚╖х (0-origin) д╬ 2 ═╫┴╟д╬╟█╬єбг 
+    е╚б╝епеєдм├╓длдьд╞ддды╣╘ (1-origin) д╚╖х (0-origin) д╬ 2 ═╫┴╟д╬╟█╬єд╟д╣бг 
 :╝я╬р (Symbol) 
-  б╓:on_XXXб╫д╬╖┴╝░д╟╔╜д╡дьдыбве╚б╝епеєд╬╝я╬рбг 
+    е╚б╝епеєд╬╝я╬рдмб╓:on_XXXб╫д╬╖┴╝░д╬е╖еєе▄еыд╟┼╧д╡дьд▐д╣бг
 :е╚б╝епеє (String) 
-  е╚б╝епеє╩╕╗·╬єбг
+    е╚б╝епеє╩╕╗·╬єд╟д╣бг
 
 --- parse(src, filename = '(ripper)', lineno = 1)
 
 --- sexp(src, filename = '-', lineno = 1)
 
+--- sexp_raw(src, filename = '-', lineno = 1)
+
 --- slice(src, pattern, n = 0)
-вк String
-pattern дЄ└╡╡м╔╜╕╜д╦е│еєе╤едеыд╖бвsrc д╧╩╕╗·╬єд╦е│еєе╤едеыд╖д╞бв└╡╡м╔╜╕╜е▐е├е┴дЄ╣╘джбг
-д╜д╖д╞бвn ╚╓╠▄д╬еле├е│╞тдЄ╝шдъ╜╨д╣
+#@# вк String
+
+Ruby е╫еэе░ещер╩╕╗·╬є src длдщ
+pattern д╬ n ╚╓╠▄д╬│ч╕╠д╦е▐е├е┴д╣дые╞ене╣е╚дЄ╩╓д╖д▐д╣бг
+д┐д└д╖бвn дм 0 д╬д╚днд╧ pattern ┴┤┬╬дЄ╔╜д╖д▐д╣бг
+
+pattern д╧еде┘еєе╚ ID д▐д┐д╧есе┐е╤е┐б╝еєдЄ╬є╡єд╖д┐╩╕╗·╬єд╟╔╜╕╜д╖д▐д╣бг
+есе┐е╤е┐б╝еєд╦д╧ Ruby д╬└╡╡м╔╜╕╜д╚╞▒д╕есе┐╡н╣цдм╗╚дид▐д╣бг
 
 ╗╚═╤╬у
 
   p Ripper.slice(%(<<HERE\nstring\#{nil}\nHERE),
                  "heredoc_beg .*? nl $(.*?) heredoc_end", 1)
-  # => "string\#{nil}\n"
+      # => "string\#{nil}\n"
 
 --- token_match(src, pattern)
 
 --- tokenize(src, filename = '-', lineno = 1)
-вк [String]
-Ruby е╫еэе░ещер str дЄе╚б╝епеєд╦╩м│фд╖бвд╜д╬еъе╣е╚дЄ╩╓д╣бг 
+#@# вк [String]
+
+Ruby е╫еэе░ещер str дЄе╚б╝епеєд╦╩м│фд╖бвд╜д╬еъе╣е╚дЄ╩╓д╖д▐д╣бг
 
 ╗╚═╤╬у
 
@@ -73,9 +95,10 @@ Ruby е╫еэе░ещер str дЄе╚б╝епеєд╦╩м│фд╖бвд╜д╬еъе╣е╚дЄ╩╓д╣бг
   p Ripper.tokenize("def m(a) nil end")
       #=> ["def", " ", "m", "(", "a", ")", " ", "nil", " ", "end"]
 
-Ripper.tokenize д╧║╟дт├▒╜уд╩е╚б╝епеєе╣е╚еъб╝ер API д╟д╣бг╞├д╦└т╠└д╣дыд│д╚д╧двдъд▐д╗дєбг
-
-Ripper.tokenize д╧╢ї╟Єдфе│есеєе╚дт┤▐дсбв╕╡д╬╩╕╗·╬єд╦двды╩╕╗·д╧ 1 е╨еде╚дт╗─д╡д║д╦╩м│фд╖д▐д╣дмбвд╜д╬д┤дп╢╧длд╩╬у│░д╚д╖д╞бв__END__ ░╩╣▀д╬╩╕╗·╬єд╧╠█д├д╞╝╬д╞дщдьд▐д╣бгд│дьд╧╕╜║▀д╬д╚д│дэ╗┼══д╚╣═дид╞дпд└д╡ддбг
+Ripper.tokenize д╧╢ї╟Єдфе│есеєе╚дт┤▐дсбв
+╕╡д╬╩╕╗·╬єд╦двды╩╕╗·д╧ 1 е╨еде╚дт╗─д╡д║д╦╩м│фд╖д▐д╣бг
+д┐д└д╖бвд┤дп╢╧длд╩╬у│░д╚д╖д╞бв__END__ ░╩╣▀д╬╩╕╗·╬єд╧╠█д├д╞╝╬д╞дщдьд▐д╣бг
+д│дьд╧╕╜║▀д╬д╚д│дэ╗┼══д╚╣═дид╞дпд└д╡ддбг
 
 --- yydebug
 --- yydebug=
@@ -88,6 +111,16 @@ Ripper.tokenize д╧╢ї╟Єдфе│есеєе╚дт┤▐дсбв╕╡д╬╩╕╗·╬єд╦двды╩╕╗·д╧ 1 е╨еде╚дт╗─д╡д║д
 
 --- lineno
 
+--- end_seen?
+
+== Private Instance Methods
+
+--- warn(fmt, *args)
+
+--- warning(fmt, *args)
+
+--- compile_error(msg)
+
 == Constants
 
 --- Version
@@ -98,38 +131,13 @@ PARSER_EVENTS + SCANNER_EVENTS
 
 --- PARSER_EVENTS
 
+е╤б╝е╡еде┘еєе╚д╬еде┘еєе╚ ID (е╖еєе▄еы) д╬еъе╣е╚дЄ╩╓д╖д▐д╣бг
+
 --- PARSER_EVENT_TABLE
 
 --- SCANNER_EVENTS
 
+е╣енеуе╩еде┘еєе╚д╬еде┘еєе╚ ID (е╖еєе▄еы) д╬еъе╣е╚дЄ╩╓д╖д▐д╣бг
+
 --- SCANNER_EVENT_TABLE
 
-= class Ripper::Filter
-
-еде┘еєе╚е╔еъе╓еєедеєе┐б╝е╒езеде╣дЄ╗¤д─епеще╣бг
-
-═°═╤╬у
-
-  require 'ripper'
-  require 'cgi'
-  
-  class Ruby2HTML < Ripper::Filter
-    def on_default(event, tok, f)
-      f << CGI.escapeHTML(tok)
-    end
-  
-    def on_comment(tok, f)
-      f << %Q[<span class="comment">#{CGI.escapeHTML(tok)}</span>]
-    end
-  
-    def on_tstring_beg(tok, f)
-      f << %Q[<span class="string">#{CGI.escapeHTML(tok)}]
-    end
-  
-    def on_tstring_end(tok, f)
-      f << %Q[#{CGI.escapeHTML(tok)}</span>]
-    end
-  end
-  
-  Ruby2HTML.new(ARGF).parse('')
-#@end
