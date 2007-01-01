@@ -237,7 +237,7 @@ webrick/ssl                     iwadon          done
 win32/registry
 win32/resolv                    date            done
 win32ole
-wsdl                            okkez
+wsdl                            okkez           done
 xmlrpc                          date            done
 xsd                             date            done
 yaml                            date            done
