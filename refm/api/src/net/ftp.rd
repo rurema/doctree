@@ -193,10 +193,15 @@ passive モードの状態を設定します。新しい状態を返します。
 現在のセッションの改行コードを設定します。新しい改行コードを返します。
 
 --- lastresp
+--- last_response_code
 
 サーバからの最後の応答を返します(string)。
 
 (例): ファイルが正常に転送された時は、"226"。数字の意味は [[unknown:RFC:959]] 参照。
+
+--- last_response
+
+
 
 --- welcome
 
@@ -299,4 +304,29 @@ EBCDIC や LOCAL など他の表現タイプはサポートされていません。
 
 表現タイプがバイナリ(IMAGE)であるか否かを設定します。
 
-[[unknown:執筆者募集]]
+
+--- noop
+
+--- site(arg)
+
+== Constants
+
+--- CRLF
+
+--- DEFAULT_BLOCKSIZE
+
+--- FTP_PORT
+
+--- MDTM_REGEXP
+
+
+= class FTPError < StandardError
+
+= class FTPReplyError < FTPError
+
+= class FTPTempError < FTPError
+
+= class FTPPermError < FTPError
+
+= class FTPProtoError < FTPError
+
