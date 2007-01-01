@@ -160,7 +160,7 @@ md5                             sheepman        done
 mkmf                            sheepman        done
 monitor                         iwadon          done
 mutex_m                         iwadon          done
-net/ftp
+net/ftp                         yanagi
 net/ftptls
 net/http                        aamine
 net/https                       aamine
