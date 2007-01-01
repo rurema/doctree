@@ -1,14 +1,19 @@
-Profiler__.start_profile 実行から、Profiler__.stop_profile までの
-区間の実行コードのプロファイルを取得する。
+プロファイラの実装です。
+現在、[[lib:profile]] ライブラリは profiler ライブラリを
+利用して実装されています。
 
-現在、[[lib:profile]] は、profiler を利用して実装されている。
+= module Profiler__
+
+プロファイラの実装です。
+Profiler__.start_profile 実行から、Profiler__.stop_profile までの
+区間の実行コードのプロファイルを取得します。
+
+以下の使用例を参照してください。
 
     require 'profiler'
 
     Profiler__.start_profile
-
-    require 'tk'
-
+    require 'tk'    # このコードのプロファイルが測定される
     Profiler__.print_profile(STDOUT)
 
     # =>
@@ -30,19 +35,17 @@ Profiler__.start_profile 実行から、Profiler__.stop_profile までの
        :
     <snip>
 
-= module Profiler__
-
 == Module Functions
 
 --- start_profile
 
-プロファイルの取得を開始する。
+プロファイルの取得を開始します。
 
 --- stop_profile
 
-プロファイルの取得を停止する。
+プロファイルの取得を停止します。
 
 --- print_profile(file)
 
-stop_profile を実行し、プロファイルの結果を file に出力する。
-file.printf が定義されている必要がある。
+stop_profile を実行し、プロファイルの結果を file に出力します。
+file には printf メソッドが定義されていなければいけません。
