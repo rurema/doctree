@@ -270,27 +270,37 @@ wsdl/xmlSchema/unique
 #@since 1.8.3
 wsdl/xmlSchema/xsd2ruby
 #@end
-#@#wsdl/soap/address
-#@#wsdl/soap/binding
-#@#wsdl/soap/body
-#@#wsdl/soap/cgiStubCreator
-#@#wsdl/soap/classDefCreator
-#@#wsdl/soap/classDefCreatorSupport
-#@#wsdl/soap/clientSkeltonCreator
-#@#wsdl/soap/complexType
-#@#wsdl/soap/data
-#@#wsdl/soap/definition
-#@#wsdl/soap/driverCreator
-#@#wsdl/soap/element
-#@#wsdl/soap/fault
-#@#wsdl/soap/header
-#@#wsdl/soap/headerfault
-#@#wsdl/soap/mappingRegisterCreator
-#@#wsdl/soap/methodDefCreator
-#@#wsdl/soap/operation
-#@#wsdl/soap/servantSkeltonCreator
-#@#wsdl/soap/standaloneServerStubCreator
-#@#wsdl/soap/wsdl2ruby
+wsdl/soap/address
+wsdl/soap/binding
+wsdl/soap/body
+#@since 1.8.2
+wsdl/soap/cgiStubCreator
+wsdl/soap/classDefCreator
+wsdl/soap/classDefCreatorSupport
+wsdl/soap/clientSkeltonCreator
+#@end
+wsdl/soap/complexType
+wsdl/soap/data
+wsdl/soap/definitions
+#@since 1.8.2
+wsdl/soap/driverCreator
+wsdl/soap/element
+#@end
+wsdl/soap/fault
+wsdl/soap/header
+wsdl/soap/headerfault
+#@since 1.8.2
+wsdl/soap/mappingRegistryCreator
+wsdl/soap/methodDefCreator
+#@end
+wsdl/soap/operation
+#@since 1.8.2
+wsdl/soap/servantSkeltonCreator
+wsdl/soap/standaloneServerStubCreator
+#@end
+#@since 1.8.3
+wsdl/soap/wsdl2ruby
+#@end
 #@end
 xmlrpc
 #@since 1.8.2
