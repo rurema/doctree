@@ -161,7 +161,7 @@ mkmf                            sheepman        done
 monitor                         iwadon          done
 mutex_m                         iwadon          done
 net/ftp                         yanagi          done
-net/ftptls
+net/ftptls                      yanagi
 net/http                        aamine
 net/https                       aamine
 net/imap
