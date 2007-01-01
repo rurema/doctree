@@ -196,7 +196,38 @@ readbytes                       sheepman        done
 readline                        sheepman        done
 resolv                          kimuraw         done
 resolv-replace                  kimuraw         done
-rexml
+rexml/attlistdecl
+rexml/attribute
+rexml/cdata
+rexml/child
+rexml/comment
+rexml/doctype
+rexml/document
+rexml/dtd
+rexml/element
+rexml/encoding
+rexml/entity
+rexml/functions
+rexml/instruction
+rexml/light
+rexml/namespace
+rexml/node
+rexml/output
+rexml/parent
+rexml/parseexception
+rexml/parsers
+rexml/quickpath
+rexml/rexml
+rexml/sax2listener
+rexml/source
+rexml/streamlistener
+rexml/syncenumerator
+rexml/text
+rexml/validation
+rexml/xmldecl
+rexml/xmltokens
+rexml/xpath
+rexml/xpath_parser
 rinda/rinda                     okkez           done
 rinda/tuplespace                okkez           done
 ripper                          aamine          done
@@ -225,6 +256,89 @@ thwait                          sheepman        done
 time                            sheepman        done
 timeout                         sheepman        done
 tk                              okkez
+tk/composite
+tk/clock
+tk/optionobj
+tk/after
+tk/canvas
+tk/macpkg
+tk/optiondb
+tk/validation
+tk/message
+tk/canvastag
+tk/bgerror
+tk/itemfont
+tk/wm
+tk/autoload
+tk/scrollbar
+tk/menuspec
+tk/scrollbox
+tk/virtevent
+tk/scale
+tk/winpkg
+tk/root
+tk/spinbox
+tk/itemconfig
+tk/selection
+tk/checkbutton
+tk/listbox
+tk/texttag
+tk/textwindow
+tk/textmark
+tk/menubar
+tk/txtwin_abst
+tk/msgcat
+tk/kinput
+tk/clipboard
+tk/menu
+tk/text
+tk/console
+tk/dialog
+tk/button
+tk/panedwindow
+tk/labelframe
+tk/toplevel
+tk/font
+tk/encodedstr
+tk/namespace
+tk/textimage
+tk/frame
+tk/event
+tk/image
+tk/scrollable
+tk/palette
+tk/bindtag
+tk/entry
+tk/mngfocus
+tk/winfo
+tk/label
+tk/grid
+tk/tagfont
+tk/place
+tk/xim
+tk/pack
+tk/radiobutton
+tk/package
+tk/timer
+tk/variable
+tkextlib/ICONS
+tkextlib/blt
+tkextlib/bwidget
+tkextlib/itcl
+tkextlib/itk
+tkextlib/iwidgets
+tkextlib/pkg_checker
+tkextlib/tcllib
+tkextlib/tclx
+tkextlib/tile
+tkextlib/tkDND
+tkextlib/tkHTML
+tkextlib/tkimg
+tkextlib/tktable
+tkextlib/tktrans
+tkextlib/treectrl
+tkextlib/vu
+tkextlib/winico
 tmpdir                          sheepman        done
 tracer                          sheepman        done
 tsort                           sheepman        done
