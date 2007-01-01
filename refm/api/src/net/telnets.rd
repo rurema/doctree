@@ -1,3 +1,12 @@
-#@# = net/telnets
+= reopen Net::Telnet
 
-[[unknown:ºπ…Æº‘ ÁΩ∏]]
+== Instance Methods
+
+--- ssl
+
+--- ssl?
+
+--- preprocess(string)
+
+--- waitfor(options)
+

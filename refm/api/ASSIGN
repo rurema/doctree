@@ -168,7 +168,7 @@ net/imap
 net/pop                         aamine          done
 net/smtp                        aamine          done
 net/telnet                      yanagi          done
-net/telnets                     yanagi
+net/telnets                     yanagi          done
 nkf                             sheepman        done
 observer                        sheepman        done
 open-uri                        sheepman        done
