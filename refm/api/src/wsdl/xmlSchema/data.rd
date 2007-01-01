@@ -20,7 +20,7 @@ require wsdl/xmlSchema/enumeration
 require wsdl/xmlSchema/length
 require wsdl/xmlSchema/pattern
 
-= reopen WSDL::XMLSchema
+= module WSDL::XMLSchema
 
 == Constants
 #@since 1.8.2
