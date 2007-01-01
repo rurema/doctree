@@ -167,7 +167,7 @@ net/https                       aamine
 net/imap
 net/pop                         aamine          done
 net/smtp                        aamine          done
-net/telnet
+net/telnet                      yanagi
 net/telnets
 nkf                             sheepman        done
 observer                        sheepman        done
