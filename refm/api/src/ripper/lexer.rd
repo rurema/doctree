@@ -52,7 +52,7 @@ Ripper.tokenize は空白やコメントも含め、
 ただし、ごく僅かな例外として、__END__ 以降の文字列は黙って捨てられます。
 これは現在のところ仕様と考えてください。
 
---- slice(src, pattern, n = 0)
+--- Ripper.slice(src, pattern, n = 0)
 #@# → String
 
 Ruby プログラム src のうち、
@@ -70,7 +70,7 @@ pattern は Ripper のイベント ID のリストを文字列で記述します。
                  "heredoc_beg .*? nl $(.*?) heredoc_end", 1)
       # => "string\#{nil}\n"
 
---- token_match(src, pattern)
+--- Ripper.token_match(src, pattern)
 
 Ruby プログラム src に対してパターン pattern をマッチし、
 マッチデータを返します。
