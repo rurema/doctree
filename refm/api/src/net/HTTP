@@ -28,6 +28,25 @@ proxy_addr を与えるとプロクシを介して接続するオブジェクトを生成します。
 ホスト address の port 番ポートに接続して path の表現する
 エンティティボディを取得したうえ、$stdout に << で出力します。
 
+--- get_response(uri)
+--- get_response(host, path = nil, port = nil)
+
+#@since 1.8.3
+--- post_form(uri, params)
+#@end
+
+--- proxy_address
+
+--- proxy_port
+
+--- proxy_pass
+
+--- proxy_user
+
+--- socket_type
+
+このメソッドは obsolete です。
+
 --- Proxy(address, port = 80)
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
@@ -48,9 +67,33 @@ Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 
 自身が (Proxy メソッドによって作成された) プロクシ用のクラスならば真。
 
+#@since 1.8.3
+--- http_default_port
+#@end
+--- default_port
 --- port
 
-HTTP のデフォルトポート (80)。
+HTTP のデフォルトポート (80) です。
+
+#@since 1.8.3
+--- https_default_port
+
+HTTPS のデフォルトポート (443) です。
+#@end
+
+--- version_1_1?
+--- version_1_1
+--- is_version_1_1?
+
+ライブラリのバージョンが 1.1 のとき true を返します。
+Ruby 1.8 以降では常に false です。
+
+--- version_1_2?
+--- version_1_2
+--- is_version_1_2?
+
+ライブラリのバージョンが 1.2 のとき true を返します。
+Ruby 1.8 以降では常に true です。
 
 == Instance Methods
 
@@ -63,9 +106,18 @@ TCP コネクションを張り、HTTP セッションを開始します。
 イテレータとして呼ばれた時はブロックの間だけセッションを接続し、
 ブロック終了とともに自動的にセッションを閉じます。
 
+--- started?
 --- active?
 
 HTTP セッションが開始されていたら真。
+
+--- set_debug_output(io)
+#@since 1.9.0
+--- debug_outupt=(io)
+#@end
+
+--- close_on_empty_response
+--- close_on_empty_response=(bool)
 
 --- address
 
@@ -74,6 +126,26 @@ HTTP セッションが開始されていたら真。
 --- port
 
 接続するポート番号
+
+--- proxy?
+
+プロクシを介して接続するなら真を返します。
+
+--- proxy_address
+--- proxyaddr
+
+プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス。
+そうでないなら nil。
+
+--- proxy_port
+--- proxyport
+
+プロクシ経由で接続する HTTP オブジェクトならプロクシのポート。
+そうでないなら nil。
+
+--- proxy_pass
+
+--- proxy_user
 
 --- open_timeout
 --- open_timeout=(seconds)
@@ -91,20 +163,6 @@ HTTP セッションが開始されていたら真。
 
 HTTP セッションを終了します。セッション開始前にこのメソッドが
 呼ばれた場合は例外 IOError を発生します。
-
---- proxy?
-
-プロクシを介して接続するなら真。
-
---- proxy_address
-
-プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス。
-そうでないなら nil。
-
---- proxy_port
-
-プロクシ経由で接続する HTTP オブジェクトならプロクシのポート。
-そうでないなら nil。
 
 --- get(path, header = nil)
 --- get(path, header = nil) {|str| .... }
@@ -151,9 +209,10 @@ HTTP ヘッダとして書きこみます。header はハッシュで、
 
 HTTPResponse オブジェクトを返します。
 
-1.1 では 3xx (再試行可能なエラー)に対しても例外を発生します。この場合
-HTTPResponse は例外オブジェクトから err.response で得ることができます。
-一方 1.2 では全く例外を発生しません。
+net/http version 1.1 では 3xx (再試行可能なエラー) に対しても例外を発生します。
+この場合、HTTPResponse は
+例外オブジェクトから err.response で得ることができます。
+一方 net/http version 1.2 では全く例外を発生しません。
 
   response = nil
   Net::HTTP.start('some.www.server', 80) {|http|
@@ -176,19 +235,20 @@ header は get メソッドと同じです。
 
 dest を与えた場合には、レスポンスは << メソッドを使って dest に書きこまれます。
 dest には << メソッドが定義されたオブジェクト、通常 [[c:String]] オブジェクトか
-[[c:Array]] オブジェクトを与えます。この dest は戻り値の HTTPResponse オブジェクトの
-body にもなります。
+[[c:Array]] オブジェクトを与えます。
+この dest は戻り値の HTTPResponse オブジェクトの body にもなります。
 
 ブロックと一緒に呼びだされたときはエンティティボディを少しづつ文字列として
 ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
 持ちません。
 
-dest とブロックを同時に与えてはいけません。同時に与えた場合は例外 ArgumentError
-を投げます。
+dest とブロックを同時に与えてはいけません。
+同時に与えた場合は例外 ArgumentError を発生します。
 
-1.1 では 3xx (再試行可能なエラー)に対しても例外を発生します。この場合
-HTTPResponse は例外オブジェクトから err.response で得ることができます。
-一方 1.2 では全く例外を発生しません。
+net/http version 1.1 では 3xx (再試行可能なエラー)に対しても例外を発生します。
+この場合、HTTPResponse は例外オブジェクトから
+err.response で得ることができます。
+一方 net/http version 1.2 では全く例外を発生しません。
 
   # net/http version 1.1 (Ruby 1.6.x)
   response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
@@ -208,9 +268,11 @@ HTTPResponse は例外オブジェクトから err.response で得ることができます。
 
 --- request_get(path, header = nil)
 --- request_get(path, header = nil) {|response| .... }
+--- get2(path, header = nil)
+--- get2(path, header = nil) {|response| .... }
 
-path にあるエンティティを取得します。HTTPResponse
-オブジェクトを返します。
+path にあるエンティティを取得します。
+HTTPResponse オブジェクトを返します。
 
 ブロックとともに呼び出されたときは、ブロック実行中は接続を
 維持したまま HTTPResponse オブジェクトをブロックに渡します。
@@ -230,8 +292,15 @@ path にあるエンティティを取得します。HTTPResponse
     end
   }
 
+--- request_head(path, header = nil)
+--- request_head(path, header = nil) {|response| .... }
+--- head2(path, header = nil)
+--- head2(path, header = nil) {|response| .... }
+
 --- request_post(path, data, header = nil)
 --- request_post(path, data, header = nil) {|response| .... }
+--- post2(path, data, header = nil)
+--- post2(path, data, header = nil) {|response| .... }
 
 path にあるエンティティを取得します。
 HTTPResponse オブジェクトを返します。
@@ -255,6 +324,16 @@ HTTPResponse オブジェクトをブロックに渡します。
     end
   }
 
+--- put(path, data, initheader = nil)
+
+--- request_put(path, data, initheader = nil)
+--- request_put(path, data, initheader = nil) {|response| .... }
+--- put2(path, data, initheader = nil)
+--- put2(path, data, initheader = nil) {|response| .... }
+
+
+--- send_request(name, path, data = nil, header = nil)
+
 --- request(request [, data])
 --- request(request [, data]) {|response| .... }
 
@@ -265,3 +344,28 @@ HTTPResquest オブジェクト request を送信します。POST/PUT の時は data も
 オブジェクトをブロックに与えます。
 
 このメソッドは HTTP プロトコルに関連した例外は発生させません。
+
+--- inspect
+
+#@since 1.8.3
+--- copy(path, initheader = nil)
+
+--- delete(path, initheader = nil)
+
+--- lock(path, body, initheader = nil)
+
+--- mkcol(path, body, initheader = nil)
+
+--- move(path, body, initheader = nil)
+
+--- options(path, initheader = nil)
+
+--- propfind(path, body, initheader = {'Depth' => '0'})
+
+--- proppatch(path, body, initheader = nil)
+
+--- trace(path, initheader = nil)
+
+--- unlock(path, body, initheader = nil)
+
+#@end

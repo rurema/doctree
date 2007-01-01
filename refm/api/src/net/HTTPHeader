@@ -1,0 +1,115 @@
+= module Net::HTTPHeader
+
+== Instance Methods
+
+--- [](key)
+
+key ヘッダフィールド (文字列) を返します。
+たとえばキー 'content-length' に対しては '2048' のような文字列が得られます。
+key は大文字小文字を区別しません。
+
+--- []=(key)
+
+key ヘッダフィールドに val をセットします。
+key は大文字小文字を区別しません。
+
+#@since 1.8.3
+--- add_field(key, val)
+
+key ヘッダフィールドに val を追加します。
+
+--- get_fields(key)
+
+key ヘッダフィールドの値 (文字列) を配列で返します。
+たとえばキー 'content-length' に対しては ['2048'] のような文字列が得られます。
+key は大文字小文字を区別しません。
+#@end
+
+--- fetch(key)
+--- fetch(key, default)
+--- fetch(key) {|hash| .... }
+
+--- size
+--- length
+
+このメソッドは obsolete です。
+
+--- basic_auth(account, password)
+
+Authrization: ヘッダを BASIC 認証用にセットします。
+
+--- content_length
+--- content_length=(len)
+
+Content-Length: ヘッダの値 (整数)。
+
+--- content_type
+
+--- content_type=(type)
+--- set_content_type(type, params = {})
+
+--- main_type
+
+--- sub_type
+
+--- type_params
+
+--- form_data=(params)
+--- set_form_data(params, sep = '&')
+
+--- content_range
+
+Content-Range: ヘッダフィールドの値を Range で返します。
+Range の表わす長さは [[m:Net::HTTPHeader#range_length]] で得られます。
+
+--- range_length
+
+Content-Range: ヘッダフィールドの表している長さを整数で返します。
+
+--- delete(key)
+
+key ヘッダフィールドを削除します。
+
+--- each {|name, val| .... }
+--- each_header {|name, val| .... }
+
+ヘッダ名とその値に対するくりかえし。ヘッダ名は小文字で統一されます。
+
+--- each_capitalized {|name, value| .... }
+--- canonical_each {|name, value| .... }
+
+ヘッダフィールドの正式名とその値のペアに対して繰り返します。
+
+--- each_capitaliezed_name {|name| .... }
+
+--- each_name {|name| ... }
+--- each_key {|name| ... }
+
+--- each_value {|value| .... }
+
+--- key?(key)
+
+key というヘッダフィールドがあれば真を返します。
+key は大文字小文字を区別しません。
+
+--- method
+
+リクエストの HTTP メソッドを文字列で返します。
+
+--- path
+
+リクエストする path を文字列で返します。
+
+--- proxy_basic_auth(account, password)
+
+Proxy 認証のために Proxy-Authrization: ヘッダをセットします。
+
+--- range
+
+Range: ヘッダの示す範囲を Range オブジェクトで返します。
+
+--- range=(r)
+--- set_range(i, len)
+
+範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
+r は Range オブジェクト、i, len は始点と長さです。

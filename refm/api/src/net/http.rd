@@ -165,5 +165,6 @@ CGIやサーバの実装者に対し `&' の代わりに
 
 
 #@include(HTTP)
+#@include(HTTPHeader)
 #@include(HTTPRequest)
 #@include(HTTPResponse)

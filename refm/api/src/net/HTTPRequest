@@ -1,12 +1,24 @@
 = class Net::HTTPRequest < Object
 
+include HTTPHeader
+
 HTTP リクエストを抽象化するクラスです。
 Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
 
   * [[c:Net::HTTP::Get]]
-  * [[c:Net::HTTP::Post]]
   * [[c:Net::HTTP::Head]]
+  * [[c:Net::HTTP::Post]]
   * [[c:Net::HTTP::Put]]
+  * [[c:Net::HTTP::Copy]]
+  * [[c:Net::HTTP::Delete]]
+  * [[c:Net::HTTP::Lock]]
+  * [[c:Net::HTTP::Mkcol]]
+  * [[c:Net::HTTP::Move]]
+  * [[c:Net::HTTP::Options]]
+  * [[c:Net::HTTP::Propfind]]
+  * [[c:Net::HTTP::Proppatch]]
+  * [[c:Net::HTTP::Trace]]
+  * [[c:Net::HTTP::Unlock]]
 
 を使用してください。
 
@@ -20,31 +32,16 @@ Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
 
 == Class Methods
 
---- new(path)
+--- new(path, initheader = nil)
 
-HTTP リクエストオブジェクトを生成します。リクエストする path を文字列で与える。
+HTTP リクエストオブジェクトを生成します。
+リクエストする path を文字列で与えます。
 
 == Instance Methods
 
---- [](key)
+--- inspect
 
-key ヘッダフィールドの文字列。
-key は大文字小文字を区別しません。
-
---- [](key)
-
-key ヘッダフィールドに val をセットします。
-key は大文字小文字を区別しません。
-
-#@since 1.9.0
---- add_header(key, val)
-
-key ヘッダフィールドに val をセットします。
-#@end
-
---- basic_auth(account, password)
-
-Authrization: ヘッダを basic auth 用にセットします。
+--- body_exist?
 
 #@since 1.8.0
 --- body
@@ -62,22 +59,6 @@ Authrization: ヘッダを basic auth 用にセットします。
 read(size) メソッドが定義されている必要があります。
 #@end
 
---- content_length
-
-Content-Length: ヘッダの値 (整数)。
-
---- content_range
-
-Content-Range: ヘッダの値 (Range)。
-
---- delete(key)
-
-key ヘッダフィールドを削除します。
-
---- each {|name, val| .... }
-
-ヘッダ名とその値に対するくりかえし。ヘッダ名は小文字で統一されます。
-
 --- method
 
 リクエストの HTTP メソッドを文字列で返します。
@@ -85,20 +66,6 @@ key ヘッダフィールドを削除します。
 --- path
 
 リクエストする path を文字列で返します。
-
---- proxy_basic_auth(account, password)
-
-Proxy 認証のために Proxy-Authrization: ヘッダをセットします。
-
---- range
-
-Range: ヘッダの示す範囲を Range オブジェクトで返します。
-
---- range=(r)
---- set_range(i, len)
-
-範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
-r は Range オブジェクト、i, len は始点と長さです。
 
 --- request_body_permitted?
 
@@ -111,6 +78,7 @@ HTTP メソッド (POST など)の場合真を返します。
 HTTP メソッド (GET, POST など)の場合真を返します。
 
 
+
 = class Net::HTTP::Head < Net::HTTPRequest
 
 = class Net::HTTP::Get < Net::HTTPRequest
@@ -118,3 +86,24 @@ HTTP メソッド (GET, POST など)の場合真を返します。
 = class Net::HTTP::Post < Net::HTTPRequest
 
 = class Net::HTTP::Put < Net::HTTPRequest
+
+= class Net::HTTP::Copy < Net::HTTPRequest
+
+= class Net::HTTP::Delete < Net::HTTPRequest
+
+= class Net::HTTP::Lock < Net::HTTPRequest
+
+= class Net::HTTP::Mkcol < Net::HTTPRequest
+
+= class Net::HTTP::Move < Net::HTTPRequest
+
+= class Net::HTTP::Options < Net::HTTPRequest
+
+= class Net::HTTP::Propfind < Net::HTTPRequest
+
+= class Net::HTTP::Proppatch < Net::HTTPRequest
+
+= class Net::HTTP::Trace < Net::HTTPRequest
+
+= class Net::HTTP::Unlock < Net::HTTPRequest
+

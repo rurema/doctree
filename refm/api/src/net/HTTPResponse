@@ -1,53 +1,53 @@
 = class Net::HTTPResponse < Object
 
-HTTP レスポンスのクラスです。
+include Net::HTTPHeader
 
-インスタンスメソッドが引数としてヘッダフィールド名を受け取る場合、
-大文字小文字を区別しません。
+HTTP レスポンスを表現するクラスです。
+Net::HTTP クラスは実際には HTTPResponse のサブクラスを返します。
+
+== Class Methods
+
+--- new(http_version, result_code, message)
+
+ライブラリ内部用メソッドです。使わないでください。
+
+--- body_permitted?
 
 == Instance Methods
-
---- [](key)
-
-key ヘッダフィールド(文字列)を返します。
-たとえばキー 'content-length' に対しては '2048' のような
-文字列が得られます。key は大文字小文字を区別しません。
-
---- [](key)
-
-key ヘッダフィールドを value に設定します。
-key は大文字小文字を区別しません。
-
---- body
-
-エンティティボディです。read_body を呼んでいればその引数 dest、
-呼んでいなければエンティティボディを文字列として読みこんで返します。
-
---- canonical_each {|name, value| .... }
-
-ヘッダフィールドの正式名とその値のペアに対して繰り返します。
 
 --- code
 
 HTTP のリザルトコードです。例えば '302' などです。
 
---- each {|name, value| .... }
-
-すべてのヘッダフィールド名とその値のペアに対するくりかえし。
-
---- key?(key)
-
-key というヘッダフィールドがあれば真。
-key は大文字小文字を区別しません。
-
---- http_version
-
-サーバがサポートしている HTTP のバージョンを文字列で返す。
-
 --- message
+--- msg
 
 HTTP サーバがリザルトコードに付加して返すメッセージです。
 例えば 'Not Found' などです。
+
+--- http_version
+
+サーバがサポートしている HTTP のバージョンを文字列で返します。
+
+#@since 1.8.0
+--- to_ary
+#@end
+
+--- value
+
+--- response
+--- header
+--- reader_header
+
+互換性を保つためだけに導入されたメソッドです。
+使わないでください。
+
+--- body
+--- entity
+
+エンティティボディです。
+[[m:Net::HTTPResponse#read_body]] を呼んでいればその引数 dest、
+呼んでいなければエンティティボディを文字列として読みこんで返します。
 
 --- read_body(dest = '')
 
@@ -58,3 +58,105 @@ HTTP サーバがリザルトコードに付加して返すメッセージです。
 --- read_body {|str| .... }
 
 エンティティボディを少しづつ取得して順次ブロックに与えます。
+
+
+= class HTTPUnknownResponse < HTTPResponse
+
+= class HTTPInformation < HTTPResponse
+1xx
+= class HTTPSuccess < HTTPResponse
+2xx
+= class HTTPRedirection < HTTPResponse
+3xx
+= class HTTPClientError < HTTPResponse
+4xx
+= class HTTPServerError < HTTPResponse
+5xx
+
+= class HTTPContinue < HTTPInformation
+100
+= class HTTPSwitchProtocol < HTTPInformation
+101
+
+= class HTTPOK < HTTPSuccess
+200
+= class HTTPCreated < HTTPSuccess
+201
+= class HTTPAccepted < HTTPSuccess
+202
+= class HTTPNonAuthoritativeInformation < HTTPSuccess
+203
+= class HTTPNoContent < HTTPSuccess
+204
+= class HTTPResetContent < HTTPSuccess
+205
+= class HTTPPartialContent < HTTPSuccess
+206
+
+= class HTTPMultipleChoice < HTTPRedirection
+300
+= class HTTPMovedPermanently < HTTPRedirection
+301
+= class HTTPFound < HTTPRedirection
+302
+#@# alias: HTTPMovedTemporarily
+= class HTTPSeeOther < HTTPRedirection
+303
+= class HTTPNotModified < HTTPRedirection
+304
+= class HTTPUseProxy < HTTPRedirection
+305
+#@# 306 unused
+= class HTTPTemporaryRedirect < HTTPRedirection
+307
+
+= class HTTPBadRequest < HTTPClientError
+400
+= class HTTPUnauthorized < HTTPClientError
+401
+= class HTTPPaymentRequired < HTTPClientError
+402
+= class HTTPForbidden < HTTPClientError
+403
+= class HTTPNotFound < HTTPClientError
+404
+= class HTTPMethodNotAllowed < HTTPClientError
+405
+= class HTTPNotAcceptable < HTTPClientError
+406
+= class HTTPProxyAuthenticationRequired < HTTPClientError
+407
+= class HTTPRequestTimeOut < HTTPClientError
+408
+= class HTTPConflict < HTTPClientError
+409
+= class HTTPGone < HTTPClientError
+410
+= class HTTPLengthRequired < HTTPClientError
+411
+= class HTTPPreconditionFailed < HTTPClientError
+412
+= class HTTPRequestEntityTooLarge < HTTPClientError
+413
+= class HTTPRequestURITooLong < HTTPClientError
+#@# alias: HTTPRequestURITooLarge
+414
+= class HTTPUnsupportedMediaType < HTTPClientError
+415
+= class HTTPRequestedRangeNotSatisfiable < HTTPClientError
+416
+= class HTTPExpectationFailed < HTTPClientError
+417
+
+= class HTTPInternalServerError < HTTPServerError
+500
+= class HTTPNotImplemented < HTTPServerError
+501
+= class HTTPBadGateway < HTTPServerError
+502
+= class HTTPServiceUnavailable < HTTPServerError
+503
+= class HTTPGatewayTimeOut < HTTPServerError
+504
+= class HTTPVersionNotSupported < HTTPServerError
+505

@@ -1,9 +1,9 @@
-SSL/TLS enhancement for Net::HTTP.
+[[lib:net/http]] に SSL/TLS 拡張を実装するライブラリです。
 
-
-[[lib:net/http]] も参照。
-
-注意。net/https は RFC2818 の 3.1 に定められた 「サーバーの証明書に記載された身元のチェック」を自らはしません。接続しているはずのサーバのホスト名と証明書に記載されているホスト名が一致するかをライブラリの使用者が各自実装する必要があります。
+[注意] net/https は RFC2818 の 3.1 に定められた
+「サーバーの証明書に記載された身元のチェック」を自動では実行しません。
+接続しているはずのサーバのホスト名と証明書に記載されているホスト名が
+一致するかをライブラリの使用者が各自実装する必要があります。
 
 [[m:URL:http:#/www.ipa.go.jp/security/rfc/RFC2818JA.html#31]]
 
@@ -11,7 +11,8 @@ SSL/TLS enhancement for Net::HTTP.
 
 === Example
 
-簡単な例を挙げます。verify_mode に指定する定数に関しては [[c:OpenSSL::SSL]] を参照してください。
+簡単な例を挙げます。
+verify_mode に指定する定数に関しては [[c:OpenSSL::SSL]] を参照してください。
 必ず use_ssl = true を呼ばなければいけないところに注意してください。
 
   require 'net/https'
@@ -20,12 +21,15 @@ SSL/TLS enhancement for Net::HTTP.
   https.ca_file = '/usr/share/ssl/cert.pem'
   https.verify_mode = OpenSSL::SSL::VERIFY_PEER
   https.verify_depth = 5
-  https.start { |w|
-    response = w.get('/')
+  https.start {
+    response = https.get('/')
     puts response.body
   }
 
-proxy 経由でアクセスする例です。proxy 経由でも通信路は暗号化されます。[[unknown:WWWプロキシにおけるSSLトンネリング|URL:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]を参照してください。
+以下は HTTPS プロクシ経由でアクセスする例です。
+プロクシ経由でも通信路は暗号化されます。
+[[unknown:WWWプロキシにおけるSSLトンネリング|URL:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]
+を参照してください。
 
   require 'net/https'
   proxy_addr = 'proxy.example.com'
@@ -35,8 +39,8 @@ proxy 経由でアクセスする例です。proxy 経由でも通信路は暗号化されます。[[unknown:
   https.ca_file = '/usr/share/ssl/cert.pem'
   https.verify_mode = OpenSSL::SSL::VERIFY_PEER
   https.verify_depth = 5
-  https.start {|w|
-    response = w.get('/')
+  https.start {
+    response = https.get('/')
     puts response.body
   }
 
@@ -50,23 +54,32 @@ HTTP で SSL/TLS を使うなら true を返します。
 
 --- use_ssl=(bool)
 
-HTTP で SSL/TLS を使うかどうかを設定します。使う場合は true を代入します。デフォルトでは false です。つまり SSL/TLS を有効にするには必ず use_ssl = true を呼ぶ必要があります。
+HTTP で SSL/TLS を使うかどうかを設定します。
+HTTPS 使う場合は true を代入します。
+デフォルトでは false です。
+つまり SSL/TLS を有効にするには必ず use_ssl = true を呼ぶ必要があります。
+
+--- ssl_timeout
+
+--- ssl_timeout=(sec)
+--- timeout=(sec)
 
 --- peer_cert
 
-サーバが送ってきた X.509 証明書を OpenSSL::X509::Certificate オブジェクトとして返2します。
+サーバが送ってきた X.509 証明書を
+OpenSSL::X509::Certificate オブジェクトとして返します。
 
 --- key
 --- key=(key)
 
-[[c:OpenSSL::PKey::RSA]] オブジェクトか [[c:OpenSSL::PKey::DSA]] オブジェクトを設定します。
-(This method is appeared in Michal Rokos's OpenSSL extention.)
+[[c:OpenSSL::PKey::RSA]] オブジェクトか
+[[c:OpenSSL::PKey::DSA]] オブジェクトを設定します。
 
 --- cert
 --- cert=(certificate)
 
-クライアント証明書として [[c:OpenSSL::X509::Certificate]] オブジェクトを設定します。
- (This method is appeared in Michal Rokos's OpenSSL extention.)
+クライアント証明書として
+[[c:OpenSSL::X509::Certificate]] オブジェクトを設定します。
 
 --- ca_file
 --- ca_file=(path)
