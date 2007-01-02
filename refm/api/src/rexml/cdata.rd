@@ -1,4 +1,4 @@
-require rexml/text
+#@#require rexml/text
 
 = class REXML::CData < REXML::Text
 
