@@ -11,6 +11,7 @@ RSS を扱うためのライブラリです。
 #@include(rss/Tutorial)
 #@include(rss/0.9.rd)
 #@include(rss/1.0.rd)
+#@include(rss/2.0.rd)
 #@include(rss/dublincore.rd)
 #@include(rss/syndication.rd)
 #@include(rss/taxonomy.rd)

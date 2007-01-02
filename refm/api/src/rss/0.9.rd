@@ -44,9 +44,6 @@
 --- docs
 --- docs=
 
---- generator
---- generator=
-
 --- image
 --- image=
 
@@ -81,9 +78,6 @@
 
 --- title
 --- title=
-
---- ttl
---- ttl=
 
 --- webMaster
 --- webMaster=
@@ -144,16 +138,10 @@
 = class RSS::Rss::Channel::Item < RSS::Element
 == Instance Methods
 
---- author
---- author=
-
 --- categories
 
 --- category
 --- category=
-
---- comments
---- comments=
 
 --- date
 --- date=
@@ -164,28 +152,14 @@
 --- enclosure
 --- enclosure=
 
---- guid
---- guid=
-
 --- link
 --- link=
-
---- pubDate
---- pubDate=
 
 --- source
 --- source=
 
 --- title
 --- title=
-
---- trackback_about
---- trackback_about=
-
---- trackback_abouts
-
---- trackback_ping
---- trackback_ping=
 
 = class RSS::Rss::Channel::Item::Source < RSS::Element
 == Instance Methods
