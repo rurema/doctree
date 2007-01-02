@@ -1,4 +1,4 @@
-require rss/1.0
+#@#require rss/1.0
 
  * [[url:http://purl.org/rss/1.0/modules/syndication/]]
 

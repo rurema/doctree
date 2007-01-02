@@ -1,4 +1,4 @@
-require rss/1.0
+#@#require rss/1.0
 
  * [[url:http://purl.org/dc/elements/1.1/]]
 

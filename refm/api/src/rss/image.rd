@@ -1,5 +1,5 @@
-require rss/1.0
-require rss/dublincore
+#@#require rss/1.0
+#@#require rss/dublincore
 
 = module RSS::ImageItemModel
 
