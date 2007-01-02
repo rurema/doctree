@@ -321,7 +321,7 @@ tk/radiobutton
 tk/package
 tk/timer
 tk/variable
-tkextlib/ICONS
+tkextlib/ICONS                  moriq
 tkextlib/blt
 tkextlib/bwidget
 tkextlib/itcl
