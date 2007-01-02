@@ -1,7 +1,5 @@
 #@# Author: kou
 
-=== Tutorial.ja
-
 === 注意
 
 RSS ParserはRSS 0.9x/1.0/2.0をサポートしていますが，RSS 0.90
@@ -47,39 +45,26 @@ RSS 2.0を扱う場合は
 
   require 'rss/dublincore'
 
-や
-
   require 'rss/syndication'
-
-や
 
   require 'rss/content'
 
-や
-
   require 'rss/trackback'
-
-や
 
   require 'rss/image'
 
-も記述してください。これらは、それぞれ((<Dublin
-Core|URL:http://web.resource.org/rss/1.0/modules/dc/>))モジュー
-ル、
-[[unknown:Syndication|URL:http://web.resource.org/rss/1.0/modules/syndication/]]
-モジュール，
-[[unknown:Content|URL:http://web.resource.org/rss/1.0/modules/content/]]
-モジュール，
-[[unknown:TrackBack|URL:http://madskills.com/public/xml/rss/module/trackback/]]
-モジュール，
-[[unknown:Image|URL:http://web.resource.org/rss/1.0/modules/image/]]
-モジュールを使用可能にします。
-
-ただし，Contentモジュールはcontent:encodedしかサポートしていません．
+なども記述してください。これらは、それぞれ
+ * Dublin Core モジュール [[url:http://web.resource.org/rss/1.0/modules/dc/]] 
+ * Syndication モジュール [[url:http://web.resource.org/rss/1.0/modules/syndication/]]
+ * Content モジュール [[url:http://web.resource.org/rss/1.0/modules/content/]]
+ * Trackback モジュール [[url:http://madskills.com/public/xml/rss/module/trackback/]]
+ * Image モジュール [[url:http://web.resource.org/rss/1.0/modules/image/]]
+使用可能にします。
+ただし，Content モジュールは content:encoded しかサポートしていません．
 
 === パース
 
-RSSをパースしたい場合はRSS::Parserクラスを使います。
+RSS をパースしたい場合は RSS::Parser クラスを使います。
 RSS::Parser.parseはStringのRSSをパースします(使用するXMLパー
 サによってはFileやIOオブジェクトなどでもパース可能です)。RSS
 1.0をパースした場合はRSS::RDFオブジェクトを、RSS 0.9x/2.0を
