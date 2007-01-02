@@ -1,9 +1,7 @@
 #@if (version >= "1.8.2")
 #@# = rss
 
-[[unknown:執筆者募集]]
-
-
+RSS を扱うためのライブラリです。
 
 === 参考
   * [[url:http://www.cozmixng.org/~rwiki/?cmd=view;name=RSS+Parser]]
@@ -11,13 +9,13 @@
   * RSS 1.0  [[url:http://purl.org/rss/1.0/spec]]  
   * RSS 2.0  [[url:http://www.rssboard.org/rss-specification]]
 #@include(rss/Tutorial)
-#@include(rss/Categories)
-#@include(rss/Channel)
-#@include(rss/Maker)
-#@include(rss/XMLStyleSheet)
-#@include(rss/SkipDays)
-#@include(rss/SkipHours)
-#@include(rss/Image)
-#@include(rss/Items)
-#@include(rss/Textinput)
+#@include(rss/maker/Categories)
+#@include(rss/maker/Channel)
+#@include(rss/maker/Maker)
+#@include(rss/maker/XMLStyleSheet)
+#@include(rss/maker/SkipDays)
+#@include(rss/maker/SkipHours)
+#@include(rss/maker/Image)
+#@include(rss/maker/Items)
+#@include(rss/maker/Textinput)
 #@end

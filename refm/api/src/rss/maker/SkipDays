@@ -1,0 +1,29 @@
+= class RSS::Maker::ChannelBase::SkipDaysBase < Object
+
+RSS 0.91/2.0を生成するときだけ利用されます．
+
+== Instance Methods
+
+--- new_day
+新しくdayを作成し，返します．作成された
+dayはdayリストの最後
+に追加されています．
+
+= class RSS::Maker::RSS09::Channel::SkipDays < RSS::Maker::ChannelBase::SkipDaysBase
+= class RSS::Maker::RSS20::Channel::SkipDays < RSS::Maker::RSS09::Channel::SkipDays
+
+= class RSS::Maker::ChannelBase::SkipDaysBase::DayBase < Object
+
+dayは
+maker.channel.skipDays.new_dayで作成されたオ
+ブジェクトとします．
+
+contentを指定する必要があります．
+
+== Instance Methods
+
+--- content
+--- content=()
+
+= class RSS::Maker::RSS09::Channel::SkipDays::Day < RSS::Maker::ChannelBase::SkipDaysBase::DayBase
+= class RSS::Maker::RSS20::Channel::SkipDays::Day < RSS::Maker::RSS09::Channel::SkipDays::Day
