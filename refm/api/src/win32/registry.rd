@@ -273,6 +273,20 @@ subkey の値を返します。
 
 キー情報の個々の値を返します。
 
+
+--- []=(name, rtype, value = nil)
+
+--- _dump
+
+--- hkey
+
+--- inspect
+
+--- keys
+
+--- open?
+
+
 == Constants
 
 --- HKEY_CLASSES_ROOT
@@ -286,33 +300,133 @@ subkey の値を返します。
 詳細は [[unknown:MSDN Library|URL:httphttp://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp]] を参照してください。
 
 
+= module Win32::Registry::API
+== Module Functions
+--- CloseKey(hkey)
+--- CreateKey(hkey, name, opt, desired)
+--- DeleteKey(hkey, name)
+--- DeleteValue(hkey, name)
+--- EnumKey(hkey, index)
+--- EnumValue(hkey, index)
+--- FlushKey(hkey)
+--- OpenKey(hkey, name, opt, desired)
+--- QueryInfoKey(hkey)
+--- QueryValue(hkey, name)
+--- SetValue(hkey, name, type, data, size)
+--- check(result)
+--- packdw(dw)
+--- packqw(qw)
+--- unpackdw(dw)
+--- unpackqw(qw)
 
-= module Registry::Constants
+== Constants
+--- RegCloseKey
+--- RegCreateKeyExA
+--- RegDeleteKey
+--- RegDeleteValue
+--- RegEnumKeyExA
+--- RegEnumValueA
+--- RegFlushKey
+--- RegOpenKeyExA
+--- RegQueryInfoKey
+--- RegQueryValueExA
+--- RegSetValueExA
+
+= class Win32::Registry::Error < StandardError
+
+== Instance Methods
+
+--- code
+
+== Constants
+
+--- FormatMessageA
+
+
+= class Win32::Registry::PredefinedKey < Win32::Registry
+
+== Class Methods
+
+--- new(hkey, keyname)
+
+== Instance Methods
+
+--- class
+
+--- close
+
+= module Win32::Registry::Constants
 
 詳細は [[unknown:MSDN Library|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp]] を参照してください。
 
 == Constants
 
---- HKEY_*
+--- HKEY_CLASSES_ROOT
+--- HKEY_CURRENT_USER
+--- HKEY_LOCAL_MACHINE
+--- HKEY_USERS
+--- HKEY_PERFORMANCE_DATA
+--- HKEY_PERFORMANCE_TEXT
+--- HKEY_PERFORMANCE_NLSTEXT
+--- HKEY_CURRENT_CONFIG
+--- HKEY_DYN_DATA
 
 定義済キー値。
 これらは Integer で、Win32::Registry オブジェクトではありません。
 
---- REG_*
+--- REG_NONE
+--- REG_SZ
+--- REG_EXPAND_SZ
+--- REG_BINARY
+--- REG_DWORD
+--- REG_DWORD_LITTLE_ENDIAN
+--- REG_DWORD_BIG_ENDIAN
+--- REG_LINK
+--- REG_MULTI_SZ
+--- REG_RESOURCE_LIST
+--- REG_FULL_RESOURCE_DESCRIPTOR
+--- REG_RESOURCE_REQUIREMENTS_LIST
+--- REG_QWORD
+--- REG_QWORD_LITTLE_ENDIAN
 
 レジストリ値の型。
 
---- KEY_*
+--- STANDARD_RIGHTS_READ
+--- STANDARD_RIGHTS_WRITE
+--- KEY_QUERY_VALUE
+--- KEY_SET_VALUE
+--- KEY_CREATE_SUB_KEY
+--- KEY_ENUMERATE_SUB_KEYS
+--- KEY_NOTIFY
+--- KEY_CREATE_LINK
+--- KEY_READ
+--- KEY_WRITE
+--- KEY_EXECUTE
+--- KEY_ALL_ACCESS
 
 セキュリティアクセスマスク。
 
---- KEY_OPTIONS_*
-
-キーオプション。
 
 --- REG_CREATED_NEW_KEY
 --- REG_OPENED_EXISTING_KEY
 
 キーが新しく作られたか、既存キーが開かれたか。
 [[m:Win32::Registry.disposition]] メソッドも参照してください。
+
+--- REG_OPTION_RESERVED
+--- REG_OPTION_NON_VOLATILE
+--- REG_OPTION_VOLATILE
+--- REG_OPTION_CREATE_LINK
+--- REG_OPTION_BACKUP_RESTORE
+--- REG_OPTION_OPEN_LINK
+--- REG_LEGAL_OPTION
+
+--- REG_WHOLE_HIVE_VOLATILE
+--- REG_REFRESH_HIVE
+--- REG_NO_LAZY_FLUSH
+--- REG_FORCE_RESTORE
+
+--- MAX_KEY_LENGTH
+--- MAX_VALUE_LENGTH
+
 #@end
