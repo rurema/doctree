@@ -206,7 +206,7 @@ rexml/document                  iwadon          done
 rexml/dtd                       iwadon          done
 rexml/element                   iwadon          done
 rexml/encoding                  iwadon          done
-rexml/encodings                 iwadon
+rexml/encodings                 iwadon          done
 rexml/entity
 rexml/functions
 rexml/instruction
