@@ -342,7 +342,13 @@ tkextlib/blt/tabnotebook
 tkextlib/blt/tabset
 tkextlib/blt/ted
 tkextlib/blt/tile
-tkextlib/blt/tile
+tkextlib/blt/tile/button
+tkextlib/blt/tile/checkbutton
+tkextlib/blt/tile/frame
+tkextlib/blt/tile/label
+tkextlib/blt/tile/radiobutton
+tkextlib/blt/tile/scrollbar
+tkextlib/blt/tile/toplevel
 tkextlib/blt/tree
 tkextlib/blt/treeview
 tkextlib/blt/unix_dnd
