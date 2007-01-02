@@ -204,7 +204,7 @@ rexml/comment                   iwadon          done
 rexml/doctype                   iwadon          done
 rexml/document                  iwadon          done
 rexml/dtd                       iwadon          done
-rexml/element                   iwadon
+rexml/element                   iwadon          done
 rexml/encoding
 rexml/entity
 rexml/functions
