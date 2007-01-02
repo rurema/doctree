@@ -23,14 +23,28 @@
 === リンク
 
   * REXML Home
-    [[m:URL:http:#/www.germane-software.com/software/rexml]]
+    [[url:http://www.germane-software.com/software/rexml]]
   * API リファレンス
-    [[m:URL:http:#/www.germane-software.com/software/rexml_doc]]
-    [[unknown:日本語訳|URL:http://pub.cozmixng.org/~kou/rexml-doc-ja/]]
+    [[url:http://www.germane-software.com/software/rexml_doc]]
+    日本語訳 [[url:http://pub.cozmixng.org/~kou/rexml-doc-ja/]]
   * チュートリアル
-    [[m:URL:http:#/www.germane-software.com/software/rexml/docs/tutorial.html]]
-    [[unknown:日本語訳|URL:http://www.baykit.org/~makotos/cgi-bin/wiliki.cgi?REXML%A5%C1%A5%E5%A1%BC%A5%C8%A5%EA%A5%A2%A5%EB&l=jp]]
+    [[url:http://www.germane-software.com/software/rexml/docs/tutorial.html]]
+    日本語訳 [[url:http://www.baykit.org/~makotos/cgi-bin/wiliki.cgi?REXML%A5%C1%A5%E5%A1%BC%A5%C8%A5%EA%A5%A2%A5%EB&l=jp]]
   * 日本語
-    [[m:URL:http:#/www.cozmixng.org/~kou/ruby/rexml/]]
-    [[m:URL:http:#/www.cozmixng.org/~kou/ruby/rexml/reference]]
+    [[url:http:#/www.cozmixng.org/~kou/ruby/rexml/]]
+    [[url:http:#/www.cozmixng.org/~kou/ruby/rexml/reference]]
+
+#@include(rexml/attlistdecl.rd)
+#@include(rexml/attribute.rd)
+#@include(rexml/cdata.rd)
+#@include(rexml/child.rd)
+#@include(rexml/comment.rd)
+#@include(rexml/doctype.rd)
+#@include(rexml/dtd/attlistdecl.rd)
+#@include(rexml/dtd/dtd.rd)
+#@include(rexml/dtd/elementdecl.rd)
+#@include(rexml/dtd/entitydecl.rd)
+#@include(rexml/dtd/notationdecl.rd)
+#@include(rexml/element.rd)
+#@include(rexml/encoding.rd)
 #@end
