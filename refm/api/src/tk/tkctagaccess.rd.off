@@ -1,0 +1,71 @@
+# $Id: tkctagaccess.rd,v 1.7 2000/02/15 18:07:59 arai Exp $
+# Module TkcTagAccess is defined in tkcanvas.rb
+=begin
+= TkcTagAccess
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkComm>))
+
+((<TkTreatTagFont>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkcTagAccess#addtag(tag)
+
+--- TkcTagAccess#bbox
+
+--- TkcTagAccess#bind(seq, cmd=Proc.new, args=nil)
+
+--- TkcTagAccess#bindinfo(seq=nil)
+
+--- TkcTagAccess#cget(option)
+
+--- TkcTagAccess#configure(key, value=None)
+
+--- TkcTagAccess#configinfo(key=nil)
+
+--- TkcTagAccess#coords(*args)
+
+--- TkcTagAccess#dchars(first, last=None)
+
+--- TkcTagAccess#dtag(tag_to_del=None)
+
+--- TkcTagAccess#find
+--- TkcTagAccess#list
+
+--- TkcTagAccess#focus
+
+--- TkcTagAccess#gettags
+
+--- TkcTagAccess#icursor(index)
+
+--- TkcTagAccess#index(index)
+
+--- TkcTagAccess#insert(beforethis, string)
+
+--- TkcTagAccess#lower(belowthis=None)
+
+--- TkcTagAccess#move(xamount, yamount)
+
+--- TkcTagAccess#raise(abovethis=None)
+
+--- TkcTagAccess#scale(xorigin, yorigin, xscale, yscale)
+
+--- TkcTagAccess#select_adjust(index)
+
+--- TkcTagAccess#select_from(index)
+
+--- TkcTagAccess#select_to(index)
+
+--- TkcTagAccess#itemtype
+
+--- TkcTagAccess#& (tag)
+
+--- TkcTagAccess#| (tag)
+
+--- TkcTagAccess#^ (tag)
+
+--- TkcTagAccess#-@
+
+=end

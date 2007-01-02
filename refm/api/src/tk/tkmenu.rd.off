@@ -1,0 +1,308 @@
+# $Id: tkmenu.rd,v 1.14 2001/03/18 12:39:31 arai Exp $
+# Class TkMenu is defined in tk.rb
+=begin
+= TkMenu
+
+¡¦â§¥Ò¡¦ê£¥·¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦â§¥Ò¡¦ê£¥·¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡¦¥Í¡¦¥Æ¡¦¥é¡¦ø§¥ë¡¦ö¦¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ì¡¢¥±¡£¡×
+
+((<TkMenubutton>))¡¢ä½¥¤¥»¥Í
+
+  require "tk"
+
+  v  = TkVariable.new
+  v1 = TkVariable.new
+  v2 = TkVariable.new
+  v3 = TkVariable.new
+
+  menu = TkMenu.new {
+    title "menu entries"
+    tearoff false
+    c = proc { p self.entryconfiginfo "end"}
+    add "command", {"label"=>"hoge", "command"=>c}
+    add "separator"
+    add "checkbutton", {"label"=>"hoge1", "command"=>c, "variable"=>v1, "onvalue"=>1}
+    add "checkbutton", {"label"=>"hoge2", "command"=>c, "variable"=>v2}
+    add "checkbutton", {"label"=>"hoge3", "command"=>c, "variable"=>v3}
+    add "separator"
+    add "radiobutton", {"label"=>"hoge1", "command"=>c, "variable"=>v}
+    add "radiobutton", {"label"=>"hoge2", "command"=>c, "variable"=>v}
+    add "radiobutton", {"label"=>"hoge3", "command"=>c, "variable"=>v}
+    20.times {|i| p menutype i}
+    activate 0
+  }
+
+  Tk.root.bind('Button-1') {|e| menu.post(e.x_root, e.y_root) }
+
+  Tk.mainloop
+
+¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥¿äÎ¥¿¡¢¥Û¥Æì¦¥Ì((*¡¼¥Õ¥Æ¥è*))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢ú½¥ê¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+*¥½þÅ¥Ø
+
+ ¥µ¥ê¥Èô¦¥­¡¢¥½¥½þÅ¥Ø¥Í¥è¥Õ¥ï¡¢¥Û¥±àÎ¥ï(¥»êÅ¥·¡¢¥Þ0¡¢¥Ì¡¢¥±)
+
+*"@¥½þÅ¥Ø"
+
+ ¥»ê¦¥©¡¢òÁþÅ¥Ø¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö¦¥¿¡¢¥¢¥¤¥·¡¢¥Ò¡¢¡Ö¡¢ö»àÎ¥ï
+
+*"end" ¡¢¡«¡¢¥½¡¢¥Þ "last"
+
+ ¥³¥Ì¥¯ê¦¥Û¥±àÎ¥ï
+
+*"active"
+
+ ¡¦¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢ö»àÎ¥ï
+
+*"none"
+
+ ¡¢¥Î¡¢¥Û¥±àÎ¥ï¡¢ä§¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è¡¢¥Ò¡¢¥­¡¢¥Ï¡¢¡¢
+
+*¡¦¥à¡¦¥½¡£¥·¡¦
+
+ ¡¦¥à¡¦¥½¡£¥·¡¦ü¦¥Ò¡¼øÅ¥é¡¢¥±¡¢ö»àÎ¥ï(¡¦¥à¡¦¥½¡£¥·¡¦ü¦¥Û¡¦¡«¡¦¥Æ¡¦¥Á¡¢¥Ò¡¢¥Þ¡¦¥­¡¦¥¡¡¦ö¦¥Í¥Ë¥¢¡¢¥¯¡¢ð¦¥ò¡¢¥Ò
+ (('"*","?","[...]"'))¡¢ú½¥Í¥Ø¥à¡¢¥±¡¢
+ ((-¡¦ò§¥ë¡¦ö¦¥Í¡¢¥Û¡¼øÅ¥é¡£¥¥-))
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkTreatMenuEntryFont>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkMenu#activate(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢ú§¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenu#add(type, keys=nil)
+    ((|type|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢úÆ¥Î¥¤¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×((|type|))¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢
+    ¡¢¥©¡¢¥Ì¡¢¥±¡£¡×
+
+      *"command"
+
+       ¡¦¥ï¡¦¥½¡¦
+      *"checkbutton"
+
+       ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦
+      *"radiobutton"
+
+       ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦
+      *"cascade"
+
+       ¡¦¥©¡¦¥±¡¦¥¢¡£¥·¡¦¥Î¡¦â§¥Ò¡¦ê£¥·
+      *"separator"
+
+       ¡¦¥µ¡¦¥à¡¦ø£¥·¡¦¥½(¥¤¡×¥¿
+
+    ((|keys|))¡¢¥Ò¡¢¥Þ¡£¡Ö¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢¥Ò¥Ä¥ß¡¢¥±¡¢ö§¥§¡¦¥é¡¦¥­¡¦î§ü¦ú§¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Ò¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±¡£¡×
+
+      *"activebackground"
+      *"activeforeground"
+      *"accelerator"
+
+       ¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢¥Û¥¢¥ò¥Æ¥·¡¢¥Ò¥Î¥¹¥·¥£¡¢¥±¡¢öÌ¥¯¥µú´¥Ä¥ß¥¢¥±¡¢ö§¥å¡£¥·¡¢úÎ¥¿¥·¥£¡¢¥±¡¢ö¦¥Û¡¢¥Ò¥µ¥Í¥Ø¥à¡¢¥±¡¢
+      *"background"
+      *"bitmap"
+      *"columnbreak"
+      *"command"
+      *"font"
+      *"foreground"
+      *"hidemargin"
+      *"image"
+      *"indicatoron"
+      *"label"
+
+       ¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢¥Í¡¢¥­¡¢¥Ë¥Î¥¹¥·¥£¡¢¥±¡¢öÌ¥¯¥µú´
+      *"menu"
+      *"offvalue"
+      *"onvalue"
+      *"selectcolor"
+      *"selectimage"
+      *"state"
+      *"underline"
+      *"value"
+      *"variable"
+
+--- TkMenu#index(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥±àÎ¥ï¡¢¥ã¥¤¥½¥Í¥è¥Õ¥ï¡¢¥©¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenu#invoke(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥±àÎ¥ï¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenu#insert(index, type, keys=nil)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Ò¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢úÆ¥Î¥¤¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×((|type|))¡£¡Ö((|keys|))¡¢¥Þ
+    ((<TkMenu#add>)) ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkMenu#delete(index, last=None)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥±àÎ¥ï¡¢ú¼þ¿¥­¡¢¡«¡¢¥±¡£¡×((|last|))¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î¦¥Þ¡£¡Ö
+    ((|index|))¡¢¥©¡¢(|last|))¡¢¡«¡¢¥Ì¡¢¥Û¥±àÎ¥ï¡¢ú¦¥±¡¢¥ë¡¢¥Ë¥³þ¿¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenu#popup(x, y, index=nil)
+
+--- TkMenu#post(x, y)
+    (({self}))¡¢ú²ú¥þ¦¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥³¥Ä¥Î¥¯¡¢¥Ò¥Ì¥í¥Æ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      menu = TkMenu.new {
+        add 'command', {'label'=>'foo1', 'command'=>proc { puts '1'}}
+        add 'command', {'label'=>'foo2', 'command'=>proc { puts '2'}}
+        add 'command', {'label'=>'foo3', 'command'=>proc { puts '3'}}
+      }
+      Tk.root.bind 'Button-3', proc {|e| menu.post e.x_root, e.y_root }
+      Tk.root.bind 'Button',   proc {|e| menu.unpost }
+      Tk.mainloop
+
+    ((-¥»ê·¥å¥Ûæ¦¥Ì¡¢¥Þ¡£¡Ö¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥·¥Ä¥±¥ä¥¹î¿¥Ò¥¨¥ê¡¢¥­¡¢¥Ë
+    ¥¿äÎ¥¿¡¢¥­¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ò¦¥Ï¡¢¡¢¥ÎþÌ¥ã¡¢ú¶¡«¡¢ü¦¥Ì¡¢¡¢¡¢))
+
+--- TkMenu#postcascade(index)
+    ¡¦¥©¡¦¥±¡¦¥¢¡£¥·¡¦¥Î¡¦â§¥Ò¡¦ê£¥·¡¢(|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Ò¥Ì¥í¥Æ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-¡¢¥ò¡¢¥¹¡¢¥©¡¢))
+
+--- TkMenu#postcommand(cmd=Proc.new)
+    (({self}))¡¢úÉ¥í¥Æ¥è¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò((|cmd|))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkMenu#post>))¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥©¡¢
+    ¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+--- TkMenu#tearoffcommand(cmd=Proc.new)
+
+--- TkMenu#menutype(index)
+    ((-dummy-))
+    *"menubar"
+    *"tearoff"
+    *"normal"
+
+--- TkMenu#unpost
+    (({self}))¡¢¥Û¥Ì¥í¥Æ¥è¡¢ú¾ð¦ô´¥·¡¢¥¤¡¢¡«¡¢¥±¡£¡×¥ÍüË¥¹¥·¥£¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkMenu#yposition(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥±àÎ¥ï¡¢¥Û¡¼¥Õ¥Æ¥è(¡¦¥ä¡¦¥Ã¡¦¥µ¡¦¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenu#entrycget(index, key)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢¥Û((|key|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¥Æ¥Ø¡¢
+    ¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenu#entryconfiure(index, key, val=None)
+--- TkMenu#entryconfiure(index, hash)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§(|key|))¡¢(|val|))¡¢¥Ò¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×
+
+    ¥Ä¡¼ú¥(|hash|))¡¢¥Ò¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î£¡Ö¡¢¥¹¡¢¥Û¡¦¥å¡£¥·¡¢¥ã¡¦¥§¡¦¥é¡¦¥­¡¦î§üÎ¥»¡£¡Ö¥Æ¥Ø
+    ¡¢¥ã¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢¥Í¡¢¥­¡¢¥Ë¡¼¥­¡¢þ¦ø¦¡«¡¢¥±¡£¡×
+
+--- TkMenu#entryconfiginfo(index, key=nil)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¡¦â§¥Ò¡¦ê£¥·¥±àÎ¥ï¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§(|key|))¡¢¥Û¥Æ¥Ø¡¢(|val|))¡¢¥Ò¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#activebackground>))
+
+((<TkObject#activeborderwidth>))
+
+((<TkObject#activeforeground>))
+
+((<TkObject#background>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#disabledforeground>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+### --- TkMenu#postcommand
+
+--- TkMenu#selectcolor
+
+--- TkMenu#tearoff
+
+--- TkMenu#tearoffcommand
+
+--- TkMenu#title
+
+### --- TkMenu#type
+
+=end
+# $Id$
+# Class TkMenuClone is defined in tk.rb
+=begin
+= TkMenuClone
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkMenu>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkMenuClone.new(parent, type=None)
+
+=end
+# $Id$
+# Class TkOptionMenubutton::OptionMenu is defined in tk.rb
+=begin
+= TkOptionMenubutton::OptionMenu
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkMenu>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkOptionMenubutton::OptionMenu.new(parent)
+
+=end
+# $Id$
+# Class TkSysMenu_Apple is defined in tk.rb
+=begin
+= TkSysMenu_Apple
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkMenu>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkSystemMenu>))
+
+=end
+# $Id$
+# Class TkSysMenu_Help is defined in tk.rb
+=begin
+= TkSysMenu_Help
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkMenu>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkSystemMenu>))
+
+=end
+# $Id$
+# Class TkSysMenu_System is defined in tk.rb
+=begin
+= TkSysMenu_System
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkMenu>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkSystemMenu>))
+
+=end

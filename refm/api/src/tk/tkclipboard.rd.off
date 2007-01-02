@@ -1,0 +1,24 @@
+# $Id: tkclipboard.rd,v 1.9 2000/02/15 18:07:59 arai Exp $
+# Module TkClipboard is defined in tk.rb
+=begin
+= TkClipboard
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö¶¥ê¥½
+
+--- TkClipboard.clear
+
+--- TkClipboard.get
+
+--- TkClipboard.set(data)
+
+--- TkClipboard.append(data)
+
+=end

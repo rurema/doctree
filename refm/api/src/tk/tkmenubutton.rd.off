@@ -1,0 +1,161 @@
+# $Id: tkmenubutton.rd,v 1.13 2001/03/18 12:39:31 arai Exp $
+# Class TkMenubutton is defined in tk.rb
+=begin
+= TkMenubutton
+
+¡¦â§¥Ò¡¦ê£¥·¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦¥ï¡¦¥½¡¦ü¦ú´¡£¡¢¥±¡¢¥Í¡¦â§¥Ò¡¦ê£¥·
+((<TkMenu>)) ¡¢¥ã¥¯¥¹¡¢ø¦¡«¡¢¥±¡£¡×
+
+  require "tk"
+
+  TkFrame.new {
+    relief "raised"
+    borderwidth 3
+
+    TkMenubutton.new(self) {
+      text "File"
+      menu TkMenu.new(self) {
+        add "command", {"label"=>"Open"}
+        add "command", {"label"=>"Exit",
+                        "command"=>proc{exit},
+                        "accelerator"=>"Ctrl-Q"
+                       }
+      }
+    }.pack "side"=>"left"
+
+  }.pack "fill"=>"x"
+
+  TkFrame.new {
+    width "5c"
+    height "5c"
+  }.pack
+
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkLabel>))
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#activebackground>))
+
+((<TkObject#activeforeground>))
+
+((<TkObject#anchor>))
+
+((<TkObject#background>))
+
+((<TkObject#bitmap>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#disabledforeground>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#image>))
+
+((<TkObject#justify>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+((<TkObject#text>))
+
+((<TkObject#textvariable>))
+
+((<TkObject#underline>))
+
+((<TkObject#wraplength>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkMenubutton#direction
+    ¡¦â§¥Ò¡¦ê£¥·¡¦¥ï¡¦¥½¡¦ü¦¥ã¥¤¡£¡¢¥ª¡¢ø¦¥½¡¢¥Í¡¢¥å¡¢¥Ò¡¦â§¥Ò¡¦ê£¥·¡¢úÉ¥í¥Æ¥è¡¢¥±¡¢öÀø¿ô¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥µ¥ê¥È
+    ¡¢¥Ì¡¢¥å¡¢ö¦¥Û¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+      *"above"
+      *"below"
+      *"left"
+      *"right"
+      *"flush"
+       ((-flush¡¢¥Þbelow¡¢¥Í¡¢¥Î¡¢¥ò¡¼æ¦¥ò¡¢¥Û?-))
+
+--- TkMenubutton#height
+
+--- TkMenubutton#indicatoron
+    (({true}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡£¡Ö¡¦â§¥Ò¡¦ê£¥·¡¦¥ï¡¦¥½¡¦(- ¡¢¥Î¡¢¥Á¡¢ò¦¥©¡¢¥Í¥¯¥¿¡¢¥£¡¢¥ß
+    ¡¦¥¦¡¦ü§¥ï¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±?-))¡¢¥Ì¡¢¡Ö¡¢ö¦¥¦¡¢¥Í¡¢ú¾¥£¡¢¥±¡¦¡¢¡¦ü§¥Ì¡¦¡×¡¦¥¢¡£¥·¡¦¥½¡¢úË¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±
+
+--- TkMenubutton#menu
+    ((<TkMenu>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢ú¶¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkMenubutton#state
+    ((-dummy-))
+    *"normal"
+    *"active"
+    *"disabled"
+
+--- TkMenubutton#width
+
+=end
+# $Id$
+# Class TkOptionMenubutton is defined in tk.rb
+=begin
+= TkOptionMenubutton
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkMenubutton>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkOptionMenubutton.new(parent=nil, var=TkVariable.new, firstval=nil, *vals)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkOptionMenubutton#value
+
+--- TkOptionMenubutton#activate(index)
+
+--- TkOptionMenubutton#add(value)
+
+--- TkOptionMenubutton#index(index)
+
+--- TkOptionMenubutton#invoke(index)
+
+--- TkOptionMenubutton#insert(index, value)
+
+--- TkOptionMenubutton#delete(index, last=None)
+
+--- TkOptionMenubutton#yposition(index)
+
+--- TkOptionMenubutton#menucget(index, key)
+
+--- TkOptionMenubutton#menuconfigure(index, key, val=None)
+
+--- TkOptionMenubutton#menuconfiginfo(index, key=nil)
+
+--- TkOptionMenubutton#entrycget(index, key)
+
+--- TkOptionMenubutton#entryconfigure(index, key, val=None)
+
+--- TkOptionMenubutton#entryconfiginfo(index, key=nil)
+
+=end

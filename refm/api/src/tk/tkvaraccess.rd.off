@@ -1,0 +1,27 @@
+# $Id: tkvaraccess.rd,v 1.8 2001/03/18 12:39:31 arai Exp $
+# Class TkVarAccess is defined in tk.rb
+=begin
+= TkVarAccess
+
+Tcl¡¦ò§¡¢¡¦¥è¡¦ò§ô¦¥Ï¡¢¥Î¡¢¥Ì¥¨ûè¥Ò¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢öÌ¥à¥½þ¦¥Ò¡¦¡Ö¡¦¥Ã¡¦¥µ¡¦¥±¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì
+¡¢¥±¡£¡×((-Tcl¡¢¥Û¡¦¥±¡¦¥¦¡£¥·¡¦¥é¡¢ú²¥æ¥·¥¢¡¢¥­¡¢¥Ë¥Ø¥à¡¢¥­¡¢¥Ï¡¢¡¢¡¢¥Í¡¢¥ò¡¢¡«¡¢¥Ã¡¦¡Ö¡¦¥Ã¡¦¥µ¡¦¥±¡¢¥Ì¡¢¥å¡¢¥Ï¡¢¡¢¡¢¥Í¥µ¥é¡¢
+¡¢ø¦ö£¡×¡¢¡«¡¢¥½¡£¡Ö¥¯¥¹¥»cl¡¢¥Û¥Ì¥í¥Ûü¦¥Ò¡¢¥Þ¡¦¡Ö¡¦¥Ã¡¦¥µ¡¦¥±¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Þ¡¢¥Ì¡¢¥å¡¢¥Ï¡¢¡¢-))
+
+  require 'tk'
+  p TkCore::INTERP._eval("set tclvar 1")  # => 1
+  var = TkVarAccess.new("tclvar", 2)
+  p TkCore::INTERP._eval("set tclvar")    # => 2
+  var.value = 3
+  p TkCore::INTERP._eval("set tclvar")    # => 3
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkVariable>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkVarAccess.new(varname, val=nil)
+    Tcl¥Ï¥à¥½(|varname|))¡¢¥Í¥¿¥¯¥¿¥ç¡¢¥­¡¢¥½¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢ú¶¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¡«¡¢¥±¡£¡×
+    ((|val|))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥Æ¥Ø¡¢¥Û¥¿¡¬¥Èô¦ä»¥ä¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+=end

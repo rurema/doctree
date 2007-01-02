@@ -1,0 +1,41 @@
+# $Id: tkoption.rd,v 1.9 2000/01/22 08:52:56 arai Exp $
+# Module TkOption is defined in tk.rb
+=begin
+= TkOption
+
+((<¡¦¥§¡¦¥é¡¦¥­¡¦î§ü§¥Ì¡£¥·¡¦¥½¡¦¥ë¡£¥·¡¦¥±>))¡¢ú§¡Ö¡¦¥Ã¡¦¥µ¡¦¥±¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+  TkLabel.new(nil, "text"=>"label1").pack
+  TkOption.add("*Label.background", "white")
+  TkLabel.new(nil, "text"=>"label2").pack
+  TkOption.clear
+  TkLabel.new(nil, "text"=>"label3").pack
+  Tk.mainloop
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö¶¥ê¥½
+
+--- TkOption.add(pat, value, pri=None)
+    ¥½¥­¡¢¥­¡¢¡¢¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦ú§¥Ì¡£¥·¡¦¥½¡¦¥ë¡£¥·¡¦¥±¡¢¥Ò¥È¥Î¥¤¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¦¥Ì¡£¥·¡¦¥½¡¦¥ë¡£¥·¡¦¥±¡¢¥Û¥Ï¥à¥±¥±¥­ö´¥Õ¡¢¥Þ¡£¡Ö¡¢¥¹¡¢¥Û¥Á¡¼¡¢¥Ò¥³üÂ¥ç¡¢¥­¡¢¥½¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ò¡¢¥Þ¥¢¥Ë¥«¥Á¡¢¥­¡¢¡«¡¢¥µ¡¢ü£¡×
+    ((|pri|))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¡£¡Ö¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¥Ø¡¦¥¿ðÇ¥ë¡¢¡¢¥©¡¢00¡¢¡«¡¢¥Ì¡¢¥Û¥½þÅ¥Ø¡¢¥Ò¥Ï¥à
+    ¥±¥±¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+
+--- TkOption.clear
+    ¡¦¥§¡¦¥é¡¦¥­¡¦î§ü§¥Ì¡£¥·¡¦¥½¡¦¥ë¡£¥·¡¦¥±¡¢¥Ò¥Ä¥ß¡¢¥­¡¢¥Ë¥±¥ä¡¢¥Æ¡¢¥½¥Ï¥à¥±¥±¡¢ú§¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ò¥Õâ¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkOption.get(win, name, klass)
+    ¡¦¥§¡¦¥é¡¦¥­¡¦î§ü§¥Ì¡£¥·¡¦¥½¡¦¥ë¡£¥·¡¦¥±¡¢¥©¡¢òÅ¥Ø¡¢ú¾ðÈ¥¿¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkOption.readfile(file, pri=None)
+    (({.Xdefaults})) ¡¢¥Ï¡¢¥Î¡¢¥Û¡¦ô§¥¹¡£¥·¡¦¥±¡¦¥æ¡¦¡£¡¦¡¢¡¦ö¦úÈ¥Î¡¢¡¬¥±¡¬¡¢¡«¡¢¥±¡£¡×
+
+=end

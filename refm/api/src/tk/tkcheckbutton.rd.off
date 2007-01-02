@@ -1,0 +1,108 @@
+# $Id: tkcheckbutton.rd,v 1.14 2001/03/18 12:37:16 arai Exp $
+# Class TkCheckButton is defined in tk.rb
+=begin
+= TkCheckButton
+
+¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+
+¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦¥ÛON/OFF¥»¥è¡¢¥Ò¡¢ð¦({variable}))¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Ì¥¨¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢ò¦
+¡¢¥½¥Ï¥à¥½þ¦¥Ò¥Æ¥Ø¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥¿¡¬¥Èô¦¥ª¡¢ø¦öÅ¥Ø¡¢¥Þ¡£¡Ö¡¦¥§¡¦¥é¡¦¥­¡¦î§
+((<TkCheckButton#onvalue>))¡£¡Ö((<TkCheckButton#offvalue>)) ¡¢¥Ò¡¢ð¦ôÌ¥à¥±¥±¡¢¥Ì
+¡¢¥å¡¢¡«¡¢¥±¡£¡×¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥ÞON¥»¥è¡¢¥Ì¡¢¥Þ1¡£¡ÖOFF¥»¥è¡¢¥Ì¡¢¥Þ0¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+
+  v1 = TkVariable.new
+  v2 = TkVariable.new
+  v3 = TkVariable.new
+
+  c = proc {print v1.value,v2.value,v3.value,"\n"}
+
+  TkCheckButton.new {text "a"; variable v1; command c; pack}
+  TkCheckButton.new {text "b"; variable v2; command c; pack}
+  TkCheckButton.new {text "c"; variable v3; command c; pack}
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkRadioButton>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkCheckButton#toggle
+    ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦¥ÛON/OFF¥»¥è¡¢ú§¥Í¡¦¡¼¡¦ö¦¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#activebackground>))
+
+((<TkObject#activeforeground>))
+
+((<TkObject#anchor>))
+
+((<TkObject#background>))
+
+((<TkObject#bitmap>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#disabledforeground>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#image>))
+
+((<TkObject#justify>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+((<TkObject#text>))
+
+### ((<TkObject#textvariable>))
+
+((<TkObject#underline>))
+
+((<TkObject#wraplength>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+###--- TkCheckButton#command
+
+--- TkCheckButton#height
+    ((<TkButton#height>))¥µ¥¤¥»¥Í
+
+--- TkCheckButton#indicatoron
+
+--- TkCheckButton#offvalue
+    ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦¥Û¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢ú¦¥Þ¡¢¥³¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Æ¥Ø¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCheckButton#onvalue
+    ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Æ¥Ø¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCheckButton#selectcolor
+
+--- TkCheckButton#selectimage
+
+--- TkCheckButton#state
+
+### --- TkCheckButton#variable
+
+--- TkCheckButton#width
+    ((<TkButton#width>))¥µ¥¤¥»¥Í
+=end

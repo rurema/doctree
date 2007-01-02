@@ -1,0 +1,41 @@
+# $Id: tkcitem.rd,v 1.8 2000/03/04 22:13:03 arai Exp $
+# Class TkcItem is defined in tkcanvas.rb
+=begin
+= TkcItem
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkObject>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkcTagAccess>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkcItem.type2class(type)
+    ((|type|))¡¢¥©¡¢òÄ¥ß¥¢¥±¡¢ö§¥Ã¡¦ò§¥±¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|type|)) ¡¢¥Þ¡£¡Ö
+    *'arc',
+    *'bitmap',
+    *'image',
+    *'line',
+    *'oval',
+    *'polygon',
+    *'rectangle',
+    *'text',
+    *'window'
+    ¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkcItem.id2obj(canvas, id)
+
+--- TkcItem.new(parent, *args)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkcItem#id
+
+--- TkcItem#delete
+
+=end

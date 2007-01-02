@@ -1,0 +1,22 @@
+# $Id: tktreatcitemfont.rd,v 1.7 2000/02/15 18:08:00 arai Exp $
+# Module TkTreatCItemFont is defined in tkcanvas.rb
+=begin
+= TkTreatCItemFont
+
+== ・皈ス・テ・ノ:
+
+--- TkTreatCItemFont#tagfont_configinfo(tagOrId)
+
+--- TkTreatCItemFont#tagfont_configure(tagOrId, slot)
+
+--- TkTreatCItemFont#latintagfont_configure(tagOrId, ltn, keys=nil)
+
+--- TkTreatCItemFont#kanjitagfont_configure(tagOrId, knj, keys=nil)
+
+--- TkTreatCItemFont#tagfont_copy(tagOrId, window, wintag=nil)
+
+--- TkTreatCItemFont#latintagfont_copy(tagOrId, window, wintag=nil)
+
+--- TkTreatCItemFont#kanjitagfont_copy(tagOrId, window, wintag=nil)
+
+=end

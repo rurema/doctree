@@ -1,0 +1,13 @@
+# $Id: tkutil.rd,v 1.8 2000/01/22 08:52:56 arai Exp $
+# Module TkUtil is defined in tkutil.so
+=begin
+= TkUtil
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkUtil.eval_cmd(cmd, *rest)
+    ((|rest|))¡¢ú²ú¥þ¦¥ÒProc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|cmd|))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥Ï¡¢ü¦¥Ì¡£¡Ö¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥ã¥Î¥ã¥Ø¥é¡¢¥Ï¡¢¥Û¡£¥¥-))
+
+=end

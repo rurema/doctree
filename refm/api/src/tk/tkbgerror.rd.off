@@ -1,0 +1,39 @@
+# $Id: tkbgerror.rd,v 1.8 2000/01/22 08:52:55 arai Exp $
+# Module TkBgError is defined in tkbgerror.rb
+=begin
+= TkBgError
+
+¡¦¥£¡¦ò£¥·¥¹¥ß¥Û¥Þ¡¢¥Û¡¢¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+
+  TkButton.new {
+    command { TkBgError.show("error!") }
+    pack
+  }
+  Tk.mainloop
+
+((-Tcl/Tk¡¢¥Ì¡¢¥Þbgerror¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦æ¦ú¼¥Ë¥Èô·¥Á¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¡£¡Ö¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Ì
+¡¦¥£¡¦ò£¥·¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥¹ðÏú§ì£¥·¡¦¥«¡¢¥Ò¥Ì¡¢¡¢¥µ¡¢ö¦¥¦¡¢¥Í¡¢¥ã¥¹¥ß¥Øð¦ö£¡×Ruby/Tk¡¢¥Ì¡¢¥Þ¡£¥¥-))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkBgError.bgerror(message)
+--- TkBgError.tkerror(message)
+--- TkBgError.show(message)
+    ¡¦¥£¡¦ò£¥·¡¢úÌü»ö¦¥±¡¢ö§¥¿¡¦¡¢¡¦¡Ö¡¦ú§¡¼¡¢úË¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥¿¡¦¡¢¡¦¡Ö¡¦ú§¡¼¡¢¥Ò¡¢¥Þ¡£¡Ö3¡¢¥È¡¢¥Û¡¦¥ï¡¦¥½¡¦ü¦¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±¡£¡×
+
+     *¡£¥èOK¡£¥é
+      ¡¦¥£¡¦ò£¥·¡¦¥¿¡¦¡¢¡¦¡Ö¡¦ú§¡¼¡¢¥Û¥Î¥¹¥·¥£¡¢ú¿¥§¥Û¥µ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+     *¡£¥èSkip Messages¡£¥é
+      ¥·¡£¡¢¥Û¡¦¥£¡¦ò£¥·¡¢¡¢¡Ö¡¢ø¦¥ß)¥Î¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±((-??¥Ò¥ï¥Ê?-))
+     *¡£¥èStack Trace¡£¥é
+      ¡¦¥£¡¦ò£¥·¡¢¥ã¥ª¥Ã¡¢¥¦¡¢¥Æ¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¥±¡¦¥½¡¦¥Æ¡¦¥Ã¡¦¥Í¡¦ø£¥·¡¦¥±¡¢úË¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+=end

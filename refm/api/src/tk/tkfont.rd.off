@@ -1,0 +1,441 @@
+# $Id: tkfont.rd,v 1.9 2000/02/15 18:07:59 arai Exp $
+# Class TkFont is defined in tkfont.rb
+=begin
+= TkFont
+
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkCore>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkFont.new(ltn=DEFAULT_LATIN_FONT_NAME, knj=nil, keys=nil)
+
+        require 'tk'
+
+        %w(helvetica courier lucida).each {|font|
+           fn = TkFont.new("-*-#{font}-*-r-*-24-*")
+           TkLabel.new(nil, "text" => font,
+                            "font" => fn).pack
+        }
+        Tk.mainloop
+
+--- TkFont.families(window=nil)
+    ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥æ¡¦¡£¡¦¡¬¡¦ô¦¥Û¡¼øÏúÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-((|window|))¡¢¥Û¡¼¥æ¥Õ¡×¡¢¥ã¡¢ð¦¥Ã¡¢þ¦¥©¡¢ò¦))
+
+        require 'tk'
+        puts *TkFont.families
+        => helvetica
+           courier
+           lucida
+            :
+            :
+
+--- TkFont.names
+    ¥¯¥¹¥³¡¬¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö§¥æ¡¦¥¥¡¦ü§¥Í¥Õ¥»¡¢¥Û¡¼øÏúÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+        require 'tk'
+        TkFont.new
+        puts *TkFont.names
+
+        => @font0000c
+           @font0000k
+           @font0000l
+
+--- TkFont.create_copy(font)
+
+--- TkFont.get_obj(name)
+
+--- TkFont.init_widget_font(path, *args)
+
+--- TkFont.used_on(path=nil)
+
+--- TkFont.failsafe(font)
+
+=end
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkFont#_get_font_info_from_hash(font)
+=end
+###--- TkFont#create_latinfont_tk4x(font)
+###
+###--- TkFont#create_kanjifont_tk4x(font)
+###
+###--- TkFont#create_compoundfont_tk4x(ltn, knj, keys)
+###
+###--- TkFont#create_latinfont_tk8x(font)
+###
+###--- TkFont#create_kanjifont_tk80(font)
+###
+###--- TkFont#create_kanjifont_tk8x(font)
+###
+###--- TkFont#create_compoundfont_tk8x(ltn, knj, keys)
+###
+###--- TkFont#actual_core_tk4x(font, window=nil, option=nil)
+###
+###--- TkFont#actual_core_tk8x(font, window=nil, option=nil)
+###
+###--- TkFont#configure_core_tk4x(font, slot, value=None)
+###
+###--- TkFont#configinfo_core_tk4x(font, option=nil)
+###
+###--- TkFont#configure_core_tk8x(font, slot, value=None)
+###
+###--- TkFont#configinfo_core_tk8x(font, option=nil)
+###
+###--- TkFont#delete_core_tk4x
+###
+###--- TkFont#delete_core_tk8x
+###
+###--- TkFont#latin_replace_core_tk4x(ltn)
+###
+###--- TkFont#kanji_replace_core_tk4x(knj)
+###
+###--- TkFont#latin_replace_core_tk8x(ltn)
+###
+###--- TkFont#kanji_replace_core_tk8x(knj)
+###
+###--- TkFont#measure_core_tk4x(window, text)
+###
+###--- TkFont#measure_core_tk8x(window, text)
+###
+###--- TkFont#metrics_core_tk4x(font, window, option=nil)
+###
+###--- TkFont#metrics_core_tk8x(font, window, option=nil)
+=begin
+
+--- TkFont#create_asciifont(font)
+--- TkFont#create_latinfont(font)
+
+--- TkFont#create_kanjifont(font)
+
+--- TkFont#create_compoundfont(ltn, knj, keys)
+
+--- TkFont#actual_core(font, window=nil, option=nil)
+
+    ¥µ¥ê¥Èô¦¥­¡¢¥½ ((|font|)) ¡¢¥Û¥·¥Ä¥³¥ó¡¢¥Ò¥µ¥Í¥Ø¥à¡¢¥ª¡¢ø¦ö§¥§¡¦¥é¡¦¥­¡¦î§((<¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§))
+    ¥µ¥¤¥»¥Í) ¡¢úÉ¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((|option|)) ¡¢¥ã¥µ¥ê¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß
+    ¡¢¥¹¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¥Æ¥Ø¡¢¥¿¡¢¥¢¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((|window|)) ¡¢¥ã¥µ¥ê¥Èô¦¥ª
+    ¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß¡£¡Ö¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦ö§¥Ì¡¦¡×¡¦¥±¡¦¥é¡¦ø§¡¢¡¢¥Ì¥µ¥Í¡¢
+    ¡¢ø¦ö§¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Û¥Ä¡¼¥¿¥å¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    tk4.x ¡¢¥Ì¡¢¥Þ¡£¡Ö¥»þ¦¥Ò¥Ì¥í¥Û
+
+        [['family',[]], ['size',[]], ['weight',[]], ['slant',[]], 
+         ['underline',[]], ['overstrike',[]], ['charset',[]], ['pointadjust',[]]]
+
+    ¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkFont#configinfo_core(font, option=nil)
+
+--- TkFont#configure_core(font, slot, value=None)
+
+--- TkFont#delete_core
+
+--- TkFont#latin_replace_core(ltn)
+
+--- TkFont#kanji_replace_core(knj)
+
+--- TkFont#measure_core(window, text)
+
+--- TkFont#metrics_core(font, window, option=nil)
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkFont#call_font_configure(path, *args)
+
+--- TkFont#used
+
+--- TkFont#id
+
+--- TkFont#font
+
+--- TkFont#ascii_font
+--- TkFont#latin_font
+
+--- TkFont#kanji_font
+
+--- TkFont#actual(option=nil)
+
+    ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Û¥Ä¡¼¥¿¥å(((<¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§))¥µ¥¤¥»¥Í)¡¢úÉ¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((|option|)) ¡¢¥ã¥µ¥ê¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß¡¢¥¹¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¥Æ¥Ø¡¢¥¿¡¢¥¢¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkFont#actual_displayof(window, option=nil)
+
+    (({actual()})) ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡¢¥ã¡£¡Ö¥µ¥ê¥Èô¦¥­¡¢¥½ ((|window|)) ¡¦¥ò¡¦¡×
+    ¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦ö§¥Ì¡¦¡×¡¦¥±¡¦¥é¡¦ø§¡¢¡¢¥Ì¥µ¥Í¡¢þ¦ø¦ö§¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦
+    ¡¦ü¦¥Û¥Æ¥Ø¡¢¥¿¡¢¥¢¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkFont#ascii_actual(option=nil)
+--- TkFont#latin_actual(option=nil)
+
+--- TkFont#ascii_actual_displayof(window, option=nil)
+--- TkFont#latin_actual_displayof(window, option=nil)
+
+--- TkFont#kanji_actual(option=nil)
+
+--- TkFont#kanji_actual_displayof(window, option=nil)
+
+--- TkFont#[](slot)
+
+--- TkFont#[]=(slot, val)
+
+--- TkFont#configure(slot, value=None)
+
+--- TkFont#configinfo(slot=nil)
+
+--- TkFont#delete
+
+--- TkFont#ascii_configure(slot, value=None)
+--- TkFont#latin_configure(slot, value=None)
+
+--- TkFont#ascii_configinfo(slot=nil)
+--- TkFont#latin_configinfo(slot=nil)
+
+--- TkFont#kanji_configure(slot, value=None)
+
+--- TkFont#kanji_configinfo(slot=nil)
+
+--- TkFont#replace(ltn, knj)
+
+--- TkFont#ascii_replace(ltn)
+--- TkFont#latin_replace(ltn)
+
+--- TkFont#kanji_replace(knj)
+
+--- TkFont#measure(text)
+
+    ¡¦¥æ¡¦¥¥¡¦ü§¥Í (({self})) ¡¢¥Ì ((|text|)) ¡¢úË¥¹¥·¥£¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Î¥¹¥·¥£¥Î
+    ¡¢ú§¥ä¡¦¥Ã¡¦¥µ¡¦öÁþ¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((|text|)) ¥Æì¦¥Û¡¦¥½¡¦¥è¡¢è´¥ä¡¢¥Þ¥Ë¥Æ¥Ï¥Õ¡¢¥Ò¡¢¥Þ
+    ¥¤ú¾â¦¥ª¡¢ø¦¡«¡¢¥µ¡¢(-¡¦¥½¡¦¥è¡¢è´¥ä¡¢¥Þ¡¦¥±¡¦¥ì¡£¥·¡¦¥±¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Í¡¢¥­¡¢¥Ë¡¼¥­¡¢¥ò¡¢þ¦¥¢¡¢¥Ì¡¢¥Þ
+    ¡¢¥Ï¡¢¡¢¡¢ò¦¥­¡¢¡¢¡£¡×¥Ë¥Í¥·¥©¡¢¥Û¥Îú½¥Æ¡¢¥Ë¡¢¡¢¡¢ö¦¥Í¥µ¥é¡¢¥£¡¢¥ß¥Û¥Î¡¢¡¢¡£¥¥-))
+
+        require 'tk'
+        fn = TkFont.new
+        p fn.measure("foobar")
+        p fn.measure("foobar ")
+        p fn.measure("foobar\t")
+        p fn.measure("foobar\n")
+
+        => 35
+           39
+           42
+           46
+
+--- TkFont#measure_displayof(window, text)
+
+--- TkFont#metrics(option=nil)
+
+    ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦â§¥Í¡¦ô§¥Æ¡¦¥Ã¥»öÌü¦úÉ¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+        require 'tk'
+        p TkFont.new.metrics
+        => [["ascent", 11], ["descent", 3], ["linespace", 14], ["fixed", 0]]
+
+    ((|option|)) ¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡¢¥¹¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥Û¥Æ¥Ø¡¢¥¿¡¢¥¢¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+        require 'tk'
+        p TkFont.new.metrics("ascent")
+        => 11
+
+    : ascent
+      ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Û¥¨ö¿à²¥Õ¥Æ¥è¡¢¥©¡¢ò¦¥Û¥»êÄ¥ò¡¢¥Û¥±ä¦¥ª¡¢ú§¥ä¡¦¥Ã¡¦¥µ¡¦öÅ¥Ø¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    : descent
+      ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Û¥¨ö¿à²¥Õ¥Æ¥è¡¢¥©¡¢ò¦¥Û¥¤¥·¥Ä¥ò¡¢¥Û¥±ä¦¥ª¡¢ú§¥ä¡¦¥Ã¡¦¥µ¡¦öÅ¥Ø¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    : linespace
+      ¥±¥ä¥¨¥è(¥¨ö¿à²¥Õ¥Æ¥è¡¢¥©¡¢ò¶ö¿à²¥Õ¥Æ¥è¡¢¡«¡¢¥Ì)¡¢¥Û¥Îú§¥ä¡¦¥Ã¡¦¥µ¡¦öÅ¥Ø¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«
+      ¡¢¥±¡£¡×¥ÎâÆ¥Õ ascent + descent ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥©¡¢ð¦ôÄî¦¥å¡¢¥Ï¥Æ¥Ø¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+    : fixed
+      ¥¯¥Ì¥ÈôË¥æ¡¦¥¥¡¦ü§¥Í(¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¥Ï¥¯¥µùè¥ã¥Ê¥Ï¡¦¥æ¡¦¥¥¡¦ü§¥Í)¡¢¥Ï¡¢1¡£¡Ö
+      ¡¦¥é¡¦ú§¥ó¡£¥·¡¦¥­¡¦î§¥Ï¡¦ö§¥æ¡¦¥¥¡¦ü§¥Í(¥Ï¥¯¥µùè¥Ò¡¢ð¦¥Æ¡¢¥Ë¥Î¥ã¡¼¥í¡¢¥Ï¡¢¡¢¥Ï¡¢0 ¡¢
+      ¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkFont#metrics_displayof(window, option=nil)
+
+--- TkFont#ascii_metrics(option=nil)
+--- TkFont#latin_metrics(option=nil)
+
+--- TkFont#latin_metrics_displayof(window, option=nil)
+
+--- TkFont#kanji_metrics(option=nil)
+
+--- TkFont#kanji_metrics_displayof(window, option=nil)
+
+--- TkFont#reset_pointadjust
+== ¥ÈôÁ
+
+--- TkFont::Tk_FontID
+
+--- TkFont::Tk_FontNameTBL
+
+--- TkFont::Tk_FontUseTBL
+
+--- TkFont::DEFAULT_LATIN_FONT_NAME
+
+--- TkFont::DEFAULT_KANJI_FONT_NAME
+
+== ¡¦¥æ¡¦¥¥¡¦ü§¥Í¥ª¥å¥¹¥á
+
+¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§((<TkObject#font>)) ¡¢¥Ï¡¢¥Î¡¢¥Ì¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢ú·¥å¥¹¥á¡¢¥±¡¢ö¦¥Í¡¢¥å
+¡¼¥Ï¥¤¥·¡¢¥Ò¡¢¡Ö¡¢¥¤¡¢ö¹¥Á¥·¡¼¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+
+: TkFont ¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í
+
+  TkFont ¡¦¥Ã¡¦ò§¥±¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±
+
+  ¥Û
+
+        require 'tk'
+        obj = TkFont.new("family"=>"courier", "size"=>16)
+        TkLabel.new(nil, "text" => "foo", "font" => obj).pack
+        Tk.mainloop
+
+: ¡¦¥æ¡¦¥¥¡¦ü§¥Í¥Õ¥»
+
+  Tcl/Tk ¡¢¥Ì¥Èô·¥Á¡¢¥ª¡¢ø¦¥½¡¦¥æ¡¦¥¥¡¦ü§¥Í¥Õ¥»¡£¡×
+  ((-TkFont ¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Þ¡¦¥æ¡¦¥¥¡¦ü§¥Í¥Õ¥»¡¢¥Í¡¢¥­¡¢¥Ë /^@font\d+[clk]$/ 
+  ¡¢¥Û¥­¥Á¥·¡¼¡¢¥Û¥Ï¥¯¥µú´ü¦ú½¥Í¥Ø¥à¡¢¥­¡¢¥Ë¡¢¡¢¡¢))
+
+: ¡¦¥­¡¦¥±¡¦¥Ë¡¦à§¥æ¡¦¥¥¡¦ü§¥Í
+
+  ¡¦¥é¡¦ò§¥Æ¡¦¥Í¡¦¥æ¡¦¥¥¡£¥·¡¦àº¥Ì¥Ø¥å¡¢¥Û¡¦¥æ¡¦¥¥¡¦ü§¥Í¥Õ¥»¡£¡×((<X Window System>)) ¡¢¥Ì¡¢¥Þ
+  ((<XLFD>)) ¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+: ¥Ì¥í¥Û
+
+  ¡¼¥Ï¥¤¥·¡¢¥Û¥­¥Á¥·¡¼¡¢¥Û¥Ì¥í¥Û
+    [family, size, style1, ... styleN]
+  ¡¢¡Ö¡¢ö¦¡¢¡¢¥Þ¥Ï¥¯¥µú´
+    "family size style1 ... styleN"
+  size ¡¢style ¡¢¥Þ¥»¥Ï¥Û¥ã¥¤¥È¡£¡×
+
+  style ¡¢¥Ò¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Û¥Ï¥¯¥µú´ü¦¥ã¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢¡«¡¢¥±(¡¢¥¹¡¢ø¦¥»¡¢ø¦¥Û
+  ¡¼¥æ¥Õ¡×¡¢¥Þ((<¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§))¡¢ú½¥¤¥»¥Í¡£¡×
+
+    normal bold roman italic underline overstrike
+
+  ¥Û
+      require 'tk'
+      TkLabel.new(nil, "text" => "foo",
+                  "font" => ["courier", 16, "italic"]).pack
+      TkLabel.new(nil, "text" => "foo",
+                  "font" => "courier 16 italic").pack
+      Tk.mainloop
+
+: XLFD
+
+  ¡¼¥Ï¥¤¥·¡¢¥Û¥­¥Á¥·¡¼(((<X Window System>)) ¡¢¥Û¡¦¥æ¡¦¥¥¡¦ü§¥Í¥ª¥å¥¹¥á¥­¥Á¥·¡¼)¡¢¥Û¥Ï¥¯¥µú´
+
+    -foundry-family-weight-slant-set_width-style-pixels-
+       points-x_res-y_res-spacing-width-registry-encoding
+
+
+  ¥Û
+      require 'tk'
+      TkLabel.new(nil, "text" => "foo",
+                  "font" => "-*-fixed-*-24-*").pack
+      Tk.mainloop
+
+: ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¹¥Á¥·¡¼¡¢¥Û¥Ì¥í¥Û
+
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¡¦¥å¡£¥·(¡¦¥å¡£¥·¡¢¥Þ "-" ¡¢¥Ì¥µ¥Þ¡¢â¦öË¥ã¥Ø¥é¡¢¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±)
+  ¡¢¥Í¥Æ¥Ø¡¢¥Û¥Á¥Í¡¢úÌ¥Ä¡¢¥ë¡¢¥½¥Ì¥í¥Û
+
+        ["-family", family, "-size", size, "-weight", weight, 
+         "-slant", slant,   "-underline", bool, "-overstrike", bool]
+
+  ¡¢¡Ö¡¢ö¦¡¢¡¢¥Þ¥Ï¥¯¥µú´
+
+        "-family family, -size size -weight weight
+        -slant slant -underline bool -overstrike bool"
+
+  ¥¦¥Ë¡¦¥å¡£¥·¡¢¥Ò¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢öÅ¥Ø¡¢¥Ò¡¢¥È¡¢¡¢¡¢¥Ë¡¢¥Þ((<¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§))¥µ¥¤¥»¥Í¡£¡×
+
+  ¥Û
+      require 'tk'
+      TkLabel.new(nil, "text" => "foo",
+                  "font" => ["-weight", "bold"]).pack
+      TkLabel.new(nil, "text" => "foo",
+                  "font" => "-underline 1").pack
+      Tk.mainloop
+
+== ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+: -family name
+
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥æ¡¦¡£¡¦¡¬¡¦ô£¥·¡¢¥Û¥Õ¥»¥Á¡¼¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×Tk¡¢¥Ì¡¢¥Þ¥Î¥ã¡¢¥³¡¼¥Ï¥¤¥·¡¢¥Û¡¦¥æ¡¦¡£¡¦¡¬¡¦ô£¥·¡¢
+  ¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢ö¦¥¦¡¢¥Í¡¢¥ã¥Ï¥ó¥»¥ì¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥±((-Windows¡¢ç®ac¡¢¥Ì¡¢ä£¥¥-))
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¦¥æ¡¦¡£¡¦¡¬¡¦ô¦¥Û¥µ¥ê¥Èô¦¥Þ¡¦¡Ö¡¦ö§¥æ¡¦¡£¡¦¥ë¡¦¥Æ¡¦¥Í¡¢¥Û¥ÄîÀ¥ç¡¢ú¸ðÌ¥Õ¡¢¥­¡¢¡«¡¢¥µ¡¢ü£¡×
+
+    : Courier
+      monospaced typewriter font
+    : Times
+      serifed newspaper font
+    : Helvetica
+      sans-serif European font
+
+: -size size
+
+  ¥µ¥ê¥Èô¦¥­¡¢¥½ ((|size|)) ¡¢¥Û¥Æ¥Ø¡¢¥ã¥¿¥ª¡¢¥Û¥½þ¦¥Ï¡¢ò§¥ó¡¦¡¢¡¦ü§¥Í¥½þ¦¥Ì¡£¡Ö¥Îò¦¥Û¥½þ¦¥Ï
+  ¡¢ò§¥ä¡¦¥Ã¡¦¥µ¡¦öÁþ¦¥Ì¡¦¥ª¡¦¡¢¡¦¥³¥µ¥ê¥Èô¦¥­¡¢¥½¡¢¥¦¡¢¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+  0 (¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í)¡¢¥Ï¡¢ò§¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Û¡¦¥ª¡¦¡¢¡¦¥³(¡¦¥é¡¦ò§¥Æ¡¦¥Í¡¦¥æ¡¦¥¥¡£¥·¡¦à²¥Ø¥Ä¥¯)¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+  ¡¦¥ª¡¦¡¢¡¦¥³¡¢¥Þ¥¿¡¼¥½þ¦¥Ì¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢ü£¡×
+
+        require 'tk'
+
+        TkLabel.new(nil, "text" => "foobar ¡¢¥í¡¢¥¤¡¢¥í¡¢¥¤",
+                    "font" => TkFont.new("size"=>24)).pack
+        Tk.mainloop
+
+: -weight
+
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Û¥Ì¥µ¡¢¥ª¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×"normal" (¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í)¡¢¥Ï¡¢ò£¡Ö¥È¥Õ¥»þ¦¥Û¡¦¥æ¡¦¥¥¡¦ü§¥Í
+  "bold" ¡¢¥Ï¡¢ò§¥ï¡£¥·¡¦ö§¥Î¥Ä¥Û¡¢¥Û¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+        require 'tk'
+
+        TkLabel.new(nil, "text" => "foobar ¡¢¥í¡¢¥¤¡¢¥í¡¢¥¤",
+                    "font" => TkFont.new("weight"=>"bold")).pack
+        Tk.mainloop
+
+: -slant slant
+
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢ú¹¥±¡¢¥¢¡¢ö¦¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢¥Û¥µ¥ê¥Èô¦¥Ì¡¢¥±¡£¡×"roman" (¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í)¡¢¥Ï¡¢
+  ¥­¥±¡¢¥å¡¢¥Ï¡¢¥­¡£¡Ö"italic" ¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥­¥±¡¢¥å¡¢¥Û¡¢¡Ö¡¢ö§¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+        require 'tk'
+
+        TkLabel.new(nil, "text" => "foobar ¡¢¥í¡¢¥¤¡¢¥í¡¢¥¤",
+                    "font" => TkFont.new("slant"=>"italic")).pack
+        Tk.mainloop
+
+: -underline bool
+
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Ò¥¤¥·¥¿ú¦¥È¡¢¥¢¡¢ö¦¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢¥Û¥µ¥ê¥Èô¦¥Ì¡¢¥±¡£¡×bool ¡¢¥Ò¡¢¥Þ¥½¥½¥ª¥«¥Æ¥Ø
+  (true/false ¡¢¡Ö¡¢ö¦¡¢¡¢¥Þ¥½þÅ¥Ø¡¢¥Ì ¥½¥½:1 ¡¢¥© ¥ª¥«:0)¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¦¥Ì¡¦¥æ¡¦¥¥
+  ¡¦ö§¥Í¡¢¥Þ false ¡¢¥Ì¡¢¥±¡£¡×
+
+        require 'tk'
+
+        TkLabel.new(nil, "text" => "foobar ¡¢¥í¡¢¥¤¡¢¥í¡¢¥¤",
+                    "font" => TkFont.new("underline"=>true)).pack
+        Tk.mainloop
+
+: -overstrike bool
+
+  ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥Ò¥·ð¦ôÀ¥Æ¡¢¥­¥¿¥Ï¥¯¥µùè¥Û¥Æì³ûè¥Ò¡¼øÍ¥ï¥¿ú¦¥È¡¢¥¢¡¢¡¢¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢¥Û
+  ¥µ¥ê¥Èô¦¥Ì¡¢¥±¡£¡×bool ¡¢¥Ò¡¢¥Þ¥½¥½¥ª¥«¥Æ¥Ø(true/false ¡¢¡Ö¡¢ö¦¡¢¡¢¥Þ¥½þÅ¥Ø¡¢¥Ì ¥½¥½:1 
+  ¡¢¥© ¥ª¥«: 0)¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Þ false ¡¢¥Ì¡¢¥±¡£¡×
+
+        require 'tk'
+
+        TkLabel.new(nil, "text" => "foobar ¡¢¥í¡¢¥¤¡¢¥í¡¢¥¤",
+                    "font" => TkFont.new("overstrike"=>true)).pack
+        Tk.mainloop
+
+=end

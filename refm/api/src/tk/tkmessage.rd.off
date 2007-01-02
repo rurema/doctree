@@ -1,0 +1,74 @@
+# $Id: tkmessage.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
+# Class TkMessage is defined in tk.rb
+=begin
+= TkMessage
+
+¡¦â§¥Æ¡¦¥µ¡£¥·¡¦¥¯¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦â§¥Æ¡¦¥µ¡£¥·¡¦¥¯¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢¥Þ¥Ï¡×¥½þ»¥ä¡¢¥Ò¡¢þ¦¥½¡¢ö§¥Ë¡¦¥å¡¦¥±¡¦¥Í¡¢úË¥¹¥·¥£¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+
+  TkMessage.new { text <<-END_OF_MESSAGE; pack }
+    ¡¢¥Ë¡¢¥±¡¢¥Í
+    ¡¦â§¥Æ¡¦¥µ¡£¥·¡¦¥¯
+  END_OF_MESSAGE
+
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkLabel>))
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#anchor>))
+
+((<TkObject#background>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady-textvariable>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+((<TkObject#text>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkMessage#aspect(ratio)
+    ¡¦â§¥Æ¡¦¥µ¡£¥·¡¦¥¯¥Ï¥¯¥µú´ü¦¥Û¥Î¥¹¥·¥£¥Û¥Û¡¼ð¦¥Û¥¹¥È¥¤¡×¥Íì¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|ratio|))¡¢¥ã100¡¢ð¦ôÄ
+    ¡¢¥å¡¢¡¢¥»ø»î¦¥Þ¥¤¡×¥È¥±¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkMessage#justify(s)
+    ¡¦â§¥Æ¡¦¥µ¡£¥·¡¦¥¯¥Ï¥¯¥µú´ü¦¥Û¥Ä¥­¡¢¥£¥Ïú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|s|))¡¢¥Ò¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢öÌ¥¯¥µú´ü¦¥Þ¡¼¥Ï¥¤¥·
+    ¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+    *"center"
+
+     ¥Æì³ûøü¦¥µ
+    *"left"
+
+     ¥³¥¯¥¨ü¦¥µ
+    *"right"
+
+     ¥¢¥ò¥¨ü¦¥µ
+
+--- TkMessage#width(w)
+
+=end

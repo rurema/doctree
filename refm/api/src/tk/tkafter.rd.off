@@ -1,0 +1,295 @@
+# $Id: tkafter.rd,v 1.10 2000/03/08 15:58:39 arai Exp $
+# Class TkAfter is defined in tkafter.rb
+=begin
+= TkAfter
+
+((-¥­ö»¥¹¥ª¥å¥¹¥á¡¢¥ã¥¤¥­¡¢¡¢¡£¡Ö¥Ø¥é¥³¥Ë¥È¥¨¥³¥³¡£¡×¥Ë¥Æ¡¢¥Ò¡¼ú¥þ¦¥Ò¥¨¥ê¡¢¥±¡¢öÂäÎ¥¿-))
+
+((-ID¡¢¥ã2¥·þÐà¦¡Ö¡¢ö¦¥Û¡¢¥Ì¥Õ¥¿¥¦¥Û¡¢¥Ò¡¢¥±¡¢ö£¡Öafter_id -> "after#N"¡£¡Ö ID -> "aNNNN"-))
+
+¥µ¥ê¥Èô½¥è¥­¥ß¥¤âºê¦¡«¡¢¥½¡¢¥Þ¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢¥ã¡¦¡Ö¡¦¡¢¡¦¥Î¡¦öÀ¥è¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò¥¹ðÏú¾¥Ä¥±¥ä¡¢¥±
+¡¢ö¦¥½¡¢â¦¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+
+¡¼¥Ï¥¤¥·¡¢¥Þ5¥Î¥Æ¥¨¥è¥¦¥è¡¢¥Ì3¥¤ü½þ¦úË¥¹¥·¥£¡¢¥±¡¢öÐ
+
+  require "tk"
+
+  TkAfter.new(5 * 1000, 3, proc { p Time.now.asctime }).start
+  Tk.mainloop
+
+¡¦¥Ì¡¦¥¯¡¦¥½¡¦ö½¥é¡¢¥Û¥Û
+
+  require "tk"
+
+  v = TkVariable.new(Time.now.asctime)
+  TkAfter.new(1 * 1000, -1, proc { v.value = Time.now.asctime }).start
+
+  TkLabel.new {
+    textvariable v
+    pack
+  }
+  Tk.mainloop
+
+¥»ê·¥å¡¦¥Ì¡¦¥¯¡¦¥½¡¦ö½¥é¡¢¥Þ¡£¡Ö(('xclock -digital -update 1')) ¡¢ð¦ô¦äÂ¥ª¥¦¥Û¡¢¥Ì¡¢¥Þ¡¢¡Ö¡¢
+¡¢¡«¡¢¥µ¡¢ü£¡×¡¢¥­¡¢¥©¡¢¥­¡£¡Ö¡¼¥Ï¥¤¥·¡¢ð¦ô¦¥Þ((*¡¦¡«¡¦¥­*))¡¢¥Ï¡¢ð¦¥ò¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+
+  v = TkVariable.new(Time.now.asctime)
+  Thread.new {
+    loop do
+      v.value = Time.now.asctime
+      sleep 1
+    end
+  }
+
+  TkLabel.new {
+    textvariable v
+    pack
+  }
+  Tk.mainloop
+
+=end
+###¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢¥ã¥Äî¦¥å¡¢¥±¡¢¥ç¡¢ö¦¥Û¡¢¥Ì¡¦¥¦¡¦â§ü§¥Í
+###
+###¡¦¡Ö¡¦¥Ï¡¦ú§¡¼¥µ¥é¡¢¥Û¥Û
+###
+###  require "tk"
+###
+###  s_line = m_line = h_line = nil
+###  canvas = TkCanvas.new {
+###    width 200
+###    height 200
+###    s_line = TkcLine.new(self, 0, 0, 0, 0, {"width"=>3})
+###    m_line = TkcLine.new(self, 0, 0, 0, 0, {"width"=>4})
+###    h_line = TkcLine.new(self, 0, 0, 0, 0, {"width"=>5})
+###  }.pack
+###
+###  sec = {}
+###  min = {}
+###  hour = {}
+###  60.times do |i|
+###    dx = Math.cos(2 * Math::PI * (i.to_f-15) / 60)
+###    dy = Math.sin(2 * Math::PI * (i.to_f-15) / 60)
+###    sec[i] = [100 + dx * 90, 100 + dy * 90]
+###    min[i] = [100 + dx * 70, 100 + dy * 70]
+###    24.times do |j|
+###      dx = Math::cos(2 * Math::PI * ((j%12+i.to_f/60)-3)/12)
+###      dy = Math::sin(2 * Math::PI * ((j%12+i.to_f/60)-3)/12)
+###      hour[[j, i]] = [100 + dx * 60, 100 + dy * 60]
+###    end
+###  end
+###
+###  tick = proc do
+###    now = Time.now
+###    s_line.coords 100, 100, *sec[now.sec]
+###    m_line.coords 100, 100, *min[now.min]
+###    h_line.coords 100, 100, *hour[[now.hour, now.min]]
+###  end
+###
+###  tick.call
+###  TkAfter.new(1 * 1000, -1, tick).start
+###
+###  Tk.mainloop
+=begin
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<Object>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkCore>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkCore>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkAfter.callback(arg)
+    ¡¼ú¥(|arg|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½ID((-aNNNN-))¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¾¥Ä¥±¥ä¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter.info
+    ¥·¥Ä¥±¥ä¥Ä¥ä¡¢¥Á¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢õµkAfter¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+
+      TkAfter.new(1 * 1000, 1, proc {puts "do callback (ruby/tk)"}).start
+      p TkAfter.info
+
+      Tk.mainloop
+
+      => [#<TkAfter: ...>]
+         do callback (ruby/tk)
+
+    Tcl/Tk¡¢¥Ì¥È¥»¥¿¥ï¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥ã¡¢¡Ö¡¢ø¦¥ß¡¢¥¹¡¢¥Û((<TkAfter#after_id>))¡¢äÉ¥í¥Û
+    ¡¢¥Ò¥¨¡«¡¢¡«¡¢ø¦¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥Á¡¢î¦¥Æ¡¢¥Í¥Ûæ¦¥ã¥Ï¡×¥µ¥£¡£¥¥-))
+
+      require "tk"
+
+      TkCore::INTERP._eval "after 1000 {puts {callback executing (tcl/tk)}}"
+      TkAfter.new(1 * 1000, 1, proc {puts "callback executing (ruby/tk)"}).start
+      p TkAfter.info
+      Thread.new {
+        sleep 5
+        p TkAfter.info
+      }
+
+      Tk.mainloop
+
+      => [#<TkAfter: ... >, "after#1"]
+         callback executing (tcl/tk)
+         callback executing (ruby/tk)
+         []
+
+--- TkAfter.new(interval=nil, loop_exec=nil, *procs])
+    (({TkAfter}))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¼ú¥þ¦¥ã¥Ø¥½¡¢¥£¡¢ò¦ø¦¥½¥»ø»î£¡Ö
+    ((<TkAfter#set_procs>))¡¢úÈ¥¢¡¢¥¯¡¼ú¥þ¦¥Ì¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkAfter#do_callback(*args)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú²ú¥(|args|))¡¢úÇ¥Þ¡¢¥­¡¢¥Ë¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#set_callback(sleep, args=nil)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÇ¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#set_next_callback(*args)
+
+--- TkAfter#after_id
+    TkAfter¡¢¥Û¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¡¢ú¾¥¢¥Ï¥Õ¡¢¥±¡¢öÌ¥¯¥µú´Tcl/Tk¡¦¥¦¡¦¡«¡¦ü§¥Î(({after}))¡¢¥Û¥Õâ¦
+    ¥Æ¥Ø)¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#after_script
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×Tcl¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkAfter#current_proc
+    ¥·¥Ä¥±¥ä¥Ä¥ä¡¢¥Á¡¢¥Û(({Proc}))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#current_sleep
+    ¥¿¡¬¥Èô¦¥­¡¢¥½¥·¥Ä¥±¥ä¥Ä¥ä¡¢¥Á¥µ¥è¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±(¥·¥Ä¥±¥ä¡¢¡«¡¢¥Ì¡¢¥Û¥µ¥È¡¢ô½¥è¡¢¥Ì¡¢¥Þ¡¢¡Ö¡¢ô¦¡«¡¢¥µ¡¢¡£¡×
+
+--- TkAfter#loop_exec
+
+--- TkAfter#loop_exec = val
+
+--- TkAfter#get_procs
+
+--- TkAfter#current_status
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥»¥è¡¢úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Ì¥í¥Ûü¦¥Û¥Ø¥é¥Á¥Ì¡¢¥Þ¥¹î¦¥Ò
+
+    *¡¦¥½¡¦¡¢¡¦¡«¡¢¥Û¥»¥è
+
+     ((<TkAfter#running?>))¡¢¥Û¥Õâ¦ôÅ¥Ø¡£¡× start¡¢¥­¡¢¥Ë¡¢¡¢¡¢ø¦¥ß(({true}))¡£¡Ö¥Èè½¡¬¡¢¥­¡¢¥Ë¡¢¡¢¡¢ø¦¥ß
+     (({false}))¡£¡×
+    *¥Ä¥ä¡¢¥Á¥µ¥è
+
+     ¥¿¡¬¥Èô¦¥­¡¢¥½¥Ä¥ä¡¢¥Á¥µ¥è¡£¡×
+    *(({Proc}))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í
+
+     ¥Ê¥ß¥Þ¥½¡¢¥­¡¢¥½¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ£¡×
+    *¡¼ú¥
+
+     ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Ò¥Ê¥Þ¡¢¥±¡¼ú¥þ¦¥Û¥Ì¥í¥Ûü£¡×
+    *¥µ¥È¡¢ô¾¥Ä¥±¥ä¥¤üÁ
+
+     ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥µ¥È¡¢ô¾¥Ä¥±¥ä¥¤üÁ
+
+    ¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkAfter#cancel_on_exception?
+
+--- TkAfter#cancel_on_exception=(mode)
+
+--- TkAfter#running?
+    ¡¦¥½¡¦¡¢¡¦¡«¡¢¥ã¥·¥Ä¥±¥ä¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¥Ï¡¢¡¢¥»ø»î£¡Ö¡¢¡«¡¢¥½¡¢¥Þ¥µ¥ê¥Èô´üÁþ¦¥Ò¥Ê¡×¡¢¥­¡¢¥½¥»ø»î¦¥Ò
+    (({false})) ¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¹¡¢ø²¥Ï¥¦¡¼¡¢¥Ì¡¢¥Þ(({true}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#loop_rest
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥µ¥È¡¢ô¾¥Ä¥±¥ä¥¤üÁþ¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#loop_rest=(rest)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥µ¥È¡¢ô¾¥Ä¥±¥ä¥¤üÁþ¦(|rest|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#set_procs(interval, loop_exec, *procs)
+    ((|interval|))¥¨¥è¥¦¥è¡¢¥Ì((|loop_exec|))¥¤ü¾¥Ä¥±¥ä¡¢¥±¡¢({Proc}))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í
+    ((|procs|))¡¢úÇ¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×(({Proc}))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Þ¥Ï¡×¥½þÇ¥ß¥Þ¥½¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+
+    ((|interval|))¡¢¥Þ¡£¡Ö"idle"¡£¡Ö¥½þÅ¥Ø¡¢¡«¡¢¥½¡¢¥Þ¥½þÅ¥Ø¡¢úÌ¥è¡¢¥±(({Proc}))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+    ¥½þÅ¥Ø¡¢¥Þ¡¢¥¹¡¢¥Û¥½þÅ¥Ø(¡¦¡¬¡¦ôË¥Æ)¥¨¥è¥¦¥è¡¢¥Ì¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¾¥Ä¥±¥ä¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢ú²¥æ¥Õ¡×¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|loop_exec|))¡¢¥Þ¡£¡Ö¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½(|procs|))¡¢¥Û¥·¥Ä¥±¥ä¥¤üÁþ¦úÁþÅ¥Ø¡¢¥Ì¥µ¥ê¥Èô¦¥­
+    ¡¢¡«¡¢¥±¡£¡×-1¡¢¥Ì¡£¡Ö¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¾¥Ä¥±¥ä¡¢¥­¥Ä¥¦¡¢¥¢¡¢¡«¡¢¥±¡£¡×
+
+    ((|loop_exec|)) > 0 ¡¢¥Ì¡£¡Ö¥µ¥ê¥Èô´üÁþ¦¥¿¡¢¥¢¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×¥µ¥ê¥Èô´üÁþ¾¥Ä¥±¥ä¥¯ê¦¥Þ¡¦¡¢¡¦ü§¥±
+    ¡¦¥½¡¦ü§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î((<TkAfter#running?>))¡¢¥Þ(({false}))¡¢úÌ¥è¡¢¥±¡¢ð¦¥ò¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkAfter#add_procs(*procs)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Ò((|procs|))¡¢úÆ¥Î¥¤¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×((|procs|))¡¢¥Þ(({Proc}))¡¦¥§¡¦¥è
+    ¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¡«¡¢¥½¡¢¥Þ((-¡¢¥Ï¡¢¥Ò¡£¥¥-))¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkAfter#set_start_proc(sleep, init_proc, *init_args)
+    ¡¼ú¥(|sleep|))¡¢¥Þ¡£¡Ö¥½þÅ¥Ø(¡¦¡¬¡¦ôË¥Æ)¡¢¡«¡¢¥½¡¢¥Þ¥Ï¥¯¥µú´"idle"))¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkAfter#start(*init_args)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦(|init_args|))¡¢ú²ú¥þ¦¥Ò¥·¥Ä¥±¥ä¡¢¥±¡¢ö¦ð¦¥ò¡¦¥±¡¦¥¢¡¦¥¯¡¦ê£¥·¡¦ö¦¥­¡¢¡«
+    ¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥Û¡¼¥æ¥Õ¡×¡¢¥Þ¥¹î¦¥Ò
+
+    *¥³¥Ì¥¹ò¦¥Û¥Ä¥ä¡¢¥Á¥µ¥è
+    *¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½
+    *¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¡¼ú¥
+    *¥­¥©¡¢ôÌ¥è¡¢¥­¥µ¥Û¥Ä¥ä¡¢¥Á¥µ¥è
+    *¥­¥©¡¢ôÌ¥è¡¢¥­¥µ¥Û¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã
+
+     ¥»¥Ï¥Û¥ã¥µ¥Þ¥³¥Ì¥¹ò¦¥Û¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¹¥©¡¢ôÌ¥è¡¢¥­¡¢¡«¡¢¥±
+    *¥­¥©¡¢ôÌ¥è¡¢¥­¥µ¥Û¡¼ú¥
+
+     ¥»¥Ï¥Û¥ã¥µ¥Þ¡¼ú¥þ¦¥Ï¡¢¥­¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkAfter#restart(*restart_args)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¼¥Ë¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#cancel
+--- TkAfter#stop
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¡¦¥±¡¦¥¢¡¦¥¯¡¦ê£¥·¡¦ö¦úÆè½¡¬¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#continue(wait=nil)
+    ¥Èè½¡¬¡¢¥­¡¢¥½¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¼¥Ë¥¦¥©¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¼ú¥(|wait|))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¥Ä¥ä
+    ¡¢¥Á¥µ¥è¡¢ú¼¥Ë¥¿¡¬¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±
+
+--- TkAfter#skip
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥·¥Ä¥±¥ä¡¢ú²øÇ¥ë¥Õ¥ª¥µö¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkAfter#info
+    [ID, ¥·þÌ¥Õ]¡¢¥Ì¡¢¡Ö¡¢öÉ¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ID¡¢¥Þ¡£¡Ö((<TkAfter#after_id>))¡¢¥ã¥Ï¥è¡¢¥±ID¡¢¥Ì¡¢¥Þ¡¢¥Ï¡¢¥Ã¡£¡Ö(({TkAfter}))¥ËäËþ¦¥Ì
+    ¥¨¥Î¥Ø¥­¡¢¥Ë¡¢¡¢¡¢ö¾¥¢¥Ï¥Õ¥Õ¥»((-aXXXX-))¡¢¥Ì¡¢¥±¡£¡×
+
+    ¥·þÌ¥Õ¡¢¥Þ¡¦¥½¡¦¡¢¡¦¡«¡¢¥Û¥·þÌ¥Õ¡¢¥Ì¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¥Ï¥¯¥µú´ü¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"timer"
+
+     ¥µ¥ê¥Èô½¥è¥¯ê¦¥Ò¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¡¢ú¾¥Ä¥±¥ä¡¢¥±¡¢ö¦ð¦¥ò¡¢¥Ò¥µ¥ê¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¥½¥»ø»
+    *"idle"
+
+     ¡¦¡Ö¡¦¡¢¡¦¥Î¡¦öÀ¥è¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò¥·¥Ä¥±¥ä¡¢¥±¡¢ö¦ð¦¥ò¥µ¥ê¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¥½¥»ø»
+
+== ¥ÈôÁ
+
+--- TkAfter::Tk_CBID
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥ÃID¡¢¥Û¡¦¥©¡¦¥ò¡¦ü§¥½¡¢¥Ì¡¢¥±¡£¡×(({Tk_CBID}))¡¢¥Þ¥Ì¥í¥Ûü¦¥Ì¡¢¥±¡¢¥ã0¥Í¥è¥Õ¥ï¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥­¡¢¥©
+    ¥µ¥Í¡¢þ¦ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥µ¡¢ü£¡×Ruby¡¢¥Û¥ÈôÁþ¦¥ã¥Æ¥Ø¡¢úÌ¥à¥±¥±¡¢¥Ì¡¢¥å¡¢¥Ï¡¢¡¢¡¢¥½¡¢â¦¥Ì¡¢¥±¡£¡×
+
+--- TkAfter::Tk_CBTBL
+    {¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥ÛID => TkAfter¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í}¡¢¥Ì¡¢¡Ö¡¢ö§¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×
+
+=end

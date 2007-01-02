@@ -1,0 +1,93 @@
+# $Id: tk.rd,v 1.10 2001/03/18 12:36:28 arai Exp $
+# Module Tk is defined in tk.rb
+=begin
+= Tk
+
+Ruby/Tk ¡¢¥Û¡¦â§¡¢¡¦ü§ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡¦Ruby/Tk¥Á¥¨¥Ä¥Û¡¢¥Ò¥Ä¥ß¡¢¥±¡¢öÃà¼ü¦¥Þ¥·î¦¥Ò¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·
+¡¦ö¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢úÆ¥Õ¡¢¥­¡¢¥Ë¥±¥ä¡¢¡¢¡¢¡«¡¢¥±¡£¡¦
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkCore>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- Tk.focus(display=nil)
+    ¥¯¥¹¥³¡¬¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢ú½¥È¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¼ú¥þ¦¥Ò¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í
+    ((|display|))¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î£¡Ö¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢ú½¥È¥¤ðÎ¥Õ¡¢¥Ì¡£¡Ö¥¯¥¹¥³¡¬¡¦¥æ¡¦¥¥¡£¥·¡¦¥©
+    ¡¦¥±¡¢ú½¥Æ¡¢¥Ë¡¢¡¢¡¢ö§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢ú½¥È¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¡¢¥Ï¡¢¡¢¥»ø»î¸¥¯¥µú´(({""})))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-nil¡¢úÌ¥è¡¢¥±¡¢¥ë¡¢¥å¡£¥¥-))
+
+--- Tk.focus_lastfor(win)
+    ¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò((|win|))¡¢¥Í¥Ë¥¢¡¢¥¯¡¦ø§¥ë¡¦ö¦¥Ò¡¢¡Ö¡¢ö§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ì¥³¥Ì¥¯ê¦¥Ò¡¦¥æ¡¦¥¥¡£¥·
+    ¡¦¥©¡¦¥±¡¢ú½¥Æ¡¢¥Ë¡¢¡¢¡¢¥½¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- Tk.show_kinsoku(mode='both')
+
+--- Tk.add_kinsoku(chars, mode='both')
+
+--- Tk.delete_kinsoku(chars, mode='both')
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+¡¦ä§¥¯¡¦ê£¥·¡¦({Tk}))¡¢¥Þ¥·¥©¥½¥Í¡¢(<Object#extend>))¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö¦¥½¡¢â£¡Ö¡¼¥Ï¥±¡¬¡¢¥Û¡¦â§¥¹¡¦¥Æ
+¡¦¥Î¡¢¥Þ¡£¡Ö¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì¡¢ä¦¡Ö¡¢ô¦¡«¡¢¥±(¡¢¡«¡¢¥½¡£¡Ö¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Í¡¢¥­¡¢¥Ë¥µ¥Í
+¥Ø¥à¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢úÁèÀ¥¥¡¢¥­¡¢¡«¡¢¥±)¡£¡×
+
+--- Tk#root
+    ¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkRoot.new>)) ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+--- Tk#bell
+    ¡¦¥ë¡¦ö¦úÎ¥È¡¢ò¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- Tk#toUTF8(str,encoding)
+    ((<TclTkIp#_toUTF8>))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡¦
+
+--- Tk#fromUTF8(str, encoding)
+    ((<TclTkIp#_fromUTF8>))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡¦
+
+¡¼¥Ï¥¤¥·¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ Tcl/Tk ¡¦¥ß¡£¥·¡¦¥¯¡¦î§ü¦¥ã8.1¡£¥Á8.9(¥Ë¥ï¥¯ø§ú£¥·¡¦¥©¡¦ò§¡¢¡¦¥³¡¢¥Ï¡¢¥­)¡¢¥Û
+¥»ø»î¦¥Ò¥Èô·¥Á¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+encoding ¡¢¥Þ¡£¡Ötk.rb ¡¢¥Û¡¦ú£¥·¡¦¥Î¥µ¥Ò(({$KCODE}))¡¢¥Û¥Æ¥Ø¡¢¥Ò¡¢¥­¡¢¥½¡¢¥ã¡¢¥Æ¡¢¥Ë¥·¥©¥Ë¡¼¥Ê¥§¡¢¥Ò¥¿¡¬
+¥Èô¦¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+--- Tk#encoding=(name)
+
+--- Tk#encoding
+
+--- Tk#encoding_names
+
+--- Tk#encoding_system
+
+--- Tk#encoding_system=(enc)
+
+--- Tk#encoding=(name)
+
+--- Tk#encoding
+
+--- Tk#encoding_names
+
+--- Tk#encoding_system
+
+--- Tk#encoding_system=(enc)
+
+== ¥ÈôÁ
+
+--- Tk::TCL_VERSION
+    ¥µ¥Í¥Ø¥à¡¢¥­¡¢¥Ë¡¢¡¢¡¢õµcl¡¢¥Û¡¦¥ß¡£¥·¡¦¥¯¡¦î§ü£¡×
+
+--- Tk::TK_VERSION
+    ¥µ¥Í¥Ø¥à¡¢¥­¡¢¥Ë¡¢¡¢¡¢õµk¡¢¥Û¡¦¥ß¡£¥·¡¦¥¯¡¦î§ü£¡×
+
+--- Tk::JAPANIZED_TK
+    ¥µ¥Í¥Ø¥à¡¢¥­¡¢¥Ë¡¢¡¢¡¢õµcl/Tk¡¢¥ã¥Ë¥ï¥¯ø¦¥Ò¡¦ú£¥·¡¦¥©¡¦ò§¡¢¡¦¥³¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢¥Ò¥¢¥¯¡¢¥Ë
+    (({true}))¡¢¡«¡¢¥½¡¢¥Þ(({false}))¡£¡×
+
+=end

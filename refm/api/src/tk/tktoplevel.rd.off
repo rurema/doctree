@@ -1,0 +1,67 @@
+# $Id: tktoplevel.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
+# Class TkToplevel is defined in tk.rb
+=begin
+= TkToplevel
+
+¡¦¥Í¡¦¥Æ¡¦¥é¡¦ø§¥ë¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥ò¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+((<¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í>))¡¢¥Í¡¢¥Þ¥Ï¥Õ¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Î¥ã¥Ø¥é¡¢¥Ï¥»ø»î¦¥Ò¥µ¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk::Wm>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkToplevel.new(parent=nil, keys=nil)
+--- TkToplevel.new(parent=nil, screen=nil, classname=nil, keys=nil)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkToplevel#specific_class
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#borderwidth>))
+((<TkObject#bd>))
+
+((<TkObject#cursor>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkToplevel#background(color)
+--- TkToplevel#bg(color)
+
+### --- TkToplevel#class
+--- TkToplevel#classname
+
+--- TkToplevel#colormap
+
+--- TkToplevel#container(bool)
+
+--- TkToplevel#height
+
+--- TkToplevel#menu
+
+--- TkToplevel#screen
+
+--- TkToplevel#use
+
+--- TkToplevel#visual
+
+--- TkToplevel#width
+
+=end

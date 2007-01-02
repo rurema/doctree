@@ -1,0 +1,14 @@
+# $Id: tktextmarkanchor.rd,v 1.7 2000/02/15 18:08:00 arai Exp $
+# Class TkTextMarkAnchor is defined in tktext.rb
+=begin
+= TkTextMarkAnchor
+
+== ・ケ。シ・ム。シ・ッ・鬣ケ:
+
+((<TkTextMark>))
+
+== ・ッ・鬣ケ・皈ス・テ・ノ:
+
+--- TkTextMarkAnchor.new(parent, index=nil)
+
+=end

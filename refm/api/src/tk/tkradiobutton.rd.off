@@ -1,0 +1,106 @@
+# $Id: tkradiobutton.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
+# Class TkRadioButton is defined in tk.rb
+=begin
+= TkRadioButton
+
+¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥Þ¡£¡Ö¥Ï¡×¥½þ¦¥Û¥Á¥§¥Äú»àÎ¥ï¡¢¥Û¡¢¥ò¡¢¥Á¡¢¥Û1¡¢¥È¡¢úÃ¥§¥Äú¦¥±¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+  v  = TkVariable.new
+  c = proc {print v, "\n"}
+  TkRadioButton.new {text "a"; variable v; value 1; select;   command c; pack}
+  TkRadioButton.new {text "b"; variable v; value 2; deselect; command c; pack}
+  TkRadioButton.new {text "c"; variable v; value 3; deselect; command c; pack}
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkButton>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkRadioButton#deselect
+    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥Ï¡¢¡¢¥»¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkRadioButton#select
+    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥½¥»¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkRadioButton#variable(v)
+    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥Û¥»¥è¡¢¥ÍTkVariable¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|v|))¡¢¥Û¥Æ¥Ø¡¢ú¶¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¡«¡¢¥±¡£¡×
+    ¥Ë¥¢¡¢¥¯TkVariable¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ò¥¨¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¥ª¡¢ø¦¥½¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥Þ¥Ë¥¢¡¢¥¯¡¦¡¼¡¦ö£¥·¡¦¥é¡¢¥Ò
+    ¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥ã¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥ª¡¢ø¦ö¦¥Í((|v|))¡¢¥ã
+    ((<TkRadioButton#value>))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥Æ¥Ø¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkRadioButton#value(val)
+    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Æ¥Ø¡¢(|val|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#activebackground>))
+
+((<TkObject#activeforeground>))
+
+((<TkObject#anchor>))
+
+((<TkObject#background>))
+
+((<TkObject#bitmap>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#disabledforeground>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#image>))
+
+((<TkObject#justify>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+((<TkObject#text>))
+
+### ((<TkObject#textvariable>))
+
+((<TkObject#underline>))
+
+((<TkObject#wraplength>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+### --- TkRadioButton#command
+
+--- TkRadioButton#height
+    ((<TkButton#height>))¥µ¥¤¥»¥Í
+
+--- TkRadioButton#indicatoron
+
+--- TkRadioButton#selectcolor
+
+--- TkRadioButton#selectimage
+
+--- TkRadioButton#state
+### --- TkRadioButton#value
+
+### --- TkRadioButton#variable
+
+--- TkRadioButton#width
+    ((<TkButton#width>))¥µ¥¤¥»¥Í
+=end

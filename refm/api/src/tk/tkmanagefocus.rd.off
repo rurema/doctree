@@ -1,0 +1,68 @@
+# $Id: tkmanagefocus.rd,v 1.7 2000/01/22 08:52:56 arai Exp $
+# Module TkManageFocus is defined in tkmngfocus.rb
+=begin
+= TkManageFocus
+
+((<¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢ú²¥­¡¢¥ò¡¢¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×((-¡¢¥¦¡¢¥¦¡¢¥Ò¡¢¡Ö¡¢¥¤¡¢ö§â§¥¹¡¦¥Æ
+¡¦¥Î¡¢¥Þ¡¦ä§¥¯¡¦ê£¥·¡¦(<Tk>))¡¢¥Ò¡¢¡Ö¡¢ö¦¥ë¡¢¥å¡¢¥¿¡¢¥Í¥µ¥é¡¢¥ò-))
+
+  require "tk"
+  require "tkmngfocus"
+
+  module Tk
+    def Tk.focus_to(to)
+      tk_call 'focus', to
+    end
+    def Tk.focus_prev(window)
+      TkManageFocus.prev window
+    end
+    def Tk.focus_next(window)
+      TkManageFocus.next window
+    end
+  end
+  class TkWindow
+    def focus_to_prev
+      Tk.focus_to Tk.focus_prev self
+    end
+    def focus_to_next
+      Tk.focus_to Tk.focus_next self
+    end
+  end
+
+  TkButton.new { text "A"; bind('Down') { focus_to_next } }.pack.focus
+  TkButton.new { text "B"; bind('Down') { focus_to_next } }.pack
+  TkButton.new { text "C"; bind('Down') { focus_to_next } }.pack
+  TkButton.new { text "D"; bind('Down') { focus_to_next } }.pack
+  TkButton.new { text "E"; bind('Down') { focus_to_next } }.pack
+
+  Tk.mainloop
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkManageFocus.followsMouse
+    ¡¦¡«¡¦¥ò¡¦¥±¡¦¥ó¡¦¡¢¡¦ü§¥½¡¢¥ã¡¢¡Ö¡¢ö²¥Õ¥Æ¥è¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò((<¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢úÅ¥è¡¢¥Ã¡¦ä£¥·
+    ¡¦¥Î¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkManageFocus.next(window)
+    ((<¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢¥ã¥Á¥©¡¼¥ï¡¢¥±¡¢ö¿îÊ¥è¡¢¥Ì¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í((|window|))¡¢¥Û¥·¡£¡¢¥Û¡¦¥ò¡¦¡×
+    ¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥à¡¦¥±¥Õ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((-¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¥½¥Ï¥ã¡¢¡¢
+    ¡¢¡¢¡¢¥Í¥µ¥é¡¢¥ò-))
+
+--- TkManageFocus.prev(window)
+    ((<¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢¥ã¥Á¥©¡¼¥ï¡¢¥±¡¢ö¿îÊ¥è¡¢¥Ì¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í((|window|))¡¢¥Û¥Á¡¼¡¢¥Û¡¦¥ò¡¦¡×
+    ¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥à¡¦¥±¥Õ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((-¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¥½¥Ï¥ã¡¢¡¢
+    ¡¢¡¢¡¢¥Í¥µ¥é¡¢¥ò-))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkManageFocus#focusNext
+    (('TkManageFocus.next self'))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkManageFocus#focusPrev
+    (('TkManageFocus.prev self'))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+=end

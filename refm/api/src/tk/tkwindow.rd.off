@@ -1,0 +1,348 @@
+# $Id: tkwindow.rd,v 1.17 2001/03/18 12:39:31 arai Exp $
+# Class TkWindow is defined in tk.rb
+=begin
+= TkWindow
+
+¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkObject>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkBindCore>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkWindow.new(parent=nil, keys=nil)
+--- TkWindow.new(parent=nil, keys=nil) {|win| ... }
+    ¥½¥Ë¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥ã((|parent|))¡¢¥Ì¡¢¡Ö¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×((|parent|))¡¢
+    ¥»¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í((<TkRoot>))¡¢¥ã¥½¥Ë¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+    ((|keys|)) ¡¢¥Þ¡£¡Ö(({{option=>value...}}))¡¢¥Ì¡¢¡Ö¡¢ö§¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡£¡Ö((<¡¦¥§¡¦¥é¡¦¥­¡¦î§))
+    ¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|keys|))¡¢¥Ò¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢ö§¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Þ¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Í¡¢¥­¡¢¥Ë¡¢ä¾¥Ä
+    ¥Á¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥Û¡¢¥Ì
+
+      TkLabel.new(nil, "text"=>"foo").pack
+
+    ¡¢¥Þ¡£¡Ö
+      label = TkLabel.new
+      label.text "foo"
+      label.pack
+    ¡¢¥Í¥¹ø¦¥Ã¡¢¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×((({pack}))¡¢¥Þ¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Ì¡¢¥Þ¡¢¡Ö¡¢ô¦¡«¡¢¥µ¡¢
+
+    ¡¦¥è¡¦ú§¥Æ¡¦¥Ã¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¥¯¥¿¥ç¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢ú²ú¥þ¦¥Ò¡¦¥è¡¦ú§¥Æ¡¦¥Ã¡¢
+    ¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¡«¡¢¥½¡£¡Ö¡¢¥¹¡¢¥Û¡¦¥è¡¦ú§¥Æ¡¦¥Ã¥Ëä¦¥Û¡¦¥¦¡¦ü§¥Ë¡¦¥å¡¦¥±¡¦¥Í¡¢¥Ì¡¢¥Þ(({self}))¡¢¥Þ¥¿¥¯¥¿¥ç¡¢¥­¡¢¥½
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+    ¥»ê·¥å¡¢¥Û¥Ûæ¦¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢ð¦¥ò¡¢¥Ò¥¹ø¦¥Ã¡¢¥¦¡¢¥Í¡¢ä¿¥ß¥Øð¦¡«¡¢¥±¡£¡×
+
+      TkLabel.new {
+        text "foo"
+        pack
+      }
+
+    ¡¦¥è¡¦ú§¥Æ¡¦¥Ã¡¢ú½¥Í¡¢¥ò¡¢¥Í¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¢ð¦¥ò¡¢¥Ò¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥½¥Ë¥µ¥á¥¨¥ê¥­¥¯¡¢ú½öµ¥ß¥Ê¥§¡¢¥Ò¥Õ¥¿¥·¥£¡¢¥±¡¢
+    ¡¢¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      TkFrame.new {
+        TkLabel.new(self) {
+          text "foo"
+        }.pack
+      }.pack
+      Tk.mainloop
+
+    ¡¢¥½¡¢¥¿¡¢¥­¡£¡Ö¡¦¥è¡¦ú§¥Æ¡¦¥Ã¥Ëä¦¥Ì¡¢¥Þ(({self}))¡¢¥ã¥Æ¥è¡¢¥å¥¨¥±¡¢þ¦ö¦¥Û¡¢¥Ì¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Í
+    Ruby¡¢¥Û¥¨¥ê¥½þ¦è§ú£¥·¡¦¥©¡¦öÌ¥à¥½þ¦¥Ï¡¢¥Î¡¢¥Û¥Õ¥»¥Á¡¼¡¢¥ã¥»¥é¥Ë¥Ø¡¢¥±¡¢ö´¥È¥Ì¥¹¥¿¥å¡¢¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±¡£¡×¥ËäÏ¥Ë¡¢¥Ò¡¢ð¦¥Æ
+    ¡¢¥Ë¡¢¥Þ¡¢¥©¡¢¥£¡¢¥Æ¡¢¥Ë¥¤¥È¥Ë¥Î¥¿¥å¡¢¥ã¡¼¥å¡¢¥Ã¡¢¥Ï¡¢öÀø»î¦¥ã¡¢¡Ö¡¢ö¦¥¦¡¢¥Í¡¢¥Ò¥ª¡¢¡¢ú¦¥È¡¢¥¢¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢ü£¡×
+
+      require "tk"
+
+      text = "foo"
+      p text                # <- ¥Ê¥¦¡¢¥¦¡¢ø¦¥Þ¡¦ú£¥·¡¦¥©¡¦öÌ¥à¥½
+
+      TkLabel.new {
+        text "bar"
+        p text              # <- ¡¢¥¦¡¢ø¦¥Þ¡¦ú£¥·¡¦¥©¡¦öÌ¥à¥½
+        p self.text         # <- ¡¢¥¦¡¢ø¦¥Þ TkLabel#text
+        raise           # <- ¥Ûæµ¡¼¡¢¥Ì¡¢¥Þ¡¢¥Ï¡¢¥ÃTkWindow#raise
+      }.pack
+
+      Tk.mainloop
+
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkWindow#create_self
+    Tcl/Tk¡¢¥Û¡¦ø§¥ë¡¦ö¦¥Ì¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (({TkWindow#initialize}))¡¢¥©¡¢òº¥Ë¡¢¥ß¡¢ø¦ö¿ò¶¥¹¡¢¥Û¡¢¥½¡¢â¦¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì¡¢¥±¡£¡×
+
+    TkWindow¡¢¥Û¡¦¥ª¡¦¥è¡¦¥Ã¡¦ò§¥±¡¢¥Þ¡£¡Ö¡¢¥¹¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ò¥¢¥¯¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥¿¥¯¥¿¥ç¡¢¥Û¡¢¥½¡¢â¦¥Ò¡¢¥¦¡¢¥Û
+    ¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú¼¥Ë¥Èô·¥Á¡¢¥­¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢ü£¡×(¡¢¥¦¡¢¥Û¡¦¡«¡¦¥Ò¡¦ê§¡Ö¡¦ö¦¥Ì¡¢¥Þ¡£¡Ö¡¦¥ª¡¦¥è¡¦¥Ã¡¦ò§¥±
+    ¡¢¥Û(({create_self}))¡¢¥Ò¡¢¥È¡¢¡¢¡¢¥Ë¡¢¥Û¥ª¥å¥¹¥á¡¢¥Þ¥»¥Ï¥Û¥ã¡¢¥­¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±)
+
+    ¥ÎâÆ¥Õ¡£¡Ö
+
+      tk_call 'Tcl/Tk¡¦¥¦¡¦¡«¡¦ü§¥Î', path
+
+    ¡¢¥Í¡¢¡¢¡¢¥Æ¡¢¥½¥­¥Á¥·¡¼¡¢¥Ì¥³¥Ë¥Èô·¥Á¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×((-tk.rb¥Æì¦¥Ì¡¢¥ÞTkWindow¡¢¥Û¡¦¥ª¡¦¥è¡¦¥Ã¡¦ò§¥±¡¢¥Þ¡¢¥¦¡¢¥Û
+    ¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ùÑrivate¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ò¡¢¥­¡¢¥Ë¡¢¥Ï¡¢¡¢¡£¡×¡¢¥Ï¡¢ü¦¥Ì¡£¥¥-))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkWindow#pack(keys=nil)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ùÑack¡¢¥­¡¢¡«¡¢¥±¡£¡×pack¡¢¥ª¡¢ø¦¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡£¡Ö
+    ((|keys|))({name=>value...}¡¢¥Û¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±)¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥½¥«¥Îø¦¥Ò¥¹¥»¡¢¥Æ¡¢¥Ë¥½¥Ë¡¦¥ò¡¦¡×
+    ¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¥Ê¥ã¥ª¥±¥ª¥Ø¡¢â»¡«¡¢ø¦¥Ë¥Ì¥í¥Æ¥è¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×(({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      Tk.pack self, keys
+    ¡¢
+      TkPack.configure self, keys
+
+    ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×((<TkPack>))¥µ¥¤¥»¥Í
+
+--- TkWindow#unpack
+--- TkWindow#pack_forget
+    pack¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú¾ð¦ô´¥·¡¢¥¤¡¢¡«¡¢¥±(¥ÍüË¥¹¥·¥£¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±)¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#pack_config(slot, value=None)
+
+--- TkWindow#pack_info
+    pack¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Ì¥í¥Æ¥è¥»öÌü¦ú§¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#pack_propagate(mode = nil)
+
+--- TkWindow#pack_slaves
+    (({self}))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥Ëä¦¥Òpack¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Ì¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«
+    ¡¢¥±¡£¡×
+
+--- TkWindow#grid(keys=nil)
+    ((|keys|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥¦¥Ï¥µ¥á¥»¥Û¡¦¡«¡¦¥±¥Õ¥ï¡¢¥Ò¥¹¥»¡¢¥Æ¡¢¥Ë¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÉ¥í¥Æ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      Tk.grid self, keys
+    ¡¢
+      TkGrid.configure self, keys
+
+    ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×((<TkGrid>))¥µ¥¤¥»¥Í
+
+--- TkWindow#ungrid
+--- TkWindow#grid_forget
+    grid¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú¾ð¦ô´¥·¡¢¥¤¡¢¡«¡¢¥±(¥ÍüË¥¹¥·¥£¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±)¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#grid_bbox(*args)
+
+--- TkWindow#grid_config(slot, value=None)
+
+--- TkWindow#grid_columnconfig(index, keys)
+
+--- TkWindow#grid_rowconfig(index, keys)
+
+--- TkWindow#grid_columnconfiginfo(index, slot=nil)
+
+--- TkWindow#grid_rowconfiginfo(index, slot=nil)
+
+--- TkWindow#grid_info
+
+--- TkWindow#grid_location(x, y)
+
+--- TkWindow#grid_propagate(mode=nil)
+
+--- TkWindow#grid_remove
+
+--- TkWindow#grid_slaves(args)
+
+--- TkWindow#place(keys=nil)
+    ((|keys|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¼¥Õ¥Æ¥è¡¢¥Ò¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÉ¥í¥Æ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|keys|))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¦¥å¡£¥·¡¢ú½¥È¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×
+
+    *"in"
+    *"x"
+    *"relx"
+    *"y"
+    *"rely"
+    *"anchor"
+    *"width"
+    *"relwidth"
+    *"height"
+    *"relheight"
+    *"bordermode"
+
+--- TkWindow#unplace
+--- TkWindow#place_forget
+    place¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú¾ð¦ô´¥·¡¢¥¤¡¢¡«¡¢¥±(¥ÍüË¥¹¥·¥£¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±)¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#place_config(keys)
+    place¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢(|keys|))¡¢¥Û¥µ¥ê¥Èô¦¥Ì¥³¥Ë¥Ì¥í¥Æ¥è¡¢¥­¡¢¡«¡¢¥±
+    ((-¡¦¥í¡¦ü§¥Í¡¢¥Ò¥³¥Ë¥Ì¥í¥Æ¥è¡£¥¥-))
+
+--- TkWindow#place_config(slot, value=None)
+
+--- TkWindow#place_configinfo(slot = nil)
+
+--- TkWindow#place_info
+    place¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Ì¥í¥Æ¥è¥»öÌü¦ú§¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#place_slaves
+    (({self}))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥Ëä¦¥Òplace¡¢¥Ì¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Ì¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#focus(force = false)
+    ((<¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢({self}))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|force|))¡¢¥ã¥½¥½¡¢¥Û¥»ø»îÄ¥»
+    ¡¢¥Û¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§ü¦¥ã¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢ú½¥Æ¡¢¥Ë¡¢¡¢¡¢öÀø»î¦¥Ò¡¢ä´¡×¥·ð¦ô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã
+    ¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×(({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#grab(arg = nil)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥ê¡¢¥Û¡¦¡¼¡¦ò§¥è¡¢¥Ò¥¨¥ê¡¢¥±¡¢öÃà¼ü¦ú»¥ä¡¢¡¢¡¢¡«¡¢¥±¡£¡×¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú§¡¼¡¦ò§¥è¡¢¥±¡¢ö¦¥Í¡£¡Ö
+    ¥Ä¥»¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì((<¡¦¡¢¡¦¥ë¡¦ü§¥Í>))¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥Ï¡¢¥Ã¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+    *¡¼ú¥þ¦¥Ï¡¢¥­
+      self¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú§¡¼¡¦ò§¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥«¥¯¥µú´ü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    *"global"
+      ¥Ä¥»¡¢¥Û¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§ü¦¥Ì¡¢ä§¡¢¡¦¥ë¡¦ü§¥Í¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¡«¡¢¥µ¡¢ü£¡×
+    *"current"
+      ¥¯¥¹¥³¡¬¡¦¡¼¡¦ò§¥è¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    *"status"
+      ¡¦¡¼¡¦ò§¥è¡¢¥Û¥»¥è¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    *"release"
+      ¡¦¡¼¡¦ò§¥è¡¢ú´úÌ¥­¡¢¡«¡¢¥±¡£¡×(({nil}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#lower(below=None)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢(|below|))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥¤¥·¡¢¥Ò¥Æ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×((|below|))¡¢úÀ¥Ï¥Û¥ã¡¢¥±¡¢
+    ¡¢¥Í¡¼øÊ¥è¥¤¥·¡¢¥Ò¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÅ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#raise(above=None)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢(|above|))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥»ê¦¥Ò¥Æ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×((|above|))¡¢úÀ¥Ï¥Û¥ã¡¢¥±¡¢
+    ¡¢¥Í¡¼øÊ¥è¥»¥·ôÃ¡¼)¡¢¥Ò¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÅ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((*¥Æú²¥æ*))
+
+    self¡¢¥ãTkWindow¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢¥Ì¡¢¡Ö¡¢ö§¥¦¡¦ü§¥Ë¡¦¥å¡¦¥±¡¦¥Í¡¢¥Ì¡¢¥Þ¡£¡Ö¥Ûæµ¡¼¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢ö¦¥Û
+    ¡¢¥Ò((<Kernel#raise>))¡¢¥ã¥µ¥Í¡¢¥£¡¢¡«¡¢¥µ¡¢ü£¡×Ruby/Tk¡¦¥é¡¦ú§¡¼¡¦ò§¡¬¡¦ü§¡¼¡¢¥Ì¥Ûæµ¡¼¡¢úÊ¥Ã¥¿¥¯¡¢¥ª
+    ¡¢¥µ¡¢öÀø»î¦¥Þ¡£¡Ö((<Kernel#fail>))¡¢ú½¥Í¥Ø¥à¡¢¥±¡¢ö¦¥Û¡¢¥ã¥Õ¥ª¥Ëø¦¥Ì¡¢¥±¡£¡×
+
+--- TkWindow#command(cmd=Proc.new)
+    ¡¼ú¥þ¦¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½Proc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢ú§¥¦¡¦¡«¡¦ü§¥Î¡¢¥Í¡¢¥­¡¢¥Ë¥Ê¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      TkButton.new {
+        text "button"
+        command { puts "button" }
+        pack
+      }
+      Tk.mainloop
+
+--- TkWindow#colormodel(model=None)
+    (¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡£¡ÖTk¡¦¥ß¡£¥·¡¦¥¯¡¦î§û¹.X¡¼¥Ï¥±¡¬¡¢¥Ì¡¢¥Þ¥µ¥Í¥Ø¥à¡¢¥Ì¡¢¥å¡¢¡«¡¢¥µ¡¢((-Tk8.0¡¢¥Ì¥¦¥Û¥Ì¥¡-))
+
+    Ruby/Tk¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥©¡¦ò£¥·¡¦ä§¥Ì¡¦ö¦ú§¥©¡¦ò£¥·¡¢¥©¥Ìú»¥©¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥©¡¦ò£¥·¡¦ä§¥Ì¡¦ö¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|model|))¡¢¥Ò¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢ö¦¥Û¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+      *"color"
+      *"monochrome"
+
+    (({self}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#destroy
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú¶¡¼¥Á¥¨¡¢¥Ò¥»¥Æ¥ªü¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#wait
+--- TkWindow#wait_visibility
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥¤¥È¥µöÀ¥è¡¢¥ã¥Ï¥à¥¤¥¹¡¢¥±¡¢ö¦¡«¡¢¥Ì¥Ä¥ä¡¢¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#wait_destroy
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥ã((<TkWindow#destroy>))¡¢¥ª¡¢ø¦ö¦¡«¡¢¥Ì¥Ä¥ä¡¢¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkWindow#bindtags(taglist=nil)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(({self}))¡¢¥Û((<¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í>))¡¢(|taglist|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥Þ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¥Ê¥Á¥Í¥Ä¡¢ú¾¥£¡¢¥±¥Ì¥í¥Ûü¦¥Ì¡¢¥¹¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥Þ
+
+    *¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í
+    *¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±
+    *((<TkBindTag>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í
+    *¥Ï¥¯¥µú´"all"
+
+    ¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(({self}))¡¢¥Ì((<¡¦¡¢¡¦¥ë¡¦ü§¥Í>))¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥±¡¢ö¦¥Í
+    ¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥Û¥¦¥Ë¥Ø¥é¥Á¥Ì¡¢ú¿î¦¥Ò¥¯¡£¥³¥­¡£¡Ö¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢
+    ((<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¡¢ú¦¥±¡¢¥ë¡¢¥Ë¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦ú½¥ê¥Èô¦¥­¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í(¥Ì¥í¥Û¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥Þ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡¢¥¹¡¢¥Û¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥Í¡¢¥­¡¢¥Ë
+
+    *¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥·¥©¥½¥Í((({self})))
+    *¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±
+    *((<TkRoot>))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(¡¢¡«¡¢¥½¡¢¥Þ((<TkToplevel>))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í)
+    *"all"¡¦¥½¡¦¡¼
+
+    ¡¢úÏ¥é¥Á¥Ì¡¢¥Ò¥µ¥Á¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      b1 = TkButton.new
+      p b1.bindtags
+
+      TkToplevel.new {
+        TkButton.new(self) {
+          p bindtags
+        }
+      }
+
+      => [#<TkButton: @path=".w0000">, TkButton, #<TkRoot: @path=".">, "all"]
+         [#<TkButton: @path=".w0002.w0003">, TkButton, \
+          #<TkToplevel: @screen=nil, @path=".w0002", @classname=nil>, "all"]
+
+    ¡¼¥Ï¥¤¥·¡¢¥Þ¡£¡Ö¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥Û¥Èô·¥Á¡¢¥Û¥Ûæ¦¥Ì¡¢¥±¡£¡×
+
+      require "tk"
+      b1 = TkButton.new.pack
+      b1.bindtags [b1, Tk.root, "all"]
+      p b1.bindtags
+      Tk.mainloop
+
+      => [#<TkButton: @path=".w0000">, #<TkRoot: @path=".">, "all"]
+
+    ¡¢¥¦¡¢¥Û¡¢ð¦¥ò¡¢¥Ò¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥©¡¢ò§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¡¢¥Û¥Èô·¥Á¡¢úÀ¥Ï¡¢¡¢¡¢¥½¥»ø»î£¡Ö¡¦¥ï¡¦¥½¡¦ü¦
+    ¥³¥¯¡¦¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥­¡¢¥Ë¡¢ä£¡Ö¡¦¥ï¡¦¥½¡¦ü¦¥ã¥¤¡£¡¢¥ª¡¢ø¦¥½¥»¥è¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢ü£¡×¡¢¥¦¡¢ø¦¥Þ¡¢¥¦¡¢¥Û¥Ë¡¼¥³ü¦ú»¥ä
+    ¡¢¥ò((<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¡¢¥ã¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¡¢¥Ò¥Ä¥ß¡¢¥­¡¢¥Ë¥Ê¥ß¥Þ¥½
+    ¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥©¡¢ò¦¥Ì¡¢¥±¡£¡×
+
+    ¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥Þ"all"¡¦¥½¡¦¡¼¡¢¥Ò¡¢¥Þ
+
+       require "tk"
+       p Tk.bindinfo "all"
+
+       => ["Shift-Key-Tab", "Key-Tab", "Key-F10", "Alt-Key"]
+
+    ¡¢¥¦¡¢ø¦ò¦¥Û¡¦¥å¡£¥·¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¡¢¥±¡¢öÈ¡¼¥³ü¦¥ã¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×¡¢¥­¡¢¥½¡¢¥ã¡¢¥Æ¡¢¥Ë¥Õ¥¿¥·¥£¥Ê¥§¡¢¥Ò
+    ¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥©¡¢all"¡¦¥½¡¦¡¼¡¢ú¿¥©¡¢¥Ï¡¢¡¢¥¯¥Ä¡¢ô£¡Ö¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¡¢¥Þ¡¢¥¦¡¢ø¦
+    ¡¢¥Û¡¦¥å¡£¥·¡¢¥Ò¥Ä¥ß¡¢¥±¡¢öÈ¡¼¥³ü¦¥ã¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥¦¡¢¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+    ((*¥Æú²¥æ*))
+
+    ¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥Ò¡¢¥Þ¡£¡Ö¥Ï¥¯¥µú´ü¦ú½¥ê¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢ä¿¥ß¥Øð¦¡«¡¢¥±¡£¡×¡¢¥½¡¢¥¿¡¢¥­¡£¡Ö¥Ï¥¯¥µú´all'
+    ((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥à¡¦¥±>))¡£¡Ö((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¥Õ¥»>))¡¢¥Þ¥Ë¥Æ¥Ï¥Õ¡¼¥­¡¢¡¢¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥à¡¦¥±¥Õ¥»¡¢ú§¥½¡¦¡¼¡¢¥Ò¥µ¥ê¥Èô¦¥±¡¢ö¦¥Í¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥·¥©¥½¥Í¡¢ú½¥ê¥Èô¦¥­¡¢¥½¡¢¥Û¡¢¥Í
+    ¥Ë¥¢¡¢¥¯¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¥Ë¥¢¥Ø¥Ø¡¢¥Ò((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¥Õ¥»>))(TkButton¡¦¥Ã¡¦ò§¥±¡¢¥Ï¡¢Button") 
+    ¡¢¥Þ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¡¢ú½¥ê¥Èô¦¥­¡¢¥½¡¢¥Û¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¥Ï¥¯¥µú´ü¦¥Ì¡¦¥½¡¦¡¼¡¢úÆô·¥Á¡¢¥±¡¢
+    ¥»ø»î¦¥¦¡¢ø¦ò¦¥Í¥»¥é¥Ë¥Ø¡¢¥­¡¢¥Ï¡¢¡¢¡¢ð¦¥ò¡¢¥Ò¡¢¥­¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢(({ruby-1.4.4}))¡¼¥Ï¥±¡¬¡¢¥Ì
+    ¥Î¥¯¥¹àÇ¥³¥Î¥æ¡¢¥ª¡¢ø¦({tk.rb}))¡¢¥Ò¡¢¥Þ¡£¡Ö¡¢¥¦¡¢¥Û¡¢ð¦¥ò¡¢¥Ï¡¦¥½¡¦¡¼¡¢úÆô·¥Á¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥Ã¡¦ò§¥±
+    ((<TkBindTag>))¡¢¥ã¥È¥Î¥¤¥Æ¡¢¥ª¡¢ø¦¡«¡¢¥­¡¢¥½)
+
+      require "tk"
+      newtag = TkBindTag.new
+      TkButton.new {
+        bindtags [path, "Button", newtag]
+        p bindtags
+      }
+
+      => [#<TkButton: @path=".w0000">, TkButton, #<TkBindTag: btag00000>]
+
+=end

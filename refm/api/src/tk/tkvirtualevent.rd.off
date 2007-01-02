@@ -1,0 +1,30 @@
+# $Id: tkvirtualevent.rd,v 1.9 2000/03/04 22:13:03 arai Exp $
+# Class TkVirtualEvent is defined in tkvirtevent.rb
+=begin
+= TkVirtualEvent
+
+== ・ケ。シ・ム。シ・ッ・鬣ケ:
+
+((<TkObject>))
+
+== extend、キ、ニ、、、�тД�・蝪シ・
+
+((<Tk>))
+
+== ・ッ・鬣ケ・皈ス・テ・ノ:
+
+--- TkVirtualEvent.getobj(event)
+
+--- TkVirtualEvent.info
+
+--- TkVirtualEvent.new(*sequences)
+
+== ・皈ス・テ・ノ:
+
+--- TkVirtualEvent#add(*sequences)
+
+--- TkVirtualEvent#delete(*sequences)
+
+--- TkVirtualEvent#info
+
+=end

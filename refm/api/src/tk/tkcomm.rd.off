@@ -1,0 +1,275 @@
+# $Id: tkcomm.rd,v 1.15 2001/03/18 12:37:20 arai Exp $
+# Module TkComm is defined in tk.rb
+=begin
+= TkComm
+
+Ruby¡¢¥ÍTcl/Tk¡¢¥Û¥¨¥è¡¢¥Ì¡¦¥Ì¡£¥·¡¦¥½¡¢¥Û¥·¥Þ¡¢¥­¡¢ú»¥ä¡¢¥ò¡¢¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
+
+¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡£¡Ö¥ÎâÆ¥Õ¡£¡Ö¡¦ä§¥¯¡¦ê£¥·¡¦(<Tk>))¡¢¥Û¡¦
+¡¦¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Í¡¢¥­¡¢¥Ë¥µ¥Í¥Ø¥à¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkComm#error_at
+
+--- TkComm#tk_tcl2ruby(val)
+    ((|val|))¡¢ù³uby¡¢¥Û¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ò¥Ï¥à¥¨¥±¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#tk_split_list(str)
+    ((<Tcl¡¢¥Û¡¦ô§¥±¡¦¥Í>))¡¢úÉ¥í¥Ûü¦¥Ò¥Ï¥à¥¨¥±¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Ì¥í¥ÛüÏ¥é¥Á¥Ì¡¢¥Þ¡£¡Ö
+    ((<TkComm#tk_tcl2ruby>))¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¥Ï¥à¥¨¥±¡¢¥­¡¢¥½¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#tk_split_simplelist(str)
+    ((<Tcl¡¢¥Û¡¦ô§¥±¡¦¥Í>))¡¢úÌ¥¯¥µú´ü¦¥Û¥Ì¥í¥Ûü¦¥Ò¥Ï¥à¥¨¥±¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#hash_kv(keys)
+    ¡¼ú¥þ¦¥Ì¥Ê¥Þ¡¢¥ª¡¢ø¦¥½¡¦¥Þ¡¦¥Æ¡¦¥­¡¦éÜ"key"=>"val", ...} ¡¢ù¼"-key", "val", ...]¡¢¥Ì¡¢¡Ö¡¢
+    ¥Ì¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    Tcl/Tk¡¢¥Û((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥¦¡¦¡«¡¦ü§¥Î>))(({configure}))¡¢¥Ò¡¼ú¥þ¦úÇ¥Þ¡¢¥±¡¢¥½¡¢â¦¥Ò¥Ë
+    ¥Îþ¦¥Ì¥µ¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#array2tk_list(ary)
+    Ruby¡¢¥Û¥Ì¥í¥Û(|ary|))¡¢ùµcl¡¢¥Û¡¦ô§¥±¡¦¥Í¡¢¥Ò¥Ï¥à¥¨¥±¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#bool(val)
+    Tcl¡¢¥Û¥½¥½¥ª¥«¥Æ¥Ø((|val|))¡¢ù³uby¡¢¥Û¥½¥½¥ª¥«¥Æ¥Ø(({truby}))/(({false}))¡¢¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«
+    ¡¢¥±¡£¡×
+
+    Tcl¡¢¥Û¥½¥½¥Æ¥Ø "1", 1, "yes", "true" ¡¢¥½¥½(({true}))¡¢¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¹¡¢ø²¥Ï
+    ¥¦¡¼¡¢¥Þ¡£¡Ö¥ª¥«((({false}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#number(val)
+    Tcl¡¢¥Û¥½þÅ¥Ø(¡¢úË¥¹¡¢¥±¥Ï¥¯¥µú´(((|val|)))¡¢ù³uby¡¢¥Û¥½þÅ¥Ø¡¢¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥½þÅ¥Ø¡¢¥Í¥Í¥¹
+    ¥Æ¥Ì¡¢¥Ì¡¢¥å¡¢¥Ï¡¢¡¢¥»ø»î£¡Ö((|val|))¡¢¥¹¡¢¥Û¡¢ä¦¥Û¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((-¡¢¡¢¡¢¡¢¡¢¥Û¡£¥¥-))
+
+--- TkComm#string(val)
+    Tcl¡¢¥Û¥Ï¥¯¥µú´ü¦ù³uby¡¢¥Û¥Ï¥¯¥µú´ü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Ë¥Æ¡¢¥Ò((|val|))¡¢¥Û¥Û¥»¥Æ¥·¡¢¥Ò"{"¡£¡Ö 
+    "}" ¡¢¥ã¡¢¡Ö¡¢ø¦¥ß¡¢¥¹¡¢ø¦ò¦ú¾ð¦ô¿¥å¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#list(val)
+    ¡¼¥Ï¥¤¥·¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+      tk_split_list(((|val|))).to_a
+
+    ¡¢¥È¡¢¡«¡¢ô£¡Ö((|val|))¡¢¥ã¡¼øÏ¥é¥Á¥Ì¡¢¥Û((<Tcl¡¢¥Û¡¦ô§¥±¡¦¥Í>))¡¢¥Ì¡¢äÀþ¦¥Ò¥Ì¥í¥Ûü¦¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#window(val)
+    Tk¡¢¥Û((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥à¡¦¥±>))((|val|))¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#procedure(val)
+    ((<TkComm#install_cmd>))¡¢¥Ì¥¿¡¬¥Èô¦¥­¡¢¥½¡£¡ÖTcl¡¢¥Û((<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))((|val|))¡¢¥Ò
+    ¥Ä¥ß¥¢¥±¡¢(<Proc>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#_get_eval_string(obj)
+    ¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|obj|))¡¢¥ÛTcl/Tk¡¦¡¢¡¦ü§¥½¡¦¥é¡¦ô§¥½¡¢¥Ì¡¢¥Û¥Î¥¹¥¯¥¹¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((<TkCore#tk_call>))¡¢¥Þ¡£¡Ö¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¼ú¥þ¦ú¦¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì¥Ï¥à¥¨¥±¡¢¥­¡¢¥ËTcl¡¢¥Ò¥Ê¥Þ¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#ruby2tcl(obj)
+    ¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|obj|))¡¢¥ÛTcl/Tk¡¦¡¢¡¦ü§¥½¡¦¥é¡¦ô§¥½¡¢¥Ì¡¢¥Û¥Î¥¹¥¯¥¹¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((<TkCore#tk_call>))¡¢¥Þ¡£¡Ö¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¼ú¥þ¦ú¦¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì¥Ï¥à¥¨¥±¡¢¥­¡¢¥ËTcl¡¢¥Ò¥Ê¥Þ¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#install_cmd(cmd)
+    Proc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|cmd|))¡¢(<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))¡¢¥Í¡¢¥­¡¢¥Ë¥Ê¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))¡¢ú¾¥Ä¥±¥ä¡¢¥±¡¢õµcl¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-proc rb_out ¡¢¥Ò¡¢¥È¡¢¡¢¡¢¥Ë¥¹ø¦¥Ã-))
+
+--- TkComm#uninstall_cmd(id)
+    ((|id|))¡¢¥Ì¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½((<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))¡¢ú¼þ¿¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#install_bind(cmd, args=nil)
+    Proc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|cmd|))¡¢(<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¡¢¥Í¡¢¥­¡¢¥Ë¥Ê¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))¡¢ú¾¥Ä¥±¥ä¡¢¥±¡¢õµcl¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm#tk_event_sequence(context)
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¥·¥¢¥Ï¥Õ¥µ¥á((|context|))¡¢ùµcl¡¢¥ã¥¤ú¾â¦¥Ì¡¢¥å¡¢öÌ¥¯¥µú´ü¦¥Ò¥Ï¥à¥¨¥±¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.module_eval { tk_event_sequence ["Escape", "a"] }
+
+      => "Escape><a"
+
+--- TkComm#_bind_core(mode, path, context, cmd, args=nil)
+    ((<TkComm#_bind>))¡£¡Ö((<TkComm#_bindappend>))¡¢¥Û¥·¥Ä¥Ä¥Û¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#_bind(what, context, cmd, args=nil)
+    ((<TkComm#bind>))¡¢¥Û¥·¥Ä¥Ä¥Û¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#_bind_append(path, context, cmd, args=nil)
+    ((<TkComm#bindappend>))¡¢¥Û¥·¥Ä¥Ä¥Û¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#_bind_remove(what, context)
+    ((<TkComm#bind_remove>))¡¢¥Û¥·¥Ä¥Ä¥Û¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#_bindinfo(what, context=nil)
+    ((<TkComm#bindinfo>))¡¢¥Û¥·¥Ä¥Ä¥Û¡¢¥Ì¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkComm#_genobj_for_tkwidget(path)
+    ((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥à¡¦¥±>))((|path|))¡¢¥©¡¢ò§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((|path|))¡¢¥Ò¡¢¥ÞTcl/Tk¡¢¥Û¡¦ò§¡¢¡¦¥è¡¦ò§ô¦¥Ï¡¢¥Î¡¢¥Ì¥¿¥¯¥¿¥ç¡¢¥ª¡¢ø¦¥½¡¦¥à¡¦¥±¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¥¿¥¯¥¿¥ç¡¢¥­¡¢¥½¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Í¡¢¥­¡¢¥Ë
+    Klass(({GeneratedOnTk}))¡¢úÁ¥­¡¢¥½¡¢¥Ò¥Èô·¥Á¡¢¥­¡¢¡«¡¢¥±¡£¡×("Klass"¡¢¥Û¥ÎþÌ¥ã¡¢¥Þ¥·¥Ä¥³¥ó¡¢¥Ò
+    ¡¢¥Þ((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¥Õ¥»>))¡¢¥Ì¡¢¥±)
+
+    Ruby/Tk¡¢¥Ì¥¿¥¯¥¿¥ç¡¢¥­¡¢¥½¡¦¥à¡¦¥±¡¢ú§¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ò¥Ï¥à¥¨¥±¡¢¥±¡¢ö¦¥Ò¡¢¥Þ¡£¡Ö¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì
+    ¡¢¥Þ¡¢¥Ï¡¢¥Ã((<TkComm#window>))¡¢ú½¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥¦¡¢ø¦¥Æ¡¢¥Ëprivate¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥¯¡¢æ¦¥Ï¡¢¡¢¡£¥¥-))
+
+--- TkComm#_curr_cmd_id
+    ¥·¡£¡¢¥Û((<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))¡¢¥ÛID¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥¦¡¢ø¦¥Æ¡¢¥Ëprivate¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥¯¡¢æ¦¥Ï¡¢¡¢¡£¥¥-))
+
+--- TkComm#_next_cmd_id
+    ¥·¡£¡¢¥Û((<¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦))¡¢¥ÛID¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×ID¡¢¥Þ¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦æ¦¥ã¥¦è¦ôÇ¥Ë¡¢ò¦ø¦
+    ¥Ê¥ë¡¢¥Ò¥Á¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥¦¡¢ø¦¥Æ¡¢¥Ëprivate¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥¯¡¢æ¦¥Ï¡¢¡¢¡£¥¥-))
+
+--- TkComm#install_win(ppath)
+    ¥½¥Ë¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥à¡¦¥±((|ppath|))¡¢¥Ò¥½¥­¡¢¥­¡¢¥Ã¥µ¥á¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Í¡¢¥­¡¢¥Ë
+    (({self}))¡¢úÇ¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥¦¡¢ø¦¥Æ¡¢¥Ëprivate¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥¯¡¢æ¦¥Ï¡¢¡¢¡£¥¥-))
+
+--- TkComm#uninstall_win
+    ¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½((|self|))¡¢ú¼þ¿¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢¥¦¡¢ø¦¥Æ¡¢¥Ëprivate¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥¯¡¢æ¦¥Ï¡¢¡¢¡£¥¥-))
+
+--- TkComm#bind(tagOrClass, context, cmd=Proc.new, args=nil)
+    ((|tagOrClass|))¡¢¥Ò¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÇ¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±(¥»¥ï¥³¥ë¡¢¥Þ
+    ((<TkBindCore#bind>))¡¢ú½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢)¡£¡×
+
+    ((|tagOrClass|))¡¢¥Þ¡£¡Ö¡¦¥½¡¦¡¼(((<TkBindTag>)))¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±
+    ¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#bind_append(tagOrClass, context, cmd=Proc.new, args=nil)
+    ((|tagOrClass|))¡¢¥Ò¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÆ¥Î¥¤¥Æ¡¢¥­¡¢¡«¡¢¥±(¥»¥ï¥³¥ë¡¢¥Þ
+    ((<TkBindCore#bind>))¡¢ú½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢)¡£¡×
+
+    ((|tagOrClass|))¡¢¥Þ¡£¡Ö¡¦¥½¡¦¡¼(((<TkBindTag>)))¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±
+    ¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#bind_remove(tagOrClass, context)
+    ((|tagOrClass|))¡¢¥Ò¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¾ð¦ô¿¥å¡¢¡«¡¢¥±(¥»¥ï¥³¥ë¡¢¥Þ
+    ((<TkBindCore#bind_remove>))¡¢ú½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢)¡£¡×
+
+    ((|tagOrClass|))¡¢¥Þ¡£¡Ö¡¦¥½¡¦¡¼(((<TkBindTag>)))¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±
+    ¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#bindinfo(tagOrClass, context=nil)
+    ((|tagOrClass|))¡¢¥Ò¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö§¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¡¢¥Û¥»öÌü¦úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë
+    ¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|tagOrClass|))¡¢¥Þ¡£¡Ö¡¦¥½¡¦¡¼(((<TkBindTag>)))¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±
+    ¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+      require "tk"
+      Tk.bind_all('Button-1', proc {|x,y| printf("X=%d Y=%d\n", x, y)}, "%X %Y")
+      Tk.bind_append_all('Button-1',
+                              proc {|x,y| printf("x=%d y=%d\n", x, y)}, "%x %y")
+      p Tk.bindinfo('all', 'Button-1')
+
+      => [[#<Proc:0x4013463c>, "%X %Y"], [#<Proc:0x4013201c>, "%x %y"]]
+
+--- TkComm#bind_all(context, cmd=Proc.new, args=nil)
+    ((|context|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò¥·¥Ä¥±¥ä¡¢¥±¡¢ö§¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê
+    ¥½(|cmd|))¡¢ú¦¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¥Ä¥ß¡¢¥­¡¢¥Ë¥Ê¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×((|context|))¡£¡Ö
+    ((|args|))¡¢¥Û¥»¥ï¥³¥ë¡¢¥Þ¡£¡Ö((<TkBindCore#bind>)),((<TkComm::Event>))¡¢ú½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª
+    ¡¢¡¢¡£¡×
+
+    ¡¼¥Ï¥¤¥·¡¢¥Û¥Ûæ¦¥Þ¡¦¡«¡¦¥ò¡¦¥±¡¢ú¼¥¯¡¦¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥Û¡¼¥Õ¥Æ¥è¡¢úË¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      Tk.bind_all('Button-1', proc {|x,y| printf("X=%d Y=%d\n", x, y)}, "%X %Y")
+      Tk.mainloop
+
+--- TkComm#bind_append_all(context, cmd=Proc.new, args=nil)
+    ((<TkComm#bind_all>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡¢¥ã¡£¡Ö¡¢¥±¡¢¥Ì¡¢¥Ò¥Ë¥¢¡¢¥¯((<context>))¡¢¥Ò¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ
+    ¡¦¥Ã¥¨¥ê¥½þ¦¥ã¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß¡£¡Ö((|cmd|))¡¢úÆ¥Î¥¤¥Æ¡¢¥Ì¥Ê¥ß¥Þ¥½¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥·¥Ä¥±¥ä¥¹î¿¥Þ¥Ê¥ß¥Þ¥½¥¹î¦¥Ì¡¢¥±(¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥·¥Ä¥±¥ä¥¹î¿¥Ò¥¨¥ê
+    ¡¢¥­¡¢¥Ë¡¢¥Þ¡£¡Ö((<TkWindow#bindtags>))¡¢ä½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢)¡£¡×
+
+    ¡¼¥Ï¥¤¥·¡¢¥Û¥Ûæ¦¥Þ¡¦¡«¡¦¥ò¡¦¥±¡¢ú¼¥¯¡¦¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥Û¡¼¥Õ¥Æ¥è¡¢úË¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥³¥Ì¥¹ò¦¥Ò¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦ö¦¥Û¡¢¥Þ¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥Û¡¼¥Õ¥Æ¥è¡£¡Ö¥·¡£¡¢¥Ò¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦ö¦¥Û¡¢¥Þ¡¦¥ò¡¦¡×
+    ¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥»ê¦¥Ì¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±
+
+      require "tk"
+      Tk.bind_all('Button-1', proc {|x,y| printf("X=%d Y=%d\n", x, y)}, "%X %Y")
+      Tk.bind_append_all('Button-1',
+                              proc {|x,y| printf("x=%d y=%d\n", x, y)}, "%x %y")
+      Tk.mainloop
+
+--- TkComm#bindinfo_all(context=nil)
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í((|context|))¡¢¥Ò¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¡¢¥Û¥»öÌü¦úÉ¥í¥Ûü¦¥Ò¡¢¥­
+    ¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Ï¥è¡¢¥ª¡¢ø¦öÉ¥í¥Ûü¦¥Û¥Ø¥é¥Á¥Ì¡¢¥Þ((<TkComm#bind_all>)) ¡¢¥Û¥Ä,3¡¼ú¥þ¦¥Û¥Ì¥í¥Ûü¦¥Ì¡¢¥±¡£¡×
+
+      require "tk"
+      cursor_pos1 = proc {|x,y| printf("X=%d Y=%d\n", x, y)}
+      cursor_pos2 = proc {|x,y| printf("x=%d y=%d\n", x, y)}
+      Tk.bind_all       ('Button-1', cursor_pos1, "%X %Y")
+      Tk.bind_append_all('Button-1', cursor_pos2, "%x %y")
+      p Tk.bindinfo_all('Button-1')
+
+      => [[#<Proc:0x40133bd4>, "%X %Y"], [#<Proc:0x40131618>, "%x %y"]]
+
+    ((|context|))¡¢úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥ã¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¥·þÐà¦úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      cursor_pos = proc {|x,y| printf("X=%d Y=%d\n", x, y)}
+      Tk.bind_all('Button-1', cursor_pos, "%X %Y")
+      Tk.bind_all('Button-2', cursor_pos, "%X %Y")
+      p Tk.bindinfo_all
+
+      => ["Button-2", "Button-1", "Shift-Key-Tab", "Key-Tab", "Key-F10", "Alt-Key"]
+
+--- TkComm#pack(*args)
+    ((<TkPack.configure>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#grid(*args)
+    ((<TkGrid.configure>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkComm#update(idle=nil)
+    ((|idle|))¡¢¥ã¥½¥½¡¢¥Ì¡¢¡Ö¡¢ø¦¥ß¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Î¥Á¥¤ð¦¥Ï¡¢¥Î¡£¡Ö¥È¥Õ¥»ýµk¡¢¥ã¥Ä¥ä¡¢¥Á¥»¥è¡¢¥Ò¡¢¥Ï¡¢
+    ¡¢¡«¡¢¥Ì¥·¥Ä¥±¥ä¡¢¥ª¡¢ø¦¥Ï¡¢¡¢¥¹ðÏúÄ¥£¥³¥Ä¡¢¥Ò¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×((|idle|))¡¢¥ãfalse,nil¡¢¥Ï¡¢ò¦¥ß¥Û¥Ã¡¢¥Æ
+    ¡¢¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ï¡¢¥Î¡¢ä¦¥±¡¢¥ë¡¢¥Ë¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¥ÈôÁ
+
+--- TkComm::WidgetClassNames
+    Tcl/Tk¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¥Õ¥»¡¢ú§¥å¡£¥·¡¢¥Ò¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¥·¥©¥Ä¥Û¡¢úµ¥Ï¥Ì¥·¡¢¥­¡¢¥½¡¦¥Þ¡¦¥Æ
+    ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×
+
+--- TkComm::None
+    ¡¼¥æ¥Õ¡×¡¢ú½¥½¡¢¥Ï¡¢¡¢¥Æ¥Ø¡¢úË¥¹¡¢¥±¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥ãTcl¡¦¡¢¡¦ü§¥½¡¦¥é
+    ¡¦ô§¥½¡¢¥Ò¥Ê¥Þ¡¢¥ª¡¢ø¦ö¦¥¦¡¢¥Í¡¢¥Þ¡¢¡Ö¡¢ô¦¡«¡¢¥µ¡¢ü£¡×((({nil}))¡¢¥Þ¡£¡Ö¥«¥¯¥µú´ü¦¥Í¡¢¥­¡¢¥ËTcl¡¦¡¢¡¦ü§¥½
+    ¡¦¥é¡¦ô§¥½¡¢¥Ò¥Ê¥Þ¡¢¥ª¡¢ø¦ö¦¥¦¡¢¥Í¡¢¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±)
+
+    ¡¦â§¥¹¡¦¥Æ¡¦¥Î¥Èô·¥Á¡¢¥Û¥³¥ó¡¢¥Ò
+
+      method(arg1, arg2=None)
+
+    ¡¢¥Í¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¡£¡Ö(('method(arg1)'))¥­¥Á¥·¡¼¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¥Í(('method(arg1,
+    arg2)'))¥­¥Á¥·¡¼¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¥Û2¥·þÐà¦¥Û¥Ø¥à¥Ê¥â¡¢¡¢¥È¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì¥·¥Ä¥¯¥¹¡¢¥­¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Tk_CMDTBL
+    {¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦åªD => Proc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í}¡¢¥Ì¡¢¡Ö¡¢ö§¥Þ¡¦¥Æ¡¦¥­¡¦ê£¡×
+
+--- TkComm::Tk_WINDOWS
+    {¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥à¡¦¥± => ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í}¡¢¥Ì¡¢¡Ö¡¢ö§¥Þ¡¦¥Æ¡¦¥­¡¦ê£¡×
+
+--- TkComm::Tk_IDs
+    [¡¦¥é¡¦ú§¥­¡£¥·¡¦¥¯¡¦åªD¡¢¥Û¡¦¥©¡¦¥ò¡¦ü§¥½¡£¡Ö¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥òID¡¢¥Û¡¦¥©¡¦¥ò¡¦ü§¥½]¡¢¥Ì¡¢¡Ö¡¢öÉ¥í¥Ûü¦¥Ì¡¢¥±¡£¡×
+
+=end

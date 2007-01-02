@@ -1,0 +1,30 @@
+# $Id: tktextimage.rd,v 1.9 2000/03/04 22:13:03 arai Exp $
+# Class TkTextImage is defined in tktext.rb
+=begin
+= TkTextImage
+
+== ・ケ。シ・ム。シ・ッ・鬣ケ:
+
+((<TkObject>))
+
+== ・ッ・鬣ケ・皈ス・テ・ノ:
+
+--- TkTextImage.new(parent, index, keys)
+
+== ・皈ス・テ・ノ:
+
+--- TkTextImage#[](slot)
+
+--- TkTextImage#[]=(slot, value)
+
+--- TkTextImage#cget(slot)
+
+--- TkTextImage#configure(slot, value=None)
+
+--- TkTextImage#image
+
+--- TkTextImage#image=(value)
+
+--- TkTextImage#configinfo(slot = nil)
+
+=end

@@ -1,0 +1,224 @@
+# $Id: tklistbox.rd,v 1.15 2001/03/18 12:39:30 arai Exp $
+# Class TkListbox is defined in tk.rb
+=begin
+= TkListbox
+
+¡¦ô§¥±¡¦¥Í¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦ô§¥±¡¦¥Í¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¥±àÎ¥ï¡¢¥Û¡¼øÏúË¥¹¡¢¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+  list = TkListbox.new { setgrid 'yes'; pack }
+  list.insert 'end', "abc"
+  list.insert 'end', "def"
+  list.insert 'end', "123"
+  list.insert 'end', "456"
+  Tk.mainloop
+
+¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥¿äÎ¥¿¡¢¥Û¥Æì¦¥Ì((*¡¼¥Õ¥Æ¥è*))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢ú½¥ê¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+*¥½þ½
+
+ ¥½þ½ùè¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥Ø¥é¥Á¥Ì¡¼¥Õ¥Æ¥è(¥»êÅ¥·¡¢¥Þ0)
+
+*"@x,y"
+
+ x¡£¡Öy ¡¢¥Þ¥½þ½ùè¥Ì¡¢¥±¡£¡×
+ ¥½þ½ùè¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö²¥Õ¥Æ¥è(¥Ë¥Þ¥Øü¦¥Û¥³¥¯¥»êÅ¥·¡¢¥Þ0¡¢¥©¡¢ò½¥Þ¡¢¡«¡¢
+
+*"active"
+
+ ¡¦¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è(¡¦¥©¡£¥·¡¦¥¹¡¦ö²¥Õ¥Æ¥è¡¢¥Û¡¢¥¦¡¢¥Í)¡¢¥Ì¡¢¡Ö¡¢öÏ¥é¥Á¥Ì¡¢¥Û¡¼¥Õ¥Æ¥è
+
+*"end"
+
+ ¥³¥Ì¥¯ê¦¥Û¥Ø¥é¥Á¥Ì¡¢¥Û¡¼¥Õ¥Æ¥è
+
+*"anchor"
+
+ ???
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkTextWin>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk::Scrollable>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkListbox#activate(y)
+    ((|y|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢ú§¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¹¡¢¥Û¡¦ô§¥±¡¦¥Í
+    ¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢¥Ò((<¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢¥ã¡¢¡Ö¡¢ø¦¥ß¡£¡Ö¡¦¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è¡¢¥Ï¥±¥ä¡¢¥Ò¡¢¥Þ¥¤¥·¥¿¥ã¡¼
+    ¡¢¥©¡¢ø¦¡«¡¢¥±¡£¡×
+
+     require "tk"
+     TkListbox.new {
+       insert 'end', "foo"
+       insert 'end', "bar"
+       insert 'end', "baz"
+       activate 1
+       #focus
+       pack
+     }
+     Tk.mainloop
+
+--- TkListbox#curselection
+    ((<¥Á¥§¥Ä))¡¢¥ª¡¢ø¦¥½¥Ø¥é¥Á¥Ì¡¢¥Û¥Ø¥é¥Á¥Ì¥Í¥è¥±ì¦úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±(¥Ø¥é¥Á¥Ì¥Í¥è¥±ì¦¥Þ¥»êÅ¥·¡¢¥ã0)
+
+--- TkListbox#get(index)
+--- TkListbox#get(first, last)
+    ¡¼ú¥þ¦¥ã1¡¢¥È¡¢¥Û¥»ø»î£¡Ö¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢úÌ¥¯¥µú´ü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã2¡¢¥È¡¢¥Û¥»ø»î£¡Ö¥µ¥ê¥Èô¦¥­¡¢¥½¥Í¥Þ¡¼¥Þ¡¢¥Û¥Ø¥é¥Á¥Ì¡¢úÌ¥¯¥µú´ü¦¥Û¥Ì¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkListbox#nearest(y)
+    ((|y|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½Y¥³¥Ä¥Î¥¯¡¢¥Ò¥«â¦¡¢¥Ø¥é¥Á¥Ì¡¢¥Û¥Ø¥é¥Á¥Ì¥Í¥è¥±ì¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkListbox#size
+    ¥Ø¥é¥Á¥Ì¡¢¥Û¥½þ¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkListbox#selection_anchor(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢(<¡¦¡Ö¡¦ü§¥©¡£¥·>))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkListbox#selection_clear(first, last=None)
+    ((|first|))¡£¡Ö((|last|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Í¥Þ¡¼¥Þ¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥ã((<¥Á¥§¥Ä))¡¢¥ª
+    ¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß¥ÍüÃ¥§¥Äú¦¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×((|last|))¡¢úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö((|first|))¡¢¥Û((*¡¼¥Õ
+    ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢úÊüÃ¥§¥Äú¦¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkListbox#selection_includes(index)
+    (({index}))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥ã((<¥Á¥§¥Ä))¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢
+    ¥½¥½¥ª¥«¥Æ¥Ø(({true}))/(({false}))¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      l = TkListbox.new {
+        100.times {|i| insert "end", i}
+      }.pack
+      p l.selection_set(0)
+      p l.selection_includes(0)
+      Tk.mainloop
+
+--- TkListbox#selection_set(first, last=None)
+    ((|first|))¡£¡Ö((|last|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Í¥Þ¡¼¥Þ¡¢¥Û¥Ø¥é¥Á¥Ì¡¢(<¥Á¥§¥Ä))¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×((|last|))¡¢úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö((|first|))¡¢¥Û((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢úÃ¥§¥Äú¦¥­
+    ¡¢¡«¡¢¥±¡£¡×
+
+--- TkListbox#itemcget(index, key)
+
+--- TkListbox#itemconfigure(index, key, val=None)
+
+--- TkListbox#itemconfiginfo(index, key=nil)
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#background>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#exportselection>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#relief>))
+
+((<TkObject#selectbackground>))
+
+((<TkObject#selectborderwidth>))
+
+((<TkObject#selectborderwidth>))
+
+((<TkObject#setgrid>))
+
+((<TkObject#takefocus>))
+
+### ((<TkObject#xscrollcommand>))
+
+### ((<TkObject#yscrollcommand>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkListbox#height
+    ¥µ¥ê¥Èô¦¥­¡¢¥½¥Ø¥é¥Á¥Ì¡¢¥Û¥½þ¦ú§ô§¥±¡¦¥Í¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢¥Û¥±ä¦¥ª¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×0¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»
+    ¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥ã¥·¡«¡¢ö¦ð¦¥ò¡¢¥Ò¥·¥©¥Ë¡¼¥Ê¥§¡¢¥Ò¥±ä¦¥ª¡¢¥ã¥È¥¨¥¿¡¼¡¢¥ª¡¢ø¦¡«¡¢¥±(¡¢¥¦¡¢¥Û¥»ø»î£¡Ö¥µ¥¤¥»¥Í¥­
+    ¥¤¥Õ¡¢¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±)¡£¡×
+
+      require "tk"
+      TkListbox.new {
+       height 0
+       insert "end", "a"
+       insert "end", "b"
+       insert "end", "c"
+       p height
+      }.pack
+      Tk.mainloop
+
+--- TkListbox#selectmode
+    ¥±¥ä¡¢(<¥Á¥§¥Ä))¡¢¥±¡¢ö¦¥Í¡¢¥å¡¢¥Û¥½¥«¡¢öËø¦¡¢¡¢ú²¥Ï¥¤¥·¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"single"
+     *1¥Ê¥ë¡¢¥Ò1¥±¥ä¡¢¥­¡¢¥©¥Á¥§¥Äú¦¥Ì¡¢¥å¡¢¡«¡¢¥µ¡¢¥Ä¥»¡¢¥Û¥±¥ä¡¢úÃ¥§¥Äú¦¥±¡¢ö¦¥Í¥½¥­¡¢¥­¡¢¥Ã¥Á¥§¥Äú¦¥­¡¢¥Ï¡¢¥§¡¢¥­¡¢¡«¡¢¥±)¡£¡×
+    *"browse"(¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í)
+     *1¥Ê¥ë¡¢¥Ò1¥±¥ä¡¢¥­¡¢¥©¥Á¥§¥Äú¦¥Ì¡¢¥å¡¢¡«¡¢¥µ¡¢¥Ä¥»¡¢¥Û¥±¥ä¡¢úÃ¥§¥Äú¦¥±¡¢ö¦¥Í¥½¥­¡¢¥­¡¢¥Ã¥Á¥§¥Äú¦¥­¡¢¥Ï¡¢¥§¡¢¥­¡¢¡«¡¢¥±)¡£¡×
+     *¡¦¥ï¡¦¥½¡¦¡¢ú§¥Î¡¦ò§¥Æ¡¦¡¼¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¥Á¥§¥Äú»àÎ¥ï¡¢úÌ¥à¥±¥±¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+    *"multiple"
+     *1¥Ê¥ë¡¢¥Ò¥Ï¡×¥½þ¦¥Û¥±¥ä¡¢úÃ¥§¥Äú¦¥Ì¡¢¥å¡¢¡«¡¢¥±
+     *¥Á¥§¥Äú¦¥­¡¢¥½¥±¥ä¡¢ú§¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥±¡¢ö¦¥Í¡¢¥¹¡¢¥Û¥±¥ä¡¢¥Þ¥ÍüÃ¥§¥ÄúÀ¥è¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±
+    *"extended"
+     *¡¦¡«¡¦¥ò¡¦¥±¡¦¥ï¡¦¥½¡¦¡¢ú§¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥±¡¢ö¦¥Í¡¢¥¹¡¢¥Û¥±¥ä¡¢¥Þ¥Á¥§¥ÄúÀ¥è¡¢¥Ò¡¢¥Ï¡¢(<¡¦¡Ö¡¦ü§¥©¡£¥·>))¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+     *((%Ctrl%))¡¦¥å¡£¥·¡¢ú´¡£¡¢¥­¡¢¥Ï¡¢¥ã¡¢ò§¡«¡¦¥ò¡¦¥±¡¦¥ï¡¦¥½¡¦¡¢ú§¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì1¥Ê¥ë¡¢¥Ò¥Ï¡×¥½þ¦¥Û¥±¥ä¡¢úÃ¥§¥Äú¦¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+     *((%SHIFT%))¡¦¥å¡£¥·¡¢ú´¡£¡¢¥­¡¢¥Ï¡¢¥ã¡¢ò§¡«¡¦¥ò¡¦¥±¡¦¥ï¡¦¥½¡¦¡¢ú§¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì((<¡¦¡Ö¡¦ü§¥©¡£¥·>))¡¢¥©¡¢ò§¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥­¡¢¥½¥±¥ä¡¢¡«¡¢¥Ì¡¢ú¦¥±¡¢¥ë¡¢¥Ë¥Á¥§¥Äú¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((-¡¢ä¦¥Æ¡¢¥Í¥»¥ï¥³¥ë¡¢¥Ò-))
+
+    ¡¼¥Ï¥¤¥·¡¢¥Ì¡£¡Ö¥¦¥Ë¡¦ä£¥·¡¦¥Î¡¢¥Û¥Ë¡¼¥³ü¦¥Û¡¼æ¦¡¢¡¢úµ¥Û¥Ì¥¡¡¢¥­¡¢¥Ë¡¢¡¬¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢¡£¡×
+
+      require "tk"
+
+      list = TkListbox.new {
+        ("a".."z").each {|c| insert 'end', c}
+      }.pack 'fill'=>'both', 'expand'=>true
+
+      mode_var = TkVariable.new("browse")       # default mode
+
+      TkLabel.new {
+        text "select one of below modes"
+      }.pack 'fill'=>'x'
+
+      %w(single browse multiple extended).each {|mode|
+        TkRadioButton.new {
+          text mode
+          variable mode_var
+          value mode
+          command {
+            list.selectmode mode
+          }
+        }.pack 'side'=>'left', 'fill'=>'x', 'expand'=>true
+      }
+      Tk.mainloop
+
+--- TkListbox#width
+    ¥ÎúÌ¥¯¥µú¥þ¦¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×0¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î¦¥±¡¢¥ë¡¢¥Ë¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥Û¥Ï¥¯¥µú´ü¦¥ã¥·
+    ¡¢¡«¡¢ö¦ð¦¥ò¡¢¥Ò¥·¥©¥Ë¡¼¥Ê¥§¡¢¥Ò¥Î¥ã¥È¥¨¥¿¡¼¡¢¥ª¡¢ø¦¡«¡¢¥±(¡¢¥¦¡¢¥Û¥»ø»î£¡Ö¥µ¥¤¥»¥Í¥­ö´¥Õ¡¢¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±)¡£¡×
+
+      require "tk"
+      TkListbox.new {
+       width 0
+       insert "end", "a" * 10
+       insert "end", "b"
+       insert "end", "c"
+       p width
+      }.pack
+      Tk.mainloop
+
+    ¡¦¥æ¡¦¥¥¡¦ü§¥Í¡¢¥ã¥¯¥Ì¥ÈôË¥Ì¡¢¥Þ¡¢¥Ï¡¢¡¢¥»ø»î£¡Ö¥Ï¥¯¥µ0"¡¢¥Û¥Îú¶ö¿à¦¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+=end

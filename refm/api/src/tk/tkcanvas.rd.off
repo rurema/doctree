@@ -1,0 +1,304 @@
+# $Id: tkcanvas.rd,v 1.14 2001/03/18 12:37:09 arai Exp $
+# Class TkCanvas is defined in tkcanvas.rb
+=begin
+= TkCanvas
+
+¡¦¥å¡¦æ§ü§¥ß¡¦¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×¡¦¥å¡¦æ§ü§¥ß¡¦¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¡¢¥Þ¡¦¡Ö¡¦¡¢¡¦¥Ë¡¦
+¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(((<TkcItem>))¡¢¥Û¡¦¥ª¡¦¥è¡¦¥Ã¡¦ò§¥±¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í)¡¢úÆ¡¦¡¢ôË¥æ¡¢¥¢¡¢ö¦¥¦¡¢¥Í
+¡¢¥ã¥¹¥ß¥Øð¦¡«¡¢¥±¡£¡×
+
+  require "tk"
+
+  TkCanvas.new {
+    xscrollincrement 50
+    yscrollincrement 50
+    scrollregion [10, 10, 500, 500]
+    xscrollbar(TkScrollbar.new).grid 'column'=>0, 'row'=>1, 'sticky'=>'ew'
+    yscrollbar(TkScrollbar.new).grid 'column'=>1, 'row'=>0, 'sticky'=>'ns'
+
+    TkcOval.new(self, 40, 40, 240, 340)
+    grid 'column'=>0, 'row'=>0, 'sticky'=>'nsew'
+  }
+  TkGrid.columnconfigure Tk.root, 0, 'weight'=>100
+  TkGrid.rowconfigure    Tk.root, 0, 'weight'=>100
+
+  Tk.mainloop
+=end
+¡¼¥Ï¥¤¥·¡¢¥Þ¡£¡Ö((<Scrollable#xscrollbar>))¡¢¥ã¡¢¥Ï¡¢¥©¡¢¥Æ¡¢¥½¥³¡Ö¡¢¥Û¥Û
+
+  require "tk"
+
+  xscrol = yscrol = canvas = nil
+
+  TkFrame.new {
+    canvas = TkCanvas.new(self) {
+      xscrollcommand {|arg| xscrol.set *arg}
+      yscrollcommand {|arg| yscrol.set *arg}
+      xscrollincrement 50
+      yscrollincrement 50
+      scrollregion [10, 10, 500, 500]
+      TkcOval.new(self, 40, 40, 240, 340)
+      pack 'side'=>'left', 'fill'=>'both', 'expand'=>true
+    }
+
+    yscrol = TkScrollbar.new(self) {
+      orient "vertical"
+      command {|arg| canvas.yview *arg}
+      pack 'side'=>'left', 'fill'=>'both'
+    }
+    pack 'fill'=>'both', 'expand'=>true
+  }
+
+  xscrol = TkScrollbar.new {
+    orient "horizontal"
+    command {|arg| canvas.xview *arg}
+    pack 'fill'=>'both'
+  }
+
+  Tk.mainloop
+=begin
+
+¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥¿äÎ¥¿¡¢¥Û¥Æì¦¥Ì((*¡¼¥Õ¥Æ¥è*))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢ú½¥ê¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+*¥½þ½
+
+ ¥½þ½ùè¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥Ï¥¯¥µùô¥Õ¥Æ¥è(¥Ë¥Þ¥Øü¦¥Û¥³¥¯¥Æ¥·¡¢¥Þ0¡¢¥©¡¢ò½¥Þ¡¢¡«¡¢
+*"@x,y"
+
+ ¥½þ½ùè¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö²¥Õ¥Æ¥è(¥Ë¥Þ¥Øü¦¥Û¥³¥¯¥Æ¥·¡¢¥Þ0¡¢¥©¡¢ò½¥Þ¡¢¡«¡¢
+*"end"
+
+ ¥Ë¥Þ¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢öÌ¥¯¥µùè¥Û¥³¥Ì¥¯ê¦¥Û¡¼¥Õ¥Æ¥è
+*"insert"
+
+ ¡¦¥©¡£¥·¡¦¥¹¡¦ö²¥Õ¥Æ¥è
+*"sel.first"
+
+ selection¡¢¥Ì¥µ¥ê¥Èô¦¥ª¡¢ø¦¥½¥Ï¥¯¥µú´ü¦¥Û¥³¥Ì¥¹ò¦¥Û¥Ï¥¯¥µùè¥Û¡¼¥Õ¥Æ¥è
+*"sel.last"
+
+ selection¡¢¥Ì¥µ¥ê¥Èô¦¥ª¡¢ø¦¥½¥Ï¥¯¥µú´ü¦¥Û¥³¥Ì¥¯ê¦¥Û¥Ï¥¯¥µùè¥Û¡¼¥Õ¥Æ¥è
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkTreatCItemFont>))
+
+((<Tk::Scrollable>))
+
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkCanvas#tagid(tag)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkCanvas#addtag(tag, mode, *args)
+
+--- TkCanvas#addtag_above(tagOrId, target)
+
+--- TkCanvas#addtag_all(tagOrId)
+
+--- TkCanvas#addtag_below(tagOrId, target)
+
+--- TkCanvas#addtag_closest(tagOrId, x, y, halo=None, start=None)
+
+--- TkCanvas#addtag_enclosed(tagOrId, x1, y1, x2, y2)
+
+--- TkCanvas#addtag_overlapping(tagOrId, x1, y1, x2, y2)
+
+--- TkCanvas#addtag_withtag(tagOrId, tag)
+
+--- TkCanvas#bbox(tagOrId, *tags)
+
+--- TkCanvas#itembind(tag, context, cmd=Proc.new, args=nil)
+
+--- TkCanvas#itembind_append(tag, context, cmd=Proc.new, args=nil)
+
+--- TkCanvas#itembindinfo(tag, context=nil)
+
+--- TkCanvas#canvasx(x, *args)
+
+--- TkCanvas#canvasy(y, *args)
+
+--- TkCanvas#coords(tag, *args)
+
+--- TkCanvas#dchars(tag, first, last=None)
+
+--- TkCanvas#delete(*args)
+--- TkCanvas#remove(*args)
+
+--- TkCanvas#dtag(tag, tag_to_del=None)
+
+--- TkCanvas#find(mode, *args)
+    ¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡Ö¡¦¡¢¡¦¥Ë¡¦à¦úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|mode|))¡¢¥Ò¡¢¥Þ¡£¡Ö
+    *"above"
+    *"all"
+    *"below"
+    *"closest"
+    *"enclosed"
+    *"overlapping"
+    *"withtag"
+
+--- TkCanvas#find_above(target)
+    ((|target|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡Ö¡¦¡¢¡¦¥Ë¡¦à¦ð¦ô¦äÀê¦¥Ò¡¢¡Ö¡¢ö§¡Ö¡¦¡¢¡¦¥Ë¡¦à¦úÏ¥é¥Á¥Ì¡¢¥Ò¥µ¥È¥Ì¥í
+    ¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCanvas#find_all
+    ¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¦¡Ö¡¦¡¢¡¦¥Ë¡¦à¦úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+
+      x1 = 10
+      y1 = 10
+      x2 = 250
+      y2 = 200
+      x3 = (x2-x1)/2 + x1
+      y3 = (y2-y1)/2 + y1
+      TkCanvas.new {
+        TkcArc.new       self, x1, y1, x2, y2, 'width'=>2.0
+        TkcBitmap.new    self, x3, y3, 'bitmap'=>'error'
+        TkcImage.new     self, x3, y3, 'image'=> TkPhotoImage.new
+        TkcLine.new      self, x1, y1, x2, y2, 'arrow'=>'both'
+        TkcOval.new      self, x1, y1, x2, y2
+        TkcPolygon.new   self, x3, y1, x2, y3, x3, y2, x1, y3,
+               'fill'=>'', 'outline'=>'black'
+        TkcRectangle.new self, x1, y1, x2, y2
+        TkcText.new      self, x2+20, y2-20, 'text'=>"foo\nbar"
+        TkcWindow.new    self, x2, y2, 'window'=>TkButton.new
+
+        puts find_all
+        pack
+      }
+
+      Tk.mainloop
+
+      => #<TkcArc:0x4045c9c0>
+         #<TkcBitmap:0x4045c678>
+         #<TkcImage:0x4045c27c>
+         #<TkcLine:0x4045be30>
+         #<TkcOval:0x4045be08>
+         #<TkcPolygon:0x4045b7a0>
+         #<TkcRectangle:0x4045b78c>
+         #<TkcText:0x4045b228>
+         #<TkcWindow:0x4045aea4>
+
+--- TkCanvas#find_below(target)
+    ((|target|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡Ö¡¦¡¢¡¦¥Ë¡¦à¦ð¦ô¦ä´¥·¡¢¥Ò¡¢¡Ö¡¢ö§¡Ö¡¦¡¢¡¦¥Ë¡¦à¦úÏ¥é¥Á¥Ì¡¢¥Ò¥µ¥È¥Ì¥í
+    ¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCanvas#find_closest(x, y, halo=None, start=None)
+
+--- TkCanvas#find_enclosed(x1, y1, x2, y2)
+    ¡¼ú¥þ¦¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥«ö¹¥Á¡¢¥Û¥Æì¦¥Ò¡¢¡Ö¡¢ö§¡Ö¡¦¡¢¡¦¥Ë¡¦à¦úÏ¥é¥Á¥Ì¡¢¥Ò¥µ¥È¥Ì¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCanvas#find_overlapping(x1, y1, x2, y2)
+    ¡¼ú¥þ¦¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥«ö¹¥Á¡¢¥Í¥¹¥Ê¡¢¥Ï¡¢ö§¡Ö¡¦¡¢¡¦¥Ë¡¦à¦úÏ¥é¥Á¥Ì¡¢¥Ò¥µ¥È¥Ì¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (({find_enclosed}))¡¢¥Ì¥¯¥©¡¢¥È¡¢¥©¡¢ö§¡Ö¡¦¡¢¡¦¥Ë¡¦à¦¥Þ¡£¡Ö(({find_overlapping}))¡¢¥Ì¡¢
+    ¥¯¥©¡¢¥È¡¢¥©¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkCanvas#find_withtag(tag)
+
+--- TkCanvas#itemfocus(tagOrId=nil)
+
+--- TkCanvas#gettags(tagOrId)
+
+--- TkCanvas#icursor(tagOrId, index)
+
+--- TkCanvas#index(tagOrId, index)
+
+--- TkCanvas#insert(tagOrId, index, string)
+
+--- TkCanvas#itemcget(tagOrId, option)
+
+--- TkCanvas#itemconfigure(tagOrId, key, value=None)
+
+--- TkCanvas#itemconfiginfo(tagOrId, key=nil)
+
+--- TkCanvas#lower(tag, below=None)
+
+--- TkCanvas#move(tag, x, y)
+
+--- TkCanvas#postscript(keys)
+
+--- TkCanvas#raise(tag, above=None)
+
+--- TkCanvas#scale(tag, x, y, xs, ys)
+
+--- TkCanvas#scan_mark(x, y)
+
+--- TkCanvas#scan_dragto(x, y)
+
+--- TkCanvas#select(mode, *args)
+
+--- TkCanvas#select_adjust(tagOrId, index)
+
+--- TkCanvas#select_clear
+
+--- TkCanvas#select_from(tagOrId, index)
+
+--- TkCanvas#select_item
+
+--- TkCanvas#select_to(tagOrId, index)
+
+--- TkCanvas#itemtype(tag)
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#background>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#insertbackground>))
+
+((<TkObject#insertborderwidth>))
+
+((<TkObject#insertofftime>))
+
+((<TkObject#insertontime>))
+
+((<TkObject#insertwidth>))
+
+((<TkObject#relief>))
+
+((<TkObject#selectbackground>))
+
+((<TkObject#selectborderwidth>))
+
+((<TkObject#selectforeground>))
+
+((<TkObject#takefocus>))
+
+### ((<TkObject#xscrollcommand>))
+
+### ((<TkObject#yscrollcommand>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkCanvas#closeenough
+
+--- TkCanvas#confine
+
+--- TkCanvas#height
+
+--- TkCanvas#scrollregion
+
+--- TkCanvas#width
+
+--- TkCanvas#xscrollincrement
+
+--- TkCanvas#yscrollincrement
+
+=end

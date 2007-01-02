@@ -1,0 +1,83 @@
+# $Id: tkframe.rd,v 1.13 2001/03/18 12:39:30 arai Exp $
+# Class TkFrame is defined in tk.rb
+=begin
+= TkFrame
+
+¡¦¥æ¡¦ø£¥·¡¦à§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦¥æ¡¦ø£¥·¡¦à§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÉ¥í¥Æ¥è¡¢¥±¡¢ö¦¥½¡¢â¦¥¿¡¢¥¢¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+((<TkWindow#pack>))¡¢ú½¥Í¡¢¥Æ¡¢¥Ë¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úµ¥Ï¥µ¥á¥»¥Ò¥Ì¥í¥Æ¥è¡¢¥±¡¢ö¦¥Ò¡¢¥Þ¡£¡Ö¡¦¥æ¡¦ø£¥·
+¡¦à§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú½¥Í¡¢¥ò¥Î¥ã¥Ø¥é¡¢¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±¡£¡×
+
+  require "tk"
+
+  TkFrame.new {
+    TkLabel.new(self, {"text"=>"A"}).pack "side"=>"left"
+    TkLabel.new(self, {"text"=>"B"}).pack "side"=>"left"
+  }.pack
+  TkFrame.new {
+    TkLabel.new(self, {"text"=>"C"}).pack "side"=>"left"
+    TkLabel.new(self, {"text"=>"D"}).pack "side"=>"left"
+  }.pack
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#borderwidth>))
+((<TkObject#bd>))
+
+((<TkObject#cursor>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkFrame#background(color)
+--- TkFrame#bg(color)
+    ¡¦¥æ¡¦ø£¥·¡¦à¦¥Û¥½¥¡¡¢(|color|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×(({TkFrame}))¡¢¥Û¡¢¥¦¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Þ¡£¡Ö
+    ((|color|))¡¢¥ã¥«¥¯¥µú´({""}))¡¢¥Û¥»ø»îÎ¥ª¥½¥¡¡¢ú²¥æ¥Õ¡×¡¢¥±¡¢öÇ¥¿¡¢¥Ì¥Ë¥Æ¥·ø¦¥Ì¡¢¥±¡£¡×
+    ((-¥¤¥½¡¢¥©¥Û¥Î¡¢¡¢¥Ûæ¦¥Þ¡£¥¥-))
+
+### --- TkFrame#class
+--- TkFrame#classname
+    Tcl/Tk¡¢¥Ò¡¢¥§¡¢¥¢¡¢ö¦¥¦¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Û¥Õ¥»¥Á¡¼¡¢¥Þ¡£¡Ö(({class})) ¡¢¥Ì¡¢¥±¡¢¥ã¡£¡Öruby¡¢¥Û¥Ø¥¹¥Õüº
+    ¡¢¥Í¥»¥é¥Ë¥Ø¡¢¥±¡¢ö¦¥Û¡¢¥Ì¥Ï¥Õ¥Õ¥»¡¢¥Í¡¢¥­¡¢¥Ë(({classname}))¡¢¥ã¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥±((-¥Ò¥ï¥Ê¥Ò¡¢¥¹¡¢¥ò
+    ¡¢¡¢¡¢¥ò¡¼¥æ¥¾¡£¥¥-))¡£¡×
+
+    ¡¢¥¦¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Þ¡£¡Ö¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¥¿¥¯¥¿¥ç¥µ¥Ò(({new}))¡¢¥Û¡¼ú¥þ¦¥Ì¡¢¥­¡¢¥©¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢¡«
+    ¡¢¥µ¡¢ü£¡×¥Æ¥Ø¡¢ú½¥¤¥»¥Í¡¢¥±¡¢ö¦¥Ò¡¢¥Þ¥Ë¥¢¥Õ¥»¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¥Ï¥à¥½({@classname}))¡¢ú½¥Í¥Ø¥à¡¢¥­¡¢¡«
+    ¡¢¥±¡£¡×
+
+--- TkFrame#colormap
+    ¡¢¥¦¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Þ¡£¡Ö¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¥¿¥¯¥¿¥ç¥µ¥Ò(({new}))¡¢¥Û¡¼ú¥þ¦¥Ì¡¢¥­¡¢¥©¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢¡«
+    ¡¢¥µ¡¢ü£¡×¥Æ¥Ø¡¢ú½¥¤¥»¥Í¡¢¥±¡¢ö¦¥Ò¡¢¥Þ¥Ë¥¢¥Õ¥»¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¥Ï¥à¥½þ¦ú½¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkFrame#container(bool)
+    ¡¢¥¦¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Þ¡£¡Ö¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¥¿¥¯¥¿¥ç¥µ¥Ò(({new}))¡¢¥Û¡¼ú¥þ¦¥Ì¡¢¥­¡¢¥©¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢¡«
+    ¡¢¥µ¡¢ü£¡×¥Æ¥Ø¡¢ú½¥¤¥»¥Í¡¢¥±¡¢ö¦¥Ò¡¢¥Þ¥Ë¥¢¥Õ¥»¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¥Ï¥à¥½þ¦ú½¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkFrame#height(h)
+    ¡¦¥æ¡¦ø£¥·¡¦à¦¥Û¥±ä¦¥ª¡¢(|h|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×((|h|))¡¢¥ã0¡¢¥Û¥»ø»î£¡Ö¡¦¥æ¡¦ø£¥·¡¦à¦¥Û¥±ä¦¥ª¡¢¥Þ¥Ë
+    ¥Îþ¦¥Ò¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥±ä¦¥ª¡¢¥Ò¥¹¥»¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkFrame#visual
+    ¡¢¥¦¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Þ¡£¡Ö¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¥¿¥¯¥¿¥ç¥µ¥Ò(({new}))¡¢¥Û¡¼ú¥þ¦¥Ì¡¢¥­¡¢¥©¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢¡«
+    ¡¢¥µ¡¢ü£¡×¥Æ¥Ø¡¢ú½¥¤¥»¥Í¡¢¥±¡¢ö¦¥Ò¡¢¥Þ¥Ë¥¢¥Õ¥»¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¥Ï¥à¥½þ¦ú½¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkFrame#width(w)
+    ¡¦¥æ¡¦ø£¥·¡¦à¦¥Û¥Î(|w|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×((|w|))¡¢¥ã0¡¢¥Û¥»ø»î£¡Ö¡¦¥æ¡¦ø£¥·¡¦à¦¥Û¥Î¥Þ¥ËäËþ¦¥Ò
+    ¥Ì¥í¥Æ¥è¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Î¥Ò¥¹¥»¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+=end

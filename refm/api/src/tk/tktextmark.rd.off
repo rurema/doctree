@@ -1,0 +1,30 @@
+# $Id: tktextmark.rd,v 1.9 2000/03/04 22:13:03 arai Exp $
+# Class TkTextMark is defined in tktext.rb
+=begin
+= TkTextMark
+
+== ・ケ。シ・ム。シ・ッ・鬣ケ:
+
+((<TkObject>))
+
+== ・ッ・鬣ケ・皈ス・テ・ノ:
+
+--- TkTextMark.new(parent, index)
+
+== ・皈ス・テ・ノ:
+
+--- TkTextMark#id
+
+--- TkTextMark#set(where)
+
+--- TkTextMark#unset
+
+--- TkTextMark#gravity
+
+--- TkTextMark#gravity=(direction)
+
+--- TkTextMark#next(index)
+
+--- TkTextMark#previous(index)
+
+=end

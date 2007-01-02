@@ -1,0 +1,415 @@
+# $Id: tkwm.rd,v 1.11 2001/03/18 12:39:31 arai Exp $
+# Module Tk::Wm is defined in tk.rb
+=begin
+= Tk::Wm
+
+¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥Í¡¢¥Û¥È¥Õ¥½¥ç¡¢ú»¥ä¡¢¥ò¡¢¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥¦¡¢¥Ì¥»¥á¥¤ö¦¥±¡¢
+¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¥È¥Õ¥»þ£¡Ö((<TkRoot>)) ¡¢((<TkToplevel>))¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î
+¡¢¥Í¡¢¥­¡¢¥Ë¥µ¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥Û¥·¥Ä¥Á¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥½¥«¡¢öËø¦¡¢¡¢¥ã¥Ï¥à¡¢þ¦ö¦¥¦¡¢¥Í¡¢¥ã¡¢¡Ö¡¢
+¡¢¡«¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- Tk::Wm#aspect
+--- Tk::Wm#aspect(min_w, min_h, max_w, max_h)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥¹¥È¥¤¡×¡¢¥Û¥Äî¦¥å¡¢¥ª¡¢¥Û¥Íì¦úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¼ú¥þ¦¥Ò¡¢¥Þ4¡¢¥È¡¢¥Û¥¿¡¼¥½þ¦ú½¥ê¥Èô¦¥­¡£¡Ö
+    ¥³¥Ì¥»¥ç¡¢¥Û¥Î¥½¥±ä¦¥ª¡¢¥Û¥Íì¦¥ã((|min_w|))/((|min_h|))¡¢¥Ò¡¢¥Ï¡¢ô£¡Ö¥³¥Ì¥Äî¦¥Û¥Íì¦¥ã
+    ((|max_w|))/((|max_h|))¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¢¥Í¡¢¥å¡¢¥Û¥Õâ¦ôÅ¥Ø¡¢¥Þ(({nil}))¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Û¥»¥è(¥¹¥È¥¤¡×¥Íì¦úº¥Ì¥Èô¦¥­¡¢¥Ï¡¢¡¢)¡¢¥Ò¥Õâ¦¥±¡¢¥Ò¡¢¥Þ¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¼ú¥þ¦¥Ò(({nil}))
+    ¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÉ¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥¹¥È¥¤¡×¥Íì¦¥ã¥¿¡¬¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¥Ï¡¢¡¢¥»
+    ¥±î¦¥Þ¥«¥í¥Û({[]}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.aspect
+      p Tk.root.aspect 2, 1, 10, 1
+      p Tk.root.aspect
+      # Tk.mainloop
+      p Tk.root.aspect nil, nil, nil, nil
+      p Tk.root.aspect
+
+      => []
+         nil
+         [2, 1, 10, 1]
+         nil
+         []
+
+--- Tk::Wm#client(name=None)
+    ¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§¥í¡¦¥±¡¦¥Í¥Õ¥»¡¢¥ã((|name|))¡¢¥Ì¡¢¡Ö¡¢ö¦¥¦¡¢¥Í¡¢ú§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·
+    ¡¦¥¯¡¦æ¦¥Ò¥«¥ª¡¢¥£¡¢¡«¡¢¥±((-¡£¥¥¥Ò¥ï¥Ê¥¥¥Ä¡¼¥¿¥å(({WM_CLIENT_MACHINE}))¡¢úÆ¥¨¡¢¥ë¡¢¥Ï¡¢¡¢
+    ¡¢¥Í¡£¥ò¡£¥ò¡£¥ò-))¡£¡×¡¢¥¦¡¢¥Û¡¢¥Í¡¢¥å¡¢¥Û¥Õâ¦ôÅ¥Ø¡¢¥Þ¥«¥¯¥µú´({""}))¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡£¡Ö¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.client
+        Tk.root.client "foobar"
+      p Tk.root.client
+        Tk.root.client nil
+      p Tk.root.client
+
+      => ""
+         "foobar"
+         ""
+
+--- Tk::Wm#colormapwindows(*args)
+
+--- Tk::Wm#wm_command(value=None)
+
+--- Tk::Wm#deiconify
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úº¥©¡¢¥£¡¢öÀ¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×((<Tk::Wm#withdraw>))¡£¡Ö((<Tk::Wm#iconify>))
+
+--- Tk::Wm#focusmodel(model=None)
+    ((|model|))¡¢¥ã"active"¡¢¥Ì¡¢¡Ö¡¢öÀø»î£¡Ö¡¢¥½¡¢¥Í¡¢¥£((<¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±>))¡¢¥ã¥Ä¥»¡¢¥Û¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·
+    ¡¦¥­¡¦î§üÀê¦¥Ò¡¢¡Ö¡¢¥Æ¡¢¥Ë¡¢äÈ¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢úÏ¥é¥ªâ¦¥­¡¢¡«¡¢¥±((-¥·¥Ä¥³¥ó¡¢¥Ò¡¢è¦¥Æ¡¢¥Ë¡¢¡¬¡¢ö¦¥Í¥Ë¥Þ
+    ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢¥ã¥Ë¥¿¡¢ò¦ø¦¥Ï¡¢¥Ã¡¢¥Ï¡¢¥Æ¡¢¥½-))
+
+    ((|model|))¡¢¥ã"passive"¡¢¥Ì¡¢¡Ö¡¢öÀø»î£¡Ö¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥·¥©¥½¥ç¡¢¥Þ¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢úÏ¥é¥ª
+    ¡¢¥µ¡¢¥³¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥Û¥¿¥¥¥¯ì¦¥Ò¥Ì¡¢¡¢¥µ¡¢¡«¡¢¥±¡£¡×Tcl/Tk¡¢¥Þ¡¢¥¦¡¢¥Û¡¦ä£¥·¡¦¥Î¡¢¥Ì¡¢¡Ö¡¢ö¦¥¦¡¢¥Í
+    ¡¢úÃ¥í¥Èô¦¥­¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×((-¡¢¥½¡¢¥è¡¢ü£¡Ö¡¢¥¿¡¢¥©¡¢ñÂctive¡¢¥Ò¡¢¥±¡¢ö¦¥Í¥·¥Ä¥³¥ó¡¢¥Ò¡¢¥Þ¥Ë¥Þ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©
+    ¡¦¥±¡¢¥ã¥Ë¥¿¡¢ò¦ø¦¥Ï¡¢¥©¡¢¥Æ¡¢¥½¡¢ü¦¥¿¡¢¥Í¥µ¥é¡¢¥ò¡£¡×¡¢¡Ö¡£¥·¡¢¥Ì¡¢ä£¡Ö¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥Û¡¢¥µ¡¢¡¢¡¢¥©¡¢
+    ¡¢¥­¡¢ü¦¥Ï¡¢¡¢¡£¡×¡¢¥Ï¡¢ü¦¥¿¡¢¥©¡¢ð¦¥Ã¡¢þ¦¥©¡¢ò¦))
+
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¦ä§¥Ì¡¦ö¦¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Þ¡£¡Ö"passive"¡¢¥Ì¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.focusmodel
+      p Tk.root.focusmodel "active"
+      p Tk.root.focusmodel
+      Tk.root.focus
+      Tk.mainloop
+
+--- Tk::Wm#frame
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¦¥æ¡¦ø£¥·¡¦¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥ã¥Î¥æ¡¢¥¢¡¢ö§¥½¡¦¡¢¡¦¥Í¡¦ö§¥ß¡£¥·¡¢¥Û¥ÎþÌ¥ã)¡¢¥Û
+    ((<¡¦ô§¥¹¡£¥·¡¦¥±ID>))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkWinfo.id>))
+
+      require "tk"
+      p Tk.root.frame
+      # Tk.root.overrideredirect true
+      Tk.after 1000, proc {
+        p Tk.root.frame
+        # p Tk.root.id
+        exit
+      }
+      Tk.mainloop
+
+      => "0x0"
+         "0xc001dd"
+
+--- Tk::Wm#geometry(geom=nil)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û((<¡¦¥¯¡¦¥§¡¦â§¥Í¡¦))¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥¯¥¹¥³¡¬¡¢¥Û¡¦¥¯¡¦¥§¡¦â§¥Í¡¦ô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|geom|))¡¢¥Ò¡¢¥Þ¡£¡Ö"¥Îx ¥±ä¦¥ª [+-] X¡¼¥Õ¥Æ¥è [+-] Y¡¼¥Õ¥Æ¥è" ¡¢¥Û¥­¥Á¥·¡¼¡¢¥Û¥Ï¥¯¥µú´ü¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.geometry("100x100+0+0")
+      Tk.after 1000, proc {
+        p Tk.root.geometry
+        exit
+      }
+      Tk.mainloop
+
+      => ""
+         "100x100+0+0"
+
+--- Tk::Wm#grid
+--- Tk::Wm#grid(base_width, base_height, width_inc, height_inc)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢ú§ô§¥ª¡¦¡¢¡¦¥³¡¢¥±¡¢ö¦¥Í¡¢¥å¡¢¥Û¥Á¥³¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|base_width|))¡£¡Ö
+    ((|base_height|))¡¢¥Ò¡¢¥Þ¡£¡Ö¥¨öÍ¥ï¡¢¥Û¥Äî¦¥å¡¢¥ª(¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥Þ200x200)
+    (((<TkWinfo.reqheight>)), ((<TkWinfo.reqwidth>)))¡¢¥ã¥¤¥½¡¦¡¼¡¦ô§¥Æ¡¦¥Î¡¢¥Ì¡¢¡Ö¡¢ö¦¥©
+    ¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±((-¡¦¥ò¡¦¥¹¡£¡×¡¢ð¦¥Ã¡¢þ¦¥©¡¢ò¦¥Ï¡¢¡¢-))¡£¡×((|width_inc|))¡£¡Ö
+    ((|height_inc|))¡¢¥Ò¡¢¥Þ¡£¡Ö¡¦¡¼¡¦ô§¥Æ¡¦¥Î¡¢¥Û¥Æ¥¢¡¼¥Õ(¡¦ô§¥ª¡¦¡¢¡¦¥³¥µ¥Û¥Á¥³)¡¢ú§¥ä¡¦¥Ã¡¦¥µ¡¦öÅ¥¢¡¼¥Õ¡¢¥Ì
+    ¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¥¿¡¬¥Èô½¥Û¥Õâ¦ôÅ¥Ø¡¢¥Þ(({nil}))¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Û¥»¥è(¡¦¡¼¡¦ô§¥Æ¡¦¥Î¥µ¥ê¥Èô¦¥Ï¡¢¥­)¡¢¥Ò¥Õâ¦¥±¡¢¥Ò¡¢¥Þ¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¼ú¥þ¦¥Ò(({nil}))¡¢
+    ¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÉ¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦¡¼¡¦ô§¥Æ¡¦¥Î¡¢¥ã¥¿¡¬¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¥Ï¡¢¥¢
+    ¡¢ø¦¥ß¥«¥í¥Û({[]}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.grid 4, 4, 50, 50
+      p Tk.root.grid
+      # Tk.mainloop
+      p Tk.root.grid nil, nil, nil, nil
+      p Tk.root.grid
+
+      => nil
+         [4, 4, 50, 50]
+         nil
+         []
+
+--- Tk::Wm#group(leader=None)
+    ¡¼ú¥þ¦ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò((|leader|))¡¢¥Í¥Ë¥¢¡¢¥¯¡¦¡¼¡¦ö£¥·¡¦¥é¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¡¦¡¼¡¦ö£¥·
+    ¡¦¥é¡¦ô£¥·¡¦¥¿¡¢¥ã¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü´¥¹¡¢¥ª¡¢ø¦¥½¡¢¥Í¡¢¥å¡¢¥Ò¥Ë¥¢¡¢¥¯¡¦¡¼¡¦ö£¥·¡¦¥é¡¢¥Ò¥Ä¡¼¡¢¥±¡¢ö§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢ä§¡Ö¡¦¡¢¡¦¥¦
+    ¡¦ü´¥¹¡¢¥ª¡¢ø¦¡«¡¢¥±(¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¢¥Þ¥ÍüË¥¹¥·¥£¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥½¡¢ô£¡Ö¥¤¥½¡¢ä¦¥Ï¡¢
+    ¡¢¥Ï¡¢¡¢¥»ø»î¦¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±)¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡¦¡¼¡¦ö£¥·¡¦¥é¥¤¥¹¡¢ú´ú¿¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      top = TkToplevel.new
+      p top.group Tk.root
+      p top.group
+      p top.group nil
+      p top.group
+      Tk.mainloop
+
+      => nil
+         #<TkRoot: @path=".">
+         nil
+         nil
+
+--- Tk::Wm#iconbitmap(bitmap=None)
+    ¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Ò¥Î¥¹¥·¥£¡¢¥±¡¢ö§¥â¡¦¥Æ¡¦¥Í¡¦¡«¡¦¥Æ¡¦¥é¡¢(|bitmap|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Û¡¦¥â¡¦¥Æ¡¦¥Í¡¦¡«¡¦¥Æ¡¦¥é¡¢¥Û¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-TkBitmapImage¡¢¥Þ¥µ¥Í¡¢¥£¡¢¥Ï¡¢¡¢¡¢¥Û¡¢¥©¡£¥¥-))
+
+      require "tk"
+      Tk.root.iconify
+      p Tk.root.iconbitmap "question"
+      p Tk.root.iconbitmap
+      Tk.mainloop
+
+      => ""
+         "question"
+
+--- Tk::Wm#iconify
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢ú§¡Ö¡¦¡¢¡¦¥¦¡¦üÀ¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×((<Tk::Wm#deiconify>))¡£¡Ö((<Tk::Wm#withdraw>))
+
+--- Tk::Wm#iconmask(bitmap=None)
+    ¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Û¡¦¡«¡¦¥±¡¦¥Ã¡¢(|bitmap|))¡¢¥Ì¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- Tk::Wm#iconname(str=None)
+    ¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Ò¥Î¥¹¥·¥£¡¢¥±¡¢öÌ¥¯¥µú´ü¦(|str|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- Tk::Wm#iconposition(x=nil, y=nil)
+    ¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Û¡¼¥Õ¥Æ¥è¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      Tk.root.iconify
+      Tk.root.iconbitmap "question"
+      p Tk.root.iconposition
+      Tk.root.iconposition 100, 100
+      p Tk.root.iconposition
+      Tk.mainloop
+
+      => []
+         [100, 100]
+
+--- Tk::Wm#iconwindow(icon=nil)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò((|icon|))¡¢ú§¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¢¥Í¡¢¥å¡¢¥Û¥Õâ¦ôÅ¥Ø¡¢¥Þ(({nil}))¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼¥Ï¥¤¥·¡¢¥Þ¡£¡Ö¡¦¥ï¡¦¥½¡¦ü¦ú§ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¡Ö¡¦¡¢¡¦¥¦¡¦ü¦¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦¥ï¡¦¥½¡¦ü¦ú´¡£¡¢¥±¡¢¥Í¡¦¡Ö
+    ¡¦¡¢¡¦¥¦¡¦ü´¥¹¡¢ú´ú¿¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      icon = TkToplevel.new
+      TkButton.new(icon) { text "Icon"; command { Tk.root.deiconify } }.pack
+      p Tk.root.iconwindow icon
+      p Tk.root.iconwindow
+      Tk.mainloop
+
+      => nil
+         #<TkToplevel: @screen=nil, @path=".w0000", @classname=nil>
+
+--- Tk::Wm#maxsize
+--- Tk::Wm#maxsize(width, height)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥³¥Ì¥Äî§¥ª¡¦¡¢¡¦¥³¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î£¡Ö¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢
+    ¥Ì¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥³¥Ì¥Äî§¥ª¡¦¡¢¡¦¥³¡¢¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¥Æ¥Ø¡¢¥Þ¡¦¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¡¦¥ª¡¦¡¢¡¦¥³¡¢¥Ì¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.maxsize
+      p Tk.root.minsize
+      Tk.mainloop
+      p Tk.root.maxsize(200,300)
+      p Tk.root.minsize(20,30)
+      p Tk.root.maxsize
+      p Tk.root.minsize
+      Tk.mainloop
+
+      => [1265, 994]
+         [1, 1]
+         nil
+         nil
+         [200, 300]
+         [20, 30]
+
+--- Tk::Wm#minsize
+--- Tk::Wm#minsize(width, height)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥³¥Ì¥»¥ç¡¦¥ª¡¦¡¢¡¦¥³¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î£¡Ö¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢
+    ¥Ì¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥³¥Ì¥»¥ç¡¦¥ª¡¦¡¢¡¦¥³¡¢¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¥Æ¥Ø¡¢¥Þ1x1¡¢¥Ì¡¢¥±¡£¡×
+
+--- Tk::Wm#overrideredirect(bool=None)
+    ¡¼ú¥(|bool|))¡¢¥Ò(({true}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢ú§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦
+    ¡¢¥Û¥¨¥Î¥Ø¥·¡¢¥Ò¥Æ¥è¡¢¥å¡¢¡«¡¢¥µ¡¢ü£¡×¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Þ(({false}))¡¢¥Ì¡¢¥±¡£¡×¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å
+    ¡¢¥Þ¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥ÈôÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.overrideredirect
+      p Tk.root.overrideredirect true
+      p Tk.root.overrideredirect
+      Tk.mainloop
+
+      => false
+         ""
+         true
+
+--- Tk::Wm#positionfrom(who=None)
+    ((|who|))¡¢¥Þ¡£¡Ö"program", "user" ¡¢¡«¡¢¥½¡¢¥Þ¡¢¥¦¡¢ø¦ò¦¥Û¥Æ¥µ¥¹¥Õ¥Õ¥»¡¢¥Ì¡¢¥±¡£¡×"user"¡¢¥Û¥»ø»
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥Ì¥í¥Æ¥è¡¢¥Þ¡¦ì£¥·¡¦¥«¡¢¥Û¥µ¥ê¥È((<Tk::Wm#geometry>))¡¢¥Ò¡¢ð¦ö½¥ê¥Èô¦ä¶¡«¡¢¡¬¡¢¡«¡¢¥±)¡¢¥Ò¥¹¥»
+    ¡¢¡¢¡¢¡«¡¢¥±((-¥Ò¥ï¥Ê¥Ò¡£¥¥-))¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.positionfrom
+      Tk.root.geometry "+0+0"
+      p Tk.root.positionfrom
+      p Tk.root.positionfrom "prog"
+      p Tk.root.positionfrom
+      Tk.mainloop
+
+      => ""
+         "user"
+         ""
+         "program"
+
+--- Tk::Wm#protocol(name=nil, cmd=nil)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦¥©¡¢(|name|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¡¦â§¥Æ¡¦¥µ¡£¥·¡¦¥¯¡¢ú¾¥¢¥·ð¦¥Æ¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò
+    ((<Proc>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|cmd|))¡¢ú¾¥Ä¥±¥ä¡¢¥±¡¢ö¦ð¦¥ò¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|cmd|))¡¢¥Ò¥«¥¯¥µú´({""}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|cmd|))¡¢úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö((|name|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¥Ë¡¢¡¢¡¢(<Proc>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã
+    ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö¥¿¡¬¥Èô¦¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö§¥é¡¦ú§¥Í¡¦¥¦¡¦öÎ¥»¡¢¥Û¥Ì¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.protocol "WM_DELETE_WINDOW", proc {puts "foo"}
+      p Tk.root.protocol "WM_TAKE_FOCUS",    proc {puts "bar"}
+      p Tk.root.protocol "WM_DELETE_WINDOW"
+      p Tk.root.protocol
+
+      p Tk.root.protocol "WM_DELETE_WINDOW", ""
+      p Tk.root.protocol "WM_DELETE_WINDOW"
+      p Tk.root.protocol
+      Tk.mainloop
+
+      => ""
+         ""
+         #<Proc:0x4013685c>
+         ["WM_TAKE_FOCUS", "WM_DELETE_WINDOW"]
+         ""
+         nil
+         ["WM_TAKE_FOCUS"]
+
+    ((-¡¦¥é¡¦ú§¥Í¡¦¥¦¡¦öÎ¥»¡¢¥Û¡¼øÏú¿ø¦¥Ã¡¢¥¦¡¢¥Í-))
+
+--- Tk::Wm#resizable
+--- Tk::Wm#resizable(width, height)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò(({self}))¡¢¥Û¥Î¥Í¥±ä¦¥ª¡¢¥ã¡¦ì£¥·¡¦¥«¡¢¥Ò¡¢ð¦ôÌ¥à¥±¥±¥¤¥È¥Ì¥¹¡¢¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢úÂ¡¬¥Èô¦¥­¡¢¡«
+    ¡¢¥±¡£¡×((|width|)), ((|height|)) ¡¢¥Þ(({true}))/(({false}))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö¥Î¥±ä¦¥ª¡¢¥ã¥Ï¥à¥±¥±¥¤¥È¥Ì¥¹¡¢¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢ú¾¥£¡¢¥±¥Ì¥í¥Û
+    (('[width, height]')) ¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¥Ì¥í¥Ûü¦¥Û¥Ø¥é¥Á¥Ì¡¢¥Þ
+    (({true}))/(({false}))¡¢¥Ì¡¢¥±¡£¡×
+
+--- Tk::Wm#sizefrom(who=None)
+    ((|who|))¡¢¥Þ¡£¡Ö"program", "user" ¡¢¡«¡¢¥½¡¢¥Þ¡¢¥¦¡¢ø¦ò¦¥Û¥Æ¥µ¥¹¥Õ¥Õ¥»¡¢¥Ì¡¢¥±¡£¡×"user"¡¢¥Û¥»ø»
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¦¥ª¡¦¡¢¡¦¥³¡¢¥Þ¡¦ì£¥·¡¦¥«¡¢¥Û¥µ¥ê¥È((<Tk::Wm#geometry>))¡¢¥Ò¡¢ð¦ö½¥ê¥Èô¦ä¶¡«¡¢¡¬¡¢¡«¡¢¥±)¡¢¥Ò
+    ¥¹¥»¡¢¡¢¡¢¡«¡¢¥±((-¥Ò¥ï¥Ê¥Ò¡£¥¥-))¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      p Tk.root.sizefrom
+      Tk.root.geometry "100x100"
+      Tk.after 1000, proc {
+        p Tk.root.sizefrom
+        p Tk.root.sizefrom "prog"
+        p Tk.root.sizefrom
+      }
+      Tk.mainloop
+
+      => ""
+         ""
+         ""
+         "program"
+
+--- Tk::Wm#state
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò(({self}))¡¢¥Û¥»¥è¡¢normal", "iconic", "withdraw", "icon"¡¢¥Û¥¤¥½
+    ¡¢ø¦¥©¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- Tk::Wm#title(str=None)
+    ((|str|))¡¢¥ã¥µ¥ê¥Èô¦¥ª¡¢ø¦¥½¥»ø»î£¡Ö¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò(({self}))¡¢¥Û((<¡¦¥½¡¦¡¢¡¦¥Í¡¦))¡¢
+    ((|str|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¢¥Í¡¢¥å¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥Õâ¦ôÅ¥Ø¡¢¥Þ¥«¥¯¥µú´({""}))¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥ã¥»¥Ï¥Û¥ã¡¢¥ª¡¢ø¦¥½¥»ø»î£¡Ö¥¯¥¹¥³¡¬¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¦¥½¡¦¡¢¡¦¥Í¡¦ö¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò
+    ¡¦¥½¡¦¡¢¡¦¥Í¡¦ö¦¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Þ"tk"¡¢¡«¡¢¥½¡¢¥Þ((<TkToplevel>))¡¢¥Û¥»ø»î¦¥Þ((<¡¦¥à¡¦¥±>))¥Õ¥»¡¢¥Ì
+    ¡¢¥±¡£¡×((<TkCore.appname>))¡¢¥Ì¡¢ä§¥½¡¦¡¢¡¦¥Í¡¦ö¦¥Þ¥Ï¥à¥±¥±¡¢¥­¡¢¡«¡¢¥±¡¢¥ã¡£¡Ö(({title}))¡¦â§¥¹¡¦¥Æ
+    ¡¦¥Î¡¢¥Ò¡¢ð¦ö½¥ê¥Èô¦¥Û¥Ï¥ã¥Ø¡¦¥¿ð¦¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+      require "tk"
+      Tk.appname "bar"
+      p Tk.root.title
+      p Tk.root.title "foo"
+      p Tk.appname
+      p TkWinfo.appname(Tk.root)
+      p Tk.root.title
+      Tk.mainloop
+
+      => "bar"
+         ""
+         "bar"
+         "bar"
+         "foo"
+
+--- Tk::Wm#transient(master=None)
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò(({self}))¡¢(|master|))¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û
+    ((<¡¦¥Í¡¦ò§ü§¥¯¡¦¥¡¡¦ü§¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò>))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥Ò(({nil}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¿¡¬¥Èô¦ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      top = TkToplevel.new
+      p top.transient Tk.root
+      p top.transient
+      Tk.mainloop
+
+      => nil
+         #<TkRoot: @path=".">
+
+--- Tk::Wm#withdraw
+    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò(({self}))¡¢úº¥©¡¢¥£¡¢¥Ï¡¢¥Ã¡¢¥­¡¢¡«¡¢¥±¡£¡×((<Tk::Wm#deiconify>))¡£¡Ö((<Tk::Wm#iconify>))
+
+=end

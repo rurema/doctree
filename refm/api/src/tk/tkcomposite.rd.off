@@ -1,0 +1,89 @@
+# $Id: tkcomposite.rd,v 1.10 2000/01/22 08:52:56 arai Exp $
+# Module TkComposite is defined in tk.rb
+=begin
+= TkComposite
+
+((-[ruby-list:5610]¡¢¥Û¥¿äÎ¥¿¡¢ú½¥¤¥±¥Ø¡¢¥Ò¡¢¥­¡¢¥½-))
+
+¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦ú§¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¥Ï¡×¥½þ¦¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¡¢¥È¡¢¥Ò
+¡¢¡«¡¢¥Í¡¢â¦¥Ë¥Áà¼ü¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¢ð¦¥ò¡¢¥Ï¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(¡¦¥Ã¡¦ò§¥±)¡¢¥Û¡¢¥¦¡¢¥Í¡¢
+¡¦¥¦¡¦ü§¥ó¡¦¥¯¡¦¥Æ¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(¡¦¥Ã¡¦ò§¥±)¡¢¥Í¥¯¥Ë¡¢¥â¡¢¡«¡¢¥±¡£¡×
+
+¡¦ò§¥ë¡¦öË¥æ¡¢¥å¡¦¥£¡¦ü§¥Í¡¦ô§¥Ã¡¦ò§¥±¡¢¥Û¥Û
+
+  require "tk"
+
+  class TkLabeledEntry < TkEntry
+    include TkComposite
+
+    def initialize_composite(*args)
+      @label = TkLabel.new(@frame)        # @frame¡¢¥Þ¥¨ûè¥Ò¥³üÂ¥ç¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢
+      @entry = TkEntry.new(@frame)
+      @label.pack('side'=>'left')
+      @entry.pack('side'=>'left')
+      @path = @entry.path                 # TkEntry¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú¹¥à¥»¥ª¡¢¥±¡¢ö¦¥½¡¢
+
+      delegate('DEFAULT', @entry, @label)
+      delegate('text', @label)
+    end
+    def textvariable(var)
+      @label.textvariable var
+    end
+  end
+
+  TkLabeledEntry.new {
+    text "foobar"
+    self.value = "hoge"
+    pack
+  }
+
+  Tk.mainloop
+
+(({@path}))¡¢¥Þ¡£¡Ö¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥Þ¡¦¥æ¡¦ø£¥·¡¦à§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í(({@frame}))¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ
+¡¦¥Í¡¦¥à¡¦¥±¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡¢¥ã¡£¡Ö((<TkEntry>))¡¢¥©¡¢ò¹¥à¥»¥ª¡¢¥­¡¢¥½¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥¯ùö¥Õ¡¢
+(({@entry}))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¥Ê¥ã¥Ø¥à¡¢¥±¡¢ö¦¥½¡¢â¦¥Ò(({@entry}))¡¢¥Û¡¦¥à¡¦¥±¡¢¥Ò¥¹ø¦¥å¥¨¥±¡¢¥£¡¢¥Ë
+¡¢¡¢¡¢¡«¡¢¥±¡£¡×(¡¢¥¦¡¢ø¦¥Þ¡£¡Ö¡¢¥í¡¢¥Í¡¢ü¦¥Î¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥ã(({@path}))¡¢¥Ò¥Ä¥ß¡¢¥­¡¢¥Ë¡¢¥Û¥Áà¼ü¦¥Í¡¢¥­¡¢¥Ë¥·¥Ä
+¥Á¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥½¡¢â¦¥Ì¡¢¥±)
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkComposite#initialize_composite(*args)
+    (({TkComposite}))¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú§¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥½¡¦¥Ã¡¦ò§¥±¡¢¥Þ¥¹ò¶¥¹¡¢¥Û¡¢¥½¡¢â¦¥Ò
+    ¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú¼¥Ë¥Èô·¥Á¡¢¥­¡¢¡«¡¢¥±¡£¡×(initialize¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú¼¥Ë¥Èô·¥Á¡¢¥­¡¢¥Ë¡¢¥Þ¡¢¡¢¡¢¥¢¡¢¡«¡¢¥µ
+    ¡¢¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¥¿¥¯¥¿¥ç¥µ¥Ò(({new}))(¥¯¥­¥Õ¥¥¡¢¥Ò¡¢¥Þ(({initialize})))¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥©¡¢
+    ¥¯¥Ë¡¢¥ß¡¢ø¦¡«¡¢¥±¡£¡×
+
+    ((|args|))¡¢¥Ò¡¢¥Þ¡£¡Ö(({new}))¡¢¥Û¥Ä¡¼ú¥þ²¥Ï¥±¡¬¡¢¥ã¥Ê¥Þ¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×(¥Ä¡¼ú¥þ¦¥Û¥½¥Ë¡¦¥ò¡¦¡×
+    ¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¥»¥Ï¡¢¥©¡¢ø¦¡«¡¢¥±)
+
+    ¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥ã¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥ª¡¢ø¦ö½¥¿¡¢¥Ì¡£¡Ö¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¥Ï¥à¥½({@frame}))¡¢¥Ò¡¢¥Þ¡£¡Ö
+    ((<TkFrame>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥ã¥³üÂ¥ç¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×¥ÎâÆ¥Õ¡£¡Ö¡¢¥¦¡¢¥Û¡¦¥æ¡¦ø£¥·¡¦à¦úÁ¥Ë¡¦¥ò¡¦¡×
+    ¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¥±îÂ¥ç¡¢¥±¡¢öÈäËþ§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÉ¥í¥Æ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkComposite#epath
+    ¡¦¥¦¡¦ü§¥ó¡¦¥¯¡¦¥Æ¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥à¡¦¥±¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦¥à¡¦¥±¡¢¥Þ¥·¥Ä¥³¥ó¡¢¥Ò
+    ¡¢¥Þ¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¥³üÂ¥ç¡¢¥ª¡¢ø¦ö§¥æ¡¦ø£¥·¡¦à§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú½¥ê¡¢¥­¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkComposite#delegate(option, *wins)
+    ¡¦¥§¡¦¥é¡¦¥­¡¦î§ü§â§¥¹¡¦¥Æ¡¦¥Î((|option|))¡¢¥ã¥¯¥Ë¡¢¥ß¡¢ø¦¥½¡¢¥Í¡¢¥å¡¢¥Ò¡£¡Ö¡¢¥¹¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢
+    ((|wins|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥ËäËþ§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¥Ê¥Þ¡¢¥±¡¢ð¦¥ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¥Ë¥Æ¥Ï¥Õ¡¢¥Ï¡¦¥§¡¦¥é¡¦¥­¡¦î§({'DEFAULT'}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¥µ¥È¡¢ô¦¥±¡¢¥ë¡¢¥Ë¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§
+    ¡¢(|wins|))¡¢¥Ò¥Ê¥Þ¡¢¥±¡¢¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+
+--- TkComposite#configure(slot, value=None)
+--- TkComposite#configure(hash)
+    ¥µ¥Í¡¢¡¢¥Ï¥Þ((<TkObject#configure>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×((<TkComposite#delegate>))¡¢¥Ì¡¢¥Û¥µ¥ê¥Èô¦¥Ò¥¹¥»¡¢¥Æ
+    ¡¢¥Ë¥ËäËþ§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+=end

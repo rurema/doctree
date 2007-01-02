@@ -1,0 +1,134 @@
+# $Id: tkbutton.rd,v 1.15 2001/03/18 12:36:39 arai Exp $
+# Class TkButton is defined in tk.rb
+=begin
+= TkButton
+
+¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+  TkButton.new {
+    text "button"
+    command { puts "button" }
+    pack
+  }
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkLabel>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkButton#invoke
+    (({command}))¡¦¥§¡¦¥é¡¦¥­¡¦î§((<TkWindow#command>))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((<Proc>))¡¦¥§¡¦¥è
+    ¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í)¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥é¡¦ú§¡¼¡¦ò§à¦¥©¡¢ò¦¥Û¥¿¥¥¥¯ì¦¥Ò¡¢ð¦ô§¥ï¡¦¥½¡¦ü¦ú´¡£¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Í¥Ë¥¢¡¢¥¯¥¹ðÏú¾¥Ä¥±¥ä¡¢¥±¡¢ö¦¥Û¡¢¥Ò¥µ¥Í
+    ¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkButton#flash
+    ¡¦¥ï¡¦¥½¡¦ü¦úºò¦¥µ¡¢¡«¡¢¥±¡£¡×
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#activebackground>))
+
+((<TkObject#activeforeground>))
+
+((<TkObject#anchor>))
+
+((<TkObject#background>))
+
+((<TkObject#bitmap>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#disabledforeground>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#image>))
+
+((<TkObject#justify>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+((<TkObject#text>))
+
+### ((<TkObject#textvariable>))
+
+((<TkObject#underline>))
+
+((<TkObject#wraplength>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+### --- TkButton#command
+
+--- TkButton#default
+    ((*¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡£¡ÖTk¡¦¥ß¡£¥·¡¦¥¯¡¦î§.0¡¢¥Ì¥·¥Ä¥Á¥ª¡¢ø¦¡«¡¢¥­¡¢¥½*))
+
+    ¡¼¥Ï¥¤¥·¡¢¥Û3¡¢¥È¡¢¥Û¡¢¥ò¡¢¥Á¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"normal"
+    *"active"
+    *"disabled"
+
+=end
+
+###¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡£¥ò¡¦ô§ü§¡¼¡¢¥Û¡¢¥½¡¢â¦¥Û3¡¢¥È¡¢¥Û¥»¥è "normal", "active", "disabled"¡¢¥Û¡¢¥ò¡¢¥Á
+###1¡¢¥È¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×"active"¡¢¥Ì¡¢¥Þ¡¦¥ï¡¦¥½¡¦ü¦¥Þ¡¦¥é¡¦ò§¥Æ¡¦¥Í¡¦¥æ¡¦¥¥¡£¥·¡¦à¦¥Ò¥·¥©¥Á¥¦¡¢¥Ï¥Î¥Á¥¤ð¦¥ã¡¢¥Ï
+###¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×"normal"¡¢¥Ì¡¢¥Þ¡£¡Ö¡¦¥ï¡¦¥½¡¦ü¦¥Þ¡¦¥é¡¦ò§¥Æ¡¦¥Í¡¦¥æ¡¦¥¥¡£¥·¡¦à¦¥Ò¥·¥©¥Á¥¦¡¢¥Ì¡¢¥Ï¡¢¥Ã¡£¡Ö¡¦¥Ì¡¦¥æ¡¦¥¥¡¦
+###¡¦¥Í¡¢¥Û¡¦¥ï¡¦¥½¡¦ü¦úË¥¹¥·¥£¡¢¥±¡¢ö¦¥Û¡¢¥Ò¥¹¥¹¥Ï¥ã¡¢¥Ï¡¦¥±¡¦¥ì¡£¥·¡¦¥±¡¢ú½¥È¡¢¥­¡¢¡«¡¢¥±¡£¡×"active"¡¢¥Í"normal"¡¢¥Þ
+###¥Ë¥¢¡¢¥¯¡¦¥ª¡¦¡¢¡¦¥³¡¢¥Û¡¦¥ï¡¦¥½¡¦ü¦¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×"disabled"¡¢¥Ì¡¢¥Þ¡¦¥ï¡¦¥½¡¦ü¦¥Þ¡¦¥é¡¦ò§¥Æ¡¦¥Í¡¦¥æ¡¦¥¥¡£¥·¡¦à¦¥Ò
+###¥·¥©¥Á¥¦¡¢¥Ì¡¢¥Ï¡¢¡¢¡¦¥ï¡¦¥½¡¦ü¦ú¿¥¹¥Ï¥ã¡¢¥Ï¡¦¥±¡¦¥ì¡£¥·¡¦¥±¡¢ú½¥È¡¢¥ª¡¢¥³¡¢¥Ò¥Î¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×"disabled"¡¢¥Ï¡¦¥ï¡¦¥½
+###¡¦ü¦¥Þ¡£¡Ö"active"¥»¥è¡¢¥Ì¡¢¡Ö¡¢ö§¥ï¡¦¥½¡¦ü¦ð¦ô¦äÀ¥ç¡¢¥ª¡¢¥Ã¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+=begin
+--- TkButton#height
+    ¡¦¥ï¡¦¥½¡¦ü¦¥Û¥±ä¦¥ª¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((<TkObject#text>))¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¦¥ï¡¦¥½¡¦ü¦¥Ò¥Ï¥¯¥µú´ü¦
+    ¥Î¥¹¥·¥£¡¢¥±¡¢öÀø»î¦¥Þ¥±¥ä¥½þ¦ú£¡Ö((<TkObject#image>))¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¥¤ðÃúÇ¥¹¡¢ôË¥æ
+    ¡¢¥¢¡¢¥Ë¡¢¡¢¡¢öÀø»î¦¥Þ¡¦¥ä¡¦¥Ã¡¦¥µ¡¦öÁþ¦¥Ï¡¢¥Î¡¢¥Û((<¥ª¡¦>)))¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkButton#state
+    ¡¦¥ï¡¦¥½¡¦ü¦¥Û¥»¥è¡¢ú²¥Ï¥¤¥·¡¢¥Û3¡¢¥È¡¢¥Û¡¢¥ò¡¢¥Á¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"normal"
+
+     ¥È¥Õ¥»þ¦¥Û¥»¥è¡¢¥Ì¡¢¥±¡£¡×((<TkObject#foreground>))¡£¡Ö((<TkObject#background>))
+     ¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥½¥¡¡¢¥Ì¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+    *"active"
+
+     ¡¦¡Ö¡¦¥Ã¡¦¥Ë¡¦¡×¡¦¥è¡¢¥Ï¥»¥è¡¢¥Ì¡¢¥±¡£¡×¥È¥Õ¥»þ§¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ã¡¦¥ï¡¦¥½¡¦ü¦¥Û¥»ê¦¥Ò¡¢¡Ö¡¢ö¦¥Í¡¢¥å¡¢¥Ò¡¢¥¦¡¢¥Û
+     ¥»¥è¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×((<TkObject#activeforeground>))¡£¡Ö
+     ((<TkObject#activebackground>)) ¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥½¥¡¡¢¥Ì¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+    *"disabled"
+
+     ((<¡¦¥Ì¡¦¡×¡¦¥±¡¦¥£¡£¥·¡¦¥è¡¦))¡¢¥Ï¥»¥è¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¥»¥è¡¢¥Û¡¦¥ï¡¦¥½¡¦ü¦ú´¡£¡¢¥±¥µ¥Þ¡¢¥Ì¡¢¥å¡¢¡«¡¢¥µ¡¢ü£¡×
+     ((<TkObject#disabledforeground>))¡£¡Ö((<TkObject#background>)) ¡¢¥Ì¥µ¥ê¥Èô¦¥­
+     ¡¢¥½¥½¥¡¡¢¥Ì¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+--- TkButton#width
+    ¡¦¥ï¡¦¥½¡¦ü¦¥Û¥ÎúÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((<TkObject#text>))¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¦¥ï¡¦¥½¡¦ü¦¥Ò¥Ï¥¯¥µú´ü¦
+    ¥Î¥¹¥·¥£¡¢¥±¡¢öÀø»î¦¥Þ¥Ï¥¯¥µú¥þ¦ú£¡Ö((<TkObject#image>))¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¥¤ðÃúÇ¥¹¡¢ôË¥æ
+    ¡¢¥¢¡¢¥Ë¡¢¡¢¡¢öÀø»î¦¥Þ¡¦¥ä¡¦¥Ã¡¦¥µ¡¦öÁþ¦¥Ï¡¢¥Î((<¥ª¡¦>))¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+=end

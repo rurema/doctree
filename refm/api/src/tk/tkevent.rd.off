@@ -1,0 +1,200 @@
+# $Id: tkevent.rd,v 1.13 2000/02/06 05:59:51 arai Exp $
+# Class TkComm::Event is defined in tk.rb
+=begin
+= TkComm::Event
+
+¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½((<¡¦¡¢¡¦¥ë¡¦ü§¥Í>))¡¢¥Û¥»¥è¡¢úË¥¹¡¢¥±¡¢¥½¡¢â¦¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+((<TkBindCore#bind>))¡¢¥Û¥Ä¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö¡¢¥¦¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢¥ã
+((<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¡¢¥Û¡¼ú¥þ¦¥Í¡¢¥­¡¢¥Ë¥Ê¥Þ¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+ require "tk"
+ Tk.root.bind('Enter') {|e| p e.is_a? TkComm::Event}
+ Tk.mainloop
+
+ => true        # <- ¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ã¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ò¥Ëö¦¥Í¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥±
+
+((*¥Æú²¥æ*))
+¡¢¡Ö¡¢¡«¡¢ô¾¥Ä¥¦¥¤¡¢¥Þ¡¢¡Ö¡¢ô¦¡«¡¢¥µ¡¢ü¦¥ã¡£¡Ö((<Object#type>))(¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢úÌ¥è¡¢¥±
+¡¦â§¥¹¡¦¥Æ¡¦¥Î)¡¢¥Þ¥³¥Ë¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥Û¡¢¥Ì
+
+ require "tk"
+ Tk.root.bind('Enter') {|e| p e.type}
+ Tk.mainloop
+
+¡¢¥Ì¡£¡Ö(({TkComm::Event}))¡¢¥Í¡¢¥Þ¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥µ¡¢ü£¡×
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<Object>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkComm::Event#initialize(serial,a,b,c,d,f,h,k,m,o,p,s,t,w,x,y,aa,bb,dd,ee,kk,nn,rr,ss,tt,ww,xx,yy)
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥Ë¡¼ú¥þ¦¥Û¥Æ¥Ø¡¢¥Þ¡£¡Ö¥Ä¥ß¥¢¥±¡¢öÄ¡¼¥¿¥å¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥Æ¥Ø¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkComm::Event#serial
+    %#
+
+--- TkComm::Event#above
+    %a
+
+--- TkComm::Event#num
+    %b
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¥½¡¦¡«¡¦¥ò¡¦¥±¡¦¥ï¡¦¥½¡¦ü¦¥Û¥Í¥è¥±ì¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ButtonPress,ButtonRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#count
+    %c
+
+--- TkComm::Event#detail
+    %d
+
+--- TkComm::Event#focus
+    %f
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢¥Û¥»¥è¡¢ùÕrue/false¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    Enter, Leave¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#height
+    %h
+
+    Configure,Expose¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#keycode
+    %k
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¥½¡¦¥å¡£¥·¡¦¥¦¡£¥·¡¦¥Î¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#mode
+    %m
+
+--- TkComm::Event#override
+    %o
+
+--- TkComm::Event#place
+    %p
+
+--- TkComm::Event#state
+    %s
+
+    ¡¼¥Ï¥¤¥·¡¢¥Û¥Æ¥Ø¡¢¥Û¥Þ¥¿¥Ø¥Ä¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((-Visibility¡¢¥Û¡¢¥Í¡¢¥å¡¢¥Þ¡£¡Ö¡¼æ¦¥ò-))
+    *Shift               1
+    *Lock                2
+    *Control             4
+    *Mod1                8
+    *Mod2                16
+    *Mod3                32
+    *Mod4                64
+    *Mod5                128
+
+    ¡¢¥¦¡¢ø¦ò¦¥Û¥½þÅ¥Ø¡¢¥Þ((<X Window System>))¡¢¥Û(({XEvent}))¥±¥¹¥Ä¡¢¥Ä¥Û¡¢¥Û(({state}))¡¢¥Û
+    ¥Æ¥Ø¡¢¥Ì¡¢¥±¡£¡×((-RCS¡¢¥ÛID¡¢¥ã "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
+    ¡¢¥Ì¡¢¡Ö¡¢õ¹.h¡¢úº¥ª¡¢¥Ò¥ª¥å¥¹¥á¡¢¥­¡¢¥½-))
+
+    ((-Win¡¢ç®ac¡¢¥Ì¡¢¥Þ¡¢¥Î¡¢¥ò¡¢¥Ï¡¢ö£¥¥-))
+
+    ButtonPress,ButtonRelease,Enter,KeyPress,KeyRelease,Leave,Motion,Visibility
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#time
+    %t
+
+--- TkComm::Event#width
+    %w
+
+    Configure,Expose¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#x
+    %x
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#y
+    %y
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛY¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#char
+    %A
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢õ¢SCII¥Ï¥¯¥µùèúÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×(¡¢¥½¡¢¥¿¡¢¥­0¡£¥Á9¡¦¥å¡£¥·¡¢ú´¡£¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Þ
+    Fixnum¡¢¥Ì0¡£¥Á9¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±)
+
+    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+    ((-Fixnum¡¢úÌ¥è¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö¦¥Û¡¢¥Þ¥Ò¥»¡¢¡«¡¢¥­¡¢¡¢¥Ë¡¼¥³ü¦¥¯¡¢æ¦¥Ï¡¢¡¢¡¢¥¿¡¢ú¦¥ò-))
+
+--- TkComm::Event#borderwidth
+    %B
+
+--- TkComm::Event#wheel_delta
+    %D
+
+--- TkComm::Event#send_event
+    %E
+
+    true/false
+
+--- TkComm::Event#keysym
+    %K
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¥å¡£¥·¡¦¥­¡¦ü§¥ï¡¦ö¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#keysym_num
+    %N
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¥å¡£¥·¡¦¥­¡¦ü§¥ï¡¦ö¦¥Û¥Í¥è¥±ì¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#rootwin_id
+    %R
+
+--- TkComm::Event#subwindow
+    %S
+
+--- TkComm::Event#type
+    %T
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¥­¥½¡¢úÁþÅ¥Ø¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Ï¥è¡¢¥ª¡¢ø¦öÁþÅ¥Ø¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¦¡¢¡¦¥ë¡¦ü§¥Í¥­¥½¡¢¥Ò¥Ä¥ß¥¢¥­¡¢¡«
+    ¡¢¥±¡£¡×
+
+    *KeyPress                2
+    *KeyRelease              3
+    *ButtonPress             4
+    *...
+
+    ¡¢¥¦¡¢ø¦ò¦¥Û¥½þÅ¥Ø¡¢¥Þ((<X Window System>))¡¢¥Û(({XEvent}))¥±¥¹¥Ä¡¢¥Ä¥Û¡¢¥Û(({type}))¡¢¥Û
+    ¥Æ¥Ø¡¢¥Ì¡¢¥±¡£¡×((-RCS¡¢¥ÛID¡¢¥ã "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
+    ¡¢¥Ì¡¢¡Ö¡¢õ¹.h¡¢úº¥ª¡¢¥Ò¥ª¥å¥¹¥á¡¢¥­¡¢¥½-))
+
+    ((-¥Ï¥¯¥µú´ü¦úÌ¥è¡¢¥­¡¢¥½¥Ï¥ã¡¢ð¦¡¢¡¢¥¿¡¢ú¦¥ò¡£¥¥Win¡¢ç®ac¡¢¥Ì¡¢¥Þ¡¢¥Î¡¢¥ò¡¢¥Ï¡¢ö£¥¥-))
+
+--- TkComm::Event#widget
+    %W
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#x_root
+    %X
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛX¥³¥Ä¥Î¥¯¡¢
+    ¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion¡¦¡¢¡¦¥ë¡¦ü§¥Í
+    ¡¢¥Ì¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkComm::Event#y_root
+    %Y
+
+    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛY¥³¥Ä¥Î¥¯¡¢
+    ¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion¡¦¡¢¡¦¥ë¡¦ü§¥Í
+    ¡¢¥Ì¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+=end

@@ -1,0 +1,33 @@
+# $Id: tkcallbackcontinue.rd,v 1.9 2000/03/04 22:13:03 arai Exp $
+# Class TkCallbackContinue is defined in tcltklib.so
+=begin
+= TkCallbackContinue
+
+((<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¥·¥Ä¥±¥ä¥Æì¦¥Ò¡¢¥¦¡¢¥Û¥Ûæµ¡¼¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¡¦¥¦¡£¥·¡¦
+¡¦¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÅìÅ¥Ì¡¢¥­¡£¡Ö((<¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±>))¡¢¥Ï¡¢¥Î¡¢¥Ò¡¦¥ß¡¦¡¢¡¦ü§¥Î¡¢¥ª¡¢ø¦¥½¡¦¡¢¡¦¥ë¡¦
+¡¦¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×(((<TkWindow#bindtags>))¥µ¥¤¥»¥Í)
+
+(({Tk.callback_continue}))¡¦â§¥¹¡¦¥Æ¡¦¥Î(¥·¥Ä¥³¥ó¡¢¥Ò¡¢¥Þ¡£¡Ö((<TkCore#callback_continue>)))
+¡¢¥Þ¡£¡Ö¡¢¥¦¡¢¥Û¥Ûæµ¡¼¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Ì¡¢¥±¡£¡×
+
+¡¼¥Ï¥¤¥·¡¢¥Û¥Ûæ¦¥Ì¡¢¥Þ¡£¡Ö¡¦¥ï¡¦¥½¡¦ü¦ú¼¥¯¡¦¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò¥Ò¥ï¥Øð¦¥Ï¡¢
+  "bind"
+  "appended bind"
+  "class bind"
+¡¢¥ã¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥±¡¢¥ã¡£¡Ö¥·¥Ä¥³¥ó¡¢¥Ò¡¢¥Þ((<Tk.callback_continue>))¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë
+  "class_bind"
+¡¢¥­¡¢¥©¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥µ¡¢ü£¡×(TkButton¡¦¥Ã¡¦ò§¥±¡¢¥Û¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÅ¥è¡¢¥å¥¨¥±¡¢¥£¡¢¥Ë¡¢¡¢¡¢
+¡¢¥½¡¢â£¡Ö¥³¥¯¡¦¥Ã¡¦ô§¥Æ¡¦¥Ã¡¢¥­¡¢¥Ë¡¢ä§¥ï¡¦¥½¡¦ü¦¥ã¡¢¥ê¡¢¥¦¡¢àÈ¡¼¥³ü¦¥ã¥ª¥Ã¡¢¥¦¡¢ô¦¡«¡¢¥µ¡¢
+
+ require "tk"
+ b1 = TkButton.new { text "click me!" } .pack
+ Tk.module_eval { _bind ["bind", b1.type], "1", proc {p "class bind"} }
+ b1.bind "1", proc {Tk.callback_continue; p "bind"}
+ b1.bind_append "1", proc {p "appended bind"}
+ Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<StandardError>))
+
+=end

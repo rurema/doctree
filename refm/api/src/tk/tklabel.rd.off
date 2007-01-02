@@ -1,0 +1,74 @@
+# $Id: tklabel.rd,v 1.13 2001/03/18 12:39:30 arai Exp $
+# Class TkLabel is defined in tk.rb
+=begin
+= TkLabel
+
+¡¦ò§¥ë¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦ò§¥ë¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡¦ò§¥ë¡¦¥Ï¥¯¥µú´¡¢úË¥¹¥·¥£¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+  TkLabel.new {
+    text "label"
+    pack
+  }
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkLabel#textvariable(var)
+    ((<TkVariable>))¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±((|var|))¡¢¥Û¥ËäÏ¥Ë¡¢ú§ò§¥ë¡¦ö¦¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((|var|))¡¢¥Û¥ËäÏ¥Ë¡¢¥ã¥Ï¥à¡¢þ¦ø¦¥ß¥·¥©¥Ë¡¼¥Ê¥§¡¢¥Ò¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦ö§ò§¥ë¡¦ö¦äÌ¥à¥¤¥¹¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#anchor>))
+
+((<TkObject#background>))
+
+((<TkObject#bitmap>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#image>))
+
+((<TkObject#justify>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+((<TkObject#text>))
+
+### ((<TkObject#textvariable>))
+
+((<TkObject#underline>))
+
+((<TkObject#wraplength>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkLabel#height
+
+--- TkLabel#width
+
+=end

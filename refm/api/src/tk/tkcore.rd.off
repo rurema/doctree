@@ -1,0 +1,237 @@
+# $Id: tkcore.rd,v 1.15 2001/03/18 12:37:29 arai Exp $
+# Module TkCore is defined in tk.rb
+=begin
+= TkCore
+
+¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡£¡Ö¥ÎâÆ¥Õ¡£¡Ö¡¦ä§¥¯¡¦ê£¥·¡¦(<Tk>))¡¢¥Û¡¦
+¡¦¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Í¡¢¥­¡¢¥Ë¥µ¥Í¥Ø¥à¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkComm>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkComm>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkCore.callback(arg)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkCore#callback_break
+    ¥Ûæµ¡¼((<TkCallbackBreak>))¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¡«¡¢¥±¡£¡×
+
+--- TkCore#callback_continue
+    ¥Ûæµ¡¼((<TkCallbackContinue>))¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¡«¡¢¥±¡£¡×
+
+--- TkCore#after(ms, cmd=Proc.new)
+    ((|ms|))¡¦¡¬¡¦ôË¥Æ¥¯ê¦¥Ò¡£¡Ö¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½(|cmd|))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×((|ms|))¡¢¥ã
+    ¥Ï¥¯¥µú´({"idle"}))¡¢¥Ì¡¢¡Ö¡¢öÀø»î£¡Ö¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í¡¢¥ã¥Ë¥Þ¥Ä¥ä¡¢¥Á¡¢¥Ï¡¢¥Î¡¦¡Ö¡¦¡¢¡¦¥Î¡¦öÀ¥è¡¢¥Ò¡¢¥Ï¡¢¥Æ
+    ¡¢¥½¡¢¥Í¡¢¥å¡¢¥Ò((|cmd|))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥·¥Ä¥±¥ä¥¤üÁþ¦ú½¥ê¥Èô¦¥±¡¢ö¦¥Ï¡¢¥Î¡£¡Ö¡¢ð¦ôÌ¡×¥µ¥£¡¢¥Ï¡¦¥½¡¦¡¢¡¦¡«¥Áà¼ü¦ú»¥ä¡¢¡¢¡¢¥½
+    ¡¢¡¢¥»ø»î¦¥Þ((<TkAfter>))¡¢ú½¥Í¥Ø¥à¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢¡£¡×
+
+--- TkCore#after_idle(cmd=Proc.new)
+    ((<TkCore#after>))(({('idle', cmd)})) ¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkCore#clock_clicks(ms=nil)
+
+--- TkCore#clock_format(clk, form=nil)
+
+--- TkCore#clock_formatGMT(clk, form=nil)
+
+--- TkCore#clock_scan(str, base=nil)
+
+--- TkCore#clock_scanGMT(str, base=nil)
+
+--- TkCore#clock_seconds
+    (({Time.now.to_i})) ¡¢¥ÛTcl¥Í¥Ì¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡¢¡Ö¡¢¡«¡¢ôË¥ã¥Ø¥é¡¢¥Ï¡¢¡¢¡¢¥Ì¡¢¥­¡¢î¦¥ò¡£¡×
+
+--- TkCore#scaling
+--- TkCore#scaling(scale)
+    ((<¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í>))¡¢¥ã¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦ö§¥Ì¡¦¡×¡¦¥±¡¦¥é¡¦ø§¡¢¡¢¥Û¡¦¥±¡¦¥¢¡£¥·¡¦ö¦ú½¥¤¥»¥Í¡£¥½¥¿¡¬¥È
+    ¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Þ¡¦¥ó¡¦¡¢¡¦ü§¥Í(1/72¡¦¡¢¡¦ü§¥Á)¡¢¡Ö¡¢¥½¡¢ô¦¥Û¡¦¥ä¡¦¥Ã¡¦¥µ¡¦öÁþ¦¥Ì¡¢¥±¡£¡×
+
+      require 'tk'
+      print Tk.scaling * 72, " dpi monitor\n"
+      print "adapt to 100 dpi monitor\n"
+      p Tk.scaling(100.0/72)
+
+--- TkCore#scaling_displayof(win)
+--- TkCore#scaling_displayof(win, scale)
+    ((|win|))¡¢úË¥¹¥·¥£¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§¥Ì¡¦¡×¡¦¥±¡¦¥é¡¦ø§¡¢¡¢¥Û¡¦¥±¡¦¥¢¡£¥·¡¦ö¦ú½¥¤¥»¥Í¡£¥½¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCore#appname(name=None)
+    ¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢(|name|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×¥ÄîÌ¥¯¥µùè¥Ì¥µ¥Þ¡¢¡«¡¢ö§¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§
+    ¥Õ¥»¡¢¥Þ¥ª¥ª¡¢ø¦¡«¡¢¥µ¡¢(-¡¢¥Í¡¦¡«¡¦¥Ò¡¦ê§¡Ö¡¦ö¦¥Ò¥¹ø¦¡¢¡¢¥Ë¡¢¡¢¡¢ö¦¥ã¥µ¥ê¥Èô¦¥Þ¡¢¥Ì¡¢¥å¡¢ö¦¡¬¡¢¥½¡¢¡¢-))¡£¡×
+
+    ¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢¥Þ¡£¡Ö((<TkCore#appsend>))¡¢¥Ì¥µ¥Í¥Ø¥à¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+    ¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢¥Þ¥»þ¦¥Ò¡¼ø²¥æ¡¢¥Ò¡¢¥Ï¡¢ö¦ð¦¥ò¡¢¥Ò¥È¥¨¥¿¡¼¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·
+    ¡¦¥­¡¦î§üÎ¥»¡¢¥ã¥¨ûè¥Ò¥Ä¥¯¥³¡¬¡¢¥±¡¢öÀø»î£¡Ö¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢¥Ò" #N"¡¢¥Û¥­¥Á¥·¡¼¡¢¥Ì¥È¥Õ¥Í¥è¡¢¥ã¥Î¥æ
+    ¡¢¥¢¡¢ò¦ø¦¡«¡¢¥±¡£¡×
+
+    ¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Þ"tk"¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkCore#appsend(interp, async, *args)
+
+--- TkCore#rb_appsend(interp, async, *args)
+
+--- TkCore#appsend_displayof(interp, async, *args)
+
+--- TkCore#rb_appsend_displayof(interp, async, *args)
+
+--- TkCore#info(*args)
+    Tcl¡¦¡¢¡¦ü§¥½¡¦¥é¡¦ô§¥½¡¢¥Û¥ËäËþÀöÌü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¥Ä¡¼ú¥þ¦¥Ì¥»öÌü¦¥Û¥·þÐà¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢ø¦¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Û¥Ï¥¯¥µú´ü¦¥Ì¡¢¥±¡£¡×¥µ¥È
+    ¡¢ô¦¥Û¡¼ú¥þ¦¥Þ¥Ä¡¼ú¥þ¦¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¢¥¹¡¢ø¦¥»¡¢ø²¥í¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×(¥»¥ï¥³¥ë¡¢¥Þinfo(n)¡¢ú½¥¤¥»¥Í¡¢¥­¡¢¥Ë
+    ¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢)
+
+      *"args"
+      *"body"
+      *"cmdcount"
+      *"commands"
+      *"complete"
+      *"default"
+      *"exists"
+      *"globals"
+      *"hostname"
+      *"level"
+      *"library"
+      *"loaded"
+      *"locals"
+      *"nameofexecutable"
+      *"patchlevel"
+      *"procs"
+      *"script"
+      *"tclversion"
+      *"vars"
+
+--- TkCore#mainloop
+    Ruby/TK¡¢¥Û¡¦â§¡¢¡¦ü§ö£¥·¡¦¥é¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¥¨¥Ë¥µö¦¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û
+    ¥·¥Ä¥±¥ä¡¢¥Þ¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥ËäËþ¦¥Ì¥±¥ä¡¢þ¦ø¦¡«¡¢¥±¡£¡×¥¹¥»¡¢¥Æ¡¢¥Ë¡£¡ÖRuby/Tk¡¦¥±¡¦¥Ã¡¦ô§¥é¡¦¥Í
+    ¡¢¥Û¥³¥Ì¥¯ê¦¥Þ¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+--- TkCore#event_generate(window, context, keys=nil)
+    ((<¡¦¡¢¡¦¥ë¡¦ü§¥Í>))((|context|))¡¢(|window|))¡¢¥Ì¥Í¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      b = TkButton.new {
+        text "button1"
+        command { puts "push!" }
+        focus
+      }.pack
+      TkButton.new {
+        text "button2"
+        command {
+          Tk.event_generate(b, "Key-space")
+        }
+      }.pack
+
+      Tk.mainloop
+
+    ((|context|)) ¡¢¥Ò"<¥¤¥»¥Á¥í¡¦¡¢¡¦¥ë¡¦ü§¥Í¥Õ¥»>"¡¢¥Í¡¢¡¢¡¢¥ò¥Ï¥¯¥µú´ü¦¥©((<TkVirtualEvent>))¡¢¥Û
+    ¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì((<¥¤¥»¥Á¥í¡¦¡¢¡¦¥ë¡¦ü§¥Í>))¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢ö¦¥¦¡¢¥Í¡¢ä¦¥Ì¡¢¥å¡¢¡«
+    ¡¢¥±¡£¡×
+
+    ¥»¥Ï¥Û¥ã¥¤¥È¥Ì¥¹¡¢¥Ï¡¼ú¥(|keys|))¡¢¥Ò¡¢¥Þ¡¼¥Ï¥¤¥·¡¢ú§¥å¡£¥·¡¢¥Ò¡¢¥­¡¢¥½¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+     *"above"
+     *"borderwidth"
+     *"button"
+     *"count"
+     *"detail"
+     *"focus"
+     *"height"
+     *"keycode"
+     *"keysym"
+     *"mode"
+     *"override"
+     *"place"
+     *"root"
+     *"rootx"
+     *"rooty"
+     *"sendevent"
+     *"serial"
+     *"state"
+     *"subwindow"
+     *"time"
+     *"width"
+     *"when"
+
+      ¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢ú¦¥Î¡¢¥Û¡¦¥½¡¦¡¢¡¦¡¬¡¦ü§¡¼¡¢¥Ì¥Í¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢ö¦¥©¡¢ú²¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¥µ¥ê¥·¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×
+      *"now"
+
+       ¥Ä¥£¥³¥Ä¡¢¥Ò¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¡«¡¢¥±(¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í)
+      *"tail"
+
+       ¥Ä¥»¡¢¥Û¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¡¦¥å¡¦ê£¥·¡¢¥Ò¥Û¥Ã¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢ø¦¥ß¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥å¡¦ê£¥·¡¢¥Û¥³¥Ì¥¯ê¦¥Ò¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡¢¡¦¥ë
+       ¡¦ü§¥Í¡¢úÅ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×
+      *"head"
+
+       ¥Ä¥»¡¢¥Û¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¡¦¥å¡¦ê£¥·¡¢¥Ò¥Û¥Ã¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢ø¦¥ß¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥å¡¦ê£¥·¡¢¥Û¥¿ðÈ¥ã¡¢¥Ò¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡¢¡¦¥ë
+       ¡¦ü§¥Í¡¢úÅ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×
+      *"mark"
+
+       ¥Ä¥»¡¢¥Û¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¡¦¥å¡¦ê£¥·¡¢¥Ò¥Û¥Ã¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢ø¦¥ß¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥å¡¦ê£¥·¡¢¥Û¥¿ðÈ¥ã¡¢¥Ò¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¡¢¡¦¥ë
+       ¡¦ü§¥Í¡¢úÅ¥è¡¢¥å¡¢¡«¡¢¥±¡£¡×¡¢¥½¡¢¥¿¡¢¥­¡£¡Ö¡¦¥å¡¦ê£¥·¥Ëä¦¥Ò"mark"¡¢¥­¡¢¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¡¢¡Ö¡¢ø¦¥ß¡¢¥¹¡¢¥Û¡¦¡¢¡¦¥ë
+       ¡¦ü§¥Í¡¢ð¦ô¦äºê¦¥Ò¥Æ¥è¡¢¥©¡¢ø¦¡«¡¢¥±¡£¡×
+     *"x"
+     *"y"
+
+--- TkCore#messageBox(keys)
+    ¡¼ú¥(|keys|))¡¢¥Ò¡¢¥Þ¡¼¥Ï¥¤¥·¡¢ú§¥å¡£¥·¡¢¥Ò¡¢¥­¡¢¥½¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+     *"default"
+     *"icon"
+     *"message"
+     *"parent"
+     *"title"
+     *"type"
+
+--- TkCore#getOpenFile(keys=nil)
+--- TkCore#getSaveFile(keys=nil)
+    ¡¦ú£¥·¡¦¥Î¡£¥½¡¦¥µ¡£¥·¡¦¥è¥Ø¥à¡¢¥Ò¡¦¥æ¡¦¡£¡¦¡¢¡¦ö¦úÃ¥§¥Äú¦¥±¡¢ö§¥¿¡¦¡¢¡¦¡Ö¡¦ú§¡¼¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¼ú¥(|keys|))¡¢¥Ò¡¢¥Þ¡¼¥Ï¥¤¥·¡¢ú§¥å¡£¥·¡¢¥Ò¡¢¥­¡¢¥½¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+     *"defaultextension"
+     *"filetypes"
+     *"initialdir"
+     *"initialfile"
+     *"parent"
+     *"title"
+
+    ¥Á¥§¥Äú¦¥­¡¢¥½¡¦¥æ¡¦¡£¡¦¡¢¡¦öÎ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦¥æ¡¦¡£¡¦¡¢¡¦öÎ¥»¥Á¥§¥Äú¦¥ã¡¦¥å¡¦æ§ü§¥µ¡¦ö¦¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥«
+    ¥Ï¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCore#chooseColor(keys=nil)
+    ¥½¥¡¡¢úÃ¥§¥Äú¦¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥¿¡¦¡¢¡¦¡Ö¡¦ú§¡¼¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢¥Ì¡¢¥±¡£¡×
+
+    ¡¼ú¥(|keys|))¡¢¥Ò¡¢¥Þ¡¼¥Ï¥¤¥·¡¢ú§¥å¡£¥·¡¢¥Ò¡¢¥­¡¢¥½¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+     *"initialcolor"
+     *"parent"
+     *"title"
+
+    ¥Á¥§¥Äú¦¥­¡¢¥½¥½¥¡¡¢#RRGGBB"¡¢¥Û¥­¥Á¥·¡¼¡¢¥Ì¥Î¥¹¡¢¥­¡¢¥½¥Ï¥¯¥µú´ü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥½¥¡¡¢¥Û¥Á¥§¥Äú¦¥ã¡¦¥å¡¦æ§
+    ¡¦¥µ¡¦ö¦¥ª¡¢ø¦¥½¥»ø»î¦¥Þ¥«¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkCore#chooseDirectory(keys = nil)
+
+--- TkCore#tk_call(*args)
+    ¡¼ú¥(|args|))¡¢(<TkComm#_get_eval_string>))¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥ÌTcl¥Ï¥¯¥µú´ü¦¥Ò¥Ï¥à¥¨¥±
+    ¡¢¥­¡£¡ÖTcl/Tk¡¦¥¦¡¦¡«¡¦ü§¥Î¡¢¥Í¡¢¥­¡¢¥Ë¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¥ÈôÁ
+
+--- TkCore::INTERP
+    Tcl/Tk¡¦¡¢¡¦ü§¥½¡¦¥é¡¦ô§¥½(((<TclTkIp>))¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±)¡¢¥Ì¡¢¥±¡£¡×
+
+=end

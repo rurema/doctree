@@ -1,0 +1,58 @@
+# $Id: tktexttag.rd,v 1.8 2000/03/04 22:13:03 arai Exp $
+# Class TkTextTag is defined in tktext.rb
+=begin
+= TkTextTag
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkObject>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkTreatTagFont>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkTextTag.new(parent, *args)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkTextTag#id
+
+--- TkTextTag#first
+
+--- TkTextTag#last
+
+--- TkTextTag#add(*index)
+
+--- TkTextTag#remove(*index)
+
+--- TkTextTag#ranges
+
+--- TkTextTag#nextrange(first, last=None)
+
+--- TkTextTag#prevrange(first, last=None)
+
+--- TkTextTag#[](key)
+
+--- TkTextTag#[]=(key,val)
+
+--- TkTextTag#cget(key)
+
+--- TkTextTag#configure(key, val=None)
+
+--- TkTextTag#configinfo(key=nil)
+
+--- TkTextTag#bind(seq, cmd=Proc.new, args=nil)
+
+--- TkTextTag#bind_append(seq, cmd=Proc.new, args=nil)
+
+--- TkTextTag#bindinfo(context=nil)
+
+--- TkTextTag#raise(above=None)
+
+--- TkTextTag#lower(below=None)
+
+--- TkTextTag#destroy
+
+=end

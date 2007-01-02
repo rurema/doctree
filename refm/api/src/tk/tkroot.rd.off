@@ -1,0 +1,69 @@
+# $Id: tkroot.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
+# Class TkRoot is defined in tk.rb
+=begin
+= TkRoot
+
+((<¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í>))¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Í¡¢¥Þ
+Ruby/Tk¡¢¥Ò¡¢¥§¡¢¥¢¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥¦¥ã¥Á¥ê¡¢¥Û¥³¥Ì¥»ê²¥Õ¡¢¥Û¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk::Wm>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkRoot.new
+    ¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×¥»þ¦¥Ò¥Ë¥¢¡¢¥¯¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÌ¥è¡¢¥­
+    ¡¢¡«¡¢¥±¡£¡×(¡¢¥È¡¢¡«¡¢ô£¡ÖRuby/Tk¡¢¥Ò¡¢¥§¡¢¡¢¡¢¥Ë¥Ë¥¢¥µ¥Ò¥Ä¥¯¥³¡¬¡¢¥Ì¡¢¥å¡¢ö§ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ1¡¢¥È
+    ¡¢¥¿¡¢¥¢¡¢¥Ì¡¢¥±)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkRoot#path
+    ¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û((<¡¦¥à¡¦¥±>))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¦¡¢ø¦¥Þ¡£¡Ö"." ¥¯¥Ì¥Èô¦¥Ì¡¢¥±¡£¡×
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#borderwidth>))
+((<TkObject#bd>))
+
+((<TkObject#cursor>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#relief>))
+
+((<TkObject#takefocus>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkRoot#background(color)
+--- TkRoot#bg(color)
+### --- TkRoot#class
+### --- TkRoot#classname
+
+--- TkRoot#colormap
+
+--- TkRoot#container(bool)
+
+--- TkRoot#height
+
+--- TkRoot#menu
+
+--- TkRoot#screen
+
+--- TkRoot#use
+
+--- TkRoot#visual
+
+--- TkRoot#width
+
+=end

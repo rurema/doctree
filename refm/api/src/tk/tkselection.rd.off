@@ -1,0 +1,62 @@
+# $Id: tkselection.rd,v 1.10 2000/03/12 20:21:02 arai Exp $
+# Module TkSelection is defined in tk.rb
+=begin
+= TkSelection
+
+((<¡¦¥µ¡¦ø§¥Ã¡¦¥­¡¦î§))¡¢úÃà¼ü¦¥±¡¢ö¦¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkSelection.handle(win, func, type=None, format=None)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í((|win|))¡¢¥ã¥µ¥È((<¡¦¥µ¡¦ø§¥Ã¡¦¥­¡¦î§))¡¢ú¾ð¦ô¿¥ß¡¢¥±¡¢¥Í¡¢¥å¥·¥Ä¥±¥ä¡¢¥±
+    ¡¢ö¿ðÏ(|func|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|type|))¡¢¥Þ¡£¡Ö¥·ð¦ô¿¥ß¡¢¥±¡¢¥Í¡¢¥å¡¢¥Ò¥µ¥ê¥Èô¦¥±
+    ¡¢ö¹¥½(((<TkSelection.get>))¥µ¥¤¥»¥Í)¡¢¥Ò¥Ä¥ß¥¢¥­¡¢¡«¡¢¥±(¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Þ"STRING"¡¢¥Ì
+    ¡¢¥±)¡£¡×
+
+--- TkSelection.own(win=None, func=None)
+    ¡¼ú¥þ¦ú½¥ê¥Èô¦¥­¡¢¥Ï¡¢¡¢¥»ø»î£¡Ö((<¡¦¥µ¡¦ø§¥Ã¡¦¥­¡¦î§))¡¢ú¿ôÏ¥å¡¢¥±¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã
+    ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±(¡¢¥½¡¢¥¿¡¢¥­¡£¡Ö¡¦¥µ¡¦ø§¥Ã¡¦¥­¡¦î§ü¦¥ã¥Ä¥¯¥³¡¬¡¢¥­¡¢¥Ï¡¢¥¢¡¢ø¦¥ß(({nil}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±)¡£¡×
+
+    ((-¡¼ú¥þ¦ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î¦¥Þ¡£¥¥-))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkSelection#handle(func, type=None, format=None)
+
+--- TkSelection#own(func=None)
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö¶¥ê¥½
+
+--- TkSelection.clear(win=Tk.root)
+    ((<¡¦¥µ¡¦ø§¥Ã¡¦¥­¡¦î§))¡¢ú¾ð¦ôÀ¥Æ¡¢¥­¡¢¡«¡¢¥±¡£¡×((|win|))¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î£¡Ö¥µ¥ê¥Èô¦¥­
+    ¡¢¥½¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥ã¥Ä¥ß¥»¥ó¡¢¥Í¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¥«¥¯¥µú´ü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkSelection.get(type=None)
+    ((<¡¦¥µ¡¦ø§¥Ã¡¦¥­¡¦î§))¡¢¥Û¥Æ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Æ¥Ø¡¢¥Û¥­¥½¡¢¥Í¡¢¥­¡¢¥Ë¡¼ú¥(|type|))¡¢¥Ò¡¼¥Ï¥¤¥·
+    ¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"STRING"
+    *"FILE_NAME"
+    *...
+    *"COMPUND_TEXT"  (¥Ë¥ï¥¯÷µcl/Tk¡¢¥Û¥»ø»
+
+    ¡¼ú¥(|type|))¡¢úÀ¥Ï¥Û¥ã¡¢¥±¡¢ö¦¥Í(({"STRING"}))¡¢ú½¥ê¥Èô¦¥­¡¢¥½¡¢¥¦¡¢¥Í¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+=end
+# Module TkSystemMenu is defined in tk.rb
+=begin
+= TkSystemMenu
+
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkSystemMenu#initialize(parent, keys=nil)
+
+=end

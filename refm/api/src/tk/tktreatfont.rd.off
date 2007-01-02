@@ -1,0 +1,25 @@
+# $Id: tktreatfont.rd,v 1.9 2000/02/15 18:08:00 arai Exp $
+# Module TkTreatFont is defined in tk.rb
+=begin
+= TkTreatFont
+
+== ・皈ス・テ・ノ:
+
+--- TkTreatFont#font_configinfo
+--- TkTreatFont#fontobj
+
+--- TkTreatFont#font_configure(slot)
+
+--- TkTreatFont#latinfont_configure(ltn, keys=nil)
+--- TkTreatFont#asciifont_configure(ltn, keys=nil)
+
+--- TkTreatFont#kanjifont_configure(knj, keys=nil)
+
+--- TkTreatFont#font_copy(window, tag=nil)
+
+--- TkTreatFont#latinfont_copy(window, tag=nil)
+--- TkTreatFont#asciifont_copy(window, tag=nil)
+
+--- TkTreatFont#kanjifont_copy(window, tag=nil)
+
+=end

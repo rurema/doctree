@@ -1,0 +1,56 @@
+# $Id: tkpalette.rd,v 1.8 2000/02/15 18:07:59 arai Exp $
+# Module TkPalette is defined in tkpalette.rb
+=begin
+= TkPalette
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkPalette.set(*args)
+
+--- TkPalette.setPalette(*args)
+
+--- TkPalette.bisque
+
+--- TkPalette.darken(color, percent)
+
+--- TkPalette.recolorTree(window, colors)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkPalette#recolorTree(colors)
+
+=end
+# $Id$
+# Module TkPlace is defined in tk.rb
+=begin
+= TkPlace
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö¶¥ê¥½
+
+--- TkPlace.configure(win, slot, value=None)
+
+--- TkPlace.configinfo(win, slot = nil)
+
+--- TkPlace.forget(win)
+
+--- TkPlace.info(win)
+
+--- TkPlace.slaves(master)
+
+=end

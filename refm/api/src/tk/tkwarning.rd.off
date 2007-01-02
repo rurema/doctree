@@ -1,0 +1,28 @@
+# $Id: tkwarning.rd,v 1.8 2000/03/04 22:13:03 arai Exp $
+# Class TkWarning is defined in tkdialog.rb
+=begin
+= TkWarning
+
+== ・ケ。シ・ム。シ・ッ・鬣ケ:
+
+((<TkDialog>))
+
+== ・ッ・鬣ケ・皈ス・テ・ノ:
+
+--- TkWarning.new(mes)
+
+== ・皈ス・テ・ノ:
+
+((-ーハケ゜、ホ・皈ス・テ・ノ、マprivate、ホハャ、、、、、�Ε�、网ハ、、。ゥ-))
+
+--- TkWarning#message
+
+--- TkWarning#title
+
+--- TkWarning#bitmap
+
+--- TkWarning#default_button
+
+--- TkWarning#buttons
+
+=end

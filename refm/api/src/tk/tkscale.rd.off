@@ -1,0 +1,125 @@
+# $Id: tkscale.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
+# Class TkScale is defined in tk.rb
+=begin
+= TkScale
+
+¡¦¥±¡¦¥¢¡£¥·¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Þ¡£¡Ö¡¦¥ª¡¦¡¢¡¦¥³¡¢¥Ï¡¢¥Î¡¢¥Û¥½þÐ¥Õ¡¢ú§¥±¡¦ò§¡¢¡¦¥¿¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¥Ò¡¢ð¦ôË¥¹¡¢¥±¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+
+  require "tk"
+
+  TkScale.new {
+    orient "horizontal"
+    length 200
+    from 1
+    to 500
+    command {|val|
+      p val
+    }
+    pack
+  }
+  Tk.mainloop
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkScale#get
+--- TkScale#value
+    ¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Û¥Æ¥Ø¡¢ú¾ðÈ¥¿¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#get(x, y)
+    ¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Û((|x|))¡¢¡«¡¢¥½¡¢¥Þ((|y|))¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¥Û¥Æ¥Ø¡¢ú¾ðÈ¥¿¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥Þ¡£¡Ö¡¦¥§¡¦¥é¡¦¥­¡¦î§(|orient|))¡¢¥ã(({"horizontal"}))¡¢¥Ï¡¢ò¦¥ß((|x|))¡¢¥Û
+    ¥Æ¥Ø¡¢¥¿¡¢¥¢¡¢¥ã¡£¡Ö(({"vertical"}))¡¢¥Ï¡¢ò¦¥ß((|y|))¡¢¥Û¥Æ¥Ø¡¢¥¿¡¢¥¢¡¢¥ã¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#set(val)
+--- TkScale#value=(val)
+    ¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Û¥Æ¥Ø¡¢(|val|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#coords(val=None)
+
+--- TkScale#identify(x, y)
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#activebackground>))
+
+((<TkObject#background>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#orient>))
+
+((<TkObject#relief-troughcolor>))
+
+((<TkObject#repeatdelay>))
+
+((<TkObject#repeatinterval>))
+
+((<TkObject#takefocus>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkScale#bigincrement
+
+--- TkScale#command
+
+--- TkScale#digits
+    ¥Ø¥å¥¯ùûêÁ
+
+--- TkScale#from(n)
+    ¥»êÅ¥·(¥³¥¯¥Æ¥·)¡¢¥Û¥Æ¥Ø¡¢(|n|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#label(text)
+    ¡¦¥±¡¦¥¢¡£¥·¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦ò§¥ë¡¦ö¦(|text|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#length(len)
+    ¡¦¥±¡¦¥¢¡£¥·¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥È¥±¡¢¥ª¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#resolution(n)
+    ¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Û¥Ï¥à¥¤¥¹¥Û¥Õ¡¢¥Û¥³¥Ì¥»¥ç¥Æ¥Ø¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Û¥Æ¥Ø¡¢¥Þ¡¢¥¦¡¢¥Û¥Æ¥Ø¡¢¥Û¥Ì¥ï¥½þ¦¥Ò¡¢¥Ï¡¢
+    ¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#showvalue(bool)
+    ¥Æ¥Ø¡¢¥Û¥Î¥¹¥·¥£¡¢ú¦¥±¡¢((|bool|))="1")¡¢¥©¡¢¥­¡¢¥Ï¡¢¡¢(((|bool|))="0")¡¢¥©¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#sliderlength(len)
+    ¡¦¥±¡¦ò§¡¢¡¦¥¿¡¢¥Û¥È¥±¡¢¥ª¡¢(|len|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#sliderrelief(s)
+    ¡¦¥±¡¦ò§¡¢¡¦¥¿¡¢¥Û¥­¥Á¥»ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥µ¥ê¥Èô¦¥Ì¡¢¥å¡¢öÅ¥Ø¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+    *"raised"
+    *"sunken"
+
+    ((-¥Ò¥ï¥Ê¥Ò¡¢¥¦¡¢ø¦¥¿¡¢¥¢¡£¥¥-))
+
+--- TkScale#state
+
+--- TkScale#tickinterval(n)
+    ¥Õ¥ï¥¿¥±¡¢ô¦¥Û¥¨¥è¥¦¥è¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|n|))¡¢¥ã0¡¢¥Û¥»ø»î¦¥Þ¥Õ¥ï¥¿¥±¡¢ô¦¥Þ¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥µ¡¢ü£¡×
+
+--- TkScale#to(n)
+    ¥¤¥·¥Æ¥·(¥¢¥ò¥Æ¥·)¡¢¥Û¥Æ¥Ø¡¢(|n|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#variable(v)
+    TkVariable¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|v|))¡¢¥Í¡¦¥±¡¦¥¢¡£¥·¡¦ö¦¥Û¥»¥è¡¢ú¶¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkScale#width
+
+=end

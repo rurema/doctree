@@ -1,0 +1,41 @@
+# $Id: tkkinput.rd,v 1.9 2000/02/15 18:07:59 arai Exp $
+# Module TkKinput is defined in tk.rb
+=begin
+= TkKinput
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkKinput.start(window, style=None)
+
+--- TkKinput.send_spot(window)
+
+--- TkKinput.input_start(window, keys=nil)
+
+--- TkKinput.attribute_config(window, slot, value=None)
+
+--- TkKinput.attribute_info(window, slot=nil)
+
+--- TkKinput.input_end(window)
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkKinput#kinput_start(style=None)
+
+--- TkKinput#kinput_send_spot
+
+--- TkKinput#kanji_input_start(keys=nil)
+
+--- TkKinput#kinput_attribute_config(slot, value=None)
+
+--- TkKinput#kinput_attribute_info(slot=nil)
+
+--- TkKinput#kanji_input_end
+
+=end

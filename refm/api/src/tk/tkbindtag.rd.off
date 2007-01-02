@@ -1,0 +1,114 @@
+# $Id: tkbindtag.rd,v 1.5 2000/02/06 05:58:42 arai Exp $
+# Class TkBindTag is defined in tk.rb
+=begin
+= TkBindTag
+
+¡¢¥¦¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Û¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢(<¡¦¥½¡¦¡¼¡¦ô§¥±¡¦¥Í>))¡¢¥Ò¥Ëø¦ö¦¥¦¡¢¥Í¡¢¥Ì¥Ì¡¢¡¼¥æ¡¢¥Û¡¦¡¼¡¦ö£¥·¡¦¥é
+¡¢¥Ò¥«¥ò¥È¥Õ¡¢¥Û((<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¡¢úÇ¥ß¥Þ¥½¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×
+((<TkWindow#bindtags>))¡¢ä½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢¡£¡×
+
+  require "tk"
+
+  tag = TkBindTag.new
+  tag.bind('Return') {|e| p e.widget }
+
+  TkButton.new {text 'A'; bindtags bindtags.unshift tag}.pack.focus
+  TkButton.new {text 'B'; bindtags bindtags.unshift tag}.pack
+  TkButton.new {text 'C'}.pack
+  Tk.mainloop
+
+¡¢¥¦¡¢¥Û¥Ûæ¦¥Ì¡¢¥Þ¡£¡Ö¡¦¥ï¡¦¥½¡¦û¢¡£¡ÖB¡¢¥¿¡¢¥¢¡¢¥Þ¡¦ô§¥½¡£¥·¡¦ü§¥å¡£¥·¡¢¥Ò¥Ä¥ß¡¢¥±¡¢ö§¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú½¥Á
+¡¢¡«¡¢¥±¡¢¥ã¡£¡Ö¡¦¥ï¡¦¥½¡¦û¤ ¡¢¥Ò¡¢¥Þ¡¢¡Ö¡¢ô¦¡«¡¢¥µ¡¢ü£¡×
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<Object>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkBindCore>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkBindTag.id2obj(id)
+    ¥Ï¥¯¥µú´(|id|))¡¢¥Ò¥Ä¥ß¥¢¥±¡¢({TkBindTag}))¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥ËäËþ¦¥Ì¥Ø¥à¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkBindTag.new
+--- TkBindTag.new(context, cmd=Proc.new, args=nil)
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦úÇ¥ß¥Þ¥½¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥½¡¦¡¼¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦ú½¥ê¥Èô¦¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Ì¥¿¥¯¥¿¥ç¡¢¥Í¥Ë¥¢¥µ¥Ò¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦¥Û¥Ê¥ß¥Þ¥½¡¢ú»¥ä¡¢¥ò¡¢¥¦¡¢¥Í¡¢ä¿¥ß¥Ø
+    ¡¢¡«¡¢¥±¡£¡×¡¼ú¥þ¦¥Û¡¼¥æ¥Õ¡×¡¢¥Þ((<TkBindCore#bind>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×¥¹¥»¡¢¥Æ¡¢¥Ë¡£¡Ö
+      tag = TkBindTag.new
+      tag.bind('Return') {|e| p e.widget }
+    ¡¢ú£¡Ö
+      tag = TkBindTag.new('Return', proc {|e| p e.widget })
+    ¡¢¥Í¥¹ø¦¥Ã¡¢¥¦¡¢¥Í¡¢ä¦¥Ì¡¢¥å¡¢¡«¡¢¥±¡£¡×((-¡¦¡¢¡¦¥Ë¡¦ø£¥·¡¦¥½¡¢¥Û¥­¥Á¥·¡¼¡¢¥Ì¥¹ø¦¥Ã¡¢¥¦¡¢¥Í¡¢¥Þ¥¹¥ß¥Øð¦¥Ï¡¢¡¢-))
+
+=end
+# $Id$
+# Class TkBindTagAll is defined in tk.rb
+=begin
+= TkBindTagAll
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkBindTag>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkBindTagAll.new
+--- TkBindTagAll.new(context, cmd=Proc.new, args=nil)
+
+=end
+# $Id$
+# Class TkEntry::ValidateCmd is defined in tkentry.rb
+=begin
+= TkEntry::ValidateCmd
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<Object>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkComm>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkEntry::ValidateCmd.new(cmd = Proc.new, args=nil)
+
+=end
+# $Id$
+# Class TkEntry::ValidateCmd::ValidateArgs is defined in tkentry.rb
+=begin
+= TkEntry::ValidateCmd::ValidateArgs
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<Object>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkEntry::ValidateCmd::ValidateArgs.new(d,i,s,v,pp,ss,vv,ww)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkEntry::ValidateCmd::ValidateArgs#action
+
+--- TkEntry::ValidateCmd::ValidateArgs#index
+
+--- TkEntry::ValidateCmd::ValidateArgs#current
+
+--- TkEntry::ValidateCmd::ValidateArgs#type
+
+--- TkEntry::ValidateCmd::ValidateArgs#value
+
+--- TkEntry::ValidateCmd::ValidateArgs#string
+
+--- TkEntry::ValidateCmd::ValidateArgs#triggered
+
+--- TkEntry::ValidateCmd::ValidateArgs#widget
+
+=end

@@ -1,0 +1,18 @@
+# $Id: tkscrollbox.rd,v 1.9 2001/03/18 12:39:31 arai Exp $
+# Class TkScrollbox is defined in tkscrollbox.rb
+=begin
+= TkScrollbox
+
+¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·((<TkScrollbar>))¡¢¥Í¡¦ô§¥±¡¦¥Í¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±((<TkListbox>))¡¢úÃ¥Í¡¢¡¬
+¥±î¦þ¦¥µ¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Þ¡£¡Ö((<TkComposite>))¡¦ä§¥¯¡¦ê£¥·
+¡¦ö¦¥Û¥µ¥Í¡¢¡¢¥Ï¥Û¥Ûæ¦¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkListbox>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkComposite>))
+
+=end

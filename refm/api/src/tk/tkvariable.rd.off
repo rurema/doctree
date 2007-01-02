@@ -1,0 +1,143 @@
+# $Id: tkvariable.rd,v 1.11 2000/03/08 15:58:39 arai Exp $
+# Class TkVariable is defined in tk.rb
+=begin
+= TkVariable
+
+Tcl¡¢¥Û¥Ï¥à¥½þ¦ú§¡Ö¡¦¥Ã¡¦¥µ¡¦¥±¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+((-Tcl¡¢¥Û¥Ì¥í¥Ûü¦¥Í¡¢¥­¡¢¥Ë¡¢¥Û¥½¥«¡¢öËø¦¡¢¡¢¥Þ¥µ¥Ê¥Ø¥Ø¡¢¥ã¥Î¥ä¡¼¥Ä¥Èô¦¥Û¡¢ð¦¥ò¡¢¥Ì¡¢¥±-))
+
+  require "tk"
+  p TkVariable.new(0).value                     # => "0"
+  p TkVariable.new(1.2).value                   # => "1.2"
+  p TkVariable.new(["a", "b"]).value            # => {"0"=>"a", "1"=>"b"}
+  p TkVariable.new(1=>"a", 2=>"b").value        # => {"1"=>"a", "2"=>"b"}
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<Object>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkCore>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkVariable.callback(args)
+    ((<TkVariable#trace>))¡¢¥Ò¡¢ð¦ôÇ¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½Proc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((|args|)) ¡¢¥Þ¡£¡Ö
+      [TkVariable¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±, "¡¦¥å¡£¥·", "¥Áà¼]
+    ¡¢¥Ì¡¢¡Ö¡¢öÉ¥í¥Ûü¦¥Ì¡¢¥±¡£¡×
+
+--- TkVariable.new(val="")
+    ¥Æ¥Ø¡¢¥ã((|val|))¡¢¥Ì¡¢¡Ö¡¢õµkVariable¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×((|val|))¡¢¥ã
+    ((<Array>)) ¡¢¡«¡¢¥½¡¢¥Þ((<Hash>))¡¢¥Û¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ì¡¢¡Ö¡¢öÀø»î£¡Ö¥¿¥¯¥¿¥ç¡¢¥ª¡¢ø¦¥½¡¦¡¢¡¦ü§¥±
+    ¡¦¥½¡¦ü§¥±¡¢¥Þ((<Tcl¡¢¥Û¥Ì¥í¥Û))¡¢¥Í¡¢¥­¡¢¥Ë¥½¥«¡¢öËø¦¡¢¡¢¡«¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkVariable#wait
+    ¥Æ¥Ø¡¢¥ã¥Ï¥à¥¤¥¹¡¢¥±¡¢ö¦¡«¡¢¥Ì¥Ä¥ä¡¢¥Á¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#value
+    ¥Æ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×(({self}))¡¢¥ã((<Tcl¡¢¥Û¥Ì¥í¥Û))¡¢¥Ï¡¢ò¦¥ß(Tcl¡¢¥Û¥Ì¥í¥Ûü¦¥Þ¥Þ¡Ö¥Á¥í¥Ì¥í¥Ûü¦¥Ï
+    ¡¢¥Û¡¢¥Ì) ((<Hash>))¡¢¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥¹¡¢ø²¥Ï¥¦¡¼¡¢¥Ì¡¢¥Þ¥»þ¦¥Ò¥Ï¥¯¥µú´ü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#value=(val)
+    ¥Æ¥Ø¡¢(|val|))¡¢¥Ò¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#[](index)
+    ((|index|))¥Í¥è¥Õ¥ï¡¢¥Û¥Æ¥Ø¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (({self}))¡¢¥Þ((<Tcl¡¢¥Û¥Ì¥í¥Û))¡¢¥Ì¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢ü£¡×
+
+--- TkVariable#[]=(index, val)
+    ((|index|))¥Í¥è¥Õ¥ï¡¢¥Û¥Ø¥é¥Á¥Ì¡¢(|val|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (({self}))¡¢¥Þ((<Tcl¡¢¥Û¥Ì¥í¥Û))¡¢¥Ì¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¡¢¥Ï¡¢ô¦¡«¡¢¥µ¡¢ü£¡×
+
+--- TkVariable#to_i
+    ¥Æ¥Ø¡¢úÁþÅ¥Ø(((<Fixnum>)))¡¢¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×(¥¯¥¹¥»¥Û(({TkVariable}))¡¢¥Þ¡£¡Ö
+    (({Bignum}))¡¢úÅ¥Ø¡¢¥Ò¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥Þ¡¢¥Ì¡¢¥å¡¢¡«¡¢¥µ¡¢
+
+--- TkVariable#to_f
+    ¥Æ¥Ø¡¢úÁþÅ¥Ø(((<Float>)))¡¢¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#to_s
+    ¥Æ¥Ø¡¢úÌ¥¯¥µú´((<String>)))¡¢¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#to_a
+    ¥Æ¥Ø¡¢úÉ¥í¥Û((<Array>)))¡¢¥Í¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#==(other)
+    ¥Æ¥Ø¡¢¥ã((|other|))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¡Ö¡¢öÀø»î¦¥Ò¥½¥½¡¢¥Ì¡¢¥±¡£¡×((|other|))¡¢¥Þ¡£¡Ö
+    (({TkVariable})), (({String})), (({Integer})), (({Float})),
+    (({Array}))¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+--- TkVariable#unset(elem=nil)
+--- TkVariable#remove(elem=nil)
+    ¥Æ¥Ø¡¢¥ãTcl¥Ì¥í¥Ûü¦¥Ì¡¢¡Ö¡¢ö¦¥Í¡¢¥å¡£¡Ö((|elem|))¡¢¥Û¥Æ¥Ø¡¢ú¼þ¿¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable#trace_callback(elem, op)
+    ((<TkVariable#trace>))¡¢¥Ò¡¢ð¦ôÇ¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½Proc¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢ú²ú¥þ¦¥Ò(({self})),
+    ((|elem|)), ((|op|))¡¢ú½¥ê¥Èô¦¥­¡¢¥Ë¥·¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+
+      var = TkVariable.new(0)
+
+      var.trace "rwu", proc {|arg| puts "callback called with #{arg.inspect}"}
+      var.trace_callback([], "r")
+
+--- TkVariable#trace(opts, cmd)
+    opts¡¢¥Þ¡£¡Ö"r", "w", "u" ¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡£¡Ö¡¢¡«¡¢¥½¡¢¥Þ¡¢¥¦¡¢ø¦ò¦¥Û¥Á¥Í¡¢¡¬¥±î¦þ¦¥µ¡¢¥Ì¡£¡Ö¡¢¥¹¡¢ø¦¥»¡¢
+    ¥Ï¥à¥½þ¦¥ã¥µ¥¤¥»¥Í¡£¡Ö¥¿¡¬¥Èô£¡Ö¥³þ¿¡¢¥ª¡¢ø¦¥½¡¢¥Í¡¢¥å¡¢¥Ò((<Proc>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í ((|cmd|)) ¡¢
+    ¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¡«¡¢¥±¡£¡×2¥¤üÎ¥ï¡¼¥Ï¥±¡¬¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¥Ì¡¢¥Þ¡£¡Ö((|opts|)) ¡¢¥ã¡¼¥Ï¥Á¡¼¡¢¥Û¥¿¡¬¥Èô¦¥Í¡¼¥í¡¢¥Ï¡¢
+    ¡¢¥ß((|cmd|))¡¢ú¼¥Ë¥¿¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((|cmd|))¡¢¥Þ¡£¡Ö¡¼ú¥þ¦¥Ò¡£¡Ö(({self}))¡£¡Ö¥«¥í¥Ûü£¡Ö"¥Áà¼ ¡¢úÇ¥Þ¡¢¥ª¡¢ø¦¥Ë¥¯¥Ë¡¢¥ß¡¢
+    ¡¢¡«¡¢¥±¡£¡×"¥Ì¥í¥Ûü¦¥Û¡¦¥å¡£¥·" ¡¢¥Þ¡£¡Ö¥Ï¥à¥½þ¦¥ã¥Ì¥í¥Ûü¦¥Û¥»ø»î²¥Ï¥¦¡¼¡¢¥Þ¥«¥¯¥µú´ü¦¥Ì¡¢¥±¡£¡×"¥Áà¼¡¢¥Þ¡£¡Ö
+    "r","w","u" ¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+
+      require "tk"
+
+      var = TkVariable.new(0)
+
+      var.trace "rwu", proc {|arg| puts "callback called with #{arg.inspect}"}
+
+      p var.value
+      p var.value = 1
+      p var.unset
+
+      =>callback called with [<TkVariable: v00000>, [], "r"]
+        "0"
+        callback called with [<TkVariable: v00000>, [], "w"]
+        "1"
+        callback called with [<TkVariable: v00000>, [], "u"]
+        ""
+
+--- TkVariable#trace_element(elem, opts, cmd)
+
+--- TkVariable#trace_vinfo
+
+--- TkVariable#trace_vinfo_for_element(elem)
+
+--- TkVariable#trace_vdelete(opts, cmd)
+    ((<TkVariable#trace>)) ¡¢¥Ì¥¿¡¬¥Èô¦¥­¡¢¥½((|cmd|))¡¢ú¼þ¿¥­¡¢¡«¡¢¥±¡£¡×((|opts|))¡¢¥ã((<TkVariable#trace>))¡¢¥Ì
+    ¥¿¡¬¥Èô¦¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Í¡¼øÅ¥é¡¢¥­¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¥¤¥½¡¢ä¦¥­¡¢¡«¡¢¥µ¡¢ü£¡×
+
+--- TkVariable#trace_vdelete_for_element(elem, opts, cmd)
+== ¥ÈôÁ
+
+--- TkVariable::TkVar_CB_TBL
+    ¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½þ¦ú·¥å¥Þ¥½¡¢¥±¡¢ö§¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×¥ËäËþ¦¥Ì¥Ø¥à¡¢¥­¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkVariable::Tk_VARIABLE_ID
+    Tcl¡¦ø§¥ë¡¦ö¦¥Û¥Ï¥à¥½þÎ¥»¡¢ú§¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢¥Ò¥¦è¦ôÇ¥Ë¡¢ö¦¥½¡¢â¦¥Ò¥ËäËþ¦¥Ì¥Ø¥à¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«
+    ¡¢¥±¡£¡×
+
+    Tk_VARIABLE_ID¡¢¥Þ¡£¡Ö¥Ì¥í¥Ûü¦¥Ì¡¢¥±¡¢¥ã0¥Í¥è¥Õ¥ï¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥­¡¢¥©¥µ¥Í¡¢þ¦ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥µ¡¢ü£¡×
+    Ruby¡¢¥Ò¡¢¥§¡¢¥¢¡¢öÆôÁþ¦¥ã¥Æ¥Ø¡¢úÌ¥à¥±¥±¡¢¥Ì¡¢¥å¡¢¥Ï¡¢¡¢¡¢¥½¡¢â¦¥Ì¡¢¥±¡£¡×
+
+=end

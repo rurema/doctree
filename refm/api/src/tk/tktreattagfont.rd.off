@@ -1,0 +1,22 @@
+# $Id: tktreattagfont.rd,v 1.7 2000/02/15 18:08:00 arai Exp $
+# Module TkTreatTagFont is defined in tkfont.rb
+=begin
+= TkTreatTagFont
+
+== ・皈ス・テ・ノ:
+
+--- TkTreatTagFont#font_configinfo
+
+--- TkTreatTagFont#font_configure(slot)
+
+--- TkTreatTagFont#latinfont_configure(ltn, keys=nil)
+
+--- TkTreatTagFont#kanjifont_configure(knj, keys=nil)
+
+--- TkTreatTagFont#font_copy(window, wintag=nil)
+
+--- TkTreatTagFont#latinfont_copy(window, wintag=nil)
+
+--- TkTreatTagFont#kanjifont_copy(window, wintag=nil)
+
+=end

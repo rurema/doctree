@@ -1,0 +1,14 @@
+# $Id: tkbitmapimage.rd,v 1.8 2000/02/15 18:07:59 arai Exp $
+# Class TkBitmapImage is defined in tkcanvas.rb
+=begin
+= TkBitmapImage
+
+== ・ケ。シ・ム。シ・ッ・鬣ケ:
+
+((<TkImage>))
+
+== ・ッ・鬣ケ・皈ス・テ・ノ:
+
+--- TkBitmapImage.new(*args)
+
+=end

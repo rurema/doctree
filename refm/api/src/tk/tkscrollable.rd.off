@@ -1,0 +1,141 @@
+# $Id: tkscrollable.rd,v 1.11 2001/03/18 12:39:31 arai Exp $
+# Module Tk::Scrollable is defined in tk.rb
+=begin
+= Tk::Scrollable
+
+¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·(((<TkScrollbar>)))¡¢¥Í¡¢¥Û¥Þ¡Ö¥Ë¡¼¡¢ú»¥ä¡¢¥ò¡¢¥½¡¢â¦¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥ã¥Èô·¥Á¡¢¥ª
+¡¢ø¦¥½¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
+
+¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö¦¥ã¥¤¥È¥Ì¥¹¡¢¥Ï¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦ú§¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- Tk::Scrollable#xscrollcommand(cmd=Proc.new)
+--- Tk::Scrollable#yscrollcommand(cmd=Proc.new)
+    (({Tk::Scrollable}))¡¢({include}))¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¡£¡Ö¥·¥©¥½¥Í¡¢¥ã
+    ¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö¦¥ª¡¢ø¦ö¦¥Í¡¢¥å¡¢¥Ò¡£¡Ö¡¢¥¹¡¢¥Û¥Î¥¹¥·¥£¡¼¥Õ¥Æ¥è¡¢ú²ú¥þ¦¥Ò¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½
+    ((|cmd|))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¡«¡¢¥±¡£¡×¥·î¦¥Ò¥Î¥¹¥·¥£¡¼¥Õ¥Æ¥è¡¢¥Ò¥¢¥¯¡¢¥Ë¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·¡¢ú²¥ï¥Ë¡¼¡¢¥ª
+    ¡¢¥µ¡¢ö¦¥½¡¢â¦¥Ò¥µ¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((<TkListbox>))¡¢¥Û¥»ø»î£¡Ö¡¦¡«¡¦¥ò¡¦¥±¡¦¥ï¡¦¥½¡¦¡¢ú§¥Î¡¦ò§¥Æ¡¦¡¼¡¢¥±¡¢ø¦¥ß
+    (({xscrollcommand}))¡£¡Ö(({yscrollcommand}))¡¢¥Ò¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¥è¡¦ú§¥Æ¡¦¥Ã¡¢¥ã¥·¥Ä¥±¥ä
+    ¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+      require "tk"
+
+      xscrol = yscrol = nil
+
+      list = TkListbox.new {
+        ('a'..'z').each {|v|
+          insert 'end', (v..'z').to_a.join
+        }
+
+        xscrollcommand {|arg| xscrol.set *arg; p arg}
+        yscrollcommand {|arg| yscrol.set *arg; p arg}
+        grid 'column'=>0, 'row'=>0, 'sticky'=>'nsew'
+        focus
+      }
+
+      xscrol = TkScrollbar.new {
+        orient "horizontal"
+        command {|arg| list.xview *arg; p args}
+        grid 'column'=>0, 'row'=>1, 'sticky'=>'ew'
+      }
+
+      yscrol = TkScrollbar.new {
+        orient "vertical"
+        command {|arg| list.yview *arg; p arg}
+        grid 'column'=>1, 'row'=>0, 'sticky'=>'ns'
+      }
+      TkGrid.columnconfigure Tk.root, 0, 'weight'=>100
+      TkGrid.rowconfigure    Tk.root, 0, 'weight'=>100
+
+      Tk.mainloop
+
+    ((<TkScrollbar#set>))¡¢ä½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢¡£¡×((-¡¦¥è¡¦ú§¥Æ¡¦¥Ã¡¢¥Ò¥Ê¥Þ¡¢¥±¡¼ú¥þ¦¥Û¥­¥Á¥·¡¼¡¢¥Ò
+    ¡¢¥È¡¢¡¢¡¢¥Ë¥¹ø¦¥Ã¡¢¥¦¡¢¥Í-))
+
+    ¥»ê·¥å¥Ûæ¦¥Þ¥Ï¡×¥µ¥£¡¢¥Ì¡¢¥±¡¢¥ã¡£¡Ö¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·¡¢¥Û¥µ¥ê¥Èô¦¥Û¥µ¥Ê¥Ï¥Þ(¥Ë¥Æ¥Ï¥Õ¡¢¥Ï¥µú¦¥­¡¢¥Ï¡¢¡¢
+    ¥¯¥Ä¡¢ô¦¥Þ)¡¢¥í¡¢¥ï¥­ð¦¡«¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢ö¦¥Û¡¢¥Ì¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¢ð¦¥ò¡¢¥Ï¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú¼ü¦ö¦¥Í¥ÆôÀ¥ó¥Ê¥ë¡¢¥ã
+    ¥Á¥­¡¢¥Ë¡¼¥Ï¥¦¡¼¡¢¥Í¥¦¥ì¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±(¥¤¥½¡¢ð¦ô£¡Ö¥Ø¥»¥­¥é¡¢¥Ï¡¦ú£¥·¡¦¥©¡¦öÌ¥à¥½þ¦¥Û¥Èô·¥Á¡¢¥ã¥Î¥ã¥Ø¥é¡¢¥Ï
+    ¡¢¥Ã¡¢¥Ï¡¢ô¦¡«¡¢¥±)¡£¡×
+
+--- Tk::Scrollable#xview(*index)
+--- Tk::Scrollable#yview(*index)
+    ((-¥¯¥©¥È¥»¡¢¥±¡¢¥¦¡¢¥Í-))
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¥Î¥¹¥·¥£¥Û¥Û¡¼ð¦úÌ¥à¥±¥±¡¢¥­¡¢¡«¡¢¥±¡£¡×¥·î¦¥Ò¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·
+    ((<TkScrollbar>))¡¢¥Í¡¢¥Û¥Þ¡Ö¥Ë¡¼¡¢¥Û¡¢¥½¡¢â¦¥Ò((<TkScrollbar#command>))¡¢¥Û¡¦¥è¡¦ú§¥Æ
+    ¡¦¥Ã¡¢¥Ì¥µ¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼ú¥þ¦¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Û¥­¥Á¥·¡¼¡¢¥Ì¡¢¥±¡£¡×
+
+    *¡¢¥Ï¡¢¥­
+
+     ¥¯¥¹¥³¡¬¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¡¢¥È¡¢¥Û¥ÍìÐ¥£(0.0¡£¥Á1.0)¡¢¥Ì¥Î¥¹¡¢¥­¡¢¥½¥Ì¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥³¥Ì¥¹ò¦¥Û¥Ø¥é¥Á¥Ì
+     ¡¢¥Þ¥Î¥¹¥·¥£¡¼¥Õ¥Æ¥è¡¢¥Û¥³¥¯¥Æ¥·(¥»êÅ¥·)¡¢¥ã¥Á¥¨¥Ä¥Û¡¢¥Û¥¤¥½%¡¼¥Õ¥Æ¥è¡¢¥Ò¡¢¡Ö¡¢ö¦¥©¡¢ú¾¥£¡¢¥­¡£¡Ö2¥Í¥è¥Õ¥ï¡¢¥Û¥Ø¥é¥Á¥Ì
+     ¡¢¥Þ¥Î¥¹¥·¥£¡¼¥Õ¥Æ¥è¡¢¥Û¥¢¥ò¥Æ¥·(¥¤¥·¥Æ¥·)¡¢¥ã¥Á¥¨¥Ä¥Û¡¢¥Û¥¤¥½%¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¥Ò¡¢¡Ö¡¢ö¦¥©¡¢ú¾¥£¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+     ¥Ûæ¦¥£¡¢¥ß¡£¡Ö(('[0.2, 0.7]'))¡¢¥Ì¡¢¥Þ¥Á¥¨¥Ä¥Û¡¢¥Û20%¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¥ã¥³¥¯¥Æ¥·¡£¡Ö¥Á¥¨¥Ä¥Û¡¢¥Û
+     30%(100-70)¡¢¥Û¡¼¥Õ¥Æ¥è¡¢¥ã¥¢¥ò¥Æ¥·¡¢¥Í¡¢¥­¡¢¥Ë¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×¡¢¥­¡¢¥½¡¢¥ã¡¢¥Æ¡¢¥Ë¡£¡Ö¥·¥Ä¥³¥ó¡¢¥Ò
+     ¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢öÐ¥Û¡¼ð¦¥Þ¥Á¥¨¥Ä¥Û¡¢¥Û50%(70-20)¡¢¥Ì¡¢¥±(¥¤¥·¥¾)¡£¡×
+
+        +--------¥Á¥¨¥Ä¥Û¡¢¥Û¡¦¥ª¡¦¡¢¡¦¥³---------+
+              +--¥Î¥¹¥·¥£¥ÎþÌ¥ã----+
+        +-----+--------------+--------+
+        |     |              |        |
+        +-----+--------------+--------+
+        0 .1 .2 .3 .4 .5 .6 .7 .8 .9  1.0
+
+    *((*¡¼¥Õ¥Æ¥è*))
+
+     ((*¡¼¥Õ¥Æ¥è*))¡¢¥ã¥³¥¯¥Æ¥·¡¢¥Ò¡¢¥Ï¡¢ö¦ð¦¥ò¡¢¥Ò¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö¦¥­¡¢¡«¡¢¥±¡£¡×
+     (((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥µ¥ê¥ÈôÌ¡£¡¢¥Þ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¼¥í¡¢¥Ï¡¢ô¦¡«¡¢¥±)
+
+    *"moveto" ¥ÍìÐ¥£
+
+     ¥ÍìÐ¥£¡¢¥Þ¡£¡Ö0.0 ¡£¥Á 1.0¡¢¡«¡¢¥Ì¡¢¥Û¥½þÅ¥Ø¡¢¥Ì¥Á¥¨¥Ä¥Û¡¢¥Û¡¢¥ò¡¢¥Á¥¤¥½%¥Õ¥ï¡¢¥ã¥³¥¯¥Æ¥·¡¢¥Ò¡¢¥Ï¡¢ö¦¥©¡¢
+     ¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+     ((<TkScrollbar#command>))¡¢¥Þ¡£¡Ö¡¢¥¦¡¢¥Û¥­¥Á¥·¡¼¡¢¥Û¥Ì¥í¥Ûü¦ú§¥è¡¦ú§¥Æ¡¦¥Ã¡¢¥Û¡¼ú¥þ¦¥Í¡¢¥­¡¢¥Ë
+     ¥Ê¥Þ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"scroll", ¥Ï ¥Æ¥¢¡¼¥Õ
+
+     ¥Ï-1:¥³¥¯¡£¡Ö1:¥¢¥ò)¡¢¥Ò¥¢¥¯¡¢¥Ë¥Æ¥¢¡¼¥Õ("units":¥Ï¥¯¥µùå¡Ö"page":((-¡£¥¥¡£¥¥¡£¥¥-)))¡¢¥¿¡¢¥¢
+     ¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö¦¥­¡¢¡«¡¢¥±¡£¡×
+
+     ((<TkScrollbar#command>))¡¢¥Þ¡£¡Ö¡¢¥¦¡¢¥Û¥­¥Á¥·¡¼¡¢¥Û¥Ì¥í¥Ûü¦ú§¥è¡¦ú§¥Æ¡¦¥Ã¡¢¥Û¡¼ú¥þ¦¥Í¡¢¥­¡¢¥Ë
+     ¥Ê¥Þ¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- Tk::Scrollable#xscrollbar(bar=nil)
+--- Tk::Scrollable#yscrollbar(bar=nil)
+    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Í¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·¡¢¥Û¥Þ¡Ö¥Ë¡¼¡¢¥Û¥µ¥ê¥Èô¦¥Þ¡£¡Ö
+    ((<Tk::Scrollable#xscrollcommand>))¡£¡Ö((<Tk::Scrollable#xview>))¡£¡Ö
+    ((<TkScrollbar#command>))¡£¡Ö((<TkScrollbar#set>))¡¢úÃ¥Í¡¢¡¬¥±î¦þ¦¥µ¡¢ö½¥Ì
+    ¥±¥ä¡¢¡¢¡¢¡«¡¢¥±¡¢¥ã¡£¡Ö¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡¢¥¦¡¢ø¦ú¶¥Ï¥Û¥ã¥¤¥¹¡¢¥±¡¢ö¦¥½¡¢â¦¥Ò¡¢¡Ö¡¢ô¦¡«¡¢¥±¡£¡×
+
+    ((<Tk::Scrollable#xscrollcommand>))¡¢¥Ò¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ú£¥·¡¦ö§¥ß¡£¥·¥Î¥æ¡¢¥å¡¦ô§¥±¡¦¥Í
+    ¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢¥Û¥Ûæ¦¥Þ¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú½¥Í¡¢¥ò¥µ¥Ì¡¼¥Ï¥¤¥·¡¢¥Û¡¢ð¦¥ò¡¢¥Ò¥¹ø¦¥å¥È¥»¡¢¥±¡¢¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å
+    ¡¢¡«¡¢¥±¡£¡×
+
+        require "tk"
+
+        TkListbox.new {
+          ('a'..'z').each {|v|
+            insert 'end', (v..'z').to_a.join
+          }
+
+          xscrollbar TkScrollbar.new
+          yscrollbar TkScrollbar.new
+          xscrollbar.grid 'column'=>0, 'row'=>1, 'sticky'=>'ew'
+          yscrollbar.grid 'column'=>1, 'row'=>0, 'sticky'=>'ns'
+          grid 'column'=>0, 'row'=>0, 'sticky'=>'nsew'
+          focus
+        }
+
+        TkGrid.columnconfigure Tk.root, 0, 'weight'=>100
+        TkGrid.rowconfigure    Tk.root, 0, 'weight'=>100
+
+        Tk.mainloop
+
+=end

@@ -1,0 +1,90 @@
+# $Id: tktextwin.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
+# Class TkTextWin is defined in tk.rb
+=begin
+= TkTextWin
+
+¡¦¥Ë¡¦¥å¡¦¥±¡¦¥Í¡¢úÈ¥Þ¡¢¥±¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¢¥½¡¢â¦¥Û¥ÆôÀ¥ó¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Þ¡¦¡¢¡¦
+¡¦¥±¡¦¥½¡¦ü§¥±¡¢úÂ¥¯¥¿¥ç¡¢¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã¡¢¥Ì¡¢¥å¡¢¡«¡¢¥µ¡¢ü£¡×
+
+¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥¿äÎ¥¿¡¢¥Û¥Æì¦¥Û((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¡¼¥æ¥Õ¡×¡¢¥Þ¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦ú§¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥±¡¢
+¡¦¥Ã¡¦ò§¥±¡¢¥Ò¡¢ð¦¥Æ¡¢¥Ë¡¼¥í¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+
+((-¡¢¥Í¡¢ô¦¡Ö¡¢¥£¡¢¥³¡£¡Ölistbox¡¢¥Û¥ªüÈ¡¼¡¢¥©¡¢ò²¥Ï¥¤¥·¡¢ú·¥å¥¹¥á¡¢¥­¡¢¥½¡£¡×text¡¢¥Ò¡¢¥È¡¢¡¢¡¢¥Ë¡¢äÆ¥¨¡¢¥ë¡¢¥Ï¡¢¥¢
+¡¢ø¦¥ß¡¢¥Ï¡¢ò¦¥Ï¡¢¡¢-))
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkWindow>))
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkTextWin#bbox(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢ú²¥Þ¡¢à¸ö¹¥Á¥³¥Ä¥Î¥¯(('[x,y,w,h]'))¡¢úÌ¥è
+    ¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Õ¥ª¥¯ùè¥Ï((|index|))¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»î¸¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkTextWin#delete(first, last=None)
+    ((|first|))¡£¡Ö((|last|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Í¥Þ¡¼¥Þ¡¢¥Û¥Ø¥é¥Á¥Ì¡¢ú¼þ¿¥­¡¢¡«¡¢¥±¡£¡×
+    ((|last|))¡¢úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö((|first|))¡¢¥Û((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥¿¡¢¥¢¡¢ú¼þ¿¥­¡¢¡«
+    ¡¢¥±¡£¡×
+
+--- TkTextWin#get(index)
+--- TkTextWin#get(first, last)
+    ¡¼ú¥þ¦¥ã1¡¢¥È¡¢¥Û¥»ø»î£¡Ö¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢úÌ¥¯¥µú´ü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¡¼ú¥þ¦¥ã2¡¢¥È¡¢¥Û¥»ø»î£¡Ö¥µ¥ê¥Èô¦¥­¡¢¥½¥Í¥Þ¡¼¥Þ¡¢¥Û¥Ø¥é¥Á¥Ì¡¢úÌ¥¯¥µú´ü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkTextWin#index(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥Û¡¼¥Õ¥Æ¥è¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-TkListBox¡¢¥Û¥»ø»î¦¥Þ¥½þÅ¥Ø¡¢úÌ¥è¡¢¥­¡¢¥½¥Ï¥ã¥Û¥Î¡¢¡¢¡£¥¥-))
+
+--- TkTextWin#insert(index, chars, *args)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Ò¥Ï¥¯¥µú´(|chars|))¡¢úÃ¡«¥Ë¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¥«¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ((<TkListbox>))¡¢¥Û¥»ø»(|args|))¡¢¥Ì¥Ï¡×¥½þ¦¥Û¡¦ô§¥±¡¦¥Í¥Ø¥é¥Á¥Ì¡¢úÃ¡«¥Ë¥±¡¢ö¦¥¦¡¢¥Í¡¢¥ã¥¹¥ß¥Øð¦¡«¡¢¥±¡£¡×
+
+--- TkTextWin#scan_mark(x, y)
+    ¡¼ú¥(|x|))¡£¡Ö((|y|))¡¢¥Í¥¯¥¹¥³¡¬¡¦ô§¥±¡¦¥Í¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¥Ëä¦¥Ì¥¯¥©¡¢¥£¡¢¥Ë¡¢¡¢¡¢öÏ¥é¥Á¥Ì¡¢¥Û¥Í¥Þ¡¼¥Þ¡¢ú·¥å¥¤¥¢
+    ¡¢¥­¡¢¡«¡¢¥±¡£¡×¥ª¥å¥¤¥¢¡¢¥­¡¢¥½¥»öÌü¦¥Þ((<TkTextWin#scan_dragto>))¡¢¥Ì¥µ¥Í¥Ø¥à¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+    ¥«¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+--- TkTextWin#scan_dragto(x, y)
+    ¥³¥Ì¥¯ê¦¥Ò((<TkTextWin#scan_mark>))¡¢ú¾¥Ä¥±¥ä¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¼ú¥(|x|))¡£¡Ö((|y|))¡¢¥Í
+    ¡¼ú¥(|x|))¡£¡Ö((|y|)) ¡¢¥Û¥³¥±¡¢ú¹¥é¥µ¥µ¡¢¥­¡¢¥¹¡¢¥Û¥³¥±¥Ï¥ã¡¢¥¿¡¢¥¢¡¦¥±¡¦¥Ã¡¦ú£¥·¡¦ö¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¥«¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+    ¡¼¥Ï¥¤¥·¡¢¥Þ¡£¡Ö¡¦¡«¡¦¥ò¡¦¥±¡¢¥Û¥³¥¯¡¦¥ï¡¦¥½¡¦ü¦¥Û¡¦¥Î¡¦ò§¥Æ¡¦¡¼¡¢¥Ì¡¦ô§¥±¡¦¥Í¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±¡¢ú§¥±¡¦¥Ã¡¦ú£¥·¡¦ö¦¥ª¡¢¥µ¡¢öÐ
+    ¡¢¥Ì¡¢¥±¡£¡×¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥Þ¥Æì§¥ï¡¦¥½¡¦ü¦¥Û¡¦¥Î¡¦ò§¥Æ¡¦¡¼¡¢¥ã¥Ë¥¢¡¢¥¯¥¿¡¬¥Èô¦¥Ò¡¢¥Ï¡¢¥Æ¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      l = TkListbox.new {
+        height 5
+        100.times {|i| insert 'end', i}
+      }.pack
+      # p Tk.bindinfo(TkListbox, 'Button-2')
+      # p Tk.bindinfo(TkListbox, 'B2-Motion')
+      l.bind "Button-1", proc {|e| l.scan_mark(e.x, e.y); Tk.callback_break}
+      l.bind "B1-Motion" , proc {|e| l.scan_dragto(e.x, e.y); Tk.callback_break}
+      Tk.mainloop
+
+    (({Tk.callback_break}))¡¢¥Û¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢¥Ò¡¢ð¦ô£¡Ö¡¦¥Ã¡¦ò§¥±¡¢¥Ò¥Ê¥ß¥Þ¥½¡¢¥ª¡¢ø¦¥½¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û
+    ¥¯¥Ë¡¢¥â¥¹¥ß¡¢¥­¡¢úÏ¡«¥µ¡¬¡¢¥­¡¢¥Ë¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+
+--- TkTextWin#see(index)
+    ((|index|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½((*¡¼¥Õ¥Æ¥è*))¡¢¥Û¥Ø¥é¥Á¥Ì¡¢¥ã¥¯¥©¡¢¥£¡¢ö¦ð¦¥ò¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥«¥¯¥µú´({""}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+
+      require "tk"
+      l = TkListbox.new {
+        height 5
+        100.times {|i| insert 'end', i}
+      }.pack
+
+      TkButton.new {
+        command {l.see(50)}
+      }.pack "fill"=>"x"
+      Tk.mainloop
+
+=end

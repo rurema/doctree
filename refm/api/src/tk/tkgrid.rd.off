@@ -1,0 +1,140 @@
+# $Id: tkgrid.rd,v 1.15 2001/03/18 12:39:30 arai Exp $
+# Module TkGrid is defined in tk.rb
+=begin
+= TkGrid
+
+¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÉ¥í¥Æ¥è¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
+¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ò¡¢ð¦ô£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Þ¥¦¥Ï¥µ¥á¥»¥Ò¥Ì¥í¥Æ¥è¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+
+¥ÎâÆ¥Õ¡£¡Ö¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úµ¥Ï¥µ¥á¥»¥Ò¥Ì¥í¥Æ¥è¡¢¥±¡¢ö¦¥Ò¡¢¥Þ((<TkWindow#grid>))¡¢¥ã¥µ¥Í¡¢þ¦ø¦¡«¡¢¥±¡£¡×
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<Tk>))
+
+== ¡¦ä§¥¯¡¦ê£¥·¡¦ö¶¥ê¥½
+
+--- TkGrid.bbox(master, column=nil, raw=nil, column2=nil, row2=nil)
+
+--- TkGrid.configure(widget1, widget2, ..., options=nil)
+    ((|wigetN|))¡¢¥Ò¥Ä¥ß¡¢¥­¡¢¥Ë¡£¡Ö((|options|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥Ì¥í¥Æ¥è¡¢ú»¥ä¡¢¡¢¡¢¡«¡¢¥±¡£¡×
+    ((|options|))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢¥Û¡¦¥å¡£¥·¡¢ú½¥È¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×
+
+    *"column"
+
+     ¥­ê²¥Õ¥Æ¥è¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥­ê²¥Õ¥Æ¥è¡¢¥Þ¥³¥¯¡¢¥©¡¢ò¿î¦¥Ò0,1,2,...¡¢¥Í¥½þ¦¥£¡¢¡«¡¢¥±¡£¡×
+
+    *"columnspan"
+
+     ¥Ì¥í¥Æ¥è¡¢¥Ò¥µ¥Í¥Ø¥à¡¢¥±¡¢ö´¡×¥Ï¥Û¡¦¥µ¡¦ö¦¥Û¥½þ¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"in"
+    *"ipadx"
+    *"ipady"
+    *"padx"
+    *"pady"
+
+    *"row"
+
+     ¥±¥ä¡¼¥Õ¥Æ¥è¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥±¥ä¡¼¥Õ¥Æ¥è¡¢¥Þ¥»ê¦¥©¡¢ò¿î¦¥Ò0,1,2,...¡¢¥Í¥½þ¦¥£¡¢¡«¡¢¥±¡£¡×
+
+    *"rowspan"
+
+     ¥Ì¥í¥Æ¥è¡¢¥Ò¥µ¥Í¥Ø¥à¡¢¥±¡¢ö¿¥È¥Ï¥Û¡¦¥µ¡¦ö¦¥Û¥½þ¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+
+    *"sticky"
+
+--- TkGrid.columnconfigure(master, index, args)
+    ¡¦¡«¡¦¥±¡¦¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í((|master|))¡¢¥Û¥­ê²¥Õ¥Æ¥è((|index|))¡¢¥Ò¥¨¥ê¡¢¥±¡¢öÄ¡¼¥¿¥å¡¢
+    ((|args|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|args|))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢ú§¥å¡£¥·¡¢¥Ò¥µ¥È¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×
+
+    *"minsize"
+    *"weight"
+    *"pad"
+
+    ((|args|))¡¢¥Ò¥«¥Û¡¦¥Þ¡¦¥Æ¡¦¥­¡¦({{}}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-((|args|))¡¢¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¥Æ¥Ø¡¢¥Þ¡£¡Ö((<TkComm::None>))¡¢¥Ò¡¢¥­¡¢¥½¥Ï¥ã¥Û¥Î¡¢¡¢-))
+
+      require "tk"
+
+      f = TkFrame.new.pack
+      p TkGrid.columnconfigure(f, 0, {})
+
+      => "-minsize 0 -pad 0 -weight 0"
+
+    ((-¥Õâ¦ôÅ¥Ø¡¢¥Þ¡£¡Öhash¡¢¥Ò¡¢¥­¡¢¥½¡¢¡¢-))
+
+--- TkGrid.rowconfigure(master, index, args)
+    ¡¦¡«¡¦¥±¡¦¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í((|master|))¡¢¥Û¥±¥ä¡¼¥Õ¥Æ¥è((|index|))¡¢¥Ò¥¨¥ê¡¢¥±¡¢öÄ¡¼¥¿¥å¡¢
+    ((|args|))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×((|args|))¡¢¥Þ¡£¡Ö¡¼¥Ï¥¤¥·¡¢ú§¥å¡£¥·¡¢¥Ò¥µ¥È¡¦¥Þ¡¦¥Æ¡¦¥­¡¦ê¦¥Ì¡¢¥±¡£¡×
+
+    *"minsize"
+    *"weight"
+    *"pad"
+
+    ((|args|))¡¢¥Ò¥«¥Û¡¦¥Þ¡¦¥Æ¡¦¥­¡¦({{}}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¥¯¥¹¥³¡¬¡¢¥Û¥¿¡¬¥Èô¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((-((|args|))¡¢¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¥Æ¥Ø¡¢¥Þ¡£¡Ö((<TkComm::None>))¡¢¥Ò¡¢¥­¡¢¥½¥Ï¥ã¥Û¥Î¡¢¡¢-))
+
+      require "tk"
+
+      f = TkFrame.new.pack
+      p TkGrid.rowconfigure(f, 0, {})
+      p TkGrid.rowconfigure(f, 0, {'minsize'=>10})
+      p TkGrid.rowconfigure(f, 0, {})
+
+      => "-minsize 0 -pad 0 -weight 0"
+         ""
+         "-minsize 10 -pad 0 -weight 0"
+
+    ((-¥Õâ¦ôÅ¥Ø¡¢¥Þ¡£¡Öhash¡¢¥Ò¡¢¥­¡¢¥½¡¢¡¢-))
+
+      require "tk"
+
+      module TkGrid
+        def columnconfigure(master, index, args=None)
+          Hash[tk_split_list(tk_call "grid", 'columnconfigure', master, index, *hash_kv(args))]
+        end
+
+        def rowconfigure(master, index, args=None)
+          tk_tcl2ruby(tk_call "grid", 'rowconfigure', master, index, *hash_kv(args))
+        end
+
+        module_function :columnconfigure, :rowconfigure
+      end
+
+
+      f = TkFrame.new.pack
+      p TkGrid.columnconfigure(f, 0)
+      p TkGrid.columnconfigure(f, 0, {'minsize'=>10})
+      p TkGrid.columnconfigure(f, 0)
+
+      f = TkFrame.new.pack
+      p TkGrid.rowconfigure(f, 0)
+      p TkGrid.rowconfigure(f, 0, {'minsize'=>10})
+      p TkGrid.rowconfigure(f, 0)
+
+--- TkGrid.columnconfiginfo(master, index, slot=nil)
+
+--- TkGrid.rowconfiginfo(master, index, slot=nil)
+
+--- TkGrid.add(widget, *args)
+
+--- TkGrid.forget(*args)
+
+--- TkGrid.info(slave)
+
+--- TkGrid.location(master, x, y)
+
+--- TkGrid.propagate(master, bool=None)
+
+--- TkGrid.remove(*args)
+
+--- TkGrid.size(master)
+
+--- TkGrid.slaves(master, args)
+
+=end

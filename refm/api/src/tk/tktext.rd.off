@@ -1,0 +1,209 @@
+# $Id: tktext.rd,v 1.11 2001/03/18 12:39:31 arai Exp $
+# Class TkText is defined in tktext.rb
+=begin
+= TkText
+
+¡¦¥Ë¡¦¥å¡¦¥±¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+
+((*¡¼¥Õ¥Æ¥è*))
+
+*"line.char"
+*"@x,y"
+*"end"
+*¡¦¡«¡£¥·¡¦¥Ã
+*¡¦¥½¡¦¡¼.first
+*¡¦¥½¡¦¡¼.last
+*¡¦¥à¡¦¥±
+*¡¦¡¢¡¦â£¥·¡¦¥¯
+
+== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+
+((<TkTextWin>))
+
+== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+
+((<TkTreatTextTagFont>))
+
+((<Scrollable>))
+
+== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkText.new(*args, &block)
+
+== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkText#_ktext_length(txt)
+
+--- TkText#_retrieve_braced_text(str, i)
+
+--- TkText#_retrieve_backslashed_text(str, i)
+
+== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+
+--- TkText#init_instance_variable
+
+--- TkText#index(index)
+
+--- TkText#value
+
+--- TkText#value= (val)
+
+--- TkText#_addcmd(cmd)
+
+--- TkText#_addtag(name, obj)
+
+--- TkText#tagid2obj(tagid)
+
+--- TkText#tag_names(index=None)
+
+--- TkText#mark_names
+
+--- TkText#mark_next(index)
+
+--- TkText#mark_previous(index)
+
+--- TkText#window_names
+
+--- TkText#image_names
+
+--- TkText#set_insert(index)
+
+--- TkText#set_current(index)
+
+--- TkText#insert(index, chars, *tags)
+
+--- TkText#destroy
+
+--- TkText#backspace
+
+--- TkText#compare(idx1, op, idx2)
+
+--- TkText#debug
+
+--- TkText#debug=(boolean)
+
+--- TkText#bbox(index)
+
+--- TkText#dlineinfo(index)
+
+--- TkText#yview_pickplace(*what)
+
+--- TkText#xview_pickplace(*what)
+
+--- TkText#tag_add(tag, index1, index2=None)
+
+--- TkText#tag_bind(tag, seq, cmd=Proc.new, args=nil)
+
+--- TkText#tag_bind_append(tag, seq, cmd=Proc.new, args=nil)
+
+--- TkText#tag_bindinfo(tag, context=nil)
+
+--- TkText#tag_cget(tag, key)
+
+--- TkText#tag_configure(tag, key, val=None)
+
+--- TkText#tag_configinfo(tag, key=nil)
+
+--- TkText#tag_raise(tag, above=None)
+
+--- TkText#tag_lower(tag, below=None)
+
+--- TkText#tag_remove(tag, *index)
+
+--- TkText#tag_ranges(tag)
+
+--- TkText#tag_nextrange(tag, first, last=None)
+
+--- TkText#tag_prevrange(tag, first, last=None)
+
+--- TkText#search_with_length(pat,start,stop=None)
+
+--- TkText#search(pat,start,stop=None)
+
+--- TkText#rsearch_with_length(pat,start,stop=None)
+
+--- TkText#rsearch(pat,start,stop=None)
+
+--- TkText#dump(type_info, *index, &block)
+
+--- TkText#dump_all(*index, &block)
+
+--- TkText#dump_mark(*index, &block)
+
+--- TkText#dump_tag(*index, &block)
+
+--- TkText#dump_text(*index, &block)
+
+--- TkText#dump_window(*index, &block)
+
+--- TkText#dump_image(*index, &block)
+
+== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+
+((<TkObject#background>))
+
+((<TkObject#borderwidth>))
+
+((<TkObject#cursor>))
+
+((<TkObject#exportselection>))
+
+((<TkObject#font>))
+
+((<TkObject#foreground>))
+
+((<TkObject#highlightbackground>))
+
+((<TkObject#highlightcolor>))
+
+((<TkObject#highlightthickness>))
+
+((<TkObject#insertbackground>))
+
+((<TkObject#insertborderwidth>))
+
+((<TkObject#insertofftime>))
+
+((<TkObject#insertontime>))
+
+((<TkObject#insertwidth>))
+
+((<TkObject#padx>))
+
+((<TkObject#pady>))
+
+((<TkObject#relief>))
+
+((<TkObject#selectbackground>))
+
+((<TkObject#selectborderwidth>))
+
+((<TkObject#selectforeground>))
+
+((<TkObject#setgrid>))
+
+((<TkObject#takefocus>))
+
+### ((<TkObject#xscrollcommand>))
+
+### ((<TkObject#yscrollcommand>))
+
+== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+
+--- TkText#height
+
+--- TkText#spacing1
+
+--- TkText#spacing2
+
+--- TkText#spacing3
+
+--- TkText#state
+
+--- TkText#tabs
+
+--- TkText#width
+
+--- TkText#wrap
+
+=end
