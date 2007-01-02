@@ -326,7 +326,7 @@ tkextlib/blt                    moriq           done
 tkextlib/blt/barchart           moriq
 tkextlib/blt/bitmap
 tkextlib/blt/busy
-tkextlib/blt/component
+tkextlib/blt/component          moriq
 tkextlib/blt/container
 tkextlib/blt/cutbuffer
 tkextlib/blt/dragdrop
