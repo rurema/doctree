@@ -28,3 +28,10 @@ RSS を扱うためのライブラリです。
 #@include(rss/maker/Items)
 #@include(rss/maker/Textinput)
 #@end
+
+= class RSS::Element < Object
+== Instance Methods
+
+--- full_name
+
+--- tag_name

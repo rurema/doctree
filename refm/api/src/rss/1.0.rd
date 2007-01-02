@@ -6,8 +6,6 @@
 --- encoding
 --- encoding=
 
---- full_name
-
 --- image
 --- image=
 

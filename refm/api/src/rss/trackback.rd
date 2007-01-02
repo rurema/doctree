@@ -18,7 +18,6 @@ include BaseTrackBackModel
 
 = class RSS::TrackBackModel10::TrackBackPing < RSS::Element
 == Instance Methods
---- full_name
 
 --- resource
 --- resource=
@@ -28,7 +27,6 @@ include BaseTrackBackModel
 
 = class RSS::TrackBackModel10::TrackBackAbout < RSS::Element
 == Instance Methods
---- full_name
 
 --- resource
 --- resource=
@@ -45,8 +43,6 @@ include BaseTrackBackModel
 --- content
 --- content=
 
---- full_name
-
 --- value
 --- value=
 
@@ -54,8 +50,6 @@ include BaseTrackBackModel
 == Instance Methods
 --- content
 --- content=
-
---- full_name
 
 --- value
 --- value=
