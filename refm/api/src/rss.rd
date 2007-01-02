@@ -9,6 +9,14 @@ RSS を扱うためのライブラリです。
   * RSS 1.0  [[url:http://purl.org/rss/1.0/spec]]  
   * RSS 2.0  [[url:http://www.rssboard.org/rss-specification]]
 #@include(rss/Tutorial)
+#@include(rss/0.9.rd)
+#@include(rss/1.0.rd)
+#@include(rss/dublincore.rd)
+#@include(rss/syndication.rd)
+#@include(rss/taxonomy.rd)
+#@include(rss/image.rd)
+#@include(rss/trackback.rd)
+#@include(rss/XMLStyleSheet)
 #@include(rss/maker/Categories)
 #@include(rss/maker/Channel)
 #@include(rss/maker/Maker)

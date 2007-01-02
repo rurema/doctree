@@ -160,8 +160,10 @@ ripper/filter
 ripper/lexer
 ripper/sexp
 #@end
-#@since 1.8.0
+#@since 1.8.3
 rss
+#@end
+#@since 1.8.0
 rubyunit
 scanf
 #@end
