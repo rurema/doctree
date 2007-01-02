@@ -350,7 +350,7 @@ webrick/cgi                     iwadon          done
 webrick/ssl                     iwadon          done
 win32/registry                  yanagi          done
 win32/resolv                    date            done
-win32ole
+win32ole                        yanagi
 wsdl                            okkez           done
 xmlrpc                          date            done
 xsd                             date            done
