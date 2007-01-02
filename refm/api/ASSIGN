@@ -250,7 +250,7 @@ syslog                          sheepman        done
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 tempfile                        sheepman        done
-test/unit                       sheepman
+test/unit                       sheepman        done
 thread                          sheepman        done
 thwait                          sheepman        done
 time                            sheepman        done
