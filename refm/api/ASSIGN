@@ -216,7 +216,7 @@ rexml/node                      iwadon          done
 rexml/output                    iwadon          done
 rexml/parent                    iwadon          done
 rexml/parseexception            iwadon          done
-rexml/parsers
+rexml/parsers                   iwadon
 rexml/quickpath
 rexml/rexml
 rexml/sax2listener
