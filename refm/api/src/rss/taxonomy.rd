@@ -8,6 +8,7 @@
 --- taxo_topic=
 
 = class RSS::TaxonomyTopicModel::TaxonomyTopic < RSS::Element
+include RSS::TaxonomyTopicsModel
 == Instance Methods
 
 --- about
@@ -18,9 +19,6 @@
 
 --- taxo_link
 --- taxo_link=
-
---- taxo_topics
---- taxo_topics=
 
 = module RSS::TaxonomyTopicsModel
 == Instance Methods
