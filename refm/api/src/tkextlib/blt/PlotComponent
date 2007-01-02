@@ -1,0 +1,690 @@
+= module Tk::BLT::PlotComponent
+
+== Instance Methods
+
+--- __destroy_hook__
+
+
+
+--- axis_bind(tag, context, *args)
+
+
+
+--- axis_bind_append(tag, context, *args)
+
+
+
+--- axis_bind_remove(tag, context)
+
+
+
+--- axis_bindinfo(tag, context = nil)
+
+
+
+--- axis_cget(id, option)
+
+
+
+--- axis_configinfo(id, slot = nil)
+
+
+
+--- axis_configure(*args)
+
+
+
+--- axis_create(id = nil, keys = {})
+
+
+
+--- axis_delete(*ids)
+
+
+
+--- axis_invtransform(id, val)
+
+
+
+--- axis_limits(id)
+
+
+
+--- axis_names(*pats)
+
+
+
+--- axis_transform(id, val)
+
+
+
+--- axis_use(id, target = nil)
+
+
+
+--- axis_view(id)
+
+
+
+--- bar(id = nil, keys = {})
+
+Alias for #line_create
+
+--- bar_activate(*args)
+
+
+
+--- bar_bind(tag, context, *args)
+
+
+
+--- bar_bind_append(tag, context, *args)
+
+
+
+--- bar_bind_remove(tag, context)
+
+
+
+--- bar_bindinfo(tag, context = nil)
+
+
+
+--- bar_cget(id, option)
+
+
+
+--- bar_closest(x, y, var, *args)
+
+
+
+--- bar_configinfo(id, slot = nil)
+
+
+
+--- bar_configure(*args)
+
+
+
+--- bar_create(id = nil, keys = {})
+alias bar
+
+
+
+--- bar_deactivate(*ids)
+
+
+
+--- bar_delete(*ids)
+
+
+
+--- bar_exist?(id)
+
+
+
+--- bar_names(*pats)
+
+
+
+--- bar_show(*names)
+
+
+
+--- bar_type(id)
+
+
+
+--- crosshairs_cget(option)
+
+
+
+--- crosshairs_configinfo(slot = nil)
+
+
+
+--- crosshairs_configure(slot, value = None)
+
+
+
+--- crosshairs_off
+
+
+
+--- crosshairs_on
+
+
+
+--- crosshairs_toggle
+
+
+
+--- current_axis_configinfo(id, slot = nil)
+
+
+
+--- current_bar_configinfo(id, slot = nil)
+
+
+
+--- current_crosshairs_configinfo(slot = nil)
+
+
+
+--- current_element_configinfo(id, slot = nil)
+
+
+
+--- current_gridline_configinfo(slot = nil)
+
+
+
+--- current_legend_configinfo(slot = nil)
+
+
+
+--- current_line_configinfo(id, slot = nil)
+
+
+
+--- current_marker_configinfo(id, slot = nil)
+
+
+
+--- current_pen_configinfo(id, slot = nil)
+
+
+
+--- current_postscript_configinfo(slot = nil)
+
+
+
+--- current_x2axis_configinfo(slot = nil)
+
+
+
+--- current_xaxis_configinfo(slot = nil)
+
+
+
+--- current_y2axis_configinfo(slot = nil)
+
+
+
+--- current_yaxis_configinfo(slot = nil)
+
+
+
+--- element_activate(*args)
+
+
+
+--- element_bind(tag, context, *args)
+
+
+
+--- element_bind_append(tag, context, *args)
+
+
+
+--- element_bind_remove(tag, context)
+
+
+
+--- element_bindinfo(tag, context = nil)
+
+
+
+--- element_cget(id, option)
+
+
+
+--- element_closest(x, y, var, *args)
+
+
+
+--- element_configinfo(id, slot = nil)
+
+
+
+--- element_configure(*args)
+
+
+
+--- element_create(id = nil, keys={})
+
+
+
+--- element_deactivate(*ids)
+
+
+
+--- element_delete(*ids)
+
+
+
+--- element_exist?(id)
+
+
+
+--- element_names(*pats)
+
+
+
+--- element_show(*names)
+
+
+
+--- element_type(id)
+
+
+
+--- gridline_cget(option)
+
+
+
+--- gridline_configinfo(slot = nil)
+
+
+
+--- gridline_configure(slot, value = None)
+
+
+
+--- gridline_off
+
+
+
+--- gridline_on
+
+
+
+--- gridline_toggle
+
+
+
+--- legend_activate(*pats)
+
+
+
+--- legend_bind(tag, context, *args)
+
+
+
+--- legend_bind_append(tag, context, *args)
+
+
+
+--- legend_bind_remove(tag, context)
+
+
+
+--- legend_bindinfo(tag, context = nil)
+
+
+
+--- legend_cget(option)
+
+
+
+--- legend_configinfo(slot = nil)
+
+
+
+--- legend_configure(slot, value = None)
+
+
+
+--- legend_deactivate(*pats)
+
+
+
+--- legend_get(pos, y = nil)
+
+
+
+--- legend_window_create(parent = nil, keys = nil)
+
+
+
+--- line_activate(*args)
+
+
+
+--- line_bind(tag, context, *args)
+
+
+
+--- line_bind_append(tag, context, *args)
+
+
+
+--- line_bind_remove(tag, context)
+
+
+
+--- line_bindinfo(tag, context = nil)
+
+
+
+--- line_cget(id, option)
+
+
+
+--- line_closest(x, y, var, *args)
+
+
+
+--- line_configinfo(id, slot = nil)
+
+
+
+--- line_configure(*args)
+
+
+
+--- line_create(id = nil, keys={})
+alias bar
+
+
+
+--- line_deactivate(*ids)
+
+
+
+--- line_delete(*ids)
+
+
+
+--- line_exist?(id)
+
+
+
+--- line_names(*pats)
+
+
+
+--- line_show(*names)
+
+
+
+--- line_type(id)
+
+
+
+--- marker_after(id, target = nil)
+
+
+
+--- marker_before(id, target = None)
+
+
+
+--- marker_bind(tag, context, *args)
+
+
+
+--- marker_bind_append(tag, context, *args)
+
+
+
+--- marker_bind_remove(tag, context)
+
+
+
+--- marker_bindinfo(tag, context = nil)
+
+
+
+--- marker_cget(id, option)
+
+
+
+--- marker_configinfo(id, slot = nil)
+
+
+
+--- marker_configure(*args)
+
+
+
+--- marker_create(type, keys={})
+
+
+
+--- marker_delete(*ids)
+
+
+
+--- marker_exist?(id)
+
+
+
+--- marker_names(*pats)
+
+
+
+--- marker_type(id)
+
+
+
+--- pen_cget(id, option)
+
+
+
+--- pen_configinfo(id, slot = nil)
+
+
+
+--- pen_configure(*args)
+
+
+
+--- pen_create(id = nil, keys={})
+
+
+
+--- pen_delete(*ids)
+
+
+
+--- pen_names(*pats)
+
+
+
+--- postscript_cget(option)
+
+
+
+--- postscript_configinfo(slot = nil)
+
+
+
+--- postscript_configure(slot, value = None)
+
+
+
+--- postscript_output(file = nil, keys={})
+
+
+
+--- tagid(tag)
+
+
+
+--- x2axis_bind(context, *args)
+
+
+
+--- x2axis_bind_append(context, *args)
+
+
+
+--- x2axis_bind_remove(context)
+
+
+
+--- x2axis_bindinfo(context = nil)
+
+
+
+--- x2axis_cget(option)
+
+
+
+--- x2axis_configinfo(slot = nil)
+
+
+
+--- x2axis_configure(slot, value = None)
+
+
+
+--- x2axis_invtransform(val)
+
+
+
+--- x2axis_limits
+
+
+
+--- x2axis_transform(val)
+
+
+
+--- x2axis_use(target = nil)
+
+
+
+--- xaxis_bind(context, *args)
+
+
+
+--- xaxis_bind_append(context, *args)
+
+
+
+--- xaxis_bind_remove(context)
+
+
+
+--- xaxis_bindinfo(context = nil)
+
+
+
+--- xaxis_cget(option)
+
+
+
+--- xaxis_configinfo(slot = nil)
+
+
+
+--- xaxis_configure(slot, value = None)
+
+
+
+--- xaxis_invtransform(val)
+
+
+
+--- xaxis_limits
+
+
+
+--- xaxis_transform(val)
+
+
+
+--- xaxis_use(target = nil)
+
+
+
+--- y2axis_bind(context, *args)
+
+
+
+--- y2axis_bind_append(context, *args)
+
+
+
+--- y2axis_bind_remove(context)
+
+
+
+--- y2axis_bindinfo(context = nil)
+
+
+
+--- y2axis_cget(option)
+
+
+
+--- y2axis_configinfo(slot = nil)
+
+
+
+--- y2axis_configure(slot, value = None)
+
+
+
+--- y2axis_invtransform(val)
+
+
+
+--- y2axis_limits
+
+
+
+--- y2axis_transform(val)
+
+
+
+--- y2axis_use(target = nil)
+
+
+
+--- yaxis_bind(context, *args)
+
+
+
+--- yaxis_bind_append(context, *args)
+
+
+
+--- yaxis_bind_remove(context)
+
+
+
+--- yaxis_bindinfo(context = nil)
+
+
+
+--- yaxis_cget(option)
+
+
+
+--- yaxis_configinfo(slot = nil)
+
+
+
+--- yaxis_configure(slot, value = None)
+
+
+
+--- yaxis_invtransform(val)
+
+
+
+--- yaxis_limits
+
+
+
+--- yaxis_transform(val)
+
+
+
+--- yaxis_use(target = nil)
+
+
+

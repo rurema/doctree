@@ -1,0 +1,74 @@
+= class Tk::BLT::PlotComponent::Axis
+
+== Class Methods
+
+--- id2obj(chart, id)
+
+
+
+--- new(chart, axis = nil, keys = {})
+
+
+
+== Instance Methods
+
+--- cget(option)
+
+
+
+--- command(cmd = nil, &b)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- delete
+
+
+
+--- id
+
+
+
+--- invtransform(val)
+
+
+
+--- limits
+
+
+
+--- name
+
+
+
+--- to_eval
+
+
+
+--- transform(val)
+
+
+
+--- use(name = None)
+
+
+
+--- use_as(axis)
+
+
+
+--- view
+
+
+
