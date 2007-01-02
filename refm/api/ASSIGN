@@ -322,7 +322,33 @@ tk/package
 tk/timer
 tk/variable
 tkextlib/ICONS                  moriq           done
-tkextlib/blt                    moriq           reopen
+tkextlib/blt                    moriq           done
+tkextlib/blt/barchart           moriq
+tkextlib/blt/bitmap
+tkextlib/blt/busy
+tkextlib/blt/component
+tkextlib/blt/container
+tkextlib/blt/cutbuffer
+tkextlib/blt/dragdrop
+tkextlib/blt/eps
+tkextlib/blt/graph
+tkextlib/blt/htext
+tkextlib/blt/setup
+tkextlib/blt/spline
+tkextlib/blt/stripchart
+tkextlib/blt/table
+tkextlib/blt/tabnotebook
+tkextlib/blt/tabset
+tkextlib/blt/ted
+tkextlib/blt/tile
+tkextlib/blt/tile
+tkextlib/blt/tree
+tkextlib/blt/treeview
+tkextlib/blt/unix_dnd
+tkextlib/blt/vector
+tkextlib/blt/watch
+tkextlib/blt/win_printer
+tkextlib/blt/winop
 tkextlib/bwidget
 tkextlib/itcl
 tkextlib/itk
