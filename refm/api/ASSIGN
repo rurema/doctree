@@ -256,9 +256,9 @@ thwait                          sheepman        done
 time                            sheepman        done
 timeout                         sheepman        done
 tk                              okkez
-tk/composite
-tk/clock
-tk/optionobj
+tk/composite                    okkez
+tk/clock                        okkez
+tk/optionobj                    okkez
 tk/after
 tk/canvas
 tk/macpkg
