@@ -31,3 +31,23 @@ include DublinCoreModel
 
 --- resource
 --- resource=
+
+= module RSS::ImageFaviconModel
+== Instance Methods
+--- image_favicon
+--- image_favicon=
+
+= class RSS::ImageFaviconModel::ImageFavicon < RSS::Element
+include DublinCoreModel
+== Instance Methods
+
+--- about
+--- about=
+
+--- date
+--- date=
+
+--- image_size
+--- size
+--- image_size=
+--- size=
