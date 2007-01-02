@@ -198,9 +198,9 @@ resolv                          kimuraw         done
 resolv-replace                  kimuraw         done
 rexml/attlistdecl               iwadon          done
 rexml/attribute                 iwadon          done
-rexml/cdata
-rexml/child
-rexml/comment
+rexml/cdata                     iwadon
+rexml/child                     iwadon
+rexml/comment                   iwadon
 rexml/doctype
 rexml/document
 rexml/dtd
