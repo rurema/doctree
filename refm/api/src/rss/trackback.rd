@@ -14,7 +14,7 @@
 
 
 = module RSS::TrackBackModel10
-include BaseTrackBackModel
+include RSS::BaseTrackBackModel
 
 = class RSS::TrackBackModel10::TrackBackPing < RSS::Element
 == Instance Methods
@@ -36,7 +36,7 @@ include BaseTrackBackModel
 
 
 = module RSS::TrackBackModel20
-include BaseTrackBackModel
+include RSS::BaseTrackBackModel
 
 = class RSS::TrackBackModel20::TrackBackPing < RSS::Element
 == Instance Methods
