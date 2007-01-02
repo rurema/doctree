@@ -42,3 +42,48 @@ runner output should go to; defaults to STDOUT.
 
 Begins the test run.
 
+= class Test::Unit::UI::Tk::TestRunner < Object
+include Test::Unit::UI::TestRunnerUtilities
+
+Runs a Test::Unit::TestSuite in a Tk UI. 
+Obviously, this one requires you to have Tk and the Ruby Tk extension installed.
+
+== Class Methods
+--- new(suite, output_level = NORMAL)   
+
+== Instance Methods
+--- start()   
+
+= class Test::Unit::UI::GTK2::TestRunner < Object
+include Test::Unit::UI::TestRunnerUtilities
+
+== Class Methods
+--- new(suite, output_level = NORMAL)   
+
+== Instance Methods
+--- start()   
+
+= class Test::Unit::UI::GTK::TestRunner < Object
+include Test::Unit::UI::TestRunnerUtilities
+
+Runs a Test::Unit::TestSuite in a Gtk UI. 
+Obviously, this one requires you to have Gtk (www.gtk.org/) and 
+the Ruby Gtk extension (ruby-gnome.sourceforge.net/) installed.
+
+== Class Methods
+--- new(suite, output_level = NORMAL)   
+
+== Instance Methods
+--- start()   
+
+= class Test::Unit::UI::Fox::TestRunner < Object
+include Test::Unit::UI::TestRunnerUtilities
+Runs a Test::Unit::TestSuite in a Fox UI. 
+Obviously, this one requires you to have Fox (www.fox-toolkit.org/fox.html) and 
+the Ruby Fox extension (fxruby.sourceforge.net/) installed.
+
+== Class Methods
+--- new(suite, output_level = NORMAL)   
+
+== Instance Methods
+--- start()   
