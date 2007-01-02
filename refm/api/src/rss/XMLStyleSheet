@@ -1,0 +1,20 @@
+= class RSS::XMLStyleSheet < Object
+== Instance Methods
+
+--- alternate
+--- alternate=
+
+--- charset
+--- charset=
+
+--- href
+--- href=
+
+--- media
+--- media=
+
+--- title
+--- title=
+
+--- type
+--- type=
