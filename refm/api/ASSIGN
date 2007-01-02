@@ -149,7 +149,7 @@ importenv                       sheepman        done
 io/nonblock                     sheepman        done
 io/wait                         sheepman        done
 ipaddr                          iwadon          done
-irb                             sheepman
+irb                             sheepman        done
 jcode                           iwadon          done
 kconv                           iwadon          done
 logger                          iwadon          done
@@ -190,7 +190,7 @@ profiler                        aamine          done
 pstore                          sheepman        done
 pty                             kimuraw         done
 racc/parser                     aamine          done
-rational                        sheepman         
+rational                        sheepman        done
 rbconfig                        sheepman        done
 readbytes                       sheepman        done
 readline                        sheepman        done
