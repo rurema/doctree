@@ -92,6 +92,10 @@ console を使う (default)
      
          -r, --runner=RUNNER              Use the given RUNNER.
                                           (c[onsole], f[ox], g[tk], g[tk]2, t[k])
+#@since 1.8.6
+         -b, --basedir=DIR                Base directory of test suites.
+         -w, --workdir=DIR                Working directory to run tests.
+#@end
          -n, --name=NAME                  Runs tests matching NAME.
                                           (patterns may be used).
          -t, --testcase=TESTCASE          Runs tests in TestCases matching TESTCASE.
@@ -366,7 +370,7 @@ force_standalone に true を与えた時には次のオプションが追加されます。
 
       require 'test/unit'
       Test::Unit::AutoRunner.run(true, './', ['--runner=tk', '-v',
-                                               '--exclude=/test_hoge.*\.rb\Z/i'])
+                                              '--exclude=/test_hoge.*\.rb\Z/i'])
     
 argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
 指定できます。
@@ -396,7 +400,18 @@ argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
 
 = module Test::Unit::UI::Console
 
+= module Test::Unit::UI::TestRunnerUtilities
+== Instance Methods
+--- run(suite, output_level=NORMAL)
+Creates a new TestRunner and runs the suite.
+
+--- start_command_line_test
+Takes care of the ARGV parsing and suite
+determination necessary for running one of the
+TestRunners from the command line.
+
 = class Test::Unit::UI::Console::TestRunner < Object
+include Test::Unit::UI::TestRunnerUtilities
 
 Runs a Test::Unit::TestSuite on the console.
 
