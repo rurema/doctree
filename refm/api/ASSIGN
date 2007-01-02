@@ -504,6 +504,12 @@ tkextlib/tktable
 tkextlib/tktrans
 tkextlib/treectrl
 tkextlib/vu
+tkextlib/vu/bargraph
+tkextlib/vu/charts
+tkextlib/vu/dial
+tkextlib/vu/pie
+tkextlib/vu/setup
+tkextlib/vu/spinbox
 tkextlib/winico
 tmpdir                          sheepman        done
 tracer                          sheepman        done
