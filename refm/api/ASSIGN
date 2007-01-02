@@ -203,7 +203,7 @@ rexml/child                     iwadon          done
 rexml/comment                   iwadon          done
 rexml/doctype                   iwadon          done
 rexml/document                  iwadon          done
-rexml/dtd
+rexml/dtd                       iwadon
 rexml/element
 rexml/encoding
 rexml/entity
