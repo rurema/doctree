@@ -5,9 +5,9 @@ require tk/variable
 
 BLT support
 
-= class Tk::BLT
+= module Tk::BLT
 
-== Class Methods
+== Singleton Methods
 
 --- active_legend(graph)
 
@@ -71,4 +71,5 @@ BLT support
 
 
 
+#@include(blt/GraphCommand)
 #@end

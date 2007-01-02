@@ -6,6 +6,9 @@ require tkextlib/blt/component
 
 = class Tk::BLT::Barchart
 
+include PlotComponent
+include GraphCommand
+
 == Instance Methods
 
 --- extents(item)
