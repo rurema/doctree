@@ -1,7 +1,8 @@
 #@if (version >= "1.8.0")
 #@# = REXML
 
-[[unknown:ºπ…Æº‘ ÁΩ∏]]
+#@# [[unknown:ºπ…Æº‘ ÁΩ∏]]
+#@todo
 
 === •È•§•÷•È•ÍÀË§Œæ‹∫Ÿ
 
@@ -47,4 +48,16 @@
 #@include(rexml/dtd/notationdecl.rd)
 #@include(rexml/element.rd)
 #@include(rexml/encoding.rd)
+#@include(rexml/encodings/CP-1252.rd)
+#@include(rexml/encodings/EUC-JP.rd)
+#@include(rexml/encodings/ICONV.rd)
+#@include(rexml/encodings/SHIFT-JIS.rd)
+#@include(rexml/encodings/SHIFT_JIS.rd)
+#@include(rexml/encodings/UNILE.rd)
+#@include(rexml/encodings/US-ASCII.rd)
+#@include(rexml/encodings/UTF-16.rd)
+#@include(rexml/encodings/UTF-8.rd)
+#@include(rexml/entity.rd)
+#@include(rexml/functions.rd)
+#@include(rexml/instruction.rd)
 #@end
