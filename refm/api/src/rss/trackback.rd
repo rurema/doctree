@@ -2,7 +2,7 @@ require rss/1.0
 require rss/2.0
 
 = module RSS::BaseTrackBackModel
-== Include Methods
+== Instance Methods
 
 --- trackback_about
 --- trackback_about=
@@ -17,7 +17,7 @@ require rss/2.0
 include BaseTrackBackModel
 
 = class RSS::TrackBackModel10::TrackBackPing < RSS::Element
-== Include Methods
+== Instance Methods
 --- full_name
 
 --- resource
@@ -27,7 +27,7 @@ include BaseTrackBackModel
 --- value=
 
 = class RSS::TrackBackModel10::TrackBackAbout < RSS::Element
-== Include Methods
+== Instance Methods
 --- full_name
 
 --- resource
@@ -41,7 +41,7 @@ include BaseTrackBackModel
 include BaseTrackBackModel
 
 = class RSS::TrackBackModel20::TrackBackPing < RSS::Element
-== Include Methods
+== Instance Methods
 --- content
 --- content=
 
@@ -51,7 +51,7 @@ include BaseTrackBackModel
 --- value=
 
 = class RSS::TrackBackModel20::TrackBackAbout < RSS::Element
-== Include Methods
+== Instance Methods
 --- content
 --- content=
 
