@@ -210,12 +210,12 @@ rexml/encodings                 iwadon          done
 rexml/entity                    iwadon          done
 rexml/functions                 iwadon          done
 rexml/instruction               iwadon          done
-rexml/light
-rexml/namespace
-rexml/node
-rexml/output
-rexml/parent
-rexml/parseexception
+rexml/light                     iwadon
+rexml/namespace                 iwadon
+rexml/node                      iwadon
+rexml/output                    iwadon
+rexml/parent                    iwadon
+rexml/parseexception            iwadon
 rexml/parsers
 rexml/quickpath
 rexml/rexml
