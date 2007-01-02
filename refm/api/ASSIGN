@@ -322,7 +322,7 @@ tk/package
 tk/timer
 tk/variable
 tkextlib/ICONS                  moriq           done
-tkextlib/blt
+tkextlib/blt                    moriq
 tkextlib/bwidget
 tkextlib/itcl
 tkextlib/itk
