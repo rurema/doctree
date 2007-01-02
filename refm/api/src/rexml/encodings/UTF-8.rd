@@ -12,7 +12,7 @@
 
 = redefine REXML::Encoding
 
-== Instante Methods
+== Instance Methods
 
 --- decode(str)
 
