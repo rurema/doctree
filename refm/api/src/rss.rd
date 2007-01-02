@@ -16,6 +16,7 @@ RSS を扱うためのライブラリです。
 #@include(rss/taxonomy.rd)
 #@include(rss/image.rd)
 #@include(rss/trackback.rd)
+#@include(rss/content.rd)
 #@include(rss/XMLStyleSheet)
 #@include(rss/maker/Categories)
 #@include(rss/maker/Channel)
