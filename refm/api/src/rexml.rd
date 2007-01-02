@@ -60,4 +60,10 @@
 #@include(rexml/entity.rd)
 #@include(rexml/functions.rd)
 #@include(rexml/instruction.rd)
+#@include(rexml/light/node.rd)
+#@include(rexml/namespace.rd)
+#@include(rexml/node.rd)
+#@include(rexml/output.rd)
+#@include(rexml/parent.rd)
+#@include(rexml/parseexception.rd)
 #@end
