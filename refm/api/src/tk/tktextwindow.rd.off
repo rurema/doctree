@@ -3,15 +3,15 @@
 =begin
 = TkTextWindow
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkObject>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkTextWindow.new(parent, index, keys)
 
-== ・皈ス・テ・ノ:
+== メソッド:
 
 --- TkTextWindow#[](slot)
 

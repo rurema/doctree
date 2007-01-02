@@ -3,25 +3,25 @@
 =begin
 = TkImage
 
-¡¦¡¢¡¦â£¥·¡¦¥¯¡¢úË¥¹¡¢¥±¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Û¥ÆôÀ¥ó¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
-((<TkBitmapImage>))¡£¡Ö((<TkPhotoImage>))¡¢ú½¥¤¥»¥Í¡¢¥­¡¢¥Ë¡¢¥Ã¡¢¥¿¡¢¥ª¡¢¡¢¡£¡×
+¥¤¥á¡¼¥¸¤òÉ½¤¹¥ª¥Ö¥¸¥§¥¯¥È¤ÎÃê¾Ý¥¯¥é¥¹¤Ç¤¹¡£
+((<TkBitmapImage>))¡¢((<TkPhotoImage>))¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkObject>))
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkImage.names
 
 --- TkImage.types
 
 --- TkImage.new(keys=nil)
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkImage#delete
 

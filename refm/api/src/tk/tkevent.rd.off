@@ -3,37 +3,37 @@
 =begin
 = TkComm::Event
 
-¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½((<¡¦¡¢¡¦¥ë¡¦ü§¥Í>))¡¢¥Û¥»¥è¡¢úË¥¹¡¢¥±¡¢¥½¡¢â¦¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
-((<TkBindCore#bind>))¡¢¥Û¥Ä¡¼ú¥þ¦úÀ¥Ï¥Û¥ã¡¢¥­¡¢¥½¥»ø»î£¡Ö¡¢¥¦¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¢¥ã
-((<¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥¦¡£¥·¡¦ö§¥ß¡¦¥Æ¡¦¥Ã¥¨¥ê¥½))¡¢¥Û¡¼ú¥þ¦¥Í¡¢¥­¡¢¥Ë¥Ê¥Þ¡¢¥ª¡¢ø¦¡«¡¢¥±¡£¡×
+È¯À¸¤·¤¿((<¥¤¥Ù¥ó¥È>))¤Î¾õÂÖ¤òÉ½¤¹¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
+((<TkBindCore#bind>))¤ÎÂè3°ú¿ô¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¡¢¤³¤Î¥¯¥é¥¹¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤¬
+((<¥¤¥Ù¥ó¥È¥³¡¼¥ë¥Ð¥Ã¥¯´Ø¿ô>))¤Î°ú¿ô¤È¤·¤ÆÅÏ¤µ¤ì¤Þ¤¹¡£
 
  require "tk"
  Tk.root.bind('Enter') {|e| p e.is_a? TkComm::Event}
  Tk.mainloop
 
- => true        # <- ¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ã¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ò¥Ëö¦¥Í¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥±
+ => true        # <- ¥Þ¥¦¥¹¥«¡¼¥½¥ë¤¬¥¦¥£¥ó¥É¥¦¤ËÆþ¤ë¤ÈÉ½¼¨¤µ¤ì¤Þ¤¹
 
-((*¥Æú²¥æ*))
-¡¢¡Ö¡¢¡«¡¢ô¾¥Ä¥¦¥¤¡¢¥Þ¡¢¡Ö¡¢ô¦¡«¡¢¥µ¡¢ü¦¥ã¡£¡Ö((<Object#type>))(¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢úÌ¥è¡¢¥±
-¡¦â§¥¹¡¦¥Æ¡¦¥Î)¡¢¥Þ¥³¥Ë¥Èô·¥Á¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ö¦¥Û¡¢¥Ì
+((*Ãí°Õ*))
+¤¢¤Þ¤ê¼Â³²¤Ï¤¢¤ê¤Þ¤»¤ó¤¬¡¢((<Object#type>))(¥ª¥Ö¥¸¥§¥¯¥È¤Î¥¯¥é¥¹¤òÊÖ¤¹
+¥á¥½¥Ã¥É)¤ÏºÆÄêµÁ¤µ¤ì¤Æ¤¤¤ë¤Î¤Ç
 
  require "tk"
  Tk.root.bind('Enter') {|e| p e.type}
  Tk.mainloop
 
-¡¢¥Ì¡£¡Ö(({TkComm::Event}))¡¢¥Í¡¢¥Þ¥Î¥¹¥·¥£¡¢¥ª¡¢ø¦¡«¡¢¥µ¡¢ü£¡×
+¤Ç¡¢(({TkComm::Event}))¤È¤ÏÉ½¼¨¤µ¤ì¤Þ¤»¤ó¡£
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<Object>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkComm::Event#initialize(serial,a,b,c,d,f,h,k,m,o,p,s,t,w,x,y,aa,bb,dd,ee,kk,nn,rr,ss,tt,ww,xx,yy)
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢úÂ¥¯¥¿¥ç¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ¥¦¥Ë¡¼ú¥þ¦¥Û¥Æ¥Ø¡¢¥Þ¡£¡Ö¥Ä¥ß¥¢¥±¡¢öÄ¡¼¥¿¥å¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Û¥Æ¥Ø¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
+    ³Æ°ú¿ô¤ÎÃÍ¤Ï¡¢ÂÐ±þ¤¹¤ëÂ°À­¥á¥½¥Ã¥É¤ÎÃÍ¤Ë¤Ê¤ê¤Þ¤¹¡£
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkComm::Event#serial
     %#
@@ -44,9 +44,9 @@
 --- TkComm::Event#num
     %b
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¥½¡¦¡«¡¦¥ò¡¦¥±¡¦¥ï¡¦¥½¡¦ü¦¥Û¥Í¥è¥±ì¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤òÈ¯À¸¤µ¤»¤¿¥Þ¥¦¥¹¥Ü¥¿¥ó¤ÎÈÖ¹æ¤òÊÖ¤·¤Þ¤¹¡£
 
-    ButtonPress,ButtonRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    ButtonPress,ButtonRelease¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#count
     %c
@@ -57,21 +57,21 @@
 --- TkComm::Event#focus
     %f
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¥æ¡¦¥¥¡£¥·¡¦¥©¡¦¥±¡¢¥Û¥»¥è¡¢ùÕrue/false¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤¬È¯À¸¤·¤¿¤È¤­¤Î¥Õ¥©¡¼¥«¥¹¤Î¾õÂÖ¤òtrue/false¤ÇÊÖ¤·¤Þ¤¹¡£
 
-    Enter, Leave¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    Enter, Leave¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#height
     %h
 
-    Configure,Expose¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    Configure,Expose¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#keycode
     %k
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢úÊ¥Ã¥¿¥¯¡¢¥ª¡¢¥µ¡¢¥½¡¦¥å¡£¥·¡¦¥¦¡£¥·¡¦¥Î¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤òÈ¯À¸¤µ¤»¤¿¥­¡¼¥³¡¼¥É¤òÊÖ¤·¤Þ¤¹¡£
 
-    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    KeyPress,KeyRelease¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#mode
     %m
@@ -85,7 +85,7 @@
 --- TkComm::Event#state
     %s
 
-    ¡¼¥Ï¥¤¥·¡¢¥Û¥Æ¥Ø¡¢¥Û¥Þ¥¿¥Ø¥Ä¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((-Visibility¡¢¥Û¡¢¥Í¡¢¥å¡¢¥Þ¡£¡Ö¡¼æ¦¥ò-))
+    °Ê²¼¤ÎÃÍ¤ÎÏÀÍýÏÂ¤òÊÖ¤·¤Þ¤¹¡£((-Visibility¤Î¤È¤­¤Ï¡¢°ã¤¦-))
     *Shift               1
     *Lock                2
     *Control             4
@@ -95,14 +95,14 @@
     *Mod4                64
     *Mod5                128
 
-    ¡¢¥¦¡¢ø¦ò¦¥Û¥½þÅ¥Ø¡¢¥Þ((<X Window System>))¡¢¥Û(({XEvent}))¥±¥¹¥Ä¡¢¥Ä¥Û¡¢¥Û(({state}))¡¢¥Û
-    ¥Æ¥Ø¡¢¥Ì¡¢¥±¡£¡×((-RCS¡¢¥ÛID¡¢¥ã "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
-    ¡¢¥Ì¡¢¡Ö¡¢õ¹.h¡¢úº¥ª¡¢¥Ò¥ª¥å¥¹¥á¡¢¥­¡¢¥½-))
+    ¤³¤ì¤é¤Î¿ôÃÍ¤Ï((<X Window System>))¤Î(({XEvent}))¹½Â¤ÂÎ¤Î(({state}))¤Î
+    ÃÍ¤Ç¤¹¡£((-RCS¤ÎID¤¬ "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
+    ¤Ç¤¢¤ëX.h¤ò¸µ¤Ëµ­½Ò¤·¤¿-))
 
-    ((-Win¡¢ç®ac¡¢¥Ì¡¢¥Þ¡¢¥Î¡¢¥ò¡¢¥Ï¡¢ö£¥¥-))
+    ((-Win¤äMac¤Ç¤Ï¤É¤¦¤Ê¤ë¡©-))
 
     ButtonPress,ButtonRelease,Enter,KeyPress,KeyRelease,Leave,Motion,Visibility
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#time
     %t
@@ -110,27 +110,27 @@
 --- TkComm::Event#width
     %w
 
-    Configure,Expose¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    Configure,Expose¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#x
     %x
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤¬È¯À¸¤·¤¿¤È¤­¤Î¥Þ¥¦¥¹¥«¡¼¥½¥ë¤ÎXºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
 
 --- TkComm::Event#y
     %y
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛY¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤¬È¯À¸¤·¤¿¤È¤­¤Î¥Þ¥¦¥¹¥«¡¼¥½¥ë¤ÎYºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
 
 --- TkComm::Event#char
     %A
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢õ¢SCII¥Ï¥¯¥µùèúÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×(¡¢¥½¡¢¥¿¡¢¥­0¡£¥Á9¡¦¥å¡£¥·¡¢ú´¡£¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Þ
-    Fixnum¡¢¥Ì0¡£¥Á9¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±)
+    ¥¤¥Ù¥ó¥È¤ËÂÐ±þ¤¹¤ëASCIIÊ¸»ú¤òÊÖ¤·¤Þ¤¹¡£(¤¿¤À¤·0¡Á9¥­¡¼¤ò²¡¤·¤¿¤È¤­¤Ï
+    Fixnum¤Ç0¡Á9¤òÊÖ¤·¤Þ¤¹)
 
-    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    KeyPress,KeyRelease¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
-    ((-Fixnum¡¢úÌ¥è¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö¦¥Û¡¢¥Þ¥Ò¥»¡¢¡«¡¢¥­¡¢¡¢¥Ë¡¼¥³ü¦¥¯¡¢æ¦¥Ï¡¢¡¢¡¢¥¿¡¢ú¦¥ò-))
+    ((-Fixnum¤òÊÖ¤·¤Æ¤¤¤ë¤Î¤ÏË¾¤Þ¤·¤¤Æ°ºî¤¸¤ã¤Ê¤¤¤À¤í¤¦-))
 
 --- TkComm::Event#borderwidth
     %B
@@ -146,14 +146,14 @@
 --- TkComm::Event#keysym
     %K
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¥å¡£¥·¡¦¥­¡¦ü§¥ï¡¦ö¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤ËÂÐ±þ¤¹¤ë¥­¡¼¥·¥ó¥Ü¥ë¤òÊÖ¤·¤Þ¤¹¡£
+    KeyPress,KeyRelease¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#keysym_num
     %N
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¥å¡£¥·¡¦¥­¡¦ü§¥ï¡¦ö¦¥Û¥Í¥è¥±ì¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    KeyPress,KeyRelease¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¡¢¥Í¡¢¥å¡¢¥¿¡¢¥¢¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤ËÂÐ±þ¤¹¤ë¥­¡¼¥·¥ó¥Ü¥ë¤ÎÈÖ¹æ¤òÊÖ¤·¤Þ¤¹¡£
+    KeyPress,KeyRelease¥¤¥Ù¥ó¥È¤Î¤È¤­¤À¤±°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#rootwin_id
     %R
@@ -164,37 +164,37 @@
 --- TkComm::Event#type
     %T
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥Û¥­¥½¡¢úÁþÅ¥Ø¡¢¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¥Ï¥è¡¢¥ª¡¢ø¦öÁþÅ¥Ø¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¦¡¢¡¦¥ë¡¦ü§¥Í¥­¥½¡¢¥Ò¥Ä¥ß¥¢¥­¡¢¡«
-    ¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤Î·¿¤ò¿ôÃÍ¤ÇÊÖ¤·¤Þ¤¹¡£ÊÖ¤µ¤ì¤ë¿ôÃÍ¤Ï°Ê²¼¤Î¥¤¥Ù¥ó¥È·¿¤ËÂÐ±þ¤·¤Þ
+    ¤¹¡£
 
     *KeyPress                2
     *KeyRelease              3
     *ButtonPress             4
     *...
 
-    ¡¢¥¦¡¢ø¦ò¦¥Û¥½þÅ¥Ø¡¢¥Þ((<X Window System>))¡¢¥Û(({XEvent}))¥±¥¹¥Ä¡¢¥Ä¥Û¡¢¥Û(({type}))¡¢¥Û
-    ¥Æ¥Ø¡¢¥Ì¡¢¥±¡£¡×((-RCS¡¢¥ÛID¡¢¥ã "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
-    ¡¢¥Ì¡¢¡Ö¡¢õ¹.h¡¢úº¥ª¡¢¥Ò¥ª¥å¥¹¥á¡¢¥­¡¢¥½-))
+    ¤³¤ì¤é¤Î¿ôÃÍ¤Ï((<X Window System>))¤Î(({XEvent}))¹½Â¤ÂÎ¤Î(({type}))¤Î
+    ÃÍ¤Ç¤¹¡£((-RCS¤ÎID¤¬ "$XConsortium: X.h,v 1.69 94/04/17 20:10:48 dpw Exp $"
+    ¤Ç¤¢¤ëX.h¤ò¸µ¤Ëµ­½Ò¤·¤¿-))
 
-    ((-¥Ï¥¯¥µú´ü¦úÌ¥è¡¢¥­¡¢¥½¥Ï¥ã¡¢ð¦¡¢¡¢¥¿¡¢ú¦¥ò¡£¥¥Win¡¢ç®ac¡¢¥Ì¡¢¥Þ¡¢¥Î¡¢¥ò¡¢¥Ï¡¢ö£¥¥-))
+    ((-Ê¸»úÎó¤òÊÖ¤·¤¿Êý¤¬¤è¤¤¤À¤í¤¦¡©Win¤äMac¤Ç¤Ï¤É¤¦¤Ê¤ë¡©-))
 
 --- TkComm::Event#widget
     %W
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤¬È¯À¸¤·¤¿¥¦¥£¥¸¥§¥Ã¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 --- TkComm::Event#x_root
     %X
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛX¥³¥Ä¥Î¥¯¡¢
-    ¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion¡¦¡¢¡¦¥ë¡¦ü§¥Í
-    ¡¢¥Ì¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤¬È¯À¸¤·¤¿¤È¤­¤Î¥ë¡¼¥È¥¦¥£¥ó¥É¥¦¾å¤Ç¤Î¥Þ¥¦¥¹¥«¡¼¥½¥ë¤ÎXºÂÉ¸¤ò
+    ÊÖ¤·¤Þ¤¹¡£ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion¥¤¥Ù¥ó¥È
+    ¤Ç°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 --- TkComm::Event#y_root
     %Y
 
-    ¡¦¡¢¡¦¥ë¡¦ü§¥Í¡¢¥ã¥Í¥Ã¥¿¥¯¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥©¡£¥·¡¦¥¹¡¦ö¦¥ÛY¥³¥Ä¥Î¥¯¡¢
-    ¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion¡¦¡¢¡¦¥ë¡¦ü§¥Í
-    ¡¢¥Ì¡¼¥æ¥Õ¡×¡¢ú½¥Á¡¢¡«¡¢¥±¡£¡×
+    ¥¤¥Ù¥ó¥È¤¬È¯À¸¤·¤¿¤È¤­¤Î¥ë¡¼¥È¥¦¥£¥ó¥É¥¦¾å¤Ç¤Î¥Þ¥¦¥¹¥«¡¼¥½¥ë¤ÎYºÂÉ¸¤ò
+    ÊÖ¤·¤Þ¤¹¡£ButtonPress,ButtonRelease,KeyPress,KeyRelease,Motion¥¤¥Ù¥ó¥È
+    ¤Ç°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
 
 =end

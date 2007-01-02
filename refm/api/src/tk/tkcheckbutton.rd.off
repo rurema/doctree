@@ -3,12 +3,12 @@
 =begin
 = TkCheckButton
 
-¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¥Á¥§¥Ã¥¯¥Ü¥¿¥ó¥¦¥£¥¸¥§¥Ã¥È¤Î¥¯¥é¥¹¤Ç¤¹¡£
 
-¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦¥ÛON/OFF¥»¥è¡¢¥Ò¡¢ð¦({variable}))¡¦¥§¡¦¥é¡¦¥­¡¦î§ü¦¥Ì¥¨¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢ò¦
-¡¢¥½¥Ï¥à¥½þ¦¥Ò¥Æ¥Ø¡¢úÂ¡¬¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥¿¡¬¥Èô¦¥ª¡¢ø¦öÅ¥Ø¡¢¥Þ¡£¡Ö¡¦¥§¡¦¥é¡¦¥­¡¦î§
-((<TkCheckButton#onvalue>))¡£¡Ö((<TkCheckButton#offvalue>)) ¡¢¥Ò¡¢ð¦ôÌ¥à¥±¥±¡¢¥Ì
-¡¢¥å¡¢¡«¡¢¥±¡£¡×¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ì¡¢¥ÞON¥»¥è¡¢¥Ì¡¢¥Þ1¡£¡ÖOFF¥»¥è¡¢¥Ì¡¢¥Þ0¡¢¥Ì¡¢¥±¡£¡×
+¥Á¥§¥Ã¥¯¥Ü¥¿¥ó¤ÎON/OFF¾õÂÖ¤Ë¤è¤ê(({variable}))¥ª¥×¥·¥ç¥ó¤Ç´ØÏ¢ÉÕ¤±¤é¤ì
+¤¿ÊÑ¿ô¤ËÃÍ¤òÀßÄê¤·¤Þ¤¹¡£ÀßÄê¤µ¤ì¤ëÃÍ¤Ï¡¢¥ª¥×¥·¥ç¥ó
+((<TkCheckButton#onvalue>))¡¢((<TkCheckButton#offvalue>)) ¤Ë¤è¤êÊÑ¹¹¤Ç
+¤­¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ç¤ÏON¾õÂÖ¤Ç¤Ï1¡¢OFF¾õÂÖ¤Ç¤Ï0¤Ç¤¹¡£
 
   require "tk"
 
@@ -23,16 +23,16 @@
   TkCheckButton.new {text "c"; variable v3; command c; pack}
   Tk.mainloop
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkRadioButton>))
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkCheckButton#toggle
-    ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦¥ÛON/OFF¥»¥è¡¢ú§¥Í¡¦¡¼¡¦ö¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¥Á¥§¥Ã¥¯¥Ü¥¿¥ó¤ÎON/OFF¾õÂÖ¤ò¥È¥°¥ë¤·¤Þ¤¹¡£
 
-== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+== É¸½à¥ª¥×¥·¥ç¥ó:
 
 ((<TkObject#activebackground>))
 
@@ -80,20 +80,20 @@
 
 ((<TkObject#wraplength>))
 
-== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+== ¥ª¥×¥·¥ç¥ó:
 
 ###--- TkCheckButton#command
 
 --- TkCheckButton#height
-    ((<TkButton#height>))¥µ¥¤¥»¥Í
+    ((<TkButton#height>))»²¾È
 
 --- TkCheckButton#indicatoron
 
 --- TkCheckButton#offvalue
-    ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦¥Û¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢ú¦¥Þ¡¢¥³¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Æ¥Ø¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¥Á¥§¥Ã¥¯¥Ü¥¿¥ó¤Î¥Á¥§¥Ã¥¯¤ò¤Ï¤º¤·¤¿¤È¤­¤ÎÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- TkCheckButton#onvalue
-    ¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Æ¥Ø¡¢ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×
+    ¥Á¥§¥Ã¥¯¥Ü¥¿¥ó¤ò¥Á¥§¥Ã¥¯¤·¤¿¤È¤­¤ÎÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- TkCheckButton#selectcolor
 
@@ -104,5 +104,5 @@
 ### --- TkCheckButton#variable
 
 --- TkCheckButton#width
-    ((<TkButton#width>))¥µ¥¤¥»¥Í
+    ((<TkButton#width>))»²¾È
 =end

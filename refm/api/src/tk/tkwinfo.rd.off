@@ -3,12 +3,12 @@
 =begin
 = TkWinfo
 
-¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ò¥¨¥ê¡¢¥±¡¢öÀöÌü¦ú¾ðÈ¥¿¡¢¥±¡¢ö¦¥½¡¢â¦¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢ú¿¥¯¡¢â¦¥½¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Ì¡¢¥±¡£¡×
-¥·ðÈ¥¿¡¢¥±¡¢öÀöÌü¦¥Þ¥Íìµ¥â¥Ê¥§¥Èæ§ø§¥ë¡¦¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¥­¡¦¥±¡¦¥Ë¡¦à¶ü¦¡¢¥Ï¥»öÌü¦¥Ì¡¢¥±¡£¡×
+¥¦¥£¥ó¥É¥¦¤Ë´Ø¤¹¤ë¾ðÊó¤ò¼èÆÀ¤¹¤ë¤¿¤á¤Î¥á¥½¥Ã¥É¤ò½¸¤á¤¿¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
+¼èÆÀ¤¹¤ë¾ðÊó¤ÏÈæ³ÓÅªÄã¥ì¥Ù¥ë(¥¦¥£¥ó¥É¥¦¥·¥¹¥Æ¥à´ó¤ê)¤Ê¾ðÊó¤Ç¤¹¡£
 
-((-MS Windows ¡¢¥Í¡¢¥©¡¢¥Þ¡¢¥Î¡¢¥ò¡¢¥Ï¡¢ö£¥¥-))
+((-MS Windows ¤È¤«¤Ï¤É¤¦¤Ê¤ë¡©-))
 
-*¥½¥¡
+*¿§
  *((<TkWinfo.cells>))
  *((<TkWinfo.colormapfull>))
  *((<TkWinfo.depth>))
@@ -16,7 +16,7 @@
  *((<TkWinfo.visual>))
  *((<TkWinfo.visualid>))
  *((<TkWinfo.visualsavailable>))
-*¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¼¥Õ¥Æ¥è¡£¥½¡¦¥ª¡¦¡¢¡¦¥³
+*¥¦¥£¥ó¥É¥¦¤Î°ÌÃÖ¡¿¥µ¥¤¥º
  *((<TkWinfo.containing>))
  *((<TkWinfo.geometry>))
  *((<TkWinfo.height>))
@@ -31,7 +31,7 @@
  *((<TkWinfo.width>))
  *((<TkWinfo.x>))
  *((<TkWinfo.y>))
-*¥¤ðÎ¥Õ
+*²èÌÌ
  *((<TkWinfo.screen>))
  *((<TkWinfo.screencells>))
  *((<TkWinfo.screendepth>))
@@ -40,19 +40,19 @@
  *((<TkWinfo.screenmmwidth>))
  *((<TkWinfo.screenvisual>))
  *((<TkWinfo.screenwidth>))
-*¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥»¥è
+*¥¦¥£¥ó¥É¥¦¤Î¾õÂÖ
  *((<TkWinfo.exist?>))
  *((<TkWinfo.mapped?>))
  *((<TkWinfo.viewable>))
-*¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥½¥Ë¥µ¥á¥¨¥ê¥­¥¯
+*¥¦¥£¥ó¥É¥¦¤Î¿Æ»Ò´Ø·¸
  *((<TkWinfo.children>))
  *((<TkWinfo.parent>))
  *((<TkWinfo.toplevel>))
-*¡¦¡«¡¦¥ò¡¦¥±¡¦¥ó¡¦¡¢¡¦ü§¥½
+*¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿
  *((<TkWinfo.pointerx>))
  *((<TkWinfo.pointery>))
  *((<TkWinfo.pointerxy>))
-*¡¢¥¹¡¢¥Û¥Ä¥»
+*¤½¤ÎÂ¾
  *((<TkWinfo.atom>))
  *((<TkWinfo.atomname>))
  *((<TkWinfo.classname>))
@@ -65,38 +65,38 @@
  *((<TkWinfo.fpixels>))
  *((<TkWinfo.pixels>))
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== extend¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== ¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥â¥¸¥å¡¼¥ë¥á¥½¥Ã¥É:
 
 --- TkWinfo.atom(name)
-    ((<¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»>))((|name|))¡¢¥Û((<¡¦¡Ö¡¦¥Í¡¦))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((<¥¢¥×¥ê¥±¡¼¥·¥ç¥óÌ¾>))((|name|))¤Î((<¥¢¥È¥à>))¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.atom("tk")
 
       => 352
 
-    ((-displayof¡¢¥Þ¡£¥¥-))
+    ((-displayof¤Ï¡©-))
 
 --- TkWinfo.atomname(id)
-    ¡¦¡Ö¡¦¥Í¡¦(|id|))¡¢¥Ò¥Ä¥ß¥¢¥±¡¢ö§¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¢¥È¥à((|id|))¤ËÂÐ±þ¤¹¤ë¥¢¥×¥ê¥±¡¼¥·¥ç¥óÌ¾¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.atomname(TkWinfo.atom("tk"))
 
       => "tk"
 
-    ((-displayof¡¢¥Þ¡£¥¥-))
+    ((-displayof¤Ï¡©-))
 
 --- TkWinfo.cells(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò((|window|))¡¢¥Û¡¦¥©¡¦ò£¥·¡¦¡«¡¦¥Æ¡¦¥é¡¢¥Û¡¦¥µ¡¦öÁþ¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦((|window|))¤Î¥«¥é¡¼¥Þ¥Ã¥×¤Î¥»¥ë¿ô¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.cells(Tk.root)
@@ -104,10 +104,10 @@
       => 64
 
 --- TkWinfo.children(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò((|window|))¡¢¥Û¥µ¥á¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦((|window|))¤Î»Ò¥¦¥£¥ó¥É¥¦¤òÇÛÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
-    (¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¥¦¥ã¥Á¥ê¥»ê¦¥Û¥µ¥á¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ï¡¢¥Û¡¢¥Ì¡£¡Ö((<TkToplevel>)) ¡¢¥Ì¡¢ä½¥á¡¦¥ò¡¦¡×¡¦
-    ¡¦¥Î¡¦¥ò¡¢¥Ò¡¢¥Ï¡¢ôÈ¥¿¡¢¡«¡¢¥±)
+    (¥¦¥£¥¸¥§¥Ã¥È³¬ÁØ¾å¤Î»Ò¥¦¥£¥ó¥É¥¦¤Ê¤Î¤Ç¡¢((<TkToplevel>)) ¤Ç¤â»Ò¥¦¥£¥ó
+    ¥É¥¦¤Ë¤Ê¤êÆÀ¤Þ¤¹)
 
       require "tk"
       TkFrame.new {
@@ -121,7 +121,7 @@
       => [#<TkFrame: @path=".w0000">, #<TkToplevel: @path= ... >]
 
 --- TkWinfo.classname(window)
-    ¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û((<¡¦¥Ã¡¦ò§¥±>))¥Õ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥¸¥§¥Ã¥È¤Î((<¥¯¥é¥¹>))Ì¾¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.classname Tk.root
@@ -133,7 +133,7 @@
          "Foo"
 
 --- TkWinfo.colormapfull(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ò¥¦è¦ôÇ¥Ë¡¢ò¦ø¦¥½¡¦¥©¡¦ò£¥·¡¦¡«¡¦¥Æ¡¦¥é¡¢¥Ò¥«¥å¡¢¥ã¡¢¥Ï¡¢¥¢¡¢ø¦¥ß¥½¥½¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Ë³ä¤êÅö¤Æ¤é¤ì¤¿¥«¥é¡¼¥Þ¥Ã¥×¤Ë¶õ¤­¤¬¤Ê¤±¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.colormapfull Tk.root
@@ -141,7 +141,7 @@
       => false
 
 --- TkWinfo.containing(rootX, rootY)
-    ¥µ¥ê¥Èô¦¥­¡¢¥½¡¼¥Õ¥Æ¥è¡¢¥Ò¡¢¡Ö¡¢ö§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    »ØÄê¤·¤¿°ÌÃÖ¤Ë¤¢¤ë¥¦¥£¥ó¥É¥¦¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       TkLabel.new {
@@ -155,10 +155,10 @@
 
       => #<TkLabel: @path=".w0000", @cmdtbl=["c0000"]>
 
-    ((-displayof¡¢¥Þ¡£¥¥-))
+    ((-displayof¤Ï¡©-))
 
 --- TkWinfo.depth(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥½¥·¡¢¥ª(1¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö¦¡Ö¡¢¥½¡¢ô¦¥Û¡¦¥â¡¦¥Æ¡¦¥Í¥½¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¿¼¤µ(1¥Ô¥¯¥»¥ë¤¢¤¿¤ê¤Î¥Ó¥Ã¥È¿ô)¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.depth TkLabel.new
@@ -166,7 +166,7 @@
       => 16
 
 --- TkWinfo.exist?(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö¦¥©¡¢¥Î¡¢¥ò¡¢¥©¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤·¤Æ¤¤¤ë¤«¤É¤¦¤«¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       l = TkLabel.new
@@ -178,7 +178,7 @@
          false
 
 --- TkWinfo.fpixels(window, number)
-    ¥ª¡¦((|number|))¡¢¥ã¥¤¥½¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö¦¥©¡¢úËäÈ¡¼¥»¥ç¥½þ¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkWinfo.pixels>))
+    µ÷Î¥((|number|))¤¬²¿¥Ô¥¯¥»¥ë¤«¤òÉâÆ°¾®¿ô¤ÇÊÖ¤·¤Þ¤¹¡£((<TkWinfo.pixels>))
 
       require "tk"
       p TkWinfo.fpixels Tk.root, 1
@@ -195,10 +195,10 @@
          75.08545035
 
 --- TkWinfo.geometry(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û((<¡¦¥¯¡¦¥§¡¦â§¥Í¡¦))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î((<¥¸¥ª¥á¥È¥ê>))¤òÊÖ¤·¤Þ¤¹¡£
 
-    ((<Tk::Wm#geometry>))¡¢¥Þ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¦¥æ¡¦ø£¥·¡¦¡¦¥½¡¦¡¢¡¦¥Í¡¦ö§¥ß¡£¥·¡¢¥Ï¡¢¥Î)¡¢¥Û¡¼¥Õ¥Æ¥è¡¢
-    ¥Ï¥è¡¢¥±¡¢¥Û¡¢¥Ì¡£¡Ö¡¢¥¦¡¢¥Û¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Í¡¢¥Þ¥­ö´¥Õ¡¢¥ã¡¼¥í¡¢¥Ï¡¢öÀø»î¦¥ã¡¢¡Ö¡¢ô¦¡«¡¢¥±¡£¡×
+    ((<Tk::Wm#geometry>))¤Ï¥¦¥£¥ó¥É¥¦¤Î¥Õ¥ì¡¼¥à(¥¿¥¤¥È¥ë¥Ð¡¼¤Ê¤É)¤Î°ÌÃÖ¤ò
+    ÊÖ¤¹¤Î¤Ç¡¢¤³¤Î¥á¥½¥Ã¥É¤È¤Ï·ë²Ì¤¬°Û¤Ê¤ë¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£
 
       require "tk"
       p Tk.root.geometry 
@@ -216,7 +216,7 @@
         "200x200+328+396"
 
 --- TkWinfo.height(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥±ä¦¥ª¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¹â¤µ¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       Tk.after 1000 do
@@ -230,7 +230,7 @@
          200
 
 --- TkWinfo.id(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û((<¡¦ô§¥¹¡£¥·¡¦¥±ID>))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkWinfo.widget>))
+    ¥¦¥£¥ó¥É¥¦¤Î((<¥ê¥½¡¼¥¹ID>))¤òÊÖ¤·¤Þ¤¹¡£((<TkWinfo.widget>))
 
       require "tk"
       p TkWinfo.id Tk.root
@@ -240,9 +240,9 @@
          #<TkRoot: @path=".">
 
 --- TkWinfo.interps(window=nil)
-    ¥·¥Ä¥±¥ä¡¢¥­¡¢¥Ë¡¢¡¢¡¢õµcl/Tk¡¦¡¢¡¦ü§¥½¡¦¥é¡¦ô§¥½¡¢¥Û¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢úÉ¥í¥Ûü¦¥Ò¡¢¥­¡¢¥Ë¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡£¡Ö¡¢¥¹¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦üÀê¦¥Ì¥·¥Ä¥±¥ä¡¢¥­¡¢¥Ë¡¢¡¢¡¢
-    ¡¢ä¦¥Û¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¼Â¹Ô¤·¤Æ¤¤¤ëTcl/Tk¥¤¥ó¥¿¥×¥ê¥¿¤Î¥¢¥×¥ê¥±¡¼¥·¥ç¥óÌ¾¤òÇÛÎó¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+    ¥¦¥£¥ó¥É¥¦¤ò»ØÄê¤¹¤ë¤È¡¢¤½¤Î¥¦¥£¥ó¥É¥¦¤¬¤¢¤ë¥¹¥¯¥ê¡¼¥ó¾å¤Ç¼Â¹Ô¤·¤Æ¤¤¤ë
+    ¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       ip = TclTkIp.new
@@ -251,7 +251,7 @@
       => ["tk #2", "tk"]
 
 --- TkWinfo.mapped?(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã((<¡¦¡«¡¦¥Æ¡¦¥é>))¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß¥½¥½¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬((<¥Þ¥Ã¥×>))¤µ¤ì¤Æ¤¤¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£
     ((<TkWinfo.viewable>))
 
       require "tk"
@@ -266,9 +266,9 @@
          true
 
 --- TkWinfo.manager(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥Ì¥í¥Æ¥è¡¢ú¹ð¦â¦¥Ë¡¢¡¢¡¢(<¡¦¥¯¡¦¥§¡¦â§¥Í¡¦ô§¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦))¡¢¥Û¥Õ¥»¥Á¡¼¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ((<TkRoot>))¡¢(<TkToplevel>))¡¢¥Û¥»ø»î¦¥Þ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¦¡«¡¦¥Ø¡£¥·¡¦¥¯¡¦æ¦úË¥¹¡¢¥±¥Ï¥¯¥µú´
-    (({"wm"}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦ÇÛÃÖ¤ò·è¤á¤Æ¤¤¤ë((<¥¸¥ª¥á¥È¥ê¥Þ¥Í¡¼¥¸¥ã>))¤ÎÌ¾Á°¤òÊÖ¤·¤Þ¤¹¡£
+    ((<TkRoot>))¤ä((<TkToplevel>))¤Î¾ì¹ç¤Ï¥¦¥£¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤òÉ½¤¹Ê¸»úÎó
+    (({"wm"}))¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.manager Tk.root
@@ -284,8 +284,8 @@
          "place"
 
 --- TkWinfo.appname(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥Õ¥»¥Á¡¼(((<¡¦¥à¡¦¥±>))¥Õ¥»¡¢¥Û¥Ø¥é¥Á¥Ì)¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥Þ
-    ¡¦¡Ö¡¦¥é¡¦ô§¥¢¡£¥·¡¦¥­¡¦î§üÎ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkCore.appname>))
+    ¥¦¥£¥ó¥É¥¦¤ÎÌ¾Á°(((<¥Ñ¥¹>))Ì¾¤ÎÍ×ÁÇ)¤òÊÖ¤·¤Þ¤¹¡£¥ë¡¼¥È¥¦¥£¥¸¥§¥Ã¥È¤Ç¤Ï
+    ¥¢¥×¥ê¥±¡¼¥·¥ç¥óÌ¾¤òÊÖ¤·¤Þ¤¹¡£((<TkCore.appname>))
 
       require "tk"
       p TkWinfo.appname Tk.root
@@ -295,8 +295,8 @@
          "w0001"
 
 --- TkWinfo.parent(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥½¥Ë¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢ú½¥ê¥Èô¦¥­¡¢¥½¥»ø»
-    (({nil}))¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¿Æ¥¦¥£¥ó¥É¥¦¤òÊÖ¤·¤Þ¤¹¡£¥ë¡¼¥È¥¦¥£¥¸¥§¥Ã¥È¤ò»ØÄê¤·¤¿¾ì¹ç
+    (({nil}))¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.parent TkRoot.new
@@ -306,7 +306,7 @@
          #<TkRoot: @path=".">
 
 --- TkWinfo.widget(id)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û((<¡¦ô§¥¹¡£¥·¡¦¥±ID>))¡¢¥©¡¢ò§¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkWinfo.id>))
+    ¥¦¥£¥ó¥É¥¦¤Î((<¥ê¥½¡¼¥¹ID>))¤«¤é¥¦¥£¥ó¥É¥¦¤òÊÖ¤·¤Þ¤¹¡£((<TkWinfo.id>))
 
       require "tk"
       p TkWinfo.id Tk.root
@@ -315,10 +315,10 @@
       => 62914574
          #<TkRoot: @path=".">
 
-    ((-displayof¡¢¥Þ¡£¥¥-))
+    ((-displayof¤Ï¡©-))
 
 --- TkWinfo.pixels(window, number)
-    ¥ª¡¦((|number|))¡¢¥ã¥¤¥½¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö¦¥©¡¢úÂ¡¼¥½þ¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkWinfo.fpixels>))
+    µ÷Î¥((|number|))¤¬²¿¥Ô¥¯¥»¥ë¤«¤òÀ°¿ô¤ÇÊÖ¤·¤Þ¤¹¡£((<TkWinfo.fpixels>))
 
       require "tk"
       p TkWinfo.pixels Tk.root, 1
@@ -335,7 +335,7 @@
          75
 
 --- TkWinfo.reqheight(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ø¥é¥ªâ¦¥±¡¢ö»ä¦¥ª¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Í×µá¤¹¤ë¹â¤µ¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.height Tk.root
@@ -345,7 +345,7 @@
          200
 
 --- TkWinfo.reqwidth(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ø¥é¥ªâ¦¥±¡¢öËúÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Í×µá¤¹¤ëÉý¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.width Tk.root
@@ -355,7 +355,7 @@
          200
 
 --- TkWinfo.rgb(window, color)
-    ¥½¥¡((|color|))¡¢¥Ò¥Ä¥ß¥¢¥±¡¢õ³GB¥Æ¥Ø¡¢úÉ¥í¥Ûü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¿§((|color|))¤ËÂÐ±þ¤¹¤ëRGBÃÍ¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.rgb Tk.root, "black"
@@ -376,8 +376,8 @@
 
 
 --- TkWinfo.rootx(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥¨ö¿à²¥Õ¥Æ¥è(¥³¥¯¥»êµ¥à)¡¢¥Û¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ((-¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥»ô¦¥Þ¥±¥Ø¥Û¥¯¡¢¥­¡¢¥Ï¡¢¡¢¡£¥¥-))
+    ¥¦¥£¥ó¥É¥¦¤Î´ð½à°ÌÃÖ(º¸¾å³Ñ)¤Î¥ë¡¼¥È¥¦¥£¥ó¥É¥¦¾å¤Ç¤ÎXºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
+    ((-¥¦¥£¥ó¥É¥¦¤Î¾þ¤ê¤Ï¹ÍÎ¸¤·¤Ê¤¤¡©-))
 
       require "tk"
       Tk.root.geometry("+0+0")
@@ -396,10 +396,10 @@
          22
 
 --- TkWinfo.rooty(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥¨ö¿à²¥Õ¥Æ¥è(¥³¥¯¥»êµ¥à)¡¢¥Û¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î´ð½à°ÌÃÖ(º¸¾å³Ñ)¤Î¥ë¡¼¥È¥¦¥£¥ó¥É¥¦¾å¤Ç¤ÎXºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
 
 --- TkWinfo.screen(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦üÎ¥»¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥óÌ¾¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.screen Tk.root
@@ -407,8 +407,8 @@
       => ":0.0"
 
 --- TkWinfo.screencells(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¦¥©¡¦ò£¥·¡¦¡«¡¦¥Æ¡¦¥é¡¢¥Û¡¦¥µ¡¦öÁþ¦úÌ¥è¡¢¥­¡¢¡«
-    ¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤Î¥Ç¥Õ¥©¥ë¥È¥«¥é¡¼¥Þ¥Ã¥×¤Î¥»¥ë¿ô¤òÊÖ¤·¤Þ
+    ¤¹¡£
 
       require "tk"
       p TkWinfo.screencells Tk.root
@@ -416,7 +416,7 @@
       => 64
 
 --- TkWinfo.screendepth(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Û¥½¥·¡¢¥ª¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤Î¥Ç¥Õ¥©¥ë¥È¤Î¿¼¤µ¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.screendepth Tk.root
@@ -424,7 +424,7 @@
       => 16
 
 --- TkWinfo.screenheight (window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¥±ä¦¥ª(¡¦¥ä¡¦¥Ã¡¦¥µ¡¦¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤Î¹â¤µ(¥Ô¥¯¥»¥ë)¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.screenheight Tk.root
@@ -432,7 +432,7 @@
       => 1024
 
 --- TkWinfo.screenmmheight(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¥±ä¦¥ª(¡¦¡¬¡¦ô§â£¥·¡¦¥Í¡¦¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤Î¹â¤µ(¥ß¥ê¥á¡¼¥È¥ë)¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.screenheight Tk.root
@@ -443,10 +443,10 @@
          347
          1025.773672
 
-    ((-¡¢¥Î¡¢¥¦¡¢¥Û¥¯ú¼¥±¡£¥¥-))
+    ((-¤É¤³¤Î¸íº¹¡©-))
 
 --- TkWinfo.screenmmwidth(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¥Î¡¦¡¬¡¦ô§â£¥·¡¦¥Í¡¦¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤ÎÉý(¥ß¥ê¥á¡¼¥È¥ë)¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.screenwidth Tk.root
@@ -458,8 +458,8 @@
          1280.0
 
 --- TkWinfo.screenvisual(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¡¦¥Ì¡¦¥æ¡¦¥¥¡¦ö§¥Í¡¢¥Ûvisual¡¦¥Ã¡¦ò§¥±¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    visual¡¦¥Ã¡¦ò§¥±¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¥ò¡¢¥Á¡¢¥Û¥¤¥½¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤Î¥Ç¥Õ¥©¥ë¥È¤Îvisual¥¯¥é¥¹¤òÊÖ¤·¤Þ¤¹¡£
+    visual¥¯¥é¥¹¤Ï°Ê²¼¤Î¤¦¤Á¤Î²¿¤ì¤«¤Ç¤¹¡£
 
     *"directcolor"
     *"grayscale"
@@ -468,7 +468,7 @@
     *"staticgray"
     *"truecolor"
 
-    ((-¡¦¥¿¡¦¡¬¡£¥·-))
+    ((-¥À¥ß¡¼-))
 
       require "tk"
       p TkWinfo.screenvisual Tk.root
@@ -476,7 +476,7 @@
       => "truecolor"
 
 --- TkWinfo.screenwidth(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¥Î¡¦¥ä¡¦¥Ã¡¦¥µ¡¦¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤ÎÉý(¥Ô¥¯¥»¥ë)¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.screenwidth Tk.root
@@ -484,19 +484,19 @@
       => 1280
 
 --- TkWinfo.server(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Ä¥¯¥³¡¬¡¢¥±¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¡¦¥ª¡£¥·¡¦¥ß¥»öÌ¡¦¥ß¡£¥·¡¦¥¯¡¦î§ü£¡Ö¡¦¥ë¡¦ü§¥¿¡£¡Ö¡¦¥ë¡¦ü§¥¿
-    ¡¦¥ß¡£¥·¡¦¥¯¡¦î§¡¢úÌ¥¯¥µú´ü¦¥Ì¥Ï¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬Â¸ºß¤¹¤ë¥¹¥¯¥ê¡¼¥ó¤Î¥µ¡¼¥Ð¾ðÊó(¥Ð¡¼¥¸¥ç¥ó¡¢¥Ù¥ó¥À¡¢¥Ù¥ó¥À
+    ¥Ð¡¼¥¸¥ç¥ó)¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.server Tk.root
 
       => "X11R0 The XFree86 Project, Inc 3320"
 
-    ((- R0 ¡£¥¥-))
+    ((- R0 ¡©-))
 
 --- TkWinfo.toplevel(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã((<TkToplevel>))¥»ê¦¥Ò¥Ì¥í¥Æ¥è¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢ø¦¥ß¡¢¥¹¡¢¥Û(({TkToplevel}))¡¦¥ò¡¦¡×
-    ¡¦ü§¥Î¡¦¥ò¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬((<TkToplevel>))¾å¤ËÇÛÃÖ¤µ¤ì¤Æ¤¤¤ì¤Ð¤½¤Î(({TkToplevel}))¥¦¥£
+    ¥ó¥É¥¦¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.toplevel TkFrame.new.pack
@@ -512,7 +512,7 @@
          #<TkToplevel: @classname=nil, @path=".w0001", @screen=nil>
 
 --- TkWinfo.visual(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û visual ¡¦¥Ã¡¦ò§¥±¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î visual ¥¯¥é¥¹¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.visual TkFrame.new
@@ -521,10 +521,10 @@
       => "truecolor"
       error--> tk.rb:510:in `_invoke': couldn't find an appropriate visual (RuntimeError)
 
-    ((-truecolor¡¼¥Ï¥¦¡¼¡¢¥Ûvisual¡¦¥Ã¡¦ò§¥±¡¢ú½¥ê¥Èô¦¥±¡¢öÌ¡£¡¢¥Þ¡£¥¥-))
+    ((-truecolor°Ê³°¤Îvisual¥¯¥é¥¹¤ò»ØÄê¤¹¤ëÊýË¡¤Ï¡©-))
 
 --- TkWinfo.visualid(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û visual ID ¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î visual ID ¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.visualid TkFrame.new
@@ -533,18 +533,18 @@
       => "0x22"
       error--> tk.rb:510:in `_invoke': couldn't find an appropriate visual (RuntimeError)
 
-    ((-truecolor¡¼¥Ï¥¦¡¼¡¢¥Ûvisual¡¦¥Ã¡¦ò§¥±¡¢ú½¥ê¥Èô¦¥±¡¢öÌ¡£¡¢¥Þ¡£¥¥-))
+    ((-truecolor°Ê³°¤Îvisual¥¯¥é¥¹¤ò»ØÄê¤¹¤ëÊýË¡¤Ï¡©-))
 
 --- TkWinfo.visualsavailable(window, includeids=false)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦üÀê¦¥Ì¥µ¥ê¥Èô´¥È¥Ì¥¹¡¢¥Ï¡¼¥Ï¥¤¥·¡¢¥Û¥Ì¥í¥Û
+    ¥¦¥£¥ó¥É¥¦¤Î¤¢¤ë¥¹¥¯¥ê¡¼¥ó¾å¤Ç»ØÄê²ÄÇ½¤Ê°Ê²¼¤ÎÇÛÎó
 
-     [visual¡¦¥Ã¡¦ò§¥± , ¥½¥·¡¢¥ª(1¡¦¥ä¡¦¥Ã¡¦¥µ¡¦ö¦¡Ö¡¢¥½¡¢ô¦¥Û¡¦¥â¡¦¥Æ¡¦¥Í¥½, visual ID]
+     [visual¥¯¥é¥¹ , ¿¼¤µ(1¥Ô¥¯¥»¥ë¤¢¤¿¤ê¤Î¥Ó¥Ã¥È¿ô), visual ID]
 
-    ¡¢¥Û¥Ì¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×¡¢¥½¡¢¥¿¡¢¥­¡£¡Övisual ID¡¢¥Þ¡£¡Ö¡¼ú¥(|includeids|))¡¢¥ã¥½¥½¡¢¥Û¥»ø»
-    ¡¢¥Ò¡¢¥­¡¢¥©¥Ø¥é¥Á¥Ì¡¢¥Ò¥¨¡«¡¢¡«¡¢ø¦¡«¡¢¥µ¡¢ü£¡×
+    ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£¤¿¤À¤·¡¢visual ID¤Ï¡¢°ú¿ô((|includeids|))¤¬¿¿¤Î¾ì¹ç
+    ¤Ë¤·¤«Í×ÁÇ¤Ë´Þ¤Þ¤ì¤Þ¤»¤ó¡£
 
-    Tk¡¢¥Û¥¯¥Ê¡¢¡¢¥Í¥Ì¡¢¥Ì¡¢¥Þ(¥»¥Ã¡¢¥Ï¡¢¥Ã¡¢¥Í¡¢ä§¥ß¡£¥·¡¦¥¯¡¦î§4.0 ¡¢¥Ì¡¢¥Þ)¡£¡Övisual ID ¡¢úÏ¥é¥Á¥Ì¡¢¥Ò¥µ¥Ë
-    ¡¢¡«¡¢¥µ¡¢ü£¡×((-¥¿¥ª¥¦¥Û¡¢¥Ò¡¢¥Î¡¢¥Û¡¦¥ß¡£¥·¡¦¥¯¡¦î§ü¦¥©¡¢includeids"¡¢¥ã¥µ¥ê¥Èô´¥È¥Ì¥¹¡¢¥Ò¡¢¥Ï¡¢¥Æ¡¢¥½¡¢¥©-))
+    Tk¤Î¸Å¤¤ÈÇ¤Ç¤Ï(¾¯¤Ê¤¯¤È¤â¥Ð¡¼¥¸¥ç¥ó 4.0 ¤Ç¤Ï)¡¢visual ID ¤òÍ×ÁÇ¤Ë»ý¤Æ
+    ¤Þ¤»¤ó¡£((-Àµ³Î¤Ë¤É¤Î¥Ð¡¼¥¸¥ç¥ó¤«¤é"includeids"¤¬»ØÄê²ÄÇ½¤Ë¤Ê¤Ã¤¿¤«-))
 
       require "tk"
       p TkWinfo.visualsavailable TkFrame.new
@@ -554,7 +554,7 @@
          [["truecolor", 16, "0x22"]]
 
 --- TkWinfo.vrootheight(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¥±ä¦¥ª¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<¥¤¥»¥Á¥í¥¤ðÎ¥Õ>))¡¢ú»¥Ø¥Û¥¯¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¤¢¤ë¥¹¥¯¥ê¡¼¥ó¤Î¹â¤µ¤òÊÖ¤·¤Þ¤¹¡£((<²¾ÁÛ²èÌÌ>))¤ò¹ÍÎ¸¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.vrootheight Tk.root
@@ -562,7 +562,7 @@
       => 1024
 
 --- TkWinfo.vrootwidth(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥Û¥ÎúÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<¥¤¥»¥Á¥í¥¤ðÎ¥Õ>))¡¢ú»¥Ø¥Û¥¯¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¤¢¤ë¥¹¥¯¥ê¡¼¥ó¤ÎÉý¤òÊÖ¤·¤Þ¤¹¡£((<²¾ÁÛ²èÌÌ>))¤ò¹ÍÎ¸¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.vrootwidth Tk.root
@@ -570,7 +570,7 @@
       => 1280
 
 --- TkWinfo.vrootx(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<¥¤¥»¥Á¥í¥¤ðÎ¥Õ>))¡¢ú»¥Ø¥Û¥¯¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¤¢¤ë¥¹¥¯¥ê¡¼¥ó¤ÎXºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£((<²¾ÁÛ²èÌÌ>))¤ò¹ÍÎ¸¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.vrootx Tk.root
@@ -578,7 +578,7 @@
       => 0
 
 --- TkWinfo.vrooty(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦ü¦¥ÛY¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<¥¤¥»¥Á¥í¥¤ðÎ¥Õ>))¡¢ú»¥Ø¥Û¥¯¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î¤¢¤ë¥¹¥¯¥ê¡¼¥ó¤ÎYºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£((<²¾ÁÛ²èÌÌ>))¤ò¹ÍÎ¸¤·¤Þ¤¹¡£
 
       require "tk"
       p TkWinfo.vrooty Tk.root
@@ -586,7 +586,7 @@
       => 0
 
 --- TkWinfo.width(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥ÎúÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤ÎÉý¤òÊÖ¤·¤Þ¤¹¡£
 
       require "tk"
       Tk.after 1000 do
@@ -600,8 +600,8 @@
          200
 
 --- TkWinfo.x(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥¨ö¿à²¥Õ¥Æ¥è(¥³¥¯¥»êµ¥à)¡¢¥Û¥½¥Ë¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ((<TkRoot>))¡¢(<TkToplevel>))¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ì¡¢¥Þ((<TkWinfo.rootx>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î´ð½à°ÌÃÖ(º¸¾å³Ñ)¤Î¿Æ¥¦¥£¥ó¥É¥¦¾å¤Ç¤ÎXºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
+    ((<TkRoot>))¤ä((<TkToplevel>))¤Î¥¦¥£¥ó¥É¥¦¤Ç¤Ï((<TkWinfo.rootx>))¤ÈÆ±¤¸¤Ç¤¹¡£
 
       require "tk"
       top = TkToplevel.new
@@ -617,12 +617,12 @@
          464+100=564
 
 --- TkWinfo.y(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Û¥¨ö¿à²¥Õ¥Æ¥è(¥³¥¯¥»êµ¥à)¡¢¥Û¥½¥Ë¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¥»ê¦¥Ì¡¢¥ÛY¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ((<TkRoot>))¡¢(<TkToplevel>))¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Ì¡¢¥Þ((<TkWinfo.rooty>))¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤Î´ð½à°ÌÃÖ(º¸¾å³Ñ)¤Î¿Æ¥¦¥£¥ó¥É¥¦¾å¤Ç¤ÎYºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
+    ((<TkRoot>))¤ä((<TkToplevel>))¤Î¥¦¥£¥ó¥É¥¦¤Ç¤Ï((<TkWinfo.rooty>))¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- TkWinfo.viewable(window)
-    ¥µ¥ê¥Èô¦¥­¡¢¥½¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥Í¡¢¥¹¡¢¥Û¥¿ðÃ¥È¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò(¡¢¥±¡¢¥ë¡¢¥Ë¡¢¥Û¥½¥Ë)¡¢¥ã((<¡¦¡«¡¦¥Æ¡¦¥é>))¡¢¥ª¡¢ø¦¥Ë
-    ¡¢¡¢¡¢ø¦¥ß¥½¥½¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×((<TkWinfo.mapped?>))
+    »ØÄê¤·¤¿¥¦¥£¥ó¥É¥¦¤È¤½¤ÎÀèÁÄ¥¦¥£¥ó¥É¥¦(¤¹¤Ù¤Æ¤Î¿Æ)¤¬((<¥Þ¥Ã¥×>))¤µ¤ì¤Æ
+    ¤¤¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£((<TkWinfo.mapped?>))
 
       require "tk"
       root  = TkRoot.new
@@ -647,8 +647,8 @@
          true
 
 --- TkWinfo.pointerx(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦üÀê¦¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥ó¡¦¡¢¡¦ü§¥½¡¢¥ÛX¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ¡¦¡«¡¦¥ò¡¦¥±¡¦¥ó¡¦¡¢¡¦ü§¥½¡¢¥ã¡¦¥±¡¦¥Ã¡¦ô£¥·¡¦üÀê¦¥Ò¡¢¥Ï¡¢¡¢¥»ø»1¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±((-¡¢¥Î¡¢¥ò¡¢¡¢¡¢¥ò¥»ø»î£¥¥-))¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬¤¢¤ë¥¹¥¯¥ê¡¼¥ó¾å¤Î¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿¤ÎXºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
+    ¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿¤¬¥¹¥¯¥ê¡¼¥ó¾å¤Ë¤Ê¤¤¾ì¹ç-1¤òÊÖ¤·¤Þ¤¹((-¤É¤¦¤¤¤¦¾ì¹ç¡©-))¡£
 
       require "tk"
       p TkWinfo.pointerx Tk.root
@@ -660,17 +660,17 @@
          [493, 556]
 
 --- TkWinfo.pointery(window)
-    ¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¡¢¡Ö¡¢ö§¥±¡¦¥Ã¡¦ô£¥·¡¦üÀê¦¥Û¡¦¡«¡¦¥ò¡¦¥±¡¦¥ó¡¦¡¢¡¦ü§¥½¡¢¥ÛY¥³¥Ä¥Î¥¯¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
-    ¡¦¡«¡¦¥ò¡¦¥±¡¦¥ó¡¦¡¢¡¦ü§¥½¡¢¥ã¡¦¥±¡¦¥Ã¡¦ô£¥·¡¦üÀê¦¥Ò¡¢¥Ï¡¢¡¢¥»ø»1¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±((-¡¢¥Î¡¢¥ò¡¢¡¢¡¢¥ò¥»ø»î£¥¥-))¡£¡×
+    ¥¦¥£¥ó¥É¥¦¤¬¤¢¤ë¥¹¥¯¥ê¡¼¥ó¾å¤Î¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿¤ÎYºÂÉ¸¤òÊÖ¤·¤Þ¤¹¡£
+    ¥Þ¥¦¥¹¥Ý¥¤¥ó¥¿¤¬¥¹¥¯¥ê¡¼¥ó¾å¤Ë¤Ê¤¤¾ì¹ç-1¤òÊÖ¤·¤Þ¤¹((-¤É¤¦¤¤¤¦¾ì¹ç¡©-))¡£
 
 --- TkWinfo.pointerxy(window)
-    (('[TkWinfo.pointerx, TkWinfo.pointery]'))¡¢¥Ì¡¢¡Ö¡¢öÉ¥í¥Ûü¦úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    (('[TkWinfo.pointerx, TkWinfo.pointery]'))¤Ç¤¢¤ëÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
-¡¢¥¦¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö¦¥Û¡¦¡¢¡¦ü§¥±¡¦¥½¡¦ü§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¡¢¥±¡¢¥ë¡¢¥Ë¡£¡Ö¥Ë¥¢¥Õ¥»¡¢¥Û¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î
-¡¢¥Í¥Ë¥¢¡¢¥¯¡¢¥Ì¡¢¥±¡£¡×¡¢¥½¡¢¥¿¡¢¥­¡£¡Ö¥Õ¥»¥Á¡¼¡¢¥Ò"winfo_"¡¢¥ã¥Î¥æ¡¢¥Ã¥Ê¥¿¡¢¥Í¡¼ú¥({window}))¡¢ú½¥È¡¦
-¡¦¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î¡¢¥Þ¥Äê¦ô¦¥Ò(({self}))¡¢ú½¥Í¡¢¥ò¥Ê¥¿¡¢¥ã¡¼¥í¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+¤³¤Î¥â¥¸¥å¡¼¥ë¤Î¥¤¥ó¥¹¥¿¥ó¥¹¥á¥½¥Ã¥É¤Ï¤¹¤Ù¤Æ¡¢Æ±Ì¾¤Î¥â¥¸¥å¡¼¥ë¥á¥½¥Ã¥É
+¤ÈÆ±¤¸¤Ç¤¹¡£¤¿¤À¤·¡¢Ì¾Á°¤Ë"winfo_"¤¬ÉÕ¤¯ÅÀ¤È°ú¿ô(({window}))¤ò»ý¤Ä¥â
+¥¸¥å¡¼¥ë¥á¥½¥Ã¥É¤ÏÂå¤ê¤Ë(({self}))¤ò»È¤¦ÅÀ¤¬°Û¤Ê¤ê¤Þ¤¹¡£
 
 --- TkWinfo#winfo_atom(name)
     ((<TkWinfo.atom>))
@@ -825,17 +825,17 @@
 =begin
 = TkXIM
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
 ((<Tk>))
 
-== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== extend¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== ¡¦ä§¥¯¡¦ê£¥·¡¦ö§â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥â¥¸¥å¡¼¥ë¥á¥½¥Ã¥É:
 
 --- TkXIM.useinputmethods(window=nil, value=nil)
 
@@ -845,7 +845,7 @@
 
 --- TkXIM.useinputmethods(window=nil,value=nil)
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkXIM#useinputmethods(value=nil)
 

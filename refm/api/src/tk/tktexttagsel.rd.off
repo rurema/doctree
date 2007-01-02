@@ -3,11 +3,11 @@
 =begin
 = TkTextTagSel
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkTextTag>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkTextTagSel.new(parent, keys=nil)
 

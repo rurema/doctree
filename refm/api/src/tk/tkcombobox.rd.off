@@ -3,9 +3,9 @@
 =begin
 = TkCombobox
 
-((*tkcombobox.rb ¡¢¥Þ¡£¡Ö1999-12-02 ¥¯¥¹¥³¡¬ ruby¡¢¥Ò¥Î¥¯¥¹àÇ¥³¥Î¥æ¡¢¥ª¡¢ø¦¥Ë¡¢¡¢¡¢¡«¡¢¥µ¡¢ü£¡×¥¹
-¥¹¥ß¡¢¥Þ¡£¡Ö[ruby-list:18167]¡¢¥Ì¡£¡ÖTakaaki Tateishi <ttate@jaist.ac.jp> ¡¢¥ª¡¢ü¦¥ã
-¥³üÂ¥ç¡¢¥­¡¢¡«¡¢¥­¡¢¥½*))
+((*tkcombobox.rb ¤Ï¡¢1999-12-02 ¸½ºß ruby¤ËÉ¸½àÅºÉÕ¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£½é
+½Ð¤Ï¡¢[ruby-list:18167]¤Ç¡¢Takaaki Tateishi <ttate@jaist.ac.jp> ¤µ¤ó¤¬
+ºîÀ®¤·¤Þ¤·¤¿*))
 
  require 'tkcombobox'
  combo = TkCombobox.new(nil,'fg' => 'black','width' => 30)
@@ -15,15 +15,15 @@
  combo.pack
  Tk.mainloop
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkEntry>))
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<TkComposite>))
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkCombobox#initialize_composite(keys=nil)
 

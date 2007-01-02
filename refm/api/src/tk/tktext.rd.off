@@ -3,34 +3,34 @@
 =begin
 = TkText
 
-¡¦¥Ë¡¦¥å¡¦¥±¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
+¥Æ¥­¥¹¥È¥¦¥£¥¸¥§¥Ã¥È¤Î¥¯¥é¥¹¤Ç¤¹¡£
 
-((*¡¼¥Õ¥Æ¥è*))
+((*°ÌÃÖ*))
 
 *"line.char"
 *"@x,y"
 *"end"
-*¡¦¡«¡£¥·¡¦¥Ã
-*¡¦¥½¡¦¡¼.first
-*¡¦¥½¡¦¡¼.last
-*¡¦¥à¡¦¥±
-*¡¦¡¢¡¦â£¥·¡¦¥¯
+*¥Þ¡¼¥¯
+*¥¿¥°.first
+*¥¿¥°.last
+*¥Ñ¥¹
+*¥¤¥á¡¼¥¸
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkTextWin>))
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<TkTreatTextTagFont>))
 
 ((<Scrollable>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkText.new(*args, &block)
 
-== private¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== private¥á¥½¥Ã¥É:
 
 --- TkText#_ktext_length(txt)
 
@@ -38,7 +38,7 @@
 
 --- TkText#_retrieve_backslashed_text(str, i)
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkText#init_instance_variable
 
@@ -138,7 +138,7 @@
 
 --- TkText#dump_image(*index, &block)
 
-== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+== É¸½à¥ª¥×¥·¥ç¥ó:
 
 ((<TkObject#background>))
 
@@ -188,7 +188,7 @@
 
 ### ((<TkObject#yscrollcommand>))
 
-== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+== ¥ª¥×¥·¥ç¥ó:
 
 --- TkText#height
 

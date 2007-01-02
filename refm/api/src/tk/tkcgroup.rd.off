@@ -3,11 +3,11 @@
 =begin
 = TkcGroup
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkcTag>))
 
-== ・皈ス・テ・ノ:
+== メソッド:
 
 --- TkcGroup#include(*tags)
 

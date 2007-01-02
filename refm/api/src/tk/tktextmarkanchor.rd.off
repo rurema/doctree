@@ -3,11 +3,11 @@
 =begin
 = TkTextMarkAnchor
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkTextMark>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkTextMarkAnchor.new(parent, index=nil)
 

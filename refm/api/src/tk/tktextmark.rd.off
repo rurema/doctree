@@ -3,15 +3,15 @@
 =begin
 = TkTextMark
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkObject>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkTextMark.new(parent, index)
 
-== ・皈ス・テ・ノ:
+== メソッド:
 
 --- TkTextMark#id
 

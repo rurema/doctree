@@ -3,8 +3,8 @@
 =begin
 = TkMenubutton
 
-¡¦â§¥Ò¡¦ê£¥·¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×¡¢¥¦¡¢¥Û¡¦¥ï¡¦¥½¡¦ü¦ú´¡£¡¢¥±¡¢¥Í¡¦â§¥Ò¡¦ê£¥·
-((<TkMenu>)) ¡¢¥ã¥¯¥¹¡¢ø¦¡«¡¢¥±¡£¡×
+¥á¥Ë¥å¡¼¥Ü¥¿¥ó¥¦¥£¥¸¥§¥Ã¥È¤Î¥¯¥é¥¹¤Ç¤¹¡£¤³¤Î¥Ü¥¿¥ó¤ò²¡¤¹¤È¥á¥Ë¥å¡¼
+((<TkMenu>)) ¤¬¸½¤ì¤Þ¤¹¡£
 
   require "tk"
 
@@ -32,11 +32,11 @@
 
   Tk.mainloop
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkLabel>))
 
-== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+== É¸½à¥ª¥×¥·¥ç¥ó:
 
 ((<TkObject#activebackground>))
 
@@ -84,27 +84,27 @@
 
 ((<TkObject#wraplength>))
 
-== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+== ¥ª¥×¥·¥ç¥ó:
 
 --- TkMenubutton#direction
-    ¡¦â§¥Ò¡¦ê£¥·¡¦¥ï¡¦¥½¡¦ü¦¥ã¥¤¡£¡¢¥ª¡¢ø¦¥½¡¢¥Í¡¢¥å¡¢¥Ò¡¦â§¥Ò¡¦ê£¥·¡¢úÉ¥í¥Æ¥è¡¢¥±¡¢öÀø¿ô¦ú½¥ê¥Èô¦¥­¡¢¡«¡¢¥±¡£¡×¥µ¥ê¥È
-    ¡¢¥Ì¡¢¥å¡¢ö¦¥Û¡¢¥Þ¡¼¥Ï¥¤¥·¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+    ¥á¥Ë¥å¡¼¥Ü¥¿¥ó¤¬²¡¤µ¤ì¤¿¤È¤­¤Ë¥á¥Ë¥å¡¼¤òÇÛÃÖ¤¹¤ë¾ì½ê¤ò»ØÄê¤·¤Þ¤¹¡£»ØÄê
+    ¤Ç¤­¤ë¤Î¤Ï°Ê²¼¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
 
       *"above"
       *"below"
       *"left"
       *"right"
       *"flush"
-       ((-flush¡¢¥Þbelow¡¢¥Í¡¢¥Î¡¢¥ò¡¼æ¦¥ò¡¢¥Û?-))
+       ((-flush¤Ïbelow¤È¤É¤¦°ã¤¦¤Î?-))
 
 --- TkMenubutton#height
 
 --- TkMenubutton#indicatoron
-    (({true}))¡¢ú½¥ê¥Èô¦¥±¡¢ö¦¥Í¡£¡Ö¡¦â§¥Ò¡¦ê£¥·¡¦¥ï¡¦¥½¡¦(- ¡¢¥Î¡¢¥Á¡¢ò¦¥©¡¢¥Í¥¯¥¿¡¢¥£¡¢¥ß
-    ¡¦¥¦¡¦ü§¥ï¡¦¥ï¡¦¥Æ¡¦¥Ã¡¦¥±?-))¡¢¥Ì¡¢¡Ö¡¢ö¦¥¦¡¢¥Í¡¢ú¾¥£¡¢¥±¡¦¡¢¡¦ü§¥Ì¡¦¡×¡¦¥¢¡£¥·¡¦¥½¡¢úË¥¹¥·¥£¡¢¥­¡¢¡«¡¢¥±
+    (({true}))¤ò»ØÄê¤¹¤ë¤È¡¢¥á¥Ë¥å¡¼¥Ü¥¿¥ó((- ¤É¤Á¤é¤«¤È¸À¤¨¤Ð
+    ¥³¥ó¥Ü¥Ü¥Ã¥¯¥¹?-))¤Ç¤¢¤ë¤³¤È¤ò¼¨¤¹¥¤¥ó¥Ç¥£¥±¡¼¥¿¤òÉ½¼¨¤·¤Þ¤¹
 
 --- TkMenubutton#menu
-    ((<TkMenu>))¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢ú¶¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¡«¡¢¥±¡£¡×
+    ((<TkMenu>))¥ª¥Ö¥¸¥§¥¯¥È¤ò´ØÏ¢ÉÕ¤±¤Þ¤¹¡£
 
 --- TkMenubutton#state
     ((-dummy-))
@@ -120,15 +120,15 @@
 =begin
 = TkOptionMenubutton
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkMenubutton>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkOptionMenubutton.new(parent=nil, var=TkVariable.new, firstval=nil, *vals)
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkOptionMenubutton#value
 

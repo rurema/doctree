@@ -3,14 +3,14 @@
 =begin
 = TkPhotoImage
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkImage>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkPhotoImage.new(*args)
-== ・皈ス・テ・ノ:
+== メソッド:
 
 --- TkPhotoImage#blank
 

@@ -3,15 +3,15 @@
 =begin
 = TkPalette
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== extend¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkPalette.set(*args)
 
@@ -23,7 +23,7 @@
 
 --- TkPalette.recolorTree(window, colors)
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkPalette#recolorTree(colors)
 
@@ -33,15 +33,15 @@
 =begin
 = TkPlace
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== extend¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== extend¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk>))
 
-== ¡¦ä§¥¯¡¦ê£¥·¡¦ö¶¥ê¥½
+== ¥â¥¸¥å¡¼¥ë´Ø¿ô:
 
 --- TkPlace.configure(win, slot, value=None)
 

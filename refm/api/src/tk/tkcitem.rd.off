@@ -3,20 +3,20 @@
 =begin
 = TkcItem
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkObject>))
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<TkcTagAccess>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkcItem.type2class(type)
-    ((|type|))¡¢¥©¡¢òÄ¥ß¥¢¥±¡¢ö§¥Ã¡¦ò§¥±¡¢úÌ¥è¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ((|type|))¤«¤éÂÐ±þ¤¹¤ë¥¯¥é¥¹¤òÊÖ¤·¤Þ¤¹¡£
 
-    ((|type|)) ¡¢¥Þ¡£¡Ö
+    ((|type|)) ¤Ï¡¢
     *'arc',
     *'bitmap',
     *'image',
@@ -26,13 +26,13 @@
     *'rectangle',
     *'text',
     *'window'
-    ¡¢¥Û¡¢¡¢¡¢¥³¡¢ø¦¥©¡¢¥Ì¡¢¥±¡£¡×
+    ¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£
 
 --- TkcItem.id2obj(canvas, id)
 
 --- TkcItem.new(parent, *args)
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkcItem#id
 

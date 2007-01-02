@@ -3,8 +3,8 @@
 =begin
 = TkRadioButton
 
-¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
-¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥Þ¡£¡Ö¥Ï¡×¥½þ¦¥Û¥Á¥§¥Äú»àÎ¥ï¡¢¥Û¡¢¥ò¡¢¥Á¡¢¥Û1¡¢¥È¡¢úÃ¥§¥Äú¦¥±¡¢ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¢¥Ì¡¢¥±¡£¡×
+¥é¥¸¥ª¥Ü¥¿¥ó¥¦¥£¥¸¥§¥Ã¥È¤Î¥¯¥é¥¹¤Ç¤¹¡£
+¥é¥¸¥ª¥Ü¥¿¥ó¤Ï¡¢Ê£¿ô¤ÎÁªÂò¹àÌÜ¤Î¤¦¤Á¤Î1¤Ä¤òÁªÂò¤¹¤ë¥¦¥£¥¸¥§¥Ã¥È¤Ç¤¹¡£
 
   require "tk"
   v  = TkVariable.new
@@ -14,28 +14,28 @@
   TkRadioButton.new {text "c"; variable v; value 3; deselect; command c; pack}
   Tk.mainloop
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkButton>))
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkRadioButton#deselect
-    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥Ï¡¢¡¢¥»¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥é¥¸¥ª¥Ü¥¿¥ó¤ò¥Á¥§¥Ã¥¯¤·¤Ê¤¤¾õÂÖ¤Ë¤·¤Þ¤¹¡£
 
 --- TkRadioButton#select
-    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥½¥»¥è¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥é¥¸¥ª¥Ü¥¿¥ó¤ò¥Á¥§¥Ã¥¯¤·¤¿¾õÂÖ¤Ë¤·¤Þ¤¹¡£
 
 --- TkRadioButton#variable(v)
-    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥Û¥»¥è¡¢¥ÍTkVariable¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í((|v|))¡¢¥Û¥Æ¥Ø¡¢ú¶¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¡«¡¢¥±¡£¡×
-    ¥Ë¥¢¡¢¥¯TkVariable¡¦¥§¡¦¥è¡¦¥¯¡¦¥¡¡¦¥Ã¡¦¥Í¡¢¥Ò¥¨¥ê¥Þ¡Ö¥Î¥æ¡¢¥¢¡¢¥ª¡¢ø¦¥½¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥Þ¥Ë¥¢¡¢¥¯¡¦¡¼¡¦ö£¥·¡¦¥é¡¢¥Ò
-    ¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦¥ã¡¦¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥ª¡¢ø¦ö¦¥Í((|v|))¡¢¥ã
-    ((<TkRadioButton#value>))¡¢¥Ì¥µ¥ê¥Èô¦¥­¡¢¥½¥Æ¥Ø¡¢¥Ò¡¢¥Ï¡¢ô¦¡«¡¢¥±¡£¡×
+    ¥é¥¸¥ª¥Ü¥¿¥ó¤Î¾õÂÖ¤ÈTkVariable¥ª¥Ö¥¸¥§¥¯¥È((|v|))¤ÎÃÍ¤ò´ØÏ¢ÉÕ¤±¤Þ¤¹¡£
+    Æ±¤¸TkVariable¥ª¥Ö¥¸¥§¥¯¥È¤Ë´ØÏ¢ÉÕ¤±¤µ¤ì¤¿¥é¥¸¥ª¥Ü¥¿¥ó¤ÏÆ±¤¸¥°¥ë¡¼¥×¤Ë
+    ¤Ê¤ê¤Þ¤¹¡£¥é¥¸¥ª¥Ü¥¿¥ó¤¬¥Á¥§¥Ã¥¯¤µ¤ì¤ë¤È((|v|))¤¬
+    ((<TkRadioButton#value>))¤Ç»ØÄê¤·¤¿ÃÍ¤Ë¤Ê¤ê¤Þ¤¹¡£
 
 --- TkRadioButton#value(val)
-    ¡¦ò§¥¯¡¦¥§¡¦¥ï¡¦¥½¡¦ü¦ú§¥Á¡¦¥¡¡¦¥Æ¡¦¥Ã¡¢¥­¡¢¥½¡¢¥Í¡¢¥å¡¢¥Û¥Æ¥Ø¡¢(|val|))¡¢¥Ò¡¢¥­¡¢¡«¡¢¥±¡£¡×
+    ¥é¥¸¥ª¥Ü¥¿¥ó¤ò¥Á¥§¥Ã¥¯¤·¤¿¤È¤­¤ÎÃÍ¤ò((|val|))¤Ë¤·¤Þ¤¹¡£
 
-== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+== É¸½à¥ª¥×¥·¥ç¥ó:
 
 ((<TkObject#activebackground>))
 
@@ -83,12 +83,12 @@
 
 ((<TkObject#wraplength>))
 
-== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+== ¥ª¥×¥·¥ç¥ó:
 
 ### --- TkRadioButton#command
 
 --- TkRadioButton#height
-    ((<TkButton#height>))¥µ¥¤¥»¥Í
+    ((<TkButton#height>))»²¾È
 
 --- TkRadioButton#indicatoron
 
@@ -102,5 +102,5 @@
 ### --- TkRadioButton#variable
 
 --- TkRadioButton#width
-    ((<TkButton#width>))¥µ¥¤¥»¥Í
+    ((<TkButton#width>))»²¾È
 =end

@@ -3,11 +3,11 @@
 =begin
 = TkcTagCurrent
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkcTag>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkcTagCurrent.new(parent)
 
@@ -17,15 +17,15 @@
 =begin
 = TkcTagString
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkcTag>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- self.new(parent, name, *args)
 
-== private・皈ス・テ・ノ:
+== privateメソッド:
 
 --- TkcTagString#initialize(parent, name, mode=nil, *args)
 

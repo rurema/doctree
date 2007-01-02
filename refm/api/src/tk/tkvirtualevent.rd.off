@@ -3,15 +3,15 @@
 =begin
 = TkVirtualEvent
 
-== ・ケ。シ・ム。シ・ッ・鬣ケ:
+== スーパークラス:
 
 ((<TkObject>))
 
-== extend、キ、ニ、、、�тД�・蝪シ・
+== extendしているモジュール:
 
 ((<Tk>))
 
-== ・ッ・鬣ケ・皈ス・テ・ノ:
+== クラスメソッド:
 
 --- TkVirtualEvent.getobj(event)
 
@@ -19,7 +19,7 @@
 
 --- TkVirtualEvent.new(*sequences)
 
-== ・皈ス・テ・ノ:
+== メソッド:
 
 --- TkVirtualEvent#add(*sequences)
 

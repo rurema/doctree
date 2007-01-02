@@ -3,27 +3,27 @@
 =begin
 = TkToplevel
 
-¡¦¥Í¡¦¥Æ¡¦¥é¡¦ø§¥ë¡¦ö§¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í¡¦¥ò¡¢¥Û¡¦¥Ã¡¦ò§¥±¡¢¥Ì¡¢¥±¡£¡×
-((<¡¦ö£¥·¡¦¥Í¡¦¥ò¡¦¡×¡¦¥¯¡¦¥¡¡¦¥Æ¡¦¥Í>))¡¢¥Í¡¢¥Þ¥Ï¥Õ¡¢¥Û¡¦¥ò¡¦¡×¡¦ü§¥Î¡¦¥ò¡¢¥ã¥Î¥ã¥Ø¥é¡¢¥Ï¥»ø»î¦¥Ò¥µ¥Í¥Ø¥à¡¢¥­¡¢¡«¡¢¥±¡£¡×
+¥È¥Ã¥×¥ì¥Ù¥ë¥¦¥£¥¸¥§¥Ã¥È¥¦¤Î¥¯¥é¥¹¤Ç¤¹¡£
+((<¥ë¡¼¥È¥¦¥£¥¸¥§¥Ã¥È>))¤È¤ÏÊÌ¤Î¥¦¥£¥ó¥É¥¦¤¬É¬Í×¤Ê¾ì¹ç¤Ë»ÈÍÑ¤·¤Þ¤¹¡£
 
-== ¡¦¥±¡£¥·¡¦¥à¡£¥·¡¦¥Ã¡¦ò§¥±:
+== ¥¹¡¼¥Ñ¡¼¥¯¥é¥¹:
 
 ((<TkWindow>))
 
-== ¡¦¡¢¡¦ü§¥Ã¡¦ö£¥·¡¦¥Î¡¢¥­¡¢¥Ë¡¢¡¢¡¢ö§ä§¥¯¡¦ê£¥·¡¦
+== ¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ë:
 
 ((<Tk::Wm>))
 
-== ¡¦¥Ã¡¦ò§¥±¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥¯¥é¥¹¥á¥½¥Ã¥É:
 
 --- TkToplevel.new(parent=nil, keys=nil)
 --- TkToplevel.new(parent=nil, screen=nil, classname=nil, keys=nil)
 
-== ¡¦â§¥¹¡¦¥Æ¡¦¥Î:
+== ¥á¥½¥Ã¥É:
 
 --- TkToplevel#specific_class
 
-== ¥Î¥¯¥¹à§¥§¡¦¥é¡¦¥­¡¦î§
+== É¸½à¥ª¥×¥·¥ç¥ó:
 
 ((<TkObject#borderwidth>))
 ((<TkObject#bd>))
@@ -40,7 +40,7 @@
 
 ((<TkObject#takefocus>))
 
-== ¡¦¥§¡¦¥é¡¦¥­¡¦î§
+== ¥ª¥×¥·¥ç¥ó:
 
 --- TkToplevel#background(color)
 --- TkToplevel#bg(color)
