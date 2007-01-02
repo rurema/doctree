@@ -201,8 +201,8 @@ rexml/attribute                 iwadon          done
 rexml/cdata                     iwadon          done
 rexml/child                     iwadon          done
 rexml/comment                   iwadon          done
-rexml/doctype
-rexml/document
+rexml/doctype                   iwadon
+rexml/document                  iwadon
 rexml/dtd
 rexml/element
 rexml/encoding
