@@ -196,8 +196,8 @@ readbytes                       sheepman        done
 readline                        sheepman        done
 resolv                          kimuraw         done
 resolv-replace                  kimuraw         done
-rexml/attlistdecl               iwadon
-rexml/attribute                 iwadon
+rexml/attlistdecl               iwadon          done
+rexml/attribute                 iwadon          done
 rexml/cdata
 rexml/child
 rexml/comment
