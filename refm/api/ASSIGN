@@ -207,9 +207,9 @@ rexml/dtd                       iwadon          done
 rexml/element                   iwadon          done
 rexml/encoding                  iwadon          done
 rexml/encodings                 iwadon          done
-rexml/entity
-rexml/functions
-rexml/instruction
+rexml/entity                    iwadon
+rexml/functions                 iwadon
+rexml/instruction               iwadon
 rexml/light
 rexml/namespace
 rexml/node
