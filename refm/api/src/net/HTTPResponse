@@ -60,103 +60,103 @@ HTTP サーバがリザルトコードに付加して返すメッセージです。
 エンティティボディを少しづつ取得して順次ブロックに与えます。
 
 
-= class HTTPUnknownResponse < HTTPResponse
+= class Net::HTTPUnknownResponse < Net::HTTPResponse
 
-= class HTTPInformation < HTTPResponse
+= class Net::HTTPInformation < Net::HTTPResponse
 1xx
-= class HTTPSuccess < HTTPResponse
+= class Net::HTTPSuccess < Net::HTTPResponse
 2xx
-= class HTTPRedirection < HTTPResponse
+= class Net::HTTPRedirection < Net::HTTPResponse
 3xx
-= class HTTPClientError < HTTPResponse
+= class Net::HTTPClientError < Net::HTTPResponse
 4xx
-= class HTTPServerError < HTTPResponse
+= class Net::HTTPServerError < Net::HTTPResponse
 5xx
 
-= class HTTPContinue < HTTPInformation
+= class Net::HTTPContinue < Net::HTTPInformation
 100
-= class HTTPSwitchProtocol < HTTPInformation
+= class Net::HTTPSwitchProtocol < Net::HTTPInformation
 101
 
-= class HTTPOK < HTTPSuccess
+= class Net::HTTPOK < Net::HTTPSuccess
 200
-= class HTTPCreated < HTTPSuccess
+= class Net::HTTPCreated < Net::HTTPSuccess
 201
-= class HTTPAccepted < HTTPSuccess
+= class Net::HTTPAccepted < Net::HTTPSuccess
 202
-= class HTTPNonAuthoritativeInformation < HTTPSuccess
+= class Net::HTTPNonAuthoritativeInformation < Net::HTTPSuccess
 203
-= class HTTPNoContent < HTTPSuccess
+= class Net::HTTPNoContent < Net::HTTPSuccess
 204
-= class HTTPResetContent < HTTPSuccess
+= class Net::HTTPResetContent < Net::HTTPSuccess
 205
-= class HTTPPartialContent < HTTPSuccess
+= class Net::HTTPPartialContent < Net::HTTPSuccess
 206
 
-= class HTTPMultipleChoice < HTTPRedirection
+= class Net::HTTPMultipleChoice < Net::HTTPRedirection
 300
-= class HTTPMovedPermanently < HTTPRedirection
+= class Net::HTTPMovedPermanently < Net::HTTPRedirection
 301
-= class HTTPFound < HTTPRedirection
+= class Net::HTTPFound < Net::HTTPRedirection
 302
-#@# alias: HTTPMovedTemporarily
-= class HTTPSeeOther < HTTPRedirection
+#@# alias: Net::HTTPMovedTemporarily
+= class Net::HTTPSeeOther < Net::HTTPRedirection
 303
-= class HTTPNotModified < HTTPRedirection
+= class Net::HTTPNotModified < Net::HTTPRedirection
 304
-= class HTTPUseProxy < HTTPRedirection
+= class Net::HTTPUseProxy < Net::HTTPRedirection
 305
 #@# 306 unused
-= class HTTPTemporaryRedirect < HTTPRedirection
+= class Net::HTTPTemporaryRedirect < Net::HTTPRedirection
 307
 
-= class HTTPBadRequest < HTTPClientError
+= class Net::HTTPBadRequest < Net::HTTPClientError
 400
-= class HTTPUnauthorized < HTTPClientError
+= class Net::HTTPUnauthorized < Net::HTTPClientError
 401
-= class HTTPPaymentRequired < HTTPClientError
+= class Net::HTTPPaymentRequired < Net::HTTPClientError
 402
-= class HTTPForbidden < HTTPClientError
+= class Net::HTTPForbidden < Net::HTTPClientError
 403
-= class HTTPNotFound < HTTPClientError
+= class Net::HTTPNotFound < Net::HTTPClientError
 404
-= class HTTPMethodNotAllowed < HTTPClientError
+= class Net::HTTPMethodNotAllowed < Net::HTTPClientError
 405
-= class HTTPNotAcceptable < HTTPClientError
+= class Net::HTTPNotAcceptable < Net::HTTPClientError
 406
-= class HTTPProxyAuthenticationRequired < HTTPClientError
+= class Net::HTTPProxyAuthenticationRequired < Net::HTTPClientError
 407
-= class HTTPRequestTimeOut < HTTPClientError
+= class Net::HTTPRequestTimeOut < Net::HTTPClientError
 408
-= class HTTPConflict < HTTPClientError
+= class Net::HTTPConflict < Net::HTTPClientError
 409
-= class HTTPGone < HTTPClientError
+= class Net::HTTPGone < Net::HTTPClientError
 410
-= class HTTPLengthRequired < HTTPClientError
+= class Net::HTTPLengthRequired < Net::HTTPClientError
 411
-= class HTTPPreconditionFailed < HTTPClientError
+= class Net::HTTPPreconditionFailed < Net::HTTPClientError
 412
-= class HTTPRequestEntityTooLarge < HTTPClientError
+= class Net::HTTPRequestEntityTooLarge < Net::HTTPClientError
 413
-= class HTTPRequestURITooLong < HTTPClientError
-#@# alias: HTTPRequestURITooLarge
+= class Net::HTTPRequestURITooLong < Net::HTTPClientError
+#@# alias: Net::HTTPRequestURITooLarge
 414
-= class HTTPUnsupportedMediaType < HTTPClientError
+= class Net::HTTPUnsupportedMediaType < Net::HTTPClientError
 415
-= class HTTPRequestedRangeNotSatisfiable < HTTPClientError
+= class Net::HTTPRequestedRangeNotSatisfiable < Net::HTTPClientError
 416
-= class HTTPExpectationFailed < HTTPClientError
+= class Net::HTTPExpectationFailed < Net::HTTPClientError
 417
 
-= class HTTPInternalServerError < HTTPServerError
+= class Net::HTTPInternalServerError < Net::HTTPServerError
 500
-= class HTTPNotImplemented < HTTPServerError
+= class Net::HTTPNotImplemented < Net::HTTPServerError
 501
-= class HTTPBadGateway < HTTPServerError
+= class Net::HTTPBadGateway < Net::HTTPServerError
 502
-= class HTTPServiceUnavailable < HTTPServerError
+= class Net::HTTPServiceUnavailable < Net::HTTPServerError
 503
-= class HTTPGatewayTimeOut < HTTPServerError
+= class Net::HTTPGatewayTimeOut < Net::HTTPServerError
 504
-= class HTTPVersionNotSupported < HTTPServerError
+= class Net::HTTPVersionNotSupported < Net::HTTPServerError
 505
