@@ -1,4 +1,7 @@
 = class RSS::Rss < RSS::Element
+include RSS::RootElementMixin
+include RSS::XMLStyleSheetMixin
+
 == Instance Methods
 
 --- channel
@@ -136,6 +139,8 @@
 --- registerProcedure=
 
 = class RSS::Rss::Channel::Item < RSS::Element
+include RSS::TrackBackModel20
+
 == Instance Methods
 
 --- categories

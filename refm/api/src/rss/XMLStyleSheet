@@ -18,3 +18,7 @@
 
 --- type
 --- type=
+
+= module RSS::XMLStyleSheetMixin 
+== Instance Methods
+--- xml_stylesheets

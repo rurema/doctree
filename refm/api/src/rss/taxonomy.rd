@@ -9,6 +9,8 @@
 
 = class RSS::TaxonomyTopicModel::TaxonomyTopic < RSS::Element
 include RSS::TaxonomyTopicsModel
+include RSS::DublinCoreModel
+
 == Instance Methods
 
 --- about

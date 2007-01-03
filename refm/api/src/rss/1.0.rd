@@ -1,4 +1,8 @@
 = class RSS::RDF < RSS::Element
+include RSS::TaxonomyTopicModel
+include RSS::RootElementMixin
+include RSS::XMLStyleSheetMixin
+
 == Instance Methods
 --- channel
 --- channel=
@@ -30,6 +34,12 @@
 --- xml_stylesheets=
 
 = class RSS::RDF::Channel < RSS::Element
+include RSS::TaxonomyTopicsModel
+include RSS::SyndicationModel
+include RSS::ImageFaviconModel
+include RSS::ImageModelUtils
+include RSS::DublinCoreModel
+
 == Instance Methods
 
 --- about
@@ -71,6 +81,8 @@
 --- resources
 
 = class RSS::RDF::Channel::ImageFavicon < RSS::Element
+include RSS::DublinCoreModel
+
 == Instance Methods
 
 --- about
@@ -85,6 +97,8 @@
 --- size=
 
 = class RSS::RDF::Image < RSS::Element
+include RSS::DublinCoreModel
+
 == Instance Methods
 
 --- about
@@ -103,6 +117,8 @@
 --- url=
  
 = class RSS::RDF::Textinput < RSS::Element
+include RSS::DublinCoreModel
+
 == Instance Methods
 
 --- about
@@ -124,6 +140,13 @@
 --- title=
 
 = class RSS::RDF::Item < RSS::Element
+include RSS::TaxonomyTopicsModel
+include RSS::TrackBackModel10
+include RSS::ImageItemModel
+include RSS::ImageModelUtils
+include RSS::DublinCoreModel
+include RSS::ContentModel
+
 == Instance Methods
 
 --- about
