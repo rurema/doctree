@@ -1,0 +1,36 @@
+= class RSS:Parser < Object
+== Class Methods
+--- parse
+
+--- new
+
+== Instance Methods
+
+--- do_validate
+--- do_validate=
+
+--- ignore_unknown_element
+--- ignore_unknown_element=
+
+--- parse
+
+--- rss
+
+
+= class RSS::NotWellFormedError < RSS::Error
+== Instance Methods
+--- line 
+
+--- element
+
+= class RSS::XMLParserNotFound < RSS::Error
+
+= class RSS::NotValidXMLParser < RSS::Error
+
+= class RSS::NSError < RSS::Error
+== Instance Methods
+--- tag
+
+--- prefix
+
+--- uri
