@@ -1,17 +1,12 @@
-#@if (version >= "1.8.0")
-#@# = REXML
-
-#@# [[unknown:執筆者募集]]
-#@todo
-
-=== ライブラリ毎の詳細
+Pure Ruby の XML パーサです。
+DOM スタイルと SAX スタイルの両方をカバーしています。
 
   * DOMっぽいAPI
     * rexml/document
     * rexml/element
     * rexml/attribute
     * rexml/namespace
-    * rexml/text(おまけでrexml/cdataも？)
+    * rexml/text (おまけで rexml/cdata も？)
     * rexml/instruction
 
   * SAXっぽいAPI
@@ -66,4 +61,3 @@
 #@include(rexml/output.rd)
 #@include(rexml/parent.rd)
 #@include(rexml/parseexception.rd)
-#@end
