@@ -1,17 +1,17 @@
-=== 目的・概要
-
-2つの正規表現による AND/OR を提供します。
+2 つの正規表現による AND/OR を提供します。
 
 Regexp クラスに & と | のメソッドを定義し、それぞれ
 2つの正規表現の両方にマッチすれば真となるもの (RegAnd) と
 いずれかにマッチすれば真となるもの (RegOr) を返します。
 RegAnd、RegOr は =~ のみサポートしています。
 
-=== サンプルコード
+=== 使用例
 
   require 'eregex'
   p "abc" =~ /b/|/c/
   p "abc" =~ /b/&/c/
+
+
 
 = reopen Regexp
 
@@ -21,36 +21,40 @@ RegAnd、RegOr は =~ のみサポートしています。
 
 --- &(other)
 
-RegAnd(self,other) を返します。
+[[m:RegAnd.new]](self, other) を返します。
 
 --- |(other)
 
-RegOr(self,other) を返します。
+[[m:RegOr.new]](self, other) を返します。
+
+
 
 = class RegAnd < Object
 
 == Class Methods
 
---- new(reg1, reg2)
+--- new(re1, re2)
 
-コンストラクタです。
+新しい RegAnd オブジェクトを生成します。
 
 == Instance Methods
 
 --- =~(str)
 
-str が reg1 と reg2 の両方にマッチすれば真を返します。
+str が re1 と re2 の両方にマッチすれば真を返します。
+
+
 
 = class RegOr < Object
 
 == Class Methods
 
---- new(reg1, reg2)
+--- new(re1, re2)
 
-コンストラクタです。
+新しい RegOr オブジェクトを生成します。
 
 == Instance Methods
 
 --- =~(str)
 
-str が reg1 か reg2 のいずれかにマッチすれば真を返します。
+str が re1 か re2 のいずれかにマッチすれば真を返します。
