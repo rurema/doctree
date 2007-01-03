@@ -28,7 +28,7 @@ RSS を扱うためのライブラリです。
 #@include(rss/maker/Image)
 #@include(rss/maker/Items)
 #@include(rss/maker/Textinput)
-#@end
+#@include(rss/Parser)
 
 = class RSS::Element < Object
 == Instance Methods
@@ -45,3 +45,19 @@ RSS を扱うためのライブラリです。
 
 --- to_xml
 
+= class RSS::Error < StandardError
+
+= class RSS::InvalidRSSError < RSS::Error
+
+= class RSS::OverlappedPrefixError < RSS::Error
+= class RSS::MissingTagError < RSS::InvalidRSSError
+= class RSS::TooMuchTagError < RSS::InvalidRSSError
+= class RSS::MissingAttributeError < RSS::InvalidRSSError
+= class RSS::UnknownTagError < RSS::InvalidRSSError
+= class RSS::NotExpectedTagError < RSS::InvalidRSSError
+= class RSS::NotAvailableValueError < RSS::InvalidRSSError
+= class RSS::UnknownConversionMethodError < RSS::Error
+= class RSS::ConversionError < RSS::Error
+= class RSS::NotSetError < RSS::Error
+
+#@end

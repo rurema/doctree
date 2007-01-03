@@ -5,72 +5,25 @@
 RSS ParserはRSS 0.9x/1.0/2.0をサポートしていますが，RSS 0.90
 はサポートしてません．ごめんなさい．
 
-=== require
-
-RSS 1.0を扱う場合は
-
-  require 'rss/1.0'
-
-を記述してください。
-
-RSS 0.9xを扱う場合は
-
-  require 'rss/0.9'
-
-を記述してください。
-
-RSS 2.0を扱う場合は
-
-  require 'rss/2.0'
-
-を記述して下さい．
-
-これらは複数記述する事ができます。つまり，RSS 0.9x/1.0を扱いたい場合は
-
-  require 'rss/0.9'
-  require 'rss/1.0'
-
-として下さい．RSS 0.9x/1.0/2.0を扱いたい場合は
-
-  require 'rss/1.0'
-  require 'rss/2.0'
-
-として下さい．RSS 2.0はRSS 0.9xを含んでいるので
-
-  require 'rss/0.9'
-
-を記述する必要はありません．
-
-また、必要に応じて
-
-  require 'rss/dublincore'
-
-  require 'rss/syndication'
-
-  require 'rss/content'
-
-  require 'rss/trackback'
-
-  require 'rss/image'
-
-なども記述してください。これらは、それぞれ
+RSS のモジュールはそれぞれ、
  * Dublin Core モジュール [[url:http://web.resource.org/rss/1.0/modules/dc/]] 
  * Syndication モジュール [[url:http://web.resource.org/rss/1.0/modules/syndication/]]
  * Content モジュール [[url:http://web.resource.org/rss/1.0/modules/content/]]
  * Trackback モジュール [[url:http://madskills.com/public/xml/rss/module/trackback/]]
  * Image モジュール [[url:http://web.resource.org/rss/1.0/modules/image/]]
-使用可能にします。
+をサポートしています。
 ただし，Content モジュールは content:encoded しかサポートしていません．
 
 === パース
 
 RSS をパースしたい場合は RSS::Parser クラスを使います。
-RSS::Parser.parseはStringのRSSをパースします(使用するXMLパー
-サによってはFileやIOオブジェクトなどでもパース可能です)。RSS
-1.0をパースした場合はRSS::RDFオブジェクトを、RSS 0.9x/2.0を
-パースした場合はRSS::Rssオブジェクトを返します。パースした
-Stringがwell formedなXMLで無い場合は，RSS::Errorのサブクラス
-(RSS::NotWellFormedError)の例外が発生します。well formedな
+RSS::Parser.parse は String の RSSを パースします(使用するXMLパー
+サによっては File や IO オブジェクトなどでもパース可能です)。
+ * RSS 1.0をパースした場合は [[c:RSS::RDF]] オブジェクト
+ * RSS 0.9x/2.0をパースした場合は [[c:RSS::Rss]] オブジェクト
+をそれぞれ返します。パースした
+String が well formed な XML で無い場合は，[[c:RSS::Error]] のサブクラス
+([[c:RSS::NotWellFormedError]])の例外が発生します。well formedな
 XMLだが，RSS 0.9x/1.0/2.0のいずれでもない場合は，nilが返りま
 す．
 
@@ -78,19 +31,19 @@ XMLだが，RSS 0.9x/1.0/2.0のいずれでもない場合は，nilが返りま
 うにします。ここで、変数rss_sourceにはRSS 1.0形式の文
 字列が格納されているものとします。
 
-  require 'rss/1.0'
+  require 'rss'
   rss = RSS::Parser.parse(rss_source, true)
 
 RSS::Parser.parseの第二引数は省略するとtrueが指定されたもの
 とみなされるので、これは以下のようにも書けます。
 
-  require 'rss/1.0'
+  require 'rss'
   rss = RSS::Parser.parse(rss_source)
 
 最初はバリデーション付きでパースして，validではないRSSだった
 場合はバリデーション無しでパースするには以下のように書きます。
 
-  require 'rss/1.0'
+  require 'rss'
   rss = nil
   begin
     rss = RSS::Parser.parse(rss_source)
@@ -99,37 +52,9 @@ RSS::Parser.parseの第二引数は省略するとtrueが指定されたもの
   end
 
 これはrss_sourceがRSS 0.9x/1.0/2.0のどれか分からない時
-にも有効です。以下のように書くと、まずRSS 1.0としてバリデー
+にも有効です。RSS 1.0としてバリデー
 ション付きでパースし、バリデーションに失敗するとRSS 0.9x/(壊
 れた)1.0/2.0のいずれかとしてパースします。
-
-  require 'rss/1.0'
-  require 'rss/2.0'
-  rss = nil
-  begin
-    rss = RSS::Parser.parse(rss_source)
-  rescue RSS::InvalidRSSError
-    rss = RSS::Parser.parse(rss_source, false)
-  end
-
-
-Dublin Core，Syndication，Content，TrackBackモジュールの要素
-もパースしたい場合はRSS::Parser.parseの前にrss/dublincore,
-rss/syndication, rss/content, rss/trackbackをrequireしてくだ
-さい。
-
-  require 'rss/1.0'
-  require 'rss/2.0'
-  require 'rss/dublincore'
-  require 'rss/syndication'
-  require 'rss/content'
-  require 'rss/trackback'
-  rss = nil
-  begin
-    rss = RSS::Parser.parse(rss_source)
-  rescue RSS::InvalidRSSError
-    rss = RSS::Parser.parse(rss_source, false)
-  end
 
 ==== 知らない要素の扱い
 
