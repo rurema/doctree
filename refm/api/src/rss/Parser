@@ -1,4 +1,4 @@
-= class RSS:Parser < Object
+= class RSS::Parser < Object
 == Class Methods
 --- parse
 
