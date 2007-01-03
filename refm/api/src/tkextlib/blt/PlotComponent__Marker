@@ -1,5 +1,11 @@
 = class Tk::BLT::PlotComponent::Marker
 
+extend Tk
+extend TkItemFontOptkeys
+extend TkItemConfigOptkeys
+
+extend Tk::BLT::PlotComponent::OptKeys
+
 == Class Methods
 
 --- create(chart, keys = {})

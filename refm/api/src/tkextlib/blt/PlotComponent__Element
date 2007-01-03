@@ -1,5 +1,11 @@
 = class Tk::BLT::PlotComponent::Element
 
+extend Tk
+extend TkItemFontOptkeys
+extend TkItemConfigOptkeys
+
+extend Tk::BLT::PlotComponent::OptKeys
+
 == Class Methods
 
 --- id2obj(chart, id)
