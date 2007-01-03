@@ -300,7 +300,7 @@ tk/panedwindow
 tk/labelframe
 tk/toplevel
 tk/font
-tk/encodedstr
+tk/encodedstr                   okkez
 tk/namespace
 tk/textimage
 tk/frame
