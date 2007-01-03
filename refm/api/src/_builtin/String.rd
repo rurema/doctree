@@ -367,27 +367,62 @@ first から last までの部分文字列を文字列 val で
 
 val を返します。
 
-
 --- capitalize
+
+文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
+ただし、アルファベット以外の文字は位置に関わらず変更しません。
+
+例:
+
+  p "foobar".capitalize   # => "Foobar"
+  p "fooBAR".capitalize   # => "Foobar"
+  p "FOOBAR".capitalize   # => "Foobar"
+
+[[m:$KCODE]] が適切に設定されていない場合は、
+マルチバイト文字の一部をあやまって変換してしまう場合があります。
+この問題は以下のように Shift JIS エンコーディングを使う場合に発生します。
+
+  $KCODE = 'NONE'
+  # 文字列は Shift JIS エンコーディングで記述されている
+  puts "帰".capitalize   # => 蟻
+
+また、$KCODE を設定しても、
+マルチバイト文字のいわゆる全角アルファベットは処理しません。
+
+[[m:String#capitalize!]],
+[[m:String#upcase]], [[m:String#downcase]],
+[[m:String#swapcase]] も参照してください。
+
 --- capitalize!
 
-先頭の文字を (アルファベットであれば) 大文字に、
-残りを小文字に変更します。
+文字列先頭の文字を大文字に、残りを小文字に変更します。
+ただし、アルファベット以外の文字は位置に関わらず変更しません。
 
-capitalize は変更後の文字列を生成して返します。
 capitalize! は self を変更して返しますが、
 変更が起こらなかった場合は nil を返します。
 
-  p "foobar".capitalize   # => "Foobar"
+例:
 
-[[m:$KCODE]] が適切に設定されていなければ、 漢字コードの一部も変換してしまいます
- (これは、ShiftJIS コードで起こり得ます)。逆に、$KCODE を設定しても
-マルチバイト文字のアルファベットは処理しません。
+  str = "foobar"
+  str.capitalize!
+  p str   # => "Foobar"
 
-  # -*- Coding: shift_jis -*-
-  $KCODE ='n'
-  puts "帰".capitalize # => 蟻
+  str = "fooBAR"
+  str.capitalize!
+  p str   # => "Foobar"
 
+[[m:$KCODE]] が適切に設定されていない場合は、
+マルチバイト文字の一部をあやまって変換してしまう場合があります。
+この問題は以下のように Shift JIS エンコーディングを使う場合に発生します。
+
+  $KCODE = 'NONE'
+  # 文字列は Shift JIS エンコーディングで記述されている
+  puts "帰".capitalize   # => 蟻
+
+また、$KCODE を設定しても、
+マルチバイト文字のいわゆる全角アルファベットは処理しません。
+
+[[m:String#capitalize]],
 [[m:String#upcase]], [[m:String#downcase]],
 [[m:String#swapcase]] も参照してください。
 
@@ -404,34 +439,71 @@ capitalize! は self を変更して返しますが、
   p 'a'.casecmp('A') #=> 0
 
 --- center(width[, padding])
+
+長さ width の文字列に self を中央寄せした文字列を返します。
+self の長さが width より長い時には元の文字列の複製を返します。
+#@since 1.8.0
+また、第二引数 padding を指定したときは
+空白文字の代わりに padding を詰めます。
+#@end
+
+例:
+
+  p "foo".center(10)       # => "   foo    "
+  p "foo".center(9)        # => "   foo   "
+  p "foo".center(8)        # => "  foo   "
+  p "foo".center(7)        # => "  foo  "
+  p "foo".center(2)        # => "foo"
+  p "foo".center(1)        # => "foo"
+#@since 1.8.0
+  p "foo".center(10, "*")  # => "***foo****"
+#@end
+
+[[m:String#ljust]], [[m:String#rjust]] も参照してください。
+
 --- ljust(width[, padding])
+
+長さ width の文字列に self を左詰めした文字列を返します。
+self の長さが width より長い時には元の文字列の複製を返します。
+#@since 1.8.0
+また、第二引数 padding を指定したときは
+空白文字の代わりに padding を詰めます。
+#@end
+
+例:
+
+  p "foo".ljust(10)        # => "foo       "
+  p "foo".ljust(9)         # => "foo      "
+  p "foo".ljust(8)         # => "foo     "
+  p "foo".ljust(2)         # => "foo"
+  p "foo".ljust(1)         # => "foo"
+#@since 1.8.0
+  p "foo".ljust(10, "*")   # => "foo*******"
+#@end
+
+[[m:String#center]], [[m:String#rjust]] も参照してください。
+
 --- rjust(width[, padding])
 
-それぞれ中央寄せ、左詰め、右詰めした文字列を返します。
-
-例:
-
-  p "foo".center(10)      # => "   foo    "
-  p "foo".ljust(10)       # => "foo       "
-  p "foo".rjust(10)       # => "       foo"
-
-文字列の長さが width より長い時には元の文字列の複製を返します。
-
-例:
-
-  s = "foo"
-  p s.center(1).object_id == s.object_id   # => false
-
+長さ width の文字列に self を右詰めした文字列を返します。
+self の長さが width より長い時には元の文字列の複製を返します。
 #@since 1.8.0
-第二引数 padding を指定すると
-空白の代わりに padding を詰めます。
+また、第二引数 padding を指定したときは
+空白文字の代わりに padding を詰めます。
+#@end
 
 例:
 
-  p "foo".center(10,"*")      # => "***foo****"
-  p "foo".ljust(10,"*")       # => "foo*******"
-  p "foo".rjust(10,"*")       # => "*******foo"
+  p "foo".rjust(10)        # => "       foo"
+  p "foo".rjust(9)         # => "      foo"
+  p "foo".rjust(8)         # => "     foo"
+  p "foo".rjust(2)         # => "foo"
+  p "foo".rjust(1)         # => "foo"
+#@since 1.8.0
+  p "foo".rjust(10, "*")   # => "*******foo"
 #@end
+
+[[m:String#center]], [[m:String#ljust]] も参照してください。
 
 --- chomp([rs])
 --- chomp!([rs])
@@ -1536,26 +1608,85 @@ self から始めて max まで
     puts str
   end
 
-
 --- eql?(other)
+
+self == other と同じです。
 
 --- hash
 
+self のハッシュ値を返します。
+eql? で等しい文字列は、常にハッシュ値も等しくなります。
+
 --- inspect
 
-#@since 1.9.0
+Ruby のリテラル形式を使って、
+文字列中の不可視文字をエスケープシーケンスに変換します。
 
+$KCODE が設定されている場合は、
+そのエンコーディング内の適正なマルチバイト文字をそのまま出力します。
+それ以外の不可視文字はエスケープシーケンスを使って出力されます。
+
+このメソッドは主にデバッグのために用意されています。
+永続化などの目的で文字列をダンプしたいときは、
+[[m:String#dump]] を使うべきです。
+
+例：
+
+  # p ではないことに注意
+  puts "string".inspect    # => "string"
+  puts "\t\r\n".inspect    # => "\t\r\n"
+
+#@since 1.9.0
 --- chr
 
---- start_with?
---- end_with?
+self の最初の文字だけを含む文字列を返します。
+
+--- start_with?(str)
+
+self の先頭が str であるとき true を返します。
+
+--- end_with?(str)
+
+self の末尾が str であるとき true を返します。
 
 --- lines
 
+文字列を行の配列に変換します。
+
 --- ord
+
+最初の文字の文字コードを返します。
+ただし self が 2 文字以上を含むときは例外 TypeError を発生します。
 
 --- partition(sep)
 
+セパレータ sep が最初に登場する部分で self を 2 つに分割し、
+[セパレータを含まない先頭部分, セパレータ, それ以降の部分]
+の 3 要素の配列を返します。
+
+self がセパレータを含まないときは、
+返り値の第 2 要素が空文字列になります。
+
+例：
+
+  p "axaxa".partition("x")   # => ["a", "x", "axa"]
+  p "aaaaa".partition("x")   # => ["aaaaa", "", ""]
+
+[[String#rpartition]] も参照してください。
+
 --- rpartition(sep)
 
+セパレータ sep が最後に登場する部分で self を 2 つに分割し、
+[最後のセパレータより前の部分, セパレータ, それ以降の部分]
+の 3 要素の配列を返します。
+
+self がセパレータを含まないときは、
+返り値の第 2 要素が空文字列になります。
+
+例：
+
+  p "axaxa".partition("x")   # => ["axa", "x", "a"]
+  p "aaaaa".partition("x")   # => ["", "", "aaaaa"]
+
+[[String#partition]] も参照してください。
 #@end
