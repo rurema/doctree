@@ -146,7 +146,7 @@ Ruby のオブジェクトを生成して返します。
 == instance methods
 --- to_yaml(opts = {})
 
-= reopen Ojbect
+= reopen Object
 == instance methods
 --- to_yaml(opts = {})
 
