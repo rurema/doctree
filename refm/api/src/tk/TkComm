@@ -1,0 +1,144 @@
+#@since 1.8.0
+
+= module TkComm
+extend TkUtil
+extend TkEvent
+include TkUtil
+include TkEvent
+
+== Constants
+#@if(version <= "1.8.1")
+--- Event
+
+#@end
+
+#@since 1.8.2
+--- GET_CONFIGINFO_AS_ARRAY
+
+--- GET_CONFIGINFOwoRES_AS_ARRAY
+
+#@end
+
+#@if(version <= "1.8.1")
+--- None
+
+#@end
+
+#@since 1.8.2
+--- TkExtlibAutoloadModule
+
+#@end
+
+--- Tk_CMDTBL
+
+--- Tk_IDs
+
+--- Tk_WINDOWS
+
+#@since 1.8.2
+--- USE_TCLs_LIST_FUNCTIONS
+
+#@end
+
+--- WidgetClassNames
+
+== Class Methods
+
+#@since 1.8.2
+--- _at(x, y = nil)
+
+--- _callback_entry?(obj)
+
+--- _callback_entry_class?(klass)
+
+#@end
+
+--- _curr_cmd_id
+
+#@since 1.8.2
+--- _fromUTF8(str, encoding = nil)
+
+#@end
+
+--- _genobj_for_tkwidget(path)
+
+#@if(version <= "1.8.1")
+--- _get_eval_string
+
+#@end
+
+--- _next_cmd_id
+
+#@since 1.8.2
+--- _toUTF8(str, encoding = nil)
+
+#@end
+
+--- array2tk_list(ary, enc = nil)
+
+
+#@if(version <= "1.8.1")
+--- hash_kv
+
+#@end
+
+#@since 1.8.2
+--- image_obj(val)
+
+#@end
+
+--- install_cmd(cmd)
+
+--- list(val, depth = 0, enc = true)
+
+--- procedure(val)
+
+--- simplelist(val, src_enc = true, dst_enc = true)
+
+
+#@since 1.8.2
+--- tk_tcl2ruby(val, enc_mode = false, listobj = true)
+
+--- uninstall_cmd(id)
+
+#@end
+
+--- window(val)
+
+
+== Instance Methods
+
+--- bind(tag_or_class, context, *args)
+
+--- bind_all(context, *args)
+
+--- bind_append(tag_or_class, context, *args)
+
+--- bind_append_all(context, *args)
+
+--- bind_remove(tag_or_class, context)
+
+--- bind_remove_all(context)
+
+--- bindinfo(tag_or_class, context = nil)
+
+--- bindinfo_all(context = nil)
+
+#@if(version <= "1.8.1")
+--- grid
+
+--- pack
+
+#@end
+
+#@since 1.8.2
+--- subst
+
+#@end
+
+#@if(version <= "1.8.1")
+--- update
+
+#@end
+
+#@end

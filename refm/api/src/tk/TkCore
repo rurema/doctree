@@ -1,0 +1,195 @@
+#@since 1.8.0
+= module TkCore
+extend TkComm
+include TkComm
+
+== Constants
+
+--- EventFlag
+
+--- INTERP
+
+#@since 1.8.2
+--- Tk_OBJECT_TABLE
+
+--- WIDGET_DESTROY_HOOK
+
+#@end
+
+== Class Methods
+
+--- callback(*arg)
+
+== Instance Methods
+
+#@since 1.8.3
+--- _tk_call_to_list_core(depth, arg_enc, val_enc, *args)
+
+#@end
+
+--- after(ms, cmd = Proc.new)
+
+#@since 1.8.2
+--- after_cancel(after_id)
+
+#@end
+
+--- after_idle(cmd = Proc.new)
+
+--- appname(name = None)
+
+--- appsend(interp, async, *args)
+
+#@since 1.8.2
+--- appsend_deny
+
+#@end
+
+--- appsend_displayof(interp, win, async, *args)
+
+--- callback_break
+
+--- callback_continue
+
+#@since 1.8.5
+--- callback_return
+
+#@end
+
+--- chooseColor(keys = nil)
+
+--- chooseDirectory(keys = nil)
+
+#@if(version <= "1.8.1")
+--- clock_clicks
+
+--- clock_format
+
+--- clock_formatGMT
+
+--- clock_scan
+
+--- clock_scanGMT
+
+--- clock_seconds
+
+#@end
+
+--- do_one_event(flag = TclTkLib::EventFlag::ALL)
+
+--- event_generate(win, context, keys = nil)
+
+#@since 1.8.3
+--- getMultipleOpenFile(keys = nil)
+
+--- getMultipleSaveFile(keys = nil)
+
+#@end
+
+--- getOpenFile(keys = nil)
+
+--- getSaveFile(keys = nil)
+
+--- get_eventloop_tick
+
+--- get_eventloop_weight
+
+--- get_no_event_wait
+
+#@since 1.8.3
+--- inactive
+
+--- inactive_displayof(win)
+
+#@end
+
+--- info(*args)
+
+--- ip_eval(cmd_string)
+
+#@since 1.8.2
+--- ip_eval_with_enc(cmd_string)
+
+--- ip_eval_without_enc(cmd_string)
+
+#@end
+
+--- ip_invoke(*args)
+
+#@since 1.8.2
+--- ip_invoke_with_enc(*args)
+
+--- ip_invoke_without_enc(*args)
+
+--- is_mainloop?
+
+#@end
+
+
+--- load_cmd_on_ip(tk_cmd)
+
+--- mainloop(check_root = true)
+
+#@since 1.8.2
+--- mainloop_exist?
+
+--- mainloop_thread?
+
+#@end
+
+--- mainloop_watchdog(check_root = true)
+
+--- messageBox(keys)
+
+--- rb_appsend(interp, async, *args)
+
+--- rb_appsend_displayof(interp, win, async, *args)
+
+#@since 1.8.3
+--- reset_inactive
+
+--- reset_inactive_displayof(win)
+
+#@end
+
+--- restart(app_name = nil, keys = {})
+
+--- scaling(scale = nil)
+
+--- scaling_displayof(win, scale=nil)
+
+--- set_eventloop_ticktimer_tick)
+
+--- set_eventloop_weight(loop_max, no_event_tick)
+
+--- set_no_event_wait(wait)
+
+--- tk_call(*args)
+
+#@since 1.8.3
+--- tk_call_to_list(*args)
+
+--- tk_call_to_list_with_enc(*args)
+
+--- tk_call_to_list_without_enc(*args)
+
+--- tk_call_to_simplelist(*args)
+
+--- tk_call_to_simplelist_with_enc(*args)
+
+--- tk_call_to_simplelist_without_enc(*args)
+
+#@end
+
+#@since 1.8.2
+--- tk_call_with_enc(*args)
+
+--- tk_call_without_enc(*args)
+
+#@end
+
+--- windowingsystem
+
+
+
+#@end
