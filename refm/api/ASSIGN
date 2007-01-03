@@ -270,7 +270,7 @@ tk/canvastag
 tk/bgerror
 tk/itemfont
 tk/wm
-tk/autoload
+tk/autoload                     okkez
 tk/scrollbar
 tk/menuspec
 tk/scrollbox
