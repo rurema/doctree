@@ -36,3 +36,12 @@ RSS を扱うためのライブラリです。
 --- full_name
 
 --- tag_name
+
+= module RSS::RootElementMixin
+== Instance Methods
+
+--- output_encoding
+--- output_encoding=
+
+--- to_xml
+
