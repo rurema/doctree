@@ -218,7 +218,7 @@ Makerが便利です．
 
 以下のように使います．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("バージョン") do |maker|
     maker.XXX = YYY
@@ -234,7 +234,7 @@ Makerが便利です．
 
 を生成するには以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -250,7 +250,7 @@ Makerが便利です．
 
 エントリを含めたければ以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -269,7 +269,7 @@ Makerが便利です．
 
 のものならこうします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -303,7 +303,7 @@ Makerが便利です．
 
 エントリを持つなら以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -328,7 +328,7 @@ Makerが便利です．
 
 を追加し，以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -356,7 +356,7 @@ Makerが便利です．
 
 がある場合は以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -389,7 +389,7 @@ Makerが便利です．
 
 検索用CGIがあったら以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     maker.channel.about = "http://example.com/index.rdf"
@@ -424,7 +424,7 @@ Makerが便利です．
 
 xml-stylesheetを追加したい場合は以下のようにします．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("1.0") do |maker|
     xss = maker.xml_stylesheets.new_xml_stylesheet
@@ -459,7 +459,7 @@ xml-stylesheetを追加したい場合は以下のようにします．
 もし，RSS 2.0を生成したい場合は以下のように，
 RSS::Maker.makeの第一引数を変更します．
 
-  require "rss/maker"
+  require "rss"
 
   rss = RSS::Maker.make("2.0") do |maker|
     xss = maker.xml_stylesheets.new_xml_stylesheet
@@ -506,8 +506,7 @@ RSS Parserのサンプルスクリプトをいくつか紹介します．これらの
 
 まず、RSS 0.9x/1.0/2.0をパースできるように以下のようにrequireします。
 
-  require 'rss/1.0'
-  require 'rss/2.0'
+  require 'rss'
 
 パースするRSSはファイルに保存されていて引数で与えられるものとします。
 
@@ -607,11 +606,6 @@ content=メソッドやその別名であるvalue=メソッドを
 ちなみにSyndicationモジュールの要素にアクセスするには「sy_要
 素名」というアクセサが，Contentモジュールの要素にアクセスす
 るには「content_要素名」というアクセサが用意されています。
-
-requireするのは以下のものです。
-
-  require 'rss/1.0'
-  require 'rss/dublincore'
 
 サンプル1と同じようにパースするRSSはファイルに保存されていて
 引数で与えられるものとします。
