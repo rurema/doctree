@@ -22,25 +22,25 @@ RSS::Parser.parse は String の RSSを パースします(使用するXMLパー
  * RSS 1.0をパースした場合は [[c:RSS::RDF]] オブジェクト
  * RSS 0.9x/2.0をパースした場合は [[c:RSS::Rss]] オブジェクト
 をそれぞれ返します。パースした
-String が well formed な XML で無い場合は，[[c:RSS::Error]] のサブクラス
-([[c:RSS::NotWellFormedError]])の例外が発生します。well formedな
-XMLだが，RSS 0.9x/1.0/2.0のいずれでもない場合は，nilが返りま
+String が well formed な XML で無い場合は，
+例外 [[c:RSS::NotWellFormedError]] が発生します。well formed な
+XML だが，RSS 0.9x/1.0/2.0 のいずれでもない場合は，nil が返りま
 す．
 
-例えば、RSS 1.0をバリデーション付きでパースするには以下のよ
-うにします。ここで、変数rss_sourceにはRSS 1.0形式の文
+例えば、RSS 1.0 をバリデーション付きでパースするには以下のよ
+うにします。ここで、変数 rss_source には RSS 1.0 形式の文
 字列が格納されているものとします。
 
   require 'rss'
   rss = RSS::Parser.parse(rss_source, true)
 
-RSS::Parser.parseの第二引数は省略するとtrueが指定されたもの
+RSS::Parser.parse の第二引数は省略すると true が指定されたもの
 とみなされるので、これは以下のようにも書けます。
 
   require 'rss'
   rss = RSS::Parser.parse(rss_source)
 
-最初はバリデーション付きでパースして，validではないRSSだった
+最初はバリデーション付きでパースして，valid ではない RSS だった
 場合はバリデーション無しでパースするには以下のように書きます。
 
   require 'rss'
@@ -51,19 +51,18 @@ RSS::Parser.parseの第二引数は省略するとtrueが指定されたもの
     rss = RSS::Parser.parse(rss_source, false)
   end
 
-これはrss_sourceがRSS 0.9x/1.0/2.0のどれか分からない時
+これは rss_source が RSS 0.9x/1.0/2.0 のどれか分からない時
 にも有効です。RSS 1.0としてバリデー
-ション付きでパースし、バリデーションに失敗するとRSS 0.9x/(壊
-れた)1.0/2.0のいずれかとしてパースします。
+ション付きでパースし、バリデーションに失敗すると RSS 0.9x/(壊
+れた)1.0/2.0 のいずれかとしてパースします。
 
 ==== 知らない要素の扱い
 
 パーサはデフォルトでは知らない要素(仕様書に規定されていない
 要素)を無視します。もし、知らない要素に遭遇した時に例外を発
-生させたければ，RSS::Parser.parseの第三引数にfalseを指定して
+生させたければ，RSS::Parser.parse の第三引数に false を指定して
 ください。こうすると、パース中に知らない要素に遭遇した時に
-RSS::UnknownTagError例外が発生します。RSS::UnknownTagErrorク
-ラスはRSS::InvalidErrorクラスのサブクラスです。
+[[c:RSS::UnknownTagError]] 例外が発生します。
 
 以下のようにすると，より厳密にRSS 1.0をパースできます。
 
@@ -71,20 +70,20 @@ RSS::UnknownTagError例外が発生します。RSS::UnknownTagErrorク
 
 === パースされたRSS
 
-RSSはパースされるとStringオブジェクトからRSS::RDF,
-RSS::RDF::Channel, RSS::Rss等のオブジェクトになります。各オ
+RSS はパースされると [[c:String]] オブジェクトから [[c:RSS::RDF]],
+[[c:RSS::RDF::Channel]], [[c:RSS::Rss]] 等のオブジェクトになります。各オ
 ブジェクトで子要素オブジェクトにアクセスするために，要素名と
 同じ名前のアクセサがあります。
 
 ==== リーダ(reader)
 
-rdf:RDF要素の子要素であるchannel要素を参照するには，以下のよう
+rdf:RDF 要素の子要素である channel 要素を参照するには，以下のよう
 にします。
 
   rss = RSS::Parser.parse(rss_source)
   rss.channel # => /rdf:RDF/channel要素; RSS::RDF::Channel
 
-もし、要素が子要素も属性も持たない場合はStringが返ってきます。
+もし、要素が子要素も属性も持たない場合は String が返ってきます。
 その要素が省略可能ならばnilが返って来るかもしれません。これ
 は要素が子要素または属性を持つ場合も同様です。
 
@@ -492,12 +491,12 @@ RSS::Maker.makeの第一引数を変更します．
   end
 
 もし，RSS 0.91を生成したい場合は，RSS 2.0の場合と同様に
-RSS::Maker.makeの第一引数を"0.91"に変更します．
+RSS::Maker.make の第一引数を"0.91"に変更します．
 
 === サンプル
 
-RSS Parserのサンプルスクリプトをいくつか紹介します．これらの
-スクリプトはsample/以下に入っています．
+RSS Parser のサンプルスクリプトをいくつか紹介します．これらの
+スクリプトは sample/ 以下に入っています．
 
 ==== サンプル1 - 項目一覧
 
