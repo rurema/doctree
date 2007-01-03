@@ -1,0 +1,70 @@
+= class Tk::BLT::PlotComponent::Marker
+
+== Class Methods
+
+--- create(chart, keys = {})
+
+
+
+--- create_type(chart, type, keys = {})
+
+
+
+--- id2obj(chart, id)
+
+
+
+--- new(parent, *args)
+
+
+
+--- type2class(type)
+
+
+
+== Instance Methods
+
+--- after(target = None)
+
+
+
+--- before(target = None)
+
+
+
+--- cget(option)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- delete
+
+
+
+--- exist?
+
+
+
+--- id
+
+
+
+--- to_eval
+
+
+
+--- type
+
+
+

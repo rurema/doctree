@@ -1,5 +1,8 @@
 = module Tk::BLT::PlotComponent
 
+include TkItemConfigMethod
+include OptKeys
+
 == Instance Methods
 
 --- __destroy_hook__

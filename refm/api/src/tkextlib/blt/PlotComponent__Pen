@@ -1,0 +1,46 @@
+= class Tk::BLT::PlotComponent::Pen
+
+== Class Methods
+
+--- id2obj(chart, id)
+
+
+
+--- new(chart, pen = nil, keys = {})
+
+
+
+== Instance Methods
+
+--- cget(option)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- delete
+
+
+
+--- id
+
+
+
+--- name
+
+
+
+--- to_eval
+
+
+

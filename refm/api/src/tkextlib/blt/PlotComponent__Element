@@ -1,0 +1,70 @@
+= class Tk::BLT::PlotComponent::Element
+
+== Class Methods
+
+--- id2obj(chart, id)
+
+
+
+--- new(chart, element = nil, keys = {})
+
+
+
+--- type2class(type)
+
+
+
+== Instance Methods
+
+--- activate(*args)
+
+
+
+--- cget(option)
+
+
+
+--- closest(x, y, var, keys = {})
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- deactivate
+
+
+
+--- delete
+
+
+
+--- exist?
+
+
+
+--- id
+
+
+
+--- name
+
+
+
+--- to_eval
+
+
+
+--- type
+
+
+

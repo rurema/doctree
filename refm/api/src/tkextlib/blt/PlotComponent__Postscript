@@ -1,0 +1,38 @@
+= class Tk::BLT::PlotComponent::Postscript
+
+== Class Methods
+
+--- new(chart, keys = {})
+
+
+
+== Instance Methods
+
+--- cget(option)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- id
+
+
+
+--- output(file = nil, keys = {})
+
+
+
+--- to_eval
+
+
+

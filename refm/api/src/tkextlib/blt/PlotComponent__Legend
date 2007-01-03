@@ -1,0 +1,46 @@
+= class Tk::BLT::PlotComponent::Legend
+
+== Class Methods
+
+--- new(chart, keys = {})
+
+
+
+== Instance Methods
+
+--- activate(*args)
+
+
+
+--- cget(option)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- deactivate(*args)
+
+
+
+--- get(pos, y = nil)
+
+
+
+--- id
+
+
+
+--- to_eval
+
+
+

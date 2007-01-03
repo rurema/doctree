@@ -1,0 +1,46 @@
+= class Tk::BLT::PlotComponent::GridLine
+
+== Class Methods
+
+--- new(chart, keys = {})
+
+
+
+== Instance Methods
+
+--- cget(option)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, value = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- id
+
+
+
+--- off
+
+
+
+--- on
+
+
+
+--- to_eval
+
+
+
+--- toggle
+
+
+
