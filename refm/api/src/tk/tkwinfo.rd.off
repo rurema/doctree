@@ -820,39 +820,3 @@
     ((<TkWinfo.pointerxy>))
 
 =end
-# $Id$
-# Module TkXIM is defined in tk.rb
-=begin
-= TkXIM
-
-== インクルードしているモジュール:
-
-((<Tk>))
-
-((<Tk>))
-
-== extendしているモジュール:
-
-((<Tk>))
-
-== モジュールメソッド:
-
---- TkXIM.useinputmethods(window=nil, value=nil)
-
---- TkXIM.configure(window, slot, value=None)
-
---- TkXIM.configinfo(window, slot=nil)
-
---- TkXIM.useinputmethods(window=nil,value=nil)
-
-== メソッド:
-
---- TkXIM#useinputmethods(value=nil)
-
---- TkXIM#imconfigure(window, slot, value=None)
-
---- TkXIM#imconfiginfo(slot=nil)
-
---- TkXIM#useinputmethods(value=nil)
-
-=end
