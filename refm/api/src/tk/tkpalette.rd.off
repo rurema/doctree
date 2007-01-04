@@ -28,29 +28,3 @@
 --- TkPalette#recolorTree(colors)
 
 =end
-# $Id$
-# Module TkPlace is defined in tk.rb
-=begin
-= TkPlace
-
-== インクルードしているモジュール:
-
-((<Tk>))
-
-== extendしているモジュール:
-
-((<Tk>))
-
-== モジュール関数:
-
---- TkPlace.configure(win, slot, value=None)
-
---- TkPlace.configinfo(win, slot = nil)
-
---- TkPlace.forget(win)
-
---- TkPlace.info(win)
-
---- TkPlace.slaves(master)
-
-=end
