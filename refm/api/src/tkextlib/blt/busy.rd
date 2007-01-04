@@ -11,7 +11,35 @@ extend TkItemConfigMethod
 
 == Singleton Methods
 
+--- check(win)
+
+
+
+--- forget(*wins)
+
+
+
+--- hold(win, keys = {})
+
+
+
+--- is_busy(pat = None)
+
+
+
+--- names(pat = None)
+
+
+
+--- release(*wins)
+
+
+
 --- shield_path(win)
+
+
+
+--- status(win)
 
 
 
