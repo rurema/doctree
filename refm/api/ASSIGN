@@ -338,9 +338,9 @@ tkextlib/blt/setup              moriq           done
 tkextlib/blt/spline             moriq           done
 tkextlib/blt/stripchart         moriq           done
 tkextlib/blt/table              moriq           done
-tkextlib/blt/tabnotebook        moriq
-tkextlib/blt/tabset             moriq
-tkextlib/blt/ted                moriq
+tkextlib/blt/tabnotebook        moriq           done
+tkextlib/blt/tabset             moriq           done
+tkextlib/blt/ted                moriq           done
 tkextlib/blt/tile               moriq
 tkextlib/blt/tile/button        moriq
 tkextlib/blt/tile/checkbutton   moriq
@@ -349,13 +349,13 @@ tkextlib/blt/tile/label         moriq
 tkextlib/blt/tile/radiobutton   moriq
 tkextlib/blt/tile/scrollbar     moriq
 tkextlib/blt/tile/toplevel      moriq
-tkextlib/blt/tree               moriq
+tkextlib/blt/tree               moriq           done
 tkextlib/blt/treeview           moriq           done
-tkextlib/blt/unix_dnd           moriq
-tkextlib/blt/vector             moriq
-tkextlib/blt/watch              moriq
-tkextlib/blt/win_printer        moriq
-tkextlib/blt/winop              moriq
+tkextlib/blt/unix_dnd           moriq           done
+tkextlib/blt/vector             moriq           done
+tkextlib/blt/watch              moriq           done
+tkextlib/blt/win_printer        moriq           done
+tkextlib/blt/winop              moriq           done
 tkextlib/bwidget
 tkextlib/bwidget/arrowbutton
 tkextlib/bwidget/bitmap
