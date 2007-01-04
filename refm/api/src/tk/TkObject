@@ -1,0 +1,65 @@
+#@since 1.8.0
+= class TkObject < TkKernel
+extend  TkCore
+include Tk
+include TkConfigMethod
+include TkBindCore
+
+== Instance Methods
+
+#@if(version <= "1.8.1")
+--- []
+
+--- []=
+
+--- cget
+
+--- configinfo
+
+--- configure
+
+--- configure_cmd
+
+#@end
+
+--- destroy
+
+--- epath
+
+--- event_generate(context, keys = nil)
+
+--- method_missing(id, *args)
+
+--- path
+
+#@since 1.8.2
+--- tk_send(cmd, *rest)
+
+#@end
+
+#@since 1.8.3
+--- tk_send_to_list(cmd, *rest)
+
+--- tk_send_to_list_with_enc(cmd, *rest)
+
+--- tk_send_to_list_without_enc(cmd, *rest)
+
+--- tk_send_to_simplelist(cmd, *rest)
+
+--- tk_send_to_simplelist_with_enc(cmd, *rest)
+
+--- tk_send_to_simplelist_without_enc(cmd, *rest)
+
+#@end
+
+#@since 1.8.2
+--- tk_send_with_enc
+
+--- tk_send_without_enc
+
+#@end
+
+--- to_eval
+
+
+#@end

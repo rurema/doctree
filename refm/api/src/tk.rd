@@ -28,4 +28,6 @@ require tk/variable
 #@include(tk/Tk)
 #@include(tk/TkBindCore)
 #@include(tk/TkTreatFont)
+#@include(tk/TkKernel)
+#@include(tk/TkObject)
 
