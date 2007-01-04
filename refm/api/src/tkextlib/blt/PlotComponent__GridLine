@@ -1,4 +1,4 @@
-= class Tk::BLT::PlotComponent::GridLine
+= class Tk::BLT::PlotComponent::GridLine < TkObject
 
 == Class Methods
 

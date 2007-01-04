@@ -1,4 +1,4 @@
-= class Tk::BLT::PlotComponent::Crosshairs
+= class Tk::BLT::PlotComponent::Crosshairs < TkObject
 
 == Class Methods
 

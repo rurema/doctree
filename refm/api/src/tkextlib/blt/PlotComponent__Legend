@@ -1,4 +1,4 @@
-= class Tk::BLT::PlotComponent::Legend
+= class Tk::BLT::PlotComponent::Legend < TkObject
 
 == Class Methods
 

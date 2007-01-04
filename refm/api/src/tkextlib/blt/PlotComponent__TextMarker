@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::TextMarker
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::TextMarker < Tk::BLT::PlotComponent::Marker
 

@@ -1,4 +1,4 @@
-= class Tk::BLT::PlotComponent::Axis
+= class Tk::BLT::PlotComponent::Axis < TkObject
 
 == Class Methods
 

@@ -1,4 +1,4 @@
-= class Tk::BLT::PlotComponent::Pen
+= class Tk::BLT::PlotComponent::Pen < TkObject
 
 == Class Methods
 

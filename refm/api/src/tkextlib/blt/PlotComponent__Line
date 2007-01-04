@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::Line
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::Line < Tk::BLT::PlotComponent::Element
 

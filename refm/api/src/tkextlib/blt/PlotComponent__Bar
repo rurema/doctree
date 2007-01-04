@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::Bar
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::Bar < Tk::BLT::PlotComponent::Element
 

@@ -1,9 +1,8 @@
-= class Tk::BLT::PlotComponent::Element
+= class Tk::BLT::PlotComponent::Element < TkObject
 
 extend Tk
 extend TkItemFontOptkeys
 extend TkItemConfigOptkeys
-
 extend Tk::BLT::PlotComponent::OptKeys
 
 == Class Methods

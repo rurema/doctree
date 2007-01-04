@@ -1,4 +1,4 @@
-= class Tk::BLT::PlotComponent::Postscript
+= class Tk::BLT::PlotComponent::Postscript < TkObject
 
 == Class Methods
 

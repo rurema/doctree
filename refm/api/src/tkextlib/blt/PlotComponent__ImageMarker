@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::ImageMarker
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::ImageMarker < Tk::BLT::PlotComponent::Marker
 

@@ -254,7 +254,7 @@ alias bar
 
 
 
---- element_create(id = nil, keys={})
+--- element_create(id = nil, keys = {})
 
 
 
@@ -386,7 +386,7 @@ alias bar
 
 
 
---- line_create(id = nil, keys={})
+--- line_create(id = nil, keys = {})
 alias bar
 
 
@@ -451,7 +451,7 @@ alias bar
 
 
 
---- marker_create(type, keys={})
+--- marker_create(type, keys = {})
 
 
 
@@ -483,7 +483,7 @@ alias bar
 
 
 
---- pen_create(id = nil, keys={})
+--- pen_create(id = nil, keys = {})
 
 
 
@@ -507,7 +507,7 @@ alias bar
 
 
 
---- postscript_output(file = nil, keys={})
+--- postscript_output(file = nil, keys = {})
 
 
 

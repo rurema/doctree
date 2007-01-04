@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::BitmapMarker
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::BitmapMarker < Tk::BLT::PlotComponent::Marker
 

@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::WindowMarker
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::WindowMarker < Tk::BLT::PlotComponent::Marker
 

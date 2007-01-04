@@ -1,6 +1,2 @@
-= class Tk::BLT::PlotComponent::PolygonMarker
-
-== Class Methods
-
-== Instance Methods
+= class Tk::BLT::PlotComponent::PolygonMarker < Tk::BLT::PlotComponent::Marker
 
