@@ -1,0 +1,42 @@
+= module TkTreatTagFont
+
+== Instance Methods
+
+--- asciifont_configure(ltn, keys = nil)
+
+Alias for #latinfont_configure
+
+--- asciifont_copy(win, wintag = nil)
+
+Alias for #latinfont_copy
+
+--- font_configinfo
+
+
+
+--- font_configure(slot)
+
+alias font font_configinfo
+
+--- font_copy(win, wintag = nil)
+
+
+
+--- kanjifont_configure(knj, keys = nil)
+
+
+
+--- kanjifont_copy(win, wintag = nil)
+
+
+
+--- latinfont_configure(ltn, keys = nil)
+alias asciifont_configure
+
+
+
+--- latinfont_copy(win, wintag = nil)
+alias asciifont_copy
+
+
+
