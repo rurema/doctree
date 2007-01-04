@@ -260,7 +260,7 @@ tk                              okkez
 tk/composite                    okkez           done
 tk/clock                        okkez           done
 tk/optionobj                    okkez           done
-tk/after                        okkez
+tk/after                        okkez           done
 tk/canvas                       moriq           done
 tk/macpkg
 tk/optiondb                     okkez
