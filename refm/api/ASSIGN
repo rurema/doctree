@@ -332,7 +332,7 @@ tkextlib/blt/container          moriq           done
 tkextlib/blt/cutbuffer          moriq           done
 tkextlib/blt/dragdrop           moriq           done
 tkextlib/blt/eps                moriq           done
-tkextlib/blt/graph              moriq
+tkextlib/blt/graph              moriq           done
 tkextlib/blt/htext              moriq
 tkextlib/blt/setup              moriq
 tkextlib/blt/spline             moriq
@@ -350,7 +350,7 @@ tkextlib/blt/tile/radiobutton   moriq
 tkextlib/blt/tile/scrollbar     moriq
 tkextlib/blt/tile/toplevel      moriq
 tkextlib/blt/tree               moriq
-tkextlib/blt/treeview           moriq           moriq
+tkextlib/blt/treeview           moriq           done
 tkextlib/blt/unix_dnd           moriq
 tkextlib/blt/vector             moriq
 tkextlib/blt/watch              moriq
