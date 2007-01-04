@@ -294,10 +294,10 @@ tk/clipboard                    iwadon          done
 tk/menu                         iwadon          done
 tk/text                         iwadon          done
 tk/console                      iwadon          done
-tk/dialog                       iwadon
-tk/button                       iwadon
-tk/panedwindow                  iwadon
-tk/labelframe                   iwadon
+tk/dialog                       iwadon          done
+tk/button                       iwadon          done
+tk/panedwindow                  iwadon          done
+tk/labelframe                   iwadon          done
 tk/toplevel
 tk/font
 tk/encodedstr                   okkez           done
