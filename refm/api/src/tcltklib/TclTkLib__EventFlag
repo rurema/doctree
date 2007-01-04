@@ -1,5 +1,7 @@
 = module TclTkLib::EventFlag
 
+== Constants
+
 --- ALL
 
 --- DONT_WAIT

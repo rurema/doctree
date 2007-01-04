@@ -1,6 +1,8 @@
 #@since 1.8.2
 = module TclTkLib::VarAccessFlag
 
+== Constants
+
 --- APPEND_VALUE
 
 --- GLOBAL_ONLY
