@@ -1,0 +1,186 @@
+= class Tk::BLT::Tree::Node < TkObject
+
+== Class Methods
+
+--- id2obj(tree, id)
+
+
+
+--- new(tree, parent, keys = {})
+
+
+
+== Instance Methods
+
+--- apply(keys = {})
+
+
+
+--- children
+
+
+
+--- copy(parent, keys = {})
+
+
+
+--- copy_to(dest_tree, parent, keys = {})
+
+
+
+--- degree
+
+
+
+--- delete
+
+
+
+--- depth
+
+
+
+--- dump
+
+
+
+--- dump_to_file(file)
+
+
+
+--- exist?(keys = {})
+
+
+
+--- find(keys = {})
+
+
+
+--- find_child(label)
+
+
+
+--- first_child
+
+
+
+--- fullpath
+
+
+
+--- get
+
+
+
+--- get_value(key, default_val = None)
+
+
+
+--- id
+
+
+
+--- index
+
+
+
+--- keys
+
+
+
+--- label(text = nil)
+
+
+
+--- label=(text)
+
+
+
+--- last_child
+
+
+
+--- leaf?
+
+
+
+--- link?
+
+
+
+--- move(dest, keys = {})
+
+
+
+--- next
+
+
+
+--- next_sibling
+
+
+
+--- parent
+
+
+
+--- position
+
+
+
+--- prev_sibling
+
+
+
+--- previous
+
+
+
+--- restore(str, keys = {})
+
+
+
+--- restore_from_file(file, keys = {})
+
+
+
+--- restore_overwrite(str, keys = {})
+
+
+
+--- restore_overwrite_from_file(file, keys = {})
+
+
+
+--- root
+
+
+
+--- root?
+
+
+
+--- set(data)
+
+
+
+--- size
+
+
+
+--- sort(keys = {})
+
+
+
+--- type(key)
+
+
+
+--- unset(*keys)
+
+
+
+--- values(key = None)
+
+
+

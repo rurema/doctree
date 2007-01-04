@@ -1,0 +1,26 @@
+= class Tk::BLT::Tree::Trace < TkObject
+
+== Class Methods
+
+--- id2obj(tree, id)
+
+
+
+--- new(create, tree, node, key, opts, cmd = nil, &b)
+
+
+
+== Instance Methods
+
+--- delete
+
+
+
+--- id
+
+
+
+--- info
+
+
+

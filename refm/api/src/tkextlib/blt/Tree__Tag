@@ -1,0 +1,42 @@
+= class Tk::BLT::Tree::Tag < TkObject
+
+== Class Methods
+
+--- id2obj(tree, id)
+
+
+
+--- new(tree, tag_str = nil)
+
+
+
+== Instance Methods
+
+--- add(*nodes)
+
+
+
+--- delete(*nodes)
+
+
+
+--- forget
+
+
+
+--- id
+
+
+
+--- nodes
+
+
+
+--- set(node)
+
+
+
+--- unset(node)
+
+
+

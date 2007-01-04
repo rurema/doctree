@@ -1,0 +1,26 @@
+= class Tk::BLT::Tree::Notify < TkObject
+
+== Class Methods
+
+--- id2obj(tree, id)
+
+
+
+--- new(create, tree, *args, &b)
+
+
+
+== Instance Methods
+
+--- delete
+
+
+
+--- id
+
+
+
+--- info
+
+
+
