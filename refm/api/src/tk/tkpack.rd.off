@@ -1,185 +1,187 @@
-# $Id: tkpack.rd,v 1.14 2001/03/18 12:39:31 arai Exp $
-# Module TkPack is defined in tk.rb
-=begin
-= TkPack
+require tk
+
+= module TkPack
+
+extend Tk
+include Tk
 
 ウィジェットを配置するためのモジュールです。
 このモジュールにより、ウィジェットは空き領域を順次詰めるように配置されます。
 
-普通、ウィジェットの配置には((<TkWindow#pack>))が使われます。
+普通、ウィジェットの配置には[[m:TkWindow#pack]]が使われます。
 
-== インクルードしているモジュール:
+== Module Functions
 
-((<Tk>))
+--- configure(win1, win2, ... winN, keys=nil)
+--- pack(win1, win2, ... winN, keys=nil)
 
-== extendしているモジュール:
+ウィジェットwin1 ... winNを配置します。
+keysは以下をキーに持つハッシュです。
 
-((<Tk>))
+*"after"=>other
 
-== モジュール関数:
+ウィジェットwinNをotherウィジェットの後に配置しなおします。
+other がまだpackされていなければエラーになります。
 
---- TkPack.configure(win1, win2, ... winN, keys=nil)
-    ウィジェット((|win1|)) ... ((|winN|))を配置します。
-    ((|keys|))は以下をキーに持つハッシュです。
+  require "tk"
+  
+  a = TkButton.new {text 'a'}.pack
+  b = TkButton.new {text 'b'}.pack
+  c = TkButton.new {text 'c'}.pack
+  
+  TkPack.configure b,a, 'after'=>c
+  
+  Tk.mainloop
 
-    *"after"=>((|other|))
+otherは、winNウィジェットとマスターが同じでなければなりま
+せん。
 
-     ウィジェット((|winN|))を((|other|))ウィジェットの後に配置しなおします。
-     ((|other|)) がまだpackされていなければエラーになります。
+  require "tk"
+  
+  frame = TkFrame.new
+  a = TkButton.new        {text 'a'}.pack
+  b = TkButton.new(frame) {text 'b'}.pack
+  c = TkButton.new        {text 'c'}.pack
+  
+  b.pack 'after'=>c
+  
+  Tk.mainloop
+  
+  error--> can't pack .w0000.w0002 inside . (RuntimeError)
 
-       require "tk"
+*"anchor"
+*"before"=>other
 
-       a = TkButton.new {text 'a'}.pack
-       b = TkButton.new {text 'b'}.pack
-       c = TkButton.new {text 'c'}.pack
+配置する位置がotherの前であることを除いて、"after"
+と同じです。
 
-       TkPack.configure b,a, 'after'=>c
+*"expand"
 
-       Tk.mainloop
+trueを指定すると、ウィジェットを配置していない空きの区画を常に
+最小の状態に保つよう、ウィジェットを配置した区画を広げます。(ウィジェッ
+ト自身を大きくするわけではありません。下記"fill"の項目も参照し
+てください)デフォルトはfalseです。
 
-     ((|other|))は、((|winN|))ウィジェットとマスターが同じでなければなりま
-     せん。
+*"fill"
 
-       require "tk"
+配置のために割り当てられた区画がスレーブが要求するサイズよりも大きい
+場合、スレーブを指定した方向に引き延ばします。
 
-       frame = TkFrame.new
-       a = TkButton.new        {text 'a'}.pack
-       b = TkButton.new(frame) {text 'b'}.pack
-       c = TkButton.new        {text 'c'}.pack
+"fill"によって、ウィジェットが常にすき間なく詰められるわけではないこ
+とに注意しなければなりません。
 
-       b.pack 'after'=>c
+例えば、以下の例を実行した後ウィンドウのサイズを縦横に大きくすると
+ウィンドウの下部に空きができます。
 
-       Tk.mainloop
+  require "tk"
+  5.times {|i| TkButton.new {text i }.pack 'fill'=>'both'}
+  Tk.mainloop
 
-       error--> can't pack .w0000.w0002 inside . (RuntimeError)
+これは、ウィジェットを配置する区画を上から切り取っているからです。こ
+の場合、横方向に区画の空きはないので、ウィジェットに割り当てられた区
+画は横方向には伸びますが、縦方向(下部)には見えない空き区画が残されて
+います。ウィンドウを大きくしたときにできた空き領域はまだウィジェット
+が割り当てられていない空きの区画です。
 
-    *"anchor"
-    *"before"=>((|other|))
+以下の例のように区画を左から切り取る('side'=>'left'で指定する)
+ようにすれば、ウィンドウを広げたときには右に空きができます。
 
-     配置する位置が((|other|))の((*前*))であることを除いて、(({"after"}))
-     と同じです。
-    *"expand"
+  require "tk"
+  5.times {|i| TkButton.new {text i }.pack 'fill'=>'both', 'side'=>'left'}
+  Tk.mainloop
 
-     (({true}))を指定すると、ウィジェットを配置していない空きの区画を常に
-     最小の状態に保つよう、ウィジェットを配置した区画を広げます。(ウィジェッ
-     ト自身を大きくするわけではありません。下記(({"fill"}))の項目も参照し
-     てください)デフォルトは(({false}))です。
+このような空きも埋めたい場合にはexpandを使用します。以下の例を
+実行した後ウィンドウを広げるとウィジェットが配置された区画は縦横両方
+向に広げられ、空きの区画は常に見えない状態になります。
 
-    *"fill"
+  require "tk"
+  5.times {|i| TkButton.new {text i }.pack 'fill'=>'both', 'expand'=>true}
+  Tk.mainloop
 
-     配置のために割り当てられた区画がスレーブが要求するサイズよりも大きい
-     場合、スレーブを指定した方向に引き延ばします。
+*"none"
 
-     "fill"によって、ウィジェットが常にすき間なく詰められるわけではないこ
-     とに注意しなければなりません。
+スレーブを引き延ばしません。デフォルト。
+*"x"
 
-     例えば、以下の例を実行した後ウィンドウのサイズを縦横に大きくすると
-     ウィンドウの下部に空きができます。
+横方向にウィジェットを引き延ばします。
+*"y"
 
-       require "tk"
-       5.times {|i| TkButton.new {text i }.pack 'fill'=>'both'}
-       Tk.mainloop
+縦方向にウィジェットを引き延ばします。
+*"both"
 
-     これは、ウィジェットを配置する区画を上から切り取っているからです。こ
-     の場合、横方向に区画の空きはないので、ウィジェットに割り当てられた区
-     画は横方向には伸びますが、縦方向(下部)には見えない空き区画が残されて
-     います。ウィンドウを大きくしたときにできた空き領域はまだウィジェット
-     が割り当てられていない空きの区画です。
+縦横両方向にウィジェットを引き延ばします。
 
-     以下の例のように区画を左から切り取る((({'side'=>'left'}))で指定する)
-     ようにすれば、ウィンドウを広げたときには右に空きができます。
+*"in"=>master
 
-       require "tk"
-       5.times {|i| TkButton.new {text i }.pack 'fill'=>'both', 'side'=>'left'}
-       Tk.mainloop
+masterをマスターウィジェットとしてpackします。
 
-     このような空きも埋めたい場合には(({expand}))を使用します。以下の例を
-     実行した後ウィンドウを広げるとウィジェットが配置された区画は縦横両方
-     向に広げられ、空きの区画は常に見えない状態になります。
+*"ipadx"
+*"ipady"
+*"padx"
+*"pady"
+*"side"
+ *"left"
+ *"right"
+ *"top"
+ *"bottom"
 
-       require "tk"
-       5.times {|i| TkButton.new {text i }.pack 'fill'=>'both', 'expand'=>true}
-       Tk.mainloop
+--- forget(*args)
 
-     *"none"
+argsで指定したウィジェットの配置を取り下げます(非表示になります)。
 
-      スレーブを引き延ばしません。デフォルト。
-     *"x"
+--- info(slave)
 
-      横方向にウィジェットを引き延ばします。
-     *"y"       
+--- propagate(master, bool=None)
 
-      縦方向にウィジェットを引き延ばします。
-     *"both"
+スレーブのpackが完了した後マスターのウィジェット(master)
+の大きさが自動的に変更されるかどうかを真偽値boolで指定します。
 
-      縦横両方向にウィジェットを引き延ばします。
+boolを省略した場合、現在の設定を返します。
 
-    *"in"=>((|master|))
+デフォルトはtrueで、この場合マスターウィジェットは、ウィジェット
+が配置されていない空き区画が見えなくなるよう縮んだり、すべてのスレーブ
+(の割り当てられた区画)のサイズにあわせて大きくなったりします。
 
-     ((|master|))をマスターウィジェットとしてpackします。
+((-このメソッドの用途がわからない。マスターのサイズを固定にしたいのな
+ら、geometry でサイズを指定すればいいんじゃないの？-))
 
-    *"ipadx"
-    *"ipady"
-    *"padx"
-    *"pady"
-    *"side"
-     *"left"
-     *"right"
-     *"top"
-     *"bottom"
+  require "tk"
 
---- TkPack.forget(*args)
-    ((|args|))で指定したウィジェットの配置を取り下げます(非表示になります)。
+  p TkPack.propagate(Tk.root)
+  TkButton.new { text "foo" }.pack
 
---- TkPack.info(slave)
+  top = TkToplevel.new
+  p TkPack.propagate(top)
 
---- TkPack.propagate(master, bool=None)
-    スレーブの(({pack}))が完了した後マスターのウィジェット(((|master|)))
-    の大きさが自動的に変更されるかどうかを真偽値(({bool}))で指定します。
+  TkPack.propagate(top, false)
+  p TkPack.propagate(top)
+  TkButton.new(top) { text "bar" }.pack
 
-    ((|bool|))を省略した場合、現在の設定を返します。
+  Tk.mainloop
 
-    デフォルトは(({true}))で、この場合マスターウィジェットは、ウィジェット
-    が配置されていない空き区画が見えなくなるよう縮んだり、すべてのスレーブ
-    (の割り当てられた区画)のサイズにあわせて大きくなったりします。
+  => true
+     true
+     false
 
-    ((-このメソッドの用途がわからない。マスターのサイズを固定にしたいのな
-    ら、geometry でサイズを指定すればいいんじゃないの？-))
+以下の例では、barが表示されない((-なんで？いつかちゃんと調べること-))
 
-      require "tk"
+  require "tk"
 
-      p TkPack.propagate(Tk.root)
-      TkButton.new { text "foo" }.pack
+  TkFrame.new {
+    TkPack.propagate(self, true)
+    TkLabel.new(self) { text "foo" }.pack
+  }.pack
 
-      top = TkToplevel.new
-      p TkPack.propagate(top)
+  TkFrame.new {
+    TkPack.propagate(self, false)
+    TkLabel.new(self) { text "bar" }.pack
+  }.pack
 
-      TkPack.propagate(top, false)
-      p TkPack.propagate(top)
-      TkButton.new(top) { text "bar" }.pack
+  Tk.mainloop
 
-      Tk.mainloop
+--- slaves(master)
 
-      => true
-         true
-         false
+== Constants
 
-    以下の例では、barが表示されない((-なんで？いつかちゃんと調べること-))
+--- TkCommandNames
 
-      require "tk"
-
-      TkFrame.new {
-        TkPack.propagate(self, true)
-        TkLabel.new(self) { text "foo" }.pack
-      }.pack
-
-      TkFrame.new {
-        TkPack.propagate(self, false)
-        TkLabel.new(self) { text "bar" }.pack
-      }.pack
-
-      Tk.mainloop
-
---- TkPack.slaves(master)
-
-=end

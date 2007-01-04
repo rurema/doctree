@@ -1,7 +1,7 @@
-# $Id: tkradiobutton.rd,v 1.12 2001/03/18 12:39:31 arai Exp $
-# Class TkRadioButton is defined in tk.rb
-=begin
-= TkRadioButton
+require tk
+require tk/button
+
+= class TkRadioButton < TkButton
 
 ラジオボタンウィジェットのクラスです。
 ラジオボタンは、複数の選択項目のうちの1つを選択するウィジェットです。
@@ -14,93 +14,29 @@
   TkRadioButton.new {text "c"; variable v; value 3; deselect; command c; pack}
   Tk.mainloop
 
-== スーパークラス:
+== Instance Methods
 
-((<TkButton>))
+--- deselect
 
-== メソッド:
+ラジオボタンをチェックしない状態にします。
 
---- TkRadioButton#deselect
-    ラジオボタンをチェックしない状態にします。
+--- select
 
---- TkRadioButton#select
-    ラジオボタンをチェックした状態にします。
+ラジオボタンをチェックした状態にします。
 
---- TkRadioButton#variable(v)
-    ラジオボタンの状態とTkVariableオブジェクト((|v|))の値を関連付けます。
-    同じTkVariableオブジェクトに関連付けされたラジオボタンは同じグループに
-    なります。ラジオボタンがチェックされると((|v|))が
-    ((<TkRadioButton#value>))で指定した値になります。
+#@if (version <= "1.8.2")
+--- variable(v)
 
---- TkRadioButton#value(val)
-    ラジオボタンをチェックしたときの値を((|val|))にします。
+ラジオボタンの状態と [[c:TkVariable]] オブジェクトvの値を関連付けます。
+同じTkVariableオブジェクトに関連付けされたラジオボタンは同じグループに
+なります。ラジオボタンがチェックされるとvが
+[[m:TkRadioButton#value]] で指定した値になります。
 
-== 標準オプション:
+#@end
 
-((<TkObject#activebackground>))
+--- get_value
 
-((<TkObject#activeforeground>))
+--- set_value(val)
 
-((<TkObject#anchor>))
+ラジオボタンをチェックしたときの値をvalにします。
 
-((<TkObject#background>))
-
-((<TkObject#bitmap>))
-
-((<TkObject#borderwidth>))
-
-((<TkObject#cursor>))
-
-((<TkObject#disabledforeground>))
-
-((<TkObject#font>))
-
-((<TkObject#foreground>))
-
-((<TkObject#highlightbackground>))
-
-((<TkObject#highlightcolor>))
-
-((<TkObject#highlightthickness>))
-
-((<TkObject#image>))
-
-((<TkObject#justify>))
-
-((<TkObject#padx>))
-
-((<TkObject#pady>))
-
-((<TkObject#relief>))
-
-((<TkObject#takefocus>))
-
-((<TkObject#text>))
-
-### ((<TkObject#textvariable>))
-
-((<TkObject#underline>))
-
-((<TkObject#wraplength>))
-
-== オプション:
-
-### --- TkRadioButton#command
-
---- TkRadioButton#height
-    ((<TkButton#height>))参照
-
---- TkRadioButton#indicatoron
-
---- TkRadioButton#selectcolor
-
---- TkRadioButton#selectimage
-
---- TkRadioButton#state
-### --- TkRadioButton#value
-
-### --- TkRadioButton#variable
-
---- TkRadioButton#width
-    ((<TkButton#width>))参照
-=end

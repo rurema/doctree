@@ -19,7 +19,7 @@ Tclの変数をアクセスするためのクラスです。
 
 --- callback(args)
 
-[[TkVariable#trace]]により登録されたProcオブジェクトを実行します。
+[[m:TkVariable#trace]]により登録されたProcオブジェクトを実行します。
 args は、 [TkVariableのインスタンス, "キー", "操作"]
 である配列です。
 
@@ -27,7 +27,7 @@ args は、 [TkVariableのインスタンス, "キー", "操作"]
 
 値がvalであるTkVariableオブジェクトを生成します。valが
 [[c:Array]] または [[c:Hash]] のオブジェクトである場合、生成されたインス
-タンスは [[c:Tclの配列]] として振る舞います。
+タンスは Tclの配列として振る舞います。
 
 --- new_hash(val = {})
 
@@ -39,7 +39,7 @@ args は、 [TkVariableのインスタンス, "キー", "操作"]
 
 --- value
 
-値を返します。selfが[[c:Tclの配列]]ならば(Tclの配列は連想配列な
+値を返します。selfがTclの配列ならば(Tclの配列は連想配列な
 ので) [[c:Hash]]として返します。それ以外では常に文字列を返します。
 
 --- value=(val)
@@ -59,12 +59,12 @@ args は、 [TkVariableのインスタンス, "キー", "操作"]
 --- [](index)
 
 index番目の値を返します。
-selfは[[c:Tclの配列]]でなければなりません。
+selfはTclの配列でなければなりません。
 
 --- []=(index, val)
 
 index番目の要素をvalにします。
-selfは[[c:Tclの配列]]でなければなりません。
+selfはTclの配列でなければなりません。
 
 --- to_i
 
@@ -141,7 +141,7 @@ TkVariable, String, Integer, Float, Arrayのいずれかです。
 
 --- trace_callback(elem, op)
 
-[[unknown:TkVariable#trace]]により登録されたProcオブジェクトを引数にself,
+[[m:TkVariable#trace]]により登録されたProcオブジェクトを引数にself,
 elem, opを指定して実行します。
 
   require "tk"
@@ -190,7 +190,7 @@ cmdは、引数に、self、空配列、"操作" を渡されて呼ばれ
 
 --- trace_vdelete(opts, cmd)
 
-[[TkVariable#trace]] で設定したcmdを削除します。opts が TkVariable#trace で
+[[m:TkVariable#trace]] で設定したcmdを削除します。opts が TkVariable#trace で
 設定したときと一致しなければ何もしません。
 
 --- trace_vdelete_for_element(elem, opts, cmd)
