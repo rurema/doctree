@@ -266,7 +266,7 @@ tk/macpkg
 tk/optiondb
 tk/validation                   moriq           done
 tk/message
-tk/canvastag
+tk/canvastag                    moriq
 tk/bgerror
 tk/itemfont                     moriq           done
 tk/wm
