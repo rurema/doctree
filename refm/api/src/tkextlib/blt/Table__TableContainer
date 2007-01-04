@@ -1,0 +1,88 @@
+= module Tk::BLT::Table::TableContainer
+
+== Instance Methods
+
+--- blt_table_add(*args)
+
+
+
+--- blt_table_arrange
+
+
+
+--- blt_table_cget(*args)
+
+
+
+--- blt_table_configinfo(*args)
+
+
+
+--- blt_table_configure(*args)
+
+
+
+--- blt_table_current_configinfo(*args)
+
+
+
+--- blt_table_current_itemconfiginfo(*args)
+
+
+
+--- blt_table_delete(*args)
+
+
+
+--- blt_table_extents(item)
+
+
+
+--- blt_table_insert(*args)
+
+
+
+--- blt_table_insert_after(*args)
+
+
+
+--- blt_table_insert_before(*args)
+
+
+
+--- blt_table_itemcget(*args)
+
+
+
+--- blt_table_itemconfiginfo(*args)
+
+
+
+--- blt_table_itemconfigure(*args)
+
+
+
+--- blt_table_iteminfo(item)
+
+
+
+--- blt_table_join(first, last)
+
+
+
+--- blt_table_locate(x, y)
+
+
+
+--- blt_table_save
+
+
+
+--- blt_table_search(*args)
+
+
+
+--- blt_table_split(*args)
+
+
+
