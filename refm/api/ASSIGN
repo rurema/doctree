@@ -257,7 +257,7 @@ thwait                          sheepman        done
 time                            sheepman        done
 timeout                         sheepman        done
 tk                              okkez
-tk/composite                    okkez
+tk/composite                    okkez           done
 tk/clock                        okkez           done
 tk/optionobj                    okkez           done
 tk/after
