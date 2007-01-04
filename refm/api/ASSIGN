@@ -336,7 +336,7 @@ tkextlib/blt/graph              moriq           done
 tkextlib/blt/htext              moriq           done
 tkextlib/blt/setup              moriq           done
 tkextlib/blt/spline             moriq           done
-tkextlib/blt/stripchart         moriq
+tkextlib/blt/stripchart         moriq           done
 tkextlib/blt/table              moriq
 tkextlib/blt/tabnotebook        moriq
 tkextlib/blt/tabset             moriq
