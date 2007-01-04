@@ -314,7 +314,7 @@ tk/mngfocus
 tk/winfo
 tk/label
 tk/grid
-tk/tagfont
+tk/tagfont                      moriq
 tk/place
 tk/xim
 tk/pack                         kimuraw
