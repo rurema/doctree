@@ -10,8 +10,6 @@ include TkComm
 --- INTERP
 
 #@since 1.8.2
---- Tk_OBJECT_TABLE
-
 --- WIDGET_DESTROY_HOOK
 
 #@end

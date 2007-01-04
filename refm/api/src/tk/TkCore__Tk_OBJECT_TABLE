@@ -1,0 +1,13 @@
+#@since 1.8.2
+= class TkCore::Tk_OBJECT_TABLE < Object
+
+== Class Methods
+
+--- new(id)
+
+
+== Instance Methods
+
+--- method_missing(m, *args, &block)
+
+#@end

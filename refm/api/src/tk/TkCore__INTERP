@@ -1,0 +1,16 @@
+= object TkCore::INTERP
+
+INTERP は [[c:TclTkIp]] のインスタンス。
+
+--- __getip
+
+--- cb_entry_class
+
+--- tk_cmd_tbl
+
+--- tk_windows
+
+
+
+
+

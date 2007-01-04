@@ -1,0 +1,218 @@
+#@since 1.8.0
+= module Tk
+extend Tk
+extend Encoding
+include TkCore
+
+
+== Constants
+
+--- AUTO_PATH
+--- JAPANIZED_TK
+#@if(version <= "1.8.0")
+--- LIBRARY
+#@end
+#@since 1.8.1
+--- LIBRARY_PATH
+--- PACKAGE_PATH
+#@end
+#@if(version <= "1.8.0")
+--- PLATFORM
+--- TCL_LIBRARY
+#@end
+#@since 1.8.1
+--- TCL_LIBRARY_PATH
+#@end
+#@since 1.8.2
+--- TCL_MAJOR_VERSION
+--- TCL_MINOR_VERSION
+#@end
+--- TCL_PACKAGE_PATH
+--- TCL_PATCHLEVEL
+--- TCL_PRECISION
+--- TCL_VERSION
+#@if(version <= "1.8.0")
+--- TK_LIBRARY
+#@end
+#@since 1.8.2
+--- TK_MAJOR_VERSION
+--- TK_MINOR_VERSION
+#@end
+--- TK_PATCHLEVEL
+#@if(version <= "1.8.0")
+--- TK_PREV
+#@end
+--- TK_VERSION
+#@since 1.8.6
+--- Tkextlib_RELEASE_DATE
+#@end
+
+
+== Class Methods
+
+--- add_kinsoku(chars, mode = 'both')
+
+#@since 1.8.2
+--- bell(nice = false)
+
+--- bell_on_display(win, nice = false)
+
+--- const_missing(sym)
+
+#@end
+
+--- current_grabs(win = nil)
+
+--- delete_kinsoku(chars, mode = 'both')
+
+--- destroy(*wins)
+
+#@since 1.8.2
+--- errorCode
+
+--- errorInfo
+
+#@end
+
+--- exit
+
+--- focus(display = nil)
+
+--- focus_lastfor(win)
+
+--- focus_next(win)
+
+--- focus_prev(win)
+
+#@since 1.8.2
+--- focus_to(win, force = false)
+
+#@end
+
+--- fromUTF8(str, encoding = nil)
+
+#@since 1.8.2
+--- grid(*args)
+
+--- grid_forget(*args)
+
+#@end
+
+#@since 1.8.3
+--- has_mainwindow?
+
+#@end
+
+#@since 1.8.2
+--- load_tcllibrary(file, pkg_name = None, interp = None)
+
+--- load_tclscript(file, enc = nil)
+
+#@end
+
+--- lower_window(win, below = None)
+
+#@since 1.8.2
+--- pack(*args)
+
+--- pack_forget(*args)
+
+#@end
+
+#@since 1.8.4
+--- pkgconfig_get(mod, key)
+
+--- pkgconfig_list(mod)
+
+#@end
+
+#@since 1.8.2
+--- place(*args)
+
+--- place_forget(*args)
+
+#@end
+
+#@since 1.8.3
+--- raise_window(win, above = None)
+
+#@end
+
+--- show_kinsoku(mode = 'both')
+
+--- strictMotif(mode = None)
+
+#@since 1.8.2
+--- subst_tk_backslash(str)
+
+--- subst_utf_backslash(str)
+
+#@end
+
+#@since 1.8.4
+--- tcl_pkgconfig_get
+
+--- tcl_pkgconfig_list(key)
+
+#@end
+
+#@since 1.8.3
+--- thread_update(idle = nil)
+
+--- thread_update_idletasks
+
+#@end
+
+#@since 1.8.4
+--- tk_pkgconfig_get(key)
+
+--- tk_pkgconfig_list
+
+#@end
+
+--- toUTF8(str, encoding = nil)
+
+#@since 1.8.2
+--- to_backslash_sequence(str)
+
+#@end
+
+#@since 1.8.2
+--- ungrid(*args)
+
+--- unload_tcllibrary(*args)
+
+--- unpack(*args)
+
+--- unplace(*args)
+
+--- update(idle = nil)
+
+--- update_idletasks
+
+--- utf_to_backslash(str)
+
+--- utf_to_backslash_sequence(str)
+
+#@end
+
+== Instance Methods
+
+#@if(version <= "1.8.1")
+--- bell
+--- bell_on_display
+#@end
+--- root
+
+#@since 1.8.2
+--- update(idle = nil)
+
+only for backward compatibility (This never be recommended to use)
+
+#@end
+
+
+#@end
+
+
+
