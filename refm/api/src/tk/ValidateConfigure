@@ -1,0 +1,30 @@
+= module Tk::ValidateConfigure
+
+== Singleton Methods
+
+--- __def_validcmd(scope, klass, keys = nil)
+
+
+
+== Instance Methods
+
+--- __conv_vcmd_on_hash_kv(keys)
+
+
+
+--- __get_validate_key2class
+
+
+
+--- __validation_class_list
+
+
+
+--- __validcmd_call(klass, key, *args, &b)
+
+
+
+--- configure(slot, value = TkComm::None)
+
+
+

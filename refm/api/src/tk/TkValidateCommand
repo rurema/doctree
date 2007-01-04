@@ -1,0 +1,26 @@
+= class TkValidateCommand
+
+extend TkComm
+
+include TkComm
+
+== Class Methods
+
+--- _config_keys
+
+
+
+--- new(cmd = Proc.new, *args)
+
+
+
+== Instance Methods
+
+--- _initialize_for_cb_class(klass, cmd = Proc.new, *args)
+
+
+
+--- to_eval
+
+
+
