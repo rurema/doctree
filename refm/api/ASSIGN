@@ -298,8 +298,8 @@ tk/dialog                       iwadon          done
 tk/button                       iwadon          done
 tk/panedwindow                  iwadon          done
 tk/labelframe                   iwadon          done
-tk/toplevel
-tk/font
+tk/toplevel                     iwadon
+tk/font                         iwadon
 tk/encodedstr                   okkez           done
 tk/namespace
 tk/textimage
