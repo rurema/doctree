@@ -325,10 +325,10 @@ tk/variable                     kimuraw
 tkextlib/ICONS                  moriq           done
 tkextlib/blt                    moriq           done
 tkextlib/blt/barchart           moriq           done
-tkextlib/blt/bitmap             moriq
-tkextlib/blt/busy               moriq
+tkextlib/blt/bitmap             moriq           done
+tkextlib/blt/busy               moriq           done
 tkextlib/blt/component          moriq           done
-tkextlib/blt/container          moriq
+tkextlib/blt/container          moriq           done
 tkextlib/blt/cutbuffer          moriq
 tkextlib/blt/dragdrop           moriq
 tkextlib/blt/eps                moriq
