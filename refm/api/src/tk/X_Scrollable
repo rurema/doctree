@@ -1,0 +1,24 @@
+= module Tk::X_Scrollable
+
+== Instance Methods
+
+--- xscrollbar(bar = nil)
+
+
+
+--- xscrollcommand(cmd = Proc.new)
+
+
+
+--- xview(*index)
+
+
+
+--- xview_moveto(*index)
+
+
+
+--- xview_scroll(*index)
+
+
+
