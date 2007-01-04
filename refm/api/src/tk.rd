@@ -30,4 +30,6 @@ require tk/variable
 #@include(tk/TkTreatFont)
 #@include(tk/TkKernel)
 #@include(tk/TkObject)
+#@include(tk/TkWindow)
+
 

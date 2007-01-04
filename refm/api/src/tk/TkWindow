@@ -1,0 +1,236 @@
+#@since 1.8.0
+= class TkWindow < TkObject
+
+== Constants
+
+--- WidgetClassName
+
+== Class Methods
+
+--- new(parent = nil, keys = nil)
+
+--- database_class
+
+--- database_classname
+
+--- to_eval
+
+
+== Instance Methods
+
+--- bind_class
+
+--- bindtags(taglist = nil)
+
+--- bindtags=(taglist)
+
+--- bindtags_shift
+
+--- bindtags_unshift(tag)
+
+#@since 1.8.1
+--- caret(keys = nil)
+
+#@end
+
+--- colormodel(model = TkUtil::None)
+
+--- command(cmd = nil, &block)
+
+--- database_class
+
+--- database_classname
+
+--- destroy
+
+
+#@since 1.8.1
+--- eventloop_wait_destroy
+--- eventloop_tkwait_destroy
+#@since 1.8.2
+--- eventloop_wait_window
+--- eventloop_tkwait_window
+#@end
+
+#@end
+
+
+#@since 1.8.1
+--- eventloop_wait_visibility
+--- eventloop_wait
+--- eventloop_tkwait
+--- eventloop_tkwait_visibility
+
+#@end
+
+#@since 1.8.2
+--- exist?
+
+#@end
+
+
+--- grab(opt = nil)
+
+--- grab_current
+#@since 1.8.2
+--- current_grab
+#@end
+
+#@since 1.8.1
+--- grab_release
+#@since 1.8.2
+--- release_grab
+#@end
+
+#@end
+
+--- grab_set
+#@since 1.8.2
+--- set_grab
+#@end
+
+
+--- grab_set_global
+#@since 1.8.2
+--- set_global_grab
+#@end
+
+--- grab_status
+
+--- grid(keys = nil)
+
+--- grid_bbox(*args)
+
+--- grid_columnconfig(index, keys)
+#@since 1.8.2
+--- grid_columnconfigure(index, keys)
+#@end
+
+--- grid_columnconfiginfo(index, slot = nil)
+
+
+--- grid_config(slot, value = TkUtil::None)
+#@since 1.8.2
+--- grid_configure(slot, value = TkUtil::None)
+#@end
+
+
+--- grid_forget
+--- ungrid
+
+--- grid_in(target, kers = nil)
+
+--- grid_info
+
+--- grid_location(x, y)
+
+--- grid_propagate(mode = TkUtil::None)
+
+--- grid_remove
+
+--- grid_rowconfig(index, keys)
+#@since 1.8.2
+--- grid_rowconfigure(index, keys)
+#@end
+
+--- grid_rowconfiginfo(index, slot = nil)
+
+
+--- grid_size
+
+--- grid_slaves(args)
+
+--- lower(below = TkUtil::None)
+#@since 1.8.3
+--- lower_window(below = TkUtil::None)
+#@end
+
+
+--- pack(keys = nil)
+
+--- pack_config(slot, value = TkUtil::None)
+#@since 1.8.2
+--- pack_configure(slot, value = TkUtil::None)
+#@end
+
+
+--- pack_forget
+--- unpack
+
+--- pack_in(target, keys = nil)
+
+--- pack_info
+
+--- pack_propagate(mode = TkUtil::None)
+
+--- pack_slaves
+
+--- place(keys)
+
+--- place_config(slot, value = TkUtil::None)
+#@since 1.8.2
+--- place_configure(slot, value = TkUtil::None)
+#@end
+
+
+--- place_configinfo(slot = nil)
+
+
+--- place_forget
+--- unplace
+
+--- place_in(target, keys = nil)
+
+--- place_info
+
+--- place_slaves
+
+--- raise(above = TkUtil::None)
+#@since 1.8.3
+--- raise_window(above = TkUtil::None)
+#@end
+
+--- focus(force = false)
+#@since 1.8.2
+--- set_focus(force = false)
+set_focus¤¬ËÜÂÎ
+#@end
+
+#@since 1.8.1
+--- thread_wait_destroy
+--- thread_tkwait_destroy
+#@since 1.8.2
+--- thread_tkwait_window
+--- thread_wait_window
+#@end
+
+
+#@end
+
+#@since 1.8.1
+--- thread_wait_visibility
+--- thread_wait
+--- thread_tkwait
+--- thread_tkwait_visibility
+
+#@end
+
+--- wait_destroy(on_thread = true)
+#@since 1.8.1
+--- tkwait_destroy(on_thread = true)
+#@end
+#@since 1.8.2
+--- wait_window(on_thread = true)
+--- tkwait_window(on_thread = true)
+#@end
+
+
+--- wait_visibility(on_thread = true)
+--- wait(on_thread = true)
+#@since 1.8.1
+--- tkwait(on_thread = true)
+#@end
+
+
+
+#@end
