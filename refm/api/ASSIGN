@@ -291,9 +291,9 @@ tk/txtwin_abst                  iwadon          done
 tk/msgcat                       iwadon          done
 tk/kinput                       iwadon          done
 tk/clipboard                    iwadon          done
-tk/menu                         iwadon
-tk/text                         iwadon
-tk/console                      iwadon
+tk/menu                         iwadon          done
+tk/text                         iwadon          done
+tk/console                      iwadon          done
 tk/dialog
 tk/button
 tk/panedwindow
