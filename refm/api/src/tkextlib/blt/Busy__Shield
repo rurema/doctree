@@ -1,0 +1,12 @@
+= class Tk::BLT::Busy::Shield < TkWindow
+
+== Class Methods
+
+--- new(win)
+
+
+
+--- shield_path(win)
+
+
+
