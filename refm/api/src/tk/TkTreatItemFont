@@ -1,0 +1,49 @@
+= module TkTreatItemFont
+
+include TkItemFontOptkeys
+
+== Instance Methods
+
+--- asciitagfont_configure(tagOrId, ltn, keys = nil)
+
+Alias for #latintagfont_configure
+
+--- asciitagfont_copy(tagOrId, win, wintag = nil, winkey = nil, targetkey = nil)
+
+Alias for #latintagfont_copy
+
+--- kanjifont_copy(tagOrId, win, wintag = nil, winkey = nil, targetkey = nil)
+
+
+
+--- kanjitagfont_configure(tagOrId, knj, keys = nil)
+
+
+
+--- latintagfont_configure(tagOrId, ltn, keys = nil)
+alias asciitagfont_configure
+
+
+
+--- latintagfont_copy(tagOrId, win, wintag = nil, winkey = nil, targetkey = nil)
+alias asciitagfont_copy
+
+
+
+--- tagfont_configinfo(tagOrId, key = nil)
+alias tagfontobj
+
+
+
+--- tagfont_configure(tagOrId, slot)
+
+
+
+--- tagfont_copy(tagOrId, win, wintag = nil, winkey = nil, targetkey = nil)
+
+
+
+--- tagfontobj(tagOrId, key = nil)
+
+Alias for #tagfont_configinfo
+
