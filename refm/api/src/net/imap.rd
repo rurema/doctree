@@ -1,33 +1,5 @@
-= class Net::IMAP < Object
-
-Copyright (C) 2000  Shugo Maeda <shugo@ruby-lang.org>
-
-This library is distributed under the terms of the Ruby license.
-You can freely distribute/modify this library.
-
-  * [[unknown:"net/imap"/Net::IMAP]]
-  * [[unknown:"net/imap"/Net::IMAP::ContinuationRequest]]
-  * [[unknown:"net/imap"/Net::IMAP::UntaggedResponse]]
-  * [[unknown:"net/imap"/Net::IMAP::TaggedResponse]]
-  * [[unknown:"net/imap"/Net::IMAP::ResponseText]]
-  * [[unknown:"net/imap"/Net::IMAP::ResponseCode]]
-  * [[unknown:"net/imap"/Net::IMAP::MailboxList]]
-  * [[unknown:"net/imap"/Net::IMAP::MailboxQuota]]
-  * [[unknown:"net/imap"/Net::IMAP::MailboxQuotaRoot]]
-  * [[unknown:"net/imap"/Net::IMAP::MailboxACLItem]]
-  * [[unknown:"net/imap"/Net::IMAP::StatusData]]
-  * [[unknown:"net/imap"/Net::IMAP::FetchData]]
-  * [[unknown:"net/imap"/Net::IMAP::Envelope]]
-  * [[unknown:"net/imap"/Net::IMAP::Address]]
-  * [[unknown:"net/imap"/Net::IMAP::ContentDisposition]]
-  * [[unknown:"net/imap"/Net::IMAP::BodyTypeBasic]]
-  * [[unknown:"net/imap"/Net::IMAP::BodyTypeText]]
-  * [[unknown:"net/imap"/Net::IMAP::BodyTypeMessage]]
-  * [[unknown:"net/imap"/Net::IMAP::BodyTypeMultipart]]
-  * [[unknown:"net/imap"/References]]
-
 Net::IMAP implements Internet Message Access Protocol (IMAP) clients.
-(The protocol is described in [[unknown:"net/imap"/[IMAP]]].)
+The IMAP protocol is described in [[RFC:2060]].
 
 Net::IMAP supports multiple commands. For example,
 
@@ -40,7 +12,6 @@ Net::IMAP supports multiple commands. For example,
   imap.disconnect
 
 This script invokes the FETCH command and the SEARCH command concurrently.
-
 
 === References
 
@@ -77,6 +48,12 @@ This script invokes the FETCH command and the SEARCH command concurrently.
   * [RSSL]
     http://savannah.gnu.org/projects/rubypki
 
+
+
+= class Net::IMAP < Object
+
+IMAP access class.
+
 == Class Methods
 
 --- new(host, port = 143, usessl = false, certs = nil, verify = false)
@@ -98,9 +75,10 @@ Returns the debug mode.
 Sets the debug mode.
 
 --- add_authenticator(auth_type, authenticator)
-      Adds an authenticator for Net::IMAP#authenticate.
 
-=== Methods
+Adds an authenticator for Net::IMAP#authenticate.
+
+== Methods
 
 --- greeting
 
@@ -361,6 +339,7 @@ If this mailbox exists, an array containing objects of
 Adds a response handler.
 
 ex).
+
   imap.add_response_handler do |resp|
     p resp
   end
@@ -372,6 +351,8 @@ Removes the response handler.
 --- response_handlers
 
 Returns all response handlers.
+
+
 
 = class Net::IMAP::ContinuationRequest < Struct
 
@@ -393,6 +374,8 @@ Returns the data (Net::IMAP::ResponseText).
 --- raw_data
 
 Returns the raw data string.
+
+
 
 = class Net::IMAP::UntaggedResponse < Struct
 
@@ -420,7 +403,9 @@ a [[unknown:"net/imap"/Net::IMAP::MailboxList]] object....
 
 Returns the raw data string.
 
-= class Net::IMAP::TaggedResponse < struct
+
+
+= class Net::IMAP::TaggedResponse < Struct
 
 Net::IMAP::TaggedResponse represents tagged responses.
 
@@ -452,6 +437,8 @@ Returns the data. See [[unknown:"net/imap"/Net::IMAP::ResponseText]].
 
 Returns the raw data string.
 
+
+
 = class Net::IMAP::ResponseText < Struct
 
 Net::IMAP::ResponseText represents texts of responses.
@@ -469,6 +456,8 @@ Returns the response code. See [[unknown:"net/imap"/Net::IMAP::ResponseCode]].
 --- text
 
 Returns the text.
+
+
 
 = class Net::IMAP::ResponseCode < Struct
 
@@ -490,6 +479,8 @@ Returns the name such as "ALERT", "PERMANENTFLAGS", "UIDVALIDITY"....
 --- data
 
 Returns the data if it exists.
+
+
 
 = class Net::IMAP::MailboxList < Struct
 
@@ -514,6 +505,8 @@ Returns the hierarchy delimiter
 --- name
 
 Returns the mailbox name.
+
+
 
 = class Net::IMAP::MailboxQuota < Struct
 
@@ -542,6 +535,8 @@ Current storage usage of mailbox.
 
 Quota limit imposed on mailbox.
 
+
+
 = class Net::IMAP::MailboxQuotaRoot < Struct
 
 Net::IMAP::MailboxQuotaRoot represents part of the GETQUOTAROOT
@@ -560,6 +555,8 @@ The mailbox with the associated quota.
 
 Zero or more quotaroots that effect the quota on the
 specified mailbox.
+
+
 
 = class Net::IMAP::MailboxACLItem < Struct
 
@@ -584,6 +581,8 @@ that was specified with the getacl command.
 The access rights the indicated user has to the
 mailbox.
 
+
+
 = class Net::IMAP::StatusData < Object
 
 Net::IMAP::StatusData represents contents of the STATUS response.
@@ -599,10 +598,11 @@ Returns the mailbox name.
 Returns a hash. Each key is one of "MESSAGES", "RECENT", "UIDNEXT",
 "UIDVALIDITY", "UNSEEN". Each value is a number.
 
+
+
 = class Net::IMAP::FetchData < Object
 
 Net::IMAP::FetchData represents contents of the FETCH response.
-
 
 == Instance Methods
 
@@ -645,6 +645,8 @@ The current data items are:
       : UID
           A number expressing the unique identifier of the message.
 
+
+
 = class Net::IMAP::Envelope < Struct
 
 Net::IMAP::Envelope represents envelope structures of messages.
@@ -661,27 +663,27 @@ Retunns a string that represents the subject.
 
 --- from
 
-Retunns an array of [[unknown:"net/imap"/Net::IMAP::Address]] that represents the from.
+Retunns an array of [[c:Net::IMAP::Address]] that represents the from.
 
 --- sender
 
-Retunns an array of [[unknown:"net/imap"/Net::IMAP::Address]] that represents the sender.
+Retunns an array of [[c:Net::IMAP::Address]] that represents the sender.
 
 --- reply_to
 
-Retunns an array of [[unknown:"net/imap"/Net::IMAP::Address]] that represents the reply-to.
+Retunns an array of [[c:Net::IMAP::Address]] that represents the reply-to.
 
 --- to
 
-Retunns an array of [[unknown:"net/imap"/Net::IMAP::Address]] that represents the to.
+Retunns an array of [[c:Net::IMAP::Address]] that represents the to.
 
 --- cc
 
-Retunns an array of [[unknown:"net/imap"/Net::IMAP::Address]] that represents the cc.
+Retunns an array of [[c:Net::IMAP::Address]] that represents the cc.
 
 --- bcc
 
-Retunns an array of [[unknown:"net/imap"/Net::IMAP::Address]] that represents the bcc.
+Retunns an array of [[c:Net::IMAP::Address]] that represents the bcc.
 
 --- in_reply_to
 
@@ -691,30 +693,34 @@ Retunns a string that represents the in-reply-to.
 
 Retunns a string that represents the message-id.
 
+
+
 = class Net::IMAP::Address < Struct
 
-[[unknown:"net/imap"/Net::IMAP::Address]] represents electronic mail addresses.
+Net::IMAP::Address represents electronic mail addresses.
 
 == Instance Methods
 
 --- name
 
-Returns the phrase from [[unknown:"net/imap"/[RFC-822]]] mailbox.
+Returns the phrase from [[RFC:822]] mailbox.
 
 --- route
 
-Returns the route from [[unknown:"net/imap"/[RFC-822]]] route-addr.
+Returns the route from [[RFC:822]] route-addr.
 
 --- mailbox
 
-nil indicates end of [[unknown:"net/imap"/[RFC-822]]] group.
-If non-nil and host is nil, returns [[unknown:"net/imap"/[RFC-822]]] group name.
-Otherwise, returns [[unknown:"net/imap"/[RFC-822]]] local-part
+nil indicates end of [[RFC:822]] group.
+If non-nil and host is nil, returns [[RFC:822]] group name.
+Otherwise, returns [[RFC:822]] local-part
 
 --- host
 
-nil indicates [[unknown:"net/imap"/[RFC-822]]] group syntax.
-Otherwise, returns [[unknown:"net/imap"/[RFC-822]]] domain name.
+nil indicates [[RFC:822]] group syntax.
+Otherwise, returns [[RFC:822]] domain name.
+
+
 
 = class Net::IMAP::ContentDisposition < Struct
 
@@ -731,20 +737,21 @@ Returns the disposition type.
 Returns a hash that represents parameters of the Content-Disposition
 field.
 
+
+
 = class Net::IMAP::BodyTypeBasic < Struct
 
 Net::IMAP::BodyTypeBasic represents basic body structures of messages.
-
 
 == Instance Methods
 
 --- media_type
 
-Returns the content media type name as defined in [[unknown:"net/imap"/[MIME-IMB]]].
+Returns the content media type name as defined in [MIME-IMB].
 
 --- subtype
 
-Returns the content subtype name as defined in [[unknown:"net/imap"/[MIME-IMB]]].
+Returns the content subtype name as defined in [MIME-IMB].
 
 --- param
 
@@ -753,17 +760,15 @@ Returns a hash that represents parameters as defined in
 
 --- content_id
 
-Returns a string giving the content id as defined in [[unknown:"net/imap"/[MIME-IMB]]].
+Returns a string giving the content id as defined in [MIME-IMB].
 
 --- description
 
-Returns a string giving the content description as defined in
-[[unknown:"net/imap"/[MIME-IMB]]].
+Returns a string giving the content description as defined in [MIME-IMB].
 
 --- encoding
 
-Returns a string giving the content transfer encoding as defined in
-[[unknown:"net/imap"/[MIME-IMB]]].
+Returns a string giving the content transfer encoding as defined in [MIME-IMB].
 
 --- size
 
@@ -771,11 +776,11 @@ Returns a number giving the size of the body in octets.
 
 --- md5
 
-Returns a string giving the body MD5 value as defined in [[unknown:"net/imap"/[MD5]]].
+Returns a string giving the body MD5 value as defined in [MD5].
 
 --- disposition
 
-Returns a [[unknown:"net/imap"/Net::IMAP::ContentDisposition]] object giving
+Returns a [[c:Net::IMAP::ContentDisposition]] object giving
 the content disposition.
 
 --- language
@@ -791,6 +796,8 @@ Returns extension data.
 
 Returns false.
 
+
+
 = class Net::IMAP::BodyTypeText < Struct
 
 Net::IMAP::BodyTypeText represents TEXT body structures of messages.
@@ -801,7 +808,9 @@ Net::IMAP::BodyTypeText represents TEXT body structures of messages.
 
 Returns the size of the body in text lines.
 
-And Net::IMAP::BodyTypeText has all methods of [[unknown:"net/imap"/Net::IMAP::BodyTypeBasic]].
+And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
+
+
 
 = class Net::IMAP::BodyTypeMessage < Struct
 
@@ -811,13 +820,15 @@ Net::IMAP::BodyTypeMessage represents MESSAGE/RFC822 body structures of messages
 
 --- envelope
 
-Returns a [[unknown:"net/imap"/Net::IMAP::Envelope]] giving the envelope structure.
+Returns a [[c:Net::IMAP::Envelope]] giving the envelope structure.
 
 --- body
 
 Returns an object giving the body structure.
 
-And Net::IMAP::BodyTypeMessage has all methods of [[unknown:"net/imap"/Net::IMAP::BodyTypeText]].
+And Net::IMAP::BodyTypeMessage has all methods of [[c:Net::IMAP::BodyTypeText]].
+
+
 
 = class Net::IMAP::BodyTypeMultipart < Struct
 
@@ -825,11 +836,11 @@ And Net::IMAP::BodyTypeMessage has all methods of [[unknown:"net/imap"/Net::IMAP
 
 --- media_type
 
-Returns the content media type name as defined in [[unknown:"net/imap"/[MIME-IMB]]].
+Returns the content media type name as defined in [MIME-IMB].
 
 --- subtype
 
-Returns the content subtype name as defined in [[unknown:"net/imap"/[MIME-IMB]]].
+Returns the content subtype name as defined in [MIME-IMB].
 
 --- parts
 
@@ -838,11 +849,11 @@ Returns multiple parts.
 --- param
 
 Returns a hash that represents parameters as defined in
-[[unknown:"net/imap"/[MIME-IMB]]].
+[MIME-IMB].
 
 --- disposition
 
-Returns a [[unknown:"net/imap"/Net::IMAP::ContentDisposition]] object giving
+Returns a [[c:Net::IMAP::ContentDisposition]] object giving
 the content disposition.
 
 --- language

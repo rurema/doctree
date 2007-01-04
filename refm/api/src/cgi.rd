@@ -656,7 +656,8 @@ ENV['HTTP_USER_AGENT']
 --- to_a
 --- to_ary
 
-= class CGI::Cookie < DelegateClass(Array)
+#@# = class CGI::Cookie < DelegateClass(Array)
+= class CGI::Cookie < Array
 
 == Class Methods
 
