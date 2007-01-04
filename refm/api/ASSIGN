@@ -259,7 +259,7 @@ timeout                         sheepman        done
 tk                              okkez
 tk/composite                    okkez
 tk/clock                        okkez           done
-tk/optionobj                    okkez
+tk/optionobj                    okkez           done
 tk/after
 tk/canvas                       moriq           done
 tk/macpkg
