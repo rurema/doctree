@@ -1,9 +1,8 @@
 
-= class TclTkIp
+= reopen TclTkIp
 
 == Instance Methods
 
---- _eval(cmd)
 --- __eval(cmd)
 #@since 1.8.2
 --- _eval_with_enc(cmd)
@@ -19,38 +18,13 @@
 
 #@end
 
---- _fromUTF8(str, encoding = nil)
 #@since 1.8.2
 --- __fromUTF8(str, encoding = nil)
 
 #@end
 
---- _toUTF8(str, encoding = nil)
 #@since 1.8.2
 --- __toUTF8(str, encoding = nil)
-
-#@end
-
-#@since 1.8.2
---- _conv_listelement(src)
-
---- _create_console
-
-#@end
-
-#@since 1.8.2
---- _get_global_var(var_name)
-
---- _get_global_var2(var_name, index)
-
---- _get_variable(var_name, flag)
-
---- _get_variable2(var_name, index, flag)
-
-#@end
-
-#@since 1.8.4
---- _immediate_invoke
 
 #@end
 
@@ -59,114 +33,6 @@
 
 #@end
 
-#@since 1.8.5
---- _make_menu_embeddable(menu_path)
-
-#@end
-
-#@since 1.8.2
---- _merge_tklist
-
-#@end
-
---- _return_value
-
-#@since 1.8.2
---- _set_global_var(var_name, value)
-
---- _set_global_var2(var_name, index, value)
-
---- _set_variable(var_name, value, flag)
-
---- _set_variable(var_name, index, value, flag)
-
-#@end
-
-#@since 1.8.2
---- _split_tklist(list_str)
-
-#@end
-
-#@since 1.8.1
---- _thread_tkwait(mode, target)
-
---- _thread_vwait(var)
-
-#@end
-
-#@since 1.8.2
---- _unset_global_var(var_name)
-
---- _unset_global_var2(var_name, index)
-
---- _unset_variable(var_name, flag)
-
---- _unset_variable2(var_name, index, flag)
-
-#@end
-
-#@since 1.8.2
---- allow_ruby_exit=(val)
-
---- allow_ruby_exit?
-
-#@end
-
---- create_slave
-
---- delete
-
---- deleted?
-
---- do_one_event
-
 --- encoding
 
 --- encoding=(encoding)
-
---- get_eventloop_tick
-
---- get_eventloop_weight
-
---- get_no_event_wait
-
-
-#@since 1.8.3
---- has_mainwindow?
-
-#@end
-
-#@since 1.8.2
---- invalid_namespace?
-
-#@end
-
---- mainloop
-
---- mainloop_abort_on_exception
-
---- mainloop_abort_on_exception=(val)
-
---- mainloop_watchdog
-
---- make_safe
-
---- restart
-
---- safe?
-
---- set_eventloop_tick(tick)
-
---- set_eventloop_weight(loop_max, no_event)
-
-#@since 1.8.2
---- set_max_block_time(time)
-
-#@end
-
---- set_no_event_wait(wait)
-
-#@since 1.8.4
---- slave_of?(master)
-
-#@end
