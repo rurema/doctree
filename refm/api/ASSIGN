@@ -311,7 +311,7 @@ tk/palette
 tk/bindtag
 tk/entry
 tk/mngfocus
-tk/winfo                        okkez
+tk/winfo                        okkez           done
 tk/label                        okkez
 tk/grid                         kimuraw         done
 tk/tagfont                      moriq           done
