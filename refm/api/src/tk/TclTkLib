@@ -1,0 +1,19 @@
+= reopen TclTkLib
+
+== Class Methods
+
+--- _encoding
+
+オリジナルの[[m:TclTkLib.encoding]]
+
+--- _encoding=(name)
+
+オリジナルの[[m:TclTkLib.encoding=]]
+
+--- encoding
+
+[[m:TkCore::INTERP.encoding]]を呼び出す
+
+--- encoding=(name)
+
+[[m:TkCore::INTERP.encoding=]]を呼び出す

@@ -27,6 +27,8 @@ require tk/variable
 #@include(tk/TkCore__INTERP)
 #@include(tk/Tk)
 #@include(tk/TkBindCore)
+#@include(tk/TkConfigMethod)
+#@include(tk/TclTkLib)
 #@include(tk/TkTreatFont)
 #@include(tk/TkKernel)
 #@include(tk/TkObject)
