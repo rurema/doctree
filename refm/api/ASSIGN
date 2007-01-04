@@ -279,7 +279,7 @@ tk/scale
 tk/winpkg
 tk/root
 tk/spinbox
-tk/itemconfig
+tk/itemconfig                   moriq
 tk/selection
 tk/checkbutton
 tk/listbox                      iwadon
