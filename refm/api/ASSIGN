@@ -331,7 +331,7 @@ tkextlib/blt/component          moriq           done
 tkextlib/blt/container          moriq           done
 tkextlib/blt/cutbuffer          moriq           done
 tkextlib/blt/dragdrop           moriq           done
-tkextlib/blt/eps                moriq
+tkextlib/blt/eps                moriq           done
 tkextlib/blt/graph              moriq
 tkextlib/blt/htext              moriq
 tkextlib/blt/setup              moriq
