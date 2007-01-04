@@ -350,7 +350,7 @@ tkextlib/blt/tile/radiobutton   moriq
 tkextlib/blt/tile/scrollbar     moriq
 tkextlib/blt/tile/toplevel      moriq
 tkextlib/blt/tree               moriq
-tkextlib/blt/treeview           moriq
+tkextlib/blt/treeview           moriq           moriq
 tkextlib/blt/unix_dnd           moriq
 tkextlib/blt/vector             moriq
 tkextlib/blt/watch              moriq
