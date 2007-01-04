@@ -324,7 +324,7 @@ tk/timer                        kimuraw
 tk/variable                     kimuraw
 tkextlib/ICONS                  moriq           done
 tkextlib/blt                    moriq           done
-tkextlib/blt/barchart           moriq
+tkextlib/blt/barchart           moriq           done
 tkextlib/blt/bitmap             moriq
 tkextlib/blt/busy               moriq
 tkextlib/blt/component          moriq           done
