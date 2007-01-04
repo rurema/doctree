@@ -306,7 +306,7 @@ tk/textimage
 tk/frame
 tk/event
 tk/image
-tk/scrollable                   moriq
+tk/scrollable                   moriq           done
 tk/palette
 tk/bindtag
 tk/entry
