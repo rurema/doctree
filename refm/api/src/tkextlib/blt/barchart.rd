@@ -4,10 +4,10 @@ require tk
 require tkextlib/blt
 require tkextlib/blt/component
 
-= class Tk::BLT::Barchart
+= class Tk::BLT::Barchart < TkWindow
 
-include PlotComponent
-include GraphCommand
+include Tk::BLT::PlotComponent
+include Tk::BLT::GraphCommand
 
 == Instance Methods
 
@@ -32,6 +32,7 @@ include GraphCommand
 
 
 --- transform(x, y)
+
 
 
 
