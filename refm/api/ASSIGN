@@ -313,10 +313,10 @@ tk/entry
 tk/mngfocus
 tk/winfo
 tk/label
-tk/grid
+tk/grid                         kimuraw
 tk/tagfont                      moriq           done
-tk/place
-tk/xim
+tk/place                        kimuraw
+tk/xim                          kimuraw
 tk/pack                         kimuraw         done
 tk/radiobutton                  kimuraw         done
 tk/package                      kimuraw         done
