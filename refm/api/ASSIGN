@@ -283,7 +283,7 @@ tk/itemconfig                   moriq           done
 tk/selection
 tk/checkbutton
 tk/listbox                      iwadon          done
-tk/texttag                      iwadon
+tk/texttag                      iwadon          done
 tk/textwindow
 tk/textmark
 tk/menubar
