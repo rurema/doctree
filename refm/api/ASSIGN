@@ -333,7 +333,7 @@ tkextlib/blt/cutbuffer          moriq           done
 tkextlib/blt/dragdrop           moriq           done
 tkextlib/blt/eps                moriq           done
 tkextlib/blt/graph              moriq           done
-tkextlib/blt/htext              moriq
+tkextlib/blt/htext              moriq           done
 tkextlib/blt/setup              moriq
 tkextlib/blt/spline             moriq
 tkextlib/blt/stripchart         moriq
