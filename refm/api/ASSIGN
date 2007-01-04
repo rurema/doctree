@@ -268,7 +268,7 @@ tk/validation                   moriq           done
 tk/message
 tk/canvastag
 tk/bgerror
-tk/itemfont
+tk/itemfont                     moriq
 tk/wm
 tk/autoload                     okkez           done
 tk/scrollbar
