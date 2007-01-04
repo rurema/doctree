@@ -1,0 +1,25 @@
+#@since 1.8.1
+
+= class TkFont::DescendantFont < Object
+
+== Class Methods
+
+--- new(compound, type)
+
+== Instance Methods
+
+--- dup
+
+--- clone
+
+--- to_eval
+
+--- font
+
+--- [](slot)
+
+--- []=(slot, value)
+
+--- method_missing(id, *args)
+
+#@end

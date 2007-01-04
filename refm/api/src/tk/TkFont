@@ -1,0 +1,179 @@
+= class TkFont < Object
+extend TkCore
+extend TkFont::CoreMethods
+include Tk
+extend TkFont::CoreMethods
+
+== Class Methods
+
+#@since 1.8.3
+--- actual(fnt, option = nil)
+
+--- actual_displayof(fnt, win, option = nil)
+
+--- configure(fnt, slot, value = TkUtil::None)
+
+--- configinfo(fnt, slot = nil)
+
+--- current_configinfo(fnt, slot = nil)
+
+--- measure(fnt, text)
+
+--- measure_displayof(fnt, win, text)
+
+--- metrics(fnt, option = nil)
+
+--- metrics_displayof(fnt, win, option = nil)
+#@end
+
+--- families(win = nil)
+
+--- names
+
+--- create_copy(font)
+
+--- get_obj(name)
+
+--- init_widget_font(pathname, *args)
+
+--- used_on(path = nil)
+
+--- failsafe(font)
+
+--- new(ltn = nil, knj = nil, keys = nil)
+
+== Instance Methods
+
+#@since 1.8.3
+--- inspect
+#@end
+
+--- method_missing(id, *args)
+
+--- call_font_configure(path, *args)
+
+--- used
+
+--- id
+
+--- to_eval
+
+--- font
+#@since 1.8.1
+--- font_id
+#@end
+
+#@since 1.8.1
+--- latin_font_id
+#@end
+
+--- latin_font
+#@since 1.8.1
+--- latinfont
+#@end
+--- ascii_font
+#@since 1.8.1
+--- asciifont
+#@end
+
+#@since 1.8.1
+--- kanji_font_id
+#@end
+
+--- kanji_font
+#@since 1.8.1
+--- kanjifont
+#@end
+
+--- actual(option = nil)
+
+--- actual_displayof(win, option = nil)
+
+--- latin_actual(option = nil)
+--- ascii_actual(option = nil)
+
+--- latin_actual_displayof(win, option = nil)
+--- ascii_actual_displayof(win, option = nil)
+
+--- kanji_actual(option = nil)
+
+--- kanji_actual_displayof(win, option = nil)
+
+--- [](slot)
+
+--- []=(slot, val)
+
+--- configure(slot, value = TkUtil::None)
+
+--- configinfo(slot = nil)
+
+#@since 1.8.2
+--- current_configinfo(slot = nil)
+#@end
+
+--- delete
+
+--- latin_configure(slot, value = TkUtil::None)
+--- ascii_configure(slot, value = TkUtil::None)
+
+--- latin_configinfo(slot = nil)
+--- ascii_configinfo(slot = nil)
+
+--- kanji_configure(slot, value = TkUtil::None)
+
+--- kanji_configinfo(slot = nil)
+
+--- replace(ltn, knj = TkUtil::None)
+
+--- latin_replace(ltn)
+--- ascii_replace(ltn)
+
+--- kanji_replace(knj)
+
+--- measure(text)
+
+--- measure_displayof(win, text)
+
+--- metrics(option = nil)
+
+--- metrics_displayof(win, option = nil)
+
+--- latin_metrics(option = nil)
+--- ascii_metrics(option = nil)
+
+--- latin_metrics_displayof(win, option = nil)
+
+--- kanji_metrics(option = nil)
+
+--- kanji_metrics_displayof(win, option = nil)
+
+--- reset_pointadjust
+
+#@since 1.8.1
+#@if (version <= "1.8.3")
+--- clone
+
+--- dup
+#@end
+#@end
+
+
+== Constants
+
+--- TkCommandNames
+
+--- Tk_FontID
+
+--- Tk_FontNameTBL
+
+--- Tk_FontUseTBL
+
+#@since 1.8.2
+--- OptionType
+
+--- MetricType
+#@end
+
+--- DEFAULT_LATIN_FONT_NAME
+
+--- DEFAULT_KANJI_FONT_NAME
