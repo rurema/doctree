@@ -12,7 +12,3 @@ tk
 
  * [[unknown:Ruby(('/'))Tk FAQ|RubyTkFAQ]]
  * Rubyist Magazine - 0003-Ruby/Tk ¤ÎÆ°¸þ [[url:http://jp.rubyist.net/magazine/?0003-RubyTkMovement]]
-
-#@since 1.8.2
-#@include(tk/listbox.rd)
-#@end
