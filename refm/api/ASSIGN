@@ -284,8 +284,8 @@ tk/selection
 tk/checkbutton
 tk/listbox                      iwadon          done
 tk/texttag                      iwadon          done
-tk/textwindow
-tk/textmark
+tk/textwindow                   iwadon
+tk/textmark                     iwadon
 tk/menubar
 tk/txtwin_abst
 tk/msgcat
