@@ -224,11 +224,11 @@ rexml/source                    iwadon          done
 rexml/streamlistener            iwadon          done
 rexml/syncenumerator            iwadon          done
 rexml/text                      iwadon          done
-rexml/validation                iwadon
-rexml/xmldecl                   iwadon
-rexml/xmltokens                 iwadon
-rexml/xpath                     iwadon
-rexml/xpath_parser              iwadon
+rexml/validation                iwadon          done
+rexml/xmldecl                   iwadon          done
+rexml/xmltokens                 iwadon          done
+rexml/xpath                     iwadon          done
+rexml/xpath_parser              iwadon          done
 rinda/rinda                     okkez           done
 rinda/tuplespace                okkez           done
 ripper                          aamine          done
