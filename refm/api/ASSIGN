@@ -282,7 +282,7 @@ tk/spinbox
 tk/itemconfig                   moriq           done
 tk/selection
 tk/checkbutton
-tk/listbox                      iwadon
+tk/listbox                      iwadon          done
 tk/texttag
 tk/textwindow
 tk/textmark
