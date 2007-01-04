@@ -260,10 +260,10 @@ tk                              okkez
 tk/composite                    okkez           done
 tk/clock                        okkez           done
 tk/optionobj                    okkez           done
-tk/after
+tk/after                        okkez
 tk/canvas                       moriq           done
 tk/macpkg
-tk/optiondb
+tk/optiondb                     okkez
 tk/validation                   moriq           done
 tk/message
 tk/canvastag                    moriq           done
