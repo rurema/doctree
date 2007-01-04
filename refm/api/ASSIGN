@@ -265,11 +265,11 @@ tk/canvas                       moriq           done
 tk/macpkg
 tk/optiondb                     okkez           done
 tk/validation                   moriq           done
-tk/message
+tk/message                      okkez
 tk/canvastag                    moriq           done
-tk/bgerror
+tk/bgerror                      okkez
 tk/itemfont                     moriq           done
-tk/wm
+tk/wm                           okkez
 tk/autoload                     okkez           done
 tk/scrollbar
 tk/menuspec
