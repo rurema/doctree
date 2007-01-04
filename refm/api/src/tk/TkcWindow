@@ -1,0 +1,8 @@
+= class TkcWindow < TkcItem
+
+== Class Methods
+
+--- create(canvas, *args)
+
+
+

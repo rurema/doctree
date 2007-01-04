@@ -1,0 +1,50 @@
+= class TkcItem < TkObject
+
+extend Tk
+extend TkItemFontOptkeys
+extend TkItemConfigOptkeys
+
+include TkcTagAccess
+
+== Class Methods
+
+--- create(canvas, *args)
+
+
+
+--- id2obj(canvas, id)
+
+
+
+--- new(parent, *args)
+
+
+
+--- type2class(type)
+
+
+
+== Instance Methods
+
+--- delete
+alias remove
+alias destroy
+
+
+
+--- destroy
+
+Alias for #delete
+
+--- exist?
+
+
+
+--- id
+
+
+
+--- remove
+
+Alias for #delete
+

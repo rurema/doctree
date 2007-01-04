@@ -1,0 +1,8 @@
+= class TkcText < TkcItem
+
+== Class Methods
+
+--- create(canvas, *args)
+
+
+

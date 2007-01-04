@@ -1,0 +1,4 @@
+= module TkCanvasItemConfig
+
+include TkItemConfigMethod
+
