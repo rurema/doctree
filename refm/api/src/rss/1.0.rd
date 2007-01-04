@@ -30,9 +30,6 @@ include RSS::XMLStyleSheetMixin
 --- version
 --- version=
 
---- xml_stylesheets
---- xml_stylesheets=
-
 = class RSS::RDF::Channel < RSS::Element
 include RSS::TaxonomyTopicsModel
 include RSS::SyndicationModel

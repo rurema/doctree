@@ -22,3 +22,4 @@
 = module RSS::XMLStyleSheetMixin 
 == Instance Methods
 --- xml_stylesheets
+--- xml_stylesheets=
