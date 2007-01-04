@@ -261,7 +261,7 @@ tk/composite                    okkez
 tk/clock                        okkez           done
 tk/optionobj                    okkez
 tk/after
-tk/canvas
+tk/canvas                       moriq           done
 tk/macpkg
 tk/optiondb
 tk/validation                   moriq           done
