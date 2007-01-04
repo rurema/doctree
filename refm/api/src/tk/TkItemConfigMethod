@@ -1,0 +1,28 @@
+= module TkItemConfigMethod
+
+include TkUtil
+include TkTreatItemFont
+include TkItemConfigOptkeys
+
+== Instance Methods
+
+--- current_itemconfiginfo(tagOrId, slot = nil)
+
+
+
+--- itemcget(tagOrId, option)
+
+
+
+--- itemconfiginfo(tagOrId, slot = nil)
+
+
+
+--- itemconfigure(tagOrId, slot, value = None)
+
+
+
+--- tagid(tagOrId)
+
+
+

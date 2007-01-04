@@ -1,0 +1,14 @@
+= module TkItemConfigOptkeys
+
+include TkUtil
+
+== Instance Methods
+
+--- __conv_item_keyonly_opts(id, keys)
+
+
+
+--- itemconfig_hash_kv(id, keys, enc_mode = nil, conf = nil)
+
+
+
