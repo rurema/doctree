@@ -1,0 +1,31 @@
+#@since 1.8.2
+= module TkConfigMethod
+include TkUtil
+include TkTreatFont
+
+== Instance Methods
+
+--- [](id)
+
+--- []=(id, value)
+
+--- __confinfo_cmd
+
+本来 private のハズ。
+
+--- __conv_keyonly_opts(keys)
+
+--- cget(slot)
+
+--- config_hash_kv(keys, enc_mode = nil, conf = nil)
+
+--- configinfo(slot = nil)
+
+--- configure(slot, value = TkUtil::None)
+
+--- configure_cmd(slot, value)
+
+--- current_configinfo(slot = nil)
+
+
+#@end
