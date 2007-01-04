@@ -263,7 +263,7 @@ tk/optionobj                    okkez           done
 tk/after                        okkez           done
 tk/canvas                       moriq           done
 tk/macpkg
-tk/optiondb                     okkez
+tk/optiondb                     okkez           done
 tk/validation                   moriq           done
 tk/message
 tk/canvastag                    moriq           done
