@@ -1,0 +1,8 @@
+= class Tk::BLT::DragDrop::SiteCommand::ValidateArgs < TkUtil::CallbackSubst
+
+== Class Methods
+
+--- ret_val(val)
+
+
+

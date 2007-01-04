@@ -1,0 +1,2 @@
+= class Tk::BLT::DragDrop::DnD_Handle < TkUtil::CallbackSubst
+
