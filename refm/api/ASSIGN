@@ -317,11 +317,11 @@ tk/grid
 tk/tagfont                      moriq           done
 tk/place
 tk/xim
-tk/pack                         kimuraw
-tk/radiobutton                  kimuraw
-tk/package                      kimuraw
-tk/timer                        kimuraw
-tk/variable                     kimuraw
+tk/pack                         kimuraw         done
+tk/radiobutton                  kimuraw         done
+tk/package                      kimuraw         done
+tk/timer                        kimuraw         done
+tk/variable                     kimuraw         done
 tkextlib/ICONS                  moriq           done
 tkextlib/blt                    moriq           done
 tkextlib/blt/barchart           moriq           done
