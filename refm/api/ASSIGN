@@ -329,7 +329,7 @@ tkextlib/blt/bitmap             moriq           done
 tkextlib/blt/busy               moriq           done
 tkextlib/blt/component          moriq           done
 tkextlib/blt/container          moriq           done
-tkextlib/blt/cutbuffer          moriq
+tkextlib/blt/cutbuffer          moriq           done
 tkextlib/blt/dragdrop           moriq
 tkextlib/blt/eps                moriq
 tkextlib/blt/graph              moriq
