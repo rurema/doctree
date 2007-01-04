@@ -1,0 +1,8 @@
+= class TkcTagString < TkcTag
+
+== Class Methods
+
+--- new(parent, name, mode = nil, *args)
+
+
+

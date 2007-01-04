@@ -1,0 +1,8 @@
+= class TkcTagCurrent < TkcTag
+
+== Class Methods
+
+--- new(parent)
+
+
+

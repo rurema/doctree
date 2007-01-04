@@ -1,0 +1,161 @@
+= module TkcTagAccess
+
+include TkComm
+include TkTreatTagFont
+
+== Instance Methods
+
+--- &(tag)
+
+Following operators support logical expressions of canvas tags
+(for Tk8.3+). If tag1.path is 't1' and tag2.path is 't2', then
+
+     ltag = tag1 & tag2; ltag.path => "(t1)&&(t2)"
+     ltag = tag1 | tag2; ltag.path => "(t1)||(t2)"
+     ltag = tag1 ^ tag2; ltag.path => "(t1)^(t2)"
+     ltag = - tag1;      ltag.path => "!(t1)"
+
+--- -@
+
+
+
+--- ^(tag)
+
+
+
+--- addtag(tag)
+
+
+
+--- bbox
+
+
+
+--- bind(seq, *args)
+
+def bind(seq, cmd=Proc.new, *args)
+
+  @c.itembind(@id, seq, cmd, *args)
+  self
+
+end
+
+--- bind_append(seq, *args)
+
+def bind_append(seq, cmd=Proc.new, *args)
+
+  @c.itembind_append(@id, seq, cmd, *args)
+  self
+
+end
+
+--- bind_remove(seq)
+
+
+
+--- bindinfo(seq = nil)
+
+
+
+--- cget(option)
+
+
+
+--- configinfo(key = nil)
+
+def configure(keys)
+
+  @c.itemconfigure @id, keys
+
+end
+
+--- configure(key, value = None)
+
+
+
+--- coords(*args)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- dchars(first, last = None)
+
+
+
+--- deltag(tag_to_del = None)
+
+Alias for #dtag
+
+--- dtag(tag_to_del = None)
+alias deltag
+
+
+
+--- find
+alias list
+
+
+
+--- focus
+
+
+
+--- gettags
+
+
+
+--- icursor(index)
+
+
+
+--- index(idx)
+
+
+
+--- insert(beforethis, string)
+
+
+
+--- itemtype
+
+
+
+--- list
+
+Alias for #find
+
+--- lower(belowthis = None)
+
+
+
+--- move(xamount, yamount)
+
+
+
+--- raise(abovethis = None)
+
+
+
+--- scale(xorigin, yorigin, xscale, yscale)
+
+
+
+--- select_adjust(index)
+
+
+
+--- select_from(index)
+
+
+
+--- select_to(index)
+
+
+
+--- |(tag)
+
+
+

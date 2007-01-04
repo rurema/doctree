@@ -1,0 +1,23 @@
+= class TkcGroup < TkcTag
+
+== Class Methods
+
+--- new(parent, *args)
+
+def create_self(parent, *args)
+
+== Instance Methods
+
+--- add(*tags)
+
+Alias for #include
+
+--- exclude(*tags)
+
+
+
+--- include(*tags)
+alias add
+
+private :create_self
+

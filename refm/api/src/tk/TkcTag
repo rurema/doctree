@@ -1,0 +1,101 @@
+= class TkcTag < TkObject
+
+include TkcTagAccess
+
+== Class Methods
+
+--- id2obj(canvas, id)
+
+
+
+--- new(parent, mode = nil, *args)
+
+
+
+== Instance Methods
+
+--- above(target)
+
+Alias for #set_to_above
+
+--- all
+
+Alias for #set_to_all
+
+--- below(target)
+
+Alias for #set_to_below
+
+--- closest(x, y, halo = None, start = None)
+
+Alias for #set_to_closest
+
+--- delete
+alias remove
+alias destroy
+
+
+
+--- destroy
+
+Alias for #delete
+
+--- enclosed(x1, y1, x2, y2)
+
+Alias for #set_to_enclosed
+
+--- exist?
+
+
+
+--- id
+
+
+
+--- overlapping(x1, y1, x2, y2)
+
+Alias for #set_to_overlapping
+
+--- remove
+
+Alias for #delete
+
+--- set_to_above(target)
+alias above
+
+
+
+--- set_to_all
+alias all
+
+
+
+--- set_to_below(target)
+alias below
+
+
+
+--- set_to_closest(x, y, halo = None, start = None)
+alias closest
+
+
+
+--- set_to_enclosed(x1, y1, x2, y2)
+alias enclosed
+
+
+
+--- set_to_overlapping(x1, y1, x2, y2)
+alias overlapping
+
+
+
+--- set_to_withtag(target)
+alias withtag
+
+
+
+--- withtag(target)
+
+Alias for #set_to_withtag
+
