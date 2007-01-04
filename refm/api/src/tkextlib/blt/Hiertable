@@ -1,0 +1,2 @@
+= class Tk::BLT::Hiertable < Tk::BLT::Treeview
+

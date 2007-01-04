@@ -1,0 +1,86 @@
+= module Tk::BLT::Treeview::ConfigMethod
+
+include TkItemConfigMethod
+
+== Instance Methods
+
+--- button_cget(option)
+
+
+
+--- button_configinfo(slot = nil)
+
+
+
+--- button_configure(slot, value = None)
+
+
+
+--- column_cget(name, option)
+
+
+
+--- column_configinfo(name, slot = nil)
+
+
+
+--- column_configure(name, slot, value = None)
+
+
+
+--- current_button_configinfo(slot = nil)
+
+
+
+--- current_column_configinfo(name, slot = nil)
+
+
+
+--- current_entry_configinfo(slot = nil)
+
+
+
+--- current_sort_configinfo(slot = nil)
+
+
+
+--- current_text_configinfo(slot = nil)
+
+
+
+--- entry_cget(option)
+
+
+
+--- entry_configinfo(slot = nil)
+
+
+
+--- entry_configure(slot, value = None)
+
+
+
+--- sort_cget(option)
+
+
+
+--- sort_configinfo(slot = nil)
+
+
+
+--- sort_configure(slot, value = None)
+
+
+
+--- text_cget(option)
+
+
+
+--- text_configinfo(slot = nil)
+
+
+
+--- text_configure(slot, value = None)
+
+
+

@@ -1,0 +1,196 @@
+= module Tk::BLT::Treeview::TagOrID_Methods
+
+== Instance Methods
+
+--- bbox
+
+
+
+--- bind(seq, *args)
+
+
+
+--- bind_append(seq, *args)
+
+
+
+--- bind_remove(seq)
+
+
+
+--- bindinfo(seq = nil)
+
+
+
+--- button_activate
+
+
+
+--- button_bind(seq, *args)
+
+
+
+--- button_bind_append(seq, *args)
+
+
+
+--- button_bind_remove(seq)
+
+
+
+--- button_bindinfo(seq = nil)
+
+
+
+--- close
+
+
+
+--- close_recurse
+
+
+
+--- delete
+
+
+
+--- entry_activate
+
+
+
+--- entry_before?(tag)
+
+
+
+--- entry_children(first = None, last = None)
+
+
+
+--- entry_delete(first = None, last = None)
+
+
+
+--- entry_hidden?
+
+
+
+--- entry_open?
+
+
+
+--- entry_size
+
+
+
+--- entry_size_recurse
+
+
+
+--- focus
+
+
+
+--- get
+
+
+
+--- get_full
+
+
+
+--- hide
+
+
+
+--- index(str)
+
+
+
+--- index_path(str)
+
+
+
+--- insert(pos, parent = nil, keys = {})
+
+
+
+--- move_after(dest)
+
+
+
+--- move_before(dest)
+
+
+
+--- move_into(dest)
+
+
+
+--- open
+
+
+
+--- open_recurse
+
+
+
+--- range_open_to(tag)
+
+
+
+--- range_to(tag)
+
+
+
+--- screen_bbox
+
+
+
+--- see
+
+
+
+--- see_anchor(anchor)
+
+
+
+--- selection_anchor
+
+
+
+--- selection_clear
+
+
+
+--- selection_include?
+
+
+
+--- selection_mark
+
+
+
+--- selection_set
+
+
+
+--- selection_toggle
+
+
+
+--- show
+
+
+
+--- sort_once
+
+
+
+--- sort_once_recurse
+
+
+
+--- toggle
+
+
+

@@ -1,0 +1,40 @@
+= class Tk::BLT::Treeview::Tag < TkObject
+
+include Tk::BLT::Treeview::TagOrID_Methods
+
+== Class Methods
+
+--- id2obj(tree, id)
+
+
+
+--- new(tree, *ids)
+
+
+
+--- new_by_name(tree, name, *ids)
+
+
+
+== Instance Methods
+
+--- add(*ids)
+
+
+
+--- forget
+
+
+
+--- id
+
+
+
+--- nodes
+
+
+
+--- remove(*ids)
+
+
+
