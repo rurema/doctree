@@ -217,13 +217,13 @@ rexml/output                    iwadon          done
 rexml/parent                    iwadon          done
 rexml/parseexception            iwadon          done
 rexml/parsers                   iwadon          done
-rexml/quickpath                 iwadon
-rexml/rexml                     iwadon
-rexml/sax2listener              iwadon
-rexml/source                    iwadon
-rexml/streamlistener            iwadon
-rexml/syncenumerator            iwadon
-rexml/text                      iwadon
+rexml/quickpath                 iwadon          done
+rexml/rexml                     iwadon          done
+rexml/sax2listener              iwadon          done
+rexml/source                    iwadon          done
+rexml/streamlistener            iwadon          done
+rexml/syncenumerator            iwadon          done
+rexml/text                      iwadon          done
 rexml/validation
 rexml/xmldecl
 rexml/xmltokens
