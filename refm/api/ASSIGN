@@ -286,11 +286,11 @@ tk/listbox                      iwadon          done
 tk/texttag                      iwadon          done
 tk/textwindow                   iwadon          done
 tk/textmark                     iwadon          done
-tk/menubar
-tk/txtwin_abst
-tk/msgcat
-tk/kinput
-tk/clipboard
+tk/menubar                      iwadon
+tk/txtwin_abst                  iwadon
+tk/msgcat                       iwadon
+tk/kinput                       iwadon
+tk/clipboard                    iwadon
 tk/menu
 tk/text
 tk/console
