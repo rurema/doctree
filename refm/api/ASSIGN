@@ -315,7 +315,7 @@ tk/winfo
 tk/label
 tk/grid                         kimuraw         done
 tk/tagfont                      moriq           done
-tk/place                        kimuraw
+tk/place                        kimuraw         done
 tk/xim                          kimuraw         done
 tk/pack                         kimuraw         done
 tk/radiobutton                  kimuraw         done
