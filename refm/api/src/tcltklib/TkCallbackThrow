@@ -1,0 +1,1 @@
+= class TkCallbackThrow < TkLocalJumpError

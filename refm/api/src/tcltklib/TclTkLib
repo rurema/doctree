@@ -1,0 +1,95 @@
+= module TclTkLib
+
+== Constants
+
+#@since 1.8.2
+--- COMPILE_INFO
+
+--- FINALIZE_PROC_NAME
+
+--- RELEASE_DATE
+
+#@end
+
+== Class Methods
+
+#@since 1.8.2
+--- _conv_listelement(src)
+
+--- _fromUTF8(*args)
+
+#@end
+
+#@since 1.8.5
+--- _mark_at_exit
+
+#@end
+
+#@since 1.8.2
+--- _merge_tklist(*args)
+
+--- _split_tklist(list_str)
+
+--- _subst_Tcl_backslash(str)
+
+--- _subst_UTF_backslash(str)
+
+--- _toUTF8(*args)
+
+#@end
+
+--- do_one_event(*args)
+
+#@since 1.8.2
+--- do_thread_callback(*args)
+
+#@end
+
+#@since 1.8.3
+--- encoding
+
+--- encoding=(enc_name)
+
+--- encoding_system
+
+--- encoding_system=(enc_name)
+
+#@end
+
+--- get_eventloop_tick
+
+--- get_eventloop_weight
+
+--- get_no_event_wait
+
+--- mainloop(*args)
+
+--- mainloop_abort_on_exception
+
+--- mainloop_abort_on_exception=(val)
+
+#@since 1.8.2
+--- mainloop_thread?
+
+#@end
+
+--- mainloop_watchdog(*args)
+
+#@since 1.8.1
+--- num_of_mainwindows
+
+#@end
+
+--- set_eventloop_tick(tick)
+
+--- set_eventloop_weight(loop_max, no_event)
+
+#@since 1.8.2
+--- set_max_block_time(time)
+
+#@end
+
+--- set_no_event_wait(wait)
+
+
+

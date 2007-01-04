@@ -198,6 +198,7 @@ thwait
 time
 timeout
 tk
+tcltklib
 #@since 1.8.0
 tmpdir
 #@end

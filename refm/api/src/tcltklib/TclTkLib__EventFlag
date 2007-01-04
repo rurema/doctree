@@ -1,0 +1,15 @@
+= module TclTkLib::EventFlag
+
+--- ALL
+
+--- DONT_WAIT
+
+--- FILE
+
+--- IDLE
+
+--- NONE
+
+--- TIMER
+
+--- WINDOW
