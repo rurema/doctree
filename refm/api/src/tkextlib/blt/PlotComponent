@@ -1,7 +1,7 @@
 = module Tk::BLT::PlotComponent
 
 include TkItemConfigMethod
-include OptKeys
+include Tk::BLT::PlotComponent::OptKeys
 
 == Instance Methods
 
