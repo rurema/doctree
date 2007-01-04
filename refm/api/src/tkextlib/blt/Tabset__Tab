@@ -1,0 +1,102 @@
+= class Tk::BLT::Tabset::Tab < TkObject
+
+include TkTreatItemFont
+
+== Class Methods
+
+--- id2obj(tabset, id)
+
+
+
+--- new(parent, pos = nil, name = nil, keys = {})
+
+
+
+== Instance Methods
+
+--- bind(context, *args)
+
+def bind(context, cmd=Proc.new, *args)
+
+  @t.tab_bind(@id, context, cmd, *args)
+  self
+
+end
+
+--- bind_append(context, *args)
+
+def bind_append(context, cmd=Proc.new, *args)
+
+  @t.tab_bind_append(@id, context, cmd, *args)
+  self
+
+end
+
+--- bind_remove(context)
+
+
+
+--- bindinfo(context = nil)
+
+
+
+--- cget(*args)
+
+
+
+--- configinfo(*args)
+
+
+
+--- configure(*args)
+
+
+
+--- current_configinfo(*args)
+
+
+
+--- delete
+
+
+
+--- focus
+
+
+
+--- get_name
+
+
+
+--- index
+
+
+
+--- invoke
+
+
+
+--- move_after(idx)
+
+
+
+--- move_before(idx)
+
+
+
+--- perforation_highlight(mode)
+
+
+
+--- perforation_invoke
+
+
+
+--- see
+
+
+
+--- tearoff(name = None)
+
+
+
