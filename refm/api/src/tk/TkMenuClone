@@ -1,0 +1,11 @@
+= class TkMenuClone < TkMenu
+
+== Class Methods
+
+--- new(src_menu, *args)
+
+== Instance Methods
+
+#@since 1.8.5
+--- source_menu
+#@end

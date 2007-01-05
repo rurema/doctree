@@ -1,0 +1,13 @@
+= class TkMenubutton < TkLabel
+
+= Instance Methods
+
+#@if (version <= "1.8.0")
+--- create_self(keys)
+#@end
+
+== Constants
+
+--- TkCommandNames
+
+--- WidgetClassName

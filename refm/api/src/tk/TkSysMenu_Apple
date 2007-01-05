@@ -1,0 +1,6 @@
+= class TkSysMenu_Apple < TkMenu
+include TkSystemMenu
+
+== Constants
+
+--- SYSMENU_NAME

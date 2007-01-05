@@ -1,0 +1,86 @@
+= class TkMenu < TkWindow
+#if (version <= "1.8.1")
+include TkTreatMenuEntryFont
+#@else
+extend TkMenuSpec
+include TkMenuEntryConfig
+#@since 1.8.5
+include Tk::Wm
+#@end
+#@end
+
+== Class Methods
+
+#@since 1.8.2
+--- new_menuspec(menu_spec, parent = nil, tearoff = false, keys = nil)
+#@end
+
+== Instance Methods
+
+#@since 1.8.2
+--- tagid(id)
+#@end
+
+--- activate(index)
+
+--- add(type, keys = nil)
+
+--- add_cascade(keys = nil)
+
+--- add_checkbutton(keys = nil)
+
+--- add_command(keys = nil)
+
+--- add_radiobutton(keys = nil)
+
+--- add_separator(keys = nil)
+
+#@since 1.8.5
+--- clone_menu(*args)
+#@end
+
+--- index(idx)
+
+--- invoke(index)
+
+--- insert(index, type, keys = nil)
+
+--- delete(first, last = nil)
+
+--- popup(x, y, index = nil)
+
+--- post(x, y)
+
+--- postcascade(index)
+
+--- postcommand(cmd = Proc.new)
+
+#@since 1.8.1
+--- set_focus
+#@end
+
+--- tearoffcommand(cmd = Proc.new)
+
+--- menutype(index)
+
+--- unpost
+
+--- yposition(index)
+
+#@if (version <= "1.8.0")
+--- craete_self(keys)
+#@end
+
+#@if (version <= "1.8.1")
+--- entrycget(index, key)
+
+--- entryconfigure(index, key, val = TkUtil::None)
+
+--- entryconfiginfo(index, key = nil)
+#@end
+
+== Constants
+
+--- TkCommandNames
+
+--- WidgetClassName

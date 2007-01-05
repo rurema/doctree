@@ -1,0 +1,12 @@
+= module TkMenuEntryConfig
+include TkItemConfigMethod
+
+== Instance Methods
+
+--- entrycget(tagOrId, option)
+
+--- entryconfigure(tagorId, slot, value = TkUtil::None)
+
+--- entryconfiginfo(tagOrId, slot = nil)
+
+--- current_entryconfiginfo(tagOrId, slot = nil)

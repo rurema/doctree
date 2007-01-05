@@ -1,0 +1,53 @@
+= class TkOptionMenubutton < TkMenubutton
+
+== Class Methods
+
+--- new(*args)
+
+== Instance Methods
+
+--- value
+
+#@since 1.8.2
+--- value=(val)
+#@end
+
+--- activate(index)
+
+--- add(value)
+
+--- index(index)
+
+--- invoke(index)
+
+--- insert(index, value)
+
+--- delete(index, last = TkUtil::None)
+
+--- yposition(index)
+
+--- menu
+
+--- menucget(key)
+
+--- menuconfigure(key, val = TkUtil::None)
+
+--- menuconfiginfo(key = nil)
+
+#@since 1.8.2
+--- current_menuconfiginfo(key = nil)
+#@end
+
+--- entrycget(index, key)
+
+--- entryconfigure(index, key, val = TkUtil::None)
+
+--- entryconfiginfo(index, key = nil)
+
+#@since 1.8.2
+--- current_entryconfiginfo(index, key = nil)
+#@end
+
+== Constants
+
+--- TkCommandNames
