@@ -359,98 +359,9 @@ tkextlib/blt/watch              moriq           done
 tkextlib/blt/win_printer        moriq           done
 tkextlib/blt/winop              moriq           done
 tkextlib/bwidget                moriq           done
-tkextlib/bwidget/arrowbutton    moriq           done
-tkextlib/bwidget/bitmap         moriq           done
-tkextlib/bwidget/button         moriq           done
-tkextlib/bwidget/buttonbox      moriq           done
-tkextlib/bwidget/combobox       moriq           done
-tkextlib/bwidget/dialog         moriq           done
-tkextlib/bwidget/dragsite       moriq           done
-tkextlib/bwidget/dropsite       moriq           done
-tkextlib/bwidget/dynamichelp    moriq           done
-tkextlib/bwidget/entry          moriq           done
-tkextlib/bwidget/label          moriq           done
-tkextlib/bwidget/labelentry     moriq           done
-tkextlib/bwidget/labelframe     moriq           done
-tkextlib/bwidget/listbox        moriq           done
-tkextlib/bwidget/mainframe      moriq           done
-tkextlib/bwidget/messagedlg     moriq           done
-tkextlib/bwidget/notebook       moriq           done
-tkextlib/bwidget/pagesmanager   moriq           done
-tkextlib/bwidget/panedwindow    moriq           done
-tkextlib/bwidget/panelframe     moriq           done
-tkextlib/bwidget/passwddlg      moriq           done
-tkextlib/bwidget/progressbar    moriq           done
-tkextlib/bwidget/progressdlg    moriq           done
-tkextlib/bwidget/scrollableframemoriq           done
-tkextlib/bwidget/scrolledwindow moriq           done
-tkextlib/bwidget/scrollview     moriq           done
-tkextlib/bwidget/selectcolor    moriq           done
-tkextlib/bwidget/selectfont     moriq           done
-tkextlib/bwidget/separator      moriq           done
-tkextlib/bwidget/setup          moriq           done
-tkextlib/bwidget/spinbox        moriq           done
-tkextlib/bwidget/statusbar      moriq           done
-tkextlib/bwidget/titleframe     moriq           done
-tkextlib/bwidget/tree           moriq           done
-tkextlib/bwidget/widget         moriq           done
 tkextlib/itcl
 tkextlib/itk
-tkextlib/iwidgets
-tkextlib/iwidgets/buttonbox
-tkextlib/iwidgets/calendar
-tkextlib/iwidgets/canvasprintbox
-tkextlib/iwidgets/canvasprintdialog
-tkextlib/iwidgets/checkbox
-tkextlib/iwidgets/combobox
-tkextlib/iwidgets/dateentry
-tkextlib/iwidgets/datefield
-tkextlib/iwidgets/dialog
-tkextlib/iwidgets/dialogshell
-tkextlib/iwidgets/disjointlistbox
-tkextlib/iwidgets/entryfield
-tkextlib/iwidgets/extbutton
-tkextlib/iwidgets/extfileselectionbox
-tkextlib/iwidgets/extfileselectiondialog
-tkextlib/iwidgets/feedback
-tkextlib/iwidgets/fileselectionbox
-tkextlib/iwidgets/fileselectiondialog
-tkextlib/iwidgets/finddialog
-tkextlib/iwidgets/hierarchy
-tkextlib/iwidgets/hyperhelp
-tkextlib/iwidgets/labeledframe
-tkextlib/iwidgets/labeledwidget
-tkextlib/iwidgets/mainwindow
-tkextlib/iwidgets/menubar
-tkextlib/iwidgets/messagebox
-tkextlib/iwidgets/messagedialog
-tkextlib/iwidgets/notebook
-tkextlib/iwidgets/optionmenu
-tkextlib/iwidgets/panedwindow
-tkextlib/iwidgets/promptdialog
-tkextlib/iwidgets/pushbutton
-tkextlib/iwidgets/radiobox
-tkextlib/iwidgets/scopedobject
-tkextlib/iwidgets/scrolledcanvas
-tkextlib/iwidgets/scrolledframe
-tkextlib/iwidgets/scrolledhtml
-tkextlib/iwidgets/scrolledlistbox
-tkextlib/iwidgets/scrolledtext
-tkextlib/iwidgets/scrolledwidget
-tkextlib/iwidgets/selectionbox
-tkextlib/iwidgets/selectiondialog
-tkextlib/iwidgets/setup
-tkextlib/iwidgets/shell
-tkextlib/iwidgets/spindate
-tkextlib/iwidgets/spinint
-tkextlib/iwidgets/spinner
-tkextlib/iwidgets/spintime
-tkextlib/iwidgets/tabnotebook
-tkextlib/iwidgets/tabset
-tkextlib/iwidgets/timeentry
-tkextlib/iwidgets/timefield
-tkextlib/iwidgets/toolbar
-tkextlib/iwidgets/watch
+tkextlib/iwidgets               moriq
 tkextlib/pkg_checker
 tkextlib/tcllib
 tkextlib/tcllib/autoscroll
