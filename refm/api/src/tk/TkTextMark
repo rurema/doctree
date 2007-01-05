@@ -1,0 +1,46 @@
+= class TkTextMark < TkObject
+include TkText::IndexModMethods
+
+== Class Methods
+
+--- id2obj(text, id)
+
+--- new(parent, index)
+
+== Instance Methods
+
+--- id
+
+--- exist?
+
+#@since 1.8.3
+--- pos
+
+--- pos=(where)
+#@end
+
+--- set(where)
+
+--- unset
+--- destroy
+
+--- gravity
+
+--- gravity=(direction)
+
+--- next(index = nil)
+
+--- previous(index = nil)
+
+#@if (version <= "1.8.2")
+
+--- +(mod)
+
+--- -(mod)
+#@end
+
+== Constants
+
+--- TMarkID_TBL
+
+--- Tk_TextMark_ID
