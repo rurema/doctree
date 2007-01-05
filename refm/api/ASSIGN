@@ -304,7 +304,7 @@ tk/toplevel                     iwadon          done
 tk/font                         iwadon          done
 tk/encodedstr                   okkez           done
 tk/namespace
-tk/textimage
+tk/textimage                    iwadon
 tk/frame
 tk/event
 tk/image
