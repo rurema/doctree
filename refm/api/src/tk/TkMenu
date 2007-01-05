@@ -1,5 +1,5 @@
 = class TkMenu < TkWindow
-#if (version <= "1.8.1")
+#@if (version <= "1.8.1")
 include TkTreatMenuEntryFont
 #@else
 extend TkMenuSpec
