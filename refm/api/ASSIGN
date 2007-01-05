@@ -271,7 +271,7 @@ tk/message                      okkez           done
 tk/canvastag                    moriq           done
 tk/bgerror                      okkez
 tk/itemfont                     moriq           done
-tk/wm                           okkez
+tk/wm                           okkez           done
 tk/autoload                     okkez           done
 tk/scrollbar                    yanagi          done
 tk/menuspec
