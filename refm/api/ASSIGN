@@ -273,7 +273,7 @@ tk/bgerror                      okkez
 tk/itemfont                     moriq           done
 tk/wm                           okkez
 tk/autoload                     okkez           done
-tk/scrollbar                    yanagi
+tk/scrollbar                    yanagi          done
 tk/menuspec
 tk/scrollbox
 tk/virtevent
