@@ -1,0 +1,8 @@
+= class Tk::Iwidgets::Spinner::EntryfieldValidate < TkValidateCommand
+
+== Class Methods
+
+--- _config_keys
+
+
+

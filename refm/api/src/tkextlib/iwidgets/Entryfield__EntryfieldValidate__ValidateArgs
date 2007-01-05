@@ -1,0 +1,2 @@
+= class Tk::Iwidgets::Entryfield::EntryfieldValidate::ValidateArgs < TkUtil::CallbackSubst
+

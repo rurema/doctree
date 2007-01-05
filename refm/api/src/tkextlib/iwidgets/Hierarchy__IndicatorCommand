@@ -1,0 +1,8 @@
+= class Tk::Iwidgets::Hierarchy::IndicatorCommand < TkValidateCommand
+
+== Class Methods
+
+--- _config_keys
+
+
+
