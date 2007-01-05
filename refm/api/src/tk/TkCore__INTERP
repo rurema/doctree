@@ -1,4 +1,4 @@
-= object TkCore::INTERP
+= object TkCore::INTERP < TclTkIp
 
 INTERP は [[c:TclTkIp]] のインスタンス。
 
