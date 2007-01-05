@@ -199,6 +199,11 @@ time
 timeout
 tk
 tcltklib
+tkconsole
+tkdialog
+tkfont
+tkmenubar
+tktext
 #@since 1.8.0
 tmpdir
 #@end
