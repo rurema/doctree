@@ -21,6 +21,6 @@ include TkTreatItemFont
 
 #@else
 
-#@include(tk/text.rd)
+require tk/text
 
 #@end
