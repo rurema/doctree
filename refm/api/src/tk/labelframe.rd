@@ -3,18 +3,6 @@
 require tk
 require tk/frame
 
-= class TkLabelFrame < TkFrame
-
-== Constants
-
---- TkCommandNames
-
---- WidgetClassName
-
-= reopen Kernel
-
-== Constants
-
---- TkLabelframe
+#@include(TkLabelFrame)
 
 #@end

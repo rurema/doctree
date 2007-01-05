@@ -1,0 +1,13 @@
+= class TkLabelFrame < TkFrame
+
+== Constants
+
+--- TkCommandNames
+
+--- WidgetClassName
+
+= reopen Kernel
+
+== Constants
+
+--- TkLabelframe
