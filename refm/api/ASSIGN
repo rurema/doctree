@@ -343,14 +343,14 @@ tkextlib/blt/table              moriq           done
 tkextlib/blt/tabnotebook        moriq           done
 tkextlib/blt/tabset             moriq           done
 tkextlib/blt/ted                moriq           done
-tkextlib/blt/tile               moriq
-tkextlib/blt/tile/button        moriq
-tkextlib/blt/tile/checkbutton   moriq
-tkextlib/blt/tile/frame         moriq
-tkextlib/blt/tile/label         moriq
-tkextlib/blt/tile/radiobutton   moriq
-tkextlib/blt/tile/scrollbar     moriq
-tkextlib/blt/tile/toplevel      moriq
+tkextlib/blt/tile               moriq           done
+tkextlib/blt/tile/button        moriq           done
+tkextlib/blt/tile/checkbutton   moriq           done
+tkextlib/blt/tile/frame         moriq           done
+tkextlib/blt/tile/label         moriq           done
+tkextlib/blt/tile/radiobutton   moriq           done
+tkextlib/blt/tile/scrollbar     moriq           done
+tkextlib/blt/tile/toplevel      moriq           done
 tkextlib/blt/tree               moriq           done
 tkextlib/blt/treeview           moriq           done
 tkextlib/blt/unix_dnd           moriq           done
