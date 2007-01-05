@@ -1,0 +1,28 @@
+= class TkTextWin < TkWindow
+
+== Instance Methods
+
+--- bbox(index)
+
+--- delete(first, last = TkUtil::None)
+
+--- get(*index)
+
+--- insert(index, *args)
+
+--- scan_mark(x, y)
+
+--- scan_dragto(x, y)
+
+--- see(index)
+
+#@if (version <= "1.8.0")
+--- create_self
+#@end
+
+== Constants
+
+#@since 1.8.2
+#@#--- TkCommandNames
+--- TkCommnadNames
+#@end
