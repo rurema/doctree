@@ -1,0 +1,20 @@
+= class Tk::BWidget::SelectFont::Dialog < Tk::BWidget::SelectFont
+
+== Instance Methods
+
+--- __font_optkeys
+
+
+
+--- configure(slot, value = None)
+
+
+
+--- create
+
+
+
+--- create_self(keys)
+
+
+

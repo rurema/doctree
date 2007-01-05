@@ -1,0 +1,88 @@
+= class Tk::BWidget::ListBox::Item < TkObject
+
+include TkTreatTagFont
+
+== Class Methods
+
+--- id2obj(lbox, id)
+
+
+
+--- new(lbox, *args)
+
+
+
+== Instance Methods
+
+--- [](key)
+
+
+
+--- []=(key, val)
+
+
+
+--- cget(key)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, val = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- delete
+
+
+
+--- edit(*args)
+
+
+
+--- exist?
+
+
+
+--- id
+
+
+
+--- index
+
+
+
+--- listbox
+
+
+
+--- move(index)
+
+
+
+--- see
+
+
+
+--- selection_add
+
+
+
+--- selection_remove
+
+
+
+--- selection_set
+
+
+
+--- selection_toggle
+
+
+

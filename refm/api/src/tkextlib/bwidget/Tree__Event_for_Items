@@ -1,0 +1,8 @@
+= class Tk::BWidget::Tree::Event_for_Items < TkEvent::Event
+
+== Class Methods
+
+--- _get_extra_args_tbl
+
+
+

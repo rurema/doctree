@@ -1,0 +1,116 @@
+= class Tk::BWidget::Tree::Node < TkObject
+
+include TkTreatTagFont
+
+== Class Methods
+
+--- id2obj(tree, id)
+
+
+
+--- new(tree, *args)
+
+
+
+== Instance Methods
+
+--- [](key)
+
+
+
+--- []=(key, val)
+
+
+
+--- cget(key)
+
+
+
+--- close_tree(recurse = None)
+
+
+
+--- configinfo(key = nil)
+
+
+
+--- configure(key, val = None)
+
+
+
+--- current_configinfo(key = nil)
+
+
+
+--- delete
+
+
+
+--- edit(*args)
+
+
+
+--- exist?
+
+
+
+--- id
+
+
+
+--- index
+
+
+
+--- move(index, parent = nil)
+
+
+
+--- open?
+
+
+
+--- open_tree(recurse = None)
+
+
+
+--- parent
+
+
+
+--- reorder(neworder)
+
+
+
+--- see
+
+
+
+--- selection_add
+
+
+
+--- selection_remove
+
+
+
+--- selection_set
+
+
+
+--- selection_toggle
+
+
+
+--- toggle
+
+
+
+--- tree
+
+
+
+--- visible
+
+
+
