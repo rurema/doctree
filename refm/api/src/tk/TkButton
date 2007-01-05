@@ -1,0 +1,13 @@
+= class TkButton < TkLabel
+
+== Instance Methods
+
+--- invoke
+
+--- flash
+
+== Constants
+
+--- TkCommandNames
+
+--- WidgetClassName

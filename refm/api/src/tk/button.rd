@@ -3,18 +3,6 @@
 require tk
 require tk/label
 
-= class TkButton < TkLabel
-
-== Instance Methods
-
---- invoke
-
---- flash
-
-== Constants
-
---- TkCommandNames
-
---- WidgetClassName
+#@include(TkButton)
 
 #@end
