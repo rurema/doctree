@@ -1,5 +1,5 @@
 #@since 1.8.0
-= class TkObject < TkKernel
+= reopen TkObject
 extend  TkCore
 include Tk
 include TkConfigMethod
@@ -20,6 +20,8 @@ include TkBindCore
 
 --- configure_cmd
 
+--- path
+
 #@end
 
 --- destroy
@@ -29,8 +31,6 @@ include TkBindCore
 --- event_generate(context, keys = nil)
 
 --- method_missing(id, *args)
-
---- path
 
 #@since 1.8.2
 --- tk_send(cmd, *rest)
