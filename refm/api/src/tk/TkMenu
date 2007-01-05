@@ -74,7 +74,7 @@ include Tk::Wm
 #@if (version <= "1.8.1")
 --- entrycget(index, key)
 
---- entryconfigure(index, key, val = TkUtil::None)
+--- entryconfigure(index, key, val = Tk::None)
 
 --- entryconfiginfo(index, key = nil)
 #@end

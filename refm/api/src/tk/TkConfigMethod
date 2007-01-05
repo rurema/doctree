@@ -21,7 +21,7 @@ include TkTreatFont
 
 --- configinfo(slot = nil)
 
---- configure(slot, value = TkUtil::None)
+--- configure(slot, value = Tk::None)
 
 --- configure_cmd(slot, value)
 

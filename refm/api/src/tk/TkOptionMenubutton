@@ -22,7 +22,7 @@
 
 --- insert(index, value)
 
---- delete(index, last = TkUtil::None)
+--- delete(index, last = Tk::None)
 
 --- yposition(index)
 
@@ -30,7 +30,7 @@
 
 --- menucget(key)
 
---- menuconfigure(key, val = TkUtil::None)
+--- menuconfigure(key, val = Tk::None)
 
 --- menuconfiginfo(key = nil)
 
@@ -40,7 +40,7 @@
 
 --- entrycget(index, key)
 
---- entryconfigure(index, key, val = TkUtil::None)
+--- entryconfigure(index, key, val = Tk::None)
 
 --- entryconfiginfo(index, key = nil)
 

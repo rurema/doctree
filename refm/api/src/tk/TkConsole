@@ -8,7 +8,7 @@ include Tk
 --- create
 #@end
 
---- title(str = TkUtil::None
+--- title(str = Tk::None)
 
 --- hide
 

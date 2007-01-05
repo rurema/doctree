@@ -33,7 +33,7 @@ include TkCore
 --- load_rb(dir)
 --- load(dir)
 
---- set_translation(locale, src_str, trans_str = TkUtil::None, enc = "utf-8")
+--- set_translation(locale, src_str, trans_str = Tk::None, enc = "utf-8")
 
 --- set_translation_list(locale, trans_list, enc = "utf-8")
 
@@ -63,7 +63,7 @@ include TkCore
 --- load_rb(dir)
 --- load(dir)
 
---- set_translation(locale, src_str, trans_str = TkUtil::None, enc = "utf-8")
+--- set_translation(locale, src_str, trans_str = Tk::None, enc = "utf-8")
 
 --- set_translation_list(locale, trans_list, enc = "utf-8")
 

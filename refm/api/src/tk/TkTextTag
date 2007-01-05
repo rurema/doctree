@@ -24,9 +24,9 @@ include TkText::IndexModMethods
 
 --- ranges
 
---- nextrange(first, last = TkUtil::None)
+--- nextrange(first, last = Tk::None)
 
---- prevrange(first, last = TkUtil::None)
+--- prevrange(first, last = Tk::None)
 
 --- [](key)
 
@@ -34,7 +34,7 @@ include TkText::IndexModMethods
 
 --- cget(key)
 
---- configure(key, val = TkUtil::None)
+--- configure(key, val = Tk::None)
 
 --- configinfo(key = nil)
 
@@ -48,9 +48,9 @@ include TkText::IndexModMethods
 
 --- bindinfo(context = nil)
 
---- raise(above = TkUtil::None)
+--- raise(above = Tk::None)
 
---- lower(below = TkUtil::None)
+--- lower(below = Tk::None)
 
 --- destroy
 

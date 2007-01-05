@@ -8,7 +8,7 @@ include TkItemConfigMethod
 
 --- tag_cget(tagOrId, option)
 
---- tag_configure(tagOrId, slot, value = TkUtil::None
+--- tag_configure(tagOrId, slot, value = Tk::None
 
 --- tag_configinfo(tagOrId, slot = nil)
 
@@ -16,7 +16,7 @@ include TkItemConfigMethod
 
 --- window_cget(tagOrId, option)
 
---- window_configure(tagOrId, slot, value = TkUtil::None)
+--- window_configure(tagOrId, slot, value = Tk::None)
 
 --- window_configinfo(tagOrId, slot = nil)
 

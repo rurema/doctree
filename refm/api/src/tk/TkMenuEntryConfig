@@ -5,7 +5,7 @@ include TkItemConfigMethod
 
 --- entrycget(tagOrId, option)
 
---- entryconfigure(tagorId, slot, value = TkUtil::None)
+--- entryconfigure(tagorId, slot, value = Tk::None)
 
 --- entryconfiginfo(tagOrId, slot = nil)
 

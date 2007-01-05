@@ -33,7 +33,7 @@
 
 #@end
 
---- colormodel(model = TkUtil::None)
+--- colormodel(model = Tk::None)
 
 --- command(cmd = nil, &block)
 
@@ -109,9 +109,9 @@
 --- grid_columnconfiginfo(index, slot = nil)
 
 
---- grid_config(slot, value = TkUtil::None)
+--- grid_config(slot, value = Tk::None)
 #@since 1.8.2
---- grid_configure(slot, value = TkUtil::None)
+--- grid_configure(slot, value = Tk::None)
 #@end
 
 
@@ -124,7 +124,7 @@
 
 --- grid_location(x, y)
 
---- grid_propagate(mode = TkUtil::None)
+--- grid_propagate(mode = Tk::None)
 
 --- grid_remove
 
@@ -140,17 +140,17 @@
 
 --- grid_slaves(args)
 
---- lower(below = TkUtil::None)
+--- lower(below = Tk::None)
 #@since 1.8.3
---- lower_window(below = TkUtil::None)
+--- lower_window(below = Tk::None)
 #@end
 
 
 --- pack(keys = nil)
 
---- pack_config(slot, value = TkUtil::None)
+--- pack_config(slot, value = Tk::None)
 #@since 1.8.2
---- pack_configure(slot, value = TkUtil::None)
+--- pack_configure(slot, value = Tk::None)
 #@end
 
 
@@ -161,15 +161,15 @@
 
 --- pack_info
 
---- pack_propagate(mode = TkUtil::None)
+--- pack_propagate(mode = Tk::None)
 
 --- pack_slaves
 
 --- place(keys)
 
---- place_config(slot, value = TkUtil::None)
+--- place_config(slot, value = Tk::None)
 #@since 1.8.2
---- place_configure(slot, value = TkUtil::None)
+--- place_configure(slot, value = Tk::None)
 #@end
 
 
@@ -185,9 +185,9 @@
 
 --- place_slaves
 
---- raise(above = TkUtil::None)
+--- raise(above = Tk::None)
 #@since 1.8.3
---- raise_window(above = TkUtil::None)
+--- raise_window(above = Tk::None)
 #@end
 
 --- focus(force = false)

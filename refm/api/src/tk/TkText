@@ -41,7 +41,7 @@ include Tk::Scrollable
 
 --- tagid2obj(tagid)
 
---- tag_names(index = TkUtil::None)
+--- tag_names(index = Tk::None)
 
 --- mark_names
 
@@ -61,7 +61,7 @@ include Tk::Scrollable
 
 --- image_cget(index, slot)
 
---- image_configure(index, slot, value = TkUtil::None)
+--- image_configure(index, slot, value = Tk::None)
 
 --- image_configinfo(index, slot = nil)
 
@@ -121,9 +121,9 @@ include Tk::Scrollable
 
 --- text_paste
 
---- tag_add(tag, index1, index2 = TkUtil::None)
---- addtag(tag, index1, index2 = TkUtil::None)
---- add_tag(tag, index1, index2 = TkUtil::None)
+--- tag_add(tag, index1, index2 = Tk::None)
+--- addtag(tag, index1, index2 = Tk::None)
+--- add_tag(tag, index1, index2 = Tk::None)
 
 --- tag_delete(*tags)
 --- deltag(*tags)
@@ -137,17 +137,17 @@ include Tk::Scrollable
 
 --- tag_bindinfo(tag, context = nil)
 
---- tag_raise(tag, above = TkUtil::None)
+--- tag_raise(tag, above = Tk::None)
 
---- tag_lower(tag, below = TkUtil::None)
+--- tag_lower(tag, below = Tk::None)
 
 --- tag_remove(tag, *indices)
 
 --- tag_ranges(tag)
 
---- tag_nextrange(tag, first, last = TkUtil::None)
+--- tag_nextrange(tag, first, last = Tk::None)
 
---- tag_prevrange(tag, first, last = TkUtil::None)
+--- tag_prevrange(tag, first, last = Tk::None)
 
 --- window_names
 
@@ -155,13 +155,13 @@ include Tk::Scrollable
 
 --- tksearch_with_count(*args)
 
---- search_with_length(pat, start, stop = TkUtil::None)
+--- search_with_length(pat, start, stop = Tk::None)
 
---- search(pat, start, stop = TkUtil::None)
+--- search(pat, start, stop = Tk::None)
 
---- rsearch_with_length(pat, start, stop = TkUtil::None)
+--- rsearch_with_length(pat, start, stop = Tk::None)
 
---- rsearch(pat, start, stop = TkUtil::None)
+--- rsearch(pat, start, stop = Tk::None)
 
 --- dump(type_info, *index) { ... }
 

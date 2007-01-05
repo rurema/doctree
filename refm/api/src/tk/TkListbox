@@ -81,7 +81,7 @@ include Tk::Scrollable
 
 ((|index|))で指定した((*位置*))の要素を((<アンカー>))にします。
 
---- selection_clear(first, last = TkUtil::None)
+--- selection_clear(first, last = Tk::None)
 
 ((|first|))、((|last|))で指定した((*位置*))の範囲の要素が((<選択>))さ
 れていれば非選択にします。((|last|))を省略した場合、((|first|))の((*位
@@ -100,7 +100,7 @@ include Tk::Scrollable
       p l.selection_includes(0)
       Tk.mainloop
 
---- selection_set(first, last = TkUtil::None)
+--- selection_set(first, last = Tk::None)
 
 ((|first|))、((|last|))で指定した((*位置*))の範囲の要素を((<選択>))し
 ます。((|last|))を省略した場合、((|first|))の((*位置*))の要素を選択し
@@ -124,7 +124,7 @@ include Tk::Scrollable
 #@if (version <= "1.8.1")
 --- itemcget(index, key)
 
---- itemconfigure(index, key, val = TkUtil::None)
+--- itemconfigure(index, key, val = Tk::None)
 
 --- itemconfiginfo(index, key = nil)
 #@end

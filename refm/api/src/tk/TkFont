@@ -11,7 +11,7 @@ extend TkFont::CoreMethods
 
 --- actual_displayof(fnt, win, option = nil)
 
---- configure(fnt, slot, value = TkUtil::None)
+--- configure(fnt, slot, value = Tk::None)
 
 --- configinfo(fnt, slot = nil)
 
@@ -103,7 +103,7 @@ extend TkFont::CoreMethods
 
 --- []=(slot, val)
 
---- configure(slot, value = TkUtil::None)
+--- configure(slot, value = Tk::None)
 
 --- configinfo(slot = nil)
 
@@ -113,17 +113,17 @@ extend TkFont::CoreMethods
 
 --- delete
 
---- latin_configure(slot, value = TkUtil::None)
---- ascii_configure(slot, value = TkUtil::None)
+--- latin_configure(slot, value = Tk::None)
+--- ascii_configure(slot, value = Tk::None)
 
 --- latin_configinfo(slot = nil)
 --- ascii_configinfo(slot = nil)
 
---- kanji_configure(slot, value = TkUtil::None)
+--- kanji_configure(slot, value = Tk::None)
 
 --- kanji_configinfo(slot = nil)
 
---- replace(ltn, knj = TkUtil::None)
+--- replace(ltn, knj = Tk::None)
 
 --- latin_replace(ltn)
 --- ascii_replace(ltn)

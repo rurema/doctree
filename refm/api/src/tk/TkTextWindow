@@ -17,7 +17,7 @@ include TkText::IndexModMethods
 
 --- cget(slot)
 
---- configure(slot, value = TkUtil::None)
+--- configure(slot, value = Tk::None)
 
 ---configinfo(slot = nil)
 
