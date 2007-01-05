@@ -1,0 +1,5 @@
+= class TkText::Peer < TkText
+
+== Class Methods
+
+--- new(text, parent = nil, keys = {})

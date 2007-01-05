@@ -1,0 +1,59 @@
+= module TkText::IndexModMethods
+
+== Instance Methods
+
+#@since 1.8.3
+--- +(mod)
+
+--- -(mod)
+#@end
+
+--- chars(mod)
+--- char(mod)
+
+#@since 1.8.4
+--- display_chars(mod)
+--- display_char(mod)
+
+--- any_chars(mod)
+--- any_char(mod)
+#@end
+
+--- indices(mod)
+
+#@since 1.8.4
+--- display_indices(mod)
+
+--- any_indices(mod)
+#@end
+
+--- lines(mod)
+--- line(mod)
+
+#@since 1.8.4
+--- display_lines(mod)
+--- display_line(mod)
+
+--- any_lines(mod)
+--- any_line(mod)
+#@end
+
+--- linestart
+
+--- lineend
+
+#@since 1.8.4
+--- display_linestart
+
+--- display_lineend
+#@end
+
+--- wordstart
+
+--- wordend
+
+#@since 1.8.4
+--- display_wordstart
+
+--- display_wordend
+#@end

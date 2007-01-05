@@ -1,0 +1,14 @@
+= class TkText::IndexString < String
+include TkText::IndexModMethods
+
+== Class Methods
+
+#@since 1.8.3
+--- at(x, y)
+#@end
+
+--- new(str)
+
+== Instance Methods
+
+--- id

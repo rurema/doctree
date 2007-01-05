@@ -1,0 +1,25 @@
+#@since 1.8.2
+
+= module TkTextTagConfig
+include TkTreatItemFont
+include TkItemConfigMethod
+
+== Instance Methods
+
+--- tag_cget(tagOrId, option)
+
+--- tag_configure(tagOrId, slot, value = TkUtil::None
+
+--- tag_configinfo(tagOrId, slot = nil)
+
+--- current_tag_configinfo(tagOrId, slot = nil)
+
+--- window_cget(tagOrId, option)
+
+--- window_configure(tagOrId, slot, value = TkUtil::None)
+
+--- window_configinfo(tagOrId, slot = nil)
+
+--- current_window_configinfo(tagOrId, slot = nil)
+
+#@end
