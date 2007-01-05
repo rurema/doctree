@@ -309,7 +309,7 @@ tk/frame
 tk/event
 tk/image
 tk/scrollable                   moriq           done
-tk/palette
+tk/palette                      yanagi
 tk/bindtag                      yanagi          done
 tk/entry                        yanagi          done
 tk/mngfocus                     yanagi          done
