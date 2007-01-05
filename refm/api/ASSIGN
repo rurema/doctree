@@ -311,7 +311,7 @@ tk/image
 tk/scrollable                   moriq           done
 tk/palette
 tk/bindtag
-tk/entry                        yanagi
+tk/entry                        yanagi          done
 tk/mngfocus                     yanagi          done
 tk/winfo                        okkez           done
 tk/label                        okkez
