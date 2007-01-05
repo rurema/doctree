@@ -1,0 +1,32 @@
+= class TkTextImage < TkObject
+include TkText::IndexModMethods
+
+== Class Methods
+
+--- new(parent, index, keys)
+
+== Instance Methods
+
+#@since 1.8.2
+--- id
+
+--- mark
+#@end
+
+--- [](slot)
+
+--- []=(slot, value)
+
+--- cget(slot)
+
+--- configure(slot, value = Tk::None)
+
+--- configinfo(slot = nil)
+
+#@since 1.8.2
+--- current_configinfo(slot = nil)
+#@end
+
+--- image
+
+--- image=(value)

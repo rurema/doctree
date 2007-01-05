@@ -17,7 +17,7 @@ include TkTreatItemFont
 #@include(tk/TkTextMarkCurrent)
 #@include(tk/TkTextMarkAnchor)
 #@include(tk/TkTextWindow)
-#@#@include(tk/TkTextImage)
+#@include(tk/TkTextImage)
 
 #@else
 
