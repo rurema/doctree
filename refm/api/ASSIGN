@@ -358,42 +358,42 @@ tkextlib/blt/vector             moriq           done
 tkextlib/blt/watch              moriq           done
 tkextlib/blt/win_printer        moriq           done
 tkextlib/blt/winop              moriq           done
-tkextlib/bwidget
-tkextlib/bwidget/arrowbutton
-tkextlib/bwidget/bitmap
-tkextlib/bwidget/button
-tkextlib/bwidget/buttonbox
-tkextlib/bwidget/combobox
-tkextlib/bwidget/dialog
-tkextlib/bwidget/dragsite
-tkextlib/bwidget/dropsite
-tkextlib/bwidget/dynamichelp
-tkextlib/bwidget/entry
-tkextlib/bwidget/label
-tkextlib/bwidget/labelentry
-tkextlib/bwidget/labelframe
-tkextlib/bwidget/listbox
-tkextlib/bwidget/mainframe
-tkextlib/bwidget/messagedlg
-tkextlib/bwidget/notebook
-tkextlib/bwidget/pagesmanager
-tkextlib/bwidget/panedwindow
-tkextlib/bwidget/panelframe
-tkextlib/bwidget/passwddlg
-tkextlib/bwidget/progressbar
-tkextlib/bwidget/progressdlg
-tkextlib/bwidget/scrollableframe
-tkextlib/bwidget/scrolledwindow
-tkextlib/bwidget/scrollview
-tkextlib/bwidget/selectcolor
-tkextlib/bwidget/selectfont
-tkextlib/bwidget/separator
-tkextlib/bwidget/setup
-tkextlib/bwidget/spinbox
-tkextlib/bwidget/statusbar
-tkextlib/bwidget/titleframe
-tkextlib/bwidget/tree
-tkextlib/bwidget/widget
+tkextlib/bwidget                moriq
+tkextlib/bwidget/arrowbutton    moriq
+tkextlib/bwidget/bitmap         moriq
+tkextlib/bwidget/button         moriq
+tkextlib/bwidget/buttonbox      moriq
+tkextlib/bwidget/combobox       moriq
+tkextlib/bwidget/dialog         moriq
+tkextlib/bwidget/dragsite       moriq
+tkextlib/bwidget/dropsite       moriq
+tkextlib/bwidget/dynamichelp    moriq
+tkextlib/bwidget/entry          moriq
+tkextlib/bwidget/label          moriq
+tkextlib/bwidget/labelentry     moriq
+tkextlib/bwidget/labelframe     moriq
+tkextlib/bwidget/listbox        moriq
+tkextlib/bwidget/mainframe      moriq
+tkextlib/bwidget/messagedlg     moriq
+tkextlib/bwidget/notebook       moriq
+tkextlib/bwidget/pagesmanager   moriq
+tkextlib/bwidget/panedwindow    moriq
+tkextlib/bwidget/panelframe     moriq
+tkextlib/bwidget/passwddlg      moriq
+tkextlib/bwidget/progressbar    moriq
+tkextlib/bwidget/progressdlg    moriq
+tkextlib/bwidget/scrollableframemoriq
+tkextlib/bwidget/scrolledwindow moriq
+tkextlib/bwidget/scrollview     moriq
+tkextlib/bwidget/selectcolor    moriq
+tkextlib/bwidget/selectfont     moriq
+tkextlib/bwidget/separator      moriq
+tkextlib/bwidget/setup          moriq
+tkextlib/bwidget/spinbox        moriq
+tkextlib/bwidget/statusbar      moriq
+tkextlib/bwidget/titleframe     moriq
+tkextlib/bwidget/tree           moriq
+tkextlib/bwidget/widget         moriq
 tkextlib/itcl
 tkextlib/itk
 tkextlib/iwidgets
