@@ -279,7 +279,7 @@ tk/scrollbox
 tk/virtevent
 tk/scale                        okkez
 tk/winpkg
-tk/root                         okkez
+tk/root                         okkez           done
 tk/spinbox
 tk/itemconfig                   moriq           done
 tk/selection
