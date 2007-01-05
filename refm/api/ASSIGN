@@ -267,7 +267,7 @@ tk/canvas                       moriq           done
 tk/macpkg
 tk/optiondb                     okkez           done
 tk/validation                   moriq           done
-tk/message                      okkez
+tk/message                      okkez           done
 tk/canvastag                    moriq           done
 tk/bgerror                      okkez
 tk/itemfont                     moriq           done
@@ -314,7 +314,7 @@ tk/bindtag                      yanagi          done
 tk/entry                        yanagi          done
 tk/mngfocus                     yanagi          done
 tk/winfo                        okkez           done
-tk/label                        okkez
+tk/label                        okkez           done
 tk/grid                         kimuraw         done
 tk/tagfont                      moriq           done
 tk/place                        kimuraw         done
