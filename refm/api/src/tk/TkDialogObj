@@ -1,0 +1,22 @@
+#@if (version <= "1.8.1")
+= class TkDialog2 < TkWindow
+#@else
+= class TkDialogObj < TkWindow
+#@end
+extend Tk
+
+== Class Methods
+
+--- show(*args)
+
+== Instance Methods
+
+--- show
+
+--- value
+
+--- name
+
+== Constants
+
+--- TkCommandNames

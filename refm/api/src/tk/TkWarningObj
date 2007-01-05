@@ -1,0 +1,13 @@
+#@if (version <= "1.8.1")
+= class TkWarning2 < TkDialog2
+#@else
+= class TkWarningObj < TkDialogObj
+#@end
+
+== Class Methods
+
+--- new(parent = nil, mes = nil)
+
+== Instance Methods
+
+--- show(mes = nil)

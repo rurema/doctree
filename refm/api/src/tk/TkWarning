@@ -1,0 +1,7 @@
+= class TkWarning < TkWarningObj
+
+== Class Methods
+
+--- show(*args)
+
+--- new(*args)
