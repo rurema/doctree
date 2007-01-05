@@ -1,6 +1,6 @@
 = class TkMenubutton < TkLabel
 
-= Instance Methods
+== Instance Methods
 
 #@if (version <= "1.8.0")
 --- create_self(keys)
