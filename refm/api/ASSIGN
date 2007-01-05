@@ -312,7 +312,7 @@ tk/scrollable                   moriq           done
 tk/palette
 tk/bindtag
 tk/entry
-tk/mngfocus
+tk/mngfocus                     yanagi
 tk/winfo                        okkez           done
 tk/label                        okkez
 tk/grid                         kimuraw         done
