@@ -1,0 +1,73 @@
+= module TkUtil
+
+== Constants
+
+--- None
+
+--- RELEASE_DATE
+
+
+== Class Methods
+
+#@since 1.8.3
+--- _conv_args(*args)
+
+#@end
+
+#@since 1.8.2
+--- _get_eval_enc_str(obj)
+
+--- _get_eval_string(*args)
+
+--- _symbolkey2str(keys)
+
+--- bool(value)
+
+--- callback(*args)
+
+#@end
+
+--- eval_cmd(*args)
+
+#@since 1.8.2
+--- hash_kv(*args)
+
+--- install_cmd(*args)
+
+--- num_or_str(value)
+
+--- number(value)
+
+--- string(value)
+
+--- uninstall_cmd(cmd_id)
+
+#@end
+
+== Instance Methods
+
+#@since 1.8.2
+--- _conv_args(*args)
+
+--- _fromUTF8(*args)
+
+--- _get_eval_enc_str(obj)
+
+--- _get_eval_string(*args)
+
+--- _symbolkey2str(keys)
+
+--- _toUTF8(*args)
+
+--- bool(value)
+
+--- hash_kv(*args)
+
+--- num_or_str(value)
+
+--- number(value)
+
+--- string(value)
+
+
+#@end

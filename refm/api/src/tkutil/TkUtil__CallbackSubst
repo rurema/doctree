@@ -1,0 +1,32 @@
+= class TkUtil::CallbackSubst < Object
+
+== Constants
+
+--- SUBST_INFO
+
+
+== Class Methods
+
+#@since 1.8.3
+--- _define_attribute_aliases(tbl)
+
+#@end
+
+--- _get_all_subst_keys
+
+--- _get_extra_args_tbl
+
+--- _get_subst_key(str)
+
+--- _setup_subst_table(key_inf, proc_inf)
+
+--- inspect
+
+--- ret_val(val)
+
+--- scan_args(arg_key, val_key)
+
+#@since 1.8.3
+--- subst_arg(*args)
+
+#@end

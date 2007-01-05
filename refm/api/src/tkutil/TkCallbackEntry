@@ -1,0 +1,5 @@
+= class TkCallbackEntry < TkKernel
+
+== Class Mthods
+
+--- inspect
