@@ -310,7 +310,7 @@ tk/event
 tk/image
 tk/scrollable                   moriq           done
 tk/palette
-tk/bindtag
+tk/bindtag                      yanagi
 tk/entry                        yanagi          done
 tk/mngfocus                     yanagi          done
 tk/winfo                        okkez           done
