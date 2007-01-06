@@ -264,7 +264,7 @@ remote-tk
 tkafter                         okkez           done
 tkconsole
 tkmacpkg                        okkez
-tkscrollbox                     okkez
+tkscrollbox                     okkez           done
 tkbgerror                       okkez
 tkdialog
 tkmenubar
