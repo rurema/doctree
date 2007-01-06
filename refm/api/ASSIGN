@@ -416,7 +416,7 @@ tkextlib/vu/dial                date
 tkextlib/vu/pie                 date
 tkextlib/vu/setup               date
 tkextlib/vu/spinbox             date
-tkextlib/winico                 date
+tkextlib/winico                 date            done
 tmpdir                          sheepman        done
 tracer                          sheepman        done
 tsort                           sheepman        done
