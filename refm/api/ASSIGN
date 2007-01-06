@@ -282,7 +282,7 @@ tk/winpkg
 tk/root                         okkez           done
 tk/spinbox                      okkez           done
 tk/itemconfig                   moriq           done
-tk/selection                    okkez
+tk/selection                    okkez           done
 tk/checkbutton                  okkez           done
 tk/listbox                      iwadon          done
 tk/texttag                      iwadon          done
