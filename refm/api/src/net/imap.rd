@@ -61,7 +61,7 @@ IMAP access class.
 Creates a new Net::IMAP object and connects it to the specified
 port on the named host.  If usessl is true, then an attempt will
 be made to use SSL (now TLS) to connect to the server.  For this
-to work OpenSSL[[unknown:"net/imap"/[OSSL]]] and the Ruby OpenSSL[[unknown:"net/imap"/[RSSL]]]
+to work OpenSSL[OSSL] and the Ruby OpenSSL ([[lib:openssl]])
 extension need to be installed.  The certs parameter indicates
 the path or file containing the CA cert of the server, and the
 verify parameter is for the OpenSSL verification callback.
@@ -77,6 +77,10 @@ Sets the debug mode.
 --- add_authenticator(auth_type, authenticator)
 
 Adds an authenticator for Net::IMAP#authenticate.
+
+--- decode_utf7
+
+--- encode_utf7
 
 == Methods
 
@@ -168,7 +172,7 @@ from the server's set of "active" or "subscribed" mailboxes.
 
 Sends a LIST command, and returns a subset of names from
 the complete set of all names available to the client.
-The return value is an array of [[unknown:"net/imap"/Net::IMAP::MailboxList]].
+The return value is an array of [[c:Net::IMAP::MailboxList]].
 
 ex).
 
@@ -182,7 +186,7 @@ ex).
 Sends a LSUB command, and returns a subset of names from the set
 of names that the user has declared as being "active" or
 "subscribed".
-The return value is an array of [[unknown:"net/imap"/Net::IMAP::MailboxList]].
+The return value is an array of [[c:Net::IMAP::MailboxList]].
 
 --- status(mailbox, attr)
 
@@ -247,7 +251,7 @@ Sends a FETCH command to retrieve data associated with a message
 in the mailbox. the set parameter is a number or an array of
 numbers or a Range object. the number is a message sequence
 number (fetch) or a unique identifier (uid_fetch).
-The return value is an array of [[unknown:"net/imap"/Net::IMAP::FetchData]].
+The return value is an array of [[c:Net::IMAP::FetchData]].
 
 ex).
 
@@ -272,7 +276,7 @@ Sends a STORE command to alter data associated with a message
 in the mailbox. the set parameter is a number or an array of
 numbers or a Range object. the number is a message sequence
 number (store) or a unique identifier (uid_store).
-The return value is an array of [[unknown:"net/imap"/Net::IMAP::FetchData]].
+The return value is an array of [[c:Net::IMAP::FetchData]].
 
 ex).
 
@@ -305,13 +309,13 @@ Sends a SETQUOTA command along with the specified mailbox and
 quota.  If quota is nil, then quota will be unset for that
 mailbox.  Typically one needs to be logged in as server admin
 for this to work.  The IMAP quota commands are described in
-[[unknown:"net/imap"/[RFC-2087]]].
+[[RFC:2087]].
 
 --- getquota(mailbox)
 
 Sends the GETQUOTA command along with specified mailbox.
 If this mailbox exists, then an array containing a
-[[unknown:"net/imap"/Net::IMAP::MailboxQuota]] object is returned.  This
+[[c:Net::IMAP::MailboxQuota]] object is returned.  This
 command generally is only available to server admin.
 
 --- getquotaroot(mailbox)
@@ -319,20 +323,20 @@ command generally is only available to server admin.
 Sends the GETQUOTAROOT command along with specified mailbox.
 This command is generally available to both admin and user.
 If mailbox exists, returns an array containing objects of
-[[unknown:"net/imap"/Net::IMAP::MailboxQuotaRoot]] and [[unknown:"net/imap"/Net::IMAP::MailboxQuota]].
+[[c:Net::IMAP::MailboxQuotaRoot]] and [[c:Net::IMAP::MailboxQuota]].
 
 --- setacl(mailbox, user, rights)
 
 Sends the SETACL command along with mailbox, user and the
 rights that user is to have on that mailbox.  If rights is nil,
 then that user will be stripped of any rights to that mailbox.
-The IMAP ACL commands are described in [[unknown:"net/imap"/[RFC-2086]]].
+The IMAP ACL commands are described in [[RFC:2086]].
 
 --- getacl(mailbox)
 
 Send the GETACL command along with specified mailbox.
 If this mailbox exists, an array containing objects of
-[[unknown:"net/imap"/Net::IMAP::MailboxACLItem]] will be returned.
+[[c:Net::IMAP::MailboxACLItem]] will be returned.
 
 --- add_response_handler(handler = Proc.new)
 
@@ -352,6 +356,44 @@ Removes the response handler.
 
 Returns all response handlers.
 
+#@since 1.9.0
+--- starttls(cxt = nil)
+
+Sends a STARTTLS command to start TLS session.
+#@end
+
+#@since 1.8.2
+--- disconnected?
+
+Returns true if disconnected from the server.
+#@end
+
+--- thread(algorithm, search_keys, charset)
+
+As for #search(), but returns message sequence numbers in threaded
+format, as a Net::IMAP::ThreadMember tree.  The supported algorithms
+are:
+
+ORDEREDSUBJECT:: split into single-level threads according to subject,
+                 ordered by date.
+REFERENCES:: split into threads by parent/child relationships determined
+              by which message is a reply to which.
+
+Unlike #search(), +charset+ is a required argument.  US-ASCII
+and UTF-8 are sample values.
+
+See [SORT-THREAD-EXT] for more details.
+
+--- uid_thread(algorithm, search_keys, charset)
+
+As for #thread(), but returns unique identifiers instead of 
+message sequence numbers.
+
+--- client_thread
+--- client_thread=(th)
+
+The thread to receive exceptions.
+
 
 
 = class Net::IMAP::ContinuationRequest < Struct
@@ -369,7 +411,7 @@ remainder of this response is a line of text.
 
 --- data
 
-Returns the data (Net::IMAP::ResponseText).
+Returns the data ([[c:Net::IMAP::ResponseText]]).
 
 --- raw_data
 
@@ -397,7 +439,7 @@ Returns the name such as "FLAGS", "LIST", "FETCH"....
 --- data
 
 Returns the data such as an array of flag symbols,
-a [[unknown:"net/imap"/Net::IMAP::MailboxList]] object....
+a [[c:Net::IMAP::MailboxList]] object....
 
 --- raw_data
 
@@ -431,7 +473,7 @@ Returns the name. the name is one of "OK", "NO", "BAD".
 
 --- data
 
-Returns the data. See [[unknown:"net/imap"/Net::IMAP::ResponseText]].
+Returns the data. See [[c:Net::IMAP::ResponseText]].
 
 --- raw_data
 
@@ -451,7 +493,7 @@ The text may be prefixed by the response code.
 
 --- code
 
-Returns the response code. See [[unknown:"net/imap"/Net::IMAP::ResponseCode]].
+Returns the response code. See [[c:Net::IMAP::ResponseCode]].
 
 --- text
 
@@ -618,32 +660,32 @@ its value.
 
 The current data items are:
 
-  : BODY
+: BODY
       A form of BODYSTRUCTURE without extension data.
-  : BODY[<section>]<<origin_octet>>
+: BODY[<section>]<<origin_octet>>
       A string expressing the body contents of the specified section.
-  : BODYSTRUCTURE
-      An object that describes the [[unknown:"net/imap"/[MIME-IMB]]] body structure of a message.
-      See [[unknown:"net/imap"/Net::IMAP::BodyTypeBasic]], [[unknown:"net/imap"/Net::IMAP::BodyTypeText]],
-      [[unknown:"net/imap"/Net::IMAP::BodyTypeMessage]], [[unknown:"net/imap"/Net::IMAP::BodyTypeMultipart]].
-      : ENVELOPE
-          A [[unknown:"net/imap"/Net::IMAP::Envelope]] object that describes the envelope
-          structure of a message.
-      : FLAGS
-          A array of flag symbols that are set for this message. flag symbols
-          are capitalized by String#capitalize.
-      : INTERNALDATE
-          A string representing the internal date of the message.
-      : RFC822
-          Equivalent to BODY[].
-      : RFC822.HEADER
-          Equivalent to BODY.PEEK[HEADER].
-      : RFC822.SIZE
-          A number expressing the [[unknown:"net/imap"/[RFC-822]]] size of the message.
-      : RFC822.TEXT
-          Equivalent to BODY[TEXT].
-      : UID
-          A number expressing the unique identifier of the message.
+: BODYSTRUCTURE
+      An object that describes the [MIME-IMB] body structure of a message.
+      See [[c:Net::IMAP::BodyTypeBasic]], [[c:Net::IMAP::BodyTypeText]],
+      [[c:Net::IMAP::BodyTypeMessage]], [[c:Net::IMAP::BodyTypeMultipart]].
+: ENVELOPE
+      A [[c:Net::IMAP::Envelope]] object that describes the envelope
+      structure of a message.
+: FLAGS
+      A array of flag symbols that are set for this message. flag symbols
+      are capitalized by String#capitalize.
+: INTERNALDATE
+      A string representing the internal date of the message.
+: RFC822
+      Equivalent to BODY[].
+: RFC822.HEADER
+      Equivalent to BODY.PEEK[HEADER].
+: RFC822.SIZE
+      A number expressing the [[RFC:822]] size of the message.
+: RFC822.TEXT
+      Equivalent to BODY[TEXT].
+: UID
+      A number expressing the unique identifier of the message.
 
 
 
@@ -739,6 +781,24 @@ field.
 
 
 
+= class Net::IMAP::ThreadMember < Struct
+
+Net::IMAP::ThreadMember represents a thread-node returned 
+by [[m:Net::IMAP#thread]]
+
+== Instance Methods
+
+--- seqno
+
+The sequence number of this message.
+
+--- children
+
+an array of [[c:Net::IMAP::ThreadMember]] objects for mail
+items that are children of this in the thread.
+
+
+
 = class Net::IMAP::BodyTypeBasic < Struct
 
 Net::IMAP::BodyTypeBasic represents basic body structures of messages.
@@ -753,10 +813,13 @@ Returns the content media type name as defined in [MIME-IMB].
 
 Returns the content subtype name as defined in [MIME-IMB].
 
+--- media_subtype
+
+media_subtype is obsolete.  Use #subtype instead.
+
 --- param
 
-Returns a hash that represents parameters as defined in
-[[unknown:"net/imap"/[MIME-IMB]]].
+Returns a hash that represents parameters as defined in [MIME-IMB].
 
 --- content_id
 
@@ -804,19 +867,68 @@ Net::IMAP::BodyTypeText represents TEXT body structures of messages.
 
 == Instance Methods
 
+--- media_type
+
+--- subtype
+
+--- media_subtype
+
+obsolete. use #subtype instead.
+
+--- param
+
+--- content_id
+
+--- description
+
+--- encoding
+
+--- size
+
 --- lines
 
 Returns the size of the body in text lines.
 
 And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
 
+--- md5
+
+--- disposition
+
+--- language
+
+--- extension
+
+--- multipart?
+
+Returns false.
+
 
 
 = class Net::IMAP::BodyTypeMessage < Struct
 
-Net::IMAP::BodyTypeMessage represents MESSAGE/RFC822 body structures of messages.
+Net::IMAP::BodyTypeMessage represents MESSAGE/RFC822 body
+ structures of messages.
 
 == Instance Methods
+
+--- media_type
+
+--- subtype
+
+--- media_subtype
+
+obsolete. use #subtype instead.
+
+--- param
+
+--- content_id
+
+--- description
+
+--- encoding
+
+--- size
 
 --- envelope
 
@@ -827,6 +939,24 @@ Returns a [[c:Net::IMAP::Envelope]] giving the envelope structure.
 Returns an object giving the body structure.
 
 And Net::IMAP::BodyTypeMessage has all methods of [[c:Net::IMAP::BodyTypeText]].
+
+--- lines
+
+Returns the size of the body in text lines.
+
+And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
+
+--- md5
+
+--- disposition
+
+--- language
+
+--- extension
+
+--- multipart?
+
+Returns false.
 
 
 
@@ -841,6 +971,10 @@ Returns the content media type name as defined in [MIME-IMB].
 --- subtype
 
 Returns the content subtype name as defined in [MIME-IMB].
+
+--- media_subtype
+
+obsolete. use #subtype instead.
 
 --- parts
 
@@ -868,3 +1002,109 @@ Returns extension data.
 --- multipart?
 
 Returns true.
+
+
+#@# internal classes:
+#@# = class Net::IMAP::Atom
+#@# = class Net::IMAP::Literal
+#@# = class Net::IMAP::QuotedString
+#@# = class Net::IMAP::MessageSet
+#@# = class Net::IMAP::RawData
+
+
+
+= class Net::IMAP::LoginAuthenticator
+
+Authenticator for the "LOGIN" authentication type.
+See [[c:Net::IMAP#authenticate]].
+
+== Class Methods
+
+--- new(user, password)
+
+== Instance Methods
+
+--- process(data)
+
+
+
+= class Net::IMAP::CramMD5Authenticator
+
+Authenticator for the "CRAM-MD5" authentication type.
+See [[c:Net::IMAP#authenticate]].
+
+== Class Methods
+
+--- new(user, password)
+
+== Instance Methods
+
+--- process(challenge)
+
+
+
+#@since 1.9.0
+= class Net::IMAP::PlainAuthenticator
+
+Authenticator for the "PLAIN" authentication type.
+See [[c:Net::IMAP#authenticate]].
+
+== Class Methods
+
+--- new(user, password)
+
+== Instance Methods
+
+--- process(data)
+
+
+
+= class Net::IMAP::DigestMD5Authenticator
+
+Authenticator for the "DIGEST-MD5" authentication type.
+See [[c:Net::IMAP#authenticate]].
+
+== Class Methods
+
+--- new(user, password, authname = nil)
+
+== Instance Methods
+
+--- process(challenge)
+#@end
+
+
+
+= class Net::IMAP::Error < StandardError
+
+Superclass of all IMAP errors.
+
+= class Net::IMAP::DataFormatError < Net::IMAP::Error
+
+Error raised when data is in the incorrect format.
+
+= class Net::IMAP::ResponseParseError < Net::IMAP::Error
+
+Error raised when a response from the server is non-parseable.
+
+= class Net::IMAP::ResponseError < Net::IMAP::Error
+
+Superclass of all errors used to encapsulate "fail" responses
+from the server.
+
+= class Net::IMAP::NoResponseError < Net::IMAP::ResposeError
+
+Error raised upon a "NO" response from the server, indicating
+that the client command could not be completed successfully.
+
+= class Net::IMAP::BadResponseError < Net::IMAP::ResposeError
+
+Error raised upon a "BAD" response from the server, indicating
+that the client command violated the IMAP protocol, or an internal
+server failure has occurred.
+
+= class Net::IMAP::ByeResponseError < Net::IMAP::ResposeError
+
+Error raised upon a "BYE" response from the server, indicating 
+that the client is not being allowed to login, or has been timed
+out due to inactivity.
