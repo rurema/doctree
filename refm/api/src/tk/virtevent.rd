@@ -36,9 +36,7 @@ extend Tk
 
 --- new(event, *sequences)
 
-
 = class TkNamedVirtualEvent
-
-TkVirtualEvent::PreDefVirtEvent のコピー？
+alias TkVirtualEvent::PreDefVirtEvent
 
 #@end
