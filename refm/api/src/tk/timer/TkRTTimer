@@ -1,0 +1,25 @@
+= class TkRTTimer < TkTimer
+
+== Constants
+
+--- DEFAULT_OFFSET_LIST_SIZE
+
+== Class Methods
+
+--- new(*args) { ... }
+
+== Instance Methods
+
+--- start(*args) { .... }
+
+--- cancel
+--- stop
+
+--- continue(wait=nil)
+
+--- set_interval(interval)
+
+--- set_next_callback(args)
+
+--- cb_call
+
