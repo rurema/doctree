@@ -1,0 +1,41 @@
+= class TkVirtualEvent < TkObject
+extend Tk
+
+== Constants
+
+--- TkCommandNames
+
+--- TkVirtualEventID
+
+--- TkVirtualEventTBL
+
+
+== Class Methods
+
+--- getobj(event)
+
+--- info
+
+--- new(*sequences)
+
+== Instance Methods
+
+--- add(*sequences)
+
+--- delete(*sequences)
+
+--- info
+
+
+= class TkVirtualEvent::PreDefVirtEvent < TkVirtualEvent
+
+== Class Methods
+
+#@if(version <= "1.8.1")
+--- new(event)
+
+#@end
+#@since 1.8.2
+--- new(event, *sequences)
+
+#@end
