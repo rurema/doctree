@@ -409,14 +409,14 @@ tkextlib/tkimg
 tkextlib/tktable
 tkextlib/tktrans
 tkextlib/treectrl
-tkextlib/vu
-tkextlib/vu/bargraph
-tkextlib/vu/charts
-tkextlib/vu/dial
-tkextlib/vu/pie
-tkextlib/vu/setup
-tkextlib/vu/spinbox
-tkextlib/winico
+tkextlib/vu                     date
+tkextlib/vu/bargraph            date
+tkextlib/vu/charts              date
+tkextlib/vu/dial                date
+tkextlib/vu/pie                 date
+tkextlib/vu/setup               date
+tkextlib/vu/spinbox             date
+tkextlib/winico                 date
 tmpdir                          sheepman        done
 tracer                          sheepman        done
 tsort                           sheepman        done
