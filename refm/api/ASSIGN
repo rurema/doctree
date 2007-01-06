@@ -275,8 +275,8 @@ tk/wm                           okkez           done
 tk/autoload                     okkez           done
 tk/scrollbar                    yanagi          done
 tk/menuspec                     okkez           done
-tk/scrollbox                    okkez
-tk/virtevent                    okkez
+tk/scrollbox                    okkez           done
+tk/virtevent                    okkez           done
 tk/scale                        okkez           done
 tk/winpkg
 tk/root                         okkez           done
