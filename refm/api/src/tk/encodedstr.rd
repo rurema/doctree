@@ -40,7 +40,7 @@ require tk
 
 = class Tk::UTF8_String < EncodedString
 
-== Constans
+== Constants
 
 --- Encoding
 
