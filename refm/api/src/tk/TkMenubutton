@@ -1,4 +1,5 @@
 = class TkMenubutton < TkLabel
+alias TkMenuButton
 
 == Instance Methods
 

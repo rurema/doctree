@@ -1,4 +1,5 @@
 = class TkcTagString < TkcTag
+alias TkcNamedTag
 
 == Class Methods
 

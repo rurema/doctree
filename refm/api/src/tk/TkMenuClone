@@ -1,4 +1,5 @@
 = class TkMenuClone < TkMenu
+alias TkCloneMenu
 
 == Class Methods
 

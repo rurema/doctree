@@ -1,4 +1,5 @@
 = class TkPanedWindow < TkWindow
+alias TkPanedwindow
 
 == Instance Methods
 
@@ -43,9 +44,3 @@
 --- TkCommandNames
 
 --- WidgetClassName
-
-= reopen Kernel
-
-== Constants
-
---- TkPanedwindow

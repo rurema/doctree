@@ -2,6 +2,7 @@
 = class TkWarning2 < TkDialog2
 #@else
 = class TkWarningObj < TkDialogObj
+alias TkWarning2
 #@end
 
 == Class Methods

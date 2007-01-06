@@ -3,6 +3,7 @@
 require tk
 
 = class TkMsgCatalog < TkObject
+alias TkMsgCat
 extend Tk
 include TkCore
 
@@ -80,11 +81,5 @@ include TkCore
 --- MSGCAT_EXT
 
 --- UNKNOWN_CBTBL
-
-= reopen Kernel
-
-== Constants
-
---- TkMsgCat
 
 #@end

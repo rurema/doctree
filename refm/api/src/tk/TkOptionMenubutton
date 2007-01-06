@@ -1,4 +1,5 @@
 = class TkOptionMenubutton < TkMenubutton
+alias TkOptionMenuButton
 
 == Class Methods
 

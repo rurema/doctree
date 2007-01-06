@@ -8,12 +8,4 @@ require tk/variable
 #@include(TkWarningObj)
 #@include(TkWarning)
 
-= reopen Kernel
-
-== Constants
-
---- TkDialog2
-
---- TkWarning2
-
 #@end

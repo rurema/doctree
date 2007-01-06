@@ -39,12 +39,6 @@ include TkTreatItemFont
 #@include(tk/TkBitmapImage)
 #@include(tk/TkPhotoImage)
 
-= reopen Kernel
-
-== Constants
-
---- TkcNamedTag
-
 #@else
 
 require tk/canvas

@@ -11,10 +11,4 @@ require tk/canvas
 #@include(TkcTagCurrent)
 #@include(TkcGroup)
 
-= reopen Kernel
-
-== Constants
-
---- TkcNamedTag
-
 #@end

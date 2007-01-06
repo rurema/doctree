@@ -15,14 +15,4 @@ require tk/menuspec
 #@include(TkOptionMenubutton)
 #@include(TkOptionMenubutton__OptionMenu)
 
-= reopen Kernel
-
-== Constants
-
---- TkCloneMenu
-
---- TkMenuButton
-
---- TkOptionMenuButton
-
 #@end
