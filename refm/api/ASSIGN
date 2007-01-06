@@ -303,11 +303,11 @@ tk/labelframe                   iwadon          done
 tk/toplevel                     iwadon          done
 tk/font                         iwadon          done
 tk/encodedstr                   okkez           done
-tk/namespace
+tk/namespace                    iwadon
 tk/textimage                    iwadon          done
-tk/frame
-tk/event
-tk/image
+tk/frame                        iwadon
+tk/event                        iwadon
+tk/image                        iwadon
 tk/scrollable                   moriq           done
 tk/palette                      yanagi          done
 tk/bindtag                      yanagi          done
