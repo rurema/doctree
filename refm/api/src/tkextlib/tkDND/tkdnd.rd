@@ -1,0 +1,23 @@
+#@since 1.8.2
+
+require tk
+require tkextlib/setup
+require tkextlib/tkDND/setup
+
+= Module Tk::TkDND
+
+== Class Methods
+--- package_version
+
+#@since 1.8.3
+--- package_name
+
+#@end
+
+= reopen TkWindow
+include Tk::TkDND::Shape
+
+#@include(DND_Subst)
+#@include(DND)
+
+#@end

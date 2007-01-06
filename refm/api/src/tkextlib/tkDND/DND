@@ -1,0 +1,23 @@
+#@since 1.8.2
+
+= module Tk::TkDND::DND
+
+== Singleton Methods
+--- version
+
+== Instance Methods
+--- dnd_bindtarget_info(type = nil, event = nil)
+
+--- dnd_bindtarget(type, event, *args)
+
+--- dnd_cleartarget
+
+--- dnd_bindsource_info(type = nil)
+
+--- dnd_bindsource(type, *args)
+
+--- dnd_clearsource
+
+--- dnd_drag(keys = nil)
+
+#@end
