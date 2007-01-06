@@ -1,0 +1,31 @@
+= class TkFrame < TkWindow
+
+== Class Methods
+
+--- new(parent = nil, keys = nil)
+
+--- database_class
+
+--- database_classname
+
+--- bind(*args) { ... }
+
+--- bind_append(*args) { ... }
+
+--- bind_remove(*args)
+
+--- bindinfo(*args)
+
+== Instance Methods
+
+--- database_classname
+
+#@if (version <= "1.8.0")
+--- create_self(keys)
+#@end
+
+== Constants
+
+--- TkCommandNames
+
+--- WidgetClassName

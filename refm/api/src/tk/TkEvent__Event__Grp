@@ -1,0 +1,61 @@
+#@since 1.8.3
+
+= module TkEvent::Event::Grp
+
+== Constants
+
+--- KEY
+
+--- BUTTON
+
+--- MOTION
+
+--- CROSSING
+
+--- FOCUS
+
+--- EXPOSE
+
+--- VISIBILITY
+
+--- CREATE
+
+--- DESTROY
+
+--- UNMAP
+
+--- MAP
+
+--- REPARENT
+
+--- CONFIG
+
+--- GRAVITY
+
+--- CIRC
+
+--- PROP
+
+--- COLORMAP
+
+--- VIRTUAL
+
+--- ACTIVATE
+
+--- MAPREQ
+
+--- CONFIGREQ
+
+--- RESIZEREQ
+
+--- CIRCREQ
+
+--- MWHEEL
+
+--- ALL
+
+--- KEY_BUTTON_MOTION_VIRTUAL
+
+--- KEY_BUTTON_MOTION_CROSSING
+
+#@end

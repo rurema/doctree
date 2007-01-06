@@ -1,0 +1,17 @@
+#@since 1.8.2
+
+= class TkNamespace::NsCode < TkObject
+
+== Class Methods
+
+--- new(scope, use_obj_id = false)
+
+== Instance Methods
+
+--- path
+
+--- to_eval
+
+--- call(*args)
+
+#@end

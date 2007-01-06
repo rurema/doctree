@@ -1,0 +1,154 @@
+#@since 1.8.2
+
+= class TkNamespace < TkObject
+extend Tk
+
+== Class Methods
+
+#@since 1.8.4
+--- id2obj(id)
+#@end
+
+--- new(name = nil, parent = nil)
+
+--- children(*args)
+
+--- code(script = Proc.new)
+
+#@since 1.8.4
+--- current_path
+#@end
+
+--- current
+
+--- delete(*ns_list)
+
+--- ensemble_create(*keys)
+
+--- ensemble_configure(cmd, slot, value = Tk::None
+
+--- ensemble_configinfo(cmd, slot = nil))
+
+--- ensemble_exist?(cmd)
+
+--- eval(namespace, cmd = Proc.new, *args)
+
+--- exist?(ns)
+
+--- export(*patterns)
+
+--- export_with_clear(*patterns)
+
+--- forget(*patterns)
+
+--- import(*patterns)
+
+--- force_import(*patterns)
+
+--- inscope(namespace, script, *args)
+
+--- origin(cmd)
+
+--- parent(namespace = Tk::None)
+
+#@since 1.8.3
+--- get_path
+
+--- set_path(*namespace_list)
+#@end
+
+--- qualifiers(str)
+
+--- tail(str)
+
+#@since 1.8.5
+--- upvar(namespace, *var_pairs)
+
+--- get_unknown_handler
+
+--- set_unknown_handler(cmd = Proc.new)
+#@end
+
+--- which(name)
+
+--- which_command(name)
+
+--- which_variable(name)
+
+== Instance Methods
+
+#@since 1.8.4
+--- install_cmd(cmd)
+#@end
+
+--- __tk_call(*args)
+
+--- __tk_call_without_enc(*args)
+
+--- __tk_call_with_enc(*args)
+
+--- tk_call(*args)
+--- ns_tk_call(*args)
+
+--- tk_call_without_enc(*args)
+--- ns_tk_call_without_enc(*args)
+
+--- tk_call_with_enc(*args)
+--- ns_tk_call_with_enc(*args)
+
+--- children
+
+--- code(script = Proc.new)
+
+#@since 1.8.4
+--- current_path
+#@end
+
+--- current_namespace
+--- current
+
+--- delete
+
+--- eval(cmd = Proc.new, *args)
+
+--- exist?
+
+--- export
+
+--- export_with_clear
+
+--- forget
+
+--- import
+
+--- force_import
+
+--- inscope(script, *args)
+
+--- parent
+
+#@since 1.8.3
+--- set_path
+#@end
+
+#@since 1.8.5
+--- upvar(*var_pairs)
+#@end
+
+== Constants
+
+--- TkCommandNames
+
+--- Tk_Namespace_ID_TBL
+
+--- Tk_Namespace_ID
+
+#@since 1.8.5
+--- Tk_NsCode_RetObjID_TBL
+#@end
+
+#@since 1.8.4
+--- Global
+#@end
+
+#@end

@@ -1,0 +1,19 @@
+#@since 1.8.3
+
+= class TkNamespace::Ensemble < TkObject
+
+== Class Methods
+
+--- exist?(ensemble)
+
+--- new(keys = {})
+
+== Instance Methods
+
+--- cget(slot)
+
+--- configinfo(slot = nil)
+
+--- exists?
+
+#@end

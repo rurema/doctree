@@ -1,0 +1,123 @@
+#@since 1.8.2
+
+= class TkEvent::Event < TkUtil::CallbackSubst
+
+== Class Methods
+
+#@since 1.8.3
+--- type_id(name)
+
+--- type_name(id)
+
+--- group_flag(id)
+#@end
+
+== Instance Methods
+
+#@since 1.8.3
+--- valid_fields(group_flag = nil)
+
+--- valid_for_generate(group_flag = nil)
+
+--- generate(win, modkeys = {})
+#@end
+
+--- above
+
+--- borderwidth
+
+--- char
+
+--- count
+
+--- detail
+#@since 1.8.4
+--- data
+#@end
+
+--- focus
+
+--- height
+
+--- keycode
+
+--- keysym
+
+--- keysym_num
+
+--- mode
+
+--- num
+--- button
+
+--- override
+
+--- place
+
+#@since 1.8.3
+--- property
+#@end
+
+--- rootwin_id
+--- root
+
+--- send_event
+--- sendevent
+
+--- serial
+
+--- state
+
+--- subwindow
+
+--- time
+
+--- type
+
+--- wheel_delta
+--- delta
+
+--- widget
+#@since 1.8.3
+--- window
+#@end
+
+--- width
+
+--- win_hex
+
+--- x
+
+--- x_root
+--- root_x
+--- rootx
+
+--- y
+
+--- y_root
+--- root_y
+--- rooty
+
+== Constants
+
+#@since 1.8.3
+--- TYPE_NAME_TBL
+
+--- TYPE_ID_TBL
+
+--- TYPE_GROUP_TBL
+
+--- FIELD_FLAG
+
+--- FIELD_OPERATION
+#@end
+
+--- KEY_TBL
+
+--- PROC_TBL
+
+#@since 1.8.3
+--- ALIAS_TBL
+#@end
+
+#@end

@@ -1,0 +1,18 @@
+#@since 1.8.2
+
+= class TkNamespace::ScopeArgs < TkObject
+include Tk
+
+== Class Methods
+
+--- new(namespace, *args)
+
+== Instance Methods
+
+--- tk_call(*args)
+
+--- tk_call_without_enc(*args)
+
+--- tk_call_with_enc(*args)
+
+#@end

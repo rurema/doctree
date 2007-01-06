@@ -1,0 +1,30 @@
+= class TkImage < TkObject
+include Tk
+
+== Class Methods
+
+--- new(keys = nil)
+
+--- names
+
+--- types
+
+== Instance Methods
+
+--- delete
+
+--- height
+
+--- inuse
+
+--- itemtype
+
+--- width
+
+== Constants
+
+--- TkCommandNames
+
+--- Tk_IMGTBL
+
+--- Tk_Image_ID
