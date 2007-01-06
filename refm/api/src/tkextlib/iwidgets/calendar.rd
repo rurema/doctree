@@ -38,5 +38,7 @@ alias get
 
 
 
+#@include(calendar/Calendar__CalendarCommand)
+#@include(calendar/Calendar__CalendarCommand__ValidateArgs)
 
 #@end

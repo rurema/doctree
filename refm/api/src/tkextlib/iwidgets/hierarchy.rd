@@ -169,5 +169,11 @@ based on tk/scrollable.rb
 
 
 
+#@include(hierarchy/Hierarchy__QueryCommand)
+#@include(hierarchy/Hierarchy__QueryCommand__ValidateArgs)
+#@include(hierarchy/Hierarchy__IndicatorCommand)
+#@include(hierarchy/Hierarchy__IndicatorCommand__ValidateArgs)
+#@include(hierarchy/Hierarchy__IconCommand)
+#@include(hierarchy/Hierarchy__IconCommand__ValidateArgs)
 
 #@end

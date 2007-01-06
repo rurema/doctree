@@ -4,6 +4,18 @@ require tk
 require tkextlib/itcl
 require tkextlib/itk
 
-#@include(Tk__Iwidgets)
+= module Tk::Iwidgets
+
+extend TkCore
+
+== Singleton Methods
+
+--- package_name
+
+
+
+--- package_version
+
+
 
 #@end

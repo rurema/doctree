@@ -100,5 +100,7 @@ based on tk/scrollable.rb
 
 
 
+#@include(entryfield/Entryfield__EntryfieldValidate)
+#@include(entryfield/Entryfield__EntryfieldValidate__ValidateArgs)
 
 #@end
