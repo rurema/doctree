@@ -1,9 +1,10 @@
 #@since 1.8.2
-= class Tk::Winico < TkObject
 
 require tk
 require tkextlib/setup
 require tkextlib/winico/setup
+
+= class Tk::Winico < TkObject
 
 == Class Methods
 --- package_version
@@ -18,7 +19,7 @@ require tkextlib/winico/setup
 
 --- new_from_resource(resource_name, file_name = nil)
 
---- new(file_name, resource_name=nil, winico_id=nil)
+--- new(file_name, resource_name = nil, winico_id = nil)
 
 == Instance Methods
 --- id
