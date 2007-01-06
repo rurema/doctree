@@ -1,0 +1,234 @@
+#@since 1.8.2
+
+= class Tk::TreeCtrl < TkWindow
+include Tk::TreeCtrl::ConfigMethod
+include Scrollable
+
+== Class Methods
+#@since 1.8.3
+--- package_name
+
+#@end
+
+--- package_version
+
+--- loupe(img, x, y, w, h, zoom)
+
+== Instance Methods
+--- install_bind(cmd, *args)
+
+--- activate(desc)
+
+--- canvasx(x)
+
+--- canvasy(y)
+
+--- collapse(*dsc) 
+
+--- collapse_recurse(*dsc)
+
+--- column_bbox(idx)
+
+--- column_delete(idx)
+
+--- column_index(idx)
+
+--- column_move(idx, to)
+
+--- column_needed_width(idx)
+--- column_neededwidth(idx)
+
+--- column_width(idx)
+
+--- compare(item1, op, item2)
+
+--- contentbox
+
+--- depth(item = None)
+
+--- dragimage_add(item, *args)
+
+--- dragimage_clear
+
+--- dragimage_offset(*args)
+
+--- dragimage_visible(*args)
+
+--- dragimage_visible?
+
+--- element_create(elem, type, keys = nil)
+
+--- element_delete(*elems)
+
+--- element_names
+
+--- element_type(elem)
+
+--- expand(*dsc)
+
+--- expand_recurse(*dsc)
+
+--- identify(x, y)
+
+--- index(idx)
+
+--- item_ancestors(item)
+
+--- item_bbox(item, *args)
+
+--- item_children(item)
+
+--- item_complex(item, *args)
+
+--- item_create
+
+--- item_delete(first, last = None)
+
+--- item_dump(item)
+
+--- item_element_actual(item, column, elem, key)
+
+--- item_firstchild(parent, child = nil)
+--- item_first_child(parent, child = nil)
+
+--- item_hashbutton(item, st = None)
+
+--- item_hashbutton?(item)
+
+--- item_index(item)
+
+--- item_isancestor(item, des)
+--- item_is_ancestor(item, des)
+--- item_isancestor?(item, des)
+--- item_is_ancestor?(item, des)
+
+--- item_isopen(item)
+--- item_is_open(item)
+--- item_isopen?(item)
+--- item_is_open?(item)
+--- item_isopened?(item)
+--- item_is_opened?(item)
+
+--- item_lastchild(parent, child = nil)
+--- item_last_child(parent, child = nil)
+
+--- item_nextsibling(sibling, nxt = nil)
+--- item_next_sibling(sibling, nxt = nil)
+
+--- item_numchildren
+--- item_num_children
+--- item_children_size
+
+--- item_parent(item)
+
+--- item_prevsibling(sibling, prev = nil)
+--- item_prev_sibling(sibling, prev = nil)
+
+--- item_remove(item)
+
+--- item_rnc(item)
+
+--- item_sort(item, *opts)
+
+--- item_state_get(item, *args)
+
+--- item_state_set(item, *args)
+
+--- item_style_elements(item, colun)
+
+--- item_style_map(item, column, style, map)
+
+--- item_style_set(item, column = nil, *args)
+
+--- item_text(item, column, txt = nil, *args)
+
+--- item_visible(item, st = None)
+
+--- item_visible?(item)
+
+--- marquee_anchor(*args)
+
+--- marquee_coords(*args)
+
+--- marquee_corner(*args)
+
+--- marquee_identify
+
+--- marquee_visible(st = None)
+
+--- marquee_visible?
+
+--- notify_bind(obj, event, *args)
+
+--- notify_bind_append(obj, event, *args)
+
+--- notify_bindremove(obj, event)
+
+--- notify_bindinfo(obj, event = nil)
+
+--- notify_detailnames(event)
+
+--- notify_eventnames
+
+--- notify_generate(pattern, char_map = None)
+
+--- notify_install_detail(event, detail, percents_cmd = nil, &b)
+
+--- notify_install_event(event, percents_cmd = nil, &b)
+
+--- notify_linkage(event, detail = None)
+
+--- notify_uninstall_detail(event, detail)
+
+--- notify_uninstall_event(event)
+
+--- numcolumns
+
+--- numitems
+
+--- orphans
+
+--- range(first, last)
+
+--- state_define(name)
+
+--- state_linkage(name)
+
+--- state_names
+
+--- state_undefine(*names)
+
+--- see(item)
+
+--- selection_add(first, last = None)
+
+--- selection_anchor(item = None)
+
+--- selection_clear(*args) # first, last
+
+--- selection_count
+
+--- selection_get
+
+--- selection_includes(item)
+
+--- selection_modify(sel, desel)
+
+--- style_create(style, keys = None)
+
+--- style_delete(*args)
+
+--- style_elements(style, *elems)
+
+--- style_layout(style, elem, keys = None)
+
+--- style_names
+
+--- toggle(*items)
+
+--- toggle_recurse
+
+= class Tk::TreeCtrl_Widget
+alias Tk::TreeCtrl
+
+#@end

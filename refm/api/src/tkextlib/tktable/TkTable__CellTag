@@ -1,0 +1,37 @@
+#@since 1.8.2
+
+= class Tk::TkTable::CellTag < TkObject
+
+== Class Methods
+--- id2obj(table, id)
+
+--- new(parent, keys = nil)
+
+== Instance Methods
+--- id
+
+--- destroy
+--- delete
+
+--- exist?
+
+--- include?(idx)
+
+--- add_cell(*args)
+
+--- add_col(*args)
+
+--- add_row(*args)
+
+--- raise(target = None)
+
+--- lower(target = None)
+
+--- cget(key)
+
+--- configure(key, val = None)
+
+--- configinfo(key = nil)
+
+--- current_configinfo(key = nil)
+#@end

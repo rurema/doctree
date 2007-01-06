@@ -1,0 +1,8 @@
+#@since 1.8.2
+
+= class Tk::TkTable::NamedCellTag < Tk::TkTable::CellTag
+
+== Class Methods
+--- new(parent, name, keys = nil)
+
+#@end

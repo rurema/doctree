@@ -1,0 +1,66 @@
+#@since 1.8.2
+
+= module Tk::TreeCtrl::ConfigMethod
+include TkItemConfigMethod
+
+== Instance Methods
+--- treectrl_tagid(key, obj)
+
+--- tagid(mixed_id)
+
+--- column_cget(tagOrId, option)
+
+--- column_configure(tagOrId, slot, value = None)
+
+--- column_configinfo(tagOrId, slot = nil)
+
+--- current_column_configinfo(tagOrId, slot = nil)
+
+--- dragimage_cget(tagOrId, option)
+
+--- dragimage_configure(tagOrId, slot, value = None)
+
+--- dragimage_configinfo(tagOrId, slot = nil)
+
+--- current_dragimage_configinfo(tagOrId, slot = nil)
+
+--- element_cget(tagOrId, option)
+
+--- element_configure(tagOrId, slot, value = None)
+
+--- element_configinfo(tagOrId, slot = nil)
+
+--- current_element_configinfo(tagOrId, slot = nil)
+
+--- item_element_cget(tagOrId, option)
+
+--- item_element_configure(tagOrId, slot, value = None)
+
+--- item_element_configinfo(tagOrId, slot = nil)
+
+--- current_item_element_configinfo(tagOrId, slot = nil)
+
+--- marquee_cget(tagOrId, option)
+
+--- marquee_configure(tagOrId, slot, value = None)
+
+--- marquee_configinfo(tagOrId, slot = nil)
+
+--- current_marquee_configinfo(tagOrId, slot = nil)
+
+--- notify_cget(win, pattern, option)
+
+--- notify_configure(win, pattern, slot, value = None)
+
+--- notify_configinfo(win, pattern, slot = nil)
+--- current_notify_configinfo(win, pattern, slot = nil)
+
+--- style_cget(tagOrId, option)
+
+--- style_configure(tagOrId, slot, value = None)
+
+--- style_configinfo(tagOrId, slot = nil)
+
+--- current_style_configinfo(tagOrId, slot = nil)
+
+#@end

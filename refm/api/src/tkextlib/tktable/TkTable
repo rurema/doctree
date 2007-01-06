@@ -1,0 +1,157 @@
+#@since 1.8.2
+
+= class Tk::TkTable < TkWindow
+include Scrollable
+include Tk::TkTable::ConfigMethod
+include Tk::ValidateConfigure
+
+== Class Methods
+#@since 1.8.3
+--- package_name
+
+#@end
+
+--- package_version
+
+== Instance Methods
+--- activate(idx)
+
+--- bbox(idx)
+
+--- border_mark(x, y)
+
+--- border_mark_row(x, y)
+
+--- border_mark_col(x, y)
+
+--- border_dragto(x, y)
+
+--- clear_cache(first = None, last = None)
+
+--- clear_sizes(first = None, last = None)
+
+--- clear_tags(first = None, last = None)
+
+--- clear_all(first = None, last = None)
+
+--- curselection
+
+--- curselection=(val)
+
+--- curvalue
+
+--- curvalue=(val)
+
+--- delete_active(idx1, idx2 = None)
+
+--- delete_cols(*args)
+
+--- delete_rows(*args)
+
+--- get(idx)
+
+--- get_area(idx1, idx2)
+
+--- height_list
+
+--- height(row)
+
+--- set_height(*pairs)
+
+--- hidden_list
+
+--- hidden?(idx, *args)
+
+--- icursor
+
+--- icursor_set(idx)
+
+--- index(idx)
+
+--- row_index(idx)
+
+--- col_index(idx)
+
+--- insert_active(idx, val)
+
+--- insert_cols(*args)
+
+--- insert_rows(*args)
+
+--- reread
+
+--- scan_mark(x, y)
+
+--- scan_dragto(x, y)
+
+--- see(idx)
+
+--- selection_anchor(idx)
+
+--- selection_clear(first, last = None)
+
+--- selection_clear_all
+
+--- selection_include?(idx)
+
+#@since 1.8.3
+--- selection_present
+
+#@end
+
+--- selection_set(first, last = None)
+
+--- set(*pairs)
+
+--- set_row(*pairs)
+
+--- set_col(*pairs)
+
+--- spans
+--- span_list
+
+--- set_spans(*pairs)
+
+--- tagid(tag)
+
+--- tagid2obj(tagid)
+
+--- tag_cell(tag, *cells)
+
+--- tag_reset(*cells)
+
+--- tag_col(tag, *cols)
+
+--- tag_col_reset(*cols)
+
+--- tag_delete(tag)
+
+--- tag_exist?(tag)
+
+--- tag_include?(tag, idx)
+
+--- tag_lower(tag, target = None)
+
+--- tag_names(pat = None)
+
+--- tag_raise(tag, target = None)
+
+--- tag_row(tag, *rows)
+
+--- tag_row_reset(*rows)
+
+--- validate(idx)
+
+--- width_list
+
+--- width(row)
+
+--- set_width(*pairs)
+
+--- window_delete(*args)
+
+--- window_move(from_idx, to_idx)
+
+--- window_names(pat = None)
+
+#@end

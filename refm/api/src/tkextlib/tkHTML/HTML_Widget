@@ -1,0 +1,171 @@
+#@since 1.8.2
+
+= class Tk::HTML_Widget < TkWindow
+include Scrollable
+
+== Class Methods
+#@since 1.8.3
+--- package_name
+
+#@end
+
+--- package_version
+
+--- reformat(src, dst, txt)
+
+--- url_join(*args)
+
+--- url_split(uri)
+
+--- lockcopy(src, dst)
+
+--- gzip_file(file, dat)
+
+--- gunzip_file(file, dat)
+
+--- gzip_data(dat)
+
+--- gunzip_data(dat)
+
+--- base64_encode(dat)
+
+--- base64_decode(dat)
+
+--- text_format(dat, len)
+
+--- xor(cmd, *args)
+
+--- stdchan(cmd, channel)
+
+== Instance Methods
+--- clipping_window
+--- clipwin
+--- htmlclip
+
+--- bgimage(image, tid = None)
+
+--- clear
+
+--- coords(index = None, percent = None)
+
+--- forminfo(*args)
+
+--- href(x, y)
+
+--- image_add(id, img)
+
+--- image_at(x, y)
+
+--- images
+
+--- image_set(id, num)
+
+--- image_update(id, imgs)
+
+--- index(idx, count = None, unit = None)
+
+--- insert_cursor(idx)
+
+--- names
+
+--- on_screen(id, x, y)
+
+--- over
+
+--- over_markup(x, y)
+
+--- over_attr(x, y, attrs)
+
+--- parse(txt)
+
+--- resolver(*uri_args)
+
+--- selection_clear
+
+--- selection_set(first, last)
+
+--- refresh(*opts)
+
+--- layout
+
+--- sizewindow(*args)
+
+--- postscript(*args)
+
+--- source
+
+--- plain_text(first, last)
+--- ascii_text(first, last)
+--- text_ascii(first, last)
+
+--- text_delete(first, last)
+
+--- html_text(first, last)
+--- text_html(first, last)
+
+--- text_insert(idx, txt)
+
+--- break_text(idx)
+
+--- text_find(txt, *args)
+
+--- text_table(idx, imgs = None, attrs = None)
+
+--- token_append(tag, *args)
+
+--- token_delete(first, last = None)
+
+--- token_define(*args)
+
+--- token_find(tag, *args)
+
+--- token_get(first, last = None)
+
+--- token_list(first, last = None)
+
+--- token_markup(first, last = None)
+
+--- token_DOM(first, last = None)
+--- token_dom(first, last = None)
+--- token_domtokens(first, last = None)
+--- token_dom_tokens(first, last = None)
+
+--- token_get_end(idx)
+--- token_getend(idx)
+
+--- token_offset(start, num1, num2)
+
+--- token_get_attr(idx, name = None)
+
+--- token_set_attr(idx, name = None, val = None)
+
+--- token_handler(tag, cmd = nil, &b)
+
+--- token_insert(idx, tag, *args)
+
+--- token_attrs(*args)
+
+--- token_unique(*args)
+
+--- token_on_events(*args)
+
+--- dom_nameidx(tag, name)
+--- dom_name_index(tag, name)
+
+--- dom_radioidx(tag, name)
+--- dom_radio_index(tag, name)
+
+--- dom_id(*spec)
+
+--- dom_ids(*spec)
+
+--- dom_value(*spec)
+
+--- dom_attr(idx)
+
+--- dom_formel(name)
+--- dom_form_element(name)
+
+--- dom_tree(idx, val)
+
+#@end

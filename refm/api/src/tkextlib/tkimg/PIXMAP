@@ -1,0 +1,12 @@
+#@since 1.8.2
+
+= module Tk::Img::PIXMAP
+== Singleton Methods
+#@since 1.8.3
+--- package_name
+
+#@end
+
+--- package_version
+
+#@end

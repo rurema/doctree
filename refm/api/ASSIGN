@@ -421,12 +421,12 @@ tkextlib/tile/tscale
 tkextlib/tile/tscrollbar
 tkextlib/tile/tseparator
 tkextlib/tile/tsquare
-tkextlib/tkDND                  date
-tkextlib/tkHTML                 date
-tkextlib/tkimg                  date
-tkextlib/tktable                date
-tkextlib/tktrans                date
-tkextlib/treectrl               date
+tkextlib/tkDND                  date            done
+tkextlib/tkHTML                 date            done
+tkextlib/tkimg                  date            done
+tkextlib/tktable                date            done
+tkextlib/tktrans                date            done
+tkextlib/treectrl               date            done
 tkextlib/vu                     date            done
 tkextlib/vu/bargraph            date            done
 tkextlib/vu/charts              date            done
