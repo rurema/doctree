@@ -280,10 +280,10 @@ tk/virtevent                    okkez           done
 tk/scale                        okkez           done
 tk/winpkg
 tk/root                         okkez           done
-tk/spinbox                      okkez
+tk/spinbox                      okkez           done
 tk/itemconfig                   moriq           done
 tk/selection                    okkez
-tk/checkbutton                  okkez
+tk/checkbutton                  okkez           done
 tk/listbox                      iwadon          done
 tk/texttag                      iwadon          done
 tk/textwindow                   iwadon          done
