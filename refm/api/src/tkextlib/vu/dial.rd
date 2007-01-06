@@ -7,7 +7,7 @@ require tkextlib/vu
 == Instance Methods
 --- coords(val = nil)
 
---- constrain(val = Tk::None)
+--- constrain(val = None)
 
 --- get
 
@@ -25,6 +25,6 @@ require tkextlib/vu
 
 --- set_tag_constrain(val, str, *args)
 
---- set(val = Tk::None)
+--- set(val = None)
 
 #@end

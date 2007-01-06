@@ -28,9 +28,9 @@
 
 --- explode_value
 
---- lower(other = Tk::None)
+--- lower(other = None)
 
---- raise(other = Tk::None)
+--- raise(other = None)
 
 --- set(value)
 --- set_value(value)

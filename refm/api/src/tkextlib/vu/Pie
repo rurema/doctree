@@ -13,14 +13,14 @@ include Tk::Vu::PieSliceConfigMethod
 
 --- explode_value(slice)
 
---- lower(slice, below = Tk::None)
+--- lower(slice, below = None)
 
 --- names(*glob_pats)
 --- slices(*glob_pats)
 
 --- order(*args)
 
---- raise(slice, above = Tk::None)
+--- raise(slice, above = None)
 
 --- swap(slice1, slice2)
 
@@ -31,7 +31,7 @@ include Tk::Vu::PieSliceConfigMethod
 
 --- slice_value(slice)
 
---- value(val = Tk::None)
---- sum_value(val = Tk::None)
+--- value(val = None)
+--- sum_value(val = None)
 
 #@end
