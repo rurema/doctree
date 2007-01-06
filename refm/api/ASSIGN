@@ -277,7 +277,7 @@ tk/scrollbar                    yanagi          done
 tk/menuspec                     okkez
 tk/scrollbox
 tk/virtevent
-tk/scale                        okkez
+tk/scale                        okkez           done
 tk/winpkg
 tk/root                         okkez           done
 tk/spinbox
