@@ -34,7 +34,7 @@ include TkComm
 
 --- after_idle(cmd = Proc.new)
 
---- appname(name = None)
+--- appname(name = Tk::None)
 
 --- appsend(interp, async, *args)
 

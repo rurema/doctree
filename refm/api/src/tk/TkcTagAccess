@@ -69,7 +69,7 @@ def configure(keys)
 
 end
 
---- configure(key, value = None)
+--- configure(key, value = Tk::None)
 
 
 
@@ -81,15 +81,15 @@ end
 
 
 
---- dchars(first, last = None)
+--- dchars(first, last = Tk::None)
 
 
 
---- deltag(tag_to_del = None)
+--- deltag(tag_to_del = Tk::None)
 
 Alias for #dtag
 
---- dtag(tag_to_del = None)
+--- dtag(tag_to_del = Tk::None)
 alias deltag
 
 
@@ -127,7 +127,7 @@ alias list
 
 Alias for #find
 
---- lower(belowthis = None)
+--- lower(belowthis = Tk::None)
 
 
 
@@ -135,7 +135,7 @@ Alias for #find
 
 
 
---- raise(abovethis = None)
+--- raise(abovethis = Tk::None)
 
 
 

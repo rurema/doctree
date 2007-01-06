@@ -7,9 +7,9 @@ include Tk
 
 == Class Methods
 
---- useinputmethods(value = None, window = nil)
+--- useinputmethods(value = Tk::None, window = nil)
 
---- useinputmethods_displayof(window, value = None)
+--- useinputmethods_displayof(window, value = Tk::None)
 
 --- caret(window, keys = nil)
 
@@ -23,11 +23,11 @@ include Tk
 
 == Instance Methods
 
---- useinputmethods(value = None)
+--- useinputmethods(value = Tk::None)
 
 --- caret(keys = nil)
 
---- imconfigure(slot, value = None)
+--- imconfigure(slot, value = Tk::None)
 
 --- imconfiginfo(slot = nil)
 

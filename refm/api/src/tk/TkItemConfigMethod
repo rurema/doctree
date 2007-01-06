@@ -18,7 +18,7 @@ include TkItemConfigOptkeys
 
 
 
---- itemconfigure(tagOrId, slot, value = None)
+--- itemconfigure(tagOrId, slot, value = Tk::None)
 
 
 

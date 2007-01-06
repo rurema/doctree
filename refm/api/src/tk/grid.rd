@@ -125,7 +125,7 @@ argsに空のハッシュ{}を指定すると現在の設定を返します。
 
 --- location(master, x, y)
 
---- propagate(master, mode = None)
+--- propagate(master, mode = Tk::None)
 
 --- remove(*args)
 
@@ -135,7 +135,7 @@ argsに空のハッシュ{}を指定すると現在の設定を返します。
 
 == Instance Methods
 
---- anchor(master, anchor = None)
+--- anchor(master, anchor = Tk::None)
 
 --- add(widget, *args)
 

@@ -26,7 +26,7 @@ Alias for #set_to_all
 
 Alias for #set_to_below
 
---- closest(x, y, halo = None, start = None)
+--- closest(x, y, halo = Tk::None, start = Tk::None)
 
 Alias for #set_to_closest
 
@@ -75,7 +75,7 @@ alias below
 
 
 
---- set_to_closest(x, y, halo = None, start = None)
+--- set_to_closest(x, y, halo = Tk::None, start = Tk::None)
 alias closest
 
 

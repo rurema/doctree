@@ -104,13 +104,13 @@ include TkCore
 #@end
 
 #@since 1.8.2
---- load_tcllibrary(file, pkg_name = None, interp = None)
+--- load_tcllibrary(file, pkg_name = Tk::None, interp = Tk::None)
 
 --- load_tclscript(file, enc = nil)
 
 #@end
 
---- lower_window(win, below = None)
+--- lower_window(win, below = Tk::None)
 
 #@since 1.8.2
 --- pack(*args)
@@ -134,13 +134,13 @@ include TkCore
 #@end
 
 #@since 1.8.3
---- raise_window(win, above = None)
+--- raise_window(win, above = Tk::None)
 
 #@end
 
 --- show_kinsoku(mode = 'both')
 
---- strictMotif(mode = None)
+--- strictMotif(mode = Tk::None)
 
 #@since 1.8.2
 --- subst_tk_backslash(str)

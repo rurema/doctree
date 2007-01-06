@@ -25,7 +25,7 @@ include Tk::Scrollable
 
 
 
---- addtag_closest(tagOrId, x, y, halo = None, start = None)
+--- addtag_closest(tagOrId, x, y, halo = Tk::None, start = Tk::None)
 
 
 
@@ -61,7 +61,7 @@ include Tk::Scrollable
 
 create a canvas item without creating a TkcItem object
 
---- dchars(tag, first, last = None)
+--- dchars(tag, first, last = Tk::None)
 
 
 
@@ -70,11 +70,11 @@ alias remove
 
 
 
---- deltag(tag, tag_to_del = None)
+--- deltag(tag, tag_to_del = Tk::None)
 
 Alias for #dtag
 
---- dtag(tag, tag_to_del = None)
+--- dtag(tag, tag_to_del = Tk::None)
 alias deltag
 
 
@@ -95,7 +95,7 @@ alias deltag
 
 
 
---- find_closest(x, y, halo = None, start = None)
+--- find_closest(x, y, halo = Tk::None, start = Tk::None)
 
 
 

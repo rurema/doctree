@@ -7,8 +7,8 @@ include Tk
 
 == Module Functions
 
---- configure(win, slot, value = None)
---- place(win, slot, value = None)
+--- configure(win, slot, value = Tk::None)
+--- place(win, slot, value = Tk::None)
 
 --- configinfo(win, slot = nil)
 
