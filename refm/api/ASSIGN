@@ -264,7 +264,7 @@ tk/clock                        okkez           done
 tk/optionobj                    okkez           done
 tk/after                        okkez           done
 tk/canvas                       moriq           done
-tk/macpkg
+tk/macpkg                       okkez
 tk/optiondb                     okkez           done
 tk/validation                   moriq           done
 tk/message                      okkez           done
@@ -278,7 +278,7 @@ tk/menuspec                     okkez           done
 tk/scrollbox                    okkez           done
 tk/virtevent                    okkez           done
 tk/scale                        okkez           done
-tk/winpkg
+tk/winpkg                       okkez
 tk/root                         okkez           done
 tk/spinbox                      okkez           done
 tk/itemconfig                   moriq           done
