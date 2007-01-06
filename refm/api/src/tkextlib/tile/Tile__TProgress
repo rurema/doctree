@@ -1,0 +1,12 @@
+#@since 1.8.3
+
+= class Tk::Tile::TProgress < TkScale
+include Tk::Tile::TileWidget
+
+== Class Methods
+--- style(*args)
+
+= class Tk::Tile::Progress
+alias Tk::Tile::TProgress
+
+#@end

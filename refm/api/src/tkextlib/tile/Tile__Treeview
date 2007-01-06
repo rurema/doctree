@@ -1,0 +1,65 @@
+#@since 1.8.3
+
+= class Tk::Tile::TreeView < TkWindow
+include Tk::Tile::TileWidget
+include Scrollable
+include Tk::Tile::TreeviewConfig
+
+== Class Methods
+--- style(*args)
+
+== Instance Methods
+--- tagid(id)
+
+--- children(item)
+
+--- set_children(item, *items)
+
+--- delete(*items)
+
+--- detach(*items)
+
+--- exist?(item)
+
+--- focus_item(item  =  None)
+
+--- identify(x, y)
+
+--- index(item)
+
+--- insert(parent, idx, keys = {})
+
+--- instate(spec, cmd = Proc.new)
+
+--- state(spec = None)
+
+--- move(item, parent, idx)
+
+--- next(item)
+
+--- parent(item)
+
+--- prev(item)
+
+--- see(item)
+
+--- selection
+--- selection_get
+
+--- selection_add(*items)
+
+--- selection_remove(*items)
+
+--- selection_set(*items)
+
+--- selection_toggle(*items)
+
+#@since 1.8.3
+--- get_directory(item)
+
+#@end
+--- get(item, col)
+
+--- set(item, col, value)
+
+#@end

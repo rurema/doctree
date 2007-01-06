@@ -5,10 +5,16 @@ require tkextlib/tile
 
 = module Tk::Tile::Style
 extend TkCore
+#@since 1.8.4
+include Tk::Tile::ParseStyleLayout
+#@end
 
 == Singleton Methods
 --- default(style, keys = nil)
+#@since 1.8.4
+--- configure(style, keys = nil)
 
+#@end
 --- map(style, keys = nil)
 
 --- layout(style, spec = nil)

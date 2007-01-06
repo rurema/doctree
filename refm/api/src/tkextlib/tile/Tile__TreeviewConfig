@@ -1,0 +1,39 @@
+#@since 1.8.3
+
+= module Tk::Tile::TreeviewConfig
+include TkItemConfigMethod
+
+== Instance Methods
+--- itemcget(tagOrId, option)
+
+--- itemconfigure(tagOrId, slot, value = None)
+
+--- itemconfiginfo(tagOrId, slot = nil)
+
+--- current_itemconfiginfo(tagOrId, slot = nil)
+
+--- columncget(tagOrId, option)
+--- column_cget(tagOrId, option)
+
+--- columnconfigure(tagOrId, slot, value = None)
+--- column_configure(tagOrId, slot, value = None)
+
+--- columnconfiginfo(tagOrId, slot = nil)
+--- column_configinfo(tagOrId, slot = nil)
+
+--- current_columnconfiginfo(tagOrId, slot=nil)
+--- current_column_configinfo(tagOrId, slot=nil)
+
+--- headingcget(tagOrId, option)
+--- heading_cget(tagOrId, option)
+
+--- headingconfigure(tagOrId, slot, value = None)
+--- heading_configure(tagOrId, slot, value = None)
+
+--- headingconfiginfo(tagOrId, slot = nil)
+--- heading_configinfo(tagOrId, slot = nil)
+
+--- current_headingconfiginfo(tagOrId, slot = nil)
+--- current_heading_configinfo(tagOrId, slot = nil)
+
+#@end

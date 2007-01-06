@@ -24,6 +24,10 @@ include Tk::Tile::TileWidget
 
 --- index(idx)
 
+#@since 1.8.4
+--- insert(idx, subwin, keys = nil)
+
+#@end
 --- select(idx)
 
 --- tabs
