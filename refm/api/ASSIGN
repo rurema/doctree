@@ -265,7 +265,7 @@ tkafter                         okkez           done
 tkconsole
 tkmacpkg                        okkez
 tkscrollbox                     okkez           done
-tkbgerror                       okkez
+tkbgerror                       okkez           done
 tkdialog
 tkmenubar
 tktext
