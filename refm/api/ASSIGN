@@ -273,7 +273,7 @@ tkcanvas
 tkentry
 tkmngfocus
 tkvirtevent                     okkez
-tkclass                         okkez
+tkclass                         okkez           done
 tkfont
 tkpalette
 tkwinpkg                        okkez
