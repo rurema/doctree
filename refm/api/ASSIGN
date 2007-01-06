@@ -259,6 +259,24 @@ timeout                         sheepman        done
 tk                              okkez           done
 tcltklib                        okkez           done
 tkutil                          okkez           done
+multi-tk
+remote-tk
+tkafter
+tkconsole
+tkmacpkg
+tkscrollbox
+tkbgerror
+tkdialog
+tkmenubar
+tktext
+tkcanvas
+tkentry
+tkmngfocus
+tkvirtevent
+tkclass
+tkfont
+tkpalette
+tkwinpkg
 tk/composite                    okkez           done
 tk/clock                        okkez           done
 tk/optionobj                    okkez           done
