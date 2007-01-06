@@ -84,6 +84,6 @@ end
 
 
 
-#@include(NoteBook__Event_for_Tabs)
+#@include(notebook/NoteBook__Event_for_Tabs)
 
 #@end

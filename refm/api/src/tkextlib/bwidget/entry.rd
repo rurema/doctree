@@ -14,6 +14,4 @@ include Tk::Scrollable
 
 
 
-#@include(TkEntry)
-
 #@end

@@ -20,7 +20,7 @@ extend Tk
 
 
 
-#@include(SelectFont__Dialog)
-#@include(SelectFont__Toolbar)
+#@include(selectfont/SelectFont__Dialog)
+#@include(selectfont/SelectFont__Toolbar)
 
 #@end
