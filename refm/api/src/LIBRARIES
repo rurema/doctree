@@ -199,6 +199,7 @@ time
 timeout
 tk
 tcltklib
+tkcanvas
 tkconsole
 tkdialog
 tkfont
