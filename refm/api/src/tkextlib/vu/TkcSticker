@@ -1,0 +1,7 @@
+#@since 1.8.2
+
+= class Tk::Vu::TkcSticker < TkcItem
+
+include ChartsConfig
+
+#@end

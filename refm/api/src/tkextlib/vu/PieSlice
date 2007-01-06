@@ -1,0 +1,40 @@
+#@since 1.8.2
+
+= class Tk::Vu::PieSlice < TkObject
+
+== Class Methods
+--- id2obj(pie, id)
+
+--- new(parent, *args)
+
+== Instance Methods
+--- id
+
+--- [](key)
+
+--- []=(key, val)
+
+--- cget(slot)
+
+--- configure(*args)
+
+--- configinfo(*args)
+
+--- current_configinfo(*args)
+
+--- delete
+
+--- explode(value)
+
+--- explode_value
+
+--- lower(other = Tk::None)
+
+--- raise(other = Tk::None)
+
+--- set(value)
+--- set_value(value)
+
+--- value
+
+#@end

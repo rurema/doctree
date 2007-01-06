@@ -1,0 +1,37 @@
+#@since 1.8.2
+
+= class Tk::Vu::Pie < TkWindow
+
+include Tk::Vu::PieSliceConfigMethod
+
+== Instance Methods
+--- tagid(tag)
+
+--- delete(*glob_pats)
+
+--- explode(slice, *args)
+
+--- explode_value(slice)
+
+--- lower(slice, below = Tk::None)
+
+--- names(*glob_pats)
+--- slices(*glob_pats)
+
+--- order(*args)
+
+--- raise(slice, above = Tk::None)
+
+--- swap(slice1, slice2)
+
+--- set(slice, *args)
+--- set_value(slice, *args)
+--- set_values(slice, *args)
+--- create(slice, *args)
+
+--- slice_value(slice)
+
+--- value(val = Tk::None)
+--- sum_value(val = Tk::None)
+
+#@end
