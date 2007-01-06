@@ -400,27 +400,27 @@ tkextlib/tcllib/tkpiechart
 tkextlib/tcllib/tooltip
 tkextlib/tcllib/widget
 tkextlib/tclx
-tkextlib/tile                   date
-tkextlib/tile/dialog            date
-tkextlib/tile/setup             date
-tkextlib/tile/style             date
-tkextlib/tile/tbutton           date
-tkextlib/tile/tcheckbutton      date
-tkextlib/tile/tcombobox         date
-tkextlib/tile/tentry            date
-tkextlib/tile/tframe            date
-tkextlib/tile/tlabel            date
-tkextlib/tile/tlabelframe       date
-tkextlib/tile/tmenubutton       date
-tkextlib/tile/tnotebook         date
-tkextlib/tile/tpaned            date
-tkextlib/tile/tprogressbar      date
-tkextlib/tile/tradiobutton      date
-tkextlib/tile/treeview          date
-tkextlib/tile/tscale            date
-tkextlib/tile/tscrollbar        date
-tkextlib/tile/tseparator        date
-tkextlib/tile/tsquare           date
+tkextlib/tile                   date            done
+tkextlib/tile/dialog            date            done
+tkextlib/tile/setup             date            done
+tkextlib/tile/style             date            done
+tkextlib/tile/tbutton           date            done
+tkextlib/tile/tcheckbutton      date            done
+tkextlib/tile/tcombobox         date            done
+tkextlib/tile/tentry            date            done
+tkextlib/tile/tframe            date            done
+tkextlib/tile/tlabel            date            done
+tkextlib/tile/tlabelframe       date            done
+tkextlib/tile/tmenubutton       date            done
+tkextlib/tile/tnotebook         date            done
+tkextlib/tile/tpaned            date            done
+tkextlib/tile/tprogressbar      date            done
+tkextlib/tile/tradiobutton      date            done
+tkextlib/tile/treeview          date            done
+tkextlib/tile/tscale            date            done
+tkextlib/tile/tscrollbar        date            done
+tkextlib/tile/tseparator        date            done
+tkextlib/tile/tsquare           date            done
 tkextlib/tkDND                  date            done
 tkextlib/tkHTML                 date            done
 tkextlib/tkimg                  date            done
