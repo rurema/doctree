@@ -43,6 +43,16 @@ extend TkItemConfigMethod
 
 
 
-#@include(Busy__Shield)
+= class Tk::BLT::Busy::Shield < TkWindow
+
+== Class Methods
+
+--- new(win)
+
+
+
+--- shield_path(win)
+
+
 
 #@end

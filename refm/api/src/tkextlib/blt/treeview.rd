@@ -381,14 +381,14 @@ include Tk::BLT::Treeview::ConfigMethod
 
 
 
-#@include(Treeview__ConfigMethod)
-#@include(Treeview__TagOrID_Methods)
-#@include(Treeview__Node)
-#@include(Treeview__Tag)
-#@include(Hiertable)
-#@include(Treeview__OpenCloseCommand)
-#@include(Treeview__OpenCloseCommand__ValidateArgs)
-#@include(Treeview__FindExecFlagValue)
-#@include(Treeview__FindExecFlagValue__ValidateArgs)
+#@include(treeview/Treeview__ConfigMethod)
+#@include(treeview/Treeview__TagOrID_Methods)
+#@include(treeview/Treeview__Node)
+#@include(treeview/Treeview__Tag)
+#@include(treeview/Hiertable)
+#@include(treeview/Treeview__OpenCloseCommand)
+#@include(treeview/Treeview__OpenCloseCommand__ValidateArgs)
+#@include(treeview/Treeview__FindExecFlagValue)
+#@include(treeview/Treeview__FindExecFlagValue__ValidateArgs)
 
 #@end

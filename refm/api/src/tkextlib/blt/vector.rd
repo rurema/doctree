@@ -161,6 +161,12 @@ require tkextlib/blt
 
 
 
-#@include(VectorAccess)
+= class Tk::BLT::VectorAccess < Tk::BLT::Vector
+
+== Class Methods
+
+--- new(vec_name)
+
+
 
 #@end

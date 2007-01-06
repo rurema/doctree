@@ -155,7 +155,7 @@ alias view
 
 
 
-#@include(Tabset__Tab)
-#@include(Tabset__NamedTab)
+#@include(tabset/Tabset__Tab)
+#@include(tabset/Tabset__NamedTab)
 
 #@end

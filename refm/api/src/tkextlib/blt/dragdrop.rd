@@ -88,11 +88,11 @@ extend Tk::ValidateConfigure
 
 
 
-#@include(DragDrop__Token)
-#@include(DragDrop__PackageCommand)
-#@include(DragDrop__PackageCommand__ValidateArgs)
-#@include(DragDrop__SiteCommand)
-#@include(DragDrop__SiteCommand__ValidateArgs)
-#@include(DragDrop__DnD_Handle)
+#@include(dragdrop/DragDrop__Token)
+#@include(dragdrop/DragDrop__PackageCommand)
+#@include(dragdrop/DragDrop__PackageCommand__ValidateArgs)
+#@include(dragdrop/DragDrop__SiteCommand)
+#@include(dragdrop/DragDrop__SiteCommand__ValidateArgs)
+#@include(dragdrop/DragDrop__DnD_Handle)
 
 #@end

@@ -297,9 +297,9 @@ require tkextlib/blt
 
 
 
-#@include(Tree__Node)
-#@include(Tree__Tag)
-#@include(Tree__Notify)
-#@include(Tree__Trace)
+#@include(tree/Tree__Node)
+#@include(tree/Tree__Tag)
+#@include(tree/Tree__Notify)
+#@include(tree/Tree__Trace)
 
 #@end
