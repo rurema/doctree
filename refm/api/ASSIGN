@@ -400,27 +400,27 @@ tkextlib/tcllib/tkpiechart
 tkextlib/tcllib/tooltip
 tkextlib/tcllib/widget
 tkextlib/tclx
-tkextlib/tile
-tkextlib/tile/dialog
-tkextlib/tile/setup
-tkextlib/tile/style
-tkextlib/tile/tbutton
-tkextlib/tile/tcheckbutton
-tkextlib/tile/tcombobox
-tkextlib/tile/tentry
-tkextlib/tile/tframe
-tkextlib/tile/tlabel
-tkextlib/tile/tlabelframe
-tkextlib/tile/tmenubutton
-tkextlib/tile/tnotebook
-tkextlib/tile/tpaned
-tkextlib/tile/tprogressbar
-tkextlib/tile/tradiobutton
-tkextlib/tile/treeview
-tkextlib/tile/tscale
-tkextlib/tile/tscrollbar
-tkextlib/tile/tseparator
-tkextlib/tile/tsquare
+tkextlib/tile                   date
+tkextlib/tile/dialog            date
+tkextlib/tile/setup             date
+tkextlib/tile/style             date
+tkextlib/tile/tbutton           date
+tkextlib/tile/tcheckbutton      date
+tkextlib/tile/tcombobox         date
+tkextlib/tile/tentry            date
+tkextlib/tile/tframe            date
+tkextlib/tile/tlabel            date
+tkextlib/tile/tlabelframe       date
+tkextlib/tile/tmenubutton       date
+tkextlib/tile/tnotebook         date
+tkextlib/tile/tpaned            date
+tkextlib/tile/tprogressbar      date
+tkextlib/tile/tradiobutton      date
+tkextlib/tile/treeview          date
+tkextlib/tile/tscale            date
+tkextlib/tile/tscrollbar        date
+tkextlib/tile/tseparator        date
+tkextlib/tile/tsquare           date
 tkextlib/tkDND                  date            done
 tkextlib/tkHTML                 date            done
 tkextlib/tkimg                  date            done
