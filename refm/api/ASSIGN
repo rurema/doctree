@@ -275,15 +275,15 @@ tk/wm                           okkez           done
 tk/autoload                     okkez           done
 tk/scrollbar                    yanagi          done
 tk/menuspec                     okkez           done
-tk/scrollbox
-tk/virtevent
+tk/scrollbox                    okkez
+tk/virtevent                    okkez
 tk/scale                        okkez           done
 tk/winpkg
 tk/root                         okkez           done
-tk/spinbox
+tk/spinbox                      okkez
 tk/itemconfig                   moriq           done
-tk/selection
-tk/checkbutton
+tk/selection                    okkez
+tk/checkbutton                  okkez
 tk/listbox                      iwadon          done
 tk/texttag                      iwadon          done
 tk/textwindow                   iwadon          done
