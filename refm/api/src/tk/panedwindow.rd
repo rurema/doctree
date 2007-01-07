@@ -1,7 +1,4 @@
 #@since 1.8.2
-
 require tk
-
-#@include(TkPanedWindow)
-
+#@include(panedwindow/TkPanedWindow)
 #@end
