@@ -1,4 +1,6 @@
 #@since 1.8.1
+require xsd/qname
+require soap/baseData
 
 = module SOAP::SOAPEnvelopeElement
 

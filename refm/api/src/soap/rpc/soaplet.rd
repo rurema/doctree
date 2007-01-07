@@ -1,4 +1,11 @@
 #@since 1.8.1
+require webrick/httpservlet/abstract
+require webrick/httpstatus
+require soap/rpc/router
+require soap/streamHandler
+#@#require stringio
+#@#require zlib
+require webrick/log
 
 = redefine WEBrick::Log
 

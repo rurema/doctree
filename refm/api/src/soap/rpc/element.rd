@@ -1,4 +1,5 @@
 #@since 1.8.1
+require soap/baseData
 
 = reopen SOAP::SOAPBody
 

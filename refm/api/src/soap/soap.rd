@@ -1,3 +1,7 @@
+#@since 1.8.1
+require xsd/qname
+require xsd/charset
+
 = module SOAP
 
 == Constants
@@ -108,5 +112,11 @@
 
 = class SOAP::UnhandledMustUnderstandHeaderError < SOAP::Error
 
-#@include(FaultError)
-#@include(Env)
+#@include(soap/FaultError)
+#@include(soap/Env)
+
+#@# add Object#instance_variable_get
+#@# add Object#instance_variable_set
+#@# add Kernel#warn
+
+#@end
