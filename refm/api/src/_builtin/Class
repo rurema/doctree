@@ -22,7 +22,7 @@
 == Class Methods
 
 --- new([superclass])
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- new([superclass]) {|klass| ... }
 #@end
 
@@ -55,26 +55,30 @@ superclass が省略された時にはObject のサブクラスを生成
 
 == Instance Methods
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 --- allocate
 
 クラスのインスタンスを生成して返します。生成したオブジェクトは
-(通常)クラスのインスタンスであること以外には何も特性を持ちません。
+クラスのインスタンスであること以外には何も特性を持ちません。
 #@end
 
---- new( ... )
+--- new(*args, &block)
 
-クラスのインスタンスを生成して返します。このメソッドの引数はブロック引数も
-含め [[m:Object#initialize]] に渡されます。
+クラスのインスタンスを生成して返します。
+このメソッドの引数はブロック引数も含め [[m:Object#initialize]] に渡されます。
 
-#@if (version >= "1.7.0")
-version 1.7 では、new は、allocate でイン
-スタンスを生成し、initialize で初期化を行うメソッドです。
+#@since 1.8.0
+Ruby 1.8.x からは、new は [[m:Class#allocate]] でインスタンスを生成し、
+[[m:Object#initialize]] で初期化を行います。
 #@end
 
 --- superclass
 
 クラスのスーパークラスを返します。
+
+--- _load(str)
+
+[[m:Object#_dump]]を参照。
 
 == Private Instance Methods
 

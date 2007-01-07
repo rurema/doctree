@@ -6,7 +6,7 @@
 
 == Instance Methods
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- all?
 --- all? {|item| ... }
 
@@ -21,7 +21,7 @@
     p [1,2,3].all? {|v| v > 1}   # => false
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- any?
 --- any? {|item| ... }
 
@@ -88,7 +88,7 @@ pattern === item が成立する要素を全て含んだ配列を返し
 それぞれブロックを評価し、その結果の配列を返します。マッチする要素
 がひとつもなかった場合は空の配列を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- inject([init]) {|result, item| ... }
 
 最初に初期値 init と self の最初の要素を引数にブロック
@@ -136,7 +136,7 @@ val と == の関係にある要素を含むとき真を返します。
 のとき負の整数を、期待しています。ブロックが整数以外を返したときは
 例外 [[c:TypeError]] が発生します。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- max_by {|item| ... }
 
 ブロックの評価結果を <=> で比較し、最大の要素を返します。
@@ -162,7 +162,7 @@ max と max_by の違いは sort と sort_by の違いと同じです。詳細は
 のとき負の整数を、期待しています。ブロックが整数以外を返したときは
 例外 TypeError が発生します。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- min_by {|item| ... }
 
 ブロックの評価結果を <=> で比較し、最小の要素を返します。
@@ -204,7 +204,7 @@ Enumerable#sort は安定ではありません (unstable sort)。
 註： 比較結果が同じ要素は元の順序通りに並ぶソートを
 「安定なソート (stable sort)」と言います。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- sort_by {|item| ... }
 
 ブロックの評価結果を <=> メソッドで比較することで、self を昇
@@ -266,7 +266,7 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 
 全ての要素を含む配列を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- zip([ary1[, ary2[, ...]]])
 --- zip([ary1[, ary2[, ...]]]) {|v1, v2, ...| ...}
 
@@ -293,4 +293,46 @@ self と引数に渡した配列の各要素からなる配列の配列を生成して
        [3, 6, 9]
        nil
 
+#@end
+
+#@since 1.8.4
+--- each_slice(n) {...}
+
+n 要素ずつにわけてブロックに渡して繰り返します。
+
+例:
+
+  (1..10).each_slice(3) {|a| p a}
+      # => [1, 2, 3]
+      #    [4, 5, 6]
+      #    [7, 8, 9]
+      #    [10]
+
+--- enum_slice(n)
+
+Enumerable::Enumerator.new(self, :each_slice, n) を返します。
+
+--- each_cons(n) {...}
+
+連続した n 要素ずつの配列をブロックに渡して繰り返す。
+
+例:
+
+  (1..10).each_cons(3) {|a| p a}
+      # => [1, 2, 3]
+      #    [2, 3, 4]
+      #    [3, 4, 5]
+      #    [4, 5, 6]
+      #    [5, 6, 7]
+      #    [6, 7, 8]
+      #    [7, 8, 9]
+      #    [8, 9, 10]
+
+--- enum_cons(n)
+
+Enumerable::Enumerator.new(self, :each_cons, n) を返します。
+
+--- enum_with_index
+
+Enumerable::Enumerator.new(self, :each_with_index) を返します。
 #@end

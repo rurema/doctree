@@ -333,7 +333,6 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
 
 #@since 1.8.6
 --- instance_variable_defined?(symbol)
-#@#    => true or false
 
 Returns true if the given instance variable is defined in obj.
 
@@ -403,11 +402,11 @@ self のメソッド name をオブジェクト化した
 一覧を文字列の配列で返します。
 
 methods は、instance_methods と同じです。
-#@if (version >= "1.8.0")
+#@since 1.8.0
 methods は、public および protected メソッド名の一覧を配列で返します。
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 Ruby 1.8 deha 引数が指定できるようになりました。
 inherited_too が真であれば、
 スーパークラスで定義されたメソッドも探索します。
@@ -474,7 +473,7 @@ __send__ は再定義すべきではありません。
 send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
 にかかわらず任意のメソッドを呼び出せます。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 [[unknown:クラス／メソッドの定義/呼び出し制限]]が
 send, __send__にも影響するようになり、
 レシーバを指定した呼び出しでは private メソッドを呼び出せなくなりました。
@@ -567,14 +566,15 @@ singleton_methods(false) は、
 オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
 
 #@if (version < "1.9.0")
---- to_a        ((<obsolete>))
+--- to_a
+((<obsolete>))
 
 オブジェクトを配列に変換してその配列を返します。
 
 普通に配列に変換できないオブジェクトは、自身のみを含む長さ 1 の配
 列に変換されます
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 このメソッドは将来なくなるかもしれません。Ruby 1.8 では警告が出ます。
 
 例
@@ -658,6 +658,125 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 
 オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
 
+#@since 1.8.4
+--- to_enum(method = :each, *args)
+--- enum_for(method = :each, *args)
+
+Enumerable::Enumerator.new(self, method, *args) を返します。
+
+例:
+
+  str = "xyz"
+
+  enum = str.enum_for(:each_byte)
+  a = enum.map {|b| '%02x' % b } #=> ["78", "79", "7a"]
+
+  # protects an array from being modified
+  a = [1, 2, 3]
+  some_method(a.to_enum)
+#@end
+
+--- _dump(limit)
+
+Marshal.dump において出力するオブジェクトがメソッド `_dump'
+を定義している場合には、そのメソッドの結果が書き出されます。メソッ
+ド `_dump' は引数として再帰を制限するレベル limit を受
+け取り、オブジェクトを文字列化したものを返します。
+
+インスタンスがメソッド `_dump' を持つクラスは必ず同じフォー
+マットを読み戻すクラスメソッド `_load' を定義する必要があり
+ます。`_load' はオブジェクトを表現した文字列を受け取り、それ
+をオブジェクトに戻したものを返す必要があります。
+
+  class Foo
+    def initialize(obj)
+      p "initialize() called"
+      @foo = obj
+    end
+    def _dump(limit)
+      Marshal.dump(@foo, limit)
+    end
+    def self._load(obj)
+      Foo.new(Marshal.load(obj))
+    end
+  end
+
+  p Marshal.load(Marshal.dump(Foo.new(['foo', 'bar'])))
+
+  => "initialize() called"
+     "initialize() called"
+     #<Foo:0x4019eb88 @foo=["foo", "bar"]>
+
+インスタンス変数の情報は普通マーシャルデータに含まれるので、この例
+のように _dump を定義する必要はありません(ただし _dump を定義すると
+インスタンス変数の情報は dump されなくなります)。
+_dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
+たクラスのインスタンスがインスタンス変数以外に情報を保持する場合に
+利用します。(例えば、クラス [[c:Time]] は、_dump/_load を定義して
+います)
+
+#@since 1.8.0
+[[m:Object#marshal_dump]],
+[[m:Object#marshal_load]] も参照してください。
+#@end
+
+#@since 1.8.0
+--- marshal_dump
+--- marshal_load(obj)
+
+[[m:Marshal.dump]] において、出力するオブジェクトがメソッド
+marshal_dump を定義している場合には、その戻り値がダンプされます。
+メソッド marshal_dump は任意のオブジェクトを返すメソッドとし
+て定義します。
+
+このようなオブジェクトをロードするにはメソッド marshal_load が
+定義されていなくてはならず、ロード時に利用されます。
+marshal_load は marshal_dump の戻り値のコピーを引数に受け取
+ります。marshal_load 時の self は、生成されたばかり
+([[m:Class#allocate]] されたばかり) の状態です。
+なお、marshal_load の戻り値は無視されます。
+
+dump するオブジェクトが _dump と marshal_dump の両方のメソッドを
+持つ場合 marshal_dump が利用されます。
+
+  class Foo
+    def initialize
+      p "initialize() called"
+      @foo = ['foo', 'bar']
+    end
+    def marshal_dump
+      @foo
+    end
+    def marshal_load(obj)
+      @foo = obj
+    end
+  end
+  
+  p Marshal.load(Marshal.dump(Foo.new))
+  
+  "initialize() called"
+  #<Foo:0x4019ed2c @foo=["foo", "bar"]>
+
+インスタンス変数の情報は普通マーシャルデータに含まれるので、
+この例のように marshal_dump を定義する必要はありません
+(ただし marsahl_dump を定義するとインスタンス変数の情報は
+ダンプされなくなるので、marshal_dump/marshal_load で扱う必要があります)。
+marshal_dump/marshal_load はより高度な制御を行いたい場合や
+拡張ライブラリで定義したクラスのインスタンスがインスタンス変数以外
+に情報を保持する場合に利用します。
+
+特に、marshal_dump/marshal_load を定義したオブジェクトは
+特異メソッドが定義されていてもマーシャルできるようになります
+(特異メソッドの情報が自動的に dump されるようになるわけではなく、
+marshal_dump/marshal_load によりそれを実現する余地があるということです)。
+
+marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
+これから書くプログラムでは _dump/_load ではなく
+marshal_dump/marshal_load を使うべきです。
+#@# _dump/_load はまだ obsolete ではありませんが、将来そうなるかもしれません。
+#@# [[ruby-dev:21088]]
+#@end
+
 == Private Methods
 
 --- initialize
@@ -673,7 +792,7 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 initialize という名前のメソッドは自動的に private に設定され
 ます。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- initialize_copy(obj)
 
 (拡張ライブラリによる) ユーザ定義クラスのオブジェクトコピー
@@ -786,7 +905,7 @@ name には追加されたメソッド名が [[c:Symbol]] で渡されます。
 通常のメソッドの追加に対するフックには
 [[m:Module#method_added]]を使います。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- singleton_method_removed(name)
 
 特異メソッドが [[m:Module#remove_method]] に
@@ -813,7 +932,7 @@ name には削除されたメソッド名が [[c:Symbol]] で渡されます。
 [[m:Module#method_removed]]を使います。
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- singleton_method_undefined(name)
 
 特異メソッドが [[m:Module#undef_method]] または
