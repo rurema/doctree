@@ -375,32 +375,32 @@ tkextlib/itcl
 tkextlib/itk
 tkextlib/iwidgets               moriq           done
 tkextlib/pkg_checker
-tkextlib/tcllib
-tkextlib/tcllib/autoscroll
-tkextlib/tcllib/ctext
-tkextlib/tcllib/cursor
-tkextlib/tcllib/datefield
-tkextlib/tcllib/dialog
-tkextlib/tcllib/getstring
-tkextlib/tcllib/history
-tkextlib/tcllib/ico
-tkextlib/tcllib/ip_entry
-tkextlib/tcllib/panelframe
-tkextlib/tcllib/plotchart
-tkextlib/tcllib/ruler
-tkextlib/tcllib/screenruler
-tkextlib/tcllib/scrollwin
-tkextlib/tcllib/setup
-tkextlib/tcllib/style
-tkextlib/tcllib/superframe
-tkextlib/tcllib/swaplist
-tkextlib/tcllib/tablelist
-tkextlib/tcllib/tablelist_core
-tkextlib/tcllib/tablelist_tile
-tkextlib/tcllib/tkpiechart
-tkextlib/tcllib/tooltip
-tkextlib/tcllib/widget
-tkextlib/tclx
+tkextlib/tcllib                 date
+tkextlib/tcllib/autoscroll      date
+tkextlib/tcllib/ctext           date
+tkextlib/tcllib/cursor          date
+tkextlib/tcllib/datefield       date
+tkextlib/tcllib/dialog          date
+tkextlib/tcllib/getstring       date
+tkextlib/tcllib/history         date
+tkextlib/tcllib/ico             date
+tkextlib/tcllib/ip_entry        date
+tkextlib/tcllib/panelframe      date
+tkextlib/tcllib/plotchart       date
+tkextlib/tcllib/ruler           date
+tkextlib/tcllib/screenruler     date
+tkextlib/tcllib/scrollwin       date
+tkextlib/tcllib/setup           date
+tkextlib/tcllib/style           date
+tkextlib/tcllib/superframe      date
+tkextlib/tcllib/swaplist        date
+tkextlib/tcllib/tablelist       date
+tkextlib/tcllib/tablelist_core  date
+tkextlib/tcllib/tablelist_tile  date
+tkextlib/tcllib/tkpiechart      date
+tkextlib/tcllib/tooltip         date
+tkextlib/tcllib/widget          date
+tkextlib/tclx                   date
 tkextlib/tile                   date            done
 tkextlib/tile/dialog            date            done
 tkextlib/tile/setup             date            done
