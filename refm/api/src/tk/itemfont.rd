@@ -2,7 +2,7 @@
 
 require tk
 
-#@include(TkItemFontOptkeys)
-#@include(TkTreatItemFont)
+#@include(itemfont/TkItemFontOptkeys)
+#@include(itemfont/TkTreatItemFont)
 
 #@end
