@@ -4,11 +4,11 @@ require tk
 require tk/tagfont
 require tk/canvas
 
-#@include(TkcTagAccess)
-#@include(TkcTag)
-#@include(TkcTagString)
-#@include(TkcTagAll)
-#@include(TkcTagCurrent)
-#@include(TkcGroup)
+#@include(canvastag/TkcTagAccess)
+#@include(canvastag/TkcTag)
+#@include(canvastag/TkcTagString)
+#@include(canvastag/TkcTagAll)
+#@include(canvastag/TkcTagCurrent)
+#@include(canvastag/TkcGroup)
 
 #@end
