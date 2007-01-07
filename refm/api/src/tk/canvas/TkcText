@@ -1,8 +1,19 @@
 = class TkcText < TkcItem
 
+#@since 1.8.2
 == Class Methods
 
 --- create(canvas, *args)
 
+
+#@end
+#@if(version == "1.8.0")
+== Instance Methods
+
+--- create_self
+
+shoul be private
+
+#@end
 
 

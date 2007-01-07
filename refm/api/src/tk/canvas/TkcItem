@@ -6,10 +6,27 @@ extend TkItemConfigOptkeys
 
 include TkcTagAccess
 
+== Constants
+
+#@since 1.8.2
+--- CItemTypeName
+#@# = nil
+
+#@end
+
+--- CItemTypeToClass
+#@# = {}
+
+--- CItemID_TBL
+#@# = TkCore::INTERP.create_table
+
+
 == Class Methods
 
+#@since 1.8.2
 --- create(canvas, *args)
 
+#@end
 
 
 --- id2obj(canvas, id)
@@ -27,24 +44,15 @@ include TkcTagAccess
 == Instance Methods
 
 --- delete
-alias remove
-alias destroy
-
-
-
+--- remove
 --- destroy
 
-Alias for #delete
 
+#@since 1.8.2
 --- exist?
 
+#@end
 
 
 --- id
-
-
-
---- remove
-
-Alias for #delete
 

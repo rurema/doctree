@@ -1,2 +1,10 @@
 = class TkcOval < TkcItem
 
+#@if(version == "1.8.0")
+== Instance Methods
+
+--- create_self
+
+shoul be private
+
+#@end
