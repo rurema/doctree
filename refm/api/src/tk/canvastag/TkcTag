@@ -2,6 +2,15 @@
 
 include TkcTagAccess
 
+== Constants
+
+--- CTagID_TBL
+#@# = TkCore::INTERP.create_table
+
+--- Tk_CanvasTag_ID
+#@# = ['ctag'.freeze, '00000'.taint].freeze
+
+
 == Class Methods
 
 --- id2obj(canvas, id)
@@ -14,88 +23,48 @@ include TkcTagAccess
 
 == Instance Methods
 
---- above(target)
-
-Alias for #set_to_above
-
---- all
-
-Alias for #set_to_all
-
---- below(target)
-
-Alias for #set_to_below
-
---- closest(x, y, halo = Tk::None, start = Tk::None)
-
-Alias for #set_to_closest
-
 --- delete
-alias remove
-alias destroy
-
-
-
+--- remove
 --- destroy
 
-Alias for #delete
-
---- enclosed(x1, y1, x2, y2)
-
-Alias for #set_to_enclosed
-
+#@since 1.8.2
 --- exist?
 
+#@end
 
 
 --- id
 
-
-
---- overlapping(x1, y1, x2, y2)
-
-Alias for #set_to_overlapping
-
---- remove
-
-Alias for #delete
-
 --- set_to_above(target)
-alias above
+--- above(target)
 
 
 
 --- set_to_all
-alias all
+--- all
 
 
 
 --- set_to_below(target)
-alias below
+--- below(target)
 
 
 
 --- set_to_closest(x, y, halo = Tk::None, start = Tk::None)
-alias closest
+--- closest(x, y, halo = Tk::None, start = Tk::None)
 
 
 
 --- set_to_enclosed(x1, y1, x2, y2)
-alias enclosed
+--- enclosed(x1, y1, x2, y2)
 
 
 
 --- set_to_overlapping(x1, y1, x2, y2)
-alias overlapping
+--- overlapping(x1, y1, x2, y2)
 
 
 
 --- set_to_withtag(target)
-alias withtag
-
-
-
 --- withtag(target)
-
-Alias for #set_to_withtag
 

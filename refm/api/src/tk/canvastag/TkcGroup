@@ -1,5 +1,10 @@
 = class TkcGroup < TkcTag
 
+== Constants
+
+--- Tk_cGroup_ID
+#@# = ['tkcg'.freeze, '00000'.taint].freeze
+
 == Class Methods
 
 --- new(parent, *args)
@@ -8,16 +13,19 @@ def create_self(parent, *args)
 
 == Instance Methods
 
---- add(*tags)
+#@if(version == "1.8.0")
+--- create_self(parent, *args)
 
-Alias for #include
+#@end
 
 --- exclude(*tags)
 
 
 
 --- include(*tags)
-alias add
+#@since 1.8.3
+--- add(*tags)
 
-private :create_self
+#@end
+
 

@@ -33,21 +33,21 @@ Following operators support logical expressions of canvas tags
 
 --- bind(seq, *args)
 
-def bind(seq, cmd=Proc.new, *args)
-
-  @c.itembind(@id, seq, cmd, *args)
-  self
-
-end
+  def bind(seq, cmd=Proc.new, *args)
+  
+    @c.itembind(@id, seq, cmd, *args)
+    self
+  
+  end
 
 --- bind_append(seq, *args)
 
-def bind_append(seq, cmd=Proc.new, *args)
-
-  @c.itembind_append(@id, seq, cmd, *args)
-  self
-
-end
+  def bind_append(seq, cmd=Proc.new, *args)
+  
+    @c.itembind_append(@id, seq, cmd, *args)
+    self
+  
+  end
 
 --- bind_remove(seq)
 
@@ -63,11 +63,11 @@ end
 
 --- configinfo(key = nil)
 
-def configure(keys)
-
-  @c.itemconfigure @id, keys
-
-end
+  def configure(keys)
+  
+    @c.itemconfigure @id, keys
+  
+  end
 
 --- configure(key, value = Tk::None)
 
@@ -77,25 +77,25 @@ end
 
 
 
+#@since 1.8.2
 --- current_configinfo(key = nil)
 
+#@end
 
 
 --- dchars(first, last = Tk::None)
 
 
 
---- deltag(tag_to_del = Tk::None)
-
-Alias for #dtag
 
 --- dtag(tag_to_del = Tk::None)
-alias deltag
-
+#@since 1.8.3
+--- deltag(tag_to_del = Tk::None)
+#@end
 
 
 --- find
-alias list
+--- list
 
 
 
@@ -121,11 +121,6 @@ alias list
 
 --- itemtype
 
-
-
---- list
-
-Alias for #find
 
 --- lower(belowthis = Tk::None)
 
