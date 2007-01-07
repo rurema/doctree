@@ -11,5 +11,5 @@
 
 --- LF
 
-#@include(webrick/HTTPUtils)
-#@include(webrick/HTTPUtils__FormData)
+#@include(httputils/HTTPUtils)
+#@include(httputils/HTTPUtils__FormData)

@@ -1,0 +1,37 @@
+= class WEBrick::HTTPUtils::FormData < String
+
+== Class Methods
+
+--- new(*args)
+
+== Instance Methods
+
+--- name
+--- name=(value)
+
+--- filename
+--- filename=(value)
+
+--- [](*key)
+
+--- <<(str)
+
+--- append_data(data)
+
+--- each_data
+
+--- list
+--- to_ary
+
+--- to_s
+
+== Protected Instance Methods
+
+--- next_data
+--- next_data=(value)
+
+== Constants
+
+--- EmptyRawHeader
+
+--- EmptyHeader

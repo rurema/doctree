@@ -1,0 +1,67 @@
+= module WEBrick::HTTPUtils
+
+== Module Functions
+
+--- normalize_path(path)
+
+--- load_mime_types(file)
+
+--- mime_type(filename, mime_tab)
+
+--- parse_header(raw)
+
+--- split_header_value(str)
+
+--- parse_range_header(ranges_specifier)
+
+#@since 1.8.2
+--- parse_qvalues(value)
+#@end
+
+--- dequote(str)
+
+--- quote(str)
+
+--- parse_query(str)
+
+--- parse_form_data(io, boundary)
+
+--- _make_regex(str)
+
+#@since 1.8.3
+--- _make_regex!(str)
+#@end
+
+--- _escape(str, regex)
+
+--- _unescape(str, regex)
+
+--- escape(str)
+
+--- unescape(str)
+
+--- escape_form(str)
+
+--- unescape_form(str)
+
+#@since 1.8.3
+--- escape_path(str)
+#@end
+
+--- escape8bit(str)
+
+== Constants
+
+--- DefaultMimeTypes
+
+--- UNESCAPED
+
+--- UNESCAPED_FORM
+
+--- NONASCII
+
+--- ESCAPED
+
+#@since 1.8.3
+--- UNESCAPED_PCHAR
+#@end
