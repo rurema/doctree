@@ -35,9 +35,9 @@ include TkTreatItemFont
 #@include(tk/TkcRectangle)
 #@include(tk/TkcText)
 #@include(tk/TkcWindow)
-#@include(tk/TkImage)
-#@include(tk/TkBitmapImage)
-#@include(tk/TkPhotoImage)
+#@include(tk/image/TkImage)
+#@include(tk/image/TkBitmapImage)
+#@include(tk/image/TkPhotoImage)
 
 #@else
 

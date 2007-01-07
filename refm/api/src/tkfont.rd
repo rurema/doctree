@@ -1,6 +1,6 @@
 #@if (version <= "1.8.1")
-#@include(tk/TkFont)
-#@include(tk/TkFont__DescendantFont)
+#@include(tk/font/TkFont)
+#@include(tk/font/TkFont__DescendantFont)
 #@else
 require tk/font
 #@end

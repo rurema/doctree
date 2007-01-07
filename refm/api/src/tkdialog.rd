@@ -1,8 +1,8 @@
 #@if (version <= "1.8.1")
-#@include(tk/TkDialogObj)
-#@include(tk/TkDialog)
-#@include(tk/TkWarningObj)
-#@include(tk/TkWarning)
+#@include(tk/dialog/TkDialogObj)
+#@include(tk/dialog/TkDialog)
+#@include(tk/dialog/TkWarningObj)
+#@include(tk/dialog/TkWarning)
 #@else
 reqiure tk/dialog
 #@end

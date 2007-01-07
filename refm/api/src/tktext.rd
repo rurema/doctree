@@ -7,17 +7,17 @@ include TkTreatItemFont
 
 --- ItemCMD
 
-#@include(tk/TkText)
-#@include(tk/TkTextTag)
-#@include(tk/TkTextNamedTag)
-#@include(tk/TkTextTagSel)
-#@include(tk/TkTextMark)
-#@include(tk/TkTextNamedMark)
-#@include(tk/TkTextMarkInsert)
-#@include(tk/TkTextMarkCurrent)
-#@include(tk/TkTextMarkAnchor)
-#@include(tk/TkTextWindow)
-#@include(tk/TkTextImage)
+#@include(tk/text/TkText)
+#@include(tk/text/TkTextTag)
+#@include(tk/text/TkTextNamedTag)
+#@include(tk/text/TkTextTagSel)
+#@include(tk/text/TkTextMark)
+#@include(tk/text/TkTextNamedMark)
+#@include(tk/text/TkTextMarkInsert)
+#@include(tk/text/TkTextMarkCurrent)
+#@include(tk/text/TkTextMarkAnchor)
+#@include(tk/text/TkTextWindow)
+#@include(tk/text/TkTextImage)
 
 #@else
 
