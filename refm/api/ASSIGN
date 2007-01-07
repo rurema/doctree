@@ -400,7 +400,7 @@ tkextlib/tcllib/tablelist_tile  date
 tkextlib/tcllib/tkpiechart      date
 tkextlib/tcllib/tooltip         date
 tkextlib/tcllib/widget          date
-tkextlib/tclx                   date
+tkextlib/tclx                   date            done
 tkextlib/tile                   date            done
 tkextlib/tile/dialog            date            done
 tkextlib/tile/setup             date            done
