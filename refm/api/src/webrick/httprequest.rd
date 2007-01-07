@@ -14,6 +14,7 @@ require webrick/cookie
 --- [](header_name)
 ¥ê¥¯¥¨¥¹¥È¤Î¥Ø¥Ã¥À¤Î³ºÅö¤¹¤ëÆâÍÆ¤òÊ¸»úÎó¤ÇÊÖ¤¹¡£
 
+#@since 1.8.2
 --- accept
 Accept ¥Ø¥Ã¥À¤ÎÆâÍÆ¤òÇÛÎó¤ÇÊÖ¤¹¡£ÇÛÎó¤ÏÉÊ¼Á·¸¿ô(qvalue)¤Ç¥½¡¼¥È¤µ¤ì¤¿¥á¥Ç¥£¥¢¥¿¥¤¥×¤ÎÊ¸»úÎó¤ÎÇÛÎó¡£
 
@@ -25,6 +26,7 @@ Accept-Encoding  ¥Ø¥Ã¥À¤ÎÆâÍÆ¤òÇÛÎó¤ÇÊÖ¤¹¡£ÇÛÎó¤ÏÉÊ¼Á·¸¿ô(qvalue)¤Ç¥½¡¼¥È¤µ¤ì¤¿¥
 
 --- accept_language
 Accept-Language  ¥Ø¥Ã¥À¤ÎÆâÍÆ¤òÇÛÎó¤ÇÊÖ¤¹¡£ÇÛÎó¤ÏÉÊ¼Á·¸¿ô(qvalue)¤Ç¥½¡¼¥È¤µ¤ì¤¿¼«Á³¸À¸ì¤ÎÊ¸»úÎó¤ÎÇÛÎó¡£
+#@end
 
 --- addr
 [[m:IPSocket#addr]]¤ÈÆ±ÍÍ¡£
@@ -34,11 +36,13 @@ Accept-Language  ¥Ø¥Ã¥À¤ÎÆâÍÆ¤òÇÛÎó¤ÇÊÖ¤¹¡£ÇÛÎó¤ÏÉÊ¼Á·¸¿ô(qvalue)¤Ç¥½¡¼¥È¤µ¤ì¤¿¼
 --- body
 --- body { ... }
 
+#@since 1.8.2
 --- content_length
 content-length ¤òÀ°¿ô¤ÇÊÖ¤¹¡£
 
 --- content_type
 content-type ¥Ø¥Ã¥À¤òÊ¸»úÎó¤ÇÊÖ¤¹¡£
+#@end
 
 --- cookies
 [[c:WEBrick::Cookie]] ¤ÎÇÛÎó¤òÊÖ¤¹¡£
@@ -65,6 +69,8 @@ Keep-Alive ¤«¤É¤¦¤«¤òÊÖ¤¹¡£
 
 --- parse(socket = nil)
 
+--- parse_uri(str, scheme = "http")
+
 --- path
 path ¤òÊ¸»úÎó¤ÇÊÖ¤¹¡£
 
@@ -82,7 +88,9 @@ path ¤ÈÆ±ÃÍ¡£
 ¥Ï¥Ã¥·¥å¤òÊÖ¤¹¡£key ¤â val ¤â unescape ¤µ¤ì¤Æ¤¤¤ë¡£
 
 --- query_string
+#@since 1.8.4
 --- query_string=(value)
+#@end
 request_uri.query ¤ÈÆ±ÃÍ¡£
 
 --- raw_header
@@ -108,3 +116,9 @@ request_uri.query ¤ÈÆ±ÃÍ¡£
 
 --- user
 --- user=(value)
+
+== Constants
+
+--- BODY_CONTAINABLE_METHODS
+
+--- BUFSIZE
