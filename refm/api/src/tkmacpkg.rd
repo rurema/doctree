@@ -1,6 +1,6 @@
 #@if(version <= "1.8.1")
 require tk
-#@include(macpkg/TkMacResource)
+#@include(tk/macpkg/TkMacResource)
 #@else
 require tk/macpkg
 
