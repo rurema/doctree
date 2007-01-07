@@ -4,7 +4,6 @@ require tk
 #@include(tk/entry/TkEntry__ValidateCmd)
 #@include(tk/entry/TkEntry__ValidateCmd__Action)
 #@include(tk/entry/TkEntry__ValidateCmd__ValidateArgs)
-
 #@else
 require tk/entry
 

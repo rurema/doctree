@@ -2,12 +2,47 @@
 
 == Constants
 
+#@since 1.8.2
+--- KEY_TBL
 
+--- PROC_TBL
+
+#@end
+#@if(version <= "1.8.1")
+--- VARG_KEY
+
+--- VARG_TYPE
+
+#@end
 
 == Class Methods
 
+--- new(d, i, s, v, pp, ss, vv, ww)
+
+#@since 1.8.2
+--- ret_val(val)
+
+#@end
+#@if(version <= "1.8.1")
 --- scan_args(arg_str, arg_val)
+
+#@end
 
 == Instance Methods
 
 
+--- action
+
+--- current
+
+--- index
+
+--- string
+
+--- triggered
+
+--- type
+
+--- value
+
+--- widget
