@@ -1,4 +1,7 @@
+#@since 1.8.1
+
 = module SOAP::Marshal
+alias SOAPMarshal
 
 == Class Methods
 
@@ -13,3 +16,5 @@
 == Constants
 
 --- MarshalMappingRegistry
+
+#@end
