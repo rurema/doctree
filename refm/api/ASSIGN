@@ -271,11 +271,11 @@ tkmenubar                       (already done)
 tktext                          (already done)
 tkcanvas                        (already done)
 tkentry                         okkez           done
-tkmngfocus                      okkez
+tkmngfocus                      okkez           done
 tkvirtevent                     okkez           done
 tkclass                         okkez           done
 tkfont                          (already done)
-tkpalette                       okkez
+tkpalette                       okkez           done
 tkwinpkg                        okkez           done
 tk/composite                    okkez           done
 tk/clock                        okkez           done

@@ -1,0 +1,24 @@
+= module TkManageFocus
+
+extend Tk
+
+== Constants
+
+--- TkCommandNames
+
+== Module Functions
+
+--- followsMouse
+
+--- next(win)
+
+--- prev(win)
+
+
+== Instance Methods
+
+--- focusNext
+
+--- focusPrev
+
+
