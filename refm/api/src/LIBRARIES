@@ -250,14 +250,38 @@ uri
 weakref
 #@since 1.8.0
 webrick
+webrick/accesslog
 #@since 1.8.1
 webrick/cgi
 #@end
+webrick/compat
+webrick/config
+webrick/cookie
+webrick/httputils
+webrick/httpauth
+webrick/httpauth/authenticator
+webrick/httpauth/basicauth
+webrick/httpauth/digestauth
+webrick/httpauth/htdigest
+webrick/httpauth/htgroup
+webrick/httpauth/htpasswd
+webrick/httpauth/userdb
+webrick/httpproxy
+webrick/httprequest
+webrick/httpresponse
 webrick/https
+webrick/httpserver
 webrick/httpservlet
+webrick/httpstatus
+webrick/httputils
+webrick/httpversion
+webrick/log
+webrick/server
 #@since 1.8.1
 webrick/ssl
 #@end
+webrick/utils
+webrick/version
 win32/registry
 win32ole
 #@since 1.8.1
