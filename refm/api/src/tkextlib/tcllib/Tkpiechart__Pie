@@ -1,0 +1,21 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Tkpiechart::Pie < TkcItem
+include Tk::Tcllib::Tkpiechart::ConfigMethod
+
+== Instance Methods
+--- tag_key
+
+--- tag
+
+--- canvas
+
+--- delete
+
+--- new_slice(text = None)
+
+--- delete_slice(slice)
+
+--- selected_slices
+
+#@end

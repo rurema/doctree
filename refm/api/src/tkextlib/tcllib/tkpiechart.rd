@@ -1,0 +1,22 @@
+#@since 1.8.4
+
+require tk
+require tk/canvas
+require tkextlib/tcllib
+
+= module Tk::Tcllib::Tkpiechart
+
+== Singleton Methods
+--- package_name
+
+--- package_version
+
+#@include(Tkpiechart__ConfigMethod)
+#@include(Tkpiechart__PieChartObj)
+#@include(Tkpiechart__Pie)
+#@include(Tkpiechart__Slice)
+#@include(Tkpiechart__BoxLabeler)
+#@include(Tkpiechart__PeripheralLabeler)
+#@include(Tkpiechart__Label)
+
+#@end

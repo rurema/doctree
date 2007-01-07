@@ -1,0 +1,22 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Tkpiechart::Slice < TkcItem
+include Tk::Tcllib::Tkpiechart::ConfigMethod
+
+== Class Methods
+--- new(pie, *args)
+
+== Instance Methods
+--- tag_key
+
+--- tag
+
+--- pie
+
+--- delete
+
+--- size(share, disp = None)
+
+--- label(text)
+
+#@end

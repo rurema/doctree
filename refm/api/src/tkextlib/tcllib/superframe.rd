@@ -1,0 +1,19 @@
+#@since 1.8.4
+
+require tk
+require tkextlib/tcllib
+
+= class Tk::Tcllib::SuperFrame < TkWindow
+
+== Class Methods
+--- package_name
+
+--- package_version
+
+== Instance Methods
+--- labelwidget
+
+= class Tk::Tcllib::Superframe
+alias Tk::Tcllib::SuperFrame
+
+#@end

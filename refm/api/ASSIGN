@@ -375,31 +375,31 @@ tkextlib/itcl
 tkextlib/itk
 tkextlib/iwidgets               moriq           done
 tkextlib/pkg_checker
-tkextlib/tcllib                 date
-tkextlib/tcllib/autoscroll      date
-tkextlib/tcllib/ctext           date
-tkextlib/tcllib/cursor          date
-tkextlib/tcllib/datefield       date
-tkextlib/tcllib/dialog          date
-tkextlib/tcllib/getstring       date
-tkextlib/tcllib/history         date
-tkextlib/tcllib/ico             date
-tkextlib/tcllib/ip_entry        date
-tkextlib/tcllib/panelframe      date
+tkextlib/tcllib                 date            done
+tkextlib/tcllib/autoscroll      date            done
+tkextlib/tcllib/ctext           date            done
+tkextlib/tcllib/cursor          date            done
+tkextlib/tcllib/datefield       date            done
+tkextlib/tcllib/dialog          date            done
+tkextlib/tcllib/getstring       date            done
+tkextlib/tcllib/history         date            done
+tkextlib/tcllib/ico             date            done
+tkextlib/tcllib/ip_entry        date            done
+tkextlib/tcllib/panelframe      date            done
 tkextlib/tcllib/plotchart       date
-tkextlib/tcllib/ruler           date
-tkextlib/tcllib/screenruler     date
-tkextlib/tcllib/scrollwin       date
-tkextlib/tcllib/setup           date
-tkextlib/tcllib/style           date
-tkextlib/tcllib/superframe      date
-tkextlib/tcllib/swaplist        date
-tkextlib/tcllib/tablelist       date
-tkextlib/tcllib/tablelist_core  date
-tkextlib/tcllib/tablelist_tile  date
-tkextlib/tcllib/tkpiechart      date
-tkextlib/tcllib/tooltip         date
-tkextlib/tcllib/widget          date
+tkextlib/tcllib/ruler           date            done
+tkextlib/tcllib/screenruler     date            done
+tkextlib/tcllib/scrollwin       date            done
+tkextlib/tcllib/setup           date            done
+tkextlib/tcllib/style           date            done
+tkextlib/tcllib/superframe      date            done
+tkextlib/tcllib/swaplist        date            done
+tkextlib/tcllib/tablelist       date            done
+tkextlib/tcllib/tablelist_core  date            done
+tkextlib/tcllib/tablelist_tile  date            done
+tkextlib/tcllib/tkpiechart      date            done
+tkextlib/tcllib/tooltip         date            done
+tkextlib/tcllib/widget          date            done
 tkextlib/tclx                   date            done
 tkextlib/tile                   date            done
 tkextlib/tile/dialog            date            done
