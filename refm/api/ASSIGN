@@ -270,7 +270,7 @@ tkdialog                        (already done)
 tkmenubar                       (already done)
 tktext                          (already done)
 tkcanvas                        (already done)
-tkentry                         okkez
+tkentry                         okkez           done
 tkmngfocus                      okkez
 tkvirtevent                     okkez           done
 tkclass                         okkez           done

@@ -2,12 +2,12 @@
 
 require tk
 
-#@include(ValidateConfigure)
-#@include(ItemValidateConfigure)
-#@include(TkValidateCommand)
-#@include(TkValidateCommand__ValidateArgs)
-#@include(TkValidation)
-#@include(TkValidation__ValidateCmd)
-#@include(TkValidation__ValidateCmd__Action)
+#@include(validation/ValidateConfigure)
+#@include(validation/ItemValidateConfigure)
+#@include(validation/TkValidateCommand)
+#@include(validation/TkValidateCommand__ValidateArgs)
+#@include(validation/TkValidation)
+#@include(validation/TkValidation__ValidateCmd)
+#@include(validation/TkValidation__ValidateCmd__Action)
 
 #@end

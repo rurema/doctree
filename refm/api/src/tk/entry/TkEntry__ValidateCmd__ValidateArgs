@@ -1,0 +1,13 @@
+= class TkEntry::ValidateCmd::ValidateArgs < Object
+
+== Constants
+
+
+
+== Class Methods
+
+--- scan_args(arg_str, arg_val)
+
+== Instance Methods
+
+

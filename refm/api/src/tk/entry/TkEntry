@@ -1,0 +1,101 @@
+= class TkEntry < TkLabel
+#@if(version <= "1.8.1")
+include Tk::Scrollable
+#@else
+include Tk::X_Scrollable
+include TkValidation
+#@end
+
+== Constants
+
+--- TkCommandNames
+
+--- WidgetClassName
+
+--- WidgetClassNames
+
+== Class Methods
+
+#@if(version <= "1.8.1")
+--- new(cmd = Proc.new, args = nil)
+
+#@end
+
+== Instance Methods
+
+--- bbox(index)
+
+--- cursor
+#@since 1.8.2
+--- icursor
+
+#@end
+
+--- cursor=(index)
+#@since 1.8.2
+--- icursor=(index)
+
+#@end
+
+--- index(idx)
+
+--- insert(pos, text)
+
+--- delete(first, last = Tk::None)
+
+--- mark(pos)
+
+--- dragto(pos)
+
+--- selection_adjust(index)
+
+--- selection_clear
+
+--- selection_from(index)
+
+--- selection_present
+
+--- selection_range(s, e)
+
+--- selection_to(index)
+
+--- invoke_validate
+
+--- validate(mode = nil)
+
+--- value
+#@since 1.8.2
+--- get
+
+#@end
+
+
+--- value=(val)
+#@since 1.8.2
+--- set(val)
+
+#@end
+
+#@since 1.8.2
+--- [](*args)
+
+--- []=(*args)
+
+#@end
+
+#@if(version <= "1.8.1")
+
+--- configure(slot, value = Tk::None)
+
+#@if(version == "1.8.0")
+--- create_self(keys)
+
+#@end
+
+--- invalidcommand(cmd = Proc.new, args = nil)
+--- invcmd(cmd = Proc.new, args = nil)
+
+--- validatecommand(cmd = Proc.new, args = nil)
+--- vcmd(cmd = Proc.new, args = nil)
+
+#@end

@@ -1,0 +1,25 @@
+= module TkEntry::ValidateCmd::Action
+
+== Constants
+
+--- Insert
+#@# = 1
+
+--- Delete
+#@# = 0
+
+--- Others
+#@# = -1
+
+--- Focus
+#@# = -1
+
+--- Forced
+#@# = -1
+
+--- Textvariable
+#@# = -1
+
+--- TextVariable
+#@# = -1
+
