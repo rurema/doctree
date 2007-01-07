@@ -11,7 +11,7 @@ require webrick/ssl
 --- HTTP
 [[m:WEBrick::Config::SSL]] の内容がマージされます。
 
-= redefine WEBrick::HTTPRequest
+= reopen WEBrick::HTTPRequest
 
 == Instance Methods
 
@@ -20,6 +20,10 @@ require webrick/ssl
 --- server_cert
 
 --- client_cert
+
+= redefine WEBrick::HTTPRequest
+
+== Instance Methods
 
 --- parse(socket = nil)
 
