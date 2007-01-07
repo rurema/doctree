@@ -1,0 +1,5 @@
+= class WEBrick::SimpleServer < Object
+
+== Class Methods
+
+--- start { ... }

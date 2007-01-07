@@ -1,0 +1,2 @@
+= class WEBrick::HTTPAuth::ProxyBasicAuth < WEBrick::HTTPAuth::BasicAuth
+include WEBrick::HTTPAuth::ProxyAuthenticator

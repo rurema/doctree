@@ -1,0 +1,15 @@
+= class WEBrick::HTTPServer::MountTable
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- [](dir)
+
+--- [](dir, val)
+
+--- delete(dir)
+
+--- scan(path)

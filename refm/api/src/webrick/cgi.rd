@@ -1,4 +1,9 @@
 #@since 1.8.1
+require webrick/httprequest
+require webrick/httpresponse
+require webrick/config
+#@#require stringio
+
 一般の CGI 環境で WEBrick のサーブレットと同じように CGI スクリプトを書くための
 クラス。サーバが WEBrick でなくても使うことが出来る。
 

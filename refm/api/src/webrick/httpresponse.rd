@@ -1,3 +1,9 @@
+#@#require time
+require webrick/httpversion
+require webrick/htmlutils
+require webrick/httputils
+require webrick/httpstatus
+
 = class WEBrick::HTTPResponse < Object
 
 == Class Methods

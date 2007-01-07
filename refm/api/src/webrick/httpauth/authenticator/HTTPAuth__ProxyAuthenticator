@@ -1,0 +1,11 @@
+= module WEBrick::HTTPAuth::ProxyAuthenticator
+
+== Constants
+
+--- RequestField
+
+--- ResponseField
+
+--- InfoField
+
+--- AuthException

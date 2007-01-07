@@ -1,3 +1,7 @@
+require webrick/httpauth/userdb
+require webrick/httpauth/digestauth
+#@#require tempfile
+
 = class WEBrick::HTTPAuth::Htdigest < Object
 include WEBrick::HTTPAuth::UserDB
 

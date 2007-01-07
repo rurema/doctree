@@ -1,3 +1,6 @@
+require webrick/httpservlet/abstract
+#@#require erb
+
 = class WEBrick::HTTPServlet::ERBHandler < WEBrick::HTTPServlet::AbstractServlet
 
 == Class Methods

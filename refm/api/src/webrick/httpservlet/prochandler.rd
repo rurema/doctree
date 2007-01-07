@@ -1,3 +1,5 @@
+require webrick/httpservlet/abstract
+
 = class WEBrick::HTTPServlet::ProcHandler < WEBrick::HTTPServlet::AbstractServlet
 
 [[c:Proc]] を扱うためのサーブレット。

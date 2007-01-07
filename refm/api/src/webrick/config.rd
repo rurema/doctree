@@ -1,3 +1,9 @@
+require webrick/version
+require webrick/httpversion
+require webrick/httputils
+require webrick/utils
+require webrick/log
+
 = module WEBrick::Config
 
 == Constants

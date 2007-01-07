@@ -1,3 +1,10 @@
+#@#require thread
+require webrick/httputils
+require webrick/httputils
+require webrick/httpstatus
+
+= class WEBrick::HTTPServlet::HTTPServletError < StandardError
+
 = class WEBrick::HTTPServlet::AbstractServlet < Object
 
 サーブレットの抽象クラス。実装はサブクラスで行なう。
@@ -5,6 +12,7 @@
 == Class Methods
 
 --- new(server, *options)
+
 --- get_instance(config, *options)
 
 == Instance Methods
@@ -25,4 +33,4 @@ do_GET, do_HEAD, do_POST, do_OPTIONS... などを呼ぶ。
 クライアントからのリクエストに使われないと分かっているメソッドは実装しなくても良い。
 クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要がある。
 
-= class WEBrick::HTTPServlet::HTTPServletError < StandardError
+#@todo

@@ -1,3 +1,9 @@
+require webrick/httpauth/basicauth
+require webrick/httpauth/digestauth
+require webrick/httpauth/htpasswd
+require webrick/httpauth/htdigest
+require webrick/httpauth/htgroup
+
 = module WEBrick::HTTPAuth
 
 [[unknown:執筆者募集]]
@@ -25,9 +31,3 @@ Basic 認証を行う。ブロックは user, pass を引数として呼ばれ、
 ブロックが true を返すとユーザを認証したことになる。
 ブロックが false を返すと認証に失敗し、例外
 WEBrick::HTTPStatus::ProxyAuthenticationRequired を投げる。
-
-#@include(HTTPAuth__BasicAuth)
-#@include(HTTPAuth__DigestAuth)
-#@include(HTTPAuth__Htpasswd)
-#@include(HTTPAuth__Htdigest)
-#@include(HTTPAuth__Htgroup)

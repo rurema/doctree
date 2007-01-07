@@ -34,10 +34,3 @@ Digest 認証のためのクラス。
 
 --- userdb
 執筆者募集
-
-= class WEBrick::HTTPAuth::ProxyDigestAuth < WEBrick::HTTPAuth::DigestAuth
-include WEBrick::HTTPAuth::ProxyAuthenticator
-
-== Instance Methods
-
---- check_uri(req, auth_req)

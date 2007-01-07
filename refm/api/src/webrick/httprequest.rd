@@ -1,3 +1,10 @@
+#@#require timeout
+#@#require uri
+require webrick/httpversion
+require webrick/httpstatus
+require webrick/httputils
+require webrick/cookie
+
 = class WEBrick::HTTPRequest < Object
 
 [[url:http://shogo.homelinux.org/~ysantoso/webrickguide/html/HTTPRequest.html]]
@@ -36,7 +43,7 @@ content-type ヘッダを文字列で返す。
 --- cookies
 [[c:WEBrick::Cookie]] の配列を返す。
 
---- each{|key, val| ... }
+--- each {|key, val| ... }
 ヘッダ名を key、内容を val としてブロックを評価します。
 
 --- fixup
@@ -62,7 +69,7 @@ Keep-Alive かどうかを返す。
 path を文字列で返す。
 
 --- path_info
---- path_info=()
+--- path_info=(value)
 path と同値。
 
 --- peeraddr
@@ -75,7 +82,7 @@ path と同値。
 ハッシュを返す。key も val も unescape されている。
 
 --- query_string
---- query_string=
+--- query_string=(value)
 request_uri.query と同値。
 
 --- raw_header
@@ -93,11 +100,11 @@ request_uri.query と同値。
 [[c:URI]] オブジェクトを返す。
 
 --- script_name
---- script_name=()
+--- script_name=(value)
 
 --- to_s
 
 --- unparsed_uri
 
 --- user
---- user=()
+--- user=(value)

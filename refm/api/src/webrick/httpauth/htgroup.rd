@@ -1,3 +1,5 @@
+#@#require tempfile
+
 = class WEBrick::HTTPAuth::Htgroup < Object
 
 [[unknown:¼¹É®¼ÔÊç½¸]]

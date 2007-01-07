@@ -1,3 +1,8 @@
+#@#require rbconfig
+#@#require tempfile
+require webrick/config
+require webrick/httpservlet/abstract
+
 = class WEBrick::HTTPServlet::CGIHandler < WEBrick::HTTPServlet::AbstractServlet
 
 CGI を扱うためのサーブレット。

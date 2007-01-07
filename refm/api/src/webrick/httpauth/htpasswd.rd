@@ -1,3 +1,7 @@
+require webrick/httpauth/userdb
+require webrick/httpauth/basicauth
+#@#require tempfile
+
 = class WEBrick::HTTPAuth::Htpasswd < Object
 include WEBrick::HTTPAuth::UserDB
 
