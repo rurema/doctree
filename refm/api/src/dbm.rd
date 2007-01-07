@@ -149,6 +149,8 @@ value を値とする組がデータベース中に存在する時、真を返します。
 
 --- to_hash
 
+--- index 
+
 == Constants
 
 #@if (version >= "1.8.2")
