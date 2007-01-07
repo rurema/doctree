@@ -57,25 +57,33 @@ include Tk::Scrollable
 
 
 
+#@since 1.8.2
 --- create(type, *args)
 
 create a canvas item without creating a TkcItem object
+
+#@end
+#@if(version == "1.8.0")
+--- create_self(*args)
+
+this method should be private.
+
+#@end
+
 
 --- dchars(tag, first, last = Tk::None)
 
 
 
 --- delete(*args)
-alias remove
+--- remove(*args)
 
 
 
+#@since 1.8.3
 --- deltag(tag, tag_to_del = Tk::None)
-
-Alias for #dtag
-
+#@end
 --- dtag(tag, tag_to_del = Tk::None)
-alias deltag
 
 
 
@@ -129,7 +137,7 @@ alias deltag
 
 --- itembind(tag, context, *args)
 
-def itembind(tag, context, cmd=Proc.new, *args)
+def itembind(tag, context, cmd = Proc.new, *args)
 
   _bind([path, "bind", tagid(tag)], context, cmd, *args)
   self
@@ -138,7 +146,7 @@ end
 
 --- itembind_append(tag, context, *args)
 
-def itembind_append(tag, context, cmd=Proc.new, *args)
+def itembind_append(tag, context, cmd = Proc.new, *args)
 
   _bind_append([path, "bind", tagid(tag)], context, cmd, *args)
   self
@@ -151,7 +159,14 @@ end
 
 --- itembindinfo(tag, context = nil)
 
+#@if(version <= "1.8.1")
+--- itemcget(tag_or_id, option)
 
+--- itemconfiginfo(tag_or_id, key = nil)
+
+--- itemconfigure(tag_or_id, key value = Tk::None)
+
+#@end
 
 --- itemfocus(tagOrId = nil)
 
@@ -175,11 +190,6 @@ end
 
 --- raise(tag, above = nil)
 
-
-
---- remove(*args)
-
-Alias for #delete
 
 --- scale(tag, x, y, xs, ys)
 
