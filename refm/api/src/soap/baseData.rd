@@ -1,5 +1,5 @@
 #@since 1.8.1
-require xsd/datatypes
+#@#require xsd/datatypes
 require soap/soap
 require soap/mapping/typeMap
 

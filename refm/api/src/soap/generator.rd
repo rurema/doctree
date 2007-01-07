@@ -1,5 +1,5 @@
 #@since 1.8.1
-require xsd/ns
+#@#require xsd/ns
 require soap/soap
 require soap/baseData
 require soap/encodingstyle/handler

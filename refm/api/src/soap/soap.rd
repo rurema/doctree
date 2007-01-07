@@ -1,6 +1,6 @@
 #@since 1.8.1
-require xsd/qname
-require xsd/charset
+#@#require xsd/qname
+#@#require xsd/charset
 
 = module SOAP
 

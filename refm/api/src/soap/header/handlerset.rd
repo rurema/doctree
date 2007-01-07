@@ -1,5 +1,5 @@
 #@since 1.8.2
-require xsd/namedelements
+#@#require xsd/namedelements
 
 = class SOAP::Header::HandlerSet < Object
 

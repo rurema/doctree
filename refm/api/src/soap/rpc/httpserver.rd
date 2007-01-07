@@ -1,8 +1,8 @@
 #@since 1.8.1
-require logger
+#@#require logger
 require soap/rpc/soaplet
 require soap/streamHandler
-require webrick
+#@#require webrick
 
 = class SOAP::RPC::HTTPServer < Logger::Application
 

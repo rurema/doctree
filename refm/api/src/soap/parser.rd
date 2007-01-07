@@ -1,6 +1,6 @@
 #@since 1.8.1
-require xsd/ns
-require xsd/xmlparser
+#@#require xsd/ns
+#@#require xsd/xmlparser
 require soap/soap
 require soap/baseData
 require soap/encodingstyle/handler
