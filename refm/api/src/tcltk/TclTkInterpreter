@@ -1,0 +1,16 @@
+= class TclTkInterpreter < Object
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- _tcltkip
+
+--- commands
+
+--- method_missing(id, *args)
+
+--- rootwidget
+

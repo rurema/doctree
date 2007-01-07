@@ -1,0 +1,11 @@
+= class TclTkVariable < TclTkObject
+
+== Class Methods
+
+--- new(interp, dat)
+
+== Instance Methods
+
+--- get
+
+--- set(data)

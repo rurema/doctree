@@ -1,0 +1,12 @@
+= class TclTkObject < Object
+
+== Class Methods
+
+--- new(ip, exp)
+
+
+== Instance Methods
+
+--- to_s
+
+

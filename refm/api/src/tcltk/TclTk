@@ -1,0 +1,15 @@
+= module TclTk
+
+== Class Methods
+
+--- _addcallback(ca)
+
+--- _callcallback(key, arg)
+
+--- _newname(prefix)
+
+--- dcb(ca, wid, w)
+
+--- deletecallbackkey(ca)
+
+--- mainloop

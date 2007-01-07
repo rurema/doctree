@@ -1,0 +1,11 @@
+= class TclTkCallback < TclTkObject
+
+== Class Methods
+
+--- new(interp, pr, arg = nil)
+
+== Instance Methods
+
+--- _call(arg)
+
+--- to_eval
