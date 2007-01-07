@@ -263,7 +263,7 @@ multi-tk
 remote-tk
 tkafter                         okkez           done
 tkconsole
-tkmacpkg                        okkez
+tkmacpkg                        okkez           done
 tkscrollbox                     okkez           done
 tkbgerror                       okkez           done
 tkdialog
@@ -272,11 +272,11 @@ tktext
 tkcanvas
 tkentry
 tkmngfocus
-tkvirtevent                     okkez
+tkvirtevent                     okkez           done
 tkclass                         okkez           done
 tkfont
 tkpalette
-tkwinpkg                        okkez
+tkwinpkg                        okkez           done
 tk/composite                    okkez           done
 tk/clock                        okkez           done
 tk/optionobj                    okkez           done

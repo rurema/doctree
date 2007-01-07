@@ -1,0 +1,58 @@
+= module TkWinDDE
+extend Tk
+extend TkWinDDE
+
+== Constants
+
+--- TkCommandNames
+#@# = ['dde'.freeze].freeze
+
+#@since 1.8.2
+--- PACKAGE_NAME
+#@# = 'dde'.freeze
+
+#@end
+
+== Class Methods
+
+#@since 1.8.2
+--- package_name
+
+#@end
+
+--- async_execute(service, topic, data)
+
+--- eval(topic, cmd, *args)
+
+--- execute(service, topic, data)
+
+--- poke(service, topic, item, data)
+
+--- request(service, topic, item)
+
+--- servername(*args)
+
+--- services(service, topic)
+
+== Instance Methods
+
+#@since 1.8.2
+--- async_eval(topic, cmd, *args)
+
+#@end
+
+--- async_execute(service, topic, data)
+
+--- binary_request(service, topic, item)
+
+--- eval(topic, cmd, *args)
+
+--- execute(service, topic, data)
+
+--- poke(service, topic, item, data)
+
+--- request(service, topic, item)
+
+--- servername(*args)
+
+--- services(service, topic)

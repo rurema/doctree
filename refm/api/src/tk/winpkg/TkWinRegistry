@@ -1,0 +1,81 @@
+= module TkWinRegistry
+extend Tk
+extend TkWinRegistry
+
+== Constants
+
+--- TkCommandNames
+#@# = ['registry'.freeze].freeze
+
+== Class Methods
+
+#@if(version <= "1.8.1")
+--- delete(keynam, valnam = nil)
+#@else
+--- delete(keynam, valnam = Tk::None)
+
+#@end
+
+--- get(keynam, valnam)
+
+#@if(version <= "1.8.1")
+--- keys(keynam)
+#@else
+--- keys(keynam, pattern = nil)
+
+#@end
+
+#@if(version <= "1.8.1")
+--- set(keynam, valnam = nil, data = nil, dattype = nil)
+#@else
+--- set(keynam, valnam = Tk::None, data = Tk::None, dattype = Tk::None)
+
+#@end
+
+--- type(keynam, valnam)
+
+#@if(version <= "1.8.1")
+--- values(keynam)
+#@else
+--- values(keynam, pattern = nil)
+
+#@end
+
+== Instance Methods
+
+#@since 1.8.2
+--- broadcast(keynam, timeout = nil)
+
+#@end
+
+#@if(version <= "1.8.1")
+--- delete(keynam, valnam = nil)
+#@else
+--- delete(keynam, valnam = Tk::None)
+
+#@end
+
+--- get(keynam, valnam)
+
+#@if(version <= "1.8.1")
+--- keys(keynam)
+#@else
+--- keys(keynam, pattern = nil)
+
+#@end
+
+#@if(version <= "1.8.1")
+--- set(keynam, valnam = nil, data = nil, dattype = nil)
+#@else
+--- set(keynam, valnam = Tk::None, data = Tk::None, dattype = Tk::None)
+
+#@end
+
+--- type(keynam, valnam)
+
+#@if(version <= "1.8.1")
+--- values(keynam)
+#@else
+--- values(keynam, pattern = nil)
+
+#@end
