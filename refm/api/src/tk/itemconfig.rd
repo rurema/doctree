@@ -4,7 +4,7 @@ require tk
 require tkutil
 require tk/itemfont
 
-#@include(TkItemConfigOptkeys)
-#@include(TkItemConfigMethod)
+#@include(itemconfig/TkItemConfigOptkeys)
+#@include(itemconfig/TkItemConfigMethod)
 
 #@end
