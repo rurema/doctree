@@ -1,5 +1,5 @@
 #@since 1.8.3
-= object WEBrick::NullReader
+= object WEBrick::NullReader < Object
 
 --- read(*args)
 --- gets(*args)
