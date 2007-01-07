@@ -12,7 +12,7 @@ require tkextlib/tile/tnotebook
 require tkextlib/tile/tradiobutton
 require tkextlib/tile/style
 
-#@include(Tk__Tile)
-#@include(Tk__Tile__TileWidget)
+#@include(tile/Tk__Tile)
+#@include(tile/Tk__Tile__TileWidget)
 
 #@end
