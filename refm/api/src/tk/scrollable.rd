@@ -17,7 +17,7 @@ include Tk::Y_Scrollable
 
 
 
-#@include(X_Scrollable)
-#@include(Y_Scrollable)
+#@include(scrollable/X_Scrollable)
+#@include(scrollable/Y_Scrollable)
 
 #@end

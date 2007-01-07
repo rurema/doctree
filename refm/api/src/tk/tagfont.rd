@@ -2,6 +2,6 @@
 
 require tk
 
-#@include(TkTreatTagFont)
+#@include(tagfont/TkTreatTagFont)
 
 #@end
