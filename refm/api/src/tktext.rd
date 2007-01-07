@@ -11,13 +11,13 @@ include TkTreatItemFont
 #@include(tk/texttag/TkTextTag)
 #@include(tk/texttag/TkTextNamedTag)
 #@include(tk/texttag/TkTextTagSel)
-#@include(tk/text/TkTextMark)
-#@include(tk/text/TkTextNamedMark)
-#@include(tk/text/TkTextMarkInsert)
-#@include(tk/text/TkTextMarkCurrent)
-#@include(tk/text/TkTextMarkAnchor)
-#@include(tk/text/TkTextWindow)
-#@include(tk/text/TkTextImage)
+#@include(tk/textmark/TkTextMark)
+#@include(tk/textmark/TkTextNamedMark)
+#@include(tk/textmark/TkTextMarkInsert)
+#@include(tk/textmark/TkTextMarkCurrent)
+#@include(tk/textmark/TkTextMarkAnchor)
+#@include(tk/textwindow/TkTextWindow)
+#@include(tk/textimage/TkTextImage)
 
 #@else
 
