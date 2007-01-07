@@ -451,10 +451,3 @@ Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 [[m:Process#waitpid]] の第二引数に指定するフラグです。
 子プロセスの停止によりステータスを報告していない
 子プロセスがある時に waitpid がブロックしません。
-
-#@since 1.8.0
-#@include(Process__Status.rd)
-#@include(Process__UID.rd)
-#@include(Process__GID.rd)
-#@include(Process__Sys.rd)
-#@end
