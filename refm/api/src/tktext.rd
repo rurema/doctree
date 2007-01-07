@@ -8,9 +8,9 @@ include TkTreatItemFont
 --- ItemCMD
 
 #@include(tk/text/TkText)
-#@include(tk/text/TkTextTag)
-#@include(tk/text/TkTextNamedTag)
-#@include(tk/text/TkTextTagSel)
+#@include(tk/texttag/TkTextTag)
+#@include(tk/texttag/TkTextNamedTag)
+#@include(tk/texttag/TkTextTagSel)
 #@include(tk/text/TkTextMark)
 #@include(tk/text/TkTextNamedMark)
 #@include(tk/text/TkTextMarkInsert)
