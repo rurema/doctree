@@ -1,0 +1,12 @@
+= class MultiTkIp_OK < Exception
+
+== Class Methods
+
+--- new(ret = nil)
+
+--- send(thread, ret = nil)
+
+== Instance Methods
+
+--- return_value
+--- value

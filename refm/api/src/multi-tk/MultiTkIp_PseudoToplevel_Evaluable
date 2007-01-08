@@ -1,0 +1,11 @@
+= module MultiTkIp_PseudoToplevel_Evaluable
+
+== Class Methods
+
+--- extend(mod)
+
+== Instance Methods
+
+--- pseudo_toplevel_evaluable=(mode)
+
+--- pseudo_toplevel_evaluable?

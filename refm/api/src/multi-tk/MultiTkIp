@@ -1,0 +1,661 @@
+= class MultiTkIp < Object
+
+== Constants
+
+--- BASE_DIR
+
+--- SAFE_OPT_LIST
+
+--- SLAVE_IP_ID
+
+== Class Methods
+
+--- __getip
+
+#@since 1.8.2
+--- _conv_listelement(arg)
+
+--- _create_console
+
+#@end
+--- _eval(str)
+
+#@since 1.8.2
+--- _eval_with_enc(str)
+
+--- _eval_without_enc(str)
+
+#@end
+--- _fromUTF8(str, encoding = nil)
+
+#@since 1.8.2
+--- _get_global_var(var)
+
+--- _get_global_var2(var, idx)
+
+--- _get_variable(var, flag)
+
+--- _get_variable2(var, idx, flag)
+
+#@end
+--- _invoke(*args)
+
+#@since 1.8.2
+--- _invoke_with_enc(*args)
+
+--- _invoke_without_enc(*args)
+
+--- _ip_id_
+
+#@end
+#@since 1.8.5
+--- _make_menu_embeddable(menu_path)
+
+#@end
+#@since 1.8.2
+--- _merge_tklist(*args)
+
+#@end
+--- _return_value
+
+#@since 1.8.2
+--- _set_global_var(var, value)
+
+--- _set_global_var2(var, idx, value)
+
+--- _set_variable(var, value, flag)
+
+--- _set_variable2(var, idx, value, flag)
+
+--- _split_tklist(str)
+
+#@end
+#@since 1.8.1
+--- _thread_tkwait(mode, target)
+
+--- _thread_vwait(var)
+
+#@end
+--- _toUTF8(str, encoding = nil)
+
+#@since 1.8.2
+--- _unset_global_var(var)
+
+--- _unset_global_var2(var, idx)
+
+--- _unset_variable(var, flag)
+
+--- _unset_variable2(var, idx, flag)
+
+#@end
+#@since 1.8.2
+--- abort(msg = nil)
+
+#@end
+--- add_tk_procs(name, args = nil, body = nil)
+
+--- alias_delete(slave, cmd_name)
+
+--- alias_info(slave, cmd_name)
+
+--- alias_target(aliascmd, slave = '')
+
+--- aliases(slave = '')
+
+--- alive?
+
+#@since 1.8.2
+--- allow_ruby_exit=(mode)
+
+--- allow_ruby_exit?
+
+#@end
+#@since 1.8.5
+--- bg_eval(*args, &block)
+--- background_eval(*args, &block)
+
+--- bg_eval_proc(*args)
+--- bg_call(*args)
+--- background_call(*args)
+--- background_eval_proc(*args)
+#@since 1.8.5
+--- thread_eval_proc(*args)
+#@end
+
+--- bg_eval_string(cmd, *eval_args)
+--- bg_eval_str(cmd, *eval_args)
+--- background_eval_string(cmd, *eval_args)
+--- background_eval_str(cmd, *eval_args)
+
+#@end
+#@since 1.8.2
+--- bgerror(cmd = Proc.new, slave = nil, &block)
+
+#@end
+#@since 1.8.2
+--- cb_entry_class
+
+#@end
+--- create_table
+
+--- def_alias(slave, new_cmd, org_cmd, *args)
+
+#@since 1.8.2
+--- delete
+
+#@end
+--- delete_cmd(slave, cmd)
+
+--- delete_slaves(*args)
+
+#@since 1.8.2
+--- deleted?
+--- deleteed?
+#@# deleteed? ¤Ï typo
+#@end
+--- do_one_event(flag = TclTkLib::EventFlag::ALL)
+
+#@since 1.8.5
+--- eval(*args, &block)
+
+#@end
+--- eval_proc
+#@since 1.8.1
+--- call
+#@end
+
+--- eval_string(cmd, *eval_args)
+#@since 1.8.5
+--- eval_str(cmd, *eval_args)
+#@end
+
+
+--- exist?(slave = '')
+
+#@since 1.8.2
+--- exit(st = true)
+
+--- exit!(st = false)
+
+#@end
+--- expose_cmd(slave, cmd, aliasname = nil)
+
+--- get_cb_entry(cmd)
+
+--- get_eventloop_tick
+
+--- get_eventloop_weight
+
+#@since 1.8.2
+--- get_limit(limit_type, slave = '', slot = nil)
+
+#@end
+--- get_no_event_wait
+
+#@since 1.8.3
+--- has_mainwindow?
+
+#@end
+--- hidden_cmds(slave = '')
+
+--- hide_cmd(slave, cmd, aliasname = nil)
+
+--- inherited(subclass)
+
+--- init_ip_env(script = Proc.new)
+
+--- init_ip_internal
+
+#@since 1.8.2
+--- invalid_namespace?
+
+#@end
+
+--- invoke_hidden(slave, cmd, *args)
+
+--- invoke_hidden_on_global(slave, cmd, *args)
+
+#@since 1.8.3
+--- invoke_hidden_on_namespace(slave, ns, cmd, *args)
+
+#@end
+--- ip_name
+
+--- mainloop(check_root = true)
+
+#@since 1.8.1
+--- mainloop_abort_on_exception
+
+--- mainloop_abort_on_exception=(mode)
+
+#@end
+--- mainloop_watchdog(check_root = true)
+
+--- make_safe
+
+#@since 1.8.4
+--- manipulable?
+
+#@end
+--- mark_trusted(slave = '')
+
+--- master?
+
+--- method_missing
+
+
+--- new_master(safe = nil, keys = {})
+--- new(safe=nil, keys={})
+
+--- new_safe_slave(safe = 4, keys = {})
+--- new_safeTk(safe = 4, keys = {})
+
+
+--- new_slave(safe = nil, keys = {})
+--- new_trusted_slave(safe = nil, keys = {})
+
+
+--- path
+
+#@since 1.8.2
+--- recursion_limit(slave = '', limit = Tk::None)
+
+#@end
+#@since 1.8.5
+--- remove_tk_procs(*names)
+
+#@end
+--- restart(app_name = nil, keys = {})
+
+--- safe?
+
+#@since 1.8.2
+--- safe_base?
+
+--- safe_level
+
+--- safe_level=(safe)
+
+#@end
+--- set_eventloop_tick(tick)
+
+--- set_eventloop_weight(loop_max, no_event_tick)
+
+#@since 1.8.2
+--- set_limit(limit_type, slave = '', opts = {})
+
+#@end
+--- set_no_event_wait(tick)
+
+--- set_safe_level(safe)
+
+--- share_stderr(dist, src = '')
+
+--- share_stdin(dist, src = '')
+
+--- share_stdio(dist, src = '')
+
+--- share_stdout(dist, src = '')
+
+--- slave?
+
+--- slaves(all = false)
+
+--- tk_cmd_tbl
+
+--- tk_object_table(id)
+
+--- tk_windows
+
+--- to_eval
+
+--- transfer_stderr(dist, src = '')
+
+--- transfer_stdin(dist, src = '')
+
+--- transfer_stdio(dist, src = '')
+
+--- transfer_stdout(dist, src = '')
+
+
+== Instance Methods
+
+--- __create_safe_slave_obj(safe_opts, app_name, tk_opts)
+
+--- __create_trusted_slave_obj(name, keys)
+
+--- __eval(str)
+
+--- __invoke(*args)
+
+#@since 1.8.5
+--- __pseudo_toplevel
+
+--- __pseudo_toplevel=(m)
+
+--- __pseudo_toplevel_evaluable=(mode)
+
+--- __pseudo_toplevel_evaluable?
+
+#@end
+#@since 1.8.1
+--- _add_new_tables
+
+#@end
+--- _add_tk_procs(name, args, body)
+
+#@since 1.8.2
+--- _conv_listelement(arg)
+
+#@end
+--- _create_slave_object(keys = {})
+
+#@since 1.8.2
+--- _default_delete_hook(slave)
+
+--- _destroy_slaves_of_slaveIP(ip)
+
+#@end
+--- _eval(str)
+
+#@since 1.8.2
+--- _eval_with_enc(str)
+
+--- _eval_without_enc(str)
+
+#@end
+--- _fromUTF8(str, encoding = nil)
+
+#@since 1.8.2
+--- _get_global_var(var)
+
+--- _get_global_var2(var, idx)
+
+--- _get_variable(var, flag)
+
+--- _get_variable2(varm idx, flag)
+
+#@end
+--- _init_ip_env(script)
+
+--- _init_ip_internal(init_ip_env, add_tk_procs)
+
+--- _invoke(*args)
+
+#@since 1.8.2
+--- _invoke_with_enc(*args)
+
+--- _invoke_without_enc(*args)
+
+--- _ip_id_
+
+#@end
+#@since 1.8.4
+--- _is_master_of?(tcltkip_obj)
+
+#@end
+#@since 1.8.5
+--- _make_menu_embeddable
+
+#@end
+#@since 1.8.2
+--- _merge_tklist(*args)
+
+--- _receiver_mainloop(check_root)
+
+#@end
+#@since 1.8.5
+--- _remove_tk_procs(*names)
+
+#@end
+--- _return_value
+
+#@since 1.8.2
+--- _set_global_var(var, value)
+
+--- _set_global_var2(var, idx, value)
+
+--- _set_variable(var, value, flag)
+
+--- _set_variable2(var, idx, value, flag)
+
+--- _split_tklist(str)
+
+#@end
+#@since 1.8.1
+--- _thread_tkwait(mode, target)
+
+--- _thread_vwait(var)
+
+#@end
+--- _tk_cmd_tbl
+
+--- _tk_table_list
+
+--- _tk_windows
+
+--- _toUTF8(str, encoding=nil)
+
+#@since 1.8.2
+--- _unset_global_var(var)
+
+--- _unset_global_var2(var, idx)
+
+--- _unset_variable(var, flag)
+
+--- _unset_variable2(var, idx, flag)
+
+--- abort(msg = nil)
+
+#@end
+--- alias_delete(slave, cmd_name)
+
+--- alias_info(slave, cmd_name)
+
+--- alias_target(aliascmd, slave = '')
+
+--- aliases(slave = '')
+
+--- alive?
+
+#@since 1.8.2
+--- allow_ruby_exit=(mode)
+
+--- allow_ruby_exit?
+
+#@end
+
+#@since 1.8.5
+--- bg_eval(*args, &block)
+--- background_eval(*args, &block)
+
+
+#@end
+#@since 1.8.2
+--- bg_eval_proc(*args)
+--- background_eval_proc(*args)
+--- background_call(*args)
+--- bg_call(*args)
+#@since 1.8.3
+--- thread_eval_proc(*args)
+#@end
+
+
+#@end
+#@since 1.8.2
+--- bg_eval_string(cmd, *eval_args)
+--- bg_eval_str(cmd, *eval_args)
+--- background_eval_string(cmd, *eval_args)
+--- background_eval_str(cmd, *eval_args)
+
+#@end
+--- call(*args)
+
+#@since 1.8.3
+--- cb_error(e)
+
+#@end
+--- cb_eval(cmd, *args)
+
+--- def_alias(slave, new_cmd, org_cmd, *args)
+
+--- delete(idx, &block)
+
+--- delete_cmd(slave, cmd)
+
+--- delete_slaves(*args)
+
+--- deleted?
+
+--- encoding
+
+--- encoding=(enc)
+
+#@since 1.8.2
+--- encoding_convertfrom(str, enc = Tk::None)
+--- encoding_convert_from(str, enc = Tk::None)
+
+--- encoding_convertto(str, enc = Tk::None)
+--- encoding_convert_to(str, enc = Tk::None)
+
+#@end
+#@since 1.8.5
+--- eval(*args, &block)
+
+#@end
+--- eval_callback(*args)
+
+--- eval_proc(*args)
+
+#@since 1.8.1
+--- eval_string(cmd, *eval_args)
+#@since 1.8.2
+--- eval_str(cmd, *eval_args)
+#@end
+
+#@end
+--- exist?(slave = '')
+
+#@since 1.8.2
+--- exit(st = true)
+
+--- exit!(st = false)
+
+#@end
+--- expose_cmd(slave, cmd, aliasname = nil)
+
+#@since 1.8.2
+--- get_bgerror_handler(slave = '')
+
+--- get_limit(limit_type, slave = '', slot = nil)
+
+#@end
+#@since 1.8.3
+--- has_mainwindow?
+
+#@end
+--- hidden_cmds(slave = '')
+
+--- hide_cmd(slave, cmd, aliasname = nil)
+
+--- inspect
+
+#@since 1.8.2
+--- invalid_namespace?
+
+#@end
+--- invoke_hidden(slave, cmd, *args)
+
+--- invoke_hidden_on_global(slave, cmd, *args)
+
+#@since 1.8.3
+--- invoke_hidden_on_namespace(slave, ns, cmd, *args)
+
+#@end
+--- ip_name
+
+--- mainloop(check_root = true, restart_on_dead = true)
+
+--- make_safe
+
+#@since 1.8.4
+--- manipulable?
+
+#@end
+--- mark_trusted(slave = '')
+
+--- master?
+
+--- path
+
+#@since 1.8.2
+--- recursion_limit(slave = '', limit = Tk::None)
+
+#@end
+--- restart(*args)
+
+#@since 1.8.2
+--- running_mainloop?
+
+#@end
+--- safe?
+
+#@since 1.8.2
+--- safe_base?
+
+--- safe_level
+
+--- safe_level=(safe)
+
+--- safeip_add_to_access_path(dir)
+
+--- safeip_configinfo(slot = nil)
+
+--- safeip_configure(slot, value = Tk::None)
+
+--- safeip_delete
+
+--- safeip_find_in_access_path(dir)
+
+--- safeip_set_log_cmd(cmd = Proc.new)
+
+--- set_bgerror_handler(cmd = Proc.new, slave = nil, &block)
+
+#@end
+#@since 1.8.3
+--- set_cb_error(cmd = Proc.new)
+
+#@end
+#@since 1.8.2
+--- set_limit(limit_type, slave = '', opts = {})
+
+#@end
+--- set_safe_level(safe)
+
+--- share_stderr(dist, src = '')
+
+--- share_stdin(dist, src = '')
+
+--- share_stdio(dist, src = '')
+
+--- share_stdout(dist, src = '')
+
+--- slave?
+
+--- slaves(all = false)
+
+
+--- to_eval
+
+--- transfer_stderr(dist, src = '')
+
+--- transfer_stdin(dist, src = '')
+
+--- transfer_stdio(dist, src = '')
+
+--- transfer_stdout(dist, src = '')
+
+--- wait_on_mainloop=(bool)
+
+--- wait_on_mainloop?
+
