@@ -1,0 +1,17 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::PolarPlot < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- plot(series, radius, angle)
+
+--- dataconfig(series, key, value = None)
+
+= class Tk::Tcllib::Plotchart::Polarplot
+alias Tk::Tcllib::Plotchart::PolarPlot
+
+#@end

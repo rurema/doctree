@@ -1,0 +1,24 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::Gnattchart < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- task(txt, time_begin, time_end, completed = 0.0)
+
+--- milestone(txt, time, col = None)
+
+--- vertline(txt, time)
+
+--- connect(from_task, to_task)
+
+--- summary(txt, tasks)
+
+--- color_of_part(keyword, newcolor)
+
+--- font_of_part(keyword, newfont)
+
+#@end

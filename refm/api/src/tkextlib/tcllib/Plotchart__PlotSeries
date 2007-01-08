@@ -1,0 +1,15 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::PlotSeries < TkObject
+
+== Class Methods
+--- id2obj(chart, id)
+
+--- new(chart, keys = nil)
+
+== Instance Methods
+--- plot(*args)
+
+--- dataconfig(key, value = None)
+
+#@end

@@ -1,0 +1,12 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::Piechart < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- plot(*dat)
+
+#@end

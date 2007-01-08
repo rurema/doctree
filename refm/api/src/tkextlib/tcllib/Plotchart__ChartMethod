@@ -1,0 +1,39 @@
+#@since 1.8.4
+
+= module Tk::Tcllib::Plotchart::ChartMethod
+extend TkCore
+
+== Instance Methods
+--- title(str)
+
+--- save_plot(filename)
+
+--- xtext(str)
+
+--- ytext(str)
+
+--- xconfig(key, value = None)
+
+--- yconfig(key, value = None)
+
+--- view_port(*args)
+
+--- world_coordinates(*args)
+
+--- world_3D_coordinates(*args) 
+
+--- coords_to_pixel(x, y)
+
+--- coords_3D_to_pixel(x, y, z)
+
+--- polar_coordinates(radmax)
+
+--- polar_to_pixel(rad, phi)
+
+--- pixel_to_coords(x, y)
+
+--- determine_scale(xmax, ymax)
+
+--- set_zoom_pan
+
+#@end

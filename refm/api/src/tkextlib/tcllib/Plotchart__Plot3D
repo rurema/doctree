@@ -1,0 +1,23 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::Plot3D < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- plot_function(cmd = Proc.new)
+
+--- plot_funcont(conts, cmd = Proc.new)
+
+--- grid_size(nxcells, nycells)
+
+--- plot_data(dat)
+
+--- colour(fill, border)
+--- colours(fill, border)
+--- colors(fill, border)
+--- color(fill, border)
+
+#@end

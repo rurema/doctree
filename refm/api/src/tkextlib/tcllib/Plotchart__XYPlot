@@ -1,0 +1,24 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::XYPlot < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- plot(series, x, y)
+
+--- contourlines(xcrd, ycrd, vals, clss = None)
+
+--- contourfill(xcrd, ycrd, vals, klasses = None)
+
+--- contourbox(xcrd, ycrd, vals, klasses = None)
+
+--- color_map(colors)
+
+--- grid_cells(xcrd, ycrd)
+
+--- dataconfig(series, key, value = None)
+
+#@end

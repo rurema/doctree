@@ -386,7 +386,7 @@ tkextlib/tcllib/history         date            done
 tkextlib/tcllib/ico             date            done
 tkextlib/tcllib/ip_entry        date            done
 tkextlib/tcllib/panelframe      date            done
-tkextlib/tcllib/plotchart       date
+tkextlib/tcllib/plotchart       date            done
 tkextlib/tcllib/ruler           date            done
 tkextlib/tcllib/screenruler     date            done
 tkextlib/tcllib/scrollwin       date            done

@@ -1,0 +1,23 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::IsometricPlot < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- plot(type, *args)
+
+--- plot_rectangle(*args)
+
+--- plot_filled_rectangle(*args)
+
+--- plot_circle(*args)
+
+--- plot_filled_circle(*args)
+
+= class Tk::Tcllib::Plotchart::Isometricplot
+alias Tk::Tcllib::Plotchart::IsometricPlot
+
+#@end

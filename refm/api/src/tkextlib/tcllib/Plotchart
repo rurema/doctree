@@ -1,0 +1,31 @@
+#@since 1.8.4
+
+= module Tk::Tcllib::Plotchart
+extend TkCore
+
+== Singleton Methods
+--- package_name
+
+--- package_version
+
+--- view_port(w, *args)
+
+--- world_coordinates(w, *args)
+
+--- world_3D_coordinates(w, *args) 
+
+--- coords_to_pixel(w, x, y)
+
+--- coords_3D_to_pixel(w, x, y, z)
+
+--- polar_coordinates(w, radmax)
+
+--- polar_to_pixel(w, rad, phi)
+
+--- pixel_to_coords(w, x, y)
+
+--- determine_scale(w, xmax, ymax)
+
+--- set_zoom_pan(w)
+
+#@end

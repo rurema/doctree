@@ -1,0 +1,5 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::Stripchart < XYPlot
+
+#@end

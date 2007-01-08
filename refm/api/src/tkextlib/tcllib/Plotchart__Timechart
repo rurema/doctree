@@ -1,0 +1,16 @@
+#@since 1.8.4
+
+= class Tk::Tcllib::Plotchart::Timechart < TkCanvas
+include ChartMethod
+
+== Class Methods
+--- new(*args)
+
+== Instance Methods
+--- period(txt, time_begin, time_end, col = None)
+
+--- milestone(txt, time, col = None)
+
+--- vertline(txt, time)
+
+#@end
