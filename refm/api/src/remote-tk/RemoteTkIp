@@ -1,0 +1,157 @@
+= class RemoteTkIp < MultiTkIp
+
+
+== Class Methods
+
+--- do_one_evant(flag = nil)
+
+--- get_eventloop_tick
+
+--- get_eventloop_weight
+
+--- get_no_event_wait
+
+--- mainloop(*args)
+
+--- mainloop_abort_on_exception
+
+--- mainloop_abort_on_exception=(mode)
+
+--- mainloop_watchdog(*args)
+
+#@since 1.8.4
+--- manipulable?
+
+#@end
+--- new(*args, &block)
+
+--- set_eventloop_tick(*args)
+
+--- set_eventloop_weight(*args)
+
+--- set_no_event_wait(*args)
+
+== Instance Methods
+
+--- __eval(str)
+
+--- __invoke(*args)
+
+--- _conv_listelement(str)
+
+--- _create_console
+
+--- _eval(str)
+
+--- _eval_with_enc(str)
+
+--- _eval_without_enc(str)
+
+--- _fromUTF8(str, encoding = nil)
+
+--- _get_global_var(var_name)
+
+--- _get_global_var2(var_name, index_name)
+
+--- _get_variable(var_name, flag)
+
+--- _get_variable2(var_name, index_name, flag)
+
+--- _invoke(*args)
+
+--- _invoke_with_enc(*args)
+
+--- _invoke_without_enc(*args)
+
+--- _ip_id_
+
+#@since 1.8.4
+--- _is_master_of?(tcltkip_obj)
+
+#@end
+--- _merge_tklist(*args)
+
+--- _return_value
+
+--- _set_global_var(var_name, value)
+
+--- _set_global_var2(var_name, index_name, value)
+
+--- _set_variable(var_name, value, flag)
+
+--- _set_variable2(var_name, index_name, value, flag)
+
+--- _split_tklist(str)
+
+--- _thread_tkwait(mode, target)
+
+--- _thread_vwait(var_name)
+
+--- _toUTF8(str, encoding = nil)
+
+--- _unset_global_var(var_name)
+
+--- _unset_global_var2(var_name, index_name)
+
+--- _unset_variable(var_name, flag)
+
+--- _unset_variable2(var_name, index_name, flag)
+
+--- allow_ruby_exit=(mode)
+
+--- allow_ruby_exit?
+
+--- appsend(async, *args)
+
+--- create_slave(name, safe = false)
+
+--- delete
+
+--- deleted?
+
+--- do_one_evant(flag = nil)
+
+--- get_eventloop_tick
+
+--- get_eventloop_weight
+
+--- get_no_event_wait
+
+#@since 1.8.4
+--- has_mainwindow?
+
+#@end
+--- invalid_namespace?
+
+--- is_rubytk?
+
+--- mainloop
+
+--- mainloop_abort_on_exception
+
+--- mainloop_abort_on_exception=(mode)
+
+--- mainloop_watchdog
+
+--- make_safe
+
+#@since 1.8.4
+--- manipulable?
+
+#@end
+--- rb_appsend(async, *args)
+
+--- ready?(timeout = 5)
+
+--- restart
+
+--- safe?
+
+--- safe_base?
+
+--- set_eventloop_tick(*args)
+
+--- set_eventloop_weight(*args)
+
+--- set_no_event_wait(*args)
+
