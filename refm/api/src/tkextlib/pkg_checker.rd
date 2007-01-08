@@ -13,4 +13,4 @@ Ruby/Tk extension library checker
     -h : Show this message
     -- : End of options
 
-@end
+#@end
