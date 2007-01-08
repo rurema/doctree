@@ -1,3 +1,11 @@
+require runit/error
+
+このライブラリは、
+RubyUnit との互換性を提供するためだけに提供されています。
+これから新しくユニットテストを書くときは
+[[lib:test/unit]] ライブラリを使ってください。
+
+
 = module RUNIT::Assert
 
 RubyUnit のアサーションを集めたモジュールです。

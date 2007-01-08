@@ -16,7 +16,9 @@ bigdecimal/newton
 #@end
 bigdecimal/util
 #@end
+#@if (version <= "1.9.0")
 cgi-lib
+#@end
 cgi
 cgi/session
 cgi/session/pstore
@@ -165,6 +167,13 @@ rss
 #@end
 #@since 1.8.0
 rubyunit
+runit/assert
+runit/cui/testrunner
+runit/error
+runit/testcase
+runit/testresult
+runit/testsuite
+runit/topublic
 scanf
 #@end
 sdbm
