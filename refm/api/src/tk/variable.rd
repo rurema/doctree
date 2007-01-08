@@ -439,7 +439,7 @@ Rubyにおける定数が値を変更できないためです。
 
 --- USE_TCLs_SET_VARIABLE_FUNCTIONS
 
-= class TkVarAccess < TkVarAccess
+= class TkVarAccess < TkVariable
 
 Tclライブラリなどで既に定義されている変数にアクセスするためのクラスで
 す。((-Tclのスコープを意識して利用しないとうまくアクセスできないと思わ
