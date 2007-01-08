@@ -1,0 +1,46 @@
+#@since 1.8.2
+
+= module Tk::Itcl
+include Tk
+extend Tk
+
+== Singleton Methods
+#@since 1.8.3
+--- package_name
+
+#@end
+--- package_version
+
+--- body(klass, func, args, body)
+
+--- code(cmd, *args)
+
+--- code_in_namespace(namespace, cmd, *args)
+
+--- configbody(klass, var, body)
+
+--- create_itcl_class(name, body)
+
+--- delete_itcl_class(*names)
+
+--- delete_itcl_object(*names)
+
+--- delete_namespace(*names)
+
+--- ensemble(name, *args)
+
+--- find_classes(pat = None)
+
+--- find_objects(*args)
+
+--- is_itcl_class(target)
+
+--- is_itcl_object(target)
+
+--- create_local_obj(klass, name, *args)
+
+--- is_itcl_instance(klass, target)
+
+--- scope(var)
+
+#@end

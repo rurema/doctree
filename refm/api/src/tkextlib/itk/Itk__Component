@@ -1,0 +1,41 @@
+#@since 1.8.2
+
+= class Tk::Itk::Component < TkObject
+
+== Class Methods
+--- id2obj(master, id)
+
+--- new(master, component = nil)
+
+== Instance Methods
+--- path
+
+--- epath
+
+--- to_eval
+
+--- master
+
+--- name
+
+--- widget
+
+--- widget_class
+
+--- method_missing(id, *args)
+
+--- tk_send(cmd, *rest)
+
+--- tk_send_without_enc(cmd, *rest)
+
+--- tk_send_with_enc(cmd, *rest)
+
+--- bind(context, *args)
+
+--- bind_append(context, *args)
+
+--- bind_remove(*args)
+
+--- bindinfo(*args)
+
+#@end

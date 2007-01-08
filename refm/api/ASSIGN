@@ -371,10 +371,10 @@ tkextlib/blt/watch              moriq           done
 tkextlib/blt/win_printer        moriq           done
 tkextlib/blt/winop              moriq           done
 tkextlib/bwidget                moriq           done
-tkextlib/itcl                   date
-tkextlib/itk                    date
+tkextlib/itcl                   date            done
+tkextlib/itk                    date            done
 tkextlib/iwidgets               moriq           done
-tkextlib/pkg_checker            date
+tkextlib/pkg_checker            date            done
 tkextlib/tcllib                 date            done
 tkextlib/tcllib/autoscroll      date            done
 tkextlib/tcllib/ctext           date            done

@@ -1,0 +1,18 @@
+#@since 1.8.2
+
+= class Tk::Itk::Archetype < TkWindow
+
+== Class Methods
+--- to_eval
+
+== Instance Methods
+--- component
+
+--- component_path(name)
+--- component_widget(name)
+
+--- component_invoke(name, cmd, *args)
+
+--- component_obj(*names)
+
+#@end

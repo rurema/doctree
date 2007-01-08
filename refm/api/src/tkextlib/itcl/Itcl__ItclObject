@@ -1,0 +1,26 @@
+#@since 1.8.2
+
+= class Tk::Itcl::ItclObject < TkObject
+
+== Class Methods
+--- new(*args)
+
+--- call_proc(name, *args)
+
+== Instance Methods
+--- call_method(name, *args)
+
+--- isa(klass)
+--- itcl_kind_of?(klass)
+
+--- info_class
+
+--- info_inherit
+
+--- info_heritage
+
+--- info_function(*args)
+
+--- info_variable(*args)
+
+#@end
