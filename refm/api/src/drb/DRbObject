@@ -1,5 +1,7 @@
 = class DRb::DRbObject < Object
 
+alias DRb::DRbObject < Object
+
 Object wrapping a reference to a remote drb object.
 
 Method calls on this object are relayed to the remote object 
