@@ -179,7 +179,7 @@ ostruct                         sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-parsearg                        (obsolete)
+parsearg                        aamine          done
 parsedate                       tadf            done
 pathname                        okkez           done
 ping                            aamine          done
