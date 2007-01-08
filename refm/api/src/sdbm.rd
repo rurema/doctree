@@ -9,8 +9,8 @@ include Enumerable
 
 == Class Methods
 
---- open(dbname[, mode[, flags]])
---- open(dbname[, mode[, flags]]) {|db| ...}
+--- open(dbname[, mode])
+--- open(dbname[, mode]) {|db| ...}
 
 dbname で指定したデータベースをモードを
 mode に設定してオープンします。mode の省
