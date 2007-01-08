@@ -263,19 +263,19 @@ multi-tk                        okkez           done
 remote-tk                       okkez
 tcltk                           okkez           done
 tkafter                         okkez           done
-tkconsole                       (already done)
+tkconsole                       anyone          done
 tkmacpkg                        okkez           done
 tkscrollbox                     okkez           done
 tkbgerror                       okkez           done
-tkdialog                        (already done)
-tkmenubar                       (already done)
-tktext                          (already done)
-tkcanvas                        (already done)
+tkdialog                        anyone          done
+tkmenubar                       anyone          done
+tktext                          anyone          done
+tkcanvas                        anyone          done
 tkentry                         okkez           done
 tkmngfocus                      okkez           done
 tkvirtevent                     okkez           done
 tkclass                         okkez           done
-tkfont                          (already done)
+tkfont                          anyone          done
 tkpalette                       okkez           done
 tkwinpkg                        okkez           done
 tk/composite                    okkez           done
