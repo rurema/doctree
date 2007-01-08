@@ -8,3 +8,4 @@ require thread
 #@end
 #@include(multi-tk/TkCore)
 #@include(multi-tk/Object)
+#@include(multi-tk/MultiTkIp_OK)
