@@ -2,10 +2,7 @@
 
 include Comparable
 
-日付を扱うクラスです。この文書のオリジナル (の html 版) は、
-[[url:http://www.funaba.org/date2/manual.html]],
-[[url:http://www.funaba.org/en/date2/manual.html]]
-です。
+日付を扱うクラスです。
 
 日付だけでなく時刻も扱える Date のサブクラス [[c:DateTime]] も利用できます。
 
@@ -287,8 +284,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- exist? (year, mon, mday[, start])
 --- exist3? (year, mon, mday[, start])
 #@end
+#@since 1.9.0
+正しい暦日付であれば真、そうでないなら偽を返します。
+#@else
 正しい暦日付であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
+#@end
 
 [[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
 
@@ -297,8 +298,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@else
 --- existw? (cwyear, cweek, cwday[, start])
 #@end
+#@since 1.9.0
+正しい暦週日付であれば真、そうでないなら偽を返します。
+#@else
 正しい暦週日付であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
+#@end
 
 [[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
 
@@ -307,7 +312,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@else
 --- exist1? (jd[, start])
 #@end
+#@since 1.9.0
+真を返します。
+#@else
 ひとつ目の引数をそのまま返します。
+#@end
 
 対称性のため用意されていますが、実際的に意味はありません。
 
@@ -318,8 +327,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@else
 --- exist2? (year, yday[, start])
 #@end
+#@since 1.9.0
+正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
+#@else
 正しい年間通算日 (年日付) であれば、相当するユリウス日を返します。
 そうでないなら、偽を返します。
+#@end
 
 [[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
