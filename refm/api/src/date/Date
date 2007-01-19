@@ -2,8 +2,6 @@
 
 include Comparable
 
-日付を扱うクラスです。
-
 日付だけでなく時刻も扱える Date のサブクラス [[c:DateTime]] も利用できます。
 
 === 簡単なつかいかた
@@ -115,17 +113,17 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@since 1.8.0
 #@#? --- ajd_to_amjd(ajd)
 
-#@#? --- ajd_to_jd(ajd[, offset=0])
+#@#? --- ajd_to_jd(ajd, offset=0)
 
 #@#? --- amjd_to_ajd(amjd)
 #@end
 
 #@since 1.8.0
---- civil([year[, mon[, mday[, start]]]])
+--- civil(year = -4712, mon = 1, mday = 1, start = Date::ITALY)
 #@else
---- new3([year[, mon[, mday[, start]]]])
+--- new3(year = -4712, mon = 1, mday = 1, start = Date::ITALY)
 #@end
---- new([year[, mon[, mday[, start]]]])
+--- new(year = -4712, mon = 1, mday = 1, start = Date::ITALY)
 暦日付に相当する日付オブジェクトを生成します。
 
 このクラスでは、紀元前の年を天文学の流儀で勘定します。
@@ -142,12 +140,14 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]] も参照してください。
 
-#@#? --- civil_to_jd(year, mon, mday[, start])
+#@#? --- civil_to_jd(year, mon, mday, start = Date::GREGORIAN)
 
+#@since 1.9.0
+--- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY)
 #@since 1.8.0
---- commercial([cwyear[, cweek[, cwday[, start]]]])
+--- commercial(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY)
 #@else
---- neww([cwyear[, cweek[, cwday[, start]]]])
+--- neww(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY)
 #@end
 暦週日付に相当する日付オブジェクトを生成します。
 
@@ -159,7 +159,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
-#@#? --- commercial_to_jd(cwyear, cweek, cwday[, start])
+#@#? --- commercial_to_jd(cwyear, cweek, cwday, start = Date::GREGORIAN)
 
 #@since 1.8.0
 #@#? --- day_fraction_to_time(fr)
@@ -176,9 +176,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 グレゴリオ暦の閏年なら真を返します。
 
 #@since 1.8.6
---- jd([jd[, start]])
+--- jd(jd = 0, start = Date::ITALY)
 #@else
---- new1([jd[, start]])
+--- new1(jd = 0, start = Date::ITALY)
 #@end
 ユリウス日に相当する日付オブジェクトを生成します。
 
@@ -188,23 +188,23 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.new]] も参照してください。
 
 #@since 1.8.0
-#@#? --- jd_to_ajd(jd, fraction[, offset])
+#@#? --- jd_to_ajd(jd, fraction, offset = 0)
 #@end
 
-#@#? --- jd_to_civil(jd[, start])
+#@#? --- jd_to_civil(jd, start = Date::GREGORIAN)
 
-#@#? --- jd_to_commercial(jd[, start])
+#@#? --- jd_to_commercial(jd, start = Date::GREGORIAN)
 
 #@#? --- jd_to_ld(jd)
 
 #@#? --- jd_to_mjd(jd)
 
-#@#? --- jd_to_ordinal(jd[, start])
+#@#? --- jd_to_ordinal(jd, start = Date::GREGORIAN)
 
 #@#? --- jd_to_wday(jd)
 
 #@since 1.8.6
-#@#? --- jd_to_weeknum(jd[, k[, start]])
+#@#? --- jd_to_weeknum(jd, f = 0, start = Date::GREGORIAN)
 #@end
 
 #@since 1.8.6
@@ -223,12 +223,16 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 #@#? --- mjd_to_jd(mjd)
 
-#@#? --- new0([ajd[, offset[, start]]])
+#@since 1.8.6
+#@#? --- new!(ajd = 0, offset = 0, start = Date::ITALY)
+#@else
+#@#? --- new0(ajd = 0, offset = 0, start = Date::ITALY)
+#@end
 
 #@since 1.8.0
---- ordinal([year[, yday[, start]]])
+--- ordinal(year = -4712, yday = 1, start = Date::ITALY)
 #@else
---- new2([year[, yday[, start]]])
+--- new2(year = -4712, yday = 1, start = Date::ITALY)
 #@end
 年間通算日 (年日付) に相当する日付オブジェクトを生成します。
 
@@ -238,16 +242,16 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]]、および [[m:Date.new]] も参照してください。
 
-#@#? --- ordinal_to_jd(year, yday[, start])
+#@#? --- ordinal_to_jd(year, yday, start = Date::GREGORIAN)
 
 #@since 1.8.0
---- _parse(str[, complete])
+--- _parse(str, complete = false)
 このメソッドは [[m:Date.parse]] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
 
 [[m:Date.parse]] も参照してください。
 
---- parse(str[, complete[, start]])
+--- parse(str = '-4712-01-01', complete = false, start = Date::ITALY)
 与えられた日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -257,11 +261,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date._parse]] も参照してください。
 
---- _strptime(str[, format])
+--- _strptime(str, format = '%F')
 このメソッドは [[m:Date.strptime]] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
 
---- strptime(str[, format[, start]])
+--- strptime(str = '-4712-01-01', format = '%F', start = Date::ITALY)
 与えられた雛型で日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
@@ -274,15 +278,15 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@#? --- time_to_day_fraction(hour, minute, second)
 #@end
 
---- today([start])
+--- today(start = Date::ITALY)
 現在の日付に相当する日付オブジェクトを生成します。
 
 #@since 1.8.0
---- valid_civil? (year, mon, mday[, start])
---- valid_date? (year, mon, mday[, start])
+--- valid_civil? (year, mon, mday, start = Date::GREGORIAN)
+--- valid_date? (year, mon, mday, start = Date::GREGORIAN)
 #@else
---- exist? (year, mon, mday[, start])
---- exist3? (year, mon, mday[, start])
+--- exist? (year, mon, mday, start = Date::GREGORIAN)
+--- exist3? (year, mon, mday, start = Date::GREGORIAN)
 #@end
 #@since 1.9.0
 正しい暦日付であれば真、そうでないなら偽を返します。
@@ -294,9 +298,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
 
 #@since 1.8.0
---- valid_commercial? (cwyear, cweek, cwday[, start])
+--- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN)
 #@else
---- existw? (cwyear, cweek, cwday[, start])
+--- existw? (cwyear, cweek, cwday, start = Date::GREGORIAN)
 #@end
 #@since 1.9.0
 正しい暦週日付であれば真、そうでないなら偽を返します。
@@ -308,9 +312,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
 
 #@since 1.8.0
---- valid_jd? (jd[, start])
+--- valid_jd? (jd, start = Date::GREGORIAN)
 #@else
---- exist1? (jd[, start])
+--- exist1? (jd, start = Date::GREGORIAN)
 #@end
 #@since 1.9.0
 真を返します。
@@ -323,9 +327,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.jd]] も参照してください。
 
 #@since 1.8.0
---- valid_ordinal? (year, yday[, start])
+--- valid_ordinal? (year, yday, start = Date::GREGORIAN)
 #@else
---- exist2? (year, yday[, start])
+--- exist2? (year, yday, start = Date::GREGORIAN)
 #@end
 #@since 1.9.0
 正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
@@ -337,7 +341,7 @@ ABBR_DAYNAMES[0] == "Sun" です。
 [[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
 #@since 1.8.6
-#@#? --- weeknum_to_jd(year, week, day[, k[, start]])
+#@#? --- weeknum_to_jd(year, week, day, f = 0, start = Date::GREGORIAN)
 #@end
 
 #@since 1.8.0
@@ -346,16 +350,16 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 == Instance Methods
 
---- +(n)
+--- + (n)
 self から n 日後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
---- -(x)
+--- - (x)
 x が日付オブジェクトなら、ふたつの差を返します。
 あるいは
 x が数値ならば、self より x 日前の日付を返します。
 
---- <<(n)
+--- << (n)
 self より n ヶ月前の日付オブジェクトを返します。
 n は数値でなければなりません。
 
@@ -363,15 +367,15 @@ n は数値でなければなりません。
 [[m:Date#prev_month]] も参照してください。
 #@end
 
---- <=>(other)
+--- <=> (other)
 ふたつを比較し、-1、零、あるいは 1 を返します。
 other は日付オブジェクトか、
 天文学的なユリウス日をあらわす数値でなければなりません。
 
---- ===(other)
+--- === (other)
 同じ日なら真を返します。
 
---- >>(n)
+--- >> (n)
 self から n ヶ月後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
@@ -498,9 +502,9 @@ JIS X 0301 書式の文字列を返します。
 #@end
 
 #@since 1.8.0
---- new_start([start])
+--- new_start(start = Date::ITALY)
 #@else
---- newsg([start])
+--- newsg(start = Date::ITALY)
 #@end
 self を複製して、その改暦日を設定しなおします。
 引数を省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
@@ -508,28 +512,28 @@ self を複製して、その改暦日を設定しなおします。
 [[m:Date.new]] も参照してください。
 
 #@since 1.9.0
---- next_day([n])
+--- next_day(n = 1)
 n 日後を返します。
 
 [[m:Date#succ]] も参照してください。
 
---- next_month([n])
+--- next_month(n = 1)
 n ヶ月後を返します。
 
 [[m:Date#>>]] も参照してください。
 
---- next_year([n])
+--- next_year(n = 1)
 n 年後を返します。
 
---- prev_day([n])
+--- prev_day(n = 1)
 n 日前を返します。
 
---- prev_month([n])
+--- prev_month(n = 1)
 n ヶ月前を返します。
 
 [[m:Date#<<]] も参照してください。
 
---- prev_year([n])
+--- prev_year(n = 1)
 n 年前を返します。
 #@end
 
@@ -553,7 +557,7 @@ RFC 2822 書式の文字列を返します。
 
 [[m:Date.new]] も参照してください。
 
---- step(limit, step){|date| ...}
+--- step(limit, step = 1){|date| ...}
 ブロックの評価を繰り返します。ブロックは日付オブジェクトをとります。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
@@ -568,7 +572,7 @@ limit は日付オブジェクトでなければなりません、
 日曜日なら真を返します。
 #@end
 
---- strftime([format])
+--- strftime(format = '%F')
 与えられた雛型で日付を書式づけます。
 つぎの変換仕様をあつかいます:
 

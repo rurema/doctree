@@ -18,8 +18,8 @@
 
 == Class Methods
 
---- civil([year[, mon[, mday[, hour[, min[, sec[, offset[, start]]]]]]]])
---- new([year[, mon[, mday[, hour[, min[, sec[, offset[, start]]]]]]]])
+--- civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
+--- new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
 暦日付に相当する日時オブジェクトを生成します。
 
 時差の単位は日です。
@@ -27,25 +27,29 @@
 1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
 #@end
 
---- commercial([cwyear[, cweek[, cwday[, hour[, min[, sec[, offset[, start]]]]]]]])
+#@since 1.9.0
+--- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
+#@else
+--- commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
+#@end
 暦週日付に相当する日時オブジェクトを生成します。
 
 [[m:DateTime.new]] も参照してください。
 
---- jd([jd[, hour[, min[, sec[, offset[, start]]]]]])
+--- jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
 ユリウス日に相当する日時オブジェクトを生成します。
 
 [[m:DateTime.new]] も参照してください。
 
---- now([start])
+--- now(start = Date::ITALY)
 現在の時刻に相当する日時オブジェクトを生成します。
 
---- ordinal([year[, yday[, hour[, min[, sec[, offset[, start]]]]]]])
+--- ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
 年日付に相当する日時オブジェクトを生成します。
 
 [[m:DateTime.new]] も参照してください。
 
---- today([start])
+--- today(start = Date::ITALY)
 このクラスでは利用できません。
 
 [[m:DateTime.now]] を参照してください。
@@ -60,14 +64,14 @@
 時間を返します (0-23)。
 
 #@since 1.9.0
---- iso8601([n])
---- rfc3339([n])
+--- iso8601(n = 0)
+--- rfc3339(n = 0)
 ISO 8601 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
 #@since 1.9.0
---- jisx0301([n])
+--- jisx0301(n = 0)
 JIS X 0301 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
@@ -76,9 +80,9 @@ JIS X 0301 書式の文字列を返します。
 分を返します (0-59)。
 
 #@since 1.8.0
---- new_offset([offset])
+--- new_offset(offset = 0)
 #@else
---- newof([offset])
+--- newof(offset = 0)
 #@end
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
@@ -96,6 +100,13 @@ self を複製して、その時差を設定しなおします。
 秒を返します (0-59)。
 
 #@#? --- sec_fraction
+#@#? 秒以下の端数を返します。
+#@#? 1.9.0 より単位は日から秒に
+#@#? #@since 1.9.0
+#@#? 変更されています。
+#@#? #@else
+#@#? 変更されます。
+#@#? #@end
 
 --- zone
 タイムゾーンを返します。
