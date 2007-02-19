@@ -154,6 +154,7 @@ Ruby 1.8.0 was released.
 
 --- new(banner=nil, width=32, indent = ' ' * 4)
 --- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}
+#@todo
 
 OptionParser オブジェクトを生成します。
 banner にはヘルプ(サマリ)の最初の部分に表示されるアプリケーションの説明
@@ -174,6 +175,7 @@ width にはサマリの幅を数値で与えます。indent にはサマリのインデント
   end
 
 --- accept(klass, pat = /.*/){|str| ...}
+#@todo
 
 オプションの引数を文字列から Ruby のオブジェクトに変換するための
 ブロックを登録します。すべての OptionParser インスタンスに共通です。
@@ -209,59 +211,71 @@ OptionParser#on で登録したブロックに渡されます。
 して下さい。
 
 --- reject(klass)
+#@todo
 
 #accept で登録したブロックを削除します。
 
 #@since 1.8.5
 --- getopts
+#@todo
 see [[m:OptionParser#getopts]].
 #@end
 
 == Instance Methods
 
 --- accept(klass, pat = /.*/){|str| ...}
+#@todo
 
 OptionParser.accept と同様ですが、
 登録したブロックはレシーバーに限定されます。
 
 --- reject(klass)
+#@todo
 
 accept で登録したブロックを削除します。
 
 --- banner
 --- banner=(heading)
+#@todo
 
 サマリの最初の部分を設定します。
 
 --- summary_width
 --- summary_width=(width)
+#@todo
 
 サマリを表示するときの幅を数値で設定します。
 
 --- summary_indent
 --- summary_indent=(indent)
+#@todo
 
 サマリを表示する時のインデントを文字列で設定します。
 
 --- program_name
 --- program_name=(name)
+#@todo
 プログラムの名前を文字列で設定します。デフォルトは $0 が使わ
 れます。
 
 --- version
 --- version=(ver)
+#@todo
 プログラムのバージョンを設定します。
 
 --- release
 --- release=(rel)
+#@todo
 Release code.
 
 --- ver
+#@todo
 program_name、version と release から生成したバー
 ジョンを表す文字列を返します。
 
 --- summarize(to = [], width = @summary_width, max = width - 1, indent= @summary_indent)
 --- summarize(to = [], width = @summary_width, max = width - 1, indent= @summary_indent) {|line| ... }
+#@todo
 
 サマリを to へと加えていきます。
 to には << メソッドが定義されたオブジェクトを与えます。
@@ -277,14 +291,17 @@ to にサマリが加えられることはありません。
 
 --- help
 --- to_s
+#@todo
 
 サマリの文字列を返します。
 
 --- to_a
+#@todo
 
 サマリの各行を要素とした配列を返します。
 
 --- separator(str)
+#@todo
 
 サマリを表示する時に、オプションを区切るためのメソッドです。オプションにいくつかの種類がある場合に、サマリがわかりやすくなります。
 区切りとして引数 str が表示されます。サマリには on メソッドを呼んだ順にオプションが表示されるので、
@@ -293,6 +310,7 @@ to にサマリが加えられることはありません。
 --- on(short [, klass [, pat [, desc]]]) {|v| ...}
 --- on(long  [, klass [, pat [, desc]]]) {|v| ...}
 --- on(short, long [, klass [, pat [, desc]]]) {|v| ...}
+#@todo
 
 オプションを取り扱うためのブロックを登録します。
 
@@ -409,6 +427,7 @@ desc にはオプションの説明を文字列で与えます。
 
 --- on_head(short [, long [, klass [, pat [, desc]]]]) {...}
 --- on_tail(short [, long [, klass [, pat [, desc]]]]) {...}
+#@todo
 
 [[m:OptionParser#on]]と同様の働きをします。
 on メソッドと違う点は、OptionParser オブジェクトが保持している
@@ -430,6 +449,7 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
 --- order(*argv){|s| ...}
 --- order!(argv = ARGV)
 --- order!(argv = ARGV) {|s| ...}
+#@todo
 
 与えられた argv を順番にパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
@@ -458,6 +478,7 @@ argv からオプションがすべて取り除かれます。
 
 --- permute(*argv)
 --- permute!(argv = ARGV)
+#@todo
 
 与えられた argv をパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
@@ -486,6 +507,7 @@ order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 
 --- parse(*argv)
 --- parse!(argv = ARGV)
+#@todo
 
 与えられた argv をパースします。
 permute と同様に振舞います。しかし、
@@ -497,31 +519,38 @@ parse! は permute! と同様に argv を破壊的にをパースします。
 order! と同様に振舞います。
 
 --- load(filename)
+#@todo
 
 file を読み込んで各行に対して parse を行ないます。
 
 --- environment(env)
+#@todo
 
 環境変数 env に対して
 [[m:Shellwords.shellwords]] を呼
 んで配列にしてから parse を行ないます。
 
 --- add_banner(to)
+#@todo
 
 --- match_nonswitch?(str)
+#@todo
 
 --- switch_name
+#@todo
 
 Main name of the switch.
 
 #@since 1.8.3
 --- default_argv
 --- default_argv=
+#@todo
 Strings to be parsed in default. ARGV is default.
 #@end
 
 #@since 1.8.5
 --- getopts
+#@todo
 Wrapper method for getopts.rb.
 
  params = ARGV.getopts("ab:", "foo", "bar:")
@@ -569,6 +598,7 @@ Extends command line arguments array to parse itself.
 == Instance Methods
 
 --- options=()
+#@todo
 
 Sets [[c:OptionParser]] object, when opt is false or
 nil, methods [[m:OptionParser::Arguable#options]] and
@@ -577,6 +607,7 @@ is no ways to access the [[c:OptionParser]] object via the
 receiver object.
 
 --- options
+#@todo
 
 Actual [[c:OptionParser]] object, automatically created if not
 yet.
@@ -593,12 +624,14 @@ error message to STDERR and returns nil.
 --- order!
 --- permute!
 --- parse!
+#@todo
 
 Parses self destructively, and returns self just contains
 rest arguments left without parsed.
 
 #@since 1.8.5
 --- getopts
+#@todo
 
 Substitution of getopts is possible as follows. Also see
 [[m:OptionParser#getopts]].
@@ -615,5 +648,6 @@ Substitution of getopts is possible as follows. Also see
 = redefine Kernel
 == Constants
 --- ARGV
+#@todo
 optparse を require することにより、ARGV は 
 [[c:OptionParser::Arguable]] を extend します。

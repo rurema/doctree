@@ -5,17 +5,24 @@ include Tk::Tcllib::Tkpiechart::ConfigMethod
 
 == Instance Methods
 --- tag_key
+#@todo
 
 --- tag
+#@todo
 
 --- canvas
+#@todo
 
 --- delete
+#@todo
 
 --- new_slice(text = None)
+#@todo
 
 --- delete_slice(slice)
+#@todo
 
 --- selected_slices
+#@todo
 
 #@end

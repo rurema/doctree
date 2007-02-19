@@ -9,24 +9,32 @@ CSVの読み込み時のベースとなるクラス
 == Class Methods
 
 --- parse(str_or_readable[, fs = ','[, rs = nil]]) { ... }
+#@todo
 
 --- create(str_or_readable[, fs = ','[, rs = nil]])
+#@todo
 
 == Instance Methods
 
 --- each
+#@todo
 
 --- shift
+#@todo
 
 --- close
+#@todo
 
 == Private Instance Methods
 
 --- initialize(dev)
+#@todo
 #@# ここじゃないような気がします。okkez
 
 --- get_row(row)
+#@todo
 
 --- terminate
+#@todo
 
 #@end

@@ -10,19 +10,25 @@
 == クラスメソッド:
 
 --- TkWarning.new(mes)
+#@todo
 
 == メソッド:
 
 ((-以降のメソッドはprivateの方がいいんじゃない？-))
 
 --- TkWarning#message
+#@todo
 
 --- TkWarning#title
+#@todo
 
 --- TkWarning#bitmap
+#@todo
 
 --- TkWarning#default_button
+#@todo
 
 --- TkWarning#buttons
+#@todo
 
 =end

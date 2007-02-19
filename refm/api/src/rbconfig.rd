@@ -22,6 +22,7 @@ RbConfig モジュールを Config と同じものとして定義します。
 
 #@if (version >= "1.8.5")
 --- expand(val)
+#@todo
 
 [[m:Config::MAKEFILE_CONFIG]] 参照
 #@end
@@ -29,12 +30,14 @@ RbConfig モジュールを Config と同じものとして定義します。
 == Constants
 
 --- DESTDIR
+#@todo
 
 --- TOPDIR
+#@todo
 
 --- CONFIG
-
 #@todo
+
 
 設定値を格納したハッシュです。以下のキーと値を持ちます。
 
@@ -204,6 +207,7 @@ RbConfig モジュールを Config と同じものとして定義します。
       ビルド時の作業ディレクトリ。
 
 --- MAKEFILE_CONFIG
+#@todo
 
 [[m:Config::CONFIG]] と同じですが、その値は以下のような形
 で他の変数への参照を含みます。

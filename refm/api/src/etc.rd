@@ -12,35 +12,42 @@
 
 #@if (version >= "1.8.1")
 --- endgrent
+#@todo
 
 #@end
 
 #@if (version >= "1.8.1")
 --- endpwent
+#@todo
 
 #@end
 
 #@if (version >= "1.8.1")
 --- getgrent
+#@todo
 
 #@end
 
 #@if (version >= "1.8.1")
 --- getpwent
+#@todo
 
 #@end
 
 #@if (version >= "1.8.1")
 --- setgrent
+#@todo
 
 #@end
 
 #@if (version >= "1.8.1")
 --- setpwent
+#@todo
 
 #@end
 
 --- getlogin
+#@todo
 
 自分の login 名を返します。得られなかった場合は nil を返します。
 
@@ -56,6 +63,7 @@ getlogin は su などでログイン時のユーザとは異なるユーザになっている場合、
 
 
 --- getpwnam(name)
+#@todo
 
 passwd データベースを検索し、
 名前が name である passwd エントリを返します。
@@ -84,6 +92,7 @@ ArgumentError が発生します。
 詳細は [[man:getpwnam(3)]] を参照してください。
 
 --- getpwuid([uid])
+#@todo
 
 passwd データベースを検索し、
 ユーザ ID が uid である passwd エントリを返します。
@@ -93,6 +102,7 @@ passwd データベースを検索し、
 詳細は [[man:getpwuid(3)]] を参照してください。
 
 --- getgrgid(gid)
+#@todo
 
 group データベースを検索し、グループ ID が gid
 であるグループエントリを返します。
@@ -108,6 +118,7 @@ group データベースを検索し、グループ ID が gid
 詳細は [[man:getgrgid(3)]] を参照してください。
 
 --- getgrnam(name)
+#@todo
 
 name という名前のグループエントリを返します。
 戻り値は [[m:Etc.getgrgid]] と同様です。
@@ -116,10 +127,12 @@ name という名前のグループエントリを返します。
 
 --- group
 --- group {|group| ... }
+#@todo
 
 全てのグループエントリを順にアクセスするためのイテレータです。
 
 --- passwd
 --- passwd {|passwd| ... }
+#@todo
 
 全ての passwd エントリを順にアクセスするためのイテレータです。

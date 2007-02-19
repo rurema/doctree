@@ -31,19 +31,23 @@ require wsdl/soap/data
 == Class Methods
 
 --- new(ns, name, node)
+#@todo
 
 == Instance Methods
 
 --- name
+#@todo
 
 Â°À­
 
 --- node
 --- node=(node)
+#@todo
 
 Â°À­
 
 --- ns
+#@todo
 
 Â°À­
 
@@ -52,30 +56,39 @@ require wsdl/soap/data
 == Class Methods
 
 --- new(opt = {} )
+#@todo
 
 == Instance Methods
 
 --- characters(text)
+#@todo
 
 
 --- charset
+#@todo
 
 
 --- end_element(name)
+#@todo
 
 
 --- parse(string_or_readable)
+#@todo
 
 
 --- start_element(name, attrs)
+#@todo
 
 
 == Private Instance Methods
 
 --- decode_tag(ns, name, attrs, parent)
+#@todo
 
 --- decode_tag_end(ns, node)
+#@todo
 
 --- decode_text(ns, text)
+#@todo
 
 

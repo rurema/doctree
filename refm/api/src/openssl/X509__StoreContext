@@ -3,34 +3,47 @@
 
 == Class Methods
 ---new
+#@todo
 
 == Instance Methods
 
 --- chain
+#@todo
 
 --- cleanup
+#@todo
 
 --- current_cert
+#@todo
 
 --- current_crl
+#@todo
 
 --- error
 --- error=
+#@todo
 
 --- error_depth
+#@todo
 
 --- error_string
+#@todo
 
 --- flags=
+#@todo
 
 --- purpose=
+#@todo
 
 #@since 1.8.2
 --- time=
+#@todo
 #@end
 
 --- trust=
+#@todo
 
 --- verify
+#@todo
 
 #@end

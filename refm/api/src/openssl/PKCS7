@@ -9,11 +9,13 @@ PKCS #7 ¥â¥¸¥å¡¼¥ë
 
 --- read_smime(str)
 --- read_smime(io)
+#@todo
 
 S/MIME ·Á¼°¤òÆÉ¤ß¹þ¤ß¡¢PKCS7 ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 --- write_smime(p7sig)
 --- write_smime(p7sig, data, flags = DETACHED)
+#@todo
 
 PKCS7 ¥ª¥Ö¥¸¥§¥¯¥È¤«¤é S/MIME ·Á¼°¤ÎÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 multipart/signed ¤Ë¤è¤ëÊ¿Ê¸½ðÌ¾¤Ç¤¢¤ë¾ì¹ç¡¢½ðÌ¾¤µ¤ì¤¿¥Ç¡¼¥¿¤ò data ¤È¤·¤ÆÍ¿¤¨¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
@@ -27,46 +29,58 @@ multipart/signed ¤Ë¤è¤ëÊ¿Ê¸½ðÌ¾¤Ç¤¢¤ë¾ì¹ç¡¢½ðÌ¾¤µ¤ì¤¿¥Ç¡¼¥¿¤ò data ¤È¤·¤ÆÍ¿¤¨¤Ê¤
   smime = PKCS7.write_smime(p7, data)
 
 --- sign(cert, key, data, []= nil, flags = 0)
+#@todo
 
 data ¤Ë¾ÚÌÀ½ñ cert ¤òÉÕ¤±¤Æ key ¤Ç½ðÌ¾¤·¤Þ¤¹¡£
 
 --- encrypt([rcpt], smime)
+#@todo
 
 S/MIME ·Á¼°¤ÎÊ¸»úÎó¤ò¥á¥Ã¥»¡¼¥¸¤Î¼õ¤±¼è¤ê¼ê¤Î¸ø³«¸° rcpt ¤ò»È¤Ã¤Æ°Å¹æ²½¤·¤Þ¤¹¡£
 
 == Constants
 
 --- DETACHED
+#@todo
 
 Ê¿Ê¸¤Ë½ðÌ¾¤òÉÕ¤±¤ë·Á¼° (multipart/signed) ¤Ç¹Ô¤¤¤Þ¤¹¡£ PKCS7.sign ¤Ë¤ª¤¤¤Æ DETACHED ¤¬¥»¥Ã¥È¤µ¤ì¤Æ¤¤¤¿»þ¤Ë¤À¤±°ÕÌ£¤ò¤â¤Á¤Þ¤¹¡£
 
 --- TEXT
+#@todo
 
 text/plain ¤Î¤¿¤á¤Î¥³¥ó¥Æ¥ó¥Ä¤Ë MIME ¥Ø¥Ã¥À¡¼¤ò²Ã¤¨¤Þ¤¹¡£DETACHED ¥Ó¥Ã¥È¤¬Î©¤Ã¤Æ¤¤¤ë»þ¤À¤±°ÕÌ£¤ò¤â¤Á¤Þ¤¹¡£
 
 --- BINARY
+#@todo
 
 MIME canonical format ¤Ø¤ÎÊÑ´¹¤ò¹Ô¤¤¤Þ¤»¤ó¡£
 
 --- NOATTR
+#@todo
 
 ½ðÌ¾¤·¤¿»þ´Ö¤Ê¤É¤Î¾ðÊó¤ò¾ÊÎ¬¤·¤Þ¤¹¡£
 
 --- NOCERTS
+#@todo
 
 ½ðÌ¾¼Ô¤Î¾ÚÌÀ½ñ¤ò½ðÌ¾¤Ë´Þ¤á¤Þ¤»¤ó¡£Á÷¤êÀè¤¬¤¹¤Ç¤Ë¾ÚÌÀ½ñ¤ò¤â¤Ã¤Æ¤¤¤ë¾ì¹ç¡¢¥Ç¡¼¥¿¤ÎÎÌ¤ò¸º¤é¤¹¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
 --- NOCHAIN
+#@todo
 
 --- NOINTERN
+#@todo
 
 --- NOSIGS
+#@todo
 
 --- NOSMIMECAP
+#@todo
 
 ½ðÌ¾¼Ô¤¬»ÈÍÑ²ÄÇ½¤Ê°Å¹æ¥¢¥ë¥´¥ê¥º¥à¤Î¾ðÊó¤Ê¤É¤ò¾ÊÎ¬¤·¤Þ¤¹¡£
 
 --- NOVERIFY
+#@todo
 
 #@since 1.8.3
 = class OpenSSL::PKCS7::RecipientInfo < Object
@@ -74,10 +88,13 @@ MIME canonical format ¤Ø¤ÎÊÑ´¹¤ò¹Ô¤¤¤Þ¤»¤ó¡£
 == Instance Methods
 
 --- enc_key
+#@todo
 
 --- issuer
+#@todo
 
 --- serial
+#@todo
 #@end
 
 = class OpenSSL::PKCS7::Signer < Object
@@ -86,13 +103,17 @@ MIME canonical format ¤Ø¤ÎÊÑ´¹¤ò¹Ô¤¤¤Þ¤»¤ó¡£
 
 #@since 1.8.3
 --- issuer
+#@todo
 #@end
 
 --- name
+#@todo
 
 --- serial
+#@todo
 
 --- signed_time
+#@todo
 
 #@since 1.8.3
 = class OpenSSL::PKCS7::SignerInfo < Object
@@ -100,12 +121,16 @@ MIME canonical format ¤Ø¤ÎÊÑ´¹¤ò¹Ô¤¤¤Þ¤»¤ó¡£
 == Instance Methods
 
 --- issuer
+#@todo
 
 --- name
+#@todo
 
 --- serial
+#@todo
 
 --- signed_time
+#@todo
 #@end
 
 #@end

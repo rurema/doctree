@@ -8,6 +8,7 @@ UNIX ドメインのストリーム型ソケットのクラス。通常の
 
 --- open(path)
 --- new(path)
+#@todo
 
 path で指定したパス名を用いて接続したソケットを返
 します。
@@ -15,6 +16,7 @@ path で指定したパス名を用いて接続したソケットを返
 #@since 1.8.0
 --- pair([type[, protocol]])
 --- socketpair([type[, protocol]])
+#@todo
 
 相互に結合された UNIX ソケットのペアを含む2要素の配列を返します。
 type が省略された場合、Socket::SOCK_STREAM が使われます。
@@ -24,6 +26,7 @@ protocol が省略された場合、0 が使われます。
 == Instance Methods
 
 --- addr
+#@todo
 
 ソケットの接続情報を表す配列を返します。配列の各要素は第1要
 素が文字列 "AF_UNIX"、第2要素がパスを表す文字列です。
@@ -35,6 +38,7 @@ protocol が省略された場合、0 が使われます。
   }
 
 --- path
+#@todo
 
 UNIX ソケットのパスを返します。
 
@@ -45,6 +49,7 @@ UNIX ソケットのパスを返します。
   }
 
 --- peeraddr
+#@todo
 
 接続相手先ソケットの情報を表す配列を返します。配列の各要素は
 [[m:UNIXSocket#addr]] メソッドが返す配列
@@ -58,6 +63,7 @@ UNIX ソケットのパスを返します。
   }
 
 --- recvfrom(maxlen[, flags])
+#@todo
 
 recv と同様にソケットからデータを受け取りますが、
 戻り値は文字列と相手ソケットのパスのペアです。引数につい
@@ -74,6 +80,7 @@ recv と同様にソケットからデータを受け取りますが、
 
 #@if (version >= "1.8.0")
 --- recv_io([klass[, mode]])
+#@todo
 
 ソケットの接続先からファイルディスクリプタを受け取ります。
 
@@ -95,6 +102,7 @@ IO.for_fd(fd[, mode]) が呼ばれます。
 
 #@if (version >= "1.8.0")
 --- send_io(io)
+#@todo
 
 IO や Fixnum に対応するファイルディスクリプタをソケットの接続先に送ります。
 #@end

@@ -4,12 +4,16 @@ include XSD::CodeGen::GenSupport
 
 == class methods
 --- new(name, baseclass = nil)
+#@todo
 
 == instance methods
 --- def_classvar(var, value)
+#@todo
 
 --- def_attr(attrname, writable = true, varname = nil)
+#@todo
 
 --- dump
+#@todo
 
 #@end

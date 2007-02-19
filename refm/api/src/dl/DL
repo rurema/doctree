@@ -69,55 +69,75 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 --- last_error
 --- last_error=
+#@todo
 
 --- win32_last_error
 --- win32_last_error=
+#@todo
 
 == Constants
 
 --- FuncTable
+#@todo
 
 --- RTLD_GLOBAL
+#@todo
 
 --- RTLD_LAZY
+#@todo
 
 --- RTLD_NOW
+#@todo
 
 --- ALIGN_INT
+#@todo
 
 --- ALIGN_LONG
+#@todo
 
 --- ALIGN_FLOAT
+#@todo
 
 --- ALIGN_SHORT
+#@todo
 
 --- ALIGN_DOUBLE
+#@todo
 
 --- ALIGN_VOIDP
+#@todo
 
 --- MAX_ARG
+#@todo
 
 --- DLSTACK
+#@todo
 
 --- FREE
+#@todo
 
 == Module Functions
 
 --- dlopen(lib) {|handle| ... }
+#@todo
 
 [[m:DL::Handle.new]](lib) と等価。
 
 --- callback
 --- define_callback
+#@todo
 
 --- remove_callback(sym)
+#@todo
 
 --- malloc(size, [free])
+#@todo
 
 size バイトのメモリ領域を割り当て、
 [[c:DL::PtrData]] オブジェクトを ptr として返します。
 
 --- sizeof(type)
+#@todo
 
 型のサイズを返します。
 
@@ -133,6 +153,7 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 指定できる型については [[m:DL#Type specifiers]] を参照
 
 --- strdup(str)
+#@todo
 
 文字列 str を複製した新しい文字列へのポインタに相当する
 [[c:DL::PtrData]] オブジェクトを返します。
@@ -146,6 +167,7 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 
 --- set_callback(cbtype, entry) {|args| ... }
 --- set_callback(cbtype, entry, proc)
+#@todo
 
 proc や指定したブロックを呼ぶ
 entry-th pre-defined function を作成します。
@@ -165,16 +187,19 @@ cbtype については class [[c:DL]] "Type specifiers" も参照。
 == Instance Methods
 
 --- to_ptr
+#@todo
 
 = reopen Array
 
 == Instance Methods
 
 --- to_ptr
+#@todo
 
 = reopen IO
 
 == Instance Methods
 
 --- to_ptr
+#@todo
 

@@ -6,29 +6,38 @@ include RSS::XMLStyleSheetMixin
 == Instance Methods
 --- channel
 --- channel=
+#@todo
 
 --- encoding
 --- encoding=
+#@todo
 
 --- image
 --- image=
+#@todo
 
 --- item
 --- item=
+#@todo
 
 --- items
+#@todo
 
 --- rss_version
 --- rss_version=
+#@todo
 
 --- standalone
 --- standalone=
+#@todo
 
 --- textinput
 --- textinput=
+#@todo
 
 --- version
 --- version=
+#@todo
 
 = class RSS::RDF::Channel < RSS::Element
 include RSS::TaxonomyTopicsModel
@@ -41,41 +50,52 @@ include RSS::DublinCoreModel
 
 --- about
 --- about=
+#@todo
 
 --- date
 --- date=
+#@todo
 
 --- description
 --- description=
+#@todo
 
 --- image
 --- image=
+#@todo
 
 --- items
 --- items=
+#@todo
 
 --- link
 --- link=
+#@todo
 
 --- textinput
 --- textinput=
+#@todo
 
 --- title
 --- title=
+#@todo
 
 = class RSS::RDF::Channel::Image < RSS::Element
 == Instance Methods
 --- resource
 --- resource=
+#@todo
 
 = class RSS::RDF::Channel::Textinput < RSS::Element
 == Instance Methods
 --- resource
 --- resource=
+#@todo
 
 = class RSS::RDF::Channel::Items < RSS::Element
 == Instance Methods
 --- resources
+#@todo
 
 = class RSS::RDF::Channel::ImageFavicon < RSS::Element
 include RSS::DublinCoreModel
@@ -84,14 +104,17 @@ include RSS::DublinCoreModel
 
 --- about
 --- about=
+#@todo
 
 --- date
 --- date=
+#@todo
 
 --- image_size
 --- size
 --- image_size=
 --- size=
+#@todo
 
 = class RSS::RDF::Image < RSS::Element
 include RSS::DublinCoreModel
@@ -100,18 +123,23 @@ include RSS::DublinCoreModel
 
 --- about
 --- about=
+#@todo
 
 --- date
 --- date=
+#@todo
 
 --- link
 --- link=
+#@todo
 
 --- title
 --- title=
+#@todo
 
 --- url
 --- url=
+#@todo
  
 = class RSS::RDF::Textinput < RSS::Element
 include RSS::DublinCoreModel
@@ -120,21 +148,27 @@ include RSS::DublinCoreModel
 
 --- about
 --- about=
+#@todo
 
 --- date
 --- date=
+#@todo
 
 --- description
 --- description=
+#@todo
 
 --- link
 --- link=
+#@todo
 
 --- name
 --- name=
+#@todo
 
 --- title
 --- title=
+#@todo
 
 = class RSS::RDF::Item < RSS::Element
 include RSS::TaxonomyTopicsModel
@@ -148,15 +182,20 @@ include RSS::ContentModel
 
 --- about
 --- about=
+#@todo
 
 --- date
 --- date=
+#@todo
 
 --- description
 --- description=
+#@todo
 
 --- link
 --- link=
+#@todo
 
 --- title
 --- title=
+#@todo

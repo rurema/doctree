@@ -6,21 +6,25 @@ UDP/IPデータグラム型ソケットのクラス。
 
 --- open([socktype])
 --- new([socktype])
+#@todo
 
 新しい UDP ソケットを返します。
 
 == Instance Methods
 
 --- bind(host, port)
+#@todo
 
 ソケットを host の port に結合します。
 
 --- connect(host, port)
+#@todo
 
 ソケットを host の port に connect します。
 
 --- send(mesg, flags[, dest_sockaddr])
 --- send(mesg, flags, host, port)
+#@todo
 
 ソケットを介してデータを送ります。flags に関しては
 [[man:send(2)]] を参照してください。connect していないソケット
@@ -45,6 +49,7 @@ host, port に関しては [[m:socket#ホスト指定形式]]、
 
 #@if (version >= "1.8.5")
 --- recvfrom_nonblock(maxlen[, flags])
+#@todo
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] でソケットからデータを受け取ります。

@@ -37,10 +37,12 @@
 == privateメソッド:
 
 --- TkObject#tk_send(cmd、*rest)
+#@todo
     selfに対してコマンド((|cmd|))と引数((|rest|))を渡して実行します。
     ((<ウィジェットコマンド>))の定義の実体です。
 
 --- TkObject#tk_trace_variable(v)
+#@todo
     引数((|v|))を返すだけのメソッドですが、((|v|))が、((<TkVariable>))オブ
     ジェクトでなければ例外((<ArgumentError>))を発生させます。内部で型チェッ
     クに使用しています。
@@ -48,10 +50,12 @@
 == メソッド:
 
 --- TkObject#path
+#@todo
     そのウィンドウの((<パス>))を返します。ウィジェットコマンドの効果はこの
     パスに適用されます。
 
 --- TkObject#epath
+#@todo
     そのウィンドウの((<パス>))を返します。ウィジェットの配置
     ((<TkWindow#pack>))はこのパスに対して適用されます。
 
@@ -59,6 +63,7 @@
     ((-たぶん-))
 
 --- TkObject#to_eval
+#@todo
     (({self}))のTcl/Tkインタプリタでの表現を返します。このメソッドは各オブ
     ジェクトで
 
@@ -80,11 +85,13 @@
 
 --- TkObject#[](slot)
 --- TkObject#cget(slot)
+#@todo
     ((<オプション>))((|slot|))の値を返します。
 
 --- TkObject#[]=(slot, value)
 --- TkObject#configure(slot, value=None)
 --- TkObject#configure(hash)
+#@todo
     ((<オプション>))((|slot|))に((|value|))を設定します。
 
       require "tk"
@@ -106,11 +113,13 @@
       Tk.mainloop
 
 --- TkObject#configure_cmd(slot, value)
+#@todo
     オプション((|slot|))に((|value|))を設定します。((|value|))は((<Proc>))
     オブジェクトです。((-configure_cmdの代りにconfigureを使っても問題なさ
     そう。このメソッドの存在価値はない？-))
 
 --- TkObject#configinfo(slot = nil)
+#@todo
     ((<オプション>))((|slot|))に関する以下の5つの要素を配列にして返します。
       [オプション名, パラメータ名, クラス名, デフォルト値, 現在値]
 
@@ -127,6 +136,7 @@
     す。
 
 --- TkObject#event_generate(context, keys=nil)
+#@todo
     ((<イベント>))((|context|))を発生させます。
 
     ((|context|)) に"<仮想イベント名>"という文字列か((<TkVirtualEvent>))の
@@ -136,9 +146,11 @@
     詳細は、((<TkCore#event_generate>))を参照してください。
 
 --- TkObject#destroy
+#@todo
     トレース変数が設定されていれば、そのトレースを解除します。((-使ってる？-))
 
 --- TkObject#method_missing(id, *args)
+#@todo
     定義されていないメソッドが呼び出されたときに実行されます。
     (((<Object#method_missing>))参照)
 
@@ -213,6 +225,7 @@
 ((<TkObject#method_missing>))
 
 --- TkObject#activebackground
+#@todo
     ウィジェットが((<アクティブ>))である場合の背景の色を指定します。
 
       require "tk"
@@ -220,9 +233,11 @@
       Tk.mainloop
 
 --- TkObject#activeborderwidth
+#@todo
     ウィジェットが((<アクティブ>))である場合のボーダーの幅を指定します。
 
 --- TkObject#activeforeground
+#@todo
     ウィジェットが((<アクティブ>))である場合の色を指定します。
 
       require "tk"
@@ -230,6 +245,7 @@
       Tk.mainloop
 
 --- TkObject#anchor
+#@todo
     ウィジェット内のテキストやビットマップを貼り付ける位置を指定します。指
     定できるのは以下のうちの何れかです。
 
@@ -273,20 +289,25 @@
 
 --- TkObject#background
 --- TkObject#bg
+#@todo
     ウィジェットの通常時の背景の色を指定します。
 
 --- TkObject#bitmap
+#@todo
     ビットマップを指定します。最近は((<TkObject#image>))オプションに取って代わられ
     ています。
 
 --- TkObject#borderwidth
 --- TkObject#bd
+#@todo
     ウィジェットのボーダーの幅を指定します。
 
 --- TkObject#cursor
+#@todo
     マウスカーソルの形状を指定します。((-指定方法について書くこと-))
 
 --- TkObject#disabledforeground
+#@todo
     ウィジェットが((<ディスエーブル>))であるときの色を指定します。
 
       require "tk"
@@ -296,17 +317,21 @@
       Tk.mainloop
 
 --- TkObject#exportselection
+#@todo
     他のアプリケーションとの間で((<セレクション>))をやりとりできるかどうか
     を真偽値((({true}))/(({false})))で指定します(デフォルトは(({true})))。
 
 --- TkObject#font
+#@todo
     テキストのフォントを指定します。((-指定方法について書くこと-))
 
 --- TkObject#foreground
 --- TkObject#fg
+#@todo
     テキスト(等)の色を指定します。
 
 --- TkObject#highlightbackground
+#@todo
     ((<入力フォーカス>))がない状態での枠(ウィジェットの周り)の色を指定します。
 
       require "tk"
@@ -317,9 +342,11 @@
       Tk.mainloop
 
 --- TkObject#highlightcolor
+#@todo
     ((<入力フォーカス>))がある状態での枠(ウィジェットの周り)の色を指定します。
 
 --- TkObject#highlightthickness
+#@todo
     ((<入力フォーカス>))のあるなしを表す枠(ウィジェットの周り)の幅を指定します。
 
       require "tk"
@@ -336,9 +363,11 @@
       Tk.mainloop
 
 --- TkObject#image
+#@todo
     イメージ((<TkImage>))を指定します。
 
 --- TkObject#insertbackground
+#@todo
     入力カーソルの色を指定します。
 
       require "tk"
@@ -351,22 +380,27 @@
       Tk.mainloop
 
 --- TkObject#insertborderwidth
+#@todo
     入力カーソルのボーダーの幅を指定します。ボーダーの幅は入力カーソルの幅
     (((<TkObject#insertwidth>))で指定)に含まれるので、入力カーソル自体より大きい幅
     になることはありません(指定しても入力カーソルの幅になります)。
 
 --- TkObject#insertofftime
+#@todo
     ((<TkObject#insertontime>))と共に、入力カーソルの点滅速度を表します。
     入力カーソルが消えた状態を保持する時間をミリ秒単位で指定します。
 
 --- TkObject#insertontime
+#@todo
     ((<TkObject#insertofftime>))と共に、入力カーソルの点滅速度を表します。
     入力カーソルを表示した状態を保持する時間をミリ秒単位で指定します。
 
 --- TkObject#insertwidth
+#@todo
     入力カーソルの幅を指定します。((<TkObject#insertborderwidth>))
 
 --- TkObject#jump
+#@todo
     スクロールバー((<TkScrollbar>))を動かしたときの動作を真偽値で指定しま
     す。真の場合スクロールバーを動かすつど関連コマンドを実行します。偽の場
     合スクロールバーを離したときに初めて関連コマンドを実行します。
@@ -399,6 +433,7 @@
       Tk.mainloop
 
 --- TkObject#justify
+#@todo
     テキストの揃え方を指定します。
     指定できる文字列は以下のいずれかです。
 
@@ -413,10 +448,12 @@
        右寄せ
 
 --- TkObject#orient
+#@todo
     ウィジェットの向きを横((({"horizontal"})))にするか縦((({"vertical"})))
     にするかを指定します。指定する文字列は省略名でも構いません。
 
 --- TkObject#padx
+#@todo
     ウィジェット内部の横の余白の幅を指定します。(((<TkPack.configure>))の
     キー(({"padx"}))とは別もの。キー(({"ipadx"}))とも別物なのが悩ましい)
 
@@ -427,10 +464,12 @@
       Tk.mainloop
 
 --- TkObject#pady
+#@todo
     ウィジェット内部の縦の余白の幅を指定します。(((<TkPack.configure>))の
     キー(({"pady"}))とは別もの。キー(({"ipady"}))とも別物なのが悩ましい)
 
 --- TkObject#relief
+#@todo
     ウィジェットの形状を以下の何れかで指定します。
 
     *"raised"
@@ -449,33 +488,42 @@
       Tk.mainloop
 
 --- TkObject#repeatdelay
+#@todo
     キーやマウスボタンを押したときのオートリピートが始まるまでの時間をミリ
     秒単位で指定します。
 
 --- TkObject#repeatinterval
+#@todo
     キーやマウスボタンのオートリピートの間隔をミリ秒単位で指定します。
 
 --- TkObject#selectbackground
+#@todo
     ((<選択>))した領域の背景の色を指定します。
 
 --- TkObject#selectborderwidth
+#@todo
     ((<選択>))した領域のボーダーの幅を指定します。
 
 --- TkObject#selectforeground
+#@todo
     ((<選択>))した領域の(文字などの)色を指定します。
 
 --- TkObject#setgrid
+#@todo
     ウィジェットのリサイズをグリッド単位にするかどうかを真偽値で指定します。
 
 --- TkObject#takefocus
+#@todo
     ((<入力フォーカス>))を持つかどうかを真偽値で指定します。
 
 --- TkObject#text
+#@todo
     ウィジェット内部に表示するテキストを文字列で指定します。
 
 ###--- TkObject#textvariable
 
 --- TkObject#troughcolor
+#@todo
     くぼみの色を指定します。
 
       require "tk"
@@ -492,6 +540,7 @@
       Tk.mainloop
 
 --- TkObject#underline
+#@todo
     下線を引くテキストの位置を指定します。ショートカットキーを指定するのに
     使用します。
 
@@ -500,6 +549,7 @@
       Tk.mainloop
 
 --- TkObject#wraplength
+#@todo
     テキストを畳み込むためにテキストの1行の長さを指定します。
     0ならばテキストの畳み込みを行いません。
 

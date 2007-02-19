@@ -8,10 +8,12 @@ zlib ライブラリに含まれている雑多な機能を提供するモジュール。
 == Module Functions
 
 --- zlib_version
+#@todo
 
 zlib ライブラリのバージョンを表す文字列を返します。
 
 --- adler32([string[, adler]])
+#@todo
 
 string の Adler-32 チェックサムを計算し、adler を
 更新した値を返します。string が省略された場合は
@@ -20,6 +22,7 @@ Adler-32 チェックサムの初期値を返します。adler が
 計算します。
 
 --- crc32([string[, crc]])
+#@todo
 
 string の CRC チェックサムを計算し、crc を
 更新した値を返します。string が省略された場合は
@@ -28,22 +31,26 @@ CRC チェックサムの初期値を返します。crc が
 計算します。
 
 --- crc_table
+#@todo
 
 CRC チェックサムの計算に用いるテーブルを配列で返します。
 
 == Constants
 
 --- VERSION
+#@todo
 
 Ruby/zlib のバージョンを表す文字列。
 
 --- ZLIB_VERSION
+#@todo
 
 zlib.h のバージョンを表す文字列。
 
 --- BINARY
 --- ASCII
 --- UNKNOWN
+#@todo
 
 [[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数。
 
@@ -51,6 +58,7 @@ zlib.h のバージョンを表す文字列。
 --- BEST_SPEED
 --- BEST_COMPRESSION
 --- DEFAULT_COMPRESSION
+#@todo
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
 圧縮レベルを表す整数。
@@ -58,16 +66,19 @@ zlib.h のバージョンを表す文字列。
 --- FILTERED
 --- HUFFMAN_ONLY
 --- DEFAULT_STRATEGY
+#@todo
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
 圧縮方法を表す整数。
 
 --- DEF_MEM_LEVEL
 --- MAX_MEM_LEVEL
+#@todo
 
 [[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数。
 
 --- MAX_WBITS
+#@todo
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Inflate.new]] での
 windowBits のデフォルト値。
@@ -76,6 +87,7 @@ windowBits のデフォルト値。
 --- SYNC_FLUSH
 --- FULL_FLUSH
 --- FINISH
+#@todo
 
 [[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
 制御するための整数。
@@ -96,5 +108,6 @@ windowBits のデフォルト値。
 --- OS_QDOS
 --- OS_RISCOS
 --- OS_UNKNOWN
+#@todo
 
 [[m:Zlib::GzipFile#os_code]] メソッドの返す値。

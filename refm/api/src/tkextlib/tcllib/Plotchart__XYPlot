@@ -5,20 +5,28 @@ include ChartMethod
 
 == Class Methods
 --- new(*args)
+#@todo
 
 == Instance Methods
 --- plot(series, x, y)
+#@todo
 
 --- contourlines(xcrd, ycrd, vals, clss = None)
+#@todo
 
 --- contourfill(xcrd, ycrd, vals, klasses = None)
+#@todo
 
 --- contourbox(xcrd, ycrd, vals, klasses = None)
+#@todo
 
 --- color_map(colors)
+#@todo
 
 --- grid_cells(xcrd, ycrd)
+#@todo
 
 --- dataconfig(series, key, value = None)
+#@todo
 
 #@end

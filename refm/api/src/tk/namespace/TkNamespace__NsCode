@@ -5,13 +5,17 @@
 == Class Methods
 
 --- new(scope, use_obj_id = false)
+#@todo
 
 == Instance Methods
 
 --- path
+#@todo
 
 --- to_eval
+#@todo
 
 --- call(*args)
+#@todo
 
 #@end

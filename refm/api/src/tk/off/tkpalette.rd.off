@@ -14,17 +14,23 @@
 == クラスメソッド:
 
 --- TkPalette.set(*args)
+#@todo
 
 --- TkPalette.setPalette(*args)
+#@todo
 
 --- TkPalette.bisque
+#@todo
 
 --- TkPalette.darken(color, percent)
+#@todo
 
 --- TkPalette.recolorTree(window, colors)
+#@todo
 
 == メソッド:
 
 --- TkPalette#recolorTree(colors)
+#@todo
 
 =end

@@ -9,17 +9,22 @@ require wsdl/xmlSchema/importer
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- content
+#@todo
 
 --- parse_attr(attr, value)
+#@todo
 
 
 --- parse_element(element)
+#@todo
 
 
 --- schemalocation
+#@todo
 
 #@end

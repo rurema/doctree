@@ -8,52 +8,67 @@
 == Module Functions
 
 --- getuid
+#@todo
 プロセスの実ユーザ ID を返します。
 C の getuid() と同じです。
 
 --- geteuid
+#@todo
 プロセスの実効ユーザ ID を返します。
 C の geteuid() と同じです。
 
 --- getgid
+#@todo
 プロセスの実グループ ID を返します。
 C の getguid() と同じです。
 
 --- getegid
+#@todo
 プロセスの実効グループ ID を返します。
 C の getegid() と同じです。
 
 --- setuid(id)
+#@todo
 C の setuid() と同じです。
 
 --- setgid(id)
+#@todo
 C の setgid() と同じです。
 
 --- setruid(id)
+#@todo
 C の setgid() と同じです。
 
 --- setrgid(id)
+#@todo
 C の setgid() と同じです。
 
 --- seteuid(id)
+#@todo
 C の seteuid() と同じです。
 
 --- setegid(id)
+#@todo
 C の setegid() と同じです。
 
 --- setreuid(rid, eid)
+#@todo
 C の setreuid() と同じです。
 
 --- setregid(rid, eid)
+#@todo
 C の setregid() と同じです。
 
 --- setresuid(rid, eid, sid)
+#@todo
 C の setresuid() と同じです。
 
 --- setresgid(rid, eid, sid)
+#@todo
 C の setresgid() と同じです。
 
 --- issetugid
+#@todo
 プロセスが setuid もしくは setgid ビットを使って
 起動されている場合に真を返します。
 #@end

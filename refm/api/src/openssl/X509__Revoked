@@ -6,25 +6,30 @@
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- serial
 --- serial=(serial)
+#@todo
 
 失効した証明書のシリアルです。
 
 --- time
 --- time=(time)
+#@todo
 
 失効した日時です。[[c:Time]] オブジェクトです。
 
 --- extensions
 --- extensions=(extensions)
+#@todo
 
 拡張領域です。[[c:OpenSSL::X509::Extension]] の配列です。
 
 --- add_extension(ex)
+#@todo
 
 拡張領域に値を加えます。
 

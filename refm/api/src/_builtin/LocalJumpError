@@ -10,6 +10,7 @@ return, break, retry のいずれかを実行すると発生します。
 
 #@since 1.8.0
 --- exit_value
+#@todo
 
 例外 LocalJumpError を発生する原因となった
 break や return に渡した値を返します。
@@ -37,6 +38,7 @@ break や return に渡した値を返します。
   end
 
 --- reason
+#@todo
 
 例外を発生させた原因をシンボルで返します。
 返す値は以下のいずれかです。

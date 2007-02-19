@@ -7,11 +7,13 @@
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- [](key)
 --- []=(key, v)
+#@todo
 
 
 

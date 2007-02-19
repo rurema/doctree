@@ -5,41 +5,50 @@
 
 #@since 1.8.1
 --- parse(str)
+#@todo
 
 名前をパースして Name オブジェクトを返します。
 #@end
 
 #@since 1.8.2
 --- parse_openssl
+#@todo
 
 --- parse_rfc2253
+#@todo
 #@end
 
 --- new([[oid1, val1], [oid2, val2] ...], template = OBJECT_TYPE_TEMPLATE)
 --- new
+#@todo
 
 Name オブジェクトを生成します。
 
 == Instance Methods
 
 --- add_entry(oid, value, type = nil)
+#@todo
 
 エントリー oid に value を設定します。type を指定することも出来ます。type を指定しない場合は oid より自動的に判別します。
 
 --- to_s
+#@todo
 
 人間の読める形式にして返します。
 
 --- to_a
+#@todo
 
 配列にして返します。
 
 --- cmp(name)
 --- <=>
+#@todo
 
 他の Name オブジェクトと比較します。
 
 --- to_der
+#@todo
 
 DER 形式を返します。
 
@@ -47,6 +56,7 @@ DER 形式を返します。
 == Constants
 
 --- OBJECT_TYPE_TEMPLATE
+#@todo
 
 エントリーのタイプを収納したハッシュです。エントリーをキーとして、値にタイプが収納されています。キーは次の文字列、
 
@@ -54,18 +64,24 @@ DER 形式を返します。
   'DC', 'domainComponent', 'emailAddress'
 
 --- DEFAULT_OBJECT_TYPE
+#@todo
 
 エントリーのデフォルトのタイプです。UTF8文字列です。
 
 --- COMPAT
+#@todo
 
 --- RFC2253
+#@todo
 
 --- RFC2253DN
+#@todo
 
 --- ONELINE
+#@todo
 
 --- MULTILINE
+#@todo
 #@end
 
 = class OpenSSL::X509::NameError < OpenSSL::OpenSSLError

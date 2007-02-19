@@ -8,6 +8,7 @@ Delegator クラスをそのまま利用した、
 == Class Methods
 
 --- new(obj)
+#@todo
 
 obj がもつメソッドについて、実行を obj に委譲する
 オブジェクトを生成する。
@@ -15,10 +16,12 @@ obj がもつメソッドについて、実行を obj に委譲する
 == Instance Methods
 
 --- __getobj__
+#@todo
 
 委譲先のオブジェクトを返す。
 
 --- __setobj__(obj)
+#@todo
 
 委譲先のオブジェクトを obj に変更する。
 
@@ -34,6 +37,7 @@ obj がもつメソッドについて、実行を obj に委譲する
 
 --- clone(obj)
 --- dup(obj)
+#@todo
 
 #@end
 #@end

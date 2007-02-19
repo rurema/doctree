@@ -6,32 +6,44 @@ require wsdl/info
 == Class Methods
 
 --- new
+#@todo
 
 
 == Instance Methods
 
 --- encodingstyle
+#@todo
 
 --- find_message
+#@todo
 
 --- find_part
+#@todo
 
 --- headerfault
+#@todo
 
 --- message
+#@todo
 
 --- namespace
+#@todo
 
 --- parse_attr(attr, value)
+#@todo
 
 --- parse_element(element)
+#@todo
 
 --- part
+#@todo
 
 #@since 1.8.3
 --- targetnamespace
+#@todo
 
 #@end
 
 --- use
+#@todo
 

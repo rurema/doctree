@@ -154,6 +154,7 @@ each_option メソッドは、常にオプション名を「正式名 (CANONICAL NAME)」
 == Class Methods
 --- new
 --- new(option...)
+#@todo
 
 GetoptLong のオブジェクトを生成します。option が与えられる
 たときは、それを set_options メソッドに渡します。
@@ -162,11 +163,13 @@ GetoptLong のオブジェクトを生成します。option が与えられる
 
 --- each {|optname, optarg|...}
 --- each_option {|optname, optarg|...}
+#@todo
 get メソッドのイテレータ版です。オプションとその引数の取得を
 繰り返し行います。詳しくは get の説明を参照して下さい。
 
 --- get
 --- get_option
+#@todo
 ARGV から、次のオプションの名前と、もしあればその引数の組を取
 得します。メソッドは 2 つの値を返し、1 つ目の値がオプション名
 (例: --max-size) で、2 つ目がオプションの引数 (例: 20K) で
@@ -204,14 +207,17 @@ ARGV に残っていないときは、optname, optarg ともに nil に
 
 --- error
 --- error?
+#@todo
 現在のエラーの型を返します。エラーが発生していなければ、nil
 を返します。
 
 --- error_message
+#@todo
 現在のエラーのエラーメッセージを返します。エラーが発生していな
 ければ、nil を返します。
 
 --- ordering=(ordering)
+#@todo
 順序形式 (ordering) を設定します。引数 ordering は、
 PERMUTE, REQUIRE_ORDER, RETURN_IN_ORDER のいずれかでなく
 てはなりません。それ以外の値を代入しようとすると、例外
@@ -233,9 +239,11 @@ PERMUTE を与えてこのメソッドを呼び出しても、実際のところの順
 ordering を返します。
 
 --- ordering
+#@todo
 現在の順序形式を返します。
 
 --- quiet=(flag)
+#@todo
 flag が TRUE なら、静粛 (quiet) モードが有効になります。
 静粛モードが有効になっていると、レシーバのオブジェクトは、
 get, get_option, each, each_option メソッドでエラーが
@@ -246,10 +254,12 @@ flag を返します。
 
 --- quiet
 --- quiet?
+#@todo
 静粛モードが有効であれば、TRUE が返ります。そうでなければ、
 FALSE が返ります。
 
 --- set_options(option...)
+#@todo
 あなたのプログラムで、認識させたいオプションをセットします。
 個々の option は、オプション名と引数のフラグからなる配列でな
 ければいけません。
@@ -282,6 +292,7 @@ each_option メソッドを呼び出す前だけです。これらのメソッドを
 メソッドのレシーバであるオブジェクトを返します。
 
 --- terminate
+#@todo
 オプションの処理を、強制的に終了させます。ただし、エラーが起き
 ている状態でこのメソッドを起動しても、終了させることはできませ
 ん。エラーが起きている状態でこのメソッドを起動すると、
@@ -291,6 +302,7 @@ RuntimeError 例外が発生します。すでにオプションの処理が終了
 メソッドのレシーバであるオブジェクトを返します。
 
 --- terminated?
+#@todo
 エラーが起きずにオプションの処理が終了しているときは TRUE が
 返ります。それ以外のときは、FALSE が返ります。
 
@@ -298,11 +310,13 @@ RuntimeError 例外が発生します。すでにオプションの処理が終了
 --- PERMUTE
 --- REQUIRE_ORDER
 --- RETURN_IN_ORDER
+#@todo
 順序形式を表しています。
 
 --- NO_ARGUMENT
 --- REQUIRED_ARGUMENT
 --- OPTIONAL_ARGUMENT
+#@todo
 オプションへの引数のフラグです。
 
 = class GetoptLong::Error < StandardError

@@ -4,12 +4,16 @@
 
 == Class Methods
 --- id2obj(chart, id)
+#@todo
 
 --- new(chart, keys = nil)
+#@todo
 
 == Instance Methods
 --- plot(*args)
+#@todo
 
 --- dataconfig(key, value = None)
+#@todo
 
 #@end

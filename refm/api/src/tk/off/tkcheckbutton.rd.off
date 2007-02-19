@@ -30,6 +30,7 @@
 == メソッド:
 
 --- TkCheckButton#toggle
+#@todo
     チェックボタンのON/OFF状態をトグルします。
 
 == 標準オプション:
@@ -85,24 +86,32 @@
 ###--- TkCheckButton#command
 
 --- TkCheckButton#height
+#@todo
     ((<TkButton#height>))参照
 
 --- TkCheckButton#indicatoron
+#@todo
 
 --- TkCheckButton#offvalue
+#@todo
     チェックボタンのチェックをはずしたときの値を指定します。
 
 --- TkCheckButton#onvalue
+#@todo
     チェックボタンをチェックしたときの値を指定します。
 
 --- TkCheckButton#selectcolor
+#@todo
 
 --- TkCheckButton#selectimage
+#@todo
 
 --- TkCheckButton#state
+#@todo
 
 ### --- TkCheckButton#variable
 
 --- TkCheckButton#width
+#@todo
     ((<TkButton#width>))参照
 =end

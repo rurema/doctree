@@ -37,6 +37,7 @@ include Enumerable
 
 --- new(enum = nil)
 --- new(enum = nil) {|g|  ... }
+#@todo
 
 [[c:Enumerable]] オブジェクトかブロックから Generator オブジェクトを生成します。
 enum には [[c:Enumerable]] をインクルードしたオブジェクトを与えます。
@@ -47,6 +48,7 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
 == Instance Methods
 
 --- current
+#@todo
 
 現在の位置にある要素を返します。next と違い位置は移動しません。
 
@@ -57,15 +59,18 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.current # => 'A'
 
 --- each {|e| ... }
+#@todo
 
 ジェネレータの要素を引数としてブロックを評価します。self を返します。
 
 --- end?
+#@todo
 
 次の要素がなく、ジェネレータが終わりに達しているなら真を返します。
 
 --- index
 --- pos
+#@todo
 
 現在の位置を返します。
 
@@ -77,6 +82,7 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.pos     # => 1
 
 --- next
+#@todo
 
 現在の位置にある要素を返し、位置を1つ増やします。次の要素がなければ、
 例外 EOFError を投げます。
@@ -92,10 +98,12 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.next # => 'B'
 
 --- next?
+#@todo
 
 次の要素が存在するなら真を返します。
 
 --- rewind
+#@todo
 
 ジェネレータを最初に巻き戻します。self を返します。
 
@@ -112,6 +120,7 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.next # => 'A'
 
 --- yield(val)
+#@todo
 
 val をジェネレータに渡します。
 Generator.new() {|g|  ... } のブロックの中でしか呼ぶことができません。
@@ -150,6 +159,7 @@ include Enumerable
 == Class Methods
 
 --- new(*enums)
+#@todo
 
 SyncEnumerator オブジェクトを生成します。
 複数の [[c:Enumerable]] オブジェクトを与えます。
@@ -158,6 +168,7 @@ Enumerable オブジェクトのサイズは異なっていても構いません。
 == Instance Methods
 
 --- each {|row| ... }
+#@todo
 
 与えられた Enumerable オブジェクトのそれぞれの要素の配列を引数として
 ブロックを評価します。self を返します。
@@ -177,6 +188,7 @@ Enumerable オブジェクトのサイズは異なっていても構いません。
   [3, nil, nil]
 
 --- end?(i = nil)
+#@todo
 
 SyncEnumerator が終わりに達している場合は真を返します。
 i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
@@ -184,6 +196,7 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 
 --- length
 --- size
+#@todo
 
 与えられた Enumerable オブジェクトの数を返します。
 #@end

@@ -5,6 +5,7 @@ include Tk::Tile::TileWidget
 
 == Class Methods
 --- style(*args)
+#@todo
 
 = class Tk::Tile::Scale
 alias Tk::Tile::TScale

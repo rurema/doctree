@@ -4,14 +4,18 @@ extend Tk
 == Constants
 
 --- TkCommandNames
+#@todo
 
 == Class Methods
 
 --- bgerror(message)
 --- show
 --- tkerror
+#@todo
 
 --- set_default
+#@todo
 
 --- set_handler(hdlr = Proc.new)
+#@todo
 

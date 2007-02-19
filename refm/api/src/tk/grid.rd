@@ -13,9 +13,11 @@ include Tk
 == Module Functions
 
 --- bbox(master, *args)
+#@todo
 
 --- configure(widget1, widget2, ..., options=nil)
 --- grid(widget1, widget2, ..., options=nil)
+#@todo
 
 wigetNに対して、optionsで指定した配置を行います。
 optionsは、以下のキーを持つハッシュです。
@@ -45,6 +47,7 @@ optionsは、以下のキーを持つハッシュです。
 *"sticky"
 
 --- columnconfigure(master, index, args)
+#@todo
 
 マスタウィジェットmasterの桁位置indexに関する属性を
 argsで指定します。argsは、以下をキーに持つハッシュです。
@@ -66,6 +69,7 @@ argsに空のハッシュ{}を指定すると現在の設定を返します。
 ((-戻り値は、hashにしたい-))
 
 --- rowconfigure(master, index, args)
+#@todo
 
 マスタウィジェットmasterの行位置indexに関する属性を
 argsで指定します。argsは、以下をキーに持つハッシュです。
@@ -116,30 +120,42 @@ argsに空のハッシュ{}を指定すると現在の設定を返します。
   p TkGrid.rowconfigure(f, 0)
 
 --- columnconfiginfo(master, index, slot=nil)
+#@todo
 
 --- rowconfiginfo(master, index, slot=nil)
+#@todo
 
 --- forget(*args)
+#@todo
 
 --- info(slave)
+#@todo
 
 --- location(master, x, y)
+#@todo
 
 --- propagate(master, mode = Tk::None)
+#@todo
 
 --- remove(*args)
+#@todo
 
 --- size(master)
+#@todo
 
 --- slaves(master, args)
+#@todo
 
 == Instance Methods
 
 --- anchor(master, anchor = Tk::None)
+#@todo
 
 --- add(widget, *args)
+#@todo
 
 == Constants
 
 --- TkCommandNames
+#@todo
 

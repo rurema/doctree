@@ -6,18 +6,22 @@ require tk/radiobutton
 == Constants
 
 --- TkCommandNames
+#@todo
 #@# = ['checkbutton'.freeze].freeze
 
 --- WidgetClassName
+#@todo
 #@# = 'Checkbutton'.freeze
 
 --- WidgetClassNames
+#@todo
 #@# [WidgetClassName] = self
 
 
 == Instance Methods
 
 --- toggle
+#@todo
 
 = class TkCheckbutton
 alias TkCheckButton

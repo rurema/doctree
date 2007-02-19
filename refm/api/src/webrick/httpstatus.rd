@@ -3,28 +3,38 @@
 == Singleton Methods
 
 --- [](code)
+#@todo
 
 == Module Functions
 
 --- reason_phrase(code)
+#@todo
 
 --- info?(code)
+#@todo
 
 --- success?(code)
+#@todo
 
 --- redirect?(code)
+#@todo
 
 --- error?(code)
+#@todo
 
 --- client_error?(code)
+#@todo
 
 --- server_error?(code)
+#@todo
 
 == Constants
 
 --- StatusMessage
+#@todo
 
 --- CodeToError
+#@todo
 
 --- RC_CONTINUE
 --- RC_SWITCHING_PROTOCOLS
@@ -66,6 +76,7 @@
 --- RC_SERVICE_UNAVAILABLE
 --- RC_GATEWAY_TIMEOUT
 --- RC_HTTP_VERSION_NOT_SUPPORTED
+#@todo
 
 
 

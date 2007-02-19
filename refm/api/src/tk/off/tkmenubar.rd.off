@@ -14,11 +14,14 @@
 == クラスメソッド:
 
 --- TkMenubar.new(parent = nil, spec = nil, options = nil)
+#@todo
 
 == メソッド:
 
 --- TkMenubar#add_menu(menu_info)
+#@todo
 
 --- TkMenubar#[](index)
+#@todo
 
 =end

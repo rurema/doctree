@@ -38,14 +38,17 @@ Profiler__.start_profile 実行から、Profiler__.stop_profile までの
 == Module Functions
 
 --- start_profile
+#@todo
 
 プロファイルの取得を開始します。
 
 --- stop_profile
+#@todo
 
 プロファイルの取得を停止します。
 
 --- print_profile(file)
+#@todo
 
 stop_profile を実行し、プロファイルの結果を file に出力します。
 file には printf メソッドが定義されていなければいけません。

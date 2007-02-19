@@ -17,6 +17,7 @@ Ruby/Tkにおけるウィジェット階層の最上位のウィジェットです。
 == クラスメソッド:
 
 --- TkRoot.new
+#@todo
     ルートウィジェットオブジェクトを生成します。常に同じオブジェクトを返し
     ます。(つまり、Ruby/Tkにおいて同時に存在できるルートウィジェットは1つ
     だけです)
@@ -24,6 +25,7 @@ Ruby/Tkにおけるウィジェット階層の最上位のウィジェットです。
 == メソッド:
 
 --- TkRoot#path
+#@todo
     ルートウィジェットの((<パス>))を返します。これは、"." 固定です。
 
 == 標準オプション:
@@ -47,23 +49,32 @@ Ruby/Tkにおけるウィジェット階層の最上位のウィジェットです。
 
 --- TkRoot#background(color)
 --- TkRoot#bg(color)
+#@todo
 ### --- TkRoot#class
 ### --- TkRoot#classname
 
 --- TkRoot#colormap
+#@todo
 
 --- TkRoot#container(bool)
+#@todo
 
 --- TkRoot#height
+#@todo
 
 --- TkRoot#menu
+#@todo
 
 --- TkRoot#screen
+#@todo
 
 --- TkRoot#use
+#@todo
 
 --- TkRoot#visual
+#@todo
 
 --- TkRoot#width
+#@todo
 
 =end

@@ -9,6 +9,7 @@
 
 --- do_not_reverse_lookup
 --- do_not_reverse_lookup=(bool)
+#@todo
 
 この値が真ならアドレスからホスト名への逆引きを行わなくなります。
 デフォルトは false です。この設定は大域的に作用します。
@@ -36,6 +37,7 @@
 
 #@since 1.8.0
 --- for_fd(fd)
+#@todo
 
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
 このメソッドは [[c:Socket]] クラスからこのクラスに移動しました。
@@ -48,6 +50,7 @@
 #@if (version >= "1.9.0")
 --- do_not_reverse_lookup
 --- do_not_reverse_lookup=(bool)
+#@todo
 
 アドレスからホスト名への逆引きの設定をソケットごとに設定します。
 初期値はソケットを生成したときの
@@ -55,6 +58,7 @@ BasicSocket.do_not_reverse_lookup になります。
 #@end
 
 --- getpeername
+#@todo
 
 接続の相手先のソケットの情報を取得します。sockaddr 構造体をパッ
 クした文字列を返します。[[man:getpeername(2)]] を参照してください。
@@ -70,6 +74,7 @@ BasicSocket.do_not_reverse_lookup になります。
   p addr == s.getsockname     #=> true
 
 --- getsockname
+#@todo
 
 ソケットの情報を取得します。sockaddr 構造体をパックした
 文字列を返します。[[man:getsockname(2)]] を参照してください。
@@ -83,6 +88,7 @@ BasicSocket.do_not_reverse_lookup になります。
   s = serv.accept
 
 --- getsockopt(level, optname)
+#@todo
 
 ソケットのオプションを取得します。[[man:getsockopt(2)]]
 を参照してください。取得したオプションのデータをパックした文字列を
@@ -97,6 +103,7 @@ BasicSocket.do_not_reverse_lookup になります。
   p opt.unpack("i")[0]                                      #=> 0   (Nagle アルゴリズム有効)
 
 --- recv(maxlen[, flags])
+#@todo
 
 ソケットからデータを受け取り、文字列として返します。
 maxlen は受け取る最大の長さを指定します。
@@ -120,6 +127,7 @@ UDP では空のパケットを読み込んだことを意味します。
 
 #@if (version >= "1.8.5")
 --- recv_nonblock(maxlen[, flags])
+#@todo
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] でソケットからデータを受け取ります。
@@ -131,6 +139,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
 --- send(mesg, flags[, dest_sockaddr])
+#@todo
 
 ソケットを介してデータを送ります。flags に関しては
 [[man:send(2)]] を参照してください。connect していないソケット
@@ -149,12 +158,14 @@ dest_sockaddr には「ソケットアドレス構造体を pack した文字列」
   s.send("The king has donkey ears!", 0, sockaddr)
 
 --- setsockopt(level, optname, optval)
+#@todo
 
 ソケットのオプションを設定します。[[man:setsockopt(2)]]
 を参照してください。
 #@# より高レベルなものとして[[c:RAA:Sockopt]]があります
 
 --- shutdown([how])
+#@todo
 
 ソケットの以降の接続を終了させます。
 how の値によって以下のように接続が終了します。

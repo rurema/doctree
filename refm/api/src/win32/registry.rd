@@ -43,6 +43,7 @@ include Win32::Registry::Constants
 --- new(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
 --- open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
 --- open(key, subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED) {|reg| ... }
+#@todo
 
 レジストリキー key 下のキー subkey を開き，
 開いたキーを表す Win32::Registry オブジェクトを返します。
@@ -56,6 +57,7 @@ desired はアクセスマスクです。opt はキーのオプションです。
 
 --- create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
 --- create(key, subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED) {|reg| ... }
+#@todo
 
 レジストリキー key 下にキー subkey を作成し，
 開いたキーを表す Win32::Registry オブジェクトを返します。
@@ -68,6 +70,7 @@ key は親のキーを Win32::Registry オブジェクトで指定します。
 ブロックが与えられると，キーは自動的に閉じられます。
 
 --- expand_environ(str)
+#@todo
 
 str の %\w+% という並びを環境変数に置換します。
 REG_EXPAND_SZ で用いられます。
@@ -75,14 +78,17 @@ REG_EXPAND_SZ で用いられます。
 詳細は [[unknown:ExpandEnvironmentStrings|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp]] Win32 API を参照してください。
 
 --- type2name(type)
+#@todo
 
 レジストリ値の型を整数から可読文字列に変換します。
 
 --- wtime2time(wtime)
+#@todo
 
 64bit の [[unknown:FILETIME|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp]] を Time オブジェクトに変換します。
 
 --- time2wtime(time)
+#@todo
 
 Time オブジェクトまたは Integer オブジェクトを受け取り，
 64bit の FILETIME に変換します。
@@ -90,20 +96,24 @@ Time オブジェクトまたは Integer オブジェクトを受け取り，
 == Instance Methods
 
 --- open(subkey, desired = KEY_READ, opt = REG_OPTION_RESERVED)
+#@todo
 
 [[m:Win32::Registry.open]](self, subkey, desired, opt) と同じです。
 
 --- create(subkey, desired = KEY_ALL_ACCESS, opt = REG_OPTION_RESERVED)
+#@todo
 
 [[m:Win32::Registry.create]](self, subkey, desired, opt) と同じです。
 
 --- close
+#@todo
 
 開かれているキーを閉じます。
 
 閉じられた後では，多くのメソッドは例外を発生します。
 
 --- read(name, *rtype)
+#@todo
 
 レジストリ値 name を読み，[ type, data ]
 の配列で返します。
@@ -125,6 +135,7 @@ data はレジストリ値のデータで，クラスは以下の通りです:
 [[c:TypeError]] が発生します。
 
 --- [](name, *rtype)
+#@todo
 
 レジストリ値 name を読み，その値を返します。クラスは
 [[unknown:read|Win32::Registry/read]] に準じます。
@@ -138,6 +149,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生します。
 --- read_s(name)
 --- read_i(name)
 --- read_bin(name)
+#@todo
 
 型がそれぞれ REG_SZ(read_s), REG_DWORD(read_i), REG_BINARY(read_bin)
 であるレジストリ値 name を読み，その値を返します。
@@ -145,6 +157,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生します。
 型がマッチしなかった場合，TypeError が発生します。
 
 --- read_s_expand(name)
+#@todo
 
 型が REG_SZ または REG_EXPAND_SZ であるレジストリ値 name を読み，
 その値を返します。
@@ -153,6 +166,7 @@ REG_DWORD_BIG_ENDIAN, REG_QWORD 以外だった場合は TypeError が発生します。
 REG_SZ または REG_EXPAND_SZ 以外だった場合，TypeError が発生します。
 
 --- write(name, type, data)
+#@todo
 
 レジストリ値 name に型 type で data を書き込みます。
 name が nil の場合，(標準) レジストリ値に書き込みます。
@@ -162,6 +176,7 @@ data のクラスは [[unknown:read|Win32::Registry/read]]
 メソッドに準じていなければなりません。
 
 --- [](name, wtype = nil)
+#@todo
 
 レジストリ値 name に value を書き込みます。
 
@@ -177,6 +192,7 @@ data のクラスは [[unknown:read|Win32::Registry/read]]
 --- write_s(name, value)
 --- write_i(name, value)
 --- write_bin(name, value)
+#@todo
 
 レジストリ値 name に value を書き込みます。
 
@@ -185,10 +201,12 @@ REG_BINARY(write_bin) です。
 
 --- each {|name, type, value| ... }
 --- each_value {|name, type, value| ... }
+#@todo
 
 キーが持つレジストリ値を列挙します。
 
 --- each_key {|subkey, wtime| ... }
+#@todo
 
 キーのサブキーを列挙します。
 
@@ -198,11 +216,13 @@ wtime は最終更新時刻を表す FILETIME (64-bit 整数) です。
 
 --- delete(name)
 --- delete_value(name)
+#@todo
 
 レジストリ値 name を削除します。
 (標準) レジストリ値を削除することはできません。
 
 --- delete_key(name, recursive = false)
+#@todo
 
 サブキー name とそのキーが持つすべての値を削除します。
 
@@ -210,40 +230,48 @@ recursive が false の場合，そのサブキーはサブキーを持っていてはなりません。
 true の場合，キーは再帰的に削除されます。
 
 --- flush
+#@todo
 
 キーの全てのデータをレジストリファイルに書き込みます。
 
 --- created?
+#@todo
 
 キーが新しく作成された場合，真を返します。
 (⇒[[m:Registry.create]])
 
 --- opened?
+#@todo
 
 キーがまだ閉じられていない場合，真を返します。
 
 --- parent
+#@todo
 
 親のキーを表す Win32::Registry オブジェクトを返します。
 定義済キーでは nil を返します。
 
 --- keyname
+#@todo
 
 [[m:Registry.open]] または [[m:Registry.create]] に指定された
 subkey の値を返します。
 
 --- disposition
+#@todo
 
 キーの disposition 値を返します。
 (REG_CREATED_NEW_KEY または REG_OPENED_EXISTING_KEY)
 
 --- name
 --- to_s
+#@todo
 
 キーのフルパスを 'HKEY_CURRENT_USER\SOFTWARE\foo\bar'
 のような形で返します。
 
 --- info
+#@todo
 
 キー情報を以下の値の配列で返します:
   * num_keys
@@ -270,21 +298,28 @@ subkey の値を返します。
 --- max_value_length
 --- descriptor_length
 --- wtime
+#@todo
 
 キー情報の個々の値を返します。
 
 
 --- []=(name, rtype, value = nil)
+#@todo
 
 --- _dump
+#@todo
 
 --- hkey
+#@todo
 
 --- inspect
+#@todo
 
 --- keys
+#@todo
 
 --- open?
+#@todo
 
 
 == Constants
@@ -295,6 +330,7 @@ subkey の値を返します。
 --- HKEY_PERFORMANCE_DATA
 --- HKEY_CURRENT_CONFIG
 --- HKEY_DYN_DATA
+#@todo
 
 それぞれの定義済キーを表す Win32::Registry オブジェクトです。
 詳細は [[unknown:MSDN Library|URL:httphttp://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp]] を参照してください。
@@ -318,6 +354,7 @@ subkey の値を返します。
 --- packqw(qw)
 --- unpackdw(dw)
 --- unpackqw(qw)
+#@todo
 
 == Constants
 --- RegCloseKey
@@ -331,16 +368,19 @@ subkey の値を返します。
 --- RegQueryInfoKey
 --- RegQueryValueExA
 --- RegSetValueExA
+#@todo
 
 = class Win32::Registry::Error < StandardError
 
 == Instance Methods
 
 --- code
+#@todo
 
 == Constants
 
 --- FormatMessageA
+#@todo
 
 
 = class Win32::Registry::PredefinedKey < Win32::Registry
@@ -348,12 +388,15 @@ subkey の値を返します。
 == Class Methods
 
 --- new(hkey, keyname)
+#@todo
 
 == Instance Methods
 
 --- class
+#@todo
 
 --- close
+#@todo
 
 = module Win32::Registry::Constants
 
@@ -370,6 +413,7 @@ subkey の値を返します。
 --- HKEY_PERFORMANCE_NLSTEXT
 --- HKEY_CURRENT_CONFIG
 --- HKEY_DYN_DATA
+#@todo
 
 定義済キー値。
 これらは Integer で、Win32::Registry オブジェクトではありません。
@@ -388,6 +432,7 @@ subkey の値を返します。
 --- REG_RESOURCE_REQUIREMENTS_LIST
 --- REG_QWORD
 --- REG_QWORD_LITTLE_ENDIAN
+#@todo
 
 レジストリ値の型。
 
@@ -403,12 +448,14 @@ subkey の値を返します。
 --- KEY_WRITE
 --- KEY_EXECUTE
 --- KEY_ALL_ACCESS
+#@todo
 
 セキュリティアクセスマスク。
 
 
 --- REG_CREATED_NEW_KEY
 --- REG_OPENED_EXISTING_KEY
+#@todo
 
 キーが新しく作られたか、既存キーが開かれたか。
 [[m:Win32::Registry.disposition]] メソッドも参照してください。
@@ -420,13 +467,16 @@ subkey の値を返します。
 --- REG_OPTION_BACKUP_RESTORE
 --- REG_OPTION_OPEN_LINK
 --- REG_LEGAL_OPTION
+#@todo
 
 --- REG_WHOLE_HIVE_VOLATILE
 --- REG_REFRESH_HIVE
 --- REG_NO_LAZY_FLUSH
 --- REG_FORCE_RESTORE
+#@todo
 
 --- MAX_KEY_LENGTH
 --- MAX_VALUE_LENGTH
+#@todo
 
 #@end

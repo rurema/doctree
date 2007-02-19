@@ -8,15 +8,18 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 #@# == ロック状態
 == Constants
 --- Sync_m::UN
+#@todo
 ロックされていない状態。
 
 --- Sync_m::EX
+#@todo
 排他ロック。
 オブジェクトの状態を更新する場合のように、
 1つのスレッドがオブジェクトを独占的に使用したい場合に用いる。
 排他ロック中に他のスレッドはオブジェクトを共有/排他ロックできない。
 
 --- Sync_m::SH
+#@todo
 共有ロック。
 複数のスレッドが同時にオブジェクトを使用できる場合に用いる。
 複数のスレッドが共有ロックしている場合、
@@ -24,34 +27,42 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 
 == Module Functions
 --- sync_mode
+#@todo
 現在のロック状態を返す。
 
 --- sync_locked?
 --- locked?
+#@todo
 ロックされているかどうかを返す。
 
 --- sync_shared?
 --- shared?
+#@todo
 共有ロックされているかどうかを返す。
 
 --- sync_exclusive?
 --- exclusive?
+#@todo
 排他ロックされているかどうかを返す。
 
 --- sync_try_lock(mode = EX)
 --- try_lock(mode = EX)
+#@todo
 ロック状態を変更する。
 変更できたかどうかをtrueかfalseで返し、ブロックしない。
 
 --- sync_lock(mode = EX)
 --- lock(mode = EX)
+#@todo
 ロック状態を変更する。
 変更できるまで現在のスレッドの実行をブロックする。
 
 --- sync_unlock(mode = EX)
 --- unlock(mode = EX)
+#@todo
 ロックを解除する。
 
 --- sync_synchronize(mode = EX) {...}
 --- synchronize(mode = EX) {...}
+#@todo
 ロック状態を変更してブロックを実行する。

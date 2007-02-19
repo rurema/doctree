@@ -3,19 +3,27 @@
 == Instance Methods
 
 --- logger
+#@todo
 
 --- realm
+#@todo
 
 --- userdb
+#@todo
 
 == Constants
 
 --- RequestField
+#@todo
 
 --- ResponseField
+#@todo
 
 --- ResponseInfoField
+#@todo
 
 --- AuthException
+#@todo
 
 --- AuthScheme
+#@todo

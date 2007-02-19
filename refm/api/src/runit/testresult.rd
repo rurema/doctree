@@ -8,20 +8,29 @@
 == Instance Methods
 
 --- errors
+#@todo
 
 --- failures
+#@todo
 
 --- succeed?
+#@todo
 
 --- failure_size
+#@todo
 
 --- run_asserts
+#@todo
 
 --- error_size
+#@todo
 
 --- run_tests
+#@todo
 
 --- add_failure(failure)
+#@todo
 
 --- add_error(error)
+#@todo
 

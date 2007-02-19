@@ -56,12 +56,15 @@ XMPメソッド群のコンテキストは, 呼び出す前のコンテキストで評価されます.
 = reopen Kernel
 == Private Instance Methods
 --- xmp
+#@todo
 
 = class XMP
 == Class Methods
 --- new
+#@todo
 
 == Instance Methods
 --- puts
+#@todo
 
 

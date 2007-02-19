@@ -11,18 +11,23 @@ maker.channel.linkが適切に設定されている必要があります．
 
 --- title
 --- title=()
+#@todo
 
 --- url
 --- url=()
+#@todo
 
 --- width
 --- width=()
+#@todo
 
 --- height
 --- height=()
+#@todo
 
 --- description
 --- description=()
+#@todo
 
 = class RSS::Maker::RSS09::Image < RSS::Maker::ImageBase
 = class RSS::Maker::RSS10::Image < RSS::Maker::ImageBase

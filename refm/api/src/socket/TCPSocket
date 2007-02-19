@@ -23,6 +23,7 @@
 
 --- open(host, service [, local_host, local_service])
 --- new(host, service [, local_host, local_service])
+#@todo
 
 host で指定したホストの service で指定したポートと接続したソケッ
 トを返します。host はホスト名、または octet decimal
@@ -36,6 +37,7 @@ host で指定したホストの service で指定したポートと接続したソケッ
 #@end
 
 --- gethostbyname(host)
+#@todo
 
 ホスト名または IP アドレス (整数または"127.0.0.1"
 のような文字列)からホストの情報を返します。ホスト情報は、ホ

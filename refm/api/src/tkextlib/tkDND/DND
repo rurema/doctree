@@ -4,20 +4,28 @@
 
 == Singleton Methods
 --- version
+#@todo
 
 == Instance Methods
 --- dnd_bindtarget_info(type = nil, event = nil)
+#@todo
 
 --- dnd_bindtarget(type, event, *args)
+#@todo
 
 --- dnd_cleartarget
+#@todo
 
 --- dnd_bindsource_info(type = nil)
+#@todo
 
 --- dnd_bindsource(type, *args)
+#@todo
 
 --- dnd_clearsource
+#@todo
 
 --- dnd_drag(keys = nil)
+#@todo
 
 #@end

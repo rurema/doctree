@@ -5,6 +5,7 @@
 == Module Functions
 
 --- pingecho(host, timeout = 5, service = 'echo')
+#@todo
 
 host の TCP サービス service に対して接続することで、
 サーバが稼動しているかどうか確かめます。

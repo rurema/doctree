@@ -6,30 +6,36 @@ RSA ░┼╣ц╕░епеще╣
 == Class Methods
 
 --- generate(size, exponent = 65537)
+#@todo
 
 RSA ╕°│л╕░д╚╚ы╠й╕░д╬е┌евдЄ└╕└од╖д╞бвRSA еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бгsize (├▒░╠д╧е╙е├е╚) д╟╕░д╬ modulus д─д▐дъд╧ ╕░д╬е╡еде║дЄ╗╪─ъд╖д▐д╣бгsize < 1024 д╟д╧╛од╡▓сдодыд╚╣═дидщдьд╞ддд▐д╣бгexponent д╟ public exponent дЄ╗╪─ъд╖д▐д╣бгexponent д╦д╧┤ё┐ЇдЄ╗╪─ъд╖бв┬ч─ёд╬╛ь╣чбв3бв17 двдыддд╧ 65537 дЄ╗╪─ъд╖д▐д╣бг
 
 --- new(size, exponent = 65537)
+#@todo
 
 RSA ░┼╣ц╕░еке╓е╕езепе╚дЄ└╕└од╖д▐д╣бгRSA.generate(size, exponent) д╚╞▒д╕д╟д╣бг
 
 --- new(str, pass = nil)
 --- new(io, pass = nil)
 --- new
+#@todo
 
 RSA ░┼╣ц╕░еке╓е╕езепе╚дЄ└╕└од╖д▐д╣бгpass дм╗╪─ъд╡дьд┐╛ь╣чд╧бв╚ы╠й╕░дЄ pass дЄ╗╚д├д╞╔№╣ц▓╜д╖д▐д╣бг
 
 == Instance Methods
 
 --- public?
+#@todo
 
 ╕°│л╕░дЄ╗¤д├д╞дддыдлд╔дждл╚╜─ъд╖д▐д╣бг
 
 --- private?
+#@todo
 
 ╚ы╠й╕░дЄ╗¤д├д╞дддыдлд╔дждл╚╜─ъд╖д▐д╣бг
 
 --- to_text
+#@todo
 
 ┐═┤╓дм╞╔дсды╖┴╝░д╦╩╤┤╣д╖д▐д╣бг
 
@@ -37,51 +43,64 @@ RSA ░┼╣ц╕░еке╓е╕езепе╚дЄ└╕└од╖д▐д╣бгpass дм╗╪─ъд╡дьд┐╛ь╣чд╧бв╚ы╠й╕░дЄ pass дЄ╗╚д
 --- export
 --- to_pem
 --- to_s
+#@todo
 
 ╕░е┌евдЄ PEM ╖┴╝░д╟╜╨╬╧д╖д▐д╣бгcipher д╚ pass дм╗╪─ъд╡дьд┐╛ь╣чбв╚ы╠й╕░дЄ░┼╣ц cipher [[c:OpenSSL::Cipher::Cipher]] д╚е╤е╣еяб╝е╔ pass дЄ╗╚д├д╞░┼╣ц▓╜д╖д▐д╣бг
 
 #@since 1.8.2
 --- to_der
+#@todo
 
 DER ╖┴╝░д╦╩╤┤╣д╖д▐д╣бг
 #@end
 
 --- public_key
+#@todo
 
 ╕°│л╕░дЄ╩г└╜д╖д╞ RSA еке╓е╕езепе╚д╚д╖д╞╩╓д╖д▐д╣бг
 
 --- public_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+#@todo
 
 ╩╕╗·╬є str дЄ╕°│л╕░д╟░┼╣ц▓╜д╖д▐д╣бг
 
 --- public_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+#@todo
 
 ╩╕╗·╬є str дЄ╕°│л╕░д╟╔№╣ц▓╜д╖д▐д╣бг
 
 --- private_encrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+#@todo
 
 ╩╕╗·╬є str дЄ╚ы╠й╕░д╟░┼╣ц▓╜д╖д▐д╣бг
 
 --- private_decrypt(str, mode = OpenSSL::PKey::RSA::PKCS1_PADDING)
+#@todo
 
 ╩╕╗·╬є str дЄ╚ы╠й╕░д╟╔№╣ц▓╜д╖д▐д╣бг
 
 --- e
 --- e=
+#@todo
 
 --- iqmp 
 --- iqmp=
+#@todo
 
 --- n
 --- n=
+#@todo
 
 --- p
 --- p=
+#@todo
 
 --- q
 --- q=
+#@todo
 
 --- params
+#@todo
 
 #@since 1.8.2
 == Constants
@@ -90,6 +109,7 @@ DER ╖┴╝░д╦╩╤┤╣д╖д▐д╣бг
 --- SSLV23_PADDING
 --- NO_PADDING
 --- PKCS1_OAEP_PADDING
+#@todo
 
 [[m:OpenSSL::PKey::RSA#public_encrypt]]бв
 [[m:OpenSSL::PKey::RSA#public_decrypt]]бв

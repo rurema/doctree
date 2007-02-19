@@ -5,7 +5,9 @@ require wsdl/xmlSchema/element
 == Instance Methods
 
 --- map_as_array?
+#@todo
 
 --- attributes
+#@todo
 
 

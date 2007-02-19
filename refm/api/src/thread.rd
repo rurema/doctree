@@ -10,6 +10,7 @@
 = reopen Thread
 == Class Methods
 --- Thread.exclusive { ... }
+#@todo
 ブロック実行中、Threadの切り替えを行いません。
 
 #@include(thread/ConditionVariable)

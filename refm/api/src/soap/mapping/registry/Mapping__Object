@@ -6,19 +6,26 @@ include SOAP::Marshal
 == Class Methods
 
 --- initialize
+#@todo
 
 == Instance Methods
 
 --- inspect
+#@todo
 
 --- __xmlattr
+#@todo
 
 --- __xmlele
+#@todo
 
 --- [](qname)
+#@todo
 
 --- []=(qname, value)
+#@todo
 
 --- __add_xmlele_value(qname, value)
+#@todo
 
 #@end

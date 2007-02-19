@@ -35,6 +35,7 @@ GNU Readline によるコマンドライン入力インタフェースを提供するモジュー
 == Module Functions
 
 --- readline([prompt, [add_hist]])
+#@todo
 ユーザからのキー入力を求め、入力した文字列を返します。EOF(UNIX で
 は ^D)を入力すると nil を返します。
 
@@ -83,6 +84,7 @@ Emacs モードなら ^P を入力することで前に入力した文字列を呼び出した
 == Singleton Methods
 
 --- completion_proc=(proc)
+#@todo
 補完時の動作を決定する[[c:Proc]]オブジェクトを指定します。
 procは引数に入力文字列を取り、候補文字列の配列を返すようにしてください。
 
@@ -105,57 +107,69 @@ procは引数に入力文字列を取り、候補文字列の配列を返すようにしてください。
 #@since 1.8.0
 --- basic_word_break_characters=(s)
 --- basic_word_break_characters
+#@todo
 補完時の単語同士の区切りを指定する basic な文字列。デフォルトでは
 Bash用の文字列 " \t\n\"\\'`@$><=;|&{(" (スペース含む)になっています。
 
 --- completer_word_break_characters=(s)
 --- completer_word_break_characters
+#@todo
 rl_complete_internal() で使われる、補完時の単語同士の区切りを指定する
 文字列です。デフォルトでは Readline.basic_word_break_characters です。
 
 --- basic_quote_characters=(s)
 --- basic_quote_characters
+#@todo
 引用符を指定します。デフォルトでは、/"'/ です。
 
 --- completer_quote_characters=(s)
 --- completer_quote_character
+#@todo
 補完時の引用符を指定します。この引用符の間では、completer_word_break_characters
 も、普通の文字列として扱われます。
 
 --- filename_quote_characters=(s)
 --- filename_quote_characters
+#@todo
 補完時のファイル名の引用符を指定します。デフォルトでは nil です。
 #@end
 
 --- completion_proc
+#@todo
 補完時の動作を決定する[[c:Proc]]オブジェクトを返します。
 
 --- completion_case_fold=(bool)
 --- completion_case_fold
+#@todo
 入力補完時に大文字／小文字の区別をするかどうかを決定します。
 bool が真ならば区別しません。
 
 --- vi_editing_mode
+#@todo
 編集モードを vi モードにします。詳細は、GNU Readline のマニュアル
 を参照してください。
 
 --- emacs_editing_mode
+#@todo
 編集モードを Emacs モードにします。デフォルトは Emacs モードです。
 
 詳細は、GNU Readline のマニュアルを参照してください。
 
 --- completion_append_character
 --- completion_append_character=
+#@todo
 
 == Constants
 
 --- FILENAME_COMPLETION_PROC
 --- USERNAME_COMPLETION_PROC
+#@todo
 ライブラリに組み込みで用意された補完用 [[c:Proc]] オブジェクトです。
 それぞれファイル名、ユーザ名の補完を行います。
 [[m:Readline.completion_proc=]] で使用します。
 
 --- HISTORY
+#@todo
 Readlineモジュールで入力した内容は入力履歴として記録されます(有効にし
 ていればですが。[[m:Readline.readline]] を参照)
 
@@ -185,3 +199,4 @@ Readlineモジュールで入力した内容は入力履歴として記録されます(有効にし
   end
 
 --- VERSION
+#@todo

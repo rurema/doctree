@@ -3,6 +3,7 @@ include Enumerable
 
 == Instance Methods
 --- new_hour
+#@todo
 
 新しくhourを作成し，返します．作成された
 hourはhourリストの最後
@@ -24,6 +25,7 @@ contentを指定する必要があります．
 
 --- hour.content
 --- hour.content=()
+#@todo
 
 = class RSS::Maker::RSS09::Channel::SkipHours::Hour < RSS::Maker::ChannelBase::SkipHoursBase::HourBase
 = class RSS::Maker::RSS20::Channel::SkipHours::Hour < RSS::Maker::RSS09::Channel::SkipHours::Hour

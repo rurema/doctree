@@ -6,6 +6,7 @@
 == Class Methods
 
 --- inflate(string)
+#@todo
 
 string を展開します。展開に辞書が必要な場合には
 Zlib::NeedDict 例外が発生します。
@@ -21,6 +22,7 @@ Zlib::NeedDict 例外が発生します。
   end
 
 --- new([windowBits])
+#@todo
 
 展開ストリームを作成します。引数の詳細は zlib.h を参照して下さい。
 nil の場合はデフォルトの値を使用します。
@@ -28,6 +30,7 @@ nil の場合はデフォルトの値を使用します。
 == Instance Methods
 
 --- inflate(string)
+#@todo
 
 string を展開ストリームに入力します。処理後、ストリームからの
 出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
@@ -39,6 +42,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
 後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
 --- << string
+#@todo
 
 [[m:Zlib::Inflate#inflate]] と同じように string を
 展開ストリームに入力しますが、Zlib::Inflate オブジェクト
@@ -46,6 +50,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
 出力バッファに保存されます。
 
 --- finish
+#@todo
 
 展開ストリームを終了します。
 ストリーム内に残っていたデータ (つまり圧縮データの後についていた
@@ -59,12 +64,14 @@ string を展開ストリームに入力します。処理後、ストリームからの
 確認するのに便利です。
 
 --- set_dictionary(string)
+#@todo
 
 展開に用いる辞書を指定します。string を返します。
 このメソッドは Zlib::NeedDict 例外が発生した直後のみ
 有効です。詳細は zlib.h を参照して下さい。
 
 --- sync(string)
+#@todo
 
 string を入力バッファの末尾に追加し、次の full flush
 point まで読み飛ばします。入力バッファ内に full flush point
@@ -73,6 +80,7 @@ point まで読み飛ばします。入力バッファ内に full flush point
 true を返し、残りのデータは入力バッファ内に保持されます。
 
 --- sync_point?
+#@todo
 
 What is this?
 #@# [[unknown:原文|"ruby-src:ext/zlib/doc/zlib.rd"]]のまま。

@@ -3,20 +3,26 @@ include YAML::BaseNode
 
 == class methods
 --- new(type, val)
+#@todo
 
 == instance methods
 --- anchor
 --- anchor=(val)
+#@todo
 
 --- kind
 --- kind=(val)
+#@todo
 
 --- transform
 --- transform=(val)
+#@todo
 
 --- type_id
 --- type_id=(val)
+#@todo
 
 --- value
 --- value=(val)
+#@todo
 

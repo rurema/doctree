@@ -9,18 +9,22 @@ require tkextlib/bwidget
 == Instance Methods
 
 --- add(win, keys = {})
+#@todo
 
 
 
 --- delete(*wins)
+#@todo
 
 
 
 --- get_frame(&b)
+#@todo
 
 
 
 --- items
+#@todo
 
 
 

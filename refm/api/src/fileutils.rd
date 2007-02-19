@@ -8,6 +8,7 @@
 --- cd(dir, options = {}) {|dir| .... }
 --- chdir(dir, options = {})
 --- chdir(dir, options = {}) {|dir| .... }
+#@todo
 
 プロセスのカレントディレクトリを dir に変更します。
 ブロックとともに呼び出された時はブロック終了後に
@@ -24,6 +25,7 @@ options には :verbose が指定できます。
   FileUtils.cd('/', {:verbose => true})   # chdir and report it
 
 --- chmod(mode, list, options = {})
+#@todo
 
 ファイル list[0], list[1], …… のパーミッションを mode に変更します。
 
@@ -37,6 +39,7 @@ options には :noop と :verbose が指定可能です。
 
 #@since 1.8.3
 --- chmod_R(mode, list, options = {})
+#@todo
 
 ファイル list[0], list[1], …… のパーミッションを再帰的に mode へ変更します。
 
@@ -49,6 +52,7 @@ options には :noop と :verbose が指定可能です。
 
 #@since 1.8.3
 --- chown(user, group, list, options = {})
+#@todo
 
 ファイル list[0], list[1], ... の
 所有ユーザと所有グループを user と group に変更します。
@@ -64,6 +68,7 @@ options には :noop と :verbose が指定可能です。
 
 #@since 1.8.3
 --- chown_R(user, group, list, options = {})
+#@todo
 
 list[0], list[1], ... 以下のファイルの所有ユーザと所有グループを
 user と group へ再帰的に変更します。
@@ -83,6 +88,7 @@ options には :noop と :verbose が指定可能です。
 --- cmp(file_a, file_b)
 --- compare_file(file_a, file_b)
 --- identical?(file_a, file_b)
+#@todo
 
 ファイル a と b の内容が同じなら真を返します。
 
@@ -92,11 +98,13 @@ options には :noop と :verbose が指定可能です。
   FileUtils.cmp('/bin/cp', '/bin/mv')    #=> maybe false.
 
 --- compare_stream(a, b)
+#@todo
 
 [[c:IO]] オブジェクト a と b の内容が同じなら真を返します。
 
 #@since 1.8.3
 --- copy_entry(src, dest, preserve = false, dereference_root = false)
+#@todo
 
 ファイル src を dest にコピーします。src が普通のファイルでない場合は
 その種別まで含めて完全にコピーします。src がディレクトリの場合はその
@@ -111,6 +119,7 @@ dereference_root が真のときは src についてだけシンボリックリンクの指す
 
 #@since 1.8.3
 --- copy_file(src, dest, preserve = false, dereference_root = true)
+#@todo
 
 ファイル src の内容を dest にコピーします。
 
@@ -123,6 +132,7 @@ dereference_root が真のときは src についてだけシンボリックリンクの指す
 
 #@since 1.8.3
 --- copy_stream(src, dest)
+#@todo
 
 src を dest にコピーします。
 src には read メソッド、dest には write メソッドが必要です。
@@ -130,6 +140,7 @@ src には read メソッド、dest には write メソッドが必要です。
 
 --- cp(src, dest, options = {})
 --- copy(src, dest, options = {})
+#@todo
 
 ファイル src を dest にコピーします。dest がディレクトリなら
 dest/src にコピーします。dest が既に存在ししかもディレクトリで
@@ -143,6 +154,7 @@ options には :preserve, :noop, :verbose が指定できます。
 
 --- cp(list, dir, options = {})
 --- copy(list, dir, options = {})
+#@todo
 
 file1 を dir/file1 にコピー、file2 を dir/file2 にコピー、
 というように、ディレクトリ dir の中にファイル file1、file2 …を
@@ -157,6 +169,7 @@ options には :preserve, :noop, :verbose が指定できます。
   FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.6', {:verbose => true})
 
 --- cp_r(src, dest, options = {})
+#@todo
 
 src を dest にコピーします。src がディレクトリであったら再帰的に
 コピーします。その際 dest がディレクトリなら dest/src にコピーします。
@@ -170,6 +183,7 @@ options には :preserve, :noop, :verbose が指定できます。
   FileUtils.cp_r('lib/', site_ruby + '/mylib')
 
 --- cp_r(list, dir, options = {})
+#@todo
 
 list[0]、list[1], list[2], ... をディレクトリ dir の中にコピーします。
 list[n] がディレクトリなら再帰的にコピーします。
@@ -183,6 +197,7 @@ options には :preserve, :noop, :verbose を指定できます。
                  {:noop => true, :verbose => true})
 
 --- install(src, dest, options = {})
+#@todo
 
 src と dest の内容が違うときだけ src を dest にコピーします。
 
@@ -198,6 +213,7 @@ options[:mode] の値に設定します。
 
 --- ln(src, dest, options = {})
 --- link(src, dest, options = {})
+#@todo
 
 src へのハードリンク dest を作成します。
 dest がすでに存在しディレクトリであるときは dest/src を作成します。
@@ -213,6 +229,7 @@ options には :force, :noop, :verbose が指定できます。
 
 --- ln(list, destdir, options = {})
 --- link(list, destdir, options = {})
+#@todo
 
 list[0] へのハードリンク destdir/list[0]、list[1] への
 ハードリンク destdir/list[1] …を作成します。
@@ -227,6 +244,7 @@ options には :force, :noop, :verbose が指定できます。
 
 --- ln_s(src, dest, options = {})
 --- symlink(src, dest, options = {})
+#@todo
 
 src へのシンボリックリンク dest を作成します。
 dest がすでに存在しディレクトリであるときは dest/src を作成します。
@@ -242,6 +260,7 @@ options には :force, :noop, :verbose を指定できます。
 
 --- ln_s(list, destdir, options = {})
 --- symlink(list, destdir, options = {})
+#@todo
 
 list[0]、list[1] …へのシンボリックリンク dir/list[0], dir/list[1] …を
 作成します。destdir がディレクトリでない場合は例外 Errno::ENOTDIR が
@@ -255,10 +274,12 @@ options には :noop, :verbose を指定できます。
   FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
 
 --- ln_sf(src, dest, options = {})
+#@todo
 
 ln_s(src, dest, :force => true) と同じです。
 
 --- mkdir(dir, options = {})
+#@todo
 
 ディレクトリ dir を作成します。
 
@@ -273,6 +294,7 @@ options には :noop, :verbose が指定できます。
 --- mkdir_p(dir, options = {})
 --- mkpath(dir, options = {})
 --- makedirs(dir, options = {})
+#@todo
 
 ディレクトリ dir とその親ディレクトリを全て作成します。
 例えば、
@@ -290,6 +312,7 @@ options には :noop, :verbose が指定できます。
 
 --- mv(src, dest, options = {})
 --- move(src, dest, options = {})
+#@todo
 
 ファイル src を dest に移動します。
 dest がディレクトリなら dest/src に移動します。
@@ -303,6 +326,7 @@ options には :noop と :verbose が指定できます。
 
 --- mv(list, dir, options = {})
 --- move(list, dir, options = {})
+#@todo
 
 list[0], list[1], ... をディレクトリ dir の中に移動します。
 パーティションをまたいで移動するときはコピーします。
@@ -317,11 +341,13 @@ options には :noop と :verbose が指定できます。
 
 --- pwd
 --- getwd
+#@todo
 
 プロセスのカレントディレクトリを文字列で返します。
 
 --- rm(list, options = {})
 --- remove(list, options = {})
+#@todo
 
 list[0], list[1], ... を消去します。:force オプションが
 セットされた場合は作業中すべての StandardError を無視します。
@@ -336,10 +362,12 @@ options には :force, :noop, :verbose が指定できます。
 
 --- rm_f(list, options = {})
 --- safe_unlink(list, options = {})
+#@todo
 
 FileUtils.rm(list, :force => true) と同じです。
 
 --- rm_r(list, options = {})
+#@todo
 
 ファイルまたはディレクトリ list[0], list[1], ... を再帰的に消去します。
 force オプションを渡した場合は削除中に発生した StandardError を無視します。
@@ -355,10 +383,12 @@ options には :force, :noop, :verbose を指定できます。
 
 --- rm_rf(list, options = {})
 --- rmtree(list, options = {})
+#@todo
 
 rm_r(list, {:force => true}) と同じです。
 
 --- rmdir(dir, options = {})
+#@todo
 
 ディレクトリ dir を削除します。
 
@@ -373,6 +403,7 @@ options には :noop, :verbose が指定できます。
 
 #@since 1.8.3
 --- remove_entry(path, force = false)
+#@todo
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
@@ -388,6 +419,7 @@ force が真のときは削除中に発生した StandardError を無視します。
 
 #@since 1.8.3
 --- remove_entry_secure(path, force = false)
+#@todo
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
@@ -416,18 +448,21 @@ rm_r および remove_entry は以下の条件が満たされるときにはセキュリティ
 #@end
 
 --- remove_file(path, force = false)
+#@todo
 
 ファイル path を削除します。
 
 force が真のときは削除中に発生した StandardError を無視します。
 
 --- remove_dir(path, force = false)
+#@todo
 
 ディレクトリ path を削除します。
 
 force が真のときは削除中に発生した StandardError を無視します。
 
 --- touch(list, options = {})
+#@todo
 
 list[0], list[1], ... の最終変更時刻 (mtime) と
 アクセス時刻 (atime) を変更します。
@@ -441,6 +476,7 @@ option には :noop と :verbose が指定できます。
   FileUtils.touch(Dir.glob('*.c'))
 
 --- uptodate?(newer, older_list)
+#@todo
 
 newer が、older_list に含まれるすべてのファイルより新しいとき真。
 存在しないファイルは無限に古いとみなされます。

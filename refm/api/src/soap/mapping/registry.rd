@@ -14,10 +14,13 @@ require soap/mapping/rubytypeFactory
 == Constants
 
 --- RubyTypeName
+#@todo
 
 --- RubyExtendName
+#@todo
 
 --- RubyIVarName
+#@todo
 
 #@include(registry/Mapping__SOAPException)
 #@include(registry/Mapping__Object)
@@ -32,7 +35,9 @@ require soap/mapping/rubytypeFactory
 == Constants
 
 --- DefaultRegistry
+#@todo
 
 --- RubyOriginalRegistry
+#@todo
 
 #@end

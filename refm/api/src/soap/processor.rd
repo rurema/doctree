@@ -12,10 +12,13 @@ require soap/encodingstyle/aspDotNetHandler
 == Class Methods
 
 --- marshal(env, opt = {}, io = nil)
+#@todo
 
 --- unmarshal(stream, opt = {})
+#@todo
 
 --- default_parser_option
 --- default_parser_option=(rhs)
+#@todo
 
 #@end

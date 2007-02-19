@@ -12,6 +12,7 @@ include Enumerable
 --- glob(pattern) {|file| ...}
 --- glob(pattern[, flags])
 --- glob(pattern[, flags]) {|file| ...}
+#@todo
 
 ワイルドカードの展開を行った結果を文字列の配列として返します。
 パターンにマッチするファイルがない場合は空の配列を返します。
@@ -96,8 +97,10 @@ include Enumerable
   #@end
 
 --- chdir([path])
+#@todo
 #@if (version >= "1.7.0")
 --- chdir([path]) {|path| ... }
+#@todo
 #@end
 
 カレントディレクトリを path に変更します。
@@ -124,6 +127,7 @@ path を省略した場合、環境変数 HOME または LOGDIR
 #@end
 
 --- chroot(path)
+#@todo
 
 ルートディレクトリを path に変更します。
 [[man:chroot(2)]] を参照のこと。スーパーユーザだけがルー
@@ -137,6 +141,7 @@ path を省略した場合、環境変数 HOME または LOGDIR
 --- delete(path)
 --- rmdir(path)
 --- unlink(path)
+#@todo
 
 ディレクトリを削除します。ディレクトリは空でなければいけませ
 ん。
@@ -145,6 +150,7 @@ path を省略した場合、環境変数 HOME または LOGDIR
 [[c:Errno::EXXX]] が発生します。
 
 --- entries(path)
+#@todo
 
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。以下と同じです。
@@ -156,6 +162,7 @@ path を省略した場合、環境変数 HOME または LOGDIR
   end
 
 --- foreach(path) {|file| ...}
+#@todo
 
 pathのディレクトリの要素に対して繰り返すイテレー
 タ。このメソッドは以下と同じ働きをします。
@@ -173,6 +180,7 @@ nil を返します。
 
 --- getwd
 --- pwd
+#@todo
 
 カレントディレクトリのフルパスを返します。
 
@@ -182,9 +190,11 @@ nil を返します。
 
 #@since 1.9.0
 --- inspect
+#@todo
 #@end
 
 --- mkdir(path[, mode])
+#@todo
 
 path という新しいディレクトリを作ります。パーミッションは
 mode で指定された値(デフォルトは 0777)に umask をかけた
@@ -196,8 +206,10 @@ mode で指定された値(デフォルトは 0777)に umask をかけた
 
 --- new(path)
 --- open(path)
+#@todo
 #@if (version >= "1.7.0")
 --- open(path) {|dir| ...}
+#@todo
 #@end
 
 pathに対するディレクトリストリームをオープンして返します。
@@ -216,6 +228,7 @@ open()はブロックを指定することができます。
 == Instance Methods
 
 --- close
+#@todo
 
 ディレクトリストリームをクローズします。以降のディレクトリに
 対する操作は例外 [[c:IOError]] を発生させます。
@@ -224,17 +237,20 @@ open()はブロックを指定することができます。
 [[c:IOError]] が発生します。
 
 --- each {|item| ... }
+#@todo
 ディレクトリの各要素に対してブロックを評価します。
 self を返します。
 
 #@if (version >= "1.7.0")
 --- path
+#@todo
 
 オープンしているディレクトリのパス名を文字列で返します。
 #@end
 
 --- pos
 --- tell
+#@todo
 
 ディレクトリストリームの現在の位置を整数で返します。
 
@@ -248,6 +264,7 @@ self を返します。
 
 --- pos=(pos)
 --- seek(pos)
+#@todo
 
 ディレクトリストリームの読み込み位置を pos に移動させます。
 posは[[m:Dir#tell]] で与えられた値でなければなりま
@@ -256,6 +273,7 @@ posは[[m:Dir#tell]] で与えられた値でなければなりま
 pos= は右辺を返します。seek は self を返します。
 
 --- read
+#@todo
 
 ディレクトリストリームから次の要素を読み出して返します。最後の要素
 まで読み出していれば nil を返します。
@@ -264,6 +282,7 @@ pos= は右辺を返します。seek は self を返します。
 生します。
 
 --- rewind
+#@todo
 
 ディレクトリストリームの読み込み位置を先頭に移動させます。
 self を返します。

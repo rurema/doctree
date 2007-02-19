@@ -10,6 +10,7 @@
 == Class Methods
 
 --- new(error_message)
+#@todo
 
 SystemCallError オブジェクトを生成して返します。
 
@@ -20,6 +21,7 @@ SystemCallError オブジェクトを生成して返します。
 
 --- new(error_message, errno)
 --- new(errno)
+#@todo
 
 整数 errno に対応する [[c:Errno::EXXX]] オブジェクトを生成して返します。
 
@@ -184,6 +186,7 @@ Errno::EXXX クラスは、対応する errno がシステムに存在する場合のみ定義されます。
 == Instance Methods
 
 --- errno
+#@todo
 
 各エラーに対応する errno 値を返します。
 
@@ -199,6 +202,7 @@ Errno::EXXX クラスは、対応する errno がシステムに存在する場合のみ定義されます。
 
 #@since 1.8.0
 --- ===(other)
+#@todo
 
 other が SystemCallError のサブクラスで、
 かつ、other.errno の値が self.errno と同じ場合に真を返します。
@@ -210,6 +214,7 @@ other が SystemCallError のサブクラスで、
 == Constants
 
 --- Errno
+#@todo
 
 Errno::EXXX の各クラスに対応する errno の値です。
 

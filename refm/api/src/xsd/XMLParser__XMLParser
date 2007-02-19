@@ -4,8 +4,10 @@ require 'xml/parser'
 
 == class methods
 --- new
+#@todo
 
 == instance methods
 --- do_parse(string_or_readable)
+#@todo
 
 #@end

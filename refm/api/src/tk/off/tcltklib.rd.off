@@ -11,6 +11,7 @@ Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
 == モジュール関数:
 
 --- TclTkLib.mainloop
+#@todo
     Tcl/Tk のメインループを実行します。Ruby/Tkでは普通、(({Tk.mainloop}))
     (実際には、((<TkCore#mainloop>)))を実行することで、間接的にこのメソッ
     ドを実行します。

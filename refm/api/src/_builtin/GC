@@ -6,6 +6,7 @@ GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 == Singleton Methods
 
 --- disable
+#@todo
 
 ガーベージコレクトを禁止します。
 
@@ -13,6 +14,7 @@ GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 false)。
 
 --- enable
+#@todo
 
 ガーベージコレクトを許可します。
 
@@ -20,6 +22,7 @@ false)。
 false)。
 
 --- start
+#@todo
 
 ガーベージコレクトを開始します。
 
@@ -28,6 +31,7 @@ nil を返します。
 #@if (version >= "1.9.0")
 --- stress
 --- stress=(bool)
+#@todo
 
 GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 #@end
@@ -35,6 +39,7 @@ GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 == Instance Methods
 
 --- garbage_collect
+#@todo
 
 ガーベージコレクトを開始します。以下と同じ働きをします。
 

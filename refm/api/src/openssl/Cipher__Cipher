@@ -42,6 +42,7 @@ ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 == Class Methods
 --- new(name)
 --- new
+#@todo
 
 対称鍵暗号アルゴリズムの名前 name を与えると暗号オブジェクトを生成します。
 利用できるアルゴリズムはシステムにインストールされている openssl に依存します。
@@ -104,62 +105,75 @@ ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 
 == Instance Methods
 --- reset
+#@todo
 
 暗号、暗号鍵、暗号化復号化フラグを共にリセットします。
 
 --- encrypt(key, iv)
+#@todo
 
 暗号化の準備をします。iv は initialization vector のことで、必要なら使用されます。
 この API に引数を渡すことは推奨されません。パスワードから鍵を生成する場合は、
 pkcs5_keyivgen を使用してください。
 
 --- decrypt(key, iv)
+#@todo
 
 復号化の準備をします。iv は initialization vector のことで、必要なら使用されます。
 この API に引数を渡すことは推奨されません。パスワードから鍵を生成する場合は、
 pkcs5_keyivgen を使用してください。
 
 --- update(data)
+#@todo
 
 与えられた文字列を暗号化あるいは復号化して文字列として返します。直前に呼ばれた encrypt あるいは decrypt により暗号化か復号化かが決まります。
 
 --- final
+#@todo
 
 ブロックに残っているデータを暗号化あるいは復号化します。final を呼んだあとでは update を呼んではいけません。
 
 --- key=(key)
+#@todo
 
 暗号鍵を設定します。
 なお、ここでいう「暗号鍵」は AES のアルゴリズムに渡される鍵であって、「パスワード」ではありません。
 
 --- key_len
 --- key_len=(length)
+#@todo
 
 暗号鍵の長さ。
 
 --- iv=(iv)
+#@todo
 
 初期ベクトル (initialization vector)。
 
 --- iv_len
+#@todo
 
 初期ベクトルの長さ。
 
 --- block_size
+#@todo
 
 ブロックのサイズを返します。
 
 --- padding=(padding)
+#@todo
 
 パディングを設定します。
 
 --- pkcs5_keyivgen(pass, salt=nil, num=2048, digest=OpenSSL::Digest::MD5.new())
+#@todo
 
 pass から key と iv を生成し key= と iv= に設定します。
 salt は 8-octet string でないといけません。nil を返します。
 
 --- random_iv
 --- random_key
+#@todo
 
 = class OpenSSL::Cipher::AES < OpenSSL::Cipher::Cipher
 #@since 1.8.5

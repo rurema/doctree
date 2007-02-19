@@ -5,11 +5,14 @@ include XSD::CodeGen::CommentDef
 
 == class methods
 --- new(name, *params)
+#@todo
 
 == instance methods
 --- definition
 --- definition=(definition)
+#@todo
 
 --- dump
+#@todo
 
 #@end

@@ -69,6 +69,7 @@ super ではなく super() を呼ぶ必要があります。
 == Instance Methods
 
 --- mon_enter
+#@todo
 
 モニターをロックします。一度に一つのスレッドだけがモニターをロックできます。
 [[m:Mutex#lock]] に相当します。返り値は不定です。
@@ -94,6 +95,7 @@ Mutex#lock ではデッドロックが起きます。
   m.lock # => deadlock; recursive locking (ThreadError)
 
 --- mon_exit
+#@todo
 
 モニターのロックを解放します。mon_enter でロックした回数だけ mon_exit を
 呼ばなければモニターは解放されません。返り値は不定です。
@@ -103,6 +105,7 @@ Mutex#lock ではデッドロックが起きます。
 
 --- mon_synchronize { ... }
 --- synchronize     { ... }
+#@todo
 
 モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
 
@@ -110,12 +113,14 @@ Mutex#lock ではデッドロックが起きます。
 --- mon_try_enter
 #@end
 --- try_mon_enter
+#@todo
 
 モニターを開始しようとして成功した場合、true を返します。
 つまりモニターしているスレッドがいないか、モニターしているのがスレッドが
 現在のスレッドの場合に true を返します。
 
 --- new_cond
+#@todo
 
 新しい [[c:MonitorMixin::ConditionVariable]] を生成して返します。
 
@@ -126,13 +131,17 @@ Mutex#lock ではデッドロックが起きます。
 
 --- mon_owner
 --- mon_owner=(owner)
+#@todo
 
 --- mon_count
 --- mon_count=(count)
+#@todo
 
 --- mon_entering_queue
+#@todo
 
 --- mon_waiting_queue
+#@todo
 #@end
 
 #@if (version <= "1.8.0")
@@ -141,4 +150,5 @@ Mutex#lock ではデッドロックが起きます。
 == Protected Instance Methods
 
 --- mon_initialize
+#@todo
 #@end

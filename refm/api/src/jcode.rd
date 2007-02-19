@@ -15,6 +15,7 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
 
 --- each_char
 --- each_char {|char| ... }
+#@todo
 
 文字列中の各文字に対して繰り返します。
 ブロックを指定せずに呼び出された時には、各文字の配列を返します。
@@ -38,6 +39,7 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
 #@# 再定義された [[m:String#succ]] で内部的に使われます。
 
 --- jcount(str)
+#@todo
 
 [[m:String#count]] の日本語対応版です。
 
@@ -58,6 +60,7 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
 
 --- jlength
 --- jsize
+#@todo
 
 [[m:String#length]] の日本語対応版です。
 
@@ -77,6 +80,7 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
   p hogehoge.jsize  # => 8
 
 --- mbchar?
+#@todo
 
 self に多バイト文字が最初に現れる位置を返します。
 多バイト文字が含まれていなければ nil を返します。
@@ -100,6 +104,7 @@ self に多バイト文字が最初に現れる位置を返します。
 
 --- chop
 --- chop!
+#@todo
 
 [[m:String#chop]] の日本語対応版です。
 
@@ -120,6 +125,7 @@ self に多バイト文字が最初に現れる位置を返します。
 
 --- delete(str)
 --- delete!(str)
+#@todo
 
 [[m:String#delete]] の日本語対応版です。
 
@@ -140,6 +146,7 @@ self に多バイト文字が最初に現れる位置を返します。
     
 --- squeeze([str])
 --- squeeze!([str])
+#@todo
 
 [[m:String#squeeze]] の日本語対応版です。
 
@@ -160,6 +167,7 @@ self に多バイト文字が最初に現れる位置を返します。
     
 --- succ
 --- succ!
+#@todo
 
 [[m:String#succ]] の日本語対応版です。
 
@@ -182,6 +190,7 @@ self に多バイト文字が最初に現れる位置を返します。
 
 --- tr(search, replace)
 --- tr!(search, replace)
+#@todo
 
 [[m:String#tr]] の日本語対応版です。
 
@@ -202,6 +211,7 @@ self に多バイト文字が最初に現れる位置を返します。
 
 --- tr_s(search, replace)
 --- tr_s!(search, replace)
+#@todo
 
 [[m:String#tr_s]] の日本語対応版です。
 

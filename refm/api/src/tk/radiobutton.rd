@@ -17,15 +17,18 @@ require tk/button
 == Instance Methods
 
 --- deselect
+#@todo
 
 ラジオボタンをチェックしない状態にします。
 
 --- select
+#@todo
 
 ラジオボタンをチェックした状態にします。
 
 #@if (version <= "1.8.2")
 --- variable(v)
+#@todo
 
 ラジオボタンの状態と [[c:TkVariable]] オブジェクトvの値を関連付けます。
 同じTkVariableオブジェクトに関連付けされたラジオボタンは同じグループに
@@ -35,8 +38,10 @@ require tk/button
 #@end
 
 --- get_value
+#@todo
 
 --- set_value(val)
+#@todo
 
 ラジオボタンをチェックしたときの値をvalにします。
 

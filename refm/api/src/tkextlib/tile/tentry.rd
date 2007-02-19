@@ -8,6 +8,7 @@ include Tk::Tile::TileWidget
 
 == Class Methods
 --- style(*args)
+#@todo
 
 = class Tk::Tile::Entry
 alias Tk::Tile::TEntry

@@ -113,6 +113,7 @@ Win32 API を呼び出すためのクラスです。
 == Class Methods
 
 --- new(dllname, func, import, export)
+#@todo
 
 DLL dllname をロードし、API func のオブジェクトを生成します。
 
@@ -139,6 +140,7 @@ nil の場合は戻り値なし (void) と見なされます。
 
 --- call(*args)
 --- Call(*args)
+#@todo
 
 API を呼び出します。
 指定する引数と戻り値は [[Win32API.new]] の引数の指定に従います。

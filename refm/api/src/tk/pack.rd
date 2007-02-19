@@ -14,6 +14,7 @@ include Tk
 
 --- configure(win1, win2, ... winN, keys=nil)
 --- pack(win1, win2, ... winN, keys=nil)
+#@todo
 
 ウィジェットwin1 ... winNを配置します。
 keysは以下をキーに持つハッシュです。
@@ -126,12 +127,15 @@ masterをマスターウィジェットとしてpackします。
  *"bottom"
 
 --- forget(*args)
+#@todo
 
 argsで指定したウィジェットの配置を取り下げます(非表示になります)。
 
 --- info(slave)
+#@todo
 
 --- propagate(master, bool=None)
+#@todo
 
 スレーブのpackが完了した後マスターのウィジェット(master)
 の大きさが自動的に変更されるかどうかを真偽値boolで指定します。
@@ -180,8 +184,10 @@ boolを省略した場合、現在の設定を返します。
   Tk.mainloop
 
 --- slaves(master)
+#@todo
 
 == Constants
 
 --- TkCommandNames
+#@todo
 

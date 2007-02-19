@@ -42,121 +42,147 @@ fork ではなくスレッドを使っています。
 == Constants
 
 --- DEFAULT_HOST
+#@todo
 
 "127.0.0.1" です。
 
 == Class Methods
 
 --- new(port, host = DEFAULT_HOST, maxConnections = 4, stdlog = $stderr, audit = false, debug = false)
+#@todo
 
 GServer オブジェクトを生成します。
 
 --- in_service?(port, host = DEFAULT_HOST)
+#@todo
 
 与えられた host と port で GServer オブジェクトが同じプロセス内で
 サービス中なら真を返します。
 
 --- stop(port, host = DEFAULT_HOST)
+#@todo
 
 与えられた host と port に対応する GServer オブジェクトを停止します。
 
 == Instance Methods
 
 --- audit
+#@todo
 
 メソッド starting, connecting, disconnecting, stopping をそれぞれ定められた時に呼ぶなら true、そうでないなら false を返します。
 
 --- audit=(bool)
+#@todo
 
 true なら GServer はログを取るためのメソッド
 starting, connecting, disconnecting, stoppingを
 それぞれ定められた時に呼びます。
 
 --- connecting(client)
+#@todo
 
 audit が true に設定されているなら、クライアント接続時に呼ばれます。
 client はクライアントと接続している [[c:TCPSocket]] です。
 サブクラスでオーバーライドします。
 
 --- connections()
+#@todo
 
 現在接続しているクライアントの数を返します。
 
 --- disconnecting(clientPort)
+#@todo
 
 audit が true に設定されているなら、クライアントとの接続終了時に呼ばれます。
 clientPort は接続していたクライアントのポートです。
 サブクラスでオーバーライドします。
 
 --- debug
+#@todo
 
 デバッグモードなら true、そうでないなら false を返します。
 
 --- debug=(bool)
+#@todo
 
 デバッグモードにするかどうかを設定します。
 
 --- error(detail)
+#@todo
 
 debug が true に設定されている時、例外が発生すると呼ばれます。
 detail は例外オブジェクトです。protected メソッドです。
 
 --- host
+#@todo
 
 ホストを文字列で返します。
 
 --- join
+#@todo
 
 サーバのサービスを実行しているスレッドを join します。
 
 --- log(msg)
+#@todo
 
 文字列 msg をログに記録します。protected メソッドです。
 
 --- maxConnections
+#@todo
 
 受け付ける最大接続数を返します。
 
 --- port
+#@todo
 
 ポートを数で返します。
 
 --- serve(io)
+#@todo
 
 何もしません。サブクラスでオーバーライドします。
 
 --- shutdown
+#@todo
 
 GServer を停止します。
 
 --- start(maxConnections = -1)
+#@todo
 
 GServer を起動します。 0 より大きい maxConnections を与えたなら、
 最大接続数として設定されます。
 
 --- starting
+#@todo
 
 audit が true に設定されているなら、サーバ起動時に呼ばれます。
 サブクラスでオーバーライドします。
 
 --- stdlog
+#@todo
 
 ログを出力する先の [[c:IO]] オブジェクトを返します。デフォルトは $stderr です。
 
 --- stdlog=(io)
+#@todo
 
 ログを出力する先の [[c:IO]] オブジェクトを設定します。デフォルトは $stderr です。
 
 --- stop
+#@todo
 
 GServer をすぐに停止します。
 
 --- stopping
+#@todo
 
 audit が true に設定されているなら、サーバ停止時に呼ばれます。
 サブクラスでオーバーライドします。
 
 --- stopped?
+#@todo
 
 GServer が停止しているなら真を返します。
 #@end

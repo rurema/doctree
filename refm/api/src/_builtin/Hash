@@ -22,6 +22,7 @@ include Enumerable
 
 --- [](key,value,...)
 --- [](hash)
+#@todo
 
 新しいハッシュを生成します。一番目の形式では、引数は必ず偶数個指定
 しなければなりません。(奇数番目がキー、偶数番目が値)。
@@ -69,6 +70,7 @@ include Enumerable
 
 --- new([ifnone])
 --- new {|hash, key| ...}
+#@todo
 
 空の新しいハッシュを生成します。ifnone はキーに対
 応する値が存在しない時のデフォルト値です。
@@ -107,6 +109,7 @@ include Enumerable
 == Instance Methods
 
 --- [](key)
+#@todo
 
 key に関連づけられた値を返します。該当するキーが登
 録されていない時には、デフォルト値(設定されていない時には
@@ -116,16 +119,19 @@ nil) を返します。
 
 --- []=(key, value)
 --- store(key,value)
+#@todo
 
 key に対して value を関連づけます。value を返し
 ます。
 
 --- clear
+#@todo
 
 ハッシュの中身を空にします。self を返します。
 
 --- clone
 --- dup
+#@todo
 
 レシーバと同じ内容を持つ新しいハッシュを返します。フリーズしたハッ
 シュの clone は同様にフリーズされたハッシュを返しますが、
@@ -133,6 +139,7 @@ dup は内容の等しいフリーズされていないハッシュを返します。
 
 --- default
 --- default([key])
+#@todo
 
 ハッシュのデフォルト値を返します。
 
@@ -144,6 +151,7 @@ key の省略値は nil です。
 #@end
 
 --- default=(value)
+#@todo
 
 ハッシュのデフォルト値を value に設定します。対応する値が存
 在しないキーで検索した時にはこの値を返します。
@@ -151,6 +159,7 @@ key の省略値は nil です。
 value を返します。
 
 --- default_proc
+#@todo
 
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを返します。
 デフォルトの [[c:Proc]] を持たない場合 nil を返します。
@@ -163,6 +172,7 @@ value を返します。
 
 --- delete(key)
 --- delete(key) {|key| ... }
+#@todo
 
 key に対する関連を取り除きます。取り除かれた値を返しますが、
 key に対応する値が存在しない時には nil を返します。
@@ -171,6 +181,7 @@ key に対応する値が存在しない時には nil を返します。
 かった時に評価し、その結果を返します。
 
 --- reject {|key, value| ... }
+#@todo
 
 self を複製して、ブロックを評価した値が真になる要
 素を削除したハッシュを返します。
@@ -180,6 +191,7 @@ self を複製して、ブロックを評価した値が真になる要
 
 --- delete_if {|key, value| ... }
 --- reject! {|key, value| ... }
+#@todo
 
 key と value を引数としてブロックを評価した値が真であ
 る時、その要素を self から削除します。
@@ -190,6 +202,7 @@ reject! は、要素を削除しなかった場合には nil を返し、
 
 --- each {|key, value| ... }
 --- each_pair {|key, value| ... }
+#@todo
 
 key と value を引数としてブロックを評価します。
 self を返します。
@@ -220,21 +233,25 @@ each と each_pair ではブロックパラメータの受渡し方が異なります。
 #@end
 
 --- each_key {|key| ... }
+#@todo
 
 key を引数としてブロックを評価します。
 self を返します。
 
 --- each_value {|value| ... }
+#@todo
 
 valueを引数としてブロックを評価します。
 self を返します。
 
 --- empty?
+#@todo
 
 ハッシュが空の時真を返します。
 
 --- fetch(key[, default])
 --- fetch(key) {|key| ... }
+#@todo
 
 key に関連づけられた値を返します。該当するキーが登録されてい
 ない時には、引数 default が与えられていればその値を、ブロッ
@@ -250,11 +267,13 @@ key に関連づけられた値を返します。該当するキーが登録されてい
 --- include?(key)
 --- key?(key)
 --- member?(key)
+#@todo
 
 ハッシュが key をキーとして持つ時真を返します。
 
 --- has_value?(value)
 --- value?(value)
+#@todo
 
 ハッシュが value を値として持つ時真を返します。
 値の一致判定は == で行われます。
@@ -262,6 +281,7 @@ key に関連づけられた値を返します。該当するキーが登録されてい
 --- index(val)
 #@since 1.9.0
 --- key(val)
+#@todo
 #@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
@@ -277,6 +297,7 @@ Hash#index は version 1.9 では、((<obsolete>)) です。
 #@if (version < "1.9.0")
 --- indexes(key_1, ... , key_n)
 --- indices(key_1, ... , key_n)
+#@todo
 
 引数で指定されたキーを持つ値の配列を返します。
 
@@ -288,6 +309,7 @@ Hash#index は version 1.9 では、((<obsolete>)) です。
 #@end
 
 --- invert
+#@todo
 
 値からキーへのハッシュを返します。
 異なるキーに対して等しい値が登録されている場合の結果は不定であることに
@@ -298,11 +320,13 @@ Hash#index は version 1.9 では、((<obsolete>)) です。
   h.invert   #=> {200=>"d", 300=>"y", 0=>"a", 100=>"n"}
 
 --- keys
+#@todo
 
 全キーの配列を返します。
 
 --- length
 --- size
+#@todo
 
 ハッシュの要素の数を返します。
 
@@ -311,6 +335,7 @@ Hash#index は version 1.9 では、((<obsolete>)) です。
 --- merge(other) {|key, self_val, other_val| ... }
 --- merge!(other)
 --- merge!(other) {|key, self_val, other_val| ... }
+#@todo
 
 Hash#merge は、hash.dup.[[m:Hash#update]] と同じです。
 Hash#merge! は、[[m:Hash#update]] の別名です。
@@ -322,17 +347,20 @@ self と other に同じキーがあった場合はブロック付きか否かで
 #@end
 
 --- rehash
+#@todo
 
 キーのハッシュ値を再計算します。キーになっているオブジェクトのハッシュ
 値が変わってしまった場合、このメソッドを使ってハッシュ値を再計算しない
 限り、そのキーに対応する値を取り出すことができなくなります。
 
 --- replace(other)
+#@todo
 
 ハッシュの内容を other の内容で置き換えます。
 self を返します。
 
 --- shift
+#@todo
 
 ハッシュから要素をひとつ取り除き、[key,value] という配列とし
 て返します。
@@ -369,15 +397,18 @@ nil を、デフォルト値を持つならその値を返します(このとき、
 #@end
 
 --- to_a
+#@todo
 
 [key,value] からなる 2 要素の配列の配列を生成して返します。
 
 --- to_hash
+#@todo
 
 self を返します。
 
 --- update(other)
 --- update(other) {|key, self_val, other_val| ... }
+#@todo
 
 ハッシュの内容をマージします。重複するキーに対応する値は
 other の内容で上書きされます。
@@ -396,11 +427,13 @@ self[key] 、other[key] が渡されます。
 self を返します。
 
 --- values
+#@todo
 
 ハッシュの全値の配列を返します。
 
 #@if (version >= "1.8.0")
 --- values_at(key_1, ... , key_n)
+#@todo
 
 引数で指定されたキーに対応する値の配列を返します。キーに対応する値
 がなければ [[m:Hash#default]] の戻り値が使用されます。
@@ -413,6 +446,7 @@ self を返します。
 #@since 1.9.0
 #@# bc-rdoc: detected missing name: compare_by_identity
 --- compare_by_identity
+#@todo
 #@# => hsh
 
 Makes hsh to compare its keys by their identity, i.e. it will
@@ -427,6 +461,7 @@ consider exact same objects as same keys.
 
 #@# bc-rdoc: detected missing name: compare_by_identity?
 --- compare_by_identity?
+#@todo
 #@# => true or false
 
 Returns true if hsh will compare its keys by their identity.

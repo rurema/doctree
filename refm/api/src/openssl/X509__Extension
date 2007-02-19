@@ -26,6 +26,7 @@ X.509 v3 証明書の拡張領域のためのクラスです。[[c:OpenSSL::X509::Certificate]] オ
 == Class Methods
 
 --- new(oid, value, critical)
+#@todo
 Extension オブジェクトを生成します。oid には拡張領域の OID をあらわす
 [[c:OpenSSL::ASN1::ObjectId]] オブジェクト、あるいは OID の short name か
 long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
@@ -46,32 +47,39 @@ long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
 ---critical=(bool)
 #@end
 ---critical?
+#@todo
 
 クリティカルかどうかを設定します。
 
 ---oid
 #@since 1.8.1
 ---oid=(oid)
+#@todo
 #@end
 
 OID を文字列で設定します。
 
 ---to_der
+#@todo
 
 DER 形式に変換します。
 
 ---value
 #@since 1.8.1
 ---value=(value)
+#@todo
 #@end
 
 値を設定します。
 
 --- to_a
+#@todo
 
 --- to_h
+#@todo
 
 --- to_s
+#@todo
 
 = class OpenSSL::X509::ExtensionError < OpenSSL::OpenSSLError
 

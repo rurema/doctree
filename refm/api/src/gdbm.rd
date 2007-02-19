@@ -11,6 +11,7 @@ Hash クラスと全く同様に扱うことができます。
 --- new(dbname[, mode[, flags]])
 --- open(dbname[, mode[, flags]])
 --- open(dbname[, mode[, flags]]) {|db| ...}
+#@todo
 
 dbname で指定したデータベースをモードを
 mode に設定してオープンします。mode の省
@@ -44,31 +45,38 @@ GDBM::WRCREAT, GDBM::WRITER, GDBM::READER の順で試します。
 == Instance Methods
 
 --- [](key)
+#@todo
 
 key をキーとする値を返します。
 
 --- []=(key, value)
+#@todo
 
 key をキーとして、value を格納します。
 
 --- cachesize=(size)
+#@todo
 
 内部のキャッシュのサイズを指定します。詳しくは [[man:gdbm]] の GDBM_CACHESIZE の項を参照ください。
 
 --- clear
+#@todo
 
 DBM ファイルを空にします。
 
 --- close
+#@todo
 
 DBM ファイルをクローズします。以後の操作は例外を発生させます。
 
 #@since 1.8.3
 --- closed?
+#@todo
 #@end
 
 --- delete(key)
 --- delete(key) {|key| ... }
+#@todo
 
 key をキーとする項目を削除します。
 
@@ -77,34 +85,41 @@ key をキーとする項目を削除します。
 
 --- delete_if { |key, value|  ...  }
 --- reject! { |key, value|  ...  }
+#@todo
 
 ブロックを評価した値が真であれば該当する項目を削除します。
 
 --- each {|key, value|  ...  }
 --- each_pair {|key, value|  ...  }
+#@todo
 
 各要素に対するイテレータです。
 
 --- each_key {|key|  ...  }
+#@todo
 
 全ての key に対して繰り返すイテレータです。
 
 --- each_value {|value|  ...  }
+#@todo
 
 全ての value に対して繰り返すイテレータです。
 
 --- empty?
+#@todo
 
 データベースが空の時、真を返します。
 
 --- fastmode=(bool)
 --- syncmode=(bool)
+#@todo
 
 オープンしている GDBM オブジェクトのモードを変更します。下記の定数
 GDBM::FAST、GDBM::SYNC を参照してください。
 
 --- fetch(key[,ifnone])
 --- fetch(key) {|key| ... }
+#@todo
 
 [[m:Hash#fetch]] と同じです。
 
@@ -112,21 +127,25 @@ GDBM::FAST、GDBM::SYNC を参照してください。
 --- key?(key)
 --- include?(key)
 --- member?(key)
+#@todo
 
 key がデータベース中に存在する時、真を返します。
 
 --- has_value?(key)
 --- value?(value)
+#@todo
 
 value を値とする組がデータベース中に存在する時、真を返します。
 
 --- index(val)
+#@todo
 
 [[m:Hash#index]] と同じです。
 
 #@if (version < "1.9.0")
 --- indexes(key_1, ... )
 --- indices(key_1, ... )
+#@todo
 
 このメソッドはobsoleteです。
 
@@ -134,24 +153,29 @@ value を値とする組がデータベース中に存在する時、真を返します。
 #@end
 
 --- invert
+#@todo
 
 値からキーへのハッシュを返します。
 
 --- keys
+#@todo
 
 データベース中に存在するキー全てを含む配列を返します。
 
 --- length
 --- size
+#@todo
 
 データベース中の要素の数を返します。(注意:現在の実現では要素数を数
 えるためにデータベースを全部検索します)
 
 --- reject {|key, value| ... }
+#@todo
 
 self.to_hash.reject と同じです。ハッシュを返します。
 
 --- reorganize
+#@todo
 
 GDBM では、要素の削除を行っても DB ファイルのサイズは減少しません(削
 除によって空いた領域は次の格納のために取っておかれます、)。このメ
@@ -161,22 +185,27 @@ GDBM では、要素の削除を行っても DB ファイルのサイズは減少しません(削
 大量の削除を行ったときに、ディスクスペースの節約のために使用します。
 
 --- replace(other)
+#@todo
 
 DBM の内容を other の内容で置き換えます。
 other は each_pair メソッドを持つオブジェクトで
 なければなりません。
 
 --- select
+#@todo
 
 --- shift
+#@todo
 
 データベース中の要素を一つ取り出し、データベースから削除します。
 
 --- store(key, val)
+#@todo
 
 self[key]=val と同じです。key に対して val を格納します。
 
 --- sync
+#@todo
 
 要素の変更をファイルに反映します。FAST モード
 (GDBM#open() の第3引数にGDBM::FAST を指定)のときだけ意味があります。
@@ -184,15 +213,18 @@ self[key]=val と同じです。key に対して val を格納します。
 注) GNU gdbm version 1.8 以降より FAST モードがデフォルトになりました。
 
 --- to_a
+#@todo
 
 DBM の各要素を格納した配列を返します。返される配列の1つの要素は
 [key, val] です。(つまり配列の配列を返します)。
 
 --- to_hash
+#@todo
 
 DBM の各要素を格納したハッシュを返します。
 
 --- update(other)
+#@todo
 
 DBM と other の内容をマージします。重複するキーに対応する値は
 other の内容で上書きされます。
@@ -201,17 +233,20 @@ other は each_pair メソッドを持つオブジェクトでなければなりま
 せん。
 
 --- values
+#@todo
 
 データベース中に存在する値全てを含む配列を返します。
 
 == Constants
 
 --- VERSION
+#@todo
 
 libgdbm のバージョン情報の文字列です。
 
 
 --- FAST
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -221,6 +256,7 @@ libgdbm のバージョン情報の文字列です。
 です。
 
 --- SYNC
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -230,6 +266,7 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 この定数は libgdbm version 1.8.0 以降より有効です。
 
 --- NOLOCK
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -242,6 +279,7 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 
 #@if (version >= "1.8.2")
 --- READER
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 読み込みモードでオープンします。
@@ -249,6 +287,7 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 
 #@if (version >= "1.8.2")
 --- WRITER
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 書き込みモードでオープンします。
@@ -256,6 +295,7 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 
 #@if (version >= "1.8.2")
 --- WRCREAT
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 書き込みモードで、すでにファイルが存在しなかったら作ります。
@@ -263,6 +303,7 @@ Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
 
 #@if (version >= "1.8.2")
 --- NEWDB
+#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 書き込みモードで、すでにファイルが存在したら削除してから作り直します。

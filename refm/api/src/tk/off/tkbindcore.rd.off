@@ -6,6 +6,7 @@
 == メソッド:
 
 --- TkBindCore#bind(context, cmd=Proc.new, args=nil)
+#@todo
     ((|context|))で指定したイベントに対して((|cmd|))を登録します。
     ((|args|)) を省略すると((|cmd|))の実行時にイベントクラス
     ((<TkComm::Event>))のインスタンスが((|cmd|))の引数に渡されます。((|args|)) を指定
@@ -152,6 +153,7 @@
       Tk.mainloop
 
 --- TkBindCore#bind_append(context, cmd=Proc.new, args=nil)
+#@todo
     ((<TkBindCore#bind>))と同じですが、すでに同じ((|context|))にコールバッ
     ク関数が登録されていれば、((|cmd|))を追加で登録します。
 
@@ -159,9 +161,11 @@
     しては、((<TkWindow#bindtags>))も参照してください)。
 
 --- TkBindCore#bind_remove(context)
+#@todo
     ((|context|))に登録されたコールバック関数を取り除きます。
 
 --- TkBindCore#bindinfo(context=nil)
+#@todo
     イベント((|context|))に登録されたイベントコールバックの情報を配列にし
     て返します。返される配列の要素は((<TkBindCore#bind>)) の第2,3引数の配列です。
 

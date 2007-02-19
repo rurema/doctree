@@ -7,22 +7,27 @@ include TkItemConfigOptkeys
 == Instance Methods
 
 --- current_itemconfiginfo(tagOrId, slot = nil)
+#@todo
 
 
 
 --- itemcget(tagOrId, option)
+#@todo
 
 
 
 --- itemconfiginfo(tagOrId, slot = nil)
+#@todo
 
 
 
 --- itemconfigure(tagOrId, slot, value = Tk::None)
+#@todo
 
 
 
 --- tagid(tagOrId)
+#@todo
 
 
 

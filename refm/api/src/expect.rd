@@ -8,6 +8,7 @@ Expect ¥é¥¤¥Ö¥é¥ê¤Ï¡¢tcl ¤Î expect ¥Ñ¥Ã¥±¡¼¥¸¤È»÷¤¿¤è¤¦¤Êµ¡Ç½¤ò IO ¥¯¥é¥¹¤ËÄÉ²Ã¤
 == Instance Methods
 --- expect(pat, [timeout])
 --- expect(pat, [timeout]) {|arry| ... }
+#@todo
 
 pattern ¤Ï String ¤« Regexp ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¡¢timeout ¤Ï Fixnum
 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¹¡£timeout ¤Ï¾ÊÎ¬¤Ç¤­¤Þ¤¹¡£

@@ -10,6 +10,7 @@ include Comparable
 == Class Methods
 
 --- new(path)
+#@todo
 
 path に関する File::Stat オブジェクトを生成して返します。
 [[m:File.stat]] と同じです。
@@ -17,11 +18,13 @@ path に関する File::Stat オブジェクトを生成して返します。
 == Instance Methods
 
 --- <=>(o)
+#@todo
 
 ファイルの最終更新時刻を比較します。self が other よりも
 新しければ正の数を、等しければ 0 を古ければ負の数を返します。
 
 --- ftype
+#@todo
 ファイルのタイプを表す文字列を返します。文字列は以下のうちの
 いずれかです。
 
@@ -45,94 +48,132 @@ path に関する File::Stat オブジェクトを生成して返します。
 #@end
 
 --- dev
+#@todo
 デバイス番号(ファイルシステム)
 
 #@since 1.8.2
 --- dev_major
+#@todo
 dev の major 番号部
 --- dev_minor
+#@todo
 dev の minor 番号部
 #@end
 
 --- ino
+#@todo
 i-node 番号
 --- mode
+#@todo
 ファイルモード
 --- nlink
+#@todo
 ハードリンクの数
 --- uid
+#@todo
 オーナーのユーザID
 --- gid
+#@todo
 オーナーのグループID
 --- rdev
+#@todo
 デバイスタイプ(スペシャルファイルのみ)
 --- rdev_major
+#@todo
 rdev の major 番号部
 --- rdev_minor
+#@todo
 rdev の minor 番号部
 --- size
+#@todo
 ファイルサイズ(バイト単位)
 --- blksize
+#@todo
 望ましいI/Oのブロックサイズ
 --- blocks
+#@todo
 割り当てられているブロック数
 --- atime
+#@todo
 最終アクセス時刻
 --- mtime
+#@todo
 最終更新時刻
 --- ctime
+#@todo
 最終状態変更時刻
 (状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
 
 --- directory?
+#@todo
 ディレクトリの時に真
 --- readable?
+#@todo
 読み込み可能な時に真
 --- readable_real?
+#@todo
 実ユーザ/実グループによって読み込み可能な時に真
 --- writable?
+#@todo
 書き込み可能な時に真
 --- writable_real?
+#@todo
 実ユーザ/実グループによって書き込み可能な時に真
 --- executable?
+#@todo
 実効ユーザ/グループIDで実行できる時に真
 --- executable_real?
+#@todo
 実ユーザ/グループIDで実行できる時に真
 --- file?
+#@todo
 通常ファイルの時に真
 --- zero?
+#@todo
 サイズが0である時に真
 --- size?
+#@todo
 サイズ(0の時には偽)
 --- owned?
+#@todo
 自分のものである時に真
 --- grpowned?
+#@todo
 グループIDが実効グループIDと等しい時に真
 
 補助グループIDは考慮されません。
 
 --- pipe?
+#@todo
 無名パイプおよび名前つきパイプ(FIFO)の時に真
 --- symlink?
+#@todo
 シンボリックリンクである時に真
 --- socket?
+#@todo
 ソケットの時に真
 
 --- blockdev?
+#@todo
 ブロックスペシャルファイルの時に真
 --- chardev?
+#@todo
 キャラクタスペシャルファイルの時に真
 
 --- setuid?
+#@todo
 setuidされている時に真
 --- setgid?
+#@todo
 setgidされている時に真
 --- sticky?
+#@todo
 stickyビットが立っている時に真
 
 #@since 1.9.0
 #@# bc-rdoc: detected missing name: world_readable?
 --- world_readable? => fixnum or nil
+#@todo
 
 If stat is readable by others, returns an integer representing
 the file permission bits of stat. Returns nil otherwise. The
@@ -144,6 +185,7 @@ stat(2).
 
 #@# bc-rdoc: detected missing name: world_writable?
 --- world_writable? => fixnum or nil
+#@todo
 
 If stat is writable by others, returns an integer representing
 the file permission bits of stat. Returns nil otherwise. The

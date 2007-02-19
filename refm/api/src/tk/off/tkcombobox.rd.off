@@ -26,13 +26,18 @@
 == メソッド:
 
 --- TkCombobox#initialize_composite(keys=nil)
+#@todo
 
 --- TkCombobox#doubleclicked_scrollbox(y)
+#@todo
 
 --- TkCombobox#cmd_scrollbox
+#@todo
 
 --- TkCombobox#show_scrollbox(entries = nil)
+#@todo
 
 --- TkCombobox#hide_scrollbox
+#@todo
 
 =end

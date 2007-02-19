@@ -19,20 +19,28 @@ see also
 = class WIN32OLE < Object
 == Class Methods
 --- new(oleserver)
+#@todo
 
 --- codepage
+#@todo
 
 --- codepage=
+#@todo
 
 --- connect(oleserver)
+#@todo
 
 --- const_load(ole [, obj])
+#@todo
 
 --- ole_free(obj)
+#@todo
 
 --- ole_reference_count(obj)
+#@todo
 
 --- ole_show_help(info [, helpcontext])
+#@todo
 
 
 == Instance Methods
@@ -53,11 +61,14 @@ see also
 --- ole_obj_help
 --- ole_put_methods
 --- setproperty(property, key, val)
+#@todo
 
 == Constants
 --- VERSION
+#@todo
 
 --- ARGV
+#@todo
 
 --- CP_ACP
 --- CP_MACCP
@@ -66,6 +77,7 @@ see also
 --- CP_THREAD_ACP
 --- CP_UTF7
 --- CP_UTF8
+#@todo
 
 
 
@@ -93,138 +105,198 @@ see also
 --- VT_UNKNOWN
 --- VT_USERDEFINED
 --- VT_VARIANT
+#@todo
 
 = class WIN32OLERuntimeError < RuntimeError
 
 = class WIN32OLE_EVENT < Object
 == Class Methods
 --- new(ole, interface)
+#@todo
 
 --- message_loop
+#@todo
 
 == Instance Methods
 --- on_event([event]) {...}
+#@todo
 
 --- on_event_with_outargs([event]) {...}
+#@todo
 
 = class WIN32OLE_METHOD < Object
 == Class Methods
 --- new(win32ole_type, method)
+#@todo
 
 == Instance Methods
 --- dispid
+#@todo
 
 --- event?
+#@todo
 
 --- event_interface
+#@todo
 
 --- helpcontext
+#@todo
 
 --- helpfile
+#@todo
 
 --- helpstring
+#@todo
 
 --- invkind
+#@todo
 
 --- invoke_kind
+#@todo
 
 --- name
+#@todo
 
 --- offset_vtbl
+#@todo
 
 --- params
+#@todo
 
 --- return_type
+#@todo
 
 --- return_type_detail
+#@todo
 
 --- return_vtype
+#@todo
 
 --- size_opt_params
+#@todo
 
 --- size_params
+#@todo
 
 --- to_s
+#@todo
 
 --- visible?
+#@todo
 
 = class WIN32OLE_PARAM < Object
 == Instance Methods
 --- default
+#@todo
 
 --- input?
+#@todo
 
 --- name
+#@todo
 
 --- ole_type
+#@todo
 
 --- ole_type_detail
+#@todo
 
 --- optional?
+#@todo
 
 --- output?
+#@todo
 
 --- retval?
+#@todo
 
 --- to_s
+#@todo
 
 = class WIN32OLE_TYPE < Object
 == Class Methods
 --- new(typelibrary, class)
+#@todo
 
 --- ole_classes(typelibrary)
+#@todo
 
 --- progids
+#@todo
 
 --- typelibs
+#@todo
 
 == Instance Methods
 --- guid
+#@todo
 
 --- helpcontext
+#@todo
 
 --- helpfile
+#@todo
 
 --- helpstring
+#@todo
 
 --- major_version
+#@todo
 
 --- minor_version
+#@todo
 
 --- name
+#@todo
 
 --- ole_methods
+#@todo
 
 --- ole_type
+#@todo
 
 --- progid
+#@todo
 
 --- src_type
+#@todo
 
 --- to_s
+#@todo
 
 --- typekind
+#@todo
 
 --- variables
+#@todo
 
 --- visible?
+#@todo
 
 = class WIN32OLE_VARIABLE < Object
 == Instance Methods
 --- name
+#@todo
 
 --- ole_type
+#@todo
 
 --- ole_type_detail
+#@todo
 
 --- to_s
+#@todo
 
 --- value
+#@todo
 
 --- variable_kind
+#@todo
 
 --- varkind
+#@todo
 
 --- visible?
+#@todo
 
 #@end

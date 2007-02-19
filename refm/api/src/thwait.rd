@@ -6,6 +6,7 @@ provides synchronization for multiple threads.
 == Class Methods
 
 --- all_waits(thread1, ...)
+#@todo
 
 waits until all of specified threads are terminated.
 if a block is supplied for the method, evaluates it for
@@ -30,36 +31,44 @@ each thread termination.
            #<Thread:0x401a17d4 dead>
 
 --- new(thread1, ...)
+#@todo
 
 creates synchronization object, specifying thread(s) to wait.
 
 == Instance Methods
 
 --- threads
+#@todo
 
 list threads to be synchronized
 
 --- empty?
+#@todo
 
 is there any thread to be synchronized.
 
 --- finished?
+#@todo
 
 is there already terminated thread.
 
 --- join(thread1, ...)
+#@todo
 
 wait for specified thread(s).
 
 --- join_nowait(threa1, ...)
+#@todo
 
 specifies thread(s) to wait.  non-blocking.
 
 --- next_wait
+#@todo
 
 waits until any of specified threads is terminated.
 
 --- all_waits
+#@todo
 
 waits until all of specified threads are terminated.
 if a block is supplied for the method, evaluates it for

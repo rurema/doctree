@@ -4,6 +4,7 @@ rational を require すると [[c:Integer]] のメソッドが以下のように再定義される。
 = reopen Kernel
 == Private Instance Methods
 --- Rational(a, b)
+#@todo
 [[c:Rational]] オブジェクトを生成する。
 
 Creates a Rational number (i.e. a fraction).  +a+ and +b+ should be Integers:
@@ -21,6 +22,7 @@ produces errors:
 == Instance Methods
 
 --- /(other)
+#@todo
 
 除算。
 
@@ -31,6 +33,7 @@ produces errors:
     ただし、いずれも、other == 0 の時は、[[c:ZeroDivisionError]]となる。
 
 --- **(other)
+#@todo
 
 べき乗。
 
@@ -47,16 +50,19 @@ produces errors:
 == Instance Methods
 
 --- power!(other)
+#@todo
 
 [[lib:rational]]で再定義される前の[[m:Integer#**]]の別名。
 other が正または 0 の整数 (Integer) ならば、
 整数 (Integer) を、それ以外なら、浮動小数 (Float) を返す。
 
 --- to_r
+#@todo
 対応する有理数 (Rational) を返す。
 Rational(self, 1) と同じ。
 
 --- gcd(n)
+#@todo
 
 self と n の最大公約数を Fixnum として返す。
 self や n が負の場合は、正に変換してから計算する。
@@ -65,6 +71,7 @@ self や n が負の場合は、正に変換してから計算する。
    19.gcd 36            # -> 1
 
 --- lcm(n)
+#@todo
 
 self と n の最小公倍数を返す。
 self や n が負の場合は、正に変換してから計算する。
@@ -73,16 +80,19 @@ self や n が負の場合は、正に変換してから計算する。
    6.lcm 9        # -> 18
 
 --- gcdlcm(int)
+#@todo
 
 最大公約数と最小公倍数の配列 [self.gcd, self.lcm] を返します。
 
    6.gcdlcm 9     # -> [3, 18]
 
 --- numerator
+#@todo
 In an integer, the value is the numerator of its rational equivalent.
 Therefore, this method returns self.
 
 --- denominator
+#@todo
 In an integer, the denominator is 1.  Therefore, this method returns 1.
 
 
@@ -90,28 +100,34 @@ In an integer, the denominator is 1.  Therefore, this method returns 1.
 == Instance Methods
 
 --- quo(other)
+#@todo
 If Rational is defined, returns a Rational number instead of a Fixnum.
 
 --- **(other)
 --- rpower (other)
+#@todo
 Returns a Rational number if the result is in fact rational (i.e. other < 0).
 
 = reopen Fixnum
 == Instance Methods
 --- power!(other)
+#@todo
 
 = redefine Bignum
 == Instance Methods
 --- quo(other)
+#@todo
 If Rational is defined, returns a Rational number instead of a Bignum.
 
 --- **(other)
 --- rpower(other)
+#@todo
 Returns a Rational number if the result is in fact rational (i.e. +other+ < 0).
 
 = reopen  Bignum
 == Instance Methods
 --- power!(other)
+#@todo
 
 = class Rational < Numeric
 
@@ -124,6 +140,7 @@ Rational に変換してから演算子を適用します。冪乗は例外です。
 
 == Class Methods
 --- new!(num, den = 1)
+#@todo
 
 Implements the constructor. This method does not reduce to lowest
 terms or check for division by zero. Therefore #Rational() should
@@ -132,6 +149,7 @@ be preferred in normal use.
   puts Rational.new!(6,10) #=> 6/10
 
 --- reduce(num, den = 1)
+#@todo
 
 Reduces the given numerator and denominator to their lowest terms.
 Use Rational() instead.
@@ -139,14 +157,17 @@ Use Rational() instead.
 == Instance Methods
 
 --- numerator
+#@todo
 
 分子を Fixnum として返します。
 
 --- denominator
+#@todo
 
 分母を Fixnum として返します。
 
 --- +(other)
+#@todo
 
 和を計算します。
 
@@ -155,10 +176,12 @@ Use Rational() instead.
   Rational(3, 4) + 2.0             # => 2.75
 
 --- -(other)
+#@todo
 
 差を計算します。
 
 --- *(other)
+#@todo
 
 積を計算します。
 
@@ -169,6 +192,7 @@ Use Rational() instead.
   r * Rational(1,2)    # -> Rational(3,8)
 
 --- /(other)
+#@todo
 
 商を計算します。
 other が 0 の時は、例外 [[c:ZeroDivisionError]] を投げます。
@@ -178,6 +202,7 @@ other が 0 の時は、例外 [[c:ZeroDivisionError]] を投げます。
   Rational(3, 4) / 2.0            # => 0.375
 
 --- %(other)
+#@todo
 
 剰余を計算します。絶対値が self の絶対値を越えない、符合が self と同じ
 Numeric を返します。
@@ -187,6 +212,7 @@ Numeric を返します。
   Rational(3, 4) % 2.0             # => 0.75
 
 --- **(other)
+#@todo
 
 冪を計算します。
 
@@ -195,6 +221,7 @@ Numeric を返します。
   Rational(3, 4) ** 2.0            # => 0.5625
 
 --- divmod(other)
+#@todo
 
 self を other で割った、商と余りの配列を返します。
 商は Fixnum、余りは絶対値が other の絶対値を越えず、符合が other と同じ
@@ -209,22 +236,27 @@ Numeric です。[[m:Numeric#divmod]] も参照して下さい。
  Rational(9,4).divmod(2.0)            # => [1, 0.25]
 
 --- abs
+#@todo
 
 self が正なら self、負なら -1 * self を返します。
 
 --- <=>(other)
+#@todo
 
 other と比べて self が大きいなら 1、同じなら 0、小さいなら -1 を返します。
 
 --- to_i
+#@todo
 
 [[c:Fixnum]] に変換します。
 
 --- to_f
+#@todo
 
 [[c:Float]] に変換します。
 
 --- to_s
+#@todo
 
 文字列に変換します。
 

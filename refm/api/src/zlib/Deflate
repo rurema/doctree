@@ -5,6 +5,7 @@
 == Class Methods
 
 --- deflate(string[, level])
+#@todo
 
 string を圧縮します。level の有効な値は
 Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
@@ -21,6 +22,7 @@ Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
   end
 
 --- new([level[, windowBits[, memlevel[, strategy]]]])
+#@todo
 
 圧縮ストリームを作成します。各引数の詳細は zlib.h を
 参照して下さい。nil の場合はデフォルトの値を使用します。
@@ -28,10 +30,12 @@ Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
 == Instance Methods
 
 --- clone
+#@todo
 
 圧縮ストリームを複製します。
 
 --- deflate(string[, flush])
+#@todo
 
 string を圧縮ストリームに入力します。処理後、ストリームからの
 出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
@@ -42,6 +46,7 @@ Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
 詳しくは zlib.h を参照して下さい。
 
 --- << string
+#@todo
 
 [[m:Zlib::Deflate#deflate]] と同じように string を
 圧縮ストリームに入力しますが、Zlib::Deflate オブジェクト
@@ -49,22 +54,26 @@ Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
 出力バッファに保存されます。
 
 --- flush([flush])
+#@todo
 
 deflate('', flush) と同じです。flush が
 省略された時は [[unknown:Zlib::SYNC_FLUSH|Zlib/Zlib::SYNC_FLUSH]] が使用されます。
 このメソッドはスクリプトの可読性のために提供されています。
 
 --- finish
+#@todo
 
 圧縮ストリームを終了します。deflate('', Zlib::FINISH) と同じです。
 
 --- params(level, strategy)
+#@todo
 
 圧縮ストリームの設定を変更します。詳しくは zlib.h を
 参照して下さい。設定の変更に伴うストリームからの出力は
 出力バッファに保存されます。
 
 --- set_dictionary(string)
+#@todo
 
 圧縮に用いる辞書を指定します。string を返します。
 このメソッドは [[m:Zlib::Deflate.new]], [[m:Zlib::ZStream#reset]]

@@ -20,62 +20,82 @@ RSS::NotSetError例外が発生します．どの値も設定していな
 
 --- about
 --- about=()
+#@todo
 
 --- title
 --- title=()
+#@todo
 
 --- link
 --- link=()
+#@todo
 
 --- description
 --- description=()
+#@todo
 
 --- language
 --- language=()
+#@todo
 
 --- copyright
 --- copyright=()
+#@todo
 
 --- managingEditor
 --- managingEditor=()
+#@todo
 
 --- webMaster
 --- webMaster=()
+#@todo
 
 --- rating
 --- rating=()
+#@todo
 
 --- docs
 --- docs=()
+#@todo
 
 --- date
 --- date=()
+#@todo
 
 --- pubDate
+#@todo
      maker.channel.dateの別名です．
 
 --- pubDate=()
+#@todo
      maker.channel.date=の別名です．
 
 --- lastBuildDate
 --- lastBuildDate=()
+#@todo
 
 --- generator
 --- generator=()
+#@todo
 
 --- ttl
 --- ttl=()
+#@todo
 
 --- categories
+#@todo
      categoriesを返します．
 
 --- cloud
+#@todo
      cloudを返します．
 
 --- skipDays
+#@todo
      skipDaysを返します．
 
 --- skipHours
+#@todo
      skipHoursを返します．
 
 = class RSS::Maker::RSS09::Channel < RSS::Maker::ChannelBase

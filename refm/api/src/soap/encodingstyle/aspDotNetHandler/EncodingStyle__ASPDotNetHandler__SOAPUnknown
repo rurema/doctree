@@ -5,13 +5,17 @@
 == Class Methods
 
 --- new(handler, elename)
+#@todo
 
 == Instance Methods
 
 --- as_struct
+#@todo
 
 --- as_string
+#@todo
 
 --- as_nil
+#@todo
 
 #@end

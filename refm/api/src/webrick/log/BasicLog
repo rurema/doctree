@@ -3,46 +3,66 @@
 == Class Methods
 
 --- new(log_file = nil, level = nil)
+#@todo
 
 == Instance Methods
 
 --- level
 --- level=(level)
+#@todo
 
 --- close
+#@todo
 
 --- log(level, data)
+#@todo
 
 --- <<(obj)
+#@todo
 
 --- fatal(msg)
+#@todo
 
 --- error(msg)
+#@todo
 
 --- warn(msg)
+#@todo
 
 --- info(msg)
+#@todo
 
 --- debug(msg)
+#@todo
 
 --- fatal?
+#@todo
 
 --- error?
+#@todo
 
 --- warn?
+#@todo
 
 --- info?
+#@todo
 
 --- debug?
+#@todo
 
 == Constants
 
 --- FATAL
+#@todo
 
 --- ERROR
+#@todo
 
 --- WARN
+#@todo
 
 --- INFO
+#@todo
 
 --- DEBUG
+#@todo

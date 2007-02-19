@@ -20,6 +20,7 @@
 == メソッド:
 
 --- TkLabel#textvariable(var)
+#@todo
     ((<TkVariable>))のインスタンス((|var|))の内容をラベルにします。
     ((|var|))の内容が変われば自動的に表示されるラベルも変化します。
 
@@ -68,7 +69,9 @@
 == オプション:
 
 --- TkLabel#height
+#@todo
 
 --- TkLabel#width
+#@todo
 
 =end

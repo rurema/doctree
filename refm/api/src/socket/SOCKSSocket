@@ -6,6 +6,7 @@
 
 --- open(host, service)
 --- new(host, service)
+#@todo
 
 host で指定したホストの service で指定したポートと接続したソケッ
 トを返します。host はホスト名、または octet decimal
@@ -16,5 +17,6 @@ host で指定したホストの service で指定したポートと接続したソケッ
 == Instance Methods
 
 --- close
+#@todo
 
 ソケットを閉じます。

@@ -5,17 +5,23 @@
 == Class Methods
 
 --- new(ns, name, node, encodingstyle)
+#@todo
 
 == Instance Methods
 
 --- node
+#@todo
 
 --- name
+#@todo
 
 --- ns
+#@todo
 
 --- encodingstyle
+#@todo
 
 --- node=(node)
+#@todo
 
 #@end

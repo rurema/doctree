@@ -12,6 +12,7 @@
 
 --- Tk::Scrollable#xscrollcommand(cmd=Proc.new)
 --- Tk::Scrollable#yscrollcommand(cmd=Proc.new)
+#@todo
     (({Tk::Scrollable}))を(({include}))しているウィジェットは、自身が
     スクロールされるときに、その表示位置を引数にコールバック関数
     ((|cmd|))を実行します。主に表示位置に応じてスクロールバーを移動さ
@@ -62,6 +63,7 @@
 
 --- Tk::Scrollable#xview(*index)
 --- Tk::Scrollable#yview(*index)
+#@todo
     ((-見直すこと-))
     ウィジェットの表示領域を変更します。主にスクロールバー
     ((<TkScrollbar>))との連動のために((<TkScrollbar#command>))のブロッ
@@ -109,6 +111,7 @@
 
 --- Tk::Scrollable#xscrollbar(bar=nil)
 --- Tk::Scrollable#yscrollbar(bar=nil)
+#@todo
     ウィジェットとスクロールバーの連動の指定は、
     ((<Tk::Scrollable#xscrollcommand>))、((<Tk::Scrollable#xview>))、
     ((<TkScrollbar#command>))、((<TkScrollbar#set>))を組み合わせる事で

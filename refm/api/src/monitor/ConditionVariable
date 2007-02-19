@@ -7,18 +7,22 @@ MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 == Instance Methods
 
 --- broadcast
+#@todo
 
 待っている全てのスレッドの実行を再開します。nil を返します。
 
 --- count_waiters
+#@todo
 
 待っているスレッドの数を返します。
 
 --- signal
+#@todo
 
 待っているスレッドがあれば実行を再開させます。nil を返します。
 
 --- wait(timeout = nil)
+#@todo
 
 現在のスレッドを停止します。timeout を与えない場合、
 ConditionVariable#signal で起こされるまでスレッドは停止し続けます。
@@ -29,12 +33,14 @@ true を返します。timeout が与えられていて待ち時間が timeout を
 越えた場合は false を返します。
 
 --- wait_while { ... }
+#@todo
 
 block が真を返している間は ConditionVariable#signal で起こされても
 スレッドを停止し続けます。 block が偽を返すとスレッドを再開します。
 true を返します。
 
 --- wait_until { ... }
+#@todo
 
 block が偽を返している間は ConditionVariable#signal で起こされても
 スレッドを停止し続けます。block が真を返すとスレッドを再開します。

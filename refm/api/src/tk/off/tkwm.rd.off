@@ -14,6 +14,7 @@
 
 --- Tk::Wm#aspect
 --- Tk::Wm#aspect(min_w, min_h, max_w, max_h)
+#@todo
     ウィンドウの縦横の大きさの比を設定します。引数には4つの整数を指定し、
     最小の幅／高さの比が((|min_w|))/((|min_h|))になり、最大の比が
     ((|max_w|))/((|max_h|))になります。このときの戻り値は(({nil}))です。
@@ -39,6 +40,7 @@
          []
 
 --- Tk::Wm#client(name=None)
+#@todo
     スクリプトを実行しているホスト名が((|name|))であることをウィンドウマネー
     ジャに教えます((-？本当？属性(({WM_CLIENT_MACHINE}))を調べない
     と・・・-))。このときの戻り値は空文字列(({""}))です。
@@ -59,13 +61,17 @@
          ""
 
 --- Tk::Wm#colormapwindows(*args)
+#@todo
 
 --- Tk::Wm#wm_command(value=None)
+#@todo
 
 --- Tk::Wm#deiconify
+#@todo
     ウィンドウを見える状態にします。((<Tk::Wm#withdraw>))、((<Tk::Wm#iconify>))
 
 --- Tk::Wm#focusmodel(model=None)
+#@todo
     ((|model|))が"active"である場合、たとえ((<フォーカス>))が他のアプリケー
     ション上にあっても入力フォーカスを要求します((-実際にやってみると入力
     フォーカスが得られなくなった-))
@@ -88,6 +94,7 @@
       Tk.mainloop
 
 --- Tk::Wm#frame
+#@todo
     ウィンドウのフレーム(ウィンドウマネージャが付けるタイトルバーの部分)の
     ((<リソースID>))を返します。((<TkWinfo.id>))
 
@@ -105,6 +112,7 @@
          "0xc001dd"
 
 --- Tk::Wm#geometry(geom=nil)
+#@todo
     ウィンドウの((<ジオメトリ>))を設定します。
     引数が省略された場合は現在のジオメトリを返します。
 
@@ -123,6 +131,7 @@
 
 --- Tk::Wm#grid
 --- Tk::Wm#grid(base_width, base_height, width_inc, height_inc)
+#@todo
     ウィンドウをリサイズするときの増減を設定します。((|base_width|))、
     ((|base_height|))には、基本の大きさ(デフォルトでは200x200)
     (((<TkWinfo.reqheight>)), ((<TkWinfo.reqwidth>)))が何グリッドであるか
@@ -151,6 +160,7 @@
          []
 
 --- Tk::Wm#group(leader=None)
+#@todo
     引数を指定するとウィンドウ((|leader|))と同じグループになります。グルー
     プリーダがアイコン化されたときに同じグループに属するウィンドウもアイコ
     ン化されます(ウィンドウマネージャによっては非表示になったり、何もなら
@@ -173,6 +183,7 @@
          nil
 
 --- Tk::Wm#iconbitmap(bitmap=None)
+#@todo
     アイコンに表示するビットマップを((|bitmap|))に設定します。
 
     引数に(({nil}))を指定するとアイコンのビットマップの設定を取り消します。
@@ -189,19 +200,23 @@
          "question"
 
 --- Tk::Wm#iconify
+#@todo
     ウィンドウをアイコン状態にします。((<Tk::Wm#deiconify>))、((<Tk::Wm#withdraw>))
 
 --- Tk::Wm#iconmask(bitmap=None)
+#@todo
     アイコンのマスクを((|bitmap|))で設定します。
     引数に(({nil}))を指定すると設定を取り消します。
     引数が省略された場合は現在の設定値を返します。
 
 --- Tk::Wm#iconname(str=None)
+#@todo
     アイコンに表示する文字列を((|str|))にします。
     引数に(({nil}))を指定すると設定を取り消します。
     引数が省略された場合は現在の設定値を返します。
 
 --- Tk::Wm#iconposition(x=nil, y=nil)
+#@todo
     アイコンの位置を指定します。
 
       require "tk"
@@ -216,6 +231,7 @@
          [100, 100]
 
 --- Tk::Wm#iconwindow(icon=nil)
+#@todo
     ウィンドウ((|icon|))をアイコンにします。このときの戻り値は(({nil}))です。
 
     引数に(({nil}))を指定すると設定を取り消します。
@@ -236,6 +252,7 @@
 
 --- Tk::Wm#maxsize
 --- Tk::Wm#maxsize(width, height)
+#@todo
     ウィンドウの最大サイズを設定します。引数が省略された場合、現在の設定値を
     配列で返します。
 
@@ -260,12 +277,14 @@
 
 --- Tk::Wm#minsize
 --- Tk::Wm#minsize(width, height)
+#@todo
     ウィンドウの最小サイズを設定します。引数が省略された場合、現在の設定値を
     配列で返します。
 
     ウィンドウの最小サイズのデフォルト値は1x1です。
 
 --- Tk::Wm#overrideredirect(bool=None)
+#@todo
     引数((|bool|))に(({true}))を指定するとウィンドウをウィンドウマネージャ
     の管理下に置きません。デフォルトは(({false}))です。引数を省略したとき
     は現在の設定値を返します。
@@ -281,6 +300,7 @@
          true
 
 --- Tk::Wm#positionfrom(who=None)
+#@todo
     ((|who|))は、"program", "user" またはこれらの短縮名です。"user"の場合
     ウィンドウの配置はユーザの指定(((<Tk::Wm#geometry>))による指定も含みます)に従
     います((-本当に？-))。
@@ -302,6 +322,7 @@
          "program"
 
 --- Tk::Wm#protocol(name=nil, cmd=nil)
+#@todo
     ウィンドウマネージャから((|name|))で指定したメッセージを受け取ったときに
     ((<Proc>))オブジェクト((|cmd|))を実行するようにします。
 
@@ -335,6 +356,7 @@
 
 --- Tk::Wm#resizable
 --- Tk::Wm#resizable(width, height)
+#@todo
     ウィンドウ(({self}))の幅と高さがユーザにより変更可能かどうかを設定しま
     す。((|width|)), ((|height|)) は(({true}))/(({false}))で指定します。
 
@@ -343,6 +365,7 @@
     (({true}))/(({false}))です。
 
 --- Tk::Wm#sizefrom(who=None)
+#@todo
     ((|who|))は、"program", "user" またはこれらの短縮名です。"user"の場合
     ウィンドウのサイズはユーザの指定(((<Tk::Wm#geometry>))による指定も含みます)に
     従います((-本当に？-))。
@@ -366,10 +389,12 @@
          "program"
 
 --- Tk::Wm#state
+#@todo
     ウィンドウ(({self}))の状態を"normal", "iconic", "withdraw", "icon"の何
     れかで返します。
 
 --- Tk::Wm#title(str=None)
+#@todo
     ((|str|))が指定された場合、ウィンドウ(({self}))の((<タイトル>))を
     ((|str|))にします。このときのメソッドの戻り値は空文字列(({""}))です。
 
@@ -394,6 +419,7 @@
          "foo"
 
 --- Tk::Wm#transient(master=None)
+#@todo
     ウィンドウ(({self}))を((|master|))ウィンドウの
     ((<トランジェントウィンドウ>))にします。
 
@@ -410,6 +436,7 @@
          #<TkRoot: @path=".">
 
 --- Tk::Wm#withdraw
+#@todo
     ウィンドウ(({self}))を見えなくします。((<Tk::Wm#deiconify>))、((<Tk::Wm#iconify>))
 
 =end

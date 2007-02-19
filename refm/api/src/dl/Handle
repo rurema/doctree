@@ -4,6 +4,7 @@
 
 --- new(lib)
 --- new(lib) {|handle| ... }
+#@todo
 
 ライブラリ lib をオープンし、Handle オブジェクト handle を返します。
 
@@ -14,16 +15,19 @@
 == Instance Methods
 
 --- close
+#@todo
 
 Handle.new(lib) によってオープンされたハンドルをクローズします。
 
 --- enable_close
 --- disable_close
+#@todo
 
 GC によるオブジェクトの回収時に、ハンドルをクローズするかどうかを指定します。
 
 --- sym(func, prototype = "0")
 --- [](func, prototype = nil)
+#@todo
 
 関数やグローバル変数 func へのポインタを取得し、
 [[c:DL::Symbol]] オブジェクトや [[c:DL::PtrData]] オブジェクトを返します。
@@ -32,6 +36,8 @@ prototype は型修飾からなる文字列で関数のプロトタイプを示します。
 class [[c:DL]] "Type Specifiers" も参照。
 
 --- to_i
+#@todo
 
 --- to_ptr
+#@todo
 

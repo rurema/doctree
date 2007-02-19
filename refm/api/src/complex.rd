@@ -61,23 +61,29 @@ Vector および Matrix のそれぞれの項目を参照してください。
 
 --- new(r,i)
 --- new!(r,i=0)
+#@todo
 
 実部が r、虚部が i である複素数を生成します。
 
 --- polar(r, theta)
+#@todo
 
 == Instance Methods
 
 --- +(c)
+#@todo
 複素数 c を加えた結果を返します。
 
 --- -(c)
+#@todo
 複素数 c を減じた結果を返します。
 
 --- *(c)
+#@todo
 複素数 c を乗じた結果を返します。
 
 --- /(c)
+#@todo
 複素数 c で除した結果を返します。
 
   z1 = a + b * i
@@ -98,6 +104,7 @@ Vector および Matrix のそれぞれの項目を参照してください。
   
 
 --- %(c)
+#@todo
 実部同士の演算結果 m1 と虚部同士の演算結果 m2 を複素数
 Complex.new(m1, m2)にして返します。つまり、
 
@@ -111,23 +118,28 @@ Complex.new(m1, m2)にして返します。つまり、
 です。
 
 --- **(c)
+#@todo
 複素数 c でべき乗した結果
   exp(c * log(self)) 
 を返します。
 
 #@if (version < "1.8.0")
 --- divmod 
+#@todo
 このメソッドは廃止されました。
 #@end
 
 --- abs
+#@todo
 複素数の絶対値を返します。
 
 --- abs2
+#@todo
 複素数の絶対値の 2 乗を返します。
 
 --- angle
 --- arg
+#@todo
 複素数の偏角を[-π,π]の範囲で返します。
 
   p Complex.new(0, 1).arg == Math::PI/2 #=> true
@@ -146,103 +158,136 @@ Complex.new(m1, m2)にして返します。つまり、
   p Complex.new(-0.0, -0.0).arg         #=> -3.14159265358979
 
 --- polar 
+#@todo
 複素数の極座標表示、すなわち、配列 [self.abs, self.arg] を返します。
 
 --- conj
 --- conjugate
+#@todo
 共役複素数を返します。
 
 --- real
 --- real=
+#@todo
 実部を返します。
 
 --- imag
 --- image
 --- imag=
 --- image=
+#@todo
 虚部を返します。
 
 #@if (version < "1.9.0")
 --- <=>(c)
+#@todo
 cとselfの絶対値absを比較した結果を返します。
 #@end
 
 --- ==(c)
+#@todo
 c と等しければ、真を返します。
 
 #@if (version < "1.8.0")
 --- to_i
+#@todo
 整数 [[c:Integer]] に変換します。
 
 --- to_f
+#@todo
 浮動小数点数 [[c:Float]] に変換します。
 
 --- to_r
+#@todo
 有理数 [[c:Rational]] に変換します。
 #@end
 
 #@since 1.9.0
 --- scalar?
+#@todo
 #@end
 
 == Constants
 
 --- I
+#@todo
 虚数単位です。
 
 = reopen Numeric
 == Instance Methods
 --- im
+#@todo
 Returns a Complex number Complex(0, self).
 
 --- real
+#@todo
 The real part of a complex number, i.e. self
 
 --- image
 --- imag
+#@todo
 The imaginary part of a complex number, i.e. 0.
 
 --- arg
+#@todo
 偏角を[-π,π]の範囲で返します。実数の場合、
 非負なら0、負なら[[c:Math::PI]]を返します。
 
 --- conj
 --- conjugate
+#@todo
 共役をかえします。実数の場合はselfを返します。
 
 = redefine Math
 == Module Functions
 
 --- sqrt(z)
+#@todo
 
 --- exp(z)
+#@todo
 
 --- log(z)
+#@todo
 
 --- log10(z)
+#@todo
 
 --- cos(z)
+#@todo
 
 --- sin(z)
+#@todo
 
 --- tan(z)
+#@todo
 
 --- cosh(z)
+#@todo
 
 --- sinh(z)
+#@todo
 
 --- tanh(z)
+#@todo
 
 --- acos(z)
+#@todo
 
 --- asin(z)
+#@todo
 
 --- atan(z)
+#@todo
 
 --- atan2(z)
+#@todo
 
 --- acosh(z)
+#@todo
 
 --- asinh(z)
+#@todo
 
 --- atanh(z)
+#@todo

@@ -164,6 +164,7 @@ Ruby 1.8.3 以降にバージョンアップするか、
 == Module Functions
 
 --- nkf(opt, str)
+#@todo
 
 文字列 str の文字コードを変換し、変換結果の文字列を返します。
 
@@ -178,6 +179,7 @@ NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 れば opt に '-m0' を含めるようにしてください。
 
 --- guess(str)
+#@todo
 
 文字列 str の漢字コードを判別して返します。
 返される値は、NKF モジュールのモジュール定数です(下記参照)。
@@ -186,12 +188,14 @@ ruby 1.8.2 以降では NKF.guess2 と同じものです。
 
 #@since 1.8.2
 --- guess1(str)
+#@todo
 
 ruby 1.8.1 以前の NKF.guess と同じものです。
 #@end
 
 #@since 1.8.2
 --- guess2(str)
+#@todo
 
 nkf2の漢字コード自動判定ルーチンを利用したものです。
 #@end
@@ -199,39 +203,47 @@ nkf2の漢字コード自動判定ルーチンを利用したものです。
 == Constants
 
 --- JIS
+#@todo
 
 JIS コードを表します。
 
 --- EUC
+#@todo
 
 EUC コードを表します。
 
 --- SJIS
+#@todo
 
 SJIS コードを表します。
 
 --- BINARY
+#@todo
 
 入力が binary であることを表します。
 
 --- UNKNOWN
+#@todo
 
 コード判定に失敗したことを表します。
 
 #@since 1.8.2
 --- ASCII
+#@todo
 
 ASCII コードを表します。
 #@end
 
 #@since 1.8.2
 --- UTF8
+#@todo
 
 UTF-8 コードを表します。
 #@end
 
 #@since 1.8.2
 --- UTF16
+#@todo
 
 UTF-16 コードを表します。
 #@end

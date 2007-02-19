@@ -10,21 +10,29 @@
 == クラスメソッド:
 
 --- TkTextMark.new(parent, index)
+#@todo
 
 == メソッド:
 
 --- TkTextMark#id
+#@todo
 
 --- TkTextMark#set(where)
+#@todo
 
 --- TkTextMark#unset
+#@todo
 
 --- TkTextMark#gravity
+#@todo
 
 --- TkTextMark#gravity=(direction)
+#@todo
 
 --- TkTextMark#next(index)
+#@todo
 
 --- TkTextMark#previous(index)
+#@todo
 
 =end

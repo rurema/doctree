@@ -68,14 +68,17 @@ require tk/xim
 == Class Methods
 
 --- Tk.EncodedString(str, enc = nil)
+#@todo
 
 [[m:Tk::EncodedString.new]] と同じ
 
 --- Tk.BinaryString(str)
+#@todo
 
 [[m:Tk::BinaryString.new]] と同じ
 
 --- Tk.UTF8_String(str)
+#@todo
 
 [[m:Tk::UTF8_String.new]] と同じ
 
@@ -85,14 +88,17 @@ require tk/xim
 == Private Instance Methods
 
 --- TkGrid(*args)
+#@todo
 
 [[m:TkGrid.configure]] と同じ
 
 --- TkPack(*args)
+#@todo
 
 [[m:TkPack.configure]] と同じ
 
 --- TkPlace(*args)
+#@todo
 
 [[m:TkPlace.configure]] と同じ
 

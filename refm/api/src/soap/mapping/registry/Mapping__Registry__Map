@@ -5,21 +5,29 @@
 == Class Methods
 
 --- new(registry)
+#@todo
 
 == Instance Methods
 
 --- obj2soap(obj)
+#@todo
 
 --- soap2obj(node, klass = nil)
+#@todo
 
 --- init(init_map = [])
+#@todo
 
 --- add(obj_class, soap_class, factory, info)
+#@todo
 
 --- clear
+#@todo
 
 --- find_mapped_soap_class(target_obj_class)
+#@todo
 
 --- find_mapped_obj_class(target_soap_class)
+#@todo
 
 #@end

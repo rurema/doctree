@@ -9,6 +9,7 @@
 
 == class methods
 --- new(*options)
+#@todo
 == instance methods
 --- [](name)
 --- fetch
@@ -20,6 +21,7 @@
 --- commit
 --- abort
 --- transaction
+#@todo
 
 === Œ„
 

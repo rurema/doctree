@@ -6,6 +6,7 @@ UNIXストリーム型接続のサーバ側のソケットのクラス。
 
 --- open(path)
 --- new(path)
+#@todo
 
 path で指定したパス名を用いて接続を受け付けるソケットを返
 します。
@@ -13,6 +14,7 @@ path で指定したパス名を用いて接続を受け付けるソケットを返
 == Instance Methods
 
 --- accept
+#@todo
 
 クライアントからの接続要求を受け付け、接続した
 [[c:UNIXSocket]] のインスタンスを返します。
@@ -30,6 +32,7 @@ path で指定したパス名を用いて接続を受け付けるソケットを返
 
 #@if (version >= "1.8.5")
 --- accept_nonblock
+#@todo
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:accept(2)]] を呼び出します。
@@ -42,6 +45,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
 #@if (version >= "1.8.0")
 --- listen(backlog)
+#@todo
 
 [[man:listen(2)]] を実行します。
 ([[m:Socket#listen]]と同じ)
@@ -55,6 +59,7 @@ UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
 #@if (version >= "1.8.0")
 --- sysaccept
+#@todo
 
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [[m:UNIXServer#accept]] と同じです。

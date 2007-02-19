@@ -3,13 +3,18 @@
 == Class Methods
 
 --- new(server, local_path)
+#@todo
 
 == Instance Methods
 
 --- do_GET(req, res)
+#@todo
 
 --- not_modified?(req, res, mtime, etag)
+#@todo
 
 --- make_partial_content(req, res, filename, filesize)
+#@todo
 
 --- prepare_range(range, filesize)
+#@todo

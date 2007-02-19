@@ -6,11 +6,14 @@
 
 --- connect_timeout
 --- connect_timeout=(value)
+#@todo
 
 --- send_timeout
 --- send_timeout=(value)
+#@todo
 
 --- receive_timeout
 --- receive_timeout=(value)
+#@todo
 
 #@end

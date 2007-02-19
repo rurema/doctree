@@ -1,6 +1,7 @@
 == Constants
 
 --- TRUE
+#@todo
 
 ((<obsolete>))
 
@@ -8,35 +9,42 @@
 (false でも nil でもない値) は全て真とみなされます。
 
 --- FALSE
+#@todo
 
 ((<obsolete>))
 
 偽の値。false と同じ。
 
 --- NIL
+#@todo
 
 ((<obsolete>))
 
 nil と同じ。
 
 --- STDIN
+#@todo
 
 標準入力。[[m:$stdin]] のデフォルト値。
 
 --- STDOUT
+#@todo
 
 標準出力。[[m:$stdout]] のデフォルト値。
 
 --- STDERR
+#@todo
 
 標準エラー出力。[[m:$stderr]] のデフォルト値。
 
 --- ENV
+#@todo
 
 環境変数を表す (疑似) 連想配列 (詳細は [[c:ENV]] を参照)。
 この連想配列の値を変更すると子プロセスの環境として引き継がれます。
 
 --- ARGF
+#@todo
 
 引数 (なければ標準入力) で構成される仮想ファイル (詳細は [[c:ARGF]] を参照)。
 つまり [[m:Kernel#gets]] は [[m:ARGF.gets]] と同じ意味です。
@@ -44,12 +52,14 @@ nil と同じ。
 [[m:ARGF.filename]] で現在読み込み中のファイル名が得られます。
 
 --- ARGV
+#@todo
 
 Ruby スクリプトに与えられた引数。
 組み込み変数 [[m:$*]] の別名。
 Ruby 自身に対する引数は取り除かれています。
 
 --- DATA
+#@todo
 
 スクリプトの __END__
 ([[unknown:スクリプトの終り|プログラム/プログラムの終り]])
@@ -67,10 +77,12 @@ Ruby 自身に対する引数は取り除かれています。
       ではなく実行されたファイル ($0) を指します。
 
 --- TOPLEVEL_BINDING
+#@todo
 
 [[unknown:Ruby用語集/トップレベル]]での [[c:Binding]] オブジェクト。
 
 --- RUBY_VERSION
+#@todo
 
 Ruby のバージョンを示す文字列。
 Ruby のバージョンは、major.minor.teeny という形式です。
@@ -89,27 +101,32 @@ minor が偶数のバージョンは安定版です。
 RUby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
 
 --- RUBY_RELEASE_DATE
+#@todo
 
 Ruby のリリース日を示す文字列。
 
 --- RUBY_PLATFORM
+#@todo
 
 プラットフォームを示す文字列。
 
 #@if (version < "1.9.0")
 --- VERSION
+#@todo
 
 ((<obsolete>))
 
 RUBY_VERSION の古い名前です。
 
 --- RELEASE_DATE
+#@todo
 
 ((<obsolete>))
 
 RUBY_RELEASE_DATE の古い名前です。
 
 --- PLATFORM
+#@todo
 
 ((<obsolete>))
 
@@ -117,6 +134,7 @@ RUBY_PLATFORM の古い名前です。
 #@end
 
 --- SCRIPT_LINES__
+#@todo
 
 この定数は、デフォルトでは定義されていません。
 

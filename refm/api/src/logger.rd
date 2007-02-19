@@ -63,6 +63,7 @@ Logger オブジェクトの重要度を DEBUG に下げるなどという使い方をします。
 == Class Methods
 
 --- new(logdev, shift_age = 0, shift_size = 1048576)
+#@todo
 
 Logger オブジェクトを生成する。logdev には
 記録するファイル名か、write と close が定義されたオブジェクト(IO
@@ -90,9 +91,11 @@ shift_size は shift_age に [[c:Integer]] を与えた場合にのみ
 == Instance Methods
 
 --- <<(msg)
+#@todo
 
 --- add(severity, message = nil, progname = nil) { ... }
 --- log(severity, message = nil, progname = nil) { ... }
+#@todo
 
 メッセージをログに記録します。message は文字列か例外オブジェクトです。
 severity にはメッセージの
@@ -107,34 +110,41 @@ progname にはログにメッセージと一緒に記録するプログラム名を与えます。
 ユーザがこのメソッドを直接使うことはあまりありません。
 
 --- close
+#@todo
 
 --- datetime_format
 --- datetime_format=(format)
+#@todo
 
 ログに記録する時の日付のフォーマットです。デフォルトでは "%Y-%m-%dT%H:%M:%S.%06d "
 です。[[m:Time#strftime]] を参照して下さい。
 
 --- debug?
+#@todo
 
 現在の Logger オブジェクトが DEBUG 以上の重要度のメッセージを記録するなら
 真を返します。
 
 --- info?
+#@todo
 
 現在の Logger オブジェクトが INFO 以上の重要度のメッセージを記録するなら
 真を返します。
 
 --- warn?
+#@todo
 
 現在の Logger オブジェクトが WARN 以上の重要度のメッセージを記録するなら
 真を返します。
 
 --- error?
+#@todo
 
 現在の Logger オブジェクトが ERROR 以上の重要度のメッセージを記録するなら
 真を返します。
 
 --- fatal?
+#@todo
 
 現在の Logger オブジェクトが FATAL 以上の重要度のメッセージを記録するなら
 真を返します。
@@ -142,6 +152,7 @@ progname にはログにメッセージと一緒に記録するプログラム名を与えます。
 --- debug(progname = nil) { ... }
 --- debug(message = nil)
 --- debug { ... }
+#@todo
 
 DEBUG 情報 message を記録します。ブロックを与えた場合は、ブロックを評価した
 返り値をメッセージとして記録します。現在の Logger の重要度が DEBUG よりも高い場合、
@@ -163,49 +174,58 @@ DEBUG 情報 message を記録します。ブロックを与えた場合は、ブロックを評価した
 --- info(progname = nil) { ... }
 --- info(message = nil)
 --- info { ... }
+#@todo
 
 INFO 情報を記録します。debug を参照して下さい。
 
 --- warn(progname = nil) { ... }
 --- warn(message = nil)
 --- warn { ... }
+#@todo
 
 WARN 情報を記録します。debug を参照して下さい。
 
 --- error(progname = nil) { ... }
 --- error(message = nil)
 --- error { ... }
+#@todo
 
 ERROR 情報を記録します。debug を参照して下さい。
 
 --- fatal(progname = nil) { ... }
 --- fatal(message = nil)
 --- fatal { ... }
+#@todo
 
 FATAL 情報を記録します。debug を参照して下さい。
 
 --- unknown(progname = nil) { ... }
 --- unknown(message = nil)
 --- unknown { ... }
+#@todo
 
 --- level
 --- level=(level)
+#@todo
 
 Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
 記録されません。
 
 --- sev_threshold
 --- sev_threshold=(level)
+#@todo
 
 level の別名です。
 
 --- progname
 --- progname=(name)
+#@todo
 
 ログに記録するプログラム名を設定します。
 
 --- formatter
 --- formatter=(formatter)
+#@todo
 
 == Constants
 
@@ -215,40 +235,53 @@ level の別名です。
 --- ERROR
 --- FATAL
 --- UNKNOWN
+#@todo
 
 重要度を表す定数です。
 
 #@if (version <= "1.8.2")
 --- Format
+#@todo
 #@end
 
 --- ProgName
+#@todo
 
 --- VERSION
+#@todo
 
 --- SEV_LABEL
+#@todo
 
 = class Logger::Application < Object
 
 == Class Methods
 
 --- new(appname = nil)
+#@todo
 
 == Instance Methods
 
 --- appname
+#@todo
 
 --- level=(level)
+#@todo
 
 --- log(severity, message = nil) { ... }
+#@todo
 
 --- log=(logdev)
+#@todo
 
 --- logdev
+#@todo
 
 --- set_log(logdev, shift_age = 0, shift_size = 1024000)
+#@todo
 
 --- start
+#@todo
 
 = class Logger::Error < RuntimeError
 
@@ -257,33 +290,42 @@ level の別名です。
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- call(severity, time, progname, msg)
+#@todo
 
 --- datetime_format
 --- datetime_format=(format)
+#@todo
 
 == Constants
 
 --- Format
+#@todo
 
 = class Logger::LogDevice < Object
 
 == Class Methods
 
 --- new(log = nil, opt = {})
+#@todo
 
 == Instance Methods
 
 --- close
+#@todo
 
 --- dev
+#@todo
 
 --- filename
+#@todo
 
 --- write(message)
+#@todo
 
 = class Logger::LogDevice::LogDeviceMutex < Object
 include MonitorMixin
@@ -298,6 +340,7 @@ include MonitorMixin
 --- ERROR
 --- FATAL
 --- UNKNOWN
+#@todo
 
 = class Logger::ShiftingError < Logger::Error
 #@end

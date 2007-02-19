@@ -33,6 +33,7 @@ Net::Telnet のインスタンスは、ソケットのメソッドをdelegateします(例え
 == Class Methods
 
 --- new(opts)
+#@todo
 
 Telnet オブジェクトを生成します。このときリモートホストへの接続も行いま
 す。opts には Telnet オブジェクトに設定する以下のオプションをハッ
@@ -74,6 +75,7 @@ waitfor メソッドは [[unknown:"net/telnet"/Net::Telnet#cmd]] や [[unknown:"net/te
 
 --- login(user[, password])
 --- login("Name" => user, "Password" => password)
+#@todo
 
 ユーザ名 user, パスワード password でログインします。
 リモートホストが以下のプロンプトでユーザ名、パスワードの入力を要求する
@@ -94,6 +96,7 @@ waitfor メソッドは [[unknown:"net/telnet"/Net::Telnet#cmd]] や [[unknown:"net/te
 
 --- waitfor(match)
 --- waitfor("Match" => match, "Timeout" => timeout, "Waittime" => waittime)
+#@todo
 
 正規表現 match で指定した文字列が出力されるまで待ち合わせます。
 match の代わりに "String" をキーに文字列を指定した場合、
@@ -109,6 +112,7 @@ timeout, waittime のデフォルト値は new で指定した
 
 --- cmd(string)
 --- cmd("String" => string, "Match" => match, "Timeout" => timeout)
+#@todo
 
 string を改行付きでリモートホストに送り、次のプロンプト
 match が出力されるまで待ちます。
@@ -119,29 +123,36 @@ timeout のデフォルト値は new で指定した "Timeout" の値です。
 ブロックを指定した場合、出力文字列を引数にブロックを逐次実行します。
 
 --- puts(string)
+#@todo
 
 string を改行を付けてリモートホストに送ります。
 
 --- telnetmode
 --- telnetmode(bool)
 --- telnetmode=(bool)
+#@todo
     ...
 
 --- binmode
 --- binmode(bool)
 --- binmode=(bool)
+#@todo
     ...
 
 --- sock
+#@todo
 
 リモートホストに接続している IO オブジェクトを返します。
 
 
 --- preprocess(string)
+#@todo
 
 --- print(string)
+#@todo
 
 --- write(string)
+#@todo
 
 
 == Constants
@@ -213,4 +224,5 @@ string を改行を付けてリモートホストに送ります。
 --- LF
 --- EOL
 --- REVISION
+#@todo
 

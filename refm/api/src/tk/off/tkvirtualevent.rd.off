@@ -14,17 +14,23 @@
 == クラスメソッド:
 
 --- TkVirtualEvent.getobj(event)
+#@todo
 
 --- TkVirtualEvent.info
+#@todo
 
 --- TkVirtualEvent.new(*sequences)
+#@todo
 
 == メソッド:
 
 --- TkVirtualEvent#add(*sequences)
+#@todo
 
 --- TkVirtualEvent#delete(*sequences)
+#@todo
 
 --- TkVirtualEvent#info
+#@todo
 
 =end

@@ -18,6 +18,7 @@ Ruby プログラムをテキストとして扱いたい場合、
 == Class Methods
 
 --- new(src, filename = "(ripper)", lineno = 1)
+#@todo
 
 Ripper オブジェクトを作成します。
 
@@ -26,45 +27,60 @@ Ripper オブジェクトを作成します。
 第三引数 lineno には src の開始行番号を、それぞれ与えます。
 
 --- parse(src, filename = '(ripper)', lineno = 1)
+#@todo
 
 --- yydebug
 --- yydebug=
+#@todo
 
 == Instance Methods
 
 --- parse
+#@todo
 
 --- column
+#@todo
 
 --- lineno
+#@todo
 
 --- end_seen?
+#@todo
 
 == Private Instance Methods
 
 --- warn(fmt, *args)
+#@todo
 
 --- warning(fmt, *args)
+#@todo
 
 --- compile_error(msg)
+#@todo
 
 == Constants
 
 --- Version
+#@todo
 
 --- EVENTS 
+#@todo
 
 PARSER_EVENTS + SCANNER_EVENTS
 
 --- PARSER_EVENTS
+#@todo
 
 パーサイベントのイベント ID (シンボル) のリストを返します。
 
 --- PARSER_EVENT_TABLE
+#@todo
 
 --- SCANNER_EVENTS
+#@todo
 
 スキャナイベントのイベント ID (シンボル) のリストを返します。
 
 --- SCANNER_EVENT_TABLE
+#@todo
 

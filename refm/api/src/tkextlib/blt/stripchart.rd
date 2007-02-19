@@ -12,26 +12,32 @@ include Tk::BLT::GraphCommand
 == Instance Methods
 
 --- extents(item)
+#@todo
 
 
 
 --- inside(x, y)
+#@todo
 
 
 
 --- invtransform(x, y)
+#@todo
 
 
 
 --- metafile(file = None)
+#@todo
 
 
 
 --- snap(output, keys = {})
+#@todo
 
 
 
 --- transform(x, y)
+#@todo
 
 
 

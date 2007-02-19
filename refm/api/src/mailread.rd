@@ -17,6 +17,7 @@ Unix mbox 形式のメールファイルを解析するライブラリです。
 == Class Methods
 
 --- new(f)
+#@todo
 
 メールを解析します。
 f にはファイル名か [[c:IO]] オブジェクトを渡します。
@@ -40,6 +41,7 @@ f にはファイル名か [[c:IO]] オブジェクトを渡します。
 == Instance Methods
 
 --- header
+#@todo
 
 ヘッダを [[c:Hash]] で返します。
 キーは 'From'、'Subject' などのフィールド名で、すべてのキーは
@@ -50,10 +52,12 @@ f にはファイル名か [[c:IO]] オブジェクトを渡します。
 MIME encoded-word のデコードなどを行いたい場合は [[lib:nkf]] などを使用してください。
 
 --- body
+#@todo
 
 本文を行単位の [[c:Array]] で返します。
 
 --- [](field)
+#@todo
 
 ヘッダの field の値を返します。
 m.header[field.capitalize] と同じですので値取得の際は、

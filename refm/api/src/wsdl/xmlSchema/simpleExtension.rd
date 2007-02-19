@@ -6,18 +6,25 @@ require xsd/namedelements
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- attributes
+#@todo
 
 --- base
+#@todo
 
 --- parse_attr(attr, value)
+#@todo
 
 --- parse_element(element)
+#@todo
 
 --- targetnamespace
+#@todo
 
 --- valid?(value)
+#@todo
 

@@ -5,6 +5,7 @@
 == Class Methods
 
 --- new(config={}, default=WEBrick::Config::General)
+#@todo
 GenericServer オブジェクトを生成する。config は設定を保存したハッシュ。
 default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
 WEBrick::Config::General。
@@ -12,40 +13,51 @@ WEBrick::Config::General。
 == Instance Methods
 
 --- [](key)
+#@todo
 self.config[key] と同値。
 
 --- config
+#@todo
 サーバの設定を保存したハッシュを返す。
 
 --- listen(address, port)
+#@todo
 与えられたアドレスとポートで listen を開始し listeners に加える。
 address は文字列。port は整数。listeners を返す。
 
 --- listeners
+#@todo
 listen している [[c:TCPServer]] オブジェクトの配列を返す。
 
 --- logger
+#@todo
 [[c:WEBrick::Log]] のインスタンスを返す。
 
 --- shutdown
+#@todo
 stop を呼び、全ての listeners を close する。
 
 --- start()
 --- start(){|soc| ... }
+#@todo
 サーバをスタートする。
 block が与えられた場合、block が実際のクライアントとの応答を担う。
 block は [[c:TCPSocket]] オブジェクトを引数として呼び出される。
 
 --- status
+#@todo
 現在のサーバのステータスを [[c:Symbol]] オブジェクトで返す。値は :Running, :Stop, :Shutdown のいずれか。
 
 --- stop
+#@todo
 サーバを停止する。
 
 --- tokens
+#@todo
 MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返す。
 [[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるクライアントの数。
 
 MaxClient を知りたい場合は self.tokens.max。self.tokens.max - self.tokens.length が現在のクライアントの接続数。
 
 --- run(sock)
+#@todo

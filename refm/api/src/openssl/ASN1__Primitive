@@ -4,6 +4,7 @@
 == Class Methods
 
 --- new(value, tag, tagging, tag_class)
+#@todo
 
 Primitive オブジェクトを生成します。
 
@@ -11,6 +12,7 @@ Primitive オブジェクトを生成します。
 
 --- tagging
 --- tagging=(tag)
+#@todo
 
 [[c:Symbol]] オブジェクト :IMPLICIT または :EXPLICIT のいずれかをとります。
 

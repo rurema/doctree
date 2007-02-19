@@ -14,6 +14,7 @@ verbose が真のとき、標準エラー出力に処理の経過が出ます。
 
 --- copy(from, to[, verbose = false])
 --- cp(from, to[, verbose = false])
+#@todo
 
 ファイルをコピーします。より正確には from を読んで to
 に書き、モードを変更します。ファイルの更新時刻はコピーした時刻に更
@@ -30,6 +31,7 @@ verbose が真のとき、標準エラー出力に処理の経過が出ます。
 
 --- move(from, to[, verbose = false]) 
 --- mv(from, to[, verbose = false])
+#@todo
 
 ファイルを移動します。[[m:File.rename]] と異なりパーティション
 をまたがる移動もできます。
@@ -38,24 +40,28 @@ verbose が真のとき、標準エラー出力に処理の経過が出ます。
 
 --- compare(from, to[, verbose = false])
 --- cmp(from, to[, verbose = false])
+#@todo
 
 2つのファイルを比較します。
 同じなら true、異なるなら false を返します。
 
 --- safe_unlink(files[, ...][, verbose = false])
 --- rm_f(files[, ...][, verbose = false])
+#@todo
 
 (複数の)ファイルを可能な限り削除します。削除できたファイルの数を
 返します。rm -f([[man:rm(1)]]) に相当します。
 
 --- makedirs(dirs[, ...][, verbose = false])
 --- mkpath(dirs[, ...][, verbose = false])
+#@todo
 
 (複数の)ディレクトリを作成します。多階層のパスを一度に作成することも可能です。
 ディレクトリが既にあれば何もしません。
 mkdir -p([[man:mkdir(1)]])に相当します。
 
 --- install(from, to[, mode = nil[, verbose = false]])
+#@todo
 
 ファイルをコピーし、モードを設定します。
 コピー先が存在する場合は一旦削除されますので、コピー先のファイルが
@@ -64,6 +70,7 @@ install ([[man:install(1)]])コマンドに相当します。
 
 #@# bc-rdoc: detected missing name: catname
 --- catname(from, to)
+#@todo
 
 If to is a valid directory, from will be appended to to, adding
 and escaping backslashes as necessary. Otherwise, to will be
@@ -72,6 +79,7 @@ was not specified in to.
 
 #@# bc-rdoc: detected missing name: syscopy
 --- syscopy(from, to)
+#@todo
 
 Copies a file from to to. If to is a directory, copies from to
 to/from.
@@ -80,6 +88,7 @@ to/from.
 == Class Methods
 
 --- chmod(mode, files[, ...][, verbose = false])
+#@todo
 
 (複数の)ファイルの属性を変えます。
 オリジナルの [[m:File.chmod]] に verbose の指定が

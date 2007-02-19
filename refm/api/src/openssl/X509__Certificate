@@ -8,74 +8,89 @@ X509 証明書クラス
 --- new
 --- new(str)
 --- new(io)
+#@todo
 
 証明書オブジェクトを生成します。
 
 == Instance Methods
 
 --- to_der
+#@todo
 
 DER 形式に変換します。
 
 --- to_pem
 --- to_s
+#@todo
 
 PEM 形式に変換します。
 
 --- to_text
+#@todo
 
 人間が読める形式に変換します。
 
 --- version
 --- version=(version)
+#@todo
 
 X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
 
 --- signature_algorithm
+#@todo
 
 発行者 (CA) が証明書に署名するのに使ったアルゴリズムです。
 
 --- serial
 --- serial=(serial)
+#@todo
 
 発行者 (CA) が証明書に付ける識別番号です。
 
 --- subject
 --- subject=(name)
+#@todo
 
 証明書の所有者の名前 [[c:OpenSSL::X509::Name]] オブジェクトです。
 http://www.ipa.go.jp/security/pki/033.html#_Toc3020767
 
 --- issuer
 --- issuer=(name)
+#@todo
 
 証明書の発行者 (CA) の名前 [[c:OpenSSL::X509::Name]] オブジェクトです。
 
 --- not_before
 --- not_before=(time)
+#@todo
 
 証明書が有効になる時刻 [[c:Time]] オブジェクトです。
 
 --- not_after
 --- not_after=(time)
+#@todo
 
 証明書が無効になる時刻 [[c:Time]] オブジェクトです。
 
 --- extensions
 --- extensions=(extensions)
+#@todo
 
 証明書の拡張領域 [[c:OpenSSL::X509::Extension]] オブジェクトの [[c:Array]] です。
 
 --- add_extension(ext)
+#@todo
 
 拡張領域に値を加えます。ext は [[c:OpenSSL::X509::Extension]] オブジェクトです。
 
 --- public_key
 --- public_key=(pkeu)
+#@todo
 
 証明書に記載された公開鍵 [[c:OpenSSL::PKey::RSA]] オブジェクトです。
 
 --- sign(pkey, digest)
+#@todo
 
 証明書に署名します。pkey は発行者の秘密鍵です。digest は
 [[c:OpenSSL::Digest::Digest]] オブジェクトです。秘密鍵オブジェクトが
@@ -84,10 +99,12 @@ http://www.ipa.go.jp/security/pki/033.html#_Toc3020767
 OpenSSL::PKey::DSA 以外のダイジェストとして使えません。
 
 --- verify(key)
+#@todo
 
 key は証明書の発行者の公開鍵です。 key で証明書の署名を検証します。
 
 --- check_private_key(pkey)
+#@todo
 
 与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめます。
 

@@ -7,12 +7,16 @@ extend Tk
 == Singleton Methods
 #@since 1.8.3
 --- package_name
+#@todo
 
 #@end
 --- package_version
+#@todo
 
 --- usual(arg, *args)
+#@todo
 
 --- usual_names
+#@todo
 
 #@end

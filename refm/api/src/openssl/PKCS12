@@ -4,6 +4,7 @@
 == Module Functions
 
 --- create
+#@todo
 
 = class OpenSSL::PKCS12::PKCS12Error < OpenSSL::OpenSSLError
 
@@ -12,12 +13,16 @@
 == Instance Methods
 
 --- ca_certs
+#@todo
 
 --- certificate
+#@todo
 
 --- key
+#@todo
 
 --- to_der
+#@todo
 
 #@end
                                    

@@ -14,6 +14,7 @@ PKCS #7 は暗号技術とともに用いられるデータのフォーマットの仕様です。
 --- new
 --- new(str)
 --- new(io)
+#@todo
 
 PKCS7 オブジェクトを生成します。
 
@@ -21,6 +22,7 @@ PKCS7 オブジェクトを生成します。
 
 --- type
 --- type=(type)
+#@todo
 
 タイプを [[c:Symbol]] オブジェクトで返します。次のうちのいずれかの値をとります。
 
@@ -28,76 +30,94 @@ PKCS7 オブジェクトを生成します。
 
 --- detached
 --- detached=(bool)
+#@todo
 
 平文に署名を付ける形式(multipart/signed)かどうかを表します。 type では :signed にあたります。
 
 --- detached?
+#@todo
 
 実際に署名されていてかつ平文に署名を付ける形式(multipart/signed)かどうかを返します。
 
 --- cipher=(cipher)
+#@todo
 
 使用する暗号アルゴリズムを指定します。
 
 --- add_signer(singer)
+#@todo
 
 署名者を加えます。
 
 --- signers
+#@todo
 
 メッセージの署名者 OpenSSL::PKCS7::Signer オブジェクトの配列を返します。
 
 --- add_recipient
+#@todo
 
 --- add_certificate
+#@todo
 
 --- certificates
 --- certificates=(certificates)
+#@todo
 
 署名に付ける証明書を指定します。
 
 --- add_crl(s)
+#@todo
 
 CRL に加えます。
 
 --- crls
 --- crls=(s)
+#@todo
 
 CRL を返します。
 
 --- add_data(data)
+#@todo
 
 署名の対象となるデータに data を加えます。
 
 --- data
 --- data=(data)
+#@todo
 
 署名の対象となるデータを返します。
 
 --- verify(certs, store, indata = nil, flags = 0)
+#@todo
 
 署名を検証します。
 
 --- decrypt(pkey, cert, flags = 0)
+#@todo
 
 復号化します。
 
 --- to_pem
 --- to_s
+#@todo
 
 PEM 形式に変換します。
 
 #@since 1.8.1
 --- to_der
+#@todo
 
 DER 形式に変換します。
 #@end
 
 --- error_string
 --- error_string=
+#@todo
 
 #@since 1.8.3
 --- recipients
+#@todo
 #@end
 
 #@end

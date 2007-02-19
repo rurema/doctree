@@ -14,6 +14,7 @@
 
 --- parse(date, now=Time.now)
 --- parse(date, now=Time.now) {|year| year}
+#@todo
 
 dateを[[m:ParseDate.parsedate]] によって
 パースして[[c:Time]]オブジェクトに変換します。
@@ -49,6 +50,7 @@ dateを[[m:ParseDate.parsedate]] によって
 
 --- rfc2822(date)
 --- rfc822(date)
+#@todo
 
 [[RFC:2822]]で定義されているdate-timeとしてdateをパースして
 [[c:Time]]オブジェクトに変換します。
@@ -60,6 +62,7 @@ dateが[[RFC:2822]]に準拠していない、または
 発生します。
 
 --- httpdate(date)
+#@todo
 
 [[RFC:2616]]で定義されているHTTP-dateとしてdateをパースして
 [[c:Time]]オブジェクトに変換します。
@@ -70,6 +73,7 @@ dateが[[RFC:2616]]に準拠していない、または
 
 --- xmlschema(date)
 --- iso8601(date)
+#@todo
 
 XML Schema で定義されている dateTime として
 date をパースして [[c:Time]] オブジェクトに変換します。
@@ -82,6 +86,7 @@ date がISO 8601で定義されている形式に準拠していない、
 
 --- rfc2822
 --- rfc822
+#@todo
 
 [[RFC:2822]] で定義されている date-time として表現される
 以下の形式の文字列を返します:
@@ -93,6 +98,7 @@ date がISO 8601で定義されている形式に準拠していない、
 self が UTC time の場合、zone は +0000 になります。
 
 --- httpdate
+#@todo
 
 [[RFC:2616]]で定義されているHTTP-dateのrfc1123-dateとして
 表現される以下の形式の文字列を返します:
@@ -103,6 +109,7 @@ self が UTC time の場合、zone は +0000 になります。
 
 --- xmlschema([fractional_seconds])
 --- iso8601([fractional_seconds])
+#@todo
 
 XML Schema で定義されている dateTime として
 表現される以下の形式の文字列を返します:

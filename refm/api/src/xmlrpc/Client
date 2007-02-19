@@ -8,10 +8,12 @@ XML-RPC サーバにプロシジャを実行させるためのクラスです。
 == Class Methods
 
 --- new(host = "localhost", path = "/RPC2", port = 80 or 443, proxy_host = nil, proxy_port = nil, user = nil, password = nil, use_ssl = false, timeout = 30)
+#@todo
 
 Client オブジェクトを生成します。
 
 --- new2(uri, proxy = nil, timeout = 30)
+#@todo
 
 Client オブジェクトを生成します。uri は文字列です。proxy は
 "proxy.eample.com:8080" のような文字列です。
@@ -23,6 +25,7 @@ Client オブジェクトを生成します。uri は文字列です。proxy は
   serv.call("sample.sumAndDifference", 5, 3)
 
 --- new3(hash = {})
+#@todo
 
 [[c:Hash]] オブジェクト hash から Client オブジェクトを生成します。
 有効なハッシュのキーはそれぞれ文字列
@@ -41,47 +44,67 @@ Client オブジェクトを生成します。uri は文字列です。proxy は
 == Instance Methods
 
 --- call(method, *args)
+#@todo
 
 --- call2(method, *args)
+#@todo
 
 --- multicall(*methods)
+#@todo
 
 --- multicall2(*methods)
+#@todo
 
 --- proxy(prefix, *args)
+#@todo
 
 --- proxy2(prefix, *args)
+#@todo
 
 --- call_async(...)
+#@todo
 
 --- call2_async(...)
+#@todo
 
 --- multicall_async(...)
+#@todo
 
 --- multicall2_async(...)
+#@todo
 
 --- proxy_async(...)
+#@todo
 
 --- proxy2_async(...)
+#@todo
 
 --- timeout
 --- timeout=(seconds)
+#@todo
 
 --- user
 --- user=(user)
+#@todo
 
 --- password
 --- password=(password)
+#@todo
 
 --- set_writer(writer)
+#@todo
 
 --- set_parser(parser)
+#@todo
 
 --- cookie
 --- cookie=(cookie)
+#@todo
 
 --- http_header_extra
 --- http_header_extra=(header)
+#@todo
 
 --- http_last_response
+#@todo
 #@end

@@ -4,11 +4,13 @@
 == Instance Methods
 
 --- ready?
+#@todo
 
 ブロックせずに読み込み可能なら真を返します。そうでなければ nil を返します。
 self が EOF に達していれば false を返します。
 
 --- wait([timeout = nil])
+#@todo
 
 self が読み込み可能になるまでブロックし、読み込み可能になったら
 self を返します。

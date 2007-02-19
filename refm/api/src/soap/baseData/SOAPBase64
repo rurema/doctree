@@ -7,13 +7,16 @@ include SOAPBasetype
 == Class Methods
 
 --- new(value = nil)
+#@todo
 
 == Instance Methods
 
 --- as_xsd
+#@todo
 
 == Constants
 
 --- Type
+#@todo
 
 #@end

@@ -5,20 +5,28 @@ include ChartMethod
 
 == Class Methods
 --- new(*args)
+#@todo
 
 == Instance Methods
 --- task(txt, time_begin, time_end, completed = 0.0)
+#@todo
 
 --- milestone(txt, time, col = None)
+#@todo
 
 --- vertline(txt, time)
+#@todo
 
 --- connect(from_task, to_task)
+#@todo
 
 --- summary(txt, tasks)
+#@todo
 
 --- color_of_part(keyword, newcolor)
+#@todo
 
 --- font_of_part(keyword, newfont)
+#@todo
 
 #@end

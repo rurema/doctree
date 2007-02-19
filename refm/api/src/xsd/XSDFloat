@@ -4,5 +4,6 @@ include XSD::FloatConstants
 
 == class methods
 --- new(value = nil)
+#@todo
 
 #@end

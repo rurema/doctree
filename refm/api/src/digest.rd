@@ -18,6 +18,7 @@ Digest::Base と同じインタフェースを持つ。
 == Module Functions
 
 --- hexencode(string)
+#@todo
 
 Generates a hex-encoded version of a given string. 
 #@end
@@ -78,20 +79,24 @@ include Digest::Instance
 
 #@if(version < "1.8.6")
 --- new([str])
+#@todo
 
 新しいダイジェストオブジェクトを生成する。文字列引数が与えられると
 それを追加する([[m:Digest::Base#update]] 参照)。
 #@else
 --- new
+#@todo
 新しいダイジェストオブジェクトを生成する。
 #@end
 
 --- digest(str)
+#@todo
 
 与えられた文字列に対するハッシュ値を文字列で返す。
 new(str).digest と等価。
 
 --- hexdigest(str)
+#@todo
 
 与えられた文字列に対するハッシュ値を、ASCIIコードを使って
 16進数の列を示す文字列にエンコードして返す。
@@ -99,6 +104,7 @@ new(str).hexdigest と等価。
 
 #@since 1.8.6
 --- file(file)
+#@todo
 creates a digest object and reads a given file, name.
 
   p Digest::SHA256.file("X11R6.8.2-src.tar.bz2").hexdigest
@@ -109,10 +115,12 @@ creates a digest object and reads a given file, name.
 
 --- dup
 --- clone
+#@todo
 
 ダイジェストオブジェクトの複製を作る。
 
 --- digest
+#@todo
 
 今までに追加した文字列に対するハッシュ値を文字列で返す。MD5では
 16バイト長、SHA1およびRMD160では20バイト長、SHA256では32バイト長、
@@ -120,12 +128,14 @@ SHA384では48バイト長、SHA512では64バイト長となる。
 
 #@since 1.8.6
 --- digest!
+#@todo
 
 Returns the resulting hash value and resets the digest to the initial state. 
 #@end
 
 --- hexdigest
 --- to_s
+#@todo
 
 今までに追加した文字列に対するハッシュ値を、ASCIIコードを使って
 16進数の列を示す文字列にエンコードして返す。MD5では32バイト長、
@@ -138,12 +148,14 @@ SHA1およびRMD160では40バイト長、SHA256では64バイト長、SHA384では
 
 #@since 1.8.6
 --- hexdigest!
+#@todo
 Returns the resulting hash value and resets the digest to the
 initial state.
 #@end
 
 --- update(str)
 --- <<(str)
+#@todo
 
 文字列を追加する。複数回updateを呼ぶことは文字列を連結して
 updateを呼ぶことと等しい。すなわち m.update(a); m.update(b) は
@@ -153,10 +165,12 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 self を返す。
 
 --- ==(md)
+#@todo
 
 与えられたダイジェストオブジェクトと比較する。
 
 --- ==(str)
+#@todo
 
 与えられた文字列を digest 値、もしくは hexdigest 値と比較する。
 いずれの値と見るかは与えられた文字列の長さによって自動判別
@@ -164,10 +178,12 @@ self を返す。
 
 #@since 1.8.6
 --- file 
+#@todo
 updates the digest with the contents of a given file _name_ and
 returns self.
 
 --- block_length
+#@todo
 
 Returns the block length of the digest.
 
@@ -176,6 +192,7 @@ This method is overridden by each implementation subclass.
 --- digest_length 
 --- length 
 --- size
+#@todo
 
 Returns the length of the hash value of the digest.
 
@@ -184,6 +201,7 @@ If not, digest_obj.digest().length() is returned.
 #@end
 
 --- reset
+#@todo
 Resets the digest to the initial state and returns self.
 
 This method is overridden by each implementation subclass.
@@ -192,4 +210,5 @@ This method is overridden by each implementation subclass.
 = reopen Kernel
 == Private Instance Methods
 --- Digest(name)
+#@todo
 #@end

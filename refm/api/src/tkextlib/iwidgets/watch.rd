@@ -8,27 +8,33 @@ require tkextlib/iwidgets
 == Instance Methods
 
 --- get
+#@todo
 
 Alias for #get_string
 
 --- get_clicks
+#@todo
 
 
 
 --- get_string
+#@todo
 alias get
 
 
 
 --- show(time = None)
+#@todo
 
 
 
 --- show_now
+#@todo
 
 
 
 --- watch(*args)
+#@todo
 
 
 

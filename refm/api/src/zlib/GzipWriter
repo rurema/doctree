@@ -23,6 +23,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 == Class Methods
 
 --- new(io[, level[, strategy]])
+#@todo
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 level, strategy は [[m:Zlib::Deflate.new]] と同じです。
@@ -31,6 +32,7 @@ GzipWriter オブジェクトは io に gzip 形式のデータを
 同じ動作をする write メソッドが定義されている必要があります。
 
 --- wrap(io[, level[, strategy]]) {|gz| ... }
+#@todo
 
 io と関連付けられた GzipWriter オブジェクトを作成し、
 それを引数としてブロックを実行します。
@@ -41,6 +43,7 @@ io と関連付けられた GzipWriter オブジェクトを作成し、
 
 --- open(filename[, level[, strategy]])
 --- open(filename[, level[, strategy]]) {|gz| ... }
+#@todo
 
 filename で指定されるファイルを gzip 圧縮データの
 書き出し用にオープンします。GzipWriter オブジェクトを返します。
@@ -52,6 +55,7 @@ filename で指定されるファイルを gzip 圧縮データの
 
 --- close
 --- finish
+#@todo
 
 フッターを書き出し、GzipWriter オブジェクトをクローズします。close と
 finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
@@ -63,6 +67,7 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
 
 --- pos
 --- tell
+#@todo
 
 現在までに圧縮したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
@@ -73,10 +78,12 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
 --- print(arg...)
 --- printf(format, arg...)
 --- write(str)
+#@todo
 
 IO クラスの同名メソッドと同じ。
 
 --- flush([flush])
+#@todo
 
 まだ書き出されていないデータをフラッシュします。
 flush は [[m:Zlib::Deflate#deflate]] と同じです。
@@ -84,6 +91,7 @@ flush は [[m:Zlib::Deflate#deflate]] と同じです。
 flush に Zlib::NO_FLUSH を指定することは無意味です。
 
 --- mtime=(time)
+#@todo
 
 gzip ファイルのヘッダーに記録する最終更新時間を指定します。
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
@@ -91,6 +99,7 @@ gzip ファイルのヘッダーに記録する最終更新時間を指定します。
 発生します。
 
 --- orig_name=(filename)
+#@todo
 
 gzip ファイルのヘッダーに記録する元ファイル名を指定します。
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
@@ -98,6 +107,7 @@ gzip ファイルのヘッダーに記録する元ファイル名を指定します。
 発生します。
 
 --- comment=(string)
+#@todo
 
 gzip ファイルのヘッダーに記録するコメントを指定します。
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを

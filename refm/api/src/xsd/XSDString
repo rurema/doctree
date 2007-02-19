@@ -2,5 +2,6 @@
 = class XSD::XSDString < XSD::XSDAnySimpleType
 == class methods
 --- new(value = nil)
+#@todo
 
 #@end

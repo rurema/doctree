@@ -10,13 +10,16 @@ include TkTreatItemFont
 
 #@if (version <= "1.8.0")
 --- __conf_cmd(idx)
+#@todo
 
 --- __item_pathname(tagOrId)
+#@todo
 #@end
 
 == Constants
 
 --- ItemCMD
+#@todo
 
 #@include(tk/canvas/TkCanvas)
 #@include(tk/canvastag/TkcTagAccess)

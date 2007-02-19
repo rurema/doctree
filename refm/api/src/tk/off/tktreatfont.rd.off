@@ -7,19 +7,26 @@
 
 --- TkTreatFont#font_configinfo
 --- TkTreatFont#fontobj
+#@todo
 
 --- TkTreatFont#font_configure(slot)
+#@todo
 
 --- TkTreatFont#latinfont_configure(ltn, keys=nil)
 --- TkTreatFont#asciifont_configure(ltn, keys=nil)
+#@todo
 
 --- TkTreatFont#kanjifont_configure(knj, keys=nil)
+#@todo
 
 --- TkTreatFont#font_copy(window, tag=nil)
+#@todo
 
 --- TkTreatFont#latinfont_copy(window, tag=nil)
 --- TkTreatFont#asciifont_copy(window, tag=nil)
+#@todo
 
 --- TkTreatFont#kanjifont_copy(window, tag=nil)
+#@todo
 
 =end

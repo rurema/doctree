@@ -74,6 +74,7 @@ SIGCHLD を trap する例
 == Instance Methods
 
 --- ==(other)
+#@todo
 
 同じステータスの場合に真を返します。
 
@@ -81,16 +82,19 @@ other が数値の場合、self.to_i との比較が行われます。こ
 れは後方互換性のためです。
 
 --- &(other)
+#@todo
 
 to_i & other と同じです。
 
 このメソッドは後方互換性のためにあります。
 
 --- pid
+#@todo
 
 終了したプロセスのプロセス ID を返します。
 
 --- to_i
+#@todo
 
 C 言語での終了ステータス表現の整数を返します。
 
@@ -99,6 +103,7 @@ C 言語での終了ステータス表現の整数を返します。
 報が入っています。
 
 --- to_int
+#@todo
 
 to_i と同じです。このメソッドにより $? が [[c:Fixnum]]
 として扱われるようになります(暗黙の型変換)。これは後方互換性のため
@@ -109,20 +114,24 @@ to_i と同じです。このメソッドにより $? が [[c:Fixnum]]
   p $? # => 256
 
 --- to_s
+#@todo
 
 to_i.to_s と同じです。
 
 --- exited?
+#@todo
 
 プロセスが [[man:exit(2)]] により自分で終了した(他のプロ
 セスに止められたのではない)場合、真を返します。
 
 --- exitstatus
+#@todo
 
 exited? が真の場合プロセスが返した終了ステータスの整数を、そ
 うでない場合は nil を返します。
 
 --- inspect
+#@todo
 
 プロセスの状態を以下のフォーマットで出力します。
 
@@ -144,27 +153,32 @@ exited? が真の場合プロセスが返した終了ステータスの整数を、そ
 
 
 --- stopped?
+#@todo
 
 プロセスが現在停止(終了ではない)している場合に真を返します。
 Process.waitpid に Process::WUNTRACED フラグを設定した
 場合にだけ真になりえます。
 
 --- stopsig
+#@todo
 
 stopped? が真の場合そのシグナルの番号を、そうでない場合は
 nil を返します。
 
 --- signaled?
+#@todo
 
 プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
 を返します。
 
 --- termsig
+#@todo
 
 signaled? が真の場合プロセスを終了させたシグナル番号を、
 そうでない場合は nil を返します。
 
 --- coredump?
+#@todo
 
 終了時にコアダンプしていたら真を返します。
 
@@ -176,6 +190,7 @@ signaled? が真の場合プロセスを終了させたシグナル番号を、
 #@since 1.8.0
 #@# 追加されたバージョンは不明
 --- stat >> num
+#@todo
 #@# => fixnum
 
 Shift the bits in stat right num places.
@@ -187,6 +202,7 @@ Shift the bits in stat right num places.
 
 #@since 1.8.2
 --- stat.success?
+#@todo
 #@# => true, false or nil
 
 Returns true if stat is successful, false if not. Returns nil

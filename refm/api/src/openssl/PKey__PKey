@@ -15,17 +15,20 @@
 == Instance Methods
 
 --- sign(digest, data)
+#@todo
 
 digest を使って、data に署名し、文字列を返します。digest は
 [[c:OpenSSL::Digest::Digest]] のサブクラスのインスタンスです。data は文字列です。
 
 --- verify(digest, sign, data)
+#@todo
 
 digest と sign を使って、data を検証します。digest は
 [[c:OpenSSL::Digest::Digest]] のサブクラスのインスタンスです。sign と data は文字列です。
 
 #@if(version < "1.8.2")
 --- to_der
+#@todo
 #@end
 
 = class OpenSSL::PKey::PKeyError < OpenSSL::OpenSSLError

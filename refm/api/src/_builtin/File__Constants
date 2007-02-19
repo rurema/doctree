@@ -8,61 +8,81 @@ File クラスはこのモジュールをインクルードしているので、以下に挙
 == Constants
 
 --- LOCK_SH
+#@todo
 共有ロック。複数のプロセスが同時にロックを共有できます。[[m:File#flock]] で使用します。
 --- LOCK_EX
+#@todo
 排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。[[m:File#flock]] で使用します。
 --- LOCK_UN
+#@todo
 アンロック。[[m:File#flock]] で使用します。
 --- LOCK_NB
+#@todo
 ロックの際にブロックしない。他の指定と or することで指定します。[[m:File#flock]] で使用します。
 
 --- RDONLY
+#@todo
 [[m:File#open]]で使用します。
 
 --- WRONLY
+#@todo
 [[m:File#open]]で使用します。
 
 --- RDWR
+#@todo
 [[m:File#open]]で使用します。
 
 --- APPEND
+#@todo
 [[m:File#open]]で使用します。
 
 --- CREAT
+#@todo
 [[m:File#open]]で使用します。
 
 --- EXCL
+#@todo
 [[m:File#open]]で使用します。
 
 --- NONBLOCK
+#@todo
 [[m:File#open]]で使用します。
 
 --- TRUNC
+#@todo
 [[m:File#open]]で使用します。
 
 --- NOCTTY
+#@todo
 [[m:File#open]]で使用します。
 
 --- BINARY
+#@todo
 [[m:File#open]]で使用します。
 
 --- SYNC
+#@todo
 [[m:File#open]]で使用します。
 
 #@since 1.8.0
 --- FNM_NOESCAPE
+#@todo
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
 --- FNM_PATHNAME
+#@todo
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
 --- FNM_PERIOD
+#@todo
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
 --- FNM_CASEFOLD
+#@todo
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
 --- FNM_DOTMATCH
+#@todo
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 #@end
 

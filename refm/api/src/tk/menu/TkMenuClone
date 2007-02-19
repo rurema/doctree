@@ -4,9 +4,11 @@ alias TkCloneMenu
 == Class Methods
 
 --- new(src_menu, *args)
+#@todo
 
 == Instance Methods
 
 #@since 1.8.5
 --- source_menu
+#@todo
 #@end

@@ -1,7 +1,6 @@
 #@since 1.8.1
 = class Test::Unit::AutoRunner
 
-#@todo
 
 テストの実行を操作したいときにこの AutoRunner クラスを使います。
 大量のテストの中から特定のテストスクリプトのみを実行したい場合、
@@ -50,6 +49,7 @@ Runner にテストを実行させているクラスです。
 == Class Methods
 
 --- run(force_standalone = false, dir = nil, argv = ARGV)
+#@todo
 テストを実行します。
         
 #@if (version >= "1.8.3")
@@ -120,5 +120,6 @@ argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
       $ ruby runner.rb --runner=tk -v --exclude=/test_hoge.\*\\.rb\\Z/i
 
 --- standalone?
+#@todo
 
 #@end

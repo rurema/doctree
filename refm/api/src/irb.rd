@@ -355,12 +355,14 @@ irb のコマンドが実行できるようにするためです。
 --- exit
 --- quit
 --- irb_exit        
+#@todo
 
 irb を終了します。
 サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
 
 --- conf
 --- irb_context
+#@todo
 
 irb の現在の設定です。[[c:IRB::Context]] オブジェクトです。
 このメソッドで得た IRB::Context オブジェクトに対してメソッドを
@@ -371,6 +373,7 @@ irb の現在の設定です。[[c:IRB::Context]] オブジェクトです。
 --- irb_cws([obj])
 --- irb_chws([obj])
 --- irb_change_workspace([obj])
+#@todo
 
 irb の self を obj に変更します。
 obj が省略されたときは、
@@ -379,27 +382,32 @@ irb を起動したときの main オブジェクトを self にします。
 --- pushws([obj])
 --- irb_pushws([obj])
 --- irb_push_workspace([obj])
+#@todo
 
 UNIX シェルコマンドの pushd と同じです。
 
 --- popws
 --- irb_popws
 --- irb_pop_workspace
+#@todo
 
 UNIX シェルコマンドの popd と同じです。
 
 --- irb([obj])
+#@todo
 
 新しいサブ irb インタプリタを起動します。
 オブジェクト obj が指定された時はその obj を self にします。
 
 --- jobs
 --- irb_jobs
+#@todo
 
 サブ irb のリストを返します。
 
 --- fg(n)
 --- irb_fg(n)
+#@todo
 
 n で指定したサブ irb に移動します。
 n は以下のいずれかの値で指定します。
@@ -411,6 +419,7 @@ n は以下のいずれかの値で指定します。
 
 --- kill(n)
 --- irb_kill(n)
+#@todo
 
 n で指定したサブ irb を停止します。
 n は以下のいずれかの値で指定します。
@@ -422,6 +431,7 @@ n は以下のいずれかの値で指定します。
 
 --- souce(path)
 --- irb_source(path)
+#@todo
 
 現在の irb インタプリタ上で、
 Ruby スクリプト path を評価します。
@@ -429,12 +439,14 @@ Ruby スクリプト path を評価します。
 source という名前は UNIX シェルの source コマンドに由来します。
 
 --- irb_load(path, prev)
+#@todo
 
 ファイル path を Ruby スクリプトとみなし、
 現在の irb インタプリタ上で実行します。
 Ruby の load の irb 版です。
 
 --- _  
+#@todo
 
 直前の式の実行結果です。
 
@@ -452,6 +464,7 @@ Ruby の load の irb 版です。
   irb(main):005:0> 
 
 --- __ 
+#@todo
 
 実行結果の履歴です。
 __[lineno] で、lineno 行で実行した結果を得られます。
@@ -500,6 +513,7 @@ conf.save_history の値を指定しておくと、
 == Methods
 
 --- eval_history=(n)
+#@todo
 
 実行結果のヒストリ機能の設定.
 n は整数か nil で n > 0 であればその数だけヒストリにためる。
@@ -507,17 +521,20 @@ n = 0の時は無制限に記憶する.
 n = nil だとヒストリ機能はやめる (デフォルト). 
 
 --- back_trace_limit
+#@todo
 
 バックトレース表示をバックトレースの頭から n,
 後ろから n だけ行なう.
 デフォルトは 16.
     
 --- debug_level=(n)
+#@todo
 
 irb のデバッグレベルの設定
 
 --- ignore_eof
 --- ignore_eof=(bool)
+#@todo
 
 Ctrl-D が入力された時の動作を設定する.
 true の時は Ctrl-D を無視する.
@@ -525,6 +542,7 @@ false の時は irb を終了する.
 
 --- ignore_sigint
 --- ignore_sigint=(bool)
+#@todo
 
 Ctrl-C が入力された時の動作を設定します。
 false 時は irb を終了します。
@@ -537,11 +555,13 @@ true の時の動作は以下のようになる.
 
 --- inf_ruby_mode
 --- inf_ruby_mode=(bool)
+#@todo
 
 inf-ruby-mode 用のプロンプト表示を行なうかどうかを表します。
 デフォルト値は false です。
 
 --- inspect_mode=(val)
+#@todo
 
 インスペクトモードを設定する.
 
@@ -554,11 +574,13 @@ inf-ruby-mode 用のプロンプト表示を行なうかどうかを表します。
     math モードなら non inspect mode
 
 --- math_mode
+#@todo
 
 分数と行列の計算ができる bc モードかどうかを表します。
 
 --- use_loader
 --- use_loader=(bool)
+#@todo
 
 load または require 時に
 irb のファイル読み込み機能を使うかどうかを示します。
@@ -567,25 +589,30 @@ irb のファイル読み込み機能を使うかどうかを示します。
 use_loader の値は irb 全体に反映されます。
 
 --- prompt_c
+#@todo
 
 if の直後など, 行が継続している時のプロンプトを
 表現するフォーマット文字列を返します。
 
 --- prompt_i
+#@todo
 
 通常のプロンプトを表現するフォーマット文字列を返します。
 
 --- prompt_s
+#@todo
 
 文字列中のプロンプトを表現するフォーマット文字列を返します。
 
 --- rc
+#@todo
 
 ~/.irbrc を読み込んでいたら true を返します。
 読み込んでいなければ false を返します。
 
 --- use_prompt
 --- use_prompt=(bool)
+#@todo
 
 プロンプトを表示するかどうかを指定します。
 use_prompt の値が true ならプロンプトを表示し、
@@ -594,6 +621,7 @@ false ならプロンプトを表示しません。
 デフォルト値は true です。
 
 --- use_readline=(val)
+#@todo
 
 [[lib:readline]] を使うかどうかを指定します。
 val の値によって、このメソッドの効果は以下のように分かれます。

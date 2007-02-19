@@ -7,6 +7,7 @@ Ruby インタプリタを終了させるときに発生します。
 
 #@since 1.8.0
 --- new(status = 0, error_message = "")
+#@todo
 
 SystemExit オブジェクトを生成して返します。
 
@@ -23,6 +24,7 @@ SystemExit オブジェクトを生成して返します。
 
 #@since 1.8.0
 --- status
+#@todo
 
 例外オブジェクトに保存された終了ステータスを返します。
 
@@ -45,6 +47,7 @@ SystemExit オブジェクトを生成して返します。
 
 #@since 1.8.2
 --- success?
+#@todo
 
 終了ステータスが正常終了を示す値ならば true を返します。
 

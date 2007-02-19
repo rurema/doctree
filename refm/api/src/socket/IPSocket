@@ -6,6 +6,7 @@
 == Class Methods
 
 --- getaddress(host)
+#@todo
 
 ホスト名からホストのアドレスを返します。ホストのアドレスは文
 字列は octet decimal の文字列 (例: 127.0.0.1) です。
@@ -17,6 +18,7 @@
 == Instance Methods
 
 --- addr
+#@todo
 
 ソケットの接続情報を表す配列を返します。配列の各要素は第1要
 素が文字列 "AF_INET", "AF_INET6" など、第2要素が port 番号、第3要素がホストを表
@@ -32,6 +34,7 @@ decimal や hexadecimal) です。
   s = serv.accept
 
 --- peeraddr
+#@todo
 
 接続相手先ソケットの情報を表す配列を返します。配列の各要素は
 [[m:IPSocket#addr]] メソッドが返す配列
@@ -45,6 +48,7 @@ decimal や hexadecimal) です。
   }
 
 --- recvfrom(maxlen[, flags])
+#@todo
 
 recv と同様にソケットからデータを受け取りますが、
 戻り値は文字列と相手ソケットのアドレス (形式は

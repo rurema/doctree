@@ -4,12 +4,14 @@
 == Class Methods
 
 --- create(canvas, *args)
+#@todo
 
 #@end
 #@if(version == "1.8.0")
 == Instance Methods
 
 --- create_self
+#@todo
 
 shoul be private
 

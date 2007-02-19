@@ -20,10 +20,12 @@
 --- OP_PKCS1_CHECK_2
 --- OP_SINGLE_DH_USE
 --- OP_TLS_ROLLBACK_BUG
+#@todo
 
 [[m:OpenSSL::SSL::SSLContext#options=]] に指定できるもの。
 
 --- VERIFY_CLIENT_ONCE
+#@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
@@ -32,6 +34,7 @@
 クライアントモード: 無視されます。
 
 --- VERIFY_FAIL_IF_NO_PEER_CERT
+#@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
@@ -40,6 +43,7 @@
 クライアントモード: 無視されます。
 
 --- VERIFY_NONE
+#@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
 
@@ -48,6 +52,7 @@
 クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってきます。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできます。証明書の検証の結果によらずハンドシェイクは継続します。
 
 --- VERIFY_PEER
+#@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
 

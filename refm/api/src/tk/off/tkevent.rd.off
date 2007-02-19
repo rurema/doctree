@@ -30,18 +30,22 @@
 == クラスメソッド:
 
 --- TkComm::Event#initialize(serial,a,b,c,d,f,h,k,m,o,p,s,t,w,x,y,aa,bb,dd,ee,kk,nn,rr,ss,tt,ww,xx,yy)
+#@todo
     イベントオブジェクトを生成します。
     各引数の値は、対応する属性メソッドの値になります。
 
 == メソッド:
 
 --- TkComm::Event#serial
+#@todo
     %#
 
 --- TkComm::Event#above
+#@todo
     %a
 
 --- TkComm::Event#num
+#@todo
     %b
 
     イベントを発生させたマウスボタンの番号を返します。
@@ -49,12 +53,15 @@
     ButtonPress,ButtonReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#count
+#@todo
     %c
 
 --- TkComm::Event#detail
+#@todo
     %d
 
 --- TkComm::Event#focus
+#@todo
     %f
 
     イベントが発生したときのフォーカスの状態をtrue/falseで返します。
@@ -62,11 +69,13 @@
     Enter, Leaveイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#height
+#@todo
     %h
 
     Configure,Exposeイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#keycode
+#@todo
     %k
 
     イベントを発生させたキーコードを返します。
@@ -74,15 +83,19 @@
     KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#mode
+#@todo
     %m
 
 --- TkComm::Event#override
+#@todo
     %o
 
 --- TkComm::Event#place
+#@todo
     %p
 
 --- TkComm::Event#state
+#@todo
     %s
 
     以下の値の論理和を返します。((-Visibilityのときは、違う-))
@@ -105,24 +118,29 @@
     イベントのときだけ意味を持ちます。
 
 --- TkComm::Event#time
+#@todo
     %t
 
 --- TkComm::Event#width
+#@todo
     %w
 
     Configure,Exposeイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#x
+#@todo
     %x
 
     イベントが発生したときのマウスカーソルのX座標を返します。
 
 --- TkComm::Event#y
+#@todo
     %y
 
     イベントが発生したときのマウスカーソルのY座標を返します。
 
 --- TkComm::Event#char
+#@todo
     %A
 
     イベントに対応するASCII文字を返します。(ただし0〜9キーを押したときは
@@ -133,35 +151,43 @@
     ((-Fixnumを返しているのは望ましい動作じゃないだろう-))
 
 --- TkComm::Event#borderwidth
+#@todo
     %B
 
 --- TkComm::Event#wheel_delta
+#@todo
     %D
 
 --- TkComm::Event#send_event
+#@todo
     %E
 
     true/false
 
 --- TkComm::Event#keysym
+#@todo
     %K
 
     イベントに対応するキーシンボルを返します。
     KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#keysym_num
+#@todo
     %N
 
     イベントに対応するキーシンボルの番号を返します。
     KeyPress,KeyReleaseイベントのときだけ意味を持ちます。
 
 --- TkComm::Event#rootwin_id
+#@todo
     %R
 
 --- TkComm::Event#subwindow
+#@todo
     %S
 
 --- TkComm::Event#type
+#@todo
     %T
 
     イベントの型を数値で返します。返される数値は以下のイベント型に対応しま
@@ -179,11 +205,13 @@
     ((-文字列を返した方がよいだろう？WinやMacではどうなる？-))
 
 --- TkComm::Event#widget
+#@todo
     %W
 
     イベントが発生したウィジェットを返します。
 
 --- TkComm::Event#x_root
+#@todo
     %X
 
     イベントが発生したときのルートウィンドウ上でのマウスカーソルのX座標を
@@ -191,6 +219,7 @@
     で意味を持ちます。
 
 --- TkComm::Event#y_root
+#@todo
     %Y
 
     イベントが発生したときのルートウィンドウ上でのマウスカーソルのY座標を

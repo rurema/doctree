@@ -5,20 +5,27 @@
 == Class Methods
 
 --- new(handler, elename, type, extraattr)
+#@todo
 
 == Instance Methods
 
 --- type
+#@todo
 
 --- definedtype
 --- definedtype=(value)
+#@todo
 
 --- extraattr
+#@todo
 
 --- as_struct
+#@todo
 
 --- as_string
+#@todo
 
 --- as_nil
+#@todo
 
 #@end

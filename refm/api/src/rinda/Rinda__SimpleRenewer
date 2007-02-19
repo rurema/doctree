@@ -10,6 +10,7 @@ still alive.
 == Class Methods
 
 --- new(sec = 180)
+#@todo
 
 Creates a new SimpleRenewer that keeps an object alive for another
 +sec+ seconds.
@@ -17,6 +18,7 @@ Creates a new SimpleRenewer that keeps an object alive for another
 == Instance Methods
 
 --- renew
+#@todo
 
 Called by the TupleSpace to check if the object is still alive.
 

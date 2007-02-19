@@ -5,18 +5,23 @@
 == Class Methods
 
 --- generate(str_or_writable[, fs = ','[, rs = nil]]) { ... }
+#@todo
 
 --- create(str_or_writable[, fs = ','[, rs = nil]])
+#@todo
 
 == Instance Methods
 
 --- <<(row)
 --- add_row(row)
+#@todo
 
 --- close
+#@todo
 
 == Private Instance Methods
 
 --- terminate
+#@todo
 
 #@end

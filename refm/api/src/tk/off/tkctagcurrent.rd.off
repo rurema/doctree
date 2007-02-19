@@ -10,6 +10,7 @@
 == クラスメソッド:
 
 --- TkcTagCurrent.new(parent)
+#@todo
 
 =end
 # $Id$
@@ -24,9 +25,11 @@
 == クラスメソッド:
 
 --- self.new(parent, name, *args)
+#@todo
 
 == privateメソッド:
 
 --- TkcTagString#initialize(parent, name, mode=nil, *args)
+#@todo
 
 =end

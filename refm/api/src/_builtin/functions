@@ -1,6 +1,7 @@
 == Private Instance Methods
 
 --- `
+#@todo
 
 文字列 str を外部コマンドとして実行し、その出力を文字列として
 返します。このメソッドは `str` の形式で呼ばれます
@@ -14,6 +15,7 @@
 `command` は失敗するかもしれません。
 
 --- Array(arg)
+#@todo
 
 arg.to_ary か arg.to_a を呼び出して引数を配
 列に変換した結果を返します。
@@ -24,6 +26,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 一要素の配列 [arg] を返します。
 
 --- Float(arg)
+#@todo
 
 引数を浮動小数点数([[c:Float]])に変換した結果を返します。
 
@@ -51,6 +54,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Float(Object.new) # => cannot convert Object into Float (TypeError)
 
 --- Integer(arg)
+#@todo
 
 引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
 #@if (version >= "1.8.0")
@@ -95,6 +99,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 [[m:String#to_i]] も参照してください。
 
 --- String(arg)
+#@todo
 
 arg.to_s を呼び出して引数を文字列に変換した
 結果を返します。
@@ -104,8 +109,10 @@ arg が文字列の場合、何もせず arg を返します。
 
 #@if (version >= "1.8.0")
 --- abort(message = $!.message)
+#@todo
 #@else
 --- abort
+#@todo
 #@end
 
 Ruby プログラムを異常終了します。[[m:Kernel#exit]] との違いは、
@@ -120,6 +127,7 @@ Ruby プログラムを異常終了します。[[m:Kernel#exit]] との違いは、
 #@end
 
 --- at_exit { .... }
+#@todo
 
 与えられたブロックをインタプリタ終了時に実行します。at_exit
 がメソッドである点を除けば、[[unknown:制御構造/END]] ブロックによる終了
@@ -129,6 +137,7 @@ Ruby プログラムを異常終了します。[[m:Kernel#exit]] との違いは、
 登録した処理を [[c:Proc]] オブジェクトで返します。
 
 --- autoload(const_name, feature)
+#@todo
 
 定数 const_name を最初に参照した時に feature を
 [[m:Kernel#require]] するように設定します。const_name
@@ -196,6 +205,7 @@ nil を返します。
 
 #@if (version >= "1.8.0")
 --- autoload?(const_name)
+#@todo
 autoload 定数がまだ定義されてない(ロードされていない)
 ときにそのパス名を返します。
 また、ロード済みなら nil を返します。
@@ -216,11 +226,13 @@ autoload 定数がまだ定義されてない(ロードされていない)
 #@end
 
 --- binding
+#@todo
 
 変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
 生成して返します。通常、[[m:Kernel#eval]] の第二引数として使います。
 
 --- caller([level])
+#@todo
 
 level 段上(引数省略時は、1)の呼び出し元の情報を [[m:$@]]
 の形式のバックトレース(文字列の配列)として返します。トップレベルで
@@ -285,10 +297,12 @@ level 段上(引数省略時は、1)の呼び出し元の情報を [[m:$@]]
     => ["-:5", "debug information"]
 
 --- callcc {|cont| .... }
+#@todo
 
 [[c:Continuation]] を参照してください。
 
 --- catch(tag) {|tag| .... }
+#@todo
 
 ブロックを実行してその値を返します。ブロックの実行中に
 tag と同じ名前の [[m:Kernel#throw]] が行われた
@@ -320,6 +334,7 @@ tag と同じ名前の [[m:Kernel#throw]] が行われた
 #@if (version < "1.9.0")
 --- chop
 --- chop!
+#@todo
 
 組み込み変数 [[m:$_]] を最後の文字を取り除いたものにし
 ます(終端が"\r\n"であれば2文字取り除きます)。
@@ -334,6 +349,7 @@ $_.chop と関数 chop では以下の点で違いがあります。
 
 --- chomp([rs])
 --- chomp!([rs])
+#@todo
 
 組み込み変数 [[m:$_]] を rs で指定される末尾
 の文字列を取り除いたものにします。
@@ -349,6 +365,7 @@ $_.chomp と関数 chomp では以下の点で違いがあります。
 #@end
 
 --- eval(expr[, binding[, fname[, lineno=1]]])
+#@todo
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
 す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
@@ -369,6 +386,7 @@ fname 行番号 lineno に文字列があるかのように
 
 --- exec(command)
 --- exec(program[, arg1[, arg2[, ...]]])
+#@todo
 
 command で指定されたコマンドを実行します。プロセスの実行コー
 ドはそのコマンド(あるいは shell。後述)になるので、起動に成功した場
@@ -398,6 +416,7 @@ program の引数に渡されます。
   exec [program, program], *args
 
 --- exit([status])
+#@todo
 
 Rubyプログラムの実行を終了します。status として整
 数が与えられた場合、その値を Ruby コマンドの終了ステータスとし
@@ -415,6 +434,7 @@ statusがtrueの場合、EXIT_SUCCESSを
 #@end
 
 --- exit!([status])
+#@todo
 
 整数 status を終了ステータスとして、Ruby プログラム
 の実行を終了します。デフォルトの終了ステータスは -1 です。
@@ -432,6 +452,7 @@ statusがtrueの場合、EXIT_SUCCESSを
 
 --- fork
 --- fork { ... }
+#@todo
 
 [[man:fork(2)]] システムコールを使ってプロセスの複製を作
 ります。親プロセスでは子プロセスのプロセスIDを、子プロセスでは
@@ -444,6 +465,7 @@ fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 
 --- gets([rs])
 --- readline([rs])
+#@todo
 
 Ruby インタプリタ実行時に引数として与えられたファイル(なければ標準
 入力)をつなげた仮想的なファイル(組み込み変数 [[m:$<]]
@@ -463,6 +485,7 @@ readline は gets と同じ働きをしますが、
 ファイルの最後まで読むと例外 [[c:EOFError]] を発生させます。
 
 --- global_variables
+#@todo
 
 プログラム中で定義されているグローバル変数(`$'で始まる変数)名の
 配列を返します。
@@ -479,6 +502,7 @@ readline は gets と同じ働きをしますが、
 --- gsub!(pattern[, replace])
 --- gsub(pattern) {|matched| ... }
 --- gsub!(pattern) {|matched| ... }
+#@todo
 
 組み込み変数 [[m:$_]] の指す文字列内で pattern に
 マッチする部分を全て replace に置き換えた文字列を返します。
@@ -501,17 +525,20 @@ String#gsub と関数 gsub では以下の点で違いがあります。
 #@end
 
 --- iterator?
+#@todo
 
 obsolete
 
 Use [[m:Kernel#block_given?]] instead.
 
 --- block_given?
+#@todo
 
 メソッドにブロックが与えられている時には真、そうでない時に偽
 を返します。
 
 --- load(file[, priv])
+#@todo
 
 Ruby プログラム file をロードして実行します。
 file が絶対パスのときは file からロードします。
@@ -544,6 +571,7 @@ load 'filename' とするのは不適切です。必ず絶対パスを
 使ってください。
 
 --- local_variables
+#@todo
 
 現在のスコープで定義されているローカル変数名の配列を返します。
 
@@ -555,11 +583,13 @@ load 'filename' とするのは不適切です。必ず絶対パスを
 も参照してください。
 
 --- loop { ... }
+#@todo
 
 (中断されない限り)永遠にブロックの評価を繰り返します。
 
 --- open(file[, mode[, perm]])
 --- open(file[, mode[, perm]]) {|io| ... }
+#@todo
 
 file をオープンして、[[c:File]] オブジェクトを返します。
 mode は、以下の文字列か整数([[c:File::Constants]] モジュール
@@ -639,6 +669,7 @@ open がブロックとともに呼び出された時、open はファイル
   end
 
 --- p(obj, [obj2, ...])
+#@todo
 
 obj を人間に読みやすい形で出力します。以下のコードと同じです。
 
@@ -649,6 +680,7 @@ obj を人間に読みやすい形で出力します。以下のコードと同じです。
 nil を返します。
 
 --- print([arg1[, arg2, ...]])
+#@todo
 
 引数を順に出力します。引数が与えられない時には変数
 [[m:$_]] の値を出力します。
@@ -665,6 +697,7 @@ nil を返します。
 nil を返します。
 
 --- printf([port, ]format[, arg[, ...]])
+#@todo
 
 C 言語の printf と同じように、format に従い引数を文字列に変
 換して [[m:$>]] に出力します。第一引数が [[c:IO]] のサ
@@ -685,6 +718,7 @@ nil を返します。
 --- lambda { ... }
 --- proc
 --- lambda
+#@todo
 
 与えられたブロックから手続きオブジェクト ([[c:Proc]] のインスタンス)
 を生成して返します。[[m:Proc.new]]と同じです。
@@ -694,6 +728,7 @@ nil を返します。
 で呼ばれると [[c:ArgumentError]] 例外が発生します。
 
 --- putc(ch)
+#@todo
 
 文字 ch を [[m:$>]] に出力します。
 ch が数字なら 0 〜 255 の範囲の対応する文字を出力します。
@@ -707,6 +742,7 @@ ch を返します。
     # => ccc
 
 --- puts([obj[, obj2[, ....]]] )
+#@todo
 
 obj と改行を順番に [[m:$>]] に出力します。
 引数がなければ改行のみを出力します。
@@ -740,6 +776,7 @@ nil を返します。
 --- raise(message)
 --- raise(error_type, message [, backtrace])
 --- fail(error_type, message [, backtrace])
+#@todo
 
 例外を発生させます。
 
@@ -813,6 +850,7 @@ exception メソッドは必ず例外オブジェクトを返さなければいけません。
 ます。
 
 --- rand([max=0])
+#@todo
 
 0 以上 max 未満の範囲の整数の乱数を発生します。
 まだ [[m:Kernel#srand]] が呼ばれていなければ自動的に
@@ -822,6 +860,7 @@ max に nil または 0 を指定すると 0 以上 1 未
 満の実数値 [[c:Float]] で乱数を与えます。
 
 --- readlines([rs])
+#@todo
 
 コマンドライン引数として与えられたファイル(なければ標準入力) をつ
 なげた仮想的なファイル([[c:ARGF]]を全て読み込んで、その
@@ -835,6 +874,7 @@ rs に nil を指定すると行区切りなしとみなします。
 (パラグラフモード)。
 
 --- require(feature)
+#@todo
 
 Ruby ライブラリ feature をロードパス [[m:Kernel$:]] 上
 から探し、同じライブラリがまだロードされていなかった時だけロードし
@@ -854,16 +894,19 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 
 --- scan(re)
 --- scan(re) {|matched| ... }
+#@todo
 
 [[m:$_]].scan と同じです。
 
 See also [[m:String#scan]].
 
 --- select(reads[, writes[, excepts[, timeout]]])
+#@todo
 
 [[m:IO.select]] と同じです。
 
 --- set_trace_func(trace_proc)
+#@todo
 
 Ruby インタプリタがプログラムを実行する過程で、メソッドの呼び出しや
 式の評価などのイベントが発生する度に手続きオブジェクト trace_proc
@@ -929,6 +972,7 @@ Ruby インタプリタがプログラムを実行する過程で、メソッドの呼び出しや
         [[c:Class]]オブジェクト。トップレベルでは false。
 
 --- sleep([sec])
+#@todo
 
 sec 秒だけプログラムの実行を停止します。
 sec には浮動小数点数も指定できます。
@@ -938,6 +982,7 @@ sec が省略された場合、他スレッドからの [[m:Thread#run]]
 
 #@if (version >= "1.9.0")
 --- spawn(cmd, [arg, ...])
+#@todo
 
 子プロセスの終了を待ち合わせないことを除けば、[[m:Kernel#system]]
 と同じです。生成した子プロセスのプロセスIDを返します。
@@ -945,6 +990,7 @@ sec が省略された場合、他スレッドからの [[m:Thread#run]]
 
 #@if (version < "1.9.0")
 --- split([sep[, limit]])
+#@todo
 
 [[m:$_]] の示す文字列をパターン sep によって
 limit 個の文字列に分割し、その配列を返します。
@@ -953,6 +999,7 @@ limit 個の文字列に分割し、その配列を返します。
 
 --- sprintf(format ... )
 --- format(format ... )
+#@todo
 
 format 文字列を C 言語の sprintf と同じように解釈し、
 引数をフォーマットした文字列を返します。
@@ -967,6 +1014,7 @@ Ruby には整数の大きさに上限がないので、%b, %o, %x
 #@include(printf-format)
 
 --- srand([seed])
+#@todo
 
 [[m:Kernel#rand]] の乱数の種を設定し、古い初期値を返します
 (ただし最初だけは 0 を返します)。初期値が省略された時には
@@ -983,6 +1031,7 @@ unsigned long よりも大きな値を与えることが出来ます。
 --- sub!(pattern[, replace])
 --- sub(pattern) {|matched| ... }
 --- sub!(pattern) {|matched| ... }
+#@todo
 
 組み込み変数 [[m:$_]] の指す文字列内で pattern に
 マッチする最初の部分を replace に置き換えた文字列を返します。
@@ -999,6 +1048,7 @@ $_ に((*再代入*))します。
 #@end
 
 --- syscall(num, arg ... )
+#@todo
 
 numで指定された番号のシステムコールを実行します。
 第2引数以降をシステムコールの引数として渡します。引数は文字
@@ -1014,6 +1064,7 @@ numで指定された番号のシステムコールを実行します。
 
 --- system(command)
 --- system(program[, arg1[, arg2[, ...]]])
+#@todo
 
 command を実行して、成功した時(子プロセスが終了ステータス 0
 で終了した時)には真を、失敗した時(コマンドが実行できなかった場合も
@@ -1037,6 +1088,7 @@ $? を参照することで判別可能です。
 [[m:Kernel#`]], [[m:Kernel#open]] も参照してください。
 
 --- test(cmd, file)
+#@todo
 
 ファイルテストを行います。
 cmd は以下に示す数値リテラルか文字列です
@@ -1094,6 +1146,7 @@ cmd は以下に示す数値リテラルか文字列です
     ファイルの inode 変更時刻を返す
 
 --- test(cmd, file1, file2)
+#@todo
 
 ファイルテストを行います。
 cmd は以下に示す数値リテラルか文字列です
@@ -1109,6 +1162,7 @@ cmd は以下に示す数値リテラルか文字列です
     ファイル1とファイル2が同一のファイルである
 
 --- throw(tag[, value=nil])
+#@todo
 
 同じ tag を指定した [[m:Kernel#catch]] のブロックの
 終わりまでメソッドを越えて脱出します。もし同じ tag で
@@ -1127,6 +1181,7 @@ value は catch の戻り値になります。
 
 --- trace_var(varname, hook)
 --- trace_var(varname) {|newval| .... }
+#@todo
 
 グローバル変数 varname への代入のフックを登録します。
 varname は文字列か [[c:Symbol]] で指定します。
@@ -1155,6 +1210,7 @@ hook の配列を返します(ブロックで登録されていれば
 
 --- trap(signal, command)
 --- trap(signal) { ... }
+#@todo
 
 ※ Ruby 1.8 以降では [[m:Signal.trap]] を推奨します。
 
@@ -1211,6 +1267,7 @@ trap 実行前に"IGNORE" や "DEFAULT" が登録されていたなら、
 ILL FPE SEGV TERM BREAK ABRT そして EXIT しか指定できません。-))
 
 --- untrace_var(varname[, hook])
+#@todo
 
 グローバル変数 varname に関連付けられたフックを解除します。
 hook が指定された場合にはそのフックだけを解除します。
@@ -1229,6 +1286,7 @@ varname のフックを全て解除します。
 
 #@if (version >= "1.8.0")
 --- warn(mesg)
+#@todo
 
 mesg と改行を順番に [[m:$stderr]] に出力します。
 組み込み変数 [[m:$VERBOSE]] が nil のときは何も出力しません。
@@ -1239,4 +1297,5 @@ mesg と改行を順番に [[m:$stderr]] に出力します。
 #@end
 
 --- getc
+#@todo
 obsolete; use STDIN.getc instead

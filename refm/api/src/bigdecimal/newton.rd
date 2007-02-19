@@ -10,8 +10,10 @@ require bigdecimal/ludcmp
 == Instance Methods
 
 --- norm(fv, zero = 0.0)
+#@todo
 
 --- nlsolve(f, x)
+#@todo
 
 
 #@end

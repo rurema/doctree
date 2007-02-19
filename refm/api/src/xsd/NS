@@ -2,27 +2,38 @@
 = module XSD::NS
 == instance methods
 --- initialize(tag2ns = {})
+#@todo
 
 --- assign(ns, tag = nil)
+#@todo
 
 --- assigned?(ns)
+#@todo
 
 --- assigned_tag?(tag)
+#@todo
 
 --- clone_ns
+#@todo
 
 --- compare(ns, name, rhs)
+#@todo
 
 --- defalut_namespace
+#@todo
 
 --- each_ns {|ns, tag| ...}
+#@todo
 
 --- name(name)
+#@todo
 
 --- parse(elem)
+#@todo
 
 #@since 1.8.2
 --- parse_local(elem)
+#@todo
 #@end
 
 #@end

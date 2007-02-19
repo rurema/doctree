@@ -2,13 +2,17 @@
 = class XSD::NSDBase
 == class methods
 --- new
+#@todo
 
 --- inherited(klass)
+#@todo
 
 --- types
+#@todo
 
 == instance methods
 --- type
 --- type=(type)
+#@todo
 
 #@end

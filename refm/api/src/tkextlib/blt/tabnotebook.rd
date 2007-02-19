@@ -9,10 +9,12 @@ require tkextlib/blt/tabset
 == Instance Methods
 
 --- get_id(index)
+#@todo
 
 Alias for #get_tab
 
 --- get_tab(index)
+#@todo
 alias get_id
 
 

@@ -30,12 +30,14 @@ ThreadGroup クラスによりグループに属する Thread をまとめて
 == Class Methods
 
 --- new
+#@todo
 
 新たな ThreadGroup を生成して返します。
 
 == Instance Methods
 
 --- add(thread)
+#@todo
 
 スレッド thread のグループを self にします。
 
@@ -43,6 +45,7 @@ self を返します。
 
 #@since 1.8.0
 --- enclose
+#@todo
 
 ThreadGroup への Thread の追加/削除を(freeze せずに)禁止します。
 (追加/削除を行うと例外 [[c:ThreadError]] が発生します)
@@ -72,6 +75,7 @@ self を返します。
 
 #@since 1.8.0
 --- enclosed?
+#@todo
 
 [[m:ThreadGroup#enclose]] の状態を真偽値で返します。
 freeze された ThreadGroup に Thread の追加/削除はできなくなりますが、
@@ -88,6 +92,7 @@ enclosed? は false を返します。
     p thg.enclosed?         # => false
 #@end
 --- list
+#@todo
 
 self に属するスレッドの配列を返します。
 #@since 1.8.0
@@ -101,6 +106,7 @@ version 1.8 では、aborting 状態であるスレッド
 == Constants
 
 --- Default
+#@todo
 
 デフォルトで定義されている ThreadGroup です。メインスレッド
 は最初このグループに属します。

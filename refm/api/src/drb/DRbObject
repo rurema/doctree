@@ -10,6 +10,7 @@ that this object is a stub for.
 == Class Methods
 #@# bc-rdoc: detected missing name: _load
 --- _load(s)
+#@todo
 
 Unmarshall a marshalled DRbObject.
 
@@ -19,6 +20,7 @@ is created to act as a stub for the remote referenced object.
 
 #@# bc-rdoc: detected missing name: new
 --- new(obj, uri=nil)
+#@todo
 
 Create a new remote object stub.
 
@@ -28,6 +30,7 @@ be a stub for.
 
 #@# bc-rdoc: detected missing name: new_with_uri
 --- new_with_uri(uri)
+#@todo
 
 Create a new DRbObject from a URI alone.
 
@@ -35,19 +38,23 @@ Create a new DRbObject from a URI alone.
 
 #@# bc-rdoc: detected missing name: method_missing
 --- method_missing(msg_id, *a, &b)
+#@todo
 
 Routes method calls to the referenced object.
 
 --- ==(other)
 --- eql?(other)
+#@todo
 
 [[c:DRb::DRbObject]] オブジェクト同士の同値判定は、
 オブジェクトが参照している URI と識別子が等しいかどうかでします。
 
 --- __drburi 
+#@todo
 
 Get the URI of the remote object.
 
 --- __drbref
+#@todo
 
 Get the reference of the object, if local.

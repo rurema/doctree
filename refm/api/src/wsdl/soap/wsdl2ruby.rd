@@ -14,44 +14,62 @@ require wsdl/soap/cgiStubCreator
 
 --- basedir
 --- basedir=
+#@todo
 
 --- location
 --- location=
+#@todo
 
 --- logger
 --- logger=
+#@todo
 
 --- opt
+#@todo
 
 --- run
+#@todo
 
 == Private Instance Methods
 
 --- new
+#@todo
 
 --- create_file
+#@todo
 
 --- create_classdef
+#@todo
 
 --- create_client_skelton(servicename)
+#@todo
 
 --- create_servant_skelton(porttypename)
+#@todo
 
 --- create_cgi_stub(servicename)
+#@todo
 
 --- create_standalone_server_stub(servicename)
+#@todo
 
 --- create_driver(porttypename)
+#@todo
 
 --- write_file(filename)
+#@todo
 
 --- check_file(filename)
+#@todo
 
 --- shbang
+#@todo
 
 --- create_name(name)
+#@todo
 
 --- import(location)
+#@todo
 
 
 

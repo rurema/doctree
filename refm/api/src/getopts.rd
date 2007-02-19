@@ -31,6 +31,7 @@ Author: <jammy@shljapan.co.jp>
 == Private Instance Methods
 
 --- getopts(single_opts, *long_opts)
+#@todo
 
   * 第一引数
     `-f' や `-x(=-fx)' の様な一文字のオプションの指定をします。オプショ

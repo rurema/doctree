@@ -7,16 +7,22 @@
 == Class Methods
 
 --- new
+#@todo
 
 --- run(suite)
+#@todo
 
 --- quiet_mode=(bool)
+#@todo
 
 == Instance Methods
 
 --- run(suite, quiet_mode = @@quiet_mode)
+#@todo
 
 --- create_mediator(suite)
+#@todo
 
 --- create_result
+#@todo
 

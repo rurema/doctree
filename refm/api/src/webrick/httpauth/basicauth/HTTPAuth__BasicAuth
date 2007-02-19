@@ -20,9 +20,11 @@ HTTP の Basic 認証のためのクラスです。
 == Class Methods
 
 --- make_passwd(realm, user, pass)
+#@todo
 pass をランダムなソルトで crypt した文字列を返します。
 
 --- new(config, default=Config::BasicAuth)
+#@todo
 BasicAuth オブジェクトを生成します。config は設定を保存したハッシュです。
 
 config で有効なハッシュキーは以下の通りです。
@@ -41,19 +43,24 @@ reload_db に渡す引数を与えます。
 == Instance Methods
 
 --- authenticate(req, res)
+#@todo
 クライアントから送られてきたユーザ名とパスワードを認証します。
 認証に失敗した場合は challenge を呼びます。
 
 --- challenge(req, res)
+#@todo
 クライアントにパスワードを要求するために res に WWW-Authenticate ヘッダを
 設定し、例外 WEBrick::HTTPStatus::Unauthorized を投げます。
 
 --- logger
+#@todo
 ロガーオブジェクトを返します。
 
 --- realm
+#@todo
 realm を文字列で返します。
 
 --- userdb
+#@todo
 ユーザ名とパスワードを保存した [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを
 返します。

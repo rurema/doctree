@@ -8,6 +8,7 @@
 
 #@since 1.8.0
 --- included(module_or_class)
+#@todo
 
 Precision がインクルードされた時に呼ばれます。詳細は
 [[m:Module#included]] を参照してください。
@@ -21,6 +22,7 @@ Precision がインクルードされた時に呼ばれます。詳細は
 #@end
 
 --- induced_from(number)
+#@todo
 
 number を自分のクラスに変換した結果を返します。 デフォルトの
 定義は、例外 [[c:TypeError]] を発生させるので、Mix-in したクラスで
@@ -31,6 +33,7 @@ number を自分のクラスに変換した結果を返します。 デフォルトの
 == Instance Methods
 
 --- prec(klass)
+#@todo
 
 self を精度 klass に変換した結果を返します。デフォルト
 の定義では klass.induced_from(self) を呼び出し、その結
@@ -41,11 +44,13 @@ self を精度 klass に変換した結果を返します。デフォルト
 prec の再定義で対応するべきです。
 
 --- prec_i
+#@todo
 
 self を [[c:Integer]] に変換します。prec(Integer) と等
 価です。
 
 --- prec_f
+#@todo
 
 self を [[c:Float]] に変換します。prec(Float) と等価で
 す。

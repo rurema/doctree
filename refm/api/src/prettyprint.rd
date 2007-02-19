@@ -25,6 +25,7 @@ Philip Wadler, A prettier printer, March 1998,
 
 == Class Methods
 --- new(output = '', maxwidth = 79, newline = "\n") [{|width| ...}]
+#@todo
 
 pretty printing のためのバッファを生成します。
 output は出力先です。
@@ -49,6 +50,7 @@ newline は改行に使われます。
 指定されない場合は {|width| ' ' * width} が使われます。
 
 --- format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
+#@todo
 
 以下と同じ働きをするもので簡便のために用意されています。
 
@@ -60,6 +62,7 @@ newline は改行に使われます。
   end
 
 --- singleline_format([output[, maxwidth[, newline[, genspace]]]]) {|pp| ...}
+#@todo
 
 [[m:PrettyPrint.format]] に似ていますが、改行しません。引数
 maxwidth, newline と genspace は無視されます。ブロッ
@@ -68,12 +71,14 @@ maxwidth, newline と genspace は無視されます。ブロッ
 
 == Instance Methods
 --- text(obj[, width])
+#@todo
 
 obj を width カラムのテキストとして追加します。
 
 width が指定されなかった場合、obj.length が利用されます。
 
 --- breakable([sep[, width]])
+#@todo
 
 「必要ならここで改行出来る」ということを通知します。
 もしその位置で改行されなければ、
@@ -85,11 +90,13 @@ width が指定されなければ、sep.length が利用されます。
 例えば sep が多バイト文字の際に指定する必要があるかも知れません。
 
 --- nest(indent) {...}
+#@todo
 
 ブロックの中で追加された改行の後の左マージンを indent ぶんだけ
 増加させます。
 
 --- group([indent[, open_obj[, close_obj[, open_width[, close_width]]]]]) {...}
+#@todo
 
 ブロック内で追加された改行のヒントをグループ化します。
 
@@ -102,10 +109,12 @@ close_obj が指定された場合、text close_obj, close_width が
 最後に呼ばれます。
 
 --- flush
+#@todo
 
 バッファされたデータを出力します。
 
 --- first?
+#@todo
 
 現在のグループで first? に対する最初の呼び出しかどうかを判定する
 述語です。

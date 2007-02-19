@@ -47,6 +47,7 @@ p a         # => [25]
 == Private Instance Methods
 
 --- DelegateClass(superclass)
+#@todo
 
 クラス superclass のインスタンスへメソッドを委譲するクラスを
 定義し、そのクラスを返す。
@@ -73,6 +74,7 @@ include Delegator::MethodDelegation
 #@if (version <= '1.8.6')
 
 --- new(obj)
+#@todo
 
 obj のもつインスタンスメソッドのうち、
 自分の持たないメソッドについて、
@@ -86,6 +88,7 @@ obj のもつインスタンスメソッドのうち、
 #@since 1.8.0
 
 --- __getobj__
+#@todo
 
 委譲先のオブジェクトを返す。
 デフォルトでは [[c:NotImplementError]] を発生するので、
@@ -96,8 +99,10 @@ obj のもつインスタンスメソッドのうち、
 #@since 1.8.1
 #@if (version < "1.9.0")
 --- marshal_dump
+#@todo
 
 --- marshal_load(obj)
+#@todo
 
 #@end
 #@end
@@ -105,8 +110,10 @@ obj のもつインスタンスメソッドのうち、
 #@since 1.8.3
 #@if (version < "1.9.0")
 --- method_missing(m, *args)
+#@todo
 
 --- respond_to?(m)
+#@todo
 
 #@end
 #@end

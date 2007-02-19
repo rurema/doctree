@@ -9,6 +9,7 @@ each 以外のメソッド、つまり each_byte 等も enumerate できる
 == Class Methods
 
 --- new(obj, method = :each, *args)
+#@todo
 
 オブジェクト obj について、 each の代わりに method という
 名前のメソッドを使って繰り返すオブジェクトを生成して返します。
@@ -24,15 +25,18 @@ args を指定すると、 method の呼び出し時に渡されます。
 == Methods
 
 --- each {...}
+#@todo
 
 生成時のパラメータに従って繰り返します。
 
 #@since 1.9.0
 --- to_splat
+#@todo
 
 Convert this enumerator object to an array to splat.
 
 --- with_index {|(*args), idx| ... }
+#@todo
 
 Iterates the given block for each elements with an index, which
 start from 0.

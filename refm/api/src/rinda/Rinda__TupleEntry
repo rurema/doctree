@@ -9,6 +9,7 @@ together with expiry and cancellation data.
 == Class Methods
 
 --- new(ary, sec = nil)
+#@todo
 
 Creates a TupleEntry based on +ary+ with an optional renewer or
 expiry time +sec+.
@@ -19,22 +20,27 @@ Numeric, nil, or true to indicate when the tuple has expired.
 == Instance Methods
 
 --- [](key)
+#@todo
 
 Retrieves key from the tuple.
 
 --- alive?
+#@todo
 
 A TupleEntry is dead when it is canceled or expired.
 
 --- cancel
+#@todo
 
 Marks this TupleEntry as canceled.
 
 --- canceled?
+#@todo
 
 Returns the canceled status.
 
 --- expired?
+#@todo
 
 Has this tuple expired? (true/false).
 
@@ -42,17 +48,21 @@ A tuple has expired when its expiry timer based on the sec argument
 to #initialize runs out.
 
 --- expires
+#@todo
 
 --- expires=(expires)
+#@todo
 
 #@since 1.8.2
 --- fetch(key)
+#@todo
 
 Fetches key from the tuple.
 
 #@end
 
 --- make_expires(sec = nil)
+#@todo
 
 Returns an expiry Time based on +sec+ which can be one of:
 
@@ -64,10 +74,12 @@ Numeric: +sec+ seconds into the future
          when UNIX clocks will die)
 
 --- make_tuple(ary)
+#@todo
 
 Creates a Rinda::Tuple for +ary+.
 
 --- renew(sec_or_renewer)
+#@todo
 
 Reset the expiry time according to +sec_or_renewer+.
 
@@ -81,10 +93,12 @@ Otherwise the argument refers to some kind of renewer object which
 will reset its expiry time.
 
 --- size
+#@todo
 
 The size of the tuple.
 
 --- value
+#@todo
 
 Return the object which makes up the tuple itself: the Array or
 Hash.

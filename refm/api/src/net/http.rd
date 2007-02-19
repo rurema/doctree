@@ -172,6 +172,7 @@ HTTP のクライアントのためのクラスです。
 == Class Methods
 
 --- new(address, port = 80, proxy_addr = nil, proxy_port = nil)
+#@todo
 
 新しい HTTP オブジェクトを生成します。address は HTTP サーバーの FQDN で、
 port は接続するポート番号です。このメソッドではまだ接続はしません。
@@ -180,41 +181,52 @@ proxy_addr を与えるとプロクシを介して接続するオブジェクトを生成します。
 
 --- start(address, port = 80, proxy_addr = nil, proxy_port = nil)
 --- start(address, port = 80, proxy_addr = nil, proxy_port = nil) {|http| .... }
+#@todo
 
 以下と同じです。
 
   Net::HTTP.new(address, port, proxy_addr, proxy_port).start(&block)
 
 --- get(address, path, port = 80)
+#@todo
 
 ホスト address の port 番ポートに接続して path の表現する
 エンティティボディを取得し、文字列で返します。
 
 --- get_print(address, path, port = 80)
+#@todo
 
 ホスト address の port 番ポートに接続して path の表現する
 エンティティボディを取得したうえ、$stdout に << で出力します。
 
 --- get_response(uri)
 --- get_response(host, path = nil, port = nil)
+#@todo
 
 #@since 1.8.3
 --- post_form(uri, params)
+#@todo
 #@end
 
 --- proxy_address
+#@todo
 
 --- proxy_port
+#@todo
 
 --- proxy_pass
+#@todo
 
 --- proxy_user
+#@todo
 
 --- socket_type
+#@todo
 
 このメソッドは obsolete です。
 
 --- Proxy(address, port = 80)
+#@todo
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 このクラスは Net::HTTP を継承しているので Net::HTTP と全く
@@ -231,6 +243,7 @@ Proxy 経由で http サーバに接続するためのクラスを作成し返します。
   }
 
 --- proxy_class?
+#@todo
 
 自身が (Proxy メソッドによって作成された) プロクシ用のクラスならば真。
 
@@ -239,11 +252,13 @@ Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 #@end
 --- default_port
 --- port
+#@todo
 
 HTTP のデフォルトポート (80) です。
 
 #@since 1.8.3
 --- https_default_port
+#@todo
 
 HTTPS のデフォルトポート (443) です。
 #@end
@@ -251,6 +266,7 @@ HTTPS のデフォルトポート (443) です。
 --- version_1_1?
 --- version_1_1
 --- is_version_1_1?
+#@todo
 
 ライブラリのバージョンが 1.1 のとき true を返します。
 Ruby 1.8 以降では常に false です。
@@ -258,6 +274,7 @@ Ruby 1.8 以降では常に false です。
 --- version_1_2?
 --- version_1_2
 --- is_version_1_2?
+#@todo
 
 ライブラリのバージョンが 1.2 のとき true を返します。
 Ruby 1.8 以降では常に true です。
@@ -266,6 +283,7 @@ Ruby 1.8 以降では常に true です。
 
 --- start
 --- start {|http| .... }
+#@todo
 
 TCP コネクションを張り、HTTP セッションを開始します。
 すでにセッションが開始していたら例外 IOError を発生します。
@@ -275,64 +293,78 @@ TCP コネクションを張り、HTTP セッションを開始します。
 
 --- started?
 --- active?
+#@todo
 
 HTTP セッションが開始されていたら真。
 
 --- set_debug_output(io)
 #@since 1.9.0
 --- debug_outupt=(io)
+#@todo
 #@end
 
 --- close_on_empty_response
 --- close_on_empty_response=(bool)
+#@todo
 
 --- address
+#@todo
 
 接続するアドレス
 
 --- port
+#@todo
 
 接続するポート番号
 
 --- proxy?
+#@todo
 
 プロクシを介して接続するなら真を返します。
 
 --- proxy_address
 --- proxyaddr
+#@todo
 
 プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス。
 そうでないなら nil。
 
 --- proxy_port
 --- proxyport
+#@todo
 
 プロクシ経由で接続する HTTP オブジェクトならプロクシのポート。
 そうでないなら nil。
 
 --- proxy_pass
+#@todo
 
 --- proxy_user
+#@todo
 
 --- open_timeout
 --- open_timeout=(seconds)
+#@todo
 
 接続時に待つ最大秒数。この秒数たってもコネクションが
 開かなければ例外 TimeoutError を発生します。
 
 --- read_timeout
 --- read_timeout=(seconds)
+#@todo
 
 読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数。
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
 --- finish
+#@todo
 
 HTTP セッションを終了します。セッション開始前にこのメソッドが
 呼ばれた場合は例外 IOError を発生します。
 
 --- get(path, header = nil)
 --- get(path, header = nil) {|str| .... }
+#@todo
 
 サーバ上の path にあるエンティティを取得します。また header が nil
 でなければ、リクエストを送るときにその内容を HTTP ヘッダとして書き
@@ -368,6 +400,7 @@ HTTPResponse は例外オブジェクトから err.response で得ることができます。
   }
 
 --- head(path, header = nil)
+#@todo
 
 サーバ上の path にあるエンティティのヘッダのみを取得します。
 また header が nil でなければリクエストを送るときにその内容を
@@ -389,6 +422,7 @@ net/http version 1.1 では 3xx (再試行可能なエラー) に対しても例外を発生します。
 
 --- post(path, data, header = nil, dest = nil)
 --- post(path, data, header = nil) {|str| .... }
+#@todo
 
 サーバ上の path にあるエンティティに対し文字列 data を
 送ります。
@@ -437,6 +471,7 @@ err.response で得ることができます。
 --- request_get(path, header = nil) {|response| .... }
 --- get2(path, header = nil)
 --- get2(path, header = nil) {|response| .... }
+#@todo
 
 path にあるエンティティを取得します。
 HTTPResponse オブジェクトを返します。
@@ -463,11 +498,13 @@ HTTPResponse オブジェクトを返します。
 --- request_head(path, header = nil) {|response| .... }
 --- head2(path, header = nil)
 --- head2(path, header = nil) {|response| .... }
+#@todo
 
 --- request_post(path, data, header = nil)
 --- request_post(path, data, header = nil) {|response| .... }
 --- post2(path, data, header = nil)
 --- post2(path, data, header = nil) {|response| .... }
+#@todo
 
 path にあるエンティティを取得します。
 HTTPResponse オブジェクトを返します。
@@ -492,17 +529,21 @@ HTTPResponse オブジェクトをブロックに渡します。
   }
 
 --- put(path, data, initheader = nil)
+#@todo
 
 --- request_put(path, data, initheader = nil)
 --- request_put(path, data, initheader = nil) {|response| .... }
 --- put2(path, data, initheader = nil)
 --- put2(path, data, initheader = nil) {|response| .... }
+#@todo
 
 
 --- send_request(name, path, data = nil, header = nil)
+#@todo
 
 --- request(request [, data])
 --- request(request [, data]) {|response| .... }
+#@todo
 
 HTTPResquest オブジェクト request を送信します。POST/PUT の時は data も
 与えられます (POST/PUT 以外で data を与えると ArgumentError を発生します)。
@@ -513,27 +554,38 @@ HTTPResquest オブジェクト request を送信します。POST/PUT の時は data も
 このメソッドは HTTP プロトコルに関連した例外は発生させません。
 
 --- inspect
+#@todo
 
 #@since 1.8.3
 --- copy(path, initheader = nil)
+#@todo
 
 --- delete(path, initheader = nil)
+#@todo
 
 --- lock(path, body, initheader = nil)
+#@todo
 
 --- mkcol(path, body, initheader = nil)
+#@todo
 
 --- move(path, body, initheader = nil)
+#@todo
 
 --- options(path, initheader = nil)
+#@todo
 
 --- propfind(path, body, initheader = {'Depth' => '0'})
+#@todo
 
 --- proppatch(path, body, initheader = nil)
+#@todo
 
 --- trace(path, initheader = nil)
+#@todo
 
 --- unlock(path, body, initheader = nil)
+#@todo
 
 #@end
 = module Net::HTTPHeader
@@ -541,22 +593,26 @@ HTTPResquest オブジェクト request を送信します。POST/PUT の時は data も
 == Instance Methods
 
 --- [](key)
+#@todo
 
 key ヘッダフィールド (文字列) を返します。
 たとえばキー 'content-length' に対しては '2048' のような文字列が得られます。
 key は大文字小文字を区別しません。
 
 --- []=(key)
+#@todo
 
 key ヘッダフィールドに val をセットします。
 key は大文字小文字を区別しません。
 
 #@since 1.8.3
 --- add_field(key, val)
+#@todo
 
 key ヘッダフィールドに val を追加します。
 
 --- get_fields(key)
+#@todo
 
 key ヘッダフィールドの値 (文字列) を配列で返します。
 たとえばキー 'content-length' に対しては ['2048'] のような文字列が得られます。
@@ -566,88 +622,112 @@ key は大文字小文字を区別しません。
 --- fetch(key)
 --- fetch(key, default)
 --- fetch(key) {|hash| .... }
+#@todo
 
 --- size
 --- length
+#@todo
 
 このメソッドは obsolete です。
 
 --- basic_auth(account, password)
+#@todo
 
 Authrization: ヘッダを BASIC 認証用にセットします。
 
 --- content_length
 --- content_length=(len)
+#@todo
 
 Content-Length: ヘッダの値 (整数)。
 
 --- content_type
+#@todo
 
 --- content_type=(type)
 --- set_content_type(type, params = {})
+#@todo
 
 --- main_type
+#@todo
 
 --- sub_type
+#@todo
 
 --- type_params
+#@todo
 
 --- form_data=(params)
 --- set_form_data(params, sep = '&')
+#@todo
 
 --- content_range
+#@todo
 
 Content-Range: ヘッダフィールドの値を Range で返します。
 Range の表わす長さは [[m:Net::HTTPHeader#range_length]] で得られます。
 
 --- range_length
+#@todo
 
 Content-Range: ヘッダフィールドの表している長さを整数で返します。
 
 --- delete(key)
+#@todo
 
 key ヘッダフィールドを削除します。
 
 --- each {|name, val| .... }
 --- each_header {|name, val| .... }
+#@todo
 
 ヘッダ名とその値に対するくりかえし。ヘッダ名は小文字で統一されます。
 
 --- each_capitalized {|name, value| .... }
 --- canonical_each {|name, value| .... }
+#@todo
 
 ヘッダフィールドの正式名とその値のペアに対して繰り返します。
 
 --- each_capitaliezed_name {|name| .... }
+#@todo
 
 --- each_name {|name| ... }
 --- each_key {|name| ... }
+#@todo
 
 --- each_value {|value| .... }
+#@todo
 
 --- key?(key)
+#@todo
 
 key というヘッダフィールドがあれば真を返します。
 key は大文字小文字を区別しません。
 
 --- method
+#@todo
 
 リクエストの HTTP メソッドを文字列で返します。
 
 --- path
+#@todo
 
 リクエストする path を文字列で返します。
 
 --- proxy_basic_auth(account, password)
+#@todo
 
 Proxy 認証のために Proxy-Authrization: ヘッダをセットします。
 
 --- range
+#@todo
 
 Range: ヘッダの示す範囲を Range オブジェクトで返します。
 
 --- range=(r)
 --- set_range(i, len)
+#@todo
 
 範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
 r は Range オブジェクト、i, len は始点と長さです。
@@ -686,6 +766,7 @@ Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
 == Class Methods
 
 --- new(path, initheader = nil)
+#@todo
 
 HTTP リクエストオブジェクトを生成します。
 リクエストする path を文字列で与えます。
@@ -693,12 +774,15 @@ HTTP リクエストオブジェクトを生成します。
 == Instance Methods
 
 --- inspect
+#@todo
 
 --- body_exist?
+#@todo
 
 #@since 1.8.0
 --- body
 --- body=(body)
+#@todo
 
 サーバに送るリクエストのエンティティボディを文字列で設定します。
 #@end
@@ -706,6 +790,7 @@ HTTP リクエストオブジェクトを生成します。
 #@since 1.9.0
 --- body_stream
 --- body_stream=(f)
+#@todo
 
 サーバに送るリクエストのエンティティボディを
 [[c:IO]] オブジェクトなどのストリームで設定します。
@@ -713,19 +798,23 @@ read(size) メソッドが定義されている必要があります。
 #@end
 
 --- method
+#@todo
 
 リクエストの HTTP メソッドを文字列で返します。
 
 --- path
+#@todo
 
 リクエストする path を文字列で返します。
 
 --- request_body_permitted?
+#@todo
 
 リクエストにエンティティボディを一緒に送ることが許されている
 HTTP メソッド (POST など)の場合真を返します。
 
 --- response_body_permitted?
+#@todo
 
 サーバからのレスポンスにエンティティボディを含むことが許されている
 HTTP メソッド (GET, POST など)の場合真を返します。
@@ -770,54 +859,65 @@ Net::HTTP クラスは実際には HTTPResponse のサブクラスを返します。
 == Class Methods
 
 --- new(http_version, result_code, message)
+#@todo
 
 ライブラリ内部用メソッドです。使わないでください。
 
 --- body_permitted?
+#@todo
 
 == Instance Methods
 
 --- code
+#@todo
 
 HTTP のリザルトコードです。例えば '302' などです。
 
 --- message
 --- msg
+#@todo
 
 HTTP サーバがリザルトコードに付加して返すメッセージです。
 例えば 'Not Found' などです。
 
 --- http_version
+#@todo
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
 #@since 1.8.0
 --- to_ary
+#@todo
 #@end
 
 --- value
+#@todo
 
 --- response
 --- header
 --- reader_header
+#@todo
 
 互換性を保つためだけに導入されたメソッドです。
 使わないでください。
 
 --- body
 --- entity
+#@todo
 
 エンティティボディです。
 [[m:Net::HTTPResponse#read_body]] を呼んでいればその引数 dest、
 呼んでいなければエンティティボディを文字列として読みこんで返します。
 
 --- read_body(dest = '')
+#@todo
 
 エンティティボディを取得し dest に << メソッドを使って書きこみます。
 同じ HTTPResponse オブジェクトに対して二回以上呼ばれた場合、
 二回目からはなにもせずに一回目の戻り値をそのまま返します。
 
 --- read_body {|str| .... }
+#@todo
 
 エンティティボディを少しづつ取得して順次ブロックに与えます。
 

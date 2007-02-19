@@ -55,6 +55,7 @@
 --- [](args, ...)
 --- call(args, ...)
 --- call(args, ...) { ... }
+#@todo
 
 UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
 常に例外 [[c:TypeError]] が発生します。
@@ -69,6 +70,7 @@ UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
 #@end
 
 --- bind(obj)
+#@todo
 
 self を obj にバインドして bound method オブジェクト
 (つまり [[c:Method]] オブジェクト) を生成し返します。ただしバイン
@@ -141,17 +143,20 @@ self を obj にバインドして bound method オブジェクト
 
 #@if (version < "1.8.0")
 --- to_proc
+#@todo
 
 self を call する [[c:Proc]] オブジェクトを生成して返します。
 #@end
 
 #@if (version < "1.8.0")
 --- unbind
+#@todo
 
 self を返します。
 #@end
 
 --- arity   
+#@todo
 #@# => fixnum
 
 Returns an indication of the number of arguments accepted by

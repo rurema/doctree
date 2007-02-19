@@ -34,26 +34,32 @@ Queueはスレッド間のFIFO(first in first out)の通信路です。ス
 == Class Methods
 
 --- new
+#@todo
 新しいqueueオブジェクトを生成します。
 
 == Instance methods
 
 --- clear
+#@todo
 queue を空にします。返り値は不定です。
 
 --- empty?
+#@todo
 queueが空の時、真を返します。
 
 --- length
 --- size
+#@todo
 queueの長さを返します。
 
 --- num_waiting
+#@todo
 queue を待っているスレッドの数を返します。
 
 --- pop(non_block = false)
 --- shift(non_block = false)
 --- deq(non_block = false)
+#@todo
 queueからひとつ値を取り出します。queueが空の時、呼出元のスレッ
 ドは停止します。non_block に true を与えると、
 queueが空の時に例外 [[c:ThreadError]] が発生します。
@@ -61,5 +67,6 @@ queueが空の時に例外 [[c:ThreadError]] が発生します。
 --- push(value)
 --- <<(value)
 --- enq(value)
+#@todo
 queue の値を追加します。待っているスレッドがいれば実行を再開
 させます。返り値は不定です。

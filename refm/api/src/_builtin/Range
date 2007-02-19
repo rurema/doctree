@@ -23,6 +23,7 @@ include Enumerable
 == Class Methods
 
 --- new(first,last[, exclude_end])
+#@todo
 
 first から last までの範囲オブジェクトを生成して返しま
 す。exclude_end が真ならば終端を含まない範囲オブジェクトを生
@@ -39,6 +40,7 @@ first から last までの範囲オブジェクトを生成して返しま
 
 --- ===(other)
 --- include?(other)
+#@todo
 
 other が範囲内に含まれている時に真を返します。=== は
 主に [[unknown:制御構造/case]] 文での比較に用いられます。
@@ -59,10 +61,12 @@ include? が、[[m:Enumerable#include?]],
 
 --- begin
 --- first
+#@todo
 
 最初の要素を返します。
 
 --- each {|item|  ... }
+#@todo
 
 範囲内の要素に対して繰り返します。
 
@@ -83,6 +87,7 @@ include? が、[[m:Enumerable#include?]],
 
 --- end
 --- last
+#@todo
 
 終端を返します。範囲オブジェクトが終端を含むかどうかは関係ありませ
 ん。
@@ -91,11 +96,13 @@ include? が、[[m:Enumerable#include?]],
   p (1...5).end  # => 5
 
 --- exclude_end?
+#@todo
 
 範囲オブジェクトが終端を含まないとき真を返します。
 
 --- length
 --- size
+#@todo
 
 範囲の長さを返します。
 始点と終端が Integer のインスタンスなら
@@ -112,6 +119,7 @@ include? が、[[m:Enumerable#include?]],
 
 #@since 1.7.0
 --- step([s]) {|item| ... }
+#@todo
 
 ((<ruby 1.7 feature>))
 範囲内の要素を s おきに繰り返します。s には正の整数を

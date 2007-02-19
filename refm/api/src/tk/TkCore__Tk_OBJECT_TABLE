@@ -4,10 +4,12 @@
 == Class Methods
 
 --- new(id)
+#@todo
 
 
 == Instance Methods
 
 --- method_missing(m, *args, &block)
+#@todo
 
 #@end

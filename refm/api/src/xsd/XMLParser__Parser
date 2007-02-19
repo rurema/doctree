@@ -2,18 +2,24 @@
 = class XSD::XMLParser::Parser
 == class methods
 --- new(host, opt = {})
+#@todo
 
 --- add_factory(factory)
+#@todo
 
 --- create_parser(host, opt = {})
+#@todo
 
 --- factory
+#@todo
 
 == instance methods
 --- charset
 --- charset=(charset)
+#@todo
 
 --- parse(string_or_readable)
+#@todo
 
 = class XSD::XMLParser::ParserError < XSD::Error
 

@@ -28,6 +28,7 @@
 
 --- ===(tuple)
 --- match(tuple)
+#@todo
 
 self と tuple のサイズが同じで、
 self の各要素が tuple にマッチする場合は真を返します。

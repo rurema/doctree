@@ -31,11 +31,13 @@
 == クラスメソッド:
 
 --- TkBindTag.id2obj(id)
+#@todo
     文字列((|id|))に対応する(({TkBindTag}))のインスタンスを返します。
     内部で利用されています。
 
 --- TkBindTag.new
 --- TkBindTag.new(context, cmd=Proc.new, args=nil)
+#@todo
     コールバック関数を登録するためのタグオブジェクトを生成します。
 
     引数を指定することで生成と同時にコールバック関数の登録を行うことも出来
@@ -60,6 +62,7 @@
 
 --- TkBindTagAll.new
 --- TkBindTagAll.new(context, cmd=Proc.new, args=nil)
+#@todo
 
 =end
 # $Id$
@@ -78,6 +81,7 @@
 == クラスメソッド:
 
 --- TkEntry::ValidateCmd.new(cmd = Proc.new, args=nil)
+#@todo
 
 =end
 # $Id$
@@ -92,23 +96,32 @@
 == クラスメソッド:
 
 --- TkEntry::ValidateCmd::ValidateArgs.new(d,i,s,v,pp,ss,vv,ww)
+#@todo
 
 == メソッド:
 
 --- TkEntry::ValidateCmd::ValidateArgs#action
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#index
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#current
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#type
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#value
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#string
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#triggered
+#@todo
 
 --- TkEntry::ValidateCmd::ValidateArgs#widget
+#@todo
 
 =end

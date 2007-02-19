@@ -17,6 +17,7 @@ Ruby/Tk のメインモジュールです．Ruby/Tk全体に対する操作は主にこのモジュー
 == モジュールメソッド:
 
 --- Tk.focus(display=nil)
+#@todo
     現在フォーカスを持つウィンドウを返します。引数にウィンドウオブジェクト
     ((|display|))を指定した場合、そのウィンドウを持つ画面で、現在フォーカ
     スを持っているウィンドウを返します。
@@ -25,14 +26,18 @@ Ruby/Tk のメインモジュールです．Ruby/Tk全体に対する操作は主にこのモジュー
     ((-nilを返すべき？-))
 
 --- Tk.focus_lastfor(win)
+#@todo
     指定したウィンドウ((|win|))と同じレベルにあるウィンドウで最後にフォー
     カスを持っていたウィンドウを返します。
 
 --- Tk.show_kinsoku(mode='both')
+#@todo
 
 --- Tk.add_kinsoku(chars, mode='both')
+#@todo
 
 --- Tk.delete_kinsoku(chars, mode='both')
+#@todo
 
 == メソッド:
 
@@ -41,15 +46,19 @@ Ruby/Tk のメインモジュールです．Ruby/Tk全体に対する操作は主にこのモジュー
 用することを推奨します)。
 
 --- Tk#root
+#@todo
     ルートウィジェットを返します。((<TkRoot.new>)) と同じです。
 
 --- Tk#bell
+#@todo
     ベルを鳴らします。
 
 --- Tk#toUTF8(str,encoding)
+#@todo
     ((<TclTkIp#_toUTF8>))を実行します．
 
 --- Tk#fromUTF8(str, encoding)
+#@todo
     ((<TclTkIp#_fromUTF8>))を実行します．
 
 以下のメソッドは Tcl/Tk バージョンが8.1〜8.9(日本語ローカライズなし)の
@@ -59,34 +68,47 @@ encoding は、tk.rb のロード時に(({$KCODE}))の値にしたがって自動的に設
 定されます。
 
 --- Tk#encoding=(name)
+#@todo
 
 --- Tk#encoding
+#@todo
 
 --- Tk#encoding_names
+#@todo
 
 --- Tk#encoding_system
+#@todo
 
 --- Tk#encoding_system=(enc)
+#@todo
 
 --- Tk#encoding=(name)
+#@todo
 
 --- Tk#encoding
+#@todo
 
 --- Tk#encoding_names
+#@todo
 
 --- Tk#encoding_system
+#@todo
 
 --- Tk#encoding_system=(enc)
+#@todo
 
 == 定数:
 
 --- Tk::TCL_VERSION
+#@todo
     使用しているTclのバージョン。
 
 --- Tk::TK_VERSION
+#@todo
     使用しているTkのバージョン。
 
 --- Tk::JAPANIZED_TK
+#@todo
     使用しているTcl/Tkが日本語にローカライズされているかどうかに応じて
     (({true}))または(({false}))。
 

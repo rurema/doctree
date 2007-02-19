@@ -8,29 +8,38 @@ Digest «ßæ⁄§Œ§ø§·§Œ•Ø•È•π°£
 == Class Methods
 
 --- make_passwd(realm, user, pass)
+#@todo
 
 --- new(config, default=Config::DigestAuth)
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 == Instance Methods
 
 --- algorithm
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 --- authenticate(req, res)
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 --- challenge(req, res, stale=false)
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 --- logger
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 --- qop
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 --- realm
+#@todo
 ºπ…Æº‘ ÁΩ∏
 
 --- userdb
+#@todo
 ºπ…Æº‘ ÁΩ∏

@@ -8,6 +8,7 @@
 
 --- getpty(command)
 --- spawn(command)
+#@todo
 
 この関数は，仮想ttyを確保し，指定されたコマンドをその仮想tty
 の向こうで実行し，配列を返します．戻り値は3つの要素からなる
@@ -31,6 +32,7 @@ SIGCHLD が PTY モジュールのシグナルハンドラに捕捉されるので，
 
 
 --- protect_signal
+#@todo
 
 #@# These functions are obsolete in this version of pty. (see README)
 
@@ -52,6 +54,7 @@ PTYの子プロセスが動いている間でも，system()や [[m:IO.popen]]などの
 例外が発生するのを防げます．
 
 --- reset_signal
+#@todo
 
 #@# These functions are obsolete in this version of pty. (see README)
 
@@ -63,6 +66,7 @@ PTY の子プロセスが動いていても，そのプロセスの終了時に例外が発生
 == Instance Methods
 
 --- status
+#@todo
 
 @since 1.8.0
 子プロセスの終了ステータスを[[c:Process::Status]]オブジェクトで返します。

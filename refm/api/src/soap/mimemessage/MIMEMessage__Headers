@@ -5,17 +5,23 @@
 == Class Methods
 
 --- parse(str)
+#@todo
 
 == Instance Methods
 
 --- parse(str)
+#@todo
 
 --- parse_line(line)
+#@todo
 
 --- parse_rhs(str)
+#@todo
 
 --- add(key, value)
+#@todo
 
 --- to_s
+#@todo
 
 #@end

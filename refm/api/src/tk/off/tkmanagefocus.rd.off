@@ -44,15 +44,18 @@
 == クラスメソッド:
 
 --- TkManageFocus.followsMouse
+#@todo
     マウスポインタがある位置のウィジェットに((<入力フォーカス>))を置くモー
     ドにします。
 
 --- TkManageFocus.next(window)
+#@todo
     ((<入力フォーカス>))が遷移する順番でウィジェット((|window|))の次のウィ
     ジェットのパス名を返します。((-ウィジェットオブジェクトを返した方がい
     いと思う-))
 
 --- TkManageFocus.prev(window)
+#@todo
     ((<入力フォーカス>))が遷移する順番でウィジェット((|window|))の前のウィ
     ジェットのパス名を返します。((-ウィジェットオブジェクトを返した方がい
     いと思う-))
@@ -60,9 +63,11 @@
 == メソッド:
 
 --- TkManageFocus#focusNext
+#@todo
     (('TkManageFocus.next self'))と同じです。
 
 --- TkManageFocus#focusPrev
+#@todo
     (('TkManageFocus.prev self'))と同じです。
 
 =end

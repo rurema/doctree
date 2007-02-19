@@ -6,17 +6,24 @@
 == メソッド:
 
 --- TkTreatTextTagFont#tagfont_configinfo(tag)
+#@todo
 
 --- TkTreatTextTagFont#tagfont_configure(tag, slot)
+#@todo
 
 --- TkTreatTextTagFont#latintagfont_configure(tag, ltn, keys=nil)
+#@todo
 
 --- TkTreatTextTagFont#kanjitagfont_configure(tag, knj, keys=nil)
+#@todo
 
 --- TkTreatTextTagFont#tagfont_copy(tag, window, wintag=nil)
+#@todo
 
 --- TkTreatTextTagFont#latintagfont_copy(tag, window, wintag=nil)
+#@todo
 
 --- TkTreatTextTagFont#kanjitagfont_copy(tag, window, wintag=nil)
+#@todo
 
 =end

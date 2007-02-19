@@ -24,5 +24,6 @@ Standards and Technology) ¤Î SHA-512 Secure Hash Algorithm¤ò
 = class Digest::SHA2 < Digest::Class
 == Class Methods
 --- new(bitlen = 256)
+#@todo
 Creates a new SHA2 hash object with a given bit length.
 #@end

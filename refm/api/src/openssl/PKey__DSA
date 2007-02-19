@@ -14,12 +14,14 @@
 
 --- generate(size)
 --- new(size)
+#@todo
 
 DSA ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£size ¤Ï¸°Ä¹¤Ç¤¹¡£
 
 --- new
 --- new(str)
 --- new(io)
+#@todo
 
 DSA ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
 
@@ -28,37 +30,45 @@ DSA ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
 --- export
 --- to_pem
 --- to_s
+#@todo
 
 PEM ·Á¼°¤ËÊÑ´¹¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- private?
+#@todo
 
 ÈëÌ©¸°¤ò¤â¤Ã¤Æ¤¤¤ë¾ì¹ç¤Ë true ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- public?
+#@todo
 
 ¸ø³«¸°¤ò¤â¤Ã¤Æ¤¤¤ë¾ì¹ç¤Ë true ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- public_key
+#@todo
 
 ¸ø³«¸°¤òÊÖ¤·¤Þ¤¹¡£
 
 #@since 1.8.2
 --- to_der
+#@todo
 
 DER ·Á¼°¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 #@end
 
 --- to_text
+#@todo
 
 ¿Í´Ö¤¬ÆÉ¤á¤ë·Á¼°¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 --- sign(digest, data)
+#@todo
 
 data ¤Ë´Ø¤·¤Æ digest ¤ò»È¤Ã¤Æ½ðÌ¾¤òºîÀ®¤·¤ÆÊ¸»úÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 digest ¤Ï OpenSSL::PKey::DSS1 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤¹¡£
 
 --- verify(digest, sign, data)
+#@todo
 
 digest ¤Ë¤Ï DSA ¤ÎÀ­¼Á¤«¤é OpenSSL::PKey::DSS1 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Î¤ß¼õ¤±ÉÕ¤±¤Þ¤¹¡£Â¾¤Ï
 Îã³° OpenSSL::PKey::PKeyError ¤òÅê¤²¤Þ¤¹¡£
@@ -66,18 +76,23 @@ digest ¤Ë¤Ï DSA ¤ÎÀ­¼Á¤«¤é OpenSSL::PKey::DSS1 ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Î¤ß¼õ¤±ÉÕ¤±¤Þ¤¹¡£Â
 #@since 1.8.2
 --- p
 --- p=(p)
+#@todo
 
 --- q
 --- q=(q)
+#@todo
 
 --- g
 --- g=(g)
+#@todo
 
 --- pub_key
 --- pub_key=(public_key)
+#@todo
 
 --- priv_key
 --- priv_key=(private_key)
+#@todo
     ¥Ñ¥é¥á¡¼¥¿¡£
 #@end
 

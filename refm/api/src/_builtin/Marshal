@@ -10,6 +10,7 @@ Ruby オブジェクトをファイル(または文字列)に書き出したり、読み戻したり
 == Module Functions
 
 --- dump(obj[,port][,limit])
+#@todo
 
 obj を再帰的にファイルに書き出します。ファイルに書き出せない
 オブジェクトをファイルに書き出そうとすると例外 [[c:TypeError]] が
@@ -46,6 +47,7 @@ limit を指定した場合、limit 段以上深くリンクしたオブジェ
 
 --- load(port[,proc])
 --- restore(port[,proc])
+#@todo
 
 port からマーシャルデータを読み込んで、元のオブジェクトと同
 じ状態をもつオブジェクトを生成します。port は文字列か
@@ -70,6 +72,7 @@ proc として手続きオブジェクトが与えられた場合には読み込んだ
 
 --- MAJOR_VERSION
 --- MINOR_VERSION
+#@todo
 
 [[m:Marshal.dump]] が出力するデータフォーマットのバージョン番号です。
 

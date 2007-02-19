@@ -5,12 +5,15 @@ require xsd/qname
 == Constants
 
 --- Namespace
+#@todo
 
 
 --- SOAPBindingNamespace
+#@todo
 
 
 --- Version
+#@todo
 
 このライブラリのバージョンを表す定数。
 

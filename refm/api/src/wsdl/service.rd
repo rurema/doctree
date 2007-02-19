@@ -7,26 +7,33 @@ require xsd/namedelements
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- name
+#@todo
 
 Â°À­
 
 --- parse_attr(attr, value)
+#@todo
 
 
 --- parse_element(element)
+#@todo
 
 
 --- ports
+#@todo
 
 Â°À­
 
 --- soap_address
+#@todo
 
 Â°À­
 
 --- targetnamespace
+#@todo
 

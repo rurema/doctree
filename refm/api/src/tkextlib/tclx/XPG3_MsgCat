@@ -4,10 +4,13 @@
 == Class Methods
 --- new(catname, fail_mode = false)
 --- open(catname, fail_mode = false)
+#@todo
 
 == Instance Methods
 --- close(fail_mode = false)
+#@todo
 
 --- get(setnum, msgnum, defaultstr)
+#@todo
 
 #@end

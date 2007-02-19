@@ -4,54 +4,76 @@
 == Class Methods
 
 --- by_id
+#@todo
 
 --- cleanup
+#@todo
 
 --- engines
+#@todo
 
 --- load
+#@todo
 
 == Instance Methods
 
 --- cipher
+#@todo
 
 #@since 1.8.3
 --- cmds
+#@todo
 
 --- ctrl_cmd
+#@todo
 #@end
 
 --- digest
+#@todo
 
 --- finish
+#@todo
 
 --- id
+#@todo
 
 --- load_private_key
+#@todo
 
 --- load_public_key
+#@todo
 
 --- name
+#@todo
 
 --- set_default
+#@todo
 
 == Constants
 
 --- METHOD_ALL
+#@todo
 
 --- METHOD_CIPHERS
+#@todo
 
 --- METHOD_DH
+#@todo
 
 --- METHOD_DIGESTS
+#@todo
 
 --- METHOD_DSA
+#@todo
 
 --- METHOD_NONE
+#@todo
 
 --- METHOD_RAND
+#@todo
 
 --- METHOD_RSA
+#@todo
 
 = class OpenSSL::Engine::EngineError < OpenSSL::OpenSSLError
 

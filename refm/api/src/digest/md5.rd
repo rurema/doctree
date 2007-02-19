@@ -10,6 +10,7 @@ Algorithmを実装するクラス。
 --- new([str])
 --- digest(str)
 --- hexdigest(str)
+#@todo
 
 [[c:Digest::Base]] のページを参照のこと。
 
@@ -24,5 +25,6 @@ Algorithmを実装するクラス。
 --- <<(str)
 --- ==(md)
 --- ==(str)
+#@todo
 
 [[c:Digest::Base]] のページを参照のこと。

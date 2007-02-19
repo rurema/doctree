@@ -115,6 +115,7 @@ HELO ドメインは [[m:Net::SMTP.start]], [[m:Net::SMTP#start]]
 == Singleton Methods
 
 --- new(address, port = 25)
+#@todo
 
 新しい SMTP オブジェクトを生成します。
 address はSMTPサーバーのFQDNで、
@@ -123,6 +124,7 @@ port は接続するポート番号です。
 
 --- start(address, port = 25, helo_domain = 'localhost.localdomain', account = nil, password = nil, authtype = nil)
 --- start(address, port = 25, helo_domain = 'localhost.localdomain', account = nil, password = nil, authtype = nil) {|smtp| .... }
+#@todo
 
 以下と同じです。
 
@@ -137,51 +139,66 @@ Example:
   }
 
 --- default_port
+#@todo
 
 The default SMTP port number, 25.
 
 #@since 1.9.0
 --- default_ssl_context
+#@todo
 
 --- default_ssl_port
+#@todo
 
 The default SMTP/SSL port number, 465.
 
 --- default_tls_port
+#@todo
 
 The default SMTP/TLS port number, 587.
 
 --- disable_ssl
+#@todo
 
 --- disable_tls
+#@todo
 
 --- enable_ssl(context = SMTP.default_ssl_context)
+#@todo
 
 Enable SMTP/SSL.
 
 --- enable_tls
+#@todo
 
 --- ssl_context
+#@todo
 
 --- use_ssl?
+#@todo
 
 --- use_tls?
+#@todo
 #@end
 
 == Instance Methods
 
 --- esmtp?
+#@todo
 
 --- esmtp
 --- esmtp=(bool)
+#@todo
 
 --- set_debug_output(f)
 #@since 1.9.0
 --- debug_output=(f)
+#@todo
 #@end
 
 --- start(helo_domain = <local host name>, account = nil, password = nil, authtype = nil)
 --- start(helo_domain = <local host name>, account = nil, password = nil, authtype = nil) {|smtp| .... }
+#@todo
 
 TCP コネクションを張り、同時に SMTP セッションを開始します。
 そのとき、こちらのホストの FQDN を helo_domain に指定します。
@@ -193,32 +210,39 @@ authtype は使用する認証のタイプで、
 シンボルで :plain か :cram_md5 を指定します。
 
 --- started?
+#@todo
 
 SMTP セッションが開始されていたら真。
 
 --- inspect
+#@todo
 
 --- address
+#@todo
 
 接続するアドレス
 
 --- port
+#@todo
 
 接続するポート番号
 
 --- open_timeout
 --- open_timeout=(n)
+#@todo
 
 接続時に待つ最大秒数。この秒数たってもコネクションが
 開かなければ例外 TimeoutError を発生します。
 
 --- read_timeout
 --- read_timeout=(n)
+#@todo
 
 読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数。
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
 --- finish
+#@todo
 
 SMTP セッションを終了します。
 
@@ -227,6 +251,7 @@ SMTP セッションを終了します。
 --- send_message(mailsrc, from_addr, *to_addrs)
 --- send_mail(mailsrc, from_addr, *to_addrs)
 --- sendmail(mailsrc, from_addr, *to_addrs)
+#@todo
 
 mailsrc をメールとして送信します。
 mailsrc は each イテレータを持つ
@@ -245,6 +270,7 @@ to_addrs には送信先メールアドレスを並べます。
 
 --- open_message_stream(from_addr, *to_addrs) {|f| .... }
 --- ready(from_addr, *to_addrs) {|f| .... }
+#@todo
 
 メール書きこみの準備をしたうえで、
 write, print, printf, puts メソッドを持つオブジェクト f をブロックにあたえます。
@@ -265,61 +291,79 @@ to_addrs は宛先のメールボックスです。
 
 #@since 1.9.0
 --- use_ssl?
+#@todo
 
 --- use_tls?
+#@todo
 
 --- disable_ssl
+#@todo
 
 --- disable_tls
+#@todo
 
 --- enable_ssl
+#@todo
 
 --- enable_tls
+#@todo
 
 --- authenticate(user, secret, authtype)
+#@todo
 
 --- auth_plain(user, secret)
+#@todo
 
 Plain authentication.
 
 --- auth_login(user, secret)
+#@todo
 
 Login authentication.
 
 --- auth_cram_md5(user, secret)
+#@todo
 
 Cram-MD5 authentication.
 
 --- starttls
+#@todo
 
 Dispatch STARTTLS command (use SMTP/TLS).
 
 --- helo(domain)
+#@todo
 
 Dispatch HELO command (use standard SMTP).
 
 --- ehlo(domain)
+#@todo
 
 Dispatch EHLO command (use ESMTP).
 
 --- mailfrom(from_addr)
+#@todo
 
 Dispatch MAILFROM command.
 
 --- rcptto_list(to_addrs)
+#@todo
 
 Dispatch multiple RCPTTO commands.
 
 --- rcptto(to_addr)
+#@todo
 
 Dispatch RCPTTO command.
 
 --- data(message)
 --- data {|f| .... }
+#@todo
 
 Dispatch DATA command.
 
 --- quit
+#@todo
 
 Dispatch QUIT command.
 #@end
@@ -327,5 +371,6 @@ Dispatch QUIT command.
 == Constants
 
 --- Revision
+#@todo
 
 File revision.  You cannot assume any specific format.

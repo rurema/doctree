@@ -5,11 +5,15 @@
 == Module Functions
 
 --- decode64(str)
+#@todo
 
 --- encode64(str)
+#@todo
 
 --- decode_b(str)
+#@todo
 
 --- b64encode(bin, len = 60)
+#@todo
 
 #@end

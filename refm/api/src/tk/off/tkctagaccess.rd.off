@@ -12,60 +12,88 @@
 == メソッド:
 
 --- TkcTagAccess#addtag(tag)
+#@todo
 
 --- TkcTagAccess#bbox
+#@todo
 
 --- TkcTagAccess#bind(seq, cmd=Proc.new, args=nil)
+#@todo
 
 --- TkcTagAccess#bindinfo(seq=nil)
+#@todo
 
 --- TkcTagAccess#cget(option)
+#@todo
 
 --- TkcTagAccess#configure(key, value=None)
+#@todo
 
 --- TkcTagAccess#configinfo(key=nil)
+#@todo
 
 --- TkcTagAccess#coords(*args)
+#@todo
 
 --- TkcTagAccess#dchars(first, last=None)
+#@todo
 
 --- TkcTagAccess#dtag(tag_to_del=None)
+#@todo
 
 --- TkcTagAccess#find
 --- TkcTagAccess#list
+#@todo
 
 --- TkcTagAccess#focus
+#@todo
 
 --- TkcTagAccess#gettags
+#@todo
 
 --- TkcTagAccess#icursor(index)
+#@todo
 
 --- TkcTagAccess#index(index)
+#@todo
 
 --- TkcTagAccess#insert(beforethis, string)
+#@todo
 
 --- TkcTagAccess#lower(belowthis=None)
+#@todo
 
 --- TkcTagAccess#move(xamount, yamount)
+#@todo
 
 --- TkcTagAccess#raise(abovethis=None)
+#@todo
 
 --- TkcTagAccess#scale(xorigin, yorigin, xscale, yscale)
+#@todo
 
 --- TkcTagAccess#select_adjust(index)
+#@todo
 
 --- TkcTagAccess#select_from(index)
+#@todo
 
 --- TkcTagAccess#select_to(index)
+#@todo
 
 --- TkcTagAccess#itemtype
+#@todo
 
 --- TkcTagAccess#& (tag)
+#@todo
 
 --- TkcTagAccess#| (tag)
+#@todo
 
 --- TkcTagAccess#^ (tag)
+#@todo
 
 --- TkcTagAccess#-@
+#@todo
 
 =end

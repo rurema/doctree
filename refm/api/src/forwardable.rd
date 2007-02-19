@@ -37,6 +37,7 @@
 
 --- debug
 --- debug=
+#@todo
 
 委譲したメソッドをバックトレースに含めるかどうかを設定します。
 (デフォルトは表示しません。)
@@ -45,12 +46,14 @@
 
 --- def_instance_delegators(accessor, *methods)
 --- def_delegators(accessor, *methods)
+#@todo
 
 methods で渡されたメソッドのリストを accessor に委譲する
 ようにします。
 
 --- def_instance_delegator(accessor, method, ali = method)
 --- def_delegator(accessor, method, ali = method)
+#@todo
 
 method で渡されたメソッドを accessor に委譲するようにし
 ます。aliが引数として渡されたときは、メソッドaliが呼ば
@@ -75,12 +78,14 @@ method で渡されたメソッドを accessor に委譲するようにし
 
 --- def_singleton_delegators(accessor, *methods)
 --- def_delegators(accessor, *methods)
+#@todo
 
 methods で渡されたメソッドのリストを accessor に委譲する
 ようにします。
 
 --- def_singleton_delegator(accessor, method, ali = method)
 --- def_delegator(accessor, method, ali = method)
+#@todo
 
 method で渡されたメソッドを accessor に委譲するようにしま
 す。ali が引数として渡されたときは, メソッド ali が呼ばれ

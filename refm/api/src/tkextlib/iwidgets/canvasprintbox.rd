@@ -8,22 +8,27 @@ require tkextlib/iwidgets
 == Instance Methods
 
 --- get_output
+#@todo
 
 
 
 --- print
+#@todo
 
 
 
 --- refresh
+#@todo
 
 
 
 --- set_canvas(win)
+#@todo
 
 
 
 --- stop
+#@todo
 
 
 

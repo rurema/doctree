@@ -23,6 +23,7 @@ CSV (Comma Separated Value) を扱うクラスです。
 == Class Methods
 
 --- open(path, mode[, fs = nil[, rs = nil]]) { ... }
+#@todo
 
 読み込みモード時には path にあるファイルを開き各行を配列として
 ブロックに渡します。
@@ -49,6 +50,7 @@ CSV (Comma Separated Value) を扱うクラスです。
 #@since 1.8.2
 
 --- foreach(path[, rs = nil]) { ... }
+#@todo
 
 読み込みモードでファイルを開き、各行を配列でブロックに渡します。
 
@@ -60,22 +62,29 @@ CSV (Comma Separated Value) を扱うクラスです。
 
 --- read(path[, length = nil[, offset = nil]])
 --- readlines(path[, rs = nil])
+#@todo
 
 path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
 #@end
 
 --- generate(path[, fs = nil[, rs = nil]]) { ... }
+#@todo
 
 --- parse(str_or_readable[, fs = nil[, rs = nil]])
+#@todo
 
 --- parse_line(src[, fs = nil[, rs = nil]])
+#@todo
 
 --- generate_line(row[, fs = nil[, rs = nil]])
+#@todo
 
 --- parse_row(src, index, out_dev[, fs = nil[, rs = nil]])
+#@todo
 
 --- generate_row(src, cells, out_dev[, fs = nil[, rs = nil]])
+#@todo
 
 #@include(csv/CSV__BasicWriter)
 #@include(csv/CSV__Cell)

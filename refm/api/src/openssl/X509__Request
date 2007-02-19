@@ -4,36 +4,49 @@
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- add_attribute
+#@todo
 
 --- attributes
 --- attributes=
+#@todo
 
 --- public_key
 --- public_key=
+#@todo
 
 --- sign
+#@todo
 
 --- signature_algorithm
+#@todo
 
 --- subject
 --- subject=
+#@todo
 
 --- to_der
+#@todo
 
 --- to_pem
+#@todo
 
 --- to_s
+#@todo
 
 --- to_text
+#@todo
 
 --- verify
+#@todo
 
 --- version
 --- version=
+#@todo
 
 = class OpenSSL::X509::RequestError < OpenSSL::OpenSSLError
 #@end

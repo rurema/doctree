@@ -9,6 +9,7 @@ require webrick/log
 == Constants
 
 --- General
+#@todo
 
 GenericServer.new(config) に与えた時に有効な設定とそのデフォルト値。
 
@@ -75,11 +76,16 @@ true の場合、ホスト名への逆引きを行わなくなる。
 も参照。
 
 --- HTTP
+#@todo
 
 --- FileHandler
+#@todo
 
 --- BasicAuth
+#@todo
 
 --- DigestAuth
+#@todo
 
 --- LIBDIR
+#@todo

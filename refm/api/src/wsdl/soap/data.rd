@@ -15,26 +15,38 @@ require wsdl/soap/complexType
 == Constants
 
 --- HeaderFaultName
+#@todo
 
 --- LocationAttrName
+#@todo
 
 --- StyleAttrName
+#@todo
 
 --- TransportAttrName
+#@todo
 
 --- UseAttrName
+#@todo
 
 --- PartsAttrName
+#@todo
 
 --- PartAttrName
+#@todo
 
 --- NameAttrName
+#@todo
 
 --- MessageAttrName
+#@todo
 
 --- EncodingStyleAttrName
+#@todo
 
 --- NamespaceAttrName
+#@todo
 
 --- SOAPActionAttrName
+#@todo
 

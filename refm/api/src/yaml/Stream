@@ -1,6 +1,7 @@
 = class YAML::Stream < Object
 == class methods
 --- new(opts = {})
+#@todo
 == instance methods
 --- [](i)
 --- add(doc)
@@ -8,6 +9,7 @@
 --- emit(io = nil)
 --- documents
 --- options
+#@todo
 
 === »²¹Í
 

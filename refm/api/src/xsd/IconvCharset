@@ -4,5 +4,6 @@ require 'iconv'
 
 == class methods
 --- safe_iconv(to, from, str)
+#@todo
 
 #@end

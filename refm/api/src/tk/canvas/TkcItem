@@ -10,14 +10,17 @@ include TkcTagAccess
 
 #@since 1.8.2
 --- CItemTypeName
+#@todo
 #@# = nil
 
 #@end
 
 --- CItemTypeToClass
+#@todo
 #@# = {}
 
 --- CItemID_TBL
+#@todo
 #@# = TkCore::INTERP.create_table
 
 
@@ -25,19 +28,23 @@ include TkcTagAccess
 
 #@since 1.8.2
 --- create(canvas, *args)
+#@todo
 
 #@end
 
 
 --- id2obj(canvas, id)
+#@todo
 
 
 
 --- new(parent, *args)
+#@todo
 
 
 
 --- type2class(type)
+#@todo
 
 
 
@@ -46,13 +53,16 @@ include TkcTagAccess
 --- delete
 --- remove
 --- destroy
+#@todo
 
 
 #@since 1.8.2
 --- exist?
+#@todo
 
 #@end
 
 
 --- id
+#@todo
 

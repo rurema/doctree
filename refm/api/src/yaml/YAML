@@ -22,16 +22,22 @@ YAML (YAML Ain't Markup Language) を扱うクラスです。
 == Module Functions
 
 --- add_builtin_type(type_re){|obj| ...}
+#@todo
 
 --- add_domain_type(domain, type_re){|obj| ...}
+#@todo
 
 --- add_private_type(type_re){|obj| ...}
+#@todo
 
 --- add_ruby_type(type){|obj| ...}
+#@todo
 
 --- detect_implicit(val)
+#@todo
 
 --- dump(obj, io = nil)
+#@todo
 
 与えられた obj を YAML フォーマットに変換し、io に書き込みます。
 io が与えられていない場合は、YAML フォーマットの文字列を返します。
@@ -41,6 +47,7 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
 
 #@since 1.8.2
 --- dump_stream(*objs)
+#@todo
 
 与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
 
@@ -58,6 +65,7 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
 
 --- each_document(io) {|obj| ...}
 --- load_documents(io) {|obj| ...}
+#@todo
 
 与えられた io から YAML フォーマットの文書をすべて順に読み込み
 Ruby のオブジェクトに変換し、
@@ -81,9 +89,11 @@ Ruby のオブジェクトに変換し、
   #=>   {"foo"=>"bar"}
 
 --- each_node(io) {|obj| ...}
+#@todo
 
 --- load(io)
 --- load(str)
+#@todo
 
 YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 引数として IO オブジェクトと文字列を受け付けます。
@@ -103,6 +113,7 @@ Ruby のオブジェクトに変換しません。
 
 #@since 1.8.2
 --- load_file(file)
+#@todo
 
 与えられた名前のファイルから YAML フォーマットの文書を読み込み
 Ruby のオブジェクトを生成して返します。
@@ -111,57 +122,76 @@ Ruby のオブジェクトを生成して返します。
 #@end
 
 --- load_stream(io)
+#@todo
 
 与えられた io から YAML フォーマットの文書を
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
 それらオブジェクトを含んだ [[c:YAML::Stream]] を返します。
 
 --- object_maker(obj_class, val, is_attr = false)
+#@todo
 
 --- parse(io)
+#@todo
 
 --- parse_documents(io) {|obj| ...}
+#@todo
 
 #@since 1.8.2
 --- parse_file
+#@todo
 #@end
 
 --- quick_emit(oid, opts={}) {|obj| ...}
+#@todo
 
 --- read_type_class(type, obj_class)
+#@todo
 
 #@since 1.8.3
 --- tagurize(val)
+#@todo
 #@end
 
 --- transfer
+#@todo
 
 --- try_implicit(obj)
+#@todo
 
 = reopen Kernel
 == private instance methods
 --- y(obj)
+#@todo
 
 = reopen Class
 == instance methods
 --- to_yaml(opts = {})
+#@todo
 
 = reopen Object
 == instance methods
 --- to_yaml(opts = {})
+#@todo
 
 --- to_yaml_style
+#@todo
 
 --- to_yaml_properties
+#@todo
 
 = reopen Struct
 == class methods
 --- yaml_tag_class_name
+#@todo
 
 --- yaml_tag_read_class(name)
+#@todo
 
 = reopen String
 == instance methods
 --- is_complex_yaml?
+#@todo
 
 --- is_binary_data?
+#@todo

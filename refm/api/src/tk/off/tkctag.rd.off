@@ -14,27 +14,38 @@
 == クラスメソッド:
 
 --- TkcTag.id2obj(canvas, id)
+#@todo
 
 --- TkcTag.new(parent, mode=nil, *args)
+#@todo
 
 == メソッド:
 
 --- TkcTag#id
+#@todo
 
 --- TkcTag#delete
+#@todo
 
 --- TkcTag#set_to_above(target)
+#@todo
 
 --- TkcTag#set_to_all
+#@todo
 
 --- TkcTag#set_to_below(target)
+#@todo
 
 --- TkcTag#set_to_closest(x, y, halo=None, start=None)
+#@todo
 
 --- TkcTag#set_to_enclosed(x1, y1, x2, y2)
+#@todo
 
 --- TkcTag#set_to_overlapping(x1, y1, x2, y2)
+#@todo
 
 --- TkcTag#set_to_withtag(target)
+#@todo
 
 =end

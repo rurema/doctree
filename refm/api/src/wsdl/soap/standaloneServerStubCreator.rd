@@ -9,16 +9,20 @@ include WSDL::SOAP::ClassDefCreatorSupport
 == Class Methods
 
 --- new(definitions)
+#@todo
 
 
 == Instance Methods
 
 --- definitions
+#@todo
 
 --- dump(service_name)
+#@todo
 
 
 == Private Instance Methods
 
 --- dump_porttype(name)
+#@todo
 

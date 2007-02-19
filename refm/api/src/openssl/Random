@@ -5,18 +5,25 @@
 == Module Functions
 
 --- egd
+#@todo
 
 --- egd_bytes
+#@todo
 
 --- load_random_file
+#@todo
 
 --- pseudo_bytes
+#@todo
 
 --- random_bytes
+#@todo
 
 --- seed
+#@todo
 
 --- write_random_file
+#@todo
 
 = class OpenSSL::Random::RandomError < OpenSSL::OpenSSLError
 

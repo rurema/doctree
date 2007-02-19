@@ -253,24 +253,28 @@ include CGI::QueryExtension
 == Class Methods
 
 --- escape(string)
+#@todo
 
 string を URL エンコードした文字列を新しく作成し返します。
 
         p CGI.escape('@##')   #=> "%40%23%23"
 
 --- unescape(string)
+#@todo
 
 string を URL デコードした文字列を新しく作成し返します。
 
         p CGI.unescape('%40%23%23')   #=> "@##"
 
 --- escapeHTML(string)
+#@todo
 
 string 中の &"<> を実体参照にエンコードした文字列を新しく作成し返します。
 
         p CGI.escapeHTML("3 > 1")   #=> "3 &gt; 1"
 
 --- unescapeHTML(string)
+#@todo
 
 string 中の実体参照のうち、&amp; &gt; &lt; &quot;
 と数値指定がされているもの (&#0ffff など) だけを外します。
@@ -278,6 +282,7 @@ string 中の実体参照のうち、&amp; &gt; &lt; &quot;
         p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 
 --- escapeElement(string, *elements)
+#@todo
 
 elements に指定したエレメントのタグだけを実体参照に置換します。
 
@@ -289,6 +294,7 @@ elements に指定したエレメントのタグだけを実体参照に置換します。
              # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 
 --- unescapeElement(string, *element)
+#@todo
 特定の要素だけをHTMLエスケープから戻す。
 
         例：
@@ -299,6 +305,7 @@ elements に指定したエレメントのタグだけを実体参照に置換します。
           # => "&lt;BR&gt;<A HREF="url"></A>"
 
 --- rfc1123_date(time)
+#@todo
 
 時刻 time を [[RFC:1123]] フォーマットに準拠した文字列に変換します。
 
@@ -307,6 +314,7 @@ elements に指定したエレメントのタグだけを実体参照に置換します。
           # => Sat, 1 Jan 2000 00:00:00 GMT
 
 --- parse(query)
+#@todo
 
 QUERY_STRING をパースします。
 
@@ -317,6 +325,7 @@ QUERY_STRING をパースします。
 #@# module QueryExtension どうしよ
 
 --- pretty(string, shift = "  ")
+#@todo
 
 HTML を人間に見やすく整形します。
 
@@ -336,6 +345,7 @@ HTML を人間に見やすく整形します。
 == Instance Methods
 
 --- header(headers = "text/html")
+#@todo
 
 HTTP ヘッダを headers に従って生成します。（ [[m:CGI#out]] と違い、標準出力には出力しません）
 [[m:CGI#out]] を使わずに自力で HTML を出力したい場合などに使います。
@@ -392,6 +402,7 @@ status パラメータには以下の文字列が使えます。
         print "<body>BODY</body></html>\r\n"
 
 --- out(options = "text/html") { .... }
+#@todo
 
 HTTP ヘッダと、ブロックで与えられた文字列を標準出力に出力します。
 
@@ -428,6 +439,7 @@ charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
 #@#((<ruby-list:35911>))
 
 --- print(*strings)
+#@todo
 
 引数の文字列を標準出力に出力します。
 
@@ -438,28 +450,38 @@ charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
 == Constants
 
 --- CR
+#@todo
 
 --- LF
+#@todo
 
 --- EOL
+#@todo
 
 --- REVISION
+#@todo
 
 --- NEEDS_BINMODE
+#@todo
 
 --- PATH_SEPARATOR
+#@todo
 
 --- HTTP_STATUS
+#@todo
 
 --- RFC822_DAYS
+#@todo
 
 --- RFC822_MONTHS
+#@todo
 
 = module CGI::QueryExtension
 
 == Instance Methods
 
 --- [](key)
+#@todo
 
 文字列 key に対応するパラメータを配列で返します。
 key に対応するパラメータが見つからなかった場合は、nil を返します。（[[m:CGI#params]]と等価です）
@@ -489,59 +511,74 @@ cgi['developer'].is_a?(String) # => 1.8.1まではfalse、1.8.2以降はtrue
     [[unknown:執筆者募集]]
 
 --- accept
+#@todo
 
 ENV['HTTP_ACCEPT']
 
 --- accept_charset
+#@todo
 
 ENV['HTTP_ACCEPT_CHARSET']
 
 --- accept_encoding
+#@todo
 
 ENV['HTTP_ACCEPT_ENCODING']
 
 --- accept_language
+#@todo
 
 ENV['HTTP_ACCEPT_LANGUAGE']
 
 --- auth_type
+#@todo
 
 ENV['AUTH_TYPE']
 
 --- cache_control
+#@todo
 
 ENV['HTTP_CACHE_CONTROL']
 
 --- content_length
+#@todo
 
 ENV['CONTENT_LENGTH']
 
 --- content_type
+#@todo
 
 ENV['CONTENT_TYPE']
 
 --- cookies
 --- cookies=(value)
+#@todo
 
 --- from
+#@todo
 
 ENV['HTTP_FROM']
 
 --- gateway_interface
+#@todo
 
 ENV['GATEWAY_INTERFACE']
 
 --- has_key?(*args)
 --- key?(*args)
 --- include?(*args)
+#@todo
 
 --- host
+#@todo
 
 ENV['HTTP_HOST']
 
 --- keys(*args)
+#@todo
 
 --- multipart?
+#@todo
 
 マルチパートフォームの場合にtrueが返ります。
 
@@ -554,10 +591,12 @@ ENV['HTTP_HOST']
        end
 
 --- negotiate
+#@todo
 
 ENV['HTTP_NEGOTIATE']
 
 --- params
+#@todo
 
 パラメータを格納したハッシュを返します。
 
@@ -569,76 +608,95 @@ ENV['HTTP_NEGOTIATE']
       cgi.params['']              # => nil
 
 --- params=(hash)
+#@todo
 
 --- path_info
+#@todo
 
 ENV['PATH_INFO']
 
 --- path_translated
+#@todo
 
 ENV['PATH_TRANSLATED']
 
 --- pragma
+#@todo
 
 ENV['HTTP_PRAGMA']
 
 --- query_string
+#@todo
 
 ENV['QUERY_STRING']
 
 --- raw_cookie
+#@todo
 
 ENV["HTTP_COOKIE"]
 
 --- raw_cookie2
+#@todo
 
 ENV["HTTP_COOKIE2"]
 
 --- referer
+#@todo
 
 ENV['HTTP_REFERER']
 
 --- remote_addr
+#@todo
 
 ENV['REMOTE_ADDR']
 
 --- remote_host
+#@todo
 
 ENV['REMOTE_HOST']
 
 --- remote_ident
+#@todo
 
 ENV['REMOTE_IDENT']
 
 --- remote_user
+#@todo
 
 ENV['REMOTE_USER']
 
 --- request_method
+#@todo
 
 ENV['REQUEST_METHOD']
 
 --- script_name
+#@todo
 
 ENV['SCRIPT_NAME']
 
 --- server_name
+#@todo
 
 ENV['SERVER_NAME']
 
 --- server_port
+#@todo
 
 ENV['SERVER_PORT']
 
 --- server_protocol
+#@todo
 
 ENV['SERVER_PROTOCOL']
 
 --- server_software
+#@todo
 
 ENV['SERVER_SOFTWARE']
 
 --- user_agent
+#@todo
 
 ENV['HTTP_USER_AGENT']
 
@@ -647,14 +705,18 @@ ENV['HTTP_USER_AGENT']
 == Instance Methods
 
 --- [](idx, *args)
+#@todo
 
 --- first
 --- last
+#@todo
 
 --- set_params(params)
+#@todo
 
 --- to_a
 --- to_ary
+#@todo
 
 #@# = class CGI::Cookie < DelegateClass(Array)
 = class CGI::Cookie < Array
@@ -662,6 +724,7 @@ ENV['HTTP_USER_AGENT']
 == Class Methods
 
 --- new(name = "", *value)
+#@todo
 
 クッキーオブジェクトを作成します。
 
@@ -693,6 +756,7 @@ ENV['HTTP_USER_AGENT']
         cookie1.secure  = true
 
 --- parse(raw_cookie)
+#@todo
 
 クッキー文字列をパースします。
 
@@ -714,6 +778,7 @@ ENV['HTTP_USER_AGENT']
 --- expires=(value)
 --- secure
 --- secure=(val)
+#@todo
 
 Cookie オブジェクトのアトリビュートです。
 
@@ -745,46 +810,55 @@ Cookie オブジェクトのアトリビュートです。
         cookie1.secure  = true
 
 --- to_s
+#@todo
 
 = module CGI::TagMaker
 
 == Instance Methods
 
 --- nn_element_def(element)
+#@todo
 
 --- nOE_element_def(element, append = nil)
+#@todo
 
 --- nO_element_def(element)
+#@todo
 
 = module CGI::HtmlExtension
 
 == Instance Methods
 
 --- a(href = "")
+#@todo
        
         例：
         a("url")
           # = a({ "HREF" => "url" })
 
 --- base(href = "")
+#@todo
        
         例：
         base("url")
           # = base({ "HREF" => "url" })
 
 --- blockquote(cite = nil)
+#@todo
        
         例：
         blockquote("url"){ "string" }
           # = blockquote({ "CITE" => "url" }){ "string" }
 
 --- caption(align = nil)
+#@todo
        
         例：
         caption("align"){ "string" }
           # = caption({ "ALIGN" => "align" }){ "string" }
 
 --- checkbox(name = "", value = nil, checked = nil)
+#@todo
        
         例：
         checkbox("name")
@@ -797,6 +871,7 @@ Cookie オブジェクトのアトリビュートです。
           # = checkbox({ "NAME" => "name", "VALUE" => "value", "CHECKED" => true })
 
 --- checkbox_group(name = "", *values)
+#@todo
        
         例：
         checkbox_group("name", "foo", "bar", "baz")
@@ -824,6 +899,7 @@ Cookie オブジェクトのアトリビュートです。
                          "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
 --- file_field(name = "", size = 20, maxlength = nil)
+#@todo
        
         例：
         file_field("name")
@@ -839,6 +915,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="file" NAME="name" SIZE="40">
 
 --- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded")
+#@todo
        
         例：
         form{ "string" }
@@ -854,6 +931,7 @@ Cookie オブジェクトのアトリビュートです。
           # <FORM METHOD="post" ENCTYPE="enctype">string</FORM>
 
 --- hidden(name = "", value = nil)
+#@todo
        
         例：
         hidden("name")
@@ -866,6 +944,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="hidden" NAME="name" VALUE="value" ID="foo">
 
 --- html(attributes = {})
+#@todo
        
         例：
 
@@ -901,6 +980,7 @@ Cookie オブジェクトのアトリビュートです。
         html(if $VERBOSE then "PRETTY" end){ "HTML string" }
 
 --- image_button(src = "", name = nil, alt = nil)
+#@todo
        
         例：
         image_button("url")
@@ -913,6 +993,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="image" SRC="url" ALT="string">
 
 --- img(src = "", alt = "", width = nil, height = nil)
+#@todo
        
         例：
         img("src", "alt", 100, 50)
@@ -922,6 +1003,7 @@ Cookie オブジェクトのアトリビュートです。
           # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
 
 --- multipart_form(action = nil, enctype = "multipart/form-data")
+#@todo
        
         例：
         multipart_form{ "string" }
@@ -931,6 +1013,7 @@ Cookie オブジェクトのアトリビュートです。
           # <FORM METHOD="post" ACTION="url" ENCTYPE="multipart/form-data">string</FORM>
 
 --- password_field(name = "", value = nil, size = 40, maxlength = nil)
+#@todo
        
         例：
         password_field("name")
@@ -946,6 +1029,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="password" NAME="name" VALUE="value">
 
 --- popup_menu(name = "", *values)
+#@todo
        
         例：
         popup_menu("name", "foo", "bar", "baz")
@@ -978,6 +1062,7 @@ Cookie オブジェクトのアトリビュートです。
           # </SELECT>
 
 --- radio_button(name = "", value = nil, checked = nil)
+#@todo
        
         例：
         radio_button("name", "value")
@@ -990,6 +1075,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="radio" NAME="name" VALUE="value" ID="foo">
 
 --- radio_group(name = "", *values)
+#@todo
        
         例：
         radio_group("name", "foo", "bar", "baz")
@@ -1017,6 +1103,7 @@ Cookie オブジェクトのアトリビュートです。
                       "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
 --- reset(value = nil, name = nil)
+#@todo
        
         例：
         reset
@@ -1029,6 +1116,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="reset" VALUE="reset" ID="foo">
 
 --- scrolling_list(name = "", *values)
+#@todo
        
         例：
 
@@ -1041,6 +1129,7 @@ Cookie オブジェクトのアトリビュートです。
           # </SELECT>
 
 --- submit(value = nil, name = nil)
+#@todo
        
         例：
         submit
@@ -1056,6 +1145,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="submit" VALUE="ok" NAME="button1" ID="foo">
 
 --- text_field(name = "", value = nil, size = 40, maxlength = nil)
+#@todo
        
         例：
         text_field("name")
@@ -1074,6 +1164,7 @@ Cookie オブジェクトのアトリビュートです。
           # <INPUT TYPE="text" NAME="name" VALUE="value">
 
 --- textarea(name = "", cols = 70, rows = 10)
+#@todo
        
         例：
         textarea("name")
@@ -1087,29 +1178,37 @@ Cookie オブジェクトのアトリビュートです。
 == Instance Methods
 
 --- doctype
+#@todo
 
 --- element_init
+#@todo
 
 = module CGI::Html4
 
 == Instance Methods
 
 --- doctype
+#@todo
 
 --- element_init
+#@todo
 
 = module CGI::Html4Fr
 
 == Instance Methods
 
 --- doctype
+#@todo
 
 --- element_init
+#@todo
 
 = module CGI::Html4Tr
 
 == Instance Methods
 
 --- doctype
+#@todo
 
 --- element_init
+#@todo

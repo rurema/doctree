@@ -34,16 +34,20 @@ RSS を扱うためのライブラリです。
 == Instance Methods
 
 --- full_name
+#@todo
 
 --- tag_name
+#@todo
 
 = module RSS::RootElementMixin
 == Instance Methods
 
 --- output_encoding
 --- output_encoding=
+#@todo
 
 --- to_xml
+#@todo
 
 = class RSS::Error < StandardError
 

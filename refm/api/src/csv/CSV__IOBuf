@@ -4,12 +4,16 @@
 == Instance Methods
 
 --- new(s)
+#@todo
 
 --- close
+#@todo
 
 == Private Instance Methods
 
 --- read(size)
+#@todo
 
 --- terminate
+#@todo
 #@end

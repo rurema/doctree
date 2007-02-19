@@ -21,64 +21,95 @@ require wsdl/parser
 == Constants
 
 --- ArrayTypeAttrName
+#@todo
 
 --- BindingName
+#@todo
 
 --- DefinitionsName
+#@todo
 
 --- DocumentationName
+#@todo
 
 --- FaultName
+#@todo
 
 --- ImportName
+#@todo
 
 --- InputName
+#@todo
 
 --- MessageName
+#@todo
 
 --- OperationName
+#@todo
 
 --- OutputName
+#@todo
 
 --- PartName
+#@todo
 
 --- PortName
+#@todo
 
 --- PortTypeName
+#@todo
 
 --- ServiceName
+#@todo
 
 --- TypesName
+#@todo
 
 --- SchemaName
+#@todo
 
 --- SOAPAddressName
+#@todo
 
 --- SOAPBindingName
+#@todo
 
 --- SOAPHeaderName
+#@todo
 
 --- SOAPBodyName
+#@todo
 
 --- SOAPFaultName
+#@todo
 
 --- SOAPOperationName
+#@todo
 
 --- BindingAttrName
+#@todo
 
 --- ElementAttrName
+#@todo
 
 --- LocationAttrName
+#@todo
 
 --- MessageAttrName
+#@todo
 
 --- NameAttrName
+#@todo
 
 --- NamespaceAttrName
+#@todo
 
 --- ParameterOrderAttrName
+#@todo
 
 --- TargetNamespaceAttrName
+#@todo
 
 --- TypeAttrName
+#@todo
 

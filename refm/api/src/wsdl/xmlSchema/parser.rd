@@ -26,15 +26,19 @@ require wsdl/xmlSchema/data
 == Class Methods
 
 --- new(ns, name, node)
+#@todo
 
 == Instance Methods
 
 --- ns
+#@todo
 
 --- name
+#@todo
 
 --- node
 --- node=(node)
+#@todo
 
 = class WSDL::XMLSchema::Parser < WSDL::Info
 include XSD
@@ -42,18 +46,24 @@ include XSD
 == Class Methods
 
 --- new(opt = {})
+#@todo
 
 
 == Instance Methods
 
 --- characters(text)
+#@todo
 
 --- charset
+#@todo
 
 --- end_element(name)
+#@todo
 
 
 --- parse(string_or_readable)
+#@todo
 
 --- start_element(name, attrs)
+#@todo
 

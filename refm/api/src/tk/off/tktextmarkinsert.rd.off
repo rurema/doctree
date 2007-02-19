@@ -10,5 +10,6 @@
 == クラスメソッド:
 
 --- TkTextMarkInsert.new(parent, index=nil)
+#@todo
 
 =end

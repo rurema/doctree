@@ -8,6 +8,7 @@
 == Class Methods
 
 --- new([issuer_cert [, subject_cert [, subject_req [, crl]]]])
+#@todo
 
 ExtensionFactory オブジェクトを生成します。
 
@@ -15,12 +16,14 @@ ExtensionFactory オブジェクトを生成します。
 
 #@since 1.8.1
 --- create_ext(oid, value, critical = false)
+#@todo
 
 OpenSSL::X509::Extension を生成して返します。
 #@end
 
 --- issuer_certificate
 --- issuer_certificate=(name)
+#@todo
 
 issuer の証明書を設定します。
 
@@ -28,28 +31,35 @@ issuer の証明書を設定します。
 --- subject_certificate
 #@end
 --- subject_certificate=(name)
+#@todo
     subject の証明書を設定します。
 
 #@since 1.8.1
 --- subject_request
 #@end
 --- subject_request=(name)
+#@todo
 
 #@since 1.8.1
 --- crl
 #@end
 --- crl=(crl)
+#@todo
 
 #@since 1.8.1
 --- config
 --- config=(config)
+#@todo
 #@end
 
 --- create_ext_from_array
+#@todo
 
 --- create_ext_from_hash
+#@todo
 
 --- create_ext_from_string
+#@todo
 
 
 #@end

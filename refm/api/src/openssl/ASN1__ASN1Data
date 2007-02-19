@@ -33,6 +33,7 @@ ASN.1データ型のスーパークラス
 
 == Class Methods
 --- new(value, tag, tag_class)
+#@todo
 
 ASN1Data オブジェクトを生成します。
 
@@ -40,11 +41,13 @@ ASN1Data オブジェクトを生成します。
 
 --- value
 --- value=(value)
+#@todo
 
 ASN.1 データの表現する値です。
 
 --- tag
 --- tag=(tag)
+#@todo
 
 タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 のいずれかの値をとります。
 あらかじめ定義されているタグ番号の定数に関しては [[c:OpenSSL::ASN1]] の
@@ -52,11 +55,13 @@ ASN.1 データの表現する値です。
 
 --- tag_class
 --- tag_class=(tag_class)
+#@todo
 
 [[c:Symbol]] オブジェクト :UNIVERSAL、:ONTEXT_SPECIFIC、:APPLICATION
 のいずれかをとります。
 
 --- to_der
+#@todo
 
 ASN.1 データの DER 表現を返します。
 #@end

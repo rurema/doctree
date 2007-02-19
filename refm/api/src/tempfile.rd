@@ -15,6 +15,7 @@
 
 --- new(basename[, tempdir])
 --- open(basename[, tempdir])
+#@todo
 
 "basenamepid.n" というファイル名で
 テンポラリファイルを作成します。
@@ -29,18 +30,21 @@
 == Instance Methods
 
 --- close(real = false)
+#@todo
 
 テンポラリファイルをクローズします。
 real が偽でなければ、テンポラリファイルはすぐに削除されます。
 そうでなければ、GC によって削除されます。
 
 --- open
+#@todo
 
 クローズしたテンポラリファイルを再オープンします。
 "r+" でオープンされるので、クローズ前の内容を再度読む
 ことができます。
 
 --- path
+#@todo
 
 テンポラリファイルのパス名を返します。
 
@@ -49,15 +53,18 @@ real が偽でなければ、テンポラリファイルはすぐに削除されます。
 #@# このバージョン情報は正しいか?
 --- length
 --- size
+#@todo
 テンポラリファイルのサイズを返します。
 #@end
 
 --- close!
+#@todo
 
 Closes and unlinks the file.
 
 --- delete
 --- unlink
+#@todo
 
 Unlinks the file. On UNIX-like systems, it is often a good idea
 to unlink a temporary file immediately after creating and opening

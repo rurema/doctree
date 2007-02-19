@@ -2,5 +2,6 @@
 = class XSD::Byte < XSD::XSDShort
 == class methods
 --- new(value = nil)
+#@todo
 
 #@end

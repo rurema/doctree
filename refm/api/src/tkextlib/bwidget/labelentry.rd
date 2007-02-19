@@ -13,6 +13,7 @@ include Tk::Scrollable
 == Instance Methods
 
 --- entrybind(context, *args)
+#@todo
 
 def entrybind(*args)
 
@@ -22,6 +23,7 @@ def entrybind(*args)
 end
 
 --- entrybind_append(context, *args)
+#@todo
 
 def entrybind_append(*args)
 
@@ -31,10 +33,12 @@ def entrybind_append(*args)
 end
 
 --- entrybind_remove(*args)
+#@todo
 
 
 
 --- entrybindinfo(*args)
+#@todo
 
 
 

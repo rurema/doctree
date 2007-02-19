@@ -3,13 +3,19 @@
 == Class Methods
 
 --- _addcallback(ca)
+#@todo
 
 --- _callcallback(key, arg)
+#@todo
 
 --- _newname(prefix)
+#@todo
 
 --- dcb(ca, wid, w)
+#@todo
 
 --- deletecallbackkey(ca)
+#@todo
 
 --- mainloop
+#@todo

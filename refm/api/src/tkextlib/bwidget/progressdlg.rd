@@ -11,30 +11,37 @@ require tkextlib/bwidget/messagedlg
 == Instance Methods
 
 --- create_self(keys)
+#@todo
 
 
 
 --- text
+#@todo
 
 
 
 --- text=(txt)
+#@todo
 
 
 
 --- textvariable
+#@todo
 
 
 
 --- value
+#@todo
 
 
 
 --- value=(val)
+#@todo
 
 
 
 --- variable
+#@todo
 
 
 

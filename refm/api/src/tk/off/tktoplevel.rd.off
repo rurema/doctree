@@ -18,10 +18,12 @@
 
 --- TkToplevel.new(parent=nil, keys=nil)
 --- TkToplevel.new(parent=nil, screen=nil, classname=nil, keys=nil)
+#@todo
 
 == メソッド:
 
 --- TkToplevel#specific_class
+#@todo
 
 == 標準オプション:
 
@@ -44,24 +46,34 @@
 
 --- TkToplevel#background(color)
 --- TkToplevel#bg(color)
+#@todo
 
 ### --- TkToplevel#class
 --- TkToplevel#classname
+#@todo
 
 --- TkToplevel#colormap
+#@todo
 
 --- TkToplevel#container(bool)
+#@todo
 
 --- TkToplevel#height
+#@todo
 
 --- TkToplevel#menu
+#@todo
 
 --- TkToplevel#screen
+#@todo
 
 --- TkToplevel#use
+#@todo
 
 --- TkToplevel#visual
+#@todo
 
 --- TkToplevel#width
+#@todo
 
 =end

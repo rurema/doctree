@@ -15,6 +15,7 @@
 == クラスメソッド:
 
 --- TkFont.new(ltn=DEFAULT_LATIN_FONT_NAME, knj=nil, keys=nil)
+#@todo
 
         require 'tk'
 
@@ -26,6 +27,7 @@
         Tk.mainloop
 
 --- TkFont.families(window=nil)
+#@todo
     フォントファミリの一覧を配列にして返します。
     ((-((|window|))の意味がよくわからん-))
 
@@ -38,6 +40,7 @@
             :
 
 --- TkFont.names
+#@todo
     現在定義されているフォント名の一覧を配列にして返します。
 
         require 'tk'
@@ -49,19 +52,25 @@
            @font0000l
 
 --- TkFont.create_copy(font)
+#@todo
 
 --- TkFont.get_obj(name)
+#@todo
 
 --- TkFont.init_widget_font(path, *args)
+#@todo
 
 --- TkFont.used_on(path=nil)
+#@todo
 
 --- TkFont.failsafe(font)
+#@todo
 
 =end
 == privateメソッド:
 
 --- TkFont#_get_font_info_from_hash(font)
+#@todo
 =end
 ###--- TkFont#create_latinfont_tk4x(font)
 ###
@@ -112,12 +121,16 @@
 
 --- TkFont#create_asciifont(font)
 --- TkFont#create_latinfont(font)
+#@todo
 
 --- TkFont#create_kanjifont(font)
+#@todo
 
 --- TkFont#create_compoundfont(ltn, knj, keys)
+#@todo
 
 --- TkFont#actual_core(font, window=nil, option=nil)
+#@todo
 
     指定した ((|font|)) の実際に使用されるオプション(((<フォントオプション>))
     参照) を配列で返します。((|option|)) が指定されていれば
@@ -133,39 +146,54 @@
     を返します。
 
 --- TkFont#configinfo_core(font, option=nil)
+#@todo
 
 --- TkFont#configure_core(font, slot, value=None)
+#@todo
 
 --- TkFont#delete_core
+#@todo
 
 --- TkFont#latin_replace_core(ltn)
+#@todo
 
 --- TkFont#kanji_replace_core(knj)
+#@todo
 
 --- TkFont#measure_core(window, text)
+#@todo
 
 --- TkFont#metrics_core(font, window, option=nil)
+#@todo
 == メソッド:
 
 --- TkFont#call_font_configure(path, *args)
+#@todo
 
 --- TkFont#used
+#@todo
 
 --- TkFont#id
+#@todo
 
 --- TkFont#font
+#@todo
 
 --- TkFont#ascii_font
 --- TkFont#latin_font
+#@todo
 
 --- TkFont#kanji_font
+#@todo
 
 --- TkFont#actual(option=nil)
+#@todo
 
     フォントの属性(((<フォントオプション>))参照)を配列で返します。
     ((|option|)) が指定されていればそのオプションの値だけを返します。
 
 --- TkFont#actual_displayof(window, option=nil)
+#@todo
 
     (({actual()})) と同じですが、指定した ((|window|)) ウィ
     ンドウが表示されるディスプレイで使われるフォントオプショ
@@ -173,42 +201,59 @@
 
 --- TkFont#ascii_actual(option=nil)
 --- TkFont#latin_actual(option=nil)
+#@todo
 
 --- TkFont#ascii_actual_displayof(window, option=nil)
 --- TkFont#latin_actual_displayof(window, option=nil)
+#@todo
 
 --- TkFont#kanji_actual(option=nil)
+#@todo
 
 --- TkFont#kanji_actual_displayof(window, option=nil)
+#@todo
 
 --- TkFont#[](slot)
+#@todo
 
 --- TkFont#[]=(slot, val)
+#@todo
 
 --- TkFont#configure(slot, value=None)
+#@todo
 
 --- TkFont#configinfo(slot=nil)
+#@todo
 
 --- TkFont#delete
+#@todo
 
 --- TkFont#ascii_configure(slot, value=None)
 --- TkFont#latin_configure(slot, value=None)
+#@todo
 
 --- TkFont#ascii_configinfo(slot=nil)
 --- TkFont#latin_configinfo(slot=nil)
+#@todo
 
 --- TkFont#kanji_configure(slot, value=None)
+#@todo
 
 --- TkFont#kanji_configinfo(slot=nil)
+#@todo
 
 --- TkFont#replace(ltn, knj)
+#@todo
 
 --- TkFont#ascii_replace(ltn)
 --- TkFont#latin_replace(ltn)
+#@todo
 
 --- TkFont#kanji_replace(knj)
+#@todo
 
 --- TkFont#measure(text)
+#@todo
 
     フォント (({self})) で ((|text|)) を表示したときの表示幅
     をピクセル数で返します。((|text|)) 中のタブや改行は特別には
@@ -228,8 +273,10 @@
            46
 
 --- TkFont#measure_displayof(window, text)
+#@todo
 
 --- TkFont#metrics(option=nil)
+#@todo
 
     フォントメトリック情報を配列で返します。
 
@@ -256,28 +303,39 @@
       になります。
 
 --- TkFont#metrics_displayof(window, option=nil)
+#@todo
 
 --- TkFont#ascii_metrics(option=nil)
 --- TkFont#latin_metrics(option=nil)
+#@todo
 
 --- TkFont#latin_metrics_displayof(window, option=nil)
+#@todo
 
 --- TkFont#kanji_metrics(option=nil)
+#@todo
 
 --- TkFont#kanji_metrics_displayof(window, option=nil)
+#@todo
 
 --- TkFont#reset_pointadjust
+#@todo
 == 定数
 
 --- TkFont::Tk_FontID
+#@todo
 
 --- TkFont::Tk_FontNameTBL
+#@todo
 
 --- TkFont::Tk_FontUseTBL
+#@todo
 
 --- TkFont::DEFAULT_LATIN_FONT_NAME
+#@todo
 
 --- TkFont::DEFAULT_KANJI_FONT_NAME
+#@todo
 
 == フォント記述
 

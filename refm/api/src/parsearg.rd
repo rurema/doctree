@@ -37,6 +37,7 @@ parsearg ライブラリのオプション解析規則は
 == Private Instance Methods
 
 --- parseArgs(min_argc，check_opts，single_opts，*opts)
+#@todo
 
 コマンドラインオプションを解析し、
 対応するグローバル変数 $OPT_xxx に値を設定します。

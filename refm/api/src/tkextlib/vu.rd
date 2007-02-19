@@ -12,5 +12,6 @@ require tkextlib/vu/bargraph
 = module Tk::Vu
 == Singleton Methods
 --- package_version
+#@todo
 
 #@end

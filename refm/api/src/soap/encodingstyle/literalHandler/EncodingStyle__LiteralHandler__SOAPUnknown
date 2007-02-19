@@ -5,19 +5,24 @@
 == Class Methods
 
 --- new(handler, elename, extraattr)
+#@todo
 
 == Instance Methods
 
 #@since 1.8.2
 --- as_element
+#@todo
 #@end
 
 --- as_string
+#@todo
 
 --- as_nil
+#@todo
 
 #@if (version == "1.8.1")
 --- as_struct
+#@todo
 #@end
 
 #@end

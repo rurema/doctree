@@ -92,6 +92,7 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 == Class Methods
 --- abort_on_exception
 --- abort_on_exception=(newstate)
+#@todo
 
 真の時は、いずれかのスレッドが例外によって終了した時に、インタプリタ
 全体を中断させます。デフォルトは偽、すなわち、通常あるスレッドで起こった例
@@ -102,6 +103,7 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 
 --- critical
 --- critical=(newstate)
+#@todo
 
 真である間、スレッドの切替えを行いません。カレントスレッドが停止
 (stop)した場合やシグナルに割り込まれた場合には、自動的に
@@ -118,10 +120,12 @@ false になります。
 [[c:Mutex]] や [[c:Monitor]] を使うべきです。
 
 --- current
+#@todo
 
 現在実行中のスレッド(カレントスレッド)を返します。
 
 --- exit
+#@todo
 
 カレントスレッドの実行を終了します。
 
@@ -137,6 +141,7 @@ false になります。
 により終了します。
 
 --- kill(thread)
+#@todo
 
 指定したスレッドの実行を終了させます。既に終了しているスレッドに対
 しては何もしません。
@@ -144,6 +149,7 @@ false になります。
 thread を返します。 exit と同様 Thread の終了結果を設定しません
 
 --- list
+#@todo
 
 生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
 の配列を返します。
@@ -154,12 +160,14 @@ version 1.8 では、aborting 状態であるスレッド
 #@end
 
 --- main
+#@todo
 
 メインスレッドを返します。
 
 --- new([arg, ...]) { ... }
 --- start([arg, ...]) { ... }
 --- fork([arg, ...]) { ... }
+#@todo
 
 スレッドを生成して、ブロックの評価を開始します。
 
@@ -182,6 +190,7 @@ version 1.8 では、aborting 状態であるスレッド
   end
 
 --- pass
+#@todo
 
 他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、
 他の実行可能状態のスレッドに制御を移します(明示的なスケジューリン
@@ -190,6 +199,7 @@ version 1.8 では、aborting 状態であるスレッド
 nil を返します。
 
 --- stop
+#@todo
 
 他のスレッドから [[m:Thread#run]] メソッドで再起動されるまで、カレ
 ントスレッドの実行を停止します。
@@ -199,6 +209,7 @@ nil を返します。
 == Instance Methods
 
 --- [](name)
+#@todo
 
 name に対応したスレッドに固有のデータを取り出しま
 す。name は文字列か [[c:Symbol]] で指定します。
@@ -207,6 +218,7 @@ name に対応するスレッド固有データがなければ nil を返し
 ます。
 
 --- []=(name,val)
+#@todo
 
 val を name に対応するスレッド固有のデータとして格納し
 ます。name は文字列か [[c:Symbol]] で指定します。
@@ -217,6 +229,7 @@ val を返します。
 
 --- abort_on_exception
 --- abort_on_exception=(newstate)
+#@todo
 
 参照の場合は真偽値を、代入形式では右辺 newstate を、返します。
 
@@ -224,6 +237,7 @@ val を返します。
 全体を中断させます。デフォルトは偽です。[[m:Thread#スレッドと例外]]に詳述。
 
 --- alive?
+#@todo
 
 スレッドが「生きている」時、true を返します。
 
@@ -233,6 +247,7 @@ val を返します。
 --- exit
 --- kill
 --- terminate
+#@todo
 
 スレッドの実行を終了させます。
 
@@ -242,6 +257,7 @@ self を返します。
 --- thr.exit!
 --- thr.kill!
 --- thr.terminate!
+#@todo
 #@#   => thr
 
 Terminates thr without calling ensure clauses and schedules another
@@ -253,6 +269,7 @@ See [[m:Thread#exit]] for the safer version.
 #@end
 
 --- group
+#@todo
 
 スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
 
@@ -262,8 +279,10 @@ See [[m:Thread#exit]] for the safer version.
 死んでいるスレッドは nil を返します。
 
 --- join
+#@todo
 #@if (version >= "1.7.0")
 --- join(limit)
+#@todo
 #@end
 
 スレッド self の実行が終了するまで、カレントスレッドを停止し
@@ -287,12 +306,14 @@ self を返します。
    threads.each {|t| t.join}
 
 --- key?(name)
+#@todo
 
 name に対応したスレッドに固有のデータが定義されていれば
 true を返します。name は文字列か [[c:Symbol]] で指定し
 ます。
 
 --- keys
+#@todo
 
 スレッド固有データに関連づけられたキーの配列を返します。キーは
 [[c:Symbol]] で返されます。
@@ -305,11 +326,13 @@ true を返します。name は文字列か [[c:Symbol]] で指定し
     #=> [:bar, :foo]
 
 --- priority
+#@todo
 
 スレッドの優先度を返します。優先度のデフォルト値は 0 で、この値の
 大きいスレッドは小さいスレッドよりも優先度が高くなります。
 
 --- priority=(val)
+#@todo
 
 スレッドの優先度を設定します。負の値も指定できます。
 
@@ -319,6 +342,7 @@ val を返します。
 #@#ていました
 
 --- raise([error_type,][message][,traceback])
+#@todo
 
 そのスレッドで強制的に例外を発生させます。
 
@@ -340,6 +364,7 @@ val を返します。
      ["-:3"]
 
 --- run
+#@todo
 
 停止状態(stop)のスレッドを再開させます。
 [[m:Thread#wakeup]] と異なりすぐにスレッドの切り替え
@@ -349,6 +374,7 @@ val を返します。
 self を返します。
 
 --- safe_level
+#@todo
 
 self のセーフレベルを返します。カレントスレッドの
 safe_level は、[[m:$SAFE]] と同じです。
@@ -356,6 +382,7 @@ safe_level は、[[m:$SAFE]] と同じです。
 セーフレベルについては[[unknown:セキュリティモデル]]を参照してください。
 
 --- status
+#@todo
 
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
 れかで返します。正常終了したスレッドに対して false、例外によ
@@ -366,11 +393,13 @@ safe_level は、[[m:$SAFE]] と同じです。
 [[m:Thread#alive?]] が真を返すなら、このメソッドも真です。
 
 --- stop?
+#@todo
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返
 します。
 
 --- value
+#@todo
 
 スレッド self が終了するまで待ち([[m:Thread#join]] と同じ)、
 そのスレッドのブロックが返した値を返します。スレッド実行中に例外が
@@ -391,6 +420,7 @@ safe_level は、[[m:$SAFE]] と同じです。
    threads.each {|t| p t.join.value}
 
 --- wakeup
+#@todo
 
 停止状態(stop)のスレッドを実行可能状態(run)にします。死んでいるス
 レッドに対して実行すると [[c:ThreadError]] が発生します。

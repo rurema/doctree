@@ -16,6 +16,7 @@
 == メソッド:
 
 --- TkScrollbar#command {|args| ...}
+#@todo
     ((-実際には、TkWindowのメソッドだが、都合によりここにも書く-))
 
     スクロールバーウィジェットの操作に応じてブロックを実行します。
@@ -44,15 +45,21 @@
 
 
 --- TkScrollbar#delta
+#@todo
 
 --- TkScrollbar#fraction
+#@todo
 
 --- TkScrollbar#identify(x, y)
+#@todo
 
 --- TkScrollbar#get
+#@todo
 
 --- TkScrollbar#set(first, last)
+#@todo
 
 --- TkScrollbar#activate(element=None)
+#@todo
 
 =end

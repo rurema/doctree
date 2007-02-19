@@ -76,6 +76,7 @@
 == モジュールメソッド:
 
 --- TkWinfo.atom(name)
+#@todo
     ((<アプリケーション名>))((|name|))の((<アトム>))を返します。
 
       require "tk"
@@ -86,6 +87,7 @@
     ((-displayofは？-))
 
 --- TkWinfo.atomname(id)
+#@todo
     アトム((|id|))に対応するアプリケーション名を返します。
 
       require "tk"
@@ -96,6 +98,7 @@
     ((-displayofは？-))
 
 --- TkWinfo.cells(window)
+#@todo
     ウィンドウ((|window|))のカラーマップのセル数を返します。
 
       require "tk"
@@ -104,6 +107,7 @@
       => 64
 
 --- TkWinfo.children(window)
+#@todo
     ウィンドウ((|window|))の子ウィンドウを配列にして返します。
 
     (ウィジェット階層上の子ウィンドウなので、((<TkToplevel>)) でも子ウィン
@@ -121,6 +125,7 @@
       => [#<TkFrame: @path=".w0000">, #<TkToplevel: @path= ... >]
 
 --- TkWinfo.classname(window)
+#@todo
     ウィジェットの((<クラス>))名を返します。
 
       require "tk"
@@ -133,6 +138,7 @@
          "Foo"
 
 --- TkWinfo.colormapfull(window)
+#@todo
     ウィンドウに割り当てられたカラーマップに空きがなければ真を返します。
 
       require "tk"
@@ -141,6 +147,7 @@
       => false
 
 --- TkWinfo.containing(rootX, rootY)
+#@todo
     指定した位置にあるウィンドウを返します。
 
       require "tk"
@@ -158,6 +165,7 @@
     ((-displayofは？-))
 
 --- TkWinfo.depth(window)
+#@todo
     ウィンドウの深さ(1ピクセルあたりのビット数)を返します。
 
       require "tk"
@@ -166,6 +174,7 @@
       => 16
 
 --- TkWinfo.exist?(window)
+#@todo
     ウィンドウが存在しているかどうかを返します。
 
       require "tk"
@@ -178,6 +187,7 @@
          false
 
 --- TkWinfo.fpixels(window, number)
+#@todo
     距離((|number|))が何ピクセルかを浮動小数で返します。((<TkWinfo.pixels>))
 
       require "tk"
@@ -195,6 +205,7 @@
          75.08545035
 
 --- TkWinfo.geometry(window)
+#@todo
     ウィンドウの((<ジオメトリ>))を返します。
 
     ((<Tk::Wm#geometry>))はウィンドウのフレーム(タイトルバーなど)の位置を
@@ -216,6 +227,7 @@
         "200x200+328+396"
 
 --- TkWinfo.height(window)
+#@todo
     ウィンドウの高さを返します。
 
       require "tk"
@@ -230,6 +242,7 @@
          200
 
 --- TkWinfo.id(window)
+#@todo
     ウィンドウの((<リソースID>))を返します。((<TkWinfo.widget>))
 
       require "tk"
@@ -240,6 +253,7 @@
          #<TkRoot: @path=".">
 
 --- TkWinfo.interps(window=nil)
+#@todo
     実行しているTcl/Tkインタプリタのアプリケーション名を配列にして返します。
     ウィンドウを指定すると、そのウィンドウがあるスクリーン上で実行している
     ものを返します。
@@ -251,6 +265,7 @@
       => ["tk #2", "tk"]
 
 --- TkWinfo.mapped?(window)
+#@todo
     ウィンドウが((<マップ>))されていれば真を返します。
     ((<TkWinfo.viewable>))
 
@@ -266,6 +281,7 @@
          true
 
 --- TkWinfo.manager(window)
+#@todo
     ウィンドウ配置を決めている((<ジオメトリマネージャ>))の名前を返します。
     ((<TkRoot>))や((<TkToplevel>))の場合はウィンドウマネージャを表す文字列
     (({"wm"}))を返します。
@@ -284,6 +300,7 @@
          "place"
 
 --- TkWinfo.appname(window)
+#@todo
     ウィンドウの名前(((<パス>))名の要素)を返します。ルートウィジェットでは
     アプリケーション名を返します。((<TkCore.appname>))
 
@@ -295,6 +312,7 @@
          "w0001"
 
 --- TkWinfo.parent(window)
+#@todo
     ウィンドウの親ウィンドウを返します。ルートウィジェットを指定した場合
     (({nil}))を返します。
 
@@ -306,6 +324,7 @@
          #<TkRoot: @path=".">
 
 --- TkWinfo.widget(id)
+#@todo
     ウィンドウの((<リソースID>))からウィンドウを返します。((<TkWinfo.id>))
 
       require "tk"
@@ -318,6 +337,7 @@
     ((-displayofは？-))
 
 --- TkWinfo.pixels(window, number)
+#@todo
     距離((|number|))が何ピクセルかを整数で返します。((<TkWinfo.fpixels>))
 
       require "tk"
@@ -335,6 +355,7 @@
          75
 
 --- TkWinfo.reqheight(window)
+#@todo
     ウィンドウが要求する高さを返します。
 
       require "tk"
@@ -345,6 +366,7 @@
          200
 
 --- TkWinfo.reqwidth(window)
+#@todo
     ウィンドウが要求する幅を返します。
 
       require "tk"
@@ -355,6 +377,7 @@
          200
 
 --- TkWinfo.rgb(window, color)
+#@todo
     色((|color|))に対応するRGB値を配列で返します。
 
       require "tk"
@@ -376,6 +399,7 @@
 
 
 --- TkWinfo.rootx(window)
+#@todo
     ウィンドウの基準位置(左上角)のルートウィンドウ上でのX座標を返します。
     ((-ウィンドウの飾りは考慮しない？-))
 
@@ -396,9 +420,11 @@
          22
 
 --- TkWinfo.rooty(window)
+#@todo
     ウィンドウの基準位置(左上角)のルートウィンドウ上でのX座標を返します。
 
 --- TkWinfo.screen(window)
+#@todo
     ウィンドウが存在するスクリーン名を返します。
 
       require "tk"
@@ -407,6 +433,7 @@
       => ":0.0"
 
 --- TkWinfo.screencells(window)
+#@todo
     ウィンドウが存在するスクリーンのデフォルトカラーマップのセル数を返しま
     す。
 
@@ -416,6 +443,7 @@
       => 64
 
 --- TkWinfo.screendepth(window)
+#@todo
     ウィンドウが存在するスクリーンのデフォルトの深さを返します。
 
       require "tk"
@@ -424,6 +452,7 @@
       => 16
 
 --- TkWinfo.screenheight (window)
+#@todo
     ウィンドウが存在するスクリーンの高さ(ピクセル)を返します。
 
       require "tk"
@@ -432,6 +461,7 @@
       => 1024
 
 --- TkWinfo.screenmmheight(window)
+#@todo
     ウィンドウが存在するスクリーンの高さ(ミリメートル)を返します。
 
       require "tk"
@@ -446,6 +476,7 @@
     ((-どこの誤差？-))
 
 --- TkWinfo.screenmmwidth(window)
+#@todo
     ウィンドウが存在するスクリーンの幅(ミリメートル)を返します。
 
       require "tk"
@@ -458,6 +489,7 @@
          1280.0
 
 --- TkWinfo.screenvisual(window)
+#@todo
     ウィンドウが存在するスクリーンのデフォルトのvisualクラスを返します。
     visualクラスは以下のうちの何れかです。
 
@@ -476,6 +508,7 @@
       => "truecolor"
 
 --- TkWinfo.screenwidth(window)
+#@todo
     ウィンドウが存在するスクリーンの幅(ピクセル)を返します。
 
       require "tk"
@@ -484,6 +517,7 @@
       => 1280
 
 --- TkWinfo.server(window)
+#@todo
     ウィンドウが存在するスクリーンのサーバ情報(バージョン、ベンダ、ベンダ
     バージョン)を文字列で返します。
 
@@ -495,6 +529,7 @@
     ((- R0 ？-))
 
 --- TkWinfo.toplevel(window)
+#@todo
     ウィンドウが((<TkToplevel>))上に配置されていればその(({TkToplevel}))ウィ
     ンドウを返します。
 
@@ -512,6 +547,7 @@
          #<TkToplevel: @classname=nil, @path=".w0001", @screen=nil>
 
 --- TkWinfo.visual(window)
+#@todo
     ウィンドウの visual クラスを返します。
 
       require "tk"
@@ -524,6 +560,7 @@
     ((-truecolor以外のvisualクラスを指定する方法は？-))
 
 --- TkWinfo.visualid(window)
+#@todo
     ウィンドウの visual ID を返します。
 
       require "tk"
@@ -536,6 +573,7 @@
     ((-truecolor以外のvisualクラスを指定する方法は？-))
 
 --- TkWinfo.visualsavailable(window, includeids=false)
+#@todo
     ウィンドウのあるスクリーン上で指定可能な以下の配列
 
      [visualクラス , 深さ(1ピクセルあたりのビット数), visual ID]
@@ -554,6 +592,7 @@
          [["truecolor", 16, "0x22"]]
 
 --- TkWinfo.vrootheight(window)
+#@todo
     ウィンドウのあるスクリーンの高さを返します。((<仮想画面>))を考慮します。
 
       require "tk"
@@ -562,6 +601,7 @@
       => 1024
 
 --- TkWinfo.vrootwidth(window)
+#@todo
     ウィンドウのあるスクリーンの幅を返します。((<仮想画面>))を考慮します。
 
       require "tk"
@@ -570,6 +610,7 @@
       => 1280
 
 --- TkWinfo.vrootx(window)
+#@todo
     ウィンドウのあるスクリーンのX座標を返します。((<仮想画面>))を考慮します。
 
       require "tk"
@@ -578,6 +619,7 @@
       => 0
 
 --- TkWinfo.vrooty(window)
+#@todo
     ウィンドウのあるスクリーンのY座標を返します。((<仮想画面>))を考慮します。
 
       require "tk"
@@ -586,6 +628,7 @@
       => 0
 
 --- TkWinfo.width(window)
+#@todo
     ウィンドウの幅を返します。
 
       require "tk"
@@ -600,6 +643,7 @@
          200
 
 --- TkWinfo.x(window)
+#@todo
     ウィンドウの基準位置(左上角)の親ウィンドウ上でのX座標を返します。
     ((<TkRoot>))や((<TkToplevel>))のウィンドウでは((<TkWinfo.rootx>))と同じです。
 
@@ -617,10 +661,12 @@
          464+100=564
 
 --- TkWinfo.y(window)
+#@todo
     ウィンドウの基準位置(左上角)の親ウィンドウ上でのY座標を返します。
     ((<TkRoot>))や((<TkToplevel>))のウィンドウでは((<TkWinfo.rooty>))と同じです。
 
 --- TkWinfo.viewable(window)
+#@todo
     指定したウィンドウとその先祖ウィンドウ(すべての親)が((<マップ>))されて
     いれば真を返します。((<TkWinfo.mapped?>))
 
@@ -647,6 +693,7 @@
          true
 
 --- TkWinfo.pointerx(window)
+#@todo
     ウィンドウがあるスクリーン上のマウスポインタのX座標を返します。
     マウスポインタがスクリーン上にない場合-1を返します((-どういう場合？-))。
 
@@ -660,10 +707,12 @@
          [493, 556]
 
 --- TkWinfo.pointery(window)
+#@todo
     ウィンドウがあるスクリーン上のマウスポインタのY座標を返します。
     マウスポインタがスクリーン上にない場合-1を返します((-どういう場合？-))。
 
 --- TkWinfo.pointerxy(window)
+#@todo
     (('[TkWinfo.pointerx, TkWinfo.pointery]'))である配列を返します。
 
 == メソッド:
@@ -673,150 +722,199 @@
 ジュールメソッドは代りに(({self}))を使う点が異なります。
 
 --- TkWinfo#winfo_atom(name)
+#@todo
     ((<TkWinfo.atom>))
 
 --- TkWinfo#winfo_atomname(id)
+#@todo
     ((<TkWinfo.atomname>))
 
 --- TkWinfo#winfo_cells
+#@todo
     ((<TkWinfo.cells>))
 
 --- TkWinfo#winfo_children
+#@todo
     ((<TkWinfo.children>))
 
 --- TkWinfo#winfo_classname
+#@todo
     ((<TkWinfo.classname>))
 
 --- TkWinfo#winfo_colormapfull
+#@todo
     ((<TkWinfo.colormapfull>))
 
 --- TkWinfo#winfo_containing(x, y)
+#@todo
     ((<TkWinfo.containing>))
 
 --- TkWinfo#winfo_depth
+#@todo
     ((<TkWinfo.depth>))
 
 --- TkWinfo#winfo_exist?
+#@todo
     ((<TkWinfo.exist?>))
 
 --- TkWinfo#winfo_fpixels(number)
+#@todo
     ((<TkWinfo.fpixels>))
 
 --- TkWinfo#winfo_geometry
+#@todo
     ((<TkWinfo.geometry>))
 
 --- TkWinfo#winfo_height
+#@todo
     ((<TkWinfo.height>))
 
 --- TkWinfo#winfo_id
+#@todo
     ((<TkWinfo.id>))
 
 --- TkWinfo#winfo_interps
+#@todo
     ((<TkWinfo.interps>))
 
 --- TkWinfo#winfo_mapped?
+#@todo
     ((<TkWinfo.mapped?>))
 
 --- TkWinfo#winfo_manager
+#@todo
     ((<TkWinfo.manager>))
 
 --- TkWinfo#winfo_appname
+#@todo
     ((<TkWinfo.appname>))
 
 --- TkWinfo#winfo_parent
+#@todo
     ((<TkWinfo.parent>))
 
 --- TkWinfo#winfo_widget(id)
+#@todo
     ((<TkWinfo.widget>))
 
 --- TkWinfo#winfo_pixels(number)
+#@todo
     ((<TkWinfo.pixels>))
 
 --- TkWinfo#winfo_reqheight
+#@todo
     ((<TkWinfo.reqheight>))
 
 --- TkWinfo#winfo_reqwidth
+#@todo
     ((<TkWinfo.reqwidth>))
 
 --- TkWinfo#winfo_rgb(color)
+#@todo
     ((<TkWinfo.rgb>))
 
 --- TkWinfo#winfo_rootx
+#@todo
     ((<TkWinfo.rootx>))
 
 --- TkWinfo#winfo_rooty
+#@todo
     ((<TkWinfo.rooty>))
 
 --- TkWinfo#winfo_screen
+#@todo
     ((<TkWinfo.screen>))
 
 --- TkWinfo#winfo_screencells
+#@todo
     ((<TkWinfo.screencells>))
 
 --- TkWinfo#winfo_screendepth
+#@todo
     ((<TkWinfo.screendepth>))
 
 --- TkWinfo#winfo_screenheight
+#@todo
     ((<TkWinfo.screenheight>))
 
 --- TkWinfo#winfo_screenmmheight
+#@todo
     ((<TkWinfo.screenmmheight>))
 
 --- TkWinfo#winfo_screenmmwidth
+#@todo
     ((<TkWinfo.screenmmwidth>))
 
 --- TkWinfo#winfo_screenvisual
+#@todo
     ((<TkWinfo.screenvisual>))
 
 --- TkWinfo#winfo_screenwidth
+#@todo
     ((<TkWinfo.screenwidth>))
 
 --- TkWinfo#winfo_server
+#@todo
     ((<TkWinfo.server>))
 
 --- TkWinfo#winfo_toplevel
+#@todo
     ((<TkWinfo.toplevel>))
 
 --- TkWinfo#winfo_visual
+#@todo
     ((<TkWinfo.visual>))
 
 --- TkWinfo#winfo_visualid
+#@todo
     ((<TkWinfo.visualid>))
 
 --- TkWinfo#winfo_visualsavailable(includeids=false)
+#@todo
     ((<TkWinfo.visualsavailable>))
 
 --- TkWinfo#winfo_vrootheight
+#@todo
     ((<TkWinfo.vrootheight>))
 
 --- TkWinfo#winfo_vrootwidth
+#@todo
     ((<TkWinfo.vrootwidth>))
 
 --- TkWinfo#winfo_vrootx
+#@todo
     ((<TkWinfo.vrootx>))
 
 --- TkWinfo#winfo_vrooty
+#@todo
     ((<TkWinfo.vrooty>))
 
 --- TkWinfo#winfo_width
+#@todo
     ((<TkWinfo.width>))
 
 --- TkWinfo#winfo_x
+#@todo
     ((<TkWinfo.x>))
 
 --- TkWinfo#winfo_y
+#@todo
     ((<TkWinfo.y>))
 
 --- TkWinfo#winfo_viewable
+#@todo
     ((<TkWinfo.viewable>))
 
 --- TkWinfo#winfo_pointerx
+#@todo
     ((<TkWinfo.pointerx>))
 
 --- TkWinfo#winfo_pointery
+#@todo
     ((<TkWinfo.pointery>))
 
 --- TkWinfo#winfo_pointerxy
+#@todo
     ((<TkWinfo.pointerxy>))
 
 =end

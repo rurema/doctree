@@ -10,6 +10,7 @@ include Enumerable
 == Class Methods
 
 --- new([name,] member, ...)
+#@todo
 
 Struct クラスに name という名前の新しいサブクラスを作っ
 て、それを返します。サブクラスでは構造体のメンバに対するアクセスメ
@@ -52,6 +53,7 @@ name を省略した場合 (第一引数が [[c:Symbol]] の場合)、
 
 --- new(value, ...)
 --- [](value, ...)
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -67,6 +69,7 @@ name を省略した場合 (第一引数が [[c:Symbol]] の場合)、
     p foo.values      # => [1, nil]
 
 --- members
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -80,6 +83,7 @@ name を省略した場合 (第一引数が [[c:Symbol]] の場合)、
 == Instance Methods
 
 --- [](nth)
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -102,6 +106,7 @@ nth が文字列かシンボルなら例外 [[c:NameError]] が発生します。
     p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
 
 --- []=(nth, value)
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -114,6 +119,7 @@ nth が整数なら例外 [[c:IndexError]] が発生します。
 nth が文字列かシンボルなら例外 [[c:NameError]] が発生します。
 
 --- each {|value| ... }
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -123,6 +129,7 @@ self を返します。
 
 #@since 1.8.0
 --- each_pair {|member, value| ... }
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -140,12 +147,14 @@ self を返します。
 
 --- length
 --- size
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
 構造体のメンバの数を返します。
 
 --- members
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -156,6 +165,7 @@ self を返します。
 
 --- values
 --- to_a
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 
@@ -167,6 +177,7 @@ passwd のエントリ([[unknown:etc]] 参照)を出力できます。
 
 #@since 1.8.0
 --- values_at(member_1, ... member_n)
+#@todo
 
 (このメソッドは Struct の下位クラスにのみ定義されています)
 

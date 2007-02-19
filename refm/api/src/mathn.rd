@@ -44,6 +44,7 @@ require 'mathn' すると上の様な動作を行なうようになります。
 == Class Methods
 
 --- from_prime_division(pd)
+#@todo
 
 素因数分解の配列 pd から数を求めます。
 pd は [素因数, 指数] 組の配列です。
@@ -56,6 +57,7 @@ pd は [素因数, 指数] 組の配列です。
 === Instance Methods
 
 --- gcd2(int)
+#@todo
 
 self と int の最大公約数を求めます。
 
@@ -65,6 +67,7 @@ self と int の最大公約数を求めます。
   # => 4
 
 --- prime_division
+#@todo
 
 self の素因数分解(の配列)を求めます。
 
@@ -78,6 +81,7 @@ self の素因数分解(の配列)を求めます。
 == Instance Methods
 
 --- /(other)
+#@todo
 
 Fixnum#quo と同じ働きをします(有理数または整数を返します)。
 
@@ -89,6 +93,7 @@ Fixnum#quo と同じ働きをします(有理数または整数を返します)。
 == Instance Methods
 
 --- /(other)
+#@todo
 
 Bignum#quo と同じ働きをします(有理数または整数を返します)。
 
@@ -99,14 +104,17 @@ Bignum#quo と同じ働きをします(有理数または整数を返します)。
 == Instance Methods
 
 --- **
+#@todo
 
 self のべき乗を返します。 Rational になるようであれば Rational で返します。
 
 --- power2
+#@todo
 
       作りかけ(^^;;
 
 --- inspect
+#@todo
 
 「3/5」などの形で返します。
 
@@ -115,6 +123,7 @@ self のべき乗を返します。 Rational になるようであれば Rational で返します。
 == Module Functions
 
 --- sqrt(a)
+#@todo
 
 a の正の平方根を返します。
 a が Complex の時は、Complex を返します。
@@ -122,6 +131,7 @@ a が負の時は、a を正にして、その平方根を Complex の虚数部に入れて返します。
 それ以外は、Math.rsqrt の結果を返します。
 
 --- rsqrt(a)
+#@todo
 
 複素数を考慮しないので、負の数や Complex をあたえないでください。
 
@@ -136,6 +146,7 @@ include Enumerable
 == Class Methods
 
 --- new
+#@todo
 
 素数を生成するオブジェクトを作ります。
 
@@ -143,6 +154,7 @@ include Enumerable
 
 --- succ
 --- next
+#@todo
 
 次の素数を返します。
 
@@ -154,6 +166,7 @@ include Enumerable
   q.succ # => 5
 
 --- each
+#@todo
 
 素数について繰り返すイテレータです。
 これは無限ループになるので必ず break を入れてください。
@@ -170,6 +183,7 @@ include Enumerable
 
 #@if (version >= "1.9.0")
 --- primes
+#@todo
 
 それまでに求めた素数の配列を返します。
 #@end
@@ -177,7 +191,9 @@ include Enumerable
 = reopen Rational
 == Constants
 --- Unify
+#@todo
 
 = reopen Complex
 == Constants
 --- Unify
+#@todo

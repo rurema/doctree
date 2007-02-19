@@ -57,6 +57,7 @@ Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
 
 == Class Methods
 --- [](rows)
+#@todo
 
 rowsを要素とする行列を生成する。
 ただし、引数rowsはネストした配列(=配列の配列)である。
@@ -65,16 +66,19 @@ rowsを要素とする行列を生成する。
   Matrix[[11, 12], [21, 22]]
 
 --- rows(rows, copy = true)
+#@todo
 
 rowsを要素とする行列を生成する。
 ただし、引数rowsはネストした配列(=配列の配列)である。
 また、オプション引数 copy が偽(false)ならば、複製を行わない。
 
 --- columns(columns)
+#@todo
 
 columnsを列ベクトルの集合とする行列を生成する。
 
 --- diagonal(values)
+#@todo
 
 対角要素がvalues(オブジェクトの並び)で、非対角要素が全て0であるような
 正方行列を生成する。
@@ -83,47 +87,56 @@ columnsを列ベクトルの集合とする行列を生成する。
 行列ができる。
 
 --- scalar(n, value)
+#@todo
 
 対角要素が全てvalue(数)で、非対角要素が全て0であるようなn次の正方行列を生成する。
 
 --- identity(n)
 --- unit(n)
 --- I(n)
+#@todo
 
 n次の単位行列を生成する。
 
 単位行列とは、対角要素が全て1で、非対角要素が全て0であるような行列である。
 
 --- zero(n)
+#@todo
 
 n次の零行列を生成する。
 零行列とは、要素が全て0の行列である。
 
 --- row_vector(row)
+#@todo
 
 要素がrowの(1,n)型の行列(行ベクトル)を生成する。
 ここで、引数rowは、[[c:Vector]] または [[c:Array]] で与えられる。
 
 --- column_vector(column)
+#@todo
 
 要素がcolumnの(n,1)型の行列(列ベクトル)を生成する。
 ここで、引数columnは、[[c:Vector]] または [[c:Array]] で与えられる。
 
 == Instance Methods
 --- [](i, j)
+#@todo
 
 (i,j)要素を返す。
 
 --- row_size
+#@todo
 
 行の大きさを返す。
 
 --- column_size
+#@todo
 
 列の大きさを返す。
 
 --- minor(from_row,row_size,from_col,col_size)
 --- minor(from_row..to_row,from_col..to_col)
+#@todo
 
 部分行列を返す。たたし、パラメータは、次の方法で指定する。
   (1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
@@ -148,23 +161,28 @@ n次の零行列を生成する。
 #@#  p m #=> Matrix[[11,12],[21,-1]]
 
 --- *(m)
+#@todo
 
 行列mを右から乗じた行列を返す。
 
 --- +(m)
+#@todo
 
 行列mを加えた行列を返す。
 
 --- -(m)
+#@todo
 
 行列mを減じた行列を返す。
 
 --- /(m)
+#@todo
 
 行列mの逆行列を右から乗じた行列を返す。
 
 --- inverse
 --- inv
+#@todo
 
 逆行列を返す。
 
@@ -172,6 +190,7 @@ n次の零行列を生成する。
 --- power(n)
 --- **(m)
 --- power(m)
+#@todo
 
 スカラーnに対するべき乗を返す。
 
@@ -179,6 +198,7 @@ n次の零行列を生成する。
 
 --- determinant
 --- det
+#@todo
 
 行列式 (determinant) を返す。
 
@@ -197,73 +217,88 @@ n次の零行列を生成する。
 #@end
 
 --- rank
+#@todo
 
 階数 (rank) を返す。
 
 --- trace
 --- tr
+#@todo
 
 トレース (trace) を返す。
 行列のトレース (trace) とは、対角要素の和である。
 
 --- transpose
 --- t
+#@todo
 
 転置行列 (transpose matrix) を返す。
 冒頭に掲げた行列に対して、 a(j,i) を (i,j) 要素とする (n,m) 型行列を転置行列という。
 
 --- row(i)
+#@todo
 
 第i番目の行ベクトルを返す。
 ブロックが与えられたときは、各行ベクトルについて、ブロックを繰り返す。
 
 --- column(j)
+#@todo
 
 第j番目の列ベクトルを返す。
 ブロックが与えられたときは、各列ベクトルについて、ブロックを繰り返す。
 
 --- collect {|x| ... }
 --- map {|x| ... }
+#@todo
 
 行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成する。
 
 --- regular?
+#@todo
 
 正則(regular)なら真を返す。
 
 行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することである。
 
 --- singular?
+#@todo
 
 特異(singular)である、すなわち、正則でないなら真を返す。
 
 --- square?
+#@todo
 
 正方行列であるなら、真を返す。
 
 
 --- row_vectors
+#@todo
 
 列ベクトルの配列を返す。
 
 --- column_vectors
+#@todo
 
 行ベクトルの配列を返す。
 
 --- to_a
+#@todo
 
 [[c:Array]]に変換する。
 結果は、ネストした配列(配列の配列)となる。
 
 --- to_f
+#@todo
 
 各要素を浮動小数点数 [[c:Float]] に変換する。
 
 --- to_i
+#@todo
 
 各要素を整数 [[c:Integer]] に変換する。
 
 --- to_r
+#@todo
 
 各要素を有理数 [[c:Rational]] に変換する。
 
@@ -276,16 +311,19 @@ n次の零行列を生成する。
 
 #@# bc-rdoc: detected missing name: coerce
 --- coerce(other)
+#@todo
 
 FIXME: describe #coerce.
 
 #@# bc-rdoc: detected missing name: compare_by_row_vectors
 --- compare_by_row_vectors(rows)
+#@todo
 
 Not really intended for general consumption.
 
 #@# bc-rdoc: detected missing name: inverse_from
 --- inverse_from(src)
+#@todo
 
 Not for public consumption?
 

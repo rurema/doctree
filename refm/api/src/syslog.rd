@@ -14,6 +14,7 @@ UNIXのsyslogのラッパーモジュール。
 
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER)
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... }
+#@todo
 
 与えられた引数でsyslogを開く。以降、他の Syslog モジュール関数が使
 用可能となる。
@@ -46,20 +47,24 @@ syslog の詳細については [[man:syslog(3)]] を参照。
 
 --- open!(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... }
 --- reopen(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... }
+#@todo
 
 開いていた syslog を最初にクローズする点を除いて Syslog.open と同じ。
 
 --- opened?
+#@todo
 
 syslog をオープンしていれば真を返す。
 
 --- ident
 --- options
 --- facility
+#@todo
 
 最後のopenで与えられた対応する引数を返す。
 
 --- log(priority, format, ...)
+#@todo
 
 syslogにメッセージを書き込む。
 
@@ -83,6 +88,7 @@ format 以降は [[m:Kernel#sprintf]] と同じ形式の引数を指定する。
 --- notice(message, ...)
 --- info(message, ...)
 --- debug(message, ...)
+#@todo
 
 Syslog#log()のショートカットメソッド。
 システムによっては定義されていないものもある。
@@ -92,6 +98,7 @@ Syslog#log()のショートカットメソッド。
 
 --- mask
 --- mask=(mask)
+#@todo
 
 ログの優先度のマスクを取得または設定する。
 マスクは永続的であり、
@@ -101,24 +108,27 @@ Syslog.openやSyslog.close
          Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 --- close
+#@todo
 
 syslogを閉じる。
 
 --- instance
+#@todo
 
 selfを返す。(旧版との互換性のため)
 
 --- LOG_MASK(priority)
+#@todo
 
 1つの優先度に対するマスクを作成する。
 
 --- LOG_UPTO(priority)
+#@todo
 
 priorityまでのすべての優先度のマスクを作成する。
 
 = module Syslog::Constants
 
-#@todo
 
 このモジュールにはシステムで使用可能なLOG_*定数が定義されている。
 
@@ -134,6 +144,7 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_NDELAY
 --- LOG_NOWAIT
 --- LOG_PERROR
+#@todo
 オプション(options)を示す定数。
 
 --- LOG_AUTH
@@ -159,6 +170,7 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_LOCAL5
 --- LOG_LOCAL6
 --- LOG_LOCAL7
+#@todo
 機能(facilities)を示す定数。
 
 --- LOG_EMERG
@@ -169,5 +181,6 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_NOTICE
 --- LOG_INFO
 --- LOG_DEBUG
+#@todo
 優先度(priorities)を示す定数。
 #@end

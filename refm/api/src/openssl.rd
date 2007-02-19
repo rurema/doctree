@@ -114,14 +114,17 @@
 == Constants
 
 --- VERSION
+#@todo
 
 Ruby/OpenSSL のバージョンです。
 
 --- OPENSSL_VERSION
+#@todo
 
 システムにインストールされている OpenSSL 本体のバージョンを表した文字列です。
 
 --- OPENSSL_VERSION_NUMBER
+#@todo
 
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
 [[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]

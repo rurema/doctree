@@ -12,6 +12,7 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 --- compile(string[, option[, code]])
 --- new(string[, option[, code]])
+#@todo
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して
 返します。
@@ -47,6 +48,7 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 --- escape(string[, kcode])
 --- quote(string[, kcode])
+#@todo
 
 string の中で正規表現において特別な意味を持つ文字の直前にエ
 スケープ文字(バックスラッシュ)を挿入した文字列を返します。省略可能
@@ -56,6 +58,7 @@ string の中で正規表現において特別な意味を持つ文字の直前にエ
 文字コードの指定は [[m:$KCODE]] と同様に行います。
 
 --- last_match
+#@todo
 
 カレントスコープで最後に行った正規表現マッチの [[c:MatchData]] オ
 ブジェクトを返します。このメソッドの呼び出しは [[m:$~]]
@@ -69,6 +72,7 @@ string の中で正規表現において特別な意味を持つ文字の直前にエ
   p Regexp.last_match[3]   # => nil
 
 --- last_match([nth])
+#@todo
 
 整数 nth が 0 の場合、マッチした文字列を返します
 ([[m:$&]])。それ以外では、nth 番目の括弧にマッチ
@@ -90,6 +94,7 @@ last_match[1] の形式では例外 [[c:NameError]] が発生します。
 
 #@since 1.8.1
 --- union([pattern, ...])
+#@todo
 
 引数として与えた patttern を選択 | で連結し、Regexp として返します。
 結果の Regexp は与えた patttern のどれかにマッチする場合にマッチするものになります。
@@ -127,6 +132,7 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 
 --- =~(string)
 --- ===(string)
+#@todo
 
 文字列 string との正規表現マッチを行います。マッチした場合、
 マッチした位置のインデックスを返します(先頭は0)。マッチしなかった
@@ -145,6 +151,7 @@ true を返します。
 #@end
 
 --- ~
+#@todo
 
 変数 [[m:$_]] の値との間でのマッチをとります。ちょうど以下と同じ意
 味です。
@@ -152,11 +159,13 @@ true を返します。
   self =~ $_
 
 --- casefold?
+#@todo
 
 正規表現が大文字小文字の判定をしないようにコンパイルされている時、
 真を返します。
 
 --- kcode
+#@todo
 
 その正規表現が対応するようにコンパイルされている文字コードを
 [[m:$KCODE]] と同じ形式で返します。もし、正規表現が固定
@@ -165,6 +174,7 @@ true を返します。
 
 --- match(str)
 --- match(str[, pos])
+#@todo
 
 [[c:MatchData]] オブジェクトを返す点を除いて、self =~ str と
 同じです。マッチしなかった場合 nil を返します。
@@ -214,6 +224,7 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 #@end
 
 --- options
+#@todo
 
 正規表現の生成時に指定されたオプションを返します。戻り値は、
 [[m:Regexp::EXTENDED]], [[m:Regexp::IGNORECASE]],
@@ -223,6 +234,7 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
   p //i.options        # => 1
 
 --- source
+#@todo
 
 その正規表現のもととなった文字列表現を生成して返します。
 
@@ -230,6 +242,7 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
   p re.source     # => "foo|bar|baz"
 
 --- to_s
+#@todo
 
 正規表現の文字列表現を生成して返します。返される文字列は他の正規表
 現に埋め込んでもその意味が保持されるようになっています。
@@ -247,16 +260,21 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
   # => /(baz)(?-mix:(foo|bar)\1)/
 
 --- ==(other)
+#@todo
 
 --- eql?(other)
+#@todo
 
 --- hash
+#@todo
 
 --- inspect
+#@todo
 
 == Constants
 
 --- EXTENDED
+#@todo
 
 バックスラッシュでエスケープされていない空白と # から改行までを無
 視します。[[unknown:リテラル/正規表現リテラル]] の //x オプションと同じ
@@ -264,11 +282,13 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 指定します)
 
 --- IGNORECASE
+#@todo
 
 文字の大小の違いを無視します。
 [[unknown:リテラル/正規表現リテラル]] の //i オプションと同じです。
 
 --- MULTILINE
+#@todo
 
 複数行モード。正規表現 "." が改行にマッチするようになります。
 [[unknown:リテラル/正規表現リテラル]] の //m オプションと同じです。

@@ -5,314 +5,470 @@
 == Constants
 
 --- A1
+#@todo
 
 --- A3
+#@todo
 
 --- B2
+#@todo
 
 --- BACKSPACE
+#@todo
 
 --- BEG
+#@todo
 
 --- BREAK
+#@todo
 
 --- BTAB
+#@todo
 
 --- C1
+#@todo
 
 --- C3
+#@todo
 
 --- CANCEL
+#@todo
 
 --- CATAB
+#@todo
 
 --- CLEAR
+#@todo
 
 --- CLOSE
+#@todo
 
 --- COMMAND
+#@todo
 
 --- COPY
+#@todo
 
 --- CREATE
+#@todo
 
 --- CTAB
+#@todo
 
 --- DC
+#@todo
 
 --- DL
+#@todo
 
 --- DOWN
+#@todo
 
 --- EIC
+#@todo
 
 --- END
+#@todo
 
 --- ENTER
+#@todo
 
 --- EOL
+#@todo
 
 --- EOS
+#@todo
 
 --- EXIT
+#@todo
 
 --- F0
+#@todo
 
 --- F1
+#@todo
 
 --- F10
+#@todo
 
 --- F11
+#@todo
 
 --- F12
+#@todo
 
 --- F13
+#@todo
 
 --- F14
+#@todo
 
 --- F15
+#@todo
 
 --- F16
+#@todo
 
 --- F17
+#@todo
 
 --- F18
+#@todo
 
 --- F19
+#@todo
 
 --- F2
+#@todo
 
 --- F20
+#@todo
 
 --- F21
+#@todo
 
 --- F22
+#@todo
 
 --- F23
+#@todo
 
 --- F24
+#@todo
 
 --- F25
+#@todo
 
 --- F26
+#@todo
 
 --- F27
+#@todo
 
 --- F28
+#@todo
 
 --- F29
+#@todo
 
 --- F3
+#@todo
 
 --- F30
+#@todo
 
 --- F31
+#@todo
 
 --- F32
+#@todo
 
 --- F33
+#@todo
 
 --- F34
+#@todo
 
 --- F35
+#@todo
 
 --- F36
+#@todo
 
 --- F37
+#@todo
 
 --- F38
+#@todo
 
 --- F39
+#@todo
 
 --- F4
+#@todo
 
 --- F40
+#@todo
 
 --- F41
+#@todo
 
 --- F42
+#@todo
 
 --- F43
+#@todo
 
 --- F44
+#@todo
 
 --- F45
+#@todo
 
 --- F46
+#@todo
 
 --- F47
+#@todo
 
 --- F48
+#@todo
 
 --- F49
+#@todo
 
 --- F5
+#@todo
 
 --- F50
+#@todo
 
 --- F51
+#@todo
 
 --- F52
+#@todo
 
 --- F53
+#@todo
 
 --- F54
+#@todo
 
 --- F55
+#@todo
 
 --- F56
+#@todo
 
 --- F57
+#@todo
 
 --- F58
+#@todo
 
 --- F59
+#@todo
 
 --- F6
+#@todo
 
 --- F60
+#@todo
 
 --- F61
+#@todo
 
 --- F62
+#@todo
 
 --- F63
+#@todo
 
 --- F7
+#@todo
 
 --- F8
+#@todo
 
 --- F9
+#@todo
 
 --- FIND
+#@todo
 
 --- HELP
+#@todo
 
 --- HOME
+#@todo
 
 --- IC
+#@todo
 
 --- IL
+#@todo
 
 --- LEFT
+#@todo
 
 --- LL
+#@todo
 
 --- MARK
+#@todo
 
 --- MAX
+#@todo
 
 --- MESSAGE
+#@todo
 
 --- MIN
+#@todo
 
 --- MOUSE
+#@todo
 
 --- MOVE
+#@todo
 
 --- NEXT
+#@todo
 
 --- NPAGE
+#@todo
 
 --- OPEN
+#@todo
 
 --- OPTIONS
+#@todo
 
 --- PPAGE
+#@todo
 
 --- PREVIOUS
+#@todo
 
 --- PRINT
+#@todo
 
 --- REDO
+#@todo
 
 --- REFERENCE
+#@todo
 
 --- REFRESH
+#@todo
 
 --- REPLACE
+#@todo
 
 --- RESET
+#@todo
 
 --- RESIZE
+#@todo
 
 --- RESTART
+#@todo
 
 --- RESUME
+#@todo
 
 --- RIGHT
+#@todo
 
 --- SAVE
+#@todo
 
 --- SBEG
+#@todo
 
 --- SCANCEL
+#@todo
 
 --- SCOMMAND
+#@todo
 
 --- SCOPY
+#@todo
 
 --- SCREATE
+#@todo
 
 --- SDC
+#@todo
 
 --- SDL
+#@todo
 
 --- SELECT
+#@todo
 
 --- SEND
+#@todo
 
 --- SEOL
+#@todo
 
 --- SEXIT
+#@todo
 
 --- SF
+#@todo
 
 --- SFIND
+#@todo
 
 --- SHELP
+#@todo
 
 --- SHOME
+#@todo
 
 --- SIC
+#@todo
 
 --- SLEFT
+#@todo
 
 --- SMESSAGE
+#@todo
 
 --- SMOVE
+#@todo
 
 --- SNEXT
+#@todo
 
 --- SOPTIONS
+#@todo
 
 --- SPREVIOUS
+#@todo
 
 --- SPRINT
+#@todo
 
 --- SR
+#@todo
 
 --- SREDO
+#@todo
 
 --- SREPLACE
+#@todo
 
 --- SRESET
+#@todo
 
 --- SRIGHT
+#@todo
 
 --- SRSUME
+#@todo
 
 --- SSAVE
+#@todo
 
 --- SSUSPEND
+#@todo
 
 --- STAB
+#@todo
 
 --- SUNDO
+#@todo
 
 --- SUSPEND
+#@todo
 
 --- UNDO
+#@todo
 
 --- UP
+#@todo
 

@@ -2,22 +2,31 @@
 = class XMLRPC::BasicServer < Object
 == class methods
 --- new(class_delim = ".")
+#@todo
 
 == instance methods
 --- add_handler(prefix, obj_or_signature = nil, help = nil, &block)
+#@todo
 
 --- add_introspection
+#@todo
 
 --- add_multicall
+#@todo
 
 --- get_default_handler
+#@todo
 
 --- get_service_hook
+#@todo
 
 --- process(data)
+#@todo
 
 --- set_default_handler(&handler)
+#@todo
 
 --- set_service_hook(&handler)
+#@todo
 
 #@end

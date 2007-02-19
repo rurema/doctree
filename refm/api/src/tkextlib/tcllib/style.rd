@@ -9,12 +9,16 @@ extend TkCore
 == Singleton Methods
 #@since 1.8.3
 --- package_name
+#@todo
 
 #@end
 --- package_version
+#@todo
 
 --- names
+#@todo
 
 --- use(style)
+#@todo
 
 #@end

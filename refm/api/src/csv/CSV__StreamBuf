@@ -5,34 +5,45 @@
 == Constants
 
 --- BufSize
+#@todo
 1024 * 8
 
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- [](idx[, n = nil])
+#@todo
 
 --- drop(n)
+#@todo
 
 --- is_eos?
+#@todo
 
 == Protected Instance Methods
 
 --- terminate
+#@todo
 
 --- read(size)
+#@todo
 
 == Private Instance Methods
 
 --- buf_size(idx)
+#@todo
 
 --- add_buf
+#@todo
 
 --- rel_buf
+#@todo
 
 --- idx_is_eos?(idx)
+#@todo
 
 #@end

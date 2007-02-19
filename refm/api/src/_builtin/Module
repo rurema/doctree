@@ -5,6 +5,7 @@
 == Class Methods
 
 --- constants
+#@todo
 
 このメソッドを呼び出した時点で参照可能な定数名の配列を返します。
 
@@ -24,6 +25,7 @@
 も参照してください。
 
 --- nesting
+#@todo
 
 このメソッドを呼び出した時点でのクラス/モジュールのネスト情
 報を配列に入れて返します。
@@ -41,6 +43,7 @@
 --- new
 #@since 1.8.0
 --- new {|mod| ... }
+#@todo
 #@end
 
 名前の付いていないモジュールを新しく生成して返します。
@@ -81,6 +84,7 @@
 == Instance Methods
 
 --- <=>(other)
+#@todo
 
 self と other を比較して、
 self が other の子孫であるとき -1、
@@ -138,6 +142,7 @@ nil を返します。
 --- <=(other)
 --- >(other)
 --- >=(other)
+#@todo
 
 比較演算子。self が other の子孫である時、
 self < other が成立します。
@@ -177,6 +182,7 @@ other がクラスやモジュールでなければ例外 [[c:TypeError]] が
   p Foo < Object.new # => in `<': compared with non class/module (TypeError)
 
 --- ===(obj)
+#@todo
 
 このメソッドは主に [[unknown:制御構造/case]] 文での比較に用いられます。
 obj が self と [[m:Object#kind_of?]]
@@ -192,6 +198,7 @@ obj が self と [[m:Object#kind_of?]]
   end
 
 --- ancestors
+#@todo
 
 クラス、モジュールのスーパークラスとインクルードしているモジュール
 を優先順位順に配列に格納して返します。
@@ -215,16 +222,19 @@ obj が self と [[m:Object#kind_of?]]
 #@since 1.8.0
 --- autoload(const_name, feature)
 --- autoload?(const_name)
+#@todo
 
 [[m:Kernel#autoload]] を参照。
 #@end
 
 --- class_eval(src[,fname[,lineno]])
 --- class_eval { ... }
+#@todo
 
 [[m:Module#module_eval]] の別名。
 
 --- class_variables
+#@todo
 
 クラス／モジュールに定義されている[[unknown:変数と定数/クラス変数]]名の配
 列を返します。スーパークラスやインクルードしているモジュールのクラ
@@ -239,8 +249,10 @@ obj が self と [[m:Object#kind_of?]]
 
 #@since 1.9.0
 --- const_defined?(name, inherit = true)
+#@todo
 #@else
 --- const_defined?(name)
+#@todo
 #@end
 
 モジュールに name で指定される名前の定数が定義されている時真
@@ -277,8 +289,10 @@ obj が self と [[m:Object#kind_of?]]
 
 #@since 1.9.0
 --- const_get(name, inherit = true)
+#@todo
 #@else
 --- const_get(name)
+#@todo
 #@end
 
 モジュールに定義されている name で指定される名前の定数の値を
@@ -288,6 +302,7 @@ name は [[c:Symbol]] か文字列で指定します。
 
 #@since 1.8.0
 --- const_missing(name)
+#@todo
 
 定義されていない定数を参照したときに Ruby がこのメソッドを呼び
 ます。参照した定数名の [[c:Symbol]] が引数に渡されます。
@@ -310,6 +325,7 @@ name は [[c:Symbol]] か文字列で指定します。
 #@end
 
 --- const_set(name, value)
+#@todo
 
 モジュールに name で指定された名前の定数を value とい
 う値として定義し、value を返します。
@@ -319,8 +335,10 @@ name は [[c:Symbol]] か文字列で指定します。
 
 #@since 1.9.0
 --- constants(inherit = true)
+#@todo
 #@else
 --- constants
+#@todo
 #@end
 
 そのモジュール(またはクラス)で定義されている定数名の配列を返
@@ -363,6 +381,7 @@ name は [[c:Symbol]] か文字列で指定します。
 
 #@since 1.8.0
 --- include?(mod)
+#@todo
 
 self かその親クラス / 親モジュールがモジュール mod を
 インクルードしていれば true を返します。
@@ -382,11 +401,13 @@ self かその親クラス / 親モジュールがモジュール mod を
 #@end
 
 --- included_modules
+#@todo
 
 インクルードされているモジュールの配列を返します。
 [[m:Module#ancestors]] の例も参照してください
 
 --- instance_method(name)
+#@todo
 
 self のインスタンスメソッドをオブジェクト化した
 [[c:UnboundMethod]] を返します。
@@ -396,8 +417,10 @@ name は [[c:Symbol]] か文字列です。
 
 #@since 1.9.0
 --- method_defined?(name, inherit = true)
+#@todo
 #@else
 --- method_defined?(name)
+#@todo
 #@end
 
 モジュールにインスタンスメソッド name が定義されているとき
@@ -410,6 +433,7 @@ true を返します。name は [[c:Symbol]] か文字列です。
 
 --- module_eval(expr, [fname, [lineno=1]])
 --- module_eval {|mod| .... }
+#@todo
 
 モジュールのコンテキストで文字列 expr を評価して
 その結果を返します。
@@ -443,6 +467,7 @@ module_eval のブロック中でメソッドを定義する場合、
 
 --- name
 --- to_s
+#@todo
 
 モジュールやクラスの名前を文字列で返します。
 #@since 1.9.0
@@ -486,6 +511,7 @@ module_eval のブロック中でメソッドを定義する場合、
 --- public_instance_methods([inherited_too])
 --- private_instance_methods([inherited_too])
 --- protected_instance_methods([inherited_too])
+#@todo
 
 そのモジュールで定義されている public/private/protected メソッド名
 の一覧を配列で返します。
@@ -560,6 +586,7 @@ inherited_too が真であれば、スーパークラスのメソッドも探索し
      ["protected_foo"]
 
 --- private_class_method(name, ...)
+#@todo
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
 可視性を private に変更します。
@@ -567,6 +594,7 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 self を返します。
 
 --- public_class_method(name, ...)
+#@todo
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
 可視性を public に変更します。
@@ -575,6 +603,7 @@ self を返します。
 
 #@since 1.8.0
 --- private_method_defined?(name)
+#@todo
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が private であるときに true を返します。
@@ -585,6 +614,7 @@ name は [[c:Symbol]] か文字列です。
 [[m:Module#method_defined?]] も参照してください。
 
 --- protected_method_defined?(name)
+#@todo
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が protected であるときに true を返します。
@@ -595,6 +625,7 @@ name は [[c:Symbol]] か文字列です。
 [[m:Module#method_defined?]] も参照してください。
 
 --- public_method_defined?(name)
+#@todo
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が public であるときに true を返します。
@@ -607,6 +638,7 @@ name は [[c:Symbol]] か文字列です。
 
 #@since 1.8.6
 --- class_variable_defined?(symbol)
+#@todo
 #@# => true or false
 
 Returns true if the given class variable is defined in obj.
@@ -622,6 +654,7 @@ Returns true if the given class variable is defined in obj.
 == Private Instance Methods
 
 --- alias_method(new, old)
+#@todo
 
 メソッドの別名を定義します。
 [[unknown:クラス／メソッドの定義/alias]] との違いは以下の通りです。
@@ -636,6 +669,7 @@ Returns true if the given class variable is defined in obj.
 self を返します。
 
 --- append_features(module_or_class)
+#@todo
 
 モジュール(あるいはクラス)に self の機能を追加します。
 このメソッドは Module#include の実体であり、
@@ -662,6 +696,7 @@ include を Ruby で書くと以下のように定義できます。
 self を返します。
 
 --- attr(name[, assignable])
+#@todo
 
 属性読み込みのためのインスタンスメソッド name を定義します。
 name は [[c:Symbol]] か文字列で指定します。戻り値は常に
@@ -682,6 +717,7 @@ nil です。
   end
 
 --- attr_accessor(name, ...)
+#@todo
 
 属性 name に対する読み込みメソッドと書きこみメソッドの両方を
 定義します。name は [[c:Symbol]] か文字列で指定します。戻り値
@@ -697,6 +733,7 @@ nil です。
   end
 
 --- attr_reader(name, ...)
+#@todo
 
 属性 name の読み出しメソッドを定義します。
 name は [[c:Symbol]] か文字列で指定します。
@@ -709,6 +746,7 @@ name は [[c:Symbol]] か文字列で指定します。
   end
 
 --- attr_writer(name, ...)
+#@todo
 
 属性 name への書き込みメソッド (name=) を定義します。
 name は [[c:Symbol]] か文字列で指定します。戻り値は常に
@@ -722,6 +760,7 @@ nil です。
 
 #@since 1.8.3
 --- class_variable_get(name)
+#@todo
 
 クラス／モジュールに定義されているクラス変数 name の値を返します。
 
@@ -745,6 +784,7 @@ name は [[c:Symbol]] か文字列で指定します。
 
 #@since 1.8.3
 --- class_variable_set(name, val)
+#@todo
 
 クラス／モジュールにクラス変数 name を定義して、その値として
 val をセットします。val を返します。
@@ -770,6 +810,7 @@ name は [[c:Symbol]] か文字列で指定します。
 
 --- define_method(name, method)
 --- define_method(name) { ... }
+#@todo
 
 インスタンスメソッド name を定義します。
 method には [[c:Proc]]、[[c:Method]] あるいは
@@ -809,6 +850,7 @@ instance_eval されます。
   C.new.print_self    #=> #<C:0x4015b490>
 
 --- extend_object(object)
+#@todo
 
 [[m:Object#extend]] の実体です。オブジェクトに
 モジュールの機能を追加します。Object#extend は、Ruby で
@@ -827,6 +869,7 @@ object を返します。
 
 #@since 1.8.0
 --- extended(class_or_module)
+#@todo
 
 self が他のオブジェクト に [[m:Object#extend]] されたときに
 呼ばれます。引数には extend を行ったオブジェクトが渡されます。
@@ -846,6 +889,7 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
 #@end
 
 --- include(mod, ...)
+#@todo
 
 モジュール mod をインクルードします。
 self を返します。
@@ -918,6 +962,7 @@ mix-in とも呼びます。
 
 #@since 1.8.0
 --- included(class_or_module)
+#@todo
 
 self が include されたときに対象のクラスまたはモジュー
 ルを引数にインタプリタから呼び出されます。
@@ -936,6 +981,7 @@ self が include されたときに対象のクラスまたはモジュー
 #@end
 
 --- method_added(name)
+#@todo
 
 メソッド name が追加された時にインタプリタから呼び出されます。
 name には追加されたメソッドの名前が [[c:Symbol]] で渡されます。
@@ -961,6 +1007,7 @@ name には追加されたメソッドの名前が [[c:Symbol]] で渡されます。
 
 #@since 1.8.0
 --- method_removed(name)
+#@todo
 
 メソッドが [[m:Module#remove_method]] により削
 除された時にインタプリタから呼び出されます。
@@ -987,6 +1034,7 @@ name には削除されたメソッド名が [[c:Symbol]] で渡されます。
 
 #@since 1.8.0
 --- method_undefined(name)
+#@todo
 
 このモジュールのインスタンスメソッド name が
 [[m:Module#undef_method]] によって削除されるか、
@@ -1021,6 +1069,7 @@ name は [[c:Symbol]] オブジェクトです。
 #@end
 
 --- module_function([name, ...])
+#@todo
 
 引数が与えられた時には、
 引数で指定されたメソッドをモジュール関数にします。
@@ -1070,6 +1119,7 @@ module_function はメソッドに「モジュール関数」という属性をつけるメ
   M.bar   # => "foo"
 
 --- private([name, ...])
+#@todo
 
 引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
 れるメソッドを関数形式でだけ呼び出せるように(private)設定します。
@@ -1092,6 +1142,7 @@ module_function はメソッドに「モジュール関数」という属性をつけるメ
 self を返します。
 
 --- protected([name, ...])
+#@todo
 
 引数なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
 れるメソッドを protected に設定します。protected とはそのメソッド
@@ -1104,6 +1155,7 @@ self を返します。
 self を返します。
 
 --- public([name, ...])
+#@todo
 
 なしのときは今後このクラスまたはモジュール定義内で新規に定義さ
 れるメソッドをどんな形式でも呼び出せるように(public)設定します。
@@ -1126,6 +1178,7 @@ self を返します。
 self を返します。
 
 --- remove_class_variable(name)
+#@todo
 
 で指定したクラス変数を取り除き、そのクラス変数に設定さ
 れていた値を返します。もし指定したクラス変数がそのモジュール(また
@@ -1144,6 +1197,7 @@ self を返します。
 も参照してください。
 
 --- remove_const(name)
+#@todo
 
 name で指定した定数を取り除き、その定数に設定されていた値を
 返します。指定した定数がそのモジュール(またはクラス)で定義されてい
@@ -1174,8 +1228,10 @@ name で指定した定数を取り除き、その定数に設定されていた値を
 
 #@since 1.8.0
 --- remove_method(name[, name2, ...])
+#@todo
 #@else
 --- remove_method(name)
+#@todo
 #@end
 
 インスタンスメソッド name をモジュールから削除します。
@@ -1202,8 +1258,10 @@ self を返します。
 
 #@since 1.8.0
 --- undef_method(name[, name2, ...])
+#@todo
 #@else
 --- undef_method(name)
+#@todo
 #@end
 
 このモジュールのインスタンスメソッド name, name2, ... を未定義にします。

@@ -6,6 +6,7 @@ ASN.1 のオブジェクト ID を操作するクラス
 == Class Methods
 
 --- new(str)
+#@todo
 
 ASN.1 のオブジェクト ID を生成します。
 
@@ -17,6 +18,7 @@ ASN.1 のオブジェクト ID を生成します。
   p ASN1::ObjectId.new("dsaWithSHA1").oid             # => "1.2.840.10040.4.3"
 
 --- register(oid, short_name, long_name)
+#@todo
 
 オブジェクト ID に対応する名前を登録します。登録した名前は [[c:OpenSSL::X509::Extension]] などで利用できるようになります。
 
@@ -29,16 +31,19 @@ ASN.1 のオブジェクト ID を生成します。
 == Instance Methods
 
 --- oid
+#@todo
 
 オブジェクト ID のドット区切り数値を文字列で返します。
 
 --- sn
 --- short_name
+#@todo
 
 オブジェクト ID に対応する短い形式の名前を返します。
 
 --- ln
 --- long_name
+#@todo
 
 オブジェクト ID に対応する長い形式の名前を返します。
 

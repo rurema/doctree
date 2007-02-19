@@ -9,12 +9,14 @@ include Precision
 == Class Methods
 
 --- induced_from(num)
+#@todo
 
 num を Integer に変換した結果を返します。
 
 == Instance Methods
 
 --- [](nth)
+#@todo
 
 nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
 を、そうでなければ 0 を返します。
@@ -28,10 +30,12 @@ immutable であるためです。
 --- /(other)
 --- %(other)
 --- **(other)
+#@todo
 
 算術演算子。それぞれ和、差、積、商、剰余、冪(べき乗)を計算します。
 
 --- <=>(other)
+#@todo
 
 self と other を比較して、self が大きい時に正、
 等しい時に 0、小さい時に負の整数を返します。
@@ -41,6 +45,7 @@ self と other を比較して、self が大きい時に正、
 --- <=(other)
 --- >(other)
 --- >=(other)
+#@todo
 
 比較演算子。
 
@@ -48,12 +53,14 @@ self と other を比較して、self が大きい時に正、
 --- |(other)
 --- &(other)
 --- ^(other)
+#@todo
 
 ビット演算子。それぞれ否定、論理和、論理積、排他的論理和を計算しま
 す。
 
 --- <<(bits)
 --- >>(bits)
+#@todo
 
 シフト演算子。bits だけビットを右(左)にシフトします。
 
@@ -70,6 +77,7 @@ self と other を比較して、self が大きい時に正、
     => -1
 
 --- chr
+#@todo
 
 文字コードに対応する 1 バイトの文字列を返します。例えば
 65.chr は "A" を返します。
@@ -81,6 +89,7 @@ self と other を比較して、self が大きい時に正、
 る呼び出しは例外 [[c:RangeError]] を発生させます。
 
 --- downto(min) {|n| ... }
+#@todo
 
 self から min まで 1 ずつ減らしながら繰り返します。
 self < min であれば何もしません。
@@ -89,10 +98,12 @@ self < min であれば何もしません。
 
 --- next
 --- succ
+#@todo
 
 次の整数を返します。
 
 --- step(limit, step) {|n| ... }
+#@todo
 
 self からはじめ step を足しながら limit を越える
 前までブロックを繰り返します。step は負の数も指定できます。
@@ -109,6 +120,7 @@ self を返します。
 #@end
 
 --- times {|n| ... }
+#@todo
 
 self 回だけ(0 から self-1 まで)繰り返します。
 self が負であれば何もしません。
@@ -119,10 +131,12 @@ self を返します。
 
 --- to_i
 --- to_int
+#@todo
 
 self を返します。
 
 --- size
+#@todo
 
 整数の実装上のサイズをバイト数で返します。
 
@@ -135,12 +149,14 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
          8
 
 --- to_f
+#@todo
 
 値を浮動小数点数([[c:Float]])に変換します。
 
 --- to_s
 #@since 1.8.0
 --- to_s(base)
+#@todo
 #@end
 
 整数を 10 進文字列表現に変換します。
@@ -157,6 +173,7 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
 #@end
 
 --- upto(max) {|n| ... }
+#@todo
 
 self から max まで 1 ずつ増やしながら繰り返します。
 self > max であれば何もしません。

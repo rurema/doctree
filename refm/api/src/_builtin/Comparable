@@ -7,6 +7,7 @@
 == Instance Methods
 
 --- ==(other)
+#@todo
 
 self と other が等しい時真を返します。
 
@@ -15,6 +16,7 @@ self と other が等しい時真を返します。
 #@end
 
 --- >(other)
+#@todo
 
 self が other より大きい時真を返します。
 
@@ -23,6 +25,7 @@ self が other より大きい時真を返します。
 #@end
 
 --- >=(other)
+#@todo
 
 self が other より大きいか等しい時真を返します。
 
@@ -31,6 +34,7 @@ self が other より大きいか等しい時真を返します。
 #@end
 
 --- <(other)
+#@todo
 
 self が other より小さい時真を返します。
 
@@ -39,6 +43,7 @@ self が other より小さい時真を返します。
 #@end
 
 --- <=(other)
+#@todo
 
 self が other より小さいか等しい時真を返します。
 
@@ -47,6 +52,7 @@ self が other より小さいか等しい時真を返します。
 #@end
 
 --- between?(min, max)
+#@todo
 
 self が min と max の範囲内(min, max
 を含みます)にある時真を返します。

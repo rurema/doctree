@@ -2,16 +2,22 @@
 = class XMLRPC::WEBrickServlet < XMLRPC::BasicServer
 == class methods
 --- new(*args)
+#@todo
 
 == instance methods
 --- get_instance(config, *options)
+#@todo
 
 --- get_valid_ip
+#@todo
 
 --- require_path_info?
+#@todo
 
 --- service(request, response)
+#@todo
 
 --- set_valid_ip(*ip_addr)
+#@todo
 
 #@end

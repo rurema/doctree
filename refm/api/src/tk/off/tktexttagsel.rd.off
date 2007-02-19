@@ -10,5 +10,6 @@
 == クラスメソッド:
 
 --- TkTextTagSel.new(parent, keys=nil)
+#@todo
 
 =end

@@ -10,25 +10,35 @@
 == クラスメソッド:
 
 --- TkTextWindow.new(parent, index, keys)
+#@todo
 
 == メソッド:
 
 --- TkTextWindow#[](slot)
+#@todo
 
 --- TkTextWindow#[]=(slot,value)
+#@todo
 
 --- TkTextWindow#cget(slot)
+#@todo
 
 --- TkTextWindow#configure(slot, value=None)
+#@todo
 
 --- TkTextWindow#window
+#@todo
 
 --- TkTextWindow#window=(value)
+#@todo
 
 --- TkTextWindow#create
+#@todo
 
 --- TkTextWindow#create=(value)
+#@todo
 
 --- TkTextWindow#configinfo(slot = nil)
+#@todo
 
 =end

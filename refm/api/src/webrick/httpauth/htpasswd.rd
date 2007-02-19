@@ -23,25 +23,32 @@ htpasswd -m (MD5) ¤ä -s (SHA) ¤ÇºîÀ®¤µ¤ì¤¿ .htpasswd ¥Õ¥¡¥¤¥ë¤Ë¤ÏÂÐ±þ¤·¤Æ¤¤¤Þ¤»¤
 == Class Methods
 
 --- new(path)
+#@todo
 Htpasswd ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¡£.htpasswd ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤ò path ¤ÇÍ¿¤¨¤ë¡£
 
 == Instance Methods
 
 --- delete_passwd(realm, user)
+#@todo
 ¥æ¡¼¥¶¤Î¥Ñ¥¹¥ï¡¼¥É¤òºï½ü¤¹¤ë¡£realm ¤ÏÌµ»ë¤µ¤ì¤ë¡£
 
 --- each{|user, pass| ...}
+#@todo
 ³Æ¥æ¡¼¥¶¤È¥Ñ¥¹¥ï¡¼¥É¤Ë´Ø¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤¹¤ë¡£
 
 --- get_passwd(realm, user, reload_db)
+#@todo
 ¥æ¡¼¥¶¤Î¥Ñ¥¹¥ï¡¼¥É¤Î crypt ¤µ¤ì¤¿Ê¸»úÎó¤ò¼èÆÀ¤¹¤ë¡£reload_db ¤¬ true ¤Î¾ì¹ç¡¢
 reload ¤ò¸Æ¤ó¤Ç¤«¤é¥Ñ¥¹¥ï¡¼¥É¤ò¼èÆÀ¤¹¤ë¡£realm ¤ÏÌµ»ë¤µ¤ì¤ë¡£
 
 --- flush(path=nil)
+#@todo
 ¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹þ¤à¡£¥Õ¥¡¥¤¥ëÌ¾ path ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢path ¤Ë½ñ¤­¹þ¤à¡£
 
 --- reload
+#@todo
 ¥Õ¥¡¥¤¥ë¤«¤éºÆÅÙÆÉ¤ß¹þ¤à¡£
 
 --- set_passwd(realm, user, pass)
+#@todo
 ¥æ¡¼¥¶¤È¥Ñ¥¹¥ï¡¼¥É¤òÊÝÂ¸¤¹¤ë¡£realm ¤ÏÌµ»ë¤µ¤ì¤ë¡£

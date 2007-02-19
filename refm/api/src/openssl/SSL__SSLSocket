@@ -27,6 +27,7 @@ SSL/TLS サーバに接続して write します。
 
 --- new(socket)
 --- new(socket, context)
+#@todo
 
 SSLSocket オブジェクトを生成します。socket には [[c:TCPSocket]] オブジェクトを与えます。context には [[c:OpenSSL::SSL::SSLContext]] オブジェクトを与えます。
 
@@ -34,26 +35,31 @@ SSLSocket オブジェクトを生成します。socket には [[c:TCPSocket]] オブジェクトを与
 
 --- io
 --- to_io
+#@todo
 
 SSLSocket オブジェクトを生成する時に渡されたソケットを返します。
 
 --- context
+#@todo
 
 SSLSocket オブジェクトを生成する時に渡されたコンテクストを返します。
 [[C:openSSL::SSL::SSLContext]] オブジェクトです。
 
 --- sync_close
 --- sync_close=(bool)
+#@todo
 
 SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 
 --- peer_cert
+#@todo
 
 接続相手の X509 証明書 [[c:OpenSSL::X509::Certificate]] オブジェクトを返します。
 検証結果は別途知る必要があります。
 
 #@since 1.8.1
 --- peer_cert_chain
+#@todo
 
 接続相手の証明書チェーンすなわち [[c:OpenSSL::X509::Certificate]] オブジェクトの配列を返します。接続相手の証明書からルート CA の証明書までのリストで、順序は以下の通りです。
 
@@ -61,10 +67,12 @@ SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 #@end
 
 --- state
+#@todo
 
 現在の状態を 6 文字の文字列で返します。
 
 --- cipher
+#@todo
 
 現在実際に使われている暗号の情報を配列で返します。 TLS/SSL ハンドシェイクが行われる前の接続されていない状態では nil を返します。
 返される配列の形式は以下の例のように [暗号名, TLS/SSLのバージョン, 鍵長, アルゴリズムで使われる bit 数] となります。
@@ -73,139 +81,171 @@ SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 
 #@since 1.8.2
 --- pending
+#@todo
 
 読み取り可能なバイト数を返します。
 #@end
 
 --- <<
+#@todo
 
 [[m:IO#<<]] と同様です。
 
 --- accept
+#@todo
 
 TLS/SSL クライアントから接続を受け付け、 TLS/SSL ハンドシェイクを実行し、自分自身を返します。
 
 #@if (version < "1.8.1")
 --- addr
+#@todo
 
 [[m:IPSocket#addr]] と同様です。
 #@end
 
 --- close
+#@todo
 
 接続を閉じます。flush を呼んでから閉じます。
 
 #@if (version < "1.8.1")
 --- closed?
+#@todo
 
 close していたら true を返します。
 #@end
 
 --- connect
+#@todo
 
 接続相手との TLS/SSL ハンドシェイクを実行します。
 
 --- do_not_reverse_lookup=(bool)
+#@todo
 
 [[m:BasicSocket#do_not_reverse_lookup]] と同様です。
 
 --- each
+#@todo
 
 [[m:IO#each]] と同様です。
 
 --- each_byte
+#@todo
 
 [[m:IO#each_byte]] と同様です。
 
 --- eof?
+#@todo
 
 [[m:IO#eof?]] と同様です。
 
 --- fcntl(cmd[, arg])
+#@todo
 
 [[m:IO#fcntl]] と同様です。
 
 --- flush
+#@todo
 
 [[m:IO#flush]] と同様です。
 
 --- getc
+#@todo
 
 [[m:IO#getc]] と同様です。
 
 --- gets([rs])
+#@todo
 
 [[m:IO#gets]] と同様です。
 
 --- getsockopt(level, optname)
+#@todo
 
 [[m:BasicSocket#getsockopt]] と同様です。
 
 #@if (version < "1.8.1")
 --- peeraddr
+#@todo
 
 [[m:IPSocket#peeraddr]] と同様です。
 #@end
 
 #@since 1.8.3
 --- post_connection_check
+#@todo
 #@end
 
 --- print([arg[, ...]])
+#@todo
 
 [[m:IO#print]] と同様です。
 
 --- printf(format[, arg[, ...]])
+#@todo
 
 [[m:IO#printf]] と同様です。
 
 --- puts([obj[, ...]])
+#@todo
 
 [[m:IO#puts]] と同様です。
 
 --- read([length[, buf]])
+#@todo
 
 [[m:IO#read]] と同様です。
 
 --- readchar
+#@todo
 
 [[m:IO#readchar]] と同様です。
 
 --- readlines([rs])
+#@todo
 
 [[m:IO#readlines]] と同様です。
 
 --- setsockopt(level, optname, optval)
+#@todo
 
 [[m:BasicSocket#setsockopt]] と同様です。
 
 #@since 1.8.1
 --- sync_close
 --- sync_close=
+#@todo
 #@end
 
 --- sysclose
+#@todo
 
 接続を閉じます。相手に'close notify'を送ります。
 
 --- sysread(length[, buf])
+#@todo
 
 [[m:IO#sysread]] と同様です。
 
 --- syswrite(string)
+#@todo
 
 [[m:IO#syswrite]] と同様です。
 
 --- ungetc(char)
+#@todo
 
 [[m:IO#ungetc]] と同様です。
 
 --- write(str)
+#@todo
 
 [[m:IO#write]] と同様です。
 
 == Constants
 
 --- BLOCK_SIZE
+#@todo
 
 #@end

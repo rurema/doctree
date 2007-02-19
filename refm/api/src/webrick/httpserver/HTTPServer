@@ -14,6 +14,7 @@ HTTP サーバのためのクラス。
 == Class Methods
 
 --- new(config={}, default=Config::HTTP)
+#@todo
 HTTPServer オブジェクトを生成する。config は設定を保存したハッシュ。
 default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
 [[m:WEBrick::Config::HTTP]]
@@ -21,33 +22,43 @@ default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
 == Instance Methods
 
 --- access_log(config, req, res)
+#@todo
 
 --- do_OPTIONS(req, res)
+#@todo
 
 --- lookup_server(req)
+#@todo
 
 --- mount(dir, servlet, *options)
+#@todo
 サーバ上のディレクトリ dir にサーブレット servlet を対応させる。
 dir はディレクトリをあらわす文字列。servlet は
 [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラス。*options を引数としてサーブレットのコンストラクタ new(*options) が呼び出される。
 
 --- mount_proc(dir, proc)
 --- mount_proc(dir){|req, res| ...}
+#@todo
 サーバ上のディレクトリ dir に [[c:Proc]] オブジェクト proc を対応させる。
 proc は [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]]
 オブジェクトを引数として proc.call(request, response) の引数の順で呼び出される。
 
 --- run(sock)
+#@todo
 
 --- search_servlet(path)
+#@todo
 
 --- service(req, res)
+#@todo
 
 --- unmount(dir)
 --- umount(dir)
+#@todo
 サーバ上のディレクトリ dir とサーブレットとの対応を解消する。
 
 --- virtual_host(server)
+#@todo
 サーバの保持しているバーチャルホストのリストに server を加える。
 server は HTTPServer オブジェクト。
 クライアントからのリクエストのうち server へのものは server に委譲される
@@ -56,6 +67,7 @@ server は HTTPServer オブジェクト。
 = reopen WEBrick::Config
 == Constants
 --- HTTP
+#@todo
 HTTPServer.new(config) に与えた時に有効な設定とそのデフォルト値。
 [[m:WEBrick::Config::General]]も参照。
 [[m:URL:http:#/shogo.homelinux.org/~ysantoso/webrickguide/html/Server_Configuration.html]]

@@ -20,10 +20,12 @@ RegAnd、RegOr は =~ のみサポートしています。
 == Instance Methods
 
 --- &(other)
+#@todo
 
 [[m:RegAnd.new]](self, other) を返します。
 
 --- |(other)
+#@todo
 
 [[m:RegOr.new]](self, other) を返します。
 
@@ -34,12 +36,14 @@ RegAnd、RegOr は =~ のみサポートしています。
 == Class Methods
 
 --- new(re1, re2)
+#@todo
 
 新しい RegAnd オブジェクトを生成します。
 
 == Instance Methods
 
 --- =~(str)
+#@todo
 
 str が re1 と re2 の両方にマッチすれば真を返します。
 
@@ -50,11 +54,13 @@ str が re1 と re2 の両方にマッチすれば真を返します。
 == Class Methods
 
 --- new(re1, re2)
+#@todo
 
 新しい RegOr オブジェクトを生成します。
 
 == Instance Methods
 
 --- =~(str)
+#@todo
 
 str が re1 か re2 のいずれかにマッチすれば真を返します。

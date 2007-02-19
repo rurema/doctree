@@ -14,6 +14,7 @@
 == クラスメソッド:
 
 --- TkcItem.type2class(type)
+#@todo
     ((|type|))から対応するクラスを返します。
 
     ((|type|)) は、
@@ -29,13 +30,17 @@
     のいずれかです。
 
 --- TkcItem.id2obj(canvas, id)
+#@todo
 
 --- TkcItem.new(parent, *args)
+#@todo
 
 == メソッド:
 
 --- TkcItem#id
+#@todo
 
 --- TkcItem#delete
+#@todo
 
 =end

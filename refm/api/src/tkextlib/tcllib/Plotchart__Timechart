@@ -5,12 +5,16 @@ include ChartMethod
 
 == Class Methods
 --- new(*args)
+#@todo
 
 == Instance Methods
 --- period(txt, time_begin, time_end, col = None)
+#@todo
 
 --- milestone(txt, time, col = None)
+#@todo
 
 --- vertline(txt, time)
+#@todo
 
 #@end

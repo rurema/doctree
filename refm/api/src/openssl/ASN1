@@ -10,6 +10,7 @@
 == Module Functions
 
 --- decode(der)
+#@todo
 
 DER 表現の文字列を解析し、[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタンスを返します。ASN.1 オブジェクトが Constructive である場合は、それを構成する要素も再帰的に解析します。der に複数の ASN.1 オブジェクトが含まれる場合は最初の ASN.1 オブジェクトだけを返します。
 
@@ -44,11 +45,13 @@ DER 表現の文字列を解析し、[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタン
             ...
 
 --- decode_all(der)
+#@todo
 
 ASN1.decode と違って、der に含まれる全てのオブジェクトを再帰的に解析し
 配列として返します。
 
 --- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...}
+#@todo
 
 der に含まれる全てのオブジェクトを再帰的に解析して、
 そのプロパティを引数として与えられたブロックを評価します。
@@ -70,52 +73,75 @@ ASN1.decode_all と同じように der に含まれる全ての ASN.1 オブジェクトを
 コンストラクター new と同じです。
 
 --- Boolean(value [, tag [, tagging [, tag_class]]])
+#@todo
 
 --- Integer(value ... )
+#@todo
 
 --- Enumerated(value ... )
+#@todo
 
 --- BitString(value ... )
+#@todo
 
 --- OctetString(value ... )
+#@todo
 
 --- UTF8String(value ... )
+#@todo
 
 --- NumericString(value ... )
+#@todo
 
 --- PrintableString(value ... )
+#@todo
 
 --- T61String(value ... )
+#@todo
 
 --- VideotexString(value ... )
+#@todo
 
 --- IA5String(value ... )
+#@todo
 
 --- GraphicString(value ... )
+#@todo
 
 --- ISO64String(value ... )
+#@todo
 
 --- GeneralString(value ... )
+#@todo
 
 --- UniversalString(value ... )
+#@todo
 
 --- BMPString(value ... )
+#@todo
 
 --- Null(value ... )
+#@todo
 
 --- ObjectId(value ... )
+#@todo
 
 --- UTCTime(value ... )
+#@todo
 
 --- GeneralizedTime(value ... )
+#@todo
 
 --- Sequence(value ... )
+#@todo
 
 --- Set(value ... )
+#@todo
 
 == Constants
 
 --- UNIVERSAL_TAG_NAME
+#@todo
 
 タグ番号が表す ASN.1 オブジェクト名を収録した配列です。
 
@@ -131,118 +157,147 @@ ASN.1 オブジェクトのタグ番号を表す定数が以下のように定義されています。
   p OpenSSL::ASN1::UTF8STRING # => 12
 
 --- EOC
+#@todo
 
 EOC のタグ番号 0 を表す定数です。
 
 --- BOOLEAN
+#@todo
 
 BOOLEAN のタグ番号 1 を表す定数です。
 
 --- INTEGER
+#@todo
 
 INTEGER のタグ番号 2 を表す定数です。
 
 --- BIT_STRING
+#@todo
 
 BIT_STRING のタグ番号 3 を表す定数です。
 
 --- OCTET_STRING
+#@todo
 
 OCTET_STRING のタグ番号 4 を表す定数です。
 
 --- NULL
+#@todo
 
 NULL のタグ番号 5 を表す定数です。
 
 --- OBJECT
+#@todo
 
 OBJECT のタグ番号 6 を表す定数です。
 
 --- OBJECT_DESCRIPTOR
+#@todo
 
 OBJECT_DESCRIPTOR のタグ番号 7 を表す定数です。
 
 --- EXTERNAL
+#@todo
 
 EXTERNAL のタグ番号 8 を表す定数です。
 
 --- REAL
+#@todo
 
 REAL のタグ番号 9 を表す定数です。
 
 --- ENUMERATED
+#@todo
 
 ENUMERATED のタグ番号 10 を表す定数です。
 
 --- EMBEDDED_PDV
+#@todo
 
 EMBEDDED_PDV のタグ番号 11 を表す定数です。
 
 --- UTF8STRING
+#@todo
 
 UTF8STRING のタグ番号 12 を表す定数です。
 
 --- RELATIVE_OID
+#@todo
 
 RELATIVE_OID のタグ番号 13 を表す定数です。
 
 --- SEQUENCE
+#@todo
 
 SEQUENCE のタグ番号 16 を表す定数です。
 
 --- SET
+#@todo
 
 SET のタグ番号 17 を表す定数です。
 
 --- NUMERICSTRING
+#@todo
 
 NUMERICSTRING のタグ番号 18 を表す定数です。
 
 --- PRINTABLESTRING
+#@todo
 
 PRINTABLESTRING のタグ番号 19 を表す定数です。
 
 --- T61STRING
+#@todo
 
 T61STRING のタグ番号 20 を表す定数です。
 
 --- VIDEOTEXSTRING
+#@todo
 
 VIDEOTEXSTRING のタグ番号 21 を表す定数です。
 
 --- IA5STRING
+#@todo
 
 IA5STRING のタグ番号 22 を表す定数です。
 
 --- UTCTIME
+#@todo
 
 UTCTIME のタグ番号 23 を表す定数です。
 
 --- GENERALIZEDTIME
+#@todo
 
 GENERALIZEDTIME のタグ番号 24 を表す定数です。
 
 --- GRAPHICSTRING
+#@todo
 
 GRAPHICSTRING のタグ番号 25 を表す定数です。
 
 --- ISO64STRING
+#@todo
 
 ISO64STRING のタグ番号 26 を表す定数です。
 
 --- GENERALSTRING
+#@todo
 
 GENERALSTRING のタグ番号 27 を表す定数です。
 
 --- UNIVERSALSTRING
+#@todo
 
 UNIVERSALSTRING のタグ番号 28 を表す定数です。
 
 --- CHARACTER_STRING
+#@todo
 
 CHARACTER_STRING のタグ番号 29 を表す定数です。
 
 --- BMPSTRING
+#@todo
 
 BMPSTRING のタグ番号 30 を表す定数です。
 

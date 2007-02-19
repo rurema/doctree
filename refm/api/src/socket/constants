@@ -48,6 +48,7 @@
 #@end
 --- AF_UNIX
 --- AF_UNSPEC
+#@todo
 
 アドレスファミリー:
 [[m:Socket.open]] の第一引数 domain に使用します。
@@ -58,6 +59,7 @@
 --- SOCK_RDM
 --- SOCK_SEQPACKET
 --- SOCK_STREAM
+#@todo
 
 ソケットタイプ:
 [[m:Socket.open]] の第二引数 type に使用します。
@@ -110,12 +112,14 @@
 #@since 1.8.3
 --- PF_XTP
 #@end
+#@todo
 
 プロトコルファミリー:
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 --- IPPORT_RESERVED
 --- IPPORT_USERRESERVED
+#@todo
 
 --- IPPROTO_BIP
 --- IPPROTO_EGP
@@ -134,6 +138,7 @@
 --- IPPROTO_TP
 --- IPPROTO_UDP
 --- IPPROTO_XTP
+#@todo
 
 IPプロトコル:
 [[m:BasicSocket#getsockopt]], [[m:BasicSocket#setsockopt]] の level 引数に
@@ -157,6 +162,7 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- AI_PASSIVE
 --- AI_V4MAPPED
 --- AI_V4MAPPED_CFG
+#@todo
 
 フラグ:
 [[m:Socket.getaddrinfo]] の flags 引数に使用します。
@@ -176,6 +182,7 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- EAI_SERVICE
 --- EAI_SOCKTYPE
 --- EAI_SYSTEM
+#@todo
 
 [[m:Socket.getaddrinfo]]が失敗したときに返すエラーコードです。
 [[man:getaddrinfo(3)]]も参照して下さい。
@@ -187,8 +194,8 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- INADDR_MAX_LOCAL_GROUP
 --- INADDR_NONE
 --- INADDR_UNSPEC_GROUP
-
 #@todo
+
 
 --- NI_DGRAM
 --- NI_MAXHOST
@@ -197,6 +204,7 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- NI_NOFQDN
 --- NI_NUMERICHOST
 --- NI_NUMERICSERV
+#@todo
 
 Socket.getnameinfoの第2引数 flags に与える定数です。
 [[man:getnameinfo(3)]]も参照して下さい。
@@ -217,8 +225,8 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 --- IP_RETOPTS
 --- IP_TOS
 --- IP_TTL
-
 #@todo
+
 
 #@since 1.8.3
 --- MSG_COMPAT
@@ -243,12 +251,13 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 #@end
 --- MSG_TRUNC
 --- MSG_WAITALL
-
 #@todo
+
 
 --- SHUT_RD
 --- SHUT_RDWR
 --- SHUT_WR
+#@todo
 
 shutdown の how:
 [[m:BasicSocket#shutdown]] の how 引数に使用します。
@@ -301,9 +310,9 @@ shutdown の how:
 --- SO_USELOOPBACK
 --- SO_WANTMORE
 --- SO_WANTOOBFLAG
+#@todo
 #@end
 
-#@todo
 
 --- SOL_ATALK
 --- SOL_AX25
@@ -312,10 +321,13 @@ shutdown の how:
 --- SOL_SOCKET
 --- SOL_TCP
 --- SOL_UDP
+#@todo
 
 --- SOPRI_BACKGROUND
 --- SOPRI_INTERACTIVE
 --- SOPRI_NORMAL
+#@todo
 
 --- TCP_MAXSEG
 --- TCP_NODELAY
+#@todo

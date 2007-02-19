@@ -1,16 +1,21 @@
 = class YAML::YPath
 == class methods
 --- new(str)
+#@todo
 
 --- each_path(str) {|YPath.new(path)| ...}
+#@todo
 
 == instance methods
 --- segments
 --- segments=(val)
+#@todo
 
 --- predicates
 --- predicates=(val)
+#@todo
 
 --- flags
 --- flags=(val)
+#@todo
 

@@ -43,6 +43,7 @@ String クラスは自身をバイト列として扱います。
 == Class Methods
 
 --- new([string])
+#@todo
 
 string と同じ内容の新しい文字列を作成して返します。
 引数を省略した場合は空文字列を生成して返します。
@@ -50,6 +51,7 @@ string と同じ内容の新しい文字列を作成して返します。
 == Instance Methods
 
 --- +(other)
+#@todo
 
 文字列を連結した新しい文字列を返します。
 
@@ -62,6 +64,7 @@ string と同じ内容の新しい文字列を作成して返します。
   p b       # => "def"
 
 --- *(times)
+#@todo
 
 文字列の内容を times 回だけ繰り返した新しい文字列を作成して
 返します。
@@ -73,6 +76,7 @@ string と同じ内容の新しい文字列を作成して返します。
   p str       #=> "abc"  (変化なし)
 
 --- %(args)
+#@todo
 
 文字列のフォーマット。引数をフォーマット文字列 self で書式化
 した文字列を返します。
@@ -89,6 +93,7 @@ args が配列であれば [[m:Kernel#sprintf]](self, *args) と同じです。
 #@include(printf-format)
 
 --- <=>(other)
+#@todo
 
 self と other を ASCII コード順で比較して、self
 が大きい時に正、等しい時に 0、小さい時に負の整数を返します。
@@ -105,6 +110,7 @@ other.<=> が定義されていれば
 #@end
 
 --- ==(other)
+#@todo
 
 #@#--- >(other)
 #@#--- >=(other)
@@ -121,6 +127,7 @@ other.<=> が定義されていれば
 
 --- <<(other)
 --- concat(other)
+#@todo
 
 文字列 other の内容を self に連結します
 (self の内容が変更されます)。
@@ -130,6 +137,7 @@ other が 0 から 255 の範囲の [[c:Fixnum]] である場合は
 self を返します。
 
 --- =~(other)
+#@todo
 
 正規表現 other とのマッチを行います。マッチが成功すればマッ
 チした位置のインデックスを、そうでなければ nil を返します。
@@ -148,6 +156,7 @@ Ruby 1.8 以降は、 other に文字列を指定したときには
 #@end
 
 --- ~
+#@todo
 
 #@if (version >= "1.8.2")
 このメソッドは削除されました。
@@ -162,6 +171,7 @@ $_ が文字列でなければ nil を返します。
 #@end
 
 --- [](nth)
+#@todo
 
 nth 番目のバイトを整数 (文字コード) で返します
 (逆に文字コードから文字列を得るには [[m:Integer#chr]] を使います)。
@@ -179,6 +189,7 @@ nth が範囲外を指す場合は nil を返します。
   p 'bar'[-4]       # => nil
 
 --- [](nth, len)
+#@todo
 
 nth バイト番目から長さ len バイトの部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。
@@ -204,6 +215,7 @@ nth が範囲外を指す場合は nil を返します。
   p str0               #=> "bar" (str0は無傷、str1はstr0と内容を共有していない)
 
 --- [](substr)
+#@todo
 
 self が substr を含む場合、一致した文字列を新しく作って返します。
 substr を含まなければ nil を返します。
@@ -215,6 +227,7 @@ substr を含まなければ nil を返します。
 
 --- [](regexp)
 --- [](regexp, nth)
+#@todo
 
 regexp にマッチする最初の部分文字列を返します。組み込み変数
 [[m:$~]] にマッチに関する情報が設定されます。
@@ -237,6 +250,7 @@ nth に対応する括弧がなければ nil を返します。
 #@end
 
 --- [](first..last)
+#@todo
 
 インデックス first から last までのバイトを含む
 新しい文字列を作成して返します。
@@ -277,6 +291,7 @@ first が 0 より小さいか文字列の長さより大きいとき、
   'abcd'[-5 ..  2] # =>  nil
 
 --- [](first...last)
+#@todo
 
 文字列先頭を 0 番目の隙間、末尾を self.length 番目の隙間として、
 first 番目の隙間から last 番目の隙間までに含まれる
@@ -313,6 +328,7 @@ first が 0 より小さいか文字列の長さより大きいとき、
     'abcd'[-5 ... 2] # => nil
 
 --- []=(nth, val)
+#@todo
 
 nth 番目のバイトを文字列 val で置き換えます。
 val が 0 から 255 の範囲の整数である場合、文字コード
@@ -322,6 +338,7 @@ val が 0 から 255 の範囲の整数である場合、文字コード
   
 
 --- []=(nth, len, val)
+#@todo
 
 nth バイト番目から長さ len バイトの部分文字
 列を文字列 val で置き換えます。nth が負の場
@@ -330,6 +347,7 @@ nth バイト番目から長さ len バイトの部分文字
 val を返します。
 
 --- []=(substr, val)
+#@todo
 
 文字列中の substr に一致する最初の部分文字列を文字列
 val で置き換えます。
@@ -341,6 +359,7 @@ val を返します。
 
 --- []=(regexp, val)
 --- []=(regexp, nth, val)
+#@todo
 
 正規表現 regexp にマッチする最初の部分文字列を文字列
 val で置き換えます。
@@ -361,6 +380,7 @@ nth 番目の括弧にマッチする最初の部分文字列を文字列 val
 
 --- []=(self, first..last, val)
 --- []=(self, first...last, val)
+#@todo
 
 first から last までの部分文字列を文字列 val で
 置き換えます。
@@ -368,6 +388,7 @@ first から last までの部分文字列を文字列 val で
 val を返します。
 
 --- capitalize
+#@todo
 
 文字列先頭の文字を大文字に、残りを小文字に変更した文字列を返します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
@@ -394,6 +415,7 @@ val を返します。
 [[m:String#swapcase]] も参照してください。
 
 --- capitalize!
+#@todo
 
 文字列先頭の文字を大文字に、残りを小文字に変更します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
@@ -427,6 +449,7 @@ capitalize! は self を変更して返しますが、
 [[m:String#swapcase]] も参照してください。
 
 --- casecmp(other)
+#@todo
 
 [[m:String#<=>]] と同様に文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
@@ -439,6 +462,7 @@ capitalize! は self を変更して返しますが、
   p 'a'.casecmp('A') #=> 0
 
 --- center(width[, padding])
+#@todo
 
 長さ width の文字列に self を中央寄せした文字列を返します。
 self の長さが width より長い時には元の文字列の複製を返します。
@@ -462,6 +486,7 @@ self の長さが width より長い時には元の文字列の複製を返します。
 [[m:String#ljust]], [[m:String#rjust]] も参照してください。
 
 --- ljust(width[, padding])
+#@todo
 
 長さ width の文字列に self を左詰めした文字列を返します。
 self の長さが width より長い時には元の文字列の複製を返します。
@@ -484,6 +509,7 @@ self の長さが width より長い時には元の文字列の複製を返します。
 [[m:String#center]], [[m:String#rjust]] も参照してください。
 
 --- rjust(width[, padding])
+#@todo
 
 長さ width の文字列に self を右詰めした文字列を返します。
 self の長さが width より長い時には元の文字列の複製を返します。
@@ -507,6 +533,7 @@ self の長さが width より長い時には元の文字列の複製を返します。
 
 --- chomp([rs])
 --- chomp!([rs])
+#@todo
 
 文字列の末尾から rs で指定する行区切りを取り除きます。
 rs のデフォルト値は変数 [[m:$/]] の値です。
@@ -535,6 +562,7 @@ rs が "\n"(デフォルト)のとき、システムによらず "\r", "\r\n",
 
 --- chop
 --- chop!
+#@todo
 
 文字列の最後の文字を取り除きます(終端が"\r\n"であれば2文字取
 り除きます)。
@@ -545,6 +573,7 @@ chop! は self を変更して返しますが、取り除く文字がなかった
 
 #@since 1.9.0
 --- clear
+#@todo
 
 文字列の内容を削除して空にします。
 self を返します。
@@ -569,6 +598,7 @@ self を返します。
 #@# [[m:Object#clone]],[[m:Object#dup]]を参照するべき
 
 --- count(str[, str2[, ...]])
+#@todo
 
 文字列中の文字の数を返します。
 
@@ -602,6 +632,7 @@ self を返します。
   n_lines += 1 if /[^\n]\z/ =~ buf   # if /\n\z/ !~ buf だと空ファイルを1行として数えるのでダメ
 
 --- crypt(salt)
+#@todo
 
 self と salt から暗号化された文字列を生成して返します。
 salt には英数字、ドット (.)、スラッシュ (/) から構成される、
@@ -644,6 +675,7 @@ salt には、以下の様になるべくランダムな文字列を選ぶべきです。
 
 --- delete(str[, str2[,  ... ]])
 --- delete!(str[, str2[,  ... ]])
+#@todo
 
 文字列から str に含まれる文字を取り除きます。
 
@@ -669,6 +701,7 @@ delete! は self を変更して返しますが、
 
 --- downcase
 --- downcase!
+#@todo
 
 文字列中のアルファベット大文字をすべて小文字に置き換えます。
 
@@ -692,6 +725,7 @@ downcase! は self を変更して返しますが、置換が起こら
   [[m:String#capitalize]] も参照してください。
 
 --- dump
+#@todo
 
 文字列中の非表示文字をバックスラッシュ記法に
 置き換えた文字列を返します。
@@ -703,6 +737,7 @@ str == eval(str.dump) となることが保証されています。
 
 --- each([rs]) {|line| ... }
 --- each_line([rs]) {|line| ... }
+#@todo
 
 文字列中の各行に対して繰り返します。
 行の区切りは rs に指定した文字列で、
@@ -718,6 +753,7 @@ self を返します。
 --- each_byte {|byte| ... }
 #@since 1.9.0
 --- bytes
+#@todo
 #@end
 
 文字列の各バイトに対して繰り返します。
@@ -728,6 +764,7 @@ self を返します。
 unpack('C*')でバイト単位の配列を取得できます。
 
 --- empty?
+#@todo
 
 文字列が空 (つまり長さ 0) の時、真を返します。
 
@@ -735,6 +772,7 @@ unpack('C*')でバイト単位の配列を取得できます。
 --- gsub!(pattern, replace)
 --- gsub(pattern) {|matched| .... }
 --- gsub!(pattern) {|matched| .... }
+#@todo
 
 文字列中で pattern にマッチする部分((*全て*))を
 replace で置き換えます。置換文字列 replace 中の
@@ -799,6 +837,7 @@ gsub! は self を変更して返しますが、
 #@end
 
 --- hex
+#@todo
 
 文字列を 16 進数表現と解釈して、整数に変換します。
 
@@ -829,6 +868,7 @@ gsub! は self を変更して返しますが、
 を使用します。
 
 --- include?(substr)
+#@todo
 
 文字列中に部分文字列 substr が含まれていれば真を返します。
 
@@ -836,6 +876,7 @@ substr が 0 から 255 の範囲の [[c:Fixnum]] の場合、
 文字コードとみなして、その文字が含まれていれば真を返します。
 
 --- index(pattern[, pos])
+#@todo
 
 部分文字列の探索を左端から右端に向かって行います。
 見つかった部分文字列の左端の位置を返します。
@@ -864,6 +905,7 @@ pos が負の場合、文字列の末尾から数えた位置から探索します。
 
 #@since 1.8.0
 --- insert(nth, other)
+#@todo
 
 nth 番目の文字の直前に文字列 other を挿入します。
 以下と (戻り値を除いて) 同じです。
@@ -884,6 +926,7 @@ self を返します。
 --- intern
 #@since 1.8.0
 --- to_sym
+#@todo
 #@end
 
 文字列に対応するシンボル値 [[c:Symbol]] を返します。
@@ -900,6 +943,7 @@ self を返します。
 
 --- length
 --- size
+#@todo
 
 文字列のバイト数を返します。
 
@@ -907,6 +951,7 @@ self を返します。
 --- match(regexp)
 #@since 1.9.0
 --- match(regexp[, pos])
+#@todo
 #@end
 
 regexp.match(self[, pos]) と同じです ([[m:Regexp#match]] 参照)。
@@ -917,6 +962,7 @@ regexp が文字列の場合は、正規表現にコンパイルします。
 --- next!
 --- succ
 --- succ!
+#@todo
 
 次の文字列を返します。
 「次」とは、アルファベットは 16 進数、
@@ -960,6 +1006,7 @@ succ!, next! は文字列の内容を破壊的に修正します。
 このメソッドは文字列の [[c:Range]] の内部で使用されます。
 
 --- oct
+#@todo
 
 文字列を 8 進文字列であると解釈して、整数に変換します。
 
@@ -1003,6 +1050,7 @@ Ruby 1.8 以降はいずれも符号を許す
 [[m:String#%]], [[m:Integer#to_s]] を使用します。
 
 --- replace(other)
+#@todo
 
 文字列の内容を other の内容で置き換えます。
 
@@ -1018,6 +1066,7 @@ self を返します。
 
 --- reverse
 --- reverse!
+#@todo
 
 文字列をひっくり返します。
 
@@ -1029,6 +1078,7 @@ reverse は変更後の文字列を生成して返します。
 reverse! は self を変更してそれを返します。
 
 --- rindex(pattern[, pos])
+#@todo
 
 部分文字列の探索を右端から左端に向かって行います。
 見つかった部分文字列の左端の位置を返します。
@@ -1072,6 +1122,7 @@ pos が負の場合、文字列の末尾から数えた位置から探索します。
 
 --- scan(re)
 --- scan(re) {|s| ... }
+#@todo
 
 self に対して正規表現 re で繰り返しマッチを行い、
 マッチした部分文字列の配列を返します。
@@ -1124,6 +1175,7 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
 --- slice(substr)
 --- slice(first..last)
 --- slice(first...last)
+#@todo
 
 [[m:String#[] ]] と同じです。
 
@@ -1133,6 +1185,7 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
 --- slice!(first...last)
 #@since 1.8.0
 --- slice!(regexp[, nth])
+#@todo
 #@end
 
 指定した範囲 ( [[m:String#[] ]] ) 参照) を
@@ -1141,6 +1194,7 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
 引数が範囲外を指す場合は nil を返します。
 
 --- split([sep[, limit]])
+#@todo
 
 sep で指定されたパターンによって文字列を分割し配列に格納します。
 sep は以下のいずれかです。
@@ -1220,6 +1274,7 @@ limit は以下のいずれかです。
 
 --- squeeze([str[, str2[, ...]]])
 --- squeeze!([str[, str2[, ...]]])
+#@todo
 
 str に含まれる同一の文字の並びをひとつにまとめます。
 
@@ -1247,6 +1302,7 @@ squeeze! は self を変更して返しますが、
 
 --- strip
 --- strip!
+#@todo
 
 先頭と末尾の空白文字を全て取り除きます。
 空白文字の定義は " \t\r\n\f\v" です。
@@ -1289,6 +1345,7 @@ strip! は self を変更して返します。
 #@since 1.8.0
 --- lstrip
 --- lstrip!
+#@todo
 
 文字列の先頭にある空白文字を全て取り除きます。
 空白文字の定義は " \t\r\n\f\v" です。
@@ -1320,6 +1377,7 @@ lstrip! は self を変更して返します。
 #@since 1.8.0
 --- rstrip
 --- rstrip!
+#@todo
 
 文字列の末尾にある空白文字を全て取り除きます。
 空白文字の定義は " \t\r\n\f\v" です。
@@ -1362,6 +1420,7 @@ rstrip! は自身を変更して返します。
 --- sub!(pattern, replace)
 --- sub(pattern) {|matched| ... }
 --- sub!(pattern) {|matched| ... }
+#@todo
 
 文字列中で pattern に((*最初に*))マッチする部分を
 replace で置き換えます。
@@ -1385,6 +1444,7 @@ sub! は self を変更して返しますが、
 #@end
 
 --- sum([bits = 16])
+#@todo
 
 文字列の bits ビットのチェックサムを計算します。
 以下と同じです。
@@ -1406,6 +1466,7 @@ sub! は self を変更して返しますが、
 
 --- swapcase
 --- swapcase!
+#@todo
 
 全ての大文字を小文字に、小文字を大文字に変更します。
 
@@ -1428,6 +1489,7 @@ swapcase! は self を変更して返しますが、置換が起こら
 [[m:String#capitalize]] も参照してください。
 
 --- to_f
+#@todo
 
 文字列を 10 進数表現と解釈して、浮動小数点数 [[c:Float]] に変換します。
 
@@ -1457,6 +1519,7 @@ swapcase! は self を変更して返しますが、置換が起こら
 を使用します。
 
 --- to_i(base = 10)
+#@todo
 
 文字列を 10 進数表現と解釈して、整数に変換します。
 
@@ -1493,11 +1556,13 @@ swapcase! は self を変更して返しますが、置換が起こら
 
 --- to_s
 --- to_str
+#@todo
 
 self を返します。
 
 --- tr(search, replace)
 --- tr!(search, replace)
+#@todo
 
 文字列の中に search 文字列に含まれる文字が存在したら、
 それを replace 文字列の対応する文字に置き換えます。
@@ -1528,6 +1593,7 @@ tr! は self を変更して返しますが、置換が起こら
 
 --- tr_s(search, replace)
 --- tr_s!(search, replace)
+#@todo
 
 文字列の中に search 文字列に含まれる文字が存在したら、
 replace 文字列の対応する文字に置き換えます。さらに、
@@ -1565,6 +1631,7 @@ squeeze の対象とします。
   p "foo".tr("o", "f").squeeze("f")   # => "f"
 
 --- unpack(template)
+#@todo
 
 [[m:Array#pack]] で生成された文字列を
 template 文字列にしたがってアンパックし、
@@ -1576,6 +1643,7 @@ template 文字列にしたがってアンパックし、
 
 --- upcase
 --- upcase!
+#@todo
 
 ASCII 文字列の範囲内でアルファベットを全て大文字にします
 
@@ -1596,6 +1664,7 @@ upcase! は self を変更して返しますが、置換が起こら
 [[m:String#capitalize]] も参照してください。
 
 --- upto(max) {|s| ... }
+#@todo
 
 self から始めて max まで
 「次の文字列」を順番にブロックに与えて繰り返します。
@@ -1609,15 +1678,18 @@ self から始めて max まで
   end
 
 --- eql?(other)
+#@todo
 
 self == other と同じです。
 
 --- hash
+#@todo
 
 self のハッシュ値を返します。
 eql? で等しい文字列は、常にハッシュ値も等しくなります。
 
 --- inspect
+#@todo
 
 Ruby のリテラル形式を使って、
 文字列中の不可視文字をエスケープシーケンスに変換します。
@@ -1638,27 +1710,33 @@ $KCODE が設定されている場合は、
 
 #@since 1.9.0
 --- chr
+#@todo
 
 self の最初の文字だけを含む文字列を返します。
 
 --- start_with?(str)
+#@todo
 
 self の先頭が str であるとき true を返します。
 
 --- end_with?(str)
+#@todo
 
 self の末尾が str であるとき true を返します。
 
 --- lines
+#@todo
 
 文字列を行の配列に変換します。
 
 --- ord
+#@todo
 
 最初の文字の文字コードを返します。
 ただし self が 2 文字以上を含むときは例外 TypeError を発生します。
 
 --- partition(sep)
+#@todo
 
 セパレータ sep が最初に登場する部分で self を 2 つに分割し、
 [セパレータを含まない先頭部分, セパレータ, それ以降の部分]
@@ -1675,6 +1753,7 @@ self がセパレータを含まないときは、
 [[String#rpartition]] も参照してください。
 
 --- rpartition(sep)
+#@todo
 
 セパレータ sep が最後に登場する部分で self を 2 つに分割し、
 [最後のセパレータより前の部分, セパレータ, それ以降の部分]

@@ -11,50 +11,62 @@ include TkItemConfigMethod
 == Instance Methods
 
 --- add(page, &b)
+#@todo
 
 
 
 --- compute_size
+#@todo
 
 
 
 --- delete(page, destroyframe = None)
+#@todo
 
 
 
 --- get_frame(page, &b)
+#@todo
 
 
 
 --- get_page(page)
+#@todo
 
 
 
 --- index(page)
+#@todo
 
 
 
 --- insert(index, page, keys = {}, &b)
+#@todo
 
 
 
 --- move(page, index)
+#@todo
 
 
 
 --- pages(first = None, last = None)
+#@todo
 
 
 
 --- raise(page = nil)
+#@todo
 
 
 
 --- see(page)
+#@todo
 
 
 
 --- tabbind(context, *args)
+#@todo
 
 def tabbind(*args)
 
@@ -64,6 +76,7 @@ def tabbind(*args)
 end
 
 --- tabbind_append(context, *args)
+#@todo
 
 def tabbind_append(*args)
 
@@ -73,14 +86,17 @@ def tabbind_append(*args)
 end
 
 --- tabbind_remove(*args)
+#@todo
 
 
 
 --- tabbindinfo(*args)
+#@todo
 
 
 
 --- tagid(id)
+#@todo
 
 
 

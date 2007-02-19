@@ -61,6 +61,7 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 == Class Methods
 
 --- new(str, dup = false)
+#@todo
 
 新しい StringScanner オブジェクトを生成します。
 str はスキャン対象の文字列です。
@@ -75,11 +76,13 @@ dup は単に無視します。
 
 #@# bc-rdoc: detected missing name: must_C_version 
 ---  StringScanner.must_C_version 
+#@todo
 This method is defined for backward compatibility.
 
 == Instance Methods
 
 --- [](nth)
+#@todo
 
 前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
 返します。インデックス 0 はマッチした部分全体です。前回のマッチが
@@ -106,6 +109,7 @@ This method is defined for backward compatibility.
 #@if (version >= "1.8.1")
 --- <<(s)
 --- concat(str)
+#@todo
 
 操作対象の文字列に対し str を破壊的に連結します。
 マッチ記録は変更されません。
@@ -133,6 +137,7 @@ selfを返します。
 #@if (version >= "1.8.1")
 --- beginning_of_line?
 --- bol?
+#@todo
 スキャンポインタが行頭を指しているなら true を、
 行頭以外を指しているなら false を返します。
 
@@ -150,6 +155,7 @@ selfを返します。
 #@end
 
 --- check(regexp)
+#@todo
 現在位置から regexp とのマッチを試みます。
 マッチに成功したらマッチした部分文字列を返します。
 マッチに失敗したら nil を返します。
@@ -164,6 +170,7 @@ selfを返します。
       s.matched      # => nil
 
 --- check_until(regexp)
+#@todo
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
 マッチに失敗したら nil を返します。
@@ -178,6 +185,7 @@ regexp が一致するまで文字列をスキャンします。
 
 --- eos?
 --- empty?
+#@todo
 スキャンポインタが文字列の末尾を指しているなら true を、
 末尾以外を指しているなら false を返します。
 
@@ -192,6 +200,7 @@ regexp が一致するまで文字列をスキャンします。
 代わりに [[m:StringScanner#eos?]] を使ってください。
 
 --- exist?(regexp)
+#@todo
 #@if (version <= "1.8.5")
 [注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
 #@else
@@ -212,6 +221,7 @@ regexp が一致するまで文字列をスキャンします。
 #@end
 
 --- getch
+#@todo
 一文字スキャンして文字列で返します。
 一文字の定義は $KCODE に依存します。
 スキャンポインタをその後ろに進めます。
@@ -229,6 +239,7 @@ regexp が一致するまで文字列をスキャンします。
 
 --- get_byte
 --- getbyte
+#@todo
 $KCODE に関らず 1 バイトスキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すなら nil を返します。
@@ -248,6 +259,7 @@ $KCODE に関らず 1 バイトスキャンして文字列で返します。
 代わりに [[m:StringScanner#get_byte]] を使ってください。
 
 --- inspect
+#@todo
 StringScannerオブジェクトを表す文字列を返します。
 
       s = StringScanner.new('test string')
@@ -266,6 +278,7 @@ StringScannerオブジェクトを表す文字列を返します。
     * スキャンポインタの前後にある文字。上記実行例の @ がスキャンポインタを表します。
 
 --- match?(regexp)
+#@todo
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタは進めずにマッチした
 部分文字列の長さを返します。マッチしなかったら nil を
@@ -277,6 +290,7 @@ StringScannerオブジェクトを表す文字列を返します。
         p s.match?(/\s+/)   #=> nil
 
 --- matched
+#@todo
 前回マッチした部分文字列を返します。
 前回のマッチに失敗していると nil を返します。
 
@@ -290,6 +304,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.matched     # => " "
 
 --- matched?
+#@todo
 前回のマッチが成功していたら true を、
 失敗していたら false を返します。
 
@@ -303,6 +318,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.matched?    # => true
 
 --- matched_size
+#@todo
 前回マッチした部分文字列の長さを返します。
 前回マッチに失敗していたら nil を返します。
 
@@ -315,6 +331,7 @@ StringScannerオブジェクトを表す文字列を返します。
 
 --- peek(bytes)
 --- peep(bytes)
+#@todo
 スキャンポインタから長さ bytes バイト分だけ文字列を返します。
 
       s = StringScanner.new('test string')
@@ -350,6 +367,7 @@ bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
 
 --- pointer
 --- pos
+#@todo
 現在のスキャンポインタのインデックスを返します。
 
       s = StringScanner.new('test string')
@@ -363,6 +381,7 @@ bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
 
 --- pointer=(n)
 --- pos=(n)
+#@todo
 スキャンポインタのインデックスを n にセットします。
 
 n は整数で、バイト単位で指定します。
@@ -386,6 +405,7 @@ n を返します。
 #@end
 
 --- post_match
+#@todo
 前回マッチを行った文字列のうち、マッチしたところよりも後ろの
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
@@ -404,6 +424,7 @@ n を返します。
       s.post_match  # => nil
 
 --- pre_match
+#@todo
 前回マッチを行った文字列のうち、マッチしたところよりも前の
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
@@ -422,6 +443,7 @@ n を返します。
       s.pre_match   # => nil
 
 --- reset
+#@todo
 スキャンポインタを文字列の先頭 (インデックス 0) に戻し、
 マッチ記録を捨てます。
 
@@ -440,6 +462,7 @@ pos = 0と同じ動作です。
       s.pos         # => 0
 
 --- rest
+#@todo
 文字列の残り (rest) を返します。
 具体的には、スキャンポインタが指す位置からの文字列を返します。
 スキャンポインタが文字列の末尾を指していたら空文字列 ("") を返します。
@@ -454,6 +477,7 @@ pos = 0と同じ動作です。
       s.rest         # => ""
 
 --- rest?
+#@todo
 文字列が残っているならば trueを、
 残っていないならば false を返します。
 
@@ -473,6 +497,7 @@ pos = 0と同じ動作です。
 
 --- rest_size
 --- restsize
+#@todo
 文字列の残りの長さを返します。
 stringscanner.rest.size と同じです。
 
@@ -484,6 +509,7 @@ stringscanner.rest.size と同じです。
 代わりに[[m:StringScanner#rest_size]] を使ってください。
 
 --- scan(regexp)
+#@todo
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタを進めて正規表現にマッチした
 部分文字列を返します。マッチしなかったら nil を返します。
@@ -496,6 +522,7 @@ stringscanner.rest.size と同じです。
         p s.scan(/./)     #=> nil
 
 --- scan_full(regexp, s, f)
+#@todo
 スキャンポインタの位置から regexp と文字列のマッチを試します。
 マッチに成功すると、s と f の値によって以下のように動作します。
 
@@ -515,6 +542,7 @@ stringscanner.rest.size と同じです。
     * scan_full(regexp, false, false) は [[m:StringScanner#match]] と同等。
 
 --- scan_until(regexp)
+#@todo
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
@@ -527,6 +555,7 @@ regexp が一致するまで文字列をスキャンします。
       s.pre_match         # => "test "
 
 --- search_full(regexp, s, f)
+#@todo
 regexp が一致するまで文字列をスキャンします。
 マッチに成功すると、s と f の値によって以下のように動作します。
 
@@ -546,6 +575,7 @@ regexp が一致するまで文字列をスキャンします。
     * search_full(regexp, false, false) は [[m:StringScanner#exist?]] と同等。
 
 --- skip(regexp)
+#@todo
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたらスキャンポインタを進めマッチした部分文字列の
 長さを返します。マッチしなかったら nil を返します。
@@ -560,6 +590,7 @@ regexp が一致するまで文字列をスキャンします。
         p s.skip(/./)     #=> nil
 
 --- skip_until(regexp)
+#@todo
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
@@ -572,6 +603,7 @@ regexp が一致するまで文字列をスキャンします。
       s.pre_match         # => "test "
 
 --- string
+#@todo
 スキャン対象にしている文字列を返します。
 
       s = StringScanner.new('test string')
@@ -611,6 +643,7 @@ regexp が一致するまで文字列をスキャンします。
       str               # => "0123" (将来は "test string" が返る可能性あり)
 
 --- string=(str)
+#@todo
 スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
 str を返します。
 
@@ -621,6 +654,7 @@ str を返します。
 
 --- terminate
 --- clear
+#@todo
 スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
 
 self を返します。
@@ -641,6 +675,7 @@ pos = self.string.size と同じ動作です。
 代わりに [[m:StringScanner#terminate]] を使ってください。
 
 --- unscan
+#@todo
 スキャンポインタを前回のマッチの前の位置に戻します。
 
       s = StringScanner.new('test string')
@@ -666,6 +701,7 @@ selfを返します。
 
 #@# bc-rdoc: detected missing name: matchedsize
 --- matchedsize
+#@todo
 
 Equivalent to #matched_size. This method is obsolete; use #matched_size
 instead.
@@ -674,6 +710,7 @@ instead.
 == Constants
 
 --- Version
+#@todo
 StringScannerクラスのバージョンを文字列で返します。
 この文字列はfreezeされています。
 

@@ -125,6 +125,7 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
 
 == Instance Methods
 --- tsort
+#@todo
 
 頂点をトポロジカルソートして得られる配列を返します。
 この配列は子から親に向かってソートされています。
@@ -133,6 +134,7 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
 閉路が存在するとき、例外[[c:TSort::Cyclic]]を起こします。
 
 --- tsort_each {|node| ...}
+#@todo
 
 tsort メソッドのイテレータ版です。
 obj.tsort_each は obj.tsort.each と似ていますが、
@@ -143,12 +145,14 @@ tsort_each は nil を返します。
 閉路が存在するとき、例外 [[c:TSort::Cyclic]] を起こします。
 
 --- strongly_connected_components
+#@todo
 
 強連結成分の集まりを配列の配列として返します。
 この配列は子から親に向かってソートされています。
 各要素は強連結成分を表す配列です。
 
 --- each_strongly_connected_component {|nodes| ...}
+#@todo
 
 strongly_connected_components メソッドのイテレータ版です。
 obj.each_strongly_connected_component は
@@ -159,6 +163,7 @@ obj.strongly_connected_components.each に似ていますが、
 each_strongly_connected_component は nil を返します。
 
 --- each_strongly_connected_component_from(node) {|nodes| ...}
+#@todo
 
 node から到達可能な強連結成分についてのイテレータです。
 
@@ -168,12 +173,14 @@ each_strongly_connected_component_from は
 tsort_each_node を呼びません。
 
 --- tsort_each_node {|node| ...}
+#@todo
 
 TSort で拡張されるクラスで定義されていなければならないメソッドです。
 
 tsort_each_node is used to iterate for all nodes over a graph.
 
 --- tsort_each_child(node) {|child| ...}
+#@todo
 
 TSort で拡張されるクラスで定義されていなければならないメソッドです。
 

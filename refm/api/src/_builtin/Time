@@ -73,6 +73,7 @@ yday は 1 から数えます。
 == Class Methods
 
 --- at(time[, usec])
+#@todo
 
 time で指定した時刻の Time オブジェクトを返します。
 time は Time オブジェクト、もしくは起算時からの経過秒
@@ -88,6 +89,7 @@ time、usec ともに整数でなければなりません。
 --- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
 --- utc(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])
 --- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
+#@todo
 
 引数で指定した協定世界時の Time オブジェクトを返します。第 2
 引数以降は省略可能で、省略した場合の値はその引数がとり得る最小の値
@@ -115,16 +117,19 @@ isdst には夏時間(Daylight Saving Time (Summer Time))があるか
 --- local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
 --- mktime(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])
 --- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
+#@todo
 
 引数で指定した地方時の Time オブジェクトを返します。引数の扱
 いは [[m:Time.gm]] と同じです。
 
 --- new
 --- now
+#@todo
 
 現在時刻の Time オブジェクトを返します。
 
 --- times  
+#@todo
 
 このメソッドは obsolete です。
 
@@ -148,28 +153,33 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 == Instance Methods
 
 --- +(other)
+#@todo
 
 self より other 秒だけ後の時刻を返します
 
 --- -(other)
+#@todo
 
 other が Time オブジェクトである時、ふたつの時刻の差を
 [[c:Float]] で返します。単位は秒です。other が数値である時には self
 より other 秒だけ前の時刻を返します。
 
 --- <=>(other)
+#@todo
 
 時刻の比較。other は Time オブジェクトか数値でなければ
 なりません。数値の場合は起算時からの経過秒数とみなして比較します。
 
 --- asctime
 --- ctime
+#@todo
 
 時刻を [[man:asctime(3)]] の形式の文字列に変換します。た
 だし、末尾の \n は含まれません。
 
 --- gmt?
 --- utc?
+#@todo
 
 self のタイムゾーンが協定世界時に設定されていれば真を返しま
 す。
@@ -177,6 +187,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 #@if (version >= "1.8.0")
 --- getgm
 --- getutc
+#@todo
 
 タイムゾーンを協定世界時に設定した Time オブジェクトを新しく
 生成して返します。
@@ -184,6 +195,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 
 #@if (version >= "1.8.0")
 --- getlocal
+#@todo
 
 タイムゾーンを地方時に設定した Time オブジェクトを新しく生成
 して返します。
@@ -191,6 +203,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 
 --- gmtime
 --- utc
+#@todo
 
 タイムゾーンを協定世界時に設定します。self を返します。
 
@@ -207,6 +220,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 渡す場合には注意する必要があります。
 
 --- localtime
+#@todo
 
 タイムゾーンを地方時に設定します(デフォルト)。self を返しま
 す。
@@ -221,6 +235,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 渡す場合には注意する必要があります。
 
 --- strftime(format)
+#@todo
 
 時刻を format 文字列に従って文字列に変換した結果を返します。
 format 文字列として指定できるものは 以下の通りです。
@@ -254,40 +269,51 @@ format 文字列として指定できるものは 以下の通りです。
 植性をそこなう可能性がある点に注意してください。
 
 --- sec
+#@todo
 秒を整数で返します。
 
 --- min
+#@todo
 分を整数で返します。
 
 --- hour
+#@todo
 時を整数で返します。
 
 --- mday
 --- day         (mday の別名)
+#@todo
 日を整数で返します。
 
 --- mon
 --- month       (mon の別名)
+#@todo
 月を整数で返します。
 
 --- year
+#@todo
 年を整数で返します。
 
 --- wday
+#@todo
 曜日を0(日曜日)から6(土曜日)の整数で返します。
 
 --- yday
+#@todo
 1月1日を1とした通算日(1から366まで)を整数で返します。
 
 --- isdst
 --- dst?        (isdst の別名)
+#@todo
 夏時間があるなら true をなければ false を返します。
 
 --- zone
+#@todo
 タイムゾーンを表す文字列を返します。
 
 #@if (version >= "1.8.0")
 --- succ
+#@todo
 
 self に 1 秒足した Time オブジェクトを生成して返します。
 タイムゾーンは地方時になります。
@@ -305,6 +331,7 @@ self に 1 秒足した Time オブジェクトを生成して返します。
 --- utc_offset
 --- gmt_offset
 --- gmtoff
+#@todo
 
 協定世界時との時差を秒を単位とする数値として返します。
 
@@ -329,6 +356,7 @@ self に 1 秒足した Time オブジェクトを生成して返します。
 #@#end
 
 --- to_a
+#@todo
 
 時刻を10要素の配列で返します。その要素は順序も含めて以下の通りです。
 
@@ -356,16 +384,19 @@ tm 構造体に zone はありません。
 yday は 1 から数えます。
 
 --- to_f
+#@todo
 
 起算時からの経過秒数を浮動小数点数で返します。1 秒に満たない経過も
 表現されます。
 
 --- to_i
 --- tv_sec
+#@todo
 
 起算時からの経過秒数を整数で返します。
 
 --- to_s
+#@todo
 
 時刻を [[man:date(1)]] のような形式の文字列に変換します。
 
@@ -379,5 +410,6 @@ self.strftime("%a %b %d %H:%M:%S %Z %Y")
 
 --- usec
 --- tv_usec
+#@todo
 
 時刻のマイクロ秒の部分を返します。

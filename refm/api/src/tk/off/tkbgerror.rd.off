@@ -25,6 +25,7 @@
 --- TkBgError.bgerror(message)
 --- TkBgError.tkerror(message)
 --- TkBgError.show(message)
+#@todo
     エラーを報告するダイアログを表示します。
 
     ダイアログには、3つのボタンがあります。

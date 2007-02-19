@@ -46,18 +46,21 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 #@if (version >= "1.8.0")
 --- filename
 --- path
+#@todo
 
 処理対象のファイル名を返します。
 標準入力に対しては - を返します。
 組み込み変数 [[m:$FILENAME]] と同じです。
 
 --- to_s
+#@todo
 
 常に文字列 "ARGF" を返します。
 #@else
 
 --- filename
 --- to_s
+#@todo
 
 処理対象のファイル名を返します。
 標準入力に対しては - を返します。
@@ -65,17 +68,20 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 #@end
 
 --- file
+#@todo
 
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
 返します。
 
 --- lineno
 --- lineno=
+#@todo
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
 個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
 
 --- skip
+#@todo
 
 処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
@@ -83,48 +89,70 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 self を返します。
 
 --- binmode
+#@todo
 
 --- close
+#@todo
 
 --- closed?
+#@todo
 
 --- dup
+#@todo
 
 --- each
+#@todo
 
 --- each_byte
+#@todo
 
 --- each_line
+#@todo
 
 --- eof
 --- eof?
+#@todo
 
 --- fileno
+#@todo
 
 --- getc
+#@todo
 
 --- gets
+#@todo
 
 --- pos
 --- pos=
+#@todo
 
 --- read
+#@todo
 
 --- readchar
+#@todo
 
 --- readline
+#@todo
 
 --- readlines
+#@todo
 
 --- rewind
+#@todo
 
 --- seek
+#@todo
 
 --- tell
+#@todo
 
 --- to_a
+#@todo
 
 --- to_i
+#@todo
 
 --- to_io
+#@todo
 

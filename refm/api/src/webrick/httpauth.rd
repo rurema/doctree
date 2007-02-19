@@ -13,6 +13,7 @@ require webrick/httpauth/htgroup
 == Module Functions
 
 --- basic_auth(req, res, realm){|user, pass| ... }
+#@todo
 Basic 認証を行う。ブロックは user, pass を引数として呼ばれ、
 ブロックが true を返すとユーザを認証したことになる。
 ブロックが false を返すと認証に失敗し、
@@ -26,6 +27,7 @@ Basic 認証を行う。ブロックは user, pass を引数として呼ばれ、
   }
 
 --- proxy_basic_auth(req, res, realm){|user, pass| ... }
+#@todo
 プロクシー [[c:WEBrick::HTTPProxyServer]] のための Basic 認証を行う。
 ブロックは user, pass を引数として呼ばれ、
 ブロックが true を返すとユーザを認証したことになる。

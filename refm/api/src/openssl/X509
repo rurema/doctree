@@ -9,109 +9,153 @@
 == Constants
 
 --- PURPOSE_ANY
+#@todo
 
 どんな目的に対しても使えるか。
 
 --- PURPOSE_CRL_SIGN
+#@todo
 
 CRL の署名をするのに使えるか。
 
 --- PURPOSE_NS_SSL_SERVER
+#@todo
 
 Netscape SSL server の証明書として使えるか。
 
 --- PURPOSE_SMIME_ENCRYPT
+#@todo
 
 S/MIME の暗号化をするのに使えるか。
 
 --- PURPOSE_SMIME_SIGN
+#@todo
 
 S/MIME の署名をするのに使えるか。
 
 --- PURPOSE_SSL_CLIENT
+#@todo
 
 SSL のクライアントサイドの証明書として使えるか。
 
 --- PURPOSE_SSL_SERVER
+#@todo
 
 SSL のサーバサイドの証明書として使えるか。
 
 以下は OpenSSL::X509::Store#trust にセットされる値です。
 
 --- TRUST_COMPAT
+#@todo
 
 --- TRUST_EMAIL
+#@todo
 
 --- TRUST_OBJECT_SIGN
+#@todo
 
 --- TRUST_SSL_CLIENT
+#@todo
 
 --- TRUST_SSL_SERVER
+#@todo
 
 以下は OpenSSL::X509::Store#error にセットされる値です。
 
 --- V_OK
+#@todo
 
 --- V_ERR_AKID_SKID_MISMATCH
+#@todo
 
 --- V_ERR_APPLICATION_VERIFICATION
+#@todo
 
 --- V_ERR_CERT_CHAIN_TOO_LONG
+#@todo
 
 --- V_ERR_CERT_HAS_EXPIRED
+#@todo
 
 --- V_ERR_CERT_NOT_YET_VALID
+#@todo
 
 --- V_ERR_CERT_REJECTED
+#@todo
 
 --- V_ERR_CERT_REVOKED
+#@todo
 
 --- V_ERR_CERT_SIGNATURE_FAILURE
+#@todo
 
 --- V_ERR_CERT_UNTRUSTED
+#@todo
 
 --- V_ERR_CRL_HAS_EXPIRED
+#@todo
 
 --- V_ERR_CRL_NOT_YET_VALID
+#@todo
 
 --- V_ERR_CRL_SIGNATURE_FAILURE
+#@todo
 
 --- V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT
+#@todo
 
 --- V_ERR_ERROR_IN_CERT_NOT_AFTER_FIELD
+#@todo
 
 --- V_ERR_ERROR_IN_CERT_NOT_BEFORE_FIELD
+#@todo
 
 --- V_ERR_ERROR_IN_CRL_LAST_UPDATE_FIELD
+#@todo
 
 --- V_ERR_ERROR_IN_CRL_NEXT_UPDATE_FIELD
+#@todo
 
 --- V_ERR_INVALID_CA
+#@todo
 
 --- V_ERR_INVALID_PURPOSE
+#@todo
 
 --- V_ERR_KEYUSAGE_NO_CERTSIGN
+#@todo
 
 --- V_ERR_OUT_OF_MEM
+#@todo
 
 --- V_ERR_PATH_LENGTH_EXCEEDED
+#@todo
 
 --- V_ERR_SELF_SIGNED_CERT_IN_CHAIN
+#@todo
 
 --- V_ERR_SUBJECT_ISSUER_MISMATCH
+#@todo
 
 --- V_ERR_UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY
+#@todo
 
 --- V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE
+#@todo
 
 --- V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE
+#@todo
 
 --- V_ERR_UNABLE_TO_GET_CRL
+#@todo
 
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT
+#@todo
 
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+#@todo
 
 --- V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE
+#@todo
 
 #@end

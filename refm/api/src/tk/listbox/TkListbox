@@ -40,9 +40,11 @@ include Tk::Scrollable
 
 #@since 1.8.2
 --- tagid(id)
+#@todo
 #@end
 
 --- activate(y)
+#@todo
 
 ((|y|))で指定した((*位置*))の要素をアクティブにします。そのリスト
 ボックスに((<入力フォーカス>))があれば、アクティブな行には下線が引
@@ -60,34 +62,41 @@ include Tk::Scrollable
      Tk.mainloop
 
 --- curselection
+#@todo
 
 ((<選択>))された要素の要素番号を配列にして返します(要素番号は上端が0)
 
 --- get(index)
 --- get(first, last)
+#@todo
 
 引数が1つの場合、指定した((*位置*))の要素を文字列で返します。
 引数が2つの場合、指定した範囲の要素を文字列の配列で返します。
 
 --- nearest(y)
+#@todo
 
 ((|y|))で指定したY座標に近い要素の要素番号を返します。
 
 --- size
+#@todo
 
 要素の数を返します。
 
 --- selection_anchor(index)
+#@todo
 
 ((|index|))で指定した((*位置*))の要素を((<アンカー>))にします。
 
 --- selection_clear(first, last = Tk::None)
+#@todo
 
 ((|first|))、((|last|))で指定した((*位置*))の範囲の要素が((<選択>))さ
 れていれば非選択にします。((|last|))を省略した場合、((|first|))の((*位
 置*))の要素を非選択にします。
 
 --- selection_includes(index)
+#@todo
 
 (({index}))で指定した((*位置*))の要素が((<選択>))されているかどうかを
 真偽値(({true}))/(({false}))で返します。
@@ -101,36 +110,47 @@ include Tk::Scrollable
       Tk.mainloop
 
 --- selection_set(first, last = Tk::None)
+#@todo
 
 ((|first|))、((|last|))で指定した((*位置*))の範囲の要素を((<選択>))し
 ます。((|last|))を省略した場合、((|first|))の((*位置*))の要素を選択し
 ます。
 
 --- index(idx)
+#@todo
 
 #@since 1.8.2
 --- value
+#@todo
 
 --- value=(vals)
+#@todo
 
 --- clear
 --- erase
+#@todo
 #@end
 
 #@if (version <= "1.8.0")
 --- create_self(keys)
+#@todo
 #@end
 
 #@if (version <= "1.8.1")
 --- itemcget(index, key)
+#@todo
 
 --- itemconfigure(index, key, val = Tk::None)
+#@todo
 
 --- itemconfiginfo(index, key = nil)
+#@todo
 #@end
 
 == Constants
 
 --- TkCommandNames
+#@todo
 
 --- WidgetClassName
+#@todo

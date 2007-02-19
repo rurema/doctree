@@ -6,19 +6,25 @@ require pstore
 == Class Methods
 
 --- new(session, option = {})
+#@todo
 
 == Instance Methods
 
 --- restore
+#@todo
 
 --- update
+#@todo
 
 --- close
+#@todo
 
 --- delete
+#@todo
 
 #@if (version <= "1.8.1")
 --- check_id(id)
+#@todo
 #@end
 
 #@if (version <= "1.8.4")
@@ -27,4 +33,5 @@ require pstore
 == Instance Methods
 
 --- []=(key, value)
+#@todo
 #@end

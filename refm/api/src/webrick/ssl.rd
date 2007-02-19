@@ -12,6 +12,7 @@ ruby 1.8.3 以降では単に require するだけでは SSL/TLS は有効ではなく、
 == Class Methods
 
 --- new(config={}, default=WEBrick::Config::General)
+#@todo
 config で有効な項目が増える。以下は増える項目とそのデフォルト値。
 
   #
@@ -37,6 +38,7 @@ config で有効な項目が増える。以下は増える項目とそのデフォルト値。
 == Instance Methods
 
 --- ssl_context
+#@todo
 サーバが保持する [[c:OpenSSL::SSL::SSLContext]] オブジェクトを返す。
 
 = reopen WEBrick::Config
@@ -44,6 +46,7 @@ config で有効な項目が増える。以下は増える項目とそのデフォルト値。
 == Constants
 
 --- SSL
+#@todo
 
 以下のほとんどの項目はサーバが保持する [[c:OpenSSL::SSL::SSLContext]] オブジェクト
 を設定するためのものです。詳しくは [[c:OpenSSL::SSL::SSLContext]] を参照して下さい。
@@ -104,6 +107,7 @@ nil の場合、WEBrick は自己署名証明書を自動的に生成する。
 == Constants
 
 --- General
+#@todo
 
 [[m:WEBrick::Config::SSL]] の内容がマージされます。
 

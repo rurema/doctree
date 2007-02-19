@@ -5,6 +5,7 @@
 
 #@# bc-rdoc: detected missing name: new
 --- new(obj)
+#@todo
 
 Pass in the obj to delegate method calls to. All methods supported
 by obj will be delegated to.
@@ -13,53 +14,63 @@ by obj will be delegated to.
 
 #@# bc-rdoc: detected missing name: ==
 --- ==(obj)
+#@todo
 
 Returns true if two objects are considered same.
 
 #@# bc-rdoc: detected missing name: __getobj__
 --- __getobj__
+#@todo
 
 This method must be overridden by subclasses and should return
 the object method calls are being delegated to.
 
 #@# bc-rdoc: detected missing name: __setobj__
 --- __setobj__(obj)
+#@todo
 
 This method must be overridden by subclasses and change the object
 delegate to obj.
 
 #@# bc-rdoc: detected missing name: clone
 --- clone
+#@todo
 
 Clone support for the object returned by __getobj__.
 
 #@# bc-rdoc: detected missing name: dup
 --- dup
+#@todo
 
 Duplication support for the object returned by __getobj__.
 
 #@# bc-rdoc: detected missing name: equal?
 --- equal?(obj)
+#@todo
 
 Returns true only if two objects are identical.
 
 #@# bc-rdoc: detected missing name: marshal_dump
 --- marshal_dump
+#@todo
 
 Serialization support for the object returned by __getobj__.
 
 #@# bc-rdoc: detected missing name: marshal_load
 --- marshal_load(obj)
+#@todo
 
 Reinitializes delegation from a serialized object.
 
 #@# bc-rdoc: detected missing name: method_missing
 --- method_missing(m, *args, &block)
+#@todo
 
 Handles the magic of delegation through __getobj__.
 
 #@# bc-rdoc: detected missing name: respond_to?
 --- respond_to?(m)
+#@todo
 
 Checks for a method provided by this the delegate object by fowarding
 the call through __getobj__.

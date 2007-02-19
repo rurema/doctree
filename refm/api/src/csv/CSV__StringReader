@@ -5,9 +5,11 @@
 == Class Methods
 
 --- new(string[, fs = ','[, rs = nil]])
+#@todo
 
 == Private Instance Methods
 
 --- get_row(row)
+#@todo
 
 #@end

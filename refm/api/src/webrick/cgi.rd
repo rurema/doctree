@@ -33,25 +33,31 @@ do_POST を再定義することによって CGI スクリプトを書く。
 == Class Methods
 
 --- new(config={}, *options)
+#@todo
 CGI オブジェクトを生成する。
 
 == Instance Methods
 
 #@since 1.8.3
 --- [](key)
+#@todo
 #@end
 
 #@since 1.8.3
 --- config
+#@todo
 #@end
 
 #@since 1.8.3
 --- logger
+#@todo
 #@end
 
 --- service(req, res)
+#@todo
 
 --- start(env=ENV, stdin=$stdin, stdout=$stdout)
+#@todo
 スクリプトを実行する。env にはスクリプトが受け取るべき環境変数、stdin には
 スクリプトの入力元、stdout には出力先を指定する。
 
@@ -63,27 +69,38 @@ include Enumerable
 == Class Methods
 
 --- new(config, env, stdin, stdout)
+#@todo
 
 == Instance Methods
 
 --- <<(data)
+#@todo
 
 --- addr
+#@todo
 
 --- cert
+#@todo
 
 --- cipher
+#@todo
 
 --- each {|line| ... }
+#@todo
 
 --- gets(eol = WEBrick::LF)
+#@todo
 
 --- peeraddr
+#@todo
 
 --- peer_cert
+#@todo
 
 --- peer_cert_chain
+#@todo
 
 --- read(size = nil)
+#@todo
 
 #@end

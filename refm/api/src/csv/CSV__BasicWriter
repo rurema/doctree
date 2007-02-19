@@ -4,9 +4,11 @@
 == Class Methods
 
 --- new(str_or_writable[, fs = ','[, rs = nil]])
+#@todo
 
 == Instance Methods
 
 --- close_on_terminate
+#@todo
 
 #@end

@@ -6,8 +6,10 @@ require webrick/httpservlet/abstract
 == Class Methods
 
 --- new(server, name)
+#@todo
 
 == Instance Methods
 
 --- do_GET(req, res)
 --- do_POST(req, res)
+#@todo

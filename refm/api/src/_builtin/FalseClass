@@ -8,13 +8,16 @@ false は nil オブジェクトとともに偽を表し、
 == Instance Methods
 
 --- &(other)
+#@todo
 
 常に false を返します。
 
 --- |(other)
+#@todo
 
 other が真なら true を, 偽なら false を返します。
 
 --- ^(other)
+#@todo
 
 other が真なら true を, 偽なら false を返します。

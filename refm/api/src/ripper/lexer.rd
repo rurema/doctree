@@ -3,6 +3,7 @@ Ruby プログラムをトークンのリストとして処理するためのライブラリです。
 = reopen Ripper
 
 --- Ripper.lex(src, filename = '-', lineno = 1)
+#@todo
 #@# → [((Integer,Integer), Symbol, String)] 
 
 Ruby プログラム str をトークンに分割し、そのリストを返します。
@@ -37,6 +38,7 @@ Ripper.lex は分割したトークンを詳しい情報とともに返します。
     トークン文字列です。
 
 --- Ripper.tokenize(src, filename = '-', lineno = 1)
+#@todo
 #@# → [String]
 
 Ruby プログラム str をトークンに分割し、そのリストを返します。
@@ -53,6 +55,7 @@ Ripper.tokenize は空白やコメントも含め、
 これは現在のところ仕様と考えてください。
 
 --- Ripper.slice(src, pattern, n = 0)
+#@todo
 #@# → String
 
 Ruby プログラム src のうち、
@@ -71,6 +74,7 @@ pattern は Ripper のイベント ID のリストを文字列で記述します。
       # => "string\#{nil}\n"
 
 --- Ripper.token_match(src, pattern)
+#@todo
 
 Ruby プログラム src に対してパターン pattern をマッチし、
 マッチデータを返します。
@@ -84,10 +88,14 @@ Ruby プログラムの字句解析器です。
 == Instance Methods
 
 --- tokenize
+#@todo
 
 --- lex
+#@todo
 
 --- parse
+#@todo
 
 --- tokenize
+#@todo
 

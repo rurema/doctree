@@ -170,6 +170,7 @@ extconf.rb が生成する Makefile には以下のターゲットが定義されています。
 #@#     ((<mkmf/try_link>)) の実体です。
 
 --- try_link(src[, opt])
+#@todo
 
 C プログラムのソースコード src をコンパイル、リンクします。
 問題なくリンクできたら true を返します。
@@ -186,6 +187,7 @@ C プログラムのソースコード src をコンパイル、リンクします。
   end
 
 --- try_cpp(src[, opt])
+#@todo
 
 C プログラムのソースコード src をプリプロセスします。
 問題なくプリプロセスできたら true を返します。
@@ -205,6 +207,7 @@ C プログラムのソースコード src をプリプロセスします。
   end
 
 --- egrep_cpp(pat, src[, opt])
+#@todo
 
 C プログラムのソースコード src をプリプロセスし、
 その結果が正規表現 pat にマッチするかどうかを判定します。
@@ -222,6 +225,7 @@ Ruby の正規表現ではありません。
 検査するために使用します。
 
 --- try_run(src[, opt])
+#@todo
 
 C プログラムのソースコード src をコンパイルし、
 生成された実行ファイルを実行します。
@@ -233,6 +237,7 @@ C プログラムのソースコード src をコンパイルし、
 第 2 引数 opt には C コンパイラのオプションを指定します。
 
 --- install_rb(mfile, dest, srcdir = '.')
+#@todo
 #@# このメソッドは create_makefile が使用します
 
 ディレクトリ srcdir/lib 配下の Ruby スクリプト (*.rb ファイル)
@@ -242,6 +247,7 @@ mfile は [[c:IO]] クラスのインスタンスです。
 srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 
 --- append_library(libs, lib)
+#@todo
 
 ライブラリのリスト libs の先頭にライブラリ lib を追加し、
 その結果を返します。
@@ -260,12 +266,14 @@ srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
 --- have_macro(macro, headers = nil, opt = "", &b)
+#@todo
 Returns whether or not +macro+ is defined either in the common header
 files or within any +headers+ you provide.
 
 Any options you pass to +opt+ are passed along to the compiler.
 
 --- have_library(lib[, func])
+#@todo
 
 ライブラリ lib がシステムに存在し、
 関数 func が定義されているかどうかをチェックします。
@@ -279,6 +287,7 @@ Any options you pass to +opt+ are passed along to the compiler.
 何も検査をせず、無条件で lib を追加します。
 
 --- find_library(lib, func, *pathes)
+#@todo
 
 関数 func が定義されたライブラリ lib を探します。
 最初はパスを指定せずに探し、
@@ -294,6 +303,7 @@ Any options you pass to +opt+ are passed along to the compiler.
 pathes を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
 
 --- find_header(header, *paths)
+#@todo
 Instructs mkmf to search for the given +header+ in any of the +paths+
 provided, and returns whether or not it was found in those paths.
 
@@ -301,6 +311,7 @@ If the header is found then the path it was found on is added to the list
 of included directories that are sent to the compiler (via the -I switch).
 
 --- have_func(func[, header])
+#@todo
 
 関数 func がシステムに存在するかどうかを検査します。
 
@@ -314,6 +325,7 @@ of included directories that are sent to the compiler (via the -I switch).
 関数が実際にはマクロで定義されている場合などのために使用します。
 
 --- have_header(header)
+#@todo
 
 ヘッダファイル header がシステムに存在するかどうか調べます。
 
@@ -324,6 +336,7 @@ of included directories that are sent to the compiler (via the -I switch).
 実際には header.upcase.tr('-.', '_') が使われます。
 
 --- have_struct_member(type, member, headers = nil, &b)
+#@todo
 
 Returns whether or not the struct of type +type+ contains +member+.  If
 it does not, or the struct type can't be found, then false is returned.  You
@@ -338,6 +351,7 @@ HAVE_ST_BAR preprocessor macro would be passed to the compiler.
  
 
 --- have_type(type, headers = nil, opt = "", &b)
+#@todo
 Returns whether or not the static type +type+ is defined.  You may
 optionally pass additional +headers+ to check against in addition to the
 common header files.
@@ -352,6 +366,7 @@ For example, if have_type('foo') returned true, then the HAVE_TYPE_FOO
 preprocessor macro would be passed to the compiler.
 
 --- have_var(var, headers = nil, &b)
+#@todo
 Returns whether or not the variable +var+ can be found in the common
 header files, or within any +headers+ that you provide.  If found, a
 macro is passed as a preprocessor constant to the compiler using the
@@ -361,6 +376,7 @@ For example, if have_var('foo') returned true, then the HAVE_FOO
 preprocessor macro would be passed to the compiler.
 
 --- check_sizeof(type, headers = nil, &b)
+#@todo
 Returns the size of the given +type+.  You may optionally specify additional
 +headers+ to search in for the +type+.
 
@@ -372,6 +388,7 @@ For example, if check_sizeof('mystruct') returned 12, then the
 SIZEOF_MYSTRUCT=12 preprocessor macro would be passed to the compiler.
 
 --- arg_config(config[, default])
+#@todo
 
 configure オプション --config の値を返します。
 オプションが指定されていないときは第 2 引数 default を返します。
@@ -384,17 +401,20 @@ configure オプション --config の値を返します。
 arg_config("--bar") の値は "baz" です。
 
 --- with_config(config[, default])
+#@todo
 
 [[m:Kernel#arg_config]] と同じですが、
 --with-config オプションの値だけを参照します。
 
 --- enable_config(config[, default])
+#@todo
 
 [[m:Kernel#arg_config]] と同じですが、
 --enable-config オプション、
 または--disable-config オプションの値だけを参照します。
 
 --- create_header
+#@todo
 
 [[m:Kernel#have_func]] などの検査結果を元に、
 
@@ -405,6 +425,7 @@ arg_config("--bar") の値は "baz" です。
 
 --- dir_config(target[, default])
 --- dir_config(target[, idefault, ldefault])
+#@todo
 
 configure オプション
 --with-TARGET-dir,
@@ -436,6 +457,7 @@ configure オプション
 第 3 引数も与えた場合は "-Iidefault" と "-Lldefault" をそれぞれ追加します。
 
 --- create_makefile(target[, srcdir])
+#@todo
 
 [[m:Kernel#have_library]] などの各種検査の結果を元に、
 拡張ライブラリ TARGET.so をビルドするための Makefile を生成します。
@@ -447,36 +469,47 @@ configure オプション
 extconf.rb は普通このメソッドの呼び出しで終ります。
 
 --- pkg_config(pkg)
+#@todo
 
 --- what_type?
+#@todo
 
 --- create_header
+#@todo
 
 --- checking_for
+#@todo
 
 --- try_run
+#@todo
 
 --- try_compile
+#@todo
 
 --- try_static_assert
+#@todo
 
 == Constants
 
 --- CONFIG
+#@todo
 
 [[m:Config::MAKEFILE_CONFIG]] と同じです。
 
 --- CFLAGS
+#@todo
 
 C コンパイラに渡されるコマンドラインオプションです。
 この値は Makefile にも反映されます。
 
 --- LINK
+#@todo
 
 リンカを起動するときのコマンドラインのフォーマットです。
 [[m:Kernel#try_link]] などが使用します。
 
 --- CPP
+#@todo
 
 プリプロセッサを起動するときのコマンドラインのフォーマットです。
 [[m:Kernel#try_cpp]] などが使用します。
@@ -486,41 +519,49 @@ C コンパイラに渡されるコマンドラインオプションです。
 #@# --- $config_cache
 #@#     この変数は obsolete です。現在使用されていません。
 --- $srcdir
+#@todo
 
 Ruby インタプリタを make したときのソースディレクトリです。
 
 --- $libdir
+#@todo
 
 Ruby のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/バージョン" です。
 
 --- $archdir
+#@todo
 
 マシン固有のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $sitelibdir
+#@todo
 
 サイト固有のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/site_ruby/バージョン" です。
 
 --- $sitearchdir
+#@todo
 
 サイト固有でかつマシン固有のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/site_ruby/バージョン/arch" です。
 
 --- $hdrdir
+#@todo
 
 Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $topdir
+#@todo
 
 拡張ライブラリを make するためのヘッダファイル、
 ライブラリ等が存在するディレクトリです。
 通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
 --- $defs
+#@todo
 
 拡張ライブラリをコンパイルするときのマクロ定義を指定する配列です。
 
@@ -537,6 +578,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 はこの変数の値を参照してヘッダファイルを生成します。
 
 --- $libs
+#@todo
 
 拡張ライブラリをリンクするときに
 一緒にリンクされるライブラリを指定する文字列です。
@@ -552,6 +594,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 間に空白をはさみつつ $libs に連結されます。
 
 --- $CFLAGS
+#@todo
 
 拡張ライブラリをコンパイルするときの C コンパイラのオプションや、
 ヘッダファイルのディレクトリを指定する文字列です。
@@ -560,6 +603,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 この変数の値に " -Idir" が追加されます。
 
 --- $LDFLAGS
+#@todo
 
 拡張ライブラリをリンクするときのリンカのオプション、
 ライブラリファイルのディレクトリを指定する文字列です。

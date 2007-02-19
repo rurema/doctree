@@ -11,18 +11,23 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
 == privateメソッド:
 
 --- TkComm#error_at
+#@todo
 
 --- TkComm#tk_tcl2ruby(val)
+#@todo
     ((|val|))をRubyのオブジェクトに変換します。
 
 --- TkComm#tk_split_list(str)
+#@todo
     ((<Tclのリスト>))を配列に変換して返します。配列要素は、
     ((<TkComm#tk_tcl2ruby>))によって変換したオブジェクトです。
 
 --- TkComm#tk_split_simplelist(str)
+#@todo
     ((<Tclのリスト>))を文字列の配列に変換して返します。
 
 --- TkComm#hash_kv(keys)
+#@todo
     引数で渡されたハッシュ{"key"=>"val", ...} を["-key", "val", ...]である
     配列にして返します。
 
@@ -30,9 +35,11 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     部で使用します。
 
 --- TkComm#array2tk_list(ary)
+#@todo
     Rubyの配列((|ary|))をTclのリストに変換します。
 
 --- TkComm#bool(val)
+#@todo
     Tclの真偽値((|val|))をRubyの真偽値(({truby}))/(({false}))にして返しま
     す。
 
@@ -40,14 +47,17 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     外は、偽((({false}))を返します。
 
 --- TkComm#number(val)
+#@todo
     Tclの数値(を表す文字列)(((|val|)))をRubyの数値にして返します。数値と判
     断できない場合、((|val|))そのものを返します。((-いいの？-))
 
 --- TkComm#string(val)
+#@todo
     Tclの文字列をRubyの文字列にして返します。特に((|val|))の両端に"{"、 
     "}" があればそれらを取り除きます。
 
 --- TkComm#list(val)
+#@todo
     以下と同じです。
 
       tk_split_list(((|val|))).to_a
@@ -55,37 +65,45 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     つまり、((|val|))が一要素の((<Tclのリスト>))でも常に配列として返します。
 
 --- TkComm#window(val)
+#@todo
     Tkの((<ウィジェットパス>))((|val|))に対応するウィジェットを返します。
 
 --- TkComm#procedure(val)
+#@todo
     ((<TkComm#install_cmd>))で設定した、Tclの((<プロシージャ>))((|val|))に
     対応する((<Proc>))オブジェクトを返します。
 
 --- TkComm#_get_eval_string(obj)
+#@todo
     オブジェクト((|obj|))のTcl/Tkインタプリタでの表現を返します。
 
     ((<TkCore#tk_call>))は、すべての引数をこのメソッドで変換してTclに渡し
     ます。
 
 --- TkComm#ruby2tcl(obj)
+#@todo
     オブジェクト((|obj|))のTcl/Tkインタプリタでの表現を返します。
 
     ((<TkCore#tk_call>))は、すべての引数をこのメソッドで変換してTclに渡し
     ます。
 
 --- TkComm#install_cmd(cmd)
+#@todo
     Procオブジェクト((|cmd|))を((<プロシージャ>))として登録します。
     ((<プロシージャ>))を実行するTclスクリプトを返します。
     ((-proc rb_out について書く-))
 
 --- TkComm#uninstall_cmd(id)
+#@todo
     ((|id|))で登録された((<プロシージャ>))を削除します。
 
 --- TkComm#install_bind(cmd, args=nil)
+#@todo
     Procオブジェクト((|cmd|))を((<イベントコールバック関数>))として登録します。
     ((<プロシージャ>))を実行するTclスクリプトを返します。
 
 --- TkComm#tk_event_sequence(context)
+#@todo
     イベント識別子((|context|))をTclが解釈できる文字列に変換して返します。
 
       require "tk"
@@ -94,23 +112,29 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
       => "Escape><a"
 
 --- TkComm#_bind_core(mode, path, context, cmd, args=nil)
+#@todo
     ((<TkComm#_bind>))、((<TkComm#_bindappend>))の実体です。
 
 --- TkComm#_bind(what, context, cmd, args=nil)
+#@todo
     ((<TkComm#bind>))の実体です。
 
 --- TkComm#_bind_append(path, context, cmd, args=nil)
+#@todo
     ((<TkComm#bindappend>))の実体です。
 
 --- TkComm#_bind_remove(what, context)
+#@todo
     ((<TkComm#bind_remove>))の実体です。
 
 --- TkComm#_bindinfo(what, context=nil)
+#@todo
     ((<TkComm#bindinfo>))の実体です。
 
 == メソッド:
 
 --- TkComm#_genobj_for_tkwidget(path)
+#@todo
     ((<ウィジェットパス>))((|path|))からウィジェットオブジェクトを生成します。
     ((|path|))にはTcl/Tkのライブラリなどで生成されたパスを指定します。
 
@@ -124,28 +148,33 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#_curr_cmd_id
+#@todo
     次の((<プロシージャ>))のIDを返します。
 
     ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#_next_cmd_id
+#@todo
     次の((<プロシージャ>))のIDを返します。IDはプロシージャが割り当てられる
     度に増加します。
 
     ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#install_win(ppath)
+#@todo
     親ウィンドウのウィジェットパス((|ppath|))に新しく子ウィジェットとして
     (({self}))を登録します。
 
     ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#uninstall_win
+#@todo
     登録された((|self|))を削除します。
 
     ((-これってprivateメソッドじゃない？-))
 
 --- TkComm#bind(tagOrClass, context, cmd=Proc.new, args=nil)
+#@todo
     ((|tagOrClass|))にコールバック関数を登録します(詳細は
     ((<TkBindCore#bind>))を参照してください)。
 
@@ -153,6 +182,7 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     の何れかです。
 
 --- TkComm#bind_append(tagOrClass, context, cmd=Proc.new, args=nil)
+#@todo
     ((|tagOrClass|))にコールバック関数を追加します(詳細は
     ((<TkBindCore#bind>))を参照してください)。
 
@@ -160,6 +190,7 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     の何れかです。
 
 --- TkComm#bind_remove(tagOrClass, context)
+#@todo
     ((|tagOrClass|))に登録されたコールバック関数を取り除きます(詳細は
     ((<TkBindCore#bind_remove>))を参照してください)。
 
@@ -167,6 +198,7 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     の何れかです。
 
 --- TkComm#bindinfo(tagOrClass, context=nil)
+#@todo
     ((|tagOrClass|))に登録されているイベントコールバックの情報を配列にして
     返します。
 
@@ -182,6 +214,7 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
       => [[#<Proc:0x4013463c>, "%X %Y"], [#<Proc:0x4013201c>, "%x %y"]]
 
 --- TkComm#bind_all(context, cmd=Proc.new, args=nil)
+#@todo
     ((|context|))で指定したイベントが発生したときに実行するコールバック関
     数((|cmd|))をすべてのウィジェットに対して登録します。((|context|))、
     ((|args|))の詳細は、((<TkBindCore#bind>)),((<TkComm::Event>))を参照してくださ
@@ -194,6 +227,7 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
       Tk.mainloop
 
 --- TkComm#bind_append_all(context, cmd=Proc.new, args=nil)
+#@todo
     ((<TkComm#bind_all>))と同じですが、すでに同じ((<context>))にコールバッ
     ク関数が登録されていれば、((|cmd|))を追加で登録します。
 
@@ -211,6 +245,7 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
       Tk.mainloop
 
 --- TkComm#bindinfo_all(context=nil)
+#@todo
     イベント((|context|))に登録されたイベントコールバックの情報を配列にし
     て返します。返される配列の要素は((<TkComm#bind_all>)) の第2,3引数の配列です。
 
@@ -235,12 +270,15 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
       => ["Button-2", "Button-1", "Shift-Key-Tab", "Key-Tab", "Key-F10", "Alt-Key"]
 
 --- TkComm#pack(*args)
+#@todo
     ((<TkPack.configure>))と同じです。
 
 --- TkComm#grid(*args)
+#@todo
     ((<TkGrid.configure>))と同じです。
 
 --- TkComm#update(idle=nil)
+#@todo
     ((|idle|))が真であれば、ウィジェットの描画など、通常Tkが待ち状態になる
     まで実行されない処理を即座に実行します。((|idle|))がfalse,nilならば溜っ
     たイベントなどもすべて実行します。
@@ -248,10 +286,12 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
 == 定数:
 
 --- TkComm::WidgetClassNames
+#@todo
     Tcl/Tkのウィジェットクラス名をキーにウィジェットクラス自体を格納したハッ
     シュです。
 
 --- TkComm::None
+#@todo
     意味を持たない値を表すオブジェクトです。このオブジェクトがTclインタプ
     リタに渡されることはありません。((({nil}))は、空文字列としてTclインタ
     プリタに渡されることがあります)
@@ -264,12 +304,15 @@ RubyとTcl/Tkの間でデータの受渡しを行うためのモジュールです。
     arg2)'))形式の呼び出しの2種類の用途を1つのメソッドで実現しています。
 
 --- TkComm::Tk_CMDTBL
+#@todo
     {プロシージャID => Procオブジェクト}であるハッシュ。
 
 --- TkComm::Tk_WINDOWS
+#@todo
     {ウィジェットパス => ウィンドウオブジェクト}であるハッシュ。
 
 --- TkComm::Tk_IDs
+#@todo
     [プロシージャIDのカウンタ、ウィンドウIDのカウンタ]である配列です。
 
 =end

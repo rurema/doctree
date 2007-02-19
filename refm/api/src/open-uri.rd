@@ -54,6 +54,7 @@ URI オブジェクトは直接読み込むことができます。
 
 --- open(name, *rest)
 --- open(name, *rest) {|ouri| ...}
+#@todo
 
 'open-uri' を require すると、Kernel.open が再定義されます。
 
@@ -92,6 +93,7 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれます。
 
 --- open_uri(name [, mode [, perm]] [, options])
 --- open_uri(name [, mode [, perm]] [, options]) {|sio| ... }
+#@todo
 
 URI である文字列 name のリソースを取得して [[c:StringIO]] オブジェクト
 として返します。 与えられた mode が書き込みモードであった場合は、例外
@@ -136,6 +138,7 @@ Content-Length を引数として実際の転送が始まる前に評価されます。返り値は特に
 == Constants
 
 --- Options
+#@todo
 
 [[c:Hash]] オブジェクト。open_uri が解釈するオプションのデフォルトです。
 
@@ -144,10 +147,12 @@ Content-Length を引数として実際の転送が始まる前に評価されます。返り値は特に
 == Instance Methods
 
 --- open(*rest, &block)
+#@todo
 
 OpenURI.open_uri(self, *rest, &block) と同じです。
 
 --- read(options={})
+#@todo
 
 self.open(options={}).read と同じです。
 このメソッドによって返される文字列は [[c:OpenURI::Meta]]
@@ -164,14 +169,17 @@ self.open(options={}).read と同じです。
 == Instance Methods
 
 --- last_modified
+#@todo
 
 対象となる URI の最終更新時刻を [[c:Time]] オブジェクトで返します。
 
 --- content_type
+#@todo
 
 対象となる URI の Content-Type を文字列で返します。
 
 --- charset
+#@todo
 
 対象となる URI の文字コードを Content-Type の文字コード情報を文字列で返します。
 
@@ -181,18 +189,22 @@ self.open(options={}).read と同じです。
   }
 
 --- content_encoding
+#@todo
 
 対象となる URI の Content-Encoding を文字列の配列として返します。
 
 --- status
+#@todo
 
 対象となる URI のステータスコードと reason phrase を文字列の配列として返します。
 
 --- base_uri
+#@todo
 
 リダイレクトされた後のデータが存在する URI を URI オブジェクトとして返します。
 
 --- meta
+#@todo
 
 ヘッダを収録したハッシュを返します。
 

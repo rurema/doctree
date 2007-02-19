@@ -4,3 +4,4 @@ include WEBrick::HTTPAuth::ProxyAuthenticator
 == Instance Methods
 
 --- check_uri(req, auth_req)
+#@todo

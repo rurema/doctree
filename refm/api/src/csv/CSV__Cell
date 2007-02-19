@@ -7,38 +7,47 @@
 == Class Methods
 
 --- new([data = '', is_null = false])
+#@todo
 
 == Instance Methods
 
 #@if (version <= '1.8.1')
 
 --- ==
+#@todo
 
 #@end
 
 #@if (version <= '1.8.5')
 
 --- data
+#@todo
 
 #@end
 
 #@if (version <= '1.8.1')
 
 --- data=
+#@todo
 
 --- is_null
+#@todo
 
 --- is_null=
+#@todo
 
 --- match
+#@todo
 
 #@end
 
 #@if (version == '1.8.1')
 
 --- to_s
+#@todo
 
 --- to_str
+#@todo
 
 #@end
 

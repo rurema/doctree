@@ -12,26 +12,32 @@ include Tk::Scrollable
 == Instance Methods
 
 --- close_tree(node, recurse = None)
+#@todo
 
 
 
 --- delete(*args)
+#@todo
 
 
 
 --- edit(node, text, *args)
+#@todo
 
 
 
 --- exist?(node)
+#@todo
 
 
 
 --- get_node(node, idx)
+#@todo
 
 
 
 --- imagebind(context, *args)
+#@todo
 
 def imagebind(*args)
 
@@ -41,6 +47,7 @@ def imagebind(*args)
 end
 
 --- imagebind_append(context, *args)
+#@todo
 
 def imagebind_append(*args)
 
@@ -50,86 +57,107 @@ def imagebind_append(*args)
 end
 
 --- imagebind_remove(*args)
+#@todo
 
 
 
 --- imagebindinfo(*args)
+#@todo
 
 
 
 --- index(node)
+#@todo
 
 
 
 --- insert(idx, parent, node, keys = {})
+#@todo
 
 
 
 --- move(parent, node, idx)
+#@todo
 
 
 
 --- nodes(node, first = None, last = None)
+#@todo
 
 
 
 --- open?(node)
+#@todo
 
 
 
 --- open_tree(node, recurse = None)
+#@todo
 
 
 
 --- parent(node)
+#@todo
 
 
 
 --- reorder(node, neworder)
+#@todo
 
 
 
 --- see(node)
+#@todo
 
 
 
 --- selection_add(*args)
+#@todo
 
 
 
 --- selection_clear
+#@todo
 
 
 
 --- selection_get
+#@todo
 
 
 
 --- selection_include?(*args)
+#@todo
 
 
 
 --- selection_range(*args)
+#@todo
 
 
 
 --- selection_remove(*args)
+#@todo
 
 
 
 --- selection_set(*args)
+#@todo
 
 
 
 --- selection_toggle(*args)
+#@todo
 
 
 
 --- tagid(tag)
+#@todo
 
 
 
 --- textbind(context, *args)
+#@todo
 
 def textbind(*args)
 
@@ -139,6 +167,7 @@ def textbind(*args)
 end
 
 --- textbind_append(context, *args)
+#@todo
 
 def textbind_append(*args)
 
@@ -148,18 +177,22 @@ def textbind_append(*args)
 end
 
 --- textbind_remove(*args)
+#@todo
 
 
 
 --- textbindinfo(*args)
+#@todo
 
 
 
 --- toggle(node)
+#@todo
 
 
 
 --- visible(node)
+#@todo
 
 
 

@@ -169,10 +169,12 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
 == Instance Methods
 
 --- +@
+#@todo
 
 self 自身を返します。
 
 --- -@
+#@todo
 
 self の符号を反転させたものを返します。
 
@@ -180,12 +182,14 @@ self の符号を反転させたものを返します。
 されています。
 
 --- ==(other)
+#@todo
 
 self と other の値が等しいときに true、等しくないときに false を返します。
 other が Numeric で比較できないオブジェクトの場合、
 結合法則が成り立つことを仮定して other == self の結果を返します。
 
 --- abs
+#@todo
 
 self の絶対値を返します。
 
@@ -193,6 +197,7 @@ self の絶対値を返します。
 --- floor
 --- round
 --- truncate
+#@todo
 
 self を整数に丸めた結果を返します。
 
@@ -292,6 +297,7 @@ self を整数に丸めた結果を返します。
 
 --- clone
 --- dup
+#@todo
 
 self を返します。
 
@@ -303,6 +309,7 @@ self を返します。
 #@end
 
 --- coerce(number)
+#@todo
 
 number の型を自分と直接演算できる型に変換して
 [number, self] という配列に格納して返します。数値クラ
@@ -312,6 +319,7 @@ number の型を自分と直接演算できる型に変換して
 
 --- div(other)
 --- quo(other)
+#@todo
 
 self を other で割った商を返します。
 #@#((-2005-11-24 [[unknown:ruby-dev:27674]]: 1.8 にはバグがあり、self/other
@@ -365,6 +373,7 @@ div の商に対応する余りは [[m:Numeric#modulo]] で求められます。
          [-11.5, -4] |  [2.0, -3.5]        2.875            2        2.875
 
 --- divmod(other)
+#@todo
 
 self を other で割った商 (q) と余り (r) を、
 [q, r] という 2 要素の配列にして返します。
@@ -412,11 +421,13 @@ divmod が返す商は [[m:Numeric#div]] と同じです。
          [-11.5, -4] |    [2, -3.5]        2.875            2        2.875         -3.5         -3.5         -3.5
 
 --- integer?
+#@todo
 
 self が整数の時、真を返します。
 
 --- modulo(other)
 --- remainder(other)
+#@todo
 
 self を other で割った余り r を返します([[m:Numeric#divmod]] も参照)。
 
@@ -485,6 +496,7 @@ modulo は、メソッド % の呼び出しとして定義されています。
          [-11.5, -4] |  [2.0, -3.5]         -3.5         -3.5         -3.5
 
 --- nonzero?
+#@todo
 
 ゼロの時 nil を返し、非ゼロの時 self を返します。
 
@@ -507,15 +519,18 @@ sort のブロックの中で、複数の要素を <=> で比較するときに使用できます。
 
 
 --- to_int
+#@todo
 
 self.to_i と同じです。
 
 --- zero?
+#@todo
 
 ゼロの時、真を返します。
 
 --- step(limit) {|n| ... }
 --- step(limit, step) {|n| ... }
+#@todo
 
 self からはじめ step を足しながら limit を越える
 前までブロックを繰り返します。step は負の数も指定できます(省
@@ -555,16 +570,19 @@ self を返します。
 
 #@since 1.8.0
 --- <=> other
+#@todo
 #@# -> 0 or nil
 
 Returns zero if num equals other, nil otherwise.
 
 --- eql?
+#@todo
 
 #@end
 
 #@since 1.9.0
 
 --- scalar?
+#@todo
 
 #@end

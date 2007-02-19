@@ -4,15 +4,20 @@
 
 == Class Methods
 --- to_eval
+#@todo
 
 == Instance Methods
 --- component
+#@todo
 
 --- component_path(name)
 --- component_widget(name)
+#@todo
 
 --- component_invoke(name, cmd, *args)
+#@todo
 
 --- component_obj(*names)
+#@todo
 
 #@end

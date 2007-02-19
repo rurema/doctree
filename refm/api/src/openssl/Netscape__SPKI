@@ -6,19 +6,25 @@
 
 --- challenge
 --- challenge=
+#@todo
 
 --- public_key
 --- public_key=
+#@todo
 
 --- sign
+#@todo
 
 --- to_der
 --- to_pem
+#@todo
 
 --- to_s
 --- to_text
+#@todo
 
 --- verify
+#@todo
 
 = class OpenSSL::Netscape::SPKIError < OpenSSL::OpenSSLError
 #@end

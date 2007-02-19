@@ -10,24 +10,34 @@
 == クラスメソッド:
 
 --- TkPhotoImage.new(*args)
+#@todo
 == メソッド:
 
 --- TkPhotoImage#blank
+#@todo
 
 --- TkPhotoImage#cget(option)
+#@todo
 
 --- TkPhotoImage#copy(source, *opts)
+#@todo
 
 --- TkPhotoImage#data(keys=nil)
+#@todo
 
 --- TkPhotoImage#get(x, y)
+#@todo
 
 --- TkPhotoImage#put(data, *to)
+#@todo
 
 --- TkPhotoImage#read(file, *opts)
+#@todo
 
 --- TkPhotoImage#redither
+#@todo
 
 --- TkPhotoImage#write(file, *opts)
+#@todo
 
 =end

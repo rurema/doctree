@@ -7,10 +7,12 @@ include Kernel
 
 == Class Methods
 --- new
+#@todo
 
 == Instance Methods
 
 --- ==(other)
+#@todo
 
 self と other が等しければ真を返します。
 デフォルトでは equal? と同じ効果です。
@@ -18,6 +20,7 @@ self と other が等しければ真を返します。
 このメソッドは各クラスの性質に合わせて再定義するべきです。
 
 --- ===(other)
+#@todo
 
 このメソッドは [[unknown:制御構造/case]] 文での比較に用いられます。
 デフォルトは [[m:Object#==]] と同じ働きをしますが、
@@ -25,6 +28,7 @@ self と other が等しければ真を返します。
 適宜再定義されます。
 
 --- =~(other)
+#@todo
 
 右辺に正規表現オブジェクトを置いた正規表現マッチ obj =~ /RE/
 をサポートするためのメソッドです。常に false を返します。
@@ -36,8 +40,10 @@ self と other が等しければ真を返します。
 は正常に false を返します。
 
 --- class
+#@todo
 #@if (version < "1.9.0")
 --- type
+#@todo
 #@end
 
 レシーバのクラスを返します。
@@ -48,6 +54,7 @@ Ruby 1.8 では type は obsolete となりました。
 
 --- clone
 --- dup
+#@todo
 
 オブジェクトの複製を作成して返します。
 
@@ -85,6 +92,7 @@ true, false, nil, [[c:Symbol]] オブジェクトなど
 #@end
 
 --- display(out = $stdout)
+#@todo
 
 オブジェクトを out に出力します。以下のように定義されています。
 
@@ -98,6 +106,7 @@ true, false, nil, [[c:Symbol]] オブジェクトなど
 nil を返します。
 
 --- eql?(other)
+#@todo
 
 二つのオブジェクトが等しければ真を返します。[[c:Hash]] で二つのキー
 が等しいかどうかを判定するのに使われます。
@@ -109,12 +118,14 @@ eql? のデフォルトの定義は equal? と同じくオブジェクト
 の同一性判定になっています。
 
 --- equal?(other)
+#@todo
 
 other が self 自身の時、真を返します。
 
 このメソッドを再定義してはいけません。
 
 --- extend(*modules)
+#@todo
 
 引数で指定したモジュールのインスタンスメソッドを self の特異
 メソッドとして追加します。self を返します。
@@ -142,16 +153,19 @@ extend の機能は、「特異クラスに対する [[m:Module#include]]」
 #@end
 
 --- freeze
+#@todo
 
 オブジェクトの内容の変更を禁止します。self を返します。
 
 フリーズされたオブジェクトの変更は例外 [[c:TypeError]] を発生させます。
 
 --- frozen?
+#@todo
 
 オブジェクトの内容の変更が禁止されているときに真を返します。
 
 --- hash
+#@todo
 
 オブジェクトのハッシュ値を返します。[[c:Hash]] クラスでオブジェク
 トを格納するのに用いられています。
@@ -172,6 +186,7 @@ hash を再定義する場合は、一様に分布する任意の整数を返すようにしま
 #@end
 --- __id__
 --- object_id
+#@todo
 
 各オブジェクトに対して一意な整数を返します。あるオブジェクトに対し
 てどのような整数が割り当てられるかは不定です。
@@ -185,6 +200,7 @@ id は Ruby 1.8 では obsolete となりました。
 #@end
 
 --- inspect
+#@todo
 
 オブジェクトを人間が読める形式に変換した文字列を返します。
 
@@ -193,6 +209,7 @@ id は Ruby 1.8 では obsolete となりました。
 
 --- instance_eval(expr, filename = '(eval)', lineno = 1)
 --- instance_eval {|obj| ... }
+#@todo
 
 オブジェクトのコンテキストで文字列 expr を評価してその結果を
 返します。
@@ -265,6 +282,7 @@ self が渡されます。
 [[m:Module#class_eval]] も参照してください。
 
 --- instance_of?(klass)
+#@todo
 
 self がクラス klass の直接のインスタンスである時、
 真を返します。
@@ -276,6 +294,7 @@ obj.kind_of?(c) も成立します。
 
 #@if (version >= "1.8.0")
 --- instance_variable_get(var)
+#@todo
 
 オブジェクトのインスタンス変数の値を取得して返します。
 
@@ -298,6 +317,7 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
 
 #@if (version >= "1.8.0")
 --- instance_variable_set(var, val)
+#@todo
 
 オブジェクトのインスタンス変数に値 val を設定して val
 を返します。
@@ -315,6 +335,7 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
 #@end
 
 --- instance_variables
+#@todo
 
 オブジェクトのインスタンス変数名を文字列の配列として返します。
 
@@ -333,6 +354,7 @@ var にはインスタンス変数名を文字列か [[c:Symbol]] で指定しま
 
 #@since 1.8.6
 --- instance_variable_defined?(symbol)
+#@todo
 
 Returns true if the given instance variable is defined in obj.
 
@@ -349,6 +371,7 @@ Returns true if the given instance variable is defined in obj.
 
 --- is_a?(mod)
 --- kind_of?(mod)
+#@todo
 
 self が、クラス mod とそのサブクラス、および
 モジュール mod をインクルードしたクラスとそのサブクラス、
@@ -372,6 +395,7 @@ self が、クラス mod とそのサブクラス、および
 [[m:Object#instance_of?]], [[m:Module#===]] も参照してください。
 
 --- method(name)
+#@todo
 
 self のメソッド name をオブジェクト化した
 [[c:Method]] オブジェクトを返します。name は
@@ -380,6 +404,7 @@ self のメソッド name をオブジェクト化した
 [[m:Module#instance_method]] も参照してください。
 
 --- method_missing(name, *args, &block)
+#@todo
 
 呼びだされたメソッドが定義されていなかった時、Ruby がこのメソッド
 を呼び出します。
@@ -397,6 +422,7 @@ self のメソッド name をオブジェクト化した
 --- public_methods([inherited_too])
 --- private_methods([inherited_too])
 --- protected_methods([inherited_too])
+#@todo
 
 そのオブジェクトが理解できる public/private/protected メソッド名の
 一覧を文字列の配列で返します。
@@ -445,10 +471,12 @@ methods(false) は [[m:Object#singleton_methods]](false) と同じです。
 も参照してください。
 
 --- nil?
+#@todo
 
 レシーバが nil であれば真を返します。
 
 --- respond_to?(name, include_private = false)
+#@todo
 
 オブジェクトが public メソッド name を持つとき真を返します。
 
@@ -459,6 +487,7 @@ name は [[c:Symbol]] または文字列です。priv が真のとき
 --- send(name, *args) { .... }
 --- __send__(name, *args)
 --- __send__(name, *args) { .... }
+#@todo
 
 オブジェクトのメソッド name を、引数に args を
 渡して呼び出し、メソッドの実行結果を返します。
@@ -489,6 +518,7 @@ privateメソッドを呼び出す必要がある場合は
 #@else
 #@if (version >= "1.8.0")
 --- singleton_methods(inherited_too = true)
+#@todo
 #@end
 #@end
 #@end
@@ -554,12 +584,14 @@ singleton_methods(false) は、
     p Bar.singleton_methods(false) #=> ["bar"]
 
 --- taint
+#@todo
 
 オブジェクトの「汚染マーク」をセットします。self を返します。
 
 オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
 
 --- tainted?
+#@todo
 
 オブジェクトの「汚染マーク」がセットされている時真を返します。
 
@@ -567,6 +599,7 @@ singleton_methods(false) は、
 
 #@if (version < "1.9.0")
 --- to_a
+#@todo
 ((<obsolete>))
 
 オブジェクトを配列に変換してその配列を返します。
@@ -605,6 +638,7 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 #@end
 #@end
 --- to_ary
+#@todo
 
 オブジェクトを配列に変換してその配列を返します。
 
@@ -627,14 +661,17 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
     => [1, 2, 3]
 
 --- to_hash
+#@todo
 
 オブジェクトのハッシュへの暗黙の変換が必要なときに内部で呼ばれます。
 
 --- to_int
+#@todo
 
 オブジェクトの整数への暗黙の変換が必要なときに内部で呼ばれます。
 
 --- to_s
+#@todo
 
 オブジェクトの文字列表現を返します。
 
@@ -643,10 +680,12 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 ます。
 
 --- to_str
+#@todo
 
 オブジェクトの文字列への暗黙の変換が必要なときに呼ばれます。
 
 --- untaint
+#@todo
 
 オブジェクトの「汚染マーク」を取り除きます。self を返します。
 
@@ -661,6 +700,7 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 #@since 1.8.4
 --- to_enum(method = :each, *args)
 --- enum_for(method = :each, *args)
+#@todo
 
 Enumerable::Enumerator.new(self, method, *args) を返します。
 
@@ -677,6 +717,7 @@ Enumerable::Enumerator.new(self, method, *args) を返します。
 #@end
 
 --- _dump(limit)
+#@todo
 
 Marshal.dump において出力するオブジェクトがメソッド `_dump'
 を定義している場合には、そのメソッドの結果が書き出されます。メソッ
@@ -723,6 +764,7 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
 #@since 1.8.0
 --- marshal_dump
 --- marshal_load(obj)
+#@todo
 
 [[m:Marshal.dump]] において、出力するオブジェクトがメソッド
 marshal_dump を定義している場合には、その戻り値がダンプされます。
@@ -780,6 +822,7 @@ marshal_dump/marshal_load を使うべきです。
 == Private Methods
 
 --- initialize
+#@todo
 
 ユーザ定義クラスのオブジェクト初期化メソッド。
 
@@ -794,6 +837,7 @@ initialize という名前のメソッドは自動的に private に設定され
 
 #@since 1.8.0
 --- initialize_copy(obj)
+#@todo
 
 (拡張ライブラリによる) ユーザ定義クラスのオブジェクトコピー
 (clone, dup) の初期化メソッド。
@@ -864,6 +908,7 @@ initialize_copy という名前のメソッドは
 #@end
 
 --- remove_instance_variable(name)
+#@todo
 
 オブジェクトからインスタンス変数 name を取り除き、そのインス
 タンス変数に設定されていた値を返します。name は [[c:Symbol]]
@@ -886,6 +931,7 @@ initialize_copy という名前のメソッドは
 も参照してください。
 
 --- singleton_method_added(name)
+#@todo
 
 特異メソッドが追加された時にインタプリタから呼び出されます。
 name には追加されたメソッド名が [[c:Symbol]] で渡されます。
@@ -907,6 +953,7 @@ name には追加されたメソッド名が [[c:Symbol]] で渡されます。
 
 #@since 1.8.0
 --- singleton_method_removed(name)
+#@todo
 
 特異メソッドが [[m:Module#remove_method]] に
 より削除された時にインタプリタから呼び出されます。
@@ -934,6 +981,7 @@ name には削除されたメソッド名が [[c:Symbol]] で渡されます。
 
 #@since 1.8.0
 --- singleton_method_undefined(name)
+#@todo
 
 特異メソッドが [[m:Module#undef_method]] または
 [[unknown:クラス／メソッドの定義/undef]]

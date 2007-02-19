@@ -49,6 +49,7 @@ require wsdl/xmlSchema/pattern
 --- SimpleContentName
 --- SimpleTypeName
 --- UniqueName
+#@todo
 
 --- AttributeFormDefaultAttrName
 --- BaseAttrName
@@ -71,5 +72,6 @@ require wsdl/xmlSchema/pattern
 --- TypeAttrName
 --- UseAttrName
 --- ValueAttrName
+#@todo
 
 #@end

@@ -3,35 +3,47 @@
 == Class Methods
 
 --- new(*args)
+#@todo
 
 == Instance Methods
 
 --- name
 --- name=(value)
+#@todo
 
 --- filename
 --- filename=(value)
+#@todo
 
 --- [](*key)
+#@todo
 
 --- <<(str)
+#@todo
 
 --- append_data(data)
+#@todo
 
 --- each_data
+#@todo
 
 --- list
 --- to_ary
+#@todo
 
 --- to_s
+#@todo
 
 == Protected Instance Methods
 
 --- next_data
 --- next_data=(value)
+#@todo
 
 == Constants
 
 --- EmptyRawHeader
+#@todo
 
 --- EmptyHeader
+#@todo

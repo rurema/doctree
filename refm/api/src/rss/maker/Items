@@ -3,23 +3,28 @@ include Enumerable
 
 == Instance Methods
 --- new_item
+#@todo
 新しくitemを作成し，返します．作成された
 itemはitemリストの最後に追加されています．
 
 --- do_sort
+#@todo
 現在のdo_sortの値を取得します．デフォルトでは
 falseになっています．
 
 --- do_sort=()
+#@todo
 trueに設定するとitem.dateが新しい順に並び替
 えます．Procオブジェクトを指定することにより並び
 替え方法をカスタマイズすることができます．
 
 --- max_size
+#@todo
 現在のmax_sizeの値を取得します．デフォルトでは
 -1になっています．
 
 --- max_size=()
+#@todo
 出力するitemの数の最大値を設定します．
 
 
@@ -43,32 +48,41 @@ RSS 2.0の場合はtitleまたはdescriptionを設定する
 
 --- title
 --- title=()
+#@todo
 
 --- link
 --- link=()
+#@todo
 
 --- description
 --- description=()
+#@todo
 
 --- date
 --- date=()
+#@todo
 
 --- pubDate
+#@todo
 item.dateの別名です．
 
 --- pubDate=()
+#@todo
 item.date=の別名です．
 
 --- author
 --- author=()
+#@todo
 
 --- comments
 --- comments=()
+#@todo
 
 --- guid
 --- enclosure
 --- source
 --- categories
+#@todo
 
 
 = class RSS::Maker::RSS09::Items::Item < RSS::Maker::ItemsBase::ItemBase
@@ -85,9 +99,11 @@ contentを設定する必要があります．
 
 --- isPermaLink
 --- isPermaLink=()
+#@todo
 
 --- content
 --- content=()
+#@todo
 
 = class RSS::Maker::RSS20::Items::Item::Enclosure < RSS::Maker::RSS09::Items::Item::Enclosure
 
@@ -99,12 +115,15 @@ url，length，typeを設定する必要があります．
 
 --- url
 --- url=()
+#@todo
 
 --- length
 --- length=()
+#@todo
 
 --- type
 --- type=()
+#@todo
 
 = class RSS::Maker::RSS20::Items::Item::Source < RSS::Maker::RSS09::Items::Item::Source
 
@@ -116,9 +135,11 @@ url，contentを設定する必要があります．
 
 --- url
 --- url=()
+#@todo
 
 --- content
 --- content=()
+#@todo
 
 = class RSS::Maker::RSS20::Items::Item::Categories < RSS::Maker::RSS09::Items::Item::Categories
 
@@ -129,6 +150,7 @@ RSS 2.0を生成するときだけ利用されます．
 == Instance Methods
 
 --- new_category
+#@todo
 新しくcategoryを作成し，返します．作成された
 categoryはcategoryリストの最後
 に追加されています．

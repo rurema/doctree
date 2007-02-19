@@ -5,7 +5,9 @@
 == Module Functions
 
 --- const_from_name(fqname)
+#@todo
 
 --- require_from_name(fqname)
+#@todo
 
 #@end

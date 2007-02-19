@@ -75,9 +75,11 @@
 == メソッド:
 
 --- TkMenu#activate(index)
+#@todo
     ((|index|))で指定した((*位置*))のメニュー項目をアクティブにします。
 
 --- TkMenu#add(type, keys=nil)
+#@todo
     ((|type|))で指定したメニュー項目を追加します。((|type|))は以下のいずれ
     かです。
 
@@ -128,22 +130,28 @@
       *"variable"
 
 --- TkMenu#index(index)
+#@todo
     ((|index|))で指定した((*位置*))の項目が何番目かを返します。
 
 --- TkMenu#invoke(index)
+#@todo
     ((|index|))で指定した((*位置*))の項目を実行します。
 
 --- TkMenu#insert(index, type, keys=nil)
+#@todo
     ((|index|))で指定した((*位置*))にメニュー項目を追加します。((|type|))、((|keys|))は
     ((<TkMenu#add>)) と同じです。
 
 --- TkMenu#delete(index, last=None)
+#@todo
     ((|index|))で指定した((*位置*))の項目を削除します。((|last|))を指定した場合は、
     ((|index|))から((|last|))までの項目をすべて削除します。
 
 --- TkMenu#popup(x, y, index=nil)
+#@todo
 
 --- TkMenu#post(x, y)
+#@todo
     (({self}))を引数で指定した座標に配置します。
 
       require "tk"
@@ -160,33 +168,41 @@
     説明しなければならない部分を含んでいる-))
 
 --- TkMenu#postcascade(index)
+#@todo
     カスケードメニューを((|index|))で指定した((*位置*))に配置します。
     ((-うそかも-))
 
 --- TkMenu#postcommand(cmd=Proc.new)
+#@todo
     (({self}))を配置したときに((|cmd|))を実行します。((<TkMenu#post>))メソッドから
     呼び出されます。
 
 --- TkMenu#tearoffcommand(cmd=Proc.new)
+#@todo
 
 --- TkMenu#menutype(index)
+#@todo
     ((-dummy-))
     *"menubar"
     *"tearoff"
     *"normal"
 
 --- TkMenu#unpost
+#@todo
     (({self}))の配置を取り下げます。非表示になります。
 
 --- TkMenu#yposition(index)
+#@todo
     ((|index|))で指定した((*位置*))の項目の位置(ピクセル)を返します。
 
 --- TkMenu#entrycget(index, key)
+#@todo
     ((|index|))で指定した((*位置*))のメニュー項目の((|key|))で指定したオプションの値を
     返します。
 
 --- TkMenu#entryconfiure(index, key, val=None)
 --- TkMenu#entryconfiure(index, hash)
+#@todo
     ((|index|))で指定した((*位置*))のメニュー項目のオプション((|key|))を((|val|))にし
     ます。
 
@@ -194,6 +210,7 @@
     がオプションの設定値として扱われます。
 
 --- TkMenu#entryconfiginfo(index, key=nil)
+#@todo
     ((|index|))で指定した((*位置*))のメニュー項目のオプション((|key|))の値を((|val|))にし
     ます。
 
@@ -226,12 +243,16 @@
 ### --- TkMenu#postcommand
 
 --- TkMenu#selectcolor
+#@todo
 
 --- TkMenu#tearoff
+#@todo
 
 --- TkMenu#tearoffcommand
+#@todo
 
 --- TkMenu#title
+#@todo
 
 ### --- TkMenu#type
 
@@ -248,6 +269,7 @@
 == クラスメソッド:
 
 --- TkMenuClone.new(parent, type=None)
+#@todo
 
 =end
 # $Id$
@@ -262,6 +284,7 @@
 == クラスメソッド:
 
 --- TkOptionMenubutton::OptionMenu.new(parent)
+#@todo
 
 =end
 # $Id$

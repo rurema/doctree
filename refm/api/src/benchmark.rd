@@ -10,6 +10,7 @@
 
 --- measure { ... }
 --- realtime { ... }
+#@todo
 
 与えられたブロックを実行して、経過した時間を Process.times() で計り、
 Benchmark::Tms オブジェクトを生成して返します。
@@ -27,6 +28,7 @@ Tms オブジェクトには to_s が定義されているので、基本的には以下のように
   1.166667   0.050000   1.216667 (  0.571355)
 
 --- bm(label_width = 0, *labels) {|rep| ... }
+#@todo
 
 benchmark メソッドの引数を簡略化したものです。benchmark メソッドと同様に働きます。
 
@@ -66,6 +68,7 @@ benchmark メソッドの引数を簡略化したものです。benchmark メソッドと同様に働きます
   upto:    1.500000   0.016667   1.516667 (  0.711239)
 
 --- bmbm(width = 0) {|job| ... }
+#@todo
 
 Benchmark::Job オブジェクトを生成して、それを引数として与えられたブロックを
 実行します。ベンチマークの実行時の隔たりを防ぐため、ブロックを2回実行します。
@@ -92,6 +95,7 @@ Benchmark::Job オブジェクトを生成して、それを引数として与えられたブロックを
   sort   12.007000   0.000000  12.007000 ( 12.791000)
 
 --- benchmark(caption = "", label_width = nil, fmtstr = nil, *labels){|rep| ...}
+#@todo
 
 Benchmark::Report オブジェクトを生成し、それを引数として与えられたブロックを実行します。
 基本的には以下のように使います。ブロックが Benchmark::Tms オブジェクトの配列を返した場合は、
@@ -149,15 +153,19 @@ fmtstr を省略したときは Benchmark::FMTSTR が使用されます。
 == Constants
 
 --- CAPTION
+#@todo
 
 --- FMTSTR
+#@todo
 
 --- BENCHMARK_VERSION
+#@todo
 
 = class Benchmark::Tms < Object
 == Class Methods
 #@# bc-rdoc: detected missing name: new
 --- new(u = 0.0, s = 0.0, cu = 0.0, cs = 0.0, real = 0.0, l = nil)
+#@todo
 
 Returns an initialized Tms object which has u as the user CPU
 time, s as the system CPU time, cu as the children's user CPU
@@ -167,12 +175,14 @@ real time and l as the label.
 == Instance Methods
 #@# bc-rdoc: detected missing name: *
 --- *(x)
+#@todo
 
 Returns a new Tms object obtained by memberwise multiplication
 of the individual times for this Tms object by x.
 
 #@# bc-rdoc: detected missing name: +
 --- +(other)
+#@todo
 
 Returns a new Tms object obtained by memberwise summation of
 the individual times for this Tms object with those of the other
@@ -180,6 +190,7 @@ Tms object. This method and #/() are useful for taking statistics.
 
 #@# bc-rdoc: detected missing name: -
 --- -(other)
+#@todo
 
 Returns a new Tms object obtained by memberwise subtraction of
 the individual times for the other Tms object from those of this
@@ -187,6 +198,7 @@ Tms object.
 
 #@# bc-rdoc: detected missing name: /
 --- /(x)
+#@todo
 
 Returns a new Tms object obtained by memberwise division of the
 individual times for this Tms object by x. This method and #+()
@@ -194,6 +206,7 @@ are useful for taking statistics.
 
 #@# bc-rdoc: detected missing name: add
 --- add {|| ...}
+#@todo
 
 Returns a new Tms object whose times are the sum of the times
 for this Tms object, plus the time required to execute the code
@@ -201,11 +214,13 @@ block (blk).
 
 #@# bc-rdoc: detected missing name: add!
 --- add!
+#@todo
 
 An in-place version of #add.
 
 
 --- format(arg0 = nil, *args)
+#@todo
 
 Returns the contents of this Tms object as a formatted string, according to a format string like that passed to Kernel.format. In addition, format accepts the following extensions:
 
@@ -227,50 +242,64 @@ Returns the contents of this Tms object as a formatted string, according to a fo
 If fmtstr is not given, FMTSTR is used as default value, detailing the user, system and real elapsed time. 
 
 --- to_a()
+#@todo
 
 Returns a new 6-element array, consisting of the label, user CPU time, system CPU time, children’s user CPU time, children’s system CPU time and elapsed real time.
 
 --- to_s()
+#@todo
 
 Same as format. 
 
 --- utime
+#@todo
 User CPU time
 
 --- stime
+#@todo
 System CPU time
 
 --- cutime
+#@todo
 User CPU time of children
 
 --- cstime
+#@todo
 System CPU time of children
 
 --- real
+#@todo
 Elapsed real time
 
 --- total
+#@todo
 Total time, that is _utime_ + _stime_ + _cutime_ + _cstime_ 
 
 --- label
+#@todo
 Label
 
 == Constants
 
 --- CAPTION
+#@todo
 
 --- FMTSTR
+#@todo
 
 = class Benchmark::Job < Object
 == Instance Methods
 --- item(label = "", &blk)
 --- report(label = "", &blk)
+#@todo
 Registers the given label and block pair in the job list.
 
 --- list
+#@todo
 An array of 2-element arrays, consisting of label and block pairs.
 
 --- width
+#@todo
 Length of the widest label in the #list, plus one.  
 
 
@@ -278,6 +307,7 @@ Length of the widest label in the #list, plus one.
 == Instance Methods
 --- item(label = "", *fmt, &blk)
 --- report(label = "", *fmt, &blk)
+#@todo
 Prints the label and measured time for the block,
 formatted by fmt. See Tms#format for the
 formatting rules.

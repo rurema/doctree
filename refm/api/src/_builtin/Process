@@ -9,12 +9,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@since 1.8.0
 --- abort([message])
+#@todo
 
 関数 [[m:Kernel#abort]] と同じです。
 #@end
 
 #@since 1.9.0
 --- daemon(nochdir=nil,noclose=nil)
+#@todo
 
 プロセスから制御端末を切り離し、
 バックグラウンドにまわってデーモンとして動作させます。
@@ -32,6 +34,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@since 1.8.0
 --- detach(pid)
+#@todo
 
 子プロセス pid の終了を監視するスレッドを生成して返します。
 生成したスレッドは子プロセスが終了した後に nil で終了します。
@@ -50,16 +53,19 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@since 1.8.0
 --- exit([status])
+#@todo
 
 関数 [[m:Kernel#exit]] と同じです。
 #@end
 
 --- exit!([status])
+#@todo
 
 関数 [[m:Kernel#exit!]] と同じです。
 
 --- fork
 --- fork { ... }
+#@todo
 
 関数 [[m:Kernel#fork]] と同じです。
 
@@ -67,6 +73,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 --- getrlimit(resource)
 --- setrlimit(resource, cur_limit, max_limit)
 --- setrlimit(resource, limit)
+#@todo
 
 resource で示すプロセスリソースの制限値の取得、設定を行います。
 
@@ -109,6 +116,7 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 #@since 1.9.0
 --- spawn(cmd, [, arg, ...])
+#@todo
 
 関数 [[m:Kernel#spawn]] と同じです。
 #@end
@@ -116,36 +124,44 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 == Module Functions
 
 --- egid
+#@todo
 
 カレントプロセスの実効グループ ID を返します。
 
 --- egid=(gid)
+#@todo
 
 カレントプロセスの実効グループ ID を設定します。gid を返します。
 
 --- euid
+#@todo
 
 カレントプロセスの実効ユーザ ID を返します。
 
 --- euid=(uid)
+#@todo
 
 カレントプロセスの実効ユーザ ID を設定します。uid を返します。
 
 --- gid
+#@todo
 
 カレントプロセスの実グループ ID を返します。
 
 --- gid=(gid)
+#@todo
 
 カレントプロセスの実グループ ID を設定します。gid を返します。
 
 --- groups
+#@todo
 
 補助グループ ID の配列を返します(実効グループ ID を含むかも知れません)。
 
 返される配列の最大要素数は 32 固定です(たぶんbug)。
 
 --- groups=(gid_ary)
+#@todo
 
 補助グループを設定します。右辺の配列の要素はグループ ID かグループ
 名を指定します。Process.groups の結果を返します。
@@ -155,31 +171,37 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 --- maxgroups
 --- maxgroups=(num)
+#@todo
 
 設定できる補助グループ ID の数を指定します。実際に返される補助グルー
 プ ID の数よりも少ない値を設定していると、
 [[m:Process#Process.groups]] で例外が発生します。
 
 --- pid
+#@todo
 
 カレントプロセスのプロセス ID を返します。変数 [[m:$$]]
 の値と同じです。
 
 --- ppid
+#@todo
 
 親プロセスのプロセス ID を返します。UN*X では実際の親プロセスが終
 了した後は ppid は 1 (initの pid)になります。
 
 --- uid
+#@todo
 
 プロセスの実ユーザ ID を返します。
 
 --- uid=(uid)
+#@todo
 
 プロセスの実ユーザ ID を設定します。uid を返します。
 
 --- getpgid(pid)
 --- getpgrp([pid])
+#@todo
 
 pid のプロセスのプロセスグループを返します。pid が 0
 の時や省略された時はカレントプロセスを意味します。
@@ -190,6 +212,7 @@ pid のプロセスのプロセスグループを返します。pid が 0
 #@# p Process.getpgid(1000000) # => -1
 
 --- getpriority(which, who)
+#@todo
 
 プロセス、プロセスグループ、ユーザの現在のプライオリティを返
 します ([[man:getpriority(2)]] 参照)。
@@ -212,6 +235,7 @@ who には、which の値にしたがってプロセス ID、プロセス
 #@end
 
 --- kill(signal, pid ... )
+#@todo
 
 pid で指定されたプロセスにシグナルを送ります。signal
 はシグナル番号か名前(文字列または[[c:Symbol]])で指定します。
@@ -236,8 +260,10 @@ pid で指定されたプロセスにシグナルを送ります。signal
 --- setpgrp
 #@else
 --- setpgrp(pid, pgrp)
+#@todo
 #@end
 --- setpgid(pid, pgrp)
+#@todo
 
 pid のプロセスグループを設定します。
 pid が 0 の時はカレントプロセスを意味します。
@@ -250,6 +276,7 @@ Process.setpgrp は、引数を取りません。
 #@end
 
 --- setpriority(which, who, prio)
+#@todo
 
 プロセス、プロセスグループ、
 ユーザの現在のプライオリティを設定します
@@ -279,6 +306,7 @@ Errno::EACCES となった場合には無視して実行を続けます。
   end
 
 --- setsid
+#@todo
 
 新しいセッションを作成して、tty を切り離します。デーモンを簡単に作
 ることができます。セッション ID を返します。
@@ -287,6 +315,7 @@ Errno::EACCES となった場合には無視して実行を続けます。
 
 #@since 1.8.0
 --- times
+#@todo
 
 自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の積算を
 [[c:Struct::Tms]] オブジェクトで返します。
@@ -303,6 +332,7 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 
 --- wait
 --- wait2
+#@todo
 
 子プロセスが終了するのを待ち、終了した子プロセスの pid を返します。
 子プロセスが一つもなければ例外 [[c:Errno::ECHILD]] が
@@ -319,6 +349,7 @@ Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 
 #@since 1.8.0
 --- waitall
+#@todo
 
 全ての子プロセスが終了するのを待ちます。
 
@@ -345,6 +376,7 @@ Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 
 --- waitpid(pid[, flags])
 --- waitpid2(pid[, flags])
+#@todo
 
 pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
 終了した時に pid を返します。子プロセスが存在しなければ例外
@@ -372,67 +404,83 @@ Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 == Constants
 
 --- PRIO_PROCESS
+#@todo
 
 [[m:Process#Process.getpriority]] または
 [[m:Process#Process.setpriority]] のプロセスプライオリティ指定。
 
 --- PRIO_PGRP
+#@todo
 
 プロセスグループプライオリティ。
 
 --- PRIO_USER
+#@todo
 
 ユーザプライオリティ。
 
 --- RLIMIT_AS
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_CORE
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_CPU
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_DATA
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_FSIZE
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_MEMLOCK
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_NOFILE
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_NPROC
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_RSS
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_SBSIZE
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIMIT_STACK
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIM_INFINITY
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
 --- RLIM_SAVED_CUR
+#@todo
 
 [[m:Process#Process.getrlimit]] 参照。
 
@@ -442,11 +490,13 @@ Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 [[m:Process#Process.getrlimit]] 参照。
 
 --- WNOHANG
+#@todo
 
 [[m:Process#waitpid]] の第二引数に指定するフラグです。
 終了した子プロセスがない時に waitpid がブロックしません。
 
 --- WUNTRACED
+#@todo
 
 [[m:Process#waitpid]] の第二引数に指定するフラグです。
 子プロセスの停止によりステータスを報告していない

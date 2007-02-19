@@ -5,94 +5,138 @@ include Comparable
 == Class Methods
 
 --- generate_prime 
+#@todo
 
 --- pseudo_rand
+#@todo
 
 --- pseudo_rand_range 
+#@todo
 
 --- rand
+#@todo
 
 --- rand_range
+#@todo
 
 == Instance Methods
 
 --- %
+#@todo
 
 --- *
+#@todo
 
 --- **
+#@todo
 
 --- +
+#@todo
 
 --- -
+#@todo
 
 --- /
+#@todo
 
 --- <<
+#@todo
 
 --- <=>
+#@todo
 
 --- ==
+#@todo
 
 --- ===
+#@todo
 
 --- >>
+#@todo
 
 --- bit_set?
+#@todo
 
 --- clear_bit!
+#@todo
 
 --- cmp
+#@todo
 
 --- coerce
+#@todo
 
 --- copy
+#@todo
 
 --- eql?
+#@todo
 
 --- gcd
+#@todo
 
 --- mask_bits!
+#@todo
 
 --- mod_add
+#@todo
 
 --- mod_exp
+#@todo
 
 --- mod_inverse
+#@todo
 
 --- mod_mul
+#@todo
 
 --- mod_sqr
+#@todo
 
 --- mod_sub
+#@todo
 
 --- num_bits
+#@todo
 
 --- num_bytes
+#@todo
 
 --- odd?
+#@todo
 
 --- one?
+#@todo
 
 --- prime?
+#@todo
 
 --- prime_fasttest?
+#@todo
 
 --- set_bit!
+#@todo
 
 --- sqr
+#@todo
 
 --- to_bn
+#@todo
 
 --- to_i
+#@todo
 
 --- to_int
+#@todo
 
 --- to_s
+#@todo
 
 --- ucmp
+#@todo
 
 --- zero?
+#@todo
 
 = class OpenSSL::BNError < OpenSSL::OpenSSLError
 #@end

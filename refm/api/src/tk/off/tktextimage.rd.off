@@ -10,21 +10,29 @@
 == クラスメソッド:
 
 --- TkTextImage.new(parent, index, keys)
+#@todo
 
 == メソッド:
 
 --- TkTextImage#[](slot)
+#@todo
 
 --- TkTextImage#[]=(slot, value)
+#@todo
 
 --- TkTextImage#cget(slot)
+#@todo
 
 --- TkTextImage#configure(slot, value=None)
+#@todo
 
 --- TkTextImage#image
+#@todo
 
 --- TkTextImage#image=(value)
+#@todo
 
 --- TkTextImage#configinfo(slot = nil)
+#@todo
 
 =end

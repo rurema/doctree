@@ -57,6 +57,7 @@ IMAP access class.
 == Class Methods
 
 --- new(host, port = 143, usessl = false, certs = nil, verify = false)
+#@todo
 
 Creates a new Net::IMAP object and connects it to the specified
 port on the named host.  If usessl is true, then an attempt will
@@ -67,28 +68,35 @@ the path or file containing the CA cert of the server, and the
 verify parameter is for the OpenSSL verification callback.
 
 --- debug
+#@todo
 
 Returns the debug mode.
 
 --- debug=(val)
+#@todo
 
 Sets the debug mode.
 
 --- add_authenticator(auth_type, authenticator)
+#@todo
 
 Adds an authenticator for Net::IMAP#authenticate.
 
 --- decode_utf7
+#@todo
 
 --- encode_utf7
+#@todo
 
 == Methods
 
 --- greeting
+#@todo
 
 Returns an initial greeting response from the server.
 
 --- responses
+#@todo
 
 Returns recorded untagged responses.
 
@@ -101,24 +109,29 @@ ex).
   #=> 968263756
 
 --- disconnect
+#@todo
 
 Disconnects from the server.
 
 --- capability
+#@todo
 
 Sends a CAPABILITY command, and returns a listing of
 capabilities that the server supports.
 
 --- noop
+#@todo
 
 Sends a NOOP command to the server. It does nothing.
 
 --- logout
+#@todo
 
 Sends a LOGOUT command to inform the server that the client is
 done with the connection.
 
 --- authenticate(auth_type, arg...)
+#@todo
 
 Sends an AUTEHNTICATE command to authenticate the client.
 The auth_type parameter is a string that represents
@@ -130,45 +143,54 @@ ex).
   imap.authenticate('LOGIN', user, password)
 
 --- login(user, password)
+#@todo
 
 Sends a LOGIN command to identify the client and carries
 the plaintext password authenticating this user.
 
 --- select(mailbox)
+#@todo
 
 Sends a SELECT command to select a mailbox so that messages
 in the mailbox can be accessed.
 
 --- examine(mailbox)
+#@todo
 
 Sends a EXAMINE command to select a mailbox so that messages
 in the mailbox can be accessed. However, the selected mailbox
 is identified as read-only.
 
 --- create(mailbox)
+#@todo
 
 Sends a CREATE command to create a new mailbox.
 
 --- delete(mailbox)
+#@todo
 
 Sends a DELETE command to remove the mailbox.
 
 --- rename(mailbox, newname)
+#@todo
 
 Sends a RENAME command to change the name of the mailbox to
 the newname.
 
 --- subscribe(mailbox)
+#@todo
 
 Sends a SUBSCRIBE command to add the specified mailbox name to
 the server's set of "active" or "subscribed" mailboxes.
 
 --- unsubscribe(mailbox)
+#@todo
 
 Sends a UNSUBSCRIBE command to remove the specified mailbox name
 from the server's set of "active" or "subscribed" mailboxes.
 
 --- list(refname, mailbox)
+#@todo
 
 Sends a LIST command, and returns a subset of names from
 the complete set of all names available to the client.
@@ -182,6 +204,7 @@ ex).
   #=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 
 --- lsub(refname, mailbox)
+#@todo
 
 Sends a LSUB command, and returns a subset of names from the set
 of names that the user has declared as being "active" or
@@ -189,6 +212,7 @@ of names that the user has declared as being "active" or
 The return value is an array of [[c:Net::IMAP::MailboxList]].
 
 --- status(mailbox, attr)
+#@todo
 
 Sends a STATUS command, and returns the status of the indicated
 mailbox.
@@ -200,6 +224,7 @@ ex).
   #=> {"RECENT"=>0, "MESSAGES"=>44}
 
 --- append(mailbox, message, flags = nil, date_time = nil)
+#@todo
 
 Sends a APPEND command to append the message to the end of
 the mailbox.
@@ -215,23 +240,27 @@ ex).
   EOF
 
 --- check
+#@todo
 
 Sends a CHECK command to request a checkpoint of the currently
 selected mailbox.
 
 --- close
+#@todo
 
 Sends a CLOSE command to close the currently selected mailbox.
 The CLOSE command permanently removes from the mailbox all
 messages that have the \Deleted flag set.
 
 --- expunge
+#@todo
 
 Sends a EXPUNGE command to permanently remove from the currently
 selected mailbox all messages that have the \Deleted flag set.
 
 --- search(keys, charset = nil)
 --- uid_search(keys, charset = nil)
+#@todo
 
 Sends a SEARCH command to search the mailbox for messages that
 match the given searching criteria, and returns message sequence
@@ -246,6 +275,7 @@ ex).
 
 --- fetch(set, attr)
 --- uid_fetch(set, attr)
+#@todo
 
 Sends a FETCH command to retrieve data associated with a message
 in the mailbox. the set parameter is a number or an array of
@@ -271,6 +301,7 @@ ex).
 
 --- store(set, attr, flags)
 --- uid_store(set, attr, flags)
+#@todo
 
 Sends a STORE command to alter data associated with a message
 in the mailbox. the set parameter is a number or an array of
@@ -285,6 +316,7 @@ ex).
 
 --- copy(set, mailbox)
 --- uid_copy(set, mailbox)
+#@todo
 
 Sends a COPY command to copy the specified message(s) to the end
 of the specified destination mailbox. the set parameter is
@@ -293,6 +325,7 @@ a message sequence number (copy) or a unique identifier (uid_copy).
 
 --- sort(sort_keys, search_keys, charset)
 --- uid_sort(sort_keys, search_keys, charset)
+#@todo
 
 Sends a SORT command to sort messages in the mailbox.
 
@@ -304,6 +337,7 @@ ex).
   #=> [6, 7, 8, 1]
 
 --- setquota(mailbox, quota)
+#@todo
 
 Sends a SETQUOTA command along with the specified mailbox and
 quota.  If quota is nil, then quota will be unset for that
@@ -312,6 +346,7 @@ for this to work.  The IMAP quota commands are described in
 [[RFC:2087]].
 
 --- getquota(mailbox)
+#@todo
 
 Sends the GETQUOTA command along with specified mailbox.
 If this mailbox exists, then an array containing a
@@ -319,6 +354,7 @@ If this mailbox exists, then an array containing a
 command generally is only available to server admin.
 
 --- getquotaroot(mailbox)
+#@todo
 
 Sends the GETQUOTAROOT command along with specified mailbox.
 This command is generally available to both admin and user.
@@ -326,6 +362,7 @@ If mailbox exists, returns an array containing objects of
 [[c:Net::IMAP::MailboxQuotaRoot]] and [[c:Net::IMAP::MailboxQuota]].
 
 --- setacl(mailbox, user, rights)
+#@todo
 
 Sends the SETACL command along with mailbox, user and the
 rights that user is to have on that mailbox.  If rights is nil,
@@ -333,12 +370,14 @@ then that user will be stripped of any rights to that mailbox.
 The IMAP ACL commands are described in [[RFC:2086]].
 
 --- getacl(mailbox)
+#@todo
 
 Send the GETACL command along with specified mailbox.
 If this mailbox exists, an array containing objects of
 [[c:Net::IMAP::MailboxACLItem]] will be returned.
 
 --- add_response_handler(handler = Proc.new)
+#@todo
 
 Adds a response handler.
 
@@ -349,26 +388,31 @@ ex).
   end
 
 --- remove_response_handler(handler)
+#@todo
 
 Removes the response handler.
 
 --- response_handlers
+#@todo
 
 Returns all response handlers.
 
 #@since 1.9.0
 --- starttls(cxt = nil)
+#@todo
 
 Sends a STARTTLS command to start TLS session.
 #@end
 
 #@since 1.8.2
 --- disconnected?
+#@todo
 
 Returns true if disconnected from the server.
 #@end
 
 --- thread(algorithm, search_keys, charset)
+#@todo
 
 As for #search(), but returns message sequence numbers in threaded
 format, as a Net::IMAP::ThreadMember tree.  The supported algorithms
@@ -385,12 +429,14 @@ and UTF-8 are sample values.
 See [SORT-THREAD-EXT] for more details.
 
 --- uid_thread(algorithm, search_keys, charset)
+#@todo
 
 As for #thread(), but returns unique identifiers instead of 
 message sequence numbers.
 
 --- client_thread
 --- client_thread=(th)
+#@todo
 
 The thread to receive exceptions.
 
@@ -410,10 +456,12 @@ remainder of this response is a line of text.
 == Instance Methods
 
 --- data
+#@todo
 
 Returns the data ([[c:Net::IMAP::ResponseText]]).
 
 --- raw_data
+#@todo
 
 Returns the raw data string.
 
@@ -433,15 +481,18 @@ that do not indicate command completion are prefixed with the token
 == Instance Methods
 
 --- name
+#@todo
 
 Returns the name such as "FLAGS", "LIST", "FETCH"....
 
 --- data
+#@todo
 
 Returns the data such as an array of flag symbols,
 a [[c:Net::IMAP::MailboxList]] object....
 
 --- raw_data
+#@todo
 
 Returns the raw data string.
 
@@ -464,18 +515,22 @@ client command which began the operation.
 == Instance Methods
 
 --- tag
+#@todo
 
 Returns the tag.
 
 --- name
+#@todo
 
 Returns the name. the name is one of "OK", "NO", "BAD".
 
 --- data
+#@todo
 
 Returns the data. See [[c:Net::IMAP::ResponseText]].
 
 --- raw_data
+#@todo
 
 Returns the raw data string.
 
@@ -492,10 +547,12 @@ The text may be prefixed by the response code.
 == Instance Methods
 
 --- code
+#@todo
 
 Returns the response code. See [[c:Net::IMAP::ResponseCode]].
 
 --- text
+#@todo
 
 Returns the text.
 
@@ -515,10 +572,12 @@ Net::IMAP::ResponseCode represents response codes.
 == Instance Methods
 
 --- name
+#@todo
 
 Returns the name such as "ALERT", "PERMANENTFLAGS", "UIDVALIDITY"....
 
 --- data
+#@todo
 
 Returns the data if it exists.
 
@@ -536,15 +595,18 @@ Net::IMAP::MailboxList represents contents of the LIST response.
 == Instance Methods
 
 --- attr
+#@todo
 
 Returns the name attributes. Each name attribute is a symbol
 capitalized by String#capitalize, such as :Noselect (not :NoSelect).
 
 --- delim
+#@todo
 
 Returns the hierarchy delimiter
 
 --- name
+#@todo
 
 Returns the mailbox name.
 
@@ -566,14 +628,17 @@ single space (SPACE).
 == Instance Methods
 
 --- mailbox
+#@todo
 
 The mailbox with the associated quota.
 
 --- usage
+#@todo
 
 Current storage usage of mailbox.
 
 --- quota
+#@todo
 
 Quota limit imposed on mailbox.
 
@@ -590,10 +655,12 @@ response. (GETQUOTAROOT can also return Net::IMAP::MailboxQuota.)
 == Instance Methods
 
 --- mailbox
+#@todo
 
 The mailbox with the associated quota.
 
 --- quotaroots
+#@todo
 
 Zero or more quotaroots that effect the quota on the
 specified mailbox.
@@ -614,11 +681,13 @@ Net::IMAP::MailboxACLItem represents response from GETACL.
 == Instance Methods
 
 --- user
+#@todo
 
 Login name that has certain rights to the mailbox
 that was specified with the getacl command.
 
 --- rights
+#@todo
 
 The access rights the indicated user has to the
 mailbox.
@@ -632,10 +701,12 @@ Net::IMAP::StatusData represents contents of the STATUS response.
 == Instance Methods
 
 --- mailbox
+#@todo
 
 Returns the mailbox name.
 
 --- attr
+#@todo
 
 Returns a hash. Each key is one of "MESSAGES", "RECENT", "UIDNEXT",
 "UIDVALIDITY", "UNSEEN". Each value is a number.
@@ -649,11 +720,13 @@ Net::IMAP::FetchData represents contents of the FETCH response.
 == Instance Methods
 
 --- seqno
+#@todo
 
 Returns the message sequence number.
 (Note: not the unique identifier, even for the UID command response.)
 
 --- attr
+#@todo
 
 Returns a hash. Each key is a data item name, and each value is
 its value.
@@ -696,42 +769,52 @@ Net::IMAP::Envelope represents envelope structures of messages.
 == Instance Methods
 
 --- date
+#@todo
 
 Retunns a string that represents the date.
 
 --- subject
+#@todo
 
 Retunns a string that represents the subject.
 
 --- from
+#@todo
 
 Retunns an array of [[c:Net::IMAP::Address]] that represents the from.
 
 --- sender
+#@todo
 
 Retunns an array of [[c:Net::IMAP::Address]] that represents the sender.
 
 --- reply_to
+#@todo
 
 Retunns an array of [[c:Net::IMAP::Address]] that represents the reply-to.
 
 --- to
+#@todo
 
 Retunns an array of [[c:Net::IMAP::Address]] that represents the to.
 
 --- cc
+#@todo
 
 Retunns an array of [[c:Net::IMAP::Address]] that represents the cc.
 
 --- bcc
+#@todo
 
 Retunns an array of [[c:Net::IMAP::Address]] that represents the bcc.
 
 --- in_reply_to
+#@todo
 
 Retunns a string that represents the in-reply-to.
 
 --- message_id
+#@todo
 
 Retunns a string that represents the message-id.
 
@@ -744,20 +827,24 @@ Net::IMAP::Address represents electronic mail addresses.
 == Instance Methods
 
 --- name
+#@todo
 
 Returns the phrase from [[RFC:822]] mailbox.
 
 --- route
+#@todo
 
 Returns the route from [[RFC:822]] route-addr.
 
 --- mailbox
+#@todo
 
 nil indicates end of [[RFC:822]] group.
 If non-nil and host is nil, returns [[RFC:822]] group name.
 Otherwise, returns [[RFC:822]] local-part
 
 --- host
+#@todo
 
 nil indicates [[RFC:822]] group syntax.
 Otherwise, returns [[RFC:822]] domain name.
@@ -771,10 +858,12 @@ Net::IMAP::ContentDisposition represents Content-Disposition fields.
 == Instance Methods
 
 --- dsp_type
+#@todo
 
 Returns the disposition type.
 
 --- param
+#@todo
 
 Returns a hash that represents parameters of the Content-Disposition
 field.
@@ -789,10 +878,12 @@ by [[m:Net::IMAP#thread]]
 == Instance Methods
 
 --- seqno
+#@todo
 
 The sequence number of this message.
 
 --- children
+#@todo
 
 an array of [[c:Net::IMAP::ThreadMember]] objects for mail
 items that are children of this in the thread.
@@ -806,56 +897,69 @@ Net::IMAP::BodyTypeBasic represents basic body structures of messages.
 == Instance Methods
 
 --- media_type
+#@todo
 
 Returns the content media type name as defined in [MIME-IMB].
 
 --- subtype
+#@todo
 
 Returns the content subtype name as defined in [MIME-IMB].
 
 --- media_subtype
+#@todo
 
 media_subtype is obsolete.  Use #subtype instead.
 
 --- param
+#@todo
 
 Returns a hash that represents parameters as defined in [MIME-IMB].
 
 --- content_id
+#@todo
 
 Returns a string giving the content id as defined in [MIME-IMB].
 
 --- description
+#@todo
 
 Returns a string giving the content description as defined in [MIME-IMB].
 
 --- encoding
+#@todo
 
 Returns a string giving the content transfer encoding as defined in [MIME-IMB].
 
 --- size
+#@todo
 
 Returns a number giving the size of the body in octets.
 
 --- md5
+#@todo
 
 Returns a string giving the body MD5 value as defined in [MD5].
 
 --- disposition
+#@todo
 
 Returns a [[c:Net::IMAP::ContentDisposition]] object giving
 the content disposition.
 
 --- language
+#@todo
 
 Returns a string or an array of strings giving the body
 language value as defined in [LANGUAGE-TAGS].
 
 --- extension
+#@todo
 
 Returns extension data.
 
 --- multipart?
+#@todo
 
 Returns false.
 
@@ -868,38 +972,52 @@ Net::IMAP::BodyTypeText represents TEXT body structures of messages.
 == Instance Methods
 
 --- media_type
+#@todo
 
 --- subtype
+#@todo
 
 --- media_subtype
+#@todo
 
 obsolete. use #subtype instead.
 
 --- param
+#@todo
 
 --- content_id
+#@todo
 
 --- description
+#@todo
 
 --- encoding
+#@todo
 
 --- size
+#@todo
 
 --- lines
+#@todo
 
 Returns the size of the body in text lines.
 
 And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
 
 --- md5
+#@todo
 
 --- disposition
+#@todo
 
 --- language
+#@todo
 
 --- extension
+#@todo
 
 --- multipart?
+#@todo
 
 Returns false.
 
@@ -913,48 +1031,64 @@ Net::IMAP::BodyTypeMessage represents MESSAGE/RFC822 body
 == Instance Methods
 
 --- media_type
+#@todo
 
 --- subtype
+#@todo
 
 --- media_subtype
+#@todo
 
 obsolete. use #subtype instead.
 
 --- param
+#@todo
 
 --- content_id
+#@todo
 
 --- description
+#@todo
 
 --- encoding
+#@todo
 
 --- size
+#@todo
 
 --- envelope
+#@todo
 
 Returns a [[c:Net::IMAP::Envelope]] giving the envelope structure.
 
 --- body
+#@todo
 
 Returns an object giving the body structure.
 
 And Net::IMAP::BodyTypeMessage has all methods of [[c:Net::IMAP::BodyTypeText]].
 
 --- lines
+#@todo
 
 Returns the size of the body in text lines.
 
 And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
 
 --- md5
+#@todo
 
 --- disposition
+#@todo
 
 --- language
+#@todo
 
 --- extension
+#@todo
 
 --- multipart?
+#@todo
 
 Returns false.
 
@@ -965,41 +1099,50 @@ Returns false.
 == Instance Methods
 
 --- media_type
+#@todo
 
 Returns the content media type name as defined in [MIME-IMB].
 
 --- subtype
+#@todo
 
 Returns the content subtype name as defined in [MIME-IMB].
 
 --- media_subtype
+#@todo
 
 obsolete. use #subtype instead.
 
 --- parts
+#@todo
 
 Returns multiple parts.
 
 --- param
+#@todo
 
 Returns a hash that represents parameters as defined in
 [MIME-IMB].
 
 --- disposition
+#@todo
 
 Returns a [[c:Net::IMAP::ContentDisposition]] object giving
 the content disposition.
 
 --- language
+#@todo
 
 Returns a string or an array of strings giving the body
 language value as defined in [LANGUAGE-TAGS].
 
 --- extension
+#@todo
 
 Returns extension data.
 
 --- multipart?
+#@todo
 
 Returns true.
 
@@ -1021,10 +1164,12 @@ See [[c:Net::IMAP#authenticate]].
 == Class Methods
 
 --- new(user, password)
+#@todo
 
 == Instance Methods
 
 --- process(data)
+#@todo
 
 
 
@@ -1036,10 +1181,12 @@ See [[c:Net::IMAP#authenticate]].
 == Class Methods
 
 --- new(user, password)
+#@todo
 
 == Instance Methods
 
 --- process(challenge)
+#@todo
 
 
 
@@ -1052,10 +1199,12 @@ See [[c:Net::IMAP#authenticate]].
 == Class Methods
 
 --- new(user, password)
+#@todo
 
 == Instance Methods
 
 --- process(data)
+#@todo
 
 
 
@@ -1067,10 +1216,12 @@ See [[c:Net::IMAP#authenticate]].
 == Class Methods
 
 --- new(user, password, authname = nil)
+#@todo
 
 == Instance Methods
 
 --- process(challenge)
+#@todo
 #@end
 
 

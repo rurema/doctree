@@ -140,12 +140,14 @@ delete_all、auth_only なども APOP とともに使えます。
 == Class Methods
 
 --- new(address, port = 110, apop = false)
+#@todo
 
 Net::POP3 オブジェクトを生成します。まだ接続はしません。
 apop が真のときは APOP 認証を行うオブジェクトを生成します。
 
 --- start(address, port = 110, account, password)
 --- start(address, port = 110, account, password) {|pop| .... }
+#@todo
 
 address の port 番ポートに接続し、アカウント account パスワード
 password で POP ログインします。第二引数 port に nil を渡すと
@@ -163,6 +165,7 @@ POP3 のデフォルトポート(110)を使います。
   }
 
 --- APOP(is_apop)
+#@todo
 
 bool が真なら Net::APOP クラス、偽なら Net::POP3 クラスを返します。
   
@@ -176,6 +179,7 @@ bool が真なら Net::APOP クラス、偽なら Net::POP3 クラスを返します。
   }
 
 --- foreach(address, port = 110, account, password) {|mail| .... }
+#@todo
 
 POP セッションを開き、サーバ上のすべてのメールに対して繰り返します。
 以下と同じです。
@@ -198,6 +202,7 @@ POP セッションを開き、サーバ上のすべてのメールに対して繰り返します。
 
 --- delete_all(address, port = 110, account, password)
 --- delete_all(address, port = 110, account, password) {|mail| .... }
+#@todo
 
 POP セッションを開き、サーバ上のメールをすべて削除します。
 ブロックが与えられた時は削除する前にブロックにそのメールを渡します。
@@ -211,6 +216,7 @@ POP セッションを開き、サーバ上のメールをすべて削除します。
   end
 
 --- auth_only(address, port = 110, account, password)
+#@todo
 
 POP セッションを開き認証だけを行って接続を切ります。
 主に POP before SMTP のために用意されています。
@@ -225,28 +231,36 @@ POP セッションを開き認証だけを行って接続を切ります。
 --- default_port
 #@since 1.9.0
 --- default_pop3_port
+#@todo
 
 --- default_pop3s_port
+#@todo
 
 --- certs
+#@todo
 
 will be altered by #ssl_context.
 
 --- verify
+#@todo
 
 will be altered by #ssl_context.
 
 --- use_ssl?
+#@todo
 
 --- enable_ssl(verify, certs)
+#@todo
 
 signature will be changed to enable_ssl(ctx).
 
 --- disable_ssl
+#@todo
 
 #@end
 
 --- socket_type
+#@todo
 
 このメソッドは obsolete です。
 使わないでください。
@@ -255,24 +269,30 @@ signature will be changed to enable_ssl(ctx).
 
 #@since 1.9.0
 --- use_ssl?
+#@todo
 
 --- enable_ssl(verify, certs)
+#@todo
 
 --- disable_ssl
+#@todo
 #@end
 
 --- inspect
+#@todo
 
 #@# --- logging   # internal use only
 
 --- start(account, password)
 --- start(account, password) {|pop| .... }
+#@todo
 
 リモートホストとの TCP 接続を開始し、アカウントに account、
 パスワードに password を使って POP ログインします。
 
 --- started?
 --- active?
+#@todo
 
 POP3 セッションが開始されていたら真を返します。
 
@@ -280,14 +300,17 @@ Ruby 1.8.0 以降では active? は obsolete です。
 これからは常に started? を使ってください。
 
 --- address
+#@todo
 
 接続するアドレスです。
 
 --- port
+#@todo
 
 接続するポート番号です。
 
 --- set_debug_output(f)
+#@todo
 #@# --- debug_output=(f)
 
 デバッグ用の出力 f をセットします。
@@ -317,6 +340,7 @@ f は << メソッドを持っているオブジェクトでなければなりません。
 
 --- open_timeout
 --- open_timeout=(n)
+#@todo
 
 接続時に待つ最大秒数です。
 この秒数たってもコネクションが開かないときは
@@ -324,39 +348,47 @@ f は << メソッドを持っているオブジェクトでなければなりません。
 
 --- read_timeout
 --- read_timeout=(n)
+#@todo
 
 読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数です。
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
 --- finish
+#@todo
 
 POP3 セッションを終了します。セッション開始前にこのメソッドが
 呼ばれた場合は例外 IOError を発生します。
 
 --- apop?
+#@todo
 
 このインスタンスが APOP を使ってサーバに接続するなら true を返します。
 
 --- n_bytes
+#@todo
 
 サーバにあるメールの総バイト数を返します。
 
 --- n_mails
+#@todo
 
 サーバにあるメールの数を返します。
 
 --- mails
+#@todo
 
 [[c:Net::POPMail]] オブジェクトの配列をかえします。
 この配列はセッションを開始したときに自動的に更新されます。
 
 --- each_mail {|popmail| .... }
 --- each {|popmail| .... }
+#@todo
 
 pop3.mails.each と同じです。
 
 --- delete_all
 --- delete_all {|popmail| .... }
+#@todo
 
 サーバ上のメールを全て消去します。
 ブロックを与えられたときは消去する前にその POPMail オブジェクトを
@@ -373,6 +405,7 @@ pop3.mails.each と同じです。
   end
 
 --- auth_only(account, password)
+#@todo
 
 POP セッションを開き認証だけを行って接続を切ります。
 主に POP before SMTP のために用意されています。
@@ -385,6 +418,7 @@ POP セッションを開き認証だけを行って接続を切ります。
   pop.auth_only 'YourAccount', 'YourPassword'
 
 --- reset
+#@todo
 
 セッションをリセットします。
 具体的には [[m:Net::POPMail#delete]] で消去したメールが全て復活します。
@@ -396,6 +430,7 @@ POP3 ではメール一個だけを復活する方法はありません。
 == Constants
 
 --- Revision
+#@todo
 
 net/pop3 file revision.
 
@@ -418,6 +453,7 @@ POP サーバー上のメール一通を表現するクラス。
 --- pop
 --- all
 --- mail
+#@todo
 
 メールを受信して文字列で返します。
 
@@ -439,6 +475,7 @@ all と mail は obsolete です。
 --- pop {|str| .... }
 --- all {|str| .... }
 --- mail {|str| .... }
+#@todo
 
 メールの文字列を少しづつ読みこみ、順次ブロックに与えます。
 
@@ -459,15 +496,18 @@ all と mail は obsolete です。
   }
 
 --- header
+#@todo
 
 ヘッダだけを受信して文字列で返します。
 
 --- top(lines)
+#@todo
 
 メールヘッダと lines 行ぶんの本文を取得し文字列で返します。
 
 --- delete
 --- delete!
+#@todo
 
 サーバ上からメールを削除します。
 
@@ -476,6 +516,7 @@ Ruby 1.8 以降では delete と delete! は同じ効果です。
 これからは常に delete を使うべきです。
 
 --- deleted?
+#@todo
 
 メールがサーバ上で消去されていたら true を返します。
 
@@ -483,10 +524,12 @@ Ruby 1.8 以降では delete と delete! は同じ効果です。
 [[m:Net::POP3#reset]] を使う以外に復活する方法はありません。
 
 --- size
+#@todo
 
 メールのサイズ (単位はバイト) をかえします。
 
 --- number
+#@todo
 
 メールに対して振られた、そのメールボックスで一意な番号です。
 サーバに接続しなおすとこの番号は変化する場合があります。
@@ -495,6 +538,7 @@ Ruby 1.8 以降では delete と delete! は同じ効果です。
 
 --- uidl
 --- unique_id
+#@todo
 
 メールに対して振られた、サーバ上で一意な識別子 (UIDL) をかえします。
 [[m:Net::POPMail#number]] と違い、

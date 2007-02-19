@@ -4,9 +4,13 @@ include TkItemConfigMethod
 == Instance Methods
 
 --- entrycget(tagOrId, option)
+#@todo
 
 --- entryconfigure(tagorId, slot, value = Tk::None)
+#@todo
 
 --- entryconfiginfo(tagOrId, slot = nil)
+#@todo
 
 --- current_entryconfiginfo(tagOrId, slot = nil)
+#@todo

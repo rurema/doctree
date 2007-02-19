@@ -3,12 +3,16 @@
 INTERP は [[c:TclTkIp]] のインスタンス。
 
 --- __getip
+#@todo
 
 --- cb_entry_class
+#@todo
 
 --- tk_cmd_tbl
+#@todo
 
 --- tk_windows
+#@todo
 
 
 

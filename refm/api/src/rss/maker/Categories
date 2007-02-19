@@ -7,6 +7,7 @@ RSS 2.0を生成するときだけ利用されます．
 == Instance Methods
 
 --- new_category
+#@todo
 新しくcategoryを作成し，返します．作成された
 categoryはcategoryリストの最後
 に追加されています．
@@ -23,6 +24,8 @@ contentを指定する必要があります．
 
 --- domain
 --- domain=()
+#@todo
 
 --- content
 --- content=()
+#@todo

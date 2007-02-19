@@ -24,6 +24,7 @@ URI (Uniform Resource Identifier) サポートライブラリ
 == Singleton Methods
 
 --- split(url)
+#@todo
 
 URI を以下の要素に分割した配列を返します。
 
@@ -43,6 +44,7 @@ URI を以下の要素に分割した配列を返します。
         # => ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
 
 --- parse(uri_str)
+#@todo
 
 与えられた URI から該当する URI サブクラスのインスタンスを生成して
 返します。
@@ -57,6 +59,7 @@ URI を以下の要素に分割した配列を返します。
         p uri.path      # => "/"
 
 --- join(uri_str[, str, ...])
+#@todo
 
 文字列 uri_str と str ... をURIとして連結して得られる
 URIオブジェクトを返します。
@@ -74,6 +77,7 @@ URIオブジェクトを返します。
 
 --- extract(str[, schemes])
 --- extract(str[, schemes]) {|uri_str| ... }
+#@todo
 
 文字列 str に対してパターンマッチングを試み、
 絶対URIにマッチした部分文字列からなる配列として返します。
@@ -98,6 +102,7 @@ URIオブジェクトを返します。
 
 #@since 1.8.1
 --- regexp([match_schemes])
+#@todo
 
 URIにマッチする正規表現を返します。
 
@@ -113,6 +118,7 @@ URIにマッチする正規表現を返します。
 
 --- escape(str[, unsafe])
 --- encode(str[, unsafe])
+#@todo
 
 URI 文字列をエンコードした文字列を返します。unsafe には、URI
 として指定できない文字を正規表現か文字列で指定します(デフォルトは、
@@ -128,6 +134,7 @@ URI 文字列をエンコードした文字列を返します。unsafe には、URI
 
 --- unescape(str)
 --- decode(str)
+#@todo
 
 URI 文字列をデコードした文字列を返します。
 
@@ -146,6 +153,7 @@ include URI
 == Class Methods
 
 --- default_port
+#@todo
 
 スキームに対応するデフォルトのポート番号を返します。
 
@@ -154,6 +162,7 @@ include URI
         p URI::HTTP.default_port        # => 80
 
 --- component
+#@todo
 
 URI の構成要素の配列を返します。
 
@@ -165,6 +174,7 @@ URI の構成要素の配列を返します。
         # => [:scheme, :to, :headers]
 
 --- use_registry
+#@todo
 
 #@#    構成要素 registry を受け付けるなら true を返します。(URI::Generic 
 #@#    クラスでは false)
@@ -174,6 +184,7 @@ registry 部を利用するか否かを表す真偽値。
 
 --- build2(ary)
 --- build2(hash)
+#@todo
 
 URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 が発生した場合に、引数の各要素を URI.escape して再度 build を試み
@@ -181,6 +192,7 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 
 --- build(ary)
 --- build(hash)
+#@todo
 
 引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
 構成要素は、
@@ -188,6 +200,7 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 を配列かハッシュで与えます。
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
 
 #@#    汎用的な構成要素から URI::Generic オブジェクトを生成します。build 
 #@#    と異なり、引数の正当性を検査しません。
@@ -203,10 +216,12 @@ use_registry が偽のとき、new に偽でない registry
 == Instance Methods
 
 --- default_port
+#@todo
 
 self.class.default_port です。
 
 --- component
+#@todo
 
 self.class.component です。
 
@@ -232,28 +247,32 @@ self.class.component です。
 --- opaque=()
 --- fragment
 --- fragment=()
+#@todo
 
 各構成要素の属性メソッドです。属性設定では、引数の正当性をチェック
 し不正な引数に対して例外 URI::InvalidComponentError を発生させます。
 ((-あらい 2002-09-24: InvalidURIError を起こすものもあるのはわざと？-))
 
 --- hierarchical?
+#@todo
 
 path が真なら真です。
 
 --- absolute
 --- absolute?
+#@todo
 
 scheme が真なら真です。
 
 --- relative?
+#@todo
 
 scheme が偽なら真です。
 
 --- merge!(rel)
-#@todo
 --- merge(rel)
 --- +(rel)
+#@todo
 
 rel を連結する。
 rel が文字列の場合は URI.parse(rel) によって、
@@ -265,6 +284,7 @@ URI に変換してから連結する。
 
 --- route_from(src)
 --- -(src)
+#@todo
 
 srcからの相対パスを返します。
 
@@ -273,6 +293,7 @@ srcからの相対パスを返します。
         => #<URI::Generic:0x20100256 URL:en/raa.html>
 
 --- route_to(dst)
+#@todo
 
 引数dstには文字列かURIオブジェクトを与えます。dstへの相対パスを返します。
 
@@ -283,26 +304,31 @@ srcからの相対パスを返します。
 
 --- normalize
 --- normalize!
+#@todo
 
 URI オブジェクトを正規化して返します。ホスト名を小文字にし、path
 構成要素がなければ '/' をセットします。
 
 --- to_s
 --- to_str
+#@todo
 
 URI を返します。
 
 --- ==(uri)
+#@todo
 
 引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
 ます。URI は正規化して比較されます。
 
 --- to_a
 --- to_ary
+#@todo
 
 URI オブジェクトの構成要素の配列を返します。
 
 --- select(*components)
+#@todo
 Args
 
 components: Multiple Symbol arguments defined in URI::HTTP
@@ -325,6 +351,7 @@ Usage
 
 --- build(ary)
 --- build(hash)
+#@todo
 
 引数で与えられた URI 構成要素から URI::FTP オブジェクトを生成します。
 構成要素は、
@@ -335,6 +362,7 @@ Usage
 FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
 
 汎用的な構成要素から URI::FTP オブジェクトを生成します。build
 と異なり、引数の正当性を検査しません。
@@ -348,11 +376,13 @@ FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 
 #@# bc-rdoc: detected missing name: new2
 --- new2(user, password, host, port, path, typecode = nil, arg_check = true)
+#@todo
 
 == Instance Methods
 
 --- typecode
 --- typecode=()
+#@todo
 
 各構成要素の属性メソッドです。属性設定では、引数の正当性をチェック
 し不正な引数に対して例外 URI::InvalidComponentError を発生させます。
@@ -363,6 +393,7 @@ FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 
 --- build(ary)
 --- build(hash)
+#@todo
 
 引数で与えられた URI 構成要素から URI::HTTP オブジェクトを生成します。
 構成要素は、
@@ -370,6 +401,7 @@ FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 を配列かハッシュで与えます。
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
 
 汎用的な構成要素から URI::HTTP オブジェクトを生成します。build
 と異なり、引数の正当性を検査しません。
@@ -377,6 +409,7 @@ FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
 == Instance Methods
 
 --- request_uri
+#@todo
 
 path + '?' + query を返します。
 
@@ -392,30 +425,42 @@ LDAP URI SCHEMA (described in [[RFC:2255]])
 
 --- build(ary)
 --- build(hash)
+#@todo
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
 
 == Instance Methods
 
 --- dn
+#@todo
 
 --- dn=()
+#@todo
 
 --- attributes
+#@todo
 
 --- attributes=()
+#@todo
 
 --- scope
+#@todo
 
 --- scope=()
+#@todo
 
 --- filter
+#@todo
 
 --- filter=()
+#@todo
 
 --- extensions
+#@todo
 
 --- extensions=()
+#@todo
 
 = class URI::MailTo < URI::Generic
 
@@ -425,6 +470,7 @@ LDAP URI SCHEMA (described in [[RFC:2255]])
 
 --- build(ary)
 --- build(hash)
+#@todo
 
 引数で与えられた URI 構成要素から URI::MailTo オブジェクトを生成します。
 構成要素は、
@@ -437,6 +483,7 @@ LDAP URI SCHEMA (described in [[RFC:2255]])
       [["subject", "subscribe"], ["cc", "addr"]]
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
 
 汎用的な構成要素から URI::MailTo オブジェクトを生成します。build
 と異なり、引数の正当性を検査しません。
@@ -447,12 +494,14 @@ LDAP URI SCHEMA (described in [[RFC:2255]])
 --- to=()
 --- headers
 --- headers=()
+#@todo
 
 各構成要素の属性メソッドです。属性設定では、引数の正当性をチェック
 し不正な引数に対して例外 URI::InvalidComponentError を発生させます。
 
 --- to_mailtext
 --- to_rfc822text
+#@todo
 
 URI オブジェクトからメールテキスト文字列を生成します。
 
@@ -471,6 +520,7 @@ URI オブジェクトからメールテキスト文字列を生成します。
 == Private Instance Methods
 
 --- URI(uri_str)
+#@todo
 
 [[m:URI.parse]]と同じです。
 #@end

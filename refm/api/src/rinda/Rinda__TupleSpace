@@ -9,16 +9,19 @@ Tuple Space のためのクラスです。
 == Class Methods
 
 --- new(period = 60)
+#@todo
 
 [[c:Rinda::TupleSpace]] オブジェクトを生成します。
 
 == Instance Methods
 
 --- move(port, tuple, sec = nil)
+#@todo
 
 Moves +tuple+ to +port+.
 
 --- notify(event, tuple, sec = nil)
+#@todo
 
 Registers for notifications of +event+. Returns a
 NotifyTemplateEntry. See NotifyTemplateEntry for examples of how to
@@ -37,10 +40,12 @@ NotifyTemplateEntry has expired.
 
 
 --- read(tuple, sec=nil)
+#@todo
 
 Reads +tuple+, but does not remove it.
 
 --- read_all(tuple)
+#@todo
 
 Returns all tuples matching +tuple+. Does not remove the found
 tuples.
@@ -48,6 +53,7 @@ tuples.
 
 --- take(tuple, sec = nil)
 --- take(tuple, sec = nil) {|template| ... }
+#@todo
 
 tuple にマッチするタプルをタプルスペースから取り出して返します。
 マッチするタプルが存在しない場合は、マッチするタプルがタプルスペースに
@@ -57,6 +63,7 @@ tuple にマッチするタプルをタプルスペースから取り出して返します。
 例外 [[c:Rinda::RequestExpiredError]] を投げます。
 
 --- write(tuple, sec = nil)
+#@todo
 
 [[c:Rinda::Tuple]] オブジェクト tuple をタプルスペースに加えます。
 tuple を管理するための [[c:Rinda::TupleEntry]] オブジェクトを返します。

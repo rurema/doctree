@@ -7,14 +7,17 @@
 == Module Functions
 
 --- rid
+#@todo
 
 現在の実ユーザ ID を返します。
 
 --- eid
+#@todo
 
 現在の実効ユーザ ID を返します。
 
 --- change_privilege(id)
+#@todo
 
 実ユーザ ID・実効ユーザ ID・保存ユーザ ID のすべてを
 放棄して他のユーザになります。成功したら id を返します。
@@ -34,6 +37,7 @@ setreuid(id,-1) によって実装されていたものを用いていた場合、
 
 --- grant_privilege(id)
 --- eid=()
+#@todo
 
 実効ユーザ ID を変更します。成功したら id を返します。
 
@@ -46,6 +50,7 @@ true の環境では、実ユーザ ID と異なる値を設定した場合、
 設定できない場合は例外 Errno::EPERM を発生します。
 
 --- re_exchange
+#@todo
 
 実ユーザ ID と実効ユーザ ID とを入れ換えます。
 保存ユーザ ID は新しい実効ユーザ ID と同じになります。
@@ -54,12 +59,14 @@ true の環境では、実ユーザ ID と異なる値を設定した場合、
 新しい実効ユーザ ID を返します。
 
 --- re_exchangeable?
+#@todo
 
 実ユーザ ID と実効ユーザ ID との入れ換えが可能な環境かどうか
 (Process::UID.re_exchange が実装されているか) を真偽値で返します。
 入れ換え可能なら true を返します。
 
 --- sid_available?
+#@todo
 
 保存ユーザ ID を持つ環境かどうかを真偽値で返します。
 保存ユーザ ID を持つなら true を返します。
@@ -73,6 +80,7 @@ true の環境では、実ユーザ ID と異なる値を設定した場合、
 
 --- switch
 --- switch { .... }
+#@todo
 
 ユーザ権限を一時的に変更します。
 

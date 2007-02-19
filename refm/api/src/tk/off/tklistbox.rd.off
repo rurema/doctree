@@ -48,6 +48,7 @@
 == メソッド:
 
 --- TkListbox#activate(y)
+#@todo
     ((|y|))で指定した((*位置*))の要素をアクティブにします。そのリスト
     ボックスに((<入力フォーカス>))があれば、アクティブな行には下線が引
     かれます。
@@ -64,28 +65,35 @@
      Tk.mainloop
 
 --- TkListbox#curselection
+#@todo
     ((<選択>))された要素の要素番号を配列にして返します(要素番号は上端が0)
 
 --- TkListbox#get(index)
 --- TkListbox#get(first, last)
+#@todo
     引数が1つの場合、指定した((*位置*))の要素を文字列で返します。
     引数が2つの場合、指定した範囲の要素を文字列の配列で返します。
 
 --- TkListbox#nearest(y)
+#@todo
     ((|y|))で指定したY座標に近い要素の要素番号を返します。
 
 --- TkListbox#size
+#@todo
     要素の数を返します。
 
 --- TkListbox#selection_anchor(index)
+#@todo
     ((|index|))で指定した((*位置*))の要素を((<アンカー>))にします。
 
 --- TkListbox#selection_clear(first, last=None)
+#@todo
     ((|first|))、((|last|))で指定した((*位置*))の範囲の要素が((<選択>))さ
     れていれば非選択にします。((|last|))を省略した場合、((|first|))の((*位
     置*))の要素を非選択にします。
 
 --- TkListbox#selection_includes(index)
+#@todo
     (({index}))で指定した((*位置*))の要素が((<選択>))されているかどうかを
     真偽値(({true}))/(({false}))で返します。
 
@@ -98,15 +106,19 @@
       Tk.mainloop
 
 --- TkListbox#selection_set(first, last=None)
+#@todo
     ((|first|))、((|last|))で指定した((*位置*))の範囲の要素を((<選択>))し
     ます。((|last|))を省略した場合、((|first|))の((*位置*))の要素を選択し
     ます。
 
 --- TkListbox#itemcget(index, key)
+#@todo
 
 --- TkListbox#itemconfigure(index, key, val=None)
+#@todo
 
 --- TkListbox#itemconfiginfo(index, key=nil)
+#@todo
 
 == 標準オプション:
 
@@ -147,6 +159,7 @@
 == オプション:
 
 --- TkListbox#height
+#@todo
     指定した要素の数をリストボックスの高さにします。0を指定した場合
     すべての要素が収まるように自動的に高さが調整されます(この場合、参照結
     果も0になります)。
@@ -162,6 +175,7 @@
       Tk.mainloop
 
 --- TkListbox#selectmode
+#@todo
     行を((<選択>))するときの振る舞いを以下の何れかで指定します。
 
     *"single"
@@ -206,6 +220,7 @@
       Tk.mainloop
 
 --- TkListbox#width
+#@todo
     幅を文字数で指定します。0を指定した場合すべての要素の文字列が収
     まるように自動的に幅が調整されます(この場合、参照結果も0になります)。
 

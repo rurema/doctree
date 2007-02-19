@@ -22,6 +22,7 @@
 == Module Functions
 
 --- abbrev(words, pattern = nil)
+#@todo
 
 words は文字列の配列です。短縮形と元の文字列の配列の配列を返します。
 上の例のように短縮形からは必ず元の文字列が一意に決まるようになっています。
@@ -47,6 +48,7 @@ words は文字列の配列です。短縮形と元の文字列の配列の配列を返します。
 == Instance Methods
 
 --- abbrev(pattern = nil)
+#@todo
 
 [[m:Abbrev.abbrev]](self, pattern) と同じです。
 

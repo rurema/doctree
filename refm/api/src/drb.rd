@@ -11,6 +11,7 @@
 == Module Functions
 
 --- config
+#@todo
 
 Get the configuration of the current server.
 
@@ -18,6 +19,7 @@ If there is no current server, this returns the default configuration.
 See #current_server and DRbServer::make_config.
 
 --- current_server
+#@todo
 
 Get the 'current' server.
 
@@ -30,10 +32,12 @@ If the above rule fails to find a server, a DRbServerNotFound
 error is raised.
 
 --- fetch_server(uri)
+#@todo
 
 
 
 --- front
+#@todo
 
 Get the front object of the current server.
 
@@ -41,29 +45,35 @@ This raises a DRbServerNotFound error if there is no current
 server. See [[m:DRb.current_server]].
 
 --- here?(uri)
+#@todo
 
 Is uri the URI for the current local server?
 
 --- install_acl(acl)
+#@todo
 
 Set the default acl.
 
 See [[m:DRb::DRbServer.default_acl]].
 
 --- install_id_conv(idconv)
+#@todo
 
 Set the default id conv object.
 See [[m:DRb::DRbServer.default_id_conv]].
 
 --- regist_server(server)
+#@todo
 
 
 
 --- remove_server(server)
+#@todo
 
 
 
 --- start_service(uri=nil, front=nil, config=nil)
+#@todo
 
 Start a dRuby server locally.
 
@@ -81,6 +91,7 @@ config is the configuration for the new server. This may be nil.
 See DRbServer::new.
 
 --- stop_service
+#@todo
 
 Stop the local dRuby server.
 
@@ -88,12 +99,14 @@ This operates on the primary server. If there is no primary server
 currently running, it is a noop.
 
 --- thread
+#@todo
 
 Get the thread of the primary server.
 
 This returns nil if there is no primary server. See #primary_server.
 
 --- to_id(obj)
+#@todo
 
 Get a reference id for an object using the current server.
 
@@ -101,6 +114,7 @@ This raises a DRbServerNotFound error if there is no current
 server. See #current_server.
 
 --- to_obj(ref)
+#@todo
 
 Convert a reference into an object using the current server.
 
@@ -108,6 +122,7 @@ This raises a DRbServerNotFound error if there is no current
 server. See #current_server.
 
 --- uri
+#@todo
 
 Get the URI defining the local dRuby space.
 

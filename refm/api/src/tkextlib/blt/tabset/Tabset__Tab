@@ -5,16 +5,19 @@ include TkTreatItemFont
 == Class Methods
 
 --- id2obj(tabset, id)
+#@todo
 
 
 
 --- new(parent, pos = nil, name = nil, keys = {})
+#@todo
 
 
 
 == Instance Methods
 
 --- bind(context, *args)
+#@todo
 
 def bind(context, cmd=Proc.new, *args)
 
@@ -24,6 +27,7 @@ def bind(context, cmd=Proc.new, *args)
 end
 
 --- bind_append(context, *args)
+#@todo
 
 def bind_append(context, cmd=Proc.new, *args)
 
@@ -33,70 +37,87 @@ def bind_append(context, cmd=Proc.new, *args)
 end
 
 --- bind_remove(context)
+#@todo
 
 
 
 --- bindinfo(context = nil)
+#@todo
 
 
 
 --- cget(*args)
+#@todo
 
 
 
 --- configinfo(*args)
+#@todo
 
 
 
 --- configure(*args)
+#@todo
 
 
 
 --- current_configinfo(*args)
+#@todo
 
 
 
 --- delete
+#@todo
 
 
 
 --- focus
+#@todo
 
 
 
 --- get_name
+#@todo
 
 
 
 --- index
+#@todo
 
 
 
 --- invoke
+#@todo
 
 
 
 --- move_after(idx)
+#@todo
 
 
 
 --- move_before(idx)
+#@todo
 
 
 
 --- perforation_highlight(mode)
+#@todo
 
 
 
 --- perforation_invoke
+#@todo
 
 
 
 --- see
+#@todo
 
 
 
 --- tearoff(name = None)
+#@todo
 
 
 

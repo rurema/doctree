@@ -125,12 +125,14 @@ trim_mode に指定できる値は次の通りです。
 == Class Methods
 
 --- new(eruby_script, safe_level=nil, trim_mode=nil, eoutvar='_erbout')
+#@todo
 
     eruby_script から ERB を生成します。eval 時の $SAFE、trim_mode(後述)、
     eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
     普通、変更する必要はありません。)を指定できます。
 
 --- version
+#@todo
 
 Returns revision information for the erb.rb module.
 
@@ -138,18 +140,22 @@ Returns revision information for the erb.rb module.
 == Instance Methods
 
 --- run(b=TOPLEVEL_BINDING)
+#@todo
 
 ERB をb の binding で実行し、印字します。
 
 --- result(b=TOPLEVEL_BINDING)
+#@todo
 
 ERB を b の binding で実行し、文字列を返します。
 
 --- src
+#@todo
 
 変換した Ruby スクリプトを取得します。
 
 --- def_method(mod, methodname, fname='(ERB)')
+#@todo
 
 変換した Ruby スクリプトをメソッドとして定義します。
 定義先のモジュールは mod で指定し、メソッド名は methodname で指定します。
@@ -161,15 +167,18 @@ fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
   erb.def_method(MyClass, 'foo(bar)', 'foo.erb')
 
 --- def_module(methodname='erb')
+#@todo
 
 変換した Ruby スクリプトをメソッドとして定義した無名のモジュールを返します。
 
 --- def_class(suplerklass=Object, methodname='erb')
+#@todo
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 #@# 使い途がなさそうだ…。
 
 --- set_eoutvar(compiler, eoutvar = '_erbout')
+#@todo
 
 Can be used to set eoutvar as described in ERB#new. It's probably
 easier to just use the constructor though, since calling this
@@ -178,6 +187,7 @@ method requires the setup of an ERB compiler object.
 #@since 1.8.1
 --- filename
 --- filename=
+#@todo
 
 The optional filename argument passed to [[m:Kernel#eval]] when the ERB code
 is run.
@@ -189,12 +199,14 @@ is run.
 
 --- html_escape(s)
 --- h(s)
+#@todo
 
 HTML の &"<> をエスケープします
 ([[m:CGI.escapeHTML]]とほぼ同じです)。
 
 --- url_encode(s)
 --- u(s)
+#@todo
 
 文字列を URL エンコードします
 ([[m:CGI.escape]]とほぼ同じです)。
@@ -204,6 +216,7 @@ HTML の &"<> をエスケープします
 == Module Functions
 
 --- def_erb_method(methodname, erb)
+#@todo
 
 self に erb のスクリプトをメソッドとして定義します。メソッド名は methodname で指定します。
 erb が文字列の時、そのファイルを読み込み ERB で変換したのち、メソッドとして定義します。

@@ -24,6 +24,7 @@
 --- new([superclass])
 #@since 1.8.0
 --- new([superclass]) {|klass| ... }
+#@todo
 #@end
 
 新しく名前の付いていない superclass のサブクラスを生成します。
@@ -57,12 +58,14 @@ superclass が省略された時にはObject のサブクラスを生成
 
 #@since 1.8.0
 --- allocate
+#@todo
 
 クラスのインスタンスを生成して返します。生成したオブジェクトは
 クラスのインスタンスであること以外には何も特性を持ちません。
 #@end
 
 --- new(*args, &block)
+#@todo
 
 クラスのインスタンスを生成して返します。
 このメソッドの引数はブロック引数も含め [[m:Object#initialize]] に渡されます。
@@ -73,16 +76,19 @@ Ruby 1.8.x からは、new は [[m:Class#allocate]] でインスタンスを生成し、
 #@end
 
 --- superclass
+#@todo
 
 クラスのスーパークラスを返します。
 
 --- _load(str)
+#@todo
 
 [[m:Object#_dump]]を参照。
 
 == Private Instance Methods
 
 --- inherited(subclass)
+#@todo
 
 クラスのサブクラスが定義された時、新しく生成されたサブクラスを引数
 にインタプリタから呼び出されます。このメソッドが呼ばれるタイミングは

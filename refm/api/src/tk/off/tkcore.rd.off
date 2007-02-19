@@ -17,16 +17,20 @@
 == クラスメソッド:
 
 --- TkCore.callback(arg)
+#@todo
 
 == メソッド:
 
 --- TkCore#callback_break
+#@todo
     例外((<TkCallbackBreak>))を発生させます。
 
 --- TkCore#callback_continue
+#@todo
     例外((<TkCallbackContinue>))を発生させます。
 
 --- TkCore#after(ms, cmd=Proc.new)
+#@todo
     ((|ms|))ミリ秒後に、コールバック関数((|cmd|))を実行します。((|ms|))が
     文字列(({"idle"}))である場合、スクリプトが入力待ちなどアイドル状態になっ
     たときに((|cmd|))を実行します。
@@ -35,23 +39,31 @@
     い場合は((<TkAfter>))を使用してください。
 
 --- TkCore#after_idle(cmd=Proc.new)
+#@todo
     ((<TkCore#after>))(({('idle', cmd)})) と同じです。
 
 --- TkCore#clock_clicks(ms=nil)
+#@todo
 
 --- TkCore#clock_format(clk, form=nil)
+#@todo
 
 --- TkCore#clock_formatGMT(clk, form=nil)
+#@todo
 
 --- TkCore#clock_scan(str, base=nil)
+#@todo
 
 --- TkCore#clock_scanGMT(str, base=nil)
+#@todo
 
 --- TkCore#clock_seconds
+#@todo
     (({Time.now.to_i})) のTcl版です。このメソッドはあまり必要ないでしょう。
 
 --- TkCore#scaling
 --- TkCore#scaling(scale)
+#@todo
     ((<ルートウィジェット>))が表示されるディスプレイのスケールを参照／設定
     します。スケールはポイント(1/72インチ)あたりのピクセル数です。
 
@@ -62,9 +74,11 @@
 
 --- TkCore#scaling_displayof(win)
 --- TkCore#scaling_displayof(win, scale)
+#@todo
     ((|win|))を表示しているディスプレイのスケールを参照／設定します。
 
 --- TkCore#appname(name=None)
+#@todo
     アプリケーション名を((|name|))にします。大文字で始まるアプリケーション
     名は許されません((-とマニュアルに書いているが指定はできるみたい-))。
 
@@ -79,14 +93,19 @@
     アプリケーション名のデフォルトは"tk"です。
 
 --- TkCore#appsend(interp, async, *args)
+#@todo
 
 --- TkCore#rb_appsend(interp, async, *args)
+#@todo
 
 --- TkCore#appsend_displayof(interp, async, *args)
+#@todo
 
 --- TkCore#rb_appsend_displayof(interp, async, *args)
+#@todo
 
 --- TkCore#info(*args)
+#@todo
     Tclインタプリタの内部情報を返します。
 
     第1引数で情報の種類を指定します。これは以下のいずれかの文字列です。残
@@ -114,11 +133,13 @@
       *"vars"
 
 --- TkCore#mainloop
+#@todo
     Ruby/TKのメインループを実行します。イベントの監視とコールバック関数の
     実行はすべてこのメソッドの内部で行われます。従って、Ruby/Tkスクリプト
     の最後はこのメソッドの呼び出しになります。
 
 --- TkCore#event_generate(window, context, keys=nil)
+#@todo
     ((<イベント>))((|context|))を((|window|))で発生させます。
 
       require "tk"
@@ -186,6 +207,7 @@
      *"y"
 
 --- TkCore#messageBox(keys)
+#@todo
     引数((|keys|))には以下をキーにしたハッシュを指定します。
 
      *"default"
@@ -197,6 +219,7 @@
 
 --- TkCore#getOpenFile(keys=nil)
 --- TkCore#getSaveFile(keys=nil)
+#@todo
     ロード／セーブ用にファイルを選択するダイアログボックスです。
 
     引数((|keys|))には以下をキーにしたハッシュを指定します。
@@ -212,6 +235,7 @@
     文字列(({""}))を返します。
 
 --- TkCore#chooseColor(keys=nil)
+#@todo
     色を選択するためのダイアログボックスです。
 
     引数((|keys|))には以下をキーにしたハッシュを指定します。
@@ -224,14 +248,17 @@
     セルされた場合は空文字列(({""}))を返します。
 
 --- TkCore#chooseDirectory(keys = nil)
+#@todo
 
 --- TkCore#tk_call(*args)
+#@todo
     引数((|args|))を((<TkComm#_get_eval_string>))メソッドでTcl文字列に変換
     し、Tcl/Tkコマンドとして実行します。
 
 == 定数:
 
 --- TkCore::INTERP
+#@todo
     Tcl/Tkインタプリタ(((<TclTkIp>))のインスタンス)です。
 
 =end

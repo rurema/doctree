@@ -56,6 +56,7 @@ Thread を使えばもっと短くなります。
 
 --- new([host, ]service)
 --- open([host, ]service)
+#@todo
 
 新しいサーバー接続をオープンします。service は
 /etc/services (または NIS) に登録されているサービ
@@ -68,6 +69,7 @@ host に指定できる形式は[[m:socket#ホスト指定形式]]を見てください。
 == Instance Methods
 
 --- accept
+#@todo
 
 クライアントからの接続要求を受け付け、接続した
 [[c:TCPSocket]] のインスタンスを返します。
@@ -83,6 +85,7 @@ host に指定できる形式は[[m:socket#ホスト指定形式]]を見てください。
 
 #@if (version >= "1.8.5")
 --- accept_nonblock
+#@todo
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:accept(2)]] を呼び出します。
@@ -95,6 +98,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
 #@if (version >= "1.8.0")
 --- listen(backlog)
+#@todo
 
 [[man:listen(2)]] を実行します。
 ([[m:Socket#listen]]と同じ)
@@ -108,6 +112,7 @@ TCPServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
 #@if (version >= "1.8.0")
 --- sysaccept
+#@todo
 
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [[m:TCPServer#accept]] と同じです。

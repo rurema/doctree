@@ -6,62 +6,77 @@
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- verify_callback
 --- verify_callback=(proc)
+#@todo
 
 --- error_string
+#@todo
 
 verify を呼び出した時のエラー内容を述べた文字列です。エラーでない場合は、"ok" がセットされます。verify を一度も呼び出していない時は nil です。
 
 --- error
+#@todo
 
 [[c:OpenSSL::X509]] を参照してください。
 
 --- flags=(flags)
+#@todo
 
 --- chain
+#@todo
 
 最後に verify(cert) した証明書を出発点とするルート CA 証明書までの証明書のチェーンです。OpenSSL::X509::Certificate オブジェクトの配列です。verify を一度も呼び出していない時は nil を返します。証明書の順序は以下の通りです。
 
   [証明書, 下位 CA 証明書, 中間 CA 証明書, ... , ルート CA 証明書]
 
 --- purpose=(purpose)
+#@todo
 
 証明書の使用目的を設定します。verify では検証対象の証明書がこの目的に使えるかどうかも検証します。[[c:OpenSSL::X509]] の定数を参照してください。
 
 --- trust=(trust)
+#@todo
 
 [[c:OpenSSL::X509]] の定数を参照してください。
 
 --- add_path(path)
+#@todo
 
 パスに含まれる証明書を信頼する証明書としてストレージに加えます。
 
 --- add_file(file)
+#@todo
 
 ファイルに含まれる証明書を信頼する証明書としてストレージに加えます。
 
 --- add_cert(cert)
+#@todo
 
 証明書を信頼する証明書としてストレージに加えます。
 
 --- add_crl(crl)
+#@todo
 
 信頼する CRL(証明書失効リスト) [[c:OpenSSL::X509::CRL]] オブジェクトをストレージに加えます。
 
 --- verify(cert, chain = nil)
+#@todo
 
 証明書 cert をストレージに存在する CA 証明書で検証します。
 
 #@since 1.8.2
 --- time=
+#@todo
 #@end
 
 #@since 1.8.3
 --- set_default_paths
+#@todo
 #@end
 
 = class OpenSSL::X509::Store < OpenSSL::OpenSSLError

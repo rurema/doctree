@@ -5,6 +5,7 @@
 == Class Methods
 
 --- new(height, width, y, x)
+#@todo
 
 画面の座標 (x,y) を左上端とし、幅 width
 高さ height とする curses のトップレベルウィンドウを
@@ -14,109 +15,132 @@
 == Instance Methods
 
 --- subwin(height, width, y, x)
+#@todo
 
 画面の座標 (x,y) を左上端とし、幅 width
 高さ height とするサブウィンドウを作成し、
 それを表現する Curses::Window オブジェクトを返します。
 
 --- close
+#@todo
 
 ウィンドウを閉じます。
 以降のこのウィンドウオブジェクトに対する操作は例外を発生します。
 
 --- clear
+#@todo
 
 ウィンドウの表示を消去します。
 この操作は即座に実行されます。
 
 --- refresh
+#@todo
 
 ウィンドウの表示を更新します。
 
 --- box(ver_char, hor_char)
+#@todo
 
 縦の線に ver_char、横の線に hor_char を使い
 ウィンドウに沿って箱を書きます。線は普通にウィンドウ内に
 書かれるだけなので上書きしないよう注意してください。
 
 --- move(y, x)
+#@todo
 
 ウィンドウを (x,y) に移動します。
 
 親ウィンドウからはみだす位置を指定すると無視されます。
 
 --- setpos(y, x)
+#@todo
 
 ウィンドウ内の (x,y) にカーソルを移動します。
 
 --- cury
+#@todo
 
 ウィンドウ内におけるカーソルの行番号を返します。
 一行目が 0 です。
 
 --- curx
+#@todo
 
 ウィンドウ内におけるカーソルの桁番号を返します。
 一桁目が 0 です。
 
 --- maxy
+#@todo
 
 移動可能な最大の y 座標を返します。
 表示可能な行 + 1 です。
 
 --- maxx
+#@todo
 
 移動可能な最大の x 座標を返します。
 表示可能なバイト数 + 1 です。
 
 --- begy
+#@todo
 
 親ウィンドウの中でウィンドウの左上がある y 座標を返します。
 始点は 0 です。
 
 --- begx
+#@todo
 
 親ウィンドウの中でウィンドウの左上がある x 座標を返します。
 始点は 0 です。
 
 --- standout
+#@todo
 
 以後書き込む文字を強調表示します。
 
 --- standend
+#@todo
 
 強調書き込みを終了します。
 
 --- inch
+#@todo
 
 ウィンドウのカーソル位置から 1 バイト読みとって返します。
 
 --- addch(ch)
+#@todo
 
 ウィンドウのカーソル位置に ch (1 バイト) を上書きします。
 
 --- insch(ch)
+#@todo
 
 ウィンドウのカーソル位置に ch (1 バイト) を挿入します。
 
 --- addstr(str)
 --- <<(str)
+#@todo
 
 ウィンドウのカーソル位置に文字列 str を上書きします。
 
 --- getch
+#@todo
 
 ウィンドウへの入力から 1 バイト読みこみます。
 
 --- getstr
+#@todo
 
 ウィンドウへの入力から一行読みこみます。
 
 --- delch
+#@todo
 
 ウィンドウのカーソル位置から 1 バイト消去します。
 
 --- deleteln
+#@todo
 
 ウィンドウの、カーソルがある行を消去します。
 
@@ -124,42 +148,62 @@
 #@# 以下、引数の数はあってるはず
 
 --- attroff(attrs)
+#@todo
 
 --- attron(attrs)
+#@todo
 
 --- attrset(attrs)
+#@todo
 
 --- bkgd(ch)
+#@todo
 
 --- bkgdset(ch)
+#@todo
 
 --- clrtoeol(color)
+#@todo
 
 --- color_set(color)
+#@todo
 
 --- getbkgd
+#@todo
 
 --- idlok(bf)
+#@todo
 
 --- insertln
+#@todo
 
 --- keypad(val)
+#@todo
 
 --- keypad=(val)
+#@todo
 
 --- nodelay=(val)
+#@todo
 
 --- noutrefresh
+#@todo
 
 --- resize(lin, col)
+#@todo
 
 --- scrl(n)
+#@todo
 
 --- scroll
+#@todo
 
 --- scrollok(bf)
+#@todo
 
 --- setscrreg(top, bottom)
+#@todo
 
 --- timeout=(delay)
+#@todo
 

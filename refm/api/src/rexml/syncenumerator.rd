@@ -6,12 +6,15 @@ include Enumerable
 == Class Methods
 
 --- new(*enums)
+#@todo
 
 == Instance Methods
 
 --- size
 --- length
+#@todo
 
 --- each {|*objects| ... }
+#@todo
 
 #@end

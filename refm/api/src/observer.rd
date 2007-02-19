@@ -32,6 +32,7 @@ Observable#notify_observers の引数は
 == Instance Methods
 
 --- add_observer(observer)
+#@todo
 
 オブザーバを追加します。
 オブザーバは update メソッドを備えている必要があります。
@@ -40,26 +41,32 @@ observer が update メソッドを持たないときは
 例外 NoMethodError が発生します。
 
 --- delete_observer(observer)
+#@todo
 
 オブザーバを削除します。
 
 --- delete_observers
+#@todo
 
 オブザーバをすべて削除します。
 
 --- count_observers
+#@todo
 
 オブザーバの数を返します。
 
 --- changed(state = true)
+#@todo
 
 更新フラグを立てます。
 
 --- changed?
+#@todo
 
 更新フラグの状態を返します。
 
 --- notify_observers(*arg)
+#@todo
 
 更新フラグが立っていたら、オブザーバの update メソッドを呼び出します。
 与えられた引数はその update メソッドに渡されます。

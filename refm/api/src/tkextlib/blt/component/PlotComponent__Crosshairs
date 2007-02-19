@@ -3,44 +3,54 @@
 == Class Methods
 
 --- new(chart, keys = {})
+#@todo
 
 
 
 == Instance Methods
 
 --- cget(option)
+#@todo
 
 
 
 --- configinfo(key = nil)
+#@todo
 
 
 
 --- configure(key, value = None)
+#@todo
 
 
 
 --- current_configinfo(key = nil)
+#@todo
 
 
 
 --- id
+#@todo
 
 
 
 --- off
+#@todo
 
 
 
 --- on
+#@todo
 
 
 
 --- to_eval
+#@todo
 
 
 
 --- toggle
+#@todo
 
 
 

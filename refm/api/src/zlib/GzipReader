@@ -20,6 +20,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 == Class Methods
 
 --- new(io)
+#@todo
 
 io と関連付けられた GzipReader オブジェクトを作成します。
 GzipReader オブジェクトは io からデータを逐次リードして
@@ -30,6 +31,7 @@ GzipReader オブジェクトは io からデータを逐次リードして
 発生します。
 
 --- wrap(io) {|gz| ... }
+#@todo
 
 と関連付けられた GzipReader オブジェクトを作成し、
 それを引数としてブロックを実行します。
@@ -40,6 +42,7 @@ GzipReader オブジェクトは io からデータを逐次リードして
 
 --- open(filename)
 --- open(filename) {|gz| ... }
+#@todo
 
 filename で指定されるファイルを gzip ファイルとして
 オープンします。GzipReader オブジェクトを返します。
@@ -50,12 +53,14 @@ filename で指定されるファイルを gzip ファイルとして
 
 --- eof
 --- eof?
+#@todo
 
 圧縮データの終端に達した場合真を返します。
 フッターが読み込まれていなくても真を返すことに注意して下さい。
 
 --- pos
 --- tell
+#@todo
 
 現在までに展開したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
@@ -75,6 +80,7 @@ filename で指定されるファイルを gzip ファイルとして
 --- readpartial(maxlen[, outbuf])
 #@end
 --- ungetc(char)
+#@todo
 
 IO クラスの同名メソッドと同じですが、gzip ファイル中に
 エラーがあった場合 [[c:Zlib::Error]] 例外や
@@ -96,12 +102,14 @@ Zlib::GzipFile::LengthError 例外を発生させます。
     呼び出された時。
 
 --- rewind
+#@todo
 
 ファイルポインタを [[m:Zlib::GzipReader#GzipReader.new]] を呼び出した直後の
 時点に戻します。関連付けられている IO オブジェクトに
 seek メソッドが定義されている必要があります。
 
 --- unused
+#@todo
 
 gzip フォーマットの解析のために読み込んだ余剰のデータを返します。
 gzip ファイルが最後まで解析されていない場合は nil を返します。

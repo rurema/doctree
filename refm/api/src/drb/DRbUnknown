@@ -16,6 +16,7 @@ attribute. The marshalled object is held in the buf attribute.
 == Class Methods
 
 --- new(err, buf)
+#@todo
 
 Create a new DRbUnknown object.
 
@@ -27,10 +28,12 @@ unmarshalled object.
 == Instance Methods
 
 --- exception()
+#@todo
 
 Create a DRbUnknownError exception containing this object. 
 
 --- reload()
+#@todo
 
 Attempt to load the wrapped marshalled object again.
 

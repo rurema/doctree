@@ -16,12 +16,14 @@ and DRbNameIdConv in sample/name.rb in the full drb distribution.
 == Instance Methods
 
 --- to_id(obj)
+#@todo
 
 Convert an object into a reference id.
 This implementation returns the object's id in the local object
 space.
 
 --- to_obj(ref)
+#@todo
 
 Convert an object reference id to an object.
 This implementation looks up the reference id in the local object

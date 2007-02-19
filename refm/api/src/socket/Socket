@@ -15,6 +15,7 @@
 
 --- open(domain, type, protocol)
 --- new(domain, type, protocol)
+#@todo
 
 ¿·¤·¤¤¥½¥±¥Ã¥È¤òÀ¸À®¤·¤Þ¤¹¡£domain¡¢type¡¢
 protocol ¤Ï¥¤¥ó¥¯¥ë¡¼¥É¥Õ¥¡¥¤¥ë¤Ë¤¢¤ëÄê¿ô¤Ç»ØÄê¤·¤Þ
@@ -35,11 +36,13 @@ Stevens ¤Î¡ÖUNIX ¥Í¥Ã¥È¥ï¡¼¥¯¥×¥í¥°¥é¥ß¥ó¥°Âè2ÈÇ Vol.1¡×4.2Àá¤Ë½Ò¤Ù¤é¤ì¤Æ¤¤¤ë¤è¤
 
 #@if (version < "1.8.0")
 --- for_fd(fd)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¥Ç¥£¥¹¥¯¥ê¥×¥¿ fd ¤ËÂÐ¤¹¤ë¿·¤·¤¤¥½¥±¥Ã¥È¤òÀ¸À®¤·¤Þ¤¹¡£
 #@end
 
 --- getaddrinfo(nodename, servname[, family[, socktype[, protocol[, flags]]]])
+#@todo
 
 [[RFC:2553]]¤ÇÄêµÁ¤µ¤ì¤¿
 getaddrinfo() ¤Îµ¡Ç½¤òÄó¶¡¤¹¤ë¥¯¥é¥¹¥á¥½¥Ã¥É¡£¤³¤Î´Ø¿ô¤Ï
@@ -99,6 +102,7 @@ IP ¤Î¥Ð¡¼¥¸¥ç¥ó¤Ë°ÍÂ¸¤·¤Ê¤¤¥×¥í¥°¥é¥à¤ò½ñ¤¯¤¿¤á¤ÎÉ¸½àÅª¤Ê API ¤Ç¤¹¡£
   #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 3, 0]]
 
 --- getnameinfo(sa[, flags])
+#@todo
 
 [[RFC:2553]] ¤ÇÄêµÁ¤µ¤ì¤¿ getnameinfo() ¤Îµ¡Ç½¤òÄó¶¡¤¹¤ë¥¯
 ¥é¥¹¥á¥½¥Ã¥É¡£ gethostbyaddr() ¤ä getservbyport() ¤ÎÂå
@@ -162,6 +166,7 @@ Socket::NI_DGRAM
   #=> ["localhost", "ftp"]
 
 --- gethostbyaddr(host[, type])
+#@todo
 
 sockaddr ¹½Â¤ÂÎ¤ò¥Ñ¥Ã¥¯¤·¤¿Ê¸»úÎó¤«¤é¥Û¥¹¥È¾ðÊó¤òÊÖ¤·¤Þ¤¹¡£
 ¥Û¥¹¥È¾ðÊó¤Î¹½Â¤¤Ï [[m:Socket.gethostbyname]] ¤ÈÆ±¤¸¤Ç¤¹¡£
@@ -169,6 +174,7 @@ type ¤Ë¤Ï¡¢¥¢¥É¥ì¥¹¥¿¥¤¥×(¥Ç¥Õ¥©¥ë¥È¤Ï
 Socket::AF_INET)¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- gethostbyname(host)
+#@todo
 
 ¥Û¥¹¥ÈÌ¾¤Þ¤¿¤Ï IP ¥¢¥É¥ì¥¹(»ØÄêÊýË¡¤Ë´Ø¤·¤Æ¤Ï
 [[m:socket#¥Û¥¹¥È»ØÄê·Á¼°]]¤ò»²¾È)
@@ -194,6 +200,7 @@ Socket.unpack_sockaddr_in ¤Ç unpack ¤Ç¤­¤Þ¤¹¡£
   "210.251.121.214"
 
 --- gethostname
+#@todo
 
 ¥·¥¹¥Æ¥à¤ÎÉ¸½à¤Î¥Û¥¹¥ÈÌ¾¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
@@ -206,6 +213,7 @@ Socket.unpack_sockaddr_in ¤Ç unpack ¤Ç¤­¤Þ¤¹¡£
   p Socket.gethostname   #=> "helium.ruby-lang.org"
 
 --- getservbyname(service[, proto])
+#@todo
 
 service, proto¤ËÂÐ±þ¤¹¤ë¥Ý¡¼¥ÈÈÖ¹æ¤òÊÖ
 ¤·¤Þ¤¹¡£proto¤Î¾ÊÎ¬ÃÍ¤Ï"tcp"¤Ç¤¹¡£
@@ -213,6 +221,7 @@ service, proto¤ËÂÐ±þ¤¹¤ë¥Ý¡¼¥ÈÈÖ¹æ¤òÊÖ
 #@if (version >= "1.8.0")
 --- sockaddr_in(port, host)
 --- pack_sockaddr_in(port, host)
+#@todo
 
 »ØÄê¤·¤¿¥¢¥É¥ì¥¹¤ò[[m:socket#¥½¥±¥Ã¥È¥¢¥É¥ì¥¹¹½Â¤ÂÎ¤ò pack ¤·¤¿Ê¸»úÎó]]
 ¤ÇÊÖ¤·¤Þ¤¹¡£port ¤Ï¡¢¥Ý¡¼¥ÈÈÖ¹æ¤òÉ½¤¹ [[c:Fixnum]] ¤¢¤ë¤¤¤Ï¡¢¥Ý¡¼¥È
@@ -230,6 +239,7 @@ service, proto¤ËÂÐ±þ¤¹¤ë¥Ý¡¼¥ÈÈÖ¹æ¤òÊÖ
 #@if (version >= "1.8.0")
 --- sockaddr_un(path)
 --- pack_sockaddr_un(path)
+#@todo
 
 »ØÄê¤·¤¿¥¢¥É¥ì¥¹¤ò[[m:socket#¥½¥±¥Ã¥È¥¢¥É¥ì¥¹¹½Â¤ÂÎ¤ò pack ¤·¤¿Ê¸»úÎó]]
 ¤ÇÊÖ¤·¤Þ¤¹¡£
@@ -243,12 +253,14 @@ service, proto¤ËÂÐ±þ¤¹¤ë¥Ý¡¼¥ÈÈÖ¹æ¤òÊÖ
 
 --- pair(domain, type, protocol)
 --- socketpair(domain, type, protocol)
+#@todo
 
 Áê¸ß¤Ë·ë¹ç¤µ¤ì¤¿¥½¥±¥Ã¥È¤Î¥Ú¥¢¤ò´Þ¤à2Í×ÁÇ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 °ú¿ô¤Î»ØÄê¤Ï Socket.open ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 #@if (version >= "1.8.0")
 --- unpack_sockaddr_in(sockaddr)
+#@todo
 
 [[m:socket#¥½¥±¥Ã¥È¥¢¥É¥ì¥¹¹½Â¤ÂÎ¤ò pack ¤·¤¿Ê¸»úÎó]]¤ò
 unpack ¤·¤¿¥¢¥É¥ì¥¹¤òÊÖ¤·¤Þ¤¹¡£ÊÖ¤µ¤ì¤ëÃÍ¤Ï [port, ipaddr]
@@ -265,6 +277,7 @@ unpack ¤·¤¿¥¢¥É¥ì¥¹¤òÊÖ¤·¤Þ¤¹¡£ÊÖ¤µ¤ì¤ëÃÍ¤Ï [port, ipaddr]
 
 #@if (version >= "1.8.0")
 --- unpack_sockaddr_un(sockaddr)
+#@todo
 
 [[m:socket#¥½¥±¥Ã¥È¥¢¥É¥ì¥¹¹½Â¤ÂÎ¤ò pack ¤·¤¿Ê¸»úÎó]]¤ò
 unpack ¤·¤¿¥½¥±¥Ã¥È¥Ñ¥¹Ì¾¤ò¤òÊÖ¤·¤Þ¤¹¡£
@@ -279,6 +292,7 @@ unpack ¤·¤¿¥½¥±¥Ã¥È¥Ñ¥¹Ì¾¤ò¤òÊÖ¤·¤Þ¤¹¡£
 == Instance Methods
 
 --- accept
+#@todo
 
 ¿·¤·¤¤ÀÜÂ³¤ò¼õ¤±ÉÕ¤±¤Æ¡¢¿·¤·¤¤ÀÜÂ³¤ËÂÐ¤¹¤ë¥½¥±¥Ã¥È¤È¥¢¥É¥ì¥¹¤Î
 ¥Ú¥¢¤òÊÖ¤·¤Þ¤¹¡£[[man:accept(2)]] ¤ò»²¾È¡£
@@ -295,6 +309,7 @@ unpack ¤·¤¿¥½¥±¥Ã¥È¥Ñ¥¹Ì¾¤ò¤òÊÖ¤·¤Þ¤¹¡£
 
 #@if (version >= "1.8.5")
 --- accept_nonblock
+#@todo
 
 ¥½¥±¥Ã¥È¤ò¥Î¥ó¥Ö¥í¥Ã¥­¥ó¥°¥â¡¼¥É¤ËÀßÄê¤·¤¿¸å¡¢
 [[man:accept(2)]] ¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
@@ -306,6 +321,7 @@ EAGAIN, EINTR ¤ò´Þ¤áÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 #@end
 
 --- bind(my_sockaddr)
+#@todo
 
 ¥½¥±¥Ã¥È¤ò my_sockaddr ¤Ë·ë¹ç¤·¤Þ¤¹¡£[[man:bind(2)]]
 ¤ÈÆ±¤¸Æ¯¤­¤ò¤·¤Þ¤¹¡£my_sockaddr ¤Ï
@@ -315,6 +331,7 @@ EAGAIN, EINTR ¤ò´Þ¤áÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 0 ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- connect(server_sockaddr)
+#@todo
 
 [[man:connect(2)]] ¤ÈÆ±¤¸Æ¯¤­¤ò¤·¤Þ¤¹¡£server_sockaddr ¤Ï¡¢
 [[m:socket#¥½¥±¥Ã¥È¥¢¥É¥ì¥¹¹½Â¤ÂÎ¤ò pack ¤·¤¿Ê¸»úÎó]]
@@ -334,6 +351,7 @@ EAGAIN, EINTR ¤ò´Þ¤áÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 
 #@if (version >= "1.8.5")
 --- connect_nonblock(server_sockaddr)
+#@todo
 
 ¥½¥±¥Ã¥È¤ò¥Î¥ó¥Ö¥í¥Ã¥­¥ó¥°¥â¡¼¥É¤ËÀßÄê¤·¤¿¸å¡¢
 [[man:connect(2)]] ¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
@@ -345,12 +363,14 @@ EINPROGRESS ¤ò´Þ¤áÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 #@end
 
 --- listen(backlog)
+#@todo
 
 [[man:listen(2)]] ¤ÈÆ±¤¸Æ¯¤­¤ò¤·¤Þ¤¹¡£
 
 0 ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- recvfrom(maxlen[, flags])
+#@todo
 
 recv ¤ÈÆ±ÍÍ¤Ë¥½¥±¥Ã¥È¤«¤é¥Ç¡¼¥¿¤ò¼õ¤±¼è¤ê¤Þ¤¹¤¬¡¢
 Ìá¤êÃÍ¤ÏÊ¸»úÎó¤ÈÁê¼ê¥½¥±¥Ã¥È¤Î¥¢¥É¥ì¥¹¤Î¥Ú¥¢¤Ç¤¹¡£°ú¿ô¤Ë¤Ä¤¤
@@ -369,6 +389,7 @@ recv ¤ÈÆ±ÍÍ¤Ë¥½¥±¥Ã¥È¤«¤é¥Ç¡¼¥¿¤ò¼õ¤±¼è¤ê¤Þ¤¹¤¬¡¢
 
 #@if (version >= "1.8.5")
 --- recvfrom_nonblock(maxlen[, flags])
+#@todo
 
 ¥½¥±¥Ã¥È¤ò¥Î¥ó¥Ö¥í¥Ã¥­¥ó¥°¥â¡¼¥É¤ËÀßÄê¤·¤¿¸å¡¢
 [[man:recvfrom(2)]] ¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
@@ -381,6 +402,7 @@ EAGAIN, EINTR ¤ò´Þ¤áÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 
 #@if (version >= "1.8.0")
 --- sysaccept
+#@todo
 
 ÀÜÂ³¤·¤¿¥¯¥é¥¤¥¢¥ó¥È¤Î¥Õ¥¡¥¤¥ëµ­½Ò»Ò¤È¥¢¥É¥ì¥¹¤Î¥Ú¥¢¤òÊÖ¤¹¤³¤È¤ò½ü
 ¤±¤Ð [[m:Socket#accept]] ¤ÈÆ±¤¸¤Ç¤¹¡£

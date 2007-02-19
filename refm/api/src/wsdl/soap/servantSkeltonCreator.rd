@@ -7,14 +7,18 @@ require xsd/codegen
 == Class Methods
 
 --- new(definitions)
+#@todo
 
 == Instance Methods
 
 --- definitions
+#@todo
 
 --- dump(porttype = nil)
+#@todo
 
 
 == Private Instance Methods
 
 --- dump_porttype(name)
+#@todo

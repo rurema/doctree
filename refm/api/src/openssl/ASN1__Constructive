@@ -5,6 +5,7 @@ include Enumerable
 
 == Class Methods
 --- new(value, tag, tagging, tag_class)
+#@todo
 
 Constructive オブジェクトを生成します。
 
@@ -12,6 +13,7 @@ Constructive オブジェクトを生成します。
 
 --- tagging
 --- tagging=(tag)
+#@todo
 
 [[c:Symbol]] オブジェクト :IMPLICIT または :EXPLICIT のいずれかをとります。
 

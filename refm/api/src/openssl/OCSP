@@ -5,68 +5,100 @@
 == Constants
 
 --- NOCASIGN
+#@todo
 
 --- NOCERTS
+#@todo
 
 --- NOCHAIN
+#@todo
 
 --- NOCHECKS
+#@todo
 
 --- NODELEGATED
+#@todo
 
 --- NOEXPLICIT
+#@todo
 
 --- NOINTERN
+#@todo
 
 --- NOSIGS
+#@todo
 
 --- NOTIME
+#@todo
 
 --- NOVERIFY
+#@todo
 
 --- RESPID_KEY
+#@todo
 
 --- RESPONSE_STATUS_INTERNALERROR
+#@todo
 
 --- RESPONSE_STATUS_MALFORMEDREQUEST
+#@todo
 
 --- RESPONSE_STATUS_SIGREQUIRED
+#@todo
 
 --- RESPONSE_STATUS_SUCCESSFUL
+#@todo
 
 --- RESPONSE_STATUS_TRYLATER
+#@todo
 
 --- RESPONSE_STATUS_UNAUTHORIZED
+#@todo
 
 --- REVOKED_STATUS_AFFILIATIONCHANGED
+#@todo
 
 --- REVOKED_STATUS_CACOMPROMISE
+#@todo
 
 --- REVOKED_STATUS_CERTIFICATEHOLD
+#@todo
 
 --- REVOKED_STATUS_CESSATIONOFOPERATION
+#@todo
 
 --- REVOKED_STATUS_KEYCOMPROMISE
+#@todo
 
 --- REVOKED_STATUS_NOSTATUS
+#@todo
 
 --- REVOKED_STATUS_REMOVEFROMCRL
+#@todo
 
 --- REVOKED_STATUS_SUPERSEDED
+#@todo
 
 --- REVOKED_STATUS_UNSPECIFIED
+#@todo
 
 --- TRUSTOTHER
+#@todo
 
 --- V_CERTSTATUS_GOOD
+#@todo
 
 --- V_CERTSTATUS_REVOKED
+#@todo
 
 --- V_CERTSTATUS_UNKNOWN
+#@todo
 
 --- V_RESPID_KEY
+#@todo
 
 --- V_RESPID_NAME
+#@todo
 
 = class OpenSSL::OCSP::OCSPError < Object
 
@@ -75,59 +107,80 @@
 == Instance Methods
 
 --- add_nonce
+#@todo
 
 --- add_status
+#@todo
 
 --- copy_nonce
+#@todo
 
 --- sign
+#@todo
 
 --- status
+#@todo
 
 --- verify
+#@todo
 
 = class OpenSSL::OCSP::CertificateId < Object
 
 == Instance Methods
 
 --- cmp
+#@todo
 
 --- cmp_issuer
+#@todo
 
 --- serial
+#@todo
 
 = class OpenSSL::OCSP::Request < Object
 
 == Instance Methods
 
 --- add_certid
+#@todo
 
 --- add_nonce
+#@todo
 
 --- certid 
+#@todo
 
 --- check_nonce
+#@todo
 
 --- sign
+#@todo
 
 --- to_der
+#@todo
 
 --- verify
+#@todo
 
 = class OpenSSL::OCSP::Response < Object
 
 == Class Methods
 
 --- create
+#@todo
 
 == Instance Methods
 
 --- basic
+#@todo
 
 --- status 
+#@todo
 
 --- status_string
+#@todo
 
 --- to_der
+#@todo
 
 #@end

@@ -7,8 +7,3 @@ DRb のプロトコルとして SSL/TLS 上で通信する drbssl が使えるようになります。
                      {:SSLCertName => [["CN","fqdn.example.com"]]})
 
 #@todo
-
-
-
-
-

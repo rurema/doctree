@@ -17,11 +17,13 @@ Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
 == クラスメソッド:
 
 --- TclTkIp.new
+#@todo
     Tcl/Tk インタプリタオブジェクトを生成します。
 
 == メソッド:
 
 --- TclTkIp#_eval(str)
+#@todo
     文字列((|str|))で指定した任意の Tcl/Tk スクリプトを実行します。実行結
     果を文字列で返します。
 
@@ -36,6 +38,7 @@ Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
       tcltk.mainloop
 
 --- TclTkIp#_invoke(cmd, *args)
+#@todo
     任意の Tcl/Tk コマンド((|cmd|))を((|args|))を引数に実行します。実行結
     果を文字列で返します。
 
@@ -48,10 +51,12 @@ Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
       tcltk.mainloop
 
 --- TclTkIp#_return_value
+#@todo
     直前に実行した ((<TclTkIp#_invoke>))、((<TclTkIp#_eval>))が正常に終了した場合、0を返し
     ます。
 
 --- TclTkIp#mainloop
+#@todo
     Tcl/Tk のメインループを実行します。((<TclTkLib.mainloop>))と同じです。
 
     以下のように、インタプリタごとにメインループを実行することができます．
@@ -73,15 +78,19 @@ Ruby/Tkプログラミングにおいてこのクラスの存在を意識する必要はありませ
         sleep
 
 --- TclTkIp#_toUTF8(str, encodename)
+#@todo
 
 --- TclTkIp#_fromUTF8(str, encodename)
+#@todo
 
 以下のメソッドは Tcl/Tk バージョンが 8.1 以降(日本語ローカライズなし)の
 場合に定義されます。また、このとき _eval, _invoke は，引数と戻り値が
 UTF-8とencodingで指定した文字列との間で相互変換されるよう再定義されます。
 
 --- TclTkIp#encoding
+#@todo
 
 --- TclTkIp#encoding= val
+#@todo
 
 =end

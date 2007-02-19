@@ -5,12 +5,15 @@ require tk
 == Constants
 
 --- TkCommandNames
+#@todo
 #@# = ['label'.freeze].freeze
 
 --- WidgetClassName
+#@todo
 #@# = 'Label'.freeze
 
 --- WidgetClassNames
+#@todo
 #@# [WidgetClassName] = self
 
 
@@ -18,6 +21,7 @@ require tk
 
 #@if(version == "1.8.2")
 --- textvariable
+#@todo
 
 #@end
 #@end

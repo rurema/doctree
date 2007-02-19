@@ -11,12 +11,14 @@ DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与える。
 
 --- define_struct(contents)
 --- struct(contents)
+#@todo
 
 構造体を定義します。
 contentsについては [[m:DL::Importable::Struct.new]] を参照せよ。
 
 --- define_union(contents)
 --- union(contents)
+#@todo
 
 共用体を定義します。
 contents については上記 define_struct と同様です。
@@ -34,6 +36,7 @@ Memoryクラスのインスタンスが生成できます。
 == Class Methods
 
 --- new(ptr, names, ty, len, enc, dec)
+#@todo
 
 DL::PtrData オブジェクト ptr の各メンバへアクセスするためのメソッドを
 動的に定義する。Struct, Union のインスタンスがこれらの情報を保持する。
@@ -41,10 +44,12 @@ DL::PtrData オブジェクト ptr の各メンバへアクセスするためのメソッドを
 == Instance Method
 
 --- to_ptr
+#@todo
 
 保持している DL::PtrData オブジェクトを返します。
 
 --- size
+#@todo
 
 DL::PtrData#size を呼びます。
 
@@ -55,6 +60,7 @@ DL::PtrData#size を呼びます。
 == Class Methods
 
 --- new(types, contents)
+#@todo
 
 types には DL::Types のインスタンス、contents には構造体の定義を
 以下のようにして与える。
@@ -72,25 +78,31 @@ types には DL::Types のインスタンス、contents には構造体の定義を
 == Instance Methods
 
 --- new(ptr)
+#@todo
 
 [[c:DL::PtrData]] オブジェクト ptr を保持する Memory オブジェクトを返します。
 
 --- malloc(size = nil)
+#@todo
 
 sizeバイトの領域を確保してDL::PtrDataオブジェクトを生成し、その
 DL::PtrDataオブジェクトを保持するMemoryオブジェクトを返します。
 
 --- size
+#@todo
 
 malloc されたサイズを返します。
 
 --- members
+#@todo
 
 構造体の要素名で構成される [[c:Array]] オブジェクトを返します。
 
 --- parse(contents)
+#@todo
 
 --- parse_elem(elem)
+#@todo
 
 
 = class DL::Importable::Internal::Union < DL::Importable::Internal::Struct
@@ -100,4 +112,5 @@ malloc されたサイズを返します。
 == Instance Methods
 
 --- new
+#@todo
 

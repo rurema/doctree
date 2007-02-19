@@ -5,11 +5,14 @@
 == Class Methods
 
 --- parse_media_type(str)
+#@todo
 
 --- create_media_type(charset)
+#@todo
 
 == Constants
 
 --- RUBY_VERSION_STRING
+#@todo
 
 #@end

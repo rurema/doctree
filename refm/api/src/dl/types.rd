@@ -17,6 +17,7 @@ improt dl
 == Instance Methods
 
 --- typealias(alias, type, enc, dec, struct_enc, struct_dec)
+#@todo
 
 型定義の追加を行う。
 
@@ -28,6 +29,7 @@ improt dl
 の組を追加する。
 
 --- encode_type(alias)
+#@todo
 
 DL モジュールで用いる型定義と Ruby のオブジェクトを
 DL モジュールで用いるデータへのエンコード用 Proc オブジェクトと、
@@ -43,23 +45,29 @@ Proc オブジェクトの組を次の通りの Array として返す。
 
 #@if (version >= "1.8.2")
 --- encode_argument_type(alias_type)
+#@todo
 
 --- encode_return_type(ty)
+#@todo
 
 --- encode_struct_type(alias_type)
+#@todo
 
 #@end
 
 #@if (version <= "1.8.1")
 --- encode_type(ty)
+#@todo
 
 #@end
 
 --- init_types
+#@todo
 
 == Constants
 
 --- TYPES
+#@todo
 
 インスタンス変数 @TYDEFS の初期値。
 

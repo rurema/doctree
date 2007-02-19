@@ -5,20 +5,27 @@
 == Class Methods
 
 --- digest
+#@todo
 
 --- hexdigest
+#@todo
 
 == Instance Methods
 
 --- <<
+#@todo
 
 --- digest
+#@todo
 
 --- hexdigest
+#@todo
 
 --- to_s
+#@todo
 
 --- update
+#@todo
 
 = class OpenSSL::HMACError < OpenSSL::OpenSSLError
 

@@ -26,56 +26,69 @@ SSL サーバーのためのクラス。[[c:TCPServer]] に対応します。
 == Class Methods
 
 --- new(svr, ctx)
+#@todo
 
 svr には [[c:TCPServer]] オブジェクトを、ctx には [[c:OpenSSL::SSL::SSLContext]] オブジェクトを取ります。
 
 == Instance Methods
 
 --- to_io
+#@todo
 
 [[c:TCPServer]] オブジェクトを返します。
 
 --- accept
+#@todo
 
 TLS/SSL クライアントから接続を受け付け、[[c:OpenSSL::SSL::SSLSocket]] オブジェクトを返します。start_immediately が真なら SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから SSLSocket オブジェクトを返します。
 
 --- addr
+#@todo
 
 [[m:IPSocket#addr]] と同様です。
 
 --- close
+#@todo
 
 接続を閉じます。
 
 --- closed?
+#@todo
 
 close していたら true を返します。
 
 --- do_not_reverse_lookup=(bool)
+#@todo
 
 [[m:BasicSocket#do_not_reverse_lookup]] と同様です。
 
 --- fcntl(cmd[, arg])
+#@todo
 
 [[m:IO#fcntl]] と同様です。
 
 --- getsockopt(level, optname)
+#@todo
 
 [[m:BasicSocket#getsockopt]] と同様です。
 
 --- listen
+#@todo
 
 [[m:TCPServer#listen]] と同様です。
 
 --- peeraddr
+#@todo
 
 [[m:IPSocket#peeraddr]] と同様です。
 
 --- setsockopt
+#@todo
 [[m:BasicSocket#setsockopt]] と同様です。
 
 --- start_immediately
 --- start_immediately=(bool)
+#@todo
 
 accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。デフォルトでは true です。
 #@end

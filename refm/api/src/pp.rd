@@ -58,6 +58,7 @@ pp による pretty-print された出力:
 = reopen Kernel
 == Private Instance Methods
 --- pp(obj)
+#@todo
 obj を $> に pretty print で出力します。
 nil を返します。
 
@@ -65,6 +66,7 @@ nil を返します。
 = reopen Object
 == Instance Methods
 --- pretty_inspect
+#@todo
 
 self を pp で表示したときの結果を文字列として返します。
 #@end
@@ -73,6 +75,7 @@ self を pp で表示したときの結果を文字列として返します。
 
 == Class Methods
 --- pp(obj[, out[, width]])
+#@todo
 obj を out に幅 width で pretty print します。
 
 out を省略した場合は、$> が指定されたものとみなされます。
@@ -90,15 +93,18 @@ PP.pp は out を返します。
      [:a, :b]]]]
 
 --- sharing_detection
+#@todo
 
 共有検出フラグを boolean すなわち true か false で返します。
 デフォルトは false です。
 
 --- sharing_detection=(boolean_value)
+#@todo
 
 共有検出フラグを設定します。
 
 --- singleline_pp(obj, out=$>)
+#@todo
 Outputs +obj+ to +out+ like PP.pp but with no indent and
 newline.
 
@@ -106,6 +112,7 @@ PP.singleline_pp returns +out+.
 
 == Instance Methods
 --- pp(obj)
+#@todo
 
 Object#pretty_print や Object#pretty_print_cycle を使って、
 obj を pretty print バッファに追加します。
@@ -115,12 +122,14 @@ obj がすでに出力されていたときには Object#pretty_print_cycle
 意味します。
 
 --- object_group(obj) { ... }
+#@todo
 
 以下と等価な働きをするもので簡便のために用意されています。
 
   group(1, '#<' + obj.class.name, '>') { ... }
 
 --- comma_breakable
+#@todo
 
 以下と等価な働きをするもので簡便のために用意されています。
 
@@ -131,6 +140,7 @@ obj がすでに出力されていたときには Object#pretty_print_cycle
 == Instance Methods
 
 --- pretty_print(pp)
+#@todo
 
 一般のオブジェクトのためのデフォルトの pretty print メソッドです。
 このメソッドはインスタンス変数を列挙するために
@@ -144,11 +154,13 @@ PP モジュールはあらかじめ定義された pretty_print() メソッドを
 簡便のために提供しています。
 
 --- pretty_print_cycle(pp)
+#@todo
 
 一般のオブジェクトがサイクルの一部であることが検出されたときのための
 デフォルトの pretty print メソッドです。
 
 --- pretty_print_instance_variables
+#@todo
 
 ソートされたインスタンス変数の名前の配列を返します。
 

@@ -3,9 +3,13 @@
 == Constants
 
 --- RequestField
+#@todo
 
 --- ResponseField
+#@todo
 
 --- InfoField
+#@todo
 
 --- AuthException
+#@todo

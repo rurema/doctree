@@ -31,6 +31,7 @@
 
 --- scanf(format)
 --- scanf(format) {|*ary| ...}
+#@todo
 
 ブロックを指定しない場合、見つかった文字列を format に従って変
 換し、そのオブジェクトの配列を返します。
@@ -66,7 +67,6 @@ that conversion.  Before conversion begins, most conversions skip
 white space in the input string; this white space is not counted
 against the field width.
 
-#@todo
 
   str = "1234"
   p str.scanf("%1s%3d")  #=> [["1", 234]]
@@ -114,6 +114,7 @@ against the field width.
 == Instance Methods
 --- scanf(format)
 --- scanf(format) {|*ary| ...}
+#@todo
 
 [[m:String#scanf]]も参照してください。
 
@@ -144,13 +145,13 @@ b) The last attempted spec/string did not match:
         no: save interim results and continue
   no: continue  [this state could be analyzed further]
 
-#@todo
 
 = reopen Kernel
 == Private Instance Methods
 
 --- scanf(format)
 --- scanf(format) {|*ary| ...}
+#@todo
 
 STDIN.scanf と同じです。
 [[m:IO#scanf]]、[[m:Stdin#scanf]]も参照してください。

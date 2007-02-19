@@ -24,18 +24,22 @@
 == モジュール関数:
 
 --- TkOption.add(pat, value, pri=None)
+#@todo
     新しいオプションをデータベースに追加します。
     データベースの変更結果は、その前に作成したオブジェクトには影響しません。
     ((|pri|))を指定することで、オプションの優先度を0から100までの数値に変
     更することができます。
 
 --- TkOption.clear
+#@todo
     オプションデータベースに対して行った変更をデフォルトに戻します。
 
 --- TkOption.get(win, name, klass)
+#@todo
     オプションデータベースから値を取得します。
 
 --- TkOption.readfile(file, pri=None)
+#@todo
     (({.Xdefaults})) などのリソースファイルを読み込みます。
 
 =end

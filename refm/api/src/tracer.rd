@@ -40,16 +40,19 @@ hoge.rbの実行をすべてトレース出力します。
 
 --- on
 --- on {...}
+#@todo
 
 トレース出力を開始。
 ブロックを与えられた場合はそのブロック内のみトレース出力を行う。
 
 --- off
+#@todo
 
 トレース出力を中断。
 
 --- set_get_line_procs(filename, proc)
 --- set_get_line_procs(filename) {|line| .... }
+#@todo
 
 あるファイルについて利用する、行番号からソースのその行の内容を返す
 手続きを指定する。何も指定しなければデフォルトの動作が利用される。
@@ -57,6 +60,7 @@ hoge.rbの実行をすべてトレース出力します。
 
 --- add_filter(proc)
 --- add_filter {|event, file, line, id, binding| .... }
+#@todo
 
 トレース出力するかどうかを決定するフィルタを追加する。
 何もフィルタを与えない場合はすべての行についてトレース情報が出力される。
@@ -107,10 +111,13 @@ hoge.rbの実行をすべてトレース出力します。
 --- verbose
 --- verbose?
 --- verbose=
+#@todo
 
 --- stdout
 --- stdout=
+#@todo
 
 == Constants
 
 --- EVENT_SYMBOL
+#@todo

@@ -19,6 +19,7 @@ File¥¯¥é¥¹¤¬¥¤¥ó¥¯¥ë¡¼¥É¤·¤Æ¤¤¤ë[[c:File::Constants]]¤ÏFile¥¯¥é¥¹¤Ë´Ø·¸¤¹¤ëÄê¿ô¤
 --- atime(filename)
 --- ctime(filename)
 --- mtime(filename)
+#@todo
 
 atime ¤ÏºÇ½ª¥¢¥¯¥»¥¹»þ¹ï¡¢
 ctime ¤Ï¾õÂÖ¤¬ºÇ¸å¤ËÊÑ¹¹¤µ¤ì¤¿»þ¹ï¡¢
@@ -30,6 +31,7 @@ mtime ¤ÏºÇ½ª¹¹¿·»þ¹ï¤ò [[c:Time]] ¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 ¤·¤Þ¤¹¡£
 
 --- basename(filename[, suffix])
+#@todo
 
 filename ¤Î°ìÈÖ¸å¤í¤Î¥¹¥é¥Ã¥·¥å¤ËÂ³¤¯Í×ÁÇ¤òÊÖ¤·¤Þ¤¹¡£¤â¤·¡¢
 °ú¿ô suffix ¤¬Í¿¤¨¤é¤ì¤Æ¡¢¤«¤Ä¤½¤ì¤¬ filename ¤ÎËöÈø¤Ë
@@ -51,6 +53,7 @@ ruby 1.8.0 ¤«¤é¤ÏFile.basename¤ÎÆ°ºî¤Ï [[url:http://www.unix-systems.org/version
 
 --- chmod(mode[, filename[, ...]])
 --- lchmod(mode[, filename[, ...]])
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¥â¡¼¥É¤ò mode ¤ËÊÑ¹¹¤·¤Þ¤¹¡£¥â¡¼¥É¤òÊÑ¹¹¤·¤¿¥Õ¥¡¥¤
 ¥ë¤Î¿ô¤òÊÖ¤·¤Þ¤¹¡£¥â¡¼¥É¤ÎÊÑ¹¹¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³°
@@ -65,6 +68,7 @@ lchmod ¤Ï¡¢¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ë´Ø¤·¤Æ¥ê¥ó¥¯¤½¤Î¤â¤Î¤Î
 
 --- chown(owner, group[, filename[, ...]])
 --- lchown(owner, group[, filename[, ...]])
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¥ª¡¼¥Ê¡¼¤È¥°¥ë¡¼¥×¤òÊÑ¹¹¤·¤Þ¤¹¡£¥¹¡¼¥Ñ¡¼¥æ¡¼¥¶¤À¤±¤¬¥Õ¥¡
 ¥¤¥ë¤Î¥ª¡¼¥Ê¡¼¤È¥°¥ë¡¼¥×¤òÊÑ¹¹¤Ç¤­¤Þ¤¹¡£ÊÑ¹¹¤ò¹Ô¤Ã¤¿¥Õ¥¡¥¤¥ë¤Î¿ô¤ò
@@ -82,6 +86,7 @@ lchown ¤Ï¡¢¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ë´Ø¤·¤Æ¥ê¥ó¥¯¤½¤Î¤â¤Î¤Î¥ª¡¼¥Ê¡¼¡¢
 
 --- delete(filename ... )
 --- unlink(filename ... )
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤òºï½ü¤·¤Þ¤¹¡£ºï½ü¤·¤¿¥Õ¥¡¥¤¥ë¤Î¿ô¤òÊÖ¤·¤Þ¤¹¡£ºï½ü¤Ë¼ºÇÔ¤·
 ¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
@@ -90,6 +95,7 @@ lchown ¤Ï¡¢¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ë´Ø¤·¤Æ¥ê¥ó¥¯¤½¤Î¤â¤Î¤Î¥ª¡¼¥Ê¡¼¡¢
 [[m:Dir.rmdir]] ¤ò»È¤¤¤Þ¤¹¡£
 
 --- dirname(filename)
+#@todo
 
 filename ¤Î°ìÈÖ¸å¤í¤Î¥¹¥é¥Ã¥·¥å¤è¤êÁ°¤òÊ¸
 »úÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£¥¹¥é¥Ã¥·¥å¤ò´Þ¤Þ¤Ê¤¤¥Õ¥¡¥¤¥ëÌ¾¤ËÂÐ¤·¤Æ¤Ï
@@ -112,6 +118,7 @@ File.dirname ¤ÎÆ°ºî¤Ï [[url:http://www.unix-systems.org/version3/online.html]] ¤
 #@end
 
 --- expand_path(path[, default_dir])
+#@todo
 
 path ¤òÀäÂÐ¥Ñ¥¹¤ËÅ¸³«¤·¤¿Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 path ¤¬ÁêÂÐ¥Ñ¥¹¤Ç¤¢¤ì¤Ð default_dir ¤ò´ð½à¤Ë¤·¤Þ¤¹¡£
@@ -127,6 +134,7 @@ default_dir ¤¬ nil ¤«¤Þ¤¿¤ÏÍ¿¤¨¤é¤ì¤Ê¤«¤Ã¤¿»þ¤Ë¤Ï¥«
   p File.expand_path("~foo")       #=> "/home/foo"
 
 --- extname(filename)
+#@todo
 
 ¥Õ¥¡¥¤¥ëÌ¾ filename ¤Î³ÈÄ¥»ÒÉôÊ¬(ºÇ¸å¤Î "." ¤ËÂ³¤¯Ê¸»úÎó)¤ò
 ÊÖ¤·¤Þ¤¹¡£¥Ç¥£¥ì¥¯¥È¥êÌ¾¤Ë´Þ¤Þ¤ì¤ë "." ¤ä¡¢¥Õ¥¡¥¤¥ëÌ¾ÀèÆ¬¤Î "."
@@ -145,6 +153,7 @@ default_dir ¤¬ nil ¤«¤Þ¤¿¤ÏÍ¿¤¨¤é¤ì¤Ê¤«¤Ã¤¿»þ¤Ë¤Ï¥«
 
 --- fnmatch(pattern, path[, flags])
 --- fnmatch?(pattern, path[, flags])
+#@todo
 
 ¥Õ¥¡¥¤¥ëÌ¾¤Î¥Ñ¥¿¡¼¥ó¥Þ¥Ã¥Á¤ò¹Ô¤¤¤Þ¤¹([[man:fnmatch(3)]])¡£
 path ¤¬ pattern ¤Ë¥Þ¥Ã¥Á¤¹¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£
@@ -203,6 +212,7 @@ FNM_DOTMATCH
   p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
 
 --- ftype(filename)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¥¿¥¤¥×¤òÉ½¤¹Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£Ê¸»úÎó¤Ï°Ê²¼¤Î¤¦¤Á¤Î¤¤¤º¤ì
 ¤«¤Ç¤¹¡£[[m:File.lstat(filename).ftype]] ¤ÈÆ±¤¸¤Ç
@@ -222,6 +232,7 @@ FNM_DOTMATCH
 #@#¤â¤·¤½¤Î¤è¤¦¤Ê¤³¤È¤¬¤¢¤ì¤Ð¡¢¥Ð¥°Êó¹ð¤ò¤·¤¿Êý¤¬ÎÉ¤¤¤È»×¤ï¤ì¤ë-))
 
 --- join(item, item, ...)
+#@todo
 
 File::SEPARATOR¤ò´Ö¤ËÆþ¤ì¤ÆÊ¸»úÎó¤òÏ¢·ë¤·¤Þ¤¹¡£
 
@@ -230,6 +241,7 @@ File::SEPARATOR¤ò´Ö¤ËÆþ¤ì¤ÆÊ¸»úÎó¤òÏ¢·ë¤·¤Þ¤¹¡£
 ¤ÈÆ±¤¸¤Ç¤¹¡£([[unknown:DOSISH ÂÐ±þ]]¤Ç´Ä¶­°ÍÂ¸¤Ë¤Ê¤ëÍ½Äê¤Ç¤¹¡£)
 
 --- link(old, new)
+#@todo
 
 old ¤ò»Ø¤¹ new ¤È¤¤¤¦Ì¾Á°¤Î¥Ï¡¼¥É¥ê¥ó¥¯¤ò
 À¸À®¤·¤Þ¤¹¡£old ¤Ï¤¹¤Ç¤ËÂ¸ºß¤·¤Æ¤¤¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
@@ -240,6 +252,7 @@ old ¤ò»Ø¤¹ new ¤È¤¤¤¦Ì¾Á°¤Î¥Ï¡¼¥É¥ê¥ó¥¯¤ò
 --- new(path[, mode [, perm]])
 --- open(path[, mode [, perm]])
 --- open(path[, mode [, perm]]) {|file| ... }
+#@todo
 
 path¤Ç»ØÄê¤µ¤ì¤ë¥Õ¥¡¥¤¥ë¤ò¥ª¡¼¥×¥ó¤·¡¢¥Õ¥¡¥¤¥ë¥ª¥Ö¥¸¥§¥¯¥È¤ò
 ÊÖ¤·¤Þ¤¹¡£¥Õ¥¡¥¤¥ë¤Î¥ª¡¼¥×¥ó¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]]
@@ -262,11 +275,13 @@ open() ¤Ï¥Ö¥í¥Ã¥¯¤ò»ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 #@end
 
 --- readlink(path)
+#@todo
 
 ¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Î¥ê¥ó¥¯Àè¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£¥ê¥ó¥¯¤ÎÆÉ¤ß¼è¤ê¤Ë
 ¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 
 --- rename(from, to)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤ÎÌ¾Á°¤òÊÑ¹¹¤·¤Þ¤¹¡£¥Ç¥£¥ì¥¯¥È¥ê¤¬°Û¤Ê¤ë¾ì¹ç¤Ë¤Ï°ÜÆ°¤â¹Ô¤¤
 ¤Þ¤¹¡£[[man:rename(2)]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£°ÜÆ°Àè¤Î¥Õ¥¡
@@ -276,6 +291,7 @@ open() ¤Ï¥Ö¥í¥Ã¥¯¤ò»ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 
 --- split(pathname)
+#@todo
 
 pathname ¤ò dirname ¤Èbasename ¤ËÊ¬³ä¤·¤Æ¡¢2 Í×
 ÁÇ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
@@ -286,6 +302,7 @@ pathname ¤ò dirname ¤Èbasename ¤ËÊ¬³ä¤·¤Æ¡¢2 Í×
 
 --- stat(filename)
 --- lstat(filename)
+#@todo
 
 filename ¤Î¾ðÊó¤ò´Þ¤à [[c:File::Stat]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·
 ¤ÆÊÖ¤·¤Þ¤¹¡£¾ðÊó¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯
@@ -300,6 +317,7 @@ File.stat ¤ÈÆ±¤¸¤Ç¤¹¡£
 [[m:File#lstat]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 --- symlink(old, new)
+#@todo
 
 old ¤Ø¤Î new ¤È¤¤¤¦Ì¾Á°¤Î¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤òÀ¸À®¤·¤Þ
 ¤¹¡£
@@ -308,6 +326,7 @@ old ¤Ø¤Î new ¤È¤¤¤¦Ì¾Á°¤Î¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤òÀ¸À®¤·¤Þ
 Îã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 
 --- truncate(path, length)
+#@todo
 
 path ¤Ç»ØÄê¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¤Î¥µ¥¤¥º¤òºÇÂç length ¥Ð¥¤¥È
 ¤Ë¤·¤Þ¤¹¡£
@@ -316,11 +335,13 @@ path ¤Ç»ØÄê¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¤Î¥µ¥¤¥º¤òºÇÂç length ¥Ð¥¤¥È
 [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 
 --- umask([umask])
+#@todo
 
 umask ¤òÊÑ¹¹¤·¤Þ¤¹¡£ÊÑ¹¹Á°¤Î umask ¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£umask ¤ò
 ¾ÊÎ¬¤¹¤ë¤ÈÊÑ¹¹¤ò¹Ô¤ï¤Ê¤¤¤Ç¡¢¸½ºß¤Î umask ¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- utime(atime, mtime[, filename[, ...]])
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤ÎºÇ½ª¥¢¥¯¥»¥¹»þ¹ï¤È¹¹¿·»þ¹ï¤òÊÑ¹¹¤·¤Þ¤¹¡£ÊÑ¹¹¤·¤¿¥Õ¥¡¥¤¥ë
 ¤Î¿ô¤òÊÖ¤·¤Þ¤¹¡£ÊÑ¹¹¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸
@@ -330,105 +351,130 @@ umask ¤òÊÑ¹¹¤·¤Þ¤¹¡£ÊÑ¹¹Á°¤Î umask ¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£umask ¤ò
 ¥¹¥¿¥ó¥¹¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
 
 --- blockdev?(path)
+#@todo
 
 [[m:FileTest.blockdev?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- chardev?(path)
+#@todo
 
 [[m:FileTest.chardev?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- directory?(path)
+#@todo
 
 [[m:FileTest.directory?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- executable?(path)
+#@todo
 
 [[m:FileTest.executable?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- executable_real?(path)
+#@todo
 
 [[m:FileTest.executable_real?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- exist?(path)
+#@todo
 
 [[m:FileTest.exist?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- exists?(path)
+#@todo
 
 [[m:FileTest.#exist?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 ¤³¤Î¥á¥½¥Ã¥É¤Ïobsolete¤Ç¤¹¡£
 [[m:File#exist?]]¤ò»È¤Ã¤Æ²¼¤µ¤¤¡£
 
 --- file?(path)
+#@todo
 
 [[m:FileTest.file?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- grpowned?(path)
+#@todo
 
 [[m:FileTest.grpowned?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- owned?(path)
+#@todo
 
 [[m:FileTest.owned?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- identical?(filename1, filename2)
+#@todo
 
 [[m:FileTest.identical?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- pipe?(path)
+#@todo
 
 [[m:FileTest.pipe?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- readable?(path)
+#@todo
 
 [[m:FileTest.readable?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- readable_real?(path)
+#@todo
 
 [[m:FileTest.readable_real?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- setgid?(path)
+#@todo
 
 [[m:FileTest.setgid?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- setuid?(path)
+#@todo
 
 [[m:FileTest.setuid?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- size(path)
+#@todo
 
 [[m:FileTest.size]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- size?(path)
+#@todo
 
 [[m:FileTest.size?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- socket?(path)
+#@todo
 
 [[m:FileTest.socket?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- sticky?(path)
+#@todo
 
 [[m:FileTest.sticky?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- symlink?(path)
+#@todo
 
 [[m:FileTest.symlink?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- writable?(path)
+#@todo
 
 [[m:FileTest.writable?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- writable_real?(path)
+#@todo
 
 [[m:FileTest.writable_real?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 --- zero?(path)
+#@todo
 
 [[m:FileTest.zero?]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 #@since 1.9.0
 --- world_readable?(path)
+#@todo
 If _file_name_ is readable by others, returns an integer
 representing the file permission bits of _file_name_. Returns +nil+
 otherwise. The meaning of the bits is platform dependent; on Unix
@@ -439,6 +485,7 @@ systems, see +stat(2)+.
         sprintf("%o", m)                              # => "644"
 
 --- world_writable?(path)
+#@todo
 If _file_name_ is writable by others, returns an integer
 representing the file permission bits of _file_name_. Returns +nil+
 otherwise. The meaning of the bits is platform dependent; on Unix
@@ -454,6 +501,7 @@ systems, see +stat(2)+.
 --- atime
 --- ctime
 --- mtime
+#@todo
 
 atime ¤ÏºÇ½ª¥¢¥¯¥»¥¹»þ¹ï¡¢
 ctime ¤Ï¾õÂÖ¤¬ºÇ¸å¤ËÊÑ¹¹¤µ¤ì¤¿»þ¹ï¡¢
@@ -465,6 +513,7 @@ mtime ¤ÏºÇ½ª¹¹¿·»þ¹ï¤ò [[c:Time]] ¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 ¤·¤Þ¤¹¡£
 
 --- chmod(mode)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¥â¡¼¥É¤ò mode ¤ËÊÑ¹¹¤·¤Þ¤¹¡£¥â¡¼¥É¤ÎÊÑ¹¹¤ËÀ®¸ù¤·¤¿
 ¾ì¹ç¤Ï 0 ¤òÊÖ¤·¤Þ¤¹¡£¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·
@@ -473,6 +522,7 @@ mtime ¤ÏºÇ½ª¹¹¿·»þ¹ï¤ò [[c:Time]] ¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 mode ¤Ï [[man:chmod(2)]] ¤ÈÆ±ÍÍ¤Ë¿ôÃÍ¤Ç»ØÄê¤·¤Þ¤¹¡£
 
 --- chown(owner, group)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¥ª¡¼¥Ê¡¼¤È¥°¥ë¡¼¥×¤òÊÑ¹¹¤·¤Þ¤¹¡£¥¹¡¼¥Ñ¡¼¥æ¡¼¥¶¤À¤±¤¬¥Õ¥¡
 ¥¤¥ë¤Î¥ª¡¼¥Ê¡¼¤È¥°¥ë¡¼¥×¤òÊÑ¹¹¤Ç¤­¤Þ¤¹¡£½êÍ­¼Ô¤ÎÊÑ¹¹¤ËÀ®¸ù¤·¤¿¾ì¹ç
@@ -485,6 +535,7 @@ nil ¤Þ¤¿¤Ï -1 ¤ò»ØÄê¤¹¤ë¤³¤È¤Ç¥ª¡¼¥Ê¡¼¤ä¥°¥ë¡¼¥×¤ò¸½ºß
 ¤Î¤Þ¤Þ¤Ë¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
 --- flock(operation)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤ò¥í¥Ã¥¯¤·¤Þ¤¹¡£¥í¥Ã¥¯¤ËÀ®¸ù¤·¤¿¾ì¹ç¤Ï 0 ¤òÊÖ¤·¤Þ¤¹¡£¼ºÇÔ
 ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£File::LOCK_NB ¤¬»Ø
@@ -560,10 +611,12 @@ flock ¤Ï false ¤òÊÖ¤·¤Þ¤¹¡£
        re-locked by process1
 
 --- path
+#@todo
 
 ¥ª¡¼¥×¥ó»þ¤Ë»ÈÍÑ¤·¤¿¥Ñ¥¹¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
 --- lstat
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¾õÂÖ¤ò´Þ¤à [[c:File::Stat]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ
 ¤¹¡£¾ðÊó¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
@@ -578,6 +631,7 @@ lstat ¤Ï¡¢¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ë´Ø¤·¤Æ¥ê¥ó¥¯¤½¤Î¤â¤Î¤Î
 [[m:File.lstat]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 --- truncate(length)
+#@todo
 
 ¥Õ¥¡¥¤¥ë¤Î¥µ¥¤¥º¤òºÇÂç length ¥Ð¥¤¥È¤Ë¤·¤Þ¤¹¡£¥Õ¥¡¥¤¥ë¤¬½ñ¤­
 ¹þ¤ß¥â¡¼¥É¤Ç¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤Ê¤±¤ì¤ÐÎã³° [[c:IOError]] ¤¬È¯À¸¤·¤Þ¤¹¡£
@@ -588,18 +642,21 @@ lstat ¤Ï¡¢¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ë´Ø¤·¤Æ¥ê¥ó¥¯¤½¤Î¤â¤Î¤Î
 == Constants
 
 --- ALT_SEPARATOR
+#@todo
 
 ¥·¥¹¥Æ¥à¤Î¥Õ¥¡¥¤¥ë¥Ñ¥¹¤Î¥»¥Ñ¥ì¡¼¥¿¤¬ SEPARATOR ¤È°Û¤Ê¤ë¾ì¹ç
 ¤ËÀßÄê¤µ¤ì¤Þ¤¹¡£MS-DOS ¤Ê¤É¤Ç¤Ï "\" ¤Ç¤¹¡£UNIX ¤ä
 [[c:Cygwin]] ¤Ê¤É¤Ç¤Ï nil ¤Ç¤¹¡£
 
 --- PATH_SEPARATOR
+#@todo
 
 PATH ´Ä¶­ÊÑ¿ô¤ÎÍ×ÁÇ¤Î¥»¥Ñ¥ì¡¼¥¿¤Ç¤¹¡£UNIX ¤Ç¤Ï ":" MS-DOS ¤Ê
 ¤É¤Ç¤Ï ";" ¤Ç¤¹¡£
 
 --- SEPARATOR
 --- Separator
+#@todo
 
 ¥Õ¥¡¥¤¥ë¥Ñ¥¹¤Î¥»¥Ñ¥ì¡¼¥¿¤Ç¤¹¡£¥Õ¥¡¥¤¥ë¤ò°·¤¦¥á¥½¥Ã¥É¤Ë¥Ñ¥¹Ì¾¤òÅÏ¤¹
 ¾ì¹ç¤Ê¤É¥¹¥¯¥ê¥×¥ÈÆâ¤Î¥Ñ¥¹Ì¾¤Ï´Ä¶­¤Ë¤è¤é¤º¤³¤Î¥»¥Ñ¥ì¡¼¥¿¤ÇÅý°ì¤µ¤ì

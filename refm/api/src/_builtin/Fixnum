@@ -7,6 +7,7 @@
 == Instance Methods
 
 --- id2name
+#@todo
 
 [[c:Symbol]] オブジェクトの整数値 ([[m:Symbol#to_i]]
 で得られます)に対応する文字列を返します。整数に対応するシンボルが
@@ -14,6 +15,7 @@
 
 #@since 1.8.0
 --- to_sym
+#@todo
 
 オブジェクトの整数値 self に対応する [[c:Symbol]] オブジェク
 トを返します。整数に対応するシンボルが存在しない時には nil

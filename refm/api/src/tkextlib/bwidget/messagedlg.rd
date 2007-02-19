@@ -9,24 +9,29 @@ require tkextlib/bwidget/dialog
 == Class Methods
 
 --- new(parent = nil, keys = nil)
+#@todo
 
 
 
 == Instance Methods
 
 --- cget(slot)
+#@todo
 
 
 
 --- configinfo(slot = nil)
+#@todo
 
 
 
 --- configure(slot, value = None)
+#@todo
 
 
 
 --- create
+#@todo
 
 
 

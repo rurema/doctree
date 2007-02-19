@@ -5,11 +5,14 @@
 == Class Methods
 
 --- getenv(name)
+#@todo
 
 == Constants
 
 --- HTTP_PROXY
+#@todo
 
 --- NO_PROXY
+#@todo
 
 #@end

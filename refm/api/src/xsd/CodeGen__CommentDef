@@ -6,10 +6,12 @@ include XSD::CodeGen::GenSupport
 == class methods
 
 --- new(name, baseclass = nil)
+#@todo
 
 == instance methods
 
 --- comment
 --- comment=(comment)
+#@todo
 
 #@end

@@ -7,13 +7,16 @@ true は真を表す代表のオブジェクトです。
 == Instance Methods
 
 --- &(other)
+#@todo
 
 other が真なら true を, 偽なら false を返します。
 
 --- |(other)
+#@todo
 
 常に true を返します。
 
 --- ^(other)
+#@todo
 
 other が真なら false を, 偽なら true を返します。

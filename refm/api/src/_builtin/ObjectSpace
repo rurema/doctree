@@ -5,6 +5,7 @@
 == Module Functions
 
 --- _id2ref(id)
+#@todo
 
 オブジェクト ID([[m:Object#__id__]])からオブジェクトを得ます。
 対応するオブジェクトが存在しなければ例外 [[c:RangeError]] が発生し
@@ -12,6 +13,7 @@
 
 --- define_finalizer(obj, proc)
 --- define_finalizer(obj) {|id| ...}
+#@todo
 
 obj が解放されるときに実行されるファイナライザ proc を
 登録します。同じオブジェクトについて複数回呼ばれたときは置き換えで
@@ -79,6 +81,7 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
   # => baz
 
 --- each_object([class_or_module]) {|object| ...}
+#@todo
 
 class_or_module と [[m:Object#kind_of?]] の関係にある全ての
 オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
@@ -97,6 +100,7 @@ class_or_module と [[m:Object#kind_of?]] の関係にある全ての
 繰り返した数を返します。
 
 --- garbage_collect
+#@todo
 
 どこからもアクセスされなくなったオブジェクトを回収します。
 [[m:GC#start]] と同じです。
@@ -104,6 +108,7 @@ class_or_module と [[m:Object#kind_of?]] の関係にある全ての
 nil を返します。
 
 --- undefine_finalizer(obj)
+#@todo
 
 obj に対するファイナライザをすべて解除します。
 obj を返します。
@@ -112,6 +117,7 @@ obj を返します。
 ジが出力されます。
 
 --- add_finalizer(proc)     ((<obsolete>))
+#@todo
 
 proc をファイナライザとして設定します。
 
@@ -125,6 +131,7 @@ proc を返します。
 [[m:ObjectSpace.define_finalizer]] を使用してください
 
 --- call_finalizer(obj)     ((<obsolete>))
+#@todo
 
 obj をファイナライザの対象オブジェクトとして設定します。
 obj を返します。
@@ -132,12 +139,14 @@ obj を返します。
 このメソッドは、obsolete です。
 
 --- finalizers      ((<obsolete>))
+#@todo
 
 現在登録されているファイナライザの配列を返します。
 
 このメソッドは、obsolete です。
 
 --- remove_finalizer(proc)  ((<obsolete>))
+#@todo
 
 指定した proc をファイナライザから取り除きます。
 proc を返します。

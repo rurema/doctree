@@ -4,8 +4,10 @@
 == Instance Methods
 
 --- from_shift_jis(content)
+#@todo
 
 --- to_shift_jis(str)
+#@todo
 #@end
 
 #@since 1.8.3

@@ -16,6 +16,7 @@ a URI, determines which protocol implementation serves that protocol.
 == Module Functions
 
 --- add_protocol(prot)
+#@todo
 
 Add a new protocol to the DRbProtocol module. 
 

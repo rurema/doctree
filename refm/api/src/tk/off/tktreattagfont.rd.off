@@ -6,17 +6,24 @@
 == メソッド:
 
 --- TkTreatTagFont#font_configinfo
+#@todo
 
 --- TkTreatTagFont#font_configure(slot)
+#@todo
 
 --- TkTreatTagFont#latinfont_configure(ltn, keys=nil)
+#@todo
 
 --- TkTreatTagFont#kanjifont_configure(knj, keys=nil)
+#@todo
 
 --- TkTreatTagFont#font_copy(window, wintag=nil)
+#@todo
 
 --- TkTreatTagFont#latinfont_copy(window, wintag=nil)
+#@todo
 
 --- TkTreatTagFont#kanjifont_copy(window, wintag=nil)
+#@todo
 
 =end

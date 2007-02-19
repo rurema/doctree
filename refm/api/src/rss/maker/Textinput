@@ -11,15 +11,19 @@ name，linkを設定する必要があります．
 
 --- title
 --- title=()
+#@todo
 
 --- description
 --- description=()
+#@todo
 
 --- name
 --- name=()
+#@todo
 
 --- link
 --- link=()
+#@todo
 
 
 = class RSS::Maker::RSS09::Textinput < RSS::Maker::TextinputBase

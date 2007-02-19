@@ -8,15 +8,20 @@ RSS 2.0を生成するときだけ利用されます．
 
 --- domain
 --- domain=()
+#@todo
 
 --- port
 --- port=()
+#@todo
 
 --- path
 --- path=()
+#@todo
 
 --- registerProcedure
 --- registerProcedure=()
+#@todo
 
 --- protocol
 --- protocol=()
+#@todo

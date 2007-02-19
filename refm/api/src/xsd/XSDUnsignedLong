@@ -2,5 +2,6 @@
 = class XSD::XSDUnsignedLong < XSD::XSDNonNegativeInteger
 == class methods
 --- new(value = nil)
+#@todo
 
 #@end

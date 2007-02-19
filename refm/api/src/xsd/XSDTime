@@ -4,5 +4,6 @@ include XSD::DateTimeImpl
 
 == class methods
 --- new(value = nil)
+#@todo
 
 #@end

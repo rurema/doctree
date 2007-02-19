@@ -194,6 +194,7 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
 == Class Methods
 
 --- new(cgi[, aHash])
+#@todo
 
 セッションオブジェクトを新しく作成し返します。
 オプションとして [[c:Hash]] オブジェクト aHash を与えることができます。
@@ -288,24 +289,29 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
     [[unknown:執筆者募集]]
 
 --- callback(dbman)
+#@todo
 
 #@if (version <= "1.8.1")
 --- create_new_id
+#@todo
 #@end
 
 == Instance Methods
 
 --- [](key)
+#@todo
 
 指定されたキーの値を返します。
 
 値が設定されていなければ nil を返します。
 
 --- []=(key, val)
+#@todo
 
 指定されたキーの値を設定します。
 
 --- update
+#@todo
 
 データベースクラスの update メソッドを呼び出して、
 セッション情報をサーバに保存します。
@@ -313,12 +319,14 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
 MemoryStore の場合は何もしません。
 
 --- close
+#@todo
 
 データベースクラスの close メソッドを呼び出して、
 セッション情報をサーバに保存し、セッションストレージをクローズします。
 #@# mod_ruby などで CGI::Session を利用する場合、明示的に close する必要がある。　参照 http://www.modruby.net/doc/faq.ja.jis.html#label-13
 
 --- delete
+#@todo
 
 データベースクラスの delete メソッドを呼び出して、
 セッションをストレージから削除します。
@@ -327,9 +335,11 @@ FileStoreの場合はセッションファイルを削除します。
 セッションファイルは明示的に削除しなければ残っています。
 
 --- session_id
+#@todo
 
 #@since 1.8.2
 --- new_session
+#@todo
 #@end
 
 #@since 1.8.2

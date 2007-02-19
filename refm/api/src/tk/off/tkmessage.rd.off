@@ -52,10 +52,12 @@
 == オプション:
 
 --- TkMessage#aspect(ratio)
+#@todo
     メッセージ文字列の表示領域の縦横比を指定します。((|ratio|))が100より大
     きい場合は横長になります。
 
 --- TkMessage#justify(s)
+#@todo
     メッセージ文字列の揃え方を指定します。((|s|))に指定できる文字列は以下
     のいずれかです。
 
@@ -70,5 +72,6 @@
      右寄せ
 
 --- TkMessage#width(w)
+#@todo
 
 =end

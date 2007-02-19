@@ -6,6 +6,7 @@ UNIX のシグナル関連の操作を行うモジュールです。
 == Module Functions
 
 --- list
+#@todo
 
 シグナル名とシグナル番号を対応づけた [[c:Hash]] オブジェクトを返し
 ます。
@@ -18,6 +19,7 @@ UNIX のシグナル関連の操作を行うモジュールです。
 #@since 1.8.0
 --- trap(signal, command)
 --- trap(signal) { ... }
+#@todo
 
 signal で指定された割り込みにたいするハンドラとして
 command を登録します。signal はシグナル名の

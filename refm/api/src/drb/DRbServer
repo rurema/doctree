@@ -9,28 +9,34 @@ Unless multiple servers are being used, the local DRbServer is normally started 
 == Class Methods
 
 --- default_acl(acl)
+#@todo
 
 Set the default value for the :acl option.
 See new(). The initial default value is nil. 
 
 --- default_argc_limit(argc)
+#@todo
 
 Set the default value for the :argc_limit option.
 See new(). The initial default value is 256.  
 
 --- default_id_conv(idconv)
+#@todo
 
 Set the default value for the :id_conv option.
 See #new(). The initial default value is a [[c:DRb::DRbIdConv]] instance.
 
 --- default_load_limit(sz)
+#@todo
 
 Set the default value for the :load_limit option.
 See new(). The initial default value is 25 MB. 
 
 --- default_safe_level(level)   
+#@todo
 
 --- new(uri=nil, front=nil, config_or_acl=nil)
+#@todo
 
 Create a new DRbServer instance.
 
@@ -80,6 +86,7 @@ The server will immediately start running in its own thread.
 
 --- verbose
 --- verbose= 
+#@todo
 Get the default value of the :verbose option. 
 See new(). The initial default value is false.
 
@@ -87,52 +94,64 @@ See new(). The initial default value is false.
 == Instance Methods
 
 --- alive?
+#@todo
 
 Is this server alive? 
 
 --- check_insecure_method(obj, msg_id)
+#@todo
 
 Check that a method is callable via dRuby.
 obj is the object we want to invoke the method on. msg_id is the method name, as a Symbol.
 If the method is an insecure method (see insecure_method?) a SecurityError is thrown. If the method is private or undefined, a [[c:NameError]] is thrown. 
 
 --- stop_service()
+#@todo
 
 Stop this server. 
 
 --- to_id(obj)
+#@todo
 
 Convert a local object to a dRuby reference. 
 
 --- to_obj(ref)
+#@todo
 
 Convert a dRuby reference to the local object it refers to.
 
 --- verbose
 --- verbose=
+#@todo
 
 Get whether the server is in verbose mode.
 In verbose mode, failed calls are logged to stdout.
 
 --- config 
+#@todo
 The configuration of this DRbServer
 
 --- front
+#@todo
 The front object of the DRbServer.
 
 This object receives remote method calls made on the server¡Çs URI alone, with an object id.
 --- safe_level
+#@todo
 
 --- thread
+#@todo
 The main thread of this DRbServer.
 
 This is the thread that listens for and accepts connections from clients, not that handles each client¡Çs request-response session.
 
 --- uri
+#@todo
 The URI of this DRbServer.
 
 == Constants
 
 --- INSECURE_METHOD
+#@todo
 List of insecure methods.
 These methods are not callable via dRuby. 

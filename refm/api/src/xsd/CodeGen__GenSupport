@@ -3,25 +3,35 @@
 
 == module functions
 --- capitalize(target)
+#@todo
 
 #@since 1.8.3
 --- keyword?(word)
+#@todo
 #@end
 
 --- uncapitalize(target)
+#@todo
 
 --- safeconstname(name)
+#@todo
 
 --- safeconstname?(name)
+#@todo
 
 --- safemethodname(name)
+#@todo
 
 --- safemethodname?(name)
+#@todo
 
 --- safevarname(name)
+#@todo
 
 --- safevarname?(name)
+#@todo
 
 --- format(str, indent = nil)
+#@todo
 
 #@end

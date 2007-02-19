@@ -5,22 +5,29 @@
 == Class Methods
 
 --- new
+#@todo
 
 --- parse(str)
+#@todo
 
 == Instance Methods
 
 --- headers
 --- headers=(value)
+#@todo
 
 --- body
 --- body=(value)
 --- content
+#@todo
 
 --- parse(str)
+#@todo
 
 --- contentid
+#@todo
 
 --- to_s
+#@todo
 
 #@end

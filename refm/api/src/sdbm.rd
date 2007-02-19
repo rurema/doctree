@@ -11,6 +11,7 @@ include Enumerable
 
 --- open(dbname[, mode])
 --- open(dbname[, mode]) {|db| ...}
+#@todo
 
 dbname で指定したデータベースをモードを
 mode に設定してオープンします。mode の省
@@ -21,57 +22,67 @@ nil を返します。
 == Instance Methods
 
 --- [](key)
+#@todo
 
 key をキーとする値を返します。
 
 --- []=(key, value)
+#@todo
 
 key をキーとして、value を格納します。
 value として nil を指定すると、key に対
 する項目を削除します。
 
 --- clear
+#@todo
 
 DBM ファイルを空にします。
 
 --- close
+#@todo
 
 DBM ファイルをクローズします。以後の操作は例外を発生させます。
 
 #@since 1.8.3
 --- closed?
-
 #@todo
+
 
 #@end
 
 --- delete(key)
+#@todo
 
 key をキーとする項目を削除します。
 
 --- reject! { |key, value|  ...  }
 --- delete_if { |key, value|  ...  }
+#@todo
 
 ブロックを評価した値が真であれば該当する項目を削除します。
 
 --- reject
-
 #@todo
+
 
 --- each {|key, value|  ...  }
 --- each_pair {|key, value|  ...  }
+#@todo
 
 各要素に対するイテレータ。
 
 --- each_key {|key|  ...  }
+#@todo
 
 全ての key に対して繰り返すイテレータ。
 
 --- each_value {|value|  ...  }
+#@todo
 
 全ての value に対して繰り返すイテレータ。
 
 --- empty?()
+#@todo
 
 データベースが空の時、真を返します。
 
@@ -79,17 +90,20 @@ key をキーとする項目を削除します。
 --- key?(key)
 --- include?(key)
 --- member?(key)
+#@todo
 
 key がデータベース中に存在する時、真を返します。
 
 --- has_value?(value)
 --- value?(value)
+#@todo
 
 value を値とする組がデータベース中に存在する時、真を返します。
 
 #@if (version < "1.9.0")
 --- indexes(key_1, ... )
 --- indices(key_1, ... )
+#@todo
 
 このメソッドは obsolete です。
 
@@ -98,41 +112,54 @@ value を値とする組がデータベース中に存在する時、真を返します。
 #@end
 
 --- keys
+#@todo
 
 データベース中に存在するキー全てを含む配列を返します。
 
 --- length
 --- size
+#@todo
 
 データベース中の要素の数を返します。(注意:現在の実現では要素数を数
 えるためにデータベースを全部検索します)
 
 --- shift
+#@todo
 
 データベース中の要素を一つ取り出し、データベースから削除します。
 
 --- values
+#@todo
 
 データベース中に存在する値全てを含む配列を返します。
 
 --- replace(other)
-
 #@todo
 
+
 --- fetch
+#@todo
 
 --- store
+#@todo
 
 --- select
+#@todo
 
 --- values_at
+#@todo
 
 --- invert
+#@todo
 
 --- update
+#@todo
 
 --- to_a
+#@todo
 
 --- to_hash
+#@todo
 
 --- index 
+#@todo

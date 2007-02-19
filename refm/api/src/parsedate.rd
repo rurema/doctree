@@ -5,6 +5,7 @@
 == Module Functions
 
 --- parsedate(str, complete = false)
+#@todo
 str で与えられた日付表現を解析し、見いだした要素を
 配列 (年、月、日、時、分、秒、タイムゾーン、曜日) で返します。
 

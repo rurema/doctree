@@ -62,6 +62,7 @@ def_e2message メソッドや def_exception メソッドが使えます。
 
 --- Raise(error, *args)
 --- Fail(error, *args)
+#@todo
 
 error クラスのエラーを発生させます。
 
@@ -104,20 +105,26 @@ error の後に続く引数 args 群は、例外クラスに関連づけられたエラー
 
 == Singleton Methods
 --- def_e2message(k, c, m)
+#@todo
 
 --- def_exception(k, n, m, s = StandardError)
+#@todo
 
 --- Raise(klass = E2MM, err = nil, *rest)
 --- Fail(klass = E2MM, err = nil, *rest)
+#@todo
 
 == Instance Methods
 
 --- Raise(err = nil, *rest)
 --- Fail(err  = nil, *rest)
+#@todo
 
 --- fail(err = nil, *rest)
+#@todo
 
 --- def_e2message(exception, message_form)
+#@todo
 
 すでに存在する例外クラス exception に、
 エラーメッセージ用フォーマット message_form を関連づけます。
@@ -126,6 +133,7 @@ message_form の形式は sprintf() の format 文字列と同じです。
 このフォーマットは Raise (またはその別名の Fail)で使われます。
 
 --- def_exception(exception_name, message_form, superclass)
+#@todo
 
 exception_name という名前の例外クラスを作ります。
 exception_name はシンボルで与えられます。

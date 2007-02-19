@@ -8,14 +8,19 @@ require wsdl/soap/classDefCreator
 
 --- basedir
 --- basedir=
+#@todo
 
 --- location
 --- location=
+#@todo
 
 --- logger
 --- logger=
+#@todo
 
 --- opt
+#@todo
 
 --- run
+#@todo
 

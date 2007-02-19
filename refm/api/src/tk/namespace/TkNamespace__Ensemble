@@ -5,15 +5,20 @@
 == Class Methods
 
 --- exist?(ensemble)
+#@todo
 
 --- new(keys = {})
+#@todo
 
 == Instance Methods
 
 --- cget(slot)
+#@todo
 
 --- configinfo(slot = nil)
+#@todo
 
 --- exists?
+#@todo
 
 #@end

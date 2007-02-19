@@ -28,6 +28,7 @@ q = [] にすると入力と違った順序で行が出力されます。
 == Class Methods
 
 --- new(max)
+#@todo
 SizedQueue オブジェクトを生成します。
 max は queue のサイズの最大値です。
 
@@ -35,9 +36,11 @@ max は queue のサイズの最大値です。
 
 --- max
 --- max=(n)
+#@todo
 queue の最大サイズを設定します。
 
 --- push(obj)
+#@todo
 queue に obj を追加します。
 
 queue のサイズが max に達している場合は、
@@ -47,6 +50,7 @@ queue に obj を追加します。
 あとは [[m:Queue#push]] と同じです。
 
 --- pop
+#@todo
 queue からひとつ値を取り出します。
 queue に push しようと待っているスレッドがあれば、実行を再開させます。
 

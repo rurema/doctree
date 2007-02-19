@@ -9,6 +9,7 @@
 
 #@since 1.8.0
 --- change_privilege(id)
+#@todo
 #@# => fixnum
 
 Change the current process's real and effective group ID to that
@@ -22,6 +23,7 @@ on all platforms.
 
 #@since 1.8.0
 --- eid
+#@todo
 #@# => fixnum
 
 Returns the effective group ID for this process. Not available
@@ -33,6 +35,7 @@ on all platforms.
 #@since 1.8.0
 --- grant_privilege(id)
 --- eid = id
+#@todo
 #@# => fixnum
 
 Set the effective group ID, and if possible, the saved group
@@ -47,6 +50,7 @@ group ID. Not available on all platforms.
 
 #@since 1.8.0
 --- re_exchange
+#@todo
 #@# => fixnum
 
 Exchange real and effective group IDs and return the new effective
@@ -60,6 +64,7 @@ group ID. Not available on all platforms.
 
 #@since 1.8.0
 --- re_exchangeable?
+#@todo
 #@# => true or false
 
 Returns true if the real and effective group IDs of a process
@@ -69,6 +74,7 @@ may be exchanged on the current platform.
 
 #@since 1.8.0
 --- rid
+#@todo
 #@# => fixnum
 
 Returns the (real) group ID for this process.
@@ -79,6 +85,7 @@ Returns the (real) group ID for this process.
 
 #@since 1.8.0
 --- sid_available?
+#@todo
 #@# => true or false
 
 Returns true if the current platform has saved group ID functionality.
@@ -88,8 +95,10 @@ Returns true if the current platform has saved group ID functionality.
 #@since 1.8.0
 #@# bc-rdoc: detected missing name: switch
 --- switch
+#@todo
 #@# => fixnum
 --- switch {|| block}
+#@todo
 #@# => object
 
 Switch the effective and real group IDs of the current process.

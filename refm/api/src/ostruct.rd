@@ -21,11 +21,12 @@ method_missingの使い方の例でもある。
   
 == Class Methods
 --- new(hash = nil)
+#@todo
 OpenStructオブジェクトを生成。
 hashが与えられたとき、
-#@todo
 
 == Instance Methods
 --- delete_field(name)
+#@todo
 nameで指定された要素を削除。
 その後その要素を参照したらnilが返る。

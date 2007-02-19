@@ -10,10 +10,12 @@ include Tk::Y_Scrollable
 == Instance Methods
 
 --- autoscroll(mode = nil)
+#@todo
 
 
 
 --- unautoscroll(mode = nil)
+#@todo
 
 
 

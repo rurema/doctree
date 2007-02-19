@@ -8,69 +8,84 @@ CRL(証明書失効リスト) クラス。
 --- new
 --- new(str)
 --- new(io)
+#@todo
 
 == Instance Methods
 
 --- version
 --- version=(version)
+#@todo
 
 CRL のバージョン。
 
 --- signature_algorithm
+#@todo
 
 署名に使ったアルゴリズム。
 
 --- issuer
 --- issuer=(issuer)
+#@todo
 
 CRL の発行者。
 
 --- last_update
 --- last_update=(time)
+#@todo
 
 最後に更新された日時。
 
 --- next_update
 --- next_update=(time)
+#@todo
 
 次に更新する日時。
 
 --- revoked
 --- revoked=(rev)
+#@todo
 
 失効した証明書の配列です。[[c:OpenSSL::X509::Revoked]] オブジェクトの [[c:Array]]。
 
 --- add_revoked(rev)
+#@todo
 
 CRL に失効した証明書を加えます。rev は [[c:OpenSSL::X509::Revoked]] オブジェクトです。
 
 --- sign(pkey, chain = nil)
+#@todo
 
 CRL に署名します。
 
 --- verify(key)
+#@todo
 
 発行者の公開鍵で CRL に記載されている署名を検証します。
 
 --- to_der
+#@todo
 
 DER 形式に変換します。
 
 --- to_pem
 --- to_s
+#@todo
 
 PEM 形式に変換します。
 
 --- to_text
+#@todo
 
 人間が読める形式に変換します。
 
 --- extensions
 --- extensions=(extensions)
+#@todo
 
 CRL の拡張領域。[[c:OpenSSL::X509::Extension]] の配列。
 
 --- add_extension(ex)
+#@todo
 
 拡張領域に値を加えます。
 

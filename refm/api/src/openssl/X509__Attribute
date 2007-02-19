@@ -5,16 +5,20 @@
 == Class Methods
 
 --- new
+#@todo
 
 == Instance Methods
 
 --- oid 
 --- oid=
+#@todo
 
 --- value
 --- value=
+#@todo
 
 --- to_der
+#@todo
 
 = class OpenSSL::X509::AttributeError < OpenSSL::OpenSSLError
 #@end

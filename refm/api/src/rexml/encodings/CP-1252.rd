@@ -5,7 +5,9 @@
 
 #@if (version <= "1.8.2")
 --- encode(content)
+#@todo
 
 --- decode(str)
+#@todo
 #@end
 #@end

@@ -5,6 +5,7 @@
 == Class Methods
 
 --- new(log_file=nil, level=nil)
+#@todo
 Log オブジェクトを生成する。log_file はメソッド << が定義されたオブジェクト。
 普通は [[c:String]] オブジェクトか [[c:IO]] オブジェクト。
 
@@ -46,11 +47,13 @@ level には Log オブジェクトのログレベルを定数で指定する。
 #@# ログレベルを指定する。
 
 --- log(level, data)
+#@todo
 data をログに記録する。level は data のログレベル。
 data のログレベルが Log オブジェクトのログレベルと同じか、より重要な時
 data はログに記録される。
 
 --- time_format
 --- time_format=()
+#@todo
 時間を記録するフォーマットを文字列で指定する。
 [[m:Time#strftime]] を参照。

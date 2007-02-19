@@ -30,37 +30,45 @@ include Enumerable
 
 == Class Methods
 --- new(enum = nil)
+#@todo
 
 引数 enum で与えられた Enumerable の要素からなる新しい集合を作ります。
 
 --- [](*ary)
+#@todo
 
 与えられたオブジェクトからなる新しい集合を作ります。
 
 == Instance Methods
 --- dup
+#@todo
 
 集合を複製します。
 
 --- size
 --- length
+#@todo
 
 要素の個数を返します。
 
 --- empty?
+#@todo
 
 要素を1つも持たないときに true を返します。
 
 --- clear
+#@todo
 
 要素をすべて削除します。
 
 --- replace(enum)
+#@todo
 
 要素を enum のものと置き換えます。要素をすべて削除し、enum で与え
 られた Enumerable の要素を新しい要素とします。
 
 --- flatten
+#@todo
 
 ネストした集合を平滑化して作られる新しい集合を返します。
 
@@ -72,114 +80,137 @@ include Enumerable
   p s1.flatten             #=> #<Set: {1, 2}>
 
 --- flatten!
+#@todo
 
 flatten と同じですが、
 集合それ自身が平滑化して作られた新しい集合の要素で置き換えられます。
 ただし、要素の変更が起こらなかったときには nil を返します。
 
 --- to_a
+#@todo
 
 配列に変換します。順序は不定です。
 
 --- include?(o)
 --- member?(o)
+#@todo
 
 オブジェクト o がその集合に属す場合に true を返します。
 
 --- superset?(set)
+#@todo
 
 集合が与えられた集合 set を含む場合に true を返します。
 
 --- proper_superset?(set)
+#@todo
 
 集合が与えられた集合 set を真に含む場合に true を返します。つまり、
 ふたつの集合が等しい場合には false を返します。
 
 --- subset?(set)
+#@todo
 
 集合が与えられた集合 set に含まれる場合に true を返します。
 
 --- proper_subset?(set)
+#@todo
 
 集合が与えられた集合 set に真に含まれる場合に true を返します。つまり、
 ふたつの集合が等しい場合には false を返します。
 
 --- each { |o| ... }
+#@todo
 
 集合のすべての要素に対して1度ずつブロックを実行します。
 ブロック変数 o にはその要素が渡されます。
 
 --- map! {|o| ...}
 --- collect! {|o| ...}
+#@todo
 
 Do collect() destructively.
 
 --- add(o)
 --- << o
+#@todo
 
 集合にオブジェクト o を加え、その集合自身を返します。
 
 --- add?(o)
+#@todo
 
 Adds the given object to the set and returns self. If the object
 is already in the set, returns nil.
 
 --- delete(o)
+#@todo
 
 集合からオブジェクト o を削除し、その集合自身を返します。
 
 --- delete?(o)
+#@todo
 
 Deletes the given object from the set and returns self. If the
 object is not in the set, returns nil.
 
 --- delete_if { |o| ... }
+#@todo
 
 ブロックで最後に評価された値が真であるようなすべての要素を削除し、
 その集合自身を返します。
 
 --- reject! { |o| ... }
+#@todo
 
 delete_if と同じですが、要素が1つも削除されなかった場合は nil を返します。
 
 --- merge(enum)
+#@todo
 
 enum で与えられた Enumerable の要素を追加し、その集合自身を返します。
 
 --- subtract(enum)
+#@todo
 
 enum で与えられた Enumerable の要素を削除し、その集合自身を返します。
 
 --- union(enum)
 --- +(enum)
 --- |(enum)
+#@todo
 
 和集合、すなわち、2つの集合の少なくともどちらか一方に属するすべて
 の要素からなる新しい集合を作りそれを返します。
 
 --- difference(enum)
 --- -(enum)
+#@todo
 
 差集合、すなわち、前者に属し後者に属さないすべての要素からなる
 新しい集合を作りそれを返します。
 
 --- intersection(enum)
 --- &(enum)
+#@todo
 
 共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる
 新しい集合を作りそれを返します。
 
 --- ^(enum)
+#@todo
 
 対称差、すなわち、2つの集合のいずれか一方にだけ属するすべての要素からなる
 新しい集合を作りそれを返します。
 
 --- ==(set)
+#@todo
 
 2つの集合が等しいときに true を返します。
 要素の等しさは Object#eql? で検査されます。
 
 --- classify { |o| ... }
+#@todo
 
 集合をブロックの値によって分類します。返される分類結果は、
 {値 => 要素の集合} という形をしたハッシュです。
@@ -197,6 +228,7 @@ enum で与えられた Enumerable の要素を削除し、その集合自身を返します。
 
 --- divide { |o| ... }
 --- divide { |o1, o2| ... }
+#@todo
 
 商集合、すなわちブロックで定義される関係で分割した結果を集合として
 返します。
@@ -240,5 +272,6 @@ block.call(o1, o3)」
      #           #<Set: {[1, 2], [5, 2], [3, 1], [7, 1]}>}>
 
 --- inspect
+#@todo
 
 人間の読みやすい形に表現した文字列を返します。

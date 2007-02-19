@@ -10,6 +10,7 @@ require webrick/httpservlet/abstract
 == Class Methods
 
 --- new(proc)
+#@todo
 proc には呼び出したい [[c:Proc]] オブジェクトを与える。proc はクライアントからの
 リクエストがあった時、proc.call(request, response) のように呼び出される。
 [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]] オブジェクト。
@@ -17,6 +18,8 @@ proc には呼び出したい [[c:Proc]] オブジェクトを与える。proc はクライアントからの
 == Instance Methods
 
 --- get_instance(server, *options)
+#@todo
 
 --- do_GET(req, res)
 --- do_POST(req, res)
+#@todo

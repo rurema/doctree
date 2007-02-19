@@ -2,8 +2,10 @@
 = class XSD::NS::Assigner
 == class methods
 --- new
+#@todo
 
 == instance methods
 --- assign(ns)
+#@todo
 
 #@end

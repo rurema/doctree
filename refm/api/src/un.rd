@@ -23,6 +23,7 @@ unがワイルドカード展開([[m:Dir.glob]]参照)します(Unix ではシェ
 = reopen Kernel
 == Private Instance Methods
 --- chmod()   
+#@todo
 Change the mode of each FILE to OCTAL-MODE.
 
   ruby -run -e chmod -- [OPTION] OCTAL-MODE FILE
@@ -30,6 +31,7 @@ Change the mode of each FILE to OCTAL-MODE.
   -v          verbose
 
 --- cp()   
+#@todo
 Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY
 
   ruby -run -e cp -- [OPTION] SOURCE DEST
@@ -39,11 +41,13 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY
   -v          verbose
 
 --- help()   
+#@todo
 Display help message.
 
   ruby -run -e help [COMMAND]
 
 --- install()   
+#@todo
 Copy SOURCE to DEST.
 
   ruby -run -e install -- [OPTION] SOURCE DEST
@@ -54,6 +58,7 @@ Copy SOURCE to DEST.
   -v          verbose
 
 --- ln()   
+#@todo
 Create a link to the specified TARGET with LINK_NAME.
 
   ruby -run -e ln -- [OPTION] TARGET LINK_NAME
@@ -63,6 +68,7 @@ Create a link to the specified TARGET with LINK_NAME.
   -v          verbose
 
 --- mkdir()   
+#@todo
 Create the DIR, if they do not already exist.
 
   ruby -run -e mkdir -- [OPTION] DIR
@@ -71,6 +77,7 @@ Create the DIR, if they do not already exist.
   -v          verbose
 
 --- mv()   
+#@todo
 Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
 
   ruby -run -e mv -- [OPTION] SOURCE DEST
@@ -78,6 +85,7 @@ Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
   -v          verbose
 
 --- rm()   
+#@todo
 Remove the FILE
 
   ruby -run -e rm -- [OPTION] FILE
@@ -87,6 +95,7 @@ Remove the FILE
   -v          verbose
 
 --- rmdir()   
+#@todo
 Remove the DIR.
 
   ruby -run -e rmdir -- [OPTION] DIR
@@ -94,6 +103,7 @@ Remove the DIR.
   -v          verbose
 
 --- touch()   
+#@todo
 Update the access and modification times of each FILE to the current time.
 
   ruby -run -e touch -- [OPTION] FILE

@@ -4,15 +4,19 @@
 == Class Methods
 
 --- new(io[, fs = ','[, rs = nil]])
+#@todo
 
 == Instance Methods
 
 --- close_on_terminate
+#@todo
 
 == Private Instance Methods
 
 --- get_row(row)
+#@todo
 
 --- terminate
+#@todo
 
 #@end

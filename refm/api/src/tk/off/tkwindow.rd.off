@@ -17,6 +17,7 @@
 
 --- TkWindow.new(parent=nil, keys=nil)
 --- TkWindow.new(parent=nil, keys=nil) {|win| ... }
+#@todo
     親ウィジェットが((|parent|))であるウィジェットを生成します。((|parent|))を
     省略するとルートウィジェット((<TkRoot>))が親ウィジェットになります。
 
@@ -75,6 +76,7 @@
 == privateメソッド:
 
 --- TkWindow#create_self
+#@todo
     Tcl/Tkのレベルでウィジェットを生成します。
     (({TkWindow#initialize}))から呼ばれる初期化のためのメソッドです。
 
@@ -92,6 +94,7 @@
 == メソッド:
 
 --- TkWindow#pack(keys=nil)
+#@todo
     ウィジェットをpackします。packされたウィジェットは、
     ((|keys|))({name=>value...}のハッシュです)で指定した振舞に従って親ウィ
     ジェットに適宜詰め込まれて配置されます。(({self}))を返します。
@@ -104,21 +107,27 @@
 
 --- TkWindow#unpack
 --- TkWindow#pack_forget
+#@todo
     packで配置したウィジェットを取り下げます(非表示になります)。
     (({self}))を返します。
 
 --- TkWindow#pack_config(slot, value=None)
+#@todo
 
 --- TkWindow#pack_info
+#@todo
     packで配置したウィジェットの配置情報をハッシュで返します。
 
 --- TkWindow#pack_propagate(mode = nil)
+#@todo
 
 --- TkWindow#pack_slaves
+#@todo
     (({self}))ウィジェット内にpackで配置したウィジェットの配列を返しま
     す。
 
 --- TkWindow#grid(keys=nil)
+#@todo
     ((|keys|))で指定した格子状のマス目に従って、ウィジェットを配置します。
     (({self}))を返します。
 
@@ -130,32 +139,45 @@
 
 --- TkWindow#ungrid
 --- TkWindow#grid_forget
+#@todo
     gridで配置したウィジェットを取り下げます(非表示になります)。
     (({self}))を返します。
 
 --- TkWindow#grid_bbox(*args)
+#@todo
 
 --- TkWindow#grid_config(slot, value=None)
+#@todo
 
 --- TkWindow#grid_columnconfig(index, keys)
+#@todo
 
 --- TkWindow#grid_rowconfig(index, keys)
+#@todo
 
 --- TkWindow#grid_columnconfiginfo(index, slot=nil)
+#@todo
 
 --- TkWindow#grid_rowconfiginfo(index, slot=nil)
+#@todo
 
 --- TkWindow#grid_info
+#@todo
 
 --- TkWindow#grid_location(x, y)
+#@todo
 
 --- TkWindow#grid_propagate(mode=nil)
+#@todo
 
 --- TkWindow#grid_remove
+#@todo
 
 --- TkWindow#grid_slaves(args)
+#@todo
 
 --- TkWindow#place(keys=nil)
+#@todo
     ((|keys|))で指定した位置にウィジェットを配置します。
     (({self}))を返します。
 
@@ -175,29 +197,37 @@
 
 --- TkWindow#unplace
 --- TkWindow#place_forget
+#@todo
     placeで配置したウィジェットを取り下げます(非表示になります)。
     (({self}))を返します。
 
 --- TkWindow#place_config(keys)
+#@todo
     placeで配置したウィジェットを((|keys|))の指定で再配置します
     ((-ホントに再配置？-))
 
 --- TkWindow#place_config(slot, value=None)
+#@todo
 
 --- TkWindow#place_configinfo(slot = nil)
+#@todo
 
 --- TkWindow#place_info
+#@todo
     placeで配置したウィジェットの配置情報をハッシュで返します。
 
 --- TkWindow#place_slaves
+#@todo
     (({self}))ウィジェット内にplaceで配置したウィジェットの配列を返します。
 
 --- TkWindow#focus(force = false)
+#@todo
     ((<入力フォーカス>))を(({self}))に設定します。((|force|))が真の場合他
     のアプリケーションが入力フォーカスを持っている場合にも横取りすることが
     できます。(({self}))を返します。
 
 --- TkWindow#grab(arg = nil)
+#@todo
     ウィジェットへのグラブに関する操作を行います。ウィジェットをグラブすると、
     他のウィジェットで((<イベント>))が発生しなくなります。
 
@@ -213,11 +243,13 @@
       グラブを解放します。(({nil}))を返します。
 
 --- TkWindow#lower(below=None)
+#@todo
     ウィジェットを((|below|))ウィジェットの下に置きます。((|below|))を省略する
     と一番下にウィジェットを置きます。
     (({self}))を返します。
 
 --- TkWindow#raise(above=None)
+#@todo
     ウィジェットを((|above|))ウィジェットの上に置きます。((|above|))を省略する
     と一番上(手前)にウィジェットを置きます。
     (({self}))を返します。
@@ -229,6 +261,7 @@
     せる場合は、((<Kernel#fail>))を使用するのが無難です。
 
 --- TkWindow#command(cmd=Proc.new)
+#@todo
     引数で指定したProcオブジェクトをコマンドとして登録します。
 
       TkButton.new {
@@ -239,6 +272,7 @@
       Tk.mainloop
 
 --- TkWindow#colormodel(model=None)
+#@todo
     (このメソッドは、TkバージョンX.X以降では使用できません)((-Tk8.0で確認-))
 
     Ruby/Tkウィジェットのカラーモデルをカラーか白黒かに設定します。
@@ -251,16 +285,20 @@
     (({self}))を返します。
 
 --- TkWindow#destroy
+#@todo
     ウィジェットを完全に消去します。
 
 --- TkWindow#wait
 --- TkWindow#wait_visibility
+#@todo
     ウィジェットの可視状態が変化するまで待ちます。
 
 --- TkWindow#wait_destroy
+#@todo
     ウィジェットが((<TkWindow#destroy>))されるまで待ちます。
 
 --- TkWindow#bindtags(taglist=nil)
+#@todo
     ウィジェット(({self}))の((<タグリスト>))を((|taglist|))に設定します。
     タグリストはイベントの伝搬を示す配列でその要素は
 
