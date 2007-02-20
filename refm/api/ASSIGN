@@ -4,7 +4,7 @@
 #--------------------------------------------------------
 _builtin/ARGF
 _builtin/ArgumentError
-_builtin/Array
+_builtin/Array                  aamine
 _builtin/Bignum
 _builtin/Binding
 _builtin/Class
@@ -25,7 +25,7 @@ _builtin/Fixnum
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
-_builtin/Hash
+_builtin/Hash                   aamine
 _builtin/IO
 _builtin/IOError
 _builtin/IndexError
@@ -65,7 +65,7 @@ _builtin/SecurityError
 _builtin/Signal
 _builtin/SignalException
 _builtin/StandardError
-_builtin/String
+_builtin/String                 aamine
 _builtin/Struct
 _builtin/Struct__Tms
 _builtin/Symbol
@@ -130,7 +130,7 @@ eregex
 etc
 expect
 fcntl
-fileutils
+fileutils                       aamine
 final
 finalize
 find
@@ -162,11 +162,11 @@ monitor
 mutex_m
 net/ftp
 net/ftptls
-net/http
-net/https
+net/http                        aamine
+net/https                       aamine
 net/imap
-net/pop
-net/smtp
+net/pop                         aamine
+net/smtp                        aamine
 net/telnet
 net/telnets
 nkf
@@ -189,7 +189,7 @@ profile
 profiler
 pstore
 pty
-racc/parser
+racc/parser                     aamine
 rational
 rbconfig
 readbytes
@@ -231,7 +231,7 @@ rexml/xpath
 rexml/xpath_parser
 rinda/rinda
 rinda/tuplespace
-ripper
+ripper                          aamine
 rss
 rubyunit
 scanf
@@ -244,7 +244,7 @@ singleton
 soap
 socket
 stringio
-strscan
+strscan                         aamine
 sync
 syslog
 
