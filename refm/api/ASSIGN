@@ -4,7 +4,7 @@
 #--------------------------------------------------------
 _builtin/ARGF
 _builtin/ArgumentError
-_builtin/Array                  aamine
+_builtin/Array
 _builtin/Bignum
 _builtin/Binding
 _builtin/Class
@@ -14,7 +14,7 @@ _builtin/Data
 _builtin/Dir
 _builtin/ENV
 _builtin/EOFError
-_builtin/Enumerable
+_builtin/Enumerable             aamine
 _builtin/Exception
 _builtin/FalseClass
 _builtin/File
@@ -25,7 +25,7 @@ _builtin/Fixnum
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
-_builtin/Hash                   aamine
+_builtin/Hash
 _builtin/IO
 _builtin/IOError
 _builtin/IndexError
