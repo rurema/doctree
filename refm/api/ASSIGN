@@ -106,8 +106,8 @@ cgi/session
 complex
 csv
 curses
-date
-date2
+date                            tadf
+date2                           tadf
 dbm
 debug
 delegate
@@ -180,7 +180,7 @@ ostruct
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 parsearg
-parsedate
+parsedate                       tadf
 pathname
 ping
 pp
