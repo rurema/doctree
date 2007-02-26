@@ -43,7 +43,7 @@ _builtin/Module
 _builtin/NameError
 _builtin/NilClass
 _builtin/NoMemoryError
-_builtin/NoMethodError
+_builtin/NoMethodError          snoozer05
 _builtin/NotImplementedError
 _builtin/Numeric
 _builtin/Object
@@ -71,7 +71,7 @@ _builtin/Struct__Tms
 _builtin/Symbol
 _builtin/SyntaxError
 _builtin/SystemCallError
-_builtin/SystemExit
+_builtin/SystemExit             snoozer05
 _builtin/SystemStackError
 _builtin/Thread
 _builtin/ThreadError
