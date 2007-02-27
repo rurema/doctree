@@ -251,7 +251,7 @@ syslog
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 tempfile
-test/unit
+test/unit                       sheepman
 thread
 thwait
 time
