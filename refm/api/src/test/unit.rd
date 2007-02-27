@@ -390,6 +390,3 @@ suites, not the suites themselves.
 
 Overridden to return the name given the suite at creation.
 
-#@include(AutoRunner)
-#@include(UI)
-#@include(Assertion)
