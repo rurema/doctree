@@ -234,6 +234,14 @@ syslog
 tempfile
 #@since 1.8.0
 test/unit
+test/unit/autorunner
+test/unit/assertions
+test/unit/ui/testrunnerutilities
+test/unit/ui/console/testrunner
+test/unit/ui/fox/testrunner
+test/unit/ui/gtk/testrunner
+test/unit/ui/gtk2/testrunner
+test/unit/ui/tk/testrunner
 #@end
 thread
 thwait
