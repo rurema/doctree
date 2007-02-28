@@ -1,8 +1,9 @@
-= class RSS::Maker::RSS20::Channel::Categories < RSS::Maker::RSS09::Channel::Categories
+= class RSS::Maker::ChannelBase::CategoriesBase < Object
+alias RSS::Maker::ItemsBase::ItemBase::CategoriesBase
 
 include Enumerable
 
-RSS 2.0を生成するときだけ利用されます．
+
 
 == Instance Methods
 
@@ -12,8 +13,8 @@ RSS 2.0を生成するときだけ利用されます．
 categoryはcategoryリストの最後
 に追加されています．
 
-= class RSS::Maker::RSS20::Channel::Categories::Category < RSS::Maker::RSS09::Channel::Categories::Category
 
+= class RSS::Maker::ChannelBase::CategoriesBase::CategoryBase < Object
 categoryは
 maker.channel.categories.new_categoryで作成されたオ
 ブジェクトとします．
@@ -29,3 +30,13 @@ contentを指定する必要があります．
 --- content
 --- content=()
 #@todo
+
+= class RSS::Maker::RSS09::Channel::Categories < RSS::Maker::ChannelBase::CategoriesBase
+
+= class RSS::Maker::RSS10::Channel::Categories < RSS::Maker::ChannelBase::CategoriesBase
+
+= class RSS::Maker::RSS20::Channel::Categories < RSS::Maker::RSS09::Channel::Categories
+
+= class RSS::Maker::RSS09::Channel::Categories::Category < RSS::Maker::ChannelBase::CategoriesBase::CategoryBase
+= class RSS::Maker::RSS10::Channel::Categories::Category < RSS::Maker::ChannelBase::CategoriesBase::CategoryBase
+= class RSS::Maker::RSS20::Channel::Categories::Category < RSS::Maker::RSS09::Channel::Categories::Category
