@@ -236,6 +236,8 @@ tempfile
 test/unit
 test/unit/autorunner
 test/unit/assertions
+test/unit/testcase
+test/unit/testsuite
 test/unit/ui/testrunnerutilities
 test/unit/ui/console/testrunner
 test/unit/ui/fox/testrunner
