@@ -1,4 +1,4 @@
-= class RSS::Maker::RSS20::Channel::Cloud < RSS::Maker::RSS09::Channel::Cloud
+= class RSS::Maker::ChannelBase::CloudBase < Object
 
 RSS 2.0を生成するときだけ利用されます．
 
@@ -25,3 +25,10 @@ RSS 2.0を生成するときだけ利用されます．
 --- protocol
 --- protocol=()
 #@todo
+
+= class RSS::Maker::RSS09::Channel::Cloud < RSS::Maker::ChannelBase::CloudBase
+
+= class RSS::Maker::RSS10::Channel::Cloud < RSS::Maker::ChannelBase::CloudBase
+ 
+= class RSS::Maker::RSS20::Channel::Cloud < RSS::Maker::RSS09::Channel::Cloud
+
