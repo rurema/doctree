@@ -77,7 +77,7 @@ _builtin/Thread
 _builtin/ThreadError
 _builtin/ThreadGroup
 _builtin/Time
-_builtin/TrueClass
+_builtin/TrueClass		yamane
 _builtin/TypeError
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError
