@@ -16,7 +16,7 @@ _builtin/ENV
 _builtin/EOFError
 _builtin/Enumerable             aamine
 _builtin/Exception
-_builtin/FalseClass
+_builtin/FalseClass		yamane
 _builtin/File
 _builtin/FileTest
 _builtin/File__Constants
