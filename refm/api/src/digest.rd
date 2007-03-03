@@ -79,24 +79,20 @@ include Digest::Instance
 
 #@if(version < "1.8.6")
 --- new([str])
-#@todo
 
 新しいダイジェストオブジェクトを生成する。文字列引数が与えられると
 それを追加する([[m:Digest::Base#update]] 参照)。
 #@else
 --- new
-#@todo
 新しいダイジェストオブジェクトを生成する。
 #@end
 
 --- digest(str)
-#@todo
 
 与えられた文字列に対するハッシュ値を文字列で返す。
 new(str).digest と等価。
 
 --- hexdigest(str)
-#@todo
 
 与えられた文字列に対するハッシュ値を、ASCIIコードを使って
 16進数の列を示す文字列にエンコードして返す。
@@ -115,12 +111,10 @@ creates a digest object and reads a given file, name.
 
 --- dup
 --- clone
-#@todo
 
 ダイジェストオブジェクトの複製を作る。
 
 --- digest
-#@todo
 
 今までに追加した文字列に対するハッシュ値を文字列で返す。MD5では
 16バイト長、SHA1およびRMD160では20バイト長、SHA256では32バイト長、
@@ -135,7 +129,6 @@ Returns the resulting hash value and resets the digest to the initial state.
 
 --- hexdigest
 --- to_s
-#@todo
 
 今までに追加した文字列に対するハッシュ値を、ASCIIコードを使って
 16進数の列を示す文字列にエンコードして返す。MD5では32バイト長、
@@ -155,7 +148,6 @@ initial state.
 
 --- update(str)
 --- <<(str)
-#@todo
 
 文字列を追加する。複数回updateを呼ぶことは文字列を連結して
 updateを呼ぶことと等しい。すなわち m.update(a); m.update(b) は
@@ -165,12 +157,10 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 self を返す。
 
 --- ==(md)
-#@todo
 
 与えられたダイジェストオブジェクトと比較する。
 
 --- ==(str)
-#@todo
 
 与えられた文字列を digest 値、もしくは hexdigest 値と比較する。
 いずれの値と見るかは与えられた文字列の長さによって自動判別
