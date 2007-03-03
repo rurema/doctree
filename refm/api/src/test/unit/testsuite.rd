@@ -1,62 +1,66 @@
 
 = class Test::Unit::TestSuite < Object
 
-A collection of tests which can be run.
-
-Note: It is easy to confuse a TestSuite instance with something that has a static suite method; I know because I have trouble keeping them straight. Think of something that has a suite method as simply providing a way to get a meaningful TestSuite instance.
-
+複数のテストをひとつにまとめたクラスです。TestSuite 同士をまとめてひとつの
+TestSuite にすることもできます。
+[[m:Test::Unit::TestSuite#run]] によりまとめたテストを一度に
+実行することができます。
 
 == Class Methods
 
-#@# bc-rdoc: detected missing name: new
---- new(name="Unnamed TestSuite")
-#@todo
+--- new(name = "Unnamed TestSuite")
 
-Creates a new TestSuite with the given name.
+TestSuite のインスタンスを生成して返します。
+
+@param name TestSuite の名前です。文字列で与えます。
 
 == Instance Methods
 
-#@# bc-rdoc: detected missing name: <<
 --- <<(test)
-#@todo
 
-Adds the test to the suite.
+テストを加えます。self を返します。
 
-#@# bc-rdoc: detected missing name: ==
+@param test TestCase か TestSuite のインスタンスを与えます。
+
+#@since 1.8.1
 --- ==(other)
 #@todo
 
 It's handy to be able to compare TestSuite instances.
 
-#@# bc-rdoc: detected missing name: delete
 --- delete(test)
-#@todo
 
+testと等しいもの全てを自身から削除します。test と等しい要素が見つかった場合は、testを返します。
+test と等しいものがなければ nil を返します
 
+@param test  TestCase か TestSuite のインスタンスを与えます。
 
-#@# bc-rdoc: detected missing name: empty?
+#@end
+
 --- empty?
+実行すべきテストが空なら true を返します。そうでないなら false を返します。
+
+
+--- run(result) 
+--- run(result) {|STARTED, name| ...}
 #@todo
 
+テストを実行します。TestSuite に最初に加えられたテストから順に実行されます。
+自身が TestSuite を含んでいる場合は、再帰的にテストを実行します。
 
-
-#@# bc-rdoc: detected missing name: run
---- run(result, &progress_block) {|STARTED, name| ...}
-#@todo
-
-Runs the tests and/or suites contained in this TestSuite.
-
-#@# bc-rdoc: detected missing name: size
 --- size
-#@todo
 
-Retuns the rolled up number of tests in this suite; i.e. if the
-suite contains other suites, it counts the tests within those
-suites, not the suites themselves.
+実行するテストの総数を返します。
+もし自身が他の TestSuite を含んでいる場合は、その TestSuite が
+持っているテストを再帰的に合計した数を返します。
 
-#@# bc-rdoc: detected missing name: to_s
 --- to_s
 #@todo
 
 Overridden to return the name given the suite at creation.
 
+--- name
+#@todo
+
+--- tests
+#@todo
