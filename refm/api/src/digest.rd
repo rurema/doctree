@@ -130,14 +130,24 @@ Returns the resulting hash value and resets the digest to the initial state.
 --- hexdigest
 --- to_s
 
-今までに追加した文字列に対するハッシュ値を、ASCIIコードを使って
-16進数の列を示す文字列にエンコードして返す。MD5では32バイト長、
-SHA1およびRMD160では40バイト長、SHA256では64バイト長、SHA384では
-96バイト長、SHA512では128バイト長となる。Rubyで書くと以下と同じ。
+newの引数で与えた文字列や、
+updateや<<によって追加した文字列に対するハッシュ値を、
+ASCIIコードを使って16進数の列を示す文字列にエンコードして返す。
+MD5では32バイト長、SHA1およびRMD160では40バイト長、SHA256では64バイト長、
+SHA384では96バイト長、SHA512では128バイト長となる。
+Rubyで書くと以下と同じ。
 
         def hexdigest
           digest.unpack("H*")[0]
         end
+
+使用例(MD5の場合)
+
+        require 'digest/md5'
+        digest = Digest::MD5.new("ruby")
+        p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
+
+[[m:Digest#digest]]、[[m:Digest#update]]、[[m:Digest#<<]]も参照してください。
 
 #@since 1.8.6
 --- hexdigest!
