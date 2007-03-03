@@ -60,9 +60,10 @@ extend TkCore
 
 
 --- lower(*wins)
-#@todo
 
+ウィンドウを最背面に移動します。
 
+@param wins ウィンドウの配列
 
 --- map(*wins)
 #@todo
@@ -85,9 +86,10 @@ extend TkCore
 
 
 --- raise(*wins)
-#@todo
 
+ウィンドウを最前面に移動します。
 
+@param wins ウィンドウの配列
 
 --- read_jpeg(file, photo)
 #@todo
@@ -100,9 +102,11 @@ extend TkCore
 
 
 --- snap(win, photo)
-#@todo
 
+スナップショットをとります。
 
+@param win ウィンドウ
+@param photo 保存する Photo イメージの名前
 
 --- subsample(src, dest, x, y, width, height, horiz_filter = None, vert_filter = None)
 #@todo

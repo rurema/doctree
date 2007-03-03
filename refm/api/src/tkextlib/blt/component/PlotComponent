@@ -718,39 +718,47 @@ alias bar
 
 
 --- xaxis_cget(option)
-#@todo
 
+現在のオプションの値を返します。
 
+@param option オプション名
 
 --- xaxis_configinfo(slot = nil)
-#@todo
 
+オプション slot の値を取得します。
 
+@param slot オプション名
 
 --- xaxis_configure(slot, value = None)
-#@todo
 
+オプション slot の値を value に設定します。
 
+@param slot オプション名
+@param value 設定する値
 
 --- xaxis_invtransform(val)
-#@todo
 
+逆変換を実行します。
+x スクリーン座標値 val をグラフ座標に変換します。
 
+@param val スクリーン座標値
 
 --- xaxis_limits
-#@todo
 
+x 軸の最小値・最大値の組を配列で返します。
 
 
 --- xaxis_transform(val)
-#@todo
 
+x グラフ座標値 val をスクリーン座標に変換します。
 
+@param val グラフ座標値
 
 --- xaxis_use(target = nil)
-#@todo
 
+軸 target を x 軸として使います。
 
+@param target 軸
 
 --- y2axis_bind(context, *args)
 #@todo
