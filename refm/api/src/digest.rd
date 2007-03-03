@@ -116,9 +116,19 @@ creates a digest object and reads a given file, name.
 
 --- digest
 
-今までに追加した文字列に対するハッシュ値を文字列で返す。MD5では
-16バイト長、SHA1およびRMD160では20バイト長、SHA256では32バイト長、
+newの引数で与えた文字列や、
+updateや<<によって追加した文字列に対するハッシュ値を文字列で返す。
+MD5では16バイト長、SHA1およびRMD160では20バイト長、SHA256では32バイト長、
 SHA384では48バイト長、SHA512では64バイト長となる。
+
+使用例
+
+        require 'digest/md5'
+        digest = Digest::MD5.new("ruby")
+        p digest.digest # => "X\345=\023$\356\366&_\333\227\260\216\331\252\337"
+
+[[m:Digest#hexdigest]]、[[c:Digest.new]]、[[m:Digest#update]]、
+[[m:Digest#<<]]も参照してください。
 
 #@since 1.8.6
 --- digest!
