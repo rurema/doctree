@@ -157,7 +157,8 @@ Rubyで書くと以下と同じ。
         digest = Digest::MD5.new("ruby")
         p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
 
-[[m:Digest#digest]]、[[m:Digest#update]]、[[m:Digest#<<]]も参照してください。
+[[m:Digest#digest]]、[[c:Digest.new]]、[[m:Digest#update]]、
+[[m:Digest#<<]]も参照してください。
 
 #@since 1.8.6
 --- hexdigest!
