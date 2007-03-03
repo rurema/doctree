@@ -170,12 +170,21 @@ initial state.
 --- update(str)
 --- <<(str)
 
-文字列を追加する。複数回updateを呼ぶことは文字列を連結して
-updateを呼ぶことと等しい。すなわち m.update(a); m.update(b) は
+文字列を追加する。self を返す。
+複数回updateを呼ぶことは文字列を連結してupdateを呼ぶことと等しい。
+すなわち m.update(a); m.update(b) は
 m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 である。
 
-self を返す。
+@param str 追加する文字列
+
+        require 'digest/md5'
+        digest = Digest::MD5.new
+        digest.update("r")
+        digest.update("u")
+        digest.update("b")
+        digest.update("y")
+        p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
 
 --- ==(md)
 
