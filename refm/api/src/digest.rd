@@ -215,6 +215,13 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 いずれの値と見るかは与えられた文字列の長さによって自動判別
 される。
 
+@param str 比較対象の(ダイジェストの)文字列
+
+        require 'digest/md5'
+        digest = Digest::MD5.new
+        digest.update("ruby")
+        p digest == "58e53d1324eef6265fdb97b08ed9aadf" # => true
+
 #@since 1.8.6
 --- file 
 #@todo
