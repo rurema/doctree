@@ -179,6 +179,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 @param str 追加する文字列
 
         require 'digest/md5'
+
         digest = Digest::MD5.new
         digest.update("r")
         digest.update("u")
@@ -186,9 +187,27 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         digest.update("y")
         p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
 
+        digest = Digest::MD5.new
+        digest << "r"
+        digest << "u"
+        digest << "b"
+        digest << "y"
+        p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
+
 --- ==(md)
 
 与えられたダイジェストオブジェクトと比較する。
+
+@param md 比較対象のダイジェストオブジェクト
+
+        require 'digest/md5'
+        digest1 = Digest::MD5.new
+        digest1.update("ruby")
+        digest2 = Digest::MD5.new
+        digest2.update("ruby")
+        p digest1 == digest2 # => true
+        digest2.update("RUBY")
+        p digest1 == digest2 # => false
 
 --- ==(str)
 
