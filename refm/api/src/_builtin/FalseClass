@@ -53,7 +53,7 @@ other が真なら true を, 偽なら false を返します。
 
 @param other 排他的論理和を行なう式です。
 
-^ は再定義可能な演算子に分類されていますので、通常は false | other の形で使われます。
+^ は再定義可能な演算子に分類されていますので、通常は false ^ other の形で使われます。
 
    p false ^ true     #=> true
    p false ^ false    #=> false
