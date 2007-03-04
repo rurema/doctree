@@ -41,8 +41,6 @@ test と等しいものがなければ nil を返します
 --- empty?
 実行すべきテストが空なら true を返します。そうでないなら false を返します。
 
-
---- run(result) 
 --- run(result) {|STARTED, name| ...}
 
 自身が持っているテストを実行します。
