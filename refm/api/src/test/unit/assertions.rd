@@ -131,7 +131,7 @@ object1.send(operator, object2) が真ならパスします。
 ブロックを実行して例外が発生し、その例外が
 expected_exception_klass クラスならばパスします。
 
-実際に投げられた例外を返します。例外が発生しなかった場合は、nil を返します。
+assert にパスした時は、実際に投げられた例外を返します。
 
 @raise Test::Unit::AssertionFailedError assert がパスしなかった時に発生します。
 
