@@ -11,14 +11,12 @@ Ties everything together. If you subclass and add your own test methods, it take
 
 == Class Methods
 
-#@# bc-rdoc: detected missing name: new
 --- new(test_method_name)
 #@todo
 
 Creates a new instance of the fixture for running the test represented
 by test_method_name.
 
-#@# bc-rdoc: detected missing name: suite
 --- suite
 #@todo
 
@@ -35,14 +33,12 @@ creating a new instance of the fixture for each method.
 #@todo
 各テストメソッドが呼ばれた後に必ず呼ばれます。
 
-#@# bc-rdoc: detected missing name: name
 --- name
 #@todo
 
 Returns a human-readable name for the specific test that this
 instance of TestCase represents.
 
-#@# bc-rdoc: detected missing name: run
 --- run(result) {|STARTED, name| ...}
 #@todo
 
@@ -50,13 +46,25 @@ Runs the individual test method represented by this instance
 of the fixture, collecting statistics, failures and errors in
 result.
 
-#@# bc-rdoc: detected missing name: size
 --- size
 #@todo
 
-#@# bc-rdoc: detected missing name: default_test
 --- default_test
 #@todo
 
+--- passed?
+#@todo
+
+Returns whether this individual test passed or
+not. Primarily for use in teardown so that artifacts
+can be left behind if the test fails.
+
+== Constants
+
+--- PASSTHROUGH_EXCEPTIONS
+
+These exceptions are not caught by #run.
+
 #@include(error.rd)
 #@include(failure.rd)
+
