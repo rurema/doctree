@@ -117,11 +117,11 @@ digest/md5
 digest/rmd160
 digest/sha1
 digest/sha2
-dl
-dl/Symbol
-dl/import
-dl/struct
-dl/types
+dl                              sheepman 
+dl/Symbol                       sheepman
+dl/import                       sheepman
+dl/struct                       sheepman
+dl/types                        sheepman
 dl/win32
 drb
 e2mmap
