@@ -13,12 +13,19 @@ extend Test::Unit::UI::TestRunnerUtilities
 == Class Methods
 
 --- new(suite, output_level=NORMAL, io=STDOUT)
-#@todo
 
-Creates a new TestRunner for running the passed suite. If quiet_mode
-is true, the output while running is limited to progress dots,
-errors and failures, and the final result. io specifies where
-runner output should go to; defaults to STDOUT.
+TestRunner オブジェクトを生成して返します。
+
+@param suite 実行したいテストを保持している TestSuite オブジェクトか
+TestCase オブジェクトを与えます。
+
+@param output_level 出力レベルを指定します。指定できるのは以下の4つです。
+ * Test::Unit::UI::SILENT 
+ * Test::Unit::UI::PROGRESS_ONLY
+ * Test::Unit::UI::NORMAL
+ * Test::Unit::UI::VERBOSE
+
+@param io 結果を出力するための [[c:IO]] オブジェクトを与えます。
 
 == Instance Methods
 
