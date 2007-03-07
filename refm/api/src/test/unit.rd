@@ -3,7 +3,7 @@ require test/unit/autorunner
 
 ユニットテストを行うためのライブラリです。
 
-[[url:http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
+#@#[[url:http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
 
 === 使い方
 
@@ -20,8 +20,9 @@ Test::Unit は以下のように使います。
        end
     end
 
-次にユニットテスト(test_foo.rb)を書きます。テストを実行するメソッドの名前は
-全て test_ で始まる必要があります。
+次にユニットテスト(test_foo.rb)を書きます。テストを実行するメソッド(テストメソッド)の名前は
+全て test_ で始まる必要があります。テストメソッドが実行される前には setup メソッドが必ず
+呼ばれます。実行されたあとには、teardown メソッドが必ず呼ばれます。
 
     require 'test/unit'
     require 'foo'
