@@ -1,15 +1,17 @@
 require test/unit/ui/testrunnerutilities
 require test/unit/ui/testrunnermediator
 
-= module Test::Unit::UI::Console
+コンソール上でユニットテストを実行し、結果を表示するための
+ライブラリです。
+
 = class Test::Unit::UI::Console::TestRunner < Object
 extend Test::Unit::UI::TestRunnerUtilities
 
-Runs a Test::Unit::TestSuite on the console.
+コンソール上でユニットテストを実行し、結果を表示するための
+クラスです。
 
 == Class Methods
 
-#@# bc-rdoc: detected missing name: new
 --- new(suite, output_level=NORMAL, io=STDOUT)
 #@todo
 
@@ -19,8 +21,7 @@ errors and failures, and the final result. io specifies where
 runner output should go to; defaults to STDOUT.
 
 == Instance Methods
-#@# bc-rdoc: detected missing name: start
---- start
-#@todo
 
-Begins the test run.
+--- start
+
+テストを実行し、生成時に与えられた io に結果を出力します。
