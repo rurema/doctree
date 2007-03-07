@@ -1,4 +1,6 @@
 require test/unit/ui/testrunnerutilities
+require test/unit/ui/testrunnermediator
+
 = module Test::Unit::UI::Console
 = class Test::Unit::UI::Console::TestRunner < Object
 extend Test::Unit::UI::TestRunnerUtilities

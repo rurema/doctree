@@ -1,3 +1,7 @@
+require test/unit
+require test/unit/util/observable
+require test/unit/testresult
+
 各種 TestRunner を実装するために使われます。
 
 Unit テストを行いたいだけのユーザが、このライブラリを require する

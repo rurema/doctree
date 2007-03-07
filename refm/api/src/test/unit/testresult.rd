@@ -1,3 +1,5 @@
+require test/unit/util/observable
+
 = class Test::Unit::TestResult < Object
 include Test::Unit::Util::Observable
 

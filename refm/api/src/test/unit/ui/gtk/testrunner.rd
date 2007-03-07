@@ -1,4 +1,5 @@
 require test/unit/ui/testrunnerutilities
+require test/unit/ui/testrunnermediator
 
 = class Test::Unit::UI::GTK::TestRunner < Object
 extend Test::Unit::UI::TestRunnerUtilities
