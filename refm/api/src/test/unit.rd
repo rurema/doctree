@@ -139,5 +139,3 @@ runは過去分詞のrunです。trueにするとテストを実行し終えたという意味になります。
 
 #@end
 
-#@include(unit/testresult.rd)
-#@include(unit/ui/testrunnermediator.rd)
