@@ -1,23 +1,32 @@
-= class Test::Unit::UI::TestRunnerMediator
+各種 TestRunner を実装するために使われます。
 
-Provides an interface to write any given UI against,
-hopefully making it easy to write new UIs.
+Unit テストを行いたいだけのユーザが、このライブラリを require する
+必要はありません。
+
+= class Test::Unit::UI::TestRunnerMediator
+include Test::Unit::Util::Observable
+
+各種 TestRunner を実装するためのクラスです。
 
 == Class Methods
 --- initialize(suite)
 
-Creates a new TestRunnerMediator initialized to run
-the passed suite.
+新しく TestRunnerMediator オブジェクトを生成して返します。
+
+@param suite 実行したいテストを持った Test::Unit::TestSuite オブジェクトを
+与えます。
 
 == Instance Methods
 
 --- run_suite
-Runs the suite the TestRunnerMediator was created
-with.
+生成時に与えられた Test::Unit::TestSuite が保持しているテストを実行します。
+実行結果を表す Test::Unit::TestResult オブジェクトを返します。
 
 == Private Instance Methods
 
 --- create_result
+#@todo
+
 A factory method to create the result the mediator
 should run with. Can be overridden by subclasses if
 one wants to use a different result.

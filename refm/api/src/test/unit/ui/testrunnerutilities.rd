@@ -1,4 +1,10 @@
+各種 TestRunner を実装するために使われます。
+
+Unit テストを行いたいだけのユーザが、このライブラリを require する
+必要はありません。
+
 = module Test::Unit::UI
+各種 TestRunner を実装するためのモジュールです。
 
 == Constants
 
@@ -14,7 +20,8 @@
 == Instance Methods
 --- run(suite, output_level=NORMAL)
 #@todo
-Creates a new TestRunner and runs the suite.
+
+新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
 
 --- start_command_line_test
 #@todo

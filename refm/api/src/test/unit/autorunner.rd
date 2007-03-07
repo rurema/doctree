@@ -1,3 +1,6 @@
+require test/unit
+require test/unit/ui/testrunnerutilities
+
 #@since 1.8.1
 = class Test::Unit::AutoRunner
 
@@ -48,20 +51,22 @@ Runner にテストを実行させているクラスです。
 
 == Class Methods
 
---- run(force_standalone = false, dir = nil, argv = ARGV)
+--- run(force_standalone = false, dir = '.', argv = ARGV)
 #@todo
-テストを実行します。
+テストを実行します。全てのテストが成功した場合、true を返します。そうでない場合は、
+false を返します。
         
 #@if (version >= "1.8.3")
 #@#ruby 1.8.3 以降では force_standalone の意味が変わり、今までと真偽が逆になりました。        
-force_standalone に true を与えると、dir 以下にある全てのテストを実行します。
+@param force_standalone true を与えると、dir 以下にある全てのテストを実行します。
 false を与えた場合は既に読み込まれたファイルの中からテストを探して実行します。
-デフォルトは false です。
+テストが読み込まれておらず、スクリプトを -e から実行している場合は、dir 以下にある全てのテストを
+実行します。デフォルトは false です。
 #@end
 
 #@if (version <= "1.8.2")
 #@#ruby 1.8.2 まで: 
-force_standalone には $0 か false を与えます。
+@param force_standalone $0 か false を与えます。
 $0 を与えた場合は既に読み込まれたファイルの中からテストを探して実行します。
 false を与えた場合は、dir の中からテストスクリプトを再帰的に探査して
 実行します。デフォルトではファイル名が test_*.rb のテストスクリプトしか探査
@@ -69,10 +74,10 @@ false を与えた場合は、dir の中からテストスクリプトを再帰的に探査して
 false を与えた場合でも、既に読み込まれたファイルは実行するテストに含まれます。
 #@end
 
-dir には force_standalone に true を与えた時に再帰的に探査するディレクトリ名を
+@param dir force_standalone に true を与えた時に再帰的に探査するディレクトリ名を
 与えます。デフォルトではカレントディレクトリを再帰的に探査します。
 
-argv にはオプションを配列として与えます。解釈するオプションは先に
+@param argv オプションを配列として与えます。解釈するオプションは先に
 出てきたものと同じです。
 
       -r, --runner=RUNNER              Use the given RUNNER.
@@ -118,8 +123,5 @@ argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
 と、runner.rb に書いておいて、コマンドラインから以下のように実行。
    
       $ ruby runner.rb --runner=tk -v --exclude=/test_hoge.\*\\.rb\\Z/i
-
---- standalone?
-#@todo
 
 #@end

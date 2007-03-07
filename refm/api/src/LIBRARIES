@@ -237,13 +237,16 @@ test/unit
 test/unit/autorunner
 test/unit/assertions
 test/unit/testcase
+test/unit/testresult
 test/unit/testsuite
 test/unit/ui/testrunnerutilities
+test/unit/ui/testrunnermediator
 test/unit/ui/console/testrunner
 test/unit/ui/fox/testrunner
 test/unit/ui/gtk/testrunner
 test/unit/ui/gtk2/testrunner
 test/unit/ui/tk/testrunner
+test/unit/util/observable
 #@end
 thread
 thwait

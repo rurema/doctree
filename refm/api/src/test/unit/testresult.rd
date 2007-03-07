@@ -1,62 +1,41 @@
-
 = class Test::Unit::TestResult < Object
 include Test::Unit::Util::Observable
 
-Collects [[c:Test::Unit::Failure]] and [[c:Test::Unit::Error]] so that they can be displayed to the user. To this end, observers can be added to it, allowing the dynamic updating of, say, a UI.
+テストの結果を保持するためのクラスです。
+
+[[c:Test::Unit::Failure]] オブジェクトと [[c:Test::Unit::Error]] オブジェクトを
+集めて、ユーザに表示するために使われます。
 
 == Class Methods
-#@# bc-rdoc: detected missing name: new
---- new
-#@todo
 
-Constructs a new, empty TestResult.
+--- new
+
+このメソッドをユーザが直接呼ぶことはありません。
+
+空の TestResult オブジェクトを返します。
 
 == Instance Methods
-#@# bc-rdoc: detected missing name: add_assertion
---- add_assertion
-#@todo
 
-Records an individual assertion.
+--- run_count
+今までに実行を記録したテストメソッドの数を返します。
 
-#@# bc-rdoc: detected missing name: add_error
---- add_error(error)
-#@todo
+--- assertion_count
+今までに実行を記録した assert の数を返します。
 
-Records a Test::Unit::Error.
-
-#@# bc-rdoc: detected missing name: add_failure
---- add_failure(failure)
-#@todo
-
-Records a Test::Unit::Failure.
-
-#@# bc-rdoc: detected missing name: add_run
---- add_run
-#@todo
-
-Records a test run.
-
-#@# bc-rdoc: detected missing name: error_count
 --- error_count
-#@todo
 
-Returns the number of errors this TestResult has recorded.
-#@# bc-rdoc: detected missing name: failure_count
+今までに記録したテストのエラーの数を返します。
+
 --- failure_count
-#@todo
 
-Returns the number of failures this TestResult has recorded.
+今までに記録した失敗したテストの数を返します。
 
-#@# bc-rdoc: detected missing name: passed?
 --- passed?
-#@todo
 
-Returns whether or not this TestResult represents successful
-completion.
+すべてのテストが成功したなら true を返します。
+そうでないなら false を返します。
 
-#@# bc-rdoc: detected missing name: to_s
 --- to_s
-#@todo
 
-Returns a string contain the recorded runs, assertions, failures
-and errors in this TestResult.
+実行したテストメソッドの数と assert の数、テストの失敗・エラーそれぞれの回数を
+人間が読みやすい文字列にして返します。
