@@ -7,12 +7,12 @@ Ruby インタプリタを終了させるときに発生します。
 
 #@since 1.8.0
 --- new(status = 0, error_message = "")
-#@todo
 
 SystemExit オブジェクトを生成して返します。
 
-第 1 引数 status には終了ステータスを整数で指定します。
-第 2 引数 error_message にはエラーメッセージを文字列で指定します。
+@param status 終了ステータスを整数で指定します。
+
+@param error_message エラーメッセージを文字列で指定します。
 
 例:
 
@@ -24,7 +24,6 @@ SystemExit オブジェクトを生成して返します。
 
 #@since 1.8.0
 --- status
-#@todo
 
 例外オブジェクトに保存された終了ステータスを返します。
 
@@ -47,7 +46,6 @@ SystemExit オブジェクトを生成して返します。
 
 #@since 1.8.2
 --- success?
-#@todo
 
 終了ステータスが正常終了を示す値ならば true を返します。
 

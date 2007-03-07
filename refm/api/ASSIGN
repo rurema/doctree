@@ -44,7 +44,7 @@ _builtin/NameError
 _builtin/NilClass
 _builtin/NoMemoryError
 _builtin/NoMethodError          snoozer05
-_builtin/NotImplementedError
+_builtin/NotImplementedError    snoozer05
 _builtin/Numeric
 _builtin/Object
 _builtin/ObjectSpace
@@ -71,7 +71,7 @@ _builtin/Struct__Tms
 _builtin/Symbol
 _builtin/SyntaxError
 _builtin/SystemCallError
-_builtin/SystemExit             snoozer05
+_builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError
 _builtin/Thread
 _builtin/ThreadError
