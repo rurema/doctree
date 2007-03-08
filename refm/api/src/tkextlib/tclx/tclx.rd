@@ -26,6 +26,6 @@ require tkextlib/tclx/setup
 
 #@end
 
-@#include(XPG3_MsgCat)
+#@include(XPG3_MsgCat)
 
 #@end

@@ -64,17 +64,17 @@ typespecが省略された場合、シンボルへの参照を[[c:DL::PtrData]]オブジェクト
 --- []
 #@todo
 
-@if (version >= "1.8.2")
+#@if (version >= "1.8.2")
 --- encode_argument_types(tys)
 #@todo
 
-@end
+#@end
 
-@if (version <= "1.8.1")
+#@if (version <= "1.8.1")
 --- encode_types
 #@todo
 
-@end
+#@end
 
 --- import(name, rettype, argtypes = nil)
 #@todo
