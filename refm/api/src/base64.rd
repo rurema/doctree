@@ -29,17 +29,18 @@ ASCII 文字のうちの 65 文字 ([A-Za-z0-9+/] の 64 文字と '=')
 == Module Functions
 
 --- decode64(str)
-#@todo
 
 Base64エンコードされた文字列strをデコードします。
 
+@param src デコードしたい文字列です。
+
 --- encode64(str)
-#@todo
 
 文字列strをBase64エンコードします。
 
+@param src エンコードしたい文字列です。
+
 --- decode_b(str)
-#@todo
 
 [[rfc:2047]] で定義されている encoded-word を含む
 文字列 str をデコードします。
@@ -55,14 +56,15 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 バグ:
 
-実際は、内部で Kconv.toeuc を呼んでいるため [[unknown:nkf]] ライブラリ
-が勝手にデコードを行ってしまいます ([[unknown:NKFの注意|nkf]]を参照のこと)。
-したがって、この関数はあまり意味がなくなってしまっています
-(昔の Kconv の実装は NKF を使用しなかったためこのようなことになって
-いるのだと思われます)。
+実際は、内部で [[m:Kconv.toeuc]] を呼んでいるため、 [[lib:Kconv]] が内
+部的に利用する [[lib:nkf]] ライブラリが勝手にデコードを行ってしまいます。
+したがって、この関数はあまり意味がなくなってしまっています(昔の Kconv
+の実装は NKF を使用しなかったためこのようなことになっているのだと思われ
+ます)。
+
+@param src デコードしたい文字列です。
 
 --- b64encode(bin, len = 60)
-#@todo
 
 文字列 bin をエンコードし、len の長さで折り返し、表示します。
 
@@ -75,16 +77,24 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 == Module Functions
 
 --- decode64(str)
-#@todo
+
+[[m:Base64.decode64]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 --- encode64(str)
-#@todo
+
+[[m:Base64.encode64]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 --- decode_b(str)
-#@todo
+
+[[m:Base64.decode_b]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 --- b64encode(bin, len = 60)
-#@todo
+
+[[m:Base64.b64encode]] と同じです。このメソッドは将来的に廃止される可能
+性があり、現在は Base64 モジュールを使うことが推奨されています。
 
 #@end
 
@@ -94,15 +104,45 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 == Private Instance Methods
 
 --- decode64(str)
-#@todo
+
+文字列strをBase64エンコードします。
+
+@param src エンコードしたい文字列です。
 
 --- encode64(str)
-#@todo
+
+文字列strをBase64エンコードします。
+
+@param src エンコードしたい文字列です。
 
 --- decode_b(str)
-#@todo
+
+[[rfc:2047]] で定義されている encoded-word を含む
+文字列 str をデコードします。
+
+encoded-word は、
+
+  "=?" + charset + "?" + encoding + "?" + encoded-text + "?="
+
+という形式の文字列で、メールヘッダに使用されます。
+
+この関数は charset として "iso-2022-jp" と "shift_jis" を、
+encoding として "B" encoding (Base64) だけをサポートしています。
+
+バグ:
+
+実際は、内部で [[m:Kconv.toeuc]] を呼んでいるため、 [[lib:Kconv]] が内
+部的に利用する [[lib:nkf]] ライブラリが勝手にデコードを行ってしまいます。
+したがって、この関数はあまり意味がなくなってしまっています(昔の Kconv
+の実装は NKF を使用しなかったためこのようなことになっているのだと思われ
+ます)。
+
+@param src デコードしたい文字列です。
 
 --- b64encode(bin, len = 60)
-#@todo
+
+文字列 bin をエンコードし、len の長さで折り返し、表示します。
+
+表示までしてしまうのはサンプルだからです。
 
 #@end
