@@ -13,19 +13,15 @@
 
 == Class Methods
 
---- new(basename[, tempdir])
---- open(basename[, tempdir])
+--- new(basename, tempdir = Dir::tmpdir)
+--- open(basename, tempdir = Dir::tmpdir)
 #@todo
 
 "basenamepid.n" というファイル名で
-テンポラリファイルを作成します。
+テンポラリファイルを作成し、インスタンスを返します。
 
-テンポラリファイルは、ディレクトリ tempdir に作成されます。
-このデフォルト値は、
-
-        ENV['TMPDIR'] || ENV['TMP'] || ENV['TEMP'] || '/tmp'
-
-です。
+@param tempdir テンポラリファイルが作られるディレクトリです。
+このデフォルト値は、 Dir::tmpdir[[m:Dir.tmpdir]] の値となります。
 
 == Instance Methods
 
@@ -48,13 +44,16 @@ real が偽でなければ、テンポラリファイルはすぐに削除されます。
 
 テンポラリファイルのパス名を返します。
 
-#@since 1.8.0
-#@todo
-#@# このバージョン情報は正しいか?
+#@since 1.6.8
 --- length
 --- size
-#@todo
 テンポラリファイルのサイズを返します。
+
+  tf = Tempfile.new("foo")
+  tf.print("bar,ugo")
+  p tf.size # => 7
+  tf.close
+  p tf.size # => 0
 #@end
 
 --- close!
