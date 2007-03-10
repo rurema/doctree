@@ -1,9 +1,10 @@
 require test/unit
 require test/unit/ui/testrunnerutilities
 
+ユニットテストの実行を操作したいときに使います。
+
 #@since 1.8.1
 = class Test::Unit::AutoRunner
-
 
 テストの実行を操作したいときにこの AutoRunner クラスを使います。
 大量のテストの中から特定のテストスクリプトのみを実行したい場合、

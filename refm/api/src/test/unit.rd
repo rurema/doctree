@@ -120,6 +120,21 @@ console を使う (default)
 もう少し高度なテストの実行方法に関しては [[c:Test::Unit::AutoRunner]] を
 参照して下さい。
 
+=== いつテストは実行されるか
+
+上の例では、テストクラスを「定義しただけ」で、テストが実行されています。
+これは、[[m:Kernel#at_exit]] と [[m:ObjectSpace.each_object]] を使って
+実装されています。つまり、上の例ではテストは終了時の後処理として実行されます。
+
+大抵の場合は、これで問題ありません。が、そうでない場合は、
+testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラスを使うことにより、
+明示的にテストを実行することができます。
+
+=== Error と Failure の違い
+
+テストメソッド実行中に例外が発生したなら Error です。例外が発生せず assert に
+失敗しただけなら Failure です。
+
 === RubyUnit からの移行
 
 assertion メソッドの違いは [[unknown:"ruby-src:lib/runit/assert.rb"]] を参照。
