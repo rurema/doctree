@@ -27,61 +27,84 @@ Windows の LoadLibrary() などの
     extern "int strlen(char*)"
   end
   # Note that we should not include the module LIBC from some reason.
-
-#@# We can call the library function strlen() using LIBC.strlen. If the first
-#@# character of given function name is an uppercase, the first character of the
-#@# defined method name becomes lowercase.
-#@# We can also construct memory images of structures and unions using functions
-#@# struct and union which are defined in "dl/struct" as follows:
+  
+  p LIBC.strlen('abc') #=> 3
 
 LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
 与えられた関数名の最初の文字が大文字なら、
 定義されるメソッド名の最初の文字は小文字になります。
 
-以下のように [[lib:dl/struct]] で定義される
-struct メソッドや union メソッドを使用することで
-構造体や共用体のメモリイメージを作成することもできます。
+==== 構造体を扱う
 
-  require "dl/import"
-  require "dl/struct"
+構造体も扱うことができます。たとえば [[man:gettimeofday(2)]]
+を使って現在時刻を得たい場合は以下のとおりです。
 
-  module LIBC
-    extend DL::Importable
-    Timeval = struct [       # define timeval structure.
-      "long tv_sec",
-      "long tv_uses",
-    ]
-  end
-  val = LIBC::Timeval.malloc # allocate memory.
+ require 'dl/import'
+ module M
+   extend DL::Importable
+   dlload "libc.so.6"
+   extern('int gettimeofday(void *, void *)')
+ end
+ 
+ timeval = DL.malloc(DL.sizeof('LL'))
+ timeval.struct!('LL', :tv_sec, :tv_usec)
+ 
+ e = M.gettimeofday(timeval, nil)
+ if e == 0
+  p timeval[:tv_sec] #=> 1173519547
+ end
 
-#@# Notice that the above example takes LIBC::Timeval.malloc to allocate memory,
-#@# rather than LIBC::Timeval.new. It is because DL::Timeval.new is for wrapping
-#@# an object, PtrData, which has already been created.
+構造体や共用体の作成には、以下のように [[lib:dl/struct]] で定義されている
+[[m:DL::Importable::Internal#struct]] メソッドや [[m:DL::Importable::Internal#union]] メソッドを使用することもできます。
+
+ require 'dl/import'
+ require "dl/struct"
+
+ module M
+   extend DL::Importable
+   dlload "libc.so.6"
+   extern('int gettimeofday(void *, void *)')
+   Timeval = struct [       # define timeval structure.
+                     "long tv_sec",
+                     "long tv_usec",
+                    ]
+ end
+ 
+ timeval = M::Timeval.malloc # allocate memory.
+ 
+ e = M.gettimeofday(timeval, nil)
+ if e == 0
+  p timeval.tv_sec #=> 1173519547
+ end
 
 上の例で、メモリの割り当てに LIBC::Timeval.new ではなく、
 LIBC::Timeval.malloc を使用していることに注意してください。
 LIBC::Timeval.new は、
 作成済みの PtrData オブジェクトをラップするためのものです。
 
-#@# We can define a callback using the module function "callback" as follows:
+==== コールバック
 
 以下のように モジュール関数 callback を使用したコールバックを定義できます。
 
-  module Foo
+  require 'dl/import'
+  module M 
     extend DL::Importable
-    def my_comp(str1,str2)
-      str1 <=> str2
-    end
-    COMPARE = callback "int my_comp(char*,char*)"
+    dlload "libc.so.6"
+  
+    COMPARE = DL.callback('IPP'){|ptr1, ptr2|
+      str1 = ptr1.ptr.to_s
+      str2 = ptr2.ptr.to_s
+      ret = str1[-1] <=> str2[-1]      
+    }
+    extern 'void qsort(void *, int, int, void *)'
   end
-
-#@# where Foo::COMPARE is a Symbol object which invokes the method "my_comp".
-
-ここで Foo::COMPARE は、my_comp メソッドを起動する Symbol オブジェクトです。
-
-#@# DL::Importable module is very useful. However, we sometimes encounter a case
-#@# that we must directly use low-level functions such as dlsym(). In such case,
-#@# we would use DL module functions. They are described in next section.
+  
+  a = ['1b', '2a', '3c']
+  ap = a.to_ptr
+  M.qsort(ap, a.size, DL.sizeof('P'), M::COMPARE)
+  p ap.to_a('P').map{|s| s.to_s } #=> ["2a", "1b", "3c"]
+  
+ここで M::COMPARE は、ブロックを呼ぶ [[c:DL::Symbol]] オブジェクトです。
 
 DL::Importable モジュールはとても便利です。
 しかし、ときにはdlsym() のような低レベル関数を
