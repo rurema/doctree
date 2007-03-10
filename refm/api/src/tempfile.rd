@@ -9,10 +9,10 @@ require tmpdir
 
  * テンポラリファイルを作成します。
    ファイルは "w+" モードで "basename.pid.n" という名前になります。
- * Tempfile オブジェクトは File オブジェクト[[c:File]]と同じように使うことができます。
+ * Tempfile オブジェクトは[[c:File]]オブジェクトと同じように使うことができます。
  * Tempfile#close(true) により、作成したテンポラリファイルは削除されます。
  * スクリプトが終了するときにも削除されます。
- * Tempfile#open により、テンポラリファイルを再オープンすることができます。
+ * [[m:Tempfile#open]]により、テンポラリファイルを再オープンすることができます。
  * テンポラリファイルのモードは 0600 です。
 
 == Class Methods
@@ -24,7 +24,7 @@ require tmpdir
 テンポラリファイルを作成し、インスタンスを返します。
 
 @param tempdir テンポラリファイルが作られるディレクトリです。
-このデフォルト値は、 Dir::tmpdir[[m:Dir.tmpdir]] の値となります。
+このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
 
 == Instance Methods
 
@@ -74,11 +74,16 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
 --- delete
 --- unlink
 #@todo
+テンポラリファイルをクローズせずに、削除します。
+UNIXライクなシステムでは、
+作成したテンポラリファイルが他のプログラムに使用される機会をなくすために
+テンポラリファイルを作成しオープンした後
+すぐに削除するということがしばしばおこなわれます。
 
-Unlinks the file. On UNIX-like systems, it is often a good idea
-to unlink a temporary file immediately after creating and opening
-it, because it leaves other programs zero chance to access the
-file.
+#@# Unlinks the file. On UNIX-like systems, it is often a good idea
+#@# to unlink a temporary file immediately after creating and opening
+#@# it, because it leaves other programs zero chance to access the
+#@# file.
 
   tf = Tempfile.new("foo")
   tf.unlink
