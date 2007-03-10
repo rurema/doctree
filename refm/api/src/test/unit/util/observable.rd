@@ -6,6 +6,8 @@ events.
 == Instance Methods
 
 --- add_listener(channel_name, listener_key=NOTHING, &listener)
+#@todo
+
 Adds the passed proc as a listener on the
 channel indicated by channel_name. listener_key
 is used to remove the listener later; if none is
@@ -19,6 +21,7 @@ itself as the listener_key:
  remove_listener("Channel", listener)
 
 --- remove_listener(channel_name, listener_key)
+#@todo
 
 Removes the listener indicated by listener_key
 from the channel indicated by
@@ -26,6 +29,7 @@ channel_name. Returns the registered proc, or
 nil if none was found.
 
 --- notify_listeners(channel_name, *arguments)
+#@todo
 
 Calls all the procs registered on the channel
 indicated by channel_name. If value is
