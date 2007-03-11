@@ -66,10 +66,7 @@ LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
    extend DL::Importable
    dlload "libc.so.6"
    extern('int gettimeofday(void *, void *)')
-   Timeval = struct [       # define timeval structure.
-                     "long tv_sec",
-                     "long tv_usec",
-                    ]
+   Timeval = struct ["long tv_sec", "long tv_usec"]
  end
  
  timeval = M::Timeval.malloc # allocate memory.
