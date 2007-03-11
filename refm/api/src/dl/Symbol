@@ -61,9 +61,9 @@ C 言語形式のプロトタイプを文字列で返します。
 --- [](*args)
 #@todo
 
-パラメータ arg1, arg2, ... argN で関数を呼び出します。関数の戻り値 result
-と、 call に渡された引数の配列 args = [arg1, arg2, ... argN] からなる配列 [result, args] を
-返します。
+自身が保持しているライブラリ関数を呼び出します。関数の
+戻り値 result と、 call に渡された引数の配列 args = [arg1, arg2, ... argN] 
+からなる配列 [result, args] を返します。
 
  require 'dl'
  h = DL.dlopen('./libtest.so')
