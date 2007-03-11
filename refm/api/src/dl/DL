@@ -123,12 +123,42 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 [[m:DL::Handle.new]](lib) と等価。
 
---- callback
---- define_callback
+--- callback(type)
+--- define_callback(type)
 #@todo
+
+Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
+[[c:DL::Symbol]] を返します。
+
+@param type コールバック関数の型指定子を与えます。
+
+@raise DL::DLError 定義できるコールバック関数の数には制限があります。それを越えると、DL::DLError が
+発生します。
+
+ 
+ strlast = DL.callback('IS'){|s|
+   s[-1]
+ }
+ 
+ module M
+   extend DL::Importable
+   dlload "./libtest.so"
+   extern "int call(void *, const char*)"
+ end
+ p LIBC.call(strlast, "abcd").chr #=> "d"
+
+
+//emlist{
+ /* libtest.so */ 
+ int call(int (*cb)(const char*), const char* s){
+   return (*cb)(s);
+ }
+//}
 
 --- remove_callback(sym)
 #@todo
+
+コールバック関数 sym を削除します。
 
 --- malloc(size, [free])
 #@todo
@@ -158,25 +188,25 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 文字列 str を複製した新しい文字列へのポインタに相当する
 [[c:DL::PtrData]] オブジェクトを返します。
 
-#@if (version >= "1.9.0")
+#@#if (version >= "1.9.0")
 
 #@# おそらく1.6以前のメソッド。
 #@# 1.9 に同名のメソッドがあったので残してあります。詳細未確認。
 
-== Instance Methods
+#@#== Instance Methods
 
---- set_callback(cbtype, entry) {|args| ... }
---- set_callback(cbtype, entry, proc)
-#@todo
+#@#--- set_callback(cbtype, entry) {|args| ... }
+#@#--- set_callback(cbtype, entry, proc)
+#@##@todo
 
-proc や指定したブロックを呼ぶ
-entry-th pre-defined function を作成します。
-entry-th pre-defined function は cbtype と entry で指定されます。
+#@#proc や指定したブロックを呼ぶ
+#@#entry-th pre-defined function を作成します。
+#@#entry-th pre-defined function は cbtype と entry で指定されます。
 
-cbtype はコールバックのプロトタイプ。
-cbtype については class [[c:DL]] "Type specifiers" も参照。
+#@#cbtype はコールバックのプロトタイプ。
+#@#cbtype については class [[c:DL]] "Type specifiers" も参照。
 
-#@end
+#@##@end
 
 = class DL::DLError < StandardError
 
@@ -194,7 +224,21 @@ cbtype については class [[c:DL]] "Type specifiers" も参照。
 == Instance Methods
 
 --- to_ptr
+--- to_ptr(type)
 #@todo
+
+[[c:DL::PtrData]] に変換して返します。
+これは、Cレベルでは各要素を指すポインタの配列です。
+
+selfのすべての要素は同じクラスでなければいけません。
+
+ require 'dl/import'
+ 
+ ptr = ['a', 'b', 'c'].to_ptr
+ p ptr.size #=> 12
+ p ptr.to_a('P').map{|s| s.to_s } #=> ["a", "b", "c"]
+
+@param type self の要素のクラスを明示的に指定します。[[c:DL]] の Type specifiers を参照して下さい。
 
 = reopen IO
 
