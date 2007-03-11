@@ -1,16 +1,19 @@
 = module DL
 
 モジュール DL は 3 つのクラスから成っています。
-クラス [[c:DL::Symbol]] は呼び出す事ができるシンボルに相当します。
-クラス [[c:DL::PtrData]] は C のポインタのようなメモリブロックを示します。
-クラス [[c:DL::Handle]] から具体化されたオブジェクトは
-オープンしたライブラリの操作を持ちます。
 
-また、現在 dl2 の Ruby 1.8 版も開発されています。
-Ruby 1.9 にはすでに dl2 が dl として添付されています。
-dl2 のドキュメントは、
-[[url:http://rubyforge.org/cgi-bin/viewcvs.cgi/ruby-dl2/doc/?root=ruby-dl2]]
-を参照。
+: [[c:DL::Symbol]] 
+  呼び出す事ができるシンボルに相当します。
+: [[c:DL::PtrData]] 
+  C のポインタのようなメモリブロックを示します。
+: [[c:DL::Handle]] 
+  具体化されたオブジェクトはオープンしたライブラリの操作を持ちます。
+
+#@#また、現在 dl2 の Ruby 1.8 版も開発されています。
+#@#Ruby 1.9 にはすでに dl2 が dl として添付されています。
+#@#dl2 のドキュメントは、
+#@#[[url:http://rubyforge.org/cgi-bin/viewcvs.cgi/ruby-dl2/doc/?root=ruby-dl2]]
+#@#を参照。
 
 === Type specifiers
 
