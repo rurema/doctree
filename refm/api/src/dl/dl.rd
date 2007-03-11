@@ -4,7 +4,7 @@ Ruby/DL は、UNIX の [[man:dlopen(3)]] や
 Windows の LoadLibrary() などの
 ダイナミックリンカへのインタフェースを提供します。
 
-現在 dl2 の Ruby 1.8 版も開発されています。
+#@# 現在 dl2 の Ruby 1.8 版も開発されています。
 
 === Using Ruby/DL
 
