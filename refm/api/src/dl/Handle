@@ -28,7 +28,7 @@ Handle.new(lib) によってオープンされたハンドルをクローズします。
 
 GC によるオブジェクトの回収時に、ハンドルをクローズするかどうかを指定します。
 
---- sym(func, prototype = "0")
+--- sym(func, prototype = nil)
 --- [](func, prototype = nil)
 #@todo
 
@@ -37,6 +37,10 @@ GC によるオブジェクトの回収時に、ハンドルをクローズするかどうかを指定します。
 prototype は型修飾からなる文字列で関数のプロトタイプを示します。
 
 class [[c:DL]] "Type Specifiers" も参照。
+
+@param func 得たい関数の名前を文字列で与えます。
+
+@param type 関数のプロトタイプを文字列で指定します。
 
 --- to_i
 #@todo
