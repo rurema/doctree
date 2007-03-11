@@ -3,11 +3,11 @@
 モジュール DL は 3 つのクラスから成っています。
 
 : [[c:DL::Symbol]] 
-  呼び出す事ができるシンボルに相当します。
+  ダイナミックライブラリの個々の関数のラッパークラスです。
 : [[c:DL::PtrData]] 
-  C のポインタのようなメモリブロックを示します。
+  C のポインタのようなメモリブロックを表すクラスです。
 : [[c:DL::Handle]] 
-  具体化されたオブジェクトはオープンしたライブラリの操作を持ちます。
+  オープンされたダイナミックライブラリを表すクラスです。
 
 #@#また、現在 dl2 の Ruby 1.8 版も開発されています。
 #@#Ruby 1.9 にはすでに dl2 が dl として添付されています。
@@ -121,10 +121,19 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 == Module Functions
 
+--- dlopen(lib)
 --- dlopen(lib) {|handle| ... }
 #@todo
 
-[[m:DL::Handle.new]](lib) と等価。
+ダイナミックライブラリ lib をロードし、それに対応する
+[[m:DL::Handle]] を返します。
+
+ブロックが与えられている場合は、[[m:DL::Handle]] 引数として
+与えられたブロックを実行します。[[m:DL::Handle]] を返します。
+
+[[m:DL::Handle.new]](lib) と等価です。
+
+@param lib ロードしたいライブラリを文字列で与えます。
 
 --- callback(type)
 --- define_callback(type)
@@ -161,13 +170,19 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 --- remove_callback(sym)
 #@todo
 
-コールバック関数 sym を削除します。
+コールバック関数 sym を [[m:DL::FuncTable]] から削除します。
+#@#sym は以後 GC の対象になり得ます。
+以後 sym.call を呼ぶことができなくなります。
 
---- malloc(size, [free])
+@param sym [[c:DL::Symbol]] オブジェクトを与えます。
+
+--- malloc(size)
 #@todo
 
 size バイトのメモリ領域を割り当て、
-[[c:DL::PtrData]] オブジェクトを ptr として返します。
+[[c:DL::PtrData]] オブジェクトを返します。
+
+@param size 必要なメモリ領域のサイズを指定します。
 
 --- sizeof(type)
 #@todo
@@ -178,12 +193,13 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 後者は構造体 struct foo { char c; long l; } の
 十分なサイズを返すと推定されますが、
 そのサイズは C の sizeof(foo) と同じではないかもしれません。
+つまり、sizeof メソッドは独自にアラインメントを考慮してサイズを決定
+しますが、 C 言語のそれとは異なるかもしれません。
 
-訳注1: sizeof メソッドは独自にアラインメントを考慮してサイズを決定
-しますが C 言語のそれとは異なるかもしれないということを言っています
+sizeof("L3") のように型の後に数字を付けることもできます。
+指定できる型については [[m:DL#Type specifiers]] を参照してください。
 
-訳注2: sizeof("L3") のように型の後に数字を付けることもできます。
-指定できる型については [[m:DL#Type specifiers]] を参照
+@param type 型指定子を与えます。
 
 --- strdup(str)
 #@todo
@@ -191,25 +207,7 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 文字列 str を複製した新しい文字列へのポインタに相当する
 [[c:DL::PtrData]] オブジェクトを返します。
 
-#@#if (version >= "1.9.0")
-
-#@# おそらく1.6以前のメソッド。
-#@# 1.9 に同名のメソッドがあったので残してあります。詳細未確認。
-
-#@#== Instance Methods
-
-#@#--- set_callback(cbtype, entry) {|args| ... }
-#@#--- set_callback(cbtype, entry, proc)
-#@##@todo
-
-#@#proc や指定したブロックを呼ぶ
-#@#entry-th pre-defined function を作成します。
-#@#entry-th pre-defined function は cbtype と entry で指定されます。
-
-#@#cbtype はコールバックのプロトタイプ。
-#@#cbtype については class [[c:DL]] "Type specifiers" も参照。
-
-#@##@end
+@param str 文字列を与えます。
 
 = class DL::DLError < StandardError
 
@@ -221,6 +219,12 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 
 --- to_ptr
 #@todo
+
+[[c:DL::PtrData]] に変換して返します。
+
+ sp = 'abc'.to_ptr
+ p sp.size #=> 3
+ p sp.to_s #=> "abc"
 
 = reopen Array
 

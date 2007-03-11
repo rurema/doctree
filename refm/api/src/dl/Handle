@@ -1,5 +1,8 @@
 = class DL::Handle < Object
 
+オープンされたダイナミックライブラリを表すクラスです。
+([[man:dlopen(3)]] が返すハンドラーのラッパークラスです。)
+
 == Class Methods
 
 --- new(lib)

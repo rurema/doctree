@@ -1,5 +1,7 @@
 = class DL::Symbol < Object
 
+ダイナミックライブラリの関数のラッパークラスです。
+
 == Class Methods
 
 --- new(addr, type = nil, name = nil)

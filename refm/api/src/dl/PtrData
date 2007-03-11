@@ -1,5 +1,7 @@
 = class DL::PtrData < Object
 
+C のポインタのようなメモリブロックを表すクラスです。
+
 == Class Methods
 
 --- new(addr, size = 0, free = nil)
@@ -8,8 +10,18 @@
 アドレス addr を指すポインタに相当する PtrData オブジェクトを返します。
 GC は free 関数を使用してメモリを解放します。
 
---- malloc
+@param addr
+
+@param size
+
+@param free
+
+--- malloc(size, free = nil)
 #@todo
+
+@param size
+
+@param free
 
 == Instance Methods
 
