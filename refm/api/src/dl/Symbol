@@ -37,6 +37,7 @@ type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
  require 'dl'
  h = DL.dlopen('./libtest.so')
  s = h.sym('slen', 'IS')
+ 
  p s.name #=> "slen"
 
 --- cproto
@@ -48,14 +49,8 @@ C 言語形式のプロトタイプを文字列で返します。
  require 'dl'
  h = DL.dlopen('./libtest.so')
  s = h.sym('slen', 'IS')
- p s.cproto #=> "int slen(const char *);"
  
-//emlist{
- /* libtest.so */
- int slen(const char* s){
-   return strlen(s);
- }
-//}
+ p s.cproto #=> "int slen(const char *);"
 
 --- inspect()
 #@todo
@@ -87,7 +82,7 @@ C 言語形式のプロトタイプを文字列で返します。
 --- to_i
 #@todo
 
-関数のアドレスを Fixnum で返します。
+自身のアドレスを返します。
 
 --- to_ptr
 #@todo
