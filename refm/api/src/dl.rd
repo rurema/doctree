@@ -8,11 +8,12 @@ Windows の LoadLibrary() などの
 === Using Ruby/DL
 
 通常は、[[c:DL::Importable]] モジュールを使用します。
-これはライブラリ関数にアクセスするための高水準の関数を持っています。
-あるモジュールを拡張するには以下のように DL::Importable を使用します。
+これは [[c:DL]] モジュールの便利なラッパーです。
+#@#のライブラリ関数にアクセスするための高水準の関数を持っています。
+ある Ruby のモジュールを拡張するには以下のように使用します。
 
   require "dl/import"
-  module LIBC
+  module M
     extend DL::Importable
   end
 
@@ -21,14 +22,14 @@ Windows の LoadLibrary() などの
 それぞれのライブラリ関数に対して extern を使用することで
 ラッパーメソッドを定義します。
 
-  module LIBC
+  module M
     extend DL::Importable
     dlload "libc.so.6","libm.so.6"
     extern "int strlen(char*)"
   end
-  # Note that we should not include the module LIBC from some reason.
+  # Note that we should not include the module M from some reason.
   
-  p LIBC.strlen('abc') #=> 3
+  p M.strlen('abc') #=> 3
 
 LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
 与えられた関数名の最初の文字が大文字なら、
