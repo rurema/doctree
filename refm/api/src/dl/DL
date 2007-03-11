@@ -138,7 +138,7 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 @raise DL::DLError 定義できるコールバック関数の数には制限があります。それを越えると、DL::DLError が
 発生します。
 
- 
+ require 'dl/import'
  strlast = DL.callback('IS'){|s|
    s[-1]
  }
