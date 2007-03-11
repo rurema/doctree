@@ -36,6 +36,10 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
 
 @param real false もしくはそれ以外を指定します。
 
+  tf = Tempfile.open("bar")
+  tf.close
+  p FileTest.exist?(tf.path) # => true
+
 --- open
 
 クローズしたテンポラリファイルを再オープンします。
@@ -71,13 +75,17 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
 --- close!
 テンポラリファイルをクローズし、すぐに削除します。
 
+  tf = Tempfile.open("bar")
+  tf.close!
+  p FileTest.exist?(tf.path) # => false
+
 --- delete
 --- unlink
-#@todo
+
 テンポラリファイルをクローズせずに、削除します。
 UNIXライクなシステムでは、
-作成したテンポラリファイルが他のプログラムに使用される機会をなくすために
-テンポラリファイルを作成しオープンした後
+作成したテンポラリファイルが他のプログラムに使用される機会をなくすために、
+テンポラリファイルを作成しオープンした後、
 すぐに削除するということがしばしばおこなわれます。
 
 #@# Unlinks the file. On UNIX-like systems, it is often a good idea

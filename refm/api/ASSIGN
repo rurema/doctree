@@ -89,7 +89,7 @@ _builtin/specialvars
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-English
+English                         kouya
 Env
 Win32API
 abbrev
@@ -250,7 +250,7 @@ syslog
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-tempfile                        kouya
+tempfile                        kouya           done
 test/unit                       sheepman
 thread
 thwait
