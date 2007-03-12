@@ -40,10 +40,10 @@ _builtin/MatchData
 _builtin/Math
 _builtin/Method
 _builtin/Module
-_builtin/NameError
+_builtin/NameError              snoozer05
 _builtin/NilClass
 _builtin/NoMemoryError          snoozer05       done
-_builtin/NoMethodError          snoozer05
+_builtin/NoMethodError          snoozer05       done
 _builtin/NotImplementedError    snoozer05       done
 _builtin/Numeric
 _builtin/Object
