@@ -19,10 +19,14 @@
 
 #@if (version >= "1.8.0")
 --- new(error_message[, name[, args]])
-#@todo
 
 例外オブジェクトを生成して返します。
-argsは、メソッド呼び出しに使われた引数です。
+
+@param error_message エラーメッセージを表す文字列です
+
+@param name 未定義だったシンボルです
+
+@param args メソッド呼び出しに使われた引数です
 
 
 例:
@@ -39,7 +43,6 @@ argsは、メソッド呼び出しに使われた引数です。
 
 #@if (version >= "1.8.0")
 --- args
-#@todo
 
 メソッド呼び出しに使われた引数を配列で返します。
 
