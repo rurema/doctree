@@ -78,7 +78,7 @@ _builtin/ThreadError
 _builtin/ThreadGroup
 _builtin/Time
 _builtin/TrueClass		yamane
-_builtin/TypeError
+_builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      snoozer05       done
 _builtin/constants
