@@ -23,7 +23,7 @@ other が真なら true を, 偽なら false を返します。
 
 other が真なら true を, 偽なら false を返します。
 
-@param other 排他的論理和を行なう式です。
+@param other 排他的論理和を行なう式です
 
 --- nil?
 
