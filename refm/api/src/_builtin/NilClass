@@ -8,41 +8,39 @@ nil は false オブジェクトとともに偽を表し、
 == Instance Methods
 
 --- &(other)
-#@todo
 
 常に false を返します。
 
+@param other 論理積を行なう式です
+
 --- |(other)
-#@todo
 
 other が真なら true を, 偽なら false を返します。
+
+@param other 論理和を行なう式です
 
 --- ^(other)
-#@todo
 
 other が真なら true を, 偽なら false を返します。
 
+@param other 排他的論理和を行なう式です。
+
 --- nil?
-#@todo
 
 常に true を返します。
 
 --- to_a
-#@todo
 
 空配列 [] を返します。
 
 --- to_f
-#@todo
 
 0.0 を返します。
 
 --- to_i
-#@todo
 
 0 を返します。
 
 --- to_s
-#@todo
 
 空文字列 "" を返します。
