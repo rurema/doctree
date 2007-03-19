@@ -75,7 +75,7 @@ ifnone には文字列かあるいは、call メソッドを持つオブジェ
     [1,2,3].find("raise") {|v| v > 4}
     # => -:1: unhandled exception
 
-#@since "1.8.0"
+#@since 1.8.0
 ifnone に文字列は指定できなくなりました。
 #@end
 
