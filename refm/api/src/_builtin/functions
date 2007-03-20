@@ -1,6 +1,6 @@
 == Private Instance Methods
 
---- `
+--- `(str)
 #@todo
 
 文字列 str を外部コマンドとして実行し、その出力を文字列として
@@ -40,24 +40,24 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Float("1e-2")  # => 0.01
     p Float(".1")    # => 0.1
 
-    p Float("nan")   # => NaN         (ruby 1.7 feature: => invalid value (ArgumentError))
-    p Float("INF")   # => Infinity    (ruby 1.7 feature: => invalid value (ArgumentError))
-    p Float("-Inf")  # => -Infinity   (ruby 1.7 feature: => invalid value (ArgumentError))
+    p Float("nan")   # invalid value (ArgumentError)
+    p Float("INF")   # invalid value (ArgumentError)
+    p Float("-Inf")  # invalid value (ArgumentError)
     p Float(("10" * 1000).to_f) # => Infinity
 
-    p Float("0xa.a") # => 10.625     # (ruby 1.7 feature: => invalid value (ArgumentError))
+    p Float("0xa.a") # invalid value (ArgumentError)
     p Float(" \n10") # => 10.0       # 先頭の空白は無視される
     p Float("1_0_0") # => 100.0      # `_' も数値要素とみなす
-    p Float("")      # => invalid value (ArgumentError)
-    p Float(nil)     # => 0.0       # ruby 1.7 feature: cannot convert nil into Float (TypeError)
+    p Float("")      # invalid value (ArgumentError)
+    p Float(nil)     # cannot convert nil into Float (TypeError)
 
-    p Float(Object.new) # => cannot convert Object into Float (TypeError)
+    p Float(Object.new) # cannot convert Object into Float (TypeError)
 
 --- Integer(arg)
 #@todo
 
 引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
-#@if (version >= "1.8.0")
+#@since 1.8.0
 数値、文字列以外のオブジェクトに対しては to_int メソッドを
 使用します。
 #@else
@@ -107,7 +107,7 @@ arg.to_s を呼び出して引数を文字列に変換した
 生します。
 arg が文字列の場合、何もせず arg を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- abort(message = $!.message)
 #@todo
 #@else
@@ -120,7 +120,7 @@ Ruby プログラムを異常終了します。[[m:Kernel#exit]] との違いは、
 メッセージを標準エラー出力に出力することと、プログラムの終了ステー
 タスが EXIT_FAILURE (ほとんどの環境では 1) 固定であることです。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 引数 message を指定すると
 [[c:SystemExit]]#[[m:Exception#message]] に message を設定し
 て標準エラー出力に出力します。
@@ -147,7 +147,7 @@ Ruby プログラムを異常終了します。[[m:Kernel#exit]] との違いは、
 
 nil を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 任意のクラス／モジュールの定数を autoload
 できます。やはり、const_name に "::" 演算子を含めることはで
 きませんが、以下のように定義する事ができます。(実際には、
@@ -203,7 +203,7 @@ nil を返します。
            Bar
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- autoload?(const_name)
 #@todo
 autoload 定数がまだ定義されてない(ロードされていない)
@@ -634,7 +634,7 @@ mode は、以下の文字列か整数([[c:File::Constants]] モジュール
 
 第 3 引数 perm は [[man:open(2)]] の第 3 引数と同
 じく、CREAT 時のファイルのアクセス権を整数で指定します。
-#@if (version >= "1.8.0")
+#@since 1.8.0
 第 2 引数によらず指定されれば有効になります。
 #@else
 この引数は、第 2 引数が数値形式でなければ無視されます
@@ -649,7 +649,7 @@ mode は、以下の文字列か整数([[c:File::Constants]] モジュール
 ます。(このときの動作は、[[m:IO.popen]] と同じです。
 [[m:File.open]] にはパイプラインを生成する機能はありません)。
 
-((*注意*)): Perlと異なりコマンドは常に `|' で始まります。
+注意: Perlと異なりコマンドは常に `|' で始まります。
 
 open がブロックとともに呼び出された時、open はファイル
 をオープンしてブロックを実行し、ブロックの実行が終了するとファイル
@@ -706,7 +706,7 @@ C 言語の printf と同じように、format に従い引数を文字列に変
 #@#第一引数に IO を渡すインタフェースは obsolete と明言
 #@#されています(あらい 2002-01-07 どこで言ってたっけ？確か「デスクトッ
 #@#プリファレンスにはこのことは載ってなかったという話だったはず)-))。
-引数を 1 つも指定しなければ何もしません
+#@# 引数を 1 つも指定しなければ何もしません
 #@#((-あらい 2002-01-07: IO#printfとは違う-))。
 
 Ruby における format 文字列の拡張については[[unknown:sprintfフォーマット]]
@@ -980,7 +980,7 @@ sec が省略された場合、他スレッドからの [[m:Thread#run]]
 などで明示的に起こさない限り永久にスリープします。
 戻り値は実際に停止していた秒数 (整数) です。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 --- spawn(cmd, [arg, ...])
 #@todo
 
@@ -1021,7 +1021,7 @@ Ruby には整数の大きさに上限がないので、%b, %o, %x
 現在の時刻やプロセス ID、srand を呼び出した回数、
 また可能なら /dev/urandom から読み出したデータなどを元に種を作ります。
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 Ruby 1.8.3 からは、seed として
 unsigned long よりも大きな値を与えることが出来ます。
 #@end
@@ -1077,7 +1077,7 @@ command を実行して、成功した時(子プロセスが終了ステータス 0
 ンドが実行できなかったのか、コマンドが失敗したのかは、普通
 $? を参照することで判別可能です。
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 コマンドを実行できないときに例外 [[c:Errno::EXXX]] が発生します。
 シェルを介する場合は、上述の通りです。
 #@end
@@ -1249,7 +1249,7 @@ trap は既にシグナルに対応する command が登録されて
 nil を返します)。何も登録されていなければ
 nil を返します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 trap 実行前に"IGNORE" や "DEFAULT" が登録されていたなら、
 "IGNORE"、"DEFAULT" を返します。ruby インタプリタが知り得ない
 シグナルハンドラが登録されていた場合((-ちょっとウソ-))は nil を返します。
@@ -1284,7 +1284,7 @@ varname のフックを全て解除します。
   untrace_var :$v
   $v = 'str'        # なにも出力されない
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- warn(mesg)
 #@todo
 
@@ -1298,4 +1298,5 @@ mesg と改行を順番に [[m:$stderr]] に出力します。
 
 --- getc
 #@todo
+
 obsolete; use STDIN.getc instead
