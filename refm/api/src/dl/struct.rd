@@ -1,11 +1,9 @@
-import dl
-import dl/import
+require dl
+require dl/import
 
-DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与える。
+DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与えます。
 
-メソッドやクラスは、実際には DL::Importable::Internal に定義されている。
-
-= reopen DL::Importable::Internal
+= reopen DL::Importable
 
 == Instance Methods
 
@@ -25,7 +23,7 @@ contents については上記 define_struct と同様です。
 
 
 
-= class DL::Importable::Internal::Memory < Object
+= class DL::Importable::Memory < Object
 
 DL::PtrData のラッパー用クラス。
 ドット形式で構造体や共用体の要素へアクセスできるようになります。
@@ -55,7 +53,7 @@ DL::PtrData#size を呼びます。
 
 
 
-= class DL::Importable::Internal::Struct < Object
+= class DL::Importable::Struct < Object
 
 == Class Methods
 
@@ -105,7 +103,7 @@ malloc されたサイズを返します。
 #@todo
 
 
-= class DL::Importable::Internal::Union < DL::Importable::Internal::Struct
+= class DL::Importable::Union < DL::Importable::Struct
 
 共用体に対するクラスである以外は、Struct とほぼ同じです。
 

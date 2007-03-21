@@ -3,25 +3,16 @@ require dl/types
 
 = module DL::Importable
 
-include DL::Importable::Internal
+DL モジュールの各クラスの便利なラッパーです。
+Importable モジュールを extend して使います。include ではありません。
 
-=== 補足
-
-実際には、メソッドは、
-DL::Importable::Internal において定義されています。
-Importable モジュールは
-Internal モジュールをインクルードしているために、
-Internal で定義されたメソッドは
-Importable モジュールによって提供されます。
-
-== Constants
-
---- LIB_MAP
-#@todo
-
-ロードされたライブラリを保持する[[c:Hash]]オブジェクトです。
-
-= module DL::Importable::Internal
+  require "dl/import"
+  
+  module M
+    extend DL::Importable
+    dlload "libc.so.6","libm.so.6"
+    extern "int strlen(char*)"
+  end
 
 == Instance Methods
 
@@ -61,20 +52,11 @@ typespec には型情報を与えて、[[c:DL::Symbol]]オブジェクトを返します。
 typespecが省略された場合、シンボルへの参照を[[c:DL::PtrData]]オブジェクト
 として返します。
 
---- []
+--- [](name) -> object
 #@todo
+関数 name のラッパーである [[DL::Symbol]] オブジェクトを返します。
 
-#@if (version >= "1.8.2")
---- encode_argument_types(tys)
-#@todo
-
-#@end
-
-#@if (version <= "1.8.1")
---- encode_types
-#@todo
-
-#@end
+@param name 取得したい関数名を文字列で与えます。
 
 --- import(name, rettype, argtypes = nil)
 #@todo
@@ -82,18 +64,16 @@ typespecが省略された場合、シンボルへの参照を[[c:DL::PtrData]]オブジェクト
 #@# example:
 #@##   import("get_length", "int", ["void*", "int"])
 
---- parse_cproto(proto)
+--- _args_ -> [object]
 #@todo
+直前に呼んだダイナミックライブラリの関数の引数を返します。
 
---- init_sym
+--- _retval_ -> object
 #@todo
+直前に呼んだダイナミックライブラリの関数の返り値を返します。
 
---- init_types
+== Constants
+
+--- LIB_MAP
 #@todo
-
---- _args_
-#@todo
-
---- _retval_
-#@todo
-
+ロードされたライブラリを保持する[[c:Hash]]オブジェクトです。
