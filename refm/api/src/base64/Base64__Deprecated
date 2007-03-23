@@ -9,19 +9,19 @@
 
 == Module Functions
 
---- decode64(str)
+--- decode64(str) -> String
 
 [[m:Base64.decode64]] と同じです。
 
---- encode64(str)
+--- encode64(str) -> String
 
 [[m:Base64.encode64]] と同じです。
 
---- decode_b(str)
+--- decode_b(str) -> String
 
 [[m:Base64.decode_b]] と同じです。
 
---- b64encode(bin, len = 60)
+--- b64encode(bin, len = 60) -> ()
 
 [[m:Base64.b64encode]] と同じです。
 

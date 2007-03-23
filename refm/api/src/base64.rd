@@ -28,19 +28,19 @@ ASCII 文字のうちの 65 文字 ([A-Za-z0-9+/] の 64 文字と '=')
 
 == Module Functions
 
---- decode64(str)
+--- decode64(str) -> String
 
 Base64エンコードされた文字列strをデコードします。
 
 @param src デコードしたい文字列です。
 
---- encode64(str)
+--- encode64(str) -> String
 
 文字列strをBase64エンコードします。
 
 @param src エンコードしたい文字列です。
 
---- decode_b(str)
+--- decode_b(str) -> String
 
 [[rfc:2047]] で定義されている encoded-word を含む
 文字列 str をデコードします。
@@ -64,7 +64,7 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 @param src デコードしたい文字列です。
 
---- b64encode(bin, len = 60)
+--- b64encode(bin, len = 60) -> ()
 
 文字列 bin をエンコードし、len の長さで折り返し、表示します。
 
@@ -76,22 +76,22 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 == Module Functions
 
---- decode64(str)
+--- decode64(str) -> String
 
 [[m:Base64.decode64]] と同じです。このメソッドは将来的に廃止される可能
 性があり、現在は Base64 モジュールを使うことが推奨されています。
 
---- encode64(str)
+--- encode64(str) -> String
 
 [[m:Base64.encode64]] と同じです。このメソッドは将来的に廃止される可能
 性があり、現在は Base64 モジュールを使うことが推奨されています。
 
---- decode_b(str)
+--- decode_b(str) -> String
 
 [[m:Base64.decode_b]] と同じです。このメソッドは将来的に廃止される可能
 性があり、現在は Base64 モジュールを使うことが推奨されています。
 
---- b64encode(bin, len = 60)
+--- b64encode(bin, len = 60) -> ()
 
 [[m:Base64.b64encode]] と同じです。このメソッドは将来的に廃止される可能
 性があり、現在は Base64 モジュールを使うことが推奨されています。
@@ -103,19 +103,19 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 == Private Instance Methods
 
---- decode64(str)
+--- decode64(str) -> String
 
 文字列strをBase64エンコードします。
 
 @param src エンコードしたい文字列です。
 
---- encode64(str)
+--- encode64(str) -> String
 
 文字列strをBase64エンコードします。
 
 @param src エンコードしたい文字列です。
 
---- decode_b(str)
+--- decode_b(str) -> String
 
 [[rfc:2047]] で定義されている encoded-word を含む
 文字列 str をデコードします。
@@ -139,7 +139,7 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 
 @param src デコードしたい文字列です。
 
---- b64encode(bin, len = 60)
+--- b64encode(bin, len = 60) -> ()
 
 文字列 bin をエンコードし、len の長さで折り返し、表示します。
 
