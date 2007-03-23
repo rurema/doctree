@@ -7,7 +7,6 @@ true は真を表す代表のオブジェクトです。
 == Instance Methods
 
 --- &(other)
-#@todo
 
 other が真なら true を, 偽なら false を返します。
 
@@ -28,7 +27,6 @@ other が真なら true を, 偽なら false を返します。
    p true.&(1 + 1)   #=> true
 
 --- |(other)
-#@todo
 
 常に true を返します。
 
@@ -49,7 +47,6 @@ other が真なら true を, 偽なら false を返します。
    p true.|(1 + 1)   #=> true
 
 --- ^(other)
-#@todo
 
 other が真なら false を, 偽なら true を返します。
 
@@ -68,3 +65,7 @@ other が真なら false を, 偽なら true を返します。
    p true.^(nil)     #=> true
    p true.^(1 == 1)  #=> false
    p true.^(1 + 1)   #=> false
+
+--- to_s
+
+常に文字列 "true" を返します。
