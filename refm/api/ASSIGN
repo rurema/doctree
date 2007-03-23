@@ -12,7 +12,7 @@ _builtin/Comparable
 _builtin/Continuation
 _builtin/Data
 _builtin/Dir
-_builtin/ENV                    mukai
+_builtin/ENV                    mukai           done
 _builtin/EOFError
 _builtin/Enumerable             aamine
 _builtin/Exception
@@ -90,7 +90,7 @@ _builtin/specialvars
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 English                         kouya
-Env                             mukai
+Env                             mukai           done
 Win32API
 abbrev
 base64                          mukai           done
@@ -145,7 +145,7 @@ getoptlong
 getopts
 gserver
 iconv
-importenv                       mukai
+importenv                       mukai           done
 io/nonblock
 io/wait
 ipaddr

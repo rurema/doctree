@@ -29,102 +29,107 @@ ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
   # => true
 #@end
 
---- [](key)
-#@todo
+--- [](key) -> String
 
 key に対応する環境変数の値を返します。該当する環境変数が存在
 しない時には nil を返します。
 
---- []=(key, value)
---- store(key, value)
-#@todo
+@param key  環境変数名を指定します。 to_str で文字列化されます。
+
+--- []=(key, value)   -> String
+--- store(key, value) -> String
 
 key に対応する環境変数の値を value にします。
+#@if (version < "1.9.0")
 value が nil の時、key に対応する環境変数を取り
-除きます。
+除きます。 
+#@end
+
+value を返します。
+
+@param key    環境変数名を指定します。 to_str で文字列化されます。
+@param value  置き換えるべき値を指定します。 to_str で文字列化されます。
 
 #@since 1.8.0
---- clear
-#@todo
+--- clear  -> ()
 
 環境変数をすべてクリアします。self を返します。
 #@end
 
---- delete(key)
---- delete(key) {|key| ... }
-#@todo
+--- delete(key) -> String | nil
+--- delete(key) {|key| ... } -> String | nil
 
 key に対応する環境変数を取り除きます。取り除かれた環境変数の
-値を返 しますが、key に対応する環境変数が存在しない時には
+値を返しますが、key に対応する環境変数が存在しない時には
 nil を返します。
 
 ブロックが与えられた時には key にマッチするものがなかった時
 に評価されます。
 
---- reject {|key, value| ... }
-#@todo
+@param key  環境変数名を指定します。 to_str で文字列化されます。
 
-ブロックを評価した値が真である時、要素を削除します。
-[[m:Enumerable#reject]] と異なり Hash を返
-します。
+--- reject {|key, value| ... } -> Hash
 
---- delete_if {|key, value| ... }
---- reject! {|key, value| ... }
-#@todo
+環境変数のうち、ブロックを評価した値が真であるものをとり除きます。
+[[m:Enumerable#reject]] と異なり Hash を返します。また、とり除いた結果
+は実際の環境変数に影響を与えません。
+
+--- delete_if {|key, value| ... } -> ENV
+--- reject! {|key, value| ... }   -> ENV | nil
 
 key と value を引数としてブロックを評価した値が真であ
 る時、環境変数を削除します。
 
 reject! は要素に変化がなければ nil を返します。
 
---- each {|key, value| ... }
---- each_pair {|key, value| ... }
-#@todo
+--- each {|key, value| ... } -> ()
+--- each_pair {|key, value| ... } -> ()
 
 key と value を引数としてブロックを評価します。
 
---- each_key {|key| ... }
-#@todo
+--- each_key {|key| ... } -> ()
 
 key を引数としてブロックを評価します。
 
---- each_value {|value| ... }
-#@todo
+--- each_value {|value| ... } -> ()
 
 value を引数としてブロックを評価します。
 
---- empty?
-#@todo
+--- empty? -> bool
 
 環境変数がひとつも定義されていない時真を返します。
 
---- fetch(key,[default])
---- fetch(key) {|key| ... }
-#@todo
+--- fetch(key) -> String
+--- fetch(key, default) -> String
+--- fetch(key) {|key| ... } -> String
 
 key に関連づけられた値を返します。該当するキーが登録されてい
 ない時には、引数 default が与えられていればその値を、ブロッ
 クが与えられていればそのブロックを評価した値を返します。そのいずれ
 でもなければ例外 [[c:IndexError]] が発生します。
 
---- has_key?(val)
---- include?(val)
---- key?(val)
---- member?(val)
-#@todo
+@param key       環境変数の名前を指定します。 to_str で文字列化されます。
+@param deafult   keyに対応する環境変数の値がないときにこの値を返します。 
 
-val で指定される環境変数が存在する時真を返します。
+--- has_key?(key) -> bool
+--- include?(key) -> bool
+--- key?(key)     -> bool
+--- member?(key)  -> bool
 
---- has_value?(value)
---- value?(value)
-#@todo
+key で指定される環境変数が存在する時、真を返します。
 
-value を値として持つ環境変数が存在する時真を返します。
+@param key   環境変数の名前を指定します。to_str で文字列化されます。
 
---- index(val)
+--- has_value?(val) -> bool
+--- value?(val)     -> bool
+
+val を値として持つ環境変数が存在する時、真を返します。
+
+@param val  値を指定します。to_str で文字列化されます。
+
+--- index(val) -> String
 #@since 1.9.0
---- key(val)
-#@todo
+--- key(val)   -> String
 #@end
 
 val に対応するキーを返します。対応する要素が存在しない時には
@@ -135,9 +140,10 @@ ENV.index は version 1.9 では、((<obsolete>)) です。
 使用すると警告メッセージが表示されます。
 #@end
 
---- indexes(key_1, ... , key_n)     ((<obsolete>))
---- indices(key_1, ... , key_n)     ((<obsolete>))
-#@todo
+@param val  値を指定します。 to_str で文字列化されます。
+
+--- indexes(key_1, ... , key_n) -> [String]     ((<obsolete>))
+--- indices(key_1, ... , key_n) -> [String]     ((<obsolete>))
 
 引数で指定された名前の環境変数の値の配列を返します。
 
@@ -147,82 +153,83 @@ ENV.index は version 1.9 では、((<obsolete>)) です。
 代わりに [[m:ENV#ENV.values_at]] を使用します。
 #@end
 
---- inspect
-#@todo
+@param key_1..n  キーの名前を指定します。 to_str で文字列化されます。
+
+--- inspect -> String
+
+ENV オブジェクトを文字列化します。 Hash#inspect と同じように動作します。
 
 #@since 1.8.0
---- invert
-#@todo
+--- invert -> Hash
 
 環境変数の値をキー、名前を値とした [[c:Hash]] を生成して返します。
 #@end
 
---- keys
-#@todo
+--- keys -> [String]
 
 全環境変数の名前の配列を返します。
 
---- length
---- size
-#@todo
+--- length -> Fixnum
+--- size   -> Fixnum
 
 環境変数の数を返します。
 
---- rehash
-#@todo
+--- rehash -> nil
 
 何もしません。nilを返します。
 
 #@since 1.8.0
---- replace(hash)
-#@todo
+--- replace(hash) -> ENV
 
-環境変数を hash に設定します。self を返します。
+環境変数を hash と同じ内容に変更します。 self を返します。
+
+@param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
 #@end
 
 #@since 1.8.0
---- select
-#@todo
+--- select {|key, value| ... }  -> [[String, String]]
+
+環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
+します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
+ます。
 #@end
 
 #@since 1.8.0
---- shift
-#@todo
+--- shift -> [String, String]
 
 環境変数を一つ取り除いて、それを名前と値の組の配列で返します。
 環境変数が一つも設定されていなければ nil を返します。
 #@end
 
---- to_a
-#@todo
+--- to_a -> [[String, String]]
 
-環境変数から [key,value] なる 2 要素の配列の配列を生成します。
+環境変数から [変数名, 値] となる 2 要素の配列の配列を生成します。
 
---- to_hash
-#@todo
+--- to_hash -> Hash
 
-環境変数の名前と値のハッシュを返します。
+環境変数の名前をキーとし、対応する値をもつハッシュを返します。
 
---- to_s
-#@todo
+--- to_s -> String
+
+環境変数を文字列化します。 Hash#to_s と同じように動作します。
 
 #@since 1.8.0
---- update(other)
-#@todo
+--- update(other) -> ENV
 
 ハッシュ other の内容を環境変数にマージします。重複するキー
 に対応する値は other の内容で上書きされます。
 
 self を返します。
+
+@param other  上書きするハッシュを指定します。
 #@end
 
---- values
-#@todo
+--- values -> [String]
 
 環境変数の全値の配列を返します。
 
 #@since 1.8.0
---- values_at(key_1, ..., key_n)
+--- values_at(key_1, ..., key_n) -> [String]
 #@todo
 
 引数で指定されたキー(環境変数名)に対応する値の配列を返します。存在
@@ -233,4 +240,6 @@ self を返します。
 
   ENV.update({'FOO','foo', 'BAR','bar'})
   p ENV.values_at(*%w(FOO BAR BAZ))   # => ["foo", "bar", nil]
+
+@param key_1..n  環境変数名を指定します。 to_str で文字列化されます。
 #@end
