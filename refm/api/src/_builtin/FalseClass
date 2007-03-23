@@ -66,3 +66,7 @@ other が真なら true を, 偽なら false を返します。
    p false.^(nil)     #=> false
    p false.^(1 == 1)  #=> true
    p false.^(1 + 1)   #=> true
+
+--- to_s
+
+常に文字列 "false" を返します。
