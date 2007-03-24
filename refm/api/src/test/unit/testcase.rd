@@ -37,7 +37,7 @@ Ties everything together. If you subclass and add your own test methods, it take
 
 == Class Methods
 
---- new(test_method_name)    -> object
+--- new(test_method_name)    -> Test::Unit::TestCase
 #@todo
 
 このメソッドをユーザが直接呼ぶことはありません。
@@ -46,7 +46,7 @@ test_method_name に対応した TestCase オブジェクトを生成して返します。
 
 @param test_method_name テストメソッドの名前を文字列で与えます。
 
---- suite    -> object
+--- suite    -> Test::Unit::TestSuite
 
 「test」ではじまるインスタンスメソッド全てに対して、それぞれに対応する
 TestCase オブジェクトを生成し、[[c:Test::Unit::TestSuite]] オブジェクト
