@@ -23,6 +23,15 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
 
 新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
 
+@param suite 実行したいテストを保持している TestSuite オブジェクトか
+TestCase オブジェクトを与えます。
+
+@param output_level 出力レベルを指定します。指定できるのは以下の4つです。
+ * Test::Unit::UI::SILENT 
+ * Test::Unit::UI::PROGRESS_ONLY
+ * Test::Unit::UI::NORMAL
+ * Test::Unit::UI::VERBOSE
+
 --- start_command_line_test
 #@todo
 Takes care of the ARGV parsing and suite
