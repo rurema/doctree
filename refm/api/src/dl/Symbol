@@ -52,7 +52,7 @@ C 言語形式のプロトタイプを文字列で返します。
  
  p s.cproto #=> "int slen(const char *);"
 
---- inspect()
+--- inspect
 #@todo
 
 人間が読みやすい形式の文字列を返します。
