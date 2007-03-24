@@ -4,21 +4,21 @@
 
 == Class Methods
 
---- new(addr, type = nil, name = nil)
+--- new(addr, type = nil, name = nil)    -> DL::Symbol 
 #@todo
 
 type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
 関数が割り当てられているなら addr はそのアドレス。type が nil なら
 [[c:DL::PtrData]] オブジェクトを返します。
 
---- char2type(char)
+--- char2type(char)    -> String
 #@todo
 
 型に相当する文字 char を取り、C 言語の型修飾を返します。
 
 == Instance Methods
 
---- proto
+--- proto    -> String
 #@todo
 
 関数のプロトタイプを DL モジュールの型指定文字列で返します。
@@ -29,7 +29,7 @@ type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
  
  p s.proto #=> "IS"
 
---- name
+--- name    -> String
 #@todo
 
 関数名を文字列で返します。
@@ -40,8 +40,8 @@ type が nil でないなら 型 type の Symbol オブジェクト sym を作成します。
  
  p s.name #=> "slen"
 
---- cproto
---- to_s
+--- cproto    -> String
+--- to_s      -> String
 #@todo
 
 C 言語形式のプロトタイプを文字列で返します。
@@ -52,13 +52,13 @@ C 言語形式のプロトタイプを文字列で返します。
  
  p s.cproto #=> "int slen(const char *);"
 
---- inspect
+--- inspect    -> String
 #@todo
 
 人間が読みやすい形式の文字列を返します。
 
---- call(*args)
---- [](*args)
+--- call(*args)    -> object
+--- [](*args)      -> object
 #@todo
 
 自身が保持しているライブラリ関数を呼び出します。関数の
@@ -79,12 +79,12 @@ C 言語形式のプロトタイプを文字列で返します。
  }
 //}
 
---- to_i
+--- to_i    -> Integer
 #@todo
 
 自身のアドレスを返します。
 
---- to_ptr
+--- to_ptr    -> DL::PtrData
 #@todo
 
 対応する [[c:DL::PtrData]] オブジェクト ptr を返します。
