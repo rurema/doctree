@@ -126,10 +126,10 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 #@todo
 
 ダイナミックライブラリ lib をロードし、それに対応する
-[[m:DL::Handle]] を返します。
+[[c:DL::Handle]] を返します。
 
-ブロックが与えられている場合は、[[m:DL::Handle]] 引数として
-与えられたブロックを実行します。[[m:DL::Handle]] を返します。
+ブロックが与えられている場合は、[[c:DL::Handle]] 引数として
+与えられたブロックを実行します。[[c:DL::Handle]] を返します。
 
 [[m:DL::Handle.new]](lib) と等価です。
 
@@ -167,7 +167,7 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
  }
 //}
 
---- remove_callback(sym)
+--- remove_callback(sym)    -> nil
 #@todo
 
 コールバック関数 sym を [[m:DL::FuncTable]] から削除します。
@@ -179,12 +179,12 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 --- malloc(size)
 #@todo
 
-size バイトのメモリ領域を割り当て、
-[[c:DL::PtrData]] オブジェクトを返します。
+size バイトのメモリ領域を確保し、
+その領域を指す [[c:DL::PtrData]] オブジェクトを返します。
 
 @param size 必要なメモリ領域のサイズを指定します。
 
---- sizeof(type)
+--- sizeof(type)    -> Integer
 #@todo
 
 型のサイズを返します。
@@ -220,11 +220,15 @@ sizeof("L3") のように型の後に数字を付けることもできます。
 --- to_ptr
 #@todo
 
-[[c:DL::PtrData]] に変換して返します。
+自身を複製し、複製した文字列を指す [[c:DL::PtrData]] を返します。
 
- sp = 'abc'.to_ptr
+ s = 'abc'
+ sp = s.to_ptr
  p sp.size #=> 3
  p sp.to_s #=> "abc"
+ p sp[0] = 'A'
+ p sp.to_s #=> "Abc"
+ p s       #=> "abc"
 
 = reopen Array
 
@@ -234,7 +238,7 @@ sizeof("L3") のように型の後に数字を付けることもできます。
 --- to_ptr(type)
 #@todo
 
-[[c:DL::PtrData]] に変換して返します。
+自身を [[c:DL::PtrData]] に変換して返します。
 これは、Cレベルでは各要素を指すポインタの配列です。
 
 selfのすべての要素は同じクラスでなければいけません。
