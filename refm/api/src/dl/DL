@@ -210,8 +210,10 @@ sizeof("L3") のように型の後に数字を付けることもできます。
 @param str 文字列を与えます。
 
 = class DL::DLError < StandardError
+DL に関する一般的なエラーが発生したときに投げられます。
 
 = class DL::DLTypeError < DL::DLError
+型に関するエラーが発生したときに投げられます。
 
 = reopen String
 
