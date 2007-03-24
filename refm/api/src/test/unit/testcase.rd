@@ -37,14 +37,16 @@ Ties everything together. If you subclass and add your own test methods, it take
 
 == Class Methods
 
---- new(test_method_name)
+--- new(test_method_name)    -> object
 #@todo
 
 このメソッドをユーザが直接呼ぶことはありません。
 
 test_method_name に対応した TestCase オブジェクトを生成して返します。
 
---- suite
+@param test_method_name テストメソッドの名前を文字列で与えます。
+
+--- suite    -> object
 
 「test」ではじまるインスタンスメソッド全てに対して、それぞれに対応する
 TestCase オブジェクトを生成し、[[c:Test::Unit::TestSuite]] オブジェクト
@@ -55,20 +57,22 @@ TestCase オブジェクトを生成し、[[c:Test::Unit::TestSuite]] オブジェクト
 
 == Instance Methods
 
---- setup
+--- setup    -> ()
 各テストメソッドが呼ばれる前に必ず呼ばれます。
 
---- teardown
+--- teardown    -> ()
 各テストメソッドが呼ばれた後に必ず呼ばれます。
 
---- method_name
+--- method_name    -> String
+
 自身に対応しているテストメソッドの名前を文字列で返します。
+
 [[m:Test::Unit::TestCase#setup]] や [[m:Test::Unit::TestCase#teardown]] 
 において、実行する(あるいは、実行した)テストメソッドの名前を知るのに
 使うことができます。
 
---- name
-正確には自身に対応しているテストメソッドの名前を人間が読みやすい形式で返します。
+--- name    -> String
+自身に対応しているテストメソッドの名前を人間が読みやすい形式で返します。
 
 --- run(result) {|STARTED, name| ...}
 #@todo
@@ -81,11 +85,13 @@ Runs the individual test method represented by this instance
 of the fixture, collecting statistics, failures and errors in
 result.
 
---- size
+@param result [[c:Test::Unit::TestResult]] オブジェクトを与えます。
+
+--- size    -> Integer
 
 常に 1 を返します。
 
---- default_test
+--- default_test     -> ()
 
 常に失敗するテストです。
 
