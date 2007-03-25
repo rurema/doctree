@@ -76,28 +76,83 @@
 
 --- $RS
 --- $INPUT_RECORD_SEPARATOR
-#@todo
 
 [[m:$/]] の別名
+
+  require "English"
+
+  $INPUT_RECORD_SEPARATOR = '|'
+  array = []
+  while line = DATA.gets
+    array << line
+  end
+  p array #=> ["ugo|", "ego|", "fogo\n"]
+
+  __END__
+  ugo|ego|fogo
 
 
 --- $ORS
 --- $OUTPUT_RECORD_SEPARATOR
-#@todo
 
 [[m:$\]] の別名
 
+  require "English"
+
+  print "hoge\nhuga\n"
+  $OUTPUT_RECORD_SEPARATOR = "\n"
+  print "fuge"
+  print "ugo"
+  # end of sample.rb
+
+  ruby sample.rb 
+  hoge
+  huga
+  fuge
+  ugo
+
 --- $INPUT_LINE_NUMBER
 --- $NR
-#@todo
 
 [[m:$.]] の別名
 
+  1 e
+  2 f
+  3 g
+  4 h
+  5 i
+  # end of a.txt
+
+  require "English"
+
+  File.foreach(ARGV.at(0)){|line|
+    # read line
+  }
+  p $INPUT_LINE_NUMBER
+  # end of sample.rb
+
+  ruby sample.rb a.txt 
+  #=> 5
+
 --- $LAST_READ_LINE
-#@todo
 
 [[m:$_]] の別名
+  
+  1 e
+  2 f
+  3 g
+  4 h
+  5 i
+  # end of a.txt
 
+  ruby -rEnglish -ne'p $LAST_READ_LINE' a.txt
+  #=> 
+  "1 e\n"
+  "2 f\n"
+  "3 g\n"
+  "4 h\n"
+  "5 i\n"
+  
 --- $DEFAULT_OUTPUT
 #@todo
 
