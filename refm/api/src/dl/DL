@@ -68,6 +68,12 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
     str1 <=> str2
   }
 
+=== Ruby のオブジェクトから C の型への変換
+
+[[m:DL.callback]] や [[m:DL::Handle#sym]] で指定した
+型指定子に従って Ruby のオブジェクトと C の型は相互に変換されます。
+
+
 == Singleton Methods
 
 --- last_error
@@ -121,8 +127,8 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 == Module Functions
 
---- dlopen(lib)
---- dlopen(lib) {|handle| ... }
+--- dlopen(lib)                    -> DL::Handle
+--- dlopen(lib) {|handle| ... }    -> DL::Handle
 #@todo
 
 ダイナミックライブラリ lib をロードし、それに対応する
@@ -135,8 +141,8 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 @param lib ロードしたいライブラリを文字列で与えます。
 
---- callback(type)
---- define_callback(type)
+--- callback(type)         -> DL::Symbol
+--- define_callback(type)  -> DL::Symbol
 #@todo
 
 Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
@@ -176,7 +182,7 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 
 @param sym [[c:DL::Symbol]] オブジェクトを与えます。
 
---- malloc(size)
+--- malloc(size)    -> DL::PtrData
 #@todo
 
 size バイトのメモリ領域を確保し、
@@ -201,7 +207,7 @@ sizeof("L3") のように型の後に数字を付けることもできます。
 
 @param type 型指定子を与えます。
 
---- strdup(str)
+--- strdup(str)    -> DL::PtrData
 #@todo
 
 文字列 str を複製した新しい文字列へのポインタに相当する
@@ -219,7 +225,7 @@ DL に関する一般的なエラーが発生したときに投げられます。
 
 == Instance Methods
 
---- to_ptr
+--- to_ptr    -> DL::PtrData
 #@todo
 
 自身を複製し、複製した文字列を指す [[c:DL::PtrData]] を返します。
@@ -236,8 +242,8 @@ DL に関する一般的なエラーが発生したときに投げられます。
 
 == Instance Methods
 
---- to_ptr
---- to_ptr(type)
+--- to_ptr          -> DL::PtrData 
+--- to_ptr(type)    -> DL::PtrData
 #@todo
 
 自身を [[c:DL::PtrData]] に変換して返します。
@@ -257,6 +263,6 @@ selfのすべての要素は同じクラスでなければいけません。
 
 == Instance Methods
 
---- to_ptr
+--- to_ptr    -> DL::PtrData
 #@todo
 

@@ -5,8 +5,8 @@
 
 == Class Methods
 
---- new(lib)
---- new(lib) {|handle| ... }
+--- new(lib)                    -> DL::Handle
+--- new(lib) {|handle| ... }    -> DL::Handle
 #@todo
 
 ライブラリ lib をオープンし、Handle オブジェクト handle を返します。
@@ -17,19 +17,19 @@
 
 == Instance Methods
 
---- close
+--- close    -> Integer
 #@todo
 
 Handle.new(lib) によってオープンされたハンドルをクローズします。
 
---- enable_close
---- disable_close
+--- enable_close     -> nil
+--- disable_close    -> nil
 #@todo
 
 GC によるオブジェクトの回収時に、ハンドルをクローズするかどうかを指定します。
 
---- sym(func, prototype = nil)
---- [](func, prototype = nil)
+--- sym(func, prototype = nil)    -> DL::Symbol
+--- [](func, prototype = nil)     -> DL::Symbol
 #@todo
 
 関数やグローバル変数 func へのポインタを取得し、
@@ -42,9 +42,9 @@ class [[c:DL]] "Type Specifiers" も参照。
 
 @param type 関数のプロトタイプを文字列で指定します。
 
---- to_i
+--- to_i    -> Integer
 #@todo
 
---- to_ptr
+--- to_ptr    -> DL::PtrData
 #@todo
 
