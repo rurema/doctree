@@ -154,9 +154,18 @@
   "5 i\n"
   
 --- $DEFAULT_OUTPUT
-#@todo
 
 [[m:$>]] ¤ÎÊÌÌ¾
+ 
+  require "English"
+
+  dout = $DEFAULT_OUTPUT.dup
+  $DEFAULT_OUTPUT.reopen("out.txt", "w")
+  print "foo"
+  $DEFAULT_OUTPUT.close
+  $DEFAULT_OUTPUT = dout
+  p "bar" # => bar
+  p File.read("out.txt") #=> foo
 
 --- $DEFAULT_INPUT
 
