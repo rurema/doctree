@@ -183,29 +183,73 @@
 
 --- $PID
 --- $PROCESS_ID
-#@todo
 
 [[m:$$]] の別名
+ 
+  require "English"
+
+	p sprintf("something%s", $PID) #=> "something5543" など
 
 --- $CHILD_STATUS
-#@todo
 
 [[m:$?]] の別名
 
+  require "English"
+
+  out = `wget http://www2.ruby-lang.org/ja/LICENSE.txt -O - 2>/dev/null`
+
+  if $CHILD_STATUS.to_i == 0
+    print "wget success\n"
+    out.split(/\n/).each { |line|
+      printf "%s\n", line
+    }
+  else
+    print "wget failed\n"
+  end
+
+
 --- $LAST_MATCH_INFO
-#@todo
 
 [[m:$~]] の別名
 
+  require "English"
+
+  str = "<a href=http://www2.ruby-lang.org/ja/LICENSE.txt>license</a>"
+
+  if /<a href=(.+?)>/ =~ str
+    p $LAST_MATCH_INFO[0] #=> "<a href=http://www2.ruby-lang.org/ja/LICENSE.txt>"
+    p $LAST_MATCH_INFO[1] #=> "http://www2.ruby-lang.org/ja/LICENSE.txt"
+    p $LAST_MATCH_INFO[2] #=> nil
+  end
+
 --- $IGNORECASE
-#@todo
 
 [[m:$=]] の別名
 
+  require "English"
+
+  $IGNORECASE=true
+
+  str_l = "FOOBAR"
+  str_s = "foobar"
+
+  if str_l == str_s
+    p "#{str_l} equal to #{str_s}" #=> "FOOBAR equal to foobar"
+  end
+
+
 --- $PROGRAM_NAME
-#@todo
 
 [[m:$0]] の別名
+  
+  require "English"
+  
+  p $PROGRAM_NAME
+  #end of sample.rb
+
+  ruby sample.rb  #=> "sample.rb"
+  ruby ./sample.rb #=> "./sample.rb"
+  ruby /home/hoge/bin/sample.rb #=> "/home/hoge/bin/sample.rb"
 
 --- $ARGV
 
@@ -219,19 +263,37 @@
   #=> ["31", "/home/hoge/fuga.txt"]
 
 --- $MATCH
-#@todo
 
 [[m:$&]] の別名
 
+  require "English"
+
+  str = 'hoge,foo,bar,hee,hoo'
+
+  /(foo|bar)/ =~ str
+  p $MATCH     #=> "foo"
+
 --- $PREMATCH
-#@todo
 
 [[m:$`]] の別名
 
+  require "English"
+
+  str = 'hoge,foo,bar,hee,hoo'
+
+  /foo/ =~ str
+  p $PREMATCH  #=> "hoge,"
+
 --- $POSTMATCH
-#@todo
 
 [[m:$']] の別名
+
+  require "English"
+
+  str = 'hoge,foo,bar,hee,hoo'
+
+  /foo/ =~ str
+  p $POSTMATCH #=> ",bar,hee,hoo"
 
 --- $LAST_PAREN_MATCH
 #@todo
