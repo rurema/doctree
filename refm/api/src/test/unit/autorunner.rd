@@ -52,7 +52,7 @@ Runner にテストを実行させているクラスです。
 
 == Class Methods
 
---- run(force_standalone = false, dir = '.', argv = ARGV)
+--- run(force_standalone = false, dir = '.', argv = ARGV)    -> bool
 #@todo
 テストを実行します。全てのテストが成功した場合、true を返します。そうでない場合は、
 false を返します。

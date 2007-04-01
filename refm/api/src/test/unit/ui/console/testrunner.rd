@@ -29,6 +29,7 @@ TestCase オブジェクトを与えます。
 
 == Instance Methods
 
---- start
+--- start    -> Test::Unit::TestResult 
 
 テストを実行し、生成時に与えられた io に結果を出力します。
+テスト結果を保持した Test::Unit::TestResult オブジェクトを返します。

@@ -10,7 +10,7 @@ include Test::Unit::Util::Observable
 
 == Class Methods
 
---- new
+--- new    -> Test::Unit::TestResult
 
 このメソッドをユーザが直接呼ぶことはありません。
 
@@ -18,26 +18,26 @@ include Test::Unit::Util::Observable
 
 == Instance Methods
 
---- run_count
+--- run_count    -> Integer
 今までに実行を記録したテストメソッドの数を返します。
 
---- assertion_count
+--- assertion_count    -> Integer
 今までに実行を記録した assert の数を返します。
 
---- error_count
+--- error_count    -> Integer
 
 今までに記録したテストのエラーの数を返します。
 
---- failure_count
+--- failure_count    -> Integer
 
 今までに記録した失敗したテストの数を返します。
 
---- passed?
+--- passed?    -> bool
 
 すべてのテストが成功したなら true を返します。
 そうでないなら false を返します。
 
---- to_s
+--- to_s    -> String
 
 実行したテストメソッドの数と assert の数、テストの失敗・エラーそれぞれの回数を
 人間が読みやすい文字列にして返します。

@@ -67,5 +67,5 @@ Overridden to return the name given the suite at creation.
 --- name    -> String
 #@todo
 
---- tests    -> [object]
+--- tests    -> [ Test::Unit::TestSuite | Test::Unit::TestCase ]
 #@todo

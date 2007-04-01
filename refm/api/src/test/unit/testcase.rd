@@ -96,7 +96,7 @@ result.
 常に失敗するテストです。
 
 == Private Instance Methods
---- passed?
+--- passed?    -> bool
 
 テストが成功したなら、true を返します。そうでないなら、false を返します。
 [[m:Test::Unit::TestCase#teardown]] の中で使うことを意図されています。

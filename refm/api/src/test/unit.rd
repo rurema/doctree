@@ -145,8 +145,8 @@ assertion メソッドの違いは [[unknown:"ruby-src:lib/runit/assert.rb"]] を参照。
 == Singleton Methods
 
 #@since 1.8.1
---- run?
---- run=(flag)
+--- run?        -> bool
+--- run=(flag)  
 #@todo
 
 #@#単なるバグかも知れない。

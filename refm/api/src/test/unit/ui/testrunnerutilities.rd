@@ -18,7 +18,7 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
 
 = module Test::Unit::UI::TestRunnerUtilities
 == Instance Methods
---- run(suite, output_level=NORMAL)
+--- run(suite, output_level=NORMAL)    -> Test::Unit::TestResult
 #@todo
 
 新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
@@ -32,7 +32,7 @@ TestCase オブジェクトを与えます。
  * Test::Unit::UI::NORMAL
  * Test::Unit::UI::VERBOSE
 
---- start_command_line_test
+--- start_command_line_test    -> Test::Unit::TestResult
 #@todo
 Takes care of the ARGV parsing and suite
 determination necessary for running one of the
