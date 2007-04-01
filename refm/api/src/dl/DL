@@ -129,7 +129,6 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 --- dlopen(lib)                    -> DL::Handle
 --- dlopen(lib) {|handle| ... }    -> DL::Handle
-#@todo
 
 ダイナミックライブラリ lib をロードし、それに対応する
 [[c:DL::Handle]] を返します。
@@ -174,16 +173,14 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 //}
 
 --- remove_callback(sym)    -> nil
-#@todo
 
 コールバック関数 sym を [[m:DL::FuncTable]] から削除します。
 #@#sym は以後 GC の対象になり得ます。
 以後 sym.call を呼ぶことができなくなります。
 
-@param sym [[c:DL::Symbol]] オブジェクトを与えます。
+@param sym テーブルから削除したい [[c:DL::Symbol]] オブジェクトを与えます。
 
 --- malloc(size)    -> DL::PtrData
-#@todo
 
 size バイトのメモリ領域を確保し、
 その領域を指す [[c:DL::PtrData]] オブジェクトを返します。
@@ -191,7 +188,6 @@ size バイトのメモリ領域を確保し、
 @param size 必要なメモリ領域のサイズを指定します。
 
 --- sizeof(type)    -> Integer
-#@todo
 
 型のサイズを返します。
 
@@ -203,14 +199,13 @@ sizeof("C") + sizeof("L") は、sizeof("CL") と等価ではありません。
 しますが、 C 言語のそれとは異なるかもしれません。
 
 sizeof("L3") のように型の後に数字を付けることもできます。
-指定できる型については [[m:DL#Type specifiers]] を参照してください。
+指定できる型については [[c:DL]] を参照してください。
 
-@param type 型指定子を与えます。
+@param type 型指定子を文字列で与えます。
 
 --- strdup(str)    -> DL::PtrData
-#@todo
 
-文字列 str を複製した新しい文字列へのポインタに相当する
+文字列 str を複製し、その新しい文字列へのポインタ
 [[c:DL::PtrData]] オブジェクトを返します。
 
 @param str 文字列を与えます。
@@ -226,7 +221,6 @@ DL に関する一般的なエラーが発生したときに投げられます。
 == Instance Methods
 
 --- to_ptr    -> DL::PtrData
-#@todo
 
 自身を複製し、複製した文字列を指す [[c:DL::PtrData]] を返します。
 
@@ -244,12 +238,13 @@ DL に関する一般的なエラーが発生したときに投げられます。
 
 --- to_ptr          -> DL::PtrData 
 --- to_ptr(type)    -> DL::PtrData
-#@todo
 
-自身を [[c:DL::PtrData]] に変換して返します。
-これは、Cレベルでは各要素を指すポインタの配列です。
+自身の各要素を指すポインタの配列へのポインタを返します。
 
-selfのすべての要素は同じクラスでなければいけません。
+self のすべての要素は同じクラスでなければならず、
+Integer、Float、String、Data、Nil のいずれかでなければいけません。
+
+要素のクラスが String である場合、各要素は複製されます。
 
  require 'dl/import'
  
@@ -264,5 +259,7 @@ selfのすべての要素は同じクラスでなければいけません。
 == Instance Methods
 
 --- to_ptr    -> DL::PtrData
-#@todo
 
+自身を指す [[c:DL::PtrData]] を返します。これは C レベルでは「FILE *」です。
+
+@raise IOError 自身が close されていたら発生します。
