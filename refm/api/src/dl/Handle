@@ -18,15 +18,14 @@
 == Instance Methods
 
 --- close    -> Integer
-#@todo
 
-Handle.new(lib) によってオープンされたハンドルをクローズします。
+自身をクローズします。成功した場合は 0 を返します。それでない場合は、
+0 以外の整数を返します。
 
 --- enable_close     -> nil
 --- disable_close    -> nil
-#@todo
 
-GC によるオブジェクトの回収時に、ハンドルをクローズするかどうかを指定します。
+GC によるオブジェクトの回収時に、自身をクローズするかどうかを指定します。
 
 --- sym(func, prototype = nil)    -> DL::Symbol
 --- [](func, prototype = nil)     -> DL::Symbol
@@ -43,8 +42,10 @@ class [[c:DL]] "Type Specifiers" も参照。
 @param type 関数のプロトタイプを文字列で指定します。
 
 --- to_i    -> Integer
-#@todo
+
+自身が保持する [[man:dlopen(3)]] が返したハンドルのアドレスを返します。
 
 --- to_ptr    -> DL::PtrData
-#@todo
 
+自身が保持する [[man:dlopen(3)]] が返したハンドルへのポインタ [[c:DL::PtrData]] ptr
+を返します。この ptr には、free 関数がセットされていません。
