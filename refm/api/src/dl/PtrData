@@ -37,72 +37,80 @@ GC は free 関数を使用してメモリを解放します。
 GC がメモリを解放するのに使用するシンボルオブジェクト sym を返します。
 sym は普通 PtrData#free= や PtrData.new によって設定されます。
 
---- size           -> Integer
---- size=(size)    -> Integer
+--- size        -> Integer
+--- size=(s)    
 #@todo
 
-サイズ size を割り当てたメモリを取得および設定します。
+自身の指す領域のサイズを返します。
+s を指定した場合は、自身の指す領域のサイズは s であると設定します。
+ただし、自身が指すメモリのサイズが s になるように再割り当てはしません。
+
+@param s 自身が指すメモリのサイズを指定します。
 
 --- null?    -> bool
-#@todo
+
+自身が NULL なら true を返します。そうでないなら false を返します。
 
 --- to_a(type, [size])    -> [object]
 #@todo
 
-type で指定された型の配列を返します。type は 'S','P','I','L','D' そし
-て 'F' のいずれかです。
+自身が指す領域から type で指定された型の配列を複製して返します。
+type は 'S','P','I','L','D' そして 'F' のいずれかです。
 
 --- to_i    -> Integer
-#@todo
+
+自身が指すアドレスを整数で返します。
 
 --- to_s([len])    -> String
-#@todo
 
-長さ len の文字列を返します。len を省略した場合は、文字列の終りは '\0'。
+自身が指す領域から長さ len の文字列を複製して返します。
+
+len を省略した場合は、文字列の終りは '\0' であると仮定して、
+[[man:strlen(3)]] を使って長さを算出します。
+
+@param len 文字列の長さを整数で指定します。
 
 --- to_str
 #@todo
 
 --- ptr   -> DL::PtrData
 --- +@    -> DL::PtrData
-#@todo
 
 自身が指す値をポインタであるとして、PtrData にして返します。
-C言語におけるポインタのポインタに対する間接参照(*p)と同じです。
+C言語におけるポインタのポインタに対する間接参照 *p と同じです。
 
  a = ['abc', 'def'].to_ptr
  p a.ptr.to_s #=> "abc"
 
 --- ==     -> bool
 --- eql?   -> bool
-#@todo
 
 ポインタの指すアドレスが同一かどうかを判定します。
 
 --- <=>    -> Integer
-#@todo
 
 ポインタの指すアドレスの大小を比較します。
 
 --- ref   -> DL::PtrData
 --- -@    -> DL::PtrData
-#@todo
 
 自身を指す PtrData オブジェクトを返します。
-C 言語におけるポインタへのアドレス演算子の適用(&p)と同じです。
+C 言語におけるポインタへのアドレス演算子の適用 &p と同じです。
 
   s = "abc".to_ptr
   p s == s.ref.ptr #=> true
 
 --- +(n)   -> DL::PtrData
-#@todo
 
-n バイトを足した新しいPtrData オブジェクトを返します。
+自身のアドレスに n バイトを足した新しい PtrData オブジェクトを返します。
+
+@param n アドレスの増分を整数で指定します。
 
 --- -(n)   -> DL::PtrData
-#@todo
 
-n バイトを引いた新しいPtrData オブジェクトを返します。
+自身のアドレスから n バイトを引いた新しい PtrData オブジェクトを返します。
+
+@param n アドレスの差分を整数で指定します。
 
 --- struct!(type, *members)    -> nil
 #@todo
@@ -131,6 +139,8 @@ key が文字列やシンボルなら、このメソッドは構造体/共用体メンバの値
 を返します。それは PtrData#{struct!,union!} によって定義された型を持ちます。
 key が整数でこのオブジェクトがポインタ ptr に相当するなら、
 (ptr + key).to_s(num) の値を返します。
+
+@param key 構造体か共用体のメンバの値を取得する時は、シンボルか文字列を指定します。
 
 --- []=(key, num, val)    -> object
 --- []=(key, val)         -> object
