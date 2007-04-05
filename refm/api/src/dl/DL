@@ -140,6 +140,8 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 @param lib ロードしたいライブラリを文字列で与えます。
 
+@raise RuntimeError [[man:dlopen(3)]] に失敗した時に発生します。
+
 --- callback(type)         -> DL::Symbol
 --- define_callback(type)  -> DL::Symbol
 #@todo
@@ -185,6 +187,8 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 size バイトのメモリ領域を確保し、
 その領域を指す [[c:DL::PtrData]] オブジェクトを返します。
 
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
+
 @param size 必要なメモリ領域のサイズを指定します。
 
 --- sizeof(type)    -> Integer
@@ -203,10 +207,14 @@ sizeof("L3") のように型の後に数字を付けることもできます。
 
 @param type 型指定子を文字列で与えます。
 
+@raise DL::DLTypeError 定められた文字以外を型指定子として与えると発生します。
+
 --- strdup(str)    -> DL::PtrData
 
 文字列 str を複製し、その新しい文字列へのポインタ
 [[c:DL::PtrData]] オブジェクトを返します。
+
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
 
 @param str 文字列を与えます。
 
@@ -223,6 +231,7 @@ DL に関する一般的なエラーが発生したときに投げられます。
 --- to_ptr    -> DL::PtrData
 
 自身を複製し、複製した文字列を指す [[c:DL::PtrData]] を返します。
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
 
  s = 'abc'
  sp = s.to_ptr
@@ -236,10 +245,12 @@ DL に関する一般的なエラーが発生したときに投げられます。
 
 == Instance Methods
 
---- to_ptr          -> DL::PtrData 
---- to_ptr(type)    -> DL::PtrData
+--- to_ptr          -> nil | DL::PtrData 
+--- to_ptr(type)    -> nil | DL::PtrData
 
-自身の各要素を指すポインタの配列へのポインタを返します。
+自身の各要素を指すポインタの配列へのポインタ [[c:DL::PtrData]] を返します。
+この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
+自身の長さが 0 なら nil を返します。
 
 self のすべての要素は同じクラスでなければならず、
 Integer、Float、String、Data、Nil のいずれかでなければいけません。
@@ -252,7 +263,9 @@ Integer、Float、String、Data、Nil のいずれかでなければいけません。
  p ptr.size #=> 12
  p ptr.to_a('P').map{|s| s.to_s } #=> ["a", "b", "c"]
 
-@param type self の要素のクラスを明示的に指定します。[[c:DL]] の Type specifiers を参照して下さい。
+@param type self の要素の型を文字列で指定します。[[c:DL]] の型指定子の項を参照して下さい。
+
+@raise DL::DLTypeError 定められた文字以外を型指定子として与えると発生します。また、与えられた型と自身の要素が一致しないと発生します。
 
 = reopen IO
 

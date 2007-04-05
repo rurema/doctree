@@ -41,6 +41,8 @@ class [[c:DL]] "Type Specifiers" も参照。
 
 @param type 関数のプロトタイプを文字列で指定します。
 
+@raise RuntimeError シンボルが見つからなかった時に発生します。
+
 --- to_i    -> Integer
 
 自身が保持する [[man:dlopen(3)]] が返したハンドルのアドレスを返します。
