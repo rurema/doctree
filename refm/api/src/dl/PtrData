@@ -1,6 +1,6 @@
 = class DL::PtrData < Object
 
-C のポインタのようなメモリブロックを表すクラスです。
+メモリ領域を表すクラスです。C 言語のポインタに相当します。
 
 == Class Methods
 

@@ -1,6 +1,6 @@
 = class DL::Symbol < Object
 
-ダイナミックライブラリの関数のラッパークラスです。
+ダイナミックライブラリの関数を表すクラスです。
 
 == Class Methods
 
