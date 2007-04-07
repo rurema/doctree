@@ -128,6 +128,10 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 --- FREE
 #@todo
 
+[[man:free(3)]] を表す [[c:DL::Symbol]] です。
+この定数に新たに DL::Symbol を代入しても、DL::PtrData にデフォルトでセットされる
+free 関数が変わることはありません。
+
 == Module Functions
 
 --- dlopen(lib)                    -> DL::Handle
@@ -251,7 +255,7 @@ DL に関する一般的なエラーが発生したときに投げられます。
 --- to_ptr          -> nil | DL::PtrData 
 --- to_ptr(type)    -> nil | DL::PtrData
 
-自身の各要素を指すポインタの配列へのポインタ [[c:DL::PtrData]] を返します。
+自身の各要素を指すポインタの配列を生成し、それへのポインタ [[c:DL::PtrData]] を返します。
 この返り値には、[[m:DL::FREE]] が free 関数としてセットされています。
 自身の長さが 0 なら nil を返します。
 
