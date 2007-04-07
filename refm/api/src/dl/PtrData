@@ -8,20 +8,25 @@ C のポインタのようなメモリブロックを表すクラスです。
 #@todo
 
 アドレス addr を指すポインタに相当する PtrData オブジェクトを返します。
+
+size を指定した場合、アドレス addr に確保されているメモリ領域のサイズは
+size であるとします。
 GC は free 関数を使用してメモリを解放します。
 
-@param addr
+@param addr 生成する PtrData オブジェクトが指すアドレスを整数で指定します。
 
-@param size
+@param size 生成する PtrData オブジェクトが指すメモリ領域のサイズを整数で指定します。
 
-@param free
+@param free 生成する PtrData オブジェクトの free 関数を [[c:DL::Symbol]] で指定します。
 
 --- malloc(size, free = nil)    -> DL::PtrData
 #@todo
 
-@param size
+サイズが size であるメモリ領域を確保し、それを指す DL::PtrData を返します。
 
-@param free
+@param size 確保したいメモリ領域のサイズを指定します。
+
+@param free 返り値にセットされる free 関数を [[c:DL::Symbol]] で指定します。
 
 == Instance Methods
 
@@ -97,12 +102,12 @@ C 言語におけるポインタのポインタに対する間接参照 *p と同じです。
  a = ['abc', 'def'].to_ptr
  p a.ptr.to_s #=> "abc"
 
---- ==     -> bool
---- eql?   -> bool
+--- ==(other)     -> bool
+--- eql?(other)   -> bool
 
 ポインタの指すアドレスが同一かどうかを判定します。
 
---- <=>    -> Integer
+--- <=>(other)    -> Integer
 
 ポインタの指すアドレスの大小を比較します。
 
