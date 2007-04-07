@@ -1,7 +1,7 @@
 = class DL::Handle < Object
 
 オープンされたダイナミックライブラリを表すクラスです。
-([[man:dlopen(3)]] が返すハンドラーのラッパークラスです。)
+[[man:dlopen(3)]] が返すハンドラーのラッパーです。
 
 == Class Methods
 
