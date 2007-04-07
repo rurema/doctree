@@ -5,7 +5,7 @@ require test/unit/testsuite
 include Test::Unit::Assertions
 #@#include Test::Unit::Util::BacktraceFilter
 
-テストの基本単位(あるいは「テスト本体」)のためのクラスです。
+テストの基本単位(あるいは「テスト本体」)を表すクラスです。
 テストを行うメソッド(テストメソッド)は TestCase のサブクラスのインスタンスメソッド
 として定義されます。テストメソッドの名前は「test」で始まっていなければなりません。
 逆に、「test」で始まっているメソッドは全てテストメソッドと見なされます。
