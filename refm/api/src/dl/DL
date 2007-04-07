@@ -1,5 +1,8 @@
 = module DL
 
+UNIX の [[man:dlopen(3)]] や Windows の LoadLibrary() などのダイナミックリンカへの低レベルな
+インターフェースを提供するモジュールです。
+
 モジュール DL は 3 つのクラスから成っています。
 
 : [[c:DL::Symbol]] 
@@ -130,8 +133,8 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 --- dlopen(lib)                    -> DL::Handle
 --- dlopen(lib) {|handle| ... }    -> DL::Handle
 
-ダイナミックライブラリ lib をロードし、それに対応する
-[[c:DL::Handle]] を返します。
+ダイナミックライブラリ lib をロードし、
+[[c:DL::Handle]] として返します。
 
 ブロックが与えられている場合は、[[c:DL::Handle]] 引数として
 与えられたブロックを実行します。[[c:DL::Handle]] を返します。
@@ -263,7 +266,7 @@ Integer、Float、String、Data、Nil のいずれかでなければいけません。
  p ptr.size #=> 12
  p ptr.to_a('P').map{|s| s.to_s } #=> ["a", "b", "c"]
 
-@param type self の要素の型を文字列で指定します。[[c:DL]] の型指定子の項を参照して下さい。
+@param type self の要素の型を文字で指定します。[[c:DL]] の型指定子の項を参照して下さい。
 
 @raise DL::DLTypeError 定められた文字以外を型指定子として与えると発生します。また、与えられた型と自身の要素が一致しないと発生します。
 
