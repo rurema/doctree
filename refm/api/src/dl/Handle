@@ -9,17 +9,16 @@
 --- new(lib) {|handle| ... }    -> DL::Handle
 #@todo
 
-ライブラリ lib をオープンし、Handle オブジェクト handle を返します。
+ライブラリ lib をオープンし、Handle オブジェクトを生成して返します。
 
-ブロックを指定すれば、
-オープンしたハンドルをブロック引数に渡してブロックを実行します。
-ハンドルはブロックの終りで自動的にクローズされます。
+ブロックを指定すれば、生成した Handle を引数としてブロックを実行します。
+Handle はブロックの終りで自動的にクローズされます。
 
 == Instance Methods
 
 --- close    -> Integer
 
-自身をクローズします。成功した場合は 0 を返します。それでない場合は、
+自身をクローズします。成功した場合は 0 を返します。そうでない場合は、
 0 以外の整数を返します。
 
 --- enable_close     -> nil
@@ -27,21 +26,32 @@
 
 GC によるオブジェクトの回収時に、自身をクローズするかどうかを指定します。
 
---- sym(func, prototype = nil)    -> DL::Symbol
---- [](func, prototype = nil)     -> DL::Symbol
+--- sym(func) -> DL::PtrData
+--- [](func)  -> DL::PtrData
 #@todo
 
 関数やグローバル変数 func へのポインタを取得し、
-[[c:DL::Symbol]] オブジェクトや [[c:DL::PtrData]] オブジェクトを返します。
-prototype は型修飾からなる文字列で関数のプロトタイプを示します。
+[[c:DL::PtrData]] オブジェクトとして返します。
 
-class [[c:DL]] "Type Specifiers" も参照。
+@param func 得たい関数の名前を文字列で与えます。
+
+@raise RuntimeError シンボルが見つからなかった時に発生します。
+
+--- sym(func, type)    -> DL::Symbol
+--- [](func, type)     -> DL::Symbol
+#@todo
+
+関数 func へのポインタを取得し、
+[[c:DL::Symbol]] オブジェクトとして返します。
+type は型修飾子からなる文字列で関数のプロトタイプを示します。
 
 @param func 得たい関数の名前を文字列で与えます。
 
 @param type 関数のプロトタイプを文字列で指定します。
 
 @raise RuntimeError シンボルが見つからなかった時に発生します。
+
+[[c:DL]] の「Type Specifiers」の項も参照して下さい。
 
 --- to_i    -> Integer
 
