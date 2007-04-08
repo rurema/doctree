@@ -1186,32 +1186,38 @@ Ruby 1.8 以降はいずれも符号を許す
 
 self を返します。
 
---- reverse
---- reverse!
-#@todo
+--- reverse -> String
 
-文字列をひっくり返します。
+文字列をバイト単位で左右逆転した文字列を返します。
 
 例:
 
   p "foobar".reverse   # => "raboof"
 
-reverse は変更後の文字列を生成して返します。
-reverse! は self を変更してそれを返します。
+--- reverse! -> self
 
---- rindex(pattern[, pos])
-#@todo
+文字列をバイト単位で左右逆転します。
+reverse! は self を破壊的に変更してそれを返します。
 
-部分文字列の探索を右端から左端に向かって行います。
+例:
+
+  str = "foobar"
+  str.reverse!
+  p str   # => "raboof"
+
+--- rindex(pattern, pos = self.size) -> Integer | nil
+
+文字列の右から左に向かって部分文字列 pattern を探索します。
 見つかった部分文字列の左端の位置を返します。
 見つからなければ nil を返します。
 
-引数 pattern は探索する部分文字列の指定を文字列、
-文字コードを示す 0 から 255 の整数、
-正規表現のいずれかで指定します。
+@param pattern 探索する部分文字列です。
+    文字列、文字コードを示す 0 から 255 の整数、
+    正規表現のいずれかで指定します。
+@param pos
 
 pos が与えられた時にはその位置から探索します。
-pos の省略時の値は self.size (右端) です。
+pos の省略時の値は self.size (文字列の右端) です。
 
 例:
 
@@ -1232,15 +1238,14 @@ pos が負の場合、文字列の末尾から数えた位置から探索します。
 以下の例を参照してください。
 
   # String#index の場合
-  p "fooooooobar".index("bar", 2)    # => 3
-  #    bar <- ここから探索を行う
-  #          bar  <- 右にずらしてここで見つかる
+  p "stringstring".index("ing", 1)    # => 3
+  #    ing             # ここから探索を始める
+  #           ing      # 右にずらしていってここで見つかる
 
   # String#rindex の場合
-  p "foooooooobar".rindex("bar", -2)  # => 3
-  #    bar <- 右端が末尾から 2 番目ではなく,
-  #            bar <- 左端が末尾から 2 番目から探索を行う
-  #           bar  <- 左にずらしてここで見つかる
+  p "stringstring".rindex("ing", -1)  # => 9
+  #             ing    # インデックス -1 のバイトから探索を始める
+  #           ing      # 左にずらしてここで見つかる
 
 --- scan(re)
 --- scan(re) {|s| ... }
@@ -1301,21 +1306,22 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
 
 [[m:String#[] ]] と同じです。
 
---- slice!(nth[, len])
+--- slice!(idx)
+--- slice!(idx, len)
 --- slice!(substr)
 --- slice!(first..last)
 --- slice!(first...last)
 #@since 1.8.0
---- slice!(regexp[, nth])
-#@todo
+--- slice!(regexp, nth = 0)
 #@end
+#@todo
 
-指定した範囲 ( [[m:String#[] ]] ) 参照) を
+指定した範囲 ([[m:String#[] ]] 参照) を
 文字列から取り除いたうえで取り除いた部分文字列を返します。
 
 引数が範囲外を指す場合は nil を返します。
 
---- split([sep[, limit]])
+--- split(sep = nil, limit = 0)
 #@todo
 
 sep で指定されたパターンによって文字列を分割し配列に格納します。
@@ -1330,7 +1336,7 @@ sep は以下のいずれかです。
 : 2 バイト以上の文字列
     [[c:Regexp.new]](sep) にマッチする文字列を
     区切りとして分割する (Ruby 1.6)。
-: 省略 or nil
+: nil
     [[m:$;]] の値を区切りとして分割する。
 : 1 バイトの空白 ' ' か [[m:$;]] が使用される場合でその値が nil:
     先頭の空白を除いて空白で分割する。
@@ -1338,7 +1344,7 @@ sep は以下のいずれかです。
     1文字ずつに分割する。マルチバイト文字を認識する。
 
 #@since 1.8.0
-Ruby 1.7 以降は、sep が文字列の場合その長さにかかわらず
+Ruby 1.8 以降は、sep が文字列の場合その長さにかかわらず
 [[m:Regexp.new]](Regexp.quote(sep)) にマッチする文字列
 (つまりその文字列そのもの) が区切りとなります。
 #@end
@@ -1353,13 +1359,14 @@ Ruby 1.7 以降は、sep が文字列の場合その長さにかかわらず
 sep で指定されたパターンが空文字列とマッチする場合は
 文字列が 1 文字ずつに分割されます.
 [[m:$KCODE]] が適切に設定されていれば
-漢字を認識して文字単位で分割します。
+マルチバイト文字を認識して文字単位で分割します。
 
 例:
 
-  p 'hi there'.split(/ */).join(':')   # => "h:i:t:h:e:r:e"
+  p 'hi there'.split(/\s*/).join(':')  # => "h:i:t:h:e:r:e"
   p 'hi there'.split(//).join(':')     # => "h:i: :t:h:e:r:e"
-  $KCODE = 'e'
+
+  $KCODE = "EUC"
   p '文字列'.split(//).join(':')       # => "文:字:列"
 
 sep で指定されたパターンに括弧が含まれている場合には、
@@ -1373,7 +1380,7 @@ sep で指定されたパターンに括弧が含まれている場合には、
 
 limit は以下のいずれかです。
 
-: limit == 0 or 省略
+: limit == 0
      配列末尾の空文字列は取り除かれる。
 : limit > 0
      最大 limit 個のフィールドに分割する。
@@ -1422,17 +1429,10 @@ squeeze は変更後の文字列を生成して返します。
 squeeze! は self を変更して返しますが、
 変更が起こらなかった場合は nil を返します。
 
---- strip
---- strip!
-#@todo
+--- strip -> String
 
-先頭と末尾の空白文字を全て取り除きます。
+先頭と末尾の空白文字を全て取り除いた文字列を生成して返します。
 空白文字の定義は " \t\r\n\f\v" です。
-
-strip は変更後の文字列を新しく生成して返します。
-
-strip! は self を変更して返します。
-ただし取り除く空白がなかったときは nil を返します。
 
 例:
 
@@ -1443,15 +1443,7 @@ strip! は self を変更して返します。
 
   str = "\tabc\n"
   p str.strip              #=> "abc"
-  p str                    #=> "\tabc\n"  (変化なし)
-
-  str = "  abc\r\n"
-  p str.strip!             #=> "abc"
-  p str                    #=> "abc"  (変化あり)
-
-  str = "abc"
-  p str.strip!             #=> nil
-  p str                    #=> "abc"
+  p str                    #=> "\tabc\n" (元の文字列は変化しない)
 
 #@since 1.8.0
 [[m:String#rstrip]] と同様、
@@ -1463,6 +1455,40 @@ strip! は self を変更して返します。
   str = "  \0  abc  \0"
   p str.strip           # => "\000  abc"
 #@end
+
+[[m:String#strip!]] も参照してください。
+
+--- strip! -> self
+
+先頭と末尾の空白文字を全て破壊的に取り除きます。
+空白文字の定義は " \t\r\n\f\v" です。
+
+strip! は、内容を変更した self を返します。
+ただし取り除く空白がなかったときは nil を返します。
+
+例:
+
+  str = "  abc\r\n"
+  p str.strip!             #=> "abc"
+  p str                    #=> "abc"
+
+  str = "abc"
+  p str.strip!             #=> nil
+  p str                    #=> "abc"
+
+#@since 1.8.0
+[[m:String#rstrip!]] と同様、
+右側の空白類と "\0" を取り除きますが、
+左側の "\0" は特別扱いされません。
+
+例:
+
+  str = "  \0  abc  \0"
+  str.strip!
+  p str   # => "\000  abc"
+#@end
+
+[[m:String#strip]] も参照してください。
 
 #@since 1.8.0
 --- lstrip
