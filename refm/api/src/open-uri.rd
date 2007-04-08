@@ -85,16 +85,10 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれます。
 @raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] を参照して下さい。
 
 = reopen URI::HTTP
-
 include OpenURI::OpenRead
-
-#@# [[c:OpenURI::OpenRead]] モジュール をインクルードします。
 
 = reopen URI::FTP
-
 include OpenURI::OpenRead
-
-#@# [[c:OpenURI::OpenRead]] モジュール をインクルードします。
 
 = module OpenURI
 
