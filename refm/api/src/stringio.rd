@@ -28,7 +28,7 @@ StringIO オブジェクトを生成して返します。
 
 @param string 生成される StringIO のデータを文字列で指定します。この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、string 自身も書き換えられます。
 
-@param mode [[m:Kernel#open]]同様文字列か整数で指定します。
+@param mode [[m:Kernel#open]] 同様文字列か整数で指定します。
 
         require 'stringio'
          
@@ -113,24 +113,26 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 
 --- closed_read?    -> bool
 
-自身に対する読み取りが禁止されているなら true を返します。
+自身に対する読み取りが禁止されているなら true を返します。そうでない場合は、false を返します。
 
 --- closed_write?    -> bool
 
-自身に対する書き込みが禁止されているなら true を返します。
+自身に対する書き込みが禁止されているなら true を返します。そうでない場合は、false を返します。
 
 --- each(sep_string = $/){|line| ... }       -> self
 --- each_line(sep_string = $/){|line| ... }  -> self
 #@todo
 自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
 
-細かい仕様は [[m:IO#each]] を参照して下さい。
+詳しい仕様は [[m:IO#each]] を参照して下さい。
+
+@param sep_string 行の区切りを文字列で指定します。
 
 @raise IOError 自身が読み取り不可なら発生します。
 
---- each_byte{|byte| ... }    -> self
+--- each_byte{|ch| ... }    -> self
 #@todo
-自身から 1 バイトずつ読み込み、整数に変換し、それを引数として与えられたブロックを実行します。
+自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
 
 @raise IOError 自身が読み取り不可なら発生します。
 
@@ -164,8 +166,10 @@ EOF に到達した時には nil を返します。
 
 --- gets(sep_string = $/)    -> String
 #@todo
-一行読み込んで、その文字列を返します。EOF に到達した時には nil を返します。
+自身から 1 行読み込んで、その文字列を返します。EOF に到達した時には nil を返します。
 詳しい仕様は [[m:IO#gets]] を参照して下さい。[[m:$_]] に読み込んだ行がセットされます。
+
+@param sep_string 行の区切りを文字列で指定します。
 
 --- isatty    -> false
 
@@ -179,9 +183,11 @@ EOF に到達した時には nil を返します。
 #@todo
 現在の行番号を n にセットします。
 
+@param n 行番号を整数で指定します。
+
 --- path    -> nil
 
-StringIOには対応するパスはないので nil を返します。
+StringIO には対応するパスはないので nil を返します。
 
 --- pid    -> nil
 
@@ -196,6 +202,8 @@ StringIOには対応するパスはないので nil を返します。
 #@todo
 自身の位置を n に移動します。自身が表す文字列のサイズより大きくても構いません。
 
+@param n 自身の位置を整数で指定します。
+
 @raise Errno::EINVAL n がマイナスである場合に発生します。
 
 --- print()        -> nil
@@ -204,34 +212,65 @@ StringIOには対応するパスはないので nil を返します。
 自身に引数を順に出力します。引数を省略した場合は、 $_ を出力します。
 引数の扱いは [[m:Kernel#print]] を参照して下さい。
 
+@param obj 書き込みたいオブジェクトを与えます。
+
 --- printf(format, *obj)    -> nil
 #@todo
 format に従い引数 *obj を文字列に変換して、自身に出力します。
 詳しい仕様は[[m:Kernel#printf]]を参照して下さい。
 
---- putc(obj)
-#@todo
-[[m:IO#putc]] と同様です。与えられた obj を返します。
+@param format 文字列のフォーマットを指定します。[[m:Kernel#format]]を参照して下さい。
 
---- puts(obj, ...)
-#@todo
-[[m:IO#puts]] と同様です。
+@param obj 書き込みたいオブジェクトを与えます。
 
---- read([integer [, buffer]])
+--- putc(ch)    -> object
 #@todo
-[[m:IO#read]] と同様です。
+文字 ch を自身に書き込みます。 ch が数字なら 0 〜 255 の範囲の対応する文字書き込みます。 
+ch が文字列なら、その先頭の文字を書き込みます。ch を返します。
 
---- readchar
-#@todo
-[[m:IO#readchar]] と同様です。
+@param ch 書き込みたい文字を、整数か文字列で与えます。ch が Float や Rational であっても、整数に変換されてから書き込まれます。
 
---- readline(sep_string = $/)
+--- puts(*obj)    -> nil
 #@todo
-[[m:IO#readline]] と同様です。
+obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
+詳しい仕様は [[m:Kernel#puts]] を参照して下さい。
 
---- readlines(sep_string = $/)
+@param obj 書き込みたいオブジェクトを与えます。
+
+--- read                  -> String
+--- read(len)             -> String | nil
+--- read(len, outbuf)     -> String
 #@todo
-[[m:IO#readlines]] と同様です。
+
+自身から len バイト読み込みんで返します。len が省略された場合は、最後まで読み込んで返します。
+詳しい仕様は [[m:IO#read]] を参照して下さい。
+
+@param len 読み込みたい長さを整数で指定します。
+
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で与えます。
+
+--- readchar    -> Integer
+#@todo
+自身から 1 文字読み込んで、その文字に対応する整数を返します。EOF に到達した時には例外 EOFError を発生させます。
+
+@raise EOFError EOF に到達した時に発生します。
+
+--- readline(sep_string = $/)    -> String
+#@todo
+自身から 1 行読み込んで、その文字列を返します。EOF に到達した時には、例外 EOFError を発生させます。
+詳しい仕様は [[m:IO#readline]] を参照して下さい。
+
+@param sep_string 行の区切りを文字列で指定します。
+
+@raise EOFError EOF に到達した時に発生します。
+
+--- readlines(sep_string = $/)    -> [String]
+#@todo
+自身からデータを全て読み込んで、その各行を要素としてもつ配列を返します。 
+既に EOF に達していれば [] を返します。 
+詳しい仕様は [[m:IO#readlines]] を参照して下さい。
+
+@param sep_string 行の区切りを文字列で指定します。
 
 #@since 1.9.0
 --- readpartial([integer [, buffer]])
@@ -239,57 +278,92 @@ format に従い引数 *obj を文字列に変換して、自身に出力します。
 [[m:IO#readpartial]] と同様です。
 #@end
 
---- reopen
+--- reopen    
 #@todo
 例外 [[c:NotImplementedError]] が発生します。
 
---- rewind
-#@todo
-[[m:IO#rewind]] と同様です。
+@raise NotImplementedError 常に発生します。
 
---- seek(n, whence)
+--- rewind    -> 0
 #@todo
-[[m:IO#seek]] と同様です。
+自身の pos と lineno をそれぞれ 0 にします。
 
---- size
---- length
+--- seek(offset, whence = IO::SEEK_SET)
+#@todo
+
+自身の pos を whence の位置から offset バイトだけ移動させます。 whence の値は以下のいずれかです。
+
+ * IO::SEEK_SET: ファイルの先頭から (デフォルト)
+ * IO::SEEK_CUR: 現在のファイルポインタから
+ * IO::SEEK_END: ファイルの末尾から
+
+@param offset 移動させたいバイト数を整数で与えます。
+
+@raise Errno::EINVAL offset + whence がマイナスである場合に発生します。
+
+@raise ArgumentError whence が上の SEEK_SET, SEEK_CUR, SEEK_END 以外だった場合に発生します。
+
+--- size    -> Integer
+--- length  -> Integer
 #@todo
 文字列の長さを返します。
 
---- sync
+--- sync    -> true
 #@todo
-何もせずに 0 を返します。
+何もせずに true を返します。
 
 --- sync=(bool)
 #@todo
 何もせずに bool を返します。
 
---- sysread([integer [, buffer]])
-#@todo
-[[m:StringIO#read]] と同じです。
+@param bool true か flase を与えます。
 
---- syswrite(obj)
+--- sysread                  -> String
+--- sysread(len)             -> String
+--- sysread(len, outbuf)     -> String
+#@todo
+[[m:StringIO#read]] と同じです。ただし、EOF に達した場合、EOFError を投げます。
+
+@param len 読み込みたい長さを整数で指定します。
+
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で与えます。
+
+@raise EOFError EOF に達した場合に発生します。
+
+--- syswrite(obj)    -> Integer
 #@todo
 [[m:StringIO#write]] と同じです。
 
---- truncate(n)
-#@todo
-n が self.size より小さい場合にはバッファのサイズを n に切り詰めます。
-n が self.size より大きい場合にはバッファのサイズを n に拡大します。
+@param obj 書き込みたいオブジェクトを与えます。
 
---- tty?
+--- truncate(len)    -> Integer
+#@todo
+自身のサイズが len になるように、自身を切り詰め、もしくは拡大します。
+拡大した場合は、その部分を 0 で埋めます。
+len を返します。
+
+@param len 変更したいサイズを整数で与えます。
+
+@raise IOError 自身が書き込み可能でない時に発生します。
+
+@raise Errno::EINVAL n がマイナスの時に発生します。
+
+--- tty?    -> false
 #@todo
 何もせず false を返します。
 
---- ungetc(c)
+--- ungetc(ch)    -> nil
 #@todo
-c は Fixnum です。
-pos を 1 減らしてからキャラクターコードが c の文字を書き込みます。
-#@#この時posは 1 増えません。
-pos が size よりも大きい場合は、リサイズして新しく加えられたバッファを 0 で
-埋めてから pos を 1 減らしてキャラクターコードが c の文字を書き込みます。
-#@#この時も pos は 1 増えません。
+ch を自身に書き戻します。
+pos が自身のサイズよりも大きい場合は、自身をリサイズしてから、ch を書き戻します。
+
+何回でも書き戻すことが可能です。また現在位置が 0 である場合は何も行いません。
+
 nil を返します。
+
+@param ch 書き戻したい文字を整数で与えます。
+
+@raise IOError 自身が読み込み可能でない時に発生します。
 
       s = StringIO.new("hoge")
       s.pos = 1
@@ -303,6 +377,14 @@ nil を返します。
       p s.string   #=> "hoge\000\000\000A"
       p s.pos        #=> 7
 
---- write(obj)
+--- write(obj)    -> Integer
 #@todo
-[[m:IO#write]] と同様です。書き込まれた文字列の長さを返します。
+自身に obj を出力します。obj が文字列でなければ to_s による文字列化を試みます。
+書き込まれた文字列の長さを返します。
+
+全ての出力メソッドは、最終的に「write」という名のメソッドを呼び出すので、
+このメソッドを置き換えることで出力関数の挙動を変更することができます。
+
+@param obj 書き込みたいオブジェクトを与えます。
+
+@raise IOError 自身が書き込み可能でない時に発生します。
