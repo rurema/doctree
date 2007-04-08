@@ -1,15 +1,11 @@
 #@since 1.8.1
-
 = module XSD
-require 'uri'
-require 'rational'
-require 'date'
 
-== constants
+== Constants
+
 --- Namespace
 #@todo
 
 --- InstanceNamespace
 #@todo
-
 #@end

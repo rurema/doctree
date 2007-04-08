@@ -1,6 +1,8 @@
 #@since 1.8.1
 = module XSD::NS
-== instance methods
+
+== Instance Methods
+
 --- initialize(tag2ns = {})
 #@todo
 
@@ -19,10 +21,10 @@
 --- compare(ns, name, rhs)
 #@todo
 
---- defalut_namespace
+--- default_namespace
 #@todo
 
---- each_ns {|ns, tag| ...}
+--- each_ns {|ns, tag| .... }
 #@todo
 
 --- name(name)
