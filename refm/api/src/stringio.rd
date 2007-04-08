@@ -347,7 +347,7 @@ len を返します。
 
 @raise IOError 自身が書き込み可能でない時に発生します。
 
-@raise Errno::EINVAL n がマイナスの時に発生します。
+@raise Errno::EINVAL len がマイナスの時に発生します。
 
 --- tty?    -> false
 #@todo
