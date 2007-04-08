@@ -4,7 +4,7 @@
 #--------------------------------------------------------
 _builtin/ARGF
 _builtin/ArgumentError
-_builtin/Array
+_builtin/Array                  aamine
 _builtin/Bignum
 _builtin/Binding
 _builtin/Class
@@ -25,13 +25,13 @@ _builtin/Fixnum
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
-_builtin/Hash
+_builtin/Hash                   aamine
 _builtin/IO
 _builtin/IOError
 _builtin/IndexError
 _builtin/Integer
 _builtin/Interrupt
-_builtin/Kernel
+_builtin/Kernel                 aamine
 _builtin/KeyError
 _builtin/LoadError
 _builtin/LocalJumpError
@@ -46,7 +46,7 @@ _builtin/NoMemoryError          snoozer05       done
 _builtin/NoMethodError          snoozer05       done
 _builtin/NotImplementedError    snoozer05       done
 _builtin/Numeric
-_builtin/Object
+_builtin/Object                 aamine
 _builtin/ObjectSpace            sheepman
 _builtin/Precision
 _builtin/Proc
@@ -81,11 +81,11 @@ _builtin/TrueClass		yamane		done
 _builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      snoozer05       done
-_builtin/constants
+_builtin/constants              aamine
 _builtin/Enumerable__Enumerator
 _builtin/fatal
-_builtin/functions
-_builtin/specialvars
+_builtin/functions              aamine
+_builtin/specialvars            aamine
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
