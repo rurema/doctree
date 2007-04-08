@@ -33,8 +33,9 @@ GC は free 関数を使用してメモリを解放します。
 --- free=(sym)    
 #@todo
 
-シンボルオブジェクト sym を指定した場合、GC は sym に相当する関数
-を使ってメモリを解放します。
+GC が自身を解放するのに使う関数を [[c:DL::Symbol]] で指定します。
+
+@param sym 自身を解放するのに使われる関数を [[c:DL::Symbol]] で指定します。
 
 --- free    -> DL::Symbol
 #@todo
