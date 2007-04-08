@@ -52,8 +52,8 @@ URI オブジェクトは直接読み込むことができます。
 
 == Private Instance Methods
 
---- open(name, *rest)                -> StringIO 
---- open(name, *rest) {|ouri| ...}   -> StringIO 
+--- open(name, *rest)                -> StringIO | File
+--- open(name, *rest) {|ouri| ...}   -> nil
 #@todo
 
 name が http:// や ftp:// で始まっている文字列なら URI のリソースを
@@ -100,8 +100,8 @@ include OpenURI::OpenRead
 
 == Singleton Methods
 
---- open_uri(name, mode = nil, perm = nil, options)                  -> StringIO
---- open_uri(name, mode = nil, perm = nil, options) {|sio| ... }     -> nil
+--- open_uri(name, mode = nil, perm = nil, options = {})                  -> StringIO
+--- open_uri(name, mode = nil, perm = nil, options = {}) {|sio| ... }     -> nil
 #@todo
 
 URI である文字列 name のリソースを取得して [[c:StringIO]] オブジェクト
