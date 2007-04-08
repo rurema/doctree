@@ -171,10 +171,10 @@ net/telnet
 net/telnets
 nkf
 observer
-open-uri
+open-uri                        sheepman
 open3
 openssl
-optparse
+optparse                        sheepman
 ostruct
 
 # LIBRARY_NAME                  OWNER           STATUS
@@ -440,7 +440,7 @@ tmpdir
 tracer
 tsort
 un
-uri
+uri                             sheepman             
 weakref
 webrick
 webrick/cgi
