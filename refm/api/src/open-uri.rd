@@ -57,10 +57,7 @@ URI オブジェクトは直接読み込むことができます。
 #@todo
 
 name が http:// や ftp:// で始まっている文字列なら URI のリソースを
-取得した上で [[c:StringIO]] オブジェクトとして返します。この [[c:StringIO]]
-オブジェクトは [[c:OpenURI::Meta]] モジュールで拡張されています。
-*rest で受け付けるオプションに関しては、
-[[m:OpenURI.open_uri]] を参照して下さい。
+取得した上で [[c:StringIO]] オブジェクトとして返します。
 
 name に open メソッドが定義されている場合は、*rest を引数として渡し
 name.open(*rest, &block) のように name の open メソッドが呼ばれます。
@@ -80,6 +77,10 @@ name.open(*rest, &block) のように name の open メソッドが呼ばれます。
 
 @param name オープンしたいリソースを文字列で与えます。
 
+@param rest [[m:OpenURI.open_uri]] を参照して下さい。
+
+@return 返り値である StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、かつリソースの取得に失敗した時に発生します。
 
 @raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] を参照して下さい。
@@ -94,52 +95,62 @@ include OpenURI::OpenRead
 
 == Singleton Methods
 
---- open_uri(name, mode = nil, perm = nil, options = {})                  -> StringIO
---- open_uri(name, mode = nil, perm = nil, options = {}) {|sio| ... }     -> nil
+--- open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
+--- open_uri(name, mode = 'r', perm = nil, options = {}) {|sio| ... }     -> nil
 #@todo
 
 URI である文字列 name のリソースを取得して [[c:StringIO]] オブジェクト
-として返します。 与えられた mode が書き込みモードであった場合は、例外
-ArgumentError を投げます。 perm は与えても無視されます。
-
-  require 'open-uri'
-  sio = OpenURI.open_uri('http://www.example.com')
-  puts sio.read
-  
-  OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
+として返します。
 
 ブロックを与えた場合は [[c:StringIO]] オブジェクトを引数としてブロックを
 評価します。ブロックの終了時に StringIO は close されます。nil を返します。
 
-options には [[c:Hash]] を与えます。解釈するハッシュの
-キーは :proxy, :progress_proc, :content_length_proc, :http_basic_authentication です。HTTP でのみ意味があります。
+  require 'open-uri'
+  sio = OpenURI.open_uri('http://www.example.com')
+  p sio.last_modified 
+  puts sio.read
+  
+  OpenURI.open_uri('http://www.example.com'){|sio| sio.read }
 
-キー「:proxy」の値には以下のいずれかを与えます。
-
-  * 文字列  => "http://proxy.foo.com:8000/" のようなプロクシの URI。
-  * URI オブジェクト => URI.parse("http://proxy.foo.com:8000/") のような
-    プロクシの URI オブジェクト。
-  * true => Proxy を環境変数などから見つけようとする。
-  * false => Proxy を用いない。
-  * nil => Proxy を用いない。
+options には [[c:Hash]] を与えます。理解するハッシュの
+キーは以下の4つのシンボル、
+ * :proxy
+ * :progress_proc
+ * :content_length_proc
+ * :http_basic_authentication 
+です。HTTP でのみ意味があります。
+「:content_length_proc」と「:progress_proc」はプログレスバーに
+利用されることを想定しています。
 
   require 'open-uri'
   sio = OpenURI.open_uri('http://www.example.com',
-                         { :proxy => 'http://proxy.example.com:8000/' })
+                         { :proxy => 'http://proxy.example.com:8000/',
+                           :http_basic_authentication => [usrname, password] })
 
-キー「:http_basic_authentication」
+: :proxy
+ 値には以下のいずれかを与えます。
+//emlist{
+   * 文字列  => "http://proxy.foo.com:8000/" のようなプロクシの URI。
+   * URI オブジェクト => URI.parse("http://proxy.foo.com:8000/") のような
+     プロクシの URI オブジェクト。
+   * true => Proxy を環境変数などから見つけようとする。
+   * false => Proxy を用いない。
+   * nil => Proxy を用いない。
+//}
+
+: :http_basic_authentication
 
 
-キー「:content_length_proc」の値にはブロックを与えます。ブロックは対象となる URI の
-Content-Length を引数として実際の転送が始まる前に評価されます。返り値は特に
-利用されません。
-
-キー「:progress_proc」の値にはブロックを与えます。ブロックは対象となる URI からデータの
-断片が転送されるたびに、その断片のサイズを引数として評価されます。返り値は特に
-利用されません。
-
-上の2つ :content_length_proc と :progress_proc はプログレスバーのために
-利用されることを想定しています。
+: :content_length_proc
+ 値にはブロックを与えます。ブロックは対象となる URI の
+ Content-Length ヘッダの値を引数として、実際の転送が始まる前に評価されます。Redirect された場合は、
+ 実際に転送されるリソースの HTTP ヘッダを利用します。Content-Length ヘッダがない場合は、nil を
+ 引数としてブロックを評価します。ブロックの返り値は特に利用されません。
+ 
+: :progress_proc
+ 値にはブロックを与えます。ブロックは対象となる URI からデータの
+ 断片が転送されるたびに、その断片のサイズを引数として評価されます。ブロックの返り値は特に
+ 利用されません。
 
 @param name オープンしたいリソースを文字列で与えます。
 
@@ -147,9 +158,13 @@ Content-Length を引数として実際の転送が始まる前に評価されます。返り値は特に
 
 @param perm 無視されます。
 
+@return 返り値である StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
+
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、かつリソースの取得に失敗した時に発生します。
 
 @raise Net::FTPError 対象となる URI のスキームが ftp であり、かつリソースの取得に失敗した時に [[c:Net::FTPError]] のサブクラスが発生します。詳しくは [[lib:net/ftp]] を参照して下さい。
+
+@raise ArgumentError 与えられた mode が読み込みモードでなかった場合に発生します。
 
 = module OpenURI::OpenRead 
 
@@ -160,6 +175,8 @@ Content-Length を引数として実際の転送が始まる前に評価されます。返り値は特に
 #@todo
 
 [[m:OpenURI.open_uri]](self, *rest, &block) と同じです。
+
+@return 返り値である StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
 
 @raise OpenURI::HTTPError 対象となる URI のスキームが http であり、かつリソースの取得に失敗した時に発生します。
 
