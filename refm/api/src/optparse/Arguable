@@ -1,0 +1,54 @@
+
+= module OptionParser::Arguable
+
+Extends command line arguments array to parse itself.
+
+== Instance Methods
+
+--- options=()
+#@todo
+
+Sets [[c:OptionParser]] object, when opt is false or
+nil, methods [[m:OptionParser::Arguable#options]] and
+[[m:OptionParser::Arguable#options=]] are undefined.  Thus, there
+is no ways to access the [[c:OptionParser]] object via the
+receiver object.
+
+--- options
+#@todo
+
+Actual [[c:OptionParser]] object, automatically created if not
+yet.
+
+If called as iterator, yields with the [[c:OptionParser]] object
+and returns the result of the block. In this case, rescues any
+[[c:OptionParser::ParseError]] exceptions in the block, just emits
+error message to STDERR and returns nil.
+
+:Parameters:
+  : block
+    Yielded with the [[c:OptionParser]] instance.
+
+--- order!
+--- permute!
+--- parse!
+#@todo
+
+Parses self destructively, and returns self just contains
+rest arguments left without parsed.
+
+#@since 1.8.5
+--- getopts
+#@todo
+
+Substitution of getopts is possible as follows. Also see
+[[m:OptionParser#getopts]].
+
+  def getopts(*args)
+    ($OPT = ARGV.getopts(*args)).each do |opt, val|
+      eval "$OPT_#{opt.gsub(/[^A-Za-z0-9_]/, '_')} = val"
+    end
+  rescue OptionParser::ParseError
+  end
+
+#@end
