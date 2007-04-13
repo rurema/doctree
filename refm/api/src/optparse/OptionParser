@@ -33,8 +33,8 @@
 
 == Class Methods
 
---- new(banner=nil, width=32, indent = ' ' * 4)
---- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}
+--- new(banner=nil, width=32, indent = ' ' * 4)              -> OptionParser
+--- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}  -> object
 #@todo
 
 OptionParser オブジェクトを生成します。
@@ -55,7 +55,7 @@ width にはサマリの幅を数値で与えます。indent にはサマリのインデント
     opt.parse!(ARGV)
   end
 
---- accept(klass, pat = /.*/){|str| ...}
+--- accept(klass, pat = /.*/){|str| ...}    -> ()
 #@todo
 
 オプションの引数を文字列から Ruby のオブジェクトに変換するための
@@ -91,65 +91,71 @@ OptionParser#on で登録したブロックに渡されます。
 います。[[m:OptionParser#デフォルトで利用可能な引数クラス]]を参照
 して下さい。
 
---- reject(klass)
+--- reject(klass)    -> ()
 #@todo
 
-#accept で登録したブロックを削除します。
+[[m:OptionParser.accept]] で登録したブロックを削除します。
 
 #@since 1.8.5
---- getopts
+--- getopts(*args)
 #@todo
-see [[m:OptionParser#getopts]].
+
+self.new.getopts(*args) と同じです。
+[[m:OptionParser#getopts]] を参照して下さい。
+
 #@end
 
 == Instance Methods
 
---- accept(klass, pat = /.*/){|str| ...}
+--- accept(klass, pat = /.*/){|str| ...}    -> ()
 #@todo
 
-OptionParser.accept と同様ですが、
+[[m:OptionParser.accept]] と同様ですが、
 登録したブロックはレシーバーに限定されます。
 
---- reject(klass)
+--- reject(klass)    -> ()
 #@todo
 
-accept で登録したブロックを削除します。
+[[m:OptionParser#accept]] で登録したクラスとブロックを
+自身から削除します。
 
---- banner
+@parse klass 自身から削除したいクラスを指定します。
+
+--- banner            -> String
 --- banner=(heading)
 #@todo
 
 サマリの最初の部分を設定します。
 
---- summary_width
+--- summary_width         -> Integer
 --- summary_width=(width)
 #@todo
 
 サマリを表示するときの幅を数値で設定します。
 
---- summary_indent
+--- summary_indent          -> String
 --- summary_indent=(indent)
 #@todo
 
 サマリを表示する時のインデントを文字列で設定します。
 
---- program_name
+--- program_name           -> String
 --- program_name=(name)
 #@todo
 プログラムの名前を文字列で設定します。デフォルトは $0 が使わ
 れます。
 
---- version
+--- version       -> [Integer]
 --- version=(ver)
 #@todo
 プログラムのバージョンを設定します。
 
---- release
+--- release       -> Integer
 --- release=(rel)
 #@todo
 Release code.
 
---- ver
+--- ver    -> String
 #@todo
 program_name、version と release から生成したバー
 ジョンを表す文字列を返します。
@@ -170,27 +176,31 @@ self.summary_indent です。
 この場合、ブロックの中で明示的に to へと加えていかない限り、
 to にサマリが加えられることはありません。
 
---- help
---- to_s
+--- help    -> String
+--- to_s    -> String
 #@todo
 
 サマリの文字列を返します。
 
---- to_a
+--- to_a    -> [String]
 #@todo
 
 サマリの各行を要素とした配列を返します。
 
---- separator(str)
+--- separator(sep)    -> ()
 #@todo
 
-サマリを表示する時に、オプションを区切るためのメソッドです。オプションにいくつかの種類がある場合に、サマリがわかりやすくなります。
-区切りとして引数 str が表示されます。サマリには on メソッドを呼んだ順にオプションが表示されるので、
-区切りを挿入したいところで separator を呼びます。[[unknown:例|optparse/Example]]を参照してください。
+サマリを表示する時に使われる、オプションを区切るための文字列 sep を設定します。
+オプションにいくつかの種類がある場合に、サマリがわかりやすくなります。
 
---- on(short, desc = "") {|v| ... }
---- on(long, desc = "") {|v| ... }
---- on(short, long, desc = "") {|v| ... }
+サマリには on メソッドを呼んだ順にオプションが表示されるので、区切りを挿入したい
+ところでこのメソッドを呼びます。[[unknown:例|optparse/Example]]を参照してください。
+
+@param sep 区切りとして表示されます。
+
+--- on(short, desc = "") {|v| ... }        -> self
+--- on(long, desc = "") {|v| ... }         -> self
+--- on(short, long, desc = "") {|v| ... }  -> self
 #@todo
 
 オプションを取り扱うためのブロックを登録します。
@@ -220,9 +230,9 @@ long にはロングオプションを表す文字列を与えます。ショートオプショ
   opts.on("-r LIBRARY"){|lib| ...}
   opts.on("--require LIBRARY"){|lib| ...}
 
---- on(short, klass = String, pat = /.*/, desc = "") {|v| ...}
---- on(long, klass = String, pat = /.*/, desc = "") {|v| ...}
---- on(short, long, klass = String, pat = /.*/, desc = "") {|v| ...}
+--- on(short, klass = String, pat = /.*/, desc = "") {|v| ...}        -> self
+--- on(long, klass = String, pat = /.*/, desc = "") {|v| ...}         -> self
+--- on(short, long, klass = String, pat = /.*/, desc = "") {|v| ...}  -> self
 #@todo
 
 オプションを取り扱うためのブロックを登録します。
@@ -297,9 +307,9 @@ desc にはオプションの説明を文字列で与えます。
 : Array
  List of strings separated by ","
 
---- on(short, *rest) {|v| ...}
---- on(long, *rest) {|v| ...}
---- on(short, long, *rest) {|v| ...}
+--- on(short, *rest) {|v| ...}        -> self
+--- on(long, *rest) {|v| ...}         -> self
+--- on(short, long, *rest) {|v| ...}  -> self
 #@todo
 
 オプションを取り扱うためのブロックを登録します。
