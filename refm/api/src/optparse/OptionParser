@@ -61,9 +61,9 @@ width にはサマリの幅を数値で与えます。indent にはサマリのインデント
 オプションの引数を文字列から Ruby のオブジェクトに変換するための
 ブロックを登録します。すべての OptionParser インスタンスに共通です。
 klass にはクラスオブジェクトを与えます。pat には match メソッドを持ったオブジェクト
-(Regexp オブジェクトなど)を与えます。
+([[c:Regexp]] オブジェクトなど)を与えます。
 
-ブロックには、文字列から klass のインスタンスを生成して返すものを指定します。
+ブロックには、文字列として与えられるオプションの引数から klass のインスタンスを生成して返すものを指定します。
 
 [[m:OptionParser#on]] で klass を指定した場合、
 コマンドラインのオプションに与えられた引数はこの accept で登録したブロックで
@@ -71,6 +71,8 @@ klass のインスタンスに変換されてから、
 OptionParser#on で登録したブロックに渡されます。
 
   require "optparse"
+  require "time"
+  
   OptionParser.accept(Time) do |s,|
     begin
       Time.parse(s) if s
@@ -88,8 +90,12 @@ OptionParser#on で登録したブロックに渡されます。
   opts.parse!(ARGV)
 
 いくつかのクラスに対しては変換用のブロックがデフォルトで登録されて
-います。[[m:OptionParser#デフォルトで利用可能な引数クラス]]を参照
+います。[[m:OptionParser#on]]を参照
 して下さい。
+
+@param klass オブジェクトを与えます。
+
+@param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
 
 --- reject(klass)    -> ()
 #@todo
@@ -230,9 +236,25 @@ long にはロングオプションを表す文字列を与えます。ショートオプショ
   opts.on("-r LIBRARY"){|lib| ...}
   opts.on("--require LIBRARY"){|lib| ...}
 
---- on(short, klass = String, pat = /.*/, desc = "") {|v| ...}        -> self
---- on(long, klass = String, pat = /.*/, desc = "") {|v| ...}         -> self
---- on(short, long, klass = String, pat = /.*/, desc = "") {|v| ...}  -> self
+
+--- on(short, pat = /.*/, desc = "") {|v| ...}        -> self
+--- on(long, pat = /.*/, desc = "") {|v| ...}         -> self
+--- on(short, long, pat = /.*/, desc = "") {|v| ...}  -> self
+#@todo
+
+pat にはオプションの引数に許すパターンを表す正規表現で与えます。
+コマンドに与えられた引数がパターンにマッチしない場合、
+例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
+  opts.on("--username VALUE", /[a-zA-Z0-9_]+/){|name| ...}
+  # ruby command --username=ruby_user
+  # ruby command --username=ruby.user #=> Error
+
+desc にはオプションの説明を文字列で与えます。
+サマリに表示されます。
+
+--- on(short, klass = String, desc = "") {|v| ...}        -> self
+--- on(long, klass = String, desc = "") {|v| ...}         -> self
+--- on(short, long, klass = String, desc = "") {|v| ...}  -> self
 #@todo
 
 オプションを取り扱うためのブロックを登録します。
@@ -254,13 +276,6 @@ klass にはクラスを与えます。
 
   opts.on("-o", "--overwrite VALUE", TrueClass){|boolean| ...}
   # ruby command --overwrite yes
-
-pat にはオプションの引数に許すパターンを表す正規表現で与えます。
-コマンドに与えられた引数がパターンにマッチしない場合、
-例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
-  opts.on("--username VALUE", /[a-zA-Z0-9_]+/){|name| ...}
-  # ruby command --username=ruby_user
-  # ruby command --username=ruby.user #=> Error
 
 desc にはオプションの説明を文字列で与えます。
 サマリに表示されます。
