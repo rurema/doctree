@@ -138,8 +138,7 @@ OptionParser の例外クラスの基底クラスです。
 
 引数が必要なオプションに引数が与えられなかった場合に投げられます。
 
-= class OptionParser::InvalidOption
-< OptionParser::ParseError
+= class OptionParser::InvalidOption < OptionParser::ParseError
 
 定義されていないオプションが与えられた場合に投げられます。
 
