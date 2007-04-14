@@ -37,11 +37,7 @@
 --- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}  -> object
 #@todo
 
-OptionParser オブジェクトを生成します。
-banner にはヘルプ(サマリ)の最初の部分に表示されるアプリケーションの説明
-などを文字列として与えます。
-width にはサマリの幅を数値で与えます。indent にはサマリのインデント
-を文字列として与えます。
+OptionParser オブジェクトを生成して返します。
 
 ブロックが与えられた場合、生成した OptionParser オブジェクトを引数としてブロックを評
 価します。つまり、以下のような書き方が可能です。
@@ -54,6 +50,12 @@ width にはサマリの幅を数値で与えます。indent にはサマリのインデント
 
     opt.parse!(ARGV)
   end
+
+@param banner ヘルプ(サマリ)の最初の部分に表示される、アプリケーションの説明などを文字列で与えます。
+
+@param width サマリの幅を整数で与えます。
+
+@param indent サマリのインデントを文字列で与えます。
 
 --- accept(klass, pat = /.*/){|str| ...}    -> ()
 #@todo
@@ -93,7 +95,7 @@ OptionParser#on で登録したブロックに渡されます。
 います。[[m:OptionParser#on]]を参照
 して下さい。
 
-@param klass オブジェクトを与えます。
+@param klass クラスオブジェクトを与えます。
 
 @param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
 
@@ -101,6 +103,8 @@ OptionParser#on で登録したブロックに渡されます。
 #@todo
 
 [[m:OptionParser.accept]] で登録したブロックを削除します。
+
+@param klass 削除したいクラスオブジェクトを与えます。
 
 #@since 1.8.5
 --- getopts(*args)
@@ -242,15 +246,19 @@ long にはロングオプションを表す文字列を与えます。ショートオプショ
 --- on(short, long, pat = /.*/, desc = "") {|v| ...}  -> self
 #@todo
 
+オプションを取り扱うためのブロックを登録します。
+
 pat にはオプションの引数に許すパターンを表す正規表現で与えます。
 コマンドに与えられた引数がパターンにマッチしない場合、
 例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
+
   opts.on("--username VALUE", /[a-zA-Z0-9_]+/){|name| ...}
   # ruby command --username=ruby_user
   # ruby command --username=ruby.user #=> Error
 
-desc にはオプションの説明を文字列で与えます。
-サマリに表示されます。
+@param pat オプションの引数に許すパターンを表す正規表現で与えます。
+
+@param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
 --- on(short, klass = String, desc = "") {|v| ...}        -> self
 --- on(long, klass = String, desc = "") {|v| ...}         -> self
