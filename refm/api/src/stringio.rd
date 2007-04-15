@@ -48,6 +48,8 @@ StringIO オブジェクトを生成して返します。
           p io.string   # => "hoge"
         }
 
+@raise Errno::EACCES string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
+
 == Instance Methods
 
 --- string    -> String
@@ -368,13 +370,13 @@ nil を返します。
 
       s = StringIO.new("hoge")
       s.pos = 1
-      s.ungetc(0x48)
+      s.ungetc(?H)
       p s.string   #=> "Hoge"
       p s.pos        #=> 0
 
       s = StringIO.new("hoge")
       s.pos = 8
-      s.ungetc(0x41)
+      s.ungetc(?A)
       p s.string   #=> "hoge\000\000\000A"
       p s.pos        #=> 7
 
