@@ -372,10 +372,11 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
     exit
   end
 
---- order(*argv)                    -> String
---- order(*argv){|s| ...}           -> String
---- order!(argv = ARGV)             -> String
---- order!(argv = ARGV) {|s| ...}   -> String
+--- order(argv = ARGV)              -> [String]
+--- order(*args)                    -> [String]
+--- order(*args){|s| ...}           -> [String]
+--- order!(argv = ARGV)             -> [String]
+--- order!(argv = ARGV) {|s| ...}   -> [String]
 #@todo
 
 与えられた argv を順番にパースします。
@@ -403,8 +404,13 @@ argv からオプションがすべて取り除かれます。
 コマンドの引数 somefile よりも後ろにオプションを置くことができま
 せん。-b もコマンドのオプションではない引数として扱われてしまいます。
 
---- permute(*argv)          -> String
---- permute!(argv = ARGV)   -> String
+@param argv パースしたい引数を文字列の配列で指定します。
+
+@param args パースしたい引数を順に文字列として与えます。
+
+--- permute(argv = ARGV)     -> [String]
+--- permute(*args)           -> [String]
+--- permute!(argv = ARGV)    -> [String]
 #@todo
 
 与えられた argv をパースします。
@@ -432,18 +438,28 @@ argv からオプションがすべて取り除かれます
 order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 できます。
 
---- parse(*argv)          -> String
---- parse!(argv = ARGV)   -> String
+@param argv パースしたい引数を文字列の配列で指定します。
+
+@param args パースしたい引数を順に文字列として与えます。
+
+--- parse(argv = ARGV)    -> [String]
+--- parse(*args)          -> [String]
+--- parse!(argv = ARGV)   -> [String]
 #@todo
 
 与えられた argv をパースします。
-permute と同様に振舞います。しかし、
-環境変数に POSIXLY_CORRECT が設定されている場合は、
-order と同様に振舞います。
 
-parse! は permute! と同様に argv を破壊的にをパースします。
+[[m:OptionParser#permute]] と同様に振舞います。しかし、
 環境変数に POSIXLY_CORRECT が設定されている場合は、
-order! と同様に振舞います。
+[[m:OptionParser#order]] と同様に振舞います。
+
+parse! は [[m:OptionParser#permute!]] と同様に argv を破壊的にをパースします。
+環境変数に POSIXLY_CORRECT が設定されている場合は、
+[[m:OptionParser#order!]] と同様に振舞います。
+
+@param argv パースしたい引数を文字列の配列で指定します。
+
+@param args パースしたい引数を順に文字列として与えます。
 
 --- load(filename)     -> bool
 #@todo
