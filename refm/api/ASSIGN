@@ -89,7 +89,7 @@ _builtin/specialvars            aamine
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-English                         kouya
+English                         kouya           done
 Env                             mukai           done
 Win32API
 abbrev
@@ -436,7 +436,7 @@ tkextlib/vu/pie
 tkextlib/vu/setup
 tkextlib/vu/spinbox
 tkextlib/winico
-tmpdir
+tmpdir                          kouya
 tracer
 tsort
 un
@@ -453,4 +453,4 @@ xmlrpc
 xsd
 yaml
 yaml/store
-zlib
+zlib                            kouya 

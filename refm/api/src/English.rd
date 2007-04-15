@@ -296,6 +296,27 @@
   p $POSTMATCH #=> ",bar,hee,hoo"
 
 --- $LAST_PAREN_MATCH
-#@todo
 
 [[m:$+]] §Œ ÃÃæ
+
+  require "English"
+
+  r1 = Regexp.compile("<img src=(http:.+?)>")
+  r2 = Regexp.compile("<a href=(http|ftp).+?>(.+?)</a>")
+
+  while line = DATA.gets
+    [ r1, r2 ].each {|rep|
+      rep =~ line
+      p $+
+    }
+  end
+  __END__
+  <tr> <td><img src=http://localhost/a.jpg></td> <td>ikkou</td> <td><a href=http://localhost/link.html>link</a></td> </tr>
+  #enf of sample.rb
+
+  $ ruby sample.rb
+  "http://localhost/a.jpg"
+  "link"
+  
+
+
