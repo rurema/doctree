@@ -21,7 +21,7 @@ _builtin/File
 _builtin/FileTest
 _builtin/File__Constants
 _builtin/File__Stat
-_builtin/Fixnum
+_builtin/Fixnum                 ujihisa
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
