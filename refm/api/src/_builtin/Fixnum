@@ -16,7 +16,7 @@ Ruby の Fixnum クラスは immutable です。
 
 == Instance Methods
 
---- id2name
+--- id2name -> String | nil
 
 オブジェクトの整数値 self を、ある [[c:Symbol]] オブジェクトに対応する整数値とみなした上で、
 そのシンボルを示す文字列を返します。
@@ -44,7 +44,7 @@ nil のときの挙動が異なります。
 
 
 #@since 1.8.0
---- to_sym
+--- to_sym -> Symbol | nil
 
 オブジェクトの整数値 self に対応する [[c:Symbol]] オブジェク
 トを返します。整数に対応するシンボルが存在しない時には nil

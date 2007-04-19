@@ -8,21 +8,30 @@ include Precision
 
 == Class Methods
 
---- induced_from(num)
-#@todo
+--- induced_from(num) -> Fixnum | Bignum
 
 num を Integer に変換した結果を返します。
+#@todo
+
+include している [[c:Precision]] モジュールの [[m:Precision.induced_from] を
+上書きしています。
+
+@param num   数値
+@return      数値
 
 == Instance Methods
 
---- [](nth)
-#@todo
+--- [](nth) -> Fixnum
 
 nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
 を、そうでなければ 0 を返します。
 
-self[nth]=bit が Integer にないのは、Numeric 関連クラスが
+@param nth  何ビット目を指すかの数値
+@return     1 か 0
+
+self[nth]=bit (つまりビットの修正) が Integer にないのは、Numeric 関連クラスが
 immutable であるためです。
+
 
 --- +(other)
 --- -(other)
