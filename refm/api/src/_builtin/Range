@@ -20,6 +20,18 @@ include Enumerable
 さらに [[m:Range#each]] を実行するためには succ メソッ
 ドを実行できるものでなければいけません。
 
+=== 破壊的な変更
+
+Ruby の Range クラスは immutable です。
+つまり、オブジェクト自体を破壊的に変更することはできません。
+ですので、一度生成された Range のオブジェクトの指し示す範囲は
+決して変更することはできません。
+
+例:
+  range = 1..10
+  range.first     #=> 1
+  range.first = 1 #=> NoMethodError
+
 == Class Methods
 
 --- new(first,last[, exclude_end])
@@ -38,8 +50,8 @@ first から last までの範囲オブジェクトを生成して返しま
 
 == Instance Methods
 
---- ===(other)
---- include?(other)
+--- ===(other) -> bool
+--- include?(other) -> bool
 #@todo
 
 other が範囲内に含まれている時に真を返します。=== は
