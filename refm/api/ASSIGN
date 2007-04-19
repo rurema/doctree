@@ -5,7 +5,7 @@
 _builtin/ARGF
 _builtin/ArgumentError
 _builtin/Array                  aamine
-_builtin/Bignum                 ujihisa
+_builtin/Bignum                 ujihisa         done
 _builtin/Binding
 _builtin/Class
 _builtin/Comparable
@@ -29,7 +29,7 @@ _builtin/Hash                   aamine
 _builtin/IO
 _builtin/IOError
 _builtin/IndexError
-_builtin/Integer
+_builtin/Integer                ujihisa
 _builtin/Interrupt
 _builtin/Kernel                 aamine
 _builtin/KeyError
