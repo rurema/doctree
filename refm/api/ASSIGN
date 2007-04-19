@@ -5,7 +5,7 @@
 _builtin/ARGF
 _builtin/ArgumentError
 _builtin/Array                  aamine
-_builtin/Bignum
+_builtin/Bignum                 ujihisa
 _builtin/Binding
 _builtin/Class
 _builtin/Comparable
@@ -21,7 +21,7 @@ _builtin/File
 _builtin/FileTest
 _builtin/File__Constants
 _builtin/File__Stat
-_builtin/Fixnum                 ujihisa
+_builtin/Fixnum                 ujihisa         done
 _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
