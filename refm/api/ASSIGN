@@ -55,7 +55,7 @@ _builtin/Process__GID
 _builtin/Process__Status
 _builtin/Process__Sys
 _builtin/Process__UID
-_builtin/Range
+_builtin/Range                  ujihisa
 _builtin/RangeError
 _builtin/Regexp
 _builtin/RegexpError
