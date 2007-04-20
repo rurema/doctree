@@ -3,12 +3,11 @@
 
 == Private Instance Methods
 
---- Pathname(path)
-#@todo
+--- Pathname(path) -> Pathname
+文字列 path を元に Pathname オブジェクトを生成します。
 
-文字列 path を元に Pathname オブジェクトを生成する。
+Pathanme.new(string) と同じです。
 
-Pathanme.new(string) と同じ。
 #@end
 
 
@@ -21,54 +20,50 @@ Pathanme.new(string) と同じ。
 
 #@since 1.8.5
 --- SEPARATOR_PAT
-#@todo
+パス名のなかのディレクトリを区切る部分にマッチする正規表現です。
 
 --- TO_PATH
-#@todo
+内部的に使っている定数です。利用者が使うことはありません。
 
 #@end
 
 == Class Methods
 
---- new(path)
-#@todo
+--- new(path) -> Pathname
+文字列 path を元に Pathname オブジェクトを生成します。
 
-文字列 path を元に Pathname オブジェクトを生成する。
+--- getwd -> Pathname
+--- pwd   -> Pathname
+カレントディレクトリを元に Pathname オブジェクトを生成します。
+Pathname.new(Dir.getwd) と同じです。
 
---- getwd
---- pwd
-#@todo
-
-カレントディレクトリを元に Pathname オブジェクトを生成する。
-Pathname.new(Dir.getwd) と同じ。
-
---- glob(pattern)
---- glob(pattern) {|pathname| ...}
---- glob(pattern[, flags])
---- glob(pattern[, flags]) {|pathname| ...}
-#@todo
+--- glob(pattern, flags=0) -> [Pathname]
+--- glob(pattern, flags=0) {|pathname| ...} -> nil
 
 ワイルドカードの展開を行なった結果を、
-Pathname オブジェクトの配列として返す。
+Pathname オブジェクトの配列として返します。
 
-引数の意味は、[[m:Dir.glob]] と同じ。
+引数の意味は、[[m:Dir.glob]] と同じです。 flag の初期値である 0 は「何
+も指定しない」ことを意味します。
 
-ブロックが与えられたときは、
-ワイルドカードにマッチした Pathname オブジェクトを引数として
-そのブロックを 1 つずつ評価し nil を返す。
+ブロックが与えられたときは、ワイルドカードにマッチした Pathname オブジェ
+クトを1つずつ引数としてそのブロックに与えて実行させます。この場合、値と
+しては nil を返します。
+
+@param pattern ワイルドカードパターンです
+@param flag    パターンマッチ時のふるまいを変化させるフラグを指定します
 
 == Instance Methods
 
---- ==(other)
---- ===(other)
---- eql?(other)
-#@todo
+--- ==(other)   -> bool
+--- ===(other)  -> bool
+--- eql?(other) -> bool
 
-パス名の比較。other と同じなら真を返す。大文字小文字は区別される。
-other は Pathname オブジェクトでなければならない。
+パス名を比較し、 other と同じなら真を返します。大文字小文字は区別されます。
+other は Pathname オブジェクトでなければなりません。
 
-パス名の比較は単純にパス文字列の比較によって行われるので論理的に
-同じパスでも異なると判断される。
+パス名の比較は単純にパス文字列の比較によって行われるので、論理的に
+同じパスでもパス文字列が違えば異なると判断されます。
 
     require 'pathname'
 
@@ -80,16 +75,14 @@ other は Pathname オブジェクトでなければならない。
          false
          false
 
---- <=>(other)
-#@todo
+--- <=>(other) -> bool
 
-パス名の比較。other と同じなら 0 を、ASCII順で self が大きい場合は
-正、other が大きい場合は負を返す。大文字小文字は区別される。
+パス名を比較します。other と同じなら 0 を、ASCII順で self が大きい場合
+は正、other が大きい場合は負を返します。大文字小文字は区別されます。
+other は Pathname オブジェクトでなければなりません。
 
-other は Pathname オブジェクトでなければならない。
-
-パス名の比較は単純にパス文字列の比較によって行われるので論理的に
-同じパスでも異なると判断される。
+パス名の比較は単純にパス文字列の比較によって行われるので、論理的に
+同じパスでもパス文字列が違えば異なると判断されます。
 
     require 'pathname'
 
@@ -100,29 +93,23 @@ other は Pathname オブジェクトでなければならない。
        1
        -1
 
---- hash
-#@todo
+--- hash -> Fixnum
+ハッシュ値を返します。
 
-ハッシュ値を返す。
-
---- to_s
---- to_str
-#@todo
-
-パス名を文字列で返す。
+--- to_s   -> String
+--- to_str -> String
+パス名を文字列で返します。
 
 to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジェクトを
-渡せるように用意してある。
+渡せるようにするために用意されています。
 
     require 'pathname'
 
     path = Pathname.new("/tmp/hogehoge")
     File.open(path)
 
---- cleanpath(consider_symlink = false)
-#@todo
-
-余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返す。
+--- cleanpath(consider_symlink = false) -> Pathname
+余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
     require "pathname"
     path = Pathname.new("//.././../")
@@ -130,10 +117,10 @@ to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジェクトを
     p path.cleanpath        # => #<Pathname:/>
 
 consider_symlink が真ならパス要素にシンボリックリンクがあった場合
-にも問題ないように .. を残す。
+にも問題ないように .. を残します。
 
-cleanpath は、実際にファイルシステムを参照することなく。文字列操作
-だけで処理を行う。
+cleanpath は、実際にファイルシステムを参照することなく、文字列操作
+だけで処理を行います。
 
     require 'pathname'
 
@@ -155,19 +142,15 @@ cleanpath は、実際にファイルシステムを参照することなく。文字列操作
        #<Pathname:bar/bar>
        #<Pathname:bar/foo/../bar>
 
---- realpath(force_absolute = true)
-#@todo
+--- realpath(force_absolute = true) -> Pathname
+余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
-余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返す。
+また、ファイルシステムをアクセスし、実際に存在するパスを返します。
+シンボリックリンクも解決されます。
 
-ファイルシステムをアクセスし、実際に存在するパスを返す。
-シンボリックリンクも解決される。
+self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
 
-force_absolute が真の場合、絶対パスを返す。self が相対パスであれば、
-カレントディレクトリからの相対パスとして解釈される。
-
-self が指すパスが存在しない場合は例外
-[[c:Errno::ENOENT]] が発生する。
+@param force_absolute 真の場合、絶対パスを返します。 self が相対パスであれば、カレントディレクトリからの相対パスとして解釈されます。
 
     require 'pathname'
 
@@ -189,36 +172,24 @@ self が指すパスが存在しない場合は例外
        #<Pathname:/tmp/bar>
        #<Pathname:bar>
 
---- parent
-#@todo
+--- parent -> Pathname
+self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
 
-self の親ディレクトリを指す新しい Pathname オブジェクトを返す。
+--- mountpoint? -> bool
+self がマウントポイントであれば真を返します。
 
---- mountpoint?
-#@todo
+--- root? -> bool
+self がルートディレクトリであれば真を返します。判断は文字列操作によっ
+て行われ、ファイルシステムはアクセスされません。
 
-self がマウントポイントであれば真を返す。
+--- absolute? -> bool
+self が絶対パス指定であれば真を返します。
 
---- root?
-#@todo
-
-self がルートディレクトリであれば真を返す。判断は文字列操作によっ
-て行われ、ファイルシステムはアクセスされない。
-
---- absolute?
-#@todo
-
-self が絶対パス指定であれば真を返す。
-
---- relative?
-#@todo
-
+--- relative? -> bool
 self が相対パス指定であれば真を返す。
 
---- each_filename {|v| ... ]
-#@todo
-
-self のパス名要素毎にブロックを実行する。
+--- each_filename {|v| ... } -> nil
+self のパス名要素毎にブロックを実行します。
 
     require 'pathname'
 
@@ -228,22 +199,19 @@ self のパス名要素毎にブロックを実行する。
          ".."
          "bar"
 
---- +(other)
-#@todo
+--- +(other) -> Pathname
+パス名を連結します。つまり、other を self からの相対パスとした新しい
+Pathname オブジェクトを生成して返します。
 
-パス名を連結する。つまり、other を self からの相対パスとした新しい
-Pathname オブジェクトを生成して返す。
+other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
+れます。
 
-other が絶対パスなら単に other を Pathname オブジェクトとして返す。
-
-other は文字列か Pathname オブジェクト。
+@param other 文字列か Pathname オブジェクトを指定します。
 
 #@since 1.8.1
 
---- children
-#@todo
-
-self 配下にあるパス名(Pathnameオブジェクト)の配列を返す。
+--- children -> [Pathname]
+self 配下にあるパス名(Pathnameオブジェクト)の配列を返します。
 
     require 'pathname'
 
@@ -251,23 +219,21 @@ self 配下にあるパス名(Pathnameオブジェクト)の配列を返す。
     => ruby 1.8.0 (2003-10-10) [i586-linux]
        [#<Pathname:.X11-unix>, #<Pathname:.iroha_unix>, ... ]
 
-".", ".." は要素に含まれない。
+ただし、 ".", ".." は要素に含まれません。
 
 self が存在しないパスであったりディレクトリでなければ例外
-[[c:Errno::EXXX]] が発生する。
+[[c:Errno::EXXX]] が発生します。
 
 #@end
 
 #@since 1.8.1
 
---- relative_path_from(base_directory)
-#@todo
-
-base_direcoty から self への相対パスを求め Pathname オブジェクトを
-生成して返す。
+--- relative_path_from(base_directory) -> Pathname
+base_direcoty から self への相対パスを求め、その内容の新しい Pathname
+オブジェクトを生成して返します。
 
 パス名の解決は文字列操作によって行われ、ファイルシステムをアクセス
-しない。
+しません。
 
     require 'pathname'
 
@@ -280,479 +246,333 @@ base_direcoty から self への相対パスを求め Pathname オブジェクトを
          #<Pathname:foo>
 
 self が相対パスなら base_directory も相対パス、self が絶対パスなら
-base_directory も絶対パスでなければならない。
+base_directory も絶対パスでなければなりません。
 
-base_directory は Pathname オブジェクトでなければならない。
+base_directory は Pathname オブジェクトでなければなりません。
 
 #@end
 
 #@since 1.8.1
 
 --- each_line(*args, &block)
-#@todo
-
-Equivalent to:
-IO.foreach(self.to_s, *args, &block)
+IO.foreach(self.to_s, *args, &block) と同じです。 (cf. [[m:IO.foreach]])
 
 #@end
 
---- read(*args)
-#@todo
+--- foreachline(*args, &block)
+IO.foreach(self.to_s, *args, &block) と同じです。 (cf. [[m:IO.foreach]])
 
-Equivalent to:
-IO.read(self.to_s, *args)
+#@since 1.8.1
+このメソッドは obsolete です。 each_line をかわりに使ってください。
+#@end
+
+--- read(*args)
+IO.read(self.to_s, *args)と同じです。 (cf. [[m:IO.read]])
 
 --- readlines(*args)
-#@todo
-
-Equivalent to:
-IO.readlines(self.to_s, *args)
+IO.readlines(self.to_s, *args)と同じです。 (cf. [[m:IO.readlines]])
 
 --- sysopen(*args)
-#@todo
+IO.sysopen(self.to_s, *args)と同じです。 (cf. [[m:IO.sysopen]])
 
-Equivalent to:
-IO.sysopen(self.to_s, *args)
+#@since 1.8.1
+--- make_link(old)
+File.link(old, self.to_s) と同じです。 (cf. [[m:File.link]]) 
+
+--- make_symlink(old)
+File.symlink(old, self.to_s) と同じです。 (cf. [[m:File.symlink]])
+
+#@end
 
 --- atime
-#@todo
-
-Equivalent to:
-File.atime(self.to_s)
+[[m:File.atime]]の第一引数に self.to_s を渡したものと同じです。
 
 --- ctime
-#@todo
-
-Equivalent to:
-File.ctime(self.to_s)
+[[m:File.ctime]]の第一引数に self.to_s を渡したものと同じです。
 
 --- mtime
-#@todo
-
-Equivalent to:
-File.mtime(self.to_s)
+[[m:File.mtime]]の第一引数に self.to_s を渡したものと同じです。
 
 --- chmod(mode)
-#@todo
-
-Equivalent to:
-File.chmod(mode, self.to_s)
+File.chmod(mode, self.to_s)と同じです。 (cf. [[m:File.chmod]])
 
 --- lchmod(mode)
-#@todo
-
-Equivalent to:
-File.chmod(mode, self.to_s)
+File.lchmod(mode, self.to_s)と同じです。 (cf. [[m:File.lchmod]])
 
 --- chown(owner, group)
-#@todo
-
-Equivalent to:
-File.chown(owner, group, self.to_s)
+File.chown(owner, group, self.to_s)と同じです。 (cf. [[m:File.chown]])
 
 --- lchown(owner, group)
-#@todo
-
-Equivalent to:
-File.lchown(owner, group, self.to_s)
+File.lchown(owner, group, self.to_s)と同じです。 (cf. [[m:File.lchown]])
 
 --- fnmatch(pattern, *args)
-#@todo
-
-Equivalent to:
-File.fnmatch(pattern, self.to_s, *args)
+File.fnmatch(pattern, self.to_s, *args)と同じです。 (cf. [[m:File.fnmatch]])
 
 --- fnmatch?(pattern, *args)
-#@todo
-
-Equivalent to:
-File.fnmatch?(pattern, self.to_s, *args)
+File.fnmatch?(pattern, self.to_s, *args) と同じです。 (cf. [[m:File.fnmatch?]])
 
 --- ftype
-#@todo
-
-Equivalent to:
-File.ftype(self.to_s)
+File.ftype(self.to_s) と同じです。 (cf. [[m:File.ftype]])
 
 --- link(old)
-#@todo
-
-Equivalent to:
-File.link(old, self.to_s)
+File.link(old, self.to_s) と同じです。 (cf. [[m:File.link]])
 
 --- open(*args, &block)
-#@todo
-
-Equivalent to:
-File.open(self.to_s, *args, &block)
+File.open(self.to_s, *args, &block) と同じです。 (cf. [[m:File.open]])
 
 --- readlink
-#@todo
-
-Equivalent to:
-Pathname.new(File.readlink(self.to_s))
+Pathname.new(File.readlink(self.to_s)) と同じです。 (cf. [[m:File.readlink]])
 
 --- rename(to)
-#@todo
-
-Equivalent to:
-File.rename(self.to_s, to)
+File.rename(self.to_s, to) と同じです。 (cf. [[m:File.rename]])
 
 --- stat
-#@todo
-
-Equivalent to:
-File.stat(self.to_s)
+File.stat(self.to_s) と同じです。 (cf. [[m:File.stat]])
 
 --- lstat
-#@todo
-
-Equivalent to:
-File.lstat(self.to_s)
+File.lstat(self.to_s) と同じです。 (cf. [[m:File.lstat]])
 
 --- symlink(old)
-#@todo
-
-Equivalent to:
-File.symlink(old, self.to_s)
+File.symlink(old, self.to_s) と同じです。 (cf. [[m:File.symlink]])
 
 --- truncate(length)
-#@todo
-
-Equivalent to:
-File.truncate(self.to_s, length)
+File.truncate(self.to_s, length) と同じです。 (cf. [[m:File.truncate]])
 
 --- utime(atime, mtime)
-#@todo
-
-Equivalent to:
-File.utime(atime, mtime, self.to_s)
+File.utime(atime, mtime, self.to_s) と同じです。 (cf. [[m:File.utime]])
 
 --- basename(*args)
-#@todo
-
-Equivalent to:
-Pathname.new(File.basename(self.to_s, *args))
+Pathname.new(File.basename(self.to_s, *args)) と同じです。 (cf. [[m:File.basename]])
 
 --- dirname
-#@todo
-
-Equivalent to:
-Pathname.new(File.dirname(self.to_s))
+Pathname.new(File.dirname(self.to_s)) と同じです。 (cf. [[m:File.dirname]])
 
 --- extname
-#@todo
-
-Equivalent to:
-File.extname(self.to_s)
+File.extname(self.to_s) と同じです。 (cf. [[m:File.extname]])
 
 --- expand_path(*args)
-#@todo
-
-Equivalent to:
-Pathname.new(File.expand_path(self.to_s, *args))
+Pathname.new(File.expand_path(self.to_s, *args)) と同じです。 (cf. [[m:File.expand_path]])
 
 --- join(*args)
-#@todo
-
-Equivalent to:
-Pathname.new(File.join(self.to_s, *args))
+Pathname.new(File.join(self.to_s, *args)) と同じです。 (cf. [[m:File.join]])
 
 --- split
-#@todo
-
-Equivalent to:
-File.split(self.to_s)
+File.split(self.to_s) と同じです。 (cf. [[m:File.split]])
 
 --- blockdev?
-#@todo
-
-Equivalent to:
-FileTest.blockdev?(self.to_s)
+FileTest.blockdev?(self.to_s) と同じです。 (cf. [[m:FileTest.blockdev?]])
 
 --- chardev?
-#@todo
-
-Equivalent to:
-FileTest.chardev?(self.to_s)
+FileTest.chardev?(self.to_s) と同じです。 (cf. [[m:FileTest.chardev?]])
 
 --- executable?
-#@todo
-
-Equivalent to:
-FileTest.executable?(self.to_s)
+FileTest.executable?(self.to_s) と同じです。 (cf. [[m:FileTest.executable?]])
 
 --- executable_real?
-#@todo
-
-Equivalent to:
-FileTest.executable_real?(self.to_s)
+FileTest.executable_real?(self.to_s) と同じです。 (cf. [[m:FileTest.executable_real?]])
 
 --- exist?
-#@todo
-
-Equivalent to:
-FileTest.exist?(self.to_s)
+FileTest.exist?(self.to_s) と同じです。 (cf. [[m:FileTest.exist?]])
 
 --- grpowned?
-#@todo
-
-Equivalent to:
-FileTest.grpowned?(self.to_s)
+FileTest.grpowned?(self.to_s) と同じです。 (cf. [[m:FileTest.grpowned?]])
 
 --- directory?
-#@todo
-
-Equivalent to:
-FileTest.directory?(self.to_s)
+FileTest.directory?(self.to_s) と同じです。 (cf. [[m:FileTest.directory?]])
 
 --- file?
-#@todo
-
-Equivalent to:
-FileTest.file?(self.to_s)
+FileTest.file?(self.to_s) と同じです。 (cf. [[m:FileTest.file?]])
 
 --- pipe?
-#@todo
-
-Equivalent to:
-FileTest.pipe?(self.to_s)
+FileTest.pipe?(self.to_s) と同じです。 (cf. [[m:FileTest.pipe?]])
 
 --- socket?
-#@todo
-
-Equivalent to:
-FileTest.socket?(self.to_s)
+FileTest.socket?(self.to_s) と同じです。 (cf. [[m:FileTest.socket?]])
 
 --- owned?
-#@todo
-
-Equivalent to:
-FileTest.owned?(self.to_s)
+FileTest.owned?(self.to_s) と同じです。 (cf. [[m:FileTest.owned?]])
 
 --- readable?
-#@todo
-
-Equivalent to:
-FileTest.readable?(self.to_s)
+FileTest.readable?(self.to_s) と同じです。 (cf. [[m:FileTest.readable?]])
 
 --- readable_real?
-#@todo
-
-Equivalent to:
-FileTest.readable_real?(self.to_s)
+FileTest.readable_real?(self.to_s) と同じです。 (cf. [[m:FileTest.readable_real?]])
 
 --- setuid?
-#@todo
-
-Equivalent to:
-FileTest.setuid?(self.to_s)
+FileTest.setuid?(self.to_s) と同じです。 (cf. [[m:FileTest.setuid?]])
 
 --- setgid?
-#@todo
-
-Equivalent to:
-FileTest.setgid?(self.to_s)
+FileTest.setgid?(self.to_s) と同じです。 (cf. [[m:FileTest.setgid?]])
 
 --- size
-#@todo
-
-Equivalent to:
-FileTest.size(self.to_s)
+FileTest.size(self.to_s) と同じです。 (cf. [[m:FileTest.size]])
 
 --- size?
-#@todo
-
-Equivalent to:
-FileTest.size?(self.to_s)
+FileTest.size?(self.to_s) と同じです。 (cf. [[m:FileTest.size?]])
 
 --- sticky?
-#@todo
-
-Equivalent to:
-FileTest.sticky?(self.to_s)
+FileTest.sticky?(self.to_s) と同じです。 (cf. [[m:FileTest.sticky?]])
 
 --- symlink?
-#@todo
+FileTest.symlink?(self.to_s) と同じです。 (cf. [[m:FileTest.symlink?]])
 
-Equivalent to:
-FileTest.symlink?(self.to_s)
+#@since 1.8.5
+
+--- world_readable?
+FileTest.world_readable?(self.to_s) と同じです。 (cf. [[m:FileTest.world_readable?]])
+
+--- world_writable?
+FileTest.world_writable?(self.to_s) と同じです。 (cf. [[m:FileTest.world_writable?]])
+
+#@end
 
 --- writable?
-#@todo
-
-Equivalent to:
-FileTest.writable?(self.to_s)
+FileTest.writable?(self.to_s) と同じです。 (cf. [[m:FileTest.writable?]])
 
 --- writable_real?
-#@todo
-
-Equivalent to:
-FileTest.writable_real?(self.to_s)
+FileTest.writable_real?(self.to_s) と同じです。 (cf. [[m:FileTest.writable_real?]])
 
 --- zero?
-#@todo
+FileTest.zero?(self.to_s) と同じです。 (cf. [[m:FileTest.zero?]])
 
-Equivalent to:
-FileTest.zero?(self.to_s)
+--- chdir(&block)
+Dir.chdir(self.to_s, &block) と同じです。 (cf. [[m:Dir.chdir]])
+
+--- chroot
+Dir.chroot(self.to_s) と同じです。 (cf. [[m:Dir.chroot]])
 
 --- rmdir
-#@todo
-
-Equivalent to:
-Dir.rmdir(self.to_s)
+Dir.rmdir(self.to_s) と同じです。 (cf. [[m:Dir.rmdir]])
 
 --- entries
-#@todo
-
-Equivalent to:
-Dir.entries(self.to_s)
+Dir.entries(self.to_s) と同じです。 (cf. [[m:Dir.entries]])
 
 #@since 1.8.1
 
 --- each_entry {|pathname| ... }
-#@todo
-
-Equivalent to:
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) }
+Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.foreach]])
 
 #@end
 
---- mkdir(*args)
-#@todo
+--- dir_foreach {|pathname| ... }
+Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.foreach]]) 
 
-Equivalent to:
-Dir.mkdir(self.to_s, *args)
+#@since 1.8.1
+このメソッドは obsolete です。 each_entry メソッドを使ってください。
+#@end
+
+--- mkdir(*args)
+Dir.mkdir(self.to_s, *args) と同じです。 (cf. [[m:Dir.mkdir]])
 
 --- opendir(&block)
-#@todo
-
-Equivalent to:
-Dir.open(self.to_s, &block)
+Dir.open(self.to_s, &block) と同じです。 (cf. [[m:Dir.open]])
 
 --- find {|pathname| ...}
-#@todo
-
 self 配下のすべてのファイルやディレクトリを
-一つずつ引数 pathname に渡してブロックを実行する。
+一つずつ引数 pathname に渡してブロックを実行します。
 
   require 'find'
   Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
-と同じ。
+と同じです。 (cf. [[m:Find.find]])
 
 --- mkpath
-#@todo
-
-Equivalent to:
-FileUtils.mkpath(self.to_s)
+FileUtils.mkpath(self.to_s) と同じです。 (cf. [[m:FileUtils.mkpath]])
 
 --- rmtree
-#@todo
-
-Equivalent to:
-FileUtils.rm_r(self.to_s)
+FileUtils.rm_r(self.to_s) と同じです。 (cf. [[m:FileUtils.rm_r]])
 
 --- unlink
 --- delete
-#@todo
-
-self が指すディレクトリあるいはファイルを削除する。
+self が指すディレクトリあるいはファイルを削除します。
 
 #@since 1.8.5
 
---- ascend
-#@todo
+--- ascend { |pathname| ... }
+self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
+ブジェクトとして生成し、ブロックへの引数として渡して実行します。
+
+  Pathname.new('/path/to/some/file.rb').ascend {|v| p v}
+     #<Pathname:/path/to/some/file.rb>
+     #<Pathname:/path/to/some>
+     #<Pathname:/path/to>
+     #<Pathname:/path>
+     #<Pathname:/>
+
+  Pathname.new('path/to/some/file.rb').ascend {|v| p v}
+     #<Pathname:path/to/some/file.rb>
+     #<Pathname:path/to/some>
+     #<Pathname:path/to>
+     #<Pathname:path>
+
+ファイルシステムにはアクセスしません。
 
 #@end
 
---- chdir
-#@todo
+#@since 1.8.5
+--- descend { |pathname| ... }
+self のパス名の親から子供へと辿っていったときの各パス名を新しい
+Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
+す。
 
---- chroot
-#@todo
+  Pathname.new('/path/to/some/file.rb').descend {|v| p v}
+     #<Pathname:/>
+     #<Pathname:/path>
+     #<Pathname:/path/to>
+     #<Pathname:/path/to/some>
+     #<Pathname:/path/to/some/file.rb>
+  
+  Pathname.new('path/to/some/file.rb').descend {|v| p v}
+     #<Pathname:path>
+     #<Pathname:path/to>
+     #<Pathname:path/to/some>
+     #<Pathname:path/to/some/file.rb>
+
+ファイルシステムにはアクセスしません。
+
+#@end
 
 #@if(version <= "1.8.1")
 
 --- cleanpath_aggressive
-#@todo
+cleanpath(false) と同じです。 1.8.2 以降より private メソッドとなり、利用できなくなりました。 cleanpath を利用してください。
 
 --- cleanpath_conservative
-#@todo
+cleanpath(true) と同じです。 1.8.2 以降より private メソッドとなり、利用できなくなりました。 cleanpath を利用してください。
 
 #@end
 
-#@since 1.8.5
---- descend
-#@todo
-
-#@end
-
---- dir_foreach
-#@todo
-
---- foreach
-#@todo
-
---- foreachline
-#@todo
-
-#@since 1.8.2
---- freeze
-#@todo
-
-#@end
-
---- inspect
-#@todo
+--- foreach(*args, &block)
+self の指し示すパスがディレクトリなら
+Dir.foreach(self.to_s, *args, &block) と、さもなければ
+IO.foreach(self.to_s, *args, &block) と同じです。
 
 #@since 1.8.1
---- make_link
-#@todo
-
-
---- make_symlink
-#@todo
-
+このメソッドは obsolete です。 each_line か each_entry を使ってください。
 #@end
+
 
 #@if(version <= "1.8.0")
 --- realpath_rec
-#@todo
-
---- realpath_root?
-#@todo
+realpath メソッドの実質的な処理を行っているメソッドです。利用するべきで
+はありません。
 
 #@end
 
 
 #@since 1.8.5
---- sub
-#@todo
+--- sub(pattern, replace)  -> Pathname
+--- sub(pattern) {|matched| ... } -> Pathname
 
-#@end
-
-#@since 1.8.2
---- taint
-#@todo
-
---- untaint
-#@todo
+self を表現するパス文字列に対して sub メソッドを呼び出し、その結果を内
+容とする新しい Pathname オブジェクトを生成し、返します。 cf. [[m:String#sub]]
 
 #@end
 
 #@since 1.9.0
 --- to_path
-#@todo
+File.open などの引数に渡す際に呼ばれるメソッドです。 Pathname オブジェ
+クトにおいては、 to_s と同じです。
 
 #@end
 
-#@since 1.8.5
-
---- world_readable?
-#@todo
-
---- world_writable?
-#@todo
-
-#@end
