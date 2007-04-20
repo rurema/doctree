@@ -181,7 +181,7 @@ ostruct
 #---------------------------------------------------------
 parsearg
 parsedate                       tadf
-pathname
+pathname                        mukai
 ping
 pp
 prettyprint
