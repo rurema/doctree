@@ -28,8 +28,16 @@
 
 : --version
 
-定数 ::Version が定義されていたら、それを表示します。
+[[m:OptionParser#ver]] を表示してから exit します。
 
+[[m:OptionParser#ver]] が定義されていない場合は、そのようにエラーメッセージを出力して
+abort します。
+
+オプション「--version」にクラス名かモジュール名を引数として与えた場合は、そのクラス/モジュールで
+定義されている定数「Version」を表示して、終了します。
+
+ $ ruby t.rb --version=OptionParser
+ t: OptionParser version 12203 (2007-04-20)
 
 == Class Methods
 
