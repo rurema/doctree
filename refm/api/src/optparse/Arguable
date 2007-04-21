@@ -58,7 +58,7 @@ getopts と違って、グローバル変数を定義しません。
  # params[:foo] = "1"  # --foo
  # params[:bar] = "x"  # --bar x
 
-@param opts 引数のパターンを文字列で指定します。詳しい仕様は [[m:Kernel:getopts]] を参照して下さい。
+@param opts 引数のパターンを文字列で指定します。詳しい仕様は [[m:Kernel#getopts]] を参照して下さい。
 
 @raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
 
