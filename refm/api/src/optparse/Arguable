@@ -1,54 +1,52 @@
-
 = module OptionParser::Arguable
 
-Extends command line arguments array to parse itself.
+主に [[m:Kernel::ARGV]] を拡張するために用意されたモジュールです。
+[[lib:optparse]] を require することにより、ARGV は
+OptionParser::Arguable を extend します。
+
+コマンドライン引数を表す、一般の文字列の配列を拡張するためにも使うことができます。
 
 == Instance Methods
 
---- options=()
+--- options=(opt)
 #@todo
 
-Sets [[c:OptionParser]] object, when opt is false or
-nil, methods [[m:OptionParser::Arguable#options]] and
-[[m:OptionParser::Arguable#options=]] are undefined.  Thus, there
-is no ways to access the [[c:OptionParser]] object via the
-receiver object.
+自身をパースするための [[c:OptionParser]] オブジェクトをセットします。
 
---- options
+opt が nil か false である場合、自身の options= メソッドと options メソッドを
+undef します。
+
+@param opt 自身をパースする [[c:OptionParser]] 、あるいは nil か false を指定します。
+
+--- options                -> OptionParser
+--- options{|opt| ... }    -> obj | nil
 #@todo
 
-Actual [[c:OptionParser]] object, automatically created if not
-yet.
+自身をパースするための [[c:OptionParser]] を返します。
+初回呼び出し時に自動的に生成されます。
+この [[m:OptionParser#default_argv]] には self がセットされています。
 
-If called as iterator, yields with the [[c:OptionParser]] object
-and returns the result of the block. In this case, rescues any
-[[c:OptionParser::ParseError]] exceptions in the block, just emits
-error message to STDERR and returns nil.
+ブロックを与えた場合は、[[c:OptionParser]] を引数としてブロックを実行します。
+ブロックの実行結果を返します。
+ブロックの実行途中で [[c:OptionParser::ParseError]] 
+が発生した場合は、全て rescue し、エラーメッセージを出力し、
+nil を返します。
 
-:Parameters:
-  : block
-    Yielded with the [[c:OptionParser]] instance.
-
---- order!
---- permute!
---- parse!
+--- order!               -> [String]
+--- order!{|s| ... }     -> [String]
+--- permute!             -> [String]
+--- parse!               -> [String]
 #@todo
 
-Parses self destructively, and returns self just contains
-rest arguments left without parsed.
+自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
+[[m:OptionParser#order!]]、[[m:OptionParser#parse!]]、[[m:OptionParser#permute!]]
+をそれぞれ参照して下さい。
 
 #@since 1.8.5
 --- getopts
 #@todo
 
-Substitution of getopts is possible as follows. Also see
-[[m:OptionParser#getopts]].
-
-  def getopts(*args)
-    ($OPT = ARGV.getopts(*args)).each do |opt, val|
-      eval "$OPT_#{opt.gsub(/[^A-Za-z0-9_]/, '_')} = val"
-    end
-  rescue OptionParser::ParseError
-  end
+[[lib:getopts]] 相当の機能を提供します。
+[[m:OptionParser#getopts]]を参照して下さい。
 
 #@end
