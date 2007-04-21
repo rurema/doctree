@@ -34,7 +34,7 @@
 == Class Methods
 
 --- new(banner=nil, width=32, indent = ' ' * 4)              -> OptionParser
---- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}  -> object
+--- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}  -> OptionParser
 #@todo
 
 OptionParser オブジェクトを生成して返します。
@@ -107,7 +107,8 @@ OptionParser#on で登録したブロックに渡されます。
 @param klass 削除したいクラスオブジェクトを与えます。
 
 #@since 1.8.5
---- getopts(*args)
+--- getopts(argv, *opts)
+--- getopts(*opts)
 #@todo
 
 self.new.getopts(*args) と同じです。
@@ -135,13 +136,17 @@ self.new.getopts(*args) と同じです。
 --- banner=(heading)
 #@todo
 
-サマリの最初の部分を設定します。
+サマリの最初に表示される文字列を返します。
+
+@param heading サマリの最初に表示される文字列を指定します。
 
 --- summary_width         -> Integer
 --- summary_width=(width)
 #@todo
 
-サマリを表示するときの幅を数値で設定します。
+サマリを表示するときの幅を返します。
+
+@param width サマリを表示するときの幅を整数で設定します。
 
 --- summary_indent          -> String
 --- summary_indent=(indent)
@@ -337,8 +342,8 @@ desc にはオプションの説明を文字列で与えます。
 
 オプションを取り扱うためのブロックを登録します。
 
-klass には可能な引数を列挙した配列やハッシュを
-与えることもできます。
+@param rest 可能な引数を列挙した配列やハッシュを与えます。文字列を与えた場合は、サマリに表示されるオプションの説明と見なします。
+
   opts.on("--protocol VALUE", [:http, :ftp, :https]){|w|
     p w
   }
@@ -352,8 +357,8 @@ klass には可能な引数を列挙した配列やハッシュを
 コマンドに与えられた引数が配列やハッシュに含まれない場合、
 例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
 
---- on_head(short [, long [, klass [, pat [, desc]]]]) {...}
---- on_tail(short [, long [, klass [, pat [, desc]]]]) {...}
+--- on_head(*arg, &block)
+--- on_tail(*arg, &block)
 #@todo
 
 [[m:OptionParser#on]]と同様の働きをします。
@@ -372,7 +377,12 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
     exit
   end
 
+@param arg [[m:OptionParser#on]]と同様です。
+
+@param block [[m:OptionParser#on]]と同様です。
+
 --- order(argv = ARGV)              -> [String]
+--- order(argv = ARGV){|s| ...}     -> [String]
 --- order(*args)                    -> [String]
 --- order(*args){|s| ...}           -> [String]
 --- order!(argv = ARGV)             -> [String]
@@ -483,9 +493,15 @@ Strings to be parsed in default. ARGV is default.
 #@end
 
 #@since 1.8.5
---- getopts    -> Hash
+--- getopts(argv, *opts)   -> Hash
+--- getopts(*opts)         -> Hash
 #@todo
-Wrapper method for getopts.rb.
+[[lib:getopts]] 相当の機能を提供します。
+getopts と違って、グローバル変数を定義しません。
+引数をパースした結果を、Hash として返します。
+
+配列 argv を与えた場合、argv をパースします。そうでない場合は、
+default_argv をパースします。
 
  params = ARGV.getopts("ab:", "foo", "bar:")
  # params[:a] = true   # -a
@@ -493,4 +509,7 @@ Wrapper method for getopts.rb.
  # params[:foo] = "1"  # --foo
  # params[:bar] = "x"  # --bar x
 
+@param argv パースしたい配列を指定します。
+
+@param opts 引数を文字列で指定します。[[m:Kernel:getopts]] を参照して下さい。
 #@end
