@@ -42,11 +42,24 @@ nil を返します。
 [[m:OptionParser#order!]]、[[m:OptionParser#parse!]]、[[m:OptionParser#permute!]]
 をそれぞれ参照して下さい。
 
+@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+
 #@since 1.8.5
---- getopts
+--- getopts(*opts)    -> Hash
 #@todo
 
 [[lib:getopts]] 相当の機能を提供します。
-[[m:OptionParser#getopts]]を参照して下さい。
+getopts と違って、グローバル変数を定義しません。
+自身をパースした結果を、Hash として返します。
+
+ params = ARGV.getopts("ab:", "foo", "bar:")
+ # params[:a] = true   # -a
+ # params[:b] = "1"    # -b1
+ # params[:foo] = "1"  # --foo
+ # params[:bar] = "x"  # --bar x
+
+@param opts 引数のパターンを文字列で指定します。詳しい仕様は [[m:Kernel:getopts]] を参照して下さい。
+
+@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
 
 #@end

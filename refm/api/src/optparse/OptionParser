@@ -418,6 +418,8 @@ argv からオプションがすべて取り除かれます。
 
 @param args パースしたい引数を順に文字列として与えます。
 
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+
 --- permute(argv = ARGV)     -> [String]
 --- permute(*args)           -> [String]
 --- permute!(argv = ARGV)    -> [String]
@@ -452,6 +454,8 @@ order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 
 @param args パースしたい引数を順に文字列として与えます。
 
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+
 --- parse(argv = ARGV)    -> [String]
 --- parse(*args)          -> [String]
 --- parse!(argv = ARGV)   -> [String]
@@ -471,6 +475,8 @@ parse! は [[m:OptionParser#permute!]] と同様に argv を破壊的にをパースします。
 
 @param args パースしたい引数を順に文字列として与えます。
 
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+
 --- load(filename)     -> bool
 #@todo
 
@@ -484,6 +490,8 @@ file を読み込んで各行に対して parse を行ないます。
 んで配列にしてから parse を行ないます。
 
 @param env 環境変数名を文字列で与えます。
+
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
 
 #@since 1.8.3
 --- default_argv    -> [String]
@@ -512,4 +520,7 @@ default_argv をパースします。
 @param argv パースしたい配列を指定します。
 
 @param opts 引数を文字列で指定します。[[m:Kernel:getopts]] を参照して下さい。
+
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+
 #@end
