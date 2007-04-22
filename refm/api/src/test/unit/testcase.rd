@@ -30,7 +30,7 @@ include Test::Unit::Assertions
  suite = TC_String.suite
  Test::Unit::UI::Console::TestRunner.run(suite)
 
-各 TestCase オブジェクトは、ひとつのテストメソッドに対応しています。テストが実行される時は、
+各 TestCase オブジェクトは、ひとつのテストメソッドに対応しています。テストが実行される時には、
 テストメソッドの数だけ TestCase オブジェクトが生成されます。
 
 Ties everything together. If you subclass and add your own test methods, it takes care of making them into tests and wrapping those tests into a suite. It also does the nitty-gritty of actually running an individual test and collecting its results into a [[c:Test::Unit::TestResult]] object.
