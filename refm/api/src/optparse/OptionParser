@@ -252,6 +252,13 @@ long にはロングオプションを表す文字列を与えます。ショートオプショ
   opts.on("-r LIBRARY"){|lib| ...}
   opts.on("--require LIBRARY"){|lib| ...}
 
+複数のことなるオプションに同じブロックを一度に登録することもできます。
+
+  opt.on('-v', '-vv'){|boolean| ...}
+  opt.on('--require X', '--need', '--dependon'){|x| ... }
+
+
+@param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
 --- on(short, pat = /.*/, desc = "") {|v| ...}        -> self
 --- on(long, pat = /.*/, desc = "") {|v| ...}         -> self
