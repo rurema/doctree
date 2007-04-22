@@ -1,0 +1,199 @@
+= class URI::Generic
+include URI
+
+すべての URI クラスの基底クラスです。
+
+== Class Methods
+
+--- default_port
+#@todo
+
+スキームに対応するデフォルトのポート番号を返します。
+
+        require 'uri'
+        p URI::Generic.default_port     # => nil
+        p URI::HTTP.default_port        # => 80
+
+--- component
+#@todo
+
+URI の構成要素の配列を返します。
+
+        require 'uri'
+        p URI::Generic.component
+        p URI::MailTo.component
+
+        # => [:scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment]
+        # => [:scheme, :to, :headers]
+
+--- use_registry
+#@todo
+
+#@#    構成要素 registry を受け付けるなら true を返します。(URI::Generic 
+#@#    クラスでは false)
+registry 部を利用するか否かを表す真偽値。
+この値が偽のとき、new に偽でない registry 部が与えられると
+例外 URI::InvalidURIError が起こります。
+
+--- build2(ary)
+--- build2(hash)
+#@todo
+
+URI::Generic.build と同じですが、例外 URI::InvalidComponentError
+が発生した場合に、引数の各要素を URI.escape して再度 build を試み
+ます。
+
+--- build(ary)
+--- build(hash)
+#@todo
+
+引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
+構成要素は、
+      [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
+を配列かハッシュで与えます。
+
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
+
+#@#    汎用的な構成要素から URI::Generic オブジェクトを生成します。build 
+#@#    と異なり、引数の正当性を検査しません。
+各引数を成分とする汎用URIオブジェクトを生成して返します。
+
+use_registry が偽のとき、new に偽でない registry
+部が与えられると例外 URI::InvalidURIError が起こります。
+
+第10引数arg_checkとして真が与えられた場合は、
+値を返す前に各引数が字句規則に適合しているか否かを検査し、
+適合しない場合は例外 URI::InvalidComponentError が起ります。
+
+== Instance Methods
+
+--- default_port
+#@todo
+
+self.class.default_port です。
+
+--- component
+#@todo
+
+self.class.component です。
+
+--- scheme
+--- scheme=()
+--- userinfo
+--- userinfo=()
+--- user
+--- user=()
+--- password
+--- password=()
+--- host
+--- host=()
+--- port
+--- port=()
+--- registry
+--- registry=()
+--- path
+--- path=()
+--- query
+--- query=()
+--- opaque
+--- opaque=()
+--- fragment
+--- fragment=()
+#@todo
+
+各構成要素の属性メソッドです。属性設定では、引数の正当性をチェック
+し不正な引数に対して例外 URI::InvalidComponentError を発生させます。
+((-あらい 2002-09-24: InvalidURIError を起こすものもあるのはわざと？-))
+
+--- hierarchical?
+#@todo
+
+path が真なら真です。
+
+--- absolute
+--- absolute?
+#@todo
+
+scheme が真なら真です。
+
+--- relative?
+#@todo
+
+scheme が偽なら真です。
+
+--- merge!(rel)
+--- merge(rel)
+--- +(rel)
+#@todo
+
+rel を連結する。
+rel が文字列の場合は URI.parse(rel) によって、
+URI に変換してから連結する。
+
+        require 'uri'
+        p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
+        => #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
+
+--- route_from(src)
+--- -(src)
+#@todo
+
+srcからの相対パスを返します。
+
+        require 'uri'
+        p URI.parse('http://www.ruby-lang.org/en/raa.html') - 'http://www.ruby-lang.org/'
+        => #<URI::Generic:0x20100256 URL:en/raa.html>
+
+--- route_to(dst)
+#@todo
+
+引数dstには文字列かURIオブジェクトを与えます。dstへの相対パスを返します。
+
+        require 'uri'
+        p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
+
+        => #<URI::Generic:0x20100198 URL:en/raa.html>
+
+--- normalize
+--- normalize!
+#@todo
+
+URI オブジェクトを正規化して返します。ホスト名を小文字にし、path
+構成要素がなければ '/' をセットします。
+
+--- to_s
+--- to_str
+#@todo
+
+URI を返します。
+
+--- ==(uri)
+#@todo
+
+引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
+ます。URI は正規化して比較されます。
+
+--- to_a
+--- to_ary
+#@todo
+
+URI オブジェクトの構成要素の配列を返します。
+
+--- select(*components)
+#@todo
+Args
+
+components: Multiple Symbol arguments defined in URI::HTTP
+
+Description
+
+Selects specified components from URI
+
+Usage
+
+  require 'uri'
+
+  uri = URI.parse('http://myuser:mypass@my.example.com/test.rbx')
+  p uri.select(:userinfo, :host, :path)
+  # => ["myuser:mypass", "my.example.com", "/test.rbx"]

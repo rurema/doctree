@@ -1,0 +1,27 @@
+= class URI::HTTP < URI::Generic
+
+== Class Methods
+
+--- build(ary)
+--- build(hash)
+#@todo
+
+引数で与えられた URI 構成要素から URI::HTTP オブジェクトを生成します。
+構成要素は、
+      [userinfo, host, port, path, query, fragment]
+を配列かハッシュで与えます。
+
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
+
+汎用的な構成要素から URI::HTTP オブジェクトを生成します。build
+と異なり、引数の正当性を検査しません。
+
+== Instance Methods
+
+--- request_uri
+#@todo
+
+path + '?' + query を返します。
+
+= class URI::HTTPS < URI::HTTP

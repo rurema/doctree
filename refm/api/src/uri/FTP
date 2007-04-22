@@ -1,0 +1,41 @@
+= class URI::FTP < URI::Generic
+
+== Class Methods
+
+--- build(ary)
+--- build(hash)
+#@todo
+
+引数で与えられた URI 構成要素から URI::FTP オブジェクトを生成します。
+構成要素は、
+      [userinfo, host, port, path, typecode]
+を配列かハッシュで与えます。typecode は、"a"、"i" あるいは "d" です。
+"a" はテキスト、"i" はバイナリ、"d" はディレクトリを表します。
+"a" がテキストで、"i" がバイナリなのは、それぞれのデータタイプが
+FTPのプロトコルで ASCII と IMAGE と呼ばれていたためです。
+
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
+
+汎用的な構成要素から URI::FTP オブジェクトを生成します。build
+と異なり、引数の正当性を検査しません。
+
+      require 'uri'
+      p ftp = URI.parse("ftp://ftp.ruby-lang.org/pub/ruby/;type=d")
+      p ftp.typecode
+      => #<URI::FTP:0x2010029c URL:ftp://ftp.ruby-lang.org/pub/ruby/;type=d>
+         "d"
+
+
+#@# bc-rdoc: detected missing name: new2
+--- new2(user, password, host, port, path, typecode = nil, arg_check = true)
+#@todo
+
+== Instance Methods
+
+--- typecode
+--- typecode=()
+#@todo
+
+各構成要素の属性メソッドです。属性設定では、引数の正当性をチェック
+し不正な引数に対して例外 URI::InvalidComponentError を発生させます。

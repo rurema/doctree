@@ -1,0 +1,134 @@
+= module URI
+
+#@#== Class Variables
+
+#@#--- @@schemes
+
+#@#    モジュール関数 parse によって生成可能なクラスを値とするハッシュ。
+#@#    キーはスキームを大文字だけで表した文字列。
+#@#    URI::Genericを継承する場合にこのハッシュにエントリを追加すると
+#@#    そのクラスが URI.parse によってサポートされます。
+
+== Singleton Methods
+
+--- split(url)
+#@todo
+
+URI を以下の要素に分割した配列を返します。
+
+      * scheme
+      * userinfo
+      * host
+      * port
+      * registry
+      * path
+      * opaque
+      * query
+      * fragment
+
+例:
+        require 'uri'
+        p URI.split("http://www.ruby-lang.org/")
+1        # => ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
+
+--- parse(uri_str)
+#@todo
+
+与えられた URI から該当する URI サブクラスのインスタンスを生成して
+返します。
+
+        require 'uri'
+        p uri = URI.parse("http://www.ruby-lang.org/")
+
+        # => #<URI::HTTP:0x201002a6 URL:http://www.ruby-lang.org/>
+        p uri.scheme    # => "http"
+        p uri.host      # => "www.ruby-lang.org"
+        p uri.port      # => 80
+        p uri.path      # => "/"
+
+--- join(uri_str[, str, ...])
+#@todo
+
+文字列 uri_str と str ... をURIとして連結して得られる
+URIオブジェクトを返します。
+
+以下と等価です
+
+        URI.parse(uri_str) + str + ....
+#@#    URI と相対パスをつなげます。((-あらい 2002-09-24: いい表現じゃないんだろうな・・・-))
+
+例
+
+        require 'uri'
+        p URI.join('http://www.ruby-lang.org/', '/ja/man-1.6/')
+        => #<URI::HTTP:0x2010017a URL:http://www.ruby-lang.org/ja/man-1.6/>
+
+--- extract(str[, schemes])
+--- extract(str[, schemes]) {|uri_str| ... }
+#@todo
+
+文字列 str に対してパターンマッチングを試み、
+絶対URIにマッチした部分文字列からなる配列として返します。
+抽出する URI がなければ空の配列を返します。
+
+第2引数に文字列の配列 schemes が与えられた場合は
+そのスキームだけを検索します。
+
+ブロックが与えられた場合は String#scan と同様で、
+マッチした部分がみつかるたびに uri_str に
+その部分を代入してブロックを評価します。
+このときの値は nil です。
+
+        # つまらんサンプルだ・・・
+        require 'uri'
+        str = "
+                http://www.ruby-lang.org/
+                http://www.ruby-lang.org/man-1.6/
+        "
+        p URI.extract(str, %w(http))
+        => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
+
+#@since 1.8.1
+--- regexp([match_schemes])
+#@todo
+
+URIにマッチする正規表現を返します。
+
+引数に文字列の配列 match_schemes を与えた場合は、
+その文字列で指定されるスキームの URI のみにマッチする
+正規表現を返します。
+
+いずれの場合も返り値の正規表現は不定数の正規表現グループ
+(括弧) を含みます。この括弧の数はバージョンによって変動
+する可能性があるので、それに依存したコードを書くべきでは
+ありません。
+#@end
+
+--- escape(str[, unsafe])
+--- encode(str[, unsafe])
+#@todo
+
+URI 文字列をエンコードした文字列を返します。unsafe には、URI
+として指定できない文字を正規表現か文字列で指定します(デフォルトは、
+定数 URI::UNSAFE
+        /[^-_.!~*'()a-zA-Z\d;\/?:@&=+$,\[\]]/n
+です)。
+
+        require 'uri'
+        $KCODE = 'EUC'
+        p URI.escape('http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Rubyリファレンスマニュアル')
+
+        => "http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Ruby%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9%A5%DE%A5%CB%A5%E5%A5%A2%A5%EB"
+
+--- unescape(str)
+--- decode(str)
+#@todo
+
+URI 文字列をデコードした文字列を返します。
+
+        require 'uri'
+        $KCODE = 'EUC'
+        p URI.unescape('http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Ruby%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9%A5%DE%A5%CB%A5%E5%A5%A2%A5%EB')
+
+        => "http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Rubyリファレンスマニュアル"
+

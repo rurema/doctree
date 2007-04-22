@@ -1,0 +1,46 @@
+= class URI::LDAP < URI::Generic
+
+LDAP URI SCHEMA (described in [[RFC:2255]])
+
+  ldap://<host>/<dn>[?<attrs>[?<scope>[?<filter>[?<extensions>]]]]
+
+== Class Methods
+
+--- build(ary)
+--- build(hash)
+#@todo
+
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+#@todo
+
+== Instance Methods
+
+--- dn
+#@todo
+
+--- dn=()
+#@todo
+
+--- attributes
+#@todo
+
+--- attributes=()
+#@todo
+
+--- scope
+#@todo
+
+--- scope=()
+#@todo
+
+--- filter
+#@todo
+
+--- filter=()
+#@todo
+
+--- extensions
+#@todo
+
+--- extensions=()
+#@todo
