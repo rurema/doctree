@@ -53,10 +53,10 @@ getopts と違って、グローバル変数を定義しません。
 自身をパースした結果を、Hash として返します。
 
  params = ARGV.getopts("ab:", "foo", "bar:")
- # params[:a] = true   # -a
- # params[:b] = "1"    # -b1
- # params[:foo] = "1"  # --foo
- # params[:bar] = "x"  # --bar x
+ # params["a"] = true   # -a
+ # params["b"] = "1"    # -b1
+ # params["foo"] = true  # --foo
+ # params["bar"] = "x"  # --bar x
 
 @param opts 引数のパターンを文字列で指定します。詳しい仕様は [[m:Kernel#getopts]] を参照して下さい。
 

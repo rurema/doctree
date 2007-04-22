@@ -521,11 +521,12 @@ getopts と違って、グローバル変数を定義しません。
 配列 argv を与えた場合、argv をパースします。そうでない場合は、
 default_argv をパースします。
 
- params = ARGV.getopts("ab:", "foo", "bar:")
- # params[:a] = true   # -a
- # params[:b] = "1"    # -b1
- # params[:foo] = "1"  # --foo
- # params[:bar] = "x"  # --bar x
+ opt = OptionParser.new
+ params = opt.getopts(ARGV, "ab:", "foo", "bar:")
+ # params["a"] = true   # -a
+ # params["b"] = "1"    # -b1
+ # params["foo"] = true  # --foo
+ # params["bar"] = "x"  # --bar x
 
 @param argv パースしたい配列を指定します。
 
