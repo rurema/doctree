@@ -3,6 +3,8 @@
 include TkItemConfigMethod
 include Tk::BLT::PlotComponent::OptKeys
 
+プロットコンポーネント
+
 == Instance Methods
 
 --- __destroy_hook__
@@ -317,9 +319,15 @@ alias bar
 
 
 --- element_create(id = nil, keys = {})
-#@todo
 
+プロット要素を作成します。
 
+id を指定した場合、指定した id のプロット要素が OBJ_TBL 上に存在するときは、そのプロット要素を返します。
+
+これは次の呼び出しと同じです。
+  Tk::BLT::PlotComponent::Element.new(self, tagid(id), keys)
+@param id id
+@param keys オプション
 
 --- element_deactivate(*ids)
 #@todo
@@ -638,9 +646,13 @@ alias bar
 
 
 --- tagid(tag)
-#@todo
 
+id を返します。
 
+tag が Axis, Crosshairs, Element, GridLine, Legend, Pen, Postscript, Marker のインスタンスの場合 tag.id を返します。
+そのほかの場合 tag を返します。
+
+@param tag 任意のプロット要素
 
 --- x2axis_bind(context, *args)
 #@todo
