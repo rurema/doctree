@@ -436,7 +436,7 @@ tkextlib/vu/pie
 tkextlib/vu/setup
 tkextlib/vu/spinbox
 tkextlib/winico
-tmpdir                          kouya
+tmpdir                          kouya            done
 tracer
 tsort
 un
@@ -451,6 +451,6 @@ win32ole
 wsdl
 xmlrpc
 xsd
-yaml
+yaml                            kouya
 yaml/store
 zlib                            kouya 
