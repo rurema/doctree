@@ -89,7 +89,28 @@ Ruby のオブジェクトに変換し、
   #=>   {"foo"=>"bar"}
 
 --- each_node(io) {|obj| ...}
-#@todo
+
+与えられた io から YAML フォーマットの文書をすべて順に読み込み
+[[c:YAML::Syck::Map]]オブジェクトに変換し、
+生成したオブジェクトを引数としてブロックを評価していきます。
+
+  food:
+   - apple
+   - banana
+   - carrot
+  ---
+  foo: bar
+  # end of test.yml
+
+  require 'yaml'
+
+  File.open( 'test.yml' ) do |io|
+    YAML.each_node(io) do |y|
+      p y.transform
+    end
+  end
+  #=> {"food"=>["apple", "banana", "carrot"]}
+  #=> {"foo"=>"bar"}
 
 --- load(io)
 --- load(str)
