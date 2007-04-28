@@ -1,4 +1,5 @@
 = module URI
+URI を扱うためのモジュールです。
 
 #@#== Class Variables
 
