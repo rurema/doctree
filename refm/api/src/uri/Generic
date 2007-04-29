@@ -82,7 +82,7 @@ self.class.component を返します。
 
 自身の scheme を設定します。
 
-@param s 自身の scheme を表す文字列をしてします。
+@param s 自身の scheme を表す文字列を指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
@@ -95,6 +95,8 @@ self.class.component を返します。
 #@todo
 
 自身の userinfo を設定します。
+
+@param s 自身の userinfo を表す文字列を指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
@@ -111,6 +113,8 @@ self.class.component を返します。
 
 自身の user を設定します。
 
+@param s 自身の user を表す文字列を指定します。
+
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError user と registry を同時に設定した場合に発生します。
@@ -124,6 +128,8 @@ self.class.component を返します。
 #@todo
 
 自身の password を設定します。
+
+@param s 自身の password を表す文字列を指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
@@ -139,6 +145,8 @@ self.class.component を返します。
 
 自身の host を設定します。
 
+@param s 自身の host を表す文字列を指定します。
+
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError host と registry を同時に設定した場合に発生します。
@@ -153,6 +161,8 @@ self.class.component を返します。
 
 自身の port を設定します。
 
+@param s 自身の port を表す文字列を指定します。
+
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError port と registry を同時に設定した場合に発生します。
@@ -166,6 +176,8 @@ self.class.component を返します。
 #@todo
 
 自身の registry を設定します。
+
+@param s 自身の registry を表す文字列を指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
@@ -185,6 +197,8 @@ self.class.component を返します。
 
 自身の path を設定します。
 
+@param s 自身の path を表す文字列を指定します。
+
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError opaque と path を同時に設定した場合に発生します。
@@ -199,6 +213,8 @@ self.class.component を返します。
 
 自身の query を設定します。
 
+@param s 自身の query を表す文字列を指定します。
+
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError opaque と query を同時に設定した場合に発生します。
@@ -208,15 +224,16 @@ self.class.component を返します。
 
 自身の opaque を返します。設定されていない場合は nil を返します。
 
- a = URI.parse('urn:ietf:rfc:1149')
- p a.class   #=> URI::Generic
- p a.opaque  #=> "ietf:rfc:1149"
- p a.path    #=> nil
+ p URI.parse('http://example.com/').opaque       #=> nil
+ p URI.parse('mailto:nospam@localhost').opaque   #=> "nospam@localhost"
+ p URI.parse('urn:ietf:rfc:1149').opaque         #=> "ietf:rfc:1149"
 
 --- opaque=(s)
 #@todo
 
 自身の opaque を設定します。
+
+@param s 自身の opaque を表す文字列を指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
@@ -232,6 +249,8 @@ self.class.component を返します。
 
 自身の fragment を設定します。
 
+@param s 自身の fragment を表す文字列を指定します。
+
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 --- hierarchical?    -> boolean
@@ -243,21 +262,19 @@ path が真なら true を返します。そうでない場合は false を返します。
 --- absolute?    -> boolean
 #@todo
 
-scheme が真なら true を返します。そうでない場合は false を返します。
+自身に scheme が設定されているなら true を返します。そうでない場合は false を返します。
 
 --- relative?    -> boolean
 #@todo
 
-scheme が偽なら true を返します。そうでない場合は false を返します。
+自身に scheme が設定されていないなら true を返します。そうでない場合は false を返します。
 
 --- merge!(rel)    -> self
 --- merge(rel)     -> URI::Generic
 --- +(rel)         -> URI::Generic
 #@todo
 
-rel を連結する。
-rel が文字列の場合は URI.parse(rel) によって、
-URI に変換してから連結する。
+rel を自身へ連結します。[[rfc:2396]] の Section 5.2 の仕様に従います。rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
 
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
