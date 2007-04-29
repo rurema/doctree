@@ -1,9 +1,11 @@
 = class URI::HTTP < URI::Generic
 
+HTTP の URI を表すクラスです。
+
 == Class Methods
 
---- build(ary)
---- build(hash)
+--- build(ary)     -> URI::HTTP
+--- build(hash)    -> URI::HTTP
 #@todo
 
 引数で与えられた URI 構成要素から URI::HTTP オブジェクトを生成します。
@@ -11,7 +13,7 @@
       [userinfo, host, port, path, query, fragment]
 を配列かハッシュで与えます。
 
---- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)     -> URI::HTTP   
 #@todo
 
 汎用的な構成要素から URI::HTTP オブジェクトを生成します。build
@@ -19,9 +21,12 @@
 
 == Instance Methods
 
---- request_uri
+--- request_uri     -> String
 #@todo
 
-path + '?' + query を返します。
+自身の「path + '?' + query」を返します。
+query が nil である場合は、自身の path を返します。
+
+path が空である場合には、path は「'/'」であるとします。
 
 = class URI::HTTPS < URI::HTTP
