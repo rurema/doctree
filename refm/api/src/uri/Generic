@@ -5,46 +5,43 @@ include URI
 
 == Class Methods
 
---- default_port
+--- default_port    -> Integer | nil
 #@todo
 
 スキームに対応するデフォルトのポート番号を返します。
 
-        require 'uri'
-        p URI::Generic.default_port     # => nil
-        p URI::HTTP.default_port        # => 80
+  require 'uri'
+  p URI::Generic.default_port     # => nil
+  p URI::HTTP.default_port        # => 80
 
---- component
+--- component     -> [Symbol]
 #@todo
 
 URI の構成要素の配列を返します。
 
-        require 'uri'
-        p URI::Generic.component
-        p URI::MailTo.component
+  require 'uri'
+  p URI::Generic.component
+  p URI::MailTo.component
+  
+  # => [:scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment]
+  # => [:scheme, :to, :headers]
 
-        # => [:scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment]
-        # => [:scheme, :to, :headers]
-
---- use_registry
+--- use_registry    -> boolean
 #@todo
 
-#@#    構成要素 registry を受け付けるなら true を返します。(URI::Generic 
-#@#    クラスでは false)
-registry 部を利用するか否かを表す真偽値。
-この値が偽のとき、new に偽でない registry 部が与えられると
-例外 URI::InvalidURIError が起こります。
+構成要素 registry を受け付けるなら true を返します。
+URI::Generic クラスでは false です。
 
---- build2(ary)
---- build2(hash)
+--- build2(ary)     -> URI::Generic
+--- build2(hash)    -> URI::Generic
 #@todo
 
 URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 が発生した場合に、引数の各要素を URI.escape して再度 build を試み
 ます。
 
---- build(ary)
---- build(hash)
+--- build(ary)     -> URI::Generic
+--- build(hash)    -> URI::Generic
 #@todo
 
 引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
@@ -52,135 +49,260 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
       [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
 を配列かハッシュで与えます。
 
---- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment[, arg_check])
+@raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
+
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::Generic
 #@todo
 
-#@#    汎用的な構成要素から URI::Generic オブジェクトを生成します。build 
-#@#    と異なり、引数の正当性を検査しません。
-各引数を成分とする汎用URIオブジェクトを生成して返します。
+各引数を成分とする URI::Generic オブジェクトを生成して返します。
 
-use_registry が偽のとき、new に偽でない registry
-部が与えられると例外 URI::InvalidURIError が起こります。
+@param arg_check 真が与えられた場合は、各引数が字句規則に適合しているか否かを検査します。適合しない場合は例外 URI::InvalidComponentError が起ります。
 
-第10引数arg_checkとして真が与えられた場合は、
-値を返す前に各引数が字句規則に適合しているか否かを検査し、
-適合しない場合は例外 URI::InvalidComponentError が起ります。
+@raise URI::InvalidURIError use_registry が偽のとき、registry が与えられると発生します。
 
 == Instance Methods
 
---- default_port
+--- default_port     -> Integer | nil
 #@todo
 
-self.class.default_port です。
+self.class.default_port を返します。
 
---- component
+--- component     -> [Symbol]
 #@todo
 
-self.class.component です。
+self.class.component を返します。
 
---- scheme
---- scheme=()
---- userinfo
---- userinfo=()
---- user
---- user=()
---- password
---- password=()
---- host
---- host=()
---- port
---- port=()
---- registry
---- registry=()
---- path
---- path=()
---- query
---- query=()
---- opaque
---- opaque=()
---- fragment
---- fragment=()
+--- scheme    -> String | nil
 #@todo
 
-各構成要素の属性メソッドです。属性設定では、引数の正当性をチェック
-し不正な引数に対して例外 URI::InvalidComponentError を発生させます。
-((-あらい 2002-09-24: InvalidURIError を起こすものもあるのはわざと？-))
+自身の scheme を返します。設定されていない場合は nil を返します。
 
---- hierarchical?
+--- scheme=(s)
 #@todo
 
-path が真なら真です。
+自身の scheme を設定します。
 
---- absolute
---- absolute?
+@param s 自身の scheme を表す文字列をしてします。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+--- userinfo    -> String | nil
 #@todo
 
-scheme が真なら真です。
+自身の userinfo を返します。設定されていない場合は nil を返します。
 
---- relative?
+--- userinfo=(s)
 #@todo
 
-scheme が偽なら真です。
+自身の userinfo を設定します。
 
---- merge!(rel)
---- merge(rel)
---- +(rel)
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError userinfo と registry を同時に設定した場合に発生します。
+
+--- user    -> String | nil
+#@todo
+
+自身の userinfo を返します。userinfo が「username:password」の形式である場合は、username 部を返します。
+設定されていない場合は nil を返します。
+
+--- user=(s)
+#@todo
+
+自身の user を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError user と registry を同時に設定した場合に発生します。
+
+--- password    -> String | nil
+#@todo
+
+自身の password を返します。設定されていない場合は nil を返します。
+
+--- password=(s)
+#@todo
+
+自身の password を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError userinfo と registry を同時に設定した場合に発生します。
+
+--- host    -> String | nil
+#@todo
+
+自身の host を返します。設定されていない場合は nil を返します。
+
+--- host=(s)
+#@todo
+
+自身の host を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError host と registry を同時に設定した場合に発生します。
+
+--- port     -> String | nil
+#@todo
+
+自身の port を返します。設定されていない場合は nil を返します。
+
+--- port=(s)
+#@todo
+
+自身の port を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError port と registry を同時に設定した場合に発生します。
+
+--- registry    -> String | nil
+#@todo
+
+自身の registry を返します。設定されていない場合は nil を返します。
+
+--- registry=(s)
+#@todo
+
+自身の registry を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError server 部と registry を同時に設定した場合に発生します。
+
+--- path     -> String | nil
+#@todo
+
+自身の path を返します。設定されていない場合は nil を返します。
+
+  p URI.parse('http://example.com/hoge').path       #=> "/hoge"
+  p URI.parse('http://example.com').path            #=> ""
+  p URI.parse('mailto:nospam@localhost').path       #=> nil
+
+--- path=(s)
+#@todo
+
+自身の path を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError opaque と path を同時に設定した場合に発生します。
+
+--- query     -> String | nil
+#@todo
+
+自身の query を返します。設定されていない場合は nil を返します。
+
+--- query=(s)
+#@todo
+
+自身の query を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError opaque と query を同時に設定した場合に発生します。
+
+--- opaque     -> String | nil
+#@todo
+
+自身の opaque を返します。設定されていない場合は nil を返します。
+
+ a = URI.parse('urn:ietf:rfc:1149')
+ p a.class   #=> URI::Generic
+ p a.opaque  #=> "ietf:rfc:1149"
+ p a.path    #=> nil
+
+--- opaque=(s)
+#@todo
+
+自身の opaque を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+@raise URI::InvalidURIError  opaque とヒエラルキーパートを同時に設定した場合に発生します。
+
+--- fragment     -> String | nil
+#@todo
+
+自身の fragment を返します。設定されていない場合は nil を返します。
+
+--- fragment=(s)
+#@todo
+
+自身の fragment を設定します。
+
+@raise URI::InvalidComponentError 不正な引数 s に対して発生します。
+
+--- hierarchical?    -> boolean
+#@todo
+
+path が真なら true を返します。そうでない場合は false を返します。
+
+--- absolute     -> boolean
+--- absolute?    -> boolean
+#@todo
+
+scheme が真なら true を返します。そうでない場合は false を返します。
+
+--- relative?    -> boolean
+#@todo
+
+scheme が偽なら true を返します。そうでない場合は false を返します。
+
+--- merge!(rel)    -> self
+--- merge(rel)     -> URI::Generic
+--- +(rel)         -> URI::Generic
 #@todo
 
 rel を連結する。
 rel が文字列の場合は URI.parse(rel) によって、
 URI に変換してから連結する。
 
-        require 'uri'
-        p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
-        => #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
+  require 'uri'
+  p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
+  #=> #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
 
---- route_from(src)
---- -(src)
+--- route_from(src)    -> URI::Generic
+--- -(src)             -> URI::Generic
 #@todo
 
-srcからの相対パスを返します。
+src からの相対パスを返します。
 
-        require 'uri'
-        p URI.parse('http://www.ruby-lang.org/en/raa.html') - 'http://www.ruby-lang.org/'
-        => #<URI::Generic:0x20100256 URL:en/raa.html>
+  require 'uri'
+  p URI.parse('http://www.ruby-lang.org/en/raa.html') - 'http://www.ruby-lang.org/'
+  #=> #<URI::Generic:0x20100256 URL:en/raa.html>
 
---- route_to(dst)
+--- route_to(dst)     -> URI::Generic
 #@todo
 
 引数dstには文字列かURIオブジェクトを与えます。dstへの相対パスを返します。
 
-        require 'uri'
-        p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
+  require 'uri'
+  p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
+  
+  #=> #<URI::Generic:0x20100198 URL:en/raa.html>
 
-        => #<URI::Generic:0x20100198 URL:en/raa.html>
-
---- normalize
---- normalize!
+--- normalize     -> URI::Generic
+--- normalize!    -> nil
 #@todo
 
 URI オブジェクトを正規化して返します。ホスト名を小文字にし、path
 構成要素がなければ '/' をセットします。
 
---- to_s
---- to_str
+--- to_s      -> String
+--- to_str    -> String
 #@todo
 
 URI を返します。
 
---- ==(uri)
+--- ==(uri)    -> boolean
 #@todo
 
 引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
 ます。URI は正規化して比較されます。
 
---- to_a
---- to_ary
-#@todo
-
-URI オブジェクトの構成要素の配列を返します。
-
---- select(*components)
+--- select(*components)    -> [String]
 #@todo
 Args
 
@@ -193,7 +315,7 @@ Selects specified components from URI
 Usage
 
   require 'uri'
-
+  
   uri = URI.parse('http://myuser:mypass@my.example.com/test.rbx')
   p uri.select(:userinfo, :host, :path)
   # => ["myuser:mypass", "my.example.com", "/test.rbx"]
