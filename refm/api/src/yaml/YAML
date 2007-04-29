@@ -94,6 +94,8 @@ Ruby のオブジェクトに変換し、
 [[c:YAML::Syck::Map]]オブジェクトに変換し、
 生成したオブジェクトを引数としてブロックを評価していきます。
 
+@param YAMLフォーマットの文書の IO オブジェクト
+
   food:
    - apple
    - banana
@@ -149,8 +151,40 @@ Ruby のオブジェクトを生成して返します。
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
 それらオブジェクトを含んだ [[c:YAML::Stream]] を返します。
 
---- object_maker(obj_class, val, is_attr = false)
-#@todo
+--- object_maker(obj_class, val)
+#@# --- object_maker(obj_class, val, is_attr = false)
+#@# is_attrはもうないのかもしれない。
+#@# ruby 1.8.5 (2006-08-25) [i386-linux]
+
+与えられたobj_class クラスに、valハッシュをインスタンス変数として追加し
+obj_classクラスのインスタンスを生成して返します。
+
+@param obj_class クラスを指定する
+@param val ハッシュを指定する。obj_classのインスタンス変数作成に使用される
+
+  require 'yaml'
+
+  class Cat; end
+
+  YAML.load_documents(DATA){|y|
+    p YAML.object_maker(Cat, y)
+  }
+
+  __END__
+  name: taro
+  age: 13
+  ---
+  name: jiro
+  age: 23
+  ---
+  name: saburo
+  age: 8
+  # end of sample
+
+  結果
+  #=> #<Cat:0xb7ccb174 @name="taro", @age=13>
+  #=> #<Cat:0xb7ccafa8 @name="jiro", @age=23>
+  #=> #<Cat:0xb7ccaad0 @name="saburo", @age=8>
 
 --- parse(io)
 #@todo
