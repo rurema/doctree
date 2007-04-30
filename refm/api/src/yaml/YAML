@@ -187,10 +187,76 @@ obj_classクラスのインスタンスを生成して返します。
   #=> #<Cat:0xb7ccaad0 @name="saburo", @age=8>
 
 --- parse(io)
-#@todo
+
+与えられた io から YAML フォーマットの文書をパースし
+[[c:YAML::Syck::Node]]オブジェクトに変換する
+複数のドキュメントを読み込む場合は、[[m:YAML.parse_documents]] を使用する。
+
+@param io YAMLフォーマットのIOオブジェクトもしくは文字列
+
+  #!/usr/bin/env ruby
+  
+  require 'yaml'
+  
+  doc = YAML.parse(DATA)
+  doc.search("//name").each {|node|
+    p node
+  }
+  
+  __END__
+  cat:
+   - name: taro
+     age: 7
+   - name: jiro
+     age: 23
+  ---
+  dog:
+   shiba:
+    - name: goro
+      age: 3
+    - name: rokuro
+      age: 1
+  # end of sample
+  #=> "/cat/0/name"
+  #=> "/cat/1/name"
+  # dog は読み込まない
 
 --- parse_documents(io) {|obj| ...}
-#@todo
+
+与えられた io から YAML フォーマットの文書をパースし
+[[c:YAML::Syck::Node]]オブジェクトに変換し、
+生成したオブジェクトを引数としてブロックを評価していきます。
+
+@param YAML フォーマットの文書のIOオブジェクトもしくは文字列
+
+  require 'yaml'
+
+  YAML.parse_documents(DATA){|doc|
+    doc.search('/dog//name').each {|node|
+      p node
+    }
+    p "-->"
+  }
+
+  __END__
+  cat:
+   - name: taro
+     age: 7
+   - name: jiro
+     age: 23
+  ---
+  dog:
+   shiba:
+    - name: goro
+      age: 3
+    - name: rokuro
+      age: 1
+  # end of sample
+
+  #=> "-->" 
+  #=> "/dog/shiba/0/name"
+  #=> "/dog/shiba/1/name"
+  #=> "-->"
 
 #@since 1.8.2
 --- parse_file
