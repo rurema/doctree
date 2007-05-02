@@ -157,7 +157,7 @@ mailread
 mathn
 matrix
 md5
-mkmf
+mkmf                            sheepman
 monitor
 mutex_m
 net/ftp
@@ -183,8 +183,8 @@ parsearg
 parsedate                       tadf
 pathname                        mukai           done
 ping
-pp
-prettyprint
+pp                              sheepman
+prettyprint                     sheepman
 profile
 profiler
 pstore
