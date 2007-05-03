@@ -5,12 +5,12 @@ YAML (YAML Ain't Markup Language) を扱うクラスです。
 === 参考
 
 * YAML Specification
-  * [[m:URL:http:#/www.yaml.org/spec/]]
-  * [[m:URL:http:#/www.yaml.org/type/]]
+  * [[url:http://www.yaml.org/spec/]]
+  * [[url:http://www.yaml.org/type/]]
 * YAML4R
-  * [[m:URL:http:#/yaml4r.sourceforge.net/]]
-  * [[m:URL:http:#/yaml4r.sourceforge.net/cookbook/]]
-  * [[m:URL:http:#/yaml4r.sourceforge.net/doc/]]
+  * [[url:http://yaml4r.sourceforge.net/]]
+  * [[url:http://yaml4r.sourceforge.net/cookbook/]]
+  * [[url:http://yaml4r.sourceforge.net/doc/]]
 * [[unknown:Ruby with YAML|URL:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
 * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
   * [[unknown:プログラマーのための YAML 入門 (初級編)|URL:http://jp.rubyist.net/magazine/?0009-YAML]]
@@ -259,8 +259,32 @@ obj_classクラスのインスタンスを生成して返します。
   #=> "-->"
 
 #@since 1.8.2
---- parse_file
-#@todo
+--- parse_file(file_path)
+file_pathのファイルから一つのYAMLドキュメントをパースし、
+[[c:YAML::Syck::Node]]オブジェクトを返します。
+
+@param file_path YAMLドキュメントが書かれたファイルへのパスを文字列で指定する
+
+  cat:
+   - name: taro
+     age: 7
+   - name: jiro
+     age: 23
+  ---
+  dog:
+   shiba:
+    - name: goro
+      age: 3
+    - name: rokuro
+      age: 1
+  # end of sample.yaml
+  
+  require 'yaml'
+  
+  tree = YAML.parse_file("sample.yaml")
+  p tree.transform
+  
+  #=> {"cat"=>[{"name"=>"taro", "age"=>7}, {"name"=>"jiro", "age"=>23}]}
 #@end
 
 --- quick_emit(oid, opts={}) {|obj| ...}
