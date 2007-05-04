@@ -114,7 +114,7 @@ pretty_print ¥á¥½¥Ã¥É¤Ë¤ª¤¤¤Æ¡¢¥æ¡¼¥¶¤Ï°Ê²¼¤Î¤³¤È¤ò¥×¥í¥°¥é¥à¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡
 == Private Instance Methods
 --- pp(obj)    -> nil
 #@todo
-obj ¤ò $> ¤Ë pretty print ¤Ç½ÐÎÏ¤·¤Þ¤¹¡£
+obj ¤ò [[m:$>]] ¤Ë pretty print ¤Ç½ÐÎÏ¤·¤Þ¤¹¡£
 
 #@since 1.8.5 
 = reopen Object
