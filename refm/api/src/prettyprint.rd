@@ -1,3 +1,5 @@
+pretty printing アルゴリズムのためのライブラリです。
+
 = class PrettyPrint < Object
 
 pretty printing アルゴリズムのためのクラスです。
