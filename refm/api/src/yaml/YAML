@@ -11,21 +11,56 @@ YAML (YAML Ain't Markup Language) を扱うクラスです。
   * [[url:http://yaml4r.sourceforge.net/]]
   * [[url:http://yaml4r.sourceforge.net/cookbook/]]
   * [[url:http://yaml4r.sourceforge.net/doc/]]
-* [[unknown:Ruby with YAML|URL:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
-* [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-  * [[unknown:プログラマーのための YAML 入門 (初級編)|URL:http://jp.rubyist.net/magazine/?0009-YAML]]
-  * [[unknown:プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML]]
-  * [[unknown:プログラマーのための YAML 入門 (実践編)|URL:http://jp.rubyist.net/magazine/?0011-YAML]]
-  * [[unknown:プログラマーのための YAML 入門 (検証編)|URL:http://jp.rubyist.net/magazine/?0012-YAML]]
-  * [[unknown:プログラマーのための YAML 入門 (探索編)|URL:http://jp.rubyist.net/magazine/?0013-YAML]]
+* Ruby with YAML[[url:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
+* Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
+  * プログラマーのための YAML 入門 (初級編)[[url:http://jp.rubyist.net/magazine/?0009-YAML]]
+  * プログラマーのための YAML 入門 (中級編)[[url:http://jp.rubyist.net/magazine/?0010-YAML]]
+  * プログラマーのための YAML 入門 (実践編)[[url:http://jp.rubyist.net/magazine/?0011-YAML]]
+  * プログラマーのための YAML 入門 (検証編)[[url:http://jp.rubyist.net/magazine/?0012-YAML]]
+  * プログラマーのための YAML 入門 (探索編)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
 
 == Module Functions
 
 --- add_builtin_type(type_re){|obj| ...}
 #@todo
 
---- add_domain_type(domain, type_re){|obj| ...}
-#@todo
+--- add_domain_type(domain, type_re){|type, val| ...}
+#@#--- add_domain_type(domain, type_re){|obj| ...}
+#@# ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
+#@# ではブロックパラメータの数が違う。
+
+YAMLドメインに属しているクラスをYAMLに追加し、
+そのクラスを見つけたときの操作を指定します。
+
+@param domain YAMLのドメインを文字列で指定する。
+@param type_re 加えるクラスを指定する。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
+
+  require 'yaml'
+  
+  class Person
+    attr_accessor :name, :age
+  end
+  
+  str=<<EOT
+  --- !Qjitsu.com,2007-05-04/Person
+  name: eiji
+  age: 33
+  EOT
+  
+  YAML.each_document(str){|obj|
+    p obj
+  }
+  #=> #<YAML::DomainType:0x2b07974 @type_id="Person", @domain="Qjitsu.com,2007-05-04", @value={"name"=>"eiji", "age"=>33}> 
+  #
+  YAML.add_domain_type( "Qjitsu.com,2007-05-04", "Person" ) { |type, val|  
+    YAML.object_maker( Person, val )
+  }
+  YAML.each_document(str){|obj|
+    p obj
+  }
+  #=> #<Person:0x2b0762c @age=33, @name="eiji">
 
 --- add_private_type(type_re){|obj| ...}
 #@todo
@@ -317,6 +352,9 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 = reopen Object
 == instance methods
 --- to_yaml(opts = {})
+オブジェクトをYAMLドキュメントに変換します。
+@param opts YAMLドキュメント出力の際のオプションを指定する。
+
 #@todo
 
 --- to_yaml_style
