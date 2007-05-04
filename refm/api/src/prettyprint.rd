@@ -17,6 +17,39 @@ pretty printing アルゴリズムのためのクラスです。
  * 出力幅とバイト数が異なるような多バイト文字
  * 文字以外の整形
 
+== 使い方
+
+Pretty Print アルゴリズムはインデントと改行を、ツリー構造を作ることによって決定します。
+ユーザは以下のことを行います。
+
+ * [[m:PrettyPrint.new]] でバッファを生成する。このとき、バッファの幅と改行文字を指定する。
+ * [[m:PrettyPrint#text]] を使って、文字列を適宜 挿入する。
+ * [[m:PrettyPrint#group]] を使って子ノードをつくる。同時に子ノードのインデントの深さも決める。
+ * [[m:PrettyPrint#breakable]] を使って改行しても良い場所を指定する。
+
+同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。そして、
+子ノードで改行が発生した場合、親ノードでも改行が発生します。逆に親ノードの改行は、
+子ノードに伝播しません。
+
+ p2 = PrettyPrint.new('', 10)
+ s = 'hello'
+ p2.text(s)
+ p2.group(p2.indent + s.size + 1) do
+   p2.breakable
+   p2.text('a')
+   p2.breakable
+   p2.text('b')
+   p2.breakable
+   p2.text('c')
+ end
+ p2.flush
+ puts p2.output
+ #=>
+ hello
+       a
+       b
+       c
+
 === References
 Christian Lindig, Strictly Pretty, March 2000,
 [[url:http://www.st.cs.uni-sb.de/~lindig/papers/pretty/strictly-pretty.html]]
@@ -146,3 +179,18 @@ obj を width カラムのテキストとして自身に追加します。
       ... pretty printing yyy ...
     }
   }
+
+--- output    -> object
+#@todo
+
+--- maxwidth    -> Integer
+#@todo
+
+--- newline    -> String
+#@todo
+
+--- genspace    -> Proc
+#@todo
+
+--- indent    -> Integer
+#@todo
