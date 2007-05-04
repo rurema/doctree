@@ -73,9 +73,9 @@ output は出力先です。output は << メソッドを持っていなければなりません。
 
 @param output 出力先を指定します。output は << メソッドを持っていなければなりません。
 
-@param maxwidth は行の最大幅を指定します。ただし、改行できないものが渡された場合は、実際の出力幅は maxwidth を越えることがあります。
+@param maxwidth 行の最大幅を指定します。ただし、改行できないものが渡された場合は、実際の出力幅は maxwidth を越えることがあります。
 
-@param newline は改行に使われます。
+@param newline 改行に使われます。
 
 
 --- format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
@@ -127,7 +127,7 @@ obj を width カラムのテキストとして自身に追加します。
 --- nest(indent) {...}     -> ()
 #@todo
 
-自身の現在のインデントを indent ぶんだけ増加させてから、ブロックを実行し、元に戻します。
+自身の現在のインデントを indent だけ増加させてから、ブロックを実行し、元に戻します。
 
 @param indent インデントの増加分を整数で指定します。
 
