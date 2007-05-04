@@ -104,10 +104,10 @@ pretty_print ¥á¥½¥Ã¥É¤Ë¤ª¤¤¤Æ¡¢¥æ¡¼¥¶¤Ï°Ê²¼¤Î¤³¤È¤ò¥×¥í¥°¥é¥à¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡
   
   #=> 
   <hash>
-   :d => "dddddddddd...",
-   :a => "aaaaa",
-   :b => "bbbbbbbbbb",
-   :c => "cccccccccc..."
+    :d => "dddddddddd...",
+    :a => "aaaaa",
+    :b => "bbbbbbbbbb",
+    :c => "cccccccccc..."
   </hash>
 
 = reopen Kernel
