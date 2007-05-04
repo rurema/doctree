@@ -108,21 +108,6 @@ pretty_print есе╜е├е╔д╦дкддд╞бвецб╝е╢д╧░╩▓╝д╬д│д╚дЄе╫еэе░ещерд╣ды╔м═╫дмдвдъд▐д╣б
     :c => "cccccccccc..."
   </hash>
 
-= reopen Kernel
-== Private Instance Methods
---- pp(obj)    -> nil
-#@todo
-obj дЄ [[m:$>]] д╦ pretty print д╟╜╨╬╧д╖д▐д╣бг
-
-#@since 1.8.5 
-= reopen Object
-== Instance Methods
---- pretty_inspect
-#@todo
-
-self дЄ pp д╟╔╜╝ид╖д┐д╚днд╬╖ы▓╠дЄ╩╕╗·╬єд╚д╖д╞╩╓д╖д▐д╣бг
-#@end
-
 = class PP < PrettyPrint
 еке╓е╕езепе╚д╩д╔дЄ╕лдфд╣дп╜╨╬╧д╣дыд┐дсд╬епеще╣д╟д╣бг
 
@@ -130,8 +115,13 @@ self дЄ pp д╟╔╜╝ид╖д┐д╚днд╬╖ы▓╠дЄ╩╕╗·╬єд╚д╖д╞╩╓д╖д▐д╣бг
 --- pp(obj, out = $>, width = 79)    -> object
 #@todo
 obj дЄ out д╦╔¤ width д╟ pretty print д╖д▐д╣бг
+out дЄ╩╓д╖д▐д╣бг
 
-PP.pp д╧ out дЄ╩╓д╖д▐д╣бг
+@param obj ╔╜╝ид╖д┐ддеке╓е╕езепе╚дЄ╗╪─ъд╖д▐д╣бг
+
+@param out ╜╨╬╧└шдЄ╗╪─ъд╖д▐д╣бг<< есе╜е├е╔дм─ъ╡┴д╡дьд╞ддды╔м═╫дмдвдъд▐д╣бг
+
+@param width ╜╨╬╧└шд╬╔¤дЄ╗╪─ъд╖д▐д╣бг
 
   str = PP.pp([[:a, :b], [:a, [[:a, [:a, [:a, :b]]], [:a, :b],]]], '', 20)
   puts str
@@ -154,64 +144,62 @@ PP.pp д╧ out дЄ╩╓д╖д▐д╣бг
 
 --- singleline_pp(obj, out=$>)    -> object
 #@todo
-Outputs +obj+ to +out+ like PP.pp but with no indent and
-newline.
+obj дЄ out д╦╜╨╬╧д╖д▐д╣бг
+д┐д└д╖бведеєе╟еєе╚дт▓■╣╘дтд╖д▐д╗дєбг
+out дЄ╩╓д╖д▐д╣бг
 
-PP.singleline_pp returns +out+.
+@param obj ╔╜╝ид╖д┐ддеке╓е╕езепе╚дЄ╗╪─ъд╖д▐д╣бг
+
+@param out ╜╨╬╧└шдЄ╗╪─ъд╖д▐д╣бг<< есе╜е├е╔дм─ъ╡┴д╡дьд╞ддды╔м═╫дмдвдъд▐д╣бг
 
 == Instance Methods
 --- pp(obj)    -> ()
 #@todo
 
-Object#pretty_print дф Object#pretty_print_cycle дЄ╗╚д├д╞бв
+[[m:Object#pretty_print]] дф [[m:Object#pretty_print_cycle]] дЄ╗╚д├д╞бв
 obj дЄ pretty print е╨е├е╒ебд╦─╔▓├д╖д▐д╣бг
 
 obj дмд╣д╟д╦╜╨╬╧д╡дьд╞ддд┐д╚днд╦д╧ [[m:Object#pretty_print_cycle]]
 дм╗╚дядьд▐д╣бгд│дьд╧еке╓е╕езепе╚д╬╗▓╛╚д╬╧в║┐дмеыб╝е╫д╖д╞дддыд│д╚дЄ
 ░╒╠гд╖д▐д╣бг
 
+@param obj ╔╜╝ид╖д┐ддеке╓е╕езепе╚дЄ╗╪─ъд╖д▐д╣бг
+
 --- object_group(obj) { ... }    -> ()
 #@todo
 
 ░╩▓╝д╚┼∙▓┴д╩╞пдндЄд╣дыдтд╬д╟┤╩╩╪д╬д┐дсд╦═╤░╒д╡дьд╞ддд▐д╣бг
-
   group(1, '#<' + obj.class.name, '>') { ... }
 
 --- comma_breakable    -> ()
 #@todo
 
 ░╩▓╝д╚┼∙▓┴д╩╞пдндЄд╣дыдтд╬д╟┤╩╩╪д╬д┐дсд╦═╤░╒д╡дьд╞ддд▐д╣бг
-
   text ','
   breakable
 
---- seplist(list, sep=nil, iter_method=:each)    -> ()
+--- seplist(list, sep = lambda { comma_breakable }, iter_method = :each){|e| ...}    -> ()
 #@todo
 
-Adds a separated list.
-The list is separated by comma with breakable space, by default.
+еъе╣е╚д╬│╞═╫┴╟дЄ▓┐длд╟╢ш└┌дъд─д─бв╝л┐╚д╦─╔▓├д╖д╞дддпд┐дсд╦╗╚дядьд▐д╣бг
 
-seplist iterates the +list+ using +iter_method+.
-It yields each object to the block given for #seplist.
-The procedure +separator_proc+ is called between each yields.
+list дЄ iter_method д╦дшд├д╞еде╞еьб╝е╚д╖бв│╞═╫┴╟дЄ░·┐Їд╚д╖д╞е╓еэе├епдЄ╝┬╣╘д╖д▐д╣бг
+д▐д┐бвд╜дьд╛дьд╬е╓еэе├епд╬╝┬╣╘д╬╣ч┤╓д╦ sep дм╕╞д╨дьд▐д╣бг
 
-If the iteration is zero times, +separator_proc+ is not called at all.
-
-If +separator_proc+ is nil or not given,
-+lambda { comma_breakable }+ is used.
-If +iter_method+ is not given, :each is used.
-
-For example, following 3 code fragments has similar effect.
+д─д▐дъбв░╩▓╝д╬д╒д┐д─д╧╞▒├═д╟д╣бг
 
   q.seplist([1,2,3]) {|v| xxx v }
-
-  q.seplist([1,2,3], lambda { comma_breakable }, :each) {|v| xxx v }
 
   xxx 1
   q.comma_breakable
   xxx 2
   q.comma_breakable
   xxx 3
+
+@param list ╝л┐╚д╦─╔▓├д╖д┐дд╟█╬єдЄ═┐дид▐д╣бгiter_method дЄ┼м└┌д╦╗╪─ъд╣дьд╨бвEnumerable д╟д╩дпд╞дт╣╜ддд▐д╗дєбг
+@param sep ╢ш└┌дъдЄ╝л┐╚д╦─╔▓├д╣дые╓еэе├епдЄ═┐дид▐д╣бгlist дмеде╞еьб╝е╚д╡дьд╩ддд╩дщбвsep д╧╖шд╖д╞╕╞д╨дьд▐д╗дєбг
+
+@param iter_method list дЄеде╞еьб╝е╚д╣дыесе╜е├е╔дЄе╖еєе▄еыд╟═┐дид▐д╣бг
 
 = reopen Object
 == Instance Methods
@@ -221,7 +209,7 @@ For example, following 3 code fragments has similar effect.
 
 ░ь╚╠д╬еке╓е╕езепе╚д╬д┐дсд╬е╟е╒ейеые╚д╬ pretty print есе╜е├е╔д╟д╣бг
 д│д╬есе╜е├е╔д╧едеєе╣е┐еєе╣╩╤┐ЇдЄ╬є╡єд╣дыд┐дсд╦
-pretty_print_instance_variables дЄ╕╞д╙д▐д╣бг
+[[m:Object#pretty_print_instance_variables]] дЄ╕╞д╙д▐д╣бг
 
 еле╣е┐е▐еде║(║╞─ъ╡┴)д╡дьд┐ inspect дЄ self дм╗¤д─╛ь╣чбв
 self.inspect д╬╖ы▓╠дм╗╚дядьд▐д╣дмбвд│дьд╧▓■╣╘д╬е╥еєе╚дЄ╗¤д┴д▐д╗дєбг
@@ -230,11 +218,15 @@ self.inspect д╬╖ы▓╠дм╗╚дядьд▐д╣дмбвд│дьд╧▓■╣╘д╬е╥еєе╚дЄ╗¤д┴д▐д╗дєбг
 PP ете╕ехб╝еыд╧двдщдлд╕дс─ъ╡┴д╡дьд┐ pretty_print() есе╜е├е╔дЄ
 ┤╩╩╪д╬д┐дсд╦─є╢бд╖д╞ддд▐д╣бг
 
+@param pp [[c:PP]] еке╓е╕езепе╚д╟д╣бг
+
 --- pretty_print_cycle(pp)    -> ()
 #@todo
 
 ░ь╚╠д╬еке╓е╕езепе╚дме╡едепеыд╬░ь╔Їд╟двдыд│д╚дм╕б╜╨д╡дьд┐д╚днд╬д┐дсд╬
 е╟е╒ейеые╚д╬ pretty print есе╜е├е╔д╟д╣бг
+
+@param pp [[c:PP]] еке╓е╕езепе╚д╟д╣бг
 
 --- pretty_print_instance_variables    -> [String | Symbol]
 #@todo
@@ -255,3 +247,18 @@ If you implement #pretty_print, it can be used as follows.
 
 However, doing this requires that every class that #inspect is called on
 implement #pretty_print, or a RuntimeError will be raised.
+
+= reopen Kernel
+== Private Instance Methods
+--- pp(obj)    -> nil
+#@todo
+obj дЄ [[m:$>]] д╦ pretty print д╟╜╨╬╧д╖д▐д╣бг
+
+#@since 1.8.5 
+= reopen Object
+== Instance Methods
+--- pretty_inspect
+#@todo
+
+self дЄ pp д╟╔╜╝ид╖д┐д╚днд╬╖ы▓╠дЄ╩╕╗·╬єд╚д╖д╞╩╓д╖д▐д╣бг
+#@end
