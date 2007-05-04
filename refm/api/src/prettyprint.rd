@@ -155,7 +155,7 @@ obj を width カラムのテキストとして自身に追加します。
 
 バッファされたデータを出力します。
 
---- first?
+--- first?    -> boolean
 #@todo
 
 #@since 1.8.2
@@ -178,14 +178,24 @@ obj を width カラムのテキストとして自身に追加します。
 --- output    -> object
 #@todo
 
+自身の output を返します。
+
 --- maxwidth    -> Integer
 #@todo
+
+自身の幅を返します。
 
 --- newline    -> String
 #@todo
 
+自身の改行文字を返します。
+
 --- genspace    -> Proc
 #@todo
 
+空白を生成する Proc を返します。
+
 --- indent    -> Integer
 #@todo
+
+現在のインデントの深さを返します。
