@@ -1,6 +1,4 @@
-require prettyprint
-
-Pretty-printer
+オブジェクトなどを見やすく出力するためのライブラリです。
 
 === どちらが読みやすいでしょうか?
 
@@ -50,17 +48,73 @@ pp による pretty-print された出力:
 
 === 出力のカスタマイズ
 
-あなたのクラスの pritty print をカスタマイズしたい場合は、
-そのクラスで pretty_print(pp) メソッドを再定義します。
-このメソッドは引数をひとつ取ります。引数 pp は [[c:PP]] クラスのインスタンスです。
-このメソッドは出力に際して [[m:PP#text]], [[m:PP#breakable]], [[m:PP#nest]], [[m:PP#group]] および [[m:PP#pp]] を使います。前の4メソッドに関してはPPの親クラスのPrettyPrintで定義されています。[[m:PrettyPrint#text]], [[m:PrettyPrint#breakable]], [[m:PrettyPrint#nest]], [[m:PrettyPrint#group]] を参照してください。
+あるクラスの pp の出力を変えたい場合は、
+そのクラスで pretty_print メソッドを再定義します。
+このメソッドは [[c:PP]] オブジェクトを引数として取ります。
+
+Pretty Print アルゴリズムはインデントと改行を、ツリー構造を作ることによって決定します。そのため、
+pretty_print メソッドにおいて、ユーザは以下のことをプログラムする必要があります。
+
+ * [[m:PrettyPrint#group]] を使って子ノードをつくる。同時に子ノードのインデントの深さも決める。
+ * [[m:PrettyPrint#breakable]] を使って改行しても良い場所を指定する。
+ * [[m:PP#pp]] を使って出力したいインスタンス変数などを出力する。
+ * [[m:PrettyPrint#text]] を使って、出力が見やすくなるように「,」などの修飾文字を適宜挿入する。
+
+同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。そして、
+子ノードで改行が発生した場合、親ノードでも改行が発生します。逆に親ノードの改行は、
+子ノードに伝播しません。
+
+以下は Hash の Pretty Print のカスタマイズの例です。
+
+  require 'pp'
+  class Hash
+    def pretty_print(q)
+      q.group(2, "<hash>") do
+        q.breakable
+        first = true
+        self.each{|k, v|
+          unless first
+            q.text(',')          
+            q.breakable
+          end        
+          q.pp k
+          q.text ' => '
+          q.group(1) do          
+            q.breakable ''
+            if v.is_a?(String) and v.size > 10
+              q.pp(v[0..9] + '...')
+            else
+              q.pp v
+            end
+          end
+          first = false
+        }
+      end
+      q.breakable
+      q.text "</hash>"
+    end
+  
+    def pretty_print_cycle(q)
+      q.text(empty? ? '{}' : '{...}')
+    end
+  end
+  
+  h = {:a => 'a'*5, :b => 'b'*10, :c => 'c'*20, :d => 'd'*30}
+  pp h
+  
+  #=> 
+  <hash>
+   :d => "dddddddddd...",
+   :a => "aaaaa",
+   :b => "bbbbbbbbbb",
+   :c => "cccccccccc..."
+  </hash>
 
 = reopen Kernel
 == Private Instance Methods
---- pp(obj)
+--- pp(obj)    -> nil
 #@todo
 obj を $> に pretty print で出力します。
-nil を返します。
 
 #@since 1.8.5 
 = reopen Object
@@ -74,12 +128,9 @@ self を pp で表示したときの結果を文字列として返します。
 = class PP < PrettyPrint
 
 == Class Methods
---- pp(obj[, out[, width]])
+--- pp(obj, out = $>, width = 79)    -> object
 #@todo
 obj を out に幅 width で pretty print します。
-
-out を省略した場合は、$> が指定されたものとみなされます。
-width を省略した場合は、79 が指定されたものとみなされます。
 
 PP.pp は out を返します。
 
@@ -92,18 +143,17 @@ PP.pp は out を返します。
       [:a, [:a, :b]]],
      [:a, :b]]]]
 
---- sharing_detection
+--- sharing_detection    -> boolean
 #@todo
 
-共有検出フラグを boolean すなわち true か false で返します。
-デフォルトは false です。
+共有検出フラグを返します。デフォルトは false です。
 
 --- sharing_detection=(boolean_value)
 #@todo
 
 共有検出フラグを設定します。
 
---- singleline_pp(obj, out=$>)
+--- singleline_pp(obj, out=$>)    -> object
 #@todo
 Outputs +obj+ to +out+ like PP.pp but with no indent and
 newline.
@@ -111,24 +161,24 @@ newline.
 PP.singleline_pp returns +out+.
 
 == Instance Methods
---- pp(obj)
+--- pp(obj)    -> ()
 #@todo
 
 Object#pretty_print や Object#pretty_print_cycle を使って、
 obj を pretty print バッファに追加します。
 
-obj がすでに出力されていたときには Object#pretty_print_cycle
+obj がすでに出力されていたときには [[m:Object#pretty_print_cycle]]
 が使われます。これはオブジェクトの参照の連鎖がループしていることを
 意味します。
 
---- object_group(obj) { ... }
+--- object_group(obj) { ... }    -> ()
 #@todo
 
 以下と等価な働きをするもので簡便のために用意されています。
 
   group(1, '#<' + obj.class.name, '>') { ... }
 
---- comma_breakable
+--- comma_breakable    -> ()
 #@todo
 
 以下と等価な働きをするもので簡便のために用意されています。
@@ -136,10 +186,38 @@ obj がすでに出力されていたときには Object#pretty_print_cycle
   text ','
   breakable
 
+--- seplist(list, sep=nil, iter_method=:each)    -> ()
+#@todo
+
+Adds a separated list.
+The list is separated by comma with breakable space, by default.
+
+seplist iterates the +list+ using +iter_method+.
+It yields each object to the block given for #seplist.
+The procedure +separator_proc+ is called between each yields.
+
+If the iteration is zero times, +separator_proc+ is not called at all.
+
+If +separator_proc+ is nil or not given,
++lambda { comma_breakable }+ is used.
+If +iter_method+ is not given, :each is used.
+
+For example, following 3 code fragments has similar effect.
+
+  q.seplist([1,2,3]) {|v| xxx v }
+
+  q.seplist([1,2,3], lambda { comma_breakable }, :each) {|v| xxx v }
+
+  xxx 1
+  q.comma_breakable
+  xxx 2
+  q.comma_breakable
+  xxx 3
+
 = reopen Object
 == Instance Methods
 
---- pretty_print(pp)
+--- pretty_print(pp)    -> ()
 #@todo
 
 一般のオブジェクトのためのデフォルトの pretty print メソッドです。
@@ -153,13 +231,13 @@ self.inspect の結果が使われますが、これは改行のヒントを持ちません。
 PP モジュールはあらかじめ定義された pretty_print() メソッドを
 簡便のために提供しています。
 
---- pretty_print_cycle(pp)
+--- pretty_print_cycle(pp)    -> ()
 #@todo
 
 一般のオブジェクトがサイクルの一部であることが検出されたときのための
 デフォルトの pretty print メソッドです。
 
---- pretty_print_instance_variables
+--- pretty_print_instance_variables    -> [String | Symbol]
 #@todo
 
 ソートされたインスタンス変数の名前の配列を返します。
@@ -169,3 +247,12 @@ PP モジュールはあらかじめ定義された pretty_print() メソッドを
  
  [:@a, :@b]
 
+--- pretty_print_inspect    -> ()
+#@todo
+Is #inspect implementation using #pretty_print.
+If you implement #pretty_print, it can be used as follows.
+
+  alias inspect pretty_print_inspect
+
+However, doing this requires that every class that #inspect is called on
+implement #pretty_print, or a RuntimeError will be raised.
