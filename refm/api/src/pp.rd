@@ -124,6 +124,7 @@ self を pp で表示したときの結果を文字列として返します。
 #@end
 
 = class PP < PrettyPrint
+オブジェクトなどを見やすく出力するためのクラスです。
 
 == Class Methods
 --- pp(obj, out = $>, width = 79)    -> object
