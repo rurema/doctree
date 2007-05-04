@@ -166,12 +166,11 @@ out を返します。
 --- pp(obj)    -> ()
 #@todo
 
-[[m:Object#pretty_print]] や [[m:Object#pretty_print_cycle]] を使って、
-obj を pretty print バッファに追加します。
+[[m:Object#pretty_print]] を使って、obj を自身のバッファに追加します。
 
-obj がすでに出力されていたときには [[m:Object#pretty_print_cycle]]
-が使われます。これはオブジェクトの参照の連鎖がループしていることを
-意味します。
+obj がすでに、現在のノードの親において出力されていた場合には、
+参照のループが存在しているので、[[m:Object#pretty_print]] の代わりに
+[[m:Object#pretty_print_cycle]] が使われます。
 
 @param obj 表示したいオブジェクトを指定します。
 
@@ -198,15 +197,16 @@ list を iter_method によってイテレートし、各要素を引数としてブロックを実行します
 
 つまり、以下のふたつは同値です。
 
-  q.seplist([1,2,3]) {|v| xxx v }
+  q.seplist([1,2,3]) {|v| q.pp v }
 
-  xxx 1
+  q.pp 1
   q.comma_breakable
-  xxx 2
+  q.pp 2
   q.comma_breakable
-  xxx 3
+  q.pp 3
 
 @param list 自身に追加したい配列を与えます。iter_method を適切に指定すれば、Enumerable でなくても構いません。
+
 @param sep 区切りを自身に追加するブロックを与えます。list がイテレートされないなら、sep は決して呼ばれません。
 
 @param iter_method list をイテレートするメソッドをシンボルで与えます。
@@ -267,7 +267,7 @@ obj を [[m:$>]] に pretty print で出力します。
 #@since 1.8.5 
 = reopen Object
 == Instance Methods
---- pretty_inspect
+--- pretty_inspect    -> String
 #@todo
 
 self を pp で表示したときの結果を文字列として返します。
