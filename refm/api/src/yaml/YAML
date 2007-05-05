@@ -62,8 +62,55 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   }
   #=> #<Person:0x2b0762c @age=33, @name="eiji">
 
---- add_private_type(type_re){|obj| ...}
-#@todo
+--- add_private_type(type_re){|type, val| ...}
+#@#--- add_private_type(type_re){|obj| ...}
+
+プライベートタイプのクラスをYAMLに追加し、
+そのクラスを見つけたときの操作を指定します。
+
+@param type_re プライベートタイプのクラスを文字列で指定します。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
+
+  require 'yaml'
+  
+  class Person ; end
+  
+  str1=<<EOT
+  --- !!Person
+  name: taro
+  country: Japan
+  capital: Tokyo
+  EOT
+  
+  YAML.each_document(str1){|obj|
+    p obj
+  }
+  #=> #<YAML::PrivateType:0x2b07a14 @type_id="Person", @value={"name"=>"taro", "country"=>"Japan", "capital"=>"Tokyo"}>
+  YAML.add_private_type("Person"){|type, val|
+    YAML.object_maker(Person, val)
+  }
+  YAML.each_document(str1){|obj|
+    p obj
+  }
+  #=> #<Person:0x2b07640 @country="Japan", @capital="Tokyo", @name="taro">
+  
+  str2=<<EOT
+  --- !Qjitsu.com,2007-05-04/Person
+  name: eiji
+  age: 33
+  --- !!Person
+  name: ichiro
+  country: Japan
+  capital: Tokyo
+  EOT
+  
+  YAML.each_document(str2){|obj|
+    p obj
+  }
+  #=> #<YAML::DomainType:0x2b071a4 @type_id="Person", @domain="Qjitsu.com,2007-05-04", @value={"name"=>"eiji", "age"=>33}>
+  #=> #<Person:0x2b06eac @country="Japan", @capital="Tokyo", @name="ichiro">
+
 
 --- add_ruby_type(type){|obj| ...}
 #@todo
