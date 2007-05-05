@@ -2,17 +2,19 @@
 Iconv ¤Ï UNIX 95 ¤Î iconv() ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¤Ç¡¢
 ¤µ¤Þ¤¶¤Þ¤ÊÊ¸»ú¥³¡¼¥ÉÂÎ·Ï´Ö¤ÇÊ¸»úÎó¤ÎÊÑ´¹¤ò¹Ô¤Ê¤¤¤Þ¤¹¡£
 
-¾ÜºÙ¤Ï[[unknown:Open Group|URL:http://www.opengroup.org/]] ¤Î¥ª¥ó¥é¥¤¥ó¥É¥­¥å¥á¥ó¥È¤ò
+¾ÜºÙ¤Ï [[url:http://www.opengroup.org/]] ¤Î¥ª¥ó¥é¥¤¥ó¥É¥­¥å¥á¥ó¥È¤ò
 »²¾È¤·¤Æ²¼¤µ¤¤¡£
 
-  * [[unknown:iconv.h]]
   * [[man:iconv(3)]]
   * [[man:iconv_open(3)]]
   * [[man:iconv_close(3)]]
+  * [[url:http://www.opengroup.org/onlinepubs/009695399/basedefs/iconv.h.html]]
+
+=== Ãí°Õ
 
 ¤É¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤¬ÍøÍÑ¤Ç¤­¤ë¤«¤Ï¥×¥é¥Ã¥È¥Õ¥©¡¼¥à°ÍÂ¸¤Ç¤¹¡£¤µ¤é¤Ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°Ì¾¤ò¤¢¤é¤ï¤¹Ê¸»úÎó¤â¥×¥é¥Ã¥È¥Õ¥©¡¼¥à°ÍÂ¸¤Ç¤¹¡£ÆüËÜ¸ì EUC ¤ò¤¢¤é¤ï¤¹Ê¸»úÎó¤¬ EUC-JP, euc-jp, eucJP ¤Ê¤É°Û¤Ê¤ë¾ì¹ç¤¬¤¢¤ê¤Þ¤¹¡£¤³¤Î¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ë¤è¤ë°ã¤¤¤òµÛ¼ý¤¹¤ë¤¿¤á¤Ë¡¢
-[[unknown:"ruby-src:ext/iconv/charset_alias.rb"]] ¤¬ÍÑ°Õ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
-GNU ¥½¥Õ¥È¥¦¥§¥¢ [[unknown:texinfo|URL:http://www.gnu.org/software/texinfo/]] ¤Ë´Þ¤Þ¤ì¤ë¥Õ¥¡¥¤¥ë config.charset ¤ò°Ê²¼¤Î¥ß¥é¡¼¥µ¥¤¥È¤«¤é¼ê¤ËÆþ¤ì¤Æ
+¡Öext/iconv/charset_alias.rb¡× ¤¬ÍÑ°Õ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+GNU ¥½¥Õ¥È¥¦¥§¥¢ texinfo ([[url:http://www.gnu.org/software/texinfo/]]) ¤Ë´Þ¤Þ¤ì¤ë¥Õ¥¡¥¤¥ë config.charset ¤ò°Ê²¼¤Î¥ß¥é¡¼¥µ¥¤¥È¤«¤é¼ê¤ËÆþ¤ì¤Æ
 
  * [[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
  * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
@@ -37,7 +39,7 @@ config.charset ¤Î¥é¥¤¥»¥ó¥¹¤Ï LGPL ¤Ê¤Î¤Ç¡¢À¸À®¤µ¤ì¤¿ iconv.rb ¤Ë¤â LGPL ¤¬Å¬ÍÑ¤
   str << iconv.iconv(nil)
   p( str == sjis )
 
-  (1) ¿·¤·¤¯ [[c:Iconv]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òºî¤ê, [[m:Iconv#iconv]] ¥á¥½¥Ã¥É¤ò»È¤¦
+(1) ¿·¤·¤¯ [[c:Iconv]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òºî¤ê, [[m:Iconv#iconv]] ¥á¥½¥Ã¥É¤ò»È¤¦
       cd = Iconv.new(to, from)
       begin
         input.each {|s| output << cd.iconv(s)}
@@ -45,12 +47,12 @@ config.charset ¤Î¥é¥¤¥»¥ó¥¹¤Ï LGPL ¤Ê¤Î¤Ç¡¢À¸À®¤µ¤ì¤¿ iconv.rb ¤Ë¤â LGPL ¤¬Å¬ÍÑ¤
       ensure
         cd.close
       end
-  (2) [[m:Iconv.open]] ¤ò¥Ö¥í¥Ã¥¯¤Ä¤­¤Ç¸Æ¤Ó½Ð¤¹
+(2) [[m:Iconv.open]] ¤ò¥Ö¥í¥Ã¥¯¤Ä¤­¤Ç¸Æ¤Ó½Ð¤¹
       Iconv.open(to, from) do |cd|
         input.each {|s| output << cd.iconv(s)}
         output << cd.iconv(nil)
       end
-  (3) (2) ¤ÎÃ»½Ì·Ï
+(3) (2) ¤ÎÃ»½Ì·Ï
       Iconv.iconv(to, from, *input.to_a)
 
 === »²¹Í
@@ -58,61 +60,80 @@ config.charset ¤Î¥é¥¤¥»¥ó¥¹¤Ï LGPL ¤Ê¤Î¤Ç¡¢À¸À®¤µ¤ì¤¿ iconv.rb ¤Ë¤â LGPL ¤¬Å¬ÍÑ¤
   * É¸½àÅºÉÕ¥é¥¤¥Ö¥é¥ê¾Ò²ð¡ÚÂè 3 ²ó¡Û Kconv/NKF/Iconv ([[url:http://jp.rubyist.net/magazine/?0009-BundledLibraries#l30]])
 
 = class Iconv < Data
+iconv ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
 
 == Class Methods
 
---- new(to, from)
+--- new(to, from)    -> Iconv
 #@todo
 
-from ¤«¤é to ¤Ø¤Î¿·¤·¤¤ÊÑ´¹´ï¤òºî¤ê¡¢¤½¤ì¤òÊÖ¤·¤Þ¤¹¡£
-to ¤È from ¤ÏÊÑ´¹Àè¤ÈÊÑ´¹Á°¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤Ç¤¹¡£
+Ê¸»ú¥³¡¼¥É from ¤«¤é to ¤Ø¤Î¿·¤·¤¤ÊÑ´¹´ï¤òºî¤ê¡¢¤½¤ì¤òÊÖ¤·¤Þ¤¹¡£
 
-¤³¤Î¥á¥½¥Ã¥É¤¬µ¯¤³¤¹Îã³°¤Ï¼¡¤ÎÄÌ¤ê¤Ç¤¹¡£
-  * to ¤ä from ¤¬ String ¤Ç¤Ê¤¤¤È¤­ TypeError¡£
-  * to ¤ä from ¤Ç»ØÄê¤µ¤ì¤¿ÊÑ´¹´ï¤¬¸«¤Ä¤«¤é¤Ê¤¤¤È¤­
-    ArgumentError¡£
-  * [[man:iconv_open(3)]] ¤¬¼ºÇÔ¤·¤¿¤È¤­SystemCallError¡£
+@param to ÊÑ´¹Àè¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤òÉ½¤¹Ê¸»úÎó¤Ç¤¹¡£
 
---- open(to, from) {|cd| ...}
+@param from ÊÑ´¹Á°¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤òÉ½¤¹Ê¸»úÎó¤Ç¤¹¡£
+
+@raise TypeError to ¤ä from ¤¬ String ¤Ç¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
+
+@raise ArgumentError to ¤ä from ¤Ç»ØÄê¤µ¤ì¤¿ÊÑ´¹´ï¤¬¸«¤Ä¤«¤é¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
+
+@raise SystemCallError [[man:iconv_open(3)]] ¤¬¼ºÇÔ¤·¤¿¤È¤­È¯À¸¤·¤Þ¤¹¡£
+
+--- open(to, from)               -> Iconv
+--- open(to, from) {|cd| ...}    -> object
 #@todo
 
 ¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤Ê¤¤¾ì¹ç¤Ï [[m:Iconv.new]] ¤ÈÅù²Á¤Ç¤¹¡£
-¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤ë¤È¡¢ÊÑ´¹´ï¤ò°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¸Æ¤Ó¡¢ÊÑ´¹´ï¤òÊÄ¤¸¤Æ¡¢
+¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤ë¤È¡¢Iconv ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¡¢¤½¤ì¤ò°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯¤Î½ª¤ê¤Ë Iconv ¥ª¥Ö¥¸¥§¥¯¥È¤Ï close ¤µ¤ì¤Þ¤¹¡£
 ¥Ö¥í¥Ã¥¯¤ÎÃÍ¤òÊÖ¤·¤Þ¤¹¡£
 
---- iconv(to, from, *strs)
+--- iconv(to, from, *strs)    -> [String]
 #@todo
 
-¼¡¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
+Í¿¤¨¤é¤ì¤¿Ê¸»ú¥³¡¼¥É¤Ë¤·¤¿¤¬¤Ã¤Æ strs ¤òÊÑ´¹¤·¡¢·ë²Ì¤òÊ¸»úÎó¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
+¼¡¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
   Iconv.open(to, from) {|cd| (strs + [nil]).collect {|s| cd.iconv(s)}}
 
-to, from ¤Î°ÕÌ£¤Ï [[m:Iconv.new]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+@param to [[m:Iconv.new]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
-strs ¤ÏÊÑ´¹¤µ¤ì¤ëÊ¸»úÎó¤Ç¤¹¡£
+@param from [[m:Iconv.new]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@param strs ÊÑ´¹¤·¤¿¤¤Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
 
 ¤³¤Î¥á¥½¥Ã¥É¤Ï
 [[m:Iconv.new]], [[m:Iconv.open]] ¤ª¤è¤Ó [[m:Iconv#iconv]] ¤ÎÎã³°
 ¤òµ¯¤³¤·¤Þ¤¹¡£
 
---- conv(to, from, str)
+--- conv(to, from, str)     -> String
 #@todo
 
-¼¡¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
+Í¿¤¨¤é¤ì¤¿Ê¸»ú¥³¡¼¥É¤Ë¤·¤¿¤¬¤Ã¤Æ str ¤òÊÑ´¹¤·¡¢·ë²Ì¤òÊ¸»úÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
+¼¡¤Î¾ÊÎ¬·Á¤Ç¤¹¡£
   Iconv.iconv(to, from, str).join
 
-¾Ü¤·¤¯¤Ï [[m:Iconv.iconv]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+@param to [[m:Iconv.new]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@param from [[m:Iconv.new]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@param str ÊÑ´¹¤·¤¿¤¤Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï
+[[m:Iconv.new]], [[m:Iconv.open]] ¤ª¤è¤Ó [[m:Iconv#iconv]] ¤ÎÎã³°
+¤òµ¯¤³¤·¤Þ¤¹¡£
 
 #@since 1.9.0
---- list {|*aliases| ... }
+--- list                       -> [String]
+--- list {|*aliases| ... }     
 #@todo
 
 ³Æ¥¨¥¤¥ê¥¢¥¹¥»¥Ã¥È¤´¤È¤Ë·«¤êÊÖ¤¹¥¤¥Æ¥ì¡¼¥¿¤Ç¤¹¡£
-#@# Iterates each alias sets.
 ¥Ö¥í¥Ã¥¯¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤Ð¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°Ì¾¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 Iconv É¸½à¤Îµ¡Ç½¤Ç¤Ï¤Ê¤¤¤Î¤Ç¥µ¥Ý¡¼¥È¤µ¤ì¤ë¤«¤Ï¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ë°ÍÂ¸¤·¤Þ¤¹¡£
-¥µ¥Ý¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤ÏÎã³° NotImplementedError ¤òÅê¤²¤Þ¤¹¡£
+
+@raise NotImplementedError ¼Â¹Ô¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ç¥µ¥Ý¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 #@end
 
 --- charset_map
@@ -122,16 +143,14 @@ Returns the map from canonical name to system dependent name.
 
 == Instance Methods
 
---- close
+--- close    -> String
 #@todo
 
-ÊÑ´¹¤ò½ªÎ»¤·¤Þ¤¹¡£
+ÊÑ´¹¤ò½ªÎ»¤·¤Þ¤¹¡£½ÐÎÏ¥Ð¥Ã¥Õ¥¡¤ò½é´ü¥·¥Õ¥È¾õÂÖ¤ËÌá¤¹¤¿¤á¤ÎÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+½ÐÎÏ¤ÎÊ¸»úÉä¹æ²½Êý¼°¤¬ÆâÉô¾õÂÖ¤ò¤â»ý¤¿¤Ê¤¤¾ì¹ç¡¢¶õÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 ¤³¤Î¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤¿¤¢¤È¤Ç [[m:Iconv#iconv]] ¤¬¸Æ¤Ð¤ì¤ë¤ÈÎã³°¤¬
 µ¯¤­¤Þ¤¹¤¬¡¢close ¼«ÂÎ¤Ï·«ÊÖ¤·¸Æ¤Ð¤ì¤Æ¤âÀ®¸ù¤·¤Þ¤¹¡£
-
-ÃÍ¤È¤·¤Æ¡¢
-½ÐÎÏ¥Ð¥Ã¥Õ¥¡¤ò½é´ü¥·¥Õ¥È¾õÂÖ¤ËÌá¤¹¤¿¤á¤Î¥Ð¥¤¥ÈÎó¤ò´Þ¤àÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
 Îã:
 
@@ -140,28 +159,28 @@ Returns the map from canonical name to system dependent name.
   i.iconv("\273\372")     #=> ";z"
   i.close                 #=> "\e(B"
 
---- iconv(str, [ start = 0, [ length = -1 ] ])
+--- iconv(str, start = 0, length = -1)    -> String
 #@todo
 
 Ê¸»úÎó¤ÎÊÑ´¹¤ò³«»Ï¤·¡¢ÊÑ´¹¸å¤ÎÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 str ¤¬Ê¸»úÎó¤Î¾ì¹ç¡¢str[start, length] ¤òÊÑ´¹¤·¡¢
 ÊÑ´¹¸å¤ÎÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-str ¤ÏÊÑ´¹¤µ¤ì¤ëÊ¸»úÎó¤Þ¤¿¤Ï nil ¤Ç¤¹¡£
-start ¤Ï str ¤Î¤¦¤ÁÊÑ´¹¤ò³«»Ï¤¹¤ë¥ª¥Õ¥»¥Ã¥È¤ò»ØÄê¤·¤Þ¤¹¡£
-length ¤Ï str ¤Î¤¦¤ÁÊÑ´¹¤¹¤ëÄ¹¤µ¤Ç¡¢
-nil ¤« -1 ¤Î¤È¤­¤Ï¡¢start °Ê¹ßÁ´Éô¤ò°ÕÌ£¤·¤Þ¤¹¡£
-
 str ¤¬ nil ¤Î¾ì¹ç¡¢ÊÑ´¹´ï¤ò¤½¤Î½é´ü¥·¥Õ¥È¾õÂÖ¤Ë¤·¡¢
 ½ÐÎÏ¥Ð¥Ã¥Õ¥¡¤ò½é´ü¥·¥Õ¥È¾õÂÖ¤ËÌá¤¹¤¿¤á¤Î¥Ð¥¤¥ÈÎó¤«¤é¤Ê¤ëÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+½ÐÎÏ¤ÎÊ¸»úÉä¹æ²½Êý¼°¤¬ÆâÉô¾õÂÖ¤ò¤â»ý¤¿¤Ê¤¤¾ì¹ç¡¢¶õÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-¤½¤ÎÂ¾¤Î¾ì¹ç¤ÏÎã³°¤òµ¯¤³¤·¤Þ¤¹¡£
+@param str ÊÑ´¹¤µ¤ì¤ëÊ¸»úÎó¤Þ¤¿¤Ï nil ¤ò»ØÄê¤·¤Þ¤¹¡£
 
-¤³¤Î¥á¥½¥Ã¥É¤Ïµ¯¤³¤¹Îã³°¤Ï
-[[m:Iconv::IllegalSequence]]¡¢
-[[m:Iconv::InvalidCharacter]]¡¢
-¤ª¤è¤Ó [[m:Iconv::OutOfRange]]
-¤Ç¤¹¡£
+@param start str ¤Î¤¦¤ÁÊÑ´¹¤ò³«»Ï¤¹¤ë¥ª¥Õ¥»¥Ã¥È¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param length str ¤Î¤¦¤ÁÊÑ´¹¤¹¤ëÄ¹¤µ¤ò»ØÄê¤·¤Þ¤¹¡£nil ¤« -1 ¤Î¤È¤­¤Ï¡¢start °Ê¹ßÁ´Éô¤ò°ÕÌ£¤·¤Þ¤¹¡£
+
+@raise Iconv::IllegalSequence
+
+@raise Iconv::InvalidCharacter
+
+@raise Iconv::OutOfRange
 
 = module Iconv::Failure
 
@@ -169,7 +188,7 @@ str ¤¬ nil ¤Î¾ì¹ç¡¢ÊÑ´¹´ï¤ò¤½¤Î½é´ü¥·¥Õ¥È¾õÂÖ¤Ë¤·¡¢
 
 == Instance Methods
 
---- success
+--- success    -> String
 #@todo
 
 Îã³°¤¬µ¯¤³¤ë¤Þ¤Ç¤ËÊÑ´¹¤ËÀ®¸ù¤·¤¿Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
@@ -178,13 +197,13 @@ str ¤¬ nil ¤Î¾ì¹ç¡¢ÊÑ´¹´ï¤ò¤½¤Î½é´ü¥·¥Õ¥È¾õÂÖ¤Ë¤·¡¢
 °ÊÁ°¤ÎÎã³°¤¬Îã³°¤¬µ¯¤³¤ë¤Þ¤Ç¤ËÊÑ´¹¤ËÀ®¸ù¤·¤¿Ê¸»úÎó¤òÍ×ÁÇ¤È¤¹¤ëÇÛÎó¤Ç¤¹¡£
 ºÇ¸å¤ÎÍ×ÁÇ¤ÏÊÑ´¹Ãæ¤ÎÊ¸»úÎó¤Ç¤¹¡£
 
---- failed
+--- failed    -> String
 #@todo
 
 [[c:Iconv]] ¤ËÅÏ¤µ¤ì¤¿Ê¸»úÎó¤Î¤¦¤Á¡¢
 Îã³°¤¬µ¯¤³¤Ã¤¿°ÌÃÖ¤«¤é¤Ï¤¸¤Þ¤ëÉôÊ¬¤òÊÖ¤·¤Þ¤¹¡£
 
---- inspect
+--- inspect    -> String
 #@todo
 
 #<type: "success", "failed"> ¤Î¤è¤¦¤Ê·Á¤ò¤·¤¿
