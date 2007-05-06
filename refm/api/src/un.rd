@@ -22,7 +22,7 @@ unがワイルドカード展開([[m:Dir.glob]]参照)します(Unix ではシェ
 
 = reopen Kernel
 == Private Instance Methods
---- chmod()   
+--- chmod -> ()
 #@todo
 Change the mode of each FILE to OCTAL-MODE.
 
@@ -30,7 +30,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
   -v          verbose
 
---- cp()   
+--- cp -> ()
 #@todo
 Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY
 
@@ -40,13 +40,13 @@ Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY
   -r          copy recursively
   -v          verbose
 
---- help()   
+--- help -> ()
 #@todo
 Display help message.
 
   ruby -run -e help [COMMAND]
 
---- install()   
+--- install -> ()
 #@todo
 Copy SOURCE to DEST.
 
@@ -57,7 +57,7 @@ Copy SOURCE to DEST.
   -m          set permission mode (as in chmod), instead of 0755
   -v          verbose
 
---- ln()   
+--- ln -> ()
 #@todo
 Create a link to the specified TARGET with LINK_NAME.
 
@@ -67,7 +67,7 @@ Create a link to the specified TARGET with LINK_NAME.
   -f          remove existing destination files
   -v          verbose
 
---- mkdir()   
+--- mkdir -> ()
 #@todo
 Create the DIR, if they do not already exist.
 
@@ -76,7 +76,7 @@ Create the DIR, if they do not already exist.
   -p          no error if existing, make parent directories as needed
   -v          verbose
 
---- mv()   
+--- mv -> ()
 #@todo
 Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
 
@@ -84,7 +84,7 @@ Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
 
   -v          verbose
 
---- rm()   
+--- rm -> ()
 #@todo
 Remove the FILE
 
@@ -94,7 +94,7 @@ Remove the FILE
   -r          remove the contents of directories recursively
   -v          verbose
 
---- rmdir()   
+--- rmdir -> ()
 #@todo
 Remove the DIR.
 
@@ -102,7 +102,7 @@ Remove the DIR.
 
   -v          verbose
 
---- touch()   
+--- touch -> ()
 #@todo
 Update the access and modification times of each FILE to the current time.
 
