@@ -6,7 +6,7 @@
 
 = reopen Kernel
 
-== Module Functions
+== Private Instance Methods
 
 #@since 1.8.0
 --- timeout(sec) {|i| .... }

@@ -105,7 +105,7 @@ alias TkVirtualEvent
 
 = reopen Kernel
 
-== Module Functions
+== Private Instance Methods
 
 --- Mainloop
 #@todo

@@ -48,10 +48,9 @@ URI オブジェクトは直接読み込むことができます。
   str = uri.read
   p str.base_uri
 
-
 = redefine Kernel
 
-== Module Functions
+== Private Instance Methods
 
 --- open(name, *rest)                -> StringIO | File
 --- open(name, *rest) {|ouri| ...}   -> nil

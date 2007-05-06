@@ -34,7 +34,7 @@ parsearg ライブラリのオプション解析規則は
 
 = reopen Kernel
 
-== Module Functions
+== Private Instance Methods
 
 --- parseArgs(min_argc，check_opts，single_opts，*opts)
 #@todo

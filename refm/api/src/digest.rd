@@ -252,12 +252,9 @@ Resets the digest to the initial state and returns self.
 
 This method is overridden by each implementation subclass.
 
-
 #@since 1.8.6
 = reopen Kernel
-
-== Module Functions
-
+== Private Instance Methods
 --- Digest(name)
 #@todo
 #@end

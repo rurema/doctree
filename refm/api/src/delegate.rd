@@ -44,7 +44,7 @@ p a         # => [25]
 
 = reopen Kernel
 
-== Module Functions
+== Private Instance Methods
 
 --- DelegateClass(superclass)
 #@todo
