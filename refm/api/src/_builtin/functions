@@ -1,4 +1,4 @@
-== Private Instance Methods
+== Module Functions
 
 --- `(str)
 #@todo
@@ -1212,7 +1212,7 @@ hook の配列を返します(ブロックで登録されていれば
 --- trap(signal) { ... }
 #@todo
 
-※ Ruby 1.8 以降では [[m:Signal.trap]] を推奨します。
+※ Ruby 1.8 以降では [[m:Signal.#trap]] を推奨します。
 
 signal で指定された割り込みにたいするハンドラとして
 command を登録します。signal はシグナル名の

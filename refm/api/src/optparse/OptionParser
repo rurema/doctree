@@ -503,7 +503,7 @@ file を読み込んで各行に対して parse を行ないます。
 #@todo
 
 環境変数 env に対して
-[[m:Shellwords.shellwords]] を呼
+[[m:Shellwords.#shellwords]] を呼
 んで配列にしてから parse を行ないます。
 
 @param env 環境変数名を文字列で与えます。

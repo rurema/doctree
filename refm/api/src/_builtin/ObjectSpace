@@ -121,14 +121,14 @@ obj を返します。
 
 proc をファイナライザとして設定します。
 
-[[m:ObjectSpace.call_finalizer]] で指定したオブジェクトが解放され
+[[m:ObjectSpace.#call_finalizer]] で指定したオブジェクトが解放され
 る時、そのオブジェクトの ID(c.f [[m:Object#__id__]])を引数に
 ファイナライザが評価されます。
 
 proc を返します。
 
 このメソッドは、obsolete です。代わりに
-[[m:ObjectSpace.define_finalizer]] を使用してください
+[[m:ObjectSpace.#define_finalizer]] を使用してください
 
 --- call_finalizer(obj)     ((<obsolete>))
 #@todo
@@ -152,5 +152,5 @@ obj を返します。
 proc を返します。
 
 このメソッドは、obsolete です。代わりに
-[[m:ObjectSpace.undefine_finalizer]] を使用してくださ
+[[m:ObjectSpace.#undefine_finalizer]] を使用してくださ
 い。

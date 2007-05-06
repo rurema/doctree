@@ -2,7 +2,7 @@
 = class YAML::Store < PStore
 
 [[c:PStore]] の [[c:YAML]] 版です。
-[[m:Marshal.dump]] したバイナリ形式の
+[[m:Marshal.#dump]] したバイナリ形式の
 代わりに YAML 形式でファイルに保存します。
 
 使い方は [[c:PStore]] とほとんど同じです。

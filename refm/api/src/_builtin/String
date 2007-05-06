@@ -1660,10 +1660,10 @@ swapcase! は self を変更して返しますが、置換が起こら
 変換対象が空文字列であれば 0.0 を返します。
 
 [[m:String#hex]], [[m:String#oct]], [[m:String#to_i]],
-[[m:Kernel.Integer]], [[m:Kernel.Float]] も参照してください。
+[[m:Kernel.#Integer]], [[m:Kernel.#Float]] も参照してください。
 
 逆に、数値を文字列に変換するには
-[[m:Kernel.sprintf]],[[m:String#%]],[[m:Integer#to_s]]
+[[m:Kernel.#sprintf]],[[m:String#%]],[[m:Integer#to_s]]
 を使用します。
 
 --- to_i(base = 10) -> Integer
@@ -1713,11 +1713,11 @@ swapcase! は self を変更して返しますが、置換が起こら
 @return        整数
 
 このメソッドの逆に数値を文字列に変換するには、
-[[m:Kernel.sprintf]], [[m:String#%]], [[m:Integer#to_s]]
+[[m:Kernel.#sprintf]], [[m:String#%]], [[m:Integer#to_s]]
 を使用します。
 
 [[m:String#hex]], [[m:String#oct]], [[m:String#to_f]],
-[[m:Kernel.Integer]], [[m:Kernel.Float]]
+[[m:Kernel.#Integer]], [[m:Kernel.#Float]]
 も参照してください。
 
 --- to_s -> self

@@ -36,7 +36,7 @@ filename が存在する時、真を返します。
 
 filename が存在する時、真を返します。
 このメソッドはobsoleteです。
-[[m:FileTest.exist?]]を使って下さい。
+[[m:FileTest.#exist?]]を使って下さい。
 
 --- grpowned?(filename)
 #@todo
@@ -118,7 +118,7 @@ filename が [[man:setgid(2)]] されている時に真を返
 filename のサイズを返します。filename が存在しなければ
 例外 [[c:Errno::EXXX]](おそらく Errno::ENOENT)が発生します。
 
-[[m:FileTest.size?]], [[m:FileTest.zero?]] も参
+[[m:FileTest.#size?]], [[m:FileTest.#zero?]] も参
 照してください。
 
 --- size?(filename)
@@ -127,7 +127,7 @@ filename のサイズを返します。filename が存在しなければ
 filename のサイズを返します。filename が存在しない時や
 filename のサイズが0の時には nil を返します。
 
-[[m:FileTest.size]], [[m:FileTest.zero?]] も参照
+[[m:FileTest.#size]], [[m:FileTest.#zero?]] も参照
 してください。
 
 --- sticky?(filename)
@@ -158,7 +158,7 @@ filename が実ユーザ/実グループによって書き込み可である時、真
 filename が存在して、そのサイズが 0 である時、真を返します。
 filename が存在しない場合は false を返します。
 
-[[m:FileTest.size]], [[m:FileTest.size?]], も参
+[[m:FileTest.#size]], [[m:FileTest.#size?]], も参
 照してください。
 
 #@since 1.9.0

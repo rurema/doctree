@@ -12,12 +12,12 @@
 
 == Class Methods
 
---- parse(date, now=Time.now)
---- parse(date, now=Time.now) {|year| year}
+--- parse(date, now = Time.now)
+--- parse(date, now = Time.now) {|year| year }
 #@todo
 
-dateを[[m:ParseDate.parsedate]] によって
-パースして[[c:Time]]オブジェクトに変換します。
+date を [[m:ParseDate.#parsedate]] によって
+パースして [[c:Time]]オブジェクトに変換します。
 
 ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
@@ -27,13 +27,11 @@ dateを[[m:ParseDate.parsedate]] によって
 該当要素が使われます。
 下位の要素がなかったり壊れていた場合、最小値(1か0)が使われます。
 
-
   # 現在時刻が "Thu Nov 29 14:33:20 GMT 2001" で
   # タイムゾーンがGMTとすると:
   Time.parse("16:30")     #=> Thu Nov 29 16:30:00 GMT 2001
   Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
   Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
-
 
 [[lib:parsedate]]がdateから情報を取り出せないとき、
 または [[c:Time]] クラスが指定された日時を表現できないときに

@@ -8,39 +8,27 @@
 
 = module Etc
 
+/etc に存在するデータベースから情報を得るためのモジュールです。
+クラスにインクルードして使うこともできます。
+
 == Module Functions
 
-#@if (version >= "1.8.1")
+#@since 1.8.1
 --- endgrent
 #@todo
 
-#@end
-
-#@if (version >= "1.8.1")
 --- endpwent
 #@todo
 
-#@end
-
-#@if (version >= "1.8.1")
 --- getgrent
 #@todo
 
-#@end
-
-#@if (version >= "1.8.1")
 --- getpwent
 #@todo
 
-#@end
-
-#@if (version >= "1.8.1")
 --- setgrent
 #@todo
 
-#@end
-
-#@if (version >= "1.8.1")
 --- setpwent
 #@todo
 
@@ -54,7 +42,7 @@
 getlogin は su などでログイン時のユーザとは異なるユーザになっている場合、
 現在ではなくログイン時のユーザを返します。
 
-このメソッドが失敗した場合は [[m:Etc.getpwuid]] に
+このメソッドが失敗した場合は [[m:Etc.#getpwuid]] に
 フォールバックするとよいでしょう。
 
 たとえば、環境変数 USER などもあわせて、以下のようにフォールバックできます。
@@ -121,7 +109,7 @@ group データベースを検索し、グループ ID が gid
 #@todo
 
 name という名前のグループエントリを返します。
-戻り値は [[m:Etc.getgrgid]] と同様です。
+戻り値は [[m:Etc.#getgrgid]] と同様です。
 
 詳細は[[man:getgrnam(3)]] を参照してください。
 

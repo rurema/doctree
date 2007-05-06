@@ -42,7 +42,7 @@ error is raised.
 Get the front object of the current server.
 
 This raises a DRbServerNotFound error if there is no current
-server. See [[m:DRb.current_server]].
+server. See [[m:DRb.#current_server]].
 
 --- here?(uri)
 #@todo

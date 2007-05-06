@@ -1,9 +1,11 @@
 = module Readline
+
 GNU Readline によるコマンドライン入力インタフェースを提供するモジュー
 ルです。
 
 === 備考
-* Readline.readline メソッドはスレッドに対応しています。
+
+* [[m:Readline.#readline]] メソッドはスレッドに対応しています。
   入力待ち状態のときはスレッドコンテキストの切替えが発生します。
 
 * [[url:http://www.gnu.org/directory/readline.html]]
@@ -171,7 +173,7 @@ bool が真ならば区別しません。
 --- HISTORY
 #@todo
 Readlineモジュールで入力した内容は入力履歴として記録されます(有効にし
-ていればですが。[[m:Readline.readline]] を参照)
+ていればですが。[[m:Readline.#readline]] を参照)
 
 この定数により、入力履歴の内容にアクセスすることができます。おおよそ、
 [[c:Array]] クラスのインスタンスのように振舞います。

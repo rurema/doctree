@@ -360,80 +360,85 @@ Pathname.new(File.join(self.to_s, *args)) と同じです。 (cf. [[m:File.join]])
 File.split(self.to_s) と同じです。 (cf. [[m:File.split]])
 
 --- blockdev?
-FileTest.blockdev?(self.to_s) と同じです。 (cf. [[m:FileTest.blockdev?]])
+FileTest.blockdev?(self.to_s) と同じです。 (cf. [[m:FileTest.#blockdev?]])
 
 --- chardev?
-FileTest.chardev?(self.to_s) と同じです。 (cf. [[m:FileTest.chardev?]])
+FileTest.chardev?(self.to_s) と同じです。 (cf. [[m:FileTest.#chardev?]])
 
 --- executable?
-FileTest.executable?(self.to_s) と同じです。 (cf. [[m:FileTest.executable?]])
+FileTest.executable?(self.to_s) と同じです。 (cf. [[m:FileTest.#executable?]])
 
 --- executable_real?
-FileTest.executable_real?(self.to_s) と同じです。 (cf. [[m:FileTest.executable_real?]])
+FileTest.executable_real?(self.to_s) と同じです。 
+(cf. [[m:FileTest.#executable_real?]])
 
 --- exist?
-FileTest.exist?(self.to_s) と同じです。 (cf. [[m:FileTest.exist?]])
+FileTest.exist?(self.to_s) と同じです。 (cf. [[m:FileTest.#exist?]])
 
 --- grpowned?
-FileTest.grpowned?(self.to_s) と同じです。 (cf. [[m:FileTest.grpowned?]])
+FileTest.grpowned?(self.to_s) と同じです。 (cf. [[m:FileTest.#grpowned?]])
 
 --- directory?
-FileTest.directory?(self.to_s) と同じです。 (cf. [[m:FileTest.directory?]])
+FileTest.directory?(self.to_s) と同じです。 (cf. [[m:FileTest.#directory?]])
 
 --- file?
-FileTest.file?(self.to_s) と同じです。 (cf. [[m:FileTest.file?]])
+FileTest.file?(self.to_s) と同じです。 (cf. [[m:FileTest.#file?]])
 
 --- pipe?
-FileTest.pipe?(self.to_s) と同じです。 (cf. [[m:FileTest.pipe?]])
+FileTest.pipe?(self.to_s) と同じです。 (cf. [[m:FileTest.#pipe?]])
 
 --- socket?
-FileTest.socket?(self.to_s) と同じです。 (cf. [[m:FileTest.socket?]])
+FileTest.socket?(self.to_s) と同じです。 (cf. [[m:FileTest.#socket?]])
 
 --- owned?
-FileTest.owned?(self.to_s) と同じです。 (cf. [[m:FileTest.owned?]])
+FileTest.owned?(self.to_s) と同じです。 (cf. [[m:FileTest.#owned?]])
 
 --- readable?
-FileTest.readable?(self.to_s) と同じです。 (cf. [[m:FileTest.readable?]])
+FileTest.readable?(self.to_s) と同じです。 (cf. [[m:FileTest.#readable?]])
 
 --- readable_real?
-FileTest.readable_real?(self.to_s) と同じです。 (cf. [[m:FileTest.readable_real?]])
+FileTest.readable_real?(self.to_s) と同じです。 
+(cf. [[m:FileTest.#readable_real?]])
 
 --- setuid?
-FileTest.setuid?(self.to_s) と同じです。 (cf. [[m:FileTest.setuid?]])
+FileTest.setuid?(self.to_s) と同じです。 (cf. [[m:FileTest.#setuid?]])
 
 --- setgid?
-FileTest.setgid?(self.to_s) と同じです。 (cf. [[m:FileTest.setgid?]])
+FileTest.setgid?(self.to_s) と同じです。 (cf. [[m:FileTest.#setgid?]])
 
 --- size
-FileTest.size(self.to_s) と同じです。 (cf. [[m:FileTest.size]])
+FileTest.size(self.to_s) と同じです。 (cf. [[m:FileTest.#size]])
 
 --- size?
-FileTest.size?(self.to_s) と同じです。 (cf. [[m:FileTest.size?]])
+FileTest.size?(self.to_s) と同じです。 (cf. [[m:FileTest.#size?]])
 
 --- sticky?
-FileTest.sticky?(self.to_s) と同じです。 (cf. [[m:FileTest.sticky?]])
+FileTest.sticky?(self.to_s) と同じです。 (cf. [[m:FileTest.#sticky?]])
 
 --- symlink?
-FileTest.symlink?(self.to_s) と同じです。 (cf. [[m:FileTest.symlink?]])
+FileTest.symlink?(self.to_s) と同じです。 (cf. [[m:FileTest.#symlink?]])
 
 #@since 1.8.5
 
 --- world_readable?
-FileTest.world_readable?(self.to_s) と同じです。 (cf. [[m:FileTest.world_readable?]])
+FileTest.world_readable?(self.to_s) と同じです。 
+(cf. [[m:FileTest.#world_readable?]])
 
 --- world_writable?
-FileTest.world_writable?(self.to_s) と同じです。 (cf. [[m:FileTest.world_writable?]])
+FileTest.world_writable?(self.to_s) と同じです。 
+(cf. [[m:FileTest.#world_writable?]])
 
 #@end
 
 --- writable?
-FileTest.writable?(self.to_s) と同じです。 (cf. [[m:FileTest.writable?]])
+FileTest.writable?(self.to_s) と同じです。 (cf. [[m:FileTest.#writable?]])
 
 --- writable_real?
-FileTest.writable_real?(self.to_s) と同じです。 (cf. [[m:FileTest.writable_real?]])
+FileTest.writable_real?(self.to_s) と同じです。 
+(cf. [[m:FileTest.#writable_real?]])
 
 --- zero?
-FileTest.zero?(self.to_s) と同じです。 (cf. [[m:FileTest.zero?]])
+FileTest.zero?(self.to_s) と同じです。 (cf. [[m:FileTest.#zero?]])
 
 --- chdir(&block)
 Dir.chdir(self.to_s, &block) と同じです。 (cf. [[m:Dir.chdir]])
@@ -474,13 +479,13 @@ self 配下のすべてのファイルやディレクトリを
   require 'find'
   Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
-と同じです。 (cf. [[m:Find.find]])
+と同じです。 (cf. [[m:Find.#find]])
 
 --- mkpath
-FileUtils.mkpath(self.to_s) と同じです。 (cf. [[m:FileUtils.mkpath]])
+FileUtils.mkpath(self.to_s) と同じです。 (cf. [[m:FileUtils.#mkpath]])
 
 --- rmtree
-FileUtils.rm_r(self.to_s) と同じです。 (cf. [[m:FileUtils.rm_r]])
+FileUtils.rm_r(self.to_s) と同じです。 (cf. [[m:FileUtils.#rm_r]])
 
 --- unlink
 --- delete

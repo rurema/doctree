@@ -1,7 +1,7 @@
 #@since 1.8.0
 = module Process::Status
 
-[[m:Process.wait]] などで生成されるオブジェクト。プロセスの終
+[[m:Process.#wait]] などで生成されるオブジェクト。プロセスの終
 了ステータスを表現します。
 
 使用例

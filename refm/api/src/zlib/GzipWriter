@@ -47,7 +47,7 @@ io と関連付けられた GzipWriter オブジェクトを作成し、
 
 filename で指定されるファイルを gzip 圧縮データの
 書き出し用にオープンします。GzipWriter オブジェクトを返します。
-その他詳細は [[m:GzipWriter.new]] や [[m:GzipWriter.wrap]] と
+その他詳細は [[m:Zlib::GzipWriter.new]] や [[m:Zlib::GzipWriter.wrap]] と
 同じです。
 
 

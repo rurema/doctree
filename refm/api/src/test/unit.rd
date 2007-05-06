@@ -123,7 +123,7 @@ console を使う (default)
 === いつテストは実行されるか
 
 上の例では、テストクラスを「定義しただけ」で、テストが実行されています。
-これは、[[m:Kernel#at_exit]] と [[m:ObjectSpace.each_object]] を使って
+これは、[[m:Kernel#at_exit]] と [[m:ObjectSpace.#each_object]] を使って
 実装されています。つまり、上の例ではテストは終了時の後処理として実行されます。
 
 大抵の場合は、これで問題ありません。が、そうでない場合は、

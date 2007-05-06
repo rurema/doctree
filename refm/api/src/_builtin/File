@@ -215,7 +215,7 @@ FNM_DOTMATCH
 #@todo
 
 ファイルのタイプを表す文字列を返します。文字列は以下のうちのいずれ
-かです。[[m:File.lstat(filename).ftype]] と同じで
+かです。File.lstat(filename).ftype と同じで
 す(シンボリックリンクに対して "link" を返します)。
 
   "file"
@@ -353,32 +353,32 @@ umask を変更します。変更前の umask の値を返します。umask を
 --- blockdev?(path)
 #@todo
 
-[[m:FileTest.blockdev?]] と同じです。
+[[m:FileTest.#blockdev?]] と同じです。
 
 --- chardev?(path)
 #@todo
 
-[[m:FileTest.chardev?]] と同じです。
+[[m:FileTest.#chardev?]] と同じです。
 
 --- directory?(path)
 #@todo
 
-[[m:FileTest.directory?]] と同じです。
+[[m:FileTest.#directory?]] と同じです。
 
 --- executable?(path)
 #@todo
 
-[[m:FileTest.executable?]] と同じです。
+[[m:FileTest.#executable?]] と同じです。
 
 --- executable_real?(path)
 #@todo
 
-[[m:FileTest.executable_real?]] と同じです。
+[[m:FileTest.#executable_real?]] と同じです。
 
 --- exist?(path)
 #@todo
 
-[[m:FileTest.exist?]] と同じです。
+[[m:FileTest.#exist?]] と同じです。
 
 --- exists?(path)
 #@todo
@@ -390,87 +390,87 @@ umask を変更します。変更前の umask の値を返します。umask を
 --- file?(path)
 #@todo
 
-[[m:FileTest.file?]] と同じです。
+[[m:FileTest.#file?]] と同じです。
 
 --- grpowned?(path)
 #@todo
 
-[[m:FileTest.grpowned?]] と同じです。
+[[m:FileTest.#grpowned?]] と同じです。
 
 --- owned?(path)
 #@todo
 
-[[m:FileTest.owned?]] と同じです。
+[[m:FileTest.#owned?]] と同じです。
 
 --- identical?(filename1, filename2)
 #@todo
 
-[[m:FileTest.identical?]] と同じです。
+[[m:FileTest.#identical?]] と同じです。
 
 --- pipe?(path)
 #@todo
 
-[[m:FileTest.pipe?]] と同じです。
+[[m:FileTest.#pipe?]] と同じです。
 
 --- readable?(path)
 #@todo
 
-[[m:FileTest.readable?]] と同じです。
+[[m:FileTest.#readable?]] と同じです。
 
 --- readable_real?(path)
 #@todo
 
-[[m:FileTest.readable_real?]] と同じです。
+[[m:FileTest.#readable_real?]] と同じです。
 
 --- setgid?(path)
 #@todo
 
-[[m:FileTest.setgid?]] と同じです。
+[[m:FileTest.#setgid?]] と同じです。
 
 --- setuid?(path)
 #@todo
 
-[[m:FileTest.setuid?]] と同じです。
+[[m:FileTest.#setuid?]] と同じです。
 
 --- size(path)
 #@todo
 
-[[m:FileTest.size]] と同じです。
+[[m:FileTest.#size]] と同じです。
 
 --- size?(path)
 #@todo
 
-[[m:FileTest.size?]] と同じです。
+[[m:FileTest.#size?]] と同じです。
 
 --- socket?(path)
 #@todo
 
-[[m:FileTest.socket?]] と同じです。
+[[m:FileTest.#socket?]] と同じです。
 
 --- sticky?(path)
 #@todo
 
-[[m:FileTest.sticky?]] と同じです。
+[[m:FileTest.#sticky?]] と同じです。
 
 --- symlink?(path)
 #@todo
 
-[[m:FileTest.symlink?]] と同じです。
+[[m:FileTest.#symlink?]] と同じです。
 
 --- writable?(path)
 #@todo
 
-[[m:FileTest.writable?]] と同じです。
+[[m:FileTest.#writable?]] と同じです。
 
 --- writable_real?(path)
 #@todo
 
-[[m:FileTest.writable_real?]] と同じです。
+[[m:FileTest.#writable_real?]] と同じです。
 
 --- zero?(path)
 #@todo
 
-[[m:FileTest.zero?]] と同じです。
+[[m:FileTest.#zero?]] と同じです。
 
 #@since 1.9.0
 --- world_readable?(path)

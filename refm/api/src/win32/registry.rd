@@ -1,6 +1,4 @@
-#@if (version >= "1.7.0")
-#@# = win32/registry
-
+#@since 1.8.0
 win32/registry は Win32 プラットフォームでレジストリをアクセスするための
 ライブラリです。Win32 API の呼び出しに [[c:Win32API]] を使います。
 
@@ -24,7 +22,7 @@ end
 
 === WSH を用いたレジストリアクセス
 
-レジストリをアクセスするには [[c:WIN32OLE]] を使って [[m:WScript.Shell]] オブジェクト経由でアクセスする方法もあります。
+レジストリをアクセスするには [[c:WIN32OLE]] を使って WScript.Shell オブジェクト経由でアクセスする方法もあります。
 
   wsh = WIN32OLE.new('WScript.Shell')
   value = wsh.RegRead 'HKLM\Software\Microsoft\Windows\...'
@@ -212,7 +210,7 @@ REG_BINARY(write_bin) です。
 
 subkey はサブキーの名前を表す String です。
 wtime は最終更新時刻を表す FILETIME (64-bit 整数) です。
-(⇒[[m:Registry.wtime2time]])
+(⇒[[m:Win32::Registry.wtime2time]])
 
 --- delete(name)
 --- delete_value(name)
@@ -238,7 +236,7 @@ true の場合，キーは再帰的に削除されます。
 #@todo
 
 キーが新しく作成された場合，真を返します。
-(⇒[[m:Registry.create]])
+(⇒[[m:Win32::Registry.create]])
 
 --- opened?
 #@todo
@@ -254,7 +252,7 @@ true の場合，キーは再帰的に削除されます。
 --- keyname
 #@todo
 
-[[m:Registry.open]] または [[m:Registry.create]] に指定された
+[[m:Win32::Registry.open]] または [[m:Win32::Registry.create]] に指定された
 subkey の値を返します。
 
 --- disposition

@@ -73,7 +73,7 @@ cbtype は型修飾子 0, C, I, H, L, F, D, S そして P から成ります。
 
 === Ruby のオブジェクトから C の型への変換
 
-[[m:DL.callback]] や [[m:DL::Handle#sym]] で指定した
+[[m:DL.#callback]] や [[m:DL::Handle#sym]] で指定した
 型指定子に従って Ruby のオブジェクトと C の型は相互に変換されます。
 
 
