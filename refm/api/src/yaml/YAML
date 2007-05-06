@@ -112,8 +112,49 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   #=> #<Person:0x2b06eac @country="Japan", @capital="Tokyo", @name="ichiro">
 
 
---- add_ruby_type(type){|obj| ...}
-#@todo
+--- add_ruby_type(type_re){|type, val| ...}
+#@#--- add_ruby_type(type){|obj| ...}
+
+rubyタイプのクラスをYAMLに追加し、
+そのクラスを見つけたときの操作を指定します。
+
+@param type_re rubyタイプのクラスを文字列で指定します。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
+
+  require 'yaml'
+  
+  class Dog
+    attr_accessor :name
+    def initialize(name) 
+      @name = name
+    end
+  end
+  
+  str1=<<EOT
+  --- !ruby/Dog
+  name: pochi
+  --- !!Dog
+  age: 0.5
+  --- !Qjitsu.com,2007-05-06/Dog
+  preference: apple
+  EOT
+  
+  
+  YAML.add_ruby_type("Dog") do |type, val|
+    YAML.object_maker(Dog, val)
+  end
+  
+  YAML.each_document(str1){|dog|
+    p dog.class
+    p dog.respond_to?(:name)
+  }
+  #=> Dog
+  #=> true
+  #=> YAML::PrivateType
+  #=> false
+  #=> YAML::DomainType
+  #=> false
 
 --- detect_implicit(val)
 #@todo
