@@ -4,8 +4,7 @@
 
 == Class Methods
 
---- constants
-#@todo
+--- constants => [String]
 
 このメソッドを呼び出した時点で参照可能な定数名の配列を返します。
 
@@ -17,15 +16,14 @@
   p Module.constants   # => ["RUBY_PLATFORM", "STDIN", ..., "C", ...]
                        # 出力中に "FOO" は現われない
 
-[[m:Module#constants]] や、
-[[m:Kernel#local_variables]],
-[[m:Kernel#global_variables]],
-[[m:Object#instance_variables]],
-[[m:Module#class_variables]]
-も参照してください。
+=== see also
+ * [[m:Module#constants]]
+ * [[m:Kernel#local_variables]]
+ * [[m:Kernel#global_variables]]
+ * [[m:Object#instance_variables]]
+ * [[m:Module#class_variables]]
 
---- nesting
-#@todo
+--- nesting -> [Class, Module]
 
 このメソッドを呼び出した時点でのクラス/モジュールのネスト情
 報を配列に入れて返します。
@@ -43,7 +41,6 @@
 --- new
 #@since 1.8.0
 --- new {|mod| ... }
-#@todo
 #@end
 
 名前の付いていないモジュールを新しく生成して返します。
@@ -83,8 +80,11 @@
 
 == Instance Methods
 
---- <=>(other)
-#@todo
+--- <=>(other) -> Integer | nil
+
+self と other の親子関係を比較します。
+
+@param other 比較対象のクラスやモジュール
 
 self と other を比較して、
 self が other の子孫であるとき -1、
@@ -138,14 +138,19 @@ nil を返します。
   p Baz <=> Object.new  # => :in `<=>': <=> requires Class or Module (Object given) (TypeError)
 #@end
 
---- <(other)
---- <=(other)
---- >(other)
---- >=(other)
+--- <(other)  -> bool | nil
+--- <=(other) -> bool | nil
+--- >(other)  -> bool | nil
+--- >=(other) -> bool | nil
 #@todo
 
 比較演算子。self が other の子孫である時、
 self < other が成立します。
+
+@param other 比較対象のモジュールやクラス
+
+@raise other がクラスやモジュールでなければ例外 [[c:TypeError]] が発生します。
+
 
 親子関係にないクラス同士の比較ではいずれの関係も
 #@since 1.8.0
@@ -154,8 +159,6 @@ nil を返します。
 false を返します。
 #@end
 
-other がクラスやモジュールでなければ例外 [[c:TypeError]] が
-発生します。
 
 例:
 
@@ -181,13 +184,15 @@ other がクラスやモジュールでなければ例外 [[c:TypeError]] が
 
   p Foo < Object.new # => in `<': compared with non class/module (TypeError)
 
---- ===(obj)
+--- ===(obj) -> bool
 #@todo
+obj が self と [[m:Object#kind_of?]] の関係がある時、真になります。
+
+@param obj 任意のオブジェクト
 
 このメソッドは主に [[unknown:制御構造/case]] 文での比較に用いられます。
-obj が self と [[m:Object#kind_of?]]
-の関係がある時、真になります。つまり、[[unknown:制御構造/case]] ではクラ
-ス、モジュールの所属関係をチェックすることになります。
+[[unknown:制御構造/case]] ではクラス、モジュールの
+所属関係をチェックすることになります。
 
 例:
 
@@ -197,8 +202,7 @@ obj が self と [[m:Object#kind_of?]]
     p true        # => true
   end
 
---- ancestors
-#@todo
+--- ancestors -> [Class, Module]
 
 クラス、モジュールのスーパークラスとインクルードしているモジュール
 を優先順位順に配列に格納して返します。
@@ -220,47 +224,68 @@ obj が self と [[m:Object#kind_of?]]
   # => Bar
 
 #@since 1.8.0
---- autoload(const_name, feature)
---- autoload?(const_name)
+--- autoload(const_name, feature) -> nil
 #@todo
 
-[[m:Kernel#autoload]] を参照。
+定数 const_name を最初に参照した時に feature を [[m:Kernel#require]] するように設定します。
+
+@param const_name [[c:String]] または [[c:Symbol]] で指定します。
+なお、const_name には、"::" 演算子を含めることはできません (つまり、トップレベルの定数しか指定できません)。
+
+@param feature [[m:Kernel#require]] と同様な方法で autoload する対象を指定する。
+
+詳しくは [[m:Kernel#autoload]] を参照。
 #@end
 
---- class_eval(src[,fname[,lineno]])
---- class_eval { ... }
-#@todo
+--- autoload?(const_name) -> String | nil
+autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します。
+また、ロード済みなら nil を返します。
 
-[[m:Module#module_eval]] の別名。
+@param const_name [[c:String]] または [[c:Symbol]] で指定します。
 
---- class_variables
-#@todo
+詳しくは [[m:Kernel#autoload?]] を参照。
 
-クラス／モジュールに定義されている[[unknown:変数と定数/クラス変数]]名の配
-列を返します。スーパークラスやインクルードしているモジュールのクラ
-ス変数も含みます。
+--- class_variables -> [String]
 
-[[m:Module.constants]],
-[[m:Kernel#local_variables]],
-[[m:Kernel#global_variables]],
-[[m:Object#instance_variables]],
-[[m:Module#constants]]
+クラス／モジュールに定義されているクラス変数の名前の配列を返します。
+
+スーパークラスやインクルードしているモジュールのクラス変数も含みます。
+
+ * [[m:Module.constants]]
+ * [[m:Kernel#local_variables]]
+ * [[m:Kernel#global_variables]]
+ * [[m:Object#instance_variables]]
+ * [[m:Module#constants]]
 も参照してください。
 
 #@since 1.9.0
 --- const_defined?(name, inherit = true)
 #@todo
+
+@param name [[c:String]], [[s:Symbol]] で指定される定数名。
+
+@param inherit false を指定するとスーパークラスや include したモジュールで
+定義された定数は対象にはなりません。
+
 #@else
---- const_defined?(name)
+--- const_defined?(name) -> bool
 #@todo
+
+@param name [[c:String]], [[s:Symbol]] で指定される定数名。
+
 #@end
 
 モジュールに name で指定される名前の定数が定義されている時真
 を返します。name は [[c:Symbol]] か文字列で指定します。
 
-スーパークラスやインクルードしたモジュールで定義された定数は対象には
-なりません。(ただし、[[c:Object]] だけは例外
+#@since 1.9.0
+スーパークラスや include したモジュールで定義された定数を検索対象
+にするかどうかは第二引数で制御することができます。
+#@else
+スーパークラスや include したモジュールで定義された定数は対象には
+なりません。(ただし、[[c:Object]] だけは例外)
 #@# あらい 2002-04-10: バグ?制限?
+#@end
 
 例:
 
@@ -284,8 +309,17 @@ obj が self と [[m:Object#kind_of?]]
   class Baz
     include Bar
   end
-  # Object以外では自身の定数だけがチェック対象
+#@since 1.9.0
+  # Object 以外でも同様になった
+  # 第二引数のデフォルト値が true であるため
+  p Baz.const_defined?(:BAR)      # => true
+
+  # 第二引数を false にした場合
+  p Baz.const_defined?(:BAR, false)   # => false
+#@else
+  # Object 以外では自身の定数だけがチェック対象
   p Baz.const_defined?(:BAR)      # => false
+#@end
 
 #@since 1.9.0
 --- const_get(name, inherit = true)
@@ -424,23 +458,31 @@ name は [[c:Symbol]] か文字列です。
 #@end
 
 モジュールにインスタンスメソッド name が定義されているとき
-true を返します。name は [[c:Symbol]] か文字列です。
+true を返します。name は [[c:Symbol]] か [[c:String]] です。
 
-[[m:Module#public_method_defined?]],
-[[m:Module#private_method_defined?]],
-[[m:Module#protected_method_defined?]]
+ * [[m:Module#public_method_defined?]]
+ * [[m:Module#private_method_defined?]]
+ * [[m:Module#protected_method_defined?]]
 も参照してください。
 
---- module_eval(expr, [fname, [lineno=1]])
---- module_eval {|mod| .... }
-#@todo
+--- module_eval(expr[, fname[, lineno = 1]]) -> object
+--- module_eval {|mod| .... } -> object
+--- class_eval(expr[, fname[, lineno = 1]]) -> object
+--- class_eval {|mod| ... } -> object
 
-モジュールのコンテキストで文字列 expr を評価して
-その結果を返します。
+モジュールのコンテキストで文字列 expr を評価してその結果を返します。
+
+@param expr 評価される文字列。
+
+@param fname スタックトレースに表示するファイル名。
+
+@param lineno スタックトレースに表示する行番号。
+
+@return expr を評価した結果。
+
 fname、lineno が与えられた場合は、ファイル fname、
 行番号 lineno にその文字列があるかのようにコンパイルされ、
-スタックトレース表示などの
-ファイル名／行番号を差し替えることができます。
+スタックトレース表示などのファイル名／行番号を差し替えることができます。
 
 ブロックが与えられた場合にはそのブロックを
 モジュールのコンテキストで評価してその結果を返します。
@@ -456,14 +498,12 @@ fname、lineno が与えられた場合は、ファイル fname、
 ブロックが与えられた場合は、
 定数とクラス変数のスコープも外側のスコープになります。
 
-注:
+=== 注意
 module_eval のブロック中でメソッドを定義する場合、
 [[m:Object#instance_eval]] と同様の制限があります。
 詳細はそちらの説明を参照してください。
 
-[[m:Object#instance_eval]],
-[[m:Module#class_eval]]
-[[m:Module.new]] も参照してください。
+[[m:Object#instance_eval]], [[m:Module.new]] も参照してください。
 
 --- name
 --- to_s
@@ -489,7 +529,7 @@ module_eval のブロック中でメソッドを定義する場合、
     end
 
     p B.name  #=> "A::B"
- 
+
     class C
     end
   end
