@@ -16,7 +16,7 @@ _builtin/ENV                    mukai           done
 _builtin/EOFError
 _builtin/Enumerable             aamine
 _builtin/Exception
-_builtin/FalseClass		yamane		done
+_builtin/FalseClass             yamane          done
 _builtin/File
 _builtin/FileTest
 _builtin/File__Constants
@@ -35,11 +35,11 @@ _builtin/Kernel                 aamine
 _builtin/KeyError
 _builtin/LoadError
 _builtin/LocalJumpError
-_builtin/Marshal
-_builtin/MatchData
-_builtin/Math
-_builtin/Method
-_builtin/Module
+_builtin/Marshal                okkez
+_builtin/MatchData              okkez
+_builtin/Math                   okkez
+_builtin/Method                 okkez
+_builtin/Module                 okkez
 _builtin/NameError              snoozer05       done
 _builtin/NilClass               snoozer05       done
 _builtin/NoMemoryError          snoozer05       done
@@ -77,7 +77,7 @@ _builtin/Thread
 _builtin/ThreadError
 _builtin/ThreadGroup
 _builtin/Time
-_builtin/TrueClass		yamane		done
+_builtin/TrueClass      yamane      done
 _builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      snoozer05       done
@@ -111,13 +111,13 @@ date2                           tadf
 dbm
 debug
 delegate
-digest				kouji
+digest              kouji
 digest/bubblebabble
 digest/md5
 digest/rmd160
 digest/sha1
 digest/sha2
-dl                              sheepman 
+dl                              sheepman
 dl/Symbol                       sheepman
 dl/import                       sheepman
 dl/struct                       sheepman
@@ -440,7 +440,7 @@ tmpdir                          kouya            done
 tracer
 tsort
 un
-uri                             sheepman             
+uri                             sheepman
 weakref
 webrick
 webrick/cgi
@@ -453,4 +453,4 @@ xmlrpc
 xsd
 yaml                            kouya
 yaml/store
-zlib                            kouya 
+zlib                            kouya
