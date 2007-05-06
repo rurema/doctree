@@ -1,7 +1,7 @@
 #@since 1.8.5
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- Pathname(path) -> Pathname
 文字列 path を元に Pathname オブジェクトを生成します。

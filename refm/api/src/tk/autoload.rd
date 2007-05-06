@@ -85,7 +85,7 @@ require tk/xim
 
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- TkGrid(*args)
 #@todo

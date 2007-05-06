@@ -258,15 +258,22 @@ If you implement #pretty_print, it can be used as follows.
 However, doing this requires that every class that #inspect is called on
 implement #pretty_print, or a RuntimeError will be raised.
 
+
+
 = reopen Kernel
-== Private Instance Methods
+
+== Module Functions
+
 --- pp(obj)    -> nil
 #@todo
 obj を [[m:$>]] に pretty print で出力します。
 
+
 #@since 1.8.5 
 = reopen Object
+
 == Instance Methods
+
 --- pretty_inspect    -> String
 #@todo
 

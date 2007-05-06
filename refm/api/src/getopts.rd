@@ -28,7 +28,7 @@ Author: <jammy@shljapan.co.jp>
 
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- getopts(single_opts, *long_opts)
 #@todo

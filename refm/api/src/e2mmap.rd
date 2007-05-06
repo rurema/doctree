@@ -58,7 +58,7 @@ def_e2message メソッドや def_exception メソッドが使えます。
 
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- Raise(error, *args)
 --- Fail(error, *args)

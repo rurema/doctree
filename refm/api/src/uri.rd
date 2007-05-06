@@ -21,7 +21,7 @@ URI (Uniform Resource Identifier) のためのライブラリです。
 #@since 1.8.2
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- URI(uri_str)
 #@todo

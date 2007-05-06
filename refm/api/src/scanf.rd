@@ -146,8 +146,10 @@ b) The last attempted spec/string did not match:
   no: continue  [this state could be analyzed further]
 
 
+
 = reopen Kernel
-== Private Instance Methods
+
+== Module Functions
 
 --- scanf(format)
 --- scanf(format) {|*ary| ...}

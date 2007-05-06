@@ -31,7 +31,7 @@ BigDecimal は可変長浮動小数点計算機能ライブラリです。
 
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- BigDecimal(s [, n])
 #@todo

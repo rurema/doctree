@@ -2,7 +2,9 @@
 rational を require すると [[c:Integer]] のメソッドが以下のように再定義される。
 
 = reopen Kernel
-== Private Instance Methods
+
+== Module Functions
+
 --- Rational(a, b)
 #@todo
 [[c:Rational]] オブジェクトを生成する。

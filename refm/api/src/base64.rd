@@ -101,7 +101,7 @@ encoding として "B" encoding (Base64) だけをサポートしています。
 #@if (version <= "1.8.1")
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- decode64(str) -> String
 

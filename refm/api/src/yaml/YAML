@@ -427,18 +427,30 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 --- try_implicit(obj)
 #@todo
 
+
+
 = reopen Kernel
-== private instance methods
+
+== Module Functions
+
 --- y(obj)
 #@todo
 
+
+
 = reopen Class
-== instance methods
+
+== Instance Methods
+
 --- to_yaml(opts = {})
 #@todo
 
+
+
 = reopen Object
-== instance methods
+
+== Instance Methods
+
 --- to_yaml(opts = {})
 オブジェクトをYAMLドキュメントに変換します。
 @param opts YAMLドキュメント出力の際のオプションを指定する。
@@ -451,16 +463,24 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 --- to_yaml_properties
 #@todo
 
+
+
 = reopen Struct
-== class methods
+
+== Class Methods
+
 --- yaml_tag_class_name
 #@todo
 
 --- yaml_tag_read_class(name)
 #@todo
 
+
+
 = reopen String
-== instance methods
+
+== Instance Methods
+
 --- is_complex_yaml?
 #@todo
 

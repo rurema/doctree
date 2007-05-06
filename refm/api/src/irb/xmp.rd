@@ -53,8 +53,9 @@ XMPメソッド群のコンテキストは, 呼び出す前のコンテキストで評価されます.
 
 [注] マルチスレッドには対応していません.
 
+
 = reopen Kernel
-== Private Instance Methods
+== Module Functions
 --- xmp
 #@todo
 
@@ -66,5 +67,3 @@ XMPメソッド群のコンテキストは, 呼び出す前のコンテキストで評価されます.
 == Instance Methods
 --- puts
 #@todo
-
-

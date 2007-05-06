@@ -147,7 +147,7 @@ extconf.rb が生成する Makefile には以下のターゲットが定義されています。
 
 = reopen Kernel
 
-== Private Instance Methods
+== Module Functions
 #@# 以下は、extconf.rb を記述するのに有用な関数です。
 #@# ヘッダファイルの存在チェック、ライブラリの存在チェックなど、
 #@# システム間の差異を調べシステムに適した Makefile を生成するために
