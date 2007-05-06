@@ -12,7 +12,7 @@ Iconv は UNIX 95 の iconv() 関数のラッパーで、
 
 === 注意
 
-どの文字コード体系が利用できるかはプラットフォーム依存です。さらにエンコーディング名をあらわす文字列もプラットフォーム依存です。日本語 EUC をあらわす文字列が EUC-JP, euc-jp, eucJP など異なる場合があります。このプラットフォームによる違いを吸収するために、
+どの文字コード体系が利用できるかはプラットフォーム依存です。さらに文字コード体系をあらわす文字列もプラットフォーム依存です。日本語 EUC をあらわす文字列が EUC-JP, euc-jp, eucJP など異なる場合があります。このプラットフォームによる違いを吸収するために、
 「ext/iconv/charset_alias.rb」 が用意されています。
 GNU ソフトウェア texinfo ([[url:http://www.gnu.org/software/texinfo/]]) に含まれるファイル config.charset を以下のミラーサイトから手に入れて
 
@@ -24,7 +24,7 @@ ext/iconv/ に置き、ext/iconv/ で次のように実行すると
   ruby extconf.rb
   make
 
-iconv.rb が生成されます。この iconv.rb がプラットフォームによるエンコーディング名をあらわす文字列の違いを吸収します。
+iconv.rb が生成されます。この iconv.rb がプラットフォームによる文字コード体系をあらわす文字列の違いを吸収します。
 
 config.charset のライセンスは LGPL なので、生成された iconv.rb にも LGPL が適用されます。
 #@# 要調査
@@ -69,9 +69,9 @@ iconv 関数のラッパークラスです。
 
 文字コード from から to への新しい変換器を作り、それを返します。
 
-@param to 変換先の文字コード体系を表す文字列です。
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from 変換前の文字コード体系を表す文字列です。
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
 @raise TypeError to や from が String でないとき発生します。
 
@@ -88,6 +88,10 @@ iconv 関数のラッパークラスです。
 ブロックの終りに Iconv オブジェクトは close されます。
 ブロックの値を返します。
 
+@param to 変換先の文字コード体系を表す文字列を指定します。
+
+@param from 変換前の文字コード体系を表す文字列を指定します。
+
 --- iconv(to, from, *strs)    -> [String]
 #@todo
 
@@ -96,9 +100,9 @@ iconv 関数のラッパークラスです。
 次の省略形です。
   Iconv.open(to, from) {|cd| (strs + [nil]).collect {|s| cd.iconv(s)}}
 
-@param to [[m:Iconv.new]] と同じです。
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from [[m:Iconv.new]] と同じです。
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
 @param strs 変換したい文字列を指定します。
 
@@ -114,9 +118,9 @@ iconv 関数のラッパークラスです。
 次の省略形です。
   Iconv.iconv(to, from, str).join
 
-@param to [[m:Iconv.new]] と同じです。
+@param to 変換先の文字コード体系を表す文字列を指定します。
 
-@param from [[m:Iconv.new]] と同じです。
+@param from 変換前の文字コード体系を表す文字列を指定します。
 
 @param str 変換したい文字列を指定します。
 
@@ -130,7 +134,7 @@ iconv 関数のラッパークラスです。
 #@todo
 
 各エイリアスセットごとに繰り返すイテレータです。
-ブロックが指定されていなければエンコーディング名のリストを返します。
+ブロックが指定されていなければ、その利用可能な文字コード体系の名前を文字列の配列として返します。
 Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 @raise NotImplementedError 実行プラットフォームでサポートされていない場合に発生します。
@@ -194,7 +198,7 @@ str が nil の場合、変換器をその初期シフト状態にし、
 例外が起こるまでに変換に成功した文字列を返します。
 
 [[m:Iconv.iconv]] でこの例外が起こったときに返される値は、
-以前の例外が例外が起こるまでに変換に成功した文字列を要素とする配列です。
+以前の例外が起こるまでに変換に成功した文字列を要素とする配列です。
 最後の要素は変換中の文字列です。
 
 --- failed    -> String
@@ -211,7 +215,6 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 #@since 1.8.4
 = class Iconv::BrokenLibrary < RuntimeError
-
 include Iconv::Failure
 
 iconv ライブラリのバグなどにより、[[man:errno]] が設定されなかった場合に発生します。
@@ -219,14 +222,12 @@ iconv ライブラリのバグなどにより、[[man:errno]] が設定されなかった場合に発生しま
 #@end
 
 = class Iconv::IllegalSequence < ArgumentError
-
 include Iconv::Failure
 
 入力か出力の文字が指示された文字集合に含まれないために変換が停止したこと
 を表します。
 
 = class Iconv::InvalidCharacter < ArgumentError
-
 include Iconv::Failure
 
 入力の最後が不完全な文字かシフトで終っているために変換が停止したこと
@@ -238,7 +239,6 @@ include Iconv::Failure
 #@end
 
 = class Iconv::OutOfRange < RuntimeError
-
 include Iconv::Failure
 
 Iconv ライブラリの内部エラーです。この例外は起こらないはずです。
