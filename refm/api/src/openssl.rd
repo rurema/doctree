@@ -43,9 +43,9 @@
     * [[c:OpenSSL::X509::Store]]
     * [[c:OpenSSL::X509::StoreContext]]
   * [[c:OpenSSL::SSL]]
-    *[[c:OpenSSL::SSL::SSLContext]]
-    *[[c:OpenSSL::SSL::SSLServer]]
-    *[[c:OpenSSL::SSL::SSLSocket]]
+    * [[c:OpenSSL::SSL::SSLContext]]
+    * [[c:OpenSSL::SSL::SSLServer]]
+    * [[c:OpenSSL::SSL::SSLSocket]]
   * [[c:OpenSSL::PKCS7]]
     * [[c:OpenSSL::PKCS7::PKCS7]]
   * OpenSSL::PKey
