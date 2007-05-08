@@ -92,6 +92,7 @@ include OpenURI::OpenRead
 include OpenURI::OpenRead
 
 = module OpenURI
+http/ftp に簡単にアクセスするためのモジュールです。
 
 == Singleton Methods
 
@@ -167,6 +168,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 @raise ArgumentError 与えられた mode が読み込みモードでなかった場合に発生します。
 
 = module OpenURI::OpenRead 
+[[c:URI::HTTP]] と [[c:URI::FTP]] を拡張するために用意されたモジュールです。
 
 == Instance Methods
 
@@ -196,6 +198,8 @@ self.open(options={}).read と同じです。
   p str.content_type
 
 = module OpenURI::Meta
+サーバから取得したデータの属性を扱うために使われるモジュールです。
+データを表す文字列や [[c:StringIO]] が extend します。
 
 == Instance Methods
 
