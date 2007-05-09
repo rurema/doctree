@@ -11,13 +11,13 @@ _builtin/Class
 _builtin/Comparable
 _builtin/Continuation
 _builtin/Data
-_builtin/Dir
+_builtin/Dir                    sheepman
 _builtin/ENV                    mukai           done
 _builtin/EOFError
 _builtin/Enumerable             aamine
 _builtin/Exception
 _builtin/FalseClass             yamane          done
-_builtin/File
+_builtin/File                   sheepman
 _builtin/FileTest
 _builtin/File__Constants
 _builtin/File__Stat
@@ -26,7 +26,7 @@ _builtin/Float
 _builtin/FloatDomainError
 _builtin/GC
 _builtin/Hash                   aamine
-_builtin/IO
+_builtin/IO                     sheepman
 _builtin/IOError
 _builtin/IndexError
 _builtin/Integer                ujihisa
