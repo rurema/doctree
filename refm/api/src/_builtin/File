@@ -98,7 +98,7 @@ owner と group は、[[man:chown(2)]] と同様に
 @raise NotImplementedError [[man:lchown(2)]] を実装していないシステムでこのメソッドを呼び出すと発生します。
 
 --- delete(*filename)    -> Integer
---- unlink(filename ... )    -> Integer
+--- unlink(*filename)    -> Integer
 #@todo
 
 ファイルを削除します。削除したファイルの数を返します。削除に失敗し
@@ -162,8 +162,8 @@ default_dir が nil かまたは与えられなかった時にはカ
 
 [[m:File.basename]], [[m:File.dirname]] も参照。
 
---- fnmatch(pattern, path[, flags])     -> boolean 
---- fnmatch?(pattern, path[, flags])    -> boolean
+--- fnmatch(pattern, path, flags = 0)     -> boolean 
+--- fnmatch?(pattern, path, flags = 0)    -> boolean
 #@todo
 
 ファイル名のパターンマッチを行います([[man:fnmatch(3)]])。
@@ -222,6 +222,7 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
   p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
   p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
 //}
+
 --- ftype(filename)    -> String
 #@todo
 
@@ -242,7 +243,7 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
 #@#((-あらい 2002-01-07: 今のところ "unknown" を返すことはないはず。
 #@#もしそのようなことがあれば、バグ報告をした方が良いと思われる-))
 
---- join(item, item, ...)    -> String
+--- join(*item)    -> String
 #@todo
 
 File::SEPARATORを間に入れて文字列を連結します。
