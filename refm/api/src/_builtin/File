@@ -1,4 +1,7 @@
 = class File < IO
+ファイルアクセスのためのクラスです。
+通常 [[m:Kernel#open]] または [[m:File.open]] を使って生成します。
+
 #@if (version >= "1.8.0")
 ((<ruby 1.8 feature>)): File::Constants は、[[c:IO]] でインクルードさ
 れるようになりました。
@@ -6,31 +9,32 @@
 include File::Constant
 #@end
 
-ファイルアクセスのためのクラス。通常 [[m:Kernel#open]]
-または [[m:File.open]] を使って生成します。
-
-Fileクラスがインクルードしている[[c:File::Constants]]はFileクラスに関係する定数を
-格納したモジュールです。[[c:File::Constants]]を参照してください。
-また[[c:File::Stat]]はstat構造体([[man:stat(2)]]参照)を表すクラスです。
-[[c:File::Stat]]を参照してください。
+Fileクラスがインクルードしている [[c:File::Constants]] は File クラスに関係する定数を
+格納したモジュールです。
+また [[c:File::Stat]] は stat 構造体([[man:stat(2)]]参照)を表すクラスです。
 
 == Class Methods
 
---- atime(filename)
---- ctime(filename)
---- mtime(filename)
+--- atime(filename)    -> Time
 #@todo
+最終アクセス時刻を返します。
 
-atime は最終アクセス時刻、
-ctime は状態が最後に変更された時刻、
-mtime は最終更新時刻を [[c:Time]] オブジェクトとして返します。
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-なお、ctime における状態の変更とは chmod などによるものです。
+--- ctime(filename)    -> Time
+#@todo
+状態が最後に変更された時刻を返します。
+状態の変更とは chmod などによるものです。
 
-ファイルの時刻の取得に失敗した場合は例外 [[c:Errno::EXXX]] が発生
-します。
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
---- basename(filename[, suffix])
+--- mtime(filename)    -> Time
+#@todo
+最終更新時刻を返します。
+
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+--- basename(filename, suffix = "")     -> String
 #@todo
 
 filename の一番後ろのスラッシュに続く要素を返します。もし、
@@ -47,27 +51,33 @@ filename の一番後ろのスラッシュに続く要素を返します。もし、
 [[m:File.dirname]], [[m:File.extname]] も参照。
 
 #@since 1.8.0
-ruby 1.8.0 からはFile.basenameの動作は [[url:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
-  p File.basename("foo/bar/")      # => "bar"  以前は、""
+File.basename の動作は [[url:http://www.unix-systems.org/version3/online.html]] に従います。
+  p File.basename("foo/bar/")      # => "bar"
 #@end
 
---- chmod(mode[, filename[, ...]])
---- lchmod(mode[, filename[, ...]])
+--- chmod(mode, *filename)    -> Integer
 #@todo
 
 ファイルのモードを mode に変更します。モードを変更したファイ
-ルの数を返します。モードの変更に失敗した場合は例外
-[[c:Errno::EXXX]] が発生します。
+ルの数を返します。
 
-mode は [[man:chmod(2)]] と同様に数値で指定します。
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
 
-lchmod は、シンボリックリンクに関してリンクそのものの
-モードを変更します。[[man:lchmod(2)]] を実装し
-ていないシステムでこのメソッドを呼び出すと
-[[c:NotImplementedError]] 例外が発生します。
+@raise Errno::EXXX モードの変更に失敗した場合に発生します。
 
---- chown(owner, group[, filename[, ...]])
---- lchown(owner, group[, filename[, ...]])
+--- lchmod(mode, *filename)    -> Integer
+#@todo
+
+[[m:File.chmod]] と同様ですが、シンボリックリンクに関してリンクそのものの
+モードを変更します。
+
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
+
+@raise NotImplementedError [[man:lchmod(2)]] を実装していないシステムでこのメソッドを呼び出すと発生します。
+
+@raise Errno::EXXX モードの変更に失敗した場合に発生します。
+
+--- chown(owner, group, *filename)    -> Integer
 #@todo
 
 ファイルのオーナーとグループを変更します。スーパーユーザだけがファ
@@ -79,13 +89,16 @@ owner と group は、[[man:chown(2)]] と同様に
 片方だけ変更したいような場合は nil または -1 を指定する
 ことでオーナーやグループを現在のままにすることができます。
 
-lchown は、シンボリックリンクに関してリンクそのもののオーナー、
-グループを変更します。[[man:lchown(2)]] を実装していない
-システムでこのメソッドを呼び出すと [[c:NotImplementedError]] 例外
-が発生します。
+--- lchown(owner, group, *filename)    -> Integer
+#@todo
+[[m:File#chown]] と同様ですが、
+シンボリックリンクに関してリンクそのもののオーナー、
+グループを変更します。
 
---- delete(filename ... )
---- unlink(filename ... )
+@raise NotImplementedError [[man:lchown(2)]] を実装していないシステムでこのメソッドを呼び出すと発生します。
+
+--- delete(*filename)    -> Integer
+--- unlink(filename ... )    -> Integer
 #@todo
 
 ファイルを削除します。削除したファイルの数を返します。削除に失敗し
@@ -94,7 +107,7 @@ lchown は、シンボリックリンクに関してリンクそのもののオーナー、
 このメソッドは通常ファイルの削除用で、ディレクトリの削除には
 [[m:Dir.rmdir]] を使います。
 
---- dirname(filename)
+--- dirname(filename)    -> String
 #@todo
 
 filename の一番後ろのスラッシュより前を文
@@ -110,14 +123,12 @@ filename の一番後ろのスラッシュより前を文
 
 #@if (version >= "1.8.0")
 ((<ruby 1.8 feature>))
-
-File.dirname の動作は [[url:http://www.unix-systems.org/version3/online.html]] に従うよう変更されました。
-
-    p File.dirname("foo/bar/")      # => "foo"  以前は、"foo/bar"
-    p File.dirname("foo//bar")      # => "foo"  以前は、"foo/"
+File.dirname の動作は [[url:http://www.unix-systems.org/version3/online.html]] に従います。
+    p File.dirname("foo/bar/")      # => "foo"
+    p File.dirname("foo//bar")      # => "foo"
 #@end
 
---- expand_path(path[, default_dir])
+--- expand_path(path, default_dir = '.')    -> String
 #@todo
 
 path を絶対パスに展開した文字列を返します。
@@ -133,7 +144,7 @@ default_dir が nil かまたは与えられなかった時にはカ
   p File.expand_path("~")          #=> "/home/matz"
   p File.expand_path("~foo")       #=> "/home/foo"
 
---- extname(filename)
+--- extname(filename)    -> String
 #@todo
 
 ファイル名 filename の拡張子部分(最後の "." に続く文字列)を
@@ -151,15 +162,15 @@ default_dir が nil かまたは与えられなかった時にはカ
 
 [[m:File.basename]], [[m:File.dirname]] も参照。
 
---- fnmatch(pattern, path[, flags])
---- fnmatch?(pattern, path[, flags])
+--- fnmatch(pattern, path[, flags])     -> boolean 
+--- fnmatch?(pattern, path[, flags])    -> boolean
 #@todo
 
 ファイル名のパターンマッチを行います([[man:fnmatch(3)]])。
 path が pattern にマッチすれば真を返します。
 
 pattern にはワイルドカードとして `*', `?', `[]' が使用できま
-す([[m:Dir#Dir.glob]] とは違って `{}' や `**/' は使用できません)。
+す([[m:Dir.glob]] とは違って `{}' や `**/' は使用できません)。
 
     %w(foo foobar bar).each {|f|
       p File.fnmatch("foo*", f)
@@ -172,9 +183,9 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
 れています)を論理和で指定することでパターンマッチの動作を変更する
 ことができます。flags のデフォルト値は0(フラグ指定なし)です。
 
-FNM_NOESCAPE
-エスケープ文字 `\' を普通の文字とみなします。
-
+: FNM_NOESCAPE
+ エスケープ文字 `\' を普通の文字とみなします。
+//emlist{
   # デフォルトでは \ を伴う任意の文字はその文字にマッチしますが、
   # このフラグをつけると、\ が普通の文字として扱われます。
   p File.fnmatch('\a', 'a')                       # => true
@@ -189,29 +200,29 @@ FNM_NOESCAPE
   # (シングルクォート文字列中では \\ は、\ であることに注意)
   p File.fnmatch('\\', '\\')                      # => true
   p File.fnmatch('\\', '\\', File::FNM_NOESCAPE)  # => true
-
-FNM_PATHNAME
-ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
-シェルのパターンマッチにはこのフラグが使用されています。
-
+//}
+: FNM_PATHNAME
+ ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
+ シェルのパターンマッチにはこのフラグが使用されています。
+//emlist{
   p File.fnmatch('*', '/', File::FNM_PATHNAME)   # => false
   p File.fnmatch('?', '/', File::FNM_PATHNAME)   # => false
   p File.fnmatch('[/]', '/', File::FNM_PATHNAME) # => false
-
-FNM_CASEFOLD
-アルファベットの大小文字を区別せずにパターンマッチを行います。
-
+//}
+: FNM_CASEFOLD
+ アルファベットの大小文字を区別せずにパターンマッチを行います。
+//emlist{
   p File.fnmatch('A', 'a', File::FNM_CASEFOLD)   # => true
-
-FNM_DOTMATCH
-ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
-
+//}
+: FNM_DOTMATCH
+ ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
+//emlist{
   p File.fnmatch('*', '.', File::FNM_DOTMATCH)           # => true
   p File.fnmatch('?', '.', File::FNM_DOTMATCH)           # => true
   p File.fnmatch('[.]', '.', File::FNM_DOTMATCH)         # => true
   p File.fnmatch('foo/*', 'foo/.', File::FNM_DOTMATCH)   # => true
-
---- ftype(filename)
+//}
+--- ftype(filename)    -> String
 #@todo
 
 ファイルのタイプを表す文字列を返します。文字列は以下のうちのいずれ
@@ -231,7 +242,7 @@ FNM_DOTMATCH
 #@#((-あらい 2002-01-07: 今のところ "unknown" を返すことはないはず。
 #@#もしそのようなことがあれば、バグ報告をした方が良いと思われる-))
 
---- join(item, item, ...)
+--- join(item, item, ...)    -> String
 #@todo
 
 File::SEPARATORを間に入れて文字列を連結します。
@@ -240,7 +251,7 @@ File::SEPARATORを間に入れて文字列を連結します。
 
 と同じです。([[unknown:DOSISH 対応]]で環境依存になる予定です。)
 
---- link(old, new)
+--- link(old, new)    -> 0
 #@todo
 
 old を指す new という名前のハードリンクを
@@ -249,9 +260,9 @@ old を指す new という名前のハードリンクを
 ハードリンクに成功した場合は 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
 
---- new(path[, mode [, perm]])
---- open(path[, mode [, perm]])
---- open(path[, mode [, perm]]) {|file| ... }
+--- new(path, mode, perm)                -> File 
+--- open(path, mode, perm)               -> File 
+--- open(path, mode, perm) {|file| ... } -> File 
 #@todo
 
 pathで指定されるファイルをオープンし、ファイルオブジェクトを
@@ -274,13 +285,13 @@ open() はブロックを指定することができます。
 #@todo
 #@end
 
---- readlink(path)
+--- readlink(path)    -> String
 #@todo
 
 シンボリックリンクのリンク先を文字列で返します。リンクの読み取りに
 失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
---- rename(from, to)
+--- rename(from, to)    -> 0
 #@todo
 
 ファイルの名前を変更します。ディレクトリが異なる場合には移動も行い
@@ -290,7 +301,7 @@ open() はブロックを指定することができます。
 ファイルの移動に成功した場合 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
 
---- split(pathname)
+--- split(pathname)    -> [String]
 #@todo
 
 pathname を dirname とbasename に分割して、2 要
@@ -300,23 +311,23 @@ pathname を dirname とbasename に分割して、2 要
 
 と同じです。
 
---- stat(filename)
---- lstat(filename)
+--- stat(filename)    -> File::Stat
 #@todo
-
 filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
-て返します。情報の取得に失敗した場合は例外 [[c:Errno::EXXX]] が発
-生します。
+て返します。
 
-lstat は、シンボリックリンクに関してリンクそのものの
-情報を返します。
-[[man:lstat(2)]] を実装していないシステムでは、
-File.stat と同じです。
+[[m:IO#stat]], [[m:File#lstat]] も参照してください。
 
-[[m:IO#stat]],
-[[m:File#lstat]] も参照してください。
+@raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
---- symlink(old, new)
+--- lstat(filename)   -> File::Stat
+#@todo
+[[m:File.stat]]と同様ですが、シンボリックリンクに関してリンクそのものの
+情報を返します。[[man:lstat(2)]] を実装していないシステムでは、File.stat と同じです。
+
+[[m:IO#stat]], [[m:File#lstat]] も参照してください。
+
+--- symlink(old, new)    -> 0
 #@todo
 
 old への new という名前のシンボリックリンクを生成しま
@@ -325,7 +336,7 @@ old への new という名前のシンボリックリンクを生成しま
 シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は
 例外 [[c:Errno::EXXX]] が発生します。
 
---- truncate(path, length)
+--- truncate(path, length)    -> 0
 #@todo
 
 path で指定されたファイルのサイズを最大 length バイト
@@ -334,13 +345,14 @@ path で指定されたファイルのサイズを最大 length バイト
 サイズの変更に成功すれば 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
 
---- umask([umask])
+--- umask
+--- umask(umask)    -> Integer
 #@todo
 
 umask を変更します。変更前の umask の値を返します。umask を
 省略すると変更を行わないで、現在の umask の値を返します。
 
---- utime(atime, mtime[, filename[, ...]])
+--- utime(atime, mtime, *filename)    -> Integer
 #@todo
 
 ファイルの最終アクセス時刻と更新時刻を変更します。変更したファイル
@@ -350,130 +362,130 @@ umask を変更します。変更前の umask の値を返します。umask を
 先頭の二つの引数は時刻を指定する数値または [[c:Time]] クラスのイン
 スタンスでなければなりません。
 
---- blockdev?(path)
+--- blockdev?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#blockdev?]] と同じです。
 
---- chardev?(path)
+--- chardev?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#chardev?]] と同じです。
 
---- directory?(path)
+--- directory?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#directory?]] と同じです。
 
---- executable?(path)
+--- executable?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#executable?]] と同じです。
 
---- executable_real?(path)
+--- executable_real?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#executable_real?]] と同じです。
 
---- exist?(path)
+--- exist?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#exist?]] と同じです。
 
---- exists?(path)
+--- exists?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#exist?]] と同じです。
 このメソッドはobsoleteです。
 [[m:File#exist?]]を使って下さい。
 
---- file?(path)
+--- file?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#file?]] と同じです。
 
---- grpowned?(path)
+--- grpowned?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#grpowned?]] と同じです。
 
---- owned?(path)
+--- owned?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#owned?]] と同じです。
 
---- identical?(filename1, filename2)
+--- identical?(filename1, filename2)    -> boolean
 #@todo
 
 [[m:FileTest.#identical?]] と同じです。
 
---- pipe?(path)
+--- pipe?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#pipe?]] と同じです。
 
---- readable?(path)
+--- readable?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#readable?]] と同じです。
 
---- readable_real?(path)
+--- readable_real?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#readable_real?]] と同じです。
 
---- setgid?(path)
+--- setgid?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#setgid?]] と同じです。
 
---- setuid?(path)
+--- setuid?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#setuid?]] と同じです。
 
---- size(path)
+--- size(path)    -> boolean
 #@todo
 
 [[m:FileTest.#size]] と同じです。
 
---- size?(path)
+--- size?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#size?]] と同じです。
 
---- socket?(path)
+--- socket?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#socket?]] と同じです。
 
---- sticky?(path)
+--- sticky?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#sticky?]] と同じです。
 
---- symlink?(path)
+--- symlink?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#symlink?]] と同じです。
 
---- writable?(path)
+--- writable?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#writable?]] と同じです。
 
---- writable_real?(path)
+--- writable_real?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#writable_real?]] と同じです。
 
---- zero?(path)
+--- zero?(path)    -> boolean
 #@todo
 
 [[m:FileTest.#zero?]] と同じです。
 
 #@since 1.9.0
---- world_readable?(path)
+--- world_readable?(path)    -> boolean
 #@todo
 If _file_name_ is readable by others, returns an integer
 representing the file permission bits of _file_name_. Returns +nil+
@@ -484,7 +496,7 @@ systems, see +stat(2)+.
         m = File.world_readable?("/etc/passwd")
         sprintf("%o", m)                              # => "644"
 
---- world_writable?(path)
+--- world_writable?(path)    -> boolean
 #@todo
 If _file_name_ is writable by others, returns an integer
 representing the file permission bits of _file_name_. Returns +nil+
@@ -498,21 +510,26 @@ systems, see +stat(2)+.
 
 == Instance Methods
 
---- atime
---- ctime
---- mtime
+--- atime    -> Time
+#@todo
+最終アクセス時刻を返します。
+
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+--- ctime    -> Time
+#@todo
+状態が最後に変更された時刻を返します。状態の変更とは chmod などによるものです。
+
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+--- mtime    -> Time
 #@todo
 
-atime は最終アクセス時刻、
-ctime は状態が最後に変更された時刻、
-mtime は最終更新時刻を [[c:Time]] オブジェクトとして返します。
+最終更新時刻を返します。
 
-なお、ctime における状態の変更とは chmod などによるものです。
+@raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-ファイルの時刻の取得に失敗した場合は例外 [[c:Errno::EXXX]] が発生
-します。
-
---- chmod(mode)
+--- chmod(mode)    -> 0
 #@todo
 
 ファイルのモードを mode に変更します。モードの変更に成功した
@@ -521,7 +538,7 @@ mtime は最終更新時刻を [[c:Time]] オブジェクトとして返します。
 
 mode は [[man:chmod(2)]] と同様に数値で指定します。
 
---- chown(owner, group)
+--- chown(owner, group)    -> 0
 #@todo
 
 ファイルのオーナーとグループを変更します。スーパーユーザだけがファ
@@ -534,7 +551,7 @@ owner と group は、[[man:chown(2)]] と同様に
 nil または -1 を指定することでオーナーやグループを現在
 のままにすることができます。
 
---- flock(operation)
+--- flock(operation)    -> 0 | false
 #@todo
 
 ファイルをロックします。ロックに成功した場合は 0 を返します。失敗
@@ -542,34 +559,27 @@ nil または -1 を指定することでオーナーやグループを現在
 定されていて、ブロックされそうな場合には false を返します。
 有効な operation は以下の通りです。
 
-LOCK_SH
-
-共有ロック。複数のプロセスが同時にロックを共有できます。
-システムによってはロック対象のファイルは読み込みモード
-("r", "r+" など)でオープンされている必要があります。そのよ
-うなシステムでは読み込み可能でないファイルに対するロックは例外
-[[c:Errno::EXXX]] が発生するかもしれません。
-
-LOCK_EX
-
-排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
-システムによってはロック対象のファイルは書き込みモード
-("w", "r+" など)でオープンされている必要があります。そのよ
-うなシステムでは書き込み可能でないファイルに対するロックは例外
-[[c:Errno::EXXX]] が発生するかもしれません。
-
-LOCK_UN
-
-アンロック。
-この明示的なアンロック以外に、Rubyインタプリタの終了
-(プロセスの終了)によっても自動的にロック状態は解除されます。
-
-LOCK_NB
-
-ノンブロックモード。
-File::LOCK_SH | File::LOCK_NB のように他の指定と or することで指
-定します。この指定がない場合、ブロックされる条件での flock
-の呼び出しはロックが解除されるまでブロックされます。
+: LOCK_SH
+ 共有ロック。複数のプロセスが同時にロックを共有できます。
+ システムによってはロック対象のファイルは読み込みモード
+ ("r", "r+" など)でオープンされている必要があります。そのよ
+ うなシステムでは読み込み可能でないファイルに対するロックは例外
+ [[c:Errno::EXXX]] が発生するかもしれません。
+: LOCK_EX
+ 排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
+ システムによってはロック対象のファイルは書き込みモード
+ ("w", "r+" など)でオープンされている必要があります。そのよ
+ うなシステムでは書き込み可能でないファイルに対するロックは例外
+ [[c:Errno::EXXX]] が発生するかもしれません。
+: LOCK_UN
+ アンロック。
+ この明示的なアンロック以外に、Rubyインタプリタの終了
+ (プロセスの終了)によっても自動的にロック状態は解除されます。
+: LOCK_NB
+ ノンブロックモード。
+ File::LOCK_SH | File::LOCK_NB のように他の指定と or することで指
+ 定します。この指定がない場合、ブロックされる条件での flock
+ の呼び出しはロックが解除されるまでブロックされます。
 
 File::LOCK_NB の指定がある場合、ブロックされる条件での
 flock は false を返します。
@@ -610,12 +620,12 @@ flock は false を返します。
        unlocked by process2
        re-locked by process1
 
---- path
+--- path    -> String
 #@todo
 
 オープン時に使用したパスを文字列で返します。
 
---- lstat
+--- lstat    -> File::Stat
 #@todo
 
 ファイルの状態を含む [[c:File::Stat]] オブジェクトを生成して返しま
@@ -630,7 +640,7 @@ lstat は、シンボリックリンクに関してリンクそのものの
 [[m:File.stat]],
 [[m:File.lstat]] も参照してください。
 
---- truncate(length)
+--- truncate(length)    -> 0
 #@todo
 
 ファイルのサイズを最大 length バイトにします。ファイルが書き
