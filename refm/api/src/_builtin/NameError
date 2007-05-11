@@ -9,7 +9,7 @@
 == Class Methods
 
 #@since 1.8.0
---- new(error_message[, name])
+--- new(error_message[, name]) -> NameError
 
 例外オブジェクトを生成して返します。
 
@@ -26,7 +26,7 @@
 
 == Instance Methods
 
---- name
+--- name -> Symbol
 
 この例外オブジェクトを発生させる原因となった
 変数や定数、メソッドの名前をシンボルで返します。
@@ -41,7 +41,7 @@
   end
 
 #@since 1.8.1
---- to_s
+--- to_s -> String
 
 例外オブジェクトを文字列に変換して返します。
 
