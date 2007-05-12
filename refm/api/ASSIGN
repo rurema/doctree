@@ -229,8 +229,8 @@ rexml/xmldecl
 rexml/xmltokens
 rexml/xpath
 rexml/xpath_parser
-rinda/rinda
-rinda/tuplespace
+rinda/rinda                     sheepman
+rinda/tuplespace                sheepman
 ripper                          aamine
 rss
 rubyunit
