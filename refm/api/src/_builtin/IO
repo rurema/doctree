@@ -705,7 +705,8 @@ readpartial の結果は以下のようになります。
 自身を io に繋ぎ換えます。クラスも io に等しくなることに
 注意してください。
 
---- reopen(path, mode = "r")     -> self
+--- reopen(path)                 -> self
+--- reopen(path, mode)     -> self
 #@todo
 
 path で指定されたファイルにストリームを繋ぎ換えます。
