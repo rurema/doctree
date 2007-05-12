@@ -125,7 +125,7 @@ rl_complete_internal() で使われる、補完時の単語同士の区切りを指定する
 引用符を指定します。デフォルトでは、/"'/ です。
 
 --- completer_quote_characters=(s)
---- completer_quote_character
+--- completer_quote_characters
 #@todo
 補完時の引用符を指定します。この引用符の間では、completer_word_break_characters
 も、普通の文字列として扱われます。
