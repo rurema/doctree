@@ -414,32 +414,22 @@ self のメソッド name をオブジェクト化した
 
 デフォルトではこのメソッドは例外 [[c:NameError]] を発生させます。
 
---- methods
---- public_methods
---- private_methods
---- protected_methods
---- methods([inherited_too])
---- public_methods([inherited_too])
---- private_methods([inherited_too])
---- protected_methods([inherited_too])
+#@since 1.8.0
+--- methods(include_inherited = true) -> [String]
+--- instance_methods(include_inherited = true) -> [String]
+#@else
+--- methods -> [String]
+--- instance_methods -> [String]
+#@end
 #@todo
 
-そのオブジェクトが理解できる public/private/protected メソッド名の
-一覧を文字列の配列で返します。
-
-methods は、instance_methods と同じです。
+そのオブジェクトに対して呼び出せるメソッド名の一覧を文字列の配列で返します。
 #@since 1.8.0
-methods は、public および protected メソッド名の一覧を配列で返します。
-#@end
+このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
-#@since 1.8.0
-Ruby 1.8 deha 引数が指定できるようになりました。
-inherited_too が真であれば、
+第 1 引数 include_inherited が真のときは
 スーパークラスで定義されたメソッドも探索します。
-デフォルトは true です。
 #@end
-
-methods(false) は [[m:Object#singleton_methods]](false) と同じです。
 
 例:
 
@@ -449,24 +439,111 @@ methods(false) は [[m:Object#singleton_methods]](false) と同じです。
       public;    def public_foo()    end
     end
 
-    class Bar < Foo
-    end
+#@since 1.8.0
+    p Foo.new.methods(false)   # => ["protected_foo", "public_foo"]
+#@else
+    p Foo.new.methods(false)   # => ["public_foo"]
+#@end
 
-    p Bar.new.methods           - Object.new.methods
-    p Bar.new.public_methods    - Object.new.public_methods
-    p Bar.new.private_methods   - Object.new.private_methods
-    p Bar.new.protected_methods - Object.new.protected_methods
-    => ["public_foo"]   # version 1.7 以降、["protected_foo", "public_foo"]
-       ["public_foo"]
-       ["private_foo"]
-       ["protected_foo"]
+なお、methods(false) は [[m:Object#singleton_methods]](false) と同じです。
 
 [[m:Module#instance_methods]],
 [[m:Module#public_instance_methods]],
 [[m:Module#private_instance_methods]],
-[[m:Module#protected_instance_methods]]
+[[m:Module#protected_instance_methods]],
+[[m:Object#singleton_methods]]
 も参照してください。
 
+#@since 1.8.0
+--- public_methods(include_inherited = true) -> [String]
+#@else
+--- public_methods -> [String]
+#@end
+#@todo
+
+そのオブジェクトが理解できる public メソッド名の一覧を文字列の配列で返します。
+
+#@since 1.8.0
+第 1 引数 include_inherited が真のときは
+スーパークラスで定義されたメソッドも探索します。
+#@end
+
+例:
+
+    class Foo
+      private;   def private_foo()   end
+      protected; def protected_foo() end
+      public;    def public_foo()    end
+    end
+
+    p Foo.new.public_methods(false)   # => ["public_foo"]
+
+[[m:Module#instance_methods]],
+[[m:Module#public_instance_methods]],
+[[m:Module#private_instance_methods]],
+[[m:Module#protected_instance_methods]],
+[[m:Object#singleton_methods]]
+も参照してください。
+
+#@since 1.8.0
+--- private_methods(include_inherited = true) -> [String]
+#@else
+--- private_methods -> [String]
+#@end
+#@todo
+
+そのオブジェクトが理解できる private メソッド名の一覧を文字列の配列で返します。
+
+#@since 1.8.0
+第 1 引数 include_inherited が真のときは
+スーパークラスで定義されたメソッドも探索します。
+#@end
+
+例:
+
+    class Foo
+      private;   def private_foo()   end
+      protected; def protected_foo() end
+      public;    def public_foo()    end
+    end
+
+    p Foo.new.private_methods(false)   # => ["private_foo"]
+
+[[m:Module#instance_methods]],
+[[m:Module#public_instance_methods]],
+[[m:Module#private_instance_methods]],
+[[m:Module#protected_instance_methods]],
+[[m:Object#singleton_methods]]
+も参照してください。
+
+#@since 1.8.0
+--- protected_methods(include_inherited = true) -> [String]
+#@else
+--- protected_methods -> [String]
+#@end
+#@todo
+
+そのオブジェクトが理解できる protected メソッド名の一覧を文字列の配列で返します。
+
+#@since 1.8.0
+第 1 引数 include_inherited が真のときは
+スーパークラスで定義されたメソッドも探索します。
+#@end
+
+例:
+
+    class Foo
+      private;   def private_foo()   end
+      protected; def protected_foo() end
+      public;    def public_foo()    end
+    end
+
+    p Bar.new.protected_methods   # => ["protected_foo"]
+
+[[m:Module#instance_methods]],
+[[m:Module#public_instance_methods]],
+[[m:Module#private_instance_methods]],
+[[m:Module#protected_instance_methods]],
 [[m:Object#singleton_methods]]
 も参照してください。
 
@@ -600,24 +677,24 @@ singleton_methods(false) は、
 #@if (version < "1.9.0")
 --- to_a
 #@todo
-((<obsolete>))
 
-オブジェクトを配列に変換してその配列を返します。
+[OBSOLETE] オブジェクトを配列に変換してその配列を返します。
 
-普通に配列に変換できないオブジェクトは、自身のみを含む長さ 1 の配
+配列に変換できないオブジェクトは、自身のみを含む長さ 1 の配
 列に変換されます
 
 #@since 1.8.0
-このメソッドは将来なくなるかもしれません。Ruby 1.8 では警告が出ます。
+このメソッドは将来なくなるかもしれません。
+Ruby 1.8 では警告が出ます。
 
-例
+例:
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
     p 1.to_a            # [1]       (warning: default `to_a' will be obsolete)
     p 'str'.to_a        # ["str"]
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 多重代入の右辺に * を伴ったオブジェクトが現れた場合、
 そのオブジェクトが to_a を定義していればその結果が利用されます。
 to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
@@ -702,7 +779,7 @@ to_a が定義されていない場合は、右辺が自身を含む長さ 1 の配列に
 --- enum_for(method = :each, *args)
 #@todo
 
-Enumerable::Enumerator.new(self, method, *args) を返します。
+[[m:Enumerable::Enumerator.new]](self, method, *args) を返します。
 
 例:
 
