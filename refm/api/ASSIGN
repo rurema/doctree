@@ -18,7 +18,7 @@ _builtin/Enumerable             aamine
 _builtin/Exception
 _builtin/FalseClass             yamane          done
 _builtin/File                   sheepman
-_builtin/FileTest
+_builtin/FileTest               sheepman
 _builtin/File__Constants
 _builtin/File__Stat
 _builtin/Fixnum                 ujihisa         done
