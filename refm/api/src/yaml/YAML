@@ -193,22 +193,41 @@ rubyタイプのクラスをYAMLに追加し、
   #=> false
 
 --- detect_implicit(val)
-#@todo
+#@# よくわかりません。
+文字列のタイプを検知する
+
+@param val 判定されるオブジェクト
+
+  require 'yaml'
+  
+  p YAML.detect_implicit("")
+  #=> "null"
+  p YAML.detect_implicit("Cat")
+  #=> "str"
+  p YAML.detect_implicit(10)
+  #=> ""
+  p YAML.detect_implicit([3, "5"])
+  #=> ""
+  p YAML.detect_implicit(nil)
+  #=> ""
 
 --- dump(obj, io = nil)
-#@todo
 
 与えられた obj を YAML フォーマットに変換し、io に書き込みます。
 io が与えられていない場合は、YAML フォーマットの文字列を返します。
+
+@param obj YAMLフォーマットに変換されるオブジェクト
+@param io 出力先のIOオブジェクト
 
   YAML.dump( ['badger', 'elephant', 'tiger'],
              File.open('sample.yml', 'w')    )
 
 #@since 1.8.2
 --- dump_stream(*objs)
-#@todo
 
 与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
+
+@param *objs YAMLフォーマットに変換されるオブジェクト
 
   require "yaml"
   puts YAML.dump_stream( "hoge\nfoo", [1,2], {"foo" => "bar"} )
@@ -224,11 +243,12 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
 
 --- each_document(io) {|obj| ...}
 --- load_documents(io) {|obj| ...}
-#@todo
 
 与えられた io から YAML フォーマットの文書をすべて順に読み込み
 Ruby のオブジェクトに変換し、
 生成したオブジェクトを引数としてブロックを評価していきます。
+
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト
 
   # sample.yml
   - apple
@@ -275,12 +295,15 @@ Ruby のオブジェクトに変換し、
 
 --- load(io)
 --- load(str)
-#@todo
 
 YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 引数として IO オブジェクトと文字列を受け付けます。
 io や 文字列が複数の YAML ドキュメントを含んでいても、最初のものしか
 Ruby のオブジェクトに変換しません。
+
+@param io YAMLフォーマットの文書の読み込み先のIOオブジェクト
+@param str YAMLフォーマットの文書の読み込み先の文字列
+
 
   $ ruby-1.8 -ryaml -e '
   p YAML.load(<<HERE)
@@ -295,12 +318,38 @@ Ruby のオブジェクトに変換しません。
 
 #@since 1.8.2
 --- load_file(file)
-#@todo
 
 与えられた名前のファイルから YAML フォーマットの文書を読み込み
 Ruby のオブジェクトを生成して返します。
 ファイルが複数の YAML ドキュメントを含んでいても、
 最初のものしか Ruby のオブジェクトに変換しません。
+
+@param file YAMLフォーマットのファイル
+
+  ---
+  - Monday
+  -
+   - 国語 
+   - 算数
+   - 理科
+   - 社会
+   - 体育
+  ---
+  - Friday
+  -
+   - 体育
+   - 算数
+   - 理科
+   - 国語 
+   - 社会
+  #end of jikanwari.yaml
+
+  require 'yaml'
+  
+  puts YAML.load_file('jikanwari.yaml').join(",")
+  
+  #=> Monday,国語,算数,理科,社会,体育
+
 #@end
 
 --- load_stream(io)
