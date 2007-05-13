@@ -127,9 +127,9 @@ path のオープンに成功すれば nil を返します。
 command をサブプロセスとして実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。
 
-mode はオープンする IO ポートのモードを指定します(mode の詳細は [[m:Kernel#open]] 参照)。
+mode はオープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel#open]] 参照して下さい。
 
-生成したパイプ([[c:IO]] オブジェクト)を返します。
+生成したパイプを [[c:IO]] オブジェクトとして返します。
 
 例:
 
@@ -154,7 +154,7 @@ mode はオープンする IO ポートのモードを指定します(mode の詳細は [[m:Kernel#open]
 きの戻りは、親プロセスは IO オブジェクトを返し、子プロセスは
 nil を返します。ブロックがあれば、親プロセスは生成した
 IO オブジェクトを引数にブロックを実行しその結果を返します。
-(パイプはクローズされます)
+パイプはクローズされます。
 子プロセスは nil を引数にブロックを実行し終了します。
 
 例:
@@ -397,7 +397,7 @@ fcntl(2) が返した数値を返します。
 #@todo
 
 書き込み用の IO に対して、システムコール [[man:fsync(2)]]
-を実行します。[[m:IO#flush]] を行ったあと(OSレベルで)まだディスクに
+を実行します。[[m:IO#flush]] を行ったあと、(OSレベルで)まだディスクに
 書き込まれていないメモリ上にあるデータをディスクに書き出します。
 
 成功すれば 0 を返します。
@@ -405,7 +405,6 @@ fcntl(2) が返した数値を返します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 #@end
 
 --- fileno    -> Integer
@@ -535,18 +534,17 @@ ch を返します。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
---- read                    -> String
---- read(length)            -> String
 #@if (version >= "1.8.0")
---- read(length, outbuf)    -> String
-#@todo
+--- read(length = nil, outbuf = "")    -> String | nil
+#@else
+--- read(length = nil)            -> String | nil
 #@end
+#@todo
 
-length が指定された場合、
 length バイト読み込んで、その文字列を返します。
 IO が既に EOF に達していれば nil を返します。
 
-length が省略された時には、EOF までの全てのデータを読み込みます。
+length が nil であるか、省略された時には、EOF までの全てのデータを読み込んで、その文字列を返します。
 IO が既に EOF に達している場合 "" を返します。
 したがって、open(空ファイル) {|f| f.read } は "" となります。
 
@@ -556,10 +554,10 @@ IO が既に EOF に達している場合 "" を返します。
 列オブジェクトがあらかじめ length 長の領域であれば、余計なメ
 モリの割当てが行われません。指定した文字列の長さが length と
 異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)さ
-れます(そして、実際に読み込んだデータのサイズになります)。
+れたあと、実際に読み込んだデータのサイズになります。
 
 第二引数を指定した read の呼び出しでデータが空であった場合
-(read がnil を返す場合)、outbuf は空文字列になりま
+(read が nil を返す場合)、outbuf は空文字列になりま
 す。
 
 例:
@@ -597,14 +595,14 @@ read(0) は常に "" を返します。
 
 [[m:IO#gets]] と同様に 1 行読み込みその文字列を返します。
 
+readline は gets 同様読み込んだ文字列を変数 $_
+にセットします。
+
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 @raise EOFError EOF に到達した時に発生します。
 
 @raise IOError 自身が読み込み用にオープンされていなければ、発生します。
-
-readline は gets 同様読み込んだ文字列を変数 $_
-にセットします。
 
 --- readlines(rs = $/)    -> [String]
 #@todo
@@ -615,44 +613,36 @@ IO が既に EOF に達していれば空配列 [] を返します。
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 #@since 1.8.5
---- read_nonblock(maxlen)            -> String
---- read_nonblock(maxlen, outbuf)    -> String
+--- read_nonblock(maxlen, outbuf = "")    -> String
 #@todo
 
 IO をノンブロッキングモードに設定し、
 その後で [[man:read(2)]] システムコールにより
 長さ maxlen を上限として読み込み、文字列として返します。
-
-文字列 outbuf が指定された場合、
-読み込んだデータを outbuf に破壊的に格納し、
-返り値は outbuf となります。
-
-read_nonblock は read(2) システムコールを呼びます。
-その結果として起きたエラーは EAGAIN, EINTR などをふくめ、
-すべてが [[c:Errno::EXXX]] 例外として呼出元に報告されます。
-
-read(2) システムコールが 0 を返した場合は
-EOFError となります。
+EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告されます。
 
 なお、バッファが空でない場合は、
 read_nonblock はバッファから読み込みます。
 この場合、read(2) システムコールは呼ばれません。
 
+@param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
+
 @raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+
+@raise Errno::EXXX read(2) システムコールの結果としてエラーが起きた場合に発生します。
+
+@raise EOFError read(2) システムコールが 0 を返した場合に発生します。 これは、IO が既に EOF に達していることを意味します。
 
 #@end
 
 #@since 1.8.3
---- readpartial(maxlen)            -> String
---- readpartial(maxlen, outbuf)    -> String
+--- readpartial(maxlen, outbuf = "")    -> String
 #@todo
 
 IO から長さ maxlen を上限として読み込み、文字列として返します。
 
 ここで、即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちますが、
 即座に得られるデータが 1byte でも存在すればブロックしません。
-第二引数 outbuf として文字列を指定すると、
-読み込んだデータを outbuf に上書きして返します。
 
 readpartial はブロックを最小限に抑えることによって、
 パイプ、ソケット、端末などのストリームに対して適切に動作するよう設計されています。
@@ -693,6 +683,8 @@ readpartial の結果は以下のようになります。
 また、readpartial の挙動は sysread によく似ています。
 とくに、バッファが空の場合には同じ挙動を示します。
 ただし、EAGAIN および EINTR エラーは内部で発生したとしても通知されず、データが到着するまでブロックし続けます。
+
+@param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ、発生します。
 
@@ -760,14 +752,18 @@ offset 位置への移動が成功すれば 0 を返します。
 newstate が真なら同期モード、偽なら非同期モードになります。
 newstate を返します。
 
---- sysread(maxlen)           -> String
 #@if (version >= "1.8.0")
---- sysread(maxlen, outbuf)   -> String
+--- sysread(maxlen, outbuf = "")   -> String
+#@else
+--- sysread(maxlen)           -> String
 #@end
 #@todo
 
 [[man:read(2)]] を用いて入力を行ない、入力されたデータを
 含む文字列を返します。
+
+stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
+をすることがあります。
 
 #@if (version >= "1.8.0")
 第二引数として文字列を指定すると、読み込ん
@@ -775,7 +771,7 @@ newstate を返します。
 列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメ
 モリの割当てが行われません。指定した文字列の長さが maxlen と
 異なる場合、その文字列は一旦 maxlen 長に拡張(あるいは縮小)さ
-れます(そして、実際に読み込んだデータのサイズになります)。
+れたあと、実際に読み込んだデータのサイズになります。
 
 第二引数を指定した sysread の呼び出しでデータが空であった場
 合(sysread が例外 [[c:EOFError]] を発生させる場合)、
@@ -793,12 +789,9 @@ outbuf は空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ、発生します。
 
-@raise EOFError ファイルの終りに到達した時に発生します。
+@raise EOFError IO が既に EOF に達していれば発生します。
 
 @raise Errno::EXXX データの読み込みに失敗した場合に発生します。
-
-stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
-をすることがあります。
 
 #@if (version >="1.8.0")
 --- sysseek(offset, whence = IO::SEEK_SET)    -> Integer
@@ -868,9 +861,9 @@ IOポートに対して str を出力します。str が文字列でなけ
 "write" という名のメソッドを呼び出すので、このメソッドを置き換える
 ことで出力関数の挙動を変更することができます。
 #@if (version >= "1.8.0")
-以前は[[m:Kernel#putc]],
+以前は [[m:Kernel.#putc]], 
 [[m:IO#putc]] に対してだけこのことは適用されませんでした
-[[ruby-dev:16305]]が、修正されました[[ruby-dev:18038]]。
+([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
 #@end
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
@@ -883,12 +876,13 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 IO をノンブロッキングモードに設定し、
 その後で string を [[man:write(2)]] システムコールで書き出します。
+ここで、EAGAIN, EINTR なども単に例外として呼出元に報告されます。
 
 write(2) が成功した場合、返り値は書き込んだ長さとなります。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
-@raise Errno::EXXX [[man:write(2)]] が失敗した場合に発生します。ここで、EAGAIN, EINTR なども単に例外として呼出元に報告されます。
+@raise Errno::EXXX [[man:write(2)]] が失敗した場合に発生します。
 #@end
 
 #@since 1.9.0
