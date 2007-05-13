@@ -21,8 +21,44 @@ YAML (YAML Ain't Markup Language) を扱うクラスです。
 
 == Module Functions
 
---- add_builtin_type(type_re){|obj| ...}
-#@todo
+--- add_builtin_type(type_re){|type, val| ...}
+#@#--- add_builtin_type(type_re){|obj| ...}
+yaml.org,2002ドメインに属しているクラスをYAMLに追加し
+そのクラスを見つけたときの操作を指定します。
+
+@param type_re 加えるクラスを指定する。
+@param type YAMLドメインとクラスの文字列
+@param val YAMLデータ構造
+
+#@# Rational はrequire しなくてもつかえるようだ。
+#@# rationalはbuiltin(組み込み)クラス?
+  require 'yaml'
+  
+  str1=<<EOT
+  --- !ruby.yaml.org,2002/Rational 5/6
+  EOT
+  str2=<<EOT
+  --- !yaml.org,2002/Rational 3/4
+  EOT
+  
+  p YAML.load(str1)
+  #=> #<YAML::DomainType:0x2b07528 @type_id="Rational", @domain="ruby.yaml.org,2002", @value="5/6">
+  
+  p YAML.load(str2)
+  #=> #<YAML::DomainType:0x2b0767c @type_id="Rational", @domain="yaml.org,2002", @value="3/4">
+
+  YAML.add_builtin_type("Rational"){|type, val|
+    md = val.split(/\//)
+    Rational.new!(md[0].to_i, md[1].to_i)
+  }
+  
+  p YAML.load(str1)
+  #=> #<YAML::DomainType:0x2b06fec @type_id="Rational", @domain="ruby.yaml.org,2002", @value="5/6">
+  ## 前回と変化なし
+  
+  rt = YAML.load(str2)
+  p rt + 0.25
+  #=> 1.0
 
 --- add_domain_type(domain, type_re){|type, val| ...}
 #@#--- add_domain_type(domain, type_re){|obj| ...}
