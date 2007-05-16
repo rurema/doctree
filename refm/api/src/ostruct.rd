@@ -1,9 +1,11 @@
-要素を動的に設定できる手軽な構造体
+要素を動的に追加・削除できる手軽な構造体
 
 = class OpenStruct < Object
 
-手軽に使える構造体クラス。
-method_missingの使い方の例でもある。
+インスタンスに対して未定義なセッターメソッドを呼ぶと、
+method_missing が呼ばれて
+代入した値を返すメソッドがインスタンスに新たに定義されます。
+この動作によって要素を動的に変更できる構造体として働きます。
 
   require 'ostruct'
   ab = OpenStruct.new
@@ -27,16 +29,22 @@ method_missingの使い方の例でもある。
   
 == Class Methods
 --- new(hash = nil) -> OpenStruct
+
 OpenStructオブジェクトを生成。
 hashが与えられたとき、それぞれのキーを
-生成したオブジェクトの要素にします。
+生成したオブジェクトの要素にし、値をセットします。
+
 @param hash 設定する要素とその値を指定します
 キーには to_sym でシンボル化できるもの、
 つまり文字列やシンボルを使用することができます。
+
 == Instance Methods
 --- delete_field(name) -> object
+
 nameで指定された要素を削除。
 その後その要素を参照したらnilが返る。
-@return 削除される前の要素の値を返します。
+
+@return 要素の削除前の値を返します。
+
 @param name 削除する要素を指定
 文字列やシンボルを用います。
