@@ -130,6 +130,8 @@ File.basename の動作は [[url:http://www.unix-systems.org/version3/online.html]] 
 
 @param filename ファイル名を表す文字列を指定します。
 
+@raise Errno::EXXX 失敗した場合に発生します。
+
 --- dirname(filename)    -> String
 #@todo
 
@@ -266,6 +268,8 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
 
   "unknown"
 
+@raise Errno::EXXX 情報の取得に失敗した場合に発生します。
+
 --- join(*item)    -> String
 #@todo
 
@@ -283,6 +287,8 @@ old を指す new という名前のハードリンクを
 
 ハードリンクに成功した場合は 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- new(path, mode = "r", perm = 0666)                -> File 
 --- open(path, mode = "r", perm = 0666)               -> File 
@@ -303,6 +309,8 @@ open() はブロックを指定することができます。
 ブロックが指定されたときのこのメソッドの戻り値はブロックの実行結果
 です。
 
+@raise Errno::EXXX 失敗した場合に発生します。
+
 #@since 1.9.0
 --- path(filename)
 #@todo
@@ -314,6 +322,8 @@ open() はブロックを指定することができます。
 シンボリックリンクのリンク先を文字列で返します。リンクの読み取りに
 失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
+@raise Errno::EXXX 失敗した場合に発生します。
+
 --- rename(from, to)    -> 0
 #@todo
 
@@ -323,6 +333,8 @@ open() はブロックを指定することができます。
 
 ファイルの移動に成功した場合 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- split(pathname)    -> [String]
 #@todo
@@ -350,6 +362,8 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 
 [[m:IO#stat]], [[m:File#lstat]] も参照してください。
 
+@raise Errno::EXXX 情報の取得に失敗した場合に発生します。
+
 --- symlink(old, new)    -> 0
 #@todo
 
@@ -359,6 +373,8 @@ old への new という名前のシンボリックリンクを生成しま
 シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は
 例外 [[c:Errno::EXXX]] が発生します。
 
+@raise Errno::EXXX 失敗した場合に発生します。
+
 --- truncate(path, length)    -> 0
 #@todo
 
@@ -367,6 +383,8 @@ path で指定されたファイルのサイズを最大 length バイト
 
 サイズの変更に成功すれば 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- umask           -> Integer
 --- umask(umask)    -> Integer
@@ -384,6 +402,8 @@ umask を変更します。変更前の umask の値を返します。umask を
 
 先頭の二つの引数は時刻を指定する数値または [[c:Time]] クラスのイン
 スタンスでなければなりません。
+
+@raise Errno::EXXX 変更に失敗した場合に発生します。
 
 --- blockdev?(path)    -> boolean
 #@todo
@@ -499,7 +519,7 @@ umask を変更します。変更前の umask の値を返します。umask を
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- size(path)    -> boolean
+--- size(path)    -> Integer
 #@todo
 
 [[m:FileTest.#size]] と同じです。
@@ -585,11 +605,15 @@ systems, see +stat(2)+.
 #@todo
 最終アクセス時刻を返します。
 
+@raise IOError 自身が close されている場合に、発生します。
+
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- ctime    -> Time
 #@todo
 状態が最後に変更された時刻を返します。状態の変更とは chmod などによるものです。
+
+@raise IOError 自身が close されている場合に、発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
@@ -597,6 +621,8 @@ systems, see +stat(2)+.
 #@todo
 
 最終更新時刻を返します。
+
+@raise IOError 自身が close されている場合に、発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
@@ -608,6 +634,10 @@ systems, see +stat(2)+.
 ます。
 
 mode は [[man:chmod(2)]] と同様に数値で指定します。
+
+@raise IOError 自身が close されている場合に、発生します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- chown(owner, group)    -> 0
 #@todo
@@ -622,13 +652,20 @@ owner と group は、[[man:chown(2)]] と同様に
 nil または -1 を指定することでオーナーやグループを現在
 のままにすることができます。
 
+@raise IOError 自身が close されている場合に、発生します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
 --- flock(operation)    -> 0 | false
 #@todo
 
-ファイルをロックします。ロックに成功した場合は 0 を返します。失敗
-した場合は例外 [[c:Errno::EXXX]] が発生します。File::LOCK_NB が指
-定されていて、ブロックされそうな場合には false を返します。
+ファイルをロックします。ロックを取得するまでブロックされます。
+ロックの取得に成功した場合は 0 を返します。
+File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロックされる場合に
+ブロックされずに false を返すようになります。
+
 有効な operation は以下の通りです。
+以下の定数は [[c:File::Constants]] モジュールで定義されています。
 
 : LOCK_SH
  共有ロック。複数のプロセスが同時にロックを共有できます。
@@ -660,7 +697,9 @@ flock は false を返します。
   * 他のプロセスがロックしている状態で排他ロックを行う
 の場合です
 
-以上の定数は [[c:File::Constants]] モジュールで定義されています。
+@raise IOError 自身が close されている場合に、発生します。
+
+@raise Errno::EXXX operation に不正な整数を与えた場合などに発生します。
 
 例:
 
@@ -709,14 +748,21 @@ lstat は、シンボリックリンクに関してリンクそのものの
 
 [[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]] も参照してください。
 
+@raise Errno::EXXX 失敗した場合に発生します。
+
+@raise IOError 自身が close されている場合に、発生します。
+
 --- truncate(length)    -> 0
 #@todo
 
-ファイルのサイズを最大 length バイトにします。ファイルが書き
-込みモードでオープンされてなければ例外 [[c:IOError]] が発生します。
+ファイルのサイズを最大 length バイトにします。
 
 サイズの変更に成功すれば 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
+
+@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+
+@raise Errno::EXXX サイズの変更に失敗した場合に発生します。
 
 == Constants
 
