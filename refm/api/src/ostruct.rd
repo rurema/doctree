@@ -26,7 +26,7 @@ method_missingの使い方の例でもある。
   p son             # => #<OpenStruct name="Thomas", age=4, items=["candy", "toy"]>
   
 == Class Methods
---- new(hash = nil) -> [OpenStruct]
+--- new(hash = nil) -> OpenStruct
 OpenStructオブジェクトを生成。
 hashが与えられたとき、それぞれのキーを
 生成したオブジェクトの要素にします。
@@ -34,7 +34,7 @@ hashが与えられたとき、それぞれのキーを
 キーには to_sym でシンボル化できるもの、
 つまり文字列やシンボルを使用することができます。
 == Instance Methods
---- delete_field(name) -> [object]
+--- delete_field(name) -> object
 nameで指定された要素を削除。
 その後その要素を参照したらnilが返る。
 @return 削除される前の要素の値を返します。
