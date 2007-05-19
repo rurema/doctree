@@ -88,6 +88,7 @@ ruby 1.9 では、"\0" 以外に、Dir.glob の第一引数に配列を指定するこ
 と同様のフラグを指定できます。このフラグを指定することでマッチの挙
 動を変更することができます。
 #@end
+  Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 
 --- chdir           -> 0
 --- chdir(path)     -> 0
@@ -157,6 +158,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。
 
+  Dir.entries('.') #=> [".", "..", "bar", "foo"]
+
 @param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
@@ -164,10 +167,11 @@ path を省略した場合、環境変数 HOME または LOGDIR
 --- foreach(path) {|file| ...}    -> nil
 #@todo
 
-path のディレクトリの要素に対して繰り返すイテレー
-タです。
+ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
 
 @param path ディレクトリのパスを文字列で指定します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- getwd    -> String
 --- pwd      -> String
@@ -233,7 +237,16 @@ pathに対するディレクトリストリームをオープンして返します。
 
 --- each {|item| ... }    -> self
 #@todo
-ディレクトリの各要素に対してブロックを評価します。
+ディレクトリの各エントリを表す文字列を引数として、ブロックを評価します。
+
+  Dir.open('.').each{|f|
+    p f
+  }
+  #=> 
+  "."
+  ".."
+  "bar"
+  "foo"
 
 #@since 1.8.0
 --- path    -> String
