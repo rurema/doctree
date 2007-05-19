@@ -18,15 +18,11 @@ include Enumerable
 ワイルドカードの展開を行った結果を文字列の配列として返します。
 パターンにマッチするファイルがない場合は空の配列を返します。
 
-例:
-
   p Dir.glob("./b*")
   => ["./bar", "./baz"]
 
 ブロックが与えられたときはワイルドカードにマッチしたファイルを
 引数にそのブロックを 1 つずつ評価して nil を返します
-
-例:
 
   Dir.glob("b*") {|f| p f }
   => "bar"
@@ -34,8 +30,6 @@ include Enumerable
 
 パターンを "\0" で区切って 1 度に複数のパターンを指定することもで
 きます。
-
-例:
 
   p Dir.glob("f*\0b*")
   => ["foo", "bar"]
@@ -46,17 +40,14 @@ include Enumerable
 
 : *
     空文字列を含む任意の文字列と一致します。
-
 : ?
     任意の一文字と一致します。
-
 : [ ]
     鈎括弧内のいずれかの文字と一致します。- でつな
     がれた文字は範囲を表します。鈎括弧の中の最初の文字が
     ^ である時には含まれない文字と一致します。
     ^ の代わりに ksh や POSIX shell のように ! も同じ意
     味で使えます。
-
 : { }
     コンマで区切られた文字列の組合せに展開します。例えば、
     foo{a,b,c} は fooa, foob, fooc 
@@ -65,7 +56,6 @@ include Enumerable
     括弧は入れ子にすることができます。例えば、
     {foo,bar{foo,bar}} は foo, barfoo, barbar
     のそれぞれにマッチします。
-
 : **/
     ワイルドカード */ の0回以上の繰り返しを意味し、
     ディレクトリを再帰的にたどってマッチを行います。
@@ -73,7 +63,12 @@ include Enumerable
     foo/**/bar は foo/bar, foo/*/bar,
     foo/*/*/bar ... (以下無限に続く)に対してそれぞれ
     マッチ判定を行います。
-
+//emlist{
+  Dir.glob("*")        #=> ["foo", "bar"]
+  Dir.glob("fo?")      #=> ["foo"]
+  Dir.glob("[^f]*")    #=> ["bar"]
+  Dir.glob("{b,f}*")   #=> ["bar", "foo"]
+//}
 #@since 1.6.0
 ruby 1.6 では、"\0" 以外に、空白類(スペース、タブ、改行)でパターン
 を複数指定できましたが、空白を含むファイル名のマッチングのために
@@ -84,9 +79,6 @@ ruby 1.7 よりパターンの区切りは "\0" のみとなりました。
 ruby 1.9 では、"\0" 以外に、Dir.glob の第一引数に配列を指定するこ
 とで複数のパターンを指定できます。Dir[] の場合は、複数の引数で複数
 のパターンを指定できます。
-
-例:
-
     p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
     p Dir["f*", "b*"]        # => ["foo", "bar"]
 #@end
@@ -111,7 +103,7 @@ path を省略した場合、環境変数 HOME または LOGDIR
 カレントディレクトリの変更に成功すれば 0 を返します。
 
 #@since 1.8.0
-ブロックが指定された場合、ディレクトリの変更はブロックの実行中に限
+ブロックが指定された場合、カレントディレクトリの変更はブロックの実行中に限
 られます。これは以下と等価です。
 
   savedir = Dir.pwd
@@ -126,6 +118,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 です。
 #@end
 
+@param path ディレクトリのパスを文字列で指定します。
+
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- chroot(path)    -> 0
@@ -139,6 +133,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 ルートディレクトリの変更に成功すれば 0 を返します。
 
+@param path ディレクトリのパスを文字列で指定します。
+
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- delete(path)    -> 0
@@ -151,19 +147,19 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 ディレクトリの削除に成功すれば 0 を返します。
 
+@param path ディレクトリのパスを文字列で指定します。
+
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- entries(path)    -> [String]
 #@todo
 
 ディレクトリ path に含まれるファイルエントリ名の
-配列を返します。以下と同じです。
+配列を返します。
 
-  def dir_s_entries( path )
-    Dir.open(path) {|d|
-      return d.to_a
-    }
-  end
+@param path ディレクトリのパスを文字列で指定します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
 --- foreach(path) {|file| ...}    -> nil
 #@todo
@@ -171,16 +167,7 @@ path を省略した場合、環境変数 HOME または LOGDIR
 path のディレクトリの要素に対して繰り返すイテレー
 タです。
 
-このメソッドは以下と同じ働きをします。
-
-  dir = Dir.open(path)
-  begin
-    dir.each {|file|
-      ...
-    }
-  ensure
-    dir.close
-  end
+@param path ディレクトリのパスを文字列で指定します。
 
 --- getwd    -> String
 --- pwd      -> String
@@ -204,7 +191,11 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になります。
 
 ディレクトリの作成に成功すれば 0 を返します。
 
-@raise Errno::EXXX 失敗した場合に発生します。
+@param path ディレクトリのパスを文字列で指定します。
+
+@param mode ディレクトリのモードを整数で与えます。
+
+@raise Errno::EXXX ディレクトリの作成に失敗した場合に発生します。
 
 --- new(path)               -> Dir
 --- open(path)              -> Dir
@@ -223,6 +214,8 @@ pathに対するディレクトリストリームをオープンして返します。
 #@since 1.8.0
 ブロックの実行結果を返します。
 #@end
+
+@param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX オープンに失敗した場合に発生します。
 
@@ -272,6 +265,8 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 せん。
 
 pos= は右辺を返します。seek は self を返します。
+
+@param pos 変更したい位置を整数で与えます。
 
 --- read    -> String | nil
 #@todo
