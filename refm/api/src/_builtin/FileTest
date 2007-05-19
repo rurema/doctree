@@ -3,59 +3,87 @@
 FileTest はファイルの検査関数を集めたモジュールです。このモジュー
 ルはインクルードしても使えます。
 
+=== 注意
+
+FileTest で定義された各メソッドは、システムコールに失敗しても例外を発生させません。
+真を返した時のみ、返り値は意味をもちます。
+例えば、
+ File.exist?('/root/.bashrc')
+が false を返しても、それはファイルが存在しないことを保証しません。
+
+
 == Module Functions
 
---- blockdev?(filename)
+--- blockdev?(filename)    -> boolean
 #@todo
 
 filename がブロックスペシャルファイルである時、真を返します。
 
---- chardev?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- chardev?(filename)    -> boolean
 #@todo
 
 filename がキャラクタスペシャルファイルの時、真を返します。
 
---- executable?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- executable?(filename)    -> boolean
 #@todo
 
 filename が実効ユーザ/グループ ID で実行できる時、真を返しま
 す。
 
---- executable_real?(filename)
+@param filename ファイル名を表す文字列を指定します。
+
+--- executable_real?(filename)    -> boolean
 #@todo
 
 filename が実ユーザ/グループ ID で実行できる時、真を返します。
 
---- exist?(filename)
+@param filename ファイル名を表す文字列を指定します。
+
+--- exist?(filename)    -> boolean
 #@todo
 
 filename が存在する時、真を返します。
 
---- exists?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- exists?(filename)    -> boolean
 #@todo
 
-filename が存在する時、真を返します。
 このメソッドはobsoleteです。
+
+filename が存在する時、真を返します。
 [[m:FileTest.#exist?]]を使って下さい。
 
---- grpowned?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- grpowned?(filename)    -> boolean
 #@todo
 
 filename のグループ ID が実効グループ ID と等しい時、真を返
 します。
 
---- directory?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- directory?(filename)    -> boolean
 #@todo
 
 filename がディレクトリの時、真を返します。
 
---- file?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- file?(filename)    -> boolean
 #@todo
 
 filaname が通常ファイルである時、真を返します。
 
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
 #@since 1.8.4
---- identical?(filename1, filename2)
+--- identical?(filename1, filename2)    -> boolean
 #@todo
 
 filaname1 と filename2 が同じファイルを指している時、真を返します。
@@ -73,46 +101,63 @@ filaname1 と filename2 が同じファイルを指している時、真を返します。
   p File.identical?("a", "c")      #=> true
   open("d", "w") {}
   p File.identical?("a", "d")      #=> false
+
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
 #@end
---- pipe?(filename)
+--- pipe?(filename)    -> boolean
 #@todo
 
 filename が名前つきパイプ(FIFO)である時、真を返します。
 
---- socket?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- socket?(filename)    -> boolean
 #@todo
 
 filename がソケットである時、真を返します。
 
---- owned?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- owned?(filename)    -> boolean
 #@todo
 
 filename が自分のものである時に真を返します。
 
---- readable?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- readable?(filename)    -> boolean
 #@todo
 
 filename を読み込み可能な時に真を返します。
 
---- readable_real?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- readable_real?(filename)    -> boolean
 #@todo
 
 filename が実ユーザ/実グループによって読み込み可能な時に真を
 返します。
 
---- setuid?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- setuid?(filename)    -> boolean
 #@todo
 
 filename が [[man:setuid(2)]] されている時に真を返
 します。
 
---- setgid?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- setgid?(filename)    -> boolean
 #@todo
 
 filename が [[man:setgid(2)]] されている時に真を返
 します。
 
---- size(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- size(filename)    -> Integer
 #@todo
 
 filename のサイズを返します。filename が存在しなければ
@@ -121,7 +166,9 @@ filename のサイズを返します。filename が存在しなければ
 [[m:FileTest.#size?]], [[m:FileTest.#zero?]] も参
 照してください。
 
---- size?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- size?(filename)    -> Integer
 #@todo
 
 filename のサイズを返します。filename が存在しない時や
@@ -130,29 +177,39 @@ filename のサイズが0の時には nil を返します。
 [[m:FileTest.#size]], [[m:FileTest.#zero?]] も参照
 してください。
 
---- sticky?(filename)
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+--- sticky?(filename)    -> boolean
 #@todo
 
 filename の sticky ビット([[man:chmod(2)]] 参照)が
 立っている時に真を返します。
 
---- symlink?(filename)
+@param filename ファイル名を表す文字列を指定します。
+
+--- symlink?(filename)    -> boolean
 #@todo
 
 filename がシンボリックリンクである時、真を返します。
 
---- writable?(filename)
+@param filename ファイル名を表す文字列を指定します。
+
+--- writable?(filename)    -> boolean
 #@todo
 
 filename が書き込み可である時、真を返します。
 
---- writable_real?(filename)
+@param filename ファイル名を表す文字列を指定します。
+
+--- writable_real?(filename)    -> boolean
 #@todo
 
 filename が実ユーザ/実グループによって書き込み可である時、真
 を返します。
 
---- zero?(filename)
+@param filename ファイル名を表す文字列を指定します。
+
+--- zero?(filename)    -> boolean
 #@todo
 
 filename が存在して、そのサイズが 0 である時、真を返します。
@@ -161,9 +218,10 @@ filename が存在しない場合は false を返します。
 [[m:FileTest.#size]], [[m:FileTest.#size?]], も参
 照してください。
 
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
 #@since 1.9.0
-#@# bc-rdoc: detected missing name: world_readable?
---- world_readable?(file_name)   => fixnum or nil
+--- world_readable?(file_name)     -> Integer | nil
 #@todo
 
 If file_name is readable by others, returns an integer representing
@@ -175,8 +233,7 @@ see stat(2).
    m = File.world_readable?("/etc/passwd")
    sprintf("%o", m)                              # => "644"
 
-#@# bc-rdoc: detected missing name: world_writable?
---- world_writable?(file_name)   => fixnum or nil
+--- world_writable?(file_name)     -> Integer | nil
 #@todo
 
 If file_name is writable by others, returns an integer representing
