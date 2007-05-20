@@ -1,13 +1,139 @@
 = class YAML::Stream < Object
 == class methods
 --- new(opts = {})
+ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
+
 #@todo
 == instance methods
 --- [](i)
+i番目のドキュメントを参照します。
+
+@param i 参照したいドキュメントの番号を指定します。
+
+  require 'yaml'
+  
+  class Dog
+    attr_accessor :name
+    def initialize(name) 
+      @name = name
+    end
+  end
+  
+  ys = YAML::Stream.new
+  begin
+    ys[0] = Dog.new("kuro")
+  rescue
+    p $!
+    #=> #<NoMethodError: undefined method `[]=' for #<YAML::Stream:0x2b07d48 @documents=[], @options={}>>
+  end
+  
+  ys.add Dog.new("pochi") 
+  p ys[0]
+  #=> #<Dog:0x2b07b04 @name="pochi">
+
 --- add(doc)
+オブジェクトをドキュメントに追加します。
+
+@param doc 適切なオブジェクトを指定します。
+
+  require 'yaml'
+  
+  class Dog
+    attr_accessor :name
+    def initialize(name) 
+      @name = name
+    end
+  end
+  
+  str1=<<EOT
+  --- !ruby/Dog
+  name: pochi
+  EOT
+  
+  ys = YAML.load_stream(str1)
+  p ys.documents
+  #=> [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">]
+  ys.add(Dog.new("tama"))
+  p ys.documents
+  #=> [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
+
 --- edit(doc_num, doc)
+doc_num番目のドキュメントをdocに変更します。
+もし、doc_numが現在のドキュメント数より大きい場合は間にはnilが挿入されます。
+
+@param doc_num 変更されるドキュメントの番号 
+@param doc 適切なオブジェクト
+
+  require 'yaml'
+  
+  class Dog
+    attr_accessor :name
+    def initialize(name) 
+      @name = name
+    end
+  end
+  
+  ys = YAML::Stream.new
+  ys.add(Dog.new("tama"))
+  ys.edit(1, Dog.new("pochi"))
+  ys.edit(5, Dog.new("jack"))
+  p ys.documents
+  #=> [#<Dog:0x2b07c44 @name="tama">, #<Dog:0x2b07c1c @name="pochi">, nil, nil, nil, #<Dog:0x2b07bf4 @name="jack">]
+
 --- emit(io = nil)
+ストリームに含まれる各ドキュメントをIOにYAML形式で書き込みます。
+io がnilの場合は文字列を返します。
+
+@param io 書き込み先のIOオブジェクト
+
+  require 'yaml'
+  
+  class Dog
+    attr_accessor :name
+    def initialize(name) 
+      @name = name
+    end
+  end
+  
+  ys = YAML::Stream.new
+  ys.add(Dog.new("pochi"))
+  ys.edit(1, { :age => 17, :color => "white"})
+  ys.edit(2, [ "Chiba", "Saitama"])
+  ys.emit.split(/\n/).each {|l|
+    puts l
+  }
+  
+  #結果
+  --- !ruby/object:Dog
+  name: pochi
+  ---
+  :age: 17
+  :color: white
+  ---
+  - Chiba
+  - Saitama
+
 --- documents
+現在のドキュメントを配列で返します。
+
+  require 'yaml'
+  
+  str1=<<EOT
+  --- !ruby/Dog
+  name: pochi
+  --- 
+  :age: 17
+  :color: white
+  EOT
+  
+  ys = YAML.load_stream(str1)
+  p ys.documents.pop
+  #=> {:age=>17, :color=>"white"}
+  p ys.documents.pop
+  #=> #<YAML::DomainType:0x2b07e24 @type_id="Dog", @domain="ruby.yaml.org,2002", @value={"name"=>"pochi"}>
+  p ys.documents.pop
+  #=> nil
+
 --- options
 #@todo
 

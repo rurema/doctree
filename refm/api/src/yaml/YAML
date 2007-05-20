@@ -353,11 +353,40 @@ Ruby のオブジェクトを生成して返します。
 #@end
 
 --- load_stream(io)
-#@todo
 
 与えられた io から YAML フォーマットの文書を
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
 それらオブジェクトを含んだ [[c:YAML::Stream]] を返します。
+
+@param io YAML フォーマットの文書のIOオブジェクトもしくは文字列
+
+  require 'yaml'
+  
+  class Dog
+    attr_accessor :name
+    def initialize(name) 
+      @name = name
+    end
+  end
+  
+  str1=<<EOT
+  --- !ruby/Dog
+  name: pochi
+  --- !!Dog
+  age: 0.5
+  EOT
+  
+  YAML.add_ruby_type("Dog") do |type, val|
+    Dog.new(val["name"])
+  end
+  
+  ys = YAML.load_stream(str1)
+  p ys
+  #=> #<YAML::Stream:0x2b079d8 @options={}, @documents=[#<Dog:0x2b079c4 @name="pochi">, #<YAML::PrivateType:0x2b07780 @value={"age"=>0.5}, @type_id="Dog">]>
+  ys.edit(1, Dog.new("tama"))
+  p ys.documents
+  #=> [#<Dog:0x2b079b0 @name="pochi">, #<Dog:0x2b0762c @name="tama">]
+
 
 --- object_maker(obj_class, val)
 #@# --- object_maker(obj_class, val, is_attr = false)
