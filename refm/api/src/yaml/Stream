@@ -1,4 +1,7 @@
 = class YAML::Stream < Object
+
+YAMLドキュメントを複数保持することができるストリームクラスです。
+
 == class methods
 --- new(opts = {})
 ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
