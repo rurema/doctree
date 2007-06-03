@@ -63,6 +63,8 @@ File.basename の動作は [[url:http://www.unix-systems.org/version3/online.html]] 
 
 @param filename ファイル名を表す文字列を指定します。
 
+@param suffix サフィックスを文字列で与えます。
+
 --- chmod(mode, *filename)    -> Integer
 #@todo
 
@@ -169,7 +171,7 @@ path が相対パスであれば default_dir を基準にします。
 
 @param path パスを表す文字列を指定します。
 
-@param default_dir パスを表す文字列を指定します。
+@param default_dir path が相対パスであれば default_dir を基準に展開されます。
 
 --- extname(filename)    -> String
 #@todo
@@ -197,9 +199,8 @@ path が相対パスであれば default_dir を基準にします。
 ファイル名のパターンマッチを行います([[man:fnmatch(3)]])。
 path が pattern にマッチすれば真を返します。
 
-pattern にはワイルドカードとして `*', `?', `[]' が使用できま
+@param pattern パターンを指定します。ワイルドカードとして `*', `?', `[]' が使用できま
 す([[m:Dir.glob]] とは違って `{}' や `**/' は使用できません)。
-
     %w(foo foobar bar).each {|f|
       p File.fnmatch("foo*", f)
     }
@@ -207,7 +208,7 @@ pattern にはワイルドカードとして `*', `?', `[]' が使用できま
          true
          false
 
-flags に以下の定数([[c:File::Constants]] モジュールで定義さ
+@param flags 以下の定数([[c:File::Constants]] モジュールで定義さ
 れています)を論理和で指定することでパターンマッチの動作を変更する
 ことができます。flags のデフォルト値は0(フラグ指定なし)です。
 
@@ -268,6 +269,8 @@ flags に以下の定数([[c:File::Constants]] モジュールで定義さ
 
   "unknown"
 
+@param filename ファイル名を表す文字列を指定します。 
+
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
 --- join(*item)    -> String
@@ -279,6 +282,8 @@ File::SEPARATORを間に入れて文字列を連結します。
 
 と同じです。([[unknown:DOSISH 対応]]で環境依存になる予定です。)
 
+@param item 連結したいディレクトリ名やファイル名を与えます。
+
 --- link(old, new)    -> 0
 #@todo
 
@@ -287,6 +292,10 @@ old を指す new という名前のハードリンクを
 
 ハードリンクに成功した場合は 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
+
+@param old ファイル名を表す文字列を指定します。 
+
+@param new ファイル名を表す文字列を指定します。 
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
@@ -346,12 +355,16 @@ pathname を dirname とbasename に分割して、2 要
 
 と同じです。
 
+@param pathname パス名を表す文字列を指定します。 
+
 --- stat(filename)    -> File::Stat
 #@todo
 filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 て返します。
 
 [[m:IO#stat]], [[m:File#lstat]] も参照してください。
+
+@param filename ファイル名を表す文字列を指定します。 
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
@@ -361,6 +374,8 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 情報を返します。[[man:lstat(2)]] を実装していないシステムでは、File.stat と同じです。
 
 [[m:IO#stat]], [[m:File#lstat]] も参照してください。
+
+@param filename ファイル名を表す文字列を指定します。 
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
@@ -373,6 +388,10 @@ old への new という名前のシンボリックリンクを生成しま
 シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は
 例外 [[c:Errno::EXXX]] が発生します。
 
+@param old ファイル名を表す文字列を指定します。 
+
+@param new ファイル名を表す文字列を指定します。 
+
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- truncate(path, length)    -> 0
@@ -384,14 +403,23 @@ path で指定されたファイルのサイズを最大 length バイト
 サイズの変更に成功すれば 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
 
+@param path パスを表す文字列を指定します。
+
+@param length 変更したいサイズを整数で与えます。
+
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- umask           -> Integer
+#@todo
+
+現在の umask の値を返します。
+
 --- umask(umask)    -> Integer
 #@todo
 
-umask を変更します。変更前の umask の値を返します。umask を
-省略すると変更を行わないで、現在の umask の値を返します。
+umask を変更します。変更前の umask の値を返します
+
+@param umask 設定したい umask の値を整数で指定します。
 
 --- utime(atime, mtime, *filename)    -> Integer
 #@todo
@@ -402,6 +430,12 @@ umask を変更します。変更前の umask の値を返します。umask を
 
 先頭の二つの引数は時刻を指定する数値または [[c:Time]] クラスのイン
 スタンスでなければなりません。
+
+@param filename ファイル名を表す文字列を指定します。 
+
+@param atime 最終アクセス時刻を [[c:Time]] か整数で指定します。
+
+@param utime 更新時刻を [[c:Time]] か整数で指定します。
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
@@ -633,7 +667,7 @@ systems, see +stat(2)+.
 場合は 0 を返します。失敗した場合は例外 [[c:Errno::EXXX]] が発生し
 ます。
 
-mode は [[man:chmod(2)]] と同様に数値で指定します。
+@param mode [[man:chmod(2)]] と同様に数値で指定します。
 
 @raise IOError 自身が close されている場合に、発生します。
 
@@ -651,6 +685,10 @@ owner と group は、[[man:chown(2)]] と同様に
 数値で指定します。
 nil または -1 を指定することでオーナーやグループを現在
 のままにすることができます。
+
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
+
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
 
 @raise IOError 自身が close されている場合に、発生します。
 
