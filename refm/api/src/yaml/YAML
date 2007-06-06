@@ -576,15 +576,61 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 == instance methods
 --- to_yaml(opts = {})
 オブジェクトをYAMLドキュメントに変換します。
+
 @param opts YAMLドキュメント出力の際のオプションを指定する。
 
-#@todo
+#@# optsの使い方
+
+  require 'yaml'
+  
+  h = {
+    :ugo => 17,
+    :hoge => "fuga",
+  }
+  
+  print h.to_yaml
+  #=> ---
+  #=> :ugo: 17
+  #=> :hoge: fuga
+  
+  class MyDog
+    attr_accessor :name, :age
+  end
+  
+  c = MyDog.new
+  c.name = "Pochi"
+  c.age = 3
+  print c.to_yaml
+  #=> --- !ruby/object:MyDog
+  #=> age: 3
+  #=> name: Pochi
 
 --- to_yaml_style
 #@todo
 
---- to_yaml_properties
-#@todo
+--- to_yaml_properties -> [String]
+[[m:Object#instance_variables]].sortの結果を返します。
+
+@return オブジェクトのインスタンス変数名の配列
+
+  require 'yaml'
+  
+  h = {
+    :ugo => 17,
+    :hoge => "fuga",
+  }
+  
+  p h.to_yaml_properties
+  #=> []
+  class MyDog
+    attr_accessor :name, :age
+  end
+  
+  c = MyDog.new
+  c.name = "Pochi"
+  c.age = 3
+  p c.to_yaml_properties.join(",")
+  #=> ["@age,@name"]
 
 = reopen Struct
 == class methods
