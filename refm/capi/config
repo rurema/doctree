@@ -1,0 +1,20 @@
+def setup_environment
+  $KCODE = 'EUC'
+  $LOAD_PATH.unshift '/usr/local/lib/bitclust/lib'
+  require 'bitclust'
+end
+
+def bitclust_context
+  cgidir = '/var/www/doc.lrn/refm/capi'
+  vardir = "#{cgidir}/var"
+  srcdir = '/usr/local/lib/bitclust'
+  baseurl = 'http://doc.loveruby.net/refm/capi'
+
+  db = BitClust::FunctionDatabase.new("#{vardir}/1.9.0")
+  manager = BitClust::ScreenManager.new(
+    :base_url    => baseurl,
+    :cgi_url     => "#{baseurl}/view",
+    :templatedir => "#{srcdir}/template"
+  )
+  BitClust::RequestHandler.new(db, manager)
+end
