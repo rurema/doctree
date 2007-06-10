@@ -1,17 +1,17 @@
---- type* ALLOC(type)
+--- MACRO type* ALLOC(type)
 
 type 型のメモリを割り当てる。
 
---- type* ALLOC_N(type, n)
+--- MACRO type* ALLOC_N(type, n)
 
 type 型のメモリを n 個割り当てる。
 
---- type* ALLOCA_N(type, n)
+--- MACRO type* ALLOCA_N(type, n)
 
 type 型のメモリを n 個スタックフレームに割り当てる。
 このメモリは関数が終わると自動的に解放される。
 
---- int BUILTIN_TYPE(VALUE obj)
+--- MACRO int BUILTIN_TYPE(VALUE obj)
 
 obj の構造体型 ID を返します。
 [[f:SPECIAL_CONST_P(obj)]] が真のオブジェクトに対して使うと落ちます。
@@ -26,24 +26,24 @@ val の構造体型フラグが typeflag でなければ
 例外 TypeError を発生します。val は即値の VALUE であっても
 構いません。
 
---- VALUE CHR2FIX(char x)
+--- MACRO VALUE CHR2FIX(char x)
 
 char 型の整数 x を Ruby の Fixnum に変換します。
 
---- VALUE CLASS_OF(VALUE obj)
+--- MACRO VALUE CLASS_OF(VALUE obj)
 
 obj のクラスを返します。
 この場合の「クラス」とは C レベルのクラス、
 つまり RBasic 構造体の klass メンバの値です。
 また、構造体を持たない Fixnum などに対しても正常に働きます。
 
---- void CLONESETUP(VALUE clone, VALUE obj)
+--- MACRO void CLONESETUP(VALUE clone, VALUE obj)
 
 OBJSETUP() の変種。
 clone を、obj から clone で作った
 オブジェクトとして初期化します。
 
---- void Data_Get_Struct(VALUE obj, type, type *svar)
+--- MACRO void Data_Get_Struct(VALUE obj, type, type *svar)
 
 Ruby のオブジェクト obj から type 型へのポインタを
 とりだし svar に代入します。
@@ -63,7 +63,7 @@ Ruby のオブジェクト obj から type 型へのポインタを
         return INT2NUM(m->i);
     }
 
---- VALUE Data_Make_Struct(VALUE klass, type, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, type *svar)
+--- MACRO VALUE Data_Make_Struct(VALUE klass, type, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, type *svar)
 
 type 型の構造体をヒープに割り当ててそれへのポインタを
 svar に代入し、クラス klass のインスタンスである
@@ -93,12 +93,12 @@ free はそれぞれマーク用・解放用の関数へのポインタです。
                                 mark_my, free_my, dummy);
     }
 
---- void *DATA_PTR(VALUE dta)
+--- MACRO void *DATA_PTR(VALUE dta)
 
 実際は struct RData* 型である dta から、
 それがラップしているポインタを取り出します。
 
---- VALUE Data_Wrap_Struct(VALUE klass, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, void *sval)
+--- MACRO VALUE Data_Wrap_Struct(VALUE klass, RUBY_DATA_FUNC mark, RUBY_DATA_FUNC free, void *sval)
 
 C の構造体 sval をラップして klass クラスの
 インスタンスである Ruby オブジェクトを生成し、それを返します。
@@ -128,173 +128,173 @@ mark、free はそれぞれ sval のマーク用・解放用の
         return Data_Wrap_Struct(MyClass, 0, free_my, m);
     }
 
---- void DUPSETUP(dup, obj)
+--- MACRO void DUPSETUP(dup, obj)
 
 OBJSETUP() の変種。
 dup を、obj から dup で作った
 オブジェクトとして初期化します。
 
---- int FIX2INT(VALUE x)
+--- MACRO int FIX2INT(VALUE x)
 
 Fixnum を int に変換します。
 返り値が int の範囲から外れる場合は RangeError が発生します。
 
---- long FIX2LONG(VALUE x)
+--- MACRO long FIX2LONG(VALUE x)
 
 Fixnum を long に変換します。
 返り値が long の範囲から外れる場合は RangeError が発生します。
 
---- unsigned int FIX2UINT(VALUE x)
+--- MACRO unsigned int FIX2UINT(VALUE x)
 
 Fixnum を unsigned int に変換します。
 返り値が unsigned int の範囲から外れる場合は RangeError が発生します。
 
---- unsigned long FIX2ULONG(VALUE x)
+--- MACRO unsigned long FIX2ULONG(VALUE x)
 
 Fixnum を unsigned long に変換します。
 返り値が unsigned long の範囲から外れる場合は RangeError が発生します。
 
---- int FIXABLE(long f)
+--- MACRO int FIXABLE(long f)
 
 f が Fixnum の範囲に収まっているなら真。
 
---- long FIXNUM_MAX
+--- MACRO long FIXNUM_MAX
 
 Fixnum にできる整数の上限値。
 
---- long FIXNUM_MIN
+--- MACRO long FIXNUM_MIN
 
 Fixnum にできる整数の下限値。
 
---- int FIXNUM_P(VALUE obj)
+--- MACRO int FIXNUM_P(VALUE obj)
 
 obj が Fixnum のインスタンスのとき真。
 
---- int FL_ABLE(VALUE x)
+--- MACRO int FL_ABLE(VALUE x)
 
 x が即値の VALUE でなければ真。
 
---- void FL_REVERSE(VALUE x, int f)
+--- MACRO void FL_REVERSE(VALUE x, int f)
 
 x のフラグ f を反転する。
 
---- void FL_SET(VALUE x, int f)
+--- MACRO void FL_SET(VALUE x, int f)
 
 x に対してフラグ f をセットする。
 
---- int FL_TEST(VALUE x, int f)
+--- MACRO int FL_TEST(VALUE x, int f)
 
 x のフラグ f が立っていたら真。
 
---- void FL_UNSET(VALUE x, int f)
+--- MACRO void FL_UNSET(VALUE x, int f)
 
 x のフラグ f をクリアする。
 
---- VALUE ID2SYM(ID id)
+--- MACRO VALUE ID2SYM(ID id)
 
 id を Symbol に変換します。
 
---- int IMMEDIATE_P(VALUE obj)
+--- MACRO int IMMEDIATE_P(VALUE obj)
 
 obj がポインタでないとき真。すなわち現在の実装では
 Symbol か Fixnum のインスタンスであるとき真。
 
---- VALUE INT2FIX(int i)
+--- MACRO VALUE INT2FIX(int i)
 
 31ビット以内におさまる整数を Fixnum に変換します。
 
---- VALUE INT2NUM(long i)
+--- MACRO VALUE INT2NUM(long i)
 
 任意の整数を Fixnum か Bignum に変換します。
 
---- int ISALNUM(char c)
+--- MACRO int ISALNUM(char c)
 
---- int ISALPHA(char c)
+--- MACRO int ISALPHA(char c)
 
---- int ISASCII(char c)
+--- MACRO int ISASCII(char c)
 
---- int ISDIGIT(char c)
+--- MACRO int ISDIGIT(char c)
 
---- int ISLOWER(char c)
+--- MACRO int ISLOWER(char c)
 
---- int ISPRINT(char c)
+--- MACRO int ISPRINT(char c)
 
---- int ISSPACE(char c)
+--- MACRO int ISSPACE(char c)
 
---- int ISUPPER(char c)
+--- MACRO int ISUPPER(char c)
 
---- int ISXDIGIT(char c)
+--- MACRO int ISXDIGIT(char c)
 
---- VALUE LL2NUM(long long v)
+--- MACRO VALUE LL2NUM(long long v)
 
---- VALUE LONG2FIX(long i)
+--- MACRO VALUE LONG2FIX(long i)
 
---- VALUE LONG2NUM(long v)
+--- MACRO VALUE LONG2NUM(long v)
 
---- int MEMCMP(p1, p2, type, n)
+--- MACRO int MEMCMP(p1, p2, type, n)
 
 type 型のメモリ領域 p1 と p2 の先頭 n 個を比較する。
 p1 が p2 の最初の n 個より小さい、等しい、大きいとき、そ
 れぞれ正、0、負の値を返す。
 
---- void MEMCPY(p1, p2, type, n)
+--- MACRO void MEMCPY(p1, p2, type, n)
 
 type 型のメモリ領域 p2 のうち先頭の n 個を p1 にコピーする。
 
---- void MEMMOVE(p1, p2, type, n)
+--- MACRO void MEMMOVE(p1, p2, type, n)
 
 type 型のメモリ領域 p2 のうち先頭の n 個を p1 に移動する。
 
---- void MEMZERO(p, type, n)
+--- MACRO void MEMZERO(p, type, n)
 
 type 型のメモリ領域 p をゼロクリアする。 n は要素数。
 
---- int NEGFIXABLE(long f)
+--- MACRO int NEGFIXABLE(long f)
 
---- NEWOBJ(obj, int typeflag)
+--- MACRO void NEWOBJ(obj, int typeflag)
 
---- int NIL_P(VALUE obj)
+--- MACRO int NIL_P(VALUE obj)
 
 obj が Qnil のとき真。
 
---- char NUM2CHR(VALUE x)
+--- MACRO char NUM2CHR(VALUE x)
 
---- double NUM2DBL(VALUE x)
+--- MACRO double NUM2DBL(VALUE x)
 
---- int NUM2INT(VALUE x)
+--- MACRO int NUM2INT(VALUE x)
 
---- long NUM2LONG(VALUE x)
+--- MACRO long NUM2LONG(VALUE x)
 
---- unsigned int NUM2UINT(VALUE x)
+--- MACRO unsigned int NUM2UINT(VALUE x)
 
---- unsigned long NUM2ULONG(VLAUE x)
+--- MACRO unsigned long NUM2ULONG(VLAUE x)
 
---- void OBJ_FREEZE(VALUE x)
+--- MACRO void OBJ_FREEZE(VALUE x)
 
---- int OBJ_FROZEN(VALUE x)
+--- MACRO int OBJ_FROZEN(VALUE x)
 
---- void OBJ_INFECT(VALUE dest, VALUE src)
+--- MACRO void OBJ_INFECT(VALUE dest, VALUE src)
 
 src に汚染マークが付いていたら dest も汚染する。
 
---- void OBJ_TAINT(VALUE x)
+--- MACRO void OBJ_TAINT(VALUE x)
 
 x に汚染マークを付ける。
 
---- int OBJ_TAINTED(VALUE x)
+--- MACRO int OBJ_TAINTED(VALUE x)
 
 x に汚染マークが付いていたら真。
 
---- void OBJSETUP(obj, VALUE klass, int typeflag)
+--- MACRO void OBJSETUP(obj, VALUE klass, int typeflag)
 
 obj をクラス klass とフラグ typeflag で初期化する。
 $SAFE >= 3 のときは無条件で汚染する。
 
---- int POSFIXABLE(long f)
+--- MACRO int POSFIXABLE(long f)
 
 f が Fixnum の上限値以下ならば真。
 
---- struct RArray *RARRAY(VALUE obj)
+--- MACRO struct RArray *RARRAY(VALUE obj)
 
 obj を struct RArray* にキャストする。
 本当は obj が struct RArray* でないとしてもキャストしてしまう。
@@ -309,65 +309,64 @@ obj を struct RArray* にキャストする。
 
 --- VALUE rb_uint_new(unsigned int v)
 
---- struct RBasic *RBASIC(VALUE obj)
+--- MACRO struct RBasic *RBASIC(VALUE obj)
 
---- struct RBignum *RBIGNUM(VALUE obj)
+--- MACRO struct RBignum *RBIGNUM(VALUE obj)
 
---- struct RClass *RCLASS(VALUE obj)
+--- MACRO struct RClass *RCLASS(VALUE obj)
 
---- struct RData *RDATA(VALUE obj)
+--- MACRO struct RData *RDATA(VALUE obj)
 
---- type* REALLOC_N(var, type, n)
+--- MACRO type* REALLOC_N(var, type, n)
 
 type 型のメモリ領域 var のサイズを n 個に変更する。
 
---- struct RFile *RFILE(VALUE obj)
+--- MACRO struct RFile *RFILE(VALUE obj)
 
---- struct RFloat *RFLOAT(VALUE obj)
+--- MACRO struct RFloat *RFLOAT(VALUE obj)
 
---- struct RHash *RHASH(VALUE obj)
+--- MACRO struct RHash *RHASH(VALUE obj)
 
---- struct RClass *RMODULE(VALUE obj)
+--- MACRO struct RClass *RMODULE(VALUE obj)
 
---- struct RObject *ROBJECT(VALUE obj)
+--- MACRO struct RObject *ROBJECT(VALUE obj)
 
---- struct RRegexp *RREGEXP(VALUE obj)
+--- MACRO struct RRegexp *RREGEXP(VALUE obj)
 
---- struct RString *RSTRING(VALUE obj)
+--- MACRO struct RString *RSTRING(VALUE obj)
 
---- struct RStruct *RSTRUCT(VALUE obj)
+--- MACRO struct RStruct *RSTRUCT(VALUE obj)
 
---- int RTEST(VALUE obj)
+--- MACRO int RTEST(VALUE obj)
 
 obj が Qfalse でも Qnil でもないとき真。
 
---- RUBY_DATA_FUNC(func)
+--- MACRO RUBY_DATA_FUNC(func)
 
 任意の関数へのポインタ func を struct RData の dmark/dfree の
 値として適する型に強制キャストします。
 
---- RUBY_METHOD_FUNC(func)
+--- MACRO RUBY_METHOD_FUNC(func)
 
 任意の関数へのポインタ func を Ruby のメソッドの実体として適する
 型に強制キャストします。
 
---- SafeStringValue(v)
+--- MACRO SafeStringValue(v)
 
 [[f:StringValue]] と同じく、val が String でなければ to_str メソッドを
 使って String に変換します。同時に rb_check_safe_str() によるチェックも
 行います。
 
---- int SPECIAL_CONST_P(VALUE obj)
+--- MACRO int SPECIAL_CONST_P(VALUE obj)
 
-obj が実体の構造体を持たないとき真。現時点で真になるのは
-Qnil Qtrue Qfalse と、
-Fixnum／Symbol のインスタンス。
+obj が実体の構造体を持たないとき真。
+現時点で真になるのは Qnil, Qtrue, Qfalse と、
+Fixnum, Symbol のインスタンス。
 
---- char *STR2CSTR(VALUE str)
+--- MACRO char *STR2CSTR(VALUE str)
 
 Ruby のオブジェクト str から C の文字列を取り出します。
-str が String でない場合は to_str によって
-変換を試みます。
+str が String でない場合は to_str によって変換を試みます。
 
 返り値を free したり直接書き換えたりしてはいけません。
 
@@ -384,40 +383,40 @@ Ruby 1.7 以降では代わりに [[f:StringValuePtr]] を使用します。こちら
 [[f:StringValue]] は、引数が to_str による暗黙の型変換を期待する
 場合に使用します。
 
---- StringValue(VALUE val)
+--- MACRO void StringValue(VALUE val)
 
 val が String でなければ to_str メソッドを使って String に変換します。
 
 このマクロに渡した VALUE は ruby の GC から確実に保護されます。
 
---- char *StringValuePtr(VALUE val)
+--- MACRO char *StringValuePtr(VALUE val)
 
 val が String でなければ to_str メソッドを使って String に変換し、
 その実体のポインタを返します。
 
 このマクロに渡した VALUE は ruby の GC から確実に保護されます。
 
---- int SYM2ID(VALUE symbol)
+--- MACRO int SYM2ID(VALUE symbol)
 
 Symbol symbol を数値に変換します。
 1.4では、[[f:FIX2INT]](symbol)と同じです。
 
---- int SYMBOL_P(VALUE obj)
+--- MACRO int SYMBOL_P(VALUE obj)
 
 obj が Symbol のインスタンスのとき真。
 
---- int TYPE(VALUE obj)
+--- MACRO int TYPE(VALUE obj)
 
 obj の構造体型 ID を返します。
 
---- VALUE UINT2NUM(unsigned long i)
+--- MACRO VALUE UINT2NUM(unsigned long i)
 
 任意の整数を Fixnum か Bignum に変換します。
 
---- VALUE ULL2NUM(unsigned long long n)
+--- MACRO VALUE ULL2NUM(unsigned long long n)
 
---- VALUE ULONG2NUM(unsigned long n)
+--- MACRO VALUE ULONG2NUM(unsigned long n)
 
---- VALUE UINT2FIX(unsigned int i)
+--- MACRO VALUE UINT2FIX(unsigned int i)
 
 unsigned int を Fixnum に変換します。

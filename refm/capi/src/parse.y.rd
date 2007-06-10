@@ -187,8 +187,7 @@ node の種類を返します。
 lex_strterm 形式のノード quote の指示に従い、
 文字列の終端または埋め込み式の始まりまで読みこみます。
 
---- int peek(int c)
-#@# [macro]
+--- MACRO static int peek(int c)
 
 現在読み込み中のプログラムの次の文字が c ならば真。
 
@@ -324,8 +323,7 @@ $~ と $_ をセットします。
 
 rb_sym_all_symbols() のイテレータブロック。
 
---- char *tok(void)
-#@# [macro]
+--- MACRO static char *tok(void)
 
 現在のトークンの先頭へのポインタ。
 free してはならない。
@@ -343,18 +341,15 @@ free してはならない。
 
 --- static int tokadd_string(int func, int term, int paren)
 
---- void tokfix(void)
-#@# [macro]
+--- MACRO static void tokfix(void)
 
 トークンバッファを NUL で終端します。
 
---- toklast(void)
-#@# [macro]
+--- MACRO static char* toklast(void)
 
 現在のトークンの末尾へのポインタ。
 
---- int toklen(void)
-#@# [macro]
+--- MACRO static int toklen(void)
 
 現在のトークンの長さ。
 
