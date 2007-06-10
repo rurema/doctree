@@ -563,14 +563,24 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
   #=> --- !ruby/object:MyDog
   #=> age: 17
   
-
-
-
-
 = reopen Class
 == instance methods
 --- to_yaml(opts = {})
-#@todo
+例外を発生する。
+
+@param opts YAMLドキュメント出力の際のオプションを指定するが使われない。
+
+@raise TypeError
+
+  require 'yaml'
+  
+  begin
+    cc = Class.new 
+    cc.to_yaml
+  rescue
+    p $!
+    #=> #<TypeError: can't dump anonymous class Class>
+  end
 
 = reopen Object
 == instance methods
@@ -605,8 +615,22 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
   #=> age: 3
   #=> name: Pochi
 
---- to_yaml_style
-#@todo
+--- to_yaml_style -> nil
+#@# 昔は違うかも
+#@since 1.8.5
+nilを返します。
+
+@return nilを返します。
+
+  require 'yaml'
+  
+  p to_yaml_style
+  #=> nil
+  a = []
+  p a.to_yaml_style
+  #=> nil
+
+#@end
 
 --- to_yaml_properties -> [String]
 [[m:Object#instance_variables]].sortの結果を返します。
@@ -634,11 +658,27 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 
 = reopen Struct
 == class methods
---- yaml_tag_class_name
-#@todo
+--- yaml_tag_class_name -> String
+Struct::をのぞいたクラス名を返す
 
---- yaml_tag_read_class(name)
-#@todo
+@return Struct::をのぞいたクラス名
+
+  require 'yaml'
+  
+  YStruct = Struct.new("YStruct", :name)
+  p YStruct::yaml_tag_class_name
+  #=> "YStruct"
+
+--- yaml_tag_read_class(name) -> String
+引数nameにStruct::を加えた文字列を返す
+
+@return 引数nameにStruct::を加えた文字列
+
+  require 'yaml'
+  
+  YStruct = Struct.new("YStruct", :name)
+  p YStruct::yaml_tag_read_class("YStruct")
+  #=> "Struct::YStruct"
 
 = reopen String
 == instance methods
