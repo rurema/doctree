@@ -1,5 +1,5 @@
 #@since 1.8.0
-\‘¢‰»‚³‚ê‚½ƒf[ƒ^‚ð•\Œ»‚·‚éƒtƒH[ƒ}ƒbƒg‚Å‚ ‚éYAML (YAML Ain't Markup Language) ‚ðˆµ‚¤‚½‚ß‚Ìƒ‰ƒCƒuƒ‰ƒŠ‚Å‚·B
+¹½Â¤²½¤µ¤ì¤¿¥Ç¡¼¥¿¤òÉ½¸½¤¹¤ë¥Õ¥©¡¼¥Þ¥Ã¥È¤Ç¤¢¤ëYAML (YAML Ain't Markup Language) ¤ò°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 #@include(yaml/YAML)
 #@include(yaml/Stream)
