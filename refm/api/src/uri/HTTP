@@ -1,6 +1,6 @@
 = class URI::HTTP < URI::Generic
 
-HTTP の URI を表すクラスです。
+HTTP URI を表すクラスです。
 
 == Class Methods
 
@@ -9,15 +9,39 @@ HTTP の URI を表すクラスです。
 #@todo
 
 引数で与えられた URI 構成要素から URI::HTTP オブジェクトを生成します。
-構成要素は、
+
+@param ary 構成要素を表す配列を与えます。要素は
       [userinfo, host, port, path, query, fragment]
-を配列かハッシュで与えます。
+の順です。
+
+@param hash 構成要素を表すハッシュを与えます。ハッシュのキーは :scheme, :userinfo
+, :host, :port, :path, :query, :fragment のいずれかです。
+
+@raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)     -> URI::HTTP   
 #@todo
 
 汎用的な構成要素から URI::HTTP オブジェクトを生成します。build
 と異なり、引数の正当性を検査しません。
+
+@param scheme 構成要素を表す文字列を与えます。
+
+@param userinfo 構成要素を表す文字列を与えます。
+
+@param host 構成要素を表す文字列を与えます。
+
+@param port 構成要素を表す文字列を与えます。
+
+@param registry 構成要素を表す文字列を与えます。
+
+@param path 構成要素を表す文字列を与えます。
+
+@param opaque 構成要素を表す文字列を与えます。
+
+@param query 構成要素を表す文字列を与えます。
+
+@param fragment 構成要素を表す文字列を与えます。
 
 == Instance Methods
 
@@ -30,3 +54,5 @@ query が nil である場合は、自身の path を返します。
 path が空である場合には、path は「'/'」であるとします。
 
 = class URI::HTTPS < URI::HTTP
+
+HTTPS URI を表すクラスです。
