@@ -165,7 +165,8 @@ klass のクラス変数 name に val を代入します。
 
 --- struct global_entry *rb_global_entry(ID id)
 
---- VALUE rb_gv_get(const char *name) [1.5 feature]
+--- VALUE rb_gv_get(const char *name)
+#@# [1.5 feature]
 
 Ruby のグローバル変数の値を取得します。
 

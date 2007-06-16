@@ -2,7 +2,7 @@
 
 p の実体。obj を見やすく出力します。
 
---- int rb_io_mode_flags(const char *mode);
+--- int rb_io_mode_flags(const char *mode)
 
 [[man:fopen(3)]] のようなモード指定modeをruby内部のモードフラグに
 変換します。

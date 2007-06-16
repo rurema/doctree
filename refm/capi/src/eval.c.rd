@@ -415,6 +415,8 @@ END ブロックおよび Kernel#at_exit で登録した Proc オブジェクトを
 
 --- void rb_exit(int status)
 
+ステータス status でインタプリタを終了させます。
+
 --- static void rb_export_method(VALUE klass, ID name, ID noex)
 
 --- void rb_extend_object(VALUE obj, VALUE module)
