@@ -40,14 +40,27 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 が発生した場合に、引数の各要素を URI.escape して再度 build を試み
 ます。
 
+@param ary 構成要素を表す配列を与えます。要素は
+      [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
+の順です。
+
+@path hash  構成要素を表すハッシュを与えます。ハッシュのキーはシンボル :scheme 
+,:userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment のいずれかです。
+ハッシュの値は文字列で与えます。
+
 --- build(ary)     -> URI::Generic
 --- build(hash)    -> URI::Generic
 #@todo
 
 引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
-構成要素は、
+
+@param ary 構成要素を表す配列を与えます。要素は
       [scheme, userinfo, host, port, registry, path, opaque, query, fragment]
-を配列かハッシュで与えます。
+の順です。
+
+@path hash  構成要素を表すハッシュを与えます。ハッシュのキーはシンボル :scheme 
+,:userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment のいずれかです。
+ハッシュの値は文字列で与えます。
 
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
@@ -55,6 +68,24 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 #@todo
 
 各引数を成分とする URI::Generic オブジェクトを生成して返します。
+
+@param scheme 構成要素 scheme を表す文字列を与えます。
+
+@param userinfo 構成要素を表す文字列を与えます。
+
+@param host 構成要素を表す文字列を与えます。
+
+@param port 構成要素を表す文字列を与えます。
+
+@param registry 構成要素を表す文字列を与えます。
+
+@param path 構成要素を表す文字列を与えます。
+
+@param opaque 構成要素を表す文字列を与えます。
+
+@param query 構成要素を表す文字列を与えます。
+
+@param fragment 構成要素を表す文字列を与えます。
 
 @param arg_check 真が与えられた場合は、各引数が字句規則に適合しているか否かを検査します。適合しない場合は例外 URI::InvalidComponentError が起ります。
 
@@ -274,11 +305,14 @@ path が真なら true を返します。そうでない場合は false を返します。
 --- +(rel)         -> URI::Generic
 #@todo
 
-rel を自身へ連結します。[[rfc:2396]] の Section 5.2 の仕様に従います。rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
+rel を自身へ連結します。[[rfc:2396]] の Section 5.2 の仕様に従います。
+rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
 
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
   #=> #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
+
+@parse rel 連結したいパスを文字列か URI オブジェクトで与えます。
 
 --- route_from(src)    -> URI::Generic
 --- -(src)             -> URI::Generic
@@ -290,15 +324,19 @@ src からの相対パスを返します。
   p URI.parse('http://www.ruby-lang.org/en/raa.html') - 'http://www.ruby-lang.org/'
   #=> #<URI::Generic:0x20100256 URL:en/raa.html>
 
+@parse src 自身の相対パスを算出するための、ルートとなる Absolute URI を与えます。
+
 --- route_to(dst)     -> URI::Generic
 #@todo
 
-引数dstには文字列かURIオブジェクトを与えます。dstへの相対パスを返します。
+自身から dst への相対パスを返します。
 
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/').route_to('http://www.ruby-lang.org/en/raa.html')
   
   #=> #<URI::Generic:0x20100198 URL:en/raa.html>
+
+@parse dst 文字列かURIオブジェクトを与えます。
 
 --- normalize     -> URI::Generic
 --- normalize!    -> nil
@@ -336,3 +374,5 @@ Usage
   uri = URI.parse('http://myuser:mypass@my.example.com/test.rbx')
   p uri.select(:userinfo, :host, :path)
   # => ["myuser:mypass", "my.example.com", "/test.rbx"]
+
+@param select 
