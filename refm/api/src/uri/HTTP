@@ -9,13 +9,16 @@ HTTP URI を表すクラスです。
 #@todo
 
 引数で与えられた URI 構成要素から URI::HTTP オブジェクトを生成します。
+引数の正当性を検査します。
+
+  newuri = URI::HTTP.build({:host => 'www.example.com', :path> => '/foo/bar'})  
+  newuri = URI::HTTP.build([nil, "www.example.com", nil, "/path", "query", 'fragment'])
 
 @param ary 構成要素を表す配列を与えます。要素は
       [userinfo, host, port, path, query, fragment]
 の順です。
 
-@param hash 構成要素を表すハッシュを与えます。ハッシュのキーは :scheme, :userinfo
-, :host, :port, :path, :query, :fragment のいずれかです。
+@param hash 構成要素を表すハッシュを与えます。ハッシュのキーは  :scheme, :userinfo, :host, :port, :path, :query, :fragment のいずれかです。
 
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
@@ -23,7 +26,7 @@ HTTP URI を表すクラスです。
 #@todo
 
 汎用的な構成要素から URI::HTTP オブジェクトを生成します。build
-と異なり、引数の正当性を検査しません。
+と異なり、デフォルトでは引数の正当性を検査しません。
 
 @param scheme 構成要素を表す文字列を与えます。
 
@@ -33,7 +36,7 @@ HTTP URI を表すクラスです。
 
 @param port 構成要素を表す文字列を与えます。
 
-@param registry 構成要素を表す文字列を与えます。
+@param registry nil を与えます。
 
 @param path 構成要素を表す文字列を与えます。
 
@@ -42,6 +45,10 @@ HTTP URI を表すクラスです。
 @param query 構成要素を表す文字列を与えます。
 
 @param fragment 構成要素を表す文字列を与えます。
+
+@param arg_check 真が与えられた場合は、各引数が字句規則に適合しているか否かを検査します。適合しない場合は例外 URI::InvalidComponentError が起ります。
+
+@raise URI::InvalidURIError registry に nil 以外を与えた時に発生します。デフォルトでは引数の正当性は、これ以外 検査しません。
 
 == Instance Methods
 
