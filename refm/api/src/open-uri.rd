@@ -50,7 +50,7 @@ URI オブジェクトは直接読み込むことができます。
 
 = redefine Kernel
 
-== Private Instance Methods
+== Module Functions
 
 --- open(name, *rest)                -> StringIO | File
 --- open(name, *rest) {|ouri| ...}   -> nil
