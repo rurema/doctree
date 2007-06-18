@@ -6,11 +6,11 @@ _builtin/ARGF
 _builtin/ArgumentError
 _builtin/Array                  aamine
 _builtin/Bignum                 ujihisa         done
-_builtin/Binding
-_builtin/Class
-_builtin/Comparable
-_builtin/Continuation
-_builtin/Data
+_builtin/Binding                sheepman
+_builtin/Class                  sheepman
+_builtin/Comparable             sheepman
+_builtin/Continuation           sheepman
+_builtin/Data                   sheepman
 _builtin/Dir                    sheepman
 _builtin/ENV                    mukai           done
 _builtin/EOFError
@@ -77,7 +77,7 @@ _builtin/Thread
 _builtin/ThreadError
 _builtin/ThreadGroup
 _builtin/Time
-_builtin/TrueClass      yamane      done
+_builtin/TrueClass              yamane          done
 _builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod
 _builtin/ZeroDivisionError      snoozer05       done
