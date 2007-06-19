@@ -73,10 +73,10 @@ _builtin/SyntaxError            snoozer05       done
 _builtin/SystemCallError
 _builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError
-_builtin/Thread
-_builtin/ThreadError
-_builtin/ThreadGroup
-_builtin/Time
+_builtin/Thread                 sheepman
+_builtin/ThreadError            sheepman
+_builtin/ThreadGroup            sheepman
+_builtin/Time                   sheepman
 _builtin/TrueClass              yamane          done
 _builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod
