@@ -1,6 +1,6 @@
 = class Continuation < Object
 
-[[unknown:組み込み関数]] [[m:Kernel#callcc]] { |cont| ... } の呼び出し
+[[unknown:組み込み関数]] [[m:Kernel.#callcc]] { |cont| ... } の呼び出し
 は、直前の状態(ローカル変数の定義、スタックフレーム)を cont に記憶
 してブロックを実行します。cont は、Continuation クラスのインスタ
 ンスで、[[m:Continuation#call]] メソッドを実行するこ
@@ -39,9 +39,11 @@ callcc とは、call-with-current-continuation の略です。
 
 == Instance Methods
 
---- [](ret[,ret2[,...]])
---- call(ret[,ret2[,...]])
+--- [](*ret)      -> ()
+--- call(*ret)    -> ()
 #@todo
 
 self が記憶した状態を継続します。引数は そのまま
-[[m:Kernel#callcc]] の戻り値になります。
+[[m:Kernel.#callcc]] の戻り値になります。
+
+@param ret 継続に復帰した時に返す値を指定します。

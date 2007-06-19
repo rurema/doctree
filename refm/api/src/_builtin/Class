@@ -21,20 +21,16 @@
 
 == Class Methods
 
---- new([superclass])
+--- new(superclass = Object)                -> Class
 #@since 1.8.0
---- new([superclass]) {|klass| ... }
-#@todo
+--- new(superclass = Object) {|klass| ... } -> Class
 #@end
+#@todo
 
 新しく名前の付いていない superclass のサブクラスを生成します。
-superclass が省略された時にはObject のサブクラスを生成
-します。
 
 名前のないクラスは、最初に名前を求める際に代入されている定数名を検
 索し、見つかった定数名をクラス名とします。
-
-例:
 
   p foo = Class.new   # => #<Class:0x401b90f8>
   p foo.name          # => ""
@@ -42,7 +38,7 @@ superclass が省略された時にはObject のサブクラスを生成
   Bar = foo
   p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
 
-#@if (version >= "1.7.0")
+#@since 1.8.0
 ブロックが与えられると生成したクラスをブロックの引数に渡し、クラス
 のコンテキストでブロックを実行します。この場合も生成したクラスを返
 します。
@@ -51,20 +47,22 @@ superclass が省略された時にはObject のサブクラスを生成
   klass.module_eval {|m| ... }
   klass
 
-と同じです。ブロックの実行は Module#initialize が行います。
+と同じです。ブロックの実行は [[m:Module#initialize]] が行います。
 #@end
+
+@param superclass 生成するクラスのスーパークラスを指定します。
 
 == Instance Methods
 
 #@since 1.8.0
---- allocate
+--- allocate    -> object
 #@todo
 
 クラスのインスタンスを生成して返します。生成したオブジェクトは
 クラスのインスタンスであること以外には何も特性を持ちません。
 #@end
 
---- new(*args, &block)
+--- new(*args, &block)    -> object
 #@todo
 
 クラスのインスタンスを生成して返します。
@@ -75,24 +73,32 @@ Ruby 1.8.x からは、new は [[m:Class#allocate]] でインスタンスを生成し、
 [[m:Object#initialize]] で初期化を行います。
 #@end
 
---- superclass
+@param args [[m:Object#initialize]] に渡される引数を指定します。
+
+@param block [[m:Object#initialize]] に渡されるブロックを指定します。
+
+--- superclass    -> Class
 #@todo
 
 クラスのスーパークラスを返します。
 
---- _load(str)
+--- _load(str)    -> Class
 #@todo
 
-[[m:Object#_dump]]を参照。
+[[m:Object#_dump]] を参照して下さい。
+
+@param str Ruby のオブジェクトがダンプされた文字列を指定します。
 
 == Private Instance Methods
 
---- inherited(subclass)
+--- inherited(subclass)     -> ()
 #@todo
 
 クラスのサブクラスが定義された時、新しく生成されたサブクラスを引数
 にインタプリタから呼び出されます。このメソッドが呼ばれるタイミングは
 クラス定義文の実行直前です。
+
+@param subclass プログラム内で新たに定義された自身のサブクラスです。
 
 例:
 

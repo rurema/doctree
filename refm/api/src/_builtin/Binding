@@ -1,8 +1,8 @@
 = class Binding < Object
 
 ローカル変数のテーブルと self、モジュールのネストなどの情報を保
-持するオブジェクトのクラス。組み込み関数 [[m:Kernel#binding]] によっ
-てのみ生成され、[[m:Kernel#eval]] の第 2 引数に使用します。
+持するオブジェクトのクラス。組み込み関数 [[m:Kernel.#binding]] によっ
+てのみ生成され、[[m:Kernel.#eval]] の第 2 引数に使用します。
 
 また[[unknown:Ruby用語集/トップレベル]]の Binding オブジェクトとして組み込み定数
 [[m:Kernel::TOPLEVEL_BINDING]] が用意されています。
@@ -10,9 +10,15 @@
 == Instance Methods
 
 #@since 1.9.0
---- eval(expr[, fname[, lineno=1]])
+--- eval(expr, fname = __FILE__, lineno = 1)    -> object
 #@todo
 
-組み込み関数 eval を使って
+組み込み関数 [[m:Kernel.#eval]] を使って
 eval(expr, self, fname, lineno) とするのと同じです。
+
+@param expr  評価したい式を文字列で与えます。
+
+@param fname ファイル名を文字列で与えます。式 expr が fname というファイル名にあるかのように実行されます。
+
+@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
 #@end
