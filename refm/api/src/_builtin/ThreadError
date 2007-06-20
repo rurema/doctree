@@ -7,6 +7,6 @@
   * 終了したスレッドを [[m:Thread#wakeup]] しようとしたとき
   * スレッドが一つしかないのに [[m:Thread.stop]] しようとしたとき
   * イテレータを与えずにスレッドを生成しようとしたとき
-  * [[m:Kernel#throw]] がスレッド内で
-    [[m:Kernel#catch]] されないとき
+  * [[m:Kernel.#throw]] がスレッド内で
+    [[m:Kernel.#catch]] されないとき
   * スレッドから [[unknown:制御構造/return]] しようとしたとき

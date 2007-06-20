@@ -1,6 +1,6 @@
 = class File < IO
 ファイルアクセスのためのクラスです。
-通常 [[m:Kernel#open]] または [[m:File.open]] を使って生成します。
+通常 [[m:Kernel.#open]] または [[m:File.open]] を使って生成します。
 
 #@if (version >= "1.8.0")
 ((<ruby 1.8 feature>)): File::Constants は、[[c:IO]] でインクルードさ
@@ -308,7 +308,7 @@ pathで指定されるファイルをオープンし、ファイルオブジェクトを
 返します。ファイルのオープンに失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
 引数 mode, perm については 組み込み関数
-[[m:Kernel#open]] と同じです。
+[[m:Kernel.#open]] と同じです。
 
 open() はブロックを指定することができます。
 ブロックを指定して呼び出した場合は、ファイルオブジェクトを
