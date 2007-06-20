@@ -184,6 +184,8 @@ version 1.8 では、aborting 状態であるスレッド
      Thread.start(i) {|t| p t }
   end
 
+@raise ThreadError 現在のスレッドが属する [[c:ThreadGroup]] が freeze されている場合に発生します。またブロックを与えられずに呼ばれた場合にも発生します。
+
 --- pass    -> nil
 #@todo
 
