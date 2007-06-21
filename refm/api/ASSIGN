@@ -125,7 +125,7 @@ dl/types                        sheepman
 dl/win32
 drb                             sheepman
 e2mmap
-erb
+erb                             snoozer05
 eregex
 etc
 expect
@@ -240,7 +240,7 @@ set
 sha1
 shell
 shellwords
-singleton
+singleton                       snoozer05
 soap
 socket
 stringio                        sheepman
