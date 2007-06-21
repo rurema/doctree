@@ -3,7 +3,7 @@
 # LIBRARY_NAME                  OWNER           STATUS
 #--------------------------------------------------------
 _builtin/ARGF
-_builtin/ArgumentError
+_builtin/ArgumentError          snoozer05       done
 _builtin/Array                  
 _builtin/Bignum                 ujihisa         done
 _builtin/Binding                sheepman
@@ -13,7 +13,7 @@ _builtin/Continuation           sheepman
 _builtin/Data                   sheepman
 _builtin/Dir                    sheepman
 _builtin/ENV                    mukai           done
-_builtin/EOFError
+_builtin/EOFError               snoozer05       done
 _builtin/Enumerable             aamine
 _builtin/Exception              sheepman
 _builtin/FalseClass             yamane          done
@@ -23,7 +23,7 @@ _builtin/File__Constants
 _builtin/File__Stat
 _builtin/Fixnum                 ujihisa         done
 _builtin/Float                  
-_builtin/FloatDomainError
+_builtin/FloatDomainError       snoozer05       done
 _builtin/GC                     
 _builtin/Hash                   
 _builtin/IO                     sheepman
@@ -32,8 +32,8 @@ _builtin/IndexError
 _builtin/Integer                ujihisa
 _builtin/Interrupt
 _builtin/Kernel                 aamine
-_builtin/KeyError
-_builtin/LoadError
+_builtin/KeyError               snoozer05       done
+_builtin/LoadError              snoozer05       done
 _builtin/LocalJumpError
 _builtin/Marshal                okkez
 _builtin/MatchData              okkez
@@ -58,12 +58,12 @@ _builtin/Process__UID
 _builtin/Range                  ujihisa
 _builtin/RangeError
 _builtin/Regexp                 aamine
-_builtin/RegexpError
-_builtin/RuntimeError
+_builtin/RegexpError            snoozer05       done
+_builtin/RuntimeError           snoozer05       done
 _builtin/ScriptError            snoozer05       done
-_builtin/SecurityError
+_builtin/SecurityError          snoozer05       done
 _builtin/Signal                 snoozer05
-_builtin/SignalException        snoozer05
+_builtin/SignalException        snoozer05       done
 _builtin/StandardError          snoozer05       done
 _builtin/String                 aamine
 _builtin/Struct
@@ -72,7 +72,7 @@ _builtin/Symbol
 _builtin/SyntaxError            snoozer05       done
 _builtin/SystemCallError
 _builtin/SystemExit             snoozer05       done
-_builtin/SystemStackError
+_builtin/SystemStackError       snoozer05       done
 _builtin/Thread                 sheepman
 _builtin/ThreadError            sheepman
 _builtin/ThreadGroup            sheepman
