@@ -18,7 +18,7 @@
 == Class Methods
 
 #@if (version >= "1.8.0")
---- new(error_message[, name[, args]])
+--- new(error_message[, name[, args]]) -> NoMethodError
 
 例外オブジェクトを生成して返します。
 
@@ -42,7 +42,7 @@
 == Instance Methods
 
 #@if (version >= "1.8.0")
---- args
+--- args -> [object]
 
 メソッド呼び出しに使われた引数を配列で返します。
 

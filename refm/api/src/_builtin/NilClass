@@ -7,40 +7,40 @@ nil は false オブジェクトとともに偽を表し、
 
 == Instance Methods
 
---- &(other)
+--- &(other) -> false
 
 常に false を返します。
 
 @param other 論理積を行なう式です
 
---- |(other)
+--- |(other) -> bool
 
 other が真なら true を, 偽なら false を返します。
 
 @param other 論理和を行なう式です
 
---- ^(other)
+--- ^(other) -> bool
 
 other が真なら true を, 偽なら false を返します。
 
 @param other 排他的論理和を行なう式です
 
---- nil?
+--- nil? -> bool
 
 常に true を返します。
 
---- to_a
+--- to_a -> Array
 
 空配列 [] を返します。
 
---- to_f
+--- to_f -> Float
 
 0.0 を返します。
 
---- to_i
+--- to_i -> Fixnum
 
 0 を返します。
 
---- to_s
+--- to_s -> String
 
 空文字列 "" を返します。
