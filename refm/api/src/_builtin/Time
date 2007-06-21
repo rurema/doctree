@@ -2,7 +2,9 @@
 
 include Comparable
 
-時刻オブジェクト。[[m:Time.now]] は現在の時刻を返します。
+時刻を表すクラスです。
+
+[[m:Time.now]] は現在の時刻を返します。
 [[m:File#stat]] の返すファイルのタイムスタンプは Time
 オブジェクトです。
 
@@ -72,23 +74,30 @@ yday は 1 から数えます。
 
 == Class Methods
 
---- at(time[, usec])
+--- at(time)    -> Time
 #@todo
 
 time で指定した時刻の Time オブジェクトを返します。
-time は Time オブジェクト、もしくは起算時からの経過秒
-数を表わす整数か浮動小数点数です。
-
-浮動小数点の精度では不十分な場合、usec を指定します。
-time + (usec/1000000) の時刻を返します。この場合、
-time、usec ともに整数でなければなりません。
 
 生成された Time オブジェクトのタイムゾーンは地方時となります。
 
---- gm(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])
---- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
---- utc(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])
---- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
+@param time Time オブジェクト、もしくは起算時からの経過秒数を表わす整数か浮動小数点数を指定します。
+
+--- at(time, usec)    -> Time
+#@todo
+time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
+浮動小数点の精度では不十分な場合に使用します。
+
+生成された Time オブジェクトのタイムゾーンは地方時となります。
+
+@param time 起算時からの経過秒数を表わす整数を指定します。
+
+@param usec マイクロ秒を整数で指定します。
+
+--- gm(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])             -> Time
+--- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
+--- utc(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])            -> Time
+--- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
 #@todo
 
 引数で指定した協定世界時の Time オブジェクトを返します。第 2
@@ -113,17 +122,17 @@ mon は 1(1月)から 12(12月)の範囲の整数または文字列です。英語
 isdst には夏時間(Daylight Saving Time (Summer Time))があるか
 を真偽値で指定します。
 
---- local(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])
---- local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
---- mktime(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])
---- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)
+--- local(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])             -> Time
+--- local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
+--- mktime(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])            -> Time
+--- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
 #@todo
 
 引数で指定した地方時の Time オブジェクトを返します。引数の扱
 いは [[m:Time.gm]] と同じです。
 
---- new
---- now
+--- new    -> Time
+--- now    -> Time
 #@todo
 
 現在時刻の Time オブジェクトを返します。
@@ -145,64 +154,64 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 時間の単位は秒で、浮動小数点数で与えられます。詳細は
 [[man:times(3)]] を参照してください。
 
-#@if (version >= "1.8.0")
-このメソッドは [[c:Process]] に移動しました。Time.times も使えます
+#@since 1.8.0
+このメソッドは [[c:Process.times]] に移動しました。Time.times も使えます
 が、警告メッセージが出力されます。
 #@end
 
 == Instance Methods
 
---- +(other)
+--- +(other)    -> Time
 #@todo
 
 self より other 秒だけ後の時刻を返します
 
---- -(other)
+--- -(other)    -> Time
 #@todo
 
 other が Time オブジェクトである時、ふたつの時刻の差を
 [[c:Float]] で返します。単位は秒です。other が数値である時には self
 より other 秒だけ前の時刻を返します。
 
---- <=>(other)
+--- <=>(other) nil | -1 | 0 | 1
 #@todo
 
 時刻の比較。other は Time オブジェクトか数値でなければ
 なりません。数値の場合は起算時からの経過秒数とみなして比較します。
 
---- asctime
---- ctime
+--- asctime    -> String
+--- ctime      -> String
 #@todo
 
 時刻を [[man:asctime(3)]] の形式の文字列に変換します。た
 だし、末尾の \n は含まれません。
 
---- gmt?
---- utc?
+--- gmt?    -> boolean
+--- utc?    -> boolean
 #@todo
 
 self のタイムゾーンが協定世界時に設定されていれば真を返しま
 す。
 
-#@if (version >= "1.8.0")
---- getgm
---- getutc
+#@since 1.8.0
+--- getgm     -> Time
+--- getutc    -> Time
 #@todo
 
 タイムゾーンを協定世界時に設定した Time オブジェクトを新しく
 生成して返します。
 #@end
 
-#@if (version >= "1.8.0")
---- getlocal
+#@since 1.8.0
+--- getlocal     -> Time
 #@todo
 
 タイムゾーンを地方時に設定した Time オブジェクトを新しく生成
 して返します。
 #@end
 
---- gmtime
---- utc
+--- gmtime    -> self
+--- utc       -> self
 #@todo
 
 タイムゾーンを協定世界時に設定します。self を返します。
@@ -219,7 +228,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 なる場合があります。システムを越えて Time オブジェクトを受け
 渡す場合には注意する必要があります。
 
---- localtime
+--- localtime     -> Time
 #@todo
 
 タイムゾーンを地方時に設定します(デフォルト)。self を返しま
@@ -234,7 +243,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 なる場合があります。システムを越えて Time オブジェクトを受け
 渡す場合には注意する必要があります。
 
---- strftime(format)
+--- strftime(format)    -> String
 #@todo
 
 時刻を format 文字列に従って文字列に変換した結果を返します。
@@ -268,51 +277,51 @@ format 文字列として指定できるものは 以下の通りです。
 用できる場合があります。ただし、上記以外の指示子を使用した場合、移
 植性をそこなう可能性がある点に注意してください。
 
---- sec
+--- sec    -> Integer
 #@todo
 秒を整数で返します。
 
---- min
+--- min    -> Integer
 #@todo
 分を整数で返します。
 
---- hour
+--- hour    -> Integer
 #@todo
 時を整数で返します。
 
---- mday
---- day         (mday の別名)
+--- mday    -> Integer
+--- day     -> Integer         (mday の別名)
 #@todo
 日を整数で返します。
 
---- mon
---- month       (mon の別名)
+--- mon      -> Integer
+--- month    -> Integer     (mon の別名)
 #@todo
 月を整数で返します。
 
---- year
+--- year    -> Integer  
 #@todo
 年を整数で返します。
 
---- wday
+--- wday    -> Integer  
 #@todo
 曜日を0(日曜日)から6(土曜日)の整数で返します。
 
---- yday
+--- yday    -> Integer  
 #@todo
 1月1日を1とした通算日(1から366まで)を整数で返します。
 
---- isdst
---- dst?        (isdst の別名)
+--- isdst    -> boolean
+--- dst?     -> boolean         (isdst の別名)
 #@todo
 夏時間があるなら true をなければ false を返します。
 
---- zone
+--- zone    -> String
 #@todo
 タイムゾーンを表す文字列を返します。
 
-#@if (version >= "1.8.0")
---- succ
+#@since 1.8.0
+--- succ    -> Time
 #@todo
 
 self に 1 秒足した Time オブジェクトを生成して返します。
@@ -327,10 +336,9 @@ self に 1 秒足した Time オブジェクトを生成して返します。
        Sun Jul 18 01:41:23 JST 2004
 #@end
 
-#@#if (version >= "1.6.7")
---- utc_offset
---- gmt_offset
---- gmtoff
+--- utc_offset     -> Integer
+--- gmt_offset     -> Integer
+--- gmtoff         -> Integer
 #@todo
 
 協定世界時との時差を秒を単位とする数値として返します。
@@ -352,10 +360,7 @@ self に 1 秒足した Time オブジェクトを生成して返します。
   p Time.now.getgm.utc_offset
   # => 0
 
-#@#このメソッドは Ruby 1.6.7 で導入されました。
-#@#end
-
---- to_a
+--- to_a     -> Array
 #@todo
 
 時刻を10要素の配列で返します。その要素は順序も含めて以下の通りです。
@@ -383,24 +388,24 @@ tm 構造体に zone はありません。
 して 1 を返し、year は 1998 年に対して 1998 を返します。また、
 yday は 1 から数えます。
 
---- to_f
+--- to_f    -> Float
 #@todo
 
 起算時からの経過秒数を浮動小数点数で返します。1 秒に満たない経過も
 表現されます。
 
---- to_i
---- tv_sec
+--- to_i      -> Integer
+--- tv_sec    -> Integer
 #@todo
 
 起算時からの経過秒数を整数で返します。
 
---- to_s
+--- to_s     -> String
 #@todo
 
 時刻を [[man:date(1)]] のような形式の文字列に変換します。
 
-self.strftime("%a %b %d %H:%M:%S %Z %Y")
+  self.strftime("%a %b %d %H:%M:%S %Z %Y")
 
 と同じです。
 
@@ -408,8 +413,8 @@ self.strftime("%a %b %d %H:%M:%S %Z %Y")
 
   p Time.now.to_s # => "Mon Oct 20 06:02:10 JST 2003"
 
---- usec
---- tv_usec
+--- usec         -> Integer
+--- tv_usec      -> Integer
 #@todo
 
 時刻のマイクロ秒の部分を返します。
