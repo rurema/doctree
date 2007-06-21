@@ -18,9 +18,8 @@
 
 == Class Methods
 
---- civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
---- new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
-#@todo
+--- civil(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
+--- new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 暦日付に相当する日時オブジェクトを生成します。
 
 時差の単位は日です。
@@ -28,94 +27,128 @@
 1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
 #@end
 
+@param year 年
+@param mon 月
+@param mday 日
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
+
 #@since 1.9.0
---- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
-#@todo
+--- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@else
---- commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
-#@todo
+--- commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@end
 暦週日付に相当する日時オブジェクトを生成します。
 
+@param cwyear 年
+@param cweek 週
+@param cwday 週の日 (曜日)
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
+
 [[m:DateTime.new]] も参照してください。
 
---- jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
-#@todo
+--- jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 ユリウス日に相当する日時オブジェクトを生成します。
 
+@param jd ユリウス日
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
+
 [[m:DateTime.new]] も参照してください。
 
---- now(start = Date::ITALY)
-#@todo
+--- now(start = Date::ITALY) -> DateTime
 現在の時刻に相当する日時オブジェクトを生成します。
 
---- ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY)
-#@todo
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+
+--- ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 年日付に相当する日時オブジェクトを生成します。
+
+@param year 年
+@param yday 年の日
+@param hour 時
+@param min 分
+@param sec 秒
+@param offset 時差
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時
 
 [[m:DateTime.new]] も参照してください。
 
---- today(start = Date::ITALY)
-#@todo
+--- today(start = Date::ITALY) -> Date
 このクラスでは利用できません。
+
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 [[m:DateTime.now]] を参照してください。
 
+#@since 1.9.0
+#@#? --- valid_time? -> bool
 #@since 1.8.0
-#@#? --- valid_time?
+#@#? --- valid_time? -> Numeric|nil
 #@end
 
 == Instance Methods
 
---- hour
-#@todo
+--- hour -> Integer
 時間を返します (0-23)。
 
 #@since 1.9.0
---- iso8601(n = 0)
---- rfc3339(n = 0)
-#@todo
+--- iso8601(n = 0) -> String
+--- rfc3339(n = 0) -> String
 ISO 8601 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
+@param n 小数点以下の桁数
+
 #@since 1.9.0
---- jisx0301(n = 0)
-#@todo
+--- jisx0301(n = 0) -> String
 JIS X 0301 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
---- min
-#@todo
+@param n 小数点以下の桁数
+
+--- min -> Integer
 分を返します (0-59)。
 
 #@since 1.8.0
---- new_offset(offset = 0)
-#@todo
+--- new_offset(offset = 0) -> DateTime
 #@else
---- newof(offset = 0)
-#@todo
+--- newof(offset = 0) -> DateTime
 #@end
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
 
+@param offset 時差
+
 [[m:Date.new]] も参照してください。
 
 #@since 1.8.0
---- offset
-#@todo
+--- offset -> Rational
 #@else
---- of
-#@todo
+--- of -> Rational
 #@end
 時差を返します。
 
---- sec
-#@todo
+--- sec -> Integer
 秒を返します (0-59)。
 
-#@#? --- sec_fraction
+#@#? --- sec_fraction -> Rational
 #@#? 秒以下の端数を返します。
 #@#? 1.9.0 より単位は日から秒に
 #@#? #@since 1.9.0
@@ -124,8 +157,7 @@ self を複製して、その時差を設定しなおします。
 #@#? 変更されます。
 #@#? #@end
 
---- zone
-#@todo
+--- zone -> String
 タイムゾーンを返します。
 
 これは、正確には時差をあらわす文字列です。
