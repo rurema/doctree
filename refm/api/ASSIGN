@@ -240,7 +240,7 @@ set
 sha1
 shell
 shellwords
-singleton                       snoozer05
+singleton                       snoozer05       done
 soap
 socket
 stringio                        sheepman

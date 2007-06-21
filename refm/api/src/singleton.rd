@@ -24,8 +24,7 @@ new は private メソッドに移され、外部から呼び出そうとするとエラーになります。
 
 == Singleton Methods
 
---- instance
-#@todo
+--- instance -> object
 
 そのクラスの唯一のインスタンスを返します。
 最初に呼ばれたときはそのインスタンスを生成します。
