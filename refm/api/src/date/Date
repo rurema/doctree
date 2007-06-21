@@ -494,7 +494,7 @@ n は数値でなければなりません。
 
 #@#? --- day_fraction -> Rational
 
---- downto(min){|date| ...} -> Date
+--- downto(min){|date| ...} -> self
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
 #@since 1.9.0
@@ -659,7 +659,7 @@ RFC 2822 書式の文字列を返します。
 
 [[m:Date.new]] も参照してください。
 
---- step(limit, step = 1){|date| ...} -> Date
+--- step(limit, step = 1){|date| ...} -> self
 ブロックの評価を繰り返します。ブロックは日付オブジェクトをとります。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
@@ -723,7 +723,7 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 火曜日なら真を返します。
 #@end
 
---- upto(max){|date| ...} -> Date
+--- upto(max){|date| ...} -> self
 このメソッドは、step(max, 1){|date| ...} と等価です。
 
 @param max 日付オブジェクト
