@@ -20,7 +20,7 @@ include Comparable
 
 === 用語の定義
 
-いくつか用語の定義は、ISO 8601、および JIS X 0301 に基づきます。
+いくつか用語の定義は、[[ISO:8601]]、および [[JIS:X 0301]] に基づきます。
 
 ==== 暦日付
 
@@ -150,10 +150,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 #@since 1.9.0
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
+#@else
 #@since 1.8.0
 --- commercial(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY) -> Date
 #@else
 --- neww(cwyear = 1582, cweek = 41, cwday = 5, start = Date::ITALY) -> Date
+#@end
 #@end
 暦週日付に相当する日付オブジェクトを生成します。
 
@@ -330,12 +332,14 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@since 1.9.0
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
+#@else
 #@since 1.8.0
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
 #@else
 --- exist? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
 --- exist3? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
+#@end
 #@end
 #@since 1.9.0
 正しい暦日付であれば真、そうでないなら偽を返します。
@@ -353,10 +357,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 #@since 1.9.0
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
+#@else
 #@since 1.8.0
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric|nil
 #@else
 --- existw? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric|nil
+#@end
 #@end
 #@since 1.9.0
 正しい暦週日付であれば真、そうでないなら偽を返します。
@@ -374,10 +380,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 #@since 1.9.0
 --- valid_jd? (jd, start = Date::GREGORIAN) -> bool
+#@else
 #@since 1.8.0
 --- valid_jd? (jd, start = Date::GREGORIAN) -> Numeric|nil
 #@else
 --- exist1? (jd, start = Date::GREGORIAN) -> Numeric|nil
+#@end
 #@end
 #@since 1.9.0
 真を返します。
@@ -394,10 +402,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 #@since 1.9.0
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
+#@else
 #@since 1.8.0
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> Numeric|nil
 #@else
 --- exist2? (year, yday, start = Date::GREGORIAN) -> Numeric|nil
+#@end
 #@end
 #@since 1.9.0
 正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
@@ -531,7 +541,7 @@ n は数値でなければなりません。
 #@since 1.9.0
 --- iso8601 -> String
 --- rfc3339 -> String
-ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
+[[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
 #@end
 
 --- italy -> Date
@@ -547,8 +557,8 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 
 #@since 1.9.0
 --- jisx0301 -> String
-JIS X 0301 書式の文字列を返します。
-ただし、明治以前については ISO 8601 書式になります。
+[[JIS:X 0301]] 書式の文字列を返します。
+ただし、明治以前については [[ISO:8601]] 書式になります。
 なお、明治6年以前についても太陰太陽暦を使用することはありません。
 #@end
 
@@ -642,7 +652,7 @@ n 年前を返します。
 #@since 1.9.0
 --- rfc2822 -> String
 --- rfc822 -> String
-RFC 2822 書式の文字列を返します。
+[[RFC:2822]] 書式の文字列を返します。
 #@end
 
 #@since 1.9.0
@@ -713,7 +723,7 @@ limit は日付オブジェクトでなければなりません、
 #@end
 
 --- to_s -> String
-ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
+[[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
 
 #@since 1.9.0
 --- to_time -> Time
@@ -762,5 +772,4 @@ ISO 8601 書式の文字列を返します (拡大表記はつかいません)。
 
 --- to_time -> Time
 対応するもっともふさわしいと思われる [[c:Time]] オブジェクトを返します。
-#@end
 #@end

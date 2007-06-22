@@ -4,12 +4,12 @@
 
 == Module Functions
 
---- parsedate(str, complete = false)
+--- parsedate(str, complete = false) -> Array|nil
 #@todo
 str で与えられた日付表現を解析し、見いだした要素を
 配列 (年、月、日、時、分、秒、タイムゾーン、曜日) で返します。
 
-complete が真で、年が0から99の範囲であれば、
+complete が真で、年が00から99の範囲であれば、
 年の下2桁の表現であるとみなし上2桁を補います。
 69 以上なら 1900 年代とみなします。
 69 未満なら 2000 年代とみなします。
@@ -45,6 +45,9 @@ parsedate はいろいろな書式をあつかえます。
   Saturday, 28-Aug-99 21:45:09 GMT
   08/28/1999
   1999/08/28
+
+@param str 日付をあらわす文字列
+@param complete 年を補完するか
 
 日付解析し直ちに [[c:Date]]、
 あるいは [[c:DateTime]] オブジェクトを生成するには、
