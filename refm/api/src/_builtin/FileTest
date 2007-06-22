@@ -88,7 +88,7 @@ filaname が通常ファイルである時、真を返します。
 
 filaname1 と filename2 が同じファイルを指している時、真を返します。
 
-(ruby 1.8.3 以前では[[m:Kernel#test]](?-, filename1, filename2)を使ってください。)
+(ruby 1.8.3 以前では[[m:Kernel.#test]](?-, filename1, filename2)を使ってください。)
 
 例:
 
