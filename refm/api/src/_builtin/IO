@@ -10,7 +10,7 @@ IO クラスは基本的な入出力機能を実装します。
   * [[unknown:Traps: IO ポートのオープンに関わる問題|trap::IO]]
 
 #@if (version >="1.8.0")
-File::Constants は、[[c:File]] から移動しました。
+File::Constants は、[[c:File]] から IO へ移動しました。
 #@end
 
 === EOF での振る舞いの違い
@@ -51,7 +51,7 @@ IO#lines                      通常どおり
 #@end
 //}
 
-== class methods
+== Class Methods
 
 --- new(fd, mode = "r")                -> IO
 #@if (version >="1.8.0")
@@ -73,9 +73,9 @@ IO オブジェクトを生成して返します。
 #@end
 
 #@if (version >="1.8.0")
-@param mode [[m:File.open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel#open]] を参照してください。
+@param mode [[m:File.open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照してください。
 #@else
-@param mode [[m:File.open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。詳細は組み込み関数[[m:Kernel#open]]を参照してください。
+@param mode [[m:File.open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。詳細は組み込み関数[[m:Kernel.#open]]を参照してください。
 #@end
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
@@ -84,7 +84,7 @@ IO オブジェクトを生成して返します。
 #@todo
 
 path で指定されたファイルの各行に対して繰り返します。
-[[m:Kernel#open]] と同様 path の先頭が "|" ならば、コマ
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、コマ
 ンドの出力を読み取ります。
 
 ちょうど以下のような働きをします。
@@ -99,6 +99,8 @@ path で指定されたファイルの各行に対して繰り返します。
   end
 
 path のオープンに成功すれば nil を返します。
+
+@param path ファイル名を表す文字列を指定します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
@@ -127,7 +129,7 @@ path のオープンに成功すれば nil を返します。
 command をサブプロセスとして実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。
 
-mode はオープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel#open]] 参照して下さい。
+mode はオープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 
 生成したパイプを [[c:IO]] オブジェクトとして返します。
 
@@ -218,6 +220,8 @@ nil を返します。length が nil か省略されていて、IO が既に EOF に
 達している場合は "" を返します。したがって、IO.read(空ファイル)
 は "" となります。
 
+@param path ファイル名を表す文字列を指定します。
+
 @param length 読み込む長さを整数で指定します。nil であるか省略した場合には、EOF まで読み込みます。
 
 @raise Errno::EXXX path のオープン、offset 位置への設定、ファイルの読み込みに失敗した場合に発生します。
@@ -271,11 +275,11 @@ path で指定されるファイルをオープンし、ファイル記述子を返しま
 [[m:IO.for_fd]] などで IO オブジェクトにしない限り、このメソッ
 ドでオープンしたファイルをクローズする手段はありません。
 
-@path path ファイルを指定します。
+@path path ファイル名を表す文字列を指定します。
 
-@param mode 組み込み関数 [[m:Kernel#open]] と同じです。
+@param mode 組み込み関数 [[m:Kernel.#open]] と同じです。
 
-@param perm 組み込み関数 [[m:Kernel#open]] と同じです。
+@param perm 組み込み関数 [[m:Kernel.#open]] と同じです。
 
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。
 
@@ -292,6 +296,8 @@ object を出力します。object が文字列でない時にはメソッ
 以下のような << の連鎖を使うことができます。
 
   STDOUT << 1 << " is a " << Fixnum << "\n"
+
+@param object 出力したいオブジェクトを与えます。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
@@ -437,7 +443,7 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 [[m:IO#each]] と同じように動作します
 が、こちらは 1 行返すだけで繰り返しません。
 
-[[m:Kernel#gets]] 同様、読み込んだ文字列を変数 [[m:$_]] にセットします。
+[[m:Kernel.#gets]] 同様、読み込んだ文字列を変数 [[m:$_]] にセットします。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
@@ -497,7 +503,7 @@ Manually sets the current line number to the given value. $. is updated only on 
 
 引数を IO ポートに順に出力します。引数を省略した場合は、
 [[m:$_]] を出力します。
-引数の扱いは [[m:Kernel#print]] と同じです。詳細はこちらを参照
+引数の扱いは [[m:Kernel.#print]] と同じです。詳細はこちらを参照
 してください。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
@@ -509,7 +515,7 @@ C 言語の printf と同じように、format に従い引数
 を文字列に変換して、self に出力します。
 
 第一引数に IO を指定できないこと、引数を省略できないことを除
-けば [[m:Kernel#printf]] と同じです。
+けば [[m:Kernel.#printf]] と同じです。
 引数の扱いの詳細については [[unknown:sprintfフォーマット]] を参照してください。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
@@ -518,10 +524,12 @@ C 言語の printf と同じように、format に従い引数
 #@todo
 
 文字 ch を self に出力します。
-引数の扱いは [[m:Kernel#putc]] と同じです。詳細はこちらを参照し
+引数の扱いは [[m:Kernel.#putc]] と同じです。詳細はこちらを参照し
 てください。
 
 ch を返します。
+
+@param ch 出力したい文字を、文字列か文字コード(整数)で与えます。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
@@ -529,7 +537,7 @@ ch を返します。
 #@todo
 
 各 obj を self に出力した後、改行します。
-引数の扱いは [[m:Kernel#puts]] と同じです。詳細はこちらを参照し
+引数の扱いは [[m:Kernel.#puts]] と同じです。詳細はこちらを参照し
 てください。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
@@ -734,10 +742,9 @@ offset 位置への移動が成功すれば 0 を返します。
 ファイルのステータスを含む [[c:File::Stat]] オブジェクトを生成して
 返します。
 
-ステータスの読み込みに失敗した場合は例外 [[c:Errno::EXXX]] が発生
-します。
-
 [[m:File#lstat]], [[m:File.stat]], [[m:File.lstat]] も参照してください。
+
+@raise Errno::EXXX ステータスの読み込みに失敗した場合に発生します。
 
 --- sync    -> boolean
 #@todo
@@ -876,7 +883,7 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 IO をノンブロッキングモードに設定し、
 その後で string を [[man:write(2)]] システムコールで書き出します。
-ここで、EAGAIN, EINTR なども単に例外として呼出元に報告されます。
+ここで、EAGAIN, EINTR なども例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 
 write(2) が成功した場合、返り値は書き込んだ長さとなります。
 
