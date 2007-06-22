@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@since 1.8.0
 = class UnboundMethod < Object
 #@else
 = class UnboundMethod < Method
@@ -52,13 +52,15 @@
 == Instance Methods
 
 #@if (version < "1.8.0")
---- [](args, ...)
---- call(args, ...)
---- call(args, ...) { ... }
+--- [](*args)            -> object
+--- call(*args)          -> object
+--- call(*args) { ... }  -> object
 #@todo
 
-UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
 常に例外 [[c:TypeError]] が発生します。
+UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
+
+@raise TypeError 常に発生します。
 
     class Foo
       def foo
@@ -69,14 +71,17 @@ UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
     # => -:5:in `call': you cannot call unbound method; bind first (TypeError)
 #@end
 
---- bind(obj)
+--- bind(obj)    -> Method
 #@todo
 
 self を obj にバインドして bound method オブジェクト
-(つまり [[c:Method]] オブジェクト) を生成し返します。ただしバイン
-ドできるのは、unbind したオブジェクトのクラスのインスタンスか、メ
+(つまり [[c:Method]] オブジェクト) を生成し返します。
+
+ただしバインドできるのは、unbind したオブジェクトのクラスのインスタンスか、メ
 ソッド定義元のモジュールをインクルードしたクラスのインスタンスだけ
-です。そうでなければ例外 [[c:TypeError]] が発生します。
+です。
+
+@raise TypeError obj のクラスが、unbind したオブジェクトのクラスのインスタンスか、メソッド定義元のモジュールをインクルードしたクラスでなければ、発生します。
 
 例:
 
@@ -142,30 +147,28 @@ self を obj にバインドして bound method オブジェクト
     p m.bind(obj)                   # => -:27:in `bind': method `foo' overridden (TypeError)
 
 #@if (version < "1.8.0")
---- to_proc
+--- to_proc    -> Proc
 #@todo
 
 self を call する [[c:Proc]] オブジェクトを生成して返します。
 #@end
 
 #@if (version < "1.8.0")
---- unbind
+--- unbind    -> self
 #@todo
 
 self を返します。
 #@end
 
---- arity   
+--- arity    -> Integer
 #@todo
-#@# => fixnum
 
-Returns an indication of the number of arguments accepted by
-a method. Returns a nonnegative integer for methods that take
-a fixed number of arguments. For Ruby methods that take a variable
-number of arguments, returns -n-1, where n is the number of required
-arguments. For methods written in C, returns -1 if the call takes
-a variable number of arguments.
+メソッドが受け付ける引数の数を返します。
 
+ただし、メソッドが可変長引数を受け付ける場合、負の整数
+  -(必要とされる引数の数 + 1)
+を返します。C 言語レベルで実装されたメソッドが可変長引数を
+受け付ける場合、-1 を返します。
   
   class C
     def one;    end
