@@ -124,40 +124,54 @@ trim_mode に指定できる値は次の通りです。
 
 == Class Methods
 
---- new(eruby_script, safe_level=nil, trim_mode=nil, eoutvar='_erbout')
-#@todo
+--- new(eruby_script, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
 
-    eruby_script から ERB を生成します。eval 時の $SAFE、trim_mode(後述)、
-    eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
-    普通、変更する必要はありません。)を指定できます。
+ERBオブジェクトを生成して返します。
 
---- version
-#@todo
+@param eruby_script eRubyスクリプト
 
-Returns revision information for the erb.rb module.
+@param safe_level eRubyスクリプトが実行されるときのセーフレベル
 
+@param trim_mode 整形の挙動を変更するオプション
+
+@param eoutvar eRubyスクリプトの中で出力をためていく変数
+
+eruby_script から ERB を生成します。eval 時の $SAFE、trim_mode(後述)、
+eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
+普通、変更する必要はありません。)を指定できます。
+
+--- version -> String
+
+erb.rbのリビジョン情報を返します。
 
 == Instance Methods
 
---- run(b=TOPLEVEL_BINDING)
-#@todo
+--- run(b=TOPLEVEL_BINDING) -> String
 
 ERB をb の binding で実行し、印字します。
 
---- result(b=TOPLEVEL_BINDING)
-#@todo
+@param b eRubyスクリプトが実行されるときのbinding
+
+--- result(b=TOPLEVEL_BINDING) -> String
 
 ERB を b の binding で実行し、文字列を返します。
 
---- src
-#@todo
+@param b eRubyスクリプトが実行されるときのbinding
+
+--- src -> String
 
 変換した Ruby スクリプトを取得します。
 
---- def_method(mod, methodname, fname='(ERB)')
-#@todo
+--- def_method(mod, methodname, fname='(ERB)') -> nil
 
 変換した Ruby スクリプトをメソッドとして定義します。
+
+@param mod メソッドを定義するモジュール（またはクラス）
+
+@param methodname メソッド名
+
+@fname スクリプトを定義する際のファイル名
+
 定義先のモジュールは mod で指定し、メソッド名は methodname で指定します。
 fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
@@ -166,31 +180,43 @@ fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
   erb = ERB.new(script)
   erb.def_method(MyClass, 'foo(bar)', 'foo.erb')
 
---- def_module(methodname='erb')
-#@todo
+--- def_module(methodname='erb') -> Module
 
 変換した Ruby スクリプトをメソッドとして定義した無名のモジュールを返します。
 
---- def_class(suplerklass=Object, methodname='erb')
-#@todo
+@param methodname メソッド名
+
+--- def_class(suplerklass=Object, methodname='erb') -> Class
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 #@# 使い途がなさそうだ…。
 
---- set_eoutvar(compiler, eoutvar = '_erbout')
-#@todo
+@param suplerklass 無名クラスのスーパークラス
+
+@param methodname メソッド名
+
+--- set_eoutvar(compiler, eoutvar = '_erbout') -> ??
+
+eRubyスクリプトの中で出力をためていく変数を設定します。
+
+@param compiler eRubyコンパイラ
+
+@param eoutvar eRubyスクリプトの中で出力をためていく変数
 
 Can be used to set eoutvar as described in ERB#new. It's probably
 easier to just use the constructor though, since calling this
 method requires the setup of an ERB compiler object.
 
 #@since 1.8.1
---- filename
---- filename=
-#@todo
 
-The optional filename argument passed to [[m:Kernel#eval]] when the ERB code
-is run.
+--- filename -> String
+
+スクリプトを定義する際のファイル名を取得します。
+
+--- filename= -> String
+
+スクリプトを定義する際のファイル名を設定します。
+
 #@end
 
 = module ERB::Util
