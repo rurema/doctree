@@ -330,11 +330,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
---- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
---- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
+--- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
+--- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
 #@else
---- exist? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
---- exist3? (year, mon, mday, start = Date::GREGORIAN) -> Numeric|nil
+--- exist? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
+--- exist3? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
 #@since 1.9.0
@@ -355,9 +355,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
---- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric|nil
+--- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric | nil
 #@else
---- existw? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric|nil
+--- existw? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
 #@since 1.9.0
@@ -378,9 +378,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- valid_jd? (jd, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
---- valid_jd? (jd, start = Date::GREGORIAN) -> Numeric|nil
+--- valid_jd? (jd, start = Date::GREGORIAN) -> Numeric | nil
 #@else
---- exist1? (jd, start = Date::GREGORIAN) -> Numeric|nil
+--- exist1? (jd, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
 #@since 1.9.0
@@ -400,9 +400,9 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
---- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> Numeric|nil
+--- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> Numeric | nil
 #@else
---- exist2? (year, yday, start = Date::GREGORIAN) -> Numeric|nil
+--- exist2? (year, yday, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
 #@since 1.9.0
@@ -435,7 +435,7 @@ n は数値でなければなりません。
 @param n 日数
 @raise 数値でない
 
---- - (x) -> Rational|Date
+--- - (x) -> Rational | Date
 x が日付オブジェクトなら、ふたつの差を返します。
 あるいは
 x が数値ならば、self より x 日前の日付を返します。
