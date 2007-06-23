@@ -91,15 +91,23 @@ Ruby のスレッドスケジューリングは優先順位付のラウンドロビンです。一定
 #@todo
 
 真の時は、いずれかのスレッドが例外によって終了した時に、インタプリタ
-全体を中断させます。デフォルトは偽、すなわち、通常あるスレッドで起こった例
-外は、[[m:Thread#join]] などで検出されない限りそのスレッ
-ドだけをなにも警告を出さずに終了させます。[[unknown:Thread#スレッドと例外]]に詳述。
+全体を中断させます。false の場合、あるスレッドで起こった例外は、[[m:Thread#join]]
+などで検出されない限りそのスレッドだけをなにも警告を出さずに終了させます。
 
-参照の場合は真偽値を、代入形式では右辺 newstate を、返します。
+デフォルトは false です。
 
---- critical             -> boolean
+[[unknown:Thread#スレッドと例外]]に詳述されています。
+
+@param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
+
+
+--- critical             -> nil
 --- critical=(newstate)
 #@todo
+
+#@since 1.9.0
+サポートされていません。警告を出力し、何もせずに nil を返します。
+#@else
 
 真である間、スレッドの切替えを行いません。カレントスレッドが停止
 (stop)した場合やシグナルに割り込まれた場合には、自動的に
@@ -109,11 +117,14 @@ false になります。
 のスレッドは実行されます。また、[[m:Thread.pass]] により明
 示的に切替えることもできます。
 
-参照の場合は真偽値を、代入形式では右辺 newstate を、返します。
+デフォルトは false です。
 
 注意: I/O や GC、拡張ライブラリがからむとこのフラグは無視さ
 れることもあります。排他制御を行うにはこのメソッドに頼らず
 [[c:Mutex]] や [[c:Monitor]] を使うべきです。
+
+@param newstate スレッドの切替えを許す稼働かを、true か false で指定します。
+#@end
 
 --- current    -> Thread
 #@todo
@@ -123,26 +134,14 @@ false になります。
 --- exit    -> Thread
 #@todo
 
-カレントスレッドの実行を終了します。
-
-カレントスレッドを返します。
-
-#@#((-あらい 2001-10-14:
-#@#p (Thread.new { Thread.exit }.value)
-#@#は、false を表示します。Thread.exit や Thread#kill ではス
-#@#レッドの終了結果を設定していないためです
-#@#[[unknown:ruby-dev:14904]]-))
-
-カレントスレッドが唯一のスレッドであるなら、[[m:Kernel.#exit]](0)
-により終了します。
+カレントスレッドに対して [[m:Thread#exit]] を呼びます。
 
 --- kill(thread)    -> Thread
 #@todo
 
-指定したスレッドの実行を終了させます。既に終了しているスレッドに対
-しては何もしません。
+指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。
 
-thread を返します。 exit と同様 Thread の終了結果を設定しません
+@param thread 終了したい Thread オブジェクトを指定します。
 
 --- list    -> [Thread]
 #@todo
@@ -223,10 +222,14 @@ val を name に対応するスレッド固有のデータとして格納します。
 --- abort_on_exception=(newstate)
 #@todo
 
-真の時は、そのスレッドが例外によって終了した時に、インタプリタ
-全体を中断させます。デフォルトは偽です。すなわち、通常あるスレッドで起こった例
+真の場合、そのスレッドが例外によって終了した時に、インタプリタ
+全体を中断させます。false の場合、あるスレッドで起こった例
 外は、[[m:Thread#join]] などで検出されない限りそのスレッ
-ドだけをなにも警告を出さずに終了させます。[[m:Thread#スレッドと例外]]に詳述。
+ドだけをなにも警告を出さずに終了させます。
+
+デフォルトは偽です。[[unknown:Thread#スレッドと例外]]に詳述。
+
+@param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
 --- alive?     -> boolean
 #@todo
@@ -240,24 +243,60 @@ val を name に対応するスレッド固有のデータとして格納します。
 --- terminate    -> self
 #@todo
 
-スレッドの実行を終了させます。ただし、スレッドは終了処理中(aborting)にはなりますが、
-直ちに終了するとは限りません。すでに終了している場合は何もしません。
+スレッドの実行を終了させます。このとき ensure 節が実行されます。
+ただし、スレッドは終了処理中(aborting)にはなりますが、
+直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
+終了したスレッドの [[m:Thread#value]] の返り値は不定です。
 
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
 により終了します。
 
+  th1 = Thread.new do
+    begin
+      sleep 10
+    ensure
+      p "this will be displayed"
+    end
+  end
+
+  sleep 0.1
+  th1.kill
+
+  #=> "this will be displayed"
+
 #@since 1.8.6
---- thr.exit!         -> self
---- thr.kill!         -> self
---- thr.terminate!    -> self
+--- exit!         -> self
+--- kill!         -> self
+--- terminate!    -> self
 #@todo
 
-Terminates thr without calling ensure clauses and schedules another
-thread to be run, returning the terminated Thread. If this is
-the main thread, or the last thread, exits the process.
+ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(aborting)にはなりますが、
+直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
+終了したスレッドの [[m:Thread#value]] の返り値は不定です。
 
-See [[m:Thread#exit]] for the safer version.
+自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
+により終了します。
+  th1 = Thread.new do
+    begin
+      sleep 10
+    ensure
+      p "th1: this will be displayed"
+    end
+  end
+  th2 = Thread.new do
+    begin
+      sleep 10
+    ensure
+      p "th2: this will NOT be displayed"
+    end
+  end
+  
+  th1.kill
+  th2.kill!
 
+  #=> "th1: this will be displayed"
+
+@see [[m:Thread#exit]]
 #@end
 
 --- group    -> nil | ThreadGroup
@@ -271,7 +310,6 @@ See [[m:Thread#exit]] for the safer version.
 死んでいるスレッドは nil を返します。
 
 --- join           -> self
-#@todo
 #@since 1.8.0
 --- join(limit)    -> nil | self
 #@end
@@ -281,11 +319,6 @@ See [[m:Thread#exit]] for the safer version.
 ます。self が例外により終了していれば、その例外がカレントス
 レッドに対して発生します。
 
-#@since 1.8.0
-limit を指定すると、limit 秒でタイムアウトし、nil を返します。
-@param limit タイムアウトする時間を整数(秒)で指定します。
-#@end
-
 以下は、生成したすべてのスレッドの終了を待つ例です。
 
    threads = []
@@ -294,6 +327,14 @@ limit を指定すると、limit 秒でタイムアウトし、nil を返します。
    threads.push(Thread.new { n = rand(5); sleep n; n })
 
    threads.each {|t| t.join}
+
+#@since 1.8.0
+limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
+
+@param limit タイムアウトする時間を整数か小数で指定します。
+#@end
+
+@raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
 
 --- key?(name)     -> boolean
 #@todo
@@ -317,18 +358,18 @@ true を返します。
     #=> [:bar, :foo]
 
 --- priority    -> Integer
-#@todo
-
-スレッドの優先度を返します。優先度のデフォルト値は 0 で、この値の
-大きいスレッドは小さいスレッドよりも優先度が高くなります。
-
 --- priority=(val)
 #@todo
 
-スレッドの優先度を設定します。負の値も指定できます。
+スレッドの優先度を返します。この値の大きいほど優先度が高くなります。
+メインスレッドのデフォルト値は 0 です。新しく生成されたスレッドは親スレッドの
+priority を引き継ぎます。
 
-#@#((<ruby 1.6 feature>)): version 1.6.5 までは self を返し
-#@#ていました
+#@since 1.9.0
+@param val スレッドの優先度を指定します。プラットフォームに依存します。
+#@else
+@param val スレッドの優先度を指定します。負の値も指定できます。
+#@end
 
 --- raise(error_type, message, traceback)     -> ()
 #@todo
