@@ -22,11 +22,6 @@
 --- new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 暦日付に相当する日時オブジェクトを生成します。
 
-時差の単位は日です。
-#@since 1.8.6
-1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
-#@end
-
 @param year 年
 @param mon 月
 @param mday 日
@@ -36,6 +31,11 @@
 @param offset 時差
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
+
+時差の単位は日です。
+#@since 1.8.6
+1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
+#@end
 
 #@since 1.9.0
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime

@@ -106,8 +106,8 @@ cgi/session
 complex                         sheepman
 csv
 curses
-date                            tadf
-date2                           tadf
+date                            tadf            almost done
+date2                           tadf            almost done
 dbm
 debug
 delegate
@@ -180,7 +180,7 @@ ostruct                         eklerni
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 parsearg
-parsedate                       tadf
+parsedate                       tadf            almost done
 pathname                        mukai           done
 ping
 pp                              sheepman
