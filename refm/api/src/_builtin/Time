@@ -5,7 +5,7 @@ include Comparable
 時刻を表すクラスです。
 
 [[m:Time.now]] は現在の時刻を返します。
-[[m:File#stat]] の返すファイルのタイムスタンプは Time
+[[c:File.mtime]] などが返すファイルのタイムスタンプは Time
 オブジェクトです。
 
 Time オブジェクトは時刻を起算時からの経過秒数で保持しています。
@@ -38,7 +38,7 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
   p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
   # => "JST"
 
-#@if (version >= "1.9.0")
+#@since 1.9.0
 1.9 以降、タイムゾーンのフラグは Marshal デー
 タに保持されます。
 
@@ -50,25 +50,11 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
 
 [[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
 
-メソッド
-[[m:Time#sec]], 
-[[m:Time#min]], 
-[[m:Time#hour]], 
-[[m:Time#mday]], 
-[[m:Time#day]](mday の別名), 
-[[m:Time#mon]], 
-[[m:Time#month]](mon の別名)
-[[m:Time#year]], 
-[[m:Time#wday]], 
-[[m:Time#yday]], 
-[[m:Time#isdst]], 
-[[m:Time#dst?]](isdst の別名), 
-[[m:Time#zone]]
-時刻の要素を参照できます。
-
 [[man:localtime(3)]] も参照しください。
 
-注意: C 言語の tm 構造体とは異なり、month は 1 月に対
+=== C 言語との違いに注意
+
+C 言語の tm 構造体とは異なり、month は 1 月に対
 して 1 を返し、year は 1998 年に対して 1998 を返します。また、
 yday は 1 から数えます。
 
@@ -81,7 +67,7 @@ time で指定した時刻の Time オブジェクトを返します。
 
 生成された Time オブジェクトのタイムゾーンは地方時となります。
 
-@param time Time オブジェクト、もしくは起算時からの経過秒数を表わす整数か浮動小数点数を指定します。
+@param time Time オブジェクト、もしくは起算時からの経過秒数を表わす数値で指定します。
 
 --- at(time, usec)    -> Time
 #@todo
@@ -94,10 +80,8 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 @param usec マイクロ秒を整数で指定します。
 
---- gm(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])             -> Time
---- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
---- utc(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])            -> Time
---- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
+--- gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
+--- utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 #@todo
 
 引数で指定した協定世界時の Time オブジェクトを返します。第 2
@@ -111,20 +95,62 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
   p Time.gm *"2002-03-17".split("-")
   # => Sun Mar 17 00:00:00 UTC 2002
 
-mon は 1(1月)から 12(12月)の範囲の整数または文字列です。英語
-の月名("Jan", "Feb", ... などの省略名。文字の大小は無視)も指定でき
-ます。
+@param year 年を整数で指定します。例えば 1998 年に対して 1998 を指定します。ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
 
-引数の数が[[m:Time#to_a]] と全く同じ場合(こちらは秒が先
-頭に来る形式ですが)、その順序を正しく解釈します。
-この形式の引数 wday, yday, zone に指定した値は無
-視されます。
-isdst には夏時間(Daylight Saving Time (Summer Time))があるか
-を真偽値で指定します。
+@param mon 1(1月)から 12(12月)の範囲の整数または文字列です。英語の月名("Jan", "Feb", ... などの省略名。文字の大小は無視)も指定できます。
 
---- local(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])             -> Time
+@param  day 日を 1 から 31 までの整数で指定します。
+
+@param  hour 時を 0 から 23 までの整数で指定します。
+
+@param  min 分を 0 から 59 までの整数で指定します。
+
+@param  sec 秒を 0 から 59 までの整数で指定します。
+
+@param  usec マイクロ秒を整数で指定します。
+
+@raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
+
+--- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
+--- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
+
+引数で指定した協定世界時の Time オブジェクトを返します。
+
+引数の順序は [[m:Time#to_a]] と全く同じです。
+引数 wday, yday, zone に指定した値は無視されます。
+
+数値を受け付ける引数には文字列も指定できます。
+
+@param  sec 秒を 0 から 59 までの整数で指定します。
+
+@param  min 分を 0 から 59 までの整数で指定します。
+
+@param  hour 時を 0 から 23 までの整数で指定します。
+
+@param  day 日を 1 から 31 までの整数で指定します。
+
+@param mon 1(1月)から 12(12月)の範囲の整数または文字列です。英語の月名("Jan", "Feb", ... などの省略名。文字の大小は無視)も指定できます。
+
+@param year 年を整数で指定します。例えば 1998 年に対して 1998 を指定します。ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
+
+@param isdst 夏時間(Daylight Saving Time (Summer Time))があるかを真偽値で指定します。
+
+@param wday 無視されます。
+
+@param yday 無視されます。
+
+@param zone 無視されます。
+
+@raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
+
+--- local(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
+--- mktime(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
+#@todo
+
+引数で指定した地方時の Time オブジェクトを返します。引数の扱
+いは [[m:Time.gm]] と同じです。
+
 --- local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
---- mktime(year[, mon[, day[, hour[, min[, sec[, usec]]]]]])            -> Time
 --- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
 #@todo
 
@@ -136,8 +162,9 @@ isdst には夏時間(Daylight Saving Time (Summer Time))があるか
 #@todo
 
 現在時刻の Time オブジェクトを返します。
+タイムゾーンは地方時となります。
 
---- times  
+--- times    -> Struct::Tms
 #@todo
 
 このメソッドは obsolete です。
@@ -166,18 +193,24 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 
 self より other 秒だけ後の時刻を返します
 
---- -(other)    -> Time
+@param other 自身からの秒数を数値で指定します。
+
+--- -(other)    -> Float | Time
 #@todo
 
 other が Time オブジェクトである時、ふたつの時刻の差を
 [[c:Float]] で返します。単位は秒です。other が数値である時には self
 より other 秒だけ前の時刻を返します。
 
+@param other 自身との差を算出したい Time オブジェクトを指定します。または、自身までの秒数を整数か小数で指定します。
+
 --- <=>(other) nil | -1 | 0 | 1
 #@todo
 
-時刻の比較。other は Time オブジェクトか数値でなければ
-なりません。数値の場合は起算時からの経過秒数とみなして比較します。
+self と other の時刻を比較します。self の方が大きい場合は 1 を、等しい場合は 0 を、
+小さい場合は -1 を返します。比較できない場合は、nil を返します。
+
+@param other 自身と比較したい時刻を Time オブジェクトか数値で指定します。数値の場合は起算時からの経過秒数とみなして比較します。
 
 --- asctime    -> String
 --- ctime      -> String
@@ -247,7 +280,7 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 #@todo
 
 時刻を format 文字列に従って文字列に変換した結果を返します。
-format 文字列として指定できるものは 以下の通りです。
+@param format フォーマット文字列を指定します。使用できるものは 以下の通りです。
 
   * %A: 曜日の名称(Sunday, Monday ... )
   * %a: 曜日の省略名(Sun, Mon ... )
@@ -276,6 +309,10 @@ format 文字列として指定できるものは 以下の通りです。
 をそのまま使用しています。そのためここにあげた指示子以外のものが使
 用できる場合があります。ただし、上記以外の指示子を使用した場合、移
 植性をそこなう可能性がある点に注意してください。
+
+  t = Time.now
+  t.strftime("Printed on %m/%d/%Y")   #=> "Printed on 04/09/2003"
+  t.strftime("at %I:%M%p")            #=> "at 08:56AM"
 
 --- sec    -> Integer
 #@todo
