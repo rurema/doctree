@@ -13,10 +13,14 @@ IO クラスは基本的な入出力機能を実装します。
 File::Constants は、[[c:File]] から IO へ移動しました。
 #@end
 
-=== EOF での振る舞いの違い
+=== EOF での読み込みメソッドの振る舞いの違い
 
 空ファイルや EOF での各読み込みメソッドの振る舞いは以下のとおりです。
-ただし、length を指定できるメソッドに関しては、length に 0 を指定した場合、以下と異なることがあります。
+ただし、length を指定できるメソッドに関しては、length に 0 を指定した場合、
+EOF であっても常に空文字列 "" を返します。
+#@if (version < "1.9.0")
+ただし、[[m:IO#read]](0) は EOF では nil を返します。
+#@end
 
 //emlist{
 メソッド                      空のファイルに対して
@@ -24,6 +28,7 @@ File::Constants は、[[c:File]] から IO へ移動しました。
 IO.read(空ファイル)           ""
 IO.read(空ファイル, length)   nil
 IO.readlines(空ファイル)      []
+IO.foreach(空ファイル)        何もしない
 //}
 
 //emlist{
@@ -84,23 +89,12 @@ IO オブジェクトを生成して返します。
 #@todo
 
 path で指定されたファイルの各行に対して繰り返します。
-[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、コマ
-ンドの出力を読み取ります。
+path のオープンに成功すれば nil を返します。path が空ファイルの場合、
+何もせずに nil を返します。
 
-ちょうど以下のような働きをします。
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
-  port = open(path)
-  begin
-    port.each_line {|line|
-       ...
-    }
-  ensure
-    port.close
-  end
-
-path のオープンに成功すれば nil を返します。
-
-@param path ファイル名を表す文字列を指定します。
+@param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
@@ -113,8 +107,6 @@ path のオープンに成功すれば nil を返します。
 [[c:IO]] オブジェクトを要素とする配列を返します。
 
 戻り値の配列は最初の要素が読み込み側で、次の要素が書き込み側です。
-
-例:
 
   p pipe = IO.pipe    # => [#<IO:0x401b90f8>, #<IO:0x401b7718>]
   pipe[1].puts "foo"
@@ -129,11 +121,11 @@ path のオープンに成功すれば nil を返します。
 command をサブプロセスとして実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。
 
-mode はオープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
-
 生成したパイプを [[c:IO]] オブジェクトとして返します。
 
-例:
+#@since 1.9.0
+command が配列の場合は、シェルを経由せずに子プロセスを実行します。
+#@end
 
   p io = IO.popen("cat", "r+")  # => #<IO:0x401b75c8>
   io.puts "foo"
@@ -143,60 +135,54 @@ mode はオープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#ope
 ロックを実行し、その結果を返します。ブロックの実行後、生成したパイ
 プは自動的にクローズされます。
 
-例:
-
   p IO.popen("cat", "r+") {|io|
     io.puts "foo"
     io.gets
   }
   # => "foo\n"
 
+@param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
+
+@raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
+
+--- popen("-", mode = "r")                -> IO
+--- popen("-", mode = "r") {|io| ... }    -> object
+
 コマンド名が "-" の時、Ruby は [[man:fork(2)]] を
-行い子プロセスの標準入出力との間にパイプラインを確立します。このと
-きの戻りは、親プロセスは IO オブジェクトを返し、子プロセスは
-nil を返します。ブロックがあれば、親プロセスは生成した
-IO オブジェクトを引数にブロックを実行しその結果を返します。
-パイプはクローズされます。
-子プロセスは nil を引数にブロックを実行し終了します。
+行い子プロセスの標準入出力との間にパイプラインを確立します。
+親プロセスでは IO オブジェクトを返し、子プロセスでは
+nil を返します。
 
-例:
-
-  # ブロックなしの例
-  
   io = IO.popen("-", "r+")
-  if io.nil?
-    # child
+  if io  # parent
+    io.puts "foo"
+    p io.gets                   # => "child output: foo\n"
+    io.close
+  else   # child
     s = gets
     print "child output: " + s
     exit
   end
   
-  # parent
-  io.puts "foo"
-  p io.gets                   # => "child output: foo\n"
-  io.close
-  
-  # ブロックありの例
-  
+ブロックを与えられた場合、親プロセスでは生成した IO オブジェクトを引数に
+ブロックを実行し、その結果を返します。ブロックの実行後、生成したパイ
+プは自動的にクローズされます。
+子プロセスでは nil を引数にブロックを実行し終了します。  
+
   p IO.popen("-", "r+") {|io|
-    if io
-      # parent
+    if io   # parent
       io.puts "foo"
       io.gets
-    else
-      # child
+    else    # child
       s = gets
       puts "child output: " + s
     end
   }
   # => "child output: foo\n"
 
-@raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
+@param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
 
-#@if (version >="1.9.0")
-command が配列の場合は、シェルを経由せずに子プロセスを実行し
-ます。
-#@end
+@raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
 #@if (version >="1.8.0")
 --- read(path, length = nil, offset = 0)     -> String | nil
@@ -205,22 +191,17 @@ command が配列の場合は、シェルを経由せずに子プロセスを実行し
 path で指定されたファイルを offset 位置から
 length バイト分読み込んで返します。
 
-ちょうど以下のような働きをします。
+IO が既に EOF に達している場合は nil を返します。ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。例えば、IO.read(空ファイル) は "" を返します。
 
-  port = open(path)
-  port.pos = offset if offset
-  begin
-    port.read length
-  ensure
-    port.close
-  end
+  IO.read(empty_file)             #=> ""
+  IO.read(empty_file, 1)          #=> nil
+  IO.read(one_byte_file, 0, 10)   #=> ""
+  IO.read(one_byte_file, nil, 10) #=> "" 
+  IO.read(one_byte_file, 1, 10)   #=> nil
 
-length に整数が指定されていて、IO が既に EOF に達している場合は、
-nil を返します。length が nil か省略されていて、IO が既に EOF に
-達している場合は "" を返します。したがって、IO.read(空ファイル)
-は "" となります。
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
-@param path ファイル名を表す文字列を指定します。
+@param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
 @param length 読み込む長さを整数で指定します。nil であるか省略した場合には、EOF まで読み込みます。
 
@@ -233,37 +214,58 @@ nil を返します。length が nil か省略されていて、IO が既に EOF に
 --- readlines(path, rs = $/)    -> [String]
 #@todo
 
-path で指定されたファイルを全て読み込んで、その各行を要素と
-してもつ配列を返します。
+path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
+
 IO が既に EOF に達していれば空配列 [] を返します。
 
-ちょうど以下のような働きをします。
+[[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
-  port = open(path)
-  begin
-    port.readlines
-  ensure
-    port.close
-  end
+@param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 @raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
 
---- select(reads, writes = [], excepts = [], timeout = nil)    -> [IO] | nil
+--- select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
 #@todo
 
-[[man:select(2)]] を実行します。[[m:Kernel.#select]] と同じです。
+[[man:select(2)]] を実行します。
+与えられた入力/出力/例外待ちの  IO オブジェクトの中から準備ができたものを
+それぞれ配列にして、配列の配列として返します。
+タイムアウトした時には nil を返します。
 
-@param reads 入力待ちする [[c:IO]] (またはそのサブクラス)のインスタンスの配列を渡します。
+[[m:Kernel.#select]] と同じです。
 
-@param writes 出力待ちする [[c:IO]] (またはそのサブクラス)のインスタンスの配列を渡します。
+ rp, wp = IO.pipe
+ mesg = "ping "
+ 100.times{
+   rs, ws, = IO.select([rp], [wp])
+   if r = rs[0]
+     ret = r.read(5)
+     print ret
+     case ret
+     when /ping/
+       mesg = "pong\n"
+     when /pong/
+       mesg = "ping "
+     end
+   end
+   if w = ws[0]
+     w.write(mesg)
+   end
+ }
 
-@param excepts 例外待ちする [[c:IO]] (またはそのサブクラス)のインスタンスの配列を渡します。
+@param reads 入力待ちする [[c:IO]] オブジェクトの配列を渡します。
 
-@param timeout 整数、[[c:Float]] または nil を指定します。nil を指定した時には IO がレディ状態になるまで待ち続けます。整数、[[c:Float]]で指定したときは単位は秒です。
+@param writes 出力待ちする [[c:IO]] オブジェクトの配列を渡します。
 
-@return タイムアウトした時には nil を返します。そうでない場合には 3 要素の配列を返します。その各要素は入力/出力/例外待ちのオブジェクトの配列です(指定した配列のサブセット)。
+@param excepts 例外待ちする [[c:IO]] オブジェクトの配列を渡します。
+
+@param timeout 数値または nil を指定します。数値で指定したときの単位は秒です。nil を指定した時には IO がどれかひとつレディ状態になるまで待ち続けます。
+
+@raise IOError 与えられた IO オブジェクトが閉じられていた時に発生します。
+
+@raise Errno::EXXX [[man:select(2)]] に失敗した場合に発生します。
 
 #@if (version >="1.8.0")
 --- sysopen(path, mode = "r", perm = 0666)     -> Integer
@@ -542,7 +544,7 @@ ch を返します。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- read(length = nil, outbuf = "")    -> String | nil
 #@else
 --- read(length = nil)            -> String | nil
@@ -550,25 +552,23 @@ ch を返します。
 #@todo
 
 length バイト読み込んで、その文字列を返します。
+
 IO が既に EOF に達していれば nil を返します。
+#@since 1.9.0
+ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。
+#@else
+ただし、length に nil が指定されている場合は、空文字列 "" を返します。
+#@end
+例えば、open(空ファイル) {|f| f.read } は "" となります。
 
-length が nil であるか、省略された時には、EOF までの全てのデータを読み込んで、その文字列を返します。
-IO が既に EOF に達している場合 "" を返します。
-したがって、open(空ファイル) {|f| f.read } は "" となります。
+@param length 読み込むサイズを整数で指定します。nil が指定された場合、EOF までの全てのデータを読み込んで、その文字列を返します。
 
-#@if (version >= "1.8.0")
-第二引数として文字列を指定すると、読み込ん
-だデータをその文字列オブジェクトに上書きして返します。指定した文字
-列オブジェクトがあらかじめ length 長の領域であれば、余計なメ
-モリの割当てが行われません。指定した文字列の長さが length と
-異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)さ
-れたあと、実際に読み込んだデータのサイズになります。
+#@since 1.8.0
+@param outbuf 出力用のバッファを文字列で指定します。読み込んだデータをその文字列オブジェクトに上書きして返します。指定した文字列オブジェクトがあらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
 
 第二引数を指定した read の呼び出しでデータが空であった場合
 (read が nil を返す場合)、outbuf は空文字列になりま
 す。
-
-例:
 
   outbuf = "x" * 20;
   io = File.open("/dev/null")
@@ -576,10 +576,6 @@ IO が既に EOF に達している場合 "" を返します。
   p outbuf
   => nil
      ""
-#@end
-
-#@if (version >= "1.9.0")
-read(0) は常に "" を返します。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ、発生します。
@@ -772,7 +768,7 @@ newstate を返します。
 stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
 をすることがあります。
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 第二引数として文字列を指定すると、読み込ん
 だデータをその文字列オブジェクトに上書きして返します。指定した文字
 列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメ
@@ -843,6 +839,8 @@ string が文字列でなければ to_s による文字列化を試みます。
 stdio を経由しないので他の出力メソッドと混用すると思わぬ動作
 をすることがあります。
 
+@param string 自身に書き込みたい文字列を指定します。
+
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
@@ -857,6 +855,15 @@ self を返します。
 
 char を読み戻します。2バイト以上の読み戻しは保証されません。
 
+@param char 読み戻したい文字に対応する [[c:Fixnum]] を指定します。
+
+@raise IOError 読み戻しに失敗した場合に発生します。また、自身が読み込み用にオープンされていない時、自身がまだ一度も read されていない時に発生します。
+
+  f = File.new("testfile")   #=> #<File:testfile>
+  c = f.getc                 #=> 84
+  f.ungetc(c)                #=> nil
+  f.getc                     #=> 84
+   
 --- write(str)     -> Integer
 #@todo
 
@@ -867,11 +874,13 @@ IOポートに対して str を出力します。str が文字列でなけ
 [[m:IO#syswrite]] を除く全ての出力メソッドは、最終的に
 "write" という名のメソッドを呼び出すので、このメソッドを置き換える
 ことで出力関数の挙動を変更することができます。
-#@if (version >= "1.8.0")
-以前は [[m:Kernel.#putc]], 
-[[m:IO#putc]] に対してだけこのことは適用されませんでした
-([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
-#@end
+#@##@since 1.8.0
+#@#以前は [[m:Kernel.#putc]], 
+#@#[[m:IO#putc]] に対してだけこのことは適用されませんでした
+#@#([[ruby-dev:16305]])が、修正されました([[ruby-dev:18038]])。
+#@##@end
+
+@param str 自身に書き込みたい文字列を指定します。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
@@ -886,6 +895,8 @@ IO をノンブロッキングモードに設定し、
 ここで、EAGAIN, EINTR なども例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 
 write(2) が成功した場合、返り値は書き込んだ長さとなります。
+
+@param string 自身に書き込みたい文字列を指定します。
 
 @raise IOError 自身が書き込み用にオープンされていなければ、発生します。
 
