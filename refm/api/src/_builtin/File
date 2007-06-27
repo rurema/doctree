@@ -47,23 +47,23 @@ filename の一番後ろのスラッシュに続く要素を返します。もし、
 引数 suffix が与えられて、かつそれが filename の末尾に
 一致するなら、それを取り除いたものを返します。
 
-例:
-
   p File.basename("ruby/ruby.c")        #=> "ruby.c"
   p File.basename("ruby/ruby.c", ".c")  #=> "ruby"
   p File.basename("ruby/ruby.c", ".*")  #=> "ruby"
   p File.basename("ruby/ruby.exe", ".*")  #=> "ruby"
 
-[[m:File.dirname]], [[m:File.extname]] も参照。
-
 #@since 1.8.0
-File.basename の動作は [[url:http://www.unix-systems.org/version3/online.html]] に従います。
+File.basename の動作は [[man:basename(3)]] 
+#@#[[url:http://www.unix-systems.org/version3/online.html]]
+に従います。
   p File.basename("foo/bar/")      # => "bar"
 #@end
 
 @param filename ファイル名を表す文字列を指定します。
 
 @param suffix サフィックスを文字列で与えます。
+
+@see [[m:File.dirname]], [[m:File.extname]]
 
 --- chmod(mode, *filename)    -> Integer
 #@todo
@@ -141,19 +141,20 @@ filename の一番後ろのスラッシュより前を文
 字列として返します。スラッシュを含まないファイル名に対しては
 "."(カレントディレクトリ)を返します。
 
-例:
     p File.dirname("dir/file.ext")    # => "dir"
     p File.dirname("file.ext")        # => "."
 
-[[m:File.basename]], [[m:File.extname]] も参照。
-
 #@if (version >= "1.8.0")
-File.dirname の動作は [[url:http://www.unix-systems.org/version3/online.html]] に従います。
+File.dirname の動作は [[man:dirname(3)]]
+#@#[[url:http://www.unix-systems.org/version3/online.html]] 
+に従います。
     p File.dirname("foo/bar/")      # => "foo"
     p File.dirname("foo//bar")      # => "foo"
 #@end
 
 @param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.basename]], [[m:File.extname]]
 
 --- expand_path(path, default_dir = '.')    -> String
 #@todo
@@ -188,19 +189,20 @@ path が相対パスであれば default_dir を基準にします。
   p File.extname("foo.txt/bar")     # => ""
   p File.extname(".foo")            # => ""
 
-[[m:File.basename]], [[m:File.dirname]] も参照。
-
 @param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.basename]], [[m:File.dirname]]
 
 --- fnmatch(pattern, path, flags = 0)     -> boolean 
 --- fnmatch?(pattern, path, flags = 0)    -> boolean
 #@todo
 
-ファイル名のパターンマッチを行います([[man:fnmatch(3)]])。
-path が pattern にマッチすれば真を返します。
+ファイル名のパターンマッチ [[man:fnmatch(3)]] を行います。
+path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
 
-@param pattern パターンを指定します。ワイルドカードとして `*', `?', `[]' が使用できま
-す([[m:Dir.glob]] とは違って `{}' や `**/' は使用できません)。
+@param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
+す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
+
     %w(foo foobar bar).each {|f|
       p File.fnmatch("foo*", f)
     }
@@ -208,9 +210,9 @@ path が pattern にマッチすれば真を返します。
          true
          false
 
-@param flags 以下の定数([[c:File::Constants]] モジュールで定義さ
-れています)を論理和で指定することでパターンマッチの動作を変更する
-ことができます。flags のデフォルト値は0(フラグ指定なし)です。
+@param path パスを表す文字列を指定します。
+
+@param flags 以下の [[c:File::Constants]] で定義されている定数を論理和で指定することで、パターンマッチの動作を変更することができます。flags のデフォルト値は0(フラグ指定なし)です。
 
 : FNM_NOESCAPE
  エスケープ文字 `\' を普通の文字とみなします。
@@ -257,17 +259,16 @@ path が pattern にマッチすれば真を返します。
 
 ファイルのタイプを表す文字列を返します。文字列は以下のうちのいずれ
 かです。File.lstat(filename).ftype と同じで
-す(シンボリックリンクに対して "link" を返します)。
+す。シンボリックリンクに対して "link" を返します。
 
-  "file"
-  "directory"
-  "characterSpecial"
-  "blockSpecial"
-  "fifo"
-  "link"
-  "socket"
-
-  "unknown"
+ * "file"
+ * "directory"
+ * "characterSpecial"
+ * "blockSpecial"
+ * "fifo"
+ * "link"
+ * "socket"
+ * "unknown"
 
 @param filename ファイル名を表す文字列を指定します。 
 
@@ -280,18 +281,18 @@ File::SEPARATORを間に入れて文字列を連結します。
 
   [item, item, ...].join(File::SEPARATOR)
 
-と同じです。([[unknown:DOSISH 対応]]で環境依存になる予定です。)
+と同じです。[[unknown:DOSISH 対応]]で環境依存になる予定です。
 
-@param item 連結したいディレクトリ名やファイル名を与えます。
+@param item 連結したいディレクトリ名やファイル名を文字列で与えます。
 
 --- link(old, new)    -> 0
 #@todo
 
 old を指す new という名前のハードリンクを
 生成します。old はすでに存在している必要があります。
+ハードリンクに成功した場合は 0 を返します。
 
-ハードリンクに成功した場合は 0 を返します。失敗した場合は例外
-[[c:Errno::EXXX]] が発生します。
+失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
 @param old ファイル名を表す文字列を指定します。 
 
@@ -310,13 +311,9 @@ pathで指定されるファイルをオープンし、ファイルオブジェクトを
 引数 mode, perm については 組み込み関数
 [[m:Kernel.#open]] と同じです。
 
-open() はブロックを指定することができます。
-ブロックを指定して呼び出した場合は、ファイルオブジェクトを
-与えられてブロックが実行されます。ブロックの実行が終了すると、
-ファイルは自動的にクローズされます。
-
-ブロックが指定されたときのこのメソッドの戻り値はブロックの実行結果
-です。
+ブロックを指定して呼び出した場合は、File オブジェクトを引数として
+ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に
+クローズされます。ブロックの実行結果を返します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
@@ -328,10 +325,11 @@ open() はブロックを指定することができます。
 --- readlink(path)    -> String
 #@todo
 
-シンボリックリンクのリンク先を文字列で返します。リンクの読み取りに
-失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
+シンボリックリンクのリンク先のパスを文字列で返します。
 
-@raise Errno::EXXX 失敗した場合に発生します。
+@param path シンボリックリンクを表す文字列を指定します。
+
+@raise Errno::EXXX 指定された path がシンボリックリンクでない場合や、リンクの読み取りに失敗した場合に発生します。
 
 --- rename(from, to)    -> 0
 #@todo
@@ -342,6 +340,10 @@ open() はブロックを指定することができます。
 
 ファイルの移動に成功した場合 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
+
+@param from ファイルの名前を文字列で与えます。
+
+@param to 新しいファイル名を文字列で与えます。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
@@ -371,26 +373,25 @@ filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 --- lstat(filename)   -> File::Stat
 #@todo
 [[m:File.stat]]と同様ですが、シンボリックリンクに関してリンクそのものの
-情報を返します。[[man:lstat(2)]] を実装していないシステムでは、File.stat と同じです。
-
-[[m:IO#stat]], [[m:File#lstat]] も参照してください。
+情報を File::Stat として返します。[[man:lstat(2)]] を実装していないシステムでは、File.stat と同じです。
 
 @param filename ファイル名を表す文字列を指定します。 
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
 
+@see [[m:IO#stat]], [[m:File#lstat]]
+
 --- symlink(old, new)    -> 0
 #@todo
 
-old への new という名前のシンボリックリンクを生成しま
-す。
+old への new という名前のシンボリックリンクを生成します。
 
 シンボリックリンクの作成に成功すれば 0 を返します。失敗した場合は
 例外 [[c:Errno::EXXX]] が発生します。
 
 @param old ファイル名を表す文字列を指定します。 
 
-@param new ファイル名を表す文字列を指定します。 
+@param new シンボリックリンクを表す文字列を指定します。 
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
@@ -428,14 +429,11 @@ umask を変更します。変更前の umask の値を返します
 の数を返します。変更に失敗した場合は例外 [[c:Errno::EXXX]] が発生
 します。
 
-先頭の二つの引数は時刻を指定する数値または [[c:Time]] クラスのイン
-スタンスでなければなりません。
-
 @param filename ファイル名を表す文字列を指定します。 
 
-@param atime 最終アクセス時刻を [[c:Time]] か整数で指定します。
+@param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-@param utime 更新時刻を [[c:Time]] か整数で指定します。
+@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
@@ -637,39 +635,39 @@ systems, see +stat(2)+.
 
 --- atime    -> Time
 #@todo
-最終アクセス時刻を返します。
+最終アクセス時刻を Time オブジェクトとして返します。
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- ctime    -> Time
 #@todo
-状態が最後に変更された時刻を返します。状態の変更とは chmod などによるものです。
+状態が最後に変更された時刻を Time オブジェクトとして返します。状態の変更とは chmod などによるものです。
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- mtime    -> Time
 #@todo
 
-最終更新時刻を返します。
+最終更新時刻を Time オブジェクトとして返します。
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
 --- chmod(mode)    -> 0
 #@todo
 
-ファイルのモードを mode に変更します。モードの変更に成功した
+ファイルのモードを指定された mode に変更します。モードの変更に成功した
 場合は 0 を返します。失敗した場合は例外 [[c:Errno::EXXX]] が発生し
 ます。
 
-@param mode [[man:chmod(2)]] と同様に数値で指定します。
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
@@ -681,16 +679,11 @@ systems, see +stat(2)+.
 は 0 を返します。変更に失敗した場合は例外 [[c:Errno::EXXX]] が発生
 します。
 
-owner と group は、[[man:chown(2)]] と同様に
-数値で指定します。
-nil または -1 を指定することでオーナーやグループを現在
-のままにすることができます。
-
 @param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在のままにすることができます。
 
 @param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在のままにすることができます。
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
@@ -702,8 +695,8 @@ nil または -1 を指定することでオーナーやグループを現在
 File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロックされる場合に
 ブロックされずに false を返すようになります。
 
+@param operation [[c:File::Constants]] モジュールで定義されている定数を指定します。
 有効な operation は以下の通りです。
-以下の定数は [[c:File::Constants]] モジュールで定義されています。
 
 : LOCK_SH
  共有ロック。複数のプロセスが同時にロックを共有できます。
@@ -730,16 +723,13 @@ File::LOCK_NB (ノンブロッキング) を指定すると、本来ならブロックされる場合に
 File::LOCK_NB の指定がある場合、ブロックされる条件での
 flock は false を返します。
 
-「ブロックされる条件」とは
+「ブロックされる条件」とは以下のいずれかです。
   * 他のプロセスが排他ロックをすでに行っている場合にロックを行う
   * 他のプロセスがロックしている状態で排他ロックを行う
-の場合です
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX operation に不正な整数を与えた場合などに発生します。
-
-例:
 
     f = File.open("/tmp/foo", "w")
 
@@ -776,19 +766,15 @@ flock は false を返します。
 --- lstat    -> File::Stat
 #@todo
 
-ファイルの状態を含む [[c:File::Stat]] オブジェクトを生成して返しま
-す。情報の取得に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
-
-lstat は、シンボリックリンクに関してリンクそのものの
-情報を返します。
-[[man:lstat(2)]] を実装していないシステムでは、
-[[m:IO#stat]]と同じです。
-
-[[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]] も参照してください。
+ファイルの状態を含む [[c:File::Stat]] オブジェクトを生成して返します。
+シンボリックリンクに関してリンクそのものの情報を返します。
+[[man:lstat(2)]] を実装していないシステムでは、[[m:IO#stat]]と同じです。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-@raise IOError 自身が close されている場合に、発生します。
+@raise IOError 自身が close されている場合に発生します。
+
+@see [[m:IO#stat]], [[m:File.stat]], [[m:File.lstat]]
 
 --- truncate(length)    -> 0
 #@todo
@@ -798,7 +784,7 @@ lstat は、シンボリックリンクに関してリンクそのものの
 サイズの変更に成功すれば 0 を返します。失敗した場合は例外
 [[c:Errno::EXXX]] が発生します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX サイズの変更に失敗した場合に発生します。
 
