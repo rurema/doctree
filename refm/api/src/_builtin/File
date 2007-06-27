@@ -364,11 +364,11 @@ pathname を dirname とbasename に分割して、2 要
 filename の情報を含む [[c:File::Stat]] オブジェクトを生成し
 て返します。
 
-[[m:IO#stat]], [[m:File#lstat]] も参照してください。
-
 @param filename ファイル名を表す文字列を指定します。 
 
 @raise Errno::EXXX 情報の取得に失敗した場合に発生します。
+
+@see [[m:IO#stat]], [[m:File#lstat]]
 
 --- lstat(filename)   -> File::Stat
 #@todo
