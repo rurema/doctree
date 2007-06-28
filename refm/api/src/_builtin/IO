@@ -89,9 +89,9 @@ IO オブジェクトを生成して返します。
 #@todo
 
 path で指定されたファイルの各行に対して繰り返します。
-path のオープンに成功すれば nil を返します。path が空ファイルの場合、
-何もせずに nil を返します。
+path のオープンに成功すれば nil を返します。
 
+path が空ファイルの場合、何もせずに nil を返します。
 [[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
 @param path ファイル名を表す文字列か "|コマンド名" を指定します。
@@ -217,7 +217,6 @@ IO が既に EOF に達している場合は nil を返します。ただし、length に nil か 0 が指
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
 IO が既に EOF に達していれば空配列 [] を返します。
-
 [[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
 @param path ファイル名を表す文字列か "|コマンド名" を指定します。
@@ -337,13 +336,15 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
+@raise IOError 既に close されていた場合に発生します。
+
 --- close_read    -> nil
 #@todo
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
 た IO オブジェクトで使用します。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
@@ -352,7 +353,7 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 
 書き込み用の IO を close します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX close に失敗した場合に発生します。
 
@@ -369,14 +370,14 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として与えられたブロッ
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- each_byte {|ch| ... }    -> self
 #@todo
 
 IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- eof     -> boolean
 --- eof?    -> boolean
@@ -390,17 +391,17 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行しま
 IOに対してシステムコール fcntl を実行します。
 機能の詳細は [[man:fcntl(2)]] を参照してください。
 
-arg が整数の時にはその値を、true または false の場合はそれぞ
-れ 1 または 0 を、文字列の場合には pack した構造体だとみなしてその
-まま [[man:fcntl(2)]] に渡します。
+fcntl(2) が返した整数を返します。
 
-cmd に対して指定できる定数は、添付ライブラリ [[lib:fcntl]] が提供しています。
+@param cmd IO に対するコマンドを、添付ライブラリ [[lib:fcntl]] が提供している定数で指定します。
 
-fcntl(2) が返した数値を返します。
+@param arg cmd に対する引数を整数、boolean、文字列のいずれかで指定します。整数の時にはその値をそのまま [[man:fcntl(2)]] に渡します。true または false の場合はそれぞれ 1 または 0 を渡します。文字列の場合には pack した構造体だとみなしてそのまま渡します。
 
 @raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
 
-#@if (version >= "1.8.0")
+@raise IOError 既に close されている場合に発生します。
+
+#@since 1.8.0
 --- fsync    -> 0 | nil
 #@todo
 
@@ -413,6 +414,8 @@ fcntl(2) が返した数値を返します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+@raise IOError 既に close されている場合に発生します。
+
 #@end
 
 --- fileno    -> Integer
@@ -421,12 +424,14 @@ fcntl(2) が返した数値を返します。
 
 ファイル記述子を表す整数を返します。
 
+@raise IOError 既に close されている場合に発生します。
+
 --- flush    -> self
 #@todo
 
 IO ポートの内部バッファをフラッシュします。
 
-@raise IOError 自身が書き込み用でなければ発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- getc    -> Integer | nil
 #@todo
@@ -434,22 +439,23 @@ IO ポートの内部バッファをフラッシュします。
 IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 返します。EOF に到達した時には nil を返します。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- gets(rs = $/)    -> String | nil
 #@todo
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
-ファイルの終りに到達した時には nil を返します。
+EOF に到達した時には nil を返します。
 
-[[m:IO#each]] と同じように動作します
-が、こちらは 1 行返すだけで繰り返しません。
+[[m:IO#each]] と同じように動作しますが、こちらは 1 行返すだけで繰り返しません。
 
 [[m:Kernel.#gets]] 同様、読み込んだ文字列を変数 [[m:$_]] にセットします。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+@see [[m:$/]]
 
 --- ioctl(cmd, arg = 0)    -> Integer
 #@todo
@@ -457,30 +463,33 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 IO に対してシステムコール ioctl を実行し、その結果を返します。
 機能の詳細は [[man:ioctl(2)]] を参照してください。
 
-arg が整数の時にはその値を、文字列の場合には
-[[m:Array#pack]] した構造体だとみなしてioctl に渡します。
-arg が省略されたときや、nil, false のときは 0、
-true に対しては 1 を ioctl に渡します。
+@param cmd IO に対するコマンドを整数で指定します。どのようなコマンドが使えるかはプラットフォームに依存します。
+
+@param arg cmd に対する引数を指定します。整数の時にはその値を ioctl に渡します。文字列の場合には [[m:Array#pack]] した構造体だとみなして渡します。arg が nil か false の場合には 0を、true の場合には 1 を渡します。
+
+@raise IOError 既に close されている場合に発生します。
 
 --- isatty    -> boolean
 --- tty?      -> boolean
 #@todo
 
-入出力ポートがttyに結合している時、真を返します。
+入出力ポートがttyに結合している時、真を返します。そうでない場合 false を返します。
+
+@raise IOError 既に close されている場合に発生します。
 
 --- lineno    -> Integer
 #@todo
 
 Returns the current line number in ios. The stream must be opened for reading. lineno counts the number of times gets is called, rather than the number of newlines encountered. The two values will differ if gets is called with a separator other than newline. See also the $. variable.
 
-@raise IOError 読み込み用にオープンされていなければ、発生します。
+@raise IOError 読み込み用にオープンされていなければ発生します。
 
 --- lineno=(number)
 #@todo
 
 Manually sets the current line number to the given value. $. is updated only on the next read.
 
-@raise IOError 読み込み用にオープンされていなければ、発生します。
+@raise IOError 読み込み用にオープンされていなければ発生します。
 
 --- pid    -> Integer | nil
 #@todo
@@ -488,17 +497,23 @@ Manually sets the current line number to the given value. $. is updated only on 
 [[m:IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
 返します。それ以外は nil を返します。
 
+@raise IOError 既に close されている場合に発生します。
+
 --- pos    -> Integer
 --- tell   -> Integer
 #@todo
 
 ファイルポインタの現在の位置を返します。
 
+@raise IOError 既に close されている場合に発生します。
+
 --- pos=(n)
 #@todo
 
 ファイルポインタを指定位置に移動します。
 [[m:IO#seek]](n, IO::SEEK_SET)と同じです。
+
+@raise IOError 既に close されている場合に発生します。
 
 --- print(*arg)    -> nil
 #@todo
@@ -508,7 +523,7 @@ Manually sets the current line number to the given value. $. is updated only on 
 引数の扱いは [[m:Kernel.#print]] と同じです。詳細はこちらを参照
 してください。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- printf(format, *arg)    -> nil
 #@todo
@@ -520,7 +535,7 @@ C 言語の printf と同じように、format に従い引数
 けば [[m:Kernel.#printf]] と同じです。
 引数の扱いの詳細については [[unknown:sprintfフォーマット]] を参照してください。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- putc(ch)    -> object
 #@todo
@@ -533,7 +548,7 @@ ch を返します。
 
 @param ch 出力したい文字を、文字列か文字コード(整数)で与えます。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- puts(*obj)    -> nil
 #@todo
@@ -542,7 +557,7 @@ ch を返します。
 引数の扱いは [[m:Kernel.#puts]] と同じです。詳細はこちらを参照し
 てください。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 #@since 1.8.0
 --- read(length = nil, outbuf = "")    -> String | nil
@@ -578,7 +593,7 @@ IO が既に EOF に達していれば nil を返します。
      ""
 #@end
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX データの読み込みに失敗した場合に発生します。
 
@@ -592,7 +607,7 @@ IO が既に EOF に達していれば nil を返します。
 
 @raise EOFError EOF に到達した時に発生します。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- readline(rs = $/)    -> String
 #@todo
@@ -606,7 +621,9 @@ readline は gets 同様読み込んだ文字列を変数 $_
 
 @raise EOFError EOF に到達した時に発生します。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+@see [[m:$/]]
 
 --- readlines(rs = $/)    -> [String]
 #@todo
@@ -615,6 +632,10 @@ readline は gets 同様読み込んだ文字列を変数 $_
 IO が既に EOF に達していれば空配列 [] を返します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+@see [[m:$/]]
 
 #@since 1.8.5
 --- read_nonblock(maxlen, outbuf = "")    -> String
@@ -631,7 +652,7 @@ read_nonblock はバッファから読み込みます。
 
 @param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX read(2) システムコールの結果としてエラーが起きた場合に発生します。
 
@@ -644,8 +665,7 @@ read_nonblock はバッファから読み込みます。
 #@todo
 
 IO から長さ maxlen を上限として読み込み、文字列として返します。
-
-ここで、即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちますが、
+即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちます。
 即座に得られるデータが 1byte でも存在すればブロックしません。
 
 readpartial はブロックを最小限に抑えることによって、
@@ -690,7 +710,7 @@ readpartial の結果は以下のようになります。
 
 @param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @raise EOFError IO が既に EOF に達していれば発生します。
 
@@ -780,8 +800,6 @@ stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
 合(sysread が例外 [[c:EOFError]] を発生させる場合)、
 outbuf は空文字列になります。
 
-例:
-
   outbuf = "x" * 20;
   io = File.open("/dev/null")
   p((io.sysread(10,outbuf) rescue nil))
@@ -790,7 +808,7 @@ outbuf は空文字列になります。
      ""
 #@end
 
-@raise IOError 自身が読み込み用にオープンされていなければ、発生します。
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 @raise EOFError IO が既に EOF に達していれば発生します。
 
@@ -841,7 +859,7 @@ stdio を経由しないので他の出力メソッドと混用すると思わぬ動作
 
 @param string 自身に書き込みたい文字列を指定します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
@@ -882,7 +900,7 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 @param str 自身に書き込みたい文字列を指定します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
@@ -898,7 +916,7 @@ write(2) が成功した場合、返り値は書き込んだ長さとなります。
 
 @param string 自身に書き込みたい文字列を指定します。
 
-@raise IOError 自身が書き込み用にオープンされていなければ、発生します。
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX [[man:write(2)]] が失敗した場合に発生します。
 #@end
@@ -918,6 +936,9 @@ Returns an enumerator that gives each line in the string.
 
    "foo\nbar\n".lines.to_a   #=> ["foo\n", "bar\n"]
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
+
+@see [[m:$/]]
+
 #@end
 
 == Constants
