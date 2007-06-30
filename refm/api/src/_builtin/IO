@@ -374,6 +374,8 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として与えられたブロッ
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+@see [[m:$/]]
+
 --- each_byte {|ch| ... }    -> self
 #@todo
 
@@ -394,7 +396,6 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行しま
 
 IOに対してシステムコール fcntl を実行します。
 機能の詳細は [[man:fcntl(2)]] を参照してください。
-
 fcntl(2) が返した整数を返します。
 
 @param cmd IO に対するコマンドを、添付ライブラリ [[lib:fcntl]] が提供している定数で指定します。
@@ -452,7 +453,6 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 EOF に到達した時には nil を返します。
 
 [[m:IO#each]] と同じように動作しますが、こちらは 1 行返すだけで繰り返しません。
-
 [[m:Kernel.#gets]] 同様、読み込んだ文字列を変数 [[m:$_]] にセットします。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
@@ -484,16 +484,23 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 --- lineno    -> Integer
 #@todo
 
-Returns the current line number in ios. The stream must be opened for reading. lineno counts the number of times gets is called, rather than the number of newlines encountered. The two values will differ if gets is called with a separator other than newline. See also the $. variable.
+現在の行番号を整数で返します。実際には [[m:IO#gets]] が呼ばれた回数です。
+改行以外のセパレータで gets が呼ばれた場合など、実際の行番号と異なる場合があります。
 
 @raise IOError 読み込み用にオープンされていなければ発生します。
+
+@see [[m:$.]]
 
 --- lineno=(number)
 #@todo
 
-Manually sets the current line number to the given value. $. is updated only on the next read.
+現在の行番号を number にセットします。 [[m:$.]] は次回の読み込みの時に更新されます。
+
+@param number 行番号を整数で指定します。
 
 @raise IOError 読み込み用にオープンされていなければ発生します。
+
+@see [[m:$.]]
 
 --- pid    -> Integer | nil
 #@todo
@@ -507,7 +514,7 @@ Manually sets the current line number to the given value. $. is updated only on 
 --- tell   -> Integer
 #@todo
 
-ファイルポインタの現在の位置を返します。
+ファイルポインタの現在の位置を整数で返します。
 
 @raise IOError 既に close されている場合に発生します。
 
@@ -515,17 +522,18 @@ Manually sets the current line number to the given value. $. is updated only on 
 #@todo
 
 ファイルポインタを指定位置に移動します。
-[[m:IO#seek]](n, IO::SEEK_SET)と同じです。
+[[m:IO#seek]](n, IO::SEEK_SET) と同じです。
+
+@param n 先頭からのオフセットを整数で指定します。
 
 @raise IOError 既に close されている場合に発生します。
 
 --- print(*arg)    -> nil
 #@todo
 
-引数を IO ポートに順に出力します。引数を省略した場合は、
-[[m:$_]] を出力します。
-引数の扱いは [[m:Kernel.#print]] と同じです。詳細はこちらを参照
-してください。
+引数を IO ポートに順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
+
+@param arg [[m:Kernel.#print]] と同じです。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
@@ -535,9 +543,11 @@ Manually sets the current line number to the given value. $. is updated only on 
 C 言語の printf と同じように、format に従い引数
 を文字列に変換して、self に出力します。
 
-第一引数に IO を指定できないこと、引数を省略できないことを除
-けば [[m:Kernel.#printf]] と同じです。
-引数の扱いの詳細については [[unknown:sprintfフォーマット]] を参照してください。
+第一引数に IO を指定できないこと、引数を省略できないことを除けば [[m:Kernel.#printf]] と同じです。
+
+@param format [[m:Kernel.#printf]] と同じです。[[unknown:sprintfフォーマット]] を参照してください。
+
+@param arg [[m:Kernel.#printf]] と同じです。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
@@ -546,9 +556,7 @@ C 言語の printf と同じように、format に従い引数
 
 文字 ch を self に出力します。
 引数の扱いは [[m:Kernel.#putc]] と同じです。詳細はこちらを参照し
-てください。
-
-ch を返します。
+てください。ch を返します。
 
 @param ch 出力したい文字を、文字列か文字コード(整数)で与えます。
 
@@ -560,6 +568,8 @@ ch を返します。
 各 obj を self に出力した後、改行します。
 引数の扱いは [[m:Kernel.#puts]] と同じです。詳細はこちらを参照し
 てください。
+
+@param obj [[m:Kernel.#puts]] と同じです。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
@@ -654,6 +664,8 @@ EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告されます。
 read_nonblock はバッファから読み込みます。
 この場合、read(2) システムコールは呼ばれません。
 
+@param maxlen 読み込む長さの上限を整数で指定します。
+
 @param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
@@ -712,6 +724,8 @@ readpartial の結果は以下のようになります。
 とくに、バッファが空の場合には同じ挙動を示します。
 ただし、EAGAIN および EINTR エラーは内部で発生したとしても通知されず、データが到着するまでブロックし続けます。
 
+@param maxlen 読み込む長さの上限を整数で指定します。
+
 @param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
@@ -724,6 +738,8 @@ readpartial の結果は以下のようになります。
 #@todo
 自身を io に繋ぎ換えます。クラスも io に等しくなることに
 注意してください。
+
+@raise IOError 指定された io が close されている場合に発生します。
 
 --- reopen(path)                 -> self
 --- reopen(path, mode)     -> self
@@ -748,42 +764,41 @@ path で指定されたファイルにストリームを繋ぎ換えます。
 #@todo
 
 ファイルポインタを whence の位置から offset だけ移動させます。
-whence の値は以下のいずれかです。
+offset 位置への移動が成功すれば 0 を返します。
+
+@param whence 値は以下のいずれかです。
 
   * IO::SEEK_SET: ファイルの先頭から (デフォルト)
   * IO::SEEK_CUR: 現在のファイルポインタから
   * IO::SEEK_END: ファイルの末尾から
 
-whence の省略値は IO::SEEK_SET です。
-
-offset 位置への移動が成功すれば 0 を返します。
-
 @raise Errno::EXXX 失敗した場合に発生します。
+
+@raise IOError 既に close されていた場合に発生します。 
 
 --- stat    -> File::Stat
 #@todo
 
 ファイルのステータスを含む [[c:File::Stat]] オブジェクトを生成して
-返します。
-
-[[m:File#lstat]], [[m:File.stat]], [[m:File.lstat]] も参照してください。
 
 @raise Errno::EXXX ステータスの読み込みに失敗した場合に発生します。
 
+@raise IOError 既に close されていた場合に発生します。 
+
+@see [[m:File#lstat]], [[m:File.stat]], [[m:File.lstat]] 
+
 --- sync    -> boolean
-#@todo
-
-現在の出力同期モードを真偽値で返します。同期モードが真の時は、
-出力関数の呼出毎にバッファがフラッシュされます。
-
 --- sync=(newstate)
 #@todo
 
-出力同期モードを設定します。
-newstate が真なら同期モード、偽なら非同期モードになります。
-newstate を返します。
+現在の出力が同期モードならば true を返します。そうでない場合は false を返します。
+自身を同期モードに設定すると、出力関数の呼出毎にバッファがフラッシュされます。
 
-#@if (version >= "1.8.0")
+@param newstate 自身を同期モードに設定するかを boolean で指定します。
+
+@raise IOError 既に close されていた場合に発生します。 
+
+#@since 1.8.0
 --- sysread(maxlen, outbuf = "")   -> String
 #@else
 --- sysread(maxlen)           -> String
@@ -796,8 +811,10 @@ newstate を返します。
 stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
 をすることがあります。
 
+@param maxlen 入力のサイズを整数で指定します。
+
 #@since 1.8.0
-第二引数として文字列を指定すると、読み込ん
+@param outbuf 出力用のバッファを文字列で指定します。読み込ん
 だデータをその文字列オブジェクトに上書きして返します。指定した文字
 列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメ
 モリの割当てが行われません。指定した文字列の長さが maxlen と
@@ -827,8 +844,8 @@ outbuf は空文字列になります。
 #@todo
 
 [[man:lseek(2)]] と同じです。[[m:IO#seek]] では、
-[[m:IO#sysread]], [[m:IO#syswrite]] と併用すると正しく動作しないの
-で代わりにこのメソッドを使います。
+[[m:IO#sysread]], [[m:IO#syswrite]] と併用すると正しく動作しないので代わりにこのメソッドを使います。
+位置 offset への移動が成功すれば移動した位置(ファイル先頭からのオフセット)を返します。
 
 書き込み用にバッファリングされた IO に対して実行すると警告が出ます。
 
@@ -844,12 +861,11 @@ outbuf は空文字列になります。
   }
   # => -:3: warning: sysseek for buffered IO
 
-引数は [[m:IO#seek]] と同じです。
+@param offset [[m:IO#seek]] と同じです。
 
-位置 offset への移動が成功すれば移動した位置(ファイル先頭から
-のオフセット)を返します。
+@param whence  [[m:IO#seek]] と同じです。
 
-@raise IOError 読み込み用にバッファリングされた IO に対して実行すると発生します。
+@raise IOError 読み込み用にバッファリングされた IO に対して実行すると発生します。既に close されていた場合にも発生します。 
 
 @raise Errno::EXXX 移動に失敗した場合に発生します。
 
@@ -916,11 +932,9 @@ IOポートに対して str を出力します。str が文字列でなけ
 --- write_nonblock(string)    -> Integer
 #@todo
 
-IO をノンブロッキングモードに設定し、
-その後で string を [[man:write(2)]] システムコールで書き出します。
-ここで、EAGAIN, EINTR なども例外 [[c:Errno::EXXX]] として呼出元に報告されます。
-
-write(2) が成功した場合、返り値は書き込んだ長さとなります。
+IO をノンブロッキングモードに設定し、string を [[man:write(2)]] システムコールで書き出します。
+write(2) が成功した場合、書き込んだ長さを返します。
+EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 
 @param string 自身に書き込みたい文字列を指定します。
 
