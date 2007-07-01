@@ -400,7 +400,7 @@ fcntl(2) が返した整数を返します。
 
 @param cmd IO に対するコマンドを、添付ライブラリ [[lib:fcntl]] が提供している定数で指定します。
 
-@param arg cmd に対する引数を整数、boolean、文字列のいずれかで指定します。整数の時にはその値をそのまま [[man:fcntl(2)]] に渡します。true または false の場合はそれぞれ 1 または 0 を渡します。文字列の場合には pack した構造体だとみなしてそのまま渡します。
+@param arg cmd に対する引数を整数、文字列、booleanのいずれかで指定します。整数の時にはその値を [[man:fcntl(2)]] に渡します。文字列の場合には Array#pack した構造体だとみなして渡します。arg が nil か false の場合には 0を、true の場合には 1 を渡します。
 
 @raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
 
@@ -437,6 +437,8 @@ fcntl(2) が返した整数を返します。
 IO ポートの内部バッファをフラッシュします。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
+
+@raise Errno::EXXX [[man:fflush(3)]] が失敗した場合に発生します。
 
 --- getc    -> Integer | nil
 #@todo
@@ -487,6 +489,13 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 現在の行番号を整数で返します。実際には [[m:IO#gets]] が呼ばれた回数です。
 改行以外のセパレータで gets が呼ばれた場合など、実際の行番号と異なる場合があります。
 
+  f = File.new("testfile")
+  f.lineno   #=> 0
+  f.gets     #=> "This is line one\n"
+  f.lineno   #=> 1
+  f.gets     #=> "This is line two\n"
+  f.lineno   #=> 2
+
 @raise IOError 読み込み用にオープンされていなければ発生します。
 
 @see [[m:$.]]
@@ -495,6 +504,15 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 #@todo
 
 現在の行番号を number にセットします。 [[m:$.]] は次回の読み込みの時に更新されます。
+
+  f = File.new("testfile")
+  f.gets                     #=> "This is line one\n"
+  $.                         #=> 1
+  f.lineno = 1000
+  f.lineno                   #=> 1000
+  $.                         #=> 1
+  f.gets                     #=> "This is line two\n"
+  $.                         #=> 1001
 
 @param number 行番号を整数で指定します。
 
@@ -505,7 +523,7 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 --- pid    -> Integer | nil
 #@todo
 
-[[m:IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
+自身が [[m:IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
 返します。それ以外は nil を返します。
 
 @raise IOError 既に close されている場合に発生します。
