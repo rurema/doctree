@@ -69,7 +69,7 @@
 このメソッドの引数はブロック引数も含め [[m:Object#initialize]] に渡されます。
 
 #@since 1.8.0
-Ruby 1.8.x からは、new は [[m:Class#allocate]] でインスタンスを生成し、
+new は [[m:Class#allocate]] でインスタンスを生成し、
 [[m:Object#initialize]] で初期化を行います。
 #@end
 
@@ -98,10 +98,6 @@ Ruby 1.8.x からは、new は [[m:Class#allocate]] でインスタンスを生成し、
 にインタプリタから呼び出されます。このメソッドが呼ばれるタイミングは
 クラス定義文の実行直前です。
 
-@param subclass プログラム内で新たに定義された自身のサブクラスです。
-
-例:
-
   class Foo
     def Foo.inherited(subclass)
       puts "class \"#{self}\" was inherited by \"#{subclass}\""
@@ -113,3 +109,5 @@ Ruby 1.8.x からは、new は [[m:Class#allocate]] でインスタンスを生成し、
   
   # => class "Foo" was inherited by "Bar"
        executing class body
+
+@param subclass プログラム内で新たに定義された自身のサブクラスです。
