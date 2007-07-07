@@ -33,16 +33,12 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
 で読み込んだ Time オブジェクトのタイムゾーンは常に地方時になりま
 す。
 
-例:
-
   p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
   # => "JST"
 
 #@since 1.9.0
 1.9 以降、タイムゾーンのフラグは Marshal デー
 タに保持されます。
-
-例:
 
   p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
   # => "UTC"
@@ -90,8 +86,6 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 数値を受け付ける引数には文字列も指定できます。
 
-例:
-
   p Time.gm *"2002-03-17".split("-")
   # => Sun Mar 17 00:00:00 UTC 2002
 
@@ -133,7 +127,7 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 @param year 年を整数で指定します。例えば 1998 年に対して 1998 を指定します。ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
 
-@param isdst 夏時間(Daylight Saving Time (Summer Time))があるかを真偽値で指定します。
+@param isdst 指定した時刻が夏時間(Daylight Saving Time)なら true を指定します。そうでないなら、false を指定します。
 
 @param wday 無視されます。
 
@@ -161,7 +155,7 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 --- now    -> Time
 #@todo
 
-現在時刻の Time オブジェクトを返します。
+現在時刻の Time オブジェクトを生成して返します。
 タイムゾーンは地方時となります。
 
 --- times    -> Struct::Tms
@@ -173,10 +167,10 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 時間の積算を [[c:Struct::Tms]] のオブジェクトとして返します。
 Struct::Tms は以下のメンバを持つ構造体クラスです。
 
-  utime           # user time
-  stime           # system time
-  cutime          # user time of children
-  cstime          # system time of children
+ * utime           # user time
+ * stime           # system time
+ * cutime          # user time of children
+ * cstime          # system time of children
 
 時間の単位は秒で、浮動小数点数で与えられます。詳細は
 [[man:times(3)]] を参照してください。
@@ -193,6 +187,9 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 
 self より other 秒だけ後の時刻を返します
 
+  t = Time.now         #=> Wed Apr 09 08:56:03 CDT 2003
+  t + (60 * 60 * 24)   #=> Thu Apr 10 08:56:03 CDT 2003
+
 @param other 自身からの秒数を数値で指定します。
 
 --- -(other)    -> Float | Time
@@ -201,6 +198,11 @@ self より other 秒だけ後の時刻を返します
 other が Time オブジェクトである時、ふたつの時刻の差を
 [[c:Float]] で返します。単位は秒です。other が数値である時には self
 より other 秒だけ前の時刻を返します。
+
+  t = Time.now       #=> Wed Apr 09 08:56:03 CDT 2003
+  t2 = t + 2592000   #=> Fri May 09 08:56:03 CDT 2003
+  t2 - t             #=> 2592000.0
+  t2 - 2592000       #=> Wed Apr 09 08:56:03 CDT 2003
 
 @param other 自身との差を算出したい Time オブジェクトを指定します。または、自身までの秒数を整数か小数で指定します。
 
@@ -233,6 +235,13 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 
 タイムゾーンを協定世界時に設定した Time オブジェクトを新しく
 生成して返します。
+
+  t = Time.local(2000,1,1,20,15,1)   #=> Sat Jan 01 20:15:01 CST 2000
+  t.gmt?                             #=> false
+  y = t.getgm                        #=> Sun Jan 02 02:15:01 UTC 2000
+  y.gmt?                             #=> true
+  t == y                             #=> true
+
 #@end
 
 #@since 1.8.0
@@ -241,40 +250,53 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 
 タイムゾーンを地方時に設定した Time オブジェクトを新しく生成
 して返します。
+
+  t = Time.gm(2000,1,1,20,15,1)   #=> Sat Jan 01 20:15:01 UTC 2000
+  t.gmt?                          #=> true
+  l = t.getlocal                  #=> Sat Jan 01 14:15:01 CST 2000
+  l.gmt?                          #=> false
+  t == l                          #=> true
+
 #@end
 
 --- gmtime    -> self
 --- utc       -> self
 #@todo
 
-タイムゾーンを協定世界時に設定します。self を返します。
+タイムゾーンを協定世界時に設定します。
 
 このメソッドを呼び出した後は時刻変換を協定世界時として行ないます。
-協定世界時を表示するためには以下のようにします。
 
-  print Time.now.gmtime, "\n"
-
-[[m:Time#localtime]], [[m:Time#gmtime]]の挙動はシステムの
-[[man:localtime(3)]]の挙動に依存します。Time クラ
+[[m:Time#localtime]], [[m:Time#gmtime]] の挙動はシステムの
+[[man:localtime(3)]] の挙動に依存します。Time クラ
 スでは時刻を起算時からの経過秒数として保持していますが、ある特定の
 時刻までの経過秒は、システムがうるう秒を勘定するかどうかによって異
 なる場合があります。システムを越えて Time オブジェクトを受け
 渡す場合には注意する必要があります。
 
---- localtime     -> Time
+  t = Time.now   #=> Wed Apr 09 08:56:03 CDT 2003
+  t.gmt?         #=> false
+  t.gmtime       #=> Wed Apr 09 13:56:03 UTC 2003
+  t.gmt?         #=> true
+
+--- localtime     -> self
 #@todo
 
-タイムゾーンを地方時に設定します(デフォルト)。self を返しま
-す。
+タイムゾーンを地方時に設定します。
 
 このメソッドを呼び出した後は時刻変換を協定地方時として行ないます。
 
-[[m:Time#localtime]], [[m:Time#gmtime]]の挙動はシステムの
-[[man:localtime(3)]]の挙動に依存します。Time クラ
+[[m:Time#localtime]], [[m:Time#gmtime]] の挙動はシステムの
+[[man:localtime(3)]] の挙動に依存します。Time クラ
 スでは時刻を起算時からの経過秒数として保持していますが、ある特定の
 時刻までの経過秒は、システムがうるう秒を勘定するかどうかによって異
 なる場合があります。システムを越えて Time オブジェクトを受け
 渡す場合には注意する必要があります。
+
+  t = Time.gm(2000, "jan", 1, 20, 15, 1)
+  t.gmt?        #=> true
+  t.localtime   #=> Sat Jan 01 14:15:01 CST 2000
+  t.gmt?        #=> false
 
 --- strftime(format)    -> String
 #@todo
@@ -327,12 +349,12 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 時を整数で返します。
 
 --- mday    -> Integer
---- day     -> Integer         (mday の別名)
+--- day     -> Integer
 #@todo
 日を整数で返します。
 
 --- mon      -> Integer
---- month    -> Integer     (mon の別名)
+--- month    -> Integer
 #@todo
 月を整数で返します。
 
@@ -349,13 +371,22 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 1月1日を1とした通算日(1から366まで)を整数で返します。
 
 --- isdst    -> boolean
---- dst?     -> boolean         (isdst の別名)
+--- dst?     -> boolean
 #@todo
-夏時間があるなら true をなければ false を返します。
+自身が表す時刻が夏時間なら true を返します。そうでないなら false を返します。
+
+現在のタイムゾーンに夏時間があるなら、以下のようになります。
+
+  Time.local(2000, 7, 1).isdst   #=> true
+  Time.local(2000, 1, 1).isdst   #=> false
+  Time.local(2000, 7, 1).dst?    #=> true
+  Time.local(2000, 1, 1).dst?    #=> false
 
 --- zone    -> String
 #@todo
 タイムゾーンを表す文字列を返します。
+
+ p Time.now.zone #=> "JST"
 
 #@since 1.8.0
 --- succ    -> Time
@@ -363,8 +394,6 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 
 self に 1 秒足した Time オブジェクトを生成して返します。
 タイムゾーンは地方時になります。
-
-例:
 
   t = Time.now
   p t
@@ -383,15 +412,11 @@ self に 1 秒足した Time オブジェクトを生成して返します。
 地方時が協定世界時よりも進んでいる場合(アジア、オーストラリアなど)
 には正の値、遅れている場合(アメリカなど)には負の値になります。
 
-例:
-
   p Time.now.zone  # => "JST"
   p Time.now.utc_offset
   # => 32400
 
 タイムゾーンが協定世界時に設定されている場合は 0 を返します。
-
-例:
 
   p Time.now.zone  # => "JST"
   p Time.now.getgm.utc_offset
@@ -410,10 +435,8 @@ self に 1 秒足した Time オブジェクトを生成して返します。
   * year:  年 (整数 2000年=2000)
   * wday:  曜日 (整数 0-6)
   * yday:  年内通算日 (整数 1-366)
-  * isdst: 夏時間の有無 (true/false)
+  * isdst: 夏時間であるかどうか (true/false)
   * zone:  タイムゾーン (文字列)
-
-例:
 
   p Time.now      # => Mon Oct 20 06:02:10 JST 2003
   p Time.now.to_a # => [10, 2, 6, 20, 10, 2003, 1, 293, false, "JST"]
@@ -445,8 +468,6 @@ yday は 1 から数えます。
   self.strftime("%a %b %d %H:%M:%S %Z %Y")
 
 と同じです。
-
-例:
 
   p Time.now.to_s # => "Mon Oct 20 06:02:10 JST 2003"
 
