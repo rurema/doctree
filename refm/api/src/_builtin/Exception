@@ -39,6 +39,18 @@
 
 という形式の [[c:String]] の配列です。
 
+ def methd
+   raise
+ end
+ 
+ begin
+   methd
+ rescue => e
+   p e.backtrace
+ end
+ 
+ #=> ["filename.rb:2:in `methd'", "filename.rb:6"]
+
 --- message    -> String
 --- to_s       -> String
 --- to_str    -> String
