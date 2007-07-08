@@ -28,7 +28,14 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
 時刻を格納しようとした場合は例外が発生します。
 
 また、Time オブジェクトは協定世界時と地方時のどちらのタイムゾー
-ンを使用するかのフラグを内部に保持しています。ただし、この情報は
+ンを使用するかのフラグを内部に保持しています。
+#@since 1.9.0
+タイムゾーンのフラグは Marshal データに保持されます。
+
+  p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
+  # => "UTC"
+#@else
+ただし、この情報は
 [[m:Marshal.#dump]] では保存されず、[[m:Marshal.#load]]
 で読み込んだ Time オブジェクトのタイムゾーンは常に地方時になりま
 す。
@@ -36,12 +43,6 @@ Time オブジェクトを生成する各メソッドで、それぞれの環境での範囲外の
   p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
   # => "JST"
 
-#@since 1.9.0
-1.9 以降、タイムゾーンのフラグは Marshal デー
-タに保持されます。
-
-  p Marshal.load(Marshal.dump(Time.now.gmtime)).zone
-  # => "UTC"
 #@end
 
 [[lib:time]] ライブラリによって、[[m:Time.parse]], [[m:Time.rfc2822]], [[m:Time.httpdate]], [[m:Time.iso8601]] 等が拡張されます。
@@ -127,7 +128,7 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 @param year 年を整数で指定します。例えば 1998 年に対して 1998 を指定します。ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
 
-@param isdst 指定した時刻が夏時間(Daylight Saving Time)なら true を指定します。そうでないなら、false を指定します。
+@param isdst 指定した日時が夏時間(Daylight Saving Time)なら true を指定します。そうでないなら、false を指定します。
 
 @param wday 無視されます。
 
@@ -373,14 +374,11 @@ self のタイムゾーンが協定世界時に設定されていれば真を返しま
 --- isdst    -> boolean
 --- dst?     -> boolean
 #@todo
-自身が表す時刻が夏時間なら true を返します。そうでないなら false を返します。
+自身が表す日時が夏時間なら true を返します。そうでないなら false を返します。
 
-現在のタイムゾーンに夏時間があるなら、以下のようになります。
-
+  ENV['TZ'] = 'US/Pacific'
   Time.local(2000, 7, 1).isdst   #=> true
   Time.local(2000, 1, 1).isdst   #=> false
-  Time.local(2000, 7, 1).dst?    #=> true
-  Time.local(2000, 1, 1).dst?    #=> false
 
 --- zone    -> String
 #@todo
