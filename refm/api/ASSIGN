@@ -4,7 +4,7 @@
 #--------------------------------------------------------
 _builtin/ARGF                   kouya
 _builtin/ArgumentError          snoozer05       done
-_builtin/Array                  
+_builtin/Array                  sheepman
 _builtin/Bignum                 ujihisa         done
 _builtin/Binding                sheepman
 _builtin/Class                  sheepman
