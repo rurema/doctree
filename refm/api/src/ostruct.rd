@@ -2,10 +2,9 @@
 
 = class OpenStruct < Object
 
-インスタンスに対して未定義なセッターメソッドを呼ぶと、
-method_missing が呼ばれて
-代入した値を返すメソッドがインスタンスに新たに定義されます。
-この動作によって要素を動的に変更できる構造体として働きます。
+OpenStructのインスタンスに対して未定義なセッターメソッド x= を呼ぶと
+[[m:Object#method_missing]]で捕捉され、インスタンスに属性 x が定義されます。
+この挙動によって要素を動的に変更できる構造体として働きます。
 
   require 'ostruct'
   ab = OpenStruct.new
@@ -34,9 +33,14 @@ OpenStructオブジェクトを生成。
 hashが与えられたとき、それぞれのキーを
 生成したオブジェクトの要素にし、値をセットします。
 
-@param hash 設定する要素とその値を指定します
-キーには to_sym でシンボル化できるもの、
-つまり文字列やシンボルを使用することができます。
+@param hash 設定する要素とその値を指定します。
+hashには[[c:Hash]]クラスのインスタンス、または配列の配列を用いることができます。
+
+@raise NoMethodError
+hashのキーが[[Symbol#to_sym]]メソッドを持たないときに発生します。
+
+  require 'ostruct'
+  some = OpenStruct.new([[:a,"a"],[:b,"b"]]) # => #<OpenStruct b="b", a="a">
 
 == Instance Methods
 --- delete_field(name) -> object
