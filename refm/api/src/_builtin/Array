@@ -87,13 +87,14 @@ nth 番目の要素を返します。
 --- [](rng)    -> nil | [] | Array
 #@todo
 
-[[c:Range]] オブジェクト rng の start 番目の要素から end 番目の要素までの部分配列を返します。
+[[c:Range]] オブジェクト rng の範囲にある要素からなる部分配列を返します。
 
 start や end の値が負の時には末尾からのインデックスと見倣します(末尾の要素が -1 番目)。
 end の値が配列の長さを越える時には、越えた分の長さは無視されます。
 
   a = [ "a", "b", "c", "d", "e" ]
   a[0..1]   #=> ["a", "b"]
+  a[0...1]  #=> ["a"]
   a[0..-1]  #=> ["a", "b", "c", "d", "e"]
   a[-2..4]  #=> ["d", "e"]  (start は末尾から -2 番目、end は先頭から (4+1) 番目となる。)
   a[0..10]  #=> ["a", "b", "c", "d", "e"]
@@ -132,8 +133,7 @@ nil で初期化します。
 --- []=(rng, val)
 #@todo
 
-[[c:Range]] オブジェクト rng の start 番目の要素から end 番目の要素までを配列
-val の内容に置換します。
+[[c:Range]] オブジェクト rng の範囲にある要素を配列 val の内容に置換します。
 
 start や end の値が負の時には末尾からのインデックスと見倣します(末尾の要素が -1 番目)。
 val の要素の数の方が多い時には、後ろの要素がずれます。
@@ -363,7 +363,7 @@ compact は self から nil である要素を取り除いた
     p a              # => [3, 4]       # こちらは変わらない
 
 --- delete(val)           -> nil | object
---- delete(val) { ... }   -> nil | object
+--- delete(val) { ... }   -> object
 #@todo
 
 val と == で等しい要素をすべて取り除きます。
@@ -401,11 +401,9 @@ pos が範囲外であったら nil を返します。
 --- reject! {|x| ... }      -> nil | self
 #@todo
 
-要素を順番にブロックに渡して評価し、その結果が真になった要素を
-すべて削除します。
-
-delete_if は常に self を返しますが、reject! は要
-素が 1 つ以上削除されれば self を、 1 つも削除されなければ nil を返します。
+要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
+delete_if は常に self を返しますが、reject! は要素が 1 つ以上削除されれば self を、
+1 つも削除されなければ nil を返します。
 
 --- each {|item| .... }    -> self
 #@todo
@@ -458,21 +456,21 @@ each により(また、標準のメソッドで)複数の値を取得しながら繰り返す
 
     (0 ... ary.size).each {|index| ....  }
 
---- empty?
+--- empty?    -> boolean
 #@todo
 
 配列の要素数が 0 の時真を返します。
 
---- eql?(other)
+--- eql?(other)    -> boolean
 #@todo
 
 self と other の各要素をそれぞれ順に
 [[m:Object#eql?]] で比較して、全要素が等しければ真を返
 します。
 
---- fetch(nth)
---- fetch(nth, ifnone)
---- fetch(nth) {|nth| ... }
+--- fetch(nth)               -> object    
+--- fetch(nth, ifnone)       -> object
+--- fetch(nth) {|nth| ... }  -> object
 #@todo
 
 [[m:Array#[] ]](nth) と同様 nth 番目の要素を返しますが、
@@ -485,13 +483,15 @@ Array#[](nth) とは nth 番目の要素が存在しない場合の振舞いが異
 
 Array#[nth] は、Array#fetch(nth, nil) と同じです。
 
---- fill(val)
---- fill(val, start[, length])
---- fill(val, start..end)
+--- fill(val)                             -> self
+--- fill(val, start)                      -> self
+--- fill(val, start, length])             -> self
+--- fill(val, range)                      -> self
 #@since 1.8.0
---- fill {|index| ... }
---- fill(start[, length]) {|index| ... }
---- fill(start..end) {|index| ... }
+--- fill {|index| ... }                   -> self
+--- fill(start) {|index| ... }            -> self
+--- fill(start, length) {|index| ... }    -> self
+--- fill(range) {|index| ... }            -> self
 #@todo
 #@end
 
@@ -527,21 +527,20 @@ version 1.8.0 には、ブロックに渡されるパラ
     p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
 #@end
 
---- first
-#@since 1.8.0
---- first(n)
+--- first       -> nil | object
 #@todo
-#@end
 配列の先頭の要素を返します。要素がなければ nil を返します。
-
-例:
 
     p [0, 1, 2].first   #=> 0
     p [].first          #=> nil
 
+[[m:Array#last]] も参照してください。
+
 #@since 1.8.0
-省略可能な引数 n を指定した場合、先頭の n 要素を配列で
-返します。n は 0 以上でなければなりません。
+--- first(n)    -> Array
+#@todo
+
+先頭の n 要素を配列で返します。n は 0 以上でなければなりません。
 
     ary =  [0, 1, 2]
     p ary.first(0)
@@ -557,15 +556,13 @@ version 1.8.0 には、ブロックに渡されるパラ
 #@end
 [[m:Array#last]] も参照してください。
 
---- flatten
---- flatten!
+--- flatten     -> Array
+--- flatten!    -> self
 #@todo
 
 ネストした配列を平滑化してそれを返します。flatten! は
 配列それ自体を破壊的に平滑化し、配列がネストしていないとき
 には nil を返します。
-
-例:
 
     p [1, [2, 3, [4], 5]].flatten   #=> [1, 2, 3, 4, 5]
 
@@ -573,28 +570,25 @@ version 1.8.0 には、ブロックに渡されるパラ
     array.flatten!
     p array                         #=> [1, 2, 3]
 
---- include?(val)
+--- include?(val)    -> boolean
 #@todo
 
-配列が val と == において等しい要素を持つ時に真を返し
-ます。
+配列が val と == において等しい要素を持つ時に真を返します。
 
---- index(val)
+--- index(val)           -> nil | Integer
 #@since 1.9.0
---- index {|item| ...}
-#@todo
+--- index {|item| ...}   -> nil | Integer
 #@end
+#@todo
 最初の形式では、val と == で等しい最初の要素の位置を返
 します。
+等しい要素がひとつもなかった時には nil を返します。
 
 #@since 1.9.0
 二番目の形式では、ブロックが真を返した最初の要素の位置を返します。
 ブロック引数には、要素が順に渡されます。
 #@end
 
-等しい要素がひとつもなかった時には nil を返します。
-
-例:
     p [1, 0, 0, 1, 0].index(1)   #=> 0
     p [1, 0, 0, 0, 0].index(1)   #=> 0
     p [0, 0, 0, 0, 0].index(1)   #=> nil
@@ -603,50 +597,41 @@ version 1.8.0 には、ブロックに渡されるパラ
 #@end
 [[m:Array#rindex]] も参照してください。
 
---- indexes(index_1, ... , index_n)     
---- indices(index_1, ... , index_n)     
+--- indexes(*index)     
+--- indices(*index)     
 #@todo
+
+#@since 1.8.0
+このメソッド obsolete です。
+代わりに [[m:Array#values_at]] を使用します。
+
+使用すると警告メッセージが表示されます。
+#@end
 
 各引数の値をインデックスとする要素の配列を返します。範囲外の
 インデックス指定に対しては nil が対応します。
 
-例:
     ary = %w( a b c d e )
     p ary.indexes( 0, 2, 4 )          #=> ["a", "c", "e"]
     p ary.indexes( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil]
     p ary.indexes( 0, -1, -2 )        #=> ["a", "e", "d"]
     p ary.indexes( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
-#@since 1.8.0
-このメソッドは version 1.8 では、((<obsolete>)) です。
-使用すると警告メッセージが表示されます。
-代わりに [[m:Array#values_at]] を使用します。
-#@end
+
 
 #@since 1.8.0
---- insert(nth, val[, val2 ...])
---- insert(nth, [val[, val2 ...]])
+--- insert(nth, *val)    -> self
 #@todo
 
 インデックス nth の要素の直前に第 2 引数以降の値を挿入します。
-self を返します。以下のように定義されます。
-
-    class Array
-      def insert( n, *vals )
-        self[n, 0] = vals
-        self
-      end
-    end
-
-例:
-    ary = %w( foo bar baz )
-    ary.insert 2, 'a', 'b'
-    p ary                  # => ["foo", "bar", "a", "b", "baz"]
-#@end
-#@since 1.8.0
 引数 val を一つも指定しなければ何もしません。
+
+    ary = [1, 2, 3]
+    ary.insert(2, "a", "b")
+    p ary                  # => [1, 2, "a", "b", 3]
+
 #@end
 
---- join([sep])
+--- join(sep = $,)    -> String
 #@todo
 
 配列の要素を文字列 sep を間に挟んで連結した文字列を返します。
@@ -657,9 +642,6 @@ join した文字列を連結します。
 
 sep が nil のときは空文字列を使います。
 
-引数 sep が省略された場合には変数 [[m:$,]]
-の値が使われます。$, のデフォルト値は nil です。
-
 注: 配列要素が自身を含むような無限にネストした配列に対しては、以下
 のような結果になります。
 
@@ -668,19 +650,23 @@ sep が nil のときは空文字列を使います。
     p ary           # => [1, 2, 3, [...]]
     p ary.join      # => "123123[...]"
 
---- last
-#@since 1.8.0
---- last(n)
+@see [[m:$,]]
+
+--- last    -> nil | object
 #@todo
-#@end
+
 配列の末尾の要素を返します。配列が空のときは nil を返します。
 
     p [0, 1, 2].last   #=> 2
     p [].last          #=> nil
 
+[[m:Array#first]] も参照してください。
+
 #@since 1.8.0
-省略可能な引数 n を指定した場合、末尾の n 要素を配列で
-返します。n は 0 以上でなければなりません。
+--- last(n)    -> Array
+#@todo
+
+末尾の n 要素を配列で返します。n は 0 以上でなければなりません。
 
     ary =  [0, 1, 2]
     p ary.last(0)
@@ -697,27 +683,29 @@ sep が nil のときは空文字列を使います。
 
 [[m:Array#first]] も参照してください。
 
---- length
---- size
+--- length    -> Integer
+--- size      -> Integer
 #@todo
 
 配列の長さを返します。配列が空のときは 0 を返します。
 
---- nitems
+--- nitems    -> Integer
 #@todo
 
 nil でない要素の数を返します。
 
---- pack(template)
+--- pack(template)    -> String
 #@todo
 
 配列の内容を template で指定された文字列にしたがって、
-バイナリとしてパックした文字列を返します。テンプレートは
+バイナリとしてパックした文字列を返します。
+
+テンプレートは
 型指定文字列とその長さ(省略時は1)を並べたものです。長さと
 して * が指定された時は「残りのデータ全て」の長さを
 表します。型指定文字は[[unknown:packテンプレート文字列]]の通りです。
 
---- pop
+--- pop    -> nil | object
 #@todo
 
 末尾の要素を取り除いてそれを返します。空配列の時は
@@ -726,7 +714,6 @@ nil を返します。
 [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]] も参照し
 てください。
 
-例:
       array = [1, [2, 3], 4]
       p array.pop      # => 4
       p array.pop      # => [2, 3]
@@ -736,28 +723,28 @@ nil を返します。
       p array.pop      # => nil
       p array          # => []
 
---- push(obj1[, obj2 ...])
---- push([obj1[, obj2 ...]])
+#@since 1.8.0
+--- push(*obj)        -> self
+#@else
+--- push(obj, *rest)  -> self
+#@end
 #@todo
 
-obj1, obj2 ... を順番に配列の末尾に追加します。
+obj を順番に配列の末尾に追加します。
+#@since 1.8.0
+引数を指定しなければ何もしません。
+#@end
 
 [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]] も参照して
 ください。
 
-self を返します。
-
-例:
       array = [1, 2, 3]
       array.push 4
       array.push [5, 6]
       array.push 7, 8
       p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
-#@since 1.8.0
-引数を指定しなければ何もしません。
-#@end
 
---- rassoc(obj)
+--- rassoc(obj)    -> nil | Array
 #@todo
 
 self が配列の配列であると仮定して、要素の配列でインデックス
@@ -766,58 +753,53 @@ self が配列の配列であると仮定して、要素の配列でインデックス
 
 該当する要素がなければ nil を返します。
 
-例:
     a = [[15,1], [25,2], [35,3]]
     p a.rassoc(2)    # => [25, 2]
 
 [[m:Array#assoc]] も参照してください。
 
---- replace(another)
+--- replace(another)    -> self
 #@todo
 
 配列の内容を配列 another の内容で置き換えます。
-self を返します。
 
-例:
     a = [1, 2, 3]
     a.replace [4, 5, 6]
     p a                 #=> [4, 5, 6]
 
---- reverse
---- reverse!
+--- reverse     -> Array
+--- reverse!    -> self
 #@todo
 
 reverse は全ての要素を逆順に並べた新しい配列を返します。
 reverse! は配列の要素を逆順に(破壊的に)並べ替えます。
-
-reverse は、常に新しい配列を返しますが、reverse!  は、
-1 要素の配列に対して nil を返しそれ以外では self を返
-します
+reverse は、常に新しい配列を返しますが、
 #@since 1.8.0
-常に self を返します。
+reverse!  は、常に self を返します。
+#@else
+reverse!  は、1 要素の配列に対して nil を返しそれ以外では self を返
+します
 #@end
---- reverse_each {|item| ... }
+
+--- reverse_each {|item| ... }    -> self
 #@todo
 
-各要素に対して逆順にブロックを評価します。self を返します。
+各要素に対して逆順にブロックを評価します。
 
---- rindex(val)
+--- rindex(val)           -> Integer
 #@since 1.9.0
---- rindex {|item| ... }
-#@todo
+--- rindex {|item| ... }  -> Integer
 #@end
-最初の形式では、val と == で等しい((*最後*))の要素の位
-置を返します。
+#@todo
+最初の形式では、val と == で等しい最後の要素の位置を返します。
 
 #@since 1.9.0
-二番目の形式では、ブロックが真を返した((*最後*))の要素の位置を返し
+二番目の形式では、ブロックが真を返した最後の要素の位置を返し
 ます。ブロック引数には、要素が順に渡されます。
 #@end
 
 等しい要素がひとつもなかった時には nil を返します。
 
-
-例:
     p [1, 0, 0, 1, 0].rindex(1)   #=> 3
     p [1, 0, 0, 0, 0].rindex(1)   #=> 0
     p [0, 0, 0, 0, 0].rindex(1)   #=> nil
@@ -825,7 +807,7 @@ reverse は、常に新しい配列を返しますが、reverse!  は、
 
 [[m:Array#index]] も参照してください。
 
---- shift
+--- shift    -> nil | object
 #@todo
 
 配列の先頭の要素を取り除いてそれを返します。残りの要素はひとつずつ
@@ -834,14 +816,16 @@ reverse は、常に新しい配列を返しますが、reverse!  は、
 [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]] も参照して
 ください。
 
---- slice(pos[, len])
---- slice(start..last)
+--- slice(nth)       -> object
+--- slice(pos, len)  -> object
+--- slice(range)     -> object
 #@todo
 
 [[m:Array#[] ]] と同じです。
 
---- slice!(pos[, len])
---- slice!(start..last)
+--- slice!(nth)       -> object
+--- slice!(pos, len)  -> object
+--- slice!(range)     -> object
 #@todo
 
 指定した要素を取り除いて返します。取り除く要素がなければ nil
@@ -865,24 +849,24 @@ nil を返していました。一方バージョン 1.7 では常に self を
 返します。
 #@end
 
---- to_a
---- to_ary
+--- to_a    -> self
+--- to_ary  -> self
 #@todo
 
 self をそのまま返します。
 
---- to_s
+--- to_s    -> String
 #@todo
 
 [[m:Array#join]]([[m:$,]]) と同じです。
 
 #@since 1.9.0
 --- to_splat
-#@todo
 #@end
+#@todo
 
 #@since 1.8.0
---- transpose
+--- transpose    -> Array
 #@todo
 
 self を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
@@ -910,8 +894,8 @@ self を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
     # => -:3:in `transpose': element size differ (3 should be 2) (IndexError)
 #@end
 
---- uniq
---- uniq!
+--- uniq     -> Array
+--- uniq!    -> self
 #@todo
 
 uniq は配列から重複した要素を取り除いた新しい配列を返します。
@@ -921,21 +905,26 @@ nil を返します。
 
 要素の重複判定は、[[m:Object#eql?]] により行われます。
 
-例:
     p [1, 1, 1].uniq         #=> [1]
     p [1, 4, 1].uniq         #=> [1, 4]
     p [1, 3, 2, 2, 3].uniq   #=> [1, 3, 2]
 
---- unshift(obj1[, obj2 ...])
---- unshift([obj1[, obj2 ...]])
+
+#@since 1.8.0
+--- unshift(*obj)        -> self
+#@else
+--- unshift(obj, *rest)  -> self
+#@end
 #@todo
 
-obj1, obj2 ... を順番に配列の先頭に挿入します。self を返します。
+obj を順番に配列の先頭に挿入します。
+#@since 1.8.0
+引数を指定しなければ何もしません。
+#@end
 
 [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]] も参照してく
 ださい。
 
-例:
     arr = [1,2,3]
     arr.unshift 0
     p arr             #=> [0, 1, 2, 3]
@@ -945,18 +934,13 @@ obj1, obj2 ... を順番に配列の先頭に挿入します。self を返します。
     p arr             #=> [1, 2, [0], 0, 1, 2, 3]
 
 #@since 1.8.0
-引数を指定しなければ何もしません。
-#@end
-
-#@since 1.8.0
---- values_at(index_1, ... , index_n)
+--- values_at(*index)    -> Array
 #@todo
 
 引数で指定されたインデックスに対応する要素を配列で返します。インデッ
 クスに対応する値がなければ nil が要素になります。
 ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
-例:
     ary = %w( a b c d e )
     p ary.values_at( 0, 2, 4 )          #=> ["a", "c", "e"]
     p ary.values_at( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil, nil]
