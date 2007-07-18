@@ -84,7 +84,7 @@ nth 番目の要素を返します。
 
 @param nth インデックスを整数で指定します。
 
---- [](range)    -> nil | [] | Array
+--- [](range)    -> nil | Array
 #@todo
 
 [[c:Range]] オブジェクト range の範囲にある要素からなる部分配列を返します。
@@ -854,25 +854,25 @@ reverse!  は、1 要素の配列に対して nil を返しそれ以外では self を返
 [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]] も参照して
 ください。
 
---- slice(nth)       -> object
---- slice(pos, len)  -> object
---- slice(range)     -> object
+--- slice(nth)       -> nil | object
+--- slice(pos, len)  -> nil | Array
+--- slice(range)     -> nil | Array
 #@todo
 
 [[m:Array#[] ]] と同じです。
 
---- slice!(nth)       -> object
---- slice!(pos, len)  -> object
---- slice!(range)     -> object
+--- slice!(nth)       -> nil | object
+--- slice!(pos, len)  -> nil | Array
+--- slice!(range)     -> nil | Array
 #@todo
 
 指定した要素を取り除いて返します。取り除く要素がなければ nil
 を返します。
 
---- sort
---- sort!
---- sort {|a, b| ... }
---- sort! {|a, b| ... }
+--- sort                -> Array
+--- sort!               -> self
+--- sort {|a, b| ... }  -> Array
+--- sort! {|a, b| ... } -> self
 #@todo
 
 配列の内容をソートします。ブロックとともに呼び出された時には
@@ -909,7 +909,9 @@ self をそのまま返します。
 
 self を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
 す。転置した配列を生成して返します。空の配列に対しては空の配列を生
-成して返します。それ以外の一次元の配列に対しては、例外
+成して返します。
+
+それ以外の一次元の配列に対しては、例外
 [[c:TypeError]] が発生します。各要素のサイズが不揃いな配列に対して
 は、例外 [[c:IndexError]] が発生します。
 
