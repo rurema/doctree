@@ -17,7 +17,7 @@ OpenStructのインスタンスに対して未定義なセッターメソッド x= を呼ぶと
   p ab.foo          # => nil
   p ab              # => <OpenStruct bar=2>
 
-  son = OpenStruct.new(:name=>"Thomas", :age => 3)
+  son = OpenStruct.new({:name=>"Thomas", :age => 3})
   p son.name        # => "Thomas"
   p son.age         # => 3
   son.age += 1
@@ -40,13 +40,14 @@ hashには[[c:Hash]]クラスのインスタンス、または配列の配列を用いることができます。
 hashのキーが[[Symbol#to_sym]]メソッドを持たないときに発生します。
 
   require 'ostruct'
-  some = OpenStruct.new([[:a,"a"],[:b,"b"]]) # => #<OpenStruct b="b", a="a">
+  some1 = OpenStruct.new({:a =>"a",:b =>"b"}) # => #<OpenStruct b="b", a="a">
+  some2 = OpenStruct.new([[:a,"a"],[:b,"b"]]) # => #<OpenStruct b="b", a="a">
 
 == Instance Methods
 --- delete_field(name) -> object
 
 nameで指定された要素を削除。
-その後その要素を参照したらnilが返る。
+その後その要素を参照したらnilが返ります。
 
 @return 要素の削除前の値を返します。
 
