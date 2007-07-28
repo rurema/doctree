@@ -671,7 +671,7 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 [[m:Array#last]] も参照してください。
 
 --- flatten     -> Array
---- flatten!    -> self
+--- flatten!    -> nil | self
 #@todo
 
 ネストした配列を平滑化してそれを返します。flatten! は
@@ -900,7 +900,11 @@ self が配列の配列であると仮定して、要素の配列でインデックス
 @param another 配列を指定します。
 
 --- reverse     -> Array
+#@since 1.8.0
 --- reverse!    -> self
+#@else
+--- reverse!    -> nil | self
+#@end
 #@todo
 
 reverse は全ての要素を逆順に並べた新しい配列を返します。
@@ -984,9 +988,9 @@ sort はソートされた新しい配列を返し、sort! は
 self を破壊的に変更します。
 
 #@since 1.8.0
-sort! は、バージョン 1.6 以前には要素の数が 2 より小さい場合には
-nil を返していました。一方バージョン 1.7 では常に self を
-返します。
+sort! は、常に self を返します。
+#@else
+sort! は、要素の数が 2 より小さい場合には nil を返します。
 #@end
 
 --- to_a    -> self
