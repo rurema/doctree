@@ -40,26 +40,51 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます。
     p ARGF.gets      # => nil
     p ARGF.filename  # => "-"
 
-[[m:Kernel#gets]] など一部の[[unknown:組み込み関数]]は
+[[m:Kernel#gets]] など一部の組み込み関数は
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 #@if (version >= "1.8.0")
---- filename
---- path
-#@todo
+--- filename -> String
+--- path -> String
 
 処理対象のファイル名を返します。
 標準入力に対しては - を返します。
 組み込み変数 [[m:$FILENAME]] と同じです。
 
---- to_s
-#@todo
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each {|line|
+    p [ARGF.filename, ARGF.path, ARGV]
+    ARGF.skip
+  }
+  #例
+  #=> ["test.rb", "test.rb", ["test.rb~", "third.txt", "ugo.yaml"]]
+  #=> ["test.rb~", "test.rb~", ["third.txt", "ugo.yaml"]]
+  #...
 
+--- to_s -> String
 常に文字列 "ARGF" を返します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  while line = ARGF.gets
+    p [ARGF.filename, ARGF.to_s, ARGV]
+    ARGF.skip
+  end
+
+  #例
+  #=> ["test.rb", "ARGF", ["test.rb~", "third.txt", "ugo.yaml"]]
+  #=> ["test.rb~", "ARGF", ["third.txt", "ugo.yaml"]]
+  #...
+
 #@else
 
---- filename
---- to_s
+--- filename -> String
+--- to_s -> String
 #@todo
 
 処理対象のファイル名を返します。
@@ -73,20 +98,50 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
 返します。
 
---- lineno
---- lineno=
-#@todo
+--- lineno -> Integer
+--- lineno= -> Integer
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
 個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
 
---- skip
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each {|line|
+    if ARGF.lineno < 10
+      ARGF.lineno = 10
+    end
+    p [ ARGF.lineno, line]
+  }
+  #例
+  #=> [10, "cat:\n"]
+  #=> [11, " - name: taro\n"]
+  #=> [12, "   age: 7\n"]
+  #...
+
+--- skip -> String
+#@# ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32] では、"ARGF" という文字列を返すようです。
 #@todo
 
 処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
 
-self を返します。
+文字列 "ARGF" を返します。
+#@#self を返します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  while line = ARGF.gets
+    p [ARGF.filename, ARGV, ARGF.skip]
+  end
+  #例
+  #=> ["sample.yaml", ["test.rb", "test.rb~", "third.txt", "ugo.yaml"], ARGF]
+  #=> ["test.rb", ["test.rb~", "third.txt", "ugo.yaml"], ARGF]
+  #...
+
 
 --- binmode
 #@todo
