@@ -145,12 +145,72 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 --- binmode
 #@todo
+[[m:IO#binmode]]を参照
 
---- close
-#@todo
+--- close -> String
+処理対象のファイルをクローズします。
 
---- closed?
+文字列 "ARGF" を返します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each {|line|
+    p [ line.chomp, ARGF.filename ]
+    ARGF.close
+    if ARGF.closed?
+      p "ARGF is closed."
+    else
+      p "ARGF is not closed"
+    end
+  }
+  if ARGF.closed?
+    p "ARGF had been closed."
+  else
+    p "ARGF is not closed"
+  end
+  
+  #例
+  #=> ["cat:", "sample.yaml"]
+  #=> "ARGF is not closed"
+  #=> ["", "test.rb"]
+  #=> "ARGF is not closed"
+  #=> ["--- !ruby/object:Dog ", "ugo.yaml"]
+  #=> "ARGF is closed."
+  #=> "ARGF had been closed."
+
+--- closed? -> boolean
 #@todo
+[[m:IO#closed?]]を参照
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each {|line|
+    p [ line.chomp, ARGF.filename ]
+    ARGF.close
+    if ARGF.closed?
+      p "ARGF is closed."
+    else
+      p "ARGF is not closed"
+    end
+  }
+  if ARGF.closed?
+    p "ARGF had been closed."
+  else
+    p "ARGF is not closed"
+  end
+  
+  #例
+  #=> ["cat:", "sample.yaml"]
+  #=> "ARGF is not closed"
+  #=> ["", "test.rb"]
+  #=> "ARGF is not closed"
+  #=> ["--- !ruby/object:Dog ", "ugo.yaml"]
+  #=> "ARGF is closed."
+  #=> "ARGF had been closed."
 
 --- dup
 #@todo
