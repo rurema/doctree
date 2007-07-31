@@ -120,15 +120,13 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
   #=> [12, "   age: 7\n"]
   #...
 
---- skip -> String
-#@# ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32] では、"ARGF" という文字列を返すようです。
+--- skip -> self
 #@todo
 
 処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
 
-文字列 "ARGF" を返します。
-#@#self を返します。
+self を返します。
 
   # カレントディレクトリから適当にファイルを選ぶ
   ARGV.replace(
@@ -143,14 +141,12 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
   #...
 
 
---- binmode
+--- binmode -> self
 #@todo
 [[m:IO#binmode]]を参照
 
---- close -> String
+--- close -> self
 処理対象のファイルをクローズします。
-
-文字列 "ARGF" を返します。
 
   # カレントディレクトリから適当にファイルを選ぶ
   ARGV.replace(
@@ -215,57 +211,52 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 --- dup
 #@todo
 
---- each
+--- each -> self
+--- each_line -> self
+[[m:IO#each]], [[m:IO#each_line]]を参照
+
+--- each_byte -> self
 #@todo
 
---- each_byte
+
+--- eof -> boolean
+--- eof? -> boolean
 #@todo
 
---- each_line
+--- fileno -> Integer
+--- to_i -> Integer
 #@todo
 
---- eof
---- eof?
+--- getc -> Integer | nil
 #@todo
 
---- fileno
-#@todo
-
---- getc
-#@todo
-
---- gets
+--- gets -> String | nil
 #@todo
 
 --- pos
 --- pos=
 #@todo
 
---- read
+--- read -> String
 #@todo
 
---- readchar
+--- readchar -> Integer
 #@todo
 
---- readline
+--- readline -> String
 #@todo
 
---- readlines
+--- readlines -> [String]
+--- to_a -> [String]
 #@todo
 
---- rewind
+--- rewind -> 0
 #@todo
 
---- seek
+--- seek -> 0
 #@todo
 
 --- tell
-#@todo
-
---- to_a
-#@todo
-
---- to_i
 #@todo
 
 --- to_io
