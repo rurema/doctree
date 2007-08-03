@@ -92,7 +92,7 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 組み込み変数 [[m:$FILENAME]] と同じです。
 #@end
 
---- file
+--- file -> IO
 #@todo
 
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
@@ -218,7 +218,6 @@ self を返します。
 --- each_byte -> self
 #@todo
 
-
 --- eof -> boolean
 --- eof? -> boolean
 #@todo
@@ -233,9 +232,14 @@ self を返します。
 --- gets -> String | nil
 #@todo
 
---- pos
+--- pos -> Integer
+--- tell -> Integer
+#@todo
+[[m:IO#pos]], [[m:IO#tell]]を参照
+
 --- pos=
 #@todo
+[[m:IO#pos=]] を参照
 
 --- read -> String
 #@todo
@@ -256,9 +260,6 @@ self を返します。
 --- seek -> 0
 #@todo
 
---- tell
-#@todo
-
---- to_io
+--- to_io -> IO
 #@todo
 
