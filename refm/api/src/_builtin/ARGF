@@ -99,7 +99,6 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 返します。
 
 --- lineno -> Integer
---- lineno= -> Integer
 
 全引数ファイルを一つのファイルとみなしたときの現在の行番号を返します。
 個々の引数ファイル毎の行番号を得るには ARGF.file.lineno とします。
@@ -119,6 +118,10 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
   #=> [11, " - name: taro\n"]
   #=> [12, "   age: 7\n"]
   #...
+
+--- lineno=(number) -> nil
+全引数ファイルを一つのファイルとみなしたときの現在の行番号をnumberに書き換えます
+
 
 --- skip -> self
 #@todo
@@ -237,7 +240,7 @@ self を返します。
 #@todo
 [[m:IO#pos]], [[m:IO#tell]]を参照
 
---- pos=
+--- pos=(n)
 #@todo
 [[m:IO#pos=]] を参照
 
@@ -262,4 +265,11 @@ self を返します。
 
 --- to_io -> IO
 #@todo
+
+#@if (version >= "1.9.0")
+--- readpartial(length, str = nil)
+#@todo
+
+#@end
+
 
