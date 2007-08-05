@@ -85,7 +85,6 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 --- filename -> String
 --- to_s -> String
-#@todo
 
 処理対象のファイル名を返します。
 標準入力に対しては - を返します。
@@ -122,9 +121,27 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 --- lineno=(number) -> nil
 全引数ファイルを一つのファイルとみなしたときの現在の行番号をnumberに書き換えます
 
+@param number 更新後の行番号を指定する
+
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+
+  ARGF.each {|line|
+    if ARGF.lineno == 4
+      ARGF.lineno = 5
+    end
+    p [ARGF.lineno, line]
+  }
+  #=> 例
+  #=> [1, "cat:\n"]
+  #=> [2, " - name: taro\n"]
+  #=> [3, "   age: 7\n"]
+  #=> [5, " - name: jiro\n"] 
+  #=> [6, "   age: 23\n"]
+  # ...
 
 --- skip -> self
-#@todo
 
 処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
@@ -180,7 +197,6 @@ self を返します。
   #=> "ARGF had been closed."
 
 --- closed? -> boolean
-#@todo
 [[m:IO#closed?]]を参照
 
   # カレントディレクトリから適当にファイルを選ぶ
@@ -211,11 +227,10 @@ self を返します。
   #=> "ARGF is closed."
   #=> "ARGF had been closed."
 
---- dup
-#@todo
-
 --- each -> self
 --- each_line -> self
+
+ARGFの現在位置から一行ずつ文字列として読み込みます。
 [[m:IO#each]], [[m:IO#each_line]]を参照
 
 --- each_byte -> self
