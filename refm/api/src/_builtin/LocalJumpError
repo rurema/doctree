@@ -37,8 +37,7 @@ break や return に渡した値を返します。
     p err.exit_value   # => 5
   end
 
---- reason
-#@todo
+--- reason -> Symbol
 
 例外を発生させた原因をシンボルで返します。
 返す値は以下のいずれかです。
@@ -72,4 +71,4 @@ break や return に渡した値を返します。
     p err.exit_value   # => 5
   end
 
-#@end
+#@End
