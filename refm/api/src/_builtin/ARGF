@@ -233,8 +233,29 @@ self を返します。
 ARGFの現在位置から一行ずつ文字列として読み込みます。
 [[m:IO#each]], [[m:IO#each_line]]を参照
 
---- each_byte -> self
-#@todo
+--- each_byte{|char| ...} -> self
+ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
+[[m:IO#each_byte]]を参照
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each_byte {|b|
+    printf("%4d <-> %4s\n", b, b.chr)
+  }
+  #例
+  #=>  45 <->    -
+  #=>  32 <->
+  #=>  83 <->    S
+  #=>  97 <->    a
+  #=> 105 <->    i
+  #=> 116 <->    t
+  #=>  97 <->    a
+  #=> 109 <->    m
+  #=>  97 <->    a
+  #=>  10 <->
+  #...
 
 --- eof -> boolean
 --- eof? -> boolean
