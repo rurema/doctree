@@ -7,8 +7,9 @@
 == Singleton Methods
 
 #@since 1.8.0
---- included(module_or_class)
-#@todo
+--- included(module_or_class) -> Precision
+
+@param module_or_class Precision をインクルードするクラスまたはモジュール
 
 Precision がインクルードされた時に呼ばれます。詳細は
 [[m:Module#included]] を参照してください。
@@ -21,8 +22,9 @@ Precision がインクルードされた時に呼ばれます。詳細は
 #@#    で実現していました-))
 #@end
 
---- induced_from(number)
-#@todo
+--- induced_from(number) -> object
+
+@param number 変換元の数値
 
 number を自分のクラスに変換した結果を返します。 デフォルトの
 定義は、例外 [[c:TypeError]] を発生させるので、Mix-in したクラスで
@@ -32,8 +34,9 @@ number を自分のクラスに変換した結果を返します。 デフォルトの
 
 == Instance Methods
 
---- prec(klass)
-#@todo
+--- prec(klass) -> object
+
+@param klass 精度を持つ数値クラス
 
 self を精度 klass に変換した結果を返します。デフォルト
 の定義では klass.induced_from(self) を呼び出し、その結
@@ -43,14 +46,12 @@ self を精度 klass に変換した結果を返します。デフォルト
 [[m:Precision#Precision.induced_from]] を変更するのではなく、この
 prec の再定義で対応するべきです。
 
---- prec_i
-#@todo
+--- prec_i -> Fixnum
 
 self を [[c:Integer]] に変換します。prec(Integer) と等
 価です。
 
---- prec_f
-#@todo
+--- prec_f -> Float
 
 self を [[c:Float]] に変換します。prec(Float) と等価で
 す。
