@@ -9,8 +9,7 @@ return, break, retry のいずれかを実行すると発生します。
 == Instance Methods
 
 #@since 1.8.0
---- exit_value
-#@todo
+--- exit_value -> object
 
 例外 LocalJumpError を発生する原因となった
 break や return に渡した値を返します。
