@@ -8,29 +8,30 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
 す。また、効率のため Numeric のメソッドと同じメソッドがサブクラ
 スで再定義されている場合があります。
 
-数値関連クラスの定義メソッド
+=== 数値関連のメソッドを実際に定義しているクラス一覧
 
 ほとんどの数値関連のメソッドはサブクラスで再定義されています。これは、
 効率のためであったり上位抽象クラスで実装を定義することができなかったり
 するためです。実際にどのメソッドがどのクラスに定義されているかは以下の
 表を参照してください。
 
-  cary = [Numeric, Integer, Fixnum, Bignum, Float]
-  mary = cary.collect {|c| c.instance_methods(false)}
-  methods = mary.flatten.uniq.sort
-  
-  methods.each_with_index {|op, i|
-  if i % 10 == 0
-    heading = sprintf("%12s   %10s %10s %10s %10s %10s",
-                "", *cary.collect {|klass| klass.name.center(10)})
-    puts heading
-    puts "-" * heading.size
-  end
+#@#  cary = [Numeric, Integer, Fixnum, Bignum, Float]
+#@#  mary = cary.collect {|c| c.instance_methods(false)}
+#@#  methods = mary.flatten.uniq.sort
+#@#  
+#@#  methods.each_with_index {|op, i|
+#@#  if i % 10 == 0
+#@#    heading = sprintf("%23s   %10s %10s %10s %10s %10s",
+#@#                "", *cary.collect {|klass| klass.name.center(10)})
+#@#    puts heading
+#@#    puts "-" * heading.size
+#@#  end
+#@#
+#@#  printf("%23s | %10s %10s %10s %10s %10s\n",
+#@#        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
+#@#  }
 
-  printf("%12s | %10s %10s %10s %10s %10s\n",
-        op, *mary.collect {|ms| (ms.member?(op) ? "o" : "-").center(10)})
-  }
-  => ruby 1.6.8 (2002-12-24) [i586-linux]
+#@if(version < '1.8.0')
                        Numeric    Integer     Fixnum     Bignum     Float
        ---------------------------------------------------------------------
                   % |     -          -          o          o          o
@@ -98,110 +99,79 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
               zero? |     o          -          o          o          o
                   | |     -          -          o          o          -
                   ~ |     -          -          o          o          -
-  => ruby 1.8.0 (2003-08-04) [i586-linux]
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-                  % |     -          -          o          o          o
-                  & |     -          -          o          o          -
-                  * |     -          -          o          o          o
-                 ** |     -          -          o          o          o
-                  + |     -          -          o          o          o
-                 +@ |     o          -          -          -          -
-                  - |     -          -          o          o          o
-                 -@ |     o          -          o          o          o
-                  / |     -          -          o          o          o
-                  < |     -          -          o          -          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-                 << |     -          -          o          o          -
-                 <= |     -          -          o          -          o
-                <=> |     o          -          o          o          o
-                 == |     -          -          o          o          o
-                  > |     -          -          o          -          o
-                 >= |     -          -          o          -          o
-                 >> |     -          -          o          o          -
-                 [] |     -          -          o          o          -
-                  ^ |     -          -          o          o          -
-                abs |     o          -          o          o          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-               ceil |     o          o          -          -          o
-                chr |     -          o          -          -          -
-             coerce |     o          -          -          o          o
-                div |     o          -          o          o          -
-             divmod |     o          -          o          o          o
-             downto |     -          o          -          -          -
-               eql? |     o          -          -          o          o
-            finite? |     -          -          -          -          o
-              floor |     o          o          -          -          o
-               hash |     -          -          -          o          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-            id2name |     -          -          o          -          -
-          infinite? |     -          -          -          -          o
-           integer? |     o          o          -          -          -
-             modulo |     o          -          o          o          o
-               nan? |     -          -          -          -          o
-               next |     -          o          -          -          -
-           nonzero? |     o          -          -          -          -
-                quo |     o          -          o          o          -
-          remainder |     o          -          -          o          -
-              round |     o          o          -          -          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-               size |     -          -          o          o          -
-               step |     o          -          -          -          -
-               succ |     -          o          -          -          -
-              times |     -          o          -          -          -
-               to_f |     -          -          o          o          o
-               to_i |     -          o          -          -          o
-             to_int |     o          o          -          -          o
-               to_s |     -          -          o          o          o
-             to_sym |     -          -          o          -          -
-           truncate |     o          o          -          -          o
-                       Numeric    Integer     Fixnum     Bignum     Float
-       ---------------------------------------------------------------------
-               upto |     -          o          -          -          -
-              zero? |     o          -          o          -          o
-                  | |     -          -          o          o          -
-                  ~ |     -          -          o          o          -
+#@else
+ => ruby 1.8.6 (2007-06-18 patchlevel 5000) [i686-linux]
+                           Numeric    Integer     Fixnum     Bignum     Float
+           ---------------------------------------------------------------------
+                      % |     -          -          o          o          o
+                      & |     -          -          o          o          -
+                      * |     -          -          o          o          o
+                     ** |     -          -          o          o          o
+                      + |     -          -          o          o          o
+                     +@ |     o          -          -          -          -
+                      - |     -          -          o          o          o
+                     -@ |     o          -          o          o          o
+                      / |     -          -          o          o          o
+                      < |     -          -          o          -          o
+                           Numeric    Integer     Fixnum     Bignum     Float
+           ---------------------------------------------------------------------
+                     << |     -          -          o          o          -
+                     <= |     -          -          o          -          o
+                    <=> |     o          -          o          o          o
+                     == |     -          -          o          o          o
+                      > |     -          -          o          -          o
+                     >= |     -          -          o          -          o
+                     >> |     -          -          o          o          -
+                     [] |     -          -          o          o          -
+                      ^ |     -          -          o          o          -
+                    abs |     o          -          o          o          o
+                           Numeric    Integer     Fixnum     Bignum     Float
+           ---------------------------------------------------------------------
+                   ceil |     o          o          -          -          o
+                    chr |     -          o          -          -          -
+                 coerce |     o          -          -          o          o
+                    div |     o          -          o          o          -
+                 divmod |     o          -          o          o          o
+                 downto |     -          o          -          -          -
+                   eql? |     o          -          -          o          o
+                   fdiv |     o          -          o          o          -
+                finite? |     -          -          -          -          o
+                  floor |     o          o          -          -          o
+                           Numeric    Integer     Fixnum     Bignum     Float
+           ---------------------------------------------------------------------
+                   hash |     -          -          -          o          o
+                id2name |     -          -          o          -          -
+              infinite? |     -          -          -          -          o
+               integer? |     o          o          -          -          -
+                 modulo |     o          -          o          o          o
+                   nan? |     -          -          -          -          o
+                   next |     -          o          -          -          -
+               nonzero? |     o          -          -          -          -
+                    quo |     o          -          o          o          -
+              remainder |     o          -          -          o          -
+                           Numeric    Integer     Fixnum     Bignum     Float
+           ---------------------------------------------------------------------
+                  round |     o          o          -          -          o
+ singleton_method_added |     o          -          -          -          -
+                   size |     -          -          o          o          -
+                   step |     o          -          -          -          -
+                   succ |     -          o          -          -          -
+                  times |     -          o          -          -          -
+                   to_f |     -          -          o          o          o
+                   to_i |     -          o          -          -          o
+                 to_int |     o          o          -          -          o
+                   to_s |     -          -          o          o          o
+                           Numeric    Integer     Fixnum     Bignum     Float
+           ---------------------------------------------------------------------
+                 to_sym |     -          -          o          -          -
+               truncate |     o          o          -          -          o
+                   upto |     -          o          -          -          -
+                  zero? |     o          -          o          -          o
+                      | |     -          -          o          o          -
+                      ~ |     -          -          o          o          -       
+#@end
 
-== Instance Methods
-
---- +@
-#@todo
-
-self 自身を返します。
-
---- -@
-#@todo
-
-self の符号を反転させたものを返します。
-
-このメソッドは、二項演算子 - で 0 - self によって定義
-されています。
-
---- ==(other)
-#@todo
-
-self と other の値が等しいときに true、等しくないときに false を返します。
-other が Numeric で比較できないオブジェクトの場合、
-結合法則が成り立つことを仮定して other == self の結果を返します。
-
---- abs
-#@todo
-
-self の絶対値を返します。
-
---- ceil
---- floor
---- round
---- truncate
-#@todo
-
-self を整数に丸めた結果を返します。
-
-整数に丸めるメソッドの例:
+=== 丸めメソッドのまとめ
 
 #@#         numbers=[1.9, 1.1, -1.1, -1.9]
 #@#         methods=%w(ceil floor round truncate)
@@ -216,21 +186,13 @@ self を整数に丸めた結果を返します。
 #@#           printf(fmt, n,
 #@#                  *methods.collect {|m| sprintf("%s", n.send(m))})
 #@#         }
-
-        _
+        
               |       ceil      floor      round   truncate
         ----------------------------------------------------
           1.9 |          2          1          2          1
           1.1 |          2          1          1          1
          -1.1 |         -1         -2         -1         -1
          -1.9 |         -1         -2         -2         -1
-
-    * ceil は大きい方の整数へ丸めます(天井)。
-    * floor は小さい方の整数に丸めます(床)。
-    * round は 近い方の整数に丸めます。中央値 0.5, -0.5 は切上げ(1,
-      -1)されます。いわゆる四捨五入ですが、偶数丸めではありません。
-    * truncate(そして、[[m:Float#to_i]]) は 0 に近い方の整数に丸めます(切捨て)。
-    * 0 から遠い方に丸める(切上げ)メソッドはありません。
 
 切上げはceil, floor を使用して以下のように定義できます。
 
@@ -295,20 +257,93 @@ self を整数に丸めた結果を返します。
 #@#        -0.15 |       -0.2       -0.1       -0.2
 #@#        -0.19 |       -0.2       -0.1       -0.2
 
---- clone
---- dup
+== Instance Methods
+
+--- +@    -> self
 #@todo
 
 self を返します。
 
+--- -@    -> Numeric
+#@todo
+
+self の符号を反転させたものを返します。
+
+このメソッドは、二項演算子 - で 0 - self によって定義されています。
+
+#@#--- ==(other)    -> boolean
+#@##@todo
+#@#
+#@#self と other の値が等しいときに true、等しくないときに false を返します。
+#@#other が Numeric で比較できないオブジェクトの場合、
+#@#結合法則が成り立つことを仮定して other == self の結果を返します。
+
+--- abs    -> Numeric
+#@todo
+
+自身が 0 以上ならば self を、そうでない場合は -self を返します。
+
+--- ceil   -> Integer
+#@todo
+
+自身と等しいかより大きな整数のうち最小のものを返します。
+
+自身を [[c:Float]] に変換し [[m:Float#ceil]] を呼ぶことにより実装されています。
+
+     1.ceil        #=> 1
+     1.2.ceil      #=> 2
+     (-1.2).ceil   #=> -1
+     (-1.5).ceil   #=> -1
+
+--- floor   -> Integer
+#@todo
+
+自身と等しいかより小さな整数のうち最大のものを返します。
+
+自身を [[c:Float]] に変換し [[m:Float#floor]] を呼ぶことにより実装されています。
+
+     1.floor        #=> 1
+     1.2.floor      #=> 1
+     (-1.2).floor   #=> -2
+     (-1.5).floor   #=> -2
+
+--- round   -> Integer
+#@todo
+
+自身ともっとも近い整数を返します。
+
+中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
+自身を [[c:Float]] に変換し [[m:Float#round]] を呼ぶことにより実装されています。
+
+     1.round        #=> 1
+     1.2.round      #=> 1
+     (-1.2).round   #=> -1
+     (-1.5).round   #=> -2
+
+--- truncate   -> Integer
+#@todo
+
+自身と 0 との間にある整数で、自身にもっとも近い整数を返します。
+
+     1.truncate        #=> 1
+     1.2.truncate      #=> 1
+     (-1.2).truncate   #=> -1
+     (-1.5).truncate   #=> -1
+
+--- clone
+--- dup
+#@todo
+
 #@since 1.8.0
+このメソッドを呼び出すことはできません。呼び出すと例外が発生します。
+
 数値などの immutable なオブジェクトは clone や dup が禁止されています。
-
   1.dup   # => in `clone': can't clone Fixnum (TypeError)
-
+#@else
+self を返します。
 #@end
 
---- coerce(number)
+--- coerce(number)    -> Numeric
 #@todo
 
 number の型を自分と直接演算できる型に変換して
@@ -317,216 +352,119 @@ number の型を自分と直接演算できる型に変換して
 取ると coerce を使って自分とオペランドを変換した上で演算を行
 います。
 
---- div(other)
---- quo(other)
+--- div(other)    -> Integer
+#@todo
+self を other で割った整数の商 q を返します。
+
+ここで、商 q と余り r は、それぞれ
+
+  * self == other * q + r  
+と
+  * other > 0 のとき:  0     <= r < other
+  * other < 0 のとき:  other <  r <= 0
+  * q は整数
+をみたす数です。
+
+商に対応する余りは [[m:Numeric#modulo]] で求められます。
+
+  p 3.div(2) # => 1
+  p (-3).div(2) # => -2
+  p (-3.0).div(2) # => -2
+
+--- quo(other)    -> Float | Rational
 #@todo
 
-self を other で割った商を返します。
-#@#((-2005-11-24 [[unknown:ruby-dev:27674]]: 1.8 にはバグがあり、self/other
-#@#の結果が負のFloatになる場合に結果が異なります。p -3.0.div(2) # => -1
-#@#(正しくは-2)-))
+self を other で割った実数の商を返します。
 
-  * div は self のクラスにかかわらず整数([[c:Integer]])の商を返します。
-  * quo は self のクラスにかかわらず実数([[c:Float]]や[[c:Rational]])
-    の商を返します。
-
-div の商に対応する余りは [[m:Numeric#modulo]] で求められます。
-
-  div の例:
-  p 3.div(2) # => 1
-  p -3.div(2) # => -2
-  p -3.0.div(2) # => -2
-
-  quo の例:
   p 1.quo(3)      # => 0.3333333333333333
   
   require 'rational'
   p 1.quo(3)      # => Rational(1, 3)
 
-各メソッドの比較:
-
-#@#        numbers=[[13,4], [13,-4], [-13,4],[-13,-4],[-13,-13],
-#@#                 [11.5,4], [11.5,-4], [-11.5,4], [-11.5,-4]]
-#@#        methods=%w(divmod / div quo)
-#@#
-#@#        fmt = "%12s |" + " %12s" * methods.size + "\n"
-#@#
-#@#        heading = sprintf(fmt, "[a,b]", *methods)
-#@#        puts heading
-#@#        puts "-" * heading.size
-#@#
-#@#        numbers.each {|a,b|
-#@#          printf(fmt, [a,b].inspect,
-#@#                 *methods.collect {|m| a.send(m, b).inspect})
-#@#        }
-        _
-               [a,b] |       divmod            /          div          quo
-        -------------------------------------------------------------------
-             [13, 4] |       [3, 1]            3            3         3.25
-            [13, -4] |     [-4, -3]           -4           -4        -3.25
-            [-13, 4] |      [-4, 3]           -4           -4        -3.25
-           [-13, -4] |      [3, -1]            3            3         3.25
-          [-13, -13] |       [1, 0]            1            1          1.0
-           [11.5, 4] |   [2.0, 3.5]        2.875            2        2.875
-          [11.5, -4] | [-3.0, -0.5]       -2.875           -3       -2.875
-          [-11.5, 4] |  [-3.0, 0.5]       -2.875           -3       -2.875
-         [-11.5, -4] |  [2.0, -3.5]        2.875            2        2.875
-
---- divmod(other)
+--- divmod(other)    -> [Numeric]
 #@todo
 
-self を other で割った商 (q) と余り (r) を、
+self を other で割った商 q と余り r を、
 [q, r] という 2 要素の配列にして返します。
+商 q は常に整数ですが、余り r は整数であるとは限りません。
 
-ここで、a を b で割った商 q と余り r とい
-うのは、それぞれ
+ここで、商 q と余り r は、それぞれ
 
-   a = b * q + r  かつ  |r| < |b|
-
-    other > 0 のとき:  0     <= r < other
-    other < 0 のとき:  other <  r <= 0
-
-をみたす ((*整数*)) q と 数 r のことです。
+  * self == other * q + r  
+と
+  * other > 0 のとき:  0     <= r < other
+  * other < 0 のとき:  other <  r <= 0
+  * q は整数
+をみたす数です。
 
 divmod が返す商は [[m:Numeric#div]] と同じです。
 また余りは、[[m:Numeric#modulo]] (つまり、%)と同じです。
 
 このメソッドは、メソッド / と % によって定義されています。
 
-    numbers=[[13,4], [13,-4], [-13,4],[-13,-4],[-13,-13],
-             [11.5,4], [11.5,-4], [-11.5,4], [-11.5,-4]]
-    methods=%w(divmod / div quo % modulo remainder)
-
-    fmt = "%12s |" + " %12s" * methods.size + "\n"
-
-    heading = sprintf(fmt, "[a,b]", *methods)
-    puts heading
-    puts "-" * heading.size
-
-    numbers.each {|a,b|
-      printf(fmt, [a,b].inspect,
-             *methods.collect {|m| a.send(m, b).inspect})
-    }
-
-               [a,b] |       divmod            /          div          quo            %       modulo    remainder
-        ----------------------------------------------------------------------------------------------------------
-             [13, 4] |       [3, 1]            3            3         3.25            1            1            1
-            [13, -4] |     [-4, -3]           -4           -4        -3.25           -3           -3            1
-            [-13, 4] |      [-4, 3]           -4           -4        -3.25            3            3           -1
-           [-13, -4] |      [3, -1]            3            3         3.25           -1           -1           -1
-          [-13, -13] |       [1, 0]            1            1          1.0            0            0            0
-           [11.5, 4] |     [2, 3.5]        2.875            2        2.875          3.5          3.5          3.5
-          [11.5, -4] |   [-3, -0.5]       -2.875           -3       -2.875         -0.5         -0.5          3.5
-          [-11.5, 4] |    [-3, 0.5]       -2.875           -3       -2.875          0.5          0.5         -3.5
-         [-11.5, -4] |    [2, -3.5]        2.875            2        2.875         -3.5         -3.5         -3.5
-
---- integer?
+--- integer?    -> boolean
 #@todo
 
-self が整数の時、真を返します。
+self が整数の時、真を返します。そうでない場合に false を返します。
 
---- modulo(other)
---- remainder(other)
+--- modulo(other)    -> Numeric
+self を other で割った余り r を返します。
+
+ここで、商 q と余り r は、それぞれ
+
+  * self == other * q + r  
+と
+  * other > 0 のとき  0 <= r < other
+  * other < 0 のとき other < r <= 0
+  * q は整数
+
+をみたす数です。
+商  q は、[[m:Numeric#div]] (あるいは Integer#/)で求められます。
+modulo はメソッド % の呼び出しとして定義されています。
+
+  p 13.modulo(4)      #=>  1
+  p 13.modulo(-4)     #=> -3
+  p (-13).modulo(4)   #=>  3
+  p (-13).modulo(-4)  #=> -1
+
+@see [[m:Numeric#divmod]]
+
+--- remainder(other)    -> Numeric
 #@todo
 
-self を other で割った余り r を返します([[m:Numeric#divmod]] も参照)。
+self を other で割った余り r を返します。
 
-modulo では、r の符号は other と同じ(またはゼロ)になります。
-一方、remainder は、r の符号は self と同じ(またはゼロ)になります。
+ここで、商 q と余り r は、それぞれ
 
-つまり、modulo では、
-    * other > 0 のとき  0 <= r < other
-    * other < 0 のとき other < r <= 0
-    となり、
-    remainder では、
-    * self > 0 のとき  0 <= r < |other|
-    * self < 0 のとき -|other| < r <= 0
-となります。
+  * self == other * q + r  
+と
 
-modulo は、メソッド % の呼び出しとして定義されています。
-(つまり、% と同じです)
+  * self > 0 のとき  0 <= r < |other|
+  * self < 0 のとき -|other| < r <= 0
+  * q は整数
 
-  p (13.modulo(4))      #=>  1
-  p (13.modulo(-4))     #=> -3
-  p ((-13).modulo(4))   #=>  3
-  p ((-13).modulo(-4))  #=> -1
+をみたす数です。r の符号は self と同じになります。
+商 q を直接返すメソッドはありません。self.quo(other).truncate がそれに相当します。
 
-  p (13.remainder(4))      #=>  1
-  p (13.remainder(-4))     #=>  1
-  p ((-13).remainder(4))   #=> -1
-  p ((-13).remainder(-4))  #=> -1
+  p 13.remainder(4)      #=>  1
+  p 13.remainder(-4)     #=>  1
+  p (-13).remainder(4)   #=> -1
+  p (-13).remainder(-4)  #=> -1
 
-余りの求めかたにはこの通り二つのメソッドがありますが、
-違いは、self または other が負のときの結果です。
-
-こだわりがなければ modulo (あるいは %)を使えばよいでしょう。
-この余りに対応する商は、[[m:Numeric#div]] (あるいは Integer#/)
-で求められます。
-
-一方、remainder に対応する商を直接返すメソッドはありません
-(self.quo(other).truncate が対応します)。
-
-各メソッドの比較:
-
-#@#        numbers=[[13,4], [13,-4], [-13,4],[-13,-4],[-13,-13],
-#@#                 [11.5,4], [11.5,-4], [-11.5,4], [-11.5,-4]]
-#@#        methods=%w(divmod % modulo remainder)
-#@#
-#@#        fmt = "%12s |" + " %12s" * methods.size + "\n"
-#@#
-#@#        heading = sprintf(fmt, "[a,b]", *methods)
-#@#        puts heading
-#@#        puts "-" * heading.size
-#@#
-#@#        numbers.each {|a,b|
-#@#          printf(fmt, [a,b].inspect,
-#@#                 *methods.collect {|m| a.send(m, b).inspect})
-#@#        }
-        _
-               [a,b] |       divmod            %       modulo    remainder
-        -------------------------------------------------------------------
-             [13, 4] |       [3, 1]            1            1            1
-            [13, -4] |     [-4, -3]           -3           -3            1
-            [-13, 4] |      [-4, 3]            3            3           -1
-           [-13, -4] |      [3, -1]           -1           -1           -1
-          [-13, -13] |       [1, 0]            0            0            0
-           [11.5, 4] |   [2.0, 3.5]          3.5          3.5          3.5
-          [11.5, -4] | [-3.0, -0.5]         -0.5         -0.5          3.5
-          [-11.5, 4] |  [-3.0, 0.5]          0.5          0.5         -3.5
-         [-11.5, -4] |  [2.0, -3.5]         -3.5         -3.5         -3.5
-
---- nonzero?
+--- nonzero?    -> nil | self
 #@todo
 
-ゼロの時 nil を返し、非ゼロの時 self を返します。
+自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
-sort のブロックの中で、複数の要素を <=> で比較するときに使用できます。
-以下の例では、使用しているシェル毎にユーザをソートしています。
-
-  require 'etc'
-  ary = []
-  Etc.passwd {|v| ary << v }
-  p ary.sort {|a, b| a.shell <=> b.shell or a.name <=> b.name }
-
-なお、[[m:Array#<=>]] を利用して、次のように書くこともできます。
-
-  require 'etc'
-  ary = []
-  Etc.passwd {|v| ary << v }
-  p ary.sort {|a, b| [a.shell, a.name] <=> [b.shell, b.name] }
-  # もしくは
-  p ary.sort_by {|a| [a.shell, a.name] }
-
-
---- to_int
+--- to_int    -> Integer
 #@todo
 
 self.to_i と同じです。
 
---- zero?
+--- zero?    -> boolean
 #@todo
 
-ゼロの時、真を返します。
+自身がゼロの時、真を返します。そうでない場合は false を返します。
 
 --- step(limit) {|n| ... }
 --- step(limit, step) {|n| ... }
