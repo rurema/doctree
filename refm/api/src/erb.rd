@@ -242,7 +242,7 @@ HTML の &"<> をエスケープします
 
 == Module Functions
 
---- def_erb_method(Methodname, erb) -> nil
+--- def_erb_method(methodname, erb) -> nil
 
 self に erb のスクリプトをメソッドとして定義します。
 
