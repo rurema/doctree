@@ -1,5 +1,7 @@
+singleton パターンを提供するモジュールです。
+
 = module Singleton
-=== 目的・概要
+
 Mix-in により singleton パターンを提供します。
 
 Singleton モジュールを include することにより、クラスは

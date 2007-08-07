@@ -1,3 +1,5 @@
+精度をもつ具象数値クラスのためのモジュールです。
+
 = module Precision
 
 精度をもつ具象数値クラスのための Mix-in。 ここでいう精度とは実数の近似
@@ -9,11 +11,12 @@
 #@since 1.8.0
 --- included(module_or_class) -> Precision
 
+Precision をインクルードするクラスやモジュールに対してメソッド induced_from を自動的に定義します。
+詳細は[[m:Module#included]] を参照してください。
+
 @param module_or_class Precision をインクルードするクラスまたはモジュール
 
-Precision がインクルードされた時に呼ばれます。詳細は
-[[m:Module#included]] を参照してください。
-
+Precision がインクルードされた時に呼ばれます。
 このメソッドは、Precision をインクルードするクラスやモジュー
 ルに対してメソッド induced_from を自動的に定義するためにあり
 ます。
@@ -24,34 +27,37 @@ Precision がインクルードされた時に呼ばれます。詳細は
 
 --- induced_from(number) -> object
 
+number を自分のクラスに変換した結果を返します。
+
 @param number 変換元の数値
 
-number を自分のクラスに変換した結果を返します。 デフォルトの
-定義は、例外 [[c:TypeError]] を発生させるので、Mix-in したクラスで
-このメソッドを再定義する必要があります。再定義に、
-[[m:Precision#prec]] を使うと、 無限ループになる可
-能性があります。
+デフォルトの定義は、例外 [[c:TypeError]] を発生させるので、
+Mix-in したクラスでこのメソッドを再定義する必要があります。
+再定義に、[[m:Precision#prec]] を使うと、 
+無限ループになる可能性があります。
 
 == Instance Methods
 
 --- prec(klass) -> object
 
+self を精度 klass に変換した結果を返します。
+
 @param klass 精度を持つ数値クラス
 
-self を精度 klass に変換した結果を返します。デフォルト
-の定義では klass.induced_from(self) を呼び出し、その結
-果を返します。
+デフォルトの定義では
+klass.induced_from(self) を呼び出し、
+その結果を返します。
 
 新しく精度クラスを作るときは組み込みクラスの
-[[m:Precision#Precision.induced_from]] を変更するのではなく、この
+[[m:Precision.induced_from]] を変更するのではなく、この
 prec の再定義で対応するべきです。
 
 --- prec_i -> Fixnum
 
-self を [[c:Integer]] に変換します。prec(Integer) と等
-価です。
+self を [[c:Integer]] に変換します。
+prec(Integer) と等価です。
 
 --- prec_f -> Float
 
-self を [[c:Float]] に変換します。prec(Float) と等価で
-す。
+self を [[c:Float]] に変換します。
+prec(Float) と等価です。

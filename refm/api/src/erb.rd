@@ -226,18 +226,17 @@ method requires the setup of an ERB compiler object.
 --- html_escape(S) -> String
 --- h(s) -> String
 
-@param s HTML文字列
-
 HTML の &"<> をエスケープします
 ([[m:CGI.escapeHTML]]とほぼ同じです)。
+
+@param s HTML文字列
 
 --- url_encode(s)  -> String
 --- u(s) -> String
 
-@param s エンコード文字列
+文字列を URL エンコードします([[m:CGI.escape]]とほぼ同じです)。
 
-文字列を URL エンコードします
-([[m:CGI.escape]]とほぼ同じです)。
+@param s エンコード文字列
 
 = module ERB::DefMethod
 
@@ -245,11 +244,13 @@ HTML の &"<> をエスケープします
 
 --- def_erb_method(Methodname, erb) -> nil
 
+self に erb のスクリプトをメソッドとして定義します。
+
 @param methodname メソッド名
 
 @param erb ERBインスタンスもしくはERBソースファイル名
 
-self に erb のスクリプトをメソッドとして定義します。メソッド名は methodname で指定します。
+メソッド名は methodname で指定します。
 erb が文字列の時、そのファイルを読み込み ERB で変換したのち、メソッドとして定義します。
 
 例:
