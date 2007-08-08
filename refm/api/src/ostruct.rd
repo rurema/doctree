@@ -2,8 +2,8 @@
 
 = class OpenStruct < Object
 
-OpenStructのインスタンスに対して未定義なセッターメソッド x= を呼ぶと
-[[m:Object#method_missing]]で捕捉され、インスタンスに属性 x が定義されます。
+OpenStructのインスタンスに対して未定義なセッターメソッド x= を呼ぶと、
+OpenStructクラスの[[m:Object#method_missing]]で捕捉され、インスタンスに属性 x が定義されます。
 この挙動によって要素を動的に変更できる構造体として働きます。
 
   require 'ostruct'
@@ -34,10 +34,9 @@ hashが与えられたとき、それぞれのキーを
 生成したオブジェクトの要素にし、値をセットします。
 
 @param hash 設定する要素とその値を指定します。
-hashには[[c:Hash]]クラスのインスタンス、または配列の配列を用いることができます。
+    hashには[[c:Hash]]クラスのインスタンス、または配列の配列を用いることができます。
 
-@raise NoMethodError
-hashのキーが[[Symbol#to_sym]]メソッドを持たないときに発生します。
+@raise NoMethodError hashのキーが[[Symbol#to_sym]]メソッドを持たないときに発生します。
 
   require 'ostruct'
   some1 = OpenStruct.new({:a =>"a",:b =>"b"}) # => #<OpenStruct b="b", a="a">
@@ -49,7 +48,6 @@ hashのキーが[[Symbol#to_sym]]メソッドを持たないときに発生します。
 nameで指定された要素を削除。
 その後その要素を参照したらnilが返ります。
 
-@return 要素の削除前の値を返します。
+@return 削除前の要素の値を返します。
 
-@param name 削除する要素を指定
-文字列やシンボルを用います。
+@param name 削除する要素を指定。文字列やシンボルを用います。
