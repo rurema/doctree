@@ -128,6 +128,10 @@ trim_mode に指定できる値は次の通りです。
 
 ERBオブジェクトを生成して返します。
 
+eruby_script から ERB を生成します。eval 時の $SAFE、trim_mode(後述)、
+eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
+普通、変更する必要はありません。)を指定できます。
+
 @param eruby_script eRubyスクリプト
 
 @param safe_level eRubyスクリプトが実行されるときのセーフレベル
@@ -135,10 +139,6 @@ ERBオブジェクトを生成して返します。
 @param trim_mode 整形の挙動を変更するオプション
 
 @param eoutvar eRubyスクリプトの中で出力をためていく変数
-
-eruby_script から ERB を生成します。eval 時の $SAFE、trim_mode(後述)、
-eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
-普通、変更する必要はありません。)を指定できます。
 
 --- version -> String
 
@@ -166,14 +166,14 @@ ERB を b の binding で実行し、文字列を返します。
 
 変換した Ruby スクリプトをメソッドとして定義します。
 
+定義先のモジュールは mod で指定し、メソッド名は methodname で指定します。
+fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
+
 @param mod メソッドを定義するモジュール（またはクラス）
 
 @param methodname メソッド名
 
 @param fname スクリプトを定義する際のファイル名
-
-定義先のモジュールは mod で指定し、メソッド名は methodname で指定します。
-fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
 例:
 
@@ -199,13 +199,13 @@ fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
 eRubyスクリプトの中で出力をためていく変数を設定します。
 
-@param compiler eRubyコンパイラ
-
-@param eoutvar eRubyスクリプトの中で出力をためていく変数
-
 Can be used to set eoutvar as described in ERB#new. It's probably
 easier to just use the constructor though, since calling this
 method requires the setup of an ERB compiler object.
+
+@param compiler eRubyコンパイラ
+
+@param eoutvar eRubyスクリプトの中で出力をためていく変数
 
 #@since 1.8.1
 
@@ -246,12 +246,12 @@ HTML の &"<> をエスケープします
 
 self に erb のスクリプトをメソッドとして定義します。
 
+メソッド名は methodname で指定します。
+erb が文字列の時、そのファイルを読み込み ERB で変換したのち、メソッドとして定義します。
+
 @param methodname メソッド名
 
 @param erb ERBインスタンスもしくはERBソースファイル名
-
-メソッド名は methodname で指定します。
-erb が文字列の時、そのファイルを読み込み ERB で変換したのち、メソッドとして定義します。
 
 例:
 

@@ -14,8 +14,6 @@
 Precision をインクルードするクラスやモジュールに対してメソッド induced_from を自動的に定義します。
 詳細は[[m:Module#included]] を参照してください。
 
-@param module_or_class Precision をインクルードするクラスまたはモジュール
-
 Precision がインクルードされた時に呼ばれます。
 このメソッドは、Precision をインクルードするクラスやモジュー
 ルに対してメソッド induced_from を自動的に定義するためにあり
@@ -25,24 +23,24 @@ Precision がインクルードされた時に呼ばれます。
 #@#    で実現していました-))
 #@end
 
+@param module_or_class Precision をインクルードするクラスまたはモジュール
+
 --- induced_from(number) -> object
 
 number を自分のクラスに変換した結果を返します。
-
-@param number 変換元の数値
 
 デフォルトの定義は、例外 [[c:TypeError]] を発生させるので、
 Mix-in したクラスでこのメソッドを再定義する必要があります。
 再定義に、[[m:Precision#prec]] を使うと、 
 無限ループになる可能性があります。
 
+@param number 変換元の数値
+
 == Instance Methods
 
 --- prec(klass) -> object
 
 self を精度 klass に変換した結果を返します。
-
-@param klass 精度を持つ数値クラス
 
 デフォルトの定義では
 klass.induced_from(self) を呼び出し、
@@ -51,6 +49,8 @@ klass.induced_from(self) を呼び出し、
 新しく精度クラスを作るときは組み込みクラスの
 [[m:Precision.induced_from]] を変更するのではなく、この
 prec の再定義で対応するべきです。
+
+@param klass 精度を持つ数値クラス
 
 --- prec_i -> Fixnum
 
