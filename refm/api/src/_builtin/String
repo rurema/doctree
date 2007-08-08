@@ -456,8 +456,7 @@ nth 番目のバイトを文字列 val で置き換えます。
 val が 0 から 255 の範囲の整数である場合、文字コード
 とみなしてその文字で置き換えます。
 
-  val を返します。
-  
+val を返します。
 
 --- []=(nth, len, val)
 #@todo
@@ -532,9 +531,8 @@ val を返します。
 また、$KCODE を設定しても、
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
 
-[[m:String#capitalize!]],
-[[m:String#upcase]], [[m:String#downcase]],
-[[m:String#swapcase]] も参照してください。
+@see [[m:String#capitalize!]], [[m:String#upcase]],
+     [[m:String#downcase]], [[m:String#swapcase]]
 
 --- capitalize!
 #@todo
@@ -566,9 +564,8 @@ capitalize! は self を変更して返しますが、
 また、$KCODE を設定しても、
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
 
-[[m:String#capitalize]],
-[[m:String#upcase]], [[m:String#downcase]],
-[[m:String#swapcase]] も参照してください。
+@see [[m:String#capitalize]], [[m:String#upcase]],
+     [[m:String#downcase]], [[m:String#swapcase]]
 
 --- casecmp(other)
 #@todo
@@ -605,7 +602,7 @@ self の長さが width より長い時には元の文字列の複製を返します。
   p "foo".center(10, "*")  # => "***foo****"
 #@end
 
-[[m:String#ljust]], [[m:String#rjust]] も参照してください。
+@see [[m:String#ljust]], [[m:String#rjust]]
 
 --- ljust(width[, padding])
 #@todo
@@ -628,7 +625,7 @@ self の長さが width より長い時には元の文字列の複製を返します。
   p "foo".ljust(10, "*")   # => "foo*******"
 #@end
 
-[[m:String#center]], [[m:String#rjust]] も参照してください。
+@see [[m:String#center]], [[m:String#rjust]]
 
 --- rjust(width[, padding])
 #@todo
@@ -651,7 +648,7 @@ self の長さが width より長い時には元の文字列の複製を返します。
   p "foo".rjust(10, "*")   # => "*******foo"
 #@end
 
-[[m:String#center]], [[m:String#ljust]] も参照してください。
+@see [[m:String#center]], [[m:String#ljust]]
 
 --- chomp([rs])
 --- chomp!([rs])
@@ -784,7 +781,7 @@ salt には、以下の様になるべくランダムな文字列を選ぶべきです。
   ent = Etc.getpwnam(user)
   p passwd.crypt(ent.passwd) == ent.passwd
 
-((*注意*)):
+注意:
 
   * crypt の処理は [[man:crypt(3)]] の実装に依存しています。
     従って、crypt で処理される内容の詳細や salt の与え方については、
@@ -882,8 +879,9 @@ self を返します。
 
 self を返します。
 
-[[m:String#unpack]] も参照してください。
 unpack('C*')でバイト単位の配列を取得できます。
+
+@see [[m:String#unpack]]
 
 --- empty?
 #@todo
@@ -950,7 +948,7 @@ gsub! は self を変更して返しますが、
   p 'abbbcd'.gsub(/a(b+)/, '\\1')         # これも正解 (より安全)
   p 'abbbcd'.gsub(/a(b+)/) { $1 }         # これも正解 (もっとも安全)
 
-[[m:String#sub]] も参照してください。
+@see [[m:String#sub]]
 
 #@since 1.8.0
 1.6 以前は、pattern が文字列の場合、
@@ -980,9 +978,8 @@ gsub! は self を変更して返しますが、
   p "10z".hex   # => 16
   p "1_0".hex   # => 16
 
-[[m:String#oct]], [[m:String#to_i]], [[m:String#to_f]],
-[[m:Kernel#Integer]], [[m:Kernel#Float]]
-も参照してください。
+@see [[m:String#oct]], [[m:String#to_i]], [[m:String#to_f]],
+     [[m:Kernel#Integer]], [[m:Kernel#Float]]
 
 逆に、数値を文字列に変換するには
 [[m:Kernel#sprintf]], [[m:String#%]],
@@ -1023,7 +1020,7 @@ pos が負の場合、文字列の末尾から数えた位置から探索します。
   p "foobarfoobar".index("bar", 6)        # => 9
   p "foobarfoobar".index("bar", -6)       # => 9
 
-[[m:String#rindex]] も参照してください。
+@see [[m:String#rindex]]
 
 #@since 1.8.0
 --- insert(nth, other)
@@ -1164,9 +1161,8 @@ Ruby 1.8 以降はいずれも符号を許す
   p "1_0_1x".oct   # => 65
 #@end
 
-[[m:String#hex]], [[m:String#to_i]], [[m:String#to_f]],
-[[m:Kernel#Integer]], [[m:Kernel#Float]]
-も参照してください。
+@see [[m:String#hex]], [[m:String#to_i]], [[m:String#to_f]],
+     [[m:Kernel#Integer]], [[m:Kernel#Float]]
 
 逆に、数値を文字列に変換するには[[m:Kernel#sprintf]],
 [[m:String#%]], [[m:Integer#to_s]] を使用します。
@@ -1275,8 +1271,7 @@ self に対して正規表現 re で繰り返しマッチを行い、
 
 ブロックを指定して呼び出した場合は、マッチした部分文字列(括弧を含
 む場合は括弧で括られたパターンにマッチした文字列の配列)をブロック
-のパラメータとします。ブロックを指定した場合は self を返しま
-す。
+のパラメータとします。ブロックを指定した場合は self を返します。
 
 例:
 
@@ -1456,7 +1451,7 @@ squeeze! は self を変更して返しますが、
   p str.strip           # => "\000  abc"
 #@end
 
-[[m:String#strip!]] も参照してください。
+@see [[m:String#strip!]]
 
 --- strip! -> self
 
@@ -1488,7 +1483,7 @@ strip! は、内容を変更した self を返します。
   p str   # => "\000  abc"
 #@end
 
-[[m:String#strip]] も参照してください。
+@see [[m:String#strip]]
 
 #@since 1.8.0
 --- lstrip
@@ -1840,10 +1835,8 @@ tr_s は置換された部分だけを squeeze の対象とします。
   $KCODE = "NONE"
   puts "蟻".upcase   # => 帰   ($KCODE が不適切なので誤って処理された)
 
-[[m:String#upcase!]],
-[[m:String#downcase]],
-[[m:String#swapcase]],
-[[m:String#capitalize]] も参照してください。
+@see [[m:String#upcase!]], [[m:String#downcase]],
+     [[m:String#swapcase]], [[m:String#capitalize]]
 
 --- upcase! -> self | nil
 
@@ -1872,10 +1865,8 @@ ASCII 文字列の範囲内でアルファベットを全て大文字にします。
   str.upcase!
   puts str   # => 帰   ($KCODE が不適切なので誤って処理された)
 
-[[m:String#upcase]],
-[[m:String#downcase!]],
-[[m:String#swapcase!]],
-[[m:String#capitalize!]] も参照してください。
+@see [[m:String#upcase]], [[m:String#downcase!]],
+     [[m:String#swapcase!]], [[m:String#capitalize!]]
 
 --- upto(max) {|s| ... }
 #@todo
@@ -1965,7 +1956,7 @@ self がセパレータを含まないときは、
   p "axaxa".partition("x")   # => ["a", "x", "axa"]
   p "aaaaa".partition("x")   # => ["aaaaa", "", ""]
 
-[[String#rpartition]] も参照してください。
+@see [[m:String#rpartition]]
 
 --- rpartition(sep) -> [String, String, String]
 #@todo
@@ -1982,5 +1973,5 @@ self がセパレータを含まないときは、
   p "axaxa".partition("x")   # => ["axa", "x", "a"]
   p "aaaaa".partition("x")   # => ["", "", "aaaaa"]
 
-[[String#partition]] も参照してください。
+@see [[m:String#partition]]
 #@end
