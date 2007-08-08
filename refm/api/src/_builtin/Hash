@@ -5,7 +5,11 @@ include Enumerable
 ジェクトから任意の種類のオブジェクトへの関連づけを行うことができます。
 ハッシュ生成は以下のようなハッシュ式で行われます。
 
+  #aはキー、bは値
   {a=>b, ... }
+#@if (version >= "1.9.0")
+  {s:b , ... }   #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法p
+#@end
 
 ハッシュの格納に用いられるハッシュ値の計算には、
 [[m:Object#hash]] メソッドが使われ、キーの同一性判定には、
@@ -18,11 +22,25 @@ include Enumerable
 使用します。キーとして使われている文字列を更新しようとすると例外
 [[c:TypeError]] が発生します。
 
+##
+ハッシュのキーに用いるオブジェクトは[[m:Object#eql?]]で同一性の判定を
+行いますが、オブジェクトを直接比較するかわりに、ハッシュ値という
+固有の整数で比較します。ハッシュ値の計算は、[[m:Object#hash]]で行います。
+キーとして用いたいオブジェクトはこの２つのメソッドを適切に定義している必要が
+あります。
+
+キーとして与えたオブジェクトの内容が変化し、メソッド hash の返す
+値が変わるとハッシュから値が取り出せなくなりますから、[[c:Array]]、
+[[c:Hash]] などのインスタンスはキーに向きません。
+[[m:Hash#rehash]]を参照。
+ただ、キーとして用いられることが多い文字列は、そのコピーを更新不可に設定
+(freeze)してキーとして用いることで、変更不可にしてあります。
+キーとして使われている文字列を更新しようとすると例外[[c:TypeError]] が発生します。
+##
 == Class Methods
 
---- [](key,value,...)
---- [](hash)
-#@todo
+--- [](key,value,...)  -> Hash
+--- [](hash=nil) -> Hash
 
 新しいハッシュを生成します。一番目の形式では、引数は必ず偶数個指定
 しなければなりません。(奇数番目がキー、偶数番目が値)。
@@ -30,10 +48,16 @@ include Enumerable
 二番目の形式(1つのハッシュオブジェクトを引数に指定した場合)は、指
 定したハッシュと同一のキーと値を持つ新たなハッシュを生成して返しま
 す。(生成されたハッシュのデフォルト値は nil です。)
+引数を与えなかった場合は空のハッシュを生成します（{}と同じ）
+
+@param key 生成するハッシュのキーです。
+@param value 生成するハッシュの値です。
+@param hash 生成元となるハッシュです
+@raise ArgumentError 一番目の形式で奇数個の引数を与えたときに発生します。
 
 以下は配列からハッシュを生成する方法の例です(より直接的な方法があ
 るのではと思うかも知れませんが残念ながらありません)。
-
+#@if (version < "1.7.0")
 (1) [キー, 値, ...] の配列からハッシュへ
 
   ary = [1,"a", 2,"b", 3,"c"]
@@ -48,7 +72,46 @@ include Enumerable
   
   #=> {1=>"a", 2=>"b", 3=>"c"}
 
-(3) キーと値の配列のペアからハッシュへ(version 1.7 以降)
+(3) キーや値が配列だと (2) の方法は使えないので地道に代入するしかない
+
+  h = Hash.new
+  alist = [[1,["a"]], [2,["b"]], [3,["c"]]]
+  alist.each {|k,v|
+    h[k] = v
+  }
+  p h
+  
+  #=> {1=>["a"], 2=>["b"], 3=>["c"]}
+  
+(4) キーと値の配列のペアからハッシュへ（地道に代入）
+
+  keys = [1, 2, 3]
+  vals = ["a", "b", "c"]
+  h={}
+  
+  keys.each_with_index{|key,n| h[key] = vals[n]}
+  p h
+  
+  #=> {1=>"a", 2=>"b", 3=>"c"}
+
+#@end
+#@if ("1.7.0" <= version)
+#@if (version < "1.9.0")
+(1) [キー, 値, ...] の配列からハッシュへ
+
+  ary = [1,"a", 2,"b", 3,"c"]
+  p Hash[*ary]
+  
+  # => {1=>"a", 2=>"b", 3=>"c"}
+
+(2) キーと値のペアの配列からハッシュへ
+
+  alist = [[1,"a"], [2,"b"], [3,"c"]]
+  p Hash[*alist.flatten]
+  
+  #=> {1=>"a", 2=>"b", 3=>"c"}
+
+(3) キーと値の配列のペアからハッシュへ
 
   keys = [1, 2, 3]
   vals = ["a", "b", "c"]
@@ -67,14 +130,43 @@ include Enumerable
   p h
   
   #=> {1=>["a"], 2=>["b"], 3=>["c"]}
+#@end
+#@end
+#@if (version >= "1.9.0")
+(1) [キー, 値, ...] の配列からハッシュへ
 
---- new([ifnone])
---- new {|hash, key| ...}
-#@todo
+  ary = [1,"a", 2,"b", 3,["c"]]
+  p Hash[*ary]
+  
+  # => {1=>"a", 2=>"b", 3=>["c"]}
+
+(2) キーと値のペアの配列からハッシュへ
+
+  alist = [[1,"a"], [2,"b"], [3,["c"]]]
+  p Hash[*alist.flatten(1)]
+  
+  #=> {1=>"a", 2=>"b", 3=>["c"]}
+
+(3) キーと値の配列のペアからハッシュへ
+
+  keys = [1, 2, 3]
+  vals = ["a", "b", ["c"]]
+  alist = keys.zip(vals)   # あるいは alist = [keys,vals].transpose
+  p Hash[*alist.flatten(1)]
+  
+  #=> {1=>"a", 2=>"b", 3=>["c"]}
+#@end
+--- new(ifnone=nil) -> Hash
+--- new {|hash, key| ...} -> Hash
 
 空の新しいハッシュを生成します。ifnone はキーに対
 応する値が存在しない時のデフォルト値です。
-デフォルト値の扱いには注意が必要です( [[trap:Hash]] )。
+#@if (version >= "1.8.0")
+ブロックの結果をデフォルト値にすることもできます。
+#@end
+
+@param ifnone キーに対応する値が存在しない時のデフォルト値です。
+デフォルト値の扱いには注意が必要です( [[trap:Hash]] )
 
 #@if (version >= "1.8.0")
 ブロックを指定した場合は、ブロックの評価結果がデフォルト値になりま
@@ -108,48 +200,78 @@ include Enumerable
 
 == Instance Methods
 
---- [](key)
+--- [](key) -> object
 #@todo
-
 key に関連づけられた値を返します。該当するキーが登
 録されていない時には、デフォルト値(設定されていない時には
 nil) を返します。
 値としての nil と区別する必要がある場合は [[m:Hash#fetch]]
 を使ってください。
 
---- []=(key, value)
---- store(key,value)
-#@todo
+@param key 探すキーを指定します。
+状態が変化していると、rehashが必要です。
+
+--- []=(key, value) -> object
+--- store(key,value) -> object
 
 key に対して value を関連づけます。value を返し
 ます。
+@param key キーを指定します。
+@param value 値を指定します。
+  
+  h = {}
+  h[:key] = "value"
+  p h #=>{:key=>"value"}
 
---- clear
-#@todo
+--- clear -> self
 
-ハッシュの中身を空にします。self を返します。
+ハッシュの中身を空にします。
 
---- clone
---- dup
-#@todo
+空にした後のselfを返します。
+デフォルト値の設定はクリアされません。
 
-レシーバと同じ内容を持つ新しいハッシュを返します。フリーズしたハッ
-シュの clone は同様にフリーズされたハッシュを返しますが、
+--- clone -> Hash
+--- dup -> Hash
+
+レシーバと同じ内容を持つ新しいハッシュを返します。
+
+フリーズしたハッシュの clone は同様にフリーズされたハッシュを返しますが、
 dup は内容の等しいフリーズされていないハッシュを返します。
 
 --- default
---- default([key])
+#@if (version >= "1.7.0")
+--- default(key)
+#@end
 #@todo
 
 ハッシュのデフォルト値を返します。
-
-#@if (version >= "1.8.0")
+#@if (version >= "1.7.0")
+ハッシュのデフォルト値がブロックで与えられている場合、1番目の形式だと
+返り値がnilになることに注意してください。
+ブロックのデフォルト値について調べる時は2番目の形式か
+[[m:Hash#default_proc]]を使ってください。
+#@end
+#@if (version >= "1.7.0")
 2 番目の形式はハッシュがデフォルト値としてブロックを持つ場合
 ([[m:Hash#Hash.new]]参照)に指定できます。self と 引数
 key を引数にブロックを実行してその結果を返します。
-key の省略値は nil です。
 #@end
-
+  
+  h = Hash.new("default")
+  p h.default #=>"default"
+  p h.default(:some) #=>"default"
+  p h #=>{}
+  
+  h = Hash.new{|hash,key|hash[key] ="default" }
+  p h.default #=>nil
+  p h.default(:some) #=>"default"
+  p h #=>{:some=>"default"}
+  
+  h = Hash.new
+  p h.default #=>nil
+  p h.default(:some) #=>nil
+  p h #=>{}
+  
 --- default=(value)
 #@todo
 
@@ -319,10 +441,14 @@ Hash#index は version 1.9 では、((<obsolete>)) です。
   h = { "n" => 100, "m" => 100, "y" => 300, "d" => 200, "a" => 0 }
   h.invert   #=> {200=>"d", 300=>"y", 0=>"a", 100=>"n"}
 
---- keys
-#@todo
+--- keys -> [object]
 
 全キーの配列を返します。
+
+   h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+   p h1.keys           #=> [:c, "a", 2]
+
+値の配列は[[m:Hash#values]]を、組になった配列は[[m:Hash#to_a]]を用います。
 
 --- length
 --- size
@@ -396,10 +522,14 @@ nil を、デフォルト値を持つならその値を返します(このとき、
   p h2.to_a               # => []
 #@end
 
---- to_a
-#@todo
+--- to_a -> [Array]
 
-[key,value] からなる 2 要素の配列の配列を生成して返します。
+キーと値からなる 2 要素の配列の配列を生成して返します。
+
+   h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+   p h1.to_a           #=> [[:c, "c"], ["a", 100], [2, ["some"]]]
+
+キーの配列は[[m:Hash#keys]]を、値の配列は[[m:Hash#values]]を用います。
 
 --- to_hash
 #@todo
@@ -426,45 +556,57 @@ self[key] 、other[key] が渡されます。
 
 self を返します。
 
---- values
-#@todo
+--- values -> [object]
 
 ハッシュの全値の配列を返します。
 
+
+   h1 = { "a" => 100, 2 => ["some"], :c => "c" }
+   p h1.values         #=> ["c", 100, ["some"]]
+
+キーの配列は[[m:Hash#keys]]を、組になった配列は[[m:Hash#to_a]]を用います。
+
 #@if (version >= "1.8.0")
---- values_at(key_1, ... , key_n)
-#@todo
+--- values_at(key_1, ... ,key_n) -> [object]
 
 引数で指定されたキーに対応する値の配列を返します。キーに対応する値
 がなければ [[m:Hash#default]] の戻り値が使用されます。
-[[m:Hash#indexes]] と [[m:Hash#indices]] と同じです。
+
+#@#[[m:Hash#indexes]] と [[m:Hash#indices]] と同じです。
+#@#言及の必要なし
 
   h = {1=>"a", 2=>"b", 3=>"c"}
   p h.values_at(1,3,4)               # => ["a", "c", nil]
 #@end
 
 #@since 1.9.0
-#@# bc-rdoc: detected missing name: compare_by_identity
---- compare_by_identity
-#@todo
-#@# => hsh
+--- compare_by_identity -> Hash
 
-Makes hsh to compare its keys by their identity, i.e. it will
-consider exact same objects as same keys.
+selfのキーの同一性判定をオブジェクトの同一性で判定するように変更します。
+
+デフォルトでは、キーのオブジェクトによっては内容が同じなら一致しているとみなされますが、より厳密に
+[[m:Object#object_id]]が一致しているかどうかを条件とするようにselfを変更します。
+
+返り値だけでなくselfも変更される破壊的メソッドです。
+
+#@#Makes hsh to compare its keys by their identity, i.e. it will
+#@#consider exact same objects as same keys.
 
    h1 = { "a" => 100, "b" => 200, :c => "c" }
-   h1["a"]        #=> 100
+   p h1["a"]        #=> 100
    h1.compare_by_identity
-   h1.compare_by_identity? #=> true
-   h1["a"]        #=> nil  # different objects.
-   h1[:c]         #=> "c"  # same symbols are all same.
+   p h1.compare_by_identity? #=> true
+   p h1["a"]        #=> nil  # この"a"と最初の"a"とは違うオブジェクト
+   p h1[:c]         #=> "c"  # 同じ内容のシンボルはすべて同一
 
-#@# bc-rdoc: detected missing name: compare_by_identity?
---- compare_by_identity?
-#@todo
-#@# => true or false
+@return selfを返します。
 
-Returns true if hsh will compare its keys by their identity.
-Also see Hash#compare_by_identity.
+--- compare_by_identity? -> bool
+
+selfがキーの一致をオブジェクトの同一性を用いて行っているならばtrueを返します。
+[[m:Hash#compare_by_identity]]を参照してください。
+
+#@#Returns true if hsh will compare its keys by their identity.
+#@#Also see Hash#compare_by_identity.
 
 #@end
