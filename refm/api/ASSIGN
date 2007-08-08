@@ -348,7 +348,7 @@ tkextlib/blt
 tkextlib/blt/barchart
 tkextlib/blt/bitmap
 tkextlib/blt/busy
-tkextlib/blt/component          moriq
+tkextlib/blt/component
 tkextlib/blt/container
 tkextlib/blt/cutbuffer
 tkextlib/blt/dragdrop
@@ -369,7 +369,7 @@ tkextlib/blt/unix_dnd
 tkextlib/blt/vector
 tkextlib/blt/watch
 tkextlib/blt/win_printer
-tkextlib/blt/winop              moriq
+tkextlib/blt/winop
 tkextlib/bwidget
 tkextlib/itcl
 tkextlib/itk
