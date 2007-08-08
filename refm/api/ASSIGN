@@ -19,7 +19,7 @@ _builtin/Exception              sheepman
 _builtin/FalseClass             yamane          done
 _builtin/File                   sheepman
 _builtin/FileTest               sheepman
-_builtin/File__Constants
+_builtin/File__Constants        takayama
 _builtin/File__Stat
 _builtin/Fixnum                 ujihisa         done
 _builtin/Float                  
@@ -437,7 +437,7 @@ tkextlib/vu/setup
 tkextlib/vu/spinbox
 tkextlib/winico
 tmpdir                          kouya            done
-tracer                          takayama
+tracer
 tsort
 un
 uri                             sheepman
