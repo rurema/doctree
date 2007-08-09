@@ -18,7 +18,6 @@ self <=> other は
 == Instance Methods
 
 --- ==(other)    -> boolean | nil
-#@todo
 
 #@if (version < "1.8.0")
 self と other が等しい時真を返します。
@@ -30,56 +29,70 @@ self と other が等しい時真を返します。
 <=> が nil を返した場合は、 nil を返します。
 #@end
 
+@param other 自身と比較したいオブジェクトを指定します。
+
 --- >(other)    -> boolean
-#@todo
+
 #@if (version < "1.8.0")
 self が other より大きい時真を返します。
 #@else
 メソッド <=> をもとにオブジェクト同士を比較します。
 <=> が正の整数を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
+#@end
 
+@param other 自身と比較したいオブジェクトを指定します。
+#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
 --- >=(other)    -> boolean
-#@todo
+
 #@if (version < "1.8.0")
 self が other より大きいか等しい時真を返します。
 #@else
 メソッド <=> をもとにオブジェクト同士を比較します。
 <=> が正の整数か 0 を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
+#@end
 
+@param other 自身と比較したいオブジェクトを指定します。
+#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
 --- <(other)    -> boolean
-#@todo
+
 #@if (version < "1.8.0")
 self が other より小さい時真を返します。
 #@else
 メソッド <=> をもとにオブジェクト同士を比較します。
 <=> が負の整数を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
+#@end
 
+@param other 自身と比較したいオブジェクトを指定します。
+#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
 --- <=(other)    -> boolean
-#@todo
+
 #@if (version < "1.8.0")
 self が other より小さいか等しい時真を返します。
 #@else
 メソッド <=> をもとにオブジェクト同士を比較します。
 <=> が負の整数か 0 を返した場合に、true を返します。
 それ以外の整数を返した場合に、false を返します。
+#@end
 
+@param other 自身と比較したいオブジェクトを指定します。
+#@since 1.8.0
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
 --- between?(min, max)    -> boolean
-#@todo
+
 #@if (version < "1.8.0")
 self が min と max の範囲内(min, max
 を含みます)にある時真を返します。
@@ -88,7 +101,10 @@ self が min と max の範囲内(min, max
 を含みます)にあるかを判断します。
   self >= min and self <= max 
 と同じです。
+#@end
 
+@param other 自身と比較したいオブジェクトを指定します。
+#@since 1.8.0
 @raise ArgumentError self <=> min か、self <=> max が nil を返
 したときに発生します。
 #@end
