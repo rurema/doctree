@@ -36,14 +36,12 @@ Thread.new{ ... } д╧еиещб╝д╦д╩дъд▐д╗дєбг└╕└од╡дьд┐е╣еье├е╔д╧╜╛═ш─╠дъ ┐╞е╣еье├е╔д
 == Class Methods
 
 --- new    -> ThreadGroup
-#@todo
 
 ┐╖д┐д╩ ThreadGroup дЄ└╕└од╖д╞╩╓д╖д▐д╣бг
 
 == Instance Methods
 
 --- add(thread)    -> self
-#@todo
 
 е╣еье├е╔ thread дм┬░д╣дые░еыб╝е╫дЄ╝л┐╚д╦╩╤╣╣д╖д▐д╣бг
 
@@ -53,7 +51,6 @@ Thread.new{ ... } д╧еиещб╝д╦д╩дъд▐д╗дєбг└╕└од╡дьд┐е╣еье├е╔д╧╜╛═ш─╠дъ ┐╞е╣еье├е╔д
 
 #@since 1.8.0
 --- enclose    -> self
-#@todo
 
 ╝л┐╚д╪д╬ [[m:ThreadGroup#add]] д╦дшдые╣еье├е╔д╬─╔▓├/║я╜№дЄ(freeze д╗д║д╦)╢╪╗▀д╖д▐д╣бг
 enclose д╡дьд┐ ThreadGroup д╦─╔▓├дф║я╜№дЄ╣╘джд╚╬у│░ [[c:ThreadError]] дм╚п└╕д╖д▐д╣бг
@@ -84,7 +81,6 @@ enclose д╡дьд┐ ThreadGroup д╦─╔▓├дф║я╜№дЄ╣╘джд╚╬у│░ [[c:ThreadError]] дм╚п└╕д╖д▐
 
 #@since 1.8.0
 --- enclosed?    -> boolean
-#@todo
 
 ╝л┐╚дм enclose д╡дьд╞дддыд╩дщ true дЄ╩╓д╖д▐д╣бгд╜джд╟д╩ддд╩дщ false дЄ╩╓д╖д▐д╣бге╟е╒ейеые╚д╧ false д╟д╣бг
 
@@ -103,7 +99,6 @@ freeze д╡дьд┐ ThreadGroup д╦д╧ Thread д╬─╔▓├/║я╜№дмд╟днд▐д╗дєдмбвenclosed? д╧ fa
 @see [[m:ThreadGroup#enclose]]
 #@end
 --- list    -> [Thread] 
-#@todo
 
 self д╦┬░д╣дые╣еье├е╔д╬╟█╬єдЄ╩╓д╖д▐д╣бг
 #@since 1.8.0
@@ -117,7 +112,6 @@ version 1.8 д╟д╧бвaborting ╛ї┬╓д╟двдые╣еье├е╔
 == Constants
 
 --- Default
-#@todo
 
 е╟е╒ейеые╚д╟─ъ╡┴д╡дьд╞ддды [[c:ThreadGroup]] д╟д╣бгеседеєе╣еье├е╔
 д╧║╟╜щд│д╬е░еыб╝е╫д╦┬░д╖д▐д╣бг
