@@ -15,43 +15,37 @@ FileTest ¤ÇÄêµÁ¤µ¤ì¤¿³Æ¥á¥½¥Ã¥É¤Ï¡¢¥·¥¹¥Æ¥à¥³¡¼¥ë¤Ë¼ºÇÔ¤·¤Æ¤âÎã³°¤òÈ¯À¸¤µ¤»¤Ş¤»¤
 == Module Functions
 
 --- blockdev?(filename)    -> boolean
-#@todo
 
-filename ¤¬¥Ö¥í¥Ã¥¯¥¹¥Ú¥·¥ã¥ë¥Õ¥¡¥¤¥ë¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¥Ö¥í¥Ã¥¯¥¹¥Ú¥·¥ã¥ë¥Õ¥¡¥¤¥ë¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- chardev?(filename)    -> boolean
-#@todo
 
-filename ¤¬¥­¥ã¥é¥¯¥¿¥¹¥Ú¥·¥ã¥ë¥Õ¥¡¥¤¥ë¤Î»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¥­¥ã¥é¥¯¥¿¥¹¥Ú¥·¥ã¥ë¥Õ¥¡¥¤¥ë¤Î»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- executable?(filename)    -> boolean
-#@todo
 
 filename ¤¬¼Â¸ú¥æ¡¼¥¶/¥°¥ë¡¼¥× ID ¤Ç¼Â¹Ô¤Ç¤­¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş
-¤¹¡£
+¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- executable_real?(filename)    -> boolean
-#@todo
 
-filename ¤¬¼Â¥æ¡¼¥¶/¥°¥ë¡¼¥× ID ¤Ç¼Â¹Ô¤Ç¤­¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¼Â¥æ¡¼¥¶/¥°¥ë¡¼¥× ID ¤Ç¼Â¹Ô¤Ç¤­¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- exist?(filename)    -> boolean
-#@todo
 
-filename ¤¬Â¸ºß¤¹¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬Â¸ºß¤¹¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- exists?(filename)    -> boolean
-#@todo
 
 ¤³¤Î¥á¥½¥Ã¥É¤Ïobsolete¤Ç¤¹¡£
 
@@ -61,36 +55,30 @@ filename ¤¬Â¸ºß¤¹¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- grpowned?(filename)    -> boolean
-#@todo
 
 filename ¤Î¥°¥ë¡¼¥× ID ¤¬¼Â¸ú¥°¥ë¡¼¥× ID ¤ÈÅù¤·¤¤»ş¡¢¿¿¤òÊÖ
-¤·¤Ş¤¹¡£
+¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- directory?(filename)    -> boolean
-#@todo
 
-filename ¤¬¥Ç¥£¥ì¥¯¥È¥ê¤Î»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¥Ç¥£¥ì¥¯¥È¥ê¤Î»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- file?(filename)    -> boolean
-#@todo
 
-filaname ¤¬ÄÌ¾ï¥Õ¥¡¥¤¥ë¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filaname ¤¬ÄÌ¾ï¥Õ¥¡¥¤¥ë¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 #@since 1.8.4
 --- identical?(filename1, filename2)    -> boolean
-#@todo
 
-filaname1 ¤È filename2 ¤¬Æ±¤¸¥Õ¥¡¥¤¥ë¤ò»Ø¤·¤Æ¤¤¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filaname1 ¤È filename2 ¤¬Æ±¤¸¥Õ¥¡¥¤¥ë¤ò»Ø¤·¤Æ¤¤¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 (ruby 1.8.3 °ÊÁ°¤Ç¤Ï[[m:Kernel.#test]](?-, filename1, filename2)¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£)
-
-Îã:
 
   open("a", "w") {}
   p File.identical?("a", "a")      #=> true
@@ -106,119 +94,102 @@ filaname1 ¤È filename2 ¤¬Æ±¤¸¥Õ¥¡¥¤¥ë¤ò»Ø¤·¤Æ¤¤¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
 
 #@end
 --- pipe?(filename)    -> boolean
-#@todo
 
-filename ¤¬Ì¾Á°¤Ä¤­¥Ñ¥¤¥×(FIFO)¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬Ì¾Á°¤Ä¤­¥Ñ¥¤¥×(FIFO)¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- socket?(filename)    -> boolean
-#@todo
 
-filename ¤¬¥½¥±¥Ã¥È¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¥½¥±¥Ã¥È¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- owned?(filename)    -> boolean
-#@todo
 
-filename ¤¬¼«Ê¬¤Î¤â¤Î¤Ç¤¢¤ë»ş¤Ë¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¼«Ê¬¤Î¤â¤Î¤Ç¤¢¤ë»ş¤Ë¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- readable?(filename)    -> boolean
-#@todo
 
-filename ¤òÆÉ¤ß¹ş¤ß²ÄÇ½¤Ê»ş¤Ë¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬ÆÉ¤ß¹ş¤ß²ÄÇ½¤Ê»ş¤Ë¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- readable_real?(filename)    -> boolean
-#@todo
 
 filename ¤¬¼Â¥æ¡¼¥¶/¼Â¥°¥ë¡¼¥×¤Ë¤è¤Ã¤ÆÆÉ¤ß¹ş¤ß²ÄÇ½¤Ê»ş¤Ë¿¿¤ò
-ÊÖ¤·¤Ş¤¹¡£
+ÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- setuid?(filename)    -> boolean
-#@todo
 
 filename ¤¬ [[man:setuid(2)]] ¤µ¤ì¤Æ¤¤¤ë»ş¤Ë¿¿¤òÊÖ
-¤·¤Ş¤¹¡£
+¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- setgid?(filename)    -> boolean
-#@todo
 
 filename ¤¬ [[man:setgid(2)]] ¤µ¤ì¤Æ¤¤¤ë»ş¤Ë¿¿¤òÊÖ
-¤·¤Ş¤¹¡£
+¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- size(filename)    -> Integer
-#@todo
 
 filename ¤Î¥µ¥¤¥º¤òÊÖ¤·¤Ş¤¹¡£filename ¤¬Â¸ºß¤·¤Ê¤±¤ì¤Ğ
 Îã³° [[c:Errno::EXXX]](¤ª¤½¤é¤¯ Errno::ENOENT)¤¬È¯À¸¤·¤Ş¤¹¡£
 
-[[m:FileTest.#size?]], [[m:FileTest.#zero?]] ¤â»²
-¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
-
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
+@see [[m:FileTest.#size?]], [[m:FileTest.#zero?]]
+
 --- size?(filename)    -> Integer
-#@todo
 
 filename ¤Î¥µ¥¤¥º¤òÊÖ¤·¤Ş¤¹¡£filename ¤¬Â¸ºß¤·¤Ê¤¤»ş¤ä
 filename ¤Î¥µ¥¤¥º¤¬0¤Î»ş¤Ë¤Ï nil ¤òÊÖ¤·¤Ş¤¹¡£
 
-[[m:FileTest.#size]], [[m:FileTest.#zero?]] ¤â»²¾È
-¤·¤Æ¤¯¤À¤µ¤¤¡£
-
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
+@see [[m:FileTest.#size]], [[m:FileTest.#zero?]] 
+
 --- sticky?(filename)    -> boolean
-#@todo
 
 filename ¤Î sticky ¥Ó¥Ã¥È([[man:chmod(2)]] »²¾È)¤¬
-Î©¤Ã¤Æ¤¤¤ë»ş¤Ë¿¿¤òÊÖ¤·¤Ş¤¹¡£
+Î©¤Ã¤Æ¤¤¤ë»ş¤Ë¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- symlink?(filename)    -> boolean
-#@todo
 
-filename ¤¬¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬¥·¥ó¥Ü¥ê¥Ã¥¯¥ê¥ó¥¯¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- writable?(filename)    -> boolean
-#@todo
 
-filename ¤¬½ñ¤­¹ş¤ß²Ä¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
+filename ¤¬½ñ¤­¹ş¤ß²Ä¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- writable_real?(filename)    -> boolean
-#@todo
 
 filename ¤¬¼Â¥æ¡¼¥¶/¼Â¥°¥ë¡¼¥×¤Ë¤è¤Ã¤Æ½ñ¤­¹ş¤ß²Ä¤Ç¤¢¤ë»ş¡¢¿¿
-¤òÊÖ¤·¤Ş¤¹¡£
+¤òÊÖ¤·¤Ş¤¹¡£¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Ş¤¹¡£
 
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Ş¤¹¡£
 
 --- zero?(filename)    -> boolean
-#@todo
 
 filename ¤¬Â¸ºß¤·¤Æ¡¢¤½¤Î¥µ¥¤¥º¤¬ 0 ¤Ç¤¢¤ë»ş¡¢¿¿¤òÊÖ¤·¤Ş¤¹¡£
 filename ¤¬Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ï false ¤òÊÖ¤·¤Ş¤¹¡£
 
-[[m:FileTest.#size]], [[m:FileTest.#size?]], ¤â»²
-¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
-
 @param filename ¥Õ¥¡¥¤¥ëÌ¾¤òÉ½¤¹Ê¸»úÎó¤« IO ¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
+
+@see [[m:FileTest.#size]], [[m:FileTest.#size?]]
 
 #@since 1.9.0
 --- world_readable?(file_name)     -> Integer | nil
