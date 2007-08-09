@@ -58,15 +58,16 @@ CREATと併用し、もしファイルが既にある場合には失敗します。
 [[m:File#open]]で使用します。
 
 --- NONBLOCK
-#@todo
+ファイルが利用可能じゃなくてもブロックしません。
+#@# IO.open で使用、かも...
 [[m:File#open]]で使用します。
 
 --- TRUNC
-#@todo
+もしファイルが存在するなら、中身を抹消してサイズをゼロにします。
 [[m:File#open]]で使用します。
 
 --- NOCTTY
-#@todo
+自身がTTY制御しないようにTTYを開きます。
 [[m:File#open]]で使用します。
 
 --- BINARY
