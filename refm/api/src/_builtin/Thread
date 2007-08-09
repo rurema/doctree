@@ -106,7 +106,6 @@ fatal は発生しません。
 == Class Methods
 --- abort_on_exception             -> boolean
 --- abort_on_exception=(newstate)
-#@todo
 
 真の時は、いずれかのスレッドが例外によって終了した時に、インタプリタ
 全体を中断させます。false の場合、あるスレッドで起こった例外は、[[m:Thread#join]]
@@ -121,7 +120,6 @@ fatal は発生しません。
 
 --- critical             -> nil
 --- critical=(newstate)
-#@todo
 
 #@since 1.9.0
 サポートされていません。警告を出力し、何もせずに nil を返します。
@@ -145,24 +143,20 @@ fatal は発生しません。
 #@end
 
 --- current    -> Thread
-#@todo
 
 現在実行中のスレッド(カレントスレッド)を返します。
 
 --- exit    -> Thread
-#@todo
 
 カレントスレッドに対して [[m:Thread#exit]] を呼びます。
 
 --- kill(thread)    -> Thread
-#@todo
 
 指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。
 
 @param thread 終了したい Thread オブジェクトを指定します。
 
 --- list    -> [Thread]
-#@todo
 
 生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
 の配列を返します。
@@ -173,14 +167,12 @@ version 1.8 では、aborting 状態であるスレッド
 #@end
 
 --- main    -> Thread
-#@todo
 
 メインスレッドを返します。
 
 --- new(*arg) {|*arg| ... }         -> Thread
 --- start(*arg) {|*arg| ... }       -> Thread
 --- fork(*arg) {|*arg| ... }        -> Thread
-#@todo
 
 スレッドを生成して、ブロックの評価を開始します。
 生成したスレッドを返します。
@@ -204,14 +196,12 @@ version 1.8 では、aborting 状態であるスレッド
 @raise ThreadError 現在のスレッドが属する [[c:ThreadGroup]] が freeze されている場合に発生します。またブロックを与えられずに呼ばれた場合にも発生します。
 
 --- pass    -> nil
-#@todo
 
 他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、
 他の実行可能状態のスレッドに制御を移します(明示的なスケジューリン
 グ)。
 
 --- stop     -> nil
-#@todo
 
 他のスレッドから [[m:Thread#run]] メソッドで再起動されるまで、カレ
 ントスレッドの実行を停止します。
@@ -219,7 +209,6 @@ version 1.8 では、aborting 状態であるスレッド
 == Instance Methods
 
 --- [](name)    -> nil | object
-#@todo
 
 name に対応したスレッドに固有のデータを取り出します。
 name に対応するスレッド固有データがなければ nil を返し
@@ -228,7 +217,6 @@ name に対応するスレッド固有データがなければ nil を返し
 @pass name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。
 
 --- []=(name,val)
-#@todo
 
 val を name に対応するスレッド固有のデータとして格納します。
 
@@ -238,7 +226,6 @@ val を name に対応するスレッド固有のデータとして格納します。
 
 --- abort_on_exception               -> boolean
 --- abort_on_exception=(newstate)
-#@todo
 
 真の場合、そのスレッドが例外によって終了した時に、インタプリタ
 全体を中断させます。false の場合、あるスレッドで起こった例
@@ -250,7 +237,6 @@ val を name に対応するスレッド固有のデータとして格納します。
 @param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
 --- alive?     -> boolean
-#@todo
 
 スレッドが「生きている」時、true を返します。
 
@@ -259,7 +245,6 @@ val を name に対応するスレッド固有のデータとして格納します。
 --- exit         -> self
 --- kill         -> self
 --- terminate    -> self
-#@todo
 
 スレッドの実行を終了させます。終了時に ensure 節が実行されます。
 ただし、スレッドは終了処理中(aborting)にはなりますが、
@@ -286,7 +271,6 @@ val を name に対応するスレッド固有のデータとして格納します。
 --- exit!         -> self
 --- kill!         -> self
 --- terminate!    -> self
-#@todo
 
 ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(aborting)にはなりますが、
 直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
@@ -294,6 +278,9 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
 により終了します。
+
+@see [[m:Thread#exit]]
+
   th1 = Thread.new do
     begin
       sleep 10
@@ -314,11 +301,9 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 
   #=> "th1: this will be displayed"
 
-@see [[m:Thread#exit]]
 #@end
 
 --- group    -> nil | ThreadGroup
-#@todo
 
 スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
 
@@ -331,11 +316,18 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 #@since 1.8.0
 --- join(limit)    -> nil | self
 #@end
-#@todo
 
 スレッド self の実行が終了するまで、カレントスレッドを停止し
 ます。self が例外により終了していれば、その例外がカレントス
 レッドに対して発生します。
+
+#@since 1.8.0
+limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
+
+@param limit タイムアウトする時間を整数か小数で指定します。
+#@end
+
+@raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
 
 以下は、生成したすべてのスレッドの終了を待つ例です。
 
@@ -346,16 +338,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 
    threads.each {|t| t.join}
 
-#@since 1.8.0
-limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
-
-@param limit タイムアウトする時間を整数か小数で指定します。
-#@end
-
-@raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
-
 --- key?(name)     -> boolean
-#@todo
 
 name に対応したスレッドに固有のデータが定義されていれば
 true を返します。
@@ -363,7 +346,6 @@ true を返します。
 @param name 文字列か [[c:Symbol]] で指定します。
 
 --- keys    -> [Symbol]
-#@todo
 
 スレッド固有データに関連づけられたキーの配列を返します。キーは
 [[c:Symbol]] で返されます。
@@ -377,7 +359,6 @@ true を返します。
 
 --- priority    -> Integer
 --- priority=(val)
-#@todo
 
 スレッドの優先度を返します。この値の大きいほど優先度が高くなります。
 メインスレッドのデフォルト値は 0 です。新しく生成されたスレッドは親スレッドの
@@ -394,8 +375,11 @@ priority を引き継ぎます。
 
 そのスレッドで強制的に例外を発生させます。
 
-引数の意味については組み込み関数 [[m:Kernel.#raise]] を参照してく
-ださい。
+@param error_type [[m:Kernel.#raise]] を参照してください。
+
+@param message [[m:Kernel.#raise]] を参照してください。
+
+@param traceback [[m:Kernel.#raise]] を参照してください。
 
   Thread.new {
     sleep 1
@@ -412,7 +396,6 @@ priority を引き継ぎます。
      ["-:3"]
 
 --- run    -> self
-#@todo
 
 停止状態(stop)のスレッドを再開させます。
 [[m:Thread#wakeup]] と異なりすぐにスレッドの切り替え
@@ -421,7 +404,6 @@ priority を引き継ぎます。
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
 --- safe_level    -> Integer
-#@todo
 
 self のセーフレベルを返します。カレントスレッドの
 safe_level は、[[m:$SAFE]] と同じです。
@@ -429,7 +411,6 @@ safe_level は、[[m:$SAFE]] と同じです。
 セーフレベルについては[[unknown:セキュリティモデル]]を参照してください。
 
 --- status    -> String | nil | false
-#@todo
 
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
 れかで返します。正常終了したスレッドに対して false、例外によ
@@ -440,12 +421,10 @@ safe_level は、[[m:$SAFE]] と同じです。
 [[m:Thread#alive?]] が真を返すなら、このメソッドも真です。
 
 --- stop?    -> boolean
-#@todo
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
 
 --- value    -> object 
-#@todo
 
 スレッド self が終了するまで待ち([[m:Thread#join]] と同じ)、
 そのスレッドのブロックが返した値を返します。スレッド実行中に例外が
@@ -468,7 +447,6 @@ safe_level は、[[m:$SAFE]] と同じです。
    threads.each {|t| p t.join.value}
 
 --- wakeup    -> self
-#@todo
 
 停止状態(stop)のスレッドを実行可能状態(run)にします。
 
