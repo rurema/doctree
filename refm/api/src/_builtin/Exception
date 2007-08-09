@@ -6,17 +6,16 @@
 
 --- new(error_message = nil)
 --- exception(error_message = nil)
-#@todo
 
 例外オブジェクトを生成して返します。
 
-@param error_message エラーメッセージを表す文字列を指定します。このメッセージは属性 [[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示されます。
+@param error_message エラーメッセージを表す文字列を指定します。このメッセージは
+                     属性 [[m:Exception#message]] の値になり、デフォルトの例外ハンドラで表示されます。
 
 == Instance Methods
 
 --- exception                   -> self
 --- exception(error_message)    -> Exception
-#@todo
 
 引数を指定しない場合は self を返します。そうでなければ、自身のコピー
 を生成し、[[m:Exception#message]] 属性を error_message にし
@@ -28,7 +27,6 @@
 @param error_message エラーメッセージを表す文字列を指定します。
 
 --- backtrace    -> [String]
-#@todo
 
 バックトレース情報を返します。デフォルトでは
 
@@ -54,12 +52,10 @@
 --- message    -> String
 --- to_s       -> String
 --- to_str    -> String
-#@todo
 
 エラーメッセージをあらわす文字列を返します。
 
 --- set_backtrace(errinfo)    -> nil | String | [String]
-#@todo
 
 バックトレース情報に errinfo を設定し、設定されたバックトレース
 情報を返します。
