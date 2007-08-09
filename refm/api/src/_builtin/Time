@@ -194,8 +194,6 @@ self より other 秒だけ後の時刻を返します
 --- -(time)    -> Float
 
 自身と time との時刻の差を [[c:Float]] で返します。単位は秒です。
-other が数値である時には self
-より other 秒だけ前の時刻を返します。
 
 @param time 自身との差を算出したい Time オブジェクトを指定します。
 
