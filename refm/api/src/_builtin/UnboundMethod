@@ -55,7 +55,6 @@
 --- [](*args)            
 --- call(*args)          
 --- call(*args) { ... }  
-#@todo
 
 常に例外 [[c:TypeError]] が発生します。
 UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
@@ -72,7 +71,6 @@ UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
 #@end
 
 --- bind(obj)    -> Method
-#@todo
 
 self を obj にバインドして bound method オブジェクト
 (つまり [[c:Method]] オブジェクト) を生成し返します。
@@ -81,9 +79,8 @@ self を obj にバインドして bound method オブジェクト
 ソッド定義元のモジュールをインクルードしたクラスのインスタンスだけ
 です。
 
-@raise TypeError obj のクラスが、unbind したオブジェクトのクラスのインスタンスか、メソッド定義元のモジュールをインクルードしたクラスでなければ、発生します。
-
-例:
+@raise TypeError obj のクラスが、unbind したオブジェクトのクラスのインスタンスか、
+                 メソッド定義元のモジュールをインクルードしたクラスでなければ、発生します。
 
     # クラスのインスタンスメソッドの UnboundMethod の場合
 
@@ -148,20 +145,17 @@ self を obj にバインドして bound method オブジェクト
 
 #@if (version < "1.8.0")
 --- to_proc    -> Proc
-#@todo
 
 self を call する [[c:Proc]] オブジェクトを生成して返します。
 #@end
 
 #@if (version < "1.8.0")
 --- unbind    -> self
-#@todo
 
 self を返します。
 #@end
 
 --- arity    -> Integer
-#@todo
 
 メソッドが受け付ける引数の数を返します。
 
