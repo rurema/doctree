@@ -186,24 +186,32 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 
 self より other 秒だけ後の時刻を返します
 
+@param other 自身からの秒数を数値で指定します。
+
   t = Time.now         #=> Wed Apr 09 08:56:03 CDT 2003
   t + (60 * 60 * 24)   #=> Thu Apr 10 08:56:03 CDT 2003
 
-@param other 自身からの秒数を数値で指定します。
+--- -(time)    -> Float
 
---- -(other)    -> Float | Time
-
-other が Time オブジェクトである時、ふたつの時刻の差を
-[[c:Float]] で返します。単位は秒です。other が数値である時には self
+自身と time との時刻の差を [[c:Float]] で返します。単位は秒です。
+other が数値である時には self
 より other 秒だけ前の時刻を返します。
+
+@param time 自身との差を算出したい Time オブジェクトを指定します。
 
   t = Time.now       #=> Wed Apr 09 08:56:03 CDT 2003
   t2 = t + 2592000   #=> Fri May 09 08:56:03 CDT 2003
   t2 - t             #=> 2592000.0
-  t2 - 2592000       #=> Wed Apr 09 08:56:03 CDT 2003
 
-@param other 自身との差を算出したい Time オブジェクトを指定します。
-             または、自身までの秒数を整数か小数で指定します。
+--- -(sec)    -> Time
+
+自身より sec 秒だけ前の時刻を返します。
+
+@param sec 実数を秒を単位として指定します。
+
+  t = Time.now       #=> Wed Apr 09 08:56:03 CDT 2003
+  t2 = t + 2592000   #=> Fri May 09 08:56:03 CDT 2003
+  t2 - 2592000       #=> Wed Apr 09 08:56:03 CDT 2003
 
 --- <=>(other) nil | -1 | 0 | 1
 
