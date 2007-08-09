@@ -25,7 +25,6 @@
 #@since 1.8.0
 --- new(superclass = Object) {|klass| ... } -> Class
 #@end
-#@todo
 
 新しく名前の付いていない superclass のサブクラスを生成します。
 
@@ -56,16 +55,14 @@
 
 #@since 1.8.0
 --- allocate    -> object
-#@todo
 
-クラスのインスタンスを生成して返します。生成したオブジェクトは
-クラスのインスタンスであること以外には何も特性を持ちません。
+自身のインスタンスを生成して返します。生成したオブジェクトは
+自身のインスタンスであること以外には何も特性を持ちません。
 #@end
 
 --- new(*args, &block)    -> object
-#@todo
 
-クラスのインスタンスを生成して返します。
+自身のインスタンスを生成して返します。
 このメソッドの引数はブロック引数も含め [[m:Object#initialize]] に渡されます。
 
 #@since 1.8.0
@@ -78,12 +75,10 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
 @param block [[m:Object#initialize]] に渡されるブロックを指定します。
 
 --- superclass    -> Class
-#@todo
 
-クラスのスーパークラスを返します。
+自身のスーパークラスを返します。
 
 --- _load(str)    -> Class
-#@todo
 
 [[m:Object#_dump]] を参照して下さい。
 
@@ -92,11 +87,12 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
 == Private Instance Methods
 
 --- inherited(subclass)     -> ()
-#@todo
 
 クラスのサブクラスが定義された時、新しく生成されたサブクラスを引数
 にインタプリタから呼び出されます。このメソッドが呼ばれるタイミングは
 クラス定義文の実行直前です。
+
+@param subclass プログラム内で新たに定義された自身のサブクラスです。
 
   class Foo
     def Foo.inherited(subclass)
@@ -109,5 +105,3 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
   
   # => class "Foo" was inherited by "Bar"
        executing class body
-
-@param subclass プログラム内で新たに定義された自身のサブクラスです。
