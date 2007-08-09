@@ -6,16 +6,16 @@ _builtin/ARGF                   kouya
 _builtin/ArgumentError          snoozer05       done
 _builtin/Array                  sheepman
 _builtin/Bignum                 ujihisa         done
-_builtin/Binding                sheepman
-_builtin/Class                  sheepman
-_builtin/Comparable             sheepman
-_builtin/Continuation           sheepman
+_builtin/Binding                sheepman        done
+_builtin/Class                  sheepman        done
+_builtin/Comparable             sheepman        done
+_builtin/Continuation           sheepman        done
 _builtin/Data                   sheepman        done
 _builtin/Dir                    sheepman
 _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
 _builtin/Enumerable             aamine
-_builtin/Exception              sheepman
+_builtin/Exception              sheepman        done
 _builtin/FalseClass             yamane          done
 _builtin/File                   sheepman
 _builtin/FileTest               sheepman
@@ -75,11 +75,11 @@ _builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError       snoozer05       done
 _builtin/Thread                 sheepman
 _builtin/ThreadError            sheepman        done
-_builtin/ThreadGroup            sheepman
+_builtin/ThreadGroup            sheepman        done
 _builtin/Time                   sheepman
 _builtin/TrueClass              yamane          done
 _builtin/TypeError              snoozer05       done
-_builtin/UnboundMethod          sheepman
+_builtin/UnboundMethod          sheepman        done
 _builtin/ZeroDivisionError      snoozer05       done
 _builtin/constants              
 _builtin/Enumerable__Enumerator
