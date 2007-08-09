@@ -64,7 +64,7 @@ IO#lines                      通常どおり
 --- open(fd, mode = "r")               -> IO
 --- open(fd, mode = "r") {|io| ... }   -> object
 #@end
-#@todo
+
 オープン済みのファイルディスクリプタ fd に対する新しい
 IO オブジェクトを生成して返します。
 
@@ -99,22 +99,21 @@ path が空ファイルの場合、何もせずに nil を返します。
 @raise Errno::EXXX path のオープンに失敗した場合、発生します。
 
 --- pipe    -> [IO]
-#@todo
 
 [[man:pipe(2)]] を実行して、相互につながった2つの
 [[c:IO]] オブジェクトを要素とする配列を返します。
 
 戻り値の配列は最初の要素が読み込み側で、次の要素が書き込み側です。
 
+@raise Errno::EXXX IO オブジェクトの作成に失敗した場合に発生します。
+
   p pipe = IO.pipe    # => [#<IO:0x401b90f8>, #<IO:0x401b7718>]
   pipe[1].puts "foo"
   p pipe[0].gets      # => "foo\n"
 
-@raise Errno::EXXX IO オブジェクトの作成に失敗した場合に発生します。
-
 --- popen(command, mode = "r")                -> IO
 --- popen(command, mode = "r") {|io| ... }    -> object
-#@todo
+
 #@since 1.9.0
 command をサブプロセスとして実行し、そのプロセスの標準入出力
 との間にパイプラインを確立します。生成したパイプを [[c:IO]] オブジェクトとして返します。
@@ -192,18 +191,11 @@ nil を返します。
 
 #@if (version >="1.8.0")
 --- read(path, length = nil, offset = 0)     -> String | nil
-#@todo
 
 path で指定されたファイルを offset 位置から
 length バイト分読み込んで返します。
 
 IO が既に EOF に達している場合は nil を返します。ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。例えば、IO.read(空ファイル) は "" を返します。
-
-  IO.read(empty_file)             #=> ""
-  IO.read(empty_file, 1)          #=> nil
-  IO.read(one_byte_file, 0, 10)   #=> ""
-  IO.read(one_byte_file, nil, 10) #=> "" 
-  IO.read(one_byte_file, 1, 10)   #=> nil
 
 [[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
@@ -215,10 +207,15 @@ IO が既に EOF に達している場合は nil を返します。ただし、length に nil か 0 が指
 
 @raise ArgumentError length が負の場合に発生します。
 
+  IO.read(empty_file)             #=> ""
+  IO.read(empty_file, 1)          #=> nil
+  IO.read(one_byte_file, 0, 10)   #=> ""
+  IO.read(one_byte_file, nil, 10) #=> "" 
+  IO.read(one_byte_file, 1, 10)   #=> nil
+
 #@end
 
 --- readlines(path, rs = $/)    -> [String]
-#@todo
 
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
@@ -232,7 +229,6 @@ IO が既に EOF に達していれば空配列 [] を返します。
 @raise Errno::EXXX path のオープン、ファイルの読み込みに失敗した場合に発生します。
 
 --- select(reads, writes = [], excepts = [], timeout = nil)    -> [[IO]] | nil
-#@todo
 
 [[man:select(2)]] を実行します。
 与えられた入力/出力/例外待ちの  IO オブジェクトの中から準備ができたものを
@@ -240,6 +236,18 @@ IO が既に EOF に達していれば空配列 [] を返します。
 タイムアウトした時には nil を返します。
 
 [[m:Kernel.#select]] と同じです。
+
+@param reads 入力待ちする [[c:IO]] オブジェクトの配列を渡します。
+
+@param writes 出力待ちする [[c:IO]] オブジェクトの配列を渡します。
+
+@param excepts 例外待ちする [[c:IO]] オブジェクトの配列を渡します。
+
+@param timeout 数値または nil を指定します。数値で指定したときの単位は秒です。nil を指定した時には IO がどれかひとつレディ状態になるまで待ち続けます。
+
+@raise IOError 与えられた IO オブジェクトが閉じられていた時に発生します。
+
+@raise Errno::EXXX [[man:select(2)]] に失敗した場合に発生します。
 
  rp, wp = IO.pipe
  mesg = "ping "
@@ -260,21 +268,8 @@ IO が既に EOF に達していれば空配列 [] を返します。
    end
  }
 
-@param reads 入力待ちする [[c:IO]] オブジェクトの配列を渡します。
-
-@param writes 出力待ちする [[c:IO]] オブジェクトの配列を渡します。
-
-@param excepts 例外待ちする [[c:IO]] オブジェクトの配列を渡します。
-
-@param timeout 数値または nil を指定します。数値で指定したときの単位は秒です。nil を指定した時には IO がどれかひとつレディ状態になるまで待ち続けます。
-
-@raise IOError 与えられた IO オブジェクトが閉じられていた時に発生します。
-
-@raise Errno::EXXX [[man:select(2)]] に失敗した場合に発生します。
-
 #@if (version >="1.8.0")
 --- sysopen(path, mode = "r", perm = 0666)     -> Integer
-#@todo
 
 path で指定されるファイルをオープンし、ファイル記述子を返しま
 す。
@@ -295,7 +290,6 @@ path で指定されるファイルをオープンし、ファイル記述子を返しま
 == Instance Methods
 
 --- <<(object)    -> self
-#@todo
 
 object を出力します。object が文字列でない時にはメソッ
 ド to_s を用いて文字列に変換します。
@@ -309,7 +303,6 @@ object を出力します。object が文字列でない時にはメソッ
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- binmode    -> self
-#@todo
 
 ストリームをバイナリモードにします。MSDOS などバイナリモードの存在
 する OS でのみ有効です。そうでない場合このメソッドは何もしません。
@@ -320,7 +313,6 @@ object を出力します。object が文字列でない時にはメソッ
 
 --- clone    -> IO
 --- dup      -> IO
-#@todo
 
 レシーバと同じ IO を参照する新しい IO オブジェクトを返します。
 参照しているファイル記述子は [[man:dup(2)]] されます。
@@ -332,7 +324,6 @@ dup は内容の等しいフリーズされていない IO を返します。
 @raise IOError 既に close されていた場合に発生します。 
 
 --- close    -> nil
-#@todo
 
 入出力ポートをクローズします。
 
@@ -347,7 +338,6 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 @raise IOError 既に close されていた場合に発生します。
 
 --- close_read    -> nil
-#@todo
 
 読み込み用の IO を close します。主にパイプや読み書き両用に作成し
 た IO オブジェクトで使用します。
@@ -357,7 +347,6 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 @raise Errno::EXXX close に失敗した場合に発生します。
 
 --- close_write    -> nil
-#@todo
 
 書き込み用の IO を close します。
 
@@ -366,13 +355,11 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 @raise Errno::EXXX close に失敗した場合に発生します。
 
 --- closed?    -> boolean
-#@todo
 
 ポートがクローズされている時に真を返します。
 
 --- each(rs = $/) {|line| ... }         -> self
 --- each_line(rs = $/) {|line| ... }    -> self
-#@todo
 
 IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として与えられたブロックを実行します。
 
@@ -383,7 +370,6 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として与えられたブロッ
 @see [[m:$/]]
 
 --- each_byte {|ch| ... }    -> self
-#@todo
 
 IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
@@ -391,14 +377,12 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行しま
 
 --- eof     -> boolean
 --- eof?    -> boolean
-#@todo
 
 ストリームがファイルの終端に達した場合、true を返します。そうでない場合、false を返します。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- fcntl(cmd, arg = 0)    -> Integer
-#@todo
 
 IOに対してシステムコール fcntl を実行します。
 機能の詳細は [[man:fcntl(2)]] を参照してください。
@@ -414,7 +398,6 @@ fcntl(2) が返した整数を返します。
 
 #@since 1.8.0
 --- fsync    -> 0 | nil
-#@todo
 
 書き込み用の IO に対して、システムコール [[man:fsync(2)]]
 を実行します。[[m:IO#flush]] を行ったあと、(OSレベルで)まだディスクに
@@ -431,14 +414,12 @@ fcntl(2) が返した整数を返します。
 
 --- fileno    -> Integer
 --- to_i      -> Integer
-#@todo
 
 ファイル記述子を表す整数を返します。
 
 @raise IOError 既に close されている場合に発生します。
 
 --- flush    -> self
-#@todo
 
 IO ポートの内部バッファをフラッシュします。
 
@@ -447,7 +428,6 @@ IO ポートの内部バッファをフラッシュします。
 @raise Errno::EXXX [[man:fflush(3)]] が失敗した場合に発生します。
 
 --- getc    -> Integer | nil
-#@todo
 
 IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 返します。EOF に到達した時には nil を返します。
@@ -455,7 +435,6 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- gets(rs = $/)    -> String | nil
-#@todo
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には nil を返します。
@@ -470,7 +449,6 @@ EOF に到達した時には nil を返します。
 @see [[m:$/]]
 
 --- ioctl(cmd, arg = 0)    -> Integer
-#@todo
 
 IO に対してシステムコール ioctl を実行し、その結果を返します。
 機能の詳細は [[man:ioctl(2)]] を参照してください。
@@ -483,17 +461,19 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 
 --- isatty    -> boolean
 --- tty?      -> boolean
-#@todo
 
 入出力ポートがttyに結合している時、真を返します。そうでない場合 false を返します。
 
 @raise IOError 既に close されている場合に発生します。
 
 --- lineno    -> Integer
-#@todo
 
 現在の行番号を整数で返します。実際には [[m:IO#gets]] が呼ばれた回数です。
 改行以外のセパレータで gets が呼ばれた場合など、実際の行番号と異なる場合があります。
+
+@raise IOError 読み込み用にオープンされていなければ発生します。
+
+@see [[m:$.]]
 
   f = File.new("testfile")
   f.lineno   #=> 0
@@ -502,14 +482,15 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
   f.gets     #=> "This is line two\n"
   f.lineno   #=> 2
 
+--- lineno=(number)
+
+現在の行番号を number にセットします。 [[m:$.]] は次回の読み込みの時に更新されます。
+
+@param number 行番号を整数で指定します。
+
 @raise IOError 読み込み用にオープンされていなければ発生します。
 
 @see [[m:$.]]
-
---- lineno=(number)
-#@todo
-
-現在の行番号を number にセットします。 [[m:$.]] は次回の読み込みの時に更新されます。
 
   f = File.new("testfile")
   f.gets                     #=> "This is line one\n"
@@ -520,14 +501,7 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
   f.gets                     #=> "This is line two\n"
   $.                         #=> 1001
 
-@param number 行番号を整数で指定します。
-
-@raise IOError 読み込み用にオープンされていなければ発生します。
-
-@see [[m:$.]]
-
 --- pid    -> Integer | nil
-#@todo
 
 自身が [[m:IO.popen]] で作られたIOポートなら、子プロセスのプロセス ID を
 返します。それ以外は nil を返します。
@@ -536,14 +510,12 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 
 --- pos    -> Integer
 --- tell   -> Integer
-#@todo
 
 ファイルポインタの現在の位置を整数で返します。
 
 @raise IOError 既に close されている場合に発生します。
 
 --- pos=(n)
-#@todo
 
 ファイルポインタを指定位置に移動します。
 [[m:IO#seek]](n, IO::SEEK_SET) と同じです。
@@ -553,7 +525,6 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 @raise IOError 既に close されている場合に発生します。
 
 --- print(*arg)    -> nil
-#@todo
 
 引数を IO ポートに順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
 
@@ -564,7 +535,6 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- printf(format, *arg)    -> nil
-#@todo
 
 C 言語の printf と同じように、format に従い引数
 を文字列に変換して、self に出力します。
@@ -580,7 +550,6 @@ C 言語の printf と同じように、format に従い引数
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- putc(ch)    -> object
-#@todo
 
 文字 ch を self に出力します。
 引数の扱いは [[m:Kernel.#putc]] と同じです。詳細はこちらを参照し
@@ -593,7 +562,6 @@ C 言語の printf と同じように、format に従い引数
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- puts(*obj)    -> nil
-#@todo
 
 各 obj を self に出力した後、改行します。
 引数の扱いは [[m:Kernel.#puts]] と同じです。詳細はこちらを参照し
@@ -610,7 +578,6 @@ C 言語の printf と同じように、format に従い引数
 #@else
 --- read(length = nil)            -> String | nil
 #@end
-#@todo
 
 length バイト読み込んで、その文字列を返します。
 
@@ -646,7 +613,6 @@ IO が既に EOF に達していれば nil を返します。
 @raise ArgumentError length が負の場合に発生します。
 
 --- readchar    -> Integer
-#@todo
 
 [[m:IO#getc]] と同様に 1 文字読み込んで、その文字に対応す
 る [[c:Fixnum]] を返します。
@@ -656,7 +622,6 @@ IO が既に EOF に達していれば nil を返します。
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- readline(rs = $/)    -> String
-#@todo
 
 [[m:IO#gets]] と同様に 1 行読み込みその文字列を返します。
 
@@ -672,7 +637,6 @@ readline は gets 同様読み込んだ文字列を変数 [[m:$_]]
 @see [[m:$/]]
 
 --- readlines(rs = $/)    -> [String]
-#@todo
 
 データを全て読み込んで、その各行を要素としてもつ配列を返します。
 IO が既に EOF に達していれば空配列 [] を返します。
@@ -685,7 +649,6 @@ IO が既に EOF に達していれば空配列 [] を返します。
 
 #@since 1.8.5
 --- read_nonblock(maxlen, outbuf = "")    -> String
-#@todo
 
 IO をノンブロッキングモードに設定し、
 その後で [[man:read(2)]] システムコールにより
@@ -710,7 +673,6 @@ IO が既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定さ
 
 #@since 1.8.3
 --- readpartial(maxlen, outbuf = "")    -> String
-#@todo
 
 IO から長さ maxlen を上限として読み込み、文字列として返します。
 即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちます。
@@ -770,7 +732,7 @@ readpartial の結果は以下のようになります。
 #@end
 
 --- reopen(io)                   -> self
-#@todo
+
 自身を io に繋ぎ換えます。クラスも io に等しくなることに
 注意してください。
 
@@ -778,7 +740,6 @@ readpartial の結果は以下のようになります。
 
 --- reopen(path)                 -> self
 --- reopen(path, mode)     -> self
-#@todo
 
 path で指定されたファイルにストリームを繋ぎ換えます。
 
@@ -789,14 +750,12 @@ path で指定されたファイルにストリームを繋ぎ換えます。
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- rewind    -> 0
-#@todo
 
 ファイルポインタを先頭に移動します。[[m:IO#lineno]] は 0 になります。
 
 @raise IOError 既に close されている場合に発生します。
 
 --- seek(offset, whence = IO::SEEK_SET)    -> 0
-#@todo
 
 ファイルポインタを whence の位置から offset だけ移動させます。
 offset 位置への移動が成功すれば 0 を返します。
@@ -812,7 +771,6 @@ offset 位置への移動が成功すれば 0 を返します。
 @raise IOError 既に close されていた場合に発生します。 
 
 --- stat    -> File::Stat
-#@todo
 
 ファイルのステータスを含む [[c:File::Stat]] オブジェクトを生成して
 
@@ -824,7 +782,6 @@ offset 位置への移動が成功すれば 0 を返します。
 
 --- sync    -> boolean
 --- sync=(newstate)
-#@todo
 
 現在の出力が同期モードならば true を返します。そうでない場合は false を返します。
 自身を同期モードに設定すると、出力関数の呼出毎にバッファがフラッシュされます。
@@ -838,7 +795,6 @@ offset 位置への移動が成功すれば 0 を返します。
 #@else
 --- sysread(maxlen)           -> String
 #@end
-#@todo
 
 [[man:read(2)]] を用いて入力を行ない、入力されたデータを
 含む文字列を返します。stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
@@ -876,7 +832,6 @@ outbuf は空文字列になります。
 
 #@if (version >="1.8.0")
 --- sysseek(offset, whence = IO::SEEK_SET)    -> Integer
-#@todo
 
 [[man:lseek(2)]] と同じです。[[m:IO#seek]] では、
 [[m:IO#sysread]], [[m:IO#syswrite]] と併用すると正しく動作しないので代わりにこのメソッドを使います。
@@ -907,7 +862,6 @@ outbuf は空文字列になります。
 #@end
 
 --- syswrite(string)    -> Integer    
-#@todo
 
 [[man:write(2)]] を用いて string を出力します。
 string が文字列でなければ to_s による文字列化を試みます。
@@ -923,12 +877,10 @@ stdio を経由しないので他の出力メソッドと混用すると思わぬ動作
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 --- to_io    -> self
-#@todo
 
 self を返します。
 
 --- ungetc(char)     -> nil
-#@todo
 
 char を読み戻します。2バイト以上の読み戻しは保証されません。
 
@@ -942,7 +894,6 @@ char を読み戻します。2バイト以上の読み戻しは保証されません。
   f.getc                     #=> 84
    
 --- write(str)     -> Integer
-#@todo
 
 IOポートに対して str を出力します。str が文字列でなけ
 れば to_s による文字列化を試みます。
@@ -965,7 +916,6 @@ IOポートに対して str を出力します。str が文字列でなけ
 
 #@if (version >= "1.8.5")
 --- write_nonblock(string)    -> Integer
-#@todo
 
 IO をノンブロッキングモードに設定し、string を [[man:write(2)]] システムコールで書き出します。
 write(2) が成功した場合、書き込んだ長さを返します。
@@ -1001,12 +951,13 @@ Returns an enumerator that gives each line in the string.
 == Constants
 
 --- SEEK_CUR
-#@todo
+
+[[m:IO#seek]] を参照してください。
 
 --- SEEK_END
-#@todo
+
+[[m:IO#seek]] を参照してください。
 
 --- SEEK_SET
-#@todo
 
 [[m:IO#seek]] を参照してください。
