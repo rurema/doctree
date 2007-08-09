@@ -260,12 +260,10 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
 == Instance Methods
 
 --- +@    -> self
-#@todo
 
 self を返します。
 
 --- -@    -> Numeric
-#@todo
 
 self の符号を反転させたものを返します。
 
@@ -279,12 +277,10 @@ self の符号を反転させたものを返します。
 #@#結合法則が成り立つことを仮定して other == self の結果を返します。
 
 --- abs    -> Numeric
-#@todo
 
 自身が 0 以上ならば self を、そうでない場合は -self を返します。
 
 --- ceil   -> Integer
-#@todo
 
 自身と等しいかより大きな整数のうち最小のものを返します。
 
@@ -296,7 +292,6 @@ self の符号を反転させたものを返します。
      (-1.5).ceil   #=> -1
 
 --- floor   -> Integer
-#@todo
 
 自身と等しいかより小さな整数のうち最大のものを返します。
 
@@ -308,7 +303,6 @@ self の符号を反転させたものを返します。
      (-1.5).floor   #=> -2
 
 --- round   -> Integer
-#@todo
 
 自身ともっとも近い整数を返します。
 
@@ -321,7 +315,6 @@ self の符号を反転させたものを返します。
      (-1.5).round   #=> -2
 
 --- truncate   -> Integer
-#@todo
 
 自身と 0 との間にある整数で、自身にもっとも近い整数を返します。
 
@@ -332,7 +325,6 @@ self の符号を反転させたものを返します。
 
 --- clone
 --- dup
-#@todo
 
 #@since 1.8.0
 このメソッドを呼び出すことはできません。呼び出すと例外が発生します。
@@ -403,11 +395,11 @@ divmod が返す商は [[m:Numeric#div]] と同じです。
 このメソッドは、メソッド / と % によって定義されています。
 
 --- integer?    -> boolean
-#@todo
 
 self が整数の時、真を返します。そうでない場合に false を返します。
 
 --- modulo(other)    -> Numeric
+
 self を other で割った余り r を返します。
 
 ここで、商 q と余り r は、それぞれ
@@ -453,17 +445,14 @@ self を other で割った余り r を返します。
   p (-13).remainder(-4)  #=> -1
 
 --- nonzero?    -> nil | self
-#@todo
 
 自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
 --- to_int    -> Integer
-#@todo
 
 self.to_i と同じです。
 
 --- zero?    -> boolean
-#@todo
 
 自身がゼロの時、真を返します。そうでない場合は false を返します。
 
