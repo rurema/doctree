@@ -145,7 +145,6 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 処理対象のファイルをクローズします。
 次回の読み込みは次の引数が処理対象になります。
-
 self を返します。
 
   # カレントディレクトリから適当にファイルを選ぶ
@@ -166,7 +165,7 @@ self を返します。
 [[m:IO#binmode]]を参照
 
 --- close -> self
-処理対象のファイルをクローズします。
+処理対象のファイルをクローズします。開くファイルが残っている場合は次のファイルをオープンします
 
   # カレントディレクトリから適当にファイルを選ぶ
   ARGV.replace(
@@ -197,7 +196,7 @@ self を返します。
   #=> "ARGF had been closed."
 
 --- closed? -> boolean
-[[m:IO#closed?]]を参照
+ARGFがcloseされていればtrueを返します。
 
   # カレントディレクトリから適当にファイルを選ぶ
   ARGV.replace(
@@ -227,15 +226,36 @@ self を返します。
   #=> "ARGF is closed."
   #=> "ARGF had been closed."
 
---- each -> self
---- each_line -> self
+@see [[m:IO#closed?]]
 
+--- each(rs = $/) {|line| ... } -> self
+--- each_line(rs = $/) {|line| ... } -> self
 ARGFの現在位置から一行ずつ文字列として読み込みます。
-[[m:IO#each]], [[m:IO#each_line]]を参照
+
+@param rs 区切り文字を指定する
+
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each_line {|line|
+    line.chomp!
+    printf("'%s' in %s\n", line, ARGF.filename)
+  }
+  #例
+  #=> '--- !ruby/object:Dog ' in ugo.yaml
+  #=> 'name: pochi' in ugo.yaml
+  #=> '--- ' in ugo.yaml
+  #=> ':age: 17' in ugo.yaml
+  #=> ':color: white' in ugo.yaml
+  #=> '--- ' in ugo.yaml
+  #=> '- Chiba' in ugo.yaml
+  #=> '- Saitama' in ugo.yaml
+
+
+@see [[m:IO#each]], [[m:IO#each_line]], 
 
 --- each_byte{|char| ...} -> self
 ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
-[[m:IO#each_byte]]を参照
 
   # カレントディレクトリから適当にファイルを選ぶ
   ARGV.replace(
@@ -257,9 +277,43 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
   #=>  10 <->
   #...
 
+@see [[m:IO#each_byte]]
+
 --- eof -> boolean
 --- eof? -> boolean
-#@todo
+現在開いているファイルがeofに達したらtrueを返します。そうでない場合はfalseを返します。
+
+@raise IOError ファイルがopenされていない場合
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  n = 0
+  ARGF.each_line {|line|
+    n += 1
+    if ARGF.eof
+      printf("eof. %s has %d(%d) line\n", ARGF.filename, n, ARGF.lineno)
+      n = 0
+    end
+  }
+  begin
+    if ARGF.eof?
+      printf("%s is eof\n", ARGF.filename)
+    end
+  rescue IOError
+    print "IOError !!\n"
+  end
+
+  #=> 例
+  #=> eof. sample.yaml has 13(13) line
+  #=> eof. test.rb has 159(172) line
+  #=> eof. test.rb~ has 159(331) line
+  #=> eof. third.txt has 1(332) line
+  #=> eof. ugo.yaml has 8(340) line
+  #=> IOError !!
+
+@see [[m:IO#eof]], [[m:IO#eof?]]
 
 --- fileno -> Integer
 --- to_i -> Integer
