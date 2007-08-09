@@ -29,20 +29,19 @@ include Enumerable
   "baz"
 
 @param pattern パターンを文字列で指定します。
-パターンを "\0" で区切って 1 度に複数のパターンを指定することもで
-きます。
+               パターンを "\0" で区切って 1 度に複数のパターンを指定することもで
+               きます。
 #@since 1.8.0
-パターンの区切りには "\0" のみ指定できます。
+               パターンの区切りには "\0" のみ指定できます。
 #@else
-パターンの区切りには "\0" 以外に、空白類(スペース、タブ、改行)でパターンを複数指定できます。
+               パターンの区切りには "\0" 以外に、空白類(スペース、タブ、改行)でパターンを複数指定できます。
 #@end
 #@since 1.9.0
-配列を指定することで複数のパターンを指定できます。
+               配列を指定することで複数のパターンを指定できます。
 #@end
 
   p Dir.glob("f*\0b*")
   => ["foo", "bar"]
-
 #@since 1.9.0
   p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
   p Dir["f*", "b*"]        # => ["foo", "bar"]
@@ -96,7 +95,7 @@ include Enumerable
 --- chdir {|path| ... }          -> object
 --- chdir(path) {|path| ... }    -> object
 #@end
-#@todo
+
 カレントディレクトリを path に変更します。
 path を省略した場合、環境変数 HOME または LOGDIR
 が設定されていればそのディレクトリに移動します。
@@ -112,7 +111,6 @@ path を省略した場合、環境変数 HOME または LOGDIR
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- chroot(path)    -> 0
-#@todo
 
 ルートディレクトリを path に変更します。
 [[man:chroot(2)]] を参照のこと。スーパーユーザだけがルー
@@ -126,7 +124,6 @@ path を省略した場合、環境変数 HOME または LOGDIR
 --- delete(path)    -> 0
 --- rmdir(path)     -> 0
 --- unlink(path)    -> 0
-#@todo
 
 ディレクトリを削除します。ディレクトリは空でなければいけませ
 ん。ディレクトリの削除に成功すれば 0 を返します。
@@ -136,21 +133,23 @@ path を省略した場合、環境変数 HOME または LOGDIR
 @raise Errno::EXXX 失敗した場合に発生します。
 
 --- entries(path)    -> [String]
-#@todo
 
 ディレクトリ path に含まれるファイルエントリ名の
 配列を返します。
-
-  Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
 @param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+  Dir.entries('.') #=> [".", "..", "bar", "foo"]
+
 --- foreach(path) {|file| ...}    -> nil
-#@todo
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
+
+@param path ディレクトリのパスを文字列で指定します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
 
   Dir.foreach('.'){|f|
     p f
@@ -161,20 +160,14 @@ path を省略した場合、環境変数 HOME または LOGDIR
   "bar"
   "foo"
 
-@param path ディレクトリのパスを文字列で指定します。
-
-@raise Errno::EXXX 失敗した場合に発生します。
-
 --- getwd    -> String
 --- pwd      -> String
-#@todo
 
 カレントディレクトリのフルパスを文字列で返します。
 
 @raise Errno::EXXX カレントディレクトリの取得に失敗した場合に発生します(が、普通は失敗することはありません)。
 
 --- mkdir(path, mode = 0777)    -> 0
-#@todo
 
 path で指定された新しいディレクトリを作ります。パーミッションは
 mode で指定された値に umask をかけた値 (mode & ~umask) になります。
@@ -194,7 +187,7 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になります。
 #@else
 --- open(path) {|dir| ...}  -> nil
 #@end
-#@todo
+
 path に対するディレクトリストリームをオープンして返します。
 
 ブロックを指定して呼び出した場合は、ディレクトリストリームを
@@ -211,7 +204,6 @@ path に対するディレクトリストリームをオープンして返します。
 == Instance Methods
 
 --- close    -> nil
-#@todo
 
 ディレクトリストリームをクローズします。以降のディレクトリに
 対する操作は例外 [[c:IOError]] を発生させます。
@@ -220,8 +212,10 @@ path に対するディレクトリストリームをオープンして返します。
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
 
 --- each {|item| ... }    -> self
-#@todo
+
 ディレクトリの各エントリを表す文字列を引数として、ブロックを評価します。
+
+@raise IOError 既に自身が close している場合に発生します。
 
   Dir.open('.').each{|f|
     p f
@@ -232,11 +226,8 @@ path に対するディレクトリストリームをオープンして返します。
   "bar"
   "foo"
 
-@raise IOError 既に自身が close している場合に発生します。
-
 #@since 1.8.0
 --- path    -> String
-#@todo
 
 オープンしているディレクトリのパス名を文字列で返します。
 
@@ -245,17 +236,16 @@ path に対するディレクトリストリームをオープンして返します。
 
 --- pos     -> Integer
 --- tell    -> Integer
-#@todo
 
 ディレクトリストリームの現在の位置を整数で返します。
+
+@raise IOError 既に自身が close している場合に発生します。
 
   Dir.open("/tmp") {|d|
     d.each {|f|
       p d.pos
     }
   }
-
-@raise IOError 既に自身が close している場合に発生します。
 
 --- pos=(pos)
 --- seek(pos)    -> self
@@ -265,6 +255,10 @@ path に対するディレクトリストリームをオープンして返します。
 pos は [[m:Dir#tell]] で与えられた値でなければなりま
 せん。
 
+@param pos 変更したい位置を整数で与えます。
+
+@raise IOError 既に自身が close している場合に発生します。
+
    d = Dir.new("testdir")   #=> #<Dir:0x401b3c40>
    d.read                   #=> "."
    i = d.tell               #=> 12
@@ -272,12 +266,7 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
    d.seek(i)                #=> #<Dir:0x401b3c40>
    d.read                   #=> ".."
 
-@param pos 変更したい位置を整数で与えます。
-
-@raise IOError 既に自身が close している場合に発生します。
-
 --- read    -> String | nil
-#@todo
 
 ディレクトリストリームから次の要素を読み出して返します。最後の要素
 まで読み出していれば nil を返します。
@@ -287,13 +276,12 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 @raise IOError 既に自身が close している場合に発生します。
 
 --- rewind    -> self
-#@todo
 
 ディレクトリストリームの読み込み位置を先頭に移動させます。
+
+@raise IOError 既に自身が close している場合に発生します。
 
    d = Dir.new("testdir")
    d.read     #=> "."
    d.rewind   #=> #<Dir:0x401b3fb0>
    d.read     #=> "."
-
-@raise IOError 既に自身が close している場合に発生します。
