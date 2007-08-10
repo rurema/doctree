@@ -371,9 +371,8 @@ priority を引き継ぎます。
 #@end
 
 --- raise(error_type, message, traceback)     -> ()
-#@todo
 
-そのスレッドで強制的に例外を発生させます。
+自身が表すスレッドで強制的に例外を発生させます。
 
 @param error_type [[m:Kernel.#raise]] を参照してください。
 
