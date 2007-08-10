@@ -13,7 +13,6 @@ include Enumerable
 --- glob(pattern)                       -> [String]
 --- glob(pattern) {|file| ...}          -> nil
 #@end
-#@todo
 
 ワイルドカードの展開を行った結果を文字列の配列として返します。
 パターンにマッチするファイルがない場合は空の配列を返します。
@@ -85,7 +84,7 @@ include Enumerable
 
 #@since 1.8.0
 @param flags [[m:File.fnmatch]] に指定できるフラグと同様のフラグを指定できます。
-このフラグを指定することでマッチの挙動を変更することができます。
+             このフラグを指定することでマッチの挙動を変更することができます。
 #@end
   Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 
@@ -249,7 +248,6 @@ path に対するディレクトリストリームをオープンして返します。
 
 --- pos=(pos)
 --- seek(pos)    -> self
-#@todo
 
 ディレクトリストリームの読み込み位置を pos に移動させます。
 pos は [[m:Dir#tell]] で与えられた値でなければなりま
