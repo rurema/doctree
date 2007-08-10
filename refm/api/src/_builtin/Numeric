@@ -535,6 +535,9 @@ self からはじめ step を足しながら limit を越える
 #@end
 
 #@since 1.8.0
+--- fdiv(other)
+#@todo
+
 --- <=>(other) -> 0 | nil
 
 自身と other が等しい場合に 0 を返します。そうでない場合に nil を返します。
