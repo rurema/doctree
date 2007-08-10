@@ -5,8 +5,14 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
 メソッドを使うことによって異なる数値クラス間で演算を行うことができます。
 
 演算や比較を行うメソッド(+, -, *, /, <=>)などはサブクラスで定義されま
-す。また、効率のため Numeric のメソッドと同じメソッドがサブクラ
-スで再定義されている場合があります。
+す。Numeric で定義されているメソッドは、サブクラスで提供されているメソッド
+(+, -, *, /, %) を利用して定義されることがほとんどです。
+
+つまり Numeric で定義されているメソッドは、Numeric のサブクラスとして新たに数値クラスを定義した時に、
+演算メソッド(+, -, *, /, %, <=>, coerce)だけを定義すれば、数値クラスのそのほかのメソッドが
+適切に定義されることを意図して提供されています。
+
+効率のため Numeric のメソッドと同じメソッドがサブクラスで再定義されている場合があります。
 
 === 数値関連のメソッドを実際に定義しているクラス一覧
 
@@ -171,7 +177,7 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
                       ~ |     -          -          o          o          -       
 #@end
 
-=== 丸めメソッドのまとめ
+=== 丸めメソッドの動作のまとめ
 
 #@#         numbers=[1.9, 1.1, -1.1, -1.9]
 #@#         methods=%w(ceil floor round truncate)
@@ -186,13 +192,19 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
 #@#           printf(fmt, n,
 #@#                  *methods.collect {|m| sprintf("%s", n.send(m))})
 #@#         }
-        
+
+[[m:Numeric#ceil]], [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
+のふるまいの違いを表にしました。左の数に対して各メソッドを呼ぶと表のような数を
+返します。
+
               |       ceil      floor      round   truncate
         ----------------------------------------------------
           1.9 |          2          1          2          1
           1.1 |          2          1          1          1
          -1.1 |         -1         -2         -1         -1
          -1.9 |         -1         -2         -2         -1
+
+=== 丸めメソッドの拡張例
 
 切上げはceil, floor を使用して以下のように定義できます。
 
@@ -345,7 +357,7 @@ number の型を自分と直接演算できる型に変換して
 います。
 
 --- div(other)    -> Integer
-#@todo
+
 self を other で割った整数の商 q を返します。
 
 ここで、商 q と余り r は、それぞれ
@@ -356,17 +368,21 @@ self を other で割った整数の商 q を返します。
   * other < 0 のとき:  other <  r <= 0
   * q は整数
 をみたす数です。
-
 商に対応する余りは [[m:Numeric#modulo]] で求められます。
+div はメソッド / の呼び出しとして定義されています。
+
+@param other 自身を割る数を指定します。
 
   p 3.div(2) # => 1
   p (-3).div(2) # => -2
   p (-3.0).div(2) # => -2
 
 --- quo(other)    -> Float | Rational
-#@todo
 
 self を other で割った実数の商を返します。
+メソッド / の呼び出しとして定義されています。
+
+@param other 自身を割る数を指定します。
 
   p 1.quo(3)      # => 0.3333333333333333
   
@@ -374,7 +390,6 @@ self を other で割った実数の商を返します。
   p 1.quo(3)      # => Rational(1, 3)
 
 --- divmod(other)    -> [Numeric]
-#@todo
 
 self を other で割った商 q と余り r を、
 [q, r] という 2 要素の配列にして返します。
@@ -388,11 +403,17 @@ self を other で割った商 q と余り r を、
   * other < 0 のとき:  other <  r <= 0
   * q は整数
 をみたす数です。
-
 divmod が返す商は [[m:Numeric#div]] と同じです。
-また余りは、[[m:Numeric#modulo]] (つまり、%)と同じです。
-
+また余りは、[[m:Numeric#modulo]] と同じです。
 このメソッドは、メソッド / と % によって定義されています。
+
+@param other 自身を割る数を指定します。
+
+   11.divmod(3)         #=> [3, 2]
+   11.divmod(-3)        #=> [-4, -1]
+   11.divmod(3.5)       #=> [3, 0.5]
+   (-11).divmod(3.5)    #=> [-4, 3.0]
+   (11.5).divmod(3.5)   #=> [3, 1.0]
 
 --- integer?    -> boolean
 
@@ -415,6 +436,8 @@ self を other で割った余り r を返します。
 商  q は、[[m:Numeric#div]] (あるいは Integer#/)で求められます。
 modulo はメソッド % の呼び出しとして定義されています。
 
+@param other 自身を割る数を指定します。
+
   p 13.modulo(4)      #=>  1
   p 13.modulo(-4)     #=> -3
   p (-13).modulo(4)   #=>  3
@@ -423,7 +446,6 @@ modulo はメソッド % の呼び出しとして定義されています。
 @see [[m:Numeric#divmod]]
 
 --- remainder(other)    -> Numeric
-#@todo
 
 self を other で割った余り r を返します。
 
@@ -438,6 +460,8 @@ self を other で割った余り r を返します。
 
 をみたす数です。r の符号は self と同じになります。
 商 q を直接返すメソッドはありません。self.quo(other).truncate がそれに相当します。
+
+@param other 自身を割る数を指定します。
 
   p 13.remainder(4)      #=>  1
   p 13.remainder(-4)     #=>  1
@@ -456,29 +480,43 @@ self.to_i と同じです。
 
 自身がゼロの時、真を返します。そうでない場合は false を返します。
 
---- step(limit) {|n| ... }
---- step(limit, step) {|n| ... }
-#@todo
+#@since 1.8.0
+--- step(limit, step = 1) {|n| ... }    -> self
 
 self からはじめ step を足しながら limit を越える
-前までブロックを繰り返します。step は負の数も指定できます(省
-略時は 1)。また、limit や step には [[c:Float]] なども
+前までブロックを繰り返します。step は負の数も指定できます。また、limit や step には [[c:Float]] なども
 指定できます。
 
-step に 0 を指定した場合は例外 [[c:ArgumentError]] が発生します。
+@param limit ループの上限あるいは下限を数値で指定します。step に負の数が指定された場合は、
+       下限として解釈されます。
 
-self を返します。
+@param step 各ステップの大きさを数値で指定します。負の数を指定することもできます。
 
-#@since 1.8.0
-このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
-た。これにより [[c:Float]] も step できるようになりました。
+@raise ArgumentError step に 0 を指定した場合に発生します。
 
-    1.1.step(1.5, 0.1) {|n| p n}
-    => 1.1
-       1.2
-       1.3
-       1.4
-       1.5
+#@#このメソッドは、[[c:Fixnum]], [[c:Integer]] から移動しまし
+#@#た。これにより [[c:Float]] も step できるようになりました。
+
+  2.step(5){|n| p n}
+  2
+  3
+  4
+  5
+  
+  1.1.step(1.5, 0.1) {|n| p n}
+  => 1.1
+     1.2
+     1.3
+     1.4
+     1.5
+  
+  10.step(6, -1){|n| p n}
+  10
+  9
+  8
+  7
+  6
+
 
 注：浮動小数点数の 0.1 は 2進数では正確な表現ができない(2進数で
 0.1は 0.00011001100....となる)ので、以下のようなループでは誤差が
@@ -497,14 +535,21 @@ self を返します。
 #@end
 
 #@since 1.8.0
---- <=> other
-#@todo
-#@# -> 0 or nil
+--- <=>(other) -> 0 | nil
 
-Returns zero if num equals other, nil otherwise.
+自身と other が等しい場合に 0 を返します。そうでない場合に nil を返します。
+サブクラスで再定義されることを意図しています。
 
---- eql?
-#@todo
+@param other 自身と比較したい数値を指定します。
+
+--- eql?(other) -> boolean
+
+自身と other のクラスが等しくかつ数値としても等しい場合に true を返します。
+そうでない場合に flase を返します。
+
+@param other 自身と比較したい数値を指定します。
+
+@see [[m:Object#equal?]], [[m:Object#eql?]], [[m:Object#==]], [[m:Object#===]]
 
 #@end
 
