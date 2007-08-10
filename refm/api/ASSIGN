@@ -11,7 +11,7 @@ _builtin/Class                  sheepman        done
 _builtin/Comparable             sheepman        done
 _builtin/Continuation           sheepman        done
 _builtin/Data                   sheepman        done
-_builtin/Dir                    sheepman
+_builtin/Dir                    sheepman        done
 _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
 _builtin/Enumerable             aamine
