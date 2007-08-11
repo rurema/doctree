@@ -317,13 +317,68 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
 
 --- fileno -> Integer
 --- to_i -> Integer
-#@todo
+現在オープンしているファイルのファイル記述子を表す整数を返します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+  ARGF.each_line {|line|
+    p [ ARGF.to_i, ARGF.filename ]
+    ARGF.skip
+  }
+  begin
+    p [ ARGF.to_i, ARGF.filename ]
+  rescue ArgumentError
+    print "ArgumentError\n"
+  end
+  #例
+  #=> [3, "sample.yaml"]
+  #=> [3, "test.rb"]
+  #=> [3, "test.rb~"]
+  #=> [3, "third.txt"]
+  #=> [3, "ugo.yaml"]
+  #=> ArgumentError
+
+@raise ArgumentError
 
 --- getc -> Integer | nil
-#@todo
+ARGFから 1 文字読み込んで、その文字に対応する Fixnum を返します。EOF に到達した時には nil を返します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+
+  while c = ARGF.getc
+    printf("%d,%c.\n", c, c)
+  end
+  #例
+  #=> 45,-.
+  #=> 32, .
+  #=> 67,C.
+  #=> 104,h.
+  #=> 105,i.
+  #=> 98,b.
+  #=> 97,a.
+  #=> 10,
+  #=> .
+  #...
 
 --- gets -> String | nil
-#@todo
+ARGFの現在位置から一行ずつ文字列として読み込みます。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+
+  while line = gets
+    line.chomp!
+    printf("%s\n", line)
+  end
+
+@see [[m:Kernel.gets]]
 
 --- pos -> Integer
 --- tell -> Integer
