@@ -961,7 +961,7 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 
    "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
 
---- lines(rs = $/)    -> Enumerator
+--- lines(rs = $/)    -> Enumerable::Enumerator
 
 自身を 1 行ずつイテレートするような
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
