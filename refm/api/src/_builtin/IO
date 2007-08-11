@@ -76,15 +76,17 @@ IO オブジェクトを生成して返します。
 @param fd ファイルディスクリプタである整数を指定します。
 
 #@since 1.8.0
-@param mode [[m:File.open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照してください。
+@param mode [[m:File.open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの
+            定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照
+            してください。
 #@else
-@param mode [[m:File.open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。詳細は組み込み関数[[m:Kernel.#open]]を参照してください。
+@param mode [[m:File.open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。
+            詳細は組み込み関数[[m:Kernel.#open]]を参照してください。
 #@end
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
-#@todo
 
 path で指定されたファイルの各行に対して繰り返します。
 path のオープンに成功すれば nil を返します。
@@ -94,9 +96,12 @@ path が空ファイルの場合、何もせずに nil を返します。
 
 @param path ファイル名を表す文字列か "|コマンド名" を指定します。
 
-@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 @raise Errno::EXXX path のオープンに失敗した場合、発生します。
+
+@see [[m:$/]]
 
 --- pipe    -> [IO]
 
@@ -379,6 +384,26 @@ IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行しま
 --- eof?    -> boolean
 
 ストリームがファイルの終端に達した場合、true を返します。そうでない場合、false を返します。
+
+   f = File.new("testfile")
+   dummy = f.readlines
+   f.eof   #=> true
+
+自身がパイプやソケットなどのストリームであった場合、相手がデータを送るか close するまでブロックします。
+
+   r, w = IO.pipe
+   Thread.new { sleep 10; w.close }
+   r.eof?  #=> 10秒ブロックしてから true を返す。
+
+   r, w = IO.pipe
+   Thread.new { sleep 10; w.puts "a" }
+   r.eof?  #=> 10秒ブロックしてから true を返す。
+
+   r, w = IO.pipe
+   r.eof?  # 永久にブロックします。
+
+eof, eof? は入力バッファにデータを読み込むので、[[m:IO#sysread]] と同時に使うと正常に
+動作しません。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -929,22 +954,25 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 #@end
 
 #@since 1.9.0
---- bytes    -> Enumerator
-#@todo
+--- bytes    -> Enumerable::Enumerator
 
-Returns an enumerator that gives each byte in the string.
+自身を 1 バイトずつ整数としてイテレートするような
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
 
    "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
 
---- lines(separator=$/)    -> Enumerator
-#@todo
+--- lines(rs = $/)    -> Enumerator
 
-Returns an enumerator that gives each line in the string.
+自身を 1 行ずつイテレートするような
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+
+@see [[m:$/]]
 
    "foo\nbar\n".lines.to_a   #=> ["foo\n", "bar\n"]
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
-
-@see [[m:$/]]
 
 #@end
 
