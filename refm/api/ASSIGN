@@ -45,7 +45,7 @@ _builtin/NilClass               snoozer05       done
 _builtin/NoMemoryError          snoozer05       done
 _builtin/NoMethodError          snoozer05       done
 _builtin/NotImplementedError    snoozer05       done
-_builtin/Numeric                sheepman
+_builtin/Numeric                sheepman        done
 _builtin/Object                 aamine
 _builtin/ObjectSpace            sheepman
 _builtin/Precision              snoozer05       done
