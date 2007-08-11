@@ -73,7 +73,7 @@ _builtin/SyntaxError            snoozer05       done
 _builtin/SystemCallError
 _builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError       snoozer05       done
-_builtin/Thread                 sheepman
+_builtin/Thread                 sheepman        done
 _builtin/ThreadError            sheepman        done
 _builtin/ThreadGroup            sheepman        done
 _builtin/Time                   sheepman
