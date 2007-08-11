@@ -281,12 +281,16 @@ self の符号を反転させたものを返します。
 
 このメソッドは、二項演算子 - で 0 - self によって定義されています。
 
-#@#--- ==(other)    -> boolean
-#@##@todo
-#@#
-#@#self と other の値が等しいときに true、等しくないときに false を返します。
-#@#other が Numeric で比較できないオブジェクトの場合、
-#@#結合法則が成り立つことを仮定して other == self の結果を返します。
+#@if (version < "1.8.0")
+--- ==(other)    -> boolean
+
+self と other の値が等しいときに true、等しくないときに false を返します。
+other が Numeric で比較できないオブジェクトの場合、
+結合法則が成り立つことを仮定して other == self の結果を返します。
+
+@param other 自身と比較したい数値を指定します。
+
+#@end
 
 --- abs    -> Numeric
 
@@ -347,14 +351,44 @@ self の符号を反転させたものを返します。
 self を返します。
 #@end
 
---- coerce(number)    -> Numeric
-#@todo
+--- coerce(other)    -> [Numeric]
 
-number の型を自分と直接演算できる型に変換して
-[number, self] という配列に格納して返します。数値クラ
-スの算術演算子は通常自分と演算できないクラスをオペランドとして受け
-取ると coerce を使って自分とオペランドを変換した上で演算を行
-います。
+自身と other が同じクラスになるよう、自身か other を変換し [other, self] という配列にして返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しないといけません。
+以下は [[c:Rational]] の coerce のソースです。other が自身の知らない数値クラスであった場合、
+super を呼んでいることに注意して下さい。
+
+  def coerce(other)
+    if other.kind_of?(Float)
+      return other, self.to_f
+    elsif other.kind_of?(Integer)
+      return Rational.new!(other, 1), self
+    else
+      super
+    end
+  end
+
+数値クラスの算術演算子は通常自分と演算できないクラスをオペランドとして受け
+取ると coerce を使って自分とオペランドを変換した上で演算を行います。
+以下は [[c:Rational]] の + メソッドを一部省略したものです。
+引数が自身の知らない数値クラスである場合、引数の coerce により自身を変換してから
++ 演算子を呼んでいます。
+
+  def + (a)
+    if a.kind_of?(Rational)
+                                # skip
+    elsif a.kind_of?(Integer)
+                                # skip
+    elsif a.kind_of?(Float)
+      Float(self) + a
+    else
+      x, y = a.coerce(self)
+      x + y
+    end
+  end
+
+@param other オペランドを数値で指定します。
 
 --- div(other)    -> Integer
 
@@ -377,7 +411,11 @@ div はメソッド / の呼び出しとして定義されています。
   p (-3).div(2) # => -2
   p (-3.0).div(2) # => -2
 
+
 --- quo(other)    -> Float | Rational
+#@since 1.8.0
+--- fdiv(other)   -> Float | Rational
+#@end
 
 self を other で割った実数の商を返します。
 メソッド / の呼び出しとして定義されています。
@@ -418,6 +456,8 @@ divmod が返す商は [[m:Numeric#div]] と同じです。
 --- integer?    -> boolean
 
 self が整数の時、真を返します。そうでない場合に false を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しないといけません。
 
 --- modulo(other)    -> Numeric
 
@@ -535,20 +575,27 @@ self からはじめ step を足しながら limit を越える
 #@end
 
 #@since 1.8.0
---- fdiv(other)
-#@todo
 
---- <=>(other) -> 0 | nil
+--- <=>(other) -> nil | -1 | 0 | 1
 
-自身と other が等しい場合に 0 を返します。そうでない場合に nil を返します。
-サブクラスで再定義されることを意図しています。
+自身が other より大きい場合に 1 を、等しい場合に 0 を、小さい場合には -1 をそれぞれ返します。
+自身と other が比較できない場合には nil を返します。
+
+Numeric のサブクラスは、上の動作を満たすよう このメソッドを適切に再定義しないといけません。
 
 @param other 自身と比較したい数値を指定します。
+
+ 1 <=> 0   #=> 1
+ 1 <=> 1   #=> 0
+ 1 <=> 2   #=> -1
+ 1 <=> "0" #=> nil
 
 --- eql?(other) -> boolean
 
 自身と other のクラスが等しくかつ数値としても等しい場合に true を返します。
 そうでない場合に flase を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しないといけません。
 
 @param other 自身と比較したい数値を指定します。
 
@@ -558,7 +605,10 @@ self からはじめ step を足しながら limit を越える
 
 #@since 1.9.0
 
---- scalar?
-#@todo
+--- scalar?    -> boolean
+
+自身がスカラーである場合に true を返します。そうでない場合に false を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しないといけません。
 
 #@end
