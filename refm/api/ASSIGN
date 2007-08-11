@@ -22,7 +22,7 @@ _builtin/FileTest               sheepman
 _builtin/File__Constants        takayama
 _builtin/File__Stat
 _builtin/Fixnum                 ujihisa         done
-_builtin/Float                  
+_builtin/Float                  kouya 
 _builtin/FloatDomainError       snoozer05       done
 _builtin/GC                     
 _builtin/Hash                   eklerni
