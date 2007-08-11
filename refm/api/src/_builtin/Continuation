@@ -41,7 +41,6 @@ callcc とは、call-with-current-continuation の略です。
 
 --- [](*ret)      -> ()
 --- call(*ret)    -> ()
-#@todo
 
 self が記憶した状態を継続します。引数は そのまま
 [[m:Kernel.#callcc]] の戻り値になります。

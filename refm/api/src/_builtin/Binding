@@ -1,7 +1,7 @@
 = class Binding < Object
 
 ローカル変数のテーブルと self、モジュールのネストなどの情報を保
-持するオブジェクトのクラス。組み込み関数 [[m:Kernel.#binding]] によっ
+持するオブジェクトのクラスです。組み込み関数 [[m:Kernel.#binding]] によっ
 てのみ生成され、[[m:Kernel.#eval]] の第 2 引数に使用します。
 
 また[[unknown:Ruby用語集/トップレベル]]の Binding オブジェクトとして組み込み定数
@@ -11,7 +11,6 @@
 
 #@since 1.9.0
 --- eval(expr, fname = __FILE__, lineno = 1)    -> object
-#@todo
 
 組み込み関数 [[m:Kernel.#eval]] を使って
 eval(expr, self, fname, lineno) とするのと同じです。
