@@ -26,7 +26,7 @@ _builtin/Float
 _builtin/FloatDomainError       snoozer05       done
 _builtin/GC                     
 _builtin/Hash                   eklerni
-_builtin/IO                     sheepman
+_builtin/IO                     sheepman        done
 _builtin/IOError                snoozer05       done
 _builtin/IndexError             snoozer05       done
 _builtin/Integer                ujihisa
