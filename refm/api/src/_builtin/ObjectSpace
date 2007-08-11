@@ -1,31 +1,36 @@
 = module ObjectSpace 
 
-全てのオブジェクトを操作するためのモジュール。
+全てのオブジェクトを操作するためのモジュールです。
 
 == Singleton Methods
 
---- _id2ref(id)
-#@todo
+--- _id2ref(id)    -> object
 
 オブジェクト ID([[m:Object#__id__]])からオブジェクトを得ます。
 対応するオブジェクトが存在しなければ例外 [[c:RangeError]] が発生し
 ます。
 
---- define_finalizer(obj, proc)
---- define_finalizer(obj) {|id| ...}
-#@todo
+@param id 取得したいオブジェクトの ID を整数で指定します。
+
+ a = "hoge"
+ p ObjectSpace._id2ref(a.__id__) #=> "hoge"
+
+--- define_finalizer(obj, proc)         -> Array
+--- define_finalizer(obj) {|id| ...}    -> Array
 
 obj が解放されるときに実行されるファイナライザ proc を
 登録します。同じオブジェクトについて複数回呼ばれたときは置き換えで
-はなく追加登録されます。
+はなく追加登録されます。現在のセーフレベルと proc を配列にして返します。
 
-proc には、ファイナライザとして [[c:Proc]] オブジェクトを渡
-します。ブロックを指定した場合は、そのブロックが proc になり
-ます(しかし、後述の問題があるのでブロックでファイナライザを登録す
-るのは難しいです)。
+ブロックを指定した場合は、そのブロックがファイナライザになります。
+obj の回収時にブロックは ojb の ID ([[m:Object#__id__]])を引数として実行されます。
+しかし、後述の問題があるのでブロックでファイナライザを登録するのは難しいでしょう。
 
-ファイナライザ proc には引数として obj の
-ID([[m:Object#__id__]]) が渡されます。
+@param obje ファイナライザを登録したいオブジェクトを指定します。
+
+@param proc ファイナライザとして [[c:Proc]] オブジェクトを指定します。proc は obj の回収時に obj の ID を引数として実行されます。
+
+==== 使い方の注意
 
 以下は、define_finalizer の使い方の悪い例です。
 
@@ -80,77 +85,76 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
   
   # => baz
 
---- each_object([class_or_module]) {|object| ...}
-#@todo
+--- each_object(klass) {|object| ...}    -> Integer
 
-class_or_module と [[m:Object#kind_of?]] の関係にある全ての
+klass と [[m:Object#kind_of?]] の関係にある全ての
 オブジェクトに対して繰り返します。引数が省略された時には全てのオブ
 ジェクトに対して繰り返します。
-
-ただし、次のクラスのオブジェクトについては繰り返しません:
-[[c:Fixnum]],
-[[c:Symbol]],
-[[c:TrueClass]],
-[[c:FalseClass]],
-[[c:NilClass]]
-
-とくに、class_or_module に [[c:Fixnum]] や [[c:Symbol]] などのクラスを指定した場合は、
-何も繰り返さないことになります。
-なお、[[c:Symbol]] については、かわりに [[m:Symbol.all_symbols]] が使用できます。
 繰り返した数を返します。
 
---- garbage_collect
-#@todo
+ただし、次のクラスのオブジェクトについては繰り返しません
+
+ * [[c:Fixnum]]
+ * [[c:Symbol]]
+ * [[c:TrueClass]]
+ * [[c:FalseClass]]
+ * [[c:NilClass]]
+
+とくに、klass に [[c:Fixnum]] や [[c:Symbol]] などのクラスを指定した場合は、
+何も繰り返さないことになります。
+なお、[[c:Symbol]] については、かわりに [[m:Symbol.all_symbols]] が使用できます。
+
+@param klass クラスかモジュールを指定します。
+
+--- garbage_collect    -> nil
 
 どこからもアクセスされなくなったオブジェクトを回収します。
 [[m:GC#start]] と同じです。
 
-nil を返します。
-
---- undefine_finalizer(obj)
-#@todo
+--- undefine_finalizer(obj)    -> object
 
 obj に対するファイナライザをすべて解除します。
 obj を返します。
 
-以下は、ファイナライザの古いインタフェースです。使用すると警告メッセー
-ジが出力されます。
+@param obj ファイナライザを解除したいオブジェクトを指定します。
 
---- add_finalizer(proc)     ((<obsolete>))
-#@todo
+--- add_finalizer(proc)    -> Proc
+
+このメソッドは、obsolete です。代わりに
+[[m:ObjectSpace.#define_finalizer]] を使用してください
 
 proc をファイナライザとして設定します。
+proc を返します。
 
 [[m:ObjectSpace.#call_finalizer]] で指定したオブジェクトが解放され
 る時、そのオブジェクトの ID(c.f [[m:Object#__id__]])を引数に
 ファイナライザが評価されます。
 
-proc を返します。
+@param proc ファイナライザとしたい Proc オブジェクトを指定します。
 
-このメソッドは、obsolete です。代わりに
-[[m:ObjectSpace.#define_finalizer]] を使用してください
+--- call_finalizer(obj)    -> object
 
---- call_finalizer(obj)     ((<obsolete>))
-#@todo
+このメソッドは、obsolete です。
 
 obj をファイナライザの対象オブジェクトとして設定します。
 obj を返します。
 
-このメソッドは、obsolete です。
+@param obj ファイナライザの対象とするオブジェクトを指定します。
 
---- finalizers      ((<obsolete>))
-#@todo
+--- finalizers     -> [Proc]
+
+このメソッドは、obsolete です。
 
 現在登録されているファイナライザの配列を返します。
 
-このメソッドは、obsolete です。
-
---- remove_finalizer(proc)  ((<obsolete>))
-#@todo
-
-指定した proc をファイナライザから取り除きます。
-proc を返します。
+--- remove_finalizer(proc)    -> Proc
 
 このメソッドは、obsolete です。代わりに
 [[m:ObjectSpace.#undefine_finalizer]] を使用してくださ
 い。
+
+指定した proc をファイナライザから取り除きます。
+proc を返します。
+
+@param proc 取り除きたいファイナライザである Proc オブジェクトを指定します。
+
