@@ -38,7 +38,7 @@ _builtin/LocalJumpError         snoozer05       done
 _builtin/Marshal                okkez           done
 _builtin/MatchData              okkez
 _builtin/Math                   okkez
-_builtin/Method                 okkez
+_builtin/Method                 okkez           done
 _builtin/Module                 okkez
 _builtin/NameError              snoozer05       done
 _builtin/NilClass               snoozer05       done
