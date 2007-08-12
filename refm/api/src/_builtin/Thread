@@ -279,8 +279,6 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
 により終了します。
 
-@see [[m:Thread#exit]]
-
   th1 = Thread.new do
     begin
       sleep 10
@@ -301,6 +299,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 
   #=> "th1: this will be displayed"
 
+@see [[m:Thread#exit]]
 #@end
 
 --- group    -> nil | ThreadGroup

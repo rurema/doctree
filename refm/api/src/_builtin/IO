@@ -498,14 +498,14 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 
 @raise IOError 読み込み用にオープンされていなければ発生します。
 
-@see [[m:$.]]
-
   f = File.new("testfile")
   f.lineno   #=> 0
   f.gets     #=> "This is line one\n"
   f.lineno   #=> 1
   f.gets     #=> "This is line two\n"
   f.lineno   #=> 2
+
+@see [[m:$.]]
 
 --- lineno=(number)
 
@@ -515,8 +515,6 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 
 @raise IOError 読み込み用にオープンされていなければ発生します。
 
-@see [[m:$.]]
-
   f = File.new("testfile")
   f.gets                     #=> "This is line one\n"
   $.                         #=> 1
@@ -525,6 +523,8 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
   $.                         #=> 1
   f.gets                     #=> "This is line two\n"
   $.                         #=> 1001
+
+@see [[m:$.]]
 
 --- pid    -> Integer | nil
 
@@ -969,11 +969,10 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
-@see [[m:$/]]
-
    "foo\nbar\n".lines.to_a   #=> ["foo\n", "bar\n"]
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
 
+@see [[m:$/]]
 #@end
 
 == Constants

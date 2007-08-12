@@ -332,12 +332,12 @@ self と other の各要素をそれぞれ順に == で比較し
 
 @param key 自身の要素である配列の、最初の要素と同じ型のオブジェクトを指定します。
 
-@see [[m:Array#rassoc]]
-
     ary = [[1,15], [2,25], [3,35]]
     p ary.assoc(2)           # => [2, 25]
     p ary.assoc(100)         # => nil
     p ary.assoc(15)          # => nil
+
+@see [[m:Array#rassoc]]
 
 --- at(pos)    -> object
 
@@ -379,12 +379,11 @@ dup は内容だけをコピーします。
 各要素を順番にブロックに渡して評価し、その結果で要素を
 置き換えます。
 
-@see [[m:Enumerable#collect]]
-
     ary = [1, 2, 3]
     ary.map! {|i| i * 3 }
     p ary   #=> [3, 6, 9]
 
+@see [[m:Enumerable#collect]]
 
 --- compact     -> Array
 --- compact!    -> nil | self
@@ -615,10 +614,10 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 
 配列の先頭の要素を返します。要素がなければ nil を返します。
 
-@see [[m:Array#last]]
-
     p [0, 1, 2].first   #=> 0
     p [].first          #=> nil
+
+@see [[m:Array#last]]
 
 #@since 1.8.0
 --- first(n)    -> Array
@@ -626,8 +625,6 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 先頭の n 要素を配列で返します。n は 0 以上でなければなりません。
 
 @param n 取得したい要素の個数を整数で指定します。
-
-@see [[m:Array#last]]
 
     ary =  [0, 1, 2]
     p ary.first(0)
@@ -641,6 +638,7 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
          [0, 1, 2]
          [0, 1, 2]
 
+@see [[m:Array#last]]
 #@end
 
 --- flatten     -> Array
@@ -677,14 +675,14 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 
 @param val インデックスを知りたいオブジェクトを指定します。
 
-@see [[m:Array#rindex]]
-
     p [1, 0, 0, 1, 0].index(1)   #=> 0
     p [1, 0, 0, 0, 0].index(1)   #=> 0
     p [0, 0, 0, 0, 0].index(1)   #=> nil
 #@since 1.9.0
     p [0, 1, 0, 1, 0].index {|v| v > 0}   #=> 1
 #@end
+
+@see [[m:Array#rindex]]
 
 --- indexes(*index)     
 --- indices(*index)     
@@ -733,21 +731,21 @@ join した文字列を連結します。
 
 @param sep 間に挟む文字列を指定します。nil のときは空文字列を使います。
 
-@see [[m:$,]]
-
     ary = [1,2,3]
     ary.push ary
     p ary           # => [1, 2, 3, [...]]
     p ary.join      # => "123123[...]"
 
+@see [[m:$,]]
+
 --- last    -> nil | object
 
 配列の末尾の要素を返します。配列が空のときは nil を返します。
 
-@see [[m:Array#first]] 
-
     p [0, 1, 2].last   #=> 2
     p [].last          #=> nil
+
+@see [[m:Array#first]] 
 
 #@since 1.8.0
 --- last(n)    -> Array
@@ -755,8 +753,6 @@ join した文字列を連結します。
 末尾の n 要素を配列で返します。n は 0 以上でなければなりません。
 
 @param n 取得したい要素の個数を整数で指定します。
-
-@see [[m:Array#first]]
 
     ary =  [0, 1, 2]
     p ary.last(0)
@@ -770,6 +766,7 @@ join した文字列を連結します。
          [0, 1, 2]
          [0, 1, 2]
 
+@see [[m:Array#first]]
 #@end
 
 --- length    -> Integer
@@ -798,8 +795,6 @@ nil でない要素の数を返します。
 末尾の要素を取り除いてそれを返します。自身が空配列の時は
 nil を返します。
 
-@see [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]] 
-
       array = [1, [2, 3], 4]
       p array.pop      # => 4
       p array.pop      # => [2, 3]
@@ -808,6 +803,8 @@ nil を返します。
       p array.pop      # => 1
       p array.pop      # => nil
       p array          # => []
+
+@see [[m:Array#push]], [[m:Array#shift]], [[m:Array#unshift]] 
 
 #@since 1.8.0
 --- push(*obj)        -> self
@@ -822,13 +819,13 @@ obj を順番に配列の末尾に追加します。
 
 @param obj 自身に追加したいオブジェクトを指定します。
 
-@see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]] 
-
       array = [1, 2, 3]
       array.push 4
       array.push [5, 6]
       array.push 7, 8
       p array          # => [1, 2, 3, 4, [5, 6], 7, 8]
+
+@see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]] 
 
 --- rassoc(obj)    -> nil | Array
 
@@ -840,10 +837,10 @@ self が配列の配列であると仮定して、要素の配列でインデックス
 
 @param obj オブジェクトを指定します。
 
-@see [[m:Array#assoc]] 
-
     a = [[15,1], [25,2], [35,3]]
     p a.rassoc(2)    # => [25, 2]
+
+@see [[m:Array#assoc]] 
 
 --- replace(another)    -> self
 
@@ -891,8 +888,6 @@ val と == で等しい最後の要素の位置を返します。
 
 @param val オブジェクトを指定します。
 
-@see [[m:Array#index]]
-
     p [1, 0, 0, 1, 0].rindex(1)   #=> 3
     p [1, 0, 0, 0, 0].rindex(1)   #=> 0
     p [0, 0, 0, 0, 0].rindex(1)   #=> nil
@@ -900,16 +895,18 @@ val と == で等しい最後の要素の位置を返します。
     p [0, 1, 0, 1, 0].rindex {|v| v > 0}   #=> 3
 #@end
 
+@see [[m:Array#index]]
+
 --- shift    -> nil | object
 
 配列の先頭の要素を取り除いてそれを返します。残りの要素はひとつずつ
 前に詰められます。自身が空配列の時は nil を返します。
 
-@see [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]]
-
   a = [0, 1, 2, 3, 4]
   p a.shift #=> 0
   p a       #=> [1, 2, 3, 4]
+
+@see [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]]
 
 --- slice(nth)       -> nil | object
 --- slice(pos, len)  -> nil | Array
@@ -1015,8 +1012,6 @@ obj を順番に配列の先頭に挿入します。
 
 @param obj 自身に追加したいオブジェクトを指定します。
 
-@see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
-
     arr = [1,2,3]
     arr.unshift 0
     p arr             #=> [0, 1, 2, 3]
@@ -1024,6 +1019,8 @@ obj を順番に配列の先頭に挿入します。
     p arr             #=> [[0], 0, 1, 2, 3]
     arr.unshift 1, 2
     p arr             #=> [1, 2, [0], 0, 1, 2, 3]
+
+@see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
 
 #@since 1.8.0
 --- values_at(*index)    -> nil | Array
