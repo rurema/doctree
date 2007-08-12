@@ -68,7 +68,7 @@ _builtin/StandardError          snoozer05       done
 _builtin/String                 aamine
 _builtin/Struct
 _builtin/Struct__Tms
-_builtin/Symbol
+_builtin/Symbol                 eklerni
 _builtin/SyntaxError            snoozer05       done
 _builtin/SystemCallError
 _builtin/SystemExit             snoozer05       done
