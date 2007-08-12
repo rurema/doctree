@@ -7,7 +7,7 @@ include Enumerable
 
   {a => b, ... }   #aはキー、bは値となる
 #@if (version >= "1.9.0")
-  {s: b , ... }    #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法m
+  {s: b , ... }    #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法k
 #@end
 
 ハッシュの格納に用いられるハッシュ値の計算には、
@@ -146,8 +146,6 @@ include Enumerable
   
   #=> {1=>"a", 2=>"b", 3=>["c"]}
 #@end
-
-@see [[m:Hash.new]],[[m:Hash#default=]]
 
 --- new(ifnone=nil) -> Hash
 
@@ -397,8 +395,8 @@ key に対して value を関連づけます。value を返し
 
 shiftは破壊的メソッドです。selfは要素を取り除かれた残りのハッシュに変更されます。
 
-ハッシュが空の場合、デフォルト値[[m:Hash#default]]を持たなければ
-nil を、デフォルト値を持つならその値を返します(このとき、
+ハッシュが空の場合、デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]の値か、どちらもnilならばnil）
+を返します(このとき、
 [key,value] という形式の値を返すわけではないことに注意)。
 
   h = {:ab => "some" , :cd => "all"}
@@ -433,8 +431,8 @@ self = other.[[m:Hash#dup]] と同じです。
   
 --- [](key) -> object
 key に関連づけられた値を返します。該当するキーが登
-録されていない時には、 [[m:Hash#default]]もしくは[[m:Hash#default_proc]] の戻り値を返します。
-値としての nil と区別する必要がある場合は [[m:Hash#fetch]]または[[m:Hash#has_key?]]を使ってください。
+録されていない時には、 デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]の値か、どちらもnilならばnil）
+を返します。値としての nil と区別する必要がある場合は [[m:Hash#fetch]]または[[m:Hash#has_key?]]を使ってください。
 
 @param key 探すキーを指定します。
 
@@ -463,7 +461,7 @@ key に関連づけられた値を返します。該当するキーが登
 [[m:Hash#default_proc]]を使ってください。
 
 2 番目の形式はハッシュがデフォルト値としてブロックを持つ場合
-([[m:Hash.Hash.new]]参照)に指定できます。self と 引数
+([[m:Hash.new]]参照)に指定できます。self と 引数
 key を引数にブロックを実行してその結果を返します。
 
 @param key デフォルトのブロックにキーとして渡されます。
@@ -555,7 +553,7 @@ key に対応する値が存在しない時には nil を返します。
 ブロックが与えられた時には key にマッチするものがな
 かった時に評価し、その結果を返します。
 
-@param 取り除くキーを指定します。
+@param key 取り除くキーを指定します。
 
   h = {:ab => "some" , :cd => "all"}
   p h.delete(:ab) #=> "some"
@@ -572,7 +570,7 @@ self を複製して、ブロックを評価した値が真になる要
 
 ハッシュを返すことを除けば
 [[m:Enumerable#reject]] と同じです。
-selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]かreject!を使います。
+selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]か[[m:Hash#reject!]]を使います。
 
   h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
   p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
@@ -719,7 +717,9 @@ Hash#index は 次バージョンの1.9では((<obsolete>)) です。
 引数で指定されたキーに対応する値の配列を返します。
 [self[key_1], ... ,self[key_n]]と同じです。
 
-キーに対応する値がなければ [[m:Hash#default]]もしくは[[m:Hash#default_proc]] の戻り値が使用されます。
+キーに対応する値がなければ デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]の値か、
+どちらもnilならばnil）
+が使用されます。
 
 @param key_1, ... ,key_n キーを指定します。
 
@@ -742,7 +742,8 @@ Hash#index は 次バージョンの1.9では((<obsolete>)) です。
 #@else
 [self[key_1], ... ,self[key_n]]と同じです。
 
-キーに対応する値がなければ [[m:Hash#default]]もしくは[[m:Hash#default_proc]] の戻り値が使用されます。
+キーに対応する値がなければ デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]の値か、
+どちらもnilならばnil）が使用されます。
 #@end
 
 @param key_1, ... ,key_n キーを指定します。
