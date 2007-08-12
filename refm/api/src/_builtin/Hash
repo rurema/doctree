@@ -7,7 +7,7 @@ include Enumerable
 
   {a => b, ... }   #aはキー、bは値となる
 #@if (version >= "1.9.0")
-  {s: b , ... }   #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法
+  {s: b , ... }    #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法o
 #@end
 
 ハッシュの格納に用いられるハッシュ値の計算には、
@@ -39,7 +39,7 @@ include Enumerable
 引数は必ず偶数個指定しなければなりません。(奇数番目がキー、偶数番目が値)。
 
 このメソッドでは生成するハッシュにデフォルト値を指定することはできません。
-[[m:Hash#.new]]を使うか、[[m:Hash#default=]]で後から指定してください。
+[[m:Hash.#new]]を使うか、[[m:Hash#default=]]で後から指定してください。
 
 @param key 生成するハッシュのキーです。
 @param value 生成するハッシュの値です。
@@ -146,7 +146,7 @@ include Enumerable
   #=> {1=>"a", 2=>"b", 3=>["c"]}
 #@end
 
-@see [[m:Hash#.new]],[[m:Hash#default=]]
+@see [[m:Hash.#new]],[[m:Hash#default=]]
 
 --- new(ifnone=nil) -> Hash
 
@@ -433,8 +433,7 @@ self = other.[[m:Hash#dup]] と同じです。
 --- [](key) -> object
 key に関連づけられた値を返します。該当するキーが登
 録されていない時には、 [[m:Hash#default]]もしくは[[m:Hash#default_proc]] の戻り値を返します。
-値としての nil と区別する必要がある場合は [[m:Hash#fetch]]
-または[[m:Hash#has_key?]]を使ってください。
+値としての nil と区別する必要がある場合は [[m:Hash#fetch]]または[[m:Hash#has_key?]]を使ってください。
 
 @param key 探すキーを指定します。
 
@@ -637,7 +636,7 @@ each と each_pair ではブロックパラメータの受渡し方が異なります。
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
 
-@see [[m:hash#each_key]],[[m:hash#each_value]]
+@see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
 #@if (version >= "1.9.0")
@@ -658,7 +657,7 @@ each と each_pair ではブロックパラメータの受渡し方が異なります。
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
 
-@see [[m:hash#each_pair]],[[m:hash#each_value]]
+@see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
 --- each_value {|value| ... } -> self
 #@if (version >= "1.9.0")
@@ -679,7 +678,7 @@ each と each_pair ではブロックパラメータの受渡し方が異なります。
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
 
-@see [[m:hash#each_pair]],[[m:hash#each_key]]
+@see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
 #@if (version < "1.9.0")
 --- index(val) -> object
@@ -725,7 +724,7 @@ Hash#index は 次バージョンの1.9では((<obsolete>)) です。
   h = {1=>"a", 2=>"b", 3=>"c"}
   p h.values_at(1,3,4)               # => ["a", "c", nil]
 
-@see [[m:Hash#[] ]]
+@see [[m:Hash#[] ]],[[m:Array#values_at]]
 #@end
 
 #@if (version < "1.9.0")
