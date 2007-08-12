@@ -7,7 +7,7 @@ include Enumerable
 
   {a => b, ... }   #aはキー、bは値となる
 #@if (version >= "1.9.0")
-  {s: b , ... }    #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法o
+  {s: b , ... }    #{ :s => b, ... } と同じ。キーがシンボルの場合の略記法m
 #@end
 
 ハッシュの格納に用いられるハッシュ値の計算には、
@@ -39,13 +39,14 @@ include Enumerable
 引数は必ず偶数個指定しなければなりません。(奇数番目がキー、偶数番目が値)。
 
 このメソッドでは生成するハッシュにデフォルト値を指定することはできません。
-[[m:Hash.#new]]を使うか、[[m:Hash#default=]]で後から指定してください。
+[[m:Hash.new]]を使うか、[[m:Hash#default=]]で後から指定してください。
 
 @param key 生成するハッシュのキーです。
 @param value 生成するハッシュの値です。
 @raise ArgumentError 奇数個の引数を与えたときに発生します。
 
 以下は配列からハッシュを生成する方法の例です。
+
 #@if (version < "1.7.0")
 (1) [キー, 値, ...] の配列からハッシュへ
 
@@ -146,7 +147,7 @@ include Enumerable
   #=> {1=>"a", 2=>"b", 3=>["c"]}
 #@end
 
-@see [[m:Hash.#new]],[[m:Hash#default=]]
+@see [[m:Hash.new]],[[m:Hash#default=]]
 
 --- new(ifnone=nil) -> Hash
 
@@ -243,9 +244,9 @@ self を返します。
 ハッシュの要素の数を返します。
 
 #@if (version >= "1.9.0")
-puts({ant: 9 ,dog: 101 ,cat: 3}.length) #=> 3
+  puts({ant: 9 ,dog: 101 ,cat: 3}.length) #=> 3
 #@else
-puts({:ant => 9 ,:dog => 101 ,:cat => 3}.length) #=> 3
+  puts({:ant => 9 ,:dog => 101 ,:cat => 3}.length) #=> 3
 #@end
 
 --- empty? -> bool
@@ -462,7 +463,7 @@ key に関連づけられた値を返します。該当するキーが登
 [[m:Hash#default_proc]]を使ってください。
 
 2 番目の形式はハッシュがデフォルト値としてブロックを持つ場合
-([[m:Hash#Hash.new]]参照)に指定できます。self と 引数
+([[m:Hash.Hash.new]]参照)に指定できます。self と 引数
 key を引数にブロックを実行してその結果を返します。
 
 @param key デフォルトのブロックにキーとして渡されます。
@@ -699,6 +700,7 @@ Hash#index は 次バージョンの1.9では((<obsolete>)) です。
 #@end
 #@end
 @param val 探索に用いる値を指定します。
+
 #@if (version >= "1.8.0")
   h = {:ab => "some" , :cd => "all"}
   p h.key("some") #=> :ab
