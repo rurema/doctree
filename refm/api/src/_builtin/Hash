@@ -33,6 +33,10 @@ include Enumerable
 
 @param hash 生成元となるハッシュです
 
+  h = {1=>2}
+  g = Hash[h]
+  p g #=> {1=>2}
+
 --- [](key,value,...)  -> Hash
 
 新しいハッシュを生成します。
