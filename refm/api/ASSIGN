@@ -35,7 +35,7 @@ _builtin/Kernel                 aamine
 _builtin/KeyError               snoozer05       done
 _builtin/LoadError              snoozer05       done
 _builtin/LocalJumpError         snoozer05       done
-_builtin/Marshal                okkez
+_builtin/Marshal                okkez           done
 _builtin/MatchData              okkez
 _builtin/Math                   okkez
 _builtin/Method                 okkez
