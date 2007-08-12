@@ -1,21 +1,20 @@
 = class Method < Object
 
 [[m:Object#method]] によりオブジェクト化され
-たメソッドオブジェクトのクラスです。メソッドの実体（名前でなく）とレシー
-バの組を封入します。[[c:Proc]] オブジェクトと違ってコンテキストを保持
-しません。
+たメソッドオブジェクトのクラスです。
 
-[[c:Proc]] との差…Method は取り出しの対象であるメソッドが
-なければ作れませんが、Proc は準備なしに作れます。その点から
-Proc は使い捨てに向き、Method は何度も繰り返し生成する
+メソッドの実体（名前でなく）とレシーバの組を封入します。
+[[c:Proc]] オブジェクトと違ってコンテキストを保持しません。
+
+[[c:Proc]] との差…[[c:Method]] は取り出しの対象であるメソッドが
+なければ作れませんが、[[c:Proc]] は準備なしに作れます。その点から
+[[c:Proc]] は使い捨てに向き、[[c:Method]] は何度も繰り返し生成する
 場合に向くと言えます。また内包するコードの大きさという点では
-Proc は小規模、Method は大規模コードに向くと言えます。
+[[c:Proc]] は小規模、[[c:Method]] は大規模コードに向くと言えます。
 
 
-例:
-
-既存のメソッドを Method オブジェクト化する
-([[m:Object#method]] を参照)
+既存のメソッドを [[c:Method]] オブジェクト化する
+@see [[m:Object#method]]
 
   class Foo
     def foo(arg)
@@ -37,7 +36,7 @@ Proc は小規模、Method は大規模コードに向くと言えます。
   p pr            # => #<Proc:0x401b1fcc>
   p pr.call(1)    # => "proc called with arg 1"
 
-Method オブジェクトが有用なのは以下のような場合
+[[c:Method]] オブジェクトが有用なのは以下のような場合
 
   class Foo
     def foo() "foo" end
@@ -80,12 +79,12 @@ Method オブジェクトが有用なのは以下のような場合
 
 == Instance Methods
 
---- [](arg, ...)
---- call(arg ... )
---- call(arg ... ) { ... }
-#@todo
+--- [](*args) -> object
+--- call(*args) -> object
+--- call(*args) { ... } -> object
 
 メソッドオブジェクトに封入されているメソッドを起動します。
+
 引数やブロックはそのままメソッドに渡されます。
 
 self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
@@ -96,21 +95,23 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 ベル 4 で実行されます
 ([[unknown:セキュリティモデル/セーフレベルに関するその他の詳細]]を参照)。
 
---- arity
-#@todo
+@param *args self に渡される引数。
 
-メソッドオブジェクトの引数の数を返します。self が引数の数を
-可変長で受け取れる場合
+--- arity -> Fixnum
+
+メソッドオブジェクトの引数の数を返します。
+
+self が引数の数を可変長で受け取れる場合
 
  -(最低限必要な数 + 1)
 
 を返します。
 
---- inspect
-#@todo
+--- inspect -> String
 
-[[m:Object#inspect]] 参照。以下の形式の文字列を返し
-ます。
+self を読みやすい文字列として返します。
+
+以下の形式の文字列を返します。
 
   #<Method: klass1(klass2)#method>                (形式1)
 
@@ -177,14 +178,13 @@ klass2 は実際にそのメソッドを定義しているオブジェクトになります。
   p obj.method(:baz)      # => #<Method: Object(Baz)#baz>
 #@end
 
---- to_proc
-#@todo
+@see [[m:Object#inspect]]
 
-self を call する [[c:Proc]] オブジェクトを生成して返
-します。
+--- to_proc -> Proc
 
---- unbind
-#@todo
+self を call する [[c:Proc]] オブジェクトを生成して返します。
+
+--- unbind -> UnboundMethod
 
 self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
 ジェクトを生成して返します。
