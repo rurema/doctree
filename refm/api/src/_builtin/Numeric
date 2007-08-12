@@ -177,7 +177,7 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
                       ~ |     -          -          o          o          -       
 #@end
 
-=== 丸めメソッドの動作のまとめ
+=== 丸めメソッドの動作一覧
 
 #@#         numbers=[1.9, 1.1, -1.1, -1.9]
 #@#         methods=%w(ceil floor round truncate)
@@ -194,7 +194,7 @@ Numeric は数値の抽象クラスです。Ruby では [[m:Numeric#coerce]]
 #@#         }
 
 [[m:Numeric#ceil]], [[m:Numeric#floor]], [[m:Numeric#round]], [[m:Numeric#truncate]]
-のふるまいの違いを表にしました。左の数に対して各メソッドを呼ぶと表のような数を
+のふるまいの違いの表です。左の実数に対して各メソッドを呼ぶと表のような数を
 返します。
 
               |       ceil      floor      round   truncate
@@ -300,8 +300,6 @@ other が Numeric で比較できないオブジェクトの場合、
 
 自身と等しいかより大きな整数のうち最小のものを返します。
 
-自身を [[c:Float]] に変換し [[m:Float#ceil]] を呼ぶことにより実装されています。
-
      1.ceil        #=> 1
      1.2.ceil      #=> 2
      (-1.2).ceil   #=> -1
@@ -310,8 +308,6 @@ other が Numeric で比較できないオブジェクトの場合、
 --- floor   -> Integer
 
 自身と等しいかより小さな整数のうち最大のものを返します。
-
-自身を [[c:Float]] に変換し [[m:Float#floor]] を呼ぶことにより実装されています。
 
      1.floor        #=> 1
      1.2.floor      #=> 1
@@ -323,7 +319,6 @@ other が Numeric で比較できないオブジェクトの場合、
 自身ともっとも近い整数を返します。
 
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。いわゆる四捨五入ですが、偶数丸めではありません。
-自身を [[c:Float]] に変換し [[m:Float#round]] を呼ぶことにより実装されています。
 
      1.round        #=> 1
      1.2.round      #=> 1
@@ -412,13 +407,14 @@ div はメソッド / の呼び出しとして定義されています。
   p (-3.0).div(2) # => -2
 
 
---- quo(other)    -> Float | Rational
+--- quo(other)    -> Float
 #@since 1.8.0
---- fdiv(other)   -> Float | Rational
+--- fdiv(other)   -> Float
 #@end
 
 self を other で割った実数の商を返します。
-メソッド / の呼び出しとして定義されています。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しないといけません。
 
 @param other 自身を割る数を指定します。
 
