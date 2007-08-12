@@ -7,10 +7,10 @@
 --- _id2ref(id)    -> object
 
 オブジェクト ID([[m:Object#__id__]])からオブジェクトを得ます。
-対応するオブジェクトが存在しなければ例外 [[c:RangeError]] が発生し
-ます。
 
 @param id 取得したいオブジェクトの ID を整数で指定します。
+
+@raise RangeError 対応するオブジェクトが存在しなければ発生します。
 
  a = "hoge"
  p ObjectSpace._id2ref(a.__id__) #=> "hoge"
@@ -108,7 +108,7 @@ klass と [[m:Object#kind_of?]] の関係にある全ての
 
 --- garbage_collect    -> nil
 
-どこからもアクセスされなくなったオブジェクトを回収します。
+どこからも参照されなくなったオブジェクトを回収します。
 [[m:GC#start]] と同じです。
 
 --- undefine_finalizer(obj)    -> object
@@ -120,7 +120,7 @@ obj を返します。
 
 --- add_finalizer(proc)    -> Proc
 
-このメソッドは、obsolete です。代わりに
+このメソッドは obsolete です。代わりに
 [[m:ObjectSpace.#define_finalizer]] を使用してください
 
 proc をファイナライザとして設定します。
@@ -134,7 +134,7 @@ proc を返します。
 
 --- call_finalizer(obj)    -> object
 
-このメソッドは、obsolete です。
+このメソッドは obsolete です。
 
 obj をファイナライザの対象オブジェクトとして設定します。
 obj を返します。
@@ -143,13 +143,13 @@ obj を返します。
 
 --- finalizers     -> [Proc]
 
-このメソッドは、obsolete です。
+このメソッドは obsolete です。
 
 現在登録されているファイナライザの配列を返します。
 
 --- remove_finalizer(proc)    -> Proc
 
-このメソッドは、obsolete です。代わりに
+このメソッドは obsolete です。代わりに
 [[m:ObjectSpace.#undefine_finalizer]] を使用してくださ
 い。
 
