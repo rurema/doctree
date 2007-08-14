@@ -236,7 +236,7 @@ root だけがこのメソッドを呼ぶことができます。
 
 which に従いプロセス、プロセスグループ、ユーザのいずれかの現在のプライオリティを整数で返します。
 
-@param which 以下の定数を指定します。
+@param which プライオリティの種類を以下の定数で指定します。
 
  * [[m:Process::PRIO_PROCESS]]
  * [[m:Process::PRIO_PGRP]]
@@ -263,7 +263,12 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 @param signal シグナルを整数かその名前の文字列で指定します。負の値を持つシグナル(あるいはシグナル名の前に-)を指定すると、プロセスではなくプロセスグループにシグナルを送ります。
 
-@param pid プロセス ID を整数で指定します。負の整数を与えるとプロセスではなくプロセスグループにシグナルを送ります。負の整数はプロセスグループ ID にマイナスを付けたものと見なされます。
+@param pid シグナルを送りたいプロセスのプロセス ID を整数で指定します。ただし、0 以下の場合は以下のような意味になります。
+
+ * 0 の場合はカレントプロセスのプロセスグループにシグナルを送ります。
+ * -1 の場合はシステム上の全てのプロセスにシグナルを送ります。
+ * それ以外の負の整数を与えるとプロセスではなくプロセスグループにシグナルを送ります。
+   負の整数はプロセスグループ ID にマイナスを付けたものと見なされます。
 
 @param rest プロセス ID を整数で指定します。
 
@@ -275,7 +280,7 @@ pid で指定されたプロセスにシグナルを送ります。signal
 #@#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
 #@#KILL も指定できます
 
-@see [[m:Kernel.#trap]]
+@see [[m:Kernel.#trap]], [[man:kill(2)]]
 
 #@if (version < "1.8.0")
 --- setpgrp(pid, pgrp)    -> 0
@@ -435,98 +440,100 @@ nil を返します。
 --- PRIO_PROCESS
 #@todo
 
-[[m:Process#Process.getpriority]] または
-[[m:Process#Process.setpriority]] のプロセスプライオリティ指定。
+[[m:Process.#getpriority]] または
+[[m:Process.#setpriority]] のプロセスプライオリティ指定。
 
 --- PRIO_PGRP
 #@todo
 
-プロセスグループプライオリティ。
+[[m:Process.#getpriority]] または
+[[m:Process.#setpriority]] のプロセスグループプライオリティ。
 
 --- PRIO_USER
 #@todo
 
-ユーザプライオリティ。
+[[m:Process.#getpriority]] または
+[[m:Process.#setpriority]] のユーザプライオリティ。
 
 --- RLIMIT_AS
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_CORE
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_CPU
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_DATA
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_FSIZE
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_MEMLOCK
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_NOFILE
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_NPROC
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_RSS
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_SBSIZE
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIMIT_STACK
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIM_INFINITY
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIM_SAVED_CUR
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- RLIM_SAVED_MAX
 #@todo
 
-[[m:Process#Process.getrlimit]] 参照。
+[[m:Process.getrlimit]] 参照。
 
 --- WNOHANG
 #@todo
 
-[[m:Process#waitpid]] の第二引数に指定するフラグです。
+[[m:Process.#waitpid]] の第二引数に指定するフラグです。
 終了した子プロセスがない時に waitpid がブロックしません。
 
 --- WUNTRACED
 #@todo
 
-[[m:Process#waitpid]] の第二引数に指定するフラグです。
+[[m:Process.#waitpid]] の第二引数に指定するフラグです。
 子プロセスの停止によりステータスを報告していない
 子プロセスがある時に waitpid がブロックしません。
