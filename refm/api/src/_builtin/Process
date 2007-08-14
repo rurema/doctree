@@ -1,6 +1,6 @@
 = module Process
 
-UNIX のプロセスを管理するモジュール。
+UNIX のプロセスを管理するモジュールです。
 
 Process がプロセスを表現するクラスではなく、プロセスに対する操作
 をまとめたモジュールであることに注意してください。
@@ -8,14 +8,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 == Singleton Methods
 
 #@since 1.8.0
---- abort([message])
+--- abort(message = "")   -> ()
 #@todo
 
-関数 [[m:Kernel#abort]] と同じです。
+関数 [[m:Kernel.#abort]] と同じです。
 #@end
 
 #@since 1.9.0
---- daemon(nochdir=nil,noclose=nil)
+--- daemon(nochdir = nil, noclose = nil)
 #@todo
 
 プロセスから制御端末を切り離し、
@@ -33,12 +33,13 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 #@end
 
 #@since 1.8.0
---- detach(pid)
-#@todo
+--- detach(pid)    -> Thread
 
 子プロセス pid の終了を監視するスレッドを生成して返します。
 生成したスレッドは子プロセスが終了した後に nil で終了します。
-(指定した子プロセスが存在しなければ即座に nil で終了します)。
+指定した子プロセスが存在しなければ即座に nil で終了します。
+
+@param pid 子スレッドのプロセス ID を整数で指定します。
 
     pid = fork {
       # child
@@ -52,22 +53,23 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 #@end
 
 #@since 1.8.0
---- exit([status])
-#@todo
+--- exit(status = 0)    -> ()
 
-関数 [[m:Kernel#exit]] と同じです。
+プロセスを終了します。関数 [[m:Kernel.#exit]] と同じです。
+
+@param status 終了ステータスを整数で指定します。
 #@end
 
---- exit!([status])
-#@todo
+--- exit!(status = 1)    -> ()
 
-関数 [[m:Kernel#exit!]] と同じです。
+関数 [[m:Kernel.#exit!]] と同じです。
 
---- fork
---- fork { ... }
-#@todo
+@param status 終了ステータスを整数で指定します。
 
-関数 [[m:Kernel#fork]] と同じです。
+--- fork            -> nil | Integer
+--- fork { ... }    -> nil | Integer
+
+子プロセスを生成します。関数 [[m:Kernel.#fork]] と同じです。
 
 #@since 1.8.5
 --- getrlimit(resource)
@@ -115,186 +117,221 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 #@end
 
 #@since 1.9.0
---- spawn(cmd, [, arg, ...])
+--- spawn(cmd, *arg)
 #@todo
 
-関数 [[m:Kernel#spawn]] と同じです。
+関数 [[m:Kernel.#spawn]] と同じです。
 #@end
 
 == Module Functions
 
---- egid
-#@todo
+--- egid    -> Integer
 
-カレントプロセスの実効グループ ID を返します。
+カレントプロセスの実効グループ ID を整数で返します。
 
 --- egid=(gid)
-#@todo
 
-カレントプロセスの実効グループ ID を設定します。gid を返します。
+カレントプロセスの実効グループ ID を gid に設定します。
 
---- euid
-#@todo
+@param gid 実効グループ ID を整数で指定します。-1 を指定した場合 何もしません。
 
-カレントプロセスの実効ユーザ ID を返します。
+@raise Errno::EXXX 権限がない場合に発生します。
+
+--- euid        -> Integer
+
+カレントプロセスの実効ユーザ ID を整数で返します。
 
 --- euid=(uid)
-#@todo
 
-カレントプロセスの実効ユーザ ID を設定します。uid を返します。
+カレントプロセスの実効ユーザ ID を uid に設定します。
 
---- gid
-#@todo
+@param euid 実効ユーザ ID を整数で指定します。-1 を指定した場合 何もしません。
+
+@raise Errno::EXXX 権限がない場合に発生します。
+
+--- gid        -> Integer
 
 カレントプロセスの実グループ ID を返します。
 
 --- gid=(gid)
-#@todo
 
-カレントプロセスの実グループ ID を設定します。gid を返します。
+カレントプロセスの実グループ ID を gid に設定します。
 
---- groups
-#@todo
+@param gid 実グループ ID を整数で指定します。-1 を指定した場合 何もしません。
+
+@raise Errno::EXXX 権限がない場合に発生します。
+
+--- groups     -> [Integer]
 
 補助グループ ID の配列を返します(実効グループ ID を含むかも知れません)。
 
-返される配列の最大要素数は 32 固定です(たぶんbug)。
+返される配列の最大要素数は [[m:Process.#maxgroups]] です。
 
---- groups=(gid_ary)
-#@todo
+@raise Errno::EXXX [[m:Process.#maxgroups]] が実際に返される補助グループ ID の
+                   数よりも少ない値を設定していると発生します。
 
-補助グループを設定します。右辺の配列の要素はグループ ID かグループ
-名を指定します。Process.groups の結果を返します。
+--- groups=(gids)
 
-設定する補助グループ ID の数が [[m:Process#Process.maxgroups]] の
-数を越えている場合、例外 [[c:ArgumentError]] が発生します。
+補助グループを設定します。
 
---- maxgroups
+root だけがこのメソッドを呼ぶことができます。
+
+@param gids 補助グループ ID の配列を指定します。補助グループ ID は整数かグループ名を表す文字列です。
+
+@raise ArgumentError 設定する補助グループ ID の数が [[m:Process.#maxgroups]] の
+                     数を越えている場合に発生します。
+
+@raise Errno::EXXX 権限がない場合に発生します。
+
+--- maxgroups        -> Integer
 --- maxgroups=(num)
-#@todo
 
-設定できる補助グループ ID の数を指定します。実際に返される補助グルー
-プ ID の数よりも少ない値を設定していると、
-[[m:Process#Process.groups]] で例外が発生します。
+設定できる補助グループ ID の数を指定します。
 
---- pid
-#@todo
+実際に返される補助グループ ID の数よりも少ない値を設定していると、
+[[m:Process.#groups]] で例外が発生します。
+
+@param num 整数を指定します。
+
+--- pid    -> Integer
 
 カレントプロセスのプロセス ID を返します。変数 [[m:$$]]
 の値と同じです。
 
---- ppid
-#@todo
+--- ppid    -> Integer
 
-親プロセスのプロセス ID を返します。UN*X では実際の親プロセスが終
+親プロセスのプロセス ID を返します。UNIX では実際の親プロセスが終
 了した後は ppid は 1 (initの pid)になります。
 
---- uid
-#@todo
+--- uid        -> Integer
 
 プロセスの実ユーザ ID を返します。
 
---- uid=(uid)
-#@todo
+--- uid=(id)
 
-プロセスの実ユーザ ID を設定します。uid を返します。
+プロセスの実ユーザ ID を id に設定します。
 
---- getpgid(pid)
---- getpgrp([pid])
-#@todo
+@param id 実ユーザ ID を整数で指定します。
 
-pid のプロセスのプロセスグループを返します。pid が 0
-の時や省略された時はカレントプロセスを意味します。
+@raise Errno::EXXX 権限がない場合に発生します。
 
-プロセスグループの取得に失敗した場合は、例外 [[c:Errno::EXXX]] が
-発生します。
+--- getpgid(pid = 0)   -> Integer
+
+プロセス ID が pid であるプロセスのプロセスグループ ID を整数で返します。
+
+@param pid プロセス ID を整数で指定します。0 の時はカレントプロセス ID を指定したのと同じです。
+
+@raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
+
+--- getpgrp            -> Integer
+
+現在のプロセスのプロセスグループ ID を整数で返します。
+
+@raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
+
 #@# 1.6.7 までは、getpgid() は例外を発生させていませんでした。
 #@# p Process.getpgid(1000000) # => -1
 
---- getpriority(which, who)
-#@todo
+--- getpriority(which, who)    -> Integer
 
-プロセス、プロセスグループ、ユーザの現在のプライオリティを返
-します ([[man:getpriority(2)]] 参照)。
+which に従いプロセス、プロセスグループ、ユーザのいずれかの現在のプライオリティを整数で返します。
 
-Process モジュールは which として指定できる定数
-[[m:Process::PRIO_PROCESS]], [[m:Process::PRIO_PGRP]],
-[[m:Process::PRIO_USER]] を定義しています。
+@param which 以下の定数を指定します。
 
-who には、which の値にしたがってプロセス ID、プロセス
-グループ ID、ユーザ ID のいずれかを指定します。
+ * [[m:Process::PRIO_PROCESS]]
+ * [[m:Process::PRIO_PGRP]]
+ * [[m:Process::PRIO_USER]] 
 
-プライオリティの取得に失敗した場合は、例外 [[c:Errno::EXXX]] が発
-生します。
+@param who which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
+
+@raise Errno::EXXX プライオリティの取得に失敗した場合に発生します。
+
+@see [[man:getpriority(2)]]
 
 #@since 1.8.0
 --- initgroups(user, group)
 #@todo
 
-[[man:initgroups(3)]] 参照
+@see [[man:initgroups(3)]]
 #@end
 
---- kill(signal, pid ... )
-#@todo
+--- kill(signal, pid, *rest)    -> Integer
 
 pid で指定されたプロセスにシグナルを送ります。signal
 はシグナル番号か名前(文字列または[[c:Symbol]])で指定します。
+全てのシグナル送信に成功した場合、指定した pid の総数を返します。
 
-負の値を持つシグナル(あるいはシグナル名の前に-)もしくは
-負の値を持つプロセス番号を与えるとプロセスではなくプロセスグループにシグナルを送ります。
-負の値のプロセス番号はプロセスグループ番号を符号反転したものと見なされます。
+@param signal シグナルを整数かその名前の文字列で指定します。負の値を持つシグナル(あるいはシグナル名の前に-)を指定すると、プロセスではなくプロセスグループにシグナルを送ります。
 
-全てのシグナル送信に成功した場合、指定した pid の数を返します。
-失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
+@param pid プロセス ID を整数で指定します。負の整数を与えるとプロセスではなくプロセスグループにシグナルを送ります。負の整数はプロセスグループ ID にマイナスを付けたものと見なされます。
 
-存在しないシグナルを指定した場合は
-例外 [[c:ArgumentError]] が発生します。
+@param rest プロセス ID を整数で指定します。
+
+@raise ArgumentError 存在しないシグナルを指定した場合に発生します。
+
+@raise Errno::EXXX シグナル送信に失敗した場合に発生します。
 
 #@#なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
 #@#ILL FPE SEGV TERM BREAK ABRT しか指定できません。((<ruby 1.7 feature>))
 #@#KILL も指定できます
 
-[[m:Kernel#trap]]も参照してください。
+@see [[m:Kernel.#trap]]
+
+#@if (version < "1.8.0")
+--- setpgrp(pid, pgrp)    -> 0
+#@end
+--- setpgid(pid, pgrp)    -> 0
+
+プロセス ID が pid であるプロセスのプロセスグループを pgrp に設定します。
+
+@param pid プロセス ID を整数で指定します。pid が 0 の時はカレントプロセスの ID を指定したのと同じです。
+           プロセスグループの設定に成功した場合は 0 を返します。
+
+@param pgrp プロセスグループ ID を整数で指定します。pgrp が 0 の時は pid を指定したのと同じです。
+
+@raise Errno::EXXX プロセスグループの設定に失敗した場合に発生します。
+
+@see [[man:setpgid(2)]]
 
 #@since 1.8.0
---- setpgrp
-#@else
---- setpgrp(pid, pgrp)
-#@todo
+--- setpgrp    -> 0
+
+カレントプロセスの ID と同じ ID をもつプロセスグループを作成し、カレントプロセスをそのリーダーにします。
+[[m:Process#setpgid]](0, 0) と同じです。
+
+@raise Errno::EXXX プロセスグループの設定に失敗した場合に発生します。
+
+ fork do
+   p [Process.pid, Process.getpgrp]
+   p Process.setpgrp
+   p [Process.pid, Process.getpgrp]
+ end
+ Process.wait
+ #=>
+   [3427, 3426]
+   0
+   [3427, 3427]
+
+@see [[man:setpgrp(2)]]
 #@end
---- setpgid(pid, pgrp)
-#@todo
 
-pid のプロセスグループを設定します。
-pid が 0 の時はカレントプロセスを意味します。
-
-プロセスグループの設定に成功した場合は 0 を返します。
-失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
-
-#@since 1.8.0
-Process.setpgrp は、引数を取りません。
-#@end
-
---- setpriority(which, who, prio)
+--- setpriority(which, who, prio)    -> 0
 #@todo
 
 プロセス、プロセスグループ、
-ユーザの現在のプライオリティを設定します
-([[man:setpriority(2)]] 参照)。
+ユーザのいずれかの現在のプライオリティを設定します
+。プライオリティの設定に成功した場合は 0 を返します。
 
-Process モジュールは which として指定できる定数
-[[m:Process::PRIO_PROCESS]], [[m:Process::PRIO_PGRP]],
-[[m:Process::PRIO_USER]] を定義しています。
+@param which プライオリティを設定する対象の種類を以下の定数のいずれかで指定します。
 
-who には、which の値にしたがってプロセス ID、プロセス
-グループ ID、ユーザ ID のいずれかを指定します。
+ * [[m:Process::PRIO_PROCESS]]
+ * [[m:Process::PRIO_PGRP]]
+ * [[m:Process::PRIO_USER]] 
 
-prio には、-20 から 20 の値を設定します。
-小さな値はプライオリティが高いことを意味し、
-大きな値はプライオリティが低いことを意味します。
+@param who which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
+           prio には、-20 から 20 の値を設定します。小さな値はプライオリティが高いことを意味し、大きな値はプライオリティが低いことを意味します。
 
-プライオリティの設定に成功した場合は 0 を返します。
-失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
+@raise Errno::EXXX プライオリティの設定に失敗した場合に発生します。
 
 以下の例は呼び出したプロセス自身のプライオリティを 10 に下げます。
 すでに 10 よりもプライオリティが低く、
@@ -305,101 +342,93 @@ Errno::EACCES となった場合には無視して実行を続けます。
   rescue Errno::EACCES
   end
 
---- setsid
-#@todo
+@see [[man:setpriority(2)]]
+
+--- setsid    -> Integer
 
 新しいセッションを作成して、tty を切り離します。デーモンを簡単に作
 ることができます。セッション ID を返します。
 
-セッションの作成に失敗した場合は、例外 [[c:Errno::EXXX]] が発生します。
+@raise Errno::EXXX セッションの作成に失敗した場合に発生します。
 
 #@since 1.8.0
---- times
-#@todo
+--- times    -> Struct::Tms
 
 自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の積算を
 [[c:Struct::Tms]] オブジェクトで返します。
-Struct::Tms は以下のメンバを持つ構造体クラスです。
-
-  utime           # user time
-  stime           # system time
-  cutime          # user time of children
-  cstime          # system time of children
-
 時間の単位は秒で、浮動小数点数で与えられます。
-詳細は [[c:Struct::Tms]] を参照してください。
+
+@see [[c:Struct::Tms]] 
 #@end
 
---- wait
---- wait2
-#@todo
+--- wait    -> Integer
+--- wait2   -> Array
 
-子プロセスが終了するのを待ち、終了した子プロセスの pid を返します。
-子プロセスが一つもなければ例外 [[c:Errno::ECHILD]] が
-発生します。
-
-wait2 は、その戻り値が pid と [[m:$?]] の配列であ
-る点だけが異なります。
-
+子プロセスのうちのひとつが終了するまで待ち、終了した子プロセスの pid を返します。
 #@since 1.8.0
-Ruby 1.8 からは $? は[[c:Process::Status]] オブジェクトです。
-Process.wait と Process.waitpid の実体は同じものになりました。
-Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+wait2 は子プロセスの pid と終了ステータスを表す [[c:Process::Status]] オブジェクトの配列を返します。
+#@else
+wait2 は子プロセスの pid と終了ステータスを表す [[m:$?]] の配列を返します。
 #@end
 
 #@since 1.8.0
---- waitall
-#@todo
+#@#$? は [[c:Process::Status]] オブジェクトです。
+#@#Process.wait と Process.waitpid の実体は同じものになりました。
+#@#Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+#@end
+
+@raise Errno::ECHILD 子プロセスが一つもなければ発生します。
+
+#@since 1.8.0
+ pid = fork{ sleep 1 }
+ Process.wait2 #=> [2756, #<Process::Status: pid=2756,exited(0)>]
+#@end
+
+#@since 1.8.0
+--- waitall    -> Array
 
 全ての子プロセスが終了するのを待ちます。
-
 終了した子プロセスの pid と終了ステータス
-([[c:Process::Status]]) の配列を要素に持つ配列を返します。
+([[c:Process::Status]]) の配列の配列を返します。
 子プロセスがいない状態でこのメソッドを呼び出すと空の配列を返します。
 
-[[m:$?]] には最後に終了した子プロセスの終了ステータスが
-設定されます。
+[[m:$?]] には最後に終了した子プロセスの終了ステータスが設定されます。
 
-例:
-    3.times {|n|
+    2.times {|n|
       Process.fork() { exit n }
     }
-    p ret = Process.waitall
-    p ret[-1][1]  , ret[-1][1].class
-    p $?          , $?.class
-    => [[5245, 256], [5244, 0], [5243, 512]]
-       512
-       Process::Status
-       512
-       Process::Status
+    p Process.waitall
+    #=> [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
 #@end
 
---- waitpid(pid[, flags])
---- waitpid2(pid[, flags])
-#@todo
+--- waitpid(pid, flags = 0)    -> nil | Integer
+--- waitpid2(pid, flags = 0)   -> nil | Array
 
 pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
-終了した時に pid を返します。子プロセスが存在しなければ例外
-[[c:Errno::ECHILD]] が発生します。
-
-flags には、Process モジュールの定数
-[[m:Process::WNOHANG]](ノンブロッキングモード)と
-[[m:Process::WUNTRACED]] の論理和を指定します。
-省略したときの値は 0 です。
-
+終了した時に pid を返します。
+#@since 1.8.0
+waitpid2 は pid と [[c:Process::Status]] オブジェクトの配列を返します。
+#@else
+waitpid2 は pid と [[m:$?]] の配列を返します。
+#@end
 ノンブロッキングモードで子プロセスがまだ終了していない時には
-nil を返します。[[man:waitpid(2)]] か
-[[man:wait4(2)]] の実装されていないマシンでは
-flags はいつも nil または 0 を指定する必要があります。
-
-waitpid2 は、その戻り値が pid と [[m:$?]] の配列
-である点だけが異なります。
+nil を返します。
 
 #@since 1.8.0
-Ruby 1.8.0 からは $? は [[c:Process::Status]] オブジェクトです。
-Process.wait と Process.waitpid の実体は同じものになりました。
-Process.wait2 と Process.waitpid2 の実体は同じものになりました。
+#@#Ruby 1.8.0 からは $? は [[c:Process::Status]] オブジェクトです。
+#@#Process.wait と Process.waitpid の実体は同じものになりました。
+#@#Process.wait2 と Process.waitpid2 の実体は同じものになりました。
 #@end
+
+@param pid 子プロセスのプロセス ID を整数で指定します。
+
+@param flags Process モジュールの定数 [[m:Process::WNOHANG]](ノンブロッキングモード)と
+             [[m:Process::WUNTRACED]] の論理和を指定します。省略したときの値は 0 です。
+             ノンブロッキングモードで子プロセスがまだ終了していない時には
+             nil を返します。[[man:waitpid(2)]] か [[man:wait4(2)]] の実装されていないマシンでは
+             flags はいつも nil または 0 を指定する必要があります。
+
+@raise Errno::ECHILD 子プロセスが存在しない場合に発生します。
 
 == Constants
 
