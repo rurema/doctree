@@ -58,6 +58,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 プロセスを終了します。関数 [[m:Kernel.#exit]] と同じです。
 
 @param status 終了ステータスを整数で指定します。
+
+@see [[man:exit(3)]]
 #@end
 
 --- exit!(status = 1)    -> ()
@@ -66,29 +68,30 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @param status 終了ステータスを整数で指定します。
 
+@see [[man:_exit(2)]]
+
 --- fork            -> nil | Integer
 --- fork { ... }    -> nil | Integer
 
 子プロセスを生成します。関数 [[m:Kernel.#fork]] と同じです。
 
-#@since 1.8.5
---- getrlimit(resource)
---- setrlimit(resource, cur_limit, max_limit)
---- setrlimit(resource, limit)
+@see [[man:fork(2)]]
+
+#@since 1.9.0
+--- spawn(cmd, *arg)
 #@todo
 
-resource で示すプロセスリソースの制限値の取得、設定を行います。
+関数 [[m:Kernel.#spawn]] と同じです。
+#@end
 
-Process.setrlimit において単一の limit が指定された場合には、
-cur_limit, max_limit の両方がその値として指定されたものとして扱います。
-これらの引数には、resource によって決まる意味を持つ何らかの整数もしくは
-[[m:Process::RLIM_INFINITY]],
-[[m:Process::RLIM_SAVED_CUR]],
-[[m:Process::RLIM_SAVED_MAX]] のいずれかを指定します。
+== Module Functions
 
-resource に指定する値は環境によりますが、以下のいずれかです。
-システムによってはこれらのいくつかは存在しない場合があります。
-詳細は、[[man:setrlimit(2)]] を参照してください。
+#@since 1.8.5
+--- getrlimit(resource)    -> [Integer]
+#@todo
+resource で示すカレントプロセスのリソースの制限値を、soft limit (整数)と hard limit (整数)の配列として返します。
+
+@param resource リソースの種類を以下の定数のいずれかで指定します。指定できる定数はシステムに依存します。
 
   * [[m:Process::RLIMIT_CORE]] core ファイルのサイズ (バイト) (SUSv3)
   * [[m:Process::RLIMIT_CPU]] プロセスの CPU 時間 (秒) (SUSv3)
@@ -102,32 +105,56 @@ resource に指定する値は環境によりますが、以下のいずれかです。
   * [[m:Process::RLIMIT_RSS]] 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
   * [[m:Process::RLIMIT_SBSIZE]] ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
-getrlimit は、2値の配列 [cur_limit, max_limit]
-を返します。
-setrlimit は、引数に指定した値を設定し、nil を返します。
+@raise Errno::EXXX リソースの制限値の取得が失敗した場合に発生します。
 
-リソースの制限値の取得、設定に失敗した場合、例外 [[c:Errno::EXXX]]
-が発生します。
+@see [[man:getrlimit(2)]]
+
+--- setrlimit(resource, cur_limit, max_limit)    -> nil
+--- setrlimit(resource, limit)                   -> nil
+#@todo
+
+resource で示すカレントプロセスのリソースの制限値の設定を行います。
+
+@param resource リソースの種類を以下の定数のいずれかで指定します。指定できる定数はシステムに依存します。
+
+  * [[m:Process::RLIMIT_CORE]] core ファイルのサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_CPU]] プロセスの CPU 時間 (秒) (SUSv3)
+  * [[m:Process::RLIMIT_DATA]] プロセスのデータ領域のサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_FSIZE]] プロセスが生成するファイルのサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_NOFILE]] プロセスがオープンできるファイルの数 (SUSv3)
+  * [[m:Process::RLIMIT_STACK]] プロセスのスタック領域のサイズ (バイト) (SUSv3)
+  * [[m:Process::RLIMIT_AS]] プロセスの仮想メモリサイズ (バイト) (SUSv3, NetBSD, FreeBSD, OpenBSD but 4.4BSD-Lite))
+  * [[m:Process::RLIMIT_MEMLOCK]] mlock(2) でロックできるトータルのサイズ (バイト) (4.4BSD, GNU/Linux)
+  * [[m:Process::RLIMIT_NPROC]] そのユーザのプロセスの最大数 (4.4BSD, GNU/Linux)
+  * [[m:Process::RLIMIT_RSS]] 使用できる実メモリの最大サイズ (バイト) (4.2BSD, GNU/Linux)
+  * [[m:Process::RLIMIT_SBSIZE]] ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
+
+@param limit resource によって意味が決まる制限値を表す整数もしくは以下の定数を指定します。soft limit と hard limit 両方にこの値が使われます。
+
+@param cur_limit soft limit を表す整数もしくは以下の定数を指定します。
+
+@param max_limit hard limit を表す整数もしくは以下の定数を指定します。
+
+ * [[m:Process::RLIM_INFINITY]]
+ * [[m:Process::RLIM_SAVED_CUR]]
+ * [[m:Process::RLIM_SAVED_MAX]]
+
+@raise Errno::EXXX リソースの制限値の設定に失敗した場合に発生します。
 
 以下の例は RLIMIT_CORE の制限を hard limit (max limit) まで引き上げ、可能なら core を残すようにします。
 
   Process.setrlimit(Process::RLIMIT_CORE, 
                     Process.getrlimit(Process::RLIMIT_CORE)[1])
 
+@see [[man:setrlimit(2)]]
+
 #@end
-
-#@since 1.9.0
---- spawn(cmd, *arg)
-#@todo
-
-関数 [[m:Kernel.#spawn]] と同じです。
-#@end
-
-== Module Functions
 
 --- egid    -> Integer
 
 カレントプロセスの実効グループ ID を整数で返します。
+
+@see [[man:getegid(2)]]
 
 --- egid=(gid)
 
@@ -137,9 +164,13 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@see [[man:setegid(2)]]
+
 --- euid        -> Integer
 
 カレントプロセスの実効ユーザ ID を整数で返します。
+
+@see [[man:geteuid(2)]]
 
 --- euid=(uid)
 
@@ -149,9 +180,13 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@see [[man:seteuid(2)]]
+
 --- gid        -> Integer
 
 カレントプロセスの実グループ ID を返します。
+
+@see [[man:getgid(2)]]
 
 --- gid=(gid)
 
@@ -161,6 +196,8 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@see [[man:setgid(2)]]
+
 --- groups     -> [Integer]
 
 補助グループ ID の配列を返します(実効グループ ID を含むかも知れません)。
@@ -169,6 +206,8 @@ setrlimit は、引数に指定した値を設定し、nil を返します。
 
 @raise Errno::EXXX [[m:Process.#maxgroups]] が実際に返される補助グループ ID の
                    数よりも少ない値を設定していると発生します。
+
+@see [[man:getgroups(2)]]
 
 --- groups=(gids)
 
@@ -182,6 +221,8 @@ root だけがこのメソッドを呼ぶことができます。
                      数を越えている場合に発生します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
+
+@see [[man:setgroups(2)]]
 
 --- maxgroups        -> Integer
 --- maxgroups=(num)
@@ -198,14 +239,20 @@ root だけがこのメソッドを呼ぶことができます。
 カレントプロセスのプロセス ID を返します。変数 [[m:$$]]
 の値と同じです。
 
+@see [[man:getpid(2)]]
+
 --- ppid    -> Integer
 
 親プロセスのプロセス ID を返します。UNIX では実際の親プロセスが終
 了した後は ppid は 1 (initの pid)になります。
 
+@see [[man:getppid(2)]]
+
 --- uid        -> Integer
 
 プロセスの実ユーザ ID を返します。
+
+@see [[man:getuid(2)]]
 
 --- uid=(id)
 
@@ -215,6 +262,8 @@ root だけがこのメソッドを呼ぶことができます。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@see [[man:setuid(2)]]
+
 --- getpgid(pid = 0)   -> Integer
 
 プロセス ID が pid であるプロセスのプロセスグループ ID を整数で返します。
@@ -223,11 +272,15 @@ root だけがこのメソッドを呼ぶことができます。
 
 @raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
 
+@see [[man:getpgid(2)]]
+
 --- getpgrp            -> Integer
 
 現在のプロセスのプロセスグループ ID を整数で返します。
 
 @raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
+
+@see [[man:getpgrp(2)]]
 
 #@# 1.6.7 までは、getpgid() は例外を発生させていませんでした。
 #@# p Process.getpgid(1000000) # => -1
@@ -356,6 +409,8 @@ Errno::EACCES となった場合には無視して実行を続けます。
 
 @raise Errno::EXXX セッションの作成に失敗した場合に発生します。
 
+@see [[man:setsid(2)]]
+
 #@since 1.8.0
 --- times    -> Struct::Tms
 
@@ -388,6 +443,8 @@ wait2 は子プロセスの pid と終了ステータスを表す [[m:$?]] の配列を返します。
  pid = fork{ sleep 1 }
  Process.wait2 #=> [2756, #<Process::Status: pid=2756,exited(0)>]
 #@end
+
+@see [[man:wait(2)]]
 
 #@since 1.8.0
 --- waitall    -> Array
@@ -434,6 +491,8 @@ nil を返します。
              flags はいつも nil または 0 を指定する必要があります。
 
 @raise Errno::ECHILD 子プロセスが存在しない場合に発生します。
+
+@see [[man:waitpid(2)]]
 
 == Constants
 
