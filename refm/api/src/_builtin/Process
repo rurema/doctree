@@ -88,8 +88,11 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@since 1.8.5
 --- getrlimit(resource)    -> [Integer]
-#@todo
-resource で示すカレントプロセスのリソースの制限値を、soft limit (整数)と hard limit (整数)の配列として返します。
+
+カレントプロセスでの resource が示すリソースの制限値を、soft limit (整数)と hard limit (整数)の
+配列として返します。
+
+それぞれの limit が [[m:Process::RLIM_INFINITY]] と等しい場合、リソースに制限がないことを意味します。
 
 @param resource リソースの種類を以下の定数のいずれかで指定します。指定できる定数はシステムに依存します。
 
@@ -113,7 +116,7 @@ resource で示すカレントプロセスのリソースの制限値を、soft limit (整数)と hard li
 --- setrlimit(resource, limit)                   -> nil
 #@todo
 
-resource で示すカレントプロセスのリソースの制限値の設定を行います。
+カレントプロセスでの resource が示すリソースの制限値を cur_limit と max_limit に設定します。
 
 @param resource リソースの種類を以下の定数のいずれかで指定します。指定できる定数はシステムに依存します。
 
@@ -135,7 +138,7 @@ resource で示すカレントプロセスのリソースの制限値の設定を行います。
 
 @param max_limit hard limit を表す整数もしくは以下の定数を指定します。
 
- * [[m:Process::RLIM_INFINITY]]
+ * [[m:Process::RLIM_INFINITY]] リソースに制限を設けないことを意味します。
  * [[m:Process::RLIM_SAVED_CUR]]
  * [[m:Process::RLIM_SAVED_MAX]]
 
