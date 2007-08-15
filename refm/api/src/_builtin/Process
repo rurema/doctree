@@ -89,8 +89,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 #@since 1.8.5
 --- getrlimit(resource)    -> [Integer]
 
-カレントプロセスでの resource が示すリソースの制限値を、soft limit (整数)と hard limit (整数)の
-配列として返します。
+カレントプロセスでのリソースの制限値を、整数の配列として返します。
+返り値は、現在の制限値 cur_limit と、制限値として設定可能な最大値 max_limit の
+配列 [cur_limit, max_limit] です。
 
 それぞれの limit が [[m:Process::RLIM_INFINITY]] と等しい場合、リソースに制限がないことを意味します。
 
@@ -110,13 +111,17 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX リソースの制限値の取得が失敗した場合に発生します。
 
-@see [[man:getrlimit(2)]]
+ include Process
+ p lim = getrlimit(RLIMIT_STACK)                                        #=> [8388608, 18446744073709551615]
+ p lim.map{|i| i == RLIM_INFINITY ? "unlimited" : "#{i/(1024**2)}MB" }  #=> ["8MB", "unlimited"]
+
+@see [[m:Process.#setrlimit]], [[man:getrlimit(2)]]
 
 --- setrlimit(resource, cur_limit, max_limit)    -> nil
 --- setrlimit(resource, limit)                   -> nil
 #@todo
 
-カレントプロセスでの resource が示すリソースの制限値を cur_limit と max_limit に設定します。
+カレントプロセスでのリソースの制限値を設定します。
 
 @param resource リソースの種類を以下の定数のいずれかで指定します。指定できる定数はシステムに依存します。
 
@@ -134,9 +139,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @param limit resource によって意味が決まる制限値を表す整数もしくは以下の定数を指定します。soft limit と hard limit 両方にこの値が使われます。
 
-@param cur_limit soft limit を表す整数もしくは以下の定数を指定します。
+@param cur_limit 現在の制限値(soft limit)を表す整数もしくは以下の定数を指定します。
 
-@param max_limit hard limit を表す整数もしくは以下の定数を指定します。
+@param max_limit soft limit として設定可能な最大値(hard limit)を表す整数もしくは以下の定数を指定します。
 
  * [[m:Process::RLIM_INFINITY]] リソースに制限を設けないことを意味します。
  * [[m:Process::RLIM_SAVED_CUR]]
@@ -390,7 +395,8 @@ pid で指定されたプロセスにシグナルを送ります。signal
  * [[m:Process::PRIO_USER]] 
 
 @param who which の値にしたがってプロセス ID、プロセスグループ ID、ユーザ ID のいずれかを整数で指定します。
-           prio には、-20 から 20 の値を設定します。小さな値はプライオリティが高いことを意味し、大きな値はプライオリティが低いことを意味します。
+
+@param prio プライオリティを -20 から 20 までの整数で設定します。小さな値はプライオリティが高いことを意味し、大きな値はプライオリティが低いことを意味します。
 
 @raise Errno::EXXX プライオリティの設定に失敗した場合に発生します。
 
