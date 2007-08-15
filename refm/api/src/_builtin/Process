@@ -9,14 +9,15 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@since 1.8.0
 --- abort(message = "")   -> ()
-#@todo
 
 関数 [[m:Kernel.#abort]] と同じです。
+
+@param message 終了時のメッセージを文字列で指定します。
+
 #@end
 
 #@since 1.9.0
---- daemon(nochdir = nil, noclose = nil)
-#@todo
+--- daemon(nochdir = nil, noclose = nil)    -> 0
 
 プロセスから制御端末を切り離し、
 バックグラウンドにまわってデーモンとして動作させます。
@@ -29,7 +30,10 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 ただし noclose に真を指定したときにはこの動作は抑制され、
 リダイレクトは行なわれません。
 
-0を返します。
+@param nochdir true を指定した場合、カレントディレクトリを移動しません。
+
+@param noclose true を指定した場合、標準入力・標準出力・標準エラー出力を変更しません。
+
 #@end
 
 #@since 1.8.0
@@ -119,7 +123,6 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 --- setrlimit(resource, cur_limit, max_limit)    -> nil
 --- setrlimit(resource, limit)                   -> nil
-#@todo
 
 カレントプロセスでのリソースの制限値を設定します。
 
@@ -382,7 +385,6 @@ pid で指定されたプロセスにシグナルを送ります。signal
 #@end
 
 --- setpriority(which, who, prio)    -> 0
-#@todo
 
 プロセス、プロセスグループ、
 ユーザのいずれかの現在のプライオリティを設定します
@@ -506,102 +508,118 @@ nil を返します。
 == Constants
 
 --- PRIO_PROCESS
-#@todo
 
 [[m:Process.#getpriority]] または
-[[m:Process.#setpriority]] のプロセスプライオリティ指定。
+[[m:Process.#setpriority]] のプロセスプライオリティ指定です。
 
 --- PRIO_PGRP
-#@todo
 
 [[m:Process.#getpriority]] または
-[[m:Process.#setpriority]] のプロセスグループプライオリティ。
+[[m:Process.#setpriority]] のプロセスグループプライオリティです。
 
 --- PRIO_USER
-#@todo
 
 [[m:Process.#getpriority]] または
-[[m:Process.#setpriority]] のユーザプライオリティ。
+[[m:Process.#setpriority]] のユーザプライオリティです。
 
 --- RLIMIT_AS
 #@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_CORE
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_CPU
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_DATA
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_FSIZE
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_MEMLOCK
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_NOFILE
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_NPROC
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_RSS
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_SBSIZE
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIMIT_STACK
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われるリソースの種類示す定数です。
+システムによっては定義されていません。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIM_INFINITY
-#@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]]、[[m:Process.#setrlimit]] で使われる、リソースに制限がないことを意味する定数です。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIM_SAVED_CUR
 #@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]] 参照。
 
 --- RLIM_SAVED_MAX
 #@todo
 
-[[m:Process.getrlimit]] 参照。
+[[m:Process.#getrlimit]] 参照。
 
 --- WNOHANG
-#@todo
 
 [[m:Process.#waitpid]] の第二引数に指定するフラグです。
-終了した子プロセスがない時に waitpid がブロックしません。
+終了した子プロセスがない時でも waitpid がブロックしません。
 
 --- WUNTRACED
 #@todo
 
 [[m:Process.#waitpid]] の第二引数に指定するフラグです。
-子プロセスの停止によりステータスを報告していない
-子プロセスがある時に waitpid がブロックしません。
+このフラグが指定された場合、waitpid は停止しているだけで
+終了していない子プロセスのプロセス ID も返すようになります。
+trace されている子プロセスの ID は返しません。
+
+ include Process
+ pid = fork{ Process.kill('SIGSTOP', Process.pid) }
+ p pid                          #=> 4336
+ p waitpid2(pid, WUNTRACED)     #=> [4336, #<Process::Status: pid=4336,stopped(SIGSTOP=19)>]
+
+@see [[man:waitpid(2)]]
