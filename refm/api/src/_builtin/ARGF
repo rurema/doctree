@@ -382,15 +382,62 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。
 
 --- pos -> Integer
 --- tell -> Integer
-#@todo
-[[m:IO#pos]], [[m:IO#tell]]を参照
+ARGFが現在開いているファイルのファイルポインタの現在の位置を整数で返します。
+
+  ARGV.replace(
+    Dir.glob("*").reject{|name| FileTest.file?(name) == false}
+  )
+
+  while c = ARGF.getc
+    printf("%d '%c' %s\n", ARGF.pos, c, ARGF.filename)
+    if ARGF.pos == 3
+      ARGF.skip
+    end
+  end
+
+  # 例
+  #=> 1 'c' sample.yaml
+  #=> 2 'a' sample.yaml
+  #=> 3 't' sample.yaml
+  #=> 1 '#' test.rb
+  #=> 2 '!' test.rb
+  #=> 3 '/' test.rb
+  #=> 1 'd' third.txt
+  #=> 2 'r' third.txt
+  #=> 3 'y' third.txt
+  #...
+
+@see [[m:IO#pos]], [[m:IO#tell]]
 
 --- pos=(n)
 #@todo
-[[m:IO#pos=]] を参照
+ARGFが開いているファイルのファイルポインタを指定位置に移動します
 
---- read -> String
-#@todo
+@param n 先頭からのオフセットを整数で指定します。
+
+@see [[m:IO#pos=]]
+
+--- read(length = nil, str = nil) -> String
+ARGVに指定されたファイルを先頭のファイルからlengthバイト読み込み、
+その文字列をstrに出力します。読み込んだ文字列を返します。
+
+@param length 読み込むバイト数を指定します nilの場合はARGVのすべてのファイルを読み込みます。
+
+@param str 出力先の文字列
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+
+  str = "efefefe"
+  ARGF.read(100, str)
+  p str.size #=> 100
+  p str 
+  # 例
+  #=> "cat:\n - name: taro\n   age: 7\n - name: jiro\n   age: 23\n---\ndog:\n shiba:\n- name: goro\n    age: 3\n  -"
+
+@see [[m:IO#read]]
 
 --- readchar -> Integer
 #@todo
