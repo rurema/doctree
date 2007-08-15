@@ -57,20 +57,20 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 #@end
 
 #@since 1.8.0
---- exit(status = 0)    -> ()
+--- exit(status = true)    -> ()
 
 プロセスを終了します。関数 [[m:Kernel.#exit]] と同じです。
 
-@param status 終了ステータスを整数で指定します。
+@param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
 @see [[man:exit(3)]]
 #@end
 
---- exit!(status = 1)    -> ()
+--- exit!(status = false)    -> ()
 
 関数 [[m:Kernel.#exit!]] と同じです。
 
-@param status 終了ステータスを整数で指定します。
+@param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
 @see [[man:_exit(2)]]
 
@@ -637,7 +637,6 @@ nil を返します。
 終了した子プロセスがない時でも waitpid がブロックしません。
 
 --- WUNTRACED
-#@todo
 
 [[m:Process.#waitpid]] の第二引数に指定するフラグです。
 このフラグが指定された場合、waitpid は停止しているだけで
