@@ -17,8 +17,8 @@ _builtin/EOFError               snoozer05       done
 _builtin/Enumerable             aamine
 _builtin/Exception              sheepman        done
 _builtin/FalseClass             yamane          done
-_builtin/File                   sheepman
-_builtin/FileTest               sheepman
+_builtin/File                   sheepman        done
+_builtin/FileTest               sheepman        done
 _builtin/File__Constants        takayama
 _builtin/File__Stat
 _builtin/Fixnum                 ujihisa         done
@@ -51,7 +51,7 @@ _builtin/ObjectSpace            sheepman        done
 _builtin/Precision              snoozer05       done
 _builtin/Proc                   snoozer05
 _builtin/Process                sheepman
-_builtin/Process__GID
+_builtin/Process__GID           sheepman
 _builtin/Process__Status
 _builtin/Process__Sys
 _builtin/Process__UID
