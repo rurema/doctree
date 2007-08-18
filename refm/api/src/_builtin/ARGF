@@ -494,12 +494,54 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。EOF に到達した時にはEOFError
 
 @see [[m:Kernel.readline]] [[m:ARGF.gets]]
 
---- readlines -> [String]
---- to_a -> [String]
-#@todo
+--- readlines(rs = $/) -> [String]
+--- to_a(rs = $/) -> [String]
+ARGFの各行を配列に読み込んで返します。rsがnilの場合は要素に各ファイルをすべて読み込んだ配列を返します。
+
+@param rs 行区切り文字
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+  aall = ARGF.readlines
+  p aall[0, 3]
+  # 例
+  #=> ["cat:\n", " - name: taro\n", "   age: 7\n"] 
+  p ARGF.closed? #=> true
+
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+
+  vsize = ARGV.size
+  aall = ARGF.readlines(nil)
+  p ARGF.closed? #=> true
+  p vsize == aall.size #=> true
+
+@see [[m:$/]] [[m:IO#readlines]]
 
 --- rewind -> 0
-#@todo
+ARGFが現在開いているファイルのファイルポインタを先頭に戻します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+
+  #各ファイルの先頭から３行を２回表示する
+  until ARGF.closed?
+    1.upto(2){|i|
+      printf("filename:%s at %d\n", ARGF.filename, i)
+      1.upto(3){
+        line = ARGF.readline
+        p line
+        break if ARGF.eof?
+      }
+      ARGF.rewind
+    }
+    ARGF.skip
+  end 
 
 --- seek -> 0
 #@todo
