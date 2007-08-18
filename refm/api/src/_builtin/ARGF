@@ -543,11 +543,54 @@ ARGFが現在開いているファイルのファイルポインタを先頭に戻します。
     ARGF.skip
   end 
 
---- seek -> 0
-#@todo
+--- seek(offset, whence = IO::SEEK_SET) -> 0
+ARGFが現在開いているファイルのファイルポインタを whence の位置から offset だけ移動させます。 offset 位置への移動が成功すれば 0 を返します。
+
+@param offset ファイルポインタを移動させるオフセットを整数で指定します。
+@param whence [[m:IO#seek]]を参照
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+
+  until ARGF.closed?
+    begin
+      ARGF.seek(-13, IO::SEEK_END)
+      printf "(%s):%s", ARGF.filename, ARGF.readline
+    rescue Errno::EINVAL
+      printf "Error %s (%s)\n", ARGF.filename, $!.to_s
+    end
+    ARGF.skip
+  end
+  #例
+  #=> (sample.yaml):d of sample
+  #=> (test.rb):.skip
+  #=> (test.rb~):.skip
+  #=> Error third.txt (Invalid argument - third.txt)
+  #=> (ugo.yaml):
+
+@see [[m:IO#seek]]
 
 --- to_io -> IO
-#@todo
+ARGFが現在開いているファイルの[[c:IO]]オブジェクトを返します
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+
+  until ARGF.closed?
+    printf("最終更新時刻 %s (%s)\n", ARGF.to_io.stat.mtime, ARGF.filename)
+    ARGF.skip
+  end 
+  #例
+  #=> 最終更新時刻 Thu May 03 14:05:53 +0900 2007 (sample.yaml)
+  #=> 最終更新時刻 Sat Aug 18 16:31:42 +0900 2007 (test.rb)
+  #=> 最終更新時刻 Sat Aug 18 16:31:30 +0900 2007 (test.rb~)
+  #=> 最終更新時刻 Sun Jun 24 13:08:12 +0900 2007 (third.txt)
+  #=> 最終更新時刻 Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
+  #...
 
 #@if (version >= "1.9.0")
 --- readpartial(length, str = nil)
