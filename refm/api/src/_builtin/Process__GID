@@ -11,9 +11,8 @@
 
 --- change_privilege(id)    -> Integer
 
-実グループ ID・実効グループ ID・保存グループ ID のすべてを
-放棄して他のグループになります。成功したら id を返します。
-root 権限を完全に放棄するために使います。
+実グループ ID・実効グループ ID・保存グループ ID のすべてを指定された id に変更します。
+成功したら id を返します。root 権限を完全に放棄するために使います。
 
 利用できるかはプラットフォームに依存します。
 
@@ -21,7 +20,7 @@ root 権限を完全に放棄するために使います。
 
 @raise ArgumentError 変更できないグループ ID があった場合に発生します。例外の発生時にこのメソッドを呼び出す前の各グループ ID の値が保存されているかどうかは保証されません。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
    [Process.gid, Process.egid]          #=> [0, 0]
    Process::GID.change_privilege(33)    #=> 33
