@@ -28,7 +28,7 @@
 
 @raise ArgumentError 変更できないユーザ ID があった場合に発生します。例外の発生時にこのメソッドを呼び出す前の各ユーザ ID の値が保存されているかどうかは保証されません。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
    [Process.uid, Process.euid]          #=> [0, 0]
    Process::UID.change_privilege(33)    #=> 33
@@ -52,7 +52,7 @@
 
 @raise Errno::EPERM 設定できない場合に発生します。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
    [Process.uid, Process.euid]          #=> [0, 0]
    Process::UID.grant_privilege(33)     #=> 33
@@ -66,7 +66,7 @@
 
 利用できるかはプラットフォームに依存します。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 --- re_exchangeable?    -> boolean
 
@@ -103,7 +103,7 @@
                     権限に復帰できないにも発生します。ブロック内でユーザ ID が変更
                     されたなどの理由が挙げられます。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 なお、保存ユーザ ID を持たない環境でこのメソッドを実行すると
 実ユーザ ID が変化します。
