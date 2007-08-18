@@ -82,10 +82,13 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 @see [[man:fork(2)]]
 
 #@since 1.9.0
---- spawn(cmd, *arg)
-#@todo
+--- spawn(cmd, *arg)    -> Integer
 
 関数 [[m:Kernel.#spawn]] と同じです。
+
+@param cmd [[m:Kernel.#spawn]] と同じです。
+
+@param arg [[m:Kernel.#spawn]] と同じです。
 #@end
 
 == Module Functions
@@ -171,11 +174,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 カレントプロセスの実効グループ ID を gid に設定します。
 
-@param gid 実効グループ ID を整数で指定します。-1 を指定した場合 何もしません。
+動作の詳細はプラットフォームに依存します。
+実効グループ ID 以外のグループ ID も変更されるかも知れません。
+
+@param gid 実効グループ ID を整数で指定します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
-@see [[man:setegid(2)]]
+@see [[c:Process::GID.#eid=]]
 
 --- euid        -> Integer
 
@@ -187,11 +193,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 カレントプロセスの実効ユーザ ID を uid に設定します。
 
-@param euid 実効ユーザ ID を整数で指定します。-1 を指定した場合 何もしません。
+動作の詳細はプラットフォームに依存します。
+実効ユーザ ID 以外のユーザ ID も変更されるかも知れません。
+
+@param euid 実効ユーザ ID を整数で指定します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
-@see [[man:seteuid(2)]]
+@see [[c:Process::UID.#eid=]]
 
 --- gid        -> Integer
 
@@ -203,11 +212,14 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 カレントプロセスの実グループ ID を gid に設定します。
 
-@param gid 実グループ ID を整数で指定します。-1 を指定した場合 何もしません。
+動作の詳細はプラットフォームに依存します。
+実グループ ID 以外のグループ ID も変更されるかも知れません。
+
+@param gid 実グループ ID を整数で指定します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
-@see [[man:setgid(2)]]
+@see [[c:Process::GID]]
 
 --- groups     -> [Integer]
 
@@ -269,11 +281,14 @@ root だけがこのメソッドを呼ぶことができます。
 
 プロセスの実ユーザ ID を id に設定します。
 
+動作の詳細はプラットフォームに依存します。
+実ユーザ ID 以外のユーザ ID も変更されるかも知れません。
+
 @param id 実ユーザ ID を整数で指定します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
-@see [[man:setuid(2)]]
+@see [[c:Process::UID]]
 
 --- getpgid(pid = 0)   -> Integer
 
@@ -313,10 +328,16 @@ which に従いプロセス、プロセスグループ、ユーザのいずれかの現在のプライオリティを
 @see [[man:getpriority(2)]]
 
 #@since 1.8.0
---- initgroups(user, group)
-#@todo
+--- initgroups(user, group)    -> [Integer]
 
-@see [[man:initgroups(3)]]
+user が属するグループのリストを更新し、group をそのリストに加えます。
+
+このメソッドを呼ぶには root 権限が必要です。
+
+@param user ユーザ名を表す文字列で指定します。
+
+@param group ユーザグループ ID を整数で指定します。
+
 #@end
 
 --- kill(signal, pid, *rest)    -> Integer
