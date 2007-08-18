@@ -32,7 +32,7 @@
 
 利用できるかはプラットフォームに依存します。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
    Process.egid   #=> 500
 
@@ -53,7 +53,7 @@
 
 @raise Errno::EPERM 設定できない場合に発生します。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
    [Process.gid, Process.egid]          #=> [0, 0]
    Process::GID.grant_privilege(33)     #=> 33
@@ -67,7 +67,7 @@
 
 利用できるかはプラットフォームに依存します。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
    [Process.gid, Process.egid]   #=> [0, 33]
    Process::GID.re_exchange      #=> 0
@@ -115,7 +115,7 @@
                     権限に復帰できないにも発生します。ブロック内でグループ ID が変更
                     されたなどの理由が挙げられます。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで提供されていない場合に発生します。
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 なお、保存グループ ID を持たない環境でこのメソッドを実行すると
 実グループ ID が変化します。
