@@ -1,5 +1,7 @@
 = class ScriptError < Exception
 
+スクリプトのエラーを表す例外クラスです。
+
 以下の例外クラスのスーパークラスです。
 
 #@# list child classes automatically
