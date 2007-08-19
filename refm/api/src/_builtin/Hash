@@ -154,13 +154,16 @@ include Enumerable
 --- new(ifnone=nil) -> Hash
 
 ¶õ¤Î¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÀ¸À®¤·¤Þ¤¹¡£ifnone ¤Ï¥­¡¼¤ËÂÐ
-±þ¤¹¤ëÃÍ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ç¤¹¡£
+±þ¤¹¤ëÃÍ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ç¤¹¡£ÀßÄê¤·¤¿¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï[[m:Hash#default]]¤Ç»²¾È¤Ç¤­¤Þ¤¹¡£
 
 ifnone¤ò¾ÊÎ¬¤·¤¿ Hash.new ¤Ï {} ¤ÈÆ±¤¸¤Ç¤¹¡£
-ÀßÄê¤·¤¿¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï[[m:Hash#default]]¤Ç»²¾È¤Ç¤­¤Þ¤¹¡£
 
 @param ifnone ¥­¡¼¤ËÂÐ±þ¤¹¤ëÃÍ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ç¤¹¡£
   ¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Î°·¤¤¤Ë¤ÏÃí°Õ¤¬É¬Í×¤Ç¤¹( [[trap:Hash]] )
+
+  h = Hash.new("foo")
+  p h[1]                  # => "foo"
+
 #@if (version >= "1.8.0")
 --- new {|hash, key| ...} -> Hash
 ¶õ¤Î¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÀ¸À®¤·¤Þ¤¹¡£¥Ö¥í¥Ã¥¯¤ÎÉ¾²Á·ë²Ì¤¬¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ë¤Ê¤ê¤Þ
@@ -274,7 +277,9 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 --- fetch(key, default) -> object
 --- fetch(key) {|key| ... } -> object
 
-key ¤Ë´ØÏ¢¤Å¤±¤é¤ì¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤
+key ¤Ë´ØÏ¢¤Å¤±¤é¤ì¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+
+³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤
 ¤Ê¤¤»þ¤Ë¤Ï¡¢°ú¿ô default ¤¬Í¿¤¨¤é¤ì¤Æ¤¤¤ì¤Ð¤½¤ÎÃÍ¤ò¡¢¥Ö¥í¥Ã
 ¥¯¤¬Í¿¤¨¤é¤ì¤Æ¤¤¤ì¤Ð¤½¤Î¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
 #@if (version >= "1.9.0")
@@ -371,7 +376,9 @@ key ¤ËÂÐ¤·¤Æ value ¤ò´ØÏ¢¤Å¤±¤Þ¤¹¡£value ¤òÊÖ¤·
   h = Hash.new("default value")
   h[:some] = "some"
   p h #=> {:some=>"some"}
+  
   h.clear
+  
   p h #=> {}
   p h.default #=> "default value"
 
@@ -391,8 +398,11 @@ key ¤ËÂÐ¤·¤Æ value ¤ò´ØÏ¢¤Å¤±¤Þ¤¹¡£value ¤òÊÖ¤·
 @return self¤òÊÖ¤·¤Þ¤¹¡£
 
    h1 = { "a" => 100, "b" => 200, :c => "c" }
+   p h1.compare_by_identity? #=> false
    p h1["a"]        #=> 100
+   
    h1.compare_by_identity
+   
    p h1.compare_by_identity? #=> true
    p h1["a"]        #=> nil  # ¤³¤Î"a"¤ÈºÇ½é¤Î"a"¤È¤Ï°ã¤¦¥ª¥Ö¥¸¥§¥¯¥È
    p h1[:c]         #=> "c"  # Æ±¤¸ÆâÍÆ¤Î¥·¥ó¥Ü¥ë¤Ï¤¹¤Ù¤ÆÆ±°ì
@@ -514,8 +524,9 @@ key ¤ò°ú¿ô¤Ë¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Æ¤½¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
 @param value ÀßÄê¤¹¤ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ç¤¹¡£
 @return value ¤òÊÖ¤·¤Þ¤¹¡£
 
-  h = Hash.new
+  h = {}
   p h.default(:some) #=>nil
+  
   h.default = "default"
   p h.default(:some) #=>"default"
 
@@ -555,12 +566,6 @@ clone ¤Ï frozen tainted singleton-class ¤Î¾ðÊó¤â´Þ¤á¤Æ¥³¥Ô¡¼¤·¤Þ¤¹¤¬¡¢ dup ¤ÏÆâÍ
   h2["as"].upcase!
   p h2 #=> {"have"=>"has", "as"=>"AS A"}
   p h1 #=> {"have"=>"have a", "as"=>"AS A"}
-  
-  #»²¾È¤·¤Æ¤¤¤ë¥ª¥Ö¥¸¥§¥¯¥È¤â¥³¥Ô¡¼¤¹¤ë¿¼¤¤(deep)¥³¥Ô¡¼¤ò¤¹¤ëÎã
-  h3 = Marshal.load(Marshal.dump(h1))
-  h3["have"].upcase!
-  p h3 #=> {"have"=>"HAVE A", "as"=>"AS A"}
-  p h1 #=> {"have"=>"have a", "as"=>"AS A"}
 
 @see [[m:Object#clone]]
 
@@ -576,9 +581,11 @@ key ¤ËÂÐ±þ¤¹¤ëÃÍ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
 @param key ¼è¤ê½ü¤¯¥­¡¼¤ò»ØÄê¤·¤Þ¤¹¡£
 
   h = {:ab => "some" , :cd => "all"}
+  
   p h.delete(:ab) #=> "some"
   p h.delete(:ef) #=> nil
   p h.delete(:ef){|key|"Nothing"} #=> "Nothing"
+  
   p h #=> {:cd=>"all"}
 
 @see [[m:Hash#delete_if]]
@@ -610,6 +617,7 @@ reject! ¤Ï¡¢Í×ÁÇ¤òºï½ü¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¤Ï nil ¤òÊÖ¤·¡¢
   h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
   p h.reject!{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
   p h #=> {6=>"4", 8=>"2"}
+  
   p h.delete_if{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
   p h.reject!{|key, value| key.to_i < value.to_i} #=> nil
 
@@ -654,6 +662,7 @@ each ¤È each_pair ¤Ç¤Ï¥Ö¥í¥Ã¥¯¥Ñ¥é¥á¡¼¥¿¤Î¼õÅÏ¤·Êý¤¬°Û¤Ê¤ê¤Þ¤¹¡£
   {:a=>1, :b=>2}.each_pair {|*a| p a}
   # => [:a, 1]
        [:b, 2]
+  
 #@if (version >= "1.9.0")
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
@@ -678,6 +687,7 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
   {:a=>1, :b=>2}.each_key {|k| p k}
   # => :a
        :b
+  
 #@if (version >= "1.9.0")
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
@@ -702,6 +712,7 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
   {:a=>1, :b=>2}.each_value {|v| p v}
   # => 1
        2
+  
 #@if (version >= "1.9.0")
   p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
@@ -811,10 +822,10 @@ Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 @see [[m:Object#hash]]
 
 #@if (version >= "1.8.0")
---- merge(other)
---- merge(other) {|key, self_val, other_val| ... }
---- merge!(other)
---- merge!(other) {|key, self_val, other_val| ... }
+--- merge(other) -> Hash
+--- merge(other) {|key, self_val, other_val| ... } -> Hash
+--- merge!(other) -> self
+--- merge!(other) {|key, self_val, other_val| ... } -> self
 
 ¥ì¥·¡¼¥Ð¤Î¥Ï¥Ã¥·¥å¤ÎÆâÍÆ¤òother¤Ç¥Þ¡¼¥¸¤·¤¿·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï¥ì¥·¡¼¥Ð¤ÎÀßÄê¤Î¤Þ¤Þ¤Ç¤¹¡£
 
@@ -830,8 +841,10 @@ Hash#merge! ¤Ï¡¢¥Þ¡¼¥¸¤Î·ë²Ì¤Çself¤òÊÑ¹¹¤¹¤ëÇË²õÅª¥á¥½¥Ã¥É¤Ç¡¢[[m:Hash#update]] 
 
   foo = {1 => 'a', 2 => 'b', 3 => 'c'}
   bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+  
   p foo.merge(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
   p foo  #=> {1=>"a", 2=>"b", 3=>"c"}
+  
   p foo.merge!(bar) {|key, foo_val, bar_val| foo_val + bar_val } #=> {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
   p foo  #=> {1=>"a", 2=>"bB", 3=>"cC", 4=>"D"}
 
@@ -859,6 +872,7 @@ Hash#merge! ¤Ï¡¢¥Þ¡¼¥¸¤Î·ë²Ì¤Çself¤òÊÑ¹¹¤¹¤ëÇË²õÅª¥á¥½¥Ã¥É¤Ç¡¢[[m:Hash#update]] 
 
   foo = {1 => 'a', 2 => 'b', 3 => 'c'}
   bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+  
   p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
   p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
 
