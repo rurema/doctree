@@ -1,10 +1,10 @@
 #@since 1.8.0
 = module Process::Status
 
-[[m:Process.#wait]] などで生成されるオブジェクト。プロセスの終
-了ステータスを表現します。
+プロセスの終了ステータスを表現するクラスです。
+メソッド [[m:Process.#wait]] などの返り値として使われます。
 
-使用例
+=== 使用例
 
 wait を使用した例
 
@@ -73,28 +73,27 @@ SIGCHLD を trap する例
 
 == Instance Methods
 
---- ==(other)
-#@todo
+--- ==(other)    -> boolean
 
 同じステータスの場合に真を返します。
 
 other が数値の場合、self.to_i との比較が行われます。こ
 れは後方互換性のためです。
 
---- &(other)
-#@todo
+@param other 自身と比較したいオブジェクトを指定します。
 
-to_i & other と同じです。
+--- &(other)    -> Integer
 
+self.to_i & other と同じです。
 このメソッドは後方互換性のためにあります。
 
---- pid
-#@todo
+@param other 自身との & 演算をしたい整数を指定します。
+
+--- pid    -> Integer
 
 終了したプロセスのプロセス ID を返します。
 
---- to_i
-#@todo
+--- to_i    -> Integer
 
 C 言語での終了ステータス表現の整数を返します。
 
@@ -102,98 +101,74 @@ C 言語での終了ステータス表現の整数を返します。
 に渡した終了ステータスが、下位 8 bit にシグナル等で終了した等の情
 報が入っています。
 
---- to_int
-#@todo
+--- to_int    -> Integer
 
-to_i と同じです。このメソッドにより $? が [[c:Fixnum]]
+to_i と同じです。
+
+このメソッドにより $? が [[c:Fixnum]]
 として扱われるようになります(暗黙の型変換)。これは後方互換性のため
 です。
 
-  fork { exit 1 }
-  Process.wait
-  p $? # => 256
-
---- to_s
-#@todo
+--- to_s    -> String
 
 to_i.to_s と同じです。
 
---- exited?
-#@todo
+--- exited?    -> boolean
 
-プロセスが [[man:exit(2)]] により自分で終了した(他のプロ
-セスに止められたのではない)場合、真を返します。
+プロセスが [[man:exit(2)]] などにより正常に終了した場合に、真を返します。
+そうでない場合に false を返します。
 
---- exitstatus
-#@todo
+--- exitstatus    -> nil | Integer
 
 exited? が真の場合プロセスが返した終了ステータスの整数を、そ
 うでない場合は nil を返します。
 
---- inspect
-#@todo
+--- inspect    -> String
 
-プロセスの状態を以下のフォーマットで出力します。
+プロセスの状態を以下のフォーマットで返します。
 
-    正常終了のとき
+: 正常終了のとき
+ #<Process::Status: pid=18262,exited(nnn)>
+: シグナルによる停止のとき
+ #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
+: シグナルによる終了のとき
+ #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
+: コアダンプしたとき(このステータスの表示はシステムに依存します)
+ #<Process::Status: pid=18262,coredumped>
 
-    #<Process::Status: pid=18262,exited(nnn)>
-
-    シグナルによる停止のとき
-
-    #<Process::Status: pid=18262,stopped(SIGxxx=nnn)>
-
-    シグナルによる終了のとき
-
-    #<Process::Status: pid=18262,signaled(SIGxxx=nnn)>
-
-    コアダンプしたとき(このステータスの表示はシステムに依存します)
-
-    #<Process::Status: pid=18262,coredumped>
-
-
---- stopped?
-#@todo
+--- stopped?    -> boolean
 
 プロセスが現在停止(終了ではない)している場合に真を返します。
-Process.waitpid に Process::WUNTRACED フラグを設定した
+[[m:Process.#waitpid]] に [[m:Process::WUNTRACED]] フラグを設定した
 場合にだけ真になりえます。
 
---- stopsig
-#@todo
+--- stopsig    -> nil | Integer
 
 stopped? が真の場合そのシグナルの番号を、そうでない場合は
 nil を返します。
 
---- signaled?
-#@todo
+--- signaled?    -> boolean
 
 プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
 を返します。
 
---- termsig
-#@todo
+--- termsig    -> nil | Integer
 
 signaled? が真の場合プロセスを終了させたシグナル番号を、
 そうでない場合は nil を返します。
 
---- coredump?
-#@todo
+--- coredump?    -> boolean
 
 終了時にコアダンプしていたら真を返します。
 
-(このメソッドはシステムに依存します。サポートしないプラットフォー
-ムでは常に false を返します)
+このメソッドはシステムに依存します。サポートしないプラットフォー
+ムでは常に false を返します。
 
-#@end
+--- >>(num)    -> Integer
 
-#@since 1.8.0
-#@# 追加されたバージョンは不明
---- stat >> num
-#@todo
-#@# => fixnum
+self.to_i >> num と同じです。
 
-Shift the bits in stat right num places.
+@param num 整数を指定します。
 
    fork { exit 99 }   #=> 26563
    Process.wait       #=> 26563
@@ -201,13 +176,10 @@ Shift the bits in stat right num places.
    $? >> 8            #=> 99
 
 #@since 1.8.2
---- stat.success?
-#@todo
-#@# => true, false or nil
+--- success?    -> boolean
 
-Returns true if stat is successful, false if not. Returns nil
-if exited? is not true.
-
+プロセスの終了状態が成功である場合に true を返します。
+そうでない場合に false を返します。
 #@end
 
 #@end
