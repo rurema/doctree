@@ -84,27 +84,33 @@ open(2) で O_SYNCが指定できる場合に使えます。
 
 #@since 1.8.0
 --- FNM_NOESCAPE
-#@todo
+エスケープ文字 `\' を普通の文字とみなします。
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
 --- FNM_PATHNAME
-#@todo
+ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
+シェルのパターンマッチにはこのフラグが使用されています。
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 
---- FNM_PERIOD
-#@todo
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
-
---- FNM_CASEFOLD
-#@todo
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
-
+#@if (version >= "1.8.0")
 --- FNM_DOTMATCH
-#@todo
+ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
+[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+
+1.8.0以前では、FNM_DOTMATCHという名前でした。
+#@else
+--- FNM_PERIOD
+ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
+1.8.0以降では、FNM_DOTMATCH に置き換えられました。
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 #@end
 
+--- FNM_CASEFOLD
+アルファベットの大小文字を区別せずにパターンマッチを行います。
+[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+
 #@since 1.8.5
 --- FNM_SYSCASE
-#@todo
+case hold なファイルシステムの場合、FNM_CASEFOLD の値になり、そうでなければゼロの値になります。
+[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
 #@end
