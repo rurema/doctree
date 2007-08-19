@@ -173,7 +173,7 @@ nkf
 observer
 open-uri                        sheepman
 open3
-openssl                         hexa
+openssl                         
 optparse                        sheepman
 ostruct                         eklerni         done
 
