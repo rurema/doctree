@@ -82,7 +82,6 @@ open(2) で O_SYNCが指定できる場合に使えます。
 
 #@# [[m:File#fnmatch]], [[m:Dir#glob で使われる定数 ------------------
 
-#@since 1.8.0
 --- FNM_NOESCAPE
 エスケープ文字 `\' を普通の文字とみなします。
 [[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
