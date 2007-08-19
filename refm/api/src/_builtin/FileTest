@@ -1,7 +1,6 @@
 = module FileTest
 
-FileTest はファイルの検査関数を集めたモジュールです。このモジュー
-ルはインクルードしても使えます。
+ファイルの検査関数を集めたモジュールです。
 
 === 注意
 
@@ -195,27 +194,27 @@ filename が存在して、そのサイズが 0 である時、真を返します。
 @see [[m:FileTest.#size]], [[m:FileTest.#size?]]
 
 #@since 1.9.0
---- world_readable?(file_name)     -> Integer | nil
-#@todo
+--- world_readable?(path)    -> nil | Integer
 
-If file_name is readable by others, returns an integer representing
-the file permission bits of file_name. Returns nil otherwise.
-The meaning of the bits is platform dependent; on Unix systems,
-see stat(2).
+path が全てのユーザから読めるならばそのファイルのパーミッションを表す
+整数を返します。そうでない場合は nil を返します。
 
-   File.world_readable?("/etc/passwd")           # => 420
-   m = File.world_readable?("/etc/passwd")
-   sprintf("%o", m)                              # => "644"
+整数の意味はプラットフォームに依存します。
 
---- world_writable?(file_name)     -> Integer | nil
-#@todo
+@param path パスを表す文字列か IO オブジェクトを指定します。
 
-If file_name is writable by others, returns an integer representing
-the file permission bits of file_name. Returns nil otherwise.
-The meaning of the bits is platform dependent; on Unix systems,
-see stat(2).
+   m = FileTest.world_readable?("/etc/passwd")
+   "%o" % m                               # => "644"
 
-   File.world_writable?("/tmp")                  #=> 511
-   m = File.world_writable?("/tmp")
-   sprintf("%o", m)                              #=> "777"
+--- world_writable?(path)    -> boolean
+
+path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
+整数を返します。そうでない場合は nil を返します。
+
+整数の意味はプラットフォームに依存します。
+
+@param path パスを表す文字列か IO オブジェクトを指定します。
+
+   m = FileTest.world_writable?("/tmp")
+   "%o" % m                               #=> "777"
 #@end
