@@ -1,7 +1,9 @@
 = class Proc < Object
 
-Proc はブロックをコンテキスト(ローカル変数のスコープやスタックフ
-レーム)とともにオブジェクト化した手続きオブジェクトです。Proc は
+ブロックをコンテキスト(ローカル変数のスコープやスタックフ
+レーム)とともにオブジェクト化した手続きオブジェクトです。
+
+Proc は
 ローカル変数のスコープを導入しないことを除いて名前のない関数のように使
 えます([[unknown:Ruby用語集/ダイナミックローカル変数]]は Proc ローカル
 の変数として使えます)。
@@ -60,9 +62,8 @@ Proc を生成したメソッドからリターンしてしまった後は Proc
 
 == Class Methods
 
---- new
---- new { ... }
-#@todo
+--- new -> Proc
+--- new { ... } -> Proc
 
 ブロックをコンテキストとともにオブジェクト化して返します。
 
@@ -103,15 +104,15 @@ Proc.new は、Proc#initialize が定義されていれば
 
 == Instance Methods
 
---- [](arg ...)
---- call(arg ... )
-#@todo
+--- [](arg ...) -> ()
+--- call(arg ... ) -> ()
 
 手続きオブジェクトを実行してその結果を返します。引数はブロックの引
 数にそのまま(多重代入のルールに従い)代入されます。
 
---- arity
-#@todo
+@raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
+
+--- arity -> Fixnum
 
 Procオブジェクトの引数の数を返します。self が引数の数
 を可変長で受け取れる場合
@@ -120,19 +121,16 @@ Procオブジェクトの引数の数を返します。self が引数の数
 
 を返します。
 
---- binding
-#@todo
+--- binding -> Binding
 
 Proc オブジェクトが保持するコンテキストを [[c:Binding]] オブ
 ジェクトで返します。
 
---- to_proc
-#@todo
+--- to_proc -> self
 
 self を返します。
 
---- to_s
-#@todo
+--- to_s -> String
 
 self の文字列表現を返します。可能なら self を生成した
 ソースファイル名、行番号を含みます。
@@ -143,9 +141,8 @@ self の文字列表現を返します。可能なら self を生成した
 
   => "#<Proc:0x0x401a880c@-:3>"
 
-#@since 1.8.0
---- yield(arg ... )
-#@todo
+#@since 1.9.0
+--- yield(arg ... ) -> ()
 
 [[m:Proc#call]] と同じですが、引数の数のチェックを行いません。
 
@@ -160,4 +157,8 @@ self の文字列表現を返します。可能なら self を生成した
     yield(1)
   end
   foo {|a,b,c| p [a,b,c]}
+
+@raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
+
 #@end
+
