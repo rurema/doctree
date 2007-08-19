@@ -1,16 +1,16 @@
 = class File < IO
-ファイルアクセスのためのクラスです。
-通常 [[m:Kernel.#open]] または [[m:File.open]] を使って生成します。
-
-#@if (version >= "1.8.0")
-File::Constants は、[[c:IO]] でインクルードされます。
-#@else
+#@if (version < "1.8.0")
 include File::Constant
 #@end
 
-Fileクラスがインクルードしている [[c:File::Constants]] は File クラスに関係する定数を
+ファイルアクセスのためのクラスです。
+
+通常 [[m:Kernel.#open]] または [[m:File.open]] を使って生成します。
+#@since 1.8.0
+[[c:IO]] クラスがインクルードしている [[c:File::Constants]] は File クラスに関係する定数を
 格納したモジュールです。
-また [[c:File::Stat]] は stat 構造体([[man:stat(2)]]参照)を表すクラスです。
+#@end
+また [[c:File::Stat]] は stat 構造体( [[man:stat(2)]] 参照)を表すクラスです。
 
 == Class Methods
 
@@ -304,8 +304,11 @@ pathで指定されるファイルをオープンし、ファイルオブジェクトを
 @raise Errno::EXXX 失敗した場合に発生します。
 
 #@since 1.9.0
---- path(filename)
-#@todo
+--- path(filename)    -> String
+
+指定されたファイル名を文字列で返します。filename が文字列でない場合は、to_path メソッドを呼びます。
+
+@param filename ファイル名を表す文字列か to_path メソッドが定義されたオブジェクトを指定します。
 #@end
 
 --- readlink(path)    -> String
@@ -563,27 +566,29 @@ umask を変更します。変更前の umask の値を返します
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
 #@since 1.9.0
---- world_readable?(path)    -> boolean
-#@todo
-If _file_name_ is readable by others, returns an integer
-representing the file permission bits of _file_name_. Returns +nil+
-otherwise. The meaning of the bits is platform dependent; on Unix
-systems, see +stat(2)+.
+--- world_readable?(path)    -> nil | Integer
 
-        File.world_readable?("/etc/passwd")           # => 420
-        m = File.world_readable?("/etc/passwd")
-        sprintf("%o", m)                              # => "644"
+path が全てのユーザから読めるならばそのファイルのパーミッションを表す
+整数を返します。そうでない場合は nil を返します。
+
+整数の意味はプラットフォームに依存します。
+
+@param path パスを表す文字列か IO オブジェクトを指定します。
+
+   m = File.world_readable?("/etc/passwd")
+   "%o" % m                               # => "644"
 
 --- world_writable?(path)    -> boolean
-#@todo
-If _file_name_ is writable by others, returns an integer
-representing the file permission bits of _file_name_. Returns +nil+
-otherwise. The meaning of the bits is platform dependent; on Unix
-systems, see +stat(2)+.
 
-        File.world_writable?("/tmp")                  #=> 511
-        m = File.world_writable?("/tmp")
-        sprintf("%o", m)                              #=> "777"
+path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
+整数を返します。そうでない場合は nil を返します。
+
+整数の意味はプラットフォームに依存します。
+
+@param path パスを表す文字列か IO オブジェクトを指定します。
+
+   m = File.world_writable?("/tmp")
+   "%o" % m                               #=> "777"
 #@end
 
 == Instance Methods
