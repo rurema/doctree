@@ -181,7 +181,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
-@see [[c:Process::GID.#eid=]]
+@see [[m:Process::GID.#eid=]]
 
 --- euid        -> Integer
 
@@ -200,7 +200,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
-@see [[c:Process::UID.#eid=]]
+@see [[m:Process::UID.#eid=]]
 
 --- gid        -> Integer
 
