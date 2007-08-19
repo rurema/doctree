@@ -50,11 +50,11 @@ _builtin/Object                 aamine
 _builtin/ObjectSpace            sheepman        done
 _builtin/Precision              snoozer05       done
 _builtin/Proc                   snoozer05
-_builtin/Process                sheepman
-_builtin/Process__GID           sheepman
-_builtin/Process__Status        sheepman
-_builtin/Process__Sys           sheepman
-_builtin/Process__UID           sheepman
+_builtin/Process                sheepman        done
+_builtin/Process__GID           sheepman        done
+_builtin/Process__Status        sheepman        done
+_builtin/Process__Sys           sheepman        done
+_builtin/Process__UID           sheepman        done
 _builtin/Range                  ujihisa
 _builtin/RangeError             snoozer05       done
 _builtin/Regexp                 aamine
