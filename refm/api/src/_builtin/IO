@@ -5,7 +5,7 @@ include Enumerable
 include File::Constants
 #@end
 
-IO クラスは基本的な入出力機能を実装します。
+基本的な入出力機能のためのクラスです。
 
   * [[unknown:Traps: IO ポートのオープンに関わる問題|trap::IO]]
 

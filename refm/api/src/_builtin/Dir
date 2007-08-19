@@ -1,7 +1,7 @@
 = class Dir < Object
 include Enumerable
 
-ディレクトリ内の要素を順に返すディレクトリストリーム操作のためのクラス。
+ディレクトリ内の要素を順に返すディレクトリストリーム操作のためのクラスです。
 
 == Class Methods
            
