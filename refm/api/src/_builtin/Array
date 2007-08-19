@@ -1,7 +1,9 @@
 = class Array < Object
 include Enumerable
 
-配列クラス。配列の要素は任意の Ruby オブジェクトです。
+配列クラスです。
+配列は任意の Ruby オブジェクトを要素として持つことができます。
+
 一般的には配列は配列式を使って
 
   [1, 2, 3]
@@ -912,15 +914,39 @@ val と == で等しい最後の要素の位置を返します。
 --- slice(nth)       -> nil | object
 --- slice(pos, len)  -> nil | Array
 --- slice(range)     -> nil | Array
-#@todo 
-[[m:Array#[] ]] と同じです。
+
+指定された自身の要素か部分配列を返します。[[m:Array#[] ]] と同じです。
+
+@param nth [[m:Array#[] ]] と同じです。
+
+@param pos [[m:Array#[] ]] と同じです。
+
+@param len [[m:Array#[] ]] と同じです。
+
+@param range [[m:Array#[] ]] と同じです。
 
 --- slice!(nth)       -> nil | object
 --- slice!(pos, len)  -> nil | Array
 --- slice!(range)     -> nil | Array
-#@todo
-指定した要素を取り除いて返します。取り除く要素がなければ nil
+
+指定した要素を自身から取り除いて返します。取り除く要素がなければ nil
 を返します。
+
+@param nth [[m:Array#[] ]] と同じです。
+
+@param pos [[m:Array#[] ]] と同じです。
+
+@param len [[m:Array#[] ]] と同じです。
+
+@param range [[m:Array#[] ]] と同じです。
+
+   a = [ "a", "b", "c" ]
+   a.slice!(1)     #=> "b"
+   a               #=> ["a", "c"]
+   a.slice!(-1)    #=> "c"
+   a               #=> ["a"]
+   a.slice!(100)   #=> nil
+   a               #=> ["a"]
 
 --- sort                -> Array
 --- sort!               -> self
