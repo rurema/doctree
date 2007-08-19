@@ -1,74 +1,132 @@
 #@since 1.8.0
 = module Process::Sys
 
-[[c:Process::UID]], [[c:Process::GID]] と異なり、
-ユーザ ID・グループ ID を操作するシステムコールを
-集めたモジュール。
+ユーザ ID・グループ ID を操作するシステムコールを直接呼ぶためのモジュールです。
+
+ポータブルにユーザ ID・グループ ID を操作するためのモジュール [[c:Process::UID]], [[c:Process::GID]] 
+も提供されています。Process::Sys と [[c:Process::UID]] や [[c:Process::GID]] を同時に使うことは
+非推奨です。
 
 == Module Functions
 
---- getuid
-#@todo
-プロセスの実ユーザ ID を返します。
-C の getuid() と同じです。
+--- getuid    -> Intger
 
---- geteuid
-#@todo
-プロセスの実効ユーザ ID を返します。
-C の geteuid() と同じです。
+システムコールの [[man:getuid(2)]] を呼びます。返り値を整数で返します。
 
---- getgid
-#@todo
-プロセスの実グループ ID を返します。
-C の getguid() と同じです。
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
---- getegid
-#@todo
-プロセスの実効グループ ID を返します。
-C の getegid() と同じです。
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
---- setuid(id)
-#@todo
-C の setuid() と同じです。
+--- geteuid    -> Intger
 
---- setgid(id)
-#@todo
-C の setgid() と同じです。
+システムコールの [[man:geteuid(2)]] を呼びます。返り値を整数で返します。
 
---- setruid(id)
-#@todo
-C の setgid() と同じです。
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
---- setrgid(id)
-#@todo
-C の setgid() と同じです。
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
---- seteuid(id)
-#@todo
-C の seteuid() と同じです。
+--- getgid    -> Intger
 
---- setegid(id)
-#@todo
-C の setegid() と同じです。
+システムコールの [[man:getgid(2)]] を呼びます。返り値を整数で返します。
 
---- setreuid(rid, eid)
-#@todo
-C の setreuid() と同じです。
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
---- setregid(rid, eid)
-#@todo
-C の setregid() と同じです。
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
---- setresuid(rid, eid, sid)
-#@todo
-C の setresuid() と同じです。
+--- getegid    -> Intger
 
---- setresgid(rid, eid, sid)
-#@todo
-C の setresgid() と同じです。
+システムコールの [[man:getegid(2)]] を呼びます。返り値を整数で返します。
 
---- issetugid
-#@todo
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setuid(id)    -> nil
+
+システムコールの [[man:setuid(2)]] を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setgid(id)    -> nil
+
+システムコールの [[man:setgid(2)]] を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setruid(id)    -> nil
+
+システムコールの setruid を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setrgid(id)    -> nil
+
+システムコールの setrgid を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- seteuid(id)    -> nil
+
+システムコールの [[man:seteuid(2)]] を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setegid(id)    -> nil
+
+システムコールの [[man:setegid(2)]] を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setreuid(rid, eid)    -> nil
+
+システムコールの [[man:setreuid(2)]] を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setregid(rid, eid)    -> nil
+
+システムコールの [[man:setregid(2)]] を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setresuid(rid, eid, sid)    -> nil
+
+システムコールの setresuid を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- setresgid(rid, eid, sid)    -> nil
+
+システムコールの setresgid を呼びます。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
+
+@raise Errno::EXXX システムコールに失敗した場合に発生します。
+
+--- issetugid    -> boolean
+
+システムコールの issetugid() を呼びます。
+
 プロセスが setuid もしくは setgid ビットを使って
 起動されている場合に真を返します。
+
+@raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 #@end
