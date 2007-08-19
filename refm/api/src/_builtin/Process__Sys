@@ -15,15 +15,11 @@
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX システムコールに失敗した場合に発生します。
-
 --- geteuid    -> Intger
 
 システムコールの [[man:geteuid(2)]] を呼びます。返り値を整数で返します。
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
-
-@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- getgid    -> Intger
 
@@ -31,15 +27,11 @@
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
-@raise Errno::EXXX システムコールに失敗した場合に発生します。
-
 --- getegid    -> Intger
 
 システムコールの [[man:getegid(2)]] を呼びます。返り値を整数で返します。
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
-
-@raise Errno::EXXX システムコールに失敗した場合に発生します。
 
 --- setuid(id)    -> nil
 
