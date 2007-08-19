@@ -16,7 +16,7 @@ Electronics Engineers: 米国電気電子技術者協会) 754 を参照してください-))
 == Class Methods
 
 --- induced_from(num)
-num を Float に変換した結果を返します。numが[[c:Fixnum], [[c:Bignum]], [[c:Float]]以外の場合は例外が発生します。
+num を Float に変換した結果を返します。numが[[c:Fixnum]], [[c:Bignum]], [[c:Float]]以外の場合は例外が発生します。
 
 @param num 変換前の数値
 
