@@ -12,12 +12,9 @@
 --- included(module_or_class) -> Precision
 
 Precision をインクルードするクラスやモジュールに対してメソッド induced_from を自動的に定義します。
-詳細は[[m:Module#included]] を参照してください。
 
-Precision がインクルードされた時に呼ばれます。
-このメソッドは、Precision をインクルードするクラスやモジュー
-ルに対してメソッド induced_from を自動的に定義するためにあり
-ます。
+このメソッドは、Precision がインクルードされた時に呼ばれます。詳細は[[m:Module#included]] を参照してください。
+
 #@#    ((-ruby 1.6 以前は、これを
 #@#    [[m:Module#append_feature]] を再定義すること
 #@#    で実現していました-))
@@ -35,6 +32,7 @@ Mix-in したクラスでこのメソッドを再定義する必要があります。
 無限ループになる可能性があります。
 
 @param number 変換元の数値
+@raise TypeError Mix-inしたクラスでこのメソッドが再定義されていない場合に発生します。
 
 == Instance Methods
 
