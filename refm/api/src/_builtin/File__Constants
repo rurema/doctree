@@ -71,11 +71,13 @@ CREATと併用し、もしファイルが既にある場合には失敗します。
 [[m:File#open]]で使用します。
 
 --- BINARY
-#@todo
+ファイルをバイナリとして開きます。
+open(2) で O_BINARYが指定できる場合に使えます。
 [[m:File#open]]で使用します。
 
 --- SYNC
-#@todo
+ファイルを同期モードで開きます。
+open(2) で O_SYNCが指定できる場合に使えます。
 [[m:File#open]]で使用します。
 
 #@# [[m:File#fnmatch]], [[m:Dir#glob で使われる定数 ------------------
