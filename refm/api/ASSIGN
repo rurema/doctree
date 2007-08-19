@@ -53,7 +53,7 @@ _builtin/Proc                   snoozer05
 _builtin/Process                sheepman
 _builtin/Process__GID           sheepman
 _builtin/Process__Status
-_builtin/Process__Sys
+_builtin/Process__Sys           sheepman
 _builtin/Process__UID           sheepman
 _builtin/Range                  ujihisa
 _builtin/RangeError             snoozer05       done
