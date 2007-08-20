@@ -6,7 +6,7 @@ include Comparable
 クトです。
 #@#シンボルとはなにか
 #@#同値なシンボルは必ず同一
-#@#
+#@#文字列との類似性
 #@#
 
 Ruby スクリプトからは
@@ -14,8 +14,7 @@ Ruby スクリプトからは
   :symbol #シンボルのリテラル表記
   'symbol'.intern
   %s!symbol! # %記法
-  
-#@#リストにする？
+
 のようにして得られます。実際にシンボルが生成されるのはコンパイル時です。
 リテラルでシンボルを表す場合、`:' の後に
 は識別子、メソッド名(`!',`?' などの接尾辞を含む)、変数名
@@ -24,13 +23,15 @@ Ruby スクリプトからは
 
 === シンボルの用途
 #@#シンボルを使うことが推薦される場面（とその理由）
+意味をはっきりさせる
+名前そのもの
+ハッシュのキー
+メソッド名の指定
+代替可能
+共通のメソッドもいくつかある（1.9）
 
 == Class Methods
-#@since 1.9.0
---- intern(str) -> Symbol
-#@#うまく動かない。質問すること
 
-#@end
 #@since 1.8.0
 --- all_symbols -> [Symbol]
 
@@ -51,11 +52,11 @@ Ruby スクリプトからは
 
 == Instance Methods
 
-#@since 1.8.0
---- to_sym -> self
 #@since 1.9.0
 --- intern -> self
 #@end
+#@since 1.8.0
+--- to_sym -> self
 self を返します。
 #@end
 
@@ -106,10 +107,6 @@ Rubyの実装では予約語、変数名、メソッド名などをこの整数で管理してい
     新規
     rb_define_method(rb_cSymbol, "==", sym_equal, 1);
     rb_define_method(rb_cSymbol, "to_proc", sym_to_proc, 0);
-    
-    ダンプする
-    rb_define_method(rb_cSymbol, "dump", rb_str_dump, 0);
-    
 
     Stringみたい レシーバをStringに変換
     rb_define_method(rb_cSymbol, "=~", sym_match, 1);
@@ -131,5 +128,4 @@ Rubyの実装では予約語、変数名、メソッド名などをこの整数で管理してい
     rb_define_method(rb_cSymbol, "capitalize", sym_capitalize, 0);
     rb_define_method(rb_cSymbol, "succ", sym_succ, 0);
     rb_define_method(rb_cSymbol, "next", sym_succ, 0);
-
 #@end
