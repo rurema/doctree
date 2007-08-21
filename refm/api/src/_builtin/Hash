@@ -13,7 +13,7 @@ include Enumerable
 ハッシュの格納に用いられるハッシュ値の計算には、
 [[m:Object#hash]] メソッドが使われ、キーの同一性判定には、
 [[m:Object#eql?]] メソッドが使われます。キーとして用いる
-オブジェクトには任意のクラスのオブジェクトを使用することができますが、
+オブジェクトには任意の種類のオブジェクトを使用することができますが、
 この２つのメソッドが適切に定義してある必要があります。
 
 キーとして与えたオブジェクトの内容が変化し、Object#hashの返す
@@ -387,14 +387,14 @@ key に対して value を関連づけます。value を返し
   p h.default #=> "default value"
 
 #@since 1.9.0
---- compare_by_identity -> Hash
+--- compare_by_identity -> self
 
 ハッシュのキーの一致判定をオブジェクトの同一性で判定するように変更します。
 
 デフォルトでは、キーのオブジェクトによっては内容が同じならキーが一致しているとみなされますが、より厳密に
 [[m:Object#object_id]]が一致しているかどうかを条件とするようにselfを変更します。
 
-返り値だけでなくselfも変更される破壊的メソッドです。
+selfも変更される破壊的メソッドです。
 
 #@#Makes hsh to compare its keys by their identity, i.e. it will
 #@#consider exact same objects as same keys.
