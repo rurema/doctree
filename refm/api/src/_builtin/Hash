@@ -676,53 +676,45 @@ each と each_pair ではブロックパラメータの受渡し方が異なります。
 
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
---- each_key {|key| ... } -> self
 #@if (version >= "1.9.0")
 --- each_key -> Enumerable::Enumerator
+
+Enumerable::Enumeratorを返します。
+
+  p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
+
+--- each_key {|key| ... } -> self
 
 ハッシュのキーを引数としてブロックを評価します。
 
 反復の際の評価順序は不定です。
-#@if (version >= "1.9.0")
-ブロック付きの場合selfを、
-無しで呼ばれた場合Enumerable::Enumeratorを返します。
-#@else
 self を返します。
-#@end
 
   {:a=>1, :b=>2}.each_key {|k| p k}
   # => :a
        :b
-  
-#@if (version >= "1.9.0")
-  p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
-#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
---- each_value {|value| ... } -> self
 #@if (version >= "1.9.0")
 --- each_value -> Enumerable::Enumerator
+
+Enumerable::Enumeratorを返します。
+
+  p({:a=>1, :b=>2}.each_value)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
+
+--- each_value {|key| ... } -> self
 
 ハッシュの値を引数としてブロックを評価します。
 
 反復の際の評価順序は不定です。
-#@if (version >= "1.9.0")
-ブロック付きの場合selfを、
-無しで呼ばれた場合Enumerable::Enumeratorを返します。
-#@else
 self を返します。
-#@end
 
   {:a=>1, :b=>2}.each_value {|v| p v}
   # => 1
        2
-  
-#@if (version >= "1.9.0")
-  p({:a=>1, :b=>2}.each_key)  # => #<Enumerable::Enumerator:0xbb19e4>
-#@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
