@@ -41,6 +41,7 @@ include Enumerable
 --- new(ary)    -> Array
 
 指定された配列 ary を複製して返します。
+[[m:Array#dup]] 同様 要素を複製しない浅い複製です。
 
 @param array 複製したい配列を指定します。
 
