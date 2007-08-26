@@ -92,10 +92,44 @@ ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 #@end
 
 --- file -> IO
-#@todo
-
 処理対象の [[c:File]] オブジェクト(または [[c:IO]] オブジェクト)を
 返します。
+
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+
+  until ARGF.closed?
+    printf("最終更新時刻 %s (%s)\n", ARGF.file.stat.mtime, ARGF.filename)
+    ARGF.skip
+  end 
+  #例
+  #=> 最終更新時刻 Thu May 03 14:05:53 +0900 2007 (sample.yaml)
+  #=> 最終更新時刻 Sun Aug 26 11:28:09 +0900 2007 (test.rb)
+  #=> 最終更新時刻 Sun Aug 26 11:27:58 +0900 2007 (test.rb~)
+  #=> 最終更新時刻 Sun Jun 24 13:08:12 +0900 2007 (third.txt)
+  #=> 最終更新時刻 Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
+
+
+$stdinがIOオブジェクトでない場合は$stdinを返します。
+
+  class MyIO
+    def to_io
+      DATA
+    end
+  end
+
+  $stdin = MyIO.new
+  ARGV.push("-");
+
+  p ARGF.file                #=> #<MyIO:0x293e840>
+  p ARGF.file.to_io.readline #=> "MyIO Test\n"
+
+  __END__
+  MyIO Test
+  です。
+
+@see [[m:ARGF.to_io]]
 
 --- lineno -> Integer
 
@@ -163,6 +197,8 @@ self を返します。
 --- binmode -> self
 #@todo
 [[m:IO#binmode]]を参照
+
+@see [[m:IO#binmode]]
 
 --- close -> self
 処理対象のファイルをクローズします。開くファイルが残っている場合は次のファイルをオープンします
@@ -573,7 +609,7 @@ ARGFが現在開いているファイルのファイルポインタを whence の位置から offset だけ移
 @see [[m:IO#seek]]
 
 --- to_io -> IO
-ARGFが現在開いているファイルの[[c:IO]]オブジェクトを返します
+ARGFが現在開いているファイルの[[c:File]]、または[[c:IO]]オブジェクトを返します
 
   # カレントディレクトリから適当にファイルを選ぶ
   ARGV.replace(
@@ -592,9 +628,32 @@ ARGFが現在開いているファイルの[[c:IO]]オブジェクトを返します
   #=> 最終更新時刻 Sun May 20 21:34:25 +0900 2007 (ugo.yaml)
   #...
 
+$stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します。
+
+  class MyIO
+    def to_io
+      DATA
+    end
+  end
+
+  $stdin = MyIO.new
+  ARGV.push("-")
+
+  myio = ARGF.to_io
+  p myio.readline #=> "MyIO Test\n"
+  p ARGF.file     #=> #<MyIO:0x293ea34>
+
+  __END__
+  MyIO Test
+  です。
+
+@see [[m:ARGF.file]]
+
 #@if (version >= "1.9.0")
 --- readpartial(length, str = nil)
 #@todo
+
+@see [[m:IO#readpartial]]
 
 #@end
 
