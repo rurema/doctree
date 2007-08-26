@@ -195,8 +195,28 @@ self を返します。
 
 
 --- binmode -> self
-#@todo
 [[m:IO#binmode]]を参照
+
+  require 'md5'
+
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+  files = ARGV.dup
+  bm = ARGF.binmode.readlines(nil)
+  bm.each_with_index {|bl, i|
+    md5 = MD5.new(bl).hexdigest
+    printf("%s\t%s\n", md5, files[i])
+  }
+
+  #例
+  #=> fe413bf114e16b0cd596d869743e9d35        ruby-1.8.5-p35.tar.gz
+  #=> 70ad729e965c9625d2dfb7fa0145b423        sample.yaml
+  #=> d91e81b81673279e908a1c08e8582487        test.rb
+  #=> 158c4a0a097379a08bd88abfca6a51c5        test.rb~
+  #...
+
+#@# ruby-list:43420 を参考にした
 
 @see [[m:IO#binmode]]
 
@@ -446,10 +466,23 @@ ARGFが現在開いているファイルのファイルポインタの現在の位置を整数で返します。
 @see [[m:IO#pos]], [[m:IO#tell]]
 
 --- pos=(n)
-#@todo
 ARGFが開いているファイルのファイルポインタを指定位置に移動します
 
 @param n 先頭からのオフセットを整数で指定します。
+
+  # カレントディレクトリから適当にファイルを選ぶ
+  ARGV.replace(
+    Dir.glob("*").select{|name| FileTest.file?(name)}
+  )
+  print ARGF.readline
+  #例
+  #=> #!/usr/bin/env ruby
+  ARGF.pos = 2
+  print ARGF.readline
+  #=> /usr/bin/env ruby
+  ARGF.pos = 4
+  print ARGF.readline
+  #=> sr/bin/env ruby
 
 @see [[m:IO#pos=]]
 
@@ -651,7 +684,7 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します。
 
 #@if (version >= "1.9.0")
 --- readpartial(length, str = nil)
-#@todo
+[[m:IO#readpartial]]を参照
 
 @see [[m:IO#readpartial]]
 
