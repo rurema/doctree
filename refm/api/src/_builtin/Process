@@ -38,6 +38,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @param noclose true を指定した場合、標準入力・標準出力・標準エラー出力を変更しません。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 #@end
 
 #@since 1.8.0
@@ -58,6 +60,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
     p th.value
 
     # => nil
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 #@end
 
 #@since 1.8.0
@@ -68,6 +73,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 @param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
 @see [[man:exit(3)]]
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 #@end
 
 --- exit!(status = false)    -> ()
@@ -83,6 +91,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 子プロセスを生成します。関数 [[m:Kernel.#fork]] と同じです。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[man:fork(2)]]
 
 #@since 1.9.0
@@ -93,6 +103,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 @param cmd [[m:Kernel.#spawn]] と同じです。
 
 @param arg [[m:Kernel.#spawn]] と同じです。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 #@end
 
 == Module Functions
@@ -121,6 +134,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
   * [[m:Process::RLIMIT_SBSIZE]] ソケットバッファのサイズ (バイト) (NetBSD, FreeBSD)
 
 @raise Errno::EXXX リソースの制限値の取得が失敗した場合に発生します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
  include Process
  p lim = getrlimit(RLIMIT_STACK)                                        #=> [8388608, 18446744073709551615]
@@ -159,6 +174,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX リソースの制限値の設定に失敗した場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 以下の例は RLIMIT_CORE の制限を hard limit (max limit) まで引き上げ、可能なら core を残すようにします。
 
   Process.setrlimit(Process::RLIMIT_CORE, 
@@ -185,6 +202,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[m:Process::GID.#eid=]]
 
 --- euid        -> Integer
@@ -203,6 +222,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 @param euid 実効ユーザ ID を整数で指定します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[m:Process::UID.#eid=]]
 
@@ -223,6 +244,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[c:Process::GID]]
 
 --- groups     -> [Integer]
@@ -233,6 +256,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @raise Errno::EXXX [[m:Process.#maxgroups]] が実際に返される補助グループ ID の
                    数よりも少ない値を設定していると発生します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getgroups(2)]]
 
@@ -249,6 +274,8 @@ root だけがこのメソッドを呼ぶことができます。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[man:setgroups(2)]]
 
 --- maxgroups        -> Integer
@@ -260,6 +287,8 @@ root だけがこのメソッドを呼ぶことができます。
 [[m:Process.#groups]] で例外が発生します。
 
 @param num 整数を指定します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 --- pid    -> Integer
 
@@ -292,6 +321,8 @@ root だけがこのメソッドを呼ぶことができます。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[c:Process::UID]]
 
 --- getpgid(pid = 0)   -> Integer
@@ -302,6 +333,8 @@ root だけがこのメソッドを呼ぶことができます。
 
 @raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[man:getpgid(2)]]
 
 --- getpgrp            -> Integer
@@ -309,6 +342,8 @@ root だけがこのメソッドを呼ぶことができます。
 現在のプロセスのプロセスグループ ID を整数で返します。
 
 @raise Errno::EXXX プロセスグループの取得に失敗した場合に発生します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getpgrp(2)]]
 
@@ -329,6 +364,8 @@ which に従いプロセス、プロセスグループ、ユーザのいずれかの現在のプライオリティを
 
 @raise Errno::EXXX プライオリティの取得に失敗した場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[man:getpriority(2)]]
 
 #@since 1.8.0
@@ -341,6 +378,8 @@ user が属するグループのリストを更新し、group をそのリストに加えます。
 @param user ユーザ名を表す文字列で指定します。
 
 @param group ユーザグループ ID を整数で指定します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 #@end
 
@@ -385,6 +424,8 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 @raise Errno::EXXX プロセスグループの設定に失敗した場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[man:setpgid(2)]]
 
 #@since 1.8.0
@@ -394,6 +435,8 @@ pid で指定されたプロセスにシグナルを送ります。signal
 [[m:Process#setpgid]](0, 0) と同じです。
 
 @raise Errno::EXXX プロセスグループの設定に失敗した場合に発生します。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
  fork do
    p [Process.pid, Process.getpgrp]
@@ -427,6 +470,8 @@ pid で指定されたプロセスにシグナルを送ります。signal
 
 @raise Errno::EXXX プライオリティの設定に失敗した場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 以下の例は呼び出したプロセス自身のプライオリティを 10 に下げます。
 すでに 10 よりもプライオリティが低く、
 Errno::EACCES となった場合には無視して実行を続けます。
@@ -445,6 +490,8 @@ Errno::EACCES となった場合には無視して実行を続けます。
 
 @raise Errno::EXXX セッションの作成に失敗した場合に発生します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
 @see [[man:setsid(2)]]
 
 #@since 1.8.0
@@ -453,6 +500,8 @@ Errno::EACCES となった場合には無視して実行を続けます。
 自身のプロセスとその子プロセスが消費したユーザ/システム CPU 時間の積算を
 [[c:Struct::Tms]] オブジェクトで返します。
 時間の単位は秒で、浮動小数点数で与えられます。
+
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[c:Struct::Tms]] 
 #@end
