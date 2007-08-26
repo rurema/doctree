@@ -20,7 +20,7 @@ num を Float に変換した結果を返します。numが[[c:Fixnum]], [[c:Bignum]], [[c:Floa
 
 @param num 変換前の数値
 
-@raise TypeError [[c:Fixnum], [[c:Bignum]], [[c:Float]]以外を入力した場合
+@raise TypeError [[c:Fixnum]], [[c:Bignum]], [[c:Float]]以外を入力した場合
 
 
   p Float.induced_from(30) #=> 30.0
@@ -68,14 +68,21 @@ self と other を比較して、self が大きい時に正、
 --- <=(other)
 --- >(other)
 --- >=(other)
-#@todo
-
 比較演算子。
 
---- finite?
-#@todo
+  p 3.14 == 3.14000 #=> true
+  p 3.14 == 3.1415  #=> false
+  p 3.14 <  3.1415  #=> true
+  p 3.14 <= 3.1415  #=> true
+  p 3.14 >  3.1415  #=> false
+  p 3.14 >= 3.1415  #=> false
 
+--- finite?
 数値が ∞ でも、NaN でもなければ真を返します
+
+  p 3.14.finite? #=> true
+  inf = 1.0/0
+  p inf.finite? #=> false
 
 --- infinite?
 #@todo
@@ -98,7 +105,6 @@ self と other を比較して、self が大きい時に正、
      -1
 
 --- nan?
-#@todo
 
 数値が NaN(Not a number)のとき真を返します。浮動小数点数 0 の 0 に
 よる除算は NaN です。
@@ -111,62 +117,56 @@ self と other を比較して、self が大きい時に正、
      true
 
 --- to_f
-#@todo
-
 self を返します。
+
+  p 3.14.to_f   #=> 3.14
 
 --- to_i
 --- truncate
-#@todo
 
 小数点以下を切り捨てて値を整数に変換します。
-
 [[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]] も参照。
+
+   p 3.14.to_i   #=> 3
+
+@see [[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]]
 
 #@if (version >= "1.8.0")
 
 == Constants
 
 --- DIG
-#@todo
 
 Float が表現できる最大の 10 進桁数
 
 --- EPSILON
-#@todo
 
 1.0 + Float::EPSILON != 1.0 となる最小の値
 
 --- MANT_DIG
-#@todo
 
 仮数部の Float::RADIX 進法での桁数
 
 --- MAX
 --- MIN
-#@todo
 
 Float が取り得る最大値、最小値
 
 --- MAX_10_EXP
 --- MIN_10_EXP
-#@todo
 
 最大／最小の 10 進の指数
 
 --- MAX_EXP
 --- MIN_EXP
-#@todo
 
 最大／最小の Float::RADIX 進の指数
 
 --- RADIX
-#@todo
 
 指数表現の基数
 
 --- ROUNDS
-#@todo
 
 丸めモード (-1: 不定、0: 0.0 の方向に丸め、1: 四捨五入、2:正の無限
 大の方向に丸め、3:負の無限大の方向に丸め)
