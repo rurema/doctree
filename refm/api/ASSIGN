@@ -2,7 +2,7 @@
 
 # LIBRARY_NAME                  OWNER           STATUS
 #--------------------------------------------------------
-_builtin/ARGF                   kouya
+_builtin/ARGF                   kouya           done
 _builtin/ArgumentError          snoozer05       done
 _builtin/Array                  sheepman        done
 _builtin/Bignum                 ujihisa         done
