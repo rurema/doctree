@@ -68,11 +68,11 @@
 
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
---- re_exchangeable?    -> boolean
+--- re_exchangeable?    -> bool
 
 [[m:Process::UID.#re_exchange]] が実装されているならば true を返します。そうでない場合に false を返します。
 
---- sid_available?    -> boolean
+--- sid_available?    -> bool
 
 保存ユーザ ID を持つ環境かどうかを真偽値で返します。
 保存ユーザ ID を持つなら true を返します。

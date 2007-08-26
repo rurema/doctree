@@ -17,7 +17,7 @@ self <=> other は
 
 == Instance Methods
 
---- ==(other)    -> boolean | nil
+--- ==(other)    -> bool | nil
 
 #@if (version < "1.8.0")
 self と other が等しい時真を返します。
@@ -31,7 +31,7 @@ self と other が等しい時真を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
 
---- >(other)    -> boolean
+--- >(other)    -> bool
 
 #@if (version < "1.8.0")
 self が other より大きい時真を返します。
@@ -46,7 +46,7 @@ self が other より大きい時真を返します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
---- >=(other)    -> boolean
+--- >=(other)    -> bool
 
 #@if (version < "1.8.0")
 self が other より大きいか等しい時真を返します。
@@ -61,7 +61,7 @@ self が other より大きいか等しい時真を返します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
---- <(other)    -> boolean
+--- <(other)    -> bool
 
 #@if (version < "1.8.0")
 self が other より小さい時真を返します。
@@ -76,7 +76,7 @@ self が other より小さい時真を返します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
---- <=(other)    -> boolean
+--- <=(other)    -> bool
 
 #@if (version < "1.8.0")
 self が other より小さいか等しい時真を返します。
@@ -91,7 +91,7 @@ self が other より小さいか等しい時真を返します。
 @raise ArgumentError <=> が nil を返したときに発生します。
 #@end
 
---- between?(min, max)    -> boolean
+--- between?(min, max)    -> bool
 
 #@if (version < "1.8.0")
 self が min と max の範囲内(min, max

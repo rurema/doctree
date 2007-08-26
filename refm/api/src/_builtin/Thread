@@ -104,7 +104,7 @@ fatal は発生しません。
 #@end
 
 == Class Methods
---- abort_on_exception             -> boolean
+--- abort_on_exception             -> bool
 --- abort_on_exception=(newstate)
 
 真の時は、いずれかのスレッドが例外によって終了した時に、インタプリタ
@@ -224,7 +224,7 @@ val を name に対応するスレッド固有のデータとして格納します。
 
 @param val スレッド固有データを指定します。nil を指定するとそのスレッド固有データは削除されます。
 
---- abort_on_exception               -> boolean
+--- abort_on_exception               -> bool
 --- abort_on_exception=(newstate)
 
 真の場合、そのスレッドが例外によって終了した時に、インタプリタ
@@ -236,7 +236,7 @@ val を name に対応するスレッド固有のデータとして格納します。
 
 @param newstate 自身を実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
---- alive?     -> boolean
+--- alive?     -> bool
 
 スレッドが「生きている」時、true を返します。
 
@@ -337,7 +337,7 @@ limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
 
    threads.each {|t| t.join}
 
---- key?(name)     -> boolean
+--- key?(name)     -> bool
 
 name に対応したスレッドに固有のデータが定義されていれば
 true を返します。
@@ -418,7 +418,7 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 [[m:Thread#alive?]] が真を返すなら、このメソッドも真です。
 
---- stop?    -> boolean
+--- stop?    -> bool
 
 スレッドが終了(dead)あるいは停止(stop)している時、true を返します。
 

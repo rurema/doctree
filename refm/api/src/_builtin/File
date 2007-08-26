@@ -184,8 +184,8 @@ path が相対パスであれば default_dir を基準にします。
 
 @see [[m:File.basename]], [[m:File.dirname]]
 
---- fnmatch(pattern, path, flags = 0)     -> boolean 
---- fnmatch?(pattern, path, flags = 0)    -> boolean
+--- fnmatch(pattern, path, flags = 0)     -> bool 
+--- fnmatch?(pattern, path, flags = 0)    -> bool
 
 ファイル名のパターンマッチ [[man:fnmatch(3)]] を行います。
 path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
@@ -418,43 +418,43 @@ umask を変更します。変更前の umask の値を返します
 
 @raise Errno::EXXX 変更に失敗した場合に発生します。
 
---- blockdev?(path)    -> boolean
+--- blockdev?(path)    -> bool
 
 [[m:FileTest.#blockdev?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- chardev?(path)    -> boolean
+--- chardev?(path)    -> bool
 
 [[m:FileTest.#chardev?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- directory?(path)    -> boolean
+--- directory?(path)    -> bool
 
 [[m:FileTest.#directory?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- executable?(path)    -> boolean
+--- executable?(path)    -> bool
 
 [[m:FileTest.#executable?]] と同じです。
 
 @param path パスを表す文字列を指定します。
 
---- executable_real?(path)    -> boolean
+--- executable_real?(path)    -> bool
 
 [[m:FileTest.#executable_real?]] と同じです。
 
 @param path パスを表す文字列を指定します。
 
---- exist?(path)    -> boolean
+--- exist?(path)    -> bool
 
 [[m:FileTest.#exist?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- exists?(path)    -> boolean
+--- exists?(path)    -> bool
 
 このメソッドはobsoleteです。
 
@@ -463,55 +463,55 @@ umask を変更します。変更前の umask の値を返します
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- file?(path)    -> boolean
+--- file?(path)    -> bool
 
 [[m:FileTest.#file?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- grpowned?(path)    -> boolean
+--- grpowned?(path)    -> bool
 
 [[m:FileTest.#grpowned?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- owned?(path)    -> boolean
+--- owned?(path)    -> bool
 
 [[m:FileTest.#owned?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- identical?(filename1, filename2)    -> boolean
+--- identical?(filename1, filename2)    -> bool
 
 [[m:FileTest.#identical?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- pipe?(path)    -> boolean
+--- pipe?(path)    -> bool
 
 [[m:FileTest.#pipe?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- readable?(path)    -> boolean
+--- readable?(path)    -> bool
 
 [[m:FileTest.#readable?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- readable_real?(path)    -> boolean
+--- readable_real?(path)    -> bool
 
 [[m:FileTest.#readable_real?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- setgid?(path)    -> boolean
+--- setgid?(path)    -> bool
 
 [[m:FileTest.#setgid?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- setuid?(path)    -> boolean
+--- setuid?(path)    -> bool
 
 [[m:FileTest.#setuid?]] と同じです。
 
@@ -523,43 +523,43 @@ umask を変更します。変更前の umask の値を返します
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- size?(path)    -> boolean
+--- size?(path)    -> bool
 
 [[m:FileTest.#size?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- socket?(path)    -> boolean
+--- socket?(path)    -> bool
 
 [[m:FileTest.#socket?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- sticky?(path)    -> boolean
+--- sticky?(path)    -> bool
 
 [[m:FileTest.#sticky?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- symlink?(path)    -> boolean
+--- symlink?(path)    -> bool
 
 [[m:FileTest.#symlink?]] と同じです。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 
---- writable?(path)    -> boolean
+--- writable?(path)    -> bool
 
 [[m:FileTest.#writable?]] と同じです。
 
 @param path パスを表す文字列を指定します。
 
---- writable_real?(path)    -> boolean
+--- writable_real?(path)    -> bool
 
 [[m:FileTest.#writable_real?]] と同じです。
 
 @param path パスを表す文字列を指定します。
 
---- zero?(path)    -> boolean
+--- zero?(path)    -> bool
 
 [[m:FileTest.#zero?]] と同じです。
 
@@ -578,7 +578,7 @@ path が全てのユーザから読めるならばそのファイルのパーミッションを表す
    m = File.world_readable?("/etc/passwd")
    "%o" % m                               # => "644"
 
---- world_writable?(path)    -> boolean
+--- world_writable?(path)    -> bool
 
 path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 整数を返します。そうでない場合は nil を返します。

@@ -73,7 +73,7 @@
    Process::GID.re_exchange      #=> 0
    [Process.gid, Process.egid]   #=> [33, 0]
 
---- re_exchangeable?    -> boolean
+--- re_exchangeable?    -> bool
 
 現在のプラットフォームで [[m:Process.#re_exchange]] が実装されている
 なら true を返します。そうでない場合に false を返します。
@@ -84,7 +84,7 @@
 
    Process.rid   #=> 500
 
---- sid_available?    -> boolean
+--- sid_available?    -> bool
 
 現在のプラットフォームが保存グループ ID を持つなら true を返します。
 そうでない場合に false を返します。
