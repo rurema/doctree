@@ -20,7 +20,7 @@ _builtin/FalseClass             yamane          done
 _builtin/File                   sheepman        done
 _builtin/FileTest               sheepman        done
 _builtin/File__Constants        takayama        done
-_builtin/File__Stat
+_builtin/File__Stat             kouya
 _builtin/Fixnum                 ujihisa         done
 _builtin/Float                  kouya 
 _builtin/FloatDomainError       snoozer05       done
