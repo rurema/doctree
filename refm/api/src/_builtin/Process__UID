@@ -7,6 +7,15 @@
 プラットフォームのシステムコールを直接使いたい場合には [[c:Process::Sys]]
 が提供されています。[[c:Process::Sys]] と Process::UID を同時に使うことは推奨されません。
 
+実ユーザ ID を変更するメソッドは提供されていません。
+これは [[m:Process::UID.#eid=]] と [[m:Process::UID.#re_exchange]] を以下のように
+組み合わせることによって実現できます。
+
+                             # (r,e,s) == (u1,u2,??)
+  Process::UID.re_exchange   # (u1,u2,??) ==> (u2,u1,??)
+  Process::UID.eid = id      # (u2,u1,??) ==> (u2,id,??)
+  Process::UID.re_exchange   # (u2,id,??) ==> (id,u2,??)
+
 == Module Functions
 
 --- rid    -> Integer
@@ -39,7 +48,8 @@
 
 現在のプロセスの実効ユーザ ID を id に変更します。成功したら id を返します。
 
-保存ユーザ ID が変化しないかもしれないので、root 権限の完全放棄には使えません。
+実ユーザ ID は変更されないことが保証されます。
+保存ユーザ ID が変更されないかもしれないので root 権限の完全放棄には使えません。
 保存ユーザ ID が変化するかどうかは [[m:Process::UID.#re_exchangeable?]]
 が true を返すかどうかで決まります。
 
@@ -50,7 +60,7 @@
 
 @param id ユーザ ID を整数で指定します。
 
-@raise Errno::EPERM 設定できない場合に発生します。
+@raise Errno::EXXX 変更できない場合に発生します。
 
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 

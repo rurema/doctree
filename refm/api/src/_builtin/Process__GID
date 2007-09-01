@@ -7,6 +7,15 @@
 プラットフォームのシステムコールを直接使いたい場合には [[c:Process::Sys]]
 が提供されています。[[c:Process::Sys]] と Process::GID を同時に使うことは推奨されません。
 
+実グループ ID を変更するメソッドは提供されていません。
+これは [[m:Process::GID.#eid=]] と [[m:Process::GID.#re_exchange]] を以下のように
+組み合わせることによって実現できます。
+
+                             # (r,e,s) == (g1,g2,??)
+  Process::GID.re_exchange   # (g1,g2,??) ==> (g2,g1,??)
+  Process::GID.eid = id      # (g2,g1,??) ==> (g2,id,??)
+  Process::GID.re_exchange   # (g2,id,??) ==> (id,g2,??)
+
 == Module Functions
 
 --- change_privilege(id)    -> Integer
@@ -41,7 +50,8 @@
 
 現在のプロセスの実効グループ ID を id に変更します。成功したら id を返します。
 
-保存グループ ID が変化しないかもしれないので、root 権限の完全放棄には使えません。
+実グループ ID は変更されないことが保証されます。
+保存グループ ID が変更されないかもしれないので root 権限の完全放棄には使えません。
 保存グループ ID が変化するかどうかは [[m:Process::GID.#re_exchangeable?]]
 が true を返すかどうかで決まります。
  * true の環境では、実グループ ID と異なる値を設定した場合、保存グループ ID は新しい実効グループ ID の値に設定されます。
@@ -51,7 +61,7 @@
 
 @param id グループ ID を整数で指定します。
 
-@raise Errno::EPERM 設定できない場合に発生します。
+@raise Errno::EXXX 設定できない場合に発生します。
 
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
