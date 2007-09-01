@@ -504,7 +504,7 @@ self を other で割った余り r を返します。
   p (-13).remainder(4)   #=> -1
   p (-13).remainder(-4)  #=> -1
 
---- nonzero?    -> nil | self
+--- nonzero?    -> self | nil
 
 自身がゼロの時 nil を返し、非ゼロの時 self を返します。
 
@@ -572,7 +572,7 @@ self からはじめ step を足しながら limit を越える
 
 #@since 1.8.0
 
---- <=>(other) -> nil | -1 | 0 | 1
+--- <=>(other) -> -1 | 0 | 1 | nil
 
 自身が other より大きい場合に 1 を、等しい場合に 0 を、小さい場合には -1 をそれぞれ返します。
 自身と other が比較できない場合には nil を返します。

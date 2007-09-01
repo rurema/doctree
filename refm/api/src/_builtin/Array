@@ -73,7 +73,7 @@ include Enumerable
 
 == Instance Methods
 
---- [](nth)    -> nil | object
+--- [](nth)    -> object | nil
 
 nth 番目の要素を返します。nth 番目の要素が存在しない時には nil を返します。
 
@@ -88,7 +88,7 @@ nth 番目の要素を返します。nth 番目の要素が存在しない時には nil を返します。
   a[-2] #=> "d"
   a[10] #=> nil
 
---- [](range)    -> nil | Array
+--- [](range)    -> Array | nil
 
 [[c:Range]] オブジェクト range の範囲にある要素からなる部分配列を返します。
 range の first の値が配列の範囲に収まらない場合 nil を返します。
@@ -110,7 +110,7 @@ range の first が end より後にある場合には空の配列を返します。
   a[2..1]   #=> []
   a[-1..-2] #=> []
 
---- [](start, length)    ->  nil | Array
+--- [](start, length)    ->  Array | nil
 
 start 番目から length 個の要素を含む部分配列を返します。
 length が負の時、start が自身の範囲を越えた時には nil を返します。
@@ -390,7 +390,7 @@ dup は内容だけをコピーします。
 @see [[m:Enumerable#collect]]
 
 --- compact     -> Array
---- compact!    -> nil | self
+--- compact!    -> self | nil
 
 compact は self から nil である要素を取り除いた
 新しい配列を返します。compact! は変更を破壊的に行い、変更が
@@ -416,7 +416,7 @@ compact は self から nil である要素を取り除いた
     p a              # => [3, 4]       # こちらは変わらない
 
 
---- delete(val)           -> nil | object
+--- delete(val)           -> object | nil
 --- delete(val) { ... }   -> object
 
 val と == で等しい要素をすべて取り除きます。
@@ -439,7 +439,7 @@ val と等しい要素が見つかった場合は、val を返します。
     p ary                   #=> []
     p ary.delete(nil)       #=> nil
 
---- delete_at(pos)    -> nil | object
+--- delete_at(pos)    -> object | nil
 
 pos で指定された位置にある要素を取り除きそれを返します。
 pos が範囲外であったら nil を返します。
@@ -454,7 +454,7 @@ pos が範囲外であったら nil を返します。
     p array             #=> [0, 1, 3, 4]
 
 --- delete_if {|x| ... }    -> self
---- reject! {|x| ... }      -> nil | self
+--- reject! {|x| ... }      -> self | nil
 
 要素を順番にブロックに渡して評価し、その結果が真になった要素をすべて削除します。
 delete_if は常に self を返しますが、reject! は要素が 1 つ以上削除されれば self を、
@@ -614,7 +614,7 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 #@#    p ary.collect {|v| v.object_id } # => [537770124, 537770112, 537770100]
 #@##@end
 
---- first       -> nil | object
+--- first       -> object | nil
 
 配列の先頭の要素を返します。要素がなければ nil を返します。
 
@@ -646,7 +646,7 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 #@end
 
 --- flatten     -> Array
---- flatten!    -> nil | self
+--- flatten!    -> self | nil
 
 ネストした配列を平滑化してそれを返します。flatten! は
 配列それ自体を破壊的に平滑化し、配列がネストしていないとき
@@ -664,9 +664,9 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 
 @param val オブジェクトを指定します。
 
---- index(val)           -> nil | Integer
+--- index(val)           -> Integer | nil
 #@since 1.9.0
---- index {|item| ...}   -> nil | Integer
+--- index {|item| ...}   -> Integer | nil
 #@end
 
 最初の形式では、val と == で等しい最初の要素の位置を返します。
@@ -720,6 +720,8 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
     ary = [1, 2, 3]
     ary.insert(2, "a", "b")
     p ary                  # => [1, 2, "a", "b", 3]
+    ary.insert(-2, "X")
+    p ary                  # => [1, 2, "a", "b", "X", 3]
 
 #@end
 
@@ -742,7 +744,7 @@ join した文字列を連結します。
 
 @see [[m:$,]]
 
---- last    -> nil | object
+--- last    -> object | nil
 
 配列の末尾の要素を返します。配列が空のときは nil を返します。
 
@@ -794,7 +796,7 @@ nil でない要素の数を返します。
 
 @param template 自身のバイナリとしてパックするためのテンプレートを文字列で指定します。
 
---- pop    -> nil | object
+--- pop    -> object | nil
 
 末尾の要素を取り除いてそれを返します。自身が空配列の時は
 nil を返します。
@@ -831,7 +833,7 @@ obj を順番に配列の末尾に追加します。
 
 @see [[m:Array#pop]], [[m:Array#shift]], [[m:Array#unshift]] 
 
---- rassoc(obj)    -> nil | Array
+--- rassoc(obj)    -> Array | nil
 
 self が配列の配列であると仮定して、要素の配列でインデックス
 1 の要素が obj に等しいものを検索し見つかった最初の要素を返
@@ -860,7 +862,7 @@ self が配列の配列であると仮定して、要素の配列でインデックス
 #@since 1.8.0
 --- reverse!    -> self
 #@else
---- reverse!    -> nil | self
+--- reverse!    -> self | nil
 #@end
 
 reverse は全ての要素を逆順に並べた新しい配列を返します。
@@ -901,7 +903,7 @@ val と == で等しい最後の要素の位置を返します。
 
 @see [[m:Array#index]]
 
---- shift    -> nil | object
+--- shift    -> object | nil
 
 配列の先頭の要素を取り除いてそれを返します。残りの要素はひとつずつ
 前に詰められます。自身が空配列の時は nil を返します。
@@ -912,9 +914,9 @@ val と == で等しい最後の要素の位置を返します。
 
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]]
 
---- slice(nth)       -> nil | object
---- slice(pos, len)  -> nil | Array
---- slice(range)     -> nil | Array
+--- slice(nth)       -> object | nil
+--- slice(pos, len)  -> Array | nil
+--- slice(range)     -> Array | nil
 
 指定された自身の要素か部分配列を返します。[[m:Array#[] ]] と同じです。
 
@@ -926,9 +928,9 @@ val と == で等しい最後の要素の位置を返します。
 
 @param range [[m:Array#[] ]] と同じです。
 
---- slice!(nth)       -> nil | object
---- slice!(pos, len)  -> nil | Array
---- slice!(range)     -> nil | Array
+--- slice!(nth)       -> object | nil
+--- slice!(pos, len)  -> Array | nil
+--- slice!(range)     -> Array | nil
 
 指定した要素を自身から取り除いて返します。取り除く要素がなければ nil
 を返します。
@@ -1013,7 +1015,7 @@ self を行列と見立てて、行列の転置(行と列の入れ換え)を行いま
 #@end
 
 --- uniq     -> Array
---- uniq!    -> nil | self
+--- uniq!    -> self | nil
 
 uniq は配列から重複した要素を取り除いた新しい配列を返します。
 取り除かれた要素の部分は前に詰められます。uniq! は削除を破壊
@@ -1051,7 +1053,7 @@ obj を順番に配列の先頭に挿入します。
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
 
 #@since 1.8.0
---- values_at(*index)    -> nil | Array
+--- values_at(*index)    -> Array | nil
 
 引数で指定されたインデックスに対応する要素を配列で返します。インデッ
 クスに対応する値がなければ nil が要素になります。

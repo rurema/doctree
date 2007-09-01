@@ -86,8 +86,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @see [[man:_exit(2)]]
 
---- fork            -> nil | Integer
---- fork { ... }    -> nil | Integer
+--- fork            -> Integer | nil
+--- fork { ... }    -> Integer | nil
 
 子プロセスを生成します。関数 [[m:Kernel.#fork]] と同じです。
 
@@ -556,8 +556,8 @@ wait2 は子プロセスの pid と終了ステータスを表す [[m:$?]] の配列を返します。
     #=> [[2766, #<Process::Status: pid=2766,exited(1)>], [2765, #<Process::Status: pid=2765,exited(1)>]]
 #@end
 
---- waitpid(pid, flags = 0)    -> nil | Integer
---- waitpid2(pid, flags = 0)   -> nil | Array
+--- waitpid(pid, flags = 0)    -> Integer | nil
+--- waitpid2(pid, flags = 0)   -> Array | nil
 
 pid で指定される特定の子プロセスの終了を待ち、そのプロセスが
 終了した時に pid を返します。

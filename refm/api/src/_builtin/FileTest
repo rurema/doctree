@@ -194,7 +194,7 @@ ruby 1.8.3 ░╩┴░д╟д╧[[m:Kernel.#test]](?-, filename1, filename2)дЄ╗╚д├д╞дпд└д╡ддб
 @see [[m:FileTest.#size]], [[m:FileTest.#size?]]
 
 #@since 1.9.0
---- world_readable?(path)    -> nil | Integer
+--- world_readable?(path)    -> Integer | nil
 
 path дм┴┤д╞д╬ецб╝е╢длдщ╞╔дсдыд╩дщд╨д╜д╬е╒ебедеыд╬е╤б╝е▀е├е╖ечеєдЄ╔╜д╣
 └░┐ЇдЄ╩╓д╖д▐д╣бгд╜джд╟д╩дд╛ь╣чд╧ nil дЄ╩╓д╖д▐д╣бг

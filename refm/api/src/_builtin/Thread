@@ -208,7 +208,7 @@ version 1.8 では、aborting 状態であるスレッド
 
 == Instance Methods
 
---- [](name)    -> nil | object
+--- [](name)    -> object | nil
 
 name に対応したスレッドに固有のデータを取り出します。
 name に対応するスレッド固有データがなければ nil を返し
@@ -302,7 +302,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 @see [[m:Thread#exit]]
 #@end
 
---- group    -> nil | ThreadGroup
+--- group    -> ThreadGroup | nil
 
 スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
 
@@ -313,7 +313,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 
 --- join           -> self
 #@since 1.8.0
---- join(limit)    -> nil | self
+--- join(limit)    -> self | nil
 #@end
 
 スレッド self の実行が終了するまで、カレントスレッドを停止し
@@ -408,7 +408,7 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 セーフレベルについては[[unknown:セキュリティモデル]]を参照してください。
 
---- status    -> String | nil | false
+--- status    -> String | false | nil
 
 生きているスレッドの状態を文字列 "run"、"sleep", "aborting" のいず
 れかで返します。正常終了したスレッドに対して false、例外によ
