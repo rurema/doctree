@@ -7,24 +7,43 @@ include Comparable
 [[c:FileTest]] に同名のモジュール関数がある場合はそれと同じ働きをします。ただ、
 ファイル名を引数に取るかわりに Stat 自身について判定する点が違います。
 
+  p File::Stat.new($0).directory? #=> false
+  p FileTest.directory?($0) #=> false
+
 == Class Methods
 
 --- new(path)
-#@todo
 
 path に関する File::Stat オブジェクトを生成して返します。
 [[m:File.stat]] と同じです。
 
+  p $:[0] 
+  #=> 例
+  # "C:/Program Files/ruby-1.8/lib/ruby/site_ruby/1.8"
+  p File::Stat.new($:[0])
+  #=> 例
+  #<File::Stat dev=0x2, ino=0, mode=040755, nlink=1, uid=0, gid=0, rdev=0x2, size=0, blksize=nil, blocks=nil, atime=Sun Sep 02 14:15:20 +0900 2007, mtime=Tue Apr 24 23:03:44 +0900 2007, ctime=Tue Apr 24 23:03:37 +0900 2007>
+
 == Instance Methods
 
---- <=>(o)
-#@todo
-
+--- <=>(o) Fixnum | nil
 ファイルの最終更新時刻を比較します。self が other よりも
 新しければ正の数を、等しければ 0 を古ければ負の数を返します。
+比較できない場合はnilを返します
 
---- ftype
-#@todo
+  require 'tempfile' # for Tempfile
+
+  fp1 = Tempfile.open("first")
+  fp1.print "古い方\n"
+  sleep(1)
+  fp2 = Tempfile.open("second")
+  fp2.print "新しい方\n"
+
+  p File::Stat.new(fp1.path) <=> File::Stat.new(fp2.path) #=> -1
+  p File::Stat.new(fp2.path) <=> File::Stat.new(fp1.path) #=>  1
+  p File::Stat.new(fp1.path) <=> fp2.path #=> nil
+
+--- ftype -> String
 ファイルのタイプを表す文字列を返します。文字列は以下のうちの
 いずれかです。
 
@@ -41,6 +60,13 @@ path に関する File::Stat オブジェクトを生成して返します。
 #@# あらい 2002-01-06: 今のところ "unknown" を返すことはないはず。
 #@# もしそのようなことがあれば、バグ報告をした方が良いと思われる。
 #@# Solaris の Door とかは unknown になる？
+
+サンプル
+
+  fs = File::Stat.new($0)
+  p fs.ftype #=> "file"
+  p File::Stat.new($:[0]).ftype #=> "directory"
+
 
 以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
 #@if (version >= "1.8.0")
