@@ -6,15 +6,16 @@
 メソッドの実体（名前でなく）とレシーバの組を封入します。
 [[c:Proc]] オブジェクトと違ってコンテキストを保持しません。
 
-[[c:Proc]] との差…[[c:Method]] は取り出しの対象であるメソッドが
+=== [[c:Proc]] との差
+
+[[c:Method]] は取り出しの対象であるメソッドが
 なければ作れませんが、[[c:Proc]] は準備なしに作れます。その点から
 [[c:Proc]] は使い捨てに向き、[[c:Method]] は何度も繰り返し生成する
 場合に向くと言えます。また内包するコードの大きさという点では
 [[c:Proc]] は小規模、[[c:Method]] は大規模コードに向くと言えます。
 
 
-既存のメソッドを [[c:Method]] オブジェクト化する
-@see [[m:Object#method]]
+既存のメソッドを [[c:Method]] オブジェクト化する。
 
   class Foo
     def foo(arg)
@@ -27,7 +28,7 @@
   p m             # => #<Method: Foo#foo>
   p m.call(1)     # => "foo called with arg 1"
 
-名前のないメソッド(の代わり)が必要なら [[c:Proc]] を使うと良い
+名前のないメソッド(の代わり)が必要なら [[c:Proc]] を使うと良い。
 
   pr = Proc.new {|arg|
     "proc called with arg #{arg}"
@@ -36,7 +37,7 @@
   p pr            # => #<Proc:0x401b1fcc>
   p pr.call(1)    # => "proc called with arg 1"
 
-[[c:Method]] オブジェクトが有用なのは以下のような場合
+[[c:Method]] オブジェクトが有用なのは以下のような場合。
 
   class Foo
     def foo() "foo" end
@@ -56,7 +57,7 @@
   p methods[2].call       # => "bar"
   p methods[3].call       # => "baz"
 
-が、レシーバを固定させる(Method オブジェクトはレシーバを保持する)必
+しかし、レシーバを固定させる(Method オブジェクトはレシーバを保持する)必
 要がないなら [[m:Object#send]]を使う方法も有用。
 
   class Foo
@@ -77,6 +78,8 @@
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
+@see [[m:Object#method]]
+
 == Instance Methods
 
 --- [](*args) -> object
@@ -95,7 +98,7 @@ self[] の形の呼び出しは通常のメソッド呼び出しに見た目を
 ベル 4 で実行されます
 ([[unknown:セキュリティモデル/セーフレベルに関するその他の詳細]]を参照)。
 
-@param *args self に渡される引数。
+@param args self に渡される引数。
 
 --- arity -> Fixnum
 
