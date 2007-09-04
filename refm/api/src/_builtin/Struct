@@ -4,14 +4,13 @@ include Enumerable
 
 構造体クラス。Struct.new はこのクラスのサブクラスを新たに生成します。
 
-個々の構造体はサブクラスから [[m:Struct#new]] を使って生成します。個々
+個々の構造体はサブクラスから [[m:Struct.new]] を使って生成します。個々
 の構造体サブクラスでは構造体のメンバに対するアクセスメソッドが定義され
 ています。
 
 == Class Methods
 
 --- new(*args) -> Class
-#@todo
 
 Struct クラスに新しいサブクラスを作って、それを返します。
 
@@ -19,7 +18,7 @@ Struct クラスに新しいサブクラスを作って、それを返します。
 
   dog = Struct.new("Dog", :name, :age)
   fred = dog.new("fred", 5)
-  fred.age=6
+  fred.age = 6
   printf "name:%s age:%d", fred.name, fred.age
   #=> "name:fred age:6" を出力します
 
@@ -27,7 +26,7 @@ Struct クラスに新しいサブクラスを作って、それを返します。
 メンバ名に文字列を指定できるのは後方互換性のためだと考えた方が良いでしょう。
 したがって、メンバ名は [[c:Symbol]] で指定するのが無難です。
 
-@param *args 構造体を定義するための可変長引数。[[c:String]] または [[c:Symbol]] を指定します。
+@param args 構造体を定義するための可変長引数。[[c:String]] または [[c:Symbol]] を指定します。
 
 ==== 第一引数が [[c:String]] の場合
 args[0] が [[c:String]] の場合、クラス名になるので、大文字で始まる必要
@@ -48,15 +47,14 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
     Foo = Struct.new(:foo, :bar)
     p Foo                             # => Foo
 
-@see [[m:Class#Class.new]]
+@see [[m:Class.new]]
 
 --- new(*args) -> ()
 --- [](*args) -> ()
-#@todo
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体オブジェクトを生成して返します。
 
-@param *args 構造体の初期値を指定します。メンバの初期値は指定されなければ nil です。
+@param args 構造体の初期値を指定します。メンバの初期値は指定されなければ nil です。
 
 @return 構造体クラスのインスタンス。
 
@@ -67,8 +65,6 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
     p foo.values      # => [1, nil]
 
 --- members -> [String]
-#@todo
-
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの名前([[c:String]])の配列を返します。
 
@@ -78,12 +74,11 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 == Instance Methods
 
 --- [](member) -> object
-#@todo
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの値を返します。
 
 @param member [[c:Fixnum]] でメンバのインデックスを指定します。
-[[c:String]], [[c:String]] でメンバの名前を指定します。
+[[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
@@ -100,13 +95,11 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
     p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
 
 --- []=(member, value) -> object
-#@todo
-
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体の member で指定されたメンバの値を value にして value を返します。
 
 @param member [[c:Fixnum]] でメンバのインデックスを指定します。
-[[c:String]], [[c:String]] でメンバの名前を指定します。
+[[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @param value メンバに設定する値を指定します。
 
@@ -115,13 +108,11 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 @raise NameError member が [[c:String]], [[c:Symbol]] で存在しないメンバを指定した場合に発生します。
 
 --- each {|value| ... } -> self
-#@todo
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体の各メンバに対して繰り返します。
 
 #@since 1.8.0
 --- each_pair {|member, value| ... } -> self
-#@todo
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバ名([[c:Symbol]])と値の組を引数にブロックを繰り返し実行します。
 
@@ -133,22 +124,20 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 
 --- length -> Fixnum
 --- size -> Fixnum
-#@todo
-
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバの数を返します。
 
 --- members -> [String]
-構造体のメンバの名前(文字列)の配列を返します。
 (このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバの名前(文字列)の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.new.members  # => ["foo", "bar"]
 
 --- values -> [object]
 --- to_a -> [object]
-構造体のメンバの値を配列にいれて返します。
 (このメソッドは Struct の下位クラスにのみ定義されています)
+構造体のメンバの値を配列にいれて返します。
 
 例えば以下のようにして passwd のエントリを出力できます。
 
@@ -157,13 +146,11 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 
 #@since 1.8.0
 --- values_at(*members) -> [object]
-#@todo
-
-引数で指定されたメンバの値の配列を返します。
 (このメソッドは Struct の下位クラスにのみ定義されています)
+引数で指定されたメンバの値の配列を返します。
 
-@param *members [[c:Fixnum]] でメンバのインデックスを指定します。
-[[c:String]], [[c:String]] でメンバの名前を指定します。
+@param members [[c:Fixnum]] でメンバのインデックスを指定します。
+[[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
