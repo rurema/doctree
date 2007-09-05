@@ -158,7 +158,7 @@ i-node 番号
 
   fs = File::Stat.new($0)
   #例
-  p fs.nlink    #=> 1
+  p fs.uid    #=> 0
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- gid -> Integer
