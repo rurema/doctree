@@ -10,6 +10,31 @@ include Comparable
   p File::Stat.new($0).directory? #=> false
   p FileTest.directory?($0) #=> false
 
+以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
+#@if (version >= "1.8.0")
+1.8.0 以降では nil が返ります。
+#@end
+
+  dev         デバイス番号(ファイルシステム)
+#@since 1.8.2
+  dev_major   dev の major 番号部
+  dev_minor   dev の minor 番号部
+#@end
+  ino         i-node 番号
+  mode        ファイルモード
+  nlink       ハードリンクの数
+  uid         オーナーのユーザID
+  gid         オーナーのグループID
+  rdev        デバイスタイプ(スペシャルファイルのみ)
+  rdev_major  rdev の major 番号部
+  rdev_minor  rdev の minor 番号部
+  size        ファイルサイズ(バイト単位)
+  blksize     望ましいI/Oのブロックサイズ
+  blocks      割り当てられているブロック数
+  atime       最終アクセス時刻
+  mtime       最終更新時刻
+  ctime       最終状態変更時刻(状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
+
 == Class Methods
 
 --- new(path)
@@ -68,67 +93,161 @@ path に関する File::Stat オブジェクトを生成して返します。
   p File::Stat.new($:[0]).ftype #=> "directory"
 
 
-以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
-#@if (version >= "1.8.0")
-1.8.0 以降では nil が返ります。
-#@end
+#@#以下の属性メソッドは、システムによってサポートされていない場合 0 が返ります。
+#@#@if (version >= "1.8.0")
+#@#1.8.0 以降では nil が返ります。
+#@#@end
 
---- dev
-#@todo
+--- dev -> String
 デバイス番号(ファイルシステム)
 
+  fs = File::Stat.new($0)
+  p fs.dev 
+  #例
+  #=> 2
+#@# WindowsXP ruby1.8.6 でテスト
+
 #@since 1.8.2
---- dev_major
-#@todo
+--- dev_major -> Integer
 dev の major 番号部
---- dev_minor
-#@todo
+
+  fs = File::Stat.new($0)
+  p fs.dev_major
+  #例
+  #=> nil #この場合ではシステムでサポートされていないため
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- dev_minor -> Integer
 dev の minor 番号部
+
+  fs = File::Stat.new($0)
+  p fs.dev_minor
+  #例
+  #=> nil
+#@# WindowsXP ruby1.8.6 でテスト
+
 #@end
 
---- ino
-#@todo
+--- ino -> Integer
 i-node 番号
---- mode
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.ino      #=> 0
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- mode -> Integer
 ファイルモード
---- nlink
-#@todo
+
+  fs = File::Stat.new($0)
+  printf "%o\n", fs.mode 
+  #例
+  #=> 100644
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- nlink -> Integer
 ハードリンクの数
---- uid
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.nlink    #=> 1
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- uid -> Integer
 オーナーのユーザID
---- gid
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.nlink    #=> 1
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- gid -> Integer
 オーナーのグループID
---- rdev
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.gid      #=> 0
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- rdev -> Integer
 デバイスタイプ(スペシャルファイルのみ)
---- rdev_major
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.rdev     #=> 2
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- rdev_major -> Integer
 rdev の major 番号部
---- rdev_minor
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.rdev_major #=> nil
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- rdev_minor -> Integer
 rdev の minor 番号部
---- size
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.rdev_minor #=> nil
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- size -> Integer
 ファイルサイズ(バイト単位)
---- blksize
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.size    #=> 1548
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- blksize -> Integer
 望ましいI/Oのブロックサイズ
---- blocks
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.blksize #=> nil
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- blocks -> Integer
 割り当てられているブロック数
---- atime
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.blocks  #=> nil
+#@# WindowsXP ruby1.8.6 でテスト
+
+--- atime -> Time
 最終アクセス時刻
---- mtime
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.atime.to_a  #=> [45, 5, 21, 5, 9, 2007, 3, 248, false, "\223\214\213\236 (\225W\217\200\216\236) "]
+#@# WindowsXP ruby1.8.6 でテスト
+
+@see [[c:Time]]
+
+--- mtime -> Time
 最終更新時刻
---- ctime
-#@todo
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.mtime   #=> Wed Sep 05 20:42:18 +0900 2007
+#@# WindowsXP ruby1.8.6 でテスト
+
+@see [[c:Time]]
+
+--- ctime -> Time
 最終状態変更時刻
 (状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
+
+  fs = File::Stat.new($0)
+  #例
+  p fs.ctime.to_f   #=> 1188719843.0
+
+#@# WindowsXP ruby1.8.6 でテスト
+
+@see [[c:Time]]
 
 --- directory?
 #@todo
