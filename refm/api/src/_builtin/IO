@@ -776,7 +776,7 @@ path で指定されたファイルにストリームを繋ぎ換えます。
 
 @param path パスを表す文字列を指定します。
 
-@path mode パスを開く際のモードを文字列で指定します。[[m:Kernel.#open]] を参照してください。
+@param mode パスを開く際のモードを文字列で指定します。[[m:Kernel.#open]] を参照してください。
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
