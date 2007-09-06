@@ -929,10 +929,10 @@ val と == で等しい最後の要素の位置を返します。
 前に詰められます。自身が空配列の時は nil を返します。
 
   a = [0, 1, 2, 3, 4]
-  p a.shift #=> 0
-  p a       #=> [1, 2, 3, 4]
+  p a.shift            #=> 0
+  p a                  #=> [1, 2, 3, 4]
 
-  p [].shift #=> nil
+  p [].shift           #=> nil
 
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#unshift]]
 
