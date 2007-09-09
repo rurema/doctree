@@ -440,7 +440,7 @@ stickyビットが立っている時に真を返します。
 
 #@since 1.9.0
 #@# bc-rdoc: detected missing name: world_readable?
---- world_readable? => fixnum or nil
+--- world_readable? -> Fixnum | nil
 #@todo
 
 If stat is readable by others, returns an integer representing
@@ -452,7 +452,7 @@ stat(2).
    sprintf("%o", m)                              # => "644"
 
 #@# bc-rdoc: detected missing name: world_writable?
---- world_writable? => fixnum or nil
+--- world_writable? -> Fixnum | nil
 #@todo
 
 If stat is writable by others, returns an integer representing
