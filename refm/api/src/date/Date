@@ -126,12 +126,6 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- new(year = -4712, mon = 1, mday = 1, start = Date::ITALY) -> Date
 暦日付に相当する日付オブジェクトを生成します。
 
-@param year 年
-@param mon 月
-@param mday 日
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
-
 このクラスでは、紀元前の年を天文学の流儀で勘定します。
 1年の前は零年、零年の前は-1年、のようにします。
 月、および月の日は負、
@@ -146,6 +140,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 [[m:Date.jd]] も参照してください。
 
+@param year 年
+@param mon 月
+@param mday 日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付
+
 #@#? --- civil_to_jd(year, mon, mday, start = Date::GREGORIAN) -> Numeric
 
 #@since 1.9.0
@@ -159,12 +159,6 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@end
 暦週日付に相当する日付オブジェクトを生成します。
 
-@param cwyear 年
-@param cweek 週
-@param cwday 週の日 (曜日)
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
-
 週、および週の日 (曜日) は負、
 または正の数でなければなりません(負のときは最後からの序数)。
 零であってはなりません。
@@ -172,6 +166,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 このメソッドに改暦前の日付を与えることはできません。
 
 [[m:Date.jd]]、および [[m:Date.new]] も参照してください。
+
+@param cwyear 年
+@param cweek 週
+@param cwday 週の日 (曜日)
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付
 
 #@#? --- commercial_to_jd(cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric
 
@@ -198,13 +198,13 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@end
 ユリウス日に相当する日付オブジェクトを生成します。
 
-@param jd ユリウス日
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
 このクラスのいくつかの重要なメソッドで、
 負のユリウス日は保証されません。
 
 [[m:Date.new]] も参照してください。
+
+@param jd ユリウス日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.8.0
 #@#? --- jd_to_ajd(jd, fraction, offset = 0) -> Rational
@@ -235,10 +235,10 @@ ABBR_DAYNAMES[0] == "Sun" です。
 --- julian_leap? (year) -> bool
 ユリウス暦の閏年なら真を返します。
 
-@param year 年
-
 西暦4年は真になりますが、
 これは歴史的には正しくありません。
+
+@param year 年
 
 #@#? --- ld_to_jd(ld) -> Numeric
 
@@ -257,16 +257,16 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@end
 年間通算日 (年日付) に相当する日付オブジェクトを生成します。
 
-@param year 年
-@param yday 年の日
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
-
 年の日は負、
 または正の数でなければなりません (負のときは最後からの序数)。
 零であってはなりません。
 
 [[m:Date.jd]]、および [[m:Date.new]] も参照してください。
+
+@param year 年
+@param yday 年の日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付
 
 #@#? --- ordinal_to_jd(year, yday, start = Date::GREGORIAN) -> Numeric
 
@@ -275,25 +275,25 @@ ABBR_DAYNAMES[0] == "Sun" です。
 このメソッドは [[m:Date.parse]] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
 
+[[m:Date.parse]] も参照してください。
+
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
-
-[[m:Date.parse]] も参照してください。
 
 --- parse(str = '-4712-01-01', complete = false, start = Date::ITALY) -> Date
 与えられた日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
-
-@param str 日付をあらわす文字列
-@param complete 年を補完するか
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
 
 省略できる最後の引数が真で、年が00から99の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
 なお、省略した場合は、偽とみなします。
 
 [[m:Date._parse]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param complete 年を補完するか
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日付
 
 --- _strptime(str, format = '%F') -> Hash
 このメソッドは [[m:Date.strptime]] と似ていますが、日付オブジェクトを生成せずに、
@@ -306,14 +306,14 @@ ABBR_DAYNAMES[0] == "Sun" です。
 与えられた雛型で日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
+[[m:Date._strptime]] も参照してください。
+また [[man:strptime(3)]]、および [[m:Date#strftime]] も参照してください。
+
 @param str 日付をあらわす文字列
 @param format 書式
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付
 
-[[m:Date._strptime]] も参照してください。
-
-また [[man:strptime(3)]]、および [[m:Date#strftime]] も参照してください。
 #@end
 
 #@since 1.8.0
@@ -344,12 +344,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 そうでないなら、偽を返します。
 #@end
 
+[[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
+
 @param year 年
 @param mon 月
 @param mday 日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
-[[m:Date.jd]]、および [[m:Date.civil]] も参照してください。
 
 #@since 1.9.0
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
@@ -367,12 +367,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 そうでないなら、偽を返します。
 #@end
 
+[[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
+
 @param cwyear 年
 @param cweek 週
 @param cwday 週の日 (曜日)
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
-[[m:Date.jd]]、および [[m:Date.commercial]] も参照してください。
 
 #@since 1.9.0
 --- valid_jd? (jd, start = Date::GREGORIAN) -> bool
@@ -389,12 +389,12 @@ ABBR_DAYNAMES[0] == "Sun" です。
 ひとつ目の引数をそのまま返します。
 #@end
 
-@param jd ユリウス日
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
 対称性のため用意されていますが、実際的に意味はありません。
 
 [[m:Date.jd]] も参照してください。
+
+@param jd ユリウス日
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.0
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
@@ -412,11 +412,11 @@ ABBR_DAYNAMES[0] == "Sun" です。
 そうでないなら、偽を返します。
 #@end
 
+[[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
+
 @param year 年
 @param yday 年の日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
-[[m:Date.jd]]、および [[m:Date.ordinal]] も参照してください。
 
 #@since 1.8.6
 #@#? --- weeknum_to_jd(year, week, day, f = 0, start = Date::GREGORIAN) -> Numeric
@@ -447,11 +447,11 @@ x が数値ならば、self より x 日前の日付を返します。
 self より n ヶ月前の日付オブジェクトを返します。
 n は数値でなければなりません。
 
-@param n 月数
-
 #@since 1.9.0
 [[m:Date#prev_month]] も参照してください。
 #@end
+
+@param n 月数
 
 --- <=> (other) -> Integer
 ふたつを比較し、-1、零、あるいは 1 を返します。
@@ -469,11 +469,11 @@ other は日付オブジェクトか、
 self から n ヶ月後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
-@param n 月数
-
 #@since 1.9.0
 [[m:Date#next_month]] も参照してください。
 #@end
+
+@param n 月数
 
 #@since 1.8.0
 --- ajd -> Rational
@@ -503,14 +503,14 @@ n は数値でなければなりません。
 --- downto(min){|date| ...} -> self
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
-@param min 日付オブジェクト
-
 #@since 1.9.0
 1.9.0 以降では、ブロックが与えられない場合、
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
 
 [[m:Date#step]] を参照してください。
+
+@param min 日付オブジェクト
 
 --- england -> Date
 このメソッドは、new_start(Date::ENGLAND) と等価です。
@@ -603,24 +603,24 @@ n は数値でなければなりません。
 self を複製して、その改暦日を設定しなおします。
 引数を省略した場合は、[[m:Date::ITALY]] (1582年10月15日) になります。
 
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
 [[m:Date.new]] も参照してください。
+
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.0
 --- next_day(n = 1) -> Date
 n 日後を返します。
 
-@param n 日数
-
 [[m:Date#succ]] も参照してください。
+
+@param n 日数
 
 --- next_month(n = 1) -> Date
 n ヶ月後を返します。
 
-@param n 月数
-
 [[m:Date#>>]] も参照してください。
+
+@param n 月数
 
 --- next_year(n = 1) -> Date
 n 年後を返します。
@@ -635,9 +635,9 @@ n 日前を返します。
 --- prev_month(n = 1) -> Date
 n ヶ月前を返します。
 
-@param n 月数
-
 [[m:Date#<<]] も参照してください。
+
+@param n 月数
 
 --- prev_year(n = 1) -> Date
 n 年前を返します。
@@ -670,13 +670,13 @@ n 年前を返します。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
 
-@param limit 日付オブジェクト
-@param step 歩幅
-
 #@since 1.9.0
 1.9.0 以降では、ブロックが与えられない場合、
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
+
+@param limit 日付オブジェクト
+@param step 歩幅
 
 #@since 1.9.0
 --- sunday? -> bool
@@ -685,8 +685,6 @@ limit は日付オブジェクトでなければなりません、
 
 --- strftime(format = '%F') -> String
 与えられた雛型で日付を書式づけます。
-
-@param format 書式
 
 つぎの変換仕様をあつかいます:
 
@@ -703,6 +701,8 @@ limit は日付オブジェクトでなければなりません、
 #@end
 
 [[man:strftime(3)]]、および [[m:Date.strptime]] も参照してください。
+
+@param format 書式
 
 --- succ -> Date
 --- next -> Date
@@ -733,14 +733,14 @@ limit は日付オブジェクトでなければなりません、
 --- upto(max){|date| ...} -> self
 このメソッドは、step(max, 1){|date| ...} と等価です。
 
-@param max 日付オブジェクト
-
-[[m:Date#step]] を参照してください。
-
 #@since 1.9.0
 1.9.0 以降では、ブロックが与えられない場合、
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
+
+[[m:Date#step]] を参照してください。
+
+@param max 日付オブジェクト
 
 --- wday -> Integer
 曜日を返します (0-6、日曜日は零)。

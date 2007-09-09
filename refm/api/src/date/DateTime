@@ -22,6 +22,11 @@
 --- new(year = -4712, mon = 1, mday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 暦日付に相当する日時オブジェクトを生成します。
 
+時差の単位は日です。
+#@since 1.8.6
+1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
+#@end
+
 @param year 年
 @param mon 月
 @param mday 日
@@ -32,17 +37,14 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-時差の単位は日です。
-#@since 1.8.6
-1.8.6 以降では、"+0900" のような時差をあらわす文字列もつかえます。
-#@end
-
 #@since 1.9.0
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@else
 --- commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@end
 暦週日付に相当する日時オブジェクトを生成します。
+
+[[m:DateTime.new]] も参照してください。
 
 @param cwyear 年
 @param cweek 週
@@ -54,10 +56,10 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-[[m:DateTime.new]] も参照してください。
-
 --- jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 ユリウス日に相当する日時オブジェクトを生成します。
+
+[[m:DateTime.new]] も参照してください。
 
 @param jd ユリウス日
 @param hour 時
@@ -67,8 +69,6 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-[[m:DateTime.new]] も参照してください。
-
 --- now(start = Date::ITALY) -> DateTime
 現在の時刻に相当する日時オブジェクトを生成します。
 
@@ -76,6 +76,8 @@
 
 --- ordinal(year = -4712, yday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 年日付に相当する日時オブジェクトを生成します。
+
+[[m:DateTime.new]] も参照してください。
 
 @param year 年
 @param yday 年の日
@@ -86,14 +88,12 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-[[m:DateTime.new]] も参照してください。
-
 --- today(start = Date::ITALY) -> Date
 このクラスでは利用できません。
 
-@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-
 [[m:DateTime.now]] を参照してください。
+
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.0
 #@#? --- valid_time? -> bool
@@ -136,9 +136,9 @@
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
 
-@param offset 時差
-
 [[m:Date.new]] も参照してください。
+
+@param offset 時差
 
 #@since 1.8.0
 --- offset -> Rational
