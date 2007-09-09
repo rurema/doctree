@@ -99,7 +99,7 @@ path に関する File::Stat オブジェクトを生成して返します。
 #@#@end
 
 --- dev -> String
-デバイス番号(ファイルシステム)
+デバイス番号(ファイルシステム)を返します。
 
   fs = File::Stat.new($0)
   p fs.dev 
@@ -109,7 +109,7 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 #@since 1.8.2
 --- dev_major -> Integer
-dev の major 番号部
+dev の major 番号部を返します。
 
   fs = File::Stat.new($0)
   p fs.dev_major
@@ -118,7 +118,7 @@ dev の major 番号部
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- dev_minor -> Integer
-dev の minor 番号部
+dev の minor 番号部を返します。
 
   fs = File::Stat.new($0)
   p fs.dev_minor
@@ -129,7 +129,7 @@ dev の minor 番号部
 #@end
 
 --- ino -> Integer
-i-node 番号
+i-node 番号を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -137,7 +137,7 @@ i-node 番号
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- mode -> Integer
-ファイルモード
+ファイルモードを返します。
 
   fs = File::Stat.new($0)
   printf "%o\n", fs.mode 
@@ -146,7 +146,7 @@ i-node 番号
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- nlink -> Integer
-ハードリンクの数
+ハードリンクの数を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -154,7 +154,7 @@ i-node 番号
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- uid -> Integer
-オーナーのユーザID
+オーナーのユーザIDを返します。
 
   fs = File::Stat.new($0)
   #例
@@ -162,7 +162,7 @@ i-node 番号
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- gid -> Integer
-オーナーのグループID
+オーナーのグループIDを返します。
 
   fs = File::Stat.new($0)
   #例
@@ -170,7 +170,7 @@ i-node 番号
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- rdev -> Integer
-デバイスタイプ(スペシャルファイルのみ)
+デバイスタイプ(スペシャルファイルのみ)を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -178,7 +178,7 @@ i-node 番号
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- rdev_major -> Integer
-rdev の major 番号部
+rdev の major 番号部を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -186,7 +186,7 @@ rdev の major 番号部
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- rdev_minor -> Integer
-rdev の minor 番号部
+rdev の minor 番号部を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -194,7 +194,7 @@ rdev の minor 番号部
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- size -> Integer
-ファイルサイズ(バイト単位)
+ファイルサイズ(バイト単位)を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -202,7 +202,7 @@ rdev の minor 番号部
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- blksize -> Integer
-望ましいI/Oのブロックサイズ
+望ましいI/Oのブロックサイズを返します。
 
   fs = File::Stat.new($0)
   #例
@@ -210,7 +210,7 @@ rdev の minor 番号部
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- blocks -> Integer
-割り当てられているブロック数
+割り当てられているブロック数を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -218,7 +218,7 @@ rdev の minor 番号部
 #@# WindowsXP ruby1.8.6 でテスト
 
 --- atime -> Time
-最終アクセス時刻
+最終アクセス時刻を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -228,7 +228,7 @@ rdev の minor 番号部
 @see [[c:Time]]
 
 --- mtime -> Time
-最終更新時刻
+最終更新時刻を返します。
 
   fs = File::Stat.new($0)
   #例
@@ -238,7 +238,7 @@ rdev の minor 番号部
 @see [[c:Time]]
 
 --- ctime -> Time
-最終状態変更時刻
+最終状態変更時刻を返します。
 (状態の変更とは chmod などによるもので、Unix では i-node の変更を意味します)
 
   fs = File::Stat.new($0)
@@ -250,53 +250,53 @@ rdev の minor 番号部
 @see [[c:Time]]
 
 --- directory? -> bool
-ディレクトリの時に真
+ディレクトリの時に真を返します。
 
   p File::Stat.new($0).directory? #=> false
 
 @see [[m:FileTest.directory?]]
 
 --- readable? -> bool
-読み込み可能な時に真
+読み込み可能な時に真を返します。
 
   p File::Stat.new($0).readable? #=> true
 
 --- readable_real? -> bool
-実ユーザ/実グループによって読み込み可能な時に真
+実ユーザ/実グループによって読み込み可能な時に真を返します。
 
   p File::Stat.new($0).readable_real? #=> true
 
 --- writable? -> bool
-書き込み可能な時に真
+書き込み可能な時に真を返します。
 
   p File::Stat.new($0).writable? #=> true
 
 --- writable_real? -> bool
-実ユーザ/実グループによって書き込み可能な時に真
+実ユーザ/実グループによって書き込み可能な時に真を返します。
 
   p File::Stat.new($0).writable_real? #=> true
 
 --- executable? -> bool
-実効ユーザ/グループIDで実行できる時に真
+実効ユーザ/グループIDで実行できる時に真を返します。
 
   p File::Stat.new($0).executable? 
   # 例
   #=> true
 
 --- executable_real? -> bool
-実ユーザ/グループIDで実行できる時に真
+実ユーザ/グループIDで実行できる時に真を返します。
 
   p File::Stat.new($0).executable_real? 
   #例
   #=> true
 
 --- file? -> bool
-通常ファイルの時に真
+通常ファイルの時に真を返します。
 
   p File::Stat.new($0).file? #=> true
 
 --- zero? -> bool
-サイズが0である時に真
+サイズが0である時に真を返します。
 
   p File::Stat.new($0).zero? #=> false
 
@@ -313,41 +313,130 @@ rdev の minor 番号部
   p FileTest.exist?(fp.path) #=> true
   p File::Stat.new(fp.path).size? #=> 6
 
---- owned?
-#@todo
-自分のものである時に真
---- grpowned?
-#@todo
-グループIDが実効グループIDと等しい時に真
+--- owned? -> bool
+自分のものである時に真を返します。
+
+  printf "%s %s\n", $:[0], File::Stat.new($:[0]).owned?
+  #例
+  #=> /usr/local/lib/site_ruby/1.8 false
+
+--- grpowned? -> bool
+グループIDが実効グループIDと等しい時に真を返します。
 
 補助グループIDは考慮されません。
 
---- pipe?
-#@todo
-無名パイプおよび名前つきパイプ(FIFO)の時に真
---- symlink?
-#@todo
-シンボリックリンクである時に真
---- socket?
-#@todo
-ソケットの時に真
+  printf "%s %s\n", $:[0], File::Stat.new($:[0]).grpowned?
+  #例
+  #=> /usr/local/lib/site_ruby/1.8 false
+  printf "%s %s\n", $0, File::Stat.new($0).grpowned?
+  #例
+  #=> filestat.rb true
 
---- blockdev?
-#@todo
-ブロックスペシャルファイルの時に真
---- chardev?
-#@todo
-キャラクタスペシャルファイルの時に真
+--- pipe? -> bool
+無名パイプおよび名前つきパイプ(FIFO)の時に真を返します。
 
---- setuid?
-#@todo
-setuidされている時に真
---- setgid?
-#@todo
-setgidされている時に真
---- sticky?
-#@todo
-stickyビットが立っている時に真
+#@#linux のみ？
+  system("mkfifo /tmp/pipetest")
+  p File::Stat.new("/tmp/pipetest").pipe? #=> true
+
+--- symlink? -> false
+シンボリックリンクである時に真を返します。
+ただし、File::Statは自動的にシンボリックリンクをたどっていくので
+常にfalseを返します。
+
+#@# ソースにそう書いてあったので
+
+  require 'fileutils'
+  outfile = $0 + ".ln"
+  FileUtils.ln_s($0, outfile, {:force => true})
+  p File::Stat.new(outfile).symlink? #=> false
+  p File.lstat(outfile).symlink?     #=> true
+  p FileTest.symlink?(outfile)       #=> true
+
+@see [[m:File.lstat]]
+
+--- socket? -> bool
+ソケットの時に真を返します。
+
+  Dir.glob("/tmp/*"){|file|
+    if File::Stat.new(file).socket?
+      printf "%s\n", file
+    end
+  }
+  #例
+  #=> /tmp/uimhelper-hogehoge
+  #...
+
+--- blockdev? -> bool
+ブロックスペシャルファイルの時に真を返します。
+
+  Dir.glob("/dev/*") {|bd|
+    if File::Stat.new(bd).blockdev?
+      puts bd
+    end
+  }
+  #例
+  #...
+  #=> /dev/hda1
+  #=> /dev/hda3
+  #...
+
+--- chardev? -> bool
+キャラクタスペシャルファイルの時に真を返します。
+
+  Dir.glob("/dev/*") {|bd|
+    if File::Stat.new(bd).chardev?
+      puts bd
+    end
+  }
+  #例
+  #...
+  #=> /dev/tty1
+  #=> /dev/stderr
+  #...
+
+--- setuid? -> bool
+setuidされている時に真を返します。
+
+  Dir.glob("/bin/*") {|bd|
+    if File::Stat.new(bd).setuid?
+      puts bd
+    end
+  }
+  #例
+  #...
+  #=> /bin/ping
+  #=> /bin/su
+  #...
+
+--- setgid? -> bool
+setgidされている時に真を返します。
+
+  Dir.glob("/usr/sbin/*") {|bd|
+    if File::Stat.new(bd).setgid?
+      puts bd
+    end
+  }
+  #例
+  #...
+  #=> /usr/sbin/postqueue
+  #...
+
+--- sticky? -> bool
+stickyビットが立っている時に真を返します。
+
+  Dir.glob("/usr/bin/*") {|bd|
+    begin
+      if File::Stat.new(bd).sticky?
+        puts bd
+      end
+    rescue
+    end
+  }
+  #例
+  #...
+  #=> /usr/bin/emacs-21.4
+  #...
 
 #@since 1.9.0
 #@# bc-rdoc: detected missing name: world_readable?
