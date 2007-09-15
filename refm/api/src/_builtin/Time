@@ -470,3 +470,45 @@ yday は 1 から数えます。
 --- tv_usec      -> Integer
 
 時刻のマイクロ秒の部分を整数で返します。
+
+#@since 1.9.0
+
+--- friday? => true or false
+#@todo
+
+Returns true if time represents Friday.
+
+--- monday? -> bool
+#@todo
+
+Returns true if time represents Monday.
+
+--- saturday? -> bool
+#@todo
+
+Returns true if time represents Saturday.
+
+--- sunday? -> bool
+#@todo
+
+Returns true if time represents Sunday.
+
+   t = Time.now   #=> Sun Oct 23 00:14:54 UTC 2005
+   t.sunday?      #=> true
+
+--- thursday? -> bool
+#@todo
+
+Returns true if time represents Thursday.
+
+--- tuesday? -> bool
+#@todo
+
+Returns true if time represents Tuesday.
+
+--- wednesday? -> bool
+#@todo
+
+Returns true if time represents Wednesday.
+
+#@end
