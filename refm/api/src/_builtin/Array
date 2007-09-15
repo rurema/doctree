@@ -1027,6 +1027,8 @@ sort! は self を破壊的に変更し、self を返します。ただし、要素の数が 2 より小さい
 --- to_ary  -> self
 
 self をそのまま返します。
+If called on a subclass of Array, converts the
+receiver to an Array object.
 
 --- to_s    -> String
 
@@ -1123,5 +1125,34 @@ obj を順番に配列の先頭に挿入します。
     p ary.values_at( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
 
 #@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
+
+#@end
+
+#@since 1.9.0
+--- choice        -> obj
+#@todo
+
+Choose a random element from an array.
+
+--- cycle {|obj| block }
+#@todo
+
+Calls block repeatedly forever.
+
+   a = ["a", "b", "c"]
+   a.each {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+
+--- shuffle -> an_array
+#@todo
+
+Returns a new array with elements of this array shuffled.
+
+   a = [ 1, 2, 3 ]           #=> [1, 2, 3]
+   a.shuffle                 #=> [2, 3, 1]
+
+--- shuffle!        -> array or nil
+#@todo
+
+Shuffles elements in self in place.
 
 #@end
