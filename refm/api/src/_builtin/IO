@@ -88,7 +88,7 @@ IO オブジェクトを生成して返します。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
 
-path で指定されたファイルの各行に対して繰り返します。
+path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
 path のオープンに成功すれば nil を返します。
 
 path が空ファイルの場合、何もせずに nil を返します。
@@ -457,21 +457,36 @@ IO ポートの内部バッファをフラッシュします。
 IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 返します。EOF に到達した時には nil を返します。
 
+[[m:IO#readchar]] との違いは EOF での振る舞いのみです。
+
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+   f = File.new("testfile")
+   f.getc                   #=> 84
+   f.getc                   #=> 104
+   f.read
+   f.getc                   #=> nil
+
+@see [[m:IO#readchar]]
 
 --- gets(rs = $/)    -> String | nil
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には nil を返します。
 
-[[m:IO#each]] と同じように動作しますが、こちらは 1 行返すだけで繰り返しません。
-[[m:Kernel.#gets]] 同様、読み込んだ文字列を変数 [[m:$_]] にセットします。
+読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#readline]] との違いは EOF での振る舞いのみです。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@see [[m:$/]]
+   f = File.new("oneline_file")
+   f.gets                          #=> "This is line one\n"
+   $_                              #=> "This is line one\n"
+   f.gets                          #=> nil
+   $_                              #=> nil
+
+@see [[m:$/]], [[m:IO#readline]]
 
 --- ioctl(cmd, arg = 0)    -> Integer
 
@@ -499,11 +514,11 @@ IO に対してシステムコール ioctl を実行し、その結果を返します。
 @raise IOError 読み込み用にオープンされていなければ発生します。
 
   f = File.new("testfile")
-  f.lineno   #=> 0
-  f.gets     #=> "This is line one\n"
-  f.lineno   #=> 1
-  f.gets     #=> "This is line two\n"
-  f.lineno   #=> 2
+  f.lineno                 #=> 0
+  f.gets                   #=> "This is line one\n"
+  f.lineno                 #=> 1
+  f.gets                   #=> "This is line two\n"
+  f.lineno                 #=> 2
 
 @see [[m:$.]]
 
@@ -617,11 +632,15 @@ IO が既に EOF に達していれば nil を返します。
 @param length 読み込むサイズを整数で指定します。nil が指定された場合、EOF までの全てのデータを読み込んで、その文字列を返します。
 
 #@since 1.8.0
-@param outbuf 出力用のバッファを文字列で指定します。読み込んだデータをその文字列オブジェクトに上書きして返します。指定した文字列オブジェクトがあらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
-
-第二引数を指定した read の呼び出しでデータが空であった場合
-(read が nil を返す場合)、outbuf は空文字列になりま
-す。
+@param outbuf 出力用のバッファを文字列で指定します。IO#read は読み込んだ
+              データをその文字列オブジェクトに上書きして返します。指定し
+              た文字列オブジェクトがあらかじめ length 長の領域であれば、
+              余計なメモリの割当てが行われません。指定した文字列の長さが
+              length と異なる場合、その文字列は一旦 length 長に拡張(ある
+              いは縮小)されたあと、実際に読み込んだデータのサイズになります。
+              
+              第二引数を指定した read の呼び出しでデータが空であった場合
+              (read が nil を返す場合)、outbuf は空文字列になります。
 
   outbuf = "x" * 20;
   io = File.open("/dev/null")
@@ -640,18 +659,27 @@ IO が既に EOF に達していれば nil を返します。
 --- readchar    -> Integer
 
 [[m:IO#getc]] と同様に 1 文字読み込んで、その文字に対応す
-る [[c:Fixnum]] を返します。
+る [[c:Fixnum]] を返します。EOF に到達した時には EOFError が発生します。
+
+[[m:IO#getc]] との違いは EOF での振る舞いのみです。
 
 @raise EOFError EOF に到達した時に発生します。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+   f = File.new("testfile")
+   f.readchar                   #=> 84
+   f.readchar                   #=> 104
+   f.read
+   f.readchar                   #=> EOFError
+
+@see [[m:IO#getc]]
+
 --- readline(rs = $/)    -> String
 
-[[m:IO#gets]] と同様に 1 行読み込みその文字列を返します。
+[[m:IO#gets]] と同様に 1 行読み込みその文字列を返します。EOF に到達した時には EOFError が発生します。
 
-readline は gets 同様読み込んだ文字列を変数 [[m:$_]]
-にセットします。
+読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#gets]] との違いは EOF での振る舞いのみです。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
@@ -659,7 +687,13 @@ readline は gets 同様読み込んだ文字列を変数 [[m:$_]]
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@see [[m:$/]]
+   f = File.new("oneline_file")
+   f.readline                      #=> "This is line one\n"
+   $_                              #=> "This is line one\n"
+   f.readline                      #=> EOFError
+   $_                              #=> nil
+
+@see [[m:$/]], [[m:IO#gets]]
 
 --- readlines(rs = $/)    -> [String]
 
@@ -686,7 +720,7 @@ IO が既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定さ
 
 @param maxlen 読み込む長さの上限を整数で指定します。
 
-@param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
+@param outbuf 文字列で指定します。IO#read_nonblock は読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。read(2) システムコールが 0 を返した場合は、空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -748,7 +782,7 @@ readpartial の結果は以下のようになります。
 
 @param maxlen 読み込む長さの上限を整数で指定します。
 
-@param outbuf 文字列で指定します。読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
+@param outbuf 文字列で指定します。IO#readpartial は読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -841,7 +875,7 @@ IO が既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定さ
 @param maxlen 入力のサイズを整数で指定します。
 
 #@since 1.8.0
-@param outbuf 出力用のバッファを文字列で指定します。読み込んだデータをその文字列オブジェクトに上書きして返します。指定した文字列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが maxlen と異なる場合、その文字列は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
+@param outbuf 出力用のバッファを文字列で指定します。IO#sysread は読み込んだデータをその文字列オブジェクトに上書きして返します。指定した文字列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが maxlen と異なる場合、その文字列は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
 
 第二引数を指定した sysread の呼び出しでデータが空であった場
 合(sysread が例外 [[c:EOFError]] を発生させる場合)、
