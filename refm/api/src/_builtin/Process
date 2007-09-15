@@ -65,6 +65,12 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@end
 
+#@since 1.9.0
+--- exec(command, *arg)
+#@todo
+
+#@end
+
 #@since 1.8.0
 --- exit(status = true)    -> ()
 
