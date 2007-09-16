@@ -603,15 +603,26 @@ C 言語の printf と同じように、format に従い引数
 
 --- puts(*obj)    -> nil
 
-各 obj を self に出力した後、改行します。
+各 obj を self に出力し、それぞれの後に改行を出力します。
 引数の扱いは [[m:Kernel.#puts]] と同じです。詳細はこちらを参照し
 てください。
 
-@param obj [[m:Kernel.#puts]] と同じです。
+@param obj 出力したいオブジェクトを指定します。[[m:Kernel.#puts]] と同じです。
 
 @raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 @raise Errno::EXXX 出力に失敗した場合に発生します。
+
+     $stdout.puts("this", "is", "a", "test", [1, [nil, 3]])
+     
+     #=>     
+     this
+     is
+     a
+     test
+     1
+     nil
+     3
 
 #@since 1.8.0
 --- read(length = nil, outbuf = "")    -> String | nil
@@ -658,8 +669,8 @@ length バイト読み込んで、その文字列を返します。
 
 --- readchar    -> Integer
 
-[[m:IO#getc]] と同様に 1 文字読み込んで、その文字に対応す
-る [[c:Fixnum]] を返します。EOF に到達した時には EOFError が発生します。
+IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
+返します。EOF に到達した時には EOFError が発生します。
 
 [[m:IO#getc]] との違いは EOF での振る舞いのみです。
 
@@ -677,7 +688,8 @@ length バイト読み込んで、その文字列を返します。
 
 --- readline(rs = $/)    -> String
 
-[[m:IO#gets]] と同様に 1 行読み込みその文字列を返します。EOF に到達した時には EOFError が発生します。
+一行読み込んで、読み込みに成功した時にはその文字列を返します。
+EOF に到達した時には EOFError が発生します。
 
 読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#gets]] との違いは EOF での振る舞いのみです。
 
@@ -792,7 +804,7 @@ readpartial の結果は以下のようになります。
 
 --- reopen(io)                   -> self
 
-自身を io に繋ぎ換えます。クラスも io に等しくなることに
+自身を指定された io に繋ぎ換えます。クラスも io に等しくなることに
 注意してください。
 
 @param io 自身を繋ぎ換えたい IO オブジェクトを指定します。
@@ -820,6 +832,12 @@ path で指定されたファイルにストリームを繋ぎ換えます。
 
 @raise IOError 既に close されている場合に発生します。
 
+     f = File.new("testfile")
+     f.readline               #=> "This is line one\n"
+     f.rewind                 #=> 0
+     f.lineno                 #=> 0
+     f.readline               #=> "This is line one\n"
+
 --- seek(offset, whence = IO::SEEK_SET)    -> 0
 
 ファイルポインタを whence の位置から offset だけ移動させます。
@@ -836,6 +854,10 @@ offset 位置への移動が成功すれば 0 を返します。
 @raise Errno::EXXX ファイルポインタの移動に失敗した場合に発生します。
 
 @raise IOError 既に close されていた場合に発生します。 
+
+     f = File.new("testfile")
+     f.seek(-13, IO::SEEK_END)   #=> 0
+     f.readline                  #=> "And so on...\n"
 
 @see [[m:IO#lseek]]
 
@@ -947,9 +969,9 @@ self を返します。
 
 --- ungetc(char)     -> nil
 
-char を読み戻します。2バイト以上の読み戻しは保証されません。
+指定された char を読み戻します。2バイト以上の読み戻しは保証されません。
 
-@param char 読み戻したい文字に対応する [[c:Fixnum]] を指定します。
+@param char 読み戻したい1バイト文字に対応する [[c:Fixnum]] を指定します。
 
 @raise IOError 読み戻しに失敗した場合に発生します。また、自身が読み込み用にオープンされていない時、自身がまだ一度も read されていない時に発生します。
 
