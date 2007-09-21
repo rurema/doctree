@@ -2,20 +2,20 @@
 #@since 1.9.0
 include Comparable
 #@end
-
 #@#インターンされた文字列
-シンボルを表すクラス。シンボルは任意の文字列と一対一に対応するオブジェクトで、
-同じ内容のシンボルはかならず同一のオブジェクトです。
-文字列の代わりに用いることもできますが、必ずしも文字列と同じ振る舞いをするわけではありません。
+シンボルを表すクラス。シンボルは任意の文字列と一対一に対応するオブジェクトです。
 
-Ruby スクリプトからは
+文字列の代わりに用いることもできますが、必ずしも文字列と同じ振る舞いをするわけではありません。
+同じ内容のシンボルはかならず同一のオブジェクトです。
+
+Ruby スクリプトからは以下のようにして得られます。
 
   :symbol # 基本のシンボルリテラル
   :'symbol'
   'symbol'.intern
   %s!symbol! # %記法
 
-のようにして得られます。実際にシンボルが生成されるのはコンパイル時です。
+実際にシンボルが生成されるのはコンパイル時です。
 一番目のリテラルでシンボルを表す場合、`:' の後に
 は識別子、メソッド名(`!',`?' などの接尾辞を含む)、変数名
 (`$'などの接頭辞を含む)、再定義できる演算子のいずれかに適合する
@@ -50,7 +50,7 @@ Rubyの内部実装では、メソッド名や変数名、定数名、クラス名など
   * ハッシュのキー { :key => "value" }
   * アクセサの引数で渡すインスタンス変数名 attr_reader :name
   * メソッド引数で渡すメソッド名 __send__ :to_s
-  * C の enum 的な使用 
+  * C の enum 的な使用 (値そのものは無視してよい場合)
 
 シンボルを使うメリットは
 
@@ -72,23 +72,24 @@ Symbolクラスのメソッドには、Stringクラスのメソッドに類似のものもあります。
 
 定義済みの全てのシンボルオブジェクトの配列を返します。
 
-  p Symbol.all_symbols  # => [:RUBY_PLATFORM, :RUBY_VERSION, ...]
+    p Symbol.all_symbols  # => [:RUBY_PLATFORM, :RUBY_VERSION, ...]
 
 シンボルの生成はコンパイル時に行われるので以下のようにしても結果に
 差はありません。
 
-  a = Symbol.all_symbols
-  :foo
-  b = Symbol.all_symbols
+    a = Symbol.all_symbols
+    :foo
+    b = Symbol.all_symbols
+    p b - a
+    # => []
   
-  p a == b #=> true
-  
-  #コンパイル時に不定なシンボルになんらかの操作をすると、違った結果になる。
-  a = Symbol.all_symbols
-  s = :"#{gets.chomp}"  #unknown と入力
-  b = Symbol.all_symbols
-  
-  p(b - a) #=> [:unknown]
+ただし、ソースコンパイル時に不定な(存在しない)シンボルは評価の段階で追加されます。
+
+    a = Symbol.all_symbols
+    :"#{1}"
+    b = Symbol.all_symbols
+    p b - a
+    # => [:"1"]
 
 #@end
 
@@ -153,29 +154,84 @@ self を返します。
 #@end
 
 
-#@#編集中
-#@since 3.0.0
-    新規
-    rb_define_method(rb_cSymbol, "to_proc", sym_to_proc, 0);
+#@since 100.9.0
+！  1.9で追加されたメソッド群だが、実装がきちんと決まってないので後で書く
+
 --- to_proc -> Proc
-    Stringみたい レシーバをStringに変換
-    rb_define_method(rb_cSymbol, "=~", sym_match, 1);
-    rb_define_method(rb_cSymbol, "match", sym_match, -1);
-    rb_define_method(rb_cSymbol, "===", sym_eqq, 1);
-    Stringみたい 返り値は Stringの時と一緒（String）
-    rb_define_method(rb_cSymbol, "[]", sym_aref, -1);
-    rb_define_method(rb_cSymbol, "slice", sym_aref, -1);
-    Stringみたい 返り値は Stringの時と一緒
-    rb_define_method(rb_cSymbol, "length", sym_length, 0);
-    rb_define_method(rb_cSymbol, "size", sym_length, 0);
-    rb_define_method(rb_cSymbol, "empty?", sym_empty, 0);
-    rb_define_method(rb_cSymbol, "<=>", sym_cmp, 1);
-    rb_define_method(rb_cSymbol, "casecmp", sym_casecmp, 1);
-    Stringみたい 返り値は Symbol
-    rb_define_method(rb_cSymbol, "swapcase", sym_swapcase, 0);
-    rb_define_method(rb_cSymbol, "upcase", sym_upcase, 0);
-    rb_define_method(rb_cSymbol, "downcase", sym_downcase, 0);
-    rb_define_method(rb_cSymbol, "capitalize", sym_capitalize, 0);
-    rb_define_method(rb_cSymbol, "succ", sym_succ, 0);
-    rb_define_method(rb_cSymbol, "next", sym_succ, 0);
+
+
+#@#Stringみたい レシーバをStringに変換
+--- =~(other) -> Integer|nil
+Stringの同名のメソッドと似た働きをします。selfを文字列化した
+
+self.to_s =~(other) と同じです。
+
+@see [[m:String#=~]]
+
+--- match -> StringSymbol
+
+@see [[m:String#match]]
+
+--- === -> StringSymbol
+
+@see [[m:String#===]]
+
+#@#Stringみたい 返り値は Stringの時と一緒（String）
+--- [] -> String
+
+@see [[m:String#[]]]
+
+--- slice -> String
+
+@see [[m:String#slice]]
+
+#@#Stringみたい 返り値は Stringの時と一緒
+--- length -> Integer
+
+@see [[m:String#length]]
+
+--- size -> Integer
+
+@see [[m:String#size]]
+
+--- empty? -> bool
+
+@see [[m:String#empty?]]
+
+--- <=>(other) -> Integer
+
+Stringの同名のメソッドと似た働きをします。シンボル同士を比較します。
+
+@param other 比較対象のシンボル
+
+@see [[m:String#<=>]]
+
+--- casecmp(other) -> Integer
+
+@see [[m:String#casecmp]]
+
+#@#Stringみたい 返り値は Symbol
+--- swapcase -> Symbol
+
+@see [[m:String#swapcase]]
+
+--- upcase -> Symbol
+
+@see [[m:String#upcase]]
+
+--- downcase -> Symbol
+
+@see [[m:String#downcase]]
+
+--- capitalize -> Symbol
+
+@see [[m:String#capitalize]]
+
+--- next -> Symbol
+--- succ -> Symbol
+
+Stringの同名のメソッドと似た働きをします。次のシンボルを返します。
+
+@see [[m:String#next]]
+
 #@end
