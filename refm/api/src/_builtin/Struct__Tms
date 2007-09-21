@@ -2,21 +2,40 @@
 
 [[m:Process.#times]] の返り値を表現する構造体です。
 
+この機能がサポートされているプラットフォーム上でプロセスの
+処理時間に関する情報を保持します。プラットフォームによっては
+使えない値があります。
+
+@see [[m:Process.#times]]
+
 == Instance Methods
 
---- cstime
+--- cstime -> Float
+終了した子プロセスのシステム CPU 時間の合計(秒)を返します。
+
+Windows 上では常に 0 を返します。
+
 --- cstime=(n)
-#@todo
+終了した子プロセスのシステム CPU 時間の合計(秒)をセットします。
 
---- cutime
+--- cutime -> Float
+終了した子プロセスのユーザー CPU 時間の合計(秒)を返します。
+
+Windows 上では常に 0 を返します。
+
 --- cutime=(n)
-#@todo
+終了した子プロセスのユーザー CPU 時間の合計(秒)をセットします。
 
---- stime
+--- stime -> Float
+システム CPU 時間を返します。
+
 --- stime=(n)
-#@todo
+システム CPU 時間をセットします。
 
---- utime
+--- utime -> Float
+ユーザー CPU 時間を返します。
+
 --- utime=(n)
-#@todo
+ユーザー CPU 時間をセットします。
+
 
