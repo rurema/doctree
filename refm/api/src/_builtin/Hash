@@ -40,12 +40,27 @@ include Enumerable
 引数hashと同一のキーと値を持つ新たなハッシュを生成して返しま
 す。(生成されたハッシュのデフォルト値は nil です。)
 
+引数hashと生成したハッシュは同じオブジェクトを参照することになるので、
+一方でキーや値に破壊的操作を行うともう片方にも影響します。
+
 @param hash 生成元となるハッシュです。
 
-  h = {1=>2}
-  g = Hash[h]
+  h = {1 => "value"}
+  h.default = "none"
   
-  p g #=> {1=>2}
+  g = Hash[h]
+  p g #=> {1=>"value"}
+  
+  p h[:no] #=> "none"
+  p g[:no] #=> nil
+  
+  h[:add] = "some"
+  p h #=> {1=>"value", :add=>"some"}
+  p g #=> {1=>"value"}
+  
+  h[1] << 'plus' #破壊的操作
+  p h #=> {1=>"valueplus", :add=>"some"}
+  p g #=> {1=>"valueplus"}
 
 --- [](*key_and_value)  -> Hash
 
@@ -55,8 +70,7 @@ include Enumerable
 このメソッドでは生成するハッシュにデフォルト値を指定することはできません。
 [[m:Hash.new]]を使うか、[[m:Hash#default=]]で後から指定してください。
 
-@param key 生成するハッシュのキーです。
-@param value 生成するハッシュの値です。
+@param key_and_value 生成するハッシュのキーと値の組です。必ず偶数個(0を含む)指定しなければいけません。
 @raise ArgumentError 奇数個の引数を与えたときに発生します。
 
 以下は配列からハッシュを生成する方法の例です。
@@ -256,7 +270,7 @@ ifnoneを省略した Hash.new は {} と同じです。
 ハッシュの全値の配列を返します。
 
    h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-   p h1.values         #=> ["c", 100, ["some"]]
+   p h1.values         #=> [100, ["some"], "c"]
 
 @see [[m:Hash#keys]],[[m:Hash#to_a]]
 
@@ -265,7 +279,7 @@ ifnoneを省略した Hash.new は {} と同じです。
 キーと値からなる 2 要素の配列を並べた配列を生成して返します。
 
    h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-   p h1.to_a           #=> [[:c, "c"], ["a", 100], [2, ["some"]]]
+   p h1.to_a           #=> [["a", 100], [2, ["some"]], [:c, "c"]]
 
 @see [[m:Hash#keys]],[[m:Hash#values]]
 
@@ -274,7 +288,7 @@ ifnoneを省略した Hash.new は {} と同じです。
 全キーの配列を返します。
 
    h1 = { "a" => 100, 2 => ["some"], :c => "c" }
-   p h1.keys           #=> [:c, "a", 2]
+   p h1.keys           #=> ["a", 2, :c]
 
 @see [[m:Hash#values]],[[m:Hash#to_a]]
 
@@ -915,6 +929,15 @@ Hash#merge! は、マージの結果でselfを変更する破壊的メソッドで、[[m:Hash#update]] 
 
 @param other 上書きに用いるハッシュです。
 @return マージ後のselfを返します。
+
+  foo = {1 => 'a', 2 => 'b', 3 => 'c'}
+  bar = {2 => 'B', 3 => 'C', 4 => 'D'}
+  
+  p foo.update(bar) #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+  p foo  #=> {1=>"a", 2=>"B", 3=>"C", 4=>"D"}
+  
+  p foo.update(bar) {|key, foo_val, bar_val| foo_val + bar_val } #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
+  p foo  #=> {1=>"a", 2=>"BB", 3=>"CC", 4=>"DD"}
 
 @see [[m:Hash#merge!]]
 
