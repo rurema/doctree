@@ -211,9 +211,9 @@ ifnone¤ò¾ÊÎ¬¤·¤¿ Hash.new ¤Ï {} ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 
   h = Hash.new([].freeze)
-  h[0] += [0] #ÇË²õÅª¤Ç¤Ê¤¤¥á¥½¥Ã¥É
+  h[0] += [0] #ÇË²õÅª¤Ç¤Ê¤¤¥á¥½¥Ã¥É¤ÏOK
   h[1] << 1
-  #=> `<<': can't modify frozen array (TypeError)
+  # ¥¨¥é¡¼ `<<': can't modify frozen array (TypeError)
 
 #@if (version >= "1.8.0")
 --- new {|hash, key| ... } -> Hash
@@ -258,7 +258,7 @@ ifnone¤ò¾ÊÎ¬¤·¤¿ Hash.new ¤Ï {} ¤ÈÆ±¤¸¤Ç¤¹¡£
                   raise(IndexError, "hash[#{key}] has no value")
                }
   h[1]
-  # => hash[1] has no value (IndexError)
+  # ¥¨¥é¡¼ hash[1] has no value (IndexError)
 #@end
 
 @see [[m:Hash#default=]],[[m:Hash#default]],[[m:Hash#default_proc]]
@@ -296,6 +296,8 @@ ifnone¤ò¾ÊÎ¬¤·¤¿ Hash.new ¤Ï {} ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 self ¤òÊÖ¤·¤Þ¤¹¡£
 
+@see [[m:Object#to_hash]]
+
 --- length -> Integer
 --- size -> Integer
 
@@ -311,7 +313,7 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 
 ¥Ï¥Ã¥·¥å¤¬¶õ¤Î»þ¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
-  puts {}.empty? #=> true
+  puts({}.empty?) #=> true
 
 --- invert -> Hash
 
@@ -321,8 +323,8 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 Ãí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡¢¤½¤Î¤è¤¦¤Ê¾ì¹ç¤Ë¤³¤Î¥á¥½¥Ã¥É¤òÍøÍÑ¤¹¤ë¤³¤È¤Ï°Õ¿Þ¤µ¤ì
 ¤Æ¤¤¤Þ¤»¤ó¡£
 
-  h = { "n" => 100, "m" => 100, "y" => 300, "d" => 200, "a" => 0 }
-  p h.invert   #=> {200=>"d", 300=>"y", 0=>"a", 100=>"n"}
+  h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
+  p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
 
 @see [[m:Hash#key]]
 
@@ -358,12 +360,12 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 #@end
   p h[:one],h[:two]                        #=> nil,nil ¤³¤ì¤Ç¤Ï¥­¡¼¤¬Â¸ºß¤¹¤ë¤Î¤«È½ÊÌ¤Ç¤­¤Ê¤¤¡£
   p h.fetch(:one)                          #=> nil
-  p h.fetch(:two)                          #=> ¥¨¥é¡¼ key not found (KeyError)
+  p h.fetch(:two)                          # ¥¨¥é¡¼ key not found (KeyError)
   p h.fetch(:two,"error")                  #=> "error"
   p h.fetch(:two){|key|"#{key} not exit"}  #=> "two not exit"
   
   h.default = "default"
-  p h.fetch(:two)                          #=> ¥¨¥é¡¼ key not found (KeyError)
+  p h.fetch(:two)                          # ¥¨¥é¡¼ key not found (KeyError)
 
 @see [[m:Hash#[] ]]
 
@@ -376,8 +378,8 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 
 @param key Ãµº÷¤¹¤ë¥­¡¼¤ò»ØÄê¤·¤Þ¤¹¡£
 
-  {1 => "one"}.has_key?(1) #=> true
-  {1 => "one"}.has_key?(2) #=> false
+  p({1 => "one"}.has_key?(1)) #=> true
+  p({1 => "one"}.has_key?(2)) #=> false
 
 @see [[m:Hash#has_value?]]
 
@@ -389,8 +391,8 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 
 @param value Ãµº÷¤¹¤ëÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
 
-  {1 => "one"}.has_value?("one") #=> true
-  {1 => "one"}.has_value?("two") #=> false
+  p({1 => "one"}.has_value?("one")) #=> true
+  p({1 => "one"}.has_value?("two")) #=> false
 
 @see [[m:Hash#has_key?]]
 
@@ -436,9 +438,6 @@ key ¤ËÂÐ¤·¤Æ value ¤ò´ØÏ¢¤Å¤±¤Þ¤¹¡£value ¤òÊÖ¤·
 [[m:Object#object_id]]¤¬°ìÃ×¤·¤Æ¤¤¤ë¤«¤É¤¦¤«¤ò¾ò·ï¤È¤¹¤ë¤è¤¦¤Ëself¤òÊÑ¹¹¤·¤Þ¤¹¡£
 
 self¤¬ÊÑ²½¤¹¤ëÇË²õÅª¥á¥½¥Ã¥É¤Ç¤¹¡£
-
-#@#Makes hsh to compare its keys by their identity, i.e. it will
-#@#consider exact same objects as same keys.
 
 @return self¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -612,7 +611,7 @@ self ¤È °ú¿ô key ¤ò¥Ö¥í¥Ã¥¯°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¡¢¤½¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
 --- clone -> Hash
 --- dup -> Hash
 
-¥ì¥·¡¼¥Ð¤ÈÆ±¤¸ÆâÍÆ¤ò»ý¤Ä¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
+self¤ÈÆ±¤¸ÆâÍÆ¤ò»ý¤Ä¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
 
 clone ¤Ï frozen tainted singleton-class ¤Î¾ðÊó¤â´Þ¤á¤Æ¥³¥Ô¡¼¤·¤Þ¤¹¤¬¡¢ dup ¤ÏÆâÍÆ¤À¤±¤ò¥³¥Ô¡¼¤·¤Þ¤¹¡£
 ¤Þ¤¿¤É¤Á¤é¤Î¥á¥½¥Ã¥É¤âÍ×ÁÇ¤½¤ì¼«ÂÎ¤Î¥³¥Ô¡¼¤Ï¤·¤Þ¤»¤ó¡£¤Ä¤Þ¤ê»²¾È¤·¤Æ¤¤¤ë¥ª¥Ö¥¸¥§¥¯¥È¤¬
@@ -878,8 +877,7 @@ Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 @return self¤òÊÖ¤·¤Þ¤¹¡£
 
   a = [ "a", "b" ]
-  c = [ "c", "d" ]
-  h = { a => 100, c => 300 }
+  h = { a => 100 }
   
   p h[a]       #=> 100
   
@@ -897,7 +895,7 @@ Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 --- merge!(other) -> self
 --- merge!(other) {|key, self_val, other_val| ... } -> self
 
-¥ì¥·¡¼¥Ð¤Î¥Ï¥Ã¥·¥å¤ÎÆâÍÆ¤òother¤Ç¾å½ñ¤­¤·¤¿·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï¥ì¥·¡¼¥Ð¤ÎÀßÄê¤Î¤Þ¤Þ¤Ç¤¹¡£
+¥Ï¥Ã¥·¥å¤ÎÆâÍÆ¤òother¤Ç¾å½ñ¤­¤·¤¿·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ïself¤ÎÀßÄê¤Î¤Þ¤Þ¤Ç¤¹¡£
 
 self ¤È other ¤ËÆ±¤¸¥­¡¼¤¬¤¢¤Ã¤¿¾ì¹ç¤Ï¥Ö¥í¥Ã¥¯ÉÕ¤­¤«ÈÝ¤«¤Ç
 È½ÄêÊýË¡¤¬°ã¤¤¤Þ¤¹¡£¥Ö¥í¥Ã¥¯ÉÕ¤­¤Î¤È¤­¤Ï¥Ö¥í¥Ã¥¯¤ò¸Æ¤Ó½Ð¤·¤Æ
@@ -927,6 +925,8 @@ Hash#merge! ¤Ï¡¢¥Þ¡¼¥¸¤Î·ë²Ì¤Çself¤òÊÑ¹¹¤¹¤ëÇË²õÅª¥á¥½¥Ã¥É¤Ç¡¢[[m:Hash#update]] 
 
 ¥Ï¥Ã¥·¥å¤ÎÆâÍÆ¤òother¤Ç¥Þ¡¼¥¸¤·¤Þ¤¹¡£[[m:Hash#merge!]]¤ÈÆ±¤¸¤Ç¤¹¡£
 
+¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ïself¤ÎÀßÄê¤Î¤Þ¤Þ¤Ç¤¹¡£
+
 @param other ¾å½ñ¤­¤ËÍÑ¤¤¤ë¥Ï¥Ã¥·¥å¤Ç¤¹¡£
 @return ¥Þ¡¼¥¸¸å¤Îself¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -945,6 +945,8 @@ Hash#merge! ¤Ï¡¢¥Þ¡¼¥¸¤Î·ë²Ì¤Çself¤òÊÑ¹¹¤¹¤ëÇË²õÅª¥á¥½¥Ã¥É¤Ç¡¢[[m:Hash#update]] 
 --- update(other) -> self
 
 ¥Ï¥Ã¥·¥å¤ÎÆâÍÆ¤òother¤Ç¾å½ñ¤­¤·¤Þ¤¹¡£½ÅÊ£¤¹¤ë¥­¡¼¤Ï¾ï¤Ëother¤Ç¾å½ñ¤­¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ïself¤ÎÀßÄê¤Î¤Þ¤Þ¤Ç¤¹¡£
 
 @param other ¾å½ñ¤­¤ËÍÑ¤¤¤ë¥Ï¥Ã¥·¥å¤Ç¤¹¡£
 @return ¥Þ¡¼¥¸¸å¤Îself¤òÊÖ¤·¤Þ¤¹¡£
