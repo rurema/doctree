@@ -9,6 +9,7 @@ include Comparable
 同じ内容のシンボルはかならず同一のオブジェクトです。
 
 シンボルオブジェクトは以下のようにして得られます。
+#@#リテラル-シンボルリテラルへのリンク貼る
 
   :symbol # 基本のシンボルリテラル
   :'symbol'
@@ -17,14 +18,14 @@ include Comparable
 
 実際にシンボルが生成されるのはコンパイル時です。
 一番目のリテラルでシンボルを表す場合、`:' の後に
-は識別子、メソッド名(`!',`?' などの接尾辞を含む)、変数名
+は識別子、メソッド名(`!',`?',`=' などの接尾辞を含む)、変数名
 (`$'などの接頭辞を含む)、再定義できる演算子のいずれかに適合する
 ものしか書くことはできません(そうでなければ文法エラーになります)。
-そうでない文字列をシンボルにしたい場合は他の表記を使用してください。
+そうでない文字列をシンボルにしたい場合は残りの表記を使用してください。
 
-どの形式でもシンボルはヌル文字('\0')を含むことはできません。
+#@#どの形式でもシンボルはヌル文字('\0')を含むことはできません。
+#@#↑1.9では可能。調べる
 
-#@#↑リストにすべき？
 #@# 1.9では空文字列もシンボルにできる
 
 === シンボルの実装と用途
@@ -34,7 +35,7 @@ Rubyの内部実装では、メソッド名や変数名、定数名、クラス名など
 速度面で有利だからです。そしてその整数をRubyのコード上で表現したものがシンボルです。
 
 シンボルは、ソース上では文字列のように見え、内部では整数として扱われる、両者を仲立ちするような存在です。
-#@#表現？
+#@#表現を変える？
 
 名前を管理するという役割上、シンボルと文字列は一対一に対応します。
 また、文字列と違い、immutable(変更不可)であり、同値ならば必ず同一です。
@@ -143,98 +144,15 @@ self を返します。
 #@end
 
    id = :foo.to_i
-   p id                  # => 8881
+   p id                  #=> 8881
 #@if ("1.8.0" > version)
-   p id.id2name.intern   # => :foo
+   p id.id2name.intern   #=> :foo
 #@else
-   p id.to_sym           # => :foo
+   p id.to_sym           #=> :foo
 #@end
 
 #@if ("1.8.0" > version)
 @see [[m:Fixnum#id2name]]
 #@else
 @see [[m:Fixnum#to_sym]]
-#@end
-
-
-#@since 100.9.0
-！  1.9で追加されたメソッド群だが、実装がきちんと決まってないので後で書く
-
---- to_proc -> Proc
-
-
-#@#Stringみたい レシーバをStringに変換
---- =~(other) -> Integer|nil
-Stringの同名のメソッドと似た働きをします。selfを文字列化した
-
-self.to_s =~(other) と同じです。
-
-@see [[m:String#=~]]
-
---- match -> StringSymbol
-
-@see [[m:String#match]]
-
---- === -> StringSymbol
-
-@see [[m:String#===]]
-
-#@#Stringみたい 返り値は Stringの時と一緒（String）
---- [] -> String
-
-@see [[m:String#[]]]
-
---- slice -> String
-
-@see [[m:String#slice]]
-
-#@#Stringみたい 返り値は Stringの時と一緒
---- length -> Integer
-
-@see [[m:String#length]]
-
---- size -> Integer
-
-@see [[m:String#size]]
-
---- empty? -> bool
-
-@see [[m:String#empty?]]
-
---- <=>(other) -> Integer
-
-Stringの同名のメソッドと似た働きをします。シンボル同士を比較します。
-
-@param other 比較対象のシンボル
-
-@see [[m:String#<=>]]
-
---- casecmp(other) -> Integer
-
-@see [[m:String#casecmp]]
-
-#@#Stringみたい 返り値は Symbol
---- swapcase -> Symbol
-
-@see [[m:String#swapcase]]
-
---- upcase -> Symbol
-
-@see [[m:String#upcase]]
-
---- downcase -> Symbol
-
-@see [[m:String#downcase]]
-
---- capitalize -> Symbol
-
-@see [[m:String#capitalize]]
-
---- next -> Symbol
---- succ -> Symbol
-
-Stringの同名のメソッドと似た働きをします。次のシンボルを返します。
-
-@see [[m:String#next]]
-
 #@end
