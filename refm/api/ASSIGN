@@ -25,7 +25,7 @@ _builtin/Fixnum                 ujihisa         done
 _builtin/Float                  kouya           done
 _builtin/FloatDomainError       snoozer05       done
 _builtin/GC                     
-_builtin/Hash                   eklerni
+_builtin/Hash                   eklerni         done
 _builtin/IO                     sheepman        done
 _builtin/IOError                snoozer05       done
 _builtin/IndexError             snoozer05       done
@@ -68,7 +68,7 @@ _builtin/StandardError          snoozer05       done
 _builtin/String                 aamine
 _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            okkez           done
-_builtin/Symbol                 eklerni
+_builtin/Symbol                 eklerni         done
 _builtin/SyntaxError            snoozer05       done
 _builtin/SystemCallError	yugui
 _builtin/SystemExit             snoozer05       done
