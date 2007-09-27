@@ -222,7 +222,7 @@ ifnoneを省略した Hash.new は {} と同じです。
 す。設定したデフォルト値は[[m:Hash#default_proc]]で参照できます。
 
 値が設定されていないハッシュ要素を参照するとその都度ブロックを
-実行し、その結果を返します（ハッシュにもその結果が追加されます）。
+実行し、その結果を返します。
 ブロックにはそのハッシュとハッシュを参照したときのキーが渡されます。
 
 @raise ArgumentError ブロックと通常引数を同時に与えると発生します。
@@ -548,6 +548,7 @@ key に関連づけられた値を返します。該当するキーが登録されていない時には、
 #@if (version >= "1.7.0")
 ハッシュのデフォルト値がブロックで与えられている場合、1番目の形式だと
 返り値がnilになることに注意してください。
+
 ブロックのデフォルト値について調べる時は2番目の形式か
 [[m:Hash#default_proc]]を使ってください。
 
@@ -599,13 +600,14 @@ self と 引数 key をブロック引数としてブロックを実行し、その結果を返します。
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを返します。
 ハッシュがブロックのデフォルト値を持たない場合 nil を返します。
 
-  h = Hash.new {|h, k| }
-  p h.default            #=> nil
-  p h.default_proc       #=> #<Proc:0x0x401a9ff4>
-
+  h = Hash.new {|hash, key| "The #{key} not exit in #{hash.inspect}"}
+  p h.default              #=> nil
+  p block = h.default_proc #=> #<Proc:0x0x401a9ff4>
+  p block.call({},:foo)    #=> "The foo not exit in {}"
+  
   h = Hash.new("default")
-  p h.default            #=> "default"
-  p h.default_proc       #=> nil
+  p h.default              #=> "default"
+  p h.default_proc         #=> nil
 
 @see [[m:Hash#default]]
 
@@ -713,7 +715,7 @@ each と each_pair ではブロックパラメータの受渡し方が異なります。
 ですので、each_pair のブロックパラメータに一つの変数を指
 定して[key, val]の配列を得たい場合は、*記号を使って明示的に配列で
 受け取るようにしてください。引数がひとつなのに*を使わない場合警告が出ます。
-詳細は、[[unknown:メソッド呼び出し/yield]] を参照してください。
+#@#詳細は、[[unknown:メソッド呼び出し/yield]] を参照してください。
 #@end
   {:a=>1, :b=>2}.each {|a| p a}
   #=> [:a, 1]
