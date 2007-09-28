@@ -70,7 +70,7 @@ _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            okkez           done
 _builtin/Symbol                 eklerni         done
 _builtin/SyntaxError            snoozer05       done
-_builtin/SystemCallError	yugui
+_builtin/SystemCallError	yugui           done
 _builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError       snoozer05       done
 _builtin/Thread                 sheepman        done

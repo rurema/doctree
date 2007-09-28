@@ -1,29 +1,39 @@
 = class SystemCallError < StandardError
 
-システムコールが失敗した時に発生する例外です。
-実際には SystemCallError そのものではなく、
-サブクラスである [[c:Errno::EXXX]] (XXX は errno 定数と同じ名前) が発生します。
+Ruby の実装に用いられているシステムコールまたは一部の C 言語関数が失敗した時に発生する例外です。システムコールの失敗した原因を表すエラーコードを保持します。
+
+多くの場合、実際には SystemCallError そのものではなく
+サブクラスである [[c:Errno::EXXX]] (XXX はエラーコードの値によって異なる。システム定義のエラー名と同じ名前) が発生します。
 詳しくは [[c:Errno::EXXX]] を参照してください。
-
-
 
 == Class Methods
 
---- new(error_message)
-#@todo
-
+--- new(error_message) -> SystemCallError
 SystemCallError オブジェクトを生成して返します。
+
+@param error_message エラーメッセージを表す文字列
 
 例:
 
   p SystemCallError.new("message")
       # => #<SystemCallError: unknown error - message>
 
---- new(error_message, errno)
---- new(errno)
-#@todo
-
+#@since 1.8.0
+--- new(error_message, errno) -> SystemCallError
+--- new(errno) -> SystemCallError
 整数 errno に対応する [[c:Errno::EXXX]] オブジェクトを生成して返します。
+
+整数 errno をシステムコールで発生したエラーの原因を示すコードであると解釈し、対応する例外クラスのインスタンスをを生成して返します。
+
+生成されるオブジェクトは SystemCallError の直接のインスタンスではなく、サブクラスのインスタンスです。それらのサブクラスは [[c:Errno]] モジュール内に定義されています。
+対応するサブクラスが存在しないコードを与えた場合には、 SystemCallError の直接のインスタンスが生成されます。
+
+エラーコードの取り得る値および意味はシステムに依存します。詳しくは [[c:Errno::EXXX]] を参照してください。
+
+@param error_message エラーメッセージを表す文字列
+@param errno システム依存のエラーコード
+@raise TypeError errno を整数に変換できないときに発生します。
+@raise RangeError errno が [[c:Fixnum]] で表せる範囲を超えるときに発生します。
 
 例:
 
@@ -34,27 +44,90 @@ SystemCallError オブジェクトを生成して返します。
   p SystemCallError.new(256)
       # => #<SystemCallError: Unknown error 256>
 
+#@end
 
+== Instance Methods
+
+--- errno -> Fixnum | nil
+
+レシーバに対応するシステム依存のエラーコードを返します。
+
+#@since 1.8.0
+エラーコードを渡さない形式で生成した場合は nil を返します。
+
+  begin
+    raise Errno::ENOENT
+  rescue Errno::ENOENT => err
+    p err.errno                 # => 2
+    p Errno::ENOENT::Errno      # => 2
+  end
+
+  begin
+    raise SystemCallError, 'message'
+  rescue SystemCallError => err
+    p err.errno                 # => nil
+  end
+
+#@else
+実際にシステムコールが発生していない場合には nil を返します。
+[[m:Kernel#raise]] によってシステムコールエラーが発生しているかのように見せかける場合は注意してください。
+
+  begin
+    open("nonexistent file")
+  rescue Errno::ENOENT => err
+    p err.errno                 # => 2
+    p Errno::ENOENT::Errno      # => 2
+  end
+
+  begin
+    raise Errno::ENOENT
+  rescue Errno::ENOENT => err
+    p err.errno                 # => nil
+    p Errno::ENOENT::Errno      # => 2
+  end
+
+#@end
+
+なお、例外を発生させずにエラーコードを得るには、
+[[m:Errno::EXXX::Errno]] 定数を使います。
+
+#@since 1.8.0
+--- ===(other)
+
+other が SystemCallError のサブクラスで、
+かつ、other.errno の値が self.errno と同じ場合に真を返します。
+
+現在は同じ errno 値を持つクラスは一つしか作られないようになったので、
+このメソッドは意味がありません。
+#@end
 
 = module Errno
 
 システムコールのエラーに対応する例外を集めたモジュールです。
 
+@see [[c:SystemCallError]]
+@see [[c:Errno::EXXX]]
 
 
 = class Errno::EXXX < SystemCallError
 
-システムの errno 値に対応するクラスです。
-システムコールが失敗したときに発生します。
+システム依存のエラーコードのそれぞれに対応する一連の例外クラスです。システムコールが失敗したときに発生します。
 
-実際には「EXXX」というクラスが定義されているわけではなく、
-以下に述べる各種の EXXX クラスが定義されます。
+実際には「EXXX」というクラスが定義されているわけではありません。「XXX」の部分は下記に列挙したような各種のエラー名が入ります。例えば、エラー名 ENOENT には Errno::ENOENT クラスが対応します。
 
-Ruby はデフォルトで以下のような Errno::EXXX クラスを定義しようとします。
-Errno::EXXX クラスは、対応する errno がシステムに存在する場合のみ定義されます。
+Ruby はデフォルトで下記リストのような Errno::EXXX クラスを定義しようとします。
+Errno::EXXX クラスは、対応するエラー名がシステムに存在する場合のみ定義されます。
 また、以下の一覧にはないシステムエラーが発生した場合は、
 [[c:Errno::EXXX]] (XXX はエラー番号を表す 3 桁の数字)
 という名前の例外クラスが自動的に作成され、発生します。
+(これは Ruby 内部でのみ行われ、 Ruby プログラム上で [[m:SystemCallError.new]] に一覧にないコードを渡してもクラスは作成されません)
+
+
+=== エラー名リスト
+
+個々の例外の意味はシステム依存です。
+システムのマニュアル [[man:errno(3)]] を参照してください。
+Microsoft Windows システムにおいては [[url:http://msdn2.microsoft.com/ja-jp/library/5814770t.aspx]] を参照してください。
 
   * ERROR
   * EPERM
@@ -180,43 +253,24 @@ Errno::EXXX クラスは、対応する errno がシステムに存在する場合のみ定義されます。
   * EREMOTEIO
   * EDQUOT
 
-個々の例外の意味はシステム依存です。
-システムのマニュアル [[man:errno(3)]] を参照してください。
+== Class Methods
 
-== Instance Methods
+--- new() -> Errno::EXXX
+--- new(error_message) -> Errno::EXXX
+Errno::EXXX オブジェクトを生成して返します。
 
---- errno
-#@todo
+@param error_message エラーメッセージを表す文字列
 
-各エラーに対応する errno 値を返します。
-
-  begin
-    raise Errno::ENOENT
-  rescue Errno::ENOENT => err
-    p err.errno                 # => 2
-    p Errno::ENOENT::Errno      # => 2
-  end
-
-なお、例外を発生させずに errno 値を得るには、
-[[m:Errno::EXXX::Errno]] 定数を使います。
-
-#@since 1.8.0
---- ===(other)
-#@todo
-
-other が SystemCallError のサブクラスで、
-かつ、other.errno の値が self.errno と同じ場合に真を返します。
-
-現在は同じ errno 値を持つクラスは一つしか作られないようになったので、
-このメソッドは意味がありません。
-#@end
+  p Errno::ENOENT
+      # => #<Errno::ENOENT: No such file or directory>
+  p Errno::ENOENT('message')
+      # => #<Errno::ENOENT: No such file or directory - message>
 
 == Constants
 
 --- Errno
-#@todo
 
-Errno::EXXX の各クラスに対応する errno の値です。
+Errno::EXXX の各クラスに対応するシステム依存のエラーコード値(整数)です。
 
 例:
 
