@@ -24,7 +24,7 @@ _builtin/File__Stat             kouya           done
 _builtin/Fixnum                 ujihisa         done
 _builtin/Float                  kouya           done
 _builtin/FloatDomainError       snoozer05       done
-_builtin/GC                     yugui
+_builtin/GC                     yugui           done
 _builtin/Hash                   eklerni         done
 _builtin/IO                     sheepman        done
 _builtin/IOError                snoozer05       done

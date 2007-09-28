@@ -3,46 +3,53 @@
 GC は Ruby インタプリタの「ゴミ集め(Garbage Collection)」を制御
 するモジュールです。
 
+@see [[c:ObjectSpace]]
+
 == Singleton Methods
 
---- disable
-#@todo
+--- disable -> bool
 
 ガーベージコレクトを禁止します。
 
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
 
---- enable
-#@todo
+@see [[m:GC.enable]]
+
+--- enable -> bool
 
 ガーベージコレクトを許可します。
 
 前回の禁止状態を返します(禁止されていたなら true, GC が有効であったなら、
 false)。
 
---- start
-#@todo
+@see [[m:GC.disable]]
+
+--- start -> nil
 
 ガーベージコレクトを開始します。
+
+[[m:GC#garbage_collect]] や [[m:ObjectSpace.garbage_collect]] と同じ働きをします。
+[[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
 
 #@if (version >= "1.9.0")
---- stress
---- stress=(bool)
-#@todo
+--- stress -> bool
+--- stress=(value) -> object
 
 GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
+
+@param value 任意のオブジェクト。真偽値として解釈されます。
 #@end
 
 == Instance Methods
 
---- garbage_collect
-#@todo
+--- garbage_collect -> nil
 
-ガーベージコレクトを開始します。以下と同じ働きをします。
+ガーベージコレクトを開始します。
 
-  GC.start
+[[m:GC.start]] や [[m:ObjectSpace.garbage_collect]] と同じ働きをします。
+[[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
