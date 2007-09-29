@@ -3,17 +3,36 @@
 
 include Enumerable
 
-each 以外のメソッド、つまり each_byte 等も enumerate できる
-ようにするためのラッパークラス。
+each 以外のメソッドにも [[c:Enumerable]] の機能を提供するためのラッパークラスです。
+#@since 1.9.0
+また、外部イテレータとしても使えます。
+#@end
+
+[[c:Enumerable]] モジュールは、 [[m:Module#include]] 先のクラスが持つ
+each メソッドを元に様々なメソッドを提供します。
+例えば Array#map は [[m:Array#each]] の繰り返しを元にして定義されます。
+Enumerator を介することにより [[m:String#each_byte]] のような
+異なる名前のイテレータについても each と同様に Enumerable の機能を利用できます。
+
+Enumerator を生成するには
+[[m:Enumerable::Enumerator.new]]
+あるいは [[m:Object#to_enum]], [[m:Object#enum_for]] を利用します。
+#@since 1.9.0
+また、一部のイテレータはブロックを渡さずに呼び出すと繰り返しを実行する代わりに
+enumerator を生成して返します。
+#@end
 
 == Class Methods
 
---- new(obj, method = :each, *args)
-#@todo
+--- new(obj, method = :each, *args) -> Enumerable::Enumerator
 
 オブジェクト obj について、 each の代わりに method という
 名前のメソッドを使って繰り返すオブジェクトを生成して返します。
 args を指定すると、 method の呼び出し時に渡されます。
+
+@param obj イテレータメソッドのレシーバとなるオブジェクト
+@param method イテレータメソッドの名前を表すシンボルまたは文字列
+@param args イテレータメソッドの呼び出しに渡す任意個の引数
 
 例:
 
@@ -24,21 +43,113 @@ args を指定すると、 method の呼び出し時に渡されます。
 
 == Methods
 
---- each {...}
-#@todo
+--- each {...} -> ()
 
-生成時のパラメータに従って繰り返します。
+生成時のパラメータに従ってブロックを繰り返します。
+
+生成時に指定したイテレータの戻り値をそのまま返します。
+
+例:
+  str = "Yet Another Ruby Hacker"
+  
+  enum = Enumerable::Enumerator.new(str, :scan, /\w+/)
+  enum.each {|word| p word }              # => "Yet"
+                                          #    "Another"
+                                          #    "Ruby"
+                                          #    "Hacker"
+
+  str.scan(/\w+/) {|word| p word }        # => "Yet"
+                                          #    "Another"
+                                          #    "Ruby"
+                                          #    "Hacker"
 
 #@since 1.9.0
---- to_splat
-#@todo
+--- next -> object
+「次」のオブジェクトを返します。
 
-Convert this enumerator object to an array to splat.
+現在までの列挙状態に応じて「次」のオブジェクトを返し、列挙状態を1つ分進めます。
+列挙が既に最後へ到達している場合は、列挙状態を最初まで巻き戻すとともに
+[[c:StopIteration]] 例外を発生します。
 
---- with_index {|(*args), idx| ... }
-#@todo
+next メソッドによる外部列挙の状態は他のイテレータメソッドによる
+内部列挙には影響を与えません。
+ただし、 [[m:IO#each_line]] のようにおおもとの列挙メカニズムが副作用を
+伴っている場合には影響があり得ます。
 
-Iterates the given block for each elements with an index, which
-start from 0.
+@raise StopIteration 列挙状態が既に最後へ到達しているとき
+@see [[m:Enumerable::Enumerator#rewind]]
+
+例1:
+    str = "xyz"
+    enum = str.each_byte
+    
+    str.bytesize.times do
+      puts enum.next
+    end
+        # => 120
+        #    121
+        #    122
+
+例2:
+    str = "xyz"
+    enum = str.each_byte
+    
+    begin
+      puts enum.next while true
+    rescue StopIteration
+      puts "iteration reached at end"
+      puts enum.next
+    end
+        # => 120
+        #    121
+        #    122
+        #    iteration reached at end
+        #    120
+
+例3: [[m:Kernel#loop]] は StopIteration を捕捉します。
+    str = "xyz"
+    enum = str.each_byte
+    loop do
+      puts enum.next
+    end
+        # => 120
+        #    121
+        #    122
+
+--- rewind -> self
+列挙状態を巻き戻します。
+
+next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
+
+@see [[m:Enumerable::Enumerator#next]]
+
+例:
+    str = "xyz"
+    enum = str.each_byte
+    
+    p enum.next # => 120
+    p enum.next # => 121
+    enum.rewind
+    p enum.next # => 120
+
+--- to_splat -> Array
+
+この enumerator を多重代入などのための配列に変換します。
+
+--- with_index {|(*args), idx| ... } -> object
+
+生成時のパラメータに従って、要素にインデックスを添えてブロックを繰り返します。
+インデックスは 0 から始まります。
+
+戻り値は生成時に指定したレシーバ自身です。
+
+例:
+    str = "xyz"
+    
+    enum = Enumerable::Enumerator.new(str, :each_byte)
+    enum.with_index {|byte, idx| p [byte, idx] }
+        # => [120, 0]
+        #    [121, 1]
+        #    [122, 2]
 #@end
 #@end
