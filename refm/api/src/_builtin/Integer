@@ -64,16 +64,16 @@ self と other を比較して、self が大きい時に正、
   1 <=> 1 #=> 0
   2 <=> 1 #=> 1
 
---- ==(other) -> Boolean
---- <(other)  -> Boolean
---- <=(other) -> Boolean
---- >(other)  -> Boolean
---- >=(other) -> Boolean
+--- ==(other) -> bool
+--- <(other)  -> bool
+--- <=(other) -> bool
+--- >(other)  -> bool
+--- >=(other) -> bool
 比較演算子。それぞれ数値として等しいか、小さいか、
 等しいまたは小さいか、大きいか、等しいまたは大きいか判定します。
 
 @param other 比較対象の数値
-@return      Boolean
+@return      bool
 
 --- ~        -> Fixnum | Bignum
 ビット演算子。否定を計算します。
