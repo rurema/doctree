@@ -1,71 +1,73 @@
 == Constants
 
 --- TRUE
-#@todo
+非推奨([[unknown:obsolete]])。代表的な真の値。true と同じ。
 
-((<obsolete>))
+この定数は過去との互換性のために提供されています。擬似変数 true を使ってください。
 
-代表的な真の値。true と同じ。Ruby では偽でない値
-(false でも nil でもない値) は全て真とみなされます。
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- FALSE
-#@todo
+非推奨([[unknown:obsolete]])。代表的な偽の値。false と同じ。
 
-((<obsolete>))
-
-偽の値。false と同じ。
+この定数は過去との互換性のために提供されています。擬似変数 false を使ってください。
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- NIL
-#@todo
+非推奨([[unknown:obsolete]])。 nil と同じ。
 
-((<obsolete>))
+この定数は過去との互換性のために提供されています。擬似変数 nil を使ってください。
 
-nil と同じ。
+Ruby では false と nil が偽として扱われます。
+偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- STDIN
-#@todo
 
-標準入力。[[m:$stdin]] のデフォルト値。
+標準入力。[[m:$stdin]] のデフォルト値。詳細は [[m:$stdin]] を参照してください。
 
 --- STDOUT
-#@todo
 
-標準出力。[[m:$stdout]] のデフォルト値。
+標準出力。[[m:$stdout]] のデフォルト値。詳細は [[m:$stdout]] を参照してください。
 
 --- STDERR
-#@todo
 
-標準エラー出力。[[m:$stderr]] のデフォルト値。
+標準エラー出力。[[m:$stderr]] のデフォルト値。詳細は [[m:$stderr]] を参照してください。
 
 --- ENV
-#@todo
-
 環境変数を表す (疑似) 連想配列 (詳細は [[c:ENV]] を参照)。
+
 この連想配列の値を変更すると子プロセスの環境として引き継がれます。
 
 --- ARGF
-#@todo
-
 引数 (なければ標準入力) で構成される仮想ファイル (詳細は [[c:ARGF]] を参照)。
+
 つまり [[m:Kernel#gets]] は [[m:ARGF.gets]] と同じ意味です。
 [[m:ARGF.file]] で現在読み込み中のファイルオブジェクトが、
 [[m:ARGF.filename]] で現在読み込み中のファイル名が得られます。
 
 --- ARGV
-#@todo
+Ruby スクリプトに与えられた引数を表す配列です。
 
-Ruby スクリプトに与えられた引数。
-組み込み変数 [[m:$*]] の別名。
+組み込み変数 [[m:$*]] の別名です。
 Ruby 自身に対する引数は取り除かれています。
 
---- DATA
-#@todo
+=== 例
+argv.rb:
+    p ARGV
 
+このとき、シェルから次を実行すると、
+    ruby argv.rb foo bar baz
+結果は
+    ["foo", "bar", "baz"]
+
+--- DATA
 スクリプトの __END__
 ([[unknown:スクリプトの終り|プログラム/プログラムの終り]])
 以降をアクセスする [[c:File]] オブジェクト。
 
-注意:
+=== 注意
 
     * DATA.rewind で移動する読みとり位置は __END__ 直後ではなく、
       スクリプトファイルの先頭です。
@@ -76,15 +78,67 @@ Ruby 自身に対する引数は取り除かれています。
       読み込まれたファイルの中であってもそのファイル (__FILE__)
       ではなく実行されたファイル ($0) を指します。
 
+=== 例1
+    print DATA.gets # => 故人西辞黄鶴楼
+    print DATA.gets # => 烟花三月下揚州
+    print DATA.gets # => 孤帆遠影碧空尽
+    print DATA.gets # => 唯見長江天際流
+    DATA.gets       # => nil
+    
+    __END__
+    故人西辞黄鶴楼
+    烟花三月下揚州
+    孤帆遠影碧空尽
+    唯見長江天際流
+
+=== 例2
+    sum = 0
+    DATA.each_line do |line|
+      sum += line.to_i
+    end
+    
+    DATA.rewind
+    p DATA.gets    # => "sum = 0￥n"
+    
+    __END__
+    17
+    19
+    23
+    29
+    31
+
+=== 例3
+    DATA.gets    # => uninitialized constant DATA (NameError)
+
+=== 例4
+library.rb:
+    print DATA.gets
+    
+    __END__
+    data from library
+
+app.rb:
+    require 'library.rb'
+
+    __END__
+    data from app
+
+このときシェルから次を実行すると
+    ruby app.rb
+結果は
+    data from app
+
+
 --- TOPLEVEL_BINDING
-#@todo
 
 [[unknown:Ruby用語集/トップレベル]]での [[c:Binding]] オブジェクト。
 
+詳細は [[c:Binding]] を参照してください。
+
 --- RUBY_VERSION
-#@todo
 
 Ruby のバージョンを示す文字列。
+
 Ruby のバージョンは、major.minor.teeny という形式です。
 それぞれの番号は (今のところ) 2 桁以上にならないと約束されていますので、
 
@@ -101,48 +155,49 @@ minor が偶数のバージョンは安定版です。
 RUby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
 
 --- RUBY_RELEASE_DATE
-#@todo
 
 Ruby のリリース日を示す文字列。
 
 --- RUBY_PLATFORM
-#@todo
 
 プラットフォームを示す文字列。
 
 #@if (version < "1.9.0")
 --- VERSION
-#@todo
 
-((<obsolete>))
+非推奨([[unknown:obsolete]])。 [[m:Kernel::RUBY_VERSION]] の古い名前です。
 
-RUBY_VERSION の古い名前です。
+この定数は過去との互換性のために提供されています。 RUBY_VERSION を使ってください。
 
 --- RELEASE_DATE
-#@todo
 
-((<obsolete>))
+非推奨([[unknown:obsolete]])。 [[m:Kernel::RUBY_RELEASE_DATE]] の古い名前です。
 
-RUBY_RELEASE_DATE の古い名前です。
+この定数は過去との互換性のために提供されています。 RUBY_RELEASE_DATE を使ってください。
 
 --- PLATFORM
-#@todo
 
-((<obsolete>))
+非推奨([[unknown:obsolete]])。 [[m:Kernel::RUBY_PLATFORM]] の古い名前です。
 
-RUBY_PLATFORM の古い名前です。
+この定数は過去との互換性のために提供されています。 RUBY_PLATFORM を使ってください。
 #@end
 
 --- SCRIPT_LINES__
-#@todo
+
+ソースファイル別にまとめられたソースコードの各行。
 
 この定数は、デフォルトでは定義されていません。
-
 この定数がハッシュとして定義された後にソースが((*コンパイル*))されると、
 そのソースファイル名をキーに、
 ソースを行毎に分割した配列を値にしたハッシュ要素が設定されます。
+
 この定数はデバッガ ([[lib:debug]]) などで利用されています。
 
+なお、 [[m:$SAFE]] レベルが 0 でなければ有効にはなりません。
+また、 [[m:Kernel#eval]] によるコンパイルは対象にはなりません。
+
+
+例:
     require 'pp'
     SCRIPT_LINES__ = {}
     require 'English'
@@ -157,5 +212,3 @@ RUBY_PLATFORM の古い名前です。
     #      "alias $POSTMATCH               $'\n",
     #      "alias $LAST_PAREN_MATCH        $+\n"]}
 
-なお、[[m:$SAFE]]レベルが 0 でなければ有効にはなりません。
-また、[[m:Kernel#eval]] によるコンパイルは対象にはなりません。
