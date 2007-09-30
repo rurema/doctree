@@ -124,22 +124,26 @@ bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
 
 @return     1バイト文字列
 
---- downto(min) {|n| ... }
-#@todo
+--- downto(min) {|n| ... } -> Fixnum | Bignum
 
-self から min まで 1 ずつ減らしながら繰り返します。
+self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
 self < min であれば何もしません。
+
+self を返します。
 
 [[m:Integer#upto]], [[m:Integer#step]], [[m:Integer#times]] も参照。
 
---- next
---- succ
-#@todo
+@param min   数値
+@return      数値
+
+--- next -> Fixnum | Bignum
+--- succ -> Fixnum | Bignum
 
 次の整数を返します。
 
---- step(limit, step) {|n| ... }
-#@todo
+@return      数値
+
+--- step(limit, step) {|n| ... } -> Fixnum | Bignum
 
 self からはじめ step を足しながら limit を越える
 前までブロックを繰り返します。step は負の数も指定できます。
@@ -155,8 +159,11 @@ self を返します。
 [[m:Numeric#step]] も参照。
 #@end
 
---- times {|n| ... }
-#@todo
+@param limit 数値
+@param step  数値
+@return      数値
+
+--- times {|n| ... } -> Fixnum | Bignum
 
 self 回だけ(0 から self-1 まで)繰り返します。
 self が負であれば何もしません。
@@ -165,14 +172,19 @@ self を返します。
 
 [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#step]] も参照。
 
---- to_i
---- to_int
-#@todo
+  3.times { puts "Hello, World!" }
+  # Hello, World! と3行続いて表示される。
+
+@return      数値
+
+--- to_i   -> Fixnum | Bignum
+--- to_int -> Fixnum | Bignum
 
 self を返します。
 
---- size
-#@todo
+@return 数値
+
+--- size -> Fixnum
 
 整数の実装上のサイズをバイト数で返します。
 
@@ -184,15 +196,17 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
     # => 4
          8
 
---- to_f
-#@todo
+@return 数値
+
+--- to_f -> Float
 
 値を浮動小数点数([[c:Float]])に変換します。
 
---- to_s
+@return 数値
+
+--- to_s -> String
 #@since 1.8.0
---- to_s(base)
-#@todo
+--- to_s(base) -> String
 #@end
 
 整数を 10 進文字列表現に変換します。
@@ -208,8 +222,12 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
     p 35.to_s(36)   # => "z"
 #@end
 
---- upto(max) {|n| ... }
-#@todo
+@return     数値の文字列表現
+#@since 1.8.0
+@param base 数値
+#@end
+
+--- upto(max) {|n| ... } -> Fixnum | Bignum
 
 self から max まで 1 ずつ増やしながら繰り返します。
 self > max であれば何もしません。
@@ -217,3 +235,6 @@ self > max であれば何もしません。
 self を返します。
 
 [[m:Integer#downto]], [[m:Integer#step]], [[m:Integer#times]] も参照。
+
+@param max   数値
+@return      数値
