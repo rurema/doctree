@@ -8,10 +8,16 @@ include Precision
 
 == Class Methods
 
---- induced_from(num) -> Fixnum | Bignum
+--- induced_from(num) -> Fixnum | Bignum | Float | Double
 
 num を Integer に変換した結果を返します。
-#@todo
+引数が数値の場合は切り捨てられ、そうでない場合はTypeErrorをraiseします。
+
+  Integer.induced_from 1.4  #=> 1
+  Integer.induced_from 1.9  #=> 1
+  Integer.induced_from -1.9 #=> -1
+  Integer.induced_from '1'  #=> TypeError
+
 
 include している [[c:Precision]] モジュールの [[m:Precision.induced_from] を
 上書きしています。
@@ -46,37 +52,55 @@ immutable であるためです。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
---- <=>(other)
-#@todo
+--- <=>(other) -> Fixnum
 
 self と other を比較して、self が大きい時に正、
 等しい時に 0、小さい時に負の整数を返します。
 
---- ==(other)
---- <(other)
---- <=(other)
---- >(other)
---- >=(other)
-#@todo
+@param other 比較対象の数値
+@return      -1か0か1のいずれか
 
-比較演算子。
+  1 <=> 2 #=> -1
+  1 <=> 1 #=> 0
+  2 <=> 1 #=> 1
 
---- ~
---- |(other)
---- &(other)
---- ^(other)
-#@todo
+--- ==(other) -> Boolean
+--- <(other)  -> Boolean
+--- <=(other) -> Boolean
+--- >(other)  -> Boolean
+--- >=(other) -> Boolean
+比較演算子。それぞれ数値として等しいか、小さいか、
+等しいまたは小さいか、大きいか、等しいまたは大きいか判定します。
 
-ビット演算子。それぞれ否定、論理和、論理積、排他的論理和を計算しま
+@param other 比較対象の数値
+@return      Boolean
+
+--- ~        -> Fixnum | Bignum
+ビット演算子。否定を計算します。
+
+@return      数値
+
+--- |(other) -> Fixnum | Bignum
+--- &(other) -> Fixnum | Bignum
+--- ^(other) -> Fixnum | Bignum
+ビット二項演算子。それぞれ論理和、論理積、排他的論理和を計算しま
 す。
 
---- <<(bits)
---- >>(bits)
-#@todo
+@param other 数値
+@return      数値
 
+  1 | 1 #=> 1
+  2 | 3 #=> 3
+
+--- <<(bits) -> Fixnum | Bignum
+--- >>(bits) -> Fixnum | Bignum
 シフト演算子。bits だけビットを右(左)にシフトします。
 
 右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
+bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
+
+@param bits 数値
+@return     数値
 
     printf("%#b\n", 0b0101 << 1)
     printf("%#b\n", 0b0101 >> 1)
@@ -88,9 +112,7 @@ self と other を比較して、self が大きい時に正、
     
     => -1
 
---- chr
-#@todo
-
+--- chr -> String
 文字コードに対応する 1 バイトの文字列を返します。例えば
 65.chr は "A" を返します。
 
@@ -99,6 +121,8 @@ self と other を比較して、self が大きい時に正、
 
 整数は 0 から 255 の範囲内でなければなりません。範囲外の整数に対す
 る呼び出しは例外 [[c:RangeError]] を発生させます。
+
+@return     1バイト文字列
 
 --- downto(min) {|n| ... }
 #@todo
