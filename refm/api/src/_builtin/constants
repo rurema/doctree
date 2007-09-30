@@ -53,7 +53,7 @@ Ruby スクリプトに与えられた引数を表す配列です。
 組み込み変数 [[m:$*]] の別名です。
 Ruby 自身に対する引数は取り除かれています。
 
-=== 例
+==== 例
 argv.rb:
     p ARGV
 
@@ -67,7 +67,7 @@ argv.rb:
 ([[unknown:スクリプトの終り|プログラム/プログラムの終り]])
 以降をアクセスする [[c:File]] オブジェクト。
 
-=== 注意
+==== 注意
 
     * DATA.rewind で移動する読みとり位置は __END__ 直後ではなく、
       スクリプトファイルの先頭です。
@@ -78,7 +78,7 @@ argv.rb:
       読み込まれたファイルの中であってもそのファイル (__FILE__)
       ではなく実行されたファイル ($0) を指します。
 
-=== 例1
+==== 例1
     print DATA.gets # => 故人西辞黄鶴楼
     print DATA.gets # => 烟花三月下揚州
     print DATA.gets # => 孤帆遠影碧空尽
@@ -91,7 +91,7 @@ argv.rb:
     孤帆遠影碧空尽
     唯見長江天際流
 
-=== 例2
+==== 例2
     sum = 0
     DATA.each_line do |line|
       sum += line.to_i
@@ -107,10 +107,10 @@ argv.rb:
     29
     31
 
-=== 例3
+==== 例3
     DATA.gets    # => uninitialized constant DATA (NameError)
 
-=== 例4
+==== 例4
 library.rb:
     print DATA.gets
     
