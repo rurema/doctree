@@ -85,7 +85,7 @@ _builtin/constants              yugui           done
 _builtin/Enumerable__Enumerator yugui           done
 _builtin/fatal                  snoozer05       done
 _builtin/functions              aamine
-_builtin/specialvars            yugui
+_builtin/specialvars            yugui           done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
