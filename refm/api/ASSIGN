@@ -29,7 +29,7 @@ _builtin/Hash                   eklerni         done
 _builtin/IO                     sheepman        done
 _builtin/IOError                snoozer05       done
 _builtin/IndexError             snoozer05       done
-_builtin/Integer                ujihisa
+_builtin/Integer                
 _builtin/Interrupt              kouya           done
 _builtin/Kernel                 aamine
 _builtin/KeyError               snoozer05       done
