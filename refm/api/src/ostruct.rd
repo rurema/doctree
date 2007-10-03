@@ -35,8 +35,7 @@ hashが与えられたとき、それぞれのキーを
 
 @param hash 設定する要素とその値を指定します。
     hashには[[c:Hash]]クラスのインスタンス、または配列の配列を用いることができます。
-
-@raise NoMethodError hashのキーが[[Symbol#to_sym]]メソッドを持たないときに発生します。
+@raise NoMethodError hashのキーが to_sym メソッドを持たないときに発生します。
 
   require 'ostruct'
   some1 = OpenStruct.new({:a =>"a",:b =>"b"}) # => #<OpenStruct b="b", a="a">
@@ -49,5 +48,4 @@ nameで指定された要素を削除。
 その後その要素を参照したらnilが返ります。
 
 @return 削除前の要素の値を返します。
-
 @param name 削除する要素を指定。文字列やシンボルを用います。
