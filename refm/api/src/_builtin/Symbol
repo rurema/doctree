@@ -129,6 +129,7 @@ self を返します。
 @see [[m:String#intern]]
 
 --- to_i -> Integer
+--- to_int -> Integer
 
 シンボルに対応する整数を返します。
 
