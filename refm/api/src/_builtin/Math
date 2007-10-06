@@ -5,7 +5,7 @@
 出して使う使い方と、クラスにインクルードして使う使い方との両方ができま
 す。
 
-例:
+=== 例
 
   pi = Math.atan2(1, 1)*4;
   include Math
@@ -13,149 +13,219 @@
 
 == Module Functions
 
---- acos(x)
---- asin(x)
---- atan(x)
-#@todo
+--- acos(x) -> Float
 
-x の逆三角関数の値をラジアンで返します。
+x の逆正接関数の値をラジアンで返します。
 
-返される値の範囲はそれぞれ [0, +π]、[-π/2, +π/2]、
-[-π/2, +π/2] です。
+@param x -1.0 <= x <= 1 の範囲内の実数
 
-acos(x), asin(x) では x は -1.0 <= x <= 1 の範囲内でな
-ければなりません。(普通、NaN を返します)
+@return 返される値の範囲は [0, +π] です。
+
+@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します
+
+--- asin(x) -> Float
+
+x の逆正弦関数の値をラジアンで返します。
+
+@param x -1.0 <= x <= 1 の範囲内の実数
+
+@return 返される値の範囲は[-π/2, +π/2] です。
+
+@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します
+
+--- atan(x) -> Float
+
+x の逆正接関数の値をラジアンで返します。
+
+@param x 実数
+
+@return 返される値の範囲は [-π/2, +π/2] です。
+
+--- atan2(x, y) -> Float
+
+x / y の逆正接関数の値を返します。
+
+@param x 実数
+@param y 実数
+
+@return 返される値の範囲は [-π, π] です。
 
 #@since 1.8.0
-acos(), asin() は範囲外の引数に対して、例
-外 [[unknown:Errno::EDOM|Errno::EXXX]] が発生します。
-#@end
+--- acosh(x) -> Float
 
---- atan2(y, x)
-#@todo
+x の双曲線余弦関数の値を返します。
 
-y/x のアークタンジェントを [-π, π] の範囲で返します。
+@param x x >= 1 の範囲の実数
 
-#@since 1.8.0
---- acosh(x)
---- asinh(x)
---- atanh(x)
-#@todo
+@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します
 
-x の逆双曲線関数の値を返します。
+=== 定義
+
+    acosh(x) = log(x + sqrt(x * x - 1)) [x >= 1]
+
+--- asinh(x) -> Float
+
+x の双曲線正弦関数の値を返します。
+
+@param x 実数
+
+=== 定義
 
     asinh(x) = log(x + sqrt(x * x + 1))
-    acosh(x) = log(x + sqrt(x * x - 1)) [x >= 1]
+
+--- atanh(x) -> Float
+
+x の双曲線正接関数の値を返します。
+
+@param x -1 < x < 1 の実数
+
+@return 実数
+
+@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します
+
+=== 定義
+
     atanh(x) = log((1+x)/(1-x)) / 2     [-1 < x < 1]
 
-acosh(x) では x はx >= 1 の範囲内でなければなりません。
-(普通、例外 [[unknown:Errno::EDOM|Errno::EXXX]] が発生します)
-
-atanh(x) では x は -1.0 < x < 1 の範囲内でなければな
-りません。(普通、例外 [[unknown:Errno::EDOM|Errno::EXXX]] が発生します)
 #@end
 
---- cos(x)
---- sin(x)
---- tan(x)
+--- cos(x) -> Float
+
+x の余弦関数の値をラジアンで返します
+
+@param x 実数
+
+@return [-1, 1] の実数
+
+--- sin(x) -> Float
+
+x の正弦関数の値をラジアンで返します
+
+@param x 実数
+
+@return [-1, 1] の実数
+
+--- tan(x) -> Float
 #@todo
 
-ラジアンで表された x の三角関数の値を [-1, 1] の範囲で
-返します。
+x の正接関数の値をラジアンで返します
+
+@param x 実数
+
+@return 実数
 
 #@since 1.8.0
---- cosh(x)
---- sinh(x)
---- tanh(x)
-#@todo
+--- cosh(x) -> Float
 
-x の双曲線関数の値を返します。
+x の双曲線余弦関数の値を返します
+
+@param x 実数
+
+=== 定義
 
     cosh(x) = (exp(x) + exp(-x)) / 2
+
+--- sinh(x) -> Float
+
+x の双曲線正弦関数の値を返します
+
+@param x 実数
+
+=== 定義
+
     sinh(x) = (exp(x) - exp(-x)) / 2
+
+--- tanh(x) -> Float
+
+x の双曲線正接関数の値を返します
+
+@param x 
+
+@return [-1, 1] の範囲の実数
+
+=== 定義
+
     tanh(x) = sinh(x) / cosh(x)
+
 #@end
 #@since 1.8.0
---- erf(x)
---- erfc(x)
-#@todo
+--- erf(x) -> Float
+x の誤差関数の値を返します。
 
-x の誤差関数(erf)、相補誤差関数(erfc)の値を返します。
+@param x 実数
+
+--- erfc(x) -> Float
+x の相補誤差関数の値を返します。
+
+@param x 実数
+
 #@end
 
---- exp(x)
-#@todo
+--- exp(x) -> Float
 
 x の指数関数の値を返します。
 
---- frexp(x)
-#@todo
+@param x 実数
 
-実数 x の指数部と仮数部を返します。
+--- frexp(x) -> [Float, Fixnum]
+
+実数 x の仮数部と指数部の配列を返します。
+
+@param x 実数
 
 #@since 1.8.0
---- hypot(x, y)
-#@todo
+--- hypot(x, y) -> Float
 
 sqrt(x*x + y*y) を返します。
+
+@param x 実数
+@param y 実数
+
 #@end
 
---- ldexp(x,exp)
-#@todo
+--- ldexp(x, exp) -> Float
 
 実数 x に 2 の exp 乗をかけた数を返します。
 
---- log(x)
-#@todo
+@param x 実数
+@param exp 整数。小数点以下切捨て。
+
+--- log(x) -> Float
 
 x の自然対数を返します。
 
-x は正の値でなければなりません(普通、負の値に対して NaN を 0
-に対して -Infinity を返します)
+@param x 正の実数
 
-#@since 1.8.0
-範囲外の引数に対して、負の場合に例外
-[[unknown:Errno::EDOM|Errno::EXXX]] が 0 の場合に
-[[unknown:Errno::ERANGE|Errno::EXXX]] が発生します。
-#@end
+@raise Errno::EDOM 引数が負のである場合に発生します
+@raise Errno::ERANGE 引数が 0 の場合に発生します
 
---- log10(x)
-#@todo
+--- log10(x) -> Float
 
 x の常用対数を返します。
 
-x は正の値でなければなりません(普通、負の値に対して NaN を 0
-に対して -Infinity を返します)
+@param x 正の実数
 
-#@since 1.8.0
-範囲外の引数に対して、負の場合に例外
-[[unknown:Errno::EDOM|Errno::EXXX]] が 0 の場合に
-[[unknown:Errno::ERANGE|Errno::EXXX]] が発生します。
-#@end
+@raise Errno::EDOM 引数が負の値である場合に発生します
+@raise Errno::ERANGE 引数が 0 の場合に発生します
 
---- sqrt(x)
-#@todo
+--- sqrt(x) -> Float
 
-x の平方根を返します。x の値が負である時には例外
-[[c:ArgumentError]] が発生します。
+x の平方根を返します。
 
-#@since 1.8.0
-普通、x が負の場合、例外
-[[unknown:Errno::EDOM|Errno::EXXX]] が発生します。
-#@end
+@param x 正の実数
+
+@raise Errno::EDOM  引数が負の値である場合に発生します。
 
 == Constants
 
---- E
-#@todo
+--- E -> Float
 
 自然対数の底
 
     p Math::E
     # => 2.718281828
 
---- PI
-#@todo
+--- PI -> Float
 
 円周率
 
