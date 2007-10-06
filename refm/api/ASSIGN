@@ -39,7 +39,7 @@ _builtin/Marshal                okkez           done
 _builtin/MatchData              okkez           done
 _builtin/Math                   okkez
 _builtin/Method                 okkez           done
-_builtin/Module                 okkez
+_builtin/Module                 okkez           done
 _builtin/NameError              snoozer05       done
 _builtin/NilClass               snoozer05       done
 _builtin/NoMemoryError          snoozer05       done
