@@ -55,7 +55,7 @@ _builtin/Process__GID           sheepman        done
 _builtin/Process__Status        sheepman        done
 _builtin/Process__Sys           sheepman        done
 _builtin/Process__UID           sheepman        done
-_builtin/Range                  
+_builtin/Range                  okkez
 _builtin/RangeError             snoozer05       done
 _builtin/Regexp                 aamine
 _builtin/RegexpError            snoozer05       done
