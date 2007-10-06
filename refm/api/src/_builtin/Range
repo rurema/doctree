@@ -7,10 +7,10 @@ include Enumerable
 オブジェクトは終端を含み、... 演算子によって生成された範囲オブジェ
 クトは終端を含みません。
 
-例:
+=== 例
 
   for i in 1..5
-     ...
+     # 処理
   end
 
 これは 1 から 5 までの範囲オブジェクトを生成して、それぞれの値に対して
@@ -27,79 +27,74 @@ Ruby の Range クラスは immutable です。
 ですので、一度生成された Range のオブジェクトの指し示す範囲は
 決して変更することはできません。
 
-例:
   range = 1..10
   range.first     #=> 1
   range.first = 1 #=> NoMethodError
 
 == Class Methods
 
---- new(first,last[, exclude_end])
-#@todo
+--- new(first, last, exclude_end = false) -> Range
 
 first から last までの範囲オブジェクトを生成して返しま
-す。exclude_end が真ならば終端を含まない範囲オブジェクトを生
+す。
+
+exclude_end が真ならば終端を含まない範囲オブジェクトを生
 成します。exclude_end 省略時には終端を含みます。
 
-生成時に、引数の正当性チェックとして
+@param first 最初のオブジェクト
+@param last 最後のオブジェクト
+@param exclude_end 真をセットした場合終端を含まない範囲オブジェクトを生成します
 
-  first <=> last
-
-を実行します。これが nil を返す場合、例外
-[[c:ArgumentError]] が発生します。
+@raise ArgmentError first <=> last が nil の場合に発生します
 
 == Instance Methods
 
 --- ===(other) -> bool
 --- include?(other) -> bool
-#@todo
 
-other が範囲内に含まれている時に真を返します。=== は
-主に [[unknown:制御構造/case]] 文での比較に用いられます。
+other が範囲内に含まれている時に真を返します。
 
-#@since 1.7.0
+[[m:Range#===]] は主に [[unknown:制御構造/case]] 文での比較に用いられます。
+
+#@since 1.8.0
 include? が、[[m:Enumerable#include?]],
 [[m:Enumerable#member?]] と異なり <=> メソッド
 による演算により範囲内かどうかを判定することに注意する必要がありま
-す。(1.6 までは、include? と member? ともに Enumerable のメソッドでした)
+す。
 
   p (0.1 .. 0.2).include?(0.15) # => true
+  # 1.8.1 以前
   p (0.1 .. 0.2).member?(0.15)  # => cannot iterate from Float (TypeError)
+  # 1.8.2 以降
+  p (0.1 .. 0.2).member?(0.15)  # => true
   
-  # 文字列の場合、include? は辞書順の比較になる
+  # 文字列の場合、include? は辞書p (0.1 .. 0.2).member?(0.15)  # => cannot iterate from Float (TypeError)順の比較になる
   p ("a" .. "c").include?("ba") # => true
+  # 1.8.1 以前
   p ("a" .. "c").member?("ba")  # => false
+  # 1.8.2 以降
+  p ("a" .. "c").member?("ba")  # => true
+  
 #@end
 
---- begin
---- first
-#@todo
+--- begin -> object
+--- first -> object
 
 最初の要素を返します。
 
---- each {|item|  ... }
-#@todo
+--- each {|item|  ... } -> self
 
 範囲内の要素に対して繰り返します。
 
-#@since 1.7.0
-((<ruby 1.7 feature>)): Range#each は各要素の succ メソッドを使用
-してイテレーションするようになりました。1.6 までは、Numeric オブ
-ジェクトは、特別に算術演算で行われていました。この変更により Float
-の Range の扱いが変わります(Float は、succ を持たない)。
+#@since 1.8.0
+Range#each は各要素の succ メソッドを使用してイテレーションするようになりました。
 
-  (1.0 .. 2.0).each {|v| p v}
-  => ruby 1.6.7 (2002-03-01) [i586-linux]
-  1
-  2
-  => -:1:in `each': cannot iterate from Float (TypeError)
-     from -:1
-     ruby 1.7.3 (2002-09-02) [i586-linux]
+@raise TypeError succ メソッドを持たないクラスの範囲オブジェクトに対してこのメソッドを呼んだ場合に発生します。
+
 #@end
 
---- end
---- last
-#@todo
+--- end -> object
+--- last -> object
 
 終端を返します。範囲オブジェクトが終端を含むかどうかは関係ありませ
 ん。
@@ -107,38 +102,18 @@ include? が、[[m:Enumerable#include?]],
   p (1..5).end   # => 5
   p (1...5).end  # => 5
 
---- exclude_end?
-#@todo
+--- exclude_end? -> bool
 
 範囲オブジェクトが終端を含まないとき真を返します。
 
---- length
---- size
-#@todo
+#@since 1.8.0
+--- step(s = 1) {|item| ... } -> self
 
-範囲の長さを返します。
-始点と終端が Integer のインスタンスなら
-        (last - first + (exclude_end? ? 0 : 1))
-です。それ以外では、each が実行され範囲の長さを数えます。
+範囲内の要素を s おきに繰り返します。
 
-#@since 1.7.0
-((<ruby 1.7 feature>)): length, size メソッドはなくなりました。
-必要なら
-  p ("a" .. "z").to_a.size
-  => 26
-などとする必要があります。
-#@end
+@param s 正の整数を指定します。
 
-#@since 1.7.0
---- step([s]) {|item| ... }
-#@todo
-
-((<ruby 1.7 feature>))
-範囲内の要素を s おきに繰り返します。s には正の整数を
-指定します。デフォルトは 1 です。
-#@#((-あらい 2002-01-13: もちろん [[c:Numeric]] のサブクラスであれば
-#@#item + s が動作しなければならない。それ以外では succ
-#@#を s 回実行する。-))
+@raise ArgumentError s に 0 または負の数を指定した場合に発生します
 
   ("a" .. "f").step(2) {|v| p v}
   # => "a"
