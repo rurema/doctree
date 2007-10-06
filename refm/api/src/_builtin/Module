@@ -126,7 +126,6 @@ nil を返します。
 #@end
 
 --- <(other)  -> bool | nil
-#@todo
 
 比較演算子。self が other の子孫である場合、 true を返します。
 #@# self < other が成立します。
@@ -166,7 +165,7 @@ false を返します。
   p Foo < Object.new # => in `<': compared with non class/module (TypeError)
 
 --- <=(other) -> bool | nil
-#@todo
+
 比較演算子。self が other の子孫であるか、 self と other が
 同一クラスである場合、 true を返します。
 
@@ -184,7 +183,6 @@ false を返します。
 @see [[m:Module#<]]
 
 --- >(other)  -> bool | nil
-#@todo
 
 比較演算子。other が self の子孫である場合、 true を返します。
 
@@ -202,7 +200,7 @@ false を返します。
 @see [[m:Module#<]]
 
 --- >=(other) -> bool | nil
-#@todo
+
 比較演算子。other が self の子孫であるか、
 self と other が同一クラスである場合、 true を返します。
 
@@ -479,7 +477,6 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
 
 #@since 1.8.0
 --- include?(mod) -> bool
-#@todo
 
 self かその親クラス / 親モジュールがモジュール mod を
 インクルードしていれば true を返します。
@@ -707,7 +704,6 @@ module_eval のブロック中でメソッドを定義する場合、
 @see [[m:Object#protected_methods]], [[m:Module#instance_methods]]
 
 --- private_class_method(*name) -> self
-#@todo
 
 name で指定したクラスメソッド (クラスの特異メソッド) の
 可視性を private に変更します。
@@ -723,7 +719,6 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 #@since 1.8.0
 --- private_method_defined?(name) -> bool
-#@todo
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が private であるときに true を返します。
@@ -734,7 +729,6 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 @see [[m:Module#method_defined?]]
 
 --- protected_method_defined?(name) -> bool
-#@todo
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が protected であるときに true を返します。
@@ -745,7 +739,6 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 @see [[m:Module#method_defined?]]
 
 --- public_method_defined?(name) -> bool
-#@todo
 
 インスタンスメソッド name がモジュールに定義されており、
 しかもその可視性が public であるときに true を返します。
@@ -759,7 +752,6 @@ name で指定したクラスメソッド (クラスの特異メソッド) の
 
 #@since 1.8.6
 --- class_variable_defined?(name) -> bool
-#@todo
 
 name で与えられた名前のクラス変数がモジュールに存在する場合 true を
 返します。
@@ -1336,8 +1328,6 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 
 #@since 1.8.0
 --- undef_method(*name) -> self
-#@todo
-#@end
 
 このモジュールのインスタンスメソッド name を未定義にします。
 
@@ -1379,7 +1369,6 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
   end
   B.new.ok   # => A
 
-#@since 1.8.0
 #@#see [ruby-dev:17894]
 また、undef 文と undef_method の違いは、
 メソッド名を [[c:String]] または [[c:Symbol]] で与えられることです。
