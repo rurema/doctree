@@ -33,7 +33,7 @@ n の値が負の時には末尾からのインデックスと見倣します(末尾の
 
 [[c:Range]] オブジェクト range の範囲にある要素からなる部分配列を返します。
 
-@param start..end 範囲式。
+@param range start..end 範囲式。
 
   /(foo)(bar)/ =~ "foobarbaz"
   p $~[0..2]      # => ["foobar", "foo", "bar"]
@@ -168,11 +168,13 @@ self.to_a.select { ... } と同じです。
   p $~.to_s       # => "bar"
 
 #@since 1.8.0
---- values_at(*indexes) -> [String]
+--- values_at(*index) -> [String]
 
 正規表現中の indexN 番目の括弧にマッチした部分文字列の配列を返します。
 
 0 番目は [[m:$&]] のようにマッチした文字列全体を表します。
+
+@param index インデックスを整数で指定します。
 
   m = /(foo)(bar)(baz)/.match("foobarbaz")
   p m.values_at(0,1,2,3,4)   # same as m.to_a.values_at(...)
