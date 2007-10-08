@@ -7,245 +7,303 @@
 == Instance Methods
 
 #@since 1.8.0
---- all?
---- all? {|item| ... }
-#@todo
+--- all?               -> bool
+--- all? {|item| ... } -> bool
 
-すべての要素が真である場合に true を返します。偽である要素が
-あれば、ただちに false を返します。
+すべての要素が真である場合に true を返します。
+偽である要素があれば、ただちに false を返します。
 
 ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
 が真である場合に true を返します。ブロックが偽を返した時点で、
 ただちに false を返します。
 
-    p [1,2,3].all? {|v| v > 0}   # => true
-    p [1,2,3].all? {|v| v > 1}   # => false
+例:
+    # すべて正の数か？
+    p [5,  6, 7].all? {|v| v > 0 }   # => true
+    p [5, -1, 7].all? {|v| v > 0 }   # => false
 #@end
 
 #@since 1.8.0
---- any?
---- any? {|item| ... }
-#@todo
+--- any?               -> bool
+--- any? {|item| ... } -> bool
 
-すべての要素が偽である場合に false を返します。真である要素
-があれば、ただちに true を返します。
+すべての要素が偽である場合に false を返します。
+真である要素があれば、ただちに true を返します。
 
 ブロックを伴う場合は、各要素に対してブロックを評価し、すべての結果
 が偽である場合に false を返します。ブロックが真を返した時点
 で、ただちに true を返します。
 
-    p [1,2,3].any? {|v| v > 3}   # => false
-    p [1,2,3].any? {|v| v > 1}   # => true
+例:
+    p [1, 2, 3].any? {|v| v > 3 }   # => false
+    p [1, 2, 3].any? {|v| v > 1 }   # => true
 #@end
 
---- collect {|item| ... }
---- map {|item| ... }
+--- collect {|item| ... } -> [Object]
+--- map {|item| ... }     -> [Object]
 #@todo
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
 
 ブロックを省略した場合、
+obj.collect {|item| item } を実行します。
+これは [[m:Enumerable#to_a]] と同じです。
 
-    obj.collect {|item| item}
+例:
+    # すべて 3 倍にする
+    p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
-を行います。これは [[m:Enumerable#to_a]] と同じで
-す。
+--- each_with_index {|item, index| ... } -> self
 
---- each_with_index {|item,index| ... }
-#@todo
-
-要素とインデックスを両方与えるイテレータ。
+要素とそのインデックスをブロックに渡して繰り返します。
 
 self を返します。
 
---- find([ifnone]) {|item| ... }
---- detect([ifnone]) {|item| ... }
-#@todo
+例:
+    [5, 10, 15].each_with_index do |n, idx|
+      p [n, idx]
+    end
+        # => [5, 0]
+        #    [10, 1]
+        #    [15, 2]
 
-要素に対してブロックを評価した値が真になった最初の要素を返します。
-真になる要素がひとつも見つからなかったときは ifnone を(もし
-指定されていれば)評価して nil を返します。
-#@# ((-1.7 featureかも。いつから?-)))
-#@# ((-あらい: ifnone に文字列が指定できなくなってから
-#@# [[url:http:#/www.ruby-lang.org/cgi-bin/cvsweb.cgi/ruby/enum.c.diff?r1=1.28&r2=1.29]]みたい-))
-
-ifnone には文字列かあるいは、call メソッドを持つオブジェ
-クト(例えば [[c:Proc]])を指定します。
-
-    [1,2,3].find("raise") {|v| v > 4}
-    # => -:1: unhandled exception
-
-#@since 1.8.0
-ifnone に文字列は指定できなくなりました。
+#@since 1.8.4
+@see enum_with_index
 #@end
 
---- find_all {|item| ... }
---- select {|item| ... }
-#@todo
+#@since 1.8.4
+--- enum_with_index -> Enumerable::Enumerator
+
+要素とそのインデックスに対して繰り返す Enumerator を返します。
+Enumerable::Enumerator.new(self, :each_with_index) と同じです。
+
+@see [[m:Enumerable#each_with_index]]
+#@end
+
+--- find(ifnone = nil) {|item| ... }   -> Object
+--- detect(ifnone = nil) {|item| ... } -> Object
+
+要素に対してブロックを評価した値が真になった最初の要素を返します。
+
+真になる要素が見つからず、
+ifnone も指定されていないときは nil を返します。
+真になる要素が見付からず、ifnone が指定されているときは
+ifnone を eval または call して実行し、nil を返します。
+#@# 1.7 featureかも。いつから?
+#@# あらい: ifnone に文字列が指定できなくなってからみたい
+#@# http://www.ruby-lang.org/cgi-bin/cvsweb.cgi/ruby/enum.c.diff?r1=1.28&r2=1.29
+
+#@since 1.8.0
+@arg ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
+
+例:
+    # 最初の 3 の倍数を探す
+    p [1, 2, 3, 4, 5].find {|i| i % 3 == 0 }   # => 3
+    p [2, 2, 2, 2, 2].find {|i| i % 3 == 0 }   # => nil
+
+    # ifnone の使用例
+    ifnone = proc { raise ArgumentError, "item not found" }
+    p [1, 2, 3, 4, 5].find(ifnone) {|i| i % 7 == 0 }
+        # ArgumentError: item not found
+#@else
+@arg ifnone  文字列または call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
+
+    [1, 2, 3].find("raise") {|v| v > 4 }
+        # => -:1: unhandled exception
+#@end
+
+--- find_all {|item| ... } -> [Object]
+--- select {|item| ... }   -> [Object]
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
---- grep(pattern)
---- grep(pattern) {|item| ... }
+--- grep(pattern)                -> [Object]
+--- grep(pattern) {|item| ... }  -> [Object]
 #@todo
 
-pattern === item が成立する要素を全て含んだ配列を返し
-ます。ブロックとともに呼び出された時には条件の成立した要素に対して
-それぞれブロックを評価し、その結果の配列を返します。マッチする要素
-がひとつもなかった場合は空の配列を返します。
+pattern === item が成立する要素を全て含んだ配列を返します。
+ブロックとともに呼び出された時には条件の成立した要素に対して
+それぞれブロックを評価し、その結果の配列を返します。
+マッチする要素がひとつもなかった場合は空の配列を返します。
+
+@arg pattern	「===」メソッドを持つオブジェクトを指定します。
+
+例:
+    p ['aa', 'bb', 'cc', 'dd', 'ee'].grep(/[bc]/)  # => ["bb", "cc"]
 
 #@since 1.8.0
---- inject([init]) {|result, item| ... }
-#@todo
+--- inject(init = self.first) {|result, item| ... } -> Object
 
-最初に初期値 init と self の最初の要素を引数にブロック
-を実行します。2 回目以降のループでは、前のブロックの実行結果と
-self の次の要素を引数に順次ブロックを実行します。そうして最
-後の要素まで繰り返し、最後のブロックの実行結果を返します。
+リストのたたみこみ演算を行います。
 
-要素が空の場合は init を返します。
+最初に初期値 init と self の最初の要素を引数にブロックを実行します。
+2 回目以降のループでは、前のブロックの実行結果と
+self の次の要素を引数に順次ブロックを実行します。
+そうして最後の要素まで繰り返し、最後のブロックの実行結果を返します。
 
-初期値 init を省略した場合は、最初に先頭の要素と 2 番目の要
-素をブロックに渡します。この場合、要素が 1 つしかなければブロック
-を実行せずに最初の要素を返します。要素が空なら nil を返しま
-す。
+要素が存在しない場合は init を返します。
 
-: 例
-  合計の計算
-    p [1,2,3,4,5].inject(0) {|result, item| result + item }
-      => 15
+初期値 init を省略した場合は、
+最初に先頭の要素と 2 番目の要素をブロックに渡します。
+また要素が 1 つしかなければブロックを実行せずに最初の要素を返します。
+要素がなければブロックを実行せずに nil を返します。
 
-  これは以下のように書くのと同じです。
-      result = 0
-      [1,2,3,4,5].each {|v| result += v }
-      p result
-      => 15
+@arg init    最初の result の値です。任意のオブジェクトが渡せます。
+
+例:
+
+  # 合計を計算する
+  p [1, 2,3, 4, 5].inject(0) {|result, item| result + item }  # => 15
+
+この式は以下のように書いても同じ結果が得られます。
+
+  result = 0
+  [1, 2, 3, 4, 5].each {|v| result += v }
+  p result   # => 15
 #@end
 
---- member?(val)
---- include?(val)
-#@todo
+--- member?(val)  -> bool
+--- include?(val) -> bool
 
 val と == の関係にある要素を含むとき真を返します。
 
---- max
-#@todo
+@arg val   任意のオブジェクト
 
-最大の要素を返します。全要素が互いに <=> メソッドで比較でき
-ることを仮定しています。
+--- max -> Object
+
+最大の要素を返します。
+全要素が互いに <=> メソッドで比較できることを仮定しています。
 
 要素が存在しなければ nil を返します。
 
---- max {|a, b| ... }
-#@todo
+--- max {|a, b| ... } -> Object
 
 ブロックの評価結果で各要素の大小判定を行い、最大の要素を返します。
 要素が存在しなければ nil を返します。
 
-ブロックの値は、a > b のとき正、a == b のとき 0、a < b
-のとき負の整数を、期待しています。ブロックが整数以外を返したときは
+ブロックの値は、a > b のとき正、
+a == b のとき 0、a < b のとき負の整数を、期待しています。
+ブロックが整数以外を返したときは
 例外 [[c:TypeError]] が発生します。
 
+@raise TypeError    ブロックが整数以外を返したときに発生します。
+
 #@since 1.9.0
---- max_by {|item| ... }
-#@todo
+--- max_by {|item| ... } -> Object
 
-ブロックの評価結果を <=> で比較し、最大の要素を返します。
-要素が存在しなければ nil を返します。
+各要素を順番にブロックに渡して実行し、
+その評価結果を <=> で比較して、
+最大であった値に対応する元の要素を返します。
 
-max と max_by の違いは sort と sort_by の違いと同じです。詳細は
-[[m:Enumerable#sort_by]] を参照してください。
+要素が存在しないときは nil を返します。
+
+max と max_by の違いは sort と sort_by の違いと同じです。
+詳細は [[m:Enumerable#sort_by]] を参照してください。
 #@end
 
---- min
-#@todo
+--- min -> Object
 
-最小の要素を返します。全要素が互いに <=> メソッドで比較でき
-ることを仮定しています。
+最小の要素を返します。
+全要素が互いに <=> メソッドで比較できることを仮定しています。
 
 要素が存在しなければ nil を返します。
 
---- min {|a, b| ... }
-#@todo
+--- min {|a, b| ... } -> Object
 
 ブロックの評価結果で各要素の大小判定を行い、最小の要素を返します。
 要素が存在しなければ nil を返します。
 
-ブロックの値は、a > b のとき正、a == b のとき 0、a < b
-のとき負の整数を、期待しています。ブロックが整数以外を返したときは
-例外 TypeError が発生します。
+ブロックの値は、a > b のとき正、a == b のとき 0、
+a < b のとき負の整数を、期待しています。
+ブロックが整数以外を返したときは例外 TypeError が発生します。
+
+@raise TypeError    ブロックが整数以外を返したとき
 
 #@since 1.9.0
---- min_by {|item| ... }
-#@todo
+--- min_by {|item| ... } -> Object
 
-ブロックの評価結果を <=> で比較し、最小の要素を返します。
-要素が存在しなければ nil を返します。
+各要素を順番にブロックに渡して実行し、
+その評価結果を <=> で比較して、
+最大であった値に対応する元の要素を返します。
 
-min と min_by の違いは sort と sort_by の違いと同じです。詳細は
-[[m:Enumerable#sort_by]] を参照してください。
+要素が存在しないときは nil を返します。
+
+min と min_by の違いは sort と sort_by の違いと同じです。
+詳細は[[m:Enumerable#sort_by]] を参照してください。
 #@end
 
---- partition {|item| ... }
-#@todo
+--- partition {|item| ... } -> [[Object], [Object]]
 
-各要素に対してブロックを評価した値が真であった要素からなる配列と
-偽であった要素からなる配列からなる配列を返します。
+各要素を、ブロックの条件を満たす要素と満たさない要素に分割します。
+各要素に対してブロックを評価して、その値が真であった要素の配列と、
+偽であった要素の配列の 2 つを配列に入れて返します。
 
-  [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition { |i| i % 3 == 0 }
+例:
+
+  [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
---- reject {|item| ... }
-#@todo
+--- reject {|item| ... } -> [Object]
 
-各要素に対してブロックを評価し、その値が偽であった要素を集めた新し
-い配列を返します。
+各要素に対してブロックを評価し、
+その値が偽であった要素を集めた新しい配列を返します。
+条件を反転させた select です。
 
---- sort
---- sort {|a, b| ... }
-#@todo
+例:
+
+  # 偶数を除外する (奇数を集める)
+  [1, 2, 3, 4, 5, 6].reject {|i| i % 2 == 0 }  # => [1, 3, 5]
+
+@see [[m:Enumerable#select]]
+
+--- sort               -> [Object]
+--- sort {|a, b| ... } -> [Object]
 
 全ての要素を昇順にソートした配列を生成して返します。
 
-ブロックなしのときは <=> メソッドを要素に対して呼び、その結
-果をもとにソートします。
+ブロックなしのときは <=> メソッドを要素に対して呼び、
+その結果をもとにソートします。
 
-<=> 以外でソートしたい場合は、ブロックを指定します。この場合
-ブロックの評価結果を元にソートします。ブロックの値は、a > b の
-とき正、a == b のとき 0、a < b のとき負の整数を、期待して
-います。ブロックが整数以外を返したときは例外 [[c:TypeError]] が発
-生します。
+<=> 以外でソートしたい場合は、ブロックを指定します。
+この場合、ブロックの評価結果を元にソートします。
+ブロックの値は、a > b のとき正、a == b のとき 0、
+a < b のとき負の整数を、期待しています。
+ブロックが整数以外を返したときは例外 [[c:TypeError]] が発生します。
 
 Enumerable#sort は安定ではありません (unstable sort)。
+安定なソートが必要な場合は [[m:Enumerable#sort_by]] を使って工夫する必要があります。
+詳しくは [[m:Enumerable#sort_by]] の項目を参照してください。
 
-註： 比較結果が同じ要素は元の順序通りに並ぶソートを
+※ 比較結果が同じ要素は元の順序通りに並ぶソートを
 「安定なソート (stable sort)」と言います。
 
+@see [[m:Enumerable#sort_by]]
+
 #@since 1.8.0
---- sort_by {|item| ... }
-#@todo
+--- sort_by {|item| ... } -> [Object]
 
 ブロックの評価結果を <=> メソッドで比較することで、self を昇
-順にソートします。ソートされた配列を新たに生成して返します。これは、
-以下とほぼ同じ動作をします。
+順にソートします。ソートされた配列を新たに生成して返します。
+つまり、以下とほぼ同じ動作をします。
 
   class Array
     def sort_by
-      self.collect {|i| [yield(i), i] }.
-         sort {|a,b| a[0] <=> b[0] }.
-         collect! {|i| i[1]}
+      self.map {|i| [yield(i), i] }.
+         sort {|a, b| a[0] <=> b[0] }.
+         map {|i| i[1]}
     end
   end
 
-sort_by を使わない以下の例では比較を行う度に downcase が実
-行されます。従って downcase の実行速度が遅ければ sort の速度が
-致命的に低下します。
+[[m:Enumerable#sort]] と比較して sort_by が優れている点として、
+比較条件が複雑な場合の速度が挙げられます。
+sort_by を使わない以下の例では比較を行う度に downcase が実行されます。
+従って downcase の実行速度が遅ければ sort の速度が致命的に低下します。
 
-  p ["BAR", "FOO", "bar", "foo"].sort {|a,b| a.downcase <=> b.downcase }
+  p ["BAR", "FOO", "bar", "foo"].sort {|a, b| a.downcase <=> b.downcase }
 
-一方次のように sort_by を使うと downcase の実行回数は要素数と
-同じです。つまり、その部分の実行時間は O(n) のオーダーです。
+一方、次のように sort_by を使うと downcase の実行回数は要素数と同じです。
+つまり、その部分の実行時間は O(n) のオーダーです。
 
   p ["BAR", "FOO", "bar", "foo"].sort_by {|v| v.downcase }
 
@@ -270,57 +328,68 @@ sort_by を使わない以下の例では比較を行う度に downcase が実
   p $n          # => 1000
 
 Enumerable#sort_by は安定ではありません (unstable sort)。
-
-註： 比較結果が同じ要素は元の順序通りに並ぶソートを
-「安定なソート (stable sort)」と言います。
-
-なお、sort_by を以下のように使うと安定なソートを実装できます。
+ただし、sort_by を以下のように使うと安定なソートを実装できます。
 
   i = 0
   ary.sort_by {|v| [v, i += 1] }
+
+※ 比較結果が同じ要素は元の順序通りに並ぶソートを
+「安定なソート (stable sort)」と言います。
+
+@see [[m:Enumerable#sort]]
 #@end
 
---- to_a
---- entries
-#@todo
+--- to_a    -> [Object]
+--- entries -> [Object]
 
 全ての要素を含む配列を返します。
 
 #@since 1.8.0
---- zip([ary1[, ary2[, ...]]])
---- zip([ary1[, ary2[, ...]]]) {|v1, v2, ...| ...}
-#@todo
+--- zip(*lists)  -> [[Object]]
 
-self と引数に渡した配列の各要素からなる配列の配列を生成して
-返します。生成される配列の要素数は self の要素数です。
+self と引数に渡した配列の各要素からなる配列の配列を生成して返します。
+生成される配列の要素数は self の要素数と同じです。
 
+例:
     p [1,2,3].zip([4,5,6], [7,8,9])
-    => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+        # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
     p [1,2].zip([:a,:b,:c], [:A,:B,:C,:D])
-    => [[1, :a, :A], [2, :b, :B]]
+        # => [[1, :a, :A], [2, :b, :B]]
 
     p (1..5).zip([:a,:b,:c], [:A,:B,:C,:D])
-    => [[1, :a, :A], [2, :b, :B], [3, :c, :C], [4, nil, :D], [5, nil, nil]]
+        # => [[1, :a, :A], [2, :b, :B],
+        #     [3, :c, :C], [4, nil, :D], [5, nil, nil]]
+#@end
 
-ブロック付きで呼び出された場合は、各配列を要素に渡してブロックを実
-行します。この場合、zip は、常に nil を返します。
+#@since 1.8.0
+--- zip(*lists) {|v1, v2, ...| ...} -> nil
 
+zip をブロック付きで呼び出した場合は、
+self と引数に渡した配列の各要素を順番にブロックに渡します。
+
+常に nil を返します。
+
+例:
     p [1,2,3].zip([4,5,6], [7,8,9]) {|ary|
       p ary
     }
-    => [1, 4, 7]
-       [2, 5, 8]
-       [3, 6, 9]
-       nil
-
+        # => [1, 4, 7]
+        #    [2, 5, 8]
+        #    [3, 6, 9]
+        #    nil
 #@end
 
 #@since 1.8.4
---- each_slice(n) {...}
-#@todo
+--- each_slice(n) {|list| ... } -> nil
 
-n 要素ずつにわけてブロックに渡して繰り返します。
+n 要素ずつブロックに渡して繰り返します。
+要素数が n で割り切れないときは、
+最後の回だけ要素数が減ります。
+
+nil を返します。
+
+@arg n   区切る要素数を示す整数です。
 
 例:
 
@@ -330,35 +399,40 @@ n 要素ずつにわけてブロックに渡して繰り返します。
       #    [7, 8, 9]
       #    [10]
 
---- enum_slice(n)
-#@todo
+@see [[m:Enumerable#each_cons]]
 
-Enumerable::Enumerator.new(self, :each_slice, n) を返します。
+--- enum_slice(n) -> Enumerable::Enumerator
 
---- each_cons(n) {...}
-#@todo
+n 要素ずつ繰り返す Enumerator を返します。
+Enumerable::Enumerator.new(self, :each_slice, n) と同じです。
 
-連続した n 要素ずつの配列をブロックに渡して繰り返す。
+@arg n   区切る要素数を示す整数です。
+@see [[m:Enumerable#each_cons]]
+
+--- each_cons(n) {|list| ... } -> nil
+
+要素を重複ありで n 要素ずつに区切り、
+ブロックに渡して繰り返します。
+
+nil を返します。
+
+@arg n   区切る要素数を示す整数です。
 
 例:
 
-  (1..10).each_cons(3) {|a| p a}
+  [1, 2, 3, 4, 5].each_cons(3) {|a| p a }
       # => [1, 2, 3]
       #    [2, 3, 4]
       #    [3, 4, 5]
-      #    [4, 5, 6]
-      #    [5, 6, 7]
-      #    [6, 7, 8]
-      #    [7, 8, 9]
-      #    [8, 9, 10]
 
---- enum_cons(n)
-#@todo
+@see [[m:Enumerable#each_slice]]
+
+--- enum_cons(n) -> Enumerable::Enumerator
+
+要素を重複ありで n 要素ずつに区切って繰り返す Enumerator を返します。
 
 Enumerable::Enumerator.new(self, :each_cons, n) を返します。
 
---- enum_with_index
-#@todo
-
-Enumerable::Enumerator.new(self, :each_with_index) を返します。
+@arg n   区切る要素数を示す整数です。
+@see [[m:Enumerable#each_slice]]
 #@end
