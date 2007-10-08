@@ -31,7 +31,7 @@ _builtin/IOError                snoozer05       done
 _builtin/IndexError             snoozer05       done
 _builtin/Integer                ujihisa         done
 _builtin/Interrupt              kouya           done
-_builtin/Kernel                 aamine
+_builtin/Kernel                 
 _builtin/KeyError               snoozer05       done
 _builtin/LoadError              snoozer05       done
 _builtin/LocalJumpError         snoozer05       done
@@ -46,7 +46,7 @@ _builtin/NoMemoryError          snoozer05       done
 _builtin/NoMethodError          snoozer05       done
 _builtin/NotImplementedError    snoozer05       done
 _builtin/Numeric                sheepman        done
-_builtin/Object                 aamine
+_builtin/Object                 
 _builtin/ObjectSpace            sheepman        done
 _builtin/Precision              snoozer05       done
 _builtin/Proc                   snoozer05       done
@@ -57,7 +57,7 @@ _builtin/Process__Sys           sheepman        done
 _builtin/Process__UID           sheepman        done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
-_builtin/Regexp                 aamine
+_builtin/Regexp                 
 _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
 _builtin/ScriptError            snoozer05       done
@@ -84,7 +84,7 @@ _builtin/ZeroDivisionError      snoozer05       done
 _builtin/constants              yugui           done
 _builtin/Enumerable__Enumerator yugui           done
 _builtin/fatal                  snoozer05       done
-_builtin/functions              aamine
+_builtin/functions              
 _builtin/specialvars            yugui           done
 
 # LIBRARY_NAME                  OWNER           STATUS
