@@ -251,6 +251,10 @@ StringIO には対応するパスはないので nil を返します。
 
 @param obj 書き込みたいオブジェクトを指定します。
 
+  a = StringIO.new("", 'r+')
+  a.print("hoge", "bar", "foo")
+  a.string                     #=> "hogebarfoo"
+
 --- printf(format, *obj)    -> nil
 
 指定されたフォーマットに従い各引数 obj を文字列に変換して、自身に出力します。
@@ -259,6 +263,10 @@ StringIO には対応するパスはないので nil を返します。
 @param format 文字列のフォーマットを指定します。[[m:Kernel.#format]] を参照して下さい。
 
 @param obj 書き込みたいオブジェクトを指定します。
+
+  a = StringIO.new("", 'r+')
+  a.printf("%c%c%c", 97, 98, 99)
+  a.string                      #=> "abc"
 
 --- putc(ch)    -> object
 
@@ -273,6 +281,10 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 詳しい仕様は [[m:Kernel.#puts]] を参照して下さい。
 
 @param obj 書き込みたいオブジェクトを指定します。
+
+  a = StringIO.new("", 'r+')
+  a.puts("hoge", "bar", "foo")
+  a.string                     #=> "hoge\nbar\nfoo\n"
 
 --- read                  -> String
 --- read(len)             -> String | nil
