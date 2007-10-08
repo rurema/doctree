@@ -79,12 +79,9 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 --- gm(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
 --- utc(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
 
-引数で指定した協定世界時の Time オブジェクトを返します。第 2
-引数以降は省略可能で、省略した場合の値はその引数がとり得る最小の値
-です。
+引数で指定した協定世界時の Time オブジェクトを返します。
 
-  p Time.gm *"2002-03-17".split("-")
-  # => Sun Mar 17 00:00:00 UTC 2002
+第2引数以降に nil を指定した場合の値はその引数がとり得る最小の値です。
 
 @param year 年を整数か文字列で指定します。例えば 1998 年に対して 1998 を指定します。
             ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。
@@ -105,6 +102,8 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 @raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
 
+  p Time.gm(2000, 1, 1)  #=> Sat Jan 01 00:00:00 UTC 2000
+
 --- gm(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
 --- utc(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
 
@@ -112,6 +111,7 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 引数の順序は [[m:Time#to_a]] と全く同じです。
 引数 wday, yday, zone に指定した値は無視されます。
+引数に nil を指定した場合の値はその引数がとり得る最小の値です。
 
 @param  sec 秒を 0 から 60 までの整数か文字列で指定します。
 
@@ -139,19 +139,68 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
 
 @raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
 
---- local(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)             -> Time
---- mktime(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)            -> Time
-#@todo
+--- local(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)      -> Time
+--- mktime(year, mon = 1, day = 1, hour = 0, min = 0, sec = 0, usec = 0)     -> Time
 
-引数で指定した地方時の Time オブジェクトを返します。引数の扱
-いは [[m:Time.gm]] と同じです。
+引数で指定した地方時の Time オブジェクトを返します。
+
+第2引数以降に nil を指定した場合の値はその引数がとり得る最小の値です。
+
+@param year 年を整数か文字列で指定します。例えば 1998 年に対して 1998 を指定します。
+            ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。
+            69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
+
+@param mon 1(1月)から 12(12月)の範囲の整数または文字列で指定します。
+           英語の月名("Jan", "Feb", ... などの省略名。文字の大小は無視)も指定できます。
+
+@param  day 日を 1 から 31 までの整数か文字列で指定します。
+
+@param  hour 時を 0 から 23 までの整数か文字列で指定します。
+
+@param  min 分を 0 から 59 までの整数か文字列で指定します。
+
+@param  sec 秒を 0 から 60 までの整数か文字列で指定します。
+
+@param  usec マイクロ秒を整数か文字列で指定します。
+
+@raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
+
+ p Time.local(2000, 1, 1) #=> Sat Jan 01 00:00:00 +0900 2000
 
 --- local(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)     -> Time
 --- mktime(sec, min, hour, mday, mon, year, wday, yday, isdst, zone)    -> Time
-#@todo
 
-引数で指定した地方時の Time オブジェクトを返します。引数の扱
-いは [[m:Time.gm]] と同じです。
+引数で指定した地方時の Time オブジェクトを返します。
+
+引数の順序は [[m:Time#to_a]] と全く同じです。
+引数 wday, yday, zone に指定した値は無視されます。
+引数に nil を指定した場合の値はその引数がとり得る最小の値です。
+
+@param  sec 秒を 0 から 60 までの整数か文字列で指定します。
+
+@param  min 分を 0 から 59 までの整数か文字列で指定します。
+
+@param  hour 時を 0 から 23 までの整数か文字列で指定します。
+
+@param  day 日を 1 から 31 までの整数か文字列で指定します。
+
+@param mon 1(1月)から 12(12月)の範囲の整数か文字列で指定します。
+           英語の月名("Jan", "Feb", ... などの省略名。文字の大小は無視)も指定できます。
+
+@param year 年を整数か文字列で指定します。例えば 1998 年に対して 1998 を指定します。
+            ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。
+            69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
+
+@param isdst 指定した日時が夏時間(Daylight Saving Time)なら true を指定します。
+             そうでないなら、false を指定します。
+
+@param wday 無視されます。
+
+@param yday 無視されます。
+
+@param zone 無視されます。
+
+@raise ArgumentError 与えられた引数の範囲が valid でない場合に発生します。
 
 --- new    -> Time
 --- now    -> Time
@@ -473,42 +522,42 @@ yday は 1 から数えます。
 
 #@since 1.9.0
 
---- friday? => true or false
-#@todo
+--- friday? -> bool
 
-Returns true if time represents Friday.
+自身の表す時刻が金曜日である場合に true を返します。
+そうでない場合に false を返します。
 
 --- monday? -> bool
-#@todo
 
-Returns true if time represents Monday.
+自身の表す時刻が月曜日である場合に true を返します。
+そうでない場合に false を返します。
 
 --- saturday? -> bool
-#@todo
 
-Returns true if time represents Saturday.
+自身の表す時刻が土曜日である場合に true を返します。
+そうでない場合に false を返します。
 
 --- sunday? -> bool
-#@todo
 
-Returns true if time represents Sunday.
+自身の表す時刻が日曜日である場合に true を返します。
+そうでない場合に false を返します。
 
    t = Time.now   #=> Sun Oct 23 00:14:54 UTC 2005
    t.sunday?      #=> true
 
 --- thursday? -> bool
-#@todo
 
-Returns true if time represents Thursday.
+自身の表す時刻が木曜日である場合に true を返します。
+そうでない場合に false を返します。
 
 --- tuesday? -> bool
-#@todo
 
-Returns true if time represents Tuesday.
+自身の表す時刻が火曜日である場合に true を返します。
+そうでない場合に false を返します。
 
 --- wednesday? -> bool
-#@todo
 
-Returns true if time represents Wednesday.
+自身の表す時刻が水曜日である場合に true を返します。
+そうでない場合に false を返します。
 
 #@end
