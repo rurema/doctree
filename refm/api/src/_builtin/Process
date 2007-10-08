@@ -702,14 +702,12 @@ nil を返します。
 
 
 --- RLIM_SAVED_CUR
-#@todo
 
-[[m:Process.#getrlimit]] 参照。
+[[m:Process.#getrlimit]], [[m:Process.#setrlimit]] で使われます。詳しくは [[man:setrlimit(2)]] を参照して下さい。
 
 --- RLIM_SAVED_MAX
-#@todo
 
-[[m:Process.#getrlimit]] 参照。
+[[m:Process.#getrlimit]], [[m:Process.#setrlimit]] で使われます。詳しくは [[man:setrlimit(2)]] を参照して下さい。
 
 --- WNOHANG
 
