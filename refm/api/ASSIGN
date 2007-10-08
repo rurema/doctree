@@ -247,15 +247,15 @@ stringio                        sheepman
 strscan                         aamine
 sync
 syslog
-
-# LIBRARY_NAME                  OWNER           STATUS
-#---------------------------------------------------------
 tempfile                        kouya           done
 test/unit                       sheepman
 thread
 thwait
 time
 timeout
+
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 tk
 tcltklib
 tkutil
@@ -343,6 +343,9 @@ tk/radiobutton
 tk/package
 tk/timer
 tk/variable
+
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 tkextlib/ICONS
 tkextlib/blt
 tkextlib/blt/barchart
@@ -436,6 +439,9 @@ tkextlib/vu/pie
 tkextlib/vu/setup
 tkextlib/vu/spinbox
 tkextlib/winico
+
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 tmpdir                          kouya            done
 tracer
 tsort
