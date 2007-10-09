@@ -393,6 +393,11 @@ webrick/httpresponse
 webrick/https
 webrick/httpserver
 webrick/httpservlet
+webrick/httpservlet/abstract
+webrick/httpservlet/cgihandler
+webrick/httpservlet/erbhandler
+webrick/httpservlet/filehandler
+webrick/httpservlet/prochandler
 webrick/httpstatus
 webrick/httputils
 webrick/httpversion
