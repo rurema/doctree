@@ -76,7 +76,7 @@ _builtin/SystemStackError       snoozer05       done
 _builtin/Thread                 sheepman        done
 _builtin/ThreadError            sheepman        done
 _builtin/ThreadGroup            sheepman        done
-_builtin/Time                   sheepman
+_builtin/Time                   sheepman        done
 _builtin/TrueClass              yamane          done
 _builtin/TypeError              snoozer05       done
 _builtin/UnboundMethod          sheepman        done
