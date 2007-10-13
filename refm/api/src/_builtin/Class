@@ -40,18 +40,32 @@
   p foo.name          # => "Bar"  ("Foo" になるか "Bar" になるかは不定)
 
 #@since 1.8.0
-ブロックが与えられると生成したクラスをブロックの引数に渡し、クラス
-のコンテキストでブロックを実行します。この場合も生成したクラスを返
-します。
+ブロックが与えられた場合、生成したクラスを引数として
+クラスのコンテキストでブロックを実行します。以下のコードと同じです。
 
-  klass = Class.new(super)
+  klass = Class.new(superclass)
   klass.module_eval {|m| ... }
   klass
 
-と同じです。ブロックの実行は [[m:Module#initialize]] が行います。
+この場合も生成したクラスを返します。
+ブロックの実行は Class#initialize が行います。
 #@end
 
 @param superclass 生成するクラスのスーパークラスを指定します。
+
+#@since 1.8.0
+ k = Class.new{|c| 
+       def initialize
+         p "in initialize"
+       end
+  
+       def hoge
+         p "hoge hoge hoge"
+       end
+     }
+ o = k.new              #=> "in initialize"
+ o.hoge                 #=> "hoge hoge hoge"
+#@end
 
 == Instance Methods
 
