@@ -112,13 +112,20 @@ path を省略した場合、環境変数 HOME または LOGDIR
 --- chroot(path)    -> 0
 
 ルートディレクトリを path に変更します。
-[[man:chroot(2)]] を参照のこと。スーパーユーザだけがルー
-トディレクトリを変更できます。
+スーパーユーザだけがルートディレクトリを変更できます。
 ルートディレクトリの変更に成功すれば 0 を返します。
+
+各プラットフォームのマニュアルの chroot の項も参照して下さい。
 
 @param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+ p Dir.glob("*")   #=> ["file1", "file2]
+ Dir.chroot("./")
+ p Dir.glob("/*")  #=> ["/file1", "/file2]
+
+@see [[url:http://opengroup.org/onlinepubs/007908799/xsh/chroot.html]]
 
 --- delete(path)    -> 0
 --- rmdir(path)     -> 0
