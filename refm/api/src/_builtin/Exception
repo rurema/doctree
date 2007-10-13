@@ -17,14 +17,19 @@
 --- exception                   -> self
 --- exception(error_message)    -> Exception
 
-引数を指定しない場合は self を返します。そうでなければ、自身のコピー
-を生成し、[[m:Exception#message]] 属性を error_message にし
-て返します。
+引数を指定しない場合は self を返します。引数を指定した場合 自身のコピー
+を生成し [[m:Exception#message]] 属性を error_message にして返します。
 
 [[m:Kernel.#raise]] は、実質的に、例外オブジェクトの exception
 メソッドの呼び出しです。
 
 @param error_message エラーメッセージを表す文字列を指定します。
+
+  begin
+   ...        # 何か処理
+  rescue => e
+   raise e.exception("an error occurs during hogehoge process")  # 詳しいエラーメッセージ
+  end
 
 --- backtrace    -> [String]
 
@@ -54,6 +59,12 @@
 --- to_str    -> String
 
 エラーメッセージをあらわす文字列を返します。
+
+  begin 
+    1 + nil 
+  rescue => e
+    p e.message   #=>  "nil can't be coerced into Fixnum"
+  end
 
 --- set_backtrace(errinfo)    -> nil | String | [String]
 
