@@ -109,6 +109,13 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+   Dir.chdir("/var/spool/mail")
+   p Dir.pwd                    #=> "/var/spool/mail"
+   Dir.chdir("/tmp") do
+     p Dir.pwd                  #=> "/tmp"
+   end 
+   p Dir.pwd                    #=> "/var/spool/mail"
+
 --- chroot(path)    -> 0
 
 ルートディレクトリを path に変更します。
@@ -137,6 +144,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 @param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+  Dir.delete("/tmp/hoge-jbrYBh.tmp")
 
 --- entries(path)    -> [String]
 
@@ -173,6 +182,9 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX カレントディレクトリの取得に失敗した場合に発生します(が、普通は失敗することはありません)。
 
+   Dir.chdir("/tmp")   #=> 0
+   Dir.getwd           #=> "/tmp"
+
 --- mkdir(path, mode = 0777)    -> 0
 
 path で指定された新しいディレクトリを作ります。パーミッションは
@@ -185,6 +197,10 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になります。
 @param mode ディレクトリのモードを整数で与えます。
 
 @raise Errno::EXXX ディレクトリの作成に失敗した場合に発生します。
+
+  p File.umask                                  #=> 2
+  Dir.mkdir('t', 0666)
+  p "%#o" % (07777 & File.stat('t').mode.to_i)  #=> "0664"
 
 --- new(path)               -> Dir
 --- open(path)              -> Dir
