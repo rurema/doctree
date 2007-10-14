@@ -109,7 +109,7 @@ string の中で正規表現において特別な意味を持つ文字の直前にエ
   p Regexp.last_match[2]   # => "b"
   p Regexp.last_match[3]   # => nil
 
---- last_match([nth]) -> String | nil
+--- last_match(nth) -> String | nil
 
 整数 nth が 0 の場合、マッチした文字列を返します
 ([[m:$&]])。それ以外では、nth 番目の括弧にマッチ
@@ -144,15 +144,14 @@ last_match[1] の形式では例外 [[c:NameError]] が発生します。
 
 
 #@since 1.8.1
---- union([pattern, ...])
-#@todo
+--- union([pattern, ...]) -> Regexp
 
-引数として与えた patttern を選択 | で連結し、Regexp として返します。
-結果の Regexp は与えた patttern のどれかにマッチする場合にマッチするものになります。
+引数として与えた pattern を選択 | で連結し、Regexp として返します。
+結果の Regexp は与えた pattern のどれかにマッチする場合にマッチするものになります。
 
   p Regexp.union(/a/, /b/, /c/) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 
-patttern は Regexp または String で与えます。
+pattern は Regexp または String で与えます。
 String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 エスケープされて結果の Regexp に組み込まれます。
 
@@ -177,6 +176,21 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 結果の Regexp は固定されているコードに対応するものになります。
 
   p Regexp.union(/a/e, /b/) # => /(?-mix:a)|(?-mix:b)/e
+
+@param pattern | で連結したい正規表現を指定します
+
+
+  # オプションは合成されない
+  p Regexp.union(/foo/i, /bar/x, /hoge/m) #=> /(?i-mx:foo)|(?x-mi:bar)|(?m-ix:hoge)/
+
+  # 文字列そのものにマッチする
+  rep1 = [ "foo", "bar", "hoge"] 
+  p Regexp.union(*rep1) #=> /foo|bar|hoge/
+
+  # 下記の場合オプションがつくのは最初だけ
+  rep2 = [ /foo/x, "bar", "hoge"] 
+  p Regexp.union(*rep2) #=> /(?x-mi:foo)|bar|hoge/
+
 #@end
 
 == Instance Methods
