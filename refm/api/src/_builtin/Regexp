@@ -8,10 +8,15 @@
 Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 こともできます。
 
+  str = "this is regexp"
+  rp1 = Regexp.new("^this is regexp")
+  p rp1 =~ str           #=> 0
+  p Regexp.last_match[0] #=> "this is regexp"
+
 == Class Methods
 
---- compile(string[, option[, code]])
---- new(string[, option[, code]])
+--- compile(string[, option[, code]]) -> Regexp
+--- new(string[, option[, code]]) -> Regexp
 #@todo
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して
@@ -45,6 +50,35 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 正規表現のコンパイルに失敗した場合、例外 [[c:RegexpError]] が発生
 します。
+
+@param string 正規表現を文字列として与えます。
+
+@param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],  [[m:Regexp::EXTENDED]] の論理和を指定します。
+
+@param code 文字コードを[[m:$KCODE]] への代入と同様の文字列で指定します。
+
+@raise  RegexpError
+  正規表現のコンパイルに失敗した場合発生します。
+
+  str = "This is Regexp"
+  t1 = Regexp.compile("this is regexp", Regexp::IGNORECASE)
+  t1.match(str)
+  puts $~ #=> This is Regexp 
+
+  t2 = Regexp.compile('
+	this         # ここは使用されない
+	\ is
+	\ regexp     # ここも使用されない
+  ', Regexp::EXTENDED | Regexp::IGNORECASE)
+  t2.match(str)
+  puts Regexp.last_match #=> This is Regexp
+
+  str = "ふるいけや\nかわずとびこむ\nみずのおと"
+  t2 = Regexp.compile("ふる.*?と", Regexp::MULTILINE)
+  puts t2.match(str)[0]  #=> ふるいけや
+                         #=> かわずと
+
+@see [[m:$KCODE]]
 
 --- escape(string[, kcode])
 --- quote(string[, kcode])
