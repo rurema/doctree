@@ -447,7 +447,6 @@ stickyビットが立っている時に真を返します。
 #@since 1.9.0
 #@# bc-rdoc: detected missing name: world_readable?
 --- world_readable? -> Fixnum | nil
-#@todo
 
 If stat is readable by others, returns an integer representing
 the file permission bits of stat. Returns nil otherwise. The
@@ -459,7 +458,6 @@ stat(2).
 
 #@# bc-rdoc: detected missing name: world_writable?
 --- world_writable? -> Fixnum | nil
-#@todo
 
 If stat is writable by others, returns an integer representing
 the file permission bits of stat. Returns nil otherwise. The
