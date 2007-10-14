@@ -40,7 +40,7 @@ ARGF を処理するごとに ARGV の要素は一つずつ取り除かれます。
     p ARGF.gets      # => nil
     p ARGF.filename  # => "-"
 
-[[m:Kernel#gets]] など一部の組み込み関数は
+[[m:Kernel.#gets]] など一部の組み込み関数は
 ARGF.gets などこのオブジェクトをレシーバとしたメソッドの省略形です。
 
 #@if (version >= "1.8.0")
@@ -251,7 +251,7 @@ self を返します。
   #=> "ARGF is closed."
   #=> "ARGF had been closed."
 
---- closed? -> boolean
+--- closed? -> bool
 ARGFがcloseされていればtrueを返します。
 
   # カレントディレクトリから適当にファイルを選ぶ
@@ -335,8 +335,8 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
 
 @see [[m:IO#each_byte]]
 
---- eof -> boolean
---- eof? -> boolean
+--- eof -> bool
+--- eof? -> bool
 現在開いているファイルがeofに達したらtrueを返します。そうでない場合はfalseを返します。
 
 @raise IOError ファイルがopenされていない場合
