@@ -31,7 +31,7 @@ _builtin/IOError                snoozer05       done
 _builtin/IndexError             snoozer05       done
 _builtin/Integer                ujihisa         done
 _builtin/Interrupt              kouya           done
-_builtin/Kernel                 eklerni
+_builtin/Kernel                 eklerni         done
 _builtin/KeyError               snoozer05       done
 _builtin/LoadError              snoozer05       done
 _builtin/LocalJumpError         snoozer05       done
