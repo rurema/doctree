@@ -57,7 +57,7 @@ _builtin/Process__Sys           sheepman        done
 _builtin/Process__UID           sheepman        done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
-_builtin/Regexp                 
+_builtin/Regexp                 kouya
 _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
 _builtin/ScriptError            snoozer05       done
