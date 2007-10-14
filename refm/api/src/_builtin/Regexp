@@ -17,7 +17,6 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 --- compile(string[, option[, code]]) -> Regexp
 --- new(string[, option[, code]]) -> Regexp
-#@todo
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して
 返します。
@@ -80,9 +79,8 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 @see [[m:$KCODE]]
 
---- escape(string[, kcode])
---- quote(string[, kcode])
-#@todo
+--- escape(string[, kcode]) -> String
+--- quote(string[, kcode]) -> String
 
 string の中で正規表現において特別な意味を持つ文字の直前にエ
 スケープ文字(バックスラッシュ)を挿入した文字列を返します。省略可能
@@ -91,8 +89,14 @@ string の中で正規表現において特別な意味を持つ文字の直前にエ
 
 文字コードの指定は [[m:$KCODE]] と同様に行います。
 
---- last_match
-#@todo
+@param string 正規表現において特別な意味をもつ文字をもつ文字列を指定します。
+
+@param kcode 文字コードを文字列で指定します。文字コードの指定は [[m:$KCODE]] と同様に行います。
+
+  rp = Regexp.escape("$bc^")
+  puts rp #=> \$bc\^
+
+--- last_match -> MatchData
 
 カレントスコープで最後に行った正規表現マッチの [[c:MatchData]] オ
 ブジェクトを返します。このメソッドの呼び出しは [[m:$~]]
@@ -105,8 +109,7 @@ string の中で正規表現において特別な意味を持つ文字の直前にエ
   p Regexp.last_match[2]   # => "b"
   p Regexp.last_match[3]   # => nil
 
---- last_match([nth])
-#@todo
+--- last_match([nth]) -> String | nil
 
 整数 nth が 0 の場合、マッチした文字列を返します
 ([[m:$&]])。それ以外では、nth 番目の括弧にマッチ
@@ -125,6 +128,20 @@ string の中で正規表現において特別な意味を持つ文字の直前にエ
 Regexp.last_match はnil を返すため、
 last_match[1] の形式では例外 [[c:NameError]] が発生します。
 対して、last_match(1) は nil を返します。
+
+  str = "This is Regexp"
+  /That is Regexp/ =~ str
+  p Regexp.last_match #=> nil
+  begin
+    p Regexp.last_match[1] # 例外が発生する
+  rescue 
+    puts $! #=> undefined method `[]' for nil:NilClass
+  end
+  p Regexp.last_match(1) #=> nil
+
+@param nth 整数を指定します。
+整数 nth が 0 の場合、マッチした文字列を返します。それ以外では、nth 番目の括弧にマッチした部分文字列を返します。
+
 
 #@since 1.8.1
 --- union([pattern, ...])
