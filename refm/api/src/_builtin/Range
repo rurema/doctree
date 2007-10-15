@@ -49,18 +49,17 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 == Instance Methods
 
---- ===(other) -> bool
---- include?(other) -> bool
+--- ===(obj) -> bool
+--- include?(obj) -> bool
 
-other が範囲内に含まれている時に真を返します。
+obj が範囲内に含まれている時に真を返します。
 
 [[m:Range#===]] は主に [[unknown:制御構造/case]] 文での比較に用いられます。
 
-#@since 1.8.0
-include? が、[[m:Enumerable#include?]],
-[[m:Enumerable#member?]] と異なり <=> メソッド
-による演算により範囲内かどうかを判定することに注意する必要がありま
-す。
+include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
+ と異なり <=> メソッドによる演算により範囲内かどうかを判定することに注意する必要があります。
+
+@param obj 比較対象のオブジェクト
 
   p (0.1 .. 0.2).include?(0.15) # => true
   # 1.8.1 以前
@@ -75,7 +74,7 @@ include? が、[[m:Enumerable#include?]],
   # 1.8.2 以降
   p ("a" .. "c").member?("ba")  # => true
   
-#@end
+
 
 --- begin -> object
 --- first -> object
