@@ -117,14 +117,12 @@ fatal は発生しません。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
-
 --- critical             -> nil
 --- critical=(newstate)
 
 #@since 1.9.0
 サポートされていません。警告を出力し、何もせずに nil を返します。
 #@else
-
 真である間、スレッドの切替えを行いません。
 
 カレントスレッドが停止状態になった場合や、シグナルに割り込まれた場合には、
@@ -146,29 +144,45 @@ fatal は発生しません。
 
 現在実行中のスレッド(カレントスレッド)を返します。
 
---- exit    -> Thread
+  p Thread.current #=> #<Thread:0x4022e6fc run>
+
+--- exit    -> ()
 
 カレントスレッドに対して [[m:Thread#exit]] を呼びます。
 
 --- kill(thread)    -> Thread
 
-指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。
+指定したスレッド thread に対して [[m:Thread#exit]] を呼びます。終了したスレッドを返します。
 
 @param thread 終了したい Thread オブジェクトを指定します。
 
+  th = Thread.new do
+  end
+    
+  p Thread.kill(th)     #=> #<Thread:0x40221bc8 dead>
+
 --- list    -> [Thread]
 
+#@since 1.8.0
+全ての生きているスレッドを含む配列を生成して返します。aborting 状態であるスレッド
+も要素に含まれます。
+#@else
 生きているスレッドのうち、実行中(run)または停止中(stop)のスレッド
 の配列を返します。
-
-#@since 1.8.0
-version 1.8 では、aborting 状態であるスレッド
-も要素に含まれます。つまり「生きている」スレッドの配列を返します
 #@end
+
+  Thread.new do
+    sleep 
+  end
+  sleep 0.1
+  
+  p Thread.list   #=> [#<Thread:0x40377a54 sleep>, #<Thread:0x4022e6fc run>]
 
 --- main    -> Thread
 
 メインスレッドを返します。
+
+  p Thread.main #=> #<Thread:0x4022e6fc run>
 
 --- new(*arg) {|*arg| ... }         -> Thread
 --- start(*arg) {|*arg| ... }       -> Thread
@@ -198,8 +212,28 @@ version 1.8 では、aborting 状態であるスレッド
 --- pass    -> nil
 
 他のスレッドに実行権を譲ります。実行中のスレッドの状態を変えずに、
-他の実行可能状態のスレッドに制御を移します(明示的なスケジューリン
-グ)。
+他の実行可能状態のスレッドに制御を移します。
+
+ Thread.new do
+   (1..3).each{|i|
+     p i
+     Thread.pass
+   }
+   exit
+ end
+ 
+ loop do
+   Thread.pass
+   p :main
+ end
+
+ #=>
+ 1
+ :main
+ 2
+ :main
+ 3
+ :main
 
 --- stop     -> nil
 
@@ -220,7 +254,7 @@ name に対応するスレッド固有データがなければ nil を返し
 
 val を name に対応するスレッド固有のデータとして格納します。
 
-@param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。
+@param name スレッド固有データのキーを文字列か [[c:Symbol]] で指定します。文字列を指定した場合は [[m:String#to_sym]] によりシンボルに変換されます。
 
 @param val スレッド固有データを指定します。nil を指定するとそのスレッド固有データは削除されます。
 
@@ -247,10 +281,10 @@ val を name に対応するスレッド固有のデータとして格納します。
 --- terminate    -> self
 
 スレッドの実行を終了させます。終了時に ensure 節が実行されます。
+
 ただし、スレッドは終了処理中(aborting)にはなりますが、
 直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
 終了したスレッドの [[m:Thread#value]] の返り値は不定です。
-
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
 により終了します。
 
@@ -272,10 +306,11 @@ val を name に対応するスレッド固有のデータとして格納します。
 --- kill!         -> self
 --- terminate!    -> self
 
-ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(aborting)にはなりますが、
+ensure 節を実行せずにスレッドの実行を終了させます。
+
+ただし、スレッドは終了処理中(aborting)にはなりますが、
 直ちに終了するとは限りません。すでに終了している場合は何もしません。このメソッドにより
 終了したスレッドの [[m:Thread#value]] の返り値は不定です。
-
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
 により終了します。
 
@@ -305,11 +340,10 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 --- group    -> ThreadGroup | nil
 
 スレッドが属している [[c:ThreadGroup]] オブジェクトを返します。
+死んでいるスレッドは nil を返します。
 
     p Thread.current.group == ThreadGroup::Default
     # => true
-
-死んでいるスレッドは nil を返します。
 
 --- join           -> self
 #@since 1.8.0
@@ -323,7 +357,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。ただし、スレッドは終了処理中(
 #@since 1.8.0
 limit を指定して、limit 秒過ぎても自身が終了しない場合、nil を返します。
 
-@param limit タイムアウトする時間を整数か小数で指定します。
+@param limit タイムアウトする時間を整数か小数で指定します。単位は秒です。
 #@end
 
 @raise ThreadError join を実行することによってデッドロックが起きる場合に発生します。またカレントスレッドを join したときにも発生します。
