@@ -31,85 +31,85 @@ Ruby 1.8 以降では、[[c:File]] ではなく、[[c:IO]] でインクルード
 ロックの際にブロックしない。他の指定と or することで指定します。
 [[m:File#flock]] で使用します。
 
-#@# [[m:File#open]] で使われる定数 -----------------------------------
+#@# [[m:File.open]] で使われる定数 -----------------------------------
 
 --- RDONLY
 読み込みのみのモードでファイルを開くときに指定します。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- WRONLY
 書き込みのみのモードでファイルを開くときに指定します。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- RDWR
 読み書き両方のモードでファイルを開くときに指定します。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- APPEND
 追記モードでファイルを開くときに指定します。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- CREAT
 ファイルがなければ作成するよう指定します。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- EXCL
 CREATと併用し、もしファイルが既にある場合には失敗します。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- NONBLOCK
 ファイルが利用可能じゃなくてもブロックしません。
 #@# IO.open で使用、かも...
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- TRUNC
 もしファイルが存在するなら、中身を抹消してサイズをゼロにします。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- NOCTTY
 自身がTTY制御しないようにTTYを開きます。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- BINARY
 ファイルをバイナリとして開きます。
 open(2) で O_BINARYが指定できる場合に使えます。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
 --- SYNC
 ファイルを同期モードで開きます。
 open(2) で O_SYNCが指定できる場合に使えます。
-[[m:File#open]]で使用します。
+[[m:File.open]]で使用します。
 
-#@# [[m:File#fnmatch]], [[m:Dir#glob で使われる定数 ------------------
+#@# [[m:File.fnmatch]], [[m:Dir#glob で使われる定数 ------------------
 
 --- FNM_NOESCAPE
 エスケープ文字 `\' を普通の文字とみなします。
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+[[m:File.fnmatch]], [[m:Dir#glob]]で使用します。
 
 --- FNM_PATHNAME
 ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
 シェルのパターンマッチにはこのフラグが使用されています。
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+[[m:File.fnmatch]], [[m:Dir#glob]]で使用します。
 
 #@if (version >= "1.8.0")
 --- FNM_DOTMATCH
 ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+[[m:File.fnmatch]], [[m:Dir#glob]]で使用します。
 
 1.8.0以前では、FNM_DOTMATCHという名前でした。
 #@else
 --- FNM_PERIOD
 ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
 1.8.0以降では、FNM_DOTMATCH に置き換えられました。
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+[[m:File.fnmatch]], [[m:Dir#glob]]で使用します。
 #@end
 
 --- FNM_CASEFOLD
 アルファベットの大小文字を区別せずにパターンマッチを行います。
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+[[m:File.fnmatch]], [[m:Dir#glob]]で使用します。
 
 #@since 1.8.5
 --- FNM_SYSCASE
 case hold なファイルシステムの場合、FNM_CASEFOLD の値になり、そうでなければゼロの値になります。
-[[m:File#fnmatch]], [[m:Dir#glob]]で使用します。
+[[m:File.fnmatch]], [[m:Dir#glob]]で使用します。
 #@end
