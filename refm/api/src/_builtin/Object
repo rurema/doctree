@@ -113,10 +113,8 @@ other が self 自身の時、真を返します。
 #@todo
 #@since 1.8.0
 --- methods(include_inherited = true) -> [String]
---- instance_methods(include_inherited = true) -> [String]
 #@else
 --- methods -> [String]
---- instance_methods -> [String]
 #@end
 
 そのオブジェクトに対して呼び出せるメソッド名の一覧を文字列の配列で返します。
@@ -387,45 +385,42 @@ singleton_methods(false) は、
 
 オブジェクトの文字列への暗黙の変換が必要なときに呼ばれます。
 
-#@since 1.8.4
---- to_enum(method = :each, *args) -> 
---- enum_for(method = :each, *args) -> 
-#@todo
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#@since 1.9.0
+--- to_enum(method = :each, *args) -> Enumerable::Enumerator
+--- enum_for(method = :each, *args) -> Enumerable::Enumerator
 
 [[m:Enumerable::Enumerator.new]](self, method, *args) を返します。
+
+@param method メソッド名の文字列かシンボルです。
+@param args 渡される引数です。
 
   str = "xyz"
 
   enum = str.enum_for(:each_byte)
-  a = enum.map {|b| '%02x' % b } #=> ["78", "79", "7a"]
+  p(a = enum.map {|b| '%02x' % b }) #=> ["78", "79", "7a"]
 
   # protects an array from being modified
   a = [1, 2, 3]
-  some_method(a.to_enum)
+  p(a.to_enum) #=> #<Enumerable::Enumerator:0xbaf7ac>
+
+@see [[c:Enumerable::Enumerator]]
 #@end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 --- __id__ -> Integer
 --- object_id -> Integer
@@ -437,8 +432,14 @@ singleton_methods(false) は、
 てどのような整数が割り当てられるかは不定です。
 
 Rubyでは、(Garbage Collectされていない)アクティブなオブジェクト間で
-重複しない整数(object_id)が１オブジェクトに１つの割合で割り当てられています。この
+重複しない整数(object_id)が各オブジェクトにひとつずつ割り当てられています。この
 メソッドはその値を返します。
+
+[[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], [[c:Symbol]], [[c:Fixnum]] クラス
+のインスタンスなど Immutable（変更不可）なオブジェクトの一部は同じ内容ならば必ず同じ object_id になります。
+
+これは、Immutable ならば複数の場所から参照されても`破壊的操作'による問題が発生しないので、
+同じ内容のインスタンスを複数生成しないという内部実装が理由です。
 
 [[m:Symbol#to_i]]で得られる整数と object_id は別物です。
 
@@ -450,18 +451,20 @@ id メソッドの再定義に備えて別名 __id__ が用意されて
 id は obsolete なので、object_id か __id__ を使用してください。
 #@end
 
-  p self.object_id #=> 6189940
-  p 0.object_id #=> 1
-  p 0.0.object_id #=> 6127340
-  p nil.object_id #=> 4
+  p "ruby".object_id #=> 22759500
+  p "ruby".object_id #=> 22759400
   
-  p "ruby".object_id #=> 6126870
-  p "ruby".object_id #=> 6126850
-  p :ruby.object_id #=> 82168
-  p :ruby.object_id #=> 82168
+  p [].object_id #=> 22759360
+  p [].object_id #=> 22759340
   
-  p :ruby.to_i #=> 8216
-  p :ruby.to_i #=> 8216
+  p :ruby.object_id #=> 103538
+  p :ruby.object_id #=> 103538
+  
+  p 11.object_id #=> 23
+  p 11.object_id #=> 23
+
+  p true.object_id #=> 2
+  p true.object_id #=> 2
 
 @see [[m:Object#equal?]],[[c:Symbol]]
 
@@ -653,7 +656,7 @@ selfを人間が読める形式に変換した文字列を返します。
 オブジェクトを表示します。
 
   puts Class.new.inspect #=> #<Class:0xbafd88>
-  puts Proc.new{}.inspect #=> #<Proc:0xbafe3c@...>
+  puts Time.now.inspect #=> 2007-10-15 21:01:37 +0900
 
 @see [[m:Kernel.#p]]
 
@@ -682,6 +685,7 @@ selfを人間が読める形式に変換した文字列を返します。
 #@else
 @see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]]
 #@end
+#@end
 
 #@if (version >= "1.8.0")
 --- instance_variable_set(var, value) -> object
@@ -704,6 +708,7 @@ selfを人間が読める形式に変換した文字列を返します。
 #@else
 @see [[m:Object#instance_variable_get]],[[m:Object#instance_variables]]
 #@end
+#@end
 
 --- instance_variables -> [String]
 
@@ -716,7 +721,6 @@ selfを人間が読める形式に変換した文字列を返します。
     #=> ["@foo", "@bar"]
 
 @see [[m:Object#instance_variable_get]],[[m:Kernel.#local_variables]],[[m:Kernel.#global_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
-
 
 #@since 1.8.6
 --- instance_variable_defined?(var) -> bool
@@ -787,7 +791,7 @@ send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]],[[c:Proc]]
+@see [[m:Object#method]],[[m:Kernel.#eval]],[[c:Proc]]
 
 --- _dump(limit) -> String
 
@@ -921,8 +925,8 @@ clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 @raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], 
 #@if (version >= "1.8.0")
 #@#Ruby 1.8 では、
-  [[c:Symbol]], そして[[c:Numeric]] クラスのインスタンスなど immutable
-  (内容不変)であるオブジェクトを複製しようとすると発生します。
+  [[c:Symbol]], そして[[c:Numeric]] クラスのインスタンスなど一部の
+  オブジェクトを複製しようとすると発生します。
 #@else
   [[c:Symbol]] クラスのインスタンスを複製しようとすると発生します。
 #@end
@@ -961,10 +965,10 @@ clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 ==== 深いコピーと浅いコピー
 
 clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
-ている先(たとえば配列の要素など)までは複製しません。これを浅い(shallow)コピーといいます。
+ている先(たとえば配列の要素など)までは複製しません。これを浅いコピー(shallow copy)といいます。
 
 深い(deep)コピーが必要な場合には、
-[[c:Marshal]]クラスを利用して
+[[c:Marshal]]モジュールを利用して
   Marshal.load(Marshal.dump(obj))
 このように複製を作成する方法があります。ただしMarshal出来ないオブジェクトが
 含まれている場合には使えません。
@@ -1091,6 +1095,8 @@ include_private が真のときは private メソッドに対しても真を返します。
   #=> Bonjour
   #   Guten Tag
 
+@see [[m:Module#method_defined?]]
+
 --- method_missing(name, *args) -> object
 
 呼びだされたメソッドが定義されていなかった時、Rubyインタプリタがこのメソッド
@@ -1129,6 +1135,7 @@ include_private が真のときは private メソッドに対しても真を返します。
   dic = Foo.new({:English => %w(zero one two), :Esperanto => %w(nulo unu du)})
   dic.find_2_in :Esperanto #=> "du"
 
+
 --- instance_of?(klass) -> bool
 
 self がクラス klass の直接のインスタンスである時真を返します。
@@ -1147,7 +1154,7 @@ obj.kind_of?(c) も成立します。
     p obj.instance_of?(S)       # true
     p obj.instance_of?(C)       # false
 
-@see [[m:Object#kind_of?]]
+@see [[m:Object#kind_of?]],[[m:Object#class]]
 
 --- is_a?(klass_or_mod) -> bool
 --- kind_of?(klass_or_mod) -> bool
@@ -1173,7 +1180,7 @@ self が、クラス mod とそのサブクラス、および
     p obj.is_a?(M)       # true
     p obj.is_a?(Hash)    # false
 
-@see [[m:Object#instance_of?]], [[m:Module#===]]
+@see [[m:Object#instance_of?]],[[m:Module#===]],[[m:Object#class]]
 
 --- instance_eval(expr, filename = '(eval)', lineno = 1) -> object
 --- instance_eval {|obj| ... } -> object
@@ -1291,7 +1298,7 @@ type は obsolete です。 class を使用してください。
   p Class.class #=> Class
   p Kernel.class #=> Module
 
-@see [[m:Class#superclass]]
+@see [[m:Class#superclass]],[[m:Object#kind_of?]],[[m:Object#instance_of?]]
 
 --- taint -> self
 
@@ -1569,3 +1576,4 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 
 @see [[m:Module#method_undefined]],[[m:Object#singleton_method_added]],[[m:Object#singleton_method_removed]]
 #@end
+
