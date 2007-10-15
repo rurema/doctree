@@ -65,7 +65,7 @@ $? を参照することで判別可能です。
 
 command で指定されたコマンドを実行します。プロセスの実行コー
 ドはそのコマンド(あるいは shell)になるので、起動に成功した場
-合、この関数からは戻りません。
+合、このメソッドからは戻りません。
 
 一番目の形式では command が shell のメタ文字
 (* ? {} [] <> () ~ & | \ $ ; ' ` " \n)を含む場合、
@@ -113,7 +113,7 @@ statusがtrueの場合、EXIT_SUCCESSを
 終了ステータスとします。デフォルトの終了ステータスはEXIT_SUCCESSに
 変更されています。( EXIT_SUCCESS、EXIT_FAILUREはCレベルの定数 )
 #@end
-@param 終了ステータスを整数か真偽値で与えます。
+@param status 終了ステータスを整数か真偽値で与えます。
 
   puts 'start'
   begin
@@ -637,8 +637,8 @@ autoload 設定されていないか、ロード済みなら nil を返します。
 --- set_trace_func(&trace_proc) -> Proc
 --- set_trace_func(nil) -> nil
 
-Ruby インタプリタのイベントをトレースする trace_proc を登録します。
-nil指定でトレースをオフにします。
+Ruby インタプリタのイベントをトレースする trace_proc を登録します。 nil
+指定でトレースをオフにします。
 
 Ruby インタプリタがプログラムを実行する過程で、メソッドの呼び出しや
 式の評価などのイベントが発生する度に手続きオブジェクト trace_proc
@@ -705,7 +705,7 @@ event に応じ、以下のものが渡されます。
         [[c:Class]]オブジェクト。トップレベルでは false。
 
 @param trace_proc トレース用Procオブジェクトです。
-@return 登録したProcオブジェクトか、引数がnilならnilを返します。
+@return 登録したProcオブジェクトか、引数が nil なら nil を返します。
 @see [[m:Kernel.#caller]]
 
 #@#例...
@@ -1235,6 +1235,7 @@ at_exitがメソッドである点を除けば、[[unknown:制御構造/END]] ブロックによる終了
 
 @return nilを返します。
 #@end
+
   def try int
     n = 0
     loop do
@@ -1298,10 +1299,9 @@ iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
 
 --- catch(tag) {|tag| .... } -> object
 
-[[m:Kernel.#throw]]との組み合わせで大域脱出を行います。
+[[m:Kernel.#throw]]との組み合わせで大域脱出を行います。 catch はブロックを実行します。
 
-ブロックを実行してその値を返します。ブロックの実行中に
-tag と同じ名前の [[m:Kernel.#throw]] が行われた
+ブロックの実行中に tag と同じ名前の [[m:Kernel.#throw]] が行われた
 場合は、その throw の第二引数を戻り値として、ブロックの実行を終了します。
 
 主にネストしたループから一気に脱出するのに使用します。
@@ -1325,23 +1325,36 @@ tag と同じ名前の [[m:Kernel.#throw]] が行われた
 
 --- throw(tag, value = nil) -> ()
 
-[[m:Kernel.#catch]]との組み合わせで大域脱出を行います。
+[[m:Kernel.#catch]]との組み合わせで大域脱出を行います。 throw 
+は同じ tag を指定した catch のブロックの終わりまでジャンプします。
 
-同じ tag を指定した [[m:Kernel.#catch]] のブロックの
-終わりまでメソッドを越えて脱出します。もし同じ tag で
-待っている catch が存在しない場合は [[c:NameError]] で
+throw は探索時に呼び出しスタックをさかのぼるので、
+ジャンプ先は同じメソッド内にあるとは限りません。
+もし ensure節 が存在するならジャンプ前に実行します。
+
+もし同じ tag で待っている catch が存在しない場合は [[c:NameError]] で
 スレッドが終了します。
 
 @param tag 文字列またはシンボルです。
 @param value catch の戻り値になります。
 @raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
 
-  ret = catch(:exit) {
-     throw :exit, 25
-     some_process()    # 絶対に実行されない
-     10
-  }
-  p ret #=> 25
+  def foo
+    throw :exit, 25
+  end
+  
+  ret = catch(:exit) do
+    begin
+      foo
+      some_process()    # 絶対に実行されない
+      10
+    ensure
+      puts "ensure"
+    end
+  end
+  puts ret
+  #=> ensure
+  #   25
 
 @see [[m:Kernel.#catch]]
 
@@ -1366,7 +1379,7 @@ max.to_i.abs（引数の整数表現の絶対値）が 0以外 の場合、
   p rand(0.9) #=> 0.195303845149051
   p rand(1.5) #=> 0
 
-@see [[m:Kernel.#srand]]
+@see [[m:Kernel.#srand]],[[m:Object#to_i]],,[[m:Object#abs]]
 
 --- srand -> Integer
 --- srand(seed) -> Integer
@@ -1385,7 +1398,7 @@ seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 seed として unsigned long よりも大きな値を与えることは出来ません。
 #@end
 
-@param 初期値となる数値 seed です。
+@param seed 初期値となる数値です。
 
   num = 455675
   seeds = []
@@ -1415,7 +1428,7 @@ seed として unsigned long よりも大きな値を与えることは出来ません。
   
   p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 
-@see [[m:Kernel.#rand]]
+@see [[m:Kernel.#rand]],[[m:Object#to_i]]
 
 --- global_variables -> [String]
 
@@ -1437,121 +1450,117 @@ seed として unsigned long よりも大きな値を与えることは出来ません。
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #@if (version < "1.9.0")
 --- sub(pattern[, replace) -> 
 --- sub!(pattern[, replace]) -> 
 --- sub(pattern) {|matched| ... } -> 
 --- sub!(pattern) {|matched| ... } -> 
 
-組み込み変数 [[m:$_]] の指す文字列内で pattern に
+組み込み変数 $_ の指す文字列内で pattern に
 マッチする最初の部分を replace に置き換えた文字列を返します。
 
-引数 replace が省略された時にはイテレータとして動作し、ブロッ
-クを評価した結果で置換を行います。ブロックには引数としてマッチした
-文字列が渡されます。
+$_.sub, $_.sub! とほぼ同じです。
 
-sub! は $_ の指している文字列そのものを書き換えます。
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.sub, $_.sub! を使ってください。
 
-String#sub と関数 sub では以下の点で違いがあります。
+$_.sub とこのメソッド sub は以下の点で違いがあります。
 
-subメソッドは $_ の値をコピーして、コピーの方を更新し、
-$_ に((*再代入*))します。
+  * sub は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
-@param 
-@param 
-@see [[m:String#sub]]
+@param pattern [[m:String#sub]]参照
+@param replace [[m:String#sub]]参照
+@see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace) -> 
 --- gsub!(pattern, replace) -> 
 --- gsub(pattern) {|matched| ... } -> 
 --- gsub!(pattern) {|matched| ... } -> 
 
-組み込み変数 [[m:$_]] の指す文字列内で pattern に
+組み込み変数 $_ の指す文字列内で pattern に
 マッチする部分を全て replace に置き換えた文字列を返します。
-引数 replace が省略された時にはイテレータとして動作し、ブロッ
-クを評価した結果で置換を行います。ブロックには引数としてマッチした
-文字列が渡されます。
 
-   $_ = "foobar"
-   p gsub(/o+/) {|m|
-     m.upcase
-   }
-   #=> "fOObar"
+$_.gsub, $_.gsub! とほぼ同じです。
 
-gsub! は $_ の指している文字列そのものを書き換えます。
-詳細は、[[m:String#gsub]] を参照してください。
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.gsub, $_.gsub! を使ってください。
 
-このメソッドは将来のバージョンで取り除かれるので、より明示的な $_.gsub を使用してください。
+$_.gsub とこのメソッド gsub は以下の点で違いがあります。
 
-String#gsub と関数 gsub では以下の点で違いがあります。
+  * gsub は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
 
-* gsubメソッドは $_ の値をコピーして、コピーの方を更新し、
-  $_ に((*再代入*))します。
+@param pattern [[m:String#gsub]]参照
+@param replace [[m:String#gsub]]参照
+@see [[m:String#gsub]],[[m:$_]]
 
 --- chop -> String
 --- chop! -> String|nil
 
-組み込み変数 [[m:$_]] を最後の文字を取り除いたものにし
+組み込み変数 $_ を最後の文字を取り除いたものにし
 ます(終端が"\r\n"であれば2文字取り除きます)。
+
 chop! は文字列そのものを変更しその結果を返しますが、
 取り除く文字列がなければ nil を返します。
 
-このメソッドは将来のバージョンで取り除かれるので、より明示的な $_.chop を使用してください。
+$_.chop, $_.chop! とほぼ同じです。
 
-$_.chop と関数 chop では以下の点で違いがあります。
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chop, $_.chop! を使ってください。
 
-* chop は $_ の値をコピーして、コピーの方を更新し、
+$_.chopとこのメソッド chop は以下の点で違いがあります。
+
+  * chop は $_ の値をコピーして、コピーの方を更新し、
   $_ に再代入します。
 
-@see [[m:String#chop]]
+@see [[m:String#chop]],[[m:$_]]
 
 --- chomp(rs = $/) -> String
 --- chomp!(rs = $/) -> String|nil
 
-組み込み変数 [[m:$_]] を rs で指定される末尾
+組み込み変数 $_ を rs で指定される末尾
 の文字列を取り除いたものにします。
+
 chomp! は文字列そのものを変更しその結果を返しますが、
 取り除く文字列がなければ nil を返します。
-rs のデフォルト値は [[m:$/]] です。
+rs のデフォルト値は $/ です。
 
-このメソッドは将来のバージョンで取り除かれるので、より明示的な $_.chomp を使用してください。
+$_.chomp, $_.chomp! とほぼ同じです。
 
-$_.chomp と関数 chomp では以下の点で違いがあります。
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.chomp, $_.chomp!を使ってください。
 
-* chomp は $_ の値をコピーして、コピーの方を更新し、
-  $_ に((*再代入*))します。
+$_.chomp とこのメソッド chomp は以下の点で違いがあります。
 
-@param 取り除く文字列です。
-@see [[m:String#chomp]]
+  * chomp は $_ の値をコピーして、コピーの方を更新し、
+  $_ に再代入します。
+
+@param rs [[m:String#chomp]]参照
+@see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 
 --- split([sep[, limit]]) -> 
 
-[[m:$_]] の示す文字列をパターン sep によって
-limit 個の文字列に分割し、その配列を返します。
-詳細は [[m:String#split]] を参照してください。
+$_.split と同じです。
+
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.split を使ってください。
+
+@param sep [[m:String#split]]参照
+@param limit [[m:String#split]]参照
+@see [[m:String#split]],[[m:$_]]
 
 --- scan(re) -> 
 --- scan(re) {|matched| ... } -> 
 
+$_.scan と同じです。
 
-[[m:$_]].scan と同じです。
+暗号的になりすぎるきらいがあるため、このメソッドの使用は推奨されていません。
+今後はより明示的な $_.scan を使ってください。
 
-See also [[m:String#scan]].
+@param re [[m:String#scan]]参照
+@see [[m:String#scan]],[[m:$_]]
+
 #@end
 
 --- trap(signal, command) -> object
@@ -1562,8 +1571,8 @@ command を登録します。[[m:Signal.#trap]]と同じです。
 
 [[m:Signal.#trap]]の使用を推奨します。
 
-@param signal [[m:Signal.#trap]]と同じです。
-@param command [[m:Signal.#trap]]と同じです。
+@param signal [[m:Signal.#trap]]参照
+@param command [[m:Signal.#trap]]参照
 
 @see [[m:Signal.#trap]],[[c:Signal]]
 #@else
@@ -1620,85 +1629,6 @@ trap 実行前に"IGNORE" や "DEFAULT" が登録されていたなら、
 ILL FPE SEGV TERM BREAK ABRT そして EXIT しか指定できません。-))
 #@end
 
---- printf(port = $stdout, format, *arg) -> nil
-
-C 言語の printf と同じように、format に従い引数を文字列に変
-換して port に出力します。
-
-第一引数が [[c:IO]] のサブクラスのインスタンスであった場合はそのオブジェクトに対して出力を
-行ないます。
-
-引数を 1 つも指定しなければ何もしません。
-
-Ruby における format 文字列の拡張については
-[[m:Kernel.#sprintf]]の項を参照してください。
-
-@param port 出力先になる[[c:IO]] のサブクラスのインスタンスです。
-@param format 
-@param arg 
-@return nil を返します。
-@raise ArgumentError portを指定したのにformatを省略した場合に発生します。
-@raise IOError portが書き込み用にオープンされていなければ発生します。
-@raise Errno::EXXX 出力に失敗した場合に発生します。 
-
-#@#printfの使用例を...
-
-@see [[m:Kernel.#sprintf]],[[m:IO#printf]]
-
---- sprintf(format,*arg) -> String
---- format(format,*arg) -> String
-
-format 文字列を C 言語の sprintf と同じように解釈し、
-引数をフォーマットした文字列を返します。
-
-Ruby には整数の大きさに上限がないので、%b, %o, %x
-に負の数を与えると (左側に無限に1が続くとみなせるので)
-..f のような表示をします。絶対値に符号を付けた形式
-で出力するためには %+x、% x のように指定します。
-
-@param format 
-@param arg 
-@see [[m:Kernel.#printf]]
-
-#@include(printf-format)
-
---- binding -> Binding
-
-変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
-生成して返します。通常、[[m:Kernel.#eval]] の第二引数として使います。
-
-  some = binding
-  p some #=> #<Binding:0xbb01ac>
-
-@see [[c:Binding]],[[m:Kernel.#eval]]
-
-#@#--- eval(expr, bind = binding(), filename = __FILE__, lineno = 1) -> object
---- eval(expr, bind = TOPLEVEL_BINDING, filename = '(eval)', lineno = 1) -> object
-
-文字列 expr を Ruby プログラムとして評価してその結果を返しま
-す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
-クトを与えた場合、そのオブジェクトを生成したコンテキストで文字列を
-評価します。
-
-filename と lineno が与えられた場合には、ファイル
-filename 行番号 lineno に文字列があるかのように
-コンパイルされ、スタックトレースの表示などを差し替えることが
-できます。
-
-@param expr  評価したい式を文字列で与えます。
-@param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクト
-@param filename ファイル名を文字列で与えます。式 expr が filename というファイル名にあるかのように実行されます。
-@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
-
-  def foo
-    a = 1
-    binding
-  end
-
-  eval("p a", foo)  #=> 1
-
-@see [[m:Kernel.#binding]],[[m:Kernel::TOPLEVEL_BINDING]],[[m:Module#class_eval]],[[m:Object#instance_eval]]
-
 --- trace_var(varname, hook) -> [String|Proc]|nil
 --- trace_var(varname) {|new_val| .... } -> [String|Proc]|nil
 
@@ -1711,7 +1641,7 @@ filename 行番号 lineno に文字列があるかのように
 値が代入されるたびに hook かブロックが評価されます。hook が Proc オブジェクトの場合
 代入された値がブロック引数に渡されます。文字列の場合はRubyコードとして評価されます。
 
- trace_var がフックするのは明示的な代入だけです。
+trace_var がフックするのは明示的な代入だけです。
 フックは複数登録できます。
 
 トレースを解除するには、hook に nil を
@@ -1762,6 +1692,126 @@ varname のフックを全て解除します。
 
 @see [[m:Kernel.#trace_var]]
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- printf(port = $stdout, format, *arg) -> nil
+
+C 言語の printf と同じように、format に従い引数を文字列に変
+換して port に出力します。
+
+第一引数が [[c:IO]] のサブクラスのインスタンスであった場合はそのオブジェクトに対して出力を
+行ないます。
+
+引数を 1 つも指定しなければ何もしません。
+
+Ruby における format 文字列の拡張については
+[[m:Kernel.#sprintf]]の項を参照してください。
+
+@param port 出力先になる[[c:IO]] のサブクラスのインスタンスです。
+@param format 
+@param arg 
+@return nil を返します。
+@raise ArgumentError portを指定したのにformatを省略した場合に発生します。
+@raise IOError portが書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。 
+
+#@#printfの使用例を...
+
+@see [[m:Kernel.#sprintf]],[[m:IO#printf]]
+
+--- sprintf(format,*arg) -> String
+--- format(format,*arg) -> String
+
+format 文字列を C 言語の sprintf と同じように解釈し、
+引数をフォーマットした文字列を返します。
+
+Ruby には整数の大きさに上限がないので、%b, %o, %x
+に負の数を与えると (左側に無限に1が続くとみなせるので)
+..f のような表示をします。絶対値に符号を付けた形式
+で出力するためには %+x、% x のように指定します。
+
+@param format 
+@param arg 
+@see [[m:Kernel.#printf]]
+
+#@include(printf-format)
+
+
+
+
+
+
+
+--- binding -> Binding
+
+変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
+生成して返します。通常、[[m:Kernel.#eval]] の第二引数として使います。
+
+  some = binding
+  p some #=> #<Binding:0xbb01ac>
+
+@see [[c:Binding]],[[m:Kernel.#eval]]
+
+#@since 1.9.0
+--- eval(expr, bind = binding(), filename = '(eval)', lineno = 1) -> object
+#@else
+--- eval(expr) -> object
+--- eval(expr, bind, filename = __FILE__, lineno = 1) -> object
+#@end
+
+文字列 expr を Ruby プログラムとして評価してその結果を返しま
+す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
+クトを与えた場合、そのオブジェクトを生成したコンテキストで文字列を
+評価します。
+
+filename と lineno が与えられた場合には、ファイル
+filename 行番号 lineno に文字列があるかのように
+コンパイルされ、スタックトレースの表示などを差し替えることが
+できます。
+
+@param expr  評価したい式を文字列で与えます。
+@param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクト
+@param filename ファイル名を文字列で与えます。式 expr が filename というファイル名にあるかのように実行されます。
+@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
+
+  def foo
+    a = 1
+    binding
+  end
+
+  eval("p a", foo)  #=> 1
+[[m:Object#method]][[m:Object#send]]
+@see [[m:Kernel.#binding]],[[m:Kernel::TOPLEVEL_BINDING]],[[m:Module#class_eval]],[[m:Object#instance_eval]]
+
 --- proc { ... } -> Proc
 --- lambda { ... } -> Proc
 --- proc -> Proc
@@ -1785,7 +1835,7 @@ varname のフックを全て解除します。
 
 @raise ArgumentError スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
 
-=== lambdaとProc.newの違い
+==== lambdaとProc.newの違い
 
 --- raise -> ()
 --- raise(error_type) -> ()
