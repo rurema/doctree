@@ -200,7 +200,7 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になります。
 
   p File.umask                                  #=> 2
   Dir.mkdir('t', 0666)
-  p "%#o" % (07777 & File.stat('t').mode.to_i)  #=> "0664"
+  p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
 
 --- new(path)               -> Dir
 --- open(path)              -> Dir
