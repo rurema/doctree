@@ -195,8 +195,8 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 
 == Instance Methods
 
---- =~(string)
---- ===(string)
+--- =~(string) -> Fixnum | nil
+--- ===(string) -> bool
 #@todo
 
 文字列 string との正規表現マッチを行います。マッチした場合、
@@ -204,7 +204,11 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 場合、あるいは string が nil の場合には nil を返
 します。
 
-組み込み変数 [[m:$~]] にマッチに関する情報が設定されます。
+  p /foo/ =~ "foo"  #=> 0
+  p /foo/ =~ "afoo" #=> 1
+  p /foo/ =~ "bar"  #=> nil
+
+組み込み変数 [[m:$~]] もしくは [[m:Regexp.last_match]] にマッチに関する情報 [[c:MatchData]] が設定されます。
 
 string がnil でも [[c:String]] オブジェクトでもなけれ
 ば例外 [[c:TypeError]] が発生します。
@@ -214,6 +218,30 @@ Regexp#=== は、真偽値を返します。引数が文
 字列でないか、マッチしなければ false を、マッチすれば
 true を返します。
 #@end
+
+@param string 文字列を指定します。
+
+@raise TypeError
+	string がnil でも [[c:String]] オブジェクトでもなけい場合発生します。
+
+  p /foo/ =~ "foo"        #=> 0
+  p Regexp.last_match(0)  #=> "foo"
+  p /foo/ =~ "afoo"       #=> 1
+  p $~[0]                 #=> "foo"
+  p /foo/ =~ "bar"        #=> nil
+
+#@since 1.8.0
+  unless /foo/ === "bar"
+    puts "not match " #=> not match
+  end
+#@end
+
+  str = []
+  begin
+    /ugo/ =~ str
+  rescue TypeError
+    printf "! %s\t%s\n", $!, $@ #=> ! can't convert Array into String       r5.rb:15
+  end
 
 --- ~
 #@todo
