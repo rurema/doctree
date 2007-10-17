@@ -85,235 +85,302 @@ other が self 自身の時、真を返します。
 
 @see [[m:Object#object_id]],[[m:Object#==]],[[m:Object#eql?]]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#@todo
+#@since 1.9.0
+--- methods(include_inherited = true) -> [Symbol]
+#@else
 #@since 1.8.0
 --- methods(include_inherited = true) -> [String]
 #@else
 --- methods -> [String]
-#@end
 
-そのオブジェクトに対して呼び出せるメソッド名の一覧を文字列の配列で返します。
+[[m:Module#instance_methods]] と同じです。
+#@end
+#@end
 #@since 1.8.0
+そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
 このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
-第 1 引数 include_inherited が真のときは
-スーパークラスで定義されたメソッドも探索します。
+ただし特別に、引数が偽の時は [[m:Object#singleton_methods]](false) と同じになっています。
 #@end
 
-    class Foo
-      private;   def private_foo()   end
-      protected; def protected_foo() end
-      public;    def public_foo()    end
-    end
+#@if (version > "1.8.0")
 
 #@since 1.8.0
-    p Foo.new.methods(false)   # => ["protected_foo", "public_foo"]
-#@else
-    p Foo.new.methods(false)   # => ["public_foo"]
+@param include_inherited 引数が偽の時は [[m:Object#singleton_methods]](false) と同じになります。
 #@end
 
-なお、methods(false) は [[m:Object#singleton_methods]](false) と同じです。
+  #例1:
+  
+  class Parent
+    private;   def private_parent()   end
+    protected; def protected_parent() end
+    public;    def public_parent()    end
+  end
+  
+  class Foo < Parent
+    private;   def private_foo()   end
+    protected; def protected_foo() end
+    public;    def public_foo()    end
+  end
+  
+  obj = Foo.new
+  class <<obj
+      private;   def private_singleton()   end
+      protected; def protected_singleton() end
+      public;    def public_singleton()    end
+  end
+  
+  # あるオブジェクトの応答できるメソッドの一覧を得る。
+  p obj.methods(false)
+  p obj.public_methods(false)
+  p obj.private_methods(false)
+  p obj.protected_methods(false)
+  
+  #実行結果
+  
+#@since 1.9.0
+  [:protected_singleton, :public_singleton]
+  [:public_singleton, :public_foo]
+  [:private_singleton, :private_foo]
+  [:protected_singleton, :protected_foo]
+#@else
+  ["public_singleton", "protected_singleton"]
+  ["public_foo", "public_singleton"]
+  ["private_foo", "private_singleton"]
+  ["protected_foo", "protected_singleton"]
+#@end
+  
+  #例2:
+    
+  # あるオブジェクトの応答できるメソッドの一覧を得る。
+  # 自身のクラスの親クラスのインスタンスメソッドも含めるために true を指定して
+  # いるが、Object のインスタンスメソッドは一覧から排除している。
+  p obj.methods(true)           - Object.instance_methods(true)
+  p obj.public_methods(true)    - Object.public_instance_methods(true)
+  p obj.private_methods(true)   - Object.private_instance_methods(true)
+  p obj.protected_methods(true) - Object.protected_instance_methods(true)
+  
+  #実行結果
+  
+#@since 1.9.0
+  [:protected_singleton, :public_singleton, :protected_foo, :public_foo, :protected_parent, :public_parent]
+  [:public_singleton, :public_foo, :public_parent]
+  [:private_singleton, :private_foo, :private_parent]
+  [:protected_singleton, :protected_foo, :protected_parent]
+#@else
+  ["public_foo", "public_parent", "protected_singleton", "public_singleton", "protected_foo", "protected_parent"]
+  ["public_foo", "public_parent", "public_singleton"]
+  ["private_singleton", "private_foo", "private_parent"]
+  ["protected_singleton", "protected_foo", "protected_parent"]
+#@end
 
-[[m:Module#instance_methods]],
-[[m:Module#public_instance_methods]],
-[[m:Module#private_instance_methods]],
-[[m:Module#protected_instance_methods]],
-[[m:Object#singleton_methods]]
-も参照してください。
+#@end
 
-#@todo
+@see [[m:Module#instance_methods]],[[m:Object#singleton_methods]]
+
+#@since 1.9.0
+--- public_methods(include_inherited = true) -> [Symbol]
+#@else
 #@since 1.8.0
 --- public_methods(include_inherited = true) -> [String]
 #@else
 --- public_methods -> [String]
 #@end
-
-そのオブジェクトが理解できる public メソッド名の一覧を文字列の配列で返します。
-
-#@since 1.8.0
-第 1 引数 include_inherited が真のときは
-スーパークラスで定義されたメソッドも探索します。
 #@end
 
-    class Foo
-      private;   def private_foo()   end
-      protected; def protected_foo() end
-      public;    def public_foo()    end
-    end
+そのオブジェクトが理解できる public メソッド名の一覧を返します。
 
-    p Foo.new.public_methods(false)   # => ["public_foo"]
+#@since 1.8.0
+@param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
+#@end
+@see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-[[m:Module#instance_methods]],
-[[m:Module#public_instance_methods]],
-[[m:Module#private_instance_methods]],
-[[m:Module#protected_instance_methods]],
-[[m:Object#singleton_methods]]
-も参照してください。
-
-#@todo
+#@since 1.9.0
+--- private_methods(include_inherited = true) -> [Symbol]
+#@else
 #@since 1.8.0
 --- private_methods(include_inherited = true) -> [String]
 #@else
 --- private_methods -> [String]
 #@end
-
-そのオブジェクトが理解できる private メソッド名の一覧を文字列の配列で返します。
-
-#@since 1.8.0
-第 1 引数 include_inherited が真のときは
-スーパークラスで定義されたメソッドも探索します。
 #@end
 
-    class Foo
-      private;   def private_foo()   end
-      protected; def protected_foo() end
-      public;    def public_foo()    end
-    end
+そのオブジェクトが理解できる private メソッド名の一覧を返します。
 
-    p Foo.new.private_methods(false)   # => ["private_foo"]
+#@since 1.8.0
+@param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
+#@end
+@see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-[[m:Module#instance_methods]],
-[[m:Module#public_instance_methods]],
-[[m:Module#private_instance_methods]],
-[[m:Module#protected_instance_methods]],
-[[m:Object#singleton_methods]]
-も参照してください。
-
-#@todo
+#@since 1.9.0
+--- protected_methods(include_inherited = true) -> [Symbol]
+#@else
 #@since 1.8.0
 --- protected_methods(include_inherited = true) -> [String]
 #@else
 --- protected_methods -> [String]
 #@end
+#@end
 
-そのオブジェクトが理解できる protected メソッド名の一覧を文字列の配列で返します。
+そのオブジェクトが理解できる protected メソッド名の一覧を返します。
 
 #@since 1.8.0
-第 1 引数 include_inherited が真のときは
-スーパークラスで定義されたメソッドも探索します。
+@param include_inherited 偽となる値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
 #@end
+@see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-    class Foo
-      private;   def private_foo()   end
-      protected; def protected_foo() end
-      public;    def public_foo()    end
-    end
-
-    p Bar.new.protected_methods   # => ["protected_foo"]
-
-[[m:Module#instance_methods]],
-[[m:Module#public_instance_methods]],
-[[m:Module#private_instance_methods]],
-[[m:Module#protected_instance_methods]],
-[[m:Object#singleton_methods]]
-も参照してください。
-
-#@todo
+#@since 1.9.0
+--- singleton_methods(inherited_too = true) -> [Symbol]
+#@else
 #@if (version > "1.8.0")
---- singleton_methods(inherited_too = true) -> 
+--- singleton_methods(inherited_too = true) -> [String]
 #@end
 #@if (version == "1.8.0")
---- singleton_methods(inherited_too = false) -> 
+--- singleton_methods(inherited_too = false) -> [String]
 #@end
 #@if (version < "1.8.0")
---- singleton_methods -> 
-#@end
+--- singleton_methods -> [String]
 
 そのオブジェクトに対して定義されている特異メソッド名
-(public あるいは protected メソッド) の一覧を文字列の配列で返します。
-inherited_too が偽であれば、
-スーパークラスで定義されたメソッドは対象になりません。
-singleton_methods(false) は、
-[[m:Object#methods]](false) と同じです。
+(publicメソッドのみ) の一覧を返します。
+#@end
+#@end
+#@since 1.8.0
+そのオブジェクトに対して定義されている特異メソッド名
+(public あるいは protected メソッド) の一覧を返します。
 
-    obj = Object.new
-    module Foo
-      private;   def private_foo()   end
-      protected; def protected_foo() end
-      public;    def public_foo()    end
-    end
-
-    class <<obj
-      include Foo
-      private;   def private_bar()   end
-      protected; def protected_bar() end
-      public;    def public_bar()    end
-    end
-    p obj.singleton_methods
-    p obj.singleton_methods(false)
-
-    # => ["public_foo", "public_bar", "protected_foo", "protected_bar"]
-         ["public_bar", "protected_bar"]
-
-あるいは、[[m:Object#extend]] は特異クラスに対するイ
-ンクルードなので以下も同様になります。
-
-    obj = Object.new
-
-    module Foo
-      private;   def private_foo()   end
-      protected; def protected_foo() end
-      public;    def public_foo()    end
-    end
-
-    obj.extend(Foo)
-    p obj.singleton_methods
-    p obj.singleton_methods(false)
-
-    # => ["public_foo", "protected_foo"]
-         []
-
-クラスメソッド (クラスオブジェクトの特異メソッド) に関しては
+クラスメソッド([[c:Class]]のインスタンスの特異メソッド)に関しては
 引数が真のとき、スーパークラスのクラスメソッドも対象になります。
 
-    class Foo
-      def Foo.foo
-      end
+singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
+#@end
+
+#@if (version > "1.8.0")
+#@#@param inherited_too 偽を表す値を指定すると自身のクラスのスーパークラスで定義されたメソッドを除きます。
+@param inherited_too 引数が真のとき、スーパークラスのクラスメソッドも対象になります。これが意味を持つのは
+  self がクラスオブジェクトであるときだけです。
+
+  #例1:
+  
+  Parent = Class.new
+  
+  class <<Parent
+    private;   def private_class_parent() end
+    protected; def protected_class_parent() end
+    public;    def public_class_parent() end
+  end
+  
+  Foo = Class.new(Parent)
+  
+  class <<Foo
+    private;   def private_class_foo() end
+    protected; def protected_class_foo() end
+    public;    def public_class_foo() end
+  end
+  
+  module Bar
+    private;   def private_bar()   end
+    protected; def protected_bar() end
+    public;    def public_bar()    end
+  end
+  
+  obj = Foo.new
+  class <<obj
+    include Bar
+    private;   def private_self()   end
+    protected; def protected_self() end
+    public;    def public_self()    end
+  end
+  
+  # あるオブジェクトの特異メソッドの一覧を得る。
+  p obj.singleton_methods(false)
+  p obj.methods(false)
+  p Foo.singleton_methods(false)
+  
+  #実行結果
+  
+#@since 1.9.0
+  [:protected_self, :public_self]
+  [:protected_self, :public_self]
+  [:protected_class_foo, :public_class_foo]
+#@else
+  ["public_self", "protected_self"]
+  ["public_self", "protected_self"]
+  ["public_class_foo", "protected_class_foo"]
+#@end
+
+  
+  #例2:
+  
+  # あるオブジェクトの特異メソッドの一覧を得る。
+  # 親クラスのクラスメソッドも含まれるよう true を指定したが、
+  # Object のクラスメソッドは一覧から排除している。
+  
+  p obj.singleton_methods(true)
+  p Foo.singleton_methods(true) - Object.singleton_methods(true)
+  
+  #実行結果
+  
+#@since 1.9.0
+  [:protected_self, :public_self, :protected_bar, :public_bar]
+  [:protected_class_foo, :public_class_foo, :protected_class_parent, :public_class_parent]
+#@else
+  ["public_bar", "public_self", "protected_bar", "protected_self"]
+  ["public_class_foo", "public_class_parent", "protected_class_foo", "protected_class_parent"]
+#@end
+#@end
+
+@see [[m:Object#methods]],[[m:Object#extend]]
+
+#@since 1.9.0
+--- to_splat -> Array
+#@#nomethod
+
+オブジェクトの [[c:Array]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。`*'による配列展開の実体です。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+メソッド呼び出し時に引数に`*'をつけたり、
+多重代入の右辺値に`*'をつけてたりして配列変換を行ったときに内部で呼ばれます。
+
+  class Foo
+    def to_ary
+      [1,2,3]
     end
-
-    class Bar < Foo
-      def Bar.bar
-      end
+    def to_splat
+      [4,5,6]
     end
+  end
 
-    p Bar.singleton_methods        #=> ["bar", "foo"]
-    p Bar.singleton_methods(false) #=> ["bar"]
+  a,b = *Foo.new
+  p [a,b] #=> [4, 5]
+  a,b = Foo.new
+  p [a,b] #=> [1, 2]
+  
+  def doi(a,*b)
+    p b
+  end
+  
+  doi(*Foo.new) #=> [5, 6]
 
-#@# to_ary, to_hash, to_int, to_str は、説明の便宜上このページに書
-#@# いてますが、デフォルトでは Object のメソッドとしては定義されていません
-
+@see [[m:Object#to_ary]],[[m:Object#to_a]],[[m:kernel.#Array]]
+#@end
 --- to_a -> Array
-#@todo
+#@#nomethod
 
 オブジェクトを配列に変換した結果を返します。
+#@since 1.9.0
+デフォルトでは定義されていません。
 
-#@if (version < "1.9.0")
-配列に変換できないオブジェクトは、自身のみを含む長さ 1 の配
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+#@else
+
+配列に変換できない(to_ary を持たない)オブジェクトは、自身のみを含む長さ 1 の配
 列に変換されます。
 このメソッドは、将来 Object のメソッドからは取り除かれます。
 なので to_a を使用する場合、
@@ -322,57 +389,23 @@ singleton_methods(false) は、
   ユーザー定義のクラスには必要に応じて自分で定義する
 
 などということが必要です。
-
-#@else
-このメソッドは、説明の便宜上このページに書
-いていますが、デフォルトでは Object のメソッドとしては定義されていません。
-個々のクラスで別々に定義されてはいます。よって
 #@end
-
+#@since 1.9.0
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
     p 1.to_a            # [1]       (warning: default `to_a' will be obsolete)
-    p 'str'.to_a        # ["str"]
+    p nil.to_a          # []
 
---- to_ary -> Array
-#@todo
+@see [[m:Object#to_ary]],[[m:Object#to_splat]],[[m:kernel.#Array]]
+#@else
+    p( {'a'=>1}.to_a )  # [["a", 1]]
+    p ['array'].to_a    # ["array"]
+    p nil.to_a          # []
 
-オブジェクトを配列に変換した結果を返します。
+@see [[m:Object#to_ary]],[[m:kernel.#Array]]
+#@end
 
-オブジェクトの配列への暗黙の変換が必要なときに内部で呼ばれます。
-
-==== 注意
-
-このメソッドは、説明の便宜上このページに書
-いていますが、デフォルトでは Object のメソッドとしては定義されていません。
-配列として振舞う。
-
-このメソッドが定義されたオブジェクトが単独で多重代入の右辺に
-現れた場合にも呼ばれます。
-
-    class Foo
-      def to_ary
-        [1, 2, 3]
-      end
-    end
-
-    a, b, c = Foo.new
-    p [a, b, c]
-
-    #=> [1, 2, 3]
-
---- to_hash -> 
-#@todo
-
-オブジェクトのハッシュへの暗黙の変換が必要なときに内部で呼ばれます。
-
---- to_int -> 
-#@todo
-
-オブジェクトの整数への暗黙の変換が必要なときに内部で呼ばれます。
-
---- to_s -> 
-#@todo
+--- to_s -> String
 
 オブジェクトの文字列表現を返します。
 
@@ -380,26 +413,192 @@ singleton_methods(false) は、
 オブジェクトが引数に渡された場合このメソッドを使って文字列に変換し
 ます。
 
---- to_str -> 
-#@todo
+  class Foo
+    def initialize num
+      @num = num
+    end
+  end
+  it = Foo.new(40)
+  
+  puts it #=> #<Foo:0x2b69110>
+  
+  class Foo
+   def to_s
+     "Class:Foo Number:#{@num}"
+   end
+  end
+  
+  puts it #=> Class:Foo Number:40
 
-オブジェクトの文字列への暗黙の変換が必要なときに呼ばれます。
+@see [[m:Object#to_str]],[[m:kernel.#String]]
+--- to_str -> String
+#@#nomethod
+
+オブジェクトの [[c:String]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+このメソッドを定義する条件は、
+  文字列が使われるすべての場面で代置可能であるような、
+  文字列そのものとみなせるようなもの
+という厳しいものになっています。
+
+  class Foo
+   def to_str
+     'Edition'
+   end
+  end
+  
+  it = Foo.new
+  p('Second' + it) #=> "SecondEdition"
+
+@see [[m:Object#to_s]],[[m:kernel.#String]]
+--- to_ary -> Array
+#@#nomethod
+
+オブジェクトの [[c:Array]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+このメソッドを定義する条件は、
+  配列が使われるすべての場面で代置可能であるような、
+  配列そのものとみなせるようなもの
+という厳しいものになっています。
+
+  class Foo
+   def to_ary
+     [3,4]
+   end
+  end
+  
+  it = Foo.new
+  p([1,2] + it) #=> [1, 2, 3, 4]
+
+#@since 1.9.0
+@see [[m:Object#to_a]],[[m:kernel.#Array]]
+#@else
+@see [[m:Object#to_splat]],[[m:Object#to_a]],[[m:kernel.#Array]]
+#@end
+
+--- to_hash -> Hash
+#@#nomethod
+
+オブジェクトの [[c:Hash]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+このメソッドを定義する条件は、
+  ハッシュが使われるすべての場面で代置可能であるような、
+  ハッシュそのものとみなせるようなもの
+という厳しいものになっています。
+
+  class Foo
+   def to_hash
+     {'as' => 24}
+   end
+  end
+  
+  it = Foo.new
+  p({:as => 12}.merge(it)) #=> {"as"=>24, :as=>12}
+
+--- to_int -> Integer
+#@#nomethod
+
+オブジェクトの [[c:Integer]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+このメソッドを定義する条件は、
+  整数が使われるすべての場面で代置可能であるような、
+  整数そのものとみなせるようなもの
+という厳しいものになっています。
+
+  class Foo
+   def to_int
+     666
+   end
+  end
+  
+  it = Foo.new
+  p(9**9 & it) #=> 8
+
+@see [[m:kernel.#Integer]]
+--- to_proc -> Proc
+#@#nomethod
+
+オブジェクトの [[c:Proc]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+  def doing
+    yield
+  end
+  
+  class Foo
+   def to_proc
+     Proc.new{p 'ok'}
+   end
+  end
+  
+  it = Foo.new
+  doing(&it) #=> "ok"
+
+--- to_io -> IO
+#@#nomethod
+
+オブジェクトの [[c:IO]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
+
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
+
+このメソッドを定義する条件は、
+  IOオブジェクトが使われるすべての場面で代置可能であるような、
+  IOオブジェクトそのものとみなせるようなもの
+という厳しいものになっています。
 
 
+#@#例
 
+--- to_regexp -> Regexp
+#@#nomethod
 
+オブジェクトの [[c:Regexp]] への暗黙の変換が必要なときに内部で呼ばれます。
+デフォルトでは定義されていません。
 
+説明のためここに記載してありますが、
+このメソッドは実際には Object クラスには定義されていません。
+必要に応じてサブクラスで定義すべきものです。
 
+このメソッドを定義する条件は、
+  正規表現が使われるすべての場面で代置可能であるような、
+  正規表現そのものとみなせるようなもの
+という厳しいものになっています。
 
-
-
-
-
-
-
-
-
-
+  class Foo
+   def to_regexp
+     /[\d]+/
+   end
+  end
+  
+  it = Foo.new
+  p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
 #@since 1.9.0
 --- to_enum(method = :each, *args) -> Enumerable::Enumerator
@@ -473,7 +672,7 @@ id は obsolete なので、object_id か __id__ を使用してください。
 オブジェクトのハッシュ値を返します。[[c:Hash]] クラスでオブジェク
 トを格納するのに用いられています。
 
-メソッド hash は[[m:Object#equal?]]と組み合わせて Hash クラスで使用するので、
+メソッド hash は[[m:Object#equal?]]と組み合わせて Hash クラスで利用されますが、その際
 
   A.eql?(B) ならば A.hash == B.hash
 
@@ -503,7 +702,7 @@ hash を再定義する場合は、一様に分布する任意の整数を返すようにしま
 
 --- ===(other) -> bool
 
-other が self に所属していれば真を返します。
+other が self に所属していれば真を返します。case-when 文で使用します。
 
 このメソッドは各クラスの性質に合わせて再定義すべきです。
 other が self に所属しているかどうかの判定をするように再定義されることが期待
@@ -512,7 +711,7 @@ other が self に所属しているかどうかの判定をするように再定義されることが期待
 デフォルトではメソッド == の別名です。
 
 このメソッドは [[unknown:制御構造/case]] 文での比較に用いられます。
-when節の式の === を呼び出すことに注意してください。
+when節の式をレシーバーとして === を呼び出すことに注意してください。
 
 @param other 比較するオブジェクトです。
 
@@ -538,7 +737,7 @@ when節の式の === を呼び出すことに注意してください。
     when /ruby(?!\s*on\s*rails)/i # 正規表現で表現される文字列の範囲に`所属'するか調べる
       "hit! #{arg}"
     when String # クラスに`所属'するか調べる
-      "instance of String class.but not hit..."
+      "Instance of String class.But don't hit."
     else
       "unknown"
     end
@@ -696,7 +895,7 @@ selfを人間が読める形式に変換した文字列を返します。
 
 @param var インスタンス変数名を文字列か [[c:Symbol]] で指定します。
 @param value 設定する値です。
-@return  valueを返します。
+@return value を返します。
 
     obj = Object.new
     p obj.instance_variable_set("@foo", 1)  #=> 1
@@ -747,8 +946,8 @@ selfを人間が読める形式に変換した文字列を返します。
 --- __send__(name, *args) -> object
 --- __send__(name, *args) { .... } -> object
 
-オブジェクトのメソッド name を引数に args を
-渡して呼び出し、メソッドの実行結果を返します。
+オブジェクトのメソッド name を args を引数に
+して呼び出し、メソッドの実行結果を返します。
 
 ブロック付きで呼ばれたときはブロックもそのまま引き渡します。
 
@@ -771,6 +970,7 @@ send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
 @param args 呼び出すメソッドに渡す引数です。
 
   p -365.send(:abs) #=> 365
+  p "ruby".send(:sub,/./,"R") #=> "Ruby"
   
   
   class Foo
@@ -795,21 +995,21 @@ send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
 
 --- _dump(limit) -> String
 
-[[m:Marshal.#dump]] において出力するオブジェクトがメソッド `_dump'
+[[m:Marshal.#dump]] において出力するオブジェクトがメソッド _dump 
 を定義している場合には、そのメソッドの結果が書き出されます。
 
 #@since 1.8.0
 バージョン1.8.0以降では[[m:Object#marshal_dump]], [[m:Object#marshal_load]]の使用
 が推奨されます。 Marshal.dump するオブジェクトが _dump と marshal_dump の両方の
-メソッドを持つ場合 marshal_dump が優先されます。
+メソッドを持つ場合は marshal_dump が優先されます。
 #@end
 
-メソッド `_dump' は引数として再帰を制限するレベル limit を受
+メソッド _dump は引数として再帰を制限するレベル limit を受
 け取り、オブジェクトを文字列化したものを返します。
 
-インスタンスがメソッド `_dump' を持つクラスは必ず同じフォー
-マットを読み戻すクラスメソッド `_load' を定義する必要があり
-ます。`_load' はオブジェクトを表現した文字列を受け取り、それ
+インスタンスがメソッド _dump を持つクラスは必ず同じフォー
+マットを読み戻すクラスメソッド _load を定義する必要があり
+ます。_load はオブジェクトを表現した文字列を受け取り、それ
 をオブジェクトに戻したものを返す必要があります。
 
 @param limit 再帰の制限レベルを表す整数です。
@@ -857,11 +1057,11 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
 [[m:Marshal.#dump]], [[m:Marshal.#load]]を制御するメソッドです。
 
 Marshal.dump(some) において、出力するオブジェクト some がメソッド marshal_dump を
-定義している場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。 
+持つ場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。 
 
 some のダンプ結果（Marshal.dump(some)） をロードする（Marshal.load(Marshal.dump(some))）に
-は some にメソッド marshal_load が
-定義されていなくてはならず、ロード時に利用されます。
+は some がメソッド marshal_load を
+持っていなくてはならず、ロード時に利用されます。
 このとき、marshal_dump の返り値が marshal_load の引数に利用されます。
 marshal_load 時の self は、生成されたばかり
 （[[m:Class#allocate]] されたばかり） の状態です。
@@ -1002,7 +1202,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
 凍結されるのはオブジェクトであり、変数ではありません。代入などで変数の指す
 オブジェクトが変化してしまうことは freeze では防げません。 freeze が防ぐのは、
 `破壊的な操作'と呼ばれるもの一般です。変数への参照自体を凍結したい
-場合は、グローバル変数なら[[m:Kernel#trace_var]]が使えます。
+場合は、グローバル変数なら[[m:Kernel.#trace_var]]が使えます。
 
 @return self を返します。
 
@@ -1056,13 +1256,13 @@ self のメソッド name をオブジェクト化した
 [[c:Method]] オブジェクトを返します。
 
 @param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
-@raise [[c:NameError]] 定義されていないメソッド名を引数として与えると発生します。
+@raise NameError 定義されていないメソッド名を引数として与えると発生します。
 
   me = -365.method(:abs)
   p me #=> #<Method: Fixnum#abs>
   p me.call #=> 365
 
-@see [[m:Module#instance_method]],[[c:Method]]
+@see [[m:Module#instance_method]],[[c:Method]],[[m:Object#__send__]],[[m:Kernel.#eval]]
 
 --- respond_to?(name, include_private = false) -> bool
 
@@ -1185,15 +1385,20 @@ self が、クラス mod とそのサブクラス、および
 --- instance_eval(expr, filename = '(eval)', lineno = 1) -> object
 --- instance_eval {|obj| ... } -> object
 
-オブジェクトのコンテキストで文字列 expr または self を引数とするブロックを
+オブジェクトのコンテキストで文字列 expr またはオブジェクト自身をブロック引数とするブロックを
 評価してその結果を返します。
 
-オブジェクトのコンテキストで評価するとは self をそのオブジェ
+オブジェクトのコンテキストで評価するとは評価中の self をそのオブジェ
 クトにして実行するということです。また、文字列／ブロック中でメソッ
-ドを定義すれば self の特異メソッドが定義されます。
+ドを定義すればそのオブジェクトの特異メソッドが定義されます。
 
-ただし、ローカル変数だけは instance_eval の外側のスコープと
-共有します。
+ただし、ローカル変数だけは instance_eval の外側のスコープと共有します。
+
+#@since 1.8.0
+メソッド定義の中で instance_eval でメソッドを定義した場合は、囲むメソッドが実行されたときに
+初めて instance_eval 内のメソッドが定義されます
+（単にネストしたメソッド定義をすればよいので、普通はそのようなことをする必要はありません）。
+#@end
 
 filename、lineno が与えられた場合は、ファイル filename、
 行番号 lineno にその文字列があるかのようにコンパイルされ、ス
@@ -1216,7 +1421,7 @@ filename、lineno が与えられた場合は、ファイル filename、
   
   some = Foo.new 'XXX'
   some.instance_eval{p @key} #=> "XXX"
-  some.instance_eval{do_fuga } #=> "secret"
+  some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
   
   some.instance_eval 'raise' # C:/.../*.rb:10: (eval):1:  (RuntimeError)
   messg = 'unknown'
@@ -1342,14 +1547,13 @@ type は obsolete です。 class を使用してください。
 
 オブジェクトの「汚染マーク」を取り除きます。
 
-@return self を返します。
-
 汚染マークを取り除くことによる危険性はプログラマが責任を負う必要が
 あります。
 
 オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
 
-@raise [[c:SecurityError]] セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
+@raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
+@return self を返します。
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
 == Private Instance Methods
@@ -1422,7 +1626,7 @@ initialize_copy という名前のメソッドは
   のクラスと異なる場合に発生します。
 @see [[m:Object#clone]],[[m:Object#dup]]
 
-例として、dup や clone がこのメソッドをどのように利用しているかを示します。
+以下に例として、dup や clone がこのメソッドをどのように利用しているかを示します。
 
 obj.dup は、新たに生成したオブジェクトに対して
 initialize_copy を呼び
@@ -1431,7 +1635,7 @@ initialize_copy を呼び
     obj2.initialize_copy(obj)
 
 obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
-ザをコピーすることで複製を作ります。[[m:Object#clone]] は、さらに
+ザをコピーすることで複製を作ります。 obj.clone は、さらに
 特異メソッドのコピーも行います。
 
     obj = Object.new
