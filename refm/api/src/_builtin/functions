@@ -16,7 +16,7 @@ command を外部コマンドとして実行し、その結果を標準出力に
 [[unknown:リテラル/コマンド出力]] も参照。
 
 @param command コマンドとして実行する引数です。そのまま評価されるのではなく、
-  ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
+    ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
 @return コマンドの出力を文字列で返します。
 @raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
 
@@ -51,7 +51,7 @@ $? を参照することで判別可能です。
 @param program [[m:Kernel.#exec]]参照
 @param arg [[m:Kernel.#exec]]参照
 #@since 1.9.0
-@raise  [[c:Errno::EXXX]] コマンドを実行できないときに発生します。
+@raise Errno::EXXX コマンドを実行できないときに発生します。
 #@end
 
 #@#例...
@@ -155,7 +155,7 @@ statusがtrueの場合、EXIT_SUCCESSを
 終了ステータスとします。デフォルトの終了ステータスはEXIT_SUCCESSに
 変更されています。( EXIT_SUCCESS、EXIT_FAILUREはCレベルの定数 )
 #@end
-@param 終了ステータスを整数か真偽値で与えます。
+@param status 終了ステータスを整数か真偽値で与えます。
 
   STDOUT.sync = true #表示前に終了しないようにする
   puts 'start'
@@ -182,7 +182,7 @@ statusがtrueの場合、EXIT_SUCCESSを
 Ruby プログラムを異常終了します。
 
 [[m:Kernel.#exit]] との違いは、呼び出し時に [[m:$!]] が nil でなければその例外の
-メッセージを標準エラー出力[[m:$stderr]]に出力することと、プログラムの終了ステー
+メッセージを標準エラー出力 [[m:$stderr]] に出力することと、プログラムの終了ステー
 タスが EXIT_FAILURE (ほとんどの環境では 1) 固定であることです。
 
 #@since 1.8.0
@@ -273,7 +273,7 @@ numで指定された番号のシステムコールを実行します。
 
 @param num システムコール番号です。
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
-@raise Errno::EXXX 上述
+@raise Errno::EXXX syscall(2)が -1 を返した場合に発生します。
 
 #@#例...
 
@@ -300,7 +300,7 @@ Perlと異なりコマンドは常に `|' で始まります。
 @param mode モードを文字列か定数の論理和で指定します。後述。
 @param parm [[man:open(2)]] の第 3 引数のように、ファイルを生成する場合の
   ファイルのパーミッションを整数で指定します。
-#@if (version < "2.8.0")
+#@if (version < "1.8.0")
   この引数は、第 2 引数が数値形式でなければ無視されます
 #@end
 @raise Errno::EXXX ファイルのオープンに失敗した場合に発生します。 
@@ -486,14 +486,14 @@ feature が相対パスのときは組み込み変数 [[m:$:]]
 `~' (チルダ) だと、環境変数 HOME の値に展開されます。
 
 Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
-(*.so,*.o,*.dllなど) であり、feature の拡張子が省略された場合はその
+(*.so,*.o,*.dll など) であり、feature の拡張子が省略された場合はその
 両方から探します( *.rb が優先されます)。
 省略されなかった場合は指定された種別のみを探します。
 また、feature の拡張子にはアーキテクチャで実際に使われる拡張子に
 関らず拡張ライブラリの拡張子として常に .so を用いることができます（内部で適切に変換されます）。
 
 ライブラリのロードに成功した時には true を返し、ロードした feature の名前を(拡
-張子も含めて) 変数 [[m:$"]]に追加します。ただし、feature の名前が既に $"
+張子も含めて) 変数 [[m:$"]] に追加します。ただし、feature の名前が既に $"
 に含まれていた場合はロードせずに false を返します。
 
 @param feature ファイル名の文字列です。
@@ -524,7 +524,7 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 定数 const_name を最初に参照した時に feature を
 [[m:Kernel.#require]] するように設定します。
 
-const_name には、"::" 演算子を含めることはできません
+const_name には、 "::" 演算子を含めることはできません
 #@since 1.8.0
 （ネストした定数を指定する方法は後述）。
 #@else
@@ -549,7 +549,7 @@ const_name には、"::" 演算子を含めることはできません
 #@since 1.8.0
 ==== ネストした定義内の定数
 
-const_name には、"::" 演算子を含めることはできないので、 Kernel.#autoload 
+const_name には、 "::" 演算子を含めることはできないので、 Kernel.#autoload 
 ではトップレベルの定数しか指定できません。
 
 [[m:Module#autoload]] と組み合わせることで、任意のクラス／モジュールの定数を autoload できます。
@@ -706,6 +706,24 @@ event に応じ、以下のものが渡されます。
 
 @param trace_proc トレース用Procオブジェクトです。
 @return 登録したProcオブジェクトか、引数が nil なら nil を返します。
+
+  set_trace_func lambda {|*arg|
+    p arg
+  }
+  class Foo
+  end
+  43.to_s
+  
+  #----結果----
+  #["line", "C:/.../", 4, nil, #<Binding:0x2b69584>, false]
+  #  ["c-call", "C:/.../", 4, :inherited, #<Binding:0x2b693b8>, Class]
+  #    ["c-return", "C:/.../", 4, :inherited, #<Binding:0x2b6937c>, Class]
+  #      ["class", "C:/.../", 4, nil, #<Binding:0x2b69098>, false]
+  #        ["end", "C:/.../", 4, nil, nil, false]
+  #        ["line", "C:/.../", 6, nil, #<Binding:0x2b68d78>, false]
+  #          ["c-call", "C:/.../", 6, :to_s, #<Binding:0x2b68c88>, Fixnum]
+  #            ["c-return", "C:/.../", 6, :to_s, #<Binding:0x2b68aa8>, Fixnum]
+
 @see [[m:Kernel.#caller]]
 
 #@#例...
@@ -867,7 +885,7 @@ rs に nil を指定すると行区切りなしとみなします。
 @see [[m:IO#getc]]
 #@end
 
--- putc(ch) -> object
+--- putc(ch) -> object
 
 文字 ch を 標準出力 [[m:$stdout]] に出力します。
 
@@ -875,10 +893,9 @@ ch が数字なら 0 〜 255 の範囲の対応する文字を出力します。
 ch が文字列なら、その先頭の文字を出力します。
 どちらでもない場合は、ch.to_int で整数に変換を試みます。
 
-@param ch 出力する文字です。
+@param ch 出力する文字です。数字または文字列で指定します。
 @return ch を返します。
-@raise [[c:RangeError]] Bignum を引数にした場合に発生します。
-@raise [[c:TypeError]] to_int を持たない非文字列オブジェクトを引数にした場合に発生します。
+@raise c:RangeError Bignum を引数にした場合に発生します。
 @raise IOError $stdoutが書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
@@ -890,7 +907,6 @@ ch が文字列なら、その先頭の文字を出力します。
     
     putc(99.00) #=> c
     putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
-    putc([]) # can't convert Array into Integer (TypeError)
 
 --- p(*arg) -> nil
 
@@ -942,7 +958,7 @@ to_s メソッドにより文字列に変換してから出力します。
 @param arg 出力するオブジェクトを任意個指定します。
 #@#to_s が定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
 @return nil を返します。
-@raise IOError $stdoutが書き込み用にオープンされていなければ発生します。
+@raise IOError $stdout が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
 #@since 1.9.0
@@ -1031,7 +1047,7 @@ to_s メソッドにより文字列に変換してから出力します。
 #@since 1.8.0
 --- warn(mesg) -> nil
 
-mesg を 標準エラー出力[[m:$stderr]] に出力します。 [[m:$VERBOSE]] 
+mesg を 標準エラー出力 [[m:$stderr]] に出力します。 [[m:$VERBOSE]] 
 フラグ が nil のときは何も出力しません。
 
 文字列以外のオブジェクトが引数として与えられた場合には、
@@ -1048,6 +1064,8 @@ to_s メソッドにより文字列に変換してから出力します。
   warn "caution!" #=> caution!
   $VERBOSE = nil
   warn "caution!" # 何もしない
+
+@see [[m:$stderr]],[[m:$VERBOSE]]
 #@end
 
 --- Array(arg) -> Array
@@ -1065,13 +1083,13 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 #@end
 
 @param arg 変換対象のオブジェクトです。
-@raise [[c:TypeError]] to_ary, to_a の返り値が配列でなければ発生します
+@raise TypeError to_ary, to_a の返り値が配列でなければ発生します
 
   p Array({:it => 3}) #=> [[:it, 3]]
   p Array(nil) #=> []
   p Array("fefe") #=> ["fefe"]
 
-@see [[m:Object#to_a]],[[m:Object#to_ary]]
+@see [[m:Object#to_a]],[[m:Object#to_ary]],[[c:Array]]
 
 --- Float(arg) -> Float
 
@@ -1086,8 +1104,8 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 メソッドFloatは文字列に対し[[m:String#to_f]]よりも厳密な変換を行います。
 
 @param arg 変換対象のオブジェクトです。
-@raise [[c:ArgumentError]] 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
-@raise [[c:TypeError]] nilまたはメソッド to_f を持たないオブジェクトを引数に指定したか、 to_f が浮動小数点数
+@raise ArgumentError 整数や浮動小数点数と見なせない文字列を引数に指定した場合に発生します。
+@raise TypeError nil またはメソッド to_f を持たないオブジェクトを引数に指定したか、 to_f が浮動小数点数
   を返さなかった場合に発生します。
 
     p Float(4)          #=> 4.0
@@ -1111,7 +1129,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Float(" \n10\s \t")  #=> 10.0 # 空白類は無視される
     p Float("")         # invalid value (ArgumentError)
 
-@see [[m:String#to_f]]
+@see [[m:String#to_f]],[[c:Float]]
 
 --- Integer(arg) -> Integer
 
@@ -1135,11 +1153,11 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 @param arg 変換対象のオブジェクトです。
 @raise [[c:ArgumentError]] 整数と見なせない文字列を引数に指定した場合に発生します。
 #@since 1.8.0
-@raise [[c:TypeError]] メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
+@raise TypeError メソッド to_int, to_i を持たないオブジェクトを引数に指定したか、to_int, to_i
   が整数([[c:Integer]]のサブクラス)を返さなかった場合に発生します。
 #@else
-@raise [[c:TypeError]] メソッド to_i を持たないオブジェクトを引数に指定したか、 to_i 
-  が整数([[c:Integer]]のサブクラス)を返さなかった場合に発生します。
+@raise TypeError メソッド to_i を持たないオブジェクトを引数に指定したか、 to_i 
+  が整数を返さなかった場合に発生します。
 #@end
 
 #@since 1.8.0
@@ -1176,7 +1194,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Integer("")         # `Integer': invalid value for Inter: "" (ArgumentError)
 #@end
 
-@see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]]
+@see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]],[[c:Integer]]
 
 --- String(arg) -> String
 
@@ -1186,7 +1204,7 @@ arg.to_s を呼び出して文字列に変換します。
 arg が文字列の場合、何もせず arg を返します。
 
 @param arg 変換対象のオブジェクトです。
-@raise [[c:TypeError]] to_s の返り値が文字列でなければ発生します。
+@raise TypeError to_s の返り値が文字列でなければ発生します。
 
   class Foo
    def to_s
@@ -1197,7 +1215,7 @@ arg が文字列の場合、何もせず arg を返します。
   arg = Foo.new
   p String(arg) #=> "hogehoge"
 
-@see [[m:Object#to_s]]
+@see [[m:Object#to_s]],[[c:String]]
 
 --- at_exit { ... } -> Proc
 
@@ -1272,8 +1290,8 @@ sleepの実行が中断されます。
   #   it_end
   #   1
 
---- iterator? -> bool
 --- block_given? -> bool
+--- iterator? -> bool
 
 メソッドにブロックが与えられていれば真を返します。
 
@@ -1297,18 +1315,45 @@ iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
 
 継続を作成します。 [[c:Continuation]] を参照してください。
 
+#@since 1.9.0
+--- catch {|tag| .... } -> object
+#@end
 --- catch(tag) {|tag| .... } -> object
 
 [[m:Kernel.#throw]]との組み合わせで大域脱出を行います。 catch はブロックを実行します。
 
+#@since 1.9.0
+ブロックの実行中に tag と同一のオブジェクトを引数とする [[m:Kernel.#throw]] が行われた
+#@else
 ブロックの実行中に tag と同じ名前の [[m:Kernel.#throw]] が行われた
+#@end
 場合は、その throw の第二引数を戻り値として、ブロックの実行を終了します。
 
 主にネストしたループから一気に脱出するのに使用します。
 
-@param tag 文字列またはシンボルです。
+#@since 1.9.0
+引数を省略した場合、タグとなるオブジェクトが内部で生成せれ、ブロック引数 tag に
+渡されます。
+
+@param tag タグとなる任意のオブジェクトです。
+#@else
+@param tag シンボルや文字列などシンボル化できるものです。
+#@end
 @return ブロックの返り値か、対応するthrowの第二引数を返り値として返します。
 
+#@since 1.9.0
+  result = catch do |tag|
+    for i in 1..2
+      for j in 1..2
+        for k in 1..2
+          throw tag, k
+        end
+      end
+    end
+  end
+  
+  p result #=> 1
+#@else
   result = catch(:tag) do
     for i in 1..2
       for j in 1..2
@@ -1320,6 +1365,7 @@ iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
   end
   
   p result #=> 1
+#@end
 
 @see [[m:Kernel.#throw]]
 
@@ -1335,7 +1381,15 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 もし同じ tag で待っている catch が存在しない場合は [[c:NameError]] で
 スレッドが終了します。
 
-@param tag 文字列またはシンボルです。
+#@since 1.9.0
+同じタグかどうかの判定は equal? で行います。
+#@end
+
+#@since 1.9.0
+@param tag catch の引数に対応する任意のオブジェクトです。
+#@else
+@param tag シンボルまたは文字列です。
+#@end
 @param value catch の戻り値になります。
 @raise NameError 同じ tag で待っている catch が存在しない場合に発生します。
 
@@ -1671,10 +1725,9 @@ hook が指定された場合にはそのフックだけを解除します。
 hook が省略されるかまたは nil を与えた場合は
 varname のフックを全て解除します。
 
-解除されたフックの配列を返します。
-
 @param varname グローバル変数名を文字列か [[c:Symbol]] で指定します。
 @param hook 文字列または [[c:Proc]] オブジェクトです。
+@return 解除されたフックの配列を返します。
 
   $v = nil
   trace_var(:$v) {|val| puts "$v=#{val.inspect}" }
@@ -1692,166 +1745,28 @@ varname のフックを全て解除します。
 
 @see [[m:Kernel.#trace_var]]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
---- printf(port = $stdout, format, *arg) -> nil
-
-C 言語の printf と同じように、format に従い引数を文字列に変
-換して port に出力します。
-
-第一引数が [[c:IO]] のサブクラスのインスタンスであった場合はそのオブジェクトに対して出力を
-行ないます。
-
-引数を 1 つも指定しなければ何もしません。
-
-Ruby における format 文字列の拡張については
-[[m:Kernel.#sprintf]]の項を参照してください。
-
-@param port 出力先になる[[c:IO]] のサブクラスのインスタンスです。
-@param format 
-@param arg 
-@return nil を返します。
-@raise ArgumentError portを指定したのにformatを省略した場合に発生します。
-@raise IOError portが書き込み用にオープンされていなければ発生します。
-@raise Errno::EXXX 出力に失敗した場合に発生します。 
-
-#@#printfの使用例を...
-
-@see [[m:Kernel.#sprintf]],[[m:IO#printf]]
-
---- sprintf(format,*arg) -> String
---- format(format,*arg) -> String
-
-format 文字列を C 言語の sprintf と同じように解釈し、
-引数をフォーマットした文字列を返します。
-
-Ruby には整数の大きさに上限がないので、%b, %o, %x
-に負の数を与えると (左側に無限に1が続くとみなせるので)
-..f のような表示をします。絶対値に符号を付けた形式
-で出力するためには %+x、% x のように指定します。
-
-@param format 
-@param arg 
-@see [[m:Kernel.#printf]]
-
-#@include(printf-format)
-
-
-
-
-
-
-
---- binding -> Binding
-
-変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
-生成して返します。通常、[[m:Kernel.#eval]] の第二引数として使います。
-
-  some = binding
-  p some #=> #<Binding:0xbb01ac>
-
-@see [[c:Binding]],[[m:Kernel.#eval]]
-
-#@since 1.9.0
---- eval(expr, bind = binding(), filename = '(eval)', lineno = 1) -> object
-#@else
---- eval(expr) -> object
---- eval(expr, bind, filename = __FILE__, lineno = 1) -> object
-#@end
-
-文字列 expr を Ruby プログラムとして評価してその結果を返しま
-す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
-クトを与えた場合、そのオブジェクトを生成したコンテキストで文字列を
-評価します。
-
-filename と lineno が与えられた場合には、ファイル
-filename 行番号 lineno に文字列があるかのように
-コンパイルされ、スタックトレースの表示などを差し替えることが
-できます。
-
-@param expr  評価したい式を文字列で与えます。
-@param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクト
-@param filename ファイル名を文字列で与えます。式 expr が filename というファイル名にあるかのように実行されます。
-@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
-
-  def foo
-    a = 1
-    binding
-  end
-
-  eval("p a", foo)  #=> 1
-[[m:Object#method]][[m:Object#send]]
-@see [[m:Kernel.#binding]],[[m:Kernel::TOPLEVEL_BINDING]],[[m:Module#class_eval]],[[m:Object#instance_eval]]
-
---- proc { ... } -> Proc
---- lambda { ... } -> Proc
---- proc -> Proc
---- lambda -> Proc
-
-与えられたブロックから手続きオブジェクト ([[c:Proc]] のインスタンス)
-を生成して返します。[[m:Proc.new]]とほぼ同じです。
-
-ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
-を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
-で呼ばれると [[c:ArgumentError]] 例外が発生します。
-
-ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
-を得たい場合は明示的に & 引数でうけるべきです。
-
-  def foo &block
-    lambda(&block)
-  end
-  
-  foo{}
-
-@raise ArgumentError スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
-
-==== lambdaとProc.newの違い
+--- fail -> ()
+--- fail(message) -> ()
+--- fail(error_type, message = nil, backtrace = caller(0)) -> ()
+
+例外を発生させます。 raise の別名です。
+
+@param error_type [[m:Kernel.#raise]]参照
+@param message [[m:Kernel.#raise]]参照
+@param backtrace [[m:Kernel.#raise]]参照
 
 --- raise -> ()
---- raise(error_type) -> ()
 --- raise(message) -> ()
---- raise(error_type, message , backtrace =) -> ()
---- fail(error_type, message , backtrace =) -> ()
-#@todo
+--- raise(error_type, message = nil, backtrace = caller(0)) -> ()
 
 例外を発生させます。
 発生した例外は変数 [[m:$!]] に格納されます。また例外が
 発生した時のスタックトレースは変数 [[m:$@]] に格納され
-ます。
+ます。発生した例外は rescue 節で捕捉できます。
 
-引数が無い場合は、同スレッドの同じブロック内で最後に rescue された
+引数無しの場合は、同スレッドの同じブロック内で最後に rescue された
 例外オブジェクト ([[m:$!]]) を再発生させます。そのような
-例外が存在しないときは例外 [[c:RuntimeError]] を発生させます。
+例外が存在しないが自身は捕捉されている時には例外 [[c:RuntimeError]] を発生させます。
 
     begin
       open("nonexist")
@@ -1859,57 +1774,231 @@ filename 行番号 lineno に文字列があるかのように
       raise   #=> `open': No such file or directory - "nonexist" (Errno::ENOENT)
     end
 
-引数が一つの場合、引数が文字列であれば、その文字列をメッ
-セージとする RuntimeError 例外を発生させます。引数
-が例外クラスまたは例外オブジェクトであった場合にはその例
-外を発生させます。
+引数を渡した場合は、例外メッセージ message を持った error_type の示す例外(省略時 RuntimeError)を
+発生させます。
 
-    raise "error message"    #=> -:1: error message (RuntimeError)
+error_type として例外ではないクラスやオブジェクトを指定した場合、
+そのオブジェクトの exception メソッドが返す値を発生する例外にします。
+その際、exception メソッドに引数として変数 message を渡すことができます。
 
-    raise ArgumentError      #=> -:1: ArgumentError (ArgumentError)
+@param error_type 発生させる例外を例外クラスまたは例外クラスのインスタンスで指定します。
+@param message 例外のメッセージとなる文字列です。
+@param backtrace 例外発生時のスタックトレースで、[[m:Kernel.#caller]] の戻り値と同じ
+  形式で指定しなければいけません。
+@raise TypeError exception メソッドが例外オブジェクトを返さなかった場合に発生します。
 
-    raise ArgumentError.new  #=> -:1: ArgumentError (ArgumentError)
+例外の捕捉の例を示します。
 
-引数が二つまたは三つの場合、第一引数で指定された例外を、第二引数に
-与えたメッセージとともに発生させます。この場合、例外は例外クラスまたは
-例外オブジェクトで指定します。第三引数は例外発生時のスタックトレース
-で、[[m:Kernel.#caller]] の戻り値と同じ形式でなければいけません。
-
-    raise ArgumentError, "error message"
-    #=> -:1: error message (ArgumentError)
-
-    raise ArgumentError, "error message", ["file1:99",
-                                           "file2:999:in `method'"]
-
-    #=> file1:99: error message (ArgumentError)
-                  from file2:999:in `method'
-
-例外ではないクラスやオブジェクトを第一引数に指定した場合、実際に
-発生する例外はそのオブジェクトの exception メソッドが
-返す値になります。
-
-    class MyException
-      def exception
-        ArgumentError.new
-      end
+  #例1
+  begin
+    raise NameError,"!!error!!"
+  rescue ArgumentError => rer
+  rescue NameError => rer
+  rescue TypeError => rer
+  ensure
+    p rer #=> #<NameError: !!error!!>
+  end
+  
+  #例2
+  def foo num
+    print 'in method.'
+    raise "error!!" if num <= 9
+  rescue RuntimeError
+    num += 10
+    print 'in rescue.'
+    retry
+  else
+    print 'in else.'
+  ensure
+    print "in ensure.\n"
+  end
+  
+  foo(4) #=> in method.in rescue.in method.in else.in ensure.
+  
+  #例3
+  class MyException
+    def exception(mesg=nil)
+      SecurityError.new(mesg)
     end
+  end
+  
+  raise MyException.new rescue p $! #=> #<SecurityError: SecurityError>
 
-    raise MyException.new
+@see [[m:Kernel.#caller]]
 
-    #=> -:7: ArgumentError (ArgumentError)
+--- printf(format, *arg) -> nil
+--- printf(port, format, *arg) -> nil
 
-第二の形式で引数を指定した場合は、exception メソッ
-ドにその引数が渡されます。
+C 言語の printf と同じように、format に従い引数を文字列に変
+換して port に出力します。
 
-    class MyException
-      def exception(mesg)
-        ArgumentError.new(mesg)
-      end
-    end
+port を省略した場合は標準出力 [[m:$stdout]] に出力します。
 
-    raise MyException.new, "error message"
+引数を 1 つも指定しなければ何もしません。
 
-    #=> -:7: error message (ArgumentError)
+Ruby における format 文字列の拡張については
+[[m:Kernel.#sprintf]]の項を参照してください。
 
-exception メソッドは必ず例外オブジェクトを返さなければいけません。
-そうでない場合は [[c:TypeError]] が発生します。
+@param port 出力先になる[[c:IO]] のサブクラスのインスタンスです。
+@param format フォーマット文字列です。
+@param arg フォーマットされる引数です。
+@return nil を返します。
+@raise ArgumentError port を指定したのに format を省略した場合に発生します。
+@raise IOError port が書き込み用にオープンされていなければ発生します。
+@raise Errno::EXXX 出力に失敗した場合に発生します。 
+
+  printf("calculate%3s%-6s%.15f", 'PI', '...', Math::PI) 
+  #=> calculate PI...   3.141592653589793
+  
+  printf("%d %04x", 123, 123)               #=> "123 007b"
+  printf("%08b '%4s'", 123, 123)            #=> "01111011 ' 123'"
+  printf("%1$*2$s %2$d %1$s", "hello", 8)   #=> "   hello 8 hello"
+  printf("%1$*2$s %2$d", "hello", -8)       #=> "hello    -8"
+  printf("%+g:% g:%-g", 1.23, 1.23, 1.23)   #=> "+1.23: 1.23:1.23"
+  printf("%u", -123)                        #=> "..4294967173"
+
+@see [[m:Kernel.#sprintf]],[[m:IO#printf]]
+
+--- sprintf(format, *arg) -> String
+--- format(format, *arg) -> String
+
+format 文字列を C 言語の sprintf と同じように解釈し、
+引数をフォーマットした文字列を返します。
+
+@param format フォーマット文字列です。
+@param arg フォーマットされる引数です。
+@see [[m:Kernel.#printf]],[[m:Time#strftime]],[[m:Date#strptime]]
+
+#@include(printf-format)
+
+--- binding -> Binding
+
+変数・メソッドなどの環境情報を含んだ [[c:Binding]] オブジェクトを
+生成して返します。通常、[[m:Kernel.#eval]] の第二引数として使います。
+
+  def foo
+    a = 1
+    binding
+  end
+
+  eval("p a", foo)  #=> 1
+
+@see [[m:Kernel.#eval]],[[m:Kernel::TOPLEVEL_BINDING]]
+
+--- eval(expr) -> object
+--- eval(expr, bind, filename = __FILE__, lineno = 1) -> object
+
+文字列 expr を Ruby プログラムとして評価してその結果を返しま
+す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
+クトを与えた場合、そのオブジェクトを生成したコンテキストで文字列を
+評価します。
+
+expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval 
+実行前に補足されていた変数はブロック外に持ち出せます。
+
+filename と lineno が与えられた場合には、ファイル
+filename 行番号 lineno に文字列があるかのように
+コンパイルされ、スタックトレースの表示などを差し替えることが
+できます。
+
+bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
+場合、 [[m:Module#module_eval]], [[m:Object#instance_eval]] が使えます。
+
+@param expr  評価したい式を文字列で与えます。
+@param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトです。
+@param filename ファイル名を文字列で与えます。式 expr が filename というファイル名にあるかのように実行されます。
+@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
+
+  a = nil
+  eval('a = RUBY_RELEASE_DATE')
+  p a #=> "2007-03-13"
+  
+  eval('def fuga;p 777 end')
+  fuga #=> 777
+  
+  eval('raise RuntimeError', binding, 'XXX.rb', 4)
+  #=> XXX.rb:4: RuntimeError (RuntimeError)
+  #       from C:/.../:9
+
+@see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Object#method]],[[m:Object#send]]
+
+#@#==== リフレクション
+
+--- proc { ... } -> Proc
+--- lambda { ... } -> Proc
+--- proc -> Proc
+--- lambda -> Proc
+
+与えられたブロックから手続きオブジェクト ([[c:Proc]] のインスタンス)
+を生成して返します。[[m:Proc.new]] に近い働きをします。
+
+ブロックが指定されなければ、呼び出し元のメソッドで指定されたブロック
+を手続きオブジェクトとして返します。呼び出し元のメソッドがブロックなし
+で呼ばれると [[c:ArgumentError]] 例外が発生します。
+
+ただし、ブロックを指定しない呼び出しは推奨されていません。呼び出し元のメソッドで指定されたブロック
+を得たい場合は明示的に & 引数でうけるべきです。
+
+@raise ArgumentError スタック上にブロックがないのにブロックを省略した呼び出しを行ったときに発生します。
+
+  def foo &block
+    lambda(&block)
+  end
+  
+  it = foo{p 12}
+  it.call #=> 12
+
+@see [[c:Proc]],[[m:Proc.new]]
+
+#@since 1.8.0
+==== lambdaとProc.newの違い
+
+lambda と Proc.new はどちらも Proc クラスのインスタンスを生成しますが、
+生成されたプロックはいくつかの場面で挙動が異なります。 lambda の生成するプロック のほうが
+よりメソッドに近い働きをするように設計されています。
+#@since 1.9.0
+1.9.0 から proc は Proc.new の別名に変更になりました。
+#@else
+proc は lambda の別名です。
+#@end
+
+: 引数の扱い
+
+lambda のほうがより厳密です。引数の数が違っていると（メソッドのように）エラーになります。 Proc.new は引数を
+多重代入に近い扱い方をします。
+
+  Proc.new{|a,b,c| p a,b,c }.call([2,4])
+  #=> 2
+  #   4
+  #   nil
+  lambda{|a,b,c| p a,b,c }.call([2,4])
+  #=> wrong number of arguments (1 for 3) (ArgumentError)
+
+: スタックジャンプ時の挙動の違い
+
+予約語を使ったジャンプで、ジャンプ先が異なるものがあります。
+例えばプロック内部で return を行った場合、lambda はプロック自身を抜けますが、 Proc,new はプロックを
+囲むメソッドを抜けます。
+
+ def foo
+   f = Proc.new { return "return from foo from inside proc" }
+   f.call # control leaves foo here
+   return "return from foo"
+ end
+ 
+ def bar
+   f = lambda { return "return from lambda" }
+   f.call # control does not leave bar here
+   return "return from bar"
+ end
+ 
+ puts foo # prints "return from foo from inside proc"
+ puts bar # prints "return from bar"
+
+以下の表を参照してください。上例のように生成、実行を同一メソッド定義内で行った場合の結果です。
+
+                return              next            break
+  Proc.new  メソッドを抜ける  プロックを抜ける   使用不可（例外）
+  lambda    プロックを抜ける  プロックを抜ける  プロックを抜ける
+#@#yield     使用不可（例外）  プロックを抜ける  メソッドを抜ける
+#@end
