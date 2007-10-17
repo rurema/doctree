@@ -18,9 +18,10 @@ Precision をインクルードするクラスやモジュールに対してメソッド induced_from を自
 #@#    ((-ruby 1.6 以前は、これを
 #@#    [[m:Module#append_feature]] を再定義すること
 #@#    で実現していました-))
-#@end
 
 @param module_or_class Precision をインクルードするクラスまたはモジュール
+
+#@end
 
 --- induced_from(number) -> object
 
