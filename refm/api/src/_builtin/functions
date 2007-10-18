@@ -910,7 +910,7 @@ ch が文字列なら、その先頭の文字を出力します。
 
 --- p(*arg) -> nil
 
-引数 arg を人間に読みやすい形に整形して改行と順番に標準出力 [[m:$stdout]] に出力します。主にデバックに使用します。
+引数を人間に読みやすい形に整形して改行と順番に標準出力 [[m:$stdout]] に出力します。主にデバックに使用します。
 
 引数の inspect メソッドの返り値と改行を順番に出力します。つまり以下のコードと同じです。
 
@@ -1070,7 +1070,7 @@ to_s メソッドにより文字列に変換してから出力します。
 
 --- Array(arg) -> Array
 
-引数argを配列([[c:Array]])に変換した結果を返します。
+引数を配列([[c:Array]])に変換した結果を返します。
 
 arg.to_ary と arg.to_a をこの順に呼び出して、返ってきた配列を変換結果とします。
 
@@ -1093,7 +1093,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 
 --- Float(arg) -> Float
 
-引数argを浮動小数点数([[c:Float]])に変換した結果を返します。
+引数を浮動小数点数([[c:Float]])に変換した結果を返します。
 
 引数が数値の場合は素直に変換し、文字列の場合
 は整数や浮動小数点数と見なせるもののみ変換します。
@@ -1133,7 +1133,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 
 --- Integer(arg) -> Integer
 
-引数argを整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
+引数を整数([[c:Fixnum]],[[c:Bignum]])に変換した結果を返します。
 
 引数が数値の場合は直接変換し（小数点以下切り落とし）、
 文字列の場合は、進数を表す接頭辞を含む整数表現とみなせる文字列のみ
@@ -1198,7 +1198,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 
 --- String(arg) -> String
 
-引数argを文字列([[c:String]])に変換した結果を返します。
+引数を文字列([[c:String]])に変換した結果を返します。
 
 arg.to_s を呼び出して文字列に変換します。
 arg が文字列の場合、何もせず arg を返します。
@@ -1886,7 +1886,7 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 @see [[m:Kernel.#eval]],[[m:Kernel::TOPLEVEL_BINDING]]
 
 --- eval(expr) -> object
---- eval(expr, bind, filename = __FILE__, lineno = 1) -> object
+--- eval(expr, bind, fname = __FILE__, lineno = 1) -> object
 
 文字列 expr を Ruby プログラムとして評価してその結果を返しま
 す。第2引数に [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェ
@@ -1896,8 +1896,8 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 expr の中のローカル変数の扱いはブロックの場合と同じです。すなわち、eval 
 実行前に補足されていた変数はブロック外に持ち出せます。
 
-filename と lineno が与えられた場合には、ファイル
-filename 行番号 lineno に文字列があるかのように
+fname と lineno が与えられた場合には、ファイル
+fname 行番号 lineno に文字列があるかのように
 コンパイルされ、スタックトレースの表示などを差し替えることが
 できます。
 
@@ -1906,8 +1906,8 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
 
 @param expr  評価したい式を文字列で与えます。
 @param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトです。
-@param filename ファイル名を文字列で与えます。式 expr が filename というファイル名にあるかのように実行されます。
-@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
+@param fname スタックトレースに表示するファイル名です。
+@param lineno スタックトレースに表示する行番号です。
 
   a = nil
   eval('a = RUBY_RELEASE_DATE')
