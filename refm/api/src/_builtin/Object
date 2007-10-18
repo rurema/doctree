@@ -19,7 +19,7 @@ Objectクラスのインスタンスを生成して返します。
 
 --- ==(other) -> bool
 
-self と other が等しければ真を返します。
+オブジェクトと other が等しければ真を返します。
 
 このメソッドは各クラスの性質に合わせて再定義すべきです。
 多くの場合、オブジェクトの内容が等しければ真を返すように
@@ -40,12 +40,12 @@ self と other が等しければ真を返します。
 
 --- eql?(other) -> bool
 
-self と other が等しければ真を返します。[[c:Hash]] で二つのキー
+オブジェクトと other が等しければ真を返します。[[c:Hash]] で二つのキー
 が等しいかどうかを判定するのに使われます。
 
 このメソッドは各クラスの性質に合わせて再定義すべきです。
 多くの場合、 == と同様に同値性の判定をするように再定義されていますが、
-適切にキー判定ができるように異なっている場合もあります。
+適切にキー判定ができるようにより厳しくなっている場合もあります。
 
 デフォルトでは equal? と同じオブジェクト
 の同一性判定になっています。
@@ -83,7 +83,7 @@ other が self 自身の時、真を返します。
   
   p(:foo.equal? :foo) #=> true
 
-@see [[m:Object#object_id]],[[m:Object#==]],[[m:Object#eql?]]
+@see [[m:Object#object_id]],[[m:Object#==]],[[m:Object#eql?]],[[c:Symbol]]
 
 #@since 1.9.0
 --- methods(include_inherited = true) -> [Symbol]
@@ -343,8 +343,8 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 このメソッドは実際には Object クラスには定義されていません。
 必要に応じてサブクラスで定義すべきものです。
 
-メソッド呼び出し時に引数に`*'をつけたり、
-多重代入の右辺値に`*'をつけてたりして配列変換を行ったときに内部で呼ばれます。
+メソッド呼び出し時の引数や、
+多重代入の右辺値に`*'をつけて配列変換を行ったときに内部で呼ばれます。
 
   class Foo
     def to_ary
@@ -366,7 +366,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   
   doi(*Foo.new) #=> [5, 6]
 
-@see [[m:Object#to_ary]],[[m:Object#to_a]],[[m:kernel.#Array]]
+@see [[m:Object#to_ary]],[[m:Object#to_a]],[[m:Kernel.#Array]]
 #@end
 --- to_a -> Array
 #@#nomethod
@@ -393,16 +393,16 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@since 1.9.0
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
-    p 1.to_a            # [1]       (warning: default `to_a' will be obsolete)
     p nil.to_a          # []
 
-@see [[m:Object#to_ary]],[[m:Object#to_splat]],[[m:kernel.#Array]]
+@see [[m:Object#to_ary]],[[m:Object#to_splat]],[[m:Kernel.#Array]]
 #@else
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
+    p 1.to_a            # [1]       (warning: default `to_a' will be obsolete)
     p nil.to_a          # []
 
-@see [[m:Object#to_ary]],[[m:kernel.#Array]]
+@see [[m:Object#to_ary]],[[m:Kernel.#Array]]
 #@end
 
 --- to_s -> String
@@ -430,7 +430,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   
   puts it #=> Class:Foo Number:40
 
-@see [[m:Object#to_str]],[[m:kernel.#String]]
+@see [[m:Object#to_str]],[[m:Kernel.#String]]
 --- to_str -> String
 #@#nomethod
 
@@ -455,7 +455,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   it = Foo.new
   p('Second' + it) #=> "SecondEdition"
 
-@see [[m:Object#to_s]],[[m:kernel.#String]]
+@see [[m:Object#to_s]],[[m:Kernel.#String]]
 --- to_ary -> Array
 #@#nomethod
 
@@ -481,9 +481,9 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   p([1,2] + it) #=> [1, 2, 3, 4]
 
 #@since 1.9.0
-@see [[m:Object#to_a]],[[m:kernel.#Array]]
+@see [[m:Object#to_a]],[[m:Kernel.#Array]]
 #@else
-@see [[m:Object#to_splat]],[[m:Object#to_a]],[[m:kernel.#Array]]
+@see [[m:Object#to_splat]],[[m:Object#to_a]],[[m:Kernel.#Array]]
 #@end
 
 --- to_hash -> Hash
@@ -534,7 +534,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   it = Foo.new
   p(9**9 & it) #=> 8
 
-@see [[m:kernel.#Integer]]
+@see [[m:Kernel.#Integer]]
 --- to_proc -> Proc
 #@#nomethod
 
@@ -607,12 +607,13 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 [[m:Enumerable::Enumerator.new]](self, method, *args) を返します。
 
 @param method メソッド名の文字列かシンボルです。
-@param args 渡される引数です。
+@param args 呼び出すメソッドに渡される引数です。
+@raise NameError 存在しないメソッド名を指定すると発生します。
 
   str = "xyz"
 
   enum = str.enum_for(:each_byte)
-  p(a = enum.map {|b| '%02x' % b }) #=> ["78", "79", "7a"]
+  p(a = enum.map{|b| '%02x' % b }) #=> ["78", "79", "7a"]
 
   # protects an array from being modified
   a = [1, 2, 3]
@@ -676,7 +677,7 @@ id は obsolete なので、object_id か __id__ を使用してください。
 
   A.eql?(B) ならば A.hash == B.hash
 
-の関係を必ず満たしていなければいけません。eql?を再定義した時には必ずこちらも合わせ
+の関係を必ず満たしていなければいけません。eql? を再定義した時には必ずこちらも合わせ
 て再定義してください。
 
 デフォルトでは、[[m:Object#object_id]] と同じ値を返します。
@@ -708,7 +709,7 @@ other が self に所属していれば真を返します。case-when 文で使用します。
 other が self に所属しているかどうかの判定をするように再定義されることが期待
 されています。
 
-デフォルトではメソッド == の別名です。
+デフォルトではメソッド == の別名で、同値性の判定になっています。
 
 このメソッドは [[unknown:制御構造/case]] 文での比較に用いられます。
 when節の式をレシーバーとして === を呼び出すことに注意してください。
@@ -781,7 +782,7 @@ when節の式をレシーバーとして === を呼び出すことに注意してください。
   end
 
 @param out 出力先のIOオブジェクトです。指定しない場合は標準出力に出力されます。
-@return nilを返します。
+@return nil を返します。
 
   Object.new.display #=> #<Object:0xbb0210>
 
@@ -849,7 +850,7 @@ extend の機能は、「特異クラスに対する [[m:Module#include]]」
 
 --- inspect -> String
 
-selfを人間が読める形式に変換した文字列を返します。
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
 組み込み関数 [[m:Kernel.#p]] は、このメソッドの結果を使用して
 オブジェクトを表示します。
@@ -956,7 +957,7 @@ send が再定義された場合に備えて別名 __send__ も
 __send__ は再定義すべきではありません。
 
 #@since 1.9.0
-1.9.0からは[[unknown:クラス／メソッドの定義/呼び出し制限]]が
+1.9.0 からは[[unknown:クラス／メソッドの定義/呼び出し制限]]が
 send, __send__にも影響するようになり、
 レシーバを指定した呼び出しでは private メソッドを呼び出せなくなりました。
 privateメソッドを呼び出す必要がある場合は
@@ -991,7 +992,7 @@ send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]],[[m:Kernel.#eval]],[[c:Proc]]
+@see [[m:Object#method]],[[m:Kernel.#eval]],[[c:Proc]],[[c:Method]]
 
 --- _dump(limit) -> String
 
@@ -1016,27 +1017,23 @@ send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
 @return オブジェクトを文字列化したものを返すように定義すべきです。
 
   class Foo
-    def initialize(obj)
-      p "initialize() called"
-      @foo = obj
+    def initialize(arg)
+      @foo = arg
     end
     def _dump(limit)
-      p '_dump'
       Marshal.dump(@foo, limit)
     end
     def self._load(obj)
-      p "_load #{obj}"
+      p obj
       Foo.new(Marshal.load(obj))
     end
   end
-
-  p Marshal.load(Marshal.dump(Foo.new(['foo', 'bar'])))
-
-  #=> "initialize() called"
-  #   "_dump"
-  #   "_load \004\b[\a\"\bfoo\"\bbar"
-  #   "initialize() called"
-  #   #<Foo:0x4019eb88 @foo=["foo", "bar"]>
+  foo = Foo.new(['foo', 'bar'])
+  p foo                      #=> #<Foo:0xbaf234 @foo=["foo", "bar"]>
+  dms = Marshal.dump(foo)
+  p dms                      #=> "\004\bu:\bFoo\023\004\b[\a\"\bfoo\"\bbar"
+  result = Marshal.load(dms) #=> "\004\b[\a\"\bfoo\"\bbar" # self._load の引数
+  p result                   #=> #<Foo:0xbaf07c @foo=["foo", "bar"]>
 
 インスタンス変数の情報は普通マーシャルデータに含まれるので、上例
 のように _dump を定義する必要はありません(ただし _dump を定義すると
@@ -1075,26 +1072,23 @@ marshal_dump/marshal_load を使うべきです。
   marshal_load の戻り値は無視されます。
 
   class Foo
-    def initialize
-      p "initialize() called"
-      @foo = ['foo', 'bar']
+    def initialize(arg)
+      @foo = arg
     end
     def marshal_dump
-      p 'marshal_dump'
       @foo
     end
     def marshal_load(obj)
-      p "marshal_load #{obj}"
+      p obj
       @foo = obj
     end
   end
-  
-  p Marshal.load(Marshal.dump(Foo.new))
-  
-  #=> "initialize() called"
-  #   "marshal_dump"
-  #   "marshal_load [\"foo\", \"bar\"]"
-  #   #<Foo:0xbaf504 @foo=["foo", "bar"]>
+  foo = Foo.new(['foo', 'bar'])
+  p foo                      #=> #<Foo:0xbaf3b0 @foo=["foo", "bar"]>
+  dms = Marshal.dump(foo)
+  p dms                      #=> "\004\bU:\bFoo[\a\"\bfoo\"\bbar"
+  result = Marshal.load(dms) #=> ["foo", "bar"] # marshal_load の引数
+  p result                   #=> #<Foo:0xbaf2ac @foo=["foo", "bar"]>
 
 インスタンス変数の情報は普通マーシャルデータに含まれるので、
 上例のように marshal_dump を定義する必要はありません
@@ -1125,7 +1119,7 @@ clone や dup は浅い(shallow)コピーであることに注意してください。後述。
 @raise TypeError [[c:TrueClass]], [[c:FalseClass]], [[c:NilClass]], 
 #@if (version >= "1.8.0")
 #@#Ruby 1.8 では、
-  [[c:Symbol]], そして[[c:Numeric]] クラスのインスタンスなど一部の
+  [[c:Symbol]], そして [[c:Numeric]] クラスのインスタンスなど一部の
   オブジェクトを複製しようとすると発生します。
 #@else
   [[c:Symbol]] クラスのインスタンスを複製しようとすると発生します。
@@ -1201,8 +1195,8 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
 
 凍結されるのはオブジェクトであり、変数ではありません。代入などで変数の指す
 オブジェクトが変化してしまうことは freeze では防げません。 freeze が防ぐのは、
-`破壊的な操作'と呼ばれるもの一般です。変数への参照自体を凍結したい
-場合は、グローバル変数なら[[m:Kernel.#trace_var]]が使えます。
+`破壊的な操作' と呼ばれるもの一般です。変数への参照自体を凍結したい
+場合は、グローバル変数なら [[m:Kernel.#trace_var]] が使えます。
 
 @return self を返します。
 
@@ -1217,7 +1211,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
   a2.replace("bar")# can't modify frozen string (TypeError)
 #@end
 
-凍結を解除することはできませんが、[[m:Object#dup]]を使えばほぼ同じ内容の凍結されていない
+凍結を解除することはできませんが、[[m:Object#dup]] を使えばほぼ同じ内容の凍結されていない
 オブジェクトを得ることはできます。
 
   a = [1].freeze
@@ -1237,7 +1231,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
   b[0] = "foo"
   p b             #=> ["foo"]
 
-@see [[m:Object#frozen?]],[[m:Object#dup]],[[m:Kernel#trace_var]]
+@see [[m:Object#frozen?]],[[m:Object#dup]],[[m:Kernel.#trace_var]]
 
 --- frozen? -> bool
 
@@ -1252,7 +1246,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
 
 --- method(name) -> Method
 
-self のメソッド name をオブジェクト化した
+オブジェクトのメソッド name をオブジェクト化した
 [[c:Method]] オブジェクトを返します。
 
 @param name メソッド名を[[c:Symbol]] または[[c:String]]で指定します。
@@ -1307,12 +1301,12 @@ include_private が真のときは private メソッドに対しても真を返します。
 
 デフォルトではこのメソッドは例外 [[c:NameError]] を発生させます。
 
-このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
+#@#このメソッドは強力ですが、反面扱いが難しいので乱用は避けるべきです。
 
 @param name 未定義メソッドの名前（シンボル）です。
 @param args 未定義メソッドに渡された引数です。
 #@#@param block 未定義メソッドに渡されたブロックです。
-@return ユーザー定義のmethod_missingメソッドの返り値が未定義メソッドの返り値で
+@return ユーザー定義の method_missing メソッドの返り値が未定義メソッドの返り値で
   あるかのように見えます。
 
   class Foo
@@ -1338,7 +1332,7 @@ include_private が真のときは private メソッドに対しても真を返します。
 
 --- instance_of?(klass) -> bool
 
-self がクラス klass の直接のインスタンスである時真を返します。
+オブジェクトがクラス klass の直接のインスタンスである時真を返します。
 
 obj.instance_of?(c) が成立する時には、常に
 obj.kind_of?(c) も成立します。
@@ -1359,8 +1353,8 @@ obj.kind_of?(c) も成立します。
 --- is_a?(klass_or_mod) -> bool
 --- kind_of?(klass_or_mod) -> bool
 
-self が、クラス mod とそのサブクラス、および
-モジュール mod をインクルードしたクラスとそのサブクラス、
+オブジェクトがクラス mod とそのサブクラスまたは
+モジュール mod をインクルードしたクラスとそのサブクラス
 のいずれかのインスタンスであるとき真を返します。
 
 @param klass_or_mod クラスやモジュールなど、[[c:Module]]かそのサブクラスのインスタンスです。
@@ -1406,8 +1400,8 @@ filename、lineno が与えられた場合は、ファイル filename、
 す。
 
 @param expr  評価したい式を文字列で与えます。
-@param fname ファイル名を文字列で与えます。式 expr が fname というファイル名にあるかのように実行されます。
-@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
+@param fname スタックトレースに表示するファイル名です。
+@param lineno スタックトレースに表示する行番号です。
 
   class Foo
     def initialize data
@@ -1427,7 +1421,7 @@ filename、lineno が与えられた場合は、ファイル filename、
   messg = 'unknown'
   some.instance_eval 'raise messg','file.rb',999 # file.rb:999: unknown (RuntimeError)
 
-@see [[m:Module#module_eval]],[[m:Kernel#eval]]
+@see [[m:Module#module_eval]],[[m:Kernel.#eval]]
 
 #@if (version < "1.8.0")
 ==== メソッド定義のネストに関する注意
@@ -1485,12 +1479,14 @@ filename、lineno が与えられた場合は、ファイル filename、
   p false.nil? #=> false
   p nil.nil? #=> true
 
+@see [[c:NilClass]]
+
 --- class -> Class
 #@if (version < "1.9.0")
 --- type -> Class
 #@end
 
-self のクラスを返します。
+レシーバのクラスを返します。
 
 #@if (version < "1.9.0")
 type は obsolete です。 class を使用してください。
@@ -1616,8 +1612,8 @@ initialize_copy は、Ruby インタプリンタが知り得ない情報をコピーするた
 報を initialize_copy でコピーするよう定義しておくことで、dup や clone
 を再定義する必要がなくなります。
 
-デフォルトの Object#initialize_copy は、 freeze チェックおよび型のチェックを行い
-self を返すだけのメソッドです。
+デフォルトの Object#initialize_copy は、 freeze チェックおよび型のチェックを行い self 
+を返すだけのメソッドです。
 
 initialize_copy という名前のメソッドは
 自動的に private に設定されます。
@@ -1693,7 +1689,7 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 
 @see [[m:Module#remove_class_variable]],[[m:Module#remove_const]]
 
---- singleton_method_added(name) -> ()
+--- singleton_method_added(name) -> object
 
 特異メソッドが追加された時にインタプリタから呼び出されます。
 
@@ -1717,7 +1713,7 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 @see [[m:Module#method_added]],[[m:Object#singleton_method_removed]],[[m:Object#singleton_method_undefined]]
 
 #@since 1.8.0
---- singleton_method_removed(name) -> ()
+--- singleton_method_removed(name) -> object
 
 特異メソッドが [[m:Module#remove_method]] に
 より削除された時にインタプリタから呼び出されます。
@@ -1747,7 +1743,7 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 #@end
 
 #@since 1.8.0
---- singleton_method_undefined(name) -> ()
+--- singleton_method_undefined(name) -> object
 
 特異メソッドが [[m:Module#undef_method]] または
 [[unknown:クラス／メソッドの定義/undef]]
