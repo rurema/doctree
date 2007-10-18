@@ -72,12 +72,11 @@ UnboundMethod は [[m:UnboundMethod#bind]] しなければ起動できません。
 
 --- bind(obj)    -> Method
 
-self を obj にバインドして bound method オブジェクト
-(つまり [[c:Method]] オブジェクト) を生成し返します。
+self を obj にバインドした [[c:Method]] オブジェクトを生成し返します。
 
-ただしバインドできるのは、unbind したオブジェクトのクラスのインスタンスか、メ
-ソッド定義元のモジュールをインクルードしたクラスのインスタンスだけ
-です。
+@param obj 自身をバインドしたいオブジェクトを指定します。ただしバインドできるのは、
+           unbind したオブジェクトのクラスのインスタンスか、メソッド定義元のモジュールを
+           インクルードしたクラスのインスタンスだけです。
 
 @raise TypeError obj のクラスが、unbind したオブジェクトのクラスのインスタンスか、
                  メソッド定義元のモジュールをインクルードしたクラスでなければ、発生します。
@@ -185,3 +184,41 @@ self を返します。
   String.instance_method(:replace).arity   #=> 1
   String.instance_method(:squeeze).arity   #=> -1
   String.instance_method(:count).arity     #=> -1
+
+--- ==(other)     -> bool
+--- ===(other)    -> bool
+
+自身と other が同じクラスの同じメソッドを表す場合に
+true を返します。そうでない場合に false を返します。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+  a = String.instance_method(:size)
+  b = String.instance_method(:size)
+  p a == b                            #=> true
+  
+  c = Array.instance_method(:size)
+  p a == c                            #=> false
+
+@see [[m:UnboundMethod#eql?]]
+
+--- eql?(other)     -> bool
+--- equal?(other)   -> bool
+
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+  a = String.instance_method(:size)
+  b = String.instance_method(:size)
+  p a.eql?(b)                        #=> false
+  p a.eql?(a)                        #=> true
+
+@see [[m:UnboundMethod#==]]
+
+--- hash    -> Integer
+
+自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
+返り値は自身が保持するキーや値に影響されません。
