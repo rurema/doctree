@@ -1,110 +1,5 @@
 == Module Functions
 
---- `(command) -> String
-
-command を外部コマンドとして実行し、その標準出力を文字列として
-返します。このメソッドは `command` の形式で呼ばれます。
-
-引数 command に対しダブルクォートで囲まれた文字列と同様の解釈と式展開を行った後、
-コマンドとして実行します。
-コマンドは評価されるたびに実行されます。コマンドの終了ステータスを得るには、[[m:$?]] を参照します。
-
-コマンドの出力を得る必要がなく、単にコマンドを実行したいだけなら
-[[m:Kernel.#system]] を使います。特に端末を制御するコマンドでは
-`command` は失敗するかもしれません。
-
-[[unknown:リテラル/コマンド出力]] も参照。
-
-@param command コマンドとして実行する引数です。そのまま評価されるのではなく、
-    ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
-@return コマンドの出力を文字列で返します。
-@raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
-
-  puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
-  puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
-
-@see [[m:Kernel.#system]],[[m:Kernel.#exec]],[[m:Kernel.#open]]
-
---- system(command) -> bool
---- system(program, *arg) -> bool
-
-command を外部コマンドとして実行して、成功した時に真を返します。
-
-子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-#@if (version < "1.9.0")
-それ以外の時
-(コマンドが実行できなかった場合も含む)は false を返します。
-#@else
-それ以外の終了ステータスの場合は false を返します。
-#@end
-
-終了ステータスは変数 [[m:$?]] で参照できます。
-
-#@if (version < "1.9.0")
-コマンドを実行することができなかった場合、多くのシェルはステータス
-127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
-さない場合は Ruby の子プロセスがステータス 127 で終了します。
-コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
-$? を参照することで判別可能です。
-#@end
-
-引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
-
-@param command [[m:Kernel.#exec]] 参照
-@param program [[m:Kernel.#exec]] 参照
-@param arg [[m:Kernel.#exec]] 参照
-#@since 1.9.0
-@raise Errno::EXXX コマンドを実行できないときに発生します。
-#@end
-
-#@#例...
-#@since 1.9.0
-@see [[m:Kernel.#exec]],[[m:Kernel.#`]],[[m:Kernel.#spawn]]
-#@else
-@see [[m:Kernel.#exec]],[[m:Kernel.#`]],[[m:Kernel.#open]]
-#@end
-
---- exec(command) -> ()
---- exec(program, *arg) -> ()
-
-command で指定されたコマンドを実行します。プロセスの実行コー
-ドはそのコマンド(あるいは shell)になるので、起動に成功した場
-合、このメソッドからは戻りません。
-
-一番目の形式では command が shell のメタ文字
-(* ? {} [] <> () ~ & | \ $ ; ' ` " \n)を含む場合、
-shell 経由で実行されます。そうでなければインタプリタから直接
-実行されます。
-
-二番目の形式では、常に shell を経由せずに実行されます。
-この場合には空白や shell のメタキャラクタもそのまま
-program の引数に渡されます。
-先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
-起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
-グラム名になります。
-#@since 1.8.0
-このとき、第1要素をフルパスで指定しなくても
-環境変数 PATH から探します。
-#@end
-
-コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
-以下のように exec を呼び出します。
-
-  exec [program, program], *args
-
-@param command コマンドを文字列で指定します。
-@param program 文字列か2要素の配列です。
-@param arg 渡される引数です。
-@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
-
-#@#例...
-
-#@since 1.9.0
-@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]]
-#@else
-@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]]
-#@end
-
 #@since 1.8.0
 --- exit(status = true) -> ()
 #@else
@@ -249,6 +144,129 @@ Ruby プログラムをエラーメッセージ付きで終了します。終了ステータスは 1 固定です。
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#exit!]]
 
+--- `(command) -> String
+
+command を外部コマンドとして実行し、その標準出力を文字列として
+返します。このメソッドは `command` の形式で呼ばれます。
+
+引数 command に対しダブルクォートで囲まれた文字列と同様の解釈と式展開を行った後、
+コマンドとして実行します。
+コマンドは評価されるたびに実行されます。コマンドの終了ステータスを得るには、[[m:$?]] を参照します。
+
+コマンドの出力を得る必要がなく、単にコマンドを実行したいだけなら
+[[m:Kernel.#system]] を使います。特に端末を制御するコマンドでは
+`command` は失敗するかもしれません。
+
+[[unknown:リテラル/コマンド出力]] も参照。
+
+@param command コマンドとして実行する引数です。そのまま評価されるのではなく、
+    ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
+@return コマンドの出力を文字列で返します。
+@raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
+
+  puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
+  puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
+
+@see [[m:Kernel.#system]],[[m:Kernel.#exec]]
+
+--- system(command) -> bool
+--- system(program, *arg) -> bool
+
+引数を外部コマンドとして実行して、成功した時に真を返します。
+
+子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
+#@if (version < "1.9.0")
+それ以外の時
+(コマンドが実行できなかった場合も含む)は false を返します。
+#@else
+それ以外の終了ステータスの場合は false を返します。
+#@end
+
+終了ステータスは変数 [[m:$?]] で参照できます。
+
+#@if (version < "1.9.0")
+コマンドを実行することができなかった場合、多くのシェルはステータス
+127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
+さない場合は Ruby の子プロセスがステータス 127 で終了します。
+コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
+$? を参照することで判別可能です。
+#@end
+
+引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
+
+@param command [[m:Kernel.#exec]] 参照
+@param program [[m:Kernel.#exec]] 参照
+@param arg [[m:Kernel.#exec]] 参照
+#@since 1.9.0
+@raise Errno::EXXX コマンドが実行できなかった場合に発生します。
+#@end
+#@#例...
+#@since 1.9.0
+@see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]]
+#@else
+@see [[m:Kernel.#`]],[[m:Kernel.#exec]]
+#@end
+
+#@since 1.9.0
+--- spawn(command) -> Integer
+--- spawn(program, *arg) -> Integer
+
+引数を外部コマンドとして実行しますが、生成した
+子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
+
+引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
+
+@param command [[m:Kernel.#exec]] 参照
+@param program [[m:Kernel.#exec]] 参照
+@param arg [[m:Kernel.#exec]] 参照
+@raise Errno::EXXX コマンドが実行できなかった場合に発生します。
+
+#@#例...
+
+@see [[m:Kernel.#system]],[[m:Kernel.#exec]]
+#@end
+
+--- exec(command) -> ()
+--- exec(program, *arg) -> ()
+
+command で指定されたコマンドを実行します。プロセスの実行コー
+ドはそのコマンド(あるいは shell)になるので、起動に成功した場
+合、このメソッドからは戻りません。
+
+一番目の形式では command が shell のメタ文字
+(* ? {} [] <> () ~ & | \ $ ; ' ` " \n)を含む場合、
+shell 経由で実行されます。そうでなければインタプリタから直接
+実行されます。
+
+二番目の形式では、常に shell を経由せずに実行されます。
+この場合には空白や shell のメタキャラクタもそのまま
+program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+#@since 1.8.0
+このとき、第1要素をフルパスで指定しなくても
+環境変数 PATH から探します。
+#@end
+
+コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
+以下のように exec を呼び出します。
+
+  exec [program, program], *args
+
+@param command コマンドを文字列で指定します。
+@param program 文字列か2要素の配列です。
+@param arg 渡される引数です。
+@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
+
+#@#例...
+
+#@since 1.9.0
+@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]]
+#@else
+@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]]
+#@end
+
 --- fork -> Integer|nil
 --- fork { ... } -> Integer|nil
 
@@ -262,28 +280,8 @@ fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 #@end
 
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
-
 #@#例...
-
-
-#@since 1.9.0
---- spawn(command) -> Integer
---- spawn(program, *arg) -> Integer
-
-子プロセスの終了を待ち合わせないことを除けば、[[m:Kernel.#system]]
-と同じです。生成した子プロセスのプロセスIDを返します。
-
-引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
-
-@param command [[m:Kernel.#exec]] 参照
-@param program [[m:Kernel.#exec]] 参照
-@param arg [[m:Kernel.#exec]] 参照
-@raise  Errno::EXXX コマンドを実行できないときに発生します。
-
-#@#例...
-
-@see [[m:Kernel.#system]],[[m:Kernel.#exec]]
-#@end
+@see [[m:IO.popen]],[[m:IO.pipe]]
 
 --- syscall(num, *arg ) -> Integer
 
@@ -304,8 +302,8 @@ numで指定された番号のシステムコールを実行します。
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
 @raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
 @raise NotImplementedErro 実行環境がこのメソッドに対応していないとき発生します。
-@see [[lib:dl]]
 #@#例...
+@see [[lib:dl]]
 
 --- open(file, mode = "r", perm = 0666) -> IO
 --- open(file, mode = "r", perm = 0666) {|io| ... } -> object
