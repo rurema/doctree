@@ -46,7 +46,7 @@ _builtin/NoMemoryError          snoozer05       done
 _builtin/NoMethodError          snoozer05       done
 _builtin/NotImplementedError    snoozer05       done
 _builtin/Numeric                sheepman        done
-_builtin/Object                 eklerni
+_builtin/Object                 eklerni         done
 _builtin/ObjectSpace            sheepman        done
 _builtin/Precision              snoozer05       done
 _builtin/Proc                   snoozer05       done
@@ -84,7 +84,7 @@ _builtin/ZeroDivisionError      snoozer05       done
 _builtin/constants              yugui           done
 _builtin/Enumerable__Enumerator yugui           done
 _builtin/fatal                  snoozer05       done
-_builtin/functions              eklerni
+_builtin/functions              eklerni         done
 _builtin/specialvars            yugui           done
 
 # LIBRARY_NAME                  OWNER           STATUS
