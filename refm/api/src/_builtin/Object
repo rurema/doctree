@@ -775,7 +775,7 @@ when節の式をレシーバーとして === を呼び出すことに注意してください。
 オブジェクトを out に出力します。以下のように定義されています。
 
   class Object
-    def display(out=$stdout)
+    def display(out = $stdout)
       out.print self.to_s
       nil
     end
@@ -1390,8 +1390,8 @@ obj.kind_of?(c) も成立します。
 
 #@since 1.8.0
 メソッド定義の中で instance_eval でメソッドを定義した場合は、囲むメソッドが実行されたときに
-初めて instance_eval 内のメソッドが定義されます
-（単にネストしたメソッド定義をすればよいので、普通はそのようなことをする必要はありません）。
+初めて instance_eval 内のメソッドが定義されます。これは
+[[unknown:クラス／メソッドの定義/メソッド定義のネスト]]と同じです。
 #@end
 
 filename、lineno が与えられた場合は、ファイル filename、
@@ -1399,7 +1399,7 @@ filename、lineno が与えられた場合は、ファイル filename、
 タックトレース表示などのファイル名／行番号を差し替えることができま
 す。
 
-@param expr  評価したい式を文字列で与えます。
+@param expr  評価する文字列です。
 @param fname スタックトレースに表示するファイル名です。
 @param lineno スタックトレースに表示する行番号です。
 
@@ -1417,7 +1417,7 @@ filename、lineno が与えられた場合は、ファイル filename、
   some.instance_eval{p @key} #=> "XXX"
   some.instance_eval{do_fuga } #=> "secret" # private メソッドも呼び出せる
   
-  some.instance_eval 'raise' # C:/.../*.rb:10: (eval):1:  (RuntimeError)
+  some.instance_eval 'raise' # ..:10: (eval):1:  (RuntimeError)
   messg = 'unknown'
   some.instance_eval 'raise messg','file.rb',999 # file.rb:999: unknown (RuntimeError)
 
@@ -1437,7 +1437,7 @@ filename、lineno が与えられた場合は、ファイル filename、
        }
     end
 
-    # => -:4: nested method definition
+    #=> -:4: nested method definition
 
 文字列で渡す形式を使えば、この制限は回避できます。
 
@@ -1453,10 +1453,10 @@ filename、lineno が与えられた場合は、ファイル filename、
     # を定義する
     foo
     p bar
-    # => "bar"
+    #=> "bar"
 
-メソッド定義のネストに関して、この制限はなくなっています。
-さらに、Ruby 1.7 以降, instance_eval を使わなく
+Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなくなっています。
+さらに、 instance_eval を使わなく
 ても以下で同じことができます (厳密には異なります。
 [[unknown:クラス／メソッドの定義/メソッド定義のネスト]]
 を参照してください)。
