@@ -2,8 +2,8 @@
 
 --- `(command) -> String
 
-command ¤ò³°Éô¥³¥Þ¥ó¥É¤È¤·¤Æ¼Â¹Ô¤·¡¢¤½¤Î·ë²Ì¤òÉ¸½à½ÐÎÏ¤Ë
-½ñ¤­½Ð¤·¤Þ¤¹¡£¤³¤Î¥á¥½¥Ã¥É¤Ï `command` ¤Î·Á¼°¤Ç¸Æ¤Ð¤ì¤Þ¤¹¡£
+command ¤ò³°Éô¥³¥Þ¥ó¥É¤È¤·¤Æ¼Â¹Ô¤·¡¢¤½¤ÎÉ¸½à½ÐÎÏ¤òÊ¸»úÎó¤È¤·¤Æ
+ÊÖ¤·¤Þ¤¹¡£¤³¤Î¥á¥½¥Ã¥É¤Ï `command` ¤Î·Á¼°¤Ç¸Æ¤Ð¤ì¤Þ¤¹¡£
 
 °ú¿ô command ¤ËÂÐ¤·¥À¥Ö¥ë¥¯¥©¡¼¥È¤Ç°Ï¤Þ¤ì¤¿Ê¸»úÎó¤ÈÆ±ÍÍ¤Î²ò¼á¤È¼°Å¸³«¤ò¹Ô¤Ã¤¿¸å¡¢
 ¥³¥Þ¥ó¥É¤È¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
@@ -20,20 +20,23 @@ command ¤ò³°Éô¥³¥Þ¥ó¥É¤È¤·¤Æ¼Â¹Ô¤·¡¢¤½¤Î·ë²Ì¤òÉ¸½à½ÐÎÏ¤Ë
 @return ¥³¥Þ¥ó¥É¤Î½ÐÎÏ¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 @raise Errno::EXXX ¥³¥Þ¥ó¥É¤ò¼Â¹Ô¤Ç¤­¤Ê¤¤¤È¤­¤ä¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
-  `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
-  p $? #=> #<Process::Status: pid=3580,exited(0)>
+  puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
+  puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
 
-@see [[m:Kernel.#system]],[[m:Kernel.#exec]]
+@see [[m:Kernel.#system]],[[m:Kernel.#exec]],[[m:Kernel.#open]]
 
 --- system(command) -> bool
 --- system(program, *arg) -> bool
 
-command ¤ò³°Éô¥³¥Þ¥ó¥É¤È¤·¤Æ¼Â¹Ô¤·¤Æ¡¢À®¸ù¤·¤¿»þ(»Ò¥×¥í¥»¥¹¤¬½ªÎ»¥¹¥Æ¡¼¥¿¥¹ 0 ¤Ç½ªÎ»¤·¤¿»þ)¤Ë¤Ï¿¿¤ò¡¢
-¼ºÇÔ¤·¤¿»þ
+command ¤ò³°Éô¥³¥Þ¥ó¥É¤È¤·¤Æ¼Â¹Ô¤·¤Æ¡¢À®¸ù¤·¤¿»þ¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
+
+»Ò¥×¥í¥»¥¹¤¬½ªÎ»¥¹¥Æ¡¼¥¿¥¹ 0 ¤Ç½ªÎ»¤¹¤ë¤ÈÀ®¸ù¤È¤ß¤Ê¤· true ¤òÊÖ¤·¤Þ¤¹¡£
 #@if (version < "1.9.0")
-(¥³¥Þ¥ó¥É¤¬¼Â¹Ô¤Ç¤­¤Ê¤«¤Ã¤¿¾ì¹ç¤â´Þ¤à)
+¤½¤ì°Ê³°¤Î»þ
+(¥³¥Þ¥ó¥É¤¬¼Â¹Ô¤Ç¤­¤Ê¤«¤Ã¤¿¾ì¹ç¤â´Þ¤à)¤Ï false ¤òÊÖ¤·¤Þ¤¹¡£
+#@else
+¤½¤ì°Ê³°¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Î¾ì¹ç¤Ï false ¤òÊÖ¤·¤Þ¤¹¡£
 #@end
-¤Ë¤Ïµ¶¤òÊÖ¤·¤Þ¤¹¡£
 
 ½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤ÏÊÑ¿ô [[m:$?]] ¤Ç»²¾È¤Ç¤­¤Þ¤¹¡£
 
@@ -47,9 +50,9 @@ $? ¤ò»²¾È¤¹¤ë¤³¤È¤ÇÈ½ÊÌ²ÄÇ½¤Ç¤¹¡£
 
 °ú¿ô¤Î²ò¼á¤Ë´Ø¤·¤Æ¤Ï [[m:Kernel.#exec]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-@param command [[m:Kernel.#exec]]»²¾È
-@param program [[m:Kernel.#exec]]»²¾È
-@param arg [[m:Kernel.#exec]]»²¾È
+@param command [[m:Kernel.#exec]] »²¾È
+@param program [[m:Kernel.#exec]] »²¾È
+@param arg [[m:Kernel.#exec]] »²¾È
 #@since 1.9.0
 @raise Errno::EXXX ¥³¥Þ¥ó¥É¤ò¼Â¹Ô¤Ç¤­¤Ê¤¤¤È¤­¤ËÈ¯À¸¤·¤Þ¤¹¡£
 #@end
@@ -60,6 +63,7 @@ $? ¤ò»²¾È¤¹¤ë¤³¤È¤ÇÈ½ÊÌ²ÄÇ½¤Ç¤¹¡£
 #@else
 @see [[m:Kernel.#exec]],[[m:Kernel.#`]],[[m:Kernel.#open]]
 #@end
+
 --- exec(command) -> ()
 --- exec(program, *arg) -> ()
 
@@ -95,25 +99,32 @@ program ¤Î°ú¿ô¤ËÅÏ¤µ¤ì¤Þ¤¹¡£
 
 #@#Îã...
 
-@see [[m:Kernel.#system]],[[m:Kernel.#`]]
+#@since 1.9.0
+@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]]
+#@else
+@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]]
+#@end
 
+#@since 1.8.0
+--- exit(status = true) -> ()
+#@else
 --- exit(status = 0) -> ()
+#@end
 
 Ruby¥×¥í¥°¥é¥à¤Î¼Â¹Ô¤ò½ªÎ»¤·¤Þ¤¹¡£status ¤È¤·¤ÆÀ°
 ¿ô¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¡¢¤½¤ÎÃÍ¤ò Ruby ¥³¥Þ¥ó¥É¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Þ¤¹¡£
 ¥Ç¥Õ¥©¥ë¥È¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Ï 0(Àµ¾ï½ªÎ»)¤Ç¤¹¡£
 
+#@since 1.8.0
+status ¤¬ true ¤Î¾ì¹ç 0¡¢ false ¤Î¾ì¹ç 1 ¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¤È¤ß¤Ê¤µ¤ì¤Þ¤¹¡£¤³¤ÎÃÍ¤ÏC¥ì¥Ù¥ë¤ÎÄê¿ô
+EXIT_SUCCESS¡¢EXIT_FAILURE ¤ÎÃÍ¤Ê¤Î¤Ç¡¢Àµ³Î¤Ë¤Ï´Ä¶­°ÍÂ¸¤Ç¤¹¡£
+#@end
+
 exit ¤ÏÎã³° [[c:SystemExit]] ¤òÈ¯À¸¤µ¤»
 ¤ë¤³¤È¤Ë¤è¤Ã¤Æ¥×¥í¥°¥é¥à¤Î¼Â¹Ô¤ò½ªÎ»¤µ¤»¤Þ¤¹¤Î¤Ç¡¢
 É¬Í×¤Ë±þ¤¸¤Æ [[unknown:rescue|À©¸æ¹½Â¤/begin]] Àá¤ÇÊáÂª¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
-#@since 1.8.0
-status¤¬true¤Î¾ì¹ç¡¢EXIT_SUCCESS¤ò
-½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Þ¤¹¡£status¤¬false¤Î¾ì¹ç¡¢EXIT_FAILURE¤ò
-½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤ÏEXIT_SUCCESS¤Ë
-ÊÑ¹¹¤µ¤ì¤Æ¤¤¤Þ¤¹¡£( EXIT_SUCCESS¡¢EXIT_FAILURE¤ÏC¥ì¥Ù¥ë¤ÎÄê¿ô )
-#@end
-@param status ½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤òÀ°¿ô¤«¿¿µ¶ÃÍ¤ÇÍ¿¤¨¤Þ¤¹¡£
+@param status ½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤òÀ°¿ô¤« true ¤Þ¤¿¤Ï false ¤ÇÍ¿¤¨¤Þ¤¹¡£
 
   puts 'start'
   begin
@@ -140,22 +151,30 @@ status¤¬true¤Î¾ì¹ç¡¢EXIT_SUCCESS¤ò
 
 @see [[m:Kernel.#exit!]],[[m:Kernel.#abort]]
 
+#@since 1.8.0
+--- exit(status = false) -> ()
+#@else
 --- exit!(status = -1) -> ()
+#@end
 
-À°¿ô status ¤ò½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Æ¡¢Ruby ¥×¥í¥°¥é¥à
-¤Î¼Â¹Ô¤ò½ªÎ»¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Ï -1 ¤Ç¤¹¡£
-
-exit! ¤Ï exit ¤È¤Ï°ã¤Ã¤Æ¡¢Îã³°½èÍý¤Ê¤É¤Ï°ìÀÚ¹Ô¤Ê¤¤¤Þ¤»
-¤ó¡£[[m:Kernel.#fork]]¤Î¸å¡¢»Ò¥×¥í¥»¥¹¤ò½ªÎ»¤µ¤»¤ë»þ¤Ê¤É¤ËÍÑ
-¤¤¤é¤ì¤Þ¤¹¡£
+Ruby¥×¥í¥°¥é¥à¤Î¼Â¹Ô¤òÂ¨ºÂ¤Ë½ªÎ»¤·¤Þ¤¹¡£
+status ¤È¤·¤ÆÀ°¿ô¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¡¢¤½¤ÎÃÍ¤ò Ruby ¥³¥Þ¥ó¥É¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Þ¤¹¡£
+#@since 1.8.0
+¥Ç¥Õ¥©¥ë¥È¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Ï 1 ¤Ç¤¹¡£
+#@else
+¥Ç¥Õ¥©¥ë¥È¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Ï -1 ¤Ç¤¹¡£
+#@end
 
 #@since 1.8.0
-status¤¬true¤Î¾ì¹ç¡¢EXIT_SUCCESS¤ò
-½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Þ¤¹¡£status¤¬false¤Î¾ì¹ç¡¢EXIT_FAILURE¤ò
-½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤È¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Î½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤ÏEXIT_SUCCESS¤Ë
-ÊÑ¹¹¤µ¤ì¤Æ¤¤¤Þ¤¹¡£( EXIT_SUCCESS¡¢EXIT_FAILURE¤ÏC¥ì¥Ù¥ë¤ÎÄê¿ô )
+status ¤¬ true ¤Î¾ì¹ç 0¡¢ false ¤Î¾ì¹ç 1 ¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¤È¤ß¤Ê¤µ¤ì¤Þ¤¹¡£¤³¤ÎÃÍ¤ÏC¥ì¥Ù¥ë¤ÎÄê¿ô
+EXIT_SUCCESS¡¢EXIT_FAILURE ¤ÎÃÍ¤Ê¤Î¤Ç¡¢Àµ³Î¤Ë¤Ï´Ä¶­°ÍÂ¸¤Ç¤¹¡£
 #@end
-@param status ½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤òÀ°¿ô¤«¿¿µ¶ÃÍ¤ÇÍ¿¤¨¤Þ¤¹¡£
+
+exit! ¤Ï exit ¤È¤Ï°ã¤Ã¤Æ¡¢Îã³°½èÍý¤Ê¤É¤Ï°ìÀÚ¹Ô¤Ê¤¤¤Þ¤»
+¤ó¡£ [[m:Kernel.#fork]] ¤Î¸å¡¢»Ò¥×¥í¥»¥¹¤ò½ªÎ»¤µ¤»¤ë»þ¤Ê¤É¤ËÍÑ
+¤¤¤é¤ì¤Þ¤¹¡£
+
+@param status ½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤òÀ°¿ô¤« true ¤Þ¤¿¤Ï false ¤ÇÍ¿¤¨¤Þ¤¹¡£
 
   STDOUT.sync = true #É½¼¨Á°¤Ë½ªÎ»¤·¤Ê¤¤¤è¤¦¤Ë¤¹¤ë
   puts 'start'
@@ -169,7 +188,11 @@ status¤¬true¤Î¾ì¹ç¡¢EXIT_SUCCESS¤ò
   
   #=> start
   #   start1...
+#@since 1.8.0
   #½ªÎ»¥¹¥Æ¡¼¥¿¥¹:1
+#@else
+  #½ªÎ»¥¹¥Æ¡¼¥¿¥¹:-1
+#@end
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#abort]]
 
@@ -179,14 +202,18 @@ status¤¬true¤Î¾ì¹ç¡¢EXIT_SUCCESS¤ò
 --- abort -> ()
 #@end
 
-Ruby ¥×¥í¥°¥é¥à¤ò°Û¾ï½ªÎ»¤·¤Þ¤¹¡£
+Ruby ¥×¥í¥°¥é¥à¤ò¥¨¥é¡¼¥á¥Ã¥»¡¼¥¸ÉÕ¤­¤Ç½ªÎ»¤·¤Þ¤¹¡£½ªÎ»¥¹¥Æ¡¼¥¿¥¹¤Ï 1 ¸ÇÄê¤Ç¤¹¡£
 
-[[m:Kernel.#exit]] ¤È¤Î°ã¤¤¤Ï¡¢¸Æ¤Ó½Ð¤·»þ¤Ë [[m:$!]] ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ð¤½¤ÎÎã³°¤Î
-¥á¥Ã¥»¡¼¥¸¤òÉ¸½à¥¨¥é¡¼½ÐÎÏ [[m:$stderr]] ¤Ë½ÐÎÏ¤¹¤ë¤³¤È¤È¡¢¥×¥í¥°¥é¥à¤Î½ªÎ»¥¹¥Æ¡¼
-¥¿¥¹¤¬ EXIT_FAILURE (¤Û¤È¤ó¤É¤Î´Ä¶­¤Ç¤Ï 1) ¸ÇÄê¤Ç¤¢¤ë¤³¤È¤Ç¤¹¡£
+¤³¤Î¥á¥½¥Ã¥É¤È [[m:Kernel.#exit]] ¤È¤Î°ã¤¤¤Ï¡¢¥×¥í¥°¥é¥à¤Î½ªÎ»¥¹¥Æ¡¼
+¥¿¥¹¤¬ 1 (Àµ³Î¤Ë¤ÏC¥ì¥Ù¥ë¤ÎÄê¿ô EXIT_FAILURE ¤ÎÃÍ)¸ÇÄê¤Ç¤¢¤ë¤³¤È¤È¡¢
+#@since 1.8.0
+°ú¿ô¤ò¾ÊÎ¬¤·¤¿¸Æ¤Ó½Ð¤·»þ¤Ë 
+#@end
+[[m:$!]] ¤¬ nil ¤Ç¤Ê¤±¤ì¤Ð¤½¤ÎÎã³°¤Î
+¥á¥Ã¥»¡¼¥¸¤òÉ¸½à¥¨¥é¡¼½ÐÎÏ [[m:$stderr]] ¤Ë½ÐÎÏ¤¹¤ë¤³¤È¤Ç¤¹¡£
 
 #@since 1.8.0
-°ú¿ô message ¤ò»ØÄê¤¹¤ë¤ÈSystemExit¥¯¥é¥¹¤Î
+°ú¿ô message ¤ò»ØÄê¤¹¤ë¤È SystemExit ¥¯¥é¥¹¤Î
 [[m:Exception#message]] ¤Ë message ¤òÀßÄê¤·
 ¤ÆÉ¸½à¥¨¥é¡¼½ÐÎÏ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
 #@end
@@ -203,7 +230,8 @@ Ruby ¥×¥í¥°¥é¥à¤ò°Û¾ï½ªÎ»¤·¤Þ¤¹¡£
   
   begin
     puts 'start2...'
-    abort "error2"
+    $! = RuntimeError.new
+    abort
   ensure
     puts 'end2...'
   end
@@ -211,13 +239,13 @@ Ruby ¥×¥í¥°¥é¥à¤ò°Û¾ï½ªÎ»¤·¤Þ¤¹¡£
   
   #=> start
   #   start1...
-  #   end1 with #<SystemExit: exit>
+  #   end1 with #<SystemExit: error1>
   #   start2...
   #   end2...
   #½ªÎ»¥¹¥Æ¡¼¥¿¥¹:1
   #(É¸½à¥¨¥é¡¼½ÐÎÏ)
   #=> error1
-  #   error2
+  #   ..:12: RuntimeError (RuntimeError)
 
 @see [[m:Kernel.#exit]],[[m:Kernel.#exit!]]
 
@@ -233,11 +261,10 @@ nil ¤òÊÖ¤·¤Þ¤¹¡£¥Ö¥í¥Ã¥¯¤ò»ØÄê¤·¤Æ¸Æ¤Ó½Ð¤·¤¿¾ì¹ç¤Ë¤Ï¡¢À¸À®¤·
 fork Á°¤Ë STDOUT ¤È STDERR ¤ò [[m:IO#flush]] ¤·¤Þ¤¹¡£
 #@end
 
-@raise NotImplementedError ¼Â¹Ô´Ä¶­¤¬ fork ¤ËÂÐ±þ¤·¤Æ¤¤¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
+@raise NotImplementedError ¼Â¹Ô´Ä¶­¤¬¤³¤Î¥á¥½¥Ã¥É¤ËÂÐ±þ¤·¤Æ¤¤¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
 
 #@#Îã...
 
-@see [[m:Kernel.#syscall]]
 
 #@since 1.9.0
 --- spawn(command) -> Integer
@@ -248,9 +275,9 @@ fork Á°¤Ë STDOUT ¤È STDERR ¤ò [[m:IO#flush]] ¤·¤Þ¤¹¡£
 
 °ú¿ô¤Î²ò¼á¤Ë´Ø¤·¤Æ¤Ï [[m:Kernel.#exec]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-@param command [[m:Kernel.#exec]]»²¾È
-@param program [[m:Kernel.#exec]]»²¾È
-@param arg [[m:Kernel.#exec]]»²¾È
+@param command [[m:Kernel.#exec]] »²¾È
+@param program [[m:Kernel.#exec]] »²¾È
+@param arg [[m:Kernel.#exec]] »²¾È
 @raise  Errno::EXXX ¥³¥Þ¥ó¥É¤ò¼Â¹Ô¤Ç¤­¤Ê¤¤¤È¤­¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
 #@#Îã...
@@ -271,10 +298,13 @@ num¤Ç»ØÄê¤µ¤ì¤¿ÈÖ¹æ¤Î¥·¥¹¥Æ¥à¥³¡¼¥ë¤ò¼Â¹Ô¤·¤Þ¤¹¡£
 ¤¬ -1 ¤òÊÖ¤¹¾ì¹ç¤Ë¤ÏÎã³° [[c:Errno::EXXX]] ¤¬È¯À¸¤·¤Þ¤¹¡£
 ¤½¤ì°Ê³°¤Ç¤Ï¡¢ÊÖ¤·¤¿ÃÍ¤ò¤½¤Î¤Þ¤Þ¿ôÃÍ¤ÇÊÖ¤·¤Þ¤¹¡£
 
+[[lib:dl]] ¤ò»È¤¨¤Ð¤è¤ê¹â¥ì¥Ù¥ë¤ÊÁàºî¤¬¤Ç¤­¤Þ¤¹¡£
+
 @param num ¥·¥¹¥Æ¥à¥³¡¼¥ëÈÖ¹æ¤Ç¤¹¡£
 @param arg Ê¸»úÎó¤«¡¢À°¿ô¤Ç¤¹¡£ºÇÂç 9 ¸Ä¤Þ¤ÇÅÏ¤¹¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
-@raise Errno::EXXX syscall(2)¤¬ -1 ¤òÊÖ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
-
+@raise Errno::EXXX syscall(2) ¤¬ -1 ¤òÊÖ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise NotImplementedErro ¼Â¹Ô´Ä¶­¤¬¤³¤Î¥á¥½¥Ã¥É¤ËÂÐ±þ¤·¤Æ¤¤¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
+@see [[lib:dl]]
 #@#Îã...
 
 --- open(file, mode = "r", perm = 0666) -> IO
@@ -354,10 +384,10 @@ Perl¤È°Û¤Ê¤ê¥³¥Þ¥ó¥É¤Ï¾ï¤Ë `|' ¤Ç»Ï¤Þ¤ê¤Þ¤¹¡£
 
 [[m:IO.select]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
-@param reads [[m:IO.select]]»²¾È
-@param writes [[m:IO.select]]»²¾È
-@param excepts [[m:IO.select]]»²¾È
-@param timeout [[m:IO.select]]»²¾È
+@param reads [[m:IO.select]] »²¾È
+@param writes [[m:IO.select]] »²¾È
+@param excepts [[m:IO.select]] »²¾È
+@param timeout [[m:IO.select]] »²¾È
 @see [[m:IO.select]]
 
 --- test(cmd, file) -> bool|Time|Integer|nil
@@ -715,14 +745,14 @@ event ¤Ë±þ¤¸¡¢°Ê²¼¤Î¤â¤Î¤¬ÅÏ¤µ¤ì¤Þ¤¹¡£
   43.to_s
   
   #----·ë²Ì----
-  #["line", "C:/.../", 4, nil, #<Binding:0x2b69584>, false]
-  #  ["c-call", "C:/.../", 4, :inherited, #<Binding:0x2b693b8>, Class]
-  #    ["c-return", "C:/.../", 4, :inherited, #<Binding:0x2b6937c>, Class]
-  #      ["class", "C:/.../", 4, nil, #<Binding:0x2b69098>, false]
-  #        ["end", "C:/.../", 4, nil, nil, false]
-  #        ["line", "C:/.../", 6, nil, #<Binding:0x2b68d78>, false]
-  #          ["c-call", "C:/.../", 6, :to_s, #<Binding:0x2b68c88>, Fixnum]
-  #            ["c-return", "C:/.../", 6, :to_s, #<Binding:0x2b68aa8>, Fixnum]
+  #["line", "..", 4, nil, #<Binding:0x2b69584>, false]
+  #  ["c-call", "..", 4, :inherited, #<Binding:0x2b693b8>, Class]
+  #    ["c-return", "..", 4, :inherited, #<Binding:0x2b6937c>, Class]
+  #      ["class", "..", 4, nil, #<Binding:0x2b69098>, false]
+  #        ["end", "..", 4, nil, nil, false]
+  #        ["line", "..", 6, nil, #<Binding:0x2b68d78>, false]
+  #          ["c-call", "..", 6, :to_s, #<Binding:0x2b68c88>, Fixnum]
+  #            ["c-return", "..", 6, :to_s, #<Binding:0x2b68aa8>, Fixnum]
 
 @see [[m:Kernel.#caller]]
 
@@ -736,10 +766,10 @@ level_num ÃÊ¾å¤Î¸Æ¤Ó½Ð¤·¸µ¤Î¾ðÊó¤ò [[m:$@]]
 ¥È¥Ã¥×¥ì¥Ù¥ë¤Ç¤Ï¶õ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£caller ¤ÎÌá¤êÃÍ¤ò $@ ¤ËÂåÆþ¤¹¤ë¤³¤È¤Ç
 Îã³°¤ÎÈ¯À¸°ÌÃÖ¤òÀßÄê¤Ç¤­¤Þ¤¹¡£
 
-»ØÄê¤·¤¿ level_num ÃÊ¾å¤¬Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ïnil¤òÊÖ¤·¤Þ¤¹¡£
+»ØÄê¤·¤¿ level_num ÃÊ¾å¤¬Â¸ºß¤·¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
 
 @param level_num long ¤ÎÈÏ°Ï¤òÄ¶¤¨¤Ê¤¤Àµ¤ÎÀ°¿ô¤Ç¥¹¥¿¥Ã¥¯¥ì¥Ù¥ë¤ò»ØÄê¤·¤Þ¤¹¡£
-@see [[m:Kernel.#set_trace_func]]
+@see [[m:Kernel.#set_trace_func]],[[m:Kernel.#raise]]
 
     def foo
       p caller(0)
@@ -896,7 +926,7 @@ ch ¤¬Ê¸»úÎó¤Ê¤é¡¢¤½¤ÎÀèÆ¬¤ÎÊ¸»ú¤ò½ÐÎÏ¤·¤Þ¤¹¡£
 @param ch ½ÐÎÏ¤¹¤ëÊ¸»ú¤Ç¤¹¡£¿ô»ú¤Þ¤¿¤ÏÊ¸»úÎó¤Ç»ØÄê¤·¤Þ¤¹¡£
 @return ch ¤òÊÖ¤·¤Þ¤¹¡£
 @raise c:RangeError Bignum ¤ò°ú¿ô¤Ë¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
-@raise IOError $stdout¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
+@raise IOError É¸½à½ÐÎÏ¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
 @raise Errno::EXXX ½ÐÎÏ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
 #@#1.9¤Ç¤â¤¤¤Þ¤Î¤È¤³¤íÆ±¤¸·ë²Ì
@@ -923,7 +953,7 @@ p ¤Ë°ú¿ô¤òÍ¿¤¨¤º¤Ë¸Æ¤Ó½Ð¤·¤¿¾ì¹ç¤ÏÆÃ¤Ë²¿¤â¤·¤Þ¤»¤ó¡£
 
 @param arg ½ÐÎÏ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤òÇ¤°Õ¸Ä»ØÄê¤·¤Þ¤¹¡£
 #@#inspect¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤ë¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡Ê¼Â¼ÁÇ¤°Õ¤Î¥ª¥Ö¥¸¥§¥¯¥È¡Ë¡£
-@raise IOError $stdout¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
+@raise IOError É¸½à½ÐÎÏ¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
 @raise Errno::EXXX ½ÐÎÏ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 @return nil ¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -958,7 +988,7 @@ to_s ¥á¥½¥Ã¥É¤Ë¤è¤êÊ¸»úÎó¤ËÊÑ´¹¤·¤Æ¤«¤é½ÐÎÏ¤·¤Þ¤¹¡£
 @param arg ½ÐÎÏ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤òÇ¤°Õ¸Ä»ØÄê¤·¤Þ¤¹¡£
 #@#to_s ¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤ë¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¢¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡Ê¼Â¼ÁÇ¤°Õ¤Î¥ª¥Ö¥¸¥§¥¯¥È¡Ë¡£
 @return nil ¤òÊÖ¤·¤Þ¤¹¡£
-@raise IOError $stdout ¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
+@raise IOError É¸½à½ÐÎÏ¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
 @raise Errno::EXXX ½ÐÎÏ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
 #@since 1.9.0
@@ -1009,7 +1039,7 @@ to_s ¥á¥½¥Ã¥É¤Ë¤è¤êÊ¸»úÎó¤ËÊÑ´¹¤·¤Æ¤«¤é½ÐÎÏ¤·¤Þ¤¹¡£
 
 @param arg ½ÐÎÏ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤òÇ¤°Õ¸Ä»ØÄê¤·¤Þ¤¹¡£
 @return nil ¤òÊÖ¤·¤Þ¤¹¡£
-@raise IOError $stdout¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
+@raise IOError É¸½à½ÐÎÏ¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
 @raise Errno::EXXX ½ÐÎÏ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
 #@since 1.9.0
@@ -1058,7 +1088,7 @@ to_s ¥á¥½¥Ã¥É¤Ë¤è¤êÊ¸»úÎó¤ËÊÑ´¹¤·¤Æ¤«¤é½ÐÎÏ¤·¤Þ¤¹¡£
 
 @param arg ½ÐÎÏ¤¹¤ë¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
 @return nil ¤òÊÖ¤·¤Þ¤¹¡£
-@raise IOError $stderr¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
+@raise IOError É¸½à¥¨¥é¡¼½ÐÎÏ¤¬½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÈ¯À¸¤·¤Þ¤¹¡£
 @raise Errno::EXXX ½ÐÎÏ¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
   warn "caution!" #=> caution!
@@ -1099,35 +1129,35 @@ arg ¤Ë to_ary, to_a ¤Î¤¤¤º¤ì¤Î¥á¥½¥Ã¥É¤â¤Ê¤¤¾ì¹ç¤Ï
 ¤ÏÀ°¿ô¤äÉâÆ°¾®¿ôÅÀ¿ô¤È¸«¤Ê¤»¤ë¤â¤Î¤Î¤ßÊÑ´¹¤·¤Þ¤¹¡£
 
 ¿ôÃÍ¤ÈÊ¸»úÎó°Ê³°¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Î¾ì¹ç¤Ï to_f ¤ò¸Æ¤ó¤ÇÊÑ´¹¤·¤Þ¤¹¡£
-¤¿¤À¤·¡¢nil¤ËÂÐ¤·¤Æ¤ÏTypeError¤¬È¯À¸¤·¤Þ¤¹¡£
+¤¿¤À¤·¡¢nil ¤ËÂÐ¤·¤Æ¤Ï TypeError ¤¬È¯À¸¤·¤Þ¤¹¡£
 
-¥á¥½¥Ã¥ÉFloat¤ÏÊ¸»úÎó¤ËÂÐ¤·[[m:String#to_f]]¤è¤ê¤â¸·Ì©¤ÊÊÑ´¹¤ò¹Ô¤¤¤Þ¤¹¡£
+¥á¥½¥Ã¥É Float ¤ÏÊ¸»úÎó¤ËÂÐ¤· [[m:String#to_f]] ¤è¤ê¤â¸·Ì©¤ÊÊÑ´¹¤ò¹Ô¤¤¤Þ¤¹¡£
 
 @param arg ÊÑ´¹ÂÐ¾Ý¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
 @raise ArgumentError À°¿ô¤äÉâÆ°¾®¿ôÅÀ¿ô¤È¸«¤Ê¤»¤Ê¤¤Ê¸»úÎó¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 @raise TypeError nil ¤Þ¤¿¤Ï¥á¥½¥Ã¥É to_f ¤ò»ý¤¿¤Ê¤¤¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¤«¡¢ to_f ¤¬ÉâÆ°¾®¿ôÅÀ¿ô
   ¤òÊÖ¤µ¤Ê¤«¤Ã¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
-    p Float(4)          #=> 4.0
-    p Float(4_000)      #=> 4000.0
-    p Float(9.88)       #=> 9.88
+    p Float(4)            #=> 4.0
+    p Float(4_000)        #=> 4000.0
+    p Float(9.88)         #=> 9.88
     
     p Flot(Time.gm(1986)) #=> 504921600.0
-    p Float(Object.new) # cannot convert Object into Float (TypeEarror)
-    p Float(nil)        # cannot convert nil into Float (TypeError)
+    p Float(Object.new)   # cannot convert Object into Float (TypeEarror)
+    p Float(nil)          # cannot convert nil into Float (TypeError)
     
-    p Float("10")       #=> 10.0
-    p Float("10e2")     #=> 1000.0
-    p Float("1e-2")     #=> 0.01
-    p Float(".1")       #=> 0.1
+    p Float("10")         #=> 10.0
+    p Float("10e2")       #=> 1000.0
+    p Float("1e-2")       #=> 0.01
+    p Float(".1")         #=> 0.1
 
-    p Float("nan")      # invalid value (ArgumentError)
-    p Float("INF")      # invalid value (ArgumentError)
-    p Float("-Inf")     # invalid value (ArgumentError)
+    p Float("nan")        # invalid value (ArgumentError)
+    p Float("INF")        # invalid value (ArgumentError)
+    p Float("-Inf")       # invalid value (ArgumentError)
     p Float(("10" * 1000)) #=> Infinity
-    p Float("0xa.a")    # invalid value (ArgumentError)
-    p Float(" \n10\s \t")  #=> 10.0 # ¶õÇòÎà¤ÏÌµ»ë¤µ¤ì¤ë
-    p Float("")         # invalid value (ArgumentError)
+    p Float("0xa.a")      # invalid value (ArgumentError)
+    p Float(" \n10\s \t") #=> 10.0 # ¶õÇòÎà¤ÏÌµ»ë¤µ¤ì¤ë
+    p Float("")           # invalid value (ArgumentError)
 
 @see [[m:String#to_f]],[[c:Float]]
 
@@ -1151,7 +1181,7 @@ arg ¤Ë to_ary, to_a ¤Î¤¤¤º¤ì¤Î¥á¥½¥Ã¥É¤â¤Ê¤¤¾ì¹ç¤Ï
 #@end
 
 @param arg ÊÑ´¹ÂÐ¾Ý¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
-@raise [[c:ArgumentError]] À°¿ô¤È¸«¤Ê¤»¤Ê¤¤Ê¸»úÎó¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise ArgumentError À°¿ô¤È¸«¤Ê¤»¤Ê¤¤Ê¸»úÎó¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 #@since 1.8.0
 @raise TypeError ¥á¥½¥Ã¥É to_int, to_i ¤ò»ý¤¿¤Ê¤¤¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤Ë»ØÄê¤·¤¿¤«¡¢to_int, to_i
   ¤¬À°¿ô([[c:Integer]]¤Î¥µ¥Ö¥¯¥é¥¹)¤òÊÖ¤µ¤Ê¤«¤Ã¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
@@ -1523,8 +1553,8 @@ $_.sub ¤È¤³¤Î¥á¥½¥Ã¥É sub ¤Ï°Ê²¼¤ÎÅÀ¤Ç°ã¤¤¤¬¤¢¤ê¤Þ¤¹¡£
   * sub ¤Ï $_ ¤ÎÃÍ¤ò¥³¥Ô¡¼¤·¤Æ¡¢¥³¥Ô¡¼¤ÎÊý¤ò¹¹¿·¤·¡¢
   $_ ¤ËºÆÂåÆþ¤·¤Þ¤¹¡£
 
-@param pattern [[m:String#sub]]»²¾È
-@param replace [[m:String#sub]]»²¾È
+@param pattern [[m:String#sub]] »²¾È
+@param replace [[m:String#sub]] »²¾È
 @see [[m:String#sub]],[[m:$_]]
 
 --- gsub(pattern, replace) -> 
@@ -1545,8 +1575,8 @@ $_.gsub ¤È¤³¤Î¥á¥½¥Ã¥É gsub ¤Ï°Ê²¼¤ÎÅÀ¤Ç°ã¤¤¤¬¤¢¤ê¤Þ¤¹¡£
   * gsub ¤Ï $_ ¤ÎÃÍ¤ò¥³¥Ô¡¼¤·¤Æ¡¢¥³¥Ô¡¼¤ÎÊý¤ò¹¹¿·¤·¡¢
   $_ ¤ËºÆÂåÆþ¤·¤Þ¤¹¡£
 
-@param pattern [[m:String#gsub]]»²¾È
-@param replace [[m:String#gsub]]»²¾È
+@param pattern [[m:String#gsub]] »²¾È
+@param replace [[m:String#gsub]] »²¾È
 @see [[m:String#gsub]],[[m:$_]]
 
 --- chop -> String
@@ -1590,7 +1620,7 @@ $_.chomp ¤È¤³¤Î¥á¥½¥Ã¥É chomp ¤Ï°Ê²¼¤ÎÅÀ¤Ç°ã¤¤¤¬¤¢¤ê¤Þ¤¹¡£
   * chomp ¤Ï $_ ¤ÎÃÍ¤ò¥³¥Ô¡¼¤·¤Æ¡¢¥³¥Ô¡¼¤ÎÊý¤ò¹¹¿·¤·¡¢
   $_ ¤ËºÆÂåÆþ¤·¤Þ¤¹¡£
 
-@param rs [[m:String#chomp]]»²¾È
+@param rs [[m:String#chomp]] »²¾È
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 
 --- split([sep[, limit]]) -> 
@@ -1600,8 +1630,8 @@ $_.split ¤ÈÆ±¤¸¤Ç¤¹¡£
 °Å¹æÅª¤Ë¤Ê¤ê¤¹¤®¤ë¤­¤é¤¤¤¬¤¢¤ë¤¿¤á¡¢¤³¤Î¥á¥½¥Ã¥É¤Î»ÈÍÑ¤Ï¿ä¾©¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£
 º£¸å¤Ï¤è¤êÌÀ¼¨Åª¤Ê $_.split ¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£
 
-@param sep [[m:String#split]]»²¾È
-@param limit [[m:String#split]]»²¾È
+@param sep [[m:String#split]] »²¾È
+@param limit [[m:String#split]] »²¾È
 @see [[m:String#split]],[[m:$_]]
 
 --- scan(re) -> 
@@ -1612,7 +1642,7 @@ $_.scan ¤ÈÆ±¤¸¤Ç¤¹¡£
 °Å¹æÅª¤Ë¤Ê¤ê¤¹¤®¤ë¤­¤é¤¤¤¬¤¢¤ë¤¿¤á¡¢¤³¤Î¥á¥½¥Ã¥É¤Î»ÈÍÑ¤Ï¿ä¾©¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£
 º£¸å¤Ï¤è¤êÌÀ¼¨Åª¤Ê $_.scan ¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£
 
-@param re [[m:String#scan]]»²¾È
+@param re [[m:String#scan]] »²¾È
 @see [[m:String#scan]],[[m:$_]]
 
 #@end
@@ -1625,8 +1655,8 @@ command ¤òÅÐÏ¿¤·¤Þ¤¹¡£[[m:Signal.#trap]]¤ÈÆ±¤¸¤Ç¤¹¡£
 
 [[m:Signal.#trap]]¤Î»ÈÍÑ¤ò¿ä¾©¤·¤Þ¤¹¡£
 
-@param signal [[m:Signal.#trap]]»²¾È
-@param command [[m:Signal.#trap]]»²¾È
+@param signal [[m:Signal.#trap]] »²¾È
+@param command [[m:Signal.#trap]] »²¾È
 
 @see [[m:Signal.#trap]],[[c:Signal]]
 #@else
@@ -1683,13 +1713,14 @@ trap ¼Â¹ÔÁ°¤Ë"IGNORE" ¤ä "DEFAULT" ¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤¤¿¤Ê¤é¡¢
 ILL FPE SEGV TERM BREAK ABRT ¤½¤·¤Æ EXIT ¤·¤«»ØÄê¤Ç¤­¤Þ¤»¤ó¡£-))
 #@end
 
---- trace_var(varname, hook) -> [String|Proc]|nil
---- trace_var(varname) {|new_val| .... } -> [String|Proc]|nil
+--- trace_var(varname, hook) -> nil
+--- trace_var(varname){|new_val| .... } -> nil
+--- trace_var(varname, hook) -> [String|Proc]
 
 ¥°¥í¡¼¥Ð¥ëÊÑ¿ô varname ¤Ø¤ÎÂåÆþ¤Î¥Õ¥Ã¥¯¤òÅÐÏ¿¤·¤Þ¤¹¡£
 
 ¤³¤³¤Ç¤Î¡Ö¥°¥í¡¼¥Ð¥ëÊÑ¿ô¡×¤Ï¡¢
-[[unknown:ÆÃ¼ìÊÑ¿ô|ÁÈ¤ß¹þ¤ßÊÑ¿ô]]¤â´Þ¤á¤¿`$' ¤Ç»Ï¤Þ¤ëÊÑ¿ô¤Î¤³¤È¤Ç¤¹¡£
+[[unknown:ÆÃ¼ìÊÑ¿ô|ÁÈ¤ß¹þ¤ßÊÑ¿ô]]¤â´Þ¤á¤¿ `$' ¤Ç»Ï¤Þ¤ëÊÑ¿ô¤Î¤³¤È¤Ç¤¹¡£
 
 ¤³¤Î¸Æ¤Ó½Ð¤·°Ê¹ß¡¢varname ¤Ç»ØÄê¤·¤¿¥°¥í¡¼¥Ð¥ëÊÑ¿ô¤Ë
 ÃÍ¤¬ÂåÆþ¤µ¤ì¤ë¤¿¤Ó¤Ë hook ¤«¥Ö¥í¥Ã¥¯¤¬É¾²Á¤µ¤ì¤Þ¤¹¡£hook ¤¬ Proc ¥ª¥Ö¥¸¥§¥¯¥È¤Î¾ì¹ç
@@ -1698,7 +1729,7 @@ ILL FPE SEGV TERM BREAK ABRT ¤½¤·¤Æ EXIT ¤·¤«»ØÄê¤Ç¤­¤Þ¤»¤ó¡£-))
 trace_var ¤¬¥Õ¥Ã¥¯¤¹¤ë¤Î¤ÏÌÀ¼¨Åª¤ÊÂåÆþ¤À¤±¤Ç¤¹¡£
 ¥Õ¥Ã¥¯¤ÏÊ£¿ôÅÐÏ¿¤Ç¤­¤Þ¤¹¡£
 
-¥È¥ì¡¼¥¹¤ò²ò½ü¤¹¤ë¤Ë¤Ï¡¢hook ¤Ë nil ¤ò
+¥Õ¥Ã¥¯¤ò²ò½ü¤¹¤ë¤Ë¤Ï¡¢hook ¤Ë nil ¤ò
 »ØÄê¤¹¤ë¤«¡¢[[m:Kernel.#untrace_var]] ¤òÍÑ¤¤¤Þ¤¹¡£
 
 hook ¤¬ nil ¤Ê¤é¤Ð¡¢ÀßÄê¤µ¤ì¤Æ¤¤¤¿
@@ -1708,8 +1739,10 @@ hook ¤ò¤¹¤Ù¤Æ²ò½ü¤·¤Æ¤½¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹(¥Ö¥í¥Ã¥¯¤ÇÅÐÏ¿¤µ¤ì¤Æ¤¤¤ì¤Ð
 
 @param varname ¥°¥í¡¼¥Ð¥ëÊÑ¿ôÌ¾¤òÊ¸»úÎó¤« [[c:Symbol]] ¤Ç»ØÄê¤·¤Þ¤¹¡£
 @param hook ¥Õ¥Ã¥¯¤Ë¤Ê¤ëÊ¸»úÎó¤Þ¤¿¤Ï [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
+@return ¥Õ¥Ã¥¯¤òÅÐÏ¿¤·¤¿¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£²ò½ü¤·¤¿¾ì¹ç¤Ï²ò½ü¤·¤¿
+  ¥Õ¥Ã¥¯¤òÊÂ¤Ù¤¿ÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-    trace_var(:$v) {|val| puts "hook: $v=#{val.inspect}" }
+    trace_var(:$v){|val| puts "hook: $v=#{val.inspect}" }
     $v = 1       #=> hook: $v=1
     $v = "foo"   #=> hook: $v="foo"
     $v.upcase!
@@ -1720,27 +1753,25 @@ hook ¤ò¤¹¤Ù¤Æ²ò½ü¤·¤Æ¤½¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹(¥Ö¥í¥Ã¥¯¤ÇÅÐÏ¿¤µ¤ì¤Æ¤¤¤ì¤Ð
 --- untrace_var(varname, hook = nil) -> [String|Proc]
 
 ¥°¥í¡¼¥Ð¥ëÊÑ¿ô varname ¤Ë´ØÏ¢ÉÕ¤±¤é¤ì¤¿¥Õ¥Ã¥¯¤ò²ò½ü¤·¤Þ¤¹¡£
-hook ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤Ë¤Ï¤½¤Î¥Õ¥Ã¥¯¤À¤±¤ò²ò½ü¤·¤Þ¤¹¡£
 
-hook ¤¬¾ÊÎ¬¤µ¤ì¤ë¤«¤Þ¤¿¤Ï nil ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï
+hook ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤Ë¤Ï¤½¤Î¥Õ¥Ã¥¯¤À¤±¤ò²ò½ü¤·¤Þ¤¹¡£
+¾ÊÎ¬¤¹¤ë¤« nil ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï
 varname ¤Î¥Õ¥Ã¥¯¤òÁ´¤Æ²ò½ü¤·¤Þ¤¹¡£
 
 @param varname ¥°¥í¡¼¥Ð¥ëÊÑ¿ôÌ¾¤òÊ¸»úÎó¤« [[c:Symbol]] ¤Ç»ØÄê¤·¤Þ¤¹¡£
 @param hook Ê¸»úÎó¤Þ¤¿¤Ï [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
 @return ²ò½ü¤µ¤ì¤¿¥Õ¥Ã¥¯¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-  $v = nil
-  trace_var(:$v) {|val| puts "$v=#{val.inspect}" }
-  $v = 'str'        #=> $v="str"
-  untrace_var :$v
-  $v = 'str'        # ¤Ê¤Ë¤â½ÐÎÏ¤µ¤ì¤Ê¤¤
-
-  $v = nil
-  trace_var(:$v) {|val| puts "$v=#{val.inspect}" }
-  trace_var(:$v, "puts 44")
-  $v = 'str'        #=> $v="str"
+  trace_var(:$v){|val| print "hookA.#{val.inspect},\n" }
+  block = proc{|val| print "hookB.#{val.inspect}," }
+  trace_var(:$v,&block)
+  $v = 'str'        #=> hookB."str",hookA."str",
   
-  untrace_var :$v
+  untrace_var(:$v,block)
+  $v = 'str'        #=> hookA."str",
+  
+  trace_var(:$v){|val| print "hookC.#{val.inspect}," }
+  p untrace_var(:$v) #=> [#<Proc:0x02b68f58@..:9>, #<Proc:0x02b6978c@..:3>]
   $v = 'str'        # ¤Ê¤Ë¤â½ÐÎÏ¤µ¤ì¤Ê¤¤
 
 @see [[m:Kernel.#trace_var]]
@@ -1749,11 +1780,11 @@ varname ¤Î¥Õ¥Ã¥¯¤òÁ´¤Æ²ò½ü¤·¤Þ¤¹¡£
 --- fail(message) -> ()
 --- fail(error_type, message = nil, backtrace = caller(0)) -> ()
 
-Îã³°¤òÈ¯À¸¤µ¤»¤Þ¤¹¡£ raise ¤ÎÊÌÌ¾¤Ç¤¹¡£
+Îã³°¤òÈ¯À¸¤µ¤»¤Þ¤¹¡£ [[m:Kernel.#raise]] ¤ÎÊÌÌ¾¤Ç¤¹¡£
 
-@param error_type [[m:Kernel.#raise]]»²¾È
-@param message [[m:Kernel.#raise]]»²¾È
-@param backtrace [[m:Kernel.#raise]]»²¾È
+@param error_type [[m:Kernel.#raise]] »²¾È
+@param message [[m:Kernel.#raise]] »²¾È
+@param backtrace [[m:Kernel.#raise]] »²¾È
 
 --- raise -> ()
 --- raise(message) -> ()
@@ -1894,7 +1925,7 @@ format Ê¸»úÎó¤ò C ¸À¸ì¤Î sprintf ¤ÈÆ±¤¸¤è¤¦¤Ë²ò¼á¤·¡¢
 É¾²Á¤·¤Þ¤¹¡£
 
 expr ¤ÎÃæ¤Î¥í¡¼¥«¥ëÊÑ¿ô¤Î°·¤¤¤Ï¥Ö¥í¥Ã¥¯¤Î¾ì¹ç¤ÈÆ±¤¸¤Ç¤¹¡£¤¹¤Ê¤ï¤Á¡¢eval 
-¼Â¹ÔÁ°¤ËÊäÂ­¤µ¤ì¤Æ¤¤¤¿ÊÑ¿ô¤Ï¥Ö¥í¥Ã¥¯³°¤Ë»ý¤Á½Ð¤»¤Þ¤¹¡£
+¼Â¹ÔÁ°¤ËÊäÂ­¤µ¤ì¤Æ¤¤¤¿ÊÑ¿ô¤Ï eval ¼Â¹Ô¸å¤Ë¥Ö¥í¥Ã¥¯³°¤Ë»ý¤Á½Ð¤»¤Þ¤¹¡£
 
 fname ¤È lineno ¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¤Ë¤Ï¡¢¥Õ¥¡¥¤¥ë
 fname ¹ÔÈÖ¹æ lineno ¤ËÊ¸»úÎó¤¬¤¢¤ë¤«¤Î¤è¤¦¤Ë
@@ -1904,7 +1935,7 @@ fname ¹ÔÈÖ¹æ lineno ¤ËÊ¸»úÎó¤¬¤¢¤ë¤«¤Î¤è¤¦¤Ë
 bind ¤Ë¤è¤é¤º¤ËÆÃÄê¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Î¥³¥ó¥Æ¥­¥¹¥È¤Ç expr ¤òÉ¾²Á¤·¤¿¤¤
 ¾ì¹ç¡¢ [[m:Module#module_eval]], [[m:Object#instance_eval]] ¤¬»È¤¨¤Þ¤¹¡£
 
-@param expr  É¾²Á¤·¤¿¤¤¼°¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£
+@param expr  É¾²Á¤¹¤ëÊ¸»úÎó¤Ç¤¹¡£
 @param bind  [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤Þ¤¿¤Ï [[c:Binding]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
 @param fname ¥¹¥¿¥Ã¥¯¥È¥ì¡¼¥¹¤ËÉ½¼¨¤¹¤ë¥Õ¥¡¥¤¥ëÌ¾¤Ç¤¹¡£
 @param lineno ¥¹¥¿¥Ã¥¯¥È¥ì¡¼¥¹¤ËÉ½¼¨¤¹¤ë¹ÔÈÖ¹æ¤Ç¤¹¡£
@@ -1918,7 +1949,7 @@ bind ¤Ë¤è¤é¤º¤ËÆÃÄê¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Î¥³¥ó¥Æ¥­¥¹¥È¤Ç expr ¤òÉ¾²Á¤·¤¿¤¤
   
   eval('raise RuntimeError', binding, 'XXX.rb', 4)
   #=> XXX.rb:4: RuntimeError (RuntimeError)
-  #       from C:/.../:9
+  #       from ..:9
 
 @see [[m:Kernel.#binding]],[[m:Module#module_eval]],[[m:Object#instance_eval]],[[m:Object#method]],[[m:Object#send]]
 
@@ -1972,7 +2003,7 @@ lambda ¤Î¤Û¤¦¤¬¤è¤ê¸·Ì©¤Ç¤¹¡£°ú¿ô¤Î¿ô¤¬°ã¤Ã¤Æ¤¤¤ë¤È¡Ê¥á¥½¥Ã¥É¤Î¤è¤¦¤Ë¡Ë¥¨¥é¡¼¤Ë¤
   #   4
   #   nil
   lambda{|a,b,c| p a,b,c }.call([2,4])
-  #=> wrong number of arguments (1 for 3) (ArgumentError)
+  # wrong number of arguments (1 for 3) (ArgumentError)
 
 : ¥¹¥¿¥Ã¥¯¥¸¥ã¥ó¥×»þ¤ÎµóÆ°¤Î°ã¤¤
 
