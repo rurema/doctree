@@ -1,14 +1,52 @@
 = class WEBrick::GenericServer < Object
 
-[[c:WEBrick::HTTPServer]] のスーパークラス
+[[c:WEBrick::HTTPServer]] のスーパークラスです。
 
 == Class Methods
 
 --- new(config={}, default=WEBrick::Config::General)
 #@todo
-GenericServer オブジェクトを生成する。config は設定を保存したハッシュ。
-default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
-WEBrick::Config::General。
+GenericServer オブジェクトを生成して返します。
+
+@param config サーバの設定を保存したハッシュを指定します。有効なキーと値は以下のとおりです。
+
+: :ServerName
+  サーバのホスト名を表す文字列を指定します。デフォルトの Utils.getservername は /etc/hostname
+  に書かれている文字列です。
+: :BindAddress
+  サーバのアドレスを指定します。デフォルトの nil や "0.0.0.0", "::" などを指定した
+  場合は使用可能なすべてのネットワークインターフェースに対して listen を開始します。
+  [[m:socket#ホスト指定形式]]を参照して下さい。
+: :Port
+  サーバのポートを指定します。[[m:socket#サービス指定形式]]を参照を参照して下さい。
+: :MaxClients
+  クライアントの最大接続数を表す整数です。
+: :ServerType
+  [[unknown:執筆者募集]]
+: :Logger
+  ログをとるオブジェクトを指定します。Logger オブジェクトに定義されているべきメソッドに関しては
+  [[c:WEBrick::Log]] を参照して下さい。一般的には WEBrick::Log.new(log_file, level) と
+  log_file と level を設定し直すだけで十分です。
+: :DoNotListen
+  true の場合、GenericServer オブジェクトを生成しただけでは listen を開始しません。
+: :StartCallback
+  start 開始時に呼ばれる [[c:Proc]] オブジェクト。呼ばれる時に引数は
+  特に与えられません。
+: :StopCallback
+  サーバを stop した時に呼ばれる [[c:Proc]] オブジェクトを指定します。呼ばれる時に引数は
+  特に与えられません。
+: :AcceptCallback
+  クライアントからの接続を accept したときに呼ばれる [[c:Proc]] オブジェクトを指定します。
+  クライアントと接続された [[c:TCPSocket]] オブジェクトを引数として呼ばれます。
+: :DoNotReverseLookup
+  true の場合、ホスト名への逆引きを行わなくなります。
+  [[m:BasicSocket#do_not_reverse_lookup]]
+  も参照して下さい。
+
+@param default サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で
+               設定がなかった項目に関してはこの default の値が使われます。
+
+@see [[m:WEBrick::Config::General]]
 
 == Instance Methods
 
