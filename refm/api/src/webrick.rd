@@ -16,15 +16,46 @@ require webrick/httpserver
 require webrick/httpservlet
 require webrick/httpauth
 
-汎用HTTPサーバーフレームワーク。HTTPサーバが簡単に作れます。
+汎用HTTPサーバーフレームワークです。HTTPサーバが簡単に作れます。
 
-WEBrick はサーブレットによって機能します。サーブレットとは何か。クライアントがアクセスしてきた時にHTTPサーバが実際に行なうことは ファイルを読み込んで返す・forkしてスクリプトを実行する・テンプレートを適用する など様々です。この「サーバが行なっている様々なこと」を抽象化したのがサーブレットです。
-
-サーブレットはRubyのオブジェクトとして実装されます。
-具体的には [[c:WEBrick::HTTPServlet::AbstractServlet]] の
-サブクラスのインスタンスです。
+WEBrick はサーブレットによって機能します。サーブレットとは
+サーバの機能をオブジェクト化したものです。
+ファイルを読み込んで返す・forkしてスクリプトを実行する・テンプレートを適用する 
+など、「サーバが行なっている様々なこと」を抽象化しオブジェクトにしたものが
+サーブレットです。サーブレットは [[c:WEBrick::HTTPServlet::AbstractServlet]] の
+サブクラスのインスタンスとして実装されます。
 
 WEBrick はセッション管理の機能を提供しません。
+
+=== WEBrick の概要
+
+以下は Web サーバとして完全に動作するスクリプトです。
+
+ require 'webrick'
+ srv = WEBrick::HTTPServer.new({ :DocumentRoot => './',
+                                 :BindAddress => '127.0.0.1',
+                                 :Port => 20080})
+ srv.mount('/view.cgi', WEBrick::HTTPServlet::CGIHandler, 'view.rb')
+ srv.mount('/foo.html', WEBrick::HTTPServlet::FileHandler, 'hoge.html')
+ trap("INT"){ srv.shutdown }
+ srv.start
+
+ブラウザで http://127.0.0.1:20080/ にアクセスすることによって確認できます。
+また http://127.0.0.1:20080/view.cgi にアクセスするとカレントディレクトリに置かれている
+view.rb がCGIスクリプトとして実行されます。http://127.0.0.1:20080/foo.html にアクセスすると
+カレントディレクトリ下の hoge.html の内容が表示されます。 
+
+上のスクリプトでは以下のような流れで view.rb は実行されます。
+
+ (1) サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
+ (2) パス /view.cgi にアクセスがあるたびにサーバは 'view.rb' を引数として CGIHandler オブジェクトを生成します。
+ (3) サーバはリクエストオブジェクトを引数として CGIHandler#serve メソッドを呼びます。
+ (4) CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
+
+このように WEBrick では Web サーバの機能の大部分がサーブレットの形で提供されています。
+またサーブレットを作成することにより新たな機能を Web サーバに追加することもできます。
+
+=== リンク
 
  * [[url:http://www.webrick.org/]]
  * [[url:http://shogo.homelinux.org/~ysantoso/WebWiki/WEBrick.html]]
@@ -33,3 +64,30 @@ WEBrick はセッション管理の機能を提供しません。
    * WEBrickでプロキシサーバを作って遊ぶ http://jp.rubyist.net/magazine/?0002-WEBrickProxy
  * [[lib:webrick/ssl]]
  * [[lib:webrick/cgi]]
+
+#@# 編集作業用のリンク
+
+ * [[c:WEBrick::GenericServer]]
+ * [[c:WEBrick::HTTPServer]]
+ * [[c:WEBrick::HTTPProxyServer]]
+ * [[c:WEBrick::HTTPResponse]]
+ * [[c:WEBrick::HTTPRequest]]
+ * [[c:WEBrick::HTTPStatus]]
+ * [[c:WEBrick::HTTPAuth]]
+ * [[c:WEBrick::HTTPAuth::BasicAuth]]
+ * [[c:WEBrick::HTTPAuth::DigestAuth]]
+ * [[c:WEBrick::HTTPAuth::Htpasswd]]
+ * [[c:WEBrick::HTTPAuth::Htdigest]]
+ * [[c:WEBrick::HTTPAuth::Htgroup]]
+ * [[c:WEBrick::HTTPUtils]]
+ * [[c:WEBrick::HTTPUtils::FormData]]
+ * [[c:WEBrick::HTTPVersion]]
+ * [[c:WEBrick::Cookie]]
+ * [[c:WEBrick::Log]]
+ * [[c:WEBrick::AccessLog]]
+ * [[c:WEBrick::HTTPServlet]]
+ * [[c:WEBrick::HTTPServlet::AbstractServlet]]
+ * [[c:WEBrick::HTTPServlet::FileHandler]]
+ * [[c:WEBrick::HTTPServlet::CGIHandler]]
+ * [[c:WEBrick::HTTPServlet::ProcHandler]]
+ * [[c:WEBrick::HTTPServlet::ERBHandler]]
