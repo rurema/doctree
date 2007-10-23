@@ -13,11 +13,50 @@ HTTP サーバのためのクラス。
 
 == Class Methods
 
---- new(config={}, default=Config::HTTP)
+--- new(config={}, default=Config::HTTP)    -> WEBrick::HTTPServer
 #@todo
-HTTPServer オブジェクトを生成する。config は設定を保存したハッシュ。
-default にはデフォルトの設定を保存したハッシュを与える。デフォルト値は
-[[m:WEBrick::Config::HTTP]]
+HTTPServer オブジェクトを生成して返します。
+
+@param config 設定を保存したハッシュを指定します。有効なキー([[c:Symbol]] オブジェクト)と値は以下のとおりです。
+: :RequestTimeout
+  どれだけの時間 クライアントからの入力を待つかを整数か [[c:Float]] で指定します。
+  単位は秒です。
+: :HTTPVersion
+  使用する HTTP のバージョンです。[[c:WEBrick::HTTPVersion]] オブジェクトで指定します。デフォルトは 1.1 です。
+: :AccessLog
+  アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような
+  配列で指定します。io は [[c:IO]] オブジェクトです。format は文字列です。デフォルトでは
+  フォーマットの形式は Apache のそれに準拠し標準エラー出力に出力します。
+  [[url:http://httpd.apache.org/docs/mod/mod_log_config.html#formats]]
+  [[m:WEBrick::AccessLog::COMMON_LOG_FORMAT]] [[m:WEBrick::AccessLog::REFERER_LOG_FORMAT]]
+  も参照して下さい。
+: :MimeTypes
+  拡張子と mime-type との対応をハッシュで指定します。デフォルトは
+  [[m:WEBrick::HTTPUtils::DefaultMimeTypes]] です。
+: :DirectoryIndex
+  ディレクトリのインデックスとなるファイル名を配列で指定します。
+: :DocumentRoot
+  サーバ上のルートディレクトリに対応させる、ローカルのファイルシステムの
+  ディレクトリを文字列で指定します。
+: :DocumentRootOptions
+  ルートディレクトリの処理を担当する [[c:WEBrick::HTTPServlet::FileHandler]] のコンストラクタに
+  渡されるオプションをハッシュで指定します。デフォルトは { :FancyIndexing => true } ですので、
+  ディレクトリにアクセスするとディレクトリの内容を適当な形式で表示します。
+: :RequestCallback
+  クライアントからのリクエストを受け付けた時に呼ばれる [[c:Proc]] オブジェクトを
+  指定します。callback.call(req, res) のように [[c:WEBrick::HTTPRequest]] オブジェクトと
+  [[c:WEBrick::HTTPResponse]] オブジェクトを引数として呼ばれます。
+: :ServerAlias
+  サーバのホスト名の別名を文字列の配列で指定します。
+: :CGIInterpreter
+  CGI を実行するインタプリタを文字列で指定します。
+: :CGIPathEnv
+  CGI に渡される PATH 環境変数を文字列で指定します。
+: :Escape8bitURI
+  この値が true の場合、クライアントからのリクエスト URI に含まれる 8bit 目が立った文字をエスケープします。
+  デフォルトは false です。
+
+@param default config で指定されなかった場合のデフォルトの設定を保存したハッシュを指定します。
 
 == Instance Methods
 
@@ -63,91 +102,5 @@ proc は [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]]
 server は HTTPServer オブジェクト。
 クライアントからのリクエストのうち server へのものは server に委譲される
 ようになる。
-
-= reopen WEBrick::Config
-== Constants
---- HTTP
-#@todo
-HTTPServer.new(config) に与えた時に有効な設定とそのデフォルト値。
-[[m:WEBrick::Config::General]]も参照。
-[[m:URL:http:#/shogo.homelinux.org/~ysantoso/webrickguide/html/Server_Configuration.html]]
-も参照。
-
-  HTTP = {
-    :ServerName     => Utils.getservername,
-    :BindAddress    => nil,   # "0.0.0.0" or "::" or nil
-    :Port           => 80,
-    :MaxClients     => 100,   # maximum number of the concurrent connections
-    :ServerType     => nil,   # default: WEBrick::SimpleServer
-    :Logger         => nil,   # default: WEBrick::Log.new
-    :ServerSoftware => "WEBrick/#{WEBrick::VERSION} " +
-                       "(Ruby/#{RUBY_VERSION}/#{RUBY_RELEASE_DATE})",
-    :TempDir        => ENV['TMPDIR']||ENV['TMP']||ENV['TEMP']||'/tmp',
-    :DoNotListen    => false,
-    :StartCallback  => nil,
-    :StopCallback   => nil,
-    :AcceptCallback => nil,
-    :DoNotReverseLookup => nil,
-
-    :RequestTimeout => 30,
-    :HTTPVersion    => HTTPVersion.new("1.1"),
-    :AccessLog      => nil,
-    :MimeTypes      => HTTPUtils::DefaultMimeTypes,
-    :DirectoryIndex => ["index.html","index.htm","index.cgi","index.rhtml"],
-    :DocumentRoot   => nil,
-    :DocumentRootOptions => { :FancyIndexing => true },
-    :RequestCallback => nil,
-    :ServerAlias    => nil,
-
-    :CGIInterpreter => nil,
-    :CGIPathEnv     => nil,
-
-    # workaround: if Request-URIs contain 8bit chars,
-    # they should be escaped before calling of URI.parse().
-    :Escape8bitURI  => false
-  }
-
-: :RequestTimeout
-どれだけの時間 クライアントからの入力を待つかを整数か [[c:Float]] で指定する。
-単位は秒。
-
-: :HTTPVersion
-使用する HTTP のバージョン。[[c:WEBrick::HTTPVersion]] オブジェクトで指定する。
-
-: :AccessLog
-アクセスログの出力先とフォーマットを [[io, format], [io, format], ...] のような
-配列で指定する。io は [[c:IO]] オブジェクト。format は文字列。フォーマットの
-形式は Apache のそれに準拠。以下を参照。デフォルトでは標準エラー出力に出力する。
-[[m:URL:http:#/httpd.apache.org/docs/mod/mod_log_config.html#formats]]
-
-: :MimeTypes
-拡張子と mime-type との対応をハッシュで指定する。
-
-: :DirectoryIndex
-ディレクトリのインデックスとなるファイル名を配列で指定する。
-
-: :DocumentRoot
-サーバ上のルートディレクトリに対応させる、ローカルのファイルシステムの
-ディレクトリを文字列で指定する。
-
-: :DocumentRootOptions
-[[c:WEBrick::HTTPServlet::FileHandler]] のコンストラクタに渡されるオプションを
-ハッシュで指定する。
-
-: :RequestCallback
-クライアントからのリクエストを受け付けた時に呼ばれる [[c:Proc]] オブジェクトを
-指定する。callback.call(req, res) のように呼ばれる。
-
-: :ServerAlias
-サーバのホスト名の別名を配列で指定する。
-
-: :CGIInterpreter
-CGI を実行するインタプリタを文字列で指定する。
-
-: :CGIPathEnv
-CGI に渡される PATH 環境変数を文字列で指定する。
-
-: :Escape8bitURI
-[[unknown:執筆者募集]]
 
 = class WEBrick::HTTPServerError < WEBrick::ServerError
