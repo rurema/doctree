@@ -1,6 +1,6 @@
 = class File < IO
 #@if (version < "1.8.0")
-include File::Constant
+include File::Constants
 #@end
 
 ファイルアクセスのためのクラスです。
