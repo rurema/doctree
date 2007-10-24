@@ -280,19 +280,29 @@ true を返します。
   # reg は nil でも false でも無いので常にtrue
 
 
---- casefold?
-#@todo
+--- casefold? -> bool
 
 正規表現が大文字小文字の判定をしないようにコンパイルされている時、
 真を返します。
 
---- kcode
-#@todo
+  reg = Regexp.new("foobar", Regexp::IGNORECASE)
+  p reg.casefold? #=> true
+
+  reg = Regexp.new("hogehoge")
+  p reg.casefold? #=> false
+
+--- kcode -> String | nil
 
 その正規表現が対応するようにコンパイルされている文字コードを
 [[m:$KCODE]] と同じ形式で返します。もし、正規表現が固定
 コードに対してコンパイルされていない(マッチ時点での [[m:$KCODE]]
 の値を用いる)場合には、nil を返します。
+
+  reg = Regexp.new("hogehoge", nil, "u")
+  p reg.kcode #=> "utf8"
+
+  reg = Regexp.new("hogehoge", nil)
+  p reg.kcode #=> "nil"
 
 --- match(str)
 --- match(str[, pos])
