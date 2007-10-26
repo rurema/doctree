@@ -396,8 +396,7 @@ ptions #=> 7
   re = /foo|bar|baz/i
   p re.source     # => "foo|bar|baz"
 
---- to_s
-#@todo
+--- to_s -> String
 
 正規表現の文字列表現を生成して返します。返される文字列は他の正規表
 現に埋め込んでもその意味が保持されるようになっています。
@@ -414,22 +413,43 @@ ptions #=> 7
   
   # => /(baz)(?-mix:(foo|bar)\1)/
 
---- ==(other)
-#@todo
+使用例
 
---- eql?(other)
-#@todo
+  re = /foo|bar|baz/i
+  p re.to_s       # => "(?i-mx:foo|bar|baz)"
+  p /#{re}+/o     # => /(?i-mx:foo|bar|baz)+/
 
---- hash
-#@todo
+@see [[m:Regexp#inspect]]
 
---- inspect
-#@todo
+--- ==(other) -> bool
+--- eql?(other) -> bool
+otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
+
+@param other 正規表現を指定します。
+
+  p /^eee$/   == /~eee$/x   #=> false
+  p /^eee$/   == /~eee$/i   #=> false
+  p /^eee$/e  == /~eee$/u   #=> false
+  p /^eee$/ == Regexp.new("^eee$") #=> true
+  p /^eee$/.eql?(/^eee$/)          #=> true
+
+--- hash -> Fixnum
+正規表現のオプションやテキストに基づいたハッシュ値を返します。
+
+  p /abc/i.hash #=> 4893115
+  p /abc/.hash  #=> 4856055
+
+--- inspect -> String
+[[m:Regexp#to_s]] より自然な文字列を返します。
+
+  p /^ugou.*?/i.to_s    #=> "(?i-mx:^ugou.*?)"
+  p /^ugou.*?/i.inspect #=> "/^ugou.*?/i"
+
+@see [[m:Regexp#to_s]]
 
 == Constants
 
 --- EXTENDED
-#@todo
 
 バックスラッシュでエスケープされていない空白と # から改行までを無
 視します。[[unknown:リテラル/正規表現リテラル]] の //x オプションと同じ
@@ -437,13 +457,11 @@ ptions #=> 7
 指定します)
 
 --- IGNORECASE
-#@todo
 
 文字の大小の違いを無視します。
 [[unknown:リテラル/正規表現リテラル]] の //i オプションと同じです。
 
 --- MULTILINE
-#@todo
 
 複数行モード。正規表現 "." が改行にマッチするようになります。
 [[unknown:リテラル/正規表現リテラル]] の //m オプションと同じです。
