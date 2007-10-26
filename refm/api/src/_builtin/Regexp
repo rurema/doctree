@@ -304,9 +304,8 @@ true を返します。
   reg = Regexp.new("hogehoge", nil)
   p reg.kcode #=> "nil"
 
---- match(str)
---- match(str[, pos])
-#@todo
+--- match(str) -> MatchData | nil
+--- match(str[, pos]) -> MatchData | nil
 
 [[c:MatchData]] オブジェクトを返す点を除いて、self =~ str と
 同じです。マッチしなかった場合 nil を返します。
@@ -355,8 +354,24 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 は異なります。
 #@end
 
---- options
-#@todo
+@param str 文字列を指定します。str との正規表現マッチを行います。
+
+@param pos 整数を指定します。マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
+
+使用例
+
+  reg = Regexp.new("foo")
+
+  if reg.match("foobar")
+    print "match\n" #=> match
+  end
+
+  p reg.match("foobar") #=> #<MatchData:0x29403fc>
+  p reg.match("bar")    #=> nil
+
+  p /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3) #=> ["foo", "bar", "baz"]
+
+--- options -> Integer
 
 正規表現の生成時に指定されたオプションを返します。戻り値は、
 [[m:Regexp::EXTENDED]], [[m:Regexp::IGNORECASE]],
@@ -365,8 +380,16 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
   p Regexp::IGNORECASE # => 1
   p //i.options        # => 1
 
---- source
-#@todo
+  p Regexp.new("foo", Regexp::IGNORECASE ).options #=> 1
+  p Regexp.new("foo", Regexp::EXTENDED).options    #=> 2
+  p Regexp.new("foo", Regexp::IGNORECASE | Regexp::EXTENDED).options #=> 3
+  p Regexp.new("foo", Regexp::MULTILINE).options #=> 4
+  p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE ).options #=> 5
+  p Regexp.new("foo", Regexp::MULTILINE | Regexp::EXTENDED).options #=>6
+  p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE | Regexp::EXTENDED).o
+ptions #=> 7
+
+--- source -> String
 
 その正規表現のもととなった文字列表現を生成して返します。
 
