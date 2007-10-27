@@ -234,7 +234,7 @@ obj が self のインスタンスである場合、 true を返します。
 
 @param obj 任意のオブジェクト
 
-@see [[m:Kernel.#kind_of?]], [[m:Kernel.#instance_of?]]
+@see [[m:Object#kind_of?]], [[m:Object#instance_of?]]
 
 --- ancestors -> [Class, Module]
 
@@ -932,9 +932,9 @@ val をセットします。val を返します。
 
 --- extend_object(module) -> Module
 
-[[m:Kernel.#extend]] の実体です。オブジェクトにモジュールの機能を追加します。
+[[m:Object#extend]] の実体です。オブジェクトにモジュールの機能を追加します。
 
-[[m:Kernel.#extend]] は、Ruby で書くと以下のように定義できます。
+[[m:Object#extend]] は、Ruby で書くと以下のように定義できます。
 
   def extend(*modules)
     modules.each {|mod| mod.__send__ :extend_object, self }
@@ -950,10 +950,10 @@ extend_object のデフォルトの実装では、self に定義されて
 #@since 1.8.0
 --- extended(class_or_module) -> ()
 
-self が他のオブジェクト に [[m:Kernel.#extend]] されたときに
+self が他のオブジェクト に [[m:Object#extend]] されたときに
 呼ばれます。引数には extend を行ったオブジェクトが渡されます。
 
-@param class_or_module [[m:Kernel.#extend]] を行ったオブジェクト
+@param class_or_module [[m:Object#extend]] を行ったオブジェクト
 
   module Foo
     def self.extended(mod)
@@ -1055,7 +1055,7 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモジュー
 メソッド name が追加された時にインタプリタがこのメソッドを呼び出します。
 
 特異メソッドの追加に対するフックには
-[[m:Kernel.#singleton_method_added]]
+[[m:Object#singleton_method_added]]
 を使います。
 
 @param name 追加されたメソッドの名前が [[c:Symbol]] で渡されます。
@@ -1080,7 +1080,7 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモジュー
 された時にインタプリタがこのメソッドを呼び出します。
 
 特異メソッドの削除に対するフックには
-[[m:Kernel.#singleton_method_removed]]
+[[m:Object#singleton_method_removed]]
 を使います。
 
 @param name 削除されたメソッド名が [[c:Symbol]] で渡されます。
@@ -1107,7 +1107,7 @@ self が [[m:Module#include]] されたときに対象のクラスまたはモジュー
 undef 文により未定義にされると、インタプリタがこのメソッドを呼び出します。
 
 特異メソッドの削除をフックするには
-[[m:Kernel.#singleton_method_undefined]]
+[[m:Object#singleton_method_undefined]]
 を使います。
 
 @param name 削除/未定義にされたメソッド名が [[c:Symbol]] で渡されます。
@@ -1265,7 +1265,7 @@ module_function はメソッドに「モジュール関数」という属性をつけるメ
     p @@foo   # => uninitialized class variable @@foo in Foo (NameError)
   end
 
-@see [[m:Module#remove_const]], [[m:Kernel.#remove_instance_variable]]
+@see [[m:Module#remove_const]], [[m:Object#remove_instance_variable]]
 
 
 --- remove_const(name) -> object
