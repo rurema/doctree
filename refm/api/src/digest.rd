@@ -1,16 +1,19 @@
 #@since 1.8.6
-digest/md5
-digest/rmd160
-digest/sha1
-digest/sha2
+require digest/md5
+require digest/rmd160
+require digest/sha1
+require digest/sha2
 #@end
 
 メッセージダイジェストライブラリ。
-基本的な使い方はどのアルゴリズムでも同じです。
-[[c:Digest::Base]]を参照。
 
 すべてのメッセージダイジェストの実装クラスは基底クラスである
-Digest::Base と同じインタフェースを持つ。
+[[c:Digest::Base]] と同じインタフェースを持つ。
+基本的な使い方は、MD5やSHA1など、どのアルゴリズムでも同じ。
+詳しくは[[c:Digest::Base]]を参照。
+
+なお、メッセージダイジェストとは、データから固定長の疑似乱数を生成する
+演算手法のこと。
 
 = module Digest
 
