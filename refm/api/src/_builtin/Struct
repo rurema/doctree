@@ -28,7 +28,7 @@ include Enumerable
 
 @param args 構造体を定義するための可変長引数。[[c:String]] または [[c:Symbol]] を指定します。
 
-==== 第一引数が [[c:String]] の場合
+==== 第一引数が String の場合
 args[0] が [[c:String]] の場合、クラス名になるので、大文字で始まる必要
 があります。つまり、以下のような指定はエラーになります。
 
@@ -39,7 +39,7 @@ args[0] が [[c:String]] の場合、クラス名になるので、大文字で始まる必要
 
     p Struct.new("Foo", :foo, :bar)   # => Struct::Foo
 
-==== 第一引数が [[c:Symbol]] の場合
+==== 第一引数が Symbol の場合
 args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 クラスになります。名前の無いクラスは最初に名前を求める際に代入され
 ている定数名を検索し、見つかった定数名をクラス名とします。
@@ -49,8 +49,8 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 
 @see [[m:Class.new]]
 
---- new(*args) -> ()
---- [](*args) -> ()
+--- new(*args) -> Struct
+--- [](*args) -> Struct
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体オブジェクトを生成して返します。
 
@@ -78,7 +78,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 構造体のメンバの値を返します。
 
 @param member [[c:Fixnum]] でメンバのインデックスを指定します。
-[[c:Symbol]], [[c:String]] でメンバの名前を指定します。
+              [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
@@ -99,7 +99,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 構造体の member で指定されたメンバの値を value にして value を返します。
 
 @param member [[c:Fixnum]] でメンバのインデックスを指定します。
-[[c:Symbol]], [[c:String]] でメンバの名前を指定します。
+              [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @param value メンバに設定する値を指定します。
 
@@ -150,7 +150,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 引数で指定されたメンバの値の配列を返します。
 
 @param members [[c:Fixnum]] でメンバのインデックスを指定します。
-[[c:Symbol]], [[c:String]] でメンバの名前を指定します。
+               [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
@@ -161,3 +161,57 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
     p obj.values_at(0, :bar, 'baz')    # => ["FOO", "BAR", "BAZ"]
 
 #@end
+
+--- ==(other)    -> bool
+
+自身と other のクラスが同じであり、各メンバが == メソッドで比較して等しい場合に
+true を返します。そうでない場合に false を返します。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+  Dog = Struct.new(:name, :age)
+  dog1 = Dog.new("fred", 5)
+  dog2 = Dog.new("fred", 5)
+
+  p dog1 == dog2                #=> true
+  p dog1.eql?(dog2)             #=> true
+  p dog1.equal?(dog2)           #=> false
+
+@see [[m:Struct#eql?]]
+
+--- eql?(other)    -> bool
+
+自身と other のクラスが同じであり、各メンバが eql? メソッドで比較して等しい場合に
+true を返します。そうでない場合に false を返します。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+  Dog = Struct.new(:name, :age)
+  dog1 = Dog.new("fred", 5)
+  dog2 = Dog.new("fred", 5)
+
+  p dog1 == dog2                #=> true
+  p dog1.eql?(dog2)             #=> true
+  p dog1.equal?(dog2)           #=> false
+
+@see [[m:Struct#==]]
+
+--- equal?(other)   -> bool
+
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
+
+@see [[m:Struct#eql?]], [[m:Struct#==]]
+
+--- hash    -> Integer
+
+自身が保持するメンバのハッシュ値を元にして算出した整数を返します。
+自身が保持するメンバの値が変化すればこのメソッドが返す値も変化します。
+
+  Dog = Struct.new(:name, :age)
+  dog = Dog.new("fred", 5)
+  p dog.hash                    #=> 7917421
+  dog.name = "john"
+  p dog.hash                    #=> -38913223
+
