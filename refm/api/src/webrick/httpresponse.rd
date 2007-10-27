@@ -73,8 +73,7 @@ HTTPResponse オブジェクトを生成して返します。
 --- chunked?     -> bool
 --- chunked=(flag)
 
-クライアントに返す内容(エンティティボディ)を chunk に分けてクライアントに
-返すかどうかを真偽で表すアクセサです。
+クライアントに返す内容(エンティティボディ)を chunk に分けるかどうかを真偽で表すアクセサです。
 
 自身の [[m:WEBrick::HTTPResponse#request_http_version]] が 1.0 以下である場合、この値は無視されます。
 
@@ -123,7 +122,22 @@ content_length の値は無視され Content-Length ヘッダはレスポンスに含まれません。
 
 @param len ヘッダの値を整数で指定します。nil を指定することは出来ません。
 
-  res.content_length = 32
+  require 'webrick'
+  include WEBrick
+  res = HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  f = File.new('testfile')
+  res.body = f
+  res.content_length = 2
+  print res.to_s
+  
+  #=> 出力結果
+  HTTP/1.1 200 OK
+  Connection: Keep-Alive
+  Date: Sat, 27 Oct 2007 12:04:32 GMT
+  Server:
+  Content-Length: 2
+  
+  ho
 
 --- content_type         -> String | nil
 --- content_type=(val)
@@ -139,9 +153,10 @@ Content-Type ヘッダの値を文字列で表すアクセサです。
 
 --- cookies    -> [WEBrick::Cookie]
 
-自身が保持する [[c:WEBrick::Cookie]] を表す配列です。
+レスポンスの Set-Cookie ヘッダの値を表す [[c:WEBrick::Cookie]] オブジェクトの配列です。
+レスポンスに新たに Cookie を加えたい場合はこの配列に [[c:WEBrick::Cookie]] オブジェクトを加えます。
 
-  res.cookies << Cookie.parse_set_cookie(k)
+  res.cookies << WEBrick::Cookie.parse_set_cookie(k)
 
 --- each{|key, val| ... }
 
@@ -180,6 +195,12 @@ HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
 デフォルトは nil です。
 
 @param val reason phrase を表す文字列を指定します。
+
+  require 'webrick'
+  res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  res.status = 404
+  
+  p res.reason_phrase    #=> "Not Found"
 
 --- request_http_version           -> WEBrick::HTTPVersion
 --- request_http_version=(ver)
@@ -230,10 +251,37 @@ reason_phrase も適切なものに設定されます。
 
 @param status ステータスコードを整数で指定します。
 
+  require 'webrick'
+  res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  res.status = 404
+  
+  p res.reason_phrase    #=> "Not Found"
+
 --- status_line    -> String
 
 HTTP のステータスラインを文字列で返します。
 
+  require 'webrick'
+  res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  res.status = 404
+  
+  p res.status_line    #=>  "HTTP/1.1 404 Not Found \r\n"
+
 --- to_s    -> String
-#@todo
+
 実際にクライアントに送られるデータを文字列として返します。
+
+  require 'webrick'
+  include WEBrick
+  res = HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  res.body = 'hoge'
+  print res.to_s
+
+  #=> 出力結果
+  HTTP/1.1 200 OK
+  Connection: Keep-Alive
+  Date: Sat, 27 Oct 2007 08:58:49 GMT
+  Server:
+  Content-Length: 4
+  
+  hoge
