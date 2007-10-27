@@ -92,7 +92,7 @@
 = class WEBrick::HTTPStatus::ClientError < WEBrick::HTTPStatus::Error
 = class WEBrick::HTTPStatus::ServerError < WEBrick::HTTPStatus::Error
 
-= class WEBrick::HTTPStatus::EOFError < StanderdError
+= class WEBrick::HTTPStatus::EOFError < StandardError
 
 = class WEBrick::HTTPStatus::Continue < WEBrick::HTTPStatus::Info
 = class WEBrick::HTTPStatus::SwitchingProtocols < WEBrick::HTTPStatus::Info
