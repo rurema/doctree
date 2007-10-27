@@ -22,11 +22,14 @@ GenericServer オブジェクトを生成して返します。
 : :MaxClients
   クライアントの最大接続数を表す整数です。
 : :ServerType
-  [[unknown:執筆者募集]]
+  サーバのタイプを表すクラスを指定します。 [[c:WEBrick::SimpleServer]] と [[c:WEBrick::Daemon]] が
+  提供されています。
 : :Logger
-  ログをとるオブジェクトを指定します。Logger オブジェクトに定義されているべきメソッドに関しては
-  [[c:WEBrick::Log]] を参照して下さい。一般的には WEBrick::Log.new(log_file, level) と
-  log_file と level を設定し直すだけで十分です。
+  ログをとるオブジェクト(Logger オブジェクト)を指定します。通常は [[c:WEBrick::Log]] のインスタンスを指定します。
+  WEBrick::Log.new(log_file, level) のように出力先とログレベルを設定することができます。
+  Logger オブジェクトに定義されているべきメソッドに関しては [[c:WEBrick::Log]] を参照して下さい。
+: :ServerSoftware
+  サーバソフトウェア名を文字列で指定します。[[c:WEBrick::HTTPServer]] では Server ヘッダにこの値が出力されます。
 : :DoNotListen
   true の場合、GenericServer オブジェクトを生成しただけでは listen を開始しません。
 : :StartCallback
@@ -50,52 +53,67 @@ GenericServer オブジェクトを生成して返します。
 
 == Instance Methods
 
---- [](key)
+--- [](key)    -> object
 #@todo
 self.config[key] と同値。
 
---- config
+--- config     -> Hash
 #@todo
 サーバの設定を保存したハッシュを返す。
 
---- listen(address, port)
-#@todo
-与えられたアドレスとポートで listen を開始し listeners に加える。
-address は文字列。port は整数。listeners を返す。
+--- listen(address, port) -> [TCPServer]
 
---- listeners
-#@todo
-listen している [[c:TCPServer]] オブジェクトの配列を返す。
+与えられたアドレスとポートで [[c:TCPServer]] オブジェクトを生成し listeners に加えます。
+[[m:WEBrick::GenericServer#listeners]] を返します。
 
---- logger
-#@todo
-[[c:WEBrick::Log]] のインスタンスを返す。
+@param address アドレスを文字列で指定します。
 
---- shutdown
+@param port listen するポートを整数で指定します。
+
+@see [[m:TCPServer#listen]]
+
+--- listeners    -> [TCPServer]
 #@todo
-stop を呼び、全ての listeners を close する。
+listen している [[c:TCPServer]] オブジェクトの配列を返します。
+
+--- logger    -> WEBrick::Log
+
+生成する時に指定された、自身をロギングする [[c:WEBrick::Log]] のインスタンスを返します。
+
+--- shutdown     -> ()
+
+[[m:WEBrick::GenericServer#stop]] を呼び、全ての listeners を close します。
 
 --- start()
 --- start(){|soc| ... }
 #@todo
-サーバをスタートする。
-block が与えられた場合、block が実際のクライアントとの応答を担う。
-block は [[c:TCPSocket]] オブジェクトを引数として呼び出される。
+サーバをスタートします。
+block が与えられた場合、block が実際のクライアントとの応答を担います。
+block は [[c:TCPSocket]] オブジェクトを引数として呼び出されます。
 
 --- status
 #@todo
-現在のサーバのステータスを [[c:Symbol]] オブジェクトで返す。値は :Running, :Stop, :Shutdown のいずれか。
+現在のサーバのステータスを [[c:Symbol]] オブジェクトで返します。
+値は :Running(活動中), :Shutdown(終了処理中), :Stop(完全に停止) のいずれか。
 
---- stop
+--- stop    -> ()
 #@todo
-サーバを停止する。
+サーバを停止します。
+
+実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止するとは限りません。
 
 --- tokens
 #@todo
-MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返す。
-[[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるクライアントの数。
+MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返します。
+[[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるクライアントの数です。
 
-MaxClient を知りたい場合は self.tokens.max。self.tokens.max - self.tokens.length が現在のクライアントの接続数。
+MaxClient を知りたい場合は self.tokens.max です。
+self.tokens.max - self.tokens.length が現在のクライアントの接続数です。
 
 --- run(sock)
-#@todo
+
+クライアントと接続された TCPSocket オブジェクトを引数として呼ばれ、
+具体的な処理を行います。
+WEBrick::GenericServer のサブクラスはこのメソッドを適切に再定義しなければいけません。
+
+@param sock クライアントと接続された TCPSocket オブジェクトを指定します。
