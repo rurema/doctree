@@ -85,12 +85,12 @@
 
 
 = class WEBrick::HTTPStatus::Status < StandardError
-= class WEBrick::HTTPStatus::Info < Status
-= class WEBrick::HTTPStatus::Success < Status
-= class WEBrick::HTTPStatus::Redirect < Status
-= class WEBrick::HTTPStatus::Error < Status
-= class WEBrick::HTTPStatus::ClientError < Error
-= class WEBrick::HTTPStatus::ServerError < Error
+= class WEBrick::HTTPStatus::Info < WEBrick::HTTPStatus::Status
+= class WEBrick::HTTPStatus::Success < WEBrick::HTTPStatus::Status
+= class WEBrick::HTTPStatus::Redirect < WEBrick::HTTPStatus::Status
+= class WEBrick::HTTPStatus::Error < WEBrick::HTTPStatus::Status
+= class WEBrick::HTTPStatus::ClientError < WEBrick::HTTPStatus::Error
+= class WEBrick::HTTPStatus::ServerError < WEBrick::HTTPStatus::Error
 
 = class WEBrick::HTTPStatus::EOFError < StanderdError
 
