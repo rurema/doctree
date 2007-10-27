@@ -80,7 +80,7 @@ view.rb ¤¬CGI¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤Þ¤¹¡£http://127.0.0.1:20080/foo.html ¤Ë¥¢¥
  * [[lib:webrick/cookie]]
  * [[lib:webrick/httpversion]]
  * [[lib:webrick/httpstatus]]
- * [[lib:webrick/htprequest]]
+ * [[lib:webrick/httprequest]]
  * [[lib:webrick/httpresponse]]
  * [[lib:webrick/httpserver]]
  * [[lib:webrick/httpservlet]]
