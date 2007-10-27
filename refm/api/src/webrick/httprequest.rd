@@ -7,6 +7,9 @@ require webrick/cookie
 
 HTTP リクエストのためのクラスです。
 
+通常 WEBrick::HTTPRequest オブジェクトはサーブレットの service メソッドや do_XXX メソッドの
+引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
+
 == Class Methods
 
 --- new(config)
@@ -140,15 +143,19 @@ of ``The WWW Common Gateway Interface Version 1.1''.
 サーバのポートを文字列で返します。
 
 --- query    -> Hash
-#@todo
-ハッシュを返します。key も val も unescape されています。
 
---- query_string
+リクエストのクエリーを表すハッシュを返します。key も val も unescape されています。
+[[m:WEBrick::HTTPRequest#query_string]] から生成されます。
+
+--- query_string          -> String
 #@since 1.8.4
 --- query_string=(value)
-#@todo
 #@end
-request_uri.query と同値。
+
+リクエスト URI のクエリーを文字列で表すアクセサです。
+デフォルトは request_uri.query です。
+
+@param value クエリーを表す文字列を指定します。
 
 --- raw_header
 #@todo
@@ -167,7 +174,7 @@ request_uri.query と同値。
 
 --- request_uri
 #@todo
-[[c:URI]] オブジェクトを返す。
+リクエスト URI を表す [[c:URI]] オブジェクトを返します。
 
 --- script_name          -> String
 --- script_name=(value)
@@ -192,10 +199,10 @@ REMOTE_USER を文字列で表すアクセサです。
 
 @param value ユーザ名を文字列で指定します。
 
-== Constants
+#@#== Constants
 
---- BODY_CONTAINABLE_METHODS
-#@todo
+#@#--- BODY_CONTAINABLE_METHODS
+#@#todo
 
---- BUFSIZE
-#@todo
+#@#--- BUFSIZE
+#@#todo
