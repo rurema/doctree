@@ -1,5 +1,3 @@
-#@#require timeout
-#@#require uri
 require webrick/httpversion
 require webrick/httpstatus
 require webrick/httputils
@@ -7,110 +5,143 @@ require webrick/cookie
 
 = class WEBrick::HTTPRequest < Object
 
-[[url:http://shogo.homelinux.org/~ysantoso/webrickguide/html/HTTPRequest.html]]
+HTTP リクエストのためのクラスです。
+
+== Class Methods
+
+--- new(config)
+#@todo
+WEBrick::HTTPRequest を生成して返します。
+
+@param config 設定を保持したハッシュを指定します。
 
 == Instance Methods
 
---- [](header_name)
-#@todo
-リクエストのヘッダの該当する内容を文字列で返す。
+--- [](header_name)    -> String
+
+リクエストのヘッダの該当する内容を文字列で返します。
+
+@param header_name ヘッダー名を文字列で指定します。大文字と小文字を区別しません。
 
 #@since 1.8.2
---- accept
-#@todo
-Accept ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされたメディアタイプの文字列の配列。
+--- accept    -> [String]
 
---- accept_charset
-#@todo
-Accept-Charset  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされた文字セットの文字列の配列。
+Accept ヘッダの内容をメディアタイプを表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
 
---- accept_encoding
-#@todo
-Accept-Encoding  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされたコーディングの文字列の配列。
+--- accept_charset    -> [String]
 
---- accept_language
-#@todo
-Accept-Language  ヘッダの内容を配列で返す。配列は品質係数(qvalue)でソートされた自然言語の文字列の配列。
+Accept-Charset  ヘッダの内容を文字セットを表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
+
+--- accept_encoding    -> [String]
+
+Accept-Encoding  ヘッダの内容をコーディングを表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
+
+--- accept_language    -> [String]
+
+Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
+配列は品質係数(qvalue)でソートされています。
+
 #@end
 
---- addr
-#@todo
-[[m:IPSocket#addr]]と同様。
+--- addr    -> Array
 
---- attributes
+クライアントと接続されているソケットの [[m:IPSocket#addr]] を返します。
+
+--- attributes    -> Hash
 #@todo
 
---- body
---- body { ... }
-#@todo
+--- body                 -> String | nil
+--- body {|chunk| ... }  -> String | nil
+
+クライアントからエンティティボディを読み込み返します。
+リクエストにエンティティボディが含まれない場合は nil を返します。
+
+リクエストが chunked 形式であっても返り値はデコードされて返されます。
+2回目の呼び出し以降は最初に読み込んだエンティティボディを返します。
+ブロックを指定された場合、クライアントからデータを読み込むたびにそのデータ(文字列)
+を引数としてブロックを実行します。リクエストが chunked 形式であっても引数はデコードされています。
 
 #@since 1.8.2
---- content_length
-#@todo
-content-length を整数で返す。
+--- content_length    -> Intger
 
---- content_type
-#@todo
-content-type ヘッダを文字列で返す。
+リクエストの Content-Length ヘッダの値を整数で返します。リクエストに Content-Length ヘッダ
+が含まれていない場合は 0 を返します。
+
+--- content_type    -> String | nil
+
+リクエストの Content-Type ヘッダを文字列で返す。
+
 #@end
 
---- cookies
-#@todo
-[[c:WEBrick::Cookie]] の配列を返す。
+--- cookies    -> [WEBrick::Cookie]
+
+リクエストに含まれる Cookie ヘッダの値を [[c:WEBrick::Cookie]] の配列として返します。
 
 --- each {|key, val| ... }
-#@todo
-ヘッダ名を key、内容を val としてブロックを評価します。
 
---- fixup
-#@todo
+リクエストの各ヘッダ名を key、内容を val としてブロックを評価します。
 
---- header
-#@todo
-ヘッダ名を key、内容を val とするハッシュを返す。key も val も文字列。
+--- fixup    -> ()
 
---- host
-#@todo
-host を文字列で返す。
+リクエストの残りのエンティティボディを読み込みます。
 
---- http_version
-#@todo
-[[c:WEBrick::HTTPVersion]] オブジェクトを返す。
+--- header    -> Hash
 
---- keep_alive
---- keep_alive?
-#@todo
-Keep-Alive かどうかを返す。
+ヘッダ名をキー、内容をその値とするハッシュを返します。キーも値も文字列です。
 
---- meta_vars
-#@todo
+--- host    -> String
 
---- parse(socket = nil)
-#@todo
+リクエスト URI の host を文字列で返す。
 
---- parse_uri(str, scheme = "http")
-#@todo
+--- http_version     -> WEBrick::HTTPVersion
 
---- path
-#@todo
-path を文字列で返す。
+リクエストの HTTP バージョンを表す [[c:WEBrick::HTTPVersion]] オブジェクトを返します。
 
---- path_info
+--- keep_alive     -> bool
+--- keep_alive?    -> bool
+
+リクエストが Keep-Alive を要求しているかを真偽で返します。
+http_version が 1.1 より小さい場合は Keep-Alive を要求していても無視して
+false となります。
+
+--- meta_vars    -> Hash
+#@todo
+This method provides the metavariables defined by the revision 3
+of ``The WWW Common Gateway Interface Version 1.1''.
+[[url:http://Web.Golux.Com/coar/cgi/]].
+
+--- parse(socket = nil)    -> ()
+
+指定された socket からクライアントのリクエストを読み込み、
+自身のアクセサなどを適切に設定します。
+
+@param socket クライアントに接続された IO オブジェクトを指定します。
+
+--- path    -> String
+
+リクエスト URI のパスを表す文字列を返します。
+
+--- path_info          -> String
 --- path_info=(value)
 #@todo
-path と同値。
+リクエスト URI のパスを文字列で表すアクセサです。デフォルトは path と同じです。
 
---- peeraddr
-#@todo
-[[m:IPSocket#peeraddr]]と同様。
+@param value 
 
---- port
-#@todo
-サーバのポートを文字列で返す。
+--- peeraddr    -> Array
 
---- query
+クライアントと接続されているソケットの [[m:IPSocket#peeraddr]] を返します。
+
+--- port    -> String
 #@todo
-ハッシュを返す。key も val も unescape されている。
+サーバのポートを文字列で返します。
+
+--- query    -> Hash
+#@todo
+ハッシュを返します。key も val も unescape されています。
 
 --- query_string
 #@since 1.8.4
@@ -126,31 +157,40 @@ request_uri.query と同値。
 #@todo
 クライアントのリクエストの最初の行(GET / HTTP/1.1)を文字列で返す。
 
---- request_method
+--- request_method     -> String
 #@todo
 クライアントのリクエストの HTTP メソッド(GET, POST,...)を文字列で返す。
 
---- request_time
+--- request_time    -> Time
 #@todo
-リクエストされた時刻を Time オブジェクトで返す。
+リクエストされた時刻を [[c:Time]] オブジェクトで返す。
 
 --- request_uri
 #@todo
 [[c:URI]] オブジェクトを返す。
 
---- script_name
+--- script_name          -> String
 --- script_name=(value)
 #@todo
 
---- to_s
-#@todo
+SCRIPT_NAME を文字列で表すアクセサです。
 
---- unparsed_uri
-#@todo
+@param value
 
---- user
+--- to_s    -> String
+
+リクエストのヘッダとボディをまとめて文字列として返します。
+
+--- unparsed_uri    -> String
+
+リクエストの URI を文字列で返します。
+
+--- user          -> String
 --- user=(value)
-#@todo
+
+REMOTE_USER を文字列で表すアクセサです。
+
+@param value ユーザ名を文字列で指定します。
 
 == Constants
 
