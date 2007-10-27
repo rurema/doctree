@@ -230,10 +230,15 @@ HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
 
 クライアントに送られた内容(エンティティボディ)のバイト数を表す整数を返します。
 
---- set_error(ex, backtrace = false)
-#@todo
+--- set_error(status, backtrace = false)    -> ()
 
---- set_redirect(status, url)
+自身の内容(エンティティボディ)を指定された status のエラーページにします。
+
+@param status [[c:WEBrick::HTTPStatus::Status]] のサブクラスか一般の例外クラスを指定します。
+
+@param backtrace true を指定した場合バックトレースをエラーページに出力します。
+
+--- set_redirect(status, url)    -> ()
 #@todo
 
 指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を設定し例外 status を
