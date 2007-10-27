@@ -7,12 +7,18 @@ require webrick/httpstatus
 
 HTTP のレスポンスを表すためのクラスです。
 
+通常 WEBrick::HTTPResponse オブジェクトはサーブレットの service メソッドや do_XXX メソッドの
+引数として与えられるものであり、ユーザが明示的に生成する必要はありません。
+
 == Class Methods
 
 --- new(config)
 #@todo
-HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを
-与えます。:HTTPVersion は必須です。
+HTTPResponse オブジェクトを生成して返します。
+
+@param config 設定を保存したハッシュを指定します。:HTTPVersion は必須です。
+
+  res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
 
 == Instance Methods
 
@@ -22,6 +28,8 @@ HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを
 
 @param field ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
+  p res['date']   #=> "Sat, 27 Oct 2007 08:53:03 GMT"
+
 --- []=(field, val)
 #@todo
 レスポンスの該当するヘッダに val を設定する。val は文字列。
@@ -29,6 +37,9 @@ HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを
 @param field ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
 @param val ヘッダの値を指定します。to_s メソッドによって文字列に変換されます。
+
+  require 'time'
+  res['last-modified'] = Time.now.httpdate
 
 @see [[m:WEBrick::HTTPResponse#chunked?]], [[m:WEBrick::HTTPResponse#content_length]], 
      [[m:WEBrick::HTTPResponse#content_type]]
@@ -44,6 +55,21 @@ HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを
            自身が chunked であってもチャンク形式にする必要はありません。
            適切にチャンク形式エンコーディングされます。
 
+  require 'webrick'
+  include WEBrick
+  res = HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  res.body = 'hoge'
+  print res.to_s
+
+  #=> 出力結果
+  HTTP/1.1 200 OK
+  Connection: Keep-Alive
+  Date: Sat, 27 Oct 2007 08:58:49 GMT
+  Server:
+  Content-Length: 4
+  
+  hoge
+
 --- chunked?     -> bool
 --- chunked=(flag)
 
@@ -54,6 +80,25 @@ HTTPResponse オブジェクトを生成する。config には設定を保存したハッシュを
 
 @param flag true を指定した場合、レスポンスを chunk に分けてクライアントに返します。
 
+  require 'webrick'
+  include WEBrick
+  res = HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  res.body = 'hoge'
+  res.chunked = true
+  print res.to_s
+
+  #=> 出力結果
+  HTTP/1.1 200 OK
+  Connection: Keep-Alive
+  Date: Sat, 27 Oct 2007 09:04:28 GMT
+  Server:
+  Transfer-Encoding: chunked
+  
+  4
+  hoge
+  0
+  
+  #
 --- config    -> Hash
 
 自身が生成される時に指定されたハッシュを返します。
@@ -78,12 +123,18 @@ content_length の値は無視され Content-Length ヘッダはレスポンスに含まれません。
 
 @param len ヘッダの値を整数で指定します。nil を指定することは出来ません。
 
+  res.content_length = 32
+
 --- content_type         -> String | nil
 --- content_type=(val)
 #@todo
 Content-Type ヘッダの値を文字列で表すアクセサです。
 
 @param val Content-Type ヘッダの値を文字列で指定します。
+
+  res.content_type = "text/html"
+
+@see [[m:WEBrick::HTTPUtils.#mime_type]]
 #@end
 
 --- cookies    -> [WEBrick::Cookie]
@@ -116,8 +167,8 @@ Content-Type ヘッダの値を文字列で表すアクセサです。
 --- keep_alive         -> bool
 --- keep_alive=(flag)
 
-レスポンスの keep_alive が有効であるかを表す真偽です。
-デフォルトは false です。
+レスポンスの keep_alive が有効であるかを真偽で表すアクセサです。
+デフォルトは true です。
 
 @param flag true を指定すると Keep-Alive を有効にします。
 
@@ -175,7 +226,7 @@ HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
 --- status=(status)
 
 レスポンスのステータスコードを整数で指定します。
-reason_phrase も適切なものに設定します。
+reason_phrase も適切なものに設定されます。
 
 @param status ステータスコードを整数で指定します。
 
