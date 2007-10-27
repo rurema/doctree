@@ -127,7 +127,7 @@ SHA384では48バイト長、SHA512では64バイト長となる。
         digest = Digest::MD5.new("ruby")
         p digest.digest # => "X\345=\023$\356\366&_\333\227\260\216\331\252\337"
 
-[[m:Digest::Base#hexdigest]]、[[c:Digest::Base.new]]、
+[[m:Digest::Base#hexdigest]]、[[m:Digest::Base.new]]、
 [[m:Digest::Base#update]]、[[m:Digest::Base#<<]]を参照。
 
 #@since 1.8.6
@@ -157,7 +157,7 @@ Rubyで書くと以下と同じ。
         digest = Digest::MD5.new("ruby")
         p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
 
-[[m:Digest::Base#digest]]、[[c:Digest::Base.new]]、
+[[m:Digest::Base#digest]]、[[m:Digest::Base.new]]、
 [[m:Digest::Base#update]]、[[m:Digest::Base#<<]]を参照。
 
 #@since 1.8.6
