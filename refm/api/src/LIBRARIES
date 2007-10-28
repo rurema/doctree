@@ -407,7 +407,6 @@ webrick/server
 webrick/ssl
 #@end
 webrick/utils
-webrick/version
 win32/registry
 win32ole
 #@since 1.8.1
