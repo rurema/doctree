@@ -1,5 +1,5 @@
 require webrick/compat
-require webrick/version
+#@#require webrick/version
 require webrick/config
 require webrick/log
 require webrick/server
@@ -69,7 +69,6 @@ view.rb ¤¬CGI¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤Þ¤¹¡£http://127.0.0.1:20080/foo.html ¤Ë¥¢¥
 
 
  * [[lib:webrick/compat]]
- * [[lib:webrick/version]]
  * [[lib:webrick/config]]
  * [[lib:webrick/log]]
  * [[lib:webrick/server]]
@@ -85,3 +84,16 @@ view.rb ¤¬CGI¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤Þ¤¹¡£http://127.0.0.1:20080/foo.html ¤Ë¥¢¥
  * [[lib:webrick/httpserver]]
  * [[lib:webrick/httpservlet]]
  * [[lib:webrick/httpauth]]
+
+
+= module WEBrick
+
+== Constants
+
+--- VERSION
+
+WEBrick ¤Î¥Ð¡¼¥¸¥ç¥ó¤òÉ½¤¹Ê¸»úÎó¤Ç¤¹¡£
+
+ p WEBrick::VERSION   #=> "1.3.1"
+
+  
