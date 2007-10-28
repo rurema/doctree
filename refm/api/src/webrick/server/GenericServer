@@ -1,5 +1,6 @@
 = class WEBrick::GenericServer < Object
 
+サーバの一般的な機能を提供するクラスです。
 [[c:WEBrick::HTTPServer]] のスーパークラスです。
 
 == Class Methods
@@ -84,17 +85,19 @@ listen している [[c:TCPServer]] オブジェクトの配列を返します。
 
 [[m:WEBrick::GenericServer#stop]] を呼び、全ての listeners を close します。
 
---- start()
---- start(){|soc| ... }
-#@todo
-サーバをスタートします。
-block が与えられた場合、block が実際のクライアントとの応答を担います。
-block は [[c:TCPSocket]] オブジェクトを引数として呼び出されます。
+--- start               -> ()
+--- start{|soc| ... }   -> ()
 
---- status
-#@todo
+サーバをスタートします。
+
+ブロックが与えられた場合 [[m:WEBrick::GenericServer#run]] メソッドの
+代わりにブロックが実際のクライアントとの応答を担います。
+ブロックは [[c:TCPSocket]] オブジェクトを引数として呼ばれます。
+
+--- status    -> Symbol
+
 現在のサーバのステータスを [[c:Symbol]] オブジェクトで返します。
-値は :Running(活動中), :Shutdown(終了処理中), :Stop(完全に停止) のいずれか。
+値は :Running(活動中), :Shutdown(終了処理中), :Stop(完全に停止) のいずれかです。
 
 --- stop    -> ()
 #@todo
@@ -102,15 +105,15 @@ block は [[c:TCPSocket]] オブジェクトを引数として呼び出されます。
 
 実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止するとは限りません。
 
---- tokens
-#@todo
+--- tokens    -> SizedQueue
+
 MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返します。
 [[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるクライアントの数です。
 
 MaxClient を知りたい場合は self.tokens.max です。
 self.tokens.max - self.tokens.length が現在のクライアントの接続数です。
 
---- run(sock)
+--- run(sock)    -> ()
 
 クライアントと接続された TCPSocket オブジェクトを引数として呼ばれ、
 具体的な処理を行います。
