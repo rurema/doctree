@@ -83,7 +83,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与える。
 
 @param value 有効期限を [[c:Time]] オブジェクトまたは文字列を指定します。
 
---- max_age          -> Intger
+--- max_age          -> Integer
 --- max_age=(value)
 
 クッキーの寿命を整数(単位は秒)で表すアクセサです。
@@ -119,7 +119,7 @@ Cookie の名前を文字列で返します。
 
 @param str クッキーの値を文字列で指定します。
 
---- version           -> Intger
+--- version           -> Integer
 --- version=(value)
 
 Cookie のバージョン番号を整数で表すアクセサです。
