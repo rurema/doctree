@@ -4,8 +4,7 @@ require webrick/httputils
 = class WEBrick::Cookie < Object
 
 Cookie を表すクラスです。[[rfc:2109]] に準拠しています。
-WEBrick::Cookie は設定された値が正しいものかどうかを厳密に確認しません。
-RFC2109 は [[rfc:2965]] により破棄されましたが、WEBrick::Cookie クラスは RFC2965 の全てに対応していません。
+RFC2109 は [[rfc:2965]] により破棄されましたが、WEBrick::Cookie クラスは RFC2965 に対応していません。
 
  * [[url:http://www.studyinghttp.net/translations#RFC2965]]  
  * [[url:http://www.studyinghttp.net/cookies]] 
