@@ -1,3 +1,5 @@
+HTTP のステータスを表す例外クラスを提供します。
+
 = module WEBrick::HTTPStatus
 
 HTTP のステータスを表す例外クラスを提供するモジュールです。
@@ -16,39 +18,77 @@ HTTP のステータスを表す例外クラスを提供するモジュールです。
 
 == Singleton Methods
 
---- [](code)
-#@todo
+--- [](code)    -> WEBrick::HTTPStatus::Status
+
+指定された整数が表すステータスコードに対応する WEBrick::HTTPStatus::Status
+のサブクラスを返します。
+
+@param code HTTP のステータスコードを表す整数を指定します。
+
+  require 'webrick'
+  p WEBrick::HTTPStatus[200]   #=> WEBrick::HTTPStatus::OK
 
 == Module Functions
 
---- reason_phrase(code)
-#@todo
+--- reason_phrase(code)     -> String
 
---- info?(code)
-#@todo
+指定された整数が表すステータスコードに対応する reason phrase
+を表す文字列を返します。
 
---- success?(code)
-#@todo
+@param code HTTP のステータスコードを表す整数か文字列を指定します。
 
---- redirect?(code)
-#@todo
+  require 'webrick'
+  p WEBrick::HTTPStatus.reason_phrase(304)   #=> "Not Modified"
 
---- error?(code)
-#@todo
+--- info?(code)    -> bool
 
---- client_error?(code)
-#@todo
+指定された整数が表すステータスコードが 1XX である場合に
+true を返します。そうでない場合に false を返します。
 
---- server_error?(code)
-#@todo
+@param code HTTP のステータスコードを表す整数を指定します。
+
+--- success?(code)    -> bool
+
+指定された整数が表すステータスコードが 2XX である場合に
+true を返します。そうでない場合に false を返します。
+
+@param code HTTP のステータスコードを表す整数か文字列を指定します。
+
+--- redirect?(code)    -> bool
+
+指定された整数が表すステータスコードが 3XX である場合に
+true を返します。そうでない場合に false を返します。
+
+@param code HTTP のステータスコードを表す整数か文字列を指定します。
+
+--- error?(code)    -> bool
+
+指定された整数が表すステータスコードが 4XX, 5xx である場合に
+true を返します。そうでない場合に false を返します。
+
+@param code HTTP のステータスコードを表す整数か文字列を指定します。
+
+--- client_error?(code)    -> bool
+
+指定された整数が表すステータスコードが 4XX である場合に
+true を返します。そうでない場合に false を返します。
+
+@param code HTTP のステータスコードを表す整数か文字列を指定します。
+
+--- server_error?(code)    -> bool
+
+指定された整数が表すステータスコードが 5XX である場合に
+true を返します。そうでない場合に false を返します。
+
+@param code HTTP のステータスコードを表す整数か文字列を指定します。
 
 == Constants
 
---- StatusMessage
-#@todo
+#@#--- StatusMessage
+#@#todo
 
---- CodeToError
-#@todo
+#@#--- CodeToError
+#@#todo
 
 --- RC_CONTINUE
 --- RC_SWITCHING_PROTOCOLS
@@ -90,12 +130,11 @@ HTTP のステータスを表す例外クラスを提供するモジュールです。
 --- RC_SERVICE_UNAVAILABLE
 --- RC_GATEWAY_TIMEOUT
 --- RC_HTTP_VERSION_NOT_SUPPORTED
-#@todo
 
+HTTP のステータスコードを表す整数です。
 
-
-
-
+  require 'webrick'
+  p WEBrick::HTTPStatus::RC_INTERNAL_SERVER_ERROR   #=> 500
 
 
 = class WEBrick::HTTPStatus::Status < StandardError
