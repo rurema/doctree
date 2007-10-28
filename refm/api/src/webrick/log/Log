@@ -1,59 +1,15 @@
 = class WEBrick::Log < WEBrick::BasicLog
 
-[[lib:webrick]]
-
-== Class Methods
-
---- new(log_file=nil, level=nil)
-#@todo
-Log オブジェクトを生成する。log_file はメソッド << が定義されたオブジェクト。
-普通は [[c:String]] オブジェクトか [[c:IO]] オブジェクト。
-
-level には Log オブジェクトのログレベルを定数で指定する。
-このログレベルと同じか より重要なレベルの data を Log オブジェクトは記録する。
-
-デフォルトではログレベル INFO が設定される。
-ログレベルは FATAL, ERROR, WARN, INFO, DEBUG の5段階。定数として
-以下のように定義されている。小さい方が重要度が大きい。
-  FATAL, ERROR, WARN, INFO, DEBUG = 1, 2, 3, 4, 5
+ログを取る機能を提供するクラスです。
+[[c:WEBrick::BasicLog]] との違いはログの各行の先頭に
+現在時刻が自動で挿入される点です。
 
 == Instance Methods
 
-#@# --- <<(data)
-#@# data をログレベル INFO でログに記録する。
-
-#@# --- close
-#@# Log オブジェクトを閉じる。
-
-#@# --- fatal(data)
-#@# --- error(data)
-#@# --- warn(data)
-#@# --- info(data)
-#@# --- debug(data)
-#@# 該当するログレベルで log(level, data）を呼ぶ。
-
-#@# --- fatal?
-#@# --- error?
-#@# --- warn?
-#@# --- info?
-#@# --- debug?
-#@# Log オブジェクトが log(level,data) を呼んだ時に
-#@# 該当するログレベルの data を記録するなら true を返す。
-
-#@# --- level
-#@# ログレベルを返す。
-
-#@# --- level=()
-#@# ログレベルを指定する。
-
---- log(level, data)
-#@todo
-data をログに記録する。level は data のログレベル。
-data のログレベルが Log オブジェクトのログレベルと同じか、より重要な時
-data はログに記録される。
-
---- time_format
+--- time_format      -> String
 --- time_format=()
-#@todo
-時間を記録するフォーマットを文字列で指定する。
-[[m:Time#strftime]] を参照。
+
+時間を記録するフォーマットを文字列で表すアクセサです。
+形式は [[m:Time#strftime]] と同じです。
+デフォルトは "[%Y-%m-%d %H:%M:%S]" です。
+
