@@ -1,7 +1,11 @@
 = class WEBrick::Daemon < Object
 
-== Singleton Methods
+サーバのタイプを表すクラスです。
+[[m:WEBrick::GenericServer.new]] の設定の :ServerType の値として指定した場合
+サーバはデーモンとして動作します。
 
---- start
---- start { ... }
-#@todo
+#@#== Singleton Methods
+
+#@#--- start
+#@#--- start { ... }
+#@#todo
