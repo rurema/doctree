@@ -8,7 +8,7 @@ include Precision
 
 == Class Methods
 
---- induced_from(num) -> Fixnum | Bignum | Float | Double
+--- induced_from(num) -> Integer
 
 num を Integer に変換した結果を返します。
 引数が数値の場合は切り捨てられ、そうでない場合はTypeErrorをraiseします。
@@ -19,7 +19,7 @@ num を Integer に変換した結果を返します。
   Integer.induced_from '1'  #=> TypeError
 
 
-include している [[c:Precision]] モジュールの [[m:Precision.induced_from] を
+include している [[c:Precision]] モジュールの [[m:Precision.induced_from]] を
 上書きしています。
 
 @param num   数値
@@ -117,7 +117,7 @@ bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
 65.chr は "A" を返します。
 
 逆に文字列から文字コードを得るには "A"[0] とします
-([[m:String#[]]] を参照してください)。
+([[m:String#[] ]] を参照してください)。
 
 整数は 0 から 255 の範囲内でなければなりません。範囲外の整数に対す
 る呼び出しは例外 [[c:RangeError]] を発生させます。

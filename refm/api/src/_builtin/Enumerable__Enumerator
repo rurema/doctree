@@ -106,7 +106,7 @@ next メソッドによる外部列挙の状態は他のイテレータメソッドによる
         #    iteration reached at end
         #    120
 
-例3: [[m:Kernel#loop]] は StopIteration を捕捉します。
+例3: [[m:Kernel.#loop]] は StopIteration を捕捉します。
     str = "xyz"
     enum = str.each_byte
     loop do

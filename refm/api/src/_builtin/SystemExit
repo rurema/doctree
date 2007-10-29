@@ -27,7 +27,7 @@ SystemExit オブジェクトを生成して返します。
 
 例外オブジェクトに保存された終了ステータスを返します。
 
-終了ステータスは [[m:Kernel#exit]] や [[m:SystemExit.new]] などで設定されます。
+終了ステータスは [[m:Kernel.#exit]] や [[m:SystemExit.new]] などで設定されます。
 
 例:
 

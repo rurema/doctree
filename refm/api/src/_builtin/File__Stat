@@ -260,7 +260,7 @@ rdev の minor 番号部を返します。
 
   p File::Stat.new($0).directory? #=> false
 
-@see [[m:FileTest.directory?]]
+@see [[m:FileTest.#directory?]]
 
 --- readable? -> bool
 読み込み可能な時に真を返します。

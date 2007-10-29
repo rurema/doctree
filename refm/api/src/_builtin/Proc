@@ -100,7 +100,7 @@ Proc を生成したメソッドからリターンしてしまった後は Proc
 
 Proc.new は、Proc#initialize が定義されていれば
 オブジェクトの初期化のためにこれを呼び出します。このことを
-除けば、[[m:Kernel#proc]] と同じです。
+除けば、[[m:Kernel.#proc]] と同じです。
 
 == Instance Methods
 
