@@ -18,7 +18,7 @@ HTTP のステータスを表す例外クラスを提供するモジュールです。
 
 == Singleton Methods
 
---- [](code)    -> WEBrick::HTTPStatus::Status
+--- [](code)    -> Class
 
 指定された整数が表すステータスコードに対応する WEBrick::HTTPStatus::Status
 のサブクラスを返します。
