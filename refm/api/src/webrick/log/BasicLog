@@ -9,12 +9,16 @@
 WEBrick::BasicLog オブジェクトを生成して返します。
 
 @param log_file ログを記録する先のオブジェクトを指定します。メソッド << が定義されている必要があります。
-                通常は [[c:String]] オブジェクトか [[c:IO]] オブジェクトです。
+                通常は [[c:String]] オブジェクトか [[c:IO]] オブジェクトです。nil
+                を指定場合、標準エラー出力にログを出力します。
 
 @param level ログレベルを定数で指定します。
              このログレベルと同じかより重要なレベルのデータのみを記録します。
              ログレベルは重要度の順に FATAL, ERROR, WARN, INFO, DEBUG の5段階があります。
              FATAL の重要度が一番高く DEBUG が一番低いです。
+
+  require 'webrick'
+  logger = WEBrick::BasicLog.new('testfile', WEBrick::BasicLog::FATAL)
 
 == Instance Methods
 
@@ -30,7 +34,7 @@ WEBrick::BasicLog オブジェクトを生成して返します。
 
 --- log(level, msg)    -> ()
 
-指定された msg をログに記録します。
+指定された msg を指定されたログレベル level でログに記録します。
 
 @param level 記録したい msg のレベルを FATAL, ERROR, WARN, INFO, DEBUG のいずれかの定数で指定します。
 
@@ -41,41 +45,64 @@ WEBrick::BasicLog オブジェクトを生成して返します。
 指定された obj を to_s メソッドで文字列に変換してから、
 ログレベル INFO でログに記録します。
 
-@param obj 記録したいオブジェクトを指定します。
+@param obj 記録したいオブジェクトを指定します。文字列でない場合は to_s メソッドで文字列に変換します。
+
+  require 'webrick'
+  logger = WEBrick::BasicLog.new() 
+  logger << 'hoge'
 
 --- fatal(msg)    -> ()
 
 ログレベル FATAL で文字列 msg をログに記録します。
 
-@param msg 記録したい文字列を指定します。
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
+
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
+
+  require 'webrick'
+  loger = WEBrick::BasicLog.new()
+  loger.fatal('client denied')       #=> FATAL client denied   (標準エラー出力に出力)
 
 --- error(msg)    -> ()
 
 ログレベル ERROR で文字列 msg をログに記録します。
 自身の level が ERROR より重要度が高い場合には記録しません。
 
-@param msg 記録したい文字列を指定します。
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
+
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- warn(msg)    -> ()
 
 ログレベル WARN で文字列 msg をログに記録します。
 自身の level が WARN より重要度が高い場合には記録しません。
 
-@param msg 記録したい文字列を指定します。
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
+
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- info(msg)    -> ()
 
 ログレベル INFO で文字列 msg をログに記録します。
 自身の level が INFO より重要度が高い場合には記録しません。
 
-@param msg 記録したい文字列を指定します。
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
+
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- debug(msg)    -> ()
 
 ログレベル DEBUG で文字列 msg をログに記録します。
 自身の level が DEBUG より重要度が高い場合には記録しません。
 
-@param msg 記録したい文字列を指定します。
+行頭に level を表す文字列が追加されます。
+msg の終端が "\n" でない場合には "\n" を追加します。
+
+@param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
 --- fatal?    -> bool
 
