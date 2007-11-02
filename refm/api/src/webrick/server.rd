@@ -1,6 +1,3 @@
-#@#require thread
-#@#require socket
-#@#require timeout
 require webrick/config
 require webrick/log
 

@@ -1,4 +1,3 @@
-#@#require time
 require webrick/httputils
 
 = class WEBrick::Cookie < Object
