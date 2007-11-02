@@ -1,6 +1,3 @@
-#@#require socket
-#@#require tempfile
-
 = reopen WEBrick
 
 == Constants

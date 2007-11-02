@@ -1,7 +1,3 @@
-#@#require socket
-#@#require fcntl
-#@#require etc
-
 = module WEBrick::Utils
 
 == Module Functions
