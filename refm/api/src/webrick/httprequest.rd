@@ -180,7 +180,7 @@ of ``The WWW Common Gateway Interface Version 1.1''.
 --- script_name=(value)
 #@todo
 
-SCRIPT_NAME を文字列で表すアクセサです。
+CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
 @param value
 

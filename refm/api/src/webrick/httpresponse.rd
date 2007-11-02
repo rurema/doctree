@@ -178,6 +178,11 @@ Content-Type ヘッダの値を文字列で表すアクセサです。
 
 レスポンスの HTTP のバージョンを表す [[c:WEBrick::HTTPVersion]] オブジェクトを返します。
 
+  require 'webrick'
+  res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )
+  p res.http_version.class                                        #=> WEBrick::HTTPVersion
+  p res.http_version.to_s                                         #=> "1.1"
+
 --- keep_alive?        -> bool
 --- keep_alive         -> bool
 --- keep_alive=(flag)
@@ -264,7 +269,7 @@ reason_phrase も適切なものに設定されます。
 
 --- status_line    -> String
 
-HTTP のステータスラインを文字列で返します。
+HTTP のステータスラインを CR+LF 付き文字列で返します。
 
   require 'webrick'
   res = WEBrick::HTTPResponse.new( { :HTTPVersion => "1.1" } )

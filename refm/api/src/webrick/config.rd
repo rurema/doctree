@@ -6,6 +6,8 @@ require webrick/log
 
 = module WEBrick::Config
 
+色々なクラスの設定のデフォルト値を提供するモジュールです。
+
 == Constants
 
 --- General
