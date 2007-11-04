@@ -41,7 +41,6 @@
 
 --- collect {|item| ... } -> [Object]
 --- map {|item| ... }     -> [Object]
-#@todo
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
 
@@ -120,7 +119,6 @@ ifnone を eval または call して実行し、nil を返します。
 
 --- grep(pattern)                -> [Object]
 --- grep(pattern) {|item| ... }  -> [Object]
-#@todo
 
 pattern === item が成立する要素を全て含んだ配列を返します。
 ブロックとともに呼び出された時には条件の成立した要素に対して
