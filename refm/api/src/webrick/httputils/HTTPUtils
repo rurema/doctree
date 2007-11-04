@@ -6,7 +6,7 @@ HTTP のためのユーティリティ関数を提供します。
 
 --- load_mime_types(file)    -> Hash
 
-指定された Apache の mime.types ファイル形式の file を読み込み
+Apache の mime.types ファイル形式の file を読み込み
 拡張子をキー、MIME タイプを値とするハッシュを返します。キーも値も文字列です。
 
 @param file Apache の mime.types ファイル形式のファイルの名前を文字列で指定します。
@@ -16,7 +16,7 @@ HTTP のためのユーティリティ関数を提供します。
 
 --- mime_type(filename, mime_tab)    -> String
 
-指定されたファイル名 filename の拡張子をもとにその MIME タイプを指定された mime_tab 
+ファイル名 filename の拡張子をもとにその MIME タイプを指定された mime_tab 
 から探して文字列として返します。MIME タイプが見つからない場合は "application/octet-stream"
 を返します。
 
