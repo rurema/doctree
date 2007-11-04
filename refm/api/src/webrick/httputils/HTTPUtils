@@ -1,15 +1,33 @@
 = module WEBrick::HTTPUtils
 
+HTTP のためのユーティリティ関数を提供します。
+
 == Module Functions
 
---- normalize_path(path)
-#@todo
+--- load_mime_types(file)    -> Hash
 
---- load_mime_types(file)
-#@todo
+指定された Apache の mime.types ファイル形式の file を読み込み
+拡張子をキー、MIME タイプを値とするハッシュを返します。キーも値も文字列です。
 
---- mime_type(filename, mime_tab)
-#@todo
+@param file Apache の mime.types ファイル形式のファイルの名前を文字列で指定します。
+
+  p WEBrick::HTTPUtils.load_mime_types('/etc/mime.types')
+  # => {"htm"=>"text/html", "rpm"=>"application/x-rpm", ... }
+
+--- mime_type(filename, mime_tab)    -> String
+
+指定されたファイル名 filename の拡張子をもとにその MIME タイプを指定された mime_tab 
+から探して文字列として返します。MIME タイプが見つからない場合は "application/octet-stream"
+を返します。
+
+@param filename ファイル名を文字列で指定します。
+
+@param mime_tab 拡張子をキー、MIME タイプを値とするハッシュを指定します。
+
+  include WEBrick::HTTPUtils
+  p mime_type('index.html', DefaultMimeTypes)     #=> "text/html"
+  p mime_type('index.html.ja', DefaultMimeTypes)  #=> "text/html"
+  p mime_type('index.hoge', DefaultMimeTypes)     #=> "application/octet-stream"
 
 --- parse_header(raw)
 #@todo
@@ -20,47 +38,16 @@
 --- parse_range_header(ranges_specifier)
 #@todo
 
-#@since 1.8.2
---- parse_qvalues(value)
-#@todo
-#@end
-
 --- dequote(str)
 #@todo
 
 --- quote(str)
 #@todo
 
---- parse_query(str)
-#@todo
-
---- parse_form_data(io, boundary)
-#@todo
-
---- _make_regex(str)
-#@todo
-
-#@since 1.8.3
---- _make_regex!(str)
-#@todo
-#@end
-
---- _escape(str, regex)
-#@todo
-
---- _unescape(str, regex)
-#@todo
-
 --- escape(str)
 #@todo
 
 --- unescape(str)
-#@todo
-
---- escape_form(str)
-#@todo
-
---- unescape_form(str)
 #@todo
 
 #@since 1.8.3
@@ -71,24 +58,41 @@
 --- escape8bit(str)
 #@todo
 
+#@#--- normalize_path(path)
+#@#todo
+
+#@since 1.8.2
+#@#--- parse_qvalues(value)
+#@#todo
+#@end
+
+#@#--- escape_form(str)
+#@#todo
+
+#@#--- unescape_form(str)
+#@#todo
+
+#@since 1.8.3
+#@#--- _make_regex!(str)
+#@#todo
+#@end
+
+#@#--- _escape(str, regex)
+#@#todo
+
+#@#--- _unescape(str, regex)
+#@#todo
+
+#@#--- parse_query(str)
+#@#todo
+
+#@#--- parse_form_data(io, boundary)
+#@#todo
+
+#@#--- _make_regex(str)
+#@#todo
+
 == Constants
 
 --- DefaultMimeTypes
 #@todo
-
---- UNESCAPED
-#@todo
-
---- UNESCAPED_FORM
-#@todo
-
---- NONASCII
-#@todo
-
---- ESCAPED
-#@todo
-
-#@since 1.8.3
---- UNESCAPED_PCHAR
-#@todo
-#@end
