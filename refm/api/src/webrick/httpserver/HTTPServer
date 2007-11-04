@@ -61,7 +61,7 @@ HTTPServer オブジェクトを生成して返します。
 == Instance Methods
 
 --- mount(dir, servlet, *options)    -> ()
-
+#@todo
 サーバ上のディレクトリ dir にサーブレット servlet を対応させます。
 
 @param dir ディレクトリをあらわす文字列を指定します。
@@ -97,10 +97,10 @@ HTTPServer オブジェクトを生成して返します。
 --- virtual_host(server)    -> ()
 
 サーバの保持しているバーチャルホストのリストに HTTP サーバ server を加えます。
+クライアントからのリクエストのうち server へのものは server に委譲されるようになります。
 
 @param server バーチャルホストを表す WEBrick::HTTPServer オブジェクトを指定します。
-              クライアントからのリクエストのうち server へのものは server に委譲される
-              ようになります。
+
 
   include WEBrick
   srv1 = HTTPServer.new( { :Port => 1080, :ServerName => 'hoge.example.com' } )
