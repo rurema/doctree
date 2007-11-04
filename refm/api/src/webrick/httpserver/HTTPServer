@@ -1,8 +1,8 @@
 = class WEBrick::HTTPServer < WEBrick::GenericServer
 
-HTTP サーバのためのクラス。
+HTTP サーバの機能を提供するクラスです。
 
-簡単な例。
+以下は HTTP サーバとしてちゃんと動作する例です。
 
  require 'webrick'
  srv = WEBrick::HTTPServer.new({:DocumentRoot => '/home/username/public_html/',
@@ -60,47 +60,54 @@ HTTPServer オブジェクトを生成して返します。
 
 == Instance Methods
 
---- access_log(config, req, res)
-#@todo
+--- mount(dir, servlet, *options)    -> ()
 
---- do_OPTIONS(req, res)
-#@todo
+サーバ上のディレクトリ dir にサーブレット servlet を対応させます。
 
---- lookup_server(req)
-#@todo
+@param dir ディレクトリをあらわす文字列を指定します。
 
---- mount(dir, servlet, *options)
-#@todo
-サーバ上のディレクトリ dir にサーブレット servlet を対応させる。
-dir はディレクトリをあらわす文字列。servlet は
-[[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラス。*options を引数としてサーブレットのコンストラクタ new(*options) が呼び出される。
+@param servlet [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインスタンスを指定します。
 
---- mount_proc(dir, proc)
---- mount_proc(dir){|req, res| ...}
-#@todo
-サーバ上のディレクトリ dir に [[c:Proc]] オブジェクト proc を対応させる。
-proc は [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]]
-オブジェクトを引数として proc.call(request, response) の引数の順で呼び出される。
+@param options サーブレットのコンストラクタの引数を指定します。
 
---- run(sock)
-#@todo
+  include WEBrick
+  srv = HTTPServer.new( { :BindAddress => '127.0.0.1', :Port => 10080 } )
+  srv.mount('/img', WEBrick::HTTPServlet::FileHandler, '/home/username/images')
 
---- search_servlet(path)
-#@todo
+--- mount_proc(dir, proc)             -> ()
+--- mount_proc(dir){|req, res| ...}   -> ()
 
---- service(req, res)
-#@todo
+サーバ上のディレクトリ dir にリクエストを処理する [[c:Proc]] オブジェクト proc を対応させます。
 
---- unmount(dir)
---- umount(dir)
-#@todo
-サーバ上のディレクトリ dir とサーブレットとの対応を解消する。
+@param dir ディレクトリをあらわす文字列を指定します。
 
---- virtual_host(server)
-#@todo
-サーバの保持しているバーチャルホストのリストに server を加える。
-server は HTTPServer オブジェクト。
-クライアントからのリクエストのうち server へのものは server に委譲される
-ようになる。
+@param proc リクエストを処理する [[c:Proc]] オブジェクトを指定します。
+            [[c:WEBrick::HTTPResponse]] オブジェクトと [[c:WEBrick::HTTPRequest]] 
+            オブジェクトを引数として proc.call(request, response) の引数の順で呼び出されます。
+
+@raise WEBrick::HTTPServerError proc も指定されずブロックも与えられない場合に発生します。
+
+--- unmount(dir)    -> ()
+--- umount(dir)     -> ()
+
+サーバ上のディレクトリ dir とサーブレットとの対応を解消します。
+
+  srv.mount('/img')
+
+--- virtual_host(server)    -> ()
+
+サーバの保持しているバーチャルホストのリストに HTTP サーバ server を加えます。
+
+@param server バーチャルホストを表す WEBrick::HTTPServer オブジェクトを指定します。
+              クライアントからのリクエストのうち server へのものは server に委譲される
+              ようになります。
+
+  include WEBrick
+  srv1 = HTTPServer.new( { :Port => 1080, :ServerName => 'hoge.example.com' } )
+  srv2 = HTTPServer.new( { :Port => 1080, :ServerName => 'foo.example.com' } )
+  
+  srv  = HTTPServer.new( { :Port => 1080 } )
+  srv.start
 
 = class WEBrick::HTTPServerError < WEBrick::ServerError
+
