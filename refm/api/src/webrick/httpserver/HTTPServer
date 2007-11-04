@@ -107,6 +107,8 @@ HTTPServer オブジェクトを生成して返します。
   srv2 = HTTPServer.new( { :Port => 1080, :ServerName => 'foo.example.com' } )
   
   srv  = HTTPServer.new( { :Port => 1080 } )
+  srv.virtual_host(srv1)
+  srv.virtual_host(srv2)
   srv.start
 
 = class WEBrick::HTTPServerError < WEBrick::ServerError
