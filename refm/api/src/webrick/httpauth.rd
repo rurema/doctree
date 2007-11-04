@@ -6,18 +6,24 @@ require webrick/httpauth/htgroup
 
 = module WEBrick::HTTPAuth
 
-[[unknown:執筆者募集]]
-
-[[url:http://shogo.homelinux.org/~ysantoso/webrickguide/html/HTTP_Authentication.html]]
+ユーザ認証の機能を提供するモジュールです。
 
 == Module Functions
 
---- basic_auth(req, res, realm){|user, pass| ... }
-#@todo
-Basic 認証を行う。ブロックは user, pass を引数として呼ばれ、
-ブロックが true を返すとユーザを認証したことになる。
-ブロックが false を返すと認証に失敗し、
-例外 WEBrick::HTTPStatus::Unauthorized を投げる。
+--- basic_auth(req, res, realm){|user, pass| ... }     -> nil
+
+Basic 認証を行うためのメソッドです。
+
+ブロックは user, pass を引数として呼ばれ、
+ブロックが true を返すと認証が成功したことになります。
+ブロックが false を返すと認証に失敗したとみなし、
+例外 WEBrick::HTTPStatus::Unauthorized を投げます。
+
+@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトを指定します。
+
+@param res [[c:WEBrick::HTTPResponse]] オブジェクトを指定します。
+
+@param realm 認証のレルムを文字列で指定します。
 
   srv.mount_proc('/basic_auth') {|req, res|
     HTTPAuth.basic_auth(req, res, "WEBrick's realm") {|user, pass|
@@ -26,10 +32,17 @@ Basic 認証を行う。ブロックは user, pass を引数として呼ばれ、
     res.body = "hoge"
   }
 
---- proxy_basic_auth(req, res, realm){|user, pass| ... }
-#@todo
-プロクシー [[c:WEBrick::HTTPProxyServer]] のための Basic 認証を行う。
+--- proxy_basic_auth(req, res, realm){|user, pass| ... }     -> nil
+
+プロクシーの Basic 認証行うためのメソッドです。
+
 ブロックは user, pass を引数として呼ばれ、
-ブロックが true を返すとユーザを認証したことになる。
+ブロックが true を返すとユーザを認証したことになります。
 ブロックが false を返すと認証に失敗し、例外
-WEBrick::HTTPStatus::ProxyAuthenticationRequired を投げる。
+WEBrick::HTTPStatus::ProxyAuthenticationRequired を投げます。
+
+@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトを指定します。
+
+@param res [[c:WEBrick::HTTPResponse]] オブジェクトを指定します。
+
+@param realm 認証のレルムを文字列で指定します。
