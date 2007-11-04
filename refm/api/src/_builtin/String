@@ -537,7 +537,7 @@ val を返します。
      buf["nosuchstring"] = "!!"   # IndexError
 
 #@since 1.8.0
---- []=(regexp, nth = 0, val)
+--- []=(regexp, nth = 0, val) -> ()
 
 正規表現 regexp の nth 番目の括弧にマッチする
 最初の部分文字列を文字列 val で置き換えます。
@@ -546,7 +546,7 @@ nth を省略したときや nth が 0 の場合は、
 
 正規表現がマッチしなければ例外 [[c:IndexError]] が発生します。
 #@else
---- []=(regexp, val)
+--- []=(regexp, val) -> ()
 
 正規表現 regexp にマッチする最初の部分文字列を文字列 val で置き換えます。
 
@@ -614,7 +614,7 @@ val を返します。
 @see [[m:String#capitalize!]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
 
---- capitalize! -> self | nil
+--- capitalize! -> ()
 
 文字列先頭の文字を大文字に、残りを小文字に変更します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
@@ -785,7 +785,7 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」になり、
   p "foo\n\r".chomp  # => "foo\n"
 #@end
 
---- chomp!(rs = $/) -> self | nil
+--- chomp!(rs = $/) -> ()
 
 self の末尾から rs で指定する改行コードを取り除きます。
 #@since 1.8.0
@@ -836,7 +836,7 @@ chop! は self を変更して返しますが、
 取り除く文字がなかった場合は nil を返します。
 
 #@since 1.9.0
---- clear -> self
+--- clear -> ()
 
 文字列の内容を削除して空にします。
 self を返します。
@@ -896,7 +896,7 @@ chars で指定された文字が文字列 self にいくつあるか数えます。
   n_lines += 1 if /[^\n]\z/ =~ buf
       # if /\n\z/ !~ buf だと空ファイルを 1 行として数えてしまうのでダメ
 
---- crypt(salt)
+--- crypt(salt) -> String
 
 self と salt から暗号化された文字列を生成して返します。
 salt には英数字、ドット (「.」)、スラッシュ (「/」) から構成される、
@@ -959,7 +959,7 @@ str の形式は [[man:tr(1)]] と同じです。
     p "123456789".delete("2378")         #=> "14569"
     p "123456789".delete("2-8", "^4-6")  #=> "14569"
 
---- delete!(*strs) -> self | nil
+--- delete!(*strs) -> ()
 
 self から strs に含まれる文字を破壊的に取り除きます。
 
@@ -1005,7 +1005,7 @@ str の形式は [[man:tr(1)]] と同じです。
   
 @see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
---- downcase! -> self | nil
+--- downcase! -> ()
 
 文字列中のアルファベット大文字をすべて破壊的に小文字に置き換えます。
 アルファベット大文字以外の文字はすべてそのまま保存されます。
@@ -1088,11 +1088,11 @@ Ruby 1.9 以降は String#bytes を使ってください。
     p "string".bytes   # => [115, 116, 114, 105, 110, 103]
 #@end
 
---- empty?
+--- empty? -> bool
 
 文字列が空 (つまり長さ 0) の時、真を返します。
 
---- gsub(pattern, replace)
+--- gsub(pattern, replace) -> String
 
 文字列中で pattern にマッチする部分全てを
 文字列 replace で置き換えた文字列を生成し返します。
@@ -1146,7 +1146,7 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#sub]]
 
---- gsub(pattern) {|matched| .... }
+--- gsub(pattern) {|matched| .... } -> String
 
 文字列中で pattern にマッチした部分を順番にブロックに渡し、
 その実行結果で置き換えます。
@@ -1166,7 +1166,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#sub]]
 
---- gsub!(pattern, replace)
+--- gsub!(pattern, replace) -> ()
 
 文字列中で pattern にマッチする部分全てを文字列 replace に破壊的に置き換えます。
 
@@ -1242,7 +1242,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#sub]]
 
---- hex
+--- hex -> Integer
 
 文字列に 16 進数で数値が表現されていると解釈して整数に変換します。
 接頭辞 "0x", "0X" とアンダースコアは無視されます。
@@ -1344,11 +1344,11 @@ self[pos, 0] = other と同じ操作です。
 
 #@if (version >= "1.8.0")
 #@since 1.9.0
---- match(regexp, pos = 0)
+--- match(regexp, pos = 0) -> MatchData
 
 regexp.match(self, pos) と同じです。
 #@else
---- match(regexp)
+--- match(regexp) -> MatchData
 
 regexp.match(self) と同じです。
 #@end
@@ -1593,30 +1593,30 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
         #    ["ba", "r"]
         #    ["ba", "z"]
 
---- slice(nth)
---- slice(pos, len)
---- slice(substr)
+--- slice(nth) -> Integer
+--- slice(pos, len) -> String
+--- slice(substr) -> String
 #@since 1.8.0
---- slice(regexp, nth = 0)
+--- slice(regexp, nth = 0) -> String
 #@else
---- slice(regexp)
+--- slice(regexp) -> String
 #@end
---- slice(first..last)
---- slice(first...last)
+--- slice(first..last) -> String
+--- slice(first...last) -> String
 
 [[m:String#[] ]] と同じです。
 
---- slice!(nth)
---- slice!(pos, len)
---- slice!(substr)
+--- slice!(nth) -> Integer
+--- slice!(pos, len) -> String
+--- slice!(substr) -> String
 #@since 1.8.0
---- slice!(regexp, nth = 0)
+--- slice!(regexp, nth = 0) -> String
 #@else
---- slice!(regexp)
+--- slice!(regexp) -> String
 #@end
---- slice!(first..last)
---- slice!(first...last)
---- slice!(regexp, nth = 0)
+--- slice!(first..last) -> String
+--- slice!(first...last) -> String
+--- slice!(regexp, nth = 0) -> String
 
 指定した範囲 ([[m:String#[] ]] 参照) を
 文字列から取り除いたうえで取り除いた部分文字列を返します。
@@ -1702,7 +1702,7 @@ sep が正規表現で、かつその正規表現に括弧が含まれている場合には、
     # limit が負の数の場合は制限なく分割
     p "a,b,c,,,".split(/,/, -1)    # => ["a", "b", "c", "", "", ""]
 
---- squeeze(*chars)
+--- squeeze(*chars) -> String
 
 chars に含まれる文字が複数並んでいたら 1 文字にまとめます。
 
@@ -1727,7 +1727,7 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
     p "112233445566778899".squeeze("2378")          # =>"11234455667899"
     p "112233445566778899".squeeze("2-8", "^4-6")   # =>"11234455667899"
 
---- squeeze!(*chars)
+--- squeeze!(*chars) -> ()
 
 chars に含まれる文字が複数並んでいたら 1 文字にまとめます。
 
@@ -1840,7 +1840,7 @@ lstrip! は self を変更して返します。
 #@end
 
 #@since 1.8.0
---- rstrip
+--- rstrip -> String
 
 文字列の末尾にある空白文字を全て取り除いた新しい文字列を返します。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -1858,7 +1858,7 @@ lstrip! は self を変更して返します。
 #@end
 
 #@since 1.8.0
---- rstrip!
+--- rstrip! -> ()
 
 文字列の末尾にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -1875,7 +1875,7 @@ lstrip! は self を変更して返します。
 @see [[m:String#rstrip]], [[m:String#lstrip]]
 #@end
 
---- sub(pattern, replace)
+--- sub(pattern, replace) -> String
 
 文字列中で pattern にマッチした最初の部分を
 文字列 replace で置き換えた文字列を生成し返します。
@@ -1929,7 +1929,7 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#gsub]]
 
---- sub(pattern) {|matched| .... }
+--- sub(pattern) {|matched| .... } -> String
 
 文字列中で pattern にマッチした最初の部分をブロックに渡し、
 その評価結果で置き換えた新しい文字列を返します。
@@ -1949,7 +1949,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#gsub]]
 
---- sub!(pattern, replace)
+--- sub!(pattern, replace) -> ()
 
 文字列中で pattern にマッチした最初の部分を文字列 replace へ破壊的に置き換えます。
 
@@ -2181,8 +2181,8 @@ swapcase! は self を変更して返しますが、
 [[m:Kernel.#Integer]], [[m:Kernel.#Float]]
 も参照してください。
 
---- to_s -> self
---- to_str -> self
+--- to_s -> String
+--- to_str -> String
 
 self を返します。
 
@@ -2446,7 +2446,7 @@ eql? で等しい文字列は、常にハッシュ値も等しくなります。
 
 @see [[c:Hash]]
 
---- inspect
+--- inspect -> String
 
 Ruby のリテラル形式を使って、
 文字列中の不可視文字をエスケープシーケンスに変換します。
