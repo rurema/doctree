@@ -1191,7 +1191,7 @@ nil を返します。
 #@end
 
 #@since 1.9.0
---- choice        -> obj
+--- choice        -> object
 #@todo
 
 Choose a random element from an array.
@@ -1202,9 +1202,9 @@ Choose a random element from an array.
 Calls block repeatedly forever.
 
    a = ["a", "b", "c"]
-   a.each {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+   a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
 
---- shuffle -> an_array
+--- shuffle -> Array
 #@todo
 
 Returns a new array with elements of this array shuffled.
@@ -1212,14 +1212,14 @@ Returns a new array with elements of this array shuffled.
    a = [ 1, 2, 3 ]           #=> [1, 2, 3]
    a.shuffle                 #=> [2, 3, 1]
 
---- shuffle!        -> array or nil
+--- shuffle!        -> Array | nil
 #@todo
 
 Shuffles elements in self in place.
 
 
---- combination(n) { |c| block }    -> ary
---- combination(n)                  -> enumerator
+--- combination(n) { |c| block }    -> Array
+--- combination(n)                  -> Enumerable::Enumerator
 #@todo
 
 When invoked with a block, yields all combinations of length
@@ -1239,8 +1239,8 @@ Examples:
     a.combination(0).to_a  #=> [[]]: one combination of length 0
     a.combination(5).to_a  #=> []  : no combinations of length 5
 
---- permutation(n) { |p| block }       -> array
---- permutation(n)                     -> enumerator
+--- permutation(n) { |p| block }       -> Array
+--- permutation(n)                     -> Enumerable::Enumerator
 #@todo
 
 When invoked with a block, yield all permutations of length n
@@ -1260,7 +1260,7 @@ Examples:
     a.permutation(4).to_a  #=> []  : no permutations of length 4
 
 
---- product(other_ary, ...)
+--- product(other_ary, ...)    -> Array
 #@todo
 
 Returns an array of all combinations of elements from all arrays.
