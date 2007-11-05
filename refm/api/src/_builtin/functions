@@ -1256,19 +1256,18 @@ at_exitがメソッドである点を除けば、[[unknown:制御構造/END]] ブロックによる終了
 @return 登録した処理を [[c:Proc]] オブジェクトで返します。
 
   3.times do |i|
-    at_exit{print :at_exit,i,"\n"}
+    at_exit{puts "at_exit#{i}"}
   end
-  END{print :END,"\n"}
-  at_exit{print :at_exit,"\n"}
+  END{puts "END"}
+  at_exit{puts "at_exit"}
   puts "main_end"
   
-  #=>
-  #  main_end
-  #  at_exit
-  #  END
-  #  at_exit2
-  #  at_exit1
-  #  at_exit0
+  #=> main_end
+  #   at_exit
+  #   END
+  #   at_exit2
+  #   at_exit1
+  #   at_exit0
 
 #@since 1.8.0
 --- loop { ... } -> object
