@@ -58,6 +58,17 @@ IO#lines                      通常どおり
 
 == Class Methods
 
+#@since 1.9.0
+--- try_convert(obj) -> IO | nil
+#@todo
+Try to convert obj into an IO, using to_io method. Returns converted
+IO or nil if obj cannot be converted for any reason.
+
+   IO.try_convert(STDOUT)     # => STDOUT
+   IO.try_convert("STDOUT")   # => nil
+
+#@end
+
 --- new(fd, mode = "r")                -> IO
 #@if (version >="1.8.0")
 --- for_fd(fd, mode = "r")             -> IO
@@ -1038,6 +1049,26 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
 
 @see [[m:$/]]
+#@end
+
+
+#@since 1.9.0
+--- getbyte   -> Integer | nil
+#@todo
+
+Gets the next 8-bit byte (0..255) from ios. Returns nil if called
+at end of file.
+
+   f = File.new("testfile")
+   f.getbyte   #=> 84
+   f.getbyte   #=> 104
+
+--- readbyte   -> Integer
+#@todo
+
+Reads a character as with IO#getc, but raises an EOFError on
+end of file.
+
 #@end
 
 == Constants

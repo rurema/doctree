@@ -731,6 +731,9 @@ flock は false を返します。
        re-locked by process1
 
 --- path    -> String
+#@since 1.9.0
+--- to_path -> String
+#@end
 
 オープン時に使用したパスを文字列で返します。
 
