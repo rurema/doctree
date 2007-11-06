@@ -47,7 +47,7 @@ exit は例外 [[c:SystemExit]] を発生させ
 @see [[m:Kernel.#exit!]],[[m:Kernel.#abort]]
 
 #@since 1.8.0
---- exit(status = false) -> ()
+--- exit!(status = false) -> ()
 #@else
 --- exit!(status = -1) -> ()
 #@end
