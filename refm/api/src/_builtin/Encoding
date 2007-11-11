@@ -1,0 +1,68 @@
+#@since 1.9.0
+=class Encoding
+
+== Class Methods
+
+--- compatible?
+#@todo
+
+--- find
+#@todo
+
+--- list
+#@todo
+
+--- primary_encoding
+#@todo
+
+== Instance Methods
+
+--- based_encoding
+#@todo
+
+--- inspect
+#@todo
+
+--- name
+#@todo
+
+--- to_s
+#@todo
+
+
+== Constants
+
+--- ASCII
+#@todo
+
+--- ASCII_8BIT
+#@todo
+
+--- BINARY
+#@todo
+
+--- EUC_JP
+#@todo
+
+--- ISO_2022_JP
+#@todo
+
+--- ISO_8859_1
+#@todo
+
+--- SHIFT_JIS
+#@todo
+
+--- SJIS
+#@todo
+
+--- Shift_JIS
+#@todo
+
+--- US_ASCII
+#@todo
+
+--- UTF_8
+#@todo
+
+#@end
