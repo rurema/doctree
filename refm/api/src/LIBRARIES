@@ -93,6 +93,9 @@ irb/completion
 irb/frame
 irb/xmp
 jcode
+#@since 1.9.0
+json
+#@end
 kconv
 #@since 1.8.1
 logger
@@ -165,6 +168,9 @@ ripper/sexp
 #@since 1.8.3
 rss
 #@end
+#@since 1.9.0
+rubygems
+#@end
 #@since 1.8.0
 rubyunit
 runit/assert
@@ -177,6 +183,9 @@ runit/topublic
 scanf
 #@end
 sdbm
+#@since 1.8.7
+securerandom
+#@end
 #@since 1.8.0
 set
 sha1
