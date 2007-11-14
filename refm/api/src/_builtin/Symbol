@@ -159,3 +159,82 @@ self を返します。
 #@else
 @see [[m:Fixnum#to_sym]]
 #@end
+
+#@since 1.9.0
+--- <=>
+#@todo
+
+--- ==(other)        -> true | false
+--- equal?(other)   -> true | false
+--- eql?(other)     -> true | false
+#@todo
+
+Equality---If sym and obj are exactly the same symbol, returns
+true. Otherwise, compares them as strings.
+
+--- =~
+#@todo
+
+--- []
+#@todo
+
+--- capitalize
+#@todo
+
+--- casecmp
+#@todo
+
+--- downcase
+#@todo
+
+--- empty?
+#@todo
+
+--- encoding
+#@todo
+
+--- eql?
+#@todo
+
+--- hash
+#@todo
+
+--- inspect    -> String
+#@todo
+
+Returns the representation of sym as a symbol literal.
+
+   :fred.inspect   #=> ":fred"
+
+--- length
+#@todo
+
+--- match
+#@todo
+
+--- next
+#@todo
+
+--- size
+#@todo
+
+--- slice
+#@todo
+
+--- succ
+#@todo
+
+--- swapcase
+#@todo
+
+--- to_proc
+#@todo
+
+Returns a Proc object which respond to the given method by sym.
+
+  (1..3).collect(&:to_s)  #=> ["1", "2", "3"]
+
+--- upcase
+#@todo
+
+#@end
