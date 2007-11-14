@@ -14,10 +14,16 @@ require を書かなくても使うことができます。
 #@include(_builtin/Dir)
 #@include(_builtin/ENV)
 #@include(_builtin/EOFError)
+#@since 1.9.0
+#@include(_builtin/Encoding)
+#@end
 #@include(_builtin/Enumerable)
 #@include(_builtin/Enumerable__Enumerator)
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
+#@since 1.9.0
+#@include(_builtin/Fiber)
+#@end
 #@include(_builtin/File)
 #@include(_builtin/FileTest)
 #@include(_builtin/File__Constants)
@@ -41,6 +47,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Math)
 #@include(_builtin/Method)
 #@include(_builtin/Module)
+#@since 1.9.0
+#@include(thread/Mutex)
+#@end
 #@include(_builtin/NameError)
 #@include(_builtin/NilClass)
 #@include(_builtin/NoMemoryError)

@@ -25,6 +25,7 @@ Mutexオブジェクトとします):
 
 == Instance Methods
 
+#@until 1.9.0
 --- exclusive_unlock { ... }
 #@todo
 ロックを解放し、ロック待ちになっているスレッドを実行可能状態に
@@ -34,6 +35,7 @@ Mutexオブジェクトとします):
 
 self がロックされていなければ nil を返します。そうでな
 ければself を返します。
+#@end
 
 --- lock
 #@todo
@@ -65,3 +67,12 @@ mutex のロックを解放します。mutex のロック待ちになっていたスレッ
 
 self がロックされていなければ nil を返します。そうでな
 ければself を返します。
+
+#@since 1.9.0
+--- sleep(timeout = nil)    -> self
+#@todo
+
+Releases the lock and sleeps timeout seconds if it is given and
+non-nil or forever. Raises ThreadError if mutex wasn't locked
+by the current thread.
+#@end

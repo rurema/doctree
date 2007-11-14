@@ -14,6 +14,8 @@
 ブロック実行中、Threadの切り替えを行いません。
 
 #@include(thread/ConditionVariable)
+#@until 1.9.0
 #@include(thread/Mutex)
+#@end
 #@include(thread/Queue)
 #@include(thread/SizedQueue)
