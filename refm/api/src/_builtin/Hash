@@ -38,6 +38,16 @@ include Enumerable
 
 == Class Methods
 
+#@since 1.9.0
+--- try_convert(obj) -> Hash | nil
+
+Try to convert obj into a hash, using to_hash method. Returns
+converted hash or nil if obj cannot be converted for any reason.
+
+   Hash.try_convert({1=>2})   # => {1=>2}
+   Hash.try_convert("1=>2")   # => nil
+#@end
+
 --- [](other) -> Hash
 
 ¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÀ¸À®¤·¤Þ¤¹¡£
@@ -1073,3 +1083,77 @@ other¤¬¥Ï¥Ã¥·¥å¤Ç¤Ï¤Ê¤¤¾ì¹ç¡¢other¤Î¥á¥½¥Ã¥Éto_hash¤ò»È¤Ã¤Æ°ÅÌÛ¤ÎÊÑ´¹¤ò»î¤ß¤Þ¤¹¡
   p a.hash    #=> 538688380
 
 #@end
+
+#@since 1.9.0
+
+--- assoc(obj)   ->  Array | nil
+#@todo
+
+Searches through the hash comparing obj with the key using ==.
+Returns the key-value pair (two elements array) or nil if no
+match is found. See Array#assoc.
+
+   h = {"colors"  => ["red", "blue", "green"],
+        "letters" => ["a", "b", "c" ]}
+   h.assoc("letters")  #=> ["letters", ["a", "b", "c"]]
+   h.assoc("foo")      #=> nil
+
+
+--- flatten -> Array
+--- flatten(level) -> Array
+#@todo
+
+Returns a new array that is a one-dimensional flattening of this
+hash. That is, for every key or value that is an array, extract
+its elements into the new array. Unlike Array#flatten, this method
+does not flatten recursively by default. If the optional level
+argument determins the level of recursion to flatten.
+
+   a =  {1=> "one", 2 => [2,"two"], 3 => "three"}
+   a.flatten    # => [1, "one", 2, [2, "two"], 3, "three"]
+   a.flatten(2) # => [1, "one", 2, 2, "two", 3, "three"]
+
+
+--- rassoc(key) -> Array | nil
+#@todo
+
+Searches through the hash comparing obj with the value using ==. 
+Returns the first key-value pair (two elements array) that
+matches. See also Array#rassoc.
+
+   a = {1=> "one", 2 => "two", 3 => "three", "ii" => "two"}
+   a.rassoc("two")    #=> [2, "two"]
+   a.rassoc("four")   #=> nil
+
+
+--- select {|key, value| block}   -> Hash
+#@todo
+
+Returns a new hash consisting of entries which the block returns
+true.
+
+   h = { "a" => 100, "b" => 200, "c" => 300 }
+   h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
+   h.select {|k,v| v < 200}  #=> {"a" => 100}
+
+#@end
+
+--- to_s   -> String
+--- inspect  -> String
+#@todo
+
+Return the contents of this hash as a string.
+
+    h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
+    h.to_s   #=> "{\"a\"=>100, \"c\"=>300, \"d\"=>400}"
+
+--- sort              -> Array
+--- sort{|a, b| ... } -> Array
+#@todo
+
+Converts hsh to a nested array of [ key, value ] arrays and
+sorts it, using Array#sort.
+
+ h = { "a" => 20, "b" => 30, "c" => 10  }
+ h.sort                       #=> [["a", 20], ["b", 30], ["c", 10]]
+ h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
