@@ -153,6 +153,7 @@ io/wait
 ipaddr
 irb
 jcode
+json
 kconv
 logger
 mailread
@@ -235,9 +236,11 @@ rinda/rinda                     sheepman
 rinda/tuplespace                sheepman
 ripper                          aamine
 rss
+rubygems
 rubyunit
 scanf
 sdbm
+securerandom
 set
 sha1
 shell
