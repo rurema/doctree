@@ -686,12 +686,24 @@ val の代わりにブロックを指定するとブロックの評価結果を値とし
 @see [[m:Array#last]]
 #@end
 
---- flatten     -> Array
---- flatten!    -> self | nil
+#@since 1.9.0
+--- flatten(lv = nil)     -> Array
+--- flatten!(lv = nil)    -> self | nil
+#@else
+--- flatten               -> Array
+--- flatten!              -> self | nil
+#@end
 
-flatten は自身を平滑化した配列を生成して返します。flatten! は
-自身を破壊的に平滑化し、平滑化が行われた場合は self をそうでない
+flatten は自身を再帰的に平滑化した配列を生成して返します。flatten! は
+自身を再帰的かつ破壊的に平滑化し、平滑化が行われた場合は self をそうでない
 場合は nil を返します。
+#@since 1.9.0
+lv が指定された場合、lv の深さまで再帰的に平滑化します。
+#@end
+
+#@since 1.9.0
+@param lv 平滑化の再帰の深さを整数で指定します。nil を指定した場合、再帰の深さの制限無しに平滑化します。
+#@end
 
 @raise ArgumentError 配列要素が自身を含むような無限にネストした配列に対して flatten を呼んだ場合に発生します。
 
@@ -702,6 +714,11 @@ flatten は自身を平滑化した配列を生成して返します。flatten! は
     p array                         #=> [1, 2, 3]
     
     p [1, 2, 3].flatten!            #=> nil
+ 
+#@since 1.9.0
+    a = [ 1, 2, [3, [4, 5] ] ]
+    a.flatten(1)              #=> [1, 2, 3, [4, 5]]
+#@end
 
 --- hash    -> Integer
 
