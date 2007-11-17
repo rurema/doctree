@@ -4,13 +4,15 @@
 = class UnboundMethod < Method
 #@end
 
-レシーバを持たないメソッドオブジェクトのクラスです。
+レシーバを持たないメソッドを表すクラスです。
+呼び出すためにはレシーバにバインドする必要があります。
+
 [[m:Module#instance_method]] や
 [[m:Method#unbind]] により生成し、後で
 [[m:UnboundMethod#bind]] によりレシーバを
 割り当てた [[c:Method]] オブジェクトを作ることができます。
 
-例: [[c:Method]] クラスの冒頭にある例を UnboundMethod で書くと以下のようになる
+例: [[c:Method]] クラスの冒頭にある例を UnboundMethod で書くと以下のようになります。
 
   class Foo
     def foo() "foo" end
@@ -30,8 +32,8 @@
   p methods[2].bind(Foo.new).call      # => "bar"
   p methods[3].bind(Foo.new).call      # => "baz"
 
-例: メソッドの再定義を UnboundMethod を使って行う方法(普通は、
-[[unknown:クラス／メソッドの定義/alias]] や [[unknown:メソッド呼び出し/super]] を使う)
+例: 以下はメソッドの再定義を UnboundMethod を使って行う方法です。普通は
+[[unknown:クラス／メソッドの定義/alias]] や [[unknown:メソッド呼び出し/super]] を使います。
 
   class Foo
     def foo
@@ -188,7 +190,7 @@ self を返します。
 --- ==(other)     -> bool
 --- ===(other)    -> bool
 
-自身と other が同じクラスの同じメソッドを表す場合に
+自身と other が同じクラスあるいは同じモジュールの同じメソッドを表す場合に
 true を返します。そうでない場合に false を返します。
 
 @param other 自身と比較したいオブジェクトを指定します。
