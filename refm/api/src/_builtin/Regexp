@@ -193,6 +193,17 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 
 #@end
 
+#@since 1.9.0
+--- try_convert(obj) -> re | nil
+#@todo
+
+Try to convert obj into a Regexp, using to_regexp method. Returns
+converted regexp or nil if obj cannot be converted for any reason.
+
+   Regexp.try_convert(/re/)      # => /re/
+   Regexp.try_convert("re")      # => nil
+#@end
+
 == Instance Methods
 
 --- =~(string) -> Fixnum | nil
@@ -444,6 +455,14 @@ otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
   p /^ugou.*?/i.inspect #=> "/^ugou.*?/i"
 
 @see [[m:Regexp#to_s]]
+
+#@since 1.9.0
+--- encoding   -> Encoding
+#@todo
+
+Returns the Encoding object that represents the encoding of obj.
+
+#@end
 
 == Constants
 
