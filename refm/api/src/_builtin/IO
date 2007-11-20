@@ -1069,6 +1069,29 @@ at end of file.
 Reads a character as with IO#getc, but raises an EOFError on
 end of file.
 
+--- close_on_exec = bool    -> bool
+#@todo
+
+Sets a close-on-exec flag.
+
+   f = open("/dev/null")
+   f.close_on_exec = true
+   system("cat", "/proc/self/fd/#{f.fileno}") # cat: /proc/self/fd/3: No such file or directory
+   f.closed?                #=> false
+
+--- close_on_exec?   -> bool
+#@todo
+
+Returns true if ios will be closed on exec.
+
+   f = open("/dev/null")
+   f.close_on_exec?                 #=> false
+   f.close_on_exec = true
+   f.close_on_exec?                 #=> true
+   f.close_on_exec = false
+   f.close_on_exec?                 #=> false
+
+
 #@end
 
 == Constants
