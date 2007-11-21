@@ -1,7 +1,7 @@
 = class Rinda::TupleSpace < Object
 
 include MonitorMixin
-include DRbUndumped
+include DRb::DRbUndumped
 
 Tuple Space のためのクラスです。
 普通は [[c:Rinda::TupleSpaceProxy]] を介して使います。

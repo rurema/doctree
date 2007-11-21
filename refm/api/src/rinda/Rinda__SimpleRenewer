@@ -2,7 +2,7 @@
 #@since 1.8.2
 
 = class Rinda::SimpleRenewer < Object
-include DRbUndumped
+include DRb::DRbUndumped
 
 An SimpleRenewer allows a TupleSpace to check if a TupleEntry is
 still alive.
