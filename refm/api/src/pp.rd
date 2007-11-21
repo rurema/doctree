@@ -2,7 +2,10 @@
 
 このライブラリを require すると [[m:Kernel.#pp]] が定義されます。
 [[m:Kernel.#p]] のかわりに [[m:Kernel.#pp]] を使うことにより、
-適切にインデントと改行された分かりやすい出力を得ることが出来ます。
+適切にインデントと改行された分かりやすい出力を得ることが出来ます。pp ライブラリは、
+ユーザがあたらしく定義したクラスに対しても見やすい表示を
+するように作られていますので、[[m:Kernel.#pp]] を使う上で余計な作業をする
+必要はありません。
 
 === どちらが読みやすいでしょうか?
 
@@ -62,19 +65,19 @@ pp による pretty-print された出力:
 
 === 出力のカスタマイズ
 
-あるクラスの pp の出力を変えたい場合は、
+あるクラスの pp の出力をカスタマイズしたい場合は、
 そのクラスで pretty_print メソッドを再定義します。
-このメソッドは [[c:PP]] オブジェクトを引数として取ります。
+このメソッドは [[c:PP]] オブジェクトを引数として pp 実行時に呼ばれます。
+ユーザは表示したい内容を表すツリーを、
+引数として与えられた [[c:PP]] オブジェクトを使って以下のように作成します。
 
-pretty printing アルゴリズムはインデントと改行を、ツリー構造を作ることによって決定します。そのため、
-pretty_print メソッドにおいて、ユーザは以下のことを行う必要があります。
+  * [[m:PrettyPrint#group]] を使って子ノードをつくります。同時に子ノードのインデントの深さも決めます。
+  * [[m:PrettyPrint#breakable]] を使って改行しても良い場所を指定します。
+  * [[m:PP#pp]] を使って出力したいインスタンス変数などを出力します。
+  * [[m:PrettyPrint#text]] を使って、出力が見やすくなるように「,」などの修飾文字を適宜挿入します。
 
- * [[m:PrettyPrint#group]] を使って子ノードをつくる。同時に子ノードのインデントの深さも決める。
- * [[m:PrettyPrint#breakable]] を使って改行しても良い場所を指定する。
- * [[m:PP#pp]] を使って出力したいインスタンス変数などを出力する。
- * [[m:PrettyPrint#text]] を使って、出力が見やすくなるように「,」などの修飾文字を適宜挿入する。
-
-同じノード内で呼ばれた breakable は、改行するならば全て同時に改行します。
+[[c:PP]] は [[c:PrettyPrint]] のサブクラスですので、上で PrettyPrint のメソッドとされているものは
+PP のメソッドでもあります。
 
 以下は Hash の pretty printing のカスタマイズの例です。
 
@@ -263,7 +266,7 @@ However, doing this requires that every class that #inspect is called on
 implement #pretty_print, or a RuntimeError will be raised.
 
 = reopen Kernel
-== Private Instance Methods
+== Module Functions
 --- pp(obj)    -> nil
 #@todo
 obj を [[m:$>]] に pretty print で出力します。
