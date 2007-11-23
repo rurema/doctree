@@ -4,5 +4,5 @@
 #@include(tk/dialog/TkWarningObj)
 #@include(tk/dialog/TkWarning)
 #@else
-reqiure tk/dialog
+require tk/dialog
 #@end
