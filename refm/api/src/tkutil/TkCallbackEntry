@@ -1,6 +1,6 @@
 = class TkCallbackEntry < TkKernel
 
-== Class Mthods
+== Class Methods
 
 --- inspect
 #@todo

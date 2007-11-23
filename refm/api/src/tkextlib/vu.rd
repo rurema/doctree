@@ -3,7 +3,6 @@
 require tk
 require tkextlib/setup
 require tkextlib/vu/setup
-
 require tkextlib/vu/dial
 require tkextlib/vu/pie
 require tkextlib/vu/spinbox

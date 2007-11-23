@@ -3,7 +3,6 @@
 require tk
 require tkextlib/setup
 require tkextlib/tcllib/setup
-
 require tkextlib/tcllib/autoscroll
 require tkextlib/tcllib/cursor
 require tkextlib/tcllib/style

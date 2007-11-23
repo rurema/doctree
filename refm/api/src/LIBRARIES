@@ -368,6 +368,7 @@ tkextlib/treectrl
 tkextlib/vu
 tkextlib/winico
 #@end
+tkutil
 #@since 1.8.0
 tmpdir
 #@end

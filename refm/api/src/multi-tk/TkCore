@@ -1,4 +1,4 @@
-= module TkCore
+= redefine TkCore
 
 == Constants
 

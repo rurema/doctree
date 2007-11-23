@@ -3,7 +3,6 @@
 require tk
 require tkextlib/setup
 require tkextlib/tile/setup
-
 require tkextlib/tile/tbutton
 require tkextlib/tile/tcheckbutton
 require tkextlib/tile/tlabel
