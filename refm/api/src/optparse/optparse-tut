@@ -1,27 +1,25 @@
-= optparse::チュートリアル
-
-((<OptionParser>))
+=== optparse::チュートリアル
 
 optparse を使う場合、基本的には
 
-(1) OptionParser オブジェクト opt を生成する。
-(2) オプションを取り扱うブロックを opt に登録する。
-(3) opt.parse(ARGV) でコマンドラインを実際に parse する。
+ (1) OptionParser オブジェクト opt を生成する。
+ (2) オプションを取り扱うブロックを opt に登録する。
+ (3) opt.parse(ARGV) でコマンドラインを実際に parse する。
 
 というような流れになります。
 
-* ((<optparse::チュートリアル/オプションの定義>))
-* ((<optparse::チュートリアル/別の書き方>))
-* ((<optparse::チュートリアル/ARGV の機能>))
-* ((<optparse::チュートリアル/オプションの引数>))
-* ((<optparse::チュートリアル/ロングオプション>))
-* ((<optparse::チュートリアル/ヘルプ>))
-* ((<optparse::チュートリアル/サブコマンド>))
-* ((<optparse::チュートリアル/'-'で始まるファイル名>))
+#@#* ((<optparse::チュートリアル/オプションの定義>))
+#@#* ((<optparse::チュートリアル/別の書き方>))
+#@#* ((<optparse::チュートリアル/ARGV の機能>))
+#@#* ((<optparse::チュートリアル/オプションの引数>))
+#@#* ((<optparse::チュートリアル/ロングオプション>))
+#@#* ((<optparse::チュートリアル/ヘルプ>))
+#@#* ((<optparse::チュートリアル/サブコマンド>))
+#@#* ((<optparse::チュートリアル/'-'で始まるファイル名>))
 
-== オプションの定義
+==== オプションの定義
 
-* 以下はオプション -a, -b を受け付けるコマンドを作成する例です。
+以下はオプション -a, -b を受け付けるコマンドを作成する例です。
 
         require 'optparse'
         opt = OptionParser.new
@@ -37,25 +35,25 @@ optparse を使う場合、基本的には
              true
              ["foo", "bar", "baz"]
 
-  on() メソッドの引数でオプションを定義し、引数が指定された時の処理を
-  ブロックで記述します。ブロックの引数にはオプションが指定されたことを
-  示す true が渡されます(((<optparse::チュートリアル/オプションの引数>))も参照)。
+on() メソッドの引数でオプションを定義し、引数が指定された時の処理を
+ブロックで記述します。ブロックの引数にはオプションが指定されたことを
+示す true が渡されます(((<optparse::チュートリアル/オプションの引数>))も参照)。
 
-  Enumerable#each などと違い、on() メソッドが呼ばれた時点ではブロックは実行されません。
-  あくまで登録されるだけです。
-  parse が呼ばれた時に、コマンドラインにオプションが指定されていれば実行されます。
+Enumerable#each などと違い、on() メソッドが呼ばれた時点ではブロックは実行されません。
+あくまで登録されるだけです。
+parse が呼ばれた時に、コマンドラインにオプションが指定されていれば実行されます。
 
-* オプションの指定はコマンドの直後である必要はありません(上の例で、-b はオプションと
-  して認識されている)。ただし、環境変数 POSIXLY_CORRECT が定義してあると
-  この挙動は変更されます。
+オプションの指定はコマンドの直後である必要はありません(上の例で、-b はオプションと
+して認識されている)。ただし、環境変数 POSIXLY_CORRECT が定義してあると
+この挙動は変更されます。
 
         env POSIXLY_CORRECT=1 ruby ./sample.rb -a foo bar -b baz
         # => true                               # -a はオプションと解釈
              ["foo", "bar", "-b", "baz"]        # -b は非オプションと解釈
 
-* parse!() により、コマンドライン(ARGV)の解析を行います。
-  parse!() では、ARGV からオプションが取り除かれます。
-  これを避けるには parse() を使います。
+parse! により、コマンドライン(ARGV)の解析を行います。
+parse! では、ARGV からオプションが取り除かれます。
+これを避けるには parse を使います。
 
         require 'optparse'
         opt = OptionParser.new
@@ -69,8 +67,8 @@ optparse を使う場合、基本的には
 
         p argv
 
-* 定義していないオプションを指定すると例外 OptionParser::InvalidOption が
-  発生する。
+定義していないオプションを指定すると例外 [[c:OptionParser::InvalidOption]] が
+発生します。
 
         ruby ./sample.rb -c
         /usr/local/lib/ruby/1.9/optparse.rb:1428:in `complete': invalid option: -c (OptionParser::InvalidOption)
@@ -84,9 +82,9 @@ optparse を使う場合、基本的には
                 from /usr/local/lib/ruby/1.9/optparse.rb:1356:in `parse'
                 from ./sample.rb:9
 
-* OptionParser 自体は、どのオプションが指定されたかを記憶しない。
-  後の処理の方で、オプションによる条件判断を加えるには、
-  他のコンテナに格納する。
+OptionParser 自体は、どのオプションが指定されたかを記憶しません。
+後の処理の方で、オプションによる条件判断を加えるには、
+他のコンテナに格納します。
 
         require 'optparse'
         opt = OptionParser.new
@@ -104,59 +102,10 @@ optparse を使う場合、基本的には
         # => ["foo", "bar", "baz"]
              {:a=>true, :b=>true}
 
+==== オプションの引数
 
-== 別の書き方
-
-OprionParser.new はブロックを受け付ける。ブロックの引数は生成した
-インスタンスなので、以下の書き方ができる。
-
-        require 'optparse'
-        OptionParser.new {|opt|
-
-          opt.on('-a') {|v| p v }
-          opt.on('-b') {|v| p v }
-
-          opt.parse!(ARGV)
-        }
-        p ARGV
-
-この書き方の利点は、
-* OptionParser に関する記述をブロックの範囲で明示する(見やすくなる?)。
-* 変数 opt をブロックローカルにする。
-ぐらいか？
-
-== ARGV の機能
-
-optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
-が加わる。このことにより、以下の書き方ができるようになる。
-
-        require 'optparse'
-        ARGV.options {|opt|
-
-            opt.on('-a') {|v| p v }
-            opt.on('-b') {|v| p v }
-
-            opt.parse!
-        }
-        p ARGV
-
-        ruby sample.rb -a foo bar -b baz
-        # => true
-             true
-             ["foo", "bar", "baz"]
-
-((<optparse::チュートリアル/別の書き方>))で示した例に比べて、
-* ARGV.options メソッドのブロックでオプション定義を記述する
-* opt.parse! の引数が ARGV 固定になる。
-といった違いがある。
-
-特に利点があるわけではないが、optparse 添付のサンプルはこの書
-き方になっている。
-
-== オプションの引数
-
-* on() メソッドのオプション定義で末尾に何かを書くと、そのオプション
-  は引数を受け付けることの指定となる。
+on() メソッドのオプション定義で末尾に何かを書くと、そのオプション
+は引数を受け付けることの指定となります。
 
         require 'optparse'
         opt = OptionParser.new
@@ -173,10 +122,8 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
              true
              ["bar", "baz"]
 
-  オプションの末尾の書き方の基準は、「((<optparse::チュートリアル/ヘルプ>))
-  の見栄えが良くなるように書く」である。
-
-* オプションの引数を省略すると例外 OptionParser::MissingArgument が発生する。
+オプションの末尾の書き方の基準は、「ヘルプの見栄えが良くなるように書く」です。
+オプションの引数を省略すると例外 [[c:OptionParser::MissingArgument]] が発生します。
 
         ruby ./sample.rb -a
         /usr/local/lib/ruby/1.9/optparse.rb:455:in `parse': missing argument: -a (OptionParser::MissingArgument)
@@ -187,7 +134,7 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
                 from /usr/local/lib/ruby/1.9/optparse.rb:1363:in `parse!'
                 from ./sample.rb:7
 
-* オプションの引数が必須でないことを示すには、" [" を付ける
+オプションの引数が必須でないことを示すには、" [" を付けます。
 
         require 'optparse'
         opt = OptionParser.new
@@ -203,16 +150,16 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
         # => nil
              []
 
-  同様に、ヘルプの見栄えが良いように "VAL]" を付加している。
+同様に、ヘルプの見栄えが良いように "VAL]" を付加しています。
 
-* ショートオプションの引数指定は使いにくいので、このような場合はロング
-  オプションの方が使う方もわかりやすい。例えば、上記の場合、-ab を
-  指定すると -a b と解釈される。-a が引数を持たない最初の例なら -a -b と
-  解釈される。
+ショートオプションの引数指定は使いにくいので、このような場合はロング
+オプションの方が使う方もわかりやすいです。例えば、上記の場合、-ab を
+指定すると -a b と解釈されます。-a が引数を持たない最初の例なら -a -b と
+解釈されます。
 
-== ロングオプション
+==== ロングオプション
 
-* ロングオプションは、on() の引数に '--'で始まるオプションを指定する。
+ロングオプションは on() の引数に '--'で始まるオプションを指定します。
 
         require 'optparse'
         opt = OptionParser.new
@@ -228,7 +175,7 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
              true
              ["foo", "bar", "baz"]
 
-* --[no-]...などとすることで、否定型のオプションを指定することができる。
+--[no-]...などとすることで、否定型のオプションを指定することができます。
 
         require 'optparse'
         opt = OptionParser.new
@@ -245,16 +192,16 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
              false                              # <- --no-bar の指定による。
              ["foo", "bar", "baz"]
 
-* オプションに対する引数も指定できる。ショートオプションと同じだが、
-  GNUの慣習にあわせて
+オプションに対する引数も指定できます。ショートオプションと同じだが、
+GNUの慣習にあわせて
 
         opt.on('-a', '--foo=VAL') {|v| p v }
         opt.on('--[no-]bar[=VAL]') {|v| p v }
 
-  と "=" を使うのが良いと思われる。
+と "=" を使うのが良いと思われます。
 
-* オプションを指定する時は、どのオプションか一意に決まる長さまで指定す
-  れば良い。
+オプションを指定する時は、どのオプションか一意に決まる長さまで指定す
+れば良いです。
 
         require 'optparse'
         opt = OptionParser.new
@@ -267,12 +214,12 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
 
         ruby sample.rb --fo
 
-  この例では、--fo は、--foo を指定したのと同じになる。この例なら --f 
-  まで省略できる。
+この例では、--fo は、--foo を指定したのと同じになります。この例なら --f 
+まで省略できます。
 
-== ヘルプ
+==== ヘルプ
 
-* デフォルトで、--help と --version オプションを認識する。
+デフォルトで --help と --version オプションを認識します。
 
         ruby ./sample.rb --help
         # => Usage: sample [options]
@@ -280,9 +227,9 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
         ruby ./sample.rb --version
         # => *出力なし*
 
-* --version は、トップレベルに Version 定数が定義されていると出力される。
-  (優先度は低いが VERSION 定数も参照する。Ruby のバージョンを示す VERSION
-  定数が ruby 1.8 までは定義されているので注意)
+--version は、トップレベルに Version 定数が定義されていると出力されます。
+(優先度は低いが VERSION 定数も参照します。Ruby のバージョンを示す VERSION
+定数が ruby 1.8 までは定義されているので注意)
 
         require 'optparse'
         opt = OptionParser.new
@@ -292,7 +239,7 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
         ruby ./sample.rb --version
         # => sample 1.2.3
 
-* on の引数にそのオプションの説明を加えると --help の出力に反映される。
+on の引数にそのオプションの説明を加えると --help の出力に反映されます。
 
         require 'optparse'
         opt = OptionParser.new
@@ -308,13 +255,14 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
                 -a                               description of -a
                 -b                               description of -b
 
-  が、1.8.2より前のバージョンではこれだけだとダメらしい。  
+#@until 1.8.2
+が、1.8.2より前のバージョンではこれだけだとダメらしい。  
         ruby ./sample.rb --help
         # => Usage: sample [options]
-  になる。
+になる。
         opt.on('--help', 'show this message') { puts opt; exit }
-  をオプション定義に追加するか、((<ARGVを使った書き方|optparse::チュートリアル/ARGV の機能>))
-  にする(以下)。
+をオプション定義に追加するか、((<ARGVを使った書き方|optparse::チュートリアル/ARGV の機能>))
+にする(以下)。
 
         require 'optparse'
         ARGV.options {|opt|
@@ -330,9 +278,10 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
         # => Usage: sample [options]
                -a                               description of -a
                -b                               description of -b
+#@end
 
-== サブコマンド
-以下は cvs や svn のようにサブコマンドを解釈する例である。
+==== サブコマンド
+以下は cvs や svn のようにサブコマンドを解釈する例です。
   
     #! /usr/bin/ruby
     # contributed by Minero Aoki.
@@ -354,7 +303,7 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
     parser.order!(ARGV)
     subparsers[ARGV.shift].parse!(ARGV) unless ARGV.empty?
 
-実行すると以下のようになる。
+実行すると以下のようになります。
 
     $ ruby subcom.rb -i add -i
     -i
@@ -363,14 +312,52 @@ optparse.rb を require すると、ARGV に OptionParser::Arguable の機能
     $ ruby subcom.rb list -i
     list -i
 
-((<OptionParser#order!|OptionParser/order>)) がオプションではない
-コマンドの引数に出会うとそこでパースを中断することを利用している。
+[[m:OptionParser#order!]] がオプションではない
+コマンドの引数に出会うとそこでパースを中断することを利用しています。
 
-== '-'で始まるファイル名
+==== ARGV の機能
+optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
+が加わります。以下の書き方ができるようになります。
+#@since 1.8.5
+[[c:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
+  # sample.rb の内容
+  require 'optparse'
+  params = ARGV.getopts("a:b:", "foo", "bar:")
+  p params
+この sample.rb を実行すると
+  $ ruby sample.rb -a 1 --foo --bar xxx
+  {"a"=>"1", "b"=>nil, "foo"=>true, "bar"=>"xxx"}
+のようになります。
+#@else
+        require 'optparse'
+        ARGV.options {|opt|
 
-'-'で始まるファイル名をコマンドに渡したい場合は以下のように間に"--"を挟む。
+            opt.on('-a') {|v| p v }
+            opt.on('-b') {|v| p v }
 
-      $ ruby sample.rb -- -a 
+            opt.parse!
+        }
+        p ARGV
 
-"-a" がオプションではない引数として解釈される。
-これは POSIX.2 の getopt(3) に由来する。"--" 以降はすべてオプションではない引数として解釈される。
+        ruby sample.rb -a foo bar -b baz
+        # => true
+             true
+             ["foo", "bar", "baz"]
+
+((<optparse::チュートリアル/別の書き方>))で示した例に比べて、
+ * ARGV.options メソッドのブロックでオプション定義を記述する
+ * opt.parse! の引数が ARGV 固定になる。
+といった違いがあります。
+
+特に利点があるわけではないが、optparse 添付のサンプルはこの書
+き方になっています。
+#@end
+
+==== '-'で始まるファイル名
+
+'-'で始まるファイル名をコマンドに渡したい場合は以下のように間に"--"を挟みます。
+
+      $ ruby sample.rb -- -file
+
+"-file" がオプションではない引数として解釈されます。
+これは POSIX.2 の getopt(3) に由来します。"--" 以降はすべてオプションではない引数として解釈されます。
