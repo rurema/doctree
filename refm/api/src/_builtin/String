@@ -107,6 +107,18 @@ String クラスのすべてのメソッドが文字単位で動作するようになります。
 
 == Class Methods
 
+#@since 1.9.0
+--- try_convert(obj) -> String | nil
+#@todo
+
+Try to convert obj into a String, using to_str method. Returns
+converted regexp or nil if obj cannot be converted for any reason.
+
+   String.try_convert("str")     # => str
+   String.try_convert(/re/)      # => nil
+
+#@end
+
 --- new(string = "") -> String
 
 string と同じ内容の新しい文字列を作成して返します。
@@ -153,8 +165,8 @@ string と同じ内容の新しい文字列を作成して返します。
 
 printf と同じ規則に従って args をフォーマットします。
 
-args が配列であれば [[m:Kernel#sprintf]](self, *args) と同じです。
-それ以外の場合は [[m:Kernel#sprintf]](self, args) と同じです。
+args が配列であれば [[m:Kernel.#sprintf]](self, *args) と同じです。
+それ以外の場合は [[m:Kernel.#sprintf]](self, args) と同じです。
 
 @param args	フォーマットする値、もしくはその配列
 @return		フォーマットされた文字列
@@ -1263,10 +1275,10 @@ self が空文字列のときは 0 を返します。
     p "".hex      # => 0
 
 @see [[m:String#oct]], [[m:String#to_i]], [[m:String#to_f]],
-     [[m:Kernel#Integer]], [[m:Kernel#Float]]
+     [[m:Kernel.#Integer]], [[m:Kernel.#Float]]
 
 このメソッドの逆に数値を文字列に変換するには
-[[m:Kernel#sprintf]], [[m:String#%]],
+[[m:Kernel.#sprintf]], [[m:String#%]],
 [[m:Integer#to_s]]
 などを使ってください。
 
@@ -1479,9 +1491,9 @@ Ruby 1.8 以降はいずれも符号を許す
 #@end
 
 @see [[m:String#hex]], [[m:String#to_i]], [[m:String#to_f]],
-     [[m:Kernel#Integer]], [[m:Kernel#Float]]
+     [[m:Kernel.#Integer]], [[m:Kernel.#Float]]
 
-逆に、数値を文字列に変換するには[[m:Kernel#sprintf]],
+逆に、数値を文字列に変換するには[[m:Kernel.#sprintf]],
 [[m:String#%]], [[m:Integer#to_s]] を使用します。
 
 --- replace(other) -> ()
@@ -2556,4 +2568,34 @@ self がセパレータを含まないときは、
   p "aaaaa".partition("x")   # => ["", "", "aaaaa"]
 
 @see [[m:String#partition]], [[m:String#split]]
+#@end
+
+#@since 1.9.0
+--- bytesize
+#@todo
+
+--- each_char {|cstr| block }    -> String
+#@todo
+
+Passes each character in str to the given block.
+
+   "hello".each_char {|c| print c, ' ' }
+
+produces:
+
+   h e l l o
+
+--- encoding   -> Encoding
+#@todo
+
+Returns the Encoding object that represents the encoding of obj.
+
+--- force_encoding(encoding)   -> String
+#@todo
+
+Changes the encoding to encoding and returns self.
+
+--- ~
+#@todo
+
 #@end

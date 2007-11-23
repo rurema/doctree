@@ -434,3 +434,152 @@ Enumerable::Enumerator.new(self, :each_cons, n) を返します。
 @arg n   区切る要素数を示す整数です。
 @see [[m:Enumerable#each_slice]]
 #@end
+
+#@since 1.9.0
+
+--- count(item)             -> Integer
+--- count {| obj | block }  -> Integer
+#@todo
+
+Returns the number of items in enum for which equals to item.
+If a block is given, counts the number of elements yielding a
+true value.
+
+   ary = [1, 2, 4, 2]
+   ary.count(2)          # => 2
+   ary.count{|x|x%2==0}  # => 3
+
+
+--- cycle {|obj| block }
+#@todo
+
+Calls block for each element of enum repeatedly forever. Returns
+nil if and only if the collection is empty. Enumerable#cycle
+saves elements in an internal array so changes to enum after
+the first pass have no effect.
+
+   a = ["a", "b", "c"]
+   a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+
+
+--- drop(n)               -> Array
+#@todo
+
+Drops first n elements from enum, and returns rest elements in
+an array.
+
+   a = [1, 2, 3, 4, 5, 0]
+   a.drop(3)             # => [4, 5, 0]
+
+
+--- drop_while {|arr| block }   -> Array
+#@todo
+
+Drops elements up to, but not including, the first element for
+which the block returns nil or false and returns an array containing
+the remaining elements.
+
+   a = [1, 2, 3, 4, 5, 0]
+   a.drop {|i| i < 3 }   # => [3, 4, 5, 0]
+
+
+--- find_index   {| obj | block }  -> Integer
+#@todo
+
+Passes each entry in enum to block. Returns the index for the
+first for which block is not false. If no object matches, returns
+nil
+
+   (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 }   #=> nil
+   (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 }   #=> 34
+
+
+--- first      -> object or nil
+--- first(n)   -> Array
+#@todo
+
+Returns the first element, or the first n elements, of the enumerable.
+If the enumerable is empty, the first form returns nil, and the
+second form returns an empty array.
+
+
+--- group_by {| obj | block }  -> Hash
+#@todo
+
+Returns a hash, which keys are evaluated result from the block,
+and values are arrays of elements in enum corresponding to the
+key.
+
+   (1..6).group_by {|i| i%3}   #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
+
+
+--- minmax                   -> [min,max]
+--- minmax {|a,b| block }    -> [min,max]
+#@todo
+
+Returns two elements array which contains the mininum and the
+maxinum value in the enumerable. The first form assumes all objects
+implement Comparable; the second uses the block to return a <=>
+b.
+
+   a = %w(albatross dog horse)
+   a.minmax                                  #=> ["albatross", "horse"]
+   a.minmax {|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
+
+
+--- minmax_by {| obj| block }   -> [min, max]
+#@todo
+
+Returns two elements array array containing the objects in enum
+that gives the minmum and maximum values respectively from the
+given block.
+
+   a = %w(albatross dog horse)
+   a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
+
+
+--- none? [{|obj| block }]   -> bool
+#@todo
+
+Passes each element of the collection to the given block. The
+method returns true if the block never returns true for all elements.
+If the block is not given, none? will return true only if none
+of the collection members is true.
+
+   %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
+   %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
+   [].none?                                          #=> true
+   [nil].none?                                       #=> true
+   [nil,false].none?                                 #=> true
+
+--- one? [{|obj| block }]   -> bool
+#@todo
+
+Passes each element of the collection to the given block. The
+method returns true if the block returns true exactly once. If
+the block is not given, one? will return true only if exactly
+one of the collection members is true.
+
+   %w{ant bear cat}.one? {|word| word.length == 4}   #=> true
+   %w{ant bear cat}.one? {|word| word.length >= 4}   #=> false
+   [ nil, true, 99 ].one?                            #=> false
+   [ nil, true, false ].one?                         #=> true
+
+--- take(n)               -> Array
+#@todo
+
+Returns first n elements from enum.
+
+   a = [1, 2, 3, 4, 5, 0]
+   a.take(3)             # => [1, 2, 3]
+
+--- take_while {|arr| block }   -> Array
+#@todo
+
+Passes elements to the block until the block returns nil or false,
+then stops iterating and returns an array of all prior elements.
+
+   a = [1, 2, 3, 4, 5, 0]
+   a.take {|i| i < 3 }   # => [1, 2]
+
+#@end

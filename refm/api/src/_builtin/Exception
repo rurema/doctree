@@ -72,3 +72,13 @@
 情報を返します。
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
+
+#@since 1.9.0
+--- ==(other)    -> bool
+
+自身と指定された other のクラスが同じであり、message と backtrace が == メソッドで比較して
+等しい場合に true を返します。そうでない場合に false を返します。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+#@end

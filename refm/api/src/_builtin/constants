@@ -162,6 +162,12 @@ Ruby のリリース日を示す文字列。
 
 プラットフォームを示す文字列。
 
+#@since 1.8.6
+--- RUBY_PATCHLEVEL
+#@todo
+
+#@end
+
 #@if (version < "1.9.0")
 --- VERSION
 
