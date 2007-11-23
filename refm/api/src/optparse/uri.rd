@@ -1,5 +1,4 @@
 require optparse
-require uri
 
 [[m:OptionParser#on]] で使用可能なクラスに [[c:URI]] が
 追加されます。

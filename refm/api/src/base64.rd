@@ -1,6 +1,3 @@
-require kconv
-require nkf
-
 
 MIME Base64のデコード/エンコードを行うメソッドが定義されています。
 このライブラリは Base64 エンコーディングの

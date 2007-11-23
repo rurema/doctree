@@ -1,5 +1,4 @@
 require optparse
-require time
 
 [[m:OptionParser#on]] で使用可能なクラスに [[c:Time]] が
 追加されます。

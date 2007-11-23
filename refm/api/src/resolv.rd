@@ -1,10 +1,5 @@
 #@if (version >= "1.6.0")
 
-require socket
-require timeout
-require fcntl
-require thread
-
 = class Resolv < Object
 
 Ruby で書かれたリゾルバ(名前解決)ライブラリ。

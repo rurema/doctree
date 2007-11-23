@@ -1,5 +1,4 @@
 require optparse
-require date
 
 [[m:OptionParser#on]] で使用可能なクラスに [[c:Date]] と [[c:DateTime]] が
 追加されます。

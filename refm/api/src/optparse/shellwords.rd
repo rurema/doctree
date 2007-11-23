@@ -1,5 +1,4 @@
 require optparse
-require shellwords
 
 [[m:OptionParser#on]] で使用可能な引数に [[c:Shellwords]]
 追加されます。

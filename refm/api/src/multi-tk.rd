@@ -1,6 +1,5 @@
 require tcltklib
 require tkutil
-require thread
 
 #@include(multi-tk/MultiTkIp)
 #@since 1.8.5

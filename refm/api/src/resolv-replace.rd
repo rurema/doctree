@@ -1,6 +1,5 @@
 #@if (version >= "1.6.0")
 
-require socket
 require resolv
 
 = redefine IPSocket

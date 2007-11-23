@@ -1,5 +1,3 @@
-require delegate
-
 weak reference を実現します。
 
 = class WeakRef < Delegator
