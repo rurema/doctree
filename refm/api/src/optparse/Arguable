@@ -4,7 +4,7 @@
 [[lib:optparse]] を require することにより、ARGV は
 OptionParser::Arguable を extend します。
 
-コマンドライン引数を表す、一般の文字列の配列を拡張するためにも使うことができます。
+コマンドライン引数を表す文字列の配列を、拡張するためにも使うことができます。
 
 == Instance Methods
 
