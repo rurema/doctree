@@ -15,8 +15,8 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 == Class Methods
 
---- compile(string[, option[, code]]) -> Regexp
---- new(string[, option[, code]]) -> Regexp
+--- compile(string, option = nil, code = nil) -> Regexp
+--- new(string, option = nil, code = nil) -> Regexp
 
 文字列 string をコンパイルして正規表現オブジェクトを生成して
 返します。
@@ -79,8 +79,8 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 @see [[m:$KCODE]]
 
---- escape(string[, kcode]) -> String
---- quote(string[, kcode]) -> String
+--- escape(string, kcode = $KCODE) -> String
+--- quote(string, kcode = $KCODE) -> String
 
 string の中で正規表現において特別な意味を持つ文字の直前にエ
 スケープ文字(バックスラッシュ)を挿入した文字列を返します。省略可能
@@ -144,7 +144,7 @@ last_match[1] の形式では例外 [[c:NameError]] が発生します。
 
 
 #@since 1.8.1
---- union([pattern, ...]) -> Regexp
+--- union(*pattern) -> Regexp
 
 引数として与えた pattern を選択 | で連結し、Regexp として返します。
 結果の Regexp は与えた pattern のどれかにマッチする場合にマッチするものになります。
@@ -313,11 +313,18 @@ true を返します。
   reg = Regexp.new("hogehoge", nil)
   p reg.kcode #=> "nil"
 
---- match(str) -> MatchData | nil
---- match(str[, pos]) -> MatchData | nil
 
-[[c:MatchData]] オブジェクトを返す点を除いて、self =~ str と
-同じです。マッチしなかった場合 nil を返します。
+#@since 1.9.0
+--- match(str, pos = 0) -> MatchData | nil
+#@else
+--- match(str) -> MatchData | nil
+#@end
+
+指定された文字列 str に対して
+#@since 1.9.0
+位置 pos から
+#@end
+自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。マッチしなかった場合 nil を返します。
 
 正規表現にマッチした部分文字列だけが必要な場合に、
 
@@ -365,7 +372,9 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 
 @param str 文字列を指定します。str との正規表現マッチを行います。
 
+#@since 1.9.0
 @param pos 整数を指定します。マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
+#@end
 
 使用例
 
