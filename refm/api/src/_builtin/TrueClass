@@ -6,7 +6,7 @@ true は真を表す代表のオブジェクトです。
 
 == Instance Methods
 
---- &(other)
+--- &(other)    -> bool
 
 other が真なら true を, 偽なら false を返します。
 
@@ -26,7 +26,7 @@ other が真なら true を, 偽なら false を返します。
    p true.&(1 == 1)  #=> true
    p true.&(1 + 1)   #=> true
 
---- |(other)
+--- |(other)    -> bool
 
 常に true を返します。
 
@@ -46,7 +46,7 @@ other が真なら true を, 偽なら false を返します。
    p true.|(1 == 1)  #=> true
    p true.|(1 + 1)   #=> true
 
---- ^(other)
+--- ^(other)    -> bool
 
 other が真なら false を, 偽なら true を返します。
 
@@ -66,6 +66,6 @@ other が真なら false を, 偽なら true を返します。
    p true.^(1 == 1)  #=> false
    p true.^(1 + 1)   #=> false
 
---- to_s
+--- to_s    -> String
 
 常に文字列 "true" を返します。
