@@ -64,7 +64,7 @@ _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
 _builtin/ScriptError            snoozer05       done
 _builtin/SecurityError          snoozer05       done
-_builtin/Signal                 snoozer05
+_builtin/Signal                 sheepman        done
 _builtin/SignalException        snoozer05       done
 _builtin/StandardError          snoozer05       done
 _builtin/String                 aamine          done
