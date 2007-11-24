@@ -51,7 +51,7 @@ value を返します。
 @param value  置き換えるべき値を指定します。 to_str で文字列化されます。
 
 #@since 1.8.0
---- clear  -> ()
+--- clear  -> self
 
 環境変数をすべてクリアします。self を返します。
 #@end
@@ -82,16 +82,16 @@ key と value を引数としてブロックを評価した値が真であ
 
 reject! は要素に変化がなければ nil を返します。
 
---- each {|key, value| ... } -> ()
---- each_pair {|key, value| ... } -> ()
+--- each {|key, value| ... } -> self
+--- each_pair {|key, value| ... } -> self
 
 key と value を引数としてブロックを評価します。
 
---- each_key {|key| ... } -> ()
+--- each_key {|key| ... } -> self
 
 key を引数としてブロックを評価します。
 
---- each_value {|value| ... } -> ()
+--- each_value {|value| ... } -> self
 
 value を引数としてブロックを評価します。
 
@@ -109,7 +109,7 @@ key に関連づけられた値を返します。該当するキーが登録されてい
 でもなければ例外 [[c:IndexError]] が発生します。
 
 @param key       環境変数の名前を指定します。 to_str で文字列化されます。
-@param deafult   keyに対応する環境変数の値がないときにこの値を返します。 
+@param default   keyに対応する環境変数の値がないときにこの値を返します。 
 
 --- has_key?(key) -> bool
 --- include?(key) -> bool
@@ -132,32 +132,32 @@ val を値として持つ環境変数が存在する時、真を返します。
 --- key(val)   -> String
 #@end
 
+#@since 1.9.0
+このメソッドは obsolete です。
+使用すると警告メッセージが表示されます。
+#@end
+
 val に対応するキーを返します。対応する要素が存在しない時には
 nil を返します。
 
-#@since 1.9.0
-ENV.index は version 1.9 では、((<obsolete>)) です。
-使用すると警告メッセージが表示されます。
-#@end
-
 @param val  値を指定します。 to_str で文字列化されます。
 
---- indexes(key_1, ... , key_n) -> [String]     ((<obsolete>))
---- indices(key_1, ... , key_n) -> [String]     ((<obsolete>))
+--- indexes(*key) -> [String]
+--- indices(*key) -> [String]
+
+#@since 1.8.0
+このメソッドは obsolete です。
+使用すると警告メッセージが表示されます。
+代わりに [[m:ENV.values_at]] を使用します。
+#@end
 
 引数で指定された名前の環境変数の値の配列を返します。
 
-#@since 1.8.0
-このメソッドは version 1.8 では、((<obsolete>)) です。
-使用すると警告メッセージが表示されます。
-代わりに [[m:ENV#ENV.values_at]] を使用します。
-#@end
-
-@param key_1..n  キーの名前を指定します。 to_str で文字列化されます。
+@param key  キーの名前を指定します。 to_str で文字列化されます。
 
 --- inspect -> String
 
-ENV オブジェクトを文字列化します。 Hash#inspect と同じように動作します。
+ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 
 #@since 1.8.0
 --- invert -> Hash
@@ -229,17 +229,17 @@ self を返します。
 環境変数の全値の配列を返します。
 
 #@since 1.8.0
---- values_at(key_1, ..., key_n) -> [String]
+--- values_at(*key) -> [String]
 #@todo
 
 引数で指定されたキー(環境変数名)に対応する値の配列を返します。存在
-しないキーに対しては nil が対応します。[[m:ENV#ENV.indexes]] と
-[[m:ENV#ENV.indices]] と同じです。
+しないキーに対しては nil が対応します。[[m:ENV.indexes]] と
+[[m:ENV.indices]] と同じです。
 
 例:
 
   ENV.update({'FOO','foo', 'BAR','bar'})
   p ENV.values_at(*%w(FOO BAR BAZ))   # => ["foo", "bar", nil]
 
-@param key_1..n  環境変数名を指定します。 to_str で文字列化されます。
+@param key 環境変数名を指定します。 to_str で文字列化されます。
 #@end
