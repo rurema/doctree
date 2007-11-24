@@ -54,6 +54,8 @@
 @param superclass 生成するクラスのスーパークラスを指定します。
 
 #@since 1.8.0
+例:
+
  k = Class.new{|c| 
        def initialize
          p "in initialize"
@@ -109,6 +111,8 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
 クラス定義文の実行直前です。
 
 @param subclass プログラム内で新たに定義された自身のサブクラスです。
+
+例:
 
   class Foo
     def Foo.inherited(subclass)
