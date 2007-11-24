@@ -104,7 +104,10 @@ self が min と max の範囲内(min, max
   self >= min and self <= max 
 #@end
 
-@param other 自身と比較したいオブジェクトを指定します。
+@param min 範囲の下端を表すオブジェクトを指定します。
+
+@param max 範囲の上端を表すオブジェクトを指定します。
+
 #@since 1.8.0
 @raise ArgumentError self <=> min か、self <=> max が nil を返
 したときに発生します。
