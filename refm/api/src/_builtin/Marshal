@@ -59,8 +59,8 @@ obj を指定された出力先に再帰的に出力します。
 @raise ArgumentError limit 段以上深くリンクしたオブジェクトをダンプしようと
                      した場合に発生します。
 
---- load(port, proc = nil)
---- restore(port, proc = nil)
+--- load(port, proc = nil)      -> object
+--- restore(port, proc = nil)   -> object
 
 port からマーシャルデータを読み込んで、元のオブジェクトと同
 じ状態をもつオブジェクトを生成します。
