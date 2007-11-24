@@ -104,11 +104,13 @@ Proc.new は、Proc#initialize が定義されていれば
 
 == Instance Methods
 
---- [](arg ...) -> ()
---- call(arg ... ) -> ()
+--- [](*arg) -> ()
+--- call(*arg) -> ()
 
 手続きオブジェクトを実行してその結果を返します。引数はブロックの引
 数にそのまま(多重代入のルールに従い)代入されます。
+
+@param arg 手続きオブジェクトに与える引数を指定します。
 
 @raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
 
@@ -142,7 +144,7 @@ self の文字列表現を返します。可能なら self を生成した
   => "#<Proc:0x0x401a880c@-:3>"
 
 #@since 1.9.0
---- yield(arg ... ) -> ()
+--- yield(*arg) -> ()
 
 [[m:Proc#call]] と同じですが、引数の数のチェックを行いません。
 
@@ -157,6 +159,8 @@ self の文字列表現を返します。可能なら self を生成した
     yield(1)
   end
   foo {|a,b,c| p [a,b,c]}
+
+@param arg 手続きオブジェクトに与える引数を指定します。
 
 @raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
 

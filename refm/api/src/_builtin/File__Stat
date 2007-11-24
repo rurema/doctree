@@ -37,7 +37,7 @@ include Comparable
 
 == Class Methods
 
---- new(path)
+--- new(path)    -> File::Stat
 
 path に関する File::Stat オブジェクトを生成して返します。
 [[m:File.stat]] と同じです。
