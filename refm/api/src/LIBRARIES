@@ -57,6 +57,7 @@ drb/ssl
 drb/timeridconv
 drb/unix
 e2mmap
+enumerator
 erb
 eregex
 etc
