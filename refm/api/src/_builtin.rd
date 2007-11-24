@@ -18,7 +18,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Encoding)
 #@end
 #@include(_builtin/Enumerable)
+#@since 1.9.0
 #@include(_builtin/Enumerable__Enumerator)
+#@end
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
 #@since 1.9.0
