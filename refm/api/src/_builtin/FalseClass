@@ -7,7 +7,7 @@ false は nil オブジェクトとともに偽を表し、
 
 == Instance Methods
 
---- &(other)
+--- &(other)    -> false
 
 常に false を返します。
 
@@ -27,7 +27,7 @@ false は nil オブジェクトとともに偽を表し、
    p false.&(1 == 1)  #=> false
    p false.&(1 + 1)   #=> false
 
---- |(other)
+--- |(other)    -> bool
 
 other が真なら true を, 偽なら false を返します。
 
@@ -47,7 +47,7 @@ other が真なら true を, 偽なら false を返します。
    p false.|(1 == 1)  #=> true
    p false.|(1 + 1)   #=> true
 
---- ^(other)
+--- ^(other)    -> bool
 
 other が真なら true を, 偽なら false を返します。
 
@@ -67,6 +67,6 @@ other が真なら true を, 偽なら false を返します。
    p false.^(1 == 1)  #=> true
    p false.^(1 + 1)   #=> true
 
---- to_s
+--- to_s    -> String
 
 常に文字列 "false" を返します。
