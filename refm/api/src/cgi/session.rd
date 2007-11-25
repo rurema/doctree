@@ -355,7 +355,3 @@ FileStoreの場合はセッションファイルを削除します。
 = class CGI::Session::MemoryStore < Object
 #@todo
 
-
-
-= class CGI::Session::PStore < Object
-#@todo
