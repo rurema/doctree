@@ -18,7 +18,7 @@
 == Class Methods
 
 #@if (version >= "1.8.0")
---- new(error_message[, name[, args]]) -> NoMethodError
+--- new(error_message = "", name = nil, args = nil) -> NoMethodError
 
 例外オブジェクトを生成して返します。
 

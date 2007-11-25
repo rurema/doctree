@@ -5,13 +5,13 @@
 以下の例外クラスのスーパークラスです。
 
 #@# list child classes automatically
-  * LoadError
+  * [[c:LoadError]]
 #@since 1.9.0
-  * NameError
-  * NoMethodError
+  * [[c:NameError]]
+  * [[c:NoMethodError]]
 #@end
-  * NotImplementedError
-  * SyntaxError
+  * [[c:NotImplementedError]]
+  * [[c:SyntaxError]]
 
-これらの例外が発生したときは Ruby プログラム自体に
+これらの例外が発生したときは Ruby スクリプト自体に
 バグがある可能性が高いと考えられます。

@@ -9,7 +9,7 @@
 == Class Methods
 
 #@since 1.8.0
---- new(error_message[, name]) -> NameError
+--- new(error_message = "", name = nil) -> NameError
 
 例外オブジェクトを生成して返します。
 
