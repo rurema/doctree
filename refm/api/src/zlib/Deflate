@@ -1,6 +1,5 @@
 = class Zlib::Deflate < Zlib::ZStream
 
-[[lib:zlib]]
 
 == Class Methods
 

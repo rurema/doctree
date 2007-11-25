@@ -1,8 +1,6 @@
 = class Zlib::Error < StandardError
 
-[[lib:zlib]]
-
-Ruby/zlib の発行する全ての例外のスーパークラス。
+ライブラリ zlib の発行する全ての例外のスーパークラスです。
 
 以下の例外が Zlib::Error のサブクラスとして定義されています。
 それぞれ zlib ライブラリ関数の返すエラーと対応しています。

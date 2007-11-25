@@ -1,4 +1,4 @@
-Ruby/zlib は zlib を Ruby から使うための拡張ライブラリです。
+zlib を Ruby から使うための拡張ライブラリです。
 gzip ファイルの読み書きもサポートします。
 
 see also: [[unknown:ruby-src:ext/zlib/doc/zlib.rd]]

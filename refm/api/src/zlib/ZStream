@@ -1,8 +1,6 @@
 = class Zlib::ZStream < Object
 
-[[lib:zlib]]
-
-圧縮データを扱うストリームを表す抽象クラス。
+圧縮データを扱うストリームを表す抽象クラスです。
 具体的な圧縮/展開の操作は、それぞれサブクラスの [[c:Zlib::Deflate]],
 [[c:Zlib::Inflate]] で定義されています。
 
