@@ -61,6 +61,7 @@ PTYの子プロセスが動いている間でも，system()や [[m:IO.popen]]などの
 PTY の子プロセスが動いていても，そのプロセスの終了時に例外が発生
 しないようにします．
 
+#@since 1.8.0
 = class PTY::ChildExited
 
 == Instance Methods
@@ -68,7 +69,6 @@ PTY の子プロセスが動いていても，そのプロセスの終了時に例外が発生
 --- status
 #@todo
 
-@since 1.8.0
 子プロセスの終了ステータスを[[c:Process::Status]]オブジェクトで返します。
-@end
+#@end
 
