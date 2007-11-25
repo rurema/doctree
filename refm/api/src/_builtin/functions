@@ -267,8 +267,8 @@ program の引数に渡されます。
 @see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]]
 #@end
 
---- fork -> Integer|nil
---- fork { ... } -> Integer|nil
+--- fork -> Integer | nil
+--- fork { ... } -> Integer | nil
 
 [[man:fork(2)]] システムコールを使ってプロセスの複製を作
 ります。親プロセスでは子プロセスのプロセスIDを、子プロセスでは
@@ -388,7 +388,7 @@ Perlと異なりコマンドは常に `|' で始まります。
 @param timeout [[m:IO.select]] 参照
 @see [[m:IO.select]]
 
---- test(cmd, file) -> bool|Time|Integer|nil
+--- test(cmd, file) -> bool | Time | Integer | nil
 
 単体のファイルでファイルテストを行います。
 
@@ -633,7 +633,7 @@ const_name には、 "::" 演算子を含めることはできないので、 Kernel.#autoload
 #@end
 
 #@since 1.8.0
---- autoload?(const_name) -> String|nil
+--- autoload?(const_name) -> String | nil
 
 const_name が [[m:Kernel.#autoload]] 設定されているか調べます。
 
@@ -756,7 +756,7 @@ event に応じ、以下のものが渡されます。
 
 #@#例...
 
---- caller(level_num = 1) -> [String]|nil
+--- caller(level_num = 1) -> [String] | nil
 
 level_num 段上の呼び出し元の情報を [[m:$@]]
 の形式のバックトレース(文字列の配列)として返します。
@@ -828,7 +828,7 @@ level_num 段上の呼び出し元の情報を [[m:$@]]
 
     #=> ["-:5", "debug information"]
 
---- gets(rs = $/) -> String|nil
+--- gets(rs = $/) -> String | nil
 --- readline(rs = $/) -> String
 
 [[c:ARGF]]から一行読み込んで、それを返します。
@@ -872,7 +872,7 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内容を
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]]
 
---- readlines(rs = $/) -> [String]|nil
+--- readlines(rs = $/) -> [String] | nil
 
 [[c:ARGF]]を [[m:Kernel.#gets]](rs) でEOFまで読み込んで、その各行を要素としてもつ配列を返します。
 行の区切りは引数 rs で指定した文字列になります。
@@ -906,7 +906,7 @@ rs に nil を指定すると行区切りなしとみなします。
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]]
 
 #@if (version <= "1.8.0")
---- getc -> Fixnum|nil
+--- getc -> Fixnum | nil
 
 このメソッドは廃止予定です。代わりにSTDIN.getcを使ってください。
 
@@ -1531,14 +1531,14 @@ seed として unsigned long よりも大きな値を与えることは出来ません。
 
 
 
-#@if (version < "1.9.0")
---- sub(pattern[, replace) -> 
---- sub!(pattern[, replace]) -> 
---- sub(pattern) {|matched| ... } -> 
---- sub!(pattern) {|matched| ... } -> 
+#@until 1.9.0
+--- sub(pattern, replace)          -> String
+--- sub!(pattern, replace)         -> String
+--- sub(pattern) {|matched| ... }  -> String
+--- sub!(pattern) {|matched| ... } -> String
 
-組み込み変数 $_ の指す文字列内で pattern に
-マッチする最初の部分を replace に置き換えた文字列を返します。
+組み込み変数 [[m:$_]] の指す文字列内で pattern に
+マッチする最初の部分を replace に置き換えます。$_ を返します。
 
 $_.sub, $_.sub! とほぼ同じです。
 
@@ -1554,13 +1554,13 @@ $_.sub とこのメソッド sub は以下の点で違いがあります。
 @param replace [[m:String#sub]] 参照
 @see [[m:String#sub]],[[m:$_]]
 
---- gsub(pattern, replace) -> 
---- gsub!(pattern, replace) -> 
---- gsub(pattern) {|matched| ... } -> 
---- gsub!(pattern) {|matched| ... } -> 
+--- gsub(pattern, replace)          -> String
+--- gsub!(pattern, replace)         -> String
+--- gsub(pattern) {|matched| ... }  -> String
+--- gsub!(pattern) {|matched| ... } -> String
 
-組み込み変数 $_ の指す文字列内で pattern に
-マッチする部分を全て replace に置き換えた文字列を返します。
+組み込み変数 [[m:$_]] の指す文字列内で pattern に
+マッチする部分を全て replace に置き換えます。$_ を返します。
 
 $_.gsub, $_.gsub! とほぼ同じです。
 
@@ -1576,8 +1576,8 @@ $_.gsub とこのメソッド gsub は以下の点で違いがあります。
 @param replace [[m:String#gsub]] 参照
 @see [[m:String#gsub]],[[m:$_]]
 
---- chop -> String
---- chop! -> String|nil
+--- chop  -> String
+--- chop! -> String | nil
 
 組み込み変数 $_ を最後の文字を取り除いたものにし
 ます(終端が"\r\n"であれば2文字取り除きます)。
@@ -1597,8 +1597,8 @@ $_.chopとこのメソッド chop は以下の点で違いがあります。
 
 @see [[m:String#chop]],[[m:$_]]
 
---- chomp(rs = $/) -> String
---- chomp!(rs = $/) -> String|nil
+--- chomp(rs = $/)  -> String
+--- chomp!(rs = $/) -> String | nil
 
 組み込み変数 $_ を rs で指定される末尾
 の文字列を取り除いたものにします。
@@ -1620,7 +1620,7 @@ $_.chomp とこのメソッド chomp は以下の点で違いがあります。
 @param rs [[m:String#chomp]] 参照
 @see [[m:String#chomp]],[[m:$_]],[[m:$/]]
 
---- split([sep[, limit]]) -> 
+--- split(sep = $/, limit = 0) -> [String]
 
 $_.split と同じです。
 
@@ -1631,8 +1631,8 @@ $_.split と同じです。
 @param limit [[m:String#split]] 参照
 @see [[m:String#split]],[[m:$_]]
 
---- scan(re) -> 
---- scan(re) {|matched| ... } -> 
+--- scan(re)                  -> [String] | [[String]]
+--- scan(re) {|matched| ... } -> [String] | [[String]]
 
 $_.scan と同じです。
 
