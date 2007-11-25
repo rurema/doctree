@@ -16,7 +16,7 @@ bigdecimal/newton
 #@end
 bigdecimal/util
 #@end
-#@if (version <= "1.9.0")
+#@until 1.9.0
 cgi-lib
 #@end
 cgi
@@ -28,7 +28,9 @@ csv
 #@end
 curses
 date
+#@until 1.9.0
 date2
+#@end
 dbm
 debug
 delegate
@@ -104,7 +106,9 @@ logger
 mailread
 mathn
 matrix
+#@until 1.9.0
 md5
+#@end
 mkmf
 monitor
 mutex_m
@@ -189,7 +193,9 @@ securerandom
 #@end
 #@since 1.8.0
 set
+#@until 1.9.0
 sha1
+#@end
 #@end
 shell
 shellwords
