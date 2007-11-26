@@ -20,6 +20,6 @@ monitor は以下のような [[c:Mutex]] としての機能も提供します。
 
 [[unknown:ruby-list:30447]] より。
 
-#@#@include(monitor/Monitor)
-#@#@include(monitor/MonitorMixin)
-#@#@include(monitor/ConditionVariable)
+#@include(monitor/Monitor)
+#@include(monitor/MonitorMixin)
+#@include(monitor/ConditionVariable)
