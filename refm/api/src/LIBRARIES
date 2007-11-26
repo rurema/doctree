@@ -201,6 +201,7 @@ shell
 shellwords
 singleton
 #@since 1.8.1
+soap
 soap/attachment
 soap/baseData
 soap/element
@@ -427,6 +428,7 @@ webrick/utils
 win32/registry
 win32ole
 #@since 1.8.1
+wsdl
 wsdl/binding
 wsdl/data
 wsdl/definitions
@@ -518,6 +520,7 @@ xmlrpc
 xsd/codegen
 #@end
 #@since 1.8.1
+xsd
 xsd/datatypes
 xsd/datatypes1999
 xsd/xmlparser
