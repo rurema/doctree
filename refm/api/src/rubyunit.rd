@@ -1,5 +1,14 @@
 require runit/testcase
 
+sublibrary runit/testcase
+sublibrary runit/assert
+sublibrary runit/cui/testrunner
+sublibrary runit/error
+sublibrary runit/testcase
+sublibrary runit/testresult
+sublibrary runit/testsuite
+sublibrary runit/topublic
+
 rubyunit ライブラリは、
 過去に使われていたユニットテストフレームワークである
 RubyUnit との互換性を提供するためだけに提供されています。
