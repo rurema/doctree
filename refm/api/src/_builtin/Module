@@ -1390,3 +1390,44 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 
 #@end
 
+#@since 1.9.0
+
+--- module_exec(arg...) {|var...| block }       -> object
+--- class_exec(arg...) {|var...| block }        -> object
+
+Evaluates the given block in the context of the class/module.
+The method defined in the block will belong to the receiver.
+
+   class Thing
+   end
+   Thing.class_exec{
+     def hello() "Hello there!" end
+   }
+   puts Thing.new.hello()
+
+produces:
+
+   Hello there!
+
+--- local_methods   -> Array
+
+Returns a list of the local methods defined in mod.
+
+--- module_exec(arg...) {|var...| block }       -> object
+--- class_exec(arg...) {|var...| block }        -> object
+
+Evaluates the given block in the context of the class/module.
+The method defined in the block will belong to the receiver.
+
+   class Thing
+   end
+   Thing.class_exec{
+     def hello() "Hello there!" end
+   }
+   puts Thing.new.hello()
+
+produces:
+
+   Hello there!
+
+#@end

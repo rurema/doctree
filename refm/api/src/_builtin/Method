@@ -6,7 +6,7 @@
 メソッドの実体（名前でなく）とレシーバの組を封入します。
 [[c:Proc]] オブジェクトと違ってコンテキストを保持しません。
 
-=== [[c:Proc]] との差
+=== Proc との差
 
 [[c:Method]] は取り出しの対象であるメソッドが
 なければ作れませんが、[[c:Proc]] は準備なしに作れます。その点から
@@ -191,3 +191,55 @@ self を call する [[c:Proc]] オブジェクトを生成して返します。
 
 self のレシーバとの関連を取り除いた [[c:UnboundMethod]] オブ
 ジェクトを生成して返します。
+
+--- ==(other)     -> bool
+--- ===(other)    -> bool
+
+自身と other が同じインスタンスの同じメソッドを表す場合に
+true を返します。そうでない場合に false を返します。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+  s = "bar"
+  a = s.method(:size)
+  b = s.method(:size)
+  p a == b                            #=> true
+
+@see [[m:Method#eql?]]
+
+--- eql?(other)     -> bool
+--- equal?(other)   -> bool
+
+指定された other が self 自身である場合のみ真を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作で
+す。
+
+@param other 自身と比較したいオブジェクトを指定します。
+
+  s = "bar"
+  a = s.method(:size)
+  b = s.method(:size)
+  p a.eql?(b)          #=> false
+  p a.eql?(a)          #=> true
+
+@see [[m:Method#==]]
+
+--- hash    -> Integer
+
+自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
+
+#@since 1.9.0
+
+--- name    -> String
+
+Returns the name of the method.
+
+--- owner    -> class_or_module
+
+Returns the class or module that defines the method.
+
+--- receiver    -> object
+
+Returns the bound receiver of the method object.
+
+#@end
