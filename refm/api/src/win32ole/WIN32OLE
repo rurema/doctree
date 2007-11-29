@@ -1,0 +1,351 @@
+= class WIN32OLE < Object
+
+WIN32OLE objects represent OLE Automation object in Ruby.
+
+   WIN32OLE.new(server, [host]) -> WIN32OLE object
+
+Returns a new WIN32OLE object(OLE Automation object).
+The first argument server specifies OLE Automation server.
+The first argument should be CLSID or PROGID.
+If second argument host specified, then returns OLE Automation 
+object on host. 
+
+    WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
+    WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
+
+== Class Methods
+
+#@since 1.9.0
+
+--- create_guid
+#@todo
+
+Creates GUID.
+
+   WIN32OLE.create_guid # => {1CB530F1-F6B1-404D-BCE6-1959BF91F4A8}
+
+--- locale -> locale id.
+#@todo
+
+Returns current locale id (lcid). The default locale is LOCALE_SYSTEM_DEFAULT.
+
+   lcid = WIN32OLE.locale
+
+--- locale = lcid
+#@todo
+
+Sets current locale id (lcid).
+
+   WIN32OLE.locale = 1033 # set locale English(U.S)
+   obj = WIN32OLE_VARIANT.new("$100,000", WIN32OLE::VARIANT::VT_CY)
+
+#@end
+
+--- codepage
+#@todo
+
+Returns current codepage.
+
+   WIN32OLE.codepage # => WIN32OLE::CP_ACP
+
+--- codepage=(CP)
+#@todo
+
+Sets current codepage.
+
+   WIN32OLE.codepage = WIN32OLE::CP_UTF8
+
+--- connect(ole) --> aWIN32OLE
+#@todo
+
+Returns running OLE Automation object or WIN32OLE object from
+moniker. 1st argument should be OLE program id or class id or
+moniker.
+
+   WIN32OLE.connect('Excel.Application') # => WIN32OLE object which represents running Excel.
+
+--- const_load(ole, mod = WIN32OLE)
+#@todo
+
+Defines the constants of OLE Automation server as mod's constants.
+The first argument is WIN32OLE object or type library name. If
+2nd argument is omitted, the default is WIN32OLE. The first letter
+of Ruby's constant variable name is upper case, so constant variable
+name of WIN32OLE object is capitalized. For example, the 'xlTop'
+constant of Excel is changed to 'XlTop' in WIN32OLE. If the first
+letter of constant variabl is not [A-Z], then the constant is
+defined as CONSTANTS hash element.
+
+   module EXCEL_CONST
+   end
+   excel = WIN32OLE.new('Excel.Application')
+   WIN32OLE.const_load(excel, EXCEL_CONST)
+   puts EXCEL_CONST::XlTop # => -4160
+   puts EXCEL_CONST::CONSTANTS['_xlDialogChartSourceData'] # => 541
+
+   WIN32OLE.const_load(excel)
+   puts WIN32OLE::XlTop # => -4160
+
+   module MSO
+   end
+   WIN32OLE.const_load('Microsoft Office 9.0 Object Library', MSO)
+   puts MSO::MsoLineSingle # => 1
+
+--- new(server, [host]) -> WIN32OLE object
+#@todo
+
+Returns a new WIN32OLE object(OLE Automation object). The first
+argument server specifies OLE Automation server. The first argument
+should be CLSID or PROGID. If second argument host specified,
+then returns OLE Automation object on host.
+
+    WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
+    WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
+
+--- ole_free(aWIN32OLE) --> number
+#@todo
+
+Invokes Release method of Dispatch interface of WIN32OLE object.
+You should not use this method because this method exists only
+for debugging WIN32OLE. The return value is reference counter
+of OLE object.
+
+--- ole_reference_count(aWIN32OLE) --> number
+#@todo
+
+Returns reference counter of Dispatch interface of WIN32OLE object.
+You should not use this method because this method exists only
+for debugging WIN32OLE.
+
+--- ole_show_help(obj [,helpcontext])
+#@todo
+
+Displays helpfile. The 1st argument specifies WIN32OLE_TYPE object
+or WIN32OLE_METHOD object or helpfile.
+
+   excel = WIN32OLE.new('Excel.Application')
+   typeobj = excel.ole_type
+   WIN32OLE.ole_show_help(typeobj)
+
+== Instance Methods
+
+--- [](property)
+#@todo
+
+Returns property of OLE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   puts excel['Visible'] # => false
+
+--- _getproperty(dispid, args, types)
+#@todo
+
+Runs the early binding method to get property. The 1st argument
+specifies dispatch ID, the 2nd argument specifies the array of
+arguments, the 3rd argument specifies the array of the type of
+arguments.
+
+   excel = WIN32OLE.new('Excel.Application')
+   puts excel._getproperty(558, [], []) # same effect as puts excel.visible
+
+--- _invoke(dispid, args, types)
+#@todo
+
+Runs the early binding method. The 1st argument specifies dispatch
+ID, the 2nd argument specifies the array of arguments, the 3rd
+argument specifies the array of the type of arguments.
+
+   excel = WIN32OLE.new('Excel.Application')
+   excel._invoke(302, [], []) #  same effect as excel.Quit
+
+--- _setproperty(dispid, args, types)
+#@todo
+
+Runs the early binding method to set property. The 1st argument
+specifies dispatch ID, the 2nd argument specifies the array of
+arguments, the 3rd argument specifies the array of the type of
+arguments.
+
+   excel = WIN32OLE.new('Excel.Application')
+   excel._setproperty(558, [true], [WIN32OLE::VARIANT::VT_BOOL]) # same effect as excel.visible = true
+
+--- each {|i|...}
+#@todo
+
+Iterates over each item of OLE collection which has IEnumVARIANT
+interface.
+
+   excel = WIN32OLE.new('Excel.Application')
+   book = excel.workbooks.add
+   sheets = book.worksheets(1)
+   cells = sheets.cells("A1:A5")
+   cells.each do |cell|
+     cell.value = 10
+   end
+
+--- invoke(method, [arg1,...])  -> return value of method.
+#@todo
+
+Runs OLE method. The first argument specifies the method name
+of OLE Automation object. The others specify argument of the
+method. If you can not execute method directly, then use this
+method instead.
+
+  excel = WIN32OLE.new('Excel.Application')
+  excel.invoke('Quit')  # => same as excel.Quit
+
+--- method_missing(id [,arg1, arg2, ...])
+#@todo
+
+Calls WIN32OLE#invoke method.
+
+--- ole_activex_initialize -> Qnil
+#@todo
+
+Initialize WIN32OLE object(ActiveX Control) by calling IPersistMemory::InitNew.
+
+Before calling OLE method, some kind of the ActiveX controls
+created with MFC should be initialized by calling IPersistXXX::InitNew.
+
+If and only if you recieved the exception "HRESULT error code:
+0x8000ffff catastrophic failure", try this method before invoking
+any ole_method.
+
+   obj = WIN32OLE.new("ProgID_or_GUID_of_ActiveX_Control")
+   obj.ole_activex_initialize
+   obj.method(...)
+
+--- ole_free
+#@todo
+
+invokes Release method of Dispatch interface of WIN32OLE object.
+Usually, you do not need to call this method because Release
+method called automatically when WIN32OLE object garbaged.
+
+--- ole_func_methods
+#@todo
+
+Returns the array of WIN32OLE_METHOD object . The element of
+the array is functional method of WIN32OLE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   properties = excel.ole_func_methods
+
+--- ole_get_methods
+#@todo
+
+Returns the array of WIN32OLE_METHOD object . The element of
+the array is property (gettable) of WIN32OLE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   properties = excel.ole_get_methods
+
+--- ole_method_help(method)
+#@todo
+alias ole_method_help
+
+Returns WIN32OLE_METHOD object corresponding with method specified
+by 1st argument.
+
+   excel = WIN32OLE.new('Excel.Application')
+   method = excel.ole_method_help('Quit')
+
+--- ole_method_help(method)
+#@todo
+alias ole_method_help
+
+Returns WIN32OLE_METHOD object corresponding with method specified
+by 1st argument.
+
+   excel = WIN32OLE.new('Excel.Application')
+   method = excel.ole_method_help('Quit')
+
+--- ole_methods
+#@todo
+
+Returns the array of WIN32OLE_METHOD object. The element is OLE
+method of WIN32OLE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   methods = excel.ole_methods
+
+--- ole_obj_help
+#@todo
+
+Returns WIN32OLE_TYPE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   tobj = excel.ole_obj_help
+
+--- ole_put_methods
+#@todo
+
+Returns the array of WIN32OLE_METHOD object . The element of
+the array is property (settable) of WIN32OLE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   properties = excel.ole_put_methods
+
+--- []=(property, val)
+--- setproperty('property', [arg1, arg2,...] val)
+#@todo
+
+Sets property of OLE object. When you want to set property with
+argument, you can use this method.
+
+   excel = WIN32OLE.new('Excel.Application')
+   excel['Visible'] = true
+   book = excel.workbooks.add
+   sheet = book.worksheets(1)
+   sheet.setproperty('Cells', 1, 2, 10) # => The B1 cell value is 10.
+
+#@since 1.9.0
+
+--- ole_query_interface(iid) -> WIN32OLE object
+#@todo
+
+Returns WIN32OLE object for a specific dispatch or dual interface
+specified by iid.
+
+    ie = WIN32OLE.new('InternetExplorer.Application')
+    ie_web_app = ie.ole_query_interface('{0002DF05-0000-0000-C000-000000000046}') # => WIN32OLE object for dispinterface IWebBrowserApp
+
+--- ole_type
+#@todo
+alias ole_obj_help
+
+Returns WIN32OLE_TYPE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   tobj = excel.ole_type
+
+--- ole_typelib -> The WIN32OLE_TYPELIB object 
+#@todo
+
+Returns the WIN32OLE_TYPELIB object. The object represents the
+type library which contains the WIN32OLE object.
+
+   excel = WIN32OLE.new('Excel.Application')
+   tlib = excel.ole_typelib
+   puts tlib.name  # -> 'Microsoft Excel 9.0 Object Library'
+
+#@end
+
+== Constants
+--- VERSION
+#@todo
+
+--- ARGV
+#@todo
+
+--- CP_ACP
+--- CP_MACCP
+--- CP_OEMCP
+--- CP_SYMBOL
+--- CP_THREAD_ACP
+--- CP_UTF7
+--- CP_UTF8
+
+--- LOCALE_SYSTEM_DEFAULT
+
+--- LOCALE_USER_DEFAULT

@@ -1,0 +1,197 @@
+= class WIN32OLE_METHOD < Object
+WIN32OLE_METHOD objects represent OLE method information.
+
+== Class Methods
+
+--- new(ole_type,  method) -> WIN32OLE_METHOD object
+#@todo
+
+Returns a new WIN32OLE_METHOD object which represents the information
+about OLE method. The first argument ole_type specifies WIN32OLE_TYPE
+object. The second argument method specifies OLE method name
+defined OLE class which represents WIN32OLE_TYPE object.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
+
+== Instance Methods
+
+--- dispid
+#@todo
+
+Returns dispatch ID.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.dispid # => 181
+
+--- event?
+#@todo
+
+Returns true if the method is event.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
+   puts method.event? # => true
+
+--- event_interface
+#@todo
+
+Returns event interface name if the method is event.
+
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+  method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
+  puts method.event_interface # =>  WorkbookEvents
+
+--- helpcontext
+#@todo
+
+Returns help context.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.helpcontext # => 65717
+
+--- helpfile
+#@todo
+
+Returns help file. If help file is not found, then the method
+returns nil.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.helpfile # => C:\...\VBAXL9.CHM
+
+--- helpstring
+#@todo
+
+Returns help string of OLE method. If the help string is not
+found, then the method returns nil.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
+   method = WIN32OLE_METHOD.new(tobj, 'Navigate')
+   puts method.helpstring # => Navigates to a URL or file.
+
+--- invkind
+#@todo
+
+Returns the method invoke kind.
+
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+  method = WIN32OLE_METHOD.new(tobj, 'Add')
+  puts method.invkind # => 1
+
+--- invoke_kind
+#@todo
+
+Returns the method kind string. The string is "UNKNOWN" or "PROPERTY"
+or "PROPERTY" or "PROPERTYGET" or "PROPERTYPUT" or "PROPERTYPPUTREF"
+or "FUNC".
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.invoke_kind # => "FUNC"
+
+--- name
+alias to_s
+
+call-seq
+
+   WIN32OLE_METHOD#name
+
+Returns the name of the method.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
+   puts method.name # => SaveAs
+
+--- offset_vtbl
+#@todo
+
+Returns the offset ov VTBL.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.offset_vtbl # => 40
+
+--- params
+#@todo
+
+returns array of WIN32OLE_PARAM object corresponding with method
+parameters.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
+   p method.params # => [Filename, FileFormat, Password, WriteResPassword,
+                         ReadOnlyRecommended, CreateBackup, AccessMode,
+                         ConflictResolution, AddToMru, TextCodepage,
+                         TextVisualLayout]
+
+--- return_type
+#@todo
+
+Returns string of return value type of method.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.return_type # => Workbook
+
+--- return_type_detail
+#@todo
+
+Returns detail information of return value type of method. The
+information is array.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   p method.return_type_detail # => ["PTR", "USERDEFINED", "Workbook"]
+
+--- return_vtype
+#@todo
+
+Returns number of return value type of method.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.return_vtype # => 26
+
+--- size_opt_params
+#@todo
+
+Returns the size of optional parameters.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
+   puts method.size_opt_params # => 4
+
+--- size_params
+#@todo
+
+Returns the size of arguments of the method.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
+   puts method.size_params # => 11
+
+--- name
+alias to_s
+
+call-seq
+
+   WIN32OLE_METHOD#name
+
+Returns the name of the method.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
+   puts method.name # => SaveAs
+
+--- visible?
+#@todo
+
+Returns true if the method is public.
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   method = WIN32OLE_METHOD.new(tobj, 'Add')
+   puts method.visible? # => true
+
