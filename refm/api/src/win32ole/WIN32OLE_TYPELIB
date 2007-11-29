@@ -1,4 +1,4 @@
-= classes WIN32OLE_TYPELIB < Object
+= class WIN32OLE_TYPELIB < Object
 WIN32OLE_TYPELIB objects represent OLE tyblib information.
 
 == Class Methods
