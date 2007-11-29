@@ -559,7 +559,7 @@ typeclass は以下のいずれかです。
 --- TypeValue
 #@todo
 
-= class Resolv::DNS::Resource::IN::WKS < Resolv::DNS::Resource::WKS
+= class Resolv::DNS::Resource::IN::WKS < Resolv::DNS::Resource
 
 == Class Methods
 
@@ -936,7 +936,7 @@ typeclass は以下のいずれかです。
 --- subdomain_of?(other)
 #@todo
 
-= class Resolv::DNS::Resource < Resource::DNS::Query
+= class Resolv::DNS::Resource < Resolv::DNS::Query
 
 == Class Methods
 
