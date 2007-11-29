@@ -71,7 +71,9 @@ fileutils
 #@if (version <= "1.6.8")
 final
 #@end
+#@until 1.9.0
 finalize
+#@end
 find
 forwardable
 ftools
