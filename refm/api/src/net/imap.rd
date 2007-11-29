@@ -1243,18 +1243,18 @@ Error raised when a response from the server is non-parseable.
 Superclass of all errors used to encapsulate "fail" responses
 from the server.
 
-= class Net::IMAP::NoResponseError < Net::IMAP::ResposeError
+= class Net::IMAP::NoResponseError < Net::IMAP::ResponseError
 
 Error raised upon a "NO" response from the server, indicating
 that the client command could not be completed successfully.
 
-= class Net::IMAP::BadResponseError < Net::IMAP::ResposeError
+= class Net::IMAP::BadResponseError < Net::IMAP::ResponseError
 
 Error raised upon a "BAD" response from the server, indicating
 that the client command violated the IMAP protocol, or an internal
 server failure has occurred.
 
-= class Net::IMAP::ByeResponseError < Net::IMAP::ResposeError
+= class Net::IMAP::ByeResponseError < Net::IMAP::ResponseError
 
 Error raised upon a "BYE" response from the server, indicating 
 that the client is not being allowed to login, or has been timed

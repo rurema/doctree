@@ -733,7 +733,7 @@ Range: ヘッダの示す範囲を Range オブジェクトで返します。
 r は Range オブジェクト、i, len は始点と長さです。
 = class Net::HTTPRequest < Object
 
-include HTTPHeader
+include Net::HTTPHeader
 
 HTTP リクエストを抽象化するクラスです。
 Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
