@@ -120,7 +120,6 @@ net/http
 net/https
 net/imap
 net/pop
-net/protocol
 net/smtp
 net/telnet
 net/telnets
