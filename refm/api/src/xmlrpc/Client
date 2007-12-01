@@ -115,7 +115,7 @@ The method returns the return-value from the RPC
 The type of the return-value is one of the above shown,
 only that a Bignum is only allowed when it fits in 32-bit and
 that a XML-RPC (('dateTime.iso8601')) type is always returned as
-a [[unknown:XMLRPC::DateTime|URL:datetime.html]] object and
+a [[c:XMLRPC::DateTime]] object and
 a Struct is never returned, only a Hash, the same for a Symbol, where
 always a String is returned.
 A XMLRPC::Base64 is returned as a String from xmlrpc4r version 1.6.1 on.

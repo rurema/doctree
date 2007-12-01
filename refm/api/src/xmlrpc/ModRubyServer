@@ -1,5 +1,10 @@
 #@since 1.8.0
 = class XMLRPC::ModRubyServer < XMLRPC::BasicServer
+
+Implements a XML-RPC server, which works with Apache mod_ruby.
+Use it in the same way as CGIServer!
+
+== Superclass
 == class methods
 --- new(*args)
 #@todo

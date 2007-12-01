@@ -1,3 +1,5 @@
+require xmlrpc/datetime
+
 XML-RPC サーバのためのライブラリです。
 
 ==== CGI-based Server

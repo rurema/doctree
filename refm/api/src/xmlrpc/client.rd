@@ -1,3 +1,5 @@
+require xmlrpc/datetime
+
 XML-RPC クライアントのためのライブラリです。
 
   require "xmlrpc/client"

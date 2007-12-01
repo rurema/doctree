@@ -520,6 +520,7 @@ wsdl/soap/wsdl2ruby
 #@end
 xmlrpc
 xmlrpc/client
+xmlrpc/datetime
 xmlrpc/server
 #@since 1.8.2
 xsd/codegen
