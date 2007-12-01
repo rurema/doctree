@@ -4,12 +4,11 @@
 Implements a XML-RPC server, which works with Apache mod_ruby.
 Use it in the same way as CGIServer!
 
-== Superclass
-== class methods
+== Class Methods
 --- new(*args)
 #@todo
 
-== instance methods
+== Instance Methods
 --- serve
 #@todo
 
