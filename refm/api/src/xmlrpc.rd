@@ -1,9 +1,12 @@
 #@since 1.8.0
 XML-RPC を扱うためのライブラリです。
 
+このページは xmlrpc ライブラリのまとめのページであり、require 'xmlrpc' を実行しても
+エラーになることに注意して下さい。
+
 === Author and Copyright
 
-Copyright (C) 2001-2004 by Michael Neumann (mailto:mneumann@ntecs.de)
+Copyright (C) 2001-2004 by Michael Neumann
 
 Released under the same term of license as Ruby.
 
@@ -306,13 +309,5 @@ You can change the XML-writer by calling method <i>set_writer</i>.
   * [[url:http://www.linux.or.jp/JF/JFdocs/XML-RPC-HOWTO/xmlrpc-howto-ruby.html]]
   * [XML-RPC] [[url:http://www.xmlrpc.com/spec]]
   * [[url:http://jp.rubyist.net/magazine/?0007-BundledLibraries]]
-
-#@include(xmlrpc/BasicServer)
-#@include(xmlrpc/CGIServer)
-#@include(xmlrpc/ModRubyServer)
-#@include(xmlrpc/Server)
-#@include(xmlrpc/WEBrickServlet)
-#@include(xmlrpc/Client)
-#@include(xmlrpc/Client__Proxy)
 
 #@end
