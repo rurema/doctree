@@ -120,6 +120,7 @@ net/http
 net/https
 net/imap
 net/pop
+net/protocol
 net/smtp
 net/telnet
 net/telnets
@@ -518,6 +519,8 @@ wsdl/soap/wsdl2ruby
 #@end
 #@end
 xmlrpc
+xmlrpc/client
+xmlrpc/server
 #@since 1.8.2
 xsd/codegen
 #@end

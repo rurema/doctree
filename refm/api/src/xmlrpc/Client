@@ -5,6 +5,7 @@
 = class XMLRPC::Client < Object
 
 Class XMLRPC::Client provides remote procedure calls to a XML-RPC server.
+
 After setting the connection-parameters with [[unknown:XMLRPC::Client.new]] which
 creates a new XMLRPC::Client instance, you can execute a remote procedure
 by sending the [[m:XMLRPC::Client#call]] or [[m:XMLRPC::Client#call2]]
