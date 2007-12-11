@@ -567,4 +567,18 @@ yday は 1 から数えます。
 自身の表す時刻が水曜日である場合に true を返します。
 そうでない場合に false を返します。
 
+--- nsec    -> Integer
+--- tv_nsec -> Integer
+#@todo
+
+Returns just the number of nanoseconds for time.
+
+   t = Time.now        #=> 2007-11-17 15:18:03 +0900
+   "%10.9f" % t.to_f   #=> "1195280283.536151409"
+   t.nsec              #=> 536151406
+
+The lowest digit of to_f and nsec is different because IEEE 754
+double is not accurate enough to represent nanoseconds from the
+Epoch. The accurate value is returned by nsec.
+
 #@end
