@@ -1069,7 +1069,7 @@ at end of file.
 Reads a character as with IO#getc, but raises an EOFError on
 end of file.
 
---- close_on_exec = bool    -> bool
+--- close_on_exec= bool    -> bool
 #@todo
 
 Sets a close-on-exec flag.
