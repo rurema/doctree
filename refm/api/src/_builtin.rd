@@ -5,6 +5,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/ARGF)
 #@include(_builtin/ArgumentError)
 #@include(_builtin/Array)
+#@since 1.9.0
+#@include(_builtin/BasicObject)
+#@end
 #@include(_builtin/Bignum)
 #@include(_builtin/Binding)
 #@include(_builtin/Class)

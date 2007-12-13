@@ -1,4 +1,8 @@
+#@since 1.9.0
+= class Object < BasicObject
+#@else
 = class Object
+#@end
 
 include Kernel
 

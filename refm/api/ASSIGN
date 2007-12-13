@@ -5,6 +5,7 @@
 _builtin/ARGF                   kouya           done
 _builtin/ArgumentError          snoozer05       done
 _builtin/Array                  sheepman        done
+_builtin/BasicObject
 _builtin/Bignum                 ujihisa         done
 _builtin/Binding                sheepman        done
 _builtin/Class                  sheepman        done
@@ -460,7 +461,7 @@ win32/registry
 win32/resolv
 win32ole
 wsdl
-xmlrpc
+xmlrpc                          
 xsd
 yaml                            kouya
 yaml/store
