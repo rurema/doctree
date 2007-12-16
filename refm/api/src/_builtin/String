@@ -1,7 +1,9 @@
 = class String < Object
 
 include Comparable
+#@until 1.9.0
 include Enumerable
+#@end
 
 文字列のクラスです。
 NUL 文字を含む任意のバイト列を扱うことができます。
@@ -2594,8 +2596,5 @@ Returns the Encoding object that represents the encoding of obj.
 #@todo
 
 Changes the encoding to encoding and returns self.
-
---- ~
-#@todo
 
 #@end
