@@ -5,7 +5,7 @@
 _builtin/ARGF                   kouya           done
 _builtin/ArgumentError          snoozer05       done
 _builtin/Array                  sheepman        done
-_builtin/BasicObject
+_builtin/BasicObject		yugui
 _builtin/Bignum                 ujihisa         done
 _builtin/Binding                sheepman        done
 _builtin/Class                  sheepman        done
