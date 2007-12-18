@@ -51,6 +51,8 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @param pid 子スレッドのプロセス ID を整数で指定します。
 
+@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
     pid = fork {
       # child
       sleep 3
@@ -60,8 +62,6 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
     p th.value
 
     # => nil
-
-@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 #@end
 
@@ -78,9 +78,9 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 @param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
-@see [[man:exit(3)]]
-
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
+
+@see [[man:exit(3)]]
 
 #@end
 
@@ -225,7 +225,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 動作の詳細はプラットフォームに依存します。
 実効ユーザ ID 以外のユーザ ID も変更されるかも知れません。
 
-@param euid 実効ユーザ ID を整数で指定します。
+@param uid 実効ユーザ ID を整数で指定します。
 
 @raise Errno::EXXX 権限がない場合に発生します。
 
@@ -352,9 +352,6 @@ root だけがこのメソッドを呼ぶことができます。
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
 
 @see [[man:getpgrp(2)]]
-
-#@# 1.6.7 までは、getpgid() は例外を発生させていませんでした。
-#@# p Process.getpgid(1000000) # => -1
 
 --- getpriority(which, who)    -> Integer
 
