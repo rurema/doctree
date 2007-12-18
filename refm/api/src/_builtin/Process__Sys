@@ -45,6 +45,8 @@
 
 システムコールの [[man:setgid(2)]] を呼びます。
 
+@param id システムコールの引数を整数で指定します。
+
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 @raise Errno::EXXX システムコールに失敗した場合に発生します。
@@ -52,6 +54,8 @@
 --- setruid(id)    -> nil
 
 システムコールの setruid を呼びます。
+
+@param id システムコールの引数を整数で指定します。
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
@@ -61,6 +65,8 @@
 
 システムコールの setrgid を呼びます。
 
+@param id システムコールの引数を整数で指定します。
+
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 @raise Errno::EXXX システムコールに失敗した場合に発生します。
@@ -68,6 +74,8 @@
 --- seteuid(id)    -> nil
 
 システムコールの [[man:seteuid(2)]] を呼びます。
+
+@param id システムコールの引数を整数で指定します。
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
@@ -77,6 +85,8 @@
 
 システムコールの [[man:setegid(2)]] を呼びます。
 
+@param id システムコールの引数を整数で指定します。
+
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 @raise Errno::EXXX システムコールに失敗した場合に発生します。
@@ -84,6 +94,10 @@
 --- setreuid(rid, eid)    -> nil
 
 システムコールの [[man:setreuid(2)]] を呼びます。
+
+@param rid システムコールの引数を整数で指定します。
+
+@param eid システムコールの引数を整数で指定します。
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
@@ -93,6 +107,10 @@
 
 システムコールの [[man:setregid(2)]] を呼びます。
 
+@param rid システムコールの引数を整数で指定します。
+
+@param eid システムコールの引数を整数で指定します。
+
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 @raise Errno::EXXX システムコールに失敗した場合に発生します。
@@ -101,6 +119,12 @@
 
 システムコールの setresuid を呼びます。
 
+@param rid システムコールの引数を整数で指定します。
+
+@param eid システムコールの引数を整数で指定します。
+
+@param sid システムコールの引数を整数で指定します。
+
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
 @raise Errno::EXXX システムコールに失敗した場合に発生します。
@@ -108,6 +132,12 @@
 --- setresgid(rid, eid, sid)    -> nil
 
 システムコールの setresgid を呼びます。
+
+@param rid システムコールの引数を整数で指定します。
+
+@param eid システムコールの引数を整数で指定します。
+
+@param sid システムコールの引数を整数で指定します。
 
 @raise NotImplementedError システムコールが現在のプラットフォームで提供されていない場合に発生します。
 
