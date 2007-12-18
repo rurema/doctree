@@ -1,8 +1,4 @@
-#@since 1.9.0
 = class NameError < StandardError
-#@else
-= class NameError < ScriptError
-#@end
 
 未定義のローカル変数や定数を使用したときに発生します。
 
