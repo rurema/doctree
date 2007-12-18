@@ -12,7 +12,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Binding)
 #@include(_builtin/Class)
 #@include(_builtin/Comparable)
+#@until 1.9.0
 #@include(_builtin/Continuation)
+#@end
 #@include(_builtin/Data)
 #@include(_builtin/Dir)
 #@include(_builtin/ENV)

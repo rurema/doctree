@@ -23,6 +23,9 @@ cgi
 cgi/session
 cgi/session/pstore
 complex
+#@since 1.9.0
+continuation
+#@end
 #@since 1.8.0
 csv
 #@end
@@ -519,6 +522,7 @@ wsdl/soap/wsdl2ruby
 #@end
 xmlrpc
 xmlrpc/client
+xmlrpc/config
 xmlrpc/datetime
 xmlrpc/server
 #@since 1.8.2
