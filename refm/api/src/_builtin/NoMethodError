@@ -1,4 +1,4 @@
-#@if (version >= "1.7.0")
+#@since 1.8.0
 = class NoMethodError < NameError
 
 定義されていないメソッドの呼び出しが行われたときに発生します。
@@ -17,7 +17,6 @@
 
 == Class Methods
 
-#@if (version >= "1.8.0")
 --- new(error_message = "", name = nil, args = nil) -> NoMethodError
 
 例外オブジェクトを生成して返します。
@@ -37,11 +36,9 @@
   
   # => "foo"
   [1, 2, 3]
-#@end
 
 == Instance Methods
 
-#@if (version >= "1.8.0")
 --- args -> [object]
 
 メソッド呼び出しに使われた引数を配列で返します。
@@ -59,5 +56,6 @@
   # => #<NoMethodError: undefined method `foobar' for main:Object>
        :foobar
        [1, 2, 3]
+
 #@end
-#@end
+
