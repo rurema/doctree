@@ -74,6 +74,9 @@ eregex
 etc
 expect
 fcntl
+#@since 1.9.0
+fiber
+#@end
 #@since 1.8.0
 fileutils
 #@end
