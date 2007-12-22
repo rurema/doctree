@@ -5,7 +5,7 @@
 _builtin/ARGF                   kouya           done
 _builtin/ArgumentError          snoozer05       done
 _builtin/Array                  sheepman        done
-_builtin/BasicObject		yugui
+_builtin/BasicObject            yugui
 _builtin/Bignum                 ujihisa         done
 _builtin/Binding                sheepman        done
 _builtin/Class                  sheepman        done
@@ -453,7 +453,7 @@ tracer
 tsort
 un
 uri                             sheepman
-weakref
+weakref                         sheepman
 webrick                         sheepman
 webrick/cgi                     sheepman
 webrick/ssl                     sheepman
