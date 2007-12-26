@@ -56,6 +56,32 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
+#@since 1.9.0
+#@# exp
+--- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
+[[RFC:2616]] で定めらてた日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:DateTime._httpdate]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
+#@since 1.9.0
+#@# exp
+--- iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+いくつかの代表的な [[ISO:8601]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+@param str 日付をあらわす文字列
+
+[[m:DateTime._iso8601]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
 --- jd(jd = 0, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 ユリウス日に相当する日時オブジェクトを生成します。
 
@@ -68,6 +94,18 @@
 @param offset 時差
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
+
+#@since 1.9.0
+#@# exp
+--- jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+いくつかの代表的な [[JIS:X 0301]] 形式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:DateTime._jisx0301]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
 
 --- now(start = Date::ITALY) -> DateTime
 現在の時刻に相当する日時オブジェクトを生成します。
@@ -88,6 +126,31 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
+#@since 1.9.0
+#@# exp
+--- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
+--- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
+[[RFC:2822]] で定められた日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:DateTime._rfc2822]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
+#@since 1.9.0
+#@# exp
+--- rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+[[RFC:3339]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:DateTime._rfc3339]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
 --- today(start = Date::ITALY) -> Date
 このクラスでは利用できません。
 
@@ -103,6 +166,18 @@
 #@end
 #@end
 
+#@since 1.9.0
+#@# exp
+--- xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
+XML Schema による日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:DateTime._xmlschema]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
 == Instance Methods
 
 --- hour -> Integer
@@ -111,7 +186,9 @@
 #@since 1.9.0
 --- iso8601(n = 0) -> String
 --- rfc3339(n = 0) -> String
-[[ISO:8601]] 書式の文字列を返します。
+#@# exp
+--- xmlschema(n = 0) -> String
+[[ISO:8601]] 書式の文字列を返します (XML Schema の dateTime 相当)。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
 #@end
 
@@ -136,7 +213,7 @@
 self を複製して、その時差を設定しなおします。
 引数を省略した場合は、零 (協定世界時) になります。
 
-[[m:Date.new]] も参照してください。
+[[m:DateTime.new]] も参照してください。
 
 @param offset 時差
 

@@ -56,7 +56,7 @@ include Comparable
 
 ==== 修正ユリウス日
 
-修正ユリウス日は西暦1858年11月17日 (グレゴリオ暦) 零時 (協定世界時) を
+修正ユリウス日は西暦1858年11月17日 (グレゴリオ暦) 正子/零時 (協定世界時) を
 暦元とした通日 (経過日数) です。
 
 この文書で、天文学的な修正ユリウス日とは、本来の修正ユリウス日と同じも
@@ -191,6 +191,68 @@ ABBR_DAYNAMES[0] == "Sun" です。
 
 @param year 年
 
+#@since 1.9.0
+#@# exp
+--- _httpdate(str) -> Hash
+このメソッドは [[m:Date.httpdate]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
+
+[[m:Date.httpdate]] も参照してください。
+
+@param str 日付をあらわす文字列
+
+--- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> Date
+[[RFC:2616]] で定めらてた日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:Date._httpdate]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
+#@since 1.9.0
+#@# exp
+--- _iso8601(str) -> Hash
+このメソッドは [[m:Date.iso8601]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
+
+[[m:Date.iso8601]] も参照してください。
+
+@param str 日付をあらわす文字列
+
+--- iso8601(str = '-4712-01-01', start = Date::ITALY) -> Date
+いくつかの代表的な [[ISO:8601]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+@param str 日付をあらわす文字列
+
+[[m:Date._iso8601]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
+#@since 1.9.0
+#@# exp
+--- _jisx0301(str) -> Hash
+このメソッドは [[m:Date.jisx0301]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
+
+[[m:Date.jisx0301]] も参照してください。
+
+@param str 日付をあらわす文字列
+
+--- jisx0301(str = '-4712-01-01', start = Date::ITALY) -> Date
+いくつかの代表的な [[JIS:X 0301]] 形式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:Date._jisx0301]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
 #@since 1.8.6
 --- jd(jd = 0, start = Date::ITALY) -> Date
 #@else
@@ -271,29 +333,99 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@#? --- ordinal_to_jd(year, yday, start = Date::GREGORIAN) -> Numeric
 
 #@since 1.8.0
+#@since 1.9.0
+#@# exp
+--- _parse(str, hints = {}) -> Hash
+#@else
 --- _parse(str, complete = false) -> Hash
+#@end
 このメソッドは [[m:Date.parse]] と似ていますが、日付オブジェクトを生成せずに、
 見いだした要素をハッシュで返します。
 
 [[m:Date.parse]] も参照してください。
 
 @param str 日付をあらわす文字列
+#@since 1.9.0
+#@# exp
+@param hints ヒント
+#@else
 @param complete 年を補完するか
+#@end
 
+#@since 1.9.0
+#@# exp
+--- parse(str = '-4712-01-01', hints = {}, start = Date::ITALY) -> Date
+#@else
 --- parse(str = '-4712-01-01', complete = false, start = Date::ITALY) -> Date
+#@end
 与えられた日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
-省略できる最後の引数が真で、年が00から99の範囲であれば、
+#@since 1.9.0
+#@# exp
+年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+この振舞いを抑止したい場合は、ヒントとして、complete:false を与えます。
+#@else
+complete が真で、年が "00" から "99" の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
 なお、省略した場合は、偽とみなします。
+#@end
 
 [[m:Date._parse]] も参照してください。
 
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
+#@since 1.9.0
+#@# exp
+@param hints ヒント
+#@else
+@param complete 年を補完するか
+#@end
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付
+
+#@since 1.9.0
+#@# exp
+--- _rfc2822(str) -> Hash
+--- _rfc822(str) -> Hash
+このメソッドは [[m:Date.rfc2822]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
+
+[[m:Date.rfc2822]] も参照してください。
+
+@param str 日付をあらわす文字列
+
+--- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
+--- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
+[[RFC:2822]] で定められた日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:Date._rfc2822]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
+#@since 1.9.0
+#@# exp
+--- _rfc3339(str) -> Hash
+このメソッドは [[m:Date.rfc3339]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
+
+[[m:Date.rfc3339]] も参照してください。
+
+@param str 日付をあらわす文字列
+
+--- rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> Date
+[[RFC:3339]] 書式の日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:Date._rfc3339]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
 
 --- _strptime(str, format = '%F') -> Hash
 このメソッドは [[m:Date.strptime]] と似ていますが、日付オブジェクトを生成せずに、
@@ -422,6 +554,26 @@ ABBR_DAYNAMES[0] == "Sun" です。
 #@#? --- weeknum_to_jd(year, week, day, f = 0, start = Date::GREGORIAN) -> Numeric
 #@end
 
+#@since 1.9.0
+#@# exp
+--- _xmlschema(str) -> Hash
+このメソッドは [[m:Date.xmlschema]] と似ていますが、日付オブジェクトを生成せずに、
+見いだした要素をハッシュで返します。
+
+[[m:Date.xmlschema]] も参照してください。
+
+@param str 日付をあらわす文字列
+
+--- xmlschema(str = '-4712-01-01', start = Date::ITALY) -> Date
+XML Schema による日付を解析し、
+その情報に基づいて日付オブジェクトを生成します。
+
+[[m:Date._xmlschema]] も参照してください。
+
+@param str 日付をあらわす文字列
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+#@end
+
 #@since 1.8.0
 #@#? --- zone_to_diff(zone) -> Rational
 #@end
@@ -535,6 +687,10 @@ n は数値でなければなりません。
 グレゴリオ暦なら真を返します。
 
 #@since 1.9.0
+#@# exp
+--- httpdate -> String
+[[RFC:2616]] ([[RFC:1123]]) で定められた書式の文字列を返します。
+
 --- iso8601 -> String
 --- rfc3339 -> String
 [[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
@@ -648,7 +804,7 @@ n 年前を返します。
 #@since 1.9.0
 --- rfc2822 -> String
 --- rfc822 -> String
-[[RFC:2822]] 書式の文字列を返します。
+[[RFC:2822]] で定められた書式の文字列を返します。
 #@end
 
 #@since 1.9.0
@@ -750,6 +906,12 @@ limit は日付オブジェクトでなければなりません、
 水曜日なら真を返します。
 #@end
 
+#@since 1.9.0
+#@# exp
+--- xmlschema -> String
+XML Scheme (date) による書式の文字列を返します。
+#@end
+
 --- yday -> Integer
 年の日を返します (1-366)。
 
@@ -762,11 +924,11 @@ limit は日付オブジェクトでなければなりません、
 == Instance Methods
 
 --- to_date -> Date
-対応するもっともふさわしいと思われる [[c:Date]] オブジェクトを返します。
+対応する [[c:Date]] オブジェクトを返します。
 
 --- to_datetime -> DateTime
-対応するもっともふさわしいと思われる [[c:DateTime]] オブジェクトを返します。
+対応する [[c:DateTime]] オブジェクトを返します。
 
 --- to_time -> Time
-対応するもっともふさわしいと思われる [[c:Time]] オブジェクトを返します。
+対応する [[c:Time]] オブジェクトを返します。
 #@end
