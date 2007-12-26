@@ -5,9 +5,9 @@
 接続しているはずのサーバのホスト名と証明書に記載されているホスト名が
 一致するかをライブラリの使用者が各自実装する必要があります。
 
-[[m:URL:http:#/www.ipa.go.jp/security/rfc/RFC2818JA.html#31]]
+[[url:http://www.ipa.go.jp/security/rfc/RFC2818JA.html#31]]
 
-[[unknown:ruby-dev:25254]]
+[[ruby-dev:25254]]
 
 === Example
 

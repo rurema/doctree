@@ -84,7 +84,7 @@ ArgumentError が発生します。
 
 passwd データベースを検索し、
 ユーザ ID が uid である passwd エントリを返します。
-戻り値は [[m:etc#Etc.getpwnam]] と同様です。
+戻り値は [[m:Etc.getpwnam]] と同様です。
 引数を省略した場合には [[man:getuid(2)]] の値を用います。
 
 詳細は [[man:getpwuid(3)]] を参照してください。

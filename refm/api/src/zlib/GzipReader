@@ -102,7 +102,7 @@ Zlib::GzipFile::LengthError 例外を発生させます。
 --- rewind
 #@todo
 
-ファイルポインタを [[m:Zlib::GzipReader#GzipReader.new]] を呼び出した直後の
+ファイルポインタを [[m:Zlib::GzipReader.new]] を呼び出した直後の
 時点に戻します。関連付けられている IO オブジェクトに
 seek メソッドが定義されている必要があります。
 

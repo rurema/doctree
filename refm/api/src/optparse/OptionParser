@@ -276,7 +276,7 @@ pat にはオプションの引数に許すパターンを表す正規表現で与えます。
   # ruby command --username=ruby_user
   # ruby command --username=ruby.user #=> Error
 
-@param pat オプションの引数に許すパターンを表す正規表現で与えます。
+@param pat オプションの引数に許すパターンを表す正??表現で与えます。
 
 @param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
@@ -537,7 +537,7 @@ default_argv をパースします。
 
 @param argv パースしたい配列を指定します。
 
-@param opts 引数を文字列で指定します。[[m:Kernel:getopts]] を参照して下さい。
+@param opts 引数を文字列で指定します。[[m:Kernel.getopts]] を参照して下さい。
 
 @raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
 
