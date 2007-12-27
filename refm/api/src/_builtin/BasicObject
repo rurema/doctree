@@ -1,3 +1,165 @@
 #@since 1.9.0
 = class BasicObject
+特殊な用途のために恣意的にほとんど何も定義されていないクラスです。
+[[c:Object]]クラスの親にあたります。Ruby 1.9.0以降で導入されました。
+
+==== 性質
+BasicObject クラスは Object クラスからほとんどのメソッドを取り除いたクラスです。
+
+Object クラスは様々な便利なメソッドや [[c:Kernel]] から受け継いだ関数的メソッド
+を多数有しています。
+これに対して、 BasicObject クラスはオブジェクトの同一性を識別したりメソッドを呼んだりする
+最低限の機能の他は一切の機能を持っていません。
+
+==== 用途
+基本的にはほぼすべてのクラスの親は [[c:Object]] と考えて差し支えありません。
+しかし、ある種のクラスを定義する際には Object クラスは持っているメソッドが多すぎる
+場合があります。
+
+例えば、 [[m:Object#method_missing]]を利用して Proxy パターンを実装する場合には
+Object クラスに定義済みのメソッドはプロクシできないという問題が発生します。
+このような場合に Object ではなく BasicObject から派生して問題を解決できます。
+
+==== 注意
+通常のクラスは Object またはその他の適切なクラスから派生すべきです。
+真に必要な場合にだけ BasicObject から派生してください。
+
+==== 例
+例
+ class Proxy < BasicObject
+   def initialize(target)
+     @target = target
+   end
+ 
+   def method_missing(message, *args)
+     @target.__send__(message, *args)
+   end
+ end
+ 
+ proxy = Proxy.new("1")
+ proxy.to_i #=> 1
+
+== Instance Methods
+--- ==(other) -> bool
+オブジェクトが other と等しければ真を、さもなくば偽を返します。
+
+このメソッドは各クラスの性質に合わせて、サブクラスで再定義するべきです。
+多くの場合、オブジェクトの内容が等しければ真を返すように (同値性を判定するように) 再定義
+することが期待されています。
+
+デフォルトでは [[m:Object#equal?]] と同じオブジェクトの同一性になっています。
+
+@param other 比較対象となるオブジェクト
+@return other が self と同値であれば真、さもなくば偽
+@see [[m:BasicObject#equal?]]
+@see [[m:Object#==]]
+@see [[m:Object#equal?]]
+@see [[m:Object#eql?]]
+
+--- equal?(other) -> bool
+オブジェクトが other と同一であれば真を、さもなくば偽を返します。
+
+このメソッドは2つのオブジェクトが同一のものであるかどうかを判定します。
+一般にはこのメソッドを決して再定義すべきでありません。
+ただし、 [[c:BasicObject]] の位置づけ上、どうしても再定義が必要な用途もあるでしょう。
+再定義する際には自分が何をしているのかよく理解してから実行してください。
+
+@param other 比較対象となるオブジェクト
+@return other が self 自身であれば真、さもなくば偽
+@see [[m:Object#equal?]]
+@see [[m:Object#==]]
+@see [[m:Object#eql?]]
+
+--- ! -> bool
+オブジェクトを真偽値として評価し、その論理否定を返します。
+
+このメソッドは self が nil または false であれば真を、さもなくば偽を返します。
+主に論理式の評価に伴って副作用を引き起こすことを目的に
+再定義するものと想定されています。
+
+このメソッドを再定義しても Ruby の制御式において nil や false 以外が偽として
+扱われることはありません。
+
+@return オブジェクトが偽であれば真、さもなくば偽
+
+例
+ class NegationRecorder < BasicObject
+   def initialize
+     @count = 0
+   end
+   attr_reader :count
+
+   def !
+     @count += 1
+     super
+   end
+ end
+
+ recorder = NegationRecorder.new
+ !recorder
+ !!!!!!!recorder
+ puts 'hoge' if !recorder
+
+ puts recorder.count #=> 3
+
+例
+ class AnotherFalse < BasicObject
+   def !
+     true
+   end
+ end
+ another_false = AnotherFalse.new
+
+ # another_falseは*真*
+ puts "another false is a truth" if another_false
+   #=> "another false is a truth"
+
+--- !=(other) -> bool
+オブジェクトが other と等しくないことを判定します。
+
+デフォルトでは self == other を評価した後に結果を論理否定して返します。
+このため、サブクラスで [[m:BasicObject#==]] を再定義しても != とは自動的に整合性が
+とれるようになっています。
+
+ただし、 [[m:BasicObject#!=]] 自身や [[m:BasicObject#!]] を再定義した際には、ユーザーの責任で
+整合性を保たなくてはなりません。
+
+このメソッドは主に論理式の評価に伴って副作用を引き起こすことを目的に
+再定義するものと想定されています。
+
+@param other 比較対象となるオブジェクト
+@see [[m:BasicObject#==]]
+@see [[m:BasicObject#!]]
+
+例
+ class NonequalityRecorder < BasicObject
+   def initialize
+     @count = 0
+   end
+   attr_reader :count
+
+   def !=(other)
+     @count += 1
+     super
+   end
+ end
+ recorder = NonequalityRecorder.new
+
+ recorder != 1
+ puts 'hoge' if recorder != "str"
+
+ p recorder.count #=> 2
+
+
+
+--- __send__(name, *args) -> object
+--- __send__(name, *args) { .... } -> object
+オブジェクトのメソッド name を args を引数にして呼び出し、メソッドの結果を返します。
+
+ブロック付きで呼ばれたときはブロックもそのまま引き渡します。
+
+@param name 呼び出すメソッドの名前。 [[c:Symbol]] または文字列で指定します。
+@param name args メソッドに渡す任意個の引数
+@see [[m:Object#__send__]]
+
 #@end
