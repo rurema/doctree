@@ -88,13 +88,17 @@ finalize
 #@end
 find
 forwardable
+#@until 1.9.0
 ftools
+#@end
 gdbm
 #@since 1.8.0
 generator
 #@end
 getoptlong
+#@until 1.9.0
 getopts
+#@end
 #@since 1.8.0
 gserver
 iconv
@@ -111,7 +115,9 @@ irb
 irb/completion
 irb/frame
 irb/xmp
+#@until 1.9.0
 jcode
+#@end
 #@since 1.9.0
 json
 #@end
@@ -119,7 +125,9 @@ kconv
 #@since 1.8.1
 logger
 #@end
+#@until 1.9.0
 mailread
+#@end
 mathn
 matrix
 #@until 1.9.0
@@ -129,14 +137,18 @@ mkmf
 monitor
 mutex_m
 net/ftp
+#@until 1.9.0
 net/ftptls
+#@end
 net/http
 net/https
 net/imap
 net/pop
 net/smtp
 net/telnet
+#@until 1.9.0
 net/telnets
+#@end
 nkf
 observer
 open-uri
@@ -148,8 +160,10 @@ optparse/shellwords
 optparse/time
 optparse/uri
 ostruct
+#@until 1.9.0
 parsearg
 parsedate
+#@end
 #@since 1.8.0
 pathname
 #@end
@@ -196,7 +210,7 @@ rss
 #@since 1.9.0
 rubygems
 #@end
-#@since 1.8.0
+#@if("1.8.0" <= version and version < "1.9.0")
 rubyunit
 runit/assert
 runit/cui/testrunner
@@ -205,6 +219,8 @@ runit/testcase
 runit/testresult
 runit/testsuite
 runit/topublic
+#@end
+#@since 1.8.0
 scanf
 #@end
 sdbm
@@ -220,7 +236,7 @@ sha1
 shell
 shellwords
 singleton
-#@since 1.8.1
+#@if("1.8.1" <= version and version < "1.9.0")
 soap
 soap/attachment
 soap/baseData
@@ -447,7 +463,7 @@ webrick/ssl
 webrick/utils
 win32/registry
 win32ole
-#@since 1.8.1
+#@if("1.8.1" <= version and version < "1.9.0")
 wsdl
 wsdl/binding
 wsdl/data
@@ -540,10 +556,10 @@ xmlrpc/client
 xmlrpc/config
 xmlrpc/datetime
 xmlrpc/server
-#@since 1.8.2
+#@if("1.8.2" <= version and version < "1.9.0")
 xsd/codegen
 #@end
-#@since 1.8.1
+#@if("1.8.1" <= version and version < "1.9.0")
 xsd
 xsd/datatypes
 xsd/datatypes1999
