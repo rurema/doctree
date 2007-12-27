@@ -15,7 +15,7 @@ _builtin/Data                   sheepman        done
 _builtin/Dir                    sheepman        done
 _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
-_builtin/Encoding
+_builtin/Encoding		yugui
 _builtin/Enumerable             aamine          done
 _builtin/Exception              sheepman        done
 _builtin/FalseClass             yamane          done
@@ -158,7 +158,7 @@ json
 kconv
 logger
 mailread
-mathn
+mathn				yugui
 matrix
 md5
 mkmf                            sheepman
@@ -194,7 +194,7 @@ profiler
 pstore
 pty
 racc/parser                     aamine
-rational
+rational			yugui
 rbconfig
 readbytes
 readline
