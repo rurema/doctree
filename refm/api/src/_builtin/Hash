@@ -92,7 +92,7 @@ converted hash or nil if obj cannot be converted for any reason.
 
 以下は配列からハッシュを生成する方法の例です。
 
-#@if (version < "1.7.0")
+#@if (version < "1.8.0")
 (1) [キー, 値, ...] の配列からハッシュへ
 
   ary = [1,"a", 2,"b", 3,"c"]
@@ -130,7 +130,7 @@ converted hash or nil if obj cannot be converted for any reason.
   #=> {1=>"a", 2=>"b", 3=>"c"}
 
 #@end
-#@if ("1.7.0" >= version)
+#@if ("1.8.0" >= version)
 #@if (version < "1.9.0")
 (1) [キー, 値, ...] の配列からハッシュへ
 
@@ -584,12 +584,12 @@ key に関連づけられた値を返します。該当するキーが登録されていない時には、
 @see [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]]
 
 --- default -> object
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 --- default(key) -> object
 #@end
 
 ハッシュのデフォルト値を返します。
-#@if (version >= "1.7.0")
+#@if (version >= "1.8.0")
 ハッシュのデフォルト値がブロックで与えられている場合、1番目の形式だと
 返り値がnilになることに注意してください。
 
@@ -743,20 +743,19 @@ reject! は、要素を削除しなかった場合には nil を返し、
 ハッシュのキーと値を引数としてブロックを評価します。
 
 反復の際の評価順序は不定です。
-#@if (version >= "1.9.0")
+#@since 1.9.0
 ブロック付きの場合selfを、
 無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
 #@else
 self を返します。
 #@end
 
-#@if (version >= "1.8.0")
+#@if( version >= "1.8.0" and version < "1.9.0" )
 each と each_pair ではブロック引数の受渡し方が異なります。
 each は キーと値の配列を１引数で、each_pair は別々に２引数でブロックに値を渡します。
 これによりブロック引数をひとつだけ指定した場合の挙動が異なります。
 ブロック引数を２つ指定するようにすれば同じ挙動になります。
 
-#@end
   {:a=>1, :b=>2}.each {|a| p a}
   #=> [:a, 1]
       [:b, 2]
@@ -768,8 +767,23 @@ each は キーと値の配列を１引数で、each_pair は別々に２引数でブロックに値を渡しま
   {:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
   #=> [:a, 1]
       [:b, 2]
+#@end
+
+#@since 1.9.0
+each_pair は each のエイリアスです。
+
+  {:a=>1, :b=>2}.each {|a| p a}
+  #=> [:a, 1]
+      [:b, 2]
+ 
+  {:a=>1, :b=>2}.each_pair {|*a| p a} 
+  #=> [[:a, 1]]
+      [[:b, 2]]
   
-#@if (version >= "1.9.0")
+  {:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
+  #=> [:a, 1]
+      [:b, 2]
+
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
 #@end
 
@@ -1126,6 +1140,8 @@ matches. See also Array#rassoc.
    a.rassoc("four")   #=> nil
 
 
+#@end
+
 --- select {|key, value| block}   -> Hash
 #@todo
 
@@ -1135,8 +1151,6 @@ true.
    h = { "a" => 100, "b" => 200, "c" => 300 }
    h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
    h.select {|k,v| v < 200}  #=> {"a" => 100}
-
-#@end
 
 --- to_s   -> String
 --- inspect  -> String
