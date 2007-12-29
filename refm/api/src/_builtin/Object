@@ -677,7 +677,7 @@ id は obsolete なので、object_id か __id__ を使用してください。
 オブジェクトのハッシュ値を返します。[[c:Hash]] クラスでオブジェク
 トを格納するのに用いられています。
 
-メソッド hash は[[m:Object#equal?]]と組み合わせて Hash クラスで利用されますが、その際
+メソッド hash は [[m:Object#eql?]] と組み合わせて Hash クラスで利用されます。その際
 
   A.eql?(B) ならば A.hash == B.hash
 
