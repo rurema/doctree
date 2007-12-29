@@ -134,7 +134,7 @@ self を返します。
 @see [[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]]
 
 --- hash -> Fixnum
-ハッシュ値を返します
+ハッシュ値を返します。
 
   pi1 = 3.14
   pi2 = 3.14
