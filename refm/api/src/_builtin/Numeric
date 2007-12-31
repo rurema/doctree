@@ -177,6 +177,7 @@ include Comparable
                       | |     -          -          o          o          -
                       ~ |     -          -          o          o          -       
 #@end
+#@# 1.9.0 以降は微妙に違う部分がある。Fixnum#succ など。
 
 === 丸めメソッドの動作一覧
 
@@ -343,6 +344,9 @@ other が Numeric で比較できないオブジェクトの場合、
 
 数値などの immutable なオブジェクトは clone や dup が禁止されています。
   1.dup   # => in `clone': can't clone Fixnum (TypeError)
+
+@raise TypeError このメソッドを呼び出した場合に発生します
+
 #@else
 self を返します。
 #@end
@@ -414,7 +418,7 @@ div はメソッド / の呼び出しとして定義されています。
 
 
 --- quo(other)    -> Float
-#@since 1.8.0
+#@since 1.8.7
 --- fdiv(other)   -> Float
 #@end
 
@@ -455,6 +459,8 @@ divmod が返す商は [[m:Numeric#div]] と同じです。
    (-11).divmod(3.5)    #=> [-4, 3.0]
    (11.5).divmod(3.5)   #=> [3, 1.0]
 
+@see [[m:Numeric#div]], [[m:Numeric#modulo]]
+
 --- integer?    -> bool
 
 self が整数の時、真を返します。そうでない場合に false を返します。
@@ -475,7 +481,7 @@ self を other で割った余り r を返します。
 
 をみたす数です。
 余り r は、other と同じ符合になります。
-商  q は、[[m:Numeric#div]] (あるいは Integer#/)で求められます。
+商  q は、[[m:Numeric#div]] (あるいは [[m:Integer#/]])で求められます。
 modulo はメソッド % の呼び出しとして定義されています。
 
 @param other 自身を割る数を指定します。
