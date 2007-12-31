@@ -1,18 +1,160 @@
 #@since 1.9.0
+= class FiberError < StandardError
+Fiber に関するエラーが起きると発生します。
+
 = class Fiber
 
+ノンプリエンプティブな軽量スレッド(以下ファイバーと呼ぶ)を提供します。
+他の言語では coroutine あるいは semicoroutine と呼ばれることもあります。
+[[c:Thread]] と違いユーザレベルスレッドとして実装されています。
+
+[[c:Thread]] クラスが表すスレッドと違い、明示的に指定しない限り
+ファイバーのコンテキストは切り替わりません。
+またファイバーは親子関係を持ちます。Fiber#resume を呼んだファイバーが親になり
+呼ばれたファイバーが子になります。親子関係を壊すような遷移(例えば
+自分の親の親のファイバーへ切り替えるような処理)はできません。
+例外 FiberError が発生します。
+できることは 
+ * Fiber#resume により子へコンテキストを切り替える
+ * Fiber.yield により親へコンテキストを切り替える
+の二通りです。この親子関係は動的なものであり
+親ファイバーへコンテキストを切り替えた時点で解消されます。
+
+なお標準添付ライブラリ [[lib:fiber]] を require することにより、
+コンテキストの切り替えに制限のない [[m:Fiber#transfer]] が使えるようになります。
+任意のファイバーにコンテキストを切り替えることができます。
+
+ファイバーが終了するとその親にコンテキストが切り替わります。
+
+=== ショートチュートリアル
+
+Fiber は処理のあるポイントで他のルーチンにコンテキストを切り替え、またそのポイントから再開する
+という目的のために使います。逆をいえばその処理に必要な変数をすべてどこかに(例えばインスタンス変数として)
+保存しておけば Fiber を使わずに同じことが可能です。
+
+[[m:Fiber.new]] により与えられたブロックとともにファイバーを生成します。
+生成した Fiber に対して [[m:Fiber#resume]] を呼ぶことによりコンテキストを切り替えます。
+ブロック中に [[m:Fiber.yield]] を呼ぶと親にコンテキストを切り替えます。
+子ファイバーで与えた Fiber.yield の引数が、親での Fiber#resume の返り値になります。
+ f = Fiber.new do
+   n = 0
+   loop do
+     Fiber.yield(n)
+     n += 1
+   end
+ end
+ 
+ 5.times do
+  p f.resume
+ end
+ 
+ #=> 0
+     1
+     2
+     3
+     4
+
+以下は内部イテレータを外部イテレータに変換する例です。
+実際 [[c:Enumerable::Enumerator]] は Fiber を用いて実装されています。
+
+ def enum2gen(enum)
+   Fiber.new do
+     enum.each{|i|
+       Fiber.yield(i)
+     }
+   end
+ end
+ 
+ g = enum2gen(1..100)
+ 
+ p g.resume  #=> 1
+ p g.resume  #=> 2
+ p g.resume  #=> 3
+
+=== 注意
+
+Thread クラスが表すスレッド間をまたがるファイバーの切り替えはできません。
+例外 FiberError が発生します。
+
+ f = nil
+ Thread.new do
+   f = Fiber.new{}
+ end.join
+ f.resume
+ #=> t.rb:5:in `resume': fiber called across threads (FiberError)
+        from t.rb:5:in `<main>'
 
 == Class Methods
 
---- new
-#@todo
+--- new{|obj| ... } -> Fiber
 
---- yield
-#@todo
+与えられたブロックとともにファイバーを生成して返します。
+ブロックは [[m:Fiber#resume]] の引数をその引数として実行されます。
 
+ブロックが終了した場合は親にコンテキストが切り替わります。
+その時ブロックの評価値が返されます。
+
+ a = nil
+ f = Fiber.new do |obj|
+   a = obj
+   :hoge
+ end
+  
+ b = f.resume(:foo)
+ p a  #=> :foo
+ p b  #=> :hoge
+
+--- yield(*arg = nil)   -> object
+
+現在のファイバーの親にコンテキストを切り替えます。
+
+[[m:Fiber#resume]] が呼ばれるとこの時点から処理が再開されます。
+その時の Fiber#resume の引数を返します。
+
+@param arg 現在のファイバーの親に渡したいオブジェクトを指定します。
+
+@raise FiberError Fiber でのルートファイバーで呼ばれた場合に発生します。
+ 
+
+例:
+
+ a = b = nil
+ f = Fiber.new do
+   a = Fiber.yield(:hoge)
+ end
+  
+ b = f.resume()
+ f.resume(:foo)
+
+ p a  #=> :foo
+ p b  #=> :hoge
 
 == Instance Methods
---- resume
-#@todo
+--- resume(*arg = nil)   -> object
+
+self が表すファイバーへコンテキストを切り替えます。
+ファイバー中で [[m:Fiber.yield]] が呼ばれた場合はこの時点から処理が再開されます。
+その時 Fiber#yield の引数を返します。
+
+self は resume を呼んだファイバーの子となります。
+
+@param arg self が表すファイバーに渡したいオブジェクトを指定します。
+
+@raise FiberError 自身が既に終了している場合、コンテキストの切替が
+                  Thread クラスが表すスレッド間をまたがる場合、自身が resume を
+                  呼んだファイバーの親かその祖先である場合に発生します。
+
+例:
+
+ a = b = nil
+ f = Fiber.new do
+   a = Fiber.yield(:hoge)
+ end
+  
+ b = f.resume()
+ f.resume(:foo)
+
+ p a  #=> :foo
+ p b  #=> :hoge
 
 #@end
