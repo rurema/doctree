@@ -89,6 +89,7 @@ _builtin/Enumerable__Enumerator yugui           done
 _builtin/fatal                  snoozer05       done
 _builtin/functions              eklerni         done
 _builtin/specialvars            yugui           done
+_builtin/pack-template          sheepman
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
