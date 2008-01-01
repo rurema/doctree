@@ -19,7 +19,7 @@ _builtin/Encoding		yugui
 _builtin/Enumerable             aamine          done
 _builtin/Exception              sheepman        done
 _builtin/FalseClass             yamane          done
-_builtin/Fiber                  sheepman
+_builtin/Fiber                  sheepman        done
 _builtin/File                   sheepman        done
 _builtin/FileTest               sheepman        done
 _builtin/File__Constants        takayama        done
