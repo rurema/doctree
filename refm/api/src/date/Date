@@ -71,22 +71,30 @@ include Comparable
 --- MONTHNAMES
 月の名称(January, February ... )
 
-MONTHNAMES[0] == nil で MONTHNAMES[1] == "January" です。
+利用者が、以下の定数を月や曜日の名前を参照のために
+利用することはあまり勧められません。
+名前の参照には [[m:Date#strftime]] が利用できます
 
 --- DAYNAMES
 曜日の名称(Sunday, Monday ... )
 
-DAYNAMES[0] == "Sunday" です。
+利用者が、以下の定数を月や曜日の名前を参照のために
+利用することはあまり勧められません。
+名前の参照には [[m:Date#strftime]] が利用できます
 
 --- ABBR_MONTHNAMES
 月の省略名(Jan, Feb ... )
 
-ABBR_MONTHNAMES[0] == nil で ABBR_MONTHNAMES[1] == "Jan" です。
+利用者が、以下の定数を月や曜日の名前を参照のために
+利用することはあまり勧められません。
+名前の参照には [[m:Date#strftime]] が利用できます
 
 --- ABBR_DAYNAMES
 曜日の省略名(Sun, Mon ... )
 
-ABBR_DAYNAMES[0] == "Sun" です。
+利用者が、以下の定数を月や曜日の名前を参照のために
+利用することはあまり勧められません。
+名前の参照には [[m:Date#strftime]] が利用できます
 
 --- ENGLAND
 英国がグレゴリオ暦をつかい始めた日 (1752年9月14日) をあらわすユリウス日です。
