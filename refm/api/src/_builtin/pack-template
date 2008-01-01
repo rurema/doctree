@@ -82,6 +82,7 @@ n, N, v, V を用います。
 
     "abc\0".unpack("a4") => ["abc\0"]
     "abc ".unpack("a4") => ["abc "]
+//}
 
 : A
 
