@@ -159,14 +159,6 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
 #@since 1.9.0
-#@#? --- valid_time? -> bool
-#@else
-#@since 1.8.0
-#@#? --- valid_time? -> Numeric | nil
-#@end
-#@end
-
-#@since 1.9.0
 #@# exp
 --- xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 XML Schema による日付を解析し、
@@ -226,15 +218,6 @@ self を複製して、その時差を設定しなおします。
 
 --- sec -> Integer
 秒を返します (0-59)。
-
-#@#? --- sec_fraction -> Rational
-#@#? 秒以下の端数を返します。
-#@#? 1.9.0 より単位は日から秒に
-#@#? #@since 1.9.0
-#@#? 変更されています。
-#@#? #@else
-#@#? 変更されます。
-#@#? #@end
 
 --- zone -> String
 タイムゾーンを返します。
