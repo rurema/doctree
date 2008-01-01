@@ -191,18 +191,20 @@ path が相対パスであれば default_dir を基準にします。
 path が pattern にマッチすれば真を返します。そうでない場合には false を返します。
 
 @param pattern パターンを文字列で指定します。ワイルドカードとして `*', `?', `[]' が使用できま
-す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
-
+               す。[[m:Dir.glob]] とは違って `{}' や `**/' は使用できません。
+//emlist{
     %w(foo foobar bar).each {|f|
       p File.fnmatch("foo*", f)
     }
     # => true
          true
          false
+//}
 
 @param path パスを表す文字列を指定します。
 
-@param flags 以下の [[c:File::Constants]] で定義されている定数を論理和で指定することで、パターンマッチの動作を変更することができます。flags のデフォルト値は0(フラグ指定なし)です。
+@param flags 以下の [[c:File::Constants]] で定義されている定数を論理和で指定することで、
+             パターンマッチの動作を変更することができます。flags のデフォルト値は0(フラグ指定なし)です。
 
 : FNM_NOESCAPE
  エスケープ文字 `\' を普通の文字とみなします。
