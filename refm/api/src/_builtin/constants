@@ -93,13 +93,13 @@ Ruby スクリプトに与えられた引数を表す配列です。
 組み込み変数 [[m:$*]] の別名です。
 Ruby 自身に対する引数は取り除かれています。
 
-==== 例
-argv.rb:
-    p ARGV
+例:
 
-このとき、シェルから次を実行すると、
-    ruby argv.rb foo bar baz
-結果は
+スクリプト argv.rb の内容が
+    p ARGV
+であったとします。このときシェルから次を実行すると、
+    $ ruby argv.rb foo bar baz
+結果は以下のようになります。
     ["foo", "bar", "baz"]
 
 --- DATA
@@ -157,6 +157,9 @@ __END__ を含まないプログラムにおいては DATA は定義されません。
     DATA.gets    # => uninitialized constant DATA (NameError)
 
 ==== 例4
+
+ファイル library.rb と app.rb の内容が以下であったとします。
+
 library.rb:
     print DATA.gets
     
@@ -170,8 +173,8 @@ app.rb:
     data from app
 
 このときシェルから次を実行すると
-    ruby app.rb
-結果は
+    $ ruby app.rb
+結果は以下のように出力されます。
     data from app
 
 
