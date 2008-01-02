@@ -413,8 +413,8 @@ $stdin はグローバルスコープです。
 
 --- $>
 --- $stdout
-#@if (version < "1.8.0")
--- $deferr
+#@until 1.9.0
+-- $defout
 #@end
 
 標準出力です。
@@ -425,7 +425,7 @@ $stdin はグローバルスコープです。
 [[unknown:Rubyの起動/-i[extension]]] オプションを指定した場合には
 読み込み元と同じ名前のファイルを表します。
 
-#@if (version >= "1.8.0")
+#@until 1.9.0
 $stdout には $defout という別名がありますが、
 $defout は非推奨([[unknown:obsolete]])になったので、
 新しいコードでは常に $stdout を使ってください。
@@ -461,7 +461,7 @@ $stdout はグローバルスコープです。
 
 
 --- $stderr
-#@if (version < "1.8.0")
+#@until 1.9.0
 --- $deferr
 #@end
 
@@ -471,7 +471,7 @@ Ruby インタプリタが出力するエラーメッセージや
 警告メッセージ、[[m:Kernel.#warn]] の出力先となります。
 初期値は [[m:Kernel::STDERR]] です。
 
-#@if (version >= "1.8.0")
+#@if (version < "1.9.0")
 $stderr には $deferr という別名がありますが、
 $deferr は非推奨([[unknown:obsolete]])になったので、
 新しいコードでは常に $stderr を使ってください。
@@ -503,24 +503,6 @@ $stderr に代入すれば十分です。
     $stderr.reopen stderr_old       # 元に戻す
 
 $stderr はグローバルスコープです。
-
-
-#@if (version >= "1.8.0")
---- $defout
-
-非推奨([[unknown:obsolete]])。 [[m:$stdout]] の別名です。
-
-この変数は過去との互換性のために提供されています。
-新しいコードでは常に [[m:$stdout]] を使ってください。
-
---- $deferr
-
-非推奨([[unknown:obsolete]])。 [[m:$stderr]] の別名です。
-
-この変数は過去との互換性のために提供されています。
-新しいコードでは常に [[m:$stderr]] を使ってください。
-#@end
-
 
 --- $VERBOSE
 --- $-v
