@@ -1478,11 +1478,13 @@ seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 現在の時刻やプロセス ID、srand を呼び出した回数、
 また可能なら /dev/urandom から読み出したデータなどを元に種を作ります。
 
-#@if (version < "1.8.3")
-seed として unsigned long よりも大きな値を与えることは出来ません。
+#@since 1.8.3
+@param seed 乱数の種となる数値を指定します。to_i メソッドにより整数に変換されます。
+            [[c:Bignum]] も指定可能です。
+#@else
+@param seed 乱数の種となる数値を指定します。to_i メソッドにより整数に変換されます。
+            unsigned long よりも大きな値を与えることは出来ません。
 #@end
-
-@param seed 初期値となる数値です。
 
   num = 455675
   seeds = []
