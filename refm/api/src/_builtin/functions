@@ -1472,7 +1472,7 @@ max.to_i.abs（引数の整数表現の絶対値）が 0以外 の場合、
   p rand(0.9) #=> 0.195303845149051
   p rand(1.5) #=> 0
 
-@see [[m:Kernel.#srand]],[[m:Object#to_i]],,[[m:Object#abs]]
+@see [[m:Kernel.#srand]], [[m:Object#to_int]], [[m:Numeric#abs]]
 
 --- srand -> Integer
 --- srand(seed) -> Integer
@@ -1488,10 +1488,10 @@ seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 また可能なら /dev/urandom から読み出したデータなどを元に種を作ります。
 
 #@since 1.8.3
-@param seed 乱数の種となる数値を指定します。to_i メソッドにより整数に変換されます。
+@param seed 乱数の種となる数値を指定します。to_int メソッドにより整数に変換されます。
             [[c:Bignum]] も指定可能です。
 #@else
-@param seed 乱数の種となる数値を指定します。to_i メソッドにより整数に変換されます。
+@param seed 乱数の種となる数値を指定します。to_int メソッドにより整数に変換されます。
             unsigned long よりも大きな値を与えることは出来ません。
 #@end
 
@@ -1523,7 +1523,7 @@ seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
   
   p seeds #=> [455675, 2995620310703489221660585195204777696, 455675]
 
-@see [[m:Kernel.#rand]],[[m:Object#to_i]]
+@see [[m:Kernel.#rand]], [[m:Object#to_int]]
 
 --- global_variables -> [String]
 
