@@ -660,7 +660,15 @@ length バイト読み込んで、その文字列を返します。
               余計なメモリの割当てが行われません。指定した文字列の長さが
               length と異なる場合、その文字列は一旦 length 長に拡張(ある
               いは縮小)されたあと、実際に読み込んだデータのサイズになります。
-              
+#@end
+
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+@raise Errno::EXXX データの読み込みに失敗した場合に発生します。
+
+@raise ArgumentError length が負の場合に発生します。
+
+#@since 1.8.0              
 第二引数を指定した read の呼び出しでデータが空であった場合
 (read が nil を返す場合)、outbuf は空文字列になります。
 
@@ -671,12 +679,6 @@ length バイト読み込んで、その文字列を返します。
   => nil
      ""
 #@end
-
-@raise IOError 自身が読み込み用にオープンされていなければ発生します。
-
-@raise Errno::EXXX データの読み込みに失敗した場合に発生します。
-
-@raise ArgumentError length が負の場合に発生します。
 
 --- readchar    -> Integer
 
@@ -912,7 +914,15 @@ offset 位置への移動が成功すれば 0 を返します。
 
 #@since 1.8.0
 @param outbuf 出力用のバッファを文字列で指定します。IO#sysread は読み込んだデータをその文字列オブジェクトに上書きして返します。指定した文字列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが maxlen と異なる場合、その文字列は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
+#@end
 
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
+
+@raise EOFError IO が既に EOF に達していれば発生します。
+
+@raise Errno::EXXX データの読み込みに失敗した場合に発生します。
+
+#@since 1.8.0
 第二引数を指定した sysread の呼び出しでデータが空であった場
 合(sysread が例外 [[c:EOFError]] を発生させる場合)、
 outbuf は空文字列になります。
@@ -924,12 +934,6 @@ outbuf は空文字列になります。
   => nil
      ""
 #@end
-
-@raise IOError 自身が読み込み用にオープンされていなければ発生します。
-
-@raise EOFError IO が既に EOF に達していれば発生します。
-
-@raise Errno::EXXX データの読み込みに失敗した場合に発生します。
 
 #@if (version >="1.8.0")
 --- sysseek(offset, whence = IO::SEEK_SET)    -> Integer
