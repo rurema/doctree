@@ -13,6 +13,34 @@ include File::Constants
 File::Constants は、[[c:File]] から IO へ移動しました。
 #@end
 
+#@since 1.9.0
+=== 多言語化と文字エンコーディングの変換
+
+すべての IO オブジェクトは外部エンコーディングと内部エンコーディングを持ちます。
+外部エンコーディングとは IO が表すファイルなどの文字エンコーディングです。
+内部エンコーディングとは IO から読み込まれた文字列、あるいは IO へ出力する文字列
+に仮定される文字エンコーディングです。
+
+IO オブジェクトの外部エンコーディングを明示的に指定しない場合は [[m:Encoding.default_external]]
+が仮定されます。
+
+可能性としては以下の二通りがあります。
+
+外部エンコーディングのみが指定されている場合。
+IO から読み込まれた文字列は外部エンコーディングであると仮定されそのようにタグ付けされます。
+このとき実際の文字エンコーディングは検査されず、変換もされません。
+
+外部エンコーディングと内部エンコーディングが指定されている場合。
+IO から読み込まれた文字列は外部エンコーディングから内部エンコーディングへと変換されます。
+また IO へと書き込まれる文字列も内部エンコーディングから外部エンコーディングへと変換されます。
+このとき指定された文字エンコーディングと実際の文字エンコーディングが違っていた場合、例外が発生します。
+
+IO に対してエンコーディングを指定する方法には、生成時に [[m:IO.open]] に渡すモードとともに指定するものと
+生成後に [[m:IO#set_encoding]] を使って指定するものの二通りがあります。詳しくはそれぞれのメソッドの項を
+参照して下さい。通常は前者の方法を使います。
+
+#@end
+
 === EOF での読み込みメソッドの振る舞いの違い
 
 空ファイルや EOF での各読み込みメソッドの振る舞いは以下のとおりです。
@@ -114,12 +142,30 @@ path が空ファイルの場合、何もせずに nil を返します。
 
 @see [[m:$/]]
 
---- pipe    -> [IO]
+--- pipe                    -> [IO]
+#@since 1.9.0
+--- pipe(enc_str)           -> [IO]
+--- pipe(ext_enc)           -> [IO]
+--- pipe(ext_enc, int_enc)  -> [IO]
+#@end
+#@todo
 
 [[man:pipe(2)]] を実行して、相互につながった2つの
 [[c:IO]] オブジェクトを要素とする配列を返します。
 
 戻り値の配列は最初の要素が読み込み側で、次の要素が書き込み側です。
+
+#@since 1.9.0
+
+@param enc_str 読み込み側の外部エンコーディングを文字列で指定します。
+               文字列がコロンを挟んだ二つのエンコーディング名 "A:B" である場合
+               最初のものが外部エンコーディング、次が内部エンコーディングを意味します。
+
+@param ext_enc 読み込み側の外部エンコーディングを Encoding オブジェクトで指定します。
+
+@param int_enc 読み込み側の内部エンコーディングを Encoding オブジェクトで指定します。
+
+#@end
 
 @raise Errno::EXXX IO オブジェクトの作成に失敗した場合に発生します。
 
@@ -205,8 +251,14 @@ nil を返します。
 
 @raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
-#@if (version >="1.8.0")
+#@since 1.8.0
+#@since 1.9.0
+--- read(path, opt = {})     -> String | nil
+--- read(path, length = nil, opt = {})     -> String | nil
+--- read(path, length = nil, offset = 0, opt = {})     -> String | nil
+#@else
 --- read(path, length = nil, offset = 0)     -> String | nil
+#@end
 
 path で指定されたファイルを offset 位置から
 length バイト分読み込んで返します。
@@ -219,9 +271,37 @@ length バイト分読み込んで返します。
 
 @param length 読み込む長さを整数で指定します。nil であるか省略した場合には、EOF まで読み込みます。
 
+@param offset 読み込みを始めるオフセットを整数で指定します。
+
+#@since 1.9.0
+@param opt ファイル path を open する時に使われるオプションを Hash で指定します。
+#@end
+
 @raise Errno::EXXX path のオープン、offset 位置への設定、ファイルの読み込みに失敗した場合に発生します。
 
 @raise ArgumentError length が負の場合に発生します。
+
+#@since 1.9.0
+引数 opt で有効なキーと値は以下のとおりです。
+キーはいずれも Symbol オブジェクトです。
+
+: :encoding
+
+  specifies encoding of the read string.  encoding will be ignored
+  if length is specified.
+
+: :mode
+
+  specifies mode argument for open().  it should start with "r"
+  otherwise it would cause error.
+
+: :open_args
+
+  specifies arguments for open() as an array.
+
+#@end
+
+例:
 
   IO.read(empty_file)             #=> ""
   IO.read(empty_file, 1)          #=> nil
@@ -1095,6 +1175,31 @@ Returns true if ios will be closed on exec.
    f.close_on_exec = false
    f.close_on_exec?                 #=> false
 
+--- external_encoding   -> Encoding
+#@todo
+
+Returns the Encoding object that represents the encoding of the
+file. If io is write mode and no encoding is specified, returns
+nil.
+
+--- internal_encoding   -> Encoding
+#@todo
+
+Returns the Encoding of the internal string if conversion is
+specified. Otherwise returns nil.
+
+--- set_encoding(enc_str)           -> IO
+--- set_encoding(ext_enc)           -> IO
+--- set_encoding(ext_enc, int_enc)  -> IO
+#@todo
+
+If single argument is specified, read string from io is tagged
+with the encoding specified. If encoding is a colon separated
+two encoding names "A:B", the read string is converted from encoding
+A (external encoding) to encoding B (internal encoding), then
+tagged with B. If two arguments are specified, those must be
+encoding objects or encoding names, and the first one is the
+external encoding, and the second one is the internal encoding.
 
 #@end
 
