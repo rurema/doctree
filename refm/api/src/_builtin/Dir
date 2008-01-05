@@ -15,25 +15,10 @@ include Enumerable
 #@end
 
 ワイルドカードの展開を行った結果を文字列の配列として返します。
+
 パターンにマッチするファイルがない場合は空の配列を返します。
 ブロックが与えられたときはワイルドカードにマッチしたファイルを
 引数にそのブロックを 1 つずつ評価して nil を返します
-
-  p Dir.glob("*")      #=> ["foo", "bar", "baz"]
-  p Dir.glob("./b*")   #=> ["./bar", "./baz"]
-  
-  Dir.glob("b*") {|f| p f }
- 
-  #=> "bar"
-      "baz"
-
-#@since 1.8.0
-@param flags [[m:File.fnmatch]] に指定できるフラグと同様のフラグを指定できます。
-             このフラグを指定することでマッチの挙動を変更することができます。
-
-  Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
-
-#@end
 
 @param pattern パターンを文字列で指定します。
                パターンを "\0" で区切って 1 度に複数のパターンを指定することもで
@@ -47,11 +32,12 @@ include Enumerable
                配列を指定することで複数のパターンを指定できます。
 #@end
 
-  p Dir.glob("f*\0b*")
-  => ["foo", "bar"]
-#@since 1.9.0
-  p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
-  p Dir["f*", "b*"]        # => ["foo", "bar"]
+#@since 1.8.0
+@param flags [[m:File.fnmatch]] に指定できるフラグと同様のフラグを指定できます。
+             このフラグを指定することでマッチの挙動を変更することができます。
+//emlist{
+  Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
+//}
 #@end
 
 ワイルドカードには以下のものがあります。これらはバックスラッシュに
@@ -84,12 +70,31 @@ include Enumerable
     foo/**/bar は foo/bar, foo/*/bar,
     foo/*/*/bar ... (以下無限に続く)に対してそれぞれ
     マッチ判定を行います。
-//emlist{
-  Dir.glob("*")        #=> ["foo", "bar"]
-  Dir.glob("fo?")      #=> ["foo"]
-  Dir.glob("[^f]*")    #=> ["bar"]
-  Dir.glob("{b,f}*")   #=> ["bar", "foo"]
-//}
+
+例:
+
+  # 一般的な例
+  p Dir.glob("*")          #=> ["foo", "bar", "baz"]
+  p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
+  
+  Dir.glob("b*") {|f| p f }
+ 
+  #=> "bar"
+      "baz"
+
+  # 複数のパターンを指定する例
+  p Dir.glob("f*\0b*")     # => ["foo", "bar"]
+#@since 1.9.0
+  p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
+  p Dir["f*", "b*"]        # => ["foo", "bar"]
+#@end
+
+  # ワイルドカードの例
+  Dir.glob("*")            #=> ["foo", "bar"]
+  Dir.glob("fo?")          #=> ["foo"]
+  Dir.glob("[^f]*")        #=> ["bar"]
+  Dir.glob("{b,f}*")       #=> ["bar", "foo"]
+
 
 --- chdir           -> 0
 --- chdir(path)     -> 0
@@ -99,6 +104,7 @@ include Enumerable
 #@end
 
 カレントディレクトリを path に変更します。
+
 path を省略した場合、環境変数 HOME または LOGDIR
 が設定されていればそのディレクトリに移動します。
 カレントディレクトリの変更に成功すれば 0 を返します。
@@ -112,6 +118,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+
    Dir.chdir("/var/spool/mail")
    p Dir.pwd                    #=> "/var/spool/mail"
    Dir.chdir("/tmp") do
@@ -122,14 +130,16 @@ path を省略した場合、環境変数 HOME または LOGDIR
 --- chroot(path)    -> 0
 
 ルートディレクトリを path に変更します。
+
 スーパーユーザだけがルートディレクトリを変更できます。
 ルートディレクトリの変更に成功すれば 0 を返します。
-
 各プラットフォームのマニュアルの chroot の項も参照して下さい。
 
 @param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+例:
 
  p Dir.glob("*")   #=> ["file1", "file2]
  Dir.chroot("./")
@@ -148,6 +158,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+
   Dir.delete("/tmp/hoge-jbrYBh.tmp")
 
 --- entries(path)    -> [String]
@@ -159,6 +171,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
+例:
+
   Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
 --- foreach(path) {|file| ...}    -> nil
@@ -168,6 +182,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 @param path ディレクトリのパスを文字列で指定します。
 
 @raise Errno::EXXX 失敗した場合に発生します。
+
+例:
 
   Dir.foreach('.'){|f|
     p f
@@ -185,6 +201,8 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 @raise Errno::EXXX カレントディレクトリの取得に失敗した場合に発生します(が、普通は失敗することはありません)。
 
+例:
+
    Dir.chdir("/tmp")   #=> 0
    Dir.getwd           #=> "/tmp"
 
@@ -200,6 +218,8 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になります。
 @param mode ディレクトリのモードを整数で与えます。
 
 @raise Errno::EXXX ディレクトリの作成に失敗した場合に発生します。
+
+例:
 
   p File.umask                                  #=> 2
   Dir.mkdir('t', 0666)
@@ -252,6 +272,8 @@ Returns +true+ if the named file is a directory, +false+ otherwise.
 
 @raise IOError 既に自身が close している場合に発生します。
 
+例:
+
   Dir.open('.').each{|f|
     p f
   }
@@ -276,6 +298,8 @@ Returns +true+ if the named file is a directory, +false+ otherwise.
 
 @raise IOError 既に自身が close している場合に発生します。
 
+例:
+
   Dir.open("/tmp") {|d|
     d.each {|f|
       p d.pos
@@ -292,6 +316,8 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 @param pos 変更したい位置を整数で与えます。
 
 @raise IOError 既に自身が close している場合に発生します。
+
+例:
 
    d = Dir.new("testdir")   #=> #<Dir:0x401b3c40>
    d.read                   #=> "."
@@ -314,6 +340,8 @@ pos は [[m:Dir#tell]] で与えられた値でなければなりま
 ディレクトリストリームの読み込み位置を先頭に移動させます。
 
 @raise IOError 既に自身が close している場合に発生します。
+
+例:
 
    d = Dir.new("testdir")
    d.read     #=> "."
