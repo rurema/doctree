@@ -76,7 +76,7 @@ include Enumerable
   # 一般的な例
   p Dir.glob("*")          #=> ["foo", "bar", "baz"]
   p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
-  p Dir.glob("*/")         #=> ["dir1/", "dir2/"]      ディレクトリのみにマッチする。
+  p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
   
   Dir.glob("b*") {|f| p f }
  
