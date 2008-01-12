@@ -84,6 +84,69 @@ String クラスのメソッドには破壊的なメソッドも非破壊的なメソッドもあります。
 『!』が付いているほうが破壊的」というだけです。
 「『!』が付いているならば破壊的」は常に成立しますが、逆は必ずしも成立しません。
 
+#@since 1.9.0
+=== 多言語化と文字列のエンコーディング
+
+String オブジェクトは文字エンコーディングを持ちます。
+インスタンスメソッドはエンコーディングに従い、1バイトではなく1文字を単位として動作します。
+
+例:
+
+  p "いろは".size     #=> 3 
+  p "漢字"[0]         #=> "漢"
+  p "山本山".reverse  #=> "山本山"
+
+==== 文字列同士の演算
+
+文字列同士の演算では両者の文字エンコーディングを意識する必要があります。
+例えば [[m:String#==]] は両者の文字エンコーディングが等しくバイト列表現が
+等しい場合にのみ true を返します。
+このときエンコーディングが UTF-8 であっても正規化せずに比較します。
+文字列の結合も同様です。異なるエンコーディング同士の文字列を結合する時は
+明示的にエンコーディングを変換する必要があります。
+
+例:
+
+  s = "いろは"
+  a = s.encode("EUC-JP")
+  b = s.encode("UTF-8")
+  p a == b                            #=> false
+ 
+  s = "合".encode("EUC-JP")
+  p s + "\u{4f53}".encode("EUC-JP")   #=> "合体"
+  p s + "\u{4f53}"                    #=> ArgumentError 
+
+==== 文字列のハッシュ値
+
+また [[m:String#hash]] の値も文字エンコーディングが異なるとバイト列表現が
+同じでも異なる値を返します。エンコーディングが UTF-8 であっても正規化しません。
+ハッシュのキーにマルチバイトの文字列を使う場合には注意が必要です。
+
+例:
+
+  s = "いろは"
+  s.force_encoding("EUC-JP")
+  p s.hash                             #=> -35343124
+  s.force_encoding("ASCII-8BIT")
+  p s.hash                             #=> 502779573
+
+==== 7bit クリーンな文字列
+
+ASCII 互換エンコーディングをもつ 7bit クリーンな文字列は
+エンコーディングに関わらず ASCII として扱うことができます。
+例えば [[m:String#==]] は両者の文字エンコーディングが異なっていても
+true を返します。
+ASCII 互換エンコーディングをもつ文字列にエンコーディングの変換なしで結合することができます。
+また [[m:String#hash]] はエンコーディングによらず同じ整数を返します。
+
+例:
+
+  s = "abc"
+  a = s.dup.force_encoding("EUC-JP")
+  b = s.dup.force_encoding("UTF-8")
+  p a == b                           #=> true
+
+#@else
 === マルチバイト文字列の処理
 
 String クラスは自身を文字の列ではなくバイト列として扱います。
@@ -106,15 +169,19 @@ Ruby の正規表現エンジンはマルチバイト文字列に対応しているので、
 String クラスのすべてのメソッドが文字単位で動作するようになります。
 しかし jcode ライブラリはプロセス全体に影響するため、
 中程度以上の規模プログラムで用いることは推奨できません。
+#@end
 
 == Class Methods
 
 #@since 1.9.0
 --- try_convert(obj) -> String | nil
-#@todo
 
-Try to convert obj into a String, using to_str method. Returns
-converted regexp or nil if obj cannot be converted for any reason.
+obj を String に変換しようと試みます。変換には [[m:Object#to_str]] メソッ
+ドが使われます。変換後の文字列を返すか、何らかの理由により変換できなかっ
+た場合は nil が返されます。
+
+@param obj   変換する任意のオブジェクト
+@return      変換後の文字列または nil
 
    String.try_convert("str")     # => str
    String.try_convert(/re/)      # => nil
@@ -126,8 +193,8 @@ converted regexp or nil if obj cannot be converted for any reason.
 string と同じ内容の新しい文字列を作成して返します。
 引数を省略した場合は空文字列を生成して返します。
 
-@param string	文字列
-@return		引数 string と同じ内容の文字列オブジェクト
+@param string   文字列
+@return         引数 string と同じ内容の文字列オブジェクト
 
 == Instance Methods
 
@@ -135,8 +202,8 @@ string と同じ内容の新しい文字列を作成して返します。
 
 文字列と other を連結した新しい文字列を返します。
 
-@param other	文字列
-@return		self と other を連結した文字列
+@param other    文字列
+@return         self と other を連結した文字列
 
 例:
 
@@ -152,8 +219,8 @@ string と同じ内容の新しい文字列を作成して返します。
 
 文字列の内容を times 回だけ繰り返した新しい文字列を作成して返します。
 
-@param times	整数
-@return		self を times 回繰り返した新しい文字列
+@param times    整数
+@return         self を times 回繰り返した新しい文字列
 
 例:
 
@@ -170,8 +237,8 @@ printf と同じ規則に従って args をフォーマットします。
 args が配列であれば [[m:Kernel.#sprintf]](self, *args) と同じです。
 それ以外の場合は [[m:Kernel.#sprintf]](self, args) と同じです。
 
-@param args	フォーマットする値、もしくはその配列
-@return		フォーマットされた文字列
+@param args     フォーマットする値、もしくはその配列
+@return         フォーマットされた文字列
 
 例:
 
@@ -207,8 +274,8 @@ other.to_str と other.<=> が定義されていれば
 そうでなければ nil を返します。
 #@end
 
-@param other	文字列
-@return		比較結果の整数か nil
+@param other    文字列
+@return         比較結果の整数か nil
 
 例:
 
@@ -237,8 +304,8 @@ str が "string" という内容の文字列でありさえすれば常に true を返します。
 ただし $= 変数はいずれ廃止されることが決まっているので
 $= に頼るべきではありません。
 
-@param other	任意のオブジェクト
-@return		true か false
+@param other    任意のオブジェクト
+@return         true か false
 
 例:
 
@@ -259,7 +326,7 @@ other が 0 から 255 の範囲の [[c:Fixnum]] である場合は
 
 self を返します。
 
-@param other	文字列もしくは 0 から 255 までの範囲の整数
+@param other    文字列もしくは 0 から 255 までの範囲の整数
 
 例:
 
@@ -290,10 +357,10 @@ other を正規表現にコンパイルして self とのマッチを実行していました。
 にマッチに関する情報が設定されます。
 
 #@since 1.8.0
-@param other	    正規表現もしくは =~ メソッドを持つオブジェクト
+@param other        正規表現もしくは =~ メソッドを持つオブジェクト
 @raise TypeError    other が文字列であった
 #@else
-@param other	    正規表現か文字列、もしくは =~ メソッドを持つオブジェクト
+@param other        正規表現か文字列、もしくは =~ メソッドを持つオブジェクト
 #@end
 
 例:
@@ -323,7 +390,7 @@ nth が負の場合は文字列の末尾から数えます。
 
 nth が範囲外を指す場合は nil を返します。
 
-@param nth	バイトインデックスを表す整数
+@param nth      バイトインデックスを表す整数
 @return         文字コードを表す整数
 
 例:
@@ -1354,7 +1421,12 @@ self[pos, 0] = other と同じ操作です。
 --- length -> Integer
 --- size -> Integer
 
+#@since 1.9.0
+文字列の文字数を返します。バイト数を知りたいときは bytesize メソッドを使ってください。
+@see [[m:String#bytesize]]
+#@else
 文字列のバイト数を返します。
+#@end
 
 #@if (version >= "1.8.0")
 #@since 1.9.0
@@ -2523,7 +2595,7 @@ self の末尾が str であるとき true を返します。
 
 --- ord -> Integer
 
-文字列の最初の文字の文字コードを返します。
+文字列の最初の文字の文字コードを整数で返します。
 
 self が空文字列のときは例外 TypeError を発生します。
 
@@ -2570,31 +2642,89 @@ self がセパレータを含まないときは、
   p "aaaaa".partition("x")   # => ["", "", "aaaaa"]
 
 @see [[m:String#partition]], [[m:String#split]]
-#@end
 
-#@since 1.9.0
---- bytesize
-#@todo
+--- bytesize -> Integer
+
+文字列のバイト長を整数で返します。
+
+例:
+
+  p "いろは".size     #=> 3
+  p "いろは".bytesize #=> 6
+
+@see [[m:String#size]]
 
 --- each_char {|cstr| block }    -> String
-#@todo
 
-Passes each character in str to the given block.
+文字列のそれぞれの文字をブロックに渡して実行します。
 
+@return self
+
+たとえば、
    "hello".each_char {|c| print c, ' ' }
-
-produces:
-
+は次のように出力されます。
    h e l l o
 
 --- encoding   -> Encoding
-#@todo
 
-Returns the Encoding object that represents the encoding of obj.
+文字列のエンコーディング情報を表現した Encoding オブジェクトを返します。
 
---- force_encoding(encoding)   -> String
-#@todo
+@see [[c:Encoding]]
 
-Changes the encoding to encoding and returns self.
+--- force_encoding(encoding)   -> self
+
+文字列のエンコーディングを指定された encoding に変更します。
+
+@param encoding   変更するエンコーディング情報を表す文字列か Encoding オブジェクトを指定します。
+
+--- ascii_only?  -> bool
+
+文字列がASCII文字のみで構成されている場合に true を返します。さもなくば
+false を返します。
+
+--- valid_encoding?  -> bool
+
+文字列の内容が、現在のエンコーディングに照らしあわせて妥当であれば
+true を返します。さもなくば false を返します。
+
+--- encode(encoding) -> String
+--- encode(encoding, from_encoding) -> String
+
+self を指定したエンコーディングに変換した文字列を作成して返します。引数
+を2つ与えた場合、第二引数は変換元のエンコーディングを意味します。さもな
+くば self のエンコーディングが使われます。
+
+@param encoding       変換先のエンコーディングを表す文字列か Encoding オブジェクトを指定します。
+@param from_encoding  変換元のエンコーディングを表す文字列か Encoding オブジェクトを指定します。
+@return               変換された文字列
+
+例:
+
+  s = "いろは"
+  s.encode("EUC-JP")
+  s.encode(Encoding::UTF_8)
+
+@see [[m:String#encode!]]
+
+--- encode!(encoding)                -> self
+--- encode!(encoding, from_encoding) -> self
+
+self を指定したエンコーディングに変換し、自身を置き換えます。引数を2つ
+与えた場合、第二引数は変換元のエンコーディングを意味します。さもなくば
+self のエンコーディングが使われます。変換後の self を返します。
+
+(gsub!などと異なり)変換が行なわれなくても self を返します。
+
+@param encoding       変換先のエンコーディングを表す文字列か Encoding オブジェクトを指定します。
+@param from_encoding  変換元のエンコーディングを表す文字列か Encoding オブジェクトを指定します。
+@return               変換後のself
+
+例:
+
+  s = "いろは"
+  s.encode!("EUC-JP")
+  s.encode!(Encoding::UTF_8)
+
+@see [[m:String#encode]]
 
 #@end
