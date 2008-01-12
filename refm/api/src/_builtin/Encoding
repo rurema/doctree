@@ -3,66 +3,141 @@
 
 == Class Methods
 
---- compatible?
+--- compatible?(str1, str2) -> Encoding | nil
+
+2つの文字列に互換性があるかどうかをチェックします。互換性がある文字列は
+結合させることができます。互換性があるときは、結合後の文字列が取るであ
+ろう Encoding オブジェクトを返します。互換性がない場合は nil を返します。
+
+@param str1   チェックする対象の文字列
+@param str2   チェックする対象の文字列
+@return       結合した場合の文字列の Encoding または nil
+
+--- find(name) -> Encoding
+
+指定された name という名前のエンコーディングを探します。
+
+@param name   エンコーディングを表現した [[c:String]] または [[c:Symbol]]
+@return       発見された Encoding
+@raise ArgumentError 指定した名前のエンコーディングが発見できないと発生します。
+
+--- list -> [Encoding]
+
+現在ロードされているエンコーディングのリストを返します。
+
+    Encoding.list
+    => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
+        #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
+        #<Encoding:ISO-2022-JP (dummy)>]
+    
+    Encoding.find("US-ASCII")
+    => #<Encoding:US-ASCII>
+    
+    Encoding.list
+    => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
+        #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
+        #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
+
+--- default_external -> Encoding
 #@todo
 
---- find
+Returns default external encoding.
+
+It is initialized by the locale or -E option.
+
+--- locale_charmap -> String
 #@todo
 
---- list
-#@todo
+Returns the locale charmap name.
 
---- primary_encoding
-#@todo
+  Debian GNU/Linux
+    LANG=C
+      Encoding.locale_charmap  => "ANSI_X3.4-1968"
+    LANG=ja_JP.EUC-JP
+      Encoding.locale_charmap  => "EUC-JP"
+
+  SunOS 5
+    LANG=C
+      Encoding.locale_charmap  => "646"
+    LANG=ja
+      Encoding.locale_charmap  => "eucJP"
+
+@see [[man:charmap(5)]]
 
 == Instance Methods
 
---- based_encoding
+--- base_encoding -> Encoding | nil
+
+self が別のエンコーディングから派生したエンコーディングである場合、もと
+となったエンコーディングを返します。そのようなエンコーディングが存在し
+なければ nil を返します。
+
+--- inspect -> String
+
+プログラマにわかりやすい表現の文字列を返します。
+
+    Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
+    Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
+
+--- name -> String
+--- to_s -> String
+
+エンコーディングの名前を返します。
+
+    Encoding::UTF_8.name       => "UTF-8"
+
+--- dummy? -> bool
 #@todo
 
---- inspect
-#@todo
+Returns true for dummy encoding. A dummy encoding is a encoding
+which character handling is not properly implemented. It is used
+for stateful encoding.
 
---- name
-#@todo
-
---- to_s
-#@todo
-
+  Encoding::ISO_2022_JP.dummy?       #=> true
+  Encoding::UTF_8.dummy?             #=> false
 
 == Constants
 
 --- ASCII
-#@todo
-
 --- ASCII_8BIT
-#@todo
-
 --- BINARY
-#@todo
+
+変換を行わないエンコーディングオブジェクトです。
 
 --- EUC_JP
-#@todo
+--- EucJP
+--- EUCJP
+
+EUC-JP エンコーディングです。
 
 --- ISO_2022_JP
-#@todo
+
+ISO-2022-JP エンコーディングです。
 
 --- ISO_8859_1
-#@todo
+
+ISO-8859-1 エンコーディングです。
 
 --- SHIFT_JIS
-#@todo
-
---- SJIS
-#@todo
-
 --- Shift_JIS
-#@todo
+--- SJIS
+
+Shift-JIS エンコーディングです。
 
 --- US_ASCII
-#@todo
+
+ASCII文字のみのエンコーディングです。通常の ASCII 文字の範囲外のバイト
+(たとえば\x80など)が含まれる場合は正しいエンコーディングであるとみなし
+ません。
+
+なお、 US_ASCII 定数は最初は存在しません。 Encoding.find("US-ASCII") な
+どを実行して US-ASCII エンコーディングをロードしたときに、 Encoding ク
+ラスに追加されます。
+
+@see [[m:Encoding.find]]
 
 --- UTF_8
-#@todo
+
+UTF-8 エンコーディングです。
 
 #@end
