@@ -87,11 +87,15 @@ self が別のエンコーディングから派生したエンコーディングである場合、もと
     Encoding::UTF_8.name       => "UTF-8"
 
 --- dummy? -> bool
-#@todo
 
-Returns true for dummy encoding. A dummy encoding is a encoding
-which character handling is not properly implemented. It is used
-for stateful encoding.
+自身がダミーエンコーディングである場合に true を返します。
+そうでない場合に false を返します。
+
+ダミーエンコーディングとは Ruby がフルにサポートしていないエンコーディングのことです。
+例えばステートフルなエンコーディングが該当します。
+ダミーエンコーディングも [[c:IO]] の外部エンコーディングに指定できます。また
+Ruby はサポートしていないが拡張ライブラリがサポートしているエンコーディングを扱う場合にも
+用います。
 
   Encoding::ISO_2022_JP.dummy?       #=> true
   Encoding::UTF_8.dummy?             #=> false
