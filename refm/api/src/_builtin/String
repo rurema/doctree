@@ -89,6 +89,7 @@ String クラスのメソッドには破壊的なメソッドも非破壊的なメソッドもあります。
 
 String オブジェクトは自身のエンコーディング情報を持ちます。
 インスタンスメソッドはエンコーディングに従い、1バイトではなく1文字を単位として動作します。
+エンコーディングの変換にはメソッド [[m:String#encode]] を使います。
 
 例:
 
@@ -99,6 +100,11 @@ String オブジェクトは自身のエンコーディング情報を持ちます。
   s = "ruビー"
   s[0..1] = "ル" 
   p s                  #=> "ルビー"
+ 
+  e = "言語".encode("EUC-JP")
+  u = "言語".encode("UTF-8")
+  p e.encoding                   #=> Encoding::EUC_JP
+  p u.encoding                   #=> Encoding::UTF_8
 
 ==== 文字列同士の比較・結合
 
@@ -143,11 +149,10 @@ ASCII 互換エンコーディングをもつ文字列にエンコーディングの変換なしで結合すること
 例:
 
   s = "abc"
-  a = s.dup.force_encoding("EUC-JP")
-  b = s.dup.force_encoding("UTF-8")
+  a = s.encode("EUC-JP")
+  b = s.encode("UTF-8")
   p a == b                           #=> true
   p a + b                            #=> "abcabc"
-  
 
 ここで言う「ASCII互換エンコーディング」とは、コードポイントが同一という意味ではなく
 バイト列が同じことを意味します。従って UTF-16 はASCII互換ではありません。
