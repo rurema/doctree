@@ -22,12 +22,16 @@ IO オブジェクトはエンコーディングを持ちます。
 IO のエンコーディングに従い変換されます。
 
 ==== エンコーディングの影響を受けるメソッドと受けないメソッド
+
 IO の読み込みメソッドは2種類存在します。
 テキスト読み込みメソッドとバイナリ読み込みメソッドです。
-テキスト読み込みメソッドは
-IO のエンコーディングの影響をうけます。
+
+テキスト読み込みメソッドは IO のエンコーディングの影響をうけます。
+詳しくは「IO のエンコーディングとエンコーディングの変換」を参照して下さい。
 以下がテキスト読み込みメソッドです。
 
+ * [[m:IO.foreach]]
+ * [[m:IO.readlines]]
  * [[m:IO#each]]
  * [[m:IO#each_line]]
  * [[m:IO#lines]]
@@ -43,8 +47,6 @@ IO のエンコーディングの影響をうけます。
 返す文字列のエンコーディングは常に ASCII-8BIT になります。
 以下がバイナリ読み込みメソッドです。
 
- * [[m:IO#bytes]]
- * [[m:IO#getbyte]]
  * [[m:IO#read]](size) 
  * [[m:IO#read_nonblock]]
  * [[m:IO#readpartial]]
@@ -70,18 +72,17 @@ IO オブジェクトは外部エンコーディングと内部エンコーディングを持ちます。
 内部エンコーディングとは IO から読み込まれた文字列、あるいは IO の書き込みメソッドへ渡す文字列
 の文字エンコーディングです。
 
-可能性としては以下の三通りがあります。
+以下の三通りがあります。
 
 : IO のエンコーディングが指定されていない場合
 
- テキスト読み込みメソッドによって IO から読み込まれた文字列のエンコーディングは [[m:Encoding.default_external]]
- であるとラベル付けされます。このとき実際の文字エンコーディングは検査されず、変換もされません。
+  IO からテキスト読み込みメソッドによって読み込まれた文字列のエンコーディングは [[m:Encoding.default_external]]
+  に設定されます。このとき実際の文字エンコーディングは検査されず、変換もされません。
 
 : 外部エンコーディングのみが指定されている場合
 
- IO からテキスト読み込みメソッドによって読み込まれた文字列は外部エンコーディングであるとラベル付けされます。
- つまり読み込まれた文字列の [[m:String#encoding]] は IO の外部エンコーディングを返します。
- このとき実際の文字エンコーディングは検査されず、変換もされません。
+ IO からテキスト読み込みメソッドによって読み込まれた文字列のエンコーディングは外部エンコーディング
+ に設定されます。このとき実際の文字エンコーディングは検査されず、変換もされません。
 
  IO へ書き込まれる文字列は常に外部エンコーディングへと変換されます。
  外部エンコーディングへの変換方法が分からない場合は例外が発生します。
@@ -92,16 +93,6 @@ IO オブジェクトは外部エンコーディングと内部エンコーディングを持ちます。
 
  IO へ書き込まれる文字列は常に外部エンコーディングへと変換されます。
  外部エンコーディングへの変換方法が分からない場合は例外が発生します。
-
-まとめると以下のようになります。
-
-                               指定無し     外部エンコーディングのみ      両方のエンコーディング     
-  ------------------------------------------------------------------------------------------------
-  バイナリ読み込みメソッド     変換なし        変換なし                       変換なし               
-                                                        
-  テキスト読み込みメソッド     変換なし        変換なし(ラベル付けのみ)       変換あり                    
-                                                         
-  書き込みメソッド             変換なし        変換あり                       変換あり               
 
 IO に対してエンコーディングを指定する方法には、生成時に [[m:IO.open]] や [[m:File.open]] 
 に渡すモードとともに指定するものと
@@ -122,6 +113,29 @@ IO に対してエンコーディングを指定する方法には、生成時に [[m:IO.open]] や [[m:Fil
   puts s.dump                           #=> "\x8A\xBF\x8E\x9A" 
                                         # エンコーディングがSJISへ変換されていることが分かる。
 
+===== まとめ
+
+以上をまとめると以下の表のようになります。
+
+読み込んだ文字列のエンコーディング
+
+                                 指定無し          外部エンコーディングのみ    両方のエンコーディング
+  ------------------------------------------------------------------------------------------------
+  バイナリ読み込みメソッド      ASCII-8BIT                ASCII-8BIT                ASCII-8BIT   
+                                                        
+  テキスト読み込みメソッド     default_external      外部エンコーディング       内部エンコーディング    
+                                                         
+
+エンコーディングの変換
+
+                               指定無し     外部エンコーディングのみ      両方のエンコーディング     
+  ------------------------------------------------------------------------------------------------
+  バイナリ読み込みメソッド     変換なし             変換なし                     変換なし               
+                                                        
+  テキスト読み込みメソッド     変換なし             変換なし                     変換あり                
+                                                         
+  書き込みメソッド             変換なし             変換あり                     変換あり               
+
 ==== ファイル名のエンコーディング
 
 ファイル名の文字エンコーディングはプラットフォームに依存します。
@@ -134,7 +148,7 @@ Win, Mac では UTF-8 です(予定)。UNIX では ASCII-8BIT です。
 ==== binmode
 
 Windows の IO にはテキストモードとバイナリモードという2種類のモードが存在します。
-これらのモードは上で説明した IO のエンコーディングとは独立であり、改行の変換にしか影響しません。
+これらのモードは上で説明した IO のエンコーディングとは独立です。改行の変換にしか影響しません。
 
 #@end
 
@@ -205,19 +219,20 @@ IO or nil if obj cannot be converted for any reason.
 IO オブジェクトを生成して返します。
 
 #@since 1.8.0
-ブロックが与えられた場合、IO オブジェクトを生成しそれを引数としてブロックを
+IO.open にブロックが与えられた場合、IO オブジェクトを生成しそれを引数としてブロックを
 実行します。ブロックの終了とともに fd はクローズされます。ブロックの結果を返します。
+IO.new, IO.for_fd はブロックを受け付けません。
 #@end
 
 @param fd ファイルディスクリプタである整数を指定します。
 
 #@since 1.8.0
-@param mode [[m:File.open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの
+@param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの
             定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照
             してください。
 #@else
-@param mode [[m:File.open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。
-            詳細は組み込み関数[[m:Kernel.#open]]を参照してください。
+@param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。
+            詳細は組み込み関数 [[m:Kernel.#open]] を参照してください。
 #@end
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
@@ -227,6 +242,9 @@ IO オブジェクトを生成して返します。
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
 path のオープンに成功すれば nil を返します。
 
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
 path が空ファイルの場合、何もせずに nil を返します。
 [[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
@@ -304,7 +322,8 @@ command をサブプロセスとして実行し、そのプロセスの標準入出力
   # => "foo\n"
 
 #@since 1.9.0
-@param command コマンド名を文字列か配列で指定します。配列が指定された場合には、シェルを経由せずに子プロセスを実行します。
+@param command コマンド名を文字列か配列で指定します。配列が指定された場合には、
+               シェルを経由せずに子プロセスを実行します。
 #@else
 @param command コマンド名を文字列で指定します。
 #@end
@@ -366,6 +385,11 @@ length バイト分読み込んで返します。
 
 既に EOF に達している場合は nil を返します。ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。例えば、IO.read(空ファイル) は "" を返します。
 
+#@since 1.9.0
+引数 length が指定された場合はバイナリ読み込みメソッド、そうでない場合はテキスト読み込みメソッドとして
+動作します。
+#@end
+
 [[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
 @param path ファイル名を表す文字列か "|コマンド名" を指定します。
@@ -416,6 +440,9 @@ length バイト分読み込んで返します。
 
 path で指定されたファイルを全て読み込んで、その各行を要素としてもつ配列を返します。
 
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
 既に EOF に達していれば空配列 [] を返します。
 [[m:Kernel.#open]] と同様 path の先頭が "|" ならば、"|" に続くコマンドの出力を読み取ります。
 
@@ -560,6 +587,10 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 
 IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として与えられたブロックを実行します。
 
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
+
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
@@ -569,6 +600,10 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として与えられたブロッ
 --- each_byte {|ch| ... }    -> self
 
 IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
+
+#@since 1.9.0
+バイナリ読み込みメソッドとして動作します。
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -651,6 +686,7 @@ IO ポートの内部バッファをフラッシュします。
 IO ポートから外部エンコーディングに従い 1 文字読み込んで返します。
 EOF に到達した時には nil を返します。
 
+テキスト読み込みメソッドとして動作します。
 [[m:IO#readchar]] との違いは EOF での振る舞いのみです。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
@@ -678,11 +714,18 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 @see [[m:IO#readchar]]
 #@end
 
+#@since 1.9.0
+--- gets(rs = $/, limit)    -> String | nil
+#@else
 --- gets(rs = $/)    -> String | nil
+#@end
 
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には nil を返します。
 
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
 読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#readline]] との違いは EOF での振る舞いのみです。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
@@ -841,6 +884,10 @@ C 言語の printf と同じように、format に従い引数
 
 length バイト読み込んで、その文字列を返します。
 
+#@since 1.9.0
+引数 length が指定された場合はバイナリ読み込みメソッド、そうでない場合はテキスト読み込みメソッドとして
+動作します。
+#@end
 既に EOF に達していれば nil を返します。
 #@since 1.9.0
 ただし、length に nil か 0 が指定されている場合は、空文字列 "" を返します。
@@ -878,22 +925,43 @@ length バイト読み込んで、その文字列を返します。
      ""
 #@end
 
+#@since 1.9.0
+--- readchar    -> String
+#@else
 --- readchar    -> Integer
+#@end
 
+#@since 1.9.0
+IO ポートから 1 文字読み込んで返します。
+#@else
 IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
-返します。EOF に到達した時には EOFError が発生します。
+返します。
+#@end
+EOF に到達した時には EOFError が発生します。
 
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
 [[m:IO#getc]] との違いは EOF での振る舞いのみです。
 
 @raise EOFError EOF に到達した時に発生します。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
+#@since 1.9.0
+   f = File.new("testfile")
+   p f.readchar                   #=> "い"
+   p f.readchar                   #=> "ろ"
+   p f.readchar                   #=> "は"
+   f.read
+   f.readchar                   #=> EOFError
+#@else
    f = File.new("testfile")
    f.readchar                   #=> 84
    f.readchar                   #=> 104
    f.read
    f.readchar                   #=> EOFError
+#@end
 
 @see [[m:IO#getc]]
 
@@ -902,6 +970,9 @@ IO ポートから 1 文字読み込んで、その文字に対応する [[c:Fixnum]] を
 一行読み込んで、読み込みに成功した時にはその文字列を返します。
 EOF に到達した時には EOFError が発生します。
 
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
 読み込んだ文字列を変数 [[m:$_]] にセットします。[[m:IO#gets]] との違いは EOF での振る舞いのみです。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
@@ -923,7 +994,12 @@ EOF に到達した時には EOFError が発生します。
 データを全て読み込んで、その各行を要素としてもつ配列を返します。
 既に EOF に達していれば空配列 [] を返します。
 
-@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+#@since 1.9.0
+テキスト読み込みメソッドとして動作します。
+#@end
+
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -939,6 +1015,9 @@ EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告されます。
 
 なお、バッファが空でない場合は、read_nonblock はバッファから読み込みます。この場合、read(2) システムコールは呼ばれません。
 
+#@since 1.9.0
+バイナリ読み込みメソッドとして動作します。
+#@end
 既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定されている場合は、空文字列 "" を返します。
 
 @param maxlen 読み込む長さの上限を整数で指定します。
@@ -960,6 +1039,9 @@ IO から長さ maxlen を上限として読み込み、文字列として返します。
 即座に得られるデータが存在しないときにはブロックしてデータの到着を待ちます。
 即座に得られるデータが 1byte でも存在すればブロックしません。
 
+#@since 1.9.0
+バイナリ読み込みメソッドとして動作します。
+#@end
 既に EOF に達していれば EOFError が発生します。
 ただし、maxlen に 0 が指定されている場合は、空文字列 "" を返します。
 
@@ -1005,7 +1087,9 @@ readpartial の結果は以下のようになります。
 
 @param maxlen 読み込む長さの上限を整数で指定します。
 
-@param outbuf 文字列で指定します。IO#readpartial は読み込んだデータを outbuf に破壊的に格納し、返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
+@param outbuf 文字列で指定します。IO#readpartial は読み込んだデータを outbuf に破壊的に格納し、
+              返り値は outbuf となります。outbuf は一旦 maxlen 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。IO が既に EOF に達していれば、空文字列になります。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -1106,12 +1190,19 @@ offset 位置への移動が成功すれば 0 を返します。
 含む文字列を返します。stdio を経由しないので gets や getc や eof? などと混用すると思わぬ動作
 をすることがあります。
 
+#@since 1.9.0
+バイナリ読み込みメソッドとして動作します。
+#@end
 既に EOF に達していれば EOFError が発生します。ただし、maxlen に 0 が指定されている場合は、空文字列 "" を返します。
 
 @param maxlen 入力のサイズを整数で指定します。
 
 #@since 1.8.0
-@param outbuf 出力用のバッファを文字列で指定します。IO#sysread は読み込んだデータをその文字列オブジェクトに上書きして返します。指定した文字列オブジェクトがあらかじめ maxlen 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の長さが maxlen と異なる場合、その文字列は一旦 maxlen 長に拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
+@param outbuf 出力用のバッファを文字列で指定します。IO#sysread は読み込んだデータを
+              その文字列オブジェクトに上書きして返します。指定した文字列オブジェクト
+              があらかじめ maxlen 長の領域であれば、余計なメモリの割当てが行われません。
+              指定した文字列の長さが maxlen と異なる場合、その文字列は一旦 maxlen 長に
+              拡張(あるいは縮小)されたあと、実際に読み込んだデータのサイズになります。
 #@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
@@ -1158,7 +1249,8 @@ outbuf は空文字列になります。
 
 @param whence  [[m:IO#seek]] と同じです。
 
-@raise IOError 読み込み用にバッファリングされた IO に対して実行すると発生します。既に close されていた場合にも発生します。 
+@raise IOError 読み込み用にバッファリングされた IO に対して実行すると発生します。
+               既に close されていた場合にも発生します。 
 
 @raise Errno::EXXX 移動に失敗した場合に発生します。
 
@@ -1185,17 +1277,28 @@ self を返します。
 
 --- ungetc(char)     -> nil
 
-指定された char を読み戻します。2バイト以上の読み戻しは保証されません。
+指定された char を読み戻します。
+#@until 1.9.0
+2バイト以上の読み戻しは保証されません。
+#@end
 
+#@since 1.9.0
+@param char 読み戻したい1文字かそのコードポイントを指定します。
+#@else
 @param char 読み戻したい1バイト文字に対応する [[c:Fixnum]] を指定します。
+#@end
 
-@raise IOError 読み戻しに失敗した場合に発生します。また、自身が読み込み用にオープンされていない時、自身がまだ一度も read されていない時に発生します。
+@raise IOError 読み戻しに失敗した場合に発生します。また、自身が読み込み用にオープンされていない時、
+               自身がまだ一度も read されていない時に発生します。
 
+#@since 1.9.0
+#@else
   f = File.new("testfile")   #=> #<File:testfile>
   c = f.getc                 #=> 84
   f.ungetc(c)                #=> nil
   f.getc                     #=> 84
-   
+#@end
+
 --- write(str)     -> Integer
 
 IOポートに対して str を出力します。str が文字列でなけ
@@ -1244,6 +1347,8 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 自身を 1 行ずつイテレートするような
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
 
+テキスト読み込みメソッドとして動作します。
+
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
 
@@ -1251,30 +1356,25 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
 
 @see [[m:$/]]
-#@end
 
-
-#@since 1.9.0
 --- getbyte   -> Integer | nil
-#@todo
 
-Gets the next 8-bit byte (0..255) from ios. Returns nil if called
-at end of file.
+IO から1バイトを読み込み整数として返します。
+既に EOF に達していれば nil を返します。
 
    f = File.new("testfile")
    f.getbyte   #=> 84
    f.getbyte   #=> 104
 
 --- readbyte   -> Integer
-#@todo
 
-Reads a character as with IO#getc, but raises an EOFError on
-end of file.
+IO から1バイトを読み込み整数として返します。
+既に EOF に達していれば EOFError が発生します。
 
 --- close_on_exec= bool    -> bool
 #@todo
 
-Sets a close-on-exec flag.
+自身に close-on-exec フラグを設定します。
 
    f = open("/dev/null")
    f.close_on_exec = true
@@ -1284,7 +1384,8 @@ Sets a close-on-exec flag.
 --- close_on_exec?   -> bool
 #@todo
 
-Returns true if ios will be closed on exec.
+自身に close-on-exec フラグが設定されていた場合 true を返します。
+そうでない場合に false を返します。
 
    f = open("/dev/null")
    f.close_on_exec?                 #=> false
@@ -1293,31 +1394,33 @@ Returns true if ios will be closed on exec.
    f.close_on_exec = false
    f.close_on_exec?                 #=> false
 
---- external_encoding   -> Encoding
-#@todo
+--- external_encoding   -> Encoding | nil
 
-Returns the Encoding object that represents the encoding of the
-file. If io is write mode and no encoding is specified, returns
-nil.
+IO の外部エンコーディングを返します。
+外部エンコーディングが指定されていない場合は nil を返します。
 
---- internal_encoding   -> Encoding
-#@todo
+--- internal_encoding   -> Encoding | nil
 
-Returns the Encoding of the internal string if conversion is
-specified. Otherwise returns nil.
+IO の内部エンコーディングを返します。
+内部エンコーディングが指定されていない場合は nil を返します。
 
---- set_encoding(enc_str)           -> IO
---- set_encoding(ext_enc)           -> IO
---- set_encoding(ext_enc, int_enc)  -> IO
-#@todo
+--- set_encoding(enc_str)           -> self
+--- set_encoding(ext_enc)           -> self
+--- set_encoding(ext_enc, int_enc)  -> self
 
-If single argument is specified, read string from io is tagged
-with the encoding specified. If encoding is a colon separated
-two encoding names "A:B", the read string is converted from encoding
-A (external encoding) to encoding B (internal encoding), then
-tagged with B. If two arguments are specified, those must be
-encoding objects or encoding names, and the first one is the
-external encoding, and the second one is the internal encoding.
+IO のエンコーディングを設定します。
+
+@param enc_str エンコーディングを表す文字列を指定します。"A:B" のようにコロンで区切られた
+               文字列を指定した場合 A が外部エンコーディング、B が内部エンコーディングを
+               表します。
+
+@param ext_enc 外部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
+
+@param int_enc 内部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
+
+例:
+    io = File.open(file)
+    io.set_encoding("ASCII-8BIT", "EUC-JP")
 
 #@end
 
