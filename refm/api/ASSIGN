@@ -247,7 +247,7 @@ securerandom                    sheepman
 set
 sha1
 shell
-shellwords                      m-kawato
+shellwords                      m-kawato        done
 singleton                       snoozer05       done
 soap
 socket
