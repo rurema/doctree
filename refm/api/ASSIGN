@@ -244,7 +244,7 @@ rubyunit
 scanf
 sdbm
 securerandom                    sheepman
-set
+set                             m-kawato
 sha1
 shell
 shellwords                      m-kawato        done
