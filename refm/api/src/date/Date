@@ -256,8 +256,7 @@ include Comparable
 
 #@since 1.8.0
 #@since 1.9.0
-#@# exp
---- _parse(str, hints = {}) -> Hash
+--- _parse(str, complete = true) -> Hash
 #@else
 --- _parse(str, complete = false) -> Hash
 #@end
@@ -267,16 +266,10 @@ include Comparable
 [[m:Date.parse]] も参照してください。
 
 @param str 日付をあらわす文字列
-#@since 1.9.0
-#@# exp
-@param hints ヒント
-#@else
 @param complete 年を補完するか
-#@end
 
 #@since 1.9.0
-#@# exp
---- parse(str = '-4712-01-01', hints = {}, start = Date::ITALY) -> Date
+--- parse(str = '-4712-01-01', complete = true, start = Date::ITALY) -> Date
 #@else
 --- parse(str = '-4712-01-01', complete = false, start = Date::ITALY) -> Date
 #@end
@@ -284,10 +277,9 @@ include Comparable
 その情報に基づいて日付オブジェクトを生成します。
 
 #@since 1.9.0
-#@# exp
 年が "00" から "99" の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
-この振舞いを抑止したい場合は、ヒントとして、complete:false を与えます。
+この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
 #@else
 complete が真で、年が "00" から "99" の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
@@ -298,12 +290,6 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
-#@since 1.9.0
-#@# exp
-@param hints ヒント
-#@else
-@param complete 年を補完するか
-#@end
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付
 
