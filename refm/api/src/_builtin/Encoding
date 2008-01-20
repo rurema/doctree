@@ -3,6 +3,14 @@
 
 == Class Methods
 
+--- aliases    -> Hash
+
+Returns the hash of available encoding alias and original encoding name.
+
+  p Encoding.aliases
+  #=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1986"=>"US-ASCII",
+      "SJIS"=>"Shift_JIS", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
+
 --- compatible?(str1, str2) -> Encoding | nil
 
 2¤Ä¤ÎÊ¸»úÎó¤Ë¸ß´¹À­¤¬¤¢¤ë¤«¤É¤¦¤«¤ò¥Á¥§¥Ã¥¯¤·¤Þ¤¹¡£¸ß´¹À­¤¬¤¢¤ëÊ¸»úÎó¤Ï
@@ -37,6 +45,18 @@
     => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
         #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
         #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
+
+--- name_list    -> [Encoding]
+
+Returns the list of available encoding names.
+
+  p Encoding.name_list
+  #=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
+       "ISO-8859-1", "Shift_JIS", "EUC-JP",
+       "Windows-31J",
+       "BINARY", "CP932", "eucJP"]
+
+This list doesn't include dummy encodings.
 
 --- default_external -> Encoding
 #@todo
@@ -102,25 +122,22 @@ Ruby ¤Ï¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤¬³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤¬¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò°·¤
 
 == Constants
 
---- ASCII
 --- ASCII_8BIT
 --- BINARY
 
 ÊÑ´¹¤ò¹Ô¤ï¤Ê¤¤¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
 
 --- EUC_JP
+--- EUC_JP_MS
 --- EucJP
 --- EUCJP
 
 EUC-JP ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- ISO_2022_JP
+--- ISO2022_JP
 
 ISO-2022-JP ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
-
---- ISO_8859_1
-
-ISO-8859-1 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- SHIFT_JIS
 --- Shift_JIS
@@ -129,19 +146,240 @@ ISO-8859-1 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 Shift-JIS ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- US_ASCII
+--- ASCII
+--- ANSI_X3_4_1968
 
 ASCIIÊ¸»ú¤Î¤ß¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£ÄÌ¾ï¤Î ASCII Ê¸»ú¤ÎÈÏ°Ï³°¤Î¥Ð¥¤¥È
 (¤¿¤È¤¨¤Ð\x80¤Ê¤É)¤¬´Þ¤Þ¤ì¤ë¾ì¹ç¤ÏÀµ¤·¤¤¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¢¤ë¤È¤ß¤Ê¤·
 ¤Þ¤»¤ó¡£
 
-¤Ê¤ª¡¢ US_ASCII Äê¿ô¤ÏºÇ½é¤ÏÂ¸ºß¤·¤Þ¤»¤ó¡£ Encoding.find("US-ASCII") ¤Ê
-¤É¤ò¼Â¹Ô¤·¤Æ US-ASCII ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò¥í¡¼¥É¤·¤¿¤È¤­¤Ë¡¢ Encoding ¥¯
-¥é¥¹¤ËÄÉ²Ã¤µ¤ì¤Þ¤¹¡£
+--- UTF_16BE
 
-@see [[m:Encoding.find]]
+--- UTF_16LE
+
+--- UTF_32BE
+
+--- UTF_32LE
 
 --- UTF_8
 
 UTF-8 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+--- Big5
+--- BIG5
+--- CP950
+
+--- CP51932
+
+--- CP850
+--- IBM850
+
+--- CP852
+
+--- CP855
+
+--- CP936
+
+--- CP949
+
+--- EUCCN
+--- EucCN
+
+--- EUC_KR
+--- EUCKR
+--- EucKR
+
+--- EUC_TW
+--- EUCTW
+--- EucTW
+
+--- GB18030
+
+--- GB1988
+
+--- GBK
+--- WINDOWS_936
+--- Windows_936
+
+--- IBM437
+--- CP437
+
+--- IBM737
+--- CP737
+
+--- IBM775
+--- CP775
+
+--- IBM852
+
+--- IBM855
+
+--- IBM857
+--- CP857
+
+--- IBM860
+--- CP860
+
+--- IBM861
+--- CP861
+
+--- IBM862
+--- CP862
+
+--- IBM863
+--- CP863
+
+--- IBM864
+--- CP864
+
+--- IBM865
+--- CP865
+
+--- IBM866
+--- CP866
+
+--- IBM869
+--- CP869
+
+--- ISO_2022_JP_2
+--- ISO2022_JP2
+
+--- ISO_8859_1
+--- ISO8859_1
+
+ISO-8859-1 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+--- ISO_8859_10
+--- ISO8859_10
+
+--- ISO_8859_11
+--- ISO8859_11
+
+--- ISO_8859_13
+--- ISO8859_13
+
+--- ISO_8859_14
+--- ISO8859_14
+
+--- ISO_8859_15
+--- ISO8859_15
+
+--- ISO_8859_16
+--- ISO8859_16
+
+--- ISO_8859_2
+--- ISO8859_2
+
+--- ISO_8859_3
+--- ISO8859_3
+
+--- ISO_8859_4
+--- ISO8859_4
+
+--- ISO_8859_5
+--- ISO8859_5
+
+--- ISO_8859_6
+--- ISO8859_6
+
+--- ISO_8859_7
+--- ISO8859_7
+
+--- ISO_8859_8
+--- ISO8859_8
+
+--- ISO_8859_9
+--- ISO8859_9
+
+--- KOI8_R
+
+--- KOI8_U
+
+--- MacJapanese
+--- MACJAPAN
+--- MACJAPANESE
+--- MacJapan
+
+--- TIS_620
+
+--- Windows_1250
+--- CP1250
+--- WINDOWS_1250
+
+--- Windows_1251
+--- CP1251
+--- WINDOWS_1251
+
+--- Windows_1252
+--- CP1252
+--- WINDOWS_1252
+
+--- Windows_1253
+--- CP1253
+--- WINDOWS_1253
+
+--- Windows_1254
+--- CP1254
+--- WINDOWS_1254
+
+--- Windows_1255
+--- CP1255
+--- WINDOWS_1255
+
+--- Windows_1256
+--- CP1256
+--- WINDOWS_1256
+
+--- Windows_1257
+--- CP1257
+--- WINDOWS_1257
+
+--- Windows_1258
+--- CP1258
+--- WINDOWS_1258
+
+--- Windows_31J
+--- CP932
+--- CSWINDOWS31J
+--- CsWindows31J
+--- WINDOWS_31J
+
+--- Windows_874
+--- CP874
+--- WINDOWS_874
+
+--- EucJP_ms
+--- EUCJP_MS
+
+--- MacCentEuro
+--- MACCENTEURO
+
+--- MacCroatian
+--- MACCROATIAN
+
+--- MacCyrillic
+--- MACCYRILLIC
+
+--- MacGreek
+--- MACGREEK
+
+--- MacIceland
+--- MACICELAND
+
+--- MacRoman
+--- MACROMAN
+
+--- MacRomania
+--- MACROMANIA
+
+--- MacThai
+--- MACTHAI
+
+--- MacTurkish
+--- MACTURKISH
+
+--- MacUkraine
+--- MACUKRAINE
+
 
 #@end
