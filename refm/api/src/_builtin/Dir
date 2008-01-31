@@ -226,6 +226,8 @@ mode で指定された値に umask をかけた値 (mode & ~umask) になります。
   Dir.mkdir('t', 0666)
   p "%#o" % (07777 & File.stat('t').mode)  #=> "0664"
 
+@see [[m:FileUtils.#makedirs]]
+
 --- new(path)               -> Dir
 --- open(path)              -> Dir
 #@if (version >= "1.8.0")
