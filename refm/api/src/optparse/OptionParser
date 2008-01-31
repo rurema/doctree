@@ -484,7 +484,7 @@ order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 環境変数に POSIXLY_CORRECT が設定されている場合は、
 [[m:OptionParser#order]] と同様に振舞います。
 
-parse! は [[m:OptionParser#permute!]] と同様に argv を破壊的にをパースします。
+parse! は [[m:OptionParser#permute!]] と同様に argv を破壊的にパースします。
 環境変数に POSIXLY_CORRECT が設定されている場合は、
 [[m:OptionParser#order!]] と同様に振舞います。
 

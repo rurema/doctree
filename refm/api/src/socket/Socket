@@ -280,7 +280,7 @@ unpack したアドレスを返します。返される値は [port, ipaddr]
 #@todo
 
 [[m:socket#ソケットアドレス構造体を pack した文字列]]を
-unpack したソケットパス名をを返します。
+unpack したソケットパス名を返します。
 
 例:
 

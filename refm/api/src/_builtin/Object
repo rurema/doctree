@@ -1610,7 +1610,7 @@ initialize という名前のメソッドは自動的に private に設定され
 し、self のインスタンス変数や特異メソッドは変化しません。
 [[m:Object#clone]], [[m:Object#dup]]の内部で使われています。
 
-initialize_copy は、Ruby インタプリンタが知り得ない情報をコピーするた
+initialize_copy は、Ruby インタプリタが知り得ない情報をコピーするた
 めに使用(定義)されます。例えば C 言語でクラスを実装する場合、情報
 をインスタンス変数に保持させない場合がありますが、そういった内部情
 報を initialize_copy でコピーするよう定義しておくことで、dup や clone
