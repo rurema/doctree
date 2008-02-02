@@ -257,7 +257,7 @@ sync
 syslog
 tempfile                        kouya           done
 test/unit                       sheepman
-thread
+thread                          m-kawato
 thwait
 time
 timeout
