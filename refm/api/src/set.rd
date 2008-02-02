@@ -1,277 +1,516 @@
-集合を表す Set クラスを提供します。集合とは重複のないオブジェクトの
-順序づけられていない集まりです。
-[[c:Array]] の持つ演算機能と [[c:Hash]] のような高速な検索を合わせ持ちます。
+集合を表す Set クラスと、取り出し順序を保証した SortedSet クラスを提供
+します。
 
-#@# Set は重複のないオブジェクトの順序づけられていない集まりの実装です。
-#@# Arrayの持つ演算機能とHashのような高速な検索を合わせ持ちます。
+集合とは重複のないオブジェクトの集まりです。
+[[c:Array]] の持つ演算機能と [[c:Hash]] の高速な検索機能を合わせ持ちます。
 
-2つのオブジェクトの等価性は Object#eql? と Object#hash によります。
-なぜなら、Set は Hash を記憶として使っているからです。
+Set および SortedSet は内部記憶として [[c:Hash]] を使うため、集合要素の
+等価性は [[m:Object#eql?]] と [[m:Object#hash]] を用いて判断されます。
+したがって、集合の各要素には、これらのメソッドが適切に定義されている
+必要があります。
+
+Set クラスでは、集合要素を取り出す際の順序は保証されません。
+一方、SortedSort では、集合要素はソートされた順序で取り出されます。
+
+また、set ライブラリを require すると [[c:Enumerable]] モジュールが
+拡張され、[[m:Enumerable#to_set]] の形で集合オブジェクトを生成できる
+ようになります。
+
+=== 注意事項
+
+#@if (version < "1.9.0")
+Ruby 1.8 では、集合オブジェクトに対する taint, untaint, freeze の各
+メソッドは、内部記憶として保持するハッシュには影響しません。
+このため、集合オブジェクトの凍結および汚染マークのセットは実質的な
+効果を持ちません。
+例えば、set.freeze に続いて set.add を呼び出しても、エラーは発生
+しません。
+#@else
+Ruby 1.9 では、集合オブジェクトに対する taint, untaint, freeze の各
+メソッドの効果は、内部記憶として保持するハッシュにも適用されます。
+
+集合オブジェクトおよびその内部記憶にセットされた taint 情報は、
+dupおよび clone メソッドによって複製された集合オブジェクトにもコピー
+されます。
+
+ただし、freeze された集合を clone した場合、複製された集合の内部記憶
+には freeze 情報が引き継がれません。
+したがって、生成された集合に対する要素の変更はエラーになりません。
+#@end
 
 
-=== 例:
-
+=== 例
   require 'set'
   
   set1 = Set.new ["foo", "bar", "baz", "foo"]
-  
-  p set1                        #=> #<Set: {"baz", "foo", "bar"}>
-  
-  p set1.include?("bar")        #=> true
+
+  p set1                  #=> #<Set: {"baz", "foo", "bar"}>
+  p set1.include?("bar")  #=> true
   
   set1.add("heh")
   set1.delete("foo")
-  
-  p set1                        #=> #<Set: {"heh", "baz", "bar"}>
+  p set1                  #=> #<Set: {"heh", "baz", "bar"}>
 
 
 = class Set < Object
+
 include Enumerable
 
+集合を表すクラスです。要素の間に順序関係はありません。
+
 == Class Methods
---- new(enum = nil)
-#@todo
+--- new(enum = nil) -> Set
+--- new(enum = nil) {|o| ... } -> Set
 
-引数 enum で与えられた Enumerable の要素からなる新しい集合を作ります。
+引数 enum で与えられた要素を元に、新しい集合を作ります。
 
---- [](*ary)
-#@todo
+引数を指定しない場合、または引数が nil である場合には、空の集合を
+作ります。
 
-与えられたオブジェクトからなる新しい集合を作ります。
+引数を与えてブロックを与えない場合、enum の各要素からなる集合を
+作ります。
+
+引数とブロックの両方を与えた場合、enum の各要素についてブロックを
+評価し、その結果を新しい集合の要素とします。
+
+@param enum Enumerable オブジェクトを指定します。
+
+  p Set.new                      #=> #<Set: {}>
+  p Set.new([1, 2])              #=> #<Set: {1, 2}>
+  p Set.new([1, 2]) {|o| o * 2}  #=> #<Set: {2, 4}>
+
+--- [](*ary) -> Set
+
+与えられたオブジェクトを要素とする新しい集合を作ります。
+
+@param ary 新しい集合の要素を指定します。
+
+  p Set[1, 2] #=> #<Set: {1, 2}>
+
 
 == Instance Methods
---- dup
-#@todo
+--- clone -> Set
+--- dup -> Set
 
-集合を複製します。
+集合を複製して返します。
 
---- size
---- length
-#@todo
+dup は、集合の内容と taint 情報のみコピーします。
+clone は、それに加えて、freeze 情報と特異メソッドをコピーします。
+いずれも共通して、内部記憶として保持するハッシュもコピーしますが、
+集合の要素そのものはコピーしません。
 
-要素の個数を返します。
+#@if (version < "1.9.0")
+ただし、Ruby 1.8 の Set クラスでは、内部記憶として用いるハッシュには
+taint 情報および freeze 情報が付加されないので、taint 情報および
+freeze 情報のコピーは実質的な効果を持ちません。
+#@else
+Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶として
+用いるハッシュも含めて taint 情報をコピーします。
+ただし、clone では内部記憶の freeze 情報はコピーされません。
+このため、freeze された集合を clone した場合、生成された集合の要素は
+変更可能である点に注意してください。
+#@end
 
---- empty?
-#@todo
+  s1 = Set[10, 20]
+  
+  s2 = s1.dup
+  s2 << 30
+  p s1 #=> #<Set: {20, 10}>
+  p s2 #=> #<Set: {30, 20, 10}>
 
-要素を1つも持たないときに true を返します。
+@see [[m:Object#clone]]
 
---- clear
-#@todo
+--- size -> Integer
+--- length -> Integer
 
-要素をすべて削除します。
+集合の要素数を返します。
 
---- replace(enum)
-#@todo
+  p Set[10, 20, 30, 10].size #=> 3
 
-要素を enum のものと置き換えます。要素をすべて削除し、enum で与え
-られた Enumerable の要素を新しい要素とします。
+--- empty? -> bool
 
---- flatten
-#@todo
+集合が要素を 1 つも持たないときに true を返します。
 
-ネストした集合を平滑化して作られる新しい集合を返します。
+  p Set[10, 20].empty? #=> false
+  p Set[].empty?       #=> true
 
-例:
+--- clear -> self
 
-  p s0 = Set[Set[1,2], 3]  #=> #<Set: {#<Set: {1, 2}>, 3}>
-  p s0.flatten             #=> #<Set: {1, 2, 3}>
-  p s1 = Set[Set[1,2], 1]  #=> #<Set: {#<Set: {1, 2}>, 1}>
-  p s1.flatten             #=> #<Set: {1, 2}>
+集合の要素をすべて削除し、空にした後の self を返します。
 
---- flatten!
-#@todo
+  p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
+  s.clear
+  p s #=> #<Set: {}>
 
-flatten と同じですが、
-集合それ自身が平滑化して作られた新しい集合の要素で置き換えられます。
-ただし、要素の変更が起こらなかったときには nil を返します。
+--- replace(enum) -> self
 
---- to_a
-#@todo
+集合の要素をすべて削除し、enum で与えられた要素に置き換えます。
 
-配列に変換します。順序は不定です。
+@param enum 置き換え後の集合要素を格納する Enumerable オブジェクトを
+            指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 
---- include?(o)
---- member?(o)
-#@todo
+  p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
+  s.replace([15, 25])
+  p s #=> #<Set: {25, 15}>
 
-オブジェクト o がその集合に属す場合に true を返します。
+--- flatten -> Set
+--- flatten! -> self | nil
 
---- superset?(set)
-#@todo
+集合を再帰的に平滑化します。
 
-集合が与えられた集合 set を含む場合に true を返します。
+flatten は、平滑化した集合を新しく作成し、それを返します。
 
---- proper_superset?(set)
-#@todo
+flatten! は、元の集合を破壊的に平滑化します。集合の要素に変更が
+発生した場合には self を、そうでない場合には nil を返します。
 
-集合が与えられた集合 set を真に含む場合に true を返します。つまり、
-ふたつの集合が等しい場合には false を返します。
+@raise ArgumentError 集合の要素として自身が再帰的に現れた場合に発生
+                     します。
 
---- subset?(set)
-#@todo
+  s = Set[Set[1,2], 3]
+  p s.flatten #=> #<Set: {1, 2, 3}>
+  p s         #=> #<Set: {#<Set: {1, 2}>, 3}>
+  s.flatten!
+  p s         #=> #<Set: {1, 2, 3}>
 
-集合が与えられた集合 set に含まれる場合に true を返します。
+@see [[m:Array#flatten]]
 
---- proper_subset?(set)
-#@todo
 
-集合が与えられた集合 set に真に含まれる場合に true を返します。つまり、
-ふたつの集合が等しい場合には false を返します。
+--- to_a -> Array
+自身を配列に変換します。要素の順序は不定です。
 
---- each { |o| ... }
-#@todo
+  set = Set['hello', 'world']
+  p set.to_a
+  #=> ["world", "hello"]
 
-集合のすべての要素に対して1度ずつブロックを実行します。
-ブロック変数 o にはその要素が渡されます。
+--- include?(o) -> bool
+--- member?(o) -> bool
 
---- map! {|o| ...}
---- collect! {|o| ...}
-#@todo
+オブジェクト o がその集合に属する場合に true を返します。
 
-Do collect() destructively.
+@param o オブジェクトを指定します。
 
---- add(o)
---- << o
-#@todo
+  set = Set['hello', 'world']
+  p set.include?('world') #=> true
+  p set.include?('bye') #=> false
 
-集合にオブジェクト o を加え、その集合自身を返します。
+--- superset?(set) -> bool
+--- proper_superset?(set) -> bool
 
---- add?(o)
-#@todo
+自身が集合 set を含む場合に true を返します。
 
-Adds the given object to the set and returns self. If the object
-is already in the set, returns nil.
+superset? は、2 つの集合が等しい場合にも true となります。
 
---- delete(o)
-#@todo
+proper_superset? は、2 つの集合が等しい場合には false を返します。
 
-集合からオブジェクト o を削除し、その集合自身を返します。
+@param set 比較対象の Set オブジェクトを指定します。
+@raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
---- delete?(o)
-#@todo
+  s = Set[1, 2, 3]
+  p s1.superset?(Set[1, 2]) #=> true
+  p s1.superset?(Set[1, 4]) #=> false
+  p s1.superset?(Set[1, 2, 3]) #=> true
+  p s.proper_superset?(Set[1, 2]) #=> true
+  p s.proper_superset?(Set[1, 4]) #=> false
+  p s.proper_superset?(Set[1, 2, 3]) #=> false
 
-Deletes the given object from the set and returns self. If the
-object is not in the set, returns nil.
+@see [[m:Set#subset?]]
 
---- delete_if { |o| ... }
-#@todo
+--- subset?(set) -> bool
+--- proper_subset?(set) -> bool
 
-ブロックで最後に評価された値が真であるようなすべての要素を削除し、
-その集合自身を返します。
+自身が集合 set の部分集合である場合に true を返します。
 
---- reject! { |o| ... }
-#@todo
+subset? は、2 つの集合が等しい場合にも true となります。
 
-delete_if と同じですが、要素が1つも削除されなかった場合は nil を返します。
+proper_subset? は、2 つの集合が等しい場合には false を返します。
 
---- merge(enum)
-#@todo
+@param set 比較対象の Set オブジェクトを指定します。
+@raise ArgumentError 引数が Set オブジェクトでない場合に発生します。
 
-enum で与えられた Enumerable の要素を追加し、その集合自身を返します。
+  s = Set[1, 2]
+  p s.subset?(Set[1, 2, 3]) #=> true
+  p s.subset?(Set[1, 4]) #=> false
+  p s.subset?(Set[1, 2]) #=> true
+  p s.proper_subset?(Set[1, 2, 3]) #=> true
+  p s.proper_subset?(Set[1, 4]) #=> false
+  p s.proper_subset?(Set[1, 2]) #=> false
 
---- subtract(enum)
-#@todo
+@see [[m:Set#superset?]]
 
-enum で与えられた Enumerable の要素を削除し、その集合自身を返します。
+--- each {|o| ... } -> self
 
---- union(enum)
---- +(enum)
---- |(enum)
-#@todo
+集合の各要素についてブロックを実行します。
 
-和集合、すなわち、2つの集合の少なくともどちらか一方に属するすべて
-の要素からなる新しい集合を作りそれを返します。
+  s = Set[10, 20]
+  ary = []
+  s.each {|num| ary << num + 1}
+  p ary #=> [21, 11]
 
---- difference(enum)
---- -(enum)
-#@todo
+--- collect! {|o| ...} -> self
+--- map! {|o| ...} -> self
 
-差集合、すなわち、前者に属し後者に属さないすべての要素からなる
-新しい集合を作りそれを返します。
+集合の各要素についてブロックを評価し、その結果で元の集合を置き換えます。
 
---- intersection(enum)
---- &(enum)
-#@todo
+  set = Set['hello', 'world']
+  set.map! {|str| str.capitalize}
+  p set  #=> #<Set: {"Hello", "World"}>
+
+@see [[m:Enumerable#collect]]
+
+--- add(o) -> self
+--- << o -> self
+--- add?(o) -> self | nil
+
+集合にオブジェクト o を加えます。
+
+add は常に self を返します。<< は add の別名です。
+
+add? は、集合に要素が追加された場合には self を、変化がなかった場合には
+nil を返します。
+
+@param o 追加対象のオブジェクトを指定します。
+
+  s = Set[1, 2]
+  s << 10
+  p s          #=> #<Set: {1, 2, 10}>
+  p s.add?(20) #=> #<Set: {1, 2, 20, 10}>
+  p s.add?(2)  #=> nil
+
+
+--- delete(o) -> self
+--- delete?(o) -> self | nil
+
+集合からオブジェクト o を削除します。
+
+delete は常に self を返します。
+
+delete? は、集合の要素が削除された場合には self を、変化がなかった場合
+には nil を返します。
+
+@param o 削除対象のオブジェクトを指定します。
+
+  s = Set[10, 20, 30]
+  s.delete(10)
+  p s             #=> #<Set: {30, 20}>
+  p s.delete?(20) #=> #<Set: {30}>
+  p s.delete?(10) #=> nil
+
+--- delete_if {|o| ... } -> self
+--- reject! {|o| ... } -> self | nil
+
+集合の各要素に対してブロックを実行し、その結果が真であるようなすべての
+要素を削除します。
+
+delete_if は常に self を返します。
+
+reject! は、要素が 1 つ以上削除されれば self を、1 つも削除されなければ
+nil を返します。
+
+  s1 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
+  s1.delete_if {|str| str =~ /\.bak$/}
+  p s1 #=> #<Set: {"test.rb", "hello.rb"}>
+  
+  s2 = Set['hello.rb', 'test.rb', 'hello.rb.bak']
+  p s2.reject! {|str| str =~ /\.bak$/} #=> #<Set: {"test.rb", "hello.rb"}>
+  p s2.reject! {|str| str =~ /\.o$/}   #=> nil
+
+@see [[m:Enumerable#reject]]
+
+--- merge(enum) -> self
+
+元の集合に enum で与えられた要素を追加します。
+
+@param enum 追加対象の要素を格納した Enumerate オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+
+  set = Set[10, 20]
+  set.merge([10, 30])
+  p set #=> #<Set: {30, 20, 10}>
+
+--- subtract(enum) -> self
+
+元の集合から、enum で与えられた要素を削除します。
+
+@param enum 削除対象の要素を格納した Enumerate オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+
+  set = Set[10, 20, 40]
+  set.subtract([10, 20, 30])
+  p set #=> #<Set: {40}>
+
+--- union(enum) -> Set
+--- +(enum) -> Set
+--- |(enum) -> Set
+
+和集合、すなわち、2 つの集合の少なくともどちらか一方に属するすべての
+要素からなる新しい集合を作ります。
+
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+
+  p Set[10, 20, 30] + Set[10, 20, 40]
+  #=> #<Set: {40, 30, 20, 10}>
+
+--- difference(enum) -> Set
+--- -(enum) -> Set
+
+差集合、すなわち、元の集合の要素のうち引数 enum に含まれる要素を取り除いた
+新しい集合を作ります。
+
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+
+  p Set[10, 20, 30] - Set[10, 20, 40]
+  #=> #<Set: {30}>
+
+--- intersection(enum) -> Set
+--- &(enum) -> Set
 
 共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる
-新しい集合を作りそれを返します。
+新しい集合を作ります。
 
---- ^(enum)
-#@todo
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 
-対称差、すなわち、2つの集合のいずれか一方にだけ属するすべての要素からなる
-新しい集合を作りそれを返します。
+  s1 = Set[10, 20, 30]
+  s2 = Set[10, 30, 50]
+  p s1 & s2 #=> #<Set: {30, 10}>
 
---- ==(set)
-#@todo
+--- ^(enum) -> Set
 
-2つの集合が等しいときに true を返します。
-要素の等しさは Object#eql? で検査されます。
+対称差、すなわち、2 つの集合のいずれか一方にだけ属するすべての要素からなる
+新しい集合を作ります。
 
---- classify { |o| ... }
-#@todo
+@param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
 
-集合をブロックの値によって分類します。返される分類結果は、
-{値 => 要素の集合} という形をしたハッシュです。
-ブロックは集合のすべての要素に対して1度ずつ実行され、
-ブロック変数 o にはその要素が渡されます。
+  s1 = Set[10, 20, 30]
+  s2 = Set[10, 30, 50]
+  p s1 ^ s2 #=> #<Set: {50, 20}>
 
-例:
+--- ==(set) -> bool
 
-  require 'set'
-  files = Set.new(Dir.glob("*.rb"))
-  hash = files.classify { |f| File.mtime(f).year }
-  p hash    #=> {2000=>#<Set: {"a.rb", "b.rb"}>,
-            #    2001=>#<Set: {"c.rb", "d.rb", "e.rb"}>,
-            #    2002=>#<Set: {"f.rb"}>}
+2 つの集合が等しいときに true を返します。
 
---- divide { |o| ... }
---- divide { |o1, o2| ... }
-#@todo
+より厳密には、引数 set が Set オブジェクトであり、自身と set が同数の
+要素を持ち、かつそれらの要素がすべて等しい場合に true となります。
+それ以外の場合には、false を返します。
+要素の等しさは [[m:Object#eql?]] により判定されます。
 
-商集合、すなわちブロックで定義される関係で分割した結果を集合として
-返します。
+@param set 比較対象のオブジェクトを指定します。
 
-引数が2個のときは block.call(o1, o2) が真ならば o1 と o2 は同じ分
-割に属します。引数が1個のときは block.call(o1) == block.call(o2)
-が真ならばo1 と o2 は同じ分割に属します。つまりブロックの引数が2個
-のときはブロックの値の真偽で決まる同値類に、引数が1個のときはブロッ
-クの値の == による等しさで定義される同値類に分割されます。
+  s1 = Set[10, 20, 30]
+  s2 = Set[10, 30, 40]
+  s3 = Set[30, 10, 30, 20]
+  p s1 == s2 #=> false
+  p s1 == s3 #=> true
 
-引数が2個のときは、いわゆる同値関係のうち、
-対称律「block.call(o1, o2) ならば block.call(o2, o1)」、
-そして推移律「block.call(o1, o2) かつ
-block.call(o2, o3) ならば
-block.call(o1, o3)」
-の2つを満たすことが仮定されています。
+--- classify {|o| ... } -> Hash
 
-例:
+集合をブロックの値によって分類し、結果をハッシュとして返します。
 
-  require 'set'
+ブロックは集合の各要素について実行され、引数 o にはその要素が
+渡されます。
+
+生成されるハッシュのキーはブロックの実行結果、値は分類された集合と
+なります。
+
+  numbers = Set[10, 4.5, 20, 30, 31.2]
+  p numbers.classify {|o| o.class}
+  #=> {Float=>#<Set: {4.5, 31.2}>, Fixnum=>#<Set: {30, 20, 10}>}
+
+--- divide {|o| ... } -> Set
+--- divide {|o1, o2| ... } -> Set
+
+商集合を計算します。すなわち、元の集合をブロックで定義される関係で
+分割し、その結果を集合として返します。
+
+ブロックの引数が 1 個の場合、block.call(o1) == block.call(o2) が真
+ならば、o1 と o2 は同じ分割に属します。
+
+ブロックの引数が 2 個の場合、block.call(o1, o2) が真ならば、
+o1 と o2 は同じ分割に属します。
+
+==== 例1
+  numbers = Set.new(1..6)
+  set = numbers.divide {|i| i % 3}
+  p set
+  #=> #<Set: {#<Set: {5, 2}>, #<Set: {1, 4}>, #<Set: {6, 3}>}>
+
+==== 例2
   numbers = Set[1, 3, 4, 6, 9, 10, 11]
-  set = numbers.divide { |i,j| (i - j).abs == 1 }
+  set = numbers.divide {|i, j| (i - j).abs == 1}
   p set     #=> #<Set: {#<Set: {1}>,
             #           #<Set: {11, 9, 10}>,
             #           #<Set: {3, 4}>,
             #           #<Set: {6}>}>
 
-応用例:
+==== 応用例
+8x2 のチェス盤上で、ナイトが到達できる位置に関する分類を作成します。
 
-  # 8x2 のチェス盤上でナイトが到達できる位置に関する分類
-  require "set"
+  require 'set'
+
   board = Set.new
   m, n = 8, 2
-  for i in 1..m do for j in 1..n do board << [i,j] end end
+  for i in 1..m
+    for j in 1..n
+      board << [i,j]
+    end
+  end
   knight_move = Set[1,2]
   p board.divide { |i,j|
-    Set[(i[0]-j[0]).abs, (i[1]-j[1]).abs] == knight_move
-  }  #=> #<Set: {#<Set: {[6, 2], [4, 1], [2, 2], [8, 1]}>,
-     #           #<Set: {[2, 1], [8, 2], [6, 1], [4, 2]}>,
-     #           #<Set: {[1, 1], [3, 2], [5, 1], [7, 2]}>,
-     #           #<Set: {[1, 2], [5, 2], [3, 1], [7, 1]}>}>
+    Set[(i[0] - j[0]).abs, (i[1] - j[1]).abs] == knight_move
+  }
+  #=> #<Set: {#<Set: {[6, 2], [4, 1], [2, 2], [8, 1]}>,
+  #            #<Set: {[2, 1], [8, 2], [6, 1], [4, 2]}>,
+  #            #<Set: {[1, 1], [3, 2], [5, 1], [7, 2]}>,
+  #            #<Set: {[1, 2], [5, 2], [3, 1], [7, 1]}>}>
 
---- inspect
-#@todo
+--- inspect -> String
 
 人間の読みやすい形に表現した文字列を返します。
+
+  puts Set.new(['element1', 'element2']).inspect
+  #=> #<Set: {"element1", "element2"}>
+
+
+= class SortedSet < Set
+
+各要素をソートされた形で扱う集合クラスです。
+
+各メソッドの使用方法については、[[c:Set]] を参照してください。
+
+RBTree ライブラリ ([[url:http://raa.ruby-lang.org/project/ruby-rbtree]])
+が利用可能である場合、内部記憶としてハッシュの代わりに RBTreeを使用します。
+
+= reopen Enumerable
+
+== Instance Methods
+
+--- to_set(klass = Set, *args) -> Set
+--- to_set(klass = Set, *args) {|o| ... } -> Set
+
+Enumerable オブジェクトの要素から、新しい集合オブジェクトを作ります。
+
+引数 klass を与えた場合、Set クラスの代わりに、指定した集合クラスの
+インスタンスを作ります。
+この引数を指定することで、SortedSet あるいはその他のユーザ定義の
+集合クラスのインスタンスを作ることができます。
+
+引数 args およびブロックは、集合オブジェクトを生成するための new 
+メソッドに渡されます。
+
+@param klass 生成する集合クラスを指定します。
+@param args 集合クラスのオブジェクト初期化メソッドに渡す引数を指定します。
+@param block 集合クラスのオブジェクト初期化メソッドに渡すブロックを指定します。
+@return 生成された集合オブジェクトを返します。
+
+  p [10, 20, 30].to_set 
+  #=> #<Set: {30, 20, 10}>
+  p [10, 20, 30].to_set(SortedSet)
+  #=> #<SortedSet: {10, 20, 30}>
+  p [10, 20, 30].to_set {|num| num / 10}
+  #=> #<Set: {1, 2, 3}>
+
+@see [[m:Set#new]]
