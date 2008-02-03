@@ -25,9 +25,13 @@ StringIO オブジェクトを生成して返します。
 与えられた string がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
 ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価します。
 
-@param string 生成される StringIO のデータを文字列で指定します。この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、string 自身も書き換えられます。
+@param string 生成される StringIO のデータを文字列で指定します。
+              この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
+              string 自身も書き換えられます。
 
 @param mode [[m:Kernel#open]] 同様文字列か整数で指定します。
+
+@raise Errno::EACCES string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
         require 'stringio'
          
@@ -46,19 +50,31 @@ StringIO オブジェクトを生成して返します。
           p io.string   # => "hoge"
         }
 
-@raise Errno::EACCES string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
-
 == Instance Methods
 
 --- string    -> String
 
-自身が表している文字列を返します。
+自身が表す文字列を返します。
+
+返されるのは生成時に与えられたバッファとして使われている文字列です。
+文字列は複製されないことに注意して下さい。
+
+例:
+
+  sio = StringIO.new
+  sio << "abc"
+  s = sio.string
+  p s                    #=> "abc"
+  sio << "xyz"
+  p s                    #=> "abcxyz"
 
 --- string=(buf)
 
-自身が表している文字列を buf に変更します。
-自身は読み書き両用になります。
-buf がフリーズされている場合には、読み取り専用になります。
+自身が表す文字列を指定された buf に変更します。
+
+buf はバッファとして使われ、書き込みメソッドによって書き換えられます。
+自身は読み書き両用になりますが、
+buf がフリーズされている場合には読み取り専用になります。
 pos と lineno は 0 にセットされます。
 
 #@if (version < "1.8.3")
@@ -251,6 +267,8 @@ StringIO には対応するパスはないので nil を返します。
 
 @param obj 書き込みたいオブジェクトを指定します。
 
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
+
   a = StringIO.new("", 'r+')
   a.print("hoge", "bar", "foo")
   a.string                     #=> "hogebarfoo"
@@ -258,11 +276,12 @@ StringIO には対応するパスはないので nil を返します。
 --- printf(format, *obj)    -> nil
 
 指定されたフォーマットに従い各引数 obj を文字列に変換して、自身に出力します。
-詳しい仕様は [[m:Kernel.#printf]] を参照して下さい。
 
 @param format 文字列のフォーマットを指定します。[[m:Kernel.#format]] を参照して下さい。
 
 @param obj 書き込みたいオブジェクトを指定します。
+
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
   a = StringIO.new("", 'r+')
   a.printf("%c%c%c", 97, 98, 99)
@@ -275,12 +294,16 @@ ch が文字列なら、その先頭の文字を書き込みます。ch を返します。
 
 @param ch 書き込みたい文字を、整数か文字列で指定します。ch が Float や Rational であっても、整数に変換されてから書き込まれます。
 
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
+
 --- puts(*obj)    -> nil
 
 obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 詳しい仕様は [[m:Kernel.#puts]] を参照して下さい。
 
 @param obj 書き込みたいオブジェクトを指定します。
+
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
   a = StringIO.new("", 'r+')
   a.puts("hoge", "bar", "foo")
@@ -294,9 +317,11 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 自身から len バイト読み込みんで返します。len が省略された場合は、最後まで読み込んで返します。
 詳しい仕様は [[m:IO#read]] を参照して下さい。
 
-@param len 読み込みたい長さを整数で指定します。
+@param len 読み込みたい長さを整数で指定します。詳しい仕様は [[m:IO#read]] を参照して下さい。
 
-@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。詳しい仕様は [[m:IO#read]] を参照して下さい。
+
+@raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- readchar    -> Integer
 
@@ -348,11 +373,18 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 [[m:IO#readpartial]] と同様です。
 #@end
 
---- reopen    -> ()
+--- reopen(sio)           -> StringIO
+--- reopen(str, mode)     -> StringIO
+#@todo
+自身が表す文字列が指定された StringIO と同じものか指定された文字列 str になります。
 
-例外 [[c:NotImplementedError]] が常に発生します。
+@param sio 自身が表したい StringIO を指定します。
 
-@raise NotImplementedError 常に発生します。
+@param str 自身が表したい文字列を指定します。
+
+@param mode [[m:Kernel#open]] 同様文字列か整数で自身のモードを指定します。
+
+@raise Errno::EACCES str がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
 --- rewind    -> 0
 
@@ -393,19 +425,23 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 --- sysread(len)             -> String
 --- sysread(len, outbuf)     -> String
 #@todo
+
+自身から len バイト読み込みんで返します。
 [[m:StringIO#read]] と同じです。ただし、文字列の終端に達した場合、EOFError を投げます。
 
-@param len 読み込みたい長さを整数で指定します。
+@param len 読み込みたい長さを整数で指定します。[[m:StringIO#read]] と同じです。
 
-@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。[[m:StringIO#read]] と同じです。
 
 @raise EOFError 文字列の終端に達した場合に発生します。
 
 --- syswrite(obj)    -> Integer
-#@todo
-[[m:StringIO#write]] と同じです。
+
+自身に obj を書き込みます。[[m:StringIO#write]] と同じです。
 
 @param obj 書き込みたいオブジェクトを指定します。
+
+@raise IOError 自身が書き込み用にオープンされていなければ発生します。
 
 --- truncate(len)    -> Integer
 
