@@ -49,7 +49,7 @@ view.rb ¤¬CGI¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤Þ¤¹¡£http://127.0.0.1:20080/foo.html ¤Ë¥¢¥
 
  (1) ¥µ¡¼¥Ð¤Î¥Ñ¥¹ /view.cgi ¤È CGIHandler ¤¬¥Þ¥¦¥ó¥È¤Ë¤è¤ê·ë¤Ó¤Ä¤±¤é¤ì¤Þ¤¹¡£
  (2) ¥Ñ¥¹ /view.cgi ¤Ë¥¢¥¯¥»¥¹¤¬¤¢¤ë¤¿¤Ó¤Ë¥µ¡¼¥Ð¤Ï 'view.rb' ¤ò°ú¿ô¤È¤·¤Æ CGIHandler ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
- (3) ¥µ¡¼¥Ð¤Ï¥ê¥¯¥¨¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤È¤·¤Æ CGIHandler#serve ¥á¥½¥Ã¥É¤ò¸Æ¤Ó¤Þ¤¹¡£
+ (3) ¥µ¡¼¥Ð¤Ï¥ê¥¯¥¨¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤È¤·¤Æ CGIHandler#service ¥á¥½¥Ã¥É¤ò¸Æ¤Ó¤Þ¤¹¡£
  (4) CGIHandler ¥ª¥Ö¥¸¥§¥¯¥È¤Ï view.rb ¤ò CGI ¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤·¤Þ¤¹¡£
 
 ¤³¤Î¤è¤¦¤Ë WEBrick ¤Ç¤Ï Web ¥µ¡¼¥Ð¤Îµ¡Ç½¤ÎÂçÉôÊ¬¤¬¥µ¡¼¥Ö¥ì¥Ã¥È¤Î·Á¤ÇÄó¶¡¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
@@ -58,35 +58,13 @@ view.rb ¤¬CGI¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤Þ¤¹¡£http://127.0.0.1:20080/foo.html ¤Ë¥¢¥
 === ¥ê¥ó¥¯
 
  * [[url:http://www.webrick.org/]]
- * [[url:http://shogo.homelinux.org/~ysantoso/WebWiki/WEBrick.html]]
  * [[url:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=WEBrick]]
- * Rubyist Magazine http://jp.rubyist.net/magazine/
-   * WEBrick¤Ç¥×¥í¥­¥·¥µ¡¼¥Ð¤òºî¤Ã¤ÆÍ·¤Ö http://jp.rubyist.net/magazine/?0002-WEBrickProxy
  * [[lib:webrick/ssl]]
  * [[lib:webrick/cgi]]
 
-#@# ÊÔ½¸ºî¶ÈÍÑ¤Î¥ê¥ó¥¯
-
-
- * [[lib:webrick/compat]]
- * [[lib:webrick/config]]
- * [[lib:webrick/log]]
- * [[lib:webrick/server]]
- * [[lib:webrick/utils]]
- * [[lib:webrick/accesslog]]
- * [[lib:webrick/htmlutils]]
- * [[lib:webrick/httputils]]
- * [[lib:webrick/cookie]]
- * [[lib:webrick/httpversion]]
- * [[lib:webrick/httpstatus]]
- * [[lib:webrick/httprequest]]
- * [[lib:webrick/httpresponse]]
- * [[lib:webrick/httpserver]]
- * [[lib:webrick/httpservlet]]
- * [[lib:webrick/httpauth]]
-
-
 = module WEBrick
+
+¥é¥¤¥Ö¥é¥ê webrick ¤Î³Æ¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
 
 == Constants
 

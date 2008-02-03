@@ -7,7 +7,28 @@ require webrick/httpstatus
 
 = class WEBrick::HTTPServlet::AbstractServlet < Object
 
-サーブレットの抽象クラス。実装はサブクラスで行なう。
+サーブレットの抽象クラスです。実装は AbstractServlet のサブクラスで行います。
+
+サーブレットは以下のように使われます。
+
+ require 'webrick'
+ srv = WEBrick::HTTPServer.new({ :DocumentRoot => './',
+                                 :BindAddress => '127.0.0.1',
+                                 :Port => 20080})
+ srv.mount('/view.cgi', WEBrick::HTTPServlet::CGIHandler, 'view.rb')
+ trap("INT"){ srv.shutdown }
+ srv.start
+
+上のスクリプトでは以下のような流れで view.rb は実行されます。
+
+ (1) サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
+ (2) パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServerオブジェクト)は 'view.rb' 
+     を引数として CGIHandler オブジェクトを生成します。
+ (3) サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
+ (4) CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
+
+このように [[c:WEBrick]] では Web サーバの機能の大部分がサーブレットの形で提供されています。
+またサーブレットを作成することにより新たな機能を Web サーバに追加することもできます。
 
 == Class Methods
 
@@ -19,21 +40,53 @@ require webrick/httpstatus
 
 == Instance Methods
 
---- service(req, res)
-#@todo
-最初にサーバーから呼び出されるメソッド。この service メソッドが
-クライアントの HTTP リクエストメソッドに応じて、
-do_GET, do_HEAD, do_POST, do_OPTIONS... などを呼ぶ。
+--- service(req, res)    -> ()
 
---- do_GET(req, res)
---- do_HEAD(req, res)
---- do_POST(req, res)
---- do_PUT(req, res)
---- do_DELETE(req, res)
---- do_OPTIONS(req, res)
-#@todo
+指定された [[c:WEBrick::HTTPRequest]] オブジェクト req の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
+自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
 
-サーブレットが実装すべきメソッド。返り値は特に規定されていない。何でも良い。
-クライアントからのリクエストに使われないと分かっているメソッドは実装しなくても良い。
-クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要がある。
+[[m:WEBrick::HTTPServer]] オブジェクトはクライアントからのリクエストがあるたびに
+サーブレットオブジェクトを生成し service メソッドを呼びます。
 
+AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
+
+@param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
+
+@param res クライアントへのレスポンスを表す [[m:WEBrick::HTTPResponse]] オブジェクトです。
+
+@raise WEBrick::HTTPStatus::MethodNotAllowed 
+       指定された [[c:WEBrick::HTTPRequest]] オブジェクト  req が自身に定義されていない 
+       HTTP のメソッドであった場合発生します。
+
+
+--- do_GET(req, res)        -> ()
+--- do_HEAD(req, res)       -> ()
+--- do_POST(req, res)       -> ()
+--- do_PUT(req, res)        -> ()
+--- do_DELETE(req, res)     -> ()
+--- do_OPTIONS(req, res)    -> ()
+
+自身の service メソッドから HTTP のリクエストに応じて
+呼ばれるメソッドです。AbstractServlet のサブクラスはこれらのメソッドを適切に実装し
+なければいけません。返り値は特に規定されていません。
+
+クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要があります。
+クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
+実装されていない HTTP メソッドであった場合、自身の service メソッドが
+例外を発生させます。
+
+例:
+
+  require 'webrick'
+  class HogeServlet < WEBrick::HTTPServlet::AbstractServlet 
+    def do_GET(req, res)
+       res.body = 'hoge'
+    end
+  end
+
+  srv = WEBrick::HTTPServer.new({ :DocumentRoot => './',
+                                  :BindAddress => '127.0.0.1',
+                                  :Port => 20080})
+  srv.mount('/', HogeServlet)
+  trap("INT"){ srv.shutdown }
+  srv.start
