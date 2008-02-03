@@ -1,15 +1,17 @@
-#@#require thread
 require webrick/httputils
 require webrick/httputils
 require webrick/httpstatus
 
 = class WEBrick::HTTPServlet::HTTPServletError < StandardError
+#@todo
 
 = class WEBrick::HTTPServlet::AbstractServlet < Object
 
 サーブレットの抽象クラスです。実装は AbstractServlet のサブクラスで行います。
 
-サーブレットは以下のように使われます。
+サーブレットは以下のように使われます。[[c:WEBrick::HTTPServlet::CGIHandler]] は
+[[lib:webrick/httpservlet/cgihandler]] で提供されているサーブレットです。
+CGIHandler は AbstractServlet のサブクラスです。
 
  require 'webrick'
  srv = WEBrick::HTTPServer.new({ :DocumentRoot => './',
@@ -22,7 +24,7 @@ require webrick/httpstatus
 上のスクリプトでは以下のような流れで view.rb は実行されます。
 
  (1) サーバのパス /view.cgi と CGIHandler がマウントにより結びつけられます。
- (2) パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServerオブジェクト)は 'view.rb' 
+ (2) パス /view.cgi にアクセスがあるたびにサーバ(WEBrick::HTTPServer オブジェクト)は 'view.rb' 
      を引数として CGIHandler オブジェクトを生成します。
  (3) サーバはリクエストオブジェクトを引数として CGIHandler#service メソッドを呼びます。
  (4) CGIHandler オブジェクトは view.rb を CGI スクリプトとして実行します。
@@ -32,11 +34,26 @@ require webrick/httpstatus
 
 == Class Methods
 
---- new(server, *options)
-#@todo
+--- new(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
 
---- get_instance(config, *options)
-#@todo
+サーブレットを生成して返します。
+[[c:WEBrick::HTTPServer]] オブジェクトは server に自身を指定してサーブレットを生成します。
+
+@param server サーブレットを生成する WEBrick::HTTPServer オブジェクトを指定します。
+
+@param options [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
+
+--- get_instance(server, *options)    -> WEBrick::HTTPServlet::AbstractServlet
+
+new(server, *options) を呼び出してサーブレットを生成して返します。
+[[c:WEBrick::HTTPServer]] オブジェクトは実際にはこの get_instance メソッドを呼び出して
+サーブレットを生成します。
+
+特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを再定義する必要はありません。
+
+@param server [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
+
+@param options [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
 
 == Instance Methods
 
@@ -48,7 +65,7 @@ require webrick/httpstatus
 [[m:WEBrick::HTTPServer]] オブジェクトはクライアントからのリクエストがあるたびに
 サーブレットオブジェクトを生成し service メソッドを呼びます。
 
-AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
+特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
 
 @param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
 
