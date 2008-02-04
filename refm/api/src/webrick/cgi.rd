@@ -9,9 +9,9 @@ require webrick/config
 サーブレットを作成するのと同じように、[[c:WEBrick::CGI]] のサブクラスでメソッド
 do_GET や do_POST を定義することによって CGI スクリプトを書きます。
 
-[[m:WEBrick::CGI#start]] を最後に必ず呼びます。
+CGI スクリプトを実行するためには [[m:WEBrick::CGI#start]] を最後に必ず呼びます。
 WEBrick::CGI#start メソッドは service メソッドを呼び出し、service メソッドはリクエストに応じて
-do_XXX メソッドを呼び出します。このようにして CGI スクリプトは実行されます。
+do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
 
 例:
 
@@ -32,6 +32,9 @@ do_XXX メソッドを呼び出します。このようにして CGI スクリプトは実行されます。
 
  * [[rfc:3875]]
 
+=== NPH スクリプト
+#@todo
+
 = class WEBrick::CGI < Object
 
 一般の CGI 環境で [[c:WEBrick]] のサーブレットと同じように CGI スクリプトを書くための
@@ -47,15 +50,21 @@ CGI オブジェクトを生成してかえします。
 @param config 設定を保存したハッシュを指定します。
 
 config で有効なキーとその値は以下のとおりです。
+キーはすべて [[c:Symbol]] オブジェクトです。
 
 : :ServerName     
  サーバ名を文字列で指定します。
 : :HTTPVersion
  HTTP バージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで指定します。
 : :RunOnCGI
- CGI スクリプトとして実行されているかを判定するために使われます。
+ true を指定します。CGI スクリプトとして実行されているかを判定するために使われます。
 : :NPH            
- NPH スクリプトとして実行される場合に true を設定します。
+ NPH スクリプトとして実行される場合に true を指定します。そうでない場合に false を指定します。
+: :Logger 
+
+: :InputBufferSize 
+
+: :ServerName
 
 == Instance Methods
 
@@ -77,11 +86,11 @@ config で有効なキーとその値は以下のとおりです。
 #@end
 
 #@since 1.8.3
---- logger     -> WEBrick::Log
+--- logger     -> WEBrick::BasicLog 
 
 設定されているログオブジェクトを返します。
 
-デフォルトでは WEBrick::BasicLog.new($stderr) です。
+デフォルトでは [[c:WEBrick::BasicLog]].new($stderr) です。
 #@end
 
 --- do_GET(req, res)        -> ()
@@ -99,6 +108,10 @@ config で有効なキーとその値は以下のとおりです。
 クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
 実装されていない HTTP メソッドであった場合、自身の service メソッドが
 例外を発生させます。
+
+@param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
+
+@param res クライアントへのレスポンスを表す [[m:WEBrick::HTTPResponse]] オブジェクトです。
 
 --- service(req, res)     -> ()
 

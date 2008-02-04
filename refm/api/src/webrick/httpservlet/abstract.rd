@@ -92,6 +92,10 @@ new(server, *options) を呼び出してサーブレットを生成して返します。
 実装されていない HTTP メソッドであった場合、自身の service メソッドが
 例外を発生させます。
 
+@param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
+
+@param res クライアントへのレスポンスを表す [[m:WEBrick::HTTPResponse]] オブジェクトです。
+
 例:
 
   require 'webrick'
