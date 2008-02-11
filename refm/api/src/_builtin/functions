@@ -162,29 +162,75 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 @param command コマンドとして実行する引数です。そのまま評価されるのではなく、
        ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
 @return コマンドの出力を文字列で返します。
+#@since 1.9.0
 @raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
+#@end
 
   puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
   puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
 
+#@since 1.9.0
+@see [[m:Kernel.#system]],[[m:Kernel.#exec]],[[m:Kernel.#spawn]]
+#@else
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
+#@end
 
 --- system(command) -> bool
---- system(program, *arg) -> bool
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-#@if (version < "1.9.0")
-それ以外の時
-(コマンドが実行できなかった場合も含む)は false を返します。
-#@else
+#@since 1.9.0
 それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
+#@else
+それ以外の終了ステータスの場合
+(コマンドを実行できなかった場合も含む)は false を返します。
 #@end
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
-#@if (version < "1.9.0")
+#@since 1.9.0
+コマンドを実行することができなかった場合、多くのシェルはステータス
+127 を返します。(したがって [[m:$?]] の数値は、0x7f00)、シェルを介
+さない場合は Ruby の子プロセスがステータス 127 で終了します。
+コマンドが実行できなかったのか、コマンドが失敗したのかは、普通
+[[m:$?]] を参照することで判別可能です。
+#@end
+
+==== 引数の解釈
+
+この形式では command が shell のメタ文字
+//emlist{
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+//}
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+@param command command コマンドを文字列で指定します。
+
+#@since 1.9.0
+@see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
+#@else
+@see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
+#@end
+
+--- system(program, *args) -> bool
+
+引数を外部コマンドとして実行して、成功した時に真を返します。
+
+子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
+#@since 1.9.0
+それ以外の終了ステータスの場合
+(コマンドを実行できなかった場合も含む)は false を返します。
+#@else
+それ以外の終了ステータスの場合は false を返します。
+コマンドを実行できなかった場合は nil を返します。
+#@end
+
+終了ステータスは変数 [[m:$?]] で参照できます。
+
+#@since 1.9.0
 コマンドを実行することができなかった場合、多くのシェルはステータス
 127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
 さない場合は Ruby の子プロセスがステータス 127 で終了します。
@@ -192,34 +238,69 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 $? を参照することで判別可能です。
 #@end
 
-引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
+==== 引数の解釈
 
-@param command [[m:Kernel.#exec]] 参照
-@param program [[m:Kernel.#exec]] 参照
-@param arg [[m:Kernel.#exec]] 参照
-#@since 1.9.0
-@raise Errno::EXXX コマンドが実行できなかった場合に発生します。
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+#@since 1.8.0
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 #@end
+
+@param program 文字列か2要素の配列です。
+@param args program に渡す引数を 0 個以上指定する
+@raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 #@#例...
 #@since 1.9.0
-@see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]]
+@see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@else
-@see [[m:Kernel.#`]],[[m:Kernel.#exec]]
+@see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@end
 
 #@since 1.9.0
 --- spawn(command) -> Integer
+
+引数を外部コマンドとして実行しますが、生成した
+子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
+
+==== 引数の解釈
+
+この形式では command が shell のメタ文字
+//emlist{
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+//}
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+@param command コマンドを文字列で指定します。
+@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
+@raise Errno::EXXX コマンドが実行できなかった場合に発生します。
+
+#@#例...
+
+@see [[m:Kernel.#system]],[[m:Kernel.#exec]]
+
 --- spawn(program, *arg) -> Integer
 
 引数を外部コマンドとして実行しますが、生成した
 子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
 
-引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
+==== 引数の解釈
 
-@param command [[m:Kernel.#exec]] 参照
-@param program [[m:Kernel.#exec]] 参照
-@param arg [[m:Kernel.#exec]] 参照
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
+先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
+起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
+グラム名になります。
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
+
+@param program 文字列か2要素の配列を指定します。
+@param args 渡される引数です。0 個以上の文字列を指定します。
+@raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 @raise Errno::EXXX コマンドが実行できなかった場合に発生します。
+
 
 #@#例...
 
@@ -227,44 +308,85 @@ $? を参照することで判別可能です。
 #@end
 
 --- exec(command) -> ()
---- exec(program, *arg) -> ()
 
-command で指定されたコマンドを実行します。プロセスの実行コー
-ドはそのコマンド(あるいは shell)になるので、起動に成功した場
-合、このメソッドからは戻りません。
+引数で指定されたコマンドを実行します。
 
-一番目の形式では command が shell のメタ文字
-(* ? {} [] <> () ~ & | \ $ ; ' ` " \n)を含む場合、
-shell 経由で実行されます。そうでなければインタプリタから直接
-実行されます。
+プロセスの実行コードはそのコマンド(あるいは shell)になるので、
+起動に成功した場合、このメソッドからは戻りません。
 
-二番目の形式では、常に shell を経由せずに実行されます。
-この場合には空白や shell のメタキャラクタもそのまま
-program の引数に渡されます。
+==== 引数の解釈
+
+この形式では command が shell のメタ文字
+//emlist{
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+//}
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+@param command コマンドを文字列で指定します。
+@raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
+
+  # a.rb
+  puts '実行前'
+  exec 'echo "実行中"'
+  puts '実行後'
+
+上記のスクリプトを実行すると以下のようになります。
+
+  $ ruby a.rb
+  実行前
+  実行中
+  # '実行後' は表示されない
+
+--- exec(program, *args) -> ()
+
+引数で指定されたコマンドを実行します。
+
+プロセスの実行コードはそのコマンド(あるいは shell)になるので、
+起動に成功した場合、このメソッドからは戻りません。
+
+この形式では、常に shell を経由せずに実行されます。
+
+==== 引数の解釈
+
+この形式で呼び出した場合、空白や shell のメタキャラクタも
+そのまま program の引数に渡されます。
 先頭の引数が2要素の配列であった場合、第1要素の文字列が実際に
 起動するプログラムのパスであり、第2要素が「みせかけ」のプロ
 グラム名になります。
 #@since 1.8.0
-このとき、第1要素をフルパスで指定しなくても
-環境変数 PATH から探します。
+また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 #@end
 
-コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
-以下のように exec を呼び出します。
-
-  exec [program, program], *args
-
-@param command コマンドを文字列で指定します。
-@param program 文字列か2要素の配列です。
-@param arg 渡される引数です。
+@param program 文字列か2要素の配列を指定します。
+@param args 渡される引数です。0 個以上の文字列を指定します。
+@raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
 #@#例...
 
+#@# コマンドの引数がない場合も含めて shell を経由せずにプログラムを実行させたい場合、
+#@# 以下のように exec を呼び出します。
+#@# 
+#@#   exec [program, program], *args
+
+例
+
+  # a.rb
+  exec ['sleep', 'mysleep'], '600'
+
+上記スクリプトを実行すると以下のようになります。
+
+  $ ruby a.rb
+  ## sleep してるので制御が戻ってこない。別の仮想端末に切替えて以下を実行
+  $ ps aux|grep sleep
+  xxxx    32754  0.0  0.0   2580   468 pts/3    S+   22:01   0:00 mysleep 600
+  xxxx    32761  0.0  0.0   2824   792 pts/6    S+   22:01   0:00 grep sleep
+
 #@since 1.9.0
-@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]]
+@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]],[[man:exec(3)]]
 #@else
-@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]]
+@see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]],[[man:exec(3)]]
 #@end
 
 --- fork -> Integer | nil
@@ -281,7 +403,7 @@ fork 前に STDOUT と STDERR を [[m:IO#flush]] します。
 
 @raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
 #@#例...
-@see [[m:IO.popen]],[[m:IO.pipe]]
+@see [[m:IO.popen]],[[m:IO.pipe]], [[man:fork(2)]]
 
 --- syscall(num, *arg ) -> Integer
 
@@ -301,7 +423,7 @@ numで指定された番号のシステムコールを実行します。
 @param num システムコール番号です。
 @param arg 文字列か、整数です。最大 9 個まで渡すことができます。
 @raise Errno::EXXX syscall(2) が -1 を返した場合に発生します。
-@raise NotImplementedErro 実行環境がこのメソッドに対応していないとき発生します。
+@raise NotImplementedError 実行環境がこのメソッドに対応していないとき発生します。
 #@#例...
 @see [[lib:dl]]
 
@@ -834,27 +956,20 @@ level_num 段上の呼び出し元の情報を [[m:$@]]
     #=> ["-:5", "debug information"]
 
 --- gets(rs = $/) -> String | nil
---- readline(rs = $/) -> String
 
 [[c:ARGF]]から一行読み込んで、それを返します。
 行の区切りは引数 rs で指定した文字列になります。
-
-ARGFはRubyインタプリタ実行時の引数（[[m:Kernel::ARGV]]）をファイル名としてみて開いたもの(なければ標準
-入力[[m:$stdin]])をつなげた仮想的なファイルです。
 
 rs に nil を指定すると行区切りなしとみなしてファイルの内容を
 すべて読み込みます。ARGVに複数のファイル名が存在する場合は1度に1ファイルずつ読み込みます。
 空文字列 "" を指定すると連続する改行を行の区切りとみなします
 (パラグラフモード)。
 
-ファイルの終り(EOF)に到達した時には メソッドgets は nil を返します。
-メソッドreadline は例外 [[c:EOFError]] を発生させます。
-
 読み込んだ文字列は組み込み変数 [[m:$_]] にもセットされます。
 
 @param rs 行の区切りとなる文字列です。
+@return ファイルの終り(EOF)に到達した時、 nil を返します。
 @raise Errno::EXXX 読み込みに失敗した場合に発生します。
-@raise EOFError readline でファイル末端(EOF)を検出すると発生します。
 
   ---main.rb---
   ARGV << 'b.txt' << 'c.txt'
@@ -875,7 +990,43 @@ rs に nil を指定すると行区切りなしとみなしてファイルの内容を
   スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と
   みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
 
-@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]]
+@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#readline]]
+
+--- readline(rs = $/) -> String
+
+[[c:ARGF]]から一行読み込んで、それを返します。
+行の区切りは引数 rs で指定した文字列になります。
+
+rs に nil を指定すると行区切りなしとみなしてファイルの内容を
+すべて読み込みます。ARGVに複数のファイル名が存在する場合は1度に1ファイルずつ読み込みます。
+空文字列 "" を指定すると連続する改行を行の区切りとみなします
+(パラグラフモード)。
+
+読み込んだ文字列は組み込み変数 [[m:$_]] にもセットされます。
+
+@param rs 行の区切りとなる文字列です。
+@raise Errno::EXXX 読み込みに失敗した場合に発生します。
+@raise EOFError readline でファイル末端(EOF)を検出すると発生します。
+
+  ---main.rb---
+  ARGV << 'b.txt' << 'c.txt'
+  p readline #=> "hello\n"
+  p readline(nil) #=> "it\ncommon\n"
+  p readline("") #=> "ARGF\n\n"
+  p readline('、') #=> "スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と\nみなして、"
+  p readline #=> "それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 \n"
+  p readline # end of file reached (EOFError)
+  --- b.txt ---
+  hello
+  it
+  common
+  --- c.txt ---
+  ARGF
+  
+  スクリプトに指定した引数 (Kernel::ARGV を参照) をファイル名と
+  みなして、それらのファイルを連結した 1 つの仮想ファイルを表すオブジェクトです。 
+
+@see [[m:$/]],[[c:ARGF]],[[m:Kernel.#readlines]],[[m:Kernel.#gets]]
 
 --- readlines(rs = $/) -> [String] | nil
 
