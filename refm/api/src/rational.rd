@@ -204,7 +204,7 @@ other が 0 の時は、例外 [[c:ZeroDivisionError]] を投げます。
 --- %(other)
 #@todo
 
-剰余を計算します。絶対値が self の絶対値を越えない、符合が self と同じ
+剰余を計算します。絶対値が self の絶対値を越えない、符号が self と同じ
 Numeric を返します。
 
   Rational(3, 4) % 2               # => Rational(3, 4)
@@ -224,7 +224,7 @@ Numeric を返します。
 #@todo
 
 self を other で割った、商と余りの配列を返します。
-商は Fixnum、余りは絶対値が other の絶対値を越えず、符合が other と同じ
+商は Fixnum、余りは絶対値が other の絶対値を越えず、符号が other と同じ
 Numeric です。[[m:Numeric#divmod]] も参照して下さい。
 
  Rational(3,4).divmod(Rational(2,3))  # => [1, Rational(1, 12)]
