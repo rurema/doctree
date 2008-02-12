@@ -1,7 +1,7 @@
 = class Regexp < Object
 
 [[unknown:正規表現]]のクラス。正規表現のリテラルはスラッシュで囲んだ形式
-で生成します。
+で記述します。
 
   /^this is regexp/
 
@@ -56,8 +56,7 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 @param code 文字コードを[[m:$KCODE]] への代入と同様の文字列で指定します。
 
-@raise  RegexpError
-  正規表現のコンパイルに失敗した場合発生します。
+@raise  RegexpError 正規表現のコンパイルに失敗した場合発生します。
 
   str = "This is Regexp"
   t1 = Regexp.compile("this is regexp", Regexp::IGNORECASE)
