@@ -14,11 +14,11 @@ Proc がローカル変数のスコープを保持していることは以下の例で
   var = 1
   $foo = Proc.new { var }
   var = 2
-
+  
   def foo
     $foo.call
   end
-
+  
   p foo       # => 2
 
 Proc を生成したメソッドからリターンしてしまった後は Proc
@@ -41,9 +41,6 @@ Proc を生成したメソッドからリターンしてしまった後は Proc
 
 ブロック付きメソッドに対して Proc オブジェクトを `&' を指定して渡すと
 呼び出しブロックのように動作しますが、厳密には以下の違いがあります
-#@#((-2002-02-20: break に関しては現在 1.6、1.7 共にこの制限はありません
-#@#が、まだ流動的なようです [[unknown:ruby-bugs-ja:PR#98]],
-#@#2003-03-12: [[unknown:ruby-dev:19799]]-))。
 
   # 問題なし
   (1..5).each { break }
@@ -72,9 +69,9 @@ Proc を生成したメソッドからリターンしてしまった後は Proc
 す。
 
   def foo
-         pr = Proc.new
-         pr.call(1,2,3)
-      end
+    pr = Proc.new
+    pr.call(1,2,3)
+  end
   foo {|args| p args }
   # => [1, 2, 3]
 
