@@ -255,6 +255,8 @@ obj が self のインスタンスである場合、 true を返します。
   # => [Foo, Kernel]
   # => Bar
 
+@see [[m:Module#included_modules]]
+
 #@since 1.8.0
 --- autoload(const_name, feature) -> nil
 
