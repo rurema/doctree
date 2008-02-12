@@ -5,7 +5,7 @@ include Comparable
 時刻を表すクラスです。
 
 [[m:Time.now]] は現在の時刻を返します。
-[[c:File.mtime]] などが返すファイルのタイムスタンプは Time
+[[m:File.mtime]] などが返すファイルのタイムスタンプは Time
 オブジェクトです。
 
 Time オブジェクトは時刻を起算時からの経過秒数で保持しています。
