@@ -59,7 +59,7 @@
 #@since 1.9.0
 #@# exp
 --- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
-[[RFC:2616]] で定めらてた日付を解析し、
+[[RFC:2616]] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:DateTime._httpdate]] も参照してください。
@@ -98,7 +98,7 @@
 #@since 1.9.0
 #@# exp
 --- jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-いくつかの代表的な [[JIS:X 0301]] 形式の日付を解析し、
+いくつかの代表的な [[JIS:X 0301]] 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:DateTime._jisx0301]] も参照してください。
@@ -130,7 +130,7 @@
 #@# exp
 --- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 --- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
-[[RFC:2822]] で定められた日付を解析し、
+[[RFC:2822]] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:DateTime._rfc2822]] も参照してください。
@@ -161,7 +161,7 @@
 #@since 1.9.0
 #@# exp
 --- xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
-XML Schema による日付を解析し、
+XML Schema による書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:DateTime._xmlschema]] も参照してください。

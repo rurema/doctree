@@ -162,7 +162,7 @@ include Comparable
 @param str 日付をあらわす文字列
 
 --- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> Date
-[[RFC:2616]] で定めらてた日付を解析し、
+[[RFC:2616]] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:Date._httpdate]] も参照してください。
@@ -204,7 +204,7 @@ include Comparable
 @param str 日付をあらわす文字列
 
 --- jisx0301(str = '-4712-01-01', start = Date::ITALY) -> Date
-いくつかの代表的な [[JIS:X 0301]] 形式の日付を解析し、
+いくつかの代表的な [[JIS:X 0301]] 書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:Date._jisx0301]] も参照してください。
@@ -306,7 +306,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 --- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
 --- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> Date
-[[RFC:2822]] で定められた日付を解析し、
+[[RFC:2822]] で定められた書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:Date._rfc2822]] も参照してください。
@@ -465,7 +465,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param str 日付をあらわす文字列
 
 --- xmlschema(str = '-4712-01-01', start = Date::ITALY) -> Date
-XML Schema による日付を解析し、
+XML Schema による書式の日付を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
 [[m:Date._xmlschema]] も参照してください。
