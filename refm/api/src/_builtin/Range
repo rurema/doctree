@@ -45,7 +45,7 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 @param last 最後のオブジェクト
 @param exclude_end 真をセットした場合終端を含まない範囲オブジェクトを生成します
 
-@raise ArgmentError first <=> last が nil の場合に発生します
+@raise ArgumentError first <=> last が nil の場合に発生します
 
 == Instance Methods
 
