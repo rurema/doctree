@@ -1233,7 +1233,7 @@ to_s メソッドにより文字列に変換してから出力します。
     #   non
 #@end
 
-@see [[m:Kernel.#print]],[[m:Kernel.#p]]
+@see [[m:Kernel.#print]], [[m:Kernel.#p]], [[m:IO#puts]]
 
 #@since 1.8.0
 --- warn(message) -> nil
