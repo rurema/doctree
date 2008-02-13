@@ -17,17 +17,24 @@ Returns the hash of available encoding alias and original encoding name.
 結合させることができます。互換性があるときは、結合後の文字列が取るであ
 ろう Encoding オブジェクトを返します。互換性がない場合は nil を返します。
 
-@param str1   チェックする対象の文字列
-@param str2   チェックする対象の文字列
+@param str1   チェックする対象の文字列を指定します。
+
+@param str2   チェックする対象の文字列を指定します。
+
 @return       結合した場合の文字列の Encoding または nil
 
 --- find(name) -> Encoding
 
-指定された name という名前のエンコーディングを探します。
+指定された name という名前を持つ Encoding オブジェクトを返します。
 
-@param name   エンコーディングを表現した [[c:String]] または [[c:Symbol]]
-@return       発見された Encoding
+@param name エンコーディング名を表す [[c:String]] か [[c:Symbol]] を指定します。
+
+@return 発見された Encoding オブジェクトを返します。
+
 @raise ArgumentError 指定した名前のエンコーディングが発見できないと発生します。
+
+ p Encoding.find(:Shift_JIS)    #=> #<Encoding:Shift_JIS>
+ p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
 
 --- list -> [Encoding]
 
