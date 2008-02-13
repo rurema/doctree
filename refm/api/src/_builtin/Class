@@ -92,9 +92,15 @@ new は [[m:Class#allocate]] でインスタンスを生成し、
 
 @param block [[m:Object#initialize]] に渡されるブロックを指定します。
 
---- superclass    -> Class
+--- superclass    -> Class | nil
 
 自身のスーパークラスを返します。
+
+#@since 1.9.0
+ただし [[c:BasicObject]].superclass は nil を返します。
+#@else
+ただし [[c:Object]].superclass は nil を返します。
+#@end
 
 --- _load(str)    -> Class
 
