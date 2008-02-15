@@ -1354,14 +1354,15 @@ obj.kind_of?(c) も成立します。
 
 @see [[m:Object#kind_of?]],[[m:Object#class]]
 
---- is_a?(klass_or_mod) -> bool
---- kind_of?(klass_or_mod) -> bool
+--- is_a?(mod) -> bool
+--- kind_of?(mod) -> bool
 
-オブジェクトがクラス mod とそのサブクラスまたは
-モジュール mod をインクルードしたクラスとそのサブクラス
-のいずれかのインスタンスであるとき真を返します。
+オブジェクトが指定されたクラス mod かそのサブクラスのインスタンスであるとき真を返します。
+また、オブジェクトがモジュール mod をインクルードしたクラスかそのサブクラス
+のインスタンスである場合にも真を返します。
+上記のいずれでもない場合に false を返します。
 
-@param klass_or_mod クラスやモジュールなど、[[c:Module]]かそのサブクラスのインスタンスです。
+@param mod クラスやモジュールなど、[[c:Module]]かそのサブクラスのインスタンスです。
 
     module M
     end
