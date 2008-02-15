@@ -87,10 +87,10 @@ self と other を比較して、self が大きい時に正、
   inf = 1.0/0
   p inf.finite? #=> false
 
---- infinite? -> bool
+--- infinite? -> 1 | -1 | nil
 
 数値が +∞ のとき 1、-∞のとき -1 を返します。それ以外は nil を返
-します。浮動小数点数の 0 による除算は ∞ です。
+します。
 
   inf = 1.0/0
   p inf
@@ -108,8 +108,7 @@ self と other を比較して、self が大きい時に正、
 
 --- nan? -> bool
 
-数値が NaN(Not a number)のとき真を返します。浮動小数点数 0 の 0 に
-よる除算は NaN です。
+数値が NaN(Not a number)のとき真を返します。
 
   nan = 0.0/0.0
   p nan
