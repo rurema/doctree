@@ -72,17 +72,17 @@ Proc を生成したメソッドからリターンしてしまった後は Proc
     pr = Proc.new
     pr.call(1,2,3)
   end
-  foo {|args| p args }
-  # => [1, 2, 3]
+  foo {|arg| p arg }
+  # => 1
 
 これは以下と同じです(厳密には引数の解釈の仕方が異なります。
 [[m:Proc#yield]] を参照してください)。
 
   def foo
-    yield(1,2,3)
+    yield(1)
   end
-  foo {|args| p args }
-  # => [1, 2, 3]
+  foo {|arg| p arg }
+  # => 1
 
 呼び出し元のメソッドがブロックを伴わなければ、例外
 [[c:ArgumentError]] が発生します。
