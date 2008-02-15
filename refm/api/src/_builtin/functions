@@ -2099,7 +2099,7 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
 @param expr  評価する文字列です。
 @param bind  [[c:Proc]] オブジェクトまたは [[c:Binding]] オブジェクトです。
 @param fname スタックトレースに表示するファイル名です。
-@param lineno スタックトレースに表示する行番号です。
+@param lineno 文字列 expr が書かれていると想定する先頭の行番号を整数で指定します。
 
   a = nil
   eval('a = RUBY_RELEASE_DATE')
