@@ -22,7 +22,7 @@ eval(expr, self, fname, lineno) とするのと同じです。
 
 @param fname ファイル名を文字列で与えます。式 expr が fname というファイル名にあるかのように実行されます。
 
-@param lineno 行番号を整数で与えます。式 expr の行番号が lineno であるかのように実行されます。
+@param lineno 行番号を整数で与えます。式 expr の先頭行の行番号が lineno であるかのように実行されます。
 
  def getBinding(str)
    return binding
