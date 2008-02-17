@@ -477,7 +477,7 @@ all と mail は obsolete です。
 --- mail {|str| .... }
 #@todo
 
-メールの文字列を少しづつ読みこみ、順次ブロックに与えます。
+メールの文字列を少しずつ読みこみ、順次ブロックに与えます。
 
 pop, all, mail はすべて同じ効果ですが、
 all と mail は obsolete です。
