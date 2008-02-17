@@ -11,7 +11,7 @@ include Precision
 --- induced_from(num) -> Integer
 
 num を Integer に変換した結果を返します。
-引数が数値の場合は切り捨てられ、そうでない場合はTypeErrorをraiseします。
+引数が数値の場合は小数部が切り捨てられ、そうでない場合はTypeErrorをraiseします。
 
   Integer.induced_from 1.4  #=> 1
   Integer.induced_from 1.9  #=> 1
