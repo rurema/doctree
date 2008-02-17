@@ -71,7 +71,7 @@
 
 --- <=>(other) -> Integer | nil
 
-self と other の親子関係を比較します。
+self と other の継承関係を比較します。
 
 self と other を比較して、
 self が other の子孫であるとき -1、
@@ -79,7 +79,7 @@ self が other の子孫であるとき -1、
 self が other の先祖であるとき 1
 を返します。
 
-親子関係にないクラス同士の比較では
+継承関係にないクラス同士の比較では
 #@since 1.8.0
 nil を返します。
 #@else
@@ -128,9 +128,10 @@ nil を返します。
 --- <(other)  -> bool | nil
 
 比較演算子。self が other の子孫である場合、 true を返します。
+self が other の先祖か同一のクラス／モジュールである場合、false を返します。
 #@# self < other が成立します。
 
-親子関係にないクラス同士の比較では
+継承関係にないクラス同士の比較では
 #@since 1.8.0
 nil を返します。
 #@else
@@ -165,10 +166,11 @@ false を返します。
 
 --- <=(other) -> bool | nil
 
-比較演算子。self が other の子孫であるか、 self と other が
+比較演算子。self が other の子孫であるか、self と other が
 同一クラスである場合、 true を返します。
+self が other の先祖である場合、false を返します。
 
-親子関係にないクラス同士の比較では
+継承関係にないクラス同士の比較では
 #@since 1.8.0
 nil を返します。
 #@else
@@ -183,9 +185,10 @@ false を返します。
 
 --- >(other)  -> bool | nil
 
-比較演算子。other が self の子孫である場合、 true を返します。
+比較演算子。 self が other の先祖である場合、true を返します。
+self が other の子孫か同一クラスである場合、false を返します。
 
-親子関係にないクラス同士の比較では
+継承関係にないクラス同士の比較では
 #@since 1.8.0
 nil を返します。
 #@else
@@ -200,10 +203,10 @@ false を返します。
 
 --- >=(other) -> bool | nil
 
-比較演算子。other が self の子孫であるか、
-self と other が同一クラスである場合、 true を返します。
+比較演算子。self が other の先祖か同一クラスである場合、 true を返します。
+self が other の子孫である場合、false を返します。
 
-親子関係にないクラス同士の比較では
+継承関係にないクラス同士の比較では
 #@since 1.8.0
 nil を返します。
 #@else
