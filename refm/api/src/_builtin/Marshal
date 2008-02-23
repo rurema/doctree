@@ -10,7 +10,7 @@ Ruby オブジェクトをファイル(または文字列)に書き出したり、読み戻したり
 
 == Module Functions
 
---- dump(obj, port = nil, limit = -1) -> IO|String
+--- dump(obj, port = '', limit = -1) -> IO|String
 
 obj を指定された出力先に再帰的に出力します。
 
