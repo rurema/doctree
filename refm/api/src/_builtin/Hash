@@ -642,7 +642,7 @@ self と 引数 key をブロック引数としてブロックを実行し、その結果を返します。
 --- default_proc -> Proc|nil
 
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを返します。
-ハッシュがブロックのデフォルト値を持たない場合 nil を返します。
+ハッシュがブロック形式のデフォルト値を持たない場合 nil を返します。
 
   h = Hash.new {|hash, key| "The #{key} not exit in #{hash.inspect}"}
   p h.default              #=> nil
