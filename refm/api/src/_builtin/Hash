@@ -644,10 +644,10 @@ self と 引数 key をブロック引数としてブロックを実行し、その結果を返します。
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを返します。
 ハッシュがブロック形式のデフォルト値を持たない場合 nil を返します。
 
-  h = Hash.new {|hash, key| "The #{key} not exit in #{hash.inspect}"}
+  h = Hash.new {|hash, key| "The #{key} not exist in #{hash.inspect}"}
   p h.default              #=> nil
   p block = h.default_proc #=> #<Proc:0x0x401a9ff4>
-  p block.call({},:foo)    #=> "The foo not exit in {}"
+  p block.call({},:foo)    #=> "The foo not exist in {}"
   
   h = Hash.new("default")
   p h.default              #=> "default"
