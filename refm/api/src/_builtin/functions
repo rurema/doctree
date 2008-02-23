@@ -1445,10 +1445,9 @@ at_exitがメソッドである点を除けば、[[unknown:制御構造/END]] ブロックによる終了
       n += 1
       break(n) if rand(n) > int
     end
-    "end of #{n}"
   end
   
-  puts try(400) #=> end of ???
+  puts "end on #{try(400)}" #=> end on ???
 
 --- sleep(sec = 0) -> Integer
 
