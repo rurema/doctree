@@ -707,23 +707,20 @@ hash を再定義する場合は、一様に分布する任意の整数を返すようにしま
 
 --- ===(other) -> bool
 
-other が self に所属していれば真を返します。case-when 文で使用します。
+メソッド [[m:Object#==]] の別名です。
+case 節で使用されます。このメソッドは case 節での振る舞いを考慮して、
+各クラスの性質に合わせて再定義すべきです。
 
-このメソッドは各クラスの性質に合わせて再定義すべきです。
-other が self に所属しているかどうかの判定をするように再定義されることが期待
-されています。
+一般的に所属性のチェックを実現するため適宜再定義されます。
 
-デフォルトではメソッド == の別名で、同値性の判定になっています。
-
-このメソッドは [[unknown:制御構造/case]] 文での比較に用いられます。
-when節の式をレシーバーとして === を呼び出すことに注意してください。
+when 節の式をレシーバーとして === を呼び出すことに注意してください。
 
 @param other 比較するオブジェクトです。
 
   age = 12
   result = 
     case age
-  when 0 .. 2 #数値の範囲に`所属'するか調べる
+  when 0 .. 2 
     "baby"
   when 3 .. 6
     "little child"
@@ -739,9 +736,9 @@ when節の式をレシーバーとして === を呼び出すことに注意してください。
   
   def check arg
     case arg
-    when /ruby(?!\s*on\s*rails)/i # 正規表現で表現される文字列の範囲に`所属'するか調べる
+    when /ruby(?!\s*on\s*rails)/i
       "hit! #{arg}"
-    when String # クラスに`所属'するか調べる
+    when String 
       "Instance of String class.But don't hit."
     else
       "unknown"
@@ -752,7 +749,7 @@ when節の式をレシーバーとして === を呼び出すことに注意してください。
   puts check("mash-up in Ruby on Rails") #=> instance of String class.but not hit...
   puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
-@see [[m:Object#==]]
+@see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]]
 
 --- =~(other) -> false
 
