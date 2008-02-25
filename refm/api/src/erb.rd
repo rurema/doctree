@@ -1,8 +1,15 @@
+eRubyスクリプトを扱うためのクラスライブラリです。
+
+
+= class ERB < Object
+
 eRuby スクリプトを処理するクラス。
+
 従来 ERbLight と呼ばれていたもので、
 標準出力への印字が文字列の挿入とならない点が eruby と異なります。
 
  * [[url:http://jp.rubyist.net/magazine/?0017-BundledLibraries]]
+
 
 === 使い方
 
@@ -119,8 +126,6 @@ trim_mode に指定できる値は次の通りです。
   
     *
   * 0
-
-= class ERB < Object
 
 == Class Methods
 
