@@ -223,13 +223,15 @@ method requires the setup of an ERB compiler object.
 
 == Module Functions
 
---- html_escape(S) -> String
+--- html_escape(s) -> String
 --- h(s) -> String
 
-HTML の &"<> をエスケープします
+文字列 s を HTML用にエスケープした文字列を返します。
+
+文字列 s 中に含まれる  &"<> を、実体参照 &amp; &quot; &lt; &gt; にそれぞれ変更した文字列を返します。
 ([[m:CGI.escapeHTML]]とほぼ同じです)。
 
-@param s HTML文字列
+@param s HTMLエスケープを行う文字列
 
 --- url_encode(s)  -> String
 --- u(s) -> String
