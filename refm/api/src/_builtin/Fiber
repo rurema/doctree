@@ -87,7 +87,7 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り替えはできません。
 --- new{|obj| ... } -> Fiber
 
 与えられたブロックとともにファイバーを生成して返します。
-ブロックは [[m:Fiber#resume]] の引数をその引数として実行されます。
+ブロックは [[m:Fiber#resume]] に与えられた引数をその引数として実行されます。
 
 ブロックが終了した場合は親にコンテキストが切り替わります。
 その時ブロックの評価値が返されます。
@@ -106,8 +106,7 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り替えはできません。
 
 現在のファイバーの親にコンテキストを切り替えます。
 
-[[m:Fiber#resume]] が呼ばれるとこの時点から処理が再開されます。
-その時の Fiber#resume の引数を返します。
+コンテキストの切り替えの際に [[m:Fiber#resume]] に与えられた引数を yield メソッドは返します。
 
 @param arg 現在のファイバーの親に渡したいオブジェクトを指定します。
 
@@ -116,25 +115,23 @@ Thread クラスが表すスレッド間をまたがるファイバーの切り替えはできません。
 
 例:
 
- a = b = nil
+ a = nil
  f = Fiber.new do
-   a = Fiber.yield(:hoge)
+   a = Fiber.yield()
  end
   
- b = f.resume()
+ f.resume()
  f.resume(:foo)
 
  p a  #=> :foo
- p b  #=> :hoge
 
 == Instance Methods
 --- resume(*arg = nil)   -> object
 
-self が表すファイバーへコンテキストを切り替えます。
-ファイバー中で [[m:Fiber.yield]] が呼ばれた場合はこの時点から処理が再開されます。
-その時 Fiber#yield の引数を返します。
+自身が表すファイバーへコンテキストを切り替えます。
+自身は resume を呼んだファイバーの子となります。
 
-self は resume を呼んだファイバーの子となります。
+コンテキストの切り替えの際に [[m:Fiber.yield]] に与えられた引数を resume メソッドは返します。
 
 @param arg self が表すファイバーに渡したいオブジェクトを指定します。
 
@@ -144,15 +141,13 @@ self は resume を呼んだファイバーの子となります。
 
 例:
 
- a = b = nil
  f = Fiber.new do
-   a = Fiber.yield(:hoge)
+   Fiber.yield(:hoge)
  end
   
- b = f.resume()
- f.resume(:foo)
+ a = f.resume()
+ f.resume()
 
- p a  #=> :foo
  p b  #=> :hoge
 
 #@end
