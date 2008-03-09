@@ -197,7 +197,8 @@ flatten! は、元の集合を破壊的に平滑化します。集合の要素に変更が
 --- superset?(set) -> bool
 --- proper_superset?(set) -> bool
 
-自身が集合 set を含む場合に true を返します。
+自身が集合 set の上位集合 (スーパーセット) である場合に true を
+返します。
 
 superset? は、2 つの集合が等しい場合にも true となります。
 
