@@ -73,7 +73,16 @@ include Enumerable
 引数とブロックの両方を与えた場合、enum の各要素についてブロックを
 評価し、その結果を新しい集合の要素とします。
 
+#@if (version >= "1.9.0")
+@param enum 集合要素を格納するオブジェクトを指定します。
+       enum には each メソッドが定義されている必要があります。
+@raise NoMethodError 引数 enum が与えられて、かつ enum に each メソッドが
+       定義されていない場合に発生します。
+#@else
 @param enum Enumerable オブジェクトを指定します。
+@raise ArgumentError Enumerable オブジェクトでない引数が与えられた場合に
+       発生します。
+#@end
 
   p Set.new                      #=> #<Set: {}>
   p Set.new([1, 2])              #=> #<Set: {1, 2}>
@@ -146,9 +155,17 @@ Ruby 1.9 の Set クラスでは、dup と clone に共通して、内部記憶として
 
 集合の要素をすべて削除し、enum で与えられた要素に置き換えます。
 
+#@if (version >= "1.9.0")
+引数 enum には each メソッドが定義されている必要があります。
+
+@param enum 置き換え後の集合要素を格納するオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum 置き換え後の集合要素を格納する Enumerable オブジェクトを
             指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   p s = Set[10, 20, 30] #=> #<Set: {30, 20, 10}>
   s.replace([15, 25])
@@ -322,8 +339,16 @@ nil を返します。
 
 元の集合に enum で与えられた要素を追加します。
 
+#@if (version >= "1.9.0")
+引数 enum には each メソッドが定義されている必要があります。
+
+@param enum 追加対象の要素を格納したオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum 追加対象の要素を格納した Enumerate オブジェクトを指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   set = Set[10, 20]
   set.merge([10, 30])
@@ -333,8 +358,16 @@ nil を返します。
 
 元の集合から、enum で与えられた要素を削除します。
 
+#@if (version >= "1.9.0")
+引数 enum には each メソッドが定義されている必要があります。
+
+@param enum 削除対象の要素を格納したオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum 削除対象の要素を格納した Enumerate オブジェクトを指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   set = Set[10, 20, 40]
   set.subtract([10, 20, 30])
@@ -347,8 +380,14 @@ nil を返します。
 和集合、すなわち、2 つの集合の少なくともどちらか一方に属するすべての
 要素からなる新しい集合を作ります。
 
+#@if (version >= "1.9.0")
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum Enumerable オブジェクトを指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   p Set[10, 20, 30] + Set[10, 20, 40]
   #=> #<Set: {40, 30, 20, 10}>
@@ -359,8 +398,14 @@ nil を返します。
 差集合、すなわち、元の集合の要素のうち引数 enum に含まれる要素を取り除いた
 新しい集合を作ります。
 
+#@if (version >= "1.9.0")
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum Enumerable オブジェクトを指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   p Set[10, 20, 30] - Set[10, 20, 40]
   #=> #<Set: {30}>
@@ -371,8 +416,14 @@ nil を返します。
 共通部分、すなわち、2つの集合のいずれにも属するすべての要素からなる
 新しい集合を作ります。
 
+#@if (version >= "1.9.0")
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum Enumerable オブジェクトを指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 50]
@@ -383,8 +434,14 @@ nil を返します。
 対称差、すなわち、2 つの集合のいずれか一方にだけ属するすべての要素からなる
 新しい集合を作ります。
 
+#@if (version >= "1.9.0")
+@param enum each メソッドが定義されたオブジェクトを指定します。
+@raise NoMethodError 引数 enum に each メソッドが定義されていない場合に
+       発生します。
+#@else
 @param enum Enumerable オブジェクトを指定します。
 @raise ArgumentError 引数が Enumerable オブジェクトでない場合に発生します。
+#@end
 
   s1 = Set[10, 20, 30]
   s2 = Set[10, 30, 50]
