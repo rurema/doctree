@@ -92,13 +92,8 @@ magic comment で指定します。
 現在のスクリプトのエンコーディングは __ENCODING__ により取得することができます。
 
 例: 
-  # t.rb の内容
   # coding: euc-jp
-  p __ENCODING__
-
-  # 実行結果
-  $ ruby t.rb
-  #<Encoding:EUC-JP>
+  p __ENCODING__     #=> #<Encoding:EUC-JP>
 
 ==== magic comment
 
@@ -156,13 +151,13 @@ locale がスクリプトエンコーディングになります。
 表記されたリテラルのエンコーディングは ASCII-8BIT になります。
 
 例: 
-  # t.rb
+
   # coding: us-ascii
   p __ENCODING__        #=> #<Encoding:US-ASCII>
   p "abc".encoding      #=> #<Encoding:US-ASCII>
   p "\x80".encoding     #=> #<Encoding:ASCII-8BIT>
  
-  # t2.rb
+
   # coding: euc-jp
   p __ENCODING__        #=> #<Encoding:EUC-JP>
   p "abc".encoding      #=> #<Encoding:US-ASCII>  (7bit クリーンなので US-ASCII になる)
