@@ -151,24 +151,22 @@ locale がスクリプトエンコーディングになります。
 スクリプトエンコーディングになります。
 ただしそれらが 7bit クリーンである場合、エンコーディングは US-ASCII になります。
 
-スクリプトエンコーディングが明示的に指定されていない場合、7bit クリーンではない
-バックスラッシュ記法で表記されたリテラルのエンコーディングは ASCII-8BIT になります。
+#@# see parser_str_new at parse.y
+またスクリプトエンコーディングが US-ASCII である場合、7bit クリーンではないバックスラッシュ記法で
+表記されたリテラルのエンコーディングは ASCII-8BIT になります。
 
 例: 
-  # t.rb の内容
-  p __ENCODING__
-  p "abc".encoding
-  p "\x80".encoding
+  # t.rb
+  # coding: us-ascii
+  p __ENCODING__        #=> #<Encoding:US-ASCII>
+  p "abc".encoding      #=> #<Encoding:US-ASCII>
+  p "\x80".encoding     #=> #<Encoding:ASCII-8BIT>
  
-  # 実行結果
-  $ ruby t.rb
-  #<Encoding:US-ASCII>
-  #<Encoding:US-ASCII>
-  #<Encoding:ASCII-8BIT>
+  # t2.rb
+  # coding: euc-jp
+  p __ENCODING__        #=> #<Encoding:EUC-JP>
+  p "abc".encoding      #=> #<Encoding:US-ASCII>  (7bit クリーンなので US-ASCII になる)
+  p "\x80".encoding     #=> #<Encoding:EUC-JP>    
 
-  $ ruby -Ke t.rb
-  #<Encoding:EUC-JP>
-  #<Encoding:US-ASCII>
-  #<Encoding:EUC-JP>
 
 #@end
