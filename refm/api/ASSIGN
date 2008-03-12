@@ -466,5 +466,5 @@ wsdl
 xmlrpc                          
 xsd
 yaml                            kouya
-yaml/store
+yaml/store                      kouya
 zlib                            kouya
