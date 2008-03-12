@@ -23,7 +23,9 @@
 --- transaction
 #@todo
 
-=== 例
+使い方は [[c:PStore]] とほとんど同じです。
+
+例
 
   require "yaml/store"
 
