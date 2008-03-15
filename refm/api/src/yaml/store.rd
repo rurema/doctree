@@ -1,4 +1,13 @@
 #@since 1.8.0
+RubyのオブジェクトをYAML形式の外部ファイルに格納するためのクラスです。
+
+  require "yaml/store"
+
+  db = YAML::Store.new("sample.yml")
+  db.transaction do
+    db["hoge"] = {1 => 100, "bar" => 101}
+  end
+
 = class YAML::Store < PStore
 
 [[c:PStore]] の [[c:YAML]] 版です。
@@ -9,7 +18,20 @@
 
 == class methods
 --- new(*options)
-#@todo
+
+YAML形式のファイルを読み込ませたい場合は、最初の引数にファイル名を文字列で指定します。
+最後の引数がハッシュであった場合は、YAMLのデフォルトの設定を変更します。
+
+@param 読み込ませたいファイルや、オプションを与えます。
+
+デフォルトの設定は下記のハッシュの通りです。
+  DEFAULTS = {
+    :Indent => 2, :UseHeader => false, :UseVersion => false, :Version => '1.0',
+    :SortKeys => false, :AnchorFormat => 'id%03d', :ExplicitTypes => false,
+    :WidthType => 'absolute', :BestWidth => 80,
+    :UseBlock => false, :UseFold => false, :Encoding => :None
+  }
+
 == instance methods
 --- [](name)
 --- fetch
