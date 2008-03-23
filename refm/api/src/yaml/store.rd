@@ -24,13 +24,7 @@ YAML形式のファイルを読み込ませたい場合は、最初の引数にファイル名を文字列で指定し
 
 @param 読み込ませたいファイルや、オプションを与えます。
 
-デフォルトの設定は下記のハッシュの通りです。
-  DEFAULTS = {
-    :Indent => 2, :UseHeader => false, :UseVersion => false, :Version => '1.0',
-    :SortKeys => false, :AnchorFormat => 'id%03d', :ExplicitTypes => false,
-    :WidthType => 'absolute', :BestWidth => 80,
-    :UseBlock => false, :UseFold => false, :Encoding => :None
-  }
+@see [[m:YAML::DEFAULTS]]
 
 == instance methods
 --- [](name)

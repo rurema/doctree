@@ -74,4 +74,30 @@
 #@include(yaml/YPath)
 #@include(yaml/BaseNode)
 #@include(yaml/YamlNode)
+
+== Constants
+
+--- DEFAULTS
+
+YAMLのデフォルトの設定のハッシュです。
+#@if (version >= 1.8.3)
+Ruby 1.8.3 以降では変更できません。
+#@end
+
+下記のオプションがあります。
+ {  
+  :SortKeys=>false, 
+  :UseFold=>false, 
+  :AnchorFormat=>"id%03d",
+  :Encoding=>:None, 
+  :Indent=>2, 
+  :ExplicitTypes=>false, 
+  :UseHeader=>false, 
+  :WidthType=>"absolute", 
+  :UseVersion=>false, 
+  :BestWidth=>80, 
+  :Version=>"1.0", 
+  :UseBlock=>false
+ }
+
 #@end
