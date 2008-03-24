@@ -195,18 +195,18 @@ fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 #@# 使い途がなさそうだ…。
-
+ 
 @param suplerklass 無名クラスのスーパークラス
 
 @param methodname メソッド名
 
---- set_eoutvar(compiler, eoutvar = '_erbout') -> ??
+--- set_eoutvar(compiler, eoutvar = '_erbout') -> Array
 
-eRubyスクリプトの中で出力をためていく変数を設定します。
+ERBの中でeRubyスクリプトの出力をためていく変数を設定します。
 
-Can be used to set eoutvar as described in ERB#new. It's probably
-easier to just use the constructor though, since calling this
-method requires the setup of an ERB compiler object.
+ERBでeRubyスクリプトの出力をためていく変数を設定するために使用します。
+この設定は ERB#new でも行えるため、通常はそちらを使用した方がより容易です。
+本メソッドを使用するためには、引数にて指定する eRuby コンパイラを事前に生成しておく必要があります。
 
 @param compiler eRubyコンパイラ
 
