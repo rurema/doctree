@@ -153,13 +153,13 @@ erb.rbのリビジョン情報を返します。
 
 --- run(b=TOPLEVEL_BINDING) -> String
 
-ERB をb の binding で実行し、印字します。
+ERB を b の binding で実行し、結果を標準出力へ印字します。
 
 @param b eRubyスクリプトが実行されるときのbinding
 
 --- result(b=TOPLEVEL_BINDING) -> String
 
-ERB を b の binding で実行し、文字列を返します。
+ERB を b の binding で実行し、結果の文字列を返します。
 
 @param b eRubyスクリプトが実行されるときのbinding
 
