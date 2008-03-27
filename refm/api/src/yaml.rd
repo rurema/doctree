@@ -80,7 +80,7 @@
 --- DEFAULTS
 
 YAMLのデフォルトの設定のハッシュです。
-#@if (version >= 1.8.3)
+#@if (version >= "1.8.3")
 Ruby 1.8.3 以降では変更できません。
 #@end
 
