@@ -81,7 +81,7 @@ tsv(Tab Separated Value)ファイルなどのセパレータをカンマ以外で指定
     puts row.join(':')
   }
 
---- read(path[, length = nil[, offset = nil]]) -> [[c:Array]]
+--- read(path[, length = nil[, offset = nil]]) -> Array
 
 path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
@@ -89,7 +89,7 @@ path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 @param length 対象ファイルの読み込みサイズ
 @param offset 読み込み開始位置
 
---- readlines(path[, rs = nil]) -> [[c:Array]]
+--- readlines(path[, rs = nil]) -> Array
 
 path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
@@ -99,7 +99,7 @@ path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
 #@end
 
---- generate(path[, fs = nil[, rs = nil]]) -> [[c:CSV::BasicWriter]]
+--- generate(path[, fs = nil[, rs = nil]]) -> CSV::BasicWriter
 --- generate(path[, fs = nil[, rs = nil]]) {|writer| ... } -> nil
 
 path で指定されたファイルを書き込みモードで開き、ブロックに渡します。
@@ -123,7 +123,7 @@ path で指定されたファイルを書き込みモードで開き、ブロックに渡します。
     }
   }
 
---- parse(str_or_readable[, fs = nil[, rs = nil]]) -> [[c:Array]]
+--- parse(str_or_readable[, fs = nil[, rs = nil]]) -> Array
 --- parse(str_or_readable[, fs = nil[, rs = nil]]){|rows| ... } -> nil
 
 str_or_readable で指定された文字列をパースし配列の配列に変換、ブロックに渡します。
@@ -140,7 +140,7 @@ str_or_readable で指定された文字列をパースし配列の配列に変換、ブロックに渡します
     p rows
   }
 
---- generate_line(row[, fs = nil[, rs = nil]]) -> [[c:String]]
+--- generate_line(row[, fs = nil[, rs = nil]]) -> String
 --- generate_line(row[, fs = nil[, rs = nil]]){|s| ... } -> nil
 
 row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
@@ -153,7 +153,7 @@ row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
 @param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
           Cr を行区切りとしたい場合は ?\r を渡します。
 
---- parse_line(src[, fs = nil[, rs = nil]]) -> [[c:Array]]
+--- parse_line(src[, fs = nil[, rs = nil]]) -> Array
 --- parse_line(src[, fs = nil[, rs = nil]]){|row| ... } -> nil
 
 src で指定された文字列を1行分としてパースし配列に変換、ブロックに渡します。
@@ -188,9 +188,49 @@ src で指定された配列パースして csv形式の文字列として(行区切り文字も含めて) out_d
   end
   p buf #=>"a,b\n1,2\n,A,B\n" 
 
---- parse_row(src, index, out_dev[, fs = nil[, rs = nil]])
-#@todo
+--- parse_row(src, index, out_dev[, fs = nil[, rs = nil]]) -> Array
 
+CSV形式の文字列をパースしてCSV1行(row)分のデータを Array に変換します。
+
+@param src パースする文字列(CSV形式)
+@param index パース開始位置
+@param out_dev 変換したデータの出力先。
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
+@return  変換したArrayのサイズと変換をした文字列の位置をArrayとして返します。
+
+例:
+   src = "a,b,c\n1,2\nA,B,C,D"
+   i = 0
+
+   x = [] #結果を格納する配列
+   begin
+     parsed = []
+     parsed_cells, i = CSV.parse_row(src, i, parsed)
+     x.push(parsed)
+   end while parsed_cells > 0
+
+   x.each{ |row|
+     p '-----'
+     row.each{ |cell|
+       p cell
+     }
+   }
+
+実行結果:
+  a
+  b
+  c
+  -----
+  1
+  2
+  -----
+  A
+  B
+  C
+  D
 
 #@include(csv/CSV__BasicWriter)
 #@include(csv/CSV__Cell)
