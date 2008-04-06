@@ -190,7 +190,7 @@ src で指定された配列パースして csv形式の文字列として(行区切り文字も含めて) out_d
 
 --- parse_row(src, index, out_dev[, fs = nil[, rs = nil]]) -> Array
 
-CSV形式の文字列をパースしてCSV1行(row)分のデータを Array に変換します。
+CSV形式の文字列をパースしてCSV1行(row)分のデータを配列に変換し out_dev に出力します。
 
 @param src パースする文字列(CSV形式)
 @param index パース開始位置
