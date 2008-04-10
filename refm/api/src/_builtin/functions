@@ -1072,24 +1072,29 @@ rs に nil を指定すると行区切りなしとみなします。
 
 文字 ch を 標準出力 [[m:$stdout]] に出力します。
 
-ch が数字なら 0 〜 255 の範囲の対応する文字を出力します。
-ch が文字列なら、その先頭の文字を出力します。
+ch が数値なら 0 〜 255 の範囲の対応する文字を出力します。
+ch が文字列なら、その先頭 1byte を出力します。
 どちらでもない場合は、ch.to_int で整数に変換を試みます。
 
-@param ch 出力する文字です。数字または文字列で指定します。
-@return ch を返します。
-@raise RangeError Bignum を引数にした場合に発生します。
+@param ch 出力する文字です。数または文字列で指定します。
+@return ch を返します
+@raise RangeError [[c:Bignum]] を引数にした場合に発生します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
+@raise TypeError [[c:Integer]] に変換できないオブジェクトを引数に
+                 指定した場合に発生します。
 
 #@#1.9でもいまのところ同じ結果
     putc("ch")
     putc(?c)
     putc(99)
-    #=> ccc
+    putc(355)
+    #=> cccc
     
     putc(99.00) #=> c
     putc(33333333333333333333333333333333333) # bignum too big to convert into `long' (RangeError)
+
+@see [[m:IO#putc]]
 
 #@since 1.9.0
 --- p(*arg) -> object | Array
