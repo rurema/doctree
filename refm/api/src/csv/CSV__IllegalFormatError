@@ -1,8 +1,8 @@
 #@since 1.8.0
 
 = class CSV::IllegalFormatError < RuntimeError
+CSV 形式のパースが失敗した場合に発生します。
 
-CSV形式のパースを失敗した場合に発生します。
   * クオート対応不正
   * 改行コード不正
 
