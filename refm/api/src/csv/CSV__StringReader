@@ -1,26 +1,26 @@
 #@since 1.8.0
 
 = class CSV::StringReader < CSV::Reader
-CSV$B7A<0$NJ8;zNs$NFI$_9~$_!J%Q!<%9!K;~$K;HMQ$5$l$k%/%i%9(B
+CSV·Á¼°¤ÎÊ¸»úÎó¤ÎÆÉ¤ß¹þ¤ß¡Ê¥Ñ¡¼¥¹¡Ë»þ¤Ë»ÈÍÑ¤µ¤ì¤ë¥¯¥é¥¹
 
 == Class Methods
 
 --- new(string[, fs = ','[, rs = nil]]) -> CSV::StringReader
-CSV$B7A<0$NJ8;zNs$r=i4|CM$H$7$FM?$($F%$%s%9%?%s%9$r@8@.$7$^$9!#(B
+CSV·Á¼°¤ÎÊ¸»úÎó¤ò½é´üÃÍ¤È¤·¤ÆÍ¿¤¨¤Æ¥¤¥ó¥¹¥¿¥ó¥¹¤òÀ¸À®¤·¤Þ¤¹¡£
 
-@param string $B=i4|CM$NJ8;zNs(B
-@param fs $B%U%#!<%k%I%;%Q%l!<%?$N;XDj!#(B
-          nil ($B%G%U%)%k%H(B) $B$G(B ',' $B$r%;%Q%l!<%?$H$7$^$9!#(B
-@param rs $B9T6h@Z$jJ8;z$N;XDj!#(Bnil ($B%G%U%)%k%H(B) $B$G(B CrLf / Lf$B!#(B
-          Cr $B$r9T6h@Z$j$H$7$?$$>l9g$O(B ?\r $B$rEO$7$^$9!#(B
+@param string ½é´üÃÍ¤ÎÊ¸»úÎó
+@param fs ¥Õ¥£¡¼¥ë¥É¥»¥Ñ¥ì¡¼¥¿¤Î»ØÄê¡£
+          nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç ',' ¤ò¥»¥Ñ¥ì¡¼¥¿¤È¤·¤Þ¤¹¡£
+@param rs ¹Ô¶èÀÚ¤êÊ¸»ú¤Î»ØÄê¡£nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç CrLf / Lf¡£
+          Cr ¤ò¹Ô¶èÀÚ¤ê¤È¤·¤¿¤¤¾ì¹ç¤Ï ?\r ¤òÅÏ¤·¤Þ¤¹¡£
 
 == Private Instance Methods
 
 --- get_row(row) -> Integer
-CSV $B7A<0$NJ8;zNs$+$i(B1 $B9T(B(row)$BJ,$N%G!<%?$rG[Ns$KJQ49$7!"(Brow $B$K=PNO$9$k!#(B
+CSV ·Á¼°¤ÎÊ¸»úÎó¤«¤é1 ¹Ô(row)Ê¬¤Î¥Ç¡¼¥¿¤òÇÛÎó¤ËÊÑ´¹¤·¡¢row ¤Ë½ÐÎÏ¤¹¤ë¡£
 
-@param row $B=i4|CM$NJ8;zNs(B
-@return $B%Q!<%9$7$F=PNO$7$?(B1$B9TJ,$N%G!<%?$N(B cell $B$N?t(B($BJQ49$7$?G[Ns$N%5%$%:(B)
+@param row ½é´üÃÍ¤ÎÊ¸»úÎó
+@return ¥Ñ¡¼¥¹¤·¤Æ½ÐÎÏ¤·¤¿1¹ÔÊ¬¤Î¥Ç¡¼¥¿¤Î cell ¤Î¿ô(ÊÑ´¹¤·¤¿ÇÛÎó¤Î¥µ¥¤¥º)
 
 #@end
 
