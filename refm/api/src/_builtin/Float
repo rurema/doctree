@@ -2,9 +2,11 @@
 include Precision
 
 浮動小数点数のクラス。Float の実装は C 言語の double で、その精度は環
-境に依存します。((-一般にはせいぜい15桁です。詳しくは多くのシステムで
-採用されている浮動小数点標準規格、IEEE (Institute of Electrical and
-Electronics Engineers: 米国電気電子技術者協会) 754 を参照してください-))
+境に依存します。
+
+一般にはせいぜい15桁です。詳しくは多くのシステムで採用されている
+浮動小数点標準規格、IEEE (Institute of Electrical and
+Electronics Engineers: 米国電気電子技術者協会) 754 を参照してください。
 
   # あるシステムでの 1/3(=0.333...) の結果
   printf("%.50f\n", 1.0/3)
@@ -15,12 +17,12 @@ Electronics Engineers: 米国電気電子技術者協会) 754 を参照してください-))
 
 == Class Methods
 
---- induced_from(num)
-num を Float に変換した結果を返します。numが[[c:Fixnum]], [[c:Bignum]], [[c:Float]]以外の場合は例外が発生します。
+--- induced_from(num) -> Float
+num を Float に変換した結果を返します。
 
 @param num 変換前の数値
 
-@raise TypeError [[c:Fixnum]], [[c:Bignum]], [[c:Float]]以外を入力した場合
+@raise TypeError [[c:Fixnum]], [[c:Bignum]], [[c:Float]]以外を入力した場合に発生します
 
 
   p Float.induced_from(30) #=> 30.0
@@ -33,24 +35,54 @@ num を Float に変換した結果を返します。numが[[c:Fixnum]], [[c:Bignum]], [[c:Floa
 
 == Instance Methods
 
---- +(other)
---- -(other)
---- *(other)
---- /(other)
---- %(other)
---- **(other)
-算術演算子。それぞれ和、差、積、商、剰余、冪を計算します。
+--- +(other) -> Float
+算術演算子。和を計算します。
+
+@param other 二項演算の右側の引数(対象)
 
   # 和
   p 3.0 + 4.5 #=> 7.5
+
+--- -(other) -> Float
+算術演算子。差を計算します。
+
+@param other 二項演算の右側の引数(対象)
+
   # 差
   p 4.5 - 1.3 #=> 3.2
-  # 商 
-  p 1.3 / 2.4 #=> 0.541666666666667
+
+--- *(other) -> Float
+算術演算子。積を計算します。
+
+@param other 二項演算の右側の引数(対象)
+
   # 積
   p 2.4 * 3   #=> 7.2
+
+
+--- /(other) -> Float
+算術演算子。商を計算します。
+
+@param other 二項演算の右側の引数(対象)
+
+  # 商 
+  p 1.3 / 2.4 #=> 0.541666666666667
+  p 1.0 / 0   #=> Infinity
+
+--- %(other) -> Float
+算術演算子。剰余を計算します。
+
+@param other 二項演算の右側の引数(対象)
+
   # 剰余
   p 3 % 1.2   #=> 0.6
+  p 3.0 % 0   #=> NaN
+
+--- **(other) -> Float
+算術演算子。冪を計算します。
+
+@param other 二項演算の右側の引数(対象)
+
   # 冪
   p 1.2 ** 3.0  #=> 1.728
   p 3.0 + 4.5 - 1.3 / 2.4 * 3 % 1.2 ** 3.0 #=> 5.875
@@ -67,16 +99,54 @@ self と other を比較して、self が大きい時に正、
   p 3.14 <=> 0.0/0.0 #=> nil
 
 --- ==(other) -> bool
---- <(other)  -> bool
---- <=(other) -> bool
---- >(other)  -> bool
---- >=(other) -> bool
-比較演算子。
+比較演算子。数値として等しいか判定します。
+
+@param other 比較対象の数値
+@return      self と other が等しい場合 true を返します。
+             そうでなければ false を返します。
 
   p 3.14 == 3.14000 #=> true
   p 3.14 == 3.1415  #=> false
+
+--- <(other)  -> bool
+比較演算子。数値として小さいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other が大きい場合 true を返します。
+             そうでなければ false を返します。
+
   p 3.14 <  3.1415  #=> true
   p 3.14 <= 3.1415  #=> true
+
+--- <=(other) -> bool
+比較演算子。数値として等しいまたは小さいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が大きい場合か、
+             両者が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+  p 3.14 <  3.1415  #=> true
+  p 3.14 <= 3.1415  #=> true
+
+--- >(other)  -> bool
+比較演算子。数値として大きいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が小さい場合 true を返します。
+             そうでなければ false を返します。
+
+  p 3.14 >  3.1415  #=> false
+  p 3.14 >= 3.1415  #=> false
+
+--- >=(other) -> bool
+比較演算子。数値として等しいまたは大きいか判定します。
+
+@param other 比較対象の数値
+@return      self よりも other の方が小さい場合か、
+             両者が等しい場合 true を返します。
+             そうでなければ false を返します。
+
   p 3.14 >  3.1415  #=> false
   p 3.14 >= 3.1415  #=> false
 
@@ -126,7 +196,6 @@ self を返します。
 --- truncate -> Integer
 
 小数点以下を切り捨てて値を整数に変換します。
-[[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]] も参照。
 
    p 3.14.to_i   #=> 3
 
@@ -160,19 +229,27 @@ Float が表現できる最大の 10 進桁数
 仮数部の Float::RADIX 進法での桁数
 
 --- MAX
+Float が取り得る最大値
+
 --- MIN
 
-Float が取り得る最大値、最小値
+Float が取り得る最小値
 
 --- MAX_10_EXP
+
+最大の 10 進の指数
+
 --- MIN_10_EXP
 
-最大／最小の 10 進の指数
+最小の 10 進の指数
 
 --- MAX_EXP
+
+最大の Float::RADIX 進の指数
+
 --- MIN_EXP
 
-最大／最小の Float::RADIX 進の指数
+最小の Float::RADIX 進の指数
 
 --- RADIX
 
