@@ -1,9 +1,9 @@
 #@since 1.8.0
 
 = class CSV::IllegalFormatError < RuntimeError
-CSV $B7A<0$N%Q!<%9$,<:GT$7$?>l9g$KH/@8$7$^$9!#(B
+CSV ·Á¼°¤Î¥Ñ¡¼¥¹¤¬¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
-  * $B%/%*!<%HBP1~IT@5(B
-  * $B2~9T%3!<%IIT@5(B
+  * ¥¯¥ª¡¼¥ÈÂÐ±þÉÔÀµ
+  * ²þ¹Ô¥³¡¼¥ÉÉÔÀµ
 
 #@end
