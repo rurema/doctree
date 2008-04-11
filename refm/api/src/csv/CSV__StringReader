@@ -1,7 +1,7 @@
 #@since 1.8.0
 
 = class CSV::StringReader < CSV::Reader
-CSV形式の文字列読み込み時に使用されるクラス
+CSV形式の文字列の読み込み（パース）時に使用されるクラス
 
 == Class Methods
 
