@@ -176,7 +176,7 @@ net/smtp                        aamine
 net/telnet
 net/telnets
 nkf
-observer
+observer                        snoozer05
 open-uri                        sheepman
 open3
 openssl                         
