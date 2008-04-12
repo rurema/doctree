@@ -5,6 +5,14 @@ include Enumerable
 gzip 形式の圧縮ファイルを読み込むラッパークラスです。
 IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 持つオブジェクト) と関連付けて使用します。
+  
+  require 'zlib'
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+  }
+  =end
 
   Zlib::GzipReader.open('hoge.gz') {|gz|
     print gz.read
@@ -22,16 +30,21 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 io と関連付けられた GzipReader オブジェクトを作成します。
 GzipReader オブジェクトは io からデータを逐次リードして
-解析/展開を行います。io には少なくとも、IO#read と
+解析/展開を行います。io には少なくとも、[[m:IO#read]] と
 同じ動作をする read メソッドが定義されている必要があります。
 
 ヘッダーの解析に失敗した場合 Zlib::GzipFile::Error 例外が
 発生します。
 
+@param io IO オブジェクト、もしくは少なくとも[[m:IO#read]]と同じ動作をするreadメソッドが定義されているオブジェクト
+
+@raise Zlib::GzipFile::Error ヘッダーの解析に失敗した場合発生します。
+
+
 --- wrap(io) {|gz| ... }
 #@todo
 
-と関連付けられた GzipReader オブジェクトを作成し、
+io と関連付けられた GzipReader オブジェクトを作成し、
 それを引数としてブロックを実行します。
 ブロックの実行が終了すると、GzipReader オブジェクトは自動的に
 クローズされます。関連付けられている IO オブジェクトまで
