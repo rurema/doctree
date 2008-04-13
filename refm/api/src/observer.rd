@@ -1,7 +1,10 @@
+Observer パターンを扱うためのライブラリです。
+
 = module Observable
 
-=== 目的・概要
-Mix-in により observer パターンを提供します。
+Observer パターンを提供するモジュールです。
+
+Mix-in により Observer パターンを提供します。
 
 Observable モジュールを include したクラスは
 Observable#changed メソッドにより更新フラグを立て、
