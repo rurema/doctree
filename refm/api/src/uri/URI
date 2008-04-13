@@ -13,9 +13,10 @@ URI を扱うためのモジュールです。
 == Singleton Methods
 
 --- split(url)    -> [String | nil]
-#@todo
 
-URI を以下の要素に分割した文字列の配列を返します。
+URI を要素に分割した文字列の配列を返します。
+
+各要素の種類と順番は以下のとおりです。
 
   * scheme
   * userinfo
@@ -27,21 +28,25 @@ URI を以下の要素に分割した文字列の配列を返します。
   * query
   * fragment
 
+@param url パースしたい URI を文字列として与えます。
+
+@raise URI::InvalidURIError パースに失敗した場合に発生します。
+
 例:
   require 'uri'
   p URI.split("http://www.ruby-lang.org/")
   #=> ["http", nil, "www.ruby-lang.org", nil, nil, "/", nil, nil, nil]
 
-@param url パースしたい URI を文字列として与えます。
-
-@raise URI::InvalidURIError パースに失敗した場合に発生します。
-
 --- parse(uri_str)    -> object
-#@todo
 
 与えられた URI から該当する [[c:URI::Generic]] のサブクラスのインスタンスを生成して
 返します。scheme が指定されていない場合は、[[c:URI::Generic]] オブジェクトを返します。
 
+@param url パースしたい URI を文字列として与えます。
+
+@raise URI::InvalidURIError パースに失敗した場合に発生します。
+
+例:
   require 'uri'
   p uri = URI.parse("http://www.ruby-lang.org/")
 
@@ -51,34 +56,29 @@ URI を以下の要素に分割した文字列の配列を返します。
   p uri.port      # => 80
   p uri.path      # => "/"
 
-@param url パースしたい URI を文字列として与えます。
+--- join(uri_str, *path)    -> object
+
+文字列 uri_str と path ... を URI として連結して得られる
+URI オブジェクトを返します。
+
+[[rfc:2396]] の Section 5.2 の
+仕様に従って連結します。
+以下と等価です
+
+  URI.parse(uri_str) + path + ...
 
 @raise URI::InvalidURIError パースに失敗した場合に発生します。
 
---- join(uri_str, *path)    -> object
-#@todo
-
-文字列 uri_str と path ... を URI として連結して得られる
-URI オブジェクトを返します。[[rfc:2396]] の Section 5.2 の
-仕様に従って連結します。
-
-以下と等価です
-
-  URI.parse(uri_str) + str + ....
-
-例
+例:
 
   require 'uri'
   p URI.join('http://www.ruby-lang.org/', '/ja/man-1.6/')
   => #<URI::HTTP:0x2010017a URL:http://www.ruby-lang.org/ja/man-1.6/>
 
-@raise URI::InvalidURIError パースに失敗した場合に発生します。
-
 --- extract(str)                               -> [String]
 --- extract(str, schemes)                      -> [String]
 --- extract(str) {|uri_str| ... }              -> nil
 --- extract(str, schemes) {|uri_str| ... }     -> nil
-#@todo
 
 文字列 str に対してパターンマッチングを試み、
 絶対URIにマッチした部分文字列からなる配列として返します。
@@ -90,7 +90,13 @@ URI オブジェクトを返します。[[rfc:2396]] の Section 5.2 の
 ブロックが与えられた場合は [[m:String#scan]] と同様で、
 マッチした部分がみつかるたびに uri_str に
 その部分を代入してブロックを評価します。
-このときの値は nil です。
+このときは nil を返します。
+
+@param str 文字列を与えます。
+
+@param schemes 検索の対象としたいスキームを、文字列の配列として与えます。
+
+例:
 
   require 'uri'
   str = "
@@ -100,14 +106,9 @@ URI オブジェクトを返します。[[rfc:2396]] の Section 5.2 の
   p URI.extract(str, ["http"])
   => ["http://www.ruby-lang.org/", "http://www.ruby-lang.org/man-1.6/"]
 
-@param str 文字列を与えます。
-
-@param schemes 検索の対象としたいスキームを、文字列の配列として与えます。
-
 #@since 1.8.1
 --- regexp             -> Regexp
 --- regexp(schemes)    -> Regexp
-#@todo
 
 URIにマッチする正規表現を返します。
 
@@ -121,19 +122,22 @@ schemes を与えた場合は、そのスキームの URI にのみマッチする
 
 @param schemes マッチさせたいスキームを、文字列の配列として与えます。
 
+例:
+  require 'uri'
+  p URI.regexp =~ "http://www.ruby-lang.org/"  #=> 0
+
 #@end
 
 --- escape(str, unsafe = URI::UNSAFE)    -> String
 --- encode(str, unsafe = URI::UNSAFE)    -> String
-#@todo
 
 URI 文字列をエンコードした文字列を返します。
 
+例:
   require 'uri'
-  $KCODE = 'EUC'
-  p URI.escape('http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Rubyリファレンスマニュアル')
+  p URI.escape('http://images.google.co.jp/images?q=モナリザ&ie=EUC-JP') 
 
-  => "http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Ruby%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9%A5%DE%A5%CB%A5%E5%A5%A2%A5%EB"
+  #=> "http://images.google.co.jp/images?q=%A5%E2%A5%CA%A5%EA%A5%B6&ie=EUC-JP"
 
 @param str URI を文字列として与えます。
 
@@ -141,15 +145,14 @@ URI 文字列をエンコードした文字列を返します。
 
 --- unescape(str)    -> String
 --- decode(str)      -> String
-#@todo
 
 URI 文字列をデコードした文字列を返します。
 
+例:
   require 'uri'
-  $KCODE = 'EUC'
-  p URI.unescape('http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Ruby%A5%EA%A5%D5%A5%A1%A5%EC%A5%F3%A5%B9%A5%DE%A5%CB%A5%E5%A5%A2%A5%EB')
+  puts URI.unescape('http://images.google.co.jp/images?q=%A5%E2%A5%CA%A5%EA%A5%B6&ie=EUC-JP')
 
-  #=> "http://www.ruby-lang.org/ja/man-1.6/?cmd=view;name=Rubyリファレンスマニュアル"
+  #=> "http://images.google.co.jp/images?q=モナリザ&ie=EUC-JP"
 
 @param str URI を文字列として与えます。
 
