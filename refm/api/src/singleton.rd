@@ -1,6 +1,8 @@
-singleton パターンを提供するモジュールです。
+Singleton パターンを扱うためのライブラリです。
 
 = module Singleton
+
+Singleton パターンを提供するモジュールです。
 
 Mix-in により singleton パターンを提供します。
 
