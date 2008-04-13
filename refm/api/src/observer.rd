@@ -47,6 +47,8 @@ observer が update メソッドを持たないときは
 
 @param observer 更新の通知を受けるオブザーバ
 
+@raise NoMethodError updateメソッドを持たないオブジェクトをオブザーバに指定した場合に発生します。
+
 --- delete_observer(observer) -> object | nil
 
 オブザーバを削除します。
@@ -88,4 +90,9 @@ observer が update メソッドを持たないときは
 更新フラグが立っていた場合は、
 登録されているオブザーバの update メソッドを順次呼び出します。
 与えられた引数はその update メソッドに渡されます。
+与えられた引数の数と登録されているオブザーバのupdate メソッドの引数の数に違いがある場合は
+例外[[c:ArgumentError]]を発生します。
 全てのオブザーバの update メソッドを呼び出し後、更新フラグを初期化します。
+
+@raise ArgumentError 与えられた引数の数と登録されているオブザーバのupdate メソッドの引数の数に違いがある場合に発生します。
+
