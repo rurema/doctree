@@ -1,5 +1,4 @@
-eRubyスクリプトを扱うためのクラスライブラリです。
-
+eRuby スクリプトを扱うためのライブラリです。
 
 = class ERB < Object
 
@@ -229,6 +228,8 @@ filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易
 
 = module ERB::Util
 
+eRubyスクリプトのためのユーティリティを提供するモジュールです。
+
 == Module Functions
 
 --- html_escape(s) -> String
@@ -251,6 +252,8 @@ filename を設定しておくことにより、エラーが発生した eRuby スクリプトの特定が容易
 @param s URLエンコードを行う文字列
 
 = module ERB::DefMethod
+
+def_erb_methodを提供するモジュールです。
 
 == Module Functions
 
