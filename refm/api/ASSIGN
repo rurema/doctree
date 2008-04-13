@@ -108,7 +108,7 @@ bigdecimal/util
 cgi
 cgi-lib
 cgi/session
-complex                         
+complex                         bornite
 csv                             bornite
 curses
 date                            tadf            almost done
@@ -149,7 +149,7 @@ generator
 getoptlong
 getopts
 gserver
-iconv                           
+iconv                           bornite
 importenv                       mukai           done
 io/nonblock
 io/wait
@@ -161,7 +161,7 @@ kconv
 logger
 mailread
 mathn				yugui
-matrix                          
+matrix                          bornite
 md5
 mkmf                            
 monitor
@@ -455,7 +455,7 @@ tracer
 tsort
 un
 uri                             sheepman
-weakref                         
+weakref                         bornite
 webrick                         sheepman
 webrick/cgi                     sheepman
 webrick/ssl                     sheepman
