@@ -7,11 +7,11 @@ Observer パターンを提供するモジュールです。
 Mix-in により Observer パターンを提供します。
 
 Observable モジュールを include したクラスは
-Observable#changed メソッドにより更新フラグを立て、
-Observable#notify_observers が呼び出されると
+[[m:Observable#changed]] メソッドにより更新フラグを立て、
+[[m:Observable#notify_observers]] が呼び出されると
 更新フラグが立っている場合はオブザーバに通知します
 (オブザーバの update メソッドを呼び出す)。
-Observable#notify_observers の引数は
+[[m:Observable#notify_observers]] の引数は
 そのままオブザーバの update メソッドに渡されます。
 
 === サンプルコード
@@ -43,7 +43,7 @@ Observable#notify_observers の引数は
 オブザーバは update メソッドを備えている必要があります。
 
 observer が update メソッドを持たないときは
-例外 NoMethodError が発生します。
+例外 [[c:NoMethodError]] が発生します。
 
 @param observer 更新の通知を受けるオブザーバ
 
