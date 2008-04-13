@@ -9,7 +9,7 @@ Mix-in により singleton パターンを提供します。
 Singleton モジュールを include することにより、クラスは
 高々ひとつのインスタンスしか持たないことが保証されます。
 
-Singleton を mix-in したクラスの
+Singleton を Mix-in したクラスの
 クラスメソッド instance はその唯一のインスタンスを返します。
 
 new は private メソッドに移され、外部から呼び出そうとするとエラーになります。
