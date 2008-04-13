@@ -34,43 +34,58 @@ Observable#notify_observers の引数は
 
 == Instance Methods
 
---- add_observer(observer)
-#@todo
+--- add_observer(observer) -> Array
 
-オブザーバを追加します。
+オブザーバを登録します。
+
+オブザーバを登録し、登録されているオブザーバのリストを返します。
+
 オブザーバは update メソッドを備えている必要があります。
 
 observer が update メソッドを持たないときは
 例外 NoMethodError が発生します。
 
---- delete_observer(observer)
-#@todo
+@param observer 更新の通知を受けるオブザーバ
+
+--- delete_observer(observer) -> object | nil
 
 オブザーバを削除します。
 
---- delete_observers
-#@todo
+指定されたオブジェクトがオブザーバとして登録されていた場合は、
+リストからオブジェクトを削除し、取り除かれたオブジェクトを返します。
+登録されていなかった場合は、nil を返します。
+
+@param observer 削除するオブザーバ
+
+--- delete_observers -> Array
 
 オブザーバをすべて削除します。
 
---- count_observers
-#@todo
+登録されているオブザーバのリストから全てのオブジェクトを取り除き、
+空となったオブザーバのリストを返します。
 
-オブザーバの数を返します。
+--- count_observers -> Fixnum
 
---- changed(state = true)
-#@todo
+登録されているオブザーバの数を返します。
+
+--- changed(state = true) -> bool
 
 更新フラグを立てます。
 
---- changed?
-#@todo
+更新フラグを指定された内容へ変更し、変更後の更新フラグの状態を返します。
+明示的に引数を指定して、更新フラグを初期化することも出来ます。
+
+@param state 更新フラグを立てる場合はtrueを、初期化する場合はfalseを指定します。
+
+--- changed? -> bool
 
 更新フラグの状態を返します。
 
---- notify_observers(*arg)
-#@todo
+--- notify_observers(*arg) -> nil
 
-更新フラグが立っていたら、オブザーバの update メソッドを呼び出します。
+オブザーバへ更新を通知します。
+
+更新フラグが立っていた場合は、
+登録されているオブザーバの update メソッドを順次呼び出します。
 与えられた引数はその update メソッドに渡されます。
-更新フラグは false になります。
+全てのオブザーバの update メソッドを呼び出し後、更新フラグを初期化します。
