@@ -5,7 +5,7 @@ include Enumerable
 gzip 形式の圧縮ファイルを読み込むラッパークラスです。
 IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 持つオブジェクト) と関連付けて使用します。
-  
+
   require 'zlib'
   =begin
   # hoge.gz がない場合は下記で作成できる。
@@ -40,6 +40,17 @@ GzipReader オブジェクトは io からデータを逐次リードして
 
 @raise Zlib::GzipFile::Error ヘッダーの解析に失敗した場合発生します。
 
+  File.open('hoge.txt', "w") { |fp|
+    fp.puts 'hoge'
+  }
+
+  f = File.open('hoge.txt')
+  begin
+    Zlib::GzipReader.new(f)
+  rescue Zlib::GzipFile::Error => err
+    puts "error", err #=> error
+                      #=> not in gzip format
+  end
 
 --- wrap(io) {|gz| ... }
 #@todo
@@ -51,23 +62,76 @@ io と関連付けられた GzipReader オブジェクトを作成し、
 クローズしたくない時は、ブロック中で [[m:Zlib::GzipFile#finish]]
 メソッドを呼び出して下さい。
 
+@param io IO オブジェクトを指定します。
+
+  require 'zlib'
+
+  =begin
+  # hoge.gz がない場合はこれで作成する。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+  }
+  =end
+
+  f = File.open('hoge.gz')
+  Zlib::GzipReader.wrap(f){|gz|
+    print gz.read
+  }
+  p f.closed? #=> true
+
+  f = File.open('hoge.gz')
+  Zlib::GzipReader.wrap(f){|gz|
+    print gz.read
+    gz.finish
+  }
+  p f.closed? #=> false
+
 --- open(filename)
 --- open(filename) {|gz| ... }
-#@todo
 
 filename で指定されるファイルを gzip ファイルとして
 オープンします。GzipReader オブジェクトを返します。
 その他詳細は [[m:Zlib::GzipReader.new]] や [[m:Zlib::GzipReader.wrap]] と
 同じです。
 
+@param filename gzip ファイル名を文字列で指定します。
+
+  require 'zlib'
+
+  =begin
+  # hoge.gz がない場合はこれで作成する。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz'){|gz|
+    print gz.read
+  }
+
 == Instance Methods
 
---- eof
---- eof?
-#@todo
+--- eof -> bool
+--- eof? -> bool
 
 圧縮データの終端に達した場合真を返します。
 フッターが読み込まれていなくても真を返すことに注意して下さい。
+
+  =begin
+  # hoge.gz がない場合はこれで作成する。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+    gz.puts 'fuga'
+    gz.puts 'foga'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz'){|gz|
+    gz.each_line{|line|
+      puts line
+    }
+    p gz.eof? #=> true
+  }
 
 --- pos
 --- tell
