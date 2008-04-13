@@ -192,7 +192,7 @@ converted hash or nil if obj cannot be converted for any reason.
   #=> {1=>"a", 2=>"b", 3=>["c"]}
 #@end
 
---- new(ifnone=nil) -> Hash
+--- new(ifnone = nil) -> Hash
 
 ¶õ¤Î¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÀ¸À®¤·¤Þ¤¹¡£ifnone ¤Ï¥­¡¼¤ËÂÐ
 ±þ¤¹¤ëÃÍ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ç¤¹¡£ÀßÄê¤·¤¿¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï[[m:Hash#default]]¤Ç»²¾È¤Ç¤­¤Þ¤¹¡£
@@ -361,30 +361,21 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 #@end
 @see [[m:Hash#key]]
 
---- fetch(key) -> object
---- fetch(key, default) -> object
---- fetch(key) {|key| ... } -> object
+--- fetch(key, default = nil) {|key| ... } -> object
 
 key ¤Ë´ØÏ¢¤Å¤±¤é¤ì¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤
 ¤Ê¤¤»þ¤Ë¤Ï¡¢°ú¿ô default ¤¬Í¿¤¨¤é¤ì¤Æ¤¤¤ì¤Ð¤½¤ÎÃÍ¤ò¡¢¥Ö¥í¥Ã
 ¥¯¤¬Í¿¤¨¤é¤ì¤Æ¤¤¤ì¤Ð¤½¤Î¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
-
-#@if (version >= "1.9.0")
-¤É¤Á¤é¤âÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÎã³° [[c:KeyError]] ¤¬È¯À¸¤·¤Þ¤¹¡£
-#@else
-¤É¤Á¤é¤âÍ¿¤¨¤é¤ì¤Æ¤¤¤Ê¤±¤ì¤ÐÎã³° [[c:IndexError]] ¤¬È¯À¸¤·¤Þ¤¹¡£
-#@end
 
 fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤¢¤ê¤Þ¤»¤ó¡Ë¡£
 
 @param key Ãµº÷¤¹¤ë¥­¡¼¤ò»ØÄê¤·¤Þ¤¹¡£
 @param default ³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤¤Ê¤¤»þ¤ÎÊÖ¤êÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
 #@if (version >= "1.9.0")
-@raise  KeyError
+@raise  KeyError   °ú¿ôdefault¤â¥Ö¥í¥Ã¥¯¤âÍ¿¤¨¤é¤ì¤Æ¤Ê¤¤»þ¡¢¥­¡¼¤ÎÃµº÷¤Ë¼ºÇÔ¤¹¤ë¤ÈÈ¯À¸¤·¤Þ¤¹¡£
 #@else
-@raise  IndexError
+@raise  IndexError °ú¿ôdefault¤â¥Ö¥í¥Ã¥¯¤âÍ¿¤¨¤é¤ì¤Æ¤Ê¤¤»þ¡¢¥­¡¼¤ÎÃµº÷¤Ë¼ºÇÔ¤¹¤ë¤ÈÈ¯À¸¤·¤Þ¤¹¡£
 #@end
-     °ú¿ôdefault¤â¥Ö¥í¥Ã¥¯¤âÍ¿¤¨¤é¤ì¤Æ¤Ê¤¤»þ¡¢¥­¡¼¤ÎÃµº÷¤Ë¼ºÇÔ¤¹¤ë¤ÈÈ¯À¸¤·¤Þ¤¹¡£
 
 #@if (version >= "1.9.0")
   h = {one: nil}
@@ -395,7 +386,10 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
   p h.fetch(:one)                          #=> nil
   p h.fetch(:two)                          # ¥¨¥é¡¼ key not found (KeyError)
   p h.fetch(:two,"error")                  #=> "error"
-  p h.fetch(:two){|key|"#{key} not exit"}  #=> "two not exit"
+  p h.fetch(:two){|key|"#{key} not exist"} #=> "two not exist"
+  p h.fetch(:two, "error"){|key|           #=> "two not exist"
+      "#{key} not exit"                    #  warning: block supersedes default value argument
+    }                                      #  ·Ù¹ð¤¬É½¼¨¤µ¤ì¤ë¡£
   
   h.default = "default"
   p h.fetch(:two)                          # ¥¨¥é¡¼ key not found (KeyError)
@@ -404,8 +398,8 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 
 --- has_key?(key) -> bool
 --- include?(key) -> bool
---- key?(key) -> bool
---- member?(key) -> bool
+--- key?(key)     -> bool
+--- member?(key)  -> bool
 
 ¥Ï¥Ã¥·¥å¤¬ key ¤ò¥­¡¼¤È¤·¤Æ»ý¤Ä»þ¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -417,7 +411,7 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 @see [[m:Hash#has_value?]]
 
 --- has_value?(value) -> bool
---- value?(value) -> bool
+--- value?(value)     -> bool
 
 ¥Ï¥Ã¥·¥å¤¬ value ¤òÃÍ¤È¤·¤Æ»ý¤Ä»þ¿¿¤òÊÖ¤·¤Þ¤¹¡£
 ÃÍ¤Î°ìÃ×È½Äê¤Ï == ¤Ç¹Ô¤ï¤ì¤Þ¤¹¡£
@@ -429,14 +423,14 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Þ¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 
 @see [[m:Hash#has_key?]]
 
---- []=(key, value) -> object
---- store(key,value) -> object
+--- []=(key, value)   -> object
+--- store(key, value) -> object
 
 key ¤ËÂÐ¤·¤Æ value ¤ò´ØÏ¢¤Å¤±¤Þ¤¹¡£value ¤òÊÖ¤·
 ¤Þ¤¹¡£
 
 @param key ¥­¡¼¤ò»ØÄê¤·¤Þ¤¹¡£
-@param value ÃÍ¤ò »ØÄê¤·¤Þ¤¹¡£
+@param value ÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
 
   
   h = {}
@@ -500,16 +494,15 @@ self¤¬ÊÑ²½¤¹¤ëÇË²õÅª¥á¥½¥Ã¥É¤Ç¤¹¡£
 @see [[m:Hash#compare_by_identity]]
 
 #@end
---- shift -> [object,object]
+--- shift -> [object, object]
 
-¥Ï¥Ã¥·¥å¤«¤éÍ×ÁÇ¤ò¤Ò¤È¤Ä¼è¤ê½ü¤­¡¢[key,value]¤È¤¤¤¦ÇÛÎó¤È¤·
+¥Ï¥Ã¥·¥å¤«¤éÍ×ÁÇ¤ò¤Ò¤È¤Ä¼è¤ê½ü¤­¡¢[key, value]¤È¤¤¤¦ÇÛÎó¤È¤·
 ¤ÆÊÖ¤·¤Þ¤¹¡£shift¤¬¤É¤ÎÍ×ÁÇ¤òÊÖ¤¹¤«¤ÏÉÔÄê¤Ç¤¹¡£
 
 shift¤ÏÇË²õÅª¥á¥½¥Ã¥É¤Ç¤¹¡£self¤ÏÍ×ÁÇ¤ò¼è¤ê½ü¤«¤ì¤¿»Ä¤ê¤Î¥Ï¥Ã¥·¥å¤ËÊÑ¹¹¤µ¤ì¤Þ¤¹¡£
 
 ¥Ï¥Ã¥·¥å¤¬¶õ¤Î¾ì¹ç¡¢¥Ç¥Õ¥©¥ë¥ÈÃÍ¡Ê[[m:Hash#default]]¤Þ¤¿¤Ï[[m:Hash#default_proc]]¤Î¥Ö¥í¥Ã¥¯¤ÎÃÍ¤«¡¢¤É¤Á¤é¤ânil¤Ê¤é¤Ðnil¡Ë
-¤òÊÖ¤·¤Þ¤¹(¤³¤Î¤È¤­¡¢
-[key,value] ¤È¤¤¤¦·Á¼°¤ÎÃÍ¤òÊÖ¤¹¤ï¤±¤Ç¤Ï¤Ê¤¤¤³¤È¤ËÃí°Õ)¡£
+¤òÊÖ¤·¤Þ¤¹(¤³¤Î¤È¤­¡¢[key,value] ¤È¤¤¤¦·Á¼°¤ÎÃÍ¤òÊÖ¤¹¤ï¤±¤Ç¤Ï¤Ê¤¤¤³¤È¤ËÃí°Õ)¡£
 
   h = {:ab => "some" , :cd => "all"}
   p h.shift               #=> [:ab, "some"]
@@ -526,6 +519,8 @@ shift¤ÏÇË²õÅª¥á¥½¥Ã¥É¤Ç¤¹¡£self¤ÏÍ×ÁÇ¤ò¼è¤ê½ü¤«¤ì¤¿»Ä¤ê¤Î¥Ï¥Ã¥·¥å¤ËÊÑ¹¹¤µ¤ì¤Þ¤¹¡
   p h2                    #=> {}
   p h2.shift              #=> [{}, nil]
 #@end
+
+
 @see [[m:Array#shift]]
 
 --- replace(other) -> self
@@ -723,13 +718,13 @@ delete_if ¤Ï¾ï¤Ë self ¤òÊÖ¤·¤Þ¤¹¡£
 reject! ¤Ï¡¢Í×ÁÇ¤òºï½ü¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¤Ï nil ¤òÊÖ¤·¡¢
 ¤½¤¦¤Ç¤Ê¤±¤ì¤Ð self ¤òÊÖ¤·¤Þ¤¹¡£
 
-  h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
+  h = { 2 => "8" ,4 => "6" ,6 => "4" ,8 => "2" }
   
-  p h.reject!{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
-  p h #=> {6=>"4", 8=>"2"}
+  p h.reject!{|key, value| key.to_i < value.to_i }   #=> { 6 => "4", 8 => "2" }
+  p h                                                #=> { 6 => "4", 8 => "2" }
   
-  p h.delete_if{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
-  p h.reject!{|key, value| key.to_i < value.to_i} #=> nil
+  p h.delete_if{|key, value| key.to_i < value.to_i } #=> { 6 => "4", 8 => "2" }
+  p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
 
 @see [[m:Hash#reject]],[[m:Hash#delete]]
 
@@ -790,7 +785,9 @@ each_pair ¤Ï each ¤Î¥¨¥¤¥ê¥¢¥¹¤Ç¤¹¡£
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
+#@since 1.9.0
 --- each_key -> Enumerable::Enumerator
+#@end
 
 ¥Ï¥Ã¥·¥å¤Î¥­¡¼¤ò°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Þ¤¹¡£
 
@@ -841,6 +838,7 @@ self ¤òÊÖ¤·¤Þ¤¹¡£
 --- index(val) -> object
 #@else
 --- key(val) -> object
+--- index(val) -> object
 #@end
 
 ÃÍ val ¤ËÂÐ±þ¤¹¤ë¥­¡¼¤òÊÖ¤·¤Þ¤¹¡£ÂÐ±þ¤¹¤ëÍ×ÁÇ¤¬Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï
@@ -1100,12 +1098,14 @@ other¤¬¥Ï¥Ã¥·¥å¤Ç¤Ï¤Ê¤¤¾ì¹ç¡¢other¤Î¥á¥½¥Ã¥Éto_hash¤ò»È¤Ã¤Æ°ÅÌÛ¤ÎÊÑ´¹¤ò»î¤ß¤Þ¤¹¡
 
 #@since 1.9.0
 
---- assoc(obj)   ->  Array | nil
-#@todo
+--- assoc(key)   ->  Array | nil
 
-Searches through the hash comparing obj with the key using ==.
-Returns the key-value pair (two elements array) or nil if no
-match is found. See Array#assoc.
+¥Ï¥Ã¥·¥å¤¬ key ¤ò¥­¡¼¤È¤·¤Æ»ý¤Ä¤È¤­¡¢¸«¤Ä¤«¤Ã¤¿Í×ÁÇ¤Î¥­¡¼¤ÈÃÍ¤Î¥Ú¥¢
+¤òÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+
+key ¤¬¸«¤Ä¤«¤é¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢nil ¤òÊÖ¤·¤Þ¤¹¡£
+
+@param key ¸¡º÷¤¹¤ë¥­¡¼
 
    h = {"colors"  => ["red", "blue", "green"],
         "letters" => ["a", "b", "c" ]}
@@ -1113,22 +1113,31 @@ match is found. See Array#assoc.
    h.assoc("foo")      #=> nil
 
 
---- flatten -> Array
---- flatten(level) -> Array
-#@todo
 
-Returns a new array that is a one-dimensional flattening of this
-hash. That is, for every key or value that is an array, extract
-its elements into the new array. Unlike Array#flatten, this method
-does not flatten recursively by default. If the optional level
-argument determins the level of recursion to flatten.
+@see [[m:Array#assoc]]
+
+
+--- flatten(level = 1) -> Array
+
+¼«¿È¤òÊ¿³ê²½¤·¤¿ÇÛÎó¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+
+Á´¤Æ¤Î¥­¡¼¤ÈÃÍ¤ò¿·¤·¤¤ÇÛÎó¤ÎÍ×ÁÇ¤È¤·¤ÆÅ¸³«¤·¤Þ¤¹¡£
+[[m:Array#flatten]] ¤È°ã¤Ã¤Æ¡¢¥Ç¥Õ¥©¥ë¥È¤Ç¤Ï¤³¤Î¥á¥½¥Ã¥É¤Ï¼«¿È¤ò
+ºÆµ¢Åª¤ËÊ¿³ê²½¤·¤Þ¤»¤ó¡£level ¤ò»ØÄê¤¹¤ë¤È»ØÄê¤µ¤ì¤¿¥ì¥Ù¥ë¤Þ¤Ç
+ºÆµ¢Åª¤ËÊ¿³ê²½¤·¤Þ¤¹¡£
+
+@param level Å¸³«¤¹¤ë¥ì¥Ù¥ë
 
    a =  {1=> "one", 2 => [2,"two"], 3 => "three"}
-   a.flatten    # => [1, "one", 2, [2, "two"], 3, "three"]
-   a.flatten(2) # => [1, "one", 2, 2, "two", 3, "three"]
+   a.flatten     #=> [1, "one", 2, [2, "two"], 3, "three"]
+   a.flatten(1)  #=> [1, "one", 2, [2, "two"], 3, "three"]
+   a.flatten(2)  #=> [1, "one", 2, 2, "two", 3, "three"]
+   a.flatten(0)  #=> [[1, "one"], [2, [2, "two"]], [3, "three"]]
+   a.flatten(-1) #=> [1, "one", 2, 2, "two", 3, "three"]
 
+@see [[m:Array#flatten]]
 
---- rassoc(key) -> Array | nil
+--- rassoc(value) -> Array | nil
 #@todo
 
 Searches through the hash comparing obj with the value using ==. 
@@ -1139,6 +1148,7 @@ matches. See also Array#rassoc.
    a.rassoc("two")    #=> [2, "two"]
    a.rassoc("four")   #=> nil
 
+@see [[m:Array#rassoc]]
 
 #@end
 
