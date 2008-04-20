@@ -25,14 +25,12 @@ URI の構成要素を表すシンボルの配列を返します。
   # => [:scheme, :to, :headers]
 
 --- use_registry    -> boolean
-#@todo
 
 構成要素 registry を受け付けるなら true を返します。
 URI::Generic クラスでは false です。
 
 --- build2(ary)     -> URI::Generic
 --- build2(hash)    -> URI::Generic
-#@todo
 
 URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 が発生した場合に、引数の各要素を URI.escape して再度 build を試み
@@ -48,11 +46,9 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 //emlist{
       :scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment 
 //}
-            
 
 --- build(ary)     -> URI::Generic
 --- build(hash)    -> URI::Generic
-#@todo
 
 引数で与えられた URI 構成要素から URI::Generic オブジェクトを生成します。
 
@@ -70,7 +66,6 @@ URI::Generic.build と同じですが、例外 URI::InvalidComponentError
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
 --- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)    -> URI::Generic
-#@todo
 
 各引数を成分とする URI::Generic オブジェクトを生成して返します。
 
@@ -111,12 +106,10 @@ self.class.component を返します。
 @see [[m:URI::Generic.component]]
 
 --- scheme    -> String | nil
-#@todo
 
 自身の scheme を文字列で返します。設定されていない場合は nil を返します。
 
 --- scheme=(s)
-#@todo
 
 自身の scheme を設定します。
 
@@ -125,23 +118,34 @@ self.class.component を返します。
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 --- userinfo    -> String | nil
-#@todo
 
-自身の userinfo を文字列で返します。設定されていない場合は nil を返します。
+自身の userinfo を "username:password" という形式の文字列で返します。
+設定されていない場合は nil を返します。
 
 --- userinfo=(s)
-#@todo
 
 自身の userinfo を設定します。
 
-@param s 自身の userinfo を表す文字列を指定します。
+@param s 自身の userinfo を "username" か "username:password" という形式の文字列、あるいは
+         [username, password] という形式の文字列の配列で指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError userinfo と registry を同時に設定した場合に発生します。
 
+例:
+  require 'uri'
+  u = URI.parse('http://example.com/')
+  u.userinfo = 'hoge-san:jfae82kj'
+  p u.to_s                             #=> "http://hoge-san:jfae82kj@example.com/"
+  
+  u.userinfo = 'oreore'
+  p u.to_s                             #=> "http://oreore:jfae82kj@example.com/"
+
+  u.userinfo = ['you', 'akakfd']
+  p u.to_s                             #=> "http://you:akakfd@example.com/"
+
 --- user    -> String | nil
-#@todo
 
 自身の userinfo を文字列で返します。
 
@@ -149,7 +153,6 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 設定されていない場合は nil を返します。
 
 --- user=(s)
-#@todo
 
 自身の user を設定します。
 
@@ -160,14 +163,14 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError user と registry を同時に設定した場合に発生します。
 
 --- password    -> String | nil
-#@todo
 
 自身の password を文字列で返します。設定されていない場合は nil を返します。
 
 --- password=(s)
-#@todo
 
 自身の password を設定します。
+
+自身に user が設定されていない場合には例外が発生します。
 
 @param s 自身の password を表す文字列を指定します。
 
@@ -176,12 +179,10 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError userinfo と registry を同時に設定した場合に発生します。
 
 --- host    -> String | nil
-#@todo
 
 自身の host を文字列で返します。設定されていない場合は nil を返します。
 
 --- host=(s)
-#@todo
 
 自身の host を設定します。
 
@@ -192,28 +193,24 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError host と registry を同時に設定した場合に発生します。
 
 --- port     -> String | nil
-#@todo
 
 自身の port を文字列で返します。設定されていない場合は nil を返します。
 
 --- port=(s)
-#@todo
 
 自身の port を設定します。
 
-@param s 自身の port を表す文字列を指定します。
+@param s 自身の port を表す文字列か整数を指定します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 @raise URI::InvalidURIError port と registry を同時に設定した場合に発生します。
 
 --- registry    -> String | nil
-#@todo
 
 自身の registry を文字列で返します。設定されていない場合は nil を返します。
 
 --- registry=(s)
-#@todo
 
 自身の registry を設定します。
 
@@ -224,7 +221,6 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError server 部と registry を同時に設定した場合に発生します。
 
 --- path     -> String | nil
-#@todo
 
 自身の path を文字列で返します。設定されていない場合は nil を返します。
 
@@ -233,7 +229,6 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
   p URI.parse('mailto:nospam@localhost').path       #=> nil
 
 --- path=(s)
-#@todo
 
 自身の path を設定します。
 
@@ -244,12 +239,13 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError opaque と path を同時に設定した場合に発生します。
 
 --- query     -> String | nil
-#@todo
 
 自身の query を文字列で返します。設定されていない場合は nil を返します。
 
+例:
+  p URI.parse('http://example.com/?hoge').query   #=> "hoge"
+
 --- query=(s)
-#@todo
 
 自身の query を設定します。
 
@@ -260,16 +256,15 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError opaque と query を同時に設定した場合に発生します。
 
 --- opaque     -> String | nil
-#@todo
 
 自身の opaque を文字列で返します。設定されていない場合は nil を返します。
 
+例:
  p URI.parse('http://example.com/').opaque       #=> nil
  p URI.parse('mailto:nospam@localhost').opaque   #=> "nospam@localhost"
  p URI.parse('urn:ietf:rfc:1149').opaque         #=> "ietf:rfc:1149"
 
 --- opaque=(s)
-#@todo
 
 自身の opaque を設定します。
 
@@ -280,12 +275,15 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidURIError  opaque とヒエラルキーパートを同時に設定した場合に発生します。
 
 --- fragment     -> String | nil
-#@todo
 
 自身の fragment を文字列で返します。設定されていない場合は nil を返します。
 
+例:
+  require 'uri'
+  u = URI.parse('http://example.com/#frgmt')
+  p u.fragment                                #=> "frgmt"
+
 --- fragment=(s)
-#@todo
 
 自身の fragment を設定します。
 
@@ -294,20 +292,25 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
 --- hierarchical?    -> boolean
-#@todo
 
 自身に path が設定されているなら true を返します。そうでない場合は false を返します。
 
 --- absolute     -> boolean
 --- absolute?    -> boolean
-#@todo
 
 自身に scheme が設定されているなら true を返します。そうでない場合は false を返します。
 
+例:
+  p URI.parse('http://example.com/').absolute?    #=> true
+  p URI.parse('./').absolute?                     #=> false
+
 --- relative?    -> boolean
-#@todo
 
 自身に scheme が設定されていないなら true を返します。そうでない場合は false を返します。
+
+例:
+  p URI.parse('http://example.com/').relative?    #=> false
+  p URI.parse('./').relative?                     #=> true
 
 --- merge!(rel)    -> self
 
@@ -351,11 +354,10 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
   #=> #<URI::Generic:0x20100256 URL:en/raa.html>
 
 --- route_to(dst)     -> URI::Generic
-#@todo
 
 自身から dst への相対パスを返します。
 
-@param dst 文字列かURIオブジェクトを与えます。
+@param dst URI を文字列かURIオブジェクトで与えます。
 
 例:
   require 'uri'
@@ -365,7 +367,6 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
 
 --- normalize     -> URI::Generic
 --- normalize!    -> nil
-#@todo
 
 URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
 構成要素がなければ '/' をセットします。
@@ -377,7 +378,6 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
 
 --- to_s      -> String
 --- to_str    -> String
-#@todo
 
 自身が表す URI を文字列として返します。
 
@@ -389,6 +389,14 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
 
 引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
 ます。URI は正規化して比較されます。
+
+@param uri 比較したい URI を URI オブジェクトで指定します。
+
+例:
+  require 'uri'
+  u1 = URI.parse('http://example.com/?hoge')
+  u2 = URI.parse('http://Example.Com/?hoge')
+  p u1 == u2                                  #=> true
 
 --- select(*components)    -> [String]
 #@todo
