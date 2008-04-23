@@ -82,6 +82,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Signal)
 #@include(_builtin/SignalException)
 #@include(_builtin/StandardError)
+#@since 1.8.7
+#@include(_builtin/StopIteration)
+#@end
 #@include(_builtin/String)
 #@include(_builtin/Struct)
 #@include(_builtin/Struct__Tms)
