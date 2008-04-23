@@ -4,7 +4,7 @@
 include Enumerable
 
 each 以外のメソッドにも [[c:Enumerable]] の機能を提供するためのラッパークラスです。
-#@since 1.9.0
+#@since 1.8.7
 また、外部イテレータとしても使えます。
 #@end
 
@@ -62,7 +62,7 @@ args を指定すると、 method の呼び出し時に渡されます。
                                           #    "Ruby"
                                           #    "Hacker"
 
-#@since 1.9.0
+#@since 1.8.7
 --- next -> object
 「次」のオブジェクトを返します。
 
