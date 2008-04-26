@@ -226,20 +226,22 @@ true を返します。そうでない場合に false を返します。
 
 --- hash    -> Integer
 
-自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
+自身の [[m:Object#object_id]] を返します。
+これは [[c:Object]] クラスで定義されたデフォルトの動作です。
 
-#@since 1.9.0
+#@since 1.8.7
 
 --- name    -> String
 
-Returns the name of the method.
+このメソッドの名前を返します。
 
---- owner    -> class_or_module
+--- owner    -> Class | Module
 
-Returns the class or module that defines the method.
+このメソッドが定義されている class か module を返します。
+
 
 --- receiver    -> object
 
-Returns the bound receiver of the method object.
+このメソッドオブジェクトのレシーバを返します。
 
 #@end
