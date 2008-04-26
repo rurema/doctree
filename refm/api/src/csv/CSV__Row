@@ -1,5 +1,7 @@
 #@if (version <= '1.8.5')
 = class Row < Array
+CSV形式1行分のデータ（Row）を操作するためのクラス。
+このクラスはバージョン1.8.6で廃止されました。
 
 #@# deprecated
 
@@ -7,11 +9,21 @@
 
 #@if (version <= '1.8.1')
 
---- match
-#@todo
+--- match(rhs) -> bool
+自分自身と引数rhsを比較しTrue/Falseを返します。
 
---- to_a
-#@todo
+比較方法としては、[[c:CSV::Row]]オブジェクトの各Cellのデータを個別にCSV::Cell#match>で比較を行いそれらの全ての返却値がTureの時のみTrueを返します。
+
+@param rhs 比較される[[c:CSV::Row]]クラスのオブジェクト
+
+注意:
+ * このメソッドはバージョン1.8.2で廃止されました。
+
+--- to_a -> Array
+自分自身を[[c:Array]]オブジェクトとして返します。
+
+注意:
+ * このメソッドはバージョン1.8.2で廃止されました。
 
 #@end
 
