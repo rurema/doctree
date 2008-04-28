@@ -1062,27 +1062,17 @@ _dump/_load はより高度な制御を行いたい場合や拡張ライブラリで定義し
 
 #@since 1.8.0
 --- marshal_dump -> object
---- marshal_load(obj) -> ()
 
-[[m:Marshal.#dump]], [[m:Marshal.#load]]を制御するメソッドです。
+[[m:Marshal.#dump]] を制御するメソッドです。
 
 Marshal.dump(some) において、出力するオブジェクト some がメソッド marshal_dump を
 持つ場合には、その返り値がダンプされたものが Marshal.dump(some) の返り値となります。 
-
-some のダンプ結果（Marshal.dump(some)） をロードする（Marshal.load(Marshal.dump(some))）に
-は some がメソッド marshal_load を
-持っていなくてはならず、ロード時に利用されます。
-このとき、marshal_dump の返り値が marshal_load の引数に利用されます。
-marshal_load 時の self は、生成されたばかり
-（[[m:Class#allocate]] されたばかり） の状態です。
 
 marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
 これから書くプログラムでは _dump/_load ではなく
 marshal_dump/marshal_load を使うべきです。
 
-@param obj marshal_dump の戻り値のコピーです。
-@return marshal_dump の戻り値は任意のオブジェクトで marshal_load の引数に利用されます。
-  marshal_load の戻り値は無視されます。
+@return 任意のオブジェクトで marshal_load の引数に利用できます。
 
   class Foo
     def initialize(arg)
@@ -1116,7 +1106,27 @@ marshal_dump/marshal_load はより高度な制御を行いたい場合や
 (特異メソッドの情報が自動的に dump されるようになるわけではなく、
 marshal_dump/marshal_load によりそれを実現する余地があるということです)。
 
-@see [[m:Kernel.#_load]]
+@see [[m:Kernel.#_dump]], [[m:Object#marshal_load]], [[c:Marshal]]
+
+--- marshal_load(obj)
+
+[[m:Marshal.#load]] を制御するメソッドです。
+
+some のダンプ結果（Marshal.dump(some)） をロードする（Marshal.load(Marshal.dump(some))）に
+は some がメソッド marshal_load を持っていなければなりません。
+このとき、marshal_dump の返り値が marshal_load の引数に利用されます。
+marshal_load 時の self は、生成されたばかり（[[m:Class#allocate]] されたばかり） の状態です。
+
+marshal_dump/marshal_load の仕組みは Ruby 1.8.0 から導入されました。
+これから書くプログラムでは _dump/_load ではなく
+marshal_dump/marshal_load を使うべきです。
+
+@param obj marshal_dump の返り値のコピーです。
+
+@return   返り値は無視されます。
+
+@see [[m:Kernel.#_load]], [[m:Object#marshal_dump]], [[c:Marshal]]
+
 #@end
 
 --- clone -> object
