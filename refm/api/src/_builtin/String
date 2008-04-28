@@ -239,6 +239,8 @@ string と同じ内容の新しい文字列を作成して返します。
 @param times    整数
 @return         self を times 回繰り返した新しい文字列
 
+@raise ArgumentError 引数に負数を指定したときに発生します。
+
 例:
 
   p "str" * 3   # => "strstrstr"
