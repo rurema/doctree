@@ -177,12 +177,11 @@ self.to_a.select { ... } と同じです。
 @param index インデックスを整数で指定します。
 
   m = /(foo)(bar)(baz)/.match("foobarbaz")
-  p m.values_at(0,1,2,3,4)   # same as m.to_a.values_at(...)
-  p m.values_at(-1,-2,-3)
+  p m.values_at(0, 1, 2, 3, 4)   # same as m.to_a.values_at(...)
+  #=> ["foobarbaz", "foo", "bar", "baz", nil] 
+  p m.values_at(-1, -2, -3, -4, -5)
+  #=> ["baz", "bar", "foo", nil, nil]
 
-  => ["foobarbaz", "foo", "bar", "baz", nil]
-     ["baz", "bar", "foo"]
-
-@see [[m:Array#values_at]]
+@see [[m:Array#values_at]], [[m:Array#[] ]]
 
 #@end
