@@ -429,8 +429,8 @@ nth が負の場合は文字列の末尾から数えます。
 
 nth が範囲外を指す場合は nil を返します。
 
-@arg nth    取得したい文字列の開始インデックス。整数
-@arg len    取得したい文字列の長さ。正の整数
+@param nth    取得したい文字列の開始インデックス。整数
+@param len    取得したい文字列の長さ。正の整数
 
 例:
 
@@ -455,7 +455,7 @@ nth が範囲外を指す場合は nil を返します。
 self が substr を含む場合、一致した文字列を新しく作って返します。
 substr を含まなければ nil を返します。
 
-@arg substr    取得したい文字列のパターン。文字列
+@param substr    取得したい文字列のパターン。文字列
 
 例:
     substr = "bar"
@@ -483,9 +483,9 @@ self が regexp にマッチしない場合は nil を返します。
 このメソッドを実行すると、
 マッチ結果に関する情報が組み込み変数 [[m:$~]] に設定されます。
 
-@arg regexp    取得したい文字列のパターンを示す正規表現
+@param regexp    取得したい文字列のパターンを示す正規表現
 #@since 1.8.0
-@arg nth       取得したい正規表現レジスタのインデックス。整数
+@param nth       取得したい正規表現レジスタのインデックス。整数
 #@end
 
    p "foobar"[/bar/]  # => "bar"
@@ -519,7 +519,7 @@ first が 0 より小さいか文字列の長さより大きいとき、
 または両方が負の数のときは一度だけ文字列の長さを足して
 再試行します。
 
-@arg first..last   取得したい文字列の範囲を示す Range オブジェクト
+@param first..last   取得したい文字列の範囲を示す Range オブジェクト
 
 例:
 
@@ -563,7 +563,7 @@ first が 0 より小さいか文字列の長さより大きいとき、
 ただし first と last のどちらかまたは両方が負の数
 であるときは一度だけ文字列の長さを足して再試行します。
 
-@arg first...last   取得したい文字列の範囲を示す Range オブジェクト
+@param first...last   取得したい文字列の範囲を示す Range オブジェクト
 
 例:
     'abcd'[ 2 ... 3] # => "c"
@@ -586,8 +586,8 @@ val が 0 から 255 の範囲の整数である場合、
 
 val を返します。
 
-@arg nth    置き換えたいバイトのインデックス
-@arg val    指定バイトと置き換える文字列もしくはバイト
+@param nth    置き換えたいバイトのインデックス
+@param val    指定バイトと置き換える文字列もしくはバイト
 
 例:
 
@@ -602,9 +602,9 @@ nth が負の場合は文字列の末尾から数えます。
 
 val を返します。
 
-@arg nth    置き換えたい部分文字列の開始インデックス
-@arg len    置き換えたい部分文字列の長さ
-@arg val    指定範囲の部分文字列と置き換える文字列
+@param nth    置き換えたい部分文字列の開始インデックス
+@param len    置き換えたい部分文字列の長さ
+@param val    指定範囲の部分文字列と置き換える文字列
 
 例:
 
@@ -621,8 +621,8 @@ self が substr を含まない場合は
 
 val を返します。
 
-@arg substr    置き換えたい部分文字列のパターンを示す文字列
-@arg val       指定範囲の部分文字列と置き換える文字列
+@param substr    置き換えたい部分文字列のパターンを示す文字列
+@param val       指定範囲の部分文字列と置き換える文字列
 
 @raise IndexError    self が部分文字列 substr を含まない
 
@@ -654,11 +654,11 @@ nth に対応する括弧がないときは例外 [[c:IndexError]] が発生します。
 
 val を返します。
 
-@arg regexp    置き換えたい部分文字列のパターンを示す正規表現
+@param regexp    置き換えたい部分文字列のパターンを示す正規表現
 #@since 1.8.0
-@arg nth       置き換えたい部分文字列のパターンを示す正規表現レジスタの番号
+@param nth       置き換えたい部分文字列のパターンを示す正規表現レジスタの番号
 #@end
-@arg val       指定範囲の部分文字列と置き換えたい文字列
+@param val       指定範囲の部分文字列と置き換えたい文字列
 
 例:
     buf = "string"
@@ -677,7 +677,7 @@ val を返します。
 
 val を返します。
 
-@arg first..last   置き換えたい範囲を示す [[c:Range]] オブジェクト
+@param first..last   置き換えたい範囲を示す [[c:Range]] オブジェクト
 
 --- []=(first...last, val) -> val
 
@@ -685,7 +685,7 @@ val を返します。
 
 val を返します。
 
-@arg firstl...last   置き換えたい範囲を示す [[c:Range]] オブジェクト
+@param firstl...last   置き換えたい範囲を示す [[c:Range]] オブジェクト
 
 --- capitalize -> String
 
@@ -712,13 +712,13 @@ val を返します。
 @see [[m:String#capitalize!]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
 
---- capitalize! -> ()
+--- capitalize! -> self | nil
 
 文字列先頭の文字を大文字に、残りを小文字に変更します。
 ただし、アルファベット以外の文字は位置に関わらず変更しません。
 
-capitalize! は self を変更して返しますが、
-変更が起こらなかった場合は nil を返します。
+@return capitalize! は self を変更して返しますが、
+        変更が起こらなかった場合は nil を返します。
 
 例:
 
@@ -751,7 +751,7 @@ capitalize! は self を変更して返しますが、
 
 このメソッドの動作は組み込み変数 [[m:$=]] には影響されません。
 
-@arg other    self と比較する文字列
+@param other    self と比較する文字列
 
 例:
 
@@ -773,9 +773,9 @@ self の長さが width より長い時には元の文字列の複製を返します。
 空白文字の代わりに padding を詰めます。
 #@end
 
-@arg width      返り値の文字列の最小の長さ
+@param width      返り値の文字列の最小の長さ
 #@since 1.8.0
-@arg padding    長さが width になるまで self の両側に詰める文字
+@param padding    長さが width になるまで self の両側に詰める文字
 #@end
 
 例:
@@ -806,9 +806,9 @@ self の長さが width より長い時には元の文字列の複製を返します。
 空白文字の代わりに padding を詰めます。
 #@end
 
-@arg width      返り値の文字列の最小の長さ
+@param width      返り値の文字列の最小の長さ
 #@since 1.8.0
-@arg padding    長さが width になるまで self の右側に詰める文字
+@param padding    長さが width になるまで self の右側に詰める文字
 #@end
 
 例:
@@ -837,9 +837,9 @@ self の長さが width より長い時には元の文字列の複製を返します。
 空白文字の代わりに padding を詰めます。
 #@end
 
-@arg width      返り値の文字列の最小の長さ
+@param width      返り値の文字列の最小の長さ
 #@since 1.8.0
-@arg padding    長さが width になるまで self の右側に詰める文字
+@param padding    長さが width になるまで self の右側に詰める文字
 #@end
 
 例:
@@ -883,7 +883,7 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」になり、
   p "foo\n\r".chomp  # => "foo\n"
 #@end
 
---- chomp!(rs = $/) -> ()
+--- chomp!(rs = $/) -> self | nil
 
 self の末尾から rs で指定する改行コードを取り除きます。
 #@since 1.8.0
@@ -896,8 +896,7 @@ rs に nil を指定した場合、このメソッドは何もしません。
 rs に空文字列 ("") を指定した場合は「パラグラフモード」になり、
 末尾の連続する改行コードをすべて取り除きます。
 
-chomp! は通常 self を返しますが、
-取り除く改行がなかった場合は nil を返します。
+@return chomp! は通常 self を返しますが、取り除く改行がなかった場合は nil を返します。
 
 例:
 
@@ -925,13 +924,12 @@ chomp! は通常 self を返しますが、
     p "strin".chop       # => "stri"
     p "".chop            # => ""
 
---- chop! -> ()
+--- chop! -> self | nil
 
 文字列の最後の文字を取り除きます。
 ただし、終端が "\r\n" であればその 2 文字を取り除きます。
 
-chop! は self を変更して返しますが、
-取り除く文字がなかった場合は nil を返します。
+@return chop! は self を変更して返しますが、取り除く文字がなかった場合は nil を返します。
 
 #@since 1.9.0
 --- clear -> ()
@@ -977,7 +975,7 @@ chars で指定された文字が文字列 self にいくつあるか数えます。
 引数を複数指定した場合は、
 すべての引数にマッチした文字だけを数えます。
 
-@arg chars    出現回数を数える文字のパターン
+@param chars    出現回数を数える文字のパターン
 
 例:
 
@@ -1017,7 +1015,7 @@ salt には、以下の様になるべくランダムな文字列を選ぶべきです。
   * 典型的な DES を使用した [[man:crypt(3)]] の場合、
     self の最初の 8 バイト、salt の最初の 2 バイトだけが使用されます。
 
-@arg salt    文字列を暗号化するための鍵となる文字列。
+@param salt    文字列を暗号化するための鍵となる文字列。
              英数字・「.」・「/」のいずれかで構成される 2 バイト以上の文字列
 
 例:
@@ -1051,13 +1049,13 @@ str の形式は [[man:tr(1)]] と同じです。
 なお、引数を複数指定した場合は、
 すべての引数にマッチする文字だけが削除されます。
 
-@arg strs    削除する文字列を示す文字列 (のリスト)
+@param strs    削除する文字列を示す文字列 (のリスト)
 
 例:
     p "123456789".delete("2378")         #=> "14569"
     p "123456789".delete("2-8", "^4-6")  #=> "14569"
 
---- delete!(*strs) -> ()
+--- delete!(*strs) -> self | nil
 
 self から strs に含まれる文字を破壊的に取り除きます。
 
@@ -1073,10 +1071,9 @@ str の形式は [[man:tr(1)]] と同じです。
 なお、引数を複数指定した場合は、
 すべての引数にマッチする文字だけが削除されます。
 
-通常は self を返しますが、
-何も変更が起こらなかった場合は nil を返します。
+@return 通常は self を返しますが、何も変更が起こらなかった場合は nil を返します。
 
-@arg strs    削除する文字列を示す文字列 (のリスト)
+@param strs    削除する文字列を示す文字列 (のリスト)
 
 例:
 
@@ -1103,7 +1100,7 @@ str の形式は [[man:tr(1)]] と同じです。
   
 @see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
---- downcase! -> ()
+--- downcase! -> self | nil
 
 文字列中のアルファベット大文字をすべて破壊的に小文字に置き換えます。
 アルファベット大文字以外の文字はすべてそのまま保存されます。
@@ -1113,6 +1110,8 @@ str の形式は [[man:tr(1)]] と同じです。
 このメソッドはマルチバイト文字の一部も変換してしまう場合があります。
 逆に、[[m:$KCODE]] を適切に設定しても
 マルチバイト文字のアルファベットは処理できません。
+
+@return self を変更して返します。変更が無かった場合は nil を返します。
 
 例:
     p "STRing?".downcase   # => "string?"
@@ -1145,7 +1144,7 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり、
 改行コードが 2 つ以上連続するところで文字列を分割します
 (つまり空行で分割します)。
 
-@arg rs    行末を示す文字列
+@param rs    行末を示す文字列
 
 例:
     "aa\nbb\ncc\n".each do |line|
@@ -1177,7 +1176,7 @@ Ruby 1.9 以降は String#bytes を使ってください。
 @see [[m:String#unpack]]
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 --- bytes -> Enumerable::Enumerator
 
 文字列をバイト配列 (を表す Enumerator) に分割します。
@@ -1204,8 +1203,8 @@ Ruby 1.6 以前では pattern が文字列の場合、
 置換文字列内では \`、\'、\+ も使えます。
 これらは [[m:$`]]、[[m:$']]、[[m:$+]] に対応します。
 
-@arg pattern    置き換える文字列のパターン
-@arg replace    pattern で指定した文字列と置き換える文字列
+@param pattern    置き換える文字列のパターン
+@param replace    pattern で指定した文字列と置き換える文字列
 
 例:
     p 'abcdefg'.gsub(/def/, '!!')          # => "abc!!g"
@@ -1255,7 +1254,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 その文字列を正規表現にコンパイルしていました。
 しかし Ruby 1.8 以降では、その文字列そのものがパターンになります。
 
-@arg pattern    置き換える文字列のパターン
+@param pattern    置き換える文字列のパターン
 
 例:
 
@@ -1264,7 +1263,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#sub]]
 
---- gsub!(pattern, replace) -> ()
+--- gsub!(pattern, replace) -> self | nil
 
 文字列中で pattern にマッチする部分全てを文字列 replace に破壊的に置き換えます。
 
@@ -1280,8 +1279,8 @@ Ruby 1.6 以前では pattern が文字列の場合、
 gsub! は通常 self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
 
-@arg pattern    置き換える文字列のパターン
-@arg replace    pattern で指定した文字列と置き換える文字列
+@param pattern    置き換える文字列のパターン
+@param replace    pattern で指定した文字列と置き換える文字列
 
 例:
 
@@ -1315,7 +1314,7 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#sub]]
 
---- gsub!(pattern) {|matched| .... } -> ()
+--- gsub!(pattern) {|matched| .... } -> self | nil
 
 文字列中で pattern にマッチする部分全てを順番にブロックに渡し、
 その評価結果に置き換えます。
@@ -1327,7 +1326,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 また、ブロックなしの場合と違い、ブロックの中からは
 組み込み変数 [[m:$1]], $2, $3, ... を問題なく参照できます。
 
-@arg pattern    置き換える文字列のパターン
+@param pattern    置き換える文字列のパターン
 
 例:
     str = 'abcabc'
@@ -1375,7 +1374,7 @@ self が空文字列のときは 0 を返します。
 substr が 0 から 255 の範囲の [[c:Fixnum]] の場合、
 文字コードとみなして、その文字が含まれていれば真を返します。
 
-@arg substr    検索する文字列もしくは文字コードを表す整数
+@param substr    検索する文字列もしくは文字コードを表す整数
 
 --- index(pattern, pos = 0) -> Integer
 
@@ -1388,8 +1387,8 @@ substr が 0 から 255 の範囲の [[c:Fixnum]] の場合、
 
 pos が負の場合、文字列の末尾から数えた位置から探索します。
 
-@arg pattern    探索する部分文字列、正規表現、文字コードを示す 0 から 255 の整数
-@arg pos        探索を開始するインデックス
+@param pattern    探索する部分文字列、正規表現、文字コードを示す 0 から 255 の整数
+@param pos        探索を開始するインデックス
   
 例:
 
@@ -1408,8 +1407,8 @@ pos が負の場合、文字列の末尾から数えた位置から探索します。
 nth 番目の文字の直前に文字列 other を挿入します。
 self[pos, 0] = other と同じ操作です。
 
-@arg pos      文字列を挿入するインデックス
-@arg other    挿入する文字列
+@param pos      文字列を挿入するインデックス
+@param other    挿入する文字列
 
 例:
     str = "foobaz"
@@ -1502,8 +1501,8 @@ self にアルファベットや数字とそれ以外の文字が混在している場合、
 
 このメソッドは文字列の [[c:Range]] の内部で使用されます。
 
---- succ! -> ()
---- next! -> ()
+--- succ! -> String
+--- next! -> String
 
 self を「次の」文字列に置き換えます。
 「次の」文字列は、アルファベットなら 16 進数、
@@ -1587,7 +1586,7 @@ Ruby 1.8 以降はいずれも符号を許す
 逆に、数値を文字列に変換するには[[m:Kernel.#sprintf]],
 [[m:String#%]], [[m:Integer#to_s]] を使用します。
 
---- replace(other) -> ()
+--- replace(other) -> String
 
 self の内容を other の内容で置き換えます。
 
@@ -1683,6 +1682,8 @@ Ruby 1.6 以前は re が文字列の場合、
 Ruby 1.8 以降は、その文字列そのものがパターンになります。
 #@end
 
+@param re パターン
+
 例:
     "foobarbazfoobarbaz".scan(/ba./) {|s| p s }
         # => "bar"
@@ -1764,8 +1765,8 @@ sep が正規表現で、かつその正規表現に括弧が含まれている場合には、
 : limit < 0
      分割個数の制限はなし
 
-@arg sep       文字列を分割するときのセパレータのパターン
-@arg limit     分割する最大個数
+@param sep       文字列を分割するときのセパレータのパターン
+@param limit     分割する最大個数
 
 例:
     p "   a \t  b \n  c".split(/\s+/) # => ["", "a", "b", "c"]
@@ -1822,6 +1823,8 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
 
 引数を複数指定した場合は、すべての引数にマッチする文字を 1 文字にまとめます。
 
+@param *chars １文字にまとめる文字。
+
 例:
     p "112233445566778899".squeeze          # =>"123456789"
     p "112233445566778899".squeeze("2-8")   # =>"11234567899"
@@ -1846,6 +1849,8 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
 引数を 1 つも指定しない場合は、すべての連続した文字を 1 文字にまとめます。
 
 引数を複数指定した場合は、すべての引数にマッチする文字を 1 文字にまとめます。
+
+@param *chars １文字にまとめる文字。
 
 例:
     str = "112233445566778899"
@@ -1880,7 +1885,7 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
 
 @see [[m:String#lstrip]]
 
---- strip! -> ()
+--- strip! -> self | nil
 
 先頭と末尾の空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v" です。
@@ -1924,7 +1929,7 @@ strip! は、内容を変更した self を返します。
 #@end
 
 #@since 1.8.0
---- lstrip! -> ()
+--- lstrip! -> self | nil
 
 文字列の先頭にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v" です。
@@ -1961,7 +1966,7 @@ lstrip! は self を変更して返します。
 #@end
 
 #@since 1.8.0
---- rstrip! -> ()
+--- rstrip! -> self | nil
 
 文字列の末尾にある空白文字を全て破壊的に取り除きます。
 空白文字の定義は " \t\r\n\f\v\0" です。
@@ -1992,8 +1997,8 @@ Ruby 1.6 以前では pattern が文字列の場合、
 置換文字列内では \`、\'、\+ も使えます。
 これらは [[m:$`]]、[[m:$']]、[[m:$+]] に対応します。
 
-@arg pattern    置き換える文字列のパターン
-@arg replace    pattern で指定した文字列と置き換える文字列
+@param pattern    置き換える文字列のパターン
+@param replace    pattern で指定した文字列と置き換える文字列
 
 例:
     p 'abcdefg'.sub(/def/, '!!')          # => "abc!!g"
@@ -2043,7 +2048,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 その文字列を正規表現にコンパイルしていました。
 しかし Ruby 1.8 以降では、その文字列そのものがパターンになります。
 
-@arg pattern    置き換える文字列のパターン
+@param pattern    置き換える文字列のパターン
 
 例:
 
@@ -2052,7 +2057,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#gsub]]
 
---- sub!(pattern, replace) -> ()
+--- sub!(pattern, replace) -> self | nil
 
 文字列中で pattern にマッチした最初の部分を文字列 replace へ破壊的に置き換えます。
 
@@ -2068,8 +2073,8 @@ Ruby 1.6 以前では pattern が文字列の場合、
 sub! は通常 self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
 
-@arg pattern    置き換える文字列のパターン
-@arg replace    pattern で指定した文字列と置き換える文字列
+@param pattern    置き換える文字列のパターン
+@param replace    pattern で指定した文字列と置き換える文字列
 
 例:
 
@@ -2103,7 +2108,7 @@ replace に「\」自身を入れたいときは
 
 @see [[m:String#gsub]]
 
---- sub!(pattern) {|matched| .... } -> ()
+--- sub!(pattern) {|matched| .... } -> self | nil
 
 文字列中で pattern にマッチした最初の部分をブロックに渡し、
 その評価結果へ破壊的に置き換えます。
@@ -2115,7 +2120,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 また、ブロックなしの sub と違い、ブロックの中からは
 組み込み変数 [[m:$1]], $2, $3, ... を問題なく参照できます。
 
-@arg pattern    置き換える文字列のパターン
+@param pattern    置き換える文字列のパターン
 
 例:
     str = 'abcabc'
@@ -2150,7 +2155,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
     end
     sum %= 65536
 
-@arg bits    チェックサムのビット数
+@param bits    チェックサムのビット数
 
 --- swapcase -> String
 
@@ -2174,7 +2179,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
---- swapcase! -> ()
+--- swapcase! -> self | nil
 
 全ての大文字を小文字に、小文字を大文字に、破壊的に変更します。
 
@@ -2322,8 +2327,8 @@ replace に対しても `-' による範囲指定が可能です。
 replace の範囲が pattern の範囲よりも小さい場合は、
 replace の最後の文字が無限に続くものとして扱われます。
 
-@arg pattern    置き換える文字のパターン
-@arg replace    pattern で指定した文字を置き換える文字
+@param pattern    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 例:
     p "foo".tr("f", "X")      # => "Xoo"
@@ -2332,7 +2337,7 @@ replace の最後の文字が無限に続くものとして扱われます。
 
 @see [[m:String#tr_s]]
 
---- tr!(pattern, replace) -> ()
+--- tr!(pattern, replace) -> self | nil
 
 pattern 文字列に含まれる文字を検索し、
 それを replace 文字列の対応する文字に破壊的に置き換えます。
@@ -2360,8 +2365,8 @@ replace の最後の文字が無限に続くものと扱われます。
 tr! は self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
 
-@arg pattern    置き換える文字のパターン
-@arg replace    pattern で指定した文字を置き換える文字
+@param pattern    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 @see [[m:String#tr]], [[m:String#tr_s]]
 
@@ -2384,8 +2389,8 @@ replace でも「-」を使って範囲を指定できます。
 replace の範囲が pattern の範囲よりも小さい場合、
 replace の最後の文字が無限に続くものとして扱われます。
 
-@arg pattern    置き換える文字のパターン
-@arg replace    pattern で指定した文字を置き換える文字
+@param pattern    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 例:
     p "gooooogle".tr_s("o", "X")       # => "gXgle"
@@ -2402,7 +2407,7 @@ tr_s は置換された部分だけを squeeze します。
 
 @see [[m:String#tr]]
 
---- tr_s!(pattern, replace) -> ()
+--- tr_s!(pattern, replace) -> self | nil
 
 文字列の中に pattern 文字列に含まれる文字が存在したら、
 replace 文字列の対応する文字に置き換えます。さらに、
@@ -2442,8 +2447,8 @@ tr_s! は置換された部分だけを squeeze! します。
     str.squeeze!("f")
     p str   # => "f"
 
-@arg pattern    置き換える文字のパターン
-@arg replace    pattern で指定した文字を置き換える文字
+@param pattern    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 @see [[m:String#tr]], [[m:String#tr_s]]
 
@@ -2485,7 +2490,7 @@ tr_s! は置換された部分だけを squeeze! します。
 @see [[m:String#upcase!]], [[m:String#downcase]],
      [[m:String#swapcase]], [[m:String#capitalize]]
 
---- upcase! -> ()
+--- upcase! -> self | nil
 
 ASCII 文字列の範囲内でアルファベットを全て大文字にします。
 このメソッドは self を破壊的に変更して返しますが、
@@ -2532,8 +2537,11 @@ self から始めて max まで
   ("a" .. "za").each do |str|
     puts str
   end
+  'a'.upto('za') do |str|
+    puts str
+  end
 
-@arg max    繰り返しをやめる文字列
+@param max    繰り返しをやめる文字列
 
 --- eql?(other) -> bool
 
@@ -2577,11 +2585,13 @@ self の最初の文字だけを含む文字列を返します。
 
 @see [[m:String#ord]], [[m:Integer#chr]]
 
+#@end
+#@since 1.8.7
 --- start_with?(str) -> bool
 
 self の先頭が str であるとき true を返します。
 
-@arg str    パターンを表す文字列
+@param str    パターンを表す文字列
 
 例:
     "string".end_with?("str")   # => true
@@ -2593,7 +2603,7 @@ self の先頭が str であるとき true を返します。
 
 self の末尾が str であるとき true を返します。
 
-@arg str    パターンを表す文字列
+@param str    パターンを表す文字列
 
 例:
     "string".end_with?("ing")   # => true
@@ -2610,20 +2620,6 @@ self の末尾が str であるとき true を返します。
     p "aa\n".lines.to_a           # => ["aa\n"]
     p "".lines.to_a               # => []
 
---- ord -> Integer
-
-文字列の最初の文字の文字コードを整数で返します。
-
-self が空文字列のときは例外 TypeError を発生します。
-
-@return             文字コードを表す整数
-@raise TypeError    self の長さが 0 のとき発生
-
-例:
-    p "a".ord   # => 97
-
-@see [[m:Integer#chr]], [[m:String#chr]]
-
 --- partition(sep) -> [String, String, String]
 
 セパレータ sep が最初に登場する部分で self を 2 つに分割し、
@@ -2633,7 +2629,7 @@ self が空文字列のときは例外 TypeError を発生します。
 self がセパレータを含まないときは、
 返り値の第 2 要素と第 3 要素が空文字列になります。
 
-@arg sep    セパレータを表す文字列か正規表現
+@param sep    セパレータを表す文字列か正規表現
 
 例：
 
@@ -2651,7 +2647,7 @@ self がセパレータを含まないときは、
 self がセパレータを含まないときは、
 返り値の第 2 要素と第 3 要素が空文字列になります。
 
-@arg sep    セパレータを表す文字列か正規表現
+@param sep    セパレータを表す文字列か正規表現
 
 例：
 
@@ -2659,6 +2655,36 @@ self がセパレータを含まないときは、
   p "aaaaa".partition("x")   # => ["", "", "aaaaa"]
 
 @see [[m:String#partition]], [[m:String#split]]
+
+--- each_char {|cstr| block }    -> String
+#@until 1.9.0
+--- chars {|cstr| block }    -> String
+#@end
+
+文字列のそれぞれの文字をブロックに渡して実行します。
+
+@return self
+
+たとえば、
+   "hello".each_char {|c| print c, ' ' }
+は次のように出力されます。
+   h e l l o
+
+#@end
+#@since 1.9.0
+--- ord -> Integer
+
+文字列の最初の文字の文字コードを整数で返します。
+
+self が空文字列のときは例外 TypeError を発生します。
+
+@return             文字コードを表す整数
+@raise TypeError    self の長さが 0 のとき発生
+
+例:
+    p "a".ord   # => 97
+
+@see [[m:Integer#chr]], [[m:String#chr]]
 
 --- bytesize -> Integer
 
@@ -2670,17 +2696,6 @@ self がセパレータを含まないときは、
   p "いろは".bytesize #=> 6
 
 @see [[m:String#size]]
-
---- each_char {|cstr| block }    -> String
-
-文字列のそれぞれの文字をブロックに渡して実行します。
-
-@return self
-
-たとえば、
-   "hello".each_char {|c| print c, ' ' }
-は次のように出力されます。
-   h e l l o
 
 --- encoding   -> Encoding
 
@@ -2757,3 +2772,4 @@ self のエンコーディングが使われます。変換後の self を返します。
 @see [[m:String#encode]]
 
 #@end
+
