@@ -245,6 +245,7 @@ string と同じ内容の新しい文字列を作成して返します。
 
   str = "abc"
   p str * 4   # => "abcabcabcabc"
+  p str * 0   # => ""
   p str       # => "abc"  (変化なし)
 
 --- %(args) -> String
