@@ -400,6 +400,7 @@ $_ が文字列でなければ nil を返します。
 #@end
 
 --- [](nth) -> Integer
+--- slice(nth) -> Integer
 
 nth 番目のバイトを整数 (文字コード) で返します。
 nth が負の場合は文字列の末尾から数えます。
@@ -423,6 +424,7 @@ nth が範囲外を指す場合は nil を返します。
 [[m:Integer#chr]] を使ってください。
 
 --- [](nth, len) -> String
+--- slice(nth, len) -> String
 
 nth バイト番目から長さ len バイトの部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。
@@ -451,6 +453,7 @@ nth が範囲外を指す場合は nil を返します。
   p str0               #=> "bar" (str0は無傷、str1はstr0と内容を共有していない)
 
 --- [](substr) -> String
+--- slice(substr) -> String
 
 self が substr を含む場合、一致した文字列を新しく作って返します。
 substr を含まなければ nil を返します。
@@ -469,12 +472,14 @@ substr を含まなければ nil を返します。
 
 #@since 1.8.0
 --- [](regexp, nth = 0) -> String
+--- slice(regexp, nth = 0) -> String
 
 正規表現 regexp の nth 番目の括弧にマッチする最初の部分文字列を返します。
 nth を省略したときや 0 の場合は正規表現がマッチした部分文字列全体を返します。
 正規表現が self にマッチしなかった場合や nth に対応する括弧がないときは nil を返します。
 #@else
 --- [](regexp) -> String
+--- slice(regexp) -> String
 
 self のうち regexp にマッチする最初の部分文字列を返します。
 self が regexp にマッチしない場合は nil を返します。
@@ -499,6 +504,7 @@ self が regexp にマッチしない場合は nil を返します。
 #@end
 
 --- [](first..last) -> String
+--- slice(first..last) -> String
 
 インデックス first から last までのバイトを含む新しい文字列を作成して返します。
 インデックスと文字列の対応については以下の対照図も参照してください。
@@ -541,6 +547,7 @@ first が 0 より小さいか文字列の長さより大きいとき、
   'abcd'[-5 ..  2] # =>  nil
 
 --- [](first...last) -> String
+--- slice(first...last) -> String
 
 文字列先頭を 0 番目の隙間、末尾を self.length 番目の隙間として、
 first 番目の隙間から last 番目の隙間までに含まれる
@@ -1696,19 +1703,6 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
         #    ["ba", "z"]
         #    ["ba", "r"]
         #    ["ba", "z"]
-
---- slice(nth) -> Integer
---- slice(pos, len) -> String
---- slice(substr) -> String
-#@since 1.8.0
---- slice(regexp, nth = 0) -> String
-#@else
---- slice(regexp) -> String
-#@end
---- slice(first..last) -> String
---- slice(first...last) -> String
-
-[[m:String#[] ]] と同じです。
 
 --- slice!(nth) -> Integer
 --- slice!(pos, len) -> String
