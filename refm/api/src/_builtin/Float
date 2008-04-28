@@ -70,6 +70,7 @@ num を Float に変換した結果を返します。
   p 1.0 / 0   #=> Infinity
 
 --- %(other) -> Float
+--- modulo(other) -> Float
 算術演算子。剰余を計算します。
 
 @param other 二項演算の右側の引数(対象)
@@ -211,6 +212,105 @@ self を返します。
   p pi1.hash #=> 335364239
   p pi2.hash #=> 335364239
   p pi3.hash #=> 420540030
+
+--- abs    -> Float
+
+self の絶対値を返します。
+
+自身が 0 以上ならば self を、そうでない場合は -self を返します。
+
+--- ceil   -> Integer
+
+自身と等しいかより大きな整数のうち最小のものを返します。
+
+     1.0.ceil      #=> 1
+     1.2.ceil      #=> 2
+     (-1.2).ceil   #=> -1
+     (-1.5).ceil   #=> -1
+
+@see [[m:Float#floor]], [[m:Float#round]], [[m:Float#truncate]]
+
+--- divmod(other) -> [Numeric]
+
+self を other で割った商 q と余り r を、
+[q, r] という 2 要素の配列にして返します。
+#@since 1.8.5
+商 q は常に整数ですが、余り r は整数であるとは限りません。
+#@else
+商 q 、余り r ともに Float になります。
+#@end
+
+ここで、商 q と余り r は、
+
+  * self == other * q + r  
+と
+  * other > 0 のとき:  0     <= r < other
+  * other < 0 のとき:  other <  r <= 0
+  * q は整数
+をみたす数です。
+このメソッドは、メソッド / と % によって定義されています。
+
+@param other 自身を割る数を指定します。
+
+#@since 1.8.5
+   11.divmod(3)         #=> [3, 2]
+   (11.5).divmod(3.5)   #=> [3, 1.0]
+   11.divmod(-3)        #=> [-4, -1]
+   11.divmod(3.5)       #=> [3, 0.5]
+   (-11).divmod(3.5)    #=> [-4, 3.0]
+#@else
+   11.divmod(3)         #=> [3, 2]
+   (11.5).divmod(3.5)   #=> [3.0, 1.0]
+   11.divmod(-3)        #=> [-4, -1]
+   11.divmod(3.5)       #=> [3.0, 0.5]
+   (-11).divmod(3.5)    #=> [-4.0, 3.0]
+#@end
+
+@see [[m:Numeric#div]], [[m:Numeric#modulo]]
+
+--- floor  -> Integer
+
+自身と等しいかより小さな整数のうち最大のものを返します。
+
+     1.0.floor      #=> 1
+     1.2.floor      #=> 1
+     (-1.2).floor   #=> -2
+     (-1.5).floor   #=> -2
+
+@see [[m:Numeric#ceil]], [[m:Numeric#round]], [[m:Float#truncate]]
+
+--- eql?(other)   -> bool
+
+自身と other のクラスが等しくかつ == メソッドで比較して等しい場合に true を返します。
+そうでない場合に false を返します。
+
+@param other 自身と比較したい数値を指定します。
+
+  1.0.eql?(1)   #=> false
+  1.0.eql?(1.0) #=> true
+
+--- round  -> Fixnum
+
+自身ともっとも近い整数を返します。
+
+中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
+いわゆる四捨五入ですが、偶数丸めではありません。
+
+     1.0.round      #=> 1
+     1.2.round      #=> 1
+     (-1.2).round   #=> -1
+     (-1.5).round   #=> -2
+
+@see [[m:Float#ceil]], [[m:Float#floor]], [[m:Float#truncate]]
+
+--- zero?  -> bool
+
+自身がゼロの時、真を返します。そうでない場合は false を返します。
+
+  p 10.0.zero?            #=> false
+  p 0.zero?               #=> true
+  p 0.0.zero?             #=> true
+
 
 #@if (version >= "1.8.0")
 
