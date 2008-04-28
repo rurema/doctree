@@ -537,8 +537,22 @@ $VERBOSE はグローバルスコープです。
 --- $KCODE
 --- $-K
 
+#@since 1.9.0
+この特殊変数は何の影響も持たなくなりました。
+
+値を代入しても無視され、参照すると常に nil です。
+
+  >> $KCODE = true
+  (irb):1: warning: variable $KCODE is no longer effective; ignored
+  => true
+  >> $KCODE
+  (irb):2: warning: variable $KCODE is no longer effective
+  => nil
+
+#@else
 Ruby の認識するマルチバイト文字列エンコーディングです。
 変数の値は "EUC" "SJIS" "UTF8" "NONE" のいずれかの文字列です。
+
 
 $KCODE の値が "EUC" のときは文字列や正規表現の
 エンコーディングが EUC-JP であると仮定します。
@@ -571,6 +585,8 @@ $KCODE の値が "EUC" のときは文字列や正規表現の
   * [[m:String#scan]]
 
 $KCODE はグローバルスコープです。
+
+#@end
 
 --- $-a
 自動 split モードを表すフラグです。
