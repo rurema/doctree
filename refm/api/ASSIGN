@@ -97,7 +97,7 @@ _builtin/printf-format          sheepman
 English                         kouya           done
 Env                             mukai           done
 Win32API
-abbrev                          okkez
+abbrev                          okkez           done
 base64                          mukai           done
 benchmark                       
 bigdecimal
