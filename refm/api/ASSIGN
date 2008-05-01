@@ -99,7 +99,7 @@ Env                             mukai           done
 Win32API
 abbrev                          okkez           done
 base64                          mukai           done
-benchmark                       okkez
+benchmark                       okkez           done
 bigdecimal
 bigdecimal/jacobian
 bigdecimal/ludcmp

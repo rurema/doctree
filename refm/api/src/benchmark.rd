@@ -441,29 +441,63 @@ System CPU time
 
 = class Benchmark::Job < Object
 
+[[m:Benchmark.#bmbm]] メソッドの内部で使用されるクラスです。
+
+このライブラリのユーザーが直接意識する必要はありません。
+
+== Class Methods
+
+--- new(width) -> Benchmark::Job
+
 == Instance Methods
 
---- item(label = "", &blk)
---- report(label = "", &blk)
-#@todo
-Registers the given label and block pair in the job list.
+--- item(label = ""){ ... } -> self
+--- report(label = ""){ ... } -> self
 
---- list
-#@todo
-An array of 2-element arrays, consisting of label and block pairs.
+与えられたラベルとブロックをジョブリストに登録します。
 
---- width
-#@todo
-Length of the widest label in the #list, plus one.  
+@param label ラベル
+
+--- list -> [String, Proc]
+
+登録されているジョブのリストを返します。
+
+それぞれの要素は、ラベルとブロックからなる二要素の配列です。
+
+--- width -> Integer
+
+[[m:BEnchmark::Job#list]] のサイズ。
 
 
 = class Benchmark::Report < Object
 
+[[m:Benchmark#benchmark]] メソッドや [[m:Benchmark#bm]] メソッドの
+内部で使用されているクラスです。
+
+このライブラリのユーザーが直接意識する必要はありません。
+
+== Class Methods
+
+--- new(width = 0, fmtstr = nil) -> Benchmark::Report
+
+[[c:Benchmark::Report]] のインスタンスを初期化して返します。
+
+通常このメソッドがユーザーによって直接呼び出されることはありません。
+
+@param width  ラベルの幅
+@param fmtstr フォーマット文字列
+
 == Instance Methods
 
---- item(label = "", *fmt, &blk)
---- report(label = "", *fmt, &blk)
-#@todo
-Prints the label and measured time for the block,
-formatted by fmt. See Tms#format for the
-formatting rules.
+--- item(label = "", *fmt){ ... } -> Benchmark::Tms
+--- report(label = "", *fmt){ ... } -> Benchmark::Tms
+
+ラベルと与えられたブロックの実行時間を標準出力に出力します。
+
+出力のフォーマットは [[m:Benchmark::Tms#format]] が行います。
+
+@param label ラベル
+@param fmt   結果に出力したいオブジェクト
+
+@see [[m:Benchmark::Tms#format]]
+
