@@ -154,10 +154,10 @@ self の内容を other で書き換えます。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
-  db2 = DBM.open('bbb.db', 666, DBM::NEWDB)
+  db2 = DBM.open('bbb.db', 0666, DBM::NEWDB)
   db2[:bb] = 'bbb'
   db2[:cc] = 'ccc'
   
@@ -179,7 +179,7 @@ self の内容を other で書き換えます。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
   p db1.fetch('a')        #=> 'aaa'
@@ -197,7 +197,7 @@ key に対して value を格納します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   p db1.store('c', 'ccc') #=> "ccc"
 
 
@@ -207,7 +207,7 @@ key に対して value を格納します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
   
@@ -222,7 +222,7 @@ keys に対応する値を配列に格納して返します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
   
@@ -235,7 +235,7 @@ keys に対応する値を配列に格納して返します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
   p db1.invert  #=> {"bbbbbb" => "b", "aaa" => "a"}
@@ -250,10 +250,10 @@ self の内容を other で更新します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
-  db2 = DBM.open('bbb.db', 666, DBM::NEWDB)
+  db2 = DBM.open('bbb.db', 0666, DBM::NEWDB)
   db2[:bb] = 'bbb'
   db2[:cc] = 'ccc'
   
@@ -266,7 +266,7 @@ self の内容を other で更新します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
 
@@ -279,7 +279,7 @@ self をハッシュに変換して返します。
 
   require 'dbm'
   
-  db1 = DBM.open('aaa.db', 666, DBM::NEWDB)
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
   p db1.to_hash #=> {"a"=>"aaa", "b"=>"bbbbbb"}
