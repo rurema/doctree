@@ -113,10 +113,10 @@ csv                             bornite
 curses
 date                            tadf            almost done
 date2                           tadf            almost done
-dbm
+dbm                             okkez
 debug
 delegate                        snoozer05
-digest              kouji
+digest                          kouji
 digest/bubblebabble
 digest/md5
 digest/rmd160
