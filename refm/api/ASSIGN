@@ -144,7 +144,7 @@ ftools
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-gdbm
+gdbm                            okkez
 generator
 getoptlong
 getopts
