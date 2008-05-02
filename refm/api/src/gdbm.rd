@@ -8,26 +8,25 @@ Hash クラスと全く同様に扱うことができます。
 
 == Class Methods
 
---- new(dbname[, mode[, flags]])
---- open(dbname[, mode[, flags]])
---- open(dbname[, mode[, flags]]) {|db| ...}
-#@todo
+--- new(dbname, mode = 0666, flags = 0) -> GDBM
+--- open(dbname, mode = 0666, flags = 0) -> GDBM
+--- open(dbname, mode = 0666, flags = 0) {|db| ... } -> ()
 
-dbname で指定したデータベースをモードを
-mode に設定してオープンします。mode の省
-略値は 0666 です。mode として nil を指定
+dbname で指定したデータベースをモードを mode に設定してオープンします。
+
+mode の省略値は 0666 です。mode として nil を指定
 するとデータベースが存在しない時には新たなデータベースを作らず
 nil を返します。
 
-flags には、GDBM::FAST, GDBM::SYNC, GDBM::NOLOCK を
+flags には、[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
 の論理和を指定します。デフォルト値は指定なし(つまり0)です。
 
 #@if (version >= "1.8.2")
 flags に
-GDBM::READER, GDBM::WRITER, GDBM::WRCREAT, GDBM::NEWDB
+[[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
 のどれかを与えて読み書きのモードを指定できます。
 これらをどれも指定しなかった場合には、
-GDBM::WRCREAT, GDBM::WRITER, GDBM::READER の順で試します。
+[[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] の順で試します。
 #@end
 
 ブロックを指定した場合、オープンした GDBM オブジェクトを
@@ -44,219 +43,329 @@ GDBM::WRCREAT, GDBM::WRITER, GDBM::READER の順で試します。
 
 == Instance Methods
 
---- [](key)
-#@todo
+--- [](key) -> String
 
 key をキーとする値を返します。
 
+@param key キー。
+
 --- []=(key, value)
-#@todo
 
 key をキーとして、value を格納します。
 
+@param key キー。
+@param value 格納する値。
+
 --- cachesize=(size)
-#@todo
 
-内部のキャッシュのサイズを指定します。詳しくは [[man:gdbm]] の GDBM_CACHESIZE の項を参照ください。
+内部のキャッシュのサイズを指定します。
 
---- clear
-#@todo
+詳しくは [[man:gdbm]] の GDBM_CACHESIZE の項を参照ください。
+
+@param size 新しい内部のキャッシュサイズ。
+
+@see [[man:gdbm]]
+
+--- clear -> self
 
 DBM ファイルを空にします。
 
---- close
-#@todo
+--- close -> nil
 
-DBM ファイルをクローズします。以後の操作は例外を発生させます。
+DBM ファイルをクローズします。
+
+以後の操作は例外 [[c:RuntimeError]] を発生させます。
 
 #@since 1.8.3
---- closed?
-#@todo
+--- closed? -> bool
+
+DBM ファイルが既に閉じられているかどうかを返します。
+
+既に閉じられていれば true を返します。
+そうでなければ false を返します。
+
 #@end
 
---- delete(key)
---- delete(key) {|key| ... }
-#@todo
+--- delete(key) -> nil
+--- delete(key) {|key| ... } -> ()
 
 key をキーとする項目を削除します。
 
-指定したキーが存在しなければ nil を返します、このとき
-ブロックを指定していれば、ブロックを評価します。
+指定したキーが存在しなければ nil を返します。
+このときブロックを指定していれば、ブロックを評価します。
 
---- delete_if { |key, value|  ...  }
---- reject! { |key, value|  ...  }
-#@todo
+--- delete_if { |key, value|  ...  } -> self
+--- reject! { |key, value|  ...  } -> self
 
 ブロックを評価した値が真であれば該当する項目を削除します。
 
---- each {|key, value|  ...  }
---- each_pair {|key, value|  ...  }
-#@todo
+このメソッドは self を破壊的に変更します。
+
+--- each {|key, value|  ...  } -> self
+--- each_pair {|key, value|  ...  } -> self
 
 各要素に対するイテレータです。
 
---- each_key {|key|  ...  }
-#@todo
+--- each_key {|key|  ...  } -> self
 
 全ての key に対して繰り返すイテレータです。
 
---- each_value {|value|  ...  }
-#@todo
+--- each_value {|value|  ...  } -> self
 
 全ての value に対して繰り返すイテレータです。
 
---- empty?
-#@todo
+--- empty? -> bool
 
 データベースが空の時、真を返します。
 
---- fastmode=(bool)
---- syncmode=(bool)
-#@todo
+--- fastmode=(bool) -> bool
 
-オープンしている GDBM オブジェクトのモードを変更します。下記の定数
-GDBM::FAST、GDBM::SYNC を参照してください。
+オープンしている GDBM オブジェクトのモードを変更します。
 
---- fetch(key[,ifnone])
---- fetch(key) {|key| ... }
-#@todo
+このオプションはデフォルトで on です。
+このオプションは obsolete です。
 
-[[m:Hash#fetch]] と同じです。
+このオプションが on のときは、GDBM はディスクへの書き込みを待たずに
+次の操作を続けます。
 
---- has_key?(key)
---- key?(key)
---- include?(key)
---- member?(key)
-#@todo
+@param bool 新たにセットするモード。
+
+
+@see [[m:GDBM::FAST]], [[m:GDBM#syncmode=]]
+
+--- syncmode=(bool) -> bool
+
+オープンしている GDBM オブジェクトのモードを変更します。
+
+このオプションはデフォルトで off です。
+
+このオプションが on のときは、GDBM はデータベースの変更操作ごとに
+データベースの状態を同期します。
+
+@param bool 新たにセットするモード。
+
+@see  [[m:GDBM::SYNC]], [[m:GDBM#fastmode=]]
+
+--- fetch(key, ifnone = nil){|key| ... } -> object
+
+データベースから対応するキーを探してその要素の値を返します。
+
+@param key     探索するキー。
+@param ifnone  対応するキーが見つからなかった場合に返す値。
+
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  
+  p db1.fetch('a')                            #=> 'aaa'
+  p db1.fetch('z', 'zzz')                     #=> 'zzz'
+  p db1.fetch('z'){|key| [:key, key] }        #=> [:key, 'z']
+  p db1.fetch('z', 'zzz'){|key| [:key, key] } #=> 'zzz'
+  p db1.fetch('z')                            #=> IndexError 発生
+
+@see [[m:Hash#fetch]]
+
+--- has_key?(key) -> bool
+--- key?(key) -> bool
+--- include?(key) -> bool
+--- member?(key) -> bool
 
 key がデータベース中に存在する時、真を返します。
 
---- has_value?(key)
---- value?(value)
-#@todo
+--- has_value?(value) -> bool
+--- value?(value) -> bool
 
-value を値とする組がデータベース中に存在する時、真を返します。
+value を値とする要素がデータベース中に存在する時、真を返します。
 
---- index(val)
-#@todo
+@param value 検索したい値。
 
-[[m:Hash#index]] と同じです。
+--- index(val) -> String
+
+値 val に対応するキーを返します。
+
+対応する要素が存在しない時には nil を返します。
+該当するキーが複数存在する場合、どのキーを返すかは不定です。
+
+@see [[m:Hash#index]]
 
 #@if (version < "1.9.0")
---- indexes(key_1, ... )
---- indices(key_1, ... )
-#@todo
+--- indexes(*keys) -> [String]
+--- indices(*keys) -> [String]
+
+各引数の値をキーとする要素の値を含む配列を返します。
 
 このメソッドはobsoleteです。
 
-各引数の値をキーとする要素を含む配列を返します。
+@param keys 検索したいキーです。
+
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  p db1.indexes('a', 'b') #=> ["aaa", "bbb"]
+
+
 #@end
 
---- invert
-#@todo
+--- invert -> Hash
 
 値からキーへのハッシュを返します。
 
---- keys
-#@todo
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  p db1.invert #=> {"aaa"=>"a", "bbb"=>"b"}
+
+
+--- keys -> [String]
 
 データベース中に存在するキー全てを含む配列を返します。
 
---- length
---- size
-#@todo
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  p db1.keys #=> ["a", "b"]
 
-データベース中の要素の数を返します。(注意:現在の実現では要素数を数
-えるためにデータベースを全部検索します)
 
---- reject {|key, value| ... }
-#@todo
+--- length -> Integer
+--- size   -> Integer
 
-self.to_hash.reject と同じです。ハッシュを返します。
+データベース中の要素の数を返します。
 
---- reorganize
-#@todo
+現在の実現では要素数を数えるためにデータベースを全部検索します。
+
+--- reject {|key, value| ... } -> Hash
+
+
+ブロックを評価した値が真であれば該当する要素を削除します。
+
+  self.to_hash.reject{|key, value| ... }
+
+と同じです。
+
+@see [[m:Hash#reject]]
+
+--- reorganize -> self
+
+DB ファイルの再編成を行います。
 
 GDBM では、要素の削除を行っても DB ファイルのサイズは減少しません(削
-除によって空いた領域は次の格納のために取っておかれます、)。このメ
-ソッドを呼び出すことで DBM ファイルを新規に作り直し無駄な領域をなく
+除によって空いた領域は次の格納のために取っておかれます)。
+このメソッドを呼び出すことで DBM ファイルを新規に作り直し無駄な領域をなく
 すことができます。
 
 大量の削除を行ったときに、ディスクスペースの節約のために使用します。
 
---- replace(other)
-#@todo
+--- replace(other) -> self
 
-DBM の内容を other の内容で置き換えます。
-other は each_pair メソッドを持つオブジェクトで
-なければなりません。
+self の内容を other の内容で置き換えます。
 
---- select
-#@todo
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
---- shift
-#@todo
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  db2 = GDBM.open('bbb.gdbm', 0666, GDBM::NEWDB)
+  db2['c'] = 'ccc'
+  db2['d'] = 'ddd'
+  hash = { 'x' => 'xxx', 'y' => 'yyy'}
+  
+  p db1               #=> #<GDBM:0xb7d1c8a8>
+  p db1.replace(db2)  #=> #<GDBM:0xb7d1c8a8>
+  p db1.replace(hash) #=> #<GDBM:0xb7d1c8a8>
+
+
+--- select{|key, value| ... } -> [[String]]
+
+ブロックを評価して真になった要素のみを配列に格納して返します。
+
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  db1['c'] = 'ccc'
+  
+  p db1.select{ |key, value| key == 'a' } #=> [["a", "aaa"]]
+  p db1.select{ |key, value| key != 'a' } #=> [["c", "ccc"], ["b", "bbb"]]
+
+@see [[m:Hash#select]]
+
+--- shift -> [String]
 
 データベース中の要素を一つ取り出し、データベースから削除します。
 
---- store(key, val)
-#@todo
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  
+  p db1.shift #=> ["a", "aaa"]
 
-self[key]=val と同じです。key に対して val を格納します。
+--- store(key, val) -> [String]
 
---- sync
-#@todo
+key に対して val を格納します。
 
-要素の変更をファイルに反映します。FAST モード
-(GDBM#open() の第3引数にGDBM::FAST を指定)のときだけ意味があります。
+@see [[m#GDBM#[]=]]
 
-注) GNU gdbm version 1.8 以降より FAST モードがデフォルトになりました。
+--- sync -> self
 
---- to_a
-#@todo
+要素の変更をファイルに反映します。
 
-DBM の各要素を格納した配列を返します。返される配列の1つの要素は
-[key, val] です。(つまり配列の配列を返します)。
+FAST モード([[m#GDBM#open]] の第3引数に [[m#GDBM::FAST]] を指定)のときだけ意味があります。
 
---- to_hash
-#@todo
+==== 注意
+GNU gdbm version 1.8 以降より FAST モードがデフォルトになりました。
 
-DBM の各要素を格納したハッシュを返します。
+--- to_a -> [[String]]
 
---- update(other)
-#@todo
+self の各要素を格納した配列を返します。
 
-DBM と other の内容をマージします。重複するキーに対応する値は
-other の内容で上書きされます。
+返される配列の1つの要素は [key, value] です。(つまり配列の配列を返します)。
 
-other は each_pair メソッドを持つオブジェクトでなければなりま
-せん。
+--- to_hash -> Hash
 
---- values
-#@todo
+self の各要素を格納したハッシュを返します。
+
+--- update(other) -> self
+
+self と other の内容をマージします。
+
+重複するキーに対応する値はother の内容で上書きされます。
+
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
+
+--- values -> [String]
 
 データベース中に存在する値全てを含む配列を返します。
 
 == Constants
 
 --- VERSION
-#@todo
 
 libgdbm のバージョン情報の文字列です。
 
 
 --- FAST
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 書き込みの結果が、ディスク上のファイルにすぐに反映しなくなります。
-このモードのときに結果を明示的にファイルに反映させるには GDBM#sync
+このモードのときに結果を明示的にファイルに反映させるには [[m:GDBM#sync]]
 メソッドを呼びます。libgdbm version 1.8.0 以降ではこのモードがデフォルト
 です。
 
 --- SYNC
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -266,45 +375,39 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 この定数は libgdbm version 1.8.0 以降より有効です。
 
 --- NOLOCK
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 通常、他のプロセスが DB をオープンしている最中にオープンを行うと
-Errno::EWOULDBLOCK(または Errno::EAGAIN) 例外が発生します。このフラグを
-指定していれば、他のプロセスがオープンしている最中でも同時オープンする
-ことができます。
+[[m#Errno::EWOULDBLOCK]](または [[m#Errno::EAGAIN]]) 例外が発生します。
+このフラグを指定していれば、他のプロセスがオープンしている最中でも同時
+オープンすることができます。
 
 この定数は libgdbm version 1.8.0 以降より有効です。
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- READER
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
+
 読み込みモードでオープンします。
-#@end
 
-#@if (version >= "1.8.2")
 --- WRITER
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
+
 書き込みモードでオープンします。
-#@end
 
-#@if (version >= "1.8.2")
 --- WRCREAT
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
+
 書き込みモードで、すでにファイルが存在しなかったら作ります。
-#@end
 
-#@if (version >= "1.8.2")
+
 --- NEWDB
-#@todo
 
 [[m:GDBM.open]] の第3引数に指定します。
+
 書き込みモードで、すでにファイルが存在したら削除してから作り直します。
 #@end
