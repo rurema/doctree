@@ -79,11 +79,15 @@ key をキーとする要素を削除します。
 このメソッドは self を破壊的に変更します。
 
 
---- reject{ |key, value| ... } -> DBM
+--- reject{ |key, value| ... } -> Hash
 
 ブロックを評価した値が真であれば該当する要素を削除します。
 
+  self.to_hash.reject{|key, value| ... }
 
+と同じです。
+
+@see [[m:Hash#reject]]
 
 --- each {|key, value|  ...  } -> self
 --- each_pair {|key, value|  ...  } -> self
@@ -119,12 +123,22 @@ value を値とする組がデータベース中に存在する時、真を返します。
 @param value 検索したい値。
 
 #@if (version < "1.9.0")
---- indexes(*keys) -> Array
---- indices(*keys) -> Array
+--- indexes(*keys) -> [String]
+--- indices(*keys) -> [String]
 
-各引数の値をキーとする要素を含む配列を返します。
+各引数の値をキーとする要素の値を含む配列を返します。
 
 このメソッドは obsolete です。
+
+@param keys 検索したいキー。複数指定可能。
+
+  require 'dbm'
+  
+  db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
+  db1[:a] = 'aaa'
+  db1[:b] = 'bbbbbb'
+  p db1.indexes('a', 'b') #=> ["aaa", "bbbbbb"]
+
 #@end
 
 --- keys -> [String]
@@ -148,9 +162,9 @@ value を値とする組がデータベース中に存在する時、真を返します。
 
 --- replace(other) -> self
 
-self の内容を other で書き換えます。
+self の内容を other の内容で置き換えます。
 
-@param other もう一つの DBM オブジェクト。
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
   require 'dbm'
   
@@ -167,10 +181,14 @@ self の内容を other で書き換えます。
   
   p db1.keys #=> ['bb', 'cc']
   p db2.keys #=> ['bb', 'cc']
+  
+  hash = {'x' => 'xxx', 'y' => 'yyy' }
+  p db1               #=> #<DBM:0xb7c7eb08>
+  p db1.replace(hash) #=> #<DBM:0xb7c7eb08>
 
 --- fetch(key, ifnone = nil) -> String
 
-データベースからキーを探して対応する値を返します。
+データベースからキーを探して対応する要素の値を返します。
 
 @param key    キー。
 @param ifnone キーが見つからなかった場合に返す値。
@@ -182,9 +200,12 @@ self の内容を other で書き換えます。
   db1 = DBM.open('aaa.db', 0666, DBM::NEWDB)
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
-  p db1.fetch('a')        #=> 'aaa'
-  p db1.fetch('z', 'zzz') #=> 'zzz'
-  p db1.fetch('z')        #=> IndexError 発生
+  p db1.fetch('a')                     #=> 'aaa'
+  p db1.fetch('z', 'zzz')              #=> 'zzz'
+  p db1.fetch('z'){|key| [:key, key] } #=> [:key, 'z']
+  p db1.fetch('z')                     #=> IndexError 発生
+
+@see [[m:Hash#fetch]]
 
 --- store(key, value) -> String
 
@@ -231,7 +252,7 @@ keys に対応する値を配列に格納して返します。
 
 --- invert -> Hash
 
-キーと値のペアを持つ Hash に変換します。
+値からキーへのハッシュを返します。
 
   require 'dbm'
   
@@ -241,11 +262,13 @@ keys に対応する値を配列に格納して返します。
   p db1.invert  #=> {"bbbbbb" => "b", "aaa" => "a"}
 
 
---- update(other){|key, value| ... } -> DBM
+--- update(other){|key, value| ... } -> self
 
-self の内容を other で更新します。
+self と other の内容をマージします。
 
-@param other DBM オブジェクト。
+重複するキーに対応する値はother の内容で上書きされます。
+
+@param other each_pair メソッドを持つオブジェクトでなければなりません。
 
 
   require 'dbm'
@@ -321,11 +344,15 @@ value を持つ要素のキーを返します。
 
 #@end
 
-
 --- VERSION
 
-DB のバージョンです。
+libdbm のバージョンを表す文字列です。
 
+#@if (version < "1.8.7")
+DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
+トップレベルの VERSION が参照されるため警告が表示されます。
+#@end
 #@since 1.9.0
-DB のバージョンが不明な場合は "unknown" になります。
+DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
+"unknown" になります。
 #@end
