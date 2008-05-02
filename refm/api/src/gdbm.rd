@@ -411,3 +411,12 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 
 書き込みモードで、すでにファイルが存在したら削除してから作り直します。
 #@end
+
+
+= class GDBMError < StandardError
+
+GDBM 内部で使用する例外クラスです。
+
+= class GDBMFatalError < StandardError
+
+GDBM 内部で使用する例外クラスです。
