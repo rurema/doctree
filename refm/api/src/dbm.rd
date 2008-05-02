@@ -358,7 +358,7 @@ DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
 #@end
 
 
-= DBMError < StandardError
+= class DBMError < StandardError
 
 DBM 内部で使用する例外クラスです。
 
