@@ -321,8 +321,11 @@ value を持つ要素のキーを返します。
 
 #@end
 
+
 --- VERSION
 
 DB のバージョンです。
 
+#@since 1.9.0
 DB のバージョンが不明な場合は "unknown" になります。
+#@end
