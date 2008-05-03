@@ -286,9 +286,24 @@ implement #pretty_print, or a RuntimeError will be raised.
 == Module Functions
 --- pp(*obj)    -> nil
 
-指定されたオブジェクト obj を [[m:$>]] に pretty print で出力します。
+指定されたオブジェクト obj を標準出力にプリティプリントで出力します。
+obj それぞれを引数として [[m:PP.pp]] を呼びことと同等です。
 
 @param obj 表示したいオブジェクトを指定します。
+
+例:
+  require 'pp'
+
+  b = [1, 2, 3] * 4
+  a = [b, b]
+  a << a    
+  pp a
+
+  #=> [[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
+       [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3],
+       [...]]
+
+@see [[m:PP.pp]]
 
 #@since 1.8.5 
 = reopen Object
