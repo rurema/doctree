@@ -241,36 +241,56 @@ list を iter_method によってイテレートし、各要素を引数としてブロックを実行します
 
 --- pretty_print(pp)    -> ()
 
-一般のオブジェクトのためのデフォルトの pretty print メソッドです。
-このメソッドはインスタンス変数を列挙するために
-[[m:Object#pretty_print_instance_variables]] を呼びます。
+[[m:PP.pp]] や [[m:Kernel.#pp]] がオブジェクトの内容を出力するときに
+呼ぶメソッドです。[[c:PP]] オブジェクトを引数として呼びます。
 
-カスタマイズ(再定義)された inspect を self が持つ場合、
-self.inspect の結果が使われますが、これは改行のヒントを持ちません。
-
-もっともよく使われるいくつかの組み込みクラスについて、
-PP モジュールはあらかじめ定義された pretty_print メソッドを
-簡便のために提供しています。
+あるクラスの pp の出力をカスタマイズしたい場合は、
+このメソッドを再定義します。
+そのとき pretty_print メソッドは指定された pp に対して表示したい自身の内容を追加して
+いかなければいけません。いくつかの組み込みクラスについて、
+pp ライブラリはあらかじめ pretty_print メソッドを定義しています。
 
 @param pp [[c:PP]] オブジェクトです。
+
+例:
+  
+ class Array
+   def pretty_print(q)
+     q.group(1, '[', ']') {
+       q.seplist(self) {|v|
+         q.pp v
+       }
+     }
+   end
+ end
 
 @see [[m:Object#inspect]]
 
 --- pretty_print_cycle(pp)    -> ()
 
-一般のオブジェクトがサイクルの一部であることが検出されたときのための
-デフォルトの pretty print メソッドです。
+pretty print 時にオブジェクトのサイクルが検出された場合に
+[[m:Object#pretty_print]] の代わりに呼ばれるメソッドです。
+
+あるクラスの pp の出力をカスタマイズしたい場合は、
+このメソッドも再定義します。
 
 @param pp [[c:PP]] オブジェクトです。
+
+例:
+ 
+ class Array 
+   def pretty_print_cycle(q)
+     q.text(empty? ? '[]' : '[...]')
+   end
+ end
 
 --- pretty_print_instance_variables    -> [String | Symbol]
 
 ソートされたインスタンス変数の名前の配列を返します。
+返されたインスタンス変数は pp に表示されます。
 
-このメソッドはインスタンス変数の名前をシンボルか文字列として要素に持つ
-配列を返さなければなりません。
- 
- [:@a, :@b]
+pp に表示したくないインスタンス変数がある場合にこのメソッドを
+再定義します。
 
 --- pretty_print_inspect    -> ()
 #@todo
