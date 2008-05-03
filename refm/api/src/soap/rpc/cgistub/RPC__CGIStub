@@ -66,8 +66,6 @@ include WEBrick
 --- route(request_string, charset)
 #@todo
 
---- 
-#@todo
 #@end
 
 == Constants
