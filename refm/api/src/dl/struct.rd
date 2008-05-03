@@ -1,3 +1,4 @@
+#@until 1.9.0
 require dl
 require dl/import
 
@@ -112,3 +113,4 @@ malloc されたサイズを返します。
 --- new
 #@todo
 
+#@end

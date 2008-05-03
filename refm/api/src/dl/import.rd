@@ -1,3 +1,4 @@
+#@until 1.9.0
 require dl
 require dl/types
 
@@ -85,21 +86,21 @@ newtype で与えた型は extern や callback メソッド
 --- symbol(sym)    -> DL::PtrData
 #@todo
 ロードしたダイナミックライブラリ内のシンボルを検索し
-シンボルへのポインタを返します。
+シンボルへのポインタを [[c:DL::PtrData]] として返します。
 
 @param sym 欲しいシンボル名を文字列で与えます。
 
 @raise RuntimeError ライブラリ内でシンボルが見つからない時に発生します。
 
---- symbol(sym, typespec)    -> DL::Symbol 
+--- symbol(func, typespec)    -> DL::Symbol 
 #@todo
 
-ロードしたダイナミックライブラリ内のシンボルを検索し
-名前が sym のシンボルを取り出します。
+ロードしたダイナミックライブラリ内の関数を検索し
+名前が func の関数を [[c:DL::Symbol]] として返します。
 
-@param sym 欲しいシンボル名を文字列で与えます。
+@param func 欲しい関数名を文字列で与えます。
 
-@param typespec シンボルの型を型指定子を使って文字列で与えます。
+@param typespec 関数の型を型指定子を使って文字列で与えます。
 
 @raise RuntimeError ライブラリ内でシンボルが見つからない時に発生します。
 
@@ -140,3 +141,4 @@ C レベルの関数や変数名 func に対応する [[c:DL::Symbol]] オブジェクトを返します。
 --- LIB_MAP
 #@todo
 ロードされたライブラリを保持する[[c:Hash]]オブジェクトです。
+#@end

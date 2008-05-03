@@ -1,3 +1,4 @@
+#@until 1.9.0
 improt dl
 
 = class DL::Types < Object
@@ -71,3 +72,4 @@ Proc オブジェクトの組を次の通りの Array として返す。
 
 インスタンス変数 @TYDEFS の初期値。
 
+#@end
