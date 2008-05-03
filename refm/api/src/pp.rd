@@ -130,9 +130,9 @@ PP のメソッドでもあります。
 
 == Class Methods
 --- pp(obj, out = $>, width = 79)    -> object
-#@todo
-obj を out に幅 width で pretty print します。
-out を返します。
+
+指定されたオブジェクト obj を出力先 out に幅 width で出力します。
+出力先 out を返します。
 
 @param obj 表示したいオブジェクトを指定します。
 
@@ -149,21 +149,33 @@ out を返します。
       [:a, [:a, :b]]],
      [:a, :b]]]]
 
---- sharing_detection    -> boolean
-#@todo
+--- sharing_detection                 -> bool
+--- sharing_detection=(boolean)
 
-共有検出フラグを返します。デフォルトは false です。
+共有検出フラグを表すアクセサです。
+デフォルトは false です。true である場合、
+[[m:PP.pp]] は一度出力したオブジェクトを再び出力する時
+[[m:Object#pretty_print_cycle]] を使います。
 
---- sharing_detection=(boolean_value)
-#@todo
+@param boolean 共有検出フラグを true か false で指定します。
 
-共有検出フラグを設定します。
+例:
+
+  require 'pp'
+  b = [1, 2, 3]
+  a = [b, b]
+    
+  pp a                        #=> [[1, 2, 3], [1, 2, 3]]
+  
+  PP.sharing_detection = true
+  pp a                        #=> [[1, 2, 3], [...]]
+
 
 --- singleline_pp(obj, out=$>)    -> object
-#@todo
-obj を out に出力します。
+
+指定されたオブジェクト obj を出力先 out に出力します。
 ただし、インデントも改行もしません。
-out を返します。
+出力先 out を返します。
 
 @param obj 表示したいオブジェクトを指定します。
 
@@ -171,9 +183,8 @@ out を返します。
 
 == Instance Methods
 --- pp(obj)    -> ()
-#@todo
 
-[[m:Object#pretty_print]] を使って、obj を自身のバッファに追加します。
+指定されたオブジェクト obj を [[m:Object#pretty_print]] を使って自身のバッファに追加します。
 
 obj がすでに、現在のノードの親において出力されていた場合には、
 参照のループが存在しているので、[[m:Object#pretty_print]] の代わりに
@@ -182,20 +193,23 @@ obj がすでに、現在のノードの親において出力されていた場合には、
 @param obj 表示したいオブジェクトを指定します。
 
 --- object_group(obj) { ... }    -> ()
-#@todo
 
 以下と等価な働きをするもので簡便のために用意されています。
   group(1, '#<' + obj.class.name, '>') { ... }
 
+@param obj 表示したいオブジェクトを指定します。
+
+@see [[m:PrettyPrint#group]]
+
 --- comma_breakable    -> ()
-#@todo
 
 以下と等価な働きをするもので簡便のために用意されています。
   text ','
   breakable
 
+@see [[m:PrettyPrint#text]], [[m:PrettyPrint#breakable]]
+
 --- seplist(list, sep = lambda { comma_breakable }, iter_method = :each){|e| ...}    -> ()
-#@todo
 
 リストの各要素を何かで区切りつつ、自身に追加していくために使われます。
 
@@ -212,17 +226,20 @@ list を iter_method によってイテレートし、各要素を引数としてブロックを実行します
   q.comma_breakable
   q.pp 3
 
-@param list 自身に追加したい配列を与えます。iter_method を適切に指定すれば、Enumerable でなくても構いません。
+@param list 自身に追加したい配列を与えます。iter_method を適切に指定すれば、
+            Enumerable でなくても構いません。
 
-@param sep 区切りを自身に追加するブロックを与えます。list がイテレートされないなら、sep は決して呼ばれません。
+@param sep 区切りを自身に追加するブロックを与えます。list がイテレートされないなら、
+           sep は決して呼ばれません。
 
 @param iter_method list をイテレートするメソッドをシンボルで与えます。
+
+@see [[m:PP#comma_breakable]]
 
 = reopen Object
 == Instance Methods
 
 --- pretty_print(pp)    -> ()
-#@todo
 
 一般のオブジェクトのためのデフォルトの pretty print メソッドです。
 このメソッドはインスタンス変数を列挙するために
@@ -232,13 +249,14 @@ list を iter_method によってイテレートし、各要素を引数としてブロックを実行します
 self.inspect の結果が使われますが、これは改行のヒントを持ちません。
 
 もっともよく使われるいくつかの組み込みクラスについて、
-PP モジュールはあらかじめ定義された pretty_print() メソッドを
+PP モジュールはあらかじめ定義された pretty_print メソッドを
 簡便のために提供しています。
 
 @param pp [[c:PP]] オブジェクトです。
 
+@see [[m:Object#inspect]]
+
 --- pretty_print_cycle(pp)    -> ()
-#@todo
 
 一般のオブジェクトがサイクルの一部であることが検出されたときのための
 デフォルトの pretty print メソッドです。
@@ -246,7 +264,6 @@ PP モジュールはあらかじめ定義された pretty_print() メソッドを
 @param pp [[c:PP]] オブジェクトです。
 
 --- pretty_print_instance_variables    -> [String | Symbol]
-#@todo
 
 ソートされたインスタンス変数の名前の配列を返します。
 
@@ -267,15 +284,16 @@ implement #pretty_print, or a RuntimeError will be raised.
 
 = reopen Kernel
 == Module Functions
---- pp(obj)    -> nil
-#@todo
-obj を [[m:$>]] に pretty print で出力します。
+--- pp(*obj)    -> nil
+
+指定されたオブジェクト obj を [[m:$>]] に pretty print で出力します。
+
+@param obj 表示したいオブジェクトを指定します。
 
 #@since 1.8.5 
 = reopen Object
 == Instance Methods
 --- pretty_inspect    -> String
-#@todo
 
 self を pp で表示したときの結果を文字列として返します。
 #@end
