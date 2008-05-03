@@ -153,6 +153,9 @@ key をキーとする項目を削除します。
 @param key     探索するキー。
 @param ifnone  対応するキーが見つからなかった場合に返す値。
 
+@raise IndexError ifnone が設定されていないときに、対応するキーが
+                  見つからなかった場合に発生します。
+
   require 'gdbm'
   
   db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
@@ -348,6 +351,23 @@ self と other の内容をマージします。
 --- values -> [String]
 
 データベース中に存在する値全てを含む配列を返します。
+
+--- values_at(*keys) -> [String]
+
+keys に対応する値を配列に格納して返します。
+
+@params keys キー。複数指定可能です。
+
+  require 'gdbm'
+  
+  db1 = GDBM.open('aaa.gdbm', 0666, GDBM::NEWDB)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  db1['c'] = 'ccc'
+  
+  p db1.values_at('a', 'b') #=> ["aaa", "bbb"]
+  p db1.values_at('x', 'y') #=> [nil, nil]
+
 
 == Constants
 
