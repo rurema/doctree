@@ -149,6 +149,8 @@ PP のメソッドでもあります。
       [:a, [:a, :b]]],
      [:a, :b]]]]
 
+@see [[m:$>]]
+
 --- sharing_detection                 -> bool
 --- sharing_detection=(boolean)
 
@@ -306,7 +308,7 @@ implement #pretty_print, or a RuntimeError will be raised.
 == Module Functions
 --- pp(*obj)    -> nil
 
-指定されたオブジェクト obj を標準出力にプリティプリントで出力します。
+指定されたオブジェクト obj を標準出力に見やすい形式(プリティプリント)で出力します。
 obj それぞれを引数として [[m:PP.pp]] を呼びことと同等です。
 
 @param obj 表示したいオブジェクトを指定します。
