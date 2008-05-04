@@ -24,7 +24,7 @@ URI の構成要素を表すシンボルの配列を返します。
   # => [:scheme, :userinfo, :host, :port, :registry, :path, :opaque, :query, :fragment]
   # => [:scheme, :to, :headers]
 
---- use_registry    -> boolean
+--- use_registry    -> bool
 
 構成要素 registry を受け付けるなら true を返します。
 URI::Generic クラスでは false です。
@@ -291,12 +291,12 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
 
 @raise URI::InvalidComponentError 不正な引数 s に対して発生します。
 
---- hierarchical?    -> boolean
+--- hierarchical?    -> bool
 
 自身に path が設定されているなら true を返します。そうでない場合は false を返します。
 
---- absolute     -> boolean
---- absolute?    -> boolean
+--- absolute     -> bool
+--- absolute?    -> bool
 
 自身に scheme が設定されているなら true を返します。そうでない場合は false を返します。
 
@@ -304,7 +304,7 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
   p URI.parse('http://example.com/').absolute?    #=> true
   p URI.parse('./').absolute?                     #=> false
 
---- relative?    -> boolean
+--- relative?    -> bool
 
 自身に scheme が設定されていないなら true を返します。そうでない場合は false を返します。
 
@@ -384,7 +384,7 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
 例:
  p URI.parse('http://example.com/').to_s #=> "http://example.com/"
 
---- ==(uri)    -> boolean
+--- ==(uri)    -> bool
 #@todo
 
 引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
