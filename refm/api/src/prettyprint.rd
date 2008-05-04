@@ -59,7 +59,6 @@ pretty printing アルゴリズムのためのクラスです。
 == Class Methods
 --- new(output = '', maxwidth = 79, newline = "\n")               -> PrettyPrint
 --- new(output = '', maxwidth = 79, newline = "\n"){|width| ...}  -> PrettyPrint
-#@todo
 
 pretty printing のためのバッファを生成します。
 output は出力先です。output は << メソッドを持っていなければなりません。
@@ -80,8 +79,6 @@ output は出力先です。output は << メソッドを持っていなければなりません。
 
 
 --- format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
-#@todo
-
 PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
 与えられた output を返します。
 
@@ -94,8 +91,17 @@ PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
     output
   end
 
+@param output 出力先を指定します。output は << メソッドを持っていなければなりません。
+
+@param maxwidth 行の最大幅を指定します。ただし、改行できないものが渡された場合は、
+                実際の出力幅は maxwidth を越えることがあります。
+
+@param newline 改行に使われます。
+
+@param genspace 空白の生成に使われる [[c:Proc]] オブジェクトを指定します。
+                生成したい空白の幅を表す整数を引数として呼ばれます。
+
 --- singleline_format(output = '', maxwidth = 79, newline = "\n", genspace = lambda{|n| ' ' * n}) {|pp| ...}    -> object
-#@todo
 
 PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
 [[m:PrettyPrint.format]] に似ていますが、改行しません。
@@ -103,10 +109,17 @@ PrettyPrint オブジェクトを生成し、それを引数としてブロックを実行します。
 引数 maxwidth, newline と genspace は無視されます。ブロック中の breakable の実行は、
 改行せずに text の実行であるかのように扱います。
 
+@param output 出力先を指定します。output は << メソッドを持っていなければなりません。
+
+@param maxwidth 無視されます。
+
+@param newline 無視されます。
+
+@param genspace 無視されます。
+
 == Instance Methods
 --- text(obj)           -> ()
---- text(obj, width)    -> ()
-#@todo
+--- text(obj, width = obj.length)    -> ()
 
 obj を width カラムのテキストとして自身に追加します。
 
@@ -115,25 +128,23 @@ obj を width カラムのテキストとして自身に追加します。
 @param width obj のカラムを指定します。指定されなかった場合、obj.length が利用されます。
 
 --- breakable(sep = ' ')     -> ()
---- breakable(sep, width)    -> ()
-#@todo
+--- breakable(sep, width = sep.length)    -> ()
 
 「必要ならここで改行出来る」ということを自身に通知します。
 もしその位置で改行されなければ、width カラムのテキスト sep が出力の際にそこに挿入されます。
 
 @param sep 改行が起きなかった場合に挿入されるテキストを文字列で指定します。
 
-@param width テキスト sep は width カラムであると仮定されます。指定されなければ、sep.length が利用されます。例えば sep が多バイト文字の際に指定する必要があるかも知れません。
+@param width テキスト sep は width カラムであると仮定されます。指定されなければ、
+             sep.length が利用されます。例えば sep が多バイト文字の際に指定する必要があるかも知れません。
 
 --- nest(indent) {...}     -> ()
-#@todo
 
 自身の現在のインデントを indent だけ増加させてから、ブロックを実行し、元に戻します。
 
 @param indent インデントの増加分を整数で指定します。
 
 --- group(indent = 0, open_obj = '', close_obj = '', open_width = open_obj.length, close_width = close_obj.length){...}      -> ()
-#@todo
 
 与えられたブロックを実行します。
 ブロック内で自身に追加される文字列やオブジェクトは、1行にまとめて表示しても
@@ -147,17 +158,21 @@ obj を width カラムのテキストとして自身に追加します。
 
 @param indent グループのインデントの深さを指定します。
 
-@param open_obj 指定された場合、self.text(open_obj, open_width) がブロックが実行される前に呼ばれます。開き括弧などを出力するのに使用されます。
+@param open_obj 指定された場合、self.text(open_obj, open_width) がブロックが
+                実行される前に呼ばれます。開き括弧などを出力するのに使用されます。
 
-@param close_obj 指定された場合、self.text(close_obj, close_width) がブロックが実行された後に呼ばれます。閉じ括弧などを出力するのに使用されます。
+@param close_obj 指定された場合、self.text(close_obj, close_width) がブロックが
+                 実行された後に呼ばれます。閉じ括弧などを出力するのに使用されます。
+
+@param open_width open_obj のカラムを指定します。
+
+@param close_width close_obj のカラムを指定します。
 
 --- flush     -> ()
-#@todo
 
 バッファされたデータを出力します。
 
 --- first?    -> boolean
-#@todo
 
 #@since 1.8.2
 このメソッドは obsolete です。
@@ -177,26 +192,21 @@ obj を width カラムのテキストとして自身に追加します。
   }
 
 --- output    -> object
-#@todo
 
 自身の output を返します。
 
 --- maxwidth    -> Integer
-#@todo
 
 自身の幅を返します。
 
 --- newline    -> String
-#@todo
 
 自身の改行文字を返します。
 
 --- genspace    -> Proc
-#@todo
 
 空白を生成する Proc を返します。
 
 --- indent    -> Integer
-#@todo
 
 現在のインデントの深さを返します。
