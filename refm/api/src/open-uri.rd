@@ -52,12 +52,13 @@ URI ¥ª¥Ö¥¸¥§¥¯¥È¤ÏÄ¾ÀÜÆÉ¤ß¹þ¤à¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
 == Module Functions
 
---- open(name, *rest)                -> StringIO | File
---- open(name, *rest) {|ouri| ...}   -> nil
+--- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | File
+--- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> nil
 #@todo
 
 name ¤¬ http:// ¤ä ftp:// ¤Ç»Ï¤Þ¤Ã¤Æ¤¤¤ëÊ¸»úÎó¤Ê¤é URI ¤Î¥ê¥½¡¼¥¹¤ò
 ¼èÆÀ¤·¤¿¾å¤Ç [[c:StringIO]] ¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
+StringIO ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:OpenURI::Meta]] ¥â¥¸¥å¡¼¥ë¤Ç extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 
 name ¤Ë open ¥á¥½¥Ã¥É¤¬ÄêµÁ¤µ¤ì¤Æ¤¤¤ë¾ì¹ç¤Ï¡¢*rest ¤ò°ú¿ô¤È¤·¤ÆÅÏ¤·
 name.open(*rest, &block) ¤Î¤è¤¦¤Ë name ¤Î open ¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤Þ¤¹¡£
@@ -65,25 +66,36 @@ name.open(*rest, &block) ¤Î¤è¤¦¤Ë name ¤Î open ¥á¥½¥Ã¥É¤¬¸Æ¤Ð¤ì¤Þ¤¹¡£
 ¤³¤ì°Ê³°¤Î¾ì¹ç¤Ï¡¢name ¤Ï¥Õ¥¡¥¤¥ëÌ¾¤È¤·¤Æ°·¤ï¤ì¡¢½¾Íè¤Î
 [[m:Kernel#open]](name, *rest) ¤¬¸Æ¤Ð¤ì¤Þ¤¹¡£
 
+¥Ö¥í¥Ã¥¯¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¾å¤Î¾ì¹ç¤ÈÆ±ÍÍ¡¢name ¤¬ http:// ¤ä ftp:// ¤Ç
+»Ï¤Þ¤Ã¤Æ¤¤¤ëÊ¸»úÎó¤Ê¤é URI ¤Î¥ê¥½¡¼¥¹¤ò¼èÆÀ¤·¤¿¾å¤Ç [[c:StringIO]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò
+°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Þ¤¹¡£¸å¤ÏÆ±ÍÍ¤Ç¤¹¡£
+StringIO ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:OpenURI::Meta]] ¥â¥¸¥å¡¼¥ë¤Ç extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+@param name ¥ª¡¼¥×¥ó¤·¤¿¤¤¥ê¥½¡¼¥¹¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£
+
+@param mode ¥â¡¼¥É¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£[[m:Kernel.#open]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@param perm [[man:open(2)]] ¤ÎÂè 3 °ú¿ô¤Î¤è¤¦¤Ë¡¢¥Õ¥¡¥¤¥ë¤òÀ¸À®¤¹¤ë¾ì¹ç¤Î¥Õ¥¡¥¤¥ë¤Î¥Ñ¡¼¥ß¥Ã¥·¥ç¥ó¤ò
+            À°¿ô¤Ç»ØÄê¤·¤Þ¤¹¡£[[m:Kernel.#open]] ¤ÈÆ±¤¸¤Ç¤¹
+
+@param options ¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[m:OpenURI.open_uri]] ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+@raise OpenURI::HTTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ http ¤Ç¤¢¤ê¡¢
+                          ¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+
+@raise Net::FTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ ftp ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤Ë
+                     [[c:Net::FTPError]] ¤Î¥µ¥Ö¥¯¥é¥¹¤¬È¯À¸¤·¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[lib:net/ftp]] 
+                     ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
+
+Îã:
+ 
   require 'open-uri'
   sio = open('http://www.example.com')
   p sio.is_a?(OpenURI::Meta) # => true
   p sio.content_type
   puts sio.read
 
-¥Ö¥í¥Ã¥¯¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¾å¤Î¾ì¹ç¤ÈÆ±ÍÍ¡¢name ¤¬ http:// ¤ä ftp:// ¤Ç
-»Ï¤Þ¤Ã¤Æ¤¤¤ëÊ¸»úÎó¤Ê¤é URI ¤Î¥ê¥½¡¼¥¹¤ò¼èÆÀ¤·¤¿¾å¤Ç [[c:StringIO]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò
-°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Þ¤¹¡£¸å¤ÏÆ±ÍÍ¤Ç¤¹¡£
-
-@param name ¥ª¡¼¥×¥ó¤·¤¿¤¤¥ê¥½¡¼¥¹¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£
-
-@param rest [[m:OpenURI.open_uri]] ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
-
-@return ÊÖ¤êÃÍ¤Ç¤¢¤ë StringIO ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:OpenURI::Meta]] ¥â¥¸¥å¡¼¥ë¤Ç extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
-
-@raise OpenURI::HTTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ http ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
-
-@raise Net::FTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ ftp ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤Ë [[c:Net::FTPError]] ¤Î¥µ¥Ö¥¯¥é¥¹¤¬È¯À¸¤·¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[lib:net/ftp]] ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
+@see [[m:OpenURI.open_uri]]
 
 = reopen URI::HTTP
 include OpenURI::OpenRead
@@ -131,12 +143,11 @@ options ¤Ë¤Ï [[c:Hash]] ¤òÍ¿¤¨¤Þ¤¹¡£Íý²ò¤¹¤ë¥Ï¥Ã¥·¥å¤Î
 : :proxy
  ÃÍ¤Ë¤Ï°Ê²¼¤Î¤¤¤º¤ì¤«¤òÍ¿¤¨¤Þ¤¹¡£
 //emlist{
-   * Ê¸»úÎó  => "http://proxy.foo.com:8000/" ¤Î¤è¤¦¤Ê¥×¥í¥¯¥·¤Î URI¡£
-   * URI ¥ª¥Ö¥¸¥§¥¯¥È => URI.parse("http://proxy.foo.com:8000/") ¤Î¤è¤¦¤Ê
-     ¥×¥í¥¯¥·¤Î URI ¥ª¥Ö¥¸¥§¥¯¥È¡£
-   * true => Proxy ¤ò´Ä¶­ÊÑ¿ô¤Ê¤É¤«¤é¸«¤Ä¤±¤è¤¦¤È¤¹¤ë¡£
-   * false => Proxy ¤òÍÑ¤¤¤Ê¤¤¡£
-   * nil => Proxy ¤òÍÑ¤¤¤Ê¤¤¡£
+   Ê¸»úÎó:           "http://proxy.foo.com:8000/" ¤Î¤è¤¦¤Ê¥×¥í¥¯¥·¤Î URI¡£
+   URI ¥ª¥Ö¥¸¥§¥¯¥È: URI.parse("http://proxy.foo.com:8000/") ¤Î¤è¤¦¤Ê¥×¥í¥¯¥·¤Î URI ¥ª¥Ö¥¸¥§¥¯¥È¡£
+   true:             Proxy ¤ò´Ä¶­ÊÑ¿ô¤Ê¤É¤«¤é¸«¤Ä¤±¤è¤¦¤È¤¹¤ë¡£
+   false:            Proxy ¤òÍÑ¤¤¤Ê¤¤¡£
+   nil:              Proxy ¤òÍÑ¤¤¤Ê¤¤¡£
 //}
 
 : :http_basic_authentication
@@ -155,15 +166,20 @@ options ¤Ë¤Ï [[c:Hash]] ¤òÍ¿¤¨¤Þ¤¹¡£Íý²ò¤¹¤ë¥Ï¥Ã¥·¥å¤Î
 
 @param name ¥ª¡¼¥×¥ó¤·¤¿¤¤¥ê¥½¡¼¥¹¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£
 
-@param mode ¥â¡¼¥É¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£
+@param mode ¥â¡¼¥É¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£[[m:Kernel.#open]] ¤ÈÆ±¤¸¤Ç¤¹¡£
 
 @param perm Ìµ»ë¤µ¤ì¤Þ¤¹¡£
 
+@param options ¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Þ¤¹¡£
+
 @return ÊÖ¤êÃÍ¤Ç¤¢¤ë StringIO ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:OpenURI::Meta]] ¥â¥¸¥å¡¼¥ë¤Ç extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 
-@raise OpenURI::HTTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ http ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+@raise OpenURI::HTTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ http ¤Ç¤¢¤ê¡¢
+                          ¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
-@raise Net::FTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ ftp ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤Ë [[c:Net::FTPError]] ¤Î¥µ¥Ö¥¯¥é¥¹¤¬È¯À¸¤·¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[lib:net/ftp]] ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
+@raise Net::FTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ ftp ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤Ë 
+                     [[c:Net::FTPError]] ¤Î¥µ¥Ö¥¯¥é¥¹¤¬È¯À¸¤·¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[lib:net/ftp]] 
+                     ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
 
 @raise ArgumentError Í¿¤¨¤é¤ì¤¿ mode ¤¬ÆÉ¤ß¹þ¤ß¥â¡¼¥É¤Ç¤Ê¤«¤Ã¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
@@ -172,24 +188,40 @@ options ¤Ë¤Ï [[c:Hash]] ¤òÍ¿¤¨¤Þ¤¹¡£Íý²ò¤¹¤ë¥Ï¥Ã¥·¥å¤Î
 
 == Instance Methods
 
---- open(*rest)                 -> StringIO
---- open(*rest){|sio| ... }     -> nil
-#@todo
+--- open(mode = 'r', perm = nil, options = {}))                 -> StringIO
+--- open(mode = 'r', perm = nil, options = {})){|sio| ... }     -> nil
 
+¼«¿È¤¬É½¤¹¥ê¥½¡¼¥¹¤ò¼èÆÀ¤·¤Æ [[c:StringIO]] ¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 [[m:OpenURI.open_uri]](self, *rest, &block) ¤ÈÆ±¤¸¤Ç¤¹¡£
 
-@return ÊÖ¤êÃÍ¤Ç¤¢¤ë StringIO ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:OpenURI::Meta]] ¥â¥¸¥å¡¼¥ë¤Ç extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯¤òÍ¿¤¨¤¿¾ì¹ç¤Ï [[c:StringIO]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò
+É¾²Á¤·¤Þ¤¹¡£¥Ö¥í¥Ã¥¯¤Î½ªÎ»»þ¤Ë StringIO ¤Ï close ¤µ¤ì¤Þ¤¹¡£nil ¤òÊÖ¤·¤Þ¤¹¡£
 
-@raise OpenURI::HTTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ http ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+ÊÖ¤êÃÍ¤Ç¤¢¤ë StringIO ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:OpenURI::Meta]] ¥â¥¸¥å¡¼¥ë¤Ç extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 
-@raise Net::FTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ ftp ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤Ë [[c:Net::FTPError]] ¤Î¥µ¥Ö¥¯¥é¥¹¤¬È¯À¸¤·¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[lib:net/ftp]] ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
+@param mode ¥â¡¼¥É¤òÊ¸»úÎó¤ÇÍ¿¤¨¤Þ¤¹¡£[[m:Kernel.#open]] ¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@param perm Ìµ»ë¤µ¤ì¤Þ¤¹¡£
+
+@param options ¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Þ¤¹¡£
+
+@raise OpenURI::HTTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ http ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë
+                          ¼ºÇÔ¤·¤¿»þ¤ËÈ¯À¸¤·¤Þ¤¹¡£
+
+@raise Net::FTPError ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ ftp ¤Ç¤¢¤ê¡¢¤«¤Ä¥ê¥½¡¼¥¹¤Î¼èÆÀ¤Ë¼ºÇÔ¤·¤¿»þ¤Ë 
+                     [[c:Net::FTPError]] ¤Î¥µ¥Ö¥¯¥é¥¹¤¬È¯À¸¤·¤Þ¤¹¡£¾Ü¤·¤¯¤Ï [[lib:net/ftp]] 
+                     ¤ò»²¾È¤·¤Æ²¼¤µ¤¤¡£
+
+@see [[m:OpenURI.open_uri]]
 
 --- read(options={})     -> String
-#@todo
 
+¼«¿È¤¬É½¤¹ÆâÍÆ¤òÆÉ¤ß¹þ¤ó¤ÇÊ¸»úÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 self.open(options={}).read ¤ÈÆ±¤¸¤Ç¤¹¡£
 ¤³¤Î¥á¥½¥Ã¥É¤Ë¤è¤Ã¤ÆÊÖ¤µ¤ì¤ëÊ¸»úÎó¤Ï [[c:OpenURI::Meta]]
 ¤Ë¤è¤Ã¤Æ extend ¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+@param options ¥Ï¥Ã¥·¥å¤òÍ¿¤¨¤Þ¤¹¡£
 
   require 'open-uri'
   uri = URI.parse('http://www.example.com/')
@@ -204,20 +236,27 @@ self.open(options={}).read ¤ÈÆ±¤¸¤Ç¤¹¡£
 == Instance Methods
 
 --- last_modified    -> Time | nil
-#@todo
 
 ÂÐ¾Ý¤È¤Ê¤ë URI ¤ÎºÇ½ª¹¹¿·»þ¹ï¤ò [[c:Time]] ¥ª¥Ö¥¸¥§¥¯¥È¤ÇÊÖ¤·¤Þ¤¹¡£
 Last-Modified ¥Ø¥Ã¥À¤¬¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
+  require 'open-uri'
+  p open('http://www.rubyist.net/').last_modified    
+  #=> Thu Feb 26 16:54:58 +0900 2004
+
 --- content_type    -> String
-#@todo
 
 ÂÐ¾Ý¤È¤Ê¤ë¥ê¥½¡¼¥¹¤Î Content-Type ¤òÊ¸»úÎó¤ÎÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£Content-Type ¥Ø¥Ã¥À¤Î¾ðÊó¤¬»È¤ï¤ì¤Þ¤¹¡£
 Content-Type ¥Ø¥Ã¥À¤¬¤Ê¤¤¾ì¹ç¤Ï¡¢"application/octet-stream" ¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
+
+  require 'open-uri'
+  p open('http://www.ruby-lang.org/').content_type  #=> "text/html"
+
 --- charset       -> String | nil
 --- charset{...}  -> String
-#@todo
 
 ÂÐ¾Ý¤È¤Ê¤ë¥ê¥½¡¼¥¹¤ÎÊ¸»ú¥³¡¼¥É¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£Content-Type ¥Ø¥Ã¥À¤ÎÊ¸»ú¥³¡¼¥É¾ðÊó¤¬»È¤ï¤ì¤Þ¤¹¡£
 Ê¸»úÎó¤Ï¾®Ê¸»ú¤Ø¤ÈÊÑ´¹¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
@@ -226,32 +265,54 @@ Content-Type ¥Ø¥Ã¥À¤¬¤Ê¤¤¾ì¹ç¤Ï¡¢nil ¤òÊÖ¤·¤Þ¤¹¡£¤¿¤À¤·¡¢¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤Æ¤¤¤
 ¤½¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£¤Þ¤¿ÂÐ¾Ý¤È¤Ê¤ë URI ¤Î¥¹¥­¡¼¥à¤¬ HTTP ¤Ç¤¢¤ê¡¢¼«¿È¤Î¥¿¥¤¥×¤¬ text ¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢
 RFC2616 3.7.1 ¤ÇÄê¤á¤é¤ì¤Æ¤¤¤ë¤È¤ª¤ê¡¢Ê¸»úÎó "iso-8859-1" ¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
+
   open("http://www.ruby-lang.org/en") {|f|
     p f.content_type  # => "text/html"
     p f.charset       # => "iso-8859-1"
   }
 
 --- content_encoding    -> [String]
-#@todo
 
 ÂÐ¾Ý¤È¤Ê¤ë¥ê¥½¡¼¥¹¤Î Content-Encoding ¤òÊ¸»úÎó¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 Content-Encoding ¥Ø¥Ã¥À¤¬¤Ê¤¤¾ì¹ç¤Ï¡¢¶õ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
+
+  require 'open-uri'
+  p open('http://example.com/f.tar.gz').content_encoding  #=> ["x-gzip"]
+
 --- status    -> [String]
-#@todo
 
 ÂÐ¾Ý¤È¤Ê¤ë¥ê¥½¡¼¥¹¤Î¥¹¥Æ¡¼¥¿¥¹¥³¡¼¥É¤È reason phrase ¤òÊ¸»úÎó¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
+Îã:
+  require 'open-uri'
+  p open('http://example.com/').status  #=> ["200", "OK"]
+ 
 --- base_uri    -> URI
-#@todo
 
 ¥ê¥½¡¼¥¹¤Î¼ÂºÝ¤Î URI ¤ò URI ¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 ¥ê¥À¥¤¥ì¥¯¥È¤µ¤ì¤¿¾ì¹ç¤Ï¡¢¥ê¥À¥¤¥ì¥¯¥È¤µ¤ì¤¿¸å¤Î¥Ç¡¼¥¿¤¬Â¸ºß¤¹¤ë URI ¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
+
+  require 'open-uri'
+  p open('http://www.ruby-lang.org/').base_uri
+  #=> #<URI::HTTP:0xb7043aa0 URL:http://www.ruby-lang.org/en/>
+
 --- meta    -> Hash
-#@todo
 
 ¥Ø¥Ã¥À¤ò¼ýÏ¿¤·¤¿¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
+
+Îã:
+
+  require 'open-uri'
+  p open('http://example.com/').meta
+  #=> {"date"=>"Sun, 04 May 2008 11:26:40 GMT",
+       "content-type"=>"text/html;charset=utf-8",
+       "server"=>"Apache/2.0.54 (Debian GNU/Linux) mod_ssl/2.0.54 OpenSSL/0.9.7e",
+       "transfer-encoding"=>"chunked"}
 
 = class OpenURI::HTTPError < StandardError
 
