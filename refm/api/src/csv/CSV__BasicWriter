@@ -16,7 +16,6 @@ CSVデータ書き込み時に用いられるクラス
 == Instance Methods
 
 --- close_on_terminate -> true
-#@todo
 本メソッドを呼び出すことで終了時に[[c:CSV::BasicWriter]]オブジェクトがIOクローズ処理を行います。
 
 == Private Instance Methods
