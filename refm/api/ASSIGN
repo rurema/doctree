@@ -89,8 +89,8 @@ _builtin/Enumerable__Enumerator yugui           done
 _builtin/fatal                  snoozer05       done
 _builtin/functions              eklerni         done
 _builtin/specialvars            yugui           done
-_builtin/pack-template          sheepman
-_builtin/printf-format          sheepman
+_builtin/pack-template          sheepman        done
+_builtin/printf-format          sheepman        done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
@@ -147,7 +147,7 @@ ftools
 gdbm                            okkez           done
 generator
 getoptlong
-getopts
+getopts                         sheepman
 gserver
 iconv                           bornite
 importenv                       mukai           done
@@ -177,7 +177,7 @@ net/telnet
 net/telnets
 nkf
 observer                        snoozer05       done
-open-uri                        sheepman
+open-uri                        sheepman        done
 open3
 openssl                         
 optparse                        sheepman
@@ -190,7 +190,7 @@ parsedate                       tadf            almost done
 pathname                        mukai           done
 ping
 pp                              sheepman
-prettyprint                     sheepman
+prettyprint                     sheepman        done
 profile
 profiler
 pstore
@@ -243,7 +243,7 @@ rubygems                        okkez
 rubyunit
 scanf
 sdbm                            okkez           done
-securerandom                    sheepman
+securerandom                    sheepman        done
 set                             m-kawato        done
 sha1
 shell
@@ -251,7 +251,7 @@ shellwords                      m-kawato        done
 singleton                       snoozer05       done
 soap
 socket
-stringio                        sheepman
+stringio                        sheepman        done
 strscan                         aamine
 sync
 syslog
