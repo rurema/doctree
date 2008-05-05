@@ -375,13 +375,13 @@ EBCDIC や LOCAL など他の表現タイプはサポートされていません。
 #@todo
 
 
-= class FTPError < StandardError
+= class Net::FTPError < StandardError
 
-= class FTPReplyError < FTPError
+= class Net::FTPReplyError < Net::FTPError
 
-= class FTPTempError < FTPError
+= class Net::FTPTempError < Net::FTPError
 
-= class FTPPermError < FTPError
+= class Net::FTPPermError < Net::FTPError
 
-= class FTPProtoError < FTPError
+= class Net::FTPProtoError < Net::FTPError
 
