@@ -54,7 +54,6 @@ URI オブジェクトは直接読み込むことができます。
 
 --- open(name, mode = 'r', perm = nil, options = {})                -> StringIO | File
 --- open(name, mode = 'r', perm = nil, options = {}) {|ouri| ...}   -> nil
-#@todo
 
 name が http:// や ftp:// で始まっている文字列なら URI のリソースを
 取得した上で [[c:StringIO]] オブジェクトとして返します。
@@ -64,7 +63,7 @@ name に open メソッドが定義されている場合は、*rest を引数として渡し
 name.open(*rest, &block) のように name の open メソッドが呼ばれます。
 
 これ以外の場合は、name はファイル名として扱われ、従来の
-[[m:Kernel#open]](name, *rest) が呼ばれます。
+[[m:Kernel.#open]](name, *rest) が呼ばれます。
 
 ブロックを与えた場合は上の場合と同様、name が http:// や ftp:// で
 始まっている文字列なら URI のリソースを取得した上で [[c:StringIO]] オブジェクトを
@@ -110,7 +109,6 @@ http/ftp に簡単にアクセスするためのモジュールです。
 
 --- open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
 --- open_uri(name, mode = 'r', perm = nil, options = {}) {|sio| ... }     -> nil
-#@todo
 
 URI である文字列 name のリソースを取得して [[c:StringIO]] オブジェクト
 として返します。
@@ -151,7 +149,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 //}
 
 : :http_basic_authentication
-
+  HTTP の Basic 認証のためのユーザ名とパスワードを、文字列の配列 ["user", "password"] として与えます。
 
 : :content_length_proc
  値にはブロックを与えます。ブロックは対象となる URI の
