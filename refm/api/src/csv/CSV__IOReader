@@ -1,22 +1,36 @@
 #@since 1.8.0
 = class CSV::IOReader < CSV::Reader
+CSVの読み込み処理を行うクラス
 
 == Class Methods
 
---- new(io[, fs = ','[, rs = nil]])
-#@todo
+--- new(io[, fs = ','[, rs = nil]]) -> CSV::IOReader
+引数に従い、[[c:CSV::IOReader]]クラスのオブジェクトを生成します。
+
+@param io 読み込み先の指定。
+@param fs フィールドセパレータの指定。
+          nil (デフォルト) で ',' をセパレータとします。
+@param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
+          Cr を行区切りとしたい場合は ?\r を渡します。
 
 == Instance Methods
 
---- close_on_terminate
-#@todo
+--- close_on_terminate -> True
+本メソッドを呼び出すことで終了(terminateメソッド実行)時に[[c:CSV::IOReader]]オブジェクトがnewメソッドで指定した読み込み先のIOクローズ処理を行います。
 
 == Private Instance Methods
 
---- get_row(row)
-#@todo
+--- get_row(row) -> Fixnum
+CSVデータの1行分のデータを取得します。
 
---- terminate
-#@todo
+1行分のデータを取得し、パラメータrowに配列として出力します。
+返り値として、セルの数(配列のサイズ)を返します。
+
+@param row 1行分のデータを格納する配列
+
+--- terminate -> nil
+オブジェクト破棄を行います。
+close_on_terminateメソッドが既に呼び出されていれば、IO(newメソッドでパラメタとして渡したオブジェクト)の終了処理を行います。
 
 #@end
+
