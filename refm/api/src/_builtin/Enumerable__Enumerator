@@ -22,6 +22,22 @@ Enumerator を生成するには
 enumerator を生成して返します。
 #@end
 
+#@since 1.9.0
+=== 注意
+外部イテレータとしての機能は [[c:Fiber]] を用いて実装されているため Fiber と同じ制限があります。
+例えば以下のようなスレッドをまたいだ呼び出しはエラーになります。
+
+ a = nil
+ Thread.new do
+   a = [1, 2, 3].each
+   a.next
+ end.join
+ 
+ p a.next
+ #=> t.rb:7:in `next': fiber called across threads (FiberError)
+         from t.rb:7:in `<main>'
+#@end
+
 == Class Methods
 
 --- new(obj, method = :each, *args) -> Enumerable::Enumerator
