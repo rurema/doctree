@@ -192,12 +192,26 @@ Zlib::GzipFile::LengthError 例外を発生させます。
   * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
     呼び出された時。
 
---- rewind
-#@todo
+--- rewind -> 0
 
 ファイルポインタを [[m:Zlib::GzipReader.new]] を呼び出した直後の
 時点に戻します。関連付けられている IO オブジェクトに
 seek メソッドが定義されている必要があります。
+
+  =begin
+  # hoge.gz がない場合はこれで作成する。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+    gz.puts 'fuga'
+  }
+  =end
+
+  gz = Zlib::GzipReader.open('hoge.gz')
+  puts gz.gets #=> hoge
+  puts gz.gets #=> fuga
+  gz.rewind  #=> 0
+  puts gz.gets #=> hoge
+  gz.close
 
 --- unused
 #@todo
