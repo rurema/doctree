@@ -39,8 +39,13 @@
     p [1, 2, 3].any? {|v| v > 1 }   # => true
 #@end
 
+#@since 1.9.0
+--- collect  -> Enumerable::Enumerator            
+--- map      -> Enumerable::Enumerator
+#@end
 --- collect {|item| ... } -> [Object]
 --- map {|item| ... }     -> [Object]
+#@todo
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
 
@@ -52,7 +57,12 @@ obj.collect {|item| item } を実行します。
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
+#@since 1.8.7
+--- each_with_index                      -> Enumerable::Enumerator
+--- enum_with_index                      -> Enumerable::Enumerator
+#@end
 --- each_with_index {|item, index| ... } -> self
+#@todo
 
 要素とそのインデックスをブロックに渡して繰り返します。
 
@@ -70,8 +80,13 @@ self を返します。
 @see enum_with_index
 #@end
 
+#@since 1.9.0
+--- find(ifnone = nil)   -> Enumerable::Enumerator
+--- detect(ifnone = nil) -> Enumerable::Enumerator
+#@end
 --- find(ifnone = nil) {|item| ... }   -> Object
 --- detect(ifnone = nil) {|item| ... } -> Object
+#@todo
 
 要素に対してブロックを評価した値が真になった最初の要素を返します。
 
@@ -102,8 +117,13 @@ ifnone を eval または call して実行し、nil を返します。
         # => -:1: unhandled exception
 #@end
 
+#@since 1.9.0
+--- find_all  -> Enumerable::Enumerator
+--- select    -> Enumerable::Enumerator 
+#@end
 --- find_all {|item| ... } -> [Object]
 --- select {|item| ... }   -> [Object]
+#@todo
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
@@ -123,7 +143,7 @@ pattern === item が成立する要素を全て含んだ配列を返します。
 
 #@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> Object
-#@since 1.9.0
+#@since 1.8.7
 --- reduce(init = self.first) {|result, item| ... } -> Object
 #@end
 
@@ -181,8 +201,10 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
-#@since 1.9.0
+#@since 1.8.7
+--- max_by               -> Enumerable::Enumerator
 --- max_by {|item| ... } -> Object
+#@todo
 
 各要素を順番にブロックに渡して実行し、
 その評価結果を <=> で比較して、
@@ -212,8 +234,10 @@ a < b のとき負の整数を、期待しています。
 
 @raise TypeError    ブロックが整数以外を返したとき
 
-#@since 1.9.0
+#@since 1.8.7
+--- min_by               -> Enumerable::Enumerator
 --- min_by {|item| ... } -> Object
+#@todo
 
 各要素を順番にブロックに渡して実行し、
 その評価結果を <=> で比較して、
@@ -225,7 +249,11 @@ min と min_by の違いは sort と sort_by の違いと同じです。
 詳細は[[m:Enumerable#sort_by]] を参照してください。
 #@end
 
+#@since 1.9.0
+--- partition               -> Enumerable::Enumerator
+#@end
 --- partition {|item| ... } -> [[Object], [Object]]
+#@todo
 
 各要素を、ブロックの条件を満たす要素と満たさない要素に分割します。
 各要素に対してブロックを評価して、その値が真であった要素の配列と、
@@ -236,6 +264,9 @@ min と min_by の違いは sort と sort_by の違いと同じです。
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
+#@since 1.9.0
+--- reject               -> Enumerable::Enumerator
+#@end
 --- reject {|item| ... } -> [Object]
 
 各要素に対してブロックを評価し、
@@ -273,6 +304,9 @@ Enumerable#sort は安定ではありません (unstable sort)。
 @see [[m:Enumerable#sort_by]]
 
 #@since 1.8.0
+#@since 1.9.0
+--- sort_by               -> Enumerable::Enumerator
+#@end
 --- sort_by {|item| ... } -> [Object]
 
 ブロックの評価結果を <=> メソッドで比較することで、self を昇
@@ -376,8 +410,12 @@ self と引数に渡した配列の各要素を順番にブロックに渡します。
         #    nil
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
+--- each_slice(n)               -> Enumerable::Enumerator
+--- enum_slice(n)               -> Enumerable::Enumerator
 --- each_slice(n) {|list| ... } -> nil
+--- enum_slice(n) {|list| ... } -> nil
+#@todo
 
 n 要素ずつブロックに渡して繰り返します。
 要素数が n で割り切れないときは、
@@ -397,7 +435,10 @@ nil を返します。
 
 @see [[m:Enumerable#each_cons]]
 
+--- each_cons(n)               -> Enumerable::Enumerator
+--- enum_cons(n)               -> Enumerable::Enumerator
 --- each_cons(n) {|list| ... } -> nil
+--- enum_cons(n) {|list| ... } -> nil
 
 要素を重複ありで n 要素ずつに区切り、
 ブロックに渡して繰り返します。
@@ -417,7 +458,7 @@ nil を返します。
 
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 
 --- count(item)             -> Integer
 --- count {| obj | block }  -> Integer
@@ -432,6 +473,7 @@ true value.
    ary.count{|x|x%2==0}  # => 3
 
 
+--- cycle -> Enumerable::Enumerator
 --- cycle {|obj| block }
 #@todo
 
@@ -453,7 +495,7 @@ an array.
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
 
-
+--- drop_while  -> Enumerable::Enumerator
 --- drop_while {|arr| block }   -> Array
 #@todo
 
