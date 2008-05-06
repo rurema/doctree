@@ -177,8 +177,16 @@ path を省略した場合、環境変数 HOME または LOGDIR
   Dir.entries('.') #=> [".", "..", "bar", "foo"]
 
 --- foreach(path) {|file| ...}    -> nil
+#@since 1.8.7
+--- foreach                       -> Enumerable::Enumerator
+#@end
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
+
+#@since 1.8.7
+ブロックが与えられなかった場合、各エントリを文字列として保持する [[c:Enumerable::Enumerator]]
+オブジェクトを返します。
+#@end
 
 @param path ディレクトリのパスを文字列で指定します。
 
@@ -270,8 +278,16 @@ Returns +true+ if the named file is a directory, +false+ otherwise.
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
 
 --- each {|item| ... }    -> self
+#@since 1.8.7
+--- each                  -> Enumerable::Enumerator
+#@end
 
 ディレクトリの各エントリを表す文字列を引数として、ブロックを評価します。
+
+#@since 1.8.7
+ブロックが与えられなかった場合、各エントリを文字列として保持する [[c:Enumerable::Enumerator]]
+オブジェクトを返します。
+#@end
 
 @raise IOError 既に自身が close している場合に発生します。
 
