@@ -70,8 +70,8 @@ n, N, v, V を用います。
 
 ==== 各テンプレート文字の説明
 
-説明中、Array#packとString#unpackで違いのあるものは `/' で区切って
-「Array#packの説明/String#unpackの説明」としています。
+説明中、[[m:Array#pack]] と [[m:String#unpack]] で違いのあるものは `/' で区切って
+「Array#pack の説明 / String#unpack の説明」としています。
 
 : a
 
