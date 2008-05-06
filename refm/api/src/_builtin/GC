@@ -34,7 +34,7 @@ false)。
 
 nil を返します。
 
-#@if (version >= "1.9.0")
+#@since 1.8.7
 --- stress -> bool
 --- stress=(value)
 
