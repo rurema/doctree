@@ -66,7 +66,7 @@ pp による pretty-print された出力:
 === 出力のカスタマイズ
 
 あるクラスの pp の出力をカスタマイズしたい場合は、
-そのクラスで pretty_print メソッドを再定義します。
+そのクラスで pretty_print メソッドと pretty_print_cycle メソッドを再定義します。
 このメソッドは [[c:PP]] オブジェクトを引数として pp 実行時に呼ばれます。
 ユーザは表示したい内容を表すツリーを、
 引数として与えられた [[c:PP]] オブジェクトを使って以下のように作成します。
@@ -265,7 +265,7 @@ list を iter_method によってイテレートし、各要素を引数としてブロックを実行します
    end
  end
 
-@see [[m:Object#inspect]], [[m:PrettyPrint#text]], [[m:PrettyPrint#group]], [[m:PrettyPrint#breakable]]
+@see [[m:Object#pretty_print_cycle]], [[m:Object#inspect]], [[m:PrettyPrint#text]], [[m:PrettyPrint#group]], [[m:PrettyPrint#breakable]]
 
 --- pretty_print_cycle(pp)    -> ()
 
