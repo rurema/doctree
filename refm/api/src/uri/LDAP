@@ -8,7 +8,6 @@ LDAP URI を表すクラスです。[[RFC:2255]] (Obsoleted by [[RFC:4510]], [[RFC:4516]]
 
 --- build(ary)   -> URI::LDAP
 --- build(hash)  -> URI::LDAP
-#@todo
 
 引数で与えられた URI 構成要素から URI::LDAP オブジェクトを生成します。
 引数の正当性を検査します。
@@ -26,10 +25,10 @@ LDAP URI を表すクラスです。[[RFC:2255]] (Obsoleted by [[RFC:4510]], [[RFC:4516]]
 @raise URI::InvalidComponentError 各要素が適合しない場合に発生します。
 
 例:
-  p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]) #=> 
+  p URI::LDAP.build(["example.com", "1", "/a", "b", "c", "d", "e=f"]).to_s   
+  #=> "ldap://example.com:1/a?b?c?d?e=f"
 
---- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)
-#@todo
+--- new(scheme, userinfo, host, port, registry, path, opaque, query, fragment, arg_check = false)   -> URI::LDAP
 
 汎用的な構成要素から URI::LDAP オブジェクトを生成します。
 build と異なり、デフォルトでは引数の正当性を検査しません。
