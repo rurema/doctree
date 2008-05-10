@@ -385,7 +385,6 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
  p URI.parse('http://example.com/').to_s #=> "http://example.com/"
 
 --- ==(uri)    -> bool
-#@todo
 
 引数に指定した URI (文字列またはURIオブジェクト)との一致判定を行い
 ます。URI は正規化して比較されます。
@@ -399,21 +398,15 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
   p u1 == u2                                  #=> true
 
 --- select(*components)    -> [String]
-#@todo
-Args
 
-components: Multiple Symbol arguments defined in URI::HTTP
+指定された components に対応する構成要素を文字列の配列として返します。
 
-Description
+@param select 構成要素名をシンボルで指定します。
 
-Selects specified components from URI
-
-Usage
-
+例:
   require 'uri'
   
   uri = URI.parse('http://myuser:mypass@my.example.com/test.rbx')
   p uri.select(:userinfo, :host, :path)
   # => ["myuser:mypass", "my.example.com", "/test.rbx"]
 
-@param select 
