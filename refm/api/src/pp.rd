@@ -294,15 +294,16 @@ list を iter_method によってイテレートし、各要素を引数としてブロックを実行します
 
 pp に表示したくないインスタンス変数がある場合にこのメソッドを再定義します。
 
---- pretty_print_inspect    -> ()
-#@todo
-Is #inspect implementation using #pretty_print.
-If you implement #pretty_print, it can be used as follows.
+--- pretty_print_inspect    -> String
 
-  alias inspect pretty_print_inspect
+[[m:Object#pretty_print]] を使って [[m:Object#inspect]] と同様に
+オブジェクトを人間が読める形式に変換した文字列を返します。
 
-However, doing this requires that every class that #inspect is called on
-implement #pretty_print, or a RuntimeError will be raised.
+出力する全てのオブジェクトに [[m:Object#pretty_print]] が定義されている必要があります。
+そうでない場合には [[c:RuntimeError]] が発生します。
+
+@raise RuntimeError 出力する全てのオブジェクトに [[m:Object#pretty_print]] が定義されて
+                    いない場合に発生します。
 
 = reopen Kernel
 == Module Functions
