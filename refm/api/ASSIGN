@@ -454,7 +454,7 @@ tmpdir                          kouya            done
 tracer
 tsort
 un
-uri                             sheepman
+uri                             sheepman         done
 weakref                         bornite
 webrick                         sheepman
 webrick/cgi                     sheepman
