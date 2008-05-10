@@ -4,6 +4,17 @@
 
 文字列に [[c:IO]] と同じインタフェースを持たせるためのクラスです。
 
+例:
+
+  require "stringio"
+  sio = StringIO.new("hoge", 'r+')
+  p sio.read                 #=> "hoge"
+  sio.rewind
+  p sio.read(1)              #=> "h"
+  sio.write("OGE")
+  sio.rewind
+  p sio.read                 #=> "hOGE"
+
 === 例外
 StringIO オブジェクトは大抵の場合 IO オブジェクトと同じ例外を発生させます。
 例えば次の例では write は IOError を発生させます。
@@ -312,14 +323,16 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 --- read                  -> String
 --- read(len)             -> String | nil
 --- read(len, outbuf)     -> String
-#@todo
 
 自身から len バイト読み込みんで返します。len が省略された場合は、最後まで読み込んで返します。
 詳しい仕様は [[m:IO#read]] を参照して下さい。
 
 @param len 読み込みたい長さを整数で指定します。詳しい仕様は [[m:IO#read]] を参照して下さい。
 
-@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。詳しい仕様は [[m:IO#read]] を参照して下さい。
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。指定した文字列オブジェクトが
+              あらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の
+              長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。[[m:IO#read]] と同じです。
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -367,24 +380,41 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 
 @see [[m:$/]]
 
-#@since 1.9.0
---- readpartial([integer [, buffer]])
-#@todo
-[[m:IO#readpartial]] と同様です。
-#@end
-
 --- reopen(sio)           -> StringIO
---- reopen(str, mode)     -> StringIO
-#@todo
-自身が表す文字列が指定された StringIO と同じものか指定された文字列 str になります。
+
+自身が表す文字列が指定された StringIO と同じものになります。
 
 @param sio 自身が表したい StringIO を指定します。
 
+例: 
+
+  require 'stringio'
+  sio = StringIO.new("hoge", 'r+')
+  sio2 = StringIO.new("foo", 'r+')
+  sio.reopen(sio2)
+  p sio.read                       #=> "foo"
+
+--- reopen(str, mode = 'r+')     -> StringIO
+
+自身が表す文字列が指定された文字列 str になります。
+
+与えられた str がフリーズされている場合には、mode はデフォルトでは読み取りのみに設定されます。
+ブロックを与えた場合は生成した StringIO オブジェクトを引数としてブロックを評価します。
+
 @param str 自身が表したい文字列を指定します。
+           この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
+           str 自身も書き換えられます。
 
 @param mode [[m:Kernel#open]] 同様文字列か整数で自身のモードを指定します。
 
 @raise Errno::EACCES str がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
+
+例: 
+
+  require 'stringio'
+  sio = StringIO.new("hoge", 'r+')
+  sio.reopen('foo')
+  p sio.read                      #=> "foo"
 
 --- rewind    -> 0
 
@@ -424,14 +454,21 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 --- sysread                  -> String
 --- sysread(len)             -> String
 --- sysread(len, outbuf)     -> String
-#@todo
+#@since 1.9.0
+--- readpartial               -> String
+--- readpartial(len)          -> String
+--- readpartial(len, outbuf)  -> String
+#@end
 
 自身から len バイト読み込みんで返します。
 [[m:StringIO#read]] と同じです。ただし、文字列の終端に達した場合、EOFError を投げます。
 
 @param len 読み込みたい長さを整数で指定します。[[m:StringIO#read]] と同じです。
 
-@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。[[m:StringIO#read]] と同じです。
+@param outbuf 読み込んだ文字列を出力するバッファを文字列で指定します。指定した文字列オブジェクトが
+              あらかじめ length 長の領域であれば、余計なメモリの割当てが行われません。指定した文字列の
+              長さが length と異なる場合、その文字列は一旦 length 長に拡張(あるいは縮小)されたあと、
+              実際に読み込んだデータのサイズになります。[[m:IO#read]] と同じです。
 
 @raise EOFError 文字列の終端に達した場合に発生します。
 
