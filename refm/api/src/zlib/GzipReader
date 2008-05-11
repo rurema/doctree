@@ -205,7 +205,56 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @see [[m:IO#each]]
 @see [[m:IO#each_line]]
 
---- each_byte([rs])
+--- each_byte -> nil
+IO クラスの同名メソッド[[m:IO#each_byte]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+@param rs 行の区切りを文字列で指定します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    gz.each_byte { |b|
+      printf "%d -> %c\n", b, b
+    }
+  }
+  #=> 104 -> h
+  #=> 111 -> o
+  #=> 103 -> g
+  #=> 101 -> e
+  #=> 10 -> 
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#each_byte]]
+
 --- gets([rs])
 --- getc
 --- lineno
