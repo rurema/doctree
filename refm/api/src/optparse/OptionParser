@@ -39,9 +39,8 @@
 //}
 == Class Methods
 
---- new(banner=nil, width=32, indent = ' ' * 4)              -> OptionParser
---- new(banner=nil, width=32, indent = ' ' * 4) {|opt| ...}  -> OptionParser
-#@todo
+--- new(banner = nil, width = 32, indent = ' ' * 4)              -> OptionParser
+--- new(banner = nil, width = 32, indent = ' ' * 4) {|opt| ...}  -> OptionParser
 
 OptionParser オブジェクトを生成して返します。
 
@@ -64,19 +63,15 @@ OptionParser オブジェクトを生成して返します。
 @param indent サマリのインデントを文字列で与えます。
 
 --- accept(klass, pat = /.*/){|str| ...}    -> ()
-#@todo
 
 オプションの引数を文字列から Ruby のオブジェクトに変換するための
 ブロックを登録します。すべての OptionParser インスタンスに共通です。
-klass にはクラスオブジェクトを与えます。pat には match メソッドを持ったオブジェクト
-([[c:Regexp]] オブジェクトなど)を与えます。
 
 ブロックには、文字列として与えられるオプションの引数から klass のインスタンスを生成して返すものを指定します。
 
 [[m:OptionParser#on]] で klass を指定した場合、
-コマンドラインのオプションに与えられた引数はこの accept で登録したブロックで
-klass のインスタンスに変換されてから、
-OptionParser#on で登録したブロックに渡されます。
+コマンドラインのオプションに与えられた引数は、この accept で登録したブロックで
+klass のインスタンスに変換されてから、OptionParser#on メソッドで登録したブロックに渡されます。
 
   require "optparse"
   require "time"
@@ -98,19 +93,17 @@ OptionParser#on で登録したブロックに渡されます。
   opts.parse!(ARGV)
 
 いくつかのクラスに対しては変換用のブロックがデフォルトで登録されて
-います。[[m:OptionParser#on]]を参照
-して下さい。
+います。[[m:OptionParser#on]] を参照して下さい。
 
 @param klass クラスオブジェクトを与えます。
 
 @param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
 
 --- reject(klass)    -> ()
-#@todo
 
-[[m:OptionParser.accept]] で登録したブロックを削除します。
+[[m:OptionParser.accept]] メソッドで登録したブロックを削除します。
 
-@param klass 削除したいクラスオブジェクトを与えます。
+@param klass 削除したいクラスオブジェクトを指定します。
 
 #@since 1.8.5
 --- getopts(argv, *opts)
@@ -125,13 +118,15 @@ self.new.getopts(*args) と同じです。
 == Instance Methods
 
 --- accept(klass, pat = /.*/){|str| ...}    -> ()
-#@todo
 
 [[m:OptionParser.accept]] と同様ですが、
 登録したブロックはレシーバーに限定されます。
 
+@param klass クラスオブジェクトを与えます。
+
+@param pat match メソッドを持ったオブジェクト([[c:Regexp]] オブジェクトなど)を与えます。
+
 --- reject(klass)    -> ()
-#@todo
 
 [[m:OptionParser#accept]] で登録したクラスとブロックを
 自身から削除します。
@@ -140,111 +135,113 @@ self.new.getopts(*args) と同じです。
 
 --- banner            -> String
 --- banner=(heading)
-#@todo
 
-サマリの最初に表示される文字列を返します。
+サマリの最初に表示される文字列を表すアクセサです。
 
 @param heading サマリの最初に表示される文字列を指定します。
 
 --- summary_width         -> Integer
 --- summary_width=(width)
-#@todo
 
-サマリを表示するときの幅を返します。
+サマリを表示するときの幅を表すアクセサです。
 
 @param width サマリを表示するときの幅を整数で設定します。
 
 --- summary_indent          -> String
 --- summary_indent=(indent)
-#@todo
 
-サマリを表示する時のインデントを文字列で設定します。
+サマリを表示する時のインデントを表すアクセサです。
+
+@param indent サマリを表示する時に使われるインデントを文字列で指定します。
 
 --- program_name           -> String
 --- program_name=(name)
-#@todo
-プログラムの名前を文字列で設定します。デフォルトは $0 が使わ
-れます。
 
---- version       -> [Integer]
+プログラムの名前を表すアクセサです。デフォルトは $0 が使われます。
+
+@param name プログラムの名前を文字列で指定します。
+
+--- version       -> String
 --- version=(ver)
-#@todo
-プログラムのバージョンを設定します。
 
---- release       -> Integer
+プログラムのバージョンを表すアクセサです。
+
+@param ver プログラムのバージョンを文字列で指定します。
+
+--- release       -> String
 --- release=(rel)
-#@todo
+
 Release code.
 
+@param rel プログラムのリリースを文字列で指定します。
+
 --- ver    -> String
-#@todo
-program_name、version と release から生成したバー
-ジョンを表す文字列を返します。
 
---- summarize(to = [], width = @summary_width, max = width - 1, indent= @summary_indent)
---- summarize(to = [], width = @summary_width, max = width - 1, indent= @summary_indent) {|line| ... }
-#@todo
+program_name、version と release から生成したバージョンを表す文字列を返します。
 
-サマリを to へと加えていきます。
-to には << メソッドが定義されたオブジェクトを与えます。
-デフォルトは [] です。
-width にはサマリの幅を数値で与えます。デフォルトは self.summary_width です。
-サマリの最大幅を数値で与えます。デフォルトは self.summary_width - 1です。
-indent にはサマリのインデントを文字列で与えます。デフォルトは
-self.summary_indent です。
+--- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent)               -> ()
+--- summarize(to = [], width = self.summary_width, max = width - 1, indent= self.summary_indent) {|line| ... } -> ()
+
+サマリを指定された to へと加えていきます。
 
 ブロックが与えられた場合、サマリの各行を引数としてブロックを評価します。
 この場合、ブロックの中で明示的に to へと加えていかない限り、
 to にサマリが加えられることはありません。
 
+@param to サマリを出力するオブジェクトを指定します。to には << メソッドが定義されいる必要があります。
+
+@param width サマリの幅を整数で指定します。
+
+@param max サマリの最大幅を整数で指定します。
+
+@param indent サマリのインデントを文字列で指定します。
+
 --- help    -> String
 --- to_s    -> String
-#@todo
 
 サマリの文字列を返します。
 
 --- to_a    -> [String]
-#@todo
 
 サマリの各行を要素とした配列を返します。
 
 --- separator(sep)    -> ()
-#@todo
 
-サマリを表示する時に使われる、オプションを区切るための文字列 sep を設定します。
+サマリにオプションを区切るための文字列 sep を挿入します。
 オプションにいくつかの種類がある場合に、サマリがわかりやすくなります。
 
 サマリには on メソッドを呼んだ順にオプションが表示されるので、区切りを挿入したい
 ところでこのメソッドを呼びます。[[unknown:例|optparse/Example]]を参照してください。
 
-@param sep 区切りとして表示されます。
+@param sep サマリの区切りを文字列で指定します。
+
+例:
+       require 'optparse'
+       opts = OptionParser.new 
+       opts.banner = "Usage: example.rb [options]"
+       
+       opts.separator ""
+       opts.separator "Specific options:"
+       
+       opts.on("-r", "--require LIBRARY") do |lib|
+               options.library << lib
+       end
+
+       opts.separator ""
+       opts.separator "Common options:"
+       
+       opts.on_tail("-h", "--help", "Show this message") do
+         puts opts
+         exit
+       end
+       
 
 --- on(short, desc = "") {|v| ... }        -> self
 --- on(long, desc = "") {|v| ... }         -> self
 --- on(short, long, desc = "") {|v| ... }  -> self
-#@todo
 
 オプションを取り扱うためのブロックを自身に登録します。
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
-
-short にはショートオプションを表す文字列を与えます。
-そのオプションが引数をとらない場合は、
-  on("-x"){|boolean| ...}
-となります。コマンドラインにオプションが存在した場合 true を引数と
-してブロックを評価します。
-ショートオプションが引数をとる場合は、
-  on("-x MANDATORY"){|val| ...}
-となります。"MANDATORY" の部分は任意の文字列で構いません。
-オプションの引数が必須でない場合は [ ] をつけて、
-  on("-x [OPTIONAL]"){|val| ...}
-となります。
-
-long にはロングオプションを表す文字列を与えます。ショートオプショ
-ンの時と同様に、
-  on("--long"){|boolean| ...}
-  on("--long MANDATORY"){|val| ...}
-  on("--long [OPTIONAL]"){|val| ...}
-と指定できます。
 
 ショートオプションとロングオプションを同時に登録することもできます。
   opts.on("-r", "--require LIBRARY"){|lib| ...}
@@ -252,18 +249,42 @@ long にはロングオプションを表す文字列を与えます。ショートオプショ
   opts.on("-r LIBRARY"){|lib| ...}
   opts.on("--require LIBRARY"){|lib| ...}
 
-複数のことなるオプションに同じブロックを一度に登録することもできます。
+複数の異なるオプションに同じブロックを一度に登録することもできます。
 
   opt.on('-v', '-vv'){|boolean| ...}
   opt.on('--require X', '--need', '--dependon'){|x| ... }
 
+@param short ショートオプションを表す文字列を指定します。
+             そのオプションが引数をとらない場合は、
+//emlist{
+  on("-x"){|boolean| ...}
+//}
+             となります。コマンドラインにオプションが存在した場合 true を引数と
+             してブロックを評価します。
+             ショートオプションが引数をとる場合は、
+//emlist{
+  on("-x MANDATORY"){|val| ...}
+//}
+             となります。"MANDATORY" の部分は任意の文字列で構いません。
+             オプションの引数が必須でない場合は [ ] をつけて、
+//emlist{
+  on("-x [OPTIONAL]"){|val| ...}
+//}
+             となります。
+
+@param long ロングオプションを表す文字列を指定します。ショートオプションの時と同様に、
+//emlist{
+  on("--long"){|boolean| ...}
+  on("--long MANDATORY"){|val| ...}
+  on("--long [OPTIONAL]"){|val| ...}
+//}
+            と指定できます。
 
 @param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
 --- on(short, pat = /.*/, desc = "") {|v| ...}        -> self
 --- on(long, pat = /.*/, desc = "") {|v| ...}         -> self
 --- on(short, long, pat = /.*/, desc = "") {|v| ...}  -> self
-#@todo
 
 オプションを取り扱うためのブロックを自身に登録します。
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
@@ -276,7 +297,11 @@ pat にはオプションの引数に許すパターンを表す正規表現で与えます。
   # ruby command --username=ruby_user
   # ruby command --username=ruby.user #=> Error
 
-@param pat オプションの引数に許すパターンを表す正??表現で与えます。
+@param short ショートオプションを表す文字列を指定します。
+
+@param long ロングオプションを表す文字列を指定します。
+
+@param pat オプションの引数に許すパターンを表す正規表現で指定します。
 
 @param desc オプションの説明を文字列で与えます。サマリに表示されます。
 
@@ -288,10 +313,9 @@ pat にはオプションの引数に許すパターンを表す正規表現で与えます。
 オプションを取り扱うためのブロックを自身に登録します。
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-klass にはクラスを与えます。
-どのようなクラスを受け付けるかは、
-以下の「デフォルトで利用可能な引数クラス」を参照して下さ
-い。OptionParser.accept や OptionParser#accept によって、受け付け
+klass にはクラスを与えます。どのようなクラスを受け付けるかは、
+以下の「デフォルトで利用可能な引数クラス」を参照して下さい。
+OptionParser.accept や OptionParser#accept によって、受け付け
 るクラスを増やすことができます。登録されていないクラスが指定された
 場合、例外 ArgumentError を投げます。
 
@@ -306,8 +330,15 @@ klass にはクラスを与えます。
   opts.on("-o", "--overwrite VALUE", TrueClass){|boolean| ...}
   # ruby command --overwrite yes
 
-desc にはオプションの説明を文字列で与えます。
-サマリに表示されます。
+@param short ショートオプションを表す文字列を指定します。
+
+@param long ロングオプションを表す文字列を指定します。
+
+@param klass オプションの引数のクラスを指定します。
+
+@param desc オプションの説明を文字列で与えます。サマリに表示されます。
+
+@raise ArgumentError 登録されていないクラスが klass に指定された場合に発生します。
 
 ==== デフォルトで利用可能な引数クラス
 
@@ -359,8 +390,17 @@ desc にはオプションの説明を文字列で与えます。
 オプションを取り扱うためのブロックを自身に登録します。
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-@param rest 可能な引数を列挙した配列やハッシュを与えます。文字列を与えた場合は、サマリに表示されるオプションの説明と見なします。
+コマンドに与えられた引数が配列やハッシュに含まれない場合、
+例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
 
+@param short ショートオプションを表す文字列を指定します。
+
+@param long ロングオプションを表す文字列を指定します。
+
+@param rest 可能な引数を列挙した配列やハッシュを与えます。文字列を与えた場合は、
+            サマリに表示されるオプションの説明と見なします。
+
+例:
   opts.on("--protocol VALUE", [:http, :ftp, :https]){|w|
     p w
   }
@@ -371,18 +411,20 @@ desc にはオプションの説明を文字列で与えます。
   }
   # ruby command --charset=jis #=> "iso-2022-jp"
 
-コマンドに与えられた引数が配列やハッシュに含まれない場合、
-例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
-
 --- on_head(*arg, &block)
 --- on_tail(*arg, &block)
-#@todo
 
-[[m:OptionParser#on]]と同様の働きをします。
+[[m:OptionParser#on]]と同様、オプションを取り扱うためのブロックを自身に登録します。
 on メソッドと違う点は、OptionParser オブジェクトが保持している
 リストの最初かあるいは最後にブロックを登録する点です。
 
 --version や --help の説明をサマリの最後に表示したい時に便利です。
+
+@param arg [[m:OptionParser#on]] と同様です。
+
+@param block [[m:OptionParser#on]] と同様です。
+
+例:
 
   opts.on_tail("-h", "--help", "Show this message") do
     puts opts
@@ -394,16 +436,10 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
     exit
   end
 
-@param arg [[m:OptionParser#on]]と同様です。
-
-@param block [[m:OptionParser#on]]と同様です。
-
---- order(argv = ARGV)              -> [String]
---- order(argv = ARGV){|s| ...}     -> [String]
+--- order(argv)                     -> [String]
+--- order(argv){|s| ...}            -> [String]
 --- order(*args)                    -> [String]
 --- order(*args){|s| ...}           -> [String]
---- order!(argv = ARGV)             -> [String]
---- order!(argv = ARGV) {|s| ...}   -> [String]
 #@todo
 
 与えられた argv を順番にパースします。
@@ -411,9 +447,17 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
 ブロックが与えられている場合は、パースを中断せずに
 引数をブロックに渡してブロックを評価し、パースを継続します。argv を返します。
 
-order! は与えられた argv を破壊的にパースします。
-argv からオプションがすべて取り除かれます。
+下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができま
+せん。-b もコマンドのオプションではない引数として扱われてしまいます。
 
+@param argv パースしたい引数を文字列の配列で指定します。
+
+@param args パースしたい引数を順に文字列として与えます。
+
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+例:
   $ cat opt.rb
   require 'optparse'
   opt = OptionParser.new
@@ -428,26 +472,58 @@ argv からオプションがすべて取り除かれます。
   :a
   ["somefile", "-b"]
 
-コマンドの引数 somefile よりも後ろにオプションを置くことができま
-せん。-b もコマンドのオプションではない引数として扱われてしまいます。
+--- order!(argv = self.default_argv)             -> [String]
+--- order!(argv = self.default_argv) {|s| ...}   -> [String]
+
+与えられた argv を順番に破壊的にパースします。
+argv からオプションがすべて取り除かれます。
+
+オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
+ブロックが与えられている場合は、パースを中断せずに
+引数をブロックに渡してブロックを評価し、パースを継続します。argv を返します。
+
+下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができません。
+-b もコマンドのオプションではない引数として扱われてしまいます。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
-@param args パースしたい引数を順に文字列として与えます。
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+例:
+  $ cat opt.rb
+  require 'optparse'
+  opt = OptionParser.new
 
---- permute(argv = ARGV)     -> [String]
+  opt.on('-a [VAL]') {|v| p :a }
+  opt.on('-b') {|v| p :b }
+
+  opt.order!(ARGV)
+  p ARGV
+
+  $ ruby opt2.rb -a foo somefile -b
+  :a
+  ["somefile", "-b"]
+
+--- permute(argv)     -> [String]
 --- permute(*args)           -> [String]
---- permute!(argv = ARGV)    -> [String]
 #@todo
 
 与えられた argv をパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
 オプションでない引数の配列を返します。
 
-permute! は与えられた argv を破壊的にパースします。
-argv からオプションがすべて取り除かれます
+下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
+できます。
+
+@param argv パースしたい引数を文字列の配列で指定します。
+
+@param args パースしたい引数を順に文字列として与えます。
+
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+例:
 
   $ cat opt.rb
   require 'optparse'
@@ -464,18 +540,40 @@ argv からオプションがすべて取り除かれます
   :b
   ["somefile"]
 
-order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
+--- permute!(argv = self.default_argv)    -> [String]
+#@todo
+
+与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます
+オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
+オプションでない引数の配列を返します。
+
+下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 できます。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
-@param args パースしたい引数を順に文字列として与えます。
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+例:
 
---- parse(argv = ARGV)    -> [String]
+  $ cat opt.rb
+  require 'optparse'
+  opt = OptionParser.new
+
+  opt.on('-a [VAL]') {|v| p :a }
+  opt.on('-b ') {|v| p :b }
+
+  opt.permute!(ARGV)
+  p ARGV
+
+  $ ruby opt2.rb -a foo somefile -b
+  :a
+  :b
+  ["somefile"]
+
+
 --- parse(*args)          -> [String]
---- parse!(argv = ARGV)   -> [String]
 #@todo
 
 与えられた argv をパースします。
@@ -484,7 +582,19 @@ order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 環境変数に POSIXLY_CORRECT が設定されている場合は、
 [[m:OptionParser#order]] と同様に振舞います。
 
-parse! は [[m:OptionParser#permute!]] と同様に argv を破壊的にパースします。
+@param argv パースしたい引数を文字列の配列で指定します。
+
+@param args パースしたい引数を順に文字列として与えます。
+
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+--- parse!(argv = self.default_argv)   -> [String]
+#@todo
+
+与えられた argv をパースします。
+
+[[m:OptionParser#permute!]] と同様に argv を破壊的にパースします。
 環境変数に POSIXLY_CORRECT が設定されている場合は、
 [[m:OptionParser#order!]] と同様に振舞います。
 
@@ -492,7 +602,8 @@ parse! は [[m:OptionParser#permute!]] と同様に argv を破壊的にパースします。
 
 @param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
 
 --- load(filename)     -> bool
 #@todo
