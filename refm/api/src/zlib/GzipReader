@@ -157,8 +157,9 @@ filename で指定されるファイルを gzip ファイルとして
   #=> , 5
 
 --- each([rs]) -> self
+--- each_line([rs]) -> self
 
-IO クラスの同名メソッド[[m:IO#each]]と同じです。
+IO クラスの同名メソッド[[m:IO#each]], [[m:IO#each_line]]と同じです。
 
 但し、gzip ファイル中に
 エラーがあった場合 [[c:Zlib::Error]] 例外や
@@ -202,8 +203,8 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
 
 @see [[m:IO#each]]
+@see [[m:IO#each_line]]
 
---- each_line([rs])
 --- each_byte([rs])
 --- gets([rs])
 --- getc
