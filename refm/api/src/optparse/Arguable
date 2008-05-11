@@ -2,14 +2,13 @@
 
 主に [[m:Kernel::ARGV]] を拡張するために用意されたモジュールです。
 [[lib:optparse]] を require することにより、ARGV は
-OptionParser::Arguable を extend します。
+OptionParser::Arguable を [[m:Object#extend]] します。
 
 コマンドライン引数を表す文字列の配列を、拡張するためにも使うことができます。
 
 == Instance Methods
 
 --- options=(opt)
-#@todo
 
 自身をパースするための [[c:OptionParser]] オブジェクトをセットします。
 
@@ -19,10 +18,9 @@ undef します。
 @param opt 自身をパースする [[c:OptionParser]] 、あるいは nil か false を指定します。
 
 --- options                -> OptionParser
---- options{|opt| ... }    -> obj | nil
-#@todo
+--- options{|opt| ... }    -> object | nil
 
-自身をパースするための [[c:OptionParser]] を返します。
+自身をパースするための [[c:OptionParser]] オブジェクトを返します。
 初回呼び出し時に自動的に生成されます。
 この [[m:OptionParser#default_argv]] には self がセットされています。
 
@@ -32,34 +30,97 @@ undef します。
 が発生した場合は、全て rescue し、エラーメッセージを出力し、
 nil を返します。
 
+例:
+
+ require 'optparse'
+ 
+ o = nil
+ ARGV.options{|opt|
+   opt.on('-a'){ o = true }
+   opt.parse!
+ }
+ p o                         #=> true
+
 --- order!               -> [String]
 --- order!{|s| ... }     -> [String]
---- permute!             -> [String]
---- parse!               -> [String]
-#@todo
 
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
-[[m:OptionParser#order!]]、[[m:OptionParser#parse!]]、[[m:OptionParser#permute!]]
-をそれぞれ参照して下さい。
+[[m:OptionParser#order!]] を参照して下さい。
 
-@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+例:
+
+  require 'optparse'
+  
+  o = nil
+  ARGV.options.on('-a'){ o = true }
+  ARGV.order!
+  p o                                #=> true
+
+--- permute!             -> [String]
+
+自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
+[[m:OptionParser#permute!]] を参照して下さい。
+
+@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+例:
+
+  require 'optparse'
+  
+  o = nil
+  ARGV.options.on('-a'){ o = true }
+  ARGV.permute!
+  p o                                #=> true
+
+--- parse!               -> [String]
+
+自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
+[[m:OptionParser#parse!]] を参照して下さい。
+
+@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+例:
+
+  require 'optparse'
+  
+  o = nil
+  ARGV.options.on('-a'){ o = true }
+  ARGV.parse!
+  p o                                #=> true
 
 #@since 1.8.5
---- getopts(*opts)    -> Hash
-#@todo
+--- getopts(short_opt, *long_opt)    -> Hash
 
-[[lib:getopts]] 相当の機能を提供します。
-getopts と違って、グローバル変数を定義しません。
-自身をパースした結果を、Hash として返します。
+指定された short_opt や long_opt に応じて自身をパースし、結果を Hash として返します。
 
- params = ARGV.getopts("ab:", "foo", "bar:")
- # params["a"] = true   # -a
- # params["b"] = "1"    # -b1
- # params["foo"] = true  # --foo
- # params["bar"] = "x"  # --bar x
+コマンドラインに - もしくは -- を指定した場合、それ以降の解析を行ないません。
 
-@param opts 引数のパターンを文字列で指定します。詳しい仕様は [[m:Kernel#getopts]] を参照して下さい。
+@param short_opt ショートネームのオプション(-f や -fx)を文字列で指定します。オプションが -f と -x の
+                 2つの場合は "fx" の様に指定します。ここでオプションがないときは空文字列を指定します。
+                 オプションが引数をとる場合は直後に ":" を付けます。
 
-@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+@param long_opt ロングネームのオプション(--version や --bufsize=512)を文字列で指定をします。                
+                オプションが引数をとる場合は後ろに ":" を付けます。
+                オプションの引数のデフォルト値を ":" の直後に指定することができます。
+                例えば、"bufsize:1024" となります。
+
+@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
+                                サブクラスが投げられます。
+
+例:
+ 
+ # t.rb の内容
+ require 'optparse'
+ params = ARGV.getopts("ab:", "foo", "bar:", "bufsize:1024")
+ p params
+
+ # 実行結果
+ $ ruby t.rb -b 1 --foo  --bar xxx -- -a 
+ {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
 
 #@end
