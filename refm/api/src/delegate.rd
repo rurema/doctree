@@ -1,28 +1,38 @@
 #@since 1.8.0
-メソッドの委譲 (delegation) を行う。
+メソッドの委譲 (delegation) を行うためのライブラリです。
 
-[[c:Delegator]] クラスは指定したオブジェクトにメソッドの実行を委譲する。
+[[c:Delegator]] クラスは指定したオブジェクトにメソッドの実行を委譲します。
 [[c:Delegator]] クラスを利用する場合はこれを継承して
-[[m:Delegator#__getobj__]] メソッドを再定義して委譲先のオブジェクトを指定する。
+[[m:Delegator#__getobj__]] メソッドを再定義して委譲先のオブジェクトを指定します。
 
-[[c:SimpleDelegator]] は [[c:Delegator]] の利用例の一つであり、コンストラクタに
-渡されたオブジェクトにメソッドの実行を委譲する。
 
-関数 DelegateClass(supperclass) は superclass クラスの
-オブジェクトをひとつとり、そのオブジェクトにインスタンスメソッドを委譲す
-るクラスを定義して返す。
+[[c:SimpleDelegator]] は [[c:Delegator]] の利用例の一つであり、
+コンストラクタに渡されたオブジェクトにメソッドの実行を委譲します。
 
-see also: [[m:Object#method_missing]]
+
+[[m:Kernel#DelegateClass]] は 引数で渡されたクラスのインスタンスをひとつとり、
+そのオブジェクトにインスタンスメソッドを委譲するクラスを定義して返します。
+
+=== 参考
+
+  * Rubyist Magazine - 標準添付ライブラリ紹介【第 6 回】委譲 [[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
+
+
+= reopen Kernel
+
+== Private Instance Methods
+
+--- DelegateClass(superclass) -> object
+
+クラス superclass のインスタンスへメソッドを委譲するクラスを定義し、
+そのクラスを返します。
+
+@param superclass 委譲先となるクラス
+
+例:
 
 //emlist{
 require 'delegate'
-
-foo = Object.new
-def foo.test
-  p 25
-end
-foo2 = SimpleDelegator.new(foo)
-foo2.test   # => 25
 
 class ExtArray < DelegateClass(Array)
   def initialize
@@ -35,24 +45,6 @@ a.push 25
 p a         # => [25]
 //}
 
-=== 参考
-
-  * Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
-  * 標準添付ライブラリ紹介【第 6 回】委譲[[url:http://jp.rubyist.net/magazine/?0012-BundledLibraries]]
-
-
-
-= reopen Kernel
-
-== Private Instance Methods
-
---- DelegateClass(superclass)
-#@todo
-
-クラス superclass のインスタンスへメソッドを委譲するクラスを
-定義し、そのクラスを返す。
-
-
 
 = class Delegator < Object
 
@@ -62,58 +54,82 @@ include Delegator::MethodDelegation
 
 #@end
 
-与えられたオブジェクトの持つメソッドに関して
-委譲用のメソッド定義を提供するクラス。
+サブクラスにメソッド委譲の仕組みを提供する抽象クラス。
 
-コンストラクタで指定されたオブジェクトのもつインスタンスメソッドのうち、
-自分の持たないメソッドについて、
-[[m:Delegator#__getobj__]] が返すオブジェクトに実行を委譲するようメソッドを定義する。
+メソッド委譲を行う場合は、本クラスを継承し[[m:Delegator#__getobj__]]を再定義する必要があります。
+
+具体的な使用例については、[[c:SimpleDelegator]]を参照してください。
 
 == Class Methods
 
 #@if (version <= '1.8.6')
 
---- new(obj)
-#@todo
+--- new(obj) -> object
+
+委譲を行うメソッドを定義します。
 
 obj のもつインスタンスメソッドのうち、
-自分の持たないメソッドについて、
-[[m:Delegator#__getobj__]] が返すオブジェクトに実行を委譲する
-ようインスタンスメソッドを定義する。
+自オブジェクトに定義されていないメソッドについて、
+[[m:Delegator#__getobj__]] が返すオブジェクトへ
+メソッド委譲を行うクラスメソッドを定義します。
+
+@param obj 委譲を行うメソッドを決定するために使用するオブジェクト
 
 #@end
 
 == Instance Methods
 
 #@since 1.8.0
+#@if (version < "1.9.0")
 
---- __getobj__
-#@todo
+--- __getobj__ -> object
 
-委譲先のオブジェクトを返す。
-デフォルトでは [[c:NotImplementError]] を発生するので、
-サブクラスで再定義する必要がある。
+委譲先のオブジェクトを返します。
 
+本メソッドは、サブクラスで再定義する必要があり、
+デフォルトでは [[c:NotImplementError]] が発生します。
+
+@raise NotImplementError サブクラスにて本メソッドが再定義されていない場合に発生します。
+
+#@end
 #@end
 
 #@since 1.8.1
 #@if (version < "1.9.0")
---- marshal_dump
-#@todo
+--- marshal_dump -> object
 
---- marshal_load(obj)
-#@todo
+シリアライゼーションをサポートするために[[m:Delegator#__getobj__]] が返すオブジェクトを返します。
+
+--- marshal_load(obj) -> object
+
+シリアライズされたオブジェクトから、[[m:Delegator#__getobj__]] が返すオブジェクトを再現します。
+
+@param obj [[m:Delegator#marshal_dump]]の戻り値のコピー
 
 #@end
 #@end
 
 #@since 1.8.3
 #@if (version < "1.9.0")
---- method_missing(m, *args)
-#@todo
+--- method_missing(m, *args) -> object
 
---- respond_to?(m)
-#@todo
+渡されたメソッド名と引数を使って、[[m:Delegator#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
+
+@param m メソッドの名前（シンボル）
+
+@param args メソッドに渡された引数
+
+@return 委譲先のメソッドからの返り値
+
+@see [[m:Object#method_missing]]
+
+--- respond_to?(m) -> bool
+
+[[m:Delegator#__getobj__]] が返すオブジェクトが メソッド m を持つとき真を返します。
+
+@param m メソッド名
+
+@see [[m:Object#respond_to?]]
 
 #@end
 #@end

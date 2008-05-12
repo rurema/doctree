@@ -1,78 +1,99 @@
 #@since 1.9.0
 = module Delegator::MethodDelegation
 
+委譲先のオブジェクト管理のためのメソッドを集めたモジュールです。
+
 == Class Methods
 
-#@# bc-rdoc: detected missing name: new
---- new(obj)
-#@todo
+--- new(obj) -> object
 
-Pass in the obj to delegate method calls to. All methods supported
-by obj will be delegated to.
+委譲先のオブジェクトを設定します。
+
+@param obj 委譲先のオブジェクト
+
 
 == Instance Methods
 
-#@# bc-rdoc: detected missing name: ==
 --- ==(obj)
-#@todo
 
-Returns true if two objects are considered same.
+二つのオブジェクトが等しければ真を返します。
 
-#@# bc-rdoc: detected missing name: __getobj__
---- __getobj__
-#@todo
+@param obj 比較を行うオブジェクト
 
-This method must be overridden by subclasses and should return
-the object method calls are being delegated to.
+@see [[m:Object#==]]
 
-#@# bc-rdoc: detected missing name: __setobj__
---- __setobj__(obj)
-#@todo
 
-This method must be overridden by subclasses and change the object
-delegate to obj.
+--- __getobj__ -> object
 
-#@# bc-rdoc: detected missing name: clone
---- clone
-#@todo
+委譲先のオブジェクトを返します。
 
-Clone support for the object returned by __getobj__.
+本メソッドは、サブクラスで再定義する必要があり、
+デフォルトでは [[c:NotImplementError]] が発生します。
 
-#@# bc-rdoc: detected missing name: dup
---- dup
-#@todo
+@raise NotImplementError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
-Duplication support for the object returned by __getobj__.
 
-#@# bc-rdoc: detected missing name: equal?
+--- __setobj__(obj) -> object
+
+委譲先のオブジェクトを設定します。
+
+本メソッドは、サブクラスで再定義する必要があり、
+デフォルトでは [[c:NotImplementError]] が発生します。
+
+@raise NotImplementError サブクラスにて本メソッドが再定義されていない場合に発生します。
+
+
+--- clone -> object
+--- dup -> object
+
+オブジェクトの複製を作成して返します。
+
+@see [[m:Object#clone]],[[m:Object#dup]]
+
+
 --- equal?(obj)
-#@todo
 
-Returns true only if two objects are identical.
+二つのオブジェクトが同一であれば真を返します。
 
-#@# bc-rdoc: detected missing name: marshal_dump
---- marshal_dump
-#@todo
+@param obj 比較を行うオブジェクト
 
-Serialization support for the object returned by __getobj__.
+@see [[m:Object#equal?]]
 
-#@# bc-rdoc: detected missing name: marshal_load
---- marshal_load(obj)
-#@todo
 
-Reinitializes delegation from a serialized object.
+--- marshal_dump -> object
 
-#@# bc-rdoc: detected missing name: method_missing
---- method_missing(m, *args, &block)
-#@todo
+シリアライゼーションをサポートするために[[m:Delegator::MethodDelegation#__getobj__]] が返すオブジェクトを返します。
 
-Handles the magic of delegation through __getobj__.
 
-#@# bc-rdoc: detected missing name: respond_to?
---- respond_to?(m)
-#@todo
+--- marshal_load(obj) -> object
 
-Checks for a method provided by this the delegate object by fowarding
-the call through __getobj__.
+シリアライズされたオブジェクトから、[[m:Delegator::MethodDelegation#__getobj__]] が返すオブジェクトを再現します。
+
+@param obj [[m:Delegator__MethodDelegatation#marshal_dump]]の戻り値のコピー
+
+
+--- method_missing(m, *args, &block) -> object
+
+渡されたメソッド名と引数を使って、[[m:Delegator::MethodDelegation#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
+
+@param m メソッドの名前（シンボル）
+
+@param args メソッドに渡された引数
+
+@param block メソッドに渡されたブロック
+
+@return 委譲先のメソッドからの返り値
+
+@see [[m:Object#method_missing]]
+
+
+--- respond_to?(m) -> bool
+
+[[m:Delegator::MethodDelegation#__getobj__]] が返すオブジェクトが メソッド m を持つとき真を返します。
+
+@param m メソッド名
+
+@see [[m:Object#respond_to?]]
+
 
 #@end
