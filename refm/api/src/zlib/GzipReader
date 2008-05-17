@@ -253,23 +253,411 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 
 @see [[m:IO#each_byte]]
 
---- gets([rs])
---- getc
---- lineno
---- lineno=(num)
---- read([length])
---- readchar
---- readline([rs])
---- readlines([rs])
+--- gets([rs]) -> String | nil
+IO クラスの同名メソッド[[m:IO#gets]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+@param rs 行の区切りを文字列で指定します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+    gz.puts 'fuga'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    while l = gz.gets
+      puts l
+    end
+  }
+  #=> hoge
+  #=> fuga
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+--- getc -> Fixnum | nil
+IO クラスの同名メソッド[[m:IO#getc]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    while c = gz.getc
+      puts c
+    end
+  }
+  #=> 104
+  #=> 111
+  #=> 103
+  #=> 101
+  #=> 10
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#getc]]
+
+--- lineno -> Fixnum | Bignum
+IO クラスの同名メソッド[[m:IO#lineno]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'h'
+    gz.puts 'o'
+    gz.puts 'g'
+    gz.puts 'e'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    while l = gz.gets
+      l.chomp!
+      printf "%s %d\n", l, gz.lineno
+    end
+  }
+  #=> h 1
+  #=> o 2
+  #=> g 3
+  #=> e 4
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#lineno]]
+
+--- lineno=(num) -> Integer
+IO クラスの同名メソッド[[m:IO#lineno=]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+@param num 新たな行番号を整数で指定します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'h'
+    gz.puts 'o'
+    gz.puts 'g'
+    gz.puts 'e'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    while l = gz.gets
+      l.chomp!
+      gz.lineno = 1000 if l == "o"
+      printf "%s %d\n", l, gz.lineno
+    end
+  }
+  #=> h 1
+  #=> o 1001
+  #=> g 1002
+  #=> e 1003
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#lineno=]]
+
+--- read([length]) -> String | nil
+IO クラスの同名メソッド[[m:IO#read]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+@param length 読み込む文字列の文字数を整数で指定します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge_fuga'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    p gz.read(4)  #=> "hoge"
+    p gz.read     #=> "_fuga\n"
+    p gz.read(1)  #=> nil
+  }
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#read]]
+
+--- readchar -> Fixnum
+IO クラスの同名メソッド[[m:IO#readchar]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    begin
+      puts gz.readchar
+    rescue EOFError => err
+      puts err
+      break
+    end while true
+  }
+  #=> 104
+  #=> 111
+  #=> 103
+  #=> 101
+  #=> 10
+  #=> end of file reached
+
+@raise EOFError  EOF に到達したとき発生します。
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+--- readline([rs]) -> String
+IO クラスの同名メソッド[[m:IO#readline]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+@param rs 行の区切りを文字列で指定します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+    gz.puts 'fuga'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    begin
+      puts gz.readline
+    rescue EOFError => err
+      puts err
+      break
+    end while true
+  }
+  #=> hoge
+  #=> fuga
+  #=> end of file reached
+
+@raise EOFError  EOF に到達したとき発生します。
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#readline]]
+
+--- readlines([rs]) -> Array
+IO クラスの同名メソッド[[m:IO#readlines]]と同じです。
+
+但し、gzip ファイル中に
+エラーがあった場合 [[c:Zlib::Error]] 例外や
+[[c:Zlib::GzipFile::Error]] 例外が発生します。
+
+@param rs 行の区切りを文字列で指定します。
+
+gzip ファイルのフッターの処理に注意して下さい。
+gzip ファイルのフッターには圧縮前データのチェックサムが
+記録されています。GzipReader オブジェクトは、次の時に展開した
+データとフッターの照合を行い、エラーがあった場合は
+[[c:Zlib::GzipFile::NoFooter]], [[c:Zlib::GzipFile::CRCError]],
+[[c:Zlib::GzipFile::LengthError]] 例外を発生させます。
+
+  * EOF (圧縮データの最後) を越えて読み込み要求を受けた時。
+    すなわち [[m:Zlib::GzipReader#read]],
+    [[m:Zlib::GzipReader#gets]] メソッド等が nil を返す時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipFile#close]] メソッドが
+    呼び出された時。
+  * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
+    呼び出された時。
+
+  =begin
+  # hoge.gz がない場合は下記で作成できる。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.puts 'hoge'
+    gz.puts 'fuga'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    p gz.readlines #=>  ["hoge\n", "fuga\n"]
+  }
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#readlines]]
+
 #@since 1.9.0
 --- readpartial(maxlen[, outbuf])
-#@end
---- ungetc(char)
 #@todo
+#@end
+--- ungetc(char) -> nil
+IO クラスの同名メソッド[[m:IO#ungetc]]と同じです。
 
 IO クラスの同名メソッドと同じですが、gzip ファイル中に
 エラーがあった場合 [[c:Zlib::Error]] 例外や
 Zlib::GzipFile::Error 例外が発生します。
+
+@param char 読み戻したい1文字かそのコードポイントを指定します。
 
 gzip ファイルのフッターの処理に注意して下さい。
 gzip ファイルのフッターには圧縮前データのチェックサムが
@@ -285,6 +673,40 @@ Zlib::GzipFile::LengthError 例外を発生させます。
     呼び出された時。
   * EOF まで読み込んだ後、[[m:Zlib::GzipReader#unused]] メソッドが
     呼び出された時。
+
+  =begin
+  # hoge.gz がない場合はこれで作成する。
+  Zlib::GzipWriter.open('hoge.gz') { |gz|
+    gz.print 'hogefuga'
+  }
+  =end
+
+  Zlib::GzipReader.open('hoge.gz') { |gz|
+    begin
+      c1 = gz.getc
+      c2 = gz.getc
+      break if c2.nil?
+      printf "%c -> %c\n", c1, c2
+      gz.ungetc(c2)
+    end while true
+  }
+
+  #=> h -> o
+  #=> o -> g
+  #=> g -> e
+  #=> e -> f
+  #=> f -> u
+  #=> u -> g
+  #=> g -> a
+  
+
+@raise Zlib::Error [[c:Zlib::Error]] を参照
+@raise Zlib::GzipFile::Error [[c:Zlib::GzipFile::Error]]を参照
+@raise Zlib::GzipFile::NoFooter [[c:Zlib::GzipFile::NoFooter]]を参照
+@raise Zlib::GzipFile::CRCError [[c:Zlib::GzipFile::CRCError]]を参照
+@raise Zlib::GzipFile::LengthError [[c:Zlib::GzipFile::LengthError]]を参照
+
+@see [[m:IO#ungetc]]
 
 --- rewind -> 0
 
