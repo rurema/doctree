@@ -385,7 +385,6 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 --- on(short, *rest) {|v| ...}        -> self
 --- on(long, *rest) {|v| ...}         -> self
 --- on(short, long, *rest) {|v| ...}  -> self
-#@todo
 
 オプションを取り扱うためのブロックを自身に登録します。
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
@@ -440,12 +439,13 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
 --- order(argv){|s| ...}            -> [String]
 --- order(*args)                    -> [String]
 --- order(*args){|s| ...}           -> [String]
-#@todo
 
 与えられた argv を順番にパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
-ブロックが与えられている場合は、パースを中断せずに
-引数をブロックに渡してブロックを評価し、パースを継続します。argv を返します。
+argv からオプションを取り除いたものを返します。
+
+ブロックが与えられている場合は、パースを中断せずに引数をブロックに渡してブロックを評価し、
+パースを継続します。argv を返します。
 
 下の例で言うと、コマンドの引数 somefile よりも後ろにオプションを置くことができま
 せん。-b もコマンドのオプションではない引数として扱われてしまいます。
@@ -477,6 +477,7 @@ on メソッドと違う点は、OptionParser オブジェクトが保持している
 
 与えられた argv を順番に破壊的にパースします。
 argv からオプションがすべて取り除かれます。
+argv を返します。
 
 オプションではないコマンドの引数(下の例で言うと somefile)に出会うと、パースを中断します。
 ブロックが与えられている場合は、パースを中断せずに
@@ -505,13 +506,12 @@ argv からオプションがすべて取り除かれます。
   :a
   ["somefile", "-b"]
 
---- permute(argv)     -> [String]
+--- permute(argv)            -> [String]
 --- permute(*args)           -> [String]
-#@todo
 
 与えられた argv をパースします。
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
-オプションでない引数の配列を返します。
+argv からオプションを取り除いたものを返します。
 
 下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 できます。
@@ -541,11 +541,10 @@ argv からオプションがすべて取り除かれます。
   ["somefile"]
 
 --- permute!(argv = self.default_argv)    -> [String]
-#@todo
 
 与えられた argv を破壊的にパースします。argv からオプションがすべて取り除かれます
 オプションではないコマンドの引数(下の例で言うと somefile)があってもパースを中断しません。
-オプションでない引数の配列を返します。
+argv を返します。
 
 下の例で言うと、order と違いコマンドの引数 somefile よりも後ろにオプションを置くことが
 できます。
@@ -572,11 +571,11 @@ argv からオプションがすべて取り除かれます。
   :b
   ["somefile"]
 
-
+--- parse(argv)           -> [String]
 --- parse(*args)          -> [String]
-#@todo
 
 与えられた argv をパースします。
+argv からオプションを取り除いたものを返します。
 
 [[m:OptionParser#permute]] と同様に振舞います。しかし、
 環境変数に POSIXLY_CORRECT が設定されている場合は、
@@ -590,7 +589,6 @@ argv からオプションがすべて取り除かれます。
                                 サブクラスが投げられます。
 
 --- parse!(argv = self.default_argv)   -> [String]
-#@todo
 
 与えられた argv をパースします。
 
@@ -605,12 +603,18 @@ argv からオプションがすべて取り除かれます。
 @raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
                                 サブクラスが投げられます。
 
---- load(filename)     -> bool
-#@todo
+--- load(filename = nil)     -> bool
 
-file を読み込んで各行に対して parse を行ないます。
+指定された filename を読み込んで各行をまとめたものに対して [[m:OptionParser#parse]] を行ないます。
 
---- environment(env)    -> String
+パースが成功した場合に true を返します。
+ファイルが存在しなかった場合に false を返します。
+
+@param filename 各行をパースしたいファイルの名前を文字列で指定します。
+                指定されないか nil である場合、~/.options/ に
+                プログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
+                
+--- environment(env)    -> [String]
 #@todo
 
 環境変数 env に対して
@@ -623,9 +627,15 @@ file を読み込んで各行に対して parse を行ないます。
 
 #@since 1.8.3
 --- default_argv    -> [String]
---- default_argv=
-#@todo
-Strings to be parsed in default. ARGV is default.
+--- default_argv=(argv)
+
+自身がデフォルトでパースする引数を表すアクセサです。
+文字列の配列です。
+
+[[m:OptionParser#parse]] の引数が指定されなかったときに使われます。
+
+@param argv デフォルトでパースしたい文字列の配列を指定します。
+
 #@end
 
 #@since 1.8.5
