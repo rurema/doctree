@@ -20,11 +20,33 @@ require tmpdir
 --- new(basename, tempdir = Dir::tmpdir)
 --- open(basename, tempdir = Dir::tmpdir)
 
+#@since 1.8.7
+テンポラリファイルを作成し、それを表す Tempfile オブジェクトを生成して返します。
+ファイル名のプレフィクスには指定された basename が使われます。
+ファイルは指定された tempdir に作られます。
+#@else
 "basename.pid.n" というファイル名で
 テンポラリファイルを作成し、インスタンスを返します。
+#@end
+
+@param basename ファイル名のプレフィクスを文字列で指定します。
+#@since 1.8.7
+                文字列の配列を指定した場合、先頭の要素がファイル名のプレフィックス、次の要素が
+                サフィックスとして使われます。
+#@end
 
 @param tempdir テンポラリファイルが作られるディレクトリです。
-このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
+               このデフォルト値は、[[m:Dir.tmpdir]] の値となります。
+
+
+#@since 1.8.7
+例:
+   require "tempfile"
+   t = Tempfile.open(['hoge', 'bar'])
+   p t.path                            #=> "/tmp/hoge20080518-6961-5fnk19-0bar"
+   t2 = Tempfile.open(['t', '.xml'])
+   p t2.path                           #=> "/tmp/t20080518-6961-xy2wvx-0.xml"
+#@end
 
 == Instance Methods
 
