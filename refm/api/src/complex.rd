@@ -59,31 +59,67 @@ Vector および Matrix のそれぞれの項目を参照してください。
  
 == Class Methods
 
---- new(r,i)
---- new!(r,i=0)
-#@todo
+--- new(r,i) -> Complex
+--- new!(r,i=0) -> Complex
+[[c:Complex]]クラスのオブジェクトを生成します。
 
 実部が r、虚部が i である複素数を生成します。
 
---- polar(r, theta)
-#@todo
+@param r 生成する複素数の実部
+@param i 生成する複素数の虚部
+
+=== 例
+
+  p Complex(1, 1)       #=> Complex(1, 1)
+  p Complex(3.5)        #=> Complex(3.5, 0)
+
+--- polar(r, theta) -> Complex
+[[c:Complex]]クラスのオブジェクトを生成します。
+
+絶対値が r、偏角が theta である複素数を生成します。
+
+@param r 生成する複素数の絶対値。
+@param theta 生成する複素数の偏角。単位はラジアン角です。
 
 == Instance Methods
 
---- +(c)
-#@todo
+--- +(c) -> Complex
 複素数 c を加えた結果を返します。
 
---- -(c)
-#@todo
+@param c 加算する数
+@return 加算結果を[[c:Complex]]クラスのオブジェクトとして返します。
+
+=== 例
+
+  c =  Complex(1, 1)    #=> Complex(1, 1)
+  p c + Complex(3, 3)   #=> Complex(4, 4)
+  p c + 3               #=> Complex(4, 1)
+
+--- -(c) -> Complex
 複素数 c を減じた結果を返します。
 
---- *(c)
-#@todo
+@param c 減算する数
+@return 減算結果を[[c:Complex]]クラスのオブジェクトとして返します。
+
+=== 例
+
+  c =  Complex(3, 3)    #=> Complex(3, 3)
+  p c - Complex(2, 2)   #=> Complex(1, 1)
+  p c - 3               #=> Complex(0, 3)
+
+--- *(c) -> Complex
 複素数 c を乗じた結果を返します。
 
---- /(c)
-#@todo
+@param c 乗算する数
+@return 乗算結果を[[c:Complex]]クラスのオブジェクトとして返します。
+
+=== 例
+
+  c =  Complex(1, 1)    #=> Complex(1, 1)
+  p c * Complex(2, 2)   #=> Complex(0, 4)
+  p c * 3               #=> Complex(3, 3)
+
+--- /(c) -> Complex
 複素数 c で除した結果を返します。
 
   z1 = a + b * i
@@ -102,9 +138,19 @@ Vector および Matrix のそれぞれの項目を参照してください。
   p z1 / z2       #=> Complex(2, 0)
   p 1.0 * z1 / z2 #=> Complex(2.2, 0.4)
   
+@param c 除算する数
+@return 除算結果を[[c:Complex]]クラスのオブジェクトとして返します。
 
---- %(c)
-#@todo
+=== 例
+
+  z1 = Complex.new(4, 3)
+  z2 = Complex.new(2, 1)
+  
+  p z1 / z2       #=> Complex(2, 0)
+  p 1.0 * z1 / z2 #=> Complex(2.2, 0.4)
+
+#@if (version < "1.9.0")
+--- %(c) -> Complex
 実部同士の演算結果 m1 と虚部同士の演算結果 m2 を複素数
 Complex.new(m1, m2)にして返します。つまり、
 
@@ -117,30 +163,65 @@ Complex.new(m1, m2)にして返します。つまり、
 
 です。
 
---- **(c)
-#@todo
+@param c 演算する数
+@return 演算結果を[[c:Complex]]クラスのオブジェクトとして返します。
+
+[注意] このメソッドは Ruby 1.9.0 で廃止されました。
+
+#@else
+このメソッドは廃止されました。
+#@end
+
+--- **(c) -> Complex
 複素数 c でべき乗した結果
   exp(c * log(self)) 
 を返します。
 
+@param c 累乗する数
+@return 演算結果を[[c:Complex]]クラスのオブジェクトとして返します。
+
+=== 例
+
+  z1 = Complex.new(1, 1)
+  z2 = Complex.new(2, 2)
+
+  p z1 ** 2     #=> Complex(0, 2)
+  p z1 ** z2    #=> Complex(-0.265653998849241, 0.319818113856136)
+
 #@if (version < "1.8.0")
 --- divmod 
-#@todo
 このメソッドは廃止されました。
 #@end
 
---- abs
-#@todo
-複素数の絶対値を返します。
+--- abs -> Float
+自分自身の絶対値を返します。
 
---- abs2
-#@todo
-複素数の絶対値の 2 乗を返します。
+  z = a + b * i
 
---- angle
---- arg
-#@todo
+としたとき、絶対値の定義は
+
+  sqrt(a*a + b*b)
+
+です。
+計算結果として[[c:Folat]]クラスのオブジェクトが返されることに注意してください。
+
+--- abs2 -> Fixnum
+--- abs2 -> Float
+自分自身の絶対値の2乗を返します。
+
+  z = a + b * i
+
+としたとき、[[m:Complex#abs2]] の定義は
+
+  a*a + b*b
+
+です。
+
+--- angle -> Float
+--- arg -> Float
 複素数の偏角を[-π,π]の範囲で返します。
+
+=== 例
 
   p Complex.new(0, 1).arg == Math::PI/2 #=> true
   p Complex.new(0, -1).arg              #=> -1.5707963267949
@@ -157,31 +238,63 @@ Complex.new(m1, m2)にして返します。つまり、
   p Complex.new(-0.0, 0).arg            #=>  3.14159265358979
   p Complex.new(-0.0, -0.0).arg         #=> -3.14159265358979
 
---- polar 
-#@todo
+--- polar -> Array
 複素数の極座標表示、すなわち、配列 [self.abs, self.arg] を返します。
 
---- conj
---- conjugate
-#@todo
-共役複素数を返します。
+=== 例
 
---- real
---- real=
-#@todo
+z = Complex.new(3.0, 4.0)
+
+p z        #=> Complex(3.0, 4.0)
+p z.polar  #=> [5.0, 0.927295218001612]
+
+--- conj -> Complex
+--- conjugate -> Complex
+自分の共役複素数を返します。
+
+=== 例
+
+z = Complex.new(1, 1)
+p z.conjugate   #=> Complex(1, -1)
+
+--- real -> Fixnum
+--- real -> Float
+#@# Complex#real= を削除
+#@#--- real=
 実部を返します。
 
---- imag
---- image
---- imag=
---- image=
-#@todo
+--- imag -> Fixnum
+--- imag -> Float
+--- image -> Fixnum
+--- image -> Float
+#@# Complex#imag=, Complex#image= を削除
+#@#--- imag=
+#@#--- image=
 虚部を返します。
 
 #@if (version < "1.9.0")
---- <=>(c)
-#@todo
+--- <=>(c) -> Fixnum
 cとselfの絶対値absを比較した結果を返します。
+
+self と c の[[m:Complex#abs]]メソッドの結果を比較し、
+ * self が大きい場合は正の数
+ * c が大きい場合は負の数
+ * 同じ場合には 0
+を返します。
+
+@param c 比較する[[c:Complex]]クラスのオブジェクト
+
+=== 例
+
+z1 = Complex.new(1, 1)
+z2 = Complex.new(2, -2)
+p z1 <=> z2   #=> -1
+
+[注意] このメソッドは Ruby 1.9.0 で廃止されました。
+
+#@else
+このメソッドは廃止されました。
+
 #@end
 
 --- ==(c)
