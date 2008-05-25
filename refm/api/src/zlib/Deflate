@@ -3,8 +3,7 @@
 
 == Class Methods
 
---- deflate(string[, level])
-#@todo
+--- deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
 
 string を圧縮します。level の有効な値は
 Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
@@ -19,6 +18,36 @@ Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
     z.close
     dst
   end
+
+@param string 圧縮する文字列を指定します。 
+@param level 圧縮の水準を詳細に指定します。
+             有効な値は Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
+             Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION 及び 0 から 9 の整数です。
+
+使用例
+  require 'zlib'
+
+  srand(1)
+  str = (1..500).collect{
+    ['A', 'T', 'C', 'G'].at(rand(4))
+  }.join
+
+  p str.size #=> 500
+
+  [ Zlib::NO_COMPRESSION,
+    Zlib::BEST_SPEED,
+    Zlib::BEST_COMPRESSION,
+    Zlib::DEFAULT_COMPRESSION ].each { |level|
+    deflate_str = Zlib::Deflate.deflate(str, level)
+    p deflate_str.size
+    # 展開する場合は、下記を実行する
+    #puts Zlib::Inflate.inflate(str)
+  }
+  #出力例
+  #=> 511
+  #=> 200
+  #=> 194
+  #=> 194
 
 --- new([level[, windowBits[, memlevel[, strategy]]]])
 #@todo
