@@ -81,6 +81,13 @@ Vector および Matrix のそれぞれの項目を参照してください。
 @param r 生成する複素数の絶対値。
 @param theta 生成する複素数の偏角。単位はラジアン角です。
 
+--- generic?(other) -> bool
+other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判定します。
+
+@param other 判定対象のオブジェクト
+@return [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトの時 ture
+        それ以外の場合には false を返します。
+
 == Instance Methods
 
 --- +(c) -> Complex
@@ -175,7 +182,7 @@ Complex.new(m1, m2)にして返します。つまり、
 --- **(c) -> Complex
 複素数 c でべき乗した結果
   exp(c * log(self)) 
-を返します。
+を返します
 
 @param c 累乗する数
 @return 演算結果を[[c:Complex]]クラスのオブジェクトとして返します。
@@ -297,28 +304,98 @@ p z1 <=> z2   #=> -1
 
 #@end
 
---- ==(c)
-#@todo
-c と等しければ、真を返します。
+--- ==(c) -> bool
+c と等しければ、true を返します。
+
+=== 例
+
+z1 = Complex.new(1, 2)
+z2 = Complex.new(1, 0)
+z3 = Complex.new(0, 1)
+
+p z1 == Complex.new(1, 2)  #=> true
+p z1 == z2                 #=> false
+p z2 == 1.0                #=> true
+p z3 == Complex::I         #=> true
 
 #@if (version < "1.8.0")
---- to_i
-#@todo
+--- to_i -> Integer
 整数 [[c:Integer]] に変換します。
 
+[注意] このメソッドは廃止されました。
 --- to_f
-#@todo
 浮動小数点数 [[c:Float]] に変換します。
 
+[注意] このメソッドは廃止されました。
 --- to_r
-#@todo
 有理数 [[c:Rational]] に変換します。
+
+[注意] このメソッドは廃止されました。
 #@end
 
 #@since 1.9.0
---- scalar?
-#@todo
+--- scalar? -> bool
+
+[注意] このメソッドは常に false を返します。
+
 #@end
+
+--- coerce(other) -> Array
+自分自身とotherのペアの配列を生成し、生成した配列を返します。
+
+otherが [[c:Complex]] のオブジェクトではないときは [[c:Complex]] オブジェクト化したものが配列の要素となります。
+
+@param other 配列の要素となるオブジェクト
+
+=== 例
+z1 = Complex.new(1, 2)
+z2 = Complex.new(3, 4)
+
+p z1.coerce(5)  #=>  [Complex(5, 0), Complex(1, 2)]
+p z1.coerce(z2) #=>  [Complex(3, 4), Complex(1, 2)]
+
+--- denominator -> Fixnum
+自分自身の実部・虚部の分母のLCM(最小公倍数)を返します。
+
+=== 例
+z1 = Complex.new(1, 2)
+z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
+
+p z1.denominator  #=> 1
+p z2.denominator  #=> 15
+
+--- numerator -> Complex
+[[m:Complex#denomirator]] の値で実部・虚部を通分したものの分子のみを [[c:Complex]] で返します。
+
+具体的な計算式は
+
+ * 実部 = 実部の分子 * (実部、虚部の分母の最大公約数 / 実部の分母)
+ * 虚部 = 虚部の分子 * (実部、虚部の分母の最大公約数 / 虚部の分母)
+
+=== 例
+
+z1 = Complex.new(1, 2)
+z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
+
+p z1.numerator
+p z2.numerator
+
+--- hash -> Fixnum
+複素数のハッシュ値を返します。
+
+=== 例
+
+z1 = Complex.new(3.5, 1.20)
+z2 = Complex.new(3.5, 1.21)
+
+p z1.hash    #=> 1889428376
+p z2.hash    #=> 425788526
+
+--- inspect -> String
+自分自身について "Complex(実部, 虚部)" 形式の文字列を返します。
+
+--- to_s -> String
+自分自身について "実部 + 虚部i" 形式の文字列を返します。
 
 == Constants
 
