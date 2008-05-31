@@ -20,10 +20,20 @@ require digest/sha2
 #@since 1.8.6
 == Module Functions
 
---- hexencode(string)
-#@todo
+--- hexencode(string) -> String
 
-Generates a hex-encoded version of a given string. 
+与えられた文字列に対するハッシュ値を、
+ASCIIコードを使って16進数の列を示す文字列にエンコードして返します。
+
+@param string ハッシュ値の生成対象の文字列です。
+
+使用例(MD5の場合)
+
+        require 'digest/md5'
+        Digest::MD5.hexdigest("ruby") # => "58e53d1324eef6265fdb97b08ed9aadf"
+
+@see [[m:Digest::Base#hexdigest]]
+
 #@end
 
 #@if(version >= "1.8.6")
