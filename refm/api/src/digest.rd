@@ -7,13 +7,14 @@ require digest/sha2
 
 メッセージダイジェストライブラリ。
 
-すべてのメッセージダイジェストの実装クラスは基底クラスである
-[[c:Digest::Base]] と同じインタフェースを持つ。
-基本的な使い方は、MD5やSHA1など、どのアルゴリズムでも同じ。
-詳しくは[[c:Digest::Base]]を参照。
+[[c:Digest::MD5]] や [[c:Digest::SHA1]] などの
+全てのメッセージダイジェストの実装クラスは、
+基底クラスである [[c:Digest::Base]] と同じインタフェースを持ちます。
+基本的な使い方は、MD5やSHA1など、どのアルゴリズムでも同じです。
+詳しくは [[c:Digest::Base]] を参照してください。
 
-なお、メッセージダイジェストとは、データから固定長の疑似乱数を生成する
-演算手法のこと。
+なお、「メッセージダイジェスト」とは、
+データから固定長の疑似乱数を生成する演算手法のことです。
 
 = module Digest
 
@@ -112,12 +113,20 @@ new(str).digest と等価。
 new(str).hexdigest と等価。
 
 #@since 1.8.6
---- file(file)
-#@todo
-creates a digest object and reads a given file, name.
+--- file(file) -> object
 
-  p Digest::SHA256.file("X11R6.8.2-src.tar.bz2").hexdigest
-  # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
+新しいダイジェストオブジェクトを生成し、
+ファイル名 file で指定したファイルの内容を読み込み、
+そのダイジェストオブジェクトを返します。
+
+@param file 読み込み対象のファイル名です。
+@return ダイジェストオブジェクトを返します。
+
+使用例(SHA256の場合)
+
+        digest = Digest::SHA256.file("X11R6.8.2-src.tar.bz2")
+        digest.hexdigest
+        # => "f02e3c85572dc9ad7cb77c2a638e3be24cc1b5bea9fdbb0b0299c9668475c534"
 #@end
 
 == Instance Methods
