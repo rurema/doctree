@@ -250,10 +250,10 @@ Complex.new(m1, m2)§À§∑§∆ ÷§∑§ﬁ§π°£§ƒ§ﬁ§Í°¢
 
 === Œ„
 
-z = Complex.new(3.0, 4.0)
+  z = Complex.new(3.0, 4.0)
 
-p z        #=> Complex(3.0, 4.0)
-p z.polar  #=> [5.0, 0.927295218001612]
+  p z        #=> Complex(3.0, 4.0)
+  p z.polar  #=> [5.0, 0.927295218001612]
 
 --- conj -> Complex
 --- conjugate -> Complex
@@ -261,8 +261,8 @@ p z.polar  #=> [5.0, 0.927295218001612]
 
 === Œ„
 
-z = Complex.new(1, 1)
-p z.conjugate   #=> Complex(1, -1)
+  z = Complex.new(1, 1)
+  p z.conjugate   #=> Complex(1, -1)
 
 --- real -> Fixnum
 --- real -> Float
@@ -293,9 +293,9 @@ self §» c §Œ[[m:Complex#abs]]•·•Ω•√•…§Œ∑Î≤Ã§Ú»Ê≥”§∑°¢
 
 === Œ„
 
-z1 = Complex.new(1, 1)
-z2 = Complex.new(2, -2)
-p z1 <=> z2   #=> -1
+  z1 = Complex.new(1, 1)
+  z2 = Complex.new(2, -2)
+  p z1 <=> z2   #=> -1
 
 [√Ì∞’] §≥§Œ•·•Ω•√•…§œ Ruby 1.9.0 §««—ªﬂ§µ§Ï§ﬁ§∑§ø°£
 
@@ -309,14 +309,14 @@ c §»≈˘§∑§±§Ï§–°¢true §Ú ÷§∑§ﬁ§π°£
 
 === Œ„
 
-z1 = Complex.new(1, 2)
-z2 = Complex.new(1, 0)
-z3 = Complex.new(0, 1)
+  z1 = Complex.new(1, 2)
+  z2 = Complex.new(1, 0)
+  z3 = Complex.new(0, 1)
 
-p z1 == Complex.new(1, 2)  #=> true
-p z1 == z2                 #=> false
-p z2 == 1.0                #=> true
-p z3 == Complex::I         #=> true
+  p z1 == Complex.new(1, 2)  #=> true
+  p z1 == z2                 #=> false
+  p z2 == 1.0                #=> true
+  p z3 == Complex::I         #=> true
 
 #@if (version < "1.8.0")
 --- to_i -> Integer
@@ -348,21 +348,23 @@ other§¨ [[c:Complex]] §Œ•™•÷•∏•ß•Ø•»§«§œ§ §§§»§≠§œ [[c:Complex]] •™•÷•∏•ß•Ø•»≤Ω§
 @param other «€ŒÛ§ŒÕ◊¡«§»§ §Î•™•÷•∏•ß•Ø•»
 
 === Œ„
-z1 = Complex.new(1, 2)
-z2 = Complex.new(3, 4)
 
-p z1.coerce(5)  #=>  [Complex(5, 0), Complex(1, 2)]
-p z1.coerce(z2) #=>  [Complex(3, 4), Complex(1, 2)]
+  z1 = Complex.new(1, 2)
+  z2 = Complex.new(3, 4)
+
+  p z1.coerce(5)  #=>  [Complex(5, 0), Complex(1, 2)]
+  p z1.coerce(z2) #=>  [Complex(3, 4), Complex(1, 2)]
 
 --- denominator -> Fixnum
 º´ ¨º´ø»§Œº¬…Ù°¶µı…Ù§Œ ¨ Ï§ŒLCM(∫«æÆ∏¯«‹øÙ)§Ú ÷§∑§ﬁ§π°£
 
 === Œ„
-z1 = Complex.new(1, 2)
-z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
 
-p z1.denominator  #=> 1
-p z2.denominator  #=> 15
+  z1 = Complex.new(1, 2)
+  z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
+
+  p z1.denominator  #=> 1
+  p z2.denominator  #=> 15
 
 --- numerator -> Complex
 [[m:Complex#denomirator]] §Œ√Õ§«º¬…Ù°¶µı…Ù§ÚƒÃ ¨§∑§ø§‚§Œ§Œ ¨ª“§Œ§ﬂ§Ú [[c:Complex]] §« ÷§∑§ﬁ§π°£
@@ -374,22 +376,22 @@ p z2.denominator  #=> 15
 
 === Œ„
 
-z1 = Complex.new(1, 2)
-z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
+  z1 = Complex.new(1, 2)
+  z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
 
-p z1.numerator
-p z2.numerator
+  p z1.numerator
+  p z2.numerator
 
 --- hash -> Fixnum
  £¡«øÙ§Œ•œ•√•∑•Â√Õ§Ú ÷§∑§ﬁ§π°£
 
 === Œ„
 
-z1 = Complex.new(3.5, 1.20)
-z2 = Complex.new(3.5, 1.21)
+  z1 = Complex.new(3.5, 1.20)
+  z2 = Complex.new(3.5, 1.21)
 
-p z1.hash    #=> 1889428376
-p z2.hash    #=> 425788526
+  p z1.hash    #=> 1889428376
+  p z2.hash    #=> 425788526
 
 --- inspect -> String
 º´ ¨º´ø»§À§ƒ§§§∆ "Complex(º¬…Ù, µı…Ù)" ∑¡º∞§Œ ∏ª˙ŒÛ§Ú ÷§∑§ﬁ§π°£
@@ -400,14 +402,21 @@ p z2.hash    #=> 425788526
 == Constants
 
 --- I
-#@todo
 µıøÙ√±∞Ã§«§π°£
+
+[√Ì∞’] Complex::I §œ Complex.new(0, 1) §«¿∏¿Æ§µ§Ï§Î•™•÷•∏•ß•Ø•»§»∆±§∏§‚§Œ§«§π°£
+
 
 = reopen Numeric
 == Instance Methods
---- im
-#@todo
+--- im -> Complex
+[[c:Numeric]] •Ø•È•π§Œ•™•÷•∏•ß•Ø•»§À¬–§∑°¢Ω„µıøÙ≤Ω§∑§ø [[c:Complex]] •Ø•È•π§Œ•™•÷•∏•ß•Ø•»§Ú ÷§∑§ﬁ§π°£
 Returns a Complex number Complex(0, self).
+
+=== Œ„
+
+  n = 100
+  p n.im   #=> Complex(0, 100)
 
 --- real
 #@todo
