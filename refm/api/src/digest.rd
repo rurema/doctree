@@ -136,57 +136,93 @@ new(str).hexdigest と等価。
 
 ダイジェストオブジェクトの複製を作る。
 
---- digest
+--- digest -> String
 
-newの引数で与えた文字列や、
-updateや<<によって追加した文字列に対するハッシュ値を文字列で返す。
-MD5では16バイト長、SHA1およびRMD160では20バイト長、SHA256では32バイト長、
-SHA384では48バイト長、SHA512では64バイト長となる。
+updateや<<によって追加した文字列に対するハッシュ値を文字列で返します。
 
-使用例
+返す文字列は、MD5では16バイト長、SHA1およびRMD160では20バイト長、
+SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイト長です。
 
-        require 'digest/md5'
-        digest = Digest::MD5.new("ruby")
-        p digest.digest # => "X\345=\023$\356\366&_\333\227\260\216\331\252\337"
+例:
 
-[[m:Digest::Base#hexdigest]]、[[m:Digest::Base.new]]、
-[[m:Digest::Base#update]]、[[m:Digest::Base#<<]]を参照。
+  # MD5の場合
+  require 'digest/md5'
+  digest = Digest::MD5.new
+  digest.update("ruby")
+  p digest.digest # => "X\345=\023$\356\366&_\333\227\260\216\331\252\337"
+
+@see [[m:Digest::Base#hexdigest]]
 
 #@since 1.8.6
---- digest!
-#@todo
+--- digest! -> String
 
-Returns the resulting hash value and resets the digest to the initial state. 
+updateや<<によって追加した文字列に対するハッシュ値を文字列で返します。
+[[m:Digest::Base#digest]]と違い、
+メソッドの処理後、
+オブジェクトの状態を初期状態(newした直後と同様の状態)に戻します。
+
+返す文字列は、MD5では16バイト長、SHA1およびRMD160では20バイト長、
+SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイト長です。
+
+例:
+
+  # MD5の場合
+  require 'digest/md5'
+  digest = Digest::MD5.new
+  digest.update("ruby")
+  p digest.digest! # => "X\345=\023$\356\366&_\333\227\260\216\331\252\337"
+  p digest.digest! # => "\324\035\214\331\217\000\262\004\351\200\t\230\354\370B~"
+
+@see [[m:Digest::Base#digest]]、[[m:Digest::Base#hexdigest!]]
+
 #@end
 
---- hexdigest
---- to_s
+--- hexdigest -> String
+--- to_s -> String
 
-newの引数で与えた文字列や、
 updateや<<によって追加した文字列に対するハッシュ値を、
 ASCIIコードを使って16進数の列を示す文字列にエンコードして返す。
+
+返す文字列は、
 MD5では32バイト長、SHA1およびRMD160では40バイト長、SHA256では64バイト長、
-SHA384では96バイト長、SHA512では128バイト長となる。
-Rubyで書くと以下と同じ。
+SHA384では96バイト長、SHA512では128バイト長です。
 
-        def hexdigest
-          digest.unpack("H*")[0]
-        end
+Rubyで書くと以下と同じです。
 
-使用例(MD5の場合)
+  def hexdigest
+    digest.unpack("H*")[0]
+  end
 
-        require 'digest/md5'
-        digest = Digest::MD5.new("ruby")
-        p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
+例:
 
-[[m:Digest::Base#digest]]、[[m:Digest::Base.new]]、
-[[m:Digest::Base#update]]、[[m:Digest::Base#<<]]を参照。
+  # MD5の場合
+  require 'digest/md5'
+  digest = Digest::MD5.new
+  digest.update("ruby")
+  p digest.hexdigest # => "58e53d1324eef6265fdb97b08ed9aadf"
+
+@see [[m:Digest::Base#digest]]
 
 #@since 1.8.6
---- hexdigest!
-#@todo
-Returns the resulting hash value and resets the digest to the
-initial state.
+--- hexdigest! -> String
+
+updateや<<によって追加した文字列に対するハッシュ値を、
+ASCIIコードを使って16進数の列を示す文字列にエンコードして返します。
+[[m:Digest::Base#hexdigest]]と違い、
+メソッドの処理後、
+オブジェクトの状態を初期状態(newした直後と同様の状態)に戻します。
+
+例:
+
+  # MD5の場合
+  require 'digest/md5'
+  digest = Digest::MD5.new
+  digest.update("ruby")
+  p digest.hexdigest! # => "58e53d1324eef6265fdb97b08ed9aadf"
+  p digest.hexdigest! # => "d41d8cd98f00b204e9800998ecf8427e"
+
+@see [[m:Digest::Base#hexdigest]]、[[m:Digest::Base#digest!]]
+
 #@end
 
 --- update(str)
