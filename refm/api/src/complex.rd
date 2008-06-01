@@ -68,7 +68,7 @@ Vector ¤ª¤è¤Ó Matrix ¤Î¤½¤ì¤¾¤ì¤Î¹àÌÜ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 @param r À¸À®¤¹¤ëÊ£ÁÇ¿ô¤Î¼ÂÉô
 @param i À¸À®¤¹¤ëÊ£ÁÇ¿ô¤ÎµõÉô
 
-=== Îã
+Îã:
 
   p Complex(1, 1)       #=> Complex(1, 1)
   p Complex(3.5)        #=> Complex(3.5, 0)
@@ -96,7 +96,7 @@ other ¤¬ [[c:Integer]] [[c:Float]] [[c:Rational]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤«¤É¤¦¤«È½
 @param c ²Ã»»¤¹¤ë¿ô
 @return ²Ã»»·ë²Ì¤ò[[c:Complex]]¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   c =  Complex(1, 1)    #=> Complex(1, 1)
   p c + Complex(3, 3)   #=> Complex(4, 4)
@@ -108,7 +108,7 @@ other ¤¬ [[c:Integer]] [[c:Float]] [[c:Rational]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤«¤É¤¦¤«È½
 @param c ¸º»»¤¹¤ë¿ô
 @return ¸º»»·ë²Ì¤ò[[c:Complex]]¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   c =  Complex(3, 3)    #=> Complex(3, 3)
   p c - Complex(2, 2)   #=> Complex(1, 1)
@@ -120,7 +120,7 @@ other ¤¬ [[c:Integer]] [[c:Float]] [[c:Rational]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤«¤É¤¦¤«È½
 @param c ¾è»»¤¹¤ë¿ô
 @return ¾è»»·ë²Ì¤ò[[c:Complex]]¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   c =  Complex(1, 1)    #=> Complex(1, 1)
   p c * Complex(2, 2)   #=> Complex(0, 4)
@@ -148,7 +148,7 @@ other ¤¬ [[c:Integer]] [[c:Float]] [[c:Rational]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤«¤É¤¦¤«È½
 @param c ½ü»»¤¹¤ë¿ô
 @return ½ü»»·ë²Ì¤ò[[c:Complex]]¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z1 = Complex.new(4, 3)
   z2 = Complex.new(2, 1)
@@ -187,7 +187,7 @@ Complex.new(m1, m2)¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£¤Ä¤Þ¤ê¡¢
 @param c Îß¾è¤¹¤ë¿ô
 @return ±é»»·ë²Ì¤ò[[c:Complex]]¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z1 = Complex.new(1, 1)
   z2 = Complex.new(2, 2)
@@ -228,7 +228,7 @@ Complex.new(m1, m2)¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£¤Ä¤Þ¤ê¡¢
 --- arg -> Float
 Ê£ÁÇ¿ô¤ÎÊÐ³Ñ¤ò[-¦Ð,¦Ð]¤ÎÈÏ°Ï¤ÇÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   p Complex.new(0, 1).arg == Math::PI/2 #=> true
   p Complex.new(0, -1).arg              #=> -1.5707963267949
@@ -248,7 +248,7 @@ Complex.new(m1, m2)¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£¤Ä¤Þ¤ê¡¢
 --- polar -> Array
 Ê£ÁÇ¿ô¤Î¶ËºÂÉ¸É½¼¨¡¢¤¹¤Ê¤ï¤Á¡¢ÇÛÎó [self.abs, self.arg] ¤òÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z = Complex.new(3.0, 4.0)
 
@@ -259,7 +259,7 @@ Complex.new(m1, m2)¤Ë¤·¤ÆÊÖ¤·¤Þ¤¹¡£¤Ä¤Þ¤ê¡¢
 --- conjugate -> Complex
 ¼«Ê¬¤Î¶¦ÌòÊ£ÁÇ¿ô¤òÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z = Complex.new(1, 1)
   p z.conjugate   #=> Complex(1, -1)
@@ -291,7 +291,7 @@ self ¤È c ¤Î[[m:Complex#abs]]¥á¥½¥Ã¥É¤Î·ë²Ì¤òÈæ³Ó¤·¡¢
 
 @param c Èæ³Ó¤¹¤ë[[c:Complex]]¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È
 
-=== Îã
+Îã:
 
   z1 = Complex.new(1, 1)
   z2 = Complex.new(2, -2)
@@ -307,7 +307,7 @@ self ¤È c ¤Î[[m:Complex#abs]]¥á¥½¥Ã¥É¤Î·ë²Ì¤òÈæ³Ó¤·¡¢
 --- ==(c) -> bool
 c ¤ÈÅù¤·¤±¤ì¤Ð¡¢true ¤òÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z1 = Complex.new(1, 2)
   z2 = Complex.new(1, 0)
@@ -347,7 +347,7 @@ other¤¬ [[c:Complex]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤Ê¤¤¤È¤­¤Ï [[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È²½¤
 
 @param other ÇÛÎó¤ÎÍ×ÁÇ¤È¤Ê¤ë¥ª¥Ö¥¸¥§¥¯¥È
 
-=== Îã
+Îã:
 
   z1 = Complex.new(1, 2)
   z2 = Complex.new(3, 4)
@@ -358,7 +358,7 @@ other¤¬ [[c:Complex]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤Ê¤¤¤È¤­¤Ï [[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È²½¤
 --- denominator -> Fixnum
 ¼«Ê¬¼«¿È¤Î¼ÂÉô¡¦µõÉô¤ÎÊ¬Êì¤ÎLCM(ºÇ¾®¸øÇÜ¿ô)¤òÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z1 = Complex.new(1, 2)
   z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
@@ -374,7 +374,7 @@ other¤¬ [[c:Complex]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤Ê¤¤¤È¤­¤Ï [[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È²½¤
  * ¼ÂÉô = ¼ÂÉô¤ÎÊ¬»Ò * (¼ÂÉô¡¢µõÉô¤ÎÊ¬Êì¤ÎºÇÂç¸øÌó¿ô / ¼ÂÉô¤ÎÊ¬Êì)
  * µõÉô = µõÉô¤ÎÊ¬»Ò * (¼ÂÉô¡¢µõÉô¤ÎÊ¬Êì¤ÎºÇÂç¸øÌó¿ô / µõÉô¤ÎÊ¬Êì)
 
-=== Îã
+Îã:
 
   z1 = Complex.new(1, 2)
   z2 = Complex.new(Rational.new!(1, 3), Rational.new!(3, 5))
@@ -385,7 +385,7 @@ other¤¬ [[c:Complex]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤Ê¤¤¤È¤­¤Ï [[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È²½¤
 --- hash -> Fixnum
 Ê£ÁÇ¿ô¤Î¥Ï¥Ã¥·¥åÃÍ¤òÊÖ¤·¤Þ¤¹¡£
 
-=== Îã
+Îã:
 
   z1 = Complex.new(3.5, 1.20)
   z2 = Complex.new(3.5, 1.21)
@@ -413,7 +413,7 @@ other¤¬ [[c:Complex]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ï¤Ê¤¤¤È¤­¤Ï [[c:Complex]] ¥ª¥Ö¥¸¥§¥¯¥È²½¤
 [[c:Numeric]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤ËÂÐ¤·¡¢½ãµõ¿ô²½¤·¤¿ [[c:Complex]] ¥¯¥é¥¹¤Î¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
 Returns a Complex number Complex(0, self).
 
-=== Îã
+Îã:
 
   n = 100
   p n.im   #=> Complex(0, 100)
