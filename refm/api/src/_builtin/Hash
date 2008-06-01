@@ -708,8 +708,13 @@ self§Ú«À≤ı≈™§À —ππ§∑§ø§§æÏπÁ§œ§´§Ô§Í§À[[m:Hash#delete_if]]§´[[m:Hash#reject!]]§Ú
 
 @see [[m:Hash#delete_if]],[[m:Hash#delete]],[[m:Enumerable#reject]]
 
+#@since 1.8.7
+--- delete_if -> Enumerable::Enumerator
+--- reject!   -> Enumerator::Enumerator
+#@end
 --- delete_if {|key, value| ... } -> self
 --- reject! {|key, value| ... } -> self|nil
+#@todo
 
 •≠°º§»√Õ§Ú∞˙øÙ§»§∑§∆•÷•Ì•√•Ø§Ú…æ≤¡§∑§ø∑Î≤Ã§¨øø§«§¢
 §Î§Ë§¶§ Õ◊¡«§Ú self §´§È∫ÔΩ¸§∑§ﬁ§π°£
@@ -730,7 +735,7 @@ reject! §œ°¢Õ◊¡«§Ú∫ÔΩ¸§∑§ §´§√§øæÏπÁ§À§œ nil §Ú ÷§∑°¢
 
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
-#@if (version >= "1.9.0")
+#@since 1.8.7
 --- each -> Enumerable::Enumerator
 --- each_pair -> Enumerable::Enumerator
 #@end
@@ -738,8 +743,8 @@ reject! §œ°¢Õ◊¡«§Ú∫ÔΩ¸§∑§ §´§√§øæÏπÁ§À§œ nil §Ú ÷§∑°¢
 •œ•√•∑•Â§Œ•≠°º§»√Õ§Ú∞˙øÙ§»§∑§∆•÷•Ì•√•Ø§Ú…æ≤¡§∑§ﬁ§π°£
 
 »ø…¸§Œ∫›§Œ…æ≤¡ΩÁΩ¯§œ…‘ƒÍ§«§π°£
-#@since 1.9.0
-•÷•Ì•√•Ø…’§≠§ŒæÏπÁself§Ú°¢
+#@since 1.8.7
+•÷•Ì•√•Ø…’§≠§ŒæÏπÁ self §Ú°¢
 Ãµ§∑§«∏∆§–§Ï§øæÏπÁ[[c:Enumerable::Enumerator]]§Ú ÷§∑§ﬁ§π°£
 #@else
 self §Ú ÷§∑§ﬁ§π°£
@@ -764,7 +769,7 @@ each §œ •≠°º§»√Õ§Œ«€ŒÛ§Ú£±∞˙øÙ§«°¢each_pair §œ Ã°π§À£≤∞˙øÙ§«•÷•Ì•√•Ø§À√Õ§Ú≈œ§∑§ﬁ
       [:b, 2]
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 each_pair §œ each §Œ•®•§•Í•¢•π§«§π°£
 
   {:a=>1, :b=>2}.each {|a| p a}
@@ -785,14 +790,14 @@ each_pair §œ each §Œ•®•§•Í•¢•π§«§π°£
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
-#@since 1.9.0
+#@since 1.8.7
 --- each_key -> Enumerable::Enumerator
 #@end
 
 •œ•√•∑•Â§Œ•≠°º§Ú∞˙øÙ§»§∑§∆•÷•Ì•√•Ø§Ú…æ≤¡§∑§ﬁ§π°£
 
 »ø…¸§Œ∫›§Œ…æ≤¡ΩÁΩ¯§œ…‘ƒÍ§«§π°£
-#@if (version >= "1.9.0")
+#@since 1.8.7
 •÷•Ì•√•Ø…’§≠§ŒæÏπÁself§Ú°¢
 Ãµ§∑§«∏∆§–§Ï§øæÏπÁ[[c:Enumerable::Enumerator]]§Ú ÷§∑§ﬁ§π°£
 #@else
@@ -803,23 +808,23 @@ self §Ú ÷§∑§ﬁ§π°£
   #=> :a
       :b
        
-#@if (version >= "1.9.0")
+#@since 1.8.7
   p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
 #@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
 --- each_value {|value| ... } -> self
-#@if (version >= "1.9.0")
+#@since 1.8.7
 --- each_value -> Enumerable::Enumerator
 #@end
 
 •œ•√•∑•Â§Œ√Õ§Ú∞˙øÙ§»§∑§∆•÷•Ì•√•Ø§Ú…æ≤¡§∑§ﬁ§π°£
 
 »ø…¸§Œ∫›§Œ…æ≤¡ΩÁΩ¯§œ…‘ƒÍ§«§π°£
-#@if (version >= "1.9.0")
+#@since 1.8.7
 •÷•Ì•√•Ø…’§≠§ŒæÏπÁself§Ú°¢
-Ãµ§∑§«∏∆§–§Ï§øæÏπÁ[[c:Enumerable::Enumerator]]§Ú ÷§∑§ﬁ§π°£
+Ãµ§∑§«∏∆§–§Ï§øæÏπÁ [[c:Enumerable::Enumerator]] §Ú ÷§∑§ﬁ§π°£
 #@else
 self §Ú ÷§∑§ﬁ§π°£
 #@end
@@ -828,7 +833,7 @@ self §Ú ÷§∑§ﬁ§π°£
   #=> 1
       2
   
-#@if (version >= "1.9.0")
+#@since 1.8.7
   p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
 #@end
 
@@ -1035,7 +1040,7 @@ other§¨•œ•√•∑•Â§«§œ§ §§æÏπÁ°¢other§Œ•·•Ω•√•…to_hash§Úª»§√§∆∞≈Ã€§Œ —¥π§ÚªÓ§ﬂ§ﬁ§π°
 
 --- ==(other) -> bool
 --- ===(other) -> bool
-#@since 1.9.0
+#@since 1.8.7
 --- eql?(other) -> bool
 #@end
 
@@ -1053,7 +1058,7 @@ other§¨•œ•√•∑•Â§«§œ§ §§æÏπÁ°¢other§Œ•·•Ω•√•…to_hash§Úª»§√§∆∞≈Ã€§Œ —¥π§ÚªÓ§ﬂ§ﬁ§π°
 
 @see [[m:Hash#equal?]]
 
-#@if(version < "1.9.0")
+#@until 1.8.7
 --- eql?(other) -> bool
 #@end
 --- equal?(other) -> bool
@@ -1062,7 +1067,7 @@ other§¨•œ•√•∑•Â§«§œ§ §§æÏπÁ°¢other§Œ•·•Ω•√•…to_hash§Úª»§√§∆∞≈Ã€§Œ —¥π§ÚªÓ§ﬂ§ﬁ§π°
 
 @param other º´ø»§»»Ê≥”§∑§ø§§ Hash •™•÷•∏•ß•Ø•»§ÚªÿƒÍ§∑§ﬁ§π°£
 
-#@if(version < "1.9.0")
+#@until 1.8.7
  p({}.eql?({}))     #=> false 
  a = {}
  p a.eql?(a)        #=> true
@@ -1152,6 +1157,9 @@ matches. See also Array#rassoc.
 
 #@end
 
+#@since 1.8.7
+--- select                        -> Enumerable::Enumerator
+#@end
 --- select {|key, value| block}   -> Hash
 #@todo
 

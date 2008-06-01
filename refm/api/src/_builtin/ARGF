@@ -335,6 +335,20 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
 
 @see [[m:IO#each_byte]]
 
+#@since 1.8.7
+--- each_char{|c| ... }     -> self
+--- chars{|c| ... }         -> self
+--- each_char               -> Enumerable::Enumerator
+--- chars                   -> Enumerable::Enumerator
+#@todo
+
+Calls the given block once for each character in <em>ios</em>,
+passing the character as an argument. The stream must be opened for
+reading or an <code>IOError</code> will be raised.  Multibyte
+characters are dealt with according to $KCODE.
+
+#@end
+
 --- eof -> bool
 --- eof? -> bool
 現在開いているファイルがeofに達したらtrueを返します。そうでない場合はfalseを返します。
@@ -681,6 +695,45 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します。
   です。
 
 @see [[m:ARGF.file]]
+
+#@since 1.8.7
+--- bytes    -> Enumerable::Enumerator
+
+自身を 1 バイトずつ整数としてイテレートするような
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+
+   ARGF.bytes.to_a        #=> [104, 101, 108, 108, 111]
+
+--- lines(rs = $/)    -> Enumerable::Enumerator
+
+自身を 1 行ずつイテレートするような
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+
+テキスト読み込みメソッドとして動作します。
+
+@param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
+          空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+
+   ARGF.lines.to_a   #=> ["foo\n", "bar\n"]
+
+@see [[m:$/]]
+
+--- getbyte   -> Integer | nil
+
+自身から 1 バイトを読み込み整数として返します。
+既に EOF に達していれば nil を返します。
+
+   ARGF.getbyte   #=> 84
+   ARGF.getbyte   #=> 104
+
+--- readbyte   -> Integer
+
+自身から 1 バイトを読み込み整数として返します。
+既に EOF に達していれば EOFError が発生します。
+
+@raise EOFError 既に EOF に達している場合に発生します。
+
+#@end
 
 #@if (version >= "1.9.0")
 --- readpartial(length, str = nil)

@@ -308,3 +308,39 @@ self > max であれば何もしません。
 @return      self を返します。
 
 @see [[m:Integer#downto]], [[m:Integer#step]], [[m:Integer#times]]
+
+#@since 1.8.7
+--- even? -> bool
+#@todo
+
+Returns true if int is an even number.
+
+--- integer? -> true
+#@todo
+
+Always returns true.
+
+--- odd? -> true | false
+#@todo
+
+Returns true if int is an odd number.
+
+--- ord    -> Integer
+#@todo
+
+Returns the int itself.
+
+   ?a.ord    #=> 97
+
+This method is intended for compatibility to character constant
+in Ruby 1.9. For example, ?a.ord returns 97 both in 1.8 and 1.9.
+
+--- pred    -> Integer
+#@todo
+
+Returns the Integer equal to int - 1.
+
+   1.pred      #=> 0
+   (-1).pred   #=> -2
+
+#@end

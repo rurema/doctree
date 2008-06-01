@@ -241,6 +241,10 @@ IO.new, IO.for_fd はブロックを受け付けません。
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
+#@since 1.8.7
+--- foreach                                 -> Enumerable::Enumerator
+#@end
+#@todo 
 
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
 path のオープンに成功すれば nil を返します。
@@ -1390,7 +1394,7 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 @raise Errno::EXXX [[man:write(2)]] が失敗した場合に発生します。
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 --- bytes    -> Enumerable::Enumerator
 
 自身を 1 バイトずつ整数としてイテレートするような
@@ -1429,6 +1433,23 @@ IO から1バイトを読み込み整数として返します。
 
 @raise EOFError 既に EOF に達している場合に発生します。
 
+--- each_char{|c| ... }     -> self
+--- chars{|c| ... }         -> self
+--- each_char               -> Enumerable::Enumerator
+--- chars                   -> Enumerable::Enumerator
+#@todo
+
+Calls the given block once for each character in <em>ios</em>,
+passing the character as an argument. The stream must be opened for
+reading or an <code>IOError</code> will be raised.  Multibyte
+characters are dealt with according to $KCODE.
+
+  f = File.new("testfile")
+  f.each_char {|c| print c, ' ' }   #=> #<File:testfile>
+
+#@end
+
+#@since 1.9.0
 --- close_on_exec=(bool)    -> bool
 #@todo
 

@@ -224,7 +224,7 @@ true を返します。そうでない場合に false を返します。
 
 自身の [[m:Object#object_id]] を返します。これは [[c:Object]] クラスで定義されたデフォルトの動作です。
 
-#@since 1.9.0
+#@since 1.8.7
 --- name    -> String
 #@todo
 

@@ -1797,3 +1797,22 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 
 @see [[m:Module#method_undefined]],[[m:Object#singleton_method_added]],[[m:Object#singleton_method_removed]]
 #@end
+
+#@since 1.8.7
+--- instance_exec(arg...) {|var...| block }                       -> object
+#@todo
+
+Executes the given block within the context of the receiver (obj).
+In order to set the context, the variable self is set to obj
+while the code is executing, giving the code access to obj's
+instance variables. Arguments are passed as block parameters.
+
+   class KlassWithSecret
+     def initialize
+       @secret = 99
+     end
+   end
+   k = KlassWithSecret.new
+   k.instance_exec(5) {|x| @secret+x }   #=> 104
+
+#@end
