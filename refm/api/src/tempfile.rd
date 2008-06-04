@@ -17,8 +17,9 @@ require tmpdir
 
 == Class Methods
 
---- new(basename, tempdir = Dir::tmpdir)
---- open(basename, tempdir = Dir::tmpdir)
+--- new(basename, tempdir = Dir::tmpdir) -> Tempfile
+--- open(basename, tempdir = Dir::tmpdir) -> Tempfile
+--- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> nil
 
 #@since 1.8.7
 テンポラリファイルを作成し、それを表す Tempfile オブジェクトを生成して返します。
@@ -28,6 +29,8 @@ require tmpdir
 "basename.pid.n" というファイル名で
 テンポラリファイルを作成し、インスタンスを返します。
 #@end
+ ブロックを指定して呼び出した場合は、Tempfile オブジェクトを引数として ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に クローズされ、nilをかえします。
+
 
 @param basename ファイル名のプレフィクスを文字列で指定します。
 #@since 1.8.7
@@ -48,9 +51,21 @@ require tmpdir
    p t2.path                           #=> "/tmp/t20080518-6961-xy2wvx-0.xml"
 #@end
 
+例２：ブロックを与えた場合
+  require 'tempfile'
+
+  path = nil
+  Tempfile.open("temp"){|fp|
+    fp.puts "hoge"
+    path = fp.path
+  }
+
+  system("cat #{path}")
+
+
 == Instance Methods
 
---- close(real = false)
+--- close(real = false) -> nil
 
 テンポラリファイルをクローズします。
 real が偽ならば、テンポラリファイルはGCによって削除されます。
@@ -62,7 +77,7 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
   tf.close
   p FileTest.exist?(tf.path) # => true
 
---- open
+--- open -> self
 
 クローズしたテンポラリファイルを再オープンします。
 "r+" でオープンされるので、クローズ前の内容を再度読む
@@ -75,7 +90,7 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
   tf.open
   p tf.gets # => "foobar,hoge\n"
 
---- path
+--- path -> String
 
 テンポラリファイルのパス名を返します。
 
@@ -83,8 +98,8 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
   p tf.path # => "/tmp/hoo.10596.0" 
 
 #@since 1.6.8
---- length
---- size
+--- length -> Integer
+--- size -> Integer
 テンポラリファイルのサイズを返します。
 
   tf = Tempfile.new("foo")
@@ -94,15 +109,19 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
   p tf.size # => 0
 #@end
 
---- close!
+#@since 1.9.0
+--- close! -> nil
+#@else
+--- close! -> self
+#@end
 テンポラリファイルをクローズし、すぐに削除します。
 
   tf = Tempfile.open("bar")
   tf.close!
   p FileTest.exist?(tf.path) # => false
 
---- delete
---- unlink
+--- delete -> self
+--- unlink -> self
 
 テンポラリファイルをクローズせずに、削除します。
 UNIXライクなシステムでは、
