@@ -1,71 +1,61 @@
 = オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル
-* ((<Ruby オフィシャルサイト|URL:http://www.ruby-lang.org/ja/>))
-* version 1.6 〜 1.9 対応リファレンス
-* 原著：まつもとゆきひろ
-* 最新版URL: ((<URL:http://www.ruby-lang.org/ja/man/>))
-* 一括ダウンロード: ((<マニュアルダウンロード>))
 
-== 執筆者募集中
-
-このリファレンスをよりよいものにするために
-随時((<執筆者募集>))中です。あなたの参加を待ってます。
-
-((<Rubyist Magazine 0013号巻頭言 リファレンスマニュアル整備について|URL:http://jp.rubyist.net/magazine/?0013-ForeWord>)) (((<ML|URL:http://www.fdiary.net/ml/ruby-reference-manual/list/1-100>)))
-
-== リファレンスマニュアルを使う前に
-((<参考文献・サイト>))で目的にあった本・サイトに目を通しておくといいでしょう。
+ * Ruby オフィシャルサイト [[url:http://www.ruby-lang.org/ja/]]
+ * version 1.8 対応リファレンス
+ * 原著：まつもとゆきひろ
+ * 最新版URL: [[url:http://www.ruby-lang.org/ja/man/]]
 
 == 目次
-* ((<はじめに>))
-* ((<コマンド>))
-  * ((<Rubyの起動>))
-    * ((<Rubyの起動/コマンドラインオプション>))
-    * ((<Rubyの起動/インタプリタ行の解釈>))
-  * ((<環境変数>))
-* Ruby 言語仕様
-  * ((<オブジェクト>))
-  * ((<クラス>))
-  * ((<実行>))
-  * ((<終了処理>))
-  * ((<スレッド|Ruby スレッド>))
-  * ((<セキュリティモデル>))
-  * ((<正規表現>))
-* ((<Rubyの文法>))
-  * ((<字句構造>))
-  * ((<プログラム>))
-  * ((<変数と定数>))
-  * ((<リテラル>))
-  * ((<演算子式>))
-  * ((<制御構造／例外処理|制御構造>))
-  * ((<メソッド呼び出し>))
-  * ((<クラス／メソッドの定義>))
-* 組み込みライブラリ
-  * ((<組み込み関数>))
-  * ((<組み込み変数>))
-  * ((<組み込み定数>))
-  * ((<組み込みクラス／モジュール／例外クラス>))
-* ((<添付ライブラリ>))
-* ((<Ruby変更履歴>))
-  * ((<ruby 1.8.5 feature>))
-  * ((<ruby 1.9 feature>))
-* 付録
-# 使い方
-  * ((<Ruby FAQ>))
-  * ((<Rubyの落とし穴>))
-  * ((<Rubyで使われる記号の意味>))
-  * ((<packテンプレート文字列>))
-  * ((<sprintfフォーマット>))
-  * ((<Ruby が動作するプラットフォーム>))
-  * ((<Ruby用語集>))
-# 専門的
-  * ((<疑似BNFによるRubyの文法>))
-  * ((<Marshalフォーマット>))
-# マニュアル
-  * ((<Rubyに関する書籍>))
-  * ((<リファレンスマニュアル検索ツール ReFe|ReFe>))
-  * ((<マニュアルダウンロード>))
-  * ((<マニュアル更新履歴MLアーカイブ|URL:http://www.atdot.net/mla/mandiff@ruby/>))
-* ((<参考文献・サイト>))
-* ((<索引|method>))
-* ((<機能別索引>))
-* ((<配布条件>))
+
+ * [[spec:intro]]
+ * [[spec:commands]]
+ * [[spec:rubycmd]]
+ * [[spec:envvars]]
+
+=== Ruby 言語仕様
+  * [[spec:object]]
+  * [[spec:class]]
+  * [[spec:eval]]
+  * [[spec:terminate]]
+  * [[spec:thread]]
+  * [[spec:safelevel]]
+  * [[spec:regexp]]
+  * [[spec:lexical]]
+  * [[spec:program]]
+  * [[spec:variables]]
+  * [[spec:literal]]
+  * [[spec:operator]]
+  * [[spec:control]] 
+  * [[spec:call]] 
+  * [[spec:def]] 
+
+=== 組み込みライブラリ
+  * [[lib:_builtin]]
+
+=== 添付ライブラリ
+  * [[lib:/]]
+
+#@#* [[c:Ruby変更履歴]]
+#@#  * ((<ruby 1.8.5 feature>))
+#@#  * ((<ruby 1.9 feature>))
+#@#* 付録
+#@##@# 使い方
+#@#  * [[unknown:Ruby FAQ]]
+#@#  * [[c:Rubyの落とし穴]]
+#@#  * [[c:Rubyで使われる記号の意味]]
+#@#  * [[unknown:packテンプレート文字列]]
+#@#  * [[unknown:sprintfフォーマット]]
+#@#  * [[unknown:Ruby が動作するプラットフォーム]]
+#@#  * [[c:Ruby用語集]]
+#@##@# 専門的
+#@#  * [[unknown:疑似BNFによるRubyの文法]]
+#@#  * [[c:Marshalフォーマット]]
+#@##@# マニュアル
+#@#  * [[c:Rubyに関する書籍]]
+#@#  * [[unknown:リファレンスマニュアル検索ツール ReFe|ReFe]]
+#@#  * [[unknown:マニュアルダウンロード]]
+#@#  * [[unknown:マニュアル更新履歴MLアーカイブ|URL:http://www.atdot.net/mla/mandiff@ruby/]]
+#@#* [[unknown:参考文献・サイト]]
+#@#* [[unknown:索引|method]]
+#@#* [[unknown:機能別索引]]
+#@#* [[unknown:配布条件]]
