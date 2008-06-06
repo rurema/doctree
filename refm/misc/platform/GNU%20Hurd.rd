@@ -1,5 +1,0 @@
-###nonref
-
-= GNU Hurd
-
---> ((<GNU>))
