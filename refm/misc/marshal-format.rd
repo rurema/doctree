@@ -139,7 +139,7 @@
     # => ["C", ":", 8, "Foo", "\"", 8, "foo"]
                               ^^^ (or '/', '[', '{')
 
-  例 2: インスタンス変数あり(((<Marshalフォーマット/instance variable>)) 参照)
+  例 2: インスタンス変数あり([[unknown:Marshalフォーマット/instance variable]] 参照)
 
     class Foo < String # (or Regexp, Array, Hash)
       def initialize(obj)
@@ -152,7 +152,7 @@
 
 
   上記以外では、'o' になる。これは、実装上内部構造が異なるため
-  (((<Marshalフォーマット/Object>)) 参照)
+  ([[unknown:Marshalフォーマット/Object]] 参照)
 
   例:
     class Foo
@@ -241,9 +241,9 @@
     p Marshal.dump(-1.0/0).unpack("x2 a c a*") # => ["f", 9, "-inf"]
     p Marshal.dump(-0.0).unpack("x2 a c a*")   # => ["f", 9, "-0"]
 
-  ((-((<ruby 1.7 feature>)): version 1.6 では、nan などの出力は 
-  ((<sprintf(3)|manual page>)) に依存している。読み込みは現在のとこ
-  ろ "nan", "inf", "-inf" 以外は ((<strtod(3)|manual page>)) に依存
+  ((-((<ruby 1.7 feature>)): version 1.6 では、nan などの出力は
+  [[man:sprintf(3)]] に依存している。読み込みは現在のとこ
+  ろ "nan", "inf", "-inf" 以外は [[man:strtod(3)]] に依存
   している。-> 1.7 では、sprintf(3)/strtod(3) への依存はなくなった-))
 
 : Bignum
@@ -273,7 +273,7 @@
 
     | '/' | 長さ(Fixnum形式) | ソース文字列 | オプション |
 
-  オプションは、((<Regexp/options>))の結果 + 漢字コードのフラグ値。
+  オプションは、[[m:Regexp#options]]の結果 + 漢字コードのフラグ値。
 
   例:
     p Marshal.dump(/(hoge)*/).unpack("x2 a c a7 c")
@@ -438,7 +438,7 @@
     | インスタンス変数名(Symbol) のdump(n) | 値(n) |
 
   Object のインスタンスはそれ自身がインスタンス変数の構造を持つので
-  別形式で dump される (((<Marshalフォーマット/Object>)) 参照)
+  別形式で dump される ([[unknown:Marshalフォーマット/Object]] 参照)
   この形式は、Array や String のインスタンス用。
 
   例:
@@ -449,7 +449,7 @@
 
   クラスやモジュール(Class/Module のインスタンス)は、
   インスタンス変数の情報を dump しない。
-  (((<Marshalフォーマット/"Class/Module">)) 参照)
+  ([[unknown:Marshalフォーマット/"Class/Module"]] 参照)
 
 : link
 
@@ -513,7 +513,7 @@
 : <= 1.6.1
     * Range が終端を含むかどうかのフラグがダンプ時に保存されない
 
-以下は、テストスクリプトです(要 ((<RAA:RubyUnit>)))
+以下は、テストスクリプトです(要 [[c:RAA:RubyUnit]])
 
     # test for Marshal for ruby version 1.6
     require 'rubyunit'

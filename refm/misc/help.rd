@@ -1,25 +1,25 @@
 = このマニュアルのFAQ
 
 * Manualの一括ダウンロードをしたいのですがどうすれば良いですか？
-  * ((<マニュアルダウンロード>))を参照してください
+  * [[unknown:マニュアルダウンロード]]を参照してください
 
 * メソッド名を元にクラスのページを探したいのですが
-  * ((<メソッド索引|method>))または各ページの上にある検索をお使いください。
-    ((<ReFe>))もお役に立つことでしょう。
+  * [[unknown:メソッド索引|method]]または各ページの上にある検索をお使いください。
+    [[c:ReFe]]もお役に立つことでしょう。
 
 * 間違いを見付けたのですがどこに報告すれば良いですか？
-  * なおしてください。((<執筆者募集>))
+  * なおしてください。[[unknown:執筆者募集]]
 
 * リンクのうしろにある(4d)とか(1h)とか(15m)はなんですか？
   * それぞれ4日前、1時間前、15分前に更新されたページであることを示しています。
 
 * RD ってなんですか？
-  * ((<RD>))を参照してください
+  * [[c:RD]]を参照してください
 
 * Rubyってなんですか？
-  * ((<Ruby Home Page|URL:http://www.ruby-lang.org/ja/>))を参照してください
+  * [[unknown:Ruby Home Page|URL:http://www.ruby-lang.org/ja/]]を参照してください
 
 * もっと初心者向けの簡単なマニュアルが読みたいのですが
-  * ((<チュートリアル|URL:http://www.ruby-lang.org/ja/20020310.html>))
-    や((<ユーザーズガイド|URL:http://www.ruby-lang.org/ja/uguide/uguide00.html>))
+  * [[unknown:チュートリアル|URL:http://www.ruby-lang.org/ja/20020310.html]]
+    や[[unknown:ユーザーズガイド|URL:http://www.ruby-lang.org/ja/uguide/uguide00.html]]
     がお望みのものかもしれません

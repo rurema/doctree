@@ -1,20 +1,20 @@
 = ReFe
 
 ReFeについては
-((<ReFe|URL:http://i.loveruby.net/ja/prog/refe.html>))
+[[unknown:ReFe|URL:http://i.loveruby.net/ja/prog/refe.html]]
 をご覧ください。
 
 == Gems版
 
 Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
-(((<ruby-list:41478>)))
+([[unknown:ruby-list:41478]])
 
 == Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
 最新 Ruby リファレンスマニュアル用に ReFe のデータを構築するには以下の
 手順で行います。(詳細は ReFe の README を参照してください)
 
-(1) ((<URL:http://i.loveruby.net/ja/prog/refe.html>)) から ReFe の基本セット
+(1) [[URL:http://i.loveruby.net/ja/prog/refe.html]] から ReFe の基本セット
     を取って来てインストールします。
 
         tar xvzf refe-x.x.x.tar.gz
@@ -24,7 +24,7 @@ Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
         (必要に応じて root になってください)
         ruby setup.rb install
 
-(2) ((<URL:http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz>))
+(2) [[URL:http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz]]
     にあるのが最新のリファレンスマニュアルの tarball です。
     これを取得します。
 
@@ -56,7 +56,7 @@ Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
 
 == ReFe の Emacs インタフェースのインストール方法
 
-(1) ((<refe.el|URL:http://ns103.net/~arai/ruby/refe.el>)) を取って来て
+(1) refe.el を取って来て
     /usr/local/share/emacs/site-lisp などの Emacs Lisp ライブラリの置き場所
     に置きます。
 
