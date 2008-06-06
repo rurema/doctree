@@ -1,0 +1,3 @@
+= WindowsCE
+
+--> ((<mswince>))
