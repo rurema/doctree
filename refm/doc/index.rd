@@ -7,27 +7,27 @@
 
 == 目次
 
- * [[spec:intro]]
- * [[spec:commands]]
- * [[spec:rubycmd]]
- * [[spec:envvars]]
+ * [[d:spec/intro]]
+ * [[d:spec/commands]]
+ * [[d:spec/rubycmd]]
+ * [[d:spec/envvars]]
 
 === Ruby 言語仕様
-  * [[spec:object]]
-  * [[spec:class]]
-  * [[spec:eval]]
-  * [[spec:terminate]]
-  * [[spec:thread]]
-  * [[spec:safelevel]]
-  * [[spec:regexp]]
-  * [[spec:lexical]]
-  * [[spec:program]]
-  * [[spec:variables]]
-  * [[spec:literal]]
-  * [[spec:operator]]
-  * [[spec:control]]
-  * [[spec:call]]
-  * [[spec:def]]
+  * [[d:spec/object]]
+  * [[d:spec/class]]
+  * [[d:spec/eval]]
+  * [[d:spec/terminate]]
+  * [[d:spec/thread]]
+  * [[d:spec/safelevel]]
+  * [[d:spec/regexp]]
+  * [[d:spec/lexical]]
+  * [[d:spec/program]]
+  * [[d:spec/variables]]
+  * [[d:spec/literal]]
+  * [[d:spec/operator]]
+  * [[d:spec/control]]
+  * [[d:spec/call]]
+  * [[d:spec/def]]
 
 === 組み込みライブラリ
   * [[lib:_builtin]]
@@ -49,9 +49,8 @@
 #@#  * [[unknown:Ruby が動作するプラットフォーム]]
   * [[d:grossary]]
   * [[d:help]]
-  * [[d;
 #@##@# 専門的
-  * [[spec:BNF]]
+  * [[d:spec/bnf]]
 #@#  * [[c:Marshalフォーマット]]
 #@##@# マニュアル
 #@#  * [[c:Rubyに関する書籍]]
