@@ -16,7 +16,7 @@ _builtin/Dir                    sheepman        done
 _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
 _builtin/Encoding		yugui
-_builtin/Enumerable             aamine          done
+_builtin/Enumerable                             done
 _builtin/Exception              sheepman        done
 _builtin/FalseClass             yamane          done
 _builtin/Fiber                  sheepman        done
@@ -68,7 +68,7 @@ _builtin/SecurityError          snoozer05       done
 _builtin/Signal                 sheepman        done
 _builtin/SignalException        snoozer05       done
 _builtin/StandardError          snoozer05       done
-_builtin/String                 aamine          done
+_builtin/String                                 done
 _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            okkez           done
 _builtin/Symbol                 eklerni         done
@@ -135,7 +135,7 @@ eregex
 etc
 expect
 fcntl
-fileutils                       aamine
+fileutils
 final
 finalize
 find
@@ -168,11 +168,11 @@ monitor
 mutex_m
 net/ftp
 net/ftptls
-net/http                        aamine
-net/https                       aamine
+net/http
+net/https
 net/imap
-net/pop                         aamine
-net/smtp                        aamine
+net/pop
+net/smtp
 net/telnet
 net/telnets
 nkf
@@ -195,7 +195,7 @@ profile
 profiler
 pstore
 pty
-racc/parser                     aamine
+racc/parser
 rational			yugui
 rbconfig
 readbytes
@@ -237,7 +237,7 @@ rexml/xpath
 rexml/xpath_parser
 rinda/rinda                     sheepman
 rinda/tuplespace                sheepman
-ripper                          aamine
+ripper
 rss
 rubygems                        okkez
 rubyunit
@@ -252,7 +252,7 @@ singleton                       snoozer05       done
 soap
 socket
 stringio                        sheepman        done
-strscan                         aamine
+strscan
 sync
 syslog
 tempfile                        kouya           done
