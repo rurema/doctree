@@ -108,28 +108,121 @@ Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
   dezstr = dez.finish
   p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
 
---- flush([flush])
-#@todo
+--- flush(flush = Zlib::SYNC_FLUSH) -> String
 
 deflate('', flush) と同じです。flush が
-省略された時は [[unknown:Zlib::SYNC_FLUSH|Zlib/Zlib::SYNC_FLUSH]] が使用されます。
+省略された時は [[m:Zlib::SYNC_FLUSH]] が使用されます。
 このメソッドはスクリプトの可読性のために提供されています。
 
+@param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] などを指定します。
+
+  require 'zlib'
+
+  def case1
+    dez = Zlib::Deflate.new
+    comp_str = dez.deflate('hoge')
+    comp_str << dez.deflate(' fuga')
+    comp_str << dez.deflate(' end', Zlib::FINISH)
+    dez.close
+    p comp_str
+    p Zlib::Inflate.inflate(comp_str)
+  end
+
+  def case2
+    dez = Zlib::Deflate.new
+    comp_str = dez.deflate('hoge')
+    comp_str << dez.flush
+    comp_str << dez.deflate(' fuga')
+    comp_str << dez.flush
+    comp_str << dez.deflate(' end', Zlib::FINISH)
+    dez.close
+    p comp_str
+    p Zlib::Inflate.inflate(comp_str)
+  end
+
+  case1
+  case2
+  #=> "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
+  #=> "hoge fuga end"
+  #=> "x\234\312\310OO\005\000\000\000\377\377RH+MO\004\000\000\000\377\377SH\315K\001\000!\251\004\276"
+  #=> "hoge fuga end"
+
 --- finish -> String
-#@todo
 
 圧縮ストリームを終了します。deflate('', Zlib::FINISH) と同じです。
 
---- params(level, strategy)
-#@todo
+  dez = Zlib::Deflate.new
+  dez << "123" * 5 << "ugougo" << "123" * 5 << "hogehoge"
+  dezstr = dez.finish
+  p dezstr #=> "x\2343426DB\245\351\371@d\210*\230\221\237\236\n\302\000\356\275\v\271"
+
+--- params(level, strategy) -> nil
 
 圧縮ストリームの設定を変更します。詳しくは zlib.h を
 参照して下さい。設定の変更に伴うストリームからの出力は
 出力バッファに保存されます。
 
---- set_dictionary(string)
-#@todo
+@param level 0-9の範囲の整数, またはZlib::DEFAULT_COMPRESSIONを指定します。詳細はzlib.hを参照してください。
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。詳細はzlib.h を参照してください。　
+
+  require 'zlib'
+
+  def case1
+    dez = Zlib::Deflate.new
+    comp_str = dez.deflate('hoge'*5);
+    comp_str << dez.deflate('0'*80)
+    comp_str << dez.finish
+    p comp_str
+    p Zlib::Inflate.inflate(comp_str)
+  end
+
+  def case2
+    dez = Zlib::Deflate.new
+    comp_str = dez.deflate('hoge'*5);
+    dez.params(Zlib::BEST_COMPRESSION, Zlib::HUFFMAN_ONLY)
+    comp_str << dez.deflate('0'*80)
+    comp_str << dez.finish
+    p comp_str
+    p Zlib::Inflate.inflate(comp_str)
+  end
+
+  case1
+  case2
+  #=> "x\234\313\310OO\315@\303\006T\006\000D\367\0270"
+  #=> "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  #=> "x\234\005\3011\r\000\000\f\003 K\230j\326\257\376\277Aw\351.\335\245\273t\027\000\000\000\000\000\000\000\000\000\200\aD\367\0270"
+  #=> "hogehogehogehogehoge00000000000000000000000000000000000000000000000000000000000000000000000000000000"
+
+
+--- set_dictionary(string) -> String
 
 圧縮に用いる辞書を指定します。string を返します。
 このメソッドは [[m:Zlib::Deflate.new]], [[m:Zlib::ZStream#reset]]
 を呼び出した直後にのみ有効です。詳細は zlib.h を参照して下さい。
+
+@param string 辞書に用いる文字列を指定します。詳しくはzlib.hを参照してください。
+@return 辞書に用いる文字列を返します。 
+
+  def case1(str)
+    dez = Zlib::Deflate.new
+    comp_str =  dez.deflate(str)
+    comp_str << dez.finish
+    comp_str.size
+  end
+
+  def case2(str, dict)
+    dez = Zlib::Deflate.new
+    p dez.set_dictionary(dict)
+    comp_str = dez.deflate(str)
+    comp_str << dez.finish
+    comp_str.size
+  end
+
+  i = 10
+  dict = 'hoge_fuga_ugougo'
+  sset = [ dict, 'taeagbamike', 'ugotagma', 'fugebogya' ]
+  g = [ 0, 1, 1, 1, 0, 0, 0, 3, 3, 3, 0, 0, 1, 1, 0, 0, 0, 1, 2, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 0]
+  str = (1..i).collect{|m| t = rand(g.size); sset.at(g[t])}.join("")
+
+  printf "%d normal:%d, dict:%d\n", i, case1(str), case2(str, dict)
+
