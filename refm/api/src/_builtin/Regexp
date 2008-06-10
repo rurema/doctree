@@ -1,6 +1,6 @@
 = class Regexp < Object
 
-[[unknown:正規表現]]のクラス。正規表現のリテラルはスラッシュで囲んだ形式
+正規表現のクラス。正規表現のリテラルはスラッシュで囲んだ形式
 で記述します。
 
   /^this is regexp/
@@ -12,6 +12,8 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
   rp1 = Regexp.new("^this is regexp")
   p rp1 =~ str           #=> 0
   p Regexp.last_match[0] #=> "this is regexp"
+
+[[d:spec/regexp]] や [[ref:d:spec/literal#regexp]] も参照してください。
 
 == Class Methods
 
@@ -323,36 +325,8 @@ true を返します。
 #@since 1.9.0
 位置 pos から
 #@end
-自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。マッチしなかった場合 nil を返します。
-
-正規表現にマッチした部分文字列だけが必要な場合に、
-
-  bar = /foo(.*)baz/.match("foobarbaz").to_a[1]
-  
-  foo, bar, baz = /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3)
-
-のように使用できます。(to_a は、マッチに失敗した場合を考慮しています。)
-
-#@since 1.8.0
-1.8 の多重代入の規則では右辺が配列でない一つのオブジェクトで to_a
-メソッドを持つ場合、右辺に * を付けることで to_a の結果を利用でき
-ます。つまり、上記は以下のように書くことができます。(ここでの
-`_' は、[[m:$&]] を捨てるために適当に選んだ変数名)
-
-  _, foo, bar, baz = */(foo)(bar)(baz)/.match("foobarbaz")
-  p [foo, bar, baz]
-
-  # => ["foo", "bar", "baz"]
-
-このような用途に [[m:MatchData#captures]] が使
-えると考えるかも知れませんが、captures では、マッチに失敗した場合、
-nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生して
-しまいます。
-
-  foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
-
-  # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
-#@end
+自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。
+マッチしなかった場合 nil を返します。
 
 #@since 1.9.0
 省略可能な第二引数 pos を指定すると、マッチの開始位置を pos から行
@@ -387,6 +361,36 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
   p reg.match("bar")    #=> nil
 
   p /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3) #=> ["foo", "bar", "baz"]
+
+==== 便利な使いかた
+正規表現にマッチした部分文字列だけが必要な場合に、
+
+  bar = /foo(.*)baz/.match("foobarbaz").to_a[1]
+  
+  foo, bar, baz = /(foo)(bar)(baz)/.match("foobarbaz").to_a.values_at(1,2,3)
+
+のように使用できます。(to_a は、マッチに失敗した場合を考慮しています。)
+
+#@since 1.8.0
+多重代入の規則では右辺が配列でない一つのオブジェクトで to_a
+メソッドを持つ場合、右辺に * を付けることで to_a の結果を利用でき
+ます。つまり、上記は以下のように書くことができます。(ここでの
+`_' は、[[m:$&]] を捨てるために適当に選んだ変数名)
+
+  _, foo, bar, baz = */(foo)(bar)(baz)/.match("foobarbaz")
+  p [foo, bar, baz]
+
+  # => ["foo", "bar", "baz"]
+
+このような用途に [[m:MatchData#captures]] が使
+えると考えるかも知れませんが、captures では、マッチに失敗した場合、
+nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生して
+しまいます。
+
+  foo, bar, baz = /(foo)(bar)(baz)/.match("foobar").captures
+
+  # => -:1: undefined method `captures' for nil:NilClass (NoMethodError)
+#@end
 
 --- options -> Integer
 
