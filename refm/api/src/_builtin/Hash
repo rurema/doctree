@@ -41,8 +41,10 @@ include Enumerable
 #@since 1.9.0
 --- try_convert(obj) -> Hash | nil
 
-Try to convert obj into a hash, using to_hash method. Returns
-converted hash or nil if obj cannot be converted for any reason.
+to_hash メソッドを用いて obj をハッシュに変換しようとします。
+
+何らかの理由で変換できないときには nil を返します。
+このメソッドは引数がハッシュであるかどうかを調べるために使えます。
 
    Hash.try_convert({1=>2})   # => {1=>2}
    Hash.try_convert("1=>2")   # => nil
@@ -1143,49 +1145,66 @@ key が見つからなかった場合は、nil を返します。
 @see [[m:Array#flatten]]
 
 --- rassoc(value) -> Array | nil
-#@todo
 
-Searches through the hash comparing obj with the value using ==. 
-Returns the first key-value pair (two elements array) that
-matches. See also Array#rassoc.
+ハッシュ内を検索して，引数 obj と 一致する値を探します。
+
+比較は == メソッドを使用して行われます。一致する値があれば，
+該当するキーとその値とを要素とするサイズ 2 の配列を返します。
+ない場合には nil を返します。
+
+@param value 探索する値。
 
    a = {1=> "one", 2 => "two", 3 => "three", "ii" => "two"}
    a.rassoc("two")    #=> [2, "two"]
    a.rassoc("four")   #=> nil
 
-@see [[m:Array#rassoc]]
+@see [[m:Hash#assoc]], [[m:Array#rassoc]]
 
 #@end
 
 #@since 1.8.7
 --- select                        -> Enumerable::Enumerator
 #@end
+#@since 1.9.0
 --- select {|key, value| block}   -> Hash
-#@todo
 
-Returns a new hash consisting of entries which the block returns
-true.
+key, value のペアについてブロックを評価し，真となるペアだけを含む
+ハッシュを生成して返します。
 
    h = { "a" => 100, "b" => 200, "c" => 300 }
    h.select {|k,v| k > "a"}  #=> {"b" => 200, "c" => 300}
    h.select {|k,v| v < 200}  #=> {"a" => 100}
 
---- to_s   -> String
---- inspect  -> String
-#@todo
+#@else
+--- select {|key, value| block}   -> Array
 
-Return the contents of this hash as a string.
+key, value のペアについてブロックを評価し、真となるペアだけを含む
+配列を生成して返します。
+
+生成される配列は、[key, value] を要素とする配列です。
+
+   h = { "a" => 100, "b" => 200, "c" => 300 }
+   h.select {|k,v| k > "a"}  #=> [["b", 200], ["c", 300]]
+   h.select {|k,v| v < 200}  #=> [["a", 100]]
+
+#@end
+
+--- to_s     -> String
+--- inspect  -> String
+
+ハッシュの内容を inspect によって文字列化して返します。
 
     h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
     h.to_s   #=> "{\"a\"=>100, \"c\"=>300, \"d\"=>400}"
 
 --- sort              -> Array
 --- sort{|a, b| ... } -> Array
-#@todo
 
-Converts hsh to a nested array of [ key, value ] arrays and
-sorts it, using Array#sort.
+ハッシュを [key, value] を要素とする配列の配列に変換して，それをソー
+トした配列を返します。
 
- h = { "a" => 20, "b" => 30, "c" => 10  }
- h.sort                       #=> [["a", 20], ["b", 30], ["c", 10]]
- h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
+  h = { "a" => 20, "b" => 30, "c" => 10  }
+  h.sort                       #=> [["a", 20], ["b", 30], ["c", 10]]
+  h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
+
+@see [[m:Array#sort]]
