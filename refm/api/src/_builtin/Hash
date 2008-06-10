@@ -1179,7 +1179,7 @@ key, value のペアについてブロックを評価し，真となるペアだけを含む
    h.select {|k,v| v < 200}  #=> {"a" => 100}
 
 #@else
---- select {|key, value| block}   -> Array
+--- select {|key, value| ... }   -> Array
 
 key, value のペアについてブロックを評価し、真となるペアだけを含む
 配列を生成して返します。
