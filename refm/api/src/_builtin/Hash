@@ -696,6 +696,9 @@ key に対応する値が存在しない時には nil を返します。
 @see [[m:Hash#delete_if]]
 
 --- reject {|key, value| ... } -> Hash
+#@since 1.8.7
+--- reject                     -> Enumerator::Enumerator
+#@end
 
 self を複製して、ブロックを評価した値が真になる要
 素を削除したハッシュを返します。
@@ -1166,7 +1169,7 @@ key が見つからなかった場合は、nil を返します。
 --- select                        -> Enumerable::Enumerator
 #@end
 #@since 1.9.0
---- select {|key, value| block}   -> Hash
+--- select {|key, value| ... }   -> Hash
 
 key, value のペアについてブロックを評価し，真となるペアだけを含む
 ハッシュを生成して返します。
