@@ -1,41 +1,36 @@
 = 制御構造
 
-  * [[unknown:制御構造/条件分岐]]
-    * [[unknown:制御構造/if]]
-    * [[unknown:制御構造/if 修飾子]]
-    * [[unknown:制御構造/unless]]
-    * [[unknown:制御構造/unless 修飾子]]
-    * [[unknown:制御構造/case]]
-  * [[unknown:制御構造/繰り返し]]
-    * [[unknown:制御構造/while]]
-    * [[unknown:制御構造/while 修飾子]]
-    * [[unknown:制御構造/until]]
-    * [[unknown:制御構造/until修飾子]]
-    * [[unknown:制御構造/for]]
-    * [[unknown:制御構造/break]]
-    * [[unknown:制御構造/next]]
-    * [[unknown:制御構造/redo]]
-    * [[unknown:制御構造/retry]]
-  * [[unknown:制御構造/例外処理]]
-    * [[unknown:制御構造/raise]]
-    * [[unknown:制御構造/begin]]
-    * [[unknown:制御構造/rescue修飾子]]
-  * [[unknown:制御構造/その他]]
-    * [[unknown:制御構造/return]]
-    * [[unknown:制御構造/BEGIN]]
-    * [[unknown:制御構造/END]]
+条件分岐:
+    * [[ref:if]]
+    * [[ref:unless]]
+    * [[ref:case]]
+繰り返し:
+    * [[ref:while]]
+    * [[ref:until]]
+    * [[ref:for]]
+    * [[ref:break]]
+    * [[ref:next]]
+    * [[ref:redo]]
+    * [[ref:retry]]
+例外処理:
+    * [[ref:raise]]
+    * [[ref:begin]]
+その他:
+    * [[ref:return]]
+    * [[ref:BEGIN]]
+    * [[ref:END]]
 
 Rubyでは(Cなどとは異なり)制御構造は式であって、何らかの値を返すものが
 あります(返さないものもあります。値を返さない式を代入式の右辺に置くと
 parse error になります)。
 
 RubyはC言語やPerlから引き継いだ制御構造を持ちますが、
-その他に[[unknown:メソッド呼び出し/ブロック付きメソッド呼び出し]]という
+その他に[[ref:d:spec/call#block]]という
 制御構造の抽象化を援助する機能があります。ブロック付きメソッド呼び出しは
 繰り返しを始めとする制御構造をクラス設計者が定義する事が出来るものです.
 
 == 条件分岐
-=== if
+===[a:if] if
 
 例:
 
@@ -91,7 +86,7 @@ Ruby では if を繋げるのは elsif であり、else if
 右辺の条件が成立する時に、左辺の式を評価してその結果を返します。
 条件が成立しなければ nil を返します。
 
-=== unless
+===[a:unless] unless
 
 例:
 
@@ -126,7 +121,7 @@ unless は if と反対で、条件式が偽の時に then 以下の
 右辺の条件が成立しない時に、左辺の式を評価してその結果を返します。
 条件が成立しなければ nil を返します。
 
-=== case
+===[a:case] case
 
 例:
 
@@ -225,7 +220,7 @@ nil を返します。
 
 == 繰り返し
 
-=== while
+===[a:while] while
 
 例:
 
@@ -278,7 +273,7 @@ while 修飾した式は値を返しません。
 また、引数を伴った break により while 修飾した式の戻り値を
 その値にすることもできます。
 
-=== until
+===[a:until] until
 
 例:
           until f.eof?
@@ -326,7 +321,7 @@ until 修飾した式は値を返しません。
 また、引数を伴った break により until 修飾した式の戻り値を
 その値にすることもできます。
 
-=== for
+===[a:for] for
 
 例:
 
@@ -388,7 +383,7 @@ for や each で配列要素を複数個ずつ取得しながらループすることは
           end
         end
 
-=== break
+===[a:break] break
 
 例:
 
@@ -418,7 +413,7 @@ break によりループを抜けた for やイテレータは nil
 を返します。((<ruby 1.7 feature>)): ただし、引数を指定した場合はループ
 の戻り値はその引数になります。
 
-=== next
+===[a:next] next
 
 例:
           # 空行を捨てるcat
@@ -434,14 +429,14 @@ break によりループを抜けた for やイテレータは nil
           next val              ruby 1.7 feature
 
 nextはもっとも内側のループの次の繰り返しにジャンプします。
-[[unknown:メソッド呼び出し/イテレータ]]では、[[unknown:メソッド呼び出し/yield]] 呼び出し
+イテレータでは、[[ref:d:spec/call#yield]] 呼び出し
 の脱出になります。
 
 next により抜けた yield 式は nil を返します。
 ((<ruby 1.7 feature>)): ただし、引数を指定した場合、yield 式の戻
 り値はその引数になります。
 
-=== redo
+===[a:redo] redo
 
 例:
 
@@ -453,7 +448,7 @@ next により抜けた yield 式は nil を返します。
 
 ループ条件のチェックを行なわず、現在の繰り返しをやり直します。
 
-=== retry
+===[a:retry] retry
 
 例:
 
@@ -533,7 +528,7 @@ retry をまとめると以下のようになります。
 
 == 例外処理
 
-=== raise
+===[a:raise] raise
 
 例:
 
@@ -569,7 +564,7 @@ retry をまとめると以下のようになります。
 [[m:Kernel.#raise]] は Ruby の予約語ではなく、[[c:Kernel]] モジュールで
 定義されている関数的メソッドです。
 
-=== begin
+===[a:begin] begin
 
 例:
 
@@ -689,7 +684,7 @@ rescue修飾子を伴う式の値は例外が発生しなければ式1、例外が発生すれば式2
 
 == その他
 
-=== return
+===[a:return] return
 
 例:
 
@@ -705,7 +700,7 @@ rescue修飾子を伴う式の値は例外が発生しなければ式1、例外が発生すれば式2
 与えられた時には、それらを要素とする配列をメソッドの戻り値と
 します。式が省略された場合には nil を戻り値とします。
 
-=== BEGIN
+===[a:BEGIN] BEGIN
 
 例:
 
@@ -745,7 +740,7 @@ BEGINはメソッド定義式中には書けません。parse error になります。
         end
         # => -:2: BEGIN in method
 
-=== END
+===[a:END] END
 
 例:
 
@@ -759,7 +754,7 @@ BEGINはメソッド定義式中には書けません。parse error になります。
 
 「後始末」ルーチンを登録します。END ブロックで指定した文はインタ
 プリタが終了する時に実行されます。Ruby の終了時処理について詳しくは
-[[unknown:終了処理]]を参照してください。
+[[d:spec/terminate]]を参照してください。
 
 複数の END ブロックを登録した場合は、登録したときと逆の順序で実
 行されます。
@@ -783,7 +778,7 @@ END ブロックは一つの記述につき最初の一回のみ有効です。たとえば以
         # => 0
 
 END をメソッド定義式中に書くと警告が出ます
-((-((<ruby 1.8 feature>)): これは 1.8.1 から [[unknown:ruby-dev:21513]]-))。
+#@#((-((<ruby 1.8 feature>)): これは 1.8.1 から [[unknown:ruby-dev:21513]]-))。
 意図的にこのようなことを行いたい場合は [[m:Kernel.#at_exit]] を使
 います。
 

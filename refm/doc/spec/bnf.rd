@@ -1,5 +1,3 @@
-#@###nonref
-
 = 疑似BNFによるRubyの文法
 
 以下に疑似BNFによるRubyの文法を示します。より詳しくは parse.y を

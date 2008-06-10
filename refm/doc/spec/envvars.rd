@@ -64,8 +64,8 @@ Rubyインタプリタは以下の環境変数を参照します。
 
 : RUBYLIB_PREFIX
 
-  この環境変数は [[c:DJGPP]]版、[[c:Cygwin]]版、[[unknown:mswin32]]版、
-  [[unknown:mingw32]]版のrubyでのみ有効です。
+  この環境変数は [[d:platform/DJGPP]]版、[[d:platform/Cygwin]]版、[[d:platform/mswin32]]版、
+  [[d:platform/mingw32]]版のrubyでのみ有効です。
 
   この環境変数の値は、path1;path2 あるいは path1 path2 という形式で、
   Rubyライブラリの探索パス[[m:$:]]の先頭部分
@@ -81,7 +81,7 @@ Rubyインタプリタは以下の環境変数を参照します。
 
 : RUBYSHELL
 
-  この環境変数は [[c:OS2]]版、[[unknown:mswin32]]版、[[unknown:mingw32]]版のrubyで
+  この環境変数は [[d:platform/OS2]]版、[[d:platform/mswin32]]版、[[d:platform/mingw32]]版のrubyで
   のみ有効です。
 
   [[m:Kernel.#system]] でコマンドを実行するときに使用するシェル

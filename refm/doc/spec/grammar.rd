@@ -1,5 +1,3 @@
-#@###nonref
-
 = Rubyの文法
 
 * [[unknown:字句構造]]
