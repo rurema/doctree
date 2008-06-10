@@ -186,7 +186,7 @@ app.rb:
 
 --- RUBY_VERSION
 
-Ruby のバージョンを示す文字列。
+Ruby のバージョンを表す文字列。
 
 Ruby のバージョンは、major.minor.teeny という形式です。
 それぞれの番号は (今のところ) 2 桁以上にならないと約束されていますので、
@@ -205,12 +205,22 @@ RUby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
 
 --- RUBY_RELEASE_DATE
 
-Ruby のリリース日を示す文字列。
+Ruby のリリース日を表す文字列。
 
 --- RUBY_PLATFORM
 
-プラットフォームを示す文字列。
+プラットフォームを表す文字列。
 
+#@since 1.8.7
+--- RUBY_COPYRIGHT
+Ruby のコピーライトを表す文字列。
+
+--- RUBY_DESCRIPTION
+Ruby の詳細を表す文字列。
+
+ruby -v で表示される内容が格納されています。
+
+#@end
 #@since 1.8.5
 --- RUBY_PATCHLEVEL
 Ruby のパッチレベルを表す [[c:Fixnum]] オブジェクトです。
