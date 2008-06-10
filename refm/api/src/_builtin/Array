@@ -13,12 +13,13 @@ include Enumerable
 == Class Methods
 
 #@since 1.9.0
---- try_convert(obj) -> array or nil
-#@todo
+--- try_convert(obj) -> Array | nil
+to_ary メソッドを用いて obj を配列に変換しようとします。
 
-Try to convert obj into an array, using to_ary method. Returns
-converted array or nil if obj cannot be converted for any reason.
-This method is to check if an argument is an array.
+何らかの理由で変換できないときには nil を返します。
+このメソッドは引数が配列であるかどうかを調べるために使えます。
+
+例:
 
    Array.try_convert([1])   # => [1]
    Array.try_convert("1")   # => nil
@@ -544,6 +545,7 @@ pos が範囲外であったら nil を返します。
 --- delete_if {|x| ... }    -> self
 --- reject! {|x| ... }      -> self | nil
 #@since 1.8.7
+--- delete_if               -> Enumerable::Enumerator
 --- reject!                 -> Enumerable::Enumerator
 #@end
 
@@ -1431,44 +1433,60 @@ self と引数に渡した配列の各要素を順番にブロックに渡します。
 
 #@since 1.8.7
 --- choice        -> object
-#@todo
 
-Choose a random element from an array.
+配列の要素を1個ランダムに選んで返します。
+
+srand()が有効です。
+
+例:
+
+  a = (1..10).to_a
+  p a.choice        #=>  9
+  p a.choice        #=> 10
+  p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 --- cycle {|obj| block }
-#@todo
 
-Calls block repeatedly forever.
+Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
+
+例:
 
    a = ["a", "b", "c"]
    a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
 
 --- shuffle -> Array
-#@todo
 
-Returns a new array with elements of this array shuffled.
+配列の要素をシャッフルして，その結果を配列として返します。
+
+srand()が有効です。
+
+例:
 
    a = [ 1, 2, 3 ]           #=> [1, 2, 3]
    a.shuffle                 #=> [2, 3, 1]
 
---- shuffle!        -> Array | nil
+--- shuffle!        -> self
 #@todo
 
-Shuffles elements in self in place.
+配列を破壊的にシャッフルします。
 
+例:
 
---- combination(n) { |c| block }    -> Array
---- combination(n)                  -> Enumerable::Enumerator
-#@todo
+   a = [ 1, 2, 3 ]           #=> [1, 2, 3]
+   a.shuffle!                #=> [2, 3, 1]
+   a                         #=> [2, 3, 1]
 
-When invoked with a block, yields all combinations of length
-n of elements from ary and then returns ary itself. The implementation
-makes no guarantees about the order in which the combinations
-are yielded.
+--- combination(n) {|c| block }    -> Array
+--- combination(n)                 -> Enumerable::Enumerator
 
-When invoked without a block, returns an enumerator object instead.
+サイズ n の組み合わせをすべて生成し、それを引数としてブロックを実行します。
 
-Examples:
+得られる組み合わせの順序は保証されません。ブロックなしで呼び出され
+ると、組み合わせを生成する Enumerator オブジェクトを返します。
+
+@param n 生成される配列のサイズ。
+
+例:
 
     a = [1, 2, 3, 4]
     a.combination(1).to_a  #=> [[1],[2],[3],[4]]
@@ -1480,16 +1498,15 @@ Examples:
 
 --- permutation(n) { |p| block }       -> Array
 --- permutation(n)                     -> Enumerable::Enumerator
-#@todo
 
-When invoked with a block, yield all permutations of length n
-of the elements of ary, then return the array itself. The implementation
-makes no guarantees about the order in which the permutations
-are yielded.
+サイズ n の順列をすべて生成し，それを引数としてブロックを実行します。
 
-When invoked without a block, return an enumerator object instead.
+得られる順列の順序は保証されません。ブロックなしで呼び出されると， 順列
+を生成する Enumerator オブジェクトを返します。
 
-Examples:
+@param n 生成する配列のサイズ
+
+例:
 
     a = [1, 2, 3]
     a.permutation(1).to_a  #=> [[1],[2],[3]]
@@ -1499,12 +1516,18 @@ Examples:
     a.permutation(4).to_a  #=> []  : no permutations of length 4
 
 
---- product(other_ary, ...)    -> Array
-#@todo
+--- product(*lists)    -> Array
 
-Returns an array of all combinations of elements from all arrays.
-The length of the returned array is the product of the length
-of ary and the argument arrays
+レシーバの配列と引数で与えられた配列（複数可）のそれぞれから要素を1
+個ずつとって配列とし，それらのすべての配列を要素とする配列を返します。
+
+返される配列の長さは，レシーバと引数で与えられた配列の長さのすべての積にな
+ります。
+
+
+@param lists 配列。複数指定可能。
+
+例:
 
    [1,2,3].product([4,5])     # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
    [1,2].product([1,2])       # => [[1,1],[1,2],[2,1],[2,2]]
