@@ -212,6 +212,9 @@ bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
 @see [[m:String#[] ]]
 
 --- downto(min) {|n| ... } -> self
+#@since 1.8.7
+--- downto(min) -> Enumerable::Enumerator
+#@end
 
 self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
 self < min であれば何もしません。
@@ -244,6 +247,9 @@ self からはじめ step を足しながら limit を越える
 @see [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#times]]
 
 --- times {|n| ... } -> self
+#@since 1.8.7
+--- times -> Enumerable::Enumerator
+#@end
 
 self 回だけ(0 から self-1 まで)繰り返します。
 self が負であれば何もしません。
@@ -300,6 +306,9 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
 #@end
 
 --- upto(max) {|n| ... } -> Fixnum | Bignum
+#@since 1.8.7
+--- upto(max) -> Enumerable::Enumerator
+#@end
 
 self から max まで 1 ずつ増やしながら繰り返します。
 self > max であれば何もしません。
@@ -309,19 +318,21 @@ self > max であれば何もしません。
 
 @see [[m:Integer#downto]], [[m:Integer#step]], [[m:Integer#times]]
 
+--- integer? -> true
+
+常に真を返します。
+
 #@since 1.8.7
 --- even? -> bool
-#@todo
+
+self が偶数であれば真を返します。
 
 Returns true if int is an even number.
 
---- integer? -> true
-#@todo
+--- odd? -> bool
 
-Always returns true.
+self が奇数であれば真を返します。
 
---- odd? -> true | false
-#@todo
 
 Returns true if int is an odd number.
 
@@ -336,9 +347,8 @@ This method is intended for compatibility to character constant
 in Ruby 1.9. For example, ?a.ord returns 97 both in 1.8 and 1.9.
 
 --- pred    -> Integer
-#@todo
 
-Returns the Integer equal to int - 1.
+self から -1 した値を返します。
 
    1.pred      #=> 0
    (-1).pred   #=> -2
