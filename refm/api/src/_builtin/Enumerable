@@ -43,8 +43,8 @@
 --- collect  -> Enumerable::Enumerator            
 --- map      -> Enumerable::Enumerator
 #@end
---- collect {|item| ... } -> [Object]
---- map {|item| ... }     -> [Object]
+--- collect {|item| ... } -> [object]
+--- map {|item| ... }     -> [object]
 #@todo
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
@@ -62,7 +62,6 @@ obj.collect {|item| item } を実行します。
 --- enum_with_index                      -> Enumerable::Enumerator
 #@end
 --- each_with_index {|item, index| ... } -> self
-#@todo
 
 要素とそのインデックスをブロックに渡して繰り返します。
 
@@ -77,15 +76,17 @@ self を返します。
         #    [15, 2]
 
 #@since 1.8.4
-@see enum_with_index
+#@until 1.8.6
+@see [[m:Enumerable::Enumerator#enum_with_index]]
+#@end
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 --- find(ifnone = nil)   -> Enumerable::Enumerator
 --- detect(ifnone = nil) -> Enumerable::Enumerator
 #@end
---- find(ifnone = nil) {|item| ... }   -> Object
---- detect(ifnone = nil) {|item| ... } -> Object
+--- find(ifnone = nil) {|item| ... }   -> object
+--- detect(ifnone = nil) {|item| ... } -> object
 #@todo
 
 要素に対してブロックを評価した値が真になった最初の要素を返します。
@@ -117,19 +118,19 @@ ifnone を eval または call して実行し、nil を返します。
         # => -:1: unhandled exception
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 --- find_all  -> Enumerable::Enumerator
 --- select    -> Enumerable::Enumerator 
 #@end
---- find_all {|item| ... } -> [Object]
---- select {|item| ... }   -> [Object]
+--- find_all {|item| ... } -> [object]
+--- select {|item| ... }   -> [object]
 #@todo
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
---- grep(pattern)                -> [Object]
---- grep(pattern) {|item| ... }  -> [Object]
+--- grep(pattern)                -> [object]
+--- grep(pattern) {|item| ... }  -> [object]
 
 pattern === item が成立する要素を全て含んだ配列を返します。
 ブロックとともに呼び出された時には条件の成立した要素に対して
@@ -142,11 +143,11 @@ pattern === item が成立する要素を全て含んだ配列を返します。
     p ['aa', 'bb', 'cc', 'dd', 'ee'].grep(/[bc]/)  # => ["bb", "cc"]
 
 #@since 1.8.0
---- inject(init = self.first) {|result, item| ... } -> Object
+--- inject(init = self.first) {|result, item| ... } -> object
 #@since 1.8.7
 --- inject(sym)
 --- inject(init, sym)
---- reduce(init = self.first) {|result, item| ... } -> Object
+--- reduce(init = self.first) {|result, item| ... } -> object
 --- reduce(sym)
 --- reduce(init, sym)
 #@end
@@ -173,7 +174,7 @@ self の次の要素を引数に順次ブロックを実行します。
 例:
 
   # 合計を計算する
-  p [1, 2,3, 4, 5].inject(0) {|result, item| result + item }  # => 15
+  p [1, 2, 3, 4, 5].inject(0) {|result, item| result + item }  # => 15
 
 この式は以下のように書いても同じ結果が得られます。
 
@@ -195,14 +196,14 @@ val と == の関係にある要素を含むとき真を返します。
 
 @arg val   任意のオブジェクト
 
---- max -> Object
+--- max -> object
 
 最大の要素を返します。
 全要素が互いに <=> メソッドで比較できることを仮定しています。
 
 要素が存在しなければ nil を返します。
 
---- max {|a, b| ... } -> Object
+--- max {|a, b| ... } -> object
 
 ブロックの評価結果で各要素の大小判定を行い、最大の要素を返します。
 要素が存在しなければ nil を返します。
@@ -215,9 +216,8 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
---- max_by               -> Enumerable::Enumerator
---- max_by {|item| ... } -> Object
-#@todo
+--- max_by              -> Enumerable::Enumerator
+--- max_by{|item| ... } -> object
 
 各要素を順番にブロックに渡して実行し、
 その評価結果を <=> で比較して、
@@ -225,18 +225,21 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 
 要素が存在しないときは nil を返します。
 
-max と max_by の違いは sort と sort_by の違いと同じです。
-詳細は [[m:Enumerable#sort_by]] を参照してください。
+[[m:Enumerable#max]] と [[m:Enumerablem#max_by]] の
+違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
+
+@see [[m:Enumerable#sort_by]]
+
 #@end
 
---- min -> Object
+--- min -> object
 
 最小の要素を返します。
 全要素が互いに <=> メソッドで比較できることを仮定しています。
 
 要素が存在しなければ nil を返します。
 
---- min {|a, b| ... } -> Object
+--- min {|a, b| ... } -> object
 
 ブロックの評価結果で各要素の大小判定を行い、最小の要素を返します。
 要素が存在しなければ nil を返します。
@@ -249,7 +252,7 @@ a < b のとき負の整数を、期待しています。
 
 #@since 1.8.7
 --- min_by               -> Enumerable::Enumerator
---- min_by {|item| ... } -> Object
+--- min_by {|item| ... } -> object
 #@todo
 
 各要素を順番にブロックに渡して実行し、
@@ -258,14 +261,17 @@ a < b のとき負の整数を、期待しています。
 
 要素が存在しないときは nil を返します。
 
-min と min_by の違いは sort と sort_by の違いと同じです。
-詳細は[[m:Enumerable#sort_by]] を参照してください。
+[[m:Enumerable#min]] と [[m:Enumerable#min_by]] の
+違いは [[m:Enumerable#sort]] と [[n:Enumerable#sort_by]] の違いと同じです。
+
+@see [[m:Enumerable#sort_by]]
+
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 --- partition               -> Enumerable::Enumerator
 #@end
---- partition {|item| ... } -> [[Object], [Object]]
+--- partition {|item| ... } -> [[object], [object]]
 #@todo
 
 各要素を、ブロックの条件を満たす要素と満たさない要素に分割します。
@@ -277,10 +283,10 @@ min と min_by の違いは sort と sort_by の違いと同じです。
   [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0].partition {|i| i % 3 == 0 }
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
-#@since 1.9.0
+#@since 1.8.7
 --- reject               -> Enumerable::Enumerator
 #@end
---- reject {|item| ... } -> [Object]
+--- reject {|item| ... } -> [object]
 
 各要素に対してブロックを評価し、
 その値が偽であった要素を集めた新しい配列を返します。
@@ -293,8 +299,8 @@ min と min_by の違いは sort と sort_by の違いと同じです。
 
 @see [[m:Enumerable#select]]
 
---- sort               -> [Object]
---- sort {|a, b| ... } -> [Object]
+--- sort               -> [object]
+--- sort {|a, b| ... } -> [object]
 
 全ての要素を昇順にソートした配列を生成して返します。
 
@@ -317,10 +323,10 @@ Enumerable#sort は安定ではありません (unstable sort)。
 @see [[m:Enumerable#sort_by]]
 
 #@since 1.8.0
-#@since 1.9.0
+#@since 1.8.7
 --- sort_by               -> Enumerable::Enumerator
 #@end
---- sort_by {|item| ... } -> [Object]
+--- sort_by {|item| ... } -> [object]
 
 ブロックの評価結果を <=> メソッドで比較することで、self を昇
 順にソートします。ソートされた配列を新たに生成して返します。
@@ -378,13 +384,13 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 @see [[m:Enumerable#sort]]
 #@end
 
---- to_a    -> [Object]
---- entries -> [Object]
+--- to_a    -> [object]
+--- entries -> [object]
 
 全ての要素を含む配列を返します。
 
 #@since 1.8.0
---- zip(*lists)  -> [[Object]]
+--- zip(*lists)  -> [[object]]
 
 self と引数に渡した配列の各要素からなる配列の配列を生成して返します。
 生成される配列の要素数は self の要素数と同じです。
@@ -431,10 +437,8 @@ self と引数に渡した配列の各要素を順番にブロックに渡します。
 #@todo
 
 n 要素ずつブロックに渡して繰り返します。
-要素数が n で割り切れないときは、
-最後の回だけ要素数が減ります。
 
-nil を返します。
+要素数が n で割り切れないときは、最後の回だけ要素数が減ります。
 
 @arg n   区切る要素数を示す整数です。
 
@@ -456,8 +460,6 @@ nil を返します。
 要素を重複ありで n 要素ずつに区切り、
 ブロックに渡して繰り返します。
 
-nil を返します。
-
 @arg n   区切る要素数を示す整数です。
 
 例:
@@ -473,115 +475,148 @@ nil を返します。
 
 #@since 1.8.7
 
+--- count                   -> Integer
 --- count(item)             -> Integer
---- count {| obj | block }  -> Integer
-#@todo
+--- count {|obj| ... }  -> Integer
 
-Returns the number of items in enum for which equals to item.
-If a block is given, counts the number of elements yielding a
-true value.
+レシーバの要素数を返します。
+
+引数を指定しない場合は、レシーバの要素数を返します。
+このとき、レシーバが size メソッドを持っていればそちらを使用します。
+レシーバが size メソッドを持っていない場合は、要素数を一つずつカウントします。
+
+引数を一つ指定した場合は、レシーバの要素のうち引数に一致するものの
+個数をカウントして返します。
+
+ブロックを指定した場合は、ブロックを評価して真になった要素の個数を
+カウントして返します。
+
+@param item カウント対象となる値。
+
+例:
 
    ary = [1, 2, 4, 2]
+   ary.count             # => 4
    ary.count(2)          # => 2
    ary.count{|x|x%2==0}  # => 3
 
 
---- cycle -> Enumerable::Enumerator
---- cycle {|obj| block }
+--- cycle                -> Enumerable::Enumerator
+--- cycle {|obj| ... } -> object | nil
 #@todo
+
+Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
 
 Calls block for each element of enum repeatedly forever. Returns
 nil if and only if the collection is empty. Enumerable#cycle
 saves elements in an internal array so changes to enum after
 the first pass have no effect.
 
+@return ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
+        レシーバが空の場合は nil を返します。
+
    a = ["a", "b", "c"]
    a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
 
 
 --- drop(n)               -> Array
-#@todo
 
-Drops first n elements from enum, and returns rest elements in
-an array.
+Enumerable オブジェクトの先頭の n 要素を捨てて、
+残りの要素を配列として返します。
+
+@param n 捨てる要素数。
 
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
 
---- drop_while  -> Enumerable::Enumerator
---- drop_while {|arr| block }   -> Array
+--- drop_while                      -> Enumerable::Enumerator
+--- drop_while {|element| ... }   -> Array
 #@todo
 
-Drops elements up to, but not including, the first element for
-which the block returns nil or false and returns an array containing
-the remaining elements.
+ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
+残りの要素を配列として返します。
+
+ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
 
    a = [1, 2, 3, 4, 5, 0]
    a.drop {|i| i < 3 }   # => [3, 4, 5, 0]
 
 
---- find_index   {| obj | block }  -> Integer
-#@todo
+--- find_index{|obj| ... }  -> Integer | nil
 
-Passes each entry in enum to block. Returns the index for the
-first for which block is not false. If no object matches, returns
-nil
+すべての要素をブロックに渡して評価し、最初に真になった要素の
+インデックスを返します。
+
+一つも真にならなければ nil を返します。
 
    (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 }   #=> nil
    (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 }   #=> 34
 
 
---- first      -> object or nil
+--- first      -> object | nil
 --- first(n)   -> Array
-#@todo
 
-Returns the first element, or the first n elements, of the enumerable.
-If the enumerable is empty, the first form returns nil, and the
-second form returns an empty array.
+Enumerable オブジェクトの最初の要素、もしくは最初の n 要素を返します。
+
+Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
+引数を指定する形式では、空の配列を返します。
+
+@param n 取得する要素数。
+
+  h = {:a => 1, :b => 2, :c => 3}
+  p h.first     #=> [:b, 2]
+  p h.first(2)  #=> [[:b, 2], [:c, 3]]
+  p {}.first    #=> nil
+  p {}.first(2) #=> []
 
 
---- group_by {| obj | block }  -> Hash
-#@todo
+--- group_by {|obj| ... }  -> Hash
 
-Returns a hash, which keys are evaluated result from the block,
-and values are arrays of elements in enum corresponding to the
-key.
+ブロックを評価した結果をキー、対応する要素を値とするハッシュを返します。
+
 
    (1..6).group_by {|i| i%3}   #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
 
 
---- minmax                   -> [min,max]
---- minmax {|a,b| block }    -> [min,max]
-#@todo
+--- minmax                 -> [min, max]
+--- minmax{|a, b| ... }    -> [min, max]
 
-Returns two elements array which contains the mininum and the
-maxinum value in the enumerable. The first form assumes all objects
-implement Comparable; the second uses the block to return a <=>
-b.
+Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
+要素とするサイズ 2 の配列を返します。
+
+一つ目の形式は、Enumerable オブジェクトのすべての要素が Comparable を
+実装していることを仮定しています。二つ目の形式では、要素同士の比較を
+ブロックを用いて行います。
 
    a = %w(albatross dog horse)
-   a.minmax                                  #=> ["albatross", "horse"]
-   a.minmax {|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
+   a.minmax                                 #=> ["albatross", "horse"]
+   a.minmax{|a,b| a.length <=> b.length }   #=> ["dog", "albatross"]
 
+@see [[m:Enumerable#sort]]
 
---- minmax_by {| obj| block }   -> [min, max]
-#@todo
+--- minmax_by {|obj| ... }   -> [min, max]
 
-Returns two elements array array containing the objects in enum
-that gives the minmum and maximum values respectively from the
-given block.
+Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
+要素とするサイズ 2 の配列を返します。
+
+[[m:Enumerable#minmax]] と [[m:Enumerable#minmax_by]] の
+違いは sort と sort_by の違いと同じです。
+詳細は [[m:Enumerable#sort_by]] を参照してください。
 
    a = %w(albatross dog horse)
    a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
 
+@see [[m:Enumerable#sort_by]]
 
---- none? [{|obj| block }]   -> bool
-#@todo
+--- none?                 -> bool
+--- none?{|obj| ... }   -> bool
 
-Passes each element of the collection to the given block. The
-method returns true if the block never returns true for all elements.
-If the block is not given, none? will return true only if none
-of the collection members is true.
+ブロックを指定しない場合は、 Enumerable オブジェクトのすべての
+要素が偽であれば真を返します。そうでなければ偽を返します。
+
+ブロックを指定した場合は、Enumerable オブジェクトのすべての要素を
+ブロックで評価した結果が、すべて偽であれば真を返します。
+そうでなければ偽を返します。
 
    %w{ant bear cat}.none? {|word| word.length == 5}  #=> true
    %w{ant bear cat}.none? {|word| word.length >= 4}  #=> false
@@ -589,13 +624,16 @@ of the collection members is true.
    [nil].none?                                       #=> true
    [nil,false].none?                                 #=> true
 
---- one? [{|obj| block }]   -> bool
-#@todo
+--- one?                -> bool
+--- one?{|obj| ... }    -> bool
 
-Passes each element of the collection to the given block. The
-method returns true if the block returns true exactly once. If
-the block is not given, one? will return true only if exactly
-one of the collection members is true.
+ブロックを指定しない場合は、 Enumerable オブジェクトの要素のうち
+ちょうど一つだけが真であれば、真を返します。
+そうでなければ偽を返します。
+
+ブロックを指定した場合は、Enumerable オブジェクトの要素を
+ブロックで評価した結果、一つの要素だけが真であれば真を返します。
+そうでなければ偽を返します。
 
    %w{ant bear cat}.one? {|word| word.length == 4}   #=> true
    %w{ant bear cat}.one? {|word| word.length >= 4}   #=> false
@@ -603,18 +641,16 @@ one of the collection members is true.
    [ nil, true, false ].one?                         #=> true
 
 --- take(n)               -> Array
-#@todo
 
-Returns first n elements from enum.
+Enumerable オブジェクトの先頭から n 要素を配列として返します。
 
    a = [1, 2, 3, 4, 5, 0]
    a.take(3)             # => [1, 2, 3]
 
---- take_while {|arr| block }   -> Array
-#@todo
+--- take_while {|element| ... }   -> Array
 
-Passes elements to the block until the block returns nil or false,
-then stops iterating and returns an array of all prior elements.
+Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
+最初に偽になった要素の手前の要素までを配列として返します。
 
    a = [1, 2, 3, 4, 5, 0]
    a.take {|i| i < 3 }   # => [1, 2]
