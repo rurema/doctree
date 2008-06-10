@@ -10,7 +10,7 @@
 
 == Instance Methods
 
-#@since 1.9.0
+#@since 1.8.7
 --- eval(expr, fname = __FILE__, lineno = 1)    -> object
 
 自身をコンテキストとし文字列 expr を 
@@ -30,5 +30,7 @@ eval(expr, self, fname, lineno) とするのと同じです。
  str = "hello"
  p eval("str + ' Fred'")                     #=> "hello Fred"
  p getBinding("bye").eval("str + ' Fred'")   #=> "bye Fred"
+
+@see [[m:Kernel.#eval]]
 
 #@end
