@@ -1,9 +1,23 @@
 = オブジェクト指向スクリプト言語 Ruby リファレンスマニュアル
 
  * Ruby オフィシャルサイト [[url:http://www.ruby-lang.org/ja/]]
- * version 1.8 対応リファレンス
+#@since 1.9.0
+ * version 1.9 未対応リファレンス
+#@else
+ * version 1.8 対応(予定)リファレンス
+#@end
  * 原著：まつもとゆきひろ
- * 最新版URL: [[url:http://www.ruby-lang.org/ja/man/]]
+ * 最新版URL: [[url:http://www.ruby-lang.org/ja/documentation/]]
+
+== 使用上の注意
+
+#@since 1.9.0
+Ruby 1.9 に関しては、言語仕様、組み込みライブラリ、標準添付ライブラリいずれも
+まったく対応していません。信用してはいけません。
+#@else
+リファレンスが完全に揃っているのは Ruby 1.8 の組み込みライブラリに関してのみです。
+Ruby 1.8 の標準添付ライブラリに関して、リファレンスは極めて不完全です。
+#@end
 
 == 目次
 
@@ -20,6 +34,12 @@
   * [[d:spec/thread]]
   * [[d:spec/safelevel]]
   * [[d:spec/regexp]]
+#@since 1.9.0
+  * [[d:spec/m17n]]
+#@end
+
+Ruby の文法:
+
   * [[d:spec/lexical]]
   * [[d:spec/program]]
   * [[d:spec/variables]]
@@ -48,13 +68,14 @@
 #@#  * [[unknown:sprintfフォーマット]]
 #@#  * [[unknown:Ruby が動作するプラットフォーム]]
   * [[d:grossary]]
+  * [[d:symref]]
   * [[d:help]]
 #@##@# 専門的
   * [[d:spec/bnf]]
 #@#  * [[c:Marshalフォーマット]]
 #@##@# マニュアル
 #@#  * [[c:Rubyに関する書籍]]
-  * [[d:ReFe]]
+#@#  * [[d:ReFe]]
 #@#  * [[unknown:マニュアルダウンロード]]
 #@#  * [[unknown:マニュアル更新履歴MLアーカイブ|URL:http://www.atdot.net/mla/mandiff@ruby/]]
 #@#* [[unknown:参考文献・サイト]]
