@@ -1,14 +1,19 @@
 = Rubyで使われる記号の意味（正規表現の複雑な記号は除く）
 
-[[ref:ex]]　[[ref:q]]　[[ref:num]]　[[ref:per]]　[[ref:and]]　[[ref:or]]　[[ref:plus]]　[[ref:minus]]　[[ref:ast]]　[[ref:slash]]　[[ref:hat]]　[[ref:sq]]　[[ref:period]]　[[ref:comma]]　[[ref:langl]]　[[ref:rangl]]　[[ref:eq]]　[[ref:tilde]]　[[ref:dollar]]　[[ref:at]]　[[ref:under]]　[[ref:lbra]][[ref:rbra]]　[[ref:lbra2]][[ref:rbra2]]　[[ref:lbra3]][[ref:rbra3]]　[[ref:dq]]　[[ref:sq]]　[[ref:ac]]　[[ref:backslash]]　[[ref:semicolon]]
+[[ref:ex]]　[[ref:q]]　[[ref:num]]　[[ref:per]]　[[ref:and]]　[[ref:or]]　
+[[ref:plus]]　[[ref:minus]]　[[ref:ast]]　[[ref:slash]]　[[ref:hat]]　[[ref:sq]]　
+[[ref:period]]　[[ref:comma]]　[[ref:langl]]　[[ref:rangl]]　[[ref:eq]]　[[ref:tilde]]　
+[[ref:dollar]]　[[ref:at]]　[[ref:under]]　[[ref:lbra]][[ref:rbra]]　
+[[ref:lbra2]][[ref:rbra2]]　[[ref:lbra3]][[ref:rbra3]]　[[ref:dq]]　[[ref:sq]]　[[ref:ac]]　
+[[ref:backslash]]　[[ref:semicolon]]
 
 ==[a:ex] !
 
-: p( !true ) #=> false
+:  !true 
 
  not 演算子。[[ref:d:spec/operator#not]]を参照。
 
-: p(3 != 5) #=> true
+: 3 != 5
 
  「等しくない」比較演算子。[[ref:d:spec/operator#not]]を参照。
 
@@ -24,7 +29,7 @@
 
 ==[a:q] ?
 
-: p( ?a ) #=> 97 ・・ ?<文字>
+:  ?a 
 
  [[ref:d:spec/literal#num]]。文字の ascii コードの数値。
 
@@ -69,11 +74,11 @@
 
 ==[a:per] %
 
-: p( 10 % 3 ) #=> 1
+:  10 % 3 
 
  各クラスで定義された「%」演算子。Integerクラスでは「余剰」を意味するメソッド。[[m:Integer#%]]メソッド。
 
-: p( "%04b" % 10 ) #=> "1010"
+:  "%04b" % 10 
 
  Stringクラスの「%」演算子。[[m:String#%]] メソッド。
 
@@ -119,15 +124,15 @@
 
 : def xxx(&yyy) ・・ &がついた引数
 
- [[ref:d:spec/def#method]] のブロック引数。
+ メソッド定義のブロック引数。[[ref:d:spec/def#method]]を参照。
 
 ==[a:or] |
 
-: p( 3 | 5 ) #=> 7
+:  3 | 5 
 
  論理和演算子または類似のメソッド。二進数で 0011 | 01010 => 0111。
 
-: p( 3 || 5 ) #=> 3
+:  3 || 5 
 
  「or」演算子または類似のメソッド。true || true なので左の値を返す。
 
@@ -184,13 +189,13 @@
 
  かけ算。または類似の演算を行うメソッド。
 
-: p(2**3) #=> 8
+: 2**3
 
  累乗。または類似の演算を行うメソッド。
 
 : def xxx(*yy) ・・ *がついた引数
 
- メソッド呼出の引数展開。[[ref:d:spec/call]]と[[ref:d:spec/def#method]]を参照。
+ メソッド呼出の引数展開。[[d:spec/call]]と[[ref:d:spec/def#method]]を参照。
 
 : /xx*/
 
@@ -198,7 +203,7 @@
 
 ==[a:slash] /
 
-: p(10 / 3) #=> 3
+: 10 / 3
 
  割り算、または類似のメソッド。
 
@@ -206,13 +211,13 @@
 
  [[ref:d:spec/literal#regexp]]。
 
-: p('1二三四5'.split(//)) #=> ["1", "二", "三", "四", "5"]
+: '1二三四5'.split(//)
 
   // は空の正規表現を意味する
 
 ==[a:hat] ^
 
-: p( true ^ true ) #=> false
+:  true ^ true 
 
  「xor」演算子。排他的論理和。または類似のメソッド。
 
@@ -231,7 +236,7 @@
 
 : :exit等の:のついた識別子
 
- [[ref:d:spec/literal#symbol]]。
+ シンボルリテラル。[[ref:d:spec/literal#symbol]]を参照。
 
 : Net::HTTP
 
@@ -239,8 +244,8 @@
 
 : ::DateTime
 
- 定数のスコープ演算子で、トップレベルの定数であることを示す。Objectクラスで
- 定義されている定数(トップレベルの定数と言う)を確実に参照する ためには
+ 定数のスコープ演算子で、トップレベルの定数であることを示す。Object クラスで
+ 定義されている定数(トップレベルの定数と言う)を確実に参照するためには
  [[ref:d:spec/variables#const]]を参照。
 
 : xx ? yy : zz
@@ -292,24 +297,24 @@
 
 : a,b, = [1,2,3] ・・ 代入の左辺の「,」
 
- [[ref:d:spec/operator#multiassign]]。
+ 多重代入。[[ref:d:spec/operator#multiassign]]を参照。
 
 ==[a:langl] <
 
-: p(3 < 5) #=> true
+: 3 < 5
 
  「より小さい」比較演算子
 
-: p(3 <= 5) #=> true
+: 3 <= 5
 
  「より小さいか等しい」比較演算子
 
-: p(3 <=> 5)  #=> -1
+: 3 <=> 5)  #=> -1
 
  基本的な比較演算子。ほかの比較演算子はこの演算子を元に [[c:Comparable]] モジュールで定義されています。
  左が大きければ 1, 等しければ0, 右が大きければ -1 を返すように作ることが期待されています。
 
-: p(3 << 1) #=> 6 ・・ 二進数で 0011 → 0110
+: 3 << 1
 
  シフト演算子。または類似のメソッド。
 
@@ -336,23 +341,23 @@
 
  特異クラス定義。[[ref:d:spec/def#singleton_class]]を参照。
 
-==[a:langl] >
+==[a:rangl] >
 
-: p(3 > 5) #=> false
+: 3 > 5
 
  「より大きい」比較演算子
 
-: p(3 >= 5) #=> false
+: 3 >= 5
 
  「より大きいか等しい」比較演算子
 
-: p(3 <=> 3)  #=> 0
+: 3 <=> 3)  #=> 0
 
  基本的な比較演算子。ほかの比較演算子はこの演算子を元に [[c:Comparable]] 
  モジュールで定義されています。左が大きければ1, 等しければ0, 右が大きければ -1 
  を返すように作ることが期待されています。
 
-: p(3 >> 1) #=> 1 ・・ 二進数で 0011 → 0001
+: 3 >> 1
 
  シフト演算子。または類似のメソッド。
 
@@ -405,7 +410,7 @@
 
 : =begin ・・ =end
 
- [[unknown:埋め込みドキュメント|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%BB%FA%B6%E7%B9%BD%C2%A4#a.cb.e4.a4.e1.b9.fe.a4.df.a5.c9.a5.ad.a5.e5.a5.e1.a5.f3.a5.c8]]
+ 埋め込みドキュメントです。[[ref:d:spec/lexical#embed]]を参照。
 
 : { 1 => "11" , 3 => "333" }
 
@@ -413,7 +418,7 @@
 
 : rescue => XXX
 
- 例外処理で例外結果を変数XXXに代入します。
+ 例外処理で例外結果を変数 XXX に代入します。
 
 : xxx #=> 実行結果
 
@@ -421,7 +426,7 @@
 
 ==[a:tilde] ~
 
-: p('%04b %04b' % [3, ~ 3])  #=> "0011 1100"
+: '%04b %04b' % [3, ~ 3])  #=> "0011 1100"
 
  ビット演算の否定。
 
@@ -433,7 +438,7 @@
 
  正規表現のメソッド =~ の否定。マッチが失敗したらtrueを返します。
 
-=== ~ /xxx/
+: ~ /xxx/
 
  /xxx/ =~ $_ の省略形。~の後ろは正規表現でなければいけません。
 
@@ -441,7 +446,7 @@
 
 : $xxx
 
- [[unknown:グローバル変数|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%CA%D1%BF%F4%A4%C8%C4%EA%BF%F4;em=%A5%B0%A5%ED%A1%BC%A5%D0%A5%EB%CA%D1%BF%F4#a.a5.b0.a5.ed.a1.bc.a5.d0.a5.eb.ca.d1.bf.f4]]。
+ グローバル変数。[[ref:d:spec/variables#global]]を参照。
 
 : $_ や $! など ・・$<1文字の数字、記号>
 
@@ -449,17 +454,18 @@
 
 : /xx$/
 
- [[unknown:正規表現|URL:http://www.ruby-lang.org/ja/man/index.cgi?cmd=view;name=%C0%B5%B5%AC%C9%BD%B8%BD]]で行末。文字列の末尾や改行文字の直前の位置にマッチします。改行自身は含みません。
+ 正規表現で行末。文字列の末尾や改行文字の直前の位置にマッチします。改行自身は含みません。
+ [[d:spec/regexp]]を参照。
 
 ==[a:at] @
 
 : @xxx
 
- [[unknown:インスタンス変数|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%CA%D1%BF%F4%A4%C8%C4%EA%BF%F4#a.a5.a4.a5.f3.a5.b9.a5.bf.a5.f3.a5.b9.ca.d1.bf.f4]]
+ インスタンス変数。[[ref:d:spec/variables#instance]]を参照。
 
 : @@xxx
 
- [[unknown:クラス変数|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%CA%D1%BF%F4%A4%C8%C4%EA%BF%F4#a.a5.af.a5.e9.a5.b9.ca.d1.bf.f4]]
+ クラス変数。[[ref:d:spec/variables#class]]を参照。
 
 : def +@ または def -@
 
@@ -482,7 +488,9 @@
 
 : 123_456
 
- 文字コード以外の[[unknown:数値リテラル|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%A5%EA%A5%C6%A5%E9%A5%EB#a.bf.f4.c3.cd.a5.ea.a5.c6.a5.e9.a5.eb]]には、`_' を含めることができます。 ruby インタプリタは `_' を単に無視し、特別な解釈は何もしません。 これは、大きな数値の桁数がひと目でわかるように記述するのに便利です。
+ 文字コード以外の数値リテラルには、`_' を含めることができます。 ruby インタプリタは `_' を単に無視し、
+ 特別な解釈は何もしません。 これは、大きな数値の桁数がひと目でわかるように記述するのに便利です。
+ [[ref:d:spec/literal#num]]を参照。
 
 ==[a:lbra] {
 ==[a:rbra] }
@@ -501,7 +509,7 @@
 
 : "a is #{a}"
 
- [[unknown:式展開|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%A5%EA%A5%C6%A5%E9%A5%EB;em=%BC%B0%C5%B8%B3%AB#a.bc.b0.c5.b8.b3.ab]]
+ 式展開。[[ref:d:spec/literal#exp]]を参照。
 //emlist{
   a = 10
   p "a is #{a}"  #=> "a is 10"
@@ -537,7 +545,7 @@
 ==[a:lbra3] (
 ==[a:rbra3] )
 
-: p((true and false)) #=> false
+: (true and false)
 
  丸カッコ()は厳密には、複数の文、式をまとめてひとつの式にするグループ化の()（例の内側のカッコ）とメソッドの引数を明示する()（例の外側のカッコ）があります。例のような特別な場合を除き、普段は使い分けを意識する必要はありません。()は意味が不明瞭にならない範囲で省略が可能です。
 
@@ -545,7 +553,8 @@
 
 : "abc"
 
- [[unknown:文字列リテラル|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%A5%EA%A5%C6%A5%E9%A5%EB;em=%CA%B8%BB%FA%CE%F3%A5%EA%A5%C6%A5%E9%A5%EB#a.ca.b8.bb.fa.ce.f3.a5.ea.a5.c6.a5.e9.a5.eb]]。式展開などが可能なタイプの文字列リテラルです。
+ 文字列リテラル。式展開などが可能なタイプの文字列リテラルです。
+ [[ref:d:spec/literal#string]]を参照。
 
 ==[a:sq] '
 
@@ -557,7 +566,8 @@
 
 : `ls`
 
- [[unknown:コマンド出力|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%A5%EA%A5%C6%A5%E9%A5%EB#a.a5.b3.a5.de.a5.f3.a5.c9.bd.d0.ce.cf]]。バッククォート(`)で囲まれた文字列は、コマンドとして実行され、その標準出力が文字列 として与えられます。
+ コマンド出力。バッククォート(`)で囲まれた文字列は、コマンドとして実行され、
+ その標準出力が文字列として与えられます。[[ref:d:spec/literal#command]]を参照。
 //emlist{
     puts `ruby -h`
     #=> Usage: ruby [switches] [--] [programfile] [arguments]
