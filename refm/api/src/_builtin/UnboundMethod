@@ -226,13 +226,14 @@ true を返します。そうでない場合に false を返します。
 
 #@since 1.8.7
 --- name    -> String
-#@todo
+#@since 1.9.0
+--- name    -> Symbol
+#@end
 
-Returns the name of the method.
+このメソッドの名前を返します。
 
 --- owner    -> Class | Module
-#@todo
 
-Returns the class or module that defines the method.
+このメソッドが定義されている class か module を返します。
 
 #@end
