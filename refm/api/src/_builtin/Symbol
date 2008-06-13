@@ -128,6 +128,7 @@ self を返します。
   
 @see [[m:String#intern]]
 
+#@until 1.9.0
 --- to_i -> Integer
 --- to_int -> Integer
 
@@ -158,6 +159,18 @@ self を返します。
 @see [[m:Fixnum#id2name]]
 #@else
 @see [[m:Fixnum#to_sym]]
+#@end
+#@end
+
+#@since 1.8.7
+--- to_proc -> Proc
+#@todo
+
+self に対応する Proc オブジェクトを返します。
+
+  (1..3).collect(&:to_s)  #=> ["1", "2", "3"]
+  (1..3).inject(&:+)      #=> 6
+
 #@end
 
 #@since 1.9.0
@@ -226,13 +239,6 @@ Returns the representation of sym as a symbol literal.
 
 --- swapcase
 #@todo
-
---- to_proc
-#@todo
-
-Returns a Proc object which respond to the given method by sym.
-
-  (1..3).collect(&:to_s)  #=> ["1", "2", "3"]
 
 --- upcase
 #@todo

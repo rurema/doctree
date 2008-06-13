@@ -1143,6 +1143,10 @@ str == eval(str.dump) となることが保証されています。
 
 --- each(rs = $/) {|line| ... } -> ()
 --- each_line(rs = $ /) {|line| ... } -> ()
+#@since 1.8.7
+--- each(rs = $/)       -> Enumerable::Enumerator
+--- each_line(rs = $ /) -> Enumerable::Enumerator
+#@end
 
 文字列中の各行に対して繰り返します。
 行の区切りは rs に指定した文字列で、
@@ -1165,6 +1169,9 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり、
         # => "cc\n"
 
 --- each_byte {|byte| ... } -> ()
+#@since 1.8.7
+--- each_byte -> Enumerable::Enumerator
+#@end
 
 文字列の各バイトに対して繰り返します。
 
@@ -1254,6 +1261,9 @@ replace に「\」自身を入れたいときは
 @see [[m:String#sub]]
 
 --- gsub(pattern) {|matched| .... } -> String
+#@since 1.8.7
+--- gsub(pattern) Enumerable::Enumerator
+#@end
 
 文字列中で pattern にマッチした部分を順番にブロックに渡し、
 その実行結果で置き換えます。
@@ -1325,6 +1335,9 @@ replace に「\」自身を入れたいときは
 @see [[m:String#sub]]
 
 --- gsub!(pattern) {|matched| .... } -> self | nil
+#@since 1.8.7
+--- gsub!(pattern) -> Enumerable::Enumerator
+#@end
 
 文字列中で pattern にマッチする部分全てを順番にブロックに渡し、
 その評価結果に置き換えます。
@@ -2522,7 +2535,11 @@ ASCII 文字列の範囲内でアルファベットを全て大文字にします。
 @see [[m:String#upcase]], [[m:String#downcase!]],
      [[m:String#swapcase!]], [[m:String#capitalize!]]
 
---- upto(max) {|s| ... } -> ()
+#@since 1.8.7
+--- uptoo(max, exclusive = false) {|s| ... } -> self
+#@else
+--- uptoo(max) {|s| ... } -> self
+#@end
 
 self から始めて max まで
 「次の文字列」を順番にブロックに与えて繰り返します。
@@ -2539,6 +2556,10 @@ self から始めて max まで
   end
 
 @param max    繰り返しをやめる文字列
+
+#@since 1.8.7
+@param exclusive max を含むかどうか。false の場合は max を含む。
+#@end
 
 --- eql?(other) -> bool
 
@@ -2653,19 +2674,31 @@ self がセパレータを含まないときは、
 
 @see [[m:String#partition]], [[m:String#split]]
 
---- each_char {|cstr| block }    -> String
-#@until 1.9.0
---- chars {|cstr| block }    -> String
-#@end
+--- each_char {|cstr| block } -> self
+--- chars {|cstr| block }     -> self
 
 文字列のそれぞれの文字をブロックに渡して実行します。
-
-@return self
 
 たとえば、
    "hello".each_char {|c| print c, ' ' }
 は次のように出力されます。
    h e l l o
+
+--- bytesize -> Integer
+
+文字列のバイト長を整数で返します。
+
+例:
+
+  # 実行結果は文字コードによって異なります。
+#@since 1.9.0
+  p "いろは".size     #=> 3
+#@else
+  p "いろは".size     #=> 6
+#@end
+  p "いろは".bytesize #=> 6
+
+@see [[m:String#size]]
 
 #@end
 #@since 1.9.0
@@ -2682,17 +2715,6 @@ self が空文字列のときは例外 TypeError を発生します。
     p "a".ord   # => 97
 
 @see [[m:Integer#chr]], [[m:String#chr]]
-
---- bytesize -> Integer
-
-文字列のバイト長を整数で返します。
-
-例:
-
-  p "いろは".size     #=> 3
-  p "いろは".bytesize #=> 6
-
-@see [[m:String#size]]
 
 --- encoding   -> Encoding
 
