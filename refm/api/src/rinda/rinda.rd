@@ -1,3 +1,4 @@
+Rubyで実装されたタプル空間(Tuple Space)を扱うためのライブラリです。
 
   * [[url:http://www.druby.org/ilikeruby/rinda.html]]
   * [[url:http://www2a.biglobe.ne.jp/~seki/ruby/d208.html]]

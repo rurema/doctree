@@ -1,4 +1,5 @@
 #@since 1.8.0
+文字列を高速にスキャンするためのライブラリです。
 
 = class StringScanner < Object
 

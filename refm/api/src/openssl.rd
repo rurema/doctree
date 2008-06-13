@@ -1,4 +1,5 @@
 #@if (version >= "1.8.0")
+OpenSSL を Ruby から扱うためのライブラリです。
 #@# = openssl
 
 [[url:http://www.openssl.org]] support library for Ruby.

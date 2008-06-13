@@ -1,3 +1,5 @@
+IMAP プロトコルを扱うライブラリです。
+
 Net::IMAP implements Internet Message Access Protocol (IMAP) clients.
 The IMAP protocol is described in [[RFC:2060]].
 

@@ -44,6 +44,8 @@ sublibrary tkextlib/treectrl
 sublibrary tkextlib/vu
 sublibrary tkextlib/winico
 
+tkを用いてGUIアプリケーションを作成するためのライブラリです。
+
 #@since 1.8.0
  * multi-tk 複数の Tcl インタープリタをサポートする
  Ruby/Tk [[ruby-dev:20949]]

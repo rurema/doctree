@@ -1,6 +1,7 @@
-組み込みクラス [[c:String]] と [[c:IO]] を拡張します。
 [[m:String#scan]] のフォーマット指定版といえるメソッド [[m:String#scanf]]
 を定義します。
+
+組み込みクラス [[c:String]] と [[c:IO]] を拡張します。
 
 === 例
   require 'scanf'

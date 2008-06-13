@@ -1,4 +1,5 @@
 #@if (version >= "1.6.0")
+DNSによる名前解決を行うライブラリです。 Ruby で書かれているため thread-aware であり、並列に多くのホスト名を解決することができます。
 
 = class Resolv < Object
 

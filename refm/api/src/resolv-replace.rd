@@ -1,4 +1,5 @@
 #@if (version >= "1.6.0")
+名前解決に resolv を使用するためのライブラリです。
 
 require resolv
 

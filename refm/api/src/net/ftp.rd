@@ -1,3 +1,5 @@
+FTP プロトコルを扱うライブラリです。
+
 = class Net::FTP < Object
 
 == Class Methods

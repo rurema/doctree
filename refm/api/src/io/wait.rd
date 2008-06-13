@@ -1,4 +1,6 @@
 #@if (version >= "1.8.0")
+IOが読み込み可能になるまで待つ機能を提供するライブラリです。
+
 = reopen IO
 
 == Instance Methods

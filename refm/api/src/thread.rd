@@ -1,4 +1,6 @@
-[[c:Thread]]を拡張するライブラリです．rubyインタプリタを
+スレッド間キューや状態変数(condition variable)を提供するライブラリです。
+
+このライブラリは[[c:Thread]]を拡張します．rubyインタプリタを
 デバッグオプション付き([[m:$DEBUG]]を真)で実行したときには，
 [[m:Thread.abort_on_exception]]をtrueにします
 

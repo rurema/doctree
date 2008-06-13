@@ -1,3 +1,5 @@
+Mix-inにより再入可能なreader/writerロック機能を提供するライブラリです。
+
 #@include(sync/Sync)
 #@include(sync/Sync_m)
 #@include(sync/Synchronizer)

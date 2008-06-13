@@ -1,3 +1,5 @@
+net/ftp に TLS 拡張を実装するライブラリです。
+
 = class Net::FTPTLS < Net::FTP
 
 == Instance Methods

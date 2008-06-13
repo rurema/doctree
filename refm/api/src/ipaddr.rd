@@ -1,4 +1,6 @@
 #@since 1.8.0
+IPアドレスを扱うライブラリです。
+
 = class IPAddr < Object
 
 IP アドレスを扱うのためのクラスです。

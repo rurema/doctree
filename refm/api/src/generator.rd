@@ -1,3 +1,5 @@
+外部イテレータを扱うためのライブラリです。
+
 #@since 1.8.1
 = class Generator < Object
 

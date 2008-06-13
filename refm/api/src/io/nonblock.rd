@@ -1,4 +1,6 @@
 #@if (version >= "1.8.0")
+IOのノンブロックモードを扱うライブラリです。
+
 = reopen IO
 
 == Instance Methods

@@ -1,5 +1,6 @@
 メールを受信するためのプロトコル
 POP3 (Post Office Protocol version 3) を扱うライブラリです。
+
 POP3 の実装は [[RFC:1939]] に基いています。
 
 === 使用例

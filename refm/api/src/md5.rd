@@ -1,4 +1,4 @@
-このライブラリは obsolete です。後方互換性のためにのみ存在します。
+このライブラリは obsolete です。[[lib:digest]] ライブラリを使ってください。
 
 [[lib:digest/md5]] をロードして  MD5 を Digest::MD5 に置き換えます。
 

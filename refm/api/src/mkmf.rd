@@ -1,4 +1,5 @@
 Ruby の拡張ライブラリのための Makefile を作成するライブラリです。
+
 このライブラリは通常、extconf.rb という名前の ruby スクリプトから require されます。
 この extconf.rb を実行して Makefile を作成するのが慣習です。
 

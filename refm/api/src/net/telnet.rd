@@ -1,3 +1,5 @@
+Telnetプロトコルを扱うライブラリです。
+
 = class Net::Telnet < SimpleDelegator
 
 === 使用例

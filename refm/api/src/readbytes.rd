@@ -1,3 +1,5 @@
+IO#readbytesを提供するライブラリです。
+
 = reopen IO
 == Instance Methods
 
