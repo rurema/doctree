@@ -65,9 +65,42 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@end
 
-#@since 1.9.0
---- exec(command, *arg)
-#@todo
+#@since 1.8.7
+--- exec(command, *args) -> ()
+
+カレントプロセスを与えられた外部コマンドで置き換えます。
+
+
+==== 引数の解釈
+
+引数が一つだけ与えられた場合、command が shell のメタ文字
+//emlist{
+  * ? {} [] <> () ~ & | \ $ ; ' ` " \n
+//}
+を含む場合、shell 経由で実行されます。
+そうでなければインタプリタから直接実行されます。
+
+引数が複数与えられた場合、第 2 引数以降は command に直接渡され、
+インタプリタから直接実行されます。
+
+第 1 引数が 2 要素の配列の場合、第 1 要素の文字列が実際に起動する
+プログラムのパスで、第 2 要素が「みせかけ」のプログラム名になります。
+
+MSDOS 環境の場合、command はサブシェル経由で実行されます。
+そうでない場合、command は [[man:exec(2)]] を使用して実行されるので元の
+プログラムからいくつかの環境を引き継ぎます。
+
+@param command 実行する外部コマンド。
+
+@param args command に渡す引数。
+
+   exec "echo *"       # echoes list of files in current directory
+   # never get here
+
+
+   exec "echo", "*"    # echoes an asterisk
+   # never get here
+
 
 #@end
 

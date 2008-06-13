@@ -1799,13 +1799,15 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 #@end
 
 #@since 1.8.7
---- instance_exec(arg...) {|var...| block }                       -> object
+--- instance_exec(*args) {|*vars| ... } -> object
 #@todo
 
-Executes the given block within the context of the receiver (obj).
-In order to set the context, the variable self is set to obj
-while the code is executing, giving the code access to obj's
-instance variables. Arguments are passed as block parameters.
+与えられたブロックをレシーバのコンテキストで実行します。
+
+ブロック実行中は、 self がレシーバのコンテキストになるので
+レシーバの持つインスタンス変数にアクセスすることができます。
+
+@param args ブロックパラメータに渡す値です。
 
    class KlassWithSecret
      def initialize
@@ -1813,6 +1815,8 @@ instance variables. Arguments are passed as block parameters.
      end
    end
    k = KlassWithSecret.new
-   k.instance_exec(5) {|x| @secret+x }   #=> 104
+   k.instance_exec(5) {|x| @secret + x }   #=> 104
+
+@see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:Object#instance_eval]]
 
 #@end

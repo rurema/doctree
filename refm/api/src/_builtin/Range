@@ -82,6 +82,9 @@ include? ¤¬¡¢[[m:Enumerable#include?]],[[m:Enumerable#member?]]
 ºÇ½é¤ÎÍ×ÁÇ¤òÊÖ¤·¤Ş¤¹¡£
 
 --- each {|item|  ... } -> self
+#@since 1.8.7
+--- each -> Enumerable::Enumerator
+#@end
 
 ÈÏ°ÏÆâ¤ÎÍ×ÁÇ¤ËÂĞ¤·¤Æ·«¤êÊÖ¤·¤Ş¤¹¡£
 
@@ -107,6 +110,9 @@ Range#each ¤Ï³ÆÍ×ÁÇ¤Î succ ¥á¥½¥Ã¥É¤ò»ÈÍÑ¤·¤Æ¥¤¥Æ¥ì¡¼¥·¥ç¥ó¤¹¤ë¤è¤¦¤Ë¤Ê¤ê¤Ş¤·¤¿¡
 
 #@since 1.8.0
 --- step(s = 1) {|item| ... } -> self
+#@since 1.8.7
+--- step(s = 1) -> Enumerable::Enumerator
+#@end
 
 ÈÏ°ÏÆâ¤ÎÍ×ÁÇ¤ò s ¤ª¤­¤Ë·«¤êÊÖ¤·¤Ş¤¹¡£
 
