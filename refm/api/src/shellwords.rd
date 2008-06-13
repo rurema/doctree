@@ -1,4 +1,4 @@
-#@if (version >= "1.9.0")
+#@since 1.8.7
 UNIX Bourne シェルの単語分割規則に従った文字列割機能と文字列エスケープ
 機能を提供します。
 
@@ -18,7 +18,7 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行う
 
 = module Shellwords
 
-#@if (version >= "1.9.0")
+#@since 1.8.7
 UNIX Bourne シェルの単語分割規則に従った文字列分割と文字列エスケープ
 を行うモジュールです。
 
@@ -37,12 +37,12 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行うモジュールです。
 
 == Module Functions
 
-#@since 1.9.0
+#@since 1.8.7
 --- shellsplit(line) -> [String]
 #@end
 --- shellwords(line) -> [String]
 
-#@if (version >= "1.9.0")
+#@since 1.8.7
 Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
 単語 (文字列) の配列を返します。
 #@else
@@ -55,7 +55,7 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行い、
 
 @param line 分割の対象となる文字列を指定します。
 @return 分割結果の各文字列を要素とする配列を返します。
-#@if (version >= "1.9.0")
+#@since 1.8.7
 @raise ArgumentError 引数の中に対でないシングルクォートまたはダブル
        クォートが現れた場合に発生します。
 #@else
@@ -72,7 +72,7 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行い、
     p Shellwords.shellwords(%q{  A B C "D E F" "G","H I"  })
     # => ["A", "B", "C", "D E F", "G,H I"]
 
-#@since 1.9.0
+#@since 1.8.7
 --- shellescape(str) -> String
 
 文字列を Bourne シェルのコマンドライン中で安全に使えるようにエスケープします。
@@ -108,7 +108,7 @@ UNIX シェルのコマンドライン解析に似た空白区切りの単語分割を行い、
     # => grep Jan\ 15 file\ name\ with\ spaces
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 == Singleton Methods
 
 --- split(line) -> [String]
@@ -141,7 +141,7 @@ Bourne シェルの単語分割規則に従った空白区切りの単語分割を行い、
 @return エスケープ結果を連結した文字列を返します。
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 = reopen String
 
 == Instance Methods
