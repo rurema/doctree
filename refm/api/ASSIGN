@@ -153,7 +153,7 @@ iconv                           bornite
 importenv                       mukai           done
 io/nonblock
 io/wait
-ipaddr                          okkez
+ipaddr                          okkez           done
 irb
 jcode
 json
