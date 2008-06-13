@@ -286,6 +286,11 @@ ARGFがcloseされていればtrueを返します。
 
 --- each(rs = $/) {|line| ... } -> self
 --- each_line(rs = $/) {|line| ... } -> self
+#@since 1.8.7
+--- each(rs = $/)       -> Enumerable::Enumerator
+--- each_line(rs = $/)  -> Enumerable::Enumerator
+#@end
+
 ARGFの現在位置から一行ずつ文字列として読み込みます。
 
 @param rs 区切り文字を指定する
@@ -311,6 +316,9 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。
 @see [[m:IO#each]], [[m:IO#each_line]], 
 
 --- each_byte{|char| ...} -> self
+#@since 1.8.7
+--- each_byte -> Enumerable::Enumerator
+#@end
 ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
   # カレントディレクトリから適当にファイルを選ぶ

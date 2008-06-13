@@ -1439,10 +1439,13 @@ IO から1バイトを読み込み整数として返します。
 --- chars                   -> Enumerable::Enumerator
 #@todo
 
-Calls the given block once for each character in <em>ios</em>,
-passing the character as an argument. The stream must be opened for
-reading or an <code>IOError</code> will be raised.  Multibyte
-characters are dealt with according to $KCODE.
+self に含まれる文字を一文字つつブロックに渡して評価します。
+
+self は読み込み用にオープンされていなければなりません。
+
+また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
+
+@raise IOError self が読み込み用にオープンされていない場合に発生します。
 
   f = File.new("testfile")
   f.each_char {|c| print c, ' ' }   #=> #<File:testfile>
