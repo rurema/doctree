@@ -152,6 +152,17 @@ last_match[1] の形式では例外 [[c:NameError]] が発生します。
 
   p Regexp.union(/a/, /b/, /c/) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
 
+#@since 1.8.7
+引数を一つだけ与える場合は、[[c:Array]] を与えても Regexp を生成します。
+つまり、以下のように書くことができます。
+
+  arr = [/a/, /b/, /c/]
+  p Regexp.union(arr)  #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
+  # 1.8.7 より前は、以下のように書く必要があった
+  p Regexp.union(*arr) #=> /(?-mix:a)|(?-mix:b)|(?-mix:c)/
+
+#@end
+
 pattern は Regexp または String で与えます。
 String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 エスケープされて結果の Regexp に組み込まれます。
@@ -187,10 +198,17 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
   # 文字列そのものにマッチする
   rep1 = [ "foo", "bar", "hoge"] 
   p Regexp.union(*rep1) #=> /foo|bar|hoge/
+#@since 1.8.7
+  p Regexp.union(rep1)  #=> /foo|bar|hoge/
+#@end
 
   # 下記の場合オプションがつくのは最初だけ
   rep2 = [ /foo/x, "bar", "hoge"] 
   p Regexp.union(*rep2) #=> /(?x-mi:foo)|bar|hoge/
+#@since 1.8.7
+  p Regexp.union(rep2)  #=> /(?x-mi:foo)|bar|hoge/
+#@end
+
 
 #@end
 
