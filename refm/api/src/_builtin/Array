@@ -1094,18 +1094,12 @@ nil を返します。
 --- reverse     -> Array
 #@since 1.8.0
 --- reverse!    -> self
-#@else
---- reverse!    -> self | nil
 #@end
 
 reverse は自身の要素を逆順に並べた新しい配列を生成して返します。
 reverse! は自身を破壊的に並べ替えます。
 #@since 1.8.0
 reverse! は self を返します。
-#@else
-reverse は常に新しい配列を返しますが、
-reverse! は 1 要素の配列に対して nil を返しそれ以外では self を返
-します
 #@end
 
  a = ["a", 2, true]
