@@ -149,6 +149,12 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 
 --- each(rs = $/){|line| ... }       -> self
 --- each_line(rs = $/){|line| ... }  -> self
+#@since 1.8.7
+--- lines(rs = $/){|line| ... }      -> self
+--- each(rs = $/)       -> Enumerable::Enumerator
+--- each_line(rs = $/)  -> Enumerable::Enumerator
+--- lines(rs = $/)      -> Enumerable::Enumerator
+#@end
 
 自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
 
@@ -166,6 +172,11 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 @see [[m:$/]]
 
 --- each_byte{|ch| ... }    -> self
+#@since 1.8.7
+--- bytes{|ch| ... }        -> self
+--- each_byte -> Enumerable::Enumerator
+--- bytes     -> Enumerable::Enumerator
+#@end
 
 自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
 
@@ -202,6 +213,9 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 何もせずに 0 を返します。
 
 --- getc    -> Integer | nil
+#@since 1.8.7
+--- getbyte -> Integer | nil
+#@end
 
 自身から 1 文字読み込んで、その文字に対応する Fixnum を返します。
 文字列の終端に到達した時には nil を返します。 
@@ -337,8 +351,13 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
 --- readchar    -> Integer
+#@since 1.8.7
+--- readbyte    -> Integer
+#@end
 
-自身から 1 文字読み込んで、その文字に対応する整数を返します。文字列の終端に到達した時には例外 EOFError を発生させます。
+自身から 1 文字読み込んで、その文字に対応する整数を返します。
+
+文字列の終端に到達した時には例外 [[c:EOFError]] を発生させます。
 
  a = StringIO.new("hoge")
  a.readchar               #=> 104
@@ -542,3 +561,22 @@ nil を返します。
   a = StringIO.new("hoge", 'r+')
   a.write("aaa")                 #=> 3
   a.string                       #=> "aaae"
+
+#@since 1.8.7
+
+--- each_char{|c| ... } -> self
+--- chars{|c| ... }     -> self
+--- each_char           -> Enumerable::Enumerator
+--- chars               -> Enumerable::Enumerator
+#@todo
+自身に含まれる文字を一文字つつブロックに渡して評価します。
+
+自身は読み込み用にオープンされていなければなりません。
+
+また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
+
+@raise IOError 自身が読み込み用にオープンされていない場合に発生します。
+
+@see [[m:IO#each_char]]
+
+#@end
