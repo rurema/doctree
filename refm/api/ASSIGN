@@ -68,7 +68,7 @@ _builtin/SecurityError          snoozer05       done
 _builtin/Signal                 sheepman        done
 _builtin/SignalException        snoozer05       done
 _builtin/StandardError          snoozer05       done
-_builtin/String                                 done
+_builtin/String                 kouya           done
 _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            okkez           done
 _builtin/Symbol                 eklerni         done
