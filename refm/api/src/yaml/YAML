@@ -426,8 +426,8 @@ obj_classクラスのインスタンスを生成して返します。
 --- parse(io)
 
 与えられた io から YAML フォーマットの文書をパースし
-[[c:YAML::Syck::Node]]オブジェクトに変換する
-複数のドキュメントを読み込む場合は、[[m:YAML.#parse_documents]] を使用する。
+[[c:YAML::Syck::Node]]オブジェクトに変換します。
+複数のドキュメントを読み込む場合は、[[m:YAML.#parse_documents]] を使用します。
 
 @param io YAMLフォーマットのIOオブジェクトもしくは文字列
 
