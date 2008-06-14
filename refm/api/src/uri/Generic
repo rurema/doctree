@@ -10,8 +10,15 @@ include URI
 スキームに対応するデフォルトのポート番号を整数で返します。
 
   require 'uri'
-  p URI::Generic.default_port     # => nil
-  p URI::HTTP.default_port        # => 80
+  URI::Generic.default_port     # => nil
+  URI::FTP.default_port         # => 21
+  URI::HTTP.default_port        # => 80
+  URI::HTTPS.default_port       # => 443
+  URI::LDAP.default_port        # => 389
+#@since 1.8.7
+  URI::LDAPS.default_port       # => 636
+#@end
+  URI::MailTo.default_port      # => nil
 
 --- component     -> [Symbol]
 
@@ -227,6 +234,13 @@ userinfo が「username:password」の形式である場合は、username 部を返します。
   p URI.parse('http://example.com/hoge').path       #=> "/hoge"
   p URI.parse('http://example.com').path            #=> ""
   p URI.parse('mailto:nospam@localhost').path       #=> nil
+#@since 1.8.7
+  p URI('ftp://example.com/foo').path    #=> 'foo'
+  p URI('ftp://example.com/%2Ffoo').path #=> '/foo'
+#@else
+  p URI('ftp://example.com/foo').path    #=> '/foo'
+  p URI('ftp://example.com/%2Ffoo').path #=> '/%2Ffoo'
+#@end
 
 --- path=(s)
 
@@ -331,8 +345,13 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
 
 自身と与えられたパス rel を連結した新しい URI オブジェクトを生成して返します。
 
-[[rfc:2396]] の Section 5.2 の仕様に従います。
+#@since 1.8.7
+[[RFC:3986]] の Section 5.2 の仕様に従います。
+#@else
+[[RFC:2396]] の Section 5.2 の仕様に従います。
+#@end
 rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
+
 
 @param rel 連結したいパスを文字列か URI オブジェクトで与えます。
 
@@ -340,6 +359,21 @@ rel が文字列の場合は URI.parse(rel) によって、URI に変換してから連結します。
   require 'uri'
   p URI.parse('http://www.ruby-lang.org/') + '/en/raa.html'
   #=> #<URI::HTTP:0x201001c0 URL:http://www.ruby-lang.org/en/raa.html>
+#@since 1.8.7
+  URI('http://a/b/c/d;p?q').merge('?y')	           #=> #<URI::HTTP:0xb7ca2e2c URL:http://a/b/c/d;p?y>
+  URI('http://a/b/c/d;p?q').merge('/./g')          #=> #<URI::HTTP:0xb7ca2738 URL:http://a/g>
+  URI('http://a/b/c/d;p?q').merge('/../g')         #=> #<URI::HTTP:0xb7ca2008 URL:http://a/g>
+  URI('http://a/b/c/d;p?q').merge('../../../g')    #=> #<URI::HTTP:0xb7ca1888 URL:http://a/g>
+  URI('http://a/b/c/d;p?q').merge('../../../../g') #=> #<URI::HTTP:0xb7ca10a4 URL:http://a/g>
+#@else
+  URI('http://a/b/c/d;p?q').merge('?y')	           #=> #<URI::HTTP:0xfdbe9c95a URL:http://a/b/c/?y>
+  URI('http://a/b/c/d;p?q').merge('/./g')          #=> #<URI::HTTP:0xfdbe89968 URL:http://a/./g>
+  URI('http://a/b/c/d;p?q').merge('/../g')         #=> #<URI::HTTP:0xfdbea2184 URL:http://a/../g>
+  URI('http://a/b/c/d;p?q').merge('../../../g')    #=> #<URI::HTTP:0xfdbea1ff4 URL:http://a/../g>
+  URI('http://a/b/c/d;p?q').merge('../../../../g') #=> #<URI::HTTP:0xfdbea1d2e URL:http://a/../../g>
+#@end
+
+
 
 --- route_from(src)    -> URI::Generic
 --- -(src)             -> URI::Generic
@@ -401,7 +435,7 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
 
 指定された components に対応する構成要素を文字列の配列として返します。
 
-@param select 構成要素名をシンボルで指定します。
+@param components 構成要素名をシンボルで指定します。
 
 例:
   require 'uri'

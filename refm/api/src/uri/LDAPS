@@ -1,0 +1,7 @@
+= class URI::LDAPS < URI::LDAP
+
+== Constants
+
+--- DEFAULT_PORT -> Integer
+
+デフォルトのポート (636) です。
