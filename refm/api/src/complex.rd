@@ -201,6 +201,23 @@ Complex.new(m1, m2)にして返します。つまり、
 このメソッドは廃止されました。
 #@end
 
+--- quo(other) -> Complex
+複素数otherでの除算結果を返します。
+
+@param other 複素数
+@return self./(other) の結果においての実部と虚部をそれぞれ[[c:Rational]]オブジェクト化したものを実部・虚部とする[[c:Complex]]クラスのオブジェクトを返します。
+        
+[注意]
+  [[m:Complex#/]] との違いは実部と虚部が全て整数だった場合に分数([[c:Rational]]クラスのオブジェクト)として計算されます。 
+
+例:
+
+  z1 = Complex.new(6, 4)
+  z2 = Complex.new(2, 2)
+
+  p z1.quo(2)   #=> Complex(Rational(3, 1), Rational(2, 1))
+  p z1.quo(z2)  #=> Complex(Rational(5, 2), Rational(-1, 2))
+
 --- abs -> Float
 自分自身の絶対値を返します。
 
@@ -518,41 +535,120 @@ z の平方根を返します。
   p Math.log10(n) #=> 0.301029995663981
   p Math.log10(z) #=> Complex(0.301029995663981, 0.0)
 
---- cos(z)
-#@todo
+--- cos(z) -> Complex
+複素関数としてのcos関数の結果を返します。
 
---- sin(z)
-#@todo
+cos関数は以下で定義されます。
 
---- tan(z)
-#@todo
+  cos(z)  = (exp(i * z) + exp(-i * z)) / 2
 
---- cosh(z)
-#@todo
+@param z 複素数
 
---- sinh(z)
-#@todo
+--- sin(z) -> Complex
+複素関数としてのsin関数の結果を返します。
 
---- tanh(z)
-#@todo
+sin関数は以下で定義されます。
 
---- acos(z)
-#@todo
+  sin(z)  = (exp(i * z) - exp(-i * z)) / 2
 
---- asin(z)
-#@todo
+@param z 複素数
 
---- atan(z)
-#@todo
+--- tan(z) -> Complex
+複素関数としてのtan関数の結果を返します。
 
---- atan2(z)
-#@todo
+tan関数は以下で定義されます。
 
---- acosh(z)
-#@todo
+  tan(z)  = sin(z) / cos(z)
 
---- asinh(z)
-#@todo
+@param z 複素数
 
---- atanh(z)
-#@todo
+--- cosh(z) -> Complex
+複素関数としてのcosh関数(双曲線cos関数)の結果を返します。
+
+cosh関数は以下で定義されます。
+
+  cosh(z) = (exp(z) + exp(-z)) / 2
+
+@param z 複素数
+
+--- sinh(z) -> Complex
+複素関数としてのsinh関数(双曲線sin関数)の結果を返します。
+
+sinh関数は以下で定義されます。
+
+  sinh(z) = (exp(z) - exp(-z)) / 2
+
+@param z 複素数
+
+--- tanh(z) -> Complex
+複素関数としてのtanh関数(双曲線tan関数)の結果を返します。
+
+tanh関数は以下で定義されます。
+
+  tanh(z) = sinh(z) / cosh(z)
+
+@param z 複素数
+
+--- acos(z) -> Complex
+複素関数としてのacos関数(逆cos関数)の結果を返します。
+
+acos関数は以下で定義されます。
+
+  acos(z) = -i * log(z + i*sqrt(1-z*z))
+
+@param z 複素数
+
+--- asin(z) -> Complex
+複素関数としてのasin関数(逆sin関数)の結果を返します。
+
+asin関数は以下で定義されます。
+
+  asin(z) = -i * log(i*z + sqrt(1-z*z))
+
+@param z 複素数
+
+--- atan(z) -> Complex
+複素関数としてのatan関数(逆tan関数)の結果を返します。
+
+atan関数は以下で定義されます。
+
+  atan(z) = i/2 * log((i+z) / (i-z))
+
+@param z 複素数
+
+--- atan2(z) -> Complex
+複素関数としてのatan2関数の結果を返します。
+
+atan2関数は以下で定義されます。
+
+  atan2(y, x) = -i * log( (x + i * y) / sqrt( x*x + y*y ) )
+
+@param z 複素数
+
+--- acosh(z) -> Complex
+複素関数としてのacosh関数(双曲逆cos関数)の結果を返します。
+
+acosh関数は以下で定義されます。
+
+  acosh(z) = log(z + sqrt(z*z-1))
+
+@param z 複素数
+
+--- asinh(z) -> Complex
+複素関数としてのasinh関数(双曲逆sin関数)の結果を返します。
+
+asinh関数は以下で定義されます。
+
+  asinh(z) = log(z + sqrt(z*z+1))
+
+@param z 複素数
+
+--- atanh(z) -> Complex
+複素関数としてのatanh関数(双曲逆tan関数)の結果を返します。
+
+atanh関数は以下で定義されます。
+
+  atanh(z) = 1/2 * log((1+z) / (1-z))
+
+@param z 複素数
+
