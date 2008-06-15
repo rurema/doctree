@@ -30,6 +30,8 @@
   真を指定するとコピーを実行する前にコピー先を削除します。
 : :secure
   真を指定するとファイルの削除に [[m:FileUtils#remove_entry_secure]] を使用します。
+: :mtime
+  時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
 == Module Functions
 
@@ -626,12 +628,13 @@ list で指定されたファイルが存在しない場合は空のファイルを作成します。
 @param list 対象のファイル。一つの場合は文字列も指定可能です。
             二つ以上指定する場合は配列で指定します。
 
-@param options :noop と :verbose が指定できます。
+@param options :mtime, :nocreate, :noop, :verbose が指定できます。
                [[ref:options]]
 
 例:
 
   FileUtils.touch('timestamp')
+  FileUtils.touch('timestamp', :mtime => Time.now)
   FileUtils.touch(Dir.glob('*.c'))
 
 --- uptodate?(newer, older_list, options = nil) -> bool
