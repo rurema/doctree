@@ -4,63 +4,118 @@
 
 基本的なファイル操作を集めたモジュールです。
 
+
+====[a:options] オプションの説明
+
+引数 options で使用できるオプションの説明です。
+メソッドごとに使用できるオプションは決まっています。
+不正なオプションを与えると [[c:ArgumentError]] が発生します。
+
+: :noop
+  真を指定すると実際の処理は行いません。
+: :preserve
+  真を指定すると更新時刻と、可能なら所有ユーザ・所有グループもコピーします。
+: :verbose
+  真を指定すると詳細を出力します。
+: :mode
+  パーミッションを8進数で指定します。
+: :force
+  真を指定すると作業中すべての [[c:StandardError]] を無視します。
+: :nocreate
+  真を指定するとファイルを作成しません。
+: :dereference_root
+  真を指定すると src についてだけシンボリックリンクの指す
+  内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+: :remove_destination
+  真を指定するとコピーを実行する前にコピー先を削除します。
+: :secure
+  真を指定するとファイルの削除に [[m:FileUtils#remove_entry_secure]] を使用します。
+
 == Module Functions
 
---- cd(dir, options = {})
---- cd(dir, options = {}) {|dir| .... }
---- chdir(dir, options = {})
---- chdir(dir, options = {}) {|dir| .... }
-#@todo
+--- cd(dir, options = {})                   -> nil
+--- cd(dir, options = {}) {|dir| .... }     -> ()
+--- chdir(dir, options = {})                -> nil
+--- chdir(dir, options = {}) {|dir| .... }  -> ()
 
 プロセスのカレントディレクトリを dir に変更します。
+
 ブロックとともに呼び出された時はブロック終了後に
 元のディレクトリに戻ります。
 
-options には :verbose が指定できます。
+@param dir ディレクトリを指定します。
 
 #@since 1.8.3
-:noop オプションは廃止されました。
+@param options :verbose が指定できます。
+#@else
+@param options :noop, :verbose が指定できます。
 #@end
+               [[ref:options]]
 
 例:
 
   FileUtils.cd('/', {:verbose => true})   # chdir and report it
 
---- chmod(mode, list, options = {})
-#@todo
+--- chmod(mode, list, options = {}) -> Array
 
-ファイル list[0], list[1], …… のパーミッションを mode に変更します。
+ファイル list のパーミッションを mode に変更します。
 
-options には :noop と :verbose が指定可能です。
+@param mode パーミッションを8進数で指定します。
+
+@param list ファイルのリストを指定します。 対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param options :noop と :verbose が指定可能です。
+               [[ref:options]]
+
+@return list を配列として返します。
 
 例:
 
-  FileUtils.chmod(0644, 'my.rb', 'your.rb')
+  FileUtils.chmod(0644, ['my.rb', 'your.rb'])
   FileUtils.chmod(0755, 'somecommand')
   FileUtils.chmod(0755, '/usr/bin/ruby', {:verbose => true})
 
 #@since 1.8.3
---- chmod_R(mode, list, options = {})
-#@todo
+--- chmod_R(mode, list, options = {}) -> Array
 
-ファイル list[0], list[1], …… のパーミッションを再帰的に mode へ変更します。
+ファイル list のパーミッションを再帰的に mode へ変更します。
 
-options には :noop と :verbose が指定可能です。
+@param mode パーミッションを8進数で指定します。
+
+@param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param options :noop と :verbose が指定可能です。
+               [[ref:options]]
+
+@return list を配列として返します。
 
 例:
 
   FileUtils.chmod_R(0700, '/tmp/removing')
+
 #@end
 
 #@since 1.8.3
---- chown(user, group, list, options = {})
-#@todo
+--- chown(user, group, list, options = {}) -> Array
 
-ファイル list[0], list[1], ... の
-所有ユーザと所有グループを user と group に変更します。
+ファイル list の所有ユーザと所有グループを user と group に変更します。
+
 user, group に nil または -1 を渡すとその項目は変更しません。
 
-options には :noop と :verbose が指定可能です。
+@param user ユーザー名か uid を指定します。nil/-1 を指定すると変更しません。
+
+@param group グループ名か gid を指定します。nil/-1 を指定すると変更しません。
+
+@param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param options :noop と :verbose が指定可能です。
+               [[ref:options]]
+
+@return list を配列として返します。
+
 
 例:
 
@@ -69,14 +124,24 @@ options には :noop と :verbose が指定可能です。
 #@end
 
 #@since 1.8.3
---- chown_R(user, group, list, options = {})
-#@todo
+--- chown_R(user, group, list, options = {}) -> Array
 
-list[0], list[1], ... 以下のファイルの所有ユーザと所有グループを
+list 以下のファイルの所有ユーザと所有グループを
 user と group へ再帰的に変更します。
+
 user, group に nil または -1 を渡すとその項目は変更しません。
 
-options には :noop と :verbose が指定可能です。
+@param user ユーザー名か uid を指定します。nil/-1 を指定すると変更しません。
+
+@param group グループ名か gid を指定します。nil/-1 を指定すると変更しません。
+
+@param list ファイルのリストを指定します。対象のファイルが一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param options :noop と :verbose が指定可能です。
+               [[ref:options]]
+
+@return list を配列として返します。
 
 例:
 
@@ -87,205 +152,241 @@ options には :noop と :verbose が指定可能です。
   FileUtils.chown_R 'cvs', 'cvs', '/var/cvs', :verbose => true
 #@end
 
---- cmp(file_a, file_b)
---- compare_file(file_a, file_b)
---- identical?(file_a, file_b)
-#@todo
+--- cmp(file_a, file_b)          -> bool
+--- compare_file(file_a, file_b) -> bool
+--- identical?(file_a, file_b)   -> bool
 
 ファイル a と b の内容が同じなら真を返します。
+
+@param file_a ファイル名。
+
+@param file_b ファイル名。
 
 例:
 
   FileUtils.cmp('somefile', 'somefile')  #=> true
   FileUtils.cmp('/bin/cp', '/bin/mv')    #=> maybe false.
 
---- compare_stream(a, b)
-#@todo
+--- compare_stream(io_a, io_b) -> bool
 
-[[c:IO]] オブジェクト a と b の内容が同じなら真を返します。
+[[c:IO]] オブジェクト io_a と io_b の内容が同じなら真を返します。
+
+@param io_a [[c:IO]] オブジェクト。
+
+@param io_b [[c:IO]] オブジェクト。
 
 #@since 1.8.3
---- copy_entry(src, dest, preserve = false, dereference_root = false)
-#@todo
+--- copy_entry(src, dest, preserve = false, dereference_root = false) -> ()
 
-ファイル src を dest にコピーします。src が普通のファイルでない場合は
-その種別まで含めて完全にコピーします。src がディレクトリの場合はその
-中身を再帰的にコピーします。
+ファイル src を dest にコピーします。
 
-preserve が真のときは更新時刻と、
-可能なら所有ユーザ・所有グループもコピーします。
+src が普通のファイルでない場合はその種別まで含めて完全にコピーします。
+src がディレクトリの場合はその中身を再帰的にコピーします。
 
-dereference_root が真のときは src についてだけシンボリックリンクの指す
-内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+@param src コピー元。
+
+@param dest コピー先。
+
+@param preserve preserve が真のときは更新時刻と、
+                可能なら所有ユーザ・所有グループもコピーします。
+
+@param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
+                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+
 #@end
 
 #@since 1.8.3
---- copy_file(src, dest, preserve = false, dereference_root = true)
-#@todo
+--- copy_file(src, dest, preserve = false, dereference_root = true) -> ()
 
 ファイル src の内容を dest にコピーします。
 
-preserve が真のときは更新時刻と、
-可能なら所有ユーザ・所有グループもコピーします。
+@param src コピー元。
 
-dereference_root が真のときは src についてだけシンボリックリンクの指す
-内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+@param dest コピー先。
+
+@param preserve preserve が真のときは更新時刻と、
+                可能なら所有ユーザ・所有グループもコピーします。
+
+@param dereference_root dereference_root が真のときは src についてだけシンボリックリンクの指す
+                        内容をコピーします。偽の場合はシンボリックリンク自体をコピーします。
+
 #@end
 
 #@since 1.8.3
---- copy_stream(src, dest)
-#@todo
+--- copy_stream(src, dest) -> ()
 
 src を dest にコピーします。
 src には read メソッド、dest には write メソッドが必要です。
+
+@param src read メソッドを持つオブジェクト。
+
+@param dest write メソッドを持つオブジェクト。
+
 #@end
 
---- cp(src, dest, options = {})
---- copy(src, dest, options = {})
-#@todo
+--- cp(src, dest, options = {})   -> ()
+--- copy(src, dest, options = {}) -> ()
 
-ファイル src を dest にコピーします。dest がディレクトリなら
-dest/src にコピーします。dest が既に存在ししかもディレクトリで
-ないときは上書きします。
+ファイル src を dest にコピーします。
 
-options には :preserve, :noop, :verbose が指定できます。
+src にファイルが一つだけ与えられた場合、
+dest がディレクトリならdest/src にコピーします。
+dest が既に存在ししかもディレクトリでないときは上書きします。
+
+src にファイルが複数与えられた場合、
+file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
+というように、ディレクトリ dest の中にファイル file1、file2 …を
+同じ名前でコピーします。dest がディレクトリでない場合は例外
+[[c:Errno::ENOTDIR]] が発生します。
+
+@param src コピー元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest コピー先のファイルかディレクトリです。
+
+@param options :preserve, :noop, :verbose が指定できます。
+               [[ref:options]]
+
+@raise Errno::ENOTDIR src が複数のファイルかつ、dest がディレクトリでない場合に発生します。
 
 例:
 
   FileUtils.cp 'eval.c', 'eval.c.org'
+  FileUtils.cp(['cgi.rb', 'complex.rb', 'date.rb'], '/usr/lib/ruby/1.8')
+  FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.8', {:verbose => true})
 
---- cp(list, dir, options = {})
---- copy(list, dir, options = {})
-#@todo
-
-file1 を dir/file1 にコピー、file2 を dir/file2 にコピー、
-というように、ディレクトリ dir の中にファイル file1、file2 …を
-同じ名前でコピーします。dir がディレクトリでない場合は例外
-Errno::ENOTDIR が発生します。
-
-options には :preserve, :noop, :verbose が指定できます。
-
-例:
-
-  FileUtils.cp('cgi.rb', 'complex.rb', 'date.rb', '/usr/lib/ruby/1.6')
-  FileUtils.cp(%w(cgi.rb complex.rb date.rb), '/usr/lib/ruby/1.6', {:verbose => true})
-
---- cp_r(src, dest, options = {})
-#@todo
+--- cp_r(src, dest, options = {}) -> ()
 
 src を dest にコピーします。src がディレクトリであったら再帰的に
 コピーします。その際 dest がディレクトリなら dest/src にコピーします。
 
-options には :preserve, :noop, :verbose が指定できます。
+@param src コピー元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest コピー先のファイルかディレクトリです。
+
+@param options :preserve, :noop, :verbose, :dereference_root, :remove_destination が指定できます。
+               [[ref:options]]
 
 例:
 
   # installing ruby library "mylib" under the site_ruby
   FileUtils.rm_r(site_ruby + '/mylib', {:force => true})
   FileUtils.cp_r('lib/', site_ruby + '/mylib')
-
---- cp_r(list, dir, options = {})
-#@todo
-
-list[0]、list[1], list[2], ... をディレクトリ dir の中にコピーします。
-list[n] がディレクトリなら再帰的にコピーします。
-
-options には :preserve, :noop, :verbose を指定できます。
-
-例:
-
+  # other sample
   FileUtils.cp_r(%w(mail.rb field.rb debug/), site_ruby + '/tmail')
   FileUtils.cp_r(Dir.glob('*.rb'), '/home/taro/lib/ruby',
                  {:noop => true, :verbose => true})
 
 --- install(src, dest, options = {})
-#@todo
 
 src と dest の内容が違うときだけ src を dest にコピーします。
 
-options には :noop, :verbose, :mode を指定できます。
-mode オプションを指定した場合はコピー先ファイルのパーミッションを
-options[:mode] の値に設定します。
+@param src コピー元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest コピー先のファイルかディレクトリです。
+
+@param options :preserve, :noop, :verbose, :mode が指定できます。
+               [[ref:options]]
 
 例:
 
   FileUtils.install('ruby', '/usr/local/bin/ruby', {:mode => 0755, :verbose => true})
-  FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby'
-                            , {:verbose => true})
+  FileUtils.install('lib.rb', '/usr/local/lib/ruby/site_ruby', {:verbose => true})
 
---- ln(src, dest, options = {})
---- link(src, dest, options = {})
-#@todo
+--- ln(src, dest, options = {})   -> ()
+--- link(src, dest, options = {}) -> ()
 
 src へのハードリンク dest を作成します。
+
+src が一つの場合、
 dest がすでに存在しディレクトリであるときは dest/src を作成します。
 dest がすでに存在しディレクトリでないならば例外 Errno::ENOTDIR が発生します。
-ただし :force オプションを指定したときは new を上書きします。
+ただし :force オプションを指定したときは dest を上書きします。
 
-options には :force, :noop, :verbose が指定できます。
+src が複数の場合、
+src[0] へのハードリンク dest/src[0]、src[1] への
+ハードリンク dest/src[1] …を作成します。
+dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
+
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest リンク作成先のファイルかディレクトリです。
+
+@param options :force, :noop, :verbose が指定できます。
+               [[ref:options]]
+
+@raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
+
 
 例:
 
   FileUtils.ln('gcc', 'cc', {:verbose => true})
   FileUtils.ln('/usr/bin/emacs21', '/usr/bin/emacs')
-
---- ln(list, destdir, options = {})
---- link(list, destdir, options = {})
-#@todo
-
-list[0] へのハードリンク destdir/list[0]、list[1] への
-ハードリンク destdir/list[1] …を作成します。
-destdir がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
-
-options には :force, :noop, :verbose が指定できます。
-
-例:
-
   FileUtils.cd('/bin')
   FileUtils.ln(%w(cp mv mkdir), '/usr/bin')
 
---- ln_s(src, dest, options = {})
---- symlink(src, dest, options = {})
-#@todo
+--- ln_s(src, dest, options = {})    -> ()
+--- symlink(src, dest, options = {}) -> ()
 
 src へのシンボリックリンク dest を作成します。
+
+src が一つの場合、
 dest がすでに存在しディレクトリであるときは dest/src を作成します。
 dest がすでに存在しディレクトリでないならば例外 Errno::ENOTDIR が発生します。
 ただし :force オプションを指定したときは dest を上書きします。
 
-options には :force, :noop, :verbose を指定できます。
+src が複数の場合、
+src[0] へのシンボリックリンク dest/src[0]、src[1] への
+シンボリックリンク dest/src[1] …を作成します。
+dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
+
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest リンク作成先のファイルかディレクトリです。
+
+@param options :force, :noop, :verbose が指定できます。
+               [[ref:options]]
+
+@raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
+
 
 例:
 
   FileUtils.ln_s('/usr/bin/ruby', '/usr/local/bin/ruby')
   FileUtils.ln_s('verylongsourcefilename.c', 'c', {:force => true})
-
---- ln_s(list, destdir, options = {})
---- symlink(list, destdir, options = {})
-#@todo
-
-list[0]、list[1] …へのシンボリックリンク dir/list[0], dir/list[1] …を
-作成します。destdir がディレクトリでない場合は例外 Errno::ENOTDIR が
-発生します。
-ただし :force オプションを指定したときは dest を上書きします。
-
-options には :noop, :verbose を指定できます。
-
-例:
-
   FileUtils.ln_s(Dir.glob('bin/*.rb'), '/home/aamine/bin')
 
---- ln_sf(src, dest, options = {})
-#@todo
+--- ln_sf(src, dest, options = {}) -> ()
+
+src へのシンボリックリンク dest を作成します。
 
 ln_s(src, dest, :force => true) と同じです。
 
---- mkdir(dir, options = {})
-#@todo
+@param src リンク元。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest リンク作成先のファイルかディレクトリです。
+
+@param options :force, :noop, :verbose が指定できます。
+               [[ref:options]]
+
+@raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
+
+@see [[m:FileUtils.#ln_s]]
+
+--- mkdir(dir, options = {}) -> ()
 
 ディレクトリ dir を作成します。
 
-options には :noop, :verbose が指定できます。
+@param dir 作成するディレクトリ。
+
+@param options :mode, :noop, :verbose が指定できます。
+               [[ref:options]]
+
 
 例:
 
@@ -293,12 +394,12 @@ options には :noop, :verbose が指定できます。
   FileUtils.mkdir(%w( tmp data ))
   FileUtils.mkdir('notexist', {:noop => true})  # does not create really
 
---- mkdir_p(dir, options = {})
---- mkpath(dir, options = {})
---- makedirs(dir, options = {})
-#@todo
+--- mkdir_p(list, options = {})  -> String | Array
+--- mkpath(list, options = {})   -> String | Array
+--- makedirs(list, options = {}) -> String | Array
 
 ディレクトリ dir とその親ディレクトリを全て作成します。
+
 例えば、
 
   FileUtils.mkdir_p('/usr/local/lib/ruby')
@@ -310,51 +411,57 @@ options には :noop, :verbose が指定できます。
   * /usr/local/bin
   * /usr/local/bin/ruby
 
-options には :noop, :verbose が指定できます。
+@param list 作成するディレクトリ。一つの場合は文字列でも指定できます。
+            二つ以上指定する場合は配列で指定します。
 
---- mv(src, dest, options = {})
---- move(src, dest, options = {})
-#@todo
+@param options :mode, :noop, :verbose が指定できます。
+               [[ref:options]]
+
+@return list を返します。
+
+--- mv(src, dest, options = {})   -> ()
+--- move(src, dest, options = {}) -> ()
 
 ファイル src を dest に移動します。
-dest がディレクトリなら dest/src に移動します。
 
-options には :noop と :verbose が指定できます。
+src が一つの場合、
+dest がすでに存在しディレクトリであるときは src を dest/src へ移動します。
+dest がすでに存在しディレクトリでないときは src は dest を上書きします。
+
+src が複数の場合、
+src[0] を dest/src[0]、src[1] を dest/src[1] へ移動します。
+dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
+
+@param src 元のファイル。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param dest 移動先のファイル、またはディレクトリ。
+
+@param options :force, :noop, :verbose, :secure が指定できます。
+               [[ref:options]]
 
 例:
 
   FileUtils.mv('badname.rb', 'goodname.rb')
   FileUtils.mv('stuff.rb', 'lib/ruby', {:force => true})
-
---- mv(list, dir, options = {})
---- move(list, dir, options = {})
-#@todo
-
-list[0], list[1], ... をディレクトリ dir の中に移動します。
-パーティションをまたいで移動するときはコピーします。
-
-options には :noop と :verbose が指定できます。
-
-例:
-
   FileUtils.mv(['junk.txt', 'dust.txt'], "#{ENV['HOME']}/.trash")
-  FileUtils.mv(Dir.glob('test*.rb'), 'test',
-               {:noop => true, :verbose => true} )
+  FileUtils.mv(Dir.glob('test*.rb'), 'test', {:noop => true, :verbose => true} )
 
---- pwd
---- getwd
-#@todo
+--- pwd   -> String
+--- getwd -> String
 
 プロセスのカレントディレクトリを文字列で返します。
 
---- rm(list, options = {})
---- remove(list, options = {})
-#@todo
+--- rm(list, options = {})     -> ()
+--- remove(list, options = {}) -> ()
 
-list[0], list[1], ... を消去します。:force オプションが
-セットされた場合は作業中すべての StandardError を無視します。
+list で指定された対象を消去します。
 
-options には :force, :noop, :verbose が指定できます。
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
+
+@param options :force, :noop, :verbose が指定できます。
+               [[ref:options]]
 
 例:
 
@@ -362,39 +469,74 @@ options には :force, :noop, :verbose が指定できます。
   FileUtils.rm(Dir.glob('*~'))
   FileUtils.rm('NotExistFile', {:force => true})    # never raises exception
 
---- rm_f(list, options = {})
---- safe_unlink(list, options = {})
-#@todo
+--- rm_f(list, options = {})        -> ()
+--- safe_unlink(list, options = {}) -> ()
 
 FileUtils.rm(list, :force => true) と同じです。
 
---- rm_r(list, options = {})
-#@todo
+[[ref:options]]
 
-ファイルまたはディレクトリ list[0], list[1], ... を再帰的に消去します。
-force オプションを渡した場合は削除中に発生した StandardError を無視します。
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
 
-options には :force, :noop, :verbose を指定できます。
+@param options :noop, :verbose が指定できます。
+               :force がセットされた場合は作業中すべての [[c:StandardError]] を無視します。
+
+@see [[m:FileUtils.#rm]]
+
+--- rm_r(list, options = {}) -> ()
+
+ファイルまたはディレクトリ list を再帰的に消去します。
+
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
+
+@param options :force, :noop, :verbose, :secure が指定できます。
+               [[ref:options]]
+
+==== 注意
+
+このメソッドにはローカル脆弱性が存在します。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
 
 例:
 
   FileUtils.rm_r(Dir.glob('/tmp/*'))
 
-このメソッドにはローカル脆弱性が存在します。
-詳しくは remove_entry_secure の項を参照してください。
+@see [[m:FileUtils.#rm]], [[m:FileUtils.#remove_entry_secure]]
 
---- rm_rf(list, options = {})
---- rmtree(list, options = {})
-#@todo
+--- rm_rf(list, options = {})  -> ()
+--- rmtree(list, options = {}) -> ()
+
+ファイルまたはディレクトリ list を再帰的に消去します。
 
 rm_r(list, {:force => true}) と同じです。
 
---- rmdir(dir, options = {})
-#@todo
+@param list 削除する対象。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
+
+@param options :noop, :verbose, :secure が指定できます。
+               [[ref:options]]
+
+==== 注意
+
+このメソッドにはローカル脆弱性が存在します。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
+
+
+@see [[m:FileUtils.#rm]], [[m:FileUtils.#rm_r]], [[m:FileUtils.#remove_entry_secure]]
+
+--- rmdir(dir, options = {}) -> ()
 
 ディレクトリ dir を削除します。
 
-options には :noop, :verbose が指定できます。
+@param dir 削除するディレクトリを指定します。一つの場合は文字列でも指定可能です。
+           二つ以上指定する場合は配列で指定します。
+
+@param options :noop, :verbose が指定できます。
+               [[ref:options]]
+
+@raise Errno::ENOTEMPTY 削除するディレクトリが空でない場合に発生します。
 
 例:
 
@@ -409,28 +551,32 @@ options には :noop, :verbose が指定できます。
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
-force が真のときは削除中に発生した StandardError を無視します。
+このメソッドにはローカル脆弱性が存在します。
+詳しくは [[m:FileUtils.#remove_entry_secure]] の項を参照してください。
+
+@param path 削除するパス。
+
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
 例:
 
   FileUtils.remove_entry '/tmp/ruby.tmp.08883'
 
-このメソッドにはローカル脆弱性が存在します。
-詳しくは remove_entry_secure の項を参照してください。
+@see [[m:FileUtils.#remove_entry_secure]]
+
 #@end
 
 #@since 1.8.3
---- remove_entry_secure(path, force = false)
+--- remove_entry_secure(path, force = false) -> ()
 #@todo
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
-force が真のときは削除中に発生した StandardError を無視します。
-
-rm_r および remove_entry には TOCTTOU (time-of-check to time-of-use)
-脆弱性が存在します。このメソッドはそれを防ぐために新設されました。
-rm_r および remove_entry は以下の条件が満たされるときにはセキュリティ
-ホールになりえます。
+[[m:FileUtils.#rm_r]] および [[m:FileUtils.#remove_entry]] には
+TOCTTOU (time-of-check to time-of-use)脆弱性が存在します。
+このメソッドはそれを防ぐために新設されました。
+[[m:FileUtils.#rm_r]] および [[m:FileUtils.#remove_entry]] は以下の条件が
+満たされるときにはセキュリティホールになりえます。
 
   * 親ディレクトリが全ユーザから書き込み可能 (/tmp を含む)
   * path 以下のいずれかのディレクトリが全ユーザから書き込み可能
@@ -447,63 +593,79 @@ rm_r および remove_entry は以下の条件が満たされるときにはセキュリティ
     その場合 / や /var が全ユーザから書き込み可能であってはなりません。
 
 この条件が満たされない場合 remove_entry_secure は安全ではありません。
+
+@param path 削除するパス。
+
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
+
 #@end
 
---- remove_file(path, force = false)
-#@todo
+--- remove_file(path, force = false) -> ()
 
 ファイル path を削除します。
 
-force が真のときは削除中に発生した StandardError を無視します。
+@param path 削除するファイル。
 
---- remove_dir(path, force = false)
-#@todo
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
+
+--- remove_dir(path, force = false) -> ()
 
 ディレクトリ path を削除します。
 
-force が真のときは削除中に発生した StandardError を無視します。
+@param path 削除するディレクトリ。
 
---- touch(list, options = {})
-#@todo
+@param force 真のときは削除中に発生した [[c:StandardError]] を無視します。
 
-list[0], list[1], ... の最終変更時刻 (mtime) と
+--- touch(list, options = {}) -> ()
+
+list で指定されたファイルの最終変更時刻 (mtime) と
 アクセス時刻 (atime) を変更します。
-list[n] が存在しない場合は空のファイルを作成します。
 
-option には :noop と :verbose が指定できます。
+list で指定されたファイルが存在しない場合は空のファイルを作成します。
+
+@param list 対象のファイル。一つの場合は文字列も指定可能です。
+            二つ以上指定する場合は配列で指定します。
+
+@param options :noop と :verbose が指定できます。
+               [[ref:options]]
 
 例:
 
   FileUtils.touch('timestamp')
   FileUtils.touch(Dir.glob('*.c'))
 
---- uptodate?(newer, older_list)
-#@todo
+--- uptodate?(newer, older_list, options = nil) -> bool
 
 newer が、older_list に含まれるすべてのファイルより新しいとき真。
 存在しないファイルは無限に古いとみなされます。
+
+@param newer ファイルを一つ指定します。
+
+@param older_list ファイル名の配列を指定します。
+
+@param options どのようなオプションも指定することはできません。
+
+@raise ArgumentError options にオプションを指定した場合に発生します。
 
 例:
 
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
 
-
-
 = module FileUtils::Verbose
+include FileUtils
 
 FileUtils と同じメソッドが定義されており全く同じ動作をしますが、
 しようとしていることを実行前に表示します。
 
-
-
 = module FileUtils::NoWrite
+include FileUtils
 
 FileUtils と同じメソッドが定義されていますが、
 実際にファイルを変更する操作は実行しません。
 
 
-
 = module FileUtils::DryRun
+include FileUtils
 
 FileUtils と同じメソッドが定義されていますが、
 実際にファイルを変更する操作は実行せず、操作を表示します。

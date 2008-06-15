@@ -135,7 +135,7 @@ eregex
 etc
 expect
 fcntl
-fileutils                       okkez
+fileutils                       okkez           done
 final
 finalize
 find
