@@ -60,27 +60,28 @@ Vector および Matrix のそれぞれの項目を参照してください。
  
 == Class Methods
 
---- new(r,i) -> Complex
---- new!(r,i=0) -> Complex
-[[c:Complex]]クラスのオブジェクトを生成します。
-
-実部が r、虚部が i である複素数を生成します。
+--- new(r, i) -> Complex
+--- new!(r, i = 0) -> Complex
+実部が r、虚部が i である[[c:Complex]]クラスのオブジェクトを生成します。
 
 @param r 生成する複素数の実部
 @param i 生成する複素数の虚部
 
 例:
 
-  p Complex(1, 1)       #=> Complex(1, 1)
-  p Complex(3.5)        #=> Complex(3.5, 0)
+  p Complex.new(1, 1)   #=> Complex(1, 1)
+  p Complex.new(3.5)    #=> Complex(3.5, 0)
 
 --- polar(r, theta) -> Complex
-[[c:Complex]]クラスのオブジェクトを生成します。
-
-絶対値が r、偏角が theta である複素数を生成します。
+絶対値が r、偏角が theta である [[c:Complex]]クラスのオブジェクトを生成します。
 
 @param r 生成する複素数の絶対値。
-@param theta 生成する複素数の偏角。単位はラジアン角です。
+@param theta 生成する複素数の偏角。単位はラジアンです。
+
+例:
+
+  p Complex.polar(2.0, 0)         #=> Complex(2.0, 0.0)
+  p Complex.polar(2.0, Math::PI)  #=> Complex(-2.0, 2.44929359829471e-16)
 
 --- generic?(other) -> bool
 other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判定します。
@@ -127,8 +128,8 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判
   p c * Complex(2, 2)   #=> Complex(0, 4)
   p c * 3               #=> Complex(3, 3)
 
---- /(c) -> Complex
-複素数 c で除した結果を返します。
+--- /(other) -> Complex
+複素数 other で除した結果を返します。
 
   z1 = a + b * i
   z2 = c + d * i
@@ -146,7 +147,7 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判
   p z1 / z2       #=> Complex(2, 0)
   p 1.0 * z1 / z2 #=> Complex(2.2, 0.4)
   
-@param c 除算する数
+@param other 除算する数
 @return 除算結果を[[c:Complex]]クラスのオブジェクトとして返します。
 
 例:
@@ -159,25 +160,26 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判
 
 #@if (version < "1.9.0")
 --- %(c) -> Complex
-実部同士の演算結果 m1 と虚部同士の演算結果 m2 を複素数
-Complex.new(m1, m2)にして返します。つまり、
+除算の剰余を計算します。
 
-  z1 = a + b * i
-  z2 = c + d * i
+引数other が[[c:Complex]]オブジェクトの場合、
 
-としたとき、計算結果は
+  (自分自身の実部 % c の実部) + (自分自身の虚部 % c の虚部) * i
 
-  z1 % z2 = (a % c) + (b % d) * i
+を返します。
+このため、c の実部または虚部が0だった場合、ZeroDivisionError例外が発生することにに注意してください。
+引数 c が[[c:Complex]]のオブジェクトではない場合、実部・虚部それぞれを c で除算したときの剰余を実部・虚部に持つ[[c:Complex]]オブジェクトを返します。
 
-です。
+例：
+  Complex(5, 4) % 3 #=> Complex(2, 1)
 
-@param c 演算する数
+@param c 除算する数
 @return 演算結果を[[c:Complex]]クラスのオブジェクトとして返します。
 
 [注意] このメソッドは Ruby 1.9.0 で廃止されました。
 
 #@else
-このメソッドは廃止されました。
+[注意] このメソッドは廃止されました。
 #@end
 
 --- **(c) -> Complex
