@@ -569,7 +569,7 @@ nil を返します。
 --- each_char           -> Enumerable::Enumerator
 --- chars               -> Enumerable::Enumerator
 #@todo
-自身に含まれる文字を一文字つつブロックに渡して評価します。
+自身に含まれる文字を一文字ずつブロックに渡して評価します。
 
 自身は読み込み用にオープンされていなければなりません。
 
