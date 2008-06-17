@@ -263,11 +263,11 @@ timeout
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-tmpdir                          kouya            done
+tmpdir                          kouya           done
 tracer
 tsort
-un                              okkez            done
-uri                             sheepman         done
+un                              okkez           done
+uri                             sheepman        done
 weakref                         bornite
 webrick                         sheepman
 webrick/cgi                     sheepman
