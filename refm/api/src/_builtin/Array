@@ -983,20 +983,27 @@ join した文字列を連結します。
 
   p [1, nil, 3, nil].size    #=> 4
 
+#@until 1.9.0
 --- nitems    -> Integer
 #@since 1.8.7
---- nitems{|obj| ... }
+--- nitems{|obj| ... } -> Integer
 #@end
+
 
 nil でない要素の数を返します。
 
-ブロックが与えられた場合は、各要素を引数として実行し
-true が返された要素の数を返します。
+#@since 1.8.7
+ブロックが与えられた場合は、各要素を引数として評価し nil でない値を返した
+要素の数を返します。
+#@end
 
 例:
   p [1, nil, 3, nil].nitems              #=> 2
-  p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 1
-  
+#@since 1.8.7
+  p [1, nil, 3, nil].nitems{|e| e == 1}  #=> 2
+#@end
+#@end
+
 --- pack(template)    -> String
 
 配列の内容を template で指定された文字列にしたがって、
