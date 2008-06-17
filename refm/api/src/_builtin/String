@@ -1142,11 +1142,11 @@ str == eval(str.dump) となることが保証されています。
     # p だとさらにバックスラッシュが増えて見にくいので puts している
     puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 
---- each(rs = $/) {|line| ... } -> ()
---- each_line(rs = $ /) {|line| ... } -> ()
+--- each(rs = $/) {|line| ... }      -> ()
+--- each_line(rs = $/) {|line| ... } -> ()
 #@since 1.8.7
 --- each(rs = $/)       -> Enumerable::Enumerator
---- each_line(rs = $ /) -> Enumerable::Enumerator
+--- each_line(rs = $/)  -> Enumerable::Enumerator
 #@end
 
 文字列中の各行に対して繰り返します。
