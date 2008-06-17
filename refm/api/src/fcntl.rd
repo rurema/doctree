@@ -1,102 +1,104 @@
 ファイルディスクリプタを扱う Unix のシステムコール [[m:IO#fcntl]] (つまり
-[[man:fcntl(2)]]) で使用できる定数 を集めたモジュールです。
+[[man:fcntl(2)]]) で使用できる定数を集めたモジュールです。
 
-定義される定数は以下の通りです
+
+例:
+    require "fcntl"
+    m = s.fcntl(Fcntl::F_GETFL, 0)
+    f.fcntl(Fcntl::F_SETFL, Fcntl::O_NONBLOCK|m)
+    
+    require 'fcntl'
+    
+    fd = IO::sysopen('/tmp/tempfile', 
+         Fcntl::O_WRONLY | Fcntl::O_EXCL | Fcntl::O_CREAT)
+    f = IO.open(fd)
+    f.syswrite("TEMP DATA")
+    
+    f.close
 
 = module Fcntl
 
 ファイルディスクリプタを扱う Unix のシステムコール [[m:IO#fcntl]]
-(つまり[[man:fcntl(2)]]) で使用できる定数 を集めたモジュールです。
-定義される定数は以下の通りです
+(つまり[[man:fcntl(2)]]) で使用できる定数を集めたモジュールです。
+
+@see [[man:fcntl(2)]], [[man:open(2)]], [[m:IO.fcntl]], [[m:IO.open]]
 
 == Constants
 
---- F_DUPFD
-#@todo
-duplicate a close-on-exec file handle to a non-close-on-exec
-file handle.
+--- F_DUPFD -> Integer
+ファイルディスクリプタを複製します。
 
---- F_GETFD
-#@todo
-read the close-on-exec flag of a file handle.
+ただし、 close-on-exec はオフになります。
 
---- F_GETLK
-#@todo
-determine whether a given region of a file is locked.
+@see [[man:dup(2)]]
 
---- F_SETFD
-#@todo
-set the close-on-exec flag of a file handle.
+--- F_GETFD -> Integer
+ファイルディスクリプタから close-on-exec フラグの値を読み出します。
 
---- F_GETFL
-#@todo
-get file descriptor flags.
+--- F_GETLK -> Integer
+与えられたファイルの範囲のロック状態を取得します。
 
---- F_SETFL
-#@todo
-set file descriptor flags.
+--- F_SETFD -> Integer
+ファイルディスクリプタに close-on-exec フラグの値を設定します。
 
---- F_SETLK
-#@todo
-acquire a lock on a region of a file.
+--- F_GETFL -> Integer
+ファイル状態フラグを読み出します。
 
---- F_SETLKW
-#@todo
-acquire a lock on a region of a file, waiting if necessary.
+@see [[man:open(2)]]
 
---- FD_CLOEXEC
-#@todo
-the value of the close-on-exec flag.
+--- F_SETFL -> Integer
+ファイル状態フラグを設定します。
 
---- F_RDLCK
-#@todo
+@see [[man:open(2)]]
 
---- F_UNLCK
-#@todo
+--- F_SETLK -> Integer
+ファイルの範囲のロックを取得します。
 
---- F_WRLCK
-#@todo
+--- F_SETLKW -> Integer
+ファイルの範囲のロックを取得します。必要があればロックを取得できるまで待ちます。
 
---- O_CREAT
-#@todo
-create file if it doesn't exist.
+--- FD_CLOEXEC -> Integer
+close-on-exec フラグの値です。
 
---- O_EXCL
-#@todo
-used with O_CREAT, fail if file exists.
+--- F_RDLCK -> Integer
+読み出しリースを取得します。
 
---- O_NOCTTY
-#@todo
-open tty without it becoming controlling tty.
+--- F_UNLCK -> Integer
+そのファイルからリースを削除します。
 
---- O_TRUNC
-#@todo
-truncate file on open.
+--- F_WRLCK -> Integer
+書き込みリースを取得する。
 
---- O_APPEND
-#@todo
-open file in append mode.
+--- O_CREAT -> Integer
+ファイルが存在しない場合にファイルを作成します。
 
---- O_NONBLOCK
---- O_NDELAY
-#@todo
-open in non-blocking mode.
+--- O_EXCL -> Integer
+ファイルが存在する場合に失敗します。[[m:Fcntl.OCREAT]] と一緒に使用します。
 
---- O_RDONLY
-#@todo
-open read-only.
+--- O_NOCTTY -> Integer
+開いたファイルが端末デバイスでも、制御端末にはなりません。
 
---- O_RDWR
-#@todo
-open read-write.
+--- O_TRUNC -> Integer
+ファイルを開くときに中身を切り捨てます。
 
---- O_WRONLY
-#@todo
-open write-only.
+--- O_APPEND -> Integer
+ファイルを追記モードで開きます。
+
+--- O_NONBLOCK -> Integer
+--- O_NDELAY -> Integer
+ファイルを non-blocking モードで開きます。
+
+--- O_RDONLY -> Integer
+ファイルを読み込み専用で開きます。
+
+--- O_RDWR -> Integer
+ファイルを読み書きできるように開きます。
+
+--- O_WRONLY -> Integer
+ファイルを書き込み専用で開きます。
 
 #@since 1.8.1
---- O_ACCMODE
-#@todo
-mask to extract read/write flags.
+--- O_ACCMODE -> Integer
+ファイルアクセスモードのマスクです。
 #@end
 

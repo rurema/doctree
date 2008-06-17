@@ -134,7 +134,7 @@ erb                             snoozer05       done
 eregex
 etc                             okkez           done
 expect
-fcntl                           okkez
+fcntl                           okkez           done
 fileutils                       okkez           done
 final
 finalize
