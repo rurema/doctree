@@ -70,7 +70,7 @@ Vector および Matrix のそれぞれの項目を参照してください。
 例:
 
   p Complex.new(1, 1)   #=> Complex(1, 1)
-  p Complex.new(3.5)    #=> Complex(3.5, 0)
+  p Complex.new!(3.5)   #=> Complex(3.5, 0)
 
 --- polar(r, theta) -> Complex
 絶対値が r、偏角が theta である [[c:Complex]]クラスのオブジェクトを生成します。
