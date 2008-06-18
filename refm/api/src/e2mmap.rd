@@ -1,4 +1,6 @@
-例外クラスに特定のエラーメッセージ用フォーマットを関連づけます。
+例外クラスに特定のエラーメッセージ用フォーマットを関連づけるためのライブラリです。
+
+=== 使い方
 
 1. クラス定義の中で、Exception2MessageMapper を extend すれば、
 def_e2message メソッドや def_exception メソッドが使えます。
@@ -12,7 +14,7 @@ def_e2message メソッドや def_exception メソッドが使えます。
     def_exception :NewExceptionClass, "message...", StandardError
     ...
   end
-
+  
   foo = Foo.new
   foo.Fail ....
 
@@ -54,99 +56,141 @@ def_e2message メソッドや def_exception メソッドが使えます。
   Foo.Fail NewExceptionClass, arg...
   Foo.Fail ExistingExceptionClass, arg...
 
+= module Exception2MessageMapper
+alias Exception2MessageMapper::E2MM
 
+例外クラスに特定のエラーメッセージ用フォーマットを関連づけるためのモジュールです。
 
-= reopen Kernel
+== Singleton Methods
+--- def_e2message(klass, exception_class, message_format) -> Class
+すでに存在する例外クラス exception_class に、
+エラーメッセージ用フォーマット message_format を関連づけます。
 
-== Private Instance Methods
+@param klass 一階層上となるクラス名を指定します。
 
---- Raise(error, *args)
---- Fail(error, *args)
-#@todo
+@param exception_class メッセージを登録する例外クラスを指定します。
 
-error クラスのエラーを発生させます。
+@param message_format メッセージのフォーマットを指定します。
+                    [[m:Kernel.#sprintf]] のフォーマット文字列と同じ形式を使用できます。
 
-error の後に続く引数 args 群は、例外クラスに関連づけられたエラー
-メッセージ用フォーマットと合わせて、エラーメッセージの一部に
-なります。例えば、
+@return exception_class を返します。
+
+--- def_exception(klass, exception_name, message_format, superklass = StandardError) -> Class
+
+exception_name という名前の例外クラスを定義します。
+
+@param klass 一階層上となるクラス名を指定します。
+
+@param exception_name 例外クラスの名前をシンボルで指定します。
+
+@param message_format メッセージのフォーマットを指定します。
+                    [[m:Kernel.#sprintf]] のフォーマット文字列と同じ形式を使用できます。
+
+@param superklass 定義する例外クラスのスーパークラスを指定します。
+                  省略すると [[c:StandardError]] を使用します。
+
+@return 定義した例外クラスを返します。
+
+--- Raise(klass = E2MM, exception_class = nil, *rest) -> ()
+--- Fail(klass = E2MM, exception_class = nil, *rest)  -> ()
+
+登録されている情報を使用して、例外を発生させます。
+
+@param klass 一階層上となるクラス名を指定します。
+
+@param exception_class 例外クラス。
+
+@param rest メッセージに埋め込む値。
+
+@raise Exception2MessageMapper::ErrNotRegisteredException 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
+
+#@until 1.9.0
+--- fail(err = nil, *rest) -> ()
+
+このメソッドは後方互換性のために用意されています。
+
+登録されている情報を使用して、例外を発生させます。
+
+@param exception_class 例外クラス。
+
+@param rest メッセージに埋め込む値。
+
+@raise Exception2MessageMapper::ErrNotRegisteredException 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
+
+--- extend_to(b) -> Class
+
+このメソッドは後方互換性のために用意されています。
+
+@param b [[c:Binding]] オブジェクト。
+
+#@end
+
+== Instance Methods
+
+--- Raise(err = nil, *rest) -> ()
+--- Fail(err = nil, *rest)  -> ()
+登録されている情報を使用して、例外を発生させます。
+
+@param exception_class 例外クラス。
+
+@param rest メッセージに埋め込む値。
+
+@raise Exception2MessageMapper::ErrNotRegisteredException 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
+
+例:
 
   class Foo
     extend Exception2MessageMapper
-    def_exception :NewExceptionClass, "message...%d, %d and %d"
+    p def_exception :NewExceptionClass, "message...%d, %d and %d" # =>
     
     def foo
       Raise NewExceptionClass, 1, 2, 3
     end
   end
+  
+  Foo.new().foo() #=> in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
+                  #   という例外が発生します。
+  
+  Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
+                                             #   という例外が発生します。
 
-という定義があれば、
+--- fail(err = nil, *rest) -> ()
+登録されている情報を使用して、例外を発生させます。
 
-  Foo.new().foo()
+@param exception_class 例外クラス。
 
-というメソッドで、
+@param rest メッセージに埋め込む値。
 
-  in `Raise': message...1, 2 and 3 (Foo::NewExceptionClass)
+@raise Exception2MessageMapper::ErrNotRegisteredException 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
 
-というエラーが発生します。
+--- def_e2message(exception_class, message_format) -> Class
 
-また、
+すでに存在する例外クラス exception_class に、
+エラーメッセージ用フォーマット message_format を関連づけます。
 
-  Foo.Raise Foo::NewExceptionClass, 1, 3, 5
+このフォーマットは [[m:Exception2MessageMapper#Raise]],
+[[m:Exception2MessageMapper#Fail]] で使用します。
 
-というメソッドでも、
+@param exception_class メッセージを登録する例外クラスを指定します。
 
-  in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
+@param message_format メッセージのフォーマットを指定します。
+                    [[m:Kernel.#sprintf]] のフォーマット文字列と同じ形式を使用できます。
 
-という例外が発生します。
+@return exception_class を返します。
 
 
+--- def_exception(exception_name, message_format, superclass = StandardError) -> Class
 
-= module Exception2MessageMapper
+exception_name という名前の例外クラスを定義します。
 
-== Singleton Methods
---- def_e2message(k, c, m)
-#@todo
+@param exception_name 定義する例外クラスの名前をシンボルで指定します。
 
---- def_exception(k, n, m, s = StandardError)
-#@todo
+@param message_format メッセージのフォーマット。
 
---- Raise(klass = E2MM, err = nil, *rest)
---- Fail(klass = E2MM, err = nil, *rest)
-#@todo
+@param superclass 定義する例外のスーパークラスを指定します。
+                  省略すると [[c:StandardError]] を使用します。
 
-== Instance Methods
-
---- Raise(err = nil, *rest)
---- Fail(err  = nil, *rest)
-#@todo
-
---- fail(err = nil, *rest)
-#@todo
-
---- def_e2message(exception, message_form)
-#@todo
-
-すでに存在する例外クラス exception に、
-エラーメッセージ用フォーマット message_form を関連づけます。
-message_form の形式は sprintf() の format 文字列と同じです。
-
-このフォーマットは Raise (またはその別名の Fail)で使われます。
-
---- def_exception(exception_name, message_form, superclass)
-#@todo
-
-exception_name という名前の例外クラスを作ります。
-exception_name はシンボルで与えられます。
-
-このクラスは、superclass が設定されていれば
-そのクラスのサブクラスに、
-設定されていない場合は StandardError のサブクラスになります。
-
-そして、そのクラスに message_form で指定された
-フォーマットを関連づけます。
-これは Raise (またはその別名の Fail) で使われます。
-
-= module Exception2MessageMapper::E2MM
-Exception2MessageMapper の別名です。
 
 = class Exception2MessageMapper::ErrNotRegisteredException < StandardError
+
+登録されていない例外が [[m:Exception2MessageMapper#Raise]] で使用された場合に発生します。
