@@ -27,19 +27,18 @@ Ruby 1.8 の標準添付ライブラリに関して、リファレンスは極めて不完全です。
  * [[d:spec/envvars]]
 
 === Ruby 言語仕様
+
+Ruby でのオブジェクト:
   * [[d:spec/object]]
   * [[d:spec/class]]
+
+プロセスの実行:
   * [[d:spec/eval]]
   * [[d:spec/terminate]]
   * [[d:spec/thread]]
   * [[d:spec/safelevel]]
-  * [[d:spec/regexp]]
-#@since 1.9.0
-  * [[d:spec/m17n]]
-#@end
 
 Ruby の文法:
-
   * [[d:spec/lexical]]
   * [[d:spec/program]]
   * [[d:spec/variables]]
@@ -49,10 +48,16 @@ Ruby の文法:
   * [[d:spec/call]]
   * [[d:spec/def]]
 
+その他:
+#@since 1.9.0
+  * [[d:spec/m17n]]
+#@end
+  * [[d:spec/regexp]]
+
 === 組み込みライブラリ
   * [[lib:_builtin]]
 
-=== 添付ライブラリ
+=== 標準添付ライブラリ
   * [[lib:/]]
 
 === その他
@@ -63,9 +68,8 @@ Ruby の文法:
 #@##@# 使い方
 #@#  * [[unknown:Ruby FAQ]]
 #@#  * [[c:Rubyの落とし穴]]
-#@#  * [[c:Rubyで使われる記号の意味]]
-#@#  * [[unknown:packテンプレート文字列]]
-#@#  * [[unknown:sprintfフォーマット]]
+  * [[d:pack_template]]
+  * [[d:print_format]]
 #@#  * [[unknown:Ruby が動作するプラットフォーム]]
   * [[d:grossary]]
   * [[d:symref]]
