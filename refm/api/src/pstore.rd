@@ -2,122 +2,236 @@ Rubyのオブジェクトを外部ファイルに格納するためのライブラリです。
 
 = class PStore < Object
 
-Rubyのオブジェクトを外部ファイルに格納するためのクラス。
-内部で [[c:Marshal]] を使っている。
+Rubyのオブジェクトを外部ファイルに格納するためのクラスです。
+内部で [[c:Marshal]] を使っています。
 
 === 使い方
+
+データベースにアクセスするためには、
+transaction のブロック内である必要があります。
+インターフェースは [[c:Hash]] に似ています。
 
   require 'pstore'
   db = PStore.new("/tmp/foo")
   db.transaction do
-    p db.roots
+    p db.roots       # => []
     ary = db["root"] = [1,2,3,4]
     ary[0] = [1,1.5]
   end
-
+  
   db.transaction do
-    p db["root"]
+    p db["root"]     # => [[1, 1.5], 2, 3, 4]
   end
 
-データベースにアクセスするためには、
-transaction のブロック内である必要がある。
-インターフェースは Hash ライクである。
 
 == Class Methods
 
---- new(file)
-#@todo
+--- new(file) -> PStore
 
 ファイル名 file に対してデータベースを読み書きする。
+
 file のあるディレクトリは書き込み可能である必要がある。
 データベースを更新するときにバックアップファイルが作成されるため。
 
-#@if (version >= "1.8.2")
+@param file データベースファイル名。
+
+#@since 1.8.2
 データベースの更新が成功すると、バックアップファイルは削除される。バックアップファイル名は
 ファイル名に ".tmp" および ".new" を付けたもの。
 #@else
-#@#ruby 1.8.1 まで: 
 バックアップファイルは削除されずに残る。バックアップファイル名はファイル名の後に "~" を付けたもの。
 #@end
 
 == Instance Methods
 
-#@if (version >= "1.8.0")
---- transaction {|pstore| ... }
---- transaction(read_only=false) {|pstore| ... }
-#@todo
+#@since 1.8.0
+--- transaction(read_only = false) {|pstore| ... } -> ()
 
-トランザクションに入る。
-このブロックの中でしかデータベースの読み書きはできない。
+トランザクションに入ります。
+このブロックの中でのみデータベースの読み書きができます。
 
-1.8では読み込み専用のトランザクションが使用可能。
+読み込み専用のトランザクションが使用可能です。
+
+@param read_only 真を指定すると、読み込み専用のトランザクションになります。
+
+@raise PStore::Error read_only を真にしたときに、データベースを変更しようした場合に発生します。
+
+例:
+
+  require 'pstore'
+  db = PStore.new("/tmp/foo")
+  db.transaction do
+    p db.roots       # => []
+    ary = db["root"] = [1,2,3,4]
+    ary[0] = [1,1.5]
+  end
+  
+  db.transaction(true) do |pstore|
+    pstore["root"] = 'aaa' # => ここで例外発生
+  end
+
+
 #@end
 
---- [](name)
-#@todo
+--- [](name) -> object
 
 ルートnameに対応する値を得る。
-[[m:Hash#[] ]]に相当。
+
+@param name 探索するルート。
+
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+@see [[m:Hash#[] ]]
 
 --- []=(name, value)
-#@todo
 
-ルートnameに対応する値valueをセットする。
-[[m:Hash#[]=]]に相当。
+ルート name に対応する値 value をセットする。
 
-#@if (version >= "1.8.0")
---- fetch(name[, default])
-#@todo
+@param name ルート。
+
+@aram value 格納する値。
+
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+@see [[m:Hash#[]=]]
+
+#@since 1.8.0
+--- fetch(name, default = PStore::Error) -> object
 
 ルートnameに対応する値を得る。
+
 該当するルートが登録されていない時には、
 引数 default が与えられていればその値を返し、
 与えられていなければ例外 [[c:PStore::Error]] が発生します。
-Hash#fetchに相当。
+
+@param name 探索するルート。
+
+@param default name に対応するルートが登録されていない場合に返す値を指定する。
+
+@raise PStore::Error name に対応するルートが登録されていないかつ、
+                     default が与えられていない場合に発生します。
+                     また、トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+例:
+
+  require 'pstore'
+  db = PStore.new("/tmp/foo")
+  db.transaction do
+    p db.roots       # => []
+    ary = db["root"] = [1,2,3,4]
+    ary[0] = [1,1.5]
+  end
+  
+  db.transaction(true) do |pstore|
+    pstore.fetch("root")        # => [[1, 1.5], 2, 3, 4]
+    pstore.fetch("root", 'aaa') # => [[1, 1.5], 2, 3, 4]
+    pstore.fetch("not_root")    # => 例外発生
+  end
+
+@see [[m:Hash#fetch]], [[m:PStore#[] ]]
 #@end
 
---- delete(name)
+--- delete(name) -> object
 #@todo
 
-ルートnameに対応する値を削除する。
-[[m:Hash#delete]]に相当。
+ルートnameに対応する値を削除します。
 
---- roots
-#@todo
+@param name 探索するルート。
 
-ルートの集合を配列で返す。
-[[m:Hash#keys]]に相当。
+@return 削除した値を返します。
 
---- root?(name)
-#@todo
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
-nameがルートであるかどうか。
-[[m:Hash#key?]]に相当。
+例:
 
---- path
-#@todo
+  require 'pstore'
+  db = PStore.new("/tmp/foo")
+  db.transaction do
+    p db.roots       # => []
+    ary = db["root"] = [1,2,3,4]
+    ary[0] = [1,1.5]
+  end
+  
+  db.transaction do |pstore|
+    pstore.delete("root")       # => [[1, 1.5], 2, 3, 4]
+    pstore.delete("root")       # => nil
+  end
 
-データベースのファイル名を得る。
+@see [[m:Hash#delete]]
 
---- commit
-#@todo
+--- roots -> Array
+
+ルートの集合を配列で返します。
+
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+@see [[m:Hash#keys]]
+
+--- root?(name) -> bool
+
+ルート name がデータベースに格納されている場合に真を返します。
+
+@param name 探索するルート。
+
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+@see [[m:Hash#key?]]
+
+--- path -> String
+
+データベースのファイル名を得ます。
+
+--- commit -> ()
+
+データベースの読み書きを終了します。
+
+transaction ブロックから抜け、データベースの変更が反映されます。
+
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+例:
+
+  require 'pstore'
+  db = PStore.new("/tmp/foo")
+  db.transaction do
+    p db.roots       # => []
+    ary = db["root"] = [1,2,3,4]
+    db.commit
+    ary[0] = [1,1.5] # => ここは実行されない。
+  end
+  
+  db.transaction do |pstore|
+    pstore["root"]       # => [[1, 2, 3, 4]
+  end
+
+--- abort -> ()
 
 データベースの読み書きを終了する。
-すなわち、transaction ブロックから抜ける。
-データベースの変更が反映される。
 
---- abort
-#@todo
+transaction ブロックから抜けますが、データベースの変更は反映されません。
 
-データベースの読み書きを終了する。
-transaction ブロックから抜けるが、データベースの変更は反映されない。
+@raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
+
+例:
+
+  require 'pstore'
+  db = PStore.new("/tmp/foo")
+  db.transaction do
+    p db.roots       # => []
+    ary = db["root"] = [1,2,3,4]
+    db.abort
+    ary[0] = [1,1.5] # => ここは実行されない。
+  end
+  
+  db.transaction do |pstore|
+    pstore["root"]       # => nil
+  end
 
 == Private Instance Methods
 
---- in_transaction
-#@todo
+--- in_transaction -> ()
 
-トランザクションの中でなければ例外を発生させる。
+トランザクションの中でなければ例外を発生させます。
 
 = class PStore::Error < StandardError
 
