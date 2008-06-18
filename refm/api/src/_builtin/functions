@@ -1941,19 +1941,12 @@ varname のフックを全て解除します。
 
 @see [[m:Kernel.#trace_var]]
 
---- fail -> ()
---- fail(message) -> ()
---- fail(error_type, message = nil, backtrace = caller(0)) -> ()
-
-例外を発生させます。 [[m:Kernel.#raise]] の別名です。
-
-@param error_type [[m:Kernel.#raise]] 参照
-@param message [[m:Kernel.#raise]] 参照
-@param backtrace [[m:Kernel.#raise]] 参照
-
 --- raise -> ()
+--- fail  -> ()
 --- raise(message) -> ()
+--- fail(message)  -> ()
 --- raise(error_type, message = nil, backtrace = caller(0)) -> ()
+--- fail(error_type, message = nil, backtrace = caller(0))  -> ()
 
 例外を発生させます。
 発生した例外は変数 [[m:$!]] に格納されます。また例外が
