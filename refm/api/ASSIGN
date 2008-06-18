@@ -193,7 +193,7 @@ pp                              sheepman        done
 prettyprint                     sheepman        done
 profile
 profiler
-pstore
+pstore                          okkez
 pty
 racc/parser
 rational			yugui
