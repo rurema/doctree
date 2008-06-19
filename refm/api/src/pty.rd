@@ -8,68 +8,55 @@
 
 == Module Functions
 
---- getpty(command)
---- spawn(command)
+--- getpty(command)                          -> [IO, IO, Integer]
+--- getpty(command){|read, write, pid| ... } -> nil
+--- spawn(command)                           -> [IO, IO, Integer]
+--- spawn(command){|read, write, pid| ... }  -> nil
 #@todo
 
-この関数は，仮想ttyを確保し，指定されたコマンドをその仮想tty
-の向こうで実行し，配列を返します．戻り値は3つの要素からなる
-配列です．最初の要素は仮想ttyから読み出すためのIOオブジェクト，
-2番目は書きこむためのIOオブジェクト，3番目は子プロセスのプロ
-セスIDです．この関数がイテレータとして呼ばれた場合，これらの
-要素はブロックパラメータとして渡され，関数自体はnilを返します．
+擬似 tty を確保し、指定されたコマンドをその擬似 tty の向こうで実行し、配列を返します。
 
-この関数によって作られたサブプロセスが動いている間，子プロセス
-の状態を監視するために SIGCHLD シグナルを捕捉します．子プロセス
-が終了したり停止した場合には，例外[[c:PTY::ChildExited]]が発生します．この間，すべての
-SIGCHLD が PTY モジュールのシグナルハンドラに捕捉されるので，
-サブプロセスを生成する他の関数(system() とか IO.popen()など)を
-使うと，予期しない例外が発生することがあります．これを防ぐため
-には，下記のprotect_signal()を参照してください．
+このメソッドによって作られたサブプロセスが動いている間、子プロセス
+の状態を監視するために SIGCHLD シグナルを捕捉します。子プロセス
+が終了したり停止した場合には、例外 [[c:PTY::ChildExited]] が発生します。
+この間、すべての SIGCHLD が PTY モジュールのシグナルハンドラに捕捉されるので、
+サブプロセスを生成する他のメソッド([[m:Kernel.#system]] や [[m:IO.#popen]]など)を
+使うと、予期しない例外が発生することがあります。これを防ぐため
+には、下記の [[m:PTY.#protect_signal]] を参照してください。
 
-この関数がブロックパラメータ付きで呼ばれた場合には，そのブロック
-の中でのみ SIGCHLD が捕捉されます．したがって，ブロックパラメータ
-として渡されたIOオブジェクトを，ブロックの外に持ち出して使うの
-は勧められません．
+このメソッドがブロック付きで呼ばれた場合には、そのブロック
+の中でのみ SIGCHLD が捕捉されます。したがって、ブロックパラメータ
+として渡されたIOオブジェクトを、ブロックの外に持ち出して使うの
+は勧められません。
 
+@param command 擬似 tty 上で実行するコマンド
 
---- protect_signal
-#@todo
+@return 返値は3つの要素からなる配列です。最初の要素は擬似 tty から
+        読み出すための IO オブジェクト、2番目の要素は書きこむための IO オブジェクト、
+        3番目の要素は子プロセスのプロセス ID です。
+        このメソッドがブロック付き呼ばれた場合、これらの要素はブロックパラメータとして渡され、
+        メソッド自体は nil を返します。
 
-#@# These functions are obsolete in this version of pty. (see README)
+@raise PTY::ChildExited 子プロセスが終了したり停止したりした場合に発生します。
 
-この関数はイテレータです．ここで指定されたブロックの中では，
-子プロセスが終了しても例外を発生しません．この関数を使うことで，
-PTYの子プロセスが動いている間でも，system()や [[m:IO.popen]]などの
-関数を安全に使うことができます．例えば，
+@see [[m:Kernel.#system]], [[m:IO.#popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
 
-  PTY.spawn("command_foo") do |r,w|
-    ...
-    ...
-    PTY.protect_signal do
-      system "some other commands"
-    end
-    ...
-  end
+--- protect_signal{ ... } -> self
+このメソッドは何もしません。
+このメソッドは obsolete です。
 
-このような記述により，"some other commands" が終了したときに
-例外が発生するのを防げます．
-
---- reset_signal
-#@todo
-
-#@# These functions are obsolete in this version of pty. (see README)
-
-PTY の子プロセスが動いていても，そのプロセスの終了時に例外が発生
-しないようにします．
+--- reset_signal -> self
+このメソッドは何もしません。
+このメソッドは obsolete です。
 
 #@since 1.8.0
-= class PTY::ChildExited
+= class PTY::ChildExited < RuntimeError
+
+子プロセスが終了したり停止した場合に発生する例外です。
 
 == Instance Methods
 
---- status
-#@todo
+--- status -> Process::Status
 
 子プロセスの終了ステータスを[[c:Process::Status]]オブジェクトで返します。
 #@end
