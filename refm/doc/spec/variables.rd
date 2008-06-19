@@ -3,6 +3,7 @@
   * [[ref:local]]
   * [[ref:instance]]
   * [[ref:class]]
+  * [[ref:class_var_scope]]
   * [[ref:global]]
   * [[ref:pseudo]]
   * [[ref:const]]
@@ -89,16 +90,14 @@ _ですが、組み込み変数の一部には
 の中で定義され、クラスの特異メソッド、インスタンスメソッドなどから参照／
 代入ができます。
 
-クラス変数と[[ref:const]]の違いは以下の通りです。
+クラス変数と定数の違いは以下の通りです。
 
  * 再代入可能(定数は警告を出す)
-
  * クラスの外から直接参照できない(継承されたクラスからは参照／代入可能)
 
 クラス変数はクラス自身のインスタンス変数とは以下の点で異なります。
 
  * サブクラスから参照／代入が可能
-
  * インスタンスメソッドから参照／代入が可能
 
 クラス変数は、そのクラスやサブクラス、それらのインスタンスで共有される
@@ -128,6 +127,82 @@ _ですが、組み込み変数の一部には
           include Foo
           p @@foo += 1          # => 3
         end
+
+#@until 1.9.0
+親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
+子クラスのクラス変数は子クラスで保存されます。上書きされません。
+
+ class Foo
+ end
+ 
+ class Bar < Foo
+   @@v = :bar
+ end
+ 
+ class Foo
+   @@v = :foo
+ end
+
+ class Bar
+   p @@v       #=> :bar
+ end
+
+ class Foo
+   p @@v       #=> :foo
+ end
+
+#@end
+
+#@since 1.9.0
+親クラスに、子クラスで既に定義されている同名のクラス変数を追加した場合には、
+子クラスのクラス変数が上書きされます。
+
+ class Foo
+ end
+ 
+ class Bar < Foo
+   @@v = :bar
+ end
+ 
+ class Foo
+   @@v = :foo
+ end
+
+ class Bar
+   p @@v       #=> :foo
+ end
+
+#@end
+
+===[a:class_var_scope] クラス変数のスコープ
+
+クラス変数は、その場所を囲むもっとも内側の(特異クラスでない) class 式
+または module 式のボディをスコープとして持ちます。
+
+#@# http://blade.nagaokaut.ac.jp/cgi-bin/vframe.rb/ruby/ruby-list/39212?39104-39789
+
+ class Foo
+   @@a = :a
+   class << Foo
+     p @@a       #=> :a
+   end
+   
+   def Foo.a1
+     p @@a
+   end
+ end
+
+ Foo.a1          #=> :a              
+ 
+ def Foo.a2
+   p @@a 
+ end
+ Foo.a2          #=> NameError になります。
+
+ class << Foo
+   p @@a         #=> NameError になります。
+ end
+
 
 ==[a:global] グローバル変数
 
