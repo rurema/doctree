@@ -194,7 +194,7 @@ prettyprint                     sheepman        done
 profile
 profiler
 pstore                          okkez           done
-pty
+pty                             okkez
 racc/parser
 rational			yugui
 rbconfig
