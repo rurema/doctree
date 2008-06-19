@@ -166,7 +166,9 @@ name という名前のグループエントリを返します。
 
 
 = class Struct::Group < Struct
-
+#@since 1.9.0
+alias Etc::Group
+#@end
 [[m:Etc.#getgrent]] で得られる構造体。
 
 この構造体の値を変更してもシステムには反映されません。
@@ -211,7 +213,9 @@ name という名前のグループエントリを返します。
 このグループのパスワードを設定します。
 
 = class Struct::Passwd < Struct
-
+#@since 1.9.0
+alias Etc::Passwd
+#@end
 [[m:Etc.#getpwent]] で得られる構造体。
 
 この構造体の値を変更してもシステムには反映されません。
