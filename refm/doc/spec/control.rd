@@ -240,9 +240,10 @@ nil を返します。
 式を評価した値が真の間、本体を繰り返し実行します。
 while は値を返しません。
 
-((<ruby 1.7 feature>)): while は nil を返します。また、引
-数を伴った break により while 式の戻り値をその値にすること
-もできます。
+#@since 1.8.0
+while は nil を返します。また、引数を伴った break により
+while 式の戻り値をその値にすることもできます。
+#@end
 
 === while 修飾子
 
@@ -258,8 +259,9 @@ while は値を返しません。
 左辺の式が rescue 節も ensure 節もない begin である場合には、
 それを最初に一回評価してから繰り返します。
 
-((<ruby 1.7 feature>)): version 1.7 では、rescue/ensure 節があっても、
-同様に解釈されます。
+#@since 1.8.0
+rescue/ensure 節があっても、同様に解釈されます。
+#@end
 
 例:
         send_request(data)
@@ -269,9 +271,11 @@ while は値を返しません。
 
 while 修飾した式は値を返しません。
 
-((<ruby 1.7 feature>)): while 修飾した式は nil を返します。
+#@since 1.8.0
+while 修飾した式は nil を返します。
 また、引数を伴った break により while 修飾した式の戻り値を
 その値にすることもできます。
+#@end
 
 ===[a:until] until
 
@@ -288,9 +292,10 @@ while 修飾した式は値を返しません。
 式を評価した値が真になるまで、本体を繰り返して実行します。
 until は、値を返しません。
 
-((<ruby 1.7 feature>)): until は nil を返します。また、引
-数を伴った break により until 式の戻り値をその値にすること
-もできます。
+#@since 1.8.0
+until は nil を返します。また、引数を伴った break により
+until 式の戻り値をその値にすることもできます。
+#@end
 
 === until修飾子
 
@@ -306,8 +311,9 @@ until は、値を返しません。
 左辺の式が rescue 節も ensure 節もない begin である場合には、
 それを最初に一回評価してから繰り返します。
 
-((<ruby 1.7 feature>)): version 1.7 では、rescue/ensure 節があっても、
-同様に解釈されます
+#@since 1.8.0
+rescue/ensure 節があっても、同様に解釈されます
+#@end
 
 例:
         send_request(data)
@@ -317,9 +323,10 @@ until は、値を返しません。
 
 until 修飾した式は値を返しません。
 
-((<ruby 1.7 feature>)): until 修飾した式は nil を返します。
-また、引数を伴った break により until 修飾した式の戻り値を
-その値にすることもできます。
+#@since 1.8.0
+until 修飾した式は nil を返します。
+また、引数を伴った break により until 修飾した式の戻り値をその値にすることもできます。
+#@end
 
 ===[a:for] for
 
@@ -397,7 +404,9 @@ for や each で配列要素を複数個ずつ取得しながらループすることは
 
           break
 
-          break val             ruby 1.7 feature
+#@since 1.8.0
+          break val          
+#@end
 
 break はもっとも内側のループを脱出します。ループとは
 
@@ -410,8 +419,10 @@ break はもっとも内側のループを脱出します。ループとは
 用だけを持ち、case を抜ける作用は持ちません。
 
 break によりループを抜けた for やイテレータは nil
-を返します。((<ruby 1.7 feature>)): ただし、引数を指定した場合はループ
-の戻り値はその引数になります。
+を返します。
+#@since 1.8.0
+ただし、引数を指定した場合はループの戻り値はその引数になります。
+#@end
 
 ===[a:next] next
 
@@ -426,15 +437,17 @@ break によりループを抜けた for やイテレータは nil
 
           next
 
-          next val              ruby 1.7 feature
+#@since 1.8.0
+          next val              
+#@end
 
 nextはもっとも内側のループの次の繰り返しにジャンプします。
-イテレータでは、[[ref:d:spec/call#yield]] 呼び出し
-の脱出になります。
+イテレータでは、yield 呼び出しの脱出になります。
 
 next により抜けた yield 式は nil を返します。
-((<ruby 1.7 feature>)): ただし、引数を指定した場合、yield 式の戻
-り値はその引数になります。
+#@since 1.8.0
+ただし、引数を指定した場合、yield 式の戻り値はその引数になります。
+#@end
 
 ===[a:redo] redo
 
@@ -606,8 +619,10 @@ rescue 節が存在する時には rescue 節の本体が実行されます。
 
 例外の一致判定は例外のクラスが rescue 節で指定したクラスと同じか
 またはサブクラスであるかどうか [[m:Object#kind_of?]] を用いて判
-定されます((-((<ruby 1.7 feature>)): 1.7 での例外の一致判定は
-[[m:Module#===]] を用いて行われます-))。
+定されます。
+#@since 1.8.0
+例外の一致判定は [[m:Module#===]] を用いて行われます。
+#@end
 
 error_type が省略された時は [[c:StandardError]] のサブクラスであ
 る全ての例外を捕捉します。Rubyの組み込み例外は([[c:SystemExit]] や
@@ -672,8 +687,9 @@ rescue修飾子を伴う式の値は例外が発生しなければ式1、例外が発生すれば式2
           p((open("nonexistent file") rescue false))
           => false
 
-((<ruby 1.7 feature>)): 1.7 では、rescue の優先度が変更され、
-この心配はなくなっています。
+#@since 1.8.0
+rescue の優先度が変更され、この心配はなくなっています。
+#@end
 
           var = open("nonexistent file") rescue false
           p var
