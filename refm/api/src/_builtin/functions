@@ -2139,56 +2139,7 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
 @see [[c:Proc]],[[m:Proc.new]]
 
 #@since 1.8.0
-==== lambdaとProc.newの違い
-
-lambda と Proc.new はどちらも Proc クラスのインスタンス(手続きオブジェクト)を生成しますが、
-生成された手続きオブジェクトはいくつかの場面で挙動が異なります。 lambda の生成する手続きオブジェクトのほうが
-よりメソッドに近い働きをするように設計されています。
-#@since 1.9.0
-1.9.0 から proc は Proc.new の別名に変更になりました。
-#@else
-proc は lambda の別名です。
-#@end
-
-: 引数の扱い
-
-lambda のほうがより厳密です。引数の数が違っていると（メソッドのように）エラーになります。 Proc.new は引数を
-多重代入に近い扱い方をします。
-
-  Proc.new{|a,b,c| p a,b,c }.call([2,4])
-  #=> 2
-  #   4
-  #   nil
-  lambda{|a,b,c| p a,b,c }.call([2,4])
-  # wrong number of arguments (1 for 3) (ArgumentError)
-
-: スタックジャンプ時の挙動の違い
-
-予約語を使ったジャンプで、ジャンプ先が異なるものがあります。
-例えば手続きオブジェクト内部で return を行った場合、lambda は手続きオブジェクト自身を抜けますが、 
-Proc.new は手続きオブジェクトを囲むメソッドを抜けます。
-
- def foo
-   f = Proc.new { return "return from foo from inside proc" }
-   f.call # control leaves foo here
-   return "return from foo"
- end
- 
- def bar
-   f = lambda { return "return from lambda" }
-   f.call # control does not leave bar here
-   return "return from bar"
- end
- 
- puts foo # prints "return from foo from inside proc"
- puts bar # prints "return from bar"
-
-以下の表を参照してください。上例のように生成、実行を同一メソッド定義内で行った場合の結果です。
-
-                return                          next                        break
-  Proc.new  メソッドを抜ける            手続きオブジェクトを抜ける   使用不可（例外）
-  lambda    手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
-#@#yield    使用不可（例外）            手続きオブジェクトを抜ける   メソッドを抜ける
+#@include(lambda_proc)
 #@end
 
 #@since 1.8.7

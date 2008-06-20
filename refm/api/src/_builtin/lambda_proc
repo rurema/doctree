@@ -1,0 +1,72 @@
+#@since 1.8.0
+==== lambda と proc と Proc.new とイテレータの違い
+
+[[m:Kernel.#lambda]] と [[m:Proc.new]] はどちらも [[c:Proc]] クラスのインスタンス(手続きオブジェクト)を生成しますが、
+生成された手続きオブジェクトはいくつかの場面で挙動が異なります。 lambda の生成する手続きオブジェクトのほうが
+よりメソッドに近い働きをするように設計されています。
+
+#@since 1.9.0
+[[m:Kernel.#proc]] は Proc.new の別名です。
+#@else
+[[m:Kernel.#proc]] は lambda の別名です。
+#@end
+
+==== 引数の扱い
+
+lambda のほうがより厳密です。引数の数が違っていると（メソッドのように）エラーになります。 Proc.new は引数を
+多重代入に近い扱い方をします。
+
+  b1 = Proc.new{|a,b,c| 
+    p a,b,c 
+  }
+  b1.call(2, 4)
+  #=> 2
+      4
+      nil
+  
+  b2 = lambda{|a,b,c| 
+    p a,b,c 
+  }
+  b2.call(2, 4)  
+  #=> wrong number of arguments (2 for 3) (ArgumentError) 
+
+==== ジャンプ構文の挙動の違い
+
+return と break は、lambda と Proc.new では挙動が異なります。
+例えば return を行った場合、lambda では手続きオブジェクト自身を抜けますが、 
+Proc.new では手続きオブジェクトを囲むメソッドを抜けます。
+
+ def foo
+   f = Proc.new { return :foo }
+   f.call 
+   return 
+ end
+ 
+ def bar
+   f = lambda { return :bar }
+   f.call 
+   return 
+ end
+ 
+ def h
+   yield
+ end
+ 
+ def hoge
+   h{ return :hoge }
+   nil
+ end
+
+ p foo()  #=> :foo
+ p bar()  #=> nil
+ p hoge() #=> :hoge
+
+以下の表は、手続きオブジェクトの実行を、上の例と同じように手続きオブジェクトが定義されたのと同じメソッド内で
+行った場合の結果です。
+
+                 return                          next                        break
+  Proc.new   メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
+  lambda     手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
+  イテレータ メソッドを抜ける            手続きオブジェクトを抜ける   メソッドを抜ける
+
+#@end
