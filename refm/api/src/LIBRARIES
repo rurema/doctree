@@ -95,7 +95,9 @@ ftools
 #@end
 gdbm
 #@since 1.8.0
+#@until 1.9.0
 generator
+#@end
 #@end
 getoptlong
 #@until 1.9.0
