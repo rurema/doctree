@@ -37,20 +37,21 @@ include Enumerable
 
 == Class Methods
 
---- new(enum = nil)
---- new(enum = nil) {|g|  ... }
-#@todo
+--- new(enum = nil) -> Generator
+--- new(enum = nil) {|g|  ... } -> Generator
 
 [[c:Enumerable]] オブジェクトかブロックから Generator オブジェクトを生成します。
-enum には [[c:Enumerable]] をインクルードしたオブジェクトを与えます。
-enum とブロックを同時に与えた場合は、ブロックは無視されます。
 
-ブロックは self を引数として呼ばれます。
+ブロックは生成した Generator オブジェクトをブロック引数として呼ばれます。
+
+@param enum [[c:Enumerable]] をインクルードしたオブジェクトを与えます。
+            enum とブロックを同時に与えた場合は、ブロックは無視されます。
+
+
 
 == Instance Methods
 
---- current
-#@todo
+--- current -> object
 
 現在の位置にある要素を返します。next と違い位置は移動しません。
 
@@ -60,19 +61,16 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.current # => 'A'
   p g.current # => 'A'
 
---- each {|e| ... }
-#@todo
+--- each {|e| ... } -> self
 
 ジェネレータの要素を引数としてブロックを評価します。self を返します。
 
---- end?
-#@todo
+--- end? -> bool
 
 次の要素がなく、ジェネレータが終わりに達しているなら真を返します。
 
---- index
---- pos
-#@todo
+--- index -> Integer
+--- pos   -> Ingeter
 
 現在の位置を返します。
 
@@ -83,11 +81,11 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.next    # => 'A'
   p g.pos     # => 1
 
---- next
-#@todo
+--- next -> object
 
-現在の位置にある要素を返し、位置を1つ増やします。次の要素がなければ、
-例外 EOFError を投げます。
+現在の位置にある要素を返し、位置を1つ進めます。
+
+@raise EOFError 次の要素が無い場合に発生します。
 
 例:
 
@@ -99,13 +97,11 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   p g.next # => 'A'
   p g.next # => 'B'
 
---- next?
-#@todo
+--- next? -> bool
 
 次の要素が存在するなら真を返します。
 
---- rewind
-#@todo
+--- rewind -> self
 
 ジェネレータを最初に巻き戻します。self を返します。
 
@@ -121,8 +117,7 @@ enum とブロックを同時に与えた場合は、ブロックは無視されます。
   g.rewind
   p g.next # => 'A'
 
---- yield(val)
-#@todo
+--- yield(val) -> self
 
 val をジェネレータに渡します。
 Generator.new() {|g|  ... } のブロックの中でしか呼ぶことができません。
@@ -144,7 +139,6 @@ Generator.new() {|g|  ... } のブロックの中でしか呼ぶことができません。
   p g.next # => 0
 
 = class SyncEnumerator < Object
-
 include Enumerable
 
 複数の [[c:Enumerable]] オブジェクトを並行して yield するためのクラスです。
@@ -160,17 +154,16 @@ include Enumerable
 
 == Class Methods
 
---- new(*enums)
-#@todo
+--- new(*enums) -> SyncEnumerator
 
 SyncEnumerator オブジェクトを生成します。
+
 複数の [[c:Enumerable]] オブジェクトを与えます。
 Enumerable オブジェクトのサイズは異なっていても構いません。
 
 == Instance Methods
 
---- each {|row| ... }
-#@todo
+--- each {|elem| ... } -> self
 
 与えられた Enumerable オブジェクトのそれぞれの要素の配列を引数として
 ブロックを評価します。self を返します。
@@ -185,20 +178,38 @@ Enumerable オブジェクトのサイズは異なっていても構いません。
   s.each{|arry| p arry}
   
   # => 結果
-  [1, "a", "X"]
-  [2, "b", nil]
-  [3, nil, nil]
+  # [1, "a", "X"]
+  # [2, "b", nil]
+  # [3, nil, nil]
 
---- end?(i = nil)
-#@todo
+--- end?(i = nil) -> bool
 
 SyncEnumerator が終わりに達している場合は真を返します。
+
 i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 達している場合、真を返します。
 
---- length
---- size
-#@todo
+--- length -> Integer
+--- size   -> Integer
 
 与えられた Enumerable オブジェクトの数を返します。
 #@end
+
+
+
+= reopen Enumerable::Enumerator
+
+--- next -> object
+
+現在の位置にある要素を返し、位置を一つ進めます。
+
+@raise EOFError 次の要素が無い場合に発生します。
+
+@see [[m:Generator#next]]
+
+
+--- rewind -> self
+
+内部で保持しているジェネレータを最初まで巻き戻します。
+
+@see [[m:Generator#rewind]]

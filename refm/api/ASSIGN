@@ -145,7 +145,7 @@ ftools                          okkez           done
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 gdbm                            okkez           done
-generator                       okkez
+generator                       okkez           done
 getoptlong
 getopts                         sheepman
 gserver
