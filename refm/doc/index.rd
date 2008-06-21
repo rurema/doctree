@@ -74,7 +74,6 @@ Ruby の文法:
 #@#  * [[unknown:Ruby が動作するプラットフォーム]]
   * [[d:grossary]]
   * [[d:symref]]
-  * [[d:help]]
 #@##@# 専門的
   * [[d:spec/bnf]]
 #@#  * [[c:Marshalフォーマット]]
@@ -87,3 +86,4 @@ Ruby の文法:
 #@#* [[unknown:索引|method]]
 #@#* [[unknown:機能別索引]]
   * [[d:license]]
+  * [[d:help]]
