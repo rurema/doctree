@@ -311,15 +311,26 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
     p digest.block_length # => 64, 128, 128
   end
 
---- digest_length 
---- length 
---- size
-#@todo
+--- digest_length -> Integer
+--- length -> Integer
+--- size -> Integer
+@todo
 
-Returns the length of the hash value of the digest.
+ダイジェストのハッシュ値のバイト長を取得する。
+例えば、Digest::MD5であれば16、Digest::SHA1であれば20です。
 
-This method should be overridden by each implementation subclass.
 If not, digest_obj.digest().length() is returned. 
+(この動作が分かりません。
+私の手元の1.8.6ではdigest.length == digest_lengthでした。)
+
+本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
+それぞれの実装に適したものにオーバーライドされます。
+
+  for a in ["MD5", "SHA1", "SHA512"]
+    digest = Digest(a).new
+    p digest.digest_length # => 64, 128, 128
+  end
+
 #@end
 
 --- reset
