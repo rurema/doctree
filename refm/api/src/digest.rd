@@ -113,13 +113,13 @@ new(str).digest と等価。
 new(str).hexdigest と等価。
 
 #@since 1.8.6
---- file(file) -> object
+--- file(path) -> object
 
 新しいダイジェストオブジェクトを生成し、
 ファイル名 file で指定したファイルの内容を読み込み、
 そのダイジェストオブジェクトを返します。
 
-@param file 読み込み対象のファイル名です。
+@param path 読み込み対象のファイル名です。
 @return ダイジェストオブジェクトを返します。
 
 使用例(SHA256の場合)
@@ -281,10 +281,20 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         p digest == "58e53d1324eef6265fdb97b08ed9aadf" # => true
 
 #@since 1.8.6
---- file 
-#@todo
-updates the digest with the contents of a given file _name_ and
-returns self.
+--- file(path) -> object
+
+ファイル名 file で指定したファイルの内容を読み込んでダイジェストを更新し、
+そのダイジェストオブジェクトを返します。
+
+@param path 読み込み対象のファイル名です。
+@return ダイジェストオブジェクトを返します。
+
+例(MD5の場合)
+
+  require 'digest/md5'
+  digest = Digest::MD5.new
+  digest.file("/path/to/file") # => Digest::MD5のインスタンス
+  digest.hexdigest # => "/path/to/file"のMD5値
 
 --- block_length
 #@todo
