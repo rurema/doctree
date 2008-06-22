@@ -296,12 +296,20 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
   digest.file("/path/to/file") # => Digest::MD5のインスタンス
   digest.hexdigest # => "/path/to/file"のMD5値
 
---- block_length
-#@todo
+--- block_length -> Integer
 
-Returns the block length of the digest.
+ダイジェストのブロック長を取得します。
+例えば、Digest::MD5であれば64、Digest::SHA512であれば128です。
 
-This method is overridden by each implementation subclass. 
+本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
+それぞれの実装に適したものにオーバーライドされます。
+
+例: Digest::MD、Digest::SHA1、Digest::SHA512のブロック長を順番に調べる。
+
+  for a in ["MD5", "SHA1", "SHA512"]
+    digest = Digest(a).new
+    p digest.block_length # => 64, 128, 128
+  end
 
 --- digest_length 
 --- length 
