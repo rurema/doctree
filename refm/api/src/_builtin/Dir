@@ -259,11 +259,19 @@ path に対するディレクトリストリームをオープンして返します。
 
 
 #@since 1.9.0
---- exist?    -> bool
-#@todo
-Returns +true+ if the named file is a directory, +false+ otherwise.
+--- exist?(file_name)    -> bool
+--- exists?(file_name)    -> bool
 
-  Dir.exist?(".")
+file_name で与えられたディレクトリが存在する場合に真を返します。
+そうでない場合は、偽を返します。
+
+@param file_name 存在を確認したいディレクトリ名。
+
+  Dir.exist?(".")      # => true
+  Dir.exists?(".")     # => true
+  File.directory?(".") # => true
+
+@see [[m:File.directory?]]
 
 #@end
 
