@@ -199,6 +199,7 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 
 = reopen Enumerable::Enumerator
 
+== Instance Methods
 --- next -> object
 
 現在の位置にある要素を返し、位置を一つ進めます。
