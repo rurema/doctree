@@ -281,10 +281,10 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
         p digest == "58e53d1324eef6265fdb97b08ed9aadf" # => true
 
 #@since 1.8.6
---- file(path) -> object
+--- file(path) -> self
 
 ファイル名 file で指定したファイルの内容を読み込んでダイジェストを更新し、
-そのダイジェストオブジェクトを返します。
+オブジェクト自身を返します。
 
 @param path 読み込み対象のファイル名です。
 @return ダイジェストオブジェクトを返します。
@@ -326,22 +326,38 @@ If not, digest_obj.digest().length() is returned.
 本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
 それぞれの実装に適したものにオーバーライドされます。
 
+例: Digest::MD、Digest::SHA1、Digest::SHA512のハッシュ値のバイト長を順番に調べる。
+
   for a in ["MD5", "SHA1", "SHA512"]
     digest = Digest(a).new
-    p digest.digest_length # => 64, 128, 128
+    p digest.digest_length # => 16, 20, 64
   end
 
 #@end
 
---- reset
-#@todo
-Resets the digest to the initial state and returns self.
+--- reset -> self
 
-This method is overridden by each implementation subclass.
+オブジェクトの状態を初期状態(newした直後と同様の状態)に戻し、
+オブジェクト自身を返します。
+
+本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
+それぞれの実装に適したものにオーバーライドされます。
 
 #@since 1.8.6
 = reopen Kernel
 == Private Instance Methods
---- Digest(name)
-#@todo
+--- Digest(name) -> object
+
+"MD5"や"SHA1"などのダイジェストを示す文字列 name を指定し、
+対応するダイジェストのクラスを取得します。
+
+@param name "MD5"や"SHA1"などのダイジェストを示す文字列を指定します。
+@return Digest::MD5やDigest::SHA1などの対応するダイジェストのクラスを返します。インスタンスではなく、クラスを返します。注意してください。
+
+例: Digest::MD、Digest::SHA1、Digest::SHA512のクラス名を順番に出力する。
+
+  for a in ["MD5", "SHA1", "SHA512"]
+    p Digest(a) # => Digest::MD5, Digest::SHA1, Digest::SHA512
+  end
+
 #@end
