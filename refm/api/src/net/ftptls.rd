@@ -1,4 +1,4 @@
-net/ftp $B$K(B TLS $B3HD%$r<BAu$9$k%i%$%V%i%j$G$9!#(B
+net/ftp ¤Ë TLS ³ÈÄ¥¤ò¼ÂÁõ¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = class Net::FTPTLS < Net::FTP
 
