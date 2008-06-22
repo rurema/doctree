@@ -1,4 +1,4 @@
-net/telnet $B$K(B SSL $B3HD%$r<BAu$9$k%i%$%V%i%j$G$9!#(B
+net/telnet ¤Ë SSL ³ÈÄ¥¤ò¼ÂÁõ¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = reopen Net::Telnet
 
