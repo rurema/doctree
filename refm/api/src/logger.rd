@@ -1,25 +1,28 @@
 #@since 1.8.1
 ログを記録するためのライブラリです。
 
-= class Logger < Object
-
-ログを記録するためのクラスです。
-
 === 使い方
 
 5段階の重要度に分けてログを記録します。
+#@# 重要度 -> ログレベル にするべきか？
 
-  * FATAL: プログラムをクラッシュさせるような制御不可能なエラー
-  * ERROR: エラー
-  * WARN: 警告
-  * INFO: 一般的な情報
-  * DEBUG: 低レベルの情報
+
+: FATAL
+  プログラムをクラッシュさせるような制御不可能なエラー
+: ERROR
+  エラー
+: WARN
+  警告
+: INFO
+   一般的な情報
+: DEBUG
+  低レベルの情報
 
 全てのメッセージは必ず重要度を持ちます。また Logger オブジェクトも同じように
 重要度を持ちます。メッセージの重要度が Logger オブジェクトの重要度よりも
 低い場合メッセージは記録されません。
 
-普段は INFO しか記録していないけど、デバッグ情報が必要になった時には、
+普段は INFO しか記録していないが、デバッグ情報が必要になった時には、
 Logger オブジェクトの重要度を DEBUG に下げるなどという使い方をします。
 
 例:
@@ -57,106 +60,131 @@ Logger オブジェクトの重要度を DEBUG に下げるなどという使い方をします。
 
 === 参考
 
-  * [[unknown:Rubyist Magazine|URL:http://jp.rubyist.net/magazine/]]
-  * [[unknown:標準添付ライブラリ紹介【第 2 回】 Logger|URL:http://jp.rubyist.net/magazine/?0008-BundledLibraries]]
+: Rubyist Magazine
+  [[url:http://jp.rubyist.net/magazine/]]
+: 標準添付ライブラリ紹介【第 2 回】
+  [[url:http://jp.rubyist.net/magazine/?0008-BundledLibraries]]
+
+= class Logger < Object
+include Logger::Severity
+
+
+ログを記録するためのクラスです。
 
 == Class Methods
 
---- new(logdev, shift_age = 0, shift_size = 1048576)
-#@todo
+--- new(logdev, shift_age = 0, shift_size = 1048576) -> Logger
 
-Logger オブジェクトを生成する。logdev には
-記録するファイル名か、write と close が定義されたオブジェクト(IO
-オブジェクトなど)を与えます。
+Logger オブジェクトを生成する。
+
+@param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
+
+@param shift_age ログファイルを保持する数か、ログファイルを切り替える頻度を指定します。
+                 頻度には daily, weekly, monthly を文字列で指定することができます。
+                 省略すると、ログの保存先を切り替えません。
+
+@param shift_size shift_age を整数で指定した場合のみ有効です。
+                  このサイズでログファイルを切り替えます。
 
 例:
 
   logger = Logger.new(STDERR)
   logger = Logger.new(STDOUT)
   logger = Logger.new('logfile.log')
-
-shift_age に [[c:Integer]] を与えた場合は、rotate したログファイルの
-残す個数と解釈されます。shift_size 毎に rotate されます。
-shift_age に 'daily', 'weekly', 'monthly' のいずれかの文字列を
-与えた場合は、その間隔毎にログは rotate されます。
-
-例:
-
+  
   file = File.open('foo.log', File::WRONLY | File::APPEND)
   logger = Logger.new(file, 'daily')
 
-shift_size は shift_age に [[c:Integer]] を与えた場合にのみ
-有効です。
 
 == Instance Methods
 
---- <<(msg)
-#@todo
+--- <<(msg) -> Integer | nil
 
---- add(severity, message = nil, progname = nil) { ... }
---- log(severity, message = nil, progname = nil) { ... }
-#@todo
+ログを出力します。
 
-メッセージをログに記録します。message は文字列か例外オブジェクトです。
-severity にはメッセージの
-重要度を DEBUG  = 0 から UNKNOWN = 5 までの定数で指定します。数字が
-大きいほど重要度も高くなります。メッセージの重要度 severity が
-Logger オブジェクトの level よりも低い場合、メッセージは記録されません。
-progname にはログにメッセージと一緒に記録するプログラム名を与えます。
-デフォルトはインスタンス変数 @progname です。
+@param msg ログに出力するメッセージ。
+
+--- add(severity, message = nil, progname = nil) -> true
+--- add(severity, message = nil, progname = nil){ ... } -> true
+--- log(severity, message = nil, progname = nil) -> true
+--- log(severity, message = nil, progname = nil){ ... } -> true
+
+メッセージをログに記録します。
 
 ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
-
 ユーザがこのメソッドを直接使うことはあまりありません。
 
---- close
-#@todo
+@param severity 重要度。[[c:Logger]] クラスで定義されている定数を指定します。
+                この値がレシーバーに設定されているレベルよりも低い場合、
+                メッセージは記録されません。
 
---- datetime_format
+@param message ログに出力するメッセージを文字列か例外オブジェクトを指定します。
+               省略すると nil が用いられます。
+
+@param progname ログメッセージと一緒に記録するプログラム名を指定します。
+                省略すると nil が使用されますが、実際には内部で保持されている値が使用されます。
+
+--- close -> nil
+
+ログ出力に使用していた IO オブジェクトを閉じます。
+
+--- datetime_format -> String
+
+ログに記録する時の日付のフォーマットです。
+
+デフォルトでは "%Y-%m-%dT%H:%M:%S.%06d "です。
+
+@see [[m:Time#strftime]], [[m:Logger#datetime_format=]]
+
+
 --- datetime_format=(format)
-#@todo
 
-ログに記録する時の日付のフォーマットです。デフォルトでは "%Y-%m-%dT%H:%M:%S.%06d "
-です。[[m:Time#strftime]] を参照して下さい。
+ログに記録する時の日付のフォーマットをセットします。
 
---- debug?
-#@todo
+@see [[m:Time#strftime]], [[m:Logger#datetime_format]]
+
+--- debug? -> bool
 
 現在の Logger オブジェクトが DEBUG 以上の重要度のメッセージを記録するなら
 真を返します。
 
---- info?
-#@todo
+--- info? -> bool
 
 現在の Logger オブジェクトが INFO 以上の重要度のメッセージを記録するなら
 真を返します。
 
---- warn?
-#@todo
+--- warn? -> bool
 
 現在の Logger オブジェクトが WARN 以上の重要度のメッセージを記録するなら
 真を返します。
 
---- error?
-#@todo
+--- error? -> bool
 
 現在の Logger オブジェクトが ERROR 以上の重要度のメッセージを記録するなら
 真を返します。
 
---- fatal?
-#@todo
+--- fatal? -> bool
 
 現在の Logger オブジェクトが FATAL 以上の重要度のメッセージを記録するなら
 真を返します。
 
---- debug(progname = nil) { ... }
---- debug(message = nil)
---- debug { ... }
-#@todo
+--- debug(progname = nil) -> true
+--- debug(progname = nil){ ... } -> true
 
-DEBUG 情報 message を記録します。ブロックを与えた場合は、ブロックを評価した
-返り値をメッセージとして記録します。現在の Logger の重要度が DEBUG よりも高い場合、
-メッセージは記録されません。
+重要度がデバッグのメッセージを出力します。
+
+現在の Logger の重要度が DEBUG よりも高い場合、メッセージは出力されません。
+
+ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
+
+ブロックを与えた場合は、ブロックを評価した結果をメッセージとして
+ログを出力します。
+
+引数とブロックを同時に与えた場合は、progname をプログラム名、ブロックを評価した
+をメッセージとしてログを出力します。
+
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクト指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
 
 例:
 
@@ -164,183 +192,344 @@ DEBUG 情報 message を記録します。ブロックを与えた場合は、ブロックを評価した
   # ...
   logger.debug { "User typed #{input}" }
 
-引数とブロックを同時に与えた場合は、progname はプログラム名、ブロックを評価した
-返り値がメッセージとなります。
+  logger.debug("MainApp") { "Received connection from #{ip}" }
+
+--- info(progname = nil){ ... } -> true
+--- info(progname = nil) -> true
+
+INFO 情報を出力します。
+
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクト指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+@see [[m:Logger#debug]]
+
+--- warn(progname = nil){ ... } -> true
+--- warn(progname = nil) -> true
+
+WARN 情報を出力します。
+
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクト指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+@see [[m:Logger#debug]]
+
+--- error(progname = nil){ ... } -> true
+--- error(progname = nil) -> true
+
+ERROR 情報を出力します。
+
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクト指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+@see [[m:Logger#debug]]
+
+--- fatal(progname = nil){ ... } -> true
+--- fatal(progname = nil) -> true
+
+FATAL 情報を出力します。
+
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクト指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+@see [[m:Logger#debug]]
+
+--- unknown(progname = nil){ ... } -> true
+--- unknown(progname = nil) -> true
+
+UNKNOWN 情報を出力します。
+
+@param progname ブロックを与えない場合は、メッセージとして文字列または例外オブジェクト指定します。
+                ブロックを与えた場合は、プログラム名を文字列として与えます。
+
+@see [[m:Logger#debug]]
+
+--- level -> Integer
+--- sev_threshold -> Integer
+
+レシーバにセットされているログレベルを取得します。
+
+--- level=(level)
+--- sev_threshold=(level)
+
+Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
+出力されません。
+
+@param level 重要度を指定します。
+
+--- progname -> String
+
+ログに出力するプログラム名を取得します。
+
+--- progname=(name)
+
+ログに出力するプログラム名を設定します。
+
+#@since 1.8.3
+--- formatter -> String
+
+ログを出力する際のフォーマット文字列を取得します。
+
+--- formatter=(formatter)
+
+ログを出力際のフォーマット文字列をセットします。
+
+#@end
+
+== Constants
+
+#@until 1.8.3
+--- Format -> String
+
+ログ用のフォーマット文字列。
+
+#@end
+
+--- ProgName -> String
+ログファイル作成時に使うプログラム名。
+
+#@since 1.9.0
+--- VERSION -> String
+このライブラリのバージョンを表す文字列。
+
+#@end
+
+--- SEV_LABEL -> Array
+
+重要度のラベルを格納した配列。
+
+= class Logger::Application < Object
+include Logger::Severity
+
+ユーザ定義のアプリケーションにログ機能を簡単に追加することができます。
+
+=== 使用方法
+
+  (1) このクラスのサブクラスとしてユーザ定義のアプリケーションのクラスを定義します。
+  (2) ユーザ定義のクラスでメイン処理を行う run メソッドを定義します。
+  (3) そのクラスをインスタンス化して start メソッドを呼び出します。
+
 
 例:
 
-  logger.debug("MainApp") { "Received connection from #{ip}" }
-
---- info(progname = nil) { ... }
---- info(message = nil)
---- info { ... }
-#@todo
-
-INFO 情報を記録します。debug を参照して下さい。
-
---- warn(progname = nil) { ... }
---- warn(message = nil)
---- warn { ... }
-#@todo
-
-WARN 情報を記録します。debug を参照して下さい。
-
---- error(progname = nil) { ... }
---- error(message = nil)
---- error { ... }
-#@todo
-
-ERROR 情報を記録します。debug を参照して下さい。
-
---- fatal(progname = nil) { ... }
---- fatal(message = nil)
---- fatal { ... }
-#@todo
-
-FATAL 情報を記録します。debug を参照して下さい。
-
---- unknown(progname = nil) { ... }
---- unknown(message = nil)
---- unknown { ... }
-#@todo
-
---- level
---- level=(level)
-#@todo
-
-Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
-記録されません。
-
---- sev_threshold
---- sev_threshold=(level)
-#@todo
-
-level の別名です。
-
---- progname
---- progname=(name)
-#@todo
-
-ログに記録するプログラム名を設定します。
-
---- formatter
---- formatter=(formatter)
-#@todo
-
-== Constants
-
---- DEBUG
---- INFO
---- WARN
---- ERROR
---- FATAL
---- UNKNOWN
-#@todo
-
-重要度を表す定数です。
-
-#@if (version <= "1.8.2")
---- Format
-#@todo
-#@end
-
---- ProgName
-#@todo
-
---- VERSION
-#@todo
-
---- SEV_LABEL
-#@todo
-
-= class Logger::Application < Object
+  class FooApp < Application
+    def initialize(foo_app, application_specific, arguments)
+      super('FooApp') # Name of the application.
+    end
+  
+    def run
+      ...
+      log(WARN, 'warning', 'my_method1')
+      ...
+      @log.error('my_method2') { 'Error!' }
+      ...
+    end
+  end
+  
+  status = FooApp.new(....).start
 
 == Class Methods
 
---- new(appname = nil)
-#@todo
+--- new(appname = nil) -> Logger::Application
+
+このクラスを初期化します。
+
+@param appname アプリケーション名を指定します。
 
 == Instance Methods
 
---- appname
-#@todo
+--- appname -> String
+
+アプリケーション名を取得します。
 
 --- level=(level)
-#@todo
 
---- log(severity, message = nil) { ... }
-#@todo
+ログの重要度をセットします。
+
+@param level ログの重要度。
+
+@see [[c:Logger::Severity]]
+
+--- log(severity, message = nil) -> true
+--- log(severity, message = nil){ ... } -> true
+
+メッセージをログに記録します。
+
+ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
+
+@param severity 重要度。[[c:Logger::Severity]] クラスで定義されている定数を指定します。
+                この値がレシーバーに設定されているレベルよりも低い場合、
+                メッセージは記録されません。
+
+@param message ログに出力するメッセージを文字列か例外オブジェクトを指定します。
+               省略すると nil が用いられます。
+
+@see [[m:Logger#add]]
 
 --- log=(logdev)
-#@todo
 
---- logdev
-#@todo
+ログの出力先をセットします。
 
---- set_log(logdev, shift_age = 0, shift_size = 1024000)
-#@todo
+@param logdev ログファイル名か IO オブジェクトを指定します。
 
---- start
-#@todo
+#@until 1.9.0
+--- logdev -> ()
 
-= class Logger::Error < RuntimeError
+このメソッドは使用されていません。
 
+#@end
+
+--- set_log(logdev, shift_age = 0, shift_size = 1024000) -> Integer
+
+内部で使用する [[c:Logger]] のオブジェクトを初期化します。
+
+@param logdev ログを書き込むファイル名か、 IO オブジェクト(STDOUT, STDERR など)を指定します。
+
+@param shift_age ログファイルを保持する数か、ログファイルを切り替える頻度を指定します。
+                 頻度には daily, weekly, monthly を文字列で指定することができます。
+                 省略すると、ログの保存先を切り替えません。
+
+@param shift_size shift_age を整数で指定した場合のみ有効です。
+                  このサイズでログファイルを切り替えます。
+
+@return ログの重要度を返します。
+
+--- start -> ()
+
+アプリケーションをスタートさせます。
+
+@return run メソッドの返値を返します。
+
+@raise RuntimeError サブクラスで run メソッドを定義していない場合に発生します。
+
+#@since 1.8.3
 = class Logger::Formatter < Object
 
-== Class Methods
-
---- new
-#@todo
+ロガーのフォーマット文字列を扱うクラス。
 
 == Instance Methods
 
---- call(severity, time, progname, msg)
-#@todo
+--- call(severity, time, progname, msg) -> String
 
---- datetime_format
+ログ情報をフォーマットして返します。
+
+@param severity 重要度。
+
+@param time 時間。[[c:Time]] クラスのオブジェクト。
+
+@param progname プログラム名
+
+@param msg メッセージ。
+
+--- datetime_format -> String
+
+ログの日付フォーマットを取得します。
+
+@see [[m:Time#strftime]]
+
 --- datetime_format=(format)
-#@todo
+
+ログの日付フォーマットをセットします。
+
+@param format 日付のフォーマット文字列。
+
+@see [[m:Time#strftime]]
 
 == Constants
 
---- Format
-#@todo
+--- Format -> String
+
+フォーマット文字列。
+
+#@end
 
 = class Logger::LogDevice < Object
 
+[[c:Logger]] の内部で使用するログの出力先を表すクラスです。
+
 == Class Methods
 
---- new(log = nil, opt = {})
-#@todo
+--- new(log = nil, opt = {}) -> Logger::LogDevice
+
+ログの出力先を初期化します。
+
+@param log ログの出力先。IO オブジェクトを指定します。
+           省略すると nil が使用されますが、実行中に例外が発生します。
+
+@param opt オプションをハッシュで指定します。
+           ハッシュのキーには :shift_age, :shift_size を指定します。
+           省略すると、それぞれ 7, 1048756 (1 MByte) が使用されます。
+
+@see [[m:Logger.new]]
+
 
 == Instance Methods
 
---- close
-#@todo
+--- close -> nil
 
---- dev
-#@todo
+出力先の IO オブジェクトを閉じます。
 
---- filename
-#@todo
+このメソッドは同期されます。
 
---- write(message)
-#@todo
+@see [[m:IO#close]]
 
+--- dev -> IO
+
+出力先の IO オブジェクトを取得します。
+
+--- filename -> String | nil
+
+出力先のファイル名を取得します。
+
+出力先がファイルではない場合は nil を返します。
+
+--- write(message) -> Integer
+
+出力先の IO オブジェクトにメッセージを書き込みます。
+
+このメソッドは同期されます。
+
+@see [[m:IO#write]]
+
+#@since 1.8.3
 = class Logger::LogDevice::LogDeviceMutex < Object
 include MonitorMixin
 
+ログの出力先ファイルを同期するためのクラスです。
+
+@see [[c:MonitorMixin]]
+
+#@end
+
 = module Logger::Severity
 
-== Constants
+[[lib:logger]] で使用する重要度を定義したモジュール。
 
---- DEBUG
---- INFO
---- WARN
---- ERROR
---- FATAL
---- UNKNOWN
-#@todo
+== Constants
+--- DEBUG -> Integer
+重要度:デバッグを表す定数です。
+
+--- INFO  -> Integer
+重要度:情報を表す定数です。
+
+--- WARN  -> Integer
+重要度:警告を表す定数です。
+
+--- ERROR -> Integer
+重要度:エラーを表す定数です。
+
+--- FATAL -> Integer
+重要度:致命的なエラーを表す定数です。
+
+--- UNKNOWN -> Integer
+重要度:不明なエラーを表す定数です。
+
+= class Logger::Error < RuntimeError
+
+このライブラリで使用する例外です。
 
 = class Logger::ShiftingError < Logger::Error
+
+ログファイルの切り替えに失敗した場合に発生する例外です。
+
 #@end
