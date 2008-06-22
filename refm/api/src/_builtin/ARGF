@@ -348,12 +348,14 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
 --- chars{|c| ... }         -> self
 --- each_char               -> Enumerable::Enumerator
 --- chars                   -> Enumerable::Enumerator
-#@todo
 
-Calls the given block once for each character in <em>ios</em>,
-passing the character as an argument. The stream must be opened for
-reading or an <code>IOError</code> will be raised.  Multibyte
-characters are dealt with according to $KCODE.
+レシーバに含まれる文字を一文字つつブロックに渡して評価します。
+
+レシーバは読み込み可能でなければなりません。
+
+また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
+
+@see [[m:IO#each_char]], [[m:IO#chars]]
 
 #@end
 
