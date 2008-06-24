@@ -523,42 +523,55 @@ true を返します。
 
 @see [[m:Module#public_method_defined?]], [[m:Module#private_method_defined?]], [[m:Module#protected_method_defined?]]
 
---- module_eval(expr, fname = '(eval)', lineno = 1) -> object
---- module_eval{|mod| .... } -> object
---- class_eval(expr, fname = '(eval)', lineno = 1) -> object
---- class_eval{|mod| ... } -> object
+--- module_eval(expr, fname = "(eval)", lineno = 1) -> object
+--- module_eval{|mod| ... }                         -> object
+--- class_eval(expr, fname = "(eval)", lineno = 1)  -> object
+--- class_eval{|mod| ... }                          -> object
 
-モジュールのコンテキストで文字列 expr を評価してその結果を返します。
+モジュールのコンテキストで文字列 expr を評価して、その結果を返します。
 
-fname、lineno が与えられた場合は、ファイル fname、
-行番号 lineno にその文字列があるかのようにコンパイルされ、
-スタックトレース表示などのファイル名／行番号を差し替えることができます。
+ブロックが与えられた場合には、そのブロックをモジュールのコンテキストで
+評価して、その結果を返します。ブロックの引数 mod には self が渡されます。
+ただし、ローカル変数だけは module_eval/class_eval の外側のスコープと共有します。
 
-ブロックが与えられた場合にはそのブロックを
-モジュールのコンテキストで評価してその結果を返します。
-ブロックの引数 mod には self が渡されます。
+モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
+つまり、そのモジュールの定義文の中にあるかのように実行されます。
 
-モジュールのコンテキストで評価するとは、
-実行中そのモジュールが self になるということです。
-つまり、そのモジュールの定義文の中にあるかのように
-実行されます。
+#@until 1.9.0
+文字列が与えられ場合には、定数とクラス変数のスコープは自身のモジュール定義式内と同じスコープになります。
+ブロックが与えられた場合は、定数とクラス変数のスコープはブロックの外側のスコープになります。
+#@else
+定数とクラス変数のスコープは、自身のモジュール定義式内と同じスコープになります。
+#@end
 
-ただし、ローカル変数は module_eval/class_eval の外側のスコープと共有します。
-
-ブロックが与えられた場合は、
-定数とクラス変数のスコープも外側のスコープになります。
-
-=== 注意
+#@until 1.8.0
+==== 注意
 module_eval のブロック中でメソッドを定義する場合、
 [[m:Object#instance_eval]] と同様の制限があります。
 詳細はそちらの説明を参照してください。
+#@end
 
 @param expr 評価される文字列。
-@param fname スタックトレースに表示するファイル名。
-@param lineno スタックトレースに表示する行番号。
 
-@return expr を評価した結果。
+@param fname 文字列を指定します。ファイル fname に文字列 expr が書かれているかのように実行されます。
+             スタックトレースの表示などを差し替えることができます。
 
+@param lineno 文字列を指定します。行番号 lineno から文字列 expr が書かれているかのように実行されます。
+              スタックトレースの表示などを差し替えることができます。
+
+例:
+
+ class C
+ end
+ a = 1
+ C.class_eval %Q{     
+   def m                   # メソッドを動的に定義できる。
+     return :m, #{a}
+   end
+ }
+ 
+ p C.new.m        #=> [:m, 1]
+ 
 @see [[m:Object#instance_eval]], [[m:Module.new]]
 
 --- name -> String
@@ -914,13 +927,13 @@ val をセットします。val を返します。
   p Fred.new.foo    # => 101
 #@end
 
---- define_method(name, method) -> Proc|Method|UnboundMethod
+--- define_method(name, method) -> Proc | Method | UnboundMethod
 --- define_method(name) { ... } -> Proc
 
 インスタンスメソッド name を定義します。
 
 ブロックを与えた場合、定義したメソッドの実行時にブロックが
-レシーバクラスのインスタンスの上で [[m:Module#instance_eval]] されます。
+レシーバクラスのインスタンスの上で [[m:Object#instance_eval]] されます。
 
 @param name [[c:String]] または [[c:Symbol]] を指定します。
 

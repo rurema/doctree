@@ -1400,32 +1400,32 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立します。
 
 @see [[m:Object#instance_of?]],[[m:Module#===]],[[m:Object#class]]
 
---- instance_eval(expr, filename = '(eval)', lineno = 1) -> object
---- instance_eval {|obj| ... } -> object
+--- instance_eval(expr, filename = "(eval)", lineno = 1) -> object
+--- instance_eval {|obj| ... }                           -> object
 
 オブジェクトのコンテキストで文字列 expr またはオブジェクト自身をブロック引数とするブロックを
 評価してその結果を返します。
 
-オブジェクトのコンテキストで評価するとは評価中の self をそのオブジェ
-クトにして実行するということです。また、文字列／ブロック中でメソッ
-ドを定義すればそのオブジェクトの特異メソッドが定義されます。
+オブジェクトのコンテキストで評価するとは評価中の self をそのオブジェクトにして実行するということです。
+また、文字列 expr やブロック中でメソッドを定義すればそのオブジェクトの特異メソッドが定義されます。
 
 ただし、ローカル変数だけは instance_eval の外側のスコープと共有します。
 
 #@since 1.8.0
 メソッド定義の中で instance_eval でメソッドを定義した場合は、囲むメソッドが実行されたときに
-初めて instance_eval 内のメソッドが定義されます。これは
-[[unknown:クラス／メソッドの定義/メソッド定義のネスト]]と同じです。
+初めて instance_eval 内のメソッドが定義されます。これはメソッド定義のネストと同じです。
+[[ref:d:spec/def#nest_method]] を参照してください。
 #@end
 
-filename、lineno が与えられた場合は、ファイル filename、
-行番号 lineno にその文字列があるかのようにコンパイルされ、ス
-タックトレース表示などのファイル名／行番号を差し替えることができま
-す。
-
 @param expr  評価する文字列です。
-@param fname スタックトレースに表示するファイル名です。
-@param lineno スタックトレースに表示する行番号です。
+
+@param fname 文字列を指定します。ファイル fname に文字列 expr が書かれているかのように実行されます。
+             スタックトレースの表示などを差し替えることができます。
+
+@param lineno 文字列を指定します。行番号 lineno から文字列 expr が書かれているかのように実行されます。
+              スタックトレースの表示などを差し替えることができます。
+
+例:
 
   class Foo
     def initialize data
@@ -1445,9 +1445,9 @@ filename、lineno が与えられた場合は、ファイル filename、
   messg = 'unknown'
   some.instance_eval 'raise messg','file.rb',999 # file.rb:999: unknown (RuntimeError)
 
-@see [[m:Module#module_eval]],[[m:Kernel.#eval]]
+@see [[m:Module#module_eval]], [[m:Kernel.#eval]]
 
-#@if (version < "1.8.0")
+#@until 1.8.0
 ==== メソッド定義のネストに関する注意
 メソッド定義の中で instance_eval のブロックを使用してメ
 ソッド定義を行うと、"nested method definition" とコンパイルエラー
