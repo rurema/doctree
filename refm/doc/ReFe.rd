@@ -4,12 +4,12 @@ ReFeについては
 [[unknown:ReFe|URL:http://i.loveruby.net/ja/prog/refe.html]]
 をご覧ください。
 
-== Gems版
+=== Gems版
 
 Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
 ([[unknown:ruby-list:41478]])
 
-== Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
+=== Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
 最新 Ruby リファレンスマニュアル用に ReFe のデータを構築するには以下の
 手順で行います。(詳細は ReFe の README を参照してください)
@@ -54,7 +54,7 @@ Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
 
             nil を返します。
 
-== ReFe の Emacs インタフェースのインストール方法
+=== ReFe の Emacs インタフェースのインストール方法
 
 (1) refe.el を取って来て
     /usr/local/share/emacs/site-lisp などの Emacs Lisp ライブラリの置き場所

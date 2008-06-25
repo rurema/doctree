@@ -29,8 +29,8 @@ RubyはC言語やPerlから引き継いだ制御構造を持ちますが、
 制御構造の抽象化を援助する機能があります。ブロック付きメソッド呼び出しは
 繰り返しを始めとする制御構造をクラス設計者が定義する事が出来るものです.
 
-== 条件分岐
-===[a:if] if
+=== 条件分岐
+====[a:if] if
 
 例:
 
@@ -73,7 +73,7 @@ Ruby では if を繋げるのは elsif であり、else if
 
 であるかのように評価されます。
 
-=== if 修飾子
+==== if 修飾子
 
 例:
 
@@ -86,7 +86,7 @@ Ruby では if を繋げるのは elsif であり、else if
 右辺の条件が成立する時に、左辺の式を評価してその結果を返します。
 条件が成立しなければ nil を返します。
 
-===[a:unless] unless
+====[a:unless] unless
 
 例:
 
@@ -108,7 +108,7 @@ unless は if と反対で、条件式が偽の時に then 以下の
 式を評価します。unless 式にelsif を指定することはできませ
 ん。
 
-=== unless 修飾子
+==== unless 修飾子
 
 例:
 
@@ -121,7 +121,7 @@ unless は if と反対で、条件式が偽の時に then 以下の
 右辺の条件が成立しない時に、左辺の式を評価してその結果を返します。
 条件が成立しなければ nil を返します。
 
-===[a:case] case
+====[a:case] case
 
 例:
 
@@ -218,9 +218,9 @@ case は、条件が成立した when 節、(あるいは else 節)
 の最後に評価した式の結果を返します。いずれの条件も成り立たなければ
 nil を返します。
 
-== 繰り返し
+=== 繰り返し
 
-===[a:while] while
+====[a:while] while
 
 例:
 
@@ -245,7 +245,7 @@ while は nil を返します。また、引数を伴った break により
 while 式の戻り値をその値にすることもできます。
 #@end
 
-=== while 修飾子
+==== while 修飾子
 
 例:
           sleep(60) while io_not_ready?
@@ -277,7 +277,7 @@ while 修飾した式は nil を返します。
 その値にすることもできます。
 #@end
 
-===[a:until] until
+====[a:until] until
 
 例:
           until f.eof?
@@ -297,7 +297,7 @@ until は nil を返します。また、引数を伴った break により
 until 式の戻り値をその値にすることもできます。
 #@end
 
-=== until修飾子
+==== until修飾子
 
 例:
           print(f.gets) until f.eof?
@@ -328,7 +328,7 @@ until 修飾した式は nil を返します。
 また、引数を伴った break により until 修飾した式の戻り値をその値にすることもできます。
 #@end
 
-===[a:for] for
+====[a:for] for
 
 例:
 
@@ -390,7 +390,7 @@ for や each で配列要素を複数個ずつ取得しながらループすることは
           end
         end
 
-===[a:break] break
+====[a:break] break
 
 例:
 
@@ -424,7 +424,7 @@ break によりループを抜けた for やイテレータは nil
 ただし、引数を指定した場合はループの戻り値はその引数になります。
 #@end
 
-===[a:next] next
+====[a:next] next
 
 例:
           # 空行を捨てるcat
@@ -449,7 +449,7 @@ next により抜けた yield 式は nil を返します。
 ただし、引数を指定した場合、yield 式の戻り値はその引数になります。
 #@end
 
-===[a:redo] redo
+====[a:redo] redo
 
 例:
 
@@ -461,7 +461,7 @@ next により抜けた yield 式は nil を返します。
 
 ループ条件のチェックを行なわず、現在の繰り返しをやり直します。
 
-===[a:retry] retry
+====[a:retry] retry
 
 例:
 
@@ -539,9 +539,9 @@ retry をまとめると以下のようになります。
 ((-あらい 2002-01-13: ensure は大域脱出を捕まえるので retry が (d)
 に飛んでいるあまり良い例じゃないか-))
 
-== 例外処理
+=== 例外処理
 
-===[a:raise] raise
+====[a:raise] raise
 
 例:
 
@@ -577,7 +577,7 @@ retry をまとめると以下のようになります。
 [[m:Kernel.#raise]] は Ruby の予約語ではなく、[[c:Kernel]] モジュールで
 定義されている関数的メソッドです。
 
-===[a:begin] begin
+====[a:begin] begin
 
 例:
 
@@ -648,7 +648,7 @@ begin式全体の評価値は、本体／rescue節／else節のうち
 最後に評価された文の値です。また各節において文が存在しなかったときの値
 はnilです。いずれにしてもensure節の値は無視されます。
 
-=== rescue修飾子
+==== rescue修飾子
 
 例:
           open("nonexistent file") rescue STDERR.puts "Warning: #$!"
@@ -698,9 +698,9 @@ rescue の優先度が変更され、この心配はなくなっています。
           p(open("nonexistent file") rescue false)
           => false
 
-== その他
+=== その他
 
-===[a:return] return
+====[a:return] return
 
 例:
 
@@ -716,7 +716,7 @@ rescue の優先度が変更され、この心配はなくなっています。
 与えられた時には、それらを要素とする配列をメソッドの戻り値と
 します。式が省略された場合には nil を戻り値とします。
 
-===[a:BEGIN] BEGIN
+====[a:BEGIN] BEGIN
 
 例:
 
@@ -756,7 +756,7 @@ BEGINはメソッド定義式中には書けません。parse error になります。
         end
         # => -:2: BEGIN in method
 
-===[a:END] END
+====[a:END] END
 
 例:
 

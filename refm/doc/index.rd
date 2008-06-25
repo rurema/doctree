@@ -9,7 +9,7 @@
  * 原著：まつもとゆきひろ
  * 最新版URL: [[url:http://www.ruby-lang.org/ja/documentation/]]
 
-== 使用上の注意
+=== 使用上の注意
 
 #@since 1.9.0
 このリファレンスマニュアルは、Ruby 1.9 に関して、言語仕様、組み込みライブラリ、
@@ -19,14 +19,14 @@
 Ruby 1.8 の標準添付ライブラリに関して、本リファレンスは極めて不完全です。
 #@end
 
-== 目次
+=== 目次
 
  * [[d:spec/intro]]
  * [[d:spec/commands]]
  * [[d:spec/rubycmd]]
  * [[d:spec/envvars]]
 
-=== Ruby 言語仕様
+==== Ruby 言語仕様
 
 Ruby でのオブジェクト:
   * [[d:spec/object]]
@@ -55,13 +55,13 @@ Ruby の文法:
   * [[d:spec/regexp]]
   * [[d:spec/lambda_proc]]
 
-=== 組み込みライブラリ
+==== 組み込みライブラリ
   * [[lib:_builtin]]
 
-=== 標準添付ライブラリ
+==== 標準添付ライブラリ
   * [[lib:/]]
 
-=== その他
+==== その他
 #@#* [[c:Ruby変更履歴]]
 #@#  * ((<ruby 1.8.5 feature>))
 #@#  * ((<ruby 1.9 feature>))
