@@ -15,47 +15,39 @@
   
  p foo().call       #=> 1
 
-
-===[a:orphan] orphan な手続きオブジェクトの挙動
-
-Proc を生成したメソッドから脱出した後、手続きオブジェクトからの return, retry は
-例外 [[c:LocalJumpError]] を発生させます。
-
-例:
-
-  def foo
-    proc { return }
-  end
-
-  foo.call
-  # => in `call': return from proc-closure (LocalJumpError)
-
-  def foo
-    proc { retry }
-  end
-
-  foo.call
-  # => in `call': retry from proc-closure (LocalJumpError)
-
 ===[a:block] Proc オブジェクトをブロック付きメソッド呼び出しに使う
 
 ブロック付きメソッドに対して Proc オブジェクトを `&' を指定して渡すと
-呼び出しブロックのように動作しますが、厳密には以下の違いがあります
+呼び出しブロックのように動作します。
+#@until 1.9.0
+しかし、厳密には以下の違いがあります
+これらは、Proc オブジェクトが呼び出しブロックとして振舞う際の制限です。
+#@end
 
   # 問題なし
   (1..5).each { break }
 
-  # ruby 1.6.7, 1.8 で問題なし。1.6.8 では例外
-  proc = Proc.new { break }
-  (1..5).each(&proc)
+#@#  # ruby 1.6.7, 1.8 で問題なし。1.6.8 では例外 
+#@since 1.9.0
+  # 問題なし
+#@else
+  # LocalJumpError が発生します。
+#@end
+  pr = Proc.new { break }
+  (1..5).each(&pr)         
 
+#@until 1.9.0
+#@since 1.8.0
+  # each 再実行
+#@else
   # ruby 1.6 では、LocalJumpError
-  # ruby 1.8 では、each 再実行
-  proc = Proc.new { retry }
-  (1..5).each(&proc)
+#@end
+  pr = Proc.new { retry }
+  (1..5).each(&pr)
+#@until 1.8.0
   #=> retry from proc-closure (LocalJumpError)
-
-これは、Proc オブジェクトが呼び出しブロックとして振舞う際の制限です。
+#@end
+#@end
 
 ===[a:lambda_proc] lambda と proc と Proc.new とイテレータの違い
 
@@ -64,15 +56,17 @@ Proc を生成したメソッドから脱出した後、手続きオブジェクトからの return, retry は
 よりメソッドに近い働きをするように設計されています。
 
 #@since 1.9.0
-[[m:Kernel.#proc]] は Proc.new の別名です。
+[[m:Kernel.#proc]] は Proc.new と同じになります。
 #@else
-[[m:Kernel.#proc]] は lambda の別名です。
+[[m:Kernel.#proc]] は lambda と同じになります。
 #@end
+引数に & を付けることで手続きオブジェクト化したブロックは、Proc.new で生成されたそれと
+同じにように振る舞います。
 
 ==== 引数の扱い
 
-lambda のほうがより厳密です。引数の数が違っていると（メソッドのように）エラーになります。 Proc.new は引数を
-多重代入に近い扱い方をします。
+lambda のほうがより厳密です。引数の数が違っていると（メソッドのように）エラーになります。
+Proc.new は引数を多重代入に近い扱い方をします。
 
 例:
 
@@ -125,12 +119,60 @@ Proc.new では手続きオブジェクトを囲むメソッドを抜けます。
  p bar()  #=> nil
  p hoge() #=> :hoge
 
-以下の表は、手続きオブジェクトの実行を、上の例と同じように手続きオブジェクトが定義されたのと同じメソッド内で
-行った場合の結果です。
+以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたのと
+同じメソッド内で行った場合の結果です。
 
                  return                          next                        break
   Proc.new   メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
+#@since 1.9.0
+  proc       メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
+#@else
+  proc       手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
+#@end
   lambda     手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
   イテレータ メソッドを抜ける            手続きオブジェクトを抜ける   メソッドを抜ける
 
 #@end
+
+
+===[a:orphan] orphan な手続きオブジェクトの挙動
+
+Proc を生成したメソッドから脱出した後、手続きオブジェクトからの
+#@since 1.9.0
+return, break
+#@else
+return, retry, break 
+#@end
+は例外 [[c:LocalJumpError]] を発生させます。
+ただし、上でも説明した通り lambda で生成した手続きオブジェクトはメソッドと同じように振る舞う
+ことを意図されているため、例外 [[c:LocalJumpError]] は発生しません。
+
+例:
+
+  def foo
+    Proc.new { return }
+  end
+
+  foo.call
+  # => in `call': return from proc-closure (LocalJumpError)
+
+#@until 1.9.0
+  def foo
+    Proc.new { retry }
+  end
+
+  foo.call
+  # => in `call': retry from proc-closure (LocalJumpError)
+#@end
+
+以下の表は、手続きオブジェクトの実行を上の例と同じように、手続きオブジェクトが定義されたメソッドを
+脱出してから行った場合の結果です。
+
+                 return                          next                        break
+  Proc.new   例外が発生する              手続きオブジェクトを抜ける   例外が発生する
+#@since 1.9.0
+  proc       例外が発生する              手続きオブジェクトを抜ける   例外が発生する
+#@else
+  proc       手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
+#@end
+  lambda     手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
