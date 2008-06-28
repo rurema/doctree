@@ -13,141 +13,141 @@ require soap/mapping/typeMap
 #@end
 
 = class SOAP::SOAPNil < XSD::XSDNil
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPRawString < XSD::XSDString
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPAnySimpleType < XSD::XSDAnySimpleType
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPString < XSD::XSDString
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPBoolean < XSD::XSDBoolean
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPDecimal < XSD::XSDDecimal
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPFloat < XSD::XSDFloat
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPDouble < XSD::XSDDouble
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPDuration < XSD::XSDDuration
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPDateTime < XSD::XSDDateTime
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPTime < XSD::XSDTime
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPDate < XSD::XSDDate
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPGYearMonth < XSD::XSDGYearMonth
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPGYear < XSD::XSDGYear
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPGMonthDay < XSD::XSDGMonthDay
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPGDay < XSD::XSDGDay
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPGMonth < XSD::XSDGMonth
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPHexBinary < XSD::XSDHexBinary
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 #@include(baseData/SOAPBase64)
 
 = class SOAP::SOAPAnyURI < XSD::XSDAnyURI
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPQName < XSD::XSDQName
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPInteger < XSD::XSDInteger
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 #@since 1.8.2
 = class SOAP::SOAPNonPositiveInteger < XSD::XSDPositiveInteger
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPNegativeInteger < XSD::XSDNegativeInteger
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 #@end
 
 = class SOAP::SOAPLong < XSD::XSDLong
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPInt < XSD::XSDInt
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPShort < XSD::XSDShort
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 #@since 1.8.2
 = class SOAP::SOAPByte < XSD::XSDByte
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPNonNegativeInteger < XSD::XSDNonNegativeInteger
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPUnsignedLong < XSD::XSDUnsignedLong
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPUnsignedInt < XSD::XSDUnsignedInt
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPUnsignedShort < XSD::XSDUnsignedShort
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPUnsignedByte < XSD::XSDUnsignedByte
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 
 = class SOAP::SOAPPositiveInteger < XSD::XSDPositiveInteger
-extend SOAPModuleUtils
-include SOAPBasetype
+extend SOAP::SOAPModuleUtils
+include SOAP::SOAPBasetype
 #@end
 
 #@include(baseData/SOAPStruct)

@@ -1,6 +1,6 @@
 #@since 1.8.1
 = class XSD::XSDTime < XSD::XSDAnySimpleType
-include XSD::DateTimeImpl
+include XSD::XSDDateTimeImpl
 
 == class methods
 --- new(value = nil)

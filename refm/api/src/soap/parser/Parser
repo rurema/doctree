@@ -43,8 +43,8 @@ include SOAP
 
 = class SOAP::Parser::ParseError < SOAP::Error
 
-= class SOAP::Parser::FormatDecodeError < SOAP::Parser::ParserError
+= class SOAP::Parser::FormatDecodeError < SOAP::Parser::ParseError
 
-= class SOAP::Parser::UnexpectedElementError < SOAP::Parser::ParserError
+= class SOAP::Parser::UnexpectedElementError < SOAP::Parser::ParseError
 
 #@end

@@ -8,7 +8,7 @@ require wsdl/data
 require wsdl/xmlSchema/data
 require wsdl/soap/data
 
-= class WSDL::ParseError < WSDL::Error
+= class WSDL::Parser::ParseError < WSDL::Error
 
 = class WSDL::Parser::FormatDecodeError < WSDL::Parser::ParseError
 

@@ -20,6 +20,7 @@
 #@include(XSDAnyURI)
 #@include(XSDBase64Binary)
 #@include(XSDBoolean)
+#@include(XSDByte)
 #@include(XSDDate)
 #@include(XSDDateTime)
 #@include(XSDDateTimeImpl)

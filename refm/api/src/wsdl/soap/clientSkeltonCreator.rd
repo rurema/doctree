@@ -2,7 +2,7 @@ require wsdl/info
 require wsdl/soap/classDefCreatorSupport
 
 = class WSDL::SOAP::ClientSkeltonCreator < Object
-include ClassDefCreatorSupport
+include WSDL::SOAP::ClassDefCreatorSupport
 
 == Class Methods
 

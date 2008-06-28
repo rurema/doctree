@@ -1,6 +1,6 @@
 #@since 1.8.1
 = module SOAP::SOAPCompoundtype
-include SOAPType
+include SOAP::SOAPType
 include SOAP
 
 == Instance Methods

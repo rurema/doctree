@@ -34,7 +34,7 @@ include SOAP::SOAPCompoundtype
 --- encode(generator, ns, attrs = {})
 #@todo
 
-= class SOAP::SOAPBody < SOAP::Struct
+= class SOAP::SOAPBody < SOAP::SOAPStruct
 include SOAP::SOAPEnvelopeElement
 
 == Class Methods

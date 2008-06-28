@@ -1,6 +1,6 @@
 #@since 1.8.1
 = class SOAP::SOAPStruct < XSD::NSDBase
-include SOAPCompoundtype
+include SOAP::SOAPCompoundtype
 include Enumerable
 
 == Class Methods

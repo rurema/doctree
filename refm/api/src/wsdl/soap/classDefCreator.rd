@@ -4,7 +4,7 @@ require xsd/codegen
 
 
 = class WSDL::SOAP::ClassDefCreator < Object
-include ClassDefCreatorSupport
+include WSDL::SOAP::ClassDefCreatorSupport
 
 == Constants
 

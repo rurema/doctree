@@ -4,7 +4,7 @@ require soap/rpc/element
 
 
 = class WSDL::SOAP::MethodDefCreator < Object
-include ClassDefCreatorSupport
+include WSDL::SOAP::ClassDefCreatorSupport
 
 
 == Class Methods

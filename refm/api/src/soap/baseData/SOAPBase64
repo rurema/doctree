@@ -1,7 +1,7 @@
 #@since 1.8.1
 
 = class SOAP::SOAPBase64 < XSD::XSDBase64Binary
-include SOAPBasetype
+include SOAP::SOAPBasetype
 #@# extend SOAPModuleUtils
 
 == Class Methods

@@ -1,6 +1,6 @@
 #@since 1.8.1
 = class SOAP::SOAPReference < XSD::NSDBase
-include SOAPBasetype
+include SOAP::SOAPBasetype
 #@# extend SOAPModuleUtils
 
 == Class Methods

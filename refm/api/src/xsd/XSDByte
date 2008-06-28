@@ -1,5 +1,5 @@
 #@since 1.8.2
-= class XSD::Byte < XSD::XSDShort
+= class XSD::XSDByte < XSD::XSDShort
 == class methods
 --- new(value = nil)
 #@todo
