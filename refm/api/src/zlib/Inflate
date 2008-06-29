@@ -97,7 +97,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
 このメソッドは Zlib::NeedDict 例外が発生した直後のみ
 有効です。詳細は zlib.h を参照して下さい。
 
-@param 展開に用いる辞書を文字列で指定します。
+@param string 展開に用いる辞書を文字列で指定します。
 
   def case2(str, dict)
     dez = Zlib::Deflate.new
