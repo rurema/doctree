@@ -138,6 +138,13 @@ IO に対してエンコーディングを指定する方法には、生成時に [[m:IO.open]] や [[m:Fil
                                                          
   書き込みメソッド             変換なし             変換あり                     変換あり               
 
+==== デフォルトの外部エンコーディングの指定
+
+[[m:Encoding.default_external]] はコマンドオプション -E で指定します。
+-E が指定されなかった場合は次のような優先順位で決定されます。
+
+ -E (最優先) > -K > locale
+
 ==== ファイル名のエンコーディング
 
 ファイル名の文字エンコーディングはプラットフォームに依存します。
@@ -872,7 +879,7 @@ C 言語の printf と同じように、format に従い引数
 
 第一引数に IO を指定できないこと、引数を省略できないことを除けば [[m:Kernel.#printf]] と同じです。
 
-@param format [[m:Kernel.#printf]] と同じです。[[unknown:sprintfフォーマット]] を参照してください。
+@param format [[m:Kernel.#printf]] と同じです。[[d:print_format]] を参照してください。
 
 @param arg [[m:Kernel.#printf]] と同じです。
 
