@@ -969,16 +969,9 @@ send が再定義された場合に備えて別名 __send__ も
 用意されており、ライブラリではこちらを使うべきです。また
 __send__ は再定義すべきではありません。
 
-#@since 1.9.0
-1.9.0 からは[[unknown:クラス／メソッドの定義/呼び出し制限]]が
-send, __send__にも影響するようになり、
-レシーバを指定した呼び出しでは private メソッドを呼び出せなくなりました。
-privateメソッドを呼び出す必要がある場合は
-[[m:Object#instance_eval]] を使用してください。
-#@else
-send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
+send, __send__ は、メソッドの呼び出し制限
 にかかわらず任意のメソッドを呼び出せます。
-#@end
+[[ref:d:spec/def#limit]] も参照してください。
 
 @param name 文字列か[[c:Symbol]] で指定するメソッド名です。
 @param args 呼び出すメソッドに渡す引数です。
@@ -1005,7 +998,7 @@ send, __send__ は、[[unknown:クラス／メソッドの定義/呼び出し制限]]
   p Foo.new.send(methods[2])      # => "bar"
   p Foo.new.send(methods[3])      # => "baz"
 
-@see [[m:Object#method]],[[m:Kernel.#eval]],[[c:Proc]],[[c:Method]]
+@see [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
 --- _dump(limit) -> String
 
@@ -1481,9 +1474,8 @@ obj.instance_of?(c) が成立する時には、常に obj.kind_of?(c) も成立します。
 
 Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなくなっています。
 さらに、 instance_eval を使わなく
-ても以下で同じことができます (厳密には異なります。
-[[unknown:クラス／メソッドの定義/メソッド定義のネスト]]
-を参照してください)。
+ても以下で同じことができます。 厳密には異なります。
+[[ref:d:spec/def#nest_method]] を参照してください。
 
     def foo
        def bar
@@ -1530,7 +1522,7 @@ type は obsolete です。 class を使用してください。
 オブジェクトの「汚染マーク」をセットします。
 
 環境変数（[[c:ENV]]で得られる文字列）など一部のオブジェクトは最初から汚染されています。
-オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
+オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
   $SAFE = 1
   
@@ -1554,7 +1546,7 @@ type は obsolete です。 class を使用してください。
 
 オブジェクトの「汚染マーク」がセットされている時真を返します。
 
-オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
+オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
   p String.new.tainted? #=> false
   p ENV['OS'].tainted? #=> true
@@ -1568,7 +1560,7 @@ type は obsolete です。 class を使用してください。
 汚染マークを取り除くことによる危険性はプログラマが責任を負う必要が
 あります。
 
-オブジェクトの汚染に関しては[[unknown:セキュリティモデル]]を参照してください。
+オブジェクトの汚染に関しては[[d:spec/safelevel]]を参照してください。
 
 @raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
 @see [[m:Object#taint]],[[m:Object#tainted?]]
@@ -1767,8 +1759,7 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
 --- singleton_method_undefined(name) -> object
 
 特異メソッドが [[m:Module#undef_method]] または
-[[unknown:クラス／メソッドの定義/undef]]
-により未定義にされた時にインタプリタから呼び出されます。
+undef により未定義にされた時にインタプリタから呼び出されます。
 
 通常のメソッドの未定義に対するフックには
 [[m:Module#method_undefined]] を使います。
@@ -1795,7 +1786,7 @@ obj2 に対してさらに obj の汚染状態、インスタンス変数、ファイナライ
     #=> singleton method "foo" was undefined
     #   singleton method "bar" was undefined
 
-@see [[m:Module#method_undefined]],[[m:Object#singleton_method_added]],[[m:Object#singleton_method_removed]]
+@see [[m:Module#method_undefined]],[[m:Object#singleton_method_added]],[[m:Object#singleton_method_removed]] , [[ref:d:spec/def#undef]]
 #@end
 
 #@since 1.8.7
