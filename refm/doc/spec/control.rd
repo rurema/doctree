@@ -471,6 +471,7 @@ next により抜けた yield 式は nil を返します。
 
           retry
 
+#@until 1.9.0
 イテレータ、ブロックまたはfor文の中で使われた場合には、そのイテレータ
 を起動しなおします。イテレータの引数も再評価されます。
 
@@ -484,6 +485,7 @@ next により抜けた yield 式は nil を返します。
             yield
             retry
           end
+#@end
 
 retry は、ループ以外に後述の rescue 節でも使えます。この場
 合は、begin 式を始めからもう一度実行します。retry を使うこ
@@ -513,7 +515,9 @@ retry をまとめると以下のようになります。
           :
          (d)
         end
+#@until 1.9.0
         iter { retry }   -> (a) へ飛ぶ
+#@end
         iter { redo  }   -> (b) へ飛ぶ
         iter { next  }   -> (c) へ飛ぶ
         iter { break }   -> (d) へ飛ぶ
@@ -530,8 +534,9 @@ retry をまとめると以下のようになります。
         ensure
           p "(d)"
         end
-
+#@until 1.9.0
         iter { p "(b)"; retry }     # => (a) .. (b)(d)(a) .. (b)(d)(a) ...
+#@end
         iter { p "(b)"; redo  }     # => (a) .. (b)(b)(b)(b) ...
         iter { p "(b)"; next  }     # => (a) .. (b)(c) .. (d)
         iter { p "(b)"; break }     # => (a)..(b)(d)
