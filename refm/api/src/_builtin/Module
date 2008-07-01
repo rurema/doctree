@@ -227,9 +227,8 @@ false を返します。
 
 言い替えると obj.kind_of?(self) が true の場合、 true を返します。
 
-このメソッドは主に [[unknown:制御構造/case]] 文での比較に用いられます。
-[[unknown:制御構造/case]] ではクラス、モジュールの
-所属関係をチェックすることになります。
+このメソッドは主に case 文での比較に用いられます。
+case ではクラス、モジュールの所属関係をチェックすることになります。
 
   str = String.new
   case str
@@ -239,7 +238,7 @@ false を返します。
 
 @param obj 任意のオブジェクト
 
-@see [[m:Object#kind_of?]], [[m:Object#instance_of?]]
+@see [[m:Object#kind_of?]], [[m:Object#instance_of?]], [[ref:d:spec/control#case]]
 
 --- ancestors -> [Class, Module]
 
@@ -786,7 +785,7 @@ name で与えられた名前のクラス変数がモジュールに存在する場合 true を
 
 メソッドの別名を定義します。
 
-[[unknown:クラス／メソッドの定義/alias]] との違いは以下の通りです。
+alias との違いは以下の通りです。
 
   * メソッド名は [[c:String]] または [[c:Symbol]] で指定します
   * グローバル変数の別名をつけることはできません
@@ -796,6 +795,8 @@ name で与えられた名前のクラス変数がモジュールに存在する場合 true を
 @param new 新しいメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
 
 @param original 元のメソッド名。[[c:String]] または [[c:Symbol]] で指定します。
+
+@see [[ref:d:spec/def#alias]]
 
 --- append_features(module_or_class) -> self
 
