@@ -116,7 +116,7 @@ self の文字列表現を返します。
   pr.yield(1,2,3,4)  #=> [1, 2, 3]
   pr.call(1)         #=> wrong # of arguments (4 for 3) (ArgumentError)
 
-これは [[unknown:メソッド呼び出し/yield]] と同じ動作です。
+これは yield と同じ動作です。
 
   def foo
     yield(1)
@@ -126,6 +126,8 @@ self の文字列表現を返します。
 @param arg 手続きオブジェクトに与える引数を指定します。
 
 @raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
+
+@see [[ref:d:spec/call#yield]]
 
 #@end
 

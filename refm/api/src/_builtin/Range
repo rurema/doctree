@@ -54,7 +54,7 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 obj が範囲内に含まれている時に真を返します。
 
-[[m:Range#===]] は主に [[unknown:制御構造/case]] 文での比較に用いられます。
+[[m:Range#===]] は主に case 文での比較に用いられます。
 
 include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
  と異なり <=> メソッドによる演算により範囲内かどうかを判定することに注意する必要があります。
@@ -74,7 +74,7 @@ include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
   # 1.8.2 以降
   p ("a" .. "c").member?("ba")  # => true
   
-
+@see [[ref:d:spec/control#case]]
 
 --- begin -> object
 --- first -> object

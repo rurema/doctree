@@ -33,7 +33,7 @@
   p methods[3].bind(Foo.new).call      # => "baz"
 
 例: 以下はメソッドの再定義を UnboundMethod を使って行う方法です。普通は
-[[unknown:クラス／メソッドの定義/alias]] や [[unknown:メソッド呼び出し/super]] を使います。
+alias や super を使います。
 
   class Foo
     def foo

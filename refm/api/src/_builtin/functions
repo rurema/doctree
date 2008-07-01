@@ -17,7 +17,7 @@ EXIT_SUCCESS、EXIT_FAILURE の値なので、正確には環境依存です。
 
 exit は例外 [[c:SystemExit]] を発生させ
 ることによってプログラムの実行を終了させますので、
-必要に応じて [[unknown:rescue|制御構造/begin]] 節で捕捉することができます。
+必要に応じて begin 節で捕捉することができます。
 
 @param status 終了ステータスを整数か true または false で与えます。
 
@@ -44,7 +44,7 @@ exit は例外 [[c:SystemExit]] を発生させ
   #   end2...
   #終了ステータス:0
 
-@see [[m:Kernel.#exit!]],[[m:Kernel.#abort]]
+@see [[m:Kernel.#exit!]],[[m:Kernel.#abort]], [[ref:d:spec/control#begin]]
 
 #@since 1.8.0
 --- exit!(status = false) -> ()
@@ -157,7 +157,7 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 [[m:Kernel.#system]] を使います。特に端末を制御するコマンドでは
 `command` は失敗するかもしれません。
 
-[[unknown:リテラル/コマンド出力]] も参照。
+[[ref:d:spec/literal#command]] も参照。
 
 @param command コマンドとして実行する引数です。そのまま評価されるのではなく、
        ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
@@ -1412,9 +1412,9 @@ arg が文字列の場合、何もせず arg を返します。
 
 与えられたブロックをインタプリタ終了時に実行します。
 
-at_exitがメソッドである点を除けば、[[unknown:制御構造/END]] ブロックによる終了
+at_exitがメソッドである点を除けば、END ブロックによる終了
 処理の登録と同等です。登録した処理を取り消すことはできません。
-[[unknown:終了処理]]も参照してください。
+[[d:spec/terminate]]も参照してください。
 
 @return 登録した処理を [[c:Proc]] オブジェクトで返します。
 
@@ -1431,6 +1431,8 @@ at_exitがメソッドである点を除けば、[[unknown:制御構造/END]] ブロックによる終了
   #   at_exit2
   #   at_exit1
   #   at_exit0
+
+@see [[ref:d:spec/control#END]]
 
 #@since 1.8.0
 --- loop { ... } -> object
@@ -1835,7 +1837,7 @@ nil、空文字列""、"SIG_IGN" または
 (可能ならば)。
 "SIG_DFL" または "DEFAULT" を指定した時は、
 デフォルトの動作を行なうようになります。
-"EXIT"を指定した時は、シグナルを受け取ると[[unknown:終了処理]]を
+"EXIT"を指定した時は、シグナルを受け取ると終了処理を
 行ったあとステータス 0 で終了します。
 
 また signal の特別な値として 0 または "EXIT"
@@ -1874,8 +1876,8 @@ trap 実行前に"IGNORE" や "DEFAULT" が登録されていたなら、
 #@##@end
 
 存在しないシグナルを指定した場合は、例外 [[c:ArgumentError]] が発
-生します((-なお、Windows ([[unknown:mswin32]], [[unknown:mingw32]])では、INT
-ILL FPE SEGV TERM BREAK ABRT そして EXIT しか指定できません。-))
+生します。なお、Windows (mswin32, mingw32)では、INT
+ILL FPE SEGV TERM BREAK ABRT そして EXIT しか指定できません。
 #@end
 
 --- trace_var(varname, hook) -> nil

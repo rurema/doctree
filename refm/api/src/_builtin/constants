@@ -1,7 +1,7 @@
 == Constants
 
 --- TRUE
-非推奨([[unknown:obsolete]])。代表的な真の値。true と同じ。
+非推奨です。代表的な真の値。true と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 true を使ってください。
 
@@ -9,14 +9,14 @@ Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- FALSE
-非推奨([[unknown:obsolete]])。代表的な偽の値。false と同じ。
+非推奨です。代表的な偽の値。false と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 false を使ってください。
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 
 --- NIL
-非推奨([[unknown:obsolete]])。 nil と同じ。
+非推奨です。 nil と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 nil を使ってください。
 
@@ -104,8 +104,9 @@ Ruby 自身に対する引数は取り除かれています。
 
 --- DATA
 スクリプトの __END__
-([[unknown:スクリプトの終り|プログラム/プログラムの終り]])
-以降をアクセスする [[c:File]] オブジェクト。
+プログラムの終り以降をアクセスする [[c:File]] オブジェクト。
+
+[[ref:d:spec/program#terminate]]も参照。
 
 ソースファイルの __END__ 以降は解析・実行の対象にならないので
 その部分にプログラムが利用するためのデータを書き込んでおくことができます。
@@ -180,7 +181,7 @@ app.rb:
 
 --- TOPLEVEL_BINDING
 
-[[unknown:Ruby用語集/トップレベル]]での [[c:Binding]] オブジェクト。
+トップレベルでの [[c:Binding]] オブジェクト。
 
 詳細は [[c:Binding]] を参照してください。
 
@@ -236,19 +237,19 @@ teeny リリースのそれぞれについてパッチレベルは 0 から始まり、
 #@if (version < "1.9.0")
 --- VERSION
 
-非推奨([[unknown:obsolete]])。 [[m:Kernel::RUBY_VERSION]] の古い名前です。
+非推奨です。 [[m:Kernel::RUBY_VERSION]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_VERSION を使ってください。
 
 --- RELEASE_DATE
 
-非推奨([[unknown:obsolete]])。 [[m:Kernel::RUBY_RELEASE_DATE]] の古い名前です。
+非推奨です。 [[m:Kernel::RUBY_RELEASE_DATE]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_RELEASE_DATE を使ってください。
 
 --- PLATFORM
 
-非推奨([[unknown:obsolete]])。 [[m:Kernel::RUBY_PLATFORM]] の古い名前です。
+非推奨です。 [[m:Kernel::RUBY_PLATFORM]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_PLATFORM を使ってください。
 #@end

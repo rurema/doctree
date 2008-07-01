@@ -38,7 +38,7 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
                指定します。nil、空文字列""、"SIG_IGN" または"IGNORE" を指定した時は、
                可能ならばそのシグナルを無視します。
                "SIG_DFL" または "DEFAULT" を指定した時は、シグナルハンドラをデフォルトに戻します。
-               "EXIT"を指定した時は、シグナルを受け取ると[[unknown:終了処理]]を
+               "EXIT"を指定した時は、シグナルを受け取ると終了処理を
                行ったあとステータス 0 で終了します。
 
 @raise ArgumentError システムに定義されていないシグナルを trap に指定した場合に
@@ -68,4 +68,5 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
   p Signal.trap(:INT, "EXIT")         # => nil
   p Signal.trap(:INT, nil)            # => "EXIT"
 
+@see [[d:spec/terminate]]
 #@end
