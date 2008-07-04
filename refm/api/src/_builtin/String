@@ -353,6 +353,8 @@ self を返します。
     str = "string"
     str.concat "XXX"
     p str    # => "stringXXX"
+    str << "YYY"
+    p str    # => "stringXXXYYY"
 
 --- =~(other) -> Integer
 
