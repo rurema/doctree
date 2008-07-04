@@ -1915,7 +1915,8 @@ chars の形式は [[man:tr(1)]] と同じです。つまり、
     p str.strip              #=> "abc"
     p str                    #=> "\tabc\n" (元の文字列は変化しない)
 
-@see [[m:String#lstrip]]
+@see [[m:String#lstrip]], [[m:String#rstrip]]
+
 
 --- strip! -> self | nil
 
@@ -1958,6 +1959,9 @@ strip! は、内容を変更した self を返します。
   p "  abc\n".lstrip     #=> "abc\n"
   p "\t abc\n".lstrip    #=> "abc\n"
   p "abc\n".lstrip       #=> "abc\n"
+
+@see [[m:String#strip]], [[m:String#rstrip]]
+
 #@end
 
 #@since 1.8.0
@@ -1994,7 +1998,8 @@ lstrip! は self を変更して返します。
     p str.rstrip    #=> "abc"
     p str           #=> "abc\n"  (元の文字列は変化しない)
 
-@see [[m:String#lstrip]]
+@see [[m:String#lstrip]],[[m:String#strip]]
+ 
 #@end
 
 #@since 1.8.0
