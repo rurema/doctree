@@ -3,7 +3,7 @@
 スレッドを表すクラスです。スレッドとはメモリ空間を共有して同時に実行される制御の流れです。
 Thread を使うことで並行プログラミングが可能になります。
 
-#@include(thread)
+#@include(thread.inc)
 
 == Class Methods
 --- abort_on_exception             -> bool
