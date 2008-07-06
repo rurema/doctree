@@ -7,7 +7,7 @@ CSVデータ書き込み時に用いられるクラス
 --- new(str_or_writable[, fs = ','[, rs = nil]]) -> CSV::BasicWriter
 引数str_or_writableを出力先として[[c:CSV::BasicWriter]]オブジェクトを生成します。
 
-@param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<>メソッドが定義されている必要があります。
+@param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<メソッドが定義されている必要があります。
 @param fs 書き込みデータのフィールドセパレータの指定。
           nil (デフォルト) で ',' をセパレータとします。
 @param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
