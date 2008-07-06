@@ -111,9 +111,8 @@ filename で指定されるファイルを gzip 圧縮データの
 
 == Instance Methods
 
---- close
---- finish
-#@todo
+--- close -> File
+--- finish -> File
 
 フッターを書き出し、GzipWriter オブジェクトをクローズします。close と
 finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
@@ -123,12 +122,53 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
 必ずクローズしてください。そうしなければフッターを書き出すことが
 できず、壊れた gzip ファイルを生成してしまう可能性があります。
 
---- pos
---- tell
-#@todo
+  require 'zlib'
+   
+  def case_finish
+    filename='hoge1.gz'
+    gz = Zlib::GzipWriter.open(filename, 9)
+    gz.puts "hogehoge\n" * 100
+    f = gz.finish
+    p f.atime
+    # 例
+    #=> Sun Jul 06 15:43:57 +0900 2008
+  end
+ 
+  def case_close
+    filename='hoge1.gz'
+    gz = Zlib::GzipWriter.open(filename, 9)
+    gz.puts "hogehoge\n" * 100
+    f = gz.close
+    begin
+      p f.atime
+    rescue IOError => err
+      puts err #=> closed stream
+    end
+  end
+ 
+  case_finish
+  case_close
+
+--- pos -> Fixnum
+--- tell -> Fixnum
 
 現在までに圧縮したデータの長さの合計を返します。
 ファイルポインタの位置ではないことに注意して下さい。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  f = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(f, Zlib::BEST_COMPRESSION){|gz|
+    (1..10).each {|i|
+      gz.print i
+      puts gz.pos
+    }
+  }
+  #=> 1
+  #=> 2
+  #=> 3
+  ...
 
 --- << str
 --- putc(ch)
@@ -148,26 +188,73 @@ flush は [[m:Zlib::Deflate#deflate]] と同じです。
 省略時は Zlib::SYNC_FLUSH が使用されます。
 flush に Zlib::NO_FLUSH を指定することは無意味です。
 
---- mtime=(time)
-#@todo
+--- mtime=(time) -> Fixnum
 
 gzip ファイルのヘッダーに記録する最終更新時間を指定します。
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
 呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
 発生します。
 
---- orig_name=(filename)
-#@todo
+@param time gzip ファイルのヘッダーに記録する最終更新時間を整数で指定します。
+@return time を返します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    p gz.mtime = 1 #=> 1
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.mtime
+    # 例
+    #=> Thu Jan 01 09:00:01 +0900 1970
+  }
+
+--- orig_name=(filename) -> String
 
 gzip ファイルのヘッダーに記録する元ファイル名を指定します。
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
 呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
 発生します。
 
---- comment=(string)
-#@todo
+@param filename gzip ファイルのヘッダーに記録する元ファイル名を文字列で指定します。
+@return filename を返します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.orig_name = "hogehoge"
+    p gz.orig_name #=> "hogehoge"
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.orig_name #=> hogehoge
+  }
+
+--- comment=(string) -> String
 
 gzip ファイルのヘッダーに記録するコメントを指定します。
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
 呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
 発生します。
+
+@param string gzip ファイルのヘッダーに記録するコメントを文字列で指定します。
+@return string を返します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.comment = "hogehoge"
+    p gz.comment #=> "hogehoge"
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.comment #=> hogehoge
+  }
+
