@@ -176,17 +176,73 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
 --- print(arg...)
 --- printf(format, arg...)
 --- write(str)
-#@todo
 
-IO クラスの同名メソッドと同じ。
+IO クラスの同名メソッドと同じです。詳しくは
+[[m:IO#<<]], [[m:IO#putc]], [[m:IO#puts]], [[m:IO#print]], [[m:IO#printf]], [[m:IO#write]]
+を参照してください。
 
---- flush([flush])
-#@todo
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz << "hoge"
+    gz.puts "fuga"
+    gz.putc ?u
+    gz.putc ?g
+    gz.putc ?o
+    gz.print "ugo"
+    gz.printf("\n%9s", "bar")
+    gz.write "foo"
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.read
+  }
+  #=> hogefuga
+  #=> ugougo
+  #=>       barfoo
+
+@see [[m:IO#<<]], [[m:IO#putc]], [[m:IO#puts]], [[m:IO#print]], [[m:IO#printf]], [[m:IO#write]]
+
+--- flush(flush = Zlib::SYNC_FLUSH) -> self
 
 まだ書き出されていないデータをフラッシュします。
 flush は [[m:Zlib::Deflate#deflate]] と同じです。
 省略時は Zlib::SYNC_FLUSH が使用されます。
 flush に Zlib::NO_FLUSH を指定することは無意味です。
+
+@param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] などを指定します。
+
+  require 'zlib'
+ 
+  def case1
+    filename='hoge1.gz'
+    fw = File.open(filename, "w")
+    Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+      gz.puts "fuga"
+      gz.puts "ugo"
+    }
+    p File.read(filename)
+  end
+   
+  def case2
+    filename='hoge1.gz'
+    fw = File.open(filename, "w")
+    Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+      gz.puts "fuga"
+      gz.flush
+      gz.puts "ugo\n"
+      gz.flush
+    }
+    p File.read(filename)
+  end
+ 
+  case1
+  #=> "\037\213\b\000p\257pH\002\003K+MO\344*M\317\347\002\000<\326\000\371\t\000\000\000"
+  case2
+  #=> "\037\213\b\000p\257pH\002\003J+MO\344\002\000\000\000\377\377*M\317\347\002\000\000\000\377\377\003\000<\326\000\371\t\000\000\000"
+
 
 --- mtime=(time) -> Fixnum
 
