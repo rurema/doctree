@@ -284,25 +284,29 @@ i 番目の要素を返します。インデックスは 0 から開始します。
   m = v.covector
   p m #=> Matrix[[2, 3, 5]]
 
---- to_a
-#@todo
+--- to_a -> Array
 
-配列 ([[c:Array]]) に変換します。
+ベクトル([[c:Vector]])から配列 ([[c:Array]]) に変換します。
 
---- to_f
-#@todo
+例:
 
-各要素を浮動小数点数 ([[c:Float]]) に変換します。
+  require 'matrix'
 
---- to_i
-#@todo
+  v = Vector[2, 3, 5, 7, 9]
+  a = v.to_a
+  p a #=> [2, 3, 5, 7, 9]
 
-各要素を整数 ([[c:Integer]]) に変換します。
+--- to_s -> String
 
---- to_r
-#@todo
+ベクトル([[c:Vector]])から文字列 ([[c:String]]) に変換します。
 
-各要素を有理数 ([[c:Rational]]) に変換します。
+例:
+
+  require 'matrix'
+
+  v = Vector[2, 3, 5, 7, 9]
+  s = v.to_s
+  p s #=> "Vector[2, 3, 5, 7, 9]"
 
 = class Vector::ErrDimensionMismatch < StandardError
 = class Vector::ErrNotRegular < StandardError
