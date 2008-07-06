@@ -140,6 +140,13 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 #@#  v[2]=-1
 #@#  p v #=> Vector[1,2,-1]
 
+--- ==(v) -> bool
+--- eqn?(v) -> bool
+
+自分自身と引数 v を比較し、true/false を返します。
+
+@param v 比較対象ベクトル
+
 --- *(a) -> Vector
 
 数 a を各要素に乗じたベクトルを返します。
@@ -308,6 +315,16 @@ i 番目の要素を返します。インデックスは 0 から開始します。
   s = v.to_s
   p s #=> "Vector[2, 3, 5, 7, 9]"
 
-= class Vector::ErrDimensionMismatch < StandardError
-= class Vector::ErrNotRegular < StandardError
-= class Vector::ErrOperationNotDefined < StandardError
+--- hash() -> Fixnum
+
+自分自身のハッシュ値を返します。
+
+--- clone() -> Vector
+
+自分自身をコピーしたベクトルを返します。
+
+
+= class ExceptionForMatrix::ErrDimensionMismatch < StandardError
+= class ExceptionForMatrix::ErrNotRegular < StandardError
+= class ExceptionForMatrix::ErrOperationNotDefined < StandardError
+
