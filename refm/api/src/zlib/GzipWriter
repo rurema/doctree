@@ -20,17 +20,30 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 == Class Methods
 
---- new(io[, level[, strategy]])
-#@todo
+--- new(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY)
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 level, strategy は [[m:Zlib::Deflate.new]] と同じです。
 GzipWriter オブジェクトは io に gzip 形式のデータを
-逐次ライトします。io には少なくとも、IO#write と
+逐次ライトします。io には少なくとも、[[m:IO#write]] と
 同じ動作をする write メソッドが定義されている必要があります。
 
---- wrap(io[, level[, strategy]]) {|gz| ... }
-#@todo
+@param io  IOオブジェクト、もしくは少なくとも、
+           [[m:IO#write]] と 同じ動作をする write メソッドが定義されている必要があります。
+@param level  0-9の範囲の整数を指定します。詳細はzlib.hを参照してください。 
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。詳細はzlib.h を>参照してください。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  f = File.open(filename, "w")
+  gz = Zlib::GzipWriter.new(f)
+  gz.puts "hogehoge" * 100
+  gz.close  
+  p gz.closed? #=> true
+  p FileTest.size(filename) #=> 32
+
+--- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... }
 
 io と関連付けられた GzipWriter オブジェクトを作成し、
 それを引数としてブロックを実行します。
@@ -39,15 +52,62 @@ io と関連付けられた GzipWriter オブジェクトを作成し、
 クローズしたくない時は、ブロック中で [[m:Zlib::GzipFile#finish]]
 メソッドを呼び出して下さい。
 
---- open(filename[, level[, strategy]])
---- open(filename[, level[, strategy]]) {|gz| ... }
-#@todo
+@param io  IOオブジェクト、もしくは少なくとも、
+           [[m:IO#write]] と 同じ動作をする write メソッドが定義されている必要があります。
+@param level  0-9の範囲の整数を指定します。詳細はzlib.hを参照してください。 
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。
+                詳細はzlib.h を参照してください。
+
+  require 'zlib'
+  
+  def case1
+    filename='hoge1.txt'
+    f = File.open(filename, "w")
+    Zlib::GzipWriter.wrap(f, Zlib::NO_COMPRESSION){|gz|
+      gz.puts "hogehoge" * 100
+    }
+    p f.closed? #=> true
+    p FileTest.size(filename) #=> 824
+  end
+  
+  def case2
+    filename='hoge1.gz'
+    f = File.open(filename, "w")
+    Zlib::GzipWriter.wrap(f, Zlib::BEST_COMPRESSION){|gz|
+      gz.puts "hogehoge" * 100
+      gz.finish
+    }
+    p f.closed? #=> false
+    f.close
+    p FileTest.size(filename) #=> 32
+  end
+  
+  case1
+  case2
+
+--- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY)
+--- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... }
 
 filename で指定されるファイルを gzip 圧縮データの
 書き出し用にオープンします。GzipWriter オブジェクトを返します。
 その他詳細は [[m:Zlib::GzipWriter.new]] や [[m:Zlib::GzipWriter.wrap]] と
 同じです。
 
+@param filename ファイル名を文字列で指定します。
+@param level 0-9の範囲の整数、または [[m:Zlib::NO_COMPRESSION]], [[m:Zlib::BEST_SPEED]], 
+             [[m:Zlib::BEST_COMPRESSION]], [[m:Zlib::DEFAULT_COMPRESSION]] を指定します。
+             詳細はzlib.hを参照してください。 
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。
+                詳細はzlib.h を参照してください。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  gz = Zlib::GzipWriter.open(filename)
+  gz.puts "hogehoge" * 100
+  gz.close
+  p gz.closed? #=> true
+  p FileTest.size(filename) #=> 32
 
 == Instance Methods
 
