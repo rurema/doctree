@@ -2565,9 +2565,9 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
      [[m:String#swapcase!]], [[m:String#capitalize!]]
 
 #@since 1.8.7
---- uptoo(max, exclusive = false) {|s| ... } -> self
+--- upto(max, exclusive = false) {|s| ... } -> self
 #@else
---- uptoo(max) {|s| ... } -> self
+--- upto(max) {|s| ... } -> self
 #@end
 
 self から始めて max まで
