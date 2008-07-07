@@ -43,16 +43,12 @@ immutable であるためです。
 
 算術演算子。和を計算します。
 
-これは、 [[c:Numeric]] で定義された同名のメソッドを上書きしたものです。
-
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
 --- -(other) -> Fixnum | Bignum | Float
 
 算術演算子。差を計算します。
-
-これは、 [[c:Numeric]] で定義された同名のメソッドを上書きしたものです。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
@@ -61,16 +57,12 @@ immutable であるためです。
 
 算術演算子。積を計算します。
 
-これは、 [[c:Numeric]] で定義された同名のメソッドを上書きしたものです。
-
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
 --- /(other) -> Fixnum | Bignum | Float
 
 算術演算子。商を計算します。
-
-これは、 [[c:Numeric]] で定義された同名のメソッドを上書きしたものです。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
@@ -79,16 +71,12 @@ immutable であるためです。
 
 算術演算子。剰余を計算します。
 
-これは、 [[c:Numeric]] で定義された同名のメソッドを上書きしたものです。
-
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
 --- **(other) -> Fixnum | Bignum | Float
 
 算術演算子。冪(べき乗)を計算します。
-
-これは、 [[c:Numeric]] で定義された同名のメソッドを上書きしたものです。
 
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
