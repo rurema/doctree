@@ -321,8 +321,12 @@ str が "string" という内容の文字列でありさえすれば常に true を返します。
 
 変数 [[m:$=]] の値が真であるときは
 アルファベットの大文字小文字を無視して比較します。
-ただし $= 変数はいずれ廃止されることが決まっているので
-$= に頼るべきではありません。
+ただし [[m:$=]] 変数はいずれ廃止されることが決まっているので
+[[m:$=]] に頼るべきではありません。
+
+アルファベットの大文字小文字を無視して比較したい場合は、[[m:String#upcase]],
+[[m:String#downcase]] で大文字小文字を揃えてから比較するとよいです。
+
 
 @param other    任意のオブジェクト
 @return         true か false
@@ -333,9 +337,14 @@ $= に頼るべきではありません。
     p "string" == "STRING"  # => false
     p "string" == ""        # => false
     p "" == "string"        # => false
-
+    
     p "string" == "str" + "ing"   # => true   (内容が同じなら true)
     p "string" == "stringX".chop  # => true   (内容が同じなら true)
+    
+    p "string".upcase == "String".upcase     # => true
+    p "string".downcase == "String".downcase # => true
+
+@see [[m:String#<=>]], [[m:String#casecmp]]
 
 --- <<(other) -> self
 --- concat(other) -> self
