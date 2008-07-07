@@ -14,6 +14,14 @@ Ruby の Fixnum クラスは immutable です。
 つまり、オブジェクト自体を破壊的に変更することはできません。
 [[c:Bignum]] も同様です。
 
+
+例:
+
+  p 100000.class             # => Fixnum
+  p 100000 * 100000          # => 100000000
+  p (100000 * 100000).class  # => Bignum
+
+
 == Instance Methods
 
 --- id2name -> String | nil
@@ -61,4 +69,3 @@ nil のときの挙動が異なります。
   1.to_sym      #=> nil
 
 #@end
-
