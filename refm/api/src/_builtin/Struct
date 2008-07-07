@@ -64,13 +64,25 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
     foo = Foo.new(1)
     p foo.values      # => [1, nil]
 
+#@since 1.9.0
+--- members -> [Symbol]
+#@else
 --- members -> [String]
+#@end
 (このメソッドは Struct の下位クラスにのみ定義されています)
+#@since 1.9.0
+構造体のメンバの名前([[c:Symbol]])の配列を返します。
+
+    Foo = Struct.new(:foo, :bar)
+    p Foo.members      # => [:foo, :bar]
+
+#@else
 構造体のメンバの名前([[c:String]])の配列を返します。
 
     Foo = Struct.new(:foo, :bar)
     p Foo.members      # => ["foo", "bar"]
 
+#@end
 == Instance Methods
 
 --- [](member) -> object
