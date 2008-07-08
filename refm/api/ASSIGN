@@ -259,7 +259,7 @@ test/unit                       sheepman
 thread                          m-kawato
 thwait
 time
-timeout
+timeout                         kouya
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
