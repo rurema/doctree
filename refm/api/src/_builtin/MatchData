@@ -140,6 +140,7 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
 
 #@since 1.8.0
 --- select {|s| ... } -> [String]
+#@todo
 
 self.to_a.select { ... } と同じです。
 #@end
@@ -170,17 +171,16 @@ self.to_a.select { ... } と同じです。
 #@since 1.8.0
 --- values_at(*index) -> [String]
 
-正規表現中の indexN 番目の括弧にマッチした部分文字列の配列を返します。
+正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
 
 0 番目は [[m:$&]] のようにマッチした文字列全体を表します。
 
-@param index インデックスを整数で指定します。
+@param index インデックスを整数で 0 個以上指定します。
 
   m = /(foo)(bar)(baz)/.match("foobarbaz")
-  p m.values_at(0, 1, 2, 3, 4)   # same as m.to_a.values_at(...)
-  #=> ["foobarbaz", "foo", "bar", "baz", nil] 
-  p m.values_at(-1, -2, -3, -4, -5)
-  #=> ["baz", "bar", "foo", nil, nil]
+  # same as m.to_a.values_at(...)
+  p m.values_at(0, 1, 2, 3, 4)      #=> ["foobarbaz", "foo", "bar", "baz", nil]
+  p m.values_at(-1, -2, -3, -4, -5) #=> ["baz", "bar", "foo", nil, nil]
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 
