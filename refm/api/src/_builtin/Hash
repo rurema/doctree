@@ -560,12 +560,10 @@ self = other.to_hash.dup と同じです。
   
 @see [[m:Hash#dup]],[[m:Hash#merge]],[[m:Object#to_hash]]
   
---- [](key) -> object
+--- [](key) -> object | nil
 key に関連づけられた値を返します。
 
-該当するキーが登録されていない時には、
-デフォルト値 ( [[m:Hash#default]] または [[m:Hash#default_proc]] の
-ブロックの値か、どちらも nil ならば nil ) を返します。
+該当するキーが登録されていない時には、デフォルト値を返します。
 
 デフォルト値と値としての nil を区別する必要が
 ある場合は [[m:Hash#fetch]] または [[m:Hash#has_key?]] を使ってください。
@@ -582,7 +580,7 @@ key に関連づけられた値を返します。
   h2 = Hash.new {|*arg| arg}
   p h2[:non]             #=> [{}, :non]
 
-@see [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
+@see [[m:Hash.new]], [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
 
 --- default -> object | nil
 #@since 1.8.0
@@ -639,7 +637,7 @@ self と引数 key をブロック引数としてブロックを実行し、その結果を返します。
 
 @see [[m:Hash#default]]
 
---- default_proc -> Proc|nil
+--- default_proc -> Proc | nil
 
 ハッシュのデフォルト値を返す [[c:Proc]] オブジェクトを返します。
 ハッシュがブロック形式のデフォルト値を持たない場合 nil を返します。
@@ -888,20 +886,20 @@ Hash#index は 次バージョンの1.9では((<obsolete>)) です。
 --- values_at(*keys) -> [object]
 
 引数で指定されたキーに対応する値の配列を返します。
-[self[引数1], self[引数2], ...]と同じです。
 
-キーに対応する値がなければ デフォルト値（[[m:Hash#default]]または[[m:Hash#default_proc]]のブロックの値か、
-どちらもnilならばnil）
-が使用されます。
+キーに対応する要素がなければデフォルト値が使用されます。
 
-@param keys キーを任意個指定します。
+@param keys キーを 0 個以上指定します。
+
+@return 引数で指定されたキーに対応する値の配列を返します。
+        引数が指定されなかった場合は、空の配列を返します。
 
   h = {1=>"a", 2=>"b", 3=>"c"}
   
   p h.values_at(1,3,4)               #=> ["a", "c", nil]
   # [h[1], h[3] ,h[4]] と同じ
 
-@see [[m:Hash#[] ]],[[m:Array#values_at]]
+@see [[m:Hash#[] ]], [[m:Hash.new]], [[m:Hash#default]], [[m:Hash#default_proc]], [[m:Array#values_at]]
 #@end
 
 #@if (version < "1.9.0")
