@@ -234,7 +234,7 @@ ifnone¤ò¾ÊÎ¬¤·¤¿ Hash.new ¤Ï {} ¤ÈÆ±¤¸¤Ç¤¹¡£
   h[1] << 1
   # ¥¨¥é¡¼ `<<': can't modify frozen array (TypeError)
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- new {|hash, key| ... } -> Hash
 ¶õ¤Î¿·¤·¤¤¥Ï¥Ã¥·¥å¤òÀ¸À®¤·¤Þ¤¹¡£¥Ö¥í¥Ã¥¯¤ÎÉ¾²Á·ë²Ì¤¬¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ë¤Ê¤ê¤Þ
 ¤¹¡£ÀßÄê¤·¤¿¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï[[m:Hash#default_proc]]¤Ç»²¾È¤Ç¤­¤Þ¤¹¡£
@@ -517,7 +517,7 @@ shift¤ÏÇË²õÅª¥á¥½¥Ã¥É¤Ç¤¹¡£self¤ÏÍ×ÁÇ¤ò¼è¤ê½ü¤«¤ì¤¿»Ä¤ê¤Î¥Ï¥Ã¥·¥å¤ËÊÑ¹¹¤µ¤ì¤Þ¤¹¡
   p h1                    #=> {}
   p h1.shift              #=> "default value"
   
-#@if (version >= "1.8.0")
+#@since 1.8.0
   h2 = Hash.new {|*arg| arg}
   p h2                    #=> {}
   p h2.shift              #=> [{}, nil]
@@ -561,11 +561,14 @@ self = other.to_hash.dup ¤ÈÆ±¤¸¤Ç¤¹¡£
 @see [[m:Hash#dup]],[[m:Hash#merge]],[[m:Object#to_hash]]
   
 --- [](key) -> object
-key ¤Ë´ØÏ¢¤Å¤±¤é¤ì¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤¤Ê¤¤»þ¤Ë¤Ï¡¢
-¥Ç¥Õ¥©¥ë¥ÈÃÍ¡Ê[[m:Hash#default]]¤Þ¤¿¤Ï[[m:Hash#default_proc]]¤Î¥Ö¥í¥Ã¥¯¤ÎÃÍ¤«¡¢¤É¤Á¤é¤ânil¤Ê¤é¤Ðnil¡Ë
-¤òÊÖ¤·¤Þ¤¹¡£
+key ¤Ë´ØÏ¢¤Å¤±¤é¤ì¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£
 
-¥Ç¥Õ¥©¥ë¥ÈÃÍ¤ÈÃÍ¤È¤·¤Æ¤Î nil ¤ò¶èÊÌ¤¹¤ëÉ¬Í×¤¬¤¢¤ë¾ì¹ç¤Ï [[m:Hash#fetch]]¤Þ¤¿¤Ï[[m:Hash#has_key?]]¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£
+³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤¤Ê¤¤»þ¤Ë¤Ï¡¢
+¥Ç¥Õ¥©¥ë¥ÈÃÍ ( [[m:Hash#default]] ¤Þ¤¿¤Ï [[m:Hash#default_proc]] ¤Î
+¥Ö¥í¥Ã¥¯¤ÎÃÍ¤«¡¢¤É¤Á¤é¤â nil ¤Ê¤é¤Ð nil ) ¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥ÈÃÍ¤ÈÃÍ¤È¤·¤Æ¤Î nil ¤ò¶èÊÌ¤¹¤ëÉ¬Í×¤¬
+¤¢¤ë¾ì¹ç¤Ï [[m:Hash#fetch]] ¤Þ¤¿¤Ï [[m:Hash#has_key?]] ¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£
 
 @param key Ãµº÷¤¹¤ë¥­¡¼¤ò»ØÄê¤·¤Þ¤¹¡£
 
@@ -579,45 +582,44 @@ key ¤Ë´ØÏ¢¤Å¤±¤é¤ì¤¿ÃÍ¤òÊÖ¤·¤Þ¤¹¡£³ºÅö¤¹¤ë¥­¡¼¤¬ÅÐÏ¿¤µ¤ì¤Æ¤¤¤Ê¤¤»þ¤Ë¤Ï¡¢
   h2 = Hash.new {|*arg| arg}
   p h2[:non]             #=> [{}, :non]
 
-@see [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]]
+@see [[m:Hash#fetch]],[[m:Hash#values_at]],[[m:Hash#has_key?]], [[m:Hash#default]], [[m:Hash#default_proc]]
 
---- default -> object
-#@if (version >= "1.8.0")
---- default(key) -> object
+--- default -> object | nil
+#@since 1.8.0
+--- default(key) -> object | nil
 #@end
-
 ¥Ï¥Ã¥·¥å¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤òÊÖ¤·¤Þ¤¹¡£
-#@if (version >= "1.8.0")
-¥Ï¥Ã¥·¥å¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬¥Ö¥í¥Ã¥¯¤ÇÍ¿¤¨¤é¤ì¤Æ¤¤¤ë¾ì¹ç¡¢1ÈÖÌÜ¤Î·Á¼°¤À¤È
-ÊÖ¤êÃÍ¤¬nil¤Ë¤Ê¤ë¤³¤È¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-¥Ö¥í¥Ã¥¯¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ë¤Ä¤¤¤ÆÄ´¤Ù¤ë»þ¤Ï2ÈÖÌÜ¤Î·Á¼°¤«
-[[m:Hash#default_proc]]¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£
+#@since 1.8.0
+¥Ï¥Ã¥·¥å¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬¥Ö¥í¥Ã¥¯¤ÇÍ¿¤¨¤é¤ì¤Æ¤¤¤ë¾ì¹ç¡¢ 1 ÈÖÌÜ¤Î·Á¼°¤À¤È
+ÊÖ¤êÃÍ¤¬ nil ¤Ë¤Ê¤ë¤³¤È¤ËÃí°Õ¤·¤Æ¤¯¤À¤µ¤¤¡£¤³¤Î¾ì¹ç¡¢¥Ï¥Ã¥·¥å¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ë
+¤Ä¤¤¤ÆÄ´¤Ù¤ë¤Ë¤Ï 2 ÈÖÌÜ¤Î·Á¼°¤« [[m:Hash#default_proc]] ¤ò»È¤Ã¤Æ¤¯¤À¤µ¤¤¡£
 
 2 ÈÖÌÜ¤Î·Á¼°¤Ï¥Ï¥Ã¥·¥å¤¬¥Ç¥Õ¥©¥ë¥ÈÃÍ¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò»ý¤Ä¾ì¹ç¤Ë¡¢
-self ¤È °ú¿ô key ¤ò¥Ö¥í¥Ã¥¯°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¡¢¤½¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
+self ¤È°ú¿ô key ¤ò¥Ö¥í¥Ã¥¯°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¡¢¤½¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
 
 @param key ¥Ç¥Õ¥©¥ë¥È¤Î¥Ö¥í¥Ã¥¯¤Ë¥­¡¼¤È¤·¤ÆÅÏ¤µ¤ì¤Þ¤¹¡£
-  
+
   h = Hash.new("default")
-  p h.default #=>"default"
-  p h.default(:some) #=>"default"
+  p h.default        #=> "default"
+  p h.default(:some) #=> "default"
   p h #=>{}
   
-  h = Hash.new{|hash,key|hash[key] ="default" }
-  p h.default #=>nil
-  p h.default(:some) #=>"default"
-  p h #=>{:some=>"default"}
+  h = Hash.new{|hash, key| hash[key] ="default" }
+  p h.default        #=> nil
+  p h.default(:some) #=> "default"
+  p h                #=> {:some=>"default"}
   
   h = Hash.new
-  p h.default #=>nil
-  p h.default(:some) #=>nil
-  p h #=>{}
+  p h.default        #=> nil
+  p h.default(:some) #=> nil
+  p h                #=> {}
 #@else
   h = Hash.new("default")
   p h.default #=>"default"
 #@end
-@see [[m:Hash#default=]],[[m:Hash#default_proc]]
+
+@see [[m:Hash#default=]], [[m:Hash#default_proc]]
 
 --- default=(value)
 
@@ -858,7 +860,7 @@ nil ¤òÊÖ¤·¤Þ¤¹¡£
 
 ³ºÅö¤¹¤ë¥­¡¼¤¬Ê£¿ôÂ¸ºß¤¹¤ë¾ì¹ç¡¢¤É¤Î¥­¡¼¤òÊÖ¤¹¤«¤ÏÉÔÄê¤Ç¤¹¡£
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 #@if (version < "1.9.0")
 Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 »ÈÍÑ¤¹¤ë¤È·Ù¹ð¥á¥Ã¥»¡¼¥¸¤¬É½¼¨¤µ¤ì¤Þ¤¹¡£
@@ -882,7 +884,7 @@ Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 
 @see [[m:Hash#invert]]
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- values_at(*keys) -> [object]
 
 °ú¿ô¤Ç»ØÄê¤µ¤ì¤¿¥­¡¼¤ËÂÐ±þ¤¹¤ëÃÍ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
@@ -908,7 +910,7 @@ Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 
 °ú¿ô¤Ç»ØÄê¤µ¤ì¤¿¥­¡¼¤ËÂÐ±þ¤¹¤ëÃÍ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 ¤³¤Î¥á¥½¥Ã¥É¤Ï ((<obsolete>)) ¤Ç¤¹¡£
 »ÈÍÑ¤¹¤ë¤È·Ù¹ð¥á¥Ã¥»¡¼¥¸¤¬É½¼¨¤µ¤ì¤Þ¤¹¡£
 Âå¤ï¤ê¤Ë [[m:Hash#values_at]] ¤ò»ÈÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
@@ -956,7 +958,7 @@ Hash#index ¤Ï ¼¡¥Ð¡¼¥¸¥ç¥ó¤Î1.9¤Ç¤Ï((<obsolete>)) ¤Ç¤¹¡£
 
 @see [[m:Object#hash]]
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- merge(other) -> Hash
 --- merge(other) {|key, self_val, other_val| ... } -> Hash
 --- merge!(other) -> self
@@ -1003,7 +1005,7 @@ other¤¬¥Ï¥Ã¥·¥å¤Ç¤Ï¤Ê¤¤¾ì¹ç¡¢other¤Î¥á¥½¥Ã¥Éto_hash¤ò»È¤Ã¤Æ°ÅÌÛ¤ÎÊÑ´¹¤ò»î¤ß¤Þ¤¹¡
 @see [[m:Hash#update]],[[m:Hash#replace]]
 #@end
 
-#@if (version >= "1.8.0")
+#@since 1.8.0
 --- update(other) -> self
 --- update(other) {|key, self_val, other_val| ... } -> self
 
