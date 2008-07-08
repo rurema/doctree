@@ -139,10 +139,31 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
   p $~.pre_match  # => "foo"
 
 #@since 1.8.0
+#@until 1.9.0
+#@until 1.8.1
+--- select(*index)    -> [String]
+#@end
 --- select {|s| ... } -> [String]
-#@todo
+#@until 1.8.1
+引数が指定された場合は、正規表現中の n 番目の括弧にマッチした部分文字列の配列を返します。
+
+ブロックを与えられた場合は、
+各要素に対してブロックを評価した値が真であった要素を全て含む配列を
+返します。真になる要素がひとつもなかった場合は空の配列を返します。
+
+@param index インデックスを整数で 0 個以上指定します。
+
+#@else
+各要素に対してブロックを評価した値が真であった要素を全て含む配列を
+返します。真になる要素がひとつもなかった場合は空の配列を返します。
 
 self.to_a.select { ... } と同じです。
+
+   m = /(.)(.)(\d+)(\d)/.match("THX1138: The Movie")
+   p m.select{|x| /X/ =~ x}   #=> ["HX1138", "X"]
+
+#@end
+#@end
 #@end
 
 --- string -> String
@@ -183,5 +204,24 @@ self.to_a.select { ... } と同じです。
   p m.values_at(-1, -2, -3, -4, -5) #=> ["baz", "bar", "foo", nil, nil]
 
 @see [[m:Array#values_at]], [[m:Array#[] ]]
+
+#@end
+#@since 1.9.0
+--- names -> Array
+#@todo
+Returns a list of names of captures as an array of strings.
+It is same as mtch.regexp.names.
+
+    /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
+    #=> ["foo", "bar", "baz"]
+
+    m = /(?<x>.)(?<y>.)?/.match("a") #=> #<MatchData "a" x:"a" y:nil>
+    m.names                          #=> ["x", "y"]
+
+--- regexp -> Regexp
+自身の元になった正規表現オブジェクトを返します。
+
+    m = /a.*b/.match("abc")
+    m.regexp #=> /a.*b/
 
 #@end
