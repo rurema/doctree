@@ -10,8 +10,7 @@
 
 #@since 1.8.0
 --- timeout(sec) {|i| .... }
---- timeout(sec, exception_class) {|i| .... }
-#@todo
+--- timeout(sec, exception_class = nil) {|i| .... }
 
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
@@ -21,6 +20,9 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 
 また sec が nil のときは制限時間なしで
 ブロックを実行します。
+
+@param sec タイムアウトする時間を秒数で指定します.
+@param exception_class タイムアウトした時、発生させる例外を指定します.
 
 [注意]
 
@@ -42,8 +44,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 
 == Module Functions
 
---- timeout(sec, [exception]) {|i| ... }
-#@todo
+--- timeout(sec, exception_class = nil) {|i| ... }
 
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
@@ -53,6 +54,49 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 
 また sec が nil のときは制限時間なしで
 ブロックを実行します。
+
+@param sec タイムアウトする時間を秒数で指定します.
+@param exception タイムアウトした時、発生させる例外を指定します.
+
+例1
+  require 'timeout'
+
+  def calc_pi(min)
+    loop do
+      x = rand
+      y = rand
+      x**2 + y**2 < 1.0 ?  min[0] += 1 : min[1] += 1
+    end
+  end
+ 
+  t = 5
+  min = [ 0, 0]
+  begin
+    timeout(t){
+      calc_pi(min)
+    }
+  rescue Timeout::Error
+    puts "timeout"
+  end
+
+  printf "%d: pi = %f\n", min[0] + min[1], min[0]*4.0/(min[0]+min[1])
+  #例
+  #=> 417519: pi = 3.141443
+
+例2
+  #!/usr/bin/env ruby
+
+  require 'timeout'
+
+  class MYError < Exception;end
+  begin
+    timeout(5, MYError) {
+      sleep(30)
+    }
+  rescue MYError => err
+    puts "MYError"
+    puts err
+  end
 
 [注意]
 
