@@ -99,6 +99,10 @@ to_ary メソッドを用いて obj を配列に変換しようとします。
 @param size 配列の長さを数値で指定します。
 
 例:
+    ary = Array.new(3){|index| "hoge#{index}"}
+    p ary                      #=> ["hoge0", "hoge1", "hoge2"]
+
+例:
 
     ary = Array.new(3){ "foo" }
     p ary                      #=> ["foo", "foo", "foo"]
