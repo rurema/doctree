@@ -190,6 +190,8 @@ val を name に対応するスレッド固有のデータとして格納します。
 自身がメインスレッドであるか最後のスレッドである場合は、プロセスを [[m:Kernel.#exit]](0) 
 により終了します。
 
+[[m:Kernel.#exit]] と違い例外  [[c:SystemExit]] を発生しません。
+
   th1 = Thread.new do
     begin
       sleep 10
@@ -202,6 +204,8 @@ val を name に対応するスレッド固有のデータとして格納します。
   th1.kill
 
   #=> "this will be displayed"
+
+@see [[m:Thread#exit!]], [[m:Kernel.#exit]], [[m:Kernel.#exit!]]
 
 #@since 1.8.6
 --- exit!         -> self
@@ -236,7 +240,7 @@ ensure 節を実行せずにスレッドの実行を終了させます。
 
   #=> "th1: this will be displayed"
 
-@see [[m:Thread#exit]]
+@see [[m:Thread#exit]], [[m:Kernel.#exit]], [[m:Kernel.#exit!]]
 #@end
 
 --- group    -> ThreadGroup | nil
