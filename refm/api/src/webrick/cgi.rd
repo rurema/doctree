@@ -6,10 +6,12 @@ require webrick/config
 一般の CGI 環境で [[c:WEBrick]] のサーブレットと同じように CGI スクリプトを書くための
 ライブラリです。サーバが WEBrick でなくても使うことが出来ます。
 
+=== 使い方
+
 サーブレットを作成するのと同じように、[[c:WEBrick::CGI]] のサブクラスでメソッド
 do_GET や do_POST を定義することによって CGI スクリプトを書きます。
 
-CGI スクリプトを実行するためには [[m:WEBrick::CGI#start]] を最後に必ず呼びます。
+スクリプトの最後で [[m:WEBrick::CGI#start]] メソッドを呼ぶ必要があります。
 WEBrick::CGI#start メソッドは service メソッドを呼び出し、service メソッドはリクエストに応じて
 do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
 
@@ -45,7 +47,7 @@ do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
 --- new(config={}, *options)    -> WEBrick::CGI
 #@todo
 
-CGI オブジェクトを生成してかえします。
+WEBrick::CGI オブジェクトを生成してかえします。
 
 @param config 設定を保存したハッシュを指定します。
 
@@ -53,18 +55,23 @@ config で有効なキーとその値は以下のとおりです。
 キーはすべて [[c:Symbol]] オブジェクトです。
 
 : :ServerName     
- サーバ名を文字列で指定します。
+ サーバ名を文字列で指定します。デフォルトでは ENV["SERVER_SOFTWARE"] が使われます。
+ ENV["SERVER_SOFTWARE"] が nil の場合は "null" が使われます。
 : :HTTPVersion
  HTTP バージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで指定します。
-: :RunOnCGI
- true を指定します。CGI スクリプトとして実行されているかを判定するために使われます。
+ デフォルトでは ENV["SERVER_PROTOCOL"] の HTTP バージョンが使われます。 
+ ENV["SERVER_PROTOCOL"] が nil の場合 HTTP バージョンは 1.0 です。
 : :NPH            
  NPH スクリプトとして実行される場合に true を指定します。そうでない場合に false を指定します。
+ デフォルトは false です。
 : :Logger 
-
-: :InputBufferSize 
-
-: :ServerName
+ ログを取るための [[c:WEBrick::BasicLog]] オブジェクトを指定します。デフォルトでは標準エラー出力に
+ ログが出力されます。
+: :RequestTimeout
+ リクエストを読み込む時のタイムアウトを秒で指定します。デフォルトは 30 秒です。
+: :Escape8bitURI
+ この値が true の場合、クライアントからのリクエスト URI に含まれる 8bit 目が立った文字をエスケープします。
+ デフォルトは false です。 
 
 == Instance Methods
 
