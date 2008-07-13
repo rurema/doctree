@@ -110,12 +110,19 @@ Vecor[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とするベクトルを生
 == Instance Methods
 
 --- [](i) -> object | nil
-
+#@if (version >= "1.9.0")
+--- element(i) -> object | nil
+--- component(i) -> object | nil
+#@end
 i 番目の要素を返します。インデックスは 0 から開始します。
 要素が存在しないインデックスを指定した時には nil を返します。
 
 @param i 取得する要素のインデックスを整数値で指定します。
          インデックスは 0 から始めます。
+
+--- init_elements(array, copy)
+#@todo
+ベクトルの要素を引数 array で初期化します。
 
 --- size() -> Fixnum
 
@@ -146,6 +153,13 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 自分自身と引数 v を比較し、true/false を返します。
 
 @param v 比較対象ベクトル
+
+--- compare_by(elements) -> bool
+
+自分自身と引数 elements を配列として比較します。
+
+@param elements 比較する配列。
+@return 比較結果が(配列として)同じものあったときは true をそれ以外は false を返します。
 
 --- *(a) -> Vector
 
@@ -315,6 +329,21 @@ i 番目の要素を返します。インデックスは 0 から開始します。
   s = v.to_s
   p s #=> "Vector[2, 3, 5, 7, 9]"
 
+#@if (version >= "1.9.0")
+--- elements_to_f
+#@todo
+ベクトルの各成分を[[c:Float]]に変換したベクトルを返します。
+
+--- elements_to_i
+#@todo
+ベクトルの各成分を[[c:Integer]]に変換したベクトルを返します。
+
+--- elements_to_r
+#@todo
+ベクトルの各成分を[[c:Rational]]に変換したベクトルを返します。
+
+#@end
+
 --- hash() -> Fixnum
 
 自分自身のハッシュ値を返します。
@@ -323,6 +352,13 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 自分自身をコピーしたベクトルを返します。
 
+--- coerce(other)
+#@todo
+self と other が同じクラスになるよう、自分自身か other を変換し [other, self] という配列にして返します。
+
+--- inspect() -> String 
+
+オブジェクトの内容を文字列化します。
 
 = class ExceptionForMatrix::ErrDimensionMismatch < StandardError
 = class ExceptionForMatrix::ErrNotRegular < StandardError
