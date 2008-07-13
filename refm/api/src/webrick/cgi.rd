@@ -34,9 +34,6 @@ do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
 
  * [[rfc:3875]]
 
-=== NPH スクリプト
-#@todo
-
 = class WEBrick::CGI < Object
 
 一般の CGI 環境で [[c:WEBrick]] のサーブレットと同じように CGI スクリプトを書くための
@@ -45,7 +42,6 @@ do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
 == Class Methods
 
 --- new(config={}, *options)    -> WEBrick::CGI
-#@todo
 
 WEBrick::CGI オブジェクトを生成してかえします。
 
@@ -116,9 +112,9 @@ config で有効なキーとその値は以下のとおりです。
 実装されていない HTTP メソッドであった場合、自身の service メソッドが
 例外を発生させます。
 
-@param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
+@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param res クライアントへのレスポンスを表す [[m:WEBrick::HTTPResponse]] オブジェクトです。
+@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 --- service(req, res)     -> ()
 
@@ -127,9 +123,9 @@ config で有効なキーとその値は以下のとおりです。
 
 特に理由が無い限り WEBrick::CGI のサブクラスがこのメソッドを定義する必要はありません。
 
-@param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
+@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param res クライアントへのレスポンスを表す [[m:WEBrick::HTTPResponse]] オブジェクトです。
+@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 @raise WEBrick::HTTPStatus::MethodNotAllowed
        指定された [[c:WEBrick::HTTPRequest]] オブジェクト  req が自身に定義されていない
@@ -150,5 +146,7 @@ do_XXX メソッドを呼び出します。このようにして CGI スクリプトは実行されます。
 @param stdout レスポンスデータの出力先を [[c:IO]] オブジェクトで指定します。
 
 = class WEBrick::CGI::CGIError < StandardError
+
+CGI に関係する例外クラスです。
 
 #@end

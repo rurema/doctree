@@ -270,7 +270,7 @@ un                              okkez           done
 uri                             sheepman        done
 weakref                         bornite
 webrick                         sheepman
-webrick/cgi                     sheepman
+webrick/cgi                     sheepman        done
 webrick/ssl                     sheepman
 win32/registry
 win32/resolv

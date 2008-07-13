@@ -55,13 +55,6 @@ view.rb ¤¬CGI¥¹¥¯¥ê¥×¥È¤È¤·¤Æ¼Â¹Ô¤µ¤ì¤Þ¤¹¡£http://127.0.0.1:20080/foo.html ¤Ë¥¢¥
 ¤³¤Î¤è¤¦¤Ë WEBrick ¤Ç¤Ï Web ¥µ¡¼¥Ð¤Îµ¡Ç½¤ÎÂçÉôÊ¬¤¬¥µ¡¼¥Ö¥ì¥Ã¥È¤Î·Á¤ÇÄó¶¡¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 ¤Þ¤¿¥µ¡¼¥Ö¥ì¥Ã¥È¤òºîÀ®¤¹¤ë¤³¤È¤Ë¤è¤ê¿·¤¿¤Êµ¡Ç½¤ò Web ¥µ¡¼¥Ð¤ËÄÉ²Ã¤¹¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
 
-=== ¥ê¥ó¥¯
-
- * [[url:http://www.webrick.org/]]
- * [[url:http://pub.cozmixng.org/~the-rwiki/rw-cgi.rb?cmd=view;name=WEBrick]]
- * [[lib:webrick/ssl]]
- * [[lib:webrick/cgi]]
-
 = module WEBrick
 
 ¥é¥¤¥Ö¥é¥ê webrick ¤Î³Æ¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£
