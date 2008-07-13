@@ -12,7 +12,7 @@ require webrick/log
 
 --- General
 
-[[m:WEBrick::GenericServer]] の設定のデフォルト値を保持したハッシュです。
+[[c:WEBrick::GenericServer]] の設定のデフォルト値を保持したハッシュです。
 
   WEBrick::Config::General = {
     :ServerName     => Utils.getservername,
