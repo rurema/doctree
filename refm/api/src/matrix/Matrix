@@ -120,6 +120,8 @@ n次の零行列を生成する。
 
 == Instance Methods
 --- [](i, j)
+--- element(i, j)
+--- component(i, j)
 #@todo
 
 (i,j)要素を返す。
@@ -187,9 +189,9 @@ n次の零行列を生成する。
 逆行列を返す。
 
 --- **(n)
---- power(n)
+#@#--- power(n)
 --- **(m)
---- power(m)
+#@#--- power(m)
 #@todo
 
 スカラーnに対するべき乗を返す。
@@ -216,10 +218,23 @@ n次の零行列を生成する。
  p Matrix[[2, 1], [-1, 2]].det #=> 5
 #@end
 
+#@if (version >= "1.9.0")
+--- determinant_e
+--- det_e
+
+行列式 (determinant) を返します。
+#@end
+
 --- rank
 #@todo
 
 階数 (rank) を返す。
+
+#@if (version >= "1.9.0")
+--- rank_e
+
+階数 (rank) を返します。
+#@end
 
 --- trace
 --- tr
@@ -270,6 +285,11 @@ n次の零行列を生成する。
 
 正方行列であるなら、真を返す。
 
+--- ==(other)
+--- eql?(other)
+#@todo
+
+自分自身と other を比較します。
 
 --- row_vectors
 #@todo
@@ -287,20 +307,36 @@ n次の零行列を生成する。
 [[c:Array]]に変換する。
 結果は、ネストした配列(配列の配列)となる。
 
---- to_f
+#@#--- to_f
 #@todo
+#@#
+#@#各要素を浮動小数点数 [[c:Float]] に変換する。
 
-各要素を浮動小数点数 [[c:Float]] に変換する。
-
---- to_i
+#@#--- to_i
 #@todo
+#@#
+#@#各要素を整数 [[c:Integer]] に変換する。
 
-各要素を整数 [[c:Integer]] に変換する。
-
---- to_r
+#@#--- to_r
 #@todo
+#@#
+#@#各要素を有理数 [[c:Rational]] に変換する。
 
-各要素を有理数 [[c:Rational]] に変換する。
+#@if (version >= "1.9.0")
+
+--- elements_to_f
+#@todo
+各要素を浮動小数点数 [[c:Float]] に変換した行列を返します。
+
+--- elements_to_i
+#@todo
+各要素を整数 [[c:Integer]] に変換した行列を返します。
+
+--- elements_to_r
+#@todo
+各要素を有理数 [[c:Rational]] に変換した行列を返します。
+
+#@end
 
 #@# bc-rdoc: detected missing name: new
 #@# --- new(init_method, *argv)
@@ -327,13 +363,26 @@ Not really intended for general consumption.
 
 Not for public consumption?
 
+--- hash
+#@#todo
+Hash値を返します。
 
-= class Matrix::ErrDimensionMismatch < StandardError
+--- to_s
+#@todo
+行列を文字列化し、その文字列を返します。
 
-= class Matrix::ErrNotRegular < StandardError
+--- inspect
+#@todo
+自分自身を見やすい形式に文字列化し、その文字列を返します。
 
-= class Matrix::ErrOperationNotDefined < StandardError
+--- clone
+#@todo
+自分自身のコピーを返します。
 
+
+= class ExceptionForMatrix::ErrDimensionMismatch < StandardError
+= class ExceptionForMatrix::ErrNotRegular < StandardError
+= class ExceptionForMatrix::ErrOperationNotDefined < StandardError
 
 #@#== ChangeLog
 #@#
