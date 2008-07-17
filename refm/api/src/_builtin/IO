@@ -249,12 +249,16 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
 #@since 1.8.7
---- foreach                                 -> Enumerable::Enumerator
+--- foreach(path, rs = $/)                  -> Enumerable::Enumerator
 #@end
-#@todo 
 
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
 path のオープンに成功すれば nil を返します。
+
+#@since 1.8.7
+ブロックが与えられなかった場合は、path で指定されたファイルの各行を繰り返す
+[[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+#@end
 
 #@since 1.9.0
 テキスト読み込みメソッドとして動作します。
