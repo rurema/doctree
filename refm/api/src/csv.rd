@@ -1,9 +1,9 @@
 #@since 1.8.0
-CSV (Comma Separated Value) を扱うライブラリです。
+CSV (Comma Separated Values) を扱うライブラリです。
 
 = class CSV < Object
 
-CSV (Comma Separated Value) を扱うクラスです。
+CSV (Comma Separated Values) を扱うクラスです。
 
 各メソッドの共通パラメタ
 
@@ -52,7 +52,7 @@ CSVファイルを読み込んでパースします。
     puts row.join("<>")
   end
 
-tsv(Tab Separated Value)ファイルなどのセパレータをカンマ以外で指定
+tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外で指定
 
   CSV.open("/temp/test.tsv", 'r', "\t") do |row|
     puts row.join("<>")
