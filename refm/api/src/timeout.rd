@@ -17,6 +17,7 @@
 [[c:Timeout::Error]] が発生します。
 exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 その例外が発生します。
+ブロックパラメータ i は sec がはいります。
 
 また sec が nil のときは制限時間なしで
 ブロックを実行します。
@@ -51,6 +52,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 [[c:Timeout::Error]] が発生します。
 exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 その例外が発生します。
+ブロックパラメータ i は sec がはいります。
 
 また sec が nil のときは制限時間なしで
 ブロックを実行します。
