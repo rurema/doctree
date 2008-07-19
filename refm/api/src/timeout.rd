@@ -112,6 +112,65 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めません
 のスレッドを意識してあげる必要があります。
 [[unknown:timeoutの落し穴|trap::timeout]]も参照
 
+timeout による割り込みは system によって呼び出された外部プログラムを
+タイムアウトさせる事はできないので、[[m:IO.popen]]、[[m:Kernel.#open]]を使用するなどの工夫が必要です。
+
+  # 例3 外部コマンドのタイムアウト
+  require 'timeout'
+
+  # テスト用のシェルをつくる。
+  File.open("loop.sh", "w"){|fp|
+    fp.print <<SHELL_EOT
+  #!/bin/bash
+
+  S="scale=10"
+  M=32767
+
+  trap 'echo "$S; $m1/($m1+$m2)*4" | bc ; echo "count = $((m1+m2))" ; exit 0' INT
+  m1=0
+  m2=0
+
+  while true
+  do
+    x="($RANDOM/$M)"
+    y="($RANDOM/$M)"
+    c=$(echo "$S;$x^2+$y^2 < 1.0" | bc)
+    echo $x $y $c
+    if [ $c -eq 1 ]
+    then
+      let m1++
+    else
+      let m2++
+    fi
+  done
+  SHELL_EOT
+  }
+
+  File.chmod(0755, "loop.sh")
+  t = 10 # 10 秒でタイムアウト
+  begin
+    pid = nil
+    com = nil
+    timeout(t) {
+      # system だととまらない
+      # system("./loop.sh")
+      com = IO.popen("./loop.sh")
+      pid = com.pid
+      while line = com.gets
+        print line
+      end
+    }
+  rescue Timeout::Error => err
+    puts "timeout: shell execution."
+    Process.kill('SIGINT', pid)
+    printf "[result]\t%s", com.read
+    com.close unless com.nil?
+  end
+#@# もっといい止め方があるかもしれない。
+
+  #止まっているか確認する。
+  #system("ps au")
+
 #@#== Constants
 #@#--- Error
 #@#[[c:Timeout::Error]]
