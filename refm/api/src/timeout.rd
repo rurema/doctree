@@ -56,7 +56,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 ブロックを実行します。
 
 @param sec タイムアウトする時間を秒数で指定します.
-@param exception タイムアウトした時、発生させる例外を指定します.
+@param exception_class タイムアウトした時、発生させる例外を指定します.
 
 例1
   require 'timeout'
