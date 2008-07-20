@@ -144,8 +144,25 @@ of ``The WWW Common Gateway Interface Version 1.1''.
 
 --- query    -> Hash
 
-リクエストのクエリーを表すハッシュを返します。key も val も unescape されています。
-[[m:WEBrick::HTTPRequest#query_string]] から生成されます。
+リクエストのクエリーあるいはクライアントがフォームへ入力した値を表すハッシュを返します。
+
+ハッシュのキーも値も unescape されています。ただし multipart/form-data なフォームデータの場合には
+ユーザが content-transfer-encoding ヘッダを見て適切に処理する必要があります。
+
+ハッシュの値は正確には文字列ではなく String クラスのサブクラスである [[c: WEBrick::HTTPUtils::FormData]]
+クラスのインスタンスです。
+
+multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデータと
+同じように扱われることに注意してください。クライアントからの入力によっては巨大な文字列が
+生成されてしまいます。
+
+例:
+
+  h = req.query
+  p h['q']                       #=>  "ruby rails session"  
+  p h['upfile']['content-type']  #=>  "plain/text"
+  p h['upfile'].filename         #=>  "my_file.txt"
+  p h['upfile']                  #=>  "hoge hoge hoge"
 
 --- query_string          -> String
 #@since 1.8.4
