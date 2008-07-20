@@ -1,49 +1,63 @@
 = class WEBrick::HTTPUtils::FormData < String
 
+クライアントがフォームへ入力した値を表すクラスです。multipart/form-data なデータを表すのにも
+使われます。
+
+[[m:WEBrick::HTTPRequest#query]] は QUERY_STRING をパースした Hash を返しますが、
+その Hash のキーと値のうち値は FormData クラスのインスタンスになります。
+同じ名前のフィールドが複数ある場合、[[m:WEBrick::HTTPUtils::FormData#list]] や
+[[m:WEBrick::HTTPUtils::FormData#each_data]] によりそれぞれの値を取り出すことができます。
+
 == Class Methods
 
---- new(*args)
-#@todo
+--- new(*args)   -> WEBrick::HTTPUtils::FormData
+
+WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッドを直接呼ぶことはありません。
+
+WEBrick::HTTPUtils::FormData のインスタンスを生成して返します。
+
+@param args 
 
 == Instance Methods
 
---- name
+--- name          -> String | nil
 --- name=(value)
-#@todo
 
---- filename
+フォームデータの name 属性を文字列で表すアクセサです。
+
+@param value フォームデータの name 属性を文字列で指定します。
+
+--- filename         -> String | nil
 --- filename=(value)
-#@todo
 
---- [](*key)
-#@todo
+フォームデータの filename 属性を文字列で表すアクセサです。
 
---- <<(str)
-#@todo
+@param value フォームデータの filename 属性を文字列で指定します。
 
---- append_data(data)
-#@todo
+--- [](header)    -> String | nil
 
---- each_data
-#@todo
+自身が multipart/form-data なデータの場合に、header で指定された 
+ヘッダの値を文字列で返します。無ければ nil を返します。
 
---- list
---- to_ary
-#@todo
+@param header ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
---- to_s
-#@todo
+--- <<(str)    -> self
 
-== Protected Instance Methods
+WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッドを直接呼ぶことはありません。
 
---- next_data
---- next_data=(value)
-#@todo
+--- append_data(data)   -> self
 
-== Constants
+WEBrick::HTTPUtils の内部で使われます。ユーザがこのメソッドを直接呼ぶことはありません。
 
---- EmptyRawHeader
-#@todo
+--- each_data{|s| ... }
 
---- EmptyHeader
-#@todo
+自身が表す各フォームデータを引数として与えられたブロックを実行します。
+
+--- list      -> Array
+--- to_ary    -> Array
+
+自身が表す各フォームデータを収納した配列を生成して返します。
+
+--- to_s      -> String
+
+自身が表すフォームデータのうちのひとつを文字列として返します。
