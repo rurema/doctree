@@ -1,4 +1,4 @@
-タイムアウトを行うライブラリ。
+タイムアウトを行うライブラリです。
 
 = class TimeoutError < Interrupt
 
@@ -41,7 +41,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 
 = module Timeout
 
-タイムアウトを行うためのモジュール。
+タイムアウトを行うためのモジュールです。
 
 == Module Functions
 
@@ -60,7 +60,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 @param sec タイムアウトする時間を秒数で指定します.
 @param exception_class タイムアウトした時、発生させる例外を指定します.
 
-例1
+例 長い計算のタイムアウト
   require 'timeout'
 
   def calc_pi(min)
@@ -85,7 +85,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
   #例
   #=> 417519: pi = 3.141443
 
-例2
+例 独自の例外を発生させるタイムアウト
   #!/usr/bin/env ruby
 
   require 'timeout'
@@ -110,12 +110,39 @@ Socket などは DNSの名前解決に時間がかかった場合割り込めません
 ([[lib:resolv-replace]] を使用する必要があります)。
 その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
-[[unknown:timeoutの落し穴|trap::timeout]]も参照
 
-timeout による割り込みは system によって呼び出された外部プログラムを
+以下の例では、gethostbyname(およそ0.6秒処理に時間がかかっている) が終了した直後((A)の箇所)で TimeoutError 例外があがっています。
+
+例 timeout が割り込めない
+  require 'timeout'
+  require 'socket'
+
+  t = 0.1
+  start = Time.now
+  begin
+    timeout(t) {
+      p TCPSocket.gethostbyname("www.ruby-lang.org")
+      # (A)
+    }
+  ensure
+    p Time.now - start
+  end
+  # 実行例
+  => ["helium.ruby-lang.org", [], 2, "210.251.121.214"]
+     0.689331
+     /usr/local/lib/ruby/1.6/timeout.rb:37: execution expired (TimeoutError)
+           from -:6:in `timeout'
+           from -:6
+  # gethostbyname が0.1秒かからない場合は例外が発生しないので
+  # その場合は、t に小さい数値(0.000001のような)に変える。
+
+#@#[[unknown:timeoutの落し穴|trap::timeout]]も参照
+#@# unknown なので、ここに少し変えてコピペした。
+
+timeout による割り込みは [[m:Kernel.#system]] によって呼び出された外部プログラムを
 タイムアウトさせる事はできないので、[[m:IO.popen]]、[[m:Kernel.#open]]を使用するなどの工夫が必要です。
 
-  # 例3 外部コマンドのタイムアウト
+例 外部コマンドのタイムアウト
   require 'timeout'
 
   # テスト用のシェルをつくる。
