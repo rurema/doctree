@@ -120,9 +120,15 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 @param i 取得する要素のインデックスを整数値で指定します。
          インデックスは 0 から始めます。
 
---- init_elements(array, copy)
-#@todo
+--- init_elements(array, copy) -> Array
 ベクトルの要素を引数 array で初期化します。
+
+@param array ベクトルとして初期化する Array を指定します。
+@param copy  引数array で渡された配列をコピーするかをtrue/falseで指定します。
+             true の場合はコピーします。
+
+注意:
+  本メソッドは[[c:Vector]]クラス内部用です。
 
 --- size() -> Fixnum
 
@@ -174,10 +180,23 @@ i 番目の要素を返します。インデックスは 0 から開始します。
   p v1.*(2)     #=> Vector[2, 4, 7.0, 200]
   p v1.*(-1.5)  #=> Vector[-1.5, -3.0, -5.25, -150.0]
 
---- *(m)
-#@todo
+--- *(m) -> Matrix
 
-列ベクトル(行列)に変換して (実際には [[m:Matrix#column_vector]](self) を適用) から、行列 m を右から乗じた行列 ([[c:Matrix]] クラス) を返します。
+自分自身を列ベクトル(行列)に変換して (実際には [[m:Matrix#column_vector]](self) を適用) から、行列 m を右から乗じた行列 ([[c:Matrix]] クラス) を返します。
+
+@param m 右から乗算を行う行列
+
+注意:
+  引数の行列 m は自分自身を列ベクトルとした場合に乗算が定義できる行列である必要があります。
+
+例:
+  require 'matrix'
+
+  v = Vector[1, 2]
+  a = [4, 5, 6]
+  m = Matrix[a]
+
+  p v * m #=> Matrix[[4, 5, 6], [8, 10, 12]]
 
 --- +(v) -> Vector
 
@@ -330,17 +349,36 @@ i 番目の要素を返します。インデックスは 0 から開始します。
   p s #=> "Vector[2, 3, 5, 7, 9]"
 
 #@if (version >= "1.9.0")
---- elements_to_f
-#@todo
+--- elements_to_f -> Vector
 ベクトルの各成分を[[c:Float]]に変換したベクトルを返します。
 
---- elements_to_i
-#@todo
+例:
+  require 'matrix'
+
+  v = Vector.elements([2, 3, 5, 7, 9])
+  vf = v.elements_to_f
+  p vf #=> "Vector[2.0, 3.0, 5.0, 7.0, 9.0]"
+
+--- elements_to_i -> Vector
 ベクトルの各成分を[[c:Integer]]に変換したベクトルを返します。
 
---- elements_to_r
-#@todo
+例:
+  require 'matrix'
+
+  v = Vector.elements([2.5, 3.0, 5.01, 7])
+  vi = v.elements_to_i
+  p vi #=> "Vector[2, 3, 5, 7]"
+
+--- elements_to_r -> Vector
 ベクトルの各成分を[[c:Rational]]に変換したベクトルを返します。
+
+例:
+
+  require 'matrix'
+
+  v = Vector.elements([2.5, 3.0, 5.75, 7])
+  vr = v.elements_to_r
+  p vr #=> "Vector[Rational(5, 2), Rational(3, 1), Rational(23, 4), Rational(7, 1)]"
 
 #@end
 
@@ -352,8 +390,7 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 自分自身をコピーしたベクトルを返します。
 
---- coerce(other)
-#@todo
+--- coerce(other) -> Array
 self と other が同じクラスになるよう、自分自身か other を変換し [other, self] という配列にして返します。
 
 --- inspect() -> String 
