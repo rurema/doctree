@@ -66,7 +66,7 @@ query メソッドが返す Hash オブジェクトのキーと値のうち値は [[c:WEBrick::HTTPUtil
    def do_GET(req, res)
      d = req.query['field_name']   #=> FormData クラスのインスタンス
      d.name                        #=> "field_name"
-     d.filename                   #=> もしあればファイル名を返す。
+     d.filename                    #=> もしあればファイル名を返す。
      d['content-type']             #=> ヘッダの値は [] メソッドで取得する
      d                             #=> 送られてきたファイルの中身
    end
