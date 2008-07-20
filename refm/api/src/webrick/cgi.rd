@@ -206,6 +206,11 @@ config で有効なキーとその値は以下のとおりです。
 実装されていない HTTP メソッドであった場合、自身の service メソッドが
 例外を発生させます。
 
+このメソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
+まだ行われていません。[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] などの
+メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
+ユーザはプログラミングを行うべきです。
+
 @param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
 @param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
