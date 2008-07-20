@@ -8,15 +8,20 @@
 ╞▒д╕╠╛┴░д╬е╒егб╝еые╔дм╩г┐Їдвды╛ь╣чбв[[m:WEBrick::HTTPUtils::FormData#list]] дф
 [[m:WEBrick::HTTPUtils::FormData#each_data]] д╦дшдъд╜дьд╛дьд╬├═дЄ╝шдъ╜╨д╣д│д╚дмд╟днд▐д╣бг
 
+─╠╛яд╬е╒ейб╝ере╟б╝е┐(application/x-www-form-urlencoded)д╧ unescape д╡дьд╞ддд▐д╣бг
+д┐д└д╖ multipart/form-data д╩е╒ейб╝ере╟б╝е┐д╧ецб╝е╢дм content-transfer-encoding 
+е╪е├е└дЄ╕лд╞┼м└┌д╦╜ш═¤д╣ды╔м═╫дмдвдъд▐д╣бг
+
+=== еъеєеп
+
+ * [[rfc:1867]] Form-based File Upload in HTML.
+ * [[rfc:2388]] multipart/form-data д╬└т╠└бг
+
 == Class Methods
 
 --- new(*args)   -> WEBrick::HTTPUtils::FormData
 
 WEBrick::HTTPUtils д╬╞т╔Їд╟╗╚дядьд▐д╣бгецб╝е╢дмд│д╬есе╜е├е╔дЄ─╛└▄╕╞д╓д│д╚д╧двдъд▐д╗дєбг
-
-WEBrick::HTTPUtils::FormData д╬едеєе╣е┐еєе╣дЄ└╕└од╖д╞╩╓д╖д▐д╣бг
-
-@param args 
 
 == Instance Methods
 
@@ -27,6 +32,16 @@ WEBrick::HTTPUtils::FormData д╬едеєе╣е┐еєе╣дЄ└╕└од╖д╞╩╓д╖д▐д╣бг
 
 @param value е╒ейб╝ере╟б╝е┐д╬ name ┬░└ндЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
 
+╬у:
+
+ require "webrick/cgi"
+ class MyCGI < WEBrick::CGI
+   def do_GET(req, res)
+     p req.query['q'].name   #=> "q"
+   end
+ end
+ MyCGI.new.start()
+
 --- filename         -> String | nil
 --- filename=(value)
 
@@ -34,12 +49,32 @@ WEBrick::HTTPUtils::FormData д╬едеєе╣е┐еєе╣дЄ└╕└од╖д╞╩╓д╖д▐д╣бг
 
 @param value е╒ейб╝ере╟б╝е┐д╬ filename ┬░└ндЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
 
+╬у:
+
+ require "webrick/cgi"
+ class MyCGI < WEBrick::CGI
+   def do_GET(req, res)
+     p req.query['q'].filename   #=> "my_file.txt"
+   end
+ end
+ MyCGI.new.start()
+
 --- [](header)    -> String | nil
 
 ╝л┐╚дм multipart/form-data д╩е╟б╝е┐д╬╛ь╣чд╦бвheader д╟╗╪─ъд╡дьд┐ 
 е╪е├е└д╬├═дЄ╩╕╗·╬єд╟╩╓д╖д▐д╣бг╠╡д▒дьд╨ nil дЄ╩╓д╖д▐д╣бг
 
 @param header е╪е├е└╠╛дЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг┬ч╩╕╗·д╚╛о╩╕╗·дЄ╢ш╩╠д╖д▐д╗дєбг
+
+╬у:
+
+ require "webrick/cgi"
+ class MyCGI < WEBrick::CGI
+   def do_GET(req, res)
+     p req.query['q']['content-type']   #=> "plain/text"
+   end
+ end
+ MyCGI.new.start()
 
 --- <<(str)    -> self
 
@@ -51,12 +86,37 @@ WEBrick::HTTPUtils д╬╞т╔Їд╟╗╚дядьд▐д╣бгецб╝е╢дмд│д╬есе╜е├е╔дЄ─╛└▄╕╞д╓д│д╚д╧двдъд
 
 --- each_data{|s| ... }
 
-╝л┐╚дм╔╜д╣│╞е╒ейб╝ере╟б╝е┐дЄ░·┐Їд╚д╖д╞═┐дидщдьд┐е╓еэе├епдЄ╝┬╣╘д╖д▐д╣бг
+╝л┐╚дм╔╜д╣│╞е╒ейб╝ере╟б╝е┐дЄ░·┐Їд╚д╖д╞бв═┐дидщдьд┐е╓еэе├епдЄ╝┬╣╘д╖д▐д╣бг
 
+╬у:
+
+ require "webrick/cgi"
+ class MyCGI < WEBrick::CGI
+   def do_GET(req, res)
+     req.query['q'].each_data{|s|
+       p s
+     }
+     #=> "val1"
+         "val2"
+         "val3"
+   end
+ end
+ MyCGI.new.start()
+  
 --- list      -> Array
 --- to_ary    -> Array
 
 ╝л┐╚дм╔╜д╣│╞е╒ейб╝ере╟б╝е┐дЄ╝¤╟╝д╖д┐╟█╬єдЄ└╕└од╖д╞╩╓д╖д▐д╣бг
+
+╬у:
+
+ require "webrick/cgi"
+ class MyCGI < WEBrick::CGI
+   def do_GET(req, res)
+     p req.query['q'].list    #=> ["val1", "val2", "val3"]
+   end
+ end
+ MyCGI.new.start()
 
 --- to_s      -> String
 
