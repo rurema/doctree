@@ -9,79 +9,76 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 == Class Methods
 
---- new(args...)
-#@todo
+--- new(args...) -> ()
 
 [[m:Zlib::GzipReader.new]] 及び [[m:Zlib::GzipWriter.new]] を参照。
 
---- wrap(args...) {|gz| ... }
-#@todo
+@see [[m:Zlib::GzipReader.new]], [[m:Zlib::GzipWriter.new]] 
+
+--- wrap(args...) {|gz| ... } -> ()
 
 [[m:Zlib::GzipReader.wrap]] 及び [[m:Zlib::GzipWriter.wrap]] を参照。
 
---- open(args...) {|gz| ... }
-#@todo
+@see [[m:Zlib::GzipReader.wrap]],[[m:Zlib::GzipWriter.wrap]]
+
+--- open(args...) {|gz| ... } -> ()
 
 [[m:Zlib::GzipReader.open]] 及び [[m:Zlib::GzipWriter.open]] を参照。
 
+@see [[m:Zlib::GzipReader.open]], [[m:Zlib::GzipWriter.open]] を参照。
+
 == Instance Methods
 
---- closed?
---- to_io
-#@todo
+--- closed? -> bool
+--- to_io -> IO
 
 IO クラスの同名メソッドと同じ。
 
---- close
-#@todo
+@see [[m:IO#to_io]], [[m:IO#closed?]]
+
+--- close -> IO
 
 GzipFile オブジェクトをクローズします。このメソッドは
 関連付けられている IO オブジェクトの close メソッドを呼び出します。
 関連付けられている IO オブジェクトを返します。
 
---- finish
-#@todo
+--- finish -> IO
 
 GzipFile オブジェクトをクローズします。[[m:Zlib::GzipFile#close]]と違い、
 このメソッドは関連付けられている IO オブジェクトの close メソッドを
 呼び出しません。関連付けられている IO オブジェクトを返します。
 
---- crc
-#@todo
+--- crc -> Integer
 
 圧縮されていないデータの CRC 値を返します。
 
---- level
-#@todo
+--- level -> Integer
 
 圧縮レベルを返します。
 
---- mtime
-#@todo
+--- mtime -> Time
 
 gzip ファイルのヘッダーに記録されている最終更新時間を返します。
 
---- os_code
-#@todo
+--- os_code -> Integer
 
 gzip ファイルのヘッダーに記録されている OS コード番号を返します。
 
---- orig_name
-#@todo
+--- orig_name -> String | nil
 
 gzip ファイルのヘッダーに記録されている元ファイル名を返します。
 ファイル名が記録されていない場合は nil を返します。
 
---- comment
-#@todo
+--- comment -> String | nil
 
 gzip ファイルのヘッダーに記録されているコメントを返します。
 コメントが存在しない場合は nil を返します。
 
---- sync
---- sync=(flag)
-#@todo
+--- sync -> bool
+--- sync=(flag) 
 
 IO クラスと同じ。flag が真の時、関連付けられている
 IO オブジェクトが flush メソッドを持っていなければなりません。
 また、true にすると圧縮率が著しく低下します。
+
+@see [[m:IO#sync]], [[m:IO#sync]]
