@@ -39,10 +39,13 @@ String オブジェクトとして返します。
 
 == Class Methods
 
---- new
-#@todo
+--- new -> ()
 
-[[m:Zlib::Deflate.new]] 及び [[m:Zlib::Inflate.new]] を参照。
+直接使用しません。
+通常、具体的な圧縮/展開を行う場合は、
+[[m:Zlib::Deflate.new]] もしくは、[[m:Zlib::Inflate.new]] を使用します。
+
+@see [[m:Zlib::Deflate.new]], [[m:Zlib::Inflate.new]] 
 
 == Instance Methods
 
