@@ -261,83 +261,247 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-#@todo 今日(2008/07/24)はここまで
+--- completion_append_character=(string)
+
+ユーザの入力の補完が完了した場合に、最後に付加する文字 string を指定します。
+
+@param string 1文字を指定します。
+
+半角スペース「" "」などの単語を区切る文字を指定すれば、
+連続して入力する際に便利です。
+
+  Readline.readline("> ", true)
+  Readline.completion_append_character = " "
+  > /var/li
+  ここで補完(TABキーを押す)を行う。
+  > /var/lib 
+  最後に" "が追加されているため、すぐに「/usr」などを入力できる。
+  > /var/lib /usr
+
+なお、1文字しか指定することはできないため、
+例えば、"string"を指定した場合は最初の文字である"s"だけを使用します。
+
+  Readline.completion_append_character = "string"
+  p Readline.completion_append_character # => "s"
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.completion_append_character]]
+
+--- completion_append_character -> string
+
+ユーザの入力の補完が完了した場合に、最後に付加する文字を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.completion_append_character=]]
 
 #@since 1.8.0
---- basic_word_break_characters=(s)
+--- basic_word_break_characters=(string)
+
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成される文字列 string を指定します。
+
+@param string 文字列を指定します。
+
+GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
+" \t\n\"\\'`@$><=;|&{(" (スペースを含む) になっています。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.basic_word_break_characters]]
+
 --- basic_word_break_characters
-#@todo
-補完時の単語同士の区切りを指定する basic な文字列。デフォルトでは
-Bash用の文字列 " \t\n\"\\'`@$><=;|&{(" (スペース含む)になっています。
 
---- completer_word_break_characters=(s)
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成される文字列を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.basic_word_break_characters=]]
+
+--- completer_word_break_characters=(string)
+
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成される文字列 string を指定します。
+[[m:Readline.basic_word_break_characters=]] との違いは、
+GNU Readline の rl_complete_internal 関数で使用されることです。
+
+@param string 文字列を指定します。
+
+GNU Readline のデフォルトの値は、 
+[[m:Readline.basic_word_break_characters]] と同じです。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.completer_word_break_characters]]
+
 --- completer_word_break_characters
-#@todo
-rl_complete_internal() で使われる、補完時の単語同士の区切りを指定する
-文字列です。デフォルトでは Readline.basic_word_break_characters です。
 
---- basic_quote_characters=(s)
+ユーザの入力の補完を行う際、
+単語の区切りを示す複数の文字で構成された文字列を取得します。
+[[m:Readline.basic_word_break_characters]] との違いは、
+GNU Readline の rl_complete_internal 関数で使用されることです。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.completer_word_break_characters=]]
+
+--- basic_quote_characters=(string)
+
+スペースなどの単語の区切りをクオートするための
+複数の文字で構成される文字列 string を指定します。
+
+@param string 文字列を指定します。
+
+GNU Readline のデフォルト値は、「"'」です。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.basic_quote_characters]]
+
 --- basic_quote_characters
-#@todo
-引用符を指定します。デフォルトでは、/"'/ です。
 
---- completer_quote_characters=(s)
+スペースなどの単語の区切りをクオートするための
+複数の文字で構成される文字列を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.basic_quote_characters=]]
+
+--- completer_quote_characters=(string)
+
+ユーザの入力の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列 string を指定します。
+指定した文字の間では、[[m:Readline::completer_word_break_characters=]]
+で指定した文字列に含まれる文字も、普通の文字列として扱われます。
+
+@param string 文字列を指定します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.completer_quote_characters]]
+
 --- completer_quote_characters
-#@todo
-補完時の引用符を指定します。この引用符の間では、completer_word_break_characters
-も、普通の文字列として扱われます。
 
---- filename_quote_characters=(s)
+ユーザの入力の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.completer_quote_characters=]]
+
+--- filename_quote_characters=(string)
+
+ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列 string を指定します。
+
+@param string 文字列を指定します。
+
+GNU Readline のデフォルト値は nil(NULL) です。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.filename_quote_characters]]
+
 --- filename_quote_characters
-#@todo
-補完時のファイル名の引用符を指定します。デフォルトでは nil です。
-#@end
 
---- completion_append_character
---- completion_append_character=
-#@todo
+ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
+クオートするための複数の文字で構成される文字列を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Readline.filename_quote_characters=]]
+#@end
 
 == Constants
 
+--- VERSION
+
+Readlineモジュールが使用している GNU Readline や liedit のバージョンを
+示す文字列です。
+
 --- FILENAME_COMPLETION_PROC
---- USERNAME_COMPLETION_PROC
-#@todo
-ライブラリに組み込みで用意された補完用 [[c:Proc]] オブジェクトです。
-それぞれファイル名、ユーザ名の補完を行います。
+
+GNU Readline で定義されている関数を使用してファイル名の補完を行うための
+[[c:Proc]] オブジェクトです。
 [[m:Readline.completion_proc=]] で使用します。
 
---- VERSION
-#@todo
+@see [[m:Readline.completion_proc=]]
+
+--- USERNAME_COMPLETION_PROC
+
+GNU Readline で定義されている関数を使用してユーザ名の補完を行うための
+[[c:Proc]] オブジェクトです。
+[[m:Readline.completion_proc=]] で使用します。
+
+@see [[m:Readline.completion_proc=]]
 
 = object Readline::HISTORY
 
 extend Enumerable
 
-#@todo
-Readlineモジュールで入力した内容は入力履歴として記録されます(有効にし
-ていればですが。[[m:Readline.#readline]] を参照)
+Readline::HISTORY を使用して入力履歴にアクセスできます。
+[[c:Enumerable]] モジュールを extend しており、
+[[c:Array]] クラスのように振る舞うことができます。
+例えば、HISTORY[4] により 5 番目に入力した内容を取り出すことができます。
 
-この定数により、入力履歴の内容にアクセスすることができます。おおよそ、
-[[c:Array]] クラスのインスタンスのように振舞います。
-([[c:Enumerable]] モジュールをextend しています)
+== Instance Methods
 
-  while buf = Readline.readline("> ", true)
-    p Readline::HISTORY.to_a
-    print "-> ", buf, "\n"
-  end
+--- to_s -> "HISTORY"
 
-空行や直前の入力と同じ内容は入力履歴に残したくないと思うかも知れません。
-この場合、以下のようにします。
+文字列"HISTORY"を返します。
 
-  while buf = Readline.readline("> ", true)
-    # p Readline::HISTORY.to_a
-    Readline::HISTORY.pop if /^\s*$/ =~ buf
+--- [](index) -> string
 
-    begin
-      Readline::HISTORY.pop if Readline::HISTORY[Readline::HISTORY.length-2] == buf
-    rescue IndexError
-    end
+@param index
 
-    # p Readline::HISTORY.to_a
-    print "-> ", buf, "\n"
-  end
+--- []=(index, string)
+
+@param index
+@param string
+
+--- <<(string) -> self
+    
+@param string
+
+--- push(*string) -> self
+
+@param string
+
+--- pop -> string
+
+--- shift -> string
+
+--- each -> Enumerable::Enumerator
+--- each { |s| }
+
+--- length -> integer
+
+--- empty? -> bool
+
+--- delete_at(index) -> nil
