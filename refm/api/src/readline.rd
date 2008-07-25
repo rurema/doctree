@@ -465,12 +465,10 @@ GNU Readline で定義されている関数を使用してユーザ名の補完を行うための
 
 extend Enumerable
 
-Readline::HISTORY を使用して入力履歴にアクセスできます。
+Readline::HISTORY を使用してヒストリにアクセスできます。
 [[c:Enumerable]] モジュールを extend しており、
 [[c:Array]] クラスのように振る舞うことができます。
 例えば、HISTORY[4] により 5 番目に入力した内容を取り出すことができます。
-
-== Instance Methods
 
 --- to_s -> "HISTORY"
 
@@ -480,28 +478,56 @@ Readline::HISTORY を使用して入力履歴にアクセスできます。
 
 @param index
 
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
 --- []=(index, string)
 
 @param index
 @param string
 
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
 --- <<(string) -> self
     
 @param string
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- push(*string) -> self
 
 @param string
 
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
 --- pop -> string
 
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
 --- shift -> string
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- each -> Enumerable::Enumerator
 --- each { |s| }
 
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
 --- length -> integer
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- empty? -> bool
 
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
 --- delete_at(index) -> nil
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
