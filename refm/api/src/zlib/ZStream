@@ -49,85 +49,77 @@ String オブジェクトとして返します。
 
 == Instance Methods
 
---- avail_in
-#@todo
+--- avail_in -> Integer
 
 入力バッファに溜っているデータのバイト数を返します。通常は 0 です。
 
---- avail_out
-#@todo
+--- avail_out -> Integer
 
 出力バッファの空き用量をバイト数で返します。
 空きは必要な時に動的に確保されるため、通常は 0 です。
 
---- avail_out=(size)
-#@todo
+--- avail_out=(size) -> Integer
 
 出力側のバッファに size バイトの空きを確保します。
 すでに size バイト以上の空きがある場合、バッファは
 縮められます。空きは必要な時に動的に確保されるため、通常
 このメソッドを使う必要はありません。
 
---- flush_next_in
-#@todo
+@param size 出力バッファのサイズを整数で指定します。
+
+@return size を返します。
+
+--- flush_next_in -> String
 
 入力バッファに残っているデータを強制的に取り出します。
 
---- flush_next_out
-#@todo
+--- flush_next_out -> String
 
 出力バッファに残っているデータを強制的に取り出します。
 
---- total_in
-#@todo
+--- total_in -> Integer
 
 ストリームに入力されたデータの総バイト数を返します。
 
---- total_out
-#@todo
+--- total_out -> Integer
 
 ストリームの出力したデータの総バイト数を返します。
 
---- data_type
-#@todo
+--- data_type -> Fixnum
 
 ストリームに入力されたデータの形式を推測します。
 返り値は Zlib::BINARY, Zlib::ASCII, Zlib::UNKNOWN の
 いずれかです。
 
---- adler
-#@todo
+--- adler -> Integer
 
 alder-32 チェックサムを返します。
 
---- reset
-#@todo
+--- reset -> nil
 
 ストリームの状態をリセットします。
 入力/出力バッファ内に残っていたデータは破棄されます。
 
---- finish
-#@todo
+--- finish -> String
 
 ストリームへの入力を終了し、出力バッファをフラッシュします。
 より具体的な振る舞いは [[m:Zlib::Deflate#finish]],
 [[m:Zlib::Inflate#finish]] を参照して下さい。
 
---- finished?
---- stream_end?
-#@todo
+@see  [[m:Zlib::Deflate#finish]],[[m:Zlib::Inflate#finish]] 
+
+--- finished? -> bool
+--- stream_end? -> bool
 
 ストリームへの入力が終了している時に真を返します。
 
---- close
---- end
-#@todo
+--- close -> nil
+--- end -> nil
 
 ストリームを閉じます。
 以後、このストリームにアクセスすることはできなくなります。
 
---- closed?
---- ended?
-#@todo
+--- closed? -> bool
+--- ended? -> bool
 
 ストリームが閉じられている時に真を返します。
