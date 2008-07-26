@@ -5,13 +5,11 @@ zlib ライブラリに含まれている雑多な機能を提供するモジュール。
 
 == Module Functions
 
---- zlib_version
-#@todo
+--- zlib_version -> String
 
 zlib ライブラリのバージョンを表す文字列を返します。
 
---- adler32([string[, adler]])
-#@todo
+--- adler32(string = nil, adler = nil) -> Integer
 
 string の Adler-32 チェックサムを計算し、adler を
 更新した値を返します。string が省略された場合は
@@ -19,8 +17,10 @@ Adler-32 チェックサムの初期値を返します。adler が
 省略された場合は adler に初期値が与えらたものとして
 計算します。
 
---- crc32([string[, crc]])
-#@todo
+@param string string の Adler-32 チェックサムが計算されます。
+@param adler  adler を整数で指定します。
+
+--- crc32(string = nil, crc = nil) -> Integer
 
 string の CRC チェックサムを計算し、crc を
 更新した値を返します。string が省略された場合は
@@ -28,67 +28,61 @@ CRC チェックサムの初期値を返します。crc が
 省略された場合は crc に初期値が与えらたものとして
 計算します。
 
---- crc_table
-#@todo
+@param string string の CRC チェックサムが計算されます。
+@param crc  crc を整数で指定します。
+
+--- crc_table -> Array
 
 CRC チェックサムの計算に用いるテーブルを配列で返します。
 
 == Constants
 
 --- VERSION
-#@todo
 
-Ruby/zlib のバージョンを表す文字列。
+Ruby/zlib のバージョンを表す文字列です。
 
 --- ZLIB_VERSION
-#@todo
 
-zlib.h のバージョンを表す文字列。
+zlib.h のバージョンを表す文字列です。
 
 --- BINARY
 --- ASCII
 --- UNKNOWN
-#@todo
 
-[[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数。
+[[m:Zlib::ZStream#data_type]] の返す、データタイプを表す整数です。
 
 --- NO_COMPRESSION
 --- BEST_SPEED
 --- BEST_COMPRESSION
 --- DEFAULT_COMPRESSION
-#@todo
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#deflate]] 等に渡す、
-圧縮レベルを表す整数。
+圧縮レベルを表す整数です。
 
 --- FILTERED
 --- HUFFMAN_ONLY
 --- DEFAULT_STRATEGY
-#@todo
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Deflate#params]] に渡す、
-圧縮方法を表す整数。
+圧縮方法を表す整数です。
 
 --- DEF_MEM_LEVEL
 --- MAX_MEM_LEVEL
-#@todo
 
-[[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数。
+[[m:Zlib::Deflate.new]] 等に渡す、memory level を表す整数です。
 
 --- MAX_WBITS
-#@todo
 
 [[m:Zlib::Deflate.new]] や [[m:Zlib::Inflate.new]] での
-windowBits のデフォルト値。
+windowBits のデフォルト値です。
 
 --- NO_FLUSH
 --- SYNC_FLUSH
 --- FULL_FLUSH
 --- FINISH
-#@todo
 
 [[m:Zlib::Deflate#deflate]] 等に渡す、ストリームの出力を
-制御するための整数。
+制御するための整数です。
 
 --- OS_CODE
 --- OS_MSDOS
@@ -106,6 +100,5 @@ windowBits のデフォルト値。
 --- OS_QDOS
 --- OS_RISCOS
 --- OS_UNKNOWN
-#@todo
 
-[[m:Zlib::GzipFile#os_code]] メソッドの返す値。
+[[m:Zlib::GzipFile#os_code]] メソッドの返す値です。
