@@ -199,7 +199,7 @@ racc/parser
 rational			yugui
 rbconfig
 readbytes
-readline                        kouji
+readline                        kouji           done
 resolv
 resolv-replace
 rexml/attlistdecl
