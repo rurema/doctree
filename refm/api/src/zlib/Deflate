@@ -73,9 +73,9 @@ Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
 
 == Instance Methods
 
---- clone
-#@todo
+--- clone -> self
 
+執筆者募集。
 圧縮ストリームを複製します。
 
 --- deflate(string, flush = Zlib::NO_FLUSH) -> String

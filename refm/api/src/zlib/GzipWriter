@@ -20,7 +20,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 == Class Methods
 
---- new(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY)
+--- new(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 level, strategy は [[m:Zlib::Deflate.new]] と同じです。
@@ -43,9 +43,11 @@ GzipWriter オブジェクトは io に gzip 形式のデータを
   p gz.closed? #=> true
   p FileTest.size(filename) #=> 32
 
---- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... }
+--- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
+--- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> nil
 
-io と関連付けられた GzipWriter オブジェクトを作成し、
+io と関連付けられた GzipWriter オブジェクトを作成します。
+ブッロクが与えられた場合、
 それを引数としてブロックを実行します。
 ブロックの実行が終了すると、GzipWriter オブジェクトは自動的に
 クローズされます。関連付けられている IO オブジェクトまで
@@ -85,8 +87,8 @@ io と関連付けられた GzipWriter オブジェクトを作成し、
   case1
   case2
 
---- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY)
---- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... }
+--- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
+--- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> nil
 
 filename で指定されるファイルを gzip 圧縮データの
 書き出し用にオープンします。GzipWriter オブジェクトを返します。

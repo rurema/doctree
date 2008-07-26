@@ -122,8 +122,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
 
   case2(str, dict)
 
---- sync(string)
-#@todo
+--- sync(string) -> bool
 
 string を入力バッファの末尾に追加し、次の full flush
 point まで読み飛ばします。入力バッファ内に full flush point
@@ -131,9 +130,11 @@ point まで読み飛ばします。入力バッファ内に full flush point
 入力バッファ内に full flush point が見つかった場合は
 true を返し、残りのデータは入力バッファ内に保持されます。
 
---- sync_point?
-#@todo
+@param string 入力バッファの末尾に追加する文字列を指定します。
+
+--- sync_point? -> bool
 
 What is this?
+執筆者募集。
+
 #@# [[unknown:原文|"ruby-src:ext/zlib/doc/zlib.rd"]]のまま。
-([[unknown:執筆者募集]])
