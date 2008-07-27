@@ -152,7 +152,9 @@ self と other を比較して、self が大きい時に正、
   p 3.14 >= 3.1415  #=> false
 
 --- finite? -> bool
-数値が ∞ でも、NaN でもなければ真を返します
+
+数値が ∞, -∞, あるいは NaN でない場合に true を返します。
+そうでない場合に false を返します。
 
   p 3.14.finite? #=> true
   inf = 1.0/0
