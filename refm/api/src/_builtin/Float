@@ -93,6 +93,8 @@ self と other を比較して、self が大きい時に正、
 等しい時に 0、小さい時に負の整数を返します。
 比較できない場合はnilを返します
 
+例:
+
   p 3.05 <=> 3.14 #=> -1
   p 1.732 <=> 1.414  #=> 1
   p 3.3 - 3.3 <=> 0.0 #=> 0
@@ -110,12 +112,14 @@ self と other を比較して、self が大きい時に正、
 @return      self と other が等しい場合 true を返します。
              そうでなければ false を返します。
 
+例:
+
   p 3.14 == 3.14000 #=> true
   p 3.14 == 3.1415  #=> false
 
   # NaN 同士では常に false 
   nan = 0.0/0
-  p nan == nan          # => false
+  p nan == nan      # => false
 
 --- <(other)  -> bool
 比較演算子。数値として小さいか判定します。
@@ -123,6 +127,8 @@ self と other を比較して、self が大きい時に正、
 @param other 比較対象の数値
 @return      self よりも other が大きい場合 true を返します。
              そうでなければ false を返します。
+
+例:
 
   p 3.14 <  3.1415  #=> true
   p 3.14 <= 3.1415  #=> true
@@ -135,6 +141,8 @@ self と other を比較して、self が大きい時に正、
              両者が等しい場合 true を返します。
              そうでなければ false を返します。
 
+例:
+
   p 3.14 <  3.1415  #=> true
   p 3.14 <= 3.1415  #=> true
 
@@ -144,6 +152,8 @@ self と other を比較して、self が大きい時に正、
 @param other 比較対象の数値
 @return      self よりも other の方が小さい場合 true を返します。
              そうでなければ false を返します。
+
+例:
 
   p 3.14 >  3.1415  #=> false
   p 3.14 >= 3.1415  #=> false
@@ -156,6 +166,8 @@ self と other を比較して、self が大きい時に正、
              両者が等しい場合 true を返します。
              そうでなければ false を返します。
 
+例:
+
   p 3.14 >  3.1415  #=> false
   p 3.14 >= 3.1415  #=> false
 
@@ -163,6 +175,8 @@ self と other を比較して、self が大きい時に正、
 
 数値が ∞, -∞, あるいは NaN でない場合に true を返します。
 そうでない場合に false を返します。
+
+例:
 
   p 3.14.finite? #=> true
   inf = 1.0/0
@@ -172,6 +186,8 @@ self と other を比較して、self が大きい時に正、
 
 数値が +∞ のとき 1、-∞のとき -1 を返します。それ以外は nil を返
 します。
+
+例:
 
   inf = 1.0/0
   p inf
@@ -191,6 +207,8 @@ self と other を比較して、self が大きい時に正、
 
 数値が NaN(Not a number)のとき真を返します。
 
+例:
+
   nan = 0.0/0.0
   p nan
   p nan.nan?
@@ -201,6 +219,8 @@ self と other を比較して、self が大きい時に正、
 --- to_f -> self
 self を返します。
 
+例:
+
   p 3.14.to_f   #=> 3.14
 
 --- to_i -> Integer
@@ -208,12 +228,16 @@ self を返します。
 
 小数点以下を切り捨てて値を整数に変換します。
 
+例:
+
    p 3.14.to_i   #=> 3
 
 @see [[m:Numeric#round]], [[m:Numeric#ceil]], [[m:Numeric#floor]]
 
 --- hash -> Fixnum
 ハッシュ値を返します。
+
+例:
 
   pi1 = 3.14
   pi2 = 3.14
@@ -225,13 +249,18 @@ self を返します。
 
 --- abs    -> Float
 
-self の絶対値を返します。
+自身の絶対値を返します。
 
-自身が 0 以上ならば self を、そうでない場合は -self を返します。
+例:
+
+ p   34.56.abs     #=> 34.56
+ p  -34.56.abs     #=> 34.56
 
 --- ceil   -> Integer
 
 自身と等しいかより大きな整数のうち最小のものを返します。
+
+例:
 
      1.0.ceil      #=> 1
      1.2.ceil      #=> 2
@@ -262,6 +291,8 @@ self を other で割った商 q と余り r を、
 
 @param other 自身を割る数を指定します。
 
+例:
+
 #@since 1.8.5
    11.divmod(3)         #=> [3, 2]
    (11.5).divmod(3.5)   #=> [3, 1.0]
@@ -282,6 +313,8 @@ self を other で割った商 q と余り r を、
 
 自身と等しいかより小さな整数のうち最大のものを返します。
 
+例:
+
      1.0.floor      #=> 1
      1.2.floor      #=> 1
      (-1.2).floor   #=> -2
@@ -296,6 +329,8 @@ self を other で割った商 q と余り r を、
 
 @param other 自身と比較したい数値を指定します。
 
+例:
+
   1.0.eql?(1)   #=> false
   1.0.eql?(1.0) #=> true
 
@@ -305,6 +340,8 @@ self を other で割った商 q と余り r を、
 
 中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
 いわゆる四捨五入ですが、偶数丸めではありません。
+
+例:
 
      1.0.round      #=> 1
      1.2.round      #=> 1
@@ -316,6 +353,8 @@ self を other で割った商 q と余り r を、
 --- zero?  -> bool
 
 自身がゼロの時、真を返します。そうでない場合は false を返します。
+
+例:
 
   p 10.0.zero?            #=> false
   p 0.zero?               #=> true
