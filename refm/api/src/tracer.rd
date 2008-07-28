@@ -30,7 +30,7 @@ hoge.rbの実行をすべてトレース出力します。
 
 === SEE ALSO
 
-[[m:Kernel#set_trace_func]]
+[[m:Kernel.#set_trace_func]]
 
 
 
@@ -71,7 +71,7 @@ hoge.rbの実行をすべてトレース出力します。
 そのうち一つでも偽を返すとトレースの出力は抑制される。
 
 フィルタ手続きは引数として event, file, line, id, binding の
-5 つをとる ([[m:Kernel#set_trace_func]] で指定するものとほぼ同じ)。
+5 つをとる ([[m:Kernel.#set_trace_func]] で指定するものとほぼ同じ)。
 
 [フィルタ手続きのパラメータ]
 
