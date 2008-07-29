@@ -1465,7 +1465,7 @@ self[pos, 0] = other と同じ操作です。
 なお、このメソッドの逆にシンボルに対応する文字列を得るには
 [[m:Symbol#to_s]] または [[m:Symbol#id2name]] を使います。
 
-@raise ArgumentError    self が "\0" を含む
+@raise ArgumentError    self が "\0" を含む、もしくは空の文字列の場合発生します。
 
 例:
     p "foo".intern                 # => :foo
