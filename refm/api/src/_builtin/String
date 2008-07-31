@@ -1459,13 +1459,18 @@ self[pos, 0] = other と同じ操作です。
 #@end
 
 文字列に対応するシンボル値 [[c:Symbol]] を返します。
-ナルキャラクタ ("\0") を含む文字列を intern すると
-例外 [[c:ArgumentError]] が発生します。
 
 なお、このメソッドの逆にシンボルに対応する文字列を得るには
 [[m:Symbol#to_s]] または [[m:Symbol#id2name]] を使います。
 
-@raise ArgumentError    self が "\0" を含む、もしくは空の文字列の場合発生します。
+#@if (version >= "1.9.0")
+Ruby 1.9 以降では、シンボル文字列にナルキャラクタ("\0")、空の文字列が使用可能になりました。
+#@else
+ナルキャラクタ ("\0") を含む文字列、もしくは空の文字列をinternすると、
+例外 [[c:ArgumentError]] が発生します。
+
+@raise ArgumentError    self が ナルキャラクタ ("\0") を含む文字列、もしくは空の文字列の場合発生します。
+#@end
 
 例:
     p "foo".intern                 # => :foo
