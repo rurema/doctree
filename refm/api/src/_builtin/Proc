@@ -77,13 +77,24 @@ Proc.new は、Proc#initialize が定義されていれば
 
 --- arity -> Fixnum
 
-Procオブジェクトの引数の数を返します。
+Proc オブジェクトが受け付ける引数の数を返します。
 
-self が引数の数を可変長で受け取れる場合
+ただし、可変長引数を受け付ける場合、負の整数
 
-  -(最低限必要な数+1)
+  -(必要とされる引数の数 + 1)
 
 を返します。
+
+例:
+
+ lambda{           }.arity   # => -1
+ lambda{||         }.arity   # =>  0
+ lambda{|x|        }.arity   # =>  1
+ lambda{|*x|       }.arity   # => -1
+ lambda{|x, y|     }.arity   # =>  2
+ lambda{|x, *y|    }.arity   # => -2
+ lambda{|(x, y)|   }.arity   # =>  2
+ lambda{|(x, y), z|}.arity   # =>  2
 
 --- binding -> Binding
 
