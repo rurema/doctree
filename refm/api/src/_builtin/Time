@@ -453,13 +453,16 @@ self のタイムゾーンが協定世界時に設定されていれば真を返します。
 --- succ    -> Time
 
 self に 1 秒足した Time オブジェクトを生成して返します。
+#@until 1.8.6
 タイムゾーンは地方時になります。
+#@end
 
   t = Time.now
   p t
   p t.succ
   # => Sun Jul 18 01:41:22 JST 2004
        Sun Jul 18 01:41:23 JST 2004
+
 #@end
 
 --- utc_offset     -> Integer
