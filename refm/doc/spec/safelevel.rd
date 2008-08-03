@@ -205,9 +205,9 @@ CGI等でユーザからの入力を処理するのに適しています。
      および他のスレッドのThread#[]
 
    * ObjectSpace._id2ref
-
-   * ObjectSpace.each_object    ((<ruby 1.7 feature>))
-
+#@since 1.8.0
+   * ObjectSpace.each_object   
+#@end
    * 環境変数の変更
 
    * srand
@@ -237,10 +237,11 @@ CGI等でユーザからの入力を処理するのに適しています。
 
    * 汚染された文字列を trap/trace_var の第二引数に指定する
      とレベル4で実行される
-     ((<ruby 1.7 feature>)):
-     version 1.7 では、汚染された文字列を第二引数に指定して
-     trap/trace_var を実行するとその時点で例外 [[c:SecurityError]] が
-     発生する。
+
+#@since 1.8.0
+     汚染された文字列を第二引数に指定して trap/trace_var を
+     実行するとその時点で例外 [[c:SecurityError]] が発生する。
+#@end
 
    * レベル4以上では out of memory でも [[c:fatal]] にならない。
 
