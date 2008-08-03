@@ -19,7 +19,11 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
+#@since 1.9.0
 --- critical             -> nil
+#@else
+--- critical             -> bool
+#@end
 --- critical=(newstate)
 
 #@since 1.9.0
@@ -39,7 +43,7 @@ Thread を使うことで並行プログラミングが可能になります。
 れることもあります。排他制御を行うにはこのメソッドに頼らず
 [[c:Mutex]] や [[c:Monitor]] を使うべきです。
 
-@param newstate スレッドの切替えを許す稼働かを、true か false で指定します。
+@param newstate スレッドの切替えを許すかどうかを、true か false で指定します。
 #@end
 
 --- current    -> Thread
