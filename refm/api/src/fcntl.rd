@@ -21,7 +21,7 @@
 ファイルディスクリプタを扱う Unix のシステムコール [[m:IO#fcntl]]
 (つまり[[man:fcntl(2)]]) で使用できる定数を集めたモジュールです。
 
-@see [[man:fcntl(2)]], [[man:open(2)]], [[m:IO.fcntl]], [[m:IO.open]]
+@see [[man:fcntl(2)]], [[man:open(2)]], [[m:IO#fcntl]], [[m:IO.open]]
 
 == Constants
 
