@@ -1,45 +1,47 @@
 #@since 1.9.0
 =class Encoding
+Ê¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°(Ê¸»úÉä¹æ²½Êý¼°)¤Î¥¯¥é¥¹¤Ç¤¹¡£Ruby¤ÎÂ¿¸À¸ìÂÐ±þ(M17N)µ¡Ç½¤Ë¤ª¤¤¤ÆÍøÍÑ¤µ¤ì¤Þ¤¹¡£
+
+Îã¤¨¤ÐÊ¸»úÎó¥ª¥Ö¥¸¥§¥¯¥È¤Ï¡¢Ê¸»úÎó¤Î¥Ð¥¤¥ÈÉ½¸½¤ÎÂ¾¤Ë¤½¤Î¥Ð¥¤¥ÈÉ½¸½¤¬¤É¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ë¤è¤ë¤â¤Î¤Ç¤¢¤ë¤«¤âÊ»¤»¤ÆÊÝ»ý¤·¤Æ¤¤¤Þ¤¹¡£¤³¤Î¾ðÊó¤Ï [[m:String#encoding]] ¤Ë¤è¤ê¼èÆÀ¤Ç¤­¤Þ¤¹¡£ Encoding ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤¹¥á¥½¥Ã¥É¤Ë¤Ï¤³¤ÎÂ¾¤Ë [[m:IO#internal_encoding]], [[m:IO#external_encoding]] ¤Ê¤É¤¬¤¢¤ê¤Þ¤¹¡£
+
+@see [[spec:m17n]]
 
 == Class Methods
 
 --- aliases    -> Hash
+¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÎÊÌÌ¾¤ËÂÐ¤·¤Æ¸µ¤ÎÌ¾Á°¤òÂÐ±þ¤Å¤±¤ë¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
 
-Returns the hash of available encoding alias and original encoding name.
-
+Îã:
   p Encoding.aliases
   #=> {"BINARY"=>"ASCII-8BIT", "ASCII"=>"US-ASCII", "ANSI_X3.4-1986"=>"US-ASCII",
       "SJIS"=>"Shift_JIS", "eucJP"=>"EUC-JP", "CP932"=>"Windows-31J"}
 
---- compatible?(str1, str2) -> Encoding | nil
 
+--- compatible?(str1, str2) -> Encoding | nil
 2¤Ä¤ÎÊ¸»úÎó¤Ë¸ß´¹À­¤¬¤¢¤ë¤«¤É¤¦¤«¤ò¥Á¥§¥Ã¥¯¤·¤Þ¤¹¡£¸ß´¹À­¤¬¤¢¤ëÊ¸»úÎó¤Ï
 ·ë¹ç¤µ¤»¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£¸ß´¹À­¤¬¤¢¤ë¤È¤­¤Ï¡¢·ë¹ç¸å¤ÎÊ¸»úÎó¤¬¼è¤ë¤Ç¤¢
 ¤í¤¦ Encoding ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£¸ß´¹À­¤¬¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
 
 @param str1   ¥Á¥§¥Ã¥¯¤¹¤ëÂÐ¾Ý¤ÎÊ¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
-
 @param str2   ¥Á¥§¥Ã¥¯¤¹¤ëÂÐ¾Ý¤ÎÊ¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
-
 @return       ·ë¹ç¤·¤¿¾ì¹ç¤ÎÊ¸»úÎó¤Î Encoding ¤Þ¤¿¤Ï nil
 
 --- find(name) -> Encoding
-
 »ØÄê¤µ¤ì¤¿ name ¤È¤¤¤¦Ì¾Á°¤ò»ý¤Ä Encoding ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 @param name ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°Ì¾¤òÉ½¤¹ [[c:String]] ¤« [[c:Symbol]] ¤ò»ØÄê¤·¤Þ¤¹¡£
-
 @return È¯¸«¤µ¤ì¤¿ Encoding ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
-
 @raise ArgumentError »ØÄê¤·¤¿Ì¾Á°¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤¬È¯¸«¤Ç¤­¤Ê¤¤¤ÈÈ¯À¸¤·¤Þ¤¹¡£
 
+Îã:
  p Encoding.find(:Shift_JIS)    #=> #<Encoding:Shift_JIS>
  p Encoding.find("utf-8")       #=> #<Encoding:UTF-8>
 
---- list -> [Encoding]
 
+--- list -> [Encoding]
 ¸½ºß¥í¡¼¥É¤µ¤ì¤Æ¤¤¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
     Encoding.list
     => [#<Encoding:ASCII-8BIT>, #<Encoding:EUC-JP>,
         #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
@@ -53,24 +55,23 @@ Returns the hash of available encoding alias and original encoding name.
         #<Encoding:Shift_JIS>, #<Encoding:UTF-8>,
         #<Encoding:US-ASCII>, #<Encoding:ISO-2022-JP (dummy)>]
 
---- name_list    -> [Encoding]
+--- name_list    -> [String]
+ÍøÍÑ²ÄÇ½¤Ê¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÎÌ¾Á°¤òÊ¸»úÎó¤ÎÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
-Returns the list of available encoding names.
+¤³¤Î¥ê¥¹¥È¤Ë¤Ï¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ï´Þ¤ß¤Þ¤»¤ó¡£
 
+Îã:
   p Encoding.name_list
   #=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
        "ISO-8859-1", "Shift_JIS", "EUC-JP",
        "Windows-31J",
        "BINARY", "CP932", "eucJP"]
 
-This list doesn't include dummy encodings.
-
 --- default_external -> Encoding
-#@todo
+µ¬Äê¤Î³°Éô¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Þ¤¹¡£
 
-Returns default external encoding.
-
-It is initialized by the locale or -E option.
+Æþ½ÐÎÏ¤Ë¤ª¤¤¤Æ¡¢³°Éô¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤¬»ØÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Îµ¬ÄêÃÍ¤È¤·¤ÆÍøÍÑ¤µ¤ì¤Þ¤¹¡£Ruby¤Ï¥í¥±¡¼¥ë¤Þ¤¿¤Ï -E ¥ª¥Ö¥·¥ç¥ó¤Ë½¾¤Ã¤Æ default_external ¤ò·èÄê¤·¤Þ¤¹¡£¥í¥±¡¼¥ë¤Î³ÎÇ§¡¦ÀßÄêÊýË¡¤Ë¤Ä¤¤¤Æ¤Ï³Æ¥·¥¹¥Æ¥à¤Î¥Þ¥Ë¥å¥¢¥ë¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+@see [[man:locale(1)]]
 
 --- locale_charmap -> String
 #@todo
@@ -79,8 +80,8 @@ Returns the locale charmap name.
 
   Debian GNU/Linux
     LANG=C
-      Encoding.locale_charmap  => "ANSI_X3.4-1968"
-    LANG=ja_JP.EUC-JP
+      Encoding.locale_charmap  => "ANSI_X3.4-1968" 
+  LANG=ja_JP.EUC-JP
       Encoding.locale_charmap  => "EUC-JP"
 
   SunOS 5
@@ -94,36 +95,36 @@ Returns the locale charmap name.
 == Instance Methods
 
 --- base_encoding -> Encoding | nil
+¸µ¤È¤Ê¤Ã¤¿¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Þ¤¹¡£
 
 self ¤¬ÊÌ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤«¤éÇÉÀ¸¤·¤¿¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¢¤ë¾ì¹ç¡¢¤â¤È
 ¤È¤Ê¤Ã¤¿¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Þ¤¹¡£¤½¤Î¤è¤¦¤Ê¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤¬Â¸ºß¤·
 ¤Ê¤±¤ì¤Ð nil ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- inspect -> String
-
 ¥×¥í¥°¥é¥Þ¤Ë¤ï¤«¤ê¤ä¤¹¤¤É½¸½¤ÎÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
 
+Îã:
     Encoding::UTF_8.inspect       #=> "#<Encoding:UTF-8>"
     Encoding::ISO_2022_JP.inspect #=> "#<Encoding:ISO-2022-JP (dummy)>"
 
 --- name -> String
 --- to_s -> String
-
 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÎÌ¾Á°¤òÊÖ¤·¤Þ¤¹¡£
 
     Encoding::UTF_8.name       => "UTF-8"
 
 --- dummy? -> bool
-
 ¼«¿È¤¬¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¢¤ë¾ì¹ç¤Ë true ¤òÊÖ¤·¤Þ¤¹¡£
 ¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ë false ¤òÊÖ¤·¤Þ¤¹¡£
 
-¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤È¤Ï Ruby ¤¬¥Õ¥ë¤Ë¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Î¤³¤È¤Ç¤¹¡£
-Îã¤¨¤Ð¥¹¥Æ¡¼¥È¥Õ¥ë¤Ê¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤¬³ºÅö¤·¤Þ¤¹¡£
-¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤â [[c:IO]] ¤Î³°Éô¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ë»ØÄê¤Ç¤­¤Þ¤¹¡£¤Þ¤¿
+¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤È¤Ï Ruby ¤¬Ì¾Á°¤òÃÎ¤Ã¤Æ¤¤¤ë¤â¤Î¤Î¼Â¼ÁÅª¤Ë¤ÏÂÐ±þ¤·¤Æ¤¤¤Ê¤¤¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Î¤³¤È¤Ç¤¹¡£Îã¤¨¤Ð¡¢¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÇÉä¹æ²½¤µ¤ì¤¿Ê¸»úÎó¤Î¾ì¹ç¡¢ [[m:String#length]] ¤Ï¥Þ¥ë¥Á¥Ð¥¤¥ÈÊ¸»ú¤ò¹ÍÎ¸¤»¤º¤Ë¥Ð¥¤¥ÈÎó¤ÎÄ¹¤µ¤òÊÖ¤·¤Þ¤¹¡£
+
+¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤â [[c:IO]] ¤Î³°Éô¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ë»ØÄê¤Ç¤­¤Þ¤¹¡£¤Þ¤¿ 
 Ruby ¤Ï¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤¬³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤¬¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò°·¤¦¾ì¹ç¤Ë¤â
 ÍÑ¤¤¤Þ¤¹¡£
 
+Îã:
   Encoding::ISO_2022_JP.dummy?       #=> true
   Encoding::UTF_8.dummy?             #=> false
 
@@ -131,19 +132,18 @@ Ruby ¤Ï¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤¬³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤¬¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò°·¤
 
 --- ASCII_8BIT
 --- BINARY
-
 ÊÑ´¹¤ò¹Ô¤ï¤Ê¤¤¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
+
+Ê¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ý¤¿¤Ê¤¤¥Ç¡¼¥¿¡¢Ê¸»ú¤òÉä¹æ²½¤·¤¿¤Î¤Ç¤Ï¤Ê¤¤Ã±¤Ê¤ë¥Ð¥¤¥È¤ÎÎó¤òÉ½¸½¤¹¤ë¤¿¤á¤Ë¤âÍÑ¤¤¤Þ¤¹¡£
 
 --- EUC_JP
 --- EUC_JP_MS
 --- EucJP
 --- EUCJP
-
 EUC-JP ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- ISO_2022_JP
 --- ISO2022_JP
-
 ISO-2022-JP ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- SHIFT_JIS
@@ -161,15 +161,18 @@ ASCIIÊ¸»ú¤Î¤ß¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£ÄÌ¾ï¤Î ASCII Ê¸»ú¤ÎÈÏ°Ï³°¤Î¥Ð¥¤¥È
 ¤Þ¤»¤ó¡£
 
 --- UTF_16BE
+UTF-16BE (¥Ó¥Ã¥°¥¨¥ó¥Ç¥£¥¢¥ó)¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- UTF_16LE
+UTF-16LE (¥ê¥È¥ë¥¨¥ó¥Ç¥£¥¢¥ó)¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- UTF_32BE
+UTF-32BE (¥Ó¥Ã¥°¥¨¥ó¥Ç¥£¥¢¥ó)¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- UTF_32LE
+UTF-32LE (¥ê¥È¥ë¥¨¥ó¥Ç¥£¥¢¥ó)¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- UTF_8
-
 UTF-8 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- Big5
