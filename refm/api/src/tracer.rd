@@ -26,7 +26,25 @@ hoge.rbの実行をすべてトレース出力します。
 
 === サンプルコード
 
-なし
+  例: 式の評価の中でHogeクラスのメソッドが呼び出される時、トレースする。
+
+  # ruby 1.8 では警告がでますが、動作します。
+  require 'tracer'
+
+  module Hoge
+    def Hoge.fuga(i)
+      "fuga #{i}"
+    end
+  end
+
+  Tracer.add_filter {|event, file, line, id, binding, klass|
+    event =~ /line/ and klass.to_s =~ /hoge/i
+  }
+  Tracer.on
+  for i in 0..3
+    puts Hoge.fuga(i) if i % 3 == 0
+  end 
+  Tracer.off
 
 === SEE ALSO
 
@@ -38,14 +56,14 @@ hoge.rbの実行をすべてトレース出力します。
 
 == Class Methods
 
---- on
+--- on -> nil
 --- on {...}
 #@todo
 
 トレース出力を開始。
 ブロックを与えられた場合はそのブロック内のみトレース出力を行う。
 
---- off
+--- off -> nil
 #@todo
 
 トレース出力を中断。
@@ -59,7 +77,7 @@ hoge.rbの実行をすべてトレース出力します。
 指定する手続きは行番号を唯一の引数として呼び出される。
 
 --- add_filter(proc)
---- add_filter {|event, file, line, id, binding| .... }
+--- add_filter {|event, file, line, id, binding, klass| .... }
 #@todo
 
 トレース出力するかどうかを決定するフィルタを追加する。
@@ -67,13 +85,18 @@ hoge.rbの実行をすべてトレース出力します。
 与えられた手続き(ブロックまたはProcオブジェクト)が真を返せば
 トレースは出力される。
 
+#@if (version < "1.9.0")
+ruby 1.8 ではブロックを与えると警告がでます。
+#@end
+
 フィルタは複数追加でき、
 そのうち一つでも偽を返すとトレースの出力は抑制される。
 
-フィルタ手続きは引数として event, file, line, id, binding の
-5 つをとる ([[m:Kernel.#set_trace_func]] で指定するものとほぼ同じ)。
+フィルタ手続きは引数として event, file, line, id, binding, klass の
+6 つをとります。
+[[m:Kernel.#set_trace_func]] で指定するものとほぼ同じです。
 
-[フィルタ手続きのパラメータ]
+==== フィルタ手続きのパラメータ
 
 : event
 イベントを表す文字列。
@@ -107,6 +130,10 @@ hoge.rbの実行をすべてトレース出力します。
 
 : binding
 現在のコンテキスト
+
+: klass
+現在呼び出されているメソッドのクラスオブジェクト。
+
 
 --- verbose
 --- verbose?
