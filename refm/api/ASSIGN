@@ -264,7 +264,7 @@ timeout                         kouya           done
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 tmpdir                          kouya           done
-tracer                          kouya
+tracer                          kouya           done
 tsort
 un                              okkez           done
 uri                             sheepman        done
