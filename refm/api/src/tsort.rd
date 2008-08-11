@@ -132,6 +132,8 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
 
 閉路が存在するとき、例外[[c:TSort::Cyclic]]を起こします。
 
+@raise TSort::Cyclic 閉路が存在するとき、発生します.
+
 --- tsort_each {|node| ...} -> nil
 #@todo
 
@@ -142,6 +144,8 @@ obj.tsort_each は obj.tsort.each と似ていますが、
 
 tsort_each は nil を返します。
 閉路が存在するとき、例外 [[c:TSort::Cyclic]] を起こします。
+
+@raise TSort::Cyclic 閉路が存在するとき、発生します.
 
 --- strongly_connected_components -> Array
 #@todo
