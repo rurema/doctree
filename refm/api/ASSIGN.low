@@ -1,6 +1,8 @@
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
 soap
+wsdl
+xsd
 tk
 tcltklib
 tkutil

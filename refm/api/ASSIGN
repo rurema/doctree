@@ -275,9 +275,7 @@ webrick/ssl                     sheepman
 win32/registry
 win32/resolv
 win32ole
-wsdl
 xmlrpc                          
-xsd
 yaml                            kouya
 yaml/store                      kouya           done
 zlib                            kouya           done
