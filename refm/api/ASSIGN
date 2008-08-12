@@ -137,7 +137,7 @@ expect                          okkez           done
 fcntl                           okkez           done
 fileutils                       okkez           done
 final                           okkez           done
-finalize                        okkez
+finalize                        okkez           done
 find                            okkez           done
 forwardable                     snoozer05
 ftools                          okkez           done
