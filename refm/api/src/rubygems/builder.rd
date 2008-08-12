@@ -1,0 +1,29 @@
+#@since 1.9.0
+= class Gem::Builder < Object
+include UserInteraction
+
+== Singleton Methods
+
+--- new(spec) -> Gem::Builder
+#@todo
+与えられた [[c:Gem::Specification]] のインスタンスによって
+[[c:Gem::Builder]] のインスタンスを生成します。
+
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
+
+== Instance Methods
+
+--- build -> String
+#@todo
+
+スペックから Gem を作成する。
+
+@return 作成したファイル名を返します。
+
+--- success -> String
+#@todo
+
+Gem の作成に成功したときに表示するメッセージを返します。
+
+#@end
+
