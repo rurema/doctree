@@ -1,18 +1,11 @@
 
+Gem パッケージをビルドするためのライブラリです。
 
 = class Gem::Commands::BuildCommand < Gem::Command
 
+Gem パッケージをビルドするためのクラスです。
+
 == Public Instance Methods
-
---- arguments -> String
-#@todo
-
-引数を説明する文字列を返します。
-
---- execute -> String | nil
-#@todo
-
-コマンドを実行します。
 
 --- load_gemspecs(filename) -> Array
 #@todo
