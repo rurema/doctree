@@ -7,6 +7,19 @@ require rubygems/gem_path_searcher
 
 指定された Gem パッケージに含まれるライブラリのパスを見つけるためのクラスです。
 
+  Usage: gem which FILE [...] [options]
+    Options:
+      -a, --[no-]all                   show all matching files
+      -g, --[no-]gems-first            search gems before non-gems
+#@include(common_options)
+    Arguments:
+      FILE          Gem パッケージ名を指定します
+    Summary:
+      指定された Gem パッケージのライブラリのある場所を表示します
+    Defaults:
+      --no-gems-first --no-all
+
+
 == Public Instance Methods
 --- find_paths(package_name, dirs) -> Array
 #@todo
