@@ -9,7 +9,7 @@ WIN32OLE_EVENT objects controls OLE event.
 
 Translates and dispatches Windows message.
 
---- new(ole, event) #-> WIN32OLE_EVENT object.
+--- new(ole, event) -> WIN32OLE_EVENT
 #@todo
 
 Returns OLE event object. The first argument specifies WIN32OLE

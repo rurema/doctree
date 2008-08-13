@@ -294,8 +294,9 @@ include Scrollable
 --- selection_anchor(item = None)
 #@todo
 
---- selection_clear(*args) # first, last
+--- selection_clear(*args)
 #@todo
+args = first, last
 
 --- selection_count
 #@todo

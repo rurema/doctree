@@ -54,7 +54,7 @@ include Comparable
 #@todo
 
 #@since 1.8.2
---- wrap(string, width, addnewline = false
+--- wrap(string, width, addnewline = false)
 #@todo
 
 --- value=(val)

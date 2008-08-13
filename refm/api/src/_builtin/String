@@ -1276,7 +1276,7 @@ replace に「\」自身を入れたいときは
 
 --- gsub(pattern) {|matched| .... } -> String
 #@since 1.8.7
---- gsub(pattern) Enumerable::Enumerator
+--- gsub(pattern) -> Enumerable::Enumerator
 #@end
 
 文字列中で pattern にマッチした部分を順番にブロックに渡し、

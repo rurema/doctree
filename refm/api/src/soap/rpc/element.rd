@@ -96,7 +96,7 @@ require soap/baseData
 --- create_request(qname, *params)
 #@todo
 
---- new(qname, param_def = nil, soapaction = nil
+--- new(qname, param_def = nil, soapaction = nil)
 #@todo
 
 == Instance Methods

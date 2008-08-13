@@ -34,7 +34,7 @@ include TkCore
 --- require_exact(package, version)
 #@todo
 
---- unknown_proc(*arg} { .... }
+--- unknown_proc(*arg) { .... }
 #@todo
 
 --- versions(package)

@@ -41,7 +41,7 @@ Returns array of type libraries.
 
 == Instance Methods
 
---- guid  #-> GUID
+--- guid -> GUID
 #@todo
 
 Returns GUID.
@@ -67,13 +67,13 @@ nil.
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
    puts tobj.helpfile # => C:\...\VBAXL9.CHM
 
---- helpstring #-> help String.
+--- helpstring -> String
 #@todo
 
 Returns help string.
 
   tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
-  puts tobj.helpstring # => Web Browser interface
+  p tobj.helpstring   # => "Web Browser interface"
 
 --- major_version
 #@todo
@@ -81,26 +81,26 @@ Returns help string.
 Returns major version.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Word 10.0 Object Library', 'Documents')
-   puts tobj.major_version # => 8
+   p tobj.major_version   # => 8
 
---- minor_version #-> OLE minor version
+--- minor_version -> Integer
 #@todo
 
 Returns minor version.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Word 10.0 Object Library', 'Documents')
-   puts tobj.minor_version # => 2
+   p tobj.minor_version   # => 2
 
---- name #-> OLE type name
+--- name -> String
 #@todo
 alias to_s
 
 Returns OLE type name.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-   puts tobj.name  # => Application
+   p tobj.name  # => "Application"
 
---- ole_methods # the array of WIN32OLE_METHOD objects.
+--- ole_methods -> [WIN32OLE_METHOD]
 #@todo
 
 Returns array of WIN32OLE_METHOD objects which represent OLE
@@ -112,46 +112,46 @@ method defined in OLE type library.
   }
   # => ['Activate', 'Copy', 'Delete',....]
 
---- ole_type #-> OLE type String.
+--- ole_type -> Class
 #@todo
 
 returns type of OLE class.
 
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-  puts tobj.ole_type  # => Class
+  p tobj.ole_type  # => Class
 
---- progid  #-> ProgID
+--- progid -> String
 #@todo
 
 Returns ProgID if it exists. If not found, then returns nil.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-   puts tobj.progid  # =>   Excel.Application.9
+   p tobj.progid   # => "Excel.Application.9"
 
---- src_type #-> OLE source class
+--- src_type -> Class
 #@todo
 
 Returns source class when the OLE class is 'Alias'.
 
    tobj =  WIN32OLE_TYPE.new('Microsoft Office 9.0 Object Library', 'MsoRGBType')
-   puts tobj.src_type # => I4
+   p tobj.src_type   # => I4
 
---- name #-> OLE type name
+--- name -> String
 #@todo
 alias to_s
 
 Returns OLE type name.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-   puts tobj.name  # => Application
+   p tobj.name   # => "Application"
 
---- typekind #-> number of type.
+--- typekind -> Integer
 #@todo
 
 Returns number which represents type.
 
   tobj = WIN32OLE_TYPE.new('Microsoft Word 10.0 Object Library', 'Documents')
-  puts tobj.typekind # => 4
+  p tobj.typekind   # => 4
 
 --- variables
 #@todo
@@ -172,7 +172,7 @@ defined in OLE class.
      xlExcel4MacroSheet = 3
      xlWorksheet = -4167
 
---- visible  #-> true | false
+--- visible -> bool
 #@todo
 
 Returns true if the OLE class is public.
@@ -199,7 +199,7 @@ object. If it is not found, then returns nil.
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
    puts tobj.ole_typelib # => 'Microsoft Excel 9.0 Object Library'
 
---- visible?  #-> true | false
+--- visible? -> bool
 #@todo
 
 Returns true if the OLE class is public.

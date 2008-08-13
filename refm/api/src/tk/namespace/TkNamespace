@@ -33,7 +33,7 @@ extend Tk
 --- ensemble_create(*keys)
 #@todo
 
---- ensemble_configure(cmd, slot, value = Tk::None
+--- ensemble_configure(cmd, slot, value = Tk::None)
 #@todo
 
 --- ensemble_configinfo(cmd, slot = nil))

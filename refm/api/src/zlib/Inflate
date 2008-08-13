@@ -58,7 +58,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
   inz = Zlib::Inflate.new
   p inz.inflate(cstr) #=> "hoge fuga end"
 
---- << string -> self
+--- <<(string) -> self
 
 [[m:Zlib::Inflate#inflate]] と同じように string を
 展開ストリームに入力しますが、Zlib::Inflate オブジェクト

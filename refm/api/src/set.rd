@@ -277,7 +277,7 @@ proper_subset? は、2 つの集合が等しい場合には false を返します。
 @see [[m:Enumerable#collect]]
 
 --- add(o) -> self
---- << o -> self
+--- <<(o) -> self
 --- add?(o) -> self | nil
 
 集合にオブジェクト o を加えます。

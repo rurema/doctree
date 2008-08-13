@@ -6,7 +6,7 @@ include TkMenuSpec
 
 == Class Methods
 
---- new(parent = nil, spec = nil, options = nil
+--- new(parent = nil, spec = nil, options = nil)
 #@todo
 
 == Instance Methods

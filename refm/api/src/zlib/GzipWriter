@@ -172,11 +172,11 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
   #=> 3
   ...
 
---- << str
+--- <<(str)
 --- putc(ch)
---- puts(obj...)
---- print(arg...)
---- printf(format, arg...)
+--- puts(*strs)
+--- print(*strs)
+--- printf(format, *args)
 --- write(str)
 
 IO クラスの同名メソッドと同じです。詳しくは

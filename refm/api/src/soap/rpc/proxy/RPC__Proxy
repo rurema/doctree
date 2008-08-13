@@ -59,7 +59,7 @@
 --- set_wiredump_file_base(wiredump_file_base)
 #@todo
 
---- test_loopback_response)
+--- test_loopback_response
 #@todo
 
 --- add_rpc_operation(qname, soapaction, name, param_def, opt = {})

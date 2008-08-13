@@ -50,7 +50,7 @@ include TkComm
 --- iconify(ex = true)
 #@todo
 
---- iconmaskbmp = nil)
+--- iconmaskbmp(bmp = nil)
 #@todo
 
 --- iconname(name = nil)

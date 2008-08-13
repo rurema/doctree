@@ -9,7 +9,7 @@ include TkItemConfigMethod
 --- tag_cget(tagOrId, option)
 #@todo
 
---- tag_configure(tagOrId, slot, value = Tk::None
+--- tag_configure(tagOrId, slot, value = Tk::None)
 #@todo
 
 --- tag_configinfo(tagOrId, slot = nil)

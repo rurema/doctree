@@ -23,8 +23,8 @@ contentを指定する必要があります．
 
 == Instance Methods
 
---- hour.content
---- hour.content=()
+--- content
+--- content=()
 #@todo
 
 = class RSS::Maker::RSS09::Channel::SkipHours::Hour < RSS::Maker::ChannelBase::SkipHoursBase::HourBase

@@ -55,7 +55,8 @@ path に関する File::Stat オブジェクトを生成して返します。
 
 == Instance Methods
 
---- <=>(o) Fixnum | nil
+--- <=>(o) -> Fixnum | nil
+
 ファイルの最終更新時刻を比較します。self が other よりも
 新しければ正の数を、等しければ 0 を古ければ負の数を返します。
 比較できない場合はnilを返します

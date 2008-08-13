@@ -94,7 +94,7 @@ Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
   dez = Zlib::Deflate.new
   p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
 
---- << string -> self
+--- <<(string) -> self
 
 [[m:Zlib::Deflate#deflate]] と同じように string を
 圧縮ストリームに入力しますが、Zlib::Deflate オブジェクト

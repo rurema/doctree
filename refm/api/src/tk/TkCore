@@ -211,7 +211,7 @@ include TkComm
 --- scaling_displayof(win, scale=nil)
 #@todo
 
---- set_eventloop_ticktimer_tick)
+--- set_eventloop_ticktimer_tick
 #@todo
 
 --- set_eventloop_weight(loop_max, no_event_tick)

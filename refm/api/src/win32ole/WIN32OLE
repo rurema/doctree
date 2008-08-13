@@ -17,21 +17,21 @@ object on host.
 
 #@since 1.9.0
 
---- create_guid
+--- create_guid -> String
 #@todo
 
 Creates GUID.
 
-   WIN32OLE.create_guid # => {1CB530F1-F6B1-404D-BCE6-1959BF91F4A8}
+   WIN32OLE.create_guid   # => "{1CB530F1-F6B1-404D-BCE6-1959BF91F4A8}"
 
---- locale -> locale id.
+--- locale -> Integer
 #@todo
 
 Returns current locale id (lcid). The default locale is LOCALE_SYSTEM_DEFAULT.
 
    lcid = WIN32OLE.locale
 
---- locale = lcid
+--- locale=(lcid)
 #@todo
 
 Sets current locale id (lcid).
@@ -46,16 +46,16 @@ Sets current locale id (lcid).
 
 Returns current codepage.
 
-   WIN32OLE.codepage # => WIN32OLE::CP_ACP
+   WIN32OLE.codepage   # => WIN32OLE::CP_ACP
 
---- codepage=(CP)
+--- codepage=(cp)
 #@todo
 
 Sets current codepage.
 
    WIN32OLE.codepage = WIN32OLE::CP_UTF8
 
---- connect(ole) --> aWIN32OLE
+--- connect(ole) -> WIN32OLE
 #@todo
 
 Returns running OLE Automation object or WIN32OLE object from
@@ -102,7 +102,7 @@ then returns OLE Automation object on host.
     WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
     WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
 
---- ole_free(aWIN32OLE) --> number
+--- ole_free(aWIN32OLE) -> number
 #@todo
 
 Invokes Release method of Dispatch interface of WIN32OLE object.
@@ -110,14 +110,14 @@ You should not use this method because this method exists only
 for debugging WIN32OLE. The return value is reference counter
 of OLE object.
 
---- ole_reference_count(aWIN32OLE) --> number
+--- ole_reference_count(aWIN32OLE) -> number
 #@todo
 
 Returns reference counter of Dispatch interface of WIN32OLE object.
 You should not use this method because this method exists only
 for debugging WIN32OLE.
 
---- ole_show_help(obj [,helpcontext])
+--- ole_show_help(obj, helpcontext = nil)
 #@todo
 
 Displays helpfile. The 1st argument specifies WIN32OLE_TYPE object
