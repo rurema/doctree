@@ -13,7 +13,7 @@ Gem パッケージの証明書や署名の設定を管理するためのライブラリです。
       -C, --certificate CERT           --sign で使用する証明書を指定します
       -K, --private-key KEY            --sign で使用する秘密鍵を指定します
       -s, --sign NEWCERT               証明書に秘密鍵で署名します
-#@include(cmmon_options)
+#@include(common_options)
     Summary:
       Manage RubyGems certificates and signing settings
 
