@@ -1382,7 +1382,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Integer("0b10")     #=> 2
     p Integer(" \n10\t ") #=> 10 # 空白類は無視される
     p Integer("hoge")     # `Integer': invalid value for Integer: "hoge" (ArgumentError)
-    p Integer("")         # `Integer': invalid value for Inter: "" (ArgumentError)
+    p Integer("")         # `Integer': invalid value for Integer: "" (ArgumentError)
 #@end
 
 @see [[m:String#hex]],[[m:String#oct]],[[m:String#to_i]],[[c:Integer]]
