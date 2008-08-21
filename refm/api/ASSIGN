@@ -114,7 +114,7 @@ curses
 date                            tadf            almost done
 date2                           tadf            almost done
 dbm                             okkez           done
-debug
+debug                           snoozer05
 delegate                        snoozer05       done
 digest                          kouji
 digest/bubblebabble
@@ -154,7 +154,7 @@ importenv                       mukai           done
 io/nonblock
 io/wait
 ipaddr                          okkez           done
-irb
+irb                             snoozer05
 jcode
 json
 kconv
