@@ -350,8 +350,8 @@ str が "string" という内容の文字列でありさえすれば常に true を返します。
 --- concat(other) -> self
 
 self に文字列 other を破壊的に連結します。
-other が 0 から 255 の範囲の [[c:Fixnum]] である場合は
-その 1 バイトを末尾に追加します。
+other が 0 から 255 のまでの整数である場合は
+その 1 バイトを末尾に追加します (つまり、整数が示す ASCII コードの文字が追加されます)。
 
 self を返します。
 
@@ -362,8 +362,13 @@ self を返します。
     str = "string"
     str.concat "XXX"
     p str    # => "stringXXX"
+
     str << "YYY"
     p str    # => "stringXXXYYY"
+
+    str << 56  # 文字AのASCIIコード
+    p str    # => "stringXXXYYYA"
+
 
 --- =~(other) -> Integer
 
