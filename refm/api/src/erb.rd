@@ -130,11 +130,7 @@ trim_mode に指定できる値は次の通りです。
 
 --- new(eruby_script, safe_level=nil, trim_mode=nil, eoutvar='_erbout') -> ERB
 
-ERBオブジェクトを生成して返します。
-
-eruby_script から ERB を生成します。eval 時の $SAFE、trim_mode(後述)、
-eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
-普通、変更する必要はありません。)を指定できます。
+eRubyスクリプト から ERB オブジェクトを生成して返します。
 
 @param eruby_script eRubyスクリプト
 
@@ -142,7 +138,7 @@ eoutvar(eRuby スクリプトの中でさらに ERB を使うときに変更します。
 
 @param trim_mode 整形の挙動を変更するオプション
 
-@param eoutvar eRubyスクリプトの中で出力をためていく変数
+@param eoutvar eRubyスクリプトの中で出力をためていく変数。eRuby スクリプトの中でさらに ERB を使うときに変更します。通常は指定する必要はありません。
 
 --- version -> String
 
