@@ -146,7 +146,7 @@ erb.rbのリビジョン情報を返します。
 
 == Instance Methods
 
---- run(b=TOPLEVEL_BINDING) -> String
+--- run(b=TOPLEVEL_BINDING) -> nil
 
 ERB を b の binding で実行し、結果を標準出力へ印字します。
 
