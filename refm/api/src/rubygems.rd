@@ -102,6 +102,25 @@ Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
   * GEM_PATH Gem のサーチパス
   * $HOME/.gemrc
 
+環境変数 GEM_HOME, GEM_PATH を設定する事によって Gem コマンドの動作を変更することができます。
+また、ホームディレクトリに .gemrc という YAML フォーマットで書かれたファイルを置くことでも
+動作を変更することができます。
+
+例:
+
+  --- 
+  :backtrace: false
+  :benchmark: false
+  :bulk_threshold: 1000
+  :sources: 
+  - http://gems.rubyforge.org
+  :update_sources: true
+  :verbose: true
+  gemhome: /home/hoge/.gems
+  gempath: 
+  - /usr/local/lib/ruby/gems/1.9
+
+
 === 参考
 : Rubyist Magazine - シリーズ パッケージマネジメント 【第 1 回】 RubyGems (1)
   [[url:http://jp.rubyist.net/magazine/?0006-PackageManagement]]
