@@ -205,6 +205,8 @@ locale がスクリプトエンコーディングになります。
 またスクリプトエンコーディングが US-ASCII である場合、7bit クリーンではないバックスラッシュ記法で
 表記されたリテラルのエンコーディングは ASCII-8BIT になります。
 
+さらに Unicode エスケープ (\uXXXX) を含む場合、リテラルのエンコーディングは UTF-8 になります。
+
 例: 
 
   # coding: us-ascii
@@ -216,7 +218,9 @@ locale がスクリプトエンコーディングになります。
   # coding: euc-jp
   p __ENCODING__        #=> #<Encoding:EUC-JP>
   p "abc".encoding      #=> #<Encoding:US-ASCII>  (7bit クリーンなので US-ASCII になる)
-  p "\x80".encoding     #=> #<Encoding:EUC-JP>    
+  p "\x80".encoding     #=> #<Encoding:EUC-JP>
+  p "\u3042".encoding   #=> #<Encoding:UTF-8>  (Unicode エスケープがあるので UTF-8 になる)
+  p "\x80\u3042".encoding #=> エラー
 
 
 #@end
