@@ -100,13 +100,13 @@ ASCII 互換エンコーディングをもつ 7bit クリーンな文字列は、
 
 例:
 
-  s = "abc"
-  a = s.encode("EUC-JP")
-  b = s.encode("UTF-8")
-  p a == b                           #=> true
-  p a + b                            #=> "abcabc"
-  p "あ" + a                         #=> "あabc"
-  p "あ" + b                         #=> "あabc"
+  a = "abc"
+  e = a.encode("EUC-JP")
+  u = a.encode("UTF-8")
+  p e == u                           #=> true
+  p e + u                            #=> "abcabc"
+  p "あ" + e                         #=> "あabc"
+  p "あ" + u                         #=> "あabc"
 
 ====[a:binary] バイナリの取扱い
 
