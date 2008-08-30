@@ -1,11 +1,11 @@
 = class Matrix < Object
-#@#[2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#@#[2002-04-03]  by [[unknown:����|URL:mailto:sugawah@attglobal.net]]
 
-(数[[c:Numeric]]を要素とする)行列を扱うクラス
+��[[c:Numeric]]�����ǤȤ������򰷤����饹�Ǥ���
 
-行列
+����
 
-m×n個の数a(i,j)を
+m��n�Ĥο�a(i,j)��
 
   [ a(0,0) a(0,1) a(0,2)  a(0,3) ... a(0,n-1)   ]
   [ a(1,0) a(1,1) a(1,2)  a(1,3) ... a(1,n-1)   ]
@@ -13,35 +13,35 @@ m×n個の数a(i,j)を
   [                                             ]
   [ a(m-1,0)                         a(m-1,n-1) ]
 
-のように、縦横の表にあらわしたものを(m,n)型の行列という。
-m=nの行列をm次の正方行列(square matrix)という。
+�Τ褦�ˡ��Ĳ���ɽ�ˤ���路����Τ�(m,n)���ι���Ȥ�����
+m=n�ι����m������������(square matrix)�Ȥ�����
 
-上からi番目の横の数の並びを第i行(the i-th row)、
-左からj番目の縦の数の並びを第j列(the j-th column)という。
+�夫��i���ܤβ��ο����¤Ӥ���i��(the i-th row)��
+������j���ܤνĤο����¤Ӥ���j��(the j-th column)�Ȥ�����
 
-(m,n)型行列は、
-大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできるし、
-大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできる。
+(m,n)������ϡ�
+�礭��n�ι�(��)�٥��ȥ��m�ĽĤ��¤٤���ΤȤߤʤ����Ȥ�Ǥ��뤷��
+�礭��m����(��)�٥��ȥ��n�Ĳ����¤٤���ΤȤߤʤ����Ȥ�Ǥ��롣
 
-第i行、第j列にある数a(i,j)を(i,j)要素(the (i,j)-th element)という。
+��i�ԡ���j��ˤ����a(i,j)��(i,j)����(the (i,j)-th element)�Ȥ�����
 
-i=jの要素a(i,j)を対角要素(diagonal element)、
-それ以外の要素を非対角要素(nondiagonal element)という。
+i=j������a(i,j)���г�����(diagonal element)��
+����ʳ������Ǥ����г�����(nondiagonal element)�Ȥ�����
 
 
-#@#使い方 Usage
+#@#�Ȥ��� Usage
 
-#@# [[c:Matrix]]クラスを使うためには、require 'matrix'する必要がある。
+#@# [[c:Matrix]]���饹��Ȥ�����ˤϡ�require 'matrix'����ɬ�פ����롣
 
 #@#  require 'matrix'
 
-=== Complex クラスとの併用
+=== Complex ���饹�Ȥ�ʻ��
 
-require 'complex'することによって、
-Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
-多くのメソッドは、この拡張されたMatrixクラスでも、期待通りに動作する。
+require 'complex'���뤳�Ȥˤ�äơ�
+Matrix���֥������Ȥ����Ǥ�[[c:Complex]]���饹�˳�ĥ����롣
+¿���Υ᥽�åɤϡ����γ�ĥ���줿Matrix���饹�Ǥ⡢�����̤��ư��롣
 
-次の例は、各要素を共役複素数に置換するメソッド([[m:Matrix#conjugate]])である。
+������ϡ������Ǥ���ʣ�ǿ����ִ�����᥽�å�([[m:Matrix#conjugate]])�Ǥ��롣
 
   require 'matrix'
   require 'complex'
@@ -56,12 +56,12 @@ Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
 == Class Methods
 --- [](rows) -> Matrix
 
-rowsを要素とする行列を生成します。
-配列を行列の行成分として行列を生成します。
+rows�����ǤȤ��������������ޤ���
+��������ι���ʬ�Ȥ��ƹ�����������ޤ���
 
-@param rows 行列の要素を配列の配列として渡します。
+@param rows ��������Ǥ����������Ȥ����Ϥ��ޤ���
 
-例:
+��:
 
   m = Matrix[[11, 12], [21, 22]]
   p m  #=> Matrix[[11, 12], [21, 22]]
@@ -70,32 +70,32 @@ rowsを要素とする行列を生成します。
 
 --- rows(rows, copy = true) -> Matrix
 
-引数 rows を要素とする行列を生成します。
-引数 copy が偽(false)ならば、rows の複製を行いません。
+���� rows �����ǤȤ��������������ޤ���
+���� copy ����(false)�ʤ�С�rows ��ʣ����Ԥ��ޤ���
 
-例:
+��:
 
   require 'matrix'
 
   a1 = [1, 2, 3]
   a2 = [10, 15, 20]
 
-  m = Matrix.rows([a1, a2], false) # 配列を複製せずに行列を生成
+  m = Matrix.rows([a1, a2], false) # �����ʣ�������˹��������
   p m #=> Matrix[[1, 2, 3], [10, 15, 20]]
-  a2[1] = 1000 # 配列のデータを変更
+  a2[1] = 1000 # ����Υǡ������ѹ�
   p m #=> Matrix[[1, 2, 3], [10, 1000, 20]]
 
 --- columns(columns) -> Matrix
 
-引数 columns を列ベクトルの集合とする行列を生成します。
+���� columns ����٥��ȥ�ν���Ȥ��������������ޤ���
 
-@param columns 配列の配列を渡します。
+@param columns �����������Ϥ��ޤ���
 
-注意:
+����:
 
-[[m:Matrix.rows]] との違いは引数として渡す配列の配列を列ベクトルの配列とみなして行列を生成します。
+[[m:Matrix.rows]] �Ȥΰ㤤�ϰ����Ȥ����Ϥ�������������٥��ȥ������Ȥߤʤ��ƹ�����������ޤ���
 
-例:
+��:
 
   require 'matrix'
 
@@ -103,32 +103,32 @@ rowsを要素とする行列を生成します。
   a2 = [4, 5, 6]
   a3 = [-1, -2, -3]
 
-  # 配列を行ベクトルとして生成
+  # �����ԥ٥��ȥ�Ȥ�������
   m = Matrix.rows([a1, a2, a3], true)
   p m #=> Matrix[[1, 2, 3], [4, 5, 6], [-1, -2, -3]]
-      # 行列としてのイメージ =>  [ 1,  2,  3]
+      # ����Ȥ��ƤΥ��᡼�� =>  [ 1,  2,  3]
       #                          [ 4,  5,  6]
       #                          [-1, -2, -3]
 
-  # 配列を列ベクトルとして生成
+  # �������٥��ȥ�Ȥ�������
   m = Matrix.columns([a1, a2, a3])
   p m #=> Matrix[[1, 4, -1], [2, 5, -2], [3, 6, -3]]
-      # 行列としてのイメージ =>  [1, 4, -1]
+      # ����Ȥ��ƤΥ��᡼�� =>  [1, 4, -1]
       #                          [2, 5, -2]
       #                          [3, 6, -3]
 
 
 --- diagonal(values) -> Matrix
 
-対角要素がvalues(オブジェクトの並び)で、非対角要素が全て0であるような
-正方行列を生成します。
+�г����Ǥ�values(���֥������Ȥ��¤�)�ǡ����г����Ǥ�����0�Ǥ���褦��
+����������������ޤ���
 
-@param values 行列の対角要素とするオブジェクトを指定します。
+@param values ������г����ǤȤ��륪�֥������Ȥ���ꤷ�ޤ���
 
-注意:
-  valuesに一次元Arrayを1個指定すると、そのArrayを唯一の要素とした1×1の行列が生成されます。
+����:
+  values�˰켡��Array��1�Ļ��ꤹ��ȡ�����Array��ͣ������ǤȤ���1��1�ι�����������ޤ���
 
-例:
+��:
   require 'matrix'
 
   m = Matrix.diagonal(1, 2, 3)
@@ -140,12 +140,12 @@ rowsを要素とする行列を生成します。
 
 --- scalar(n, value) -> Matrix
 
-対角要素が全てvalue(数)で、非対角要素が全て0であるようなn次の正方行列を生成します。
+�г����Ǥ�����value(��)�ǡ����г����Ǥ�����0�Ǥ���褦��n��������������������ޤ���
 
-@param n     生成する行列の次元
-@param value 生成する行列の対角要素の値
+@param n     �����������μ���
+@param value �������������г����Ǥ���
 
-例:
+��:
   require 'matrix'
 
   m = Matrix.scalar(3, 2.5)
@@ -155,30 +155,30 @@ rowsを要素とする行列を生成します。
 --- unit(n) -> Matrix
 --- I(n) -> Matrix
 
-@param n 単位行列の次元
+@param n ñ�̹���μ���
 
-n次の単位行列を生成します。
+n����ñ�̹�����������ޤ���
 
-単位行列とは、対角要素が全て1で非対角要素が全て0であるような行列のことです。
+ñ�̹���Ȥϡ��г����Ǥ�����1�����г����Ǥ�����0�Ǥ���褦�ʹ���Τ��ȤǤ���
 
 --- zero(n) -> Matrix
 
-n次の零行列を生成します。
-零行列とは、要素が全て0の行列です。
+n������������������ޤ���
+������Ȥϡ����Ǥ�����0�ι���Ǥ���
 
-@param n 生成する行列の次元
+@param n �����������μ���
 
 --- row_vector(row) -> Matrix
 
-要素がrowの(1,n)型の行列(行ベクトル)を生成します。
+���Ǥ�row��(1,n)���ι���(�ԥ٥��ȥ�)���������ޤ���
 
-@param row (1,n)型の行列として生成する[[c:Vector]] [[c:Array]] オブジェクト
+@param row (1,n)���ι���Ȥ�����������[[c:Vector]] [[c:Array]] ���֥�������
 
 --- column_vector(column) -> Matrix
 
-要素がcolumnの(n,1)型の行列(列ベクトル)を生成します。
+���Ǥ�column��(n,1)���ι���(��٥��ȥ�)���������ޤ���
 
-@param column (n,1)型の行列として生成する[[c:Vector]] [[c:Array]] オブジェクト
+@param column (n,1)���ι���Ȥ�����������[[c:Vector]] [[c:Array]] ���֥�������
 
 == Instance Methods
 --- [](i, j) -> ()
@@ -187,16 +187,16 @@ n次の零行列を生成します。
 --- component(i, j) -> ()
 #@end
 
-(i,j)要素を返します。
+(i,j)���Ǥ��֤��ޤ���
 
-@param i 要素の行成分を0オリジンで指定します。
-@param j 要素の列成分を0オリジンで指定します。
+@param i ���Ǥι���ʬ��0���ꥸ��ǻ��ꤷ�ޤ���
+@param j ���Ǥ�����ʬ��0���ꥸ��ǻ��ꤷ�ޤ���
 
-注:
-行成分に[[m:Matrix#row_size]]より大きな値を指定した場合には例外が発生します。
-列成分に[[m:Matrix#column_size]]より大きな値を指定した場合にはnilを返します。
+��:
+����ʬ��[[m:Matrix#row_size]]����礭���ͤ���ꤷ�����ˤ��㳰��ȯ�����ޤ���
+����ʬ��[[m:Matrix#column_size]]����礭���ͤ���ꤷ�����ˤ�nil���֤��ޤ���
 
-例:
+��:
   a1 = [1, 2, 3]
   a2 = [10, 15, 20]
   a3 = [-1, 2, 1.5]
@@ -209,25 +209,25 @@ n次の零行列を生成します。
 
 --- row_size -> Fixnum
 
-行の大きさを返します。
+�Ԥ��礭�����֤��ޤ���
 
 --- column_size -> Fixnum
 
-列の大きさを返します。
+����礭�����֤��ޤ���
 
 --- minor(from_row,row_size,from_col,col_size)
 --- minor(from_row..to_row,from_col..to_col)
 #@todo
 
-部分行列を返す。たたし、パラメータは、次の方法で指定する。
-  (1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
-  (2) 開始行番号..終了行番号, 開始列番号..終了列番号
+��ʬ������֤������������ѥ�᡼���ϡ�������ˡ�ǻ��ꤹ�롣
+  (1) ���Ϲ��ֹ�, �Ԥ��礭��, �������ֹ�, ����礭��
+  (2) ���Ϲ��ֹ�..��λ���ֹ�, �������ֹ�..��λ���ֹ�
 
 #@#--- []=(i,j,x)
-#@#(i,j)要素をxに変更する。
+#@#(i,j)���Ǥ�x���ѹ����롣
 #@#
-#@#このメソッドは、matrix.rbに定義されていない。
-#@#以下に、その定義と使用例を示す。
+#@#���Υ᥽�åɤϡ�matrix.rb���������Ƥ��ʤ���
+#@#�ʲ��ˡ���������Ȼ�����򼨤���
 #@#
 #@#  require 'matrix'
 #@#
@@ -243,32 +243,31 @@ n次の零行列を生成します。
 
 --- *(m) -> Matrix
 
-行列mを右から乗じた行列を返します。
+����m�򱦤���褸��������֤��ޤ���
 
-@param m 右から乗算する行列。乗算が定義可能な行列を渡します。
+@param m ������軻������󡣾軻�������ǽ�ʹ�����Ϥ��ޤ���
 
 --- +(m) -> Matrix
+
+����m��û�����������֤��ޤ���
+
+@param m �û�������󡣲û���ǽ�ʹ�����Ϥ��ޤ���
+
+--- -(m) -> Matrix
 #@todo
 
-行列mを加算した行列を返します。
-
-@param m 加算する行列。加算可能な行列を渡します。
-
---- -(m)
-#@todo
-
-行列mを減じた行列を返す。
+����m�򸺤���������֤���
 
 --- /(m)
 #@todo
 
-行列mの逆行列を右から乗じた行列を返す。
+����m�εչ���򱦤���褸��������֤���
 
 --- inverse
 --- inv
 #@todo
 
-逆行列を返す。
+�չ�����֤���
 
 --- **(n)
 #@#--- power(n)
@@ -276,21 +275,21 @@ n次の零行列を生成します。
 #@#--- power(m)
 #@todo
 
-スカラーnに対するべき乗を返す。
+�����顼n���Ф���٤�����֤���
 
-行列mに対するべき乗を返す。
+����m���Ф���٤�����֤���
 
 --- determinant
 --- det
 #@todo
 
-行列式 (determinant) を返す。
+���� (determinant) ���֤���
 
 #@if (version < "1.9.0")
-注意:
+����:
 
-全ての要素が整数である場合、正しい答を返さないかも知れません。
-その場合は [[lib:mathn]] を require して下さい。
+���Ƥ����Ǥ������Ǥ����硢�����������֤��ʤ������Τ�ޤ���
+���ξ��� [[lib:mathn]] �� require ���Ʋ�������
 
  p Matrix[[2, 1], [-1, 2]].det #=> 6
  
@@ -304,119 +303,119 @@ n次の零行列を生成します。
 --- determinant_e
 --- det_e
 
-行列式 (determinant) を返します。
+���� (determinant) ���֤��ޤ���
 #@end
 
 --- rank
 #@todo
 
-階数 (rank) を返す。
+���� (rank) ���֤���
 
 #@if (version >= "1.9.0")
 --- rank_e
 
-階数 (rank) を返します。
+���� (rank) ���֤��ޤ���
 #@end
 
 --- trace
 --- tr
 #@todo
 
-トレース (trace) を返す。
-行列のトレース (trace) とは、対角要素の和である。
+�ȥ졼�� (trace) ���֤���
+����Υȥ졼�� (trace) �Ȥϡ��г����Ǥ��¤Ǥ��롣
 
 --- transpose
 --- t
 #@todo
 
-転置行列 (transpose matrix) を返す。
-冒頭に掲げた行列に対して、 a(j,i) を (i,j) 要素とする (n,m) 型行列を転置行列という。
+ž�ֹ��� (transpose matrix) ���֤���
+��Ƭ�˷Ǥ���������Ф��ơ� a(j,i) �� (i,j) ���ǤȤ��� (n,m) �������ž�ֹ���Ȥ�����
 
 --- row(i)
 #@todo
 
-第i番目の行ベクトルを返す。
-ブロックが与えられたときは、各行ベクトルについて、ブロックを繰り返す。
+��i���ܤιԥ٥��ȥ���֤���
+�֥��å���Ϳ����줿�Ȥ��ϡ��ƹԥ٥��ȥ�ˤĤ��ơ��֥��å��򷫤��֤���
 
 --- column(j)
 #@todo
 
-第j番目の列ベクトルを返す。
-ブロックが与えられたときは、各列ベクトルについて、ブロックを繰り返す。
+��j���ܤ���٥��ȥ���֤���
+�֥��å���Ϳ����줿�Ȥ��ϡ�����٥��ȥ�ˤĤ��ơ��֥��å��򷫤��֤���
 
 --- collect {|x| ... }
 --- map {|x| ... }
 #@todo
 
-行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成する。
+����γ����Ǥ��Ф��ƥ֥��å���Ŭ�Ѥ򷫤��֤�����̤����ǤȤ��ƻ��Ĺ�����������롣
 
 --- regular?
 #@todo
 
-正則(regular)なら真を返す。
+��§(regular)�ʤ鿿���֤���
 
-行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することである。
+������§�Ǥ���Ȥϡ���������Ǥ��ꡢ���ġ����εչ���¸�ߤ��뤳�ȤǤ��롣
 
 --- singular?
 #@todo
 
-特異(singular)である、すなわち、正則でないなら真を返す。
+�ð�(singular)�Ǥ��롢���ʤ������§�Ǥʤ��ʤ鿿���֤���
 
 --- square?
 #@todo
 
-正方行列であるなら、真を返す。
+��������Ǥ���ʤ顢�����֤���
 
 --- ==(other)
 --- eql?(other)
 #@todo
 
-自分自身と other を比較します。
+��ʬ���Ȥ� other ����Ӥ��ޤ���
 
 --- row_vectors
 #@todo
 
-列ベクトルの配列を返す。
+��٥��ȥ��������֤���
 
 --- column_vectors
 #@todo
 
-行ベクトルの配列を返す。
+�ԥ٥��ȥ��������֤���
 
 --- to_a
 #@todo
 
-[[c:Array]]に変換する。
-結果は、ネストした配列(配列の配列)となる。
+[[c:Array]]���Ѵ����롣
+��̤ϡ��ͥ��Ȥ�������(���������)�Ȥʤ롣
 
 #@#--- to_f
 #@todo
 #@#
-#@#各要素を浮動小数点数 [[c:Float]] に変換する。
+#@#�����Ǥ���ư�������� [[c:Float]] ���Ѵ����롣
 
 #@#--- to_i
 #@todo
 #@#
-#@#各要素を整数 [[c:Integer]] に変換する。
+#@#�����Ǥ����� [[c:Integer]] ���Ѵ����롣
 
 #@#--- to_r
 #@todo
 #@#
-#@#各要素を有理数 [[c:Rational]] に変換する。
+#@#�����Ǥ�ͭ���� [[c:Rational]] ���Ѵ����롣
 
 #@if (version >= "1.9.0")
 
 --- elements_to_f
 #@todo
-各要素を浮動小数点数 [[c:Float]] に変換した行列を返します。
+�����Ǥ���ư�������� [[c:Float]] ���Ѵ�����������֤��ޤ���
 
 --- elements_to_i
 #@todo
-各要素を整数 [[c:Integer]] に変換した行列を返します。
+�����Ǥ����� [[c:Integer]] ���Ѵ�����������֤��ޤ���
 
 --- elements_to_r
 #@todo
-各要素を有理数 [[c:Rational]] に変換した行列を返します。
+�����Ǥ�ͭ���� [[c:Rational]] ���Ѵ�����������֤��ޤ���
 
 #@end
 
@@ -425,7 +424,7 @@ n次の零行列を生成します。
 #@# 
 #@# This method is used by the other methods that create matrices,
 #@# and is of no use to general users.
-#@# bc-methods -r matrix Matrix で見つからなかった。okkez
+#@# bc-methods -r matrix Matrix �Ǹ��Ĥ���ʤ��ä���okkez
 
 #@# bc-rdoc: detected missing name: coerce
 --- coerce(other)
@@ -447,19 +446,19 @@ Not for public consumption?
 
 --- hash
 #@#todo
-Hash値を返します。
+Hash�ͤ��֤��ޤ���
 
 --- to_s
 #@todo
-行列を文字列化し、その文字列を返します。
+�����ʸ���󲽤�������ʸ������֤��ޤ���
 
 --- inspect
 #@todo
-自分自身を見やすい形式に文字列化し、その文字列を返します。
+��ʬ���Ȥ򸫤䤹��������ʸ���󲽤�������ʸ������֤��ޤ���
 
 --- clone
 #@todo
-自分自身のコピーを返します。
+��ʬ���ȤΥ��ԡ����֤��ޤ���
 
 
 = class ExceptionForMatrix::ErrDimensionMismatch < StandardError
@@ -468,13 +467,13 @@ Hash値を返します。
 
 #@#== ChangeLog
 #@#
-#@#*[2004-04-23] by [[unknown:坂野|URL:mailto:mas@star.le.ac.uk]]
-#@#    * Matrix.diagonalに注意書を加える。
-#@#*[2002-04-03] by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
-#@#    * 使い方の節を追加
-#@#    * Working with Complex classの節を追加
-#@#    * []=メソッドを追加
-#@#    * イテレータ関係を同じ節にまとめた
-#@#    * 誤りを訂正し、説明を直した。
-#@#    * 他クラスへのリンクを追加 Numeric, Vector
-#@#*[2002-04-02] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
+#@#*[2004-04-23] by [[unknown:����|URL:mailto:mas@star.le.ac.uk]]
+#@#    * Matrix.diagonal�����ս��ä��롣
+#@#*[2002-04-03] by [[unknown:����|URL:mailto:sugawah@attglobal.net]]
+#@#    * �Ȥ���������ɲ�
+#@#    * Working with Complex class������ɲ�
+#@#    * []=�᥽�åɤ��ɲ�
+#@#    * ���ƥ졼���ط���Ʊ����ˤޤȤ᤿
+#@#    * �������������������ľ������
+#@#    * ¾���饹�ؤΥ�󥯤��ɲ� Numeric, Vector
+#@#*[2002-04-02] ���� by [[unknown:����|URL:mailto:sugawah@attglobal.net]]
