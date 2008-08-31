@@ -179,20 +179,33 @@ tsort_each は nil を返します。
     }
   }
 
-  # 出力例
+  # 出力
   #=> 2 -> 3
   #=> 1 -> 2
   #=> 1 -> 3
 
 --- strongly_connected_components -> Array
-#@todo
 
 強連結成分の集まりを配列の配列として返します。
 この配列は子から親に向かってソートされています。
 各要素は強連結成分を表す配列です。
 
+  require 'tsort'
+
+  class Hash
+    include TSort
+    alias tsort_each_node each_key
+    def tsort_each_child(node, &block)
+      fetch(node).each(&block)
+    end
+  end
+
+  non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+
+  p non_sort.strongly_connected_components
+  #=> [[4], [2, 3], [1]]
+
 --- each_strongly_connected_component {|nodes| ...} -> nil
-#@todo
 
 strongly_connected_components メソッドのイテレータ版です。
 obj.each_strongly_connected_component は
@@ -202,8 +215,29 @@ obj.strongly_connected_components.each に似ていますが、
 
 each_strongly_connected_component は nil を返します。
 
+使用例
+  require 'tsort'
+
+  class Hash
+    include TSort
+    alias tsort_each_node each_key
+    def tsort_each_child(node, &block)
+      fetch(node).each(&block)
+    end
+  end
+
+  non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+
+  non_sort.each_strongly_connected_component{|nodes|
+    p nodes
+  }
+
+  #出力
+  #=> [4]
+  #=> [2, 3]
+  #=> [1]
+
 --- each_strongly_connected_component_from(node) {|nodes| ...} -> ()
-#@todo
 
 node から到達可能な強連結成分についてのイテレータです。
 
@@ -211,6 +245,43 @@ node から到達可能な強連結成分についてのイテレータです。
 
 each_strongly_connected_component_from は
 tsort_each_node を呼びません。
+
+@param node ノードを指定します。
+
+  #例 到達可能なノードを表示する
+  require 'tsort'
+
+  class Hash
+    include TSort
+    alias tsort_each_node each_key
+    def tsort_each_child(node, &block)
+      fetch(node).each(&block)
+    end
+  end
+
+  non_sort = {1=>[2], 2=>[3, 4], 3=>[2], 4=>[]}
+
+  non_sort.each_strongly_connected_component{|nodes|
+    p nodes
+    nodes.each {|node|
+      non_sort.each_strongly_connected_component_from(node){|ns|
+        printf("%s -> %s\n", node, ns.join(","))
+      }
+    }
+  }
+
+  #出力
+  #=> [4]
+  #=> 4 -> 4
+  #=> [2, 3]
+  #=> 2 -> 4
+  #=> 2 -> 2,3
+  #=> 3 -> 4
+  #=> 3 -> 3,2
+  #=> [1]
+  #=> 1 -> 4
+  #=> 1 -> 2,3
+  #=> 1 -> 1
 
 --- tsort_each_node {|node| ...} -> ()
 
@@ -225,6 +296,8 @@ tsort_each_node is used to iterate for all nodes over a graph.
 TSort で拡張されるクラスで定義されていなければならないメソッドです。
 
 tsort_each_child is used to iterate for child nodes of node.
+
+@param node ノードを指定します。
 
 @raise NotImplementedError TSort で拡張されるクラスで定義されていない場合発生します。
 
