@@ -14,7 +14,6 @@
 
 --- parse(date, now = Time.now) -> Time
 --- parse(date, now = Time.now) {|year| year } -> Time
-#@todo
 
 #@since 1.9.0
 date を [[m:Date.#_parse]] によって
@@ -59,9 +58,8 @@ date を [[m:ParseDate.#parsedate]] によって
 
 従って [[m:Time.parse]] の失敗はチェックすべきです。
 
---- rfc2822(date)
---- rfc822(date)
-#@todo
+--- rfc2822(date) -> Time
+--- rfc822(date) -> Time
 
 [[RFC:2822]]で定義されているdate-timeとしてdateをパースして
 [[c:Time]]オブジェクトに変換します。
@@ -72,8 +70,27 @@ dateが[[RFC:2822]]に準拠していない、または
 [[c:Time]]クラスが指定された日時を表現できないときに[[c:ArgumentError]]が
 発生します。
 
---- httpdate(date)
-#@todo
+@param date [[RFC:2822]] で定義されるdate-time として文字列を指定します。
+
+@raise ArgumentError dateが[[RFC:2822]]に準拠していない、または 
+                     [[c:Time]]クラスが指定された日時を表現できないときに
+                     発生します。
+
+使用例
+  require 'time'
+
+  rfc2822_time = 'Sun, 31 Aug 2008 12:08:19 +0900'
+  t = Time.rfc2822(rfc2822_time)
+  p t.kind_of?(Time) #=> true
+  non_rfc2822_time = 'Sun 31 Aug 2008 12:08:19 +0900'
+
+  begin
+    p Time.rfc2822(non_rfc2822_time)
+  rescue ArgumentError => err
+    puts "format err: #{err}"
+  end
+
+--- httpdate(date) -> Time
 
 [[RFC:2616]]で定義されているHTTP-dateとしてdateをパースして
 [[c:Time]]オブジェクトに変換します。
@@ -82,9 +99,26 @@ dateが[[RFC:2616]]に準拠していない、または
 [[c:Time]]クラスが指定された日時を表現できないときに[[c:ArgumentError]]が
 発生します。
 
---- xmlschema(date)
---- iso8601(date)
-#@todo
+@param date [[RFC:2616]]で定義されているHTTP-dateとしてパースされる文字列を指定します。
+
+@raise ArgumentError dateが[[RFC:2616]]に準拠していない、または [[c:Time]]クラスが指定された日時を表現できないときに発生します。
+
+  require 'time'
+  rfc2616_time = 'Sun, 31 Aug 2008 12:34:56 GMT'
+
+  t = Time.httpdate(rfc2616_time)
+  p t.kind_of?(Time) #=> true
+
+  non_rfc2616_time = 'San, 31 Aug 2008 12:34:56 GMT'
+  begin
+    Time.httpdate(non_rfc2616_time)
+  rescue ArgumentError => err
+    puts err #=>  not RFC 2616 compliant date: "San, 31 Aug 2008 12:34:56 GMT"
+  end
+
+
+--- xmlschema(date) -> Time
+--- iso8601(date) -> Time
 
 XML Schema で定義されている dateTime として
 date をパースして [[c:Time]] オブジェクトに変換します。
@@ -93,11 +127,31 @@ date がISO 8601で定義されている形式に準拠していない、
 または [[c:Time]] クラスが指定された日時を表現できないときに
 [[c:ArgumentError]] が発生します。
 
+@param date XML Schema で定義されている dateTime として
+            パースされる文字列を指定します。
+
+@raise ArgumentError date がISO 8601で定義されている形式に準拠していない、
+                     または [[c:Time]] クラスが指定された日時を表現できないとき
+                     に発生します。
+使用例
+  require 'time'
+
+  iso8601_time = '2008-08-31T12:34:56+09:00'
+  t = Time.iso8601(iso8601_time)
+  p t #=> Sun Aug 31 03:34:56 UTC 2008
+  p t.kind_of?(Time) #=> true
+
+  begin
+    non_iso8601_time = '2008-08-31A12:34:56+09:00'
+    Time.iso8601(non_iso8601_time)
+  rescue ArgumentError => err
+    puts err #=> invalid date: "2008-08-31A12:34:56+09:00"
+  end
+
 == Instance Methods
 
---- rfc2822
---- rfc822
-#@todo
+--- rfc2822 -> String
+--- rfc822 -> String
 
 [[RFC:2822]] で定義されている date-time として表現される
 以下の形式の文字列を返します:
@@ -108,8 +162,14 @@ date がISO 8601で定義されている形式に準拠していない、
 
 self が UTC time の場合、zone は +0000 になります。
 
---- httpdate
-#@todo
+使用例
+  require 'time'
+
+  iso8601_time = '2008-08-31T12:34:56+09:00'
+  t = Time.iso8601(iso8601_time)
+  p t.rfc2822      #=> "Sun, 31 Aug 2008 03:34:56 -0000"
+
+--- httpdate -> String
 
 [[RFC:2616]]で定義されているHTTP-dateのrfc1123-dateとして
 表現される以下の形式の文字列を返します:
@@ -118,9 +178,16 @@ self が UTC time の場合、zone は +0000 になります。
 
 注意: 結果はいつも UTC (GMT) です。
 
---- xmlschema([fractional_seconds])
---- iso8601([fractional_seconds])
-#@todo
+使用例
+  require 'time'
+
+  iso8601_time = '2008-08-31T12:34:56+09:00'
+  t = Time.iso8601(iso8601_time)
+  p t.httpdate     #=> "Sun, 31 Aug 2008 03:34:56 GMT"
+
+
+--- xmlschema(fractional_seconds = 0) -> String
+--- iso8601(fractional_seconds = 0) -> String
 
 XML Schema で定義されている dateTime として
 表現される以下の形式の文字列を返します:
@@ -135,3 +202,15 @@ If self is a UTC time, Z is used as TZD.
 
 fractional_seconds は小数点以下の秒を指定します。
 fractional_seconds のデフォルト値は 0 です。
+
+@param fractional_seconds 小数点以下の秒の桁数を整数で指定します。
+                          省略した場合は0 となります。
+
+使用例
+  require 'time'
+
+  iso8601_time = '2008-08-31T12:34:56+09:00'
+  t = Time.iso8601(iso8601_time)
+  p t.xmlschema    #=> "2008-08-31T03:34:56Z"
+  p t.xmlschema(9) #=> "2008-08-31T03:34:56.000000000Z"
+
