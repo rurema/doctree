@@ -258,7 +258,7 @@ syslog
 tempfile                        kouya           done
 test/unit                       sheepman
 thread                          m-kawato
-thwait
+thwait                          kouya
 time                            kouya           done
 timeout                         kouya           done
 
