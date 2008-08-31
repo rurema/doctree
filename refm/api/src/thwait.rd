@@ -7,71 +7,195 @@ provides synchronization for multiple threads.
 
 == Class Methods
 
---- all_waits(thread1, ...)
-#@todo
+--- all_waits(*threads) -> ()
+--- all_waits(*threads){|thread| ...} -> ()
 
-waits until all of specified threads are terminated.
-if a block is supplied for the method, evaluates it for
-each thread termination.
+指定されたスレッドすべてが終了するまで待ちます。
+ブロックが与えられた場合、スレッド終了時にブロックを評価します。
 
-        require 'thwait'
+@param threads 終了するまでまつスレッドを一つもしくは複数指定します。
 
-        threads = []
-        5.times {|i|
-          threads << Thread.new { sleep 1; p Thread.current }
-        }
-        ThreadsWait.all_waits(*threads) {|th| p th }
-        => #<Thread:0x401a0ca8 run>
-           #<Thread:0x401a0d70 run>
-           #<Thread:0x401a1130 run>
-           #<Thread:0x401a13ec run>
-           #<Thread:0x401a17d4 run>
-           #<Thread:0x401a0ca8 dead>
-           #<Thread:0x401a0d70 dead>
-           #<Thread:0x401a1130 dead>
-           #<Thread:0x401a13ec dead>
-           #<Thread:0x401a17d4 dead>
+  require 'thwait'
 
---- new(thread1, ...)
-#@todo
+  threads = []
+  5.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
+  ThreadsWait.all_waits(*threads) {|th| printf("end %s\n", th.inspect) }
 
-creates synchronization object, specifying thread(s) to wait.
+  # 出力例
+  #=> #<Thread:0x21584 run>
+  #=> #<Thread:0x21610 run>
+  #=> #<Thread:0x2169c run>
+  #=> #<Thread:0x21728 run>
+  #=> #<Thread:0x214f8 run>
+  #=> end #<Thread:0x21584 dead>
+  #=> end #<Thread:0x21610 dead>
+  #=> end #<Thread:0x2169c dead>
+  #=> end #<Thread:0x21728 dead>
+  #=> end #<Thread:0x214f8 dead>
+
+--- new(*threads) -> ThreadsWait
+
+指定されたスレッドの終了をまつための、スレッド同期オブジェクトをつくります。
+
+@param threads 終了を待つスレッドを一つもしくは複数指定します。
+
+使用例
+  require 'thwait'
+
+  threads = []
+  5.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
+  
+  thall = ThreadsWait.new(*threads)
+  thall.all_waits{|th|
+    printf("end %s\n", th.inspect)
+  }
+  
+  # 出力例
+  #=> #<Thread:0x214bc run>
+  #=> #<Thread:0x21548 run>
+  #=> #<Thread:0x215d4 run>
+  #=> #<Thread:0x21660 run>
+  #=> #<Thread:0x21430 run>
+  #=> end #<Thread:0x214bc dead>
+  #=> end #<Thread:0x21548 dead>
+  #=> end #<Thread:0x215d4 dead>
+  #=> end #<Thread:0x21660 dead>
+  #=> end #<Thread:0x21430 dead>
+
 
 == Instance Methods
 
---- threads
-#@todo
+--- threads -> Array
 
-list threads to be synchronized
+同期されるスレッドの一覧を配列で返します。
 
---- empty?
-#@todo
+使用例
+  require 'thwait'
 
-is there any thread to be synchronized.
+  threads = []
+  3.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
 
---- finished?
-#@todo
+  thall = ThreadsWait.new(*threads)
+  p thall.threads
+  #=> [#<Thread:0x21750 sleep>, #<Thread:0x216c4 sleep>, #<Thread:0x21638 sleep>]
 
-is there already terminated thread.
+--- empty? -> bool
 
---- join(thread1, ...)
-#@todo
+同期されるスレッドが存在するならば true をかえします。
 
-wait for specified thread(s).
+使用例
+  require 'thwait'
 
---- join_nowait(threa1, ...)
-#@todo
+  threads = []
+  3.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
 
-specifies thread(s) to wait.  non-blocking.
+  thall = ThreadsWait.new
+  p thall.threads.empty? #=> true
+  thall.join(*threads)
+  p thall.threads.empty? #=> false
 
---- next_wait
+--- finished? -> bool
+
+すでに終了したスレッドが存在すれば true を返します。
+
+使用例
+  require 'thwait'
+
+  threads = []
+  3.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
+
+  thall = ThreadsWait.new(*threads)
+  p thall.finished? #=> false
+  sleep 3
+  p thall.finished? #=> true
+
+--- join(*threads) -> ()
+
+終了を待つスレッドの対象として、threads で指定されたスレッドを指定します。
+
+@param threads 複数スレッドの終了を待つスレッドに指定されたthreadsを加えます。
+
+  require 'thwait'
+
+  threads = []
+  5.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
+
+  thall = ThreadsWait.new
+  p thall.threads #=> []
+  thall.join(*threads)
+  p thall.threads
+  #=> [#<Thread:0x216ec dead>, #<Thread:0x21660 dead>, #<Thread:0x215d4 dead>, #<Thread:0x214bc dead>]
+
+--- join_nowait(*threads) -> ()
+
+終了を待つスレッドの対象として、threads で指定されたスレッドを指定します。
+しかし、実際には終了をまちません。
+
+@param threads 複数スレッドの終了を待つスレッドに指定されたthreadsを加えます。
+
+  require 'thwait'
+
+  threads = []
+  5.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
+
+  thall = ThreadsWait.new
+  p thall.threads #=> []
+  thall.join_nowait(*threads)
+  p thall.threads #=> [#<Thread:0x21638 sleep>, #<Thread:0x215ac sleep>, #<Thread:0x21520 sleep>, #<Thread:0x21494 sleep>, #<Thread:0x21408 sleep>]
+  # 実際には終了を待っていない。sleep している。
+
+--- next_wait(nonblock = nil) -> Thread
 #@todo
 
 waits until any of specified threads is terminated.
 
---- all_waits
-#@todo
+@param nonblock 
 
-waits until all of specified threads are terminated.
-if a block is supplied for the method, evaluates it for
-each thread termination.
+@raise ErrNoWaitingThread 終了をまつスレッドが存在しない場合発生します。
+
+@raise ErrNoFinishedThread
+
+--- all_waits -> ()
+
+指定されたスレッドすべてが終了するまで待ちます。
+ブロックが与えられた場合、スレッド終了時にブロックを評価します。
+
+使用例
+  require 'thwait'
+
+  threads = []
+  5.times {|i|
+    threads << Thread.new { sleep 1; p Thread.current }
+  }
+  
+  thall = ThreadsWait.new(*threads)
+  thall.all_waits{|th|
+    printf("end %s\n", th.inspect)
+  }
+  
+  # 出力例
+  #=> #<Thread:0x214bc run>
+  #=> #<Thread:0x21548 run>
+  #=> #<Thread:0x215d4 run>
+  #=> #<Thread:0x21660 run>
+  #=> #<Thread:0x21430 run>
+  #=> end #<Thread:0x214bc dead>
+  #=> end #<Thread:0x21548 dead>
+  #=> end #<Thread:0x215d4 dead>
+  #=> end #<Thread:0x21660 dead>
+  #=> end #<Thread:0x21430 dead>
+
