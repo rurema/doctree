@@ -3,7 +3,7 @@
 = class ThreadsWait < Object
 #@# alias ThWait
 
-provides synchronization for multiple threads.
+複数スレッドの終了を待つ機能を提供します。
 
 == Class Methods
 
@@ -159,15 +159,31 @@ provides synchronization for multiple threads.
   # 実際には終了を待っていない。sleep している。
 
 --- next_wait(nonblock = nil) -> Thread
-#@todo
 
-waits until any of specified threads is terminated.
+指定したスレッドのどれかが終了するまで待ちます。
 
-@param nonblock 
+@param nonblock true を与えると、キューが空の時、例外 [[c:ErrNoFinishedThread]] が発生します。
 
-@raise ErrNoWaitingThread 終了をまつスレッドが存在しない場合発生します。
+@raise ErrNoWaitingThread 終了をまつスレッドが存在しない時、発生します。
 
-@raise ErrNoFinishedThread
+@raise ErrNoFinishedThread キューが空の時、発生します。
+
+  #使用例
+  require 'thwait'
+
+  threads = []
+  2.times {|i|
+    threads << Thread.new { sleep i }
+  }
+
+  thall = ThreadsWait.new
+  thall.join_nowait(*threads)
+  until thall.empty?
+    th = thall.next_wait
+    p th
+  end
+
+@see [[m:Queue#pop]]
 
 --- all_waits -> ()
 
@@ -198,4 +214,8 @@ waits until any of specified threads is terminated.
   #=> end #<Thread:0x215d4 dead>
   #=> end #<Thread:0x21660 dead>
   #=> end #<Thread:0x21430 dead>
+
+= class ThreadsWait::ErrNoFinishedThread < StandardError
+
+= class ThreadsWait::ErrNoWaitingThread < StandardError
 
