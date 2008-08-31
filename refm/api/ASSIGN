@@ -266,7 +266,7 @@ timeout                         kouya           done
 #---------------------------------------------------------
 tmpdir                          kouya           done
 tracer                          kouya           done
-tsort                           kouya
+tsort                           kouya           done
 un                              okkez           done
 uri                             sheepman        done
 weakref                         bornite
