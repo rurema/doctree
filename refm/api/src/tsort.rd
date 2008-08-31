@@ -124,7 +124,6 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
 
 == Instance Methods
 --- tsort -> Array
-#@todo
 
 頂点をトポロジカルソートして得られる配列を返します。
 この配列は子から親に向かってソートされています。
@@ -134,8 +133,22 @@ TSort がオブジェクトをグラフとして解釈するには2つのメソッドを要求します。
 
 @raise TSort::Cyclic 閉路が存在するとき、発生します.
 
+使用例
+  require 'tsort'
+
+  class Hash
+    include TSort
+    alias tsort_each_node each_key
+    def tsort_each_child(node, &block)
+      fetch(node).each(&block)
+    end
+  end
+
+  sorted = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}.tsort
+  p sorted #=> [3, 2, 1, 4]
+
+
 --- tsort_each {|node| ...} -> nil
-#@todo
 
 tsort メソッドのイテレータ版です。
 obj.tsort_each は obj.tsort.each と似ていますが、
@@ -146,6 +159,30 @@ tsort_each は nil を返します。
 閉路が存在するとき、例外 [[c:TSort::Cyclic]] を起こします。
 
 @raise TSort::Cyclic 閉路が存在するとき、発生します.
+
+使用例
+  require 'tsort'
+
+  class Hash
+    include TSort
+    alias tsort_each_node each_key
+    def tsort_each_child(node, &block)
+      fetch(node).each(&block)
+    end
+  end
+
+  non_sort = {1=>[2, 3], 2=>[3], 3=>[], 4=>[]}
+
+  non_sort.tsort_each {|node|
+    non_sort.tsort_each_child(node){|child|
+      printf("%d -> %d\n", node, child)
+    }
+  }
+
+  # 出力例
+  #=> 2 -> 3
+  #=> 1 -> 2
+  #=> 1 -> 3
 
 --- strongly_connected_components -> Array
 #@todo
