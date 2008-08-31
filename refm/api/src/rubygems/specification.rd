@@ -25,323 +25,618 @@ Gem パッケージのメタデータを扱うためのクラスです。
 
 == Instance Methods
 
---- <=>
+--- _dump -> String
 #@todo
 
---- ==
+重要なインスタンス変数のみを [[m:Marshal.dump]] します。
+
+@see [[m:Marshal.dump]]
+
+--- add_bindir(executables) -> Array | nil
 #@todo
 
---- _dump
-#@todo
+実行コマンドの格納場所を返します。
 
---- add_bindir
-#@todo
+@param executables 実行コマンド名を格納した配列を指定します。
 
 --- add_dependency
 #@todo
 
---- add_development_dependency
+--- add_development_dependency(gem, *requirements) -> Array
+--- add_runtime_dependency(gem, *requirements) -> Array
 #@todo
 
---- add_runtime_dependency
-#@todo
+この Gem を実行するための依存関係を追加します。
 
---- assign_defaults
-#@todo
+例:
+  spec.add_runtime_dependency('jabber4r', '> 0.1', '<= 0.5')
 
---- author
-#@todo
 
---- author=
-#@todo
+@param gem 依存する Gem の名前か [[c:Gem::Dependency]] のインスタンスを指定します。
 
---- authors
-#@todo
+@param requirements バージョンの必須条件を指定します。デフォルトは ">= 0" です。
 
---- authors=
-#@todo
+@see [[c:Gem::Dependency]]
 
---- autorequire
+--- assign_defaults -> ()
 #@todo
 
---- autorequire=
-#@todo
+全ての属性にデフォルト値をセットします。
 
---- bindir
+これはアクセサメソッドを使用して行われるので、ブロックを用いた特別な初期化も
+きちんと実行されます。セットされる値はデフォルト値のコピーです。
+
+--- author -> String
 #@todo
+
+作成者の名前を返します。
 
---- bindir=
+--- author=(name)
 #@todo
 
---- cert_chain
+作成者の名前をセットします。
+
+--- authors -> Array
 #@todo
+
+作成者の名前の配列を返します。
 
---- cert_chain=
+--- authors=(names)
 #@todo
 
---- date
+作成者の名前の配列をセットします。
+
+--- autorequire -> String
 #@todo
 
---- date=
+非推奨の属性です。
+
+--- autorequire=(lib)
 #@todo
+
+非推奨の属性です。
 
---- default_executable
+--- bindir -> String
 #@todo
 
---- default_executable=
+実行ファイルを格納するディレクトリを返します。
+
+--- bindir=(dir)
 #@todo
+
+実行ファイルを格納するディレクトリをセットします。
 
---- dependencies
+@param dir 実行ファイルを格納するディレクトリを指定します。デフォルトは "bin" です。
+
+--- cert_chain -> Array
 #@todo
 
---- dependent_gems
+--- cert_chain=(arr)
 #@todo
 
---- description
+@param arr デフォルトは空の配列です。
+
+--- date -> Time
 #@todo
+
+日付を返します。
 
---- description=
+--- date=(date)
 #@todo
 
---- development_dependencies
+@param date 日付をセットします。デフォルトは今日です。
+
+--- default_executable -> String | nil
 #@todo
+
+Gem パッケージ内で gem コマンド経由で実行するファイルを返します。
 
---- email
+--- default_executable=(executable)
 #@todo
+
+Gem パッケージ内で gem コマンド経由で実行するファイルをセットします。
+
+@param executable 実行ファイルを指定します。
 
---- email=
+--- dependencies -> Array
 #@todo
 
---- eql?
+依存している Gem のリストを返します。
+
+@see [[c:Gem::Dependency]]
+
+--- dependent_gems -> Array
 #@todo
+
+この Gem に依存している全ての Gem の情報のリストを返します。
+
+それぞれのエントリは配列になっており、各要素は以下のようになっています。
+
+ (0) [[c:Gem::Specification]]
+ (1) [[c:Gem::Dependency]]
+ (2) [[c:Gem::Specification]] の配列
 
---- executable
+
+--- description -> String
 #@todo
+
+Gem パッケージの説明を返します。
 
---- executable=
+--- description=(desc)
 #@todo
 
---- executables
+Gem パッケージの説明をセットします。
+
+@param desc パッケージの詳細を説明する文章を指定します。
+
+--- development_dependencies -> Array
 #@todo
+
+この Gem が依存している Gem のリストを返します。
 
---- executables=
+--- email -> String
 #@todo
 
---- extensions
+メールアドレスを返します。
+
+--- email=(email)
 #@todo
+
+メールアドレスをセットします。
 
---- extensions=
+@param email メールアドレスを指定します。
+
+--- executable -> String
 #@todo
 
---- extra_rdoc_files
+実行可能ファイル名を返します。
+
+--- executable=(executable)
 #@todo
+
+実行可能ファイル名をセットします。
 
---- extra_rdoc_files=
+@param executable 実行可能ファイル名を指定します。
+
+--- executables -> [String]
 #@todo
+
+実行可能ファイル名のリストを返します。
 
---- file_name
+--- executables=(executables)
 #@todo
+
+実行可能ファイル名のリストをセットします。
+
+@param executables 実行可能ファイル名のリストを指定します。
 
---- files
+--- extensions -> [String]
 #@todo
 
---- files=
+拡張ライブラリをコンパイルするために必要な extconf.rb 形式のファイルのリストを返します。
+
+--- extensions=(paths)
 #@todo
+
+拡張ライブラリをコンパイルするために必要な extconf.rb 形式のファイルのリストをセットします。
 
---- full_gem_path
+@param paths 拡張ライブラリをコンパイルするために必要な extconf.rb 形式のファイルのリストを指定します。
+
+--- extra_rdoc_files -> [String]
 #@todo
 
---- full_name
+RDoc でドキュメントを作成する際に使用する特別なファイルのリストを返します。
+
+--- extra_rdoc_files=(paths)
 #@todo
+
+RDoc でドキュメントを作成する際に使用する特別なファイルのリストをセットします。
 
---- has_rdoc
+@param paths RDoc でドキュメントを作成する際に使用する特別なファイルのリストを指定します。
+
+--- file_name -> String
 #@todo
+
+生成される Gem パッケージの名前を返します。
 
---- has_rdoc=
+--- files -> [String]
 #@todo
 
---- has_rdoc?
+この Gem パッケージに含まれるファイル名の配列を返します。
+
+--- files=(files)
 #@todo
+
+この Gem パッケージに含まれるファイル名の配列をセットします。
+
+@param files この Gem パッケージに含まれるファイル名の配列を指定します。
 
---- has_test_suite?
+
+--- full_gem_path -> String
 #@todo
+
+この Gem パッケージへのフルパスを返します。
 
---- has_unit_tests?
+--- full_name -> String
 #@todo
 
---- hash
+この Gem パッケージのバージョンを含む完全な名前 (name-version) を返します。
+
+プラットフォームの情報が指定されている場合は、それも含みます (name-version-platform)。
+
+--- has_rdoc -> bool
 #@todo
+
+真の場合は RDoc を生成しせん。偽の場合は RDoc を生成します。
 
---- homepage
+--- has_rdoc=(flag)
 #@todo
 
---- homepage=
+RDoc を生成するかどうかをセットします。デフォルトは偽です。
+
+--- has_rdoc? -> bool
 #@todo
+
+真の場合は RDoc を生成しせん。偽の場合は RDoc を生成します。
 
---- installation_path
+@see [[m:Gem::Specification#has_rdoc]]
+
+--- has_test_suite? -> bool
 #@todo
+
+このメソッドは非推奨です。 [[m:Gem::Specification#has_unit_tests?]] を使用してください。
 
---- lib_files
+--- has_unit_tests? -> bool
 #@todo
 
---- loaded=
+この Gem パッケージがユニットテストを含むかどうか返します。
+
+真の場合はユニットテストを含みます。そうでない場合は偽を返します。
+
+--- homepage -> String
 #@todo
 
---- loaded?
+この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI を返します。
+
+--- homepage=(uri)
 #@todo
+
+この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI をセットします。
+
+@param uri この Gem パッケージを作成しているプロジェクトか作成者のウェブサイトの URI を指定します。
 
---- loaded_from
+--- installation_path -> String
 #@todo
 
---- loaded_from=
+この Gem パッケージのインストール先のパスを返します。
+
+--- lib_files -> [String]
 #@todo
+
+この Gem パッケージに含まれているファイルのうち [[m:Gem::Specification#require_paths]]
+以下にあるファイルのリストを返します。
 
---- mark_version
+--- loaded=(flag)
 #@todo
+
+この Gem パッケージの gemspec が既にロードされているかどうかをセットします。
+
+この属性は永続化しません。
+
+@param flag 既にロードされている場合は真を指定します。
 
---- method_missing
+--- loaded? -> bool
 #@todo
 
---- name
+この Gem パッケージの gemspec が既にロードされているかどうかを返します。
+
+既にロードされている場合は真を返します。そうでない場合は偽を返します。
+
+--- loaded_from -> String
 #@todo
 
---- name=
+この Gem パッケージの gemspec がある場所を返します。
+
+この属性は永続化されません。
+
+--- loaded_from=(path)
 #@todo
+
+この Gem パッケージの gemspec がある場所をセットします。
 
---- normalize
+@param path この Gem パッケージの gemspec がある場所を指定します。
+
+--- mark_version -> String
 #@todo
+
+RubyGems のバージョンを内部にセットします。
 
---- original_name
+--- name -> String
 #@todo
 
---- original_platform
+この Gem パッケージの名前を返します。
+
+--- name=(name)
 #@todo
+
+この Gem パッケージの名前をセットします。
 
---- original_platform=
+@param name この Gem パッケージの名前を指定します。
+
+--- normalize -> [String]
 #@todo
+
+この Gem パッケージの含まれるファイルリストから重複を取り除きます。
 
---- platform
+--- original_name -> String
 #@todo
 
---- platform=
+このメソッドは後方互換性のために残されています。
+
+@see [[m:Gem::Specification#full_name]]
+
+--- original_platform -> String
 #@todo
+
+この属性は古いバージョンの Gem パッケージをアンインストールするために残されています。
 
---- post_install_message
+--- original_platform=(platform)
 #@todo
 
---- post_install_message=
+この属性は古いバージョンの Gem パッケージをアンインストールするために残されています。
+
+@param platform プラットフォームを指定します。
+
+--- platform -> String
 #@todo
 
---- rdoc_options
+この Gem パッケージを使用できるプラットフォームを返します。
+
+--- platform=(platform)
 #@todo
+
+この Gem パッケージを使用できるプラットフォームをセットします。
+
+@param platform この Gem パッケージを使用できるプラットフォームを指定します。
+       デフォルトは [[m:Gem::Platform::RUBY]] です。
 
---- rdoc_options=
+@see [[m:Gem::Platform::RUBY]]
+
+--- post_install_message -> String
 #@todo
 
---- require_path
+--- post_install_message=(message)
 #@todo
+
+@param message メッセージを指定します。
 
---- require_path=
+--- rdoc_options -> [String]
 #@todo
 
---- require_paths
+API ドキュメントを生成するときに rdoc コマンドに与えるオプションを返します。
+
+--- rdoc_options=(options)
 #@todo
+
+API ドキュメントを生成するときに rdoc コマンドに与えるオプションをセットします。
+
+@param options API ドキュメントを生成するときに rdoc コマンドに与えるオプションを指定します。
 
---- require_paths=
+--- require_path -> String
 #@todo
 
---- required_ruby_version
+[[m:Gem::Specification#require_paths]] の単数バージョンです。
+
+@see [[m:Gem::Specification#require_paths]]
+
+--- require_path=(path)
 #@todo
+
+[[m:Gem::Specification#require_paths=]] の単数バージョンです。
+
+@param path この Gem パッケージを使用した際に require するファイルが置かれているディレクトリを指定します。
 
---- required_ruby_version=
+@see [[m:Gem::Specification#require_paths=]]
+
+--- require_paths -> [String]
 #@todo
+
+この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
+のリストを返します。
 
---- required_rubygems_version
+--- require_paths=(paths)
 #@todo
+
+この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
+のリストをセットします。
+
+@param paths この Gem パッケージを使用した際に require するファイルが置かれているディレクトリ
+             のリストを指定します。
+
 
---- required_rubygems_version=
+--- required_ruby_version -> Gem::Requirement
 #@todo
 
---- requirements
+この Gem パッケージを動作させるのに必要な Ruby のバージョンを返します。
+
+--- required_ruby_version=(requirement)
 #@todo
+
+この Gem パッケージを動作させるのに必要な Ruby のバージョンをセットします。
 
---- requirements=
+@param requirement [[m:Gem::Requirement.create]] が受け付ける形式のオブジェクトを指定します。
+
+@see [[c:Gem::Requirement]]
+
+--- required_rubygems_version -> Gem::Requirement
 #@todo
+
+この Gem パッケージを動作させるのに必要な RubyGems のバージョンを返します。
 
---- rubyforge_project
+--- required_rubygems_version=(requirement)
 #@todo
 
---- rubyforge_project=
+この Gem パッケージを動作させるのに必要な RubyGems のバージョンをセットします。
+
+@param requirement [[m:Gem::Requirement.create]] が受け付ける形式のオブジェクトを指定します。
+
+@see [[c:Gem::Requirement]]
+
+--- requirements -> Array
 #@todo
 
---- rubygems_version
+この Gem パッケージを動作させるのに必要な条件を返します。
+これはユーザのためのシンプルな情報です。
+
+--- requirements=(infomations)
 #@todo
+
+この Gem パッケージを動作させるのに必要な条件をセットします。
+これはユーザのためのシンプルな情報をセットします。
 
---- rubygems_version=
+@param infomations 情報を文字列の配列で指定します。
+
+--- rubyforge_project -> String
 #@todo
+
+この Gem の RubyForge 上でのプロジェクト名を返します。
 
---- runtime_dependencies
+--- rubyforge_project=(project_name)
 #@todo
+
+この Gem の RubyForge 上でのプロジェクト名をセットします。
+
+@param project_name RubyForge 上のプロジェクト名を指定します。
 
---- satisfies_requirement?
+--- rubygems_version -> String
 #@todo
 
---- signing_key
+この Gem パッケージを作成した RubyGems のバージョンを返します。
+
+--- rubygems_version=(version)
 #@todo
+
+この Gem パッケージを作成した RubyGems のバージョンをセットします。
+この属性は Gem パッケージが作成された時に自動的にセットされます。
 
---- signing_key=
+@param versipn RubyGems のバージョンを指定します。
+
+--- runtime_dependencies -> Array
 #@todo
 
---- sort_obj
+この Gem パッケージが依存している Gem パッケージのリストを返します。
+
+--- satisfies_requirement?(dependency) -> bool
 #@todo
+
+この Gem パッケージが与えられた依存関係を満たすかどうかを返します。
 
---- specification_version
+依存関係を満たす場合は真を返します。そうでない場合は偽を返します。
+
+@param dependency チェックしたい依存関係を指定します。
+
+@see [[c:Gem::Dependency]]
+
+--- signing_key -> String
 #@todo
 
---- specification_version=
+この Gem パッケージの署名に使用するキーを返します。
+
+--- signing_key=(key)
 #@todo
+
+この Gem パッケージの署名に使用するキーをセットします。
 
---- summary
+@param key 署名に使用するキーを指定します。
+
+--- specification_version -> Integer
 #@todo
+
+この Gem パッケージに用いられている gemspec のバージョンを返します。
 
---- summary=
+--- specification_version=(version)
 #@todo
+
+この Gem パッケージに用いられている gemspec のバージョンをセットします。
+
+@param version gemspec のバージョンを指定します。
+
+@see [[m:Gem::Specification::SPECIFICATION_VERSION_HISTORY]]
 
---- test_file
+--- summary -> String
 #@todo
 
---- test_file=
+この Gem パッケージの短い説明を返します。
+
+--- summary=(summary)
 #@todo
+
+この Gem パッケージの短い説明をセットします。
 
---- test_files
+@param summary 短い説明を指定します。
+
+--- test_file -> String
 #@todo
 
---- test_files=
+[[m:Gem::Specification#test_files]] の単数バージョンです。
+
+--- test_file=(file)
 #@todo
+
+[[m:Gem::Specification#test_files=]] の単数バージョンです。
 
---- test_suite_file
+--- test_files -> [String]
 #@todo
 
---- test_suite_file=
+ユニットテストのファイルのリストを返します。
+
+
+--- test_files=(files)
 #@todo
 
---- to_ruby
+ユニットテストのファイルのリストをセットします。
+
+@param files ユニットテストのファイルのリストを指定します。
+
+--- test_suite_file -> String
 #@todo
+
+この属性は非推奨です。 [[m:Gem::Specification#test_files]] を使用してください。
 
---- to_s
+--- test_suite_file=(file)
 #@todo
 
---- to_yaml
+この属性は非推奨です。 [[m:Gem::Specification#test_files=]] を使用してください。
+
+@params file テストスイートのファイルを指定します。
+
+--- to_ruby -> String
 #@todo
 
---- validate
+自身を再現するための Ruby スクリプトを文字列で返します。
+
+省略されている値はデフォルト値が使用されます。
+
+--- validate -> bool
 #@todo
+
+必須属性のチェックと自身の基本的な正当性チェックを行います。
 
---- version
+チェックにパスした場合は常に true を返します。そうでない場合は例外が発生します。
+
+@raise Gem::InvalidSpecificationException チェックにパスしなかった場合に発生します。
+
+--- version -> Gem::Version
 #@todo
 
---- version=
+この Gem パッケージのバージョンを返します。
+
+--- version=(version)
 #@todo
+
+この Gem パッケージのバージョンをセットします。
+
+@param version バージョンを文字列か [[c:Gem::Version]] のインスタンスで指定します。
 
 --- yaml_initialize
 #@todo
