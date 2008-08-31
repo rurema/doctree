@@ -259,7 +259,7 @@ tempfile                        kouya           done
 test/unit                       sheepman
 thread                          m-kawato
 thwait
-time
+time                            kouya
 timeout                         kouya           done
 
 # LIBRARY_NAME                  OWNER           STATUS
