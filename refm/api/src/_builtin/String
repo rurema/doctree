@@ -2677,14 +2677,22 @@ self の末尾が str であるとき true を返します。
 
 @see [[m:String#start_with?]]
 
---- lines -> Enumerable::Enumerator
+--- lines(rs = $/) -> Enumerable::Enumerator
 
-文字列を行の配列 (を生成する Enumerator) に変換します。
+@param rs    行末を示す文字列
+
+文字列を行の配列 (を生成する Enumerator) に変換します。行の区切りは rs
+に指定した文字列で、そのデフォルト値は変数 $/ の値です。各 line
+には区切りの文字列も含みます。
 
 例:
     p "aa\nbb\ncc\n".lines.to_a   # => ["aa\n", "bb\n", "cc\n"]
     p "aa\n".lines.to_a           # => ["aa\n"]
     p "".lines.to_a               # => []
+    
+    s = "aa\nbb\ncc\n"
+    p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
+    p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
 
 --- partition(sep) -> [String, String, String]
 
