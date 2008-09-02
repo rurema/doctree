@@ -166,7 +166,7 @@
 
 @raise ErrNoWaitingThread 終了をまつスレッドが存在しない時、発生します。
 
-@raise ErrNoFinishedThread キューが空の時、発生します。
+@raise ErrNoFinishedThread nonblock がtrue でかつ、キューが空の時、発生します。
 
   #使用例
   require 'thwait'
@@ -217,5 +217,12 @@
 
 = class ThreadsWait::ErrNoFinishedThread < StandardError
 
+nonblock がtrue でかつ、キューが空の時、発生します。
+
+@see [[m:ThreadsWait#next_wait]]
+
 = class ThreadsWait::ErrNoWaitingThread < StandardError
 
+終了をまつスレッドが存在しない時、発生します。
+
+@see [[m:ThreadsWait#next_wait]]
