@@ -254,7 +254,7 @@ socket
 stringio                        sheepman        done
 strscan
 sync
-syslog
+syslog                          kouya
 tempfile                        kouya           done
 test/unit                       sheepman
 thread                          m-kawato
