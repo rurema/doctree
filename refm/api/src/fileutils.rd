@@ -52,7 +52,7 @@
 #@else
 @param options :noop, :verbose が指定できます。
 #@end
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 例:
 
@@ -68,7 +68,7 @@
            二つ以上指定する場合は配列で指定します。
 
 @param options :noop と :verbose が指定可能です。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @return list を配列として返します。
 
@@ -89,7 +89,7 @@
            二つ以上指定する場合は配列で指定します。
 
 @param options :noop と :verbose が指定可能です。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @return list を配列として返します。
 
@@ -114,7 +114,7 @@ user, group に nil または -1 を渡すとその項目は変更しません。
            二つ以上指定する場合は配列で指定します。
 
 @param options :noop と :verbose が指定可能です。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @return list を配列として返します。
 
@@ -141,7 +141,7 @@ user, group に nil または -1 を渡すとその項目は変更しません。
            二つ以上指定する場合は配列で指定します。
 
 @param options :noop と :verbose が指定可能です。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @return list を配列として返します。
 
@@ -247,7 +247,7 @@ file1 を dest/file1 にコピー、file2 を dest/file2 にコピー、
 @param dest コピー先のファイルかディレクトリです。
 
 @param options :preserve, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @raise Errno::ENOTDIR src が複数のファイルかつ、dest がディレクトリでない場合に発生します。
 
@@ -268,7 +268,7 @@ src を dest にコピーします。src がディレクトリであったら再帰的に
 @param dest コピー先のファイルかディレクトリです。
 
 @param options :preserve, :noop, :verbose, :dereference_root, :remove_destination が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 例:
 
@@ -290,7 +290,7 @@ src と dest の内容が違うときだけ src を dest にコピーします。
 @param dest コピー先のファイルかディレクトリです。
 
 @param options :preserve, :noop, :verbose, :mode が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 例:
 
@@ -318,7 +318,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 @param dest リンク作成先のファイルかディレクトリです。
 
 @param options :force, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
 
@@ -351,7 +351,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 @param dest リンク作成先のファイルかディレクトリです。
 
 @param options :force, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
 
@@ -374,7 +374,7 @@ ln_s(src, dest, :force => true) と同じです。
 @param dest リンク作成先のファイルかディレクトリです。
 
 @param options :force, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @raise Errno::ENOTDIR dest がディレクトリでない場合に発生します。
 
@@ -387,7 +387,7 @@ ln_s(src, dest, :force => true) と同じです。
 @param dir 作成するディレクトリ。
 
 @param options :mode, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 
 例:
@@ -417,7 +417,7 @@ ln_s(src, dest, :force => true) と同じです。
             二つ以上指定する場合は配列で指定します。
 
 @param options :mode, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @return list を返します。
 
@@ -440,7 +440,7 @@ dest がディレクトリでない場合は例外 Errno::ENOTDIR が発生します。
 @param dest 移動先のファイル、またはディレクトリ。
 
 @param options :force, :noop, :verbose, :secure が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 例:
 
@@ -463,7 +463,7 @@ list で指定された対象を消去します。
             二つ以上指定する場合は配列で指定します。
 
 @param options :force, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 例:
 
@@ -476,7 +476,7 @@ list で指定された対象を消去します。
 
 FileUtils.rm(list, :force => true) と同じです。
 
-[[ref:options]]
+[[ref:c:FileUtils#options]]
 
 @param list 削除する対象。一つの場合は文字列も指定可能です。
             二つ以上指定する場合は配列で指定します。
@@ -494,7 +494,7 @@ FileUtils.rm(list, :force => true) と同じです。
             二つ以上指定する場合は配列で指定します。
 
 @param options :force, :noop, :verbose, :secure が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 ==== 注意
 
@@ -518,7 +518,7 @@ rm_r(list, {:force => true}) と同じです。
             二つ以上指定する場合は配列で指定します。
 
 @param options :noop, :verbose, :secure が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 ==== 注意
 
@@ -536,7 +536,7 @@ rm_r(list, {:force => true}) と同じです。
            二つ以上指定する場合は配列で指定します。
 
 @param options :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 @raise Errno::ENOTEMPTY 削除するディレクトリが空でない場合に発生します。
 
@@ -629,7 +629,7 @@ list で指定されたファイルが存在しない場合は空のファイルを作成します。
             二つ以上指定する場合は配列で指定します。
 
 @param options :mtime, :nocreate, :noop, :verbose が指定できます。
-               [[ref:options]]
+               [[ref:c:FileUtils#options]]
 
 例:
 
