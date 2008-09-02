@@ -1088,7 +1088,7 @@ marshal_dump/marshal_load を使うべきです。
 
 インスタンス変数の情報は普通マーシャルデータに含まれるので、
 上例のように marshal_dump を定義する必要はありません
-(ただし marsahl_dump を定義するとインスタンス変数の情報は
+(ただし marshal_dump を定義するとインスタンス変数の情報は
 ダンプされなくなるので、marshal_dump/marshal_load で扱う必要があります)。
 marshal_dump/marshal_load はより高度な制御を行いたい場合や
 拡張ライブラリで定義したクラスのインスタンスがインスタンス変数以外

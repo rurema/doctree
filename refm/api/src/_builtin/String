@@ -712,7 +712,7 @@ val を返します。
 
 val を返します。
 
-@param firstl...last   置き換えたい範囲を示す [[c:Range]] オブジェクト
+@param first...last   置き換えたい範囲を示す [[c:Range]] オブジェクト
 
 --- capitalize -> String
 

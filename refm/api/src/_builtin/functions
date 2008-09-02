@@ -1304,7 +1304,7 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
     p Float(9.88)         #=> 9.88
     
     p Flot(Time.gm(1986)) #=> 504921600.0
-    p Float(Object.new)   # cannot convert Object into Float (TypeEarror)
+    p Float(Object.new)   # cannot convert Object into Float (TypeError)
     p Float(nil)          # cannot convert nil into Float (TypeError)
     
     p Float("10")         #=> 10.0

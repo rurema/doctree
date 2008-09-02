@@ -83,7 +83,7 @@ getlogin は [[man:su(1)]] などでログイン時のユーザとは異なるユーザになっている場
   login_user = ENV['USER'] || ENV['LOGNAME'] || Etc.getlogin || Etc.getpwuid.name
 
 
---- getpwnam(name) -> Strunct::Passwd
+--- getpwnam(name) -> Struct::Passwd
 
 passwd データベースを検索し、
 名前が name である passwd エントリを返します。
