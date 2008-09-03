@@ -202,12 +202,6 @@ Windows プラットフォームであれば真を返します。そうでなければ偽を返します。
 
 @see [[m:Gem::RUBY_PLATFORM]]
 
---- default_dir -> String
-#@todo
-
-環境変数 GEM_HOME が設定されていない場合に、
-デフォルトの Gem のインストールディレクトリを返します。
-
 --- dir -> String
 #@todo
 
