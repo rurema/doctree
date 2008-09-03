@@ -1,6 +1,11 @@
 #@since 1.9.0
+
+[[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのライブラリです。
+
 = class Gem::Builder < Object
 include UserInteraction
+
+[[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのクラスです。
 
 == Singleton Methods
 
