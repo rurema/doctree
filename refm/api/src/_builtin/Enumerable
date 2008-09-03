@@ -539,7 +539,7 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
 ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
 
    a = [1, 2, 3, 4, 5, 0]
-   a.drop {|i| i < 3 }   # => [3, 4, 5, 0]
+   a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
 
 
 --- find_index{|obj| ... }  -> Integer | nil
