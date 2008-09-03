@@ -1,7 +1,7 @@
 require rubygems/digest/md5
 require rubygems/security
 require rubygems/specification
-
+#@# --
 require rubygems/package/f_sync_dir
 require rubygems/package/tar_header
 require rubygems/package/tar_input
@@ -29,7 +29,7 @@ require rubygems/package/tar_writer
 = module Gem::Package
 
 
-== Module Functions
+== Singleton Methods
 
 --- open(io, mode = 'r', signer = nil){|tar_io| ... }
 #@todo
