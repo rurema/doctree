@@ -1,6 +1,6 @@
 require rubygems/command
 require rubygems/user_interaction
-
+#@# --
 require rubygems/commands/build_command
 require rubygems/commands/cert_command
 require rubygems/commands/check_command
