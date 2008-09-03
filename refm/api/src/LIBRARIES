@@ -286,7 +286,6 @@ rubygems/platform
 rubygems/remote_fetcher
 rubygems/require_paths_builder
 rubygems/requirement
-rubygems/rubygems_version
 rubygems/security
 rubygems/server
 rubygems/source_index
