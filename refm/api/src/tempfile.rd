@@ -90,12 +90,25 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
   tf.open
   p tf.gets # => "foobar,hoge\n"
 
+#@since 1.8.7
+--- path -> String | nil
+#@else
 --- path -> String
+#@end
 
 テンポラリファイルのパス名を返します。
 
+#@since 1.8.7
+Tempfile#close!を実行後だった場合にはnilを返します。
+
   tf = Tempfile.new("hoo")
   p tf.path # => "/tmp/hoo.10596.0" 
+  tf.close!
+  p tf.path # => nil
+#@else
+  tf = Tempfile.new("hoo")
+  p tf.path # => "/tmp/hoo.10596.0" 
+#@end
 
 #@since 1.6.8
 --- length -> Integer
@@ -109,16 +122,18 @@ real が偽ならば、テンポラリファイルはGCによって削除されます。
   p tf.size # => 0
 #@end
 
-#@since 1.9.0
+#@since 1.8.7
 --- close! -> nil
 #@else
 --- close! -> self
 #@end
 テンポラリファイルをクローズし、すぐに削除します。
 
+  require "tempfile"
   tf = Tempfile.open("bar")
+  path = tf.path
   tf.close!
-  p FileTest.exist?(tf.path) # => false
+  p FileTest.exist?(path) # => false
 
 --- delete -> self
 --- unlink -> self
