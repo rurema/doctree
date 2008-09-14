@@ -5,6 +5,7 @@ Unix系OS の syslog を扱うライブラリです。
 include Syslog::Constants
 
 UNIXのsyslogのラッパーモジュール。
+syslog の詳細については [[man:syslog(3)]] を参照してください。
 
   require 'syslog'
 
@@ -24,15 +25,33 @@ UNIXのsyslogのラッパーモジュール。
 
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) -> self
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
-#@todo
 
 与えられた引数でsyslogを開く。以降、他の Syslog モジュール関数が使
 用可能となる。
 
 ブロック付きで呼ばれた場合は、self を引数としてブロックを実行し、
-最後に Syslog.close を行う。
+最後に [[m:Syslog.close]] を行う。
 
-syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
+syslog の詳細については [[man:syslog(3)]] を参照してください。
+
+@param ident すべてのログにつく識別子で、どのプログラムから送られ
+             たログなのかを識別するために使われる文字列を指定します。
+             指定しない場合はプログラム名が使われます。
+
+@param options Syslog.open や Syslog.log の動作を制御するフラグを指定します。
+               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
+               ます。使用できる値は[[c:Syslog::Constants]] を参照してください。
+               
+@param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
+                にしたがって出力先となるログファイルを決定します。 詳しくは、
+                [[man:syslog.conf(5)]], [[c:Syslog::Constants]] を参照してく
+                ださい。
+
+@raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
+
+@return self を返します。
+
+syslogを既に開いていた場合は[[c:RuntimeError]]が発生します。
 
   require 'syslog'
 
@@ -44,33 +63,30 @@ syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
     puts err #=> "syslog already open"
   end
 
-ident はすべてのログにつく識別子で、どのプログラムから送られ
-たログなのかを識別するために使われる。通常プログラム名が使われる。
-
-options には、Syslog.open や Syslog.log の動作を制御するフラ
-グを指定する。
-
-facility には、ログ出力を行うプログラムの種別を指定する。
-syslog はこの値にしたがって出力先となるログファイルを決める。
-[[man:syslog.conf(5)]] 参照)
-
 options と facility に指定できる値については
-[[c:Syslog::Constants]] を参照。
+[[c:Syslog::Constants]] を参照してください。
 
-      例:
+指定例:
         Syslog.open('ftpd', Syslog::LOG_PID | Syslog::LOG_NDELAY,
                     Syslog::LOG_FTP)
-
-syslog の詳細については [[man:syslog(3)]] を参照してください。
-
-@raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
-
-@return self を返します。
 
 --- open!(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 --- reopen(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
 開いていた syslog を最初にクローズする点を除いて[[m:Syslog.open]] と同じです。
+
+@param ident すべてのログにつく識別子で、どのプログラムから送られ
+             たログなのかを識別するために使われる文字列を指定します。
+             指定しない場合はプログラム名が使われます。
+
+@param options Syslog.open や Syslog.log の動作を制御するフラグを指定します。
+               指定しない場合は、Syslog::LOG_PID|Syslog::LOG_CONSの値が使われ
+               ます。使用できる値は[[c:Syslog::Constants]] を参照してください。
+               
+@param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
+                にしたがって出力先となるログファイルを決定します。 詳しくは、
+                [[man:syslog.conf(5)]], [[c:Syslog::Constants]] を参照してく
+                ださい。
 
 使用例
   require 'syslog'
