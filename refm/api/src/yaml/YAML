@@ -227,7 +227,7 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
 
 与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
 
-@param *objs YAMLフォーマットに変換されるオブジェクト
+@param objs YAMLフォーマットに変換されるオブジェクト
 
   require "yaml"
   puts YAML.dump_stream( "hoge\nfoo", [1,2], {"foo" => "bar"} )
