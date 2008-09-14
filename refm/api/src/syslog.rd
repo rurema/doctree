@@ -142,7 +142,8 @@ priority は優先度を示す定数([[c:Syslog::Constants]]参照)。
 ることで open で指定した facility を切替えることもできる。
 
 format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定する。
-注： [[man:syslog(3)]] のように format に %m は使用できない。
+
+但し、[[man:syslog(3)]] のように format に %m は使用できません。
 
 メッセージに改行を含める必要はない。
 
