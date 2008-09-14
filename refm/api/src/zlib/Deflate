@@ -50,7 +50,7 @@ Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
   #=> 194
   #=> 194
 
---- new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY)
+--- new(level = Zlib::DEFAULT_COMPRESSION, windowBits = Zlib::MAX_WBITS, memlevel = Zlib::DEF_MEM_LEVEL, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::Deflate
 
 圧縮ストリームを作成します。各引数の詳細は zlib.h を
 参照して下さい。nil の場合はデフォルトの値を使用します。

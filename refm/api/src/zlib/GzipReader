@@ -52,7 +52,7 @@ GzipReader オブジェクトは io からデータを逐次リードして
   end
 
 --- wrap(io) -> Zlib::GzipReader
---- wrap(io) {|gz| ... } -> nil
+--- wrap(io) {|gz| ... } -> object
 
 io と関連付けられた GzipReader オブジェクトを作成します。
 ブロックが与えられた場合は、それを引数としてブロックを実行します。
@@ -86,7 +86,7 @@ io と関連付けられた GzipReader オブジェクトを作成します。
   p f.closed? #=> false
 
 --- open(filename) -> Zlib::GzipReader
---- open(filename) {|gz| ... } -> nil
+--- open(filename) {|gz| ... } -> object
 
 filename で指定されるファイルを gzip ファイルとして
 オープンします。GzipReader オブジェクトを返します。

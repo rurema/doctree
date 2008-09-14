@@ -44,7 +44,7 @@ GzipWriter オブジェクトは io に gzip 形式のデータを
   p FileTest.size(filename) #=> 32
 
 --- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
---- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> nil
+--- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
 ブッロクが与えられた場合、
@@ -88,7 +88,7 @@ io と関連付けられた GzipWriter オブジェクトを作成します。
   case2
 
 --- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) -> Zlib::GzipWriter
---- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> nil
+--- open(filename, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
 filename で指定されるファイルを gzip 圧縮データの
 書き出し用にオープンします。GzipWriter オブジェクトを返します。

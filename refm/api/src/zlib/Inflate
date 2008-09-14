@@ -27,7 +27,7 @@ Zlib::NeedDict 例外が発生します。
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   p Zlib::Inflate.inflate(cstr) #=> "hoge fuga end"
 
---- new([windowBits])
+--- new([windowBits]) -> Zlib::Inflate
 
 展開ストリームを作成します。引数の詳細は zlib.h を参照して下さい。
 nil の場合はデフォルトの値を使用します。
