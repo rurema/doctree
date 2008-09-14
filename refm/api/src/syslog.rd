@@ -156,7 +156,9 @@ format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定する。
 @raise ArgumentError 引数が２つ以上でない場合に発生します。
 
 例:
-         Syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
+  Syslog.open("syslogtest") {|syslog|
+    syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
+  }
 
 
 --- emerg(message, *arg) -> self
@@ -182,8 +184,10 @@ Syslog#log()のショートカットメソッド。
 
 @raise RuntimeError syslog がopen されていない場合発生します。
 
-       例:
-         Syslog.crit("the sky is falling in %d seconds!",5)
+例:
+  Syslog.open("syslogtest") {|syslog|
+    syslog.crit("the sky is falling in %d seconds!",5)
+  }
 
 --- mask -> Fixnum | nil
 --- mask=(mask)
