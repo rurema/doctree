@@ -253,7 +253,7 @@ singleton                       snoozer05       done
 socket
 stringio                        sheepman        done
 strscan
-sync
+sync                            kouya
 syslog                          kouya           done
 tempfile                        kouya           done
 test/unit                       
