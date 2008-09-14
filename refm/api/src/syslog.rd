@@ -44,8 +44,8 @@ syslog の詳細については [[man:syslog(3)]] を参照してください。
                
 @param facility ログ出力を行うプログラムの種別を指定します。syslog はこの値
                 にしたがって出力先となるログファイルを決定します。 詳しくは、
-                [[man:syslog.conf(5)]], [[c:Syslog::Constants]] を参照してく
-                ださい。
+                [[man:syslog.conf(5)]], 
+                [[c:Syslog::Constants]] を参照してください。
 
 @raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
 
@@ -133,35 +133,54 @@ syslog をオープンしていれば真を返す。
   p Syslog.options  #=> 3
   p Syslog.facility #=> 8
 
---- log(priority, format, ...)
-#@todo
+--- log(priority, format, *arg) -> self
 
-syslogにメッセージを書き込む。
+syslogにメッセージを書き込みます。
 
 priority は優先度を示す定数([[c:Syslog::Constants]]参照)。
 また、facility([[c:Syslog::Constants]]参照)を論理和で指定す
 ることで open で指定した facility を切替えることもできる。
 
 format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定する。
-メッセージに改行を含める必要はない。
-
-       例:
-         Syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
-
 注： [[man:syslog(3)]] のように format に %m は使用できない。
 
---- emerg(message, ...)
---- alert(message, ...)
---- crit(message, ...)
---- err(message, ...)
---- warning(message, ...)
---- notice(message, ...)
---- info(message, ...)
---- debug(message, ...)
-#@todo
+メッセージに改行を含める必要はない。
+
+@param priority priority は優先度を示す定数を指定します。
+                詳しくは、[[c:Syslog::Constants]]を参照してください。
+
+@param format フォーマット文字列です。
+
+@param arg フォーマットされる引数です。
+
+@raise ArgumentError 引数が２つ以上でない場合に発生します。
+
+例:
+         Syslog.log(Syslog::LOG_CRIT, "the sky is falling in %d seconds!", 10)
+
+
+--- emerg(message, *arg) -> self
+--- alert(message, *arg) -> self
+--- crit(message, *arg) -> self
+--- err(message, *arg) -> self
+--- warning(message, *arg) -> self
+--- notice(message, *arg) -> self
+--- info(message, *arg) -> self
+--- debug(message, *arg) -> self
 
 Syslog#log()のショートカットメソッド。
-システムによっては定義されていないものもある。
+システムによっては定義されていないものもあります。
+
+例えば、Syslog.emerg(message, *arg) は、Syslog.log(Syslog::LOG_EMERG, message, *arg)
+と同じです。
+
+@param message フォーマット文字列です。[[m:Kernel.#sprintf]] と同じ形式の引数を指定します。
+
+@param arg フォーマットされる引数です。
+
+@raise ArgumentError 引数が1つ以上でない場合に発生します。
+
+@raise RuntimeError syslog がopen されていない場合発生します。
 
        例:
          Syslog.crit("the sky is falling in %d seconds!",5)
@@ -169,15 +188,33 @@ Syslog#log()のショートカットメソッド。
 --- mask -> Fixnum | nil
 --- mask=(mask)
 
-@param mask ログの優先度のマスクを設定します。
-
 ログの優先度のマスクを取得または設定する。
 マスクは永続的であり、
 Syslog.openやSyslog.close
 ではリセットされない。
 
-例:
-         Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
+@param mask ログの優先度のマスクを設定します。
+
+@raise RuntimeError syslog がオープンされていない場合、発生します。
+
+使用例
+
+  require 'syslog'
+  include Syslog::Constants
+  # ログの場所は実行環境によって異なる。詳しくはsyslog.conf を参照
+  log = '/var/log/ftp.log'
+
+  Syslog.open('ftpd', LOG_PID | LOG_NDELAY, LOG_FTP)
+  Syslog.mask = Syslog::LOG_UPTO(LOG_ERR)
+
+  [ LOG_CRIT, LOG_ERR, LOG_WARNING,
+    LOG_NOTICE, LOG_INFO, LOG_DEBUG ].each_with_index { |c, i|
+    Syslog.log(c, "test for syslog FTP #{c}, #{i}")
+  }
+  Syslog.close
+  File.foreach(log){|line|
+    print line if line =~ /FTP/
+  } 
 
 --- close -> nil
 
@@ -197,14 +234,24 @@ syslogを閉じます。
 selfを返す。(旧版との互換性のため)
 
 --- LOG_MASK(priority) -> Fixnum
-#@todo
 
 1つの優先度に対するマスクを作成する。
 
+@param priority priority は優先度を示す定数を指定します。
+                詳しくは、[[c:Syslog::Constants]]を参照してください。
+
+例:
+         Syslog.mask = Syslog::LOG_MASK(Syslog::LOG_ERR)
+
 --- LOG_UPTO(priority) -> Fixnum
-#@todo
 
 priorityまでのすべての優先度のマスクを作成する。
+
+@param priority priority は優先度を示す定数を指定します。
+                詳しくは、[[c:Syslog::Constants]]を参照してください。
+
+例:
+         Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
 = module Syslog::Constants
 
@@ -223,8 +270,9 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_NDELAY
 --- LOG_NOWAIT
 --- LOG_PERROR
-#@todo
+
 オプション(options)を示す定数。
+定数 の詳細については [[man:syslog(3)]] を参照してください。
 
 --- LOG_AUTH
 --- LOG_AUTHPRIV
@@ -249,8 +297,10 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_LOCAL5
 --- LOG_LOCAL6
 --- LOG_LOCAL7
-#@todo
+
 機能(facilities)を示す定数。
+
+定数 の詳細については [[man:syslog(3)]] を参照してください。
 
 --- LOG_EMERG
 --- LOG_ALERT
@@ -260,6 +310,8 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_NOTICE
 --- LOG_INFO
 --- LOG_DEBUG
-#@todo
+
 優先度(priorities)を示す定数。
+定数 の詳細については [[man:syslog(3)]] を参照してください。
+
 #@end
