@@ -180,7 +180,7 @@ observer                        snoozer05       done
 open-uri                        sheepman        done
 open3
 openssl                         
-optparse                        sheepman
+optparse                        
 ostruct                         eklerni         done
 
 # LIBRARY_NAME                  OWNER           STATUS
@@ -236,8 +236,8 @@ rexml/xmldecl
 rexml/xmltokens
 rexml/xpath
 rexml/xpath_parser
-rinda/rinda                     sheepman
-rinda/tuplespace                sheepman
+rinda/rinda                     
+rinda/tuplespace                
 ripper
 rss
 rubygems                        okkez
@@ -256,7 +256,7 @@ strscan
 sync
 syslog                          kouya
 tempfile                        kouya           done
-test/unit                       sheepman
+test/unit                       
 thread                          m-kawato
 thwait                          kouya           done
 time                            kouya           done
@@ -270,9 +270,9 @@ tsort                           kouya           done
 un                              okkez           done
 uri                             sheepman        done
 weakref                         bornite
-webrick                         sheepman
+webrick                         
 webrick/cgi                     sheepman        done
-webrick/ssl                     sheepman
+webrick/ssl                     
 win32/registry
 win32/resolv
 win32ole
