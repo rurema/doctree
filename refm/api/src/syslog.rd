@@ -22,8 +22,8 @@ UNIXのsyslogのラッパーモジュール。
 
 == Module Functions
 
---- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER)
---- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... }
+--- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) -> self
+--- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 #@todo
 
 与えられた引数でsyslogを開く。以降、他の Syslog モジュール関数が使
@@ -33,6 +33,16 @@ UNIXのsyslogのラッパーモジュール。
 最後に Syslog.close を行う。
 
 syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
+
+  require 'syslog'
+
+  Syslog.open("syslogtest")
+  Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
+  begin
+    Syslog.open("syslogtest2")
+  rescue RuntimeError => err
+    puts err #=> "syslog already open"
+  end
 
 ident はすべてのログにつく識別子で、どのプログラムから送られ
 たログなのかを識別するために使われる。通常プログラム名が使われる。
@@ -51,20 +61,47 @@ options と facility に指定できる値については
         Syslog.open('ftpd', Syslog::LOG_PID | Syslog::LOG_NDELAY,
                     Syslog::LOG_FTP)
 
-self を返す。
+syslog の詳細については [[man:syslog(3)]] を参照してください。
 
-syslog の詳細については [[man:syslog(3)]] を参照。
+@raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
 
---- open!(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... }
---- reopen(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... }
-#@todo
+@return self を返します。
 
-開いていた syslog を最初にクローズする点を除いて Syslog.open と同じ。
+--- open!(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
+--- reopen(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
---- opened?
-#@todo
+開いていた syslog を最初にクローズする点を除いて[[m:Syslog.open]] と同じです。
+
+使用例
+  require 'syslog'
+
+  Syslog.open("syslogtest")
+  Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
+  begin
+    Syslog.open!("syslogtest2")
+    Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 200)
+  rescue RuntimeError => err
+    # RuntimeError は発生しない。
+    puts err 
+  end
+  File.foreach('/var/log/system.log'){|line|
+    print line if line =~ /the sky is/
+  }
+
+@see [[m:Syslog.open]]
+
+--- opened? -> bool
 
 syslog をオープンしていれば真を返す。
+
+使用例
+  require 'syslog'
+
+  p Syslog.opened? #=> false
+  Syslog.open("syslogtest")
+  Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
+  p Syslog.opened? #=> true
+
 
 --- ident
 --- options
