@@ -119,12 +119,19 @@ syslog をオープンしていれば真を返す。
   p Syslog.opened? #=> true
 
 
---- ident
---- options
---- facility
-#@todo
+--- ident -> String | nil
+--- options -> Fixnum | nil
+--- facility -> Fixnum | nil
 
-最後のopenで与えられた対応する引数を返す。
+最後のopenで与えられた対応する引数を返します。
+
+使用例
+  require 'syslog'
+
+  Syslog.open("syslogtest")
+  p Syslog.ident    #=> "syslogtest"
+  p Syslog.options  #=> 3
+  p Syslog.facility #=> 8
 
 --- log(priority, format, ...)
 #@todo
@@ -135,7 +142,7 @@ priority は優先度を示す定数[[c:Syslog::Constants]]参照)。
 また、facility([[c:Syslog::Constants]]参照)を論理和で指定す
 ることで open で指定した facility を切替えることもできる。
 
-format 以降は [[m:Kernel#sprintf]] と同じ形式の引数を指定する。
+format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定する。
 メッセージに改行を含める必要はない。
 
        例:
