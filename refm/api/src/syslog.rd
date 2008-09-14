@@ -6,11 +6,19 @@ include Syslog::Constants
 
 UNIXのsyslogのラッパーモジュール。
 
-        require 'syslog'
+  require 'syslog'
 
-        Syslog.open("syslogtest")
-        Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
-        Syslog.close
+  Syslog.open("syslogtest")
+  Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
+  Syslog.close
+  # 書き込まれているか確かめる。
+  # 但し、実行環境によってログの場所が違う。くわしくはsyslog.confを参照。
+  File.foreach('/var/log/system.log'){|line|
+    line.chomp!
+    if /syslogtest/ =~ line
+      puts line
+    end
+  }
 
 == Module Functions
 
