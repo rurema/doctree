@@ -138,7 +138,7 @@ syslog をオープンしていれば真を返す。
 
 syslogにメッセージを書き込む。
 
-priority は優先度を示す定数[[c:Syslog::Constants]]参照)。
+priority は優先度を示す定数([[c:Syslog::Constants]]参照)。
 また、facility([[c:Syslog::Constants]]参照)を論理和で指定す
 ることで open で指定した facility を切替えることもできる。
 
@@ -166,33 +166,42 @@ Syslog#log()のショートカットメソッド。
        例:
          Syslog.crit("the sky is falling in %d seconds!",5)
 
---- mask
+--- mask -> Fixnum | nil
 --- mask=(mask)
-#@todo
+
+@param mask ログの優先度のマスクを設定します。
 
 ログの優先度のマスクを取得または設定する。
 マスクは永続的であり、
 Syslog.openやSyslog.close
 ではリセットされない。
-       例:
+
+例:
          Syslog.mask = Syslog::LOG_UPTO(Syslog::LOG_ERR)
 
---- close
-#@todo
+--- close -> nil
 
-syslogを閉じる。
+syslogを閉じます。
 
---- instance
-#@todo
+@raise RuntimeError syslog がopen されていない場合発生します。
+
+使用例
+  require 'syslog'
+
+  Syslog.open("syslogtest")
+  Syslog.log(Syslog::LOG_WARNING, "the sky is falling in %d seconds!", 100)
+  Syslog.close
+
+--- instance -> self
 
 selfを返す。(旧版との互換性のため)
 
---- LOG_MASK(priority)
+--- LOG_MASK(priority) -> Fixnum
 #@todo
 
 1つの優先度に対するマスクを作成する。
 
---- LOG_UPTO(priority)
+--- LOG_UPTO(priority) -> Fixnum
 #@todo
 
 priorityまでのすべての優先度のマスクを作成する。
