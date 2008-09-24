@@ -26,7 +26,7 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 どのスレッドもオブジェクトを排他ロックできない。
 
 == Module Functions
---- sync_mode
+--- sync_mode -> bool
 #@todo
 現在のロック状態を返す。
 
