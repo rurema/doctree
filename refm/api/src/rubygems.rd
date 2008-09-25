@@ -284,7 +284,7 @@ Windows 上で動いている Ruby を識別するための正規表現の配列。
 --- version_requirement -> Get::Requirement
 #@todo
 
-ロードに失敗した Gem の必要上件を返します。
+ロードに失敗した Gem の必要条件を返します。
 
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirement]]
 
@@ -292,7 +292,7 @@ Windows 上で動いている Ruby を識別するための正規表現の配列。
 #@todo
 
 ロードに失敗した Gem の必要条件をセットします。
-
+ 
 @param version_requirement [[c:Gem::Requirement]] のインスタンスをセットします。
 
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirement]]
