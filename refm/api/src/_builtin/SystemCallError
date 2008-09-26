@@ -105,17 +105,30 @@ SystemCallError オブジェクトを生成して返します。
 
 = class Errno::EXXX < SystemCallError
 
-システム依存のエラーコードのそれぞれに対応する一連の例外クラスです。システムコールが失敗したときに発生します。
+システム依存のエラーコードのそれぞれに対応する一連の例外クラスです。
+Rubyのライブラリ内部でシステムコールや一部のC言語関数が失敗したときに発生します。
 
-実際には「EXXX」というクラスが定義されているわけではありません。「XXX」の部分は下記に列挙したような各種のエラー名が入ります。例えば、エラー名 ENOENT には Errno::ENOENT クラスが対応します。
+実際には「EXXX」というクラスが定義されているわけではありません。「XXX」の部分は下記に列挙したような各種のエラー名が入ります。
+例えば、[[m:File::open]] の内部でシステムコール [[man:open(2)]] がエラーコード ENOENT を返すと、Rubyは例外 Errno::ENOENT を発生させます。
 
-Ruby はデフォルトで下記リストのような Errno::EXXX クラスを定義しようとします。
-Errno::EXXX クラスは、対応するエラー名がシステムに存在する場合のみ定義されます。
+Ruby は処理系がコンパイルされるときに、デフォルトで下記リストのような Errno::EXXX クラスを定義しようとします。
+#@since 1.9.0
+動作環境に EXXX というエラーコードが存在しない場合、Rubyはその Errno::EXXX を Errno::NOERROR の別名として定義します。
+#@else
+Errno::EXXX クラスは、対応するエラー名が動作環境に存在する場合のみ定義されます。
+このため、一部の環境にしか存在しないエラーコードについて rescue 節などで Errno::EXXX を利用すると
+意図せずプログラムの可搬性を損なう場合があります。
+それを避けるには、エラーコードの種類を特定する必要がある場合を除いては [[c:SystemCallError]] で rescue するようにしてください。
+#@end
+
+
 また、以下の一覧にはないシステムエラーが発生した場合は、
 [[c:Errno::EXXX]] (XXX はエラー番号を表す 3 桁の数字)
 という名前の例外クラスが自動的に作成され、発生します。
 (これは Ruby 内部でのみ行われ、 Ruby プログラム上で [[m:SystemCallError.new]] に一覧にないコードを渡してもクラスは作成されません)
 
+それぞれの例外が発生し得るケースについては、この項では記述しません。
+例外を発生する各メソッドのマニュアルおよびオペレーティングシステムのマニュアルを参照してください。
 
 === エラー名リスト
 
@@ -299,3 +312,376 @@ Errno::EXXX の各クラスに対応するシステム依存のエラーコード値(整数)です。
     p Errno::EAGAIN::Errno            # => 11
     p Errno::EWOULDBLOCK::Errno       # => 11
 
+= class Errno::ERROR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EPERM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOENT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESRCH < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EINTR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EIO < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENXIO < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::E2BIG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOEXEC < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADF < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ECHILD < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EAGAIN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOMEM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EACCES < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EFAULT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTBLK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBUSY < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EEXIST < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EXDEV < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENODEV < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTDIR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EISDIR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EINVAL < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENFILE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EMFILE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTTY < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ETXTBSY < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EFBIG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOSPC < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESPIPE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EROFS < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EMLINK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EPIPE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EDOM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ERANGE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EDEADLK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENAMETOOLONG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOLCK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOSYS < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTEMPTY < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELOOP < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EWOULDBLOCK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOMSG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EIDRM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ECHRNG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EL2NSYNC < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EL3HLT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EL3RST < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELNRNG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EUNATCH < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOCSI < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EL2HLT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EXFULL < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOANO < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADRQC < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADSLT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EDEADLOCK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBFONT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOSTR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENODATA < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ETIME < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOSR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENONET < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOPKG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EREMOTE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOLINK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EADV < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESRMNT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ECOMM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EPROTO < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EMULTIHOP < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EDOTDOT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADMSG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EOVERFLOW < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTUNIQ < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EBADFD < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EREMCHG < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELIBACC < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELIBBAD < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELIBSCN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELIBMAX < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ELIBEXEC < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EILSEQ < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ERESTART < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESTRPIPE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EUSERS < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTSOCK < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EDESTADDRREQ < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EMSGSIZE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EPROTOTYPE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOPROTOOPT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EPROTONOSUPPORT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESOCKTNOSUPPORT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EOPNOTSUPP < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EPFNOSUPPORT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EAFNOSUPPORT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EADDRINUSE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EADDRNOTAVAIL < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENETDOWN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENETUNREACH < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENETRESET < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ECONNABORTED < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ECONNRESET < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOBUFS < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EISCONN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTCONN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESHUTDOWN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ETOOMANYREFS < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ETIMEDOUT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ECONNREFUSED < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EHOSTDOWN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EHOSTUNREACH < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EALREADY < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EINPROGRESS < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ESTALE < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EUCLEAN < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENOTNAM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::ENAVAIL < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EISNAM < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EREMOTEIO < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+= class Errno::EDQUOT < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+
+#@since 1.9.0
+= class Errno::NOERROR < SystemCallError
+システムコールのエラーコードを表す例外クラスです。詳細は [[c:Errno::EXXX]] を参照してください。
+#@end
