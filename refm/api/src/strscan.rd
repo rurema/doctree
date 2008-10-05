@@ -585,13 +585,13 @@ regexp が一致するまで文字列をスキャンします。
     * search_full(regexp, false, true) は [[m:StringScanner#check_until]] と同等。
     * search_full(regexp, false, false) は [[m:StringScanner#exist?]] と同等。
 
---- skip(regexp)
+--- skip(regexp) -> Fixnum | nil
 #@todo
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたらスキャンポインタを進めマッチした部分文字列の
 長さを返します。マッチしなかったら nil を返します。
 
-このメソッドはマッチが成功してもスキャンポインタを進めません。
+@param regexp マッチに使用する正規表現を指定します。
 
         s = StringScanner.new('test string')
         p s.skip(/\w+/)   #=> 4
