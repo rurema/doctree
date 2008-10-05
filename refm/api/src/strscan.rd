@@ -165,13 +165,14 @@ selfを返します。
       s.bol?        # => false
 #@end
 
---- check(regexp)
-#@todo
+--- check(regexp) -> String | nil
 現在位置から regexp とのマッチを試みます。
 マッチに成功したらマッチした部分文字列を返します。
 マッチに失敗したら nil を返します。
 
 このメソッドはマッチが成功してもスキャンポインタを進めません。
+
+@param regexp マッチに用いる正規表現を指定します。
 
       s = StringScanner.new('test string')
       s.check(/\w+/) # => "test"
@@ -180,13 +181,14 @@ selfを返します。
       s.check(/\s+/) # => nil
       s.matched      # => nil
 
---- check_until(regexp)
-#@todo
+--- check_until(regexp) -> String | nil
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
 マッチに失敗したら nil を返します。
 
 このメソッドはマッチが成功してもスキャンポインタを進めません。
+
+@param regexp マッチに用いる正規表現を指定します。
 
       s = StringScanner.new('test string')
       s.check_until(/str/) # => "test str"
@@ -194,9 +196,8 @@ regexp が一致するまで文字列をスキャンします。
       s.pos                # => 0
       s.pre_match          # => "test "
 
---- eos?
---- empty?
-#@todo
+--- eos? -> bool
+--- empty? -> bool
 スキャンポインタが文字列の末尾を指しているなら true を、
 末尾以外を指しているなら false を返します。
 
@@ -210,16 +211,15 @@ regexp が一致するまで文字列をスキャンします。
 [[m:StringScanner#empty?]] は将来のバージョンで削除される予定です。
 代わりに [[m:StringScanner#eos?]] を使ってください。
 
---- exist?(regexp)
-#@todo
+--- exist?(regexp) -> Fixnum | nil
 #@if (version <= "1.8.5")
 [注意] このメソッドは Ruby 1.8.5 以前では正しく動作しません。
 #@else
 #@#Ruby 1.8.6 以降は以下の記述に沿った仕様に変わります。
 
-スキャンポインタの位置の文字列から regexp がマッチする位置を返します。
-この位置はスキャンポインタからの相対位置です。
-マッチしなければ nil を返します。
+スキャンポインタの位置から，次にマッチする文字列の末尾までの長さを返します。
+
+マッチに失敗したら nil を返します。
 
 このメソッドはマッチが成功してもスキャンポインタを進めません。
 
