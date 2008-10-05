@@ -30,39 +30,40 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 #@todo
 現在のロック状態を返す。
 
---- sync_locked?
---- locked?
+--- sync_locked? -> bool
+--- locked? -> bool
 #@todo
 ロックされているかどうかを返す。
 
---- sync_shared?
---- shared?
+--- sync_shared? -> bool
+--- shared? -> bool
 #@todo
 共有ロックされているかどうかを返す。
 
---- sync_exclusive?
---- exclusive?
+--- sync_exclusive? -> bool
+--- exclusive? -> bool
 #@todo
 排他ロックされているかどうかを返す。
 
---- sync_try_lock(mode = EX)
---- try_lock(mode = EX)
+--- sync_try_lock(mode = EX) -> bool
+--- try_lock(mode = EX) -> bool
 #@todo
 ロック状態を変更する。
 変更できたかどうかをtrueかfalseで返し、ブロックしない。
 
---- sync_lock(mode = EX)
---- lock(mode = EX)
+--- sync_lock(mode = EX) -> self
+--- lock(mode = EX) -> self
 #@todo
 ロック状態を変更する。
 変更できるまで現在のスレッドの実行をブロックする。
 
---- sync_unlock(mode = EX)
---- unlock(mode = EX)
+--- sync_unlock(mode = EX) -> self
+--- unlock(mode = EX) -> self
 #@todo
 ロックを解除する。
 
---- sync_synchronize(mode = EX) {...}
---- synchronize(mode = EX) {...}
+--- sync_synchronize(mode = EX) {...} -> object
+--- synchronize(mode = EX) {...} -> object
 #@todo
 ロック状態を変更してブロックを実行する。
+ブロックの実行結果を返します。
