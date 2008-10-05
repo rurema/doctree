@@ -61,33 +61,42 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 
 == Class Methods
 
---- new(str, dup = false)
-#@todo
+--- new(str, dup = false) -> StringScanner -> StringScanner
 
 新しい StringScanner オブジェクトを生成します。
-str はスキャン対象の文字列です。
+
+@param str スキャン対象の文字列を指定します。
 
 #@if (version <= "1.8.0")
-dup が true の時は文字列を複製して freeze します。
-dup が false なら複製せずに freeze します。
+@param dup dup が true の時は文字列を複製して freeze します。
+           dup が false なら複製せずに freeze します。
 #@else
-dup は単に無視します。
-引数の文字列は複製も freeze もされず、そのまま使います。
+@param dup dup は単に無視します。
+           引数の文字列は複製も freeze もされず、そのまま使います。
 #@end
 
-#@# bc-rdoc: detected missing name: must_C_version 
----  StringScanner.must_C_version 
-#@todo
-This method is defined for backward compatibility.
+使用例
+    s = StringScanner.new('This is an example string')
+    s.eos?            #=> false
+
+    p s.scan(/\w+/)   #=> "This"
+    p s.scan(/\w+/)   #=> nil
+    p s.scan(/\s+/)   #=> " "
+
+---  StringScanner.must_C_version -> self
+このメソッドは後方互換性のために定義されています。
 
 == Instance Methods
 
---- [](nth)
-#@todo
+--- [](nth) -> String | nil
 
 前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
 返します。インデックス 0 はマッチした部分全体です。前回のマッチが
 失敗していると常に nil を返します。
+
+@param nth 前回マッチした正規表現の nth 番目のかっこに対応する部分文字列を
+           返します。
+
 
       s = StringScanner.new('test string')
       s.scan(/\w(\w)(\w*)/) # => "test"
@@ -108,14 +117,15 @@ This method is defined for backward compatibility.
       s[2]                  # => "ring"
 
 #@if (version >= "1.8.1")
---- <<(s)
---- concat(str)
-#@todo
+--- <<(str) -> self
+--- concat(str) -> self
 
 操作対象の文字列に対し str を破壊的に連結します。
 マッチ記録は変更されません。
 
 selfを返します。
+
+@param str 操作対象の文字列に対し str を破壊的に連結します。
 
       s = StringScanner.new('test') # => #<StringScanner 0/4 @ "test">
       s.match(/\w(\w*)/)            # => "test"
@@ -136,8 +146,8 @@ selfを返します。
 #@end
 
 #@if (version >= "1.8.1")
---- beginning_of_line?
---- bol?
+--- beginning_of_line? -> bool
+--- bol? -> bool
 #@todo
 スキャンポインタが行頭を指しているなら true を、
 行頭以外を指しているなら false を返します。
@@ -145,7 +155,7 @@ selfを返します。
 行頭の定義は、文字列先頭かまたは \n の直後を指していることです。
 文字列末尾は必ずしも行頭ではありません。
 
-      s = StringScanner.new('test\nstring')
+      s = StringScanner.new("test\nstring")
       s.bol?        # => true
       s.scan(/\w+/)
       s.bol?        # => false
