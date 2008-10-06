@@ -231,12 +231,27 @@ regexp が一致するまで文字列をスキャンします。
       s.exist?(/e/) # => nil
 #@end
 
---- getch
-#@todo
+--- getch -> String | nil
 一文字スキャンして文字列で返します。
-一文字の定義は $KCODE に依存します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すならnilを返します。
+
+#@since 1.9.0
+一文字の定義は、与えた文字列のエンコードに依存します。
+
+  require 'strscan'
+
+  utf8 = "\u{308B 3073 3044}"
+  s = StringScanner.new(utf8.encode("UTF-8")) 
+  p s.getch                         # => "る"
+  p s.getch                         # => "び"
+  p s.getch                         # => "い"
+  p s.getch                         # => nil
+
+#@else
+一文字の定義は $KCODE に依存します。
+
+      require 'strscan'
 
       s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
       $KCODE = 'n'                    # 単なるバイト列として認識されます
@@ -246,6 +261,7 @@ regexp が一致するまで文字列をスキャンします。
       s.getch                         # => "び"
       s.getch                         # => "い"
       s.getch                         # => nil
+#@end
 
 
 --- get_byte
