@@ -272,6 +272,10 @@ regexp が一致するまで文字列をスキャンします。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すなら nil を返します。
 
+[[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#get_byte]] を使ってください。
+
+使用例
   require 'strscan'
 
   utf8 = "\u{308B 3073 3044}"
@@ -289,6 +293,10 @@ $KCODE に関らず 1 バイトスキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すなら nil を返します。
 
+[[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#get_byte]] を使ってください。
+
+使用例
       require 'strscan'
 
       s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
@@ -304,8 +312,6 @@ $KCODE に関らず 1 バイトスキャンして文字列で返します。
 
 #@end
 
-[[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
-代わりに [[m:StringScanner#get_byte]] を使ってください。
 
 --- inspect -> String
 StringScannerオブジェクトを表す文字列を返します。
@@ -379,44 +385,55 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\w+/)  # => nil
       s.matched_size # => nil
 
---- peek(bytes)
---- peep(bytes)
-#@todo
+--- peek(bytes) -> String
+--- peep(bytes) -> String
 スキャンポインタから長さ bytes バイト分だけ文字列を返します。
 
+動作例:
+      require 'strscan'
       s = StringScanner.new('test string')
       s.peek(4)   # => "test"
 
-bytes は 0 以上の整数です。
-ただし、スキャン対象の文字列の長さを超える分は無視されます。
-また、負数を与えると例外 ArgumentError が発生します。
-bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
-指しているときは空文字列 ("") を返します。
-
-      s = StringScanner.new('test string')
-      s.peek(4)     # => "test"
-      s.peek(20)    # => "test string"
-      s.peek(0)     # => ""
-      s.peek(-1)    # ArgumentError: negative string size (or size too big)
-      s.scan(/\w+/) # => "test"
-      s.scan(/\s+/) # => " "
-      s.scan(/\w+/) # => "string"
-      s.peek(4)     # => ""
-
-このメソッドを実行してもスキャンポインタは移動しません。
-
-      s = StringScanner.new('test string')
-      s.peek(4)     # => "test"
-      s.peek(4)     # => "test"
-      s.scan(/\w+/) # => "test"
-      s.peek(4)     # => " str"
-      s.peek(4)     # => " str"
+また、このメソッドを実行してもスキャンポインタは移動しません。
 
 [[m:StringScanner#peep]] は将来のバージョンでは削除される予定です。
 代わりに [[m:StringScanner#peek]] を使ってください。
 
---- pointer
---- pos
+@param bytes 0 以上の整数を指定します。
+             ただし、スキャン対象の文字列の長さを超える分は無視されます。
+             bytes が 0 のとき、またはスキャンポインタが文字列の末尾を
+             指しているときは空文字列 ("") を返します。
+
+@raise ArgumentError bytes に負数を与えると発生します。
+
+使用例
+      require 'strscan'
+
+      s = StringScanner.new('test string')
+      p s.peek(4)     # => "test"
+      p s.peek(20)    # => "test string"
+      p s.peek(0)     # => ""
+      begin
+        s.peek(-1)   
+      rescue ArgumentError => err
+        puts err # negative string size (or size too big)
+      end
+      p s.scan(/\w+/) # => "test"
+      p s.scan(/\s+/) # => " "
+      p s.scan(/\w+/) # => "string"
+      p s.peek(4)     # => ""
+
+      # このメソッドを実行してもスキャンポインタは移動しません。
+
+      s = StringScanner.new('test string')
+      p s.peek(4)     # => "test"
+      p s.peek(4)     # => "test"
+      p s.scan(/\w+/) # => "test"
+      p s.peek(4)     # => " str"
+      p s.peek(4)     # => " str"
+
+--- pointer -> Fixnum
+--- pos -> Fixnum
 #@todo
 現在のスキャンポインタのインデックスを返します。
 
