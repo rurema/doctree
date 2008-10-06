@@ -264,12 +264,32 @@ regexp が一致するまで文字列をスキャンします。
 #@end
 
 
---- get_byte
---- getbyte
-#@todo
+--- get_byte -> String | nil
+--- getbyte -> String | nil
+
+#@since 1.9.0
+1 バイトスキャンして文字列で返します。
+スキャンポインタをその後ろに進めます。
+スキャンポインタが文字列の末尾を指すなら nil を返します。
+
+  require 'strscan'
+
+  utf8 = "\u{308B 3073 3044}"
+  s = StringScanner.new(utf8.encode("EUC-JP"))
+  p s.get_byte       #=> "\xA4"
+  p s.get_byte       #=> "\xEB"
+  p s.get_byte       #=> "\xA4"
+  p s.get_byte       #=> "\xD3"
+  p s.get_byte       #=> "\xA4"
+  p s.get_byte       #=> "\xA4"
+  p s.get_byte       #=> nil   
+
+#@else
 $KCODE に関らず 1 バイトスキャンして文字列で返します。
 スキャンポインタをその後ろに進めます。
 スキャンポインタが文字列の末尾を指すなら nil を返します。
+
+      require 'strscan'
 
       s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
       $KCODE = 'n'                    # 単なるバイト列として認識されます
@@ -282,12 +302,22 @@ $KCODE に関らず 1 バイトスキャンして文字列で返します。
       s.get_byte                      # => "\244"
       s.get_byte                      # => nil
 
+#@end
+
 [[m:StringScanner#getbyte]] は将来のバージョンで削除される予定です。
 代わりに [[m:StringScanner#get_byte]] を使ってください。
 
---- inspect
-#@todo
+--- inspect -> String
 StringScannerオブジェクトを表す文字列を返します。
+
+文字列にはクラス名の他、以下の情報が含まれます。
+
+    * スキャナポインタの現在位置。
+    * スキャン対象の文字列の長さ。
+    * スキャンポインタの前後にある文字。上記実行例の @ がスキャンポインタを表します。
+
+使用例
+      require 'strscan'
 
       s = StringScanner.new('test string')
       s.inspect                            # => "#<StringScanner 0/11 @ \"test ...\">"
@@ -298,26 +328,21 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\w+/)                        # => "string"
       s.inspect                            # => "#<StringScanner fin>"
 
-文字列にはクラス名の他、以下の情報が含まれます。
 
-    * スキャナポインタの現在位置。
-    * スキャン対象の文字列の長さ。
-    * スキャンポインタの前後にある文字。上記実行例の @ がスキャンポインタを表します。
-
---- match?(regexp)
-#@todo
+--- match?(regexp) -> Fixnum | nil
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタは進めずにマッチした
 部分文字列の長さを返します。マッチしなかったら nil を
 返します。
+
+@param regexp マッチに用いる正規表現を指定します。
 
         s = StringScanner.new('test string')
         p s.match?(/\w+/)   #=> 4
         p s.match?(/\w+/)   #=> 4
         p s.match?(/\s+/)   #=> nil
 
---- matched
-#@todo
+--- matched -> String | nil
 前回マッチした部分文字列を返します。
 前回のマッチに失敗していると nil を返します。
 
@@ -330,8 +355,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\s+/) # => " "
       s.matched     # => " "
 
---- matched?
-#@todo
+--- matched? -> bool
 前回のマッチが成功していたら true を、
 失敗していたら false を返します。
 
@@ -344,8 +368,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\s+/) # => " "
       s.matched?    # => true
 
---- matched_size
-#@todo
+--- matched_size -> Fixnum | nil
 前回マッチした部分文字列の長さを返します。
 前回マッチに失敗していたら nil を返します。
 
