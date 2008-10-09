@@ -127,6 +127,7 @@ selfを返します。
 
 @param str 操作対象の文字列に対し str を破壊的に連結します。
 
+使用例
       s = StringScanner.new('test') # => #<StringScanner 0/4 @ "test">
       s.match(/\w(\w*)/)            # => "test"
       s[0]                          # => "test"
@@ -148,13 +149,13 @@ selfを返します。
 #@if (version >= "1.8.1")
 --- beginning_of_line? -> bool
 --- bol? -> bool
-#@todo
 スキャンポインタが行頭を指しているなら true を、
 行頭以外を指しているなら false を返します。
 
 行頭の定義は、文字列先頭かまたは \n の直後を指していることです。
 文字列末尾は必ずしも行頭ではありません。
 
+使用例
       s = StringScanner.new("test\nstring")
       s.bol?        # => true
       s.scan(/\w+/)
@@ -174,6 +175,7 @@ selfを返します。
 
 @param regexp マッチに用いる正規表現を指定します。
 
+使用例
       s = StringScanner.new('test string')
       s.check(/\w+/) # => "test"
       s.pos          # => 0
@@ -190,6 +192,7 @@ regexp が一致するまで文字列をスキャンします。
 
 @param regexp マッチに用いる正規表現を指定します。
 
+使用例
       s = StringScanner.new('test string')
       s.check_until(/str/) # => "test str"
       s.matched            # => "str"
@@ -201,6 +204,7 @@ regexp が一致するまで文字列をスキャンします。
 スキャンポインタが文字列の末尾を指しているなら true を、
 末尾以外を指しているなら false を返します。
 
+使用例
       s = StringScanner.new('test string')
       s.eos?        # => false
       s.scan(/\w+/)
@@ -223,6 +227,7 @@ regexp が一致するまで文字列をスキャンします。
 
 このメソッドはマッチが成功してもスキャンポインタを進めません。
 
+使用例
       s = StringScanner.new('test string')
       s.exist?(/s/) # => 3
       s.exist?(//)  # => 0
@@ -239,6 +244,7 @@ regexp が一致するまで文字列をスキャンします。
 #@since 1.9.0
 一文字の定義は、与えた文字列のエンコードに依存します。
 
+使用例
   require 'strscan'
 
   utf8 = "\u{308B 3073 3044}"
@@ -251,6 +257,7 @@ regexp が一致するまで文字列をスキャンします。
 #@else
 一文字の定義は $KCODE に依存します。
 
+使用例
       require 'strscan'
 
       s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
@@ -343,6 +350,7 @@ StringScannerオブジェクトを表す文字列を返します。
 
 @param regexp マッチに用いる正規表現を指定します。
 
+使用例
         s = StringScanner.new('test string')
         p s.match?(/\w+/)   #=> 4
         p s.match?(/\w+/)   #=> 4
@@ -352,6 +360,7 @@ StringScannerオブジェクトを表す文字列を返します。
 前回マッチした部分文字列を返します。
 前回のマッチに失敗していると nil を返します。
 
+使用例
       s = StringScanner.new('test string')
       s.matched     # => nil
       s.scan(/\w+/) # => "test"
@@ -365,6 +374,7 @@ StringScannerオブジェクトを表す文字列を返します。
 前回のマッチが成功していたら true を、
 失敗していたら false を返します。
 
+使用例
       s = StringScanner.new('test string')
       s.matched?    # => false
       s.scan(/\w+/) # => "test"
@@ -378,6 +388,7 @@ StringScannerオブジェクトを表す文字列を返します。
 前回マッチした部分文字列の長さを返します。
 前回マッチに失敗していたら nil を返します。
 
+使用例
       s = StringScanner.new('test string')
       s.matched_size # => nil
       s.scan(/\w+/)  # => "test"
@@ -434,9 +445,9 @@ StringScannerオブジェクトを表す文字列を返します。
 
 --- pointer -> Fixnum
 --- pos -> Fixnum
-#@todo
 現在のスキャンポインタのインデックスを返します。
 
+使用例
       s = StringScanner.new('test string')
       s.pos         # => 0
       s.scan(/\w+/) # => "test"
@@ -446,33 +457,39 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\s+/) # => " "
       s.pos         # => 5
 
---- pointer=(n)
---- pos=(n)
-#@todo
+--- pointer=(n) -> Fixnum
+--- pos=(n) -> Fixnum
 スキャンポインタのインデックスを n にセットします。
 
-n は整数で、バイト単位で指定します。
-マッチ対象の文字列の長さを超える値を指定すると例外 RangeError が発生します。
-負数を指定すると文字列の末尾からのオフセットとして扱います。
+@param n 整数で、バイト単位で指定します。
+         負数を指定すると文字列の末尾からのオフセットとして扱います。
+@raise RangeError  マッチ対象の文字列の長さを超える値を指定すると発生します。
 
-n を返します。
+@return n を返します。
+
+使用例
+      require 'strscan'
 
       s = StringScanner.new('test string')
-      s.scan(/\w+/) # => "test"
-      s.pos = 1     # => 1
-      s.scan(/\w+/) # => "est"
-      s.pos = 7     # => 7
-      s.scan(/\w+/) # => "ring"
-      s.pos = 20    # RangeError: index out of range
-      s.pos = -4    # => -4
-      s.scan(/\w+/) # => "ring"
+      p s.scan(/\w+/) # => "test"
+      p s.pos = 1     # => 1
+      p s.scan(/\w+/) # => "est"
+      p s.pos = 7     # => 7
+      p s.scan(/\w+/) # => "ring"
+
+      begin
+        s.pos = 20    
+      rescue RangeError => err
+        puts err #=> index out of range
+      end
+      p s.pos = -4    # => -4
+      p s.scan(/\w+/) # => "ring"
 
 #@if (version <= "1.8.0")
 このメソッドはマッチ記録を捨てます。
 #@end
 
---- post_match
-#@todo
+--- post_match -> String | nil
 前回マッチを行った文字列のうち、マッチしたところよりも後ろの
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
@@ -490,8 +507,7 @@ n を返します。
       s.scan(/\w+/) # => nil
       s.post_match  # => nil
 
---- pre_match
-#@todo
+--- pre_match -> String | nil
 前回マッチを行った文字列のうち、マッチしたところよりも前の
 部分文字列を返します。前回のマッチが失敗していると常に nil を
 返します。
@@ -509,14 +525,13 @@ n を返します。
       s.scan(/\w+/) # => nil
       s.pre_match   # => nil
 
---- reset
-#@todo
+--- reset -> self
 スキャンポインタを文字列の先頭 (インデックス 0) に戻し、
 マッチ記録を捨てます。
 
-self を返します。
-
 pos = 0と同じ動作です。
+
+@return self を返します。
 
       s = StringScanner.new('test string')
       s.scan(/\w+/) # => "test"
@@ -528,10 +543,10 @@ pos = 0と同じ動作です。
       s[0]          # => nil
       s.pos         # => 0
 
---- rest
-#@todo
+--- rest -> String
 文字列の残り (rest) を返します。
 具体的には、スキャンポインタが指す位置からの文字列を返します。
+
 スキャンポインタが文字列の末尾を指していたら空文字列 ("") を返します。
 
       s = StringScanner.new('test string')
@@ -543,44 +558,46 @@ pos = 0と同じ動作です。
       s.scan(/\w+/)  # => "string"
       s.rest         # => ""
 
---- rest?
-#@todo
+--- rest? -> bool
 文字列が残っているならば trueを、
 残っていないならば false を返します。
 
 [[m:StringScanner#eos?]] と逆の結果を返します。
 
-      s = StringScanner.new('test string')
-      s.eos?        # => false
-      s.rest?       # => true
-      s.scan(/\w+/)
-      s.scan(/\s+/)
-      s.scan(/\w+/)
-      s.eos?        # => true
-      s.rest?       # => false
-
 [[m:StringScanner#rest?]] は将来のバージョンで削除される予定です。
 代わりに [[m:StringScanner#eos?]] を使ってください。
 
---- rest_size
---- restsize
-#@todo
+使用例
+      s = StringScanner.new('test string')
+      p s.eos?        # => false
+      p s.rest?       # => true
+      s.scan(/\w+/)
+      s.scan(/\s+/)
+      s.scan(/\w+/)
+      p s.eos?        # => true
+      p s.rest?       # => false
+
+--- rest_size -> Fixnum
+--- restsize -> Fixnum
 文字列の残りの長さを返します。
 stringscanner.rest.size と同じです。
-
-      s = StringScanner.new('test string')
-      s.rest_size # => 11
-      s.rest.size # => 11
 
 [[m:StringScanner#restsize]] は将来のバージョンで削除される予定です。
 代わりに[[m:StringScanner#rest_size]] を使ってください。
 
---- scan(regexp)
-#@todo
+使用例
+      s = StringScanner.new('test string')
+      p s.rest_size # => 11
+      p s.rest.size # => 11
+
+--- scan(regexp) -> String | nil
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたら、スキャンポインタを進めて正規表現にマッチした
 部分文字列を返します。マッチしなかったら nil を返します。
 
+@param regexp マッチに用いる正規表現を指定します。
+
+使用例
         s = StringScanner.new('test string')
         p s.scan(/\w+/)   #=> "test"
         p s.scan(/\w+/)   #=> nil
