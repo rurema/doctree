@@ -55,13 +55,42 @@ StringScanner オブジェクトはスキャンする文字列と「スキャンポインタ」のセットです
     s.scan(/\w+/)
     This is an example string_     s.eos? = true
 
+
+現在のスキャンポインタがさす地点以外でもマッチしたい場合は、[[m:StringScanner#scan_until]]など
+を使ってください。
+
+例: scan, scan_full の動作の違い
+
+  def case1
+    s = StringScanner.new('test string')
+    p s.scan(/t/)       #=> "t"
+    p s.scan(/\w+/)     #=> "est"
+    p s.scan(/string/)  #=> nil
+    p s.scan(/\s+/)     #=> " "
+    p s.scan(/string/)  #=> "string"
+  end
+  
+  def case2
+    s = StringScanner.new('test string')
+    p s.scan_until(/t/)       #=> "t"
+    p s.scan_until(/\w+/)     #=> "est"
+    p s.scan_until(/string/)  #=> " string"
+    p s.scan_until(/\s+/)     #=> nil
+    p s.scan_until(/string/)  #=> nil
+  end
+  
+  p "case1"
+  case1
+  p "case2"
+  case2
+
 StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
-セットしません。代わりに StringScanner#[], #matched? などの
+セットしません。代わりに [[m:StringScanner#[] ]], [[m:StringScanner##matched?]] などの
 マッチデータ関連メソッドを使ってください。
 
 == Class Methods
 
---- new(str, dup = false) -> StringScanner -> StringScanner
+--- new(str, dup = false) -> StringScanner 
 
 新しい StringScanner オブジェクトを生成します。
 
@@ -605,8 +634,7 @@ stringscanner.rest.size と同じです。
         p s.scan(/\w+/)   #=> "string"
         p s.scan(/./)     #=> nil
 
---- scan_full(regexp, s, f)
-#@todo
+--- scan_full(regexp, s, f) -> object
 スキャンポインタの位置から regexp と文字列のマッチを試します。
 マッチに成功すると、s と f の値によって以下のように動作します。
 
@@ -625,21 +653,40 @@ stringscanner.rest.size と同じです。
     * scan_full(regexp, false, true) は [[m:StringScanner#check]] と同等。
     * scan_full(regexp, false, false) は [[m:StringScanner#match]] と同等。
 
---- scan_until(regexp)
-#@todo
+@param regexp マッチに用いる正規表現を指定します。
+
+@param s true ならばスキャンポインタを進めます。
+         false ならばスキャンポインタを進めません。
+
+@param f true ならばマッチした部分文字列を返します。
+         false ならばマッチした部分文字列の長さを返します。
+
+使用例
+  s = StringScanner.new('test string')
+  p s.scan_full(/\w+/, true, true)     #=> "test"
+  p s.scan_full(/\s+/, false, true)    #=> " "
+  p s.scan_full(/\s+/, true, false)    #=> 1
+  p s.scan_full(/\w+/, false, false)   #=> 6
+  p s.scan_full(/\w+/, true, true)     #=> "string"
+
+@see [[m:StringScanner#scan]] [[m:StringScanner#skip]] [[m:StringScanner#check]]  [[m:StringScanner#match]] 
+
+--- scan_until(regexp) -> String | nil
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
 マッチに失敗したら nil を返します。
 
+@param regexp マッチに用いる正規表現を指定します。
+
+使用例
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => "test str"
       s.matched           # => "str"
       s.pos               # => 8
       s.pre_match         # => "test "
 
---- search_full(regexp, s, f)
-#@todo
+--- search_full(regexp, s, f) -> object
 regexp が一致するまで文字列をスキャンします。
 マッチに成功すると、s と f の値によって以下のように動作します。
 
@@ -658,14 +705,32 @@ regexp が一致するまで文字列をスキャンします。
     * search_full(regexp, false, true) は [[m:StringScanner#check_until]] と同等。
     * search_full(regexp, false, false) は [[m:StringScanner#exist?]] と同等。
 
+@param regexp マッチに用いる正規表現を指定します。
+
+@param s true ならばスキャンポインタを進めます。
+         false ならばスキャンポインタを進めません。
+
+@param f true ならばマッチした部分文字列を返します。
+         false ならばマッチした部分文字列の長さを返します。
+
+使用例
+
+  s = StringScanner.new('test string')   
+  p s.search_full(/t/, true, true)       #=> "t"
+  p s.search_full(/str/, false, true)    #=> "est str"
+  p s.search_full(/string/, true, true)  #=> "est string"
+
+
+@see [[m:StringScanner#scan_until]] [[m:StringScanner#skip_until]] [[m:StringScanner#check_until]] [[m:StringScanner#exist?]]
+
 --- skip(regexp) -> Fixnum | nil
-#@todo
 スキャンポインタの地点だけで regexp と文字列のマッチを試します。
 マッチしたらスキャンポインタを進めマッチした部分文字列の
 長さを返します。マッチしなかったら nil を返します。
 
 @param regexp マッチに使用する正規表現を指定します。
 
+使用例
         s = StringScanner.new('test string')
         p s.skip(/\w+/)   #=> 4
         p s.skip(/\w+/)   #=> nil
@@ -673,23 +738,25 @@ regexp が一致するまで文字列をスキャンします。
         p s.skip(/\w+/)   #=> 6
         p s.skip(/./)     #=> nil
 
---- skip_until(regexp)
-#@todo
+--- skip_until(regexp) -> Fixnum | nil
 regexp が一致するまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列の長さを返します。
 マッチに失敗したら nil を返します。
 
+@param regexp マッチに使用する正規表現を指定します。
+
+使用例
       s = StringScanner.new('test string')
       s.scan_until(/str/) # => 8
       s.matched           # => "str"
       s.pos               # => 8
       s.pre_match         # => "test "
 
---- string
-#@todo
+--- string -> String
 スキャン対象にしている文字列を返します。
 
+使用例
       s = StringScanner.new('test string')
       s.string # => "test string"
 
@@ -726,22 +793,24 @@ regexp が一致するまで文字列をスキャンします。
       s.scan(/\w+/)     # => "0123" (将来は "test" が返る可能性あり)
       str               # => "0123" (将来は "test string" が返る可能性あり)
 
---- string=(str)
-#@todo
+--- string=(str) -> String
 スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
-str を返します。
 
+@param str スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
+
+@return str を返します。
+
+使用例
       str = '0123'
       s = StringScanner.new('test string')
       s.string = str     # => "0123"
       s.scan(/\w+/)      # => "0123"
 
---- terminate
---- clear
-#@todo
+--- terminate -> self
+--- clear -> self
 スキャンポインタを文字列末尾後まで進め、マッチ記録を捨てます。
 
-self を返します。
+@return self を返します。
 
 pos = self.string.size と同じ動作です。
 
@@ -758,8 +827,7 @@ pos = self.string.size と同じ動作です。
 [[m:StringScanner#clear]] は将来のバージョンで削除される予定です。
 代わりに [[m:StringScanner#terminate]] を使ってください。
 
---- unscan
-#@todo
+--- unscan -> self
 スキャンポインタを前回のマッチの前の位置に戻します。
 
       s = StringScanner.new('test string')
@@ -767,34 +835,63 @@ pos = self.string.size と同じ動作です。
       s.unscan
       s.scan(/\w+/) # => "test"
 
+
+@return selfを返します。
+
 このメソッドでポインタを戻せるのは 1 回分だけです。
 2 回分以上戻そうとしたときは例外 StringScanner::Error が発生します。
 また、まだマッチを一度も行っていないときや、
 前回のマッチが失敗していたときも例外 StringScanner::Error が発生します。
 
-      s = StringScanner.new('test string')
-      s.unscan      # StringScanner::Error: can't unscan: prev match had failed
-      s.scan(/\w+/) # => "test"
-      s.unscan
-      s.unscan      # StringScanner::Error: can't unscan: prev match had failed
-      s.scan(/\w+/) # => "test"
-      s.scan(/\w+/) # => nil
-      s.unscan      # StringScanner::Error: can't unscan: prev match had failed
+@raise StringScanner::Error 2 回分以上戻そうとした時や、
+                            まだマッチを一度も行っていない時、
+                            前回のマッチが失敗していた時に発生します。
 
-selfを返します。
+使用例
+      s = StringScanner.new('test string')
+      begin
+        # マッチを一度も行っていないので、例外が発生する。
+        s.unscan
+      rescue StringScanner::Error => err
+        puts err
+        # 出力例
+        #=> unscan failed: previous match had failed
+      end
+      p s.scan(/\w+/) # => "test"
+      s.unscan
+      begin
+        # 二回以上戻そうとしたので、例外が発生する。
+        s.unscan
+      rescue StringScanner::Error => err
+        puts err
+        # 出力例
+        #=> unscan failed: previous match had failed
+      end
+      p s.scan(/\w+/) # => "test"
+      p s.scan(/\w+/) # => nil
+      begin
+        # 前回のマッチが失敗しているので、例外が発生する。
+        s.unscan
+      rescue => err
+        puts err
+        # 出力例
+        #=> unscan failed: previous match had failed
+      end
+
 
 #@# bc-rdoc: detected missing name: matchedsize
---- matchedsize
-#@todo
+--- matchedsize -> Fixnum | nil
 
-Equivalent to #matched_size. This method is obsolete; use #matched_size
-instead.
+[[m:StringScanner#matched_size]] と同じです。
 
+このメソッドは は将来のバージョンで削除される予定です。
+代わりに [[m:StringScanner#matched_size]] を使ってください。
+
+@see [[m:StringScanner#matched_size]] 
 
 == Constants
 
 --- Version
-#@todo
 StringScannerクラスのバージョンを文字列で返します。
 この文字列はfreezeされています。
 
