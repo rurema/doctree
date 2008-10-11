@@ -84,9 +84,17 @@ StringScanner オブジェクトはスキャンする文字列と「スキャンポインタ」のセットです
   p "case2"
   case2
 
+スキャンポインタの位置は文字単位でなくバイト単位となります。
+
+      # vim:set fileencoding=euc-jp:
+      require 'strscan'
+      s = StringScanner.new("るびい") # 文字コードはEUC-JPとします
+      p s.exist?(/び/) #=> 4
+
 StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
 セットしません。代わりに [[m:StringScanner#[] ]], [[m:StringScanner##matched?]] などの
 マッチデータ関連メソッドを使ってください。
+
 
 == Class Methods
 
@@ -377,6 +385,26 @@ StringScannerオブジェクトを表す文字列を返します。
 部分文字列の長さを返します。マッチしなかったら nil を
 返します。
 
+マッチしたサイズは文字単位でなくバイト単位となります。
+
+#@since 1.9.0
+  require 'strscan'
+  def case1(encode)
+    utf8 = "\u{308B 3073 3044}"
+    s = StringScanner.new(utf8.encode(encode))
+    s.match?(/#{"\u{308B}".encode(encode)}/)
+  end
+
+  p case1("EUC-JP")     #=> 2
+#@else
+
+  require 'strscan'
+  s = StringScanner.new("るびい") # 文字コードはUTF-8とします
+  puts s.string      #=> るびい
+  puts s.match?(/る/)  #=> 3
+
+#@end
+
 @param regexp マッチに用いる正規表現を指定します。
 
 使用例
@@ -417,6 +445,31 @@ StringScannerオブジェクトを表す文字列を返します。
 前回マッチした部分文字列の長さを返します。
 前回マッチに失敗していたら nil を返します。
 
+マッチしたサイズは文字単位でなくバイト単位となります。
+
+#@since 1.9.0
+  def run(encode)
+    utf8 = "\u{308B 3073 3044}" # るびい
+    s = StringScanner.new(utf8.encode(encode))
+    s.scan(/#{"\u{308B}".encode(encode)}/)
+    s.matched_size
+  end
+
+  p run("UTF-8")     #=> 3
+  p run("EUC-JP")    #=> 2
+  p run("Shift_Jis") #=> 2
+
+#@else
+
+ require 'strscan'
+
+ s = StringScanner.new("るびい") # 文字コードはUTF-8とします
+ puts s.string       #=> るびい
+ puts s.scan(/る/)   #=> る
+ p s.matched_size    #=> 3
+
+#@end
+
 使用例
       s = StringScanner.new('test string')
       s.matched_size # => nil
@@ -424,6 +477,7 @@ StringScannerオブジェクトを表す文字列を返します。
       s.matched_size # => 4
       s.scan(/\w+/)  # => nil
       s.matched_size # => nil
+
 
 --- peek(bytes) -> String
 --- peep(bytes) -> String
