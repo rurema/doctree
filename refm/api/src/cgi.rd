@@ -376,15 +376,15 @@ HTML を人間に見やすく整形します。
 
 == Instance Methods
 
---- header(headers = "text/html")
+--- header(options = "text/html") -> string
 #@todo
 
-HTTP ヘッダを headers に従って生成します。（ [[m:CGI#out]] と違い、標準出力には出力しません）
+HTTP ヘッダを options に従って生成します。（ [[m:CGI#out]] と違い、標準出力には出力しません）
 [[m:CGI#out]] を使わずに自力で HTML を出力したい場合などに使います。
 このメソッドは文字列エンコーディングを変換しません。
 [[ruby-list:35911]]
 
-        例：
+例：
         header
           # Content-Type: text/html
 
@@ -426,10 +426,9 @@ status パラメータには以下の文字列が使えます。
         "BAD_GATEWAY"         --> "502 Bad Gateway"
         "VARIANT_ALSO_VARIES" --> "506 Variant Also Negotiates"
 
-例
-
+例：
         cgi = CGI.new('html3')
-        print cgi.header({"charset" => "shift_jis"})
+        print cgi.header({"charset" => "shift_jis", "status" => "OK"})
         print "<html><head><title>TITLE</title></head>\r\n"
         print "<body>BODY</body></html>\r\n"
 
@@ -438,6 +437,7 @@ status パラメータには以下の文字列が使えます。
 
 HTTP ヘッダと、ブロックで与えられた文字列を標準出力に出力します。
 
+例：
         cgi = CGI.new
         cgi.out{ "string" }
           # Content-Type: text/html
@@ -468,14 +468,15 @@ HEADリクエスト (REQUEST_METHOD == "HEAD") の場合は HTTP ヘッダのみを出力します。
 
 charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
 ある場合は文字列エンコーディングを自動変換し、language を "ja"にします。
-#@#((<ruby-list:35911>))
+#@#[[ruby-list:35911]]
 
 --- print(*strings)
 #@todo
 
 引数の文字列を標準出力に出力します。
+cgi.print は $DEFAULT_OUTPUT.print と等価です。
 
-       例：
+例：
        cgi = CGI.new
        cgi.print "This line is a part of content body.\r\n"
 
