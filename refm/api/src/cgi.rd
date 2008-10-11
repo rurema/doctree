@@ -252,84 +252,116 @@ include CGI::QueryExtension
 
 == Class Methods
 
---- escape(string)
+--- escape(string) -> string
 #@todo
 
 string を URL エンコードした文字列を新しく作成し返します。
 
+例:
+        require "cgi"
+
         p CGI.escape('@##')   #=> "%40%23%23"
 
---- unescape(string)
+        url = "http://www.example.com/register?url=" + 
+          CGI.escape('http://www.example.com/index.rss')
+        p url
+        #=> "http://www.example.com/register?url=http%3A%2F%2Fwww.example.com%2Findex.rss"
+
+--- unescape(string) -> string
 #@todo
 
 string を URL デコードした文字列を新しく作成し返します。
 
+        require "cgi"
+
         p CGI.unescape('%40%23%23')   #=> "@##"
 
---- escapeHTML(string)
+        p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
+        #=> "http://www.example.com/index.rss"
+
+--- escapeHTML(string) -> string
 #@todo
 
 string 中の &"<> を実体参照にエンコードした文字列を新しく作成し返します。
 
+        require "cgi"
+
         p CGI.escapeHTML("3 > 1")   #=> "3 &gt; 1"
 
---- unescapeHTML(string)
+        print('<script type="text/javascript">alert("警告")</script>')
+
+        p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
+        #=> "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;警告&quot;)&lt;/script&gt;"
+
+--- unescapeHTML(string) -> string
 #@todo
 
 string 中の実体参照のうち、&amp; &gt; &lt; &quot;
 と数値指定がされているもの (&#0ffff など) だけを外します。
 
+        require "cgi"
+
         p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 
---- escapeElement(string, *elements)
+--- escapeElement(string, *elements) -> string
 #@todo
 
 elements に指定したエレメントのタグだけを実体参照に置換します。
 
-        例：
+例：
+        require "cgi"
+
         p CGI.escapeElement('<BR><A HREF="url"></A>', "A", "IMG")
              # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 
         p CGI.escapeElement('<BR><A HREF="url"></A>', ["A", "IMG"])
              # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 
---- unescapeElement(string, *element)
+--- unescapeElement(string, *element) -> string
 #@todo
 特定の要素だけをHTMLエスケープから戻す。
 
-        例：
+例：
+        require "cgi"
+
         print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', "A", "IMG")
           # => "&lt;BR&gt;<A HREF="url"></A>"
 
         print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
           # => "&lt;BR&gt;<A HREF="url"></A>"
 
---- rfc1123_date(time)
+--- rfc1123_date(time) -> string
 #@todo
 
 時刻 time を [[RFC:1123]] フォーマットに準拠した文字列に変換します。
 
-        例：
+例：
+        require "cgi"
+
         CGI.rfc1123_date(Time.now)
           # => Sat, 1 Jan 2000 00:00:00 GMT
 
---- parse(query)
+--- parse(query) -> object
 #@todo
 
 QUERY_STRING をパースします。
 
-        例：
+例：
+        require "cgi"
+
         params = CGI.parse("query_string")
           # {"name1" => ["value1", "value2", ...],
           #  "name2" => ["value1", "value2", ...], ... }
 #@# module QueryExtension どうしよ
 
---- pretty(string, shift = "  ")
+--- pretty(string, shift = "  ") -> string
 #@todo
 
 HTML を人間に見やすく整形します。
 
-        例：
+例：
+        require "cgi"
+
         print CGI.pretty("<HTML><BODY></BODY></HTML>")
           # <HTML>
           #   <BODY>
