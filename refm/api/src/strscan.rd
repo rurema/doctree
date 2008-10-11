@@ -728,7 +728,7 @@ stringscanner.rest.size と同じです。
 @see [[m:StringScanner#scan]] [[m:StringScanner#skip]] [[m:StringScanner#check]]  [[m:StringScanner#match]] 
 
 --- scan_until(regexp) -> String | nil
-regexp が一致するまで文字列をスキャンします。
+regexp で指定された正規表現とマッチするまで文字列をスキャンします。
 マッチに成功したらスキャンポインタを進めて、
 スキャン開始位置からマッチ部分の末尾までの部分文字列を返します。
 マッチに失敗したら nil を返します。
@@ -743,13 +743,13 @@ regexp が一致するまで文字列をスキャンします。
       s.pre_match         # => "test "
 
 --- search_full(regexp, s, f) -> object
-regexp が一致するまで文字列をスキャンします。
+regexp で指定された正規表現とマッチするまで文字列をスキャンします。
 マッチに成功すると、s と f の値によって以下のように動作します。
 
     * s が true ならばスキャンポインタを進めます。
     * s が false ならばスキャンポインタを進めません。
-    * f が true ならばマッチした部分文字列を返します。
-    * f が false ならばマッチした部分文字列の長さを返します。
+    * f が true ならばスキャン開始位置からマッチした部分の末尾までの部分文字列を返します。
+    * f が false ならばスキャン開始位置からマッチした部分の末尾までの部分文字列の長さを返します。
 
 マッチに失敗すると s や f に関係なく nil を返します。
 
