@@ -403,6 +403,8 @@ other を正規表現にコンパイルして self とのマッチを実行していました。
 
     p "string" =~ /str/   # => 0
     p "string" =~ /not/   # => nil
+    p "abcfoo" =~ /foo/   # => 3
+
 
 #@if (version < "1.8.2")
 --- ~ -> Integer
