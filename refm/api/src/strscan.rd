@@ -1,9 +1,9 @@
 #@since 1.8.0
-文字列を高速にスキャンするためのライブラリです。
+strscan は 文字列を高速にスキャンするためのライブラリです。
 
 = class StringScanner < Object
 
-strscan は文字列スキャナライブラリです。
+StringScanner は文字列スキャナクラスです。
 簡単に高速なスキャナを記述できます。
 
     s = StringScanner.new('This is an example string')
