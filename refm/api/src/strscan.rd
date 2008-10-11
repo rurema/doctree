@@ -92,7 +92,7 @@ StringScanner オブジェクトはスキャンする文字列と「スキャンポインタ」のセットです
       p s.exist?(/び/) #=> 4
 
 StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
-セットしません。代わりに [[m:StringScanner#[] ]], [[m:StringScanner##matched?]] などの
+セットしません。代わりに [[m:StringScanner#[] ]], [[m:StringScanner#matched?]] などの
 マッチデータ関連メソッドを使ってください。
 
 
