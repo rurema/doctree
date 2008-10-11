@@ -264,6 +264,8 @@ regexp が一致するまで文字列をスキャンします。
 
 このメソッドはマッチが成功してもスキャンポインタを進めません。
 
+@param regexp マッチに用いる正規表現を指定します。
+
 使用例
       s = StringScanner.new('test string')
       s.exist?(/s/) # => 3
