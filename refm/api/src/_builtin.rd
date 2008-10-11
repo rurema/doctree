@@ -39,6 +39,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Float)
 #@include(_builtin/FloatDomainError)
 #@include(_builtin/GC)
+#@since 1.9.0
+#@include(_builtin/GC__Profiler)
+#@end
 #@include(_builtin/Hash)
 #@include(_builtin/IO)
 #@include(_builtin/IOError)
