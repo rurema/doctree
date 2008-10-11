@@ -52,18 +52,18 @@
   }
   
   Dir.mktmpdir(nil, "/var/tmp") {|dir|
-	puts dir
+    puts dir
     # 出力例: tmpdir の作成先が'/var/tmp'となる。
     #         さらに、一時ディレクトリ の名前の先頭に'd' をつける。
-	#=> /var/tmp/d20081011-5304-h6b13j
+    #=> /var/tmp/d20081011-5304-h6b13j
   }
   
   memory_dir = nil
   Dir.mktmpdir {|dir|
-	memory_dir = dir
+    memory_dir = dir
     File.open("#{dir}/foo", "w") { |fp|
-	  fp.puts "hogehoge"
-	}
+     fp.puts "hogehoge"
+    }
   }
   # ブロックを抜けたら、テンポラリディレクトリは消される。
   p FileTest.directory?(memory_dir) #=> false
@@ -72,8 +72,8 @@
   # ブロックを与えない場合は、ディレクトリは存在する。
   begin
     File.open("#{dir}/foo", "w") { |fp|
-	  fp.puts "hogehoge"
-	}
+      fp.puts "hogehoge"
+    }
   ensure
     FileUtils.remove_entry_secure dir
   end
