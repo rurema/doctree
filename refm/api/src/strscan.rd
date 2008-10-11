@@ -707,7 +707,7 @@ stringscanner.rest.size と同じです。
     * scan_full(regexp, true, true) は [[m:StringScanner#scan]] と同等。
     * scan_full(regexp, true, false) は [[m:StringScanner#skip]] と同等。
     * scan_full(regexp, false, true) は [[m:StringScanner#check]] と同等。
-    * scan_full(regexp, false, false) は [[m:StringScanner#match]] と同等。
+    * scan_full(regexp, false, false) は [[m:StringScanner#match?]] と同等。
 
 @param regexp マッチに用いる正規表現を指定します。
 
@@ -725,7 +725,7 @@ stringscanner.rest.size と同じです。
   p s.scan_full(/\w+/, false, false)   #=> 6
   p s.scan_full(/\w+/, true, true)     #=> "string"
 
-@see [[m:StringScanner#scan]] [[m:StringScanner#skip]] [[m:StringScanner#check]]  [[m:StringScanner#match]] 
+@see [[m:StringScanner#scan]] [[m:StringScanner#skip]] [[m:StringScanner#check]]  [[m:StringScanner#match?]] 
 
 --- scan_until(regexp) -> String | nil
 regexp で指定された正規表現とマッチするまで文字列をスキャンします。
