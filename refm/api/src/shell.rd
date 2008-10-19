@@ -62,8 +62,9 @@ include Enumerable
 
 == Class Methods
 
---- new
-#@todo
+--- new -> Shell
+
+Shellクラス のインスタンスを返します。
 
 == Instance Methods
 
