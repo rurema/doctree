@@ -155,9 +155,9 @@ rowsを要素とする行列を生成します。
 --- unit(n) -> Matrix
 --- I(n) -> Matrix
 
-@param n 単位行列の次元
-
 n次の単位行列を生成します。
+
+@param n 単位行列の次元
 
 単位行列とは、対角要素が全て1で非対角要素が全て0であるような行列のことです。
 
@@ -254,38 +254,40 @@ n次の零行列を生成します。
 @param m 加算する行列。加算可能な行列を渡します。
 
 --- -(m) -> Matrix
-#@todo
 
-行列mを減じた行列を返す。
+行列mを減算した行列を返します。
 
---- /(m)
-#@todo
+@param m 減算する行列。減算可能な行列を渡します。
 
-行列mの逆行列を右から乗じた行列を返す。
+--- /(m) -> Matrix
 
---- inverse
---- inv
-#@todo
+行列mの逆行列を右から乗じた行列を返します。
 
-逆行列を返す。
+@param m 逆行列を右から乗算する行列。可逆行列でselfと乗算可能な行列を渡します。
 
---- **(n)
-#@#--- power(n)
---- **(m)
-#@#--- power(m)
-#@todo
+--- inverse -> Matrix
+--- inv -> Matrix
 
-スカラーnに対するべき乗を返す。
+逆行列を返します。
 
-行列mに対するべき乗を返す。
+--- **(n) -> Matrix
 
---- determinant
---- det
-#@todo
+self の n乗をした行列を返します。
 
-行列式 (determinant) を返す。
+@param n べき数の指定
 
 #@if (version < "1.9.0")
+--- determinant -> Fixnum | Float
+--- det -> Fixnum | Float
+#@else
+--- determinant -> Rational | Float
+--- det -> Rational | Float
+#@end
+
+#@todo
+
+行列式 (determinant) を返します。
+
 注意:
 
 全ての要素が整数である場合、正しい答を返さないかも知れません。
@@ -297,19 +299,26 @@ n次の零行列を生成します。
 
  require 'mathn'
  p Matrix[[2, 1], [-1, 2]].det #=> 5
-#@end
 
 #@if (version >= "1.9.0")
---- determinant_e
---- det_e
+--- determinant_e -> Rational | Float
+--- det_e -> Rational | Float
 
 行列式 (determinant) を返します。
+
+ユークリッドアルゴリズムに基づいて行列式を計算します。
+行列の全成分が整数([[c:Integer]])の場合は正しい値を返します。
+成分に[[c:Float]]があった場合には正しい値を返さないかもしれません。
+
 #@end
 
---- rank
-#@todo
+--- rank -> Fixnum
 
-階数 (rank) を返す。
+階数 (rank) を返します。
+
+selfの行列の階数(rank)を返します。
+行列の成分が[[c:Float]]の場合は正しい値を返さない場合があります。
+その場合は行列成分に[[c:Rational]]を用いるか、[[m:Matrix#rank_e]]を使用してください。
 
 #@if (version >= "1.9.0")
 --- rank_e
