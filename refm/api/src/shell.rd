@@ -58,56 +58,120 @@ sh/csh の制御文は Ruby の機能を用いて実現します。
 
 include Enumerable
 
-コマンドの実行結果はすべてFilterとしてかえります. 
+コマンドの実行結果はすべてShell::Filterとしてかえります. 
 
 == Class Methods
 
---- new -> Shell
+--- new -> Shell::Filter
 
-Shellクラス のインスタンスを返します。
+執筆者募集。
+Shell::Filter クラス のインスタンスを返します。
+通常このnewを直接使う機会はすくないでしょう。
 
 == Instance Methods
 
---- each
-#@todo
+--- each(rs = nil) -> ()
 
-フィルタの一行ずつをblockに渡す.
+フィルタの一行ずつをblockに渡します。
 
---- <(src)
-#@todo
+@param rs レコードセパレーターを表す文字列を指定します。
+          nil ならば、[[m:Shell.record_separator]]の値が使用されます。
 
-srcをフィルタの入力とする. srcが, 文字列ならばファイルを, IOであれ
+使用例
+  sh = Shell.new
+  sh.cat("/etc/passwd").each { |line|
+    puts line
+  }
+
+--- <(src) -> self
+
+srcをフィルタの入力とする. srcが, 文字列ならばファイルを, IOオブジェクトであれ
 ばそれをそのまま入力とする.
 
---- >(to)
-#@todo
+@param src フィルタの入力を, 文字列もしくは,IO オブジェクトで指定します.
 
-srcをフィルタの出力とする. toが, 文字列ならばファイルに, IOであれ
+使用例
+  Shell.def_system_command("head")
+  sh = Shell.new
+  sh.transact {
+    (sh.head("-n 30") < "/etc/passwd") > "ugo.txt"
+  }
+
+--- >(to) -> self
+
+toをフィルタの出力とする. toが, 文字列ならばファイルに, IOオブジェクトであれ
 ばそれをそのまま出力とする.
 
---- >>(to)
-#@todo
+@param to 出力先を指定します.文字列ならばファイルに,IOオブジェクトならばそれに出力します.
 
-srcをフィルタに追加する. toが, 文字列ならばファイルに, IOであれば
+使用例
+  Shell.def_system_command("tail")
+  sh = Shell.new
+  sh.transact {
+    (sh.tail("-n 3") < "/etc/passwd") > File.open("tail.out", "w")
+    #(sh.tail("-n 3") < "/etc/passwd") > "tail.out" # と同じ.
+  }
+
+--- >>(to) -> self
+
+toをフィルタに追加する. toが, 文字列ならばファイルに, IOオブジェクトであれば
 それをそのまま出力とする.
 
---- |(filter)
-#@todo
+@param to 出力先を指定します。文字列ならばファイルに、IOオブジェクトならばそれに出力します。
 
-パイプ結合
+使用例
+  Shell.def_system_command("tail")
+  sh = Shell.new
+  sh.transact {
+    (sh.tail("-n 3") < "/etc/passwd") >> "tail.out" 
+    #(sh.tail("-n 3") < "/etc/passwd") >> File.open("tail.out", "w") # でも同じ.
+  }
+
+--- |(filter) -> object
+
+パイプ結合を filter に対して行います。
+
+@param filter Shell::Filter オブジェクトを指定します.
+
+@return filter を返します.
+
+使用例
+  Shell.def_system_command("tail")
+  Shell.def_system_command("head")
+  Shell.def_system_command("wc")
+  sh = Shell.new
+  sh.transact {
+    i = 1
+    while i <= (cat("/etc/passwd") | wc("-l")).to_s.chomp.to_i
+      puts (cat("/etc/passwd") | head("-n #{i}") | tail("-n 1")).to_s
+      i += 1
+    end
+  }
 
 --- +(filter)
-#@todo
+執筆者募集
 
 filter1 + filter2 は filter1の出力の後, filter2の出力を行う.
 
---- to_a
---- to_s
-#@todo
+--- to_a -> Array
+--- to_s -> String
+
+実行結果を文字列、それぞれ文字列の配列で返します。
+
+使用例
+  Shell.def_system_command("wc")
+  sh = Shell.new
+  puts sh.cat("/etc/passwd").to_a
+
+  sh.transact {
+    puts (cat("/etc/passwd") | wc("-l")).to_s
+  }
 
 --- input
 --- input=
-#@todo
+執筆者募集
+
+フィルターを設定します。
 
 = class Shell < Object
 
@@ -120,51 +184,150 @@ Shellオブジェクトはカレントディレクトリを持ち,
 #@#OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
 #@#注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
 
---- def_system_command(command, path = command)
-#@todo
+--- def_system_command(command, path = command) -> nil
 
 Shellのメソッドとしてcommandを登録します.
 
 OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
 注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
 
+@param command Shell のメソッドとして定義するコマンドを文字列で指定します。
+
+@param path command のパスを指定します。
+            指定しない場合はcommand と同じになります。
+
 例)
   Shell.def_system_command "ls"
-  ls を定義
+  # ls を定義
 
   Shell.def_system_command "sys_sort", "sort"
-  sortコマンドをsys_sortとして定義
+  # sortコマンドをsys_sortとして定義
 
---- undef_system_command(command)
-#@todo
+  sh = Shell.new
+  sh.transact {
+    ls.each { |l|
+      puts l
+    }
+    (ls("-l") | sys_sort("-k 5")).each {|l|
+      puts l
+    }
+  }
+
+
+--- undef_system_command(command) -> Shell::CommandProcessor
 
 commandを削除します.
 
---- alias_command(ali, command, *opts) {...}
-#@todo
+@param command 削除するコマンドの文字列を指定します。
 
-commandのaliasをします.
+動作例：
+  Shell.def_system_command("ls")
+  # ls を定義
+  Shell.undef_system_command("ls")
+  # ls を 削除
 
-例)
-  Shell.alias_command "lsC", "ls", "-CBF", "--show-control-chars"
-  Shell.alias_command("lsC", "ls"){|*opts| ["-CBF", "--show-control-chars", *opts]}
+  sh = Shell.new
+  begin
+    sh.transact {
+      ls("-l").each {|l|
+        puts l
+      }
+    }
+  rescue NameError => err
+    puts err
+  end
 
---- unalias_command(ali)
-#@todo
+--- alias_command(alias, command, *opts) {...} -> self
+
+コマンドの別名(エイリアス)を作成します。
+コマンドが無い場合は、[[m:Shell.def_system_command]] などであらかじめ作成します.
+
+@param alias エイリアスの名前を文字列で指定します.
+
+@param command コマンド名を文字列で指定します.
+
+@param *opts command で指定したコマンドのオプションを指定します.
+
+使用例: ls -la | sort -k 5 のような例。
+
+  Shell.def_system_command("ls")
+  Shell.alias_command("lsla", "ls", "-a", "-l")
+  Shell.def_system_command("sort")
+  sh = Shell.new
+  sh.transact {
+    (lsla | sort("-k 5")).each {|l|
+      puts l
+    }
+  }
+
+--- unalias_command(alias) -> ()
 
 commandのaliasを削除します.
 
---- install_system_commands(pre = "sys_")
-#@todo
+@param alias 削除したいエイリアスの名前を文字列で指定します。
+
+@raise NameError alias で指定したコマンドが無い場合に発生します。
+
+使用例: ls -la | sort -k 5 のような例。
+  Shell.def_system_command("ls")
+  Shell.alias_command("lsla", "ls", "-a", "-l")
+  Shell.def_system_command("sort")
+  sh = Shell.new
+  sh.transact {
+    (lsla | sort("-k 5")).each {|l|
+      puts l
+    }
+  }
+  Shell.unalias_command("lsla")
+  begin
+    Shell.unalias_command("lsla")
+  rescue NameError => err
+    puts err
+  end
+
+--- install_system_commands(pre = "sys_") -> ()
 
 system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
 ド名は元のファイル名の頭にpreをつけたものとなる.
 
---- new
+@param pre Shellに定義するメソッド名の先頭に付加される文字列を指定します。
+
+使用例: ls -l | head -n 5 のような例。
+
+  Shell.install_system_commands
+  sh = Shell.new
+  sh.verbose = false
+  sh.transact {
+    (sys_ls("-l") | sys_head("-n 5")).each {|l|
+      puts l
+    } 
+  }
+
+#@since 1.9.0
+--- new(pwd = Dir.pwd, umask = nil) -> Shell
 #@todo
+
+プロセスのカレントディレクトリをpwd で指定されたディレクトリとするShellオ
+ブジェクトを生成します.
+
+@param pwd プロセスのカレントディレクトリをpwd で指定されたディレクトリとします。
+           指定しない場合は、[[m:Dir.pwd]] が使用されます。
+
+@param umask ファイル作成の際に用いられる umask を使用します。
+
+
+#@else
+--- new -> Shell
 
 プロセスのカレントディレクトリをカレントディレクトリとするShellオ
 ブジェクトを生成します.
+
+使用例：カレントディレクトリを表示
+
+  sh = Shell.new
+  puts sh.pwd.to_s
+
+#@end
 
 --- cd(path)
 #@todo
