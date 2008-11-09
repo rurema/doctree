@@ -305,7 +305,6 @@ system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
 
 #@since 1.9.0
 --- new(pwd = Dir.pwd, umask = nil) -> Shell
-#@todo
 
 プロセスのカレントディレクトリをpwd で指定されたディレクトリとするShellオ
 ブジェクトを生成します.
@@ -329,36 +328,77 @@ system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
 
 #@end
 
---- cd(path)
-#@todo
+#@since 1.9.0
+
+--- cd(path = nil, verbose = self.verbose) -> self
 
 pathをカレントディレクトリとするShellオブジェクトを生成します.
 
-#@# bc-rdoc: detected missing name: debug=
---- debug
---- debug?
---- debug=(val)
-#@todo
+@param path カレントディレクトリとするディレクトリを文字列で指定します。
+
+@param verbose true を指定すると冗長な出力を行います。
+
+#@else
+--- cd(path = nil) -> self
+
+pathをカレントディレクトリとするShellオブジェクトを生成します.
+
+@param path カレントディレクトリとするディレクトリを文字列で指定します。
+
+#@end
+
+使用例
+  require 'shell'
+  sh = Shell.new
+  sh.cd("/tmp")
 
 
-#@# bc-rdoc: detected missing name: default_record_separator
---- default_record_separator
+--- debug -> bool | Integer
+--- debug? -> bool | Integer
+--- debug=(val) 
+
+デバッグ用のフラグの設定および、参照を行います。
+
+@param val bool 値や整数値を指定します。詳細は下記を参照してください。
+
+  # debug: true -> normal debug
+  # debug: 1    -> eval definition debug
+  # debug: 2    -> detail inspect debug
+
+--- default_record_separator -> String
 --- default_record_separator=(rs)
-#@todo
+
+執筆者募集
+
+Shell で用いられる入力レコードセパレータを表す文字列を設定および参照します。
+なにも指定しない場合は[[m:$/]] の値が用いられます。
+
+@param rs Shell で用いられる入力レコードセパレータを表す文字列を指定します。
 
 
-
-#@# bc-rdoc: detected missing name: default_system_path
---- default_system_path
+--- default_system_path -> Array
 --- default_system_path=(path)
-#@todo
 
+Shellでもちいられるコマンドを検索する対象のパスを設定および、参照します。
 
---- verbose   
---- verbose?  
---- verbose=  
-#@todo
+@param path Shellでもちいられるコマンドを検索する対象のパスを文字列で指定します。
 
+動作例
+  require 'shell'
+  p Shell.default_system_path 
+  # 例
+  #=> [ "/opt/local/bin", "/opt/local/sbin", "/usr/bin", "/bin", "/usr/sbin", "/sbin", "/usr/local/bin", "/usr/X11/bin", "/Users/kouya/bin"]
+  Shell.default_system_path = ENV["HOME"] + "/bin"
+  p Shell.default_system_path
+  # => "/Users/kouya/bin"
+
+--- verbose -> bool  
+--- verbose? -> bool
+--- verbose=(flag)
+
+true ならば冗長な出力の設定を行います。
+
+@param flag true ならば冗長な出力の設定を行います。
 
 == Instance Methods
 #@#=== プロセス管理
