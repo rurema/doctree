@@ -5,7 +5,7 @@
 
 行列
 
-m×n個の数a(i,j)を
+m * n 個の数a(i,j)を
 
   [ a(0,0) a(0,1) a(0,2)  a(0,3) ... a(0,n-1)   ]
   [ a(1,0) a(1,1) a(1,2)  a(1,3) ... a(1,n-1)   ]
@@ -215,13 +215,31 @@ n次の零行列を生成します。
 
 列の大きさを返します。
 
---- minor(from_row,row_size,from_col,col_size)
---- minor(from_row..to_row,from_col..to_col)
-#@todo
+--- minor(from_row, row_size, from_col, col_size) -> Matrix
+--- minor(from_row..to_row, from_col..to_col) -> Matrix
 
-部分行列を返す。たたし、パラメータは、次の方法で指定する。
+selfの部分行列を返します。
+
+自分自身の部分行列を返します。
+ただし、パラメータは次の方法で指定します。
   (1) 開始行番号, 行の大きさ, 開始列番号, 列の大きさ
   (2) 開始行番号..終了行番号, 開始列番号..終了列番号
+
+@param from_row 部分行列の開始行(0オリジンで指定)
+@param row_size 部分行列の行サイズ
+@param from_col 部分行列の開始列(0オリジンで指定)
+@param col_size 部分行列の列サイズ
+
+例:
+
+  a1 = [ 1,  2,  3,  4,  5]
+  a2 = [11, 12, 13, 14, 15]
+  a3 = [21, 22, 23, 24, 25]
+  a4 = [31, 32, 33, 34, 35]
+  a5 = [51, 52, 53, 54, 55]
+  m = Matrix[a1, a2, a3, a4, a5]
+
+  p m.minor(0, 2, 1, 2) #=> Matrix[[2, 3], [12, 13]]
 
 #@#--- []=(i,j,x)
 #@#(i,j)要素をxに変更する。
@@ -284,9 +302,10 @@ self の n乗をした行列を返します。
 --- det -> Rational | Float
 #@end
 
-#@todo
-
 行列式 (determinant) を返します。
+
+行列式 (determinant) の値を返します。
+self が正方行列ではない場合は0を返します。
 
 注意:
 
@@ -321,81 +340,184 @@ selfの行列の階数(rank)を返します。
 その場合は行列成分に[[c:Rational]]を用いるか、[[m:Matrix#rank_e]]を使用してください。
 
 #@if (version >= "1.9.0")
---- rank_e
+--- rank_e -> Fixnum
 
 階数 (rank) を返します。
+
+ユークリッドアルゴリズムに基づいて階数(rank)を計算します。
+行列の全成分が整数([[c:Integer]])の場合は正しい値を返します。
+成分に[[c:Float]]があった場合には正しい値を返さないかもしれません。
+
 #@end
 
---- trace
---- tr
+--- trace -> Fixnum | Float | Rational
+--- tr -> Fixnum | Float | Rational
+
+トレース (trace) を返します。
+
+行列のトレース (trace) とは、対角要素の和です。
+
+例:
+  Matrix[[7,6], [3,9]].trace #=> 16
+
+--- transpose -> Matrix
+--- t -> Matrix
+
+転置行列 (transpose matrix) を返します。
+
+self を[[c:Matirx]]のオブジェクトで、(m,n)型行列としたとき a(j,i) を (i,j) 要素とする (n,m) 型行列を返します。
+
+--- row(i) -> Vector
+--- row(i) {|x| ... } -> nil
+
+第i番目の行ベクトルを返します。
+
+selfのi行目を行ベクトルとして返します。
+ブロックが与えられたときは、各行ベクトルの要素についてブロックを繰り返します。
+
+@param i 行ベクトルの位置を指定します。
+
+注意:
+  引数iは0オリジンで指定することに注意してください。
+
+例:
+  a1 = [1, 2, 3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
+
+  p m.row(1) #=> Vector[10, 15, 20]
+ 
+  cnt = 0
+  m.row(0) { |x|
+    cnt = cnt + x
+  }
+  p cnt #=> 6
+
+--- column(j) -> Vector
+--- column(j) {|x| ... } -> nil
+
+第j番目の列ベクトルを返します。
+
+selfのj列目を列ベクトルとして返します。
+ブロックが与えられたときは、各列ベクトルの要素についてブロックを繰り返します。
+
+@param j 列ベクトルの位置を指定します。
+
+注意:
+  引数jは0オリジンで指定することに注意してください。
+
+例:
+  a1 = [ 1,  2,   3]
+  a2 = [10, 15,  20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
+
+  p m.column(1) #=> Vector[2, 15, -2]
+ 
+  cnt = 0
+  m.column(0) { |x|
+    cnt = cnt + x
+  }
+  p cnt #=> 24.5
+
+--- collect {|x| ... } -> Matrix
+--- map {|x| ... } -> Matrix
 #@todo
 
-トレース (trace) を返す。
-行列のトレース (trace) とは、対角要素の和である。
+行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成します。
 
---- transpose
---- t
-#@todo
+例:
+  a1 = [ 1,  2,   3]
+  a2 = [10, 15,  20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
 
-転置行列 (transpose matrix) を返す。
-冒頭に掲げた行列に対して、 a(j,i) を (i,j) 要素とする (n,m) 型行列を転置行列という。
+  # 行列mのすべての要素に100を加える。
+  p m.collect { |x|
+    x + 100
+  } #=> Matrix[[101, 102, 103], [110, 115, 120], [99, 98, 101.5]]
 
---- row(i)
-#@todo
+--- regular? -> bool
 
-第i番目の行ベクトルを返す。
-ブロックが与えられたときは、各行ベクトルについて、ブロックを繰り返す。
+正則(regular)なら真(true)を返します。
 
---- column(j)
-#@todo
+行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することです。
 
-第j番目の列ベクトルを返す。
-ブロックが与えられたときは、各列ベクトルについて、ブロックを繰り返す。
+例:
+  a1 = [ 1,  2,  3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
+  p m.regular? #=> true
 
---- collect {|x| ... }
---- map {|x| ... }
-#@todo
+  a1 = [ 1,  2,  3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, -3]
+  m = Matrix[a1, a2, a3]
+  p m.regular? #=> false
 
-行列の各要素に対してブロックの適用を繰り返した結果を、要素として持つ行列を生成する。
+  a1 = [ 1,  2,  3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, 1.5]
+  a4 = [1, 1, 1]
+  m = Matrix[a1, a2, a3, a4]
+  p m.regular? #=> false
 
---- regular?
-#@todo
+--- singular? -> bool
 
-正則(regular)なら真を返す。
+特異(singular)なら真(true)を返します。
 
-行列が正則であるとは、正方行列であり、かつ、その逆行列が存在することである。
+行列が特異(singular)であるとは、正則でないことです。
 
---- singular?
-#@todo
+--- square? -> bool
 
-特異(singular)である、すなわち、正則でないなら真を返す。
+正方行列であるなら、真を返します。
 
---- square?
-#@todo
+--- ==(other) -> bool
+--- eql?(other) -> bool
 
-正方行列であるなら、真を返す。
+自分自身と other を比較し、同値であれば真(true)を返します。
 
---- ==(other)
---- eql?(other)
-#@todo
+--- row_vectors -> Array
 
-自分自身と other を比較します。
+自分自身を行ベクトルの配列として返します。
 
---- row_vectors
-#@todo
+例:
+  a1 = [ 1,  2,  3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
 
-列ベクトルの配列を返す。
+  p m.row_vectors #=> [Vector[1, 2, 3], Vector[10, 15, 20], Vector[-1, -2, 1.5]]
 
---- column_vectors
-#@todo
+--- column_vectors -> Array
 
-行ベクトルの配列を返す。
+自分自身を列ベクトルの配列として返します。
 
---- to_a
-#@todo
+例:
+  a1 = [ 1,  2,  3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
 
-[[c:Array]]に変換する。
-結果は、ネストした配列(配列の配列)となる。
+  p m.row_vectors #=> [Vector[1, 10, -1], Vector[2, 15, -2], Vector[3, 20, 1.5]]
+
+--- to_a -> Array
+
+自分自身を[[c:Array]]に変換したものを返します。
+
+行ベクトルを配列([[c:Array]])としたものの配列(つまり配列の配列)として返します。
+
+例:
+  a1 = [ 1,  2,  3]
+  a2 = [10, 15, 20]
+  a3 = [-1, -2, 1.5]
+  m = Matrix[a1, a2, a3]
+
+  p m.to_a #=> [[1, 2, 3], [10, 15, 20], [-1, -2, 1.5]]
+
+
 
 #@#--- to_f
 #@todo
@@ -414,16 +536,13 @@ selfの行列の階数(rank)を返します。
 
 #@if (version >= "1.9.0")
 
---- elements_to_f
-#@todo
+--- elements_to_f -> Array
 各要素を浮動小数点数 [[c:Float]] に変換した行列を返します。
 
---- elements_to_i
-#@todo
+--- elements_to_i -> Array
 各要素を整数 [[c:Integer]] に変換した行列を返します。
 
---- elements_to_r
-#@todo
+--- elements_to_r -> Array
 各要素を有理数 [[c:Rational]] に変換した行列を返します。
 
 #@end
@@ -435,8 +554,7 @@ selfの行列の階数(rank)を返します。
 #@# and is of no use to general users.
 #@# bc-methods -r matrix Matrix で見つからなかった。okkez
 
-#@# bc-rdoc: detected missing name: coerce
---- coerce(other)
+--- coerce(other) -> Array
 #@todo
 
 FIXME: describe #coerce.
