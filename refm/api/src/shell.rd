@@ -403,77 +403,146 @@ true ならば冗長な出力の設定を行います。
 == Instance Methods
 #@#=== プロセス管理
 
---- cwd
---- dir
---- getwd
---- pwd
-#@todo
+--- cwd -> String
+--- dir -> String
+--- getwd -> String
+--- pwd -> String
 
-カレントディレクトリを返す。
+カレントディレクトリのパスを文字列で返します。
 
---- system_path
+使用例
+  require 'shell'
+  sh = Shell.new
+  p sh.cwd 
+  # 例
+  #=> "/Users/kouya/tall"
+
+
+--- system_path -> Array 
 --- system_path=(path)
-#@todo
-
 コマンドサーチパスの配列を返す。
 
---- umask
-#@todo
+@param path コマンドサーチパスの配列を指定します。
 
-umaskを返す。
+使用例
 
---- jobs
-#@todo
+  require 'shell'
+  sh = Shell.new
+  sh.system_path = [ "./" ]
+  p sh.system_path #=> ["./"]
 
-スケジューリングされているjobの一覧を返す.
+--- umask -> object
+
+umaskを返します。
+
+--- jobs -> Array
+
+執筆者募集. スケジューリングされているjobの一覧を返す.
 
 --- kill(sig, job)
 #@todo
 
-jobにシグナルsigを送る
+執筆者募集. jobにシグナルsigを送る.
 
 #@#=== カレントディレクトリ操作
 
---- cd(path, &block)
---- chdir
-#@todo
+--- cd(path, &block) -> self
+--- chdir(path, &block) -> self
 
 カレントディレクトリをpathにする. イテレータとして呼ばれたときには
 ブロック実行中のみカレントディレクトリを変更する.
 
---- pushd(path = nil, &block)
---- pushdir
-#@todo
+@param path カレントディレクトリを文字列で指定します.  
+
+@param block path で指定したディレクトリで行う操作をブロックで指定します.
+
+使用例
+  require 'shell'
+  sh = Shell.new
+  sh.transact {
+    cd("/tmp"){
+      p cwd #=> "/tmp"
+    }
+    p cwd #=> "/Users/kouya/rbmanual"
+  }
+
+--- pushd(path = nil, &block) -> object
+--- pushdir(path = nil, &block) -> object
 
 カレントディレクトリをディレクトリスタックにつみ, カレントディレク
 トリをpathにする. pathが省略されたときには, カレントディレクトリと
 ディレクトリスタックのトップを交換する. イテレータとして呼ばれたと
 きには, ブロック実行中のみpushdする.
 
---- popd
---- popdir
-#@todo
+@param path  カレントディレクトリをpathにする。文字列で指定します。
+
+@param block イテレータとして呼ぶ場合, ブロックを指定します。
+ 
+動作例
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
+  sh.pushd("/tmp")
+  p sh.cwd #=> "/tmp"
+  sh.pushd("/usr")
+  p sh.cwd #=> "/usr"
+  sh.popd
+  p sh.cwd #=> "/tmp"
+  sh.pushd("/usr/local"){
+    p sh.cwd #=> "/usr/local"
+  }
+  p sh.cwd #=> "/tmp"
+
+--- popd -> ()
+--- popdir -> ()
 
 ディレクトリスタックからポップし, それをカレントディレクトリにする.
 
+動作例
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
+  sh.pushd("/tmp")
+  p sh.cwd #=> "/tmp"
+  sh.pushd("/usr")
+  p sh.cwd #=> "/usr"
+  sh.popd
+  p sh.cwd #=> "/tmp"
+
 #@#=== ファイル/ディレクトリ操作
---- foreach(path = nil, &block)
-#@todo
+--- foreach(path = nil, &block) -> ()
 
 pathがファイルなら, File#foreach
 pathがディレクトリなら, Dir#foreach
+の動作をします。
 
---- open(path, mode)
-#@todo
+@param path ファイルもしくはディレクトリのパスを文字列で指定します。
+
+使用例
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
+  sh.foreach("/tmp"){|f|
+    puts f
+  }
+
+--- open(path, mode) -> object
 
 pathがファイルなら, File#open
 pathがディレクトリなら, Dir#open
+の動作をします。
 
---- unlink(path)
-#@todo
+@param path くわしくは、[[m:File.open]], [[m:Dir.open]]を参照してください。
+
+@param mode くわしくは、[[m:File.open]], [[m:Dir.open]]を参照してください。
+
+--- unlink(path) -> self
 
 pathがファイルなら, File#unlink
 pathがディレクトリなら, Dir#unlink
+の動作をします。
+
+@param path くわしくは、[[m:File.unlink]], [[m:Dir.unlink]]を参照してください。
 
 --- test(command, file1, file2)
 --- [](command, file1, file2)
