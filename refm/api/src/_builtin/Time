@@ -225,7 +225,7 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 [[man:times(3)]] を参照してください。
 
 #@since 1.8.0
-このメソッドは [[c:Process.times]] に移動しました。Time.times も使えます
+このメソッドは [[m:Process.#times]] に移動しました。Time.times も使えます
 が、警告メッセージが出力されます。
 #@end
 
