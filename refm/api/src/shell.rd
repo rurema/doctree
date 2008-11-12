@@ -544,39 +544,77 @@ pathがディレクトリなら, Dir#unlink
 
 @param path くわしくは、[[m:File.unlink]], [[m:Dir.unlink]]を参照してください。
 
---- test(command, file1, file2)
---- [](command, file1, file2)
-#@todo
+--- test(command, file1, file2 = nil) -> bool
+--- [](command, file1, file2 = nil) -> bool
 
-ファイルテスト関数testと同じ.
+執筆者募集。 ファイルテスト関数testと同じです。
+
+@param command ファイルテスト関数testと同じです。
+
+@param file1 文字列でファイルへのパスを指定します。
+             ファイルテスト関数testに渡される第一引数となります。
+
+@param file2 文字列でファイルへのパスを指定します。
+             ファイルテスト関数testに渡される第二引数となります。省略可。
+
 
 例:
 
-    sh[?e, "foo"]
-    sh[:e, "foo"]
-    sh["e", "foo"]
-    sh[:exists?, "foo"]
-    sh["exists?", "foo"]
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
+  begin
+    sh.mkdir("foo")
+  rescue
+  end
+  p sh[?e, "foo"]         #=> true
+  p sh[:e, "foo"]         #=> true
+  p sh["e", "foo"]        #=> true
+  p sh[:exists?, "foo"]   #=> true
+  p sh["exists?", "foo"]  #=> true
 
---- mkdir(*path)
-#@todo
+--- mkdir(*path) -> Array
 
-Dir.mkdirと同じ (複数可)
+Dir.mkdirと同じです。 (複数可)
 
---- rmdir(*path)
-#@todo
+@param *path 作成するディレクトリ名を文字列で指定します。
 
-Dir.rmdirと同じ (複数可)
+@return 作成するディレクトリの一覧の配列を返します。
 
---- system(command, *opts)
-#@todo
+使用例
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
+  begin
+    p sh.mkdir("foo") #=> ["foo"]
+  rescue => err
+    puts err
+  end
+
+
+--- rmdir(*path) -> ()
+
+Dir.rmdirと同じです。 (複数可)
+
+@param *path 削除するディレクトリ名を文字列で指定します。
+
+--- system(command, *opts) -> Shell::Filter
 
 commandを実行する.
 
-例:
+@param command 実行するコマンドのパスを文字列で指定します。
+
+@param *opt command のオプションを文字列で指定します。複数可。
+
+使用例:
+
+  require 'shell'
+  Shell.verbose = false
+  sh = Shell.new
 
   print sh.system("ls", "-l")
-  sh.system("ls", "-l") | sh.head > STDOUT
+  Shell.def_system_command("head")
+  sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
 
 --- rehash
 #@todo
