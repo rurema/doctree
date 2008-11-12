@@ -10,7 +10,7 @@ require webrick/httputils
 require webrick/cookie
 require webrick/httpversion
 require webrick/httpstatus
-require webrick/htprequest
+require webrick/httprequest
 require webrick/httpresponse
 require webrick/httpserver
 require webrick/httpservlet

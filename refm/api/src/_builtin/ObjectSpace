@@ -131,7 +131,7 @@ obj を返します。
 --- add_finalizer(proc)    -> Proc
 
 このメソッドは obsolete です。代わりに
-[[m:ObjectSpace.#define_finalizer]] を使用してください
+[[m:ObjectSpace.define_finalizer]] を使用してください
 
 proc をファイナライザとして設定します。
 proc を返します。
@@ -160,7 +160,7 @@ obj を返します。
 --- remove_finalizer(proc)    -> Proc
 
 このメソッドは obsolete です。代わりに
-[[m:ObjectSpace.#undefine_finalizer]] を使用してくださ
+[[m:ObjectSpace.undefine_finalizer]] を使用してくださ
 い。
 
 指定した proc をファイナライザから取り除きます。

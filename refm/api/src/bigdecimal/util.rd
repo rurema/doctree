@@ -32,7 +32,7 @@ This method is deprecated; use BigDecimal#to_s("F") instead.
 
 --- to_r
 #@todo
-[[c:Raitional]]に変換する
+[[c:Rational]]に変換する
 
 = reopen Rational
 

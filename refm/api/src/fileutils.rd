@@ -29,7 +29,7 @@
 : :remove_destination
   真を指定するとコピーを実行する前にコピー先を削除します。
 : :secure
-  真を指定するとファイルの削除に [[m:FileUtils#remove_entry_secure]] を使用します。
+  真を指定するとファイルの削除に [[m:FileUtils.#remove_entry_secure]] を使用します。
 : :mtime
   時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
