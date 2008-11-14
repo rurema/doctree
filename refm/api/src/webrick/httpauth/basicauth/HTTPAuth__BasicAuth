@@ -37,7 +37,7 @@ config で有効なハッシュキーは以下の通りです。
 realm を表す文字列 :Realm には与えます。:UserDB
 には [[c:WEBrick::HTTPAuth::Htpasswd]] オブジェクトを与えます。:Logger には
 ロガーオブジェクトを与えます。また、:AutoReloadUserDB には
-[[m:Htpasswd#get_passwd]] の
+[[m:WEBrick::HTTPAuth::Htpasswd#get_passwd]] の
 reload_db に渡す引数を与えます。
 
 == Instance Methods

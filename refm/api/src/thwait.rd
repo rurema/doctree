@@ -162,7 +162,7 @@
 
 指定したスレッドのどれかが終了するまで待ちます。
 
-@param nonblock true を与えると、キューが空の時、例外 [[c:ErrNoFinishedThread]] が発生します。
+@param nonblock true を与えると、キューが空の時、例外 [[c:ThreadsWait::ErrNoFinishedThread]] が発生します。
 
 @raise ErrNoWaitingThread 終了をまつスレッドが存在しない時、発生します。
 

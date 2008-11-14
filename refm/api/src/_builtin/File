@@ -483,7 +483,7 @@ umask を変更します。変更前の umask の値を返します
 このメソッドはobsoleteです。
 
 [[m:FileTest.#exist?]] と同じです。
-[[m:File#exist?]]を使って下さい。
+[[m:File.exist?]]を使って下さい。
 
 @param path パスを表す文字列か IO オブジェクトを指定します。
 

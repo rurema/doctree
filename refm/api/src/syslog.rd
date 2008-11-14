@@ -30,7 +30,7 @@ syslog の詳細については [[man:syslog(3)]] を参照してください。
 用可能となる。
 
 ブロック付きで呼ばれた場合は、self を引数としてブロックを実行し、
-最後に [[m:Syslog.close]] を行う。
+最後に [[m:Syslog.#close]] を行う。
 
 syslog の詳細については [[man:syslog(3)]] を参照してください。
 
@@ -73,7 +73,7 @@ options と facility に指定できる値については
 --- open!(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 --- reopen(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
-開いていた syslog を最初にクローズする点を除いて[[m:Syslog.open]] と同じです。
+開いていた syslog を最初にクローズする点を除いて[[m:Syslog.#open]] と同じです。
 
 @param ident すべてのログにつく識別子で、どのプログラムから送られ
              たログなのかを識別するために使われる文字列を指定します。
@@ -104,7 +104,7 @@ options と facility に指定できる値については
     print line if line =~ /the sky is/
   }
 
-@see [[m:Syslog.open]]
+@see [[m:Syslog.#open]]
 
 --- opened? -> bool
 
