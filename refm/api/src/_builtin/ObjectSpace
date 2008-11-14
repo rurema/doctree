@@ -119,7 +119,7 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
 --- garbage_collect    -> nil
 
 どこからも参照されなくなったオブジェクトを回収します。
-[[m:GC#start]] と同じです。
+[[m:GC.start]] と同じです。
 
 --- undefine_finalizer(obj)    -> object
 

@@ -20,7 +20,7 @@
 の状態を監視するために SIGCHLD シグナルを捕捉します。子プロセス
 が終了したり停止した場合には、例外 [[c:PTY::ChildExited]] が発生します。
 この間、すべての SIGCHLD が PTY モジュールのシグナルハンドラに捕捉されるので、
-サブプロセスを生成する他のメソッド([[m:Kernel.#system]] や [[m:IO.#popen]]など)を
+サブプロセスを生成する他のメソッド([[m:Kernel.#system]] や [[m:IO.popen]]など)を
 使うと、予期しない例外が発生することがあります。これを防ぐため
 には、下記の [[m:PTY.#protect_signal]] を参照してください。
 
@@ -39,7 +39,7 @@
 
 @raise PTY::ChildExited 子プロセスが終了したり停止したりした場合に発生します。
 
-@see [[m:Kernel.#system]], [[m:IO.#popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
+@see [[m:Kernel.#system]], [[m:IO.popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
 
 --- protect_signal{ ... } -> self
 このメソッドは何もしません。

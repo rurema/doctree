@@ -40,7 +40,7 @@ StringIO オブジェクトを生成して返します。
               この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
               string 自身も書き換えられます。
 
-@param mode [[m:Kernel#open]] 同様文字列か整数で指定します。
+@param mode [[m:Kernel.#open]] 同様文字列か整数で指定します。
 
 @raise Errno::EACCES string がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
@@ -424,7 +424,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
            この文字列はバッファとして使われます。[[m:StringIO#write]] などによって、
            str 自身も書き換えられます。
 
-@param mode [[m:Kernel#open]] 同様文字列か整数で自身のモードを指定します。
+@param mode [[m:Kernel.#open]] 同様文字列か整数で自身のモードを指定します。
 
 @raise Errno::EACCES str がフリーズされていて、mode が書き込み可能に設定されている場合に発生します。
 
