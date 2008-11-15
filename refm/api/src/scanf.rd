@@ -86,7 +86,7 @@ against the field width.
  符号付き10進数
 
 : %i
- [[m:Kernel#Integer]]のように接頭辞を受け付ける符号付き整数
+ [[m:Kernel.#Integer]]のように接頭辞を受け付ける符号付き整数
 
 : %o
  符号付き8進数

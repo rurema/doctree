@@ -329,25 +329,25 @@ value を持つ要素のキーを返します。
 
 読み込みモードでオープンします．
 
-@see [[m:DBM#open]]
+@see [[m:DBM.open]]
 
 --- WRITER
 
 書き込みモードでオープンします．
 
-@see [[m:DBM#open]]
+@see [[m:DBM.open]]
 
 --- WRCREAT
 
 書き込みモードで、すでにファイルが存在しなかったら作ります．
 
-@see [[m:DBM#open]]
+@see [[m:DBM.open]]
 
 --- NEWDB
 
 書き込みモードで、すでにファイルが存在したら削除して作り直します．
 
-@see [[m:DBM#open]]
+@see [[m:DBM.open]]
 
 #@end
 

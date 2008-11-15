@@ -458,7 +458,7 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤Ï nil ¤òÊ
     printf("%s\n", line)
   end
 
-@see [[m:Kernel.gets]]
+@see [[m:Kernel.#gets]]
 
 --- pos -> Integer
 --- tell -> Integer
@@ -585,7 +585,7 @@ ARGF¤Î¸½ºß°ÌÃÖ¤«¤é°ì¹Ô¤º¤ÄÊ¸»úÎó¤È¤·¤ÆÆÉ¤ß¹þ¤ß¤Þ¤¹¡£EOF ¤ËÅþÃ£¤·¤¿»þ¤Ë¤ÏEOFError
   #=> "- Saitama\n"
   #=> <EOFError: end of file reached>
 
-@see [[m:Kernel.readline]] [[m:ARGF.gets]]
+@see [[m:Kernel.#readline]] [[m:ARGF.gets]]
 
 --- readlines(rs = $/) -> [String]
 --- to_a(rs = $/) -> [String]
