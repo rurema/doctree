@@ -616,34 +616,125 @@ commandを実行する.
   Shell.def_system_command("head")
   sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
 
---- rehash
-#@todo
+--- rehash -> Hash
+執筆者募集。
+リハッシュする。通常使う事はありません。
 
-リハッシュする
+--- transact { ... } -> object
 
---- transact { ... }
-#@todo
-
-ブロック中では shell を self として実行する.
+ブロック中で shell を self として実行します。
 
 例:
 
-  sh.transact{system("ls", "-l") | head > STDOUT}
+  require 'shell'
+  Shell.def_system_command("head")
+  sh = Shell.new
+  sh.transact{
+    system("ls", "-l") | head > STDOUT
+    # transact の中では、
+    # sh.system("ls", "-l") | sh.head > STDOUT と同じとなる。
+  }
 
---- out(dev = STDOUT, &block)
-#@todo
+--- out(dev = STDOUT, &block) -> ()
 
-[[m:Shell#transact]] を呼び出しその結果を dev に出力する.
+[[m:Shell#transact]] を呼び出しその結果を dev に出力します。
+
+@param dev  出力先をIO オブジェクトなどで指定します。
+
+@param block transact 内部で実行するシェルを指定します。
+
+
+使用例:
+  require 'shell'
+  Shell.def_system_command("head")
+  sh = Shell.new
+  File.open("out.txt", "w"){ |fp|
+    sh.out(fp) {
+      system("ls", "-l") | head("-n 3")
+    }
+  }
+
 
 #@#=== 内部コマンド
 
---- echo(*strings)
---- cat(*files)
---- glob(patten)
---- tee(file)
-#@todo
+--- echo(*strings) -> Shell::Filter
+実行すると, それらを内容とする Filter オブジェクトを返します.
+
+@param *strings シェルコマンド echo に与える引数を文字列で指定します。
+
+動作例
+  require 'shell'
+  Shell.def_system_command("head")
+  sh = Shell.new
+  sh.transact {
+    glob("*.txt").to_a.each { |file|
+      file.chomp!
+      cat(file).each { |l|
+        echo(l) | tee(file + ".tee") >> "all.tee"
+      }
+    }
+  }
+
+
+--- cat(*files) -> Shell::Filter
+実行すると, それらを内容とする Filter オブジェクトを返します.
+
+@param *files シェルコマンド cat に与えるファイル名を文字列で指定します。
+
+動作例
+  require 'shell'
+  Shell.def_system_command("head")
+  sh = Shell.new
+  sh.transact {
+    glob("*.txt").to_a.each { |file|
+      file.chomp!
+      cat(file).each { |l|
+        echo(l) | tee(file + ".tee") >> "all.tee"
+      }
+    }
+  }
+
+
+--- glob(patten) -> Shell::Filter
+実行すると, それらを内容とする Filter オブジェクトを返します.
+
+@param patten シェルコマンド glob に与えるパターンを指定します。
+              パターンの書式については、[[m:Dir.[]]]を参照してください。
+
+動作例
+  require 'shell'
+  Shell.def_system_command("head")
+  sh = Shell.new
+  sh.transact {
+    glob("*.txt").to_a.each { |file|
+      file.chomp!
+      cat(file).each { |l|
+        echo(l) | tee(file + ".tee") >> "all.tee"
+      }
+    }
+  }
+
+@see [[m:Dir.[]]]
+
+
+--- tee(file) -> Shell::Filter
 
 実行すると, それらを内容とする Filter オブジェクトを返します.
+
+@param file シェルコマンドtee に与えるファイル名を文字列で指定します。
+
+動作例
+  require 'shell'
+  Shell.def_system_command("head")
+  sh = Shell.new
+  sh.transact {
+    glob("*.txt").to_a.each { |file|
+      file.chomp!
+      cat(file).each { |l|
+        echo(l) | tee(file + ".tee") >> "all.tee"
+      }
+    }
+  }
 
 #@#=== 組込みコマンド
 
