@@ -576,16 +576,14 @@ yday は 1 から数えます。
 
 --- nsec    -> Integer
 --- tv_nsec -> Integer
-#@todo
 
-Returns just the number of nanoseconds for time.
+時刻のナノ秒の部分を整数で返します。
 
    t = Time.now        #=> 2007-11-17 15:18:03 +0900
    "%10.9f" % t.to_f   #=> "1195280283.536151409"
    t.nsec              #=> 536151406
 
-The lowest digit of to_f and nsec is different because IEEE 754
-double is not accurate enough to represent nanoseconds from the
-Epoch. The accurate value is returned by nsec.
+IEEE 754 浮動小数点数で表現できる精度が違うため、[[m:Time#to_f]]の最小
+の桁とnsecの最小の桁は異なります。nsecで表される値の方が正確です。
 
 #@end
