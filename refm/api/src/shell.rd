@@ -738,207 +738,322 @@ commandを実行する.
 
 #@#=== 組込みコマンド
 
---- atime(file)
-#@todo
+--- atime(filename) -> Time
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+@see [[m:File.atime]]
+
+--- basename(filename, suffix = "")     -> String
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param filename ファイル名を表す文字列を指定します。
+
+@param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働
+き
+              '.' を含まない任意の文字列にマッチします。
+
+@see [[m:File.basename]]
+
+
+--- chmod(mode, *filename)    -> Integer
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- basename(file, *opt)
-#@todo
+@param filename ファイル名を表す文字列を指定します。
+
+@param mode [[man:chmod(2)]] と同様に整数で指定します。
+
+@see [[m:File.chmod]]
+
+--- chown(owner, group, *filename)    -> Integer
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在の>ままにすることができます。
+
+@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在の>ままにすることができます。
+
+@param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.chown]]
+
+--- ctime(filename)    -> Time
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+@see [[m:File.ctime]]
+
+--- delete(*filename)    -> Integer
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.delete]]
+
+--- dirname(filename)    -> String
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- chmod(mode, *files)
-#@todo
+@param filename ファイル名を表す文字列を指定します。
+
+@see [[File.dirname]]
+
+--- ftype(filename)    -> String
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- chown(owner, group, *file)
-#@todo
+@param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.ftype]]
+
+--- join(*item)    -> String
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param item 連結したいディレクトリ名やファイル名を文字列で与えます。
+
+@see [[m:File.join]]
+
+--- link(old, new)    -> 0
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- ctime(file)
-#@todo
+@param old ファイル名を表す文字列を指定します。
+
+@param new ファイル名を表す文字列を指定します。
+
+@see [[m:File.link]]
+
+
+--- lstat(filename)   -> File::Stat
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- delete(*file)
-#@todo
+@param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.lstat]]
+
+--- mtime(filename)    -> Time
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- dirname(file)
-#@todo
+@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
+
+@see [[m:File.mtime]]
+
+--- readlink(path)    -> String
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param path シンボリックリンクを表す文字列を指定します。
+
+@see [[m:File.readlink]]
+
+--- rename(from, to)    -> 0
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param from ファイルの名前を文字列で与えます。
+
+@param to 新しいファイル名を文字列で与えます。
+
+@see [[m:File.rename]]
+
+--- split(pathname)    -> [String]
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- ftype(file)
-#@todo
+@param pathname パス名を表す文字列を指定します。
+
+@see [[m:File.split]]
+
+--- stat(filename)    -> File::Stat
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- join(*file)
-#@todo
+@param filename ファイル名を表す文字列を指定します。
+
+@see [[m:File.stat]]
+
+
+--- symlink(old, new)    -> 0
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param old ファイル名を表す文字列を指定します。
+
+@param new シンボリックリンクを表す文字列を指定します。
+
+@see [[m:File.symlink]]
+
+
+--- truncate(path, length)    -> 0
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- link(file_from, file_to)
-#@todo
+@param path パスを表す文字列を指定します。
 
+@param length 変更したいサイズを整数で与えます。
+
+@see [[m:File.truncate]]
+
+--- utime(atime, mtime, *filename)    -> Integer
 Fileクラスにある同名のクラスメソッドと同じです.
 
---- lstat(file)
-#@todo
+@param filename ファイル名を表す文字列を指定します。
 
-Fileクラスにある同名のクラスメソッドと同じです.
+@param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
---- mtime(file)
-#@todo
+@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
 
-Fileクラスにある同名のクラスメソッドと同じです.
+@see [[m:File.utime]]
 
---- readlink(file)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- rename(file_from, file_to)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- split(file)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- stat(file)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- symlink(file_from, file_to)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- truncate(file, length)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- utime(atime, mtime, *file)
-#@todo
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
---- blockdev?(file)
-#@todo
-
+--- blockdev?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- chardev?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.blockdev?]]
+
+--- chardev?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- directory?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.chardev?]]
+
+--- directory?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- executable?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.directory?]]
+
+--- executable?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- executable_real?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.executable?]]
+
+--- executable_real?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- exist?(file)
---- exists?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.executable_real?]]
+
+--- exist?(file) -> bool
+--- exists?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- file?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.exist?]] [[m:FileTest.exists?]]
+
+--- file?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- grpowned?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.file?]]
+
+--- grpowned?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- owned?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.grpowned?]]
+
+--- owned?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- pipe?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.owned?]]
+
+--- pipe?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- readable?(file)
-#@todo
+@param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
+@see [[m:FileTest.pipe?]]
+
+--- readable?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- readable_real?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.readable?]]
+
+--- readable_real?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
+
+@param file ファイル名を表す文字列を指定します。
+
+@see [[m:FileTest.readable_real?]]
 
 --- setgid?(file)
-#@todo
 
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- setuid?(file)
-#@todo
+--- setuid?(file)    -> bool
+FileTestクラスにある同名のクラスメソッドと同じです.
+
+@param file ファイル名を表す文字列を指定します。
+
+@see [[m:FileTest.setuid?]]
+
+--- size(file) -> Integer
+--- size?(file) -> Integer | nil
 
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- size(file)
---- size?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
+
+@see [[m:FileTest.size]] [[m:FileTest.size?]]
+
+--- socket?(file) -> bool
 
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- socket?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.socket?]]
+
+
+--- sticky?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- sticky?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
-FileTestクラスにある同名のクラスメソッドと同じです.
+@see [[m:FileTest.sticky?]]
 
 --- symlink?(file)
-#@todo
-
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- writable?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.symlink?]]
+
+--- writable?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- writable_real?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.writable?]]
+
+--- writable_real?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
---- zero?(file)
-#@todo
+@param file ファイル名を表す文字列を指定します。
 
+@see [[m:FileTest.writable_real?]]
+
+--- zero?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
+
+@param file ファイル名を表す文字列を指定します。
+
+@see [[m:FileTest.zero?]]
 
 --- syscopy(filename_from, filename_to)
 #@todo
