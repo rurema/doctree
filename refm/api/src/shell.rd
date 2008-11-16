@@ -440,7 +440,6 @@ umaskを返します。
 執筆者募集. スケジューリングされているjobの一覧を返す.
 
 --- kill(sig, job)
-#@todo
 
 執筆者募集. jobにシグナルsigを送る.
 
@@ -1055,79 +1054,125 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:FileTest.zero?]]
 
---- syscopy(filename_from, filename_to)
-#@todo
+#@if (version < "1.9.0")
+--- syscopy(from, to) -> bool
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
---- copy(filename_from, filename_to)
-#@todo
+@param from ファイルの名前を文字列で与えます。
+
+@param to 新しいファイル名を文字列で与えます。
+
+@see [[m:File.syscopy]]
+
+#@end
+
+#@if (version < "1.9.0")
+--- copy(from, to) -> bool
+FileToolsクラスにある同名のクラスメソッドと同じです.
+
+@param from ファイルの名前を文字列で与えます。
+
+@param to 新しいファイル名を文字列で与えます。
+
+@see [[m:File.copy]]
+
+#@end
+
+
+#@if (version < "1.9.0")
+--- move(from, to) -> bool
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
---- move(filename_from, filename_to)
-#@todo
+@param from ファイルの名前を文字列で与えます。
+
+@param to 新しいファイル名を文字列で与えます。
+
+@see [[m:File.move]]
+
+#@end
+
+#@if (version < "1.9.0")
+--- compare(file1, file2) -> bool
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
---- compare(filename_from, filename_to)
-#@todo
+@param file1 ファイルの名前を文字列で与えます。
+
+@param file2 新しいファイル名を文字列で与えます。
+
+@see [[m:File.compare]]
+
+#@end
+
+#@if (version < "1.9.0")
+--- safe_unlink(*filenames) -> Array
+FileToolsクラスにある同名のクラスメソッドと同じです.
+
+@param filenames 削除するファイルを指定します。
+
+@see [[m:File.safe_unlink]]
+
+#@end
+
+#@if (version < "1.9.0")
+--- makedirs(*dirs) -> Array
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
---- safe_unlink(*filenames)
-#@todo
+@param dirs 作成するディレクトリを指定します。
+
+@see [[m:File.makedirs]]
+
+#@end
+
+#@if (version < "1.9.0")
+--- install(from, to, mode = nil, verbose = false) -> () 
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
---- makedirs(*filenames)
-#@todo
+@param from コピー元のファイル。
 
-FileToolsクラスにある同名のクラスメソッドと同じです.
+@param to コピー先のファイル。
 
---- install(filename_from, filename_to, mode)
-#@todo
+@param mode ファイルのアクセスモード。8進数で指定します。
 
-FileToolsクラスにある同名のクラスメソッドと同じです.
+@param verbose 真を指定すると詳細を表示します。
 
+@see [[m:File.install]]
+
+#@end
+
+#@if (version < "1.9.0")
 --- cmp
-#@todo
 
 [[m:Shell#compare]] と同じです。
 
 --- mv
-#@todo
 
 [[m:Shell#move]] と同じです。
 
 --- cp
-#@todo
 
 [[m:Shell#copy]] と同じです。
 
 --- rm_f
-#@todo
 
 [[m:Shell#safe_unlink]] と同じです。
 
 --- mkpath
-#@todo
 
 [[m:Shell#makedirs]] と同じです。
 
-#@# bc-rdoc: detected missing name: debug=
---- debug
---- debug?
---- debug=(val)
-#@todo
+#@end
 
---- verbose   
---- verbose?  
---- verbose=  
-#@todo
-
-#@# bc-rdoc: detected missing name: expand_path
 --- expand_path(path)
-#@todo
+
+Fileクラスにある同名のクラスメソッドと同じです.
+
+@param path ファイル名を表す文字列を指定します。
+
+@see [[m:File.expand_path]]
 
 
