@@ -466,12 +466,12 @@ System CPU time
 
 --- width -> Integer
 
-[[m:BEnchmark::Job#list]] のサイズ。
+[[m:Benchmark::Job#list]] のサイズ。
 
 
 = class Benchmark::Report < Object
 
-[[m:Benchmark#benchmark]] メソッドや [[m:Benchmark#bm]] メソッドの
+[[m:Benchmark.#benchmark]] メソッドや [[m:Benchmark.#bm]] メソッドの
 内部で使用されているクラスです。
 
 このライブラリのユーザーが直接意識する必要はありません。
