@@ -52,7 +52,7 @@ require resolv
 --- new(host, serv)
 #@todo
 
-[[m:SOCKSocket.new]]のパラメータ host の名前解決に [[lib:resolv]] 
+[[m:SOCKSSocket.new]]のパラメータ host の名前解決に [[lib:resolv]] 
 ライブラリを使います。
 
 #@end

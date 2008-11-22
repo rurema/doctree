@@ -485,9 +485,9 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   p([1,2] + it) #=> [1, 2, 3, 4]
 
 #@since 1.9.0
-@see [[m:Object#to_a]],[[m:Kernel.#Array]]
-#@else
 @see [[m:Object#to_splat]],[[m:Object#to_a]],[[m:Kernel.#Array]]
+#@else
+@see [[m:Object#to_a]],[[m:Kernel.#Array]]
 #@end
 
 --- to_hash -> Hash

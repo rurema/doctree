@@ -571,4 +571,4 @@ Enumerable オブジェクトの要素から、新しい集合オブジェクトを作ります。
   p [10, 20, 30].to_set {|num| num / 10}
   #=> #<Set: {1, 2, 3}>
 
-@see [[m:Set#new]]
+@see [[m:Set.new]]
