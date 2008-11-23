@@ -2057,7 +2057,7 @@ format 文字列を C 言語の sprintf と同じように解釈し、
 
 @param format フォーマット文字列です。
 @param arg フォーマットされる引数です。
-@see [[m:Kernel.#printf]],[[m:Time#strftime]],[[m:Date#strptime]]
+@see [[m:Kernel.#printf]],[[m:Time#strftime]],[[m:Date.strptime]]
 
 #@include(printf-format)
 
