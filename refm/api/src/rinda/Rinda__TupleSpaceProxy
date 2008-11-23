@@ -14,24 +14,24 @@ Creates a new TupleSpaceProxy to wrap +ts+.
 --- notify(ev, tuple, sec = nil)
 #@todo
 
-詳細は [[m:TupleSpace#notify]] 参照
+詳細は [[m:Rinda::TupleSpace#notify]] 参照
 
 --- read(tuple, sec = nil){|template| ... }
 #@todo
 
-詳細は [[m:TupleSpace#read]] 参照
+詳細は [[m:Rinda::TupleSpace#read]] 参照
 
 --- read_all(tuple)
 #@todo
 
-詳細は [[m:TupleSpace#read_all]] 参照
+詳細は [[m:Rinda::TupleSpace#read_all]] 参照
 
 --- take(tuple, sec = nil){|template| ... }
 #@todo
 
-詳細は [[m:TupleSpace#take]] 参照
+詳細は [[m:Rinda::TupleSpace#take]] 参照
 
 --- write(tuple, sec = nil)
 #@todo
 
-詳細は [[m:TupleSpace#write]] 参照
+詳細は [[m:Rinda::TupleSpace#write]] 参照

@@ -62,14 +62,14 @@ new(server, *options) を呼び出してサーブレットを生成して返します。
 指定された [[c:WEBrick::HTTPRequest]] オブジェクト req の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
 自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
 
-[[m:WEBrick::HTTPServer]] オブジェクトはクライアントからのリクエストがあるたびに
+[[c:WEBrick::HTTPServer]] オブジェクトはクライアントからのリクエストがあるたびに
 サーブレットオブジェクトを生成し service メソッドを呼びます。
 
 特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
 
-@param req クライアントからのリクエストを表す [[m:WEBrick::HTTPRequest]] オブジェクトです。
+@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param res クライアントへのレスポンスを表す [[m:WEBrick::HTTPResponse]] オブジェクトです。
+@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 @raise WEBrick::HTTPStatus::MethodNotAllowed 
        指定された [[c:WEBrick::HTTPRequest]] オブジェクト  req が自身に定義されていない 

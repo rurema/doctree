@@ -20,7 +20,7 @@ Emacs のようなキー操作などができます。
   end
 
 ユーザが入力した内容を履歴(以下、ヒストリ)として記録することができます。
-定数 [[m:Readline::HISTORY]] を使用して入力履歴にアクセスできます。
+定数 [[c:Readline::HISTORY]] を使用して入力履歴にアクセスできます。
 例えば、Readline::HISTORY.to_a により、
 全ての入力した内容を文字列の配列として取得できます。
 
@@ -389,7 +389,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 ユーザの入力の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列 string を指定します。
-指定した文字の間では、[[m:Readline::completer_word_break_characters=]]
+指定した文字の間では、[[m:Readline.completer_word_break_characters=]]
 で指定した文字列に含まれる文字も、普通の文字列として扱われます。
 
 @param string 文字列を指定します。
