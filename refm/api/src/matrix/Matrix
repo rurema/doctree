@@ -41,7 +41,7 @@ require 'complex'することによって、
 Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
 多くのメソッドは、この拡張されたMatrixクラスでも、期待通りに動作する。
 
-次の例は、各要素を共役複素数に置換するメソッド([[m:Matrix#conjugate]])である。
+次の例は、各要素を共役複素数に置換するメソッド Matrix#conjugate である。
 
   require 'matrix'
   require 'complex'
@@ -337,7 +337,11 @@ self が正方行列ではない場合は0を返します。
 
 selfの行列の階数(rank)を返します。
 行列の成分が[[c:Float]]の場合は正しい値を返さない場合があります。
+#@if (version >= "1.9.0")
 その場合は行列成分に[[c:Rational]]を用いるか、[[m:Matrix#rank_e]]を使用してください。
+#@else
+その場合は行列成分に[[c:Rational]]を使用してください。
+#@end
 
 #@if (version >= "1.9.0")
 --- rank_e -> Fixnum
