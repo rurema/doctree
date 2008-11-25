@@ -1,5 +1,9 @@
 = class YAML::Error < StandardError
+意図しない入力がメソッドに与えられた時などに発生します。
 
 = class YAML::ParseError < YAML::Error
+将来のために予約されています。現在は発生しません。
 
 = class YAML::TypeError < StandardError
+意図しない入力がメソッドに与えられた時などに発生します。
+
