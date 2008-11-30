@@ -2,6 +2,12 @@
 
 YAMLドキュメントを複数保持することができるストリームクラスです。
 
+=== 参考
+
+* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
+  * ((<プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML>))
+
+
 == class methods
 --- new(opts = {})
 ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
@@ -140,7 +146,4 @@ io がnilの場合は文字列を返します。
 --- options
 #@todo
 
-=== 参考
 
-* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
-  * ((<プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML>))
