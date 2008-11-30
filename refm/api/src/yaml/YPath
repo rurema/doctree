@@ -1,8 +1,8 @@
 = class YAML::YPath
 
-YAML $B%I%-%e%a%s%H$+$iFCDj$N%G!<%?$r8!:w$9$k5!G=$rDs6!$9$k(BYPath$B$N%/%i%9$G$9!#(B
+YAML ¥É¥­¥å¥á¥ó¥È¤«¤éÆÃÄê¤Î¥Ç¡¼¥¿¤ò¸¡º÷¤¹¤ëµ¡Ç½¤òÄó¶¡¤¹¤ëYPath¤Î¥¯¥é¥¹¤Ç¤¹¡£
 
-$B;HMQNc!((B"name" $B$r4^$`%;%0%a%s%H$rI=<($9$k!#(B
+»ÈÍÑÎã¡¨"name" ¤ò´Þ¤à¥»¥°¥á¥ó¥È¤òÉ½¼¨¤¹¤ë¡£
   require 'yaml'
 
   YAML.parse_documents(DATA){|doc|
@@ -28,19 +28,19 @@ YAML $B%I%-%e%a%s%H$+$iFCDj$N%G!<%?$r8!:w$9$k5!G=$rDs6!$9$k(BYPath$B$N%/%i%9$
       age: 1
   # end of sample
 
-=== $B;29M(B
+=== »²¹Í
 
 * Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
-  * $B%W%m%0%i%^!<$N$?$a$N(B YAML $BF~Lg(B ($BC5:wJT(B)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
+  * ¥×¥í¥°¥é¥Þ¡¼¤Î¤¿¤á¤Î YAML ÆþÌç (Ãµº÷ÊÔ)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
 
 
 == class methods
 --- new(str) -> YAML::YPath
-YAML::YPath $B%*%V%8%'%/%H$rJV$7$^$9!#(B
+YAML::YPath ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
 
-@param str YPath $B$G%Q!<%92DG=$J%Q%9$rJ8;zNs$G;XDj$7$^$9!#(B
+@param str YPath ¤Ç¥Ñ¡¼¥¹²ÄÇ½¤Ê¥Ñ¥¹¤òÊ¸»úÎó¤Ç»ØÄê¤·¤Þ¤¹¡£
 
-$BF0:nNc(B
+Æ°ºîÎã
   require 'yaml'
 
   str = "/ugo[:hoge]/0/name"
@@ -55,13 +55,13 @@ YAML::YPath $B%*%V%8%'%/%H$rJV$7$^$9!#(B
 == instance methods
 --- segments -> String
 --- segments=(val)
-$B<9I.<TJg=8!#(B $B%/%i%9JQ?t$K(Bsegments $B$KBP$9$k;2>H!"BeF~$r$*$3$J$&$?$a$N%a%=%C%I$G$9!#(B
+¼¹É®¼ÔÊç½¸¡£ ¥¯¥é¥¹ÊÑ¿ô¤Ësegments ¤ËÂÐ¤¹¤ë»²¾È¡¢ÂåÆþ¤ò¤ª¤³¤Ê¤¦¤¿¤á¤Î¥á¥½¥Ã¥É¤Ç¤¹¡£
 
 --- predicates -> String
 --- predicates=(val)
-$B<9I.<TJg=8!#(B $B%/%i%9JQ?t$K(Bpredicates $B$KBP$9$k;2>H!"BeF~$r$*$3$J$&$?$a$N%a%=%C%I$G$9!#(B
+¼¹É®¼ÔÊç½¸¡£ ¥¯¥é¥¹ÊÑ¿ô¤Ëpredicates ¤ËÂÐ¤¹¤ë»²¾È¡¢ÂåÆþ¤ò¤ª¤³¤Ê¤¦¤¿¤á¤Î¥á¥½¥Ã¥É¤Ç¤¹¡£
 
 --- flags -> bool
 --- flags=(val)
-$B<9I.<TJg=8!#(B $B%/%i%9JQ?t$K(Bflags $B$KBP$9$k;2>H!"BeF~$r$*$3$J$&$?$a$N%a%=%C%I$G$9!#(B
+¼¹É®¼ÔÊç½¸¡£ ¥¯¥é¥¹ÊÑ¿ô¤Ëflags ¤ËÂÐ¤¹¤ë»²¾È¡¢ÂåÆþ¤ò¤ª¤³¤Ê¤¦¤¿¤á¤Î¥á¥½¥Ã¥É¤Ç¤¹¡£
 
