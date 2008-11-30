@@ -1,21 +1,67 @@
 = class YAML::YPath
-== class methods
---- new(str)
-#@todo
 
---- each_path(str) {|YPath.new(path)| ...}
+YAML ドキュメントから特定のデータを検索する機能を提供するYPathのクラスです。
+
+使用例；"name" を含むセグメントを表示する。
+  require 'yaml'
+
+  YAML.parse_documents(DATA){|doc|
+    doc.search('/*//name').each {|node|
+      YAML::YPath.each_path(node){|u|
+        p u.segments
+      }
+    }
+  }
+
+  __END__
+  cat:
+   - name: taro
+     age: 7
+   - name: jiro
+     age: 23
+  ---
+  dog:
+   shiba:
+    - name: goro
+      age: 3
+    - name: rokuro
+      age: 1
+  # end of sample
+
+=== 参考
+
+* Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
+  * プログラマーのための YAML 入門 (探索編)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
+
+
+== class methods
+--- new(str) -> YAML::YPath
+YAML::YPath オブジェクトを返します。
+
+@param str YPath でパース可能なパスを文字列で指定します。
+
+動作例
+  require 'yaml'
+
+  str = "/ugo[:hoge]/0/name"
+
+  p YAML::YPath.new(str)
+  #=> #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
+
+
+--- each_path(str) {|YPath.new(path)| ...} -> object
 #@todo
 
 == instance methods
---- segments
+--- segments -> String
 --- segments=(val)
-#@todo
+執筆者募集。 クラス変数にsegments に対する参照、代入をおこなうためのメソッドです。
 
---- predicates
+--- predicates -> String
 --- predicates=(val)
-#@todo
+執筆者募集。 クラス変数にpredicates に対する参照、代入をおこなうためのメソッドです。
 
---- flags
+--- flags -> bool
 --- flags=(val)
-#@todo
+執筆者募集。 クラス変数にflags に対する参照、代入をおこなうためのメソッドです。
 
