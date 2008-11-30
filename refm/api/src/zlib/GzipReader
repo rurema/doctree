@@ -646,8 +646,17 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 @see [[m:IO#readlines]]
 
 #@since 1.9.0
---- readpartial(maxlen[, outbuf])
-#@todo
+--- readpartial(maxlen[, outbuf]) -> String
+IO クラスの同名メソッド[[m:IO#readpartial]]と同じです。
+
+@param maxlen [[m:IO#readpartial]]を参照してください。
+
+@param outbuf [[m:IO#readpartial]]を参照してください。
+
+@raise ArgumentError maxlen に負の値が入力された場合発生します。
+
+@see [[m:IO#readpartial]]
+
 #@end
 --- ungetc(char) -> nil
 IO クラスの同名メソッド[[m:IO#ungetc]]と同じです。
