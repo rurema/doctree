@@ -1,6 +1,11 @@
 require rubygems/ext
 
+拡張ライブラリをビルドするためのクラスを扱うライブラリです。
+
 = class Gem::Ext::Builder
+
+拡張ライブラリをビルドするためのクラスです。
+他のビルダークラスはこのクラスを継承しています。
 
 == Singleton Methods
 

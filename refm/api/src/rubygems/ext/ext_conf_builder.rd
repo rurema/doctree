@@ -1,6 +1,10 @@
-require 'rubygems/ext/builder'
+require rubygems/ext/builder
+
+extconf.rb を元にして拡張ライブラリをビルドするためのクラスを扱うライブラリです。
 
 = class Gem::Ext::ExtConfBuilder < Gem::Ext::Builder
+
+extconf.rb を元にして拡張ライブラリをビルドするためのクラスです。
 
 == Singleton Methods
 
@@ -14,7 +18,7 @@ Makefile を作成してから make を実行します。
 
 @param directory このメソッドでは使用していません。
 
-@param dest_path
+@param dest_path ???
 
 @param results コマンドの実行結果を格納します。破壊的に変更されます。
 

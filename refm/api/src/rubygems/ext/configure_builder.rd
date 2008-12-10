@@ -1,6 +1,10 @@
 require rubygems/ext/builder
 
+configure スクリプトを元に拡張ライブラリをビルドするクラスを扱うライブラリです。
+
 = class Gem::Ext::ConfigureBuilder < Gem::Ext::Builder
+
+configure スクリプトを元に拡張ライブラリをビルドするクラスです。
 
 == Singleton Methods
 
