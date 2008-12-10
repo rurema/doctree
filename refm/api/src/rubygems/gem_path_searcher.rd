@@ -1,6 +1,10 @@
 require rubygems
 
+Gem パッケージに含まれているファイルのうちロード可能なものを検索するためのライブラリです。
+
 = class Gem::GemPathSearcher
+
+Gem パッケージに含まれているファイルのうちロード可能なものを検索するためのクラスです。
 
 == Public Instance Methods
 
