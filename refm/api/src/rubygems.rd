@@ -269,6 +269,8 @@ Windows 上で動いている Ruby を識別するための正規表現の配列。
 
 = class Gem::LoadError < LoadError
 
+Gem をロードできなかった場合に発生するエラーです。
+
 == Public Instance Methods
 
 --- name -> String
