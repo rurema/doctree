@@ -1,4 +1,7 @@
 = module Gem::RequirePathsBuilder
+
+== Public Instance Methods
+
 --- write_require_paths_file_if_needed(spec = @spec, gem_home = @gem_home)
 #@todo
 
