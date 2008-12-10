@@ -6,6 +6,9 @@ require rubygems
 = module Gem::VersionOption
 
 [[c:Gem::Command]] の --version, --platform オプションのためのモジュールです。
+
+== Public Instance Methods
+
 --- add_platform_option(task = command, *wrap)
 #@todo
 
