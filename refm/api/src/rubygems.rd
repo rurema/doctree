@@ -96,6 +96,8 @@ Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
 
 執筆中
 
+#@# cutagem, rtask
+
 === gem コマンドの設定
   * GEM_HOME Gem のホームディレクトリ
   * GEM_PATH Gem のサーチパス
