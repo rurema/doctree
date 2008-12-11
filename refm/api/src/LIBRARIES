@@ -187,6 +187,19 @@ pty
 #@since 1.8.0
 racc/parser
 #@end
+#@since 1.9.0
+rake
+rake/classic_namespace
+rake/clean
+rake/gempackagetask
+rake/packagetask
+rake/rake_test_loader
+rake/rdoctask
+rake/runtest
+rake/tasklib
+rake/testtask
+rake/loaders/makefile
+#@end
 rational
 rbconfig
 #@until 1.9.0
