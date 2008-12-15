@@ -7,6 +7,10 @@ include FileUtils
 [[c:FileUtils]] で定義されているメソッドのうち、:verbose, :noop の二つの
 オプションのいずれかに反応するメソッドの動作を変更します。
 
+このモジュールはトップレベルでインクルードされます。
+その際、[[c:FileUtils]], [[c:RakeFileUtils]] に定義されているメソッドの
+可視性はプライベートに変更されます。
+
 == Public Instance Methods
 
 --- verbose(value = nil){ ... }
