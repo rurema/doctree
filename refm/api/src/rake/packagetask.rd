@@ -30,6 +30,8 @@ require rake/tasklib
 
 配布するパッケージ (zip, tar, etc...) を作成するためのタスクを定義するクラスです。
 
+== Public Instance Methods
+
 --- define -> self
 #@todo
 
