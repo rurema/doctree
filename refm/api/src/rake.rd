@@ -78,7 +78,12 @@ Rake は以下のような特徴を持っています。
 #@include(rake/Rake__Cloneable)
 #@include(rake/Rake__DefaultLoader)
 #@include(rake/Rake__EarlyTime)
+#@include(rake/Rake__FileCreationTask)
 #@include(rake/Rake__FileList)
-
-
-
+#@include(rake/Rake__FileTask)
+#@include(rake/Rake__InvocationChain)
+#@include(rake/Rake__MultiTask)
+#@include(rake/Rake__NameSpace)
+#@include(rake/Rake__Task)
+#@include(rake/Rake__TaskArguments)
+#@include(rake/Rake__TaskManager)
