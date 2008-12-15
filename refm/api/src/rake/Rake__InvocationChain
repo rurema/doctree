@@ -1,0 +1,81 @@
+= class Rake::InvocationChain
+
+循環したタスクの呼び出しを検出するためのクラスです。
+
+例:
+  a = Rake::InvocationChain::EMPTY
+  b = a.append('task_a').append('task_b')
+  p b.to_s  # => "TOP => task_a => task_b"
+  
+  a.append('task_a').append('task_b').append('task_a') # => 例外発生
+
+== Public Instance Methods
+
+--- append(task_name) -> Rake::InvocationChain
+#@todo
+
+与えられたタスク名を追加して新しい [[c:Rake::InvocationChain]] を返します。
+
+@param task_name 追加するタスク名を指定します。
+
+@raise RuntimeError 循環したタスクの呼び出しを検出した場合に発生します。
+
+--- member?(task_name) -> bool
+#@todo
+
+与えられたタスク名が自身に含まれる場合は真を返します。
+そうでない場合は偽を返します。
+
+@param task_name タスク名を指定します。
+
+--- to_s -> String
+#@todo
+
+トップレベルのタスクから自身までの依存関係を文字列として返します。
+
+== Singleton Methods
+
+--- new(task_name, tail)
+#@todo
+
+与えられたタスク名と一つ前の [[c:Rake::InvocationChain]] を用いて自身を初期化します。
+
+@param task_name タスク名を指定します。
+
+@param tail 一つ前の [[c:Rake::InvocationChain]] を指定します。
+
+--- append(task_name, chain) -> Rake::InvocationChain
+#@todo
+
+与えられたタスク名を第二引数の [[c:Rake::InvocationChain]] に追加します。
+
+@param task_name タスク名を指定します。
+
+@param chain 既に存在する [[c:Rake::InvocationChain]] のインスタンスを指定します。
+
+== Constants
+
+--- EMPTY -> Rake::InvocationChain::EmptyInvocationChain
+#@todo
+
+[[c:Rake::InvocationChain::EmptyInvocationChain]] のインスタンスを表します。
+
+= class Rake::InvocationChain::EmptyInvocationChain
+
+呼び出し関係のトップレベルを表します。
+
+== Public Instance Methods
+
+--- member?(task_name) -> bool
+
+偽を返します。
+
+--- append(task_name) -> Rake::InvocationChain
+
+与えられた値を追加した [[c:Rake::InvocationChain]] を返します。
+
+@param task_name 追加する値を指定します。
+
+--- to_s -> String
+
+'TOP' という文字列を返します。
