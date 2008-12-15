@@ -1,0 +1,75 @@
+= class Rake::TaskArguments
+include Enumerable
+
+タスクに渡されるパラメータの管理をするクラスです。
+
+== Public Instance Methods
+
+--- [](key) -> object
+#@todo
+
+与えられたパラメータ名に対応する値を返します。
+
+@param key パラメータの名前を指定します。
+
+--- each{|key, val| ... } -> Hash
+#@todo
+
+自身に含まれるパラメータ名とそれに対応する値をブロックパラメータとしてブロックを評価します。
+
+@see [[m:Hash#each]]
+
+--- inspect -> String
+--- to_s -> String
+#@todo
+
+自身を人間に読みやすい文字列にして返します。
+
+@see [[m:Hash#inspect]]
+
+--- names -> Array
+#@todo
+
+パラメータ名のリストを返します。
+
+--- new_scope(names) -> Rake::TaskArguments
+#@todo
+
+与えられたパラメータ名のリストを使用して新しい [[c:Rake::TaskArguments]] を作成します。
+
+@param names パラメータ名のリストを指定します。
+
+--- to_hash -> Hash
+#@todo
+
+パラメータ名と対応する値を格納したハッシュを返します。
+
+--- with_defaults(defaults) -> Hash
+#@todo
+
+パラメータにデフォルト値をセットします。
+
+@param defaults デフォルト値として使用するキーと値を格納したハッシュを指定します。
+
+
+== Protected Instance Methods
+
+--- lookup(name) -> object
+#@todo
+
+与えられた名前に対応する値を返します。
+
+@param name パラメータ名を指定します。
+
+== Singleton Methods
+
+--- new(names, values, parent = nil)
+
+自身を初期化します。
+
+@param names パラメータの名前のリストを指定します。
+
+@param values パラメータの値のリストを指定します。
+
+@param parent 親となる [[c:Rake::TaskArguments]] を指定します。
+
