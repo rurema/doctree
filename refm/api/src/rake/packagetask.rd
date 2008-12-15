@@ -8,7 +8,7 @@ require rake/tasklib
 : package
   パッケージを作成します。
 : clobber_package
-  作成したパッケージを削除します。このタスクは clobber ターゲットにも追加されます。
+  作成したパッケージを削除します。このタスクは clobber タスクにも追加されます。
 : repackage
   パッケージが古くない場合でもパッケージを再作成します。
 : PACKAGE_DIR/NAME-VERSION.tgz
