@@ -1,3 +1,5 @@
+Makefile をロードするためのライブラリです。
+
 = class Rake::MakefileLoader
 
 Makefile をロードするためのクラスです。
