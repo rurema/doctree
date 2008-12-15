@@ -1,0 +1,46 @@
+= module Rake
+
+Rake の主要なモジュールです。
+
+== Singleton Methods
+
+--- application -> Rake::Application
+#@todo
+
+現在の Rake アプリケーションを返します。
+
+--- application=(app)
+#@todo
+
+現在の Rake アプリケーションをセットします。
+
+@param app [[c:Rake::Application]] のインスタンスを指定します。
+
+--- original_dir -> String
+#@todo
+
+Rake アプリケーションを開始したディレクトリを返します。
+
+== Constants
+
+--- EARLY -> Rake::EarlyTime
+#@todo
+
+[[c:Rake::EarlyTime]] の唯一のインスタンスを返します。
+
+--- EMPTY_TASK_ARGS -> Rake::TaskArguments
+#@todo
+
+空のタスクに渡すパラメータをあらわす定数です。
+
+
+= class Rake::RuleRecursionOverflowError < StandardError
+#@todo
+
+ルールのネストが多すぎる場合に発生する例外です。
+
+= class Rake::TaskArgumentError < ArgumentError
+#@todo
+
+間違ったタスクの定義を行った場合に発生する例外です。
+
