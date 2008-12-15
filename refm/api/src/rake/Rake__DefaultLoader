@@ -1,0 +1,12 @@
+= class Rake::DefaultLoader
+
+[[m:Kernel#import]] で使用するデフォルトのローダーです。
+
+== Public Instance Methods
+
+--- load(filename)
+#@todo
+
+与えられたファイルをロードします。
+
+@param filename ロードするファイル名を指定します。
