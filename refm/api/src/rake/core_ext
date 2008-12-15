@@ -228,6 +228,8 @@ Rake タスクを定義します。
 
 = reopen FileUtils
 
+== Public Instance Methods
+
 --- sh(*cmd){|result, status| ... }
 
 与えられたコマンドを実行します。
