@@ -87,3 +87,5 @@ Rake は以下のような特徴を持っています。
 #@include(rake/Rake__Task)
 #@include(rake/Rake__TaskArguments)
 #@include(rake/Rake__TaskManager)
+
+#@include(rake/RakeFileUtils)
