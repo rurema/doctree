@@ -1,4 +1,9 @@
 = class Rake::Application
+include TaskManager
+
+Rake で使用するメインのクラスです。
+
+コマンドラインで rake コマンドを実行した時に作成され、実行されます。
 
 == Public Instance Methods
 
