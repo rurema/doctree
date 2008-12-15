@@ -21,50 +21,64 @@ Rake は以下のような特徴を持っています。
 
   $ rake --help
   rake [-f rakefile] {options} targets...
-  
-  オプション ...
-  
-    --classic-namespace  (-C)
-        Put Task and FileTask in the top level namespace
-    --describe=PATTERN   (-D)
-        PATTERN にマッチしたタスクの詳細を表示します。PATTERN を省略すると全タスクを表示します。
-    --dry-run            (-n)
-        Do a dry run without executing actions.
-        何をするか表示しますが、実際には何もしません。
-    --help               (-h)
-        このメッセージを表示します。
-    --libdir=LIBDIR      (-I)
-        $LOAD_PATH を指定します。
-    --nosearch           (-N)
-        親ディレクトリの Rakefile を探索しません。
-    --prereqs            (-P)
-        タスクと依存関係を表示します。
-    --quiet              (-q)
-        ログメッセージを標準出力に出力しません。
-    --rakefile=FILE      (-f)
-        FILE を Rakefile として使用します。
-    --rakelibdir=RAKELIBDIR (-R)
-        RAKELIBDIR にある *.rake というファイルを自動的に読み込みます。(デフォルトは 'rakelib' です)
-    --require=MODULE     (-r)
-        Rakefile を実行する前に MODULE を読み込みます。
-    --silent             (-s)
-        --quiet のように動作しますが、現在のディレクトリを表示します。
-    --tasks=PATTERN      (-T)
-        PATTERN にマッチしたタスクと説明を表示します。PATTERN を省略すると全タスクを表示します。
-    --trace              (-t)
-        Turn on invoke/execute tracing, enable full backtrace.
-        起動/実行したタスクのトレースを出力します。バックトレースを全て表示します。
-    --verbose            (-v)
-        標準出力にログメッセージを出力します。 (デフォルト).
-    --version            (-V)
-        このプログラムのバージョンを表示します。
-
+  Options are ...
+      -C, --classic-namespace       トップレベルに Task, FileTask を定義します。
+                                    過去との互換性のためのオプションです。
+      -D, --describe [PATTERN]      パターンにマッチしたタスクの詳細を表示して終了します。
+                                    パターンは省略可能です。
+      -n, --dry-run                 アクションを実行せずにタスクを実行します。
+      -e, --execute CODE            Ruby のコードを実行して終了します。
+      -p, --execute-print CODE      Ruby のコードを実行して結果を表示して終了します。
+      -E, --execute-continue CODE   Ruby のコードを実行してから、タスクを実行します。
+      -I, --libdir LIBDIR           ロードパスに LIBDIR を含めます。
+      -P, --prereqs                 タスクの依存関係を表示して終了します。
+      -q, --quiet                   標準出力にログメッセージを表示しません。
+      -f, --rakefile [FILE]         FILE を Rakefile として使用します。
+      -R, --rakelibdir RAKELIBDIR   RAKELIBDIR にある *.rake ファイルを自動的にインポートします。
+          --rakelib                 デフォルトは rakelib です。
+      -r, --require MODULE          Rakefile を実行する前に MODULE を require します。
+          --rules                   ルールの解決を追跡します。
+      -N, --no-search, --nosearch   親ディレクトリの Rakefile を検索しません。
+      -s, --silent                  --quiet に似ていますが、ディレクトリも表示しません。
+      -g, --system                  システム全体の Rakefile を使用します。('~/.rake/*.rake')
+      -G, --no-system, --nosystem   システム全体の Rakefile を使用しません。
+      -T, --tasks [PATTERN]         パターンにマッチしたタスクの短い説明を表示して終了します。
+                                    パターンは省略可能です。
+      -t, --trace                   全てのバックトレースを表示します。
+      -v, --verbose                 標準出力にログメッセージを表示します (デフォルト)。
+      -V, --version                 このプログラムのバージョンを表示します。
+      -h, -H, --help                このメッセージを表示します。
 
 === Rake ファイルの書き方
 
-簡単な例:
-  
+一から全て自分で書くことも出来ますが、あらかじめ定義されているタスクを
+使用すると比較的複雑なタスクも簡単に定義することができます。
+また、ルールやファイルタスクをうまく使うとタスクを簡潔に書くことが
+出来る場合があります。Rakefile は普通の Ruby スクリプトと同じ文法で
+書くことができるので工夫次第で Ruby にできることなら何でもできます。
 
+簡単な例:
+  # coding: utf-8
+  task :hello do
+    puts 'do task hello!'
+  end
+
+動的にタスクを定義する例:
+  # cofing: utf-8
+  require 'rake/testtask'
+  require 'rake/clean'    # clean, clobber の二つのタスクを定義
+  task :default => [:test]
+  
+  1.upto(8) do |n|
+    Rake::TestTask.new("test_step#{n}") do |t|
+      t.libs << "step#{n}"
+      t.test_files = FileList["step#{n}/test_*.rb"]
+      t.verbose = false
+    end
+  end
+  
+  desc 'execute all test'
+  task 'test_all' => (1..8).to_a.map{|n| "test_step#{n}"}
 
 === 用語集
 
