@@ -164,6 +164,9 @@ mailread			masao		done
 mathn				yugui
 matrix                          bornite
 md5
+miniunit/mock                   okkez
+miniunit/spec                   okkez
+miniunit/unit                   okkez
 mkmf                            bornite
 monitor
 mutex_m
