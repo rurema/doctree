@@ -1,0 +1,242 @@
+= class Rake::Application
+
+== Public Instance Methods
+
+--- add_import(file_name)
+#@todo
+
+与えられたファイルをロード予定ファイルのリストに追加します。
+
+@param file_name ロード予定のファイル名を指定します。
+
+--- add_loader(ext, loader)
+#@todo
+
+与えられた拡張子で終わるファイル名のファイルをロードするためのローダーを
+自身に追加します。
+
+@param ext 拡張子を指定します。
+
+@param loader ローダーを指定します。
+
+--- collect_tasks(argv) -> Array
+#@todo
+
+コマンドライン引数を解析して実行するタスクのリストを返します。
+
+実行するタスクが指定されていない場合はデフォルトのタスクのみ返します。
+また、このとき環境変数の解析も行います。
+
+--- const_warning(const_name)
+#@todo
+
+トップレベルで定数を使用している場合に警告を表示します。
+
+--- display_prerequisites
+#@todo
+
+タスクとそのタスクに依存しているタスクを表示します。
+
+--- display_tasks_and_comments
+#@todo
+
+タスクとコメントを表示します。
+
+--- dynamic_width -> Fixnum
+#@todo
+
+ターミナルの幅を計算します。
+
+--- dynamic_width_stty
+#@todo
+
+[[man:stty(1)]] を用いてターミナルの幅を計算します。
+
+--- dynamic_width_tput
+#@todo
+
+[[man:tput(1)]] を用いてターミナルの幅を計算します。
+
+--- find_rakefile_location -> Array | nil
+#@todo
+
+Rakefile とそのファイルがあったディレクトリのペアを返します。
+
+--- handle_options
+#@todo
+
+コマンドラインオプションを [[c:OptionParser]] に登録します。
+
+--- have_rakefile -> String | nil
+#@todo
+
+Rakefile がカレントディレクトリに存在する場合はそのファイル名を返します。
+そうでない場合は nil を返します。
+
+@see [[m:Rake::Application.RAKEFILES]]
+
+--- init(app_name = 'rake')
+#@todo
+
+コマンドラインオプションとアプリケーション名を初期化します。
+
+--- invoke_task(task_string)
+#@todo private?
+
+与えられた文字列を解析してタスクを実行します。
+
+@param task_string タスク名とそれに与えるパラメータをあらわす文字列を指定します。
+
+--- load_imports
+#@todo
+
+ロード予定のファイルを全てロードします。
+
+既にロード済みのファイルはロードしません。
+
+--- load_rakefile
+#@todo
+
+Rakefile を探してロードします。
+
+--- name -> String
+#@todo
+
+アプリケーションの名前を返します。通常は 'rake' という名前を返します。
+
+--- options -> OpenStruct
+#@todo
+
+コマンドラインで与えられたアプリケーションのオプションを返します。
+
+--- original_dir -> String
+#@todo
+
+rake コマンドを実行したディレクトリを返します。
+
+--- parse_task_string(string) -> [Stging, Array]
+#@todo
+
+与えられた文字列を解析して、タスク名とそれに与えるパラメータのペアを返します。
+
+@param string タスク名とそれに与えるパラメータのペアを返します。
+
+--- rake_require(file_name, paths = $LOAD_PATH, loaded = $") -> bool
+#@todo
+
+[[m:Kernel#require]] に似ていますが、*.rb ファイルではなく *.rake ファイルを探索します。
+
+@param file_name ロードするファイル名を指定します。
+
+@param paths ロードパスを指定します。
+
+@param loaded ロード済みのファイルリストを指定します。
+
+@raise LoadError 指定されたファイルが見つからなかった場合に発生します。
+
+--- rakefile -> String
+#@todo
+
+実際に使用されている Rakefile の名前を返します。
+
+--- rakefile_location -> String
+#@todo
+
+Rakefile のパスを返します。
+
+--- raw_load_rakefile
+#@todo
+
+Rakefile をロードします。
+
+@raise RuntimeErro Rakefile が見つからなかった場合に発生します。
+
+--- run
+#@todo
+
+Rake アプリケーションを実行します。
+
+このメソッドは以下の 3 ステップを実行します。
+
+ * コマンドラインオプションを初期化します。[[m:Rake::Application#init]]
+ * タスクを定義します。[[m:Rake::Application#load_rakefile]]
+ * コマンドラインで指定されたタスクを実行します。[[m:Rake::Application#top_level]]
+
+--- standard_exception_handling{ ... }
+#@todo
+
+与えられたブロックを評価する際に発生する標準的な例外を補足して
+アプリケーションを終了させます。
+
+--- standard_rake_options -> Array
+#@todo
+
+Rake コマンドで使用する標準的なコマンドラインオプションのリストを返します。
+
+--- system_dir -> String
+#@todo
+
+システム全体の Rakefile が格納されているディレクトリを返します。
+
+環境変数 RAKE_SYSTEM で設定することができます。
+
+--- terminal_width -> Fixnum
+#@todo
+
+ターミナルの幅を返します。
+
+環境変数 RAKE_COLUMNS で指定することが出来ます。
+
+--- top_level
+#@todo
+
+Rake アプリケーションに与えられたトップレベルのタスク
+(コマンドラインで指定されたタスク) を実行します。
+
+--- top_level_tasks -> Array
+#@todo
+
+コマンドラインで指定されたタスクのリストを返します。
+
+--- truncate(string, width) -> String
+#@todo
+
+与えられた文字列を与えられた幅で切り詰めます。
+
+--- truncate_output?
+#@todo
+
+--- tty_output=(tty_output_state)
+#@todo
+
+TTY に対する出力状態を上書きします。
+
+大抵の場合、テストのために使用します。
+
+@param tty_output_state 変更後の状態を指定します
+
+--- tty_output? -> bool
+#@todo
+
+TTY に出力している場合は真を返します。そうでない場合は偽を返します。
+
+--- unix? -> bool
+#@todo
+
+現在のプラットフォームが UNIX 系である場合、真を返します。
+そうでない場合は偽を返します。
+
+--- windows? -> bool
+#@todo
+
+現在のプラットフォームが Windows 系である場合、真を返します。
+そうでない場合は偽を返します。
+
+== Constants
+
+--- DEFAULT_RAKEFILES -> Array
+#@todo
+
+デフォルトで Rakefile として扱うファイル名の配列を返します。
+
+'rakefile', 'Rakefile', 'rakefile.rb', 'Rakefile.rb' が指定されています。
