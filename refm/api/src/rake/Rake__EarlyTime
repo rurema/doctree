@@ -1,0 +1,20 @@
+= class Rake::EarlyTime
+include Comparable
+include Singleton
+
+このクラスは全てのタイムスタンプより前の時刻をあらわします。
+
+== Public Instance Methods
+
+--- <=>(other) -> Fixnum
+
+必ず -1 を返します。
+
+@param other 比較対象のオブジェクト
+
+@return -1 を返します。
+
+--- to_s -> String
+#@todo
+
+"<EARLY TIME>" という文字列を返します。
