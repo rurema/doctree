@@ -109,3 +109,175 @@
 @param patterns 'pat1,rep1;pat2,rep2;...' のような形式で置換パターンを指定します。
 
 
+= reopen Kernel
+include RakeFileUtils
+
+== Private Instance Methods
+
+--- task(*args){ ... } -> Rake::Task
+
+Rake タスクを定義します。
+
+@param args タスク名と依存タスクを指定します。
+
+例:
+  task :clobber => [:clean] do
+    rm_rf "html"
+  end
+
+@see [[m:Rake::Task#define_task]]
+
+
+--- file(*args){ ... } -> Rake::FileTask
+
+ファイルタスクを定義します。
+
+@param args ファイル名と依存ファイル名を指定します。
+
+例:
+   file "config.cfg" => ["config.template"] do
+     open("config.cfg", "w") do |outfile|
+       open("config.template") do |infile|
+         while line = infile.gets
+           outfile.puts line
+         end
+       end
+     end
+   end
+
+@see [[m:Rake::Task#define_task]]
+
+--- file_create(*args){ ... } -> Rake::FileCreationTask
+
+ファイルを作成するタスクを定義します。
+
+主に [[m:Kernel.#directory]] を定義するために使用します。
+
+--- directory(dir)
+
+与えられたディレクトリを作成するタスクを定義します。
+
+@param 作成するディレクトリを指定します。
+
+例:
+  directory 'testdata/doc'
+
+
+--- multitask(args){ ... } -> Rake::MultiTask
+
+事前タスクを並列実行するタスクを定義します。
+
+与えられた事前タスクを実行する順序は不定です。
+
+例:
+  multitask :deploy => [:deploy_gem, :deploy_rdoc]
+
+--- namespace(name = nil){ ... } -> Rake::NameSpace
+
+新しい名前空間を作成します。
+
+与えられたブロックを評価する間は、その名前空間を使用します。
+
+例:
+   ns = namespace "nested" do
+     task :run
+   end
+   task_run = ns[:run] # find :run in the given namespace.
+
+@see [[m:Rake::TaskManager#in_namespace]]
+
+--- rule(*args){|t| ... }
+
+自動的に作成するタスクのためのルールを定義します。
+
+@param args ルールに与えるパラメータを指定します。
+
+例:
+  rule '.o' => '.c' do |t|
+    sh %{cc -o #{t.name} #{t.source}}
+  end
+
+--- desc(description)
+
+直後の Rake タスクの説明を登録します。
+
+@param description 直後のタスクの説明を指定します。
+
+例:
+   desc "Run the Unit Tests"
+   task :test => [:build]
+     runtests
+   end
+
+--- import(*filenames)
+
+分割された Rakefile をインポートします。
+
+インポートされたファイルは、現在のファイルが完全にロードされた後でロードされます。
+このメソッドはインポートするファイルのどこで呼び出されてもかまいません。
+また、インポートされるファイル内に現れるオブジェクトはインポートするファイル内で定義
+されているオブジェクトに依存していてもかまいません。
+
+このメソッドは依存関係を定義したファイルを読み込むのによく使われます。
+
+@param filenames インポートする Rakefile を指定します。
+
+例:
+   import ".depend", "my_rules"
+
+
+= reopen FileUtils
+
+--- sh(*cmd){|result, status| ... }
+
+与えられたコマンドを実行します。
+
+与えられた引数が複数の場合、シェルを経由しないでコマンドを実行します。
+
+@param cmd 引数の解釈に関しては [[m:Kernel.#exec]] を参照してください。
+
+
+例:
+   sh %{ls -ltr}
+   
+   sh 'ls', 'file with spaces'
+   
+   # check exit status after command runs
+   sh %{grep pattern file} do |ok, res|
+     if ! ok
+       puts "pattern not found (status = #{res.exitstatus})"
+     end
+   end
+
+@see [[m:Kernel.#exec]], [[m:Kernel.#system]]
+
+
+--- ruby(*args){ ... }
+
+与えられた引数で Ruby インタプリタを実行します。
+
+@param args Ruby インタプリタに与える引数を指定します。
+
+例:
+   ruby %{-pe '$_.upcase!' <README}
+
+
+--- safe_ln(*args)
+
+安全にリンクを作成します。
+
+リンクの作成に失敗した場合はファイルをコピーします。
+
+@param args [[m:FileUtils#cp]], [[m:FileUtils#ln]] に渡す引数を指定します。
+
+@see [[m:FileUtils#cp]], [[m:FileUtils#ln]]
+
+--- split_all(path) -> Array
+
+与えられたパスをディレクトリごとに分割します。
+
+@param path 分割するパスを指定します。
+
+例:
+   split_all("a/b/c") =>  ['a', 'b', 'c']
+
