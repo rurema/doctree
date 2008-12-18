@@ -110,6 +110,8 @@ cgi
 cgi-lib
 cgi/session
 complex                         bornite
+continuation
+coverage
 csv                             bornite
 curses
 date                            tadf            almost done
@@ -136,6 +138,7 @@ eregex                          okkez           done
 etc                             okkez           done
 expect                          okkez           done
 fcntl                           okkez           done
+fiber
 fileutils                       okkez           done
 final                           okkez           done
 finalize                        okkez           done
@@ -195,6 +198,7 @@ pathname                        mukai           done
 ping                            okkez           done
 pp                              sheepman        done
 prettyprint                     sheepman        done
+prime                           yugui
 profile
 profiler
 pstore                          okkez           done
@@ -203,6 +207,7 @@ rake                            okkez
 racc/parser
 rational			yugui
 rbconfig
+rdoc
 readbytes
 readline                        kouji           done
 resolv
@@ -271,6 +276,7 @@ timeout                         kouya           done
 tmpdir                          kouya           done
 tracer                          kouya           done
 tsort                           kouya           done
+ubygems
 un                              okkez           done
 uri                             sheepman        done
 weakref                         bornite
