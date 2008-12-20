@@ -131,7 +131,7 @@ dl/import
 dl/struct                       
 dl/types                        
 dl/win32
-drb                             sheepman
+drb                             
 e2mmap                          okkez           done
 erb                             snoozer05       done
 eregex                          okkez           done
