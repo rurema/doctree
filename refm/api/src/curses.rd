@@ -43,6 +43,11 @@
   foo:1:in `require': no such file to load -- bar (LoadError)
           from foo:1:in `<main>'
 
+いくつかの操作において、サポートしていない環境では、
+例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、ほとんどの操作で例外 SecurityError を発生します。
+
 == Constants
 
 --- REPORT_MOUSE_POSITION
@@ -750,28 +755,55 @@
 
 == Module Functions
 
---- init_screen
-#@todo
+--- init_screen -> Curses::Window
+--- stdscr -> Curses::Window
 
-スクリーンを curses のために初期化します。
-Curses モジュールのすべてのメソッドはこのメソッドを
-呼び出してからでないと使えません。
+端末の種類や curses に関するデータを初期化し、画面をクリアします。
+stdscr と呼ばれる画面全体を表すウィンドウを返します。
 
----  close_screen
-#@todo
+ncurses を利用している場合、
+このメソッドに失敗すると標準エラー出力にエラーメッセージを出力し、終了します。
+そうでない場合、このメソッドに失敗すると例外 RuntimeError を発生します。
 
-curses スクリーンを閉じます。これ以後 Curses モジュール
-のメソッドを呼び出すとすべて例外になります。
+詳しくは、 man ページの curs_initscr(3X) の initscr 関数と、
+curs_clear(3X) の clear 関数を参照ください。
 
---- stdscr
-#@todo
+[[m:Curses]] のいくつかのメソッドは、内部でこのメソッドを呼び出します。
+これにより、このメソッドを呼び出していない場合でも、
+いくつかの処理をできるようになっています。
 
-画面全体を表す Curses::Window オブジェクトを返します。
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
---- refresh
-#@todo
+@see [[m:Curses.close_screen]]
 
-stdscr の表示を更新します。
+--- close_screen -> nil
+
+curses の終了処理を行います。
+端末の状態を復帰させ、カーソルを左端に移動させます。
+
+詳しくは、 man ページの curs_initscr(3X) の endwin 関数を参照ください。
+
+@see [[m:Curses.init_screen]]、[[m:Curses.stdscr]]
+
+--- closed? -> bool
+
+curses が終了しているかどうかを返します。
+
+詳しくは、 man ページの curs_initscr(3X) の isendwin 関数を参照ください。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+@see [[m:Curses.close_screen]]
+
+--- refresh -> nil
+
+画面全体を表すウィンドウ stdscr の表示を更新します。
+
+このメソッドの中で [[m:Curses.init_screen]] を呼び出します。
+
+詳しくは、 man ページの curs_refresh(3X) の refresh 関数を参照ください。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- doupdate
 #@todo
@@ -966,9 +998,6 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 --- can_change_color?
 #@todo
 
---- closed?
-#@todo
-
 --- color_content(color)
 #@todo
 
@@ -1026,8 +1055,43 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 --- ungetmouse(mevent)
 #@todo
 
+--- ESCDELAY -> Integer
+
+ESC の入力を破棄する時間(ミリ秒単位)を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+--- ESCDELAY=(val) -> Integer
+
+ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
+設定した値を返します。
+
+@param val ESC の入力を破棄する時間(ミリ秒単位)を指定します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+--- TABSIZE -> Integer
+
+タブ幅を取得します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+--- TABSIZE=(val) -> Integer
+
+タブ幅を val に設定します。設定した値を返します。
+
+@param val タブ幅を指定します。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
 
 
+--- use_default_colors -> nil
+
+前景色と背景色を端末のデフォルト値 (-1) に設定します。
+
+詳細は man ページの defualt_colors(3X) を参照ください。
+
+サポートしていない環境では、例外 NotImplementError が発生します。
 
 #@include(curses/Curses__Key)
 #@include(curses/Curses__MouseEvent)
