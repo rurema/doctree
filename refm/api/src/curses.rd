@@ -1,8 +1,47 @@
 #@since 1.8.0
 
-端末操作ライブラリ curses の Ruby インターフェイスです。
+端末制御ライブラリの curses や ncurses を利用して、端末に依存しない形式でテキストユーザインタフェースを作成するためのライブラリです。
 
 = module Curses
+
+端末制御ライブラリの curses や ncurses を利用して、端末に依存しない形式でテキストユーザインタフェースを作成するためのモジュールです。
+
+  * [[url:http://pdcurses.sourceforge.net/]]
+  * [[url:http://www.gnu.org/software/ncurses/ncurses.html]]
+
+本モジュールを使ってテキストユーザインタフェースを作成する流れは次のようになります。
+
+  (1) [[m:Curses.init_screen]] で初期化を行います。
+  (2) [[c:Curses]] のモジュール関数を使って、
+  入力のエコーを無効にするなどの curses の設定を行います。
+  (3) [[m:Curses.stdscr]] で [[c:Curses::Window]] オブジェクトを取得し、
+  それを使ってインタフェースを構築する。
+  (4) [[m:Curses.getch]] や [[m:Curses.getstr]] により、
+  ユーザからの入力を取得します。入力した情報に従って処理を行い、
+  そして、入力を待つということを繰り返します。
+  (5) 最後に [[m:Curses.close_screen]] で終了処理を行います。
+
+例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
+
+  require "curses"
+  
+  Curses.init_screen
+  begin
+    s = "Hello World!"
+    Curses.setpos(Curses.lines / 2, Curses.cols / 2 - (s.length / 2))
+    Curses.addstr(s)
+    Curses.refresh
+    Curses.getch
+  ensure
+    Curses.close_screen
+  end
+
+なお、curses や ncurses をインストールしていない環境では、
+本モジュールは利用できません。
+利用できない場合、require の時点で以下のような例外が発生します。
+
+  foo:1:in `require': no such file to load -- bar (LoadError)
+          from foo:1:in `<main>'
 
 == Constants
 
