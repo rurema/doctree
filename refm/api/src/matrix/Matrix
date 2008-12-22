@@ -610,20 +610,31 @@ srcが正則行列ではないでは場合には、ExceptionForMatrix::ErrNotRegularの例外が発生
   p m #=> Matrix[[1, 2.0], [4, 6.5]]
   p n * x #=> Matrix[[1, 2.0], [3, 4.5]]
 
---- hash
-#@#todo
-Hash値を返します。
+--- hash -> Fixnum
+行列のHash値を返します。
 
---- to_s
-#@todo
+--- to_s -> String
 行列を文字列化し、その文字列を返します。
 
---- inspect
-#@todo
+例:
+  a1 = [1, 2]
+  a2 = [3, 4.5]
+  m = Matrix[a1, a2]
+
+  p m.to_s #=> "Matrix[[1, 2], [3, 4.5]]"
+
+--- inspect -> String
 自分自身を見やすい形式に文字列化し、その文字列を返します。
 
---- clone
-#@todo
+例:
+  a1 = [1, 2]
+  a2 = [3, 4.5]
+  m = Matrix[a1, a2]
+
+  p m.to_s #=> "Matrix[[1, 2], [3, 4.5]]"
+
+
+--- clone -> Matrix
 自分自身のコピーを返します。
 
 
