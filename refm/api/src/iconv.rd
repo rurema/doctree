@@ -16,8 +16,9 @@ Iconv は UNIX 95 の iconv() 関数のラッパーで、
 「ext/iconv/charset_alias.rb」 が用意されています。
 GNU ソフトウェア texinfo ([[url:http://www.gnu.org/software/texinfo/]]) に含まれるファイル config.charset を以下のミラーサイトから手に入れて
 
- * [[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
- * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
+#@# * [[url:http://tug.ctan.org/cgi-bin/getFile.py?fn=/macros/texinfo/texinfo/intl/config.charset]]
+#@# * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/intl/config.charset]]
+ * [[url:http://ring.riken.go.jp/archives/text/CTAN/macros/texinfo/texinfo/gnulib/lib/config.charset]]
 
 ext/iconv/ に置き、ext/iconv/ で次のように実行すると
 
@@ -65,20 +66,24 @@ iconv 関数のラッパークラスです。
 == Class Methods
 
 --- new(to, from)    -> Iconv
-#@todo
 
-文字コード from から to への新しい変換器を作り、それを返します。
+文字コード from から to へ変換するIconvオブジェクトを生成します。
 
 @param to 変換先の文字コード体系を表す文字列を指定します。
 
 @param from 変換前の文字コード体系を表す文字列を指定します。
 
-@raise TypeError to や from が String でないとき発生します。
+@raise TypeError to や from が String オブジェクトでないとき発生します。
 
-@raise ArgumentError to や from で指定された変換器が見つからないとき発生します。
+@raise ArgumentError to や from で指定された文字コード体系が見つからないとき発生します。
 
 @raise SystemCallError [[man:iconv_open(3)]] が失敗したとき発生します。
 
+例:
+  require 'iconv'
+  # EUC-JP から SHIFT_JIS へ変換するIconvオブジェクトを生成。
+  icv = Iconv.new('SHIFT_JIS', 'EUC-JP')
+ 
 --- open(to, from)               -> Iconv
 --- open(to, from) {|cd| ...}    -> object
 #@todo
@@ -92,7 +97,7 @@ iconv 関数のラッパークラスです。
 
 @param from 変換前の文字コード体系を表す文字列を指定します。
 
---- iconv(to, from, *strs)    -> [String]
+--- iconv(to, from, *strs)    -> Array
 #@todo
 
 与えられた文字コードにしたがって strs を変換し、結果を文字列の配列として返します。
@@ -129,8 +134,8 @@ iconv 関数のラッパークラスです。
 を起こします。
 
 #@since 1.9.0
---- list                       -> [String]
---- list {|*aliases| ... }     
+--- list                       -> Array
+--- list {|*aliases| ... }     -> Array
 #@todo
 
 各エイリアスセットごとに繰り返すイテレータです。
@@ -140,10 +145,21 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 @raise NotImplementedError 実行プラットフォームでサポートされていない場合に発生します。
 #@end
 
---- charset_map
+--- charset_map -> Hash
 #@todo
 
-Returns the map from canonical name to system dependent name.
+#@# Returns the map from canonical name to system dependent name.
+
+普遍な文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
+
+#@since 1.9.0
+--- ctlmethods -> Array
+#@todo
+
+#@# Returns available iconvctl() method list.
+システム上のlibiconvのiconvctl()関数で使用可能なフラグのリストを [[c:Array]] として返します。
+
+#@end
 
 == Instance Methods
 
@@ -186,6 +202,39 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 @raise Iconv::OutOfRange
 
+#@since 1.9.0
+
+--- conv(str) -> String
+#@todo
+
+文字列を変換し、変換後の文字列を返します。
+
+@param str 変換される文字列を指定します。
+
+例:
+  utf8 = ["E38182E38184E38186E38188E3818A"].pack("H*") # あいうえお
+
+  iconv = Iconv.new('EUC-JP', 'UTF-8') # UTF-8 から EUC へ変換
+  str = iconv.conv(utf8)
+  puts str #=> "あいうえお"
+
+--- discard_ilseq=
+#@todo
+
+--- discard_ilseq?
+#@todo
+
+--- transliterate=
+#@todo
+
+--- transliterate?
+#@todo
+
+--- trivial?
+#@todo
+
+#@end
+
 = module Iconv::Failure
 
 [[c:Iconv]] が起こす例外のためのモジュールです。
@@ -212,6 +261,7 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 #<type: "success", "failed"> のような形をした
 文字列を返します。
+
 
 #@since 1.8.4
 = class Iconv::BrokenLibrary < RuntimeError
