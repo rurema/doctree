@@ -134,6 +134,11 @@ mailread
 #@end
 mathn
 matrix
+#@since 1.9.1
+miniunit/mock
+miniunit/spec
+miniunit/unit
+#@end
 #@until 1.9.0
 md5
 #@end
@@ -391,6 +396,7 @@ syslog
 tempfile
 #@since 1.8.0
 test/unit
+#@until 1.9.1
 test/unit/autorunner
 test/unit/assertions
 test/unit/testcase
@@ -404,6 +410,7 @@ test/unit/ui/gtk/testrunner
 test/unit/ui/gtk2/testrunner
 test/unit/ui/tk/testrunner
 test/unit/util/observable
+#@end
 #@end
 thread
 thwait
