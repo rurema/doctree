@@ -135,9 +135,9 @@ mailread
 mathn
 matrix
 #@since 1.9.1
-miniunit/mock
-miniunit/spec
-miniunit/unit
+minitest/mock
+#@# minitest/spec
+#@# minitest/unit
 #@end
 #@until 1.9.0
 md5

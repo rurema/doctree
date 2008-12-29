@@ -1,0 +1,573 @@
+= module MiniTest::Assertions
+#@todo
+
+各種 assert メソッドを提供します。
+
+== Public Instance Methods
+
+--- _assertions -> Fixnum
+#@todo
+
+--- _assertions=(count)
+#@todo
+
+@param count
+
+--- assert(test, message = nil) -> true
+#@todo
+
+与えられた式の評価結果が真である場合、検査にパスしたことになります。
+
+@param test 真偽値を返す式を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた式が偽である場合に発生します。
+
+--- assert_block(message = nil){ ... } -> true
+#@todo
+
+与えられたブロックの評価結果が真である場合、検査にパスしたことになります。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたブロックの評価結果が偽である場合に発生します。
+
+--- assert_empty(object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが空である場合、検査にパスしたことになります。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが empty? メソッドを持たない場合に発生します。
+                           また、与えられたオブジェクトが空でない場合にも発生します。
+
+--- assert_equal(expected, actual, message = nil) -> true
+#@todo
+
+与えられた期待値と実際の値が等しい場合、検査にパスしたことになります。
+
+@param expected 期待値を指定します。
+
+@param actual 実際の値を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた期待値と実際の値が等しくない場合に発生します。
+
+@see [[m:Object#==]]
+
+--- assert_in_delta(expected, actual, delta = 0.001, message = nil) -> true
+#@todo
+
+期待値と実際の値の差の絶対値が与えられた差分以下である場合、検査にパスしたことになります。
+
+@param expected 期待値を指定します。
+
+@param actual 実際の値を指定します。
+
+@param delta 許容する差分を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
+
+--- assert_in_epsilon(a, b, epsilon = 0.001, message = nil) -> true
+#@todo
+
+#@# assert_in_delta a, b, [a, b].min * epsilon, msg
+#@# 誤差の判定？
+
+@param a 任意の数値を指定します。
+
+@param b 任意の数値を指定します。
+
+@param epsilon ???
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 
+
+--- assert_includes(collection, object, message = nil) -> true
+#@todo
+
+与えられたコレクションにオブジェクトが含まれている場合、検査にパスしたことになります。
+
+@param collection 任意のコレクションを指定します。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 第一引数のオブジェクトが include? メソッドを持たない場合に発生します。
+                           与えられたコレクションにオブジェクトが含まれていない場合に発生します。
+
+--- assert_instance_of(klass, object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが与えられたクラスの直接のインスタンスである場合、検査にパスしたことになります。
+
+@param klass オブジェクトが直接のインタンスであることを期待するクラスを指定します。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスの直接のインスタンスでない
+                           場合に発生します。
+
+@see [[m:Module#===]], [[m:MiniTest::Assertions#assert_kind_of]]
+
+--- assert_kind_of(klass, object, message) -> true
+#@todo
+
+与えられたオブジェクトが与えられたクラスまたはそのサブクラスのインスタンス
+である場合、検査にパスしたことになります。
+
+@param klass オブジェクトが所属することを期待するクラスを指定します。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスまたはそのサブクラスの
+                           インスタンスではない場合に発生します。
+
+@see [[m:Object#kind_of?]], [[m:MiniTest::Assertions#assert_instance_of]]
+
+--- assert_match(regexp, str, message = nil) -> true
+#@todo
+
+与えられた文字列が与えられた正規表現にマッチした場合、検査にパスしたことになります。
+
+@param regexp 正規表現か文字列を指定します。文字列を指定した場合は正規表現に変換してから
+              使用します。
+
+@param str 検査対象の文字列を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチしなかった場合に発生します。
+
+--- assert_nil(object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが nil である場合、検査にパスしたことになります。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが nil でない場合に発生します。
+
+--- assert_operator(operand1, operator, operand2, message = nil) -> true
+#@todo
+
+与えられたオブジェクトから作成する式を評価した結果が真を返す場合、検査にパスしたことになります。
+
+@param operand1 任意のオブジェクトを指定します。
+
+@param operator 真偽値を返すメソッドを指定します。
+
+@param operand2 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトから作成する式を評価した結果が真でない場合に発生します。
+
+例:
+   # 以下の二つは同じ
+   assert_operator('aaa', :==, 'aaa', 'message')
+   assert('aaa'.__send__(:==, 'aaa'), 'message')
+
+
+--- assert_raises(*args){ ... } -> true
+#@todo
+
+与えられたブロックを評価中に与えられた例外が発生する場合、検査にパスしたことになります。
+
+@param args 与えられたブロックを評価中に発生する可能性のある例外クラスを一つ以上指定します。
+            最後の引数は、メッセージを指定することができます。
+
+@raise MiniTest::Assertion 与えられたブロックを評価した結果、例外が発生しない場合に発生します。
+                           また、与えられたブロックを評価中に発生した例外が、与えられた例外
+                           またはそのサブクラスでない場合に発生します。
+
+
+--- assert_respond_to(object, method_name, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが与えられたメソッドを持つ場合、検査にパスしたことになります。
+
+@param object 任意のオブジェクトを指定します。
+
+@param method_name メソッド名を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたメソッドを持たない場合に発生します。
+
+@see [[m:Object#respond_to?]]
+
+--- assert_same(expected, actual, message = nil) -> true
+#@todo
+
+与えられた二つのオブジェクトの [[m:Object#object_id]] が同じ場合、検査にパスしたことになります。
+
+@param expected 任意のオブジェクトを指定します。
+
+@param actual 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた二つのオブジェクトが異なる場合に発生します。
+
+@see [[m:Object#equal?]]
+
+--- assert_send(array, message = nil) -> true
+#@todo
+
+引数から、式を取り出して評価した結果が真の場合、検査にパスしたことになります。
+
+@param array 第一要素にレシーバとなる任意のオブジェクト、第二要素にメソッド名、
+             第三要素にパラメータをそれぞれ指定した配列を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
+
+例:
+  assert_send([%w[foo bar baz], :include?, 'baz'])
+
+--- assert_throws(tag, message = nil){ ... } -> true
+#@todo
+
+与えられたブロックを評価中に、与えられたタグが [[m:Kernel.#throw]] された場合、検査にパスしたことになります。
+
+@param tag 与えられたブロック評価中に [[m:Kernel.#throw]] されるタグを任意のオブジェクトとして指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
+
+@see [[m:Kernel.#throw]]
+
+--- capture_io{ ... } -> Array
+#@todo
+
+与えられたブロックを評価中の標準出力と標準エラー出力を [[c:StringIO]] に
+変更します。
+
+@return ブロック評価中に出力された文字列を標準出力を第一要素、標準エラー出力を第二要素とした
+        配列にして返します。
+
+--- exception_details(exception, message) -> String
+#@todo
+
+与えられた例外の詳細を文字列として返します。
+
+@param exception 例外を指定します。
+
+@param message メッセージを指定します。
+
+--- flunk(message = nil)
+#@todo
+
+必ず失敗するメソッドです。
+
+@param message メッセージを指定します。
+
+@raise MiniTest::Assertion 必ず発生します。
+
+--- message(message){ ... } -> Proc
+#@todo
+
+与えられたブロックを評価した結果と与えられたメッセージを連結して返します。
+
+@param messege メッセージを指定します。
+
+--- mu_pp(object) -> String
+#@todo
+
+[[m:Object#inspect]] した結果のエンコーディングを変更して返します。
+
+エンコーディングは [[m:Encoding.default_external]] に変更されます。
+
+@param object 任意のオブジェクトを指定します。
+
+--- pass(message = nil) -> true
+#@todo
+
+アサーション数をカウントするために使用します。
+
+@param message 無視されます。
+
+--- refute(test, message = nil) -> true
+#@todo
+
+与えられた式の評価結果が偽である場合、検査にパスしたことになります。
+
+@param test 真偽値を返す式を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた式が真である場合に発生します。
+
+@see [[m:MiniTest::Assertions#assert]]
+
+--- refute_empty(object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが空でない場合、検査にパスしたことになります。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが empty? メソッドを持たない場合に発生します。
+                           また、与えられたオブジェクトが空である場合にも発生します。
+
+@see [[m:MiniTest::Assertions#assert_empty]]
+
+--- refute_equal(expected, actual, message = nil) -> true
+#@todo
+
+与えられた期待値と実際の値が等くない場合、検査にパスしたことになります。
+
+@param expected 期待値を指定します。
+
+@param actual 実際の値を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた期待値と実際の値が等しい場合に発生します。
+
+@see [[m:Object#==]], [[m:MiniTest::Assertions#assert_equal]]
+
+--- refute_in_delta(expected, actual, delta = 0.001, message = nil) -> true
+#@todo
+
+期待値と実際の値の差の絶対値が与えられた差分より大きい場合、検査にパスしたことになります。
+
+@param expected 期待値を指定します。
+
+@param actual 実際の値を指定します。
+
+@param delta 差分を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分以下である場合に発生します。
+
+--- refute_in_epsilon(a, b, epsilon = 0.001, message = nil) -> true
+#@todo
+
+#@# refute_in_delta a, b, [a, b].min * epsilon, msg
+#@# 誤差の判定？
+
+@param a 任意の数値を指定します。
+
+@param b 任意の数値を指定します。
+
+@param epsilon ???
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 
+
+--- refute_includes(collection, object, message = nil) -> true
+#@todo
+
+与えられたコレクションにオブジェクトが含まれていない場合、検査にパスしたことになります。
+
+@param collection 任意のコレクションを指定します。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 第一引数のオブジェクトが include? メソッドを持たない場合に発生します。
+                           与えられたコレクションにオブジェクトが含まれている場合に発生します。
+
+--- refute_instance_of(klass, object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが与えられたクラスの直接のインスタンスでない場合、検査にパスしたことになります。
+
+@param klass オブジェクトが直接のインタンスでないことを期待するクラスを指定します。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスの直接のインスタンスである
+                           場合に発生します。
+
+@see [[m:Module#===]], [[m:MiniTest::Assertions#refute_kind_of]], [[m:MiniTest::Assertions#assert_instance_of]]
+
+--- refute_kind_of(klass, object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが与えられたクラスまたはそのサブクラスのインスタンス
+でない場合、検査にパスしたことになります。
+
+@param klass オブジェクトが所属しないことを期待するクラスを指定します。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスまたはそのサブクラスの
+                           インスタンスである場合に発生します。
+
+@see [[m:Object#kind_of?]], [[m:MiniTest::Assertions#refute_instance_of]], [[m:MiniTest::Assertions#assert_kind_of]]
+
+--- refute_match(regexp, str, message = nil) -> true
+#@todo
+
+与えられた文字列が与えられた正規表現にマッチしなかった場合、検査にパスしたことになります。
+
+@param regexp 正規表現か文字列を指定します。文字列を指定した場合は正規表現に変換してから
+              使用します。
+
+@param str 検査対象の文字列を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチした場合に発生します。
+
+--- refute_nil(object, message = nil) -> true
+#@todo
+
+与えられたオブジェクトが nil でない場合、検査にパスしたことになります。
+
+@param object 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが nil である場合に発生します。
+
+--- refute_operator(operand1, operator, operand2, message = nil) -> true
+#@todo
+
+与えられたオブジェクトから作成する式を評価した結果が偽を返す場合、検査にパスしたことになります。
+
+@param operand1 任意のオブジェクトを指定します。
+
+@param operator 真偽値を返すメソッドを指定します。
+
+@param operand2 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトから作成する式を評価した結果が偽でない場合に発生します。
+
+例:
+   # 以下の二つは同じ
+   refute_operator('aaa', :==, 'aaa', 'message')
+   refute('aaa'.__send__(:==, 'aaa'), 'message')
+
+--- refute_respond_to(object, method_name) -> true
+#@todo
+
+与えられたオブジェクトが与えられたメソッドを持たない場合、検査にパスしたことになります。
+
+@param object 任意のオブジェクトを指定します。
+
+@param method_name メソッド名を指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられたオブジェクトが与えられたメソッドを持つ場合に発生します。
+
+@see [[m:Object#respond_to?]]
+
+--- refute_same(expected, actual, message = nil) -> true
+#@todo
+
+与えられた二つのオブジェクトの [[m:Object#object_id]] が異なる場合、検査にパスしたことになります。
+
+@param expected 任意のオブジェクトを指定します。
+
+@param actual 任意のオブジェクトを指定します。
+
+@param message 検査に失敗した場合に表示するメッセージを指定します。
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               結果を使用します。
+
+@raise MiniTest::Assertion 与えられた二つのオブジェクトが同じ場合に発生します。
+
+@see [[m:Object#equal?]]
+
+--- skip(message = nil, backtrace = caller)
+#@todo
+
+このメソッドを呼び出したテストメソッドをスキップします。
+
+@param message メッセージを指定します。
+
+@param backtrace 例外発生時のスタックトレースで、[[m:Kernel.#caller]] の戻り値と同じ
+                 形式で指定しなければいけません。
+
+@raise MiniTest::Skip 必ず発生します。
+
+@see [[m:Kernel.#raise]]
