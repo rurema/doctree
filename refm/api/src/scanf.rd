@@ -30,9 +30,8 @@
 
 == Instance Methods
 
---- scanf(format)
---- scanf(format) {|*ary| ...}
-#@todo
+--- scanf(format) -> Array
+--- scanf(format) {|*ary| ...} -> Array
 
 ブロックを指定しない場合、見つかった文字列を format に従って変
 換し、そのオブジェクトの配列を返します。
@@ -57,20 +56,52 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
   ret = str.scanf("%s%d") { |s, n| [s, n] }
   p ret #=> [["123", nil], ["abc", 456], ["def", nil]]
 
+
+@param format スキャンするフォーマットを文字列で指定します。
+              詳細は、[[unknown:scanfフォーマット文字列]] を参照してください。
+
+使用例:
+  str = "123 abc 456 def 789 ghi"
+  p str.scanf("%d%s") #=> [123, "abc"]
+
 ==== scanfフォーマット文字列
 
-There may be an optional maximum field width, expressed as a decimal
-integer, between the % and the conversion. If no width is given, a
-default of `infinity' is used (with the exception of the %c specifier;
-see below).  Otherwise, given a field width of <em>n</em> for a given
-conversion, at most <em>n</em> characters are scanned in processing
-that conversion.  Before conversion begins, most conversions skip
-white space in the input string; this white space is not counted
-against the field width.
+文字 '%' と(s,d のような)指示子の間に、整数を指定する事により読み込む文字列の幅を
+指定する事ができます。もし幅が与えられなければ、無限大の値が規定値として使用されます。
+(但し、%c では、この規定値は適用されません。) 
+上記の幅が整数 n で与えられた場合、多くても n 個の文字列がマッチします。
+このフォーマット文字列によるマッチの実行前、多くの場合入力文字列のスペースは読み飛ばされます。
+つまり、スペースは幅の数として数えられない事になります。
+
+動作例;
+  p "a           10".scanf("%s %d")  # => ["a", 10]
+  p "a10".scanf("%1s %d")      # => ["a", 10]
 
 
+使用例；
   str = "1234"
-  p str.scanf("%1s%3d")  #=> [["1", 234]]
+  p str.scanf("%1s%3d")  #=> ["1", 234]
+
+#@since 1.9.0
+また、1.9 以降では、スペースには全角文字列が含まれます。
+
+動作例；
+  # encoding: utf-8
+  require 'scanf'
+
+  str = "1　　　　　aaa"
+  p str.scanf("%d %s") #=> [1, "aaa"]
+#end
+
+#@# There may be an optional maximum field width, expressed as a decimal
+#@# integer, between the % and the conversion. If no width is given, a
+#@# default of `infinity' is used (with the exception of the %c specifier;
+#@# see below).  Otherwise, given a field width of <em>n</em> for a given
+#@# conversion, at most <em>n</em> characters are scanned in processing
+#@# that conversion.  Before conversion begins, most conversions skip
+#@# white space in the input string; this white space is not counted
+#@# against the field width.
+
 
 : space
  フォーマット中の空白は(0個を含む)任意の数の空白にマッチします。
