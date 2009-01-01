@@ -91,7 +91,7 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
 
   str = "1　　　　　aaa"
   p str.scanf("%d %s") #=> [1, "aaa"]
-#end
+#@end
 
 #@# There may be an optional maximum field width, expressed as a decimal
 #@# integer, between the % and the conversion. If no width is given, a
