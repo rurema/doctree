@@ -75,7 +75,7 @@ iconv 関数のラッパークラスです。
 
 @raise TypeError to や from が String オブジェクトでないとき発生します。
 
-@raise ArgumentError to や from で指定された文字コード体系が見つからないとき発生します。
+@raise Iconv::InvalidEncoding to や from で指定された文字コード体系が見つからないとき発生します。
 
 @raise SystemCallError [[man:iconv_open(3)]] が失敗したとき発生します。
 
@@ -86,7 +86,6 @@ iconv 関数のラッパークラスです。
  
 --- open(to, from)               -> Iconv
 --- open(to, from) {|cd| ...}    -> object
-#@todo
 
 ブロックが与えられない場合は [[m:Iconv.new]] と等価です。
 ブロックが与えられると、Iconv オブジェクトを生成し、それを引数としてブロックを実行します。
@@ -97,8 +96,20 @@ iconv 関数のラッパークラスです。
 
 @param from 変換前の文字コード体系を表す文字列を指定します。
 
+@raise TypeError to や from が String オブジェクトでないとき発生します。
+
+@raise Iconv::InvalidEncoding to や from で指定された文字コード体系が見つからないとき発生します。
+
+例:
+  euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # あいうえおのEUC-JPコード
+
+  Iconv.open("UTF-8", "EUC-JP") do |i|
+    str = i.iconv(euc)
+    str << i.iconv(nil)
+  end
+  puts str #=> あいうえお
+
 --- iconv(to, from, *strs)    -> Array
-#@todo
 
 与えられた文字コードにしたがって strs を変換し、結果を文字列の配列として返します。
 
@@ -116,7 +127,6 @@ iconv 関数のラッパークラスです。
 を起こします。
 
 --- conv(to, from, str)     -> String
-#@todo
 
 与えられた文字コードにしたがって str を変換し、結果を文字列として返します。
 
@@ -150,7 +160,7 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 #@# Returns the map from canonical name to system dependent name.
 
-普遍な文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
+文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
 
 #@since 1.9.0
 --- ctlmethods -> Array
@@ -221,17 +231,27 @@ str が nil の場合、変換器をその初期シフト状態にし、
 --- discard_ilseq=
 #@todo
 
+Sets discard_ilseq flag.
+
 --- discard_ilseq?
 #@todo
+
+Returns discard_ilseq flag
 
 --- transliterate=
 #@todo
 
+Sets transliterate flag.
+
 --- transliterate?
 #@todo
 
+Returns transliterate flag.
+
 --- trivial?
 #@todo
+
+Returns trivial flag.
 
 #@end
 
@@ -286,6 +306,8 @@ include Iconv::Failure
 #@since 1.8.3
 = class Iconv::InvalidEncoding < ArgumentError
 include Iconv::Failure
+
+メソッドの引数等で指定された文字コード体系が見つからない (システム上で有効でない) 場合に発生します。
 #@end
 
 = class Iconv::OutOfRange < RuntimeError
