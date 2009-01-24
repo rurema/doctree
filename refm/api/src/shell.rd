@@ -698,7 +698,7 @@ commandを実行する.
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
 @param patten シェルコマンド glob に与えるパターンを指定します。
-              パターンの書式については、[[m:Dir.[]]]を参照してください。
+              パターンの書式については、[[m:Dir.[] ]]を参照してください。
 
 動作例
   require 'shell'
@@ -713,7 +713,7 @@ commandを実行する.
     }
   }
 
-@see [[m:Dir.[]]]
+@see [[m:Dir.[] ]]
 
 
 --- tee(file) -> Shell::Filter
