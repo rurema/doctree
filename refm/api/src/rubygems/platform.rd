@@ -118,5 +118,5 @@ OS の種類をセットします。
 --- RUBY -> String
 #@todo
 
-Pure Ruby の Gem はバイナリファイルをビルドするために [[m:Gem::Specification"extensions]]
+Pure Ruby の Gem はバイナリファイルをビルドするために [[m:Gem::Specification#extensions]]
 を使用する可能性があります。
