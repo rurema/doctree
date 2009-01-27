@@ -1,5 +1,6 @@
-#@since 1.8.8
-= class Enumerator < Object
+#@if (version < 1.9.0)
+#@since 1.8.4
+= class Enumerable::Enumerator < Object
 
 include Enumerable
 
@@ -7,6 +8,7 @@ each °Ê³°¤Î¥á¥½¥Ã¥É¤Ë¤â [[c:Enumerable]] ¤Îµ¡Ç½¤òÄó¶¡¤¹¤ë¤¿¤á¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤
 #@since 1.8.7
 ¤Þ¤¿¡¢³°Éô¥¤¥Æ¥ì¡¼¥¿¤È¤·¤Æ¤â»È¤¨¤Þ¤¹¡£
 #@end
+Ruby 1.9 ¤Ç¤Ï Enumerable::Enumerator ¤Ï Enumerator ¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡£
 
 [[c:Enumerable]] ¥â¥¸¥å¡¼¥ë¤Ï¡¢ [[m:Module#include]] Àè¤Î¥¯¥é¥¹¤¬»ý¤Ä
 each ¥á¥½¥Ã¥É¤ò¸µ¤ËÍÍ¡¹¤Ê¥á¥½¥Ã¥É¤òÄó¶¡¤·¤Þ¤¹¡£
@@ -15,7 +17,7 @@ Enumerator ¤ò²ð¤¹¤ë¤³¤È¤Ë¤è¤ê [[m:String#each_byte]] ¤Î¤è¤¦¤Ê
 °Û¤Ê¤ëÌ¾Á°¤Î¥¤¥Æ¥ì¡¼¥¿¤Ë¤Ä¤¤¤Æ¤â each ¤ÈÆ±ÍÍ¤Ë Enumerable ¤Îµ¡Ç½¤òÍøÍÑ¤Ç¤­¤Þ¤¹¡£
 
 Enumerator ¤òÀ¸À®¤¹¤ë¤Ë¤Ï
-[[m:Enumerator.new]]
+[[m:Enumerable::Enumerator.new]]
 ¤¢¤ë¤¤¤Ï [[m:Object#to_enum]], [[m:Object#enum_for]] ¤òÍøÍÑ¤·¤Þ¤¹¡£
 #@since 1.9.0
 ¤Þ¤¿¡¢°ìÉô¤Î¥¤¥Æ¥ì¡¼¥¿¤Ï¥Ö¥í¥Ã¥¯¤òÅÏ¤µ¤º¤Ë¸Æ¤Ó½Ð¤¹¤È·«¤êÊÖ¤·¤ò¼Â¹Ô¤¹¤ëÂå¤ï¤ê¤Ë
@@ -40,7 +42,7 @@ enumerator ¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 == Class Methods
 
---- new(obj, method = :each, *args) -> Enumerator
+--- new(obj, method = :each, *args) -> Enumerable::Enumerator
 
 ¥ª¥Ö¥¸¥§¥¯¥È obj ¤Ë¤Ä¤¤¤Æ¡¢ each ¤ÎÂå¤ï¤ê¤Ë method ¤È¤¤¤¦
 Ì¾Á°¤Î¥á¥½¥Ã¥É¤ò»È¤Ã¤Æ·«¤êÊÖ¤¹¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤ÆÊÖ¤·¤Þ¤¹¡£
@@ -54,7 +56,7 @@ args ¤ò»ØÄê¤¹¤ë¤È¡¢ method ¤Î¸Æ¤Ó½Ð¤·»þ¤ËÅÏ¤µ¤ì¤Þ¤¹¡£
 
   str = "xyz"
 
-  enum = Enumerator.new(str, :each_byte)
+  enum = Enumerable::Enumerator.new(str, :each_byte)
   p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
 
 == Methods
@@ -67,7 +69,7 @@ args ¤ò»ØÄê¤¹¤ë¤È¡¢ method ¤Î¸Æ¤Ó½Ð¤·»þ¤ËÅÏ¤µ¤ì¤Þ¤¹¡£
 Îã:
   str = "Yet Another Ruby Hacker"
   
-  enum = Enumerator.new(str, :scan, /\w+/)
+  enum = Enumerable::Enumerator.new(str, :scan, /\w+/)
   enum.each {|word| p word }              # => "Yet"
                                           #    "Another"
                                           #    "Ruby"
@@ -92,7 +94,7 @@ next ¥á¥½¥Ã¥É¤Ë¤è¤ë³°ÉôÎóµó¤Î¾õÂÖ¤ÏÂ¾¤Î¥¤¥Æ¥ì¡¼¥¿¥á¥½¥Ã¥É¤Ë¤è¤ë
 È¼¤Ã¤Æ¤¤¤ë¾ì¹ç¤Ë¤Ï±Æ¶Á¤¬¤¢¤êÆÀ¤Þ¤¹¡£
 
 @raise StopIteration Îóµó¾õÂÖ¤¬´û¤ËºÇ¸å¤ØÅþÃ£¤·¤Æ¤¤¤ë¤È¤­
-@see [[m:Enumerator#rewind]]
+@see [[m:Enumerable::Enumerator#rewind]]
 
 Îã1:
     str = "xyz"
@@ -136,7 +138,7 @@ next ¥á¥½¥Ã¥É¤Ë¤è¤ë³°ÉôÎóµó¤Î¾õÂÖ¤ÏÂ¾¤Î¥¤¥Æ¥ì¡¼¥¿¥á¥½¥Ã¥É¤Ë¤è¤ë
 
 next ¥á¥½¥Ã¥É¤Ë¤è¤ë³°ÉôÎóµó¤Î¾õÂÖ¤òºÇ½é¤Þ¤Ç´¬¤­Ìá¤·¤Þ¤¹¡£ self ¤òÊÖ¤·¤Þ¤¹¡£
 
-@see [[m:Enumerator#next]]
+@see [[m:Enumerable::Enumerator#next]]
 
 Îã:
     str = "xyz"
@@ -161,10 +163,11 @@ next ¥á¥½¥Ã¥É¤Ë¤è¤ë³°ÉôÎóµó¤Î¾õÂÖ¤òºÇ½é¤Þ¤Ç´¬¤­Ìá¤·¤Þ¤¹¡£ self ¤òÊÖ¤·¤Þ¤¹¡£
 Îã:
     str = "xyz"
     
-    enum = Enumerator.new(str, :each_byte)
+    enum = Enumerable::Enumerator.new(str, :each_byte)
     enum.with_index {|byte, idx| p [byte, idx] }
         # => [120, 0]
         #    [121, 1]
         #    [122, 2]
+#@end
 #@end
 #@end

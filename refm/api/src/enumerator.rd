@@ -1,3 +1,4 @@
+#@if (version < 1.9.0)
 each 以外のメソッドも enumerate できるようにするライブラリです。
 
 #@since 1.8.7
@@ -76,5 +77,6 @@ Enumerable::Enumerator.new(self, :each_with_index) と同じです。
 
 @see [[m:Enumerable#each_with_index]]
 
+#@end
 #@end
 #@end
