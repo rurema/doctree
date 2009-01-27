@@ -1,0 +1,198 @@
+#@since 1.9.1
+=class Encoding::Converter
+文字エンコーディング(文字符号化方式)の変換器のクラスです。既存の変換器より一段細かな処理が可能となります。Encoding::Converter を用いて変換を行う場合は、[[m:Encoding::Converter#convert]] か、より細かな変換処理が可能な [[m:Encoding::Converter#primitive_convert]] が利用できます。
+エンコーディングを変換するメソッドはこの他に [[m:String#encode]], [[m:NKF#nkf]], [[m:Iconv#conv]] などがあります。
+
+== Class Methods
+--- new(source_encoding, destination_encoding)
+--- new(source_encoding, destination_encoding, options)
+--- new(convpath)
+Encoding::Converter オブジェクトを作成します。
+options では [[m:String#encode]] でのハッシュオプションに加えて、以下の定数が利用可能です。
+* Encoding::Converter::INVALID_REPLACE
+* Encoding::Converter::UNDEF_REPLACE
+* Encoding::Converter::UNDEF_HEX_CHARREF
+* Encoding::Converter::UNIVERSAL_NEWLINE_DECORATOR
+* Encoding::Converter::CRLF_NEWLINE_DECORATOR
+* Encoding::Converter::CR_NEWLINE_DECORATOR
+* Encoding::Converter::XML_TEXT_DECORATOR
+* Encoding::Converter::XML_ATTR_CONTENT_DECORATOR
+* Encoding::Converter::XML_ATTR_QUOTE_DECORATOR
+
+== Instance Methods
+--- inspect -> String
+Encoding::Converter オブジェクトの情報を簡単に表示します。
+
+--- source_encoding -> Encoding
+変換元のエンコーディングを返します。
+
+--- destination_encoding -> Encoding
+変換先のエンコーディングを返します。
+
+--- convpath -> Array
+変換器が行う変換の経路を配列にして返します。
+
+  ec = Encoding::Converter.new("ISo-8859-1", "EUC-JP", crlf_newline: true)
+  p ec.convpath
+  #=> [[#<Encoding:ISO-8859-1>, #<Encoding:UTF-8>],
+  #    [#<Encoding:UTF-8>, #<Encoding:EUC-JP>],
+  #    "crlf_newline"]
+
+--- replacement -> String
+変換器に設定されている置換文字を返します。
+
+  ec = Encoding::Converter.new("euc-jp", "us-ascii")
+  p ec.replacement    #=> "?"
+  
+  ec = Encoding::Converter.new("euc-jp", "utf-8")
+  p ec.replacement    #=> "\uFFFD"
+
+--- replacement=(string)
+置換文字を設定します。
+
+  ec = Encoding::Converter.new("utf-8", "us-ascii", :undef => :replace)
+  ec.replacement = "<undef>"
+  p ec.convert("a \u3042 b")      #=> "a <undef> b"
+
+--- convert
+Encoding::Converter を用いると、文字列の一部を渡して変換を行うことができます。よって、不正なバイトを意識せずにストリームから読み出した文字列を変換したいときには Encoding::Converter が適します。
+
+  ec = Encoding::Converter.new("EUC-JP", "UTF-8")
+  dst = ec.convert("あいうえお")
+
+のようにして用います。
+
+なお、Encoding::Converter#convert では、これらの例外を捕獲しても、例外を起こしたところから変換を再開することはできません。不正なバイトや変換先で未定義な文字をエスケープしたい場合やさらに細かい指定を行いたい場合は、[[m:Encoding::Converter#primitive_convert]] を用います。
+
+--- last_error -> Exception | nil
+直前に変換器で発生した例外に相当する例外オブジェクトを返します
+直線の変換で例外が発生していない場合は nil を返します。
+
+--- finish -> String
+変換処理を終了し、結果文字列の末尾を返します。
+
+  ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
+  p ec.convert("\u3042")     #=> "\e$B$\""
+  p ec.finish                #=> "\e(B"
+
+--- primitive_convert
+エンコーディング変換のためのメソッドの中で、もっとも細かな扱いが可能なメソッドです。
+可搬性を確保しつつ、不正なバイトや変換先で未定義な文字の扱いを細かに指定したいときは、Encoding::Converter#primitive_convert が唯一の方法になります。
+
+  ec = Encoding::Converter.new("UTF-8", "EUC-JP")
+  src = "abc\x81あいう\u{20bb7}\xe3"
+  dst = ''
+  
+  begin
+    ret = ec.primitive_convert(src, dst)
+    p [ret, src, dst, ec.primitive_errinfo]
+    case ret
+    when :invalid_byte_sequence
+      ec.insert_output(ec.primitive_errinfo[3].dump[1..-2])
+      redo
+    when :undefined_conversion
+      c = ec.primitive_errinfo[3].dup.force_encoding(ec.primitive_errinfo[1])
+      ec.insert_output('\x{%X:%s}' % [c.ord, c.encoding])
+      redo
+    when :incomplete_input
+      ec.insert_output(ec.primitive_errinfo[3].dump[1..-2])
+    hen :finished
+    end
+    break
+  end while nil
+
+不正なバイトや変換先で未定義なバイトをエスケープしつつ変換する例です。以上のように、戻り値で分岐させつつ、[[m:Encoding::Converter#primitive_errinfo]] の情報を参照して処理していくことになります。
+--- primitive_errinfo -> Array
+直前の [[m:Encoding::Converter#primitive_convert]] による変換の結果を保持する五要素の配列を返します。
+
+  [result, enc1, enc2, error_bytes, readagain_bytes]
+
+result は直前の primitive_convert の戻り値です。
+それ以外の四要素は :invalid_byte_sequence か :incomplete_input か :undefined_conversion だった場合に意味を持ちます。
+enc1 はエラーの発生した原始変換の変換元のエンコーディング、enc2 は変換先のエンコーディングです。
+error_bytes はエラーの発生原因となったバイト列、readagain_bytes は先読みによって変換器内部に保持されているバイト列です。
+
+primitive_errinfo はもっぱら [[m:Encoding::Converter#primitive_convert]] と組み合わせて使います。[[m:Encoding:Converter#convert]] を用いている場合にも取得することはできますが、有用な使い方は難しいでしょう。
+
+  # \xff is invalid as EUC-JP.
+  ec = Encoding::Converter.new("EUC-JP", "Shift_JIS")
+  ec.primitive_convert(src="\xff", dst="", nil, 10)
+  p ec.primitive_errinfo
+  #=> [:invalid_byte_sequence, "EUC-JP", "UTF-8", "\xFF", ""]
+  
+  # HIRAGANA LETTER A (\xa4\xa2 in EUC-JP) is not representable in ISO-8859-1.
+  # Since this error is occur in UTF-8 to ISO-8859-1 conversion,
+  # error_bytes is HIRAGANA LETTER A in UTF-8 (\xE3\x81\x82).
+  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+  ec.primitive_convert(src="\xa4\xa2", dst="", nil, 10)
+  p ec.primitive_errinfo
+  #=> [:undefined_conversion, "UTF-8", "ISO-8859-1", "\xE3\x81\x82", ""]
+  
+  # partial character is invalid
+  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+  ec.primitive_convert(src="\xa4", dst="", nil, 10)
+  p ec.primitive_errinfo
+  #=> [:incomplete_input, "EUC-JP", "UTF-8", "\xA4", ""]
+  
+  # Encoding::Converter::PARTIAL_INPUT prevents invalid errors by
+  # partial characters.
+  ec = Encoding::Converter.new("EUC-JP", "ISO-8859-1")
+  ec.primitive_convert(src="\xa4", dst="", nil, 10, Encoding::Converter::PARTIAL_INPUT)
+  p ec.primitive_errinfo
+  #=> [:source_buffer_empty, nil, nil, nil, nil]
+  
+  # \xd8\x00\x00@ is invalid as UTF-16BE because
+  # no low surrogate after high surrogate (\xd8\x00).
+  # It is detected by 3rd byte (\00) which is part of next character.
+  # So the high surrogate (\xd8\x00) is discarded and
+  # the 3rd byte is read again later.
+  # Since the byte is buffered in ec, it is dropped from src.
+  ec = Encoding::Converter.new("UTF-16BE", "UTF-8")
+  ec.primitive_convert(src="\xd8\x00\x00@", dst="", nil, 10)
+  p ec.primitive_errinfo
+  #=> [:invalid_byte_sequence, "UTF-16BE", "UTF-8", "\xD8\x00", "\x00"]
+  p src
+  #=> "@"
+  
+  # Similar to UTF-16BE, \x00\xd8@\x00 is invalid as UTF-16LE.
+  # The problem is detected by 4th byte.
+  ec = Encoding::Converter.new("UTF-16LE", "UTF-8")
+  ec.primitive_convert(src="\x00\xd8@\x00", dst="", nil, 10)
+  p ec.primitive_errinfo
+  #=> [:invalid_byte_sequence, "UTF-16LE", "UTF-8", "\x00\xD8", "@\x00"]
+  p src
+  #=> ""
+
+--- insert_output(string) -> nil
+Inserts string into the encoding converter.
+The string will be converted to the destination encoding and
+output on later conversions.
+
+If the destination encoding is stateful,
+string is converted according to the state and the state is updated.
+
+This method should be used only when a conversion error occurs.
+
+  ec = Encoding::Converter.new("utf-8", "iso-8859-1")
+  src = "HIRAGANA LETTER A is \u{3042}."
+  dst = ""
+  p ec.primitive_convert(src, dst)    #=> :undefined_conversion
+  puts "[#{dst.dump}, #{src.dump}]"   #=> ["HIRAGANA LETTER A is ", "."]
+  ec.insert_output("<err>")
+  p ec.primitive_convert(src, dst)    #=> :finished
+  puts "[#{dst.dump}, #{src.dump}]"   #=> ["HIRAGANA LETTER A is <err>.", ""]
+  
+  ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
+  src = "\u{306F 3041 3068 2661 3002}" # U+2661 is not representable in iso-2022-jp
+  dst = ""
+  p ec.primitive_convert(src, dst)    #=> :undefined_conversion
+  puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H".force_encoding("ISO-2022-JP"), "\xE3\     x80\x82"]
+  ec.insert_output "?"                # state change required to output "?".
+  p ec.primitive_convert(src, dst)    #=> :finished
+  puts "[#{dst.dump}, #{src.dump}]"   #=> ["\e$B$O$!$H\e(B?\e$B!#\e(B".force_encoding("ISO-20     22-JP"), ""]
+
+--- putback -> String
+--- putback(max_numbytes) -> String
+後の変換用に変換器内部で保持しているバイト列をはき出します。
+
+#@end

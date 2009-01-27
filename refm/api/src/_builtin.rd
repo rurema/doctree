@@ -21,6 +21,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/EOFError)
 #@since 1.9.0
 #@include(_builtin/Encoding)
+#@since 1.9.1
+#@include(_builtin/Encoding__Converter)
+#@end
 #@end
 #@include(_builtin/Enumerable)
 #@since 1.8.8
