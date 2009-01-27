@@ -1444,20 +1444,27 @@ self と引数に渡した配列の各要素を順番にブロックに渡します。
         #    nil
 #@end
 
-#@since 1.8.7
---- choice        -> object
+#@since 1.8.8
+#@if (version == 1.9.0)
+#@else
+--- sample        -> object
+--- sample(n)     -> an_array
 
-配列の要素を1個ランダムに選んで返します。
+配列の要素を1個(引数を指定した場合は n 個)ランダムに選んで返します。
+配列が空の場合は、無引数の場合は nil を、個数を指定した場合は空配列を返します。
 
 srand()が有効です。
 
 例:
 
   a = (1..10).to_a
-  p a.choice        #=>  9
-  p a.choice        #=> 10
+  p a.sample        #=>  9
+  p a.sample        #=> 10
   p a               #=> [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+#@end
+#@end
 
+#@since 1.8.7
 --- cycle {|obj| block }
 
 Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
