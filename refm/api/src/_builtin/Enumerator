@@ -1,5 +1,5 @@
 #@since 1.8.4
-= class Enumerable::Enumerator < Object
+= class Enumerator < Object
 
 include Enumerable
 
@@ -15,7 +15,7 @@ Enumerator を介することにより [[m:String#each_byte]] のような
 異なる名前のイテレータについても each と同様に Enumerable の機能を利用できます。
 
 Enumerator を生成するには
-[[m:Enumerable::Enumerator.new]]
+[[m:Enumerator.new]]
 あるいは [[m:Object#to_enum]], [[m:Object#enum_for]] を利用します。
 #@since 1.9.0
 また、一部のイテレータはブロックを渡さずに呼び出すと繰り返しを実行する代わりに
@@ -40,7 +40,7 @@ enumerator を生成して返します。
 
 == Class Methods
 
---- new(obj, method = :each, *args) -> Enumerable::Enumerator
+--- new(obj, method = :each, *args) -> Enumerator
 
 オブジェクト obj について、 each の代わりに method という
 名前のメソッドを使って繰り返すオブジェクトを生成して返します。
@@ -54,7 +54,7 @@ args を指定すると、 method の呼び出し時に渡されます。
 
   str = "xyz"
 
-  enum = Enumerable::Enumerator.new(str, :each_byte)
+  enum = Enumerator.new(str, :each_byte)
   p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
 
 == Methods
@@ -67,7 +67,7 @@ args を指定すると、 method の呼び出し時に渡されます。
 例:
   str = "Yet Another Ruby Hacker"
   
-  enum = Enumerable::Enumerator.new(str, :scan, /\w+/)
+  enum = Enumerator.new(str, :scan, /\w+/)
   enum.each {|word| p word }              # => "Yet"
                                           #    "Another"
                                           #    "Ruby"
@@ -92,7 +92,7 @@ next メソッドによる外部列挙の状態は他のイテレータメソッドによる
 伴っている場合には影響があり得ます。
 
 @raise StopIteration 列挙状態が既に最後へ到達しているとき
-@see [[m:Enumerable::Enumerator#rewind]]
+@see [[m:Enumerator#rewind]]
 
 例1:
     str = "xyz"
@@ -136,7 +136,7 @@ next メソッドによる外部列挙の状態は他のイテレータメソッドによる
 
 next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
 
-@see [[m:Enumerable::Enumerator#next]]
+@see [[m:Enumerator#next]]
 
 例:
     str = "xyz"
@@ -161,7 +161,7 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
 例:
     str = "xyz"
     
-    enum = Enumerable::Enumerator.new(str, :each_byte)
+    enum = Enumerator.new(str, :each_byte)
     enum.with_index {|byte, idx| p [byte, idx] }
         # => [120, 0]
         #    [121, 1]
