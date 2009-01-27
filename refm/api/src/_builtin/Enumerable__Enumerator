@@ -1,4 +1,4 @@
-#@if (version < 1.9.0)
+#@until 1.9.1
 #@since 1.8.4
 = class Enumerable::Enumerator < Object
 

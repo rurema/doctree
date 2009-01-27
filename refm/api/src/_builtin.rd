@@ -30,7 +30,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Enumerator)
 #@end
 #@since 1.8.7
-#@if (version < 1.9.0)
+#@until 1.9.1
 #@include(_builtin/Enumerable__Enumerator)
 #@end
 #@end

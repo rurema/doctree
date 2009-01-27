@@ -1,4 +1,4 @@
-#@if (version < 1.9.0)
+#@until  1.9.1
 each 以外のメソッドも enumerate できるようにするライブラリです。
 
 #@since 1.8.7
