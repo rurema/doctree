@@ -23,8 +23,13 @@ require を書かなくても使うことができます。
 #@include(_builtin/Encoding)
 #@end
 #@include(_builtin/Enumerable)
+#@since 1.8.8
+#@include(_builtin/Enumerator)
+#@end
 #@since 1.8.7
+#@if (version < 1.9.0)
 #@include(_builtin/Enumerable__Enumerator)
+#@end
 #@end
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
