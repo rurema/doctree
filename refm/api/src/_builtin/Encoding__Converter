@@ -18,15 +18,15 @@ Encoding::Converter オブジェクトを作成します。
 
 options では [[m:String#encode]] でのハッシュオプションに加えて、以下の定数が利用可能です。
 
-* Encoding::Converter::INVALID_REPLACE
-* Encoding::Converter::UNDEF_REPLACE
-* Encoding::Converter::UNDEF_HEX_CHARREF
-* Encoding::Converter::UNIVERSAL_NEWLINE_DECORATOR
-* Encoding::Converter::CRLF_NEWLINE_DECORATOR
-* Encoding::Converter::CR_NEWLINE_DECORATOR
-* Encoding::Converter::XML_TEXT_DECORATOR
-* Encoding::Converter::XML_ATTR_CONTENT_DECORATOR
-* Encoding::Converter::XML_ATTR_QUOTE_DECORATOR
+  * Encoding::Converter::INVALID_REPLACE
+  * Encoding::Converter::UNDEF_REPLACE
+  * Encoding::Converter::UNDEF_HEX_CHARREF
+  * Encoding::Converter::UNIVERSAL_NEWLINE_DECORATOR
+  * Encoding::Converter::CRLF_NEWLINE_DECORATOR
+  * Encoding::Converter::CR_NEWLINE_DECORATOR
+  * Encoding::Converter::XML_TEXT_DECORATOR
+  * Encoding::Converter::XML_ATTR_CONTENT_DECORATOR
+  * Encoding::Converter::XML_ATTR_QUOTE_DECORATOR
 
 == Instance Methods
 --- inspect -> String
@@ -146,13 +146,13 @@ options には以下が指定できます。
 
 戻り値は以下のうちのどれかです。
 
-* :invalid_byte_sequence
-* :incomplete_input
-* :undefined_conversion
-* :after_output
-* :destination_buffer_full
-* :source_buffer_empty
-* :finished
+  * :invalid_byte_sequence
+  * :incomplete_input
+  * :undefined_conversion
+  * :after_output
+  * :destination_buffer_full
+  * :source_buffer_empty
+  * :finished
 
   ec = Encoding::Converter.new("UTF-8", "EUC-JP")
   src = "abc\x81あいう\u{20bb7}\xe3"
