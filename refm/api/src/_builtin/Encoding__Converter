@@ -1,6 +1,8 @@
 #@since 1.9.1
 =class Encoding::Converter
- ∏ª˙•®•Û•≥°º•«•£•Û•∞( ∏ª˙…‰πÊ≤Ω ˝º∞)§Œ —¥π¥Ô§Œ•Ø•È•π§«§π°£¥˚¬∏§Œ —¥π¥Ô§Ë§Í∞Ï√ ∫Ÿ§´§ ΩËÕ˝§¨≤ƒ«Ω§»§ §Í§ﬁ§π°£Encoding::Converter §ÚÕ—§§§∆ —¥π§Úπ‘§¶æÏπÁ§œ°¢[[m:Encoding::Converter#convert]] §´°¢§Ë§Í∫Ÿ§´§  —¥πΩËÕ˝§¨≤ƒ«Ω§  [[m:Encoding::Converter#primitive_convert]] §¨Õ¯Õ—§«§≠§ﬁ§π°£
+ ∏ª˙•®•Û•≥°º•«•£•Û•∞( ∏ª˙…‰πÊ≤Ω ˝º∞)§Œ —¥π¥Ô§Œ•Ø•È•π§«§π°£¥˚¬∏§Œ —¥π¥Ô§Ë§Í∞Ï√ ∫Ÿ§´§ ΩËÕ˝§¨≤ƒ«Ω§»§ §Í§ﬁ§π°£
+
+Encoding::Converter §ÚÕ—§§§∆ —¥π§Úπ‘§¶æÏπÁ§œ°¢[[m:Encoding::Converter#convert]] §´°¢§Ë§Í∫Ÿ§´§  —¥πΩËÕ˝§¨≤ƒ«Ω§  [[m:Encoding::Converter#primitive_convert]] §¨Õ¯Õ—§«§≠§ﬁ§π°£
 •®•Û•≥°º•«•£•Û•∞§Ú —¥π§π§Î•·•Ω•√•…§œ§≥§Œ¬æ§À [[m:String#encode]], [[m:NKF#nkf]], [[m:Iconv#conv]] § §…§¨§¢§Í§ﬁ§π°£
 
 == Class Methods
@@ -8,7 +10,14 @@
 --- new(source_encoding, destination_encoding, options)
 --- new(convpath)
 Encoding::Converter •™•÷•∏•ß•Ø•»§Ú∫Ó¿Æ§∑§ﬁ§π°£
+
+@param source_encoding  —¥π∏µ§Œ•®•Û•≥°º•«•£•Û•∞
+@param destination_encoding  —¥π¿Ë§Œ•®•Û•≥°º•«•£•Û•∞
+@param options  —¥π§Œæ‹∫Ÿ§ÚªÿƒÍ§π§ÎƒÍøÙ§‰•œ•√•∑•Â
+@param convpath  —¥π∑–œ©§Œ«€ŒÛ
+
 options §«§œ [[m:String#encode]] §«§Œ•œ•√•∑•Â•™•◊•∑•Á•Û§À≤√§®§∆°¢∞ ≤º§ŒƒÍøÙ§¨Õ¯Õ—≤ƒ«Ω§«§π°£
+
 * Encoding::Converter::INVALID_REPLACE
 * Encoding::Converter::UNDEF_REPLACE
 * Encoding::Converter::UNDEF_HEX_CHARREF
@@ -23,14 +32,22 @@ options §«§œ [[m:String#encode]] §«§Œ•œ•√•∑•Â•™•◊•∑•Á•Û§À≤√§®§∆°¢∞ ≤º§ŒƒÍøÙ§¨Õ¯Õ
 --- inspect -> String
 Encoding::Converter •™•÷•∏•ß•Ø•»§Œæ Û§Ú¥ √±§À…Ωº®§∑§ﬁ§π°£
 
+@return  —¥π¥Ô§Œæ Û§Ú¥ √±§À≤ƒªÎ≤Ω§∑§ø ∏ª˙ŒÛ§«§π°£
+
 --- source_encoding -> Encoding
  —¥π∏µ§Œ•®•Û•≥°º•«•£•Û•∞§Ú ÷§∑§ﬁ§π°£
+
+@return  —¥π∏µ§Œ•®•Û•≥°º•«•£•Û•∞
 
 --- destination_encoding -> Encoding
  —¥π¿Ë§Œ•®•Û•≥°º•«•£•Û•∞§Ú ÷§∑§ﬁ§π°£
 
+@return  —¥π¿Ë§Œ•®•Û•≥°º•«•£•Û•∞
+
 --- convpath -> Array
  —¥π¥Ô§¨π‘§¶ —¥π§Œ∑–œ©§Ú«€ŒÛ§À§∑§∆ ÷§∑§ﬁ§π°£
+
+@return  —¥π¥Ô§¨π‘§¶ —¥π§Œ∑–œ©§Œ«€ŒÛ
 
   ec = Encoding::Converter.new("ISo-8859-1", "EUC-JP", crlf_newline: true)
   p ec.convpath
@@ -41,6 +58,8 @@ Encoding::Converter •™•÷•∏•ß•Ø•»§Œæ Û§Ú¥ √±§À…Ωº®§∑§ﬁ§π°£
 --- replacement -> String
  —¥π¥Ô§À¿ﬂƒÍ§µ§Ï§∆§§§Î√÷¥π ∏ª˙§Ú ÷§∑§ﬁ§π°£
 
+@return  —¥π¥Ô§À¿ﬂƒÍ§µ§Ï§∆§§§Î√÷¥π ∏ª˙
+
   ec = Encoding::Converter.new("euc-jp", "us-ascii")
   p ec.replacement    #=> "?"
   
@@ -50,19 +69,40 @@ Encoding::Converter •™•÷•∏•ß•Ø•»§Œæ Û§Ú¥ √±§À…Ωº®§∑§ﬁ§π°£
 --- replacement=(string)
 √÷¥π ∏ª˙§Ú¿ﬂƒÍ§∑§ﬁ§π°£
 
+@param string  —¥π¥Ô§À¿ﬂƒÍ§π§Î√÷¥π ∏ª˙
+
   ec = Encoding::Converter.new("utf-8", "us-ascii", :undef => :replace)
   ec.replacement = "<undef>"
   p ec.convert("a \u3042 b")      #=> "a <undef> b"
 
---- convert
-Encoding::Converter §ÚÕ—§§§Î§»°¢ ∏ª˙ŒÛ§Œ∞Ï…Ù§Ú≈œ§∑§∆ —¥π§Úπ‘§¶§≥§»§¨§«§≠§ﬁ§π°£§Ë§√§∆°¢…‘¿µ§ •–•§•»§Ú∞’º±§ª§∫§À•π•»•Í°º•‡§´§È∆…§ﬂΩ–§∑§ø ∏ª˙ŒÛ§Ú —¥π§∑§ø§§§»§≠§À§œ Encoding::Converter §¨≈¨§∑§ﬁ§π°£
+--- convert(source_string) -> String
+Õø§®§È§Ï§ø ∏ª˙ŒÛ§Ú —¥π§∑§∆°¢ —¥π§«§≠§ø∑Î≤Ã§Ú ÷§∑§ﬁ§π°£
+∞˙øÙ§ŒÀˆ»¯§Œ ∏ª˙§¨•–•§•»ŒÛ§Œ≈”√Ê§«Ω™§Ô§√§∆§§§ÎæÏπÁ°¢§Ω§Œ•–•§•»ŒÛ§œ —¥π¥Ô∆‚§ÀºË§Í√÷§´§Ï§ﬁ§π°£
+ —¥π§ÚΩ™Œª§µ§ª§Î§À§œ [[m:Encoding::Converter#finish]] §Ú∏∆§”§ﬁ§π°£
 
-  ec = Encoding::Converter.new("EUC-JP", "UTF-8")
-  dst = ec.convert("§¢§§§¶§®§™")
-
-§Œ§Ë§¶§À§∑§∆Õ—§§§ﬁ§π°£
+[[m:Encoding::Converter]] §ÚÕ—§§§Î§»°¢ ∏ª˙ŒÛ§Œ∞Ï…Ù§ﬁ§ø§œ¡¥…Ù§Ú≈œ§∑§∆ —¥π§Úπ‘§¶§≥§»§¨§«§≠§ﬁ§π°£§Ë§√§∆°¢…‘¿µ§ •–•§•»§Ú∞’º±§ª§∫§À•π•»•Í°º•‡§´§È∆…§ﬂΩ–§∑§ø ∏ª˙ŒÛ§Ú —¥π§∑§ø§§§»§≠§À§œ Encoding::Converter §¨≈¨§∑§ﬁ§π°£
 
 § §™°¢Encoding::Converter#convert §«§œ°¢§≥§Ï§È§ŒŒ„≥∞§Ú ·≥Õ§∑§∆§‚°¢Œ„≥∞§ÚµØ§≥§∑§ø§»§≥§Ì§´§È —¥π§Ú∫∆≥´§π§Î§≥§»§œ§«§≠§ﬁ§ª§Û°£…‘¿µ§ •–•§•»§‰ —¥π¿Ë§«Ã§ƒÍµ¡§  ∏ª˙§Ú•®•π•±°º•◊§∑§ø§§æÏπÁ§‰§µ§È§À∫Ÿ§´§§ªÿƒÍ§Úπ‘§§§ø§§æÏπÁ§œ°¢[[m:Encoding::Converter#primitive_convert]] §ÚÕ—§§§ﬁ§π°£
+
+@param source_string  —¥π§π§Î ∏ª˙ŒÛ§Œ∞Ï…Ù§ﬁ§ø§œ¡¥…Ù§«§π°£
+@return  —¥π∑Î≤Ã§«§¢§Î ∏ª˙ŒÛ§Œ∞Ï…Ù§ﬁ§ø§œ¡¥…Ù§«§π°£
+@raise Encoding::InvalidByteSequenceError  —¥π∏µ§Œ•®•Û•≥°º•«•£•Û•∞§À§™§§§∆…‘¿µ§ •–•§•»ŒÛ§¨§¢§√§øæÏπÁ§À»Ø¿∏§∑§ﬁ§π°£
+@raise Encoding::UndefinedConversionError  —¥π¿Ë§Œ•®•Û•≥°º•«•£•Û•∞§«Ã§ƒÍµ¡§  ∏ª˙§¨§¢§√§øæÏπÁ§À»Ø¿∏§∑§ﬁ§π°£
+
+  ec = Encoding::Converter.new("utf-8", "euc-jp")
+  puts ec.convert("\u3042").dump     #=> "\xA4\xA2"
+  puts ec.finish.dump                #=> ""
+
+  ec = Encoding::Converter.new("euc-jp", "utf-8")
+  puts ec.convert("\xA4").dump       #=> ""
+  puts ec.convert("\xA2").dump       #=> "\xE3\x81\x82"
+  puts ec.finish.dump                #=> ""
+
+  ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
+  puts ec.convert("\xE3").dump       #=> "".force_encoding("ISO-2022-JP")
+  puts ec.convert("\x81").dump       #=> "".force_encoding("ISO-2022-JP")
+  puts ec.convert("\x82").dump       #=> "\e$B$\"".force_encoding("ISO-2022-JP")
+  puts ec.finish.dump                #=> "\e(B".force_encoding("ISO-2022-JP")
 
 --- last_error -> Exception | nil
 ƒæ¡∞§À —¥π¥Ô§«»Ø¿∏§∑§øŒ„≥∞§À¡Í≈ˆ§π§ÎŒ„≥∞•™•÷•∏•ß•Ø•»§Ú ÷§∑§ﬁ§π
@@ -70,19 +110,56 @@ Encoding::Converter §ÚÕ—§§§Î§»°¢ ∏ª˙ŒÛ§Œ∞Ï…Ù§Ú≈œ§∑§∆ —¥π§Úπ‘§¶§≥§»§¨§«§≠§ﬁ§π°£§Ë
 
 --- finish -> String
  —¥πΩËÕ˝§ÚΩ™Œª§∑°¢∑Î≤Ã ∏ª˙ŒÛ§ŒÀˆ»¯§Ú ÷§∑§ﬁ§π°£
+ —¥π∏µ§Œ ∏ª˙ŒÛ§ŒÀˆ»¯§¨•–•§•»ŒÛ§Œ≈”√Ê§«Ω™§Ô§√§∆§§§øæÏπÁ°¢
+
+@return  —¥π∑Î≤Ã§ŒÀˆ»¯
+@raise Encoding::InvalidByteSequenceError
 
   ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
   p ec.convert("\u3042")     #=> "\e$B$\""
   p ec.finish                #=> "\e(B"
 
---- primitive_convert
+--- primitive_convert(source_buffer, destination_buffer) -> Symbol
+--- primitive_convert(source_buffer, destination_buffer, destination_byteoffset) -> Symbol
+--- primitive_convert(source_buffer, destination_buffer, destination_byteoffset, destination_bytesize) -> Symbol
+--- primitive_convert(source_buffer, destination_buffer, destination_byteoffset, destination_bytesize, opttions) -> Symbol
+
 •®•Û•≥°º•«•£•Û•∞ —¥π§Œ§ø§·§Œ•·•Ω•√•…§Œ√Ê§«°¢§‚§√§»§‚∫Ÿ§´§ ∞∑§§§¨≤ƒ«Ω§ •·•Ω•√•…§«§π°£
+
 ≤ƒ»¬¿≠§Ú≥Œ ›§∑§ƒ§ƒ°¢…‘¿µ§ •–•§•»§‰ —¥π¿Ë§«Ã§ƒÍµ¡§  ∏ª˙§Œ∞∑§§§Ú∫Ÿ§´§ÀªÿƒÍ§∑§ø§§§»§≠§œ°¢Encoding::Converter#primitive_convert §¨Õ£∞Ï§Œ ˝À°§À§ §Í§ﬁ§π°£
+
+@param source_buffer  —¥π∏µ ∏ª˙ŒÛ§Œ•–•√•’•°
+@param destination_buffer  —¥π¿Ë ∏ª˙ŒÛ§Ú≥ «º§π§Î•–•√•’•°
+@param destination_byteoffset  —¥π¿Ë•–•√•’•°§«§Œ•™•’•ª•√•»
+@param destination_bytesize  —¥π¿Ë•–•√•’•°§ŒÕ∆ŒÃ
+@param options  —¥π§Œæ‹∫Ÿ§ÚªÿƒÍ§π§ÎƒÍøÙ§‰•œ•√•∑•Â
+@return  —¥π∑Î≤Ã¡ƒ…Ω§π Symbol
+
+options §À§œ∞ ≤º§¨ªÿƒÍ§«§≠§ﬁ§π°£
+
+  hash form:
+    :partial_input => true           # source buffer may be part of larger source
+    :after_output => true            # stop conversion after output before input
+  integer form:
+    Encoding::Converter::PARTIAL_INPUT
+    Encoding::Converter::AFTER_OUTPUT
+
+Ã·§Í√Õ§œ∞ ≤º§Œ§¶§¡§Œ§…§Ï§´§«§π°£
+
+* :invalid_byte_sequence
+* :incomplete_input
+* :undefined_conversion
+* :after_output
+* :destination_buffer_full
+* :source_buffer_empty
+* :finished
 
   ec = Encoding::Converter.new("UTF-8", "EUC-JP")
   src = "abc\x81§¢§§§¶\u{20bb7}\xe3"
   dst = ''
   
+…‘¿µ§ •–•§•»§‰ —¥π¿Ë§«Ã§ƒÍµ¡§ •–•§•»§Ú•®•π•±°º•◊§∑§ƒ§ƒ —¥π§π§ÎŒ„§«§π°£∞ æÂ§Œ§Ë§¶§À°¢Ã·§Í√Õ§« ¨¥Ù§µ§ª§ƒ§ƒ°¢[[m:Encoding::Converter#primitive_errinfo]] §Œæ Û§Úª≤æ»§∑§∆ΩËÕ˝§∑§∆§§§Ø§≥§»§À§ §Í§ﬁ§π°£
+
   begin
     ret = ec.primitive_convert(src, dst)
     p [ret, src, dst, ec.primitive_errinfo]
@@ -101,18 +178,17 @@ Encoding::Converter §ÚÕ—§§§Î§»°¢ ∏ª˙ŒÛ§Œ∞Ï…Ù§Ú≈œ§∑§∆ —¥π§Úπ‘§¶§≥§»§¨§«§≠§ﬁ§π°£§Ë
     break
   end while nil
 
-…‘¿µ§ •–•§•»§‰ —¥π¿Ë§«Ã§ƒÍµ¡§ •–•§•»§Ú•®•π•±°º•◊§∑§ƒ§ƒ —¥π§π§ÎŒ„§«§π°£∞ æÂ§Œ§Ë§¶§À°¢Ã·§Í√Õ§« ¨¥Ù§µ§ª§ƒ§ƒ°¢[[m:Encoding::Converter#primitive_errinfo]] §Œæ Û§Úª≤æ»§∑§∆ΩËÕ˝§∑§∆§§§Ø§≥§»§À§ §Í§ﬁ§π°£
 --- primitive_errinfo -> Array
 ƒæ¡∞§Œ [[m:Encoding::Converter#primitive_convert]] §À§Ë§Î —¥π§Œ∑Î≤Ã§Ú ›ª˝§π§Î∏ﬁÕ◊¡«§Œ«€ŒÛ§Ú ÷§∑§ﬁ§π°£
 
-  [result, enc1, enc2, error_bytes, readagain_bytes]
+@return [result, enc1, enc2, error_bytes, readagain_bytes] §»§§§¶∏ﬁÕ◊¡«§Œ«€ŒÛ
 
 result §œƒæ¡∞§Œ primitive_convert §ŒÃ·§Í√Õ§«§π°£
 §Ω§Ï∞ ≥∞§ŒªÕÕ◊¡«§œ :invalid_byte_sequence §´ :incomplete_input §´ :undefined_conversion §¿§√§øæÏπÁ§À∞’Ã£§Úª˝§¡§ﬁ§π°£
 enc1 §œ•®•È°º§Œ»Ø¿∏§∑§ø∏∂ªœ —¥π§Œ —¥π∏µ§Œ•®•Û•≥°º•«•£•Û•∞°¢enc2 §œ —¥π¿Ë§Œ•®•Û•≥°º•«•£•Û•∞§«§π°£
 error_bytes §œ•®•È°º§Œ»Ø¿∏∏∂∞¯§»§ §√§ø•–•§•»ŒÛ°¢readagain_bytes §œ¿Ë∆…§ﬂ§À§Ë§√§∆ —¥π¥Ô∆‚…Ù§À ›ª˝§µ§Ï§∆§§§Î•–•§•»ŒÛ§«§π°£
 
-primitive_errinfo §œ§‚§√§—§È [[m:Encoding::Converter#primitive_convert]] §»¡»§ﬂπÁ§Ô§ª§∆ª»§§§ﬁ§π°£[[m:Encoding:Converter#convert]] §ÚÕ—§§§∆§§§ÎæÏπÁ§À§‚ºË∆¿§π§Î§≥§»§œ§«§≠§ﬁ§π§¨°¢Õ≠Õ—§ ª»§§ ˝§œ∆Ò§∑§§§«§∑§Á§¶°£
+primitive_errinfo §œ§‚§√§—§È [[m:Encoding::Converter#primitive_convert]] §»¡»§ﬂπÁ§Ô§ª§∆ª»§§§ﬁ§π°£[[m:Encoding::Converter#convert]] §ÚÕ—§§§∆§§§ÎæÏπÁ§À§‚ºË∆¿§π§Î§≥§»§œ§«§≠§ﬁ§π§¨°¢Õ≠Õ—§ ª»§§ ˝§œ∆Ò§∑§§§«§∑§Á§¶°£
 
   # \xff is invalid as EUC-JP.
   ec = Encoding::Converter.new("EUC-JP", "Shift_JIS")
@@ -163,15 +239,16 @@ primitive_errinfo §œ§‚§√§—§È [[m:Encoding::Converter#primitive_convert]] §»¡»§ﬂπ
   p src
   #=> ""
 
---- insert_output(string) -> nil
-Inserts string into the encoding converter.
-The string will be converted to the destination encoding and
-output on later conversions.
+--- insert_output(string)
+ —¥π¥Ô∆‚§Œ•–•√•’•°§À ∏ª˙ŒÛ§Ú¡ﬁ∆˛§∑§ﬁ§π°£
+•–•√•’•°§À ›ª˝§µ§Ï§ø ∏ª˙ŒÛ§œ°¢º°§Œ —¥πª˛§Œ —¥π∑Î≤Ã§»∞ÏΩÔ§À ÷§µ§Ï§ﬁ§π°£
 
-If the destination encoding is stateful,
-string is converted according to the state and the state is updated.
+ —¥π¿Ë§¨•π•∆°º•»•’•Î§ •®•Û•≥°º•«•£•Û•∞§«§¢§√§øæÏπÁ°¢
+¡ﬁ∆˛§µ§Ï§ø ∏ª˙ŒÛ§œæı¬÷§À¥§≈§§§∆ —¥π§µ§Ï°¢æı¬÷§Úππø∑§∑§ﬁ§π°£
 
-This method should be used only when a conversion error occurs.
+§≥§Œ•·•Ω•√•…§œ —¥π§À∫›§∑§∆•®•È°º§¨»Ø¿∏§∑§ø∫›§À§Œ§ﬂÕ¯Õ—§µ§Ï§Î§Ÿ§≠§«§π°£
+
+@param string ¡ﬁ∆˛§π§Î ∏ª˙ŒÛ
 
   ec = Encoding::Converter.new("utf-8", "iso-8859-1")
   src = "HIRAGANA LETTER A is \u{3042}."
@@ -194,5 +271,9 @@ This method should be used only when a conversion error occurs.
 --- putback -> String
 --- putback(max_numbytes) -> String
 ∏Â§Œ —¥πÕ—§À —¥π¥Ô∆‚…Ù§« ›ª˝§∑§∆§§§Î•–•§•»ŒÛ§Ú§œ§≠Ω–§∑§ﬁ§π°£
+
+@param max_numbytes 
+
+@return ≥ «º§µ§Ï§∆§§§ø•–•§•»ŒÛ
 
 #@end
