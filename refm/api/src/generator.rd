@@ -195,8 +195,7 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 与えられた Enumerable オブジェクトの数を返します。
 #@end
 
-
-
+#@since 1.8.4
 = reopen Enumerable::Enumerator
 
 == Instance Methods
@@ -214,3 +213,4 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 内部で保持しているジェネレータを最初まで巻き戻します。
 
 @see [[m:Generator#rewind]]
+#@end

@@ -43,14 +43,14 @@ require tk
 --- encoding
 #@todo
 
-= class Tk::BinaryString < EncodedString
+= class Tk::BinaryString < Tk::EncodedString
 
 == Constants
 
 --- Encoding
 #@todo
 
-= class Tk::UTF8_String < EncodedString
+= class Tk::UTF8_String < Tk::EncodedString
 
 == Constants
 

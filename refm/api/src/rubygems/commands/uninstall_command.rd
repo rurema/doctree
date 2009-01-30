@@ -25,7 +25,7 @@ Usage: gem uninstall GEMNAME [GEMNAME ...] [options]
 
 
 = class Gem::Commands::UninstallCommand < Gem::Command
-include VersionOption
+include Gem::VersionOption
 
 Gem パッケージをアンインストールするためのクラスです。
 

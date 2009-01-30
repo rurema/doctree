@@ -1,5 +1,5 @@
 = class Rake::Application
-include TaskManager
+include Rake::TaskManager
 
 Rake で使用するメインのクラスです。
 

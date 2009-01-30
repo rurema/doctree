@@ -1,7 +1,7 @@
 #@if (version >= "1.8.0")
 = class OpenSSL::SSL::SSLSocket < Object
 include Enumerable
-include SocketForwarder 
+include OpenSSL::SSL::SocketForwarder 
 #@todo
 #@# IO と同じメソッドはこのモジュールで定義されているので、下のいくつかのエントリーはこちらにまわす
 

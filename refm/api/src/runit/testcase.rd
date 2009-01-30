@@ -7,6 +7,8 @@ require runit/error
 これからユニットテストを書くときは
 [[lib:test/unit]] ライブラリを使ってください。
 
+= module RUNIT::AssertMixin
+#@todo
 
 = class RUNIT::TestCase < Test::Unit::TestCase
 

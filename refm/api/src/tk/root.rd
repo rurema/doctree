@@ -4,7 +4,7 @@ require tk/wm
 require tk/menuspec
 
 = class TkRoot < TkWindow
-include Wm
+include Tk::Wm
 include TkMenuSpec
 
 == Constants

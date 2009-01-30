@@ -1,4 +1,4 @@
-= class Rake::MultiTask < Task
+= class Rake::MultiTask < Rake::Task
 #@todo
 
 通常のタスクと同じですが、[[lib:thread]] を用いて事前タスクを並列実行します。

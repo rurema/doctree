@@ -2828,8 +2828,9 @@ self を指定したエンコーディングに変換した文字列を作成して返します。引数
 @return               変換された文字列
 
 変換オプション
+
 : :invalid => nil
-変換元のエンコーディングにおいて不正なバイトがあった場合に、例外 [[c:Encoding::InvalidByteSequenceError]] を投げます。(デフォルト)
+  変換元のエンコーディングにおいて不正なバイトがあった場合に、例外 [[c:Encoding::InvalidByteSequenceError]] を投げます。(デフォルト)
 : :invalid => :replace
   変換元のエンコーディングにおいて不正なバイトがあった場合に、不正なバイトを置換文字で置き換えます。
 : :undef => nil

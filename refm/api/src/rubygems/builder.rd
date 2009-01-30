@@ -3,7 +3,7 @@
 [[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのライブラリです。
 
 = class Gem::Builder < Object
-include UserInteraction
+include Gem::UserInteraction
 
 [[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのクラスです。
 

@@ -545,7 +545,8 @@ Ruby 1.8 以降では delete と delete! は同じ効果です。
 [[m:Net::POPMail#number]] と違い、
 この UIDL は接続しなおしても変化しません。
 
-
+= class Net::ProtocolError < StandardError
+#@todo
 
 = class Net::POPError < Net::ProtocolError
 
@@ -554,6 +555,9 @@ POP3 の、認証以外のエラーが起きたときに発生します。
 = class Net::POPBadResponse < Net::POPError
 
 サーバから予期しないレスポンスが帰ってきたときに発生します。
+
+= class Net::ProtoAuthError < StandardError
+#@todo
 
 = class Net::POPAuthenticationError < Net::ProtoAuthError
 

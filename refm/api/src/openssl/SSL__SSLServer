@@ -1,6 +1,6 @@
 #@since 1.8.1
 = class OpenSSL::SSL::SSLServer < Object
-include SocketForwarder 
+include OpenSSL::SSL::SocketForwarder 
 
 SSL サーバーのためのクラス。[[c:TCPServer]] に対応します。
 

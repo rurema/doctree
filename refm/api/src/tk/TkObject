@@ -1,5 +1,5 @@
 #@since 1.8.0
-= reopen TkObject
+= class TkObject
 extend  TkCore
 include Tk
 include TkConfigMethod

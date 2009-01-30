@@ -57,7 +57,7 @@
 @see [[m:Gem::DefaultUserInteraction.#use_ui]]
 
 = module Gem::UserInteraction
-include DefaultUserInteraction
+include Gem::DefaultUserInteraction
 
 デフォルト UI にアクセスしやすくするためのモジュールです。
 
@@ -367,7 +367,7 @@ WARNING レベルのアラートを表示します。
 
 @param message 表示するメッセージを指定します。
 
-= class ConsoleUI < StreamUI
+= class ConsoleUI < Gem::StreamUI
 
 [[c:Gem::StreamUI]] を標準入力、標準出力、標準エラー出力を使用して初期化します。
 

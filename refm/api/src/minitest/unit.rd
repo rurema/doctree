@@ -18,7 +18,7 @@
 
 
 
-= class MiniTest::Skip < Assertion
+= class MiniTest::Skip < MiniTest::Assertion
 #@todo
 
 

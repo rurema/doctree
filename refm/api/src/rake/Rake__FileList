@@ -1,6 +1,6 @@
 = class Rake::FileList
 alias FileList
-include Cloneable
+include Rake::Cloneable
 
 このクラスは [[c:Array]] と基本的には同じです。
 

@@ -1,3 +1,4 @@
+#@since 1.8.2
 = class Rinda::Template < Rinda::Tuple
 
 タプルのマッチングのためのクラスです。
@@ -34,3 +35,4 @@ self と tuple のサイズが同じで、
 self の各要素が tuple にマッチする場合は真を返します。
 マッチングの検査には [[m:Rinda::Tuple#==]] と [[m:Rinda::Tuple#===]] を用います。
 nil はワイルドカードです。
+#@end

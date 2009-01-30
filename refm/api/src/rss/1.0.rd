@@ -39,6 +39,12 @@ include RSS::XMLStyleSheetMixin
 --- version=
 #@todo
 
+= module RSS::ImageModelUtils
+#@todo
+
+= module RSS::DublinCoreModel
+#@todo
+
 = class RSS::RDF::Channel < RSS::Element
 include RSS::TaxonomyTopicsModel
 include RSS::SyndicationModel

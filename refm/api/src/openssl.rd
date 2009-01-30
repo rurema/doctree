@@ -132,6 +132,7 @@ Ruby/OpenSSL のバージョンです。
 も参照してください。
 #@end
 
+= module OpenSSL::SSL::SocketForwarder
 = class OpenSSL::OpenSSLError < StandardError
 
 #@include(openssl/ASN1)
