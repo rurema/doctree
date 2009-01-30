@@ -1,25 +1,96 @@
 #@since 1.8.0
 
-端末制御ライブラリの curses や ncurses を利用して、端末に依存しない形式でテキストユーザインタフェースを作成するためのライブラリです。
+Ruby の curses ライブラリ(以下、Ruby curses)は、C のプログラムから端末
+の画面を制御するための curses ライブラリ(以下、C curses)を利用して、端
+末に依存しない形式でテキストユーザインタフェースを構築するためのライブ
+ラリです。
+
+C curses には、次のような実装があります。
+#@# 利用可能な curses の実装を見つけたら、随時追加してください。
+
+  * [[url:http://www.gnu.org/software/ncurses/ncurses.html]]
+  * [[url:http://pdcurses.sourceforge.net/]]
+
+Ruby curses を使ってテキストユーザインタフェース(以下、TUI)を
+構築する流れは次のようになります。
+
+  (1) [[m:Curses.#init_screen]] で初期化を行います。
+  (2) [[c:Curses]] のモジュール関数を使い、
+  入力のエコーを無効にするなどの Ruby curses の設定を行います。
+  (3) [[m:Curses.#stdscr]] やそのサブウインドウを操作し、TUI を構築します。
+  (4) [[m:Curses.#getch]] や [[m:Curses.#getstr]] により、
+  ユーザからの入力を取得します。入力した情報に従って処理を行い、
+  そして、入力を待つということを繰り返します。
+  (5) 最後に [[m:Curses.#close_screen]] で終了処理を行います。
+
+例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
+
+  require "curses"
+  
+  Curses.init_screen
+  begin
+    s = "Hello World!"
+    Curses.setpos(Curses.lines / 2, Curses.cols / 2 - (s.length / 2))
+    Curses.addstr(s)
+    Curses.refresh
+    Curses.getch
+  ensure
+    Curses.close_screen
+  end
+
+例: 上記の例と同様だが、Curses モジュールを include する場合
+
+  require "curses"
+
+  include Curses
+  
+  init_screen
+  begin
+    s = "Hello World!"
+    setpos(lines / 2, cols / 2 - (s.length / 2))
+    addstr(s)
+    refresh
+    getch
+  ensure
+    close_screen
+  end
+
+なお、C curses を利用できない環境で Ruby をコンパイルしている場合、
+Ruby curses は利用できません。
+利用できない場合、require の時点で例外 LoadError が発生します。
+
+  foo:1:in `require': no such file to load -- curses (LoadError)
+          from foo:1:in `<main>'
+
+Ruby curses の操作によっては、
+利用する C curses が提供していない機能を使うものがあります。
+そのような操作を行った場合、例外 NotImplementError が発生します。
+
+セーフレベル ($SAFE) が 4 の場合、いくつかの操作で例外 SecurityError を発生します。
 
 = module Curses
 
-端末制御ライブラリの curses や ncurses を利用して、端末に依存しない形式でテキストユーザインタフェースを作成するためのモジュールです。
+Curses モジュールや [[c:Curses::Window]] クラスは、curses ライブラリを利用して、
+端末に依存しない形式でテキストユーザインタフェースを作成できます。
+curses ライブラリとは、
+C のプログラムから端末のディスプレイ画面を制御するためのライブラリのことで、
+次のような実装があります。
+#@# 利用可能な curses の実装を見つけたら、随時追加してください。
 
   * [[url:http://pdcurses.sourceforge.net/]]
   * [[url:http://www.gnu.org/software/ncurses/ncurses.html]]
 
 本モジュールを使ってテキストユーザインタフェースを作成する流れは次のようになります。
 
-  (1) [[m:Curses.init_screen]] で初期化を行います。
+  (1) [[m:Curses.#init_screen]] で初期化を行います。
   (2) [[c:Curses]] のモジュール関数を使って、
   入力のエコーを無効にするなどの curses の設定を行います。
-  (3) [[m:Curses.stdscr]] で [[c:Curses::Window]] オブジェクトを取得し、
+  (3) [[m:Curses.#stdscr]] で [[c:Curses::Window]] オブジェクトを取得し、
   それを使ってインタフェースを構築する。
-  (4) [[m:Curses.getch]] や [[m:Curses.getstr]] により、
+  (4) [[m:Curses.#getch]] や [[m:Curses.#getstr]] により、
   ユーザからの入力を取得します。入力した情報に従って処理を行い、
   そして、入力を待つということを繰り返します。
-  (5) 最後に [[m:Curses.close_screen]] で終了処理を行います。
+  (5) 最後に [[m:Curses.#close_screen]] で終了処理を行います。
 
 例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
 
@@ -774,7 +845,7 @@ curs_clear(3X) の clear 関数を参照ください。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-@see [[m:Curses.close_screen]]
+@see [[m:Curses.#close_screen]]
 
 --- close_screen -> nil
 
@@ -783,7 +854,7 @@ curses の終了処理を行います。
 
 詳しくは、 man ページの curs_initscr(3X) の endwin 関数を参照ください。
 
-@see [[m:Curses.init_screen]]、[[m:Curses.stdscr]]
+@see [[m:Curses.#init_screen]]、[[m:Curses.#stdscr]]
 
 --- closed? -> bool
 
@@ -793,56 +864,114 @@ curses が終了しているかどうかを返します。
 
 サポートしていない環境では、例外 NotImplementError が発生します。
 
-@see [[m:Curses.close_screen]]
+@see [[m:Curses.#close_screen]]
+
+--- clear -> nil
+
+画面全体を表すウィンドウ stdscr の文字を消去し、画面をクリアします。
+画面のクリアを反映させるために、
+本メソッドのあとに [[m:Curses.#refresh]] を呼び出す必要はありません。
+
+詳しくは、 man ページの curs_clear(3X) の clear 関数を参照ください。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- refresh -> nil
 
 画面全体を表すウィンドウ stdscr の表示を更新します。
 
-このメソッドの中で [[m:Curses.init_screen]] を呼び出します。
-
 詳しくは、 man ページの curs_refresh(3X) の refresh 関数を参照ください。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
---- doupdate
-#@todo
+--- doupdate -> nil
 
-？
+画面全体を表すウィンドウ stdscr の表示を更新します。
+[[m:Curses.#refresh]] 以上に能率良く更新処理を行います。
 
---- clear
-#@todo
+詳しくは、 man ページの curs_refresh(3X) の doupdate 関数を参照ください。
 
-stdscr の文字を消去します。
-この消去は refresh を待たずにすぐ実行されます。
+利用している curses のライブラリが doupdate 関数を提供していない場合、
+doupdate 関数の代わりに、refresh 関数を呼び出します。
 
---- echo
-#@todo
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
-入力のエコーを有効にします。
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+--- echo -> nil
+
+ユーザの入力内容を画面に表示するようにします。
+つまり、入力のエコーを有効にします。
+
+詳しくは、 man ページの curs_inopts(3X) の echo 関数を参照ください。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 --- noecho
-#@todo
 
-入力のエコーをやめます。
+ユーザの入力内容を画面に表示しないようにします。
+つまり、入力のエコーを止めます。
 
---- cbreak
---- crmode
-#@todo
+詳しくは、 man ページの curs_inopts(3X) の noecho 関数を参照ください。
 
-キーボード入力のバッファリングをやめます。
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
 
---- nocbreak
---- nocrmode
-#@todo
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-キーボード入力のバッファリングを有効にします。
+--- cbreak -> nil
+--- crmode -> nil
 
---- nl
+キーボード入力のバッファリングをやめ、ユーザの入力を即座に処理できるようにします。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Curses.#nocbreak]]、[[m:Curses.#nocrmode]]
+
+--- nocbreak -> nil
+--- nocrmode -> nil
+
+通常の端末のように、キーボード入力のバッファリングを有効にします。
+ユーザの入力はエンターキーなどを押すまで処理できません。
+この状態のことを「coocked」モードといいます。
+
+このメソッドの中で [[m:Curses.#init_screen]] を呼び出します。
+
+セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+
+@see [[m:Curses.#cbreak]]、[[m:Curses.#crmode]]
+
+--- raw -> nil
+
+[[m:Curses.#cbreak]] と同様に、キーボード入力のバッファリングをやめ、
+ユーザの入力を即座に処理できるようにします。なおかつ、
+割り込み(Ctrl-C)、サスペンド(Ctrl-Z) などの特殊キーの処理をやめます。
+この状態のことを「raw」モードといいます。
+
+@see [[m:Curses.#cbreak]]、[[m:Curses.#noraw]]
+
+--- noraw -> nil
+
+raw モードを抜け、通常の状態にします。
+つまり、キーボード入力のバッファリングを行い、
+割り込み(Ctrl-C)、サスペンド(Ctrl-Z) などの特殊キーの処理を行うようにします。
+
+@see [[m:Curses.#raw]]
+
+--- nl -> nil
 #@todo
 
 cooked モードのとき、return キーの入力に対して
 LF (Ctrl-j) を返すようにします。
+
+詳しくは、 man ページの curs_outopts(3X) の nl 関数を参照ください。
 
 --- nonl
 #@todo
@@ -850,17 +979,7 @@ LF (Ctrl-j) を返すようにします。
 cooked モードのとき、return キーの入力に対して
 CR (Ctrl-m) を返すようにします。
 
---- raw
-#@todo
-
-キーボード入力のバッファリングと Ctrl-C などの
-特殊キーの処理をやめます (raw モード)。
-
---- noraw
-#@todo
-
-キーボード入力のバッファリングと Ctrl-C など
-特殊キーの処理を行うようにします (cooked モード)。
+詳しくは、 man ページの curs_outopts(3X) の nonl 関数を参照ください。
 
 --- beep
 #@todo
