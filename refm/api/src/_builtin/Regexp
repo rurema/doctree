@@ -319,6 +319,13 @@ true を返します。
   reg = Regexp.new("hogehoge")
   p reg.casefold? #=> false
 
+#@since 1.9.0
+--- fixed_encoding? -> bool
+
+正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。
+#end
+
+#@until 1.9.0
 --- kcode -> String | nil
 
 その正規表現が対応するようにコンパイルされている文字コードを
@@ -331,7 +338,7 @@ true を返します。
 
   reg = Regexp.new("hogehoge", nil)
   p reg.kcode #=> "nil"
-
+#@end
 
 #@since 1.9.0
 --- match(str, pos = 0) -> MatchData | nil
