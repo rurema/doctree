@@ -28,6 +28,22 @@ options д╟д╧ [[m:String#encode]] д╟д╬е╧е├е╖ехеке╫е╖ечеєд╦▓├дид╞бв░╩▓╝д╬─ъ┐Їдм═°═
   * Encoding::Converter::XML_ATTR_CONTENT_DECORATOR
   * Encoding::Converter::XML_ATTR_QUOTE_DECORATOR
 
+--- asciicompat_encoding(string) -> encoding | nil
+--- asciicompat_encoding(encoding) -> encoding | nil
+╞▒д╕╩╕╗·╜╕╣чдЄ╗¤д─ ASCII ╕▀┤╣еиеєе│б╝е╟егеєе░дЄ╩╓д╖д▐д╣бг
+
+@param string еиеєе│б╝е╟егеєе░╠╛
+@param encoding еиеєе│б╝е╟егеєе░еке╓е╕езепе╚
+@return ASCII ╕▀┤╣еиеєе│б╝е╟егеєе░д╬еке╓е╕езепе╚дл nil
+
+░·┐Їд╚еиеєе│б╝е╟егеєе░д╚╞▒д╕╩╕╗·╜╕╣чдЄ╗¤д─ ASCII ╕▀┤╣еиеєе│б╝е╟егеєе░дЄ╩╓д╖д▐д╣бг░·┐Їд╚╠сдъ├═бв2 д─д╬еиеєе│б╝е╟егеєе░┤╓д╟д╧╩╤┤╣д╖д╞дт╠д─ъ╡┴╩╕╗·д╬╬у│░д╧╚п└╕д╖д▐д╗дєбг
+░·┐Їдм ASCII ╕▀┤╣еиеєе│б╝е╟егеєе░д╟двды╛ь╣чдфбвеиеєе│б╝е╟егеєе░д╟д╩дд╛ь╣чд╧ nil дЄ╩╓д╖д▐д╣бг
+
+  Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-     JP>
+  Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
+  Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
+
+
 == Instance Methods
 --- inspect -> String
 Encoding::Converter еке╓е╕езепе╚д╬╛Ё╩єдЄ┤╩├▒д╦╔╜╝ид╖д▐д╣бг
