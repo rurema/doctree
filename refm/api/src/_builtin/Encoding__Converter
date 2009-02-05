@@ -39,7 +39,7 @@ options ¤Ç¤Ï [[m:String#encode]] ¤Ç¤Î¥Ï¥Ã¥·¥å¥ª¥×¥·¥ç¥ó¤Ë²Ã¤¨¤Æ¡¢°Ê²¼¤ÎÄê¿ô¤¬ÍøÍ
 °ú¿ô¤È¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÈÆ±¤¸Ê¸»ú½¸¹ç¤ò»ý¤Ä ASCII ¸ß´¹¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Þ¤¹¡£°ú¿ô¤ÈÌá¤êÃÍ¡¢2 ¤Ä¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°´Ö¤Ç¤ÏÊÑ´¹¤·¤Æ¤âÌ¤ÄêµÁÊ¸»ú¤ÎÎã³°¤ÏÈ¯À¸¤·¤Þ¤»¤ó¡£
 °ú¿ô¤¬ ASCII ¸ß´¹¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¢¤ë¾ì¹ç¤ä¡¢¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
 
-  Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-     JP>
+  Encoding::Converter.asciicompat_encoding("ISO-2022-JP") #=> #<Encoding:stateless-ISO-2022-JP>
   Encoding::Converter.asciicompat_encoding("UTF-16BE") #=> #<Encoding:UTF-8>
   Encoding::Converter.asciicompat_encoding("UTF-8") #=> nil
 
