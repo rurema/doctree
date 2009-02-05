@@ -1,4 +1,5 @@
-= class RSS::Maker::ItemsBase < Object
+= class RSS::Maker::Base < Object
+= class RSS::Maker::ItemsBase < RSS::Maker::Base
 include Enumerable
 
 == Instance Methods
@@ -89,6 +90,8 @@ item.date=の別名です．
 = class RSS::Maker::RSS10::Items::Item < RSS::Maker::ItemsBase::ItemBase
 = class RSS::Maker::RSS20::Items::Item < RSS::Maker::RSS09::Items::Item
 
+= class RSS::Maker::ItemsBase::ItemBase::GuidBase < RSS::Maker::Base
+= class RSS::Maker::RSS09::Items::Item::Guid < RSS::Maker::ItemsBase::ItemBase::GuidBase
 = class RSS::Maker::RSS20::Items::Item::Guid < RSS::Maker::RSS09::Items::Item::Guid
 
 RSS 2.0を生成するときだけ利用されます．
@@ -105,6 +108,8 @@ contentを設定する必要があります．
 --- content=()
 #@todo
 
+= class RSS::Maker::ItemsBase::ItemBase::EnclosureBase < RSS::Maker::Base
+= class RSS::Maker::RSS09::Items::Item::Enclosure < RSS::Maker::ItemsBase::ItemBase::EnclosureBase
 = class RSS::Maker::RSS20::Items::Item::Enclosure < RSS::Maker::RSS09::Items::Item::Enclosure
 
 RSS 2.0を生成するときだけ利用されます．
@@ -125,6 +130,8 @@ url，length，typeを設定する必要があります．
 --- type=()
 #@todo
 
+= class RSS::Maker::ItemsBase::ItemBase::SourceBase < RSS::Maker::Base
+= class RSS::Maker::RSS09::Items::Item::Source < RSS::Maker::ItemsBase::ItemBase::SourceBase
 = class RSS::Maker::RSS20::Items::Item::Source < RSS::Maker::RSS09::Items::Item::Source
 
 RSS 2.0を生成するときだけ利用されます．
@@ -141,6 +148,8 @@ url，contentを設定する必要があります．
 --- content=()
 #@todo
 
+= class RSS::Maker::ItemsBase::ItemBase::CategoriesBase < RSS::Maker::Base
+= class RSS::Maker::RSS09::Items::Item::Categories < RSS::Maker::ItemsBase::ItemBase::CategoriesBase
 = class RSS::Maker::RSS20::Items::Item::Categories < RSS::Maker::RSS09::Items::Item::Categories
 
 include Enumerable
