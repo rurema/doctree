@@ -68,7 +68,7 @@ Fiber.yield の引数が、親での Fiber#resume の返り値になります。
      4
 
 以下は内部イテレータを外部イテレータに変換する例です。
-実際 [[c:Enumerable::Enumerator]] は Fiber を用いて実装されています。
+実際 [[c:Enumerator]] は Fiber を用いて実装されています。
 
  def enum2gen(enum)
    Fiber.new do
