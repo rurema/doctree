@@ -651,7 +651,21 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 
 @param feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
+#@since 1.9.0
+@see [[m:Kernel.#load]],[[m:Kernel.#autoload]],[[m:Kernel.#require_relative]]
+#@else
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]]
+#@end
+
+--- require_relative(relative_feature) -> bool
+現在のファイルからの相対パスで require します。
+
+  require File.expand_path(File.join(File.dirname(__FILE__), relative_feature))
+とほぼ同じです。
+
+@param feature ファイル名の文字列です。
+@raise LoadError ロードに失敗した場合に発生します。
+@see [[m:Kernel.#require]]
 
 ==== require と load のスコープ
 
