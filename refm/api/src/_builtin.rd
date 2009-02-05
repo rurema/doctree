@@ -76,7 +76,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Numeric)
 #@include(_builtin/Object)
 #@include(_builtin/ObjectSpace)
+#@until 1.9.0
 #@include(_builtin/Precision)
+#@end
 #@include(_builtin/Proc)
 #@include(_builtin/Process)
 #@include(_builtin/Process__GID)
