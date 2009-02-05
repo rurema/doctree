@@ -18,6 +18,7 @@
 
 
 --- compatible?(str1, str2) -> Encoding | nil
+--- compatible?(enc1, enc2) -> Encoding | nil
 2つの文字列に互換性があるかどうかをチェックします。互換性がある文字列は
 結合させることができます。互換性があるときは、結合後の文字列が取るであ
 ろう Encoding オブジェクトを返します。互換性がない場合は nil を返します。
@@ -32,6 +33,8 @@
 @param name エンコーディング名を表す [[c:String]] か [[c:Symbol]] を指定します。
 @return 発見された Encoding オブジェクトを返します。
 @raise ArgumentError 指定した名前のエンコーディングが発見できないと発生します。
+
+特殊なエンコーディング名として、ロケールエンコーディングを表す locale、default_external を表す external、default_internal を表す internal があります。
 
 例:
  p Encoding.find(:Shift_JIS)    #=> #<Encoding:Shift_JIS>
@@ -70,8 +73,17 @@
 --- default_external -> Encoding
 規定の外部エンコーディングを返します。
 
-入出力において、外部エンコーディングが指定されていない場合の規定値として利用されます。Rubyはロケールまたは -E オブションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
+入出力において、外部エンコーディングが指定されていない場合の規定値として利用されます。Rubyはロケールまたは -E オプションに従って default_external を決定します。ロケールの確認・設定方法については各システムのマニュアルを参照してください。
 @see [[man:locale(1)]]
+
+--- default_external=(encoding) -> Encoding
+規定の外部エンコーディングを設定します。
+
+--- default_internal -> Encoding
+規定の内部エンコーディングを返します。
+
+--- default_internal=(encoding) -> Encoding
+規定の内部エンコーディングを返します。
 
 --- locale_charmap -> String
 #@todo
@@ -94,13 +106,6 @@ Returns the locale charmap name.
 
 == Instance Methods
 
---- base_encoding -> Encoding | nil
-元となったエンコーディングを返します。
-
-self が別のエンコーディングから派生したエンコーディングである場合、もと
-となったエンコーディングを返します。そのようなエンコーディングが存在し
-なければ nil を返します。
-
 --- inspect -> String
 プログラマにわかりやすい表現の文字列を返します。
 
@@ -113,6 +118,11 @@ self が別のエンコーディングから派生したエンコーディングである場合、もと
 エンコーディングの名前を返します。
 
     Encoding::UTF_8.name       => "UTF-8"
+
+--- names -> String
+エンコーディングの名前とエイリアス名の配列を返します。
+
+    Encoding::UTF_8.names      => ["UTF-8", "CP65001"]
 
 --- dummy? -> bool
 自身がダミーエンコーディングである場合に true を返します。
