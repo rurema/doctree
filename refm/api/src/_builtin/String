@@ -1164,11 +1164,13 @@ str == eval(str.dump) となることが保証されています。
     # p だとさらにバックスラッシュが増えて見にくいので puts している
     puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 
---- each(rs = $/) {|line| ... }      -> ()
+--- each(rs = $/)      {|line| ... }      -> ()
 --- each_line(rs = $/) {|line| ... } -> ()
 #@since 1.8.7
+--- lines(rs = $/)     {|line| ... } -> ()
 --- each(rs = $/)       -> Enumerable::Enumerator
 --- each_line(rs = $/)  -> Enumerable::Enumerator
+--- lines(rs = $/)      -> Enumerable::Enumerator
 #@end
 
 文字列中の各行に対して繰り返します。
@@ -1190,17 +1192,26 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり、
         # => "aa\n"
         # => "bb\n"
         # => "cc\n"
+    
+    p "aa\nbb\ncc\n".lines.to_a   # => ["aa\n", "bb\n", "cc\n"]
+    p "aa\n".lines.to_a           # => ["aa\n"]
+    p "".lines.to_a               # => []
+    
+    s = "aa\nbb\ncc\n"
+    p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
+    p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
 
 --- each_byte {|byte| ... } -> ()
 #@since 1.8.7
 --- each_byte -> Enumerable::Enumerator
+--- bytes -> Enumerable::Enumerator
 #@end
 
 文字列の各バイトに対して繰り返します。
 
 なお、バイトごとに分割した配列を得たいときは、
 Ruby 1.8 までなら unpack('C*') を、
-Ruby 1.9 以降は String#bytes を使ってください。
+Ruby 1.9 以降は String#bytes.to_a を使ってください。
 
 例:
     "str".each do |byte|
@@ -1210,20 +1221,7 @@ Ruby 1.9 以降は String#bytes を使ってください。
         # => 116
         # => 114
 
-#@since 1.9.0
-@see [[m:String#bytes]]
-#@else
 @see [[m:String#unpack]]
-#@end
-
-#@since 1.8.7
---- bytes -> Enumerable::Enumerator
-
-文字列をバイト配列 (を表す Enumerator) に分割します。
-
-例:
-    p "string".bytes   # => [115, 116, 114, 105, 110, 103]
-#@end
 
 --- empty? -> bool
 
@@ -2538,7 +2536,7 @@ tr_s! は置換された部分だけを squeeze! します。
 [[m:$KCODE]] が適切に設定されていないときは
 以下のようにマルチバイト文字の一部も変換してしまいます。
 
-  # ソースコードは Shift JIS エンコーディングとする
+  #coding:Shift_JIS
   $KCODE = "SJIS"
   puts "蟻".upcase   # => 蟻   ($KCODE が適切なので正しく無視された)
 
@@ -2568,12 +2566,12 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
 [[m:$KCODE]] が適切に設定されていないときは
 以下のようにマルチバイト文字の一部も変換してしまいます。
 
-  # ソースコードは Shift JIS エンコーディングとする
+  #coding:Shift_JIS
   $KCODE = "SJIS"
   str = "蟻"
   str.upcase!
   puts str   # => 蟻   ($KCODE が適切なので正しく無視された)
-
+  
   $KCODE = "NONE"
   str = "蟻"
   str.upcase!
@@ -2684,23 +2682,6 @@ self の末尾が str であるとき true を返します。
 
 @see [[m:String#start_with?]]
 
---- lines(rs = $/) -> Enumerable::Enumerator
-
-@param rs    行末を示す文字列
-
-文字列を行の配列 (を生成する Enumerator) に変換します。行の区切りは rs
-に指定した文字列で、そのデフォルト値は変数 $/ の値です。各 line
-には区切りの文字列も含みます。
-
-例:
-    p "aa\nbb\ncc\n".lines.to_a   # => ["aa\n", "bb\n", "cc\n"]
-    p "aa\n".lines.to_a           # => ["aa\n"]
-    p "".lines.to_a               # => []
-    
-    s = "aa\nbb\ncc\n"
-    p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
-    p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
-
 --- partition(sep) -> [String, String, String]
 
 セパレータ sep が最初に登場する部分で self を 2 つに分割し、
@@ -2747,13 +2728,24 @@ self がセパレータを含まないときは、
 は次のように出力されます。
    h e l l o
 
+#@since 1.9.1
+--- each_codepoint {|codepoint| block } -> self
+--- chars {|codepoint| block }     -> self
+
+文字列のそれぞれのコードポイントをブロックに渡して実行します。
+
+   #coding:UTF-8
+   "hello わーるど".codepoints.to_a
+   # => [104, 101, 108, 108, 111, 32, 12431, 12540, 12427, 12393]
+#@end
+
 --- bytesize -> Integer
 
 文字列のバイト長を整数で返します。
 
 例:
 
-  # 実行結果は文字コードによって異なります。
+  #coding:UTF-8
 #@since 1.9.0
   p "いろは".size     #=> 3
 #@else
@@ -2801,7 +2793,7 @@ self が空文字列のときは例外 TypeError を発生します。
   p s.force_encoding("EUC-JP")                  #=> "いろは"
  
   u = [12411, 12408, 12392].pack("U*")
-  u.force_encoding("UTF-8")
+  u.force_encoding("UTF-8")                     #=> "ほへと"
 
 --- ascii_only?  -> bool
 
@@ -2854,6 +2846,7 @@ self を指定したエンコーディングに変換した文字列を作成して返します。引数
 
 例:
 
+  #coding:UTF-8
   s = "いろは"
   s.encode("EUC-JP")
   s.encode(Encoding::UTF_8)
@@ -2875,6 +2868,7 @@ self のエンコーディングが使われます。変換後の self を返します。
 
 例:
 
+  #coding:UTF-8
   s = "いろは"
   s.encode!("EUC-JP")
   s.encode!(Encoding::UTF_8)
