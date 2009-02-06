@@ -288,7 +288,7 @@ Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
 --- ProgName -> String
 ログファイル作成時に使うプログラム名。
 
-#@since 1.9.0
+#@since 1.9.1
 --- VERSION -> String
 このライブラリのバージョンを表す文字列。
 
@@ -372,7 +372,7 @@ include Logger::Severity
 
 @param logdev ログファイル名か IO オブジェクトを指定します。
 
-#@until 1.9.0
+#@until 1.9.1
 --- logdev -> ()
 
 このメソッドは使用されていません。

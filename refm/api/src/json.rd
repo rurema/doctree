@@ -1,3 +1,3 @@
-#@if (version >= "1.9.0")
+#@since 1.9.1
 JSON を扱うライブラリです。
 #@end

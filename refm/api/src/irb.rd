@@ -80,7 +80,7 @@ irb コマンドのオプションを指定したのと同じ効果が得られます。
   IRB.conf[:DEBUG_LEVEL] = 1
   IRB.conf[:ECHO] = nil
   IRB.conf[:EVAL_HISTORY] = nil
-#@since 1.9.0
+#@since 1.9.1
   IRB.conf[:HISTORY_FILE] = nil
 #@end
   IRB.conf[:IGNORE_EOF] = true
@@ -92,7 +92,7 @@ irb コマンドのオプションを指定したのと同じ効果が得られます。
   IRB.conf[:PROMPT] = {....}
   IRB.conf[:PROMPT_MODE] = :DEFALUT
   IRB.conf[:SINGLE_IRB] = false
-#@since 1.9.0
+#@since 1.9.1
   IRB.conf[:SAVE_HISTORY] = nil
 #@end
   IRB.conf[:USE_LOADER] = true
@@ -492,7 +492,7 @@ conf.eval_history の値を指定しておかなければいけません。
   => "hogefoo"
   irb(main):007:0> 
 
-#@since 1.9.0
+#@since 1.9.1
 #@# 1.8.2 に入っていない理由は ((<ruby-dev:25595>)) を参照してください
 === 履歴の保存
 
