@@ -28,7 +28,7 @@ include Enumerable
 #@else
                パターンの区切りには "\0" 以外に、空白類(スペース、タブ、改行)でパターンを複数指定できます。
 #@end
-#@since 1.9.0
+#@since 1.9.1
                配列を指定することで複数のパターンを指定できます。
 #@end
 
@@ -85,7 +85,7 @@ include Enumerable
 
   # 複数のパターンを指定する例
   p Dir.glob("f*\0b*")     # => ["foo", "bar"]
-#@since 1.9.0
+#@since 1.9.1
   p Dir.glob(["f*", "b*"]) # => ["foo", "bar"]
   p Dir["f*", "b*"]        # => ["foo", "bar"]
 #@end
@@ -258,7 +258,7 @@ path に対するディレクトリストリームをオープンして返します。
 @raise Errno::EXXX オープンに失敗した場合に発生します。
 
 
-#@since 1.9.0
+#@since 1.9.1
 --- exist?(file_name)    -> bool
 --- exists?(file_name)    -> bool
 
