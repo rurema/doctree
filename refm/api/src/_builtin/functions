@@ -162,14 +162,14 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 @param command コマンドとして実行する引数です。そのまま評価されるのではなく、
        ダブルクォート文字列と同様のバックスラッシュ記法の解釈と式展開が行われます。
 @return コマンドの出力を文字列で返します。
-#@since 1.9.0
+#@since 1.9.1
 @raise Errno::EXXX コマンドを実行できないときや失敗した場合に発生します。
 #@end
 
   puts `ruby -v` #=> ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
   puts $?.inspect #=> #<Process::Status: pid=3580,exited(0)>
 
-#@since 1.9.0
+#@since 1.9.1
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]],[[m:Kernel.#spawn]]
 #@else
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
@@ -180,7 +180,7 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-#@since 1.9.0
+#@since 1.9.1
 それ以外の終了ステータスの場合は false を返します。
 コマンドを実行できなかった場合は nil を返します。
 #@else
@@ -190,7 +190,7 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
-#@since 1.9.0
+#@since 1.9.1
 コマンドを実行することができなかった場合、多くのシェルはステータス
 127 を返します。(したがって [[m:$?]] の数値は、0x7f00)、シェルを介
 さない場合は Ruby の子プロセスがステータス 127 で終了します。
@@ -209,7 +209,7 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 
 @param command command コマンドを文字列で指定します。
 
-#@since 1.9.0
+#@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@else
 @see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
@@ -220,7 +220,7 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
 子プロセスが終了ステータス 0 で終了すると成功とみなし true を返します。
-#@since 1.9.0
+#@since 1.9.1
 それ以外の終了ステータスの場合
 (コマンドを実行できなかった場合も含む)は false を返します。
 #@else
@@ -230,7 +230,7 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 
 終了ステータスは変数 [[m:$?]] で参照できます。
 
-#@since 1.9.0
+#@since 1.9.1
 コマンドを実行することができなかった場合、多くのシェルはステータス
 127 を返します。(したがって $? の数値は、0x7f00)、シェルを介
 さない場合は Ruby の子プロセスがステータス 127 で終了します。
@@ -253,13 +253,13 @@ $? を参照することで判別可能です。
 @param args program に渡す引数を 0 個以上指定する
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 #@#例...
-#@since 1.9.0
+#@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@else
 @see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- spawn(command) -> Integer
 
 引数を外部コマンドとして実行しますが、生成した
@@ -383,7 +383,7 @@ $? を参照することで判別可能です。
   xxxx    32754  0.0  0.0   2580   468 pts/3    S+   22:01   0:00 mysleep 600
   xxxx    32761  0.0  0.0   2824   792 pts/6    S+   22:01   0:00 grep sleep
 
-#@since 1.9.0
+#@since 1.9.1
 @see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]],[[man:exec(3)]]
 #@else
 @see [[m:Kernel.#system]],[[m:Kernel.#`]],[[m:Kernel.#fork]],[[m:IO.popen]],[[m:IO.pipe]],[[m:Kernel.#open]],[[man:exec(3)]]
@@ -651,7 +651,7 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 
 @param feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
-#@since 1.9.0
+#@since 1.9.1
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]],[[m:Kernel.#require_relative]]
 #@else
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]]
@@ -1074,7 +1074,7 @@ rs に nil を指定すると行区切りなしとみなします。
 
 @see [[m:$/]],[[c:ARGF]],[[m:Kernel.#gets]]
 
-#@if ("1.8.0" <= version and version < "1.9.0")
+#@if ("1.8.0" <= version and version < "1.9.1")
 --- getc -> Fixnum | nil
 
 このメソッドは廃止予定です。代わりに STDIN.getc を使ってください。
@@ -1110,7 +1110,7 @@ ch が文字列なら、その先頭 1byte を出力します。
 
 @see [[m:IO#putc]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- p(*arg) -> object | Array
 #@else
 --- p(*arg) -> nil
@@ -1132,7 +1132,7 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 #@#inspectが定義されているオブジェクトである必要があります（実質任意のオブジェクト）。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
-#@since 1.9.0
+#@since 1.9.1
 @return 指定された引数 arg を返します。複数の引数が指定された場合はそれらを要素とする配列を返します。
 #@else
 @return nil を返します。
@@ -1157,7 +1157,7 @@ p に引数を与えずに呼び出した場合は特に何もしません。
 
 文字列以外のオブジェクトが引数として与えられた場合には、
 to_s メソッドにより文字列に変換してから出力します。
-#@if (version < "1.9.0")
+#@if (version < "1.9.1")
 ただし、nil に対しては文字列 "nil" を出力します
 #@end
 
@@ -1171,7 +1171,7 @@ to_s メソッドにより文字列に変換してから出力します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-#@since 1.9.0
+#@since 1.9.1
   print "Hello, world!"
   print "Regexp is",/ant/
   print nil
@@ -1211,7 +1211,7 @@ to_s メソッドにより文字列に変換してから出力します。
 配列や文字列以外のオブジェクトが引数として与えられた場合には、
 当該オブジェクトを最初に to_ary により配列へ、
 次に to_s メソッドにより文字列へ変換を試みます。
-#@if (version < "1.9.0")
+#@if (version < "1.9.1")
 ただし、nil に対しては文字列 "nil" を出力します
 #@end
 末尾が改行で終っている引数や配列の要素に対しては puts 自身
@@ -1221,7 +1221,7 @@ to_s メソッドにより文字列に変換してから出力します。
 @raise IOError 標準出力が書き込み用にオープンされていなければ発生します。
 @raise Errno::EXXX 出力に失敗した場合に発生します。
 
-#@since 1.9.0
+#@since 1.9.1
     puts "foo", "bar\n", "baz"
     puts ""    # 改行のみ出力
     puts       # 改行のみ出力
@@ -1282,7 +1282,7 @@ to_s メソッドにより文字列に変換してから出力します。
 
 arg.to_ary と arg.to_a をこの順に呼び出して、返ってきた配列を変換結果とします。
 
-#@if (version > "1.9.0")
+#@if (version > "1.9.1")
 arg に to_ary, to_a のいずれのメソッドも定義されていない場合は
 一要素の配列 [arg] を返します。
 #@else
@@ -1518,20 +1518,20 @@ iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
   check{} #=> Block is given.
   check #=> Block isn't given.
 
-#@until 1.9.0
+#@until 1.9.1
 --- callcc {|cont| .... } -> object
 
 継続を作成します。 [[c:Continuation]] を参照してください。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- catch {|tag| .... } -> object
 #@end
 --- catch(tag) {|tag| .... } -> object
 
 [[m:Kernel.#throw]]との組み合わせで大域脱出を行います。 catch はブロックを実行します。
 
-#@since 1.9.0
+#@since 1.9.1
 ブロックの実行中に tag と同一のオブジェクトを引数とする [[m:Kernel.#throw]] が行われた
 #@else
 ブロックの実行中に tag と同じ名前の [[m:Kernel.#throw]] が行われた
@@ -1540,7 +1540,7 @@ iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
 
 主にネストしたループから一気に脱出するのに使用します。
 
-#@since 1.9.0
+#@since 1.9.1
 引数を省略した場合、タグとなるオブジェクトが内部で生成せれ、ブロック引数 tag に
 渡されます。
 
@@ -1550,7 +1550,7 @@ iterator? は （ブロックが必ずイテレートするとはいえないので）推奨されていないの
 #@end
 @return ブロックの返り値か、対応するthrowの第二引数を返り値として返します。
 
-#@since 1.9.0
+#@since 1.9.1
   result = catch do |tag|
     for i in 1..2
       for j in 1..2
@@ -1590,11 +1590,11 @@ throw は探索時に呼び出しスタックをさかのぼるので、
 もし同じ tag で待っている catch が存在しない場合は [[c:NameError]] で
 スレッドが終了します。
 
-#@since 1.9.0
+#@since 1.9.1
 同じタグであるとは [[m:Object#object_id]] が同じであるという意味です。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 @param tag catch の引数に対応する任意のオブジェクトです。
 #@else
 @param tag シンボルまたは文字列です。
@@ -1715,7 +1715,7 @@ seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 
 
 
-#@until 1.9.0
+#@until 1.9.1
 --- sub(pattern, replace)          -> String
 --- sub!(pattern, replace)         -> String
 --- sub(pattern) {|matched| ... }  -> String
