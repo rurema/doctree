@@ -143,7 +143,7 @@ iconv 関数のラッパークラスです。
 [[m:Iconv.new]], [[m:Iconv.open]] および [[m:Iconv#iconv]] の例外
 を起こします。
 
-#@since 1.9.0
+#@since 1.9.1
 --- list                       -> Array
 --- list {|*aliases| ... }     -> Array
 #@todo
@@ -162,7 +162,7 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
 
-#@since 1.9.0
+#@since 1.9.1
 --- ctlmethods -> Array
 #@todo
 
@@ -212,7 +212,7 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 @raise Iconv::OutOfRange
 
-#@since 1.9.0
+#@since 1.9.1
 
 --- conv(str) -> String
 #@todo

@@ -321,7 +321,7 @@ RuntimeError 例外が発生します。すでにオプションの処理が終了
 
 = class GetoptLong::Error < StandardError
 
-#@if (version < '1.9.0')
+#@until 1.9.1
 = class GetoptLong::AmbigousOption < GetoptLong::Error
 #@else
 = class GetoptLong::AmbiguousOption < GetoptLong::Error

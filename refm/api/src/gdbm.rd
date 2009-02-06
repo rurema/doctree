@@ -202,7 +202,7 @@ value を値とする要素がデータベース中に存在する時、真を返します。
 
 @see [[m:Hash#index]]
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- indexes(*keys) -> [String]
 --- indices(*keys) -> [String]
 
