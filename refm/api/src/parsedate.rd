@@ -1,8 +1,6 @@
+#@until 1.9.0
 日付を解析します。
 
-#@since 1.9.0
-このライブラリは削除されました。
-#@else
 = module ParseDate
 
 == Module Functions

@@ -151,7 +151,7 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 
 == Singleton Methods
 
-#@since 1.9.0
+#@since 1.9.1
 --- input=(input) -> input
 
 readline メソッドで使用する入力用の [[c:File]] オブジェクト input を指定します。
