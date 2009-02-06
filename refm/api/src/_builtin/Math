@@ -208,7 +208,7 @@ x の自然対数を返します。
 @raise Errno::EDOM 引数が負の値である場合に発生します
 @raise Errno::ERANGE 引数が 0 の場合に発生します
 
-#@since 1.9.0
+#@since 1.9.1
 --- log2(x) -> Float
 
 2 を底とする x の対数 (binary logarithm) を返す。

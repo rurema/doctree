@@ -1,4 +1,4 @@
-#@since 1.9.0
+#@since 1.9.1
 = class KeyError < IndexError
 
 [[m:Hash#fetch]] などで key に対応する value がない場合に発生します。

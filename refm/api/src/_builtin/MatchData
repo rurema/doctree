@@ -139,7 +139,7 @@ n 番目の部分文字列のオフセットの配列 [start, end] を返
   p $~.pre_match  # => "foo"
 
 #@since 1.8.0
-#@until 1.9.0
+#@until 1.9.1
 #@until 1.8.1
 --- select(*index)    -> [String]
 #@end
@@ -206,7 +206,7 @@ self.to_a.select { ... } と同じです。
 @see [[m:Array#values_at]], [[m:Array#[] ]]
 
 #@end
-#@since 1.9.0
+#@since 1.9.1
 --- names -> Array
 #@todo
 Returns a list of names of captures as an array of strings.
