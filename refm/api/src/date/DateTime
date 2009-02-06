@@ -37,7 +37,7 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-#@since 1.9.0
+#@since 1.9.1
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
 #@else
 --- commercial(cwyear = 1582, cweek = 41, cwday = 5, hour = 0, min = 0, sec = 0, offset = 0, start = Date::ITALY) -> DateTime
@@ -56,7 +56,7 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- httpdate(str = 'Mon, 01 Jan -4712 00:00:00 GMT', start = Date::ITALY) -> DateTime
 [[RFC:2616]] で定められた書式の日付を解析し、
@@ -68,7 +68,7 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- iso8601(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 いくつかの代表的な [[ISO:8601]] 書式の日付を解析し、
@@ -95,7 +95,7 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- jisx0301(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 いくつかの代表的な [[JIS:X 0301]] 書式の日付を解析し、
@@ -126,7 +126,7 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日時
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- rfc2822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
 --- rfc822(str = 'Mon, 1 Jan -4712 00:00:00 +0000', start = Date::ITALY) -> DateTime
@@ -139,7 +139,7 @@
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- rfc3339(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 [[RFC:3339]] 書式の日付を解析し、
@@ -158,7 +158,7 @@
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- xmlschema(str = '-4712-01-01T00:00:00+00:00', start = Date::ITALY) -> DateTime
 XML Schema による書式の日付を解析し、
@@ -175,7 +175,7 @@ XML Schema による書式の日付を解析し、
 --- hour -> Integer
 時間を返します (0-23)。
 
-#@since 1.9.0
+#@since 1.9.1
 --- iso8601(n = 0) -> String
 --- rfc3339(n = 0) -> String
 #@# exp
@@ -186,7 +186,7 @@ XML Schema による書式の日付を解析し、
 
 @param n 小数点以下の桁数
 
-#@since 1.9.0
+#@since 1.9.1
 --- jisx0301(n = 0) -> String
 [[JIS:X 0301]] 書式の文字列を返します。
 省略可能な引数により、印字する秒の小数点以下の桁数を与えることができます。
