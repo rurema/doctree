@@ -182,7 +182,7 @@ n次の零行列を生成します。
 
 == Instance Methods
 --- [](i, j) -> ()
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 --- element(i, j) -> ()
 --- component(i, j) -> ()
 #@end
@@ -294,7 +294,7 @@ self の n乗をした行列を返します。
 
 @param n べき数の指定
 
-#@if (version < "1.9.0")
+#@if (version < "1.9.1")
 --- determinant -> Fixnum | Float
 --- det -> Fixnum | Float
 #@else
@@ -319,7 +319,7 @@ self が正方行列ではない場合は0を返します。
  require 'mathn'
  p Matrix[[2, 1], [-1, 2]].det #=> 5
 
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 --- determinant_e -> Rational | Float
 --- det_e -> Rational | Float
 
@@ -337,13 +337,13 @@ self が正方行列ではない場合は0を返します。
 
 selfの行列の階数(rank)を返します。
 行列の成分が[[c:Float]]の場合は正しい値を返さない場合があります。
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 その場合は行列成分に[[c:Rational]]を用いるか、[[m:Matrix#rank_e]]を使用してください。
 #@else
 その場合は行列成分に[[c:Rational]]を使用してください。
 #@end
 
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 --- rank_e -> Fixnum
 
 階数 (rank) を返します。
@@ -536,7 +536,7 @@ selfのj列目を列ベクトルとして返します。
 #@#
 #@#各要素を有理数 [[c:Rational]] に変換する。
 
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 
 --- elements_to_f -> Array
 各要素を浮動小数点数 [[c:Float]] に変換した行列を返します。

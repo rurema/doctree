@@ -110,7 +110,7 @@ Vecor[a1, a2, a3, ... ]としたとき、 引数a1, a2, a3, ... を要素とするベクトルを生
 == Instance Methods
 
 --- [](i) -> object | nil
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 --- element(i) -> object | nil
 --- component(i) -> object | nil
 #@end
@@ -348,7 +348,7 @@ i 番目の要素を返します。インデックスは 0 から開始します。
   s = v.to_s
   p s #=> "Vector[2, 3, 5, 7, 9]"
 
-#@if (version >= "1.9.0")
+#@if (version >= "1.9.1")
 --- elements_to_f -> Vector
 ベクトルの各成分を[[c:Float]]に変換したベクトルを返します。
 
