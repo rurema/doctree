@@ -55,7 +55,7 @@ obj の間で呼び出せるメソッドに違いがあった場合は、
 #@end
 
 #@since 1.8.2
-#@if (version < '1.9.0')
+#@until 1.9.1
 
 --- clone -> object
 --- dup(obj) -> object

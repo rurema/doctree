@@ -1,4 +1,4 @@
-#@since 1.9.0
+#@since 1.9.1
 = module Delegator::MethodDelegation
 
 委譲先のオブジェクト管理のためのメソッドを集めたモジュールです。

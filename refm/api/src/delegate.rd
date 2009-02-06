@@ -48,7 +48,7 @@ p a         # => [25]
 
 = class Delegator < Object
 
-#@since 1.9.0
+#@since 1.9.1
 
 include Delegator::MethodDelegation
 
@@ -80,7 +80,7 @@ obj のもつインスタンスメソッドのうち、
 == Instance Methods
 
 #@since 1.8.0
-#@if (version < "1.9.0")
+#@until 1.9.1
 
 --- __getobj__ -> object
 
@@ -95,7 +95,7 @@ obj のもつインスタンスメソッドのうち、
 #@end
 
 #@since 1.8.1
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- marshal_dump -> object
 
 シリアライゼーションをサポートするために[[m:Delegator#__getobj__]] が返すオブジェクトを返します。
@@ -110,7 +110,7 @@ obj のもつインスタンスメソッドのうち、
 #@end
 
 #@since 1.8.3
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- method_missing(m, *args) -> object
 
 渡されたメソッド名と引数を使って、[[m:Delegator#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
@@ -136,7 +136,7 @@ obj のもつインスタンスメソッドのうち、
 
 #@include(delegate/SimpleDelegator)
 
-#@since 1.9.0
+#@since 1.9.1
 #@include(delegate/Delegator__MethodDelegation)
 #@end
 
