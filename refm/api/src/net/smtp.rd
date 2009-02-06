@@ -145,7 +145,7 @@ Example:
 
 The default SMTP port number, 25.
 
-#@since 1.9.0
+#@since 1.9.1
 --- default_ssl_context
 #@todo
 
@@ -193,7 +193,7 @@ Enable SMTP/SSL.
 #@todo
 
 --- set_debug_output(f)
-#@since 1.9.0
+#@since 1.9.1
 --- debug_output=(f)
 #@todo
 #@end
@@ -291,7 +291,7 @@ to_addrs は宛先のメールボックスです。
     }
   }
 
-#@since 1.9.0
+#@since 1.9.1
 --- use_ssl?
 #@todo
 

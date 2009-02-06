@@ -230,7 +230,7 @@ POP セッションを開き認証だけを行って接続を切ります。
                       'YourAccount', 'YourPassword')
 
 --- default_port
-#@since 1.9.0
+#@since 1.9.1
 --- default_pop3_port
 #@todo
 
@@ -268,7 +268,7 @@ signature will be changed to enable_ssl(ctx).
 
 == Instance Methods
 
-#@since 1.9.0
+#@since 1.9.1
 --- use_ssl?
 #@todo
 

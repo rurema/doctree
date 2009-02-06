@@ -399,7 +399,7 @@ Removes the response handler.
 
 Returns all response handlers.
 
-#@since 1.9.0
+#@since 1.9.1
 --- starttls(cxt = nil)
 #@todo
 
@@ -1192,7 +1192,7 @@ See [[c:Net::IMAP#authenticate]].
 
 
 
-#@since 1.9.0
+#@since 1.9.1
 = class Net::IMAP::PlainAuthenticator
 
 Authenticator for the "PLAIN" authentication type.

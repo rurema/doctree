@@ -298,7 +298,7 @@ TCP コネクションを張り、HTTP セッションを開始します。
 HTTP セッションが開始されていたら真。
 
 --- set_debug_output(io)
-#@since 1.9.0
+#@since 1.9.1
 --- debug_outupt=(io)
 #@todo
 #@end
@@ -787,7 +787,7 @@ HTTP リクエストオブジェクトを生成します。
 サーバに送るリクエストのエンティティボディを文字列で設定します。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- body_stream
 --- body_stream=(f)
 #@todo
