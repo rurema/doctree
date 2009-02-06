@@ -30,7 +30,7 @@
   pr = Proc.new { break }
   (1..5).each(&pr)         
 
-#@until 1.9.0
+#@until 1.9.1
 #@since 1.8.0
   # each 再実行
 #@else
@@ -49,7 +49,7 @@
 生成された手続きオブジェクトはいくつかの場面で挙動が異なります。 lambda の生成する手続きオブジェクトのほうが
 よりメソッドに近い働きをするように設計されています。
 
-#@since 1.9.0
+#@since 1.9.1
 [[m:Kernel.#proc]] は Proc.new と同じになります。
 #@else
 [[m:Kernel.#proc]] は lambda と同じになります。
@@ -118,7 +118,7 @@ Proc.new では手続きオブジェクトを囲むメソッドを抜けます。
 
                  return                          next                        break
   Proc.new   メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
-#@since 1.9.0
+#@since 1.9.1
   proc       メソッドを抜ける            手続きオブジェクトを抜ける   例外が発生する
 #@else
   proc       手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
@@ -132,7 +132,7 @@ Proc.new では手続きオブジェクトを囲むメソッドを抜けます。
 ===[a:orphan] orphan な手続きオブジェクトの挙動
 
 Proc を生成したメソッドから脱出した後、手続きオブジェクトからの
-#@since 1.9.0
+#@since 1.9.1
 return, break
 #@else
 return, retry, break 
@@ -150,7 +150,7 @@ return, retry, break
   foo.call
   # => in `call': return from proc-closure (LocalJumpError)
 
-#@until 1.9.0
+#@until 1.9.1
   def foo
     Proc.new { retry }
   end
@@ -164,7 +164,7 @@ return, retry, break
 
                  return                          next                        break
   Proc.new   例外が発生する              手続きオブジェクトを抜ける   例外が発生する
-#@since 1.9.0
+#@since 1.9.1
   proc       例外が発生する              手続きオブジェクトを抜ける   例外が発生する
 #@else
   proc       手続きオブジェクトを抜ける  手続きオブジェクトを抜ける   手続きオブジェクトを抜ける
