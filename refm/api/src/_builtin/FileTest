@@ -225,7 +225,7 @@ ruby 1.8.3 以前では[[m:Kernel.#test]](?-, file1, file2)を使ってください。
 
 @see [[m:FileTest.#size]], [[m:FileTest.#size?]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- world_readable?(path)    -> Integer | nil
 
 path が全てのユーザから読めるならばそのファイルのパーミッションを表す

@@ -445,7 +445,7 @@ stickyビットが立っている時に真を返します。
   #=> /usr/bin/emacs-21.4
   #...
 
-#@since 1.9.0
+#@since 1.9.1
 #@# bc-rdoc: detected missing name: world_readable?
 --- world_readable? -> Fixnum | nil
 

@@ -56,7 +56,9 @@
 
 --- message    -> String
 --- to_s       -> String
+#@until 1.9.1
 --- to_str    -> String
+#@end
 
 エラーメッセージをあらわす文字列を返します。
 
@@ -73,7 +75,7 @@
 
 @param errinfo nil、[[c:String]] あるいは [[c:String]] の配列のいずれかを指定します。
 
-#@since 1.9.0
+#@since 1.9.1
 --- ==(other)    -> bool
 
 自身と指定された other のクラスが同じであり、message と backtrace が == メソッドで比較して
