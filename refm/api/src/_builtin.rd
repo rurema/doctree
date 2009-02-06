@@ -5,25 +5,23 @@ require を書かなくても使うことができます。
 #@include(_builtin/ARGF)
 #@include(_builtin/ArgumentError)
 #@include(_builtin/Array)
-#@since 1.9.0
+#@since 1.9.1
 #@include(_builtin/BasicObject)
 #@end
 #@include(_builtin/Bignum)
 #@include(_builtin/Binding)
 #@include(_builtin/Class)
 #@include(_builtin/Comparable)
-#@until 1.9.0
+#@until 1.9.1
 #@include(_builtin/Continuation)
 #@end
 #@include(_builtin/Data)
 #@include(_builtin/Dir)
 #@include(_builtin/ENV)
 #@include(_builtin/EOFError)
-#@since 1.9.0
-#@include(_builtin/Encoding)
 #@since 1.9.1
+#@include(_builtin/Encoding)
 #@include(_builtin/Encoding__Converter)
-#@end
 #@end
 #@include(_builtin/Enumerable)
 #@since 1.8.8
@@ -36,7 +34,7 @@ require を書かなくても使うことができます。
 #@end
 #@include(_builtin/Exception)
 #@include(_builtin/FalseClass)
-#@since 1.9.0
+#@since 1.9.1
 #@include(_builtin/Fiber)
 #@end
 #@include(_builtin/File)
@@ -47,7 +45,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Float)
 #@include(_builtin/FloatDomainError)
 #@include(_builtin/GC)
-#@since 1.9.0
+#@since 1.9.1
 #@include(_builtin/GC__Profiler)
 #@end
 #@include(_builtin/Hash)
@@ -65,7 +63,7 @@ require を書かなくても使うことができます。
 #@include(_builtin/Math)
 #@include(_builtin/Method)
 #@include(_builtin/Module)
-#@since 1.9.0
+#@since 1.9.1
 #@include(thread/Mutex)
 #@end
 #@include(_builtin/NameError)

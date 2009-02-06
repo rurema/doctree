@@ -1,13 +1,13 @@
 _builtin
 English
-#@until 1.9.0
+#@until 1.9.1
 Env
 #@end
 Win32API
 #@since 1.8.0
 abbrev
 #@end
-#@until 1.9.0
+#@until 1.9.1
 base64
 #@end
 #@since 1.8.0
@@ -20,14 +20,14 @@ bigdecimal/newton
 #@end
 bigdecimal/util
 #@end
-#@until 1.9.0
+#@until 1.9.1
 cgi-lib
 #@end
 cgi
 cgi/session
 cgi/session/pstore
 complex
-#@since 1.9.0
+#@since 1.9.1
 continuation
 #@end
 #@since 1.8.0
@@ -35,7 +35,7 @@ csv
 #@end
 curses
 date
-#@until 1.9.0
+#@until 1.9.1
 date2
 #@end
 dbm
@@ -70,13 +70,13 @@ e2mmap
 enumerator
 #@end
 erb
-#@until 1.9.0
+#@until 1.9.1
 eregex
 #@end
 etc
 expect
 fcntl
-#@since 1.9.0
+#@since 1.9.1
 fiber
 #@end
 #@since 1.8.0
@@ -85,29 +85,29 @@ fileutils
 #@if (version <= "1.6.8")
 final
 #@end
-#@until 1.9.0
+#@until 1.9.1
 finalize
 #@end
 find
 forwardable
-#@until 1.9.0
+#@until 1.9.1
 ftools
 #@end
 gdbm
 #@since 1.8.0
-#@until 1.9.0
+#@until 1.9.1
 generator
 #@end
 #@end
 getoptlong
-#@until 1.9.0
+#@until 1.9.1
 getopts
 #@end
 #@since 1.8.0
 gserver
 iconv
 #@end
-#@until 1.9.0
+#@until 1.9.1
 importenv
 #@end
 #@since 1.8.0
@@ -119,17 +119,17 @@ irb
 irb/completion
 irb/frame
 irb/xmp
-#@until 1.9.0
+#@until 1.9.1
 jcode
 #@end
-#@since 1.9.0
+#@since 1.9.1
 json
 #@end
 kconv
 #@since 1.8.1
 logger
 #@end
-#@until 1.9.0
+#@until 1.9.1
 mailread
 #@end
 mathn
@@ -139,14 +139,14 @@ matrix
 #@# minitest/spec
 minitest/unit
 #@end
-#@until 1.9.0
+#@until 1.9.1
 md5
 #@end
 mkmf
 monitor
 mutex_m
 net/ftp
-#@until 1.9.0
+#@until 1.9.1
 net/ftptls
 #@end
 net/http
@@ -155,7 +155,7 @@ net/imap
 net/pop
 net/smtp
 net/telnet
-#@until 1.9.0
+#@until 1.9.1
 net/telnets
 #@end
 nkf
@@ -169,14 +169,14 @@ optparse/shellwords
 optparse/time
 optparse/uri
 ostruct
-#@until 1.9.0
+#@until 1.9.1
 parsearg
 parsedate
 #@end
 #@since 1.8.0
 pathname
 #@end
-#@until 1.9.0
+#@until 1.9.1
 ping
 #@end
 #@since 1.8.0
@@ -192,7 +192,7 @@ pty
 #@since 1.8.0
 racc/parser
 #@end
-#@since 1.9.0
+#@since 1.9.1
 rake
 rake/classic_namespace
 rake/clean
@@ -207,7 +207,7 @@ rake/loaders/makefile
 #@end
 rational
 rbconfig
-#@until 1.9.0
+#@until 1.9.1
 readbytes
 #@end
 readline
@@ -220,7 +220,7 @@ rexml
 rinda/rinda
 rinda/tuplespace
 #@end
-#@since 1.9.0
+#@since 1.9.1
 ripper
 ripper/filter
 ripper/lexer
@@ -229,7 +229,7 @@ ripper/sexp
 #@since 1.8.3
 rss
 #@end
-#@since 1.9.0
+#@since 1.9.1
 rubygems
 rubygems/builder
 rubygems/command
@@ -319,7 +319,7 @@ rubygems/validator
 rubygems/version
 rubygems/version_option
 #@end
-#@if("1.8.0" <= version and version < "1.9.0")
+#@if("1.8.0" <= version and version < "1.9.1")
 rubyunit
 runit/assert
 runit/cui/testrunner
@@ -338,14 +338,14 @@ securerandom
 #@end
 #@since 1.8.0
 set
-#@until 1.9.0
+#@until 1.9.1
 sha1
 #@end
 #@end
 shell
 shellwords
 singleton
-#@if("1.8.1" <= version and version < "1.9.0")
+#@if("1.8.1" <= version and version < "1.9.1")
 soap
 soap/attachment
 soap/baseData
@@ -574,7 +574,7 @@ webrick/ssl
 webrick/utils
 win32/registry
 win32ole
-#@if("1.8.1" <= version and version < "1.9.0")
+#@if("1.8.1" <= version and version < "1.9.1")
 wsdl
 wsdl/binding
 wsdl/data
@@ -667,10 +667,10 @@ xmlrpc/client
 xmlrpc/config
 xmlrpc/datetime
 xmlrpc/server
-#@if("1.8.2" <= version and version < "1.9.0")
+#@if("1.8.2" <= version and version < "1.9.1")
 xsd/codegen
 #@end
-#@if("1.8.1" <= version and version < "1.9.0")
+#@if("1.8.1" <= version and version < "1.9.1")
 xsd
 xsd/datatypes
 xsd/datatypes1999
