@@ -1,5 +1,5 @@
 = class Symbol < Object
-#@since 1.9.0
+#@since 1.9.1
 include Comparable
 #@end
 #@#インターンされた文字列
@@ -64,7 +64,7 @@ Rubyの内部実装では、メソッド名や変数名、定数名、クラス名など
 
 大抵のメソッドはシンボルの代わりに文字列を引数として渡すこともできるようになっています。
 
-#@since 1.9.0
+#@since 1.9.1
 Symbolクラスのメソッドには、Stringクラスのメソッドと同名で似た働きをするものもあります。
 #@end
 
@@ -101,7 +101,7 @@ Symbolクラスのメソッドには、Stringクラスのメソッドと同名で似た働きをするものもあ
 
 == Instance Methods
 
-#@since 1.9.0
+#@since 1.9.1
 --- intern -> self
 #@end
 #@since 1.8.0
@@ -128,7 +128,7 @@ self を返します。
   
 @see [[m:String#intern]]
 
-#@until 1.9.0
+#@until 1.9.1
 --- to_i -> Integer
 --- to_int -> Integer
 
@@ -173,7 +173,7 @@ self に対応する Proc オブジェクトを返します。
 
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- <=>
 #@todo
 
