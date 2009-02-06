@@ -104,7 +104,7 @@ exception_name という名前の例外クラスを定義します。
 
 @raise Exception2MessageMapper::ErrNotRegisteredException 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
 
-#@until 1.9.0
+#@until 1.9.1
 --- fail(err = nil, *rest) -> ()
 
 このメソッドは後方互換性のために用意されています。

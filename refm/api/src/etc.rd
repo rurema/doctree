@@ -166,7 +166,7 @@ name という名前のグループエントリを返します。
 
 
 = class Struct::Group < Struct
-#@since 1.9.0
+#@since 1.9.1
 alias Etc::Group
 #@end
 [[m:Etc.#getgrent]] で得られる構造体。
@@ -213,7 +213,7 @@ alias Etc::Group
 このグループのパスワードを設定します。
 
 = class Struct::Passwd < Struct
-#@since 1.9.0
+#@since 1.9.1
 alias Etc::Passwd
 #@end
 [[m:Etc.#getpwent]] で得られる構造体。
