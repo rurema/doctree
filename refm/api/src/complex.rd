@@ -158,7 +158,7 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判
   p z1 / z2       #=> Complex(2, 0)
   p 1.0 * z1 / z2 #=> Complex(2.2, 0.4)
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- %(c) -> Complex
 除算の剰余を計算します。
 
@@ -176,7 +176,7 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判
 @param c 除算する数
 @return 演算結果を[[c:Complex]]クラスのオブジェクトとして返します。
 
-[注意] このメソッドは Ruby 1.9.0 で廃止されました。
+[注意] このメソッドは Ruby 1.9 で廃止されました。
 
 #@else
 [注意] このメソッドは廃止されました。
@@ -299,7 +299,7 @@ other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判
 #@#--- image=
 虚部を返します。
 
-#@if (version < "1.9.0")
+#@since 1.9.1
 --- <=>(c) -> Fixnum
 cとselfの絶対値absを比較した結果を返します。
 
@@ -317,7 +317,7 @@ self と c の[[m:Complex#abs]]メソッドの結果を比較し、
   z2 = Complex.new(2, -2)
   p z1 <=> z2   #=> -1
 
-[注意] このメソッドは Ruby 1.9.0 で廃止されました。
+[注意] このメソッドは Ruby 1.9 で廃止されました。
 
 #@else
 このメソッドは廃止されました。
@@ -353,7 +353,7 @@ c と等しければ、true を返します。
 [注意] このメソッドは廃止されました。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- scalar? -> bool
 
 [注意] このメソッドは常に false を返します。
