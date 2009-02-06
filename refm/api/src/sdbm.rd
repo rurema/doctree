@@ -146,7 +146,7 @@ value を値とする組がデータベース中に存在する時、真を返します。
 
 @param value 検索したい値。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- indexes(*keys) -> [[String]]
 --- indices(*keys) -> [[String]]
 
