@@ -20,7 +20,7 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- daemon(nochdir = nil, noclose = nil)    -> 0
 
 プロセスから制御端末を切り離し、
@@ -134,7 +134,7 @@ MSDOS 環境の場合、command はサブシェル経由で実行されます。
 
 @see [[man:fork(2)]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- spawn(cmd, *arg)    -> Integer
 
 関数 [[m:Kernel.#spawn]] と同じです。

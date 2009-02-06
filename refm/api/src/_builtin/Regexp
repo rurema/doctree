@@ -212,7 +212,7 @@ String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
 
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- try_convert(obj) -> re | nil
 #@todo
 
@@ -319,13 +319,13 @@ true を返します。
   reg = Regexp.new("hogehoge")
   p reg.casefold? #=> false
 
-#@since 1.9.0
+#@since 1.9.1
 --- fixed_encoding? -> bool
 
 正規表現が任意の ASCII 互換エンコーディングとマッチ可能な時に false を返します。
 #@end
 
-#@until 1.9.0
+#@until 1.9.1
 --- kcode -> String | nil
 
 その正規表現が対応するようにコンパイルされている文字コードを
@@ -340,20 +340,20 @@ true を返します。
   p reg.kcode #=> "nil"
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- match(str, pos = 0) -> MatchData | nil
 #@else
 --- match(str) -> MatchData | nil
 #@end
 
 指定された文字列 str に対して
-#@since 1.9.0
+#@since 1.9.1
 位置 pos から
 #@end
 自身が表す正規表現によるマッチングを行います。マッチした場合には結果を MatchData オブジェクトで返します。
 マッチしなかった場合 nil を返します。
 
-#@since 1.9.0
+#@since 1.9.1
 省略可能な第二引数 pos を指定すると、マッチの開始位置を pos から行
 うよう制御できます(pos のデフォルト値は 0)。
 
@@ -370,7 +370,7 @@ pos を指定しても [[m:MatchData#offset]] 等の結果
 
 @param str 文字列を指定します。str との正規表現マッチを行います。
 
-#@since 1.9.0
+#@since 1.9.1
 @param pos 整数を指定します。マッチの開始位置を pos から行うよう制御できます(pos のデフォルト値は 0)。
 #@end
 
@@ -493,7 +493,7 @@ otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
 
 @see [[m:Regexp#to_s]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- encoding   -> Encoding
 #@todo
 
