@@ -15,7 +15,7 @@
 --- parse(date, now = Time.now) -> Time
 --- parse(date, now = Time.now) {|year| year } -> Time
 
-#@since 1.9.0
+#@since 1.9.1
 date を [[m:Date.#_parse]] によって
 パースして [[c:Time]]オブジェクトに変換します。
 #@else
@@ -41,7 +41,7 @@ date を [[m:ParseDate.#parsedate]] によって
   Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
   Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
 
-#@since 1.9.0
+#@since 1.9.1
 [[m:Date._parse]]がdateから情報を取り出せないとき、
 #@else
 [[lib:parsedate]]がdateから情報を取り出せないとき、

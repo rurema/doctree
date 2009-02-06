@@ -645,7 +645,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 
 @see [[m:IO#readlines]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- readpartial(maxlen[, outbuf]) -> String
 IO クラスの同名メソッド[[m:IO#readpartial]]と同じです。
 

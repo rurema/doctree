@@ -15,7 +15,7 @@ object on host.
 
 == Class Methods
 
-#@since 1.9.0
+#@since 1.9.1
 
 --- create_guid -> String
 #@todo
@@ -299,7 +299,7 @@ argument, you can use this method.
    sheet = book.worksheets(1)
    sheet.setproperty('Cells', 1, 2, 10) # => The B1 cell value is 10.
 
-#@since 1.9.0
+#@since 1.9.1
 
 --- ole_query_interface(iid) -> WIN32OLE object
 #@todo

@@ -180,7 +180,7 @@ Returns true if the OLE class is public.
   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
   puts tobj.visible  # => true
 
-#@since 1.9.0
+#@since 1.9.1
 --- implemented_ole_types
 #@todo
 

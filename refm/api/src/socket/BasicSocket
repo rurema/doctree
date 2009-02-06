@@ -47,7 +47,7 @@
 
 == Instance Methods
 
-#@if (version >= "1.9.0")
+#@since 1.9.1
 --- do_not_reverse_lookup
 --- do_not_reverse_lookup=(bool)
 #@todo

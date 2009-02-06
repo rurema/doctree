@@ -473,7 +473,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 --- sysread                  -> String
 --- sysread(len)             -> String
 --- sysread(len, outbuf)     -> String
-#@since 1.9.0
+#@since 1.9.1
 --- readpartial               -> String
 --- readpartial(len)          -> String
 --- readpartial(len, outbuf)  -> String

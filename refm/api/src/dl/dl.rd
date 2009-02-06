@@ -1,4 +1,4 @@
-#@if("1.8.0" <= version and version < "1.9.0")
+#@if("1.8.0" <= version and version < "1.9.1")
 
 Ruby/DL は、UNIX の [[man:dlopen(3)]] や
 Windows の LoadLibrary() などの

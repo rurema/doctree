@@ -303,7 +303,7 @@ system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
     } 
   }
 
-#@since 1.9.0
+#@since 1.9.1
 --- new(pwd = Dir.pwd, umask = nil) -> Shell
 
 プロセスのカレントディレクトリをpwd で指定されたディレクトリとするShellオ
@@ -328,7 +328,7 @@ system_path上にある全ての実行可能ファイルをShellに定義する. メソッ
 
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 
 --- cd(path = nil, verbose = self.verbose) -> self
 
@@ -1054,7 +1054,7 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:FileTest.zero?]]
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- syscopy(from, to) -> bool
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
@@ -1065,9 +1065,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.syscopy]]
 
-#@end
-
-#@if (version < "1.9.0")
 --- copy(from, to) -> bool
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
@@ -1077,10 +1074,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.copy]]
 
-#@end
-
-
-#@if (version < "1.9.0")
 --- move(from, to) -> bool
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
@@ -1091,9 +1084,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.move]]
 
-#@end
-
-#@if (version < "1.9.0")
 --- compare(file1, file2) -> bool
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
@@ -1104,9 +1094,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.compare]]
 
-#@end
-
-#@if (version < "1.9.0")
 --- safe_unlink(*filenames) -> Array
 FileToolsクラスにある同名のクラスメソッドと同じです.
 
@@ -1114,9 +1101,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.safe_unlink]]
 
-#@end
-
-#@if (version < "1.9.0")
 --- makedirs(*dirs) -> Array
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
@@ -1125,9 +1109,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.makedirs]]
 
-#@end
-
-#@if (version < "1.9.0")
 --- install(from, to, mode = nil, verbose = false) -> () 
 
 FileToolsクラスにある同名のクラスメソッドと同じです.
@@ -1142,9 +1123,6 @@ FileToolsクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:File.install]]
 
-#@end
-
-#@if (version < "1.9.0")
 --- cmp
 
 [[m:Shell#compare]] と同じです。

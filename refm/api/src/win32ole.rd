@@ -20,7 +20,7 @@ Microsoft Windows で COM や ActiveX を扱うためのライブラリです。
 #@include(win32ole/WIN32OLE_PARAM)
 #@include(win32ole/WIN32OLE_TYPE)
 #@include(win32ole/WIN32OLE_VARIABLE)
-#@since 1.9.0
+#@since 1.9.1
 #@include(win32ole/WIN32OLE_TYPELIB)
 #@include(win32ole/WIN32OLE_VARIANT)
 #@end
