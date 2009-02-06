@@ -129,7 +129,7 @@ value を値とする組がデータベース中に存在する時、真を返します。
 
 @param value 検索したい値。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- indexes(*keys) -> [String]
 --- indices(*keys) -> [String]
 
@@ -359,7 +359,7 @@ libdbm のバージョンを表す文字列です。
 DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
 トップレベルの VERSION が参照されるため警告が表示されます。
 #@end
-#@since 1.9.0
+#@since 1.9.1
 DB_VERSION_STRING という定数が C 言語レベルで定義されていない場合は
 "unknown" になります。
 #@end
