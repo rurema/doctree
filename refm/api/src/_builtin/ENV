@@ -40,7 +40,7 @@ key に対応する環境変数の値を返します。該当する環境変数が存在
 --- store(key, value) -> String
 
 key に対応する環境変数の値を value にします。
-#@if (version < "1.9.0")
+#@until 1.9.1
 value が nil の時、key に対応する環境変数を取り
 除きます。 
 #@end
@@ -143,11 +143,11 @@ val を値として持つ環境変数が存在する時、真を返します。
 @param val  値を指定します。to_str で文字列化されます。
 
 --- index(val) -> String
-#@since 1.9.0
+#@since 1.9.1
 --- key(val)   -> String
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 このメソッドは obsolete です。
 使用すると警告メッセージが表示されます。
 #@end
