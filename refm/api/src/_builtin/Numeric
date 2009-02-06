@@ -177,7 +177,7 @@ include Comparable
                       | |     -          -          o          o          -
                       ~ |     -          -          o          o          -       
 #@end
-#@# 1.9.0 以降は微妙に違う部分がある。Fixnum#succ など。
+#@# 1.9 以降は微妙に違う部分がある。Fixnum#succ など。
 
 === 丸めメソッドの動作一覧
 
@@ -644,7 +644,7 @@ hash メソッドを適切に定義する必要があります。
 
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 
 --- scalar?    -> bool
 
