@@ -1,4 +1,4 @@
-#@since 1.9.0
+#@since 1.9.1
 = class Object < BasicObject
 #@else
 = class Object
@@ -89,7 +89,7 @@ other が self 自身の時、真を返します。
 
 @see [[m:Object#object_id]],[[m:Object#==]],[[m:Object#eql?]],[[c:Symbol]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- methods(include_inherited = true) -> [Symbol]
 #@else
 #@since 1.8.0
@@ -142,7 +142,7 @@ other が self 自身の時、真を返します。
   
   #実行結果
   
-#@since 1.9.0
+#@since 1.9.1
   [:protected_singleton, :public_singleton]
   [:public_singleton, :public_foo]
   [:private_singleton, :private_foo]
@@ -166,7 +166,7 @@ other が self 自身の時、真を返します。
   
   #実行結果
   
-#@since 1.9.0
+#@since 1.9.1
   [:protected_singleton, :public_singleton, :protected_foo, :public_foo, :protected_parent, :public_parent]
   [:public_singleton, :public_foo, :public_parent]
   [:private_singleton, :private_foo, :private_parent]
@@ -182,7 +182,7 @@ other が self 自身の時、真を返します。
 
 @see [[m:Module#instance_methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- public_methods(include_inherited = true) -> [Symbol]
 #@else
 #@since 1.8.0
@@ -199,7 +199,7 @@ other が self 自身の時、真を返します。
 #@end
 @see [[m:Module#public_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- private_methods(include_inherited = true) -> [Symbol]
 #@else
 #@since 1.8.0
@@ -216,7 +216,7 @@ other が self 自身の時、真を返します。
 #@end
 @see [[m:Module#private_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- protected_methods(include_inherited = true) -> [Symbol]
 #@else
 #@since 1.8.0
@@ -233,7 +233,7 @@ other が self 自身の時、真を返します。
 #@end
 @see [[m:Module#protected_instance_methods]],[[m:Object#methods]],[[m:Object#singleton_methods]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- singleton_methods(inherited_too = true) -> [Symbol]
 #@else
 #@if (version > "1.8.0")
@@ -303,7 +303,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   
   #実行結果
   
-#@since 1.9.0
+#@since 1.9.1
   [:protected_self, :public_self]
   [:protected_self, :public_self]
   [:protected_class_foo, :public_class_foo]
@@ -325,7 +325,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   
   #実行結果
   
-#@since 1.9.0
+#@since 1.9.1
   [:protected_self, :public_self, :protected_bar, :public_bar]
   [:protected_class_foo, :public_class_foo, :protected_class_parent, :public_class_parent]
 #@else
@@ -336,7 +336,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
 @see [[m:Object#methods]],[[m:Object#extend]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- to_splat -> Array
 #@#nomethod
 
@@ -376,7 +376,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 #@#nomethod
 
 オブジェクトを配列に変換した結果を返します。
-#@since 1.9.0
+#@since 1.9.1
 デフォルトでは定義されていません。
 
 説明のためここに記載してありますが、
@@ -394,7 +394,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
 などということが必要です。
 #@end
-#@since 1.9.0
+#@since 1.9.1
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
     p nil.to_a          # []
@@ -484,7 +484,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   it = Foo.new
   p([1,2] + it) #=> [1, 2, 3, 4]
 
-#@since 1.9.0
+#@since 1.9.1
 @see [[m:Object#to_splat]],[[m:Object#to_a]],[[m:Kernel.#Array]]
 #@else
 @see [[m:Object#to_a]],[[m:Kernel.#Array]]
@@ -641,7 +641,7 @@ self を引数としてブロックを評価し、self を返します。
 
 --- __id__ -> Integer
 --- object_id -> Integer
-#@if (version < "1.9.0")
+#@if (version < "1.9.1")
 --- id -> Integer
 #@end
 
@@ -660,7 +660,7 @@ Rubyでは、(Garbage Collectされていない)アクティブなオブジェクト間で
 
 [[m:Symbol#to_i]]で得られる整数と object_id は別物です。
 
-#@if (version < "1.9.0")
+#@if (version < "1.9.1")
 id メソッドの再定義に備えて別名 __id__ が用意されて
 おり、ライブラリでは後者の利用が推奨されます。また __id__ を
 再定義すべきではありません。
@@ -1202,7 +1202,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
 オブジェクトを凍結（内容の変更を禁止）します。
 
 凍結されたオブジェクトの変更は
-#@since 1.9.0
+#@since 1.9.1
 例外 [[c:RuntimeError]] を発生させます。
 #@else
 例外 [[c:TypeError]] を発生させます。
@@ -1221,7 +1221,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
   p a1 #=> "bar"
   
   a2 = "foo".freeze
-#@since 1.9.0
+#@since 1.9.1
   a2.replace("bar")# can't modify frozen string (RuntimeError)
 #@else
   a2.replace("bar")# can't modify frozen string (TypeError)
@@ -1234,7 +1234,7 @@ clone や dup はオブジェクト自身を複製するだけで、オブジェクトの指し
   p a.frozen?     #=> true
   
   a[0] = "foo"
-#@since 1.9.0
+#@since 1.9.1
   p a             # can't modify frozen array (RuntimeError)
 #@else
   p a             # can't modify frozen array (TypeError)
@@ -1498,15 +1498,11 @@ Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなくなっています。
 @see [[c:NilClass]]
 
 --- class -> Class
-#@if (version < "1.9.0")
+#@if (version < "1.9.1")
 --- type -> Class
 #@end
 
 レシーバのクラスを返します。
-
-#@if (version < "1.9.0")
-type は obsolete です。 class を使用してください。
-#@end
 
   p "ruby".class #=> String
   p 999999999999999.class #=> Bignum
