@@ -19,12 +19,12 @@ Enumerator を介することにより [[m:String#each_byte]] のような
 Enumerator を生成するには
 [[m:Enumerable::Enumerator.new]]
 あるいは [[m:Object#to_enum]], [[m:Object#enum_for]] を利用します。
-#@since 1.9.0
+#@since 1.9.1
 また、一部のイテレータはブロックを渡さずに呼び出すと繰り返しを実行する代わりに
 enumerator を生成して返します。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 === 注意
 外部イテレータとしての機能は [[c:Fiber]] を用いて実装されているため Fiber と同じ制限があります。
 例えば以下のようなスレッドをまたいだ呼び出しはエラーになります。

@@ -39,7 +39,7 @@
     p [1, 2, 3].any? {|v| v > 1 }   # => true
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- collect  -> Enumerable::Enumerator            
 --- map      -> Enumerable::Enumerator
 #@end
