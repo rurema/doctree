@@ -1,4 +1,4 @@
-#@since 1.9.0
+#@since 1.9.1
 require rubygems/defaults
 require rubygems/exceptions
 require rubygems/version

@@ -1,4 +1,4 @@
-#@since 1.9.0
+#@since 1.9.1
 
 [[c:Gem::Specification]] のインスタンスから Gem パッケージを作成するためのライブラリです。
 
