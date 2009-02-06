@@ -57,7 +57,7 @@
 
   m = Module.new
   p m               # => #<Module 0lx40198a54>
-#@since 1.9.0
+#@since 1.9.1
   p m.name          # => nil   # まだ名前は未定
 #@else
   p m.name          # => ""    # まだ名前は未定
@@ -283,7 +283,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
 
 @see [[m:Kernel.#autoload?]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- class_variables -> [Symbol]
 #@else
 --- class_variables -> [String]
@@ -295,7 +295,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
 
 @see [[m:Module.constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#constants]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- const_defined?(name, inherit = true) -> bool
 
 モジュールに name で指定される名前の定数が定義されている時真
@@ -342,7 +342,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
   class Baz
     include Bar
   end
-#@since 1.9.0
+#@since 1.9.1
   # Object 以外でも同様になった
   # 第二引数のデフォルト値が true であるため
   p Baz.const_defined?(:BAR)      # => true
@@ -354,7 +354,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
   p Baz.const_defined?(:BAR)      # => false
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- const_get(name, inherit = true) -> object
 #@else
 --- const_get(name) -> object
@@ -367,7 +367,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
 
 @param name 定数名。[[c:String]] か [[c:Symbol]] で指定します。
 
-#@since 1.9.0
+#@since 1.9.1
 @param inherit false を指定するとスーパークラスや include したモジュールで
        定義された定数は対象にはなりません。
 #@end
@@ -390,7 +390,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
   p Baz.const_get(:BAR)      # => 1
   # 定義されていない定数
   p Baz.const_get(:NOT_DEFINED) #=> raise NameError
-#@since 1.9.0
+#@since 1.9.1
   # 第二引数に false を指定すると自分自身に定義された定数から探す
   p Baz.const_get(:BAR, false) #=> raise NameError
 #@end
@@ -429,18 +429,18 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
 @param name  [[c:Symbol]],[[c:String]] で定数の名前を指定します。
 @param value セットしたい値を指定します。
 
-#@since 1.9.0
+#@since 1.9.1
 --- constants(inherit = true) -> [Symbol]
 #@else
 --- constants -> [String]
 #@end
 
 そのモジュール(またはクラス)で定義されている定数名の配列を返します。
-#@if version < "1.9.0"
+#@until 1.9.1
 スーパークラスやインクルードしているモジュールの定数も含みます。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 @param inherit true を指定するとスーパークラスや include したモジュールで
        定義された定数が対象にはなります。false を指定した場合 対象にはなりません。
 #@end
@@ -509,7 +509,7 @@ self のインスタンスメソッドをオブジェクト化した [[c:UnboundMethod]] を返します。
 
 @see [[m:Object#method]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- method_defined?(name, inherit = true) -> bool
 #@else
 --- method_defined?(name) -> bool
@@ -533,7 +533,7 @@ true を返します。
 モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
 つまり、そのモジュールの定義式の中にあるかのように実行されます。
 
-#@until 1.9.0
+#@until 1.9.1
 ただし、ローカル変数は module_eval/class_eval の外側のスコープと共有します。
 文字列が与えられ場合には、定数とクラス変数のスコープは自身のモジュール定義式内と同じスコープになります。
 ブロックが与えられた場合には、定数とクラス変数のスコープはブロックの外側のスコープになります。
@@ -583,7 +583,7 @@ module_eval のブロック中でメソッドを定義する場合、
 「::」を使って表示した名前のことです。
 クラスパスの例としては「CGI::Session」「Net::HTTP」が挙げられます。
 
-#@since 1.9.0
+#@since 1.9.1
 @return 名前のないモジュール / クラスに対しては nil を返します。
 #@else
 @return 名前のないモジュール / クラスに対しては空文字列を返します。
@@ -604,7 +604,7 @@ module_eval のブロック中でメソッドを定義する場合、
   p A::C.name #=> "A::C"
 
   # 名前のないモジュール / クラス
-#@since 1.9.0
+#@since 1.9.1
   p Module.new.name   #=> nil
   p Class.new.name    #=> nil
 #@else
@@ -612,7 +612,7 @@ module_eval のブロック中でメソッドを定義する場合、
   p Class.new.name    #=> ""
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- instance_methods(inherited_too = true) -> [Symbol]
 #@else
 --- instance_methods(inherited_too = true) -> [String]
@@ -674,7 +674,7 @@ module_eval のブロック中でメソッドを定義する場合、
      ["private_foo"]
      ["protected_foo"]
 
-#@since 1.9.0
+#@since 1.9.1
 --- public_instance_methods(inherited_too = true) -> [Symbol]
 #@else
 --- public_instance_methods(inherited_too = true) -> [String]
@@ -687,7 +687,7 @@ module_eval のブロック中でメソッドを定義する場合、
 
 @see [[m:Object#public_methods]], [[m:Module#instance_methods]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- private_instance_methods(inherited_too = true) -> [Symbol]
 #@else
 --- private_instance_methods(inherited_too = true) -> [String]
@@ -700,7 +700,7 @@ module_eval のブロック中でメソッドを定義する場合、
 
 @see [[m:Object#private_methods]], [[m:Module#instance_methods]]
 
-#@since 1.9.0
+#@since 1.9.1
 --- protected_instance_methods(inherited_too = true) -> [Symbol]
 #@else
 --- protected_instance_methods(inherited_too = true) -> [String]
@@ -809,7 +809,7 @@ include を Ruby で書くと以下のように定義できます。
     modules.each {|mod|
       # append_features はプライベートメソッドなので
       # 直接 mod.append_features(self) とは書けない
-#@since 1.9.0
+#@since 1.9.1
       mod.__send!(:append_features, self)
       mod.__send!(:included, self)
 #@else
@@ -1011,7 +1011,7 @@ self が他のオブジェクト に [[m:Object#extend]] されたときに
 
 
 インクルードとは、指定されたモジュールの定義
-#@since 1.9.0
+#@since 1.9.1
 (メソッド、定数) を引き継ぐことです。
 #@else
 (メソッド、定数、クラス変数) を引き継ぐことです。
@@ -1419,7 +1419,7 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 モジュールのコンテキストで評価するとは、実行中そのモジュールが self になるということです。
 つまり、そのモジュールの定義式の中にあるかのように実行されます。
 
-#@until 1.9.0
+#@until 1.9.1
 ローカル変数、定数とクラス変数のスコープはブロックの外側のスコープになります。
 #@else
 ただし、ローカル変数だけは外側のスコープと共有します。
@@ -1451,7 +1451,7 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 
 --- local_methods   -> Array
 
