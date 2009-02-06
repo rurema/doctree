@@ -745,7 +745,7 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します。
 
 #@end
 
-#@if (version >= "1.9.0")
+#@since 1.9.1
 --- readpartial(length, str = nil)
 [[m:IO#readpartial]]を参照
 
