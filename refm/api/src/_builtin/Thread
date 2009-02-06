@@ -19,14 +19,14 @@ Thread を使うことで並行プログラミングが可能になります。
 
 @param newstate スレッド実行中に例外発生した場合、インタプリタ全体を終了させるかどうかを true か false で指定します。
 
-#@since 1.9.0
+#@since 1.9.1
 --- critical             -> nil
 #@else
 --- critical             -> bool
 #@end
 --- critical=(newstate)
 
-#@since 1.9.0
+#@since 1.9.1
 サポートされていません。警告を出力し、何もせずに nil を返します。
 #@else
 真である間、スレッドの切替えを行いません。
@@ -337,7 +337,7 @@ true を返します。
 メインスレッドのデフォルト値は 0 です。新しく生成されたスレッドは親スレッドの
 priority を引き継ぎます。
 
-#@since 1.9.0
+#@since 1.9.1
 @param val スレッドの優先度を指定します。プラットフォームに依存します。
 #@else
 @param val スレッドの優先度を指定します。負の値も指定できます。
@@ -425,7 +425,7 @@ safe_level は、[[m:$SAFE]] と同じです。
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
 
-#@since 1.9.0
+#@since 1.9.1
 --- add_trace_func
 #@todo
 
@@ -435,6 +435,7 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 == Constants
 
-#@since 1.9.0
+#@since 1.9.1
 --- MUTEX_FOR_THREAD_EXCLUSIVE
+#@todo
 #@end

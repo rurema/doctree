@@ -226,7 +226,7 @@ true を返します。そうでない場合に false を返します。
 
 #@since 1.8.7
 --- name    -> String
-#@since 1.9.0
+#@since 1.9.1
 --- name    -> Symbol
 #@end
 
