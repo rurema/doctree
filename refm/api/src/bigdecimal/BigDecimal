@@ -219,8 +219,10 @@ double_figは以下の C プログラムの結果と同じです。
 --- _load(str)
 #@todo
 
+#@until 1.9.1
 --- induced_from(x)
 #@todo
+#@end
 
 --- ver
 #@todo

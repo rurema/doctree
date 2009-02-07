@@ -1,5 +1,7 @@
 = class Float < Numeric
+#@until 1.9.1
 include Precision
+#@end
 
 浮動小数点数のクラス。Float の実装は C 言語の double で、その精度は環
 境に依存します。
@@ -17,6 +19,7 @@ Electronics Engineers: 米国電気電子技術者協会) 754 を参照してください。
 
 == Class Methods
 
+#@until 1.9.1
 --- induced_from(num) -> Float
 num を Float に変換した結果を返します。
 
@@ -32,6 +35,7 @@ num を Float に変換した結果を返します。
   rescue TypeError
     p $! #=> #<TypeError: failed to convert String into Float>
   end
+#@end
 
 == Instance Methods
 
