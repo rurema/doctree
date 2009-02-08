@@ -146,7 +146,6 @@ iconv 関数のラッパークラスです。
 #@since 1.9.1
 --- list                       -> Array
 --- list {|*aliases| ... }     -> Array
-#@todo
 
 各エイリアスセットごとに繰り返すイテレータです。
 ブロックが指定されていなければ、その利用可能な文字コード体系の名前を文字列の配列として返します。
@@ -156,7 +155,6 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 #@end
 
 --- charset_map -> Hash
-#@todo
 
 #@# Returns the map from canonical name to system dependent name.
 
@@ -164,7 +162,6 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 #@since 1.9.1
 --- ctlmethods -> Array
-#@todo
 
 #@# Returns available iconvctl() method list.
 システム上のlibiconvのiconvctl()関数で使用可能なフラグのリストを [[c:Array]] として返します。
@@ -174,7 +171,6 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 == Instance Methods
 
 --- close    -> String
-#@todo
 
 変換を終了します。出力バッファを初期シフト状態に戻すための文字列を返します。
 出力の文字符号化方式が内部状態をも持たない場合、空文字列を返します。
@@ -190,7 +186,6 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
   i.close                 #=> "\e(B"
 
 --- iconv(str, start = 0, length = -1)    -> String
-#@todo
 
 文字列の変換を開始し、変換後の文字列を返します。
 str が文字列の場合、str[start, length] を変換し、
@@ -206,18 +201,18 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 @param length str のうち変換する長さを指定します。nil か -1 のときは、start 以降全部を意味します。
 
-@raise Iconv::IllegalSequence
+@raise Iconv::IllegalSequence strに指定された文字列に入力に指示された文字コードに含まれないために変換が停止した場合に発生します。
 
-@raise Iconv::InvalidCharacter
+@raise Iconv::InvalidCharacter 入力の最後が不完全な文字かシフトで終っているために変換が停止した場合に発生します。
 
-@raise Iconv::OutOfRange
+@raise Iconv::OutOfRange ライブラリの内部エラーが発生した場合に発生します。
 
 #@since 1.9.1
 
 --- conv(str) -> String
-#@todo
 
 文字列を変換し、変換後の文字列を返します。
+str が nil の場合、空文字列""を返します。
 
 @param str 変換される文字列を指定します。
 

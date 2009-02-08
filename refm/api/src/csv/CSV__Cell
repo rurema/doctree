@@ -1,10 +1,8 @@
-#@if (version <= '1.8.5')
+#@if (version <= '1.8.7')
 
 = class CSV::Cell < String
 CSV形式データのカラム（Cell）を操作するためのクラス。
-このクラスはバージョン1.8.6で廃止されました。
-
-#@# deprecated
+このクラスはバージョン1.8.7で廃止されました。
 
 == Class Methods
 
@@ -30,7 +28,7 @@ CSV::Cellオブジェクト間の比較を行い、真偽値を返します。
 
 #@end
 
-#@if (version <= '1.8.5')
+#@if (version <= '1.8.7')
 
 --- data -> String
 自分自身のCellデータを[[c:String]]クラスオブジェクトとして返します。

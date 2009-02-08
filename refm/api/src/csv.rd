@@ -187,6 +187,7 @@ src ¤Ç»ØÄê¤µ¤ì¤¿Ê¸»úÎó¤ò1¹ÔÊ¬¤È¤·¤Æ¥Ñ¡¼¥¹¤·ÇÛÎó¤ËÊÑ´¹¡¢¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤Ş¤¹¡£
 @param rs ¹Ô¶èÀÚ¤êÊ¸»ú¤Î»ØÄê¡£nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç CrLf / Lf¡£
           Cr ¤ò¹Ô¶èÀÚ¤ê¤È¤·¤¿¤¤¾ì¹ç¤Ï ?\r ¤òÅÏ¤·¤Ş¤¹¡£
 
+#@if (version < "1.9.0")
 --- generate_row(src, cells, out_dev[, fs = nil[, rs = nil]]) -> Fixnum
 
 src ¤Ç»ØÄê¤µ¤ì¤¿ÇÛÎó¤ò¥Ñ¡¼¥¹¤·¤Æ csv·Á¼°¤ÎÊ¸»úÎó¤È¤·¤Æ(¹Ô¶èÀÚ¤êÊ¸»ú¤â´Ş¤á¤Æ) out_dev ¤Ë½ĞÎÏ¤·¤Ş¤¹¡£
@@ -214,6 +215,7 @@ src ¤Ç»ØÄê¤µ¤ì¤¿ÇÛÎó¤ò¥Ñ¡¼¥¹¤·¤Æ csv·Á¼°¤ÎÊ¸»úÎó¤È¤·¤Æ(¹Ô¶èÀÚ¤êÊ¸»ú¤â´Ş¤á¤Æ) out
     parsed_cells = CSV.generate_row(row, 2, buf)
   end
   p buf #=>"a,b\n1,2\n,A,B\n" 
+
 
 --- parse_row(src, index, out_dev[, fs = nil[, rs = nil]]) -> Array
 
@@ -263,14 +265,17 @@ CSV·Á¼°¤ÎÊ¸»úÎó¤ò¥Ñ¡¼¥¹¤·¤ÆCSV1¹Ô(row)Ê¬¤Î¥Ç¡¼¥¿¤òÇÛÎó¤ËÊÑ´¹¤· out_dev ¤Ë½ĞÎÏ¤·¤
   C
   D
 
-#@include(csv/CSV__BasicWriter)
+#@end
+
 #@include(csv/CSV__Cell)
+#@include(csv/CSV__Row)
+#@include(csv/CSV__BasicWriter)
 #@include(csv/CSV__IOBuf)
 #@include(csv/CSV__IOReader)
 #@include(csv/CSV__IllegalFormatError)
 #@include(csv/CSV__Reader)
-#@include(csv/CSV__Row)
 #@include(csv/CSV__StreamBuf)
 #@include(csv/CSV__StringReader)
 #@include(csv/CSV__Writer)
+
 #@end
