@@ -83,7 +83,7 @@
 規定の内部エンコーディングを返します。
 
 --- default_internal=(encoding) -> Encoding
-規定の内部エンコーディングを返します。
+規定の内部エンコーディングを設定します。
 
 --- locale_charmap -> String
 #@todo
@@ -160,7 +160,7 @@ ISO-2022-JP エンコーディングです。
 --- Shift_JIS
 --- SJIS
 
-Shift-JIS エンコーディングです。
+Shift_JIS エンコーディングです。
 
 --- US_ASCII
 --- ASCII
