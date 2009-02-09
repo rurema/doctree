@@ -51,13 +51,20 @@ exclude_end が真ならば終端を含まない範囲オブジェクトを生
 
 --- ===(obj) -> bool
 --- include?(obj) -> bool
+--- member?(obj) -> bool
 
 obj が範囲内に含まれている時に真を返します。
 
 [[m:Range#===]] は主に case 文での比較に用いられます。
 
+#@since 1.9.1
+#@todo
+
+<=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
+#@else
 include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
 と異なり <=> メソッドによる演算により範囲内かどうかを判定することに注意する必要があります。
+#@end
 
 @param obj 比較対象のオブジェクト
 
@@ -73,8 +80,19 @@ include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
   p ("a" .. "c").member?("ba")  # => false
   # 1.8.2 以降
   p ("a" .. "c").member?("ba")  # => true
-  
+  # 1.9.1 以降
+  p ("a" .. "c").include?("ba") # => false
+  p ("a" .. "c").member?("ba")  # => false
+
 @see [[ref:d:spec/control#case]]
+#@since 1.9.1
+@see [[m:Range#cover?]]
+
+--- cover?(obj) -> bool
+#@todo
+
+@see [[m:Range#include?]]
+#@end
 
 --- begin -> object
 --- first -> object
