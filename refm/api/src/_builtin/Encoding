@@ -4,7 +4,7 @@
 
 例えば文字列オブジェクトは、文字列のバイト表現の他にそのバイト表現がどのエンコーディングによるものであるかも併せて保持しています。この情報は [[m:String#encoding]] により取得できます。 Encoding オブジェクトを返すメソッドにはこの他に [[m:IO#internal_encoding]], [[m:IO#external_encoding]] などがあります。
 
-@see [[spec:m17n]]
+@see [[d:spec/m17n]]
 
 == Class Methods
 
