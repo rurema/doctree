@@ -1442,10 +1442,14 @@ self が空文字列のときは 0 を返します。
 
 文字列中に部分文字列 substr が含まれていれば真を返します。
 
+#@until 1.9.1
 substr が 0 から 255 の範囲の [[c:Fixnum]] の場合、
 文字コードとみなして、その文字が含まれていれば真を返します。
 
 @param substr    検索する文字列もしくは文字コードを表す整数
+#@else
+@param substr    検索する文字列
+#@end
 
 --- index(pattern, pos = 0) -> Integer
 
