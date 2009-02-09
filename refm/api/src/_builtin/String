@@ -1164,13 +1164,20 @@ str == eval(str.dump) となることが保証されています。
     # p だとさらにバックスラッシュが増えて見にくいので puts している
     puts "abc\r\n\f\x00\b10\\\"".dump   # => "abc\r\n\f\000\01010\\\""
 
---- each(rs = $/)      {|line| ... }      -> ()
+#@until 1.9.1
+--- each(rs = $/)      {|line| ... } -> ()
+#@end
 --- each_line(rs = $/) {|line| ... } -> ()
 #@since 1.8.7
 --- lines(rs = $/)     {|line| ... } -> ()
+#@since 1.9.1
+--- each_line(rs = $/)  -> Enumerator
+--- lines(rs = $/)      -> Enumerator
+#@else
 --- each(rs = $/)       -> Enumerable::Enumerator
 --- each_line(rs = $/)  -> Enumerable::Enumerator
 --- lines(rs = $/)      -> Enumerable::Enumerator
+#@end
 #@end
 
 文字列中の各行に対して繰り返します。
@@ -1186,13 +1193,18 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり、
 @param rs    行末を示す文字列
 
 例:
+#@since 1.8.7
+    "aa\nbb\ncc\n".each_line do |line|
+#@else
     "aa\nbb\ncc\n".each do |line|
+#@end
       p line
     end
         # => "aa\n"
         # => "bb\n"
         # => "cc\n"
     
+#@since 1.8.7
     p "aa\nbb\ncc\n".lines.to_a   # => ["aa\n", "bb\n", "cc\n"]
     p "aa\n".lines.to_a           # => ["aa\n"]
     p "".lines.to_a               # => []
@@ -1200,11 +1212,18 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり、
     s = "aa\nbb\ncc\n"
     p s.lines("\n").to_a #=> ["aa\n", "bb\n", "cc\n"]  
     p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
+#@end
 
 --- each_byte {|byte| ... } -> ()
+--- bytes {|byte| ... } -> ()
 #@since 1.8.7
+#@since 1.9.1
+--- each_byte -> Enumerator
+--- bytes -> Enumerator
+#@else
 --- each_byte -> Enumerable::Enumerator
 --- bytes -> Enumerable::Enumerator
+#@end
 #@end
 
 文字列の各バイトに対して繰り返します。
@@ -1214,7 +1233,7 @@ Ruby 1.8 までなら unpack('C*') を、
 Ruby 1.9 以降は String#bytes.to_a を使ってください。
 
 例:
-    "str".each do |byte|
+    "str".each_byte do |byte|
       p byte
     end
         # => 115
@@ -1283,7 +1302,11 @@ replace に「\」自身を入れたいときは
 
 --- gsub(pattern) {|matched| .... } -> String
 #@since 1.8.7
+#@since 1.8.8
+--- gsub(pattern) -> Enumerator
+#@else
 --- gsub(pattern) -> Enumerable::Enumerator
+#@end
 #@end
 
 文字列中で pattern にマッチした部分を順番にブロックに渡し、
@@ -1357,7 +1380,11 @@ replace に「\」自身を入れたいときは
 
 --- gsub!(pattern) {|matched| .... } -> self | nil
 #@since 1.8.7
+#@since 1.8.8
+--- gsub!(pattern) -> Enumerator
+#@else
 --- gsub!(pattern) -> Enumerable::Enumerator
+#@end
 #@end
 
 文字列中で pattern にマッチする部分全てを順番にブロックに渡し、
@@ -2720,8 +2747,15 @@ self がセパレータを含まないときは、
 
 --- each_char {|cstr| block } -> self
 --- chars {|cstr| block }     -> self
+#@since 1.9.1
+--- each_char -> Enumerator
+--- chars -> Enumerator
+#@else
+--- each_char -> Enumerable::Enumerator
+--- chars -> Enumerable::Enumerator
+#@end
 
-文字列のそれぞれの文字をブロックに渡して実行します。
+文字列の各文字に対して繰り返します。
 
 たとえば、
    "hello".each_char {|c| print c, ' ' }
@@ -2731,8 +2765,10 @@ self がセパレータを含まないときは、
 #@since 1.9.1
 --- each_codepoint {|codepoint| block } -> self
 --- codepoints {|codepoint| block }     -> self
+--- each_codepoint -> Enumerator
+--- codepoints     -> Enumerator
 
-文字列のそれぞれのコードポイントをブロックに渡して実行します。
+文字列の各コードポイントに対して繰り返します。
 
    #coding:UTF-8
    "hello わーるど".codepoints.to_a
