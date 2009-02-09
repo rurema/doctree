@@ -2730,7 +2730,7 @@ self がセパレータを含まないときは、
 
 #@since 1.9.1
 --- each_codepoint {|codepoint| block } -> self
---- chars {|codepoint| block }     -> self
+--- codepoints {|codepoint| block }     -> self
 
 文字列のそれぞれのコードポイントをブロックに渡して実行します。
 
