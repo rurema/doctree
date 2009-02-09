@@ -40,8 +40,8 @@
 #@end
 
 #@since 1.9.1
---- collect  -> Enumerable::Enumerator            
---- map      -> Enumerable::Enumerator
+--- collect  -> Enumerator
+--- map      -> Enumerator
 #@end
 --- collect {|item| ... } -> [object]
 --- map {|item| ... }     -> [object]
@@ -49,17 +49,26 @@
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
 
+#@until 1.9.1
 ブロックを省略した場合、
 obj.collect {|item| item } を実行します。
 これは [[m:Enumerable#to_a]] と同じです。
+#@end
 
 例:
     # すべて 3 倍にする
     p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
 
 #@since 1.8.7
+#@since 1.8.8
+--- each_with_index                      -> Enumerator
+#@until 1.9.1
+--- enum_with_index                      -> Enumerator
+#@end
+#@else
 --- each_with_index                      -> Enumerable::Enumerator
 --- enum_with_index                      -> Enumerable::Enumerator
+#@end
 #@end
 --- each_with_index {|item, index| ... } -> self
 
@@ -82,8 +91,13 @@ self を返します。
 #@end
 
 #@since 1.8.7
+#@since 1.8.8
+--- find(ifnone = nil)   -> Enumerator
+--- detect(ifnone = nil) -> Enumerator
+#@else
 --- find(ifnone = nil)   -> Enumerable::Enumerator
 --- detect(ifnone = nil) -> Enumerable::Enumerator
+#@end
 #@end
 --- find(ifnone = nil) {|item| ... }   -> object
 --- detect(ifnone = nil) {|item| ... } -> object
@@ -119,8 +133,13 @@ ifnone を eval または call して実行し、nil を返します。
 #@end
 
 #@since 1.8.7
+#@since 1.8.8
+--- find_all  -> Enumerator
+--- select    -> Enumerator
+#@else
 --- find_all  -> Enumerable::Enumerator
---- select    -> Enumerable::Enumerator 
+--- select    -> Enumerable::Enumerator
+#@end
 #@end
 --- find_all {|item| ... } -> [object]
 --- select {|item| ... }   -> [object]
@@ -216,7 +235,11 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 @raise TypeError    ブロックが整数以外を返したときに発生します。
 
 #@since 1.8.7
+#@since 1.8.8
+--- max_by              -> Enumerator
+#@else
 --- max_by              -> Enumerable::Enumerator
+#@end
 --- max_by{|item| ... } -> object
 
 各要素を順番にブロックに渡して実行し、
@@ -251,7 +274,11 @@ a < b のとき負の整数を、期待しています。
 @raise TypeError    ブロックが整数以外を返したとき
 
 #@since 1.8.7
+#@since 1.8.8
+--- min_by               -> Enumerator
+#@else
 --- min_by               -> Enumerable::Enumerator
+#@end
 --- min_by {|item| ... } -> object
 #@todo
 
@@ -269,7 +296,11 @@ a < b のとき負の整数を、期待しています。
 #@end
 
 #@since 1.8.7
+#@since 1.8.8
+--- partition               -> Enumerator
+#@else
 --- partition               -> Enumerable::Enumerator
+#@end
 #@end
 --- partition {|item| ... } -> [[object], [object]]
 #@todo
@@ -284,7 +315,11 @@ a < b のとき負の整数を、期待しています。
    #=> [[9, 6, 3, 0], [10, 8, 7, 5, 4, 2, 1]]
 
 #@since 1.8.7
+#@since 1.8.8
+--- reject               -> Enumerator
+#@else
 --- reject               -> Enumerable::Enumerator
+#@end
 #@end
 --- reject {|item| ... } -> [object]
 
@@ -324,7 +359,11 @@ Enumerable#sort は安定ではありません (unstable sort)。
 
 #@since 1.8.0
 #@since 1.8.7
+#@since 1.8.8
+--- sort_by               -> Enumerator
+#@else
 --- sort_by               -> Enumerable::Enumerator
+#@end
 #@end
 --- sort_by {|item| ... } -> [object]
 
@@ -430,10 +469,19 @@ self と引数に渡した配列の各要素を順番にブロックに渡します。
 #@end
 
 #@since 1.8.7
+#@since 1.8.8
+--- each_slice(n)               -> Enumerator
+#@until 1.9.1
+--- enum_slice(n)               -> Enumerator
+#@end
+#@else
 --- each_slice(n)               -> Enumerable::Enumerator
 --- enum_slice(n)               -> Enumerable::Enumerator
+#@end
 --- each_slice(n) {|list| ... } -> nil
+#@until 1.9.1
 --- enum_slice(n) {|list| ... } -> nil
+#@end
 #@todo
 
 n 要素ずつブロックに渡して繰り返します。
@@ -452,10 +500,19 @@ n 要素ずつブロックに渡して繰り返します。
 
 @see [[m:Enumerable#each_cons]]
 
+#@since 1.8.8
+--- each_cons(n)               -> Enumerator
+#@until 1.9.1
+--- enum_cons(n)               -> Enumerator
+#@end
+#@else
 --- each_cons(n)               -> Enumerable::Enumerator
 --- enum_cons(n)               -> Enumerable::Enumerator
+#@end
 --- each_cons(n) {|list| ... } -> nil
+#@until 1.9.1
 --- enum_cons(n) {|list| ... } -> nil
+#@end
 
 要素を重複ありで n 要素ずつに区切り、
 ブロックに渡して繰り返します。
@@ -501,7 +558,11 @@ n 要素ずつブロックに渡して繰り返します。
    ary.count{|x|x%2==0}  # => 3
 
 
---- cycle                -> Enumerable::Enumerator
+#@since 1.8.8
+--- cycle              -> Enumerator
+#@else
+--- cycle              -> Enumerable::Enumerator
+#@end
 --- cycle {|obj| ... } -> object | nil
 #@todo
 
@@ -529,7 +590,11 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    a = [1, 2, 3, 4, 5, 0]
    a.drop(3)             # => [4, 5, 0]
 
---- drop_while                      -> Enumerable::Enumerator
+#@since 1.8.8
+--- drop_while                    -> Enumerator
+#@else
+--- drop_while                    -> Enumerable::Enumerator
+#@end
 --- drop_while {|element| ... }   -> Array
 #@todo
 
@@ -542,6 +607,11 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
 
 
+#@since 1.8.8
+--- find_index                    -> Enumerator
+#@else
+--- find_index                    -> Enumerable::Enumerator
+#@end
 --- find_index{|obj| ... }  -> Integer | nil
 
 すべての要素をブロックに渡して評価し、最初に真になった要素の
@@ -570,6 +640,11 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
   p {}.first(2) #=> []
 
 
+#@since 1.8.8
+--- group_by               -> Enumerator
+#@else
+--- group_by               -> Enumerable::Enumerator
+#@end
 --- group_by {|obj| ... }  -> Hash
 
 ブロックを評価した結果をキー、対応する要素を値とするハッシュを返します。
@@ -594,6 +669,11 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
 
 @see [[m:Enumerable#sort]]
 
+#@since 1.8.8
+--- minmax_by                -> Enumerator
+#@else
+--- minmax_by                -> Enumerable::Enumerator
+#@end
 --- minmax_by {|obj| ... }   -> [min, max]
 
 Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
@@ -608,7 +688,7 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
 
 @see [[m:Enumerable#sort_by]]
 
---- none?                 -> bool
+--- none?               -> bool
 --- none?{|obj| ... }   -> bool
 
 ブロックを指定しない場合は、 Enumerable オブジェクトのすべての
@@ -647,6 +727,11 @@ Enumerable オブジェクトの先頭から n 要素を配列として返します。
    a = [1, 2, 3, 4, 5, 0]
    a.take(3)             # => [1, 2, 3]
 
+#@since 1.8.8
+--- take_while                    -> Enumerator
+#@else
+--- take_while                    -> Enumerable::Enumerator
+#@end
 --- take_while {|element| ... }   -> Array
 
 Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
