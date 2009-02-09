@@ -1319,13 +1319,27 @@ Ruby 1.6 以前では pattern が文字列の場合、
 しかし Ruby 1.8 以降では、その文字列そのものがパターンになります。
 
 @param pattern    置き換える文字列のパターン
+@return 置換した場合は self、置換しなかった場合は nil
 
 例:
 
-    p 'abcabc'.gsub(/b/) {|s| s.upcase }  #=> "aBcaBc"
-    p 'abcabc'.gsub(/b/) { $&.upcase }    #=> "aBcaBc"
+    p 'abcabc'.gsub(/[bc]/) {|s| s.upcase }  #=> "aBCaBC"
+    p 'abcabc'.gsub(/[bc]/) { $&.upcase }    #=> "aBCaBC"
 
 @see [[m:String#sub]]
+
+#@since 1.9.1
+--- gsub(pattern, hash) -> String
+
+文字列中の pattern にマッチした部分をキーにして hash を引いた値で置き換えます。
+
+@param pattern    置き換える文字列のパターン
+@param hash       置き換える文字列を与えるハッシュ
+
+  hash = {'b'=>'B', 'c'=>'C'}
+  p "abcabc".gsub(/[bc]/){hash[$&]} #=> "aBCaBC"
+  p "abcabc".gsub(/[bc]/, hash)     #=> "aBCaBC"
+#@end
 
 --- gsub!(pattern, replace) -> self | nil
 
@@ -1345,6 +1359,7 @@ gsub! は通常 self を変更して返しますが、
 
 @param pattern    置き換える文字列のパターン
 @param replace    pattern で指定した文字列と置き換える文字列
+@return 置換した場合は self、置換しなかった場合は nil
 
 例:
 
@@ -1398,6 +1413,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 組み込み変数 [[m:$1]], $2, $3, ... を問題なく参照できます。
 
 @param pattern    置き換える文字列のパターン
+@return 置換した場合は self、置換しなかった場合は nil
 
 例:
     str = 'abcabc'
@@ -1409,6 +1425,19 @@ Ruby 1.6 以前では pattern が文字列の場合、
     p str    #=> "aBcaBc"
 
 @see [[m:String#sub]]
+
+#@since 1.9.1
+--- gsub!(pattern, hash) -> self | nil
+
+文字列中の pattern にマッチした部分をキーにして hash を引いた値で置き換えます。
+
+@param pattern    置き換える文字列のパターン
+@param hash       置き換える文字列を与えるハッシュ
+
+  hash = {'b'=>'B', 'c'=>'C'}
+  p "abcabc".gsub(/[bc]/){hash[$&]} #=> "aBCaBC"
+  p "abcabc".gsub(/[bc]/, hash)     #=> "aBCaBC"
+#@end
 
 --- hex -> Integer
 
@@ -2146,6 +2175,19 @@ Ruby 1.6 以前では pattern が文字列の場合、
 
 @see [[m:String#gsub]]
 
+#@since 1.9.1
+--- sub(pattern, hash) -> String
+
+文字列中の pattern にマッチした部分をキーにして hash を引いた値で置き換えます。
+
+@param pattern    置き換える文字列のパターン
+@param hash       置き換える文字列を与えるハッシュ
+
+  hash = {'b'=>'B', 'c'=>'C'}
+  p "abcabc".sub(/[bc]/){hash[$&]} #=> "aBCabc"
+  p "abcabc".sub(/[bc]/, hash)     #=> "aBCabc"
+#@end
+
 --- sub!(pattern, replace) -> self | nil
 
 文字列中で pattern にマッチした最初の部分を文字列 replace へ破壊的に置き換えます。
@@ -2164,6 +2206,7 @@ sub! は通常 self を変更して返しますが、
 
 @param pattern    置き換える文字列のパターン
 @param replace    pattern で指定した文字列と置き換える文字列
+@return 置換した場合は self、置換しなかった場合は nil
 
 例:
 
@@ -2210,6 +2253,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 組み込み変数 [[m:$1]], $2, $3, ... を問題なく参照できます。
 
 @param pattern    置き換える文字列のパターン
+@return 置換した場合は self、置換しなかった場合は nil
 
 例:
     str = 'abcabc'
@@ -2221,6 +2265,16 @@ Ruby 1.6 以前では pattern が文字列の場合、
     p str    #=> "aBcabc"
 
 @see [[m:String#gsub]]
+
+#@since 1.9.1
+--- sub!(pattern, hash) -> String
+
+文字列中の pattern にマッチした部分をキーにして hash を引いた値で破壊的に置き換えます。
+
+@param pattern    置き換える文字列のパターン
+@param hash       置き換える文字列を与えるハッシュ
+@return 置換した場合は self、置換しなかった場合は nil
+#@end
 
 --- sum(bits = 16) -> Integer
 
