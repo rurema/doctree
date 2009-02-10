@@ -183,3 +183,12 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
         #    [122, 2]
 #@end
 #@end
+
+#@since 1.9.1
+--- with_object(obj) -> Enumerator
+--- with_object(obj) {|(*args), memo_obj| ... } -> object
+#@todo
+
+@see [[m:Enumerable#each_with_object]]
+
+#@end

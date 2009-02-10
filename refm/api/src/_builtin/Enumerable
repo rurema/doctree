@@ -741,3 +741,12 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
    a.take_while {|i| i < 3 }   # => [1, 2]
 
 #@end
+
+#@since 1.9.1
+--- each_with_object(obj) -> Enumerator
+--- each_with_object(obj) {|(*args), memo_obj| ... } -> object
+#@todo
+
+@see [[m:Enumerator#with_object]]
+
+#@end
