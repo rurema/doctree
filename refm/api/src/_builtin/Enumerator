@@ -151,12 +151,22 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
 
 この enumerator を多重代入などのための配列に変換します。
 
+#@since 1.9.2
+--- with_index(offset = 0) {|(*args), idx| ... } -> object
+--- with_index(offset = 0) -> Enumerator
+#@else
 --- with_index {|(*args), idx| ... } -> object
+--- with_index -> Enumerator
+#@end
 
-生成時のパラメータに従って、要素にインデックスを添えてブロックを繰り返します。
+生成時のパラメータに従って、要素にインデックスを添えて繰り返します。
+#@since 1.9.2
+インデックスは offset から始まります。
+#@else
 インデックスは 0 から始まります。
+#@end
 
-戻り値は生成時に指定したレシーバ自身です。
+ブロックを指定した場合の戻り値は生成時に指定したレシーバ自身です。
 
 例:
     str = "xyz"
