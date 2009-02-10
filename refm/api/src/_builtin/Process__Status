@@ -13,13 +13,14 @@ wait を使用した例
   case
   when $?.signaled?
     p "child #{$?.pid} was killed by signal #{$?.termsig}"
+    if $?.coredump?   # システムがこのステータスをサポートしてなければ常にfalse
+      p "child #{$?.pid} dumped core."
+    end
   when $?.stopped?
     # 実際には Process.wait を使用しているので、ここに来ることはない
     p "child #{$?.pid} was stopped by signal #{$?.stopsig}"
   when $?.exited?
     p "child #{$?.pid} exited normaly. status=#{$?.exitstatus}"
-  when $?.coredump?   # システムがこのステータスをサポートしてなければ常にfalse
-    p "child #{$?.pid} dumped core."
   else
     p "unknown status %#x" % $?.to_i
   end
@@ -36,12 +37,13 @@ SIGCHLD を trap する例
       case
       when $?.signaled?
         puts "   child #{$?.pid} was killed by signal #{$?.termsig}"
+        if $?.coredump?
+          puts "   child #{$?.pid} dumped core."
+        end
       when $?.stopped?
         puts "   child #{$?.pid} was stopped by signal #{$?.stopsig}"
       when $?.exited?
         puts "   child #{$?.pid} exited normaly. status=#{$?.exitstatus}"
-      when $?.coredump?
-        puts "   child #{$?.pid} dumped core."
       else
         p "unknown status %#x" % $?.to_i
       end
@@ -160,6 +162,8 @@ signaled? が真の場合プロセスを終了させたシグナル番号を、
 --- coredump?    -> boolean
 
 終了時にコアダンプしていたら真を返します。
+
+このメソッドは signaled? が真のときにしか意味を持ちません。
 
 このメソッドはシステムに依存します。サポートしないプラットフォー
 ムでは常に false を返します。
