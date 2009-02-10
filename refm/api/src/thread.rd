@@ -11,9 +11,13 @@
 
 = reopen Thread
 == Class Methods
+#@until 1.9.1
 --- Thread.exclusive { ... }
 #@todo
+#@# 1.9.1 以降は prelude.rb で定義されているので _builtin/Thread に移動しました。
 ブロック実行中、Threadの切り替えを行いません。
+
+#@end
 
 #@include(thread/ConditionVariable)
 #@until 1.9.1

@@ -176,6 +176,19 @@ new メソッドと違い initialize メソッドを呼びません。
 他のスレッドから [[m:Thread#run]] メソッドで再起動されるまで、カレ
 ントスレッドの実行を停止します。
 
+#@since 1.9.1
+--- Thread.exclusive { ... }
+#@todo
+#@# 1.8 以前は ../thread.rb にあります。
+VMグローバルのMutexをロックし、ブロックを実行します。
+
+このクラスメソッドの挙動は1.8以前とは違います。
+Thread.exclusiveはVMグローバルの[[c:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]]の
+synchronizeをしているだけで、Thread.exclusiveしていないスレッドは動きます。
+[[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
+
+#@end
+
 == Instance Methods
 
 --- [](name)    -> object | nil
@@ -438,4 +451,6 @@ safe_level は、[[m:$SAFE]] と同じです。
 #@since 1.9.1
 --- MUTEX_FOR_THREAD_EXCLUSIVE
 #@todo
+
+[[m:Thread.exclusive]]用の[[c:Mutex]]です。
 #@end
