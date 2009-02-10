@@ -26,6 +26,9 @@ cgi-lib
 cgi
 cgi/session
 cgi/session/pstore
+#@since 1.9.1
+cmath
+#@end
 complex
 #@since 1.9.1
 continuation
