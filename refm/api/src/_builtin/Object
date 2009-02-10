@@ -1561,6 +1561,29 @@ Ruby 1.7 以降, メソッド定義のネストに関してこの制限はなくなっています。
 @raise SecurityError セキュリティレベルが3以上の時にこのメソッドを使用すると発生します。
 @see [[m:Object#taint]],[[m:Object#tainted?]]
 
+#@since 1.9.1
+--- trust -> self
+#@todo
+
+オブジェクトの「untrustマーク」を取り除きます。
+
+@see [[m:Object#untrusted?]],[[m:Object#untrust]]
+
+--- untrusted? -> bool
+#@todo
+
+オブジェクトの「untrustマーク」がセットされている時真を返します。
+
+@see [[m:Object#trust]],[[m:Object#untrust]]
+
+--- untrust -> self
+#@todo
+
+オブジェクトの「untrustマーク」をセットします。
+
+@see [[m:Object#trust]],[[m:Object#untrusted?]]
+#@end
+
 == Private Instance Methods
 
 --- initialize(*args, &block) -> object
