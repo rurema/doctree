@@ -86,9 +86,7 @@
 規定の内部エンコーディングを設定します。
 
 --- locale_charmap -> String
-#@todo
-
-Returns the locale charmap name.
+ロケールエンコーディングを決定するために用いる、locale charmap 名を返します。nl_langinfo 等がない環境では nil を、miniruby では ASCII_8BIT を返します。
 
   Debian GNU/Linux
     LANG=C
