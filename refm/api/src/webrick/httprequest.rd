@@ -68,7 +68,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 を引数としてブロックを実行します。リクエストが chunked 形式であっても引数はデコードされています。
 
 #@since 1.8.2
---- content_length    -> Intger
+--- content_length    -> Integer
 
 リクエストの Content-Length ヘッダの値を整数で返します。リクエストに Content-Length ヘッダ
 が含まれていない場合は 0 を返します。

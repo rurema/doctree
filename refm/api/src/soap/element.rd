@@ -56,7 +56,7 @@ include SOAP::SOAPCompoundtype
 
 == Class Methods
 
---- new(element, mustunderstand = true, encodingstype = nil)
+--- new(element, mustunderstand = true, encodingstyle = nil)
 #@todo
 
 == Instance Methods

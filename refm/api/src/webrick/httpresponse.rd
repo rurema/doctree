@@ -103,7 +103,7 @@ HTTPResponse オブジェクトを生成して返します。
 自身が生成される時に指定されたハッシュを返します。
 
 #@since 1.8.2
---- content_length         -> Intger | nil
+--- content_length         -> Integer | nil
 --- content_length=(len)
 #@todo
 
@@ -231,7 +231,7 @@ HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
 
 @param method リクエストの URI を [[c:URI]] オブジェクトで指定します。
 
---- sent_size    -> Intger
+--- sent_size    -> Integer
 
 クライアントに送られた内容(エンティティボディ)のバイト数を表す整数を返します。
 
@@ -249,7 +249,7 @@ HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
 指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を設定し例外 status を
 発生させます。
 
---- status           -> Intger
+--- status           -> Integer
 
 レスポンスのステータスコードを表す整数を返します。
 デフォルトは [[m:WEBrick::HTTPStatus::RC_OK]] です。

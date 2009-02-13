@@ -70,7 +70,7 @@ include Enumerable
 次の要素がなく、ジェネレータが終わりに達しているなら真を返します。
 
 --- index -> Integer
---- pos   -> Ingeter
+--- pos   -> Integer
 
 現在の位置を返します。
 

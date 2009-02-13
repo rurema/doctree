@@ -1022,7 +1022,7 @@ Cookie オブジェクトのアトリビュートです。
         image_button("url", "name", "string")
           # <INPUT TYPE="image" SRC="url" NAME="name" ALT="string">
 
-        image_button({ "SRC" => "url", "ATL" => "strng" })
+        image_button({ "SRC" => "url", "ALT" => "string" })
           # <INPUT TYPE="image" SRC="url" ALT="string">
 
 --- img(src = "", alt = "", width = nil, height = nil)

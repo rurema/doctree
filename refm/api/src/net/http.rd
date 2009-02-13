@@ -633,7 +633,7 @@ key は大文字小文字を区別しません。
 --- basic_auth(account, password)
 #@todo
 
-Authrization: ヘッダを BASIC 認証用にセットします。
+Authorization: ヘッダを BASIC 認証用にセットします。
 
 --- content_length
 --- content_length=(len)
@@ -718,7 +718,7 @@ key は大文字小文字を区別しません。
 --- proxy_basic_auth(account, password)
 #@todo
 
-Proxy 認証のために Proxy-Authrization: ヘッダをセットします。
+Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 
 --- range
 #@todo
