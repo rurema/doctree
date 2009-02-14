@@ -4,7 +4,7 @@ require tk
 require tkextlib/setup
 require tkextlib/tkimg/setup
 
-#@include(Pixmap)
+#@include(PIXMAP)
 #@include(TkPixmapImage)
 
 #@end

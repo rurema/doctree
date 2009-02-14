@@ -3,7 +3,7 @@
 require tk
 require tkextlib/tile
 
-#@include(Tile__TreeView)
+#@include(Tile__Treeview)
 #@include(Tile__TreeviewConfig)
 
 #@end
