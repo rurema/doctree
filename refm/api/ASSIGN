@@ -138,7 +138,7 @@ eregex                          okkez           done
 etc                             okkez           done
 expect                          okkez           done
 fcntl                           okkez           done
-fiber
+fiber                           okkez
 fileutils                       okkez           done
 final                           okkez           done
 finalize                        okkez           done
