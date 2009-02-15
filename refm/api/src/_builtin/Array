@@ -1324,7 +1324,11 @@ self をそのまま返します
 
 --- to_s    -> String
 
+#@since 1.9.1
+[[m:Array#inspect]] と同じです。
+#@else
 [[m:Array#join]]([[m:$,]]) と同じです。
+#@end
 
 #@since 1.8.0
 --- transpose    -> Array
