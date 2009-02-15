@@ -109,6 +109,7 @@ bigdecimal/util
 cgi
 cgi-lib
 cgi/session
+cmath
 complex                         bornite
 continuation
 coverage
