@@ -444,6 +444,8 @@ length バイト分読み込んで返します。
 
   specifies arguments for open() as an array.
 
+@see [[m:IO.binread]]
+
 #@end
 
 例:
@@ -454,6 +456,13 @@ length バイト分読み込んで返します。
   IO.read(one_byte_file, nil, 10) #=> "" 
   IO.read(one_byte_file, 1, 10)   #=> nil
 
+#@end
+
+#@since 1.9.1
+--- binread(path, length = nil, offset = 0)     -> String | nil
+#@todo
+
+@see [[m:IO.read]]
 #@end
 
 --- readlines(path, rs = $/)    -> [String]
