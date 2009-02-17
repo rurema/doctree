@@ -8,7 +8,7 @@
 --- Pathname(path) -> Pathname
 文字列 path を元に Pathname オブジェクトを生成します。
 
-Pathanme.new(string) と同じです。
+Pathname.new(string) と同じです。
 
 #@end
 

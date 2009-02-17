@@ -136,7 +136,7 @@ a が負の時は、a を正にして、その平方根を Complex の虚数部に入れて返します。
 複素数を考慮しないので、負の数や Complex をあたえないでください。
 
 a が Float の時は、Float を返します。
-それ以外の時、平方根が有理数であれば、Rational または Interger を返します。
+それ以外の時、平方根が有理数であれば、Rational または Integer を返します。
 無理数であれば、Float を返します。
 
 = class Prime < Object

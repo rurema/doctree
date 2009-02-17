@@ -149,7 +149,7 @@ require tkextlib/blt
 
 
 
---- initialzie(name = nil)
+--- initialize(name = nil)
 #@todo
 
 
