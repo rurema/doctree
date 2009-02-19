@@ -1,3 +1,4 @@
+#@since 1.9.1
 カバレッジを測定するためのライブラリです。
 
 = class Coverage
@@ -43,5 +44,4 @@ This feature is experimental, so these APIs may be changed in future.
 Returns a hash that contains filename as key and coverage array as value
 and disables coverage measurement.
 
-== Instance Methods
-
+#@end
