@@ -1,19 +1,19 @@
 #@since 1.9.1
-ã‚«ãƒãƒ¬ãƒƒã‚¸ã‚’æ¸¬å®šã™ã‚‹ãŸã‚ã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã§ã™ã€‚
+¥«¥Ğ¥ì¥Ã¥¸¤òÂ¬Äê¤¹¤ë¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = class Coverage
 
 Coverage provides coverage measurement feature for Ruby.
 This feature is experimental, so these APIs may be changed in future.
 
-=== ä½¿ã„æ–¹
+=== »È¤¤Êı
 
 (1) require "coverage"
-(2) Coverage.start ã‚’å®Ÿè¡Œ
-(3) Ruby ã® source file ã‚’ require ã¾ãŸã¯ load ã™ã‚‹
-(4) Coverage.result ã§çµæœãŒã‹ãˆã‚‹
+(2) Coverage.start ¤ò¼Â¹Ô
+(3) Ruby ¤Î source file ¤ò require ¤Ş¤¿¤Ï load ¤¹¤ë
+(4) Coverage.result ¤Ç·ë²Ì¤¬¤«¤¨¤ë
 
-=== ä¾‹
+=== Îã
 
   [foo.rb]
   s = 0
@@ -36,10 +36,10 @@ This feature is experimental, so these APIs may be changed in future.
 == Class Methods
 
 --- Coverage.start  -> nil
-ã‚«ãƒãƒ¬ãƒƒã‚¸ã®æ¸¬å®šã‚’é–‹å§‹ã—ã¾ã™ã€‚
+¥«¥Ğ¥ì¥Ã¥¸¤ÎÂ¬Äê¤ò³«»Ï¤·¤Ş¤¹¡£
 
 --- Coverage.result  -> Hash
-æ¸¬å®šçµæœã‚’è¿”ã—ã¾ã™ã€‚
+Â¬Äê·ë²Ì¤òÊÖ¤·¤Ş¤¹¡£
 
 Returns a hash that contains filename as key and coverage array as value
 and disables coverage measurement.
