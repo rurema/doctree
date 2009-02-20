@@ -5,7 +5,7 @@ ncurses を利用して curses ライブラリをインストールした場合にだけ、
 本クラスが定義されています。
 
 本クラスのインスタンスを直接生成することはできません。
-[[m:Curses.getmouse]] で生成します。
+[[m:Curses.#getmouse]] で生成します。
 
 なお、ncurses でマウスのイベントを取得できるようにするには、
 いくつかの条件が必要なようです。
@@ -132,29 +132,29 @@ ncurses を利用して curses ライブラリをインストールした場合にだけ、
     Curses.close_screen
   end
 
-@see [[m:Curses.mousemask]]、[[m:Curses.getmouse]]
+@see [[m:Curses.#mousemask]]、[[m:Curses.#getmouse]]
 
 --- eid -> Integer
 
 マウスを識別するための ID を返します。
 複数のマウスを使用している場合に、それらを識別するために使用します。
 
-@see [[m:Curses.getmouse]]
+@see [[m:Curses.#getmouse]]
 
 --- x -> Integer
 
 マウスのイベントが発生した文字の位置の X 座標を返します。
 
-@see [[m:Curses.getmouse]]
+@see [[m:Curses.#getmouse]]
 
 --- y -> Integer
 
 マウスのイベントが発生した文字の位置の Y 座標を返します。
 
-@see [[m:Curses.getmouse]]
+@see [[m:Curses.#getmouse]]
 
 --- z -> Integer
 
 マウスのイベントが発生した文字の位置の Z 座標を返します。
 
-@see [[m:Curses.getmouse]]
+@see [[m:Curses.#getmouse]]
