@@ -910,35 +910,35 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.blockdev?]]
+@see [[m:FileTest.#blockdev?]]
 
 --- chardev?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.chardev?]]
+@see [[m:FileTest.#chardev?]]
 
 --- directory?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.directory?]]
+@see [[m:FileTest.#directory?]]
 
 --- executable?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.executable?]]
+@see [[m:FileTest.#executable?]]
 
 --- executable_real?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.executable_real?]]
+@see [[m:FileTest.#executable_real?]]
 
 --- exist?(file) -> bool
 --- exists?(file) -> bool
@@ -946,49 +946,49 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.exist?]] [[m:FileTest.exists?]]
+@see [[m:FileTest.#exist?]] [[m:FileTest.#exists?]]
 
 --- file?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.file?]]
+@see [[m:FileTest.#file?]]
 
 --- grpowned?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.grpowned?]]
+@see [[m:FileTest.#grpowned?]]
 
 --- owned?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.owned?]]
+@see [[m:FileTest.#owned?]]
 
 --- pipe?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列か IO オブジェクトを指定します。
 
-@see [[m:FileTest.pipe?]]
+@see [[m:FileTest.#pipe?]]
 
 --- readable?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.readable?]]
+@see [[m:FileTest.#readable?]]
 
 --- readable_real?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.readable_real?]]
+@see [[m:FileTest.#readable_real?]]
 
 --- setgid?(file)
 
@@ -999,7 +999,7 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.setuid?]]
+@see [[m:FileTest.#setuid?]]
 
 --- size(file) -> Integer
 --- size?(file) -> Integer | nil
@@ -1008,7 +1008,7 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.size]] [[m:FileTest.size?]]
+@see [[m:FileTest.#size]] [[m:FileTest.#size?]]
 
 --- socket?(file) -> bool
 
@@ -1016,7 +1016,7 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.socket?]]
+@see [[m:FileTest.#socket?]]
 
 
 --- sticky?(file) -> bool
@@ -1024,35 +1024,35 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.sticky?]]
+@see [[m:FileTest.#sticky?]]
 
 --- symlink?(file)
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.symlink?]]
+@see [[m:FileTest.#symlink?]]
 
 --- writable?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.writable?]]
+@see [[m:FileTest.#writable?]]
 
 --- writable_real?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.writable_real?]]
+@see [[m:FileTest.#writable_real?]]
 
 --- zero?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
 
-@see [[m:FileTest.zero?]]
+@see [[m:FileTest.#zero?]]
 
 #@until 1.9.1
 --- syscopy(from, to) -> bool
