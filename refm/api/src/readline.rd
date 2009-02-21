@@ -145,9 +145,8 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-@see [[m:Readline.vi_editing_mode=]]、[[m:Readline.vi_editing_mode]]、
-     [[m:Readline.emacs_editing_mode=]]、[[m:Readline.emacs_editing_mode]]、
-     [[m:Readline::HISTORY]]
+@see [[m:Readline.vi_editing_mode]]、[[m:Readline.emacs_editing_mode]]、
+     [[c:Readline::HISTORY]]
 
 == Singleton Methods
 
