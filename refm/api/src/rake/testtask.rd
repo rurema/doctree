@@ -121,7 +121,7 @@ require rake/tasklib
 
 明示的にテスト対象のファイルを指定します。
 
-[[m:Rake::TestTask#pattern=]], [[m:Rake::TestTask#test_files]] の
+[[m:Rake::TestTask#pattern=]], [[m:Rake::TestTask#test_files=]] の
 両方でテスト対象を指定した場合、両者は一つにまとめて使用されます。
 
 @param list 配列か [[c:Rake::FileList]] のインスタンスを指定します。

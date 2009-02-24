@@ -125,7 +125,7 @@ Rake タスクを定義します。
     rm_rf "html"
   end
 
-@see [[m:Rake::Task#define_task]]
+@see [[m:Rake::Task.define_task]]
 
 
 --- file(*args){ ... } -> Rake::FileTask
@@ -145,7 +145,7 @@ Rake タスクを定義します。
      end
    end
 
-@see [[m:Rake::Task#define_task]]
+@see [[m:Rake::Task.define_task]]
 
 --- file_create(*args){ ... } -> Rake::FileCreationTask
 
@@ -157,7 +157,7 @@ Rake タスクを定義します。
 
 与えられたディレクトリを作成するタスクを定義します。
 
-@param 作成するディレクトリを指定します。
+@param dir 作成するディレクトリを指定します。
 
 例:
   directory 'testdata/doc'
@@ -270,9 +270,9 @@ Rake タスクを定義します。
 
 リンクの作成に失敗した場合はファイルをコピーします。
 
-@param args [[m:FileUtils#cp]], [[m:FileUtils#ln]] に渡す引数を指定します。
+@param args [[m:FileUtils.#cp]], [[m:FileUtils.#ln]] に渡す引数を指定します。
 
-@see [[m:FileUtils#cp]], [[m:FileUtils#ln]]
+@see [[m:FileUtils.#cp]], [[m:FileUtils.#ln]]
 
 --- split_all(path) -> Array
 

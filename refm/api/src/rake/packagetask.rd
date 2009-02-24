@@ -12,13 +12,13 @@ require rake/tasklib
 : repackage
   パッケージが古くない場合でもパッケージを再作成します。
 : PACKAGE_DIR/NAME-VERSION.tgz
-  [[m:Rake::PackageRask#need_tar]] が真の場合 gzip された tar パッケージを作成します。
+  [[m:Rake::PackageTask#need_tar]] が真の場合 gzip された tar パッケージを作成します。
 : PACKAGE_DIR/NAME-VERSION.tar.gz
-  [[m:Rake::PackageRask#need_tar_gz]] が真の場合 gzip された tar パッケージを作成します。
+  [[m:Rake::PackageTask#need_tar_gz]] が真の場合 gzip された tar パッケージを作成します。
 : PACKAGE_DIR/NAME-VERSION.tar.bz2
-  [[m:Rake::PackageRask#need_tar_bz2]] が真の場合 bzip2 された tar パッケージを作成します。
+  [[m:Rake::PackageTask#need_tar_bz2]] が真の場合 bzip2 された tar パッケージを作成します。
 : PACKAGE_DIR/NAME-VERSION.zip
-  [[m:Rake::PackageRask#need_zip]] が真の場合 zip されたパッケージを作成します。
+  [[m:Rake::PackageTask#need_zip]] が真の場合 zip されたパッケージを作成します。
 
 例:
    Rake::PackageTask.new("rake", "1.2.3") do |t|

@@ -78,7 +78,7 @@ Rakefile とそのファイルがあったディレクトリのペアを返します。
 Rakefile がカレントディレクトリに存在する場合はそのファイル名を返します。
 そうでない場合は nil を返します。
 
-@see [[m:Rake::Application.RAKEFILES]]
+@see [[m:Rake::Application::DEFAULT_RAKEFILES]]
 
 --- init(app_name = 'rake')
 #@todo
