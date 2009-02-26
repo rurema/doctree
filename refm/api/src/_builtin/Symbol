@@ -174,43 +174,80 @@ self に対応する Proc オブジェクトを返します。
 #@end
 
 #@since 1.9.1
---- <=>
-#@todo
-
 --- ==(other)        -> true | false
---- equal?(other)   -> true | false
---- eql?(other)     -> true | false
 #@todo
 
-Equality---If sym and obj are exactly the same symbol, returns
-true. Otherwise, compares them as strings.
+other がシンボルの時に true を返します。
 
---- =~
+--- succ -> Symbol
+--- next -> Symbol
 #@todo
+
+@see [[m:String#succ]]
+
+--- <=>(other) -> Integer
+#@todo
+
+@see [[m:String#<=>]]
+
+--- casecmp(other) -> Integer
+#@todo
+
+@see [[m:String#casecmp]]
+
+--- =~(other) -> Integer
+#@todo
+
+@see [[m:String#=~]]
 
 --- []
+--- slice
 #@todo
 
---- capitalize
+@see [[m:String#[]]], [[m:String#slice]]
+
+--- length -> Integer
+--- size -> Integer
 #@todo
 
---- casecmp
+@see [[m:String#length]], [[m:String#size]]
+
+--- empty? -> bool
 #@todo
 
---- downcase
+@see [[m:String#empty?]]
+
+--- match
 #@todo
 
---- empty?
+@see [[m:String#match]]
+
+--- upcase -> Symbol
 #@todo
 
---- encoding
+@see [[m:String#upcase]]
+
+--- downcase -> Symbol
 #@todo
 
---- eql?
+@see [[m:String#downcase]]
+
+--- capitalize -> Symbol
 #@todo
 
---- hash
+@see [[m:String#capitalize]]
+
+--- swapcase -> Symbol
 #@todo
+
+@see [[m:String#swapcase]]
+
+--- encoding   -> Encoding
+#@todo
+
+@see [[m:String#encoding]]
+
+#@end
 
 --- inspect    -> String
 #@todo
@@ -218,29 +255,3 @@ true. Otherwise, compares them as strings.
 Returns the representation of sym as a symbol literal.
 
    :fred.inspect   #=> ":fred"
-
---- length
-#@todo
-
---- match
-#@todo
-
---- next
-#@todo
-
---- size
-#@todo
-
---- slice
-#@todo
-
---- succ
-#@todo
-
---- swapcase
-#@todo
-
---- upcase
-#@todo
-
-#@end
