@@ -286,14 +286,23 @@ file_name で与えられたディレクトリが存在する場合に真を返します。
 @raise IOError close に失敗した場合に発生します。また既に自身が close している場合に発生します。
 
 --- each {|item| ... }    -> self
+#@since 1.8.8
+--- each                  -> Enumerator
+#@else
 #@since 1.8.7
 --- each                  -> Enumerable::Enumerator
+#@end
 #@end
 
 ディレクトリの各エントリを表す文字列を引数として、ブロックを評価します。
 
 #@since 1.8.7
-ブロックが与えられなかった場合、各エントリを文字列として保持する [[c:Enumerable::Enumerator]]
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+#@since 1.8.8
+[[c:Enumerator]]
+#@else
+[[c:Enumerable::Enumerator]]
+#@end
 オブジェクトを返します。
 #@end
 
