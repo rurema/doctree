@@ -204,7 +204,7 @@ other がシンボルの時に true を返します。
 --- slice
 #@todo
 
-@see [[m:String#[]]], [[m:String#slice]]
+@see [[m:String#[] ]], [[m:String#slice]]
 
 --- length -> Integer
 --- size -> Integer
