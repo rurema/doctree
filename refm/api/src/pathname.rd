@@ -288,6 +288,13 @@ IO.read(self.to_s, *args)と同じです。
 
 @see [[m:IO.read]]
 
+#@since 1.9.2
+--- binread(*args)
+IO.binread(self.to_s, *args)と同じです。
+
+@see [[m:IO.binread]]
+
+#@end
 --- readlines(*args)
 IO.readlines(self.to_s, *args)と同じです。
 
