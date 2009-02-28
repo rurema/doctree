@@ -144,7 +144,10 @@ cleanpath は、実際にファイルシステムを参照することなく、文字列操作
        #<Pathname:bar/bar>
        #<Pathname:bar/foo/../bar>
 
+--- realpath -> Pathname
+#@until 1.9.2
 --- realpath(force_absolute = true) -> Pathname
+#@end
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
 また、ファイルシステムをアクセスし、実際に存在するパスを返します。
@@ -152,7 +155,10 @@ cleanpath は、実際にファイルシステムを参照することなく、文字列操作
 
 self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
 
+#@until 1.9.2
 @param force_absolute 真の場合、絶対パスを返します。 self が相対パスであれば、カレントディレクトリからの相対パスとして解釈されます。
+                      古い挙動は obsolete です。引数は省略すべきです。
+#@end
 
     require 'pathname'
 
@@ -168,11 +174,15 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
     Dir.chdir("/tmp")
 
     p path.realpath
+#@until 1.9.2
     p path.realpath(false)
+#@end
 
     => ruby 1.8.0 (2003-10-10) [i586-linux]
        #<Pathname:/tmp/bar>
+#@until 1.9.2
        #<Pathname:bar>
+#@end
 
 --- parent -> Pathname
 self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
@@ -261,11 +271,14 @@ IO.foreach(self.to_s, *args, &block) と同じです。 (cf. [[m:IO.foreach]])
 
 #@end
 
+#@until 1.9.2
 --- foreachline(*args, &block)
 IO.foreach(self.to_s, *args, &block) と同じです。 (cf. [[m:IO.foreach]])
 
 #@since 1.8.1
-このメソッドは obsolete です。 each_line をかわりに使ってください。
+このメソッドは obsolete です。
+代わりに [[m:Pathname#each_line]] を使ってください。
+#@end
 #@end
 
 --- read(*args)
@@ -316,8 +329,14 @@ File.fnmatch?(pattern, self.to_s, *args) と同じです。 (cf. [[m:File.fnmatch?]])
 --- ftype
 File.ftype(self.to_s) と同じです。 (cf. [[m:File.ftype]])
 
+#@until 1.9.2
 --- link(old)
 File.link(old, self.to_s) と同じです。 (cf. [[m:File.link]])
+
+レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
+このメソッドは obsolete です。
+代わりに [[m:Pathname#make_link]] を使ってください。
+#@end
 
 --- open(*args, &block)
 File.open(self.to_s, *args, &block) と同じです。 (cf. [[m:File.open]])
@@ -334,8 +353,14 @@ File.stat(self.to_s) と同じです。 (cf. [[m:File.stat]])
 --- lstat
 File.lstat(self.to_s) と同じです。 (cf. [[m:File.lstat]])
 
+#@until 1.9.2
 --- symlink(old)
 File.symlink(old, self.to_s) と同じです。 (cf. [[m:File.symlink]])
+
+レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
+このメソッドは obsolete です。
+代わりに [[m:Pathname#make_symlink]] を使ってください。
+#@end
 
 --- truncate(length)
 File.truncate(self.to_s, length) と同じです。 (cf. [[m:File.truncate]])
@@ -442,12 +467,22 @@ FileTest.writable_real?(self.to_s) と同じです。
 --- zero?
 FileTest.zero?(self.to_s) と同じです。 (cf. [[m:FileTest.#zero?]])
 
+#@until 1.9.2
 --- chdir(&block)
 Dir.chdir(self.to_s, &block) と同じです。 (cf. [[m:Dir.chdir]])
 
+#@since 1.8.1
+このメソッドは obsolete です。
+代わりに [[m:Dir.chdir]] を使ってください。
+#@end
 --- chroot
 Dir.chroot(self.to_s) と同じです。 (cf. [[m:Dir.chroot]])
 
+#@since 1.8.1
+このメソッドは obsolete です。
+代わりに [[m:Dir.chroot]] を使ってください。
+#@end
+#@end
 --- rmdir
 Dir.rmdir(self.to_s) と同じです。 (cf. [[m:Dir.rmdir]])
 
@@ -461,13 +496,15 @@ Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.fo
 
 #@end
 
+#@until 1.9.2
 --- dir_foreach {|pathname| ... }
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.foreach]]) 
 
 #@since 1.8.1
-このメソッドは obsolete です。 each_entry メソッドを使ってください。
+このメソッドは obsolete です。
+代わりに [[m:Pathname#each_entry]] メソッドを使ってください。
 #@end
-
+#@end
 --- mkdir(*args)
 Dir.mkdir(self.to_s, *args) と同じです。 (cf. [[m:Dir.mkdir]])
 
