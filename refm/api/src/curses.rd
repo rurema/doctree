@@ -1117,12 +1117,30 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 --- can_change_color?
 #@todo
 
+#@since 1.9.2
+--- colors -> Integer
+#@todo
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+@raise NotImplementError
+
+#@end
 --- color_content(color)
 #@todo
 
 --- color_pair(attr)
 #@todo
 
+#@since 1.9.2
+--- color_pairs -> Integer
+#@todo
+
+サポートしていない環境では、例外 NotImplementError が発生します。
+
+@raise NotImplementError
+
+#@end
 --- curs_set(visibility)
 #@todo
 
