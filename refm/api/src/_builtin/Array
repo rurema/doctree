@@ -1309,6 +1309,15 @@ sort! は self を破壊的に変更し、self を返します。ただし、要素の数が 2 より小さい
 
 @see [[m:Enumerable#sort_by]]
 
+#@since 1.9.2
+--- sort_by!               -> Enumerator
+--- sort_by! {|a, b| ... } -> self
+#@todo
+sort_by の破壊的バージョンです。
+
+@see [[m:Enumerable#sort_by]]
+#@end
+
 --- to_a       -> Array
 #@since 1.9.1
 --- to_splat   -> Array
