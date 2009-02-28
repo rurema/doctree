@@ -184,6 +184,17 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
        #<Pathname:bar>
 #@end
 
+#@since 1.9.2
+@see [[m:Pathname#realdirpath]]
+
+--- realdirpath -> Pathname
+#@todo
+
+[[m:Pathname#realpath]] とほぼ同じで、最後のコンポーネントは実際に
+存在しなくてもエラーになりません。
+
+@see [[m:Pathname#realpath]]
+#@end
 --- parent -> Pathname
 self の親ディレクトリを指す新しい Pathname オブジェクトを返します。
 
@@ -223,6 +234,8 @@ other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
 #@since 1.8.1
 
 --- children -> [Pathname]
+#@todo
+#@#(with_directory=true)について追記が必要
 self 配下にあるパス名(Pathnameオブジェクト)の配列を返します。
 
     require 'pathname'
@@ -236,6 +249,17 @@ self 配下にあるパス名(Pathnameオブジェクト)の配列を返します。
 self が存在しないパスであったりディレクトリでなければ例外
 [[c:Errno::EXXX]] が発生します。
 
+#@end
+
+#@since 1.9.2
+
+--- each_child(with_directory=true)                  -> Enumerator
+--- each_child(with_directory=true) {|pathname| ...} -> [Pathname]
+#@todo
+
+self.children(with_directory).each とほぼ同じです。
+
+@see [[m:Pathname#children]]
 #@end
 
 #@since 1.8.1
