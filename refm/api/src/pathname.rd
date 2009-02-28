@@ -267,71 +267,103 @@ base_directory は Pathname オブジェクトでなければなりません。
 #@since 1.8.1
 
 --- each_line(*args, &block)
-IO.foreach(self.to_s, *args, &block) と同じです。 (cf. [[m:IO.foreach]])
+IO.foreach(self.to_s, *args, &block) と同じです。
 
+@see [[m:IO.foreach]]
 #@end
 
 #@until 1.9.2
 --- foreachline(*args, &block)
-IO.foreach(self.to_s, *args, &block) と同じです。 (cf. [[m:IO.foreach]])
+IO.foreach(self.to_s, *args, &block) と同じです。
 
 #@since 1.8.1
 このメソッドは obsolete です。
 代わりに [[m:Pathname#each_line]] を使ってください。
 #@end
-#@end
 
+@see [[m:IO.foreach]]
+#@end
 --- read(*args)
-IO.read(self.to_s, *args)と同じです。 (cf. [[m:IO.read]])
+IO.read(self.to_s, *args)と同じです。
+
+@see [[m:IO.read]]
 
 --- readlines(*args)
-IO.readlines(self.to_s, *args)と同じです。 (cf. [[m:IO.readlines]])
+IO.readlines(self.to_s, *args)と同じです。
+
+@see [[m:IO.readlines]]
 
 --- sysopen(*args)
-IO.sysopen(self.to_s, *args)と同じです。 (cf. [[m:IO.sysopen]])
+IO.sysopen(self.to_s, *args)と同じです。
+
+@see [[m:IO.sysopen]]
 
 #@since 1.8.1
 --- make_link(old)
-File.link(old, self.to_s) と同じです。 (cf. [[m:File.link]]) 
+File.link(old, self.to_s) と同じです。
+
+@see [[m:File.link]]
 
 --- make_symlink(old)
-File.symlink(old, self.to_s) と同じです。 (cf. [[m:File.symlink]])
+File.symlink(old, self.to_s) と同じです。
 
+@see [[m:File.symlink]]
 #@end
 
 --- atime
-[[m:File.atime]]の第一引数に self.to_s を渡したものと同じです。
+File.atime(self.to_s) を渡したものと同じです。
+
+@see [[m:File.atime]]
 
 --- ctime
-[[m:File.ctime]]の第一引数に self.to_s を渡したものと同じです。
+File.ctime(self.to_s) を渡したものと同じです。
 
+@see [[m:File.ctime]]
 --- mtime
-[[m:File.mtime]]の第一引数に self.to_s を渡したものと同じです。
+File.mtime(self.to_s) を渡したものと同じです。
+
+@see [[m:File.mtime]]
 
 --- chmod(mode)
-File.chmod(mode, self.to_s)と同じです。 (cf. [[m:File.chmod]])
+File.chmod(mode, self.to_s) と同じです。
+
+@see [[m:File.chmod]]
 
 --- lchmod(mode)
-File.lchmod(mode, self.to_s)と同じです。 (cf. [[m:File.lchmod]])
+File.lchmod(mode, self.to_s) と同じです。
+
+@see [[m:File.lchmod]]
 
 --- chown(owner, group)
-File.chown(owner, group, self.to_s)と同じです。 (cf. [[m:File.chown]])
+File.chown(owner, group, self.to_s) と同じです。
+
+@see [[m:File.chown]]
 
 --- lchown(owner, group)
-File.lchown(owner, group, self.to_s)と同じです。 (cf. [[m:File.lchown]])
+File.lchown(owner, group, self.to_s) と同じです。
+
+@see [[m:File.lchown]]
 
 --- fnmatch(pattern, *args)
-File.fnmatch(pattern, self.to_s, *args)と同じです。 (cf. [[m:File.fnmatch]])
+File.fnmatch(pattern, self.to_s, *args) と同じです。
+
+@see [[m:File.fnmatch]]
 
 --- fnmatch?(pattern, *args)
-File.fnmatch?(pattern, self.to_s, *args) と同じです。 (cf. [[m:File.fnmatch?]])
+File.fnmatch?(pattern, self.to_s, *args) と同じです。
+
+@see [[m:File.fnmatch?]]
 
 --- ftype
-File.ftype(self.to_s) と同じです。 (cf. [[m:File.ftype]])
+File.ftype(self.to_s) と同じです。
+
+@see [[m:File.ftype]]
 
 #@until 1.9.2
 --- link(old)
-File.link(old, self.to_s) と同じです。 (cf. [[m:File.link]])
+File.link(old, self.to_s) と同じです。
+
+@see [[m:File.link]]
 
 レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
 このメソッドは obsolete です。
@@ -339,23 +371,35 @@ File.link(old, self.to_s) と同じです。 (cf. [[m:File.link]])
 #@end
 
 --- open(*args, &block)
-File.open(self.to_s, *args, &block) と同じです。 (cf. [[m:File.open]])
+File.open(self.to_s, *args, &block) と同じです。
+
+@see [[m:File.open]]
 
 --- readlink
-Pathname.new(File.readlink(self.to_s)) と同じです。 (cf. [[m:File.readlink]])
+Pathname.new(File.readlink(self.to_s)) と同じです。
+
+@see [[m:File.readlink]]
 
 --- rename(to)
-File.rename(self.to_s, to) と同じです。 (cf. [[m:File.rename]])
+File.rename(self.to_s, to) と同じです。
+
+@see [[m:File.rename]]
 
 --- stat
-File.stat(self.to_s) と同じです。 (cf. [[m:File.stat]])
+File.stat(self.to_s) と同じです。
+
+@see [[m:File.stat]]
 
 --- lstat
-File.lstat(self.to_s) と同じです。 (cf. [[m:File.lstat]])
+File.lstat(self.to_s) と同じです。
+
+@see [[m:File.lstat]]
 
 #@until 1.9.2
 --- symlink(old)
-File.symlink(old, self.to_s) と同じです。 (cf. [[m:File.symlink]])
+File.symlink(old, self.to_s) と同じです。
+
+@see [[m:File.symlink]]
 
 レシーバと引数がシステムコールの引数と逆順に対応していて紛らわしいため、
 このメソッドは obsolete です。
@@ -363,120 +407,183 @@ File.symlink(old, self.to_s) と同じです。 (cf. [[m:File.symlink]])
 #@end
 
 --- truncate(length)
-File.truncate(self.to_s, length) と同じです。 (cf. [[m:File.truncate]])
+File.truncate(self.to_s, length) と同じです。
+
+@see [[m:File.truncate]]
 
 --- utime(atime, mtime)
-File.utime(atime, mtime, self.to_s) と同じです。 (cf. [[m:File.utime]])
+File.utime(atime, mtime, self.to_s) と同じです。
+
+@see [[m:File.utime]]
 
 --- basename(*args)
-Pathname.new(File.basename(self.to_s, *args)) と同じです。 (cf. [[m:File.basename]])
+Pathname.new(File.basename(self.to_s, *args)) と同じです。
+
+@see [[m:File.basename]]
 
 --- dirname
-Pathname.new(File.dirname(self.to_s)) と同じです。 (cf. [[m:File.dirname]])
+Pathname.new(File.dirname(self.to_s)) と同じです。
+
+@see [[m:File.dirname]]
 
 --- extname
-File.extname(self.to_s) と同じです。 (cf. [[m:File.extname]])
+File.extname(self.to_s) と同じです。
+
+@see [[m:File.extname]]
 
 --- expand_path(*args)
-Pathname.new(File.expand_path(self.to_s, *args)) と同じです。 (cf. [[m:File.expand_path]])
+Pathname.new(File.expand_path(self.to_s, *args)) と同じです。
+
+@see [[m:File.expand_path]]
 
 --- join(*args)
-Pathname.new(File.join(self.to_s, *args)) と同じです。 (cf. [[m:File.join]])
+Pathname.new(File.join(self.to_s, *args)) と同じです。
+
+@see [[m:File.join]]
 
 --- split
-File.split(self.to_s) と同じです。 (cf. [[m:File.split]])
+File.split(self.to_s) と同じです。
+
+@see [[m:File.split]]
 
 --- blockdev?
-FileTest.blockdev?(self.to_s) と同じです。 (cf. [[m:FileTest.#blockdev?]])
+FileTest.blockdev?(self.to_s) と同じです。
+
+@see [[m:FileTest.#blockdev?]]
 
 --- chardev?
-FileTest.chardev?(self.to_s) と同じです。 (cf. [[m:FileTest.#chardev?]])
+FileTest.chardev?(self.to_s) と同じです。
+
+@see [[m:FileTest.#chardev?]]
 
 --- executable?
-FileTest.executable?(self.to_s) と同じです。 (cf. [[m:FileTest.#executable?]])
+FileTest.executable?(self.to_s) と同じです。
+
+@see [[m:FileTest.#executable?]]
 
 --- executable_real?
-FileTest.executable_real?(self.to_s) と同じです。 
-(cf. [[m:FileTest.#executable_real?]])
+FileTest.executable_real?(self.to_s) と同じです。
+
+@see [[m:FileTest.#executable_real?]]
 
 --- exist?
-FileTest.exist?(self.to_s) と同じです。 (cf. [[m:FileTest.#exist?]])
+FileTest.exist?(self.to_s) と同じです。
+
+@see [[m:FileTest.#exist?]]
 
 --- grpowned?
-FileTest.grpowned?(self.to_s) と同じです。 (cf. [[m:FileTest.#grpowned?]])
+FileTest.grpowned?(self.to_s) と同じです。
+
+@see [[m:FileTest.#grpowned?]]
 
 --- directory?
-FileTest.directory?(self.to_s) と同じです。 (cf. [[m:FileTest.#directory?]])
+FileTest.directory?(self.to_s) と同じです。
+
+@see [[m:FileTest.#directory?]]
 
 --- file?
-FileTest.file?(self.to_s) と同じです。 (cf. [[m:FileTest.#file?]])
+FileTest.file?(self.to_s) と同じです。
+
+@see [[m:FileTest.#file?]]
 
 --- pipe?
-FileTest.pipe?(self.to_s) と同じです。 (cf. [[m:FileTest.#pipe?]])
+FileTest.pipe?(self.to_s) と同じです。
+
+@see [[m:FileTest.#pipe?]]
 
 --- socket?
-FileTest.socket?(self.to_s) と同じです。 (cf. [[m:FileTest.#socket?]])
+FileTest.socket?(self.to_s) と同じです。
+
+@see [[m:FileTest.#socket?]]
 
 --- owned?
-FileTest.owned?(self.to_s) と同じです。 (cf. [[m:FileTest.#owned?]])
+FileTest.owned?(self.to_s) と同じです。
+
+@see [[m:FileTest.#owned?]]
 
 --- readable?
-FileTest.readable?(self.to_s) と同じです。 (cf. [[m:FileTest.#readable?]])
+FileTest.readable?(self.to_s) と同じです。
+
+@see [[m:FileTest.#readable?]]
 
 --- readable_real?
-FileTest.readable_real?(self.to_s) と同じです。 
-(cf. [[m:FileTest.#readable_real?]])
+FileTest.readable_real?(self.to_s) と同じです。
+
+@see [[m:FileTest.#readable_real?]]
 
 --- setuid?
-FileTest.setuid?(self.to_s) と同じです。 (cf. [[m:FileTest.#setuid?]])
+FileTest.setuid?(self.to_s) と同じです。
+
+@see [[m:FileTest.#setuid?]]
 
 --- setgid?
-FileTest.setgid?(self.to_s) と同じです。 (cf. [[m:FileTest.#setgid?]])
+FileTest.setgid?(self.to_s) と同じです。
+
+@see [[m:FileTest.#setgid?]]
 
 --- size
-FileTest.size(self.to_s) と同じです。 (cf. [[m:FileTest.#size]])
+FileTest.size(self.to_s) と同じです。
+
+@see [[m:FileTest.#size]]
 
 --- size?
-FileTest.size?(self.to_s) と同じです。 (cf. [[m:FileTest.#size?]])
+FileTest.size?(self.to_s) と同じです。
+
+@see [[m:FileTest.#size?]]
 
 --- sticky?
-FileTest.sticky?(self.to_s) と同じです。 (cf. [[m:FileTest.#sticky?]])
+FileTest.sticky?(self.to_s) と同じです。
+
+@see [[m:FileTest.#sticky?]]
 
 --- symlink?
-FileTest.symlink?(self.to_s) と同じです。 (cf. [[m:FileTest.#symlink?]])
+FileTest.symlink?(self.to_s) と同じです。
+
+@see [[m:FileTest.#symlink?]]
 
 #@since 1.8.5
 
 --- world_readable?
-FileTest.world_readable?(self.to_s) と同じです。 
-(cf. [[m:FileTest.#world_readable?]])
+FileTest.world_readable?(self.to_s) と同じです。
+
+@see [[m:FileTest.#world_readable?]]
 
 --- world_writable?
-FileTest.world_writable?(self.to_s) と同じです。 
-(cf. [[m:FileTest.#world_writable?]])
+FileTest.world_writable?(self.to_s) と同じです。
+
+@see [[m:FileTest.#world_writable?]]
 
 #@end
 
 --- writable?
-FileTest.writable?(self.to_s) と同じです。 (cf. [[m:FileTest.#writable?]])
+FileTest.writable?(self.to_s) と同じです。
+
+@see [[m:FileTest.#writable?]]
 
 --- writable_real?
-FileTest.writable_real?(self.to_s) と同じです。 
-(cf. [[m:FileTest.#writable_real?]])
+FileTest.writable_real?(self.to_s) と同じです。
+
+@see [[m:FileTest.#writable_real?]]
 
 --- zero?
-FileTest.zero?(self.to_s) と同じです。 (cf. [[m:FileTest.#zero?]])
+FileTest.zero?(self.to_s) と同じです。
+
+@see [[m:FileTest.#zero?]]
 
 #@until 1.9.2
 --- chdir(&block)
-Dir.chdir(self.to_s, &block) と同じです。 (cf. [[m:Dir.chdir]])
+Dir.chdir(self.to_s, &block) と同じです。
+
+@see [[m:Dir.chdir]]
 
 #@since 1.8.1
 このメソッドは obsolete です。
 代わりに [[m:Dir.chdir]] を使ってください。
 #@end
 --- chroot
-Dir.chroot(self.to_s) と同じです。 (cf. [[m:Dir.chroot]])
+Dir.chroot(self.to_s) と同じです。
+
+@see [[m:Dir.chroot]]
 
 #@since 1.8.1
 このメソッドは obsolete です。
@@ -484,21 +591,29 @@ Dir.chroot(self.to_s) と同じです。 (cf. [[m:Dir.chroot]])
 #@end
 #@end
 --- rmdir
-Dir.rmdir(self.to_s) と同じです。 (cf. [[m:Dir.rmdir]])
+Dir.rmdir(self.to_s) と同じです。
+
+@see [[m:Dir.rmdir]]
 
 --- entries
-Dir.entries(self.to_s) と同じです。 (cf. [[m:Dir.entries]])
+Dir.entries(self.to_s) と同じです。
+
+@see [[m:Dir.entries]]
 
 #@since 1.8.1
 
 --- each_entry {|pathname| ... }
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.foreach]])
+Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
+
+@see [[m:Dir.foreach]]
 
 #@end
 
 #@until 1.9.2
 --- dir_foreach {|pathname| ... }
-Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.foreach]]) 
+Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
+
+@see [[m:Dir.foreach]]
 
 #@since 1.8.1
 このメソッドは obsolete です。
@@ -506,10 +621,14 @@ Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。 (cf. [[m:Dir.fo
 #@end
 #@end
 --- mkdir(*args)
-Dir.mkdir(self.to_s, *args) と同じです。 (cf. [[m:Dir.mkdir]])
+Dir.mkdir(self.to_s, *args) と同じです。
+
+@see [[m:Dir.mkdir]]
 
 --- opendir(&block)
-Dir.open(self.to_s, &block) と同じです。 (cf. [[m:Dir.open]])
+Dir.open(self.to_s, &block) と同じです。
+
+@see [[m:Dir.open]]
 
 --- find {|pathname| ...}
 self 配下のすべてのファイルやディレクトリを
@@ -518,13 +637,19 @@ self 配下のすべてのファイルやディレクトリを
   require 'find'
   Find.find(self.to_s) {|f| yield Pathname.new(f)}
 
-と同じです。 (cf. [[m:Find.#find]])
+と同じです。
+
+@see [[m:Find.#find]]
 
 --- mkpath
-FileUtils.mkpath(self.to_s) と同じです。 (cf. [[m:FileUtils.#mkpath]])
+FileUtils.mkpath(self.to_s) と同じです。
+
+@see [[m:FileUtils.#mkpath]]
 
 --- rmtree
-FileUtils.rm_r(self.to_s) と同じです。 (cf. [[m:FileUtils.#rm_r]])
+FileUtils.rm_r(self.to_s) と同じです。
+
+@see [[m:FileUtils.#rm_r]]
 
 --- unlink
 --- delete
