@@ -1,7 +1,7 @@
 = class Gem::Version
 include Comparable
 
-文字列で表現されたバージョンを比較可能 (Cmparable) にするためのクラスです。
+文字列で表現されたバージョンを比較可能 (Comparable) にするためのクラスです。
 
 == Singleton Methods
 

@@ -158,7 +158,7 @@ gem メソッドは全ての require メソッドよりも前に実行されます。
 
 @param gem Gem の名前の文字列か、Gem の依存関係を [[c:Gem::Dependency]] のインスタンスで指定します。
 
-@param version_requirement 必要とする gem のバージョンを指定します。
+@param version_requirements 必要とする gem のバージョンを指定します。
 
 @return Gem がロードできた場合は true を返します。ロードできなかった場合は false を返します。
 
@@ -192,17 +192,17 @@ gem メソッドは全ての require メソッドよりも前に実行されます。
 --- source_index -> Gem::SourceIndex
 #@todo
 
-[[m:Gem.#path]] にある [[c:Gem::Specifications]] のキャッシュを返します。
-インストールされている [[c:Gem::Specifications]] のインデックスを返します
+[[m:Gem.#path]] にある [[c:Gem::Specification]] のキャッシュを返します。
+インストールされている [[c:Gem::Specification]] のインデックスを返します
 
-@see [[c:Gem::SourceIndex]], [[c:Gem::Specifications]]
+@see [[c:Gem::SourceIndex]], [[c:Gem::Specification]]
 
 --- win_platform? -> bool
 #@todo
 
 Windows プラットフォームであれば真を返します。そうでなければ偽を返します。
 
-@see [[m:Gem::RUBY_PLATFORM]]
+@see [[m:Kernel::RUBY_PLATFORM]]
 
 --- dir -> String
 #@todo
@@ -216,7 +216,7 @@ Gem をインストールするために必要なサブディレクトリを適切に作成します。
 
 ディレクトリを作成する権限が無い場合もこのメソッドからは例外は発生しません。
 
-@see [[c:Gem::DIRECTORIES]]
+@see [[m:Gem::DIRECTORIES]]
 
 --- path -> Array
 #@todo
@@ -290,7 +290,7 @@ Gem をロードできなかった場合に発生するエラーです。
 
 ロードに失敗した Gem の必要条件を返します。
 
-@see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirement]]
+@see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
 
 --- version_requirement=(version_requirement)
 #@todo
@@ -299,7 +299,7 @@ Gem をロードできなかった場合に発生するエラーです。
  
 @param version_requirement [[c:Gem::Requirement]] のインスタンスをセットします。
 
-@see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirement]]
+@see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
 
 
 

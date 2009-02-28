@@ -439,11 +439,11 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 
 »ÈÍÑ²ÄÇ½¤Ê¥Ý¥ê¥·¡¼¤Î°ìÍ÷¤òÊÖ¤·¤Þ¤¹¡£
 
-* [[m:Gem::Security.NoSecurity]]
-* [[m:Gem::Security.AlmostNoSecurity]]
-* [[m:Gem::Security.LowSecurity]]
-* [[m:Gem::Security.MediumSecurity]]
-* [[m:Gem::Security.HighSecurity]]
+ * [[m:Gem::Security::NoSecurity]]
+ * [[m:Gem::Security::AlmostNoSecurity]]
+ * [[m:Gem::Security::LowSecurity]]
+ * [[m:Gem::Security::MediumSecurity]]
+ * [[m:Gem::Security::HighSecurity]]
 
 = class Gem::Security::Policy
 #@todo

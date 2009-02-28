@@ -2,11 +2,11 @@ require rubygems
 require rubygems/source_index
 require rubygems/remote_fetcher
 
-[[c:SourceInfoCache]] が持つエントリを表すためのライブラリです。
+[[c:Gem::SourceInfoCache]] が持つエントリを表すためのライブラリです。
 
 = class Gem::SourceInfoCacheEntry
 
-[[c:SourceInfoCache]] が持つエントリを表すためのクラスです。
+[[c:Gem::SourceInfoCache]] が持つエントリを表すためのクラスです。
 
 == Public Instance Methods
 

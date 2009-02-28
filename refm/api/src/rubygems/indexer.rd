@@ -13,7 +13,7 @@ Gem リポジトリのインデックスを作成するためのクラスです。
 --- abbreviate(spec) -> Gem::Specification
 #@todo
 
-ダウンロードを速くするために与えられた [[c:GemSpecification]] の持つデータを
+ダウンロードを速くするために与えられた [[c:Gem::Specification]] の持つデータを
 小さくします。
 
 @param spec

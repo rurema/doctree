@@ -144,7 +144,7 @@ Gem をインストールします。
 --- spec -> Gem::Specification
 #@todo
 
-インストールしようとしている Gem に対応する [[c:GemSpecification]] のインスタンスを返します。
+インストールしようとしている Gem に対応する [[c:Gem::Specification]] のインスタンスを返します。
 
 --- unpack(directory)
 #@todo

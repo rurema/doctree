@@ -36,14 +36,14 @@ Gem のパスをセットします。
 --- spec -> Gem::Specification
 #@todo
 
-Gem の [[c:GemSpecification]] を返します。
+Gem の [[c:Gem::Specification]] を返します。
 
 --- spec=(spec)
 #@todo
 
-Gem の [[c:GemSpecification]] をセットします。
+Gem の [[c:Gem::Specification]] をセットします。
 
-@param spec Gem の [[c:GemSpecification]] をセットします。
+@param spec Gem の [[c:Gem::Specification]] をセットします。
 
 == Singleton Methods
 

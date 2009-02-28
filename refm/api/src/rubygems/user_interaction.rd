@@ -3,7 +3,7 @@
 
 = module Gem::DefaultUserInteraction
 
-このモジュールはデフォルトの [[c:UserInteraction]] を定義しています。
+このモジュールはデフォルトの [[c:Gem::UserInteraction]] を定義しています。
 
 == Singleton Methods
 
@@ -18,7 +18,7 @@
 デフォルトの UI を新しくセットします。
 
 デフォルトの UI を明確にセットしたことがなければ、シンプルなコンソールベースの
-[[c:UserInteraction]] を自動的に使用します。
+[[c:Gem::UserInteraction]] を自動的に使用します。
 
 @param new_ui 新しい UI を指定します。
 

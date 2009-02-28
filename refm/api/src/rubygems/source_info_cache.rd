@@ -19,7 +19,7 @@ include Gem::UserInteraction
 使用するキャッシュを選択すると、全ての操作で選択されたキャッシュを使用します。
 また、このクラスは動的にキャッシュの種類を切り替えません。
 
-キャッシュデータはキーが取得元の URI で値が [[c:SourceInfoCacheEntry]] のインスタンスであるハッシュです。
+キャッシュデータはキーが取得元の URI で値が [[c:Gem::SourceInfoCacheEntry]] のインスタンスであるハッシュです。
 
 == Public Instance Methods
 

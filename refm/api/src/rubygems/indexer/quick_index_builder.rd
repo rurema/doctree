@@ -10,7 +10,7 @@ require rubygems/indexer
 --- add(spec)
 #@todo
 
-与えられた [[c:Gen::Specification]] のインスタンスをインデックスに追加します。
+与えられた [[c:Gem::Specification]] のインスタンスをインデックスに追加します。
 
 @param spec インデックスに追加する [[c:Gem::Specification]] のインスタンスを指定します。
 

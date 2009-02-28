@@ -66,4 +66,4 @@ self が other との依存関係を満たしていれば真を返します。満たしていなければ偽を返
 
 有効な依存関係の型を表す配列です。
 
-@see [[m:Gem::Specification.CURRENT_SPECIFICATION_VERSION]]
+@see [[m:Gem::Specification::CURRENT_SPECIFICATION_VERSION]]

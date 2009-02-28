@@ -175,7 +175,7 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 
 gemspec ¥Õ¥¡¥¤¥ë¤¬¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ë¥Ç¥£¥ì¥¯¥È¥ê¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
-@see [[m:Gem.path]]
+@see [[m:Gem.#path]]
 
 --- load_specification(file_name) -> Gem::Specification | nil
 #@todo

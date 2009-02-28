@@ -82,7 +82,7 @@ Gem が依存している Gem の情報を集めて返します。
   ただし、署名付きの Gem のみをインストールするポリシーが指定されている場合は上記のチェックを
   実行します。
 : :format_executable
-  [[m:Gem::Installer#initialize]] を参照してください。
+  [[m:Gem::Installer.new]] を参照してください。
 : :ignore_dependencies
   依存している Gem をインストールしません。
 : :install_dir
