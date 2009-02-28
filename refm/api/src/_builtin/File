@@ -629,6 +629,8 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+@see [[m:File#stat]], [[m:File#ctime]], [[m:File#mtime]]
+
 --- ctime    -> Time
 
 状態が最後に変更された時刻を Time オブジェクトとして返します。状態の変更とは chmod などによるものです。
@@ -636,6 +638,8 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 @raise IOError 自身が close されている場合に発生します。
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
+
+@see [[m:File#stat]], [[m:File#atime]], [[m:File#mtime]]
 
 --- mtime    -> Time
 
@@ -645,6 +649,26 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
+@see [[m:File#stat]], [[m:File#atime]], [[m:File#ctime]]
+
+#@since 1.9.2
+--- size     -> Integer
+
+ファイルのサイズを返します。
+
+例:
+
+   File.open("/dev/null") do |f|
+     f.size   #=> 0
+   end
+
+@raise IOError 自身が close されている場合に発生します。
+
+@raise Errno::EXXX 失敗した場合に発生します。
+
+@see [[m:File#stat]]
+
+#@end
 --- chmod(mode)    -> 0
 
 ファイルのモードを指定された mode に変更します。
