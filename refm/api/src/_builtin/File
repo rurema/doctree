@@ -752,7 +752,27 @@ flock は false を返します。
   * 他のプロセスが排他ロックをすでに行っている場合にロックを行う
   * 他のプロセスがロックしている状態で排他ロックを行う
 
-例:
+例1:
+
+    # 書き込みロック(write lock)を使用してカウンタを更新。
+    # ロック前にファイルを切り詰めてしまうので、
+    # モードに"w"を使ってはいけません。
+    File.open("counter", File::RDWR|File::CREAT, 0644) {|f|
+      f.flock(File::LOCK_EX)
+      value = f.read.to_i + 1
+      f.rewind
+      f.write("#{value}\n")
+      f.flush
+      f.truncate(f.pos)
+    }
+
+    # 読み込みロック(read lock)を使用してカウンタを読み込み。
+    File.open("counter", "r") {|f|
+      f.flock(File::LOCK_SH)
+      p f.read
+    }
+
+例2:
 
     f = File.open("/tmp/foo", "w")
 
