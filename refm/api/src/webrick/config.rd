@@ -33,7 +33,7 @@ require webrick/log
 
 --- HTTP
 
-[[m:WEBrick::HTTPServer]] の設定のデフォルト値を保持したハッシュです。
+[[c:WEBrick::HTTPServer]] の設定のデフォルト値を保持したハッシュです。
 
   HTTP = {
     :ServerName     => Utils.getservername,

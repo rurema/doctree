@@ -28,9 +28,9 @@
 委譲先のオブジェクトを返します。
 
 本メソッドは、サブクラスで再定義する必要があり、
-デフォルトでは [[c:NotImplementError]] が発生します。
+デフォルトでは [[c:NotImplementedError]] が発生します。
 
-@raise NotImplementError サブクラスにて本メソッドが再定義されていない場合に発生します。
+@raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 
 --- __setobj__(obj) -> object
@@ -38,9 +38,9 @@
 委譲先のオブジェクトを設定します。
 
 本メソッドは、サブクラスで再定義する必要があり、
-デフォルトでは [[c:NotImplementError]] が発生します。
+デフォルトでは [[c:NotImplementedError]] が発生します。
 
-@raise NotImplementError サブクラスにて本メソッドが再定義されていない場合に発生します。
+@raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 
 --- clone -> object
@@ -69,7 +69,7 @@
 
 シリアライズされたオブジェクトから、[[m:Delegator::MethodDelegation#__getobj__]] が返すオブジェクトを再現します。
 
-@param obj [[m:Delegator__MethodDelegatation#marshal_dump]]の戻り値のコピー
+@param obj [[m:Delegator::MethodDelegation#marshal_dump]]の戻り値のコピー
 
 
 --- method_missing(m, *args, &block) -> object
