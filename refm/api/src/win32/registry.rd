@@ -46,7 +46,7 @@ include Win32::Registry::Constants
 レジストリキー key 下のキー subkey を開き，
 開いたキーを表す Win32::Registry オブジェクトを返します。
 key は親のキーを Win32::Registry オブジェクトで指定します。
-親のキーには定義済キー HKEY_* を使用できます (⇒[[m:Win32::Registry#constants]])
+親のキーには定義済キー HKEY_* を使用できます (⇒[[c:Win32::Registry::Constants]])
 
 desired はアクセスマスクです。opt はキーのオプションです。
 詳細は [[unknown:MSDN Library|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp]] を参照してください。
@@ -60,7 +60,7 @@ desired はアクセスマスクです。opt はキーのオプションです。
 レジストリキー key 下にキー subkey を作成し，
 開いたキーを表す Win32::Registry オブジェクトを返します。
 key は親のキーを Win32::Registry オブジェクトで指定します。
-親のキーには定義済キー HKEY_* を使用できます (⇒[[m:Win32::Registry#constants]])
+親のキーには定義済キー HKEY_* を使用できます (⇒[[c:Win32::Registry::Constants]])
 
 サブキーが既に存在していればキーはただ開かれ，[[unknown:created?|Win32::Registry/created?]]
 メソッドが false を返します。
@@ -456,7 +456,7 @@ subkey の値を返します。
 #@todo
 
 キーが新しく作られたか、既存キーが開かれたか。
-[[m:Win32::Registry.disposition]] メソッドも参照してください。
+[[m:Win32::Registry#disposition]] メソッドも参照してください。
 
 --- REG_OPTION_RESERVED
 --- REG_OPTION_NON_VOLATILE
