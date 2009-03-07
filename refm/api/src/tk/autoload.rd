@@ -90,16 +90,16 @@ require tk/xim
 --- TkGrid(*args)
 #@todo
 
-[[m:TkGrid.configure]] と同じ
+[[m:TkGrid.#configure]] と同じ
 
 --- TkPack(*args)
 #@todo
 
-[[m:TkPack.configure]] と同じ
+[[m:TkPack.#configure]] と同じ
 
 --- TkPlace(*args)
 #@todo
 
-[[m:TkPlace.configure]] と同じ
+[[m:TkPlace.#configure]] と同じ
 
 #@end
