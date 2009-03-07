@@ -8,7 +8,7 @@ method_missing and will forward the method call to a XML-RPC server.
 Don't use this class directly, but use instead method [[unknown:XMLRPC::Client#proxy]] or
 [[m:XMLRPC::Client#proxy2]].
 
-Every method call is forwarded to the XML-RPC server defined in [[m:XMLRPC::Client::Proxy#new]].
+Every method call is forwarded to the XML-RPC server defined in [[m:XMLRPC::Client::Proxy.new]].
 
 Note: Inherited methods from class Object cannot be used as XML-RPC names, because they get around
 method_missing.

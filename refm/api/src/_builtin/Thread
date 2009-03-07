@@ -183,7 +183,7 @@ new メソッドと違い initialize メソッドを呼びません。
 VMグローバルのMutexをロックし、ブロックを実行します。
 
 このクラスメソッドの挙動は1.8以前とは違います。
-Thread.exclusiveはVMグローバルの[[c:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]]の
+Thread.exclusiveはVMグローバルの[[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]]の
 synchronizeをしているだけで、Thread.exclusiveしていないスレッドは動きます。
 [[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
 
