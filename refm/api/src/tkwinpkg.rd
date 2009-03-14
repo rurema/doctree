@@ -5,6 +5,6 @@ require tk
 #@include(tk/winpkg/TkWinRegistry)
 
 #@else
-require 'tk/winpkg'
+require tk/winpkg
 
 #@end

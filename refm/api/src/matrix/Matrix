@@ -369,7 +369,7 @@ selfの行列の階数(rank)を返します。
 
 転置行列 (transpose matrix) を返します。
 
-self を[[c:Matirx]]のオブジェクトで、(m,n)型行列としたとき a(j,i) を (i,j) 要素とする (n,m) 型行列を返します。
+self を[[c:Matrix]]のオブジェクトで、(m,n)型行列としたとき a(j,i) を (i,j) 要素とする (n,m) 型行列を返します。
 
 --- row(i) -> Vector
 --- row(i) {|x| ... } -> nil
