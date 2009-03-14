@@ -990,9 +990,13 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:FileTest.#readable_real?]]
 
---- setgid?(file)
+--- setgid?(file) -> bool
 
 FileTestクラスにある同名のクラスメソッドと同じです.
+
+@param file ファイル名を表す文字列を指定します。
+
+@see [[m:FileTest.#setgid?]]
 
 --- setuid?(file)    -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
@@ -1026,7 +1030,7 @@ FileTestクラスにある同名のクラスメソッドと同じです.
 
 @see [[m:FileTest.#sticky?]]
 
---- symlink?(file)
+--- symlink?(file) -> bool
 FileTestクラスにある同名のクラスメソッドと同じです.
 
 @param file ファイル名を表す文字列を指定します。
