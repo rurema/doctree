@@ -7,9 +7,8 @@
 
 == Class Methods
 
---- do_not_reverse_lookup
---- do_not_reverse_lookup=(bool)
-#@todo
+--- do_not_reverse_lookup -> bool
+--- do_not_reverse_lookup=(bool) -> bool
 
 この値が真ならアドレスからホスト名への逆引きを行わなくなります。
 デフォルトは false です。この設定は大域的に作用します。
@@ -24,6 +23,8 @@
   * [[m:IPSocket#peeraddr]]
   * [[m:Socket.getaddrinfo]]
 
+@param bool この値が真ならアドレスからホスト名への逆引きを行わなくなります。
+
 例:
 
   require 'socket'
@@ -36,13 +37,17 @@
      ["AF_INET", 2254, "127.0.0.1", "127.0.0.1"]
 
 #@since 1.8.0
---- for_fd(fd)
-#@todo
+--- for_fd(fd) -> Object
 
 ファイルディスクリプタ fd に対する新しいソケットを生成します。
 このメソッドは [[c:Socket]] クラスからこのクラスに移動しました。
 これにより、任意のソケットである fd から対応するソケッ
 トクラスを作ることができます。
+
+@param   fd ファイルディスクリプタ を指定します。
+
+@return  任意のソケットである fd から対応するソケットクラスを作り、それを返します。
+
 #@end
 
 == Instance Methods
@@ -57,8 +62,7 @@
 BasicSocket.do_not_reverse_lookup になります。
 #@end
 
---- getpeername
-#@todo
+--- getpeername -> String
 
 接続の相手先のソケットの情報を取得します。sockaddr 構造体をパッ
 クした文字列を返します。[[man:getpeername(2)]] を参照してください。
@@ -73,8 +77,7 @@ BasicSocket.do_not_reverse_lookup になります。
   p Socket.unpack_sockaddr_in(addr)   #=> [46988, "127.0.0.1"]
   p addr == s.getsockname     #=> true
 
---- getsockname
-#@todo
+--- getsockname -> String
 
 ソケットの情報を取得します。sockaddr 構造体をパックした
 文字列を返します。[[man:getsockname(2)]] を参照してください。
