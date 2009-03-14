@@ -144,46 +144,52 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
 
 = reopen IO
 == Instance Methods
---- scanf(format)
---- scanf(format) {|*ary| ...}
-#@todo
+--- scanf(format) -> Array
+--- scanf(format) {|*ary| ...} -> Array
 
 [[m:String#scanf]]も参照してください。
 
-The trick here is doing a match where you grab one line of input at a time. 
-The linebreak may or may not occur at the boundary where the string matches 
-a format specifier. And if it does, some rule about whitespace may or may not 
-be in effect...
+@param format スキャンするフォーマットを文字列で指定します。
+              詳細は、[[unknown:scanfフォーマット文字列]] を参照してください。
 
-That’s why this is much more elaborate than the string version.
-
-For each line: 
-
-Match succeeds (non-emptily) 
-
-a) and the last attempted spec/string sub-match succeeded:
-
-  a-1) could the last spec keep matching?
-    yes: save interim results and continue (next line)
-
-b) The last attempted spec/string did not match:
-
-  b-1)are we on the next-to-last spec in the string?
-
-  yes:
-    is fmt_string.string_left all spaces?
-      yes: does current spec care about input space?
-        yes: fatal failure
-        no: save interim results and continue
-  no: continue  [this state could be analyzed further]
-
+#@#The trick here is doing a match where you grab one line of input at a time. 
+#@#The linebreak may or may not occur at the boundary where the string matches 
+#@#a format specifier. And if it does, some rule about whitespace may or may not 
+#@#be in effect...
+#@#
+#@#That’s why this is much more elaborate than the string version.
+#@#
+#@#For each line: 
+#@#
+#@#Match succeeds (non-emptily) 
+#@#
+#@#a) and the last attempted spec/string sub-match succeeded:
+#@#
+#@#  a-1) could the last spec keep matching?
+#@#    yes: save interim results and continue (next line)
+#@#
+#@#b) The last attempted spec/string did not match:
+#@#
+#@#  b-1)are we on the next-to-last spec in the string?
+#@#
+#@#  yes:
+#@#    is fmt_string.string_left all spaces?
+#@#      yes: does current spec care about input space?
+#@#        yes: fatal failure
+#@#        no: save interim results and continue
+#@#  no: continue  [this state could be analyzed further]
+#@#
 
 = reopen Kernel
 == Private Instance Methods
 
---- scanf(format)
---- scanf(format) {|*ary| ...}
-#@todo
+--- scanf(format) -> Array
+--- scanf(format) {|*ary| ...} -> Array
 
 STDIN.scanf と同じです。
 [[m:IO#scanf]]、[[m:Stdin#scanf]]も参照してください。
+
+@param format スキャンするフォーマットを文字列で指定します。
+              詳細は、[[unknown:scanfフォーマット文字列]] を参照してください。
+
+@see [[m:IO#scanf]], [[m:Stdin#scanf]]
