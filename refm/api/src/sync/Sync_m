@@ -3,67 +3,68 @@
 スレッド同期機構である再入可能な reader/writer ロック機能を Mix-in により提供する。
 
 includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
-(((<ruby 1.7 feature>)))
+#@# (((<ruby 1.7 feature>)))
 
 #@# == ロック状態
 == Constants
 --- Sync_m::UN
-#@todo
-ロックされていない状態。
+ロックされていない状態を表す定数です。
 
 --- Sync_m::EX
-#@todo
-排他ロック。
+排他ロックされている状態を表す定数です。
 オブジェクトの状態を更新する場合のように、
 1つのスレッドがオブジェクトを独占的に使用したい場合に用いる。
 排他ロック中に他のスレッドはオブジェクトを共有/排他ロックできない。
 
 --- Sync_m::SH
-#@todo
-共有ロック。
+共有ロックされている状態を表す定数です。
 複数のスレッドが同時にオブジェクトを使用できる場合に用いる。
 複数のスレッドが共有ロックしている場合、
 どのスレッドもオブジェクトを排他ロックできない。
 
 == Module Functions
 --- sync_mode -> bool
-#@todo
-現在のロック状態を返す。
+現在のロック状態を返します。
 
 --- sync_locked? -> bool
 --- locked? -> bool
-#@todo
-ロックされているかどうかを返す。
+ロックされているかどうかを返します。
 
 --- sync_shared? -> bool
 --- shared? -> bool
-#@todo
-共有ロックされているかどうかを返す。
+共有ロックされているかどうかを返します。
 
 --- sync_exclusive? -> bool
 --- exclusive? -> bool
-#@todo
-排他ロックされているかどうかを返す。
+排他ロックされているかどうかを返します。
 
 --- sync_try_lock(mode = EX) -> bool
 --- try_lock(mode = EX) -> bool
-#@todo
-ロック状態を変更する。
+ロック状態を変更します。
 変更できたかどうかをtrueかfalseで返し、ブロックしない。
+
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_lock(mode = EX) -> self
 --- lock(mode = EX) -> self
-#@todo
-ロック状態を変更する。
+ロック状態を変更します。
 変更できるまで現在のスレッドの実行をブロックする。
+
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_unlock(mode = EX) -> self
 --- unlock(mode = EX) -> self
-#@todo
-ロックを解除する。
+ロックを解除します。
+
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
 
 --- sync_synchronize(mode = EX) {...} -> object
 --- synchronize(mode = EX) {...} -> object
-#@todo
-ロック状態を変更してブロックを実行する。
+ロック状態を変更してブロックを実行します。
 ブロックの実行結果を返します。
+
+@param mode 変更後の状態を指定します。
+            通常、 [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
