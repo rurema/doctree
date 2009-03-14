@@ -260,7 +260,7 @@ sha1
 shell                           kouya           done
 shellwords                      m-kawato        done
 singleton                       snoozer05       done
-socket
+socket                          kouya
 stringio                        sheepman        done
 strscan                         kouya           done
 sync                            kouya           done
