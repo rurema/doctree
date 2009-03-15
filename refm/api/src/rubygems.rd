@@ -120,6 +120,7 @@ Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
   gemhome: /home/hoge/.gems
   gempath: 
   - /usr/local/lib/ruby/gems/1.9
+  gem: --no-rdoc --no-ri
 
 
 === 参考
