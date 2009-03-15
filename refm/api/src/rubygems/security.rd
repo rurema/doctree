@@ -1,6 +1,8 @@
 require rubygems
 require rubygems/gem_openssl
 
+このライブラリは暗号署名を RubyGems パッケージに使用するために使用します。
+
 ==== 署名付きの Gem パッケージ
 
 ===== 目次
