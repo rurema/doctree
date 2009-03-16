@@ -4,24 +4,24 @@
 #--------------------------------------------------------
 _builtin/ARGF                   kouya           done
 _builtin/ArgumentError          snoozer05       done
-_builtin/Array                  sheepman        done
+_builtin/Array                                  done
 _builtin/BasicObject            yugui		done
 _builtin/Bignum                 ujihisa         done
-_builtin/Binding                sheepman        done
-_builtin/Class                  sheepman        done
-_builtin/Comparable             sheepman        done
-_builtin/Continuation           sheepman        done
-_builtin/Data                   sheepman        done
-_builtin/Dir                    sheepman        done
+_builtin/Binding                                done
+_builtin/Class                                  done
+_builtin/Comparable                             done
+_builtin/Continuation                           done
+_builtin/Data                                   done
+_builtin/Dir                                    done
 _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
 _builtin/Encoding		yugui
 _builtin/Enumerable                             done
-_builtin/Exception              sheepman        done
+_builtin/Exception                              done
 _builtin/FalseClass             yamane          done
-_builtin/Fiber                  sheepman        done
-_builtin/File                   sheepman        done
-_builtin/FileTest               sheepman        done
+_builtin/Fiber                                  done
+_builtin/File                                   done
+_builtin/FileTest                               done
 _builtin/File__Constants        takayama        done
 _builtin/File__Stat             kouya           done
 _builtin/Fixnum                 ujihisa         done
@@ -30,7 +30,7 @@ _builtin/FloatDomainError       snoozer05       done
 _builtin/GC                     yugui           done
 _builtin/Profiler               kouji           done
 _builtin/Hash                   eklerni         done
-_builtin/IO                     sheepman        done
+_builtin/IO                                     done
 _builtin/IOError                snoozer05       done
 _builtin/IndexError             snoozer05       done
 _builtin/Integer                ujihisa         done
@@ -49,16 +49,16 @@ _builtin/NilClass               snoozer05       done
 _builtin/NoMemoryError          snoozer05       done
 _builtin/NoMethodError          snoozer05       done
 _builtin/NotImplementedError    snoozer05       done
-_builtin/Numeric                sheepman        done
+_builtin/Numeric                                done
 _builtin/Object                 eklerni         done
-_builtin/ObjectSpace            sheepman        done
+_builtin/ObjectSpace                            done
 _builtin/Precision              snoozer05       done
 _builtin/Proc                   snoozer05       done
-_builtin/Process                sheepman        done
-_builtin/Process__GID           sheepman        done
-_builtin/Process__Status        sheepman        done
-_builtin/Process__Sys           sheepman        done
-_builtin/Process__UID           sheepman        done
+_builtin/Process                                done
+_builtin/Process__GID                           done
+_builtin/Process__Status                        done
+_builtin/Process__Sys                           done
+_builtin/Process__UID                           done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
 _builtin/Regexp                 kouya           done
@@ -66,7 +66,7 @@ _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
 _builtin/ScriptError            snoozer05       done
 _builtin/SecurityError          snoozer05       done
-_builtin/Signal                 sheepman        done
+_builtin/Signal                                 done
 _builtin/SignalException        snoozer05       done
 _builtin/StandardError          snoozer05       done
 _builtin/String                 kouya           done
@@ -77,21 +77,21 @@ _builtin/SyntaxError            snoozer05       done
 _builtin/SystemCallError	yugui           done
 _builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError       snoozer05       done
-_builtin/Thread                 sheepman        done
-_builtin/ThreadError            sheepman        done
-_builtin/ThreadGroup            sheepman        done
-_builtin/Time                   sheepman        done
+_builtin/Thread                                 done
+_builtin/ThreadError                            done
+_builtin/ThreadGroup                            done
+_builtin/Time                                   done
 _builtin/TrueClass              yamane          done
 _builtin/TypeError              snoozer05       done
-_builtin/UnboundMethod          sheepman        done
+_builtin/UnboundMethod                          done
 _builtin/ZeroDivisionError      snoozer05       done
 _builtin/constants              yugui           done
 _builtin/Enumerable__Enumerator yugui           done
 _builtin/fatal                  snoozer05       done
 _builtin/functions              eklerni         done
 _builtin/specialvars            yugui           done
-_builtin/pack-template          sheepman        done
-_builtin/printf-format          sheepman        done
+_builtin/pack-template                          done
+_builtin/printf-format                          done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
@@ -152,7 +152,7 @@ ftools                          okkez           done
 gdbm                            okkez           done
 generator                       okkez           done
 getoptlong
-getopts                         sheepman        done
+getopts                                         done
 gserver
 iconv                           bornite
 importenv                       mukai           done
@@ -185,7 +185,7 @@ net/telnet
 net/telnets
 nkf
 observer                        snoozer05       done
-open-uri                        sheepman        done
+open-uri                                        done
 open3                           sho-h
 openssl                         
 optparse                        
@@ -197,8 +197,8 @@ parsearg
 parsedate                       tadf            almost done
 pathname                        mukai           done
 ping                            okkez           done
-pp                              sheepman        done
-prettyprint                     sheepman        done
+pp                                              done
+prettyprint                                     done
 prime                           yugui
 profile
 profiler
@@ -254,14 +254,14 @@ rubygems                        okkez
 rubyunit
 scanf                           kouya           done
 sdbm                            okkez           done
-securerandom                    sheepman        done
+securerandom                                    done
 set                             m-kawato        done
 sha1
 shell                           kouya           done
 shellwords                      m-kawato        done
 singleton                       snoozer05       done
 socket                          kouya
-stringio                        sheepman        done
+stringio                                        done
 strscan                         kouya           done
 sync                            kouya           done
 syslog                          kouya           done
@@ -279,10 +279,10 @@ tracer                          kouya           done
 tsort                           kouya           done
 ubygems
 un                              okkez           done
-uri                             sheepman        done
+uri                                             done
 weakref                         bornite
 webrick                         
-webrick/cgi                     sheepman        done
+webrick/cgi                                     done
 webrick/ssl                     
 win32/registry
 win32/resolv
