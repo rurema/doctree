@@ -211,4 +211,7 @@ how を省略すると Socket::SHUT_RDWR を指定したことになります。
 
 @param how 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, Socket::SHUT_RDWR などで指定します。
 
-@raise ソケットの以降の接続を終了操作が失敗した場合に発生します。
+@raise Errno::EXXX ソケットの以降の接続を終了操作が失敗した場合に発生します。
+@raise ArgumentError how に範囲外の整数を入力した場合に発生します。
+@raise SecurityError セーフレベルが 4 以上で、ソケットに汚染マークがついていない場合発生します。
+
