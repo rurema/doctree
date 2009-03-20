@@ -90,12 +90,14 @@ BasicSocket.do_not_reverse_lookup になります。
   c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
   s = serv.accept
 
---- getsockopt(level, optname)
-#@todo
+--- getsockopt(level, optname) -> String
 
 ソケットのオプションを取得します。[[man:getsockopt(2)]]
 を参照してください。取得したオプションのデータをパックした文字列を
 返します。
+
+@param level    [[man:getsockopt(2)]] の 第二引数のlevel に相当する整数を指定します。
+@param optname  [[man:getsockopt(2)]] の 第三引数のoption_name に相当する整数を指定します。
 
 例:
 
@@ -105,8 +107,7 @@ BasicSocket.do_not_reverse_lookup になります。
   p c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)  #=> "\000\000\000\000"
   p opt.unpack("i")[0]                                      #=> 0   (Nagle アルゴリズム有効)
 
---- recv(maxlen[, flags])
-#@todo
+--- recv(maxlen, flags = 0) -> String
 
 ソケットからデータを受け取り、文字列として返します。
 maxlen は受け取る最大の長さを指定します。
@@ -119,6 +120,14 @@ Socket クラスで定義されています。(例: Socket::MSG_PEEK)
 たとえば TCP では EOF を意味しますし、
 UDP では空のパケットを読み込んだことを意味します。
 
+@param maxlen 受け取る文字列の最大の長さを指定します。
+
+@param flags [[man:recv(2)]] を参照してください。
+
+@raise IOError
+
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーになった場合などに発生します。
+
 例:
 
   s1, s2 = UNIXSocket.pair
@@ -129,8 +138,7 @@ UDP では空のパケットを読み込んだことを意味します。
   p s2.recv(10)                     #=> ""
 
 #@if (version >= "1.8.5")
---- recv_nonblock(maxlen[, flags])
-#@todo
+--- recv_nonblock(maxlen, flags = 0) -> String
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] でソケットからデータを受け取ります。
@@ -139,10 +147,18 @@ UDP では空のパケットを読み込んだことを意味します。
 
 [[man:recvfrom(2)]] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
+
+@param maxlen 受け取る文字列の最大の長さを指定します。
+
+@param flags [[man:recv(2)]] を参照してください。
+
+@raise IOError
+
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーになった場合などに発生します。
+
 #@end
 
---- send(mesg, flags[, dest_sockaddr])
-#@todo
+--- send(mesg, flags, dest_sockaddr = nil) -> Fixnum
 
 ソケットを介してデータを送ります。flags に関しては
 [[man:send(2)]] を参照してください。connect していないソケット
@@ -154,21 +170,34 @@ dest_sockaddr には「ソケットアドレス構造体を pack した文字列」
 
 データの送信に失敗した場合は例外 [[c:Errno::EXXX]] が発生します。
 
+@param mesg       送信するデータを文字列で指定します。
+
+@param flags      [[man:send(2)]] の flags を参照してください。
+
+@param dest_sockaddr  「ソケットアドレス構造体を pack した文字列」を指定します。
+
+@raise Errno::EXXX データの送信に失敗した場合に発生します。
+
 例:
 
   s = UDPSocket.new
   sockaddr = Socket.sockaddr_in("discard", "localhost")
   s.send("The king has donkey ears!", 0, sockaddr)
 
---- setsockopt(level, optname, optval)
-#@todo
+--- setsockopt(level, optname, optval) -> 0
 
 ソケットのオプションを設定します。[[man:setsockopt(2)]]
 を参照してください。
+
+@param level    [[man:setsockopt(2)]] の level を参照してください。
+@param optname  [[man:setsockopt(2)]] の option_name を参照してください。
+@param optval  設定される値を文字列で指定します。
+
+@raise Errno::EXXX  オプションの設定に失敗した場合発生します。
+
 #@# より高レベルなものとして[[c:RAA:Sockopt]]があります
 
---- shutdown([how])
-#@todo
+--- shutdown(how = Socket::SHUT_RDWR) -> 0
 
 ソケットの以降の接続を終了させます。
 how の値によって以下のように接続が終了します。
@@ -179,3 +208,7 @@ how の値によって以下のように接続が終了します。
 
 how を省略すると Socket::SHUT_RDWR を指定したことになります。
 [[man:shutdown(2)]] を参照してください。
+
+@param how 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, Socket::SHUT_RDWR などで指定します。
+
+@raise ソケットの以降の接続を終了操作が失敗した場合に発生します。
