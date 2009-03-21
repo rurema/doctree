@@ -4,8 +4,8 @@
 
 == Class Methods
 
---- open(host, service)
---- new(host, service)
+--- open(host, service) -> SOCKSSocket
+--- new(host, service) -> SOCKSSocket
 #@todo
 
 host で指定したホストの service で指定したポートと接続したソケッ
@@ -14,9 +14,12 @@ host で指定したホストの service で指定したポートと接続したソケッ
 は /etc/services (または NIS) に登録されているサー
 ビス名かポート番号です。
 
+@param host  ホスト名、または octet decimal によるインターネットアドレスを示す文字列を指定します。
+@param servide /etc/services (または NIS) に登録されているサービス名かポート番号です。
+
+
 == Instance Methods
 
---- close
-#@todo
+--- close -> nil
 
 ソケットを閉じます。
