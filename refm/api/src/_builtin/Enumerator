@@ -181,7 +181,21 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
         # => [120, 0]
         #    [121, 1]
         #    [122, 2]
+#@since 1.9.2
+    
+    require "stringio"
+    StringIO.new("foo|bar|baz").each("|").with_index(1) {|s, i| p [s, i] }
+        # => ["foo|", 0]
+        #    ["bar|", 1]
+        #    ["baz", 2]
 #@end
+
+
+生成時のパラメータに従って、要素にインデックスを添えてブロックを繰り返します。
+インデックスは 0 から始まります。
+#@since 1.9.2
+[[m:Enumeartor#with_index]] は offset 引数を受け取りますが、
+each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
 #@end
 
 #@since 1.9.1
