@@ -46,6 +46,16 @@ HTTP のセッションキーなどに適しています。
 
   p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
 
+#@since 1.9.1
+#@since 1.9.2
+--- urlsafe_base64(n=nil, padding=false)  -> String
+#@else
+--- urlsafe_base64(n=nil)  -> String
+#@end
+#@todo
+
+@see [[m:SecureRandom.base64]]
+#@end
 --- hex(n = nil)    -> String
 
 ランダムな hex 文字列を生成して返します。
@@ -81,3 +91,12 @@ n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
 @raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
 
   p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
+
+#@since 1.8.8
+--- uuid   -> String
+#@todo
+
+SecureRandom.uuid generates a v4 random UUID (Universally Unique IDentifier).
+
+See RFC 4122 for UUID.
+#@end
