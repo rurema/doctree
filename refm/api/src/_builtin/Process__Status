@@ -75,7 +75,7 @@ SIGCHLD を trap する例
 
 == Instance Methods
 
---- ==(other)    -> boolean
+--- ==(other)    -> bool
 
 同じステータスの場合に真を返します。
 
@@ -115,7 +115,7 @@ to_i と同じです。
 
 to_i.to_s と同じです。
 
---- exited?    -> boolean
+--- exited?    -> bool
 
 プロセスが [[man:exit(2)]] などにより正常に終了した場合に、真を返します。
 そうでない場合に false を返します。
@@ -138,7 +138,7 @@ exited? が真の場合プロセスが返した終了ステータスの整数を、そ
 : コアダンプしたとき(このステータスの表示はシステムに依存します)
  #<Process::Status: pid=18262,coredumped>
 
---- stopped?    -> boolean
+--- stopped?    -> bool
 
 プロセスが現在停止(終了ではない)している場合に真を返します。
 [[m:Process.#waitpid]] に [[m:Process::WUNTRACED]] フラグを設定した
@@ -149,7 +149,7 @@ exited? が真の場合プロセスが返した終了ステータスの整数を、そ
 stopped? が真の場合そのシグナルの番号を、そうでない場合は
 nil を返します。
 
---- signaled?    -> boolean
+--- signaled?    -> bool
 
 プロセスがハンドラを定義していないシグナルを受けて終了した場合に真
 を返します。
@@ -159,7 +159,7 @@ nil を返します。
 signaled? が真の場合プロセスを終了させたシグナル番号を、
 そうでない場合は nil を返します。
 
---- coredump?    -> boolean
+--- coredump?    -> bool
 
 終了時にコアダンプしていたら真を返します。
 
@@ -180,7 +180,7 @@ self.to_i >> num と同じです。
    $? >> 8            #=> 99
 
 #@since 1.8.2
---- success?    -> boolean
+--- success?    -> bool
 
 プロセスの終了状態が成功である場合に true を返します。
 そうでない場合に false を返します。

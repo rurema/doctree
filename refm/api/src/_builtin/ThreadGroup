@@ -80,7 +80,7 @@ enclose された ThreadGroup に追加や削除を行うと例外 [[c:ThreadError]] が発生しま
 #@end
 
 #@since 1.8.0
---- enclosed?    -> boolean
+--- enclosed?    -> bool
 
 自身が enclose されているなら true を返します。そうでないなら false を返します。デフォルトは false です。
 

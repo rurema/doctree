@@ -189,7 +189,7 @@ Procをカリー化します
   b = proc { :foo }
   p b.curry[]                  #=> :foo
 
---- lambda? -> boolean
+--- lambda? -> bool
 #@todo
 
 --- source_location -> [String, Fixnum] | nil
