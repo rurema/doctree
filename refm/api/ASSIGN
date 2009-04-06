@@ -17,6 +17,7 @@ _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
 _builtin/Encoding		yugui
 _builtin/Enumerable                             done
+_builtin/Enumerator             yugui           done
 _builtin/Exception                              done
 _builtin/FalseClass             yamane          done
 _builtin/Fiber                                  done
