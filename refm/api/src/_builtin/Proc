@@ -75,6 +75,12 @@ Proc.new は、Proc#initialize が定義されていれば
 
 @raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
 
+#@since 1.8.8
+--- ===(obj) -> ()
+#@todo
+
+@see [[m:Proc#call]]
+#@end
 --- arity -> Fixnum
 
 Proc オブジェクトが受け付ける引数の数を返します。
@@ -182,5 +188,19 @@ Procをカリー化します
 
   b = proc { :foo }
   p b.curry[]                  #=> :foo
-#@end
 
+--- lambda? -> boolean
+#@todo
+
+--- source_location -> [String, Fixnum] | nil
+#@todo
+
+returns the ruby source filename and line number containing this proc
+or nil if this proc was not defined in ruby (i.e. native)
+#@end
+#@since 1.9.2
+--- parameters -> [object]
+#@todo
+
+Proc オブジェクトの引数の情報を返します。
+#@end
