@@ -1,7 +1,7 @@
 = class Dir < Object
 include Enumerable
 
-ディレクトリ内の要素を順に返すディレクトリストリーム操作のためのクラスです。
+ディレクトリの操作を行うためのクラスです。
 
 == Class Methods
            
@@ -14,9 +14,10 @@ include Enumerable
 --- glob(pattern) {|file| ...}          -> nil
 #@end
 
-ワイルドカードの展開を行った結果を文字列の配列として返します。
-
+ワイルドカードの展開を行い、
+パターンにマッチするファイル名を文字列の配列として返します。
 パターンにマッチするファイルがない場合は空の配列を返します。
+
 ブロックが与えられたときはワイルドカードにマッチしたファイルを
 引数にそのブロックを 1 つずつ評価して nil を返します
 
@@ -36,6 +37,7 @@ include Enumerable
 @param flags [[m:File.fnmatch]] に指定できるフラグと同様のフラグを指定できます。
              このフラグを指定することでマッチの挙動を変更することができます。
 //emlist{
+  Dir.glob("*")                      #=> ["bar", "foo"]
   Dir.glob("*", File::FNM_DOTMATCH)  #=> [".", "..", "bar", "foo"]
 //}
 #@end
@@ -77,7 +79,8 @@ include Enumerable
   p Dir.glob("*")          #=> ["foo", "bar", "baz"]
   p Dir.glob("./b*")       #=> ["./bar", "./baz"]      先頭に "./" が付いている。
   p Dir.glob("*/")         #=> ["foo/"]                ディレクトリのみにマッチする。
-  
+  p Dir.glob("wrong_name") #=> []                      マッチしないと空の配列を返す。
+
   Dir.glob("b*") {|f| p f }
  
   #=> "bar"
