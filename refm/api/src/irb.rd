@@ -128,7 +128,7 @@ irb のプロンプトをカスタマイズしたい時は、
   IRB.conf[:PROMPT_MODE] = :MY_PROMPT
 
 PROMPT_I, PROMPT_S, PROMPT_C にはフォーマット文字列を指定します。
-フォーマット文字列では [[m:Kernel#printf]] のように
+フォーマット文字列では [[m:Kernel.#printf]] のように
 「%」を用いた記法が使えます。
 フォーマット文字列で使用可能な記法は以下の通りです。
 
