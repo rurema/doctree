@@ -1,4 +1,3 @@
-require webrick/version
 require webrick/httpversion
 require webrick/httputils
 require webrick/utils

@@ -1,5 +1,4 @@
 require webrick/compat
-#@#require webrick/version
 require webrick/config
 require webrick/log
 require webrick/server

@@ -546,6 +546,7 @@ webrick/cgi
 webrick/compat
 webrick/config
 webrick/cookie
+webrick/htmlutils
 webrick/httputils
 webrick/httpauth
 webrick/httpauth/authenticator
