@@ -1,3 +1,3 @@
 #@since 1.9.1
-JSON を扱うライブラリです。
+JSON (JavaScript Object Notation)を扱うライブラリです。
 #@end
