@@ -265,7 +265,7 @@ self.children(with_directory).each とほぼ同じです。
 #@since 1.8.1
 
 --- relative_path_from(base_directory) -> Pathname
-base_direcoty から self への相対パスを求め、その内容の新しい Pathname
+base_directory から self への相対パスを求め、その内容の新しい Pathname
 オブジェクトを生成して返します。
 
 パス名の解決は文字列操作によって行われ、ファイルシステムをアクセス
