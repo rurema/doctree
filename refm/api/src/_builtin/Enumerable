@@ -192,8 +192,11 @@ self の次の要素を引数に順次ブロックを実行します。
 #@end
 例:
 
-  # 合計を計算する
-  p [1, 2, 3, 4, 5].inject(0) {|result, item| result + item }  # => 15
+  # 合計を計算する。
+  p [2, 3, 4, 5].inject {|result, item| result + item }        #=> 14
+ 
+  # 自乗和を計算する。初期値をセットする必要がある。
+  p [2, 3, 4, 5].inject(0) {|result, item| result + item**2 }  #=> 54
 
 この式は以下のように書いても同じ結果が得られます。
 
