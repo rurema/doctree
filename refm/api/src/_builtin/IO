@@ -221,6 +221,32 @@ IO#lines                      通常どおり
 == Class Methods
 
 #@since 1.9.1
+
+--- copy_stream(src, dst, copy_length = nil)             -> Integer
+--- copy_stream(src, dst, copy_length, src_offset) -> Integer
+
+指定された src から dst へコピーします。
+コピーしたバイト数を返します。
+
+コピー元の src が IO オブジェクトの場合は、src のオフセットから
+ファイル名の場合はファイルの最初からコピーを開始します。
+コピー先の dst に関しても同様です。
+
+dst にファイル名を指定し、そのファイルが存在しない場合、
+ファイルは作成されます。ファイルが存在する場合は長さ 0 に切り詰められます。
+
+src が IO オブジェクトでかつ src_offset が指定されている場合、
+src のオフセット(src.pos)は変更されません。
+
+@param src コピー元となる IO オブジェクトかファイル名を指定します。
+
+@param dst コピー先となる IO オブジェクトかファイル名を指定します。
+
+@param copy_length コピーする長さをバイト単位で指定します。最大 copy_length までコピーされます。
+                   nil を指定した場合、コピーする長さに制限はありません。
+
+@param src_offset  コピーを始めるオフセットを数値で指定します。
+
 --- try_convert(obj) -> IO | nil
 #@todo
 Try to convert obj into an IO, using to_io method. Returns converted
@@ -1369,6 +1395,7 @@ stdio を経由しないので他の出力メソッドと混用すると思わぬ動作
 self を返します。
 
 --- ungetc(char)     -> nil
+#@todo
 
 指定された char を読み戻します。
 #@until 1.9.1
@@ -1486,6 +1513,29 @@ self は読み込み用にオープンされていなければなりません。
 #@end
 
 #@since 1.9.1
+
+--- ungetbyte(c) -> nil
+#@todo
+
+Pushes back bytes (passed as a parameter) onto <em>ios</em>,
+such that a subsequent buffered read will return it. Only one byte
+may be pushed back before a subsequent read operation (that is,
+you will be able to read only the last of several bytes that have been pushed
+back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
+
+@param c 
+
+例:
+
+   f = File.new("testfile")   #=> #<File:testfile>
+   b = f.getbyte              #=> 0x38
+   f.ungetbyte(b)             #=> nil
+   f.getbyte                  #=> 0x38
+
+--- binmode? -> bool
+
+自身がバイナリモードなら true を返します。そうでない場合、false を返します。
+
 --- close_on_exec=(bool)    -> bool
 #@todo
 
@@ -1554,3 +1604,13 @@ IO のエンコーディングを設定します。
 --- SEEK_SET
 
 [[m:IO#seek]] を参照してください。
+
+#@since 1.9.1
+
+--- WaitReadable
+#@todo
+
+--- WaitWritable
+#@todo
+
+#@end
