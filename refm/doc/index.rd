@@ -72,7 +72,7 @@ Ruby の文法:
   * [[d:pack_template]]
   * [[d:print_format]]
 #@#  * [[unknown:Ruby が動作するプラットフォーム]]
-  * [[d:grossary]]
+  * [[d:glossary]]
   * [[d:symref]]
 #@##@# 専門的
   * [[d:spec/bnf]]
