@@ -88,3 +88,11 @@ IO オブジェクトが flush メソッドを持っていなければなりません。
 また、true にすると圧縮率が著しく低下します。
 
 @see [[m:IO#sync]], [[m:IO#sync]]
+
+#@since 1.9.2
+--- path
+#@todo
+
+Returns the path string of the associated IO-like object.  This
+method is only defined when the IO-like object responds to #path().
+#@end
