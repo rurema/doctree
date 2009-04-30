@@ -258,10 +258,12 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 
 @param n 行番号を整数で指定します。
 
+#@until 1.9.2
 --- path    -> nil
 
 StringIO には対応するパスはないので nil を返します。
 
+#@end
 --- pid    -> nil
 
 何もせず nil を返します。
