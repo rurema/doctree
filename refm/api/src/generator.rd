@@ -196,7 +196,11 @@ i を与えた場合は、i 番目の Enumerable オブジェクトが終わりに
 #@end
 
 #@since 1.8.4
+#@since 1.8.8
+= reopen Enumerator
+#@else
 = reopen Enumerable::Enumerator
+#@end
 
 == Instance Methods
 --- next -> object
