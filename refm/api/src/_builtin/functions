@@ -688,6 +688,26 @@ Perlと異なりコマンドは常に `|' で始まります。
 します (ただし、DOS/Windowsのようにシステムがテキスト／バイナリでファイルを区別する場
 合に限ります)
 
+#@since 1.9.1
+==== Universal Newline
+改行をLFに揃えます。一言で言えばPEP:278 [[url:http://www.python.org/dev/peps/pep-0278/]]のことです。
+
+: "rt"
+    CR、LF、CRLFのいずれをもLFとして読み込む。
+: "rb"
+    CR、LF、CRLFはいずれもそのまま読み込まれる。
+: "r"
+    "rt"と"rb"のどちらの扱いになるかはプラットフォーム依存。
+    (Unix系ならばなら"rb"、mswinやmingwなら"rt"扱いとなる)
+: "wb"
+    LFはそのままLFとして書き込まれる。
+: "wt" または "w"
+    LFはLFのままか、CR+LFか、どちらかになる。どちらになるかはプラットフォーム依存。
+    (Unix系ならばLFのまま、mswinやmingwならばCRLFとなる)
+
+なお、以上のCR、LF、CRLFは入力のエンコーディングを解釈した後に処理されます。例えば、UTF-16LEでは、LFはバイト列"\x0a\x00"のことになります。
+#@end
+
 --- select(reads, writes = [], excepts = [], timeout = nil) -> [[IO]] | nil
 
 [[m:IO.select]] と同じです。
