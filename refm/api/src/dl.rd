@@ -3,15 +3,18 @@
 
 #@until 1.9.1
 
-#@include(dl/dl.rd)
-#@include(dl/DL)
-#@include(dl/Handle)
-#@include(dl/PtrData)
-#@include(dl/Symbol)
+#@include(dl/dl1/dl.rd)
+#@include(dl/dl1/DL)
+#@include(dl/dl1/Handle)
+#@include(dl/dl1/PtrData)
+#@include(dl/dl1/Symbol)
 
 #@else
 
-#@todo
+#@include(dl/dl2/DL)
+#@include(dl/dl2/Handle)
+#@include(dl/dl2/CPtr)
+#@include(dl/dl2/CFunc)
 
 #@end
 
