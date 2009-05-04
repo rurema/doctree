@@ -127,12 +127,13 @@ digest/md5
 digest/rmd160
 digest/sha1
 digest/sha2
-dl                              
+dl                                                          
 dl/Symbol                       
 dl/import                       
 dl/struct                       
 dl/types                        
 dl/win32
+dl/dl2                          sheepman
 drb                             
 e2mmap                          okkez           done
 erb                             snoozer05       done
