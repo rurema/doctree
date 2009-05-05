@@ -1,0 +1,71 @@
+= class DL::CPtr < Object
+
+== Singleton Methods
+
+--- []
+#@todo 
+
+--- malloc
+#@todo 
+
+--- to_ptr
+#@todo 
+
+== Instance Methods
+
+--- +(other)
+#@todo 
+
+--- +@
+#@todo 
+
+--- -(other)
+#@todo 
+
+--- -@
+#@todo 
+
+--- <=>(other)
+#@todo 
+
+--- ==(other)
+#@todo 
+
+--- []
+--- []=
+#@todo 
+
+--- eql?
+#@todo 
+
+--- free
+--- free=
+#@todo 
+
+--- inspect
+#@todo 
+
+--- null?
+#@todo 
+
+--- ptr
+#@todo 
+
+--- ref
+#@todo 
+
+--- size
+--- size=
+#@todo 
+
+--- to_i
+#@todo 
+
+--- to_s
+#@todo 
+
+--- to_str
+#@todo 
+
+--- to_value
+#@todo 

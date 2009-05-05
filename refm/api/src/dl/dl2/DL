@@ -1,0 +1,104 @@
+= module DL
+
+
+UNIX の [[man:dlopen(3)]] や Windows の LoadLibrary() などのダイナミックリンカへの低レベルな
+インターフェースを提供するモジュールです。
+
+== Module Functions
+
+--- dlopen(lib)                    -> DL::Handle
+--- dlopen(lib) {|handle| ... }    -> DL::Handle
+
+ダイナミックライブラリ lib をロードし、
+[[c:DL::Handle]] として返します。
+
+ブロックが与えられている場合は、[[c:DL::Handle]] 引数として
+与えられたブロックを実行します。[[c:DL::Handle]] を返します。
+
+[[m:DL::Handle.new]](lib) と等価です。
+
+@param lib ロードしたいライブラリを文字列で与えます。
+
+@raise RuntimeError [[man:dlopen(3)]] に失敗した時に発生します。
+
+--- malloc(size)    -> Integer
+
+size バイトのメモリ領域を確保し、その領域を指す整数を返します。
+
+@param size 必要なメモリ領域のサイズを整数で指定します。
+
+--- realloc(addr, size)   -> Integer
+#@todo
+
+--- free(addr)      -> nil
+
+指定された addr が指すメモリ領域を開放します。
+
+必ず [[m:DL.malloc]] が返した整数を addr に与えなければいけません。
+そうでない場合、ruby インタプリタが異常終了します。
+
+@param addr [[m:DL.malloc]] で確保されたメモリ領域を指す整数を指定します。
+
+例:
+  require 'dl'
+  addr = DL.malloc(10)
+  p addr               #=> 136942800
+  DL.free(addr)
+
+--- dlwrap(addr)    -> Integer
+#@todo
+
+@param addr 
+
+--- dlunwrap(addr)  -> Integer
+#@todo
+
+== Constants
+
+--- CdeclCallbackProcs
+
+--- CdeclCallbackAddrs
+
+--- StdcallCallbackProcs
+
+--- StdcallCallbackAddrs
+
+--- ALIGN_CHAR
+--- ALIGN_DOUBLE
+--- ALIGN_FLOAT
+--- ALIGN_INT
+--- ALIGN_LONG
+--- ALIGN_LONG_LONG
+--- ALIGN_SHORT
+--- ALIGN_VOIDP
+--- BUILD_RUBY_PLATFORM
+--- BUILD_RUBY_VERSION
+--- DLSTACK_SIZE
+--- MAX_CALLBACK
+--- NULL
+--- RTLD_GLOBAL
+--- RTLD_LAZY
+--- RTLD_NOW
+--- RUBY_FREE
+--- SIZEOF_CHAR
+--- SIZEOF_DOUBLE
+--- SIZEOF_FLOAT
+--- SIZEOF_INT
+--- SIZEOF_LONG
+--- SIZEOF_LONG_LONG
+--- SIZEOF_SHORT
+--- SIZEOF_VOIDP
+--- TYPE_CHAR
+--- TYPE_DOUBLE
+--- TYPE_FLOAT
+--- TYPE_INT
+--- TYPE_LONG
+--- TYPE_LONG_LONG
+--- TYPE_SHORT
+--- TYPE_VOID
+--- TYPE_VOIDP
+
+
+= class DL::DLError < StandardError
+
+= class DL::DLTypeError < StandardError

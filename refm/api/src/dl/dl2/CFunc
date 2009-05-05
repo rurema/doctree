@@ -1,0 +1,36 @@
+= class DL::CFunc < Object
+
+== Singleton Methods
+
+--- last_error
+#@todo 
+
+== Instance Methods
+
+--- []
+--- call
+#@todo 
+
+--- calltype
+--- calltype=
+#@todo 
+
+--- ctype
+--- ctype=
+#@todo 
+
+--- inspect
+#@todo 
+
+--- name
+#@todo 
+
+--- ptr
+--- ptr=
+#@todo 
+
+--- to_i
+#@todo 
+
+--- to_s
+#@todo 

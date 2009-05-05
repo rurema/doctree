@@ -1,0 +1,21 @@
+= class DL::Handle < Object
+
+== Instance Methods
+
+--- []
+#@todo 
+
+--- close
+#@todo 
+
+--- disable_close
+#@todo 
+
+--- enable_close
+#@todo 
+
+--- sym
+#@todo 
+
+--- to_i
+#@todo 
