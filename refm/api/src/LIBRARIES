@@ -55,8 +55,13 @@ digest/sha2
 #@since 1.8.0
 dl
 dl/import
+#@until 1.9.1
 dl/struct
 dl/types
+#@end
+#@since 1.9.1
+dl/func
+#@end
 dl/win32
 #@end
 drb
