@@ -1,21 +1,61 @@
 = class DL::Handle < Object
 
+オープンされたダイナミックライブラリを表すクラスです。
+[[man:dlopen(3)]] が返すハンドラーのラッパーです。
+
+== Class Methods
+
+--- new(lib)                    -> DL::Handle
+--- new(lib) {|handle| ... }    -> DL::Handle
+
+ライブラリ lib をオープンし、Handle オブジェクトとして返します。
+
+ブロックを指定すれば、生成した Handle を引数としてブロックを実行します。
+Handle はブロックの終りで自動的にクローズされます。
+
+@param lib ライブラリを文字列で指定します。
+
+例:
+
+ require 'dl'
+
+ h = DL::Handle.new('libc.so.6')
+ i = h.sym('strlen') #=> 3085201584
+ cfunc = DL::CFunc.new(i, DL::TYPE_INT, 'strlen')
+ p cfunc.call(['abcde'].pack('p*').unpack('l!*'))   #=> 5
+
 == Instance Methods
 
---- []
-#@todo 
+--- close    -> Integer
 
---- close
-#@todo 
+自身をクローズします。成功した場合は 0 を返します。そうでない場合は、
+0 以外の整数を返します。
 
---- disable_close
-#@todo 
+--- enable_close     -> nil
+--- disable_close    -> nil
 
---- enable_close
-#@todo 
+GC によるオブジェクトの回収時に自身をクローズするかどうかを指定します。
 
---- sym
-#@todo 
+--- sym(func) -> Integer
+--- [](func)  -> Integer
+#@todo
 
---- to_i
-#@todo 
+関数やグローバル変数 func へのポインタを取得し、
+[[c:DL::PtrData]] オブジェクトとして返します。
+
+@param func 得たいシンボルの名前を文字列で与えます。
+
+@raise RuntimeError シンボルが見つからなかった時に発生します。
+
+例:
+
+ require 'dl'
+
+ h = DL::Handle.new('libc.so.6')
+ i = h.sym('strlen') #=> 3085201584
+ cfunc = DL::CFunc.new(i, DL::TYPE_INT, 'strlen')
+ p cfunc.call(['abcde'].pack('p*').unpack('l!*'))   #=> 5
+
+--- to_i    -> Integer
+
+自身が表すハンドル([[man:dlopen(3)]] が返したもの)のアドレスを返します。
