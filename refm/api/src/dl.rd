@@ -11,6 +11,7 @@
 
 #@else
 
+#@include(dl/dl2/dl.rd)
 #@include(dl/dl2/DL)
 #@include(dl/dl2/Handle)
 #@include(dl/dl2/CPtr)
