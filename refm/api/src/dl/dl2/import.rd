@@ -3,18 +3,28 @@
 == Instance Methods
 
 --- []
+#@todo
+
 --- bind
---- bind_function
---- create_carried_function
---- create_temp_function
---- create_value
+#@todo
+
 --- dlload
+#@todo
+
 --- extern
---- import_function
---- import_symbol
---- import_value
+#@todo
+
 --- sizeof
+#@todo
+
 --- struct
+#@todo
+
 --- typealias
+#@todo
+
 --- union
+#@todo
+
 --- value
+#@todo
