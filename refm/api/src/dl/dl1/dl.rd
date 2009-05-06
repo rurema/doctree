@@ -14,7 +14,7 @@ Windows の LoadLibrary() などの
 ある Ruby のモジュールを拡張するには以下のように使用します。
 
   require "dl/import"
-  module M
+  module LIBC
     extend DL::Importable
   end
 
@@ -23,14 +23,14 @@ Windows の LoadLibrary() などの
 それぞれのライブラリ関数に対して extern を使用することで
 ラッパーメソッドを定義します。
 
-  module M
+  module LIBC
     extend DL::Importable
     dlload "libc.so.6","libm.so.6"
     extern "int strlen(char*)"
   end
   # Note that we should not include the module M from some reason.
   
-  p M.strlen('abc') #=> 3
+  p LIBC.strlen('abc') #=> 3
 
 LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
 与えられた関数名の最初の文字が大文字なら、
@@ -42,7 +42,7 @@ LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
 を使って現在時刻を得たい場合は以下のとおりです。
 
  require 'dl/import'
- module M
+ module LIBC
    extend DL::Importable
    dlload "libc.so.6"
    extern('int gettimeofday(void *, void *)')
@@ -51,35 +51,35 @@ LIBC.strlen を使用することで、ライブラリ関数 strlen() を使用できます。
  timeval = DL.malloc(DL.sizeof('LL'))
  timeval.struct!('LL', :tv_sec, :tv_usec)
  
- e = M.gettimeofday(timeval, nil)
+ e = LIBC.gettimeofday(timeval, nil)
  if e == 0
   p timeval[:tv_sec] #=> 1173519547
  end
 
 構造体や共用体の作成には、以下のように [[lib:dl/struct]] で定義されている
-[[m:DL::Importable::Internal#struct]] メソッドや [[m:DL::Importable::Internal#union]] メソッドを使用することもできます。
+[[m:DL::Importable::Internal#struct]] メソッドや
+[[m:DL::Importable::Internal#union]] メソッドを使用することもできます。
 
  require 'dl/import'
  require "dl/struct"
 
- module M
+ module LIBC
    extend DL::Importable
    dlload "libc.so.6"
    extern('int gettimeofday(void *, void *)')
    Timeval = struct ["long tv_sec", "long tv_usec"]
  end
  
- timeval = M::Timeval.malloc # allocate memory.
+ timeval = LIBC::Timeval.malloc # allocate memory.
  
- e = M.gettimeofday(timeval, nil)
+ e = LIBC.gettimeofday(timeval, nil)
  if e == 0
   p timeval.tv_sec #=> 1173519547
  end
 
 上の例で、メモリの割り当てに LIBC::Timeval.new ではなく、
 LIBC::Timeval.malloc を使用していることに注意してください。
-LIBC::Timeval.new は、
-作成済みの PtrData オブジェクトをラップするためのものです。
+LIBC::Timeval.new は作成済みの PtrData オブジェクトをラップするためのものです。
 
 ==== コールバック
 

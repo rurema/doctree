@@ -1,0 +1,25 @@
+= class DL::Function < Object
+
+[[c:DL::CFunc]] のラッパークラスです。
+
+== Class Methods
+
+--- new
+
+== Instance Methods
+
+--- bind
+
+--- bind_at_call
+
+--- call
+
+--- name
+
+--- to_i
+
+--- unbind
+
+--- unbind_at_call
+
+--- wrap_result

@@ -59,9 +59,6 @@ dl/import
 dl/struct
 dl/types
 #@end
-#@since 1.9.1
-dl/func
-#@end
 dl/win32
 #@end
 drb
