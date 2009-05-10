@@ -74,3 +74,33 @@ M::Timeval.malloc を使用していることに注意してください。
   p buff #=>   "7654321"
 
 ここで M::QsortCallback はブロックを呼ぶ [[c:DL::Function]] オブジェクトです。
+
+
+==== ポインタを扱う
+
+引数としてポインタを受け取る関数に対しては、ポインタの変わりに
+文字列を渡します。文字列はポインタが指すメモリ領域として扱われます。
+
+ require 'dl/import' 
+ 
+ module M
+   extend DL::Importer
+   dlload 'libc.so.6'
+   extern 'void * memmove(void *, void *, unsigned long)'
+ end
+ 
+ s = 'xxxyyyzzz'
+ M.memmove(s, 'abc', 3)
+ p s                    #=> "abcyyyzzz"
+
+文字列以外の型のポインタも文字列として渡します。
+
+ module M
+   extend DL::Importer
+   dlload 'libm.so.6'
+   extern 'double modf(double, double *)'
+ end 
+ 
+ s = ' ' * 8
+ p M2.modf(1.25, s)  #=> 0.25
+ p s.unpack('d')[0]  #=> 1.0
