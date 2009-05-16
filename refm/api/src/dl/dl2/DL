@@ -104,6 +104,11 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返します。
 --- TYPE_VOID
 --- TYPE_VOIDP
 
+変数の型を表す定数です。unsigned char などを表したい場合は - を付けて
+
+ - TYPE_CHAR
+
+などとします。
 
 = class DL::DLError < StandardError
 

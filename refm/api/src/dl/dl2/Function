@@ -4,22 +4,82 @@
 
 == Class Methods
 
---- new
+--- new(cfunc, argtypes)                  -> DL::Function
+--- new(cfunc, argtypes){|*arg| ... }     -> DL::Function
+
+指定された [[c:DL::CFunc]] オブジェクト cfunc をラップする
+DL::Function オブジェクトを生成して返します。
+
+@pack cfunc [[c:DL::CFunc]] オブジェクトを指定します。
+
+@parse argtypes cfunc の引数の型を[[c:DL]]に定義された定数の配列で指定します。
+                unsigned char など unsigned を指定したい場合は - を付けて
+//emlist{
+    - TYPE_CHAR
+//}
+                を使います。
+
+例:
+
+ require 'dl/import'
+
+ h = DL::Handle.new
+ addr = h.sym('strncmp')
+ cfunc = DL::CFunc.new(addr, DL::TYPE_INT)
+ func = DL::Function.new(cfunc, [DL::TYPE_VOIDP, DL::TYPE_VOIDP, DL::TYPE_INT])
+ 
+ p func.call("abcd", "abcz", 3)    #=> 0
+
+@see [[m:DL::TYPE_INT]]
 
 == Instance Methods
 
---- bind
+--- bind{|*args| ... }
 
---- bind_at_call
+自身に指定されたブロックをバインドします。
+自身に対して call メソッドが呼ばれたとき、生成時に与えられた [[c:DL::CFunc]] オブジェクトではなく
+このブロックが呼ばれます。
 
---- call
+例:
 
---- name
+ require 'dl/import'
 
---- to_i
+ cfunc = DL::CFunc.new(0, DL::TYPE_INT)
+ func  = DL::Function.new(cfunc, [])
+ func.bind{|i| i + 3  }
+ p func.call(2)             #=> 5
 
---- unbind
 
---- unbind_at_call
+--- call(*arg)
+--- call(*arg){|*v| ... }
 
---- wrap_result
+--- name  -> String
+
+自身が表す関数の名前を文字列で返します。
+
+ require 'dl/import'
+
+ h = DL::Handle.new
+ addr = h.sym('strncmp')
+ cfunc = DL::CFunc.new(addr, DL::TYPE_INT, 'strncmp')
+ func = DL::Function.new(cfunc, [DL::TYPE_VOIDP, DL::TYPE_VOIDP, DL::TYPE_INT])
+ 
+ p func.name    #=> "strncmp"
+
+
+--- to_i  -> Integer
+
+自身が表す関数のアドレスを整数で返します。
+
+ require 'dl/import'
+
+ h = DL::Handle.new
+ addr = h.sym('strncmp')
+ cfunc = DL::CFunc.new(addr, DL::TYPE_INT)
+ func = DL::Function.new(cfunc, [DL::TYPE_VOIDP, DL::TYPE_VOIDP, DL::TYPE_INT])
+
+ p func.to_i    #=>  3084587680
+
+--- unbind    -> ()
+
+自身から関数をアンバインドします。

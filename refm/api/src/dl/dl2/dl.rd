@@ -93,7 +93,7 @@ M::Timeval.malloc を使用していることに注意してください。
  M.memmove(s, 'abc', 3)
  p s                    #=> "abcyyyzzz"
 
-文字列以外の型のポインタも文字列として渡します。
+char * 以外の型のポインタを受け取る関数に対しても文字列を渡します。
 
  module M
    extend DL::Importer
