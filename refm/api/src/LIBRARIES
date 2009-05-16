@@ -58,8 +58,8 @@ dl/import
 #@until 1.9.1
 dl/struct
 dl/types
-#@end
 dl/win32
+#@end
 #@end
 drb
 drb/acl
