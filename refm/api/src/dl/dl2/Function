@@ -50,8 +50,48 @@ DL::Function オブジェクトを生成して返します。
  p func.call(2)             #=> 5
 
 
---- call(*arg)
---- call(*arg){|*v| ... }
+--- call(*arg)              -> DL::CPtr | Integer | Float | nil
+--- call(*arg){|*v| ... }   -> DL::CPtr | Integer | Float | nil
+
+自身が表す関数を呼び、返り値を Ruby のオブジェクトに変換して返します。
+
+自身の返り値の型がポインタを返す場合は、返り値を [[c:DL::CPtr]] オブジェクトとして返します。
+自身の返り値の型([[m:DL::CFunc#ctype]])が double か float である場合は、返り値を
+Ruby の [[c:Float]] オブジェクトに変換して返します。
+返り値の型が void の場合は nil を返します。それ以外の場合は整数として返します。
+
+ブロックを与えた場合、引数の中にバインドされていない [[c:DL::Function]] オブジェクトが
+もしあれば与えられたブロックをバインドし、その後上と同じように関数を呼びます。
+
+@param arg 関数に与える引数を指定します。引数の型がポインタである場合は、
+           [[c:DL::CPtr]] オブジェクト、[[c:DL::Function]] オブジェクト、IO オブジェクト、
+           整数、文字列のいずれかを指定します。特に文字列を与えた場合は、
+           文字列はポインタが指すメモリ領域として扱われます。 
+           それ以外の場合は、Integer か Float を与えます。
+           
+例:
+ require 'dl/import' 
+ 
+ h = DL::Handle.new
+ addr = h.sym('fread')
+ cfunc = DL::CFunc.new(addr, DL::TYPE_INT)
+ func = DL::Function.new(cfunc, [DL::TYPE_VOIDP, DL::TYPE_LONG, DL::TYPE_LONG, DL::TYPE_VOIDP])
+ io = File.open('s.txt')
+ s = " " * 8
+ func.call(s, 4, 1, io)
+ p s                    #=> "hoge    "
+
+例:
+ require 'dl/import' 
+
+ h = DL::Handle.new
+ addr = h.sym('strdup')
+ cfunc = DL::CFunc.new(addr, DL::TYPE_VOIDP)
+ func = DL::Function.new(cfunc, [DL::TYPE_VOIDP])
+ s = 'abc'
+ ptr = func.call(s)
+ p ptr.to_s              #=> "abc"
+
 
 --- name  -> String
 
