@@ -10,9 +10,9 @@
 指定された [[c:DL::CFunc]] オブジェクト cfunc をラップする
 DL::Function オブジェクトを生成して返します。
 
-@pack cfunc [[c:DL::CFunc]] オブジェクトを指定します。
+@param cfunc [[c:DL::CFunc]] オブジェクトを指定します。
 
-@parse argtypes cfunc の引数の型を[[c:DL]]に定義された定数の配列で指定します。
+@param argtypes cfunc の引数の型を[[c:DL]]に定義された定数の配列で指定します。
                 unsigned char など unsigned を指定したい場合は - を付けて
 //emlist{
     - TYPE_CHAR
