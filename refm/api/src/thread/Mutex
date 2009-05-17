@@ -60,13 +60,36 @@ mutex をロックし、ブロックを実行します。実行後に必ず mutex のロッ
 mutex をロックしようとして、ロックが成功した場合、真を返しま
 す。ロックできなかった場合にはブロックせず偽を返します。
 
---- unlock
-#@todo
+--- unlock     -> self | nil
+
 mutex のロックを解放します。mutex のロック待ちになっていたスレッ
 ドの実行は再開されます。
 
 self がロックされていなければ nil を返します。そうでな
 ければself を返します。
+
+例:
+
+ m = Mutex.new
+ begin 
+   m.lock
+   # critical part
+ ensure
+   m.unlock
+ end
+
+#@since 1.9.1
+Mutex はロックしたスレッド以外からロックを開放することは出来ません。
+ロックしたスレッド以外から unlock が呼ばれると ThreadError が発生します。
+
+ m = Mutex.new
+ m.lock
+ Thread.new do
+   m.unlock # => ThreadError
+ end.join
+
+@raise ThreadError 自身をロックしたスレッド以外から呼ばれた場合に発生します。
+#@end
 
 #@since 1.9.1
 --- sleep(timeout = nil)    -> self
