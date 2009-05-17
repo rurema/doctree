@@ -76,6 +76,43 @@ args を指定すると、 method の呼び出し時に渡されます。
 #@end
   p enum.map {|b| '%02x' % b }   # => ["78", "79", "7a"]
 
+
+#@since 1.8.8
+--- new{|y| ... }                   -> Enumerator
+
+Enumerator オブジェクトを生成して返します。与えられたブロックは Enumerator::Yielder オブジェクトを
+引数として実行されます。
+
+生成された Enumerator オブジェクトに対して each を呼ぶと、この生成時に指定されたブロックを
+実行し、Yielder オブジェクトに対して << メソッドが呼ばれるたびに、
+each に渡されたブロックが繰り返されます。
+
+例:
+
+  enum = Enumerator.new{|y|
+    (1..10).each{|i|   
+      y << i if i % 5 == 0
+    }
+  }
+  enum.each{|i| p i }  
+
+  #=>  5 
+      10
+
+
+  fib = Enumerator.new { |y|
+    a = b = 1
+    loop {
+      y << a
+      a, b = b, a + b
+    }
+  }
+
+  p fib.take(10) #=> [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+
+#@end
+
 == Methods
 
 --- each {...} -> object
