@@ -44,13 +44,31 @@ size バイトのメモリ領域を確保し、その領域を指す整数を返します。
   p addr               #=> 136942800
   DL.free(addr)
 
---- dlwrap(addr)    -> Integer
-#@todo
+--- dlwrap(obj)    -> Integer
 
-@param addr 
+指定されたオブジェクト obj のアドレスを表す整数を返します。
 
---- dlunwrap(addr)  -> Integer
-#@todo
+@param obj Ruby のオブジェクトを指定します。
+
+例:
+
+  require 'dl'
+  s = 'abc'
+  p addr = DL.dlwrap(s)   #=> 136122440
+  p DL.dlunwrap(addr)     #=> "abc"
+
+--- dlunwrap(addr)  -> object
+
+指定されたアドレスの Ruby オブジェクトを返します。
+
+@param addr [[m:DL.#dlwrap]] が返した Ruby オブジェクトのアドレス(整数)を指定します。
+
+例:
+
+  require 'dl'
+  s = 'abc'
+  p addr = DL.dlwrap(s)   #=> 136122440
+  p DL.dlunwrap(addr)     #=> "abc"
 
 == Constants
 
