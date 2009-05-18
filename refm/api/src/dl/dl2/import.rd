@@ -1,3 +1,5 @@
+require dl
+
 dl ライブラリのための高レベルインターフェースを提供するライブラリです。
 
 通常は dl ライブラリを使わずこの dl/import ライブラリを使います。
@@ -57,3 +59,8 @@ dl ライブラリのための高レベルインターフェースを提供するライブラリです。
   a = buff.map{|t| DL.dlwrap(t)}.pack('l!*')
   M.qsort(a, buff.size, DL::SIZEOF_VOIDP, M::QsortCallback)
   p a.unpack('l!*').map{|t| DL.dlunwrap(t).to_i }             #=> [1, 10, 100, 1241603848]
+
+==== 複雑な構造体を定義したい
+
+構造体をメンバとして持つ構造体を [[m:DL::Importer#struct]] を使って定義することは残念ながらできません。
+自力でメンバを展開してから [[m:DL::Importer#struct]] を使ってください。
