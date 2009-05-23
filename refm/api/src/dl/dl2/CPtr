@@ -4,8 +4,7 @@
 
 == Singleton Methods
 
---- new(addr)                     -> DL::CPtr
---- new(addr, size, free = nil)   -> DL::CPtr
+--- new(addr, size = 0, free = nil)   -> DL::CPtr
 
 与えられた addr が指すメモリ領域を表す CPtr オブジェクトを生成して返します。
 
@@ -16,7 +15,7 @@ size であると仮定されます。GC は free 関数を使用してメモリを解放します。
 
 @param size 生成する CPtr オブジェクトが指すメモリ領域のサイズを整数で指定します。
 
-@param free 生成する CPtr オブジェクトの free 関数を [[c:DL::CFunc]] オブジェクトで指定します。
+@param free GC 時に呼ばれる free 関数を [[c:DL::CFunc]] オブジェクトか整数で指定します。
 
 --- malloc(size, free = nil)   -> DL::CPtr
 
@@ -24,20 +23,30 @@ size であると仮定されます。GC は free 関数を使用してメモリを解放します。
 
 @param size 確保したいメモリ領域のサイズを整数で指定します。
 
-@param free 返り値にセットされる free 関数を [[c:DL::CFunc]] オブジェクトで指定します。
+@param free GC 時に呼べれる CPtr オブジェクトの free 関数を [[c:DL::CFunc]] オブジェクトか整数で指定します。
 
 --- [](val)       -> DL::CPtr
 --- to_ptr(val)   -> DL::CPtr
-#@todo 
 
 与えられた val を表す CPtr オブジェクトを生成して返します。
-val が文字列の場合は文字列が格納されているメモリ領域を CPtr オブジェクトを返します。
-それ以外の場合は val.to_ptr を呼んで返します。
+
+val が文字列の場合は文字列が格納されているメモリ領域を指す CPtr オブジェクトを返します。
+IO オブジェクトの場合は FILE ポインタを表す CPtr オブジェクトを返します。
+val に to_ptr メソッドが定義されている場合は、val.to_ptr を呼びます。
+上以外の場合は、整数に変換しそれをアドレスとする CPtr オブジェクトを返します。
+
+@param val Ruby オブジェクトを指定します。
+
+例:
+
+ require 'dl'
+ s = "abc"
+ p DL::CPtr[s].to_i                 #=> 136186388
+ p [s].pack('p*').unpack('l!*')[0]  #=> 136186388
 
 == Instance Methods
 
 --- +(n)   -> DL::CPtr
-#@todo 
 
 自身のアドレスに n バイトを足した新しい CPtr オブジェクトを返します。
 
@@ -45,10 +54,17 @@ val が文字列の場合は文字列が格納されているメモリ領域を CPtr オブジェクトを返しま
 
 @param n アドレスの増分を整数で指定します。
 
+例:
+ require 'dl'
+ 
+ s = 'abc'
+ cptr = DL::CPtr[s]
+ p cptr[0,1]         #=> "a"
+ cptr += 1
+ p cptr[0,1]         #=> "b"
 
 --- ptr   -> DL::CPtr
 --- +@    -> DL::CPtr
-#@todo 
 
 自身の指す値を CPtr にして返します。
 自身の指す値はポインタであると仮定します。
@@ -56,8 +72,18 @@ C 言語におけるポインタのポインタに対する間接参照 *p と同じです。
 
 この返り値には、free 関数がセットされていません。
 
+例:
+
+ require 'dl/import'
+ 
+ s = 'abc'
+ cptr = DL::CPtr[s]
+ cref = cptr.ref
+ p cref.to_s(4).unpack('l*')[0]  #=> 136121648
+ p cptr.to_i                     #=> 136121648
+ p cref.ptr.to_s                 #=> "abc"
+
 --- -(n)   -> DL::CPtr
-#@todo
 
 自身のアドレスから n バイトを引いた新しい CPtr オブジェクトを返します。
 
@@ -65,14 +91,35 @@ C 言語におけるポインタのポインタに対する間接参照 *p と同じです。
 
 @param n アドレスの差分を整数で指定します。
 
+例:
+ require 'dl' 
+ 
+ s = 'abc'
+ cptr = DL::CPtr[s]
+ cptr += 1
+ p cptr[0,1]         #=> "b"
+ cptr -= 1
+ p cptr[0,1]         #=> "a"
+
 --- ref   -> DL::CPtr
 --- -@    -> DL::CPtr
-#@todo 
 
 自身を指す CPtr オブジェクトを返します。
 C 言語におけるポインタへのアドレス演算子の適用 &p と同じです。
 
 この返り値には、free 関数がセットされていません。
+
+例:
+
+ require 'dl/import'
+ 
+ s = 'abc'
+ cptr = DL::CPtr[s]
+ cref = cptr.ref
+ p cref.to_s(4).unpack('l*')[0]  #=> 136121648
+ p cptr.to_i                     #=> 136121648
+ p cref.ptr.to_s                 #=> "abc"
+
 
 --- <=>(other)    -> Integer
 #@todo 
@@ -81,14 +128,41 @@ C 言語におけるポインタへのアドレス演算子の適用 &p と同じです。
 
 --- eql?(other)     -> bool
 --- ==(other)       -> bool
-#@todo 
 
 ポインタの指すアドレスが同一かどうかを判定します。
 
---- [](offset, len = 0)     -> String
+例:
+
+ require 'dl' 
+ 
+ s = 'abc'
+ cptr  = DL::CPtr[s]
+ cptr0 = DL::CPtr[s]
+ cptr1 = cptr + 1
+ 
+ p cptr == cptr1     #=> false
+ p cptr == cptr0     #=> true
+
+--- [](offset)            -> Integer
+
+自身の指すアドレスに offset バイトを足したメモリ領域の先頭を整数として返します。
+
+
+例:
+
+ require 'dl'
+ 
+ s = 'abc'
+ cptr  = DL::CPtr[s]
+ p cptr[0]            #=> 97           
+ p cptr[1]            #=> 98
+
+--- [](offset, len)       -> String
 
 自身の指すアドレスに offset バイトを足したメモリ領域の先頭 len バイトを複製し、
-文字列として返します。(self + offset).to_s(len) と同等です。
+文字列として返します。
+
+(self + offset).to_s(len) と同等です。
 offset + len が自身のサイズより小さいかを検証しません。
 
 @param offset 値を得たい領域の先頭のアドレスまでのオフセットを整数で与えます。
@@ -96,12 +170,35 @@ offset + len が自身のサイズより小さいかを検証しません。
 @param len 値を得たい領域のサイズを指定します。
 
 
+例:
+
+ require 'dl'
+ 
+ s = 'abc'
+ cptr  = DL::CPtr[s]
+ p cptr[0, 1]            #=> "a"
+ p cptr[1, 2]            #=> "bc"
+
 --- []=(offset, n)
+
+自身の指すアドレスに offset バイトを足したメモリ領域を指定された n に書き換えます。
+
+例:
+
+ require 'dl'
+
+ s = 'abc'
+ cptr  = DL::CPtr[s]
+ cptr[0] = 65
+ p cptr.to_s         #=> "Bbc"
+
+
 --- []=(offset, len, v) 
-#@todo
 
 自身の指すアドレスに offset バイトを足したメモリ領域の先頭 len バイトに
-文字列 str をコピーします。str のサイズが len より小さい場合は、残りの領域を 0 で埋めます。
+文字列 str をコピーします。
+
+str のサイズが len より小さい場合は、残りの領域を 0 で埋めます。
 コピー先の領域が len より大きいか検証しません。
 
 @param offset 書き換えたいメモリ領域のオフセットを整数で与えます。
@@ -110,6 +207,17 @@ offset + len が自身のサイズより小さいかを検証しません。
 
 @param v メモリ領域にセットしたいバイト列を文字列で指定します。
 
+
+例:
+
+ require 'dl'
+ 
+ s = 'abc'
+ cptr  = DL::CPtr[s]
+ p cptr[1,2] = "AA"
+ p cptr.to_s         #=> "aAA"
+
+
 --- free     -> DL::CFunc
 
 GC がメモリを解放するのに使用する [[c:DL::CFunc]] オブジェクトを返します。
@@ -117,38 +225,34 @@ GC がメモリを解放するのに使用する [[c:DL::CFunc]] オブジェクトを返します。
 これは普通 [[m:CPtr#free=]] や [[m:CPtr.new]] によって設定されます。
 
 --- free=(cfunc)
-#@todo 
 
 GC が自身を解放するのに使う関数を [[c:DL::CFunc]] で指定します。
 
-@param cfunc 自身を解放するのに使われる関数を [[c:DL::CFunc]] で指定します。
+@param cfunc 自身を解放するのに使われる関数を [[c:DL::CFunc]] か整数で指定します。
 
 --- inspect
 #@todo 
 
 --- null?    -> bool
-#@todo 
 
 自身が NULL なら true を返します。そうでないなら false を返します。
 
 --- size        -> Integer
 --- size=(s)
-#@todo 
 
-自身の指す領域のサイズを返します。
-s を指定した場合は、自身の指す領域のサイズは s であると設定します。
-ただし、自身が指すメモリのサイズが s になるように再割り当てはしません。
+自身の指す領域のサイズを表すアクセサです。
+
+s を指定しても自身が指すメモリ領域のサイズが s になるように再割り当てはしません。
 
 @param s 自身が指すメモリのサイズを整数で指定します。
 
 --- to_i    -> Integer
-#@todo 
 
 自身が指すアドレスを整数で返します。
 
 --- to_s         -> String
 --- to_s(len)    -> String
-#@todo 
+
 自身が指す領域から長さ len の文字列を複製して返します。
 
 len を省略した場合は、文字列の終りは '\0' であると仮定して、
@@ -156,18 +260,23 @@ len を省略した場合は、文字列の終りは '\0' であると仮定して、
 
 @param len 文字列の長さを整数で指定します。
 
---- to_str
-#@todo 
+--- to_str         -> String
+--- to_str(len)    -> String
+
+自身が指す領域から長さ len の文字列を複製して返します。
+
+len を省略した場合は、self.size をその代わりに使います。
+
+@param len 文字列の長さを整数で指定します。
 
 --- to_value    -> Object
-#@todo 
 
 自身はヒープに確保された Ruby のオブジェクトを指すポインタであると仮定して、
 自身が指すオブジェクトを返します。
 
 例:
 
- require 'dl/import'
+ require 'dl'
  
  s = 'abc'
  i = DL.dlwrap(s)
