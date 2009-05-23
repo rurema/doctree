@@ -45,7 +45,7 @@ DL::Function オブジェクトを生成して返します。
  require 'dl/import'
 
  cfunc = DL::CFunc.new(0, DL::TYPE_INT)
- func  = DL::Function.new(cfunc, [])
+ func  = DL::Function.new(cfunc, [DL::TYPE_INT])
  func.bind{|i| i + 3  }
  p func.call(2)             #=> 5
 
