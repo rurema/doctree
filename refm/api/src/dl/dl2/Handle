@@ -38,10 +38,8 @@ GC によるオブジェクトの回収時に自身をクローズするかどうかを指定します。
 
 --- sym(func) -> Integer
 --- [](func)  -> Integer
-#@todo
 
-関数やグローバル変数 func へのポインタを取得し、
-[[c:DL::CPtr]] オブジェクトとして返します。
+関数やグローバル変数 func へのポインタを取得し、整数として返します。
 
 @param func 得たいシンボルの名前を文字列で与えます。
 
@@ -52,7 +50,8 @@ GC によるオブジェクトの回収時に自身をクローズするかどうかを指定します。
  require 'dl'
 
  h = DL::Handle.new('libc.so.6')
- i = h.sym('strlen') #=> 3085201584
+ i = h.sym('strlen') 
+ p i                                                #=> 3085201584
  cfunc = DL::CFunc.new(i, DL::TYPE_INT, 'strlen')
  p cfunc.call(['abcde'].pack('p*').unpack('l!*'))   #=> 5
 
