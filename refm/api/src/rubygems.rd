@@ -299,7 +299,7 @@ Gem をロードできなかった場合に発生するエラーです。
 --- push_gem_version_on_load_path
 #@todo
 
-== Singlton Methods
+== Singleton Methods
 
 --- load_full_rubygems_library
 
