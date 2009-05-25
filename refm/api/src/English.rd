@@ -246,7 +246,7 @@
 --- $PROGRAM_NAME -> String
 
 [[m:$0]] ¤ÎÊÌÌ¾
-  
+
   require "English"
   
   p $PROGRAM_NAME
