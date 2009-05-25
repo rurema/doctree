@@ -11,18 +11,15 @@ include MiniTest::Assertions
 == Public Instance Methods
 
 --- name -> String
-#@todo
 
 自身の名前を返します。
 
 --- passed? -> bool
-#@todo
 
 自身の実行に成功した場合は真を返します。
 そうでない場合は偽を返します。
 
 --- run(runner) -> String
-#@todo
 
 自身に関連付けられているテストを実行します。
 
@@ -32,14 +29,12 @@ include MiniTest::Assertions
 @param runner テストの実行結果を管理するオブジェクトを指定します。
 
 --- setup
-#@todo
 
 各テストケースの実行前に実行するメソッドです。
 
 サブクラスで再定義します。
 
 --- teardown
-#@todo
 
 各テストケースの実行後に実行するメソッドです。
 
@@ -54,17 +49,14 @@ include MiniTest::Assertions
 @param name 自身の名前を指定します。
 
 --- inherited(klass)
-#@todo
 
 テストクラス名をテストスイート登録します。
 
 --- reset
-#@todo
 
 テストスイートをクリアします。
 
 --- test_methods -> Array
-#@todo
 
 テストメソッドのリストを返します。
 
@@ -73,13 +65,11 @@ include MiniTest::Assertions
 そうでない場合は、文字コード順にソートされます。
 
 --- test_order -> Symbol
-#@todo
 
 テストの実行順序を返します。
 
 デフォルトはランダムです。
 
 --- test_suites -> Array
-#@todo
 
 テストクラス名のリストを返します。
