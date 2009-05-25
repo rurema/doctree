@@ -1,20 +1,20 @@
 = module MiniTest::Assertions
-#@todo
 
 各種 assert メソッドを提供します。
 
 == Public Instance Methods
 
 --- _assertions -> Fixnum
-#@todo
+
+アサーション数を返します。
 
 --- _assertions=(count)
-#@todo
 
-@param count
+アサーション数をセットします。
+
+@param count 件数を指定します。
 
 --- assert(test, message = nil) -> true
-#@todo
 
 与えられた式の評価結果が真である場合、検査にパスしたことになります。
 
@@ -27,7 +27,6 @@
 @raise MiniTest::Assertion 与えられた式が偽である場合に発生します。
 
 --- assert_block(message = nil){ ... } -> true
-#@todo
 
 与えられたブロックの評価結果が真である場合、検査にパスしたことになります。
 
@@ -38,7 +37,6 @@
 @raise MiniTest::Assertion 与えられたブロックの評価結果が偽である場合に発生します。
 
 --- assert_empty(object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが空である場合、検査にパスしたことになります。
 
@@ -52,7 +50,6 @@
                            また、与えられたオブジェクトが空でない場合にも発生します。
 
 --- assert_equal(expected, actual, message = nil) -> true
-#@todo
 
 与えられた期待値と実際の値が等しい場合、検査にパスしたことになります。
 
@@ -69,7 +66,6 @@
 @see [[m:Object#==]]
 
 --- assert_in_delta(expected, actual, delta = 0.001, message = nil) -> true
-#@todo
 
 期待値と実際の値の差の絶対値が与えられた差分以下である場合、検査にパスしたことになります。
 
@@ -104,7 +100,6 @@
 @raise MiniTest::Assertion 
 
 --- assert_includes(collection, object, message = nil) -> true
-#@todo
 
 与えられたコレクションにオブジェクトが含まれている場合、検査にパスしたことになります。
 
@@ -120,7 +115,6 @@
                            与えられたコレクションにオブジェクトが含まれていない場合に発生します。
 
 --- assert_instance_of(klass, object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが与えられたクラスの直接のインスタンスである場合、検査にパスしたことになります。
 
@@ -138,7 +132,6 @@
 @see [[m:Module#===]], [[m:MiniTest::Assertions#assert_kind_of]]
 
 --- assert_kind_of(klass, object, message) -> true
-#@todo
 
 与えられたオブジェクトが与えられたクラスまたはそのサブクラスのインスタンス
 である場合、検査にパスしたことになります。
@@ -157,7 +150,6 @@
 @see [[m:Object#kind_of?]], [[m:MiniTest::Assertions#assert_instance_of]]
 
 --- assert_match(regexp, str, message = nil) -> true
-#@todo
 
 与えられた文字列が与えられた正規表現にマッチした場合、検査にパスしたことになります。
 
@@ -173,7 +165,6 @@
 @raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチしなかった場合に発生します。
 
 --- assert_nil(object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが nil である場合、検査にパスしたことになります。
 
@@ -186,7 +177,6 @@
 @raise MiniTest::Assertion 与えられたオブジェクトが nil でない場合に発生します。
 
 --- assert_operator(operand1, operator, operand2, message = nil) -> true
-#@todo
 
 与えられたオブジェクトから作成する式を評価した結果が真を返す場合、検査にパスしたことになります。
 
@@ -209,7 +199,6 @@
 
 
 --- assert_raises(*args){ ... } -> true
-#@todo
 
 与えられたブロックを評価中に与えられた例外が発生する場合、検査にパスしたことになります。
 
@@ -222,7 +211,6 @@
 
 
 --- assert_respond_to(object, method_name, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが与えられたメソッドを持つ場合、検査にパスしたことになります。
 
@@ -239,7 +227,6 @@
 @see [[m:Object#respond_to?]]
 
 --- assert_same(expected, actual, message = nil) -> true
-#@todo
 
 与えられた二つのオブジェクトの [[m:Object#object_id]] が同じ場合、検査にパスしたことになります。
 
@@ -256,7 +243,6 @@
 @see [[m:Object#equal?]]
 
 --- assert_send(array, message = nil) -> true
-#@todo
 
 引数から、式を取り出して評価した結果が真の場合、検査にパスしたことになります。
 
@@ -273,7 +259,6 @@
   assert_send([%w[foo bar baz], :include?, 'baz'])
 
 --- assert_throws(tag, message = nil){ ... } -> true
-#@todo
 
 与えられたブロックを評価中に、与えられたタグが [[m:Kernel.#throw]] された場合、検査にパスしたことになります。
 
@@ -288,7 +273,6 @@
 @see [[m:Kernel.#throw]]
 
 --- capture_io{ ... } -> Array
-#@todo
 
 与えられたブロックを評価中の標準出力と標準エラー出力を [[c:StringIO]] に
 変更します。
@@ -297,7 +281,6 @@
         配列にして返します。
 
 --- exception_details(exception, message) -> String
-#@todo
 
 与えられた例外の詳細を文字列として返します。
 
@@ -306,7 +289,6 @@
 @param message メッセージを指定します。
 
 --- flunk(message = nil)
-#@todo
 
 必ず失敗するメソッドです。
 
@@ -315,14 +297,12 @@
 @raise MiniTest::Assertion 必ず発生します。
 
 --- message(message){ ... } -> Proc
-#@todo
 
 与えられたブロックを評価した結果と与えられたメッセージを連結して返します。
 
 @param messege メッセージを指定します。
 
 --- mu_pp(object) -> String
-#@todo
 
 [[m:Object#inspect]] した結果のエンコーディングを変更して返します。
 
@@ -331,14 +311,12 @@
 @param object 任意のオブジェクトを指定します。
 
 --- pass(message = nil) -> true
-#@todo
 
 アサーション数をカウントするために使用します。
 
 @param message 無視されます。
 
 --- refute(test, message = nil) -> true
-#@todo
 
 与えられた式の評価結果が偽である場合、検査にパスしたことになります。
 
@@ -353,7 +331,6 @@
 @see [[m:MiniTest::Assertions#assert]]
 
 --- refute_empty(object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが空でない場合、検査にパスしたことになります。
 
@@ -369,7 +346,6 @@
 @see [[m:MiniTest::Assertions#assert_empty]]
 
 --- refute_equal(expected, actual, message = nil) -> true
-#@todo
 
 与えられた期待値と実際の値が等くない場合、検査にパスしたことになります。
 
@@ -386,7 +362,6 @@
 @see [[m:Object#==]], [[m:MiniTest::Assertions#assert_equal]]
 
 --- refute_in_delta(expected, actual, delta = 0.001, message = nil) -> true
-#@todo
 
 期待値と実際の値の差の絶対値が与えられた差分より大きい場合、検査にパスしたことになります。
 
@@ -421,7 +396,6 @@
 @raise MiniTest::Assertion 
 
 --- refute_includes(collection, object, message = nil) -> true
-#@todo
 
 与えられたコレクションにオブジェクトが含まれていない場合、検査にパスしたことになります。
 
@@ -437,7 +411,6 @@
                            与えられたコレクションにオブジェクトが含まれている場合に発生します。
 
 --- refute_instance_of(klass, object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが与えられたクラスの直接のインスタンスでない場合、検査にパスしたことになります。
 
@@ -455,7 +428,6 @@
 @see [[m:Module#===]], [[m:MiniTest::Assertions#refute_kind_of]], [[m:MiniTest::Assertions#assert_instance_of]]
 
 --- refute_kind_of(klass, object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが与えられたクラスまたはそのサブクラスのインスタンス
 でない場合、検査にパスしたことになります。
@@ -474,7 +446,6 @@
 @see [[m:Object#kind_of?]], [[m:MiniTest::Assertions#refute_instance_of]], [[m:MiniTest::Assertions#assert_kind_of]]
 
 --- refute_match(regexp, str, message = nil) -> true
-#@todo
 
 与えられた文字列が与えられた正規表現にマッチしなかった場合、検査にパスしたことになります。
 
@@ -490,7 +461,6 @@
 @raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチした場合に発生します。
 
 --- refute_nil(object, message = nil) -> true
-#@todo
 
 与えられたオブジェクトが nil でない場合、検査にパスしたことになります。
 
@@ -503,7 +473,6 @@
 @raise MiniTest::Assertion 与えられたオブジェクトが nil である場合に発生します。
 
 --- refute_operator(operand1, operator, operand2, message = nil) -> true
-#@todo
 
 与えられたオブジェクトから作成する式を評価した結果が偽を返す場合、検査にパスしたことになります。
 
@@ -525,7 +494,6 @@
    refute('aaa'.__send__(:==, 'aaa'), 'message')
 
 --- refute_respond_to(object, method_name) -> true
-#@todo
 
 与えられたオブジェクトが与えられたメソッドを持たない場合、検査にパスしたことになります。
 
@@ -542,7 +510,6 @@
 @see [[m:Object#respond_to?]]
 
 --- refute_same(expected, actual, message = nil) -> true
-#@todo
 
 与えられた二つのオブジェクトの [[m:Object#object_id]] が異なる場合、検査にパスしたことになります。
 
@@ -559,7 +526,6 @@
 @see [[m:Object#equal?]]
 
 --- skip(message = nil, backtrace = caller)
-#@todo
 
 このメソッドを呼び出したテストメソッドをスキップします。
 
