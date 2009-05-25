@@ -135,7 +135,6 @@ Proxy サーバ経由で Gem パッケージをインストールするには以下のようにします。
 == Private Instance Methods
 
 --- gem(gem_name, *version_requirements) -> bool
-#@todo
 [[m:$LOAD_PATH]] に Ruby Gem を追加します。
 
 指定された Gem をロードする前にその Gem が必要とする Gem をロードします。
@@ -173,7 +172,6 @@ gem メソッドは全ての require メソッドよりも前に実行されます。
 == Module Functions
 
 --- clear_paths -> nil
-#@todo
 
 [[m:Gem.#dir]], [[m:Gem.#path]] の値をリセットします。
 
@@ -181,17 +179,14 @@ gem メソッドは全ての require メソッドよりも前に実行されます。
 このメソッドは主にユニットテストの独立性を提供するために使用します。
 
 --- marshal_version -> String
-#@todo
 
 [[c:Marshal]] のバージョンを表す文字列を返します。
 
 --- prefix -> String
-#@todo
 
 このライブラリがインストールされているディレクトリの親ディレクトリを返します。
 
 --- source_index -> Gem::SourceIndex
-#@todo
 
 [[m:Gem.#path]] にある [[c:Gem::Specification]] のキャッシュを返します。
 インストールされている [[c:Gem::Specification]] のインデックスを返します
@@ -199,19 +194,16 @@ gem メソッドは全ての require メソッドよりも前に実行されます。
 @see [[c:Gem::SourceIndex]], [[c:Gem::Specification]]
 
 --- win_platform? -> bool
-#@todo
 
 Windows プラットフォームであれば真を返します。そうでなければ偽を返します。
 
 @see [[m:Kernel::RUBY_PLATFORM]]
 
 --- dir -> String
-#@todo
 
 Gem のインストールされているディレクトリを返します。
 
 --- ensure_gem_subdirectories
-#@todo
 
 Gem をインストールするために必要なサブディレクトリを適切に作成します。
 
@@ -220,19 +212,16 @@ Gem をインストールするために必要なサブディレクトリを適切に作成します。
 @see [[m:Gem::DIRECTORIES]]
 
 --- path -> Array
-#@todo
 
 Gem を検索するパスの配列を返します。
 
 --- set_home
-#@todo
 
 Gem のホームディレクトリをセットします。
 
 @see [[m:Gem.#set_home]]
 
 --- set_paths
-#@todo
 
 Gem を検索するパスをセットします。
 
@@ -241,29 +230,19 @@ Gem を検索するパスをセットします。
 == Constants
 
 --- ConfigMap -> Hash
-#@todo
 
 [[m:RbConfig::CONFIG]] の中からこのライブラリで使用するものを抽出して定義したハッシュ。
 
 --- DIRECTORIES -> Array
-#@todo
 
 Gem のホームディレクトリ以下に作成されるサブディレクトリの配列。
 
---- Gem::Enable
-#@todo
-
---- Gem::QuickLoader
-#@todo
-
 --- RubyGemsVersion        -> String
 --- RubyGemsPackageVersion -> String
-#@todo
 
 このライブラリのバージョンを表す文字列。
 
 --- WIN_PATTERNS -> Array
-#@todo
 
 Windows 上で動いている Ruby を識別するための正規表現の配列。
 
@@ -275,26 +254,22 @@ Gem をロードできなかった場合に発生するエラーです。
 == Public Instance Methods
 
 --- name -> String
-#@todo
 
 ロードに失敗した Gem の名前を返します。
 
 --- name=(gem_name)
-#@todo
 
 ロードに失敗した Gem の名前をセットします。
 
 @param gem_name Gem の名前を指定します。
 
 --- version_requirement -> Get::Requirement
-#@todo
 
 ロードに失敗した Gem の必要条件を返します。
 
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
 
 --- version_requirement=(version_requirement)
-#@todo
 
 ロードに失敗した Gem の必要条件をセットします。
  
@@ -303,6 +278,37 @@ Gem をロードできなかった場合に発生するエラーです。
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
 
 
+= module Gem::QuickLoader
+#@todo
+
+== Public Instance Methods
+
+--- calculate_integers_for_gem_version
+#@todo
+
+--- const_missing
+#@todo
+
+--- method_missing
+#@todo
+
+--- push_all_highest_version_gems_on_load_path
+#@todo
+
+--- push_gem_version_on_load_path
+#@todo
+
+== Singlton Methods
+
+--- load_full_rubygems_library
+
+== Constants
+
+--- GemPaths
+#@todo
+
+--- GemVersions
+#@todo
 
 
 #@end
