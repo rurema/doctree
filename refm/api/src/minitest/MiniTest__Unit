@@ -1,51 +1,45 @@
 = class MiniTest::Unit
 #@todo
 
+ユニットテストで使用する様々なメソッドを定義しているクラスです。
+
 == Public Instance Methods
 
 --- assertion_count -> Fixnum
-#@todo
 
 アサーション数を返します。
 
 --- assertion_count=(count)
-#@todo
 
 アサーション数をセットします。
 
 @param count 件数を指定します。
 
 --- errors -> Fixnum
-#@todo
 
 エラー数を返します。
 
 --- errors=(count)
-#@todo
 
 エラー数をセットします。
 
 @param count 件数を指定します。
 
 --- failures -> Fixnum
-#@todo
 
 失敗したアサーション数を返します。
 
 --- failures=(count)
-#@todo
 
 失敗したアサーション数をセットします。
 
 @param count 件数を指定します。
 
 --- location(exception) -> String
-#@todo
 
 与えられた例外の発生した場所を返します。
 
 --- puke(klass, method_name, exception) -> String
-#@todo
 
 テストメソッドの実行結果が成功以外の場合に、その種類と理由を記録します。
 
@@ -59,26 +53,22 @@
         いずれかの頭文字を返します。
 
 --- report -> Array
-#@todo
 
 テストメソッドの実行結果のリストを返します。
 
 --- report=(list)
-#@todo
 
 テストメソッドの実行結果のリストをセットします。
 
 @param list テストメソッドの実行結果のリストを指定します。
 
 --- run(args = []) -> Fixnum | nil
-#@todo
 
 全てのテストを実行するためのメソッドです。
 
 @param args コマンドライン引数を指定します。
 
 --- run_test_suites(filter = /./) -> Array
-#@todo
 
 全てのテストを実行します。
 
@@ -87,24 +77,20 @@
 @return テストケース数とアサーション数を返します。
 
 --- skips -> Fixnum
-#@todo
 
 実行しなかったテストケース数を返します。
 
 --- skips=(count)
-#@todo
 
 実行しなかったテストケース数をセットします。
 
 @param count 件数を指定します。
 
 --- test_count -> Fixnum
-#@todo
 
 テストケース数を返します。
 
 --- test_count=(count)
-#@todo
 
 テストケース数をセットします。
 
@@ -119,7 +105,6 @@
 #@todo
 
 --- output=(stream)
-#@todo
 
 出力先をセットします。
 
