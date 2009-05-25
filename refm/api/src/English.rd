@@ -14,7 +14,7 @@
 
 == Special Variables
 
---- $ERROR_INFO
+--- $ERROR_INFO -> Exception
 
 [[m:$!]] の別名
 
@@ -28,7 +28,7 @@
     p $ERROR_INFO.to_s #=> "SomethingError"
   end
 
---- $ERROR_POSITION
+--- $ERROR_POSITION -> [String] | nil
 
 [[m:$@]] の別名
 
@@ -41,7 +41,8 @@
     p $ERROR_POSITION #=> ["sample.rb:5"]
   end
 
---- $LOADED_FEATURES
+#@until 1.8.2
+--- $LOADED_FEATURES -> [String]
 
 [[m:$"]] の別名
 
@@ -50,8 +51,10 @@
 
   p $LOADED_FEATURES #=> ["English.rb", "find.rb"]
 
---- $FS
---- $FIELD_SEPARATOR
+#@end
+
+--- $FS              -> String | nil
+--- $FIELD_SEPARATOR -> String | nil
 
 [[m:$;]] の別名
 
@@ -62,8 +65,8 @@
   $FIELD_SEPARATOR = ","
   p str.split #=> ["hoge", "fuga", "ugo", "bar", "foo"]
 
---- $OFS
---- $OUTPUT_FIELD_SEPARATOR
+--- $OFS                    -> String | nil
+--- $OUTPUT_FIELD_SEPARATOR -> String | nil
 
 [[m:$,]] の別名
 
@@ -74,8 +77,8 @@
   $OUTPUT_FIELD_SEPARATOR = ","
   p array.join #=> "hoge,fuga,ugo,bar,foo"
 
---- $RS
---- $INPUT_RECORD_SEPARATOR
+--- $RS                     -> String | nil
+--- $INPUT_RECORD_SEPARATOR -> String | nil
 
 [[m:$/]] の別名
 
@@ -92,8 +95,8 @@
   ugo|ego|fogo
 
 
---- $ORS
---- $OUTPUT_RECORD_SEPARATOR
+--- $ORS                     -> String | nil
+--- $OUTPUT_RECORD_SEPARATOR -> String | nil
 
 [[m:$\]] の別名
 
@@ -111,8 +114,8 @@
   fuge
   ugo
 
---- $INPUT_LINE_NUMBER
---- $NR
+--- $INPUT_LINE_NUMBER -> Fixnum
+--- $NR                -> Fixnum
 
 [[m:$.]] の別名
 
@@ -134,7 +137,7 @@
   ruby sample.rb a.txt 
   #=> 5
 
---- $LAST_READ_LINE
+--- $LAST_READ_LINE -> String | nil
 
 [[m:$_]] の別名
   
@@ -153,7 +156,7 @@
   "4 h\n"
   "5 i\n"
   
---- $DEFAULT_OUTPUT
+--- $DEFAULT_OUTPUT -> IO
 
 [[m:$>]] の別名
  
@@ -167,7 +170,7 @@
   p "bar" # => bar
   p File.read("out.txt") #=> foo
 
---- $DEFAULT_INPUT
+--- $DEFAULT_INPUT -> IO
 
 [[m:$<]] の別名
   
@@ -181,8 +184,8 @@
   # => "hoge:x:500:501::/home/hoge:/bin/bash\n"
        ...
 
---- $PID
---- $PROCESS_ID
+--- $PID        -> Fixnum
+--- $PROCESS_ID -> Fixnum
 
 [[m:$$]] の別名
  
@@ -190,7 +193,7 @@
 
 	p sprintf("something%s", $PID) #=> "something5543" など
 
---- $CHILD_STATUS
+--- $CHILD_STATUS -> Process::Status | nil
 
 [[m:$?]] の別名
 
@@ -208,7 +211,7 @@
   end
 
 
---- $LAST_MATCH_INFO
+--- $LAST_MATCH_INFO -> MatchData
 
 [[m:$~]] の別名
 
@@ -222,7 +225,9 @@
     p $LAST_MATCH_INFO[2] #=> nil
   end
 
---- $IGNORECASE
+--- $IGNORECASE -> bool
+
+非推奨([[unknown:obsolete>]]): この変数は将来のバージョンで削除される予定です。
 
 [[m:$=]] の別名
 
@@ -238,7 +243,7 @@
   end
 
 
---- $PROGRAM_NAME
+--- $PROGRAM_NAME -> String
 
 [[m:$0]] の別名
   
@@ -251,7 +256,7 @@
   ruby ./sample.rb #=> "./sample.rb"
   ruby /home/hoge/bin/sample.rb #=> "/home/hoge/bin/sample.rb"
 
---- $ARGV
+--- $ARGV -> [String]
 
 [[m:$*]] の別名
 
@@ -262,7 +267,7 @@
   ruby sample.rb 31 /home/hoge/fuga.txt
   #=> ["31", "/home/hoge/fuga.txt"]
 
---- $MATCH
+--- $MATCH -> String | nil
 
 [[m:$&]] の別名
 
@@ -273,7 +278,7 @@
   /(foo|bar)/ =~ str
   p $MATCH     #=> "foo"
 
---- $PREMATCH
+--- $PREMATCH -> String | nil
 
 [[m:$`]] の別名
 
@@ -284,7 +289,7 @@
   /foo/ =~ str
   p $PREMATCH  #=> "hoge,"
 
---- $POSTMATCH
+--- $POSTMATCH -> String | nil
 
 [[m:$']] の別名
 
@@ -295,7 +300,7 @@
   /foo/ =~ str
   p $POSTMATCH #=> ",bar,hee,hoo"
 
---- $LAST_PAREN_MATCH
+--- $LAST_PAREN_MATCH -> String | nil
 
 [[m:$+]] の別名
 
