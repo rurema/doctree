@@ -85,6 +85,10 @@ immutable であるためです。
 @param other 二項演算の右側の引数(対象)
 @return 計算結果
 
+  p 2 ** 3 # => 8
+  p 2 ** 0 # => 1
+  p 0 ** 0 # => 1
+
 --- <=>(other) -> Fixnum
 
 self と other を比較して、self が大きい時に正、
