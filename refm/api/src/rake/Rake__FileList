@@ -12,11 +12,6 @@ include Rake::Cloneable
 このことは、多くのファイルにマッチする多くの [[c:Rake::FileList]] を使用できることを意味します。
 実際に使用されると [[c:Rake::FileList]] が保持するパターンが評価されます。
 
-==== メソッドの委譲
-
-#@todo
-
-
 == Public Instance Methods
 
 --- include(*filenames) -> self
@@ -71,7 +66,6 @@ include Rake::Cloneable
 自身に [[c:Array]] のフリをさせます。
 
 --- *(other) -> Array | String
-#@todo
 
 [[m:Array#*]] と動作を合わせるために再定義しています。
 
@@ -182,7 +176,6 @@ include Rake::Cloneable
 
 
 --- [](*args) -> Rake::FileList
-#@todo
 
 与えられたパターンをもとにして自身を初期化します。
 
@@ -192,39 +185,32 @@ include Rake::Cloneable
 == Constants
 
 --- ARRAY_METHODS -> Array
-#@todo
 
 [[c:Array]] に定義されているメソッドのリストです。
 
 --- DEFAULT_IGNORE_PATTERNS -> Array
-#@todo
 
 デフォルトで除外するパターンのリストです。
 
 --- DEFAULT_IGNORE_PROCS
-#@todo
 
 デフォルトで除外する手続きです。
 
 --- DELEGATING_METHODS -> Array
-#@todo
 
 委譲するメソッドのリストです。
 
 --- MUST_DEFINE -> Array
-#@todo
 
 必ず委譲しなければならない付加的なメソッドのリストです。
 
 
 --- MUST_NOT_DEFINE -> Array
-#@todo
 
 委譲してはいけないメソッドのリストです。
 
 このリストに含まれているメソッドはこのクラスで定義しています。
 
 --- SPECIAL_RETURN -> Array
-#@todo
 
 [[c:Array]] のインスタンスを返すので委譲した後にラップする必要があるメソッドのリストです。

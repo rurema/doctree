@@ -12,7 +12,6 @@
 == Public Instance Methods
 
 --- append(task_name) -> Rake::InvocationChain
-#@todo
 
 与えられたタスク名を追加して新しい [[c:Rake::InvocationChain]] を返します。
 
@@ -21,7 +20,6 @@
 @raise RuntimeError 循環したタスクの呼び出しを検出した場合に発生します。
 
 --- member?(task_name) -> bool
-#@todo
 
 与えられたタスク名が自身に含まれる場合は真を返します。
 そうでない場合は偽を返します。
@@ -29,14 +27,12 @@
 @param task_name タスク名を指定します。
 
 --- to_s -> String
-#@todo
 
 トップレベルのタスクから自身までの依存関係を文字列として返します。
 
 == Singleton Methods
 
 --- new(task_name, tail)
-#@todo
 
 与えられたタスク名と一つ前の [[c:Rake::InvocationChain]] を用いて自身を初期化します。
 
@@ -45,7 +41,6 @@
 @param tail 一つ前の [[c:Rake::InvocationChain]] を指定します。
 
 --- append(task_name, chain) -> Rake::InvocationChain
-#@todo
 
 与えられたタスク名を第二引数の [[c:Rake::InvocationChain]] に追加します。
 
@@ -56,7 +51,6 @@
 == Constants
 
 --- EMPTY -> Rake::InvocationChain::EmptyInvocationChain
-#@todo
 
 [[c:Rake::InvocationChain::EmptyInvocationChain]] のインスタンスを表します。
 

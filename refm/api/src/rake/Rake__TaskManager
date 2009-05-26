@@ -5,7 +5,6 @@
 == Public Instance Methods
 
 --- [](task_name, scopes = nil) -> Rake::Task
-#@todo
 
 与えられたタスク名にマッチするタスクを検索します。
 
@@ -14,24 +13,20 @@
 @param scopes スコープを指定します。
 
 --- clear
-#@todo
 
 全てのタスクとルールをクリアします。
 
 --- create_rule(*args){ ... }
-#@todo
 
 与えられたパラメータに従ってルールを作成します。
 
 @param args ルールに与えるパラメータを指定します。
 
 --- current_scope -> Array
-#@todo
 
 現在のスコープを返します。
 
 --- define_task(task_class, *args){ ... } -> Rake::Task
-#@todo
 
 タスクを定義します。
 
@@ -40,7 +35,6 @@
 @param args タスクに渡すパラメータを指定します。
 
 --- enhance_with_matching_rule(task_name, level = 0) -> Rake::Task | nil
-#@todo
 
 与えられたタスク名にマッチしたルールが存在する場合は、そのタスクに見つかったルールの
 事前タスクとアクションを追加して返します。
@@ -52,7 +46,6 @@
 @raise RuntimeError ルールの解決時にオーバーフローした場合に発生します。
 
 --- in_namespace(name){|name_space| ... } -> Array
-#@todo
 
 与えられた名前の名前空間でブロックを評価します。
 
@@ -60,7 +53,6 @@
 
 
 --- intern(task_class, task_name) -> Rake::Task
-#@todo
 
 タスクを検索します。
 
@@ -73,17 +65,14 @@
 
 --- last_description -> String
 --- last_comment -> String
-#@todo
 
 Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 
 --- last_description=(description)
-#@todo
 
 最新の詳細説明をセットします。
 
 --- lookup(task_name, initial_scope = nil) -> Rake::Task | nil
-#@todo
 
 与えられたタスク名にマッチするタスクを検索します。
 
@@ -96,7 +85,6 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 @param initiali_scope 検索するスコープを指定します。
 
 --- resolve_args(args) -> Array
-#@todo
 
 タスクやルールに与えられたパラメータを解釈します。
 
@@ -105,7 +93,6 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 @return [task_name, arg_name_list, prerequisites] を返します。
 
 --- synthesize_file_task(task_name) -> Rake::FileTask | nil
-#@todo
 
 与えられたタスク名をもとにファイルタスクを合成します。
 
@@ -117,6 +104,5 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 @raise RuntimeError タスクを合成できなかった場合に発生します。
 
 --- tasks -> Array
-#@todo
 
 全てのタスクリストを返します。

@@ -1,26 +1,22 @@
 = class Rake::NameSpace
-#@todo
 
 タスクの名前空間を表すクラスです。
 
 == Public Instance Methods
 
 --- [](name) -> Rake::Task
-#@todo
 
 与えられた名前のタスクを返します。
 
 @param name タスクの名前を指定します。
 
 --- tasks -> Array
-#@todo
 
 タスクのリストを返します。
 
 == Singleton Methods
 
 --- new(task_manager, scope_list)
-#@todo
 
 自身を初期化します。
 

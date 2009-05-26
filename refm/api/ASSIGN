@@ -206,7 +206,7 @@ profile
 profiler
 pstore                          okkez           done
 pty                             okkez           done
-rake                            okkez
+rake                            okkez           done
 racc/parser
 rational			yugui
 rbconfig

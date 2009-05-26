@@ -9,7 +9,6 @@
 == Public Instance Methods
 
 --- needed? -> bool
-#@todo
 
 このタスクが必要である場合は真を返します。
 そうでない場合は偽を返します。
@@ -18,13 +17,11 @@
 このタスクで作成しようとしているファイルが古い場合に真を返します。
 
 --- timestamp -> Time
-#@todo
 
 ファイルタスクのタイムスタンプを返します。
 
 == Singleton Methods
 
 --- scope_name(scope, task_name) -> String
-#@todo
 
 ファイルタスクはスコープを無視します。

@@ -1,14 +1,4 @@
 = class Rake::MultiTask < Rake::Task
-#@todo
 
 通常のタスクと同じですが、[[lib:thread]] を用いて事前タスクを並列実行します。
 
-#@# == Public Instance Methods
-#@# 
-#@# --- invoke_prerequisites(args, invocation_chain)
-#@# #@todo このメソッドは private であるべき？
-#@# 事前タスクを実行します。
-#@# 
-#@# @param args
-#@# 
-#@# @param invocation_chain

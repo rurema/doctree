@@ -7,12 +7,10 @@
 == Public Instance Methods
 
 --- needed? -> bool
-#@todo
 
 ファイルが存在しない場合、真を返します。
 そうでない場合は、偽を返します。
 
 --- timestamp -> Rake::EarlyTime
-#@todo
 
 どんなタイムスタンプよりも前の時刻をあらわすタイムスタンプを返します。

@@ -5,7 +5,6 @@
 == Public Instance Methods
 
 --- load(filename)
-#@todo
 
 与えられたファイルをロードします。
 

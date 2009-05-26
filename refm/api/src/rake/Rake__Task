@@ -11,57 +11,46 @@
 == Public Instance Methods
 
 --- actions -> Array
-#@todo
 
 自身に関連するアクションのリストを返します。
 
 --- add_description(description)
-#@todo
 
 自身に詳細説明を追加します。
 
 --- application -> Rake::Application
-#@todo
 
 自身を所有している [[c:Rake::Application]] のインスタンスを返します。
 
 --- application=(app)
-#@todo
 
 自身を所有している [[c:Rake::Application]] のインスタンスをセットします。
 
 @param app 自身を所有しているアプリケーションを指定します。
 
 --- arg_description
-#@todo
 
 --- arg_names -> Array
-#@todo
 
 自身のパラメータ名のリストを返します。
 
 --- clear -> self
-#@todo
 
 自身に登録されているアクションと事前タスクをクリアします。
 
 --- clear_actions -> self
-#@todo
 
 自身に登録されているアクションをクリアします。
 
 --- clear_prerequisites -> self
-#@todo
 
 自身に登録されている事前タスクをクリアします。
 
 --- comment -> String
-#@todo
 
 自身の短いコメントを返します。
 
 --- comment=(comment)
-#@todo
 
 自身のコメントをセットします。
 
@@ -70,86 +59,70 @@
 @param comment コメントをあらわす文字列を指定します。
 
 --- enhance(deps = nil){ ... }  -> self
-#@todo
 
 自身に事前タスクとアクションを追加します。
 
 --- execute(args = nil)
-#@todo
 
 自身に関連付けられているアクションを実行します。
 
 --- full_comment -> String
-#@todo
 
 自身のコメントを全て返します。
 
 --- inspect -> String
-#@todo
 
 自身の情報を人間に読める形式で返します。
 
 --- investigation -> String
-#@todo
 
 自身の詳しい内部状態を文字列化して返します。
 
 このメソッドはデバッグに便利です。
 
 --- invoke(*args)
-#@todo
 
 必要であれば自身を実行します。最初に事前タスクを実行します。
 
 --- name -> String
-#@todo
 
 ネームスペースを含むタスクの名前を返します。
 
 --- needed? -> true
-#@todo
 
 このタスクが必要ならば真を返します。
 
 --- prerequisites -> Array
-#@todo
 
 事前タスクのリストを返します。
 
 --- reenable -> false
-#@todo
 
 自身をもう一度実行出来るようにします。
 
 --- scope
-#@todo
 
 --- set_arg_names(args)
-#@todo
 
 自身のパラメータの名前のリストをセットします。
 
 @param args シンボルのリストを指定します。
 
 --- source -> String
-#@todo
 
 [[m:Rake::Task#sources]] の最初の要素を返します。
 
 --- sources -> Array
-#@todo
 
 自身が依存するファイルのリストを返します。
 
 --- sources=(sources)
-#@todo
 
 自身が依存するファイルのリストをセットします。
 
 @param sources 自身が依存するファイルのリストを指定します。
 
 --- timestamp -> Time
-#@todo
 
 自身のタイムスタンプを返します。
 
@@ -157,7 +130,6 @@
 計算して返します。
 
 --- to_s -> String
-#@todo
 
 自身の名前を返します。
 
@@ -173,7 +145,6 @@
 @see [[m:Rake::Task#enhance]]
 
 --- [](task_name) -> Rake::Task
-#@todo
 
 与えられた名前のタスクを返します。
 
@@ -184,19 +155,16 @@
 @param task_name タスクの名前を指定します。
 
 --- clear
-#@todo
 
 タスクリストをクリアします。
 
 このメソッドはユニットテスト用です。
 
 --- create_rule(*args){ ... } -> Rake::Task
-#@todo
 
 タスクを合成するためのルールを作成します。
 
 --- define_task(*args){ ... } -> Rake::Task
-#@todo
 
 与えられたパラメータと省略可能なブロックを用いてタスクを定義します。
 
@@ -205,12 +173,10 @@
 @param args パラメータを指定します。
 
 --- scope_name(scope, task_name) -> String
-#@todo
 
 与えられたスコープとタスク名をコロンで連結して返します。
 
 --- task_defined?(task_name) -> bool
-#@todo
 
 与えられたタスク名が既に定義されている場合は真を返します。
 そうでない場合は偽を返します。
@@ -218,6 +184,5 @@
 @param task_name タスク名を指定します。
 
 --- tasks -> Array
-#@todo
 
 定義されているタスクのリストを返します。

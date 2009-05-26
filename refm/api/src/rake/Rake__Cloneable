@@ -1,5 +1,4 @@
 = module Rake::Cloneable
-#@todo
 
 簡単に複製したオブジェクトを作成することができるようにするための
 Mixin モジュールです。

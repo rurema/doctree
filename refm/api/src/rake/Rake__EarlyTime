@@ -15,6 +15,5 @@ include Singleton
 @return -1 を返します。
 
 --- to_s -> String
-#@todo
 
 "<EARLY TIME>" という文字列を返します。
