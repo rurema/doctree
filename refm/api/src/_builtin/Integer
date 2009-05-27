@@ -209,7 +209,11 @@ bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
 
 --- downto(min) {|n| ... } -> self
 #@since 1.8.7
+#@since 1.8.8
+--- downto(min) -> Enumerator
+#@else
 --- downto(min) -> Enumerable::Enumerator
+#@end
 #@end
 
 self から min まで 1 ずつ減らしながらブロックを繰り返し実行します。
@@ -227,7 +231,11 @@ self の次の整数を返します。
 
 --- times {|n| ... } -> self
 #@since 1.8.7
+#@since 1.8.8
+--- times -> Enumerator
+#@else
 --- times -> Enumerable::Enumerator
+#@end
 #@end
 
 self 回だけ繰り返します。
@@ -287,7 +295,11 @@ bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
 
 --- upto(max) {|n| ... } -> Fixnum | Bignum
 #@since 1.8.7
+#@since 1.8.8
+--- upto(max) -> Enumerator
+#@else
 --- upto(max) -> Enumerable::Enumerator
+#@end
 #@end
 
 self から max まで 1 ずつ増やしながら繰り返します。

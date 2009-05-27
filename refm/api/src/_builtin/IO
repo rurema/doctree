@@ -288,7 +288,11 @@ IO.new, IO.for_fd はブロックを受け付けません。
 
 --- foreach(path, rs = $/) {|line| ... }    -> nil
 #@since 1.8.7
+#@since 1.8.8
+--- foreach(path, rs = $/)                  -> Enumerator
+#@else
 --- foreach(path, rs = $/)                  -> Enumerable::Enumerator
+#@end
 #@end
 
 path で指定されたファイルの各行を引数としてブロックを繰り返し実行します。
@@ -296,7 +300,11 @@ path のオープンに成功すれば nil を返します。
 
 #@since 1.8.7
 ブロックが与えられなかった場合は、path で指定されたファイルの各行を繰り返す
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを生成して返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+#@end
 #@end
 
 #@since 1.9.1
@@ -657,8 +665,13 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 --- each(rs = $/) {|line| ... }         -> self
 --- each_line(rs = $/) {|line| ... }    -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each(rs = $/)                       -> Enumerator
+--- each_line(rs = $/)                  -> Enumerator
+#@else
 --- each(rs = $/)                       -> Enumerable::Enumerator
 --- each_line(rs = $/)                  -> Enumerable::Enumerator
+#@end
 #@end
 
 IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
@@ -666,7 +679,11 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
 
 #@since 1.8.7
 ブロックが与えられなかった場合は、自身から生成した
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 #@since 1.9.1
@@ -682,14 +699,22 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
 
 --- each_byte {|ch| ... }    -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each_byte                -> Enumerator
+#@else
 --- each_byte                -> Enumerable::Enumerator
+#@end
 #@end
 
 IO の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
 #@since 1.8.7
 ブロックが与えられなかった場合は、自身から生成した
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 #@since 1.9.1
@@ -1455,17 +1480,32 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 #@end
 
 #@since 1.8.7
+#@since 1.8.8
+--- bytes    -> Enumerator
+#@else
 --- bytes    -> Enumerable::Enumerator
-
+#@end
 自身を 1 バイトずつ整数としてイテレートするような
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを生成して返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+#@end
 
    "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
 
+#@since 1.8.8
+--- lines(rs = $/)    -> Enumerator
+#@else
 --- lines(rs = $/)    -> Enumerable::Enumerator
+#@end
 
 自身を 1 行ずつイテレートするような
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを生成して返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+#@end
 
 テキスト読み込みメソッドとして動作します。
 
@@ -1495,8 +1535,13 @@ IO から1バイトを読み込み整数として返します。
 
 --- each_char{|c| ... }     -> self
 --- chars{|c| ... }         -> self
+#@since 1.8.8
+--- each_char               -> Enumerator
+--- chars                   -> Enumerator
+#@else
 --- each_char               -> Enumerable::Enumerator
 --- chars                   -> Enumerable::Enumerator
+#@end
 #@todo
 
 self に含まれる文字を一文字つつブロックに渡して評価します。

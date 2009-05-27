@@ -287,8 +287,14 @@ ARGFがcloseされていればtrueを返します。
 --- each(rs = $/) {|line| ... } -> self
 --- each_line(rs = $/) {|line| ... } -> self
 #@since 1.8.7
+#@until 1.8.8
 --- each(rs = $/)       -> Enumerable::Enumerator
 --- each_line(rs = $/)  -> Enumerable::Enumerator
+#@end
+#@end
+#@since 1.8.8
+--- each(rs = $/)       -> Enumerator
+--- each_line(rs = $/)  -> Enumerator
 #@end
 
 ARGFの現在位置から一行ずつ文字列として読み込みます。
@@ -317,8 +323,15 @@ ARGFの現在位置から一行ずつ文字列として読み込みます。
 
 --- each_byte{|char| ...} -> self
 #@since 1.8.7
+#@until 1.8.8
 --- each_byte -> Enumerable::Enumerator
 #@end
+#@end
+#@since 1.8.8
+--- each_byte -> Enumerator
+#@end
+
+
 ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行します。
 
   # カレントディレクトリから適当にファイルを選ぶ
@@ -346,8 +359,14 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
 #@since 1.8.7
 --- each_char{|c| ... }     -> self
 --- chars{|c| ... }         -> self
+#@until 1.8.8
 --- each_char               -> Enumerable::Enumerator
 --- chars                   -> Enumerable::Enumerator
+#@end
+#@since 1.8.8
+--- each_char               -> Enumerator
+--- chars                   -> Enumerator
+#@end
 
 レシーバに含まれる文字を一文字つつブロックに渡して評価します。
 
@@ -707,17 +726,34 @@ $stdinがIOオブジェクトでない場合は$stdin.to_ioを呼び出します。
 @see [[m:ARGF.file]]
 
 #@since 1.8.7
+#@since 1.8.8
+--- bytes    -> Enumerator
+#@else
 --- bytes    -> Enumerable::Enumerator
+#@end
+
 
 自身を 1 バイトずつ整数としてイテレートするような
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを生成して返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+#@end
 
    ARGF.bytes.to_a        #=> [104, 101, 108, 108, 111]
 
+#@since 1.8.8
+--- lines(rs = $/)    -> Enumerator
+#@else
 --- lines(rs = $/)    -> Enumerable::Enumerator
+#@end
 
 自身を 1 行ずつイテレートするような
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを生成して返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
+#@end
 
 テキスト読み込みメソッドとして動作します。
 

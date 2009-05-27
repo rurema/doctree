@@ -181,14 +181,22 @@ path を省略した場合、環境変数 HOME または LOGDIR
 
 --- foreach(path) {|file| ...}    -> nil
 #@since 1.8.7
+#@since 1.8.8
+--- foreach                       -> Enumerator
+#@else
 --- foreach                       -> Enumerable::Enumerator
+#@end
 #@end
 
 ディレクトリ path の各エントリを表す文字列を引数として、ブロックを評価します。
 
 #@since 1.8.7
-ブロックが与えられなかった場合、各エントリを文字列として保持する [[c:Enumerable::Enumerator]]
-オブジェクトを返します。
+ブロックが与えられなかった場合、各エントリを文字列として保持する
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
+[[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 @param path ディレクトリのパスを文字列で指定します。

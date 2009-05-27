@@ -463,8 +463,13 @@ dup д╧╞т═╞д└д▒дЄе│е╘б╝д╖д▐д╣бг
 --- collect! {|item| ..}    -> self
 --- map! {|item| ..}        -> self
 #@since 1.8.7
+#@since 1.8.8
+--- collect!                -> Enumerator
+--- map!                    -> Enumerator
+#@else
 --- collect!                -> Enumerable::Enumerator
 --- map!                    -> Enumerable::Enumerator
+#@end
 #@end
 
 │╞═╫┴╟дЄ╜ч╚╓д╦е╓еэе├епд╦┼╧д╖д╞╔╛▓┴д╖бвд╜д╬╖ы▓╠д╟═╫┴╟дЄ
@@ -472,7 +477,11 @@ dup д╧╞т═╞д└д▒дЄе│е╘б╝д╖д▐д╣бг
 
 #@since 1.8.7
 е╓еэе├епдм═┐дидщдьд╩длд├д┐╛ь╣чд╧бв╝л┐╚д╚ map! длдщ└╕└од╖д┐
+#@since 1.8.8
+[[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
 [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 #@end
 
 ╬у:
@@ -488,7 +497,11 @@ dup д╧╞т═╞д└д▒дЄе│е╘б╝д╖д▐д╣бг
     p ary           #=> [1, 1, 1]
 #@end
 
+#@since 1.8.8
 @see [[m:Enumerable#collect]], [[c:Enumerable::Enumerator]]
+#@else
+@see [[m:Enumerable#collect]]
+#@end
 
 --- compact     -> Array
 --- compact!    -> self | nil
@@ -557,8 +570,13 @@ pos дм╚╧░╧│░д╟двд├д┐дщ nil дЄ╩╓д╖д▐д╣бг
 --- delete_if {|x| ... }    -> self
 --- reject! {|x| ... }      -> self | nil
 #@since 1.8.7
+#@since 1.8.8
+--- delete_if               -> Enumerator
+--- reject!                 -> Enumerator
+#@else
 --- delete_if               -> Enumerable::Enumerator
 --- reject!                 -> Enumerable::Enumerator
+#@end
 #@end
 
 ═╫┴╟дЄ╜ч╚╓д╦е╓еэе├епд╦┼╧д╖д╞╔╛▓┴д╖бвд╜д╬╖ы▓╠дм┐┐д╦д╩д├д┐═╫┴╟дЄд╣д┘д╞║я╜№д╖д▐д╣бг
@@ -567,7 +585,11 @@ delete_if д╧╛яд╦ self дЄ╩╓д╖д▐д╣дмбвreject! д╧═╫┴╟дм 1 д─░╩╛х║я╜№д╡дьдьд╨ self д
 
 #@since 1.8.7
 е╓еэе├епдм═┐дидщдьд╩длд├д┐╛ь╣чд╧бв╝л┐╚д╚ reject! длдщ└╕└од╖д┐
+#@since 1.8.8
+[[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
 [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 ╩╓д╡дьд┐ Enumerator еке╓е╕езепе╚д╬ each есе╜е├е╔д╦д╧бв
 дтд╚д╬╟█╬єд╦┬╨д╖д╞╔√║ю═╤дмдвдыд│д╚д╦├э░╒д╖д╞дпд└д╡ддбг
 #@end
@@ -586,14 +608,22 @@ delete_if д╧╛яд╦ self дЄ╩╓д╖д▐д╣дмбвreject! д╧═╫┴╟дм 1 д─░╩╛х║я╜№д╡дьдьд╨ self д
 
 --- each {|item| .... }    -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each                   -> Enumerator
+#@else
 --- each                   -> Enumerable::Enumerator
+#@end
 #@end
 
 │╞═╫┴╟д╦┬╨д╖д╞е╓еэе├епдЄ╔╛▓┴д╖д▐д╣бг
 
 #@since 1.8.7
 е╓еэе├епдм═┐дидщдьд╩длд├д┐╛ь╣чд╧бв╝л┐╚д╚ each длдщ└╕└од╖д┐
+#@since 1.8.8
+[[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
 [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 #@end
 
     [1, 2, 3].each do |i|
@@ -639,7 +669,11 @@ delete_if д╧╛яд╦ self дЄ╩╓д╖д▐д╣дмбвreject! д╧═╫┴╟дм 1 д─░╩╛х║я╜№д╡дьдьд╨ self д
 
 --- each_index {|index| .... }    -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each_index                    -> Enumerator
+#@else
 --- each_index                    -> Enumerable::Enumerator
+#@end
 #@end
 
 │╞═╫┴╟д╬едеєе╟е├епе╣д╦┬╨д╖д╞е╓еэе├епдЄ╔╛▓┴д╖д▐д╣бг
@@ -650,7 +684,11 @@ delete_if д╧╛яд╦ self дЄ╩╓д╖д▐д╣дмбвreject! д╧═╫┴╟дм 1 д─░╩╛х║я╜№д╡дьдьд╨ self д
 
 #@since 1.8.7
 е╓еэе├епдм═┐дидщдьд╩длд├д┐╛ь╣чд╧бв╝л┐╚д╚ each_index длдщ└╕└од╖д┐
+#@since 1.8.8
+[[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
 [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 #@end
 
 --- empty?    -> bool
@@ -1131,14 +1169,22 @@ reverse! д╧ self дЄ╩╓д╖д▐д╣бг
 
 --- reverse_each {|item| ... }    -> self
 #@since 1.8.7
+#@since 1.8.8
+--- reverse_each                  -> Enumerator
+#@else
 --- reverse_each                  -> Enumerable::Enumerator
+#@end
 #@end
 
 │╞═╫┴╟д╦┬╨д╖д╞╡╒╜чд╦е╓еэе├епдЄ╔╛▓┴д╖д▐д╣бг
 
 #@since 1.8.7
 е╓еэе├епдм═┐дидщдьд╩длд├д┐╛ь╣чд╧бв╝л┐╚д╚ reverse_each длдщ└╕└од╖д┐
+#@since 1.8.8
+[[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
 [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 #@end
 
 --- rindex(val)           -> Integer | nil
@@ -1529,12 +1575,20 @@ srand()дм═н╕·д╟д╣бг
    a                         #=> [2, 3, 1]
 
 --- combination(n) {|c| block }    -> Array
+#@since 1.8.8
+--- combination(n)                 -> Enumerator
+#@else
 --- combination(n)                 -> Enumerable::Enumerator
+#@end
 
 е╡еде║ n д╬┴╚д▀╣чдяд╗дЄд╣д┘д╞└╕└од╖бвд╜дьдЄ░·┐Їд╚д╖д╞е╓еэе├епдЄ╝┬╣╘д╖д▐д╣бг
 
-╞└дщдьды┴╚д▀╣чдяд╗д╬╜ч╜°д╧╩▌╛┌д╡дьд▐д╗дєбге╓еэе├епд╩д╖д╟╕╞д╙╜╨д╡дь
-дыд╚бв┴╚д▀╣чдяд╗дЄ└╕└од╣ды Enumerator еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+╞└дщдьды┴╚д▀╣чдяд╗д╬╜ч╜°д╧╩▌╛┌д╡дьд▐д╗дєбге╓еэе├епд╩д╖д╟╕╞д╙╜╨д╡дьдыд╚бв┴╚д▀╣чдяд╗
+#@since 1.8.8
+дЄ└╕└од╣ды [[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
+дЄ└╕└од╣ды [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 
 @param n └╕└од╡дьды╟█╬єд╬е╡еде║бг
 
@@ -1549,12 +1603,20 @@ srand()дм═н╕·д╟д╣бг
     a.combination(5).to_a  #=> []  : no combinations of length 5
 
 --- permutation(n) { |p| block }       -> Array
+#@since 1.8.8
+--- permutation(n)                     -> Enumerator
+#@else
 --- permutation(n)                     -> Enumerable::Enumerator
+#@end
 
 е╡еде║ n д╬╜ч╬єдЄд╣д┘д╞└╕└од╖бдд╜дьдЄ░·┐Їд╚д╖д╞е╓еэе├епдЄ╝┬╣╘д╖д▐д╣бг
 
 ╞└дщдьды╜ч╬єд╬╜ч╜°д╧╩▌╛┌д╡дьд▐д╗дєбге╓еэе├епд╩д╖д╟╕╞д╙╜╨д╡дьдыд╚бд ╜ч╬є
-дЄ└╕└од╣ды Enumerator еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@since 1.8.8
+дЄ└╕└од╣ды [[c:Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@else
+дЄ└╕└од╣ды [[c:Enumerable::Enumerator]] еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
+#@end
 
 @param n └╕└од╣ды╟█╬єд╬е╡еде║
 

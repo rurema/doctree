@@ -605,10 +605,17 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   p Regexp.union(/^at/, it) #=> /(?-mix:^at)|(?-mix:[\d]+)/
 
 #@since 1.8.7
+#@since 1.8.8
+--- to_enum(method = :each, *args) -> Enumerator
+--- enum_for(method = :each, *args) -> Enumerator
+
+[[m:Enumerator.new]](self, method, *args) を返します。
+#@else
 --- to_enum(method = :each, *args) -> Enumerable::Enumerator
 --- enum_for(method = :each, *args) -> Enumerable::Enumerator
 
 [[m:Enumerable::Enumerator.new]](self, method, *args) を返します。
+#@end
 
 @param method メソッド名の文字列かシンボルです。
 @param args 呼び出すメソッドに渡される引数です。
@@ -621,9 +628,17 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
   # protects an array from being modified
   a = [1, 2, 3]
+#@since 1.8.8
+  p(a.to_enum) #=> #<Enumerator: [1, 2, 3]:each>
+#@else
   p(a.to_enum) #=> #<Enumerable::Enumerator:0xbaf7ac>
+#@end
 
+#@since 1.8.8
+@see [[c:Enumerator]]
+#@else
 @see [[c:Enumerable::Enumerator]]
+#@end
 
 --- tap{|x| ... } -> self
 

@@ -716,8 +716,13 @@ selfを破壊的に変更したい場合はかわりに[[m:Hash#delete_if]]か[[m:Hash#reject!]]を
 @see [[m:Hash#delete_if]],[[m:Hash#delete]],[[m:Enumerable#reject]]
 
 #@since 1.8.7
+#@since 1.8.8
+--- delete_if -> Enumerator
+--- reject!   -> Enumerator
+#@else
 --- delete_if -> Enumerable::Enumerator
 --- reject!   -> Enumerator::Enumerator
+#@end
 #@end
 --- delete_if {|key, value| ... } -> self
 --- reject! {|key, value| ... } -> self|nil
@@ -743,8 +748,13 @@ reject! は、要素を削除しなかった場合には nil を返し、
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
 #@since 1.8.7
---- each -> Enumerable::Enumerator
+#@since 1.8.8
+--- each      -> Enumerator
+--- each_pair -> Enumerator
+#@else
+--- each      -> Enumerable::Enumerator
 --- each_pair -> Enumerable::Enumerator
+#@end
 #@end
 
 ハッシュのキーと値を引数としてブロックを評価します。
@@ -752,7 +762,11 @@ reject! は、要素を削除しなかった場合には nil を返し、
 反復の際の評価順序は不定です。
 #@since 1.8.7
 ブロック付きの場合 self を、
-無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
+#@since 1.8.8
+無しで呼ばれた場合 [[c:Enumerator]] を返します。
+#@else
+無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
+#@end
 #@else
 self を返します。
 #@end
@@ -790,15 +804,23 @@ each_pair は each のエイリアスです。
   {:a=>1, :b=>2}.each {|k, v| p [k, v]}  #each_pairでも同じ結果
   #=> [:a, 1]
       [:b, 2]
-
+  
+#@since 1.8.8
+  p({:a=>1, :b=>2}.each_pair)  # => #<Enumerator: {:a=>1, :b=>2}:each_pair>
+#@else
   p({:a=>1, :b=>2}.each_pair)  # => #<Enumerable::Enumerator:0xbb19e4>
+#@end
 #@end
 
 @see [[m:Hash#each_key]],[[m:Hash#each_value]]
 
 --- each_key {|key| ... } -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each_key -> Enumerator
+#@else
 --- each_key -> Enumerable::Enumerator
+#@end
 #@end
 
 ハッシュのキーを引数としてブロックを評価します。
@@ -806,7 +828,11 @@ each_pair は each のエイリアスです。
 反復の際の評価順序は不定です。
 #@since 1.8.7
 ブロック付きの場合selfを、
+#@since 1.8.8
+無しで呼ばれた場合[[c:Enumerator]]を返します。
+#@else
 無しで呼ばれた場合[[c:Enumerable::Enumerator]]を返します。
+#@end
 #@else
 self を返します。
 #@end
@@ -816,14 +842,22 @@ self を返します。
       :b
        
 #@since 1.8.7
+#@since 1.8.8
+  p({:a=>1, :b=>2}.each_key)  # => #<Enumerator: {:a=>1, :b=>2}:each_key>
+#@else
   p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
+#@end
 #@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_value]]
 
 --- each_value {|value| ... } -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each_value -> Enumerator
+#@else
 --- each_value -> Enumerable::Enumerator
+#@end
 #@end
 
 ハッシュの値を引数としてブロックを評価します。
@@ -831,7 +865,11 @@ self を返します。
 反復の際の評価順序は不定です。
 #@since 1.8.7
 ブロック付きの場合selfを、
+#@since 1.8.8
+無しで呼ばれた場合 [[c:Enumerator]] を返します。
+#@else
 無しで呼ばれた場合 [[c:Enumerable::Enumerator]] を返します。
+#@end
 #@else
 self を返します。
 #@end
@@ -841,7 +879,11 @@ self を返します。
       2
   
 #@since 1.8.7
-  p({:a=>1, :b=>2}.each_key)  #=> #<Enumerable::Enumerator:0xbb19e4>
+#@since 1.8.8
+  p({:a=>1, :b=>2}.each_value)  # => #<Enumerator: {:a=>1, :b=>2}:each_value>
+#@else
+  p({:a=>1, :b=>2}.each_value)  #=> #<Enumerable::Enumerator:0xbb19e4>
+#@end
 #@end
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
@@ -1168,7 +1210,11 @@ key が見つからなかった場合は、nil を返します。
 #@end
 
 #@since 1.8.7
+#@since 1.8.8
+--- select                        -> Enumerator
+#@else
 --- select                        -> Enumerable::Enumerator
+#@end
 #@end
 #@since 1.9.1
 --- select {|key, value| ... }   -> Hash

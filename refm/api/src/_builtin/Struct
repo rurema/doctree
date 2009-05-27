@@ -121,7 +121,11 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 
 --- each {|value| ... } -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each -> Enumerator
+#@else
 --- each -> Enumerable::Enumerator
+#@end
 #@end
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体の各メンバに対して繰り返します。
@@ -129,7 +133,11 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 #@since 1.8.0
 --- each_pair {|member, value| ... } -> self
 #@since 1.8.7
+#@since 1.8.8
+--- each_pair -> Enumerator
+#@else
 --- each_pair -> Enumerable::Enumerator
+#@end
 #@end
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体のメンバ名([[c:Symbol]])と値の組を引数にブロックを繰り返し実行します。
