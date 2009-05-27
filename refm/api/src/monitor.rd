@@ -5,9 +5,9 @@
 
 === 参照
 
-  *[[unknown:ruby-list:6829]]
-  *[[unknown:ruby-list:30447]]
-    *[[unknown:ruby-list:30449]]
+  * [[ruby-list:6829]]
+  * [[ruby-list:30447]]
+    * [[ruby-list:30449]]
 
 monitor は以下のような [[c:Mutex]] としての機能も提供します。
 
@@ -18,7 +18,7 @@ monitor は以下のような [[c:Mutex]] としての機能も提供します。
       自分が lock していたら ただ yield するだけ (lock/unlockもしない)
     * unlock はそのスレッドだけができる
 
-[[unknown:ruby-list:30447]] より。
+[[ruby-list:30447]] より。
 
 #@include(monitor/Monitor)
 #@include(monitor/MonitorMixin)

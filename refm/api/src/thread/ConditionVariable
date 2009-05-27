@@ -41,7 +41,7 @@
         }
     }
 
-以下は [[unknown:ruby-list:14445]] で紹介されている例です。@q が空になった場合、
+以下は [[ruby-list:14445]] で紹介されている例です。@q が空になった場合、
 あるいは満たんになった場合に Condition Variable を使って wait しています。
 
   require 'thread'

@@ -63,8 +63,8 @@ super ではなく super() を呼ぶ必要があります。
 
 以下も参考になります。
 
-  *[[unknown:ruby-dev:9384]]
-  *[[unknown:ruby-dev:9386]]
+  * [[ruby-dev:9384]]
+  * [[ruby-dev:9386]]
 
 == Instance Methods
 

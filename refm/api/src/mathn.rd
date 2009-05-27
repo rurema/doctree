@@ -37,7 +37,7 @@ require 'mathn' すると上の様な動作を行なうようになります。
 
 === 参考
 
-  * [[unknown:ruby-list:1174]]
+  * [[ruby-list:1174]]
 
 = reopen Integer
 

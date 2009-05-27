@@ -5,7 +5,7 @@
 スレッド同期機構である [[c:Mutex]] のモジュール版です。普通のオブジェクトを
 extend により Mutex にする事ができます。
 
-[[unknown:ruby-list:1991]]
+[[ruby-list:1991]]
 
 #@# == 例
 

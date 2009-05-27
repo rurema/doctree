@@ -7,7 +7,7 @@ ReFeについては
 === Gems版
 
 Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
-([[unknown:ruby-list:41478]])
+([[ruby-list:41478]])
 
 === Ruby リファレンスマニュアルの検索ツール ReFe のデータ構築について
 
