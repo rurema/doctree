@@ -304,26 +304,24 @@ self > max であれば何もしません。
 #@since 1.8.7
 --- even? -> bool
 
-self が偶数であれば真を返します。
+自身が偶数であれば真を返します。
+そうでない場合は偽を返します。
 
-Returns true if int is an even number.
 
 --- odd? -> bool
 
-self が奇数であれば真を返します。
+自身が奇数であれば真を返します。
+そうでない場合は偽を返します。
 
-
-Returns true if int is an odd number.
 
 --- ord    -> Integer
 #@todo
 
-Returns the int itself.
+自身を返します。
 
+   10.ord    #=> 10
    ?a.ord    #=> 97
 
-This method is intended for compatibility to character constant
-in Ruby 1.9. For example, ?a.ord returns 97 both in 1.8 and 1.9.
 
 --- pred    -> Integer
 
