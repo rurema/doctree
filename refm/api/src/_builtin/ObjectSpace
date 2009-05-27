@@ -66,7 +66,7 @@ obj の回収時にブロックは obj の ID ([[m:Object#__id__]])を引数として実行されます
 
 proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
 これは、スクリプトのメイン処理が GC の発生によって非同期に中断され
-るのを防ぐためです。不安なうちは [[unknown:Rubyの起動/-d]] オプションで
+るのを防ぐためです。不安なうちは -d オプションで
 事前に例外の発生の有無を確認しておいた方が良いでしょう。
 
   class Baz
@@ -84,6 +84,8 @@ proc の呼び出しで発生した大域脱出(exitや例外)は無視されます。
   GC.start
   
   # => baz
+
+@see [[d:spec/rubycmd]]
 
 --- each_object        {|object| ...}    -> Integer
 --- each_object(klass) {|object| ...}    -> Integer

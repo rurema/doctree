@@ -36,8 +36,7 @@ obj を指定された出力先に再帰的に出力します。
   p Marshal.dump(Hash.new {})
   => -:1:in `dump': cannot dump hash with default proc (TypeError)
 
-マーシャルの動作を任意に定義することもできます。詳細は、
-[[unknown:Marshal#ユーザ定義のMarshal]] を参照してください。
+マーシャルの動作を任意に定義することもできます。
 
 @param obj ダンプする対象のオブジェクトを指定します。
 
@@ -58,6 +57,8 @@ obj を指定された出力先に再帰的に出力します。
 
 @raise ArgumentError limit 段以上深くリンクしたオブジェクトをダンプしようと
                      した場合に発生します。
+
+@see [[m:Object#marshal_dump]], [[m:Object#marshal_load]]
 
 --- load(port, proc = nil)      -> object
 --- restore(port, proc = nil)   -> object

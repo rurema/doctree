@@ -106,7 +106,7 @@ String オブジェクトは自身のエンコーディング情報を持ちます。
   p e.encoding                   #=> Encoding::EUC_JP
   p u.encoding                   #=> Encoding::UTF_8
 
-より詳しく知りたい場合は、[[unknown:m17n]] を参照してください。
+より詳しく知りたい場合は、[[d:spec/m17n]] を参照してください。
 
 ==== 文字列同士の比較・結合
 

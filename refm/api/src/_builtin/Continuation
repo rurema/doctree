@@ -2,7 +2,7 @@
 
 継続を表すクラスです。
 
-[[unknown:組み込み関数]] [[m:Kernel.#callcc]] { |cont| ... } の呼び出し
+[[m:Kernel.#callcc]] { |cont| ... } の呼び出し
 は、直前の状態(ローカル変数の定義、スタックフレーム)を cont に記憶
 してブロックを実行します。cont は、Continuation クラスのインスタ
 ンスで、[[m:Continuation#call]] メソッドを実行するこ
