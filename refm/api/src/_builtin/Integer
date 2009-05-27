@@ -225,23 +225,6 @@ self < min であれば何もしません。
 
 self の次の整数を返します。
 
---- step(limit, step) {|n| ... } -> self
-
-self からはじめ step を足しながら limit を越える
-前までブロックを繰り返します。step は負の数も指定できます。
-また、limit や step には [[c:Float]] なども指定できます。
-
-#@since 1.8.0
-[[m:Numeric#step]] も参照。
-#@end
-
-@param limit 数値
-@param step  数値
-@return      self を返します。
-@raise ArgumentError step に 0 を指定した場合に発生します。
-
-@see [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#times]]
-
 --- times {|n| ... } -> self
 #@since 1.8.7
 --- times -> Enumerable::Enumerator
