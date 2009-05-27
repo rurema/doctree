@@ -230,13 +230,14 @@ self の次の整数を返します。
 --- times -> Enumerable::Enumerator
 #@end
 
-self 回だけ(0 から self-1 まで)繰り返します。
-self が負であれば何もしません。
+self 回だけ繰り返します。
+self が正の整数でない場合は何もしません。
 
-@return      self を返します。
+またブロックパラメータには 0 から self - 1 までの数値が渡されます。
 
-  3.times { puts "Hello, World!" }
-  # Hello, World! と3行続いて表示される。
+  3.times { puts "Hello, World!" }  # Hello, World! と3行続いて表示される。
+  0.times { puts "Hello, World!" }  # 何も表示されない。
+  5.times {|n| print n }            # 01234 と表示される。
 
 @see [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#step]]
 
