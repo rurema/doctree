@@ -1,0 +1,163 @@
+= class Complex < Numeric
+
+複素数を扱うクラスです。
+
+== Instance Methods
+
+--- *(other)
+#@todo
+Multiplication with real or complex number.
+
+--- **(other)
+#@todo
+
+Raise this complex number to the given (real or complex) power.
+
+--- +(other)
+#@todo
+
+Addition with real or complex number.
+
+--- -(other)
+#@todo
+
+Subtraction with real or complex number.
+
+--- -@
+#@todo
+
+--- /(other)
+#@todo
+
+Division by real or complex number.
+
+--- ==(other)
+#@todo
+
+Test for numerical equality (a == a + 0i).
+
+--- abs
+#@todo
+
+Absolute value (aka modulus): distance from the zero point on
+the complex plane.
+
+--- abs2
+#@todo
+
+Square of the absolute value.
+
+
+--- angle
+--- arg
+#@todo
+
+Argument (angle from (1,0) on the complex plane).
+
+--- coerce(other)
+#@todo
+
+Attempts to coerce other to a Complex number.
+
+--- conjugate
+--- conj
+
+Complex conjugate (z + z.conjugate = 2 * z.real).
+
+--- denominator
+#@todo
+
+FIXME
+
+--- eql?
+#@todo
+
+--- fdiv
+#@todo
+
+--- hash
+#@todo
+
+Returns a hash code for the complex number.
+
+--- imag
+#@todo
+
+--- imaginary
+#@todo
+
+--- inspect
+#@todo
+
+Returns "Complex(real, image)".
+
+--- magnitude
+#@todo
+
+--- marshal_dump
+#@todo
+
+--- marshal_load
+#@todo
+
+--- numerator
+#@todo
+
+FIXME
+
+--- phase
+#@todo
+
+--- polar
+#@todo
+
+Returns the absolute value and the argument.
+
+--- quo(other)
+#@todo
+
+
+--- real
+#@todo
+
+--- real?
+#@todo
+
+--- rect
+#@todo
+
+--- rectangular
+#@todo
+
+--- to_f
+#@todo
+
+--- to_i
+#@todo
+
+--- to_r
+#@todo
+
+--- to_s
+#@todo
+
+Standard string representation of the complex number.
+
+== Class Methods
+
+--- polar(r, theta)
+#@todo
+
+Creates a Complex number in terms of r (radius) and theta (angle).
+
+--- rect
+#@todo
+
+--- rectangular
+#@todo
+
+== Constants
+
+--- I
+#@todo
+

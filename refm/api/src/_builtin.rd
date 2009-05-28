@@ -12,6 +12,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Binding)
 #@include(_builtin/Class)
 #@include(_builtin/Comparable)
+#@since 1.9.1
+#@include(_builtin/Complex)
+#@end
 #@until 1.9.1
 #@include(_builtin/Continuation)
 #@end
@@ -85,6 +88,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Process__UID)
 #@include(_builtin/Range)
 #@include(_builtin/RangeError)
+#@since 1.9.1
+#@include(_builtin/Rational)
+#@end
 #@include(_builtin/Regexp)
 #@include(_builtin/RegexpError)
 #@include(_builtin/RuntimeError)
