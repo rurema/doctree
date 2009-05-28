@@ -635,14 +635,24 @@ self を返します。
 @see [[m:Readline::HISTORY.push]]、[[m:Readline::HISTORY.pop]]、
      [[m:Readline::HISTORY.delete_at]]
 
+#@since 1.8.7
+#@since 1.8.8
+--- each -> Enumerator
+#@else
 --- each -> Enumerable::Enumerator
+#@end
+#@end
 --- each {|string| ... }
 
 ヒストリの内容に対してブロックを評価します。
 ブロック引数にはヒストリの最初から最後までの内容を順番に渡します。
 #@since 1.8.7
 ブロックが与えられなかった場合は、自身と each から生成した
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
@@ -657,7 +667,11 @@ self を返します。
   end
 
 #@since 1.8.7
+#@since 1.8.8
+例: [[c:Enumerator]] オブジェクトを返す場合。
+#@else
 例: [[c:Enumerable::Enumerator]] オブジェクトを返す場合。
+#@end
 
   require "readline"
   

@@ -151,9 +151,15 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 --- each_line(rs = $/){|line| ... }  -> self
 #@since 1.8.7
 --- lines(rs = $/){|line| ... }      -> self
+#@since 1.8.8
+--- each(rs = $/)       -> Enumerator
+--- each_line(rs = $/)  -> Enumerator
+--- lines(rs = $/)      -> Enumerator
+#@else
 --- each(rs = $/)       -> Enumerable::Enumerator
 --- each_line(rs = $/)  -> Enumerable::Enumerator
 --- lines(rs = $/)      -> Enumerable::Enumerator
+#@end
 #@end
 
 自身から 1 行ずつ読み込み、それを引数として与えられたブロックを実行します。
@@ -174,8 +180,13 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 --- each_byte{|ch| ... }    -> self
 #@since 1.8.7
 --- bytes{|ch| ... }        -> self
+#@since 1.8.8
+--- each_byte -> Enumerator
+--- bytes     -> Enumerator
+#@else
 --- each_byte -> Enumerable::Enumerator
 --- bytes     -> Enumerable::Enumerator
+#@end
 #@end
 
 自身から 1 バイトずつ読み込み、整数 ch に変換し、それを引数として与えられたブロックを実行します。
@@ -568,8 +579,13 @@ nil を返します。
 
 --- each_char{|c| ... } -> self
 --- chars{|c| ... }     -> self
+#@since 1.8.8
+--- each_char           -> Enumerator
+--- chars               -> Enumerator
+#@else
 --- each_char           -> Enumerable::Enumerator
 --- chars               -> Enumerable::Enumerator
+#@end
 #@todo
 自身に含まれる文字を一文字ずつブロックに渡して評価します。
 

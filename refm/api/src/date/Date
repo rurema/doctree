@@ -547,21 +547,32 @@ n は数値でなければなりません。
 暦週における年を返します。
 
 --- downto(min){|date| ...} -> self
+#@since 1.8.7
+#@since 1.8.8
+--- downto(min){|date| ...} -> Enumerator
+#@else
+--- downto(min){|date| ...} -> Enumerable::Enumerator
+#@end
+#@end
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
-#@since 1.9.1
-1.9.1 以降では、ブロックが与えられない場合、
+#@since 1.8.7
+ブロックが与えられない場合、
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
 #@end
-
-[[m:Date#step]] を参照してください。
+#@end
 
 @param min 日付オブジェクト
+
+@see [[m:Date#step]]
 
 --- england -> Date
 このメソッドは、new_start(Date::ENGLAND) と等価です。
 
-[[m:Date#new_start]]、および [[m:Date::ENGLAND]] を参照してください。
+@see [[m:Date#new_start]], [[m:Date::ENGLAND]]
 
 #@since 1.9.1
 --- friday? -> bool
@@ -716,13 +727,24 @@ n 年前を返します。
 [[m:Date.new]] も参照してください。
 
 --- step(limit, step = 1){|date| ...} -> self
+#@since 1.8.7
+#@since 1.8.8
+--- step(limit, step = 1){|date| ...} -> Enumerator
+#@else
+--- step(limit, step = 1){|date| ...} -> Enumerable::Enumerator
+#@end
+#@end
 ブロックの評価を繰り返します。ブロックは日付オブジェクトをとります。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
 
-#@since 1.9.1
-1.9.1 以降では、ブロックが与えられない場合、
+#@since 1.8.7
+ブロックが与えられない場合、
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 @param limit 日付オブジェクト
@@ -781,11 +803,22 @@ limit は日付オブジェクトでなければなりません、
 #@end
 
 --- upto(max){|date| ...} -> self
+#@since 1.8.7
+#@since 1.8.8
+--- upto(max){|date| ...} -> Enumerator
+#else
+--- upto(max){|date| ...} -> Enumerable::Enumerator
+#@end
+#@end
 このメソッドは、step(max, 1){|date| ...} と等価です。
 
-#@since 1.9.1
-1.9.1 以降では、ブロックが与えられない場合、
+#@since 1.8.7
+ブロックが与えられない場合、
+#@since 1.8.8
+[[c:Enumerator]] オブジェクトを返します。
+#@else
 [[c:Enumerable::Enumerator]] オブジェクトを返します。
+#@end
 #@end
 
 [[m:Date#step]] を参照してください。

@@ -40,7 +40,12 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 ¼«¿È¤ò [[m:Marshal.#dump]] ¤·¤Þ¤¹¡£
 
 --- each{|full_name, gem| ... } -> Hash
+#@since 1.8.7
+#@since 1.8.8
+--- each -> Enumerator
+#@else
 --- each -> Enumerable::Enumerator
+#@end
 #@todo
 
 ¼«¿È¤ËÅÐÏ¿¤µ¤ì¤Æ¤¤¤ë¤½¤ì¤¾¤ì¤Î Gem ¤Ë¤Ä¤¤¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Þ¤¹¡£
