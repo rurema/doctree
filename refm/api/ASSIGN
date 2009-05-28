@@ -10,6 +10,7 @@ _builtin/Bignum                 ujihisa         done
 _builtin/Binding                                done
 _builtin/Class                                  done
 _builtin/Comparable                             done
+_builtin/Complex
 _builtin/Continuation                           done
 _builtin/Data                                   done
 _builtin/Dir                                    done
@@ -62,6 +63,7 @@ _builtin/Process__Sys                           done
 _builtin/Process__UID                           done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
+_builtin/Rational
 _builtin/Regexp                 kouya           done
 _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
