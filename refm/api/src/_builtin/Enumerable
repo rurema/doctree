@@ -105,13 +105,8 @@ self を返します。
 
 要素に対してブロックを評価した値が真になった最初の要素を返します。
 
-真になる要素が見つからず、
-ifnone も指定されていないときは nil を返します。
-真になる要素が見付からず、ifnone が指定されているときは
-ifnone を eval または call して実行し、nil を返します。
-#@# 1.7 featureかも。いつから?
-#@# あらい: ifnone に文字列が指定できなくなってからみたい
-#@# http://www.ruby-lang.org/cgi-bin/cvsweb.cgi/ruby/enum.c.diff?r1=1.28&r2=1.29
+真になる要素が見つからず、ifnone も指定されていないときは nil を返します。
+真になる要素が見つからず、ifnone が指定されているときは ifnone を call した結果を返します。
 
 #@since 1.8.0
 @arg ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
