@@ -40,10 +40,7 @@ key に対応する環境変数の値を返します。該当する環境変数が存在
 --- store(key, value) -> String
 
 key に対応する環境変数の値を value にします。
-#@until 1.9.1
-value が nil の時、key に対応する環境変数を取り
-除きます。 
-#@end
+value が nil の時、key に対応する環境変数を取り除きます。 
 
 value を返します。
 
