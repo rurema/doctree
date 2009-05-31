@@ -56,6 +56,7 @@ pd は [素因数, 指数] 組の配列です。
 
 === Instance Methods
 
+#@until 1.9.1
 --- gcd2(int)
 #@todo
 
@@ -65,6 +66,8 @@ self と int の最大公約数を求めます。
 
   12.gcd2 8
   # => 4
+
+#@end
 
 --- prime_division
 #@todo
