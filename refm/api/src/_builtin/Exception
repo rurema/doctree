@@ -33,7 +33,9 @@
 
 --- backtrace    -> [String]
 
-バックトレース情報を返します。デフォルトでは
+バックトレース情報を返します。
+
+デフォルトでは
 
   * "#{sourcefile}:#{sourceline}:in `#{method}'"
     (メソッド内の場合)
