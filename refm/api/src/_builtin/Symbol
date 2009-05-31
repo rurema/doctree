@@ -177,7 +177,7 @@ self に対応する Proc オブジェクトを返します。
 --- ==(other)        -> true | false
 #@todo
 
-other がシンボルの時に true を返します。
+other が同じシンボルの時に true を返します。
 
 --- succ -> Symbol
 --- next -> Symbol
