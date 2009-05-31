@@ -99,14 +99,18 @@ other は Pathname オブジェクトでなければなりません。
 ハッシュ値を返します。
 
 --- to_s   -> String
+#@until 1.9.1
 --- to_str -> String
+#@end
 パス名を文字列で返します。
 
+#@until 1.9.1
 to_str は、[[m:File.open]] などの引数にそのまま Pathname オブジェクトを
 渡せるようにするために用意されています。
+#@end
 
     require 'pathname'
-
+    
     path = Pathname.new("/tmp/hogehoge")
     File.open(path)
 
