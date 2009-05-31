@@ -755,6 +755,13 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object
 #@todo
 
+与えられた任意のオブジェクトと要素をブロックに渡し繰り返し、最初に与えられたオブジェクトを返します。
+
+@param obj 任意のオブジェクトを指定します。
+
+  evens = (1..10).each_with_object([]) {|i, a| a << i*2 }
+  # => [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+
 @see [[m:Enumerator#with_object]]
 
 #@end
