@@ -2074,6 +2074,11 @@ lstrip! は self を変更して返します。
     p "  abc\n".rstrip          #=> "  abc"
     p "  abc \t\r\n\0".rstrip   #=> "  abc"
     p "  abc".rstrip            #=> "  abc"
+#@since 1.9.1
+    p "  abc\0 ".rstrip         #=> "  abc"
+#@else
+    p "  abc\0 ".rstrip         #=> "  abc\0"
+#@end
 
     str = "abc\n"
     p str.rstrip    #=> "abc"
