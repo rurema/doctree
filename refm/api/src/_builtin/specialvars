@@ -377,7 +377,7 @@ require 'foo' を実行すると、
 
 この変数はグローバルスコープです。
 
---- $stdin -> IO
+--- $stdin -> object
 標準入力です。
 
 自プロセスの標準入力をリダイレクトしたいときは
@@ -421,10 +421,10 @@ $stdin オブジェクトに代入したオブジェクトが以下のメソッドを
 
 $stdin はグローバルスコープです。
 
---- $>      -> IO
---- $stdout -> IO
+--- $>      -> object
+--- $stdout -> object
 #@until 1.9.1
--- $defout  -> IO
+-- $defout  -> object
 #@end
 
 標準出力です。
@@ -470,9 +470,9 @@ $stdout はグローバルスコープです。
 
 @see [[d:spec/rubycmd]]
 
---- $stderr -> IO
+--- $stderr -> object
 #@until 1.9.1
---- $deferr -> IO
+--- $deferr -> object
 #@end
 
 標準エラー出力です。
