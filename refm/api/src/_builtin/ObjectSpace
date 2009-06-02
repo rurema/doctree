@@ -2,7 +2,7 @@
 
 全てのオブジェクトを操作するためのモジュールです。
 
-== Singleton Methods
+== Module Functions
 
 --- _id2ref(id)    -> object
 
