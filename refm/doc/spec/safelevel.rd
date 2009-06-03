@@ -42,7 +42,6 @@ Rubyではオブジェクトは「汚染されている」とみなされることがあります。この
 [[m:$SAFE]] に関するルール
 
   * プログラム開始時の$SAFEの値は0
-
   * 各スレッドは作られた時点での親スレッドの$SAFEの値を引き継ぐ
 //emlist{
       $SAFE = 1
@@ -72,8 +71,6 @@ Rubyではオブジェクトは「汚染されている」とみなされることがあります。この
        $ ruby -e 'p ARGV[0].tainted?' hoge
        true
 
-     (環境変数PATHだけは特別)
-
 環境変数PATHだけは例外で、値に危険なパスを含む場合のみ汚染されます。
 
 ここでは危険なパスとは誰でも変更／書き込みが可能なパスをいいます。
@@ -96,25 +93,19 @@ CGI等でユーザからの入力を処理するのに適しています。
 ===== 禁止される操作
    * 汚染された文字列を引数とした以下の操作
 
-      * Dir, IO, File、FileTestのクラスメソッド、メソッド
+      * [[c:Dir]], [[c:IO]], [[c:File]], [[c:FileTest]] のメソッド呼び出し
 //emlist{
           $ ruby -e '$SAFE = 1; open(ARGV[0])' hoge
           -e:1:in `initialize': Insecure operation - initialize (SecurityError)
                   from -e:1
 //}
       * ファイルテスト演算子の使用、ファイルの更新時刻比較
+      * 外部コマンド実行 ([[m:Kernel.#system]], [[m:Kernel.#exec]], [[m:Kernel.#`]])
+      * [[m:Kernel.#eval]] ([[ref:level4]]の説明も参照)
+      * トップレベルへの [[m:Kernel.#load]] (第二引数を指定してラップすれば実行可能)
+      * [[m:Kernel.#require]]
+      * [[m:Kernel.#trap]]
 
-      * 外部コマンド実行(system, exec, ``)
-
-      * eval ([[ref:level4]]の説明も参照)
-
-      * トップレベルへのload(第二引数を指定してラップすれば実行可能)
-
-      * require
-
-      * trap
-
-   * 外部コマンド実行(環境変数PATHに危険なパスを含んでいる場合のみ)
 
 ==== レベル 2
 
@@ -125,27 +116,19 @@ CGI等でユーザからの入力を処理するのに適しています。
 =====  禁止される操作
 レベル1の制限に加え、以下の操作が禁止されます。
 
-   * Dir.chdir Dir.chroot Dir.mkdir Dir.rmdir
-
-   * File.chown File.chmod File.umask File.truncate
-     File#lstat File#chmod File#chown File#delete File#unlink
-     File#truncate File#flock
-     およびFileTestモジュールのメソッド
-
-   * IO#ioctl, IO#fcntl
-
-   * Process.fork Process.setpgid Process.setsid
-     Process.setpriority Process.egid= Process.kill
-
-   * 危険なパスからのload
-
-   * 汚染された文字列を引数にしてのload(ラップされていても)
-
-   * syscall
-
-   * exit!
-
-   * trap
+   * [[m:Dir.chdir]] [[m:Dir.chroot]] [[m:Dir.mkdir]] [[m:Dir.rmdir]]
+   * [[m:File.chown]] [[m:File.chmod]] [[m:File.umask]] [[m:File.truncate]]
+     [[m:File#lstat]] [[m:File#chmod]] [[m:File#chown]] [[m:File#delete]] [[m:File#unlink]]
+     [[m:File#truncate]] [[m:File#flock]]
+     および [[c:FileTest]] モジュールのメソッド
+   * [[m:IO#ioctl]], [[m:IO#fcntl]]
+   * [[m:Process.fork]] [[m:Process.setpgid]] [[m:Process.setsid]]
+     [[m:Process.setpriority]] [[m:Process.egid=]] [[m:Process.kill]]
+   * 危険なパスからの [[m:Kernel.#load]]
+   * 汚染された文字列を引数にしての [[m:Kernel.#load]] (ラップされていても)
+   * [[m:Kernel.#syscall]]
+   * [[m:Kernel.#exit!]]
+   * [[m:Kernel.#trap]]
 
 ==== レベル 3
 
@@ -159,7 +142,7 @@ CGI等でユーザからの入力を処理するのに適しています。
 ===== 禁止される操作
 レベル2の制限に加え、以下の操作が禁止されます。
 
-   * Object#untaint
+   * [[m:Object#untaint]]
 
 ====[a:level4] レベル 4
 
@@ -169,7 +152,7 @@ CGI等でユーザからの入力を処理するのに適しています。
 完全な安全性は保証されません。
 
 このレベルではレベル3では禁止されている「汚染された文字列のeval」が許可
-されています。(evalで実行すると危険な操作は全て禁止されているからです。)
+されています。([[m:Kernel.#eval]] で実行すると危険な操作は全て禁止されているからです。)
 
 ===== 汚染されるオブジェクト
 
@@ -179,43 +162,28 @@ CGI等でユーザからの入力を処理するのに適しています。
 
 レベル3の制限(上記のとおりevalは除く)に加え、以下の操作が禁止されます。
 
-   * Object#taint
-
-   * トップレベルの定義の変更(autoload, load, include)
-
+   * [[m:Object#taint]]
+   * トップレベルの定義の変更([[m:Kernel.#autoload]], [[m:Kernel.#load]], [[m:Module#include]])
    * 既存のメソッドの再定義
-
-   * Objectクラスの定義の変更
-
-   * 汚染されていないクラスやモジュールの定義の変更
-     およびクラス変数の変更
-
+   * [[c:Object]] クラスの定義の変更
+   * 汚染されていないクラスやモジュールの定義の変更およびクラス変数の変更
    * 汚染されていないオブジェクトの状態の変更
-
    * グローバル変数の変更
-
-   * 汚染されていないIOやFileを使用する処理
-
-   * IOへの出力
-
-   * プログラムの終了(exit, abort)
-     (なおout of memoryでもfatalにならない)
-
-   * 他のスレッドに影響が出るThreadクラスの操作
-     および他のスレッドのThread#[]
-
-   * ObjectSpace._id2ref
+   * 汚染されていない [[c:IO]] や [[c:File]] を使用する処理
+   * [[c:IO]] への出力
+   * プログラムの終了([[m:Kernel.#exit]], [[m:Kernel.#abort]])
+     (なお out of memory でも fatal にならない)
+   * 他のスレッドに影響が出る [[c:Thread]] クラスの操作および他のスレッドの [[m:Thread#[] ]]
+   * [[m:ObjectSpace._id2ref]]
 #@since 1.8.0
-   * ObjectSpace.each_object   
+   * [[m:ObjectSpace.each_object]]
 #@end
    * 環境変数の変更
-
-   * srand
+   * [[m:Kernel.#srand]]
 
 === セーフレベルに関するその他の詳細
 
    * requireは$SAFE = 0で実行される
-
    * Level 1以上では起動時に以下の違いがある
 //emlist{
       * 環境変数 RUBYLIB を $: に加えない
@@ -228,25 +196,18 @@ CGI等でユーザからの入力を処理するのに適しています。
         (スクリプトがsetgid, setuidされている時も同様)
 //}
    * setuid, setgid されたスクリプトは $SAFE = 1 以上で実行される。
-
-   * Procはその時点でのセーフレベルを記憶する
-     そのProcオブジェクトがcallされると、
-     記憶していたセーフレベルで実行される。
-
-   * 汚染されたMethodオブジェクトがcallされるとレベル4で実行される
-
-   * 汚染された文字列を trap/trace_var の第二引数に指定する
-     とレベル4で実行される
-
+   * [[c:Proc]] はその時点でのセーフレベルを記憶する。
+     その [[c:Proc]] オブジェクトが call されると、記憶していたセーフレベルで実行される。
+   * 汚染された [[c:Method]] オブジェクトが call されるとレベル4で実行される。
 #@since 1.8.0
-     汚染された文字列を第二引数に指定して trap/trace_var を
+   * 汚染された文字列を第二引数に指定して [[m:Kernel.#trap]]/[[m:Kernel.#trace_var]] を
      実行するとその時点で例外 [[c:SecurityError]] が発生する。
+#@else
+   * 汚染された文字列を [[m:Kernel.#trap]]/[[m:Kernel.#trace_var]] の第二引数に指定するとレベル4で実行される。
 #@end
-
    * レベル4以上では out of memory でも [[c:fatal]] にならない。
-
-   * 実装の都合上、Fixnum・Symbol・true・false・nil は汚染されない。
-     なお Bignum・Float は汚染されることは注意が必要。
+   * 実装の都合上 [[m:Fixnum]], [[m:Symbol]], true, false, nil は汚染されない。
+     なお [[c:Bignum]], [[m:Float]] は汚染されることは注意が必要。
 
 === 使用例
 
@@ -274,4 +235,4 @@ CGI等でユーザからの入力を処理するのに適しています。
  * グローバルな状態を変更する場合や外部とのやりとりの前にセキュリティレベルを
    チェックする必要があります。
 
-[[ruby-list:37407]]
+@see [[ruby-list:37407]]
