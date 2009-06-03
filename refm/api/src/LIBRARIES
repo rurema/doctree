@@ -7,9 +7,7 @@ Win32API
 #@since 1.8.0
 abbrev
 #@end
-#@until 1.9.1
 base64
-#@end
 #@since 1.8.0
 benchmark
 bigdecimal
