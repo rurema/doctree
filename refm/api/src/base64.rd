@@ -12,11 +12,11 @@ ASCII 文字のうちの 65 文字 ([A-Za-z0-9+/] の 64 文字と '=')
 === 使用方法
 
   require 'base64'
-
-  p b64encode("日本語")      # => "xvzL3Ljs\n"
-  p decode64('xvzL3Ljs')     # => "日本語"
-  p decode_b("日本語")       # => "日本語"
-  p decode_b("=?ISO-2022-JP?B?QyAbJEI4QDhsJV0lJCVzJT80MEE0QClHRhsoQg==?=")
+  # EUC-JP の場合
+  p Base64.b64encode("日本語")      # => "xvzL3Ljs\n"
+  p Base64.decode64('xvzL3Ljs')    # => "日本語"
+  p Base64.decode_b("日本語")       # => "日本語"
+  p Base64.decode_b("=?ISO-2022-JP?B?QyAbJEI4QDhsJV0lJCVzJT80MEE0QClHRhsoQg==?=")
                              # => "C 言語ポインタ完全制覇"
 
 
