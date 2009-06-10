@@ -326,33 +326,63 @@ n, N, v, V を用います。
 
   base64された文字列。60 オクテットごと(と最後)に改行コードが付加されます。
 
+#@since 1.9.1
   Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
   うちの65文字 ([A-Za-z0-9+/]の64文字とpaddingのための'=')だけを使用して
   4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
-  ング法です。RFC2045で定義されています。
+  ング法です。[[RFC:2045]], [[RFC:4648]] で定義されています。
+#@else
+  Base64は、3オクテット(8bits * 3 = 24bits)のバイナリコードをASCII文字の
+  うちの65文字 ([A-Za-z0-9+/]の64文字とpaddingのための'=')だけを使用して
+  4オクテット(6bits * 4 = 24bits)の印字可能文字列に変換するエンコーディ
+  ング法です。[[RFC:2045]] で定義されています。
+#@end
 //emlist{
-    [""].pack("m") => ""
-    ["\0"].pack("m") => "AA==\n"
-    ["\0\0"].pack("m") => "AAA=\n"
-    ["\0\0\0"].pack("m") => "AAAA\n"
-    ["\377"].pack("m") => "/w==\n"
-    ["\377\377"].pack("m") => "//8=\n"
-    ["\377\377\377"].pack("m") => "////\n"
+    [""].pack("m")             # => ""
+    ["\0"].pack("m")           # => "AA==\n"
+    ["\0\0"].pack("m")         # => "AAA=\n"
+    ["\0\0\0"].pack("m")       # => "AAAA\n"
+    ["\377"].pack("m")         # => "/w==\n"
+    ["\377\377"].pack("m")     # => "//8=\n"
+    ["\377\377\377"].pack("m") # => "////\n"
 
     ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"].pack("m")
-    => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n"
+    # => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n"
     ["abcdefghijklmnopqrstuvwxyz"].pack("m3")
-    => "YWJj\nZGVm\nZ2hp\namts\nbW5v\ncHFy\nc3R1\ndnd4\neXo=\n"
+    # => "YWJj\nZGVm\nZ2hp\namts\nbW5v\ncHFy\nc3R1\ndnd4\neXo=\n"
 
-    "".unpack("m") => [""]
-    "AA==\n".unpack("m") => ["\000"]
-    "AA==".unpack("m") => ["\000"]
+    "".unpack("m")       # => [""]
+    "AA==\n".unpack("m") # => ["\000"]
+    "AA==".unpack("m")   # => ["\000"]
 
     "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJT\nVFVWV1hZWg==\n".unpack("m")
-    => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+    # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
     "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==\n".unpack("m")
-    => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+    # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
 //}
+#@since 1.9.1
+  m0 は [[RFC:4648]] 対応
+//emlist{
+    [""].pack("m0")             # => ""
+    ["\0"].pack("m0")           # => "AA=="
+    ["\0\0"].pack("m0")         # => "AAA="
+    ["\0\0\0"].pack("m0")       # => "AAAA"
+    ["\377"].pack("m0")         # => "/w=="
+    ["\377\377"].pack("m0")     # => "//8="
+    ["\377\377\377"].pack("m0") # => "////"
+
+    ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"].pack("m0")
+    # => "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg=="
+    
+    "".unpack("m0")       # => [""]
+    "AA==\n".unpack("m0") # => ArgumentError
+    "AA==".unpack("m0")   # => ["\x00"]
+    
+    "YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWg==".unpack("m0")
+    # => ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"]
+//}
+@see [[lib:base64]]
+#@end
 
 : M
 
@@ -902,3 +932,4 @@ pack は暗号になりやすい面があることを考慮し、pack を使いたくない人
     p(("Comments").unpack("U*").pack("n*"))
     "\000C\000o\000m\000m\000e\000n\000t\000s"
 //}
+
