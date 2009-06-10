@@ -1660,12 +1660,18 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
 --- loop { ... } -> object
 (中断されない限り)永遠にブロックの評価を繰り返します。
 
-@return breakの引数など、ループ脱出時の値を返します。
+#@since 1.8.7
+与えられたブロック内で [[c:StopIteration]] を [[m:Kernel.#raise]] すると
+ループを終了して nil を返します。
+ループを終了させる場合、通常は break を使用してください。
+#@end
+
+@return break の引数など、ループ脱出時の値を返します。
 #@else
 --- loop { ... } -> nil
 (中断されない限り)永遠にブロックの評価を繰り返します。
 
-@return nilを返します。
+@return nil を返します。
 #@end
 
   def try int
