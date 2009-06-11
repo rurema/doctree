@@ -894,6 +894,7 @@ pos = self.string.size と同じ動作です。
 
 @return selfを返します。
 
+#@since 1.8.2
 このメソッドでポインタを戻せるのは 1 回分だけです。
 2 回分以上戻そうとしたときは例外 StringScanner::Error が発生します。
 また、まだマッチを一度も行っていないときや、
@@ -902,7 +903,16 @@ pos = self.string.size と同じ動作です。
 @raise StringScanner::Error 2 回分以上戻そうとした時や、
                             まだマッチを一度も行っていない時、
                             前回のマッチが失敗していた時に発生します。
+#@else
+このメソッドでポインタを戻せるのは 1 回分だけです。
+2 回分以上戻そうとしたときは例外 ScanError が発生します。
+また、まだマッチを一度も行っていないときや、
+前回のマッチが失敗していたときも例外 ScanError が発生します。
 
+@raise ScanError 2 回分以上戻そうとした時や、
+                 まだマッチを一度も行っていない時、
+                 前回のマッチが失敗していた時に発生します。
+#@end
 使用例
       s = StringScanner.new('test string')
       begin
@@ -918,7 +928,11 @@ pos = self.string.size と同じ動作です。
       begin
         # 二回以上戻そうとしたので、例外が発生する。
         s.unscan
+#@since 1.8.2
       rescue StringScanner::Error => err
+#@else
+      rescue ScanError => err
+#@end
         puts err
         # 出力例
         #=> unscan failed: previous match had failed
@@ -947,11 +961,29 @@ pos = self.string.size と同じ動作です。
 
 == Constants
 
---- Version
-StringScannerクラスのバージョンを文字列で返します。
-この文字列はfreezeされています。
+--- Version -> String
+[[c:StringScanner]] クラスのバージョンを文字列で返します。
+この文字列は [[m:Object#freeze]] されています。
 
       StringScanner::Version           # => "0.7.0"
       StringScanner::Version.frozen?   # => true
 
+--- Id -> String
+
+[[c:StringScanner]] クラスの詳しいバージョンを文字列で返します。
+この文字列は [[m:Object#freeze]] されています。
+
+
+#@until 1.8.2
+= class ScanError
+
+スキャン中に発生したエラーをあらわす例外です。
+
+#@end
+#@since 1.8.2
+= class StringScanner::Error
+
+スキャン中に発生したエラーをあらわす例外です。
+
+#@end
 #@end
