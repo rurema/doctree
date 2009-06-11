@@ -1,4 +1,5 @@
 = module Sync_m
+alias Synchronizer_m
 
 スレッド同期機構である再入可能な reader/writer ロック機能を Mix-in により提供する。
 

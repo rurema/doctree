@@ -1,4 +1,5 @@
 = class Sync
+alias Synchronizer
 include Sync_m
 
 [[c:Sync_m]]をincludeしたクラスで[[c:Synchronizer]]の別名です。
