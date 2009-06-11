@@ -140,6 +140,7 @@ mailread
 mathn
 matrix
 #@since 1.9.1
+minitest/autorun
 minitest/mock
 minitest/spec
 minitest/unit

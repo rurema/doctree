@@ -1,3 +1,5 @@
+sublibrary minitest/autorun
+
 ユニットテストを行うためのライブラリです。
 
 === 使い方
