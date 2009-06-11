@@ -120,7 +120,7 @@ StringScanner は $~ $& $1 $2 …… などの正規表現関連変数を
     p s.scan(/\w+/)   #=> nil
     p s.scan(/\s+/)   #=> " "
 
----  StringScanner.must_C_version -> self
+---  must_C_version -> self
 このメソッドは後方互換性のために定義されています。
 
 == Instance Methods
