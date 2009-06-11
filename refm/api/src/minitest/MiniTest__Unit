@@ -1,5 +1,4 @@
 = class MiniTest::Unit
-#@todo
 
 ユニットテストで使用する様々なメソッドを定義しているクラスです。
 
@@ -98,10 +97,10 @@
 
 == Singleton Methods
 
---- autorun
+--- autorun -> ()
 #@todo
 
---- disable_autorun
+--- disable_autorun -> ()
 #@todo
 
 --- output=(stream)

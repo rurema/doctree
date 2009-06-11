@@ -23,8 +23,7 @@ include MiniTest::Assertions
 
 自身に関連付けられているテストを実行します。
 
-[[m:MiniTest::Unit::TestCase#setup]], [[m:MiniTest::Unit::TestCase#setup]] が
-サブクラスで再定義されている場合はそれらも実行します。
+[[m:MiniTest::Unit::TestCase#setup]] がサブクラスで再定義されている場合はそれらも実行します。
 
 @param runner テストの実行結果を管理するオブジェクトを指定します。
 
