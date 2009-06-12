@@ -153,12 +153,12 @@ Encoding::Converter オブジェクトの情報を簡単に表示します。
 
 options には以下が指定できます。
 
-  hash form:
-    :partial_input => true           # source buffer may be part of larger source
-    :after_output => true            # stop conversion after output before input
-  integer form:
-    Encoding::Converter::PARTIAL_INPUT
-    Encoding::Converter::AFTER_OUTPUT
+: hash form
+  :partial_input => true           # source buffer may be part of larger source
+  :after_output => true            # stop conversion after output before input
+: integer form
+  Encoding::Converter::PARTIAL_INPUT
+  Encoding::Converter::AFTER_OUTPUT
 
 戻り値は以下のうちのどれかです。
 
@@ -174,8 +174,6 @@ options には以下が指定できます。
   src = "abc\x81あいう\u{20bb7}\xe3"
   dst = ''
   
-不正なバイトや変換先で未定義なバイトをエスケープしつつ変換する例です。以上のように、戻り値で分岐させつつ、[[m:Encoding::Converter#primitive_errinfo]] の情報を参照して処理していくことになります。
-
   begin
     ret = ec.primitive_convert(src, dst)
     p [ret, src, dst, ec.primitive_errinfo]
@@ -189,10 +187,12 @@ options には以下が指定できます。
       redo
     when :incomplete_input
       ec.insert_output(ec.primitive_errinfo[3].dump[1..-2])
-    hen :finished
+    when :finished
     end
     break
   end while nil
+
+不正なバイトや変換先で未定義なバイトをエスケープしつつ変換する例です。以上のように、戻り値で分岐させつつ、[[m:Encoding::Converter#primitive_errinfo]] の情報を参照して処理していくことになります。
 
 --- primitive_errinfo -> Array
 直前の [[m:Encoding::Converter#primitive_convert]] による変換の結果を保持する五要素の配列を返します。
