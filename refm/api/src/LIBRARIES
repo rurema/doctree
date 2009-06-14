@@ -189,6 +189,9 @@ ping
 pp
 prettyprint
 #@end
+#@since 1.9.1
+prime
+#@end
 profile
 #@since 1.8.0
 profiler
