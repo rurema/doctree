@@ -446,6 +446,11 @@ safe_level は、[[m:$SAFE]] と同じです。
 #@todo
 #@end
 
+#@since 1.9.2
+--- backtrace    -> [String] | nil
+#@todo
+
+#@end
 == Constants
 
 #@since 1.9.1
