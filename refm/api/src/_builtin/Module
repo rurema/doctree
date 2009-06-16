@@ -4,15 +4,24 @@
 
 == Class Methods
 
+#@since 1.9.1
+--- constants -> [Symbol]
+#@else
 --- constants -> [String]
+#@end
 
 このメソッドを呼び出した時点で参照可能な定数名の配列を返します。
 
   class C
     FOO = 1
   end
+#@since 1.9.1
+  p Module.constants   # => [:RUBY_PLATFORM, :STDIN, ..., :C, ...]
+                       # 出力中に :FOO は現われない
+#@else
   p Module.constants   # => ["RUBY_PLATFORM", "STDIN", ..., "C", ...]
                        # 出力中に "FOO" は現われない
+#@end
 
 @see [[m:Module#constants]], [[m:Kernel.#local_variables]], [[m:Kernel.#global_variables]], [[m:Object#instance_variables]], [[m:Module#class_variables]]
 
@@ -458,6 +467,21 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
   class Bar
     BAR = 1
 
+#@since 1.9.1
+    # Bar は BAR を含む
+    p constants - $clist                # => [:BAR]
+    # 出力に FOO は含まれない
+    p Module.constants - $clist         # => [:BAR, :Bar, :Foo]
+    class Baz
+      # Baz は定数を含まない
+      p constants - $clist              # => []
+
+      # ネストしたクラスでは、外側のクラスで定義した定数は
+      # 参照可能なので、BAR は、Module.constants には含まれる
+      # (クラス Baz も Bar の定数なので同様)
+      p Module.constants - $clist       # => [:BAR, :Baz, :Foo, :Bar]
+    end
+#@else
     # Bar は BAR を含む
     p constants - $clist                # => ["BAR"]
     # 出力に FOO は含まれない
@@ -471,6 +495,7 @@ autoload 定数がまだ定義されてない(ロードされていない) ときにそのパス名を返します
       # (クラス Baz も Bar の定数なので同様)
       p Module.constants - $clist       # => ["BAR", "Baz", "Bar", "Foo"]
     end
+#@end
   end
 
 #@since 1.8.0
@@ -644,6 +669,12 @@ module_eval のブロック中でメソッドを定義する場合、
 
 実行結果
 
+#@since 1.9.1
+     [:protected_foo, :public_foo]
+     [:public_foo]
+     [:private_foo]
+     [:protected_foo]
+#@else
 #@since 1.8.0
      ["protected_foo", "public_foo"]
 #@else
@@ -652,8 +683,15 @@ module_eval のブロック中でメソッドを定義する場合、
      ["public_foo"]
      ["private_foo"]
      ["protected_foo"]
+#@end
 
 例2:
+
+  class Bar
+    private;   def private_foo()   end
+    protected; def protected_foo() end
+    public;    def public_foo()    end
+  end
 
   # あるクラスのインスタンスメソッドの一覧を得る。
   # 親のクラスのインスタンスメソッドも含めるため true を指定して
@@ -665,6 +703,12 @@ module_eval のブロック中でメソッドを定義する場合、
 
 実行結果
 
+#@since 1.9.1
+     [:protected_foo, :public_foo]
+     [:public_foo]
+     [:private_foo]
+     [:protected_foo]
+#@else
 #@since 1.8.0
      ["protected_foo", "public_foo"]
 #@else
@@ -673,6 +717,7 @@ module_eval のブロック中でメソッドを定義する場合、
      ["public_foo"]
      ["private_foo"]
      ["protected_foo"]
+#@end
 
 #@since 1.9.1
 --- public_instance_methods(inherited_too = true) -> [Symbol]

@@ -1909,21 +1909,37 @@ seed に既知の値を与えると、以前の Kernel.#rand の値を再現できます。
 
 @see [[m:Kernel.#rand]], [[m:Object#to_int]]
 
+#@since 1.9.1
+--- global_variables -> [Symbol]
+#@else
 --- global_variables -> [String]
+#@end
 
 プログラム中で定義されているグローバル変数(`$'で始まる変数)名の
 配列を返します。
 
+#@since 1.9.1
+  p global_variables #=> [:$;, :$-F, :$@, ... ]
+#@else
   p global_variables #=> ["$-p", "$-I", "$-v" ... ]
+#@end
 
 @see [[m:Kernel.#local_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
+#@since 1.9.1
+--- local_variables -> [Symbol]
+#@else
 --- local_variables -> [String]
+#@end
 
 現在のスコープで定義されているローカル変数名の配列を返します。
 
   yuyu = 0
+#@since 1.9.1
+  p local_variables #=> [:yuyu]
+#@else
   p local_variables #=> ["yuyu"]
+#@end
 
 @see [[m:Kernel.#global_variables]],[[m:Object#instance_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
