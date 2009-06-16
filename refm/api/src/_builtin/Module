@@ -1495,11 +1495,3 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 @see [[m:Module#module_eval]], [[m:Module#class_eval]]
 
 #@end
-
-#@since 1.9.1
-
---- local_methods   -> Array
-
-Returns a list of the local methods defined in mod.
-
-#@end
