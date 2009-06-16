@@ -177,14 +177,14 @@ new メソッドと違い initialize メソッドを呼びません。
 ントスレッドの実行を停止します。
 
 #@since 1.9.1
---- Thread.exclusive { ... }
+--- exclusive { ... }  -> object
 #@todo
 #@# 1.8 以前は ../thread.rb にあります。
-VMグローバルのMutexをロックし、ブロックを実行します。
+VM グローバルの Mutex をロックし、ブロックを実行します。
 
-このクラスメソッドの挙動は1.8以前とは違います。
-Thread.exclusiveはVMグローバルの[[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]]の
-synchronizeをしているだけで、Thread.exclusiveしていないスレッドは動きます。
+このクラスメソッドの挙動は 1.8 以前とは違います。
+Thread.exclusive は VM グローバルの [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] の
+synchronize をしているだけで、Thread.exclusive していないスレッドは動きます。
 [[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
 
 #@end
