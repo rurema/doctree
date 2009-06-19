@@ -37,7 +37,7 @@ BigDecimal は可変長浮動小数点計算機能ライブラリです。
 #@todo
 詳細は [[m:BigDecimal.new]] を参照
 
-= class BigDecimal
+= class BigDecimal < Numeric
 
 == Constants
 
