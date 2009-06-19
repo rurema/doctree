@@ -854,14 +854,9 @@ include を Ruby で書くと以下のように定義できます。
     modules.each {|mod|
       # append_features はプライベートメソッドなので
       # 直接 mod.append_features(self) とは書けない
-#@since 1.9.1
-      mod.__send!(:append_features, self)
-      mod.__send!(:included, self)
-#@else
       mod.__send__(:append_features, self)
 #@since 1.8.0
       mod.__send__(:included, self)
-#@end
 #@end
     }
   end
