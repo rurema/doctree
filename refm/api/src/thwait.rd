@@ -1,7 +1,8 @@
 複数スレッドの終了を待つ機能を提供します。
 
 = class ThreadsWait < Object
-#@# alias ThWait
+alias ThWait
+extend Exception2MessageMapper
 
 複数スレッドの終了を待つ機能を提供します。
 
@@ -223,6 +224,6 @@ nonblock がtrue でかつ、キューが空の時、発生します。
 
 = class ThreadsWait::ErrNoWaitingThread < StandardError
 
-終了をまつスレッドが存在しない時、発生します。
+終了を待つスレッドが存在しない時、発生します。
 
 @see [[m:ThreadsWait#next_wait]]
