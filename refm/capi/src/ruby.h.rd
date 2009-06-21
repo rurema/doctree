@@ -142,7 +142,7 @@ Fixnum を int に変換します。
 --- MACRO long FIX2LONG(VALUE x)
 
 Fixnum を long に変換します。
-返り値が long の範囲から外れる場合は RangeError が発生します。
+Fixnum は常に long に収まります。
 
 --- MACRO unsigned int FIX2UINT(VALUE x)
 
@@ -152,7 +152,7 @@ Fixnum を unsigned int に変換します。
 --- MACRO unsigned long FIX2ULONG(VALUE x)
 
 Fixnum を unsigned long に変換します。
-返り値が unsigned long の範囲から外れる場合は RangeError が発生します。
+Fixnum は常に unsigned long に収まります。
 
 --- MACRO int FIXABLE(long f)
 
@@ -202,7 +202,8 @@ obj が Symbol か Fixnum のインスタンスであるか、 Qtrue のとき真。
 
 --- MACRO VALUE INT2FIX(int i)
 
-31ビット以内におさまる整数を Fixnum に変換します。
+Fixnum におさまることが自明な整数を Fixnum に変換します。
+なお、Fixnum の幅は long の幅 - 1 です。
 
 --- MACRO VALUE INT2NUM(long i)
 
