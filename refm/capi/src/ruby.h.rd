@@ -231,6 +231,8 @@ Fixnum におさまることが自明な整数を Fixnum に変換します。
 
 --- MACRO VALUE LONG2FIX(long i)
 
+INT2FIX と同じです。
+
 --- MACRO VALUE LONG2NUM(long v)
 
 --- MACRO int MEMCMP(p1, p2, type, n)
