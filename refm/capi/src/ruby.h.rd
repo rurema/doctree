@@ -205,7 +205,7 @@ obj が Symbol か Fixnum のインスタンスであるか、 Qtrue のとき真。
 Fixnum におさまることが自明な整数を Fixnum に変換します。
 なお、Fixnum の幅は long の幅 - 1 です。
 
---- MACRO VALUE INT2NUM(long i)
+--- MACRO VALUE INT2NUM(int i)
 
 任意の整数を Fixnum か Bignum に変換します。
 
@@ -411,7 +411,7 @@ obj が Symbol のインスタンスのとき真。
 
 obj の構造体型 ID を返します。
 
---- MACRO VALUE UINT2NUM(unsigned long i)
+--- MACRO VALUE UINT2NUM(unsigned int i)
 
 任意の整数を Fixnum か Bignum に変換します。
 
