@@ -196,8 +196,9 @@ id を Symbol に変換します。
 
 --- MACRO int IMMEDIATE_P(VALUE obj)
 
-obj がポインタでないとき真。すなわち現在の実装では
-Symbol か Fixnum のインスタンスであるとき真。
+obj が即値でかつ真な値であるとき真。
+すなわち現在の実装では
+obj が Symbol か Fixnum のインスタンスであるか、 Qtrue のとき真。
 
 --- MACRO VALUE INT2FIX(int i)
 
