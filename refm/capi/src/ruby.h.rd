@@ -419,6 +419,3 @@ obj の構造体型 ID を返します。
 
 --- MACRO VALUE ULONG2NUM(unsigned long n)
 
---- MACRO VALUE UINT2FIX(unsigned int i)
-
-unsigned int を Fixnum に変換します。
