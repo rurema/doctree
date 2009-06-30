@@ -206,8 +206,8 @@ CGI等でユーザからの入力を処理するのに適しています。
    * 汚染された文字列を [[m:Kernel.#trap]]/[[m:Kernel.#trace_var]] の第二引数に指定するとレベル4で実行される。
 #@end
    * レベル4以上では out of memory でも [[c:fatal]] にならない。
-   * 実装の都合上 [[m:Fixnum]], [[m:Symbol]], true, false, nil は汚染されない。
-     なお [[c:Bignum]], [[m:Float]] は汚染されることは注意が必要。
+   * 実装の都合上 [[c:Fixnum]], [[c:Symbol]], true, false, nil は汚染されない。
+     なお [[c:Bignum]], [[c:Float]] は汚染されることは注意が必要。
 
 === 使用例
 
