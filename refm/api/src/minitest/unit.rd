@@ -47,7 +47,7 @@ sublibrary minitest/autorun
     end
   end
 
-または MiniTest::Unit.autorun を省略して以下のように書くこともできる。
+または MiniTest::Unit.autorun を省略して以下のように書くこともできます。
 
   require 'minitest/unit'
   require 'minitest/autorun'
@@ -105,7 +105,7 @@ test_bar だけテストしたい場合は以下のようなオプションを与えます。
 : Failure
   アサーションに失敗した。
 : Skip
-  テストメソッド内で [[m:MiniTest::Assersions#skip]] を呼び出した。
+  テストメソッド内で [[m:MiniTest::Assertions#skip]] を呼び出した。
 
 === test/unit からの移行
 
