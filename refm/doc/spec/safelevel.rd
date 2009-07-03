@@ -118,12 +118,12 @@ CGI等でユーザからの入力を処理するのに適しています。
 
    * [[m:Dir.chdir]] [[m:Dir.chroot]] [[m:Dir.mkdir]] [[m:Dir.rmdir]]
    * [[m:File.chown]] [[m:File.chmod]] [[m:File.umask]] [[m:File.truncate]]
-     [[m:File#lstat]] [[m:File#chmod]] [[m:File#chown]] [[m:File#delete]] [[m:File#unlink]]
+     [[m:File#lstat]] [[m:File#chmod]] [[m:File#chown]] [[m:File.delete]] [[m:File.unlink]]
      [[m:File#truncate]] [[m:File#flock]]
      および [[c:FileTest]] モジュールのメソッド
    * [[m:IO#ioctl]], [[m:IO#fcntl]]
-   * [[m:Process.fork]] [[m:Process.setpgid]] [[m:Process.setsid]]
-     [[m:Process.setpriority]] [[m:Process.egid=]] [[m:Process.kill]]
+   * [[m:Process.fork]] [[m:Process.#setpgid]] [[m:Process.#setsid]]
+     [[m:Process.#setpriority]] [[m:Process.#egid=]] [[m:Process.#kill]]
    * 危険なパスからの [[m:Kernel.#load]]
    * 汚染された文字列を引数にしての [[m:Kernel.#load]] (ラップされていても)
    * [[m:Kernel.#syscall]]
@@ -174,9 +174,9 @@ CGI等でユーザからの入力を処理するのに適しています。
    * プログラムの終了([[m:Kernel.#exit]], [[m:Kernel.#abort]])
      (なお out of memory でも fatal にならない)
    * 他のスレッドに影響が出る [[c:Thread]] クラスの操作および他のスレッドの [[m:Thread#[] ]]
-   * [[m:ObjectSpace._id2ref]]
+   * [[m:ObjectSpace.#_id2ref]]
 #@since 1.8.0
-   * [[m:ObjectSpace.each_object]]
+   * [[m:ObjectSpace.#each_object]]
 #@end
    * 環境変数の変更
    * [[m:Kernel.#srand]]
