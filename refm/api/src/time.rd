@@ -16,7 +16,7 @@
 --- parse(date, now = Time.now) {|year| year } -> Time
 
 #@since 1.9.1
-date を [[m:Date.#_parse]] によって
+date を [[m:Date._parse]] によって
 パースして [[c:Time]]オブジェクトに変換します。
 #@else
 date を [[m:ParseDate.#parsedate]] によって
