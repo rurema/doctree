@@ -625,49 +625,7 @@
   Rubyインタプリタ組み込みでインスタンスの構造が
   通常のオブジェクトと異なるクラス。
   これらのクラスを継承したクラスを定義することはお勧めしない。
-  Rubyのビルトインクラスは以下の通りである
-  (本当はもっとあるけど気にしないように、ちゃんと
-  [[unknown:組み込みクラス／モジュール／例外クラス]]
-  に列挙されてるのだから)
-
-  * [[c:Array]]
-
-  * [[c:Bignum]]
-
-  * [[c:Class]]
-
-  * [[c:Data]]
-
-  * [[c:FalseClass]]
-
-  * [[c:File]]
-
-  * [[c:Fixnum]]
-
-  * [[c:Float]]
-
-  * [[c:Hash]]
-
-  * [[c:IO]]
-
-  * [[c:MatchData]]
-
-  * [[c:Module]]
-
-  * [[c:NilClass]]
-
-  * [[c:Proc]]
-
-  * [[c:Regexp]]
-
-  * [[c:String]]
-
-  * [[c:Struct]]
-
-  * [[c:Thread]]
-
-  * [[c:TrueClass]]
-
+  Rubyのビルトインクラスは [[lib:_builtin]] に列挙されている。
 
 : 深い複製
 : deep copy
