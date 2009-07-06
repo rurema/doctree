@@ -2,11 +2,39 @@
 
 素数や素因数分解を扱うライブラリです。
 
+ライブラリの中心にあるのは [[c:Prime]] クラスで、これは素数全体を表すシングルトンです。また、素数性と素因数分解に関するメソッドを [[c:Integer]] に追加します。
+さらに、 Prime クラスの機能を実現するための低水準のクラスも幾つか提供されています。
+
 === 例
 
   Prime.each(100) do |prime|
     p prime #=> 2, 3, 5, 7, 11, ..., 97
   end
+
+  2.prime? #=> true
+  4.prime? #=> false
+
+=== 生成器
+
+[[c:Prime]] のメソッドは内部で低水準の疑似素数生成器を使用します。
+生成器は擬似素数の列挙方法の実装を提供します。また列挙状態や列挙の上界を記憶する機能もあります。
+更に、 [[c:Enumerator]] と互換性のある外部イテレータでもあります。
+
+状況に応じて適切な疑似素数生成アルゴリズムは異なるので、いくつかの生成器の実装が用意されています。 
+[[c:Prime::PseudoPrimeGenerator]] は生成器の基底となるクラスです。
+
+: [[c:Prime::EratosthenesGenerator]]
+  エラトステネスの篩いを使用します。
+: [[c:Prime::TrialDivisionGenerator]]
+  試行除算法を使用します。
+: [[c:Prime::Generator23]]
+  2 と 3 で割り切れない全ての正の整数を生成します。
+  この数列は素数の数列としては使い物になりません。しかし、他の生成器より速く、
+  メモリの使用量も少ないという特徴があります。そのため、それほど大きくなくて、
+  素数の要素を多く持つ整数の因数分解に向いています。
+
+Prime クラスの各メソッドは、一般的な用途を想定して適切な生成器を使用します。
+ユーザーは必要に応じて特定の生成器実装を使用するようにオプション引数を設定することもできます。また、ユーザーは独自の生成器を実装することもできます。
 
 = class Prime < Object
 include Enumerable
@@ -25,23 +53,6 @@ Prime クラスはシングルトンであると考えてください。Prime クラスはデフォルトのイン
   Prime.instance.prime?(2)  #=> true
   Prime.prime?(2)           #=> true
 
-=== 生成器
-
-生成器は擬似素数の列挙方法の実装を提供します。また列挙状態や列挙の上界を記憶する機能もあります。
-更に、 [[c:Enumerator]] と互換性のある外部イテレータでもあります。
-
-[[c:Prime::PseudoPrimeGenerator]] は生成器の基底となるクラスです。
-生成器の実装はいくつかあります。
-
-: [[c:Prime::EratosthenesGenerator]]
-  エラトステネスの篩いを使用します。
-: [[c:Prime::TrialDivisionGenerator]]
-  試行除算法を使用します。
-: [[c:Prime::Generator23]]
-  2 と 3 で割り切れない全ての正の整数を生成します。
-  この数列は素数の数列としては使い物になりません。しかし、他の生成器より速く、
-  メモリの使用量も少ないという特徴があります。そのため、それほど大きくなくて、
-  素数の要素を多く持つ整数の因数分解に向いています。
 
 == Class Methods
 --- new -> Prime
@@ -74,6 +85,18 @@ Prime クラスはシングルトンであると考えてください。Prime クラスはデフォルトのイン
   Prime.each(7).each{|prime| prime }  # => 7
   Prime.each(10).each{|prime| prime } # => 7
   Prime.each(11).each{|prime| prime } # => 11
+
+例: 30以下の双子素数
+  Prime.each(30).each_cons(2).select{|p,r| r-p == 2} 
+    #=> [[3, 5], [5, 7], [11, 13], [17, 19]]
+
+注:
+  このメソッドに、真の素数列でない疑似素数を与えるべきではありません。
+
+  このメソッドは、素数列の外部イテレータを内部イテレータに変換してRubyらしいプログラミングを提供することが責務です。独自に素数性の保障するのはメソッドの責務ではありません。従って、次のように精度の低い素数生成器を与えると、真に素数とは限らない数列が発生します。
+   Prime.each(50, Prime::Generator23.new) do |n|
+     p n #=> [2, 3, 5, 7, 11, 13, 17, 19, 23, 25, 29, 31, 35, 37, 41, 43, 47, 49]
+   end
 
 @see [[c:Prime::EratosthenesGenerator]], [[c:Prime::TrialDivisionGenerator]], [[c:Prime::Generator23]]
 
@@ -125,9 +148,12 @@ Prime クラスはシングルトンであると考えてください。Prime クラスはデフォルトのイン
 = class Prime::PseudoPrimeGenerator < Object
 include Enumerable
 
-擬似素数を列挙するための抽象クラスです。
+擬似素数列の列挙子のための抽象クラスです。
 
+[[c:Prime]] の各メソッドが使用する低水準の疑似素数列挙子は、 Prime::PseudoPrimeGenerator のインスタンスであることが期待されています。
 このクラスを継承する具象クラスは succ, next, rewind をオーバーライドしなければなりません。
+
+独自の素数列挙アルゴリズムを実装しようとする場合を除いて、ユーザーがこのクラスを利用する必要はありません。高水準の [[c:Prime]] クラスを利用してください。
 
 == Class Methods
 
@@ -164,15 +190,15 @@ include Enumerable
 
 @see [[m:Enumerator#rewind]]
 
---- upper_bound -> Integer
+--- upper_bound -> Integer | nil
 
-現在の列挙上界を返します。
+現在の列挙上界を返します。 nil は上界がなく無限に素数を列挙すべきであることを意味します。
 
 --- upper_bound=(upper_bound)
 
 新しい列挙上界をセットします。
 
-@param upper_bound 新しい上界を指定します。
+@param upper_bound 新しい上界を整数または nil で指定します。 nil は上界がなく無限に素数を列挙すべきであることを意味します。
 
 --- with_index{|prime, index| ... }      -> self
 --- each_with_index{|prime, index| ... } -> self
@@ -207,7 +233,7 @@ include Enumerable
 
 = class Prime::EratosthenesGenerator < PseudoPrimeGenerator
 
-[[c:PseudoPrimeGenerator]] の具象クラスです。
+[[c:Prime::PseudoPrimeGenerator]] の具象クラスです。
 素数の生成にエラトステネスのふるいを使用しています。
 
 == Instance Methods
@@ -219,13 +245,32 @@ include Enumerable
 
 また内部的な列挙位置を進めます。
 
+例:
+ generator = Prime::EratosthenesGenerator.new
+ p generator.next #=> 2
+ p generator.next #=> 3
+ p generator.succ #=> 5
+ p generator.succ #=> 7
+ p generator.next #=> 11
+
 --- rewind -> nil
 
 列挙状態を巻き戻します。
 
+例:
+ generator = Prime::EratosthenesGenerator.new
+ p generator.next #=> 2
+ p generator.next #=> 3
+ p generator.next #=> 5
+
+ generator.rewind
+
+ p generator.next #=> 2
+
+
 = class Prime::TrialDivisionGenerator < PseudoPrimeGenerator
 
-[[c:PseudoPrimeGenerator]] の具象クラスです。
+[[c:Prime::PseudoPrimeGenerator]] の具象クラスです。
 素数の生成に試行除算法を使用しています。
 
 == Instance Methods
@@ -243,9 +288,11 @@ include Enumerable
 
 = class Prime::Generator23 < PseudoPrimeGenerator
 
-2と、2 より大きくて 2 と 3 で割り切れない全ての整数を生成します。
+2と3と、3 より大きくて 2 でも 3 でも割り切れない全ての整数を生成します。
 
-これはある整数の素数性を総当たりでチェックするのに適した擬似素数の生成器です。
+ある整数の素数性を疑似素数による試し割りでチェックする場合、このように低精度だが高速でメモリを消費しない疑似素数生成器が適しています。
+
+一方、 [[m:Prime#each]] のように素数列を生成する目的にはまったく役に立ちません。
 
 == Instance Methods
 
@@ -309,7 +356,7 @@ break 後に再度呼び出すと、最初からではなくインスタンス内部に保存されている中断位
 @param pd 整数のペアの配列を指定します。含まれているペアの第一要素は素因数を、
           第二要素はその素因数の指数をあらわします。
 
-@see [[m:Prime#from_prime_division]]
+@see [[m:Prime#int_from_prime_division]]
 
 例:
   Prime.int_from_prime_division([[2,2], [3,1]])  #=> 12
