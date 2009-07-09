@@ -770,3 +770,9 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
 @see [[m:Enumerator#with_object]]
 
 #@end
+#@since 1.9.2
+--- join(sep = $,)    -> String
+#@todo
+
+@see [[m:Array#join]]
+#@end
