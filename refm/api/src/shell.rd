@@ -246,7 +246,7 @@ commandを削除します.
 
 @param command コマンド名を文字列で指定します.
 
-@param *opts command で指定したコマンドのオプションを指定します.
+@param opts command で指定したコマンドのオプションを指定します.
 
 使用例: ls -la | sort -k 5 のような例。
 
@@ -576,7 +576,7 @@ pathがディレクトリなら, Dir#unlink
 
 Dir.mkdirと同じです。 (複数可)
 
-@param *path 作成するディレクトリ名を文字列で指定します。
+@param path 作成するディレクトリ名を文字列で指定します。
 
 @return 作成するディレクトリの一覧の配列を返します。
 
@@ -595,7 +595,7 @@ Dir.mkdirと同じです。 (複数可)
 
 Dir.rmdirと同じです。 (複数可)
 
-@param *path 削除するディレクトリ名を文字列で指定します。
+@param path 削除するディレクトリ名を文字列で指定します。
 
 --- system(command, *opts) -> Shell::Filter
 
@@ -603,7 +603,7 @@ commandを実行する.
 
 @param command 実行するコマンドのパスを文字列で指定します。
 
-@param *opt command のオプションを文字列で指定します。複数可。
+@param opts command のオプションを文字列で指定します。複数可。
 
 使用例:
 
@@ -659,7 +659,7 @@ commandを実行する.
 --- echo(*strings) -> Shell::Filter
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
-@param *strings シェルコマンド echo に与える引数を文字列で指定します。
+@param strings シェルコマンド echo に与える引数を文字列で指定します。
 
 動作例
   require 'shell'
@@ -678,7 +678,7 @@ commandを実行する.
 --- cat(*files) -> Shell::Filter
 実行すると, それらを内容とする Filter オブジェクトを返します.
 
-@param *files シェルコマンド cat に与えるファイル名を文字列で指定します。
+@param files シェルコマンド cat に与えるファイル名を文字列で指定します。
 
 動作例
   require 'shell'
