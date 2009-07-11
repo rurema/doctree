@@ -29,7 +29,7 @@ false)。
 
 ガーベージコレクトを開始します。
 
-[[m:GC#garbage_collect]] や [[m:ObjectSpace.garbage_collect]] と同じ働きをします。
+[[m:GC#garbage_collect]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
@@ -49,7 +49,7 @@ GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 
 ガーベージコレクトを開始します。
 
-[[m:GC.start]] や [[m:ObjectSpace.garbage_collect]] と同じ働きをします。
+[[m:GC.start]] や [[m:ObjectSpace.#garbage_collect]] と同じ働きをします。
 [[m:GC.disable]] により GC が禁止されている場合は何もしません。
 
 nil を返します。
