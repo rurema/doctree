@@ -527,10 +527,15 @@ self が regexp にマッチしない場合は nil を返します。
    p "def getcnt(line)"[ /def\s+(\w+)/, 1 ]   # => "getcnt"
 #@end
 
---- [](first..last) -> String
---- slice(first..last) -> String
+--- [](range) -> String
+--- slice(range) -> String
 
-インデックス first から last までのバイトを含む新しい文字列を作成して返します。
+rangeで指定したインデックスの範囲に含まれる部分文字列を返します。
+
+@param range   取得したい文字列の範囲を示す Range オブジェクト
+
+=== rangeオブジェクトが終端を含む場合
+
 インデックスと文字列の対応については以下の対照図も参照してください。
 
     0   1   2   3   4   5   (インデックス)
@@ -540,16 +545,14 @@ self が regexp にマッチしない場合は nil を返します。
                   |<----->|    'abcdef'[4..5]  # => 'ef'
           |<--------->|        'abcdef'[2..4]  # => 'cde'
 
-last が文字列の長さ以上のときは
+range.last が文字列の長さ以上のときは
 (文字列の長さ - 1) を指定したものとみなされます。
 
-first が 0 より小さいか文字列の長さより大きいとき、
-および first > last + 1 であるときは nil を
-返します。ただし first および last のどちらか
+range.first が 0 より小さいか文字列の長さより大きいとき、
+および range.first > range.last + 1 であるときは nil を
+返します。ただし range.first および range.last のどちらか
 または両方が負の数のときは一度だけ文字列の長さを足して
 再試行します。
-
-@param first..last   取得したい文字列の範囲を示す Range オブジェクト
 
 例:
 
@@ -570,12 +573,7 @@ first が 0 より小さいか文字列の長さより大きいとき、
   'abcd'[-4 ..  2] # => "abc"
   'abcd'[-5 ..  2] # =>  nil
 
---- [](first...last) -> String
---- slice(first...last) -> String
-
-文字列先頭を 0 番目の隙間、末尾を self.length 番目の隙間として、
-first 番目の隙間から last 番目の隙間までに含まれる
-バイト列を含んだ新しい文字列を作成して返します。
+=== rangeオブジェクトが終端を含まない場合
 
 文字列と「隙間」の関係については以下の模式図を参照してください。
 
@@ -586,15 +584,13 @@ first 番目の隙間から last 番目の隙間までに含まれる
                      |<----->|    'abcdef'[4...6]  # => 'ef'
              |<--------->|        'abcdef'[2...5]  # => 'cde'
 
-last が文字列の長さよりも大きいときは文字列の長さを
+range.last が文字列の長さよりも大きいときは文字列の長さを
 指定したものとみなされます。
 
-first が 0 より小さいか文字列の長さより大きいとき、
-および first > last であるときは nil を返します。
-ただし first と last のどちらかまたは両方が負の数
+range.first が 0 より小さいか文字列の長さより大きいとき、
+および range.first > range.last であるときは nil を返します。
+ただし range.first と range.last のどちらかまたは両方が負の数
 であるときは一度だけ文字列の長さを足して再試行します。
-
-@param first...last   取得したい文字列の範囲を示す Range オブジェクト
 
 例:
     'abcd'[ 2 ... 3] # => "c"
@@ -702,21 +698,13 @@ val を返します。
     p buf    # => "def preprocess(cmd)"
 #@end
 
---- []=(first..last, val) -> val
+--- []=(range, val) -> val
 
-インデックス first から last までの部分文字列を文字列 val で置き換えます。
-
-val を返します。
-
-@param first..last   置き換えたい範囲を示す [[c:Range]] オブジェクト
-
---- []=(first...last, val) -> val
-
-インデックス first から last までの部分文字列を文字列 val で置き換えます。
+rangeで指定したインデックスの範囲に含まれる部分文字列を文字列 val で置き換えます。
 
 val を返します。
 
-@param first...last   置き換えたい範囲を示す [[c:Range]] オブジェクト
+@param range   置き換えたい範囲を示す [[c:Range]] オブジェクト
 
 --- capitalize -> String
 
