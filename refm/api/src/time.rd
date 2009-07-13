@@ -6,7 +6,11 @@
  * date-time は [[RFC:2822]] で定義されています。
  * HTTP-date は [[RFC:2616]] で定義されています。
  * dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
+#@since 1.9.1
+ * 文字列から [[c:Time]] オブジェクトへの変換では [[m:Date._parse]] により様々な形式を扱えます。
+#@else
  * 文字列から [[c:Time]] オブジェクトへの変換では [[lib:parsedate]] により様々な形式を扱えます。
+#@end
 
 = reopen Time
 
