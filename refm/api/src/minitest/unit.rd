@@ -144,5 +144,6 @@ require 'test/unit' している場合は互換レイヤーが読み込まれ以前の [[lib:test/unit
 
 
 #@include(MiniTest__Unit)
+#@include(MiniTest__Unit__TestCase)
 #@include(MiniTest__Assertions)
 
