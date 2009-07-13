@@ -76,8 +76,13 @@ GNU getopt_long() および geoptlong.rb には、`REQUIRE_ORDER',
 
     require 'getoptlong.rb'
 
+#@since 1.9.1
+getoptlong はクラスを提供します。
+#@else
 [[lib:getopts]] や [[lib:parsearg]] とは異なり、getoptlong はモジュール
-ではなくクラスを提供します。クラスの名前は GetoptLong です。
+ではなくクラスを提供します。
+#@end
+クラスの名前は GetoptLong です。
 [[c:GetoptLong]] クラスのオブジェクトを生成します。
 
     parser = GetoptLong.new

@@ -642,8 +642,10 @@ argv からオプションを取り除いたものを返します。
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 #@todo
+#@until 1.9.1
 [[lib:getopts]] 相当の機能を提供します。
 getopts と違って、グローバル変数を定義しません。
+#@end
 引数をパースした結果を、Hash として返します。
 
 配列 argv を与えた場合、argv をパースします。そうでない場合は、
