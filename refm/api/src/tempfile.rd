@@ -19,7 +19,11 @@ require tmpdir
 
 --- new(basename, tempdir = Dir::tmpdir) -> Tempfile
 --- open(basename, tempdir = Dir::tmpdir) -> Tempfile
+#@since 1.9.1
+--- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> object
+#@else
 --- open(basename, tempdir = Dir::tmpdir){|fp| ...} -> nil
+#@end
 
 #@since 1.8.7
 テンポラリファイルを作成し、それを表す Tempfile オブジェクトを生成して返します。
@@ -29,8 +33,12 @@ require tmpdir
 "basename.pid.n" というファイル名で
 テンポラリファイルを作成し、インスタンスを返します。
 #@end
-ブロックを指定して呼び出した場合は、Tempfile オブジェクトを引数として ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に クローズされ、nilをかえします。
-
+ブロックを指定して呼び出した場合は、Tempfile オブジェクトを引数として ブロックを実行します。ブロックの実行が終了すると、ファイルは自動的に クローズされ、
+#@since 1.9.1
+ブロックの値をかえします。
+#@else
+nilをかえします。
+#@end
 
 @param basename ファイル名のプレフィクスを文字列で指定します。
 #@since 1.8.7
@@ -51,7 +59,20 @@ require tmpdir
    p t2.path                           #=> "/tmp/t20080518-6961-xy2wvx-0.xml"
 #@end
 
-例２：ブロックを与えた場合
+#@since 1.9.1
+例：ブロックを与えた場合
+  require 'tempfile'
+
+  path = Tempfile.open("temp"){|fp|
+    fp.puts "hoge"
+    fp.path
+  }
+  # テンポラリファイルへのパスを表示
+  p path 
+  p File.read(path) #=> "hoge\n"
+
+#@else
+例：ブロックを与えた場合
   require 'tempfile'
 
   path = nil
@@ -61,6 +82,7 @@ require tmpdir
   }
 
   system("cat #{path}")
+#@end
 
 
 == Instance Methods
