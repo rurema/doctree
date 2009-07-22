@@ -171,6 +171,7 @@ BDD 風にテストを書くために使用するメソッド群を定義します。
 
 @param desc ブロックに対する説明を指定します。
 
+= class MiniTest::Unit::TestCase
 = class MiniTest::Spec < MiniTest::Unit::TestCase
 
 BDD 風にテストを書くための [[c:MiniTest::Unit::TestCase]] に対するラッパークラスです。
