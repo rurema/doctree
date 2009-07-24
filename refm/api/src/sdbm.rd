@@ -280,15 +280,14 @@ keys に対応する値を配列に格納して返します。
 
 @param keys キー。複数指定可能です。
 
-require 'sdbm'
-
-db1 = SDBM.open('aaa.gdbm', 0666)
-db1['a'] = 'aaa'
-db1['b'] = 'bbb'
-db1['c'] = 'ccc'
-
-p db1.values_at('a', 'b')  #=> ["aaa", "bbb"]
-
+  require 'sdbm'
+  
+  db1 = SDBM.open('aaa.gdbm', 0666)
+  db1['a'] = 'aaa'
+  db1['b'] = 'bbb'
+  db1['c'] = 'ccc'
+  
+  p db1.values_at('a', 'b')  #=> ["aaa", "bbb"]
 
 --- invert -> Hash
 
