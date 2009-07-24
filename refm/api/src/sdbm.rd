@@ -278,7 +278,7 @@ key に対して val を格納します。
 
 keys に対応する値を配列に格納して返します。
 
-@params keys キー。複数指定可能です。
+@param keys キー。複数指定可能です。
 
 require 'sdbm'
 

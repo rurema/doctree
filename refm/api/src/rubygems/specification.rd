@@ -608,7 +608,7 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオプションをセットします。
 
 この属性は非推奨です。 [[m:Gem::Specification#test_files=]] を使用してください。
 
-@params file テストスイートのファイルを指定します。
+@param file テストスイートのファイルを指定します。
 
 --- to_ruby -> String
 #@todo

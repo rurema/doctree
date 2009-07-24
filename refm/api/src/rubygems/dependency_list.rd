@@ -26,7 +26,7 @@ include TSort
 
 見つからなかった場合は nil を返します。
 
-@params full_name バージョンを含むフルネームで Gem の名前を指定します。
+@param full_name バージョンを含むフルネームで Gem の名前を指定します。
 
 @see [[m:Gem::Specification#full_name]]
 
@@ -45,7 +45,7 @@ include TSort
 与えられた名前を持つ [[c:Gem::Specification]] を自身から削除すると、
 依存関係を壊してしまう場合が、それを削除してはいけない場合です。
 
-@params full_name バージョンを含むフルネームで Gem の名前を指定します。
+@param full_name バージョンを含むフルネームで Gem の名前を指定します。
 
 @see [[m:Gem::Specification#full_name]]
 
@@ -56,7 +56,7 @@ include TSort
 
 このメソッドでは削除後の依存関係をチェックしません。
 
-@params full_name バージョンを含むフルネームで Gem の名前を指定します。
+@param full_name バージョンを含むフルネームで Gem の名前を指定します。
 
 @see [[m:Gem::Specification#full_name]], [[m:Array#delete_if]]
 

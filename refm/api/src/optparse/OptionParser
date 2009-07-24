@@ -131,7 +131,7 @@ self.new.getopts(*args) と同じです。
 [[m:OptionParser#accept]] で登録したクラスとブロックを
 自身から削除します。
 
-@parse klass 自身から削除したいクラスを指定します。
+@param klass 自身から削除したいクラスを指定します。
 
 --- banner            -> String
 --- banner=(heading)

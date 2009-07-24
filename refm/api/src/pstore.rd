@@ -89,7 +89,7 @@ file のあるディレクトリは書き込み可能である必要がある。
 
 @param name ルート。
 
-@aram value 格納する値。
+@param value 格納する値。
 
 @raise PStore::Error トランザクション外でこのメソッドが呼び出された場合に発生します。
 
