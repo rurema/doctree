@@ -64,7 +64,7 @@ RDoc と RI 用のデータを削除します。
 
 @param spec ドキュメントを生成する対象の [[c:Gem::Specification]] のインスタンスを指定します。
 
-@oaram rdoc_args RDoc に渡すオプションを指定します。
+@param rdoc_args RDoc に渡すオプションを指定します。
 
 --- configured_args -> Array
 #@todo
