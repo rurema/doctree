@@ -20,7 +20,7 @@ wait を使用した例
     # 実際には Process.wait を使用しているので、ここに来ることはない
     p "child #{$?.pid} was stopped by signal #{$?.stopsig}"
   when $?.exited?
-    p "child #{$?.pid} exited normaly. status=#{$?.exitstatus}"
+    p "child #{$?.pid} exited normally. status=#{$?.exitstatus}"
   else
     p "unknown status %#x" % $?.to_i
   end
@@ -43,7 +43,7 @@ SIGCHLD を trap する例
       when $?.stopped?
         puts "   child #{$?.pid} was stopped by signal #{$?.stopsig}"
       when $?.exited?
-        puts "   child #{$?.pid} exited normaly. status=#{$?.exitstatus}"
+        puts "   child #{$?.pid} exited normally. status=#{$?.exitstatus}"
       else
         p "unknown status %#x" % $?.to_i
       end
@@ -69,7 +69,7 @@ SIGCHLD を trap する例
      interrupted by signal 17 at -:30:in `sleep'
         child 12965 was killed by signal 15
      interrupted by signal 17 at -:30:in `sleep'
-        child 12964 exited normaly. status=0
+        child 12964 exited normally. status=0
      done
 
 
