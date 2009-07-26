@@ -445,8 +445,7 @@ Regexp::new.
   p Regexp.new("foo", Regexp::MULTILINE).options #=> 4
   p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE ).options #=> 5
   p Regexp.new("foo", Regexp::MULTILINE | Regexp::EXTENDED).options #=>6
-  p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE | Regexp::EXTENDED).o
-ptions #=> 7
+  p Regexp.new("foo", Regexp::IGNORECASE | Regexp::MULTILINE | Regexp::EXTENDED).options #=> 7
 
 --- source -> String
 
