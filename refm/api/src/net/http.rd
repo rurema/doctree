@@ -689,7 +689,7 @@ key ヘッダフィールドを削除します。
 
 ヘッダフィールドの正式名とその値のペアに対して繰り返します。
 
---- each_capitaliezed_name {|name| .... }
+--- each_capitalized_name {|name| .... }
 #@todo
 
 --- each_name {|name| ... }
