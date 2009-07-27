@@ -63,7 +63,7 @@ _builtin/Process__Sys                           done
 _builtin/Process__UID                           done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
-_builtin/Rational
+_builtin/Rational		mrkn		
 _builtin/Regexp                 kouya           done
 _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
@@ -104,11 +104,11 @@ Win32API
 abbrev                          okkez           done
 base64                          mukai           done
 benchmark                       okkez           done
-bigdecimal
-bigdecimal/jacobian
-bigdecimal/ludcmp
-bigdecimal/newton
-bigdecimal/util
+bigdecimal			mrkn
+bigdecimal/jacobian		mrkn
+bigdecimal/ludcmp		mrkn
+bigdecimal/newton		mrkn
+bigdecimal/util			mrkn
 cgi
 cgi-lib
 cgi/session
