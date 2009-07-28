@@ -15,7 +15,7 @@ host で指定したホストの service で指定したポートと接続したソケッ
 ビス名かポート番号です。
 
 @param host  ホスト名、または octet decimal によるインターネットアドレスを示す文字列を指定します。
-@param servide /etc/services (または NIS) に登録されているサービス名かポート番号です。
+@param service /etc/services (または NIS) に登録されているサービス名かポート番号です。
 
 
 == Instance Methods
