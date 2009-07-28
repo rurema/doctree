@@ -87,7 +87,7 @@ getoptlong はクラスを提供します。
 
     parser = GetoptLong.new
 
-そして、set_optins メソッドを呼び出し、この parser にオプションを
+そして、set_options メソッドを呼び出し、この parser にオプションを
 セットします。
 
     parser.set_options(
