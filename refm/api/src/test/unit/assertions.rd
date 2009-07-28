@@ -74,7 +74,7 @@ object が nil でないならばパスします。
 object.kind_of?(klass) が真ならパスします。
 
 正確には、object が klass かそのサブクラスのインスタンスであるならパスします。
-また、kalss がモジュールである場合は、object が klass をインクルードしたクラスかそのサブクラスの
+また、klass がモジュールである場合は、object が klass をインクルードしたクラスかそのサブクラスの
 インスタンスであるならパスします。[[m:Object#kind_of?]] を参照して下さい。
 
 [[m:Test::Unit::Assertions#assert_instance_of]] との違いに注意して下さい。
