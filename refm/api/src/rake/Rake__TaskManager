@@ -82,7 +82,7 @@ Rakefile 内の最新の詳細説明を追跡するためのメソッドです。
 
 @param task_name タスク名を指定します。
 
-@param initiali_scope 検索するスコープを指定します。
+@param initial_scope 検索するスコープを指定します。
 
 --- resolve_args(args) -> Array
 
