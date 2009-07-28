@@ -300,7 +300,7 @@
 
 与えられたブロックを評価した結果と与えられたメッセージを連結して返します。
 
-@param messege メッセージを指定します。
+@param message メッセージを指定します。
 
 --- mu_pp(object) -> String
 
