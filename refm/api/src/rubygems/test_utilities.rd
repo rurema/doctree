@@ -17,7 +17,7 @@ require rubygems/remote_fetcher
 
 テスト用のメソッドです。
 
-= class TemoIO
+= class TempIO
 
 テスト用に [[c:Tempfile]] をラップします。
 
