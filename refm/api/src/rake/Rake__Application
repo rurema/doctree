@@ -101,7 +101,7 @@ Rakefile を探してロードします。
 
 rake コマンドを実行したディレクトリを返します。
 
---- parse_task_string(string) -> [Stging, Array]
+--- parse_task_string(string) -> [String, Array]
 
 与えられた文字列を解析して、タスク名とそれに与えるパラメータのペアを返します。
 
