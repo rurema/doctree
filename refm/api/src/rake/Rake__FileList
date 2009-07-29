@@ -126,7 +126,7 @@ include Rake::Cloneable
 ブロックに渡されてブロックが評価されます。ブロックが与えられなかった場合は、
 標準出力に、ファイル名:行番号:マッチした行を出力します。
 
-@param pettern 正規表現を指定します。
+@param pattern 正規表現を指定します。
 
 --- existing -> Rake::FileList
 
