@@ -131,7 +131,7 @@ Rakefile のパスを返します。
 
 Rakefile をロードします。
 
-@raise RuntimeErro Rakefile が見つからなかった場合に発生します。
+@raise RuntimeError Rakefile が見つからなかった場合に発生します。
 
 --- run
 
