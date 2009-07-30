@@ -70,7 +70,7 @@ require rake/tasklib
 --- need_tar=(flag)
 #@todo
 
- gzip した tar ファイル (tgz) を作成するかどうかを設定します。
+gzip した tar ファイル (tgz) を作成するかどうかを設定します。
 
 @param flag 真または偽を指定します。
 
