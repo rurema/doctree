@@ -64,7 +64,7 @@ Rake は以下のような特徴を持っています。
   end
 
 動的にタスクを定義する例:
-  # cofing: utf-8
+  # coding: utf-8
   require 'rake/testtask'
   require 'rake/clean'    # clean, clobber の二つのタスクを定義
   task :default => [:test]
