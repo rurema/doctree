@@ -21,8 +21,8 @@
 
 == Class Methods
 
---- open(host, service [, local_host, local_service])
---- new(host, service [, local_host, local_service])
+--- open(host, service [, local_host, local_service]) -> TCPSocket
+--- new(host, service [, local_host, local_service]) -> TCPSocket
 #@todo
 
 host で指定したホストの service で指定したポートと接続したソケッ
@@ -36,14 +36,22 @@ host で指定したホストの service で指定したポートと接続したソケッ
 に対して [[man:bind(2)]] します。
 #@end
 
---- gethostbyname(host)
-#@todo
+@param host           ホスト名、または octet decimal によるインターネットアドレスを示す文字列を指定します。
+@param service        /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
+@param local_host     ホスト名、または octet decimal によるインターネットアドレスを示す文字列を指定します。
+@param local_service  /etc/services (または NIS) に登録されているサービス名かポート番号を指定します。
+
+--- gethostbyname(host) -> Array
 
 ホスト名または IP アドレス (整数または"127.0.0.1"
 のような文字列)からホストの情報を返します。ホスト情報は、ホ
 スト名、ホストの別名の配列、ホストのアドレスタイプ、ホストの
 アドレスを各要素とする配列です。ホストのアドレスは octet
 decimal の文字列 ("127.0.0.1"のような文字列) です。
+
+@param host ホスト名または IP アドレス (整数または"127.0.0.1" のような文字列)を指定します。
+
+@return ホスト名、ホストの別名の配列、ホストのアドレスタイプ、ホストのアドレスを各要素とする配列を返します。
 
 例:
 
