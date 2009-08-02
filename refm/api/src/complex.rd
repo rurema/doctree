@@ -87,7 +87,7 @@ Vector および Matrix のそれぞれの項目を参照してください。
 other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトかどうか判定します。
 
 @param other 判定対象のオブジェクト
-@return [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトの時 ture
+@return [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトの時 true
         それ以外の場合には false を返します。
 
 == Instance Methods

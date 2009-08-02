@@ -11,7 +11,7 @@ require 'ftools' とすると、ファイルのコピーや削除などのメソッドが追加されます。
 == Class Methods
 
 --- copy(from, to, verbose = false) -> bool
---- cp(from, to, verbose = falseo)  -> bool
+--- cp(from, to, verbose = false)  -> bool
 #@todo
 
 ファイルをコピーします。
@@ -25,7 +25,7 @@ require 'ftools' とすると、ファイルのコピーや削除などのメソッドが追加されます。
 
 @param verbose 真をセットすると詳細を表示します。
 
-@return コピーに成功したなら ture、失敗したなら false を返します。
+@return コピーに成功したなら true、失敗したなら false を返します。
 
 例:
   # 更新時刻を保持したい場合
@@ -47,7 +47,7 @@ require 'ftools' とすると、ファイルのコピーや削除などのメソッドが追加されます。
 
 @param verbose 真をセットすると詳細を表示します。
 
-@return 移動に成功したなら ture、失敗したなら false を返します。
+@return 移動に成功したなら true、失敗したなら false を返します。
 
 --- compare(from, to, verbose = false) -> bool
 --- cmp(from, to, verbose = false)     -> bool

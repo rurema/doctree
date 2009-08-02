@@ -130,7 +130,7 @@ close された StringIO に読み書き等が行われると IOError が発生します。
 
 --- closed?    -> bool
 
-自身が既に close されていた場合に ture を返します。そうでない場合は、false を返します。
+自身が既に close されていた場合に true を返します。そうでない場合は、false を返します。
 
       sio = StringIO.open("hoge")
       p sio.closed? # => false
@@ -481,7 +481,7 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 
 何もせずに bool を返します。
 
-@param bool true か flase を指定します。
+@param bool true か false を指定します。
 
 --- sysread                  -> String
 --- sysread(len)             -> String
