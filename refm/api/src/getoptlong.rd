@@ -19,8 +19,8 @@ terms as Ruby.
 
 === GNU getopt_long() とは?
 
-GNU geopt_long() は、コマンド行オプションの解析を行う C の関数です。多
-くの GNU ソフトウェアがこの関数を使用しています。GNU geopt_long() そし
+GNU getopt_long() は、コマンド行オプションの解析を行う C の関数です。多
+くの GNU ソフトウェアがこの関数を使用しています。GNU getopt_long() そし
 て getoptlong には、以下のような特徴があります。
 
  * 伝統的な一文字オプションに加えて、長いオプションに対応しています。長
@@ -33,7 +33,7 @@ GNU geopt_long() は、コマンド行オプションの解析を行う C の関数です。多
 
 === 順序形式 (Ordering)
 
-GNU getopt_long() および geoptlong.rb には、`REQUIRE_ORDER',
+GNU getopt_long() および getoptlong.rb には、`REQUIRE_ORDER',
 `PERMUTE', `RETURN_IN_ORDER' という、3 つの「順序形式 (ORDERING)」が用
 意されています。それぞれの処理形式は、非オプション引数についての扱い方
 が異なります。
