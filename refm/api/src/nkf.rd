@@ -112,7 +112,7 @@ NKF 1.7 相当です。
   -v   バージョンを表示する。
   -T   テキストモードで出力する。(MS-DOS上でのみ効力を持つ)
 
-  -m   MIME を解読する。(defalut on)
+  -m   MIME を解読する。(default on)
        ISO-2022-JP(base64)とISO-8859-1(Q encode)のみを解読する。
        ISO-8859-1 (Latin-1) を解読する時は、-lフラグも必要である。
          -mB  MIME base64 stream を解読する。ヘッダなどは取り除くこと。

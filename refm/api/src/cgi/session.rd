@@ -237,7 +237,7 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
 
   * "database_manager"
     データベースクラスを指定します。
-    (defalut: CGI::Session::FileStore)
+    (default: CGI::Session::FileStore)
 
   * CGI::Session::FileStore
     テキストファイルを使います。文字列データしか扱えません。
