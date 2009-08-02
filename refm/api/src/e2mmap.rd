@@ -25,7 +25,7 @@ def_e2message メソッドや def_exception メソッドが使えます。
 
   module ErrorMod
     extend Exception2MessageMapper
-    def_e2meggage ExistingExceptionClass, "message..."
+    def_e2message ExistingExceptionClass, "message..."
     def_exception :NewExceptionClass, "message...", StandardError
     ...
   end
