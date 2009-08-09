@@ -151,15 +151,15 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 == Singleton Methods
 
 #@since 1.9.1
---- input=(input) -> input
+--- input=(input) -> File
 
 readline メソッドで使用する入力用の [[c:File]] オブジェクト input を指定します。
 戻り値は指定した [[c:File]] オブジェクト input です。
 
 @param input [[c:File]] オブジェクトを指定します。
 
---- output=(output) -> output
-
+--- output=(output) -> File
+    
 readline メソッドで使用する出力用の [[c:File]] オブジェクト output を指定します。
 戻り値は指定した [[c:File]] オブジェクト output です。
 
@@ -203,7 +203,7 @@ proc は、次のものを想定しています。
 
 @see [[m:Readline.completion_proc=]]
 
---- completion_proc -> proc
+--- completion_proc -> Proc
 
 ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクト
 proc を取得します。
@@ -289,7 +289,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 
 @see [[m:Readline.completion_append_character]]
 
---- completion_append_character -> string
+--- completion_append_character -> String
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字を取得します。
 
@@ -477,7 +477,7 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
   Readline::HISOTRY.to_s #=> "HISTORY"
 
---- [](index) -> string
+--- [](index) -> String
 
 ヒストリから index で指定したインデックスの内容を取得します。
 例えば index に 0 を指定すると最初の入力内容が取得できます。
@@ -517,7 +517,7 @@ index で指定したインデックスが int 型よりも大きな値の場合、
 
   Readline::HISTORY[2 ** 64 + 1] #=> 例外 RangeError が発生します。
 
---- []=(index, string) -> string
+--- []=(index, string) -> String
 
 ヒストリの index で指定したインデックスの内容を string で指定した文字列で書き換えます。
 例えば index に 0 を指定すると最初の入力内容が書き換えます。
@@ -593,7 +593,7 @@ self を返します。
 
 @see [[m:Readline::HISTORY.<<]]
 
---- pop -> string
+--- pop -> String
 
 ヒストリの最後の内容を取り出します。
 最後の内容は、ヒストリから取り除かれます。
@@ -614,7 +614,7 @@ self を返します。
 @see [[m:Readline::HISTORY.push]]、[[m:Readline::HISTORY.shift]]、
      [[m:Readline::HISTORY.delete_at]]
 
---- shift -> string
+--- shift -> String
 
 ヒストリの最初の内容を取り出します。
 最初の内容は、ヒストリから取り除かれます。
@@ -682,7 +682,7 @@ self を返します。
   end
 #@end
 
---- length -> integer
+--- length -> Integer
 
 ヒストリに格納された内容の数を取得します。
 
@@ -714,7 +714,7 @@ self を返します。
 
 @see [[m:Readline::HISTORY.length]]
 
---- delete_at(index) -> string | nil
+--- delete_at(index) -> String | nil
 
 index で指定したインデックスの内容をヒストリから削除し、その内容を返します。
 該当する index の内容がヒストリになければ、 nil を返します。
