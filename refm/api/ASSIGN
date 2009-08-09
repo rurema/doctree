@@ -166,7 +166,7 @@ ipaddr                          okkez           done
 irb                             snoozer05
 jcode
 json                            okkez
-kconv
+kconv                           ohai
 logger                          okkez           done
 mailread			masao		done
 mathn				yugui
@@ -215,7 +215,7 @@ rbconfig
 rdoc
 readbytes
 readline                        kouji           done
-resolv
+resolv                          ohai
 resolv-replace
 rexml/attlistdecl
 rexml/attribute
