@@ -29,65 +29,61 @@ Change the mode of each FILE to OCTAL-MODE.
 
   ruby -run -e chmod -- [OPTION] OCTAL-MODE FILE
 
-  -v          verbose
+  -v          詳細表示
 
 @see [[man:chmod(1)]]
 
 --- cp -> ()
 ファイルやディレクトリをコピーします。
 
-Copy SOURCE to DEST, or multiple SOURCE(s) to DIRECTORY
 
   ruby -run -e cp -- [OPTION] SOURCE DEST
 
-  -p          preserve file attributes if possible
-  -r          copy recursively
-  -v          verbose
+  -p          可能であればファイルの属性を保持します。
+  -r          再帰的にコピーします。
+  -v          詳細表示
 
 @see [[man:cp(1)]]
 
 --- help -> ()
 ヘルプメッセージを表示します。
 
-Display help message.
 
   ruby -run -e help [COMMAND]
 
 --- install -> ()
 ファイルをコピーし、その属性を設定します。
 
-Copy SOURCE to DEST.
 
   ruby -run -e install -- [OPTION] SOURCE DEST
 
-  -p          apply access/modification times of SOURCE files to
+  -p          ファイルのアクセス時刻と修正時刻を保持します。
               corresponding destination files
-  -m          set permission mode (as in chmod), instead of 0755
-  -v          verbose
+  -m          chmod と同じようにファイルのパーミッションを設定します。
+  -v          詳細表示
 
 @see [[man:install(1)]]
 
 --- ln -> ()
-#@todo
 ファイルへのリンクを作成します。
 
   ruby -run -e ln -- [OPTION] TARGET LINK_NAME
 
-  -s          make symbolic links instead of hard links
-  -f          remove existing destination files
-  -v          verbose
+  -s          ハードリンクの代わりにシンボリックリンクを作成します
+  -f          LINK_NAME を上書きします
+  -v          詳細表示
 
 @see [[man:ln(1)]]
 
 --- mkdir -> ()
 ディレクトリを作成します。
 
-Create the DIR, if they do not already exist.
 
   ruby -run -e mkdir -- [OPTION] DIR
 
-  -p          no error if existing, make parent directories as needed
-  -v          verbose
+  -p          ディレクトリが存在してもエラーになりません。
+              必要であれば親ディレクトリも作成します。
+  -v          詳細表示
 
 @see [[man:mkdir(1)]]
 
@@ -95,11 +91,10 @@ Create the DIR, if they do not already exist.
 
 ファイルを移動します (ファイル名を変更します)。
 
-Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
 
   ruby -run -e mv -- [OPTION] SOURCE DEST
 
-  -v          verbose
+  -v          詳細表示
 
 @see [[man:mv(1)]]
 
@@ -107,13 +102,12 @@ Rename SOURCE to DEST, or move SOURCE(s) to DIRECTORY.
 
 ファイルやディレクトリを削除します。
 
-Remove the FILE
 
   ruby -run -e rm -- [OPTION] FILE
 
-  -f          ignore nonexistent files
-  -r          remove the contents of directories recursively
-  -v          verbose
+  -f          存在しないファイルを無視します
+  -r          ディレクトリを再帰的にたどってファイルやディレクトリを削除します
+  -v          詳細表示
 
 @see [[man:rm(1)]]
 
@@ -121,22 +115,22 @@ Remove the FILE
 
 空のディレクトリを削除します。
 
-Remove the DIR.
-
   ruby -run -e rmdir -- [OPTION] DIR
 
-  -v          verbose
+  -v          詳細表示
 
 @see [[man:rmdir(1)]]
 
 --- touch -> ()
 
-ファイルのアクセス時刻と修正時刻を変更する。
+ファイルのアクセス時刻と修正時刻を現在の時刻に変更します。
 
-Update the access and modification times of each FILE to the current time.
 
   ruby -run -e touch -- [OPTION] FILE
 
-  -v          verbose
+  -v          詳細表示
 
 @see [[man:touch(1)]]
+
+#@# 内部的に使用するだけ
+#@# --- setup(options = "", * long_options) -> ()
