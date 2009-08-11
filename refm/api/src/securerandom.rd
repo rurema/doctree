@@ -46,15 +46,46 @@ HTTP のセッションキーなどに適しています。
 
   p SecureRandom.base64(3)    #=> "4pYO"  (文字列のサイズは 3 でない)
 
+@see [[rfc:3548]]
+
 #@since 1.9.1
 #@since 1.9.2
---- urlsafe_base64(n=nil, padding=false)  -> String
-#@else
---- urlsafe_base64(n=nil)  -> String
-#@end
-#@todo
+--- urlsafe_base64(n = nil, padding = false)  -> String
 
-@see [[m:SecureRandom.base64]]
+ランダムで URL-safe な base64 文字列を生成して返します。
+
+@param n 文字列の生成に使われるランダムネスのサイズを整数で指定します。
+         生成される文字列のサイズはn の約 4/3 倍になります。
+         nil を指定した場合 n として 16 が使われます。
+
+@param padding 真を指定すると '=' でパディングを行います。
+               偽を指定するとパディングを行いません。デフォルトは偽です。
+
+@raise NotImplementedError  安全な乱数発生器が使えない場合に発生します。
+
+   p SecureRandom.urlsafe_base64 #=> "b4GOKm4pOYU_-BOXcrUGDg"
+   p SecureRandom.urlsafe_base64 #=> "UZLdOkzop70Ddx-IJR0ABg"
+   p SecureRandom.urlsafe_base64(nil, true) #=> "i0XQ-7gglIsHGV2_BNPrdQ=="
+   p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
+
+@see [[rfc:3548]]
+
+#@else
+--- urlsafe_base64(n = nil)  -> String
+
+ランダムで URL-safe な base64 文字列を生成して返します。
+
+@param n 文字列の生成に使われるランダムネスのサイズを整数で指定します。
+         生成される文字列のサイズはn の約 4/3 倍になります。
+         nil を指定した場合 n として 16 が使われます。
+
+@raise NotImplementedError  安全な乱数発生器が使えない場合に発生します。
+
+   p SecureRandom.urlsafe_base64 #=> "b4GOKm4pOYU_-BOXcrUGDg"
+   p SecureRandom.urlsafe_base64 #=> "UZLdOkzop70Ddx-IJR0ABg"
+
+#@end
+@see [[m:SecureRandom.base64]],  [[rfc:3548]]
 #@end
 --- hex(n = nil)    -> String
 
@@ -80,7 +111,7 @@ HTTP のセッションキーなどに適しています。
 
   p SecureRandom.random_bytes(3)    #=> "\321\020\203"
 
----   random_number(n = 0)     -> Integer | Float
+--- random_number(n = 0)     -> Integer | Float
 
 ランダムな数値を生成して返します。
 n が 1 以上の整数の場合、0 以上 n 未満の整数を返します。
@@ -93,10 +124,19 @@ n が 0 の場合、0.0 以上 1.0 未満の実数を返します。
   p SecureRandom.random_number(1 << 64)    #=> 4078466195356651249
 
 #@since 1.8.8
+#@if (version != "1.9.1")
 --- uuid   -> String
-#@todo
 
-SecureRandom.uuid generates a v4 random UUID (Universally Unique IDentifier).
+バージョン 4 の UUID (Universally Unique IDentifier) を生成して返します。
 
-See RFC 4122 for UUID.
+version 4 の UUID は全くランダムです (バージョンを除いて)。
+この UUID は MAC アドレスや時刻などのような意味のある情報を含みません。
+
+@raise NotImplementedError 安全な乱数発生器が使えない場合に発生します。
+
+   p SecureRandom.uuid #=> "2d931510-d99f-494a-8c67-87feb05e1594"
+   p SecureRandom.uuid #=> "62936e70-1815-439b-bf89-8492855a7e6b"
+
+@see [[rfc:4122]]
+#@end
 #@end
