@@ -1,97 +1,10 @@
-文字コードの変換を手軽に行うためのライブラリです。
+require nkf
 
-kconv を require すると [[c:String]] クラスに以下のメソッドが定義されます。
-他のメソッドや定数については [[c:Kconv]] を参照してください。
+日本語文字コードの変換を手軽に行うためのライブラリです。
 
-= reopen String
-
-== Instance Methods
-
---- kconv(out_code, in_code = Kconv::AUTO)
-#@todo
-
-self のエンコーディングを out_code に変換したのを
-返します。out_code in_code は Kconv の定数で
-指定します。
-
---- tojis
-#@todo
-
-self のエンコーディングを iso-2022-jp に変換した文字列を
-返します。
-
---- toeuc
-#@todo
-
-self のエンコーディングを euc-jp に変換した文字列を
-返します。
-
---- tosjis
-#@todo
-
-self のエンコーディングを shift_jis に変換した文字列を
-返します。
-
-#@if (version >= "1.8.2")
---- toutf8
-#@todo
-
-((<ruby 1.8.2 feature>))
-
-
-self のエンコーディングを utf8 に変換した文字列を
-返します。
-#@end
-
-#@if (version >= "1.8.2")
---- toutf16
-#@todo
-
-((<ruby 1.8.2 feature>))
-
-
-self のエンコーディングを utf16 に変換した文字列を
-返します。
-#@end
-
-#@if (version >= "1.8.2")
---- iseuc
-#@todo
-
-((<ruby 1.8.2 feature>))
-
-
-Kconv.iseuc(self) と同じです。
-#@end
-
-#@if (version >= "1.8.2")
---- issjis
-#@todo
-
-((<ruby 1.8.2 feature>))
-
-
-Kconv.issjis(self) と同じです。
-#@end
-
-#@if (version >= "1.8.2")
---- isutf8
-#@todo
-
-((<ruby 1.8.2 feature>))
-
-
-Kconv.isutf8(self) と同じです。
-#@end
-
-= module Kconv
-
-文字コードエンコーディングを変換するためのモジュール。
-[[c:Kconv]] は [[lib:nkf]] のラッパーです。
-
-see also: [[m:kconv#String に追加されるメソッド]]
-
-[[trap:Kconv]]
+kconv を require すると [[c:String]] クラスに変換用のメソッドが定義されます。
+[[c:Kconv]] にも同等のメソッドが定義されます。 [[c:Kconv]] には
+エンコーディングを表す定数も定義されています。
 
 === 使用例
 
@@ -108,209 +21,390 @@ see also: [[m:kconv#String に追加されるメソッド]]
   newstring = string.toeuc
   newstring = string.tosjis
 
+
+= reopen String
+
+== Instance Methods
+
+--- kconv(out_code, in_code = Kconv::AUTO) -> String
+
+self のエンコーディングを out_code に変換した文字列を
+返します。
+out_code in_code は [[c:Kconv]] の定数で指定します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]] を使ってください。
+
+@param out_code 変換後のエンコーディングを [[c:Kconv]] の定数で指定します。
+@param in_code 変換する文字列のエンコーディングを [[c:Kconv]] の定数で指定します。
+
+@see [[m:Kconv.#kconv]]
+
+--- tojis -> String
+
+self のエンコーディングを iso-2022-jp に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-jxm0', str)
+を使ってください。
+
+@see [[m:Kconv.#tojis]]
+--- toeuc -> String
+
+self のエンコーディングを EUC-JP に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-exm0', str)
+を使ってください。
+
+@see [[m:Kconv.#toeuc]]
+--- tosjis -> String
+
+self のエンコーディングを shift_jis に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-sxm0', str)
+を使ってください。
+
+@see [[m:Kconv.#tosjis]]
+
+#@if (version >= "1.8.2")
+--- toutf8 -> String
+
+self のエンコーディングを UTF-8 に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-wxm0', str)
+を使ってください。
+
+@see [[m:Kconv.#toutf8]]
+#@end
+
+#@if (version >= "1.8.2")
+--- toutf16 -> String
+
+self のエンコーディングを UTF-16BE に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w16xm0', str)
+を使ってください。
+
+@see [[m:Kconv.#toutf16]]
+
+#@end
+
+#@if (version >= "1.8.2")
+--- iseuc -> bool
+
+self が EUC-JP なバイト列として正当であるかどうかを判定します。
+
+[[m:Kconv.#iseuc]](self) と同じです。
+
+#@end
+
+#@if (version >= "1.8.2")
+--- issjis -> bool
+
+self が Shift_JIS なバイト列として正当であるかどうかを判定します。
+
+
+[[m:Kconv.#issjis(self)]] と同じです。
+
+#@end
+
+#@if (version >= "1.8.2")
+--- isutf8 -> bool
+
+self が UTF-8 なバイト列として正当であるかどうかを判定します。
+
+[[m:Kconv.#isutf8]](self) と同じです。
+#@end
+
+#@since 1.9.1
+--- isjis -> bool
+
+self が ISO-2022-JP なバイト列として正当であるかどうかを判定します。
+
+Kconv.isjis(self) と同じです。
+
+#@end
+= module Kconv
+
+文字コードエンコーディングを変換するためのモジュール。
+[[c:Kconv]] は [[lib:nkf]] のラッパーです。
+
+#@#[[trap:Kconv]]
+
 == Module Functions
 
---- kconv(str, out_code, in_code = Kconv::AUTO)
-#@todo
+--- kconv(str, out_code, in_code = Kconv::AUTO) -> String
 
 文字列 str のエンコーディングを out_code に変換したものを
 返します。in_code も指定されていたら str のエンコーディングが
 in_code だとして動作します。
 
-out_code in_code は定数で指定します。
+このメソッドはMIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]] を使ってください。
 
---- tojis(str)
-#@todo
+@param str 変換元の文字列
+@param out_code 変換後のエンコーディング
+@param in_code strのエンコーディング
+
+@see [[m:String#kconv]]
+
+--- tojis(str) -> String
 
 文字列 str のエンコーディングを iso-2022-jp に変換して返します。
-以下と同じです。
 
-  Kconv.kconv(str, Kconv::JIS)
+Kconv.kconv(str, Kconv::JIS) と同じです。
 
---- toeuc(str)
-#@todo
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-jxm0', str)
+を使ってください。
 
-文字列 str のエンコーディングを euc-jp に変換して返します。
-以下と同じです。
+@param str 変換元の文字列
 
-  Kconv.kconv(str, Kconv::EUC)
+@see [[m:Kconv.#kconv]], [[m:String#tojis]]
+--- toeuc(str) -> String
 
---- tosjis(str)
-#@todo
+文字列 str のエンコーディングを EUC-JP に変換して返します。
+
+Kconv.kconv(str, Kconv::EUC)と同じです。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-exm0', str)
+を使ってください。
+
+@param str 変換元の文字列
+
+@see [[m:Kconv.#kconv]], [[m:String#toeuc]]
+
+--- tosjis(str) -> String
 
 文字列 str のエンコーディングを shift_jis に変換して返します。
-以下と同じです。
 
-  Kconv.kconv(str, Kconv::SJIS)
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-sxm0', str)
+を使ってください。
 
---- guess(str)
-#@todo
+Kconv.kconv(str, Kconv::SJIS)と同じです。
+
+@param str 変換元の文字列
+
+@see [[m:Kconv.#kconv]], [[m:String#tosjis]]
+
+#@until 1.9.0
+--- guess(str) -> Integer
+#@else
+--- guess(str) -> Encoding | nil
+#@end
 
 文字列 str のエンコーディングを判定します。戻り値は
 Kconv の定数です。
 
+このモジュール関数で判定できるのは、
+  * ISO-2022-JP ([[m:Kconv::JIS]])
+  * Shift_JIS ([[m:Kconv::SJIS]])
+  * EUC-JP ([[m:Kconv::EUC]])
 #@since 1.8.2
---- guess_old(str)
-#@todo
+  * ASCII ([[m:Kconv::ASCII]])
+  * UTF-8 ([[m:Kconv::UTF8]])
+  * UTF-16BE ([[m:Kconv::UTF16]])
+#@end
+  * 不明 ([[m:Kconv::UNKNOWN]])
+  * 以上のどれでもない ([[m:Kconv::BINARY]])
+のいずれかです。
+
+@param str エンコーディング判定対象の文字列
+
+#@since 1.8.2
+#@if (version < "1.9.0")
+--- guess_old(str) -> Integer
+文字列 str のエンコーディングを判定します。戻り値は
+Kconv の定数です。
+
+このモジュール関数で判定できるのは、
+  * ISO-2022-JP ([[m:Kconv::JIS]])
+  * Shift_JIS ([[m:Kconv::SJIS]])
+  * EUC-JP ([[m:Kconv::EUC]])
+  * 不明 ([[m:Kconv::UNKNOWN]])
+  * 以上のどれでもない ([[m:Kconv::BINARY]])
+のいずれかです。
+
+@param str エンコーディング判定対象の文字列
+@see [[m:Kconv.#guess]]
+#@end
 #@end
 
 #@if (version >= "1.8.2")
---- toutf8(str)
-#@todo
+--- toutf8(str) -> String
 
-((<ruby 1.8.2 feature>)):
-文字列 str のエンコーディングを utf8 に変換して返します。
-以下と同じです。
+文字列 str のエンコーディングを UTF-8 に変換して返します。
 
-  Kconv.kconv(str, Kconv::UTF8)
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-wxm0', str)
+を使ってください。
+
+Kconv.kconv(str, Kconv::UTF8)と同じです。
+
+@param str 変換元の文字列
+@see [[m:String#toutf8]]
+
 #@end
 
 #@if (version >= "1.8.2")
---- toutf16(str)
-#@todo
+--- toutf16(str) -> String
 
-((<ruby 1.8.2 feature>)):
-文字列 str のエンコーディングを utf16 に変換して返します。
-以下と同じです。
+文字列 str のエンコーディングを UTF-16BE に変換して返します。
 
-  Kconv.kconv(str, Kconv::UTF16)
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w16xm0', str)
+を使ってください。
+
+Kconv.kconv(str, Kconv::UTF16)と同じです。
+
+@param str 変換元の文字列
+@see [[m:String#toutf16]]
+
 #@end
 
 #@if (version >= "1.8.2")
---- iseuc(str)
-#@todo
+--- iseuc(str) -> bool
+文字列 str が EUC-JP なバイト列として正当であるかどうかを判定します。
 
-((<ruby 1.8.2 feature>)):
-以下と同じです。
+@param str 判定対象の文字列
+@see [[m:String#iseuc]]
 
-  Kconv::RegexpEucjp.match(str)
 #@end
 
 #@if (version >= "1.8.2")
---- issjis(str)
-#@todo
+--- issjis(str) -> bool
+文字列 str が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
-((<ruby 1.8.2 feature>)):
-以下と同じです。
+@param str 判定対象の文字列
+@see [[m:String#issjis]]
 
-  Kconv::RegexpShiftjis.match(str)
 #@end
 
 #@if (version >= "1.8.2")
---- isutf8(str)
-#@todo
+--- isutf8(str) -> bool
+文字列 str が UTF-8 なバイト列として正当であるかどうかを判定します。
 
-((<ruby 1.8.2 feature>)):
-以下と同じです。
-
-  Kconv::RegexpUtf8.match(str)
+@param str 判定対象の文字列
+@see [[m:String#isutf8]]
 #@end
 
+#@since 1.9.1
+--- isjis(str) -> bool
+文字列 str が ISO-2022-JP なバイト列として正当であるかどうかを判定します。
+
+@param str 判定対象の文字列
+@see [[m:String#isjis]]
+#@end
 == Constants
 
 --- AUTO
-#@todo
-
 エンコーディングを自動検出します。
 入力の指定でのみ有効です。
 
 --- JIS
-#@todo
 
-iso-2022-jp を表します。
+ISO-2022-JP を表します。
 
 --- EUC
-#@todo
 
-euc-jp を表します。
+EUC-JP を表します。
 
 --- SJIS
-#@todo
 
-shift_jis (シフト JIS / MS 漢字コードとも言う) を表します。
+Shift_JIS を表します。
+cp932ではないことに注意してください。
 
 --- BINARY
-#@todo
 
+#@if (version < "1.8.2")
 JIS EUC SJIS 以外を表します。
+#@else
+JIS EUC SJIS UTF8 UTF16 以外を表します。
+#@end
+この値は[[m:Kconv.#guess]]の返り値としてのみ用いられます。
 
 --- UNKNOWN
-#@todo
 
 出力においては「エンコーディングを判定できなかった」
 入力においては AUTO と同様に「自動検出」を表します。
 
 --- NOCONV
-#@todo
 
 変換されないことを表します。
+出力エンコーディングの指定にのみ用います。
 
 #@if (version >= "1.8.2")
 --- ASCII
-#@todo
-
-((<ruby 1.8.2 feature>)):
 ASCII を表します。
 #@end
 
 #@if (version >= "1.8.2")
 --- UTF8
-#@todo
-
-((<ruby 1.8.2 feature>)):
 UTF8 を表します。
 #@end
 
 #@if (version >= "1.8.2")
 --- UTF16
-#@todo
-
-((<ruby 1.8.2 feature>)):
 UTF16 を表します。
 #@end
 
 #@if (version >= "1.8.2")
 --- UTF32
-#@todo
-
-((<ruby 1.8.2 feature>)):
 UTF32 を表します。
 #@end
 
 #@if (version >= "1.8.2")
 --- RegexpShiftjis
-#@todo
-
-((<ruby 1.8.2 feature>)):
-SJIS にマッチする正規表現です。
+この定数は使うべきではありません。
 #@end
 
 #@if (version >= "1.8.2")
 --- RegexpEucjp
-#@todo
-
-((<ruby 1.8.2 feature>)):
-EUCJP にマッチする正規表現です。
+この定数は使うべきではありません。
 #@end
 
 #@if (version >= "1.8.2")
 --- RegexpUtf8
-#@todo
-
-((<ruby 1.8.2 feature>)):
-UTF8 にマッチする正規表現です。
+この定数は使うべきではありません。
 #@end
 
 #@since 1.8.5
+#@if (version < "1.9.0")
 --- REVISION
-#@todo
+この定数は使うべきではありません。
+#@end
 #@end
 
 #@if (version >= "1.8.2")
 #@if (version <= "1.8.4")
 --- Iconv_EUC_JP
+この定数は使うべきではありません。
 --- Iconv_Shift_JIS
+この定数は使うべきではありません。
 --- Iconv_UTF8
-#@todo
+この定数は使うべきではありません。
 #@end
 #@end
