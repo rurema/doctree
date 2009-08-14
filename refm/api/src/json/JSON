@@ -72,54 +72,73 @@
 == Constants
 
 --- JSON::VARIANT_BINARY -> bool
-#@todo
+
+拡張ライブラリ版を使用している場合に真を返します。
+そうでない場合は偽を返します。
 
 --- JSON::VERSION -> String
-#@todo
 
---- JSON::VERSION_ARRAY -> Array
-#@todo
+このライブラリのバージョンを表す文字列です。
 
---- JSON::VERSION_BUILD -> Fixnum
-#@todo
-
---- JSON::VERSION_MAJOR -> Fixnum
-#@todo
-
---- JSON::VERSION_MINOR -> Fixnum
-#@todo
+#@# nodoc
+#@# --- JSON::VERSION_ARRAY -> Array
+#@# 
+#@# --- JSON::VERSION_BUILD -> Fixnum
+#@# 
+#@# --- JSON::VERSION_MAJOR -> Fixnum
+#@# 
+#@# --- JSON::VERSION_MINOR -> Fixnum
+#@#
 
 --- JSON::Infinity -> Float
-#@todo
+
+正の無限大を表します。
+
+@see [[c:Float]]
 
 --- JSON::MinusInfinity -> Float
-#@todo
+
+負の無限大を表します。
+
+@see [[c:Float]]
 
 --- JSON::NaN -> Float
-#@todo
+
+NaN (Not a Number) を表します。
+
+@see [[c:Float]]
 
 --- JSON::JSON_LOADED -> bool
-#@todo
+
+JSON ライブラリがロード済みである場合に真を返します。
+そうでない場合は偽を返します。
 
 
 = class JSON::JSONError < StandardError
-#@todo
+
+JSON のエラーのための基底クラスです。
 
 = class JSON::ParserError < JSON::JSONError
-#@todo
+
+JSON のパースエラーを通知する例外です。
 
 = class JSON::GeneratorError < JSON::JSONError
 alias JSON::UnparserError
-#@todo
+
+JSON を生成するときに発生したエラーを通知する例外です。
 
 = class JSON::CircularDatastructure < JSON::GeneratorError
-#@todo
+
+JSON を生成時に循環するデータ構造があるときに発生する例外です。
 
 = class JSON::MissingUnicodeSupport < JSON::JSONError
-#@todo
+
+要求されたユニコードサポートがシステムにインストールされていない場合に発生する例外です。
+通常、これは [[lib:iconv]] がインストールされていないことを意味します。
 
 = class JSON::NestingError < JSON::ParserError
-#@todo
+
+パースしようとしているデータ構造のネストが深すぎる場合に発生する例外です。
 
 
 
