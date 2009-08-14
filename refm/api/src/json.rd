@@ -2,8 +2,11 @@
 
 JSON (JavaScript Object Notation)を扱うライブラリです。
 
+JSON の仕様は [[rfc:4627]] を参照してください。
+
 拡張ライブラリによる実装と Ruby による実装があり、拡張ライブラリによる実装が使用できるときは
 拡張ライブラリによる実装を使用します。
+Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
 
 
 #@include(json/JSON)
