@@ -1,0 +1,12 @@
+= class JSON::Parser < Object
+alias JSON::Ext::Parser
+alias JSON::Pure::Parser
+
+== Public Instance Methods
+
+--- parse
+#@todo
+
+--- source
+#@todo
+

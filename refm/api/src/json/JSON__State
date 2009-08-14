@@ -1,0 +1,69 @@
+= class JSON::State < Object
+alias JSON::Ext::Generator::State
+alias JSON::Pure::Generator::State
+
+
+== Public Instance Methods
+
+--- allow_nan?
+#@todo
+
+--- array_nl
+#@todo
+
+--- array_nl=
+#@todo
+
+--- check_circular?
+#@todo
+
+--- configure
+#@todo
+
+--- forget
+#@todo
+
+--- indent
+#@todo
+
+--- indent=
+#@todo
+
+--- max_nesting
+#@todo
+
+--- max_nesting=
+#@todo
+
+--- object_nl
+#@todo
+
+--- object_nl=
+#@todo
+
+--- remember
+#@todo
+
+--- seen?
+#@todo
+
+--- space
+#@todo
+
+--- space=
+#@todo
+
+--- space_before
+#@todo
+
+--- space_before=
+#@todo
+
+--- to_h
+#@todo
+
+== Singleton Methods
+
+--- from_state
+#@todo
+

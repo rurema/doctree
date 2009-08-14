@@ -1,0 +1,128 @@
+= module JSON
+
+
+== Singleton Methods
+
+--- []
+#@todo
+
+--- create_id
+#@todo
+
+--- create_id=
+#@todo
+
+--- deep_const_get
+#@todo
+
+--- dump
+#@todo
+
+--- fast_generate
+#@todo
+
+--- fast_unparse
+#@todo
+
+--- generate
+#@todo
+
+--- generator
+#@todo
+
+--- generator=
+#@todo
+
+--- load
+#@todo
+
+--- parse
+#@todo
+
+--- parse!
+#@todo
+
+--- parser
+#@todo
+
+--- parser=
+#@todo
+
+--- pretty_generate
+#@todo
+
+--- pretty_unparse
+#@todo
+
+--- recurse_proc
+#@todo
+
+--- restore
+#@todo
+
+--- state
+#@todo
+
+--- state=
+#@todo
+
+--- unparse
+#@todo
+
+== Constants
+
+--- JSON::VARIANT_BINARY -> bool
+#@todo
+
+--- JSON::VERSION -> String
+#@todo
+
+--- JSON::VERSION_ARRAY -> Array
+#@todo
+
+--- JSON::VERSION_BUILD -> Fixnum
+#@todo
+
+--- JSON::VERSION_MAJOR -> Fixnum
+#@todo
+
+--- JSON::VERSION_MINOR -> Fixnum
+#@todo
+
+--- JSON::Infinity -> Float
+#@todo
+
+--- JSON::MinusInfinity -> Float
+#@todo
+
+--- JSON::NaN -> Float
+#@todo
+
+--- JSON::JSON_LOADED -> bool
+#@todo
+
+
+= class JSON::JSONError < StandardError
+#@todo
+
+= class JSON::ParserError < JSON::JSONError
+#@todo
+
+= class JSON::GeneratorError < JSON::JSONError
+alias JSON::UnparserError
+#@todo
+
+= class JSON::CircularDatastructure < JSON::GeneratorError
+#@todo
+
+= class JSON::MissingUnicodeSupport < JSON::JSONError
+#@todo
+
+= class JSON::NestingError < JSON::ParserError
+#@todo
+
+
+
+
+
+
