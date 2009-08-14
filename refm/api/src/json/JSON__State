@@ -2,6 +2,8 @@
 alias JSON::Ext::Generator::State
 alias JSON::Pure::Generator::State
 
+Ruby オブジェクトから JSON 形式の文字列を生成する間、
+JSON 形式の文字列を生成するための設定を保持しておくために使用するクラスです。
 
 == Public Instance Methods
 
@@ -23,11 +25,15 @@ alias JSON::Pure::Generator::State
 --- forget
 #@todo
 
---- indent
-#@todo
+--- indent -> String
 
---- indent=
-#@todo
+インデントに使用する文字列を返します。
+
+--- indent=(string)
+
+インデントに使用する文字列をセットします。
+
+@param string インデントに使用する文字列を指定します。
 
 --- max_nesting
 #@todo
@@ -35,11 +41,17 @@ alias JSON::Pure::Generator::State
 --- max_nesting=
 #@todo
 
---- object_nl
+--- object_nl -> String
 #@todo
 
---- object_nl=
+JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を返します。
+
+--- object_nl=(string)
 #@todo
+
+JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列をセットします。
+
+@param string JSON 形式の文字列中に現れる JavaScript のオブジェクトの行末に挿入する文字列を指定します。
 
 --- remember
 #@todo
@@ -47,23 +59,71 @@ alias JSON::Pure::Generator::State
 --- seen?
 #@todo
 
---- space
-#@todo
+--- space -> String
 
---- space=
-#@todo
+JSON 形式の文字列のトークン間に挿入する文字列を返します。
 
---- space_before
-#@todo
+--- space=(string)
 
---- space_before=
-#@todo
+JSON 形式の文字列のトークン間に挿入する文字列をセットします。
 
---- to_h
-#@todo
+@param string JSON 形式の文字列のトークン間に挿入する文字列を指定します。
+
+--- space_before -> String
+
+JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+前に挿入する文字列を返します。
+
+--- space_before=(string)
+
+JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+前に挿入する文字列をセットします。
+
+@param string JSON 形式の文字列中で JavaScript のオブジェクトを表す部分にある ':' の
+              前に挿入する文字列をセットします。
+
+
+--- to_h -> Hash
+
+自身をハッシュに変換します。
 
 == Singleton Methods
 
---- from_state
-#@todo
+--- new(options = {}) -> JSON::State
+
+自身を初期化します。
+
+@params options ハッシュを指定します。
+        指定可能なオプションは以下の通りです。
+
+: :indent
+  インデントに使用する文字列を指定します。デフォルトは空文字列です。
+: :space
+  a string that is put after, a : or , delimiter (default: '')
+: :space_before
+  a string that is put before a : pair delimiter (default: '')
+: :object_nl
+  a string that is put at the end of a JSON object (default: '')
+: :array_nl
+  a string that is put at the end of a JSON array (default: '')
+: :check_circular
+  真を指定した場合、生成するオブジェクトの循環をチェックします。
+  この動作がデフォルトです。
+: :allow_nan
+  真を指定した場合、[[m:JSON::NaN]], [[m:JSON::Infinity]],
+  [[m:JSON::MinusInfinity]] を生成することを許すようになります。
+  偽を指定した場合、これらの値を生成しようとすると例外が発生します。
+  デフォルトは偽です。
+
+
+--- from_state(options) -> JSON::State
+
+与えられた options によって生成した [[c:JSON::State]] のインスタンスを返します。
+
+@param options [[c:JSON::State]] のインスタンスか、ハッシュを指定します。
+
+@return options がハッシュである場合は、それによって初期化した [[c:JSON::State]] を
+        返します。options が [[c:JSON::State]] のインスタンスである場合は単に
+        options を返します。いずれでも無い場合は、何も設定されていない [[c:JSON::State]] の
+        インスタンスを返します。
 
