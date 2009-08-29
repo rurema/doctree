@@ -1,18 +1,13 @@
 #@if (version >= "1.6.0")
+require socket
+require timeout
+
 DNSによる名前解決を行うライブラリです。 Ruby で書かれているため thread-aware であり、並列に多くのホスト名を解決することができます。
-
-= class Resolv < Object
-
-Ruby で書かれたリゾルバ(名前解決)ライブラリ。
-Ruby で書かれているため thread-aware であり、
-並列に多くのホスト名を解決することができます。
 
 DNS モジュールを使うことで、さまざまなリソースを直接ルックアップできます。
 
 なお、単にホスト名から IP アドレスを得たいだけであれば、
 [[lib:socket]] ライブラリの [[m:IPSocket.getaddress]] などが使用できます。
-
-[[unknown:執筆者募集]]
 
 === 例:
   Resolv.getaddress("www.ruby-lang.org")
@@ -25,148 +20,325 @@ DNS モジュールを使うことで、さまざまなリソースを直接ルックアップできます。
 #@#NIS is not supported.
 NIS はサポートされていません。
 
+
+= class Resolv < Object
+リゾルバを表すクラスです。
+このクラス自体は実際には名前解決をせず、
+[[m:Resolv.new]] で与えられたリゾルバに順に
+問合せることしかしません。
+
+このクラスのクラスメソッドで名前解決をした場合には、
+内部で /etc/hosts, DNS の順に問合せます。
+
+順に問合せる過程で、あるリゾルバが1個以上の
+結果を返した場合、それ以降のリゾルバには
+問い合わせをしません。
+
 == Class Methods
---- new(resolvers = [Hosts.new, DNS.new])
-#@todo
+--- new(resolvers = [Hosts.new, DNS.new]) -> Resolv
+resolvers に与えたリゾルバの配列を先頭から順に
+名前解決を試すような、新しいリソルバオブジェクトを返します。
 
+resolvers の各要素は each_address と each_name という
+メソッドを持っていなければなりません。
 
---- getaddress(name)
---- getaddresses(name)
---- each_address(name) {|address| ...}
-#@todo
+@param resolvers リゾルバの配列
 
-String のホスト名 name の IP アドレスをルックアップします。
+--- getaddress(name) -> String
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-getaddress はルックアップ結果の最初のアドレスを返します。
-getaddresses はルックアップ結果のアドレスリストを返します。
-each_address はルックアップ結果のアドレスに対するイテレータです。
+ルックアップは /etc/hosts, DNS の順で行います。
 
-例:
-  Resolv.getaddress("www.ruby-lang.org").to_s #=> "210.251.121.214"
+  Resolv.getaddress("localhost") #=> "127.0.0.1"
+  Resolv.getaddress("www.ruby-lang.org") #=> "221.186.184.68"
 
---- getname(address)
---- getnames(address)
---- each_name(address) {|name| ...}
-#@todo
+@param name ホスト名を文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
-String の IP アドレス address のホスト名をルックアップします。
+--- getaddresses(name) -> [String]
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
-getname はルックアップ結果の最初のホスト名を返します。
-getnames はルックアップ結果のホスト名リストを返します。
-each_name はルックアップ結果のアドレスに対するイテレータです。
+ルックアップは /etc/hosts, DNS の順で行います。
+ルックアップに失敗した場合は空の配列が返されます。
 
-例:
-  Resolv.getname("210.251.121.214").to_s #=> "helium.ruby-lang.org"
+@param name ホスト名を文字列で与えます。
+
+--- each_address(name) {|address| ...} -> ()
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
+
+ルックアップは /etc/hosts, DNS の順で行います。
+
+@param name ホスト名を文字列で与えます。
+
+--- getname(address) -> String
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を文字列で返します。
+
+ルックアップは /etc/hosts, DNS の順で行います。
+
+  Resolv.getname("221.186.184.68") #=> "carbon.ruby-lang.org"
+
+@param address IPアドレスを文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
+
+--- getnames(address) -> [String]
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
+
+ルックアップは /etc/hosts, DNS の順で行います。
+
+@param address IPアドレスを文字列で与えます。
+
+--- each_name(address) {|name| ...} -> ()
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
+
+ルックアップは /etc/hosts, DNS の順で行います。
+
+@param address IPアドレスを文字列で与えます。
 
 == Instance Methods
 
---- getaddress(name)
---- getaddresses(name)
---- each_address(name) {|name| ...}
-#@todo
+--- getaddress(name) -> String
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-String のホスト名 name の IP アドレスをルックアップします。
+@param name ホスト名を文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
-それぞれ[[m:Resolv.getaddress]], [[m:Resolv.getaddresses]], 
-[[m:Resolv.each_address]] と同じ機能です。
+--- getaddresses(name) -> [String]
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
---- getname(address)
---- getnames(address)
---- each_name(address) {|name| ...}
-#@todo
+ルックアップに失敗した場合は空の配列が返されます。
 
-String の IP アドレス address のホスト名をルックアップします。
+@param name ホスト名を文字列で与えます。
 
-それぞれ[[m:Resolv.getname]], [[m:Resolv.getnames]], 
-[[m:Resolv.each_name]] と同じ機能です。
+--- each_address(name) {|name| ...} -> ()
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
+
+@param name ホスト名を文字列で与えます。
+
+--- getname(address) -> String
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を文字列で返します。
+
+@param address IPアドレスを文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
+
+--- getnames(address) -> [String]
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
+
+@param address IPアドレスを文字列で与えます。
+
+--- each_name(address) {|name| ...} -> ()
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
+
+@param address IPアドレスを文字列で与えます。
 
 == Constants
 
 --- DefaultResolver
-#@todo
+[[c:Resolv]] の各クラスメソッドを呼びだしたときに
+利用されるリゾルバです。
 
---- AddressRegex
-#@todo
+--- ADDRESSREGEX
+IPアドレスにマッチする正規表現です。
 
 = class Resolv::ResolvError < StandardError
+名前解決に失敗したときに発生する例外のクラスです。
 
-= class Resolv::ResolvTimeout < StandardError
+= class Resolv::ResolvTimeout < TimeoutError
+名前解決がタイムアウトしたときに発生する例外のクラスです。
 
 = class Resolv::Hosts < Object
 
-/etc/hosts を使用するホスト名リゾルバです。
+/etc/hosts (Windows であれば 
+%SystemRoot%\System32\drivers\etc\hosts など)
+を使用するホスト名リゾルバです。
 
 == Class Methods
 
---- new(hosts = '/etc/hosts')
-#@todo
+--- new(hosts = DefaultFileName) -> Resolv::Hosts
+hosts というファイル名のファイルを情報源とする
+リゾルバを生成し、返します。
+
+@param hosts ホスト情報が書かれたファイルの名前を文字列で与えます。
 
 == Instance Methods
---- getaddress(name)
---- getaddresses(name)
---- each_address(name) {|address| ...}
-#@todo
 
-address lookup methods.
+--- getaddress(name) -> String
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
---- getname(address)
---- getnames(address)
---- each_name(address) {|name| ...}
-#@todo
+@param name ホスト名を文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
-hostnames lookup methods.
+--- getaddresses(name) -> [String]
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
---- lazy_initialize
-#@todo
+ルックアップに失敗した場合は空の配列が返されます。
 
-new で指定されたファイル内容を読み込み、名前解決のための内部情報を生成します。
+@param name ホスト名を文字列で与えます。
+
+--- each_address(name) {|name| ...} -> ()
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
+
+@param name ホスト名を文字列で与えます。
+
+--- getname(address) -> String
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を文字列で返します。
+
+@param address IPアドレスを文字列で与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
+
+--- getnames(address) -> [String]
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
+
+@param address IPアドレスを文字列で与えます。
+
+--- each_name(address) {|name| ...} -> ()
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
+
+ルックアップは /etc/hosts, DNS の順で行います。
+
+@param address IPアドレスを文字列で与えます。
+
+--- lazy_initialize -> Resolv::Hosts
+
+このメソッドはユーザが使うべきではありません。
 
 == Constants
 
 --- DefaultFileName
-#@todo
+
+システム標準の、
+ホスト情報が書かれたファイルの名前です。
+
 
 = class Resolv::DNS < Object
 
-DNS stub resolver.
+このクラスは DNS を利用した名前解決をするリゾルバを
+表します。
+
+このクラスは実際には下位のクラスに処理を依頼します。
+
+DNSについては以下を参照してください。
+  * STD0013
+  * [[RFC:1035]]
+  * [[url:ftp://ftp.isi.edu/in-notes/iana/assignments/dns-parameters]]
+  * etc.
 
 == Class Methods
 
---- new(resolv_conf = '/etc/resolv.conf')
-#@todo
+#@until 1.8.1
+--- new(resolv_conf = '/etc/resolv.conf') -> Resolv::DNS
+#@else
+--- new(resolv_conf = nil) -> Resolv::DNS
+#@end
+
+新しい DNS リゾルバを生成します。
+
+#@since 1.8.2
+resolv_conf が nil の場合は
+/etc/resolv.conf もしくはプラットフォーム固有の
+DNS設定を利用します。
+resolv_conf が文字列の場合は /etc/resolv.conf と
+同じフォーマットのファイルを設定に利用します。
+resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
+というキーが利用可能です。
+それぞれの意味は [[man:resolv.conf(5)]] を参照してください。
+
+   Resolv::DNS.new(:nameserver => ['210.251.121.21'],
+                   :search => ['ruby-lang.org'],
+                   :ndots => 1)
+#@end
+
+#@until 1.8.1
+@param resolv_conf DNSの設定ファイル名を文字列で与えます
+#@else
+@param resolv_conf DNSの設定を与えます。
+#@end
 
 --- open(*args)
-#@todo
+--- open(*args){|dns| ...}
+
+新しい DNS リゾルバを生成します。
+ブロックを与えた場合は生成したリゾルバでブロックを呼びだし、
+ブロック終了時にリゾルバを閉じます。
+
+ブロックを与えなかった場合は [[m:Resolv::DNS.new]] と
+同じです。
+
+@param args DNSの設定を与えます。意味は [[m:Resolv::DNS.new]] 
+            の引数と同じです。
 
 == Instance Methods
 
---- getaddress(name)
---- getaddresses(name)
---- each_address(name) {|address| ...}
-#@todo
+--- getaddress(name) -> Resolv::IPv4 | Resolv::IPv6
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果の最初のアドレスを返します。
 
-address lookup methods.
+@param name ホスト名を文字列もしくはResolv::Nameのインスタンスで与えます。
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
 
-name は Resolv::Name または String でなければなりません。
-ルックアップ結果は Resolv::IPv4 または Resolv::IPv6 のインスタンスとなります。
+--- getaddresses(name) -> [Resolv::IPv4 | Resolv::IPv6]
+ホスト名 name の IP アドレスをルックアップし、
+ルックアップ結果のアドレスリストを返します。
 
---- getname(address)
---- getnames(address)
---- each_name(address) {|name| ...}
-#@todo
+ルックアップに失敗した場合は空の配列が返されます。
 
-hostnames lookup methods.
+@param name ホスト名を文字列もしくはResolv::Nameのインスタンスで与えます。
 
-address は Resolv::IPv4, Resolv::IPv6, String のいずれかでなければなりません。
-ルックアップ結果は Resolv::Name のインスタンスとなります。
+--- each_address(name) {|name| ...} -> ()
+ホスト名 name の IP アドレスをルックアップし、
+各ルックアップ結果のアドレスに対してブロックを評価します。
 
---- getresource(name, typeclass)
---- getresources(name, typeclass)
---- each_resource(name, typeclass) {|resource| ...}
-#@todo
+@param name ホスト名を文字列もしくはResolv::Nameのインスタンスで与えます。
 
-They lookup DNS resources of name.
-name は Resolv::Name または String でなければなりません。
+--- getname(address) -> Resolv::Name
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果の最初のホスト名を返します。
+
+@param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
+               Resolv::IPv6 のインスタンス、のいずれか与えます。
+               
+@raise Resolv::ResolvError ルックアップに失敗したときに発生します。
+
+--- getnames(address) -> [Resolv::Name]
+IP アドレス address のホスト名をルックアップし、
+ルックアップ結果のホスト名リストを返します。
+
+@param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
+               Resolv::IPv6 のインスタンス、のいずれか与えます。
+
+--- each_name(address) {|name| ...} -> ()
+IP アドレス address のホスト名をルックアップし、
+各ルックアップ結果のホスト名に対してブロックを評価します。
+
+@param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
+               Resolv::IPv6 のインスタンス、のいずれか与えます。
+
+--- getresource(name, typeclass) -> object
+--- getresources(name, typeclass) -> [object]
+--- each_resource(name, typeclass) {|resource| ...} -> ()
+
+nameに対応するDNSリソースレコードを取得します。
+
+getresource は最初に見つかったリソースを、
+getresources は見つかったリソース全てを返します。
+each_resource は見つかったリソースをブロックに渡します。
 
 typeclass は以下のいずれかです。
   * Resolv::DNS::Resource::IN::ANY
@@ -177,33 +349,58 @@ typeclass は以下のいずれかです。
   * Resolv::DNS::Resource::IN::MINFO
   * Resolv::DNS::Resource::IN::MX
   * Resolv::DNS::Resource::IN::TXT
-  * Resolv::DNS::Resource::IN::ANY
   * Resolv::DNS::Resource::IN::A
   * Resolv::DNS::Resource::IN::WKS
   * Resolv::DNS::Resource::IN::PTR
   * Resolv::DNS::Resource::IN::AAAA
 
 ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
+そのクラスのインスタンスを返します。
 
---- close
-#@todo
+@param name ルックアップ対象となる名前を [[c:Resolv::Name]] または String で指定します。
+@param typeclass レコード種別を指定します。
+@raise Resolv::ResolvError getresourceでルックアップに失敗した場合に発生します。
 
---- extract_resources(msg, name, typeclass)
-#@todo
+--- close -> ()
 
---- lazy_initialize
-#@todo
+DNSリゾルバを閉じます。
+
+--- extract_resources(msg, name, typeclass) {|resource| ...}
+
+このメソッドはユーザが使うべきではありません。
+
+DNSサーバからの返答 msg を name と typeclass でフィルタリングし、
+その結果をブロックに渡します。
+
+@param msg DNSサーバからの返答を与えます。[[c:Resolv::DNS::Message]] のインスタンスを与えることができます。
+@param name フィルタリングする名前を指定します。
+@param typeclass フィルタリングするDNSレコード種別を表します。[[m:Resolv::DNS#getresource]] の typeclass と同じクラスを与えます。
+--- lazy_initialize -> Resolv::DNS
+
+このメソッドはユーザが使うべきではありません。
+
+[[m:Resolv::DNS.new]] で与えた設定でインスタンスを実際に初期化します。
 
 == Constants
 
 --- DNSThreadGroup
-#@todo
+
+この定数はユーザが使うべきではありません。
+
+#@until 1.8.5
+Resolv::DNS内部で利用される [[c:ThreadGroup]] です。
+#@else
+この定数はもはや利用されていません。
+#@end
 
 --- Port
-#@todo
+
+デフォルトの DNS ポート番号です。
 
 --- UDPSize
-#@todo
+
+デフォルトの UDP パケットサイズです。
 
 = class Resolv::DNS::Requester < Object
 
