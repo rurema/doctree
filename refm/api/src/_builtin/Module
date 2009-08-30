@@ -149,7 +149,7 @@ false を返します。
 
 @param other 比較対象のモジュールやクラス
 
-@raise other がクラスやモジュールでなければ例外 [[c:TypeError]] が発生します。
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
   module Foo
   end
@@ -188,7 +188,7 @@ false を返します。
 
 @param other 比較対象のモジュールやクラス
 
-@raise other がクラスやモジュールでなければ例外 [[c:TypeError]] が発生します。
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
 
@@ -206,7 +206,7 @@ false を返します。
 
 @param other 比較対象のモジュールやクラス
 
-@raise other がクラスやモジュールでなければ例外 [[c:TypeError]] が発生します。
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
 
@@ -224,7 +224,7 @@ false を返します。
 
 @param other 比較対象のモジュールやクラス
 
-@raise other がクラスやモジュールでなければ例外 [[c:TypeError]] が発生します。
+@raise TypeError other がクラスやモジュールではない場合に発生します。
 
 @see [[m:Module#<]]
 
