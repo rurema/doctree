@@ -310,7 +310,7 @@ self と x の除算を計算します。
 与えられたブロックの実行時間を self に加算して
 新しい [[c:Benchmark::Tms]] オブジェクトを生成して返します。
 
-@see [[m:Benchmark#measure]
+@see [[m:Benchmark.#measure]]
 
 --- add!{ ... } -> self
 
@@ -318,7 +318,7 @@ self と x の除算を計算します。
 
 このメソッドは self を破壊的に変更します。
 
-@see [[m:Benchmark#measure]
+@see [[m:Benchmark.#measure]]
 
 
 --- format(fmtstr = nil, *args)
