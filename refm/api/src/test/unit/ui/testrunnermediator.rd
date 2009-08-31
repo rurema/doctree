@@ -18,7 +18,7 @@ include Test::Unit::Util::Observable
 新しく TestRunnerMediator オブジェクトを生成して返します。
 
 @param suite 実行したいテストを持った Test::Unit::TestSuite オブジェクトを
-与えます。
+             与えます。
 
 == Instance Methods
 

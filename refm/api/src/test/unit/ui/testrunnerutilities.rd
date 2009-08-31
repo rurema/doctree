@@ -24,7 +24,7 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
 新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
 
 @param suite 実行したいテストを保持している TestSuite オブジェクトか
-TestCase オブジェクトを与えます。
+             TestCase オブジェクトを与えます。
 
 @param output_level 出力レベルを指定します。指定できるのは以下の4つです。
  * Test::Unit::UI::SILENT 
