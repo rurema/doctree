@@ -56,7 +56,7 @@ Runner にテストを実行させているクラスです。
 #@todo
 テストを実行します。全てのテストが成功した場合、true を返します。そうでない場合は、
 false を返します。
-        
+
 #@if (version >= "1.8.3")
 #@#ruby 1.8.3 以降では force_standalone の意味が変わり、今までと真偽が逆になりました。        
 @param force_standalone true を与えると、dir 以下にある全てのテストを実
