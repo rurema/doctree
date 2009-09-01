@@ -273,7 +273,7 @@ Gem をロードできなかった場合に発生するエラーです。
 --- version_requirement=(version_requirement)
 
 ロードに失敗した Gem の必要条件をセットします。
- 
+
 @param version_requirement [[c:Gem::Requirement]] のインスタンスをセットします。
 
 @see [[c:Gem::Requirement]], [[m:Gem::Dependency#version_requirements]]
