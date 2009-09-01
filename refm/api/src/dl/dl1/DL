@@ -158,8 +158,7 @@ Cレベルのコールバック関数を定義し、その関数(へのポインタ)を保持した
 
 @param type コールバック関数の型指定子を与えます。
 
-@raise DL::DLError 定義できるコールバック関数の数には制限があります。それを越えると、DL::DLError が
-発生します。
+@raise DL::DLError 定義できるコールバック関数の数には制限があります。それを越えると、DL::DLError が発生します。
 
  require 'dl/import'
  strlast = DL.callback('IS'){|s|
