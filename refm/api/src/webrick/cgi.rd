@@ -226,9 +226,9 @@ config で有効なキーとその値は以下のとおりです。
 
 @param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
-@raise WEBrick::HTTPStatus::MethodNotAllowed
-       指定された [[c:WEBrick::HTTPRequest]] オブジェクト  req が自身に定義されていない
-       HTTP のメソッドであった場合発生します。
+@raise WEBrick::HTTPStatus::MethodNotAllowed 指定された
+       [[c:WEBrick::HTTPRequest]] オブジェクト req が自身に定義されてい
+       ないHTTP のメソッドであった場合発生します。
 
 --- start(env = ENV, stdin = $stdin, stdout = $stdout)     -> ()
 
