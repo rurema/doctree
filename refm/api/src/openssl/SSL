@@ -1,9 +1,9 @@
 #@if (version >= "1.8.0")
 = module OpenSSL::SSL
 
-  *[[c:OpenSSL::SSL::SSLContext]]
-  *[[c:OpenSSL::SSL::SSLServer]]
-  *[[c:OpenSSL::SSL::SSLSocket]]
+  * [[c:OpenSSL::SSL::SSLContext]]
+  * [[c:OpenSSL::SSL::SSLServer]]
+  * [[c:OpenSSL::SSL::SSLSocket]]
 
 == Constants
 
