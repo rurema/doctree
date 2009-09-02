@@ -250,8 +250,8 @@ true を返します。
 
 @param string 文字列を指定します。
 
-@raise TypeError
-	string がnil でも [[c:String]] オブジェクトでもなけい場合発生します。
+@raise TypeError string がnil でも [[c:String]] オブジェクトでもなけい
+                 場合発生します。
 
   p /foo/ =~ "foo"        #=> 0
   p Regexp.last_match(0)  #=> "foo"
