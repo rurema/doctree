@@ -314,7 +314,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 --- digest_length -> Integer
 --- length -> Integer
 --- size -> Integer
-@todo
+#@todo
 
 ダイジェストのハッシュ値のバイト長を取得する。
 例えば、Digest::MD5であれば16、Digest::SHA1であれば20です。
