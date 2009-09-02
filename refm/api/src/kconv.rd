@@ -119,7 +119,7 @@ self が EUC-JP なバイト列として正当であるかどうかを判定します。
 self が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
 
-[[m:Kconv.#issjis(self)]] と同じです。
+[[m:Kconv.#issjis]] と同じです。
 
 #@end
 
