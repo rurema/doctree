@@ -1090,7 +1090,7 @@ priority が同じならば [[m:Resolv::DNS::Resource::IN::SRV#wight]]
 #@end
 
 #@# = module Resolv::DNS::OpCode
-#@# 
+#@# このモジュールはユーザが使うべきではありません。
 #@# == Constants
 #@# 
 #@# --- Query
@@ -1230,7 +1230,7 @@ DNS サーバからの応答がエラーであった場合に発生する例外です。
 Resolv::DNSの各メソッドがこの例外を発生させる可能性があります。
 
 #@# = class Resolv::DNS::Message < Object
-#@# 
+#@# このクラスはユーザが使うべきではありません。
 #@# == Class Method
 #@# 
 #@# --- new(id = ((@@identifier += 1) & 0xffff))
