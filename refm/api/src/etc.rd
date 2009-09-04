@@ -183,7 +183,7 @@ alias Etc::Group
 
 グループ ID を設定します。
 
---- mem -> Array
+--- mem -> [String]
 
 このグループに所属するメンバーのログイン名を配列で返します。
 
