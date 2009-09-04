@@ -320,24 +320,45 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 #@end
 == Constants
 
---- AUTO
+#@if (version < "1.9.0")
+--- AUTO -> Integer
+#@else
+--- AUTO -> nil
+#@end
+
 エンコーディングを自動検出します。
 入力の指定でのみ有効です。
 
---- JIS
+#@if (version < "1.9.0")
+--- JIS -> Integer
+#@else
+--- JIS -> Encoding
+#@end
 
 ISO-2022-JP を表します。
 
---- EUC
+#@if (version < "1.9.0")
+--- EUC -> Integer
+#@else
+--- EUC -> Encoding
+#@end
 
 EUC-JP を表します。
 
---- SJIS
+#@if (version < "1.9.0")
+--- SJIS -> Integer
+#@else
+--- SJIS -> Encoding
+#@end
 
 Shift_JIS を表します。
 cp932ではないことに注意してください。
 
---- BINARY
+#@if (version < "1.9.0")
+--- BINARY -> Integer
+#@else
+--- BINARY -> Encoding
+#@end
 
 #@if (version < "1.8.2")
 JIS EUC SJIS 以外を表します。
@@ -346,65 +367,91 @@ JIS EUC SJIS UTF8 UTF16 以外を表します。
 #@end
 この値は[[m:Kconv.#guess]]の返り値としてのみ用いられます。
 
---- UNKNOWN
+#@if (version < "1.9.0")
+--- UNKNOWN -> Integer
+#@else
+--- UNKNOWN -> nil
+#@end
 
 出力においては「エンコーディングを判定できなかった」
 入力においては AUTO と同様に「自動検出」を表します。
 
---- NOCONV
+#@if (version < "1.9.0")
+--- NOCONV -> Integer
+#@else
+--- NOCONV -> nil
+#@end
 
 変換されないことを表します。
 出力エンコーディングの指定にのみ用います。
 
 #@if (version >= "1.8.2")
---- ASCII
+#@if (version < "1.9.0")
+--- ASCII -> Integer
+#@else
+--- ASCII -> Encoding
+#@end
+
 ASCII を表します。
 #@end
 
 #@if (version >= "1.8.2")
---- UTF8
+#@if (version < "1.9.0")
+--- UTF8 -> Integer
+#@else
+--- UTF8 -> Encoding
+#@end
+
 UTF8 を表します。
 #@end
 
 #@if (version >= "1.8.2")
---- UTF16
+#@if (version < "1.9.0")
+--- UTF16 -> Integer
+#@else
+--- UTF16 -> Encoding
+#@end
+
 UTF16 を表します。
 #@end
 
 #@if (version >= "1.8.2")
---- UTF32
+#@if (version < "1.9.0")
+--- UTF32 -> Integer
+#@else
+--- UTF32 -> Encoding
+#@end
+
 UTF32 を表します。
 #@end
 
 #@if (version >= "1.8.2")
---- RegexpShiftjis
+#@if (version < "1.9.0")
+--- RegexpShiftjis -> Regexp
+この定数は使うべきではありません。
+
+--- RegexpEucjp -> Regexp
+この定数は使うべきではありません。
+
+--- RegexpUtf8 -> Regexp
 この定数は使うべきではありません。
 #@end
-
-#@if (version >= "1.8.2")
---- RegexpEucjp
-この定数は使うべきではありません。
-#@end
-
-#@if (version >= "1.8.2")
---- RegexpUtf8
-この定数は使うべきではありません。
 #@end
 
 #@since 1.8.5
 #@if (version < "1.9.0")
---- REVISION
+--- REVISION -> String
 この定数は使うべきではありません。
 #@end
 #@end
 
 #@if (version >= "1.8.2")
 #@if (version <= "1.8.4")
---- Iconv_EUC_JP
+--- Iconv_EUC_JP -> Regexp
 この定数は使うべきではありません。
---- Iconv_Shift_JIS
+--- Iconv_Shift_JIS -> Regexp
 この定数は使うべきではありません。
---- Iconv_UTF8
+--- Iconv_UTF8 -> Regexp
 この定数は使うべきではありません。
 #@end
 #@end
