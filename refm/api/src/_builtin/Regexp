@@ -250,7 +250,7 @@ true を返します。
 
 @param string 文字列を指定します。
 
-@raise TypeError string がnil でも [[c:String]] オブジェクトでもなけい
+@raise TypeError string がnil でも [[c:String]] オブジェクトでもない
                  場合発生します。
 
   p /foo/ =~ "foo"        #=> 0
