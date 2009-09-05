@@ -137,13 +137,14 @@ BigDecimalの実行結果を制御します。
 
 計算結果が非数(NaN)やゼロによる除算になったときの処理を定義することができます。
 
-    f = BigDecimal::mode(BigDecimal::EXCEPTION_NaN,flag)
-    f = BigDecimal::mode(BigDecimal::EXCEPTION_INFINITY,flag)
-    f = BigDecimal::mode(BigDecimal::EXCEPTION_UNDERFLOW,flag)
-    f = BigDecimal::mode(BigDecimal::EXCEPTION_OVERFLOW,flag)
-    f = BigDecimal::mode(BigDecimal::EXCEPTION_ZERODIVIDE,flag)
-    f = BigDecimal::mode(BigDecimal::EXCEPTION_ALL,flag)
-
+//emlist{
+f = BigDecimal::mode(BigDecimal::EXCEPTION_NaN,flag)
+f = BigDecimal::mode(BigDecimal::EXCEPTION_INFINITY,flag)
+f = BigDecimal::mode(BigDecimal::EXCEPTION_UNDERFLOW,flag)
+f = BigDecimal::mode(BigDecimal::EXCEPTION_OVERFLOW,flag)
+f = BigDecimal::mode(BigDecimal::EXCEPTION_ZERODIVIDE,flag)
+f = BigDecimal::mode(BigDecimal::EXCEPTION_ALL,flag)
+//}
 
   * [[m:BigDecimal::EXCEPTION_NaN]] は結果が NaN になったときの指定です。
   * [[m:BigDecimal::EXCEPTION_INFINITY]] は結果が無限大(±Infinity)になったときの指定です。
