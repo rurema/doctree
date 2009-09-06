@@ -702,7 +702,7 @@ DNS リソースの HINFO レコード
 Resolv::DNS::Resource::HINFO のインスタンスを生成します。
 
 @param cpu CPU 名
-@aaram os OS 名
+@param os OS 名
 
 #@# --- decode_rdata(msg) -> Resolv::DNS::Resource::HINFO
 #@# このメソッドはユーザが使うべきではありません。
