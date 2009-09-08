@@ -206,8 +206,8 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 @param v 加算をするベクトル
 
-@raise ExceptionForMatrix::ErrDimensionMismatch
-       自分自身と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 --- -(v) -> Vector
 
@@ -217,8 +217,8 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 @param v 減算するベクトル
 
-@raise ExceptionForMatrix::ErrDimensionMismatch
-       自分自身と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 --- inner_product(v) -> Float
 
@@ -226,8 +226,8 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 @param v 内積を求めるベクトル
 
-@raise ExceptionForMatrix::ErrDimensionMismatch
-       自分自身と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 --- r -> Float
 
@@ -263,8 +263,8 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 @param v ブロック内で評価される(ベクトル or 配列)
 
-@raise ExceptionForMatrix::ErrDimensionMismatch
-       自分自身と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 次の例は、２つのベクトルの要素毎の積を要素とする配列を生成します。
 
@@ -290,8 +290,8 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 @param v ブロック内で評価される(ベクトル or 配列)
 
-@raise ExceptionForMatrix::ErrDimensionMismatch
-       自分自身と引数のベクトルの要素の数(次元)が異なっていたときに発生します。
+@raise ExceptionForMatrix::ErrDimensionMismatch 自分自身と引数のベクト
+       ルの要素の数(次元)が異なっていたときに発生します。
 
 次の例は、２つのベクトルの要素毎の積を要素として持つベクトルを生成します。
 
