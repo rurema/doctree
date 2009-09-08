@@ -32,7 +32,7 @@ issuer の証明書を設定します。
 #@end
 --- subject_certificate=(name)
 #@todo
-    subject の証明書を設定します。
+subject の証明書を設定します。
 
 #@since 1.8.1
 --- subject_request
