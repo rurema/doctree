@@ -233,7 +233,7 @@ Proxy 経由で http サーバに接続するためのクラスを作成し返します。
 同じように使えます。指定されたプロクシを常に経由して http サーバ
 に接続します。
 
-  address が nil のときは Net::HTTP クラスをそのまま返します。
+address が nil のときは Net::HTTP クラスをそのまま返します。
 
   require 'net/http'
   proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
