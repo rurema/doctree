@@ -73,7 +73,7 @@ Gem が依存している Gem の情報を集めて返します。
 : :cache_dir
   *.gem ファイルを保存するディレクトリを指定します。
 : :domain
-　:local (カレントディレクトリのみ検索します), :remote ([[m:Gem.sources]] を検索します),
+  :local (カレントディレクトリのみ検索します), :remote ([[m:Gem.sources]] を検索します),
   :both (:local, :remote の両方を検索します) のいずれかを指定可能です。
 : :env_shebang
   [[m:Gem::Installer.new]] を参照してください。
