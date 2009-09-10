@@ -23,6 +23,7 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
 
 == Methods
 
+#@if (version <= "1.8.6")
 --- each_char -> [String]
 --- each_char {|char| ... } -> String
 文字列中の各文字に対してブロックを呼びだします。
@@ -40,6 +41,7 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
   zstr.each_char do |x|
     print "+#{x}+"
   end                     # => +Ａ++Ｂ++Ｃ++Ｄ++Ｅ++Ｆ+
+#@end
 
 #@# --- end_regexp
 #@# 
@@ -136,6 +138,26 @@ self に多バイト文字が最初に現れる位置を返します。
 = redefine String
 
 == Methods
+
+#@since 1.8.7
+--- each_char -> [String]
+--- each_char {|char| ... } -> String
+文字列中の各文字に対してブロックを呼びだします。
+ブロックを指定せずに呼び出された時には、各文字の配列を返します。
+
+例：
+
+  #!/usr/bin/env ruby
+
+  $KCODE = 'EUC'
+
+  require 'jcode'
+
+  zstr = 'ＡＢＣＤＥＦ'
+  zstr.each_char do |x|
+    print "+#{x}+"
+  end                     # => +Ａ++Ｂ++Ｃ++Ｄ++Ｅ++Ｆ+
+#@end
 
 --- chop -> String
 --- chop! -> String|nil
