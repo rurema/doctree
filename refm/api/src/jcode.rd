@@ -4,10 +4,11 @@
 対象の文字列のエンコーディングが [[m:$KCODE]] で
 指定されたものとして処理します。
 
-[[m:String#chop]]、[[m:String#delete]] といった
+[[m:String#chop]]、[[m:String#delete]] といった既存の
 メソッドを置き換えるため、別のライブラリの
 動作が変化してしまう可能性があります。
-
+そのためこのライブラリは利用しているライブラリが把握可能な
+場合のみ使うべきです。
 
 === 使用例 
 
@@ -47,7 +48,13 @@ $KCODE はこのスクリプト自体の文字コードあわせて設定します。
 --- jcount(str) -> Integer
 [[m:String#count]] の日本語対応版です。
 
-self に文字列 str がいくつ含まれているかを数えます
+self に文字列 str で指定した文字がいくつ含まれているかを数えます
+
+ただし [[m:String#count]] とは異なり利用できるパターンは
+"Ａ-Ｄ" のような「^」(否定)を含まないパターンのみであり、
+また複数のパターンを取ることはできません。
+
+@param str 出現回数を数える文字のパターン 
 
 例：
 
@@ -58,13 +65,15 @@ self に文字列 str がいくつ含まれているかを数えます
   hogehoge = 'hogehoge'
 
   p zstr.count('Ａ')     # => 7   これは正しくない
+  p zstr.jcount('ＡＢ')  # => 8 
   p hogehoge.count('g')  # => 2
 
   require 'jcode'
   p zstr.jcount('Ａ')    # => 1   これは正しい
   p hogehoge.jcount('g') # => 2
 
-@param str 数える文字列です。
+  p zstr.jcount('ＡＢ')  # => 2 
+
 
 --- jlength -> Integer
 --- jsize -> Integer
@@ -88,8 +97,7 @@ self に文字列 str がいくつ含まれているかを数えます
   p zstr.jsize      # => 6    これは正しい
   p hogehoge.jsize  # => 8
 
---- mbchar?
-#@todo
+--- mbchar? -> Integer|nil
 
 self に多バイト文字が最初に現れる位置を返します。
 多バイト文字が含まれていなければ nil を返します。
@@ -106,14 +114,22 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.mbchar?   # => 0
   p hoge.mbchar?   # => nil
   
+#@# == Constant
+#@# 以下の定数は内部的に用いられ、ユーザが使うべきでない。
+#@# --- PATTERN_SJIS
+#@# --- PATTERN_EUC
+#@# --- PATTERN_UTF8
+#@# --- RE_SJIS
+#@# --- RE_EUC
+#@# --- RE_UTF8
+#@# --- SUCC
 
 = redefine String
 
 == Methods
 
---- chop
---- chop!
-#@todo
+--- chop -> String
+--- chop! -> String|nil
 
 [[m:String#chop]] の日本語対応版です。
 
@@ -132,11 +148,15 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.chop       # => "ＡＢＣＤＥ"
   p hoge.chop       # => "hogehog"
 
---- delete(str)
---- delete!(str)
-#@todo
+--- delete(str) -> String
+--- delete!(str) -> String|nil
 
 [[m:String#delete]] の日本語対応版です。
+
+ただしこのメソッドは置き換え前の物とは異なり
+複数の引数を取れません。
+
+@param str 取り除く文字のパターン。
 
 例：
 
@@ -153,11 +173,15 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.delete("Ａ")  # => "ＢＣＤＥＦ"
   p hoge.delete("e")   # => "hoghog"
     
---- squeeze([str])
---- squeeze!([str])
-#@todo
+--- squeeze([str]) -> String
+--- squeeze!([str]) -> String|nil
 
 [[m:String#squeeze]] の日本語対応版です。
+
+ただしこのメソッドは置き換え前の物とは異なり、
+2つ以上の引数を取ることはできません。
+
+@param str 1文字にまとめる文字のパターン。
 
 例：
 
@@ -174,9 +198,8 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.squeeze   # => "ＡＢＣ"
   p hoge.squeeze   # => "hoge"
     
---- succ
---- succ!
-#@todo
+--- succ -> String
+--- succ! -> String|nil
 
 [[m:String#succ]] の日本語対応版です。
 
@@ -190,20 +213,22 @@ self に多バイト文字が最初に現れる位置を返します。
 多バイト文字と半角文字が混在している文字列を
 意図通りに処理することができません。
 例えば上記のコードは、それぞれ
-"あbあ"、"sｂ"、"_紘玉" を返します。
+"あbあ"、"sｂ"、"_紘玉"(最後のは SJIS 環境の場合の例で、
+EUC-JP の場合はこうはなりません)を返します。
 
 なお、"99" の次は "100" になるのに対し、
 "９９" の次は "１００" にはならないことに注意。
-"Ａｚ" や "ｚｚ" も同様です。
+"Ａｚ" や "ｚｚ" も同様です。つまり多バイト文字では
+従来の [[m:String#succ]] のようなアルファベットや数字に
+関する繰り上げを行わないということです。
 #@# CozoH: このあたり、もっと正確で分かりやすい説明が欲しいです。私自身、よく分かっていないので。
 
---- tr(search, replace)
---- tr!(search, replace)
-#@todo
+--- tr(search, replace) -> String
+--- tr!(search, replace) -> String|nil
 
 [[m:String#tr]] の日本語対応版です。
 
-例：
+例:
 
   #!/usr/bin/env ruby
 
@@ -218,12 +243,20 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.tr('Ａ-Ｚ','A-Z')    # => "AABBCC"
   p hoge.tr('a-z','Ａ-Ｚ')    # => "ＨＨＯＧＥ"
 
---- tr_s(search, replace)
---- tr_s!(search, replace)
-#@todo
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
+@see [[m:String#tr_s]]
+
+--- tr_s(search, replace) -> String
+--- tr_s!(search, replace) -> String|nil
 
 [[m:String#tr_s]] の日本語対応版です。
 
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
+@see [[m:String#tr]]
+
+例:
   $KCODE = 'EUC'
 
   p "foo".tr_s("o", "f")        # => "ff"
@@ -232,4 +265,5 @@ self に多バイト文字が最初に現れる位置を返します。
   require 'jcode'
   p "foo".tr_s("o", "f")        # => "ff"
   p "ｆｏｏ".tr_s("ｏ", "ｆ")   # => "ｆｆ"
+
 #@end
