@@ -55,51 +55,85 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
 == Public Instance Methods
 
 --- json_creatable? -> bool
-#@todo
+
+シリアライズされた JSON 形式の文字列から、インスタンスを作成するのにこのクラスを使用できる場合は
+真を返します。そうでない場合は、偽を返します。
+
+このメソッドが真を返すクラスは json_create というメソッドを実装していなければなりません。
+また json_create の第一引数は必要なデータを含むハッシュを期待しています。
 
 = reopen Array
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json(state = nil, depth = 0) -> String
+
+自身から生成した JSON 形式の文字列を返します。
+
+@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
+
+@param depth ネストの深さを見つけるために使用されます。
 
 = reopen FalseClass
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身から生成した JSON 形式の文字列を返します。
+
+"false" という文字列を返します。
 
 = reopen Float
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身から生成した JSON 形式の文字列を返します。
 
 = reopen Hash
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json(state = nil, depth = 0) -> String
+
+自身から生成した JSON 形式の文字列を返します。
+
+@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
+
+@param depth ネストの深さを見つけるために使用されます。
 
 = reopen Integer
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身から生成した JSON 形式の文字列を返します。
 
 = reopen NilClass
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身から生成した JSON 形式の文字列を返します。
+
+"null" という文字列を返します。
 
 = reopen Object
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身を to_s で文字列にした結果を JSON 形式の文字列に変換して返します。
+
+このメソッドはあるオブジェクトに to_json メソッドが定義されていない場合に使用する
+フォールバックのためのメソッドです。
 
 = reopen String
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身から生成した JSON 形式の文字列を返します。
+
+自身のエンコードは UTF-8 であるべきです。
+"\u????" のように UTF-16 ビッグエンディアンでエンコードされた文字列を返すことがあります。
 
 = reopen TrueClass
 == Public Instance Methods
---- to_json
-#@todo
+--- to_json -> String
+
+自身から生成した JSON 形式の文字列を返します。
+
+"true" という文字列を返します。
 
 #@end
