@@ -216,7 +216,7 @@ rdoc
 readbytes
 readline                        kouji           done
 resolv                          ohai            done
-resolv-replace
+resolv-replace                  ohai
 rexml/attlistdecl
 rexml/attribute
 rexml/cdata
