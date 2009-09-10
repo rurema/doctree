@@ -10,7 +10,7 @@ require rubygems/remote_fetcher
 
 == Public Instance Methods
 
---- refresh(source_uri, all) -> [[c:Gem::SourceIndex]]
+--- refresh(source_uri, all) -> Gem::SourceIndex
 #@todo
 
 ソースインデックスを更新します。
@@ -26,7 +26,7 @@ require rubygems/remote_fetcher
 
 ソースインデックスが変化したことを検出するために使用します。
 
---- source_index -> [[c:Gem::SourceIndex]]
+--- source_index -> Gem::SourceIndex
 #@todo
 
 このキャッシュエントリに対するソースインデックスです。

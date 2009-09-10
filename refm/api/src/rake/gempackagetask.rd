@@ -50,7 +50,7 @@ Gem Spec ファイルを元にして Gem パッケージを作成するタスクを定義するためのクラス
 
 Gem パッケージの名前を返します。
 
---- gem_spec -> [[c:Gem::Specification]]
+--- gem_spec -> Gem::Specification
 #@todo
 
 package ターゲットで使用する gemspec を返します。
