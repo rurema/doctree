@@ -113,7 +113,7 @@ self が min と max の範囲内(min, max
 
 #@since 1.8.0
 @raise ArgumentError self <=> min か、self <=> max が nil を返
-したときに発生します。
+                     したときに発生します。
 #@end
 
   3.between?(1, 5)               #=> true
