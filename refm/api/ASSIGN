@@ -164,7 +164,7 @@ io/nonblock
 io/wait
 ipaddr                          okkez           done
 irb                             snoozer05
-jcode                           ohai
+jcode                           ohai            done
 json                            okkez
 kconv                           ohai            done
 logger                          okkez           done
@@ -187,7 +187,7 @@ net/pop
 net/smtp
 net/telnet
 net/telnets
-nkf                             ohai
+nkf                             ohai            done
 observer                        snoozer05       done
 open-uri                                        done
 open3                           sho-h
@@ -216,7 +216,7 @@ rdoc
 readbytes
 readline                        kouji           done
 resolv                          ohai            done
-resolv-replace                  ohai
+resolv-replace                  ohai            done
 rexml/attlistdecl
 rexml/attribute
 rexml/cdata
