@@ -2,7 +2,7 @@ nkf を Ruby から使うためのライブラリです。
 
 = module NKF
 
-nkf(Network Kanji code conversion Filter, [[url:http://www.ie.u-ryukyu.ac.jp/~kono/nkf/]]) を
+nkf(Network Kanji code conversion Filter, [[url:http://sourceforge.jp/projects/nkf/]]) を
 Ruby から使うためのモジュールです。
 
 #@since 1.8.2
@@ -25,8 +25,6 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
   end
 
 以下は、漢字コード判別コマンドの例です。
-(Ruby 1.8.2 以降の NKF.guess では、
-以下の5種類以外の値になる可能性があります [[trap:NKF]])
 
   #!/usr/local/bin/ruby
   
@@ -36,8 +34,10 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
     NKF::JIS      => "JIS",
     NKF::EUC      => "EUC",
     NKF::SJIS     => "SJIS",
+    NKF::UTF8     => "UTF8",
     NKF::BINARY   => "BINARY",
-    NKF::UNKNOWN  => "UNKNOWN(ASCII)",
+    NKF::ASCII    => "ASCII",
+    NKF::UNKNOWN  => "UNKNOWN",
   }
   
   while file = ARGV.shift
@@ -47,7 +47,7 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
     if str.nil?
       puts "EMPTY"
     else
-      puts CODES.fetch NKF.guess(str)
+      puts CODES.fetch(NKF.guess(str))
     end
   end
 
@@ -163,87 +163,170 @@ Ruby 1.8.3 以降にバージョンアップするか、
 
 == Module Functions
 
---- nkf(opt, str)
-#@todo
+--- nkf(opt, str) -> String
 
 文字列 str の文字コードを変換し、変換結果の文字列を返します。
 
-opt には、nkf と同じコマンドラインオプションを指定します([[unknown:後述|nkf/オプション文字列]])。
-複数指定する場合は、NKF.nkf('-Se', str) や
+opt には、nkf と同じコマンドラインオプションを指定します。
+オプション文字列は [[c:NKF]] のオプション文字列の項を
+見てください。
+#@# ここは「オプション文字列」に直接リンクしたいが
+#@# おそらく方法がないので上のように書いておく。
+オプションを複数指定する場合は、NKF.nkf('-Se', str) や
 NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 で始めなければいけないことに注意してください。
 
-: 注意
+@param opt オプション文字列です。
+@param str 変換対象の文字列です。
+
+=== 注意
 このメソッドは(nkf コマンドがそうであるように)、MIME Base64 の
 デコード処理がデフォルトでオンになっています。この動作を無効にしたけ
 れば opt に '-m0' を含めるようにしてください。
 
---- guess(str)
-#@todo
+#@until 1.9.0
+--- guess(str) -> Integer
+#@else
+--- guess(str) -> Encoding
+#@end
 
 文字列 str の漢字コードを判別して返します。
-返される値は、NKF モジュールのモジュール定数です(下記参照)。
+
+返される値は、NKF モジュールのモジュール定数です。
+#@until 1.9.0
 ruby 1.8.2 より前は現在の NKF.guess1 と同じものです。
 ruby 1.8.2 以降では NKF.guess2 と同じものです。
+#@end
 
+@param str 推測対象の文字列です。
+
+#@until 1.9.0
 #@since 1.8.2
---- guess1(str)
-#@todo
+--- guess1(str) -> Integer
 
 ruby 1.8.1 以前の NKF.guess と同じものです。
+
+@param str 推測対象の文字列です。
 #@end
 
 #@since 1.8.2
---- guess2(str)
-#@todo
+--- guess2(str) -> Integer
 
 nkf2の漢字コード自動判定ルーチンを利用したものです。
+
+@param str 推測対象の文字列です。
+#@end
 #@end
 
 == Constants
 
---- JIS
-#@todo
-
+#@until 1.9.0
+--- JIS -> Integer
+#@else
+--- JIS -> Encoding
+#@end
 JIS コードを表します。
 
---- EUC
-#@todo
+#@until 1.9.0
+--- EUC -> Integer
+#@else
+--- EUC -> Encoding
+#@end
 
 EUC コードを表します。
 
---- SJIS
-#@todo
+#@until 1.9.0
+--- SJIS -> Integer
+#@else
+--- SJIS -> Encoding
+#@end
 
 SJIS コードを表します。
 
---- BINARY
-#@todo
+#@until 1.9.0
+--- BINARY -> Integer
+#@else
+--- BINARY -> Encoding
+#@end
 
 入力が binary であることを表します。
 
---- UNKNOWN
-#@todo
+#@until 1.9.0
+--- UNKNOWN -> Integer
+#@else
+--- UNKNOWN -> nil
+#@end
 
 コード判定に失敗したことを表します。
 
 #@since 1.8.2
---- ASCII
-#@todo
+#@until 1.9.0
+--- NOCONV -> Integer
+#@else
+--- NOCONV -> nil
+#@end
+コードを変換しないことを表します。
+
+NKFモジュール自体からは利用しません。
+
+#@end
+
+#@since 1.8.2
+#@until 1.9.0
+--- AUTO -> Integer
+#@else
+--- AUTO -> nil
+#@end
+コードを自動判別することを表します。
+
+NKFモジュール自体からは利用しません。
+
+#@end
+
+#@since 1.8.2
+#@until 1.9.0
+--- ASCII -> Integer
+#@else
+--- ASCII -> Encoding
+#@end
 
 ASCII コードを表します。
 #@end
 
 #@since 1.8.2
---- UTF8
-#@todo
+#@until 1.9.0
+--- UTF8 -> Integer
+#@else
+--- UTF8 -> Encoding
+#@end
 
 UTF-8 コードを表します。
 #@end
 
 #@since 1.8.2
---- UTF16
-#@todo
+#@until 1.9.0
+--- UTF16 -> Integer
+#@else
+--- UTF16 -> Encoding
+#@end
 
 UTF-16 コードを表します。
+#@end
+
+#@since 1.8.2
+--- VERSION -> String
+"#{NKF::NKF_VERSION} (#{NKF_RELEASE_DATE})" と
+あらわされる文字列です。
+
+--- NKF_VERSION -> String
+nkf 自体のバージョンを表す文字列です。
+
+--- NKF_RELEASE_DATE -> String
+nkf のリリース日を表す文字列です。
+
+#@if (version <= "1.8.4")
+--- REVISION -> String
+この定数は使うべきではありません。
+
+#@end
 #@end
