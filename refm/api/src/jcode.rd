@@ -7,8 +7,9 @@
 [[m:String#chop]]、[[m:String#delete]] といった既存の
 メソッドを置き換えるため、別のライブラリの
 動作が変化してしまう可能性があります。
-そのためこのライブラリは利用しているライブラリが把握可能な
-場合のみ使うべきです。
+そのためこのライブラリを使ってよいのは
+利用しているライブラリを含め
+動作しているソースすべてが把握可能な場合のみです。
 
 === 使用例 
 
@@ -113,9 +114,9 @@ self に多バイト文字が最初に現れる位置を返します。
   require 'jcode'
   p zstr.mbchar?   # => 0
   p hoge.mbchar?   # => nil
-  
+
+#@# 以下の定数、メソッドは内部的に用いられ、ユーザが使うべきでない。  
 #@# == Constant
-#@# 以下の定数は内部的に用いられ、ユーザが使うべきでない。
 #@# --- PATTERN_SJIS
 #@# --- PATTERN_EUC
 #@# --- PATTERN_UTF8
@@ -123,6 +124,14 @@ self に多バイト文字が最初に現れる位置を返します。
 #@# --- RE_EUC
 #@# --- RE_UTF8
 #@# --- SUCC
+#@# --- HashCache 
+#@# --- TrPatternCache
+#@# --- DeletePatternCache
+#@# --- SqueezePatternCache
+#@# == Private Instance Methods
+#@# --- _regex_quote(str) 
+#@# --- _expand_ch(str)
+#@# --- _expand_ch_hash(from, to)
 
 = redefine String
 
