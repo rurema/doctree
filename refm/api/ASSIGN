@@ -164,7 +164,7 @@ io/nonblock
 io/wait
 ipaddr                          okkez           done
 irb                             snoozer05
-jcode
+jcode                           ohai
 json                            okkez
 kconv                           ohai            done
 logger                          okkez           done
