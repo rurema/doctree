@@ -4,16 +4,14 @@ JSON (JavaScript Object Notation)を扱うライブラリです。
 
 JSON の仕様は [[rfc:4627]] を参照してください。
 
+#@until 1.9.2
 拡張ライブラリによる実装と Ruby による実装があり、拡張ライブラリによる実装が使用できるときは
 拡張ライブラリによる実装を使用します。
 Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
-
+#@end
 
 #@include(json/JSON)
-#@include(json/JSON__Ext__Generator__GeneratorMethods)
-#@until 1.9.2
-#@include(json/JSON__Pure__Generator__GeneratorMethods)
-#@end
+#@include(json/JSON__Generator__GeneratorMethods)
 #@include(json/JSON__Parser)
 #@include(json/JSON__State)
 
@@ -63,77 +61,31 @@ Ruby による実装は [[lib:iconv]] と [[lib:strscan]] に依存しています。
 また json_create の第一引数は必要なデータを含むハッシュを期待しています。
 
 = reopen Array
-== Public Instance Methods
---- to_json(state = nil, depth = 0) -> String
-
-自身から生成した JSON 形式の文字列を返します。
-
-@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
-
-@param depth ネストの深さを見つけるために使用されます。
+include JSON::Generator::GeneratorMethods::Array
 
 = reopen FalseClass
-== Public Instance Methods
---- to_json -> String
-
-自身から生成した JSON 形式の文字列を返します。
-
-"false" という文字列を返します。
+include JSON::Generator::GeneratorMethods::FalseClass
 
 = reopen Float
-== Public Instance Methods
---- to_json -> String
-
-自身から生成した JSON 形式の文字列を返します。
+include JSON::Generator::GeneratorMethods::Float
 
 = reopen Hash
-== Public Instance Methods
---- to_json(state = nil, depth = 0) -> String
-
-自身から生成した JSON 形式の文字列を返します。
-
-@param state 生成する JSON 形式の文字列をカスタマイズするために [[c:JSON::State]] のインスタンスを指定します。
-
-@param depth ネストの深さを見つけるために使用されます。
+include JSON::Generator::GeneratorMethods::Hash
 
 = reopen Integer
-== Public Instance Methods
---- to_json -> String
-
-自身から生成した JSON 形式の文字列を返します。
+include JSON::Generator::GeneratorMethods::Integer
 
 = reopen NilClass
-== Public Instance Methods
---- to_json -> String
-
-自身から生成した JSON 形式の文字列を返します。
-
-"null" という文字列を返します。
+include JSON::Generator::GeneratorMethods::NilClass
 
 = reopen Object
-== Public Instance Methods
---- to_json -> String
-
-自身を to_s で文字列にした結果を JSON 形式の文字列に変換して返します。
-
-このメソッドはあるオブジェクトに to_json メソッドが定義されていない場合に使用する
-フォールバックのためのメソッドです。
+include JSON::Generator::GeneratorMethods::Object
 
 = reopen String
-== Public Instance Methods
---- to_json -> String
-
-自身から生成した JSON 形式の文字列を返します。
-
-自身のエンコードは UTF-8 であるべきです。
-"\u????" のように UTF-16 ビッグエンディアンでエンコードされた文字列を返すことがあります。
+extend JSON::Generator::GeneratorMethods::String::Extend
+include JSON::Generator::GeneratorMethods::String
 
 = reopen TrueClass
-== Public Instance Methods
---- to_json -> String
-
-自身から生成した JSON 形式の文字列を返します。
-
-"true" という文字列を返します。
+include JSON::Generator::GeneratorMethods::TrueClass
 
 #@end
