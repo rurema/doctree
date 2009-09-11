@@ -1,9 +1,9 @@
 = class String < Object
 
-include Comparable
 #@until 1.9.1
 include Enumerable
 #@end
+include Comparable
 
 文字列のクラスです。
 NUL 文字を含む任意のバイト列を扱うことができます。
