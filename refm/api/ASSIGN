@@ -180,7 +180,7 @@ monitor
 mutex_m
 net/ftp
 net/ftptls
-net/http
+net/http                        ohai
 net/https
 net/imap
 net/pop
