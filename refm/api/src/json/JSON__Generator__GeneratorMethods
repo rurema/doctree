@@ -5,7 +5,7 @@ alias JSON::Ext::Generator::GeneratorMethods::Array
 alias JSON::Pure::Generator::GeneratorMethods::Array
 #@end
 
-[[c:Array]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:Array]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json(state = nil, depth = 0) -> String
@@ -22,7 +22,7 @@ alias JSON::Ext::Generator::GeneratorMethods::FalseClass
 alias JSON::Pure::Generator::GeneratorMethods::FalseClass
 #@end
 
-[[c:FalseClass]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:FalseClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
@@ -37,7 +37,7 @@ alias JSON::Ext::Generator::GeneratorMethods::Float
 alias JSON::Pure::Generator::GeneratorMethods::Float
 #@end
 
-[[c:Float]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:Float]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
@@ -50,7 +50,7 @@ alias JSON::Ext::Generator::GeneratorMethods::Hash
 alias JSON::Pure::Generator::GeneratorMethods::Hash
 #@end
 
-[[c:Hash]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:Hash]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json(state = nil, depth = 0) -> String
@@ -67,7 +67,7 @@ alias JSON::Ext::Generator::GeneratorMethods::Integer
 alias JSON::Pure::Generator::GeneratorMethods::Integer
 #@end
 
-[[c:Integer]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:Integer]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
@@ -80,7 +80,7 @@ alias JSON::Ext::Generator::GeneratorMethods::NilClass
 alias JSON::Pure::Generator::GeneratorMethods::NilClass
 #@end
 
-[[c:NilClass]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:NilClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
@@ -95,7 +95,7 @@ alias JSON::Ext::Generator::GeneratorMethods::Object
 alias JSON::Pure::Generator::GeneratorMethods::Object
 #@end
 
-[[c:Object]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:Object]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
@@ -111,7 +111,7 @@ alias JSON::Ext::Generator::GeneratorMethods::String
 alias JSON::Pure::Generator::GeneratorMethods::String
 #@end
 
-[[c:String]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:String]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
@@ -144,9 +144,16 @@ alias JSON::Ext::Generator::GeneratorMethods::String::Extend
 alias JSON::Pure::Generator::GeneratorMethods::String::Extend
 #@end
 
+[[c:String]] に JSON で使用する特異メソッドを追加するためのモジュールです。
+
 == Class Methods
---- json_create
-#@todo
+--- json_create(hash) -> String
+
+JSON のオブジェクトから Ruby の文字列を生成して返します。
+
+@param hash キーとして "raw" という文字列を持ち、その値として数値の配列を持つハッシュを指定します。
+
+  String.json_create({"raw" => [0x41, 0x42, 0x43]}) # => "ABC"
 
 = module JSON::Generator::GeneratorMethods::TrueClass
 alias JSON::Ext::Generator::GeneratorMethods::TrueClass
@@ -154,7 +161,7 @@ alias JSON::Ext::Generator::GeneratorMethods::TrueClass
 alias JSON::Pure::Generator::GeneratorMethods::TrueClass
 #@end
 
-[[c:TrueClass]] に JSON で使用するメソッドを追加するためのモジュールです。
+[[c:TrueClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
 == Public Instance Methods
 --- to_json -> String
