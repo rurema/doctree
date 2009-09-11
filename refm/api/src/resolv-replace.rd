@@ -1,6 +1,3 @@
-#@if (version >= "1.6.0")
-require resolv
-
 名前解決に resolv を使用するためのライブラリです。
 
 = redefine IPSocket
@@ -18,8 +15,8 @@ require resolv
 
 == Class Methods
 
---- open(host, serv, [, local_host, local_service]) -> TCPSocket
---- new(host, serv, [, local_host, local_service]) -> TCPSocket
+--- open(host, serv, local_host=nil, local_service=nil) -> TCPSocket
+--- new(host, serv, local_host=nil, local_service=nil) -> TCPSocket
 [[m:TCPSocket.new]] のパラメータ host と local_host 
 の名前解決に [[lib:resolv]] ライブラリを使います。
 
@@ -49,7 +46,7 @@ require resolv
 @param port connect するポートを指定します。
 @raise SocketError 名前解決に失敗した場合に発生します。
 
---- send(mesg, flags[, dest_sockaddr]) -> Integer
+--- send(mesg, flags , dest_sockaddr=nil) -> Integer
 --- send(mesg, flags, host, port) -> Integer
 4 引数の形式で [[m:UDPSocket#send]] 実行したとき、
 パラメータ host の名前解決に
@@ -73,4 +70,4 @@ require resolv
 @param serv ホスト名を文字列で指定します。
 @raise SocketError 名前解決に失敗した場合に発生します。
 
-#@end
+
