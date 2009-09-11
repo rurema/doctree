@@ -128,7 +128,6 @@ alias JSON::Pure::Generator::GeneratorMethods::String
 @see [[m:String#to_json_raw_object]], [[m:Hash#to_json]]
 
 --- to_json_raw_object -> Hash
-#@todo
 
 生の文字列を格納したハッシュを生成します。
 

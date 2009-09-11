@@ -16,10 +16,14 @@ JSON (JavaScript Object Notation) を扱うためのモジュールです。
 @see [[m:JSON.#parse]], [[m:JSON.#generate]]
 
 --- create_id -> String
-#@todo
+
+json_create メソッドで使用するクラスを決定するために使用する値を返します。
+
+デフォルトは "json_class" です。
 
 --- create_id=(identifier)
-#@todo
+
+json_create メソッドで使用するクラスを決定するために使用する値をセットします。
 
 @param identifier 識別子を指定します。
 
