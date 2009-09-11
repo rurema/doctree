@@ -2,11 +2,40 @@
 alias JSON::Ext::Parser
 alias JSON::Pure::Parser
 
+== Singleton Methods
+
+--- new(source, options => {})
+
+パーサを初期化します。
+
+第二引数のハッシュには以下のキーを指定することができます。
+
+: :max_nesting
+  データ構造のネストの深さの最大値を指定します。デフォルトは 19 です。
+  チェックを無効にするにはゼロまたは偽を指定してください。
+: :allow_nan
+  真を指定すると [[rfc:4627]] を無視して NaN, Infinity, -Infinity をパースエラーにしません。
+  デフォルトは偽です。
+: :create_additions
+  偽を指定するとマッチするクラスや ID があっても付加情報を生成しません。デフォルトは真です。
+: :object_class
+  JSON のオブジェクトを変換するクラスを指定します。デフォルトは [[c:Hash]] です。
+: :array_class
+  JSON の配列を変換するクラスを指定します。デフォルトは [[c:Array]] です。
+
+@param source パーサの元となる文字列を指定します。
+
+@param options オプションを指定するためのハッシュです。
+
 == Public Instance Methods
 
---- parse
-#@todo
+--- parse -> object
 
---- source
-#@todo
+現在のソースをパースして結果を Ruby のオブジェクトとして返します。
+
+@see [[m:JSON::Parser#source]]
+
+--- source -> String
+
+現在のソースのコピーを返します。
 
