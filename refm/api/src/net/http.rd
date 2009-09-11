@@ -5,148 +5,167 @@
 
 ==== ウェブサーバからドキュメントを得る (GET)
 
+例1: GET して 表示するだけ
   require 'net/http'
-  Net::HTTP.version_1_2   # おまじない
-  Net::HTTP.start('www.example.com', 80) {|http|
-    response = http.get('/index.html')
-    puts response.body
-  }
-
-また以下は同じ意味で短く書いたものです。
-
-  require 'net/http'
-  Net::HTTP.version_1_2   # おまじない
   Net::HTTP.get_print 'www.example.com', '/index.html'
 
-==== フォームの情報を送信する (POST)
+例2: [[c:URI]] を使う
+  require 'net/http'
+  require 'uri'
+  Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+
+例3: より汎用的な例
 
   require 'net/http'
-  Net::HTTP.version_1_2   # おまじない
-  Net::HTTP.start('www.example.com', 80) {|http|
-    response = http.post('/cgi-bin/somecgi.rb',
-                         'querytype=subject&target=ruby')
+  require 'uri'
+  
+  url = URI.parse('http://www.example.com/index.html')
+  res = Net::HTTP.start(url.host, url.port) {|http|
+    http.get('/index.html')
   }
+  puts res.body
 
-(参照: フォームの値の区切り文字について)
+例4: 上の例よりさらに汎用的な例
+  require 'net/http'
+  
+  url = URI.parse('http://www.example.com/index.html')
+  req = Net::HTTP::Get.new(url.path)
+  res = Net::HTTP.start(url.host, url.port) {|http|
+    http.request(req)
+  }
+  puts res.body
+
+==== フォームの情報を送信する (POST)
+  require 'net/http'
+  require 'uri'
+
+  #例1: POSTするだけ
+  res = Net::HTTP.post_form(URI.parse('http://www.example.com/search'),
+                            {'q'=>'ruby', 'max'=>'50'})
+  puts res.body
+  
+  #例2: 認証付きで POST する
+  res = Net::HTTP.post_form(URI.parse('http://jack:pass@www.example.com/todo.cgi'),
+                            {'from'=>'2005-01-01', 'to'=>'2005-03-31'})
+  puts res.body
+
+  #例3: より細かく制御する
+  url = URI.parse('http://www.example.com/todo.cgi')
+  req = Net::HTTP::Post.new(url.path)
+  req.basic_auth 'jack', 'pass'
+  req.set_form_data({'from'=>'2005-01-01', 'to'=>'2005-03-31'}, ';')
+  res = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
+  case res
+  when Net::HTTPSuccess, Net::HTTPRedirection
+    # OK
+  else
+    res.error!
+  end
 
 ==== プロクシ経由のアクセス
 
-Net::HTTP のクラスメソッド Net::HTTP.Proxy は、常にプロクシ経由で
-接続するような動作をする、新しいクラスを作成して返します。このクラスは
-Net::HTTP を継承しているので Net::HTTP と全く同じように使えます。
-
+[[m:Net::HTTP.Proxy]] はプロクシ経由での接続を行なうクラスを
+生成して返します。このクラスは [[c:Net::HTTP]] と同じ
+メソッドを持ち、同じように動作をします。ただし
+接続する際には常にプロクシ経由となります。
   require 'net/http'
-  Net::HTTP.version_1_2   # おまじない
   
-  $proxy_addr = 'your.proxy.addr'
-  $proxy_port = 8080
-        :
-  Net::HTTP::Proxy($proxy_addr, $proxy_port).start( 'some.www.server' ) {|http|
+  proxy_addr = 'your.proxy.host'
+  proxy_port = 8080
+          :
+  Net::HTTP::Proxy(proxy_addr, proxy_port).start('www.example.com') {|http|
     # always connect to your.proxy.addr:8080
-        :
+          :
   }
 
-また Net::HTTP.Proxy は第一引数が nil だと Net::HTTP 自身を返すので
+また [[m:Net::HTTP.Proxy]] は第一引数が nil だと 
+Net::HTTP 自身を返すので
 上のコードのように書いておけばプロクシなしの場合にも対応できます。
 
-==== リダイレクトに対応する
+[[m:Net::HTTP.Proxy]] にはユーザ名とパスワードを取る
+オプション引数があり、以下のようにして
+プロクシの認証をすることができます。
+  proxy_host = 'your.proxy.host'
+  proxy_port = 8080
+  uri = URI.parse(ENV['http_proxy'])
+  proxy_user, proxy_pass = uri.userinfo.split(/:/) if uri.userinfo
+  Net::HTTP::Proxy(proxy_host, proxy_port,
+                   proxy_user, proxy_pass).start('www.example.com') {|http|
+    # always connect to your.proxy.addr:8080 using specified username and password
+          :
+  }
+このライブラリは環境変数 HTTP_PROXY を一切考慮しないこと
+に注意してください。プロクシを使いたい場合は上の例のように
+明示的に取り扱わなければなりません。
 
-以下のメソッド fetch はリダイレクトに対応しています。
+==== リダイレクトに対応する
+以下の例の fetch はリダイレクトに対応しています。
 limit 回数以上リダイレクトしたらエラーにします。
 
-  require 'uri'
   require 'net/http'
-  Net::HTTP.version_1_2    # おまじない
+  require 'uri'
   
   def fetch(uri_str, limit = 10)
-    # 適切な例外クラスに変えるべき
-    raise ArgumentError, 'http redirect too deep' if limit == 0
-    
+    # You should choose better exception. 
+    raise ArgumentError, 'HTTP redirect too deep' if limit == 0
+
     response = Net::HTTP.get_response(URI.parse(uri_str))
     case response
-    when Net::HTTPSuccess     then response
-    when Net::HTTPRedirection then fetch(response['location'], limit - 1)
+    when Net::HTTPSuccess
+      response
+    when Net::HTTPRedirection
+      fetch(response['location'], limit - 1)
     else
       response.error!
     end
   end
-  
+
   print fetch('http://www.ruby-lang.org')
+
+より詳しくは [[c:HTTPResponse]]、 [[c:Net::HTTPSuccess]]、
+[[c:Net::HTTPRedirection]] を参照してください。
 
 ==== Basic 認証
 
   require 'net/http'
-  Net::HTTP.version_1_2   # おまじない
   
-  req = Net::HTTP::Get.new('/need-auth.cgi')
-  req.basic_auth 'account', 'password'
   Net::HTTP.start('www.example.com') {|http|
+    req = Net::HTTP::Get.new('/secret-page.html')
+    req.basic_auth 'account', 'password'
     response = http.request(req)
     print response.body
   }
 
-=== 新しい仕様への変更と移行措置について
 
-Ruby 1.6 に入っているのが net/http 1.1 で 1.7 以降が 1.2 ですが、
-この間ではかなり大きく仕様が変わります。そこで突然に仕様を変更
-するのでなく、両方の実装を並存させる時期を設けることにしました。
+#@# === 例外
 
-メソッド HTTP.version_1_2、HTTP.version_1_1 を呼ぶと
-そのあとに生成される Net::HTTP オブジェクトはそれぞれの
-バージョンの仕様で動作するようになります。以下は使用例です。
+#@# get、head、post メソッドで発生する HTTP プロトコル関連の例外として、
+#@# 以下に挙げるものがあります。
+#@# ここに挙げる例外クラスの親クラスはすべて Net::ProtocolError クラスで、
+#@# response メソッドによってエラーの原因となったレスポンスオブジェクトを
+#@# 得ることができます。
 
-  # example
-  Net::HTTP.start {|http1| ...(http1 has 1.2 features)... }
-  
-  Net::HTTP.version_1_1
-  Net::HTTP.start {|http2| ...(http2 has 1.1 features)... }
-  
-  Net::HTTP.version_1_2
-  Net::HTTP.start {|http3| ...(http3 has 1.2 features)... }
-
-つまり Ruby 1.6 でも Net::HTTP.version_1_2 を呼べば 1.2 の挙動になりますし、
-大半のメソッドは呼べます (Ruby 1.8 でもメソッドが増えているので全てではありません)。
-Ruby 1.8 でも Net::HTTP.version_1_1 を呼べば元の挙動にできるので、後方互換性を
-保つことができます。
-
-ただし、この機能はスレッドセーフではありません。
-つまり、複数スレッドでそれぞれに version_1_1 や version_1_2 を呼んだ場合、
-次に生成する Net::HTTP オブジェクトがどちらのバージョンになるかは保証できません。
-アプリケーション全体でどちらかのバージョンに固定する必要があります。
-
-なおどちらを使うかですが、これから書くなら断然 version_1_2 です。
-require 'net/http' 直後に Net::HTTP.version_1_2 を呼んで
-1.1 のことは忘れてください。
-
-=== 例外
-
-get、head、post メソッドで発生する HTTP プロトコル関連の例外として、
-以下に挙げるものがあります。
-ここに挙げる例外クラスの親クラスはすべて Net::ProtocolError クラスで、
-response メソッドによってエラーの原因となったレスポンスオブジェクトを
-得ることができます。
-
-: ProtoRetriableError
-    HTTP ステータスコード 3xx を受け取った時に発生します。
-    リソースが移動したなどの理由により、リクエストを完了させるには更な
-    るアクションが必要になります。
-: ProtoFatalError
-    HTTP ステータスコード 4xx を受け取った時に発生します。
-    クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
-    れた(認証が必要、リソースが存在しないなどで)ことを示します。
-: ProtoServerError
-    HTTP ステータスコード 5xx を受け取った時に発生します。
-    サーバがリクエストを処理中にエラーが発生したことを示します。
-: ProtoUnknownError
-    プロトコルのバージョンが上がった、あるいはライブラリのバグなどで、
-    ライブラリが対応していない状況が発生しました。
+#@# : ProtoRetriableError
+#@#     HTTP ステータスコード 3xx を受け取った時に発生します。
+#@#     リソースが移動したなどの理由により、リクエストを完了させるには更な
+#@#     るアクションが必要になります。
+#@# : ProtoFatalError
+#@#     HTTP ステータスコード 4xx を受け取った時に発生します。
+#@#     クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+#@#     れた(認証が必要、リソースが存在しないなどで)ことを示します。
+#@# : ProtoServerError
+#@#     HTTP ステータスコード 5xx を受け取った時に発生します。
+#@#     サーバがリクエストを処理中にエラーが発生したことを示します。
+#@# : ProtoUnknownError
+#@#     プロトコルのバージョンが上がった、あるいはライブラリのバグなどで、
+#@#     ライブラリが対応していない状況が発生しました。
 
 === フォームの値の区切り文字について
 
 POSTで application/x-www-form-urlencoded として複数のフォームの値を送る場合、
 現在広く行なわれているのは、 name0=value0&name1=value1 のようにアンパサンド
 (`&') で区切るやりかたです。
-この方法は、RFC1866 Hypertext Markup Language - 2.0 で初めて公式に登場し、
+この方法は、[[RFC:1866]] Hypertext Markup Language - 2.0 で初めて公式に登場し、
 HTML 4.01 Specification の 17.13.4 Form content types
 でもそのように書かれています。
 
@@ -164,224 +183,394 @@ CGIやサーバの実装者に対し `&' の代わりに
 必要はありません。
 
 
+=== 新しい仕様への変更と移行措置について
+
+net/http 1.1 (Ruby 1.6に含まれています)の挙動を使いたい場合には
+[[m:Net::HTTP.version_1_1]] を呼んでください。
+その後 [[m:Net::HTTP.version_1_2]] を呼ぶと挙動が 1.2 に
+戻ります。
+
+  # example
+  Net::HTTP.start {|http1| ...(http1 has 1.2 features)... }
+  
+  Net::HTTP.version_1_1
+  Net::HTTP.start {|http2| ...(http2 has 1.1 features)... }
+  
+  Net::HTTP.version_1_2
+  Net::HTTP.start {|http3| ...(http3 has 1.2 features)... }
+
+ただし、この機能はスレッドセーフではありません。
+つまり、複数スレッドでそれぞれに version_1_1 や version_1_2 を呼んだ場合、
+次に生成する Net::HTTP オブジェクトがどちらのバージョンになるかは保証できません。
+アプリケーション全体でどちらかのバージョンに固定する必要があります。
+通常この機能は使わないはずです。1.2固定で利用してください。
+このドキュメントでは 1.1 互換動作については解説しません。
 
 = class Net::HTTP < Object
+alias HTTPSession
 
 HTTP のクライアントのためのクラスです。
 
 == Class Methods
 
---- new(address, port = 80, proxy_addr = nil, proxy_port = nil)
-#@todo
+--- new(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
 
-新しい HTTP オブジェクトを生成します。address は HTTP サーバーの FQDN で、
-port は接続するポート番号です。このメソッドではまだ接続はしません。
+新しい [[c:Net::HTTP]] オブジェクトを生成します。
 
-proxy_addr を与えるとプロクシを介して接続するオブジェクトを生成します。
+proxy_addr を与えるとプロクシを介して接続するオブジェクトを
+生成します。このときに proxy_userを指定するとプロクシの認証が
+行われます
 
---- start(address, port = 80, proxy_addr = nil, proxy_port = nil)
---- start(address, port = 80, proxy_addr = nil, proxy_port = nil) {|http| .... }
-#@todo
+このメソッドは TCP コネクションを張りません。
 
-以下と同じです。
+@param address 接続するホスト名を文字列で指定します。
+@param port 接続するポート番号を指定します。
+@param proxy_addr プロクシのホスト名を指定します。
+@param proxy_port プロクシのホスト名を指定します。
+@param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
+@param proxy_pass プロクシの認証のパスワードを指定します。
 
-  Net::HTTP.new(address, port, proxy_addr, proxy_port).start(&block)
 
---- get(address, path, port = 80)
-#@todo
+--- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) -> Net::HTTP
+--- start(address, port = 80, proxy_addr = nil, proxy_port = nil, proxy_user=nil, proxy_pass=nil) {|http| .... } -> object
 
-ホスト address の port 番ポートに接続して path の表現する
-エンティティボディを取得し、文字列で返します。
+新しい [[c:Net::HTTP]] オブジェクトを生成し、
+TCP コネクション、 HTTP セッションを開始します。
 
---- get_print(address, path, port = 80)
-#@todo
+ブロックを与えた場合には生成したオブジェクトをそのブロックに
+渡し、ブロックが終わったときに接続を閉じます。このときは
+ブロックの値を返り値とします。
 
-ホスト address の port 番ポートに接続して path の表現する
-エンティティボディを取得したうえ、$stdout に << で出力します。
+ブロックを与えなかった場合には生成したオブジェクトを渡します。
+利用後にはこのオブジェクトを [[c:Net::HTTP#finish]] してください。
 
---- get_response(uri)
---- get_response(host, path = nil, port = nil)
-#@todo
+このメソッドは以下と同じです。
+
+  Net::HTTP.new(address, port, proxy_addr, proxy_port, proxy_user, proxy_pass).start(&block)
+
+@param address 接続するホスト名を文字列で指定します。
+@param port 接続するポート番号を指定します。
+@param proxy_addr プロクシのホスト名を指定します。
+@param proxy_port プロクシのホスト名を指定します。
+@param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
+@param proxy_pass プロクシの認証のパスワードを指定します。
+@see [[m:Net::HTTP.new]], [[m:Net::HTTP#start]]
+
+--- get(uri) -> String
+--- get(host, path, port = 80) -> String
+指定した対象に GET リクエストを送り、そのボディを
+文字列として返します。
+
+対象の指定方法は [[c:URI]] で指定するか、
+(host, port, path) で指定するかのいずれかです。
+
+@param uri データの取得対象を [[c:URI]] で指定します。
+@param host 接続先のホストを文字列で指定します。
+@param path データの存在するパスを文字列で指定します。
+@param port 接続するポートを整数で指定します。
+@see [[m:Net::HTTP#get]]
+
+--- get_print(uri) -> ()
+--- get_print(host, path, port = 80) -> ()
+指定した対象から HTTP でエンティティボディを取得し、
+[[m:$stdout]] に出力します。
+
+対象の指定方法は [[c:URI]] で指定するか、
+(host, port, path) で指定するかのいずれかです。
+
+@param uri データの取得対象を [[c:URI]] で指定します。
+@param host 接続先のホストを文字列で指定します。
+@param path データの存在するパスを文字列で指定します。
+@param port 接続するポートを整数で指定します。
+@see [[m:Net::HTTP.get]]
+
+=== 例
+  Net::HTTP.get_print URI.parse('http://www.example.com/index.html')
+もしくは
+  Net::HTTP.get_print 'www.example.com', '/index.html'
+
+--- get_response(uri) -> Net::HTTPResponse
+--- get_response(host, path = nil, port = nil) -> Net::HTTPResponse
+指定した対象に GET リクエストを送り、そのレスポンスを
+[[c:Net::HTTPResponse]] として返します。
+
+対象の指定方法は [[c:URI]] で指定するか、
+(host, port, path) で指定するかのいずれかです。
+
+@param uri データの取得対象を [[c:URI]] で指定します。
+@param host 接続先のホストを文字列で指定します。
+@param path データの存在するパスを文字列で指定します。
+@param port 接続するポートを整数で指定します。
+@see [[m:Net::HTTP#get]]
 
 #@since 1.8.3
---- post_form(uri, params)
-#@todo
+--- post_form(uri, params) -> Net::HTTPResponse
+[[c:URI]] で指定した対象に フォームのデータを HTTP で 
+POST します。
+
+送るデータは param に文字列から文字列への [[c:Hash]] として
+渡します。
+
+@param uri POST する対象を [[c:URI]] で指定します。
+@param param POST するデータです。
+
 #@end
 
---- proxy_address
-#@todo
+--- proxy_address -> String|nil
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスならばプロクシのアドレスを返します。
 
---- proxy_port
-#@todo
+そうでなければ nil を返します。
 
---- proxy_pass
-#@todo
+@see [[m:Net::HTTP.Proxy]]
 
---- proxy_user
-#@todo
+--- proxy_port -> Integer|nil
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスならばプロクシのポート番号を返します。
 
---- socket_type
-#@todo
+そうでなければ nil を返します。
 
-このメソッドは obsolete です。
+@see [[m:Net::HTTP.Proxy]]
 
---- Proxy(address, port = 80)
-#@todo
+--- proxy_pass -> String|nil
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスならばプロクシ認証のパスワードを返します。
+
+そうでなければ nil を返します。
+
+@see [[m:Net::HTTP.Proxy]]
+
+--- proxy_user -> String|nil
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) 
+プロクシ用のクラスで、かつプロクシの認証を利用する場合は
+プロクシ認証のユーザ名を返します。
+
+そうでなければ nil を返します。
+
+@see [[m:Net::HTTP.Proxy]]
+
+#@# --- socket_type -> Net::BufferedIO
+#@# 
+#@# このメソッドは obsolete です。
+
+--- Proxy(address, port = 80) -> Class
 
 Proxy 経由で http サーバに接続するためのクラスを作成し返します。
+
 このクラスは Net::HTTP を継承しているので Net::HTTP と全く
 同じように使えます。指定されたプロクシを常に経由して http サーバ
 に接続します。
 
 address が nil のときは Net::HTTP クラスをそのまま返します。
 
+例1: [[m:Net::HTTP.new]] を使う
   require 'net/http'
   proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
   http = proxy_class.new('www.ruby-lang.org')
   http.start {|h|
     h.get('/ja/') # proxy.example.com 経由で接続します。
   }
+例2: [[m:Net::HTTP.start]] を使う
+  require 'net/http'
+  proxy_class = Net::HTTP::Proxy('proxy.example.com', 8080)
+  proxy_class.start('www.ruby-lang.org') {|h|
+    h.get('/ja/') # proxy.example.com 経由で接続します。
+  }
 
---- proxy_class?
-#@todo
+@param address プロクシのホスト名を文字列で与えます。
+@param port プロクシのポート番号を与えます。
 
-自身が (Proxy メソッドによって作成された) プロクシ用のクラスならば真。
+--- proxy_class? -> bool
+
+自身が ([[m:Net::HTTP.Proxy]] によって作成された) プロクシ用のクラスならば真を返し、そうでなければ偽を返します。
+
+@see [[m:Net::HTTP.Proxy]]
 
 #@since 1.8.3
---- http_default_port
-#@end
---- default_port
---- port
-#@todo
+--- http_default_port -> Integer
+--- default_port -> Integer
+HTTP のデフォルトポート (80) を返します。
 
-HTTP のデフォルトポート (80) です。
+--- https_default_port -> Integer
+HTTPS のデフォルトポート (443) を返します。
 
-#@since 1.8.3
---- https_default_port
-#@todo
-
-HTTPS のデフォルトポート (443) です。
 #@end
 
---- version_1_1?
---- version_1_1
---- is_version_1_1?
-#@todo
+--- version_1_1 -> ()
+ライブラリの動作をバージョン1.1互換にします。
 
-ライブラリのバージョンが 1.1 のとき true を返します。
-Ruby 1.8 以降では常に false です。
+@see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
+     [[m:Net::HTTP.version_1_2?]]
 
---- version_1_2?
---- version_1_2
---- is_version_1_2?
-#@todo
+--- version_1_1? -> bool
+--- is_version_1_1? -> bool 
+ライブラリの動作がバージョン1.1互換である場合に真を返します。
 
-ライブラリのバージョンが 1.2 のとき true を返します。
-Ruby 1.8 以降では常に true です。
+@see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
+     [[m:Net::HTTP.version_1_2?]]
+
+--- version_1_2 -> ()
+ライブラリの動作をバージョン1.2互換、つまり
+通常の動作にします。
+
+@see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_1?]]
+     [[m:Net::HTTP.version_1_2?]]
+
+--- version_1_2? -> bool
+--- is_version_1_2? -> bool 
+ライブラリの動作がバージョン1.2互換である場合に真を返します。
+
+@see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
+     [[m:Net::HTTP.version_1_1?]]
 
 == Instance Methods
 
---- start
---- start {|http| .... }
-#@todo
+--- start -> self
+--- start {|http| .... } -> object
 
 TCP コネクションを張り、HTTP セッションを開始します。
 すでにセッションが開始していたら例外 IOError を発生します。
 
-イテレータとして呼ばれた時はブロックの間だけセッションを接続し、
-ブロック終了とともに自動的にセッションを閉じます。
+ブロックを与えた場合には自分自身をそのブロックに
+渡し、ブロックが終わったときに接続を閉じます。このときは
+ブロックの値を返り値とします。
 
---- started?
---- active?
-#@todo
+ブロックを与えなかった場合には自分自身を返します。
+利用後にはこのオブジェクトを [[c:Net::HTTP#finish]] してください。
 
-HTTP セッションが開始されていたら真。
+@raise IOError すでにセッションが開始していた場合に発生します。
 
---- set_debug_output(io)
+--- started? -> bool
+--- active? -> bool
+
+HTTP セッションが開始されていたら真を返します。
+
+active? は時代遅れのメソッドです。
+
+--- set_debug_output(io) -> ()
 #@since 1.9.1
 --- debug_outupt=(io)
-#@todo
+デバッグ出力を指定します。
+このメソッドは深刻なセキュリティホールの原因
+になるため、デバッグ以外では決して使わないでください。
+
+@param io 出力先を指定します。このオブジェクトは << という
+          メソッドを持っている必要があります。
+
 #@end
 
---- close_on_empty_response
+--- close_on_empty_response -> bool
 --- close_on_empty_response=(bool)
-#@todo
+レスポンスがボディを持っていない場合にコネクションを
+閉じるかどうかです。デフォルトでは偽(閉じない)です。
 
---- address
-#@todo
+@param bool レスポンスがボディを持っていない場合にコネクションを
+            閉じるかどうか指定します。
 
-接続するアドレス
+--- address -> String
 
---- port
-#@todo
+接続するアドレスを返します。
 
-接続するポート番号
+@see [[m:Net::HTTP.new]]
+--- port -> Integer
 
---- proxy?
-#@todo
+接続するポート番号を返します。
+
+@see [[m:Net::HTTP.new]]
+--- proxy? -> bool
 
 プロクシを介して接続するなら真を返します。
 
---- proxy_address
---- proxyaddr
-#@todo
+@see [[m:Net::HTTP.Proxy]]
 
-プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス。
-そうでないなら nil。
+--- proxy_address -> String|nil
+--- proxyaddr -> String|nil
 
---- proxy_port
---- proxyport
-#@todo
+プロクシ経由で接続する HTTP オブジェクトならプロクシのアドレス
+を返します。
 
-プロクシ経由で接続する HTTP オブジェクトならプロクシのポート。
-そうでないなら nil。
+そうでないなら nil を返します。
 
---- proxy_pass
-#@todo
+proxyaddr は時代遅れのメソッドです。
 
---- proxy_user
-#@todo
+@see [[m:Net::HTTP.Proxy]]
 
---- open_timeout
+--- proxy_port -> Integer|nil
+--- proxyport -> Integer|nil
+
+プロクシ経由で接続する HTTP オブジェクトならプロクシのポート番号
+を返します。
+
+そうでないなら nil を返します。
+
+proxyport は時代遅れのメソッドです。
+@see [[m:Net::HTTP.Proxy]]
+--- proxy_pass -> String|nil
+プロクシ経由で接続し、さらにプロクシのユーザ認証を
+する HTTP オブジェクトなら認証のパスワードを
+を返します。
+
+そうでないなら nil を返します。
+@see [[m:Net::HTTP.Proxy]]
+
+--- proxy_user -> String|nil
+プロクシ経由で接続し、さらにプロクシのユーザ認証を
+する HTTP オブジェクトなら認証のユーザ名を
+を返します。
+
+そうでないなら nil を返します。
+@see [[m:Net::HTTP.Proxy]]
+
+--- open_timeout -> Integer
 --- open_timeout=(seconds)
-#@todo
 
 接続時に待つ最大秒数。この秒数たってもコネクションが
-開かなければ例外 TimeoutError を発生します。
+開かなければ例外 [[c:TimeoutError]] を発生します。
 
---- read_timeout
+@second 待つ秒数を指定します。
+@see [[m:Net::HTTP#read_timeout]]
+
+--- read_timeout -> Integer
 --- read_timeout=(seconds)
-#@todo
 
 読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数。
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
---- finish
-#@todo
+@second 待つ秒数を指定します。
+@see [[m:Net::HTTP#open_timeout]]
+
+--- finish -> ()
 
 HTTP セッションを終了します。セッション開始前にこのメソッドが
 呼ばれた場合は例外 IOError を発生します。
 
---- get(path, header = nil)
---- get(path, header = nil) {|str| .... }
-#@todo
+@raise IOError セッション開始前に呼ぶと発生します。
 
-サーバ上の path にあるエンティティを取得します。また header が nil
-でなければ、リクエストを送るときにその内容を HTTP ヘッダとして書き
-こみます。header はハッシュで、「ヘッダ名 => 内容」のような形式で
-なければいけません。
+--- get(path, header = nil, dest = nil) -> Net::HTTPResponse
+--- get(path, header = nil, dest = nil) {|body_segment| .... } -> Net::HTTPResponse
 
-戻り値は、バージョン 1.1 では HTTPResponse とエンティティボディ文字列の
-二要素の配列です。1.2 では HTTPResponse ただひとつのみです。この場合、
-エンティティボディは response.body で得られます。
+サーバ上の path にあるエンティティを取得し、
+[[c:Net::HTTPResponse]] のインスタンスとして返します。
 
-ブロックとともに呼ばれた時はエンティティボディを少しずつブロックに
-与えます。
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-1.1 では 3xx (再試行可能なエラー)に対しても例外を発生します。この場合
-HTTPResponse は例外オブジェクトから err.response で得ることができます。
-一方 1.2 では全く例外を発生しません。
+ブロックと一緒に呼びだされたときは
+エンティティボディを少しずつ文字列として
+ブロックに与えます。このとき戻り値の 
+[[c:Net::HTTPResponse]] オブジェクトは有効な body を
+持ちません。
 
+dest は時代遅れの引数です。利用しないでください。
+
+@param path 取得するエンティティのパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@param dest 利用しないでください。
+@see [[m:Net::HTTP#request_get]]
+
+例:
   # net/http version 1.1 (Ruby 1.6.x)
   response, body = http.get( '/index.html' )
   
@@ -399,87 +588,89 @@ HTTPResponse は例外オブジェクトから err.response で得ることができます。
     end
   }
 
---- head(path, header = nil)
-#@todo
+--- head(path, header = nil) -> Net::HTTPResponse
 
 サーバ上の path にあるエンティティのヘッダのみを取得します。
-また header が nil でなければリクエストを送るときにその内容を
-HTTP ヘッダとして書きこみます。header はハッシュで、
-「ヘッダ名 => 内容」のような形式でなければいけません。
+[[c:Net::HTTPResponse]] のインスタンスを返します。
 
-HTTPResponse オブジェクトを返します。
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-net/http version 1.1 では 3xx (再試行可能なエラー) に対しても例外を発生します。
-この場合、HTTPResponse は
-例外オブジェクトから err.response で得ることができます。
-一方 net/http version 1.2 では全く例外を発生しません。
+@param path 取得するエンティティのパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@param dest 利用しないでください。
+@see [[m:Net::HTTP#request_head]]
 
+例:
   response = nil
   Net::HTTP.start('some.www.server', 80) {|http|
     response = http.head('/index.html')
   }
   p response['content-type']
 
---- post(path, data, header = nil, dest = nil)
---- post(path, data, header = nil) {|str| .... }
-#@todo
+
+
+--- post(path, data, header = nil, dest = nil) -> Net::HTTPResponse
+--- post(path, data, header = nil, dest = nil) {|body_segment| .... } -> Net::HTTPResponse
 
 サーバ上の path にあるエンティティに対し文字列 data を
-送ります。
+POST で送ります。
 
-戻り値は get と同じように、net/http バージョン 1.1 では HTTPResponse と
-エンティティボディ文字列の二要素の配列です。
-net/http 1.2 では HTTPResponse ただひとつのみです。
-この場合、エンティティボディは response.body で得られます。
-
-header は get メソッドと同じです。
-
-dest を与えた場合には、レスポンスは << メソッドを使って dest に書きこまれます。
-dest には << メソッドが定義されたオブジェクト、通常 [[c:String]] オブジェクトか
-[[c:Array]] オブジェクトを与えます。
-この dest は戻り値の HTTPResponse オブジェクトの body にもなります。
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
 
 ブロックと一緒に呼びだされたときはエンティティボディを少しずつ文字列として
 ブロックに与えます。このとき戻り値の HTTPResponse オブジェクトは有効な body を
 持ちません。
 
-dest とブロックを同時に与えてはいけません。
-同時に与えた場合は例外 ArgumentError を発生します。
+dest は時代遅れの引数です。利用しないでください。
 
-net/http version 1.1 では 3xx (再試行可能なエラー)に対しても例外を発生します。
-この場合、HTTPResponse は例外オブジェクトから
-err.response で得ることができます。
-一方 net/http version 1.2 では全く例外を発生しません。
+POST する場合にはヘッダに Content-Type: を指定する必要があります。
+もし header に指定しなかったならば、 Content-Type として
+"application/x-www-form-urlencoded" を用います。
 
+@param path POST先のパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@param dest 利用しないでください。
+@see [[m:Net::HTTP#request_post]]
+例:
   # net/http version 1.1 (Ruby 1.6.x)
   response, body = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
   # version 1.2 (Ruby 1.8.x or later)
   response = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
   
-  # compatible in both version
-  response , = http.post('/cgi-bin/search.rb', 'query=subject&target=ruby')
-  
-  # compatible, using block
+  # using block
   File.open('save.html', 'w') {|f|
     http.post('/cgi-bin/search.rb', 'query=subject&target=ruby') do |str|
       f.write str
     end
   }
 
---- request_get(path, header = nil)
---- request_get(path, header = nil) {|response| .... }
---- get2(path, header = nil)
---- get2(path, header = nil) {|response| .... }
-#@todo
+--- request_get(path, header = nil) -> Net::HTTPResponse
+--- request_get(path, header = nil) {|response| .... } -> Net::HTTPResponse
+--- get2(path, header = nil) -> Net::HTTPResponse
+--- get2(path, header = nil) {|response| .... } -> Net::HTTPResponse
 
-path にあるエンティティを取得します。
-HTTPResponse オブジェクトを返します。
+サーバ上の path にあるエンティティを取得します。
+[[c:Net::HTTPResponse]] オブジェクトを返します。
 
-ブロックとともに呼び出されたときは、ブロック実行中は接続を
-維持したまま HTTPResponse オブジェクトをブロックに渡します。
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-このメソッドは HTTP プロトコルに関連した例外は発生させません。
+ブロックとともに呼び出されたときは、
+エンティティボディをソケットから読み出す前に、
+接続を維持した状態で [[c:Net::HTTPResponse]]
+オブジェクトをブロックに渡します。
+大きなサイズのボディを一度に読みだすとまずく、
+小さなサイズに分けて取りだしたい場合にはこれを利用します。
+
+@param path 取得するエンティティのパスを文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@see [[m:Net::HTTP#get]], [[m:Net::HTTPResponse#read_body]]
 
   # example
   response = http.request_get('/index.html')
@@ -494,33 +685,73 @@ HTTPResponse オブジェクトを返します。
     end
   }
 
---- request_head(path, header = nil)
---- request_head(path, header = nil) {|response| .... }
---- head2(path, header = nil)
---- head2(path, header = nil) {|response| .... }
-#@todo
+get2 は時代遅れなので使わないでください。
 
---- request_post(path, data, header = nil)
---- request_post(path, data, header = nil) {|response| .... }
---- post2(path, data, header = nil)
---- post2(path, data, header = nil) {|response| .... }
-#@todo
+--- request_head(path, header = nil) -> Net::HTTPResponse
+--- request_head(path, header = nil) {|response| .... } -> Net::HTTPResponse
+--- head2(path, header = nil) -> Net::HTTPResponse
+--- head2(path, header = nil) {|response| .... } -> Net::HTTPResponse
 
-path にあるエンティティを取得します。
-HTTPResponse オブジェクトを返します。
+サーバ上の path にあるエンティティのヘッダのみを取得します。
+[[c:Net::HTTPResponse]] オブジェクトを返します。
 
-ブロックとともに呼び出されたときは、ボディを読みこむ前に
-HTTPResponse オブジェクトをブロックに渡します。
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
 
-このメソッドは HTTP プロトコルに関連した例外は発生させません。
+ブロックとともに呼び出されたときは、
+[[m:Net::HTTP#request_get]] と同じ動作を
+しますが、そもそもヘッダしか要求していないので
+body は空です。そのためこの動作はそれほど意味はありません。
+
+@param path ヘッダを取得するエンティティのパスを
+            文字列で指定します。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+
+@see [[m:Net::HTTP#head]]
+
+例:
+  response = http.request_head('/index.html')
+  p response['content-type']
+
+head2 は時代遅れなので使わないでください。
+
+--- request_post(path, data, header = nil) -> Net::HTTPResponse
+--- request_post(path, data, header = nil) {|response| .... } -> Net::HTTPResponse
+--- post2(path, data, header = nil) -> Net::HTTPResponse
+--- post2(path, data, header = nil) {|response| .... } -> Net::HTTPResponse
+
+サーバ上の path にあるエンティティに対し文字列 data を
+POST で送ります。
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
+
+header が nil
+でなければ、リクエストを送るときにその内容を HTTP ヘッダとして
+送ります。 header は { 'Accept' = > '*/*', ... } という
+形のハッシュでなければいけません。
+
+ブロックとともに呼び出されたときは、
+エンティティボディをソケットから読み出す前に、
+接続を維持した状態で [[c:Net::HTTPResponse]]
+オブジェクトをブロックに渡します。
+
+POST する場合にはヘッダに Content-Type: を指定する必要があります。
+もし header に指定しなかったならば、 Content-Type として
+"application/x-www-form-urlencoded" を用います。
+
+@param path POST先のエンティティのパスを文字列で指定します。
+@param data POSTするデータを与えます。
+@param header リクエストの HTTP ヘッダをハッシュで指定します。
+@see [[m:Net::HTTP#post]], [[m:Net::HTTPResponse#read_body]]
 
   # example
-  response = http.post2('/cgi-bin/nice.rb', 'datadatadata...')
+  response = http.request_post('/cgi-bin/nice.rb', 'datadatadata...')
   p response.status
   puts response.body          # body is already read
   
   # using block
-  http.post2('/cgi-bin/nice.rb', 'datadatadata...') {|response|
+  http.request_post('/cgi-bin/nice.rb', 'datadatadata...') {|response|
     p response.status
     p response['content-type']
     response.read_body do |str|   # read body now
@@ -528,214 +759,580 @@ HTTPResponse オブジェクトをブロックに渡します。
     end
   }
 
---- put(path, data, initheader = nil)
-#@todo
-
---- request_put(path, data, initheader = nil)
---- request_put(path, data, initheader = nil) {|response| .... }
---- put2(path, data, initheader = nil)
---- put2(path, data, initheader = nil) {|response| .... }
-#@todo
+post2 は時代遅れなので使わないでください。
 
 
---- send_request(name, path, data = nil, header = nil)
-#@todo
+--- put(path, data, initheader = nil) -> Net::HTTPResponse
+サーバ上の path にあるエンティティに対し文字列 data を
+PUT で送ります。
 
---- request(request [, data])
---- request(request [, data]) {|response| .... }
-#@todo
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
 
-HTTPResquest オブジェクト request を送信します。POST/PUT の時は data も
-与えられます (POST/PUT 以外で data を与えると ArgumentError を発生します)。
+@param path 取得するエンティティのパスを文字列で指定します。
+@param data 送るデータを文字列で指定します。
+@param initheader リクエストの HTTP ヘッダをハッシュで指定します。
 
-ブロックとともに呼びだされたときはボディを読みこまずに HTTPResponse
+@see [[m:Net::HTTP#request_put]]
+
+--- request_put(path, data, initheader = nil) -> Net::HTTPResponse
+--- request_put(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
+--- put2(path, data, initheader = nil) -> Net::HTTPResponse
+--- put2(path, data, initheader = nil) {|response| .... } -> Net::HTTPResponse
+サーバ上の path にあるエンティティに対し文字列 data を
+PUT で送ります。
+
+返り値は [[c:Net::HTTPResponse]] のインスタンスです。
+
+ブロックとともに呼び出されたときは、
+ボディをソケットから読み出す前に、
+接続を維持した状態で [[c:Net::HTTPResponse]]
+オブジェクトをブロックに渡します。
+
+@param path 取得するエンティティのパスを文字列で指定します。
+@param data 送るデータを文字列で指定します。
+@param initheader リクエストの HTTP ヘッダをハッシュで指定します。
+
+@see [[m:Net::HTTP#put]]
+
+put2 は時代遅れなので使わないでください。
+
+--- send_request(name, path, data = nil, header = nil) -> Net::HTTPResponse
+HTTP リクエストをサーバに送り、そのレスポンスを
+[[c:Net::HTTPResponse]] のインスタンスとして返します。
+
+@param name リクエストのメソッド名を文字列で与えます。
+@param path リクエストのパスを文字列で与えます。
+@param data リクエストのボディを文字列で与えます。
+@param header リクエストのヘッダをハッシュで与えます。
+@see [[m:Net::HTTP#request]]
+
+例:
+  response = http.send_request('GET', '/index.html')
+  puts response.body
+
+--- request(request [, data]) -> Net::HTTPResponse
+--- request(request [, data]) {|response| .... } -> Net::HTTPResponse
+
+[[c:Net::HTTPResquest]] オブジェクト request をサーバに送信します。
+POST/PUT の時は data も与えられます 
+(GET/HEAD などで  data を与えると 
+[[c:ArgumentError]] を発生します)。
+
+ブロックとともに呼びだされたときは
+ソケットからボディを読みこまずに [[c:Net::HTTPResponse]]
 オブジェクトをブロックに与えます。
 
-このメソッドは HTTP プロトコルに関連した例外は発生させません。
+@param request リクエストオブジェクトを与えます。
+@param data リクエストのボディを文字列で与えます。
+@raise ArgumentError dataを与えるべきでないリクエストでdataを
+                     与えた場合に発生します。
 
---- inspect
-#@todo
+@see [[m:Net::HTTP#send_request]]
+
+#@# --- inspect
+#@# 
 
 #@since 1.8.3
---- copy(path, initheader = nil)
-#@todo
+--- copy(path, initheader = nil) -> Net::HTTPResponse
+サーバの path に COPY リクエストを
+ヘッダが initheader として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
---- delete(path, initheader = nil)
-#@todo
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Copy]]
 
---- lock(path, body, initheader = nil)
-#@todo
 
---- mkcol(path, body, initheader = nil)
-#@todo
+--- delete(path, initheader = nil) -> Net::HTTPResponse
+サーバの path に DELETE リクエストを
+ヘッダが initheader として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
---- move(path, body, initheader = nil)
-#@todo
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Delete]]
 
---- options(path, initheader = nil)
-#@todo
 
---- propfind(path, body, initheader = {'Depth' => '0'})
-#@todo
+--- lock(path, body, initheader = nil) -> Net::HTTPResponse
+サーバの path に LOCK リクエストを
+ヘッダが initheader, ボディを body として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
---- proppatch(path, body, initheader = nil)
-#@todo
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Lock]]
 
---- trace(path, initheader = nil)
-#@todo
+--- mkcol(path, body, initheader = nil) -> Net::HTTPResponse
+サーバの path に MKCOL リクエストを
+ヘッダが initheader, ボディを body として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
 
---- unlock(path, body, initheader = nil)
-#@todo
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Mkcol]]
+
+--- move(path, body, initheader = nil) -> Net::HTTPResponse
+サーバの path に MOVE リクエストを
+ヘッダが initheader, ボディを body として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
+
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Move]]
+
+--- options(path, initheader = nil) -> Net::HTTPResponse
+サーバの path に OPTIONS リクエストを
+ヘッダが initheader として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
+
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Options]]
+
+
+--- propfind(path, body, initheader = {'Depth' => '0'}) -> Net::HTTPResponse
+サーバの path に PROPFIND リクエストを
+ヘッダが initheader, ボディを body として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
+
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Propfind]]
+
+
+--- proppatch(path, body, initheader = nil) -> Net::HTTPResponse
+サーバの path に PROPPATCH リクエストを
+ヘッダが initheader, ボディを body として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
+
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Proppatch]]
+
+--- trace(path, initheader = nil) -> Net::HTTPResponse
+サーバの path に TRACE リクエストを
+ヘッダが initheader として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
+
+@param path リクエストを送るパスを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Trace]]
+
+
+--- unlock(path, body, initheader = nil) -> Net::HTTPResponse
+サーバの path に UNLOCK リクエストを
+ヘッダが initheader, ボディを body として送り、
+レスポンスを [[c:Net::HTTPResponse]] のオブジェクト
+で返します。
+
+@param path リクエストを送るパスを文字列で与えます。
+@param body リクエストのボディを文字列で与えます。
+@param initheader リクエストのヘッダを「文字列=>文字列」の
+                  ハッシュで与えます。
+@see [[c:Net::NTTP::Unlock]]
+
+
+--- use_ssl? -> bool
+SSLを利用して接続する場合に真を返します。
+
+@see [[lib:net/https]], [[lib:openssl]] 
 
 #@end
+
 = module Net::HTTPHeader
+HTTP ヘッダのためのモジュールです。
+
+このモジュールを mix-in に @header という(ハッシュを代入してある)
+変数への「大文字小文字を無視した」ハッシュ的アクセスメソッドを
+提供します。またよくある HTTP ヘッダへの便利なアクセスメソッドも
+用意します。
 
 == Instance Methods
 
---- [](key)
-#@todo
+#@# --- initialize_http_header(initheader) -> ()
+#@# このモジュールを mix-in したクラスの
+#@# 初期化時に呼びだし、 このモジュールの各メソッド
+#@# を利用可能にします。 
+#@# @param initheader 初期化時のヘッダの内容を
+#@#                   {ヘッダフィールド名(文字列)=>その中身(文字列)}
+#@#                   というハッシュで与えます。
 
-key ヘッダフィールド (文字列) を返します。
-たとえばキー 'content-length' に対しては '2048' のような文字列が得られます。
-key は大文字小文字を区別しません。
+--- [](key) -> String|nil
+key ヘッダフィールドを返します。
 
---- []=(key)
-#@todo
-
-key ヘッダフィールドに val をセットします。
-key は大文字小文字を区別しません。
+たとえばキー 'content-length' に対しては  '2048'
+のような文字列が得られます。キーが存在しなければ nil を返します。
 
 #@since 1.8.3
---- add_field(key, val)
-#@todo
+一種類のヘッダフィールドが一つのヘッダの中に複数存在する
+場合にはそれを全て ", " で連結した文字列を返します。
+#@end
+key は大文字小文字を区別しません。
+
+@param key ヘッダフィール名を文字列で与えます。
+
+@see [[m:Net::HTTPHeader#[]= ]],
+#@since 1.8.3
+     [[m:Net::HTTPHeader#add_field]],
+     [[m:Net::HTTPHeader#get_field]]
+#@end
+
+--- []=(key, val)
+key ヘッダフィールドに文字列 val をセットします。
+
+key に元々設定されていた値は破棄されます。
+key は大文字小文字を区別しません。
+val に nil を与えるとそのフィールドを削除します。
+
+@param key ヘッダフィール名を文字列で与えます。
+@param val keyで指定したフィールドにセットする文字列を与えます。
+
+@see [[m:Net::HTTPHeader#[] ]],
+#@since 1.8.3
+     [[m:Net::HTTPHeader#add_field]],
+     [[m:Net::HTTPHeader#get_field]]
+#@end
+
+#@since 1.8.3
+--- add_field(key, val) -> ()
 
 key ヘッダフィールドに val を追加します。
 
---- get_fields(key)
-#@todo
+key に元々設定されていた値は破棄されず、それに val 追加されます。
 
+@param key ヘッダフィール名を文字列で与えます。
+@param val keyで指定したフィールドに追加する文字列を与えます。
+@see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]= ]],
+     [[m:Net::HTTPHeader#get_field]]
+
+例:
+  request.add_field 'X-My-Header', 'a'
+  p request['X-My-Header']              #=> "a"
+  p request.get_fields('X-My-Header')   #=> ["a"]
+  request.add_field 'X-My-Header', 'b'
+  p request['X-My-Header']              #=> "a, b"
+  p request.get_fields('X-My-Header')   #=> ["a", "b"]
+  request.add_field 'X-My-Header', 'c'
+  p request['X-My-Header']              #=> "a, b, c"
+  p request.get_fields('X-My-Header')   #=> ["a", "b", "c"]
+   
+--- get_fields(key) -> [String]
 key ヘッダフィールドの値 (文字列) を配列で返します。
-たとえばキー 'content-length' に対しては ['2048'] のような文字列が得られます。
+
+たとえばキー 'content-length' に対しては ['2048'] のような
+文字列が得られます。一種類のヘッダフィールドが一つのヘッダの中
+に複数存在することがありえます。
 key は大文字小文字を区別しません。
+
+@param key ヘッダフィール名を文字列で与えます。
+@see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]= ]],
+     [[m:Net::HTTPHeader#add_field]],
+
 #@end
 
---- fetch(key)
---- fetch(key, default)
---- fetch(key) {|hash| .... }
-#@todo
+--- fetch(key) -> String
+--- fetch(key, default) -> String
+--- fetch(key) {|hash| .... } -> String
+key ヘッダフィールドを返します。
 
---- size
---- length
-#@todo
+たとえばキー 'content-length' に対しては  '2048'
+のような文字列が得られます。キーが存在しなければ nil を返します。
+
+該当するキーが登録されてい
+ない時には、引数 default が与えられていればその値を、ブロッ
+クが与えられていればそのブロックを評価した値を返します。
+
+#@since 1.8.3
+一種類のヘッダフィールドが一つのヘッダの中に複数存在する
+場合にはそれを全て ", " で連結した文字列を返します。
+#@end
+key は大文字小文字を区別しません。
+
+@param key ヘッダフィール名を文字列で与えます。
+@param default 該当するキーが登録されていない時の返り値を指定します。
+@raise IndexError IndexError 引数defaultもブロックも与えられてない時、キーの探索に 失敗すると発生します。
+@see [[m:Net::HTTPHeader#[] ]
+
+--- size -> Integer
+--- length -> Integer
 
 このメソッドは obsolete です。
 
---- basic_auth(account, password)
-#@todo
 
+--- basic_auth(account, password) -> ()
 Authorization: ヘッダを BASIC 認証用にセットします。
 
---- content_length
---- content_length=(len)
-#@todo
+@param account アカウント名を文字列で与えます。
+@param password パスワードを文字列で与えます。
 
-Content-Length: ヘッダの値 (整数)。
+--- chunked? -> bool
+Transfer-Encoding: ヘッダフィールドが "chunked" である
+場合に真を返します。
 
---- content_type
-#@todo
+Transfer-Encoding: ヘッダフィールドが存在しなかったり、
+"chunked" 以外である場合には偽を返します。
+
+--- content_type -> String|nil
+"text/html" のような Content-Type を表す
+文字列を返します。
+
+Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
 --- content_type=(type)
 --- set_content_type(type, params = {})
-#@todo
+type と param から Content-Type: ヘッダフィールドの
+値を設定します。
 
---- main_type
-#@todo
+--- main_type -> String|nil
+"text/html" における "text" のような Content-Type を表す
+文字列を返します。
 
---- sub_type
-#@todo
+Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
---- type_params
-#@todo
+--- sub_type -> String|nil
+"text/html" における "html" のような Content-Type を表す
+文字列を返します。
 
---- form_data=(params)
---- set_form_data(params, sep = '&')
-#@todo
+Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
---- content_range
-#@todo
+--- type_params -> Hash
+Content-Type のパラメータを {"charset" => "iso-2022-jp"}
+というような形の [[c:Hash]] で返します。
+
+Content-Type: ヘッダフィールドが存在しない場合には
+空のハッシュを返します。
+
+--- form_data=(params) -> ()
+--- set_form_data(params, sep = '&') -> ()
+HTMLのフォームのデータ params から
+ヘッダフィールドとボディを設定します。
+
+ヘッダフィールド Content-Type: には
+'application/x-www-form-urlencoded' が設定されます。
+
+@param params HTML のフォームデータの [[c:Hash]] を与えます。
+@param sep データのセパレータを文字列で与えます。
+
+--- content_length -> Integer|nil
+Content-Length: ヘッダフィールドの表している値を整数で返します。
+
+ヘッダが設定されていない場合には nil を返します。
+
+@raise Net::HTTPHeaderSyntaxError フィールドの値が不正である場合に
+                                  発生します。
+
+--- content_length=(len)
+Content-Length: ヘッダフィールドに値を設定します。
+
+len に nil を与えると Content-Length: ヘッダフィールドを
+削除します。
+
+@param len 設定する値を整数で与えます。
+
+--- content_range -> Range|nil
 
 Content-Range: ヘッダフィールドの値を Range で返します。
 Range の表わす長さは [[m:Net::HTTPHeader#range_length]] で得られます。
 
---- range_length
-#@todo
+ヘッダが設定されていない場合には nil を返します。
+
+--- range_length -> Integer|nil
 
 Content-Range: ヘッダフィールドの表している長さを整数で返します。
 
---- delete(key)
-#@todo
+ヘッダが設定されていない場合には nil を返します。
 
+@raise Net::HTTPHeaderSyntaxError Content-Range: ヘッダフィールド
+                                  の値が不正である場合に
+                                  発生します。
+                                  
+--- delete(key) -> String | nil
 key ヘッダフィールドを削除します。
 
---- each {|name, val| .... }
---- each_header {|name, val| .... }
-#@todo
+@param key 削除するフィールド名
+@param 取り除かれたフィールドの値を返します。
+       key ヘッダフィールドが存在しなかった場合には
+        nil を返します。
 
-ヘッダ名とその値に対するくりかえし。ヘッダ名は小文字で統一されます。
+--- each {|name, val| .... } -> ()
+--- each_header {|name, val| .... } -> ()
 
---- each_capitalized {|name, value| .... }
---- canonical_each {|name, value| .... }
-#@todo
+保持しているヘッダ名とその値をそれぞれ
+ブロックに渡して呼びだします。
 
-ヘッダフィールドの正式名とその値のペアに対して繰り返します。
+ヘッダ名は小文字で統一されます。
+val は ", " で連結した文字列がブロックに渡されます。
 
---- each_capitalized_name {|name| .... }
-#@todo
+--- each_capitalized {|name, value| .... } -> ()
+--- canonical_each {|name, value| .... } -> ()
 
---- each_name {|name| ... }
---- each_key {|name| ... }
-#@todo
+ヘッダフィールドの正式名とその値のペアを
+ブロックに渡し、呼びだします。
 
---- each_value {|value| .... }
-#@todo
+正式名は name に対し
+  name.downcase.split(/-/).capitalize.join('-')
+で求まる文字列です。
 
---- key?(key)
-#@todo
+--- each_capitalized_name {|name| .... } -> ()
+保持しているヘッダ名をキャピタライズ
+('x-my-header' -> 'X-My-Header') 
+して、ブロックに渡します。
 
+--- each_name {|name| ... } -> ()
+--- each_key {|name| ... } -> ()
+
+保持しているヘッダ名をブロックに渡して呼びだします。
+
+ヘッダ名は小文字で統一されます。
+
+--- each_value {|value| .... } -> ()
+保持しているヘッダの値をブロックに渡し、呼びだします。
+
+渡される文字列は ", " で連結したものです。
+
+--- key?(key) -> bool
 key というヘッダフィールドがあれば真を返します。
 key は大文字小文字を区別しません。
 
---- method
-#@todo
+@param key 探すヘッダフィールド名を文字列で与えます。
+
+--- method -> String
 
 リクエストの HTTP メソッドを文字列で返します。
 
---- path
-#@todo
-
-リクエストする path を文字列で返します。
-
---- proxy_basic_auth(account, password)
-#@todo
+--- proxy_basic_auth(account, password) -> ()
 
 Proxy 認証のために Proxy-Authorization: ヘッダをセットします。
 
---- range
-#@todo
+@param account アカウント名を文字列で与えます。
+@param password パスワードを文字列で与えます。
 
-Range: ヘッダの示す範囲を Range オブジェクトで返します。
+--- range -> Range|nil
 
+Range: ヘッダの示す範囲を [[c:Range]] オブジェクトで返します。
+
+ヘッダにない場合は nil を返します。
+
+@param HTTPHeaderSyntaxError Range:ヘッダの中身が規格通りでない
+                             場合に発生します。
 --- range=(r)
---- set_range(i, len)
-#@todo
+--- set_range(i, len) -> ()
+--- set_range(n) -> ()
 
 範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
-r は Range オブジェクト、i, len は始点と長さです。
-= class Net::HTTPRequest < Object
+
+以下の3つは同じことを表しています。
+  req.range = 0..1023
+  req.set_range(0, 1024)
+  req.set_range(1024)
+
+特別な場合として、
+n に負数を与えた場合には最初から(-n)バイトまでの範囲を表します。
+r を x..-1 とした場合には、x が正ならば
+x バイト目から最後までの範囲を、
+x が負ならば最初から x バイト目までの範囲を表します。
+
+@param r 範囲を [[c:Range]] オブジェクトで与えます。
+@param i 範囲の始点を整数で与えます。
+@param len 範囲の長さを整数で与えます。
+@param n 0からの長さを整数で与えます。
+
+= class Net::HTTPGenericRequest < Object
 
 include Net::HTTPHeader
 
+[[c:Net::HTTPRequest]] のスーパークラスです。
+このクラスは直接は使わないでください。
+
+[[c:Net::HTTPRequest]] のサブクラスを使ってください。
+
+== Class Methods
+
+#@# 
+#@# --- new(m, reqbody, resbody, path, initheader = nil)
+
+== Instance Methods
+
+#@# --- inspect
+
+
+--- body_exist? -> bool
+このメソッドは obsolete です。
+
+[[m:Net::HTTPGenericRequest#response_body_permitted?]]
+の別名です。
+
+#@since 1.8.0
+--- body -> String
+サーバに送るリクエストのエンティティボディを返します。
+
+@see [[m:Net::HTTPGenericRequest#body=]]
+
+--- body=(body)
+
+サーバに送るリクエストのエンティティボディを文字列で設定します。
+
+@param body 設定するボディを文字列で与えます。
+@see [[m:Net::HTTPGenericRequest#body]]
+
+#@end
+
+#@since 1.9.1
+--- body_stream -> object
+--- body_stream=(f)
+
+サーバに送るリクエストのエンティティボディを
+[[c:IO]] オブジェクトなどのストリームで設定します。
+f は read(size) メソッドが定義されている必要があります。
+
+@param f エンティティボディのデータを得るストリームオブジェクトを与えます。
+
+#@end
+
+--- method -> String
+リクエストの HTTP メソッドを文字列で返します。
+
+--- path -> String
+
+リクエストする path を文字列で返します。
+
+--- request_body_permitted? -> bool
+
+リクエストにエンティティボディを一緒に送ることが許されている
+HTTP メソッド (POST など)の場合真を返します。
+
+--- response_body_permitted? -> bool
+
+サーバからのレスポンスにエンティティボディを含むことが許されている
+HTTP メソッド (GET, POST など)の場合真を返します。
+
+
+= class Net::HTTPRequest < Net::HTTPGenericRequest
 HTTP リクエストを抽象化するクラスです。
+
 Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
 
   * [[c:Net::HTTP::Get]]
@@ -764,93 +1361,77 @@ Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
   print res.body
 
 == Class Methods
-
---- new(path, initheader = nil)
-#@todo
-
+--- new(path, initheader = nil) -> Net::HTTPRequest
 HTTP リクエストオブジェクトを生成します。
-リクエストする path を文字列で与えます。
 
-== Instance Methods
+initheader でリクエストヘッダを指定することができます。
+{ヘッダフィールド名(文字列)=>その中身(文字列)} という
+[[c:Hash]] を用います。
 
---- inspect
-#@todo
+@param path リクエストする path を文字列で与えます。
+@param initheader リクエストヘッダをハッシュで指定します。
 
---- body_exist?
-#@todo
+#@# == Constants
+#@# --- METHOD -> String
+#@# リクエストの HTTP メソッドを文字列で返します。
 
-#@since 1.8.0
---- body
---- body=(body)
-#@todo
+#@# 実際にはこの定数は各サブクラスで定義されています。
 
-サーバに送るリクエストのエンティティボディを文字列で設定します。
-#@end
+#@# --- REQUEST_HAS_BODY -> bool
+#@# リクエストにエンティティボディを一緒に送ることが許されている
+#@# HTTP メソッド (POST など)の場合真を返します。
 
-#@since 1.9.1
---- body_stream
---- body_stream=(f)
-#@todo
+#@# 実際にはこの定数は各サブクラスで定義されています。
 
-サーバに送るリクエストのエンティティボディを
-[[c:IO]] オブジェクトなどのストリームで設定します。
-read(size) メソッドが定義されている必要があります。
-#@end
+#@# --- RESPONSE_HAS_BODY -> bool
+#@# サーバからのレスポンスにエンティティボディを含むことが許されている
+#@# HTTP メソッド (GET, POST など)の場合真を返します。
 
---- method
-#@todo
-
-リクエストの HTTP メソッドを文字列で返します。
-
---- path
-#@todo
-
-リクエストする path を文字列で返します。
-
---- request_body_permitted?
-#@todo
-
-リクエストにエンティティボディを一緒に送ることが許されている
-HTTP メソッド (POST など)の場合真を返します。
-
---- response_body_permitted?
-#@todo
-
-サーバからのレスポンスにエンティティボディを含むことが許されている
-HTTP メソッド (GET, POST など)の場合真を返します。
-
-
+実際にはこの定数は各サブクラスで定義されています。
 
 = class Net::HTTP::Head < Net::HTTPRequest
+HTTP の HEAD リクエストを表すクラスです。
 
 = class Net::HTTP::Get < Net::HTTPRequest
+HTTP の GET リクエストを表すクラスです。
 
 = class Net::HTTP::Post < Net::HTTPRequest
+HTTP の POST リクエストを表すクラスです。
 
 = class Net::HTTP::Put < Net::HTTPRequest
+HTTP の PUT リクエストを表すクラスです。
 
 = class Net::HTTP::Copy < Net::HTTPRequest
+HTTP の COPY リクエストを表すクラスです。
 
 = class Net::HTTP::Delete < Net::HTTPRequest
+HTTP の DELETE リクエストを表すクラスです。
 
 = class Net::HTTP::Lock < Net::HTTPRequest
+HTTP の LOCK リクエストを表すクラスです。
 
 = class Net::HTTP::Mkcol < Net::HTTPRequest
+HTTP の MKCOL リクエストを表すクラスです。
 
 = class Net::HTTP::Move < Net::HTTPRequest
+HTTP の MOVE リクエストを表すクラスです。
 
 = class Net::HTTP::Options < Net::HTTPRequest
+HTTP の OPTIONS リクエストを表すクラスです。
 
 = class Net::HTTP::Propfind < Net::HTTPRequest
+HTTP の PROPFIND リクエストを表すクラスです。
 
 = class Net::HTTP::Proppatch < Net::HTTPRequest
+HTTP の PROPPATCH リクエストを表すクラスです。
 
 = class Net::HTTP::Trace < Net::HTTPRequest
+HTTP の TRACE リクエストを表すクラスです。
 
 = class Net::HTTP::Unlock < Net::HTTPRequest
+HTTP の UNLOCK リクエストを表すクラスです。
 
 = class Net::HTTPResponse < Object
-
 include Net::HTTPHeader
 
 HTTP レスポンスを表現するクラスです。
@@ -858,167 +1439,395 @@ Net::HTTP クラスは実際には HTTPResponse のサブクラスを返します。
 
 == Class Methods
 
---- new(http_version, result_code, message)
-#@todo
+#@# --- new(http_version, result_code, message) 
+#@# ライブラリ内部用メソッドです。使わないでください。
 
-ライブラリ内部用メソッドです。使わないでください。
+--- body_permitted? -> bool
+エンティティボディを含むことが許されているレスポンスクラス
+ならば真を、そうでなければ偽を返します。
 
---- body_permitted?
-#@todo
+#@# --- exception_type
+#@# --- read_new 
+#@# internal use only
 
 == Instance Methods
 
---- code
-#@todo
+--- code -> String
 
 HTTP のリザルトコードです。例えば '302' などです。
 
---- message
---- msg
-#@todo
+この値を見ることでレスポンスの種類を判別できますが、
+レスポンスオブジェクトがどのクラスのインスタンスかを
+見ることでもレスポンスの種類を判別できます。
+
+--- message -> String
+--- msg -> String
 
 HTTP サーバがリザルトコードに付加して返すメッセージです。
 例えば 'Not Found' などです。
 
---- http_version
-#@todo
+msg は obsolete です。使わないでください。
+
+--- http_version -> String
 
 サーバがサポートしている HTTP のバージョンを文字列で返します。
 
 #@since 1.8.0
---- to_ary
-#@todo
+--- to_ary -> [Net::HTTPResponse, String]
+このメソッドは net/http.rb 1.1 との互換性のために存在します。
 #@end
 
---- value
-#@todo
+--- value -> nil
+レスポンスが 2xx(成功)でなかった場合に、対応する
+例外を発生させます。
 
---- response
---- header
---- reader_header
-#@todo
+@raise HTTPError レスポンスが 1xx であるか、 net/http が知らない
+                 種類のレスポンスである場合に発生します。
+@raise HTTPRetriableError レスポンスが 3xx である場合に発生します。
+@raise HTTPFatalError レスポンスが 4xx である場合に発生します。
+@raise HTTPServerError レスポンスが 5xx である場合に発生します。
+
+
+--- response -> self
+--- header -> self
+--- reader_header -> self
 
 互換性を保つためだけに導入されたメソッドです。
 使わないでください。
 
---- body
---- entity
-#@todo
+--- body -> String | () | nil
+--- entity -> String | () | nil
 
-エンティティボディです。
-[[m:Net::HTTPResponse#read_body]] を呼んでいればその引数 dest、
-呼んでいなければエンティティボディを文字列として読みこんで返します。
+エンティティボディを返します。
 
---- read_body(dest = '')
-#@todo
+レスポンスにボディがない場合には nil を返します。
 
-エンティティボディを取得し dest に << メソッドを使って書きこみます。
-同じ HTTPResponse オブジェクトに対して二回以上呼ばれた場合、
-二回目からはなにもせずに一回目の戻り値をそのまま返します。
+[[m:Net::HTTPResponse#read_body]] をブロック付きで呼んだ場合には
+このメソッドはNet::ReadAdapter のインスタンスを返しますが、
+これは使わないでください。
 
---- read_body {|str| .... }
-#@todo
 
+
+entity は obsolete です。
+
+--- read_body(dest=nil) -> String|nil
+--- read_body {|str| .... } -> ()
+
+ブロックを与えなかった場合にはエンティティボディを
+文字列で返します。
+ブロックを与えた場合には
 エンティティボディを少しずつ取得して順次ブロックに与えます。
 
+レスポンスがボディを持たない場合には nil を返します。
+
+一度ブロックを与えずにこのメソッドを呼んだ場合には、
+次からはすでに読みだしたボディを文字列として
+返します。また一度ブロックを与えてこのメソッドを呼んだ場合には、
+次からは Net::ReadAdapter のインスタンスが帰ってきますが、
+その場合はそのオブジェクトは使わないでください。
+
+dest は obsolete です。使わないでください。
+
+#@# = Constants
+#@# --- CODE_CLASS_TO_OBJ
+#@# --- CODE_TO_OBJ
 
 = class Net::HTTPUnknownResponse < Net::HTTPResponse
+このライブラリが知らないレスポンスを表現するクラスです。
 
 = class Net::HTTPInformation < Net::HTTPResponse
-1xx
+HTTP レスポンス 1xx (Informational) を表現するクラスです。
+
+リクエストが正常に受信し、処理を続けていることを表わして
+います。
+
 = class Net::HTTPSuccess < Net::HTTPResponse
-2xx
+HTTP レスポンス 2xx (Success) を表現するクラスです。
+
+リクエストが正常に受信、処理されたことを表しています。
+
 = class Net::HTTPRedirection < Net::HTTPResponse
-3xx
+HTTP レスポンス 3xx (Redirection) を表現するクラスです。
+
+リクエストが正常に受信しましたが、処理を完了するためには
+さらなる動作が必要なことを表します。
+
 = class Net::HTTPClientError < Net::HTTPResponse
-4xx
+HTTP レスポンス 4xx (Client Error) を表現するクラスです。
+
+リクエスト構文が間違っているなど、クライアントが間違って
+いることを表しています。
+
 = class Net::HTTPServerError < Net::HTTPResponse
-5xx
+HTTP レスポンス 2xx (Server Error) を表現するクラスです。
+
+サーバがエラーを起こしているなど、サーバ側で処理
+を完了することができないことを表しています。
 
 = class Net::HTTPContinue < Net::HTTPInformation
-100
+HTTP レスポンス 100 (Continue) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPSwitchProtocol < Net::HTTPInformation
-101
+HTTP レスポンス 101 (Switching Protocols) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
 
 = class Net::HTTPOK < Net::HTTPSuccess
-200
+HTTP レスポンス 200 (OK) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPCreated < Net::HTTPSuccess
-201
+HTTP レスポンス 201 (Created) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPAccepted < Net::HTTPSuccess
-202
+HTTP レスポンス 202 (Accepted) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPNonAuthoritativeInformation < Net::HTTPSuccess
-203
+HTTP レスポンス 203 (Non-Authoritative Information) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPNoContent < Net::HTTPSuccess
-204
+HTTP レスポンス 204 (No Content) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPResetContent < Net::HTTPSuccess
-205
+HTTP レスポンス 205 (Reset Content) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPPartialContent < Net::HTTPSuccess
-206
+HTTP レスポンス 206 (Partial Content) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 
 = class Net::HTTPMultipleChoice < Net::HTTPRedirection
-300
+HTTP レスポンス 300 (Multiple Choices) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPMovedPermanently < Net::HTTPRedirection
-301
+HTTP レスポンス 301 (Moved Permanently) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPFound < Net::HTTPRedirection
-302
-#@# alias: Net::HTTPMovedTemporarily
+alias Net::HTTPMovedTemporarily
+
+HTTP レスポンス 302 (Found) を表現するクラスです。
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPSeeOther < Net::HTTPRedirection
-303
+HTTP レスポンス 303 (See Other) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPNotModified < Net::HTTPRedirection
-304
+HTTP レスポンス 304 (Not Modified) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPUseProxy < Net::HTTPRedirection
-305
+HTTP レスポンス 305 (Use Proxy) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 #@# 306 unused
 = class Net::HTTPTemporaryRedirect < Net::HTTPRedirection
-307
+HTTP レスポンス 307 (Temporary Redirect) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 
 = class Net::HTTPBadRequest < Net::HTTPClientError
-400
+HTTP レスポンス 400 (Bad Request) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPUnauthorized < Net::HTTPClientError
-401
+HTTP レスポンス 401 (Unauthorized) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPPaymentRequired < Net::HTTPClientError
-402
+HTTP レスポンス 402 (Payment Required) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPForbidden < Net::HTTPClientError
-403
+HTTP レスポンス 403 (Forbidden) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPNotFound < Net::HTTPClientError
-404
+HTTP レスポンス 404 (Not Found) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPMethodNotAllowed < Net::HTTPClientError
-405
+HTTP レスポンス 405  (Method Not Allowed) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPNotAcceptable < Net::HTTPClientError
-406
+HTTP レスポンス 406 (Not Acceptable) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPProxyAuthenticationRequired < Net::HTTPClientError
-407
+HTTP レスポンス 407 (Proxy Authentication Required) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPRequestTimeOut < Net::HTTPClientError
-408
+HTTP レスポンス 408 (Request Time-out) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPConflict < Net::HTTPClientError
-409
+HTTP レスポンス 409 (Conflict) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPGone < Net::HTTPClientError
-410
+HTTP レスポンス 410 (Gone) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPLengthRequired < Net::HTTPClientError
-411
+HTTP レスポンス 411 (Length Required) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPPreconditionFailed < Net::HTTPClientError
-412
+HTTP レスポンス 412 (Precondition Failed) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPRequestEntityTooLarge < Net::HTTPClientError
-413
+HTTP レスポンス 413 (Request Entity Too Large) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPRequestURITooLong < Net::HTTPClientError
-#@# alias: Net::HTTPRequestURITooLarge
-414
+alias Net::HTTPRequestURITooLarge
+
+HTTP レスポンス 414 (Request-URI Too Large) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPUnsupportedMediaType < Net::HTTPClientError
-415
+
+HTTP レスポンス 415 (Unsupported Media Type) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPRequestedRangeNotSatisfiable < Net::HTTPClientError
-416
+HTTP レスポンス 416 (Requested range not satisfiable) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPExpectationFailed < Net::HTTPClientError
-417
+HTTP レスポンス 417 (Expectation Failed) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 
 = class Net::HTTPInternalServerError < Net::HTTPServerError
-500
+HTTP レスポンス 500 (Internal Server Error) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPNotImplemented < Net::HTTPServerError
-501
+HTTP レスポンス 501 (Not Implemented) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPBadGateway < Net::HTTPServerError
-502
+HTTP レスポンス 502 (Bad Gateway) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPServiceUnavailable < Net::HTTPServerError
-503
+HTTP レスポンス 503 (Service Unavailable) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPGatewayTimeOut < Net::HTTPServerError
-504
+HTTP レスポンス 504 (Gateway Time-out) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
 = class Net::HTTPVersionNotSupported < Net::HTTPServerError
-505
+HTTP レスポンス 505 (HTTP Version not supported) を表現するクラスです。
+
+詳しくは [[RFC:2616]] を見てください。
+
+
+= module Net::HTTPExceptions
+HTTP 例外クラスです。
+
+実際にはこれを include した以下のサブクラスの
+例外が発生します。
+
+  * [[c:Net::HTTPError]]
+  * [[c:Net::HTTPRetriableError]]
+  * [[c:Net::HTTPServerError]]
+  * [[c:Net::HTTPFatalError]]
+
+また、例外を発生させるためには [[m:HTTPResponse#value]] を
+呼ぶ必要があります。
+
+== Instance Methods
+--- response -> Net::HTTPResponse
+--- data -> Net::HTTPResponse
+
+エラーの原因となったレスポンスオブジェクトを返します。
+
+#@# = class HTTPError < ProtocolError
+= class HTTPError < StandardError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 1xx を受け取ったという例外です。
+または、ステータスコードが未知のものである場合も
+これに対応します。
+
+#@# = class HTTPRetriableError < ProtoRetriableError
+= class HTTPRetriableError < StandardError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 3xx を受け取ったという例外です。
+
+リソースが移動したなどの理由により、リクエストを完了させるには更な
+るアクションが必要になります。
+
+#@# = class HTTPServerException < ProtoServerError
+= class HTTPServerException < StandardError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 5xx を受け取ったという例外です。
+
+クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+れた(認証が必要、リソースが存在しないなどで)ことを示します。
+
+#@# = class HTTPFatalError < ProtoFatalError
+= class HTTPFatalError < StandardError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 4xx を受け取ったという例外です。
+
+クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+れた(認証が必要、リソースが存在しないなどで)ことを示します。
+
+
+#@# internal classes
+#@# = module Net::HTTP::ProxyDelta
