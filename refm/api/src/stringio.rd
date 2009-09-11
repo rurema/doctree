@@ -598,3 +598,35 @@ nil を返します。
 @see [[m:IO#each_char]]
 
 #@end
+#@since 1.9.1
+--- ungetbyte(num) -> nil
+#@todo
+
+@see [[m:IO#ungetbyte]]
+
+--- set_encoding(encoding) -> self
+#@todo
+
+自身のエンコーディングを指定されたエンコーディングに設定します。
+
+--- external_encoding -> Encoding
+#@todo
+
+現在の外部エンコーディングを返します。
+
+--- internal_encoding -> Encoding
+#@todo
+
+現在の内部エンコーディングを返します。
+
+#@since 1.9.2
+--- codepoints{|codepoint| ... } => self
+--- codepoints -> Enumrator
+--- each_codepoint{|codepoint| ... } -> self
+--- each_codepoint -> Enumrator
+#@todo
+
+@see [[m:IO#each_codepoint]]
+
+#@end
+#@end
