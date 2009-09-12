@@ -141,7 +141,7 @@ Gem е╤е├е▒б╝е╕д╬е╒еые═б╝ерд╚ д╜дьд╛дьд╬ [[c:Gem::Specification]] еке╓е╕езепе╚дЄ┬
 
 @param full_name Gem д╬е╒еые═б╝ердЄ╗╪─ъд╖д▐д╣бг
 
---- update(source_uri, all) -> boolean
+--- update(source_uri, all) -> bool
 #@todo
 
 ┬ш░ь░·┐Їд╟╗╪─ъд╡дьд┐ URI дЄ╗╚═╤д╖д╞╝л┐╚дЄ╣╣┐╖д╖д▐д╣бг

@@ -172,7 +172,7 @@ obj を width カラムのテキストとして自身に追加します。
 
 バッファされたデータを出力します。
 
---- first?    -> boolean
+--- first?    -> bool
 
 #@since 1.8.2
 このメソッドは obsolete です。
