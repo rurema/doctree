@@ -59,7 +59,7 @@
   when Net::HTTPSuccess, Net::HTTPRedirection
     # OK
   else
-    res.error!
+    res.value
   end
 
 ==== プロクシ経由のアクセス
@@ -116,7 +116,7 @@ limit 回数以上リダイレクトしたらエラーにします。
     when Net::HTTPRedirection
       fetch(response['location'], limit - 1)
     else
-      response.error!
+      response.value
     end
   end
 
