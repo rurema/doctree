@@ -231,7 +231,7 @@ include Enumerable
 
 @see [[m:Enumerator#with_object]]
 
-= class Prime::EratosthenesGenerator < PseudoPrimeGenerator
+= class Prime::EratosthenesGenerator < Prime::PseudoPrimeGenerator
 
 [[c:Prime::PseudoPrimeGenerator]] の具象クラスです。
 素数の生成にエラトステネスのふるいを使用しています。
@@ -268,7 +268,7 @@ include Enumerable
  p generator.next #=> 2
 
 
-= class Prime::TrialDivisionGenerator < PseudoPrimeGenerator
+= class Prime::TrialDivisionGenerator < Prime::PseudoPrimeGenerator
 
 [[c:Prime::PseudoPrimeGenerator]] の具象クラスです。
 素数の生成に試行除算法を使用しています。
@@ -286,7 +286,7 @@ include Enumerable
 
 列挙状態を巻き戻します。
 
-= class Prime::Generator23 < PseudoPrimeGenerator
+= class Prime::Generator23 < Prime::PseudoPrimeGenerator
 
 2と3と、3 より大きくて 2 でも 3 でも割り切れない全ての整数を生成します。
 
