@@ -225,7 +225,7 @@ proxy_addr を与えるとプロクシを介して接続するオブジェクトを
 
 @param address 接続するホスト名を文字列で指定します。
 @param port 接続するポート番号を指定します。
-@param proxy_addr プロクシのホスト名を指定します。
+@param proxy_addr プロクシのホスト名を指定します。省略した場合には直接接続します。
 @param proxy_port プロクシのホスト名を指定します。
 @param proxy_user プロクシの認証のユーザ名を指定します。省略した場合には認証はなされません。
 @param proxy_pass プロクシの認証のパスワードを指定します。
@@ -450,24 +450,38 @@ active? は時代遅れのメソッドです。
 --- set_debug_output(io) -> ()
 #@since 1.9.1
 --- debug_outupt=(io)
+#@end
+
 デバッグ出力の出力先を指定します。
 このメソッドは深刻なセキュリティホールの原因
 になるため、デバッグ以外では決して使わないでください。
 
-  http.set_debug_output($stderr)
+io に nil を指定するとデバッグ出力を止めます。
 
 @param io 出力先を指定します。このオブジェクトは 
           メソッド << を持っている必要があります。
 
-#@end
+  http.set_debug_output($stderr)
+
 
 --- close_on_empty_response -> bool
+レスポンスがボディを持っていない場合にコネクションを
+閉じるかどうかを返します。
+
+デフォルトでは偽(閉じない)です。
+
+@see [[m:Net::HTTP#close_on_empty_response=]]
+
+@see 
 --- close_on_empty_response=(bool)
 レスポンスがボディを持っていない場合にコネクションを
-閉じるかどうかです。デフォルトでは偽(閉じない)です。
+閉じるかどうかを設定します。
+
 
 @param bool レスポンスがボディを持っていない場合にコネクションを
             閉じるかどうか指定します。
+
+@see [[m:Net::HTTP#close_on_empty_response]]
 
 --- address -> String
 
@@ -524,22 +538,43 @@ proxyport は時代遅れのメソッドです。
 @see [[m:Net::HTTP.Proxy]]
 
 --- open_timeout -> Integer
---- open_timeout=(seconds)
+接続時に待つ最大秒数を返します。
 
-接続時に待つ最大秒数。この秒数たってもコネクションが
+この秒数たってもコネクションが
+開かなければ例外 [[c:TimeoutError]] を発生します。
+デフォルトは 30 (秒)です。
+
+@see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout=]]
+
+--- open_timeout=(seconds)
+接続時に待つ最大秒数を設定します。
+
+この秒数たってもコネクションが
 開かなければ例外 [[c:TimeoutError]] を発生します。
 
-@second 待つ秒数を指定します。
-@see [[m:Net::HTTP#read_timeout]]
+@param second 待つ秒数を指定します。
+@see [[m:Net::HTTP#read_timeout]], [[m:Net::HTTP#open_timeout]]
 
 --- read_timeout -> Integer
+読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数
+を返します。
+
+この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
+を発生します。
+デフォルトは 60 (秒)です。
+
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout=]]
+
 --- read_timeout=(seconds)
 
-読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数。
-この秒数たっても読みこめなければ例外 TimeoutError を発生します。
+読みこみ([[man:read(2)]]) 一回でブロックしてよい最大秒数を
+設定します。
 
-@second 待つ秒数を指定します。
-@see [[m:Net::HTTP#open_timeout]]
+この秒数たっても読みこめなければ例外 [[c:TimeoutError]]
+を発生します。
+
+@param second 待つ秒数を指定します。
+@see [[m:Net::HTTP#open_timeout]], [[m:Net::HTTP#read_timeout]]
 
 --- finish -> ()
 
@@ -1032,7 +1067,7 @@ key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
 
-@see [[m:Net::HTTPHeader#[]= ]],
+@see [[m:Net::HTTPHeader#[]=]],
 #@since 1.8.3
      [[m:Net::HTTPHeader#add_field]],
      [[m:Net::HTTPHeader#get_fields]]
@@ -1063,7 +1098,7 @@ key に元々設定されていた値は破棄されず、それに val 追加されます。
 
 @param key ヘッダフィール名を文字列で与えます。
 @param val keyで指定したフィールドに追加する文字列を与えます。
-@see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]= ]],
+@see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#get_fields]]
 
 例:
@@ -1086,7 +1121,7 @@ key ヘッダフィールドの値 (文字列) を配列で返します。
 key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
-@see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]= ]],
+@see [[m:Net::HTTPHeader#[] ]], [[m:Net::HTTPHeader#[]=]],
      [[m:Net::HTTPHeader#add_field]],
 
 #@end
@@ -1111,8 +1146,8 @@ key は大文字小文字を区別しません。
 
 @param key ヘッダフィール名を文字列で与えます。
 @param default 該当するキーが登録されていない時の返り値を指定します。
-@raise IndexError IndexError 引数defaultもブロックも与えられてない時、キーの探索に 失敗すると発生します。
-@see [[m:Net::HTTPHeader#[] ]
+@raise IndexError 引数defaultもブロックも与えられてない時、キーの探索に 失敗すると発生します。
+@see [[m:Net::HTTPHeader#[] ]]
 
 --- size -> Integer
 --- length -> Integer
@@ -1281,18 +1316,24 @@ Range: ヘッダの示す範囲を [[c:Range]] オブジェクトで返します。
 @param HTTPHeaderSyntaxError Range:ヘッダの中身が規格通りでない
                              場合に発生します。
 --- range=(r)
+--- range=(n)
 --- set_range(i, len) -> ()
+--- set_range(r) -> ()
 --- set_range(n) -> ()
 
 範囲を指定してエンティティを取得するためのヘッダ Range: をセットします。
 
-以下の3つは同じことを表しています。
+以下は同じことを表しています。
   req.range = 0..1023
+  req.range = 0...1024
+  req.range = 1024
   req.set_range(0, 1024)
+  req.set_range(0..1023)
+  req.set_range(0...1024)
   req.set_range(1024)
 
 特別な場合として、
-n に負数を与えた場合には最初から(-n)バイトまでの範囲を表します。
+n に負数を与えた場合にnは最初から(-n)バイトまでの範囲を表します。
 r を x..-1 とした場合には、x が正ならば
 x バイト目から最後までの範囲を、
 x が負ならば最初から x バイト目までの範囲を表します。
@@ -1301,6 +1342,8 @@ x が負ならば最初から x バイト目までの範囲を表します。
 @param i 範囲の始点を整数で与えます。
 @param len 範囲の長さを整数で与えます。
 @param n 0からの長さを整数で与えます。
+
+#@# この仕様はどこまで意図的なのだろうか？
 
 = class Net::HTTPGenericRequest < Object
 
@@ -1839,7 +1882,7 @@ HTTP 例外クラスです。
 --- response -> Net::HTTPResponse
 --- data -> Net::HTTPResponse
 
-エラーの原因となったレスポンスオブジェクトを返します。
+例外の原因となったレスポンスオブジェクトを返します。
 
 #@# = class HTTPError < ProtocolError
 = class Net::HTTPError < StandardError
