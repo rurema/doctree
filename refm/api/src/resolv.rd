@@ -1,7 +1,3 @@
-#@if (version >= "1.6.0")
-require socket
-require timeout
-
 DNSによる名前解決を行うライブラリです。 Ruby で書かれているため thread-aware であり、並列に多くのホスト名を解決することができます。
 
 DNS モジュールを使うことで、さまざまなリソースを直接ルックアップできます。
@@ -249,7 +245,7 @@ DNSについては以下を参照してください。
 
 == Class Methods
 
-#@until 1.8.1
+#@if (version <= "1.8.1")
 --- new(resolv_conf = '/etc/resolv.conf') -> Resolv::DNS
 #@else
 --- new(resolv_conf = nil) -> Resolv::DNS
@@ -272,14 +268,14 @@ resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
                    :ndots => 1)
 #@end
 
-#@until 1.8.1
+#@if (version <= "1.8.1")
 @param resolv_conf DNSの設定ファイル名を文字列で与えます
 #@else
 @param resolv_conf DNSの設定を与えます。
 #@end
 
---- open(*args)
---- open(*args){|dns| ...}
+--- open(*args) -> Resolv::DNS
+--- open(*args){|dns| ...} -> object
 
 新しい DNS リゾルバを生成します。
 ブロックを与えた場合は生成したリゾルバでブロックを呼びだし、
@@ -290,6 +286,8 @@ resolv_conf がハッシュの場合は、:nameserver, :search, :ndots
 
 @param args DNSの設定を与えます。意味は [[m:Resolv::DNS.new]] 
             の引数と同じです。
+@return ブロックを与えた場合はブロックの返す値を返し、
+        与えなかった場合は生成したリゾルバを返します。
 
 == Instance Methods
 
@@ -337,8 +335,8 @@ IP アドレス address のホスト名をルックアップし、
 @param address IPアドレスを文字列、 Resolv::IPv4 のインスタンス、
                Resolv::IPv6 のインスタンス、のいずれか与えます。
 
---- getresource(name, typeclass) -> object
---- getresources(name, typeclass) -> [object]
+--- getresource(name, typeclass) -> Resolv::DNS::Resource
+--- getresources(name, typeclass) -> [Resolv::DNS::Resource]
 --- each_resource(name, typeclass) {|resource| ...} -> ()
 
 nameに対応するDNSリソースレコードを取得します。
@@ -780,7 +778,8 @@ DNS リソースの MX レコード
 
 == Class Methods
 
---- new(preference, exchange)
+--- new(preference, exchange) -> Resolv::DNS::Resource::MX
+Resolv::DNS::Resource::MX のインスタンスを返します。
 
 @param preference MXの優先度
 @param exchange MXのホスト
@@ -1565,5 +1564,3 @@ IPv6の各文字列表記とマッチする正規表現です。順に
   * a::b
   * a::b:w.x.y.z
 という文字列とマッチします。
-
-#@end
