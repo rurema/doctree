@@ -182,7 +182,7 @@ NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 === 注意
 このメソッドは(nkf コマンドがそうであるように)、MIME Base64 の
 デコード処理がデフォルトでオンになっています。この動作を無効にしたけ
-れば opt に '-m0' を含めるようにしてください。
+れば opt に '-m0' を含めてください。
 
 #@until 1.9.0
 --- guess(str) -> Integer
@@ -249,7 +249,7 @@ SJIS コードを表します。
 --- BINARY -> Encoding
 #@end
 
-入力が binary であることを表します。
+バイナリ列を表します。
 
 #@until 1.9.0
 --- UNKNOWN -> Integer
