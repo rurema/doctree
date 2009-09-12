@@ -57,7 +57,7 @@ self に文字列 str で指定した文字がいくつ含まれているかを数えます
 "Ａ-Ｄ" のような「^」(否定)を含まないパターンのみであり、
 また複数のパターンを取ることはできません。
 
-@param str 出現回数を数える文字のパターン 
+@param str 出現回数を数える文字のパターンを文字列で与えます。
 
 例：
 
@@ -183,6 +183,7 @@ self に多バイト文字が最初に現れる位置を返します。
 --- delete!(str) -> String|nil
 
 [[m:String#delete]] の日本語対応版です。
+指定したパターンの文字列を取り除きます。
 
 ただしこのメソッドは置き換え前の物とは異なり
 複数の引数を取れません。
@@ -208,6 +209,7 @@ self に多バイト文字が最初に現れる位置を返します。
 --- squeeze!([str]) -> String|nil
 
 [[m:String#squeeze]] の日本語対応版です。
+指定した文字を1文字にまとめます。
 
 ただしこのメソッドは置き換え前の物とは異なり、
 2つ以上の引数を取ることはできません。
@@ -233,6 +235,7 @@ self に多バイト文字が最初に現れる位置を返します。
 --- succ! -> String|nil
 
 [[m:String#succ]] の日本語対応版です。
+「次の」文字列を返します。
 
 以下のような次の文字列を返します。
 
@@ -258,6 +261,11 @@ EUC-JP の場合はこうはなりません)を返します。
 --- tr!(search, replace) -> String|nil
 
 [[m:String#tr]] の日本語対応版です。
+search に含まれる文字を検索し、 replace の対応する文字に
+置き換えます。
+
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
 
 例:
 
@@ -274,18 +282,19 @@ EUC-JP の場合はこうはなりません)を返します。
   p zstr.tr('Ａ-Ｚ','A-Z')    # => "AABBCC"
   p hoge.tr('a-z','Ａ-Ｚ')    # => "ＨＨＯＧＥ"
 
-@param search    置き換える文字のパターン
-@param replace    pattern で指定した文字を置き換える文字
 @see [[m:String#tr_s]]
 
 --- tr_s(search, replace) -> String
 --- tr_s!(search, replace) -> String|nil
 
 [[m:String#tr_s]] の日本語対応版です。
+文字列の中に search 文字列に含まれる文字が存在したら、
+replace 文字列の対応する文字に置き換えます。さらに、
+置換した部分内に同一の文字の並びがあったらそれを 
+1 文字に圧縮します。
 
 @param search    置き換える文字のパターン
 @param replace    pattern で指定した文字を置き換える文字
-@see [[m:String#tr]]
 
 例:
   $KCODE = 'EUC'
@@ -298,3 +307,6 @@ EUC-JP の場合はこうはなりません)を返します。
   p "ｆｏｏ".tr_s("ｏ", "ｆ")   # => "ｆｆ"
 
 #@end
+
+@see [[m:String#tr]]
+
