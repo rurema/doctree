@@ -107,7 +107,7 @@ non-ASCII の文字列を XML エンティティに置換します。
 
 @param string サニタイズ対象の文字列を指定します。
 
-@see [[Gem::Indexer#sanitize]]
+@see [[m:Gem::Indexer#sanitize]]
 
 == Singleton Methods
 
