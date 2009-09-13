@@ -43,7 +43,7 @@ SSLSocket オブジェクトを生成する時に渡されたソケットを返します。
 #@todo
 
 SSLSocket オブジェクトを生成する時に渡されたコンテクストを返します。
-[[C:openSSL::SSL::SSLContext]] オブジェクトです。
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトです。
 
 --- sync_close
 --- sync_close=(bool)

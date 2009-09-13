@@ -17,7 +17,7 @@ Ruby/DL が [[c:Win32API]] と互換性を持つようにするライブラリ。
 --- Call(*args)
 #@todo
 
-[[DL::Symbol#call]] により関数を実行します。
+[[m:DL::Symbol#call]] により関数を実行します。
 
 == Constants
 

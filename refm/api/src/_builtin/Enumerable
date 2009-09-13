@@ -287,7 +287,7 @@ a < b のとき負の整数を、期待しています。
 要素が存在しないときは nil を返します。
 
 [[m:Enumerable#min]] と [[m:Enumerable#min_by]] の
-違いは [[m:Enumerable#sort]] と [[n:Enumerable#sort_by]] の違いと同じです。
+違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
 
 @see [[m:Enumerable#sort_by]]
 
