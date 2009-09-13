@@ -472,7 +472,6 @@ io に nil を指定するとデバッグ出力を止めます。
 
 @see [[m:Net::HTTP#close_on_empty_response=]]
 
-@see 
 --- close_on_empty_response=(bool)
 レスポンスがボディを持っていない場合にコネクションを
 閉じるかどうかを設定します。
@@ -1619,6 +1618,7 @@ dest を指定した場合には
 ボディを少しずつ取得して順次
 「dest << ボディの断片」を実行します。
 
+@param dest obsoleteな引数です。利用しないでください。
 #@# = Constants
 #@# --- CODE_CLASS_TO_OBJ
 #@# --- CODE_TO_OBJ
