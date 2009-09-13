@@ -35,63 +35,63 @@ nroff プロセスの標準出力から処理結果を受け取る。
 
 外部プログラム cmd を実行し、そのプロセスの標準入力、標準出力、標準エラー
 出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の
-配列で返す。cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈され
-る。
+配列で返します。cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈
+されます。
 
   stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
 
-@param cmd 実行するコマンドを指定。
+@param cmd 実行するコマンドを指定します。
 
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定。
+@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
 
-@return ブロックを与えられた場合はブロックの最後に評価された値を返す。
-        ブロックを与えられなかった場合は標準入力、標準出力、標準エラー
-        出力と実行したプロセスを待つためのスレッドに接続されたパイプを
-        返す。
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は標準入力、標準出力、標準エラー出
+        力と実行したプロセスを待つためのスレッドに接続されたパイプを返
+        します。
 
-ブロックを指定するとパイプの配列を引数にブロックを実行し、最後に
-パイプを close する。この場合はブロックの最後の式の結果を返す。
+ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
+を close します。この場合はブロックの最後の式の結果を返します。
 
-        require 'open3'
+  require 'open3'
 
-        Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr, wait_thr|
-          stdin.puts "stdin"
-          stdin.close     # または close_write
-          p stdout.read
-          p stderr.read
-        }
-        #=> "stdout\n"
-            "stderr\n"
+  Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr, wait_thr|
+    stdin.puts "stdin"
+    stdin.close     # または close_write
+    p stdout.read
+    p stderr.read
+  }
+  #=> "stdout\n"
+      "stderr\n"
 
 #@else
 --- popen3(*cmd) -> [IO, IO, IO]
 --- popen3(*cmd) {|stdin, stdout, stderr| ... } -> ()
 
 外部プログラム cmd を実行し、そのプロセスの標準入力、
-標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返す。
-cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈される。
+標準出力、標準エラー出力に接続されたパイプを 3 要素の配列で返します。
+cmd は組み込み関数 [[m:Kernel.#exec]] と同じ規則で解釈されます。
 
-        stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
+  stdin, stdout, stderr = *Open3.popen3("/usr/bin/nroff -man")
 
-@param cmd 実行するコマンドを指定。
+@param cmd 実行するコマンドを指定します。
 
-@return ブロックを与えられた場合はブロックの最後に評価された値を返す。
-        ブロックを与えられなかった場合は標準入力、標準出力、標準エラー
-        を返す。
+@return ブロックを指定した場合はブロックの最後に評価された値を返します。
+        ブロックを指定しなかった場合は標準入力、標準出力、標準エラー
+        を返します。
 
-ブロックを指定するとパイプの配列を引数にブロックを実行し、最後に
-パイプを close する。この場合はブロックの最後の式の結果を返す。
+ブロックを指定するとパイプの配列を引数にブロックを実行し、最後にパイプ
+を close します。この場合はブロックの最後の式の結果を返します。
 
-        require 'open3'
+  require 'open3'
 
-        Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr|
-          stdin.puts "stdin"
-          stdin.close     # または close_write
-          p stdout.read
-          p stderr.read
-        }
-        #=> "stdout\n"
-            "stderr\n"
+  Open3.popen3("read stdin; echo stdout; echo stderr >&2") {|stdin, stdout, stderr|
+    stdin.puts "stdin"
+    stdin.close     # または close_write
+    p stdout.read
+    p stderr.read
+  }
+  #=> "stdout\n"
+      "stderr\n"
 
 #@end
 
