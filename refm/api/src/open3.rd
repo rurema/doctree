@@ -28,10 +28,9 @@ nroff プロセスの標準出力から処理結果を受け取る。
 
 == Module Functions
 
-#@todo envについて追記する。
 #@since 1.9.2
---- popen3(cmd, opts = {}) -> [IO, IO, IO, Thread]
---- popen3(cmd, opts = {}) {|stdin, stdout, stderr, wait_thr| ... } -> ()
+--- popen3(*cmd) -> [IO, IO, IO, Thread]
+--- popen3(*cmd) {|stdin, stdout, stderr, wait_thr| ... } -> ()
 
 外部プログラム cmd を実行し、そのプロセスの標準入力、標準出力、標準エラー
 出力に接続されたパイプと実行したプロセスを待つためのスレッドを 4 要素の
@@ -41,8 +40,6 @@ nroff プロセスの標準出力から処理結果を受け取る。
   stdin, stdout, stderr, wait_thr = *Open3.popen3("/usr/bin/nroff -man")
 
 @param cmd 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は標準入力、標準出力、標準エラー出
@@ -105,8 +102,23 @@ stdin への入力が終わったらできる限り早く close か close_write
 #@#終了ステータスがほしいひとは、((<POpen4|URL:http://popen4.rubyforge.org/>)) を試してみるといいかもしれません。
 
 #@since 1.9.2
-引数リストの最後に[[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で
+[[m:Kernel.#spawn]]と同様に、引数リストの最初に環境変数をハッシュ形式で
 指定する事ができます。
+
+例:
+
+  require 'open3'
+
+  Open3.popen3({"foo" => "1", "bar" => "2"}, "env") {|i, o, e, t|
+    i.close
+    print o.read
+  }
+  #=> ...
+      foo=1
+      bar=2
+
+[[m:Kernel.#spawn]]と同様に、引数リストの最後にオプションをハッシュ形式
+で指定する事ができます。
 
 例:
 
@@ -130,24 +142,25 @@ stdin への入力が終わったらできる限り早く close か close_write
 
 #@since 1.9.2
 
---- popen2(cmd, opts = {}) -> [IO, IO, Thread]
---- popen2(cmd, opts = {}) {|stdin, stdout, wait_thr| ... } -> ()
+--- popen2(*cmd) -> [IO, IO, Thread]
+--- popen2(*cmd) {|stdin, stdout, wait_thr| ... } -> ()
 
 cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力にパイ
 プをつなぎます。Open3.popen3に似ていますが、標準エラーを扱いません。
 
 @param cmd 実行するコマンドを指定します。
 
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
-
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は標準入力、標準出力に接続されたパ
         イプと実行したプロセスを待つためのスレッドを返します。
 
-@see [[m:Open3.#popen3]], [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- popen2e(cmd, opts = {}) -> [IO, IO, Thread]
---- popen2e(cmd, opts = {}) {|stdin, stdout_and_stderr, wait_thr| ... } -> ()
+@see [[m:Open3.#popen3]]
+
+--- popen2e(*cmd) -> [IO, IO, Thread]
+--- popen2e(*cmd) {|stdin, stdout_and_stderr, wait_thr| ... } -> ()
 
 cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力と標準
 エラーにパイプをつなぎます。Open3.popen3に似ていますが、標準出力と標準
@@ -155,23 +168,22 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準入力・標準出力と標準
 
 @param cmd 実行するコマンドを指定します。
 
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
-
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は標準入力、標準出力と標準エラーに
         接続されたパイプと実行したプロセスを待つためのスレッドを返しま
         す。
 
-@see [[m:Open3.#popen3]], [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- capture3(cmd, opts = {}) -> [String, String, Process::Status]
+@see [[m:Open3.#popen3]]
+
+--- capture3(*cmd) -> [String, String, Process::Status]
 
 cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラー、プ
 ロセスの終了ステータスを表すオブジェクトを返します。
 
 @param cmd 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
 
 @return 実行したコマンドの標準出力と標準エラー、プロセスの終了ステータ
         スを表すオブジェクトを配列で返します。
@@ -190,16 +202,17 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラー、プ
   p e #=> "bar\nbaz\nfoo\n"
   p s #=> #<Process::Status: pid 32682 exit 0>
 
-@see [[m:Open3.#popen3]], [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- capture2(cmd, opts = {}) -> [String, Process::Status]
+@see [[m:Open3.#popen3]]
+
+--- capture2(*cmd) -> [String, Process::Status]
 
 cmdで指定されたコマンドを実行し、そのプロセスの標準出力とプロセスの終了
 ステータスを表すオブジェクトを返します。
 
 @param cmd 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
 
 @return 実行したコマンドの標準出力と終了ステータスを表すオブジェクトを
         配列で返します。
@@ -217,17 +230,18 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力とプロセスの終了
   o, s = Open3.capture2("factor", :stdin_data=>"42")
   p o #=> "42: 2 3 7\n"
 
-@see [[m:Open3.#popen3]], [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- capture2e(cmd, opts = {}) -> [String, Process::Status]
+@see [[m:Open3.#popen3]]
+
+--- capture2e(*cmd) -> [String, Process::Status]
 
 cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
 つの文字列にしたものとプロセスの終了ステータスを表すオブジェクトを返し
 ます。
 
 @param cmd 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
 
 @return 実行したコマンドの標準出力と標準エラーを1つの文字列にしたものと
         終了ステータスを表すオブジェクトを配列で返します。
@@ -245,18 +259,19 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
   p o #=> "a\nbar\nbaz\nfoo\n"
   p s #=> #<Process::Status: pid 20574 exit 0>
 
-@see [[m:Open3.#popen3]], [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- pipeline_rw(cmd1, cmd2, ..., opts = {}) -> [IO, IO, [Thread]]
---- pipeline_rw(cmd1, cmd2, ..., opts = {}) {|first_stdin, last_stdout, wait_thrs| -> ()
+@see [[m:Open3.#popen3]]
 
-cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
+--- pipeline_rw(*cmds) -> [IO, IO, [Thread]]
+--- pipeline_rw(*cmds) {|first_stdin, last_stdout, wait_thrs| -> ()
+
+指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
 コマンドの標準入力に書き込む事も最後のコマンドの標準出力を受けとる事も
 できます。
 
-@param cmdX 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
+@param cmds 実行するコマンドのリストを指定します。
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力
@@ -280,17 +295,18 @@ cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
     p stdout.read   #=> "     1\tbar\n     2\tbaz\n     3\tfoo\n"
   }
 
-@see [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- pipeline_r(cmd1, cmd2, ..., opts = {}) -> [IO, [Thread]]
---- pipeline_r(cmd1, cmd2, ..., opts = {}) {|last_stdout, wait_thrs| -> ()
+@see [[m:Open3.#popen3]]
 
-cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
+--- pipeline_r(*cmds) -> [IO, [Thread]]
+--- pipeline_r(*cmds) {|last_stdout, wait_thrs| -> ()
+
+指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
 コマンドの標準出力を受けとる事ができます。
 
-@param cmdX 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
+@param cmds 実行するコマンドのリストを指定します。
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最後に実行するコマンドの標準出力、
@@ -306,17 +322,18 @@ cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
     p ts[1].value #=> #<Process::Status: pid 24913 exit 0>
   }
 
-@see [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- pipeline_w(cmd1, cmd2, ..., opts = {}) -> [IO, [Thread]]
---- pipeline_w(cmd1, cmd2, ..., opts = {}) {|first_stdin, wait_thrs| -> ()
+@see [[m:Open3.#popen3]]
 
-cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
+--- pipeline_w(*cmds) -> [IO, [Thread]]
+--- pipeline_w(*cmds) {|first_stdin, wait_thrs| -> ()
+
+指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
 コマンドの標準入力に書き込む事ができます。
 
-@param cmdX 実行するコマンドを指定します。
-
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
+@param cmds 実行するコマンドのリストを指定します。
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は最初に実行するコマンドの標準入力、
@@ -330,16 +347,17 @@ cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
     w.puts "hello"
   }
 
-@see [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- pipeline_start(cmd1, cmd2, ..., opts = {}) -> [Thread]
---- pipeline_start(cmd1, cmd2, ..., opts = {}) {|wait_thrs| -> ()
+@see [[m:Open3.#popen3]]
 
-cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。
+--- pipeline_start(*cmds) -> [Thread]
+--- pipeline_start(*cmds) {|wait_thrs| -> ()
 
-@param cmdX 実行するコマンドを指定します。
+指定したコマンドのリストをパイプで繋いで順番に実行します。
 
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
+@param cmd 実行するコマンドのリストを指定します。
 
 @return ブロックを指定した場合はブロックの最後に評価された値を返します。
         ブロックを指定しなかった場合は実行したプロセスを待つためのスレッ
@@ -357,15 +375,16 @@ cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。
     p t.value #=> #<Process::Status: pid 911 SIGTERM (signal 15)>
   }
 
-@see [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
 
---- pipeline(cmd1, cmd2, ..., opts = {}) -> [Process::Status]
+@see [[m:Open3.#popen3]]
 
-cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。
+--- pipeline(*cmds) -> [Process::Status]
 
-@param cmdX 実行するコマンドを指定します。
+指定したコマンドのリストをパイプで繋いで順番に実行します。
 
-@param opts [[m:Kernel.#spawn]]と同様のオプションをハッシュ形式で指定します。
+@param cmds 実行するコマンドのリストを指定します。
 
 @return 実行したコマンドの終了ステータスを配列で返します。
 
@@ -379,6 +398,9 @@ cmdXで指定したコマンドのリストをパイプで繋いで順番に実行します。
   #    #<Process::Status: pid 11820 exit 0>,
   #    #<Process::Status: pid 11828 exit 0>]
 
-@see [[m:Kernel.#spawn]]
+[[m:Open3.#popen3]]と同様に引数に環境変数とオプションを指定してコマンド
+を実行する事ができます。
+
+@see [[m:Open3.#popen3]]
 
 #@end
