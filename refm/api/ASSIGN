@@ -270,7 +270,7 @@ strscan                         kouya           done
 sync                            kouya           done
 syslog                          kouya           done
 tempfile                        kouya           done
-test/unit                       
+test/unit                       sho-h
 thread                          m-kawato
 thwait                          kouya           done
 time                            kouya           done
