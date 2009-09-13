@@ -122,7 +122,7 @@ limit 回数以上リダイレクトしたらエラーにします。
 
   print fetch('http://www.example.org')
 
-より詳しくは [[c:HTTPResponse]]、 [[c:Net::HTTPSuccess]]、
+より詳しくは [[c:Net::HTTPResponse]]、 [[c:Net::HTTPSuccess]]、
 [[c:Net::HTTPRedirection]] を参照してください。
 
 ==== Basic 認証
@@ -869,7 +869,7 @@ HTTP リクエストをサーバに送り、そのレスポンスを
 --- request(request [, data]) -> Net::HTTPResponse
 --- request(request [, data]) {|response| .... } -> Net::HTTPResponse
 
-[[c:Net::HTTPResquest]] オブジェクト request をサーバに送信します。
+[[c:Net::HTTPRequest]] オブジェクト request をサーバに送信します。
 
 POST/PUT の時は data も与えられます 
 (GET/HEAD などで  data を与えると 
@@ -901,7 +901,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Copy]]
+@see [[c:Net::HTTP::Copy]]
 
 --- delete(path, initheader = nil) -> Net::HTTPResponse
 サーバの path に DELETE リクエストを
@@ -914,7 +914,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Delete]]
+@see [[c:Net::HTTP::Delete]]
 
 --- lock(path, body, initheader = nil) -> Net::HTTPResponse
 サーバの path に LOCK リクエストを
@@ -928,7 +928,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Lock]]
+@see [[c:Net::HTTP::Lock]]
 
 --- mkcol(path, body, initheader = nil) -> Net::HTTPResponse
 サーバの path に MKCOL リクエストを
@@ -942,7 +942,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Mkcol]]
+@see [[c:Net::HTTP::Mkcol]]
 
 --- move(path, body, initheader = nil) -> Net::HTTPResponse
 サーバの path に MOVE リクエストを
@@ -956,7 +956,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Move]]
+@see [[c:Net::HTTP::Move]]
 
 --- options(path, initheader = nil) -> Net::HTTPResponse
 サーバの path に OPTIONS リクエストを
@@ -968,7 +968,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Options]]
+@see [[c:Net::HTTP::Options]]
 
 --- propfind(path, body, initheader = {'Depth' => '0'}) -> Net::HTTPResponse
 サーバの path に PROPFIND リクエストを
@@ -982,7 +982,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Propfind]]
+@see [[c:Net::HTTP::Propfind]]
 
 --- proppatch(path, body, initheader = nil) -> Net::HTTPResponse
 サーバの path に PROPPATCH リクエストを
@@ -996,7 +996,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Proppatch]]
+@see [[c:Net::HTTP::Proppatch]]
 
 --- trace(path, initheader = nil) -> Net::HTTPResponse
 サーバの path に TRACE リクエストを
@@ -1009,7 +1009,7 @@ POST/PUT の時は data も与えられます
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
 
-@see [[c:Net::NTTP::Trace]]
+@see [[c:Net::HTTP::Trace]]
 
 
 --- unlock(path, body, initheader = nil) -> Net::HTTPResponse
@@ -1023,7 +1023,7 @@ POST/PUT の時は data も与えられます
 @param body リクエストのボディを文字列で与えます。
 @param initheader リクエストのヘッダを「文字列=>文字列」の
                   ハッシュで与えます。
-@see [[c:Net::NTTP::Unlock]]
+@see [[c:Net::HTTP::Unlock]]
 
 
 --- use_ssl? -> bool
@@ -1250,8 +1250,8 @@ Content-Range: ヘッダフィールドの表している長さを整数で返します。
 key ヘッダフィールドを削除します。
 
 @param key 削除するフィールド名
-@param 取り除かれたフィールドの値を返します。
-       key ヘッダフィールドが存在しなかった場合には
+@return 取り除かれたフィールドの値を返します。
+        key ヘッダフィールドが存在しなかった場合には
         nil を返します。
 
 --- each {|name, val| .... } -> ()
@@ -1875,7 +1875,7 @@ HTTP 例外クラスです。
   * [[c:Net::HTTPServerError]]
   * [[c:Net::HTTPFatalError]]
 
-また、例外を発生させるためには [[m:HTTPResponse#value]] を
+また、例外を発生させるためには [[m:Net::HTTPResponse#value]] を
 呼ぶ必要があります。
 
 == Instance Methods
