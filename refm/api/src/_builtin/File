@@ -629,7 +629,7 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-@see [[m:File#stat]], [[m:File#ctime]], [[m:File#mtime]]
+@see [[m:File#lstat]], [[m:File#ctime]], [[m:File#mtime]]
 
 --- ctime    -> Time
 
@@ -639,7 +639,7 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-@see [[m:File#stat]], [[m:File#atime]], [[m:File#mtime]]
+@see [[m:File#lstat]], [[m:File#atime]], [[m:File#mtime]]
 
 --- mtime    -> Time
 
@@ -649,7 +649,7 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 
 @raise Errno::EXXX ファイルの時刻の取得に失敗した場合に発生します。
 
-@see [[m:File#stat]], [[m:File#atime]], [[m:File#ctime]]
+@see [[m:File#lstat]], [[m:File#atime]], [[m:File#ctime]]
 
 #@since 1.9.2
 --- size     -> Integer
@@ -666,7 +666,7 @@ path が全てのユーザから書き込めるならば、そのファイルのパーミッションを表す
 
 @raise Errno::EXXX 失敗した場合に発生します。
 
-@see [[m:File#stat]]
+@see [[m:File#lstat]]
 
 #@end
 --- chmod(mode)    -> 0
