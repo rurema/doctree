@@ -4,27 +4,26 @@ alias Synchronizer_m
 スレッド同期機構である再入可能な reader/writer ロック機能を Mix-in により提供する。
 
 includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
-#@# (((<ruby 1.7 feature>)))
 
-#@# == ロック状態
+
 == Constants
---- Sync_m::UN
+--- UN
 ロックされていない状態を表す定数です。
 
---- Sync_m::EX
+--- EX
 排他ロックされている状態を表す定数です。
 オブジェクトの状態を更新する場合のように、
 1つのスレッドがオブジェクトを独占的に使用したい場合に用いる。
 排他ロック中に他のスレッドはオブジェクトを共有/排他ロックできない。
 
---- Sync_m::SH
+--- SH
 共有ロックされている状態を表す定数です。
 複数のスレッドが同時にオブジェクトを使用できる場合に用いる。
 複数のスレッドが共有ロックしている場合、
 どのスレッドもオブジェクトを排他ロックできない。
 
 == Module Functions
---- sync_mode -> bool
+--- sync_mode -> Symbol
 現在のロック状態を返します。
 
 --- sync_locked? -> bool
@@ -69,3 +68,81 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 
 @param mode 変更後の状態を指定します。
             通常、 [[m:Sync_m::UN]], [[m:Sync_m::EX]], [[m:Sync_m::SH]] のどれかを指定します。
+
+--- sync_waiting -> [Thread]
+#@todo
+
+--- sync_waiting=(arr)
+#@todo
+
+--- sync_upgrade_waiting -> [Thread]
+#@todo
+
+--- sync_upgrade_waiting=(arr)
+#@todo
+
+--- sync_sh_locker -> Hash
+#@todo
+
+--- sync_sh_locker=(hash)
+#@todo
+
+--- sync_ex_locker -> Thread | nil
+#@todo
+
+--- sync_ex_locker=(thread)
+#@todo
+
+--- sync_ex_count -> Integer
+#@todo
+
+--- sync_ex_count=(count)
+#@todo
+
+#@until 1.9.1
+--- sync_extended
+#@todo
+
+#@end
+
+#@since 1.9.1
+--- sync_extend
+#@todo
+
+--- sync_inspect
+#@todo
+
+#@end
+
+
+= class Sync_m::Err < StandardError
+
+このライブラリで使用する例外の基底クラスです。
+
+== Singleton Methods
+
+--- Fail(*options) -> ()
+
+自身に定義されているメッセージをセットして例外を発生させます。
+
+= class Syc_m::UnknownLocker < Sync_m::Err
+
+スレッドがロックされているべきタイミングでロックさ庭内場合に発生する例外です。
+
+== Singleton Methods
+
+--- Fail(*options) -> ()
+
+自身に定義されているメッセージをセットして例外を発生させます。
+
+= class Syc_m::LockModeFailer < Sync_m::Err
+
+誤ったロックモードがセットされている場合に発生する例外です。
+
+== Singleton Methods
+
+--- Fail(*options) -> ()
+
+自身に定義されているメッセージをセットして例外を発生させます。
+
+
