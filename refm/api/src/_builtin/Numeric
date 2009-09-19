@@ -666,3 +666,12 @@ true を返します。そうでない場合に false を返します。
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 #@end
+#@since 1.9.2
+--- i    -> Complex
+#@todo
+Complex(0, num) を返す。
+
+Returns the corresponding imaginary number.
+Not available for complex numbers.
+
+#@end
