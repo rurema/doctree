@@ -140,6 +140,15 @@ Ruby ¤Ï¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤¬³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤¬¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò°·¤
   Encoding::ISO_2022_JP.dummy?       #=> true
   Encoding::UTF_8.dummy?             #=> false
 
+#@since 1.9.2
+--- ascii_compatible? -> bool
+#@todo
+Returns whether ASCII-compatible or not.
+
+Îã:
+  Encoding::UTF_8.ascii_compatible?     #=> true
+  Encoding::UTF_16BE.ascii_compatible?  #=> false
+#@end
 == Constants
 
 --- ASCII_8BIT
