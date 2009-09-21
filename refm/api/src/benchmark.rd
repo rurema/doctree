@@ -343,7 +343,7 @@ self を指定されたフォーマットで整形して返します。
 : %n
   ラベルで置き換えられます(Mnemonic: n of "*n*ame")。[[m:Benchmark::Tms#label]]
 
-@param fmtstr フォーマット文字列です。省略された場合は、[[:Benchmark::Tms::FMTSTR]] が使用されます。
+@param fmtstr フォーマット文字列です。省略された場合は、[[m:Benchmark::Tms::FMTSTR]] が使用されます。
 @param args  フォーマットされる引数です。
 
 --- to_a -> Array
