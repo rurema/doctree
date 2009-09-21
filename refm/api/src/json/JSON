@@ -64,7 +64,7 @@ JSON ライブラリがジェネレータの状態を表すクラスとして使用するクラスを返します。
 
 与えられたオブジェクトを JSON 形式の文字列に変換してダンプします。
 
-与えられたオブジェクトを引数として [[JSON.#generate]] を呼び出します。
+与えられたオブジェクトを引数として [[m:JSON.#generate]] を呼び出します。
 
 
 @param object ダンプするオブジェクトを指定します。
@@ -228,7 +228,7 @@ proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを
 
 Ruby のオブジェクトを JSON 形式の文字列に変換して返します。
 
-このメソッドは [[m:JSON.generate]] よりも人間に読みやすい文字列を返します。
+このメソッドは [[m:JSON.#generate]] よりも人間に読みやすい文字列を返します。
 
 pretty_unparse は将来削除される予定です。
 
@@ -237,7 +237,7 @@ pretty_unparse は将来削除される予定です。
 @param options [[c:JSON::State]] または、to_hash や to_h メソッドでハッシュに変換可能なオブジェクトを指定できます。
        ハッシュを使用する場合指定可能なオプションは [[m:JSON.#generate]] を参照してください。
 
-@see [[m:JSON.generate]]
+@see [[m:JSON.#generate]]
 
 #@# nodoc?
 #@# --- recurse_proc(result, &proc) -> object
