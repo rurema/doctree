@@ -1,7 +1,13 @@
 require test/unit/assertions
+#@until 1.9.1
 require test/unit/testsuite
+#@end
 
+#@since 1.9.1
+= class Test::Unit::TestCase < MiniTest::Unit::TestCase
+#@else
 = class Test::Unit::TestCase < Object
+#@end
 include Test::Unit::Assertions
 #@#include Test::Unit::Util::BacktraceFilter
 
@@ -9,8 +15,10 @@ include Test::Unit::Assertions
 テストを行うメソッド(テストメソッド)は TestCase のサブクラスのインスタンスメソッド
 として定義されます。テストメソッドの名前は「test」で始まっていなければなりません。
 逆に、「test」で始まっているメソッドは全てテストメソッドと見なされます。
+#@until 1.9.1
 各テストメソッドは、[[m:Test::Unit::TestCase.suite]] により [[c:Test::Unit::TestSuite]]
 オブジェクトへとひとつにまとめられます。
+#@end
 
  require 'test/unit'
  require 'test/unit/ui/console/testrunner'
@@ -37,6 +45,12 @@ Ties everything together. If you subclass and add your own test methods, it take
 
 == Class Methods
 
+#@since 1.9.1
+--- test_order    -> Symbol
+
+テストの実行順序を返します。
+
+#@else
 --- new(test_method_name)    -> Test::Unit::TestCase
 #@todo
 
@@ -106,8 +120,9 @@ result.
 
 --- PASSTHROUGH_EXCEPTIONS
 
-These exceptions are not caught by #run.
+[[m:Test::Unit::TestCase#run]] の実行時に rescue されない例外の一覧です。
 
 #@include(error.rd)
 #@include(failure.rd)
 
+#@end
