@@ -149,7 +149,7 @@ of ``The WWW Common Gateway Interface Version 1.1''.
 ハッシュのキーも値も unescape されています。ただし multipart/form-data なフォームデータの場合には
 ユーザが content-transfer-encoding ヘッダを見て適切に処理する必要があります。
 
-ハッシュの値は正確には文字列ではなく String クラスのサブクラスである [[c: WEBrick::HTTPUtils::FormData]]
+ハッシュの値は正確には文字列ではなく String クラスのサブクラスである [[c:WEBrick::HTTPUtils::FormData]]
 クラスのインスタンスです。
 
 multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデータと
