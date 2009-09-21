@@ -796,7 +796,7 @@ Fileクラスにある同名のクラスメソッドと同じです.
 
 @param filename ファイル名を表す文字列を指定します。
 
-@see [[File.dirname]]
+@see [[m:File.dirname]]
 
 --- ftype(filename)    -> String
 
