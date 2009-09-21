@@ -1,5 +1,7 @@
+#@until 1.9.1
 = class Test::Unit::AssertionFailedError < StandardError
 Thrown by Test::Unit::Assertions when an assertion fails.
+#@end
 
 = module Test::Unit::Assertions
 

@@ -410,10 +410,10 @@ syslog
 tempfile
 #@since 1.8.0
 test/unit
-#@until 1.9.1
-test/unit/autorunner
 test/unit/assertions
 test/unit/testcase
+#@until 1.9.1
+test/unit/autorunner
 test/unit/testresult
 test/unit/testsuite
 test/unit/ui/testrunnerutilities

@@ -1,5 +1,7 @@
 require test/unit/testcase
+#@until 1.9.1
 require test/unit/autorunner
+#@end
 
 ¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¹Ô¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
@@ -117,8 +119,10 @@ console ¤ò»È¤¦ (default)
  require 'test_foo.rb'
  require 'test_bar.rb'
 
+#@until 1.9.1
 ¤â¤¦¾¯¤·¹âÅÙ¤Ê¥Æ¥¹¥È¤Î¼Â¹ÔÊýË¡¤Ë´Ø¤·¤Æ¤Ï [[c:Test::Unit::AutoRunner]] ¤ò
 »²¾È¤·¤Æ²¼¤µ¤¤¡£
+#@end
 
 === ¤¤¤Ä¥Æ¥¹¥È¤Ï¼Â¹Ô¤µ¤ì¤ë¤«
 
@@ -135,10 +139,12 @@ testrb ¥³¥Þ¥ó¥É¤ä [[c:Test::Unit::AutoRunner]] ¡¢³Æ¼ï TestRunner ¥¯¥é¥¹¤ò»È¤¦¤³¤
 ¥Æ¥¹¥È¥á¥½¥Ã¥É¼Â¹ÔÃæ¤ËÎã³°¤¬È¯À¸¤·¤¿¤Ê¤é Error ¤Ç¤¹¡£Îã³°¤¬È¯À¸¤»¤º assert ¤Ë
 ¼ºÇÔ¤·¤¿¤À¤±¤Ê¤é Failure ¤Ç¤¹¡£
 
+#@until 1.9.1
 === RubyUnit ¤«¤é¤Î°Ü¹Ô
 
 assertion ¥á¥½¥Ã¥É¤Î°ã¤¤¤Ï [[unknown:"ruby-src:lib/runit/assert.rb"]] ¤ò»²¾È¡£
 [[c:RUNIT::Assert]] ¤â»²¾È¡£
+#@end
 
 = module Test::Unit
 
