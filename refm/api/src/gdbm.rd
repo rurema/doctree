@@ -328,13 +328,13 @@ self の内容を other の内容で置き換えます。
 
 key に対して val を格納します。
 
-@see [[m#GDBM#[]=]]
+@see [[m:GDBM#[]=]]
 
 --- sync -> self
 
 要素の変更をファイルに反映します。
 
-FAST モード([[m#GDBM#open]] の第3引数に [[m#GDBM::FAST]] を指定)のときだけ意味があります。
+FAST モード([[m:GDBM.open]] の第3引数に [[m:GDBM::FAST]] を指定)のときだけ意味があります。
 
 ==== 注意
 GNU gdbm version 1.8 以降より FAST モードがデフォルトになりました。
