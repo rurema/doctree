@@ -73,7 +73,7 @@ self のエンコーディングを shift_jis に変換した文字列を
 
 @see [[m:Kconv.#tosjis]]
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- toutf8 -> String
 
 self のエンコーディングを UTF-8 に変換した文字列を
@@ -87,7 +87,7 @@ self のエンコーディングを UTF-8 に変換した文字列を
 @see [[m:Kconv.#toutf8]]
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- toutf16 -> String
 
 self のエンコーディングを UTF-16BE に変換した文字列を
@@ -102,7 +102,7 @@ self のエンコーディングを UTF-16BE に変換した文字列を
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- iseuc -> bool
 
 self が EUC-JP なバイト列として正当であるかどうかを判定します。
@@ -111,7 +111,7 @@ self が EUC-JP なバイト列として正当であるかどうかを判定します。
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- issjis -> bool
 
 self が Shift_JIS なバイト列として正当であるかどうかを判定します。
@@ -121,7 +121,7 @@ self が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- isutf8 -> bool
 
 self が UTF-8 なバイト列として正当であるかどうかを判定します。
@@ -206,7 +206,7 @@ Kconv.kconv(str, Kconv::SJIS)と同じです。
 
 @see [[m:Kconv.#kconv]], [[m:String#tosjis]]
 
-#@until 1.9.0
+#@until 1.9.1
 --- guess(str) -> Integer
 #@else
 --- guess(str) -> Encoding | nil
@@ -231,7 +231,7 @@ Kconv の定数です。
 @param str エンコーディング判定対象の文字列
 
 #@since 1.8.2
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- guess_old(str) -> Integer
 文字列 str のエンコーディングを判定します。戻り値は
 Kconv の定数です。
@@ -249,7 +249,7 @@ Kconv の定数です。
 #@end
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- toutf8(str) -> String
 
 文字列 str のエンコーディングを UTF-8 に変換して返します。
@@ -266,7 +266,7 @@ Kconv.kconv(str, Kconv::UTF8)と同じです。
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- toutf16(str) -> String
 
 文字列 str のエンコーディングを UTF-16BE に変換して返します。
@@ -283,7 +283,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- iseuc(str) -> bool
 文字列 str が EUC-JP なバイト列として正当であるかどうかを判定します。
 
@@ -292,7 +292,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- issjis(str) -> bool
 文字列 str が Shift_JIS なバイト列として正当であるかどうかを判定します。
 
@@ -301,7 +301,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 
 #@end
 
-#@if (version >= "1.8.2")
+#@since 1.8.2
 --- isutf8(str) -> bool
 文字列 str が UTF-8 なバイト列として正当であるかどうかを判定します。
 
@@ -318,7 +318,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 #@end
 == Constants
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- AUTO -> Integer
 #@else
 --- AUTO -> nil
@@ -327,7 +327,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 エンコーディングを自動検出します。
 入力の指定でのみ有効です。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- JIS -> Integer
 #@else
 --- JIS -> Encoding
@@ -335,7 +335,7 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 
 ISO-2022-JP を表します。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- EUC -> Integer
 #@else
 --- EUC -> Encoding
@@ -343,7 +343,7 @@ ISO-2022-JP を表します。
 
 EUC-JP を表します。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- SJIS -> Integer
 #@else
 --- SJIS -> Encoding
@@ -352,20 +352,20 @@ EUC-JP を表します。
 Shift_JIS を表します。
 cp932ではないことに注意してください。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- BINARY -> Integer
 #@else
 --- BINARY -> Encoding
 #@end
 
-#@if (version < "1.8.2")
+#@since 1.8.2
 JIS EUC SJIS 以外を表します。
 #@else
 JIS EUC SJIS UTF8 UTF16 以外を表します。
 #@end
 この値は[[m:Kconv.#guess]]の返り値としてのみ用いられます。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- UNKNOWN -> Integer
 #@else
 --- UNKNOWN -> nil
@@ -374,7 +374,7 @@ JIS EUC SJIS UTF8 UTF16 以外を表します。
 出力においては「エンコーディングを判定できなかった」
 入力においては AUTO と同様に「自動検出」を表します。
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- NOCONV -> Integer
 #@else
 --- NOCONV -> nil
@@ -383,8 +383,8 @@ JIS EUC SJIS UTF8 UTF16 以外を表します。
 変換されないことを表します。
 出力エンコーディングの指定にのみ用います。
 
-#@if (version >= "1.8.2")
-#@if (version < "1.9.0")
+#@since 1.8.2
+#@until 1.9.1
 --- ASCII -> Integer
 #@else
 --- ASCII -> Encoding
@@ -393,8 +393,8 @@ JIS EUC SJIS UTF8 UTF16 以外を表します。
 ASCII を表します。
 #@end
 
-#@if (version >= "1.8.2")
-#@if (version < "1.9.0")
+#@since 1.8.2
+#@until 1.9.1
 --- UTF8 -> Integer
 #@else
 --- UTF8 -> Encoding
@@ -403,8 +403,8 @@ ASCII を表します。
 UTF8 を表します。
 #@end
 
-#@if (version >= "1.8.2")
-#@if (version < "1.9.0")
+#@since 1.8.2
+#@until 1.9.1
 --- UTF16 -> Integer
 #@else
 --- UTF16 -> Encoding
@@ -413,8 +413,8 @@ UTF8 を表します。
 UTF16 を表します。
 #@end
 
-#@if (version >= "1.8.2")
-#@if (version < "1.9.0")
+#@since 1.8.2
+#@until 1.9.1
 --- UTF32 -> Integer
 #@else
 --- UTF32 -> Encoding
@@ -423,8 +423,8 @@ UTF16 を表します。
 UTF32 を表します。
 #@end
 
-#@if (version >= "1.8.2")
-#@if (version < "1.9.0")
+#@since 1.8.2
+#@until 1.9.1
 --- RegexpShiftjis -> Regexp
 この定数は使うべきではありません。
 
@@ -437,14 +437,14 @@ UTF32 を表します。
 #@end
 
 #@since 1.8.5
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- REVISION -> String
 この定数は使うべきではありません。
 #@end
 #@end
 
-#@if (version >= "1.8.2")
-#@if (version <= "1.8.4")
+#@since 1.8.2
+#@until 1.8.5
 --- Iconv_EUC_JP -> Regexp
 この定数は使うべきではありません。
 --- Iconv_Shift_JIS -> Regexp
