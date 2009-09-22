@@ -144,7 +144,7 @@ IP アドレス address のホスト名をルックアップし、
 [[c:Resolv]] の各クラスメソッドを呼びだしたときに
 利用されるリゾルバです。
 
---- ADDRESSREGEX -> Regexp
+--- AddressRegex -> Regexp
 IPアドレスにマッチする正規表現です。
 
 = class Resolv::ResolvError < StandardError
@@ -336,14 +336,8 @@ IP アドレス address のホスト名をルックアップし、
                Resolv::IPv6 のインスタンス、のいずれか与えます。
 
 --- getresource(name, typeclass) -> Resolv::DNS::Resource
---- getresources(name, typeclass) -> [Resolv::DNS::Resource]
---- each_resource(name, typeclass) {|resource| ...} -> ()
-
 nameに対応するDNSリソースレコードを取得します。
-
-getresource は最初に見つかったリソースを、
-getresources は見つかったリソース全てを返します。
-each_resource は見つかったリソースをブロックに渡します。
+最初に見つかったリソースを返します。
 
 typeclass は以下のいずれかです。
   * [[c:Resolv::DNS::Resource::IN::ANY]]
@@ -366,7 +360,60 @@ typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
 
 @param name ルックアップ対象となる名前を [[c:Resolv::DNS::Name]] または String で指定します。
 @param typeclass レコード種別を指定します。
-@raise Resolv::ResolvError getresourceでルックアップに失敗した場合に発生します。
+@raise Resolv::ResolvError ルックアップに失敗した場合に発生します。
+
+--- getresources(name, typeclass) -> [Resolv::DNS::Resource]
+nameに対応するDNSリソースレコードを取得します。
+見つかったリソース全てを配列にして返します。
+
+typeclass は以下のいずれかです。
+  * [[c:Resolv::DNS::Resource::IN::ANY]]
+  * [[c:Resolv::DNS::Resource::IN::NS]]
+  * [[c:Resolv::DNS::Resource::IN::CNAME]]
+  * [[c:Resolv::DNS::Resource::IN::SOA]]
+  * [[c:Resolv::DNS::Resource::IN::HINFO]]
+  * [[c:Resolv::DNS::Resource::IN::MINFO]]
+  * [[c:Resolv::DNS::Resource::IN::MX]]
+  * [[c:Resolv::DNS::Resource::IN::TXT]]
+  * [[c:Resolv::DNS::Resource::IN::A]]
+  * [[c:Resolv::DNS::Resource::IN::WKS]]
+  * [[c:Resolv::DNS::Resource::IN::PTR]]
+  * [[c:Resolv::DNS::Resource::IN::AAAA]]
+  * [[c:Resolv::DNS::Resource::IN::SRV]]
+
+ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
+そのクラスのインスタンスを返します。
+
+@param name ルックアップ対象となる名前を [[c:Resolv::DNS::Name]] または String で指定します。
+@param typeclass レコード種別を指定します。
+
+--- each_resource(name, typeclass) {|resource| ...} -> ()
+
+nameに対応するDNSリソースレコードを取得します。
+見つかったリソースをひとつづつブロックに渡します。
+
+typeclass は以下のいずれかです。
+  * [[c:Resolv::DNS::Resource::IN::ANY]]
+  * [[c:Resolv::DNS::Resource::IN::NS]]
+  * [[c:Resolv::DNS::Resource::IN::CNAME]]
+  * [[c:Resolv::DNS::Resource::IN::SOA]]
+  * [[c:Resolv::DNS::Resource::IN::HINFO]]
+  * [[c:Resolv::DNS::Resource::IN::MINFO]]
+  * [[c:Resolv::DNS::Resource::IN::MX]]
+  * [[c:Resolv::DNS::Resource::IN::TXT]]
+  * [[c:Resolv::DNS::Resource::IN::A]]
+  * [[c:Resolv::DNS::Resource::IN::WKS]]
+  * [[c:Resolv::DNS::Resource::IN::PTR]]
+  * [[c:Resolv::DNS::Resource::IN::AAAA]]
+  * [[c:Resolv::DNS::Resource::IN::SRV]]
+
+ルックアップ結果は Resolv::DNS::Resource （のサブクラス）のインスタンスとなります。
+typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
+そのクラスのインスタンスを返します。
+
+@param name ルックアップ対象となる名前を [[c:Resolv::DNS::Name]] または String で指定します。
+@param typeclass レコード種別を指定します。
 
 --- close -> ()
 
