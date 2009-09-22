@@ -4,6 +4,13 @@ kconv を require すると [[c:String]] クラスに変換用のメソッドが定義されます。
 [[c:Kconv]] にも同等のメソッドが定義されます。 [[c:Kconv]] には
 エンコーディングを表す定数も定義されています。
 
+#@since 1.9.1
+1.9.1 以降では、Ruby の m17n 機能を用いてエンコーディングの変換を
+行うことができます。1.8 との互換性が問題でないのならば、
+m17n 機能を使うほうがよいでしょう。MIMEのデコード等面倒な問題を
+避けることができます。
+#@end
+
 === 使用例
 
   newstring = Kconv.kconv(string, Kconv::JIS, Kconv::AUTO)
@@ -99,6 +106,35 @@ self のエンコーディングを UTF-16BE に変換した文字列を
 を使ってください。
 
 @see [[m:Kconv.#toutf16]]
+
+#@end
+
+#@since 1.9.1
+--- toutf32 -> String
+
+self のエンコーディングを UTF-32 に変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w32xm0', str)
+を使ってください。
+
+@see [[m:Kconv.#toutf32]]
+
+--- tolocale -> String
+self のエンコーディングをロケールエンコーディングに変換した文字列を
+返します。変換元のエンコーディングは文字列の内容から推測します。
+
+ロケールエンコーディングについては [[m:Encoding.locale_charmap]] を見てください。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:String#encode]]
+を使ってください。
+
+@see [[m:Kconv.#tolocale]]
+
 
 #@end
 
@@ -280,6 +316,42 @@ Kconv.kconv(str, Kconv::UTF16)と同じです。
 
 @param str 変換元の文字列
 @see [[m:String#toutf16]]
+
+#@end
+
+#@since 1.9.1
+--- toutf32(str)
+
+文字列 str のエンコーディングを UTF-32 に変換して返します。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:NKF.#nkf]]('-w32xm0', str)
+を使ってください。
+
+Kconv.kconv(str, Kconv::UTF32)と同じです。
+
+@param str 変換元の文字列
+@see [[m:String#toutf32]]
+
+#@end
+
+#@since 1.9.1
+--- tolocale(str)
+
+文字列 str のエンコーディングをロケールエンコーディングに変換して返します。
+
+ロケールエンコーディングについては [[m:Encoding.locale_charmap]] を見てください。
+
+このメソッドは MIME エンコードされた文字列を展開し、
+いわゆる半角カナを全角に変換します。
+これらを変換したくない場合は、 [[m:String#encode]]
+を使ってください。
+
+Kconv.kconv(str, Encoding.locale_charmap)と同じです。
+
+@param str 変換元の文字列
+@see [[m:String#tolocale]]
 
 #@end
 
