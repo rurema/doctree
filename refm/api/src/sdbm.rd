@@ -257,7 +257,7 @@ self の内容を other の内容で置き換えます。
 
 key に対して val を格納します。
 
-@see [[m#SDBM#[]=]]
+@see [[m:SDBM#[]=]]
 
 --- select{|key, value| ... } -> [[String]]
 
