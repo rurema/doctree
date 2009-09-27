@@ -13,9 +13,8 @@
 
 == Class Methods
 
---- open(domain, type, protocol)
---- new(domain, type, protocol)
-#@todo
+--- open(domain, type, protocol) -> Socket
+--- new(domain, type, protocol) -> Socket
 
 ┐╖д╖дде╜е▒е├е╚дЄ└╕└од╖д▐д╣бгdomainбвtypeбв
 protocol д╧едеєепеыб╝е╔е╒ебедеыд╦двды─ъ┐Їд╟╗╪─ъд╖д▐
@@ -34,20 +33,33 @@ Stevens д╬б╓UNIX е═е├е╚еяб╝епе╫еэе░еще▀еєе░┬ш2╚╟ Vol.1б╫4.2└сд╦╜╥д┘дщдьд╞дддыдшд
 ╕╜╝┬┼кд╦д╧д╔д┴дщд╟дт╠ф┬ъд╩дпбвд▐д┐бв┤√┬╕д╬е│б╝е╟егеєе░╜м┤╖д╚д╖д╞ AF_ дм═╤дддщдьдыд│д╚дм┬┐ддд┐дсбв
 д│д│д╟д╧ AF_ дЄ╗╚═╤д╖д╞ддд▐д╣бг
 
-#@if (version < "1.8.0")
---- for_fd(fd)
-#@todo
+@param domain ╬удид╨бв<sys/socket.h> д╬дшджд╩едеєепеыб╝е╔е╒ебедеыд╦─ъ╡┴д╡дьд╞ддды─ъ┐ЇдЄ╗╪─ъд╖д▐д╣бг
+@param type   ╬удид╨бв<sys/socket.h> д╬дшджд╩едеєепеыб╝е╔е╒ебедеыд╦─ъ╡┴д╡дьд╞ддды─ъ┐ЇдЄ╗╪─ъд╖д▐д╣бг
+@param protocol е╫еэе╚е│еыд╦╗╚═╤д╣ды┐Ї├═дЄ╗╪─ъд╖д▐д╣бг
 
-е╒ебедеые╟еге╣епеъе╫е┐ fd д╦┬╨д╣ды┐╖д╖дде╜е▒е├е╚дЄ└╕└од╖д▐д╣бг
-#@end
+#@# 1.8.0 ╠д╦■д╟д╣д╬д╟дтдж╔м═╫д╩ддбг
+#@# #@if (version < "1.8.0")
+#@# --- for_fd(fd)
+#@# #@todo
+#@# 
+#@# е╒ебедеые╟еге╣епеъе╫е┐ fd д╦┬╨д╣ды┐╖д╖дде╜е▒е├е╚дЄ└╕└од╖д▐д╣бг
+#@# #@end
 
---- getaddrinfo(nodename, servname[, family[, socktype[, protocol[, flags]]]])
+--- getaddrinfo(nodename, servname[, family[, socktype[, protocol[, flags]]]]) -> Array
 #@todo
 
 [[RFC:2553]]д╟─ъ╡┴д╡дьд┐
 getaddrinfo() д╬╡б╟╜дЄ─є╢бд╣дыепеще╣есе╜е├е╔бгд│д╬┤╪┐Їд╧
 gethostbyname() дф getservbyname() д╬┬хдядъд╚д╖д╞═╤░╒д╡дьд╞дкдъбв
 IP д╬е╨б╝е╕ечеєд╦░═┬╕д╖д╩дде╫еэе░ещердЄ╜ёдпд┐дсд╬╔╕╜р┼кд╩ API д╟д╣бг
+
+@param nodename е█е╣е╚╠╛дЄ╗╪─ъд╖д▐д╣бг
+@param servname
+@param family
+@param socktype
+@param protocol
+@param flags
+@return еве╔еье╣╛Ё╩єд╬╟█╬єдЄ╩╓д╖д▐д╣бг╛▄║┘д╧▓╝╡ндЄ╗▓╛╚д╖д╞дпд└д╡ддбг
 
 еве╔еье╣╛Ё╩єд╬╟█╬єдЄ╩╓д╖д▐д╣бгеве╔еье╣╛Ё╩єд╚д╧7д─д╬═╫┴╟длдщд╩ды╝бд╬
 ╖┴д╬╟█╬єд╟д╣бг
