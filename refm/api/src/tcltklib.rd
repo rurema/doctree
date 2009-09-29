@@ -1,5 +1,5 @@
 
-#@# tcltklib.so$B$NCf?H$rE83+(B
+#@# tcltklib.so¤ÎÃæ¿È¤òÅ¸³«
 
 #@include(tcltklib/TclTkIp)
 #@include(tcltklib/TclTkLib)
