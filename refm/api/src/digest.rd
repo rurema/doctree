@@ -269,11 +269,17 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 
 --- ==(str)
 
+#@if(version >= "1.8.6")
+与えられた文字列を hexdigest 値と見て、自身の hexdigest 値と比較する。
+
+@param str 比較対象の hexdigest 文字列
+#@else
 与えられた文字列を digest 値、もしくは hexdigest 値と比較する。
 いずれの値と見るかは与えられた文字列の長さによって自動判別
 される。
 
 @param str 比較対象の(ダイジェストの)文字列
+#@end
 
         require 'digest/md5'
         digest = Digest::MD5.new
