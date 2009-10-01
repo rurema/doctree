@@ -1,8 +1,10 @@
-#@if (version < "1.9.0")
+#@until 1.9.1
 [[c:String]]クラスのメソッドを追加、再定義し、
 日本語を意識した文字列処理を提供します。
+
 対象の文字列のエンコーディングが [[m:$KCODE]] で
-指定されたものとして処理します。
+あるものとして処理します。つまりスクリプト中で
+[[m:$KCODE]] を変更すると以後メソッドの動作が変わります。
 
 [[m:String#chop]]、[[m:String#delete]] といった既存の
 メソッドを置き換えるため、別のライブラリの
@@ -11,13 +13,24 @@
 利用しているライブラリを含め
 動作しているソースすべてが把握可能な場合のみです。
 
+マルチバイト文字列の取扱に関する問題を
+このライブラリで解決しようとするのはお勧めしません。
+Ruby の文字列のエンコーディングの取り扱いに関しては、
+[[d:spec/rubycmd]] の -K オプションの所や、 [[m:$KCODE]] を
+見てください。
+
 === 使用例 
 
-  require 'jcode'
-  $KCODE = 'EUC' # 漢字コードをEUC-JPに。Windows で Shift JIS なら 'SJIS' にする
+  #!/usr/bin/ruby -Ke
+  # -*- coding: euc-jp -*-
+  # 漢字コードをEUC-JPに。
+  # Windows で Shift JIS なら -Ks, coding: cp932 にする
+  
+  # jcode ライブラリを読み込み、メソッドの追加、再定義を行う
+  require 'jcode' 
+  
+  # 再定義された String#tr を呼びだす
   puts 'abcdef'.tr('a-z', 'Ａ-Ｚ')
-
-$KCODE はこのスクリプト自体の文字コードあわせて設定します。
 
 = reopen String
 
