@@ -1,6 +1,7 @@
 FTP プロトコルを扱うライブラリです。
 
-基本的には CLI の FTP クライアントを使ったことのある
+基本的には  unix の ftp コマンドのような
+command-line interface の FTP クライアントを使ったことのある
 人にとってわかりやすいインターフェースになっています。
 より「Ruby 的」であるインターフェースも用意しています。
 
@@ -12,11 +13,11 @@ FTP のデータ転送にはテキストモードとバイナリモード
 改行を適宜CRLFに変換します。バイナリモードの場合は
 一切の変換をしません。
 
-通常ではバイナリモード以外を使う必要はないでしょう。
+通常はバイナリモード以外を使う必要はないでしょう。
 
 [[m:Net::FTP#get]] 、 [[m:Net::FTP#put]] は
 [[m:Net::FTP#binary]] の値に従ってテキストモードと
-バイナリモードを一方を選びます。また、
+バイナリモードの一方を選びます。また、
 [[m:Net::FTP#getbinaryfile]]、[[m:Net::FTP#putbinaryfile]]
 は [[m:Net::FTP#binary]] の値によらずバイナリモードで、
 [[m:Net::FTP#gettextfile]]、[[m:Net::FTP#puttextfile]] は
@@ -24,10 +25,10 @@ FTP のデータ転送にはテキストモードとバイナリモード
 データ転送が行われます。
 
 === パッシブモードとアクティブモード
-FTP はデータ転送やディレクトリ情報取得のための
+FTP はファイル転送やディレクトリ情報取得のための
 データ転送用の TCP コネクションを、
-サーバとの制御コマンドをやりとりを
-をするためのコネクションとは別に作成します。
+サーバとの制御コマンドをやりとり
+するためのコネクションとは別に作成します。
 
 このデータ転送用コネクションを作成する際に、
 アクティブモードでは
@@ -105,9 +106,9 @@ user が指定された場合は [[m:Net::FTP#login]]
 @param passwd ログインに使うパスワードを指定します。
 @param acct ログイン後に送る ACCT コマンドのパラメータを指定します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 == Instance Methods
@@ -122,9 +123,9 @@ host で指定されたホストに接続します。
 @param host 接続するホスト名です。
 @param port 接続するポート番号です。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- sendcmd(cmd) -> String
@@ -133,9 +134,9 @@ cmd で指定されたコマンドをサーバーに送り、
 
 @param cmd コマンドを文字列で指定します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 
 --- voidcmd(cmd) -> nil
@@ -160,9 +161,9 @@ acct で指定したパラメータで送ります。
 @param passwd ログインに使うパスワードを指定します。
 @param acct ログイン後に送る ACCT コマンドのパラメータを指定します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- retrbinary(cmd, blocksize, rest_offset = nil) -> nil
@@ -182,9 +183,9 @@ REST コマンドを送り、指定したバイト数の位置から
 @param blocksize 読み込み単位をバイト単位で与えます。
 @param rest_offset REST コマンドに与えるオフセットを与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#getbinaryfile]]
@@ -197,9 +198,9 @@ REST コマンドを送り、指定したバイト数の位置から
 
 @param cmd コマンドを文字列で与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#gettextfile]]
@@ -229,9 +230,9 @@ REST コマンドを送り、指定したバイト数の位置から
 @param blocksize 読み込み単位をバイト単位で与えます。
 @param rest_offset REST コマンドに与えるオフセットを与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#putbinaryfile]]
@@ -241,7 +242,7 @@ REST コマンドを送り、指定したバイト数の位置から
 サーバーに cmd で指定されたコマンドを送り、テキストデータを
 送ります。
 
-一行ずつで file からテキストを読み込み、サーバーに送ります。
+一行づつで file からテキストを読み込み、サーバーに送ります。
 
 送るデータは [[c:IO]] のインスタンスを
 file で指定します。
@@ -253,9 +254,9 @@ file で指定します。
 @param cmd コマンドを文字列で与えます。
 @param file 送るデータを与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 @see [[m:Net::FTP#puttextfile]]
@@ -263,10 +264,12 @@ file で指定します。
 --- getbinaryfile(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE){|data| ...} -> nil
 --- getbinaryfile(remotefile, localfile = File.basename(remotefile), blocksize = DEFAULT_BLOCKSIZE) -> nil
 
-サーバ上のバイナリファイルを取得します。
+サーバ上のファイルをバイナリモードで取得します。
 
 サーバー上にある remotefile という名前のファイルを取得し、
 ローカルの localfile という名前のファイルに保存します。
+
+localfile が nil である場合には保存はしません。
 
 データの転送は blocksize バイト毎に行なわれます。
 
@@ -279,18 +282,20 @@ file で指定します。
 @param blocksize データ転送の単位をバイト単位で与えます。
 
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- gettextfile(remotefile, localfile = File.basename(remotefile)) -> nil
 --- gettextfile(remotefile, localfile = File.basename(remotefile)){|line| ...} -> nil
 
-サーバ上のテキストファイルを取得します。
+サーバ上のファイルをテキストモードで取得します。
 
 サーバー上にある remotefile という名前のファイルを取得し、
 ローカルの localfile という名前のファイルに保存します。
+
+localfile が nil である場合には保存はしません。
 
 ブロックが指定された場合は
 データを1行受信するごとに、その行をブロックに渡します。
@@ -299,15 +304,15 @@ file で指定します。
 @param localfile 取得したデータを格納するローカルのファイル名を与えます。
 
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- putbinaryfile(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) -> nil
 --- putbinaryfile(localfile, remotefile = File.basename(localfile), blocksize = DEFAULT_BLOCKSIZE) {|data| ...} -> nil
 
-サーバにバイナリファイルを転送します。
+サーバにファイルをバイナリモードで転送します。
 
 ローカルの localfile という名前のファイルを読みだし、
 サーバー上の remotefile という名前のファイルに保存します。
@@ -322,14 +327,14 @@ file で指定します。
 @param remotefile 転送データを保存するリモートのファイル名を与えます。
 @param blocksize データ転送の単位をバイト単位で与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- puttextfile(localfile, remotefile = File.basename(localfile)) -> nil
 --- puttextfile(localfile, remotefile = File.basename(localfile)) {|line| ... } -> nil
-サーバにバイナリファイルを転送します。
+サーバにファイルをテキストモードで転送します。
 
 ローカルの localfile という名前のファイルを読みだし、
 サーバー上の remotefile という名前のファイルに保存します。
@@ -341,9 +346,9 @@ file で指定します。
 @param localfile 転送するローカルのファイル名を与えます。
 @param remotefile 転送データを保存するリモートのファイル名を与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- acct(account) -> nil
@@ -362,9 +367,9 @@ dir を省略した場合カレントディレクトリが指定されます。
 
 @param dir ディレクトリを文字列で指定します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- list(*args) -> [String]
@@ -381,9 +386,9 @@ LIST コマンドを送信し、結果を返します。
 
 @param args LIST の引数を文字列で渡します。複数渡すことができます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合(1xy, 3xyが来るべきでないときに来た場合など)に発生します。
 
 --- rename(fromname, toname) -> nil
@@ -420,9 +425,9 @@ toname という名前に変更します。
 
 @param filename サイズを調べたいファイル名を与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- mtime(filename, local = false) -> Time
@@ -430,14 +435,14 @@ toname という名前に変更します。
 filename の更新時刻を Time オブジェクトで返します。
 
 local を真とすると、得られた更新時刻を地方時とみなします。
-偽の場合は更新時刻を協定世界時と見做します。
+偽の場合は更新時刻を協定世界時とみなします。
 
 @param filename 更新時刻を得たいファイルの名前を文字列で与えます。
 @param local 返り値の時刻を地方時とみなすかどうかを真偽値で与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- mkdir(dirname) -> String
@@ -447,9 +452,9 @@ local を真とすると、得られた更新時刻を地方時とみなします。
 
 @param dirname 作成するディレクトリ名を文字列で指定します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- rmdir(dirname) -> nil
@@ -463,17 +468,17 @@ local を真とすると、得られた更新時刻を地方時とみなします。
 --- getdir -> String
 カレントディレクトリを返します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- system -> String
 サーバーの OS のタイプを返します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外でエラーである場合に発生します。
 
 --- abort -> String
@@ -486,17 +491,17 @@ local を真とすると、得られた更新時刻を地方時とみなします。
 --- status -> String
 現在の状態を返します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 --- mdtm(filename) -> String
 MDTM コマンドを送信し、結果を返します。
 
 @param filename コマンドを発行したいファイル名を文字列で指定します。
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 --- passive -> bool
 passive モードであるならば真を、そうでなければ
@@ -547,9 +552,9 @@ passive モードを設定します。
 
 @param arg HELP コマンドのパラメータを指定します。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 
 --- quit -> nil
 FTP のセッションからログアウトします。
@@ -646,9 +651,9 @@ binary が偽のとき、つまりテキストモードの
 @param localfile 取得したデータを格納するローカルのファイル名を与えます。
 @param blocksize データ転送の単位をバイト単位で与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 
@@ -668,14 +673,14 @@ binary が偽のとき、つまりテキストモードの
 @param remotefile 転送データを保存するリモートのファイル名を与えます。
 @param blocksize データ転送の単位をバイト単位で与えます。
 
-@raise Net::FTPTermError 応答コードが 4yz のときに発生します。
+@raise Net::FTPTempError 応答コードが 4yz のときに発生します。
 @raise Net::FTPPermError 応答コードが 5yz のときに発生します。
-@raise Net::FTPProtoErrro 応答コードが RFC 的に正しくない場合に発生します。
+@raise Net::FTPProtoError 応答コードが RFC 的に正しくない場合に発生します。
 @raise Net::FTPReplyError 応答コードが上の場合以外で正しくない場合に発生します。
 
 --- binary -> bool
 [[m:Net::FTP#put]], [[m:Net::FTP#get]] による転送を
-バイナリモード(IMAGE)で転送するかどうかを返します。
+バイナリモード(IMAGE)で行うかどうかを返します。
 
 デフォルトの値は true です。
 
