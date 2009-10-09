@@ -409,7 +409,7 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 [[m:GDBM.open]] の第3引数に指定します。
 
 通常、他のプロセスが DB をオープンしている最中にオープンを行うと
-[[m#Errno::EWOULDBLOCK]](または [[m#Errno::EAGAIN]]) 例外が発生します。
+[[c:Errno::EWOULDBLOCK]](または [[c:Errno::EAGAIN]]) 例外が発生します。
 このフラグを指定していれば、他のプロセスがオープンしている最中でも同時
 オープンすることができます。
 
