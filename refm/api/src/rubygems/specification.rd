@@ -729,7 +729,7 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオプションをセットします。
 
 YAML ファイルから gemspec をロードします。
 
-YAML ファイルから [Gem::Specification]] をロードすると、通常の Ruby オブジェクトの
+YAML ファイルから [[c:Gem::Specification]] をロードすると、通常の Ruby オブジェクトの
 初期化ルーチン (#initialize) を通りません。このメソッドは初期化ルーチンの一部を実行し、
 gemspec のバージョンチェックも行います。
 
