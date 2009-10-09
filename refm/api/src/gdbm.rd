@@ -3,7 +3,7 @@ GDBM(GNU ¥Ç¡¼¥¿¥Ù¡¼¥¹¡¦¥Þ¥Í¡¼¥¸¥ã) ¤ò Ruby ¥¹¥¯¥ê¥×¥È¤«¤é°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤
 GDBM ¤Ï dbm ¤ª¤è¤Ó ndbm ¸ß´¹µ¡Ç½¤ò´Þ¤ó¤Ç¤¤¤Þ¤¹¡£
 °·¤¨¤ë¥­¡¼¤äÃÍ¤Î¥µ¥¤¥º¤ËÀ©¸Â¤Ï¤¢¤ê¤Þ¤»¤ó¡£
 
-@see [lib:dbm]], [[lib:sdbm]], [[man:gdbm]]
+@see [[lib:dbm]], [[lib:sdbm]], [[man:gdbm]]
 
 = class GDBM < Object
 
