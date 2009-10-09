@@ -282,7 +282,7 @@ Returns trivial flag.
 = class Iconv::BrokenLibrary < RuntimeError
 include Iconv::Failure
 
-iconv ライブラリのバグなどにより、[[man:errno]] が設定されなかった場合に発生します。
+iconv ライブラリのバグなどにより、[[man:errno(3)]] が設定されなかった場合に発生します。
 (Windows で iconv.dll の使用する MSVC runtime DLL のバージョンが、ruby 本体が使用するものと一致していない場合も含みます。)
 #@end
 
