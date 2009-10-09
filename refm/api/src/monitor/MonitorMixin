@@ -41,7 +41,7 @@ MonitorMixin は初期化される必要があります。
 しかし、MonitorMixin をクラス定義の際に [[m:Module#include]] を使って
 利用する場合は、initialize メソッドで super() か super を呼んで、初期化する必要があります。
 スーパークラスの initialize に引数を渡したい場合は super を、そうでない場合は super() を呼んで下さい。
-詳しくは、[[m:メソッド呼び出し#super]] を参照して下さい。
+詳しくは、[[ref:d:spec/call#super]] を参照して下さい。
 例えば、以下の MyObject のスーパークラスは Object であり、その initialize は引数を受け付けないので
 super ではなく super() を呼ぶ必要があります。
 
