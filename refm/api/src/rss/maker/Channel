@@ -64,11 +64,11 @@ RSS::NotSetError例外が発生します．どの値も設定していな
 
 --- pubDate
 #@todo
-     maker.channel.dateの別名です．
+maker.channel.dateの別名です．
 
 --- pubDate=()
 #@todo
-     maker.channel.date=の別名です．
+maker.channel.date=の別名です．
 
 --- lastBuildDate
 --- lastBuildDate=()
@@ -84,19 +84,19 @@ RSS::NotSetError例外が発生します．どの値も設定していな
 
 --- categories
 #@todo
-     categoriesを返します．
+categoriesを返します．
 
 --- cloud
 #@todo
-     cloudを返します．
+cloudを返します．
 
 --- skipDays
 #@todo
-     skipDaysを返します．
+skipDaysを返します．
 
 --- skipHours
 #@todo
-     skipHoursを返します．
+skipHoursを返します．
 
 = class RSS::Maker::RSS09::Channel < RSS::Maker::ChannelBase
 
