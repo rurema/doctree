@@ -4,7 +4,7 @@
 するクラス。Perl のソケットに対するアクセスと同レベルの機能を
 提供してます。このクラスではソケットアドレスは [[m:Array#pack]]
 された文字列で指定します
-([[m:socket#ソケットアドレス構造体を pack した文字列]]を参照)。
+([[ref:lib:socket#pack_string]]を参照)。
 
 一般的なソケットプログラミングはより高レベルの
 [[c:TCPSocket]] クラスや
@@ -75,9 +75,9 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 必須引数の意味は以下の通りです。
 
   * nodename - ホスト名
-    ([[m:socket#ホスト指定形式]]を参照)
+    ([[ref:lib:socket#host_format]]を参照)
   * servname - サービス名
-    ([[m:socket#サービス指定形式]]を参照)
+    ([[ref:lib:socket#service_format]]を参照)
 
 残りの引数は省略可能です。
 
@@ -140,8 +140,8 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 nil を指定することは Socket::AF_UNSPEC を指定すること
 と等価です。
 
-サービス、ホストの指定に関しては [[m:socket#サービス指定形式]]、
-[[m:socket#ホスト指定形式]]を参照してください。
+サービス、ホストの指定に関しては [[ref:lib:socket#service_format]]、
+[[ref:lib:socket#host_format]]を参照してください。
 
 要素が3つの場合でも、ホストにはアドレスを指定できますが、要素が4つ
 の場合には、最後の要素を名前解決しないことが保証されます。
@@ -189,7 +189,7 @@ Socket::AF_INET)を指定します。
 #@todo
 
 ホスト名または IP アドレス(指定方法に関しては
-[[m:socket#ホスト指定形式]]を参照)
+[[ref:lib:socket#host_format]]を参照)
 からホストの情報を返します。
 ホスト情報は以下の 4 要素の配列で表現されています。
 
@@ -235,7 +235,7 @@ service, protoに対応するポート番号を返
 --- pack_sockaddr_in(port, host)
 #@todo
 
-指定したアドレスを[[m:socket#ソケットアドレス構造体を pack した文字列]]
+指定したアドレスを[[ref:lib:socket#pack_string]]
 で返します。port は、ポート番号を表す [[c:Fixnum]] あるいは、ポート
 番号、サービス名を表す文字列です。
 
@@ -253,7 +253,7 @@ service, protoに対応するポート番号を返
 --- pack_sockaddr_un(path)
 #@todo
 
-指定したアドレスを[[m:socket#ソケットアドレス構造体を pack した文字列]]
+指定したアドレスを[[ref:lib:socket#pack_string]]
 で返します。
 
 例:
@@ -274,7 +274,7 @@ service, protoに対応するポート番号を返
 --- unpack_sockaddr_in(sockaddr)
 #@todo
 
-[[m:socket#ソケットアドレス構造体を pack した文字列]]を
+[[ref:lib:socket#pack_string]]を
 unpack したアドレスを返します。返される値は [port, ipaddr]
 の配列です。
 
@@ -291,7 +291,7 @@ unpack したアドレスを返します。返される値は [port, ipaddr]
 --- unpack_sockaddr_un(sockaddr)
 #@todo
 
-[[m:socket#ソケットアドレス構造体を pack した文字列]]を
+[[ref:lib:socket#pack_string]]を
 unpack したソケットパス名を返します。
 
 例:
@@ -337,7 +337,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
 ソケットを my_sockaddr に結合します。[[man:bind(2)]]
 と同じ働きをします。my_sockaddr は
-[[m:socket#ソケットアドレス構造体を pack した文字列]]
+[[ref:lib:socket#pack_string]]
 です。
 
 0 を返します。
@@ -346,7 +346,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@todo
 
 [[man:connect(2)]] と同じ働きをします。server_sockaddr は、
-[[m:socket#ソケットアドレス構造体を pack した文字列]]
+[[ref:lib:socket#pack_string]]
 です。
 
 0 を返します。

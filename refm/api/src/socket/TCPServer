@@ -65,10 +65,10 @@ Thread を使えばもっと短くなります。
 指定したホストに対しての接続だけを受け付けます。省略時は全てのホ
 スト(インタフェース)への接続要求を受け付けることになります。
 
-host に指定できる形式は[[m:socket#ホスト指定形式]]を見てください。
+host に指定できる形式は[[ref:lib:socket#host_format]]を見てください。
 
 @param host 接続したいホストを指定します。
-            host に指定できる形式は[[m:socket#ホスト指定形式]]を見てください。
+            host に指定できる形式は[[ref:lib:socket#host_format]]を見てください。
 
 @param service /etc/services (または NIS) に登録されているサービ
                ス名かポート番号で指定します。

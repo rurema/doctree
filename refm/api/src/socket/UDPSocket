@@ -32,11 +32,11 @@ UDP/IPデータグラム型ソケットのクラス。
 port を指定する必要があります。実際に送ったデータの長さを返
 します。
 
-dest_sockaddr には[[m:socket#ソケットアドレス構造体を pack した文字列]]
+dest_sockaddr には[[ref:lib:socket#pack_string]]
 を指定します。
 
-host, port に関しては [[m:socket#ホスト指定形式]]、
-[[m:socket#サービス指定形式]]を参照してください。
+host, port に関しては [[ref:lib:socket#host_format]]、
+[[ref:lib:socket#service_format]]を参照してください。
 
 2 引数、3 引数の形式の場合の動作は、
 [[m:BasicSocket#send]] と同じです。
