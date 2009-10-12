@@ -441,7 +441,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 
 --- VERSION
 
-Readlineモジュールが使用している GNU Readline や liedit のバージョンを
+Readlineモジュールが使用している GNU Readline や libedit のバージョンを
 示す文字列です。
 
 --- FILENAME_COMPLETION_PROC
