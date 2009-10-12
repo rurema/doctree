@@ -620,7 +620,7 @@ nil を返します。
 現在の内部エンコーディングを返します。
 
 #@since 1.9.2
---- codepoints{|codepoint| ... } => self
+--- codepoints{|codepoint| ... } -> self
 --- codepoints -> Enumerator
 --- each_codepoint{|codepoint| ... } -> self
 --- each_codepoint -> Enumerator
