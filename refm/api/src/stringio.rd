@@ -621,9 +621,9 @@ nil を返します。
 
 #@since 1.9.2
 --- codepoints{|codepoint| ... } => self
---- codepoints -> Enumrator
+--- codepoints -> Enumerator
 --- each_codepoint{|codepoint| ... } -> self
---- each_codepoint -> Enumrator
+--- each_codepoint -> Enumerator
 #@todo
 
 @see [[m:IO#each_codepoint]]
