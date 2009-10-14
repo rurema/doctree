@@ -118,5 +118,5 @@ DER 形式に変換します。
 第二引数に指定できるパディングモード。
 #@end
 
-class OpenSSL::PKey::RSAError < OpenSSL::PKey::PKeyError
+= class OpenSSL::PKey::RSAError < OpenSSL::PKey::PKeyError
 #@end

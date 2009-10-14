@@ -105,5 +105,5 @@ Diffie-Hellman 暗号の性質から、呼び出しても全て PKeyError になります。
 #@todo
 #@end
 
-class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
+= class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
 #@end
