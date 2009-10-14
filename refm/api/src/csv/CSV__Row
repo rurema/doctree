@@ -1,4 +1,4 @@
-= class Row < Array
+= class CSV::Row < Array
 CSV形式1行分のデータ（Row）を操作するためのクラス。
 
 == Instance Methods
