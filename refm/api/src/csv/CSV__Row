@@ -8,7 +8,7 @@ CSV形式1行分のデータ（Row）を操作するためのクラス。
 --- match(rhs) -> bool
 自分自身と引数rhsを比較しtrue/falseを返します。
 
-比較方法としては、[[c:CSV::Row]]オブジェクトの各Cellのデータを個別にCSV::Cell#match>で比較を行いそれらの全ての返却値がtrueの時のみtrueを返します。
+比較方法としては、[[c:CSV::Row]]オブジェクトの各Cellのデータを個別にCSV::Cell#matchで比較を行いそれらの全ての返却値がtrueの時のみtrueを返します。
 
 @param rhs 比較される[[c:CSV::Row]]クラスのオブジェクト
 
