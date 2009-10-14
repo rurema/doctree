@@ -125,7 +125,7 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 
 自身に定義されているメッセージをセットして例外を発生させます。
 
-= class Syc_m::UnknownLocker < Sync_m::Err
+= class Sync_m::UnknownLocker < Sync_m::Err
 
 スレッドがロックされているべきタイミングでロックさ庭内場合に発生する例外です。
 
@@ -135,7 +135,7 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 
 自身に定義されているメッセージをセットして例外を発生させます。
 
-= class Syc_m::LockModeFailer < Sync_m::Err
+= class Sync_m::LockModeFailer < Sync_m::Err
 
 誤ったロックモードがセットされている場合に発生する例外です。
 
