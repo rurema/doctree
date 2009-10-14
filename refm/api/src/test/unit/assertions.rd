@@ -1,6 +1,6 @@
 #@until 1.9.1
 = class Test::Unit::AssertionFailedError < StandardError
-Thrown by Test::Unit::Assertions when an assertion fails.
+アサーションに失敗した時に [[c:Test::Unit::Assertions]] から raise されます。
 #@end
 
 = module Test::Unit::Assertions
@@ -20,12 +20,11 @@ assert が失敗した時は、例外 [[c:Test::Unit::AssertionFailedError]] を投げます。
 == Singleton Methods
 
 --- use_pp=(value)
-#@todo
 
-Select whether or not to use the pretty-printer. If this option
-is set to false before any assertions are made, pp.rb will not
-be required.
+出力に [[lib:pp]] を使用するかどうかを指定します。偽を指定した場合は
+[[lib:pp]] は require されません。
 
+@param value [[lib:pp]] を使用するかどうか。
 
 == Instance Methods
 
@@ -144,19 +143,27 @@ assert にパスした時は、実際に投げられた例外を返します。
 #@end
 
 --- assert_raises(*args, &block)    -> object
-#@todo
 
-Alias of assert_raise.
-
-Will be deprecated in 1.9, and removed in 2.0.
+[[m:Test::Unit::Assertions#assert_raise]] のエイリアスです。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
 --- build_message(head, template=nil, *arguments)
-#@todo
 
-Builds a failure message. head is added before the template and
-arguments replaces the '?'s positionally in the template.
+テストが失敗したときに表示されるメッセージを作成します。
+
+@param head templateから作成するメッセージの前に表示する文字列を指定します。
+
+@param template 作成するメッセージのテンプレートを文字列で指定します。
+
+@param arguments template 内の '?' を置き換えるオブジェクトを配列で指定します。
+
+@return 作成したメッセージをTest::Unit::Assertions::AssertionMessageの
+        インスタンスで返します。
+
+head は template の前に追加されます。template に指定した文字列に '?' が
+含まれていた場合は、arguments に指定したオブジェクトでそれぞれ置き換え
+られます。
 
 --- assert_nothing_raised(message = "") { ... }
 --- assert_nothing_raised(klass1, klass2, ..., message = "") { ... }
