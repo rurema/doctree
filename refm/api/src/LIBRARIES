@@ -591,6 +591,9 @@ webrick/ssl
 #@end
 webrick/utils
 win32/registry
+#@since 1.8.0
+win32/resolv
+#@end
 win32ole
 #@if("1.8.1" <= version and version < "1.9.1")
 wsdl
