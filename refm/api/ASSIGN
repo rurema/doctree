@@ -289,7 +289,7 @@ webrick
 webrick/cgi                                     done
 webrick/ssl                     
 win32/registry
-win32/resolv                    sho-h
+win32/resolv                    sho-h           done
 win32ole
 xmlrpc                          
 yaml                            kouya
