@@ -1,6 +1,6 @@
 #@since 1.8.0
 = class Win32::Resolv
-== module methods
+== module functions
 --- get_hosts_path
 #@todo
 
