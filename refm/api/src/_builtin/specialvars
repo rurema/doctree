@@ -527,7 +527,7 @@ $stdin はグローバルスコープです。
 --- $>      -> object
 --- $stdout -> object
 #@until 1.9.1
--- $defout  -> object
+--- $defout  -> object
 #@end
 
 標準出力です。
