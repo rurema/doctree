@@ -87,7 +87,7 @@ pd は [素因数, 指数] 組の配列です。
   Integer.from_prime_division [[2,3],[3,2]]
   # => 72 == 2**3 * 3**2
 
-=== Instance Methods
+== Instance Methods
 
 --- gcd2(int)
 #@todo
