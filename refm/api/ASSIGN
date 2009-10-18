@@ -115,7 +115,7 @@ cgi/session
 cmath
 complex                         bornite
 continuation
-coverage                        sho-h
+coverage                        sho-h           done
 csv                             bornite
 curses                          kouji
 date                            tadf            almost done
