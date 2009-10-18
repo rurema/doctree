@@ -32,6 +32,7 @@ complex
 #@end
 #@since 1.9.1
 continuation
+coverage
 #@end
 #@since 1.8.0
 csv
