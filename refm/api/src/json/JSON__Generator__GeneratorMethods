@@ -1,9 +1,6 @@
 
 = module JSON::Generator::GeneratorMethods::Array
 alias JSON::Ext::Generator::GeneratorMethods::Array
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::Array
-#@end
 
 [[c:Array]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -18,9 +15,6 @@ alias JSON::Pure::Generator::GeneratorMethods::Array
 
 = module JSON::Generator::GeneratorMethods::FalseClass
 alias JSON::Ext::Generator::GeneratorMethods::FalseClass
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::FalseClass
-#@end
 
 [[c:FalseClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -33,9 +27,6 @@ alias JSON::Pure::Generator::GeneratorMethods::FalseClass
 
 = module JSON::Generator::GeneratorMethods::Float
 alias JSON::Ext::Generator::GeneratorMethods::Float
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::Float
-#@end
 
 [[c:Float]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -46,9 +37,6 @@ alias JSON::Pure::Generator::GeneratorMethods::Float
 
 = module JSON::Generator::GeneratorMethods::Hash
 alias JSON::Ext::Generator::GeneratorMethods::Hash
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::Hash
-#@end
 
 [[c:Hash]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -63,9 +51,6 @@ alias JSON::Pure::Generator::GeneratorMethods::Hash
 
 = module JSON::Generator::GeneratorMethods::Integer
 alias JSON::Ext::Generator::GeneratorMethods::Integer
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::Integer
-#@end
 
 [[c:Integer]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -76,9 +61,6 @@ alias JSON::Pure::Generator::GeneratorMethods::Integer
 
 = module JSON::Generator::GeneratorMethods::NilClass
 alias JSON::Ext::Generator::GeneratorMethods::NilClass
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::NilClass
-#@end
 
 [[c:NilClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -91,9 +73,6 @@ alias JSON::Pure::Generator::GeneratorMethods::NilClass
 
 = module JSON::Generator::GeneratorMethods::Object
 alias JSON::Ext::Generator::GeneratorMethods::Object
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::Object
-#@end
 
 [[c:Object]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -107,9 +86,6 @@ alias JSON::Pure::Generator::GeneratorMethods::Object
 
 = module JSON::Generator::GeneratorMethods::String
 alias JSON::Ext::Generator::GeneratorMethods::String
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::String
-#@end
 
 [[c:String]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 
@@ -139,9 +115,6 @@ alias JSON::Pure::Generator::GeneratorMethods::String
 
 = module JSON::Generator::GeneratorMethods::String::Extend
 alias JSON::Ext::Generator::GeneratorMethods::String::Extend
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::String::Extend
-#@end
 
 [[c:String]] に JSON で使用する特異メソッドを追加するためのモジュールです。
 
@@ -156,9 +129,6 @@ JSON のオブジェクトから Ruby の文字列を生成して返します。
 
 = module JSON::Generator::GeneratorMethods::TrueClass
 alias JSON::Ext::Generator::GeneratorMethods::TrueClass
-#@until 1.9.2
-alias JSON::Pure::Generator::GeneratorMethods::TrueClass
-#@end
 
 [[c:TrueClass]] に JSON で使用するインスタンスメソッドを追加するためのモジュールです。
 

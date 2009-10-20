@@ -1,6 +1,5 @@
 = class JSON::State < Object
 alias JSON::Ext::Generator::State
-alias JSON::Pure::Generator::State
 
 Ruby オブジェクトから JSON 形式の文字列を生成する間、
 JSON 形式の文字列を生成するための設定を保持しておくために使用するクラスです。

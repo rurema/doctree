@@ -30,29 +30,23 @@ json_create メソッドで使用するクラスを決定するために使用する値をセットします。
 #@# nodoc
 #@# --- deep_const_get
 
---- generator -> Module
+--- generator -> JSON::Ext::Generator
 
 JSON ライブラリがジェネレータとして使用するモジュールを返します。
-
-@return [[c:JSON::Ext::Generator]], [[c:JSON::Pure::Generator]] のいずれかを返します。
 
 #@# nodoc
 #@# --- generator=(generator)
 
---- parser -> Class
+--- parser -> JSON::Ext::Parser
 
 JSON ライブラリがパーサとして使用するクラスを返します。
-
-@return [[c:JSON::Ext::Parser]], [[c:JSON::Pure::Parser]] のいずれかを返します。
 
 #@# nodoc
 #@# --- parser=(parser)
 
---- state -> Class
+--- state -> JSON::Ext::Generator::State
 
 JSON ライブラリがジェネレータの状態を表すクラスとして使用するクラスを返します。
-
-@return [[c:JSON::Ext::Generator::State]], [[c:JSON::Pure::Generator::State]] のいずれかを返します。
 
 #@# 他のメソッドから考えると nodoc のはず。
 #@# --- state=(state)
@@ -196,7 +190,7 @@ proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
   デフォルトは真です。
 
-@see [[m:JSON::Ext::Parser#parse]], [[m:JSON::Pure::Parser#parse]]
+@see [[m:JSON::Parser#parse]]
 
 --- parse!(source, options = {}) -> object
 
@@ -221,7 +215,7 @@ proc として手続きオブジェクトが与えられた場合は、読み込んだオブジェクトを
   偽を指定するとマッチするクラスや [[m:JSON.create_id]] が見つかっても付加情報を生成しません。
   デフォルトは真です。
 
-@see [[m:JSON::Ext::Parser#parse]], [[m:JSON::Pure::Parser#parse]]
+@see [[m:JSON::Parser#parse]]
 
 --- pretty_generate(object, options = nil) -> String
 --- pretty_unparse(object, options = nil) -> String
