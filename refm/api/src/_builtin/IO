@@ -276,7 +276,7 @@ IO.new, IO.for_fd はブロックを受け付けません。
 @param fd ファイルディスクリプタである整数を指定します。
 
 #@since 1.8.0
-@param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します。[[m:File::RDONLY]] などの
+@param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します。[[m:File::Constants::RDONLY]] などの
             定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照
             してください。
 #@else
