@@ -4,7 +4,7 @@ Finalizer とは, あるオブジェクト obj が GC される時に obj に依存しているオブジェ
 してメッセージを送る機能です。
 
 このライブラリは実装が古いため動きません。
-[[m:ObjectSpace.define_finalizer]] 等を使用してください。
+[[m:ObjectSpace.#define_finalizer]] 等を使用してください。
 
 @see [[ruby-list:3465]]
 
@@ -12,7 +12,7 @@ Finalizer とは, あるオブジェクト obj が GC される時に obj に依存しているオブジェ
 
 オブジェクトが GC される時にメッセージを送る機能を提供します。
 このモジュールは obsolete なので、
-[[m:ObjectSpace.define_finalizer]] 等を使用してください。
+[[m:ObjectSpace.#define_finalizer]] 等を使用してください。
 
 == Singleton Methods
 
