@@ -93,7 +93,7 @@ String オブジェクトとして返します。
 
 --- adler -> Integer
 
-alder-32 チェックサムを返します。
+adler-32 チェックサムを返します。
 
 --- reset -> nil
 
