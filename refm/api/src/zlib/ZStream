@@ -88,7 +88,7 @@ String オブジェクトとして返します。
 --- data_type -> Fixnum
 
 ストリームに入力されたデータの形式を推測します。
-返り値は Zlib::BINARY, Zlib::ASCII, Zlib::UNKNOWN の
+返り値は [[m:Zlib::BINARY]], [[m:Zlib::ASCII]], [[m:Zlib::UNKNOWN]] の
 いずれかです。
 
 --- adler -> Integer
