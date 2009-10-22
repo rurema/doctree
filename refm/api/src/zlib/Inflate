@@ -1,14 +1,13 @@
 = class Zlib::Inflate < Zlib::ZStream
 
-入力データを展開するストリームのクラス。Zlib::Deflate と違い、
+入力データを展開するストリームのクラス。[[c:Zlib::Deflate]] と違い、
 このクラスのインスタンスを複製 (clone, dup) することはできません。
 
 == Class Methods
 
 --- inflate(string) -> String
 
-string を展開します。展開に辞書が必要な場合には
-Zlib::NeedDict 例外が発生します。
+string を展開します。
 
 ちなみに、このメソッドは以下のコードとほぼ同じです:
 
@@ -22,17 +21,20 @@ Zlib::NeedDict 例外が発生します。
 
 @param string 展開する文字列を指定します。
 
+@raise Zlib::NeedDict 展開に辞書が必要な場合に発生します。
+
   require 'zlib'
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   p Zlib::Inflate.inflate(cstr) #=> "hoge fuga end"
 
---- new([windowBits]) -> Zlib::Inflate
+--- new(window_bits = Zlib::MAX_WBITS) -> Zlib::Inflate
 
-展開ストリームを作成します。引数の詳細は zlib.h を参照して下さい。
-nil の場合はデフォルトの値を使用します。
+展開ストリームを作成します。
 
-@param windowBits ウィンドの大きさを整数で指定します。詳細はzlib.hを参照してください。
+@param window_bits ウィンドの大きさを整数で指定します。
+                   nil の場合はデフォルトの値を使用します。
+                   詳細は zlib.h を参照してください。
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new(15)
@@ -43,16 +45,18 @@ nil の場合はデフォルトの値を使用します。
 
 --- inflate(string) -> String
 
-string を展開ストリームに入力します。処理後、ストリームからの
-出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
-空になります。string が nil の場合はストリームへの入力を
+string を展開ストリームに入力します。
+
+処理後、ストリームからの出力を返します。
+このメソッドを呼ぶと出力バッファ及び入力バッファは空になります。
+string が nil の場合はストリームへの入力を
 終了します。([[m:Zlib::ZStream#finish]] と同じ)。
 
-展開に辞書が必要な場合には Zlib::NeedDict 例外が発生します。
-[[m:Zlib::Inflate#set_dictionary]] メソッドで辞書をセットした
-後で、空文字列と共にこのメソッドを再度呼び出して下さい。
-
 @param string 展開する文字列を入力します。
+
+@raise Zlib::NeedDict 展開に辞書が必要な場合に発生します。
+                      [[m:Zlib::Inflate#set_dictionary]] メソッドで辞書をセットした
+                      後で、空文字列と共にこのメソッドを再度呼び出して下さい。
 
   cstr = "x\234\313\310OOUH+MOTH\315K\001\000!\251\004\276"
   inz = Zlib::Inflate.new
@@ -76,6 +80,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
 --- finish -> String
 
 展開ストリームを終了します。
+
 ストリーム内に残っていたデータ (つまり圧縮データの後についていた
 ゴミデータ) を返します。
 [[m:Zlib::ZStream#finished?]] が真でない時に finish を呼ぶと
@@ -94,7 +99,7 @@ string を展開ストリームに入力します。処理後、ストリームからの
 --- set_dictionary(string) -> String
 
 展開に用いる辞書を指定します。string を返します。
-このメソッドは Zlib::NeedDict 例外が発生した直後のみ
+このメソッドは [[c:Zlib::NeedDict]] 例外が発生した直後のみ
 有効です。詳細は zlib.h を参照して下さい。
 
 @param string 展開に用いる辞書を文字列で指定します。
@@ -133,8 +138,9 @@ true を返し、残りのデータは入力バッファ内に保持されます。
 @param string 入力バッファの末尾に追加する文字列を指定します。
 
 --- sync_point? -> bool
+#@todo zlib.h にもドキュメントが無い？
 
 What is this?
-執筆者募集。
 
-#@# [[unknown:原文|"ruby-src:ext/zlib/doc/zlib.rd"]]のまま。
+
+
