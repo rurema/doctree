@@ -3,8 +3,6 @@
 gzip ファイルを処理している間にエラーが生じた時に発生する全ての例外の
 スーパークラスです。
 
-次の例外が Zlib::GzipFile::Error のサブクラスとして定義されています。
-
 = class Zlib::GzipFile::NoFooter < Zlib::GzipFile::Error
 
 gzip ファイルにフッターが無い時に発生します。
