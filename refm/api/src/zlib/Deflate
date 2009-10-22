@@ -7,8 +7,8 @@
 --- deflate(string, level = Zlib::DEFAULT_COMPRESSION ) -> String
 
 string を圧縮します。level の有効な値は
-Zlib::NO_COMPRESSION, Zlib::BEST_SPEED,
-Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
+[[m:Zlib::NO_COMPRESSION]], [[m:Zlib::BEST_SPEED]],
+[[m:Zlib::BEST_COMPRESSION]], [[m:Zlib::DEFAULT_COMPRESSION]]
 及び 0 から 9 の整数です。
 
 ちなみに、このメソッドは以下のコードとほぼ同じです:
@@ -73,10 +73,12 @@ Zlib::BEST_COMPRESSION, Zlib::DEFAULT_COMPRESSION
 
 == Instance Methods
 
+#@until 1.8.3
 --- clone -> self
 
-執筆者募集。
 圧縮ストリームを複製します。
+
+#@end
 
 --- deflate(string, flush = Zlib::NO_FLUSH) -> String
 
@@ -84,12 +86,13 @@ string を圧縮ストリームに入力します。処理後、ストリームからの
 出力を返します。このメソッドを呼ぶと出力バッファ及び入力バッファは
 空になります。string が nil の場合はストリームへの入力を
 終了します。([[m:Zlib::ZStream#finish]] と同じ)。
-flush には Zlib::NO_FLUSH, Zlib::SYNC_FLUSH,
-Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
+flush には [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
+[[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] のいずれかを指定します。
 詳しくは zlib.h を参照して下さい。
 
 @param string 圧縮する文字列を指定します。
-@param flush Zlib::NO_FLUSH, Zlib::SYNC_FLUSH, Zlib::FULL_FLUSH, Zlib::FINISH のいずれかを指定します。
+@param flush [[m:Zlib::NO_FLUSH]], [[m:Zlib::SYNC_FLUSH]],
+             [[m:Zlib::FULL_FLUSH]], [[m:Zlib::FINISH]] のいずれかを指定します。
 
   dez = Zlib::Deflate.new
   p dez.deflate("123" * 20, Zlib::FINISH) #=> "x\2343426$\027\001\000e\217\v\271"
@@ -162,8 +165,10 @@ deflate('', flush) と同じです。flush が
 参照して下さい。設定の変更に伴うストリームからの出力は
 出力バッファに保存されます。
 
-@param level 0-9の範囲の整数, またはZlib::DEFAULT_COMPRESSIONを指定します。詳細はzlib.hを参照してください。
-@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]], [[m:Zlib::DEFAULT_STRATEGY]]など指定します。詳細はzlib.h を参照してください。　
+@param level 0-9の範囲の整数, または [[m:Zlib::DEFAULT_COMPRESSION]] を指定します。
+             詳細はzlib.hを参照してください。
+@param strategy [[m:Zlib::FILTERED]], [[m:Zlib::HUFFMAN_ONLY]],
+                [[m:Zlib::DEFAULT_STRATEGY]] など指定します。詳細は zlib.h を参照してください。　
 
   require 'zlib'
 
@@ -200,7 +205,7 @@ deflate('', flush) と同じです。flush が
 このメソッドは [[m:Zlib::Deflate.new]], [[m:Zlib::ZStream#reset]]
 を呼び出した直後にのみ有効です。詳細は zlib.h を参照して下さい。
 
-@param string 辞書に用いる文字列を指定します。詳しくはzlib.hを参照してください。
+@param string 辞書に用いる文字列を指定します。詳しくは zlib.h を参照してください。
 @return 辞書に用いる文字列を返します。 
 
   def case1(str)
