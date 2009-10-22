@@ -172,47 +172,154 @@ finish の違いは [[m:Zlib::GzipFile#close]], [[m:Zlib::GzipFile#finish]] を
   #=> 3
   ...
 
---- <<(str)
---- putc(ch)
---- puts(*strs)
---- print(*strs)
---- printf(format, *args)
---- write(str)
+--- <<(str) -> self
 
-IO クラスの同名メソッドと同じです。詳しくは
-[[m:IO#<<]], [[m:IO#putc]], [[m:IO#puts]], [[m:IO#print]], [[m:IO#printf]], [[m:IO#write]]
-を参照してください。
+str を出力します。str が文字列でない場合は to_s を用いて
+文字列に変換します。
+
+@param str 出力したいオブジェクトを与えます。
 
   require 'zlib'
 
   filename='hoge1.gz'
   fw = File.open(filename, "w")
   Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
-    gz << "hoge"
-    gz.puts "fuga"
-    gz.putc ?u
-    gz.putc ?g
-    gz.putc ?o
-    gz.print "ugo"
-    gz.printf("\n%9s", "bar")
-    gz.write "foo"
+    gz << "hoge" << "fuga"
   }
   fr = File.open(filename)
   Zlib::GzipReader.wrap(fr){|gz|
     puts gz.read
   }
   #=> hogefuga
-  #=> ugougo
-  #=>       barfoo
 
-@see [[m:IO#<<]], [[m:IO#putc]], [[m:IO#puts]], [[m:IO#print]], [[m:IO#printf]], [[m:IO#write]]
+@see [[m:IO#<<]]
+
+--- putc(ch) -> object
+
+文字 ch を自身に出力します。
+
+ch が数値なら 0 〜 255 の範囲の対応する文字を出力します。
+ch が文字列なら、その先頭 1byte を出力します。
+どちらでもない場合は、ch.to_int で整数に変換を試みます。
+
+@param 出力する文字を数値または文字列で指定します。
+
+@return ch を返します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.putc ?u
+    gz.putc ?g
+    gz.putc ?o
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.read
+  }
+  #=> ugo
+
+@see [[m:IO#putc]], [[m:Kernel.#putc]]
+
+--- puts(*str) -> nil
+
+各引数を自身に出力し、それぞれの後に改行を出力します。
+
+@param str 出力したいオブジェクトを指定します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.puts "fuga"
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.read
+  }
+  #=> fuga
+
+@see [[m:IO#puts]], [[m:Kernel.#puts]]
+
+--- print(*str) -> nil
+
+引数を自身に順に出力します。引数を省略した場合は、[[m:$_]] を出力します。
+
+@param str 出力するオブジェクトを指定します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.print "ugo"
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.read
+  }
+  #=> ugo
+
+@see [[m:IO#print]], [[m:Kernel.#print]]
+
+--- printf(format, *args) -> nil
+
+C 言語の printf と同じように、format に従い引数
+を文字列に変換して、自身に出力します。
+
+@param format フォーマット文字列を指定します。[[d:print_format]] を参照してください。
+
+@param args フォーマットされるオブジェクトを指定します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.printf("\n%9s", "bar")
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.read
+  }
+  #=>       bar
+
+@see [[m:IO#printf]], [[m:Kernel.#printf]]
+
+--- write(str) -> Integer
+
+自身に str を出力します。str が文字列でなけ
+れば to_s による文字列化を試みます。
+
+@param str 出力する文字列を指定します。文字列でない場合は to_s で文字列に変換します。
+
+@return 実際に出力できたバイト数を返します。
+
+  require 'zlib'
+
+  filename='hoge1.gz'
+  fw = File.open(filename, "w")
+  Zlib::GzipWriter.wrap(fw, Zlib::BEST_COMPRESSION){|gz|
+    gz.write "foo"
+  }
+  fr = File.open(filename)
+  Zlib::GzipReader.wrap(fr){|gz|
+    puts gz.read
+  }
+  #=> foo
+
+@see [[m:IO#write]]
 
 --- flush(flush = Zlib::SYNC_FLUSH) -> self
 
 まだ書き出されていないデータをフラッシュします。
+
 flush は [[m:Zlib::Deflate#deflate]] と同じです。
-省略時は Zlib::SYNC_FLUSH が使用されます。
-flush に Zlib::NO_FLUSH を指定することは無意味です。
+省略時は [[m:Zlib::SYNC_FLUSH]] が使用されます。
+flush に [[m:Zlib::NO_FLUSH]] を指定することは無意味です。
 
 @param flush [[m:Zlib::NO_FLUSH]] [[m:Zlib::SYNC_FLUSH]] [[m:Zlib::FULL_FLUSH]] などを指定します。
 
@@ -249,6 +356,7 @@ flush に Zlib::NO_FLUSH を指定することは無意味です。
 --- mtime=(time) -> Fixnum
 
 gzip ファイルのヘッダーに記録する最終更新時間を指定します。
+
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
 呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
 発生します。
@@ -273,6 +381,7 @@ gzip ファイルのヘッダーに記録する最終更新時間を指定します。
 --- orig_name=(filename) -> String
 
 gzip ファイルのヘッダーに記録する元ファイル名を指定します。
+
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
 呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
 発生します。
@@ -296,6 +405,7 @@ gzip ファイルのヘッダーに記録する元ファイル名を指定します。
 --- comment=(string) -> String
 
 gzip ファイルのヘッダーに記録するコメントを指定します。
+
 [[m:Zlib::GzipWriter#write]] 等の書き込み系メソッドを
 呼んだ後で指定しようとすると [[c:Zlib::GzipFile::Error]] 例外が
 発生します。
