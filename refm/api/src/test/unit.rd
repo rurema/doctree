@@ -7,6 +7,11 @@ require test/unit/autorunner
 
 #@#[[url:http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
 
+#@since 1.9.1
+test/unit は [[lib:minitest/unit]] を使って再実装されましたが、完全な互
+換性がある訳ではありません。
+#@end
+
 === 使い方
 
 Test::Unit は以下のように使います。
@@ -47,6 +52,43 @@ Test::Unit は以下のように使います。
 
 テストを実行するには上で用意した test_foo.rb を実行します。
 デフォルトではすべてのテストが実行されます。
+
+#@since 1.9.1
+
+        $ ruby test_foo.rb
+
+        Loaded suite test_foo
+        Started
+        F.
+        Finished in 0.022223 seconds.
+
+          1) Failure:
+        test_bar(TC_Foo) [test_foo.rb:16]:
+        <"bar"> expected but was
+        <"foo">.
+
+        2 tests, 2 assertions, 1 failures, 0 errors, 0 skips
+
+test_bar だけテストしたい場合は以下のようなオプションを与えます。
+
+        $ ruby test_foo.rb --name test_bar
+
+        Loaded suite test_foo
+        Started
+        F
+        Finished in 0.019573 seconds.
+
+          1) Failure:
+        test_bar(TC_Foo) [test_foo.rb:16]:
+        <"bar"> expected but was
+        <"foo">.
+
+        1 tests, 1 assertions, 1 failures, 0 errors, 0 skips
+
+--name=test_barのような指定は行えません。その他の使用可能なオプションにつ
+いては、[[lib:minitest/unit]]と同様です。
+
+#@else
 
         $ ruby test_foo.rb
 
@@ -113,6 +155,8 @@ console を使う (default)
                                           test.
          -h, --help                       Display this help.
 
+#@end
+
 複数のテストを一度に行う場合、以下のように書いただけのファイルを実行します。
 
  require 'test/unit'
@@ -127,17 +171,26 @@ console を使う (default)
 === いつテストは実行されるか
 
 上の例では、テストクラスを「定義しただけ」で、テストが実行されています。
+#@since 1.9.1
+これは、require 'test/unit'した時に[[m:MiniTest::Unit.autorun]]を実行し
+ているためです。その結果、終了時の後処理として実行されるようになってい
+ます。
+#@else
 これは、[[m:Kernel.#at_exit]] と [[m:ObjectSpace.#each_object]] を使って
 実装されています。つまり、上の例ではテストは終了時の後処理として実行されます。
 
 大抵の場合は、これで問題ありません。が、そうでない場合は、
 testrb コマンドや [[c:Test::Unit::AutoRunner]] 、各種 TestRunner クラスを使うことにより、
 明示的にテストを実行することができます。
+#@end
 
 === Error と Failure の違い
 
-テストメソッド実行中に例外が発生したなら Error です。例外が発生せず assert に
-失敗しただけなら Failure です。
+: Error
+  テストメソッド実行中に例外が発生した。
+
+: Failure
+  アサーションに失敗した。
 
 #@until 1.9.1
 === RubyUnit からの移行
@@ -148,16 +201,69 @@ assertion メソッドの違いは [[unknown:"ruby-src:lib/runit/assert.rb"]] を参照。
 
 = module Test::Unit
 
+ユニットテストを行うためのモジュールです。
+
 == Singleton Methods
 
 #@since 1.8.1
+#@until 1.9.1
 --- run?        -> bool
+
+ユニットテストを自動実行するかどうかを返します。
+
 --- run=(flag)  
 #@todo
+
+ユニットテストを自動実行するかどうかを指定します。
+
+@param flag ユニットテストを自動実行するかどうか
 
 #@#単なるバグかも知れない。
 trueをセットすると[[c:Test::Unit]]はユニットテストを自動実行``しなくなります''。
 runは過去分詞のrunです。trueにするとテストを実行し終えたという意味になります。
 
 #@end
+#@end
 
+#@since 1.9.1
+--- setup_argv(original_argv = ARGV) { |files| ... } -> [String]
+
+original_argvで指定されたオプションを解析して、テスト対象になるファイル
+をrequireします。
+
+@param original_argv オプションを指定します。省略された場合は、
+                     [[m:Kernel::ARGV]]が使用されます。
+
+@raise ArgumentError 指定されたファイルが存在しない場合に発生します。
+
+ブロックが指定された場合にはブロックを評価して、その結果をrequireの対象
+にします。
+
+ブロックパラメータには上記のoriginal_argvから-xで指定されたもの以外のオ
+プションが配列で渡されます。ファイル名の代わりにディレクトリを指定する
+と、ディレクトリの中にあるtest_*.rbを全てrequireします。
+
+このメソッド自体は、オプションを解析してrequireを行う以外の処理は行いま
+せんが、test/unit.rbをrequireして呼び出すメソッドのため、結果的にユニッ
+トテストが実行されます。testrbコマンドのように、ユニットテストを実行す
+るプログラムを作成する場合に使用します。
+
+===== 使用可能なオプション
+
+: -v
+  詳細を表示します。
+
+: -n, --name
+  指定されたテストメソッドを実行します。テストメソッドの指定に正規表現
+  も使えます。--name=test_fooのような指定は行えません。--name test_foo
+  のように指定してください。
+
+: -x
+  指定されたファイルを除外します。ファイルの指定に正規表現も使えます。
+
+===== 注意
+
+Test::Unit.setup_argvはoriginal_argvの指定に関わらず、ARGVをfilesで置き
+換えます。置き換えられたARGVは[[lib:minitest]]によってもう1度解析されます。
+
+#@end
