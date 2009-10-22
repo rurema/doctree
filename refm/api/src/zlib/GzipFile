@@ -90,9 +90,9 @@ IO オブジェクトが flush メソッドを持っていなければなりません。
 @see [[m:IO#sync]], [[m:IO#sync]]
 
 #@since 1.9.2
---- path
-#@todo
+--- path -> String
 
-Returns the path string of the associated IO-like object.  This
-method is only defined when the IO-like object responds to #path().
+関連付けられている IO オブジェクトのパスを返します。
+このメソッドは IO オブジェクトが path というメソッドを持つ場合のみ定義されます。
+
 #@end
