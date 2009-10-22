@@ -18,15 +18,14 @@
 全ての入力データが処理済みで全ての出力が取り出し済みである場合に発生します。
 
 = class Zlib::NeedDict < Zlib::Error
-#@todo
+
+展開に用いる辞書がしていされていない場合に発生します。
 
 = class Zlib::DataError < Zlib::Error
-#@todo
 
 入力データが壊れている場合などに発生します。
 
 = class Zlib::StreamError < Zlib::Error
-#@todo
 
 ストリームの状態が異常である場合や、圧縮レベルの指定が無効なもので
 ある場合に発生します。
