@@ -1109,7 +1109,7 @@ Resolv::DNS::Resource::IN::SRV のインスタンスを生成します。
 クライアントは利用可能なホストの中で最も priority が
 小さい数値のホストを利用しなければなりません。
 
-priority が同じならば [[m:Resolv::DNS::Resource::IN::SRV#wight]]
+priority が同じならば [[m:Resolv::DNS::Resource::IN::SRV#weight]]
 で定義されるようにホストを選ぶべきです。
 
 返り値の範囲は 0 から 65535 までの整数値です。
