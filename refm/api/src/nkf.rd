@@ -59,7 +59,7 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
 NKF 2.0.5 相当です。
 
   b,u      Output is buffered (DEFAULT),Output is unbuffered
-  j,s,e,w  Outout code is JIS 7 bit (DEFAULT), Shift JIS, AT&T JIS (EUC), UTF-8
+  j,s,e,w  Output code is JIS 7 bit (DEFAULT), Shift JIS, AT&T JIS (EUC), UTF-8
            After 'w' you can add more options. (80?|16((B|L)0?)?)
   J,S,E,W  Input assumption is JIS 7 bit , Shift JIS, AT&T JIS (EUC), UTF-8
            After 'W' you can add more options. (8|16(B|L)?)
