@@ -307,7 +307,11 @@ pp に表示したくないインスタンス変数がある場合にこのメソッドを再定義します。
 
 = reopen Kernel
 == Module Functions
+#@since 1.9.2
+--- pp(*obj)    -> object
+#@else
 --- pp(*obj)    -> nil
+#@end
 
 指定されたオブジェクト obj を標準出力に見やすい形式(プリティプリント)で出力します。
 obj それぞれを引数として [[m:PP.pp]] を呼びことと同等です。
