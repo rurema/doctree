@@ -775,4 +775,15 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
 #@todo
 
 @see [[m:Array#join]]
+
+--- flat_map       -> Enumerator
+--- collect_concat -> Enumerator
+--- flat_map       {| obj | block }  -> Array
+--- collect_concat {| obj | block }  -> Array
+#@todo
+
+Returns a new array with the concatenated results of running
+<em>block</em> once for every element in <i>enum</i>.
+
+    [[1,2],[3,4]].flat_map {|i| i }   #=> [1, 2, 3, 4]
 #@end
