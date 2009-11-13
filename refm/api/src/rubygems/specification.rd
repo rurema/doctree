@@ -488,13 +488,13 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオプションをセットします。
 この Gem パッケージを動作させるのに必要な条件を返します。
 これはユーザのためのシンプルな情報です。
 
---- requirements=(infomations)
+--- requirements=(informations)
 #@todo
 
 この Gem パッケージを動作させるのに必要な条件をセットします。
 これはユーザのためのシンプルな情報をセットします。
 
-@param infomations 情報を文字列の配列で指定します。
+@param informations 情報を文字列の配列で指定します。
 
 --- rubyforge_project -> String
 #@todo
@@ -519,7 +519,7 @@ API ドキュメントを生成するときに rdoc コマンドに与えるオプションをセットします。
 この Gem パッケージを作成した RubyGems のバージョンをセットします。
 この属性は Gem パッケージが作成された時に自動的にセットされます。
 
-@param versipn RubyGems のバージョンを指定します。
+@param version RubyGems のバージョンを指定します。
 
 --- runtime_dependencies -> Array
 #@todo
