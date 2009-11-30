@@ -925,10 +925,10 @@ rs に空文字列 ("") を指定した場合は「パラグラフモード」になり、
 
 #@since 1.8.0
   $/ = "\n"   # デフォルトと同じ
-  p "foo\r".chomp    # => "foo"
-  p "foo\r\n".chomp  # => "foo"
-  p "foo\n".chomp    # => "foo"
-  p "foo\n\r".chomp  # => "foo\n"
+  p "foo\r".chomp!    # => "foo"
+  p "foo\r\n".chomp!  # => "foo"
+  p "foo\n".chomp!    # => "foo"
+  p "foo\n\r".chomp!  # => "foo\n"
 #@end
 
 --- chop -> String
