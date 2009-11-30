@@ -34,7 +34,11 @@
 @return 発見された Encoding オブジェクトを返します。
 @raise ArgumentError 指定した名前のエンコーディングが発見できないと発生します。
 
+#@since 1.9.2
+特殊なエンコーディング名として、ロケールエンコーディングを表す locale、default_external を表す external、default_internal を表す internal、ファイルシステムエンコーディングを表す filesystem があります。
+#@else
 特殊なエンコーディング名として、ロケールエンコーディングを表す locale、default_external を表す external、default_internal を表す internal があります。
+#@end
 
 例:
  p Encoding.find(:Shift_JIS)    #=> #<Encoding:Shift_JIS>
