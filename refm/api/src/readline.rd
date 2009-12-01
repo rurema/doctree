@@ -244,7 +244,7 @@ vi モードの詳細は、GNU Readline のマニュアルを参照してください。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -256,7 +256,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -283,7 +283,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
   Readline.completion_append_character = "string"
   p Readline.completion_append_character # => "s"
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -293,7 +293,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -310,7 +310,7 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
 " \t\n\"\\'`@$><=;|&{(" (スペースを含む) になっています。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -321,7 +321,7 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -339,7 +339,7 @@ GNU Readline の rl_complete_internal 関数で使用されることです。
 GNU Readline のデフォルトの値は、 
 [[m:Readline.basic_word_break_characters]] と同じです。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -352,7 +352,7 @@ GNU Readline のデフォルトの値は、
 [[m:Readline.basic_word_break_characters]] との違いは、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -367,7 +367,7 @@ GNU Readline の rl_complete_internal 関数で使用されることです。
 
 GNU Readline のデフォルト値は、「"'」です。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -378,7 +378,7 @@ GNU Readline のデフォルト値は、「"'」です。
 スペースなどの単語の区切りをクオートするための
 複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -393,7 +393,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 @param string 文字列を指定します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -404,7 +404,7 @@ GNU Readline のデフォルト値は、「"'」です。
 ユーザの入力の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -419,7 +419,7 @@ GNU Readline のデフォルト値は、「"'」です。
 
 GNU Readline のデフォルト値は nil(NULL) です。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -430,7 +430,7 @@ GNU Readline のデフォルト値は nil(NULL) です。
 ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -537,7 +537,7 @@ index で指定したインデックスに該当する入力内容がない場合、
 index で指定したインデックスが int 型よりも大きな値の場合、
 例外 RangeError が発生します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -598,7 +598,7 @@ self を返します。
 ヒストリの最後の内容を取り出します。
 最後の内容は、ヒストリから取り除かれます。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -619,7 +619,7 @@ self を返します。
 ヒストリの最初の内容を取り出します。
 最初の内容は、ヒストリから取り除かれます。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
@@ -726,7 +726,7 @@ index が -1 の場合は [[m:Readline::HISTORY.pop]] と同様に動作します。
 
 @param index 削除対象のヒストリのインデックスを指定します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 

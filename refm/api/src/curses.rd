@@ -64,7 +64,7 @@ Ruby curses は利用できません。
 
 Ruby curses の操作によっては、
 利用する C curses が提供していない機能を使うものがあります。
-そのような操作を行った場合、例外 NotImplementError が発生します。
+そのような操作を行った場合、例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、いくつかの操作で例外 SecurityError を発生します。
 
@@ -115,7 +115,7 @@ C のプログラムから端末のディスプレイ画面を制御するためのライブラリのことで、
           from foo:1:in `<main>'
 
 いくつかの操作において、サポートしていない環境では、
-例外 NotImplementError が発生します。
+例外 NotImplementedError が発生します。
 
 セーフレベル ($SAFE) が 4 の場合、ほとんどの操作で例外 SecurityError を発生します。
 
@@ -862,7 +862,7 @@ curses が終了しているかどうかを返します。
 
 詳しくは、 man ページの curs_initscr(3X) の isendwin 関数を参照ください。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 @see [[m:Curses.#close_screen]]
 
@@ -1121,9 +1121,9 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 --- colors -> Integer
 #@todo
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
-@raise NotImplementError
+@raise NotImplementedError
 
 #@end
 --- color_content(color)
@@ -1136,9 +1136,9 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 --- color_pairs -> Integer
 #@todo
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
-@raise NotImplementError
+@raise NotImplementedError
 
 #@end
 --- curs_set(visibility)
@@ -1196,7 +1196,7 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 
 ESC の入力を破棄する時間(ミリ秒単位)を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 --- ESCDELAY=(val) -> Integer
 
@@ -1205,13 +1205,13 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 @param val ESC の入力を破棄する時間(ミリ秒単位)を指定します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 --- TABSIZE -> Integer
 
 タブ幅を取得します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 --- TABSIZE=(val) -> Integer
 
@@ -1219,7 +1219,7 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 @param val タブ幅を指定します。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 
 --- use_default_colors -> nil
@@ -1228,7 +1228,7 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 詳細は man ページの default_colors(3X) を参照ください。
 
-サポートしていない環境では、例外 NotImplementError が発生します。
+サポートしていない環境では、例外 NotImplementedError が発生します。
 
 #@include(curses/Curses__Key)
 #@include(curses/Curses__MouseEvent)

@@ -87,9 +87,9 @@ obj のもつインスタンスメソッドのうち、
 委譲先のオブジェクトを返します。
 
 本メソッドは、サブクラスで再定義する必要があり、
-デフォルトでは [[c:NotImplementError]] が発生します。
+デフォルトでは [[c:NotImplementedError]] が発生します。
 
-@raise NotImplementError サブクラスにて本メソッドが再定義されていない場合に発生します。
+@raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 #@end
 #@end
