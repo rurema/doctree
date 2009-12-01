@@ -42,7 +42,7 @@ RbConfig モジュールを Config と同じものとして定義します。
 設定値を格納したハッシュです。以下のキーと値を持ちます。
 
 : srcdir
-      Ruby をコンパイルしたソースディレクトリ
+      コンパイルした Ruby のソースディレクトリ
 : prefix
       Ruby のインストール先の基準ディレクトリ
 : ruby_install_name
