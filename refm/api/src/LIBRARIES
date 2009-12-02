@@ -18,6 +18,9 @@ bigdecimal/newton
 #@end
 bigdecimal/util
 #@end
+#@since 1.8.1
+bigdecimal/math
+#@end
 #@until 1.9.1
 cgi-lib
 #@end
