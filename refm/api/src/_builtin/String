@@ -1829,7 +1829,7 @@ Ruby 1.8 以降は、その文字列そのものがパターンになります。
 
 引数が範囲外を指す場合は nil を返します。
 
---- split(sep = $/, limit = 0) -> [String] | [[String]]
+--- split(sep = $;, limit = 0) -> [String] | [[String]]
 
 第 1 引数 sep で指定されたセパレータによって文字列を limit 個まで分割し、
 結果を文字列の配列で返します。
