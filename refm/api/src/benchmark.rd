@@ -251,7 +251,7 @@ benchmark ライブラリのバージョンを表します。
 
 == Class Methods
 
---- new(utime = 0.0, stime = 0.0, cutime = 0.0, cstime = 0.0, real = 0.0, label = nil) -> Benchmark:Tms
+--- new(utime = 0.0, stime = 0.0, cutime = 0.0, cstime = 0.0, real = 0.0, label = nil) -> Benchmark::Tms
 
 新しい [[c:Benchmark::Tms]] オブジェクトを生成して返します。
 
