@@ -109,7 +109,7 @@ bigdecimal/jacobian		mrkn
 bigdecimal/ludcmp		mrkn
 bigdecimal/newton		mrkn
 bigdecimal/util			mrkn
-bigdecimal/math                 sho-h
+bigdecimal/math                 sho-h           done
 cgi
 cgi-lib
 cgi/session
