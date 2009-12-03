@@ -2840,7 +2840,7 @@ self がセパレータを含まないときは、
 #@else
   p "いろは".size     #=> 6
 #@end
-  p "いろは".bytesize #=> 6
+  p "いろは".bytesize #=> 9
 
 @see [[m:String#size]]
 
