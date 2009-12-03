@@ -4,7 +4,7 @@
 [[ref:plus]]　[[ref:minus]]　[[ref:ast]]　[[ref:slash]]　[[ref:hat]]　[[ref:sq]]　
 [[ref:period]]　[[ref:comma]]　[[ref:langl]]　[[ref:rangl]]　[[ref:eq]]　[[ref:tilde]]　
 [[ref:dollar]]　[[ref:at]]　[[ref:under]]　[[ref:lbra]][[ref:rbra]]　
-[[ref:lbra2]][[ref:rbra2]]　[[ref:lbra3]][[ref:rbra3]]　[[ref:dq]]　[[ref:sq]]　[[ref:ac]]　
+[[ref:lbra2]][[ref:rbra2]]　[[ref:lbra3]][[ref:rbra3]]　[[ref:dq]]　[[ref:colon]]　[[ref:ac]]　
 [[ref:backslash]]　[[ref:semicolon]]
 
 ===[a:ex] !
