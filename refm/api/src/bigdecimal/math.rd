@@ -1,23 +1,29 @@
 #@since 1.8.1
 
-Provides mathematical functions.
+BigDecimalを使った数学的な機能を提供します。
 
-Contents:
-  sqrt(x, prec)
-  sin (x, prec)
-  cos (x, prec)
-  atan(x, prec)  Note: |x|<1, x=0.9999 may not converge.
-  exp (x, prec)
-  log (x, prec)
-  PI  (prec)
-  E   (prec) == exp(1.0,prec)
+以下の計算が行えます。
 
-where:
-  x    ... BigDecimal number to be computed.
-           |x| must be small enough to get convergence.
-  prec ... Number of digits to be obtained.
+ * sqrt(x, prec)
+ * sin (x, prec)
+ * cos (x, prec)
+ * atan(x, prec)
+ * exp (x, prec)
+ * log (x, prec)
+ * PI  (prec)
+ * E   (prec) == exp(1.0, prec)
 
-Example:
+引数:
+
+: x
+
+  計算対象の BigDecimal オブジェクト。
+
+: prec
+
+  計算結果の精度。prec + BigDecimal.double_fig 桁まで正確に計算されます。
+
+例:
 
   require "bigdecimal"
   require "bigdecimal/math"
@@ -29,59 +35,152 @@ Example:
 
 = module BigMath
 
+BigDecimalを使った数学的な機能を提供するモジュールです。
+
 == Instance Methods
 
---- sqrt(x, prec)
+--- sqrt(x, prec) -> BigDecimal
 
-Computes the square root of x to the specified number of digits of 
-precision.
+x の平方根を prec で指定した精度で計算します。
 
-  BigDecimal.new('2').sqrt(16).to_s 
-   -> "0.14142135623730950488016887242096975E1"
+@param x 平方根を求める数。
 
---- sin(x, prec)
+@param prec 計算結果の精度。
 
-Computes the sine of x to the specified number of digits of precision.
+@raise FloatDomainError x に 0 以下、もしくは NaN が指定された場合に発生します。
 
-If x is infinite or NaN, returns NaN.
+@raise ArgumentError prec に 0 未満が指定された場合に発生します。
 
---- cos(x, prec)
+例:
 
-Computes the cosine of x to the specified number of digits of precision.
+  require "bigdecimal"
+  require "bigdecimal/math"
 
-If x is infinite or NaN, returns NaN.
+  include BigMath
+  puts sqrt(BigDecimal.new('2'), 10) #-> 0.14142135623730950488016883515E1
 
---- atan(x, prec)
+--- sin(x, prec) -> BigDecimal
 
-Computes the arctangent of x to the specified number of digits of precision.
+x の正弦関数を prec で指定した精度で計算します。単位はラジアンです。x
+に無限大や NaN を指定した場合には NaN を返します。
 
-If x is infinite or NaN, returns NaN.
-Raises an argument error if x > 1.
+@param prec 計算結果の精度。
 
---- exp(x, prec)
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
 
-Computes the value of e (the base of natural logarithms) raised to the 
-power of x, to the specified number of digits of precision.
+例:
 
-If x is infinite or NaN, returns NaN.
+  require "bigdecimal"
+  require "bigdecimal/math"
 
-  BigMath::exp(BigDecimal.new('1'), 10).to_s
-  -> "0.271828182845904523536028752390026306410273E1"
+  include BigMath
+  puts sin(BigDecimal.new('0.5'), 10) #-> 0.479425538604203000273287935689073955184741E0
 
---- log(x, prec)
+--- cos(x, prec) -> BigDecimal
 
-Computes the natural logarithm of x to the specified number of digits 
-of precision.
+x の余弦関数を prec で指定した精度で計算します。単位はラジアンです。x
+に無限大や NaN を指定した場合には NaN を返します。
 
-Returns x if x is infinite or NaN.
+@param prec 計算結果の精度。
 
---- PI(prec)
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
 
-Computes the value of pi to the specified number of digits of precision.
+例:
 
---- E(prec)
+  require "bigdecimal"
+  require "bigdecimal/math"
 
-Computes e (the base of natural logarithms) to the specified number of
-digits of precision.
+  include BigMath
+  puts cos(BigDecimal.new('0.5'), 10) #-> 0.8775825618903727161162815826327690580439923E0
+
+--- atan(x, prec) -> BigDecimal
+
+x の逆正接関数を prec で指定した精度で計算します。単位はラジアンです。
+x に無限大や NaN を指定した場合には NaN を返します。
+
+@param prec 計算結果の精度。
+
+@raise ArgumentError x の絶対値が1以上の場合に発生します。
+
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
+
+例:
+
+  require "bigdecimal"
+  require "bigdecimal/math"
+
+  include BigMath
+  puts atan(BigDecimal.new('0.5'), 10) #-> 0.463647609000806116214256237466868871528608E0
+
+===== 注意
+
+x の絶対値を 0.9999 のような 1 に近すぎる値にすると計算結果が収束しない
+可能性があります。
+
+--- exp(x, prec) -> BigDecimal
+
+x の指数関数を prec で指定した精度で計算します。x に無限大や NaN を指定
+した場合には x を返します。
+
+@param prec 計算結果の精度。
+
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
+
+例:
+
+  require "bigdecimal"
+  require "bigdecimal/math"
+
+  include BigMath
+  puts exp(BigDecimal.new('1'), 10) #-> 0.271828182845904523536028752390026306410273E1
+
+--- log(x, prec) -> BigDecimal
+
+x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
+した場合には x を返します。
+
+@param prec 計算結果の精度。
+
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
+
+例:
+
+  require "bigdecimal"
+  require "bigdecimal/math"
+
+  include BigMath
+  puts log(BigDecimal.new('2'), 10) #-> 0.693147180559945309417232112588603776354688E0
+
+--- PI(prec) -> BigDecimal
+
+円周率を prec で指定した精度で計算します。
+
+@param prec 計算結果の精度。
+
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
+
+例:
+
+  require "bigdecimal"
+  require "bigdecimal/math"
+
+  include BigMath
+  puts PI(10) #-> 0.314159265359224236485984067E1
+
+--- E(prec) -> BigDecimal
+
+自然対数 e を prec で指定した精度で計算します。
+
+@param prec 計算結果の精度。
+
+@raise ArgumentError prec に 0 以下が指定された場合に発生します。
+
+例:
+
+  require "bigdecimal"
+  require "bigdecimal/math"
+
+  include BigMath
+  puts E(10) #-> 0.271828182845904523536028752390026306410273E1
 
 #@end
