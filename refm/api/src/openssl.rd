@@ -12,7 +12,7 @@ OpenSSL を Ruby から扱うためのライブラリです。
   * [[c:OpenSSL]]
   * OpenSSL::Cipher
     * [[c:OpenSSL::Cipher::Cipher]]
-    * 以下のクラスは Cipher を継承している。使い方は Chipher を参照。
+    * 以下のクラスは Cipher を継承している。使い方は Cipher を参照。
     * OpenSSL::Cipher::AES
     * OpenSSL::Cipher::BF
     * OpenSSL::Cipher::CAST5
