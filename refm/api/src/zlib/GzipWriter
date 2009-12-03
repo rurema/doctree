@@ -47,7 +47,7 @@ GzipWriter オブジェクトは io に gzip 形式のデータを
 --- wrap(io, level = Zlib::DEFAULT_COMPRESSION, strategy = Zlib::DEFAULT_STRATEGY) {|gz| ... } -> object
 
 io と関連付けられた GzipWriter オブジェクトを作成します。
-ブッロクが与えられた場合、
+ブロックが与えられた場合、
 それを引数としてブロックを実行します。
 ブロックの実行が終了すると、GzipWriter オブジェクトは自動的に
 クローズされます。関連付けられている IO オブジェクトまで
