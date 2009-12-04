@@ -265,6 +265,6 @@ original_argvで指定されたオプションを解析して、テスト対象になるファイル
 ===== 注意
 
 Test::Unit.setup_argvはoriginal_argvの指定に関わらず、ARGVをfilesで置き
-換えます。置き換えられたARGVは[[lib:minitest]]によってもう1度解析されます。
+換えます。置き換えられたARGVは[[lib:minitest/unit]]によってもう1度解析されます。
 
 #@end
