@@ -2763,37 +2763,42 @@ self の末尾が str であるとき true を返します。
 
 --- partition(sep) -> [String, String, String]
 
-セパレータ sep が最初に登場する部分で self を 2 つに分割し、
-[セパレータを含まない先頭部分, セパレータ, それ以降の部分]
+セパレータ sep が最初に登場する部分で self を 3 つに分割し、
+[最初のセパレータより前の部分, セパレータ, それ以降の部分]
 の 3 要素の配列を返します。
 
 self がセパレータを含まないときは、
 返り値の第 2 要素と第 3 要素が空文字列になります。
 
-@param sep    セパレータを表す文字列か正規表現
+@param sep    セパレータを表す文字列か正規表現を指定します。
 
 例：
 
   p "axaxa".partition("x")   # => ["a", "x", "axa"]
   p "aaaaa".partition("x")   # => ["aaaaa", "", ""]
+#@since 1.9.1
+  p "aaaaa".partition("")    # => ["", "", "aaaaa"]
+#@else
+  p "aaaaa".partition("")    # => ["aaaaa", "", ""]
+#@end
 
 @see [[m:String#rpartition]], [[m:String#split]]
 
 --- rpartition(sep) -> [String, String, String]
 
-セパレータ sep が最後に登場する部分で self を 2 つに分割し、
+セパレータ sep が最後に登場する部分で self を 3 つに分割し、
 [最後のセパレータより前の部分, セパレータ, それ以降の部分]
 の 3 要素の配列を返します。
 
 self がセパレータを含まないときは、
-返り値の第 2 要素と第 3 要素が空文字列になります。
+返り値の第 1 要素と第 2 要素が空文字列になります。
 
-@param sep    セパレータを表す文字列か正規表現
+@param sep    セパレータを表す文字列か正規表現を指定します。
 
 例：
 
-  p "axaxa".partition("x")   # => ["axa", "x", "a"]
-  p "aaaaa".partition("x")   # => ["", "", "aaaaa"]
+  p "axaxa".rpartition("x")   # => ["axa", "x", "a"]
+  p "aaaaa".rpartition("x")   # => ["", "", "aaaaa"]
 
 @see [[m:String#partition]], [[m:String#split]]
 
