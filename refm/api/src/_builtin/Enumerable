@@ -581,8 +581,13 @@ nil if and only if the collection is empty. Enumerable#cycle
 saves elements in an internal array so changes to enum after
 the first pass have no effect.
 
+#@since 1.8.8
+@return ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
+        レシーバが空の場合は nil を返します。
+#@else
 @return ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
         レシーバが空の場合は nil を返します。
+#@end
 
    a = ["a", "b", "c"]
    a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
@@ -609,7 +614,11 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
 ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
 残りの要素を配列として返します。
 
+#@since 1.8.8
+ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
+#@else
 ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
+#@end
 
    a = [1, 2, 3, 4, 5, 0]
    a.drop_while {|i| i < 3 }   # => [3, 4, 5, 0]
