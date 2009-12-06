@@ -660,7 +660,11 @@ default_argv をパースします。
 
 @param argv パースしたい配列を指定します。
 
+#@since 1.9.1
+@param opts 引数を文字列で指定します。
+#@else
 @param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
+#@end
 
 @raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
 
