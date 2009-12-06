@@ -500,9 +500,9 @@ dup は内容だけをコピーします。
 #@end
 
 #@since 1.8.8
-@see [[m:Enumerable#collect]], [[c:Enumerable::Enumerator]]
+@see [[m:Enumerable#collect]], [[c:Enumerator]]
 #@else
-@see [[m:Enumerable#collect]]
+@see [[m:Enumerable#collect]], [[c:Enumerable::Enumerator]]
 #@end
 
 --- compact     -> Array
