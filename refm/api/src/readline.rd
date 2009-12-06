@@ -214,18 +214,18 @@ proc を取得します。
 
 --- completion_case_fold=(bool)
 
-ユーザの入力を補完する際、大文字と小文字を区別する／しないを指定します。
-bool が真ならば区別しません。 bool が偽ならば区別します。
+ユーザの入力を補完する際、大文字と小文字を同一視する／しないを指定します。
+bool が真ならば同一視します。bool が偽ならば同一視しません。
 セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
-@param bool 大文字と小文字を区別する(true)／しない(false)を指定します。
+@param bool 大文字と小文字を同一視する(true)／しない(false)を指定します。
 
 @see [[m:Readline.completion_case_fold]]
 
 --- completion_case_fold -> bool
 
-ユーザの入力を補完する際、大文字と小文字を区別する／しないを取得します。
-bool が真ならば区別しません。bool が偽ならば区別します。
+ユーザの入力を補完する際、大文字と小文字を同一視する／しないを取得します。
+bool が真ならば同一視します。bool が偽ならば同一視しません。
 
 なお、Readline.completion_case_fold= メソッドで指定したオブジェクトを
 そのまま取得するので、次のような動作をします。
