@@ -11,7 +11,7 @@ include TkBindCore
 --- []
 #@todo
 
---- []=
+--- []=(id, val)
 #@todo
 
 --- cget
