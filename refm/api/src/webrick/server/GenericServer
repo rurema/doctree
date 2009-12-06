@@ -42,10 +42,12 @@ GenericServer オブジェクトを生成して返します。
 : :AcceptCallback
   クライアントからの接続を accept したときに呼ばれる [[c:Proc]] オブジェクトを指定します。
   クライアントと接続された [[c:TCPSocket]] オブジェクトを引数として呼ばれます。
+#@since 1.9.1
 : :DoNotReverseLookup
   true の場合、ホスト名への逆引きを行わなくなります。
   [[m:BasicSocket#do_not_reverse_lookup]]
   も参照して下さい。
+#@end
 
 @param default サーバのデフォルトの設定を保存したハッシュを指定します。指定された config で
                設定がなかった項目に関してはこの default の値が使われます。
