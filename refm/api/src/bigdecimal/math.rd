@@ -21,7 +21,7 @@ BigDecimalを使った数学的な機能を提供します。
 
 : prec
 
-  計算結果の精度。prec + BigDecimal.double_fig 桁まで正確に計算されます。
+  計算結果の精度。
 
 例:
 
