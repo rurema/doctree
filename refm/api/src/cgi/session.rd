@@ -251,7 +251,7 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
     CGI::Session::FileStore がセッションデータを作成するディレクトリの名前を指定します。
     (default: ENV["TMP"] || "/tmp")
 #@if (version >= "1.8.0")
-    ((<ruby 1.8 feature>)): default は [[m:tmpdir#Dir.tmpdir]] になりました。
+    ((<ruby 1.8 feature>)): default は [[m:Dir.tmpdir]] になりました。
 #@end
 
   * "prefix"
