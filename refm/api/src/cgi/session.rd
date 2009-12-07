@@ -225,14 +225,11 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
     値が true のときは強制的に新しいセッションを始めます。
 #@if (version >= "1.8.2")
     以下は ((<ruby 1.8.2 feature>)) です。
-
     値が false のときは、リクエストにセッション ID が含まれていない場合に
     例外 ArgumentError が発生します。
-
     値がないときは、リクエストにセッション ID が
     含まれている場合はそれを使用し、含まれていない場合は新しいセッションを始めます。
 #@end
-
     (default: 値なし)
 
   * "database_manager"
@@ -244,7 +241,7 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
 
   * CGI::Session::MemoryStore
     メモリ上のハッシュを使います。Ruby インタプリタの生存期間中のみ有効です。
-    #@# mod_ruby 用って事かな...
+#@# mod_ruby 用って事かな...
 
   * CGI::Session::PStore
     Marshal フォーマットを使い、あらゆる型のデータを保存できます。
@@ -253,7 +250,6 @@ CGI::HtmlExtension#form を使い、<INPUT TYPE="submit"> でページ遷移をするようにす
   * "tmpdir"
     CGI::Session::FileStore がセッションデータを作成するディレクトリの名前を指定します。
     (default: ENV["TMP"] || "/tmp")
-
 #@if (version >= "1.8.0")
     ((<ruby 1.8 feature>)): default は [[m:tmpdir#Dir.tmpdir]] になりました。
 #@end
