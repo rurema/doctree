@@ -693,7 +693,7 @@ $KCODE の値が "EUC" のときは文字列や正規表現の
 
   * インタプリタの字句解析器
   * [[c:Regexp]] のエンコーディングフラグのデフォルト値
-  * [[unknown:リテラル/正規表現リテラル]]
+  * [[ref:d:spec/literal#regexp]]
   * [[m:Regexp.new]]
   * [[m:String#upcase]]
   * [[m:String#downcase]]

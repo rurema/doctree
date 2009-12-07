@@ -140,7 +140,7 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
  1文字(幅が指定されているときは指定された文字数)
 
 : [...]
- [[unknown:正規表現/文字クラス]]
+ [[ref:d:spec/regexp#string]]
 
 = reopen IO
 == Instance Methods

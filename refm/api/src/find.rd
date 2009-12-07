@@ -56,7 +56,7 @@
 あるディレクトリ配下の探索を省略したい場合は上記のように、
 [[m:Find.#prune]] を使用します。この例では "/tmp/bar"
 配下のファイルやディレクトリを探索しません。prune の代わりに
-[[unknown:制御構造/next]] を使用した場合、"/tmp/bar" 自体をスキップする
+[[ref:d:spec/control#next]] を使用した場合、"/tmp/bar" 自体をスキップする
 だけで、その配下の探索は続行されます。
 
 @see [[man:find(1)]], [[m:Find.#prune]]
