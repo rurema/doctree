@@ -475,7 +475,7 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
 
 例:
 
-  Readline::HISOTRY.to_s #=> "HISTORY"
+  Readline::HISTORY.to_s #=> "HISTORY"
 
 --- [](index) -> String
 
