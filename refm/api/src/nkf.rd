@@ -77,7 +77,7 @@ NKF 2.0.5 相当です。
   B[0-2]   Broken input  0: missing ESC,1: any X on ESC-[($]-X,2: ASCII on NL
   T        Text mode output
   d,c      Delete \r in line feed and \032, Add \r in line feed
-  I        Convert non ISO-2022-JP charactor to GETA
+  I        Convert non ISO-2022-JP character to GETA
   -L[uwm]  line mode u:LF w:CRLF m:CR (DEFAULT noconversion)
   long name options
    --fj,--unix,--mac,--windows                        convert for the system
@@ -85,8 +85,8 @@ NKF 2.0.5 相当です。
    --hiragana, --katakana    Hiragana/Katakana Conversion
    --cap-input, --url-input  Convert hex after ':' or ''
    --numchar-input   Convert Unicode Character Reference
-   --no-cp932        Don't convert Shift_JIS FAxx-FCxx to equivalnet CP932
-   --cp932inv        convert Shift_JIS EDxx-EFxx to equivalnet CP932 FAxx-FCxx
+   --no-cp932        Don't convert Shift_JIS FAxx-FCxx to equivalent CP932
+   --cp932inv        convert Shift_JIS EDxx-EFxx to equivalent CP932 FAxx-FCxx
    --ms-ucs-map      Microsoft UCS Mapping Compatible
 
 #@else
