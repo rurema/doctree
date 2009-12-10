@@ -58,13 +58,13 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
 
 
 @param format スキャンするフォーマットを文字列で指定します。
-              詳細は、[[unknown:scanfフォーマット文字列]] を参照してください。
+              詳細は、[[ref:m:String#scanf#format]] を参照してください。
 
 使用例:
   str = "123 abc 456 def 789 ghi"
   p str.scanf("%d%s") #=> [123, "abc"]
 
-==== scanfフォーマット文字列
+====[a:format] scanfフォーマット文字列
 
 文字 '%' と(s,d のような)指示子の間に、整数を指定する事により読み込む文字列の幅を
 指定する事ができます。もし幅が与えられなければ、無限大の値が規定値として使用されます。
@@ -150,7 +150,7 @@ formatに完全にマッチしていなくても、部分的にマッチしていれば、
 [[m:String#scanf]]も参照してください。
 
 @param format スキャンするフォーマットを文字列で指定します。
-              詳細は、[[unknown:scanfフォーマット文字列]] を参照してください。
+              詳細は、[[ref:m:String#scanf#format]] を参照してください。
 
 #@#The trick here is doing a match where you grab one line of input at a time. 
 #@#The linebreak may or may not occur at the boundary where the string matches 
@@ -190,6 +190,6 @@ STDIN.scanf と同じです。
 [[m:IO#scanf]]、[[m:Stdin#scanf]]も参照してください。
 
 @param format スキャンするフォーマットを文字列で指定します。
-              詳細は、[[unknown:scanfフォーマット文字列]] を参照してください。
+              詳細は、[[ref:m:String#scanf#format]] を参照してください。
 
 @see [[m:IO#scanf]], [[m:Stdin#scanf]]
