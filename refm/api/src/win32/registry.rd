@@ -62,7 +62,7 @@ desired はアクセスマスクです。opt はキーのオプションです。
 key は親のキーを Win32::Registry オブジェクトで指定します。
 親のキーには定義済キー HKEY_* を使用できます (⇒[[c:Win32::Registry::Constants]])
 
-サブキーが既に存在していればキーはただ開かれ，[[unknown:created?|Win32::Registry/created?]]
+サブキーが既に存在していればキーはただ開かれ，[[m:Win32::Registry#created?]]
 メソッドが false を返します。
 
 ブロックが与えられると，キーは自動的に閉じられます。
@@ -117,7 +117,7 @@ Time オブジェクトまたは Integer オブジェクトを受け取り，
 の配列で返します。
 name が nil の場合，(標準) レジストリ値が読み込まれます。
 
-type はレジストリ値の型です。(⇒[[unknown:Registry::Constants module|Win32::Registry/Registry::Constants module]])
+type はレジストリ値の型です。(⇒[[c:Win32::Registry::Constants]])
 data はレジストリ値のデータで，クラスは以下の通りです:
   * REG_SZ, REG_EXPAND_SZ
     String
@@ -136,7 +136,7 @@ data はレジストリ値のデータで，クラスは以下の通りです:
 #@todo
 
 レジストリ値 name を読み，その値を返します。クラスは
-[[unknown:read|Win32::Registry/read]] に準じます。
+[[m:Win32::Registry#read]] に準じます。
 
 レジストリ値の型が REG_EXPAND_SZ だった場合，環境変数が置換されます。
 レジストリ値の型が REG_SZ, REG_EXPAND_SZ, REG_MULTI_SZ, REG_DWORD,
@@ -169,8 +169,8 @@ REG_SZ または REG_EXPAND_SZ 以外だった場合，TypeError が発生します。
 レジストリ値 name に型 type で data を書き込みます。
 name が nil の場合，(標準) レジストリ値に書き込みます。
 
-type はレジストリ値の型です。(⇒[[unknown:Registry::Constants module|Win32::Registry/Registry::Constants module]])
-data のクラスは [[unknown:read|Win32::Registry/read]]
+type はレジストリ値の型です。(⇒[[c:Win32::Registry::Constants]])
+data のクラスは [[m:Win32::Registry#read]]
 メソッドに準じていなければなりません。
 
 --- [](name, wtype = nil)

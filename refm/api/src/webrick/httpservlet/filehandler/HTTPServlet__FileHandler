@@ -89,5 +89,5 @@ falseならばエラー(403 Forbidden)となる。
 クライアントから/~foo/index.htmlがリクエストされると/home/foo/public_html/index.htmlの内容を表示される。
 
 この設定を有効にするには以下の条件が必要。
-  * [[unknown:etc]]ライブラリが使える状態である。
+  * [[lib:etc]]ライブラリが使える状態である。
   * 環境変数SCRIPT_NAMEが空(空文字列)である。

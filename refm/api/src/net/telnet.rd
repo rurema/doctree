@@ -60,11 +60,11 @@ delegateされる)．
 "Timeout" で指定した時間までに接続できない場合 [[c:TimeoutError]] 例外
 が発生します。
 
-"Waittime" は [[unknown:"net/telnet"/Net::Telnet#waitfor]] メソッドの "Waittime" のデフォ
+"Waittime" は [[m:Net::Telnet#waitfor]] メソッドの "Waittime" のデフォ
 ルト値になります。waitfor メソッドのプロンプト待ち合わせの処理は、リモー
 トホストからの出力が "Prompt" で指定した正規表現にマッチしてから
 "Waittime" 秒待っても出力がないかどうかで判断されます。
-waitfor メソッドは [[unknown:"net/telnet"/Net::Telnet#cmd]] や [[unknown:"net/telnet"/Net::Telnet#login]]
+waitfor メソッドは [[m:Net::Telnet#cmd]] や [[m:Net::Telnet#login]]
 の内部でも使用されています。
 
 ブロックを指定した場合、接続前に
