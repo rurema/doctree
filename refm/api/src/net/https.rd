@@ -28,8 +28,9 @@ verify_mode に指定する定数に関しては [[c:OpenSSL::SSL]] を参照してください。
 
 以下は HTTPS プロクシ経由でアクセスする例です。
 プロクシ経由でも通信路は暗号化されます。
-[[unknown:WWWプロキシにおけるSSLトンネリング|URL:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]
-を参照してください。
+詳しくは以下を参照してください。
+
+ * WWWプロキシにおけるSSLトンネリング: [[url:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]
 
   require 'net/https'
   proxy_addr = 'proxy.example.com'

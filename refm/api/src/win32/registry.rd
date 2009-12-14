@@ -49,7 +49,9 @@ key は親のキーを Win32::Registry オブジェクトで指定します。
 親のキーには定義済キー HKEY_* を使用できます (⇒[[c:Win32::Registry::Constants]])
 
 desired はアクセスマスクです。opt はキーのオプションです。
-詳細は [[unknown:MSDN Library|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp]] を参照してください。
+詳細は以下の MSDN Library を参照してください。
+
+ * Registry Key Security and Access Rights: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry_key_security_and_access_rights.asp]]
 
 ブロックが与えられると，キーは自動的に閉じられます。
 
@@ -73,7 +75,9 @@ key は親のキーを Win32::Registry オブジェクトで指定します。
 str の %\w+% という並びを環境変数に置換します。
 REG_EXPAND_SZ で用いられます。
 
-詳細は [[unknown:ExpandEnvironmentStrings|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp]] Win32 API を参照してください。
+詳細は以下の Win32 API を参照してください。
+
+ * ExpandEnvironmentStrings: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/expandenvironmentstrings.asp]]
 
 --- type2name(type)
 #@todo
@@ -83,7 +87,11 @@ REG_EXPAND_SZ で用いられます。
 --- wtime2time(wtime)
 #@todo
 
-64bit の [[unknown:FILETIME|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp]] を Time オブジェクトに変換します。
+64bit の FILETIME を Time オブジェクトに変換します。
+
+詳細は以下の MSDN Library を参照してください。
+
+ * FILETIME Structure: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/filetime_str.asp]]
 
 --- time2wtime(time)
 #@todo
@@ -287,7 +295,9 @@ subkey の値を返します。
   * wtime
     最終更新時刻 (FILETIME)
 
-詳細は [[unknown:RegQueryInfoKey|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/regqueryinfokey.asp]] Win32 API を参照してください。
+詳細は以下の Win32 API を参照してください。
+
+ * RegQueryInfoKey: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/regqueryinfokey.asp]]
 
 --- num_keys
 --- max_key_length
@@ -331,8 +341,10 @@ subkey の値を返します。
 #@todo
 
 それぞれの定義済キーを表す Win32::Registry オブジェクトです。
-詳細は [[unknown:MSDN Library|URL:httphttp://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp]] を参照してください。
 
+詳細は以下の MSDN Library を参照してください。
+
+ * Predefined Keys: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/predefined_keys.asp]]
 
 = module Win32::Registry::API
 == Module Functions
@@ -398,7 +410,9 @@ subkey の値を返します。
 
 = module Win32::Registry::Constants
 
-詳細は [[unknown:MSDN Library|URL:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp]] を参照してください。
+詳細は以下の MSDN Library を参照してください。
+
+ * Registry: [[url:http://msdn.microsoft.com/library/en-us/sysinfo/base/registry.asp]]
 
 == Constants
 
