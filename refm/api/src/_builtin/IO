@@ -1638,15 +1638,15 @@ IO のエンコーディングを設定します。
 
 == Constants
 
---- SEEK_CUR
+--- SEEK_CUR -> Fixnum
 
 [[m:IO#seek]] を参照してください。
 
---- SEEK_END
+--- SEEK_END -> Fixnum
 
 [[m:IO#seek]] を参照してください。
 
---- SEEK_SET
+--- SEEK_SET -> Fixnum
 
 [[m:IO#seek]] を参照してください。
 
