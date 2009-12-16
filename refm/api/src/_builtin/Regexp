@@ -515,19 +515,19 @@ Returns the Encoding object that represents the encoding of obj.
 
 == Constants
 
---- EXTENDED
+--- EXTENDED -> Fixnum
 
 バックスラッシュでエスケープされていない空白と # から改行までを無
 視します。正規表現リテラルの //x オプションと同じ
 です。(空白を入れる場合は\でエスケープして\ (<-空白)と
 指定します)
 
---- IGNORECASE
+--- IGNORECASE -> Fixnum
 
 文字の大小の違いを無視します。
 正規表現リテラルの //i オプションと同じです。
 
---- MULTILINE
+--- MULTILINE -> Fixnum
 
 複数行モード。正規表現 "." が改行にマッチするようになります。
 正規表現リテラルの //m オプションと同じです。
