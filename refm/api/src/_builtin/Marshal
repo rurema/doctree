@@ -91,8 +91,8 @@ proc として手続きオブジェクトが与えられた場合には読み込んだ
 #@since 1.8.0
 == Constants
 
---- MAJOR_VERSION
---- MINOR_VERSION
+--- MAJOR_VERSION -> Fixnum
+--- MINOR_VERSION -> Fixnum
 
 [[m:Marshal.#dump]] が出力するデータフォーマットのバージョン番号です。
 
