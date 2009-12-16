@@ -1,6 +1,6 @@
 == Constants
 
---- TRUE
+--- TRUE -> TrueClass
 非推奨です。代表的な真の値。true と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 true を使ってください。
@@ -8,14 +8,14 @@
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 
---- FALSE
+--- FALSE -> FalseClass
 非推奨です。代表的な偽の値。false と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 false を使ってください。
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 
---- NIL
+--- NIL -> NilClass
 非推奨です。 nil と同じ。
 
 この定数は過去との互換性のために提供されています。擬似変数 nil を使ってください。
@@ -23,7 +23,7 @@ Ruby では false と nil が偽として扱われます。
 Ruby では false と nil が偽として扱われます。
 偽でない値(false でも nil でもない値) は全て真とみなされます。
 
---- STDIN
+--- STDIN -> IO
 標準入力。[[m:$stdin]] のデフォルト値。 [[m:$stdin]] も参照してください。
 
 STDIN は、 ruby プロセスが起動された時点での標準入力を表します。
@@ -40,7 +40,7 @@ STDIN は ruby 自体が起動された時点での標準入力です。
 ruby 自体が他のストリームに向けて入力をリダイレクトされた状態で起動された場合、
 STDIN が保持するのは端末ではなく、リダイレクト先のストリームです。
 
---- STDOUT
+--- STDOUT -> IO
 標準出力。[[m:$stdout]] のデフォルト値。 [[m:$stdout]] も参照してください。
 
 STDOUT は、 ruby プロセスが起動された時点での標準出力を表します。
@@ -58,7 +58,7 @@ ruby 自体が他のストリームに向けて出力をリダイレクトされた状態で起動された場合、
 STDOUT が保持するのは端末ではなく、リダイレクト先のストリームです。
 
 
---- STDERR
+--- STDERR -> IO
 標準エラー出力。[[m:$stderr]] のデフォルト値。 [[m:$stderr]] も参照してください。
 
 STDERR は、 ruby プロセスが起動された時点での標準エラー出力を表します。
@@ -75,19 +75,19 @@ STDERR は ruby 自体が起動された時点での標準エラー出力です。
 ruby 自体が他のストリームに向けてエラー出力をリダイレクトされた状態で起動された場合、
 STDERR が保持するのは端末ではなく、リダイレクト先のストリームです。
 
---- ENV
+--- ENV -> Object
 環境変数を表す (疑似) 連想配列 (詳細は [[c:ENV]] を参照)。
 
 この連想配列の値を変更すると子プロセスの環境として引き継がれます。
 
---- ARGF
+--- ARGF -> Object
 引数 (なければ標準入力) で構成される仮想ファイル (詳細は [[c:ARGF]] を参照)。
 
 つまり [[m:Kernel.#gets]] は [[m:ARGF.gets]] と同じ意味です。
 [[m:ARGF.file]] で現在読み込み中のファイルオブジェクトが、
 [[m:ARGF.filename]] で現在読み込み中のファイル名が得られます。
 
---- ARGV
+--- ARGV -> Array
 Ruby スクリプトに与えられた引数を表す配列です。
 
 組み込み変数 [[m:$*]] の別名です。
@@ -102,7 +102,7 @@ Ruby 自身に対する引数は取り除かれています。
 結果は以下のように出力されます。
     ["foo", "bar", "baz"]
 
---- DATA
+--- DATA -> File
 スクリプトの __END__
 プログラムの終り以降をアクセスする [[c:File]] オブジェクト。
 
@@ -179,13 +179,13 @@ app.rb:
     data from app
 
 
---- TOPLEVEL_BINDING
+--- TOPLEVEL_BINDING -> Binding
 
 トップレベルでの [[c:Binding]] オブジェクト。
 
 詳細は [[c:Binding]] を参照してください。
 
---- RUBY_VERSION
+--- RUBY_VERSION -> String
 
 Ruby のバージョンを表す文字列。
 
@@ -204,26 +204,26 @@ Ruby 1.8 までは、minor が奇数のバージョンは開発版、
 minor が偶数のバージョンは安定版です。
 RUby 1.9.0 以降は、teeny が 0 のバージョンが開発版となる予定です。
 
---- RUBY_RELEASE_DATE
+--- RUBY_RELEASE_DATE -> String
 
 Ruby のリリース日を表す文字列。
 
---- RUBY_PLATFORM
+--- RUBY_PLATFORM -> String
 
 プラットフォームを表す文字列。
 
 #@since 1.8.7
---- RUBY_COPYRIGHT
+--- RUBY_COPYRIGHT -> String
 Ruby のコピーライトを表す文字列。
 
---- RUBY_DESCRIPTION
+--- RUBY_DESCRIPTION -> String
 Ruby の詳細を表す文字列。
 
 ruby -v で表示される内容が格納されています。
 
 #@end
 #@since 1.8.5
---- RUBY_PATCHLEVEL
+--- RUBY_PATCHLEVEL -> Fixnum
 Ruby のパッチレベルを表す [[c:Fixnum]] オブジェクトです。
 
 パッチレベルはRubyの各バージョンに対するバグ修正パッチの適用をカウントしています。
@@ -234,7 +234,7 @@ teeny リリースのそれぞれについてパッチレベルは 0 から始まり、
 1.8.5やそれ以前のバージョンでは定義されていません。
 #@end
 #@since 1.9.1
---- RUBY_ENGINE
+--- RUBY_ENGINE -> String
 Ruby処理系実装の種類を表す文字列。
 
 例:
@@ -248,26 +248,26 @@ Ruby処理系実装の種類を表す文字列。
 
 #@end
 #@if (version < "1.9.1")
---- VERSION
+--- VERSION -> String
 
 非推奨です。 [[m:Kernel::RUBY_VERSION]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_VERSION を使ってください。
 
---- RELEASE_DATE
+--- RELEASE_DATE -> String
 
 非推奨です。 [[m:Kernel::RUBY_RELEASE_DATE]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_RELEASE_DATE を使ってください。
 
---- PLATFORM
+--- PLATFORM -> String
 
 非推奨です。 [[m:Kernel::RUBY_PLATFORM]] の古い名前です。
 
 この定数は過去との互換性のために提供されています。 RUBY_PLATFORM を使ってください。
 #@end
 
---- SCRIPT_LINES__
+--- SCRIPT_LINES__ -> Hash
 
 ソースファイル別にまとめられたソースコードの各行。
 
