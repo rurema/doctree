@@ -556,13 +556,9 @@ n は数値でなければなりません。
 #@end
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
-#@since 1.8.7
-ブロックが与えられない場合、
 #@since 1.8.8
+ブロックが与えられない場合、
 [[c:Enumerator]] オブジェクトを返します。
-#@else
-[[c:Enumerable::Enumerator]] オブジェクトを返します。
-#@end
 #@end
 
 @param min 日付オブジェクト
