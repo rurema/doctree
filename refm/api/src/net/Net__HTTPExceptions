@@ -1,0 +1,56 @@
+= module Net::HTTPExceptions
+HTTP 例外クラスです。
+
+実際にはこれを include した以下のサブクラスの
+例外が発生します。
+
+  * [[c:Net::HTTPError]]
+  * [[c:Net::HTTPRetriableError]]
+  * [[c:Net::HTTPServerError]]
+  * [[c:Net::HTTPFatalError]]
+
+また、例外を発生させるためには [[m:Net::HTTPResponse#value]] を
+呼ぶ必要があります。
+
+== Instance Methods
+--- response -> Net::HTTPResponse
+--- data -> Net::HTTPResponse
+
+例外の原因となったレスポンスオブジェクトを返します。
+
+= class HTTPError < Net::ProtocolError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 1xx を受け取ったという例外です。
+または、ステータスコードが未知のものである場合も
+これに対応します。
+
+= class HTTPRetriableError < Net::ProtoRetriableError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 3xx を受け取ったという例外です。
+
+リソースが移動したなどの理由により、リクエストを完了させるには更な
+るアクションが必要になります。
+
+= class HTTPServerException < Net::ProtoServerError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 5xx を受け取ったという例外です。
+
+クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+れた(認証が必要、リソースが存在しないなどで)ことを示します。
+
+= class HTTPFatalError < Net::ProtoFatalError
+include Net::HTTPExceptions
+
+HTTP ステータスコード 4xx を受け取ったという例外です。
+
+クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
+れた(認証が必要、リソースが存在しないなどで)ことを示します。
+
+= class HTTPBadResponse < StandardError
+HTTP のレスポンスが不正であった場合に発生する例外です。
+
+= class HTTPHeaderSyntaxError < StandardError
+HTTP ヘッダの内容が不正である場合に発生する例外です。

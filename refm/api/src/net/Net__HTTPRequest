@@ -1,0 +1,170 @@
+= class Net::HTTPGenericRequest < Object
+
+include Net::HTTPHeader
+
+[[c:Net::HTTPRequest]] のスーパークラスです。
+このクラスは直接は使わないでください。
+
+[[c:Net::HTTPRequest]] のサブクラスを使ってください。
+
+== Class Methods
+
+#@# 
+#@# --- new(m, reqbody, resbody, path, initheader = nil)
+
+== Instance Methods
+
+#@# --- inspect
+
+
+--- body_exist? -> bool
+このメソッドは obsolete です。
+
+[[m:Net::HTTPGenericRequest#response_body_permitted?]]
+の別名です。
+
+#@since 1.8.0
+--- body -> String
+サーバに送るリクエストのエンティティボディを返します。
+
+@see [[m:Net::HTTPGenericRequest#body=]]
+
+--- body=(body)
+
+サーバに送るリクエストのエンティティボディを文字列で設定します。
+
+@param body 設定するボディを文字列で与えます。
+@see [[m:Net::HTTPGenericRequest#body]]
+
+#@end
+
+#@since 1.9.1
+--- body_stream -> object
+--- body_stream=(f)
+
+サーバに送るリクエストのエンティティボディを
+[[c:IO]] オブジェクトなどのストリームで設定します。
+f は read(size) メソッドが定義されている必要があります。
+
+@param f エンティティボディのデータを得るストリームオブジェクトを与えます。
+
+#@end
+
+--- method -> String
+リクエストの HTTP メソッドを文字列で返します。
+
+--- path -> String
+
+リクエストする path を文字列で返します。
+
+--- request_body_permitted? -> bool
+
+リクエストにエンティティボディを一緒に送ることが許されている
+HTTP メソッド (POST など)の場合真を返します。
+
+--- response_body_permitted? -> bool
+
+サーバからのレスポンスにエンティティボディを含むことが許されている
+HTTP メソッド (GET, POST など)の場合真を返します。
+
+
+= class Net::HTTPRequest < Net::HTTPGenericRequest
+HTTP リクエストを抽象化するクラスです。
+
+Net::HTTPRequest は抽象クラスなので実際にはサブクラスの
+
+  * [[c:Net::HTTP::Get]]
+  * [[c:Net::HTTP::Head]]
+  * [[c:Net::HTTP::Post]]
+  * [[c:Net::HTTP::Put]]
+  * [[c:Net::HTTP::Copy]]
+  * [[c:Net::HTTP::Delete]]
+  * [[c:Net::HTTP::Lock]]
+  * [[c:Net::HTTP::Mkcol]]
+  * [[c:Net::HTTP::Move]]
+  * [[c:Net::HTTP::Options]]
+  * [[c:Net::HTTP::Propfind]]
+  * [[c:Net::HTTP::Proppatch]]
+  * [[c:Net::HTTP::Trace]]
+  * [[c:Net::HTTP::Unlock]]
+
+を使用してください。
+
+=== 例
+
+  require 'net/http'
+  http = Net::HTTP.new('www.example.com', 80)
+  req = Net::HTTP::Get.new('/somefile')
+  res = http.request(req)
+  print res.body
+
+== Class Methods
+--- new(path, initheader = nil) -> Net::HTTPRequest
+HTTP リクエストオブジェクトを生成します。
+
+initheader でリクエストヘッダを指定することができます。
+{ヘッダフィールド名(文字列)=>その中身(文字列)} という
+[[c:Hash]] を用います。
+
+@param path リクエストする path を文字列で与えます。
+@param initheader リクエストヘッダをハッシュで指定します。
+
+#@# == Constants
+#@# --- METHOD -> String
+#@# リクエストの HTTP メソッドを文字列で返します。
+
+#@# 実際にはこの定数は各サブクラスで定義されています。
+
+#@# --- REQUEST_HAS_BODY -> bool
+#@# リクエストにエンティティボディを一緒に送ることが許されている
+#@# HTTP メソッド (POST など)の場合真を返します。
+#@#
+#@# 実際にはこの定数は各サブクラスで定義されています。
+
+#@# --- RESPONSE_HAS_BODY -> bool
+#@# サーバからのレスポンスにエンティティボディを含むことが許されている
+#@# HTTP メソッド (GET, POST など)の場合真を返します。
+#@#
+#@# 実際にはこの定数は各サブクラスで定義されています。
+
+= class Net::HTTP::Head < Net::HTTPRequest
+HTTP の HEAD リクエストを表すクラスです。
+
+= class Net::HTTP::Get < Net::HTTPRequest
+HTTP の GET リクエストを表すクラスです。
+
+= class Net::HTTP::Post < Net::HTTPRequest
+HTTP の POST リクエストを表すクラスです。
+
+= class Net::HTTP::Put < Net::HTTPRequest
+HTTP の PUT リクエストを表すクラスです。
+
+= class Net::HTTP::Copy < Net::HTTPRequest
+HTTP の COPY リクエストを表すクラスです。
+
+= class Net::HTTP::Delete < Net::HTTPRequest
+HTTP の DELETE リクエストを表すクラスです。
+
+= class Net::HTTP::Lock < Net::HTTPRequest
+HTTP の LOCK リクエストを表すクラスです。
+
+= class Net::HTTP::Mkcol < Net::HTTPRequest
+HTTP の MKCOL リクエストを表すクラスです。
+
+= class Net::HTTP::Move < Net::HTTPRequest
+HTTP の MOVE リクエストを表すクラスです。
+
+= class Net::HTTP::Options < Net::HTTPRequest
+HTTP の OPTIONS リクエストを表すクラスです。
+
+= class Net::HTTP::Propfind < Net::HTTPRequest
+HTTP の PROPFIND リクエストを表すクラスです。
+
+= class Net::HTTP::Proppatch < Net::HTTPRequest
+HTTP の PROPPATCH リクエストを表すクラスです。
+
+= class Net::HTTP::Trace < Net::HTTPRequest
+HTTP の TRACE リクエストを表すクラスです。
+
+= class Net::HTTP::Unlock < Net::HTTPRequest
+HTTP の UNLOCK リクエストを表すクラスです。
