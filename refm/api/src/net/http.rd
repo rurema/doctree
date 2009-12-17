@@ -1881,16 +1881,14 @@ HTTP 例外クラスです。
 
 例外の原因となったレスポンスオブジェクトを返します。
 
-#@# = class HTTPError < ProtocolError
-= class Net::HTTPError < StandardError
+= class HTTPError < Net::ProtocolError
 include Net::HTTPExceptions
 
 HTTP ステータスコード 1xx を受け取ったという例外です。
 または、ステータスコードが未知のものである場合も
 これに対応します。
 
-#@# = class HTTPRetriableError < ProtoRetriableError
-= class Net::HTTPRetriableError < StandardError
+= class HTTPRetriableError < Net::ProtoRetriableError
 include Net::HTTPExceptions
 
 HTTP ステータスコード 3xx を受け取ったという例外です。
@@ -1898,8 +1896,7 @@ HTTP ステータスコード 3xx を受け取ったという例外です。
 リソースが移動したなどの理由により、リクエストを完了させるには更な
 るアクションが必要になります。
 
-#@# = class HTTPServerException < ProtoServerError
-= class Net::HTTPServerException < StandardError
+= class HTTPServerException < Net::ProtoServerError
 include Net::HTTPExceptions
 
 HTTP ステータスコード 5xx を受け取ったという例外です。
@@ -1907,8 +1904,7 @@ HTTP ステータスコード 5xx を受け取ったという例外です。
 クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
 れた(認証が必要、リソースが存在しないなどで)ことを示します。
 
-#@# = class HTTPFatalError < ProtoFatalError
-= class Net::HTTPFatalError < StandardError
+= class HTTPFatalError < Net::ProtoFatalError
 include Net::HTTPExceptions
 
 HTTP ステータスコード 4xx を受け取ったという例外です。
@@ -1916,6 +1912,11 @@ HTTP ステータスコード 4xx を受け取ったという例外です。
 クライアントのリクエストに誤りがあるか、サーバにリクエストを拒否さ
 れた(認証が必要、リソースが存在しないなどで)ことを示します。
 
+= class HTTPBadResponse < StandardError
+HTTP のレスポンスが不正であった場合に発生する例外です。
+
+= class HTTPHeaderSyntaxError < StandardError
+HTTP ヘッダの内容が不正である場合に発生する例外です。
 
 #@# internal classes
 #@# = module Net::HTTP::ProxyDelta

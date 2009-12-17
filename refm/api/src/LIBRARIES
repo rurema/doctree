@@ -166,6 +166,7 @@ net/http
 net/https
 net/imap
 net/pop
+net/protocol
 net/smtp
 net/telnet
 #@until 1.9.1
