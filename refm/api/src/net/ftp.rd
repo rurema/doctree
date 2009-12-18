@@ -5,7 +5,7 @@ command-line interface の FTP クライアントを使ったことのある
 人にとってわかりやすいインターフェースになっています。
 より「Ruby 的」であるインターフェースも用意しています。
 
-FTP については [[RFC:959]] 、 [[RFC:3659]] を参考にしてください。
+FTP については [[RFC:959]]、[[RFC:3659]] を参考にしてください。
 
 === バイナリモードとテキストモード
 FTP のデータ転送にはテキストモードとバイナリモード
@@ -15,13 +15,13 @@ FTP のデータ転送にはテキストモードとバイナリモード
 
 通常はバイナリモード以外を使う必要はないでしょう。
 
-[[m:Net::FTP#get]] 、 [[m:Net::FTP#put]] は
+[[m:Net::FTP#get]]、[[m:Net::FTP#put]] は
 [[m:Net::FTP#binary]] の値に従ってテキストモードと
 バイナリモードの一方を選びます。また、
 [[m:Net::FTP#getbinaryfile]]、[[m:Net::FTP#putbinaryfile]]
 は [[m:Net::FTP#binary]] の値によらずバイナリモードで、
 [[m:Net::FTP#gettextfile]]、[[m:Net::FTP#puttextfile]] は
-は [[m:Net::FTP#binary]] の値によらずテキストモードで
+[[m:Net::FTP#binary]] の値によらずテキストモードで
 データ転送が行われます。
 
 === パッシブモードとアクティブモード
