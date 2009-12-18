@@ -264,7 +264,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
 @see [[m:Open3.#popen3]]
 
 --- pipeline_rw(*cmds) -> [IO, IO, [Thread]]
---- pipeline_rw(*cmds) {|first_stdin, last_stdout, wait_thrs| -> ()
+--- pipeline_rw(*cmds) {|first_stdin, last_stdout, wait_thrs| ... } -> ()
 
 指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
 コマンドの標準入力に書き込む事も最後のコマンドの標準出力を受けとる事も
@@ -300,7 +300,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
 @see [[m:Open3.#popen3]]
 
 --- pipeline_r(*cmds) -> [IO, [Thread]]
---- pipeline_r(*cmds) {|last_stdout, wait_thrs| -> ()
+--- pipeline_r(*cmds) {|last_stdout, wait_thrs| ... } -> ()
 
 指定したコマンドのリストをパイプで繋いで順番に実行します。最後の
 コマンドの標準出力を受けとる事ができます。
@@ -327,7 +327,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
 @see [[m:Open3.#popen3]]
 
 --- pipeline_w(*cmds) -> [IO, [Thread]]
---- pipeline_w(*cmds) {|first_stdin, wait_thrs| -> ()
+--- pipeline_w(*cmds) {|first_stdin, wait_thrs| ... } -> ()
 
 指定したコマンドのリストをパイプで繋いで順番に実行します。最初の
 コマンドの標準入力に書き込む事ができます。
@@ -352,7 +352,7 @@ cmdで指定されたコマンドを実行し、そのプロセスの標準出力と標準エラーを1
 @see [[m:Open3.#popen3]]
 
 --- pipeline_start(*cmds) -> [Thread]
---- pipeline_start(*cmds) {|wait_thrs| -> ()
+--- pipeline_start(*cmds) {|wait_thrs| ... } -> ()
 
 指定したコマンドのリストをパイプで繋いで順番に実行します。
 
