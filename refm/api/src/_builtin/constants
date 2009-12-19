@@ -244,7 +244,6 @@ Ruby処理系実装の種類を表す文字列。
   $ jruby -ve 'p RUBY_ENGINE'
   jruby 1.2.0 (ruby 1.8.6 patchlevel 287) (2009-03-16 rev 9419) [i386-java]
   "jruby"
-  $
 
 #@end
 #@if (version < "1.9.1")
