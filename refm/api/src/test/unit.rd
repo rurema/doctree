@@ -192,13 +192,6 @@ testrb ¥³¥Þ¥ó¥É¤ä [[c:Test::Unit::AutoRunner]] ¡¢³Æ¼ï TestRunner ¥¯¥é¥¹¤ò»È¤¦¤³¤
 : Failure
   ¥¢¥µ¡¼¥·¥ç¥ó¤Ë¼ºÇÔ¤·¤¿¡£
 
-#@until 1.9.1
-=== RubyUnit ¤«¤é¤Î°Ü¹Ô
-
-assertion ¥á¥½¥Ã¥É¤Î°ã¤¤¤Ï [[unknown:"ruby-src:lib/runit/assert.rb"]] ¤ò»²¾È¡£
-[[c:RUNIT::Assert]] ¤â»²¾È¡£
-#@end
-
 = module Test::Unit
 
 ¥æ¥Ë¥Ã¥È¥Æ¥¹¥È¤ò¹Ô¤¦¤¿¤á¤Î¥â¥¸¥å¡¼¥ë¤Ç¤¹¡£

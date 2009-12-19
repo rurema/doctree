@@ -21,7 +21,9 @@ include Test::Unit::Assertions
 #@end
 
  require 'test/unit'
+#@until 1.9.1
  require 'test/unit/ui/console/testrunner'
+#@end
  
  class TC_String < Test::Unit::TestCase
    def test_size
@@ -35,8 +37,10 @@ include Test::Unit::Assertions
    end
  end
  
+#@until 1.9.1
  suite = TC_String.suite
  Test::Unit::UI::Console::TestRunner.run(suite)
+#@end
 
 各 TestCase オブジェクトは、ひとつのテストメソッドに対応しています。テストが実行される時には、
 テストメソッドの数だけ TestCase オブジェクトが生成されます。
@@ -52,7 +56,6 @@ Ties everything together. If you subclass and add your own test methods, it take
 
 #@else
 --- new(test_method_name)    -> Test::Unit::TestCase
-#@todo
 
 このメソッドをユーザが直接呼ぶことはありません。
 
@@ -89,15 +92,10 @@ TestCase オブジェクトを生成し、[[c:Test::Unit::TestSuite]] オブジェクト
 自身に対応しているテストメソッドの名前を人間が読みやすい形式で返します。
 
 --- run(result) {|STARTED, name| ...}
-#@todo
 
 このメソッドをユーザが直接呼ぶことはありません。
 
-自身に対応したテストメソッドを実行します。
-
-Runs the individual test method represented by this instance
-of the fixture, collecting statistics, failures and errors in
-result.
+自身に対応したテストメソッドを実行して failures や errors を集計します。
 
 @param result [[c:Test::Unit::TestResult]] オブジェクトを与えます。
 
