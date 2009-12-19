@@ -31,7 +31,7 @@ BigDecimalを使った数学的な機能を提供します。
   include BigMath
 
   a = BigDecimal((PI(100)/2).to_s)
-  puts sin(a,100) # -> 0.10000000000000000000......E1
+  puts sin(a,100) #=> 0.10000000000000000000......E1
 
 = module BigMath
 
@@ -61,7 +61,7 @@ x の平方根を prec で指定した精度で計算します。
 
   require "bigdecimal/math"
 
-  puts BigMath::sqrt(BigDecimal.new('2'), 10) #-> 0.14142135623730950488016883515E1
+  puts BigMath::sqrt(BigDecimal.new('2'), 10) #=> 0.14142135623730950488016883515E1
 
 #@else
 
@@ -69,7 +69,7 @@ x の平方根を prec で指定した精度で計算します。
   require "bigdecimal/math"
 
   include BigMath
-  puts sqrt(BigDecimal.new('2'), 10) #-> 0.14142135623730950488016883515E1
+  puts sqrt(BigDecimal.new('2'), 10) #=> 0.14142135623730950488016883515E1
 
 #@end
 
@@ -88,7 +88,7 @@ x の正弦関数を prec で指定した精度で計算します。単位はラジアンです。x
 
   require "bigdecimal/math"
 
-  puts BigMath::sin(BigDecimal.new('0.5'), 10) #-> 0.479425538604203000273287935689073955184741E0
+  puts BigMath::sin(BigDecimal.new('0.5'), 10) #=> 0.479425538604203000273287935689073955184741E0
 
 #@else
 
@@ -96,7 +96,7 @@ x の正弦関数を prec で指定した精度で計算します。単位はラジアンです。x
   require "bigdecimal/math"
 
   include BigMath
-  puts sin(BigDecimal.new('0.5'), 10) #-> 0.479425538604203000273287935689073955184741E0
+  puts sin(BigDecimal.new('0.5'), 10) #=> 0.479425538604203000273287935689073955184741E0
 
 #@end
 
@@ -115,7 +115,7 @@ x の余弦関数を prec で指定した精度で計算します。単位はラジアンです。x
 
   require "bigdecimal/math"
 
-  puts BigMath::cos(BigDecimal.new('0.5'), 10) #-> 0.8775825618903727161162815826327690580439923E0
+  puts BigMath::cos(BigDecimal.new('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923E0
 
 #@else
 
@@ -123,7 +123,7 @@ x の余弦関数を prec で指定した精度で計算します。単位はラジアンです。x
   require "bigdecimal/math"
 
   include BigMath
-  puts cos(BigDecimal.new('0.5'), 10) #-> 0.8775825618903727161162815826327690580439923E0
+  puts cos(BigDecimal.new('0.5'), 10) #=> 0.8775825618903727161162815826327690580439923E0
 
 #@end
 
@@ -144,7 +144,7 @@ x に無限大や NaN を指定した場合には NaN を返します。
 
   require "bigdecimal/math"
 
-  puts BigMath::atan(BigDecimal.new('0.5'), 10) #-> 0.463647609000806116214256237466868871528608E0
+  puts BigMath::atan(BigDecimal.new('0.5'), 10) #=> 0.463647609000806116214256237466868871528608E0
 
 #@else
 
@@ -152,7 +152,7 @@ x に無限大や NaN を指定した場合には NaN を返します。
   require "bigdecimal/math"
 
   include BigMath
-  puts atan(BigDecimal.new('0.5'), 10) #-> 0.463647609000806116214256237466868871528608E0
+  puts atan(BigDecimal.new('0.5'), 10) #=> 0.463647609000806116214256237466868871528608E0
 
 #@end
 
@@ -180,7 +180,7 @@ x に無限大や NaN を指定した場合には x を返します。
 
   require "bigdecimal/math"
 
-  puts BigMath::exp(BigDecimal.new('1'), 10) #-> 0.2718281828E1
+  puts BigMath::exp(BigDecimal.new('1'), 10) #=> 0.2718281828E1
 
 #@else
 
@@ -188,7 +188,7 @@ x に無限大や NaN を指定した場合には x を返します。
   require "bigdecimal/math"
 
   include BigMath
-  puts exp(BigDecimal.new('1'), 10) #-> 0.271828182845904523536028752390026306410273E1
+  puts exp(BigDecimal.new('1'), 10) #=> 0.271828182845904523536028752390026306410273E1
 
 #@end
 
@@ -207,7 +207,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
 
   require "bigdecimal/math"
 
-  puts BigMath::log(BigDecimal.new('2'), 10) #-> 0.693147180559945309417232112588603776354688E0
+  puts BigMath::log(BigDecimal.new('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
 
 #@else
 
@@ -215,7 +215,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
   require "bigdecimal/math"
 
   include BigMath
-  puts log(BigDecimal.new('2'), 10) #-> 0.693147180559945309417232112588603776354688E0
+  puts log(BigDecimal.new('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
 
 #@end
 
@@ -233,7 +233,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
 
   require "bigdecimal/math"
 
-  puts BigMath::PI(10) #-> 0.314159265359224236485984067E1
+  puts BigMath::PI(10) #=> 0.314159265359224236485984067E1
 
 #@else
 
@@ -241,7 +241,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
   require "bigdecimal/math"
 
   include BigMath
-  puts PI(10) #-> 0.314159265359224236485984067E1
+  puts PI(10) #=> 0.314159265359224236485984067E1
 
 #@end
 
@@ -259,7 +259,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
 
   require "bigdecimal/math"
 
-  puts BigMath::E(10) #-> 0.271828182845904523536028752390026306410273E1
+  puts BigMath::E(10) #=> 0.271828182845904523536028752390026306410273E1
 
 #@else
 
@@ -267,7 +267,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
   require "bigdecimal/math"
 
   include BigMath
-  puts E(10) #-> 0.271828182845904523536028752390026306410273E1
+  puts E(10) #=> 0.271828182845904523536028752390026306410273E1
 
 #@end
 
