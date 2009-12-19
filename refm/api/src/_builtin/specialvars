@@ -68,7 +68,7 @@ Ruby起動時の初期値は nil です。
 
 === 例
  str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>/] =~ str
+ if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $& 
  end
  #=> "<p><a href=\"http://example.com\">example.com</a></p>"
@@ -89,7 +89,7 @@ Ruby起動時の初期値は nil です。
 
 === 例
  str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>/] =~ str
+ if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $~[1]
  end
  #=> "http://example.com"
@@ -108,7 +108,7 @@ Ruby起動時の初期値は nil です。
 
 === 例
  str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>/] =~ str
+ if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $`
  end
  #=> "<p>"
@@ -127,7 +127,7 @@ Ruby起動時の初期値は nil です。
 
 === 例
  str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>/] =~ str
+ if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $'
  end
  #=> "</p>"
@@ -168,7 +168,7 @@ Ruby起動時の初期値は nil です。
 
 === 例
  str = '<p><a href="http://example.com">example.com</a></p>'
- if %r[<a href="(.*?)">(.*?)</a>/] =~ str
+ if %r[<a href="(.*?)">(.*?)</a>] =~ str
    print $1
    print $2
  end
