@@ -30,11 +30,11 @@ Ripper.lex は分割したトークンを詳しい情報とともに返します。
 返り値の配列の要素は 3 要素の配列 (概念的にはタプル) です。
 その内訳を以下に示します。
 
-:位置情報 (Integer,Integer) 
+: 位置情報 (Integer,Integer) 
     トークンが置かれている行 (1-origin) と桁 (0-origin) の 2 要素の配列です。 
-:種類 (Symbol) 
+: 種類 (Symbol) 
     トークンの種類が「:on_XXX」の形式のシンボルで渡されます。
-:トークン (String) 
+: トークン (String) 
     トークン文字列です。
 
 --- Ripper.tokenize(src, filename = '-', lineno = 1)
