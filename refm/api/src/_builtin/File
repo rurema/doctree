@@ -509,7 +509,9 @@ umask を変更します。変更前の umask の値を返します
 
 [[m:FileTest.#identical?]] と同じです。
 
-@param path パスを表す文字列か IO オブジェクトを指定します。
+@param filename1 パスを表す文字列か IO オブジェクトを指定します。
+
+@param filename2 パスを表す文字列か IO オブジェクトを指定します。
 
 --- pipe?(path)    -> bool
 

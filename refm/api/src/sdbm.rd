@@ -303,7 +303,7 @@ keys に対応する値を配列に格納して返します。
   
   p db1.invert #=> {"aaa"=>"a", "bbb"=>"b", "ccc"=>"c"}
 
---- update -> self
+--- update(other) -> self
 
 self と other の内容をマージします。
 
