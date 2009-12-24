@@ -1309,8 +1309,9 @@ Range: ヘッダの示す範囲を [[c:Range]] オブジェクトで返します。
 
 ヘッダにない場合は nil を返します。
 
-@param HTTPHeaderSyntaxError Range:ヘッダの中身が規格通りでない
-                             場合に発生します。
+@raise Net::HTTPHeaderSyntaxError Range:ヘッダの中身が規格通り
+                                  でない場合に発生します。
+
 --- range=(r)
 --- range=(n)
 --- set_range(i, len) -> ()
