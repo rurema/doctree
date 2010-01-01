@@ -388,12 +388,9 @@ ARGF の現在位置から 1 バイトずつ読み込み、それを整数として与え、ブロックを実行し
   ARGV.replace(
     Dir.glob("*").reject{|name| FileTest.file?(name) == false}
   )
-  n = 0
   ARGF.each_line {|line|
-    n += 1
     if ARGF.eof
-      printf("eof. %s has %d(%d) line\n", ARGF.filename, n, ARGF.lineno)
-      n = 0
+      printf("eof. %s has %d(%d) line\n", ARGF.filename, ARGF.file.lineno, ARGF.lineno)
     end
   }
   begin
