@@ -26,6 +26,12 @@ RbConfig モジュールを Config と同じものとして定義します。
 
 [[m:Config::MAKEFILE_CONFIG]] 参照
 #@end
+#@since 1.9.2
+--- ruby
+#@todo
+
+returns the absolute pathname of the ruby command.
+#@end
 
 == Constants
 
