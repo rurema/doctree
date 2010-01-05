@@ -11,7 +11,7 @@ BigDecimalを使った数学的な機能を提供します。
  * exp (x, prec)
  * log (x, prec)
  * PI  (prec)
- * E   (prec) == exp(1.0, prec)
+ * E   (prec)
 
 引数:
 
@@ -247,7 +247,7 @@ x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
 
 --- E(prec) -> BigDecimal
 
-自然対数 e を prec で指定した精度で計算します。
+自然対数の底 e を prec で指定した精度で計算します。
 
 @param prec 計算結果の精度。
 
