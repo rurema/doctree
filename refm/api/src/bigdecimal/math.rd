@@ -78,6 +78,8 @@ x の平方根を prec で指定した精度で計算します。
 x の正弦関数を prec で指定した精度で計算します。単位はラジアンです。x
 に無限大や NaN を指定した場合には NaN を返します。
 
+@param x 計算対象の BigDecimal オブジェクト。単位はラジアン。
+
 @param prec 計算結果の精度。
 
 @raise ArgumentError prec に 0 以下が指定された場合に発生します。
@@ -105,6 +107,8 @@ x の正弦関数を prec で指定した精度で計算します。単位はラジアンです。x
 x の余弦関数を prec で指定した精度で計算します。単位はラジアンです。x
 に無限大や NaN を指定した場合には NaN を返します。
 
+@param x 計算対象の BigDecimal オブジェクト。単位はラジアン。
+
 @param prec 計算結果の精度。
 
 @raise ArgumentError prec に 0 以下が指定された場合に発生します。
@@ -131,6 +135,8 @@ x の余弦関数を prec で指定した精度で計算します。単位はラジアンです。x
 
 x の逆正接関数を prec で指定した精度で計算します。単位はラジアンです。
 x に無限大や NaN を指定した場合には NaN を返します。
+
+@param x 計算対象の BigDecimal オブジェクト。単位はラジアン。
 
 @param prec 計算結果の精度。
 
@@ -170,6 +176,8 @@ x に無限大や NaN を指定した場合には NaN を返します。
 x に無限大や NaN を指定した場合には x を返します。
 #@end
 
+@param x 計算対象の BigDecimal オブジェクト。
+
 @param prec 計算結果の精度。
 
 @raise ArgumentError prec に 0 以下が指定された場合に発生します。
@@ -196,6 +204,8 @@ x に無限大や NaN を指定した場合には x を返します。
 
 x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
 した場合には x を返します。
+
+@param x 計算対象の BigDecimal オブジェクト。
 
 @param prec 計算結果の精度。
 
