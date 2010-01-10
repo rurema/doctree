@@ -1161,7 +1161,7 @@ Returns true.
 = class Net::IMAP::LoginAuthenticator
 
 Authenticator for the "LOGIN" authentication type.
-See [[c:Net::IMAP#authenticate]].
+See [[m:Net::IMAP#authenticate]].
 
 == Class Methods
 
@@ -1178,7 +1178,7 @@ See [[c:Net::IMAP#authenticate]].
 = class Net::IMAP::CramMD5Authenticator
 
 Authenticator for the "CRAM-MD5" authentication type.
-See [[c:Net::IMAP#authenticate]].
+See [[m:Net::IMAP#authenticate]].
 
 == Class Methods
 
@@ -1196,7 +1196,7 @@ See [[c:Net::IMAP#authenticate]].
 = class Net::IMAP::PlainAuthenticator
 
 Authenticator for the "PLAIN" authentication type.
-See [[c:Net::IMAP#authenticate]].
+See [[m:Net::IMAP#authenticate]].
 
 == Class Methods
 
@@ -1213,7 +1213,7 @@ See [[c:Net::IMAP#authenticate]].
 = class Net::IMAP::DigestMD5Authenticator
 
 Authenticator for the "DIGEST-MD5" authentication type.
-See [[c:Net::IMAP#authenticate]].
+See [[m:Net::IMAP#authenticate]].
 
 == Class Methods
 

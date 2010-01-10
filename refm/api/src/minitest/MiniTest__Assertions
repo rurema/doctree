@@ -21,7 +21,7 @@
 @param test 真偽値を返す式を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた式が偽である場合に発生します。
@@ -31,7 +31,7 @@
 与えられたブロックの評価結果が真である場合、検査にパスしたことになります。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたブロックの評価結果が偽である場合に発生します。
@@ -43,7 +43,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが empty? メソッドを持たない場合に発生します。
@@ -58,7 +58,7 @@
 @param actual 実際の値を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値が等しくない場合に発生します。
@@ -76,7 +76,7 @@
 @param delta 許容する差分を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
@@ -94,7 +94,7 @@
 @param epsilon ???
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 
@@ -108,7 +108,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 第一引数のオブジェクトが include? メソッドを持たない場合に発生します。
@@ -123,7 +123,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスの直接のインスタンスでない
@@ -141,7 +141,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスまたはそのサブクラスの
@@ -159,7 +159,7 @@
 @param str 検査対象の文字列を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチしなかった場合に発生します。
@@ -171,7 +171,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが nil でない場合に発生します。
@@ -187,7 +187,7 @@
 @param operand2 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトから作成する式を評価した結果が真でない場合に発生します。
@@ -219,7 +219,7 @@
 @param method_name メソッド名を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが与えられたメソッドを持たない場合に発生します。
@@ -235,7 +235,7 @@
 @param actual 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた二つのオブジェクトが異なる場合に発生します。
@@ -250,7 +250,7 @@
              第三要素にパラメータをそれぞれ指定した配列を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
@@ -265,7 +265,7 @@
 @param tag 与えられたブロック評価中に [[m:Kernel.#throw]] されるタグを任意のオブジェクトとして指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
@@ -323,7 +323,7 @@
 @param test 真偽値を返す式を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた式が真である場合に発生します。
@@ -337,7 +337,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが empty? メソッドを持たない場合に発生します。
@@ -354,7 +354,7 @@
 @param actual 実際の値を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値が等しい場合に発生します。
@@ -372,7 +372,7 @@
 @param delta 差分を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分以下である場合に発生します。
@@ -390,7 +390,7 @@
 @param epsilon ???
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 
@@ -404,7 +404,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 第一引数のオブジェクトが include? メソッドを持たない場合に発生します。
@@ -419,7 +419,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスの直接のインスタンスである
@@ -437,7 +437,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが与えられたクラスまたはそのサブクラスの
@@ -455,7 +455,7 @@
 @param str 検査対象の文字列を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた文字列が与えられた正規表現にマッチした場合に発生します。
@@ -467,7 +467,7 @@
 @param object 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが nil である場合に発生します。
@@ -483,7 +483,7 @@
 @param operand2 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトから作成する式を評価した結果が偽でない場合に発生します。
@@ -502,7 +502,7 @@
 @param method_name メソッド名を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられたオブジェクトが与えられたメソッドを持つ場合に発生します。
@@ -518,7 +518,7 @@
 @param actual 任意のオブジェクトを指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
-               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[c:Proc#call]] した
+               文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
 @raise MiniTest::Assertion 与えられた二つのオブジェクトが同じ場合に発生します。

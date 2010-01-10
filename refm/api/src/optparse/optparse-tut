@@ -319,7 +319,7 @@ on の引数にそのオプションの説明を加えると --help の出力に反映されます。
 optparse を require すると ARGV に [[c:OptionParser::Arguable]] の機能
 が加わります。以下の書き方ができるようになります。
 #@since 1.8.5
-[[c:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
+[[m:OptionParser::Arguable#getopts]] はオプションを保持した Hash を返します。
   # sample.rb の内容
   require 'optparse'
   params = ARGV.getopts("a:b:", "foo", "bar:")
