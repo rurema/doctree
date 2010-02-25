@@ -1,24 +1,19 @@
-#@if (version >= "1.8.0")
 IOのノンブロックモードを扱うライブラリです。
 
 = reopen IO
 
 == Instance Methods
 
---- nonblock?
-#@todo
+--- nonblock? -> bool
+self がノンブロックモードならばtrueを、
+ブロックモードならfalseを返します。
 
-self がノンブロックモードならば真を、ブロックモードなら偽を返す。
-
---- nonblock=(bool)
-#@todo
-
+--- nonblock=(bool) -> Integer
 bool が真なら self をノンブロックモードに、偽ならブロックモー
-ドにする。
+ドにします。
 
---- nonblock(bool = true) { ... }
-#@todo
+--- nonblock(bool = true) { ... } -> object
 
-ブロック実行中、一時的に self のブロックモードを変更する。
-bool が真ならノンブロックモード、偽ならブロックモードになる。
-#@end
+ブロック実行中、一時的に self のブロックモードを変更します。
+bool が真ならノンブロックモード、偽ならブロックモードになります。
+
