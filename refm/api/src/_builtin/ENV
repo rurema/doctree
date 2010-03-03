@@ -285,3 +285,15 @@ self を返します。
 
 @param key 環境変数名を指定します。 to_str で文字列化されます。
 #@end
+#@since 1.9.2
+--- keep_if {|key, value| ... } -> ENV
+--- select! {|key, value| ... } -> ENV | nil
+--- keep_if -> Enumerator
+--- select! -> Enumerator
+#@todo
+
+キーと値を引数としてブロックを評価した結果が真であ
+るような要素を self に残します。
+
+@see [[m:ENV#delete_if]],[[m:ENV#reject!]]
+#@end

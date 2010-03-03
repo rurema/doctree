@@ -751,6 +751,9 @@ reject! は、要素を削除しなかった場合には nil を返し、
   p h.reject!{|key, value| key.to_i < value.to_i }   #=> nil
 
 @see [[m:Hash#reject]],[[m:Hash#delete]]
+#@since 1.9.2
+@see [[m:Hash#keep_if]],[[m:Hash#select!]]
+#@end
 
 --- each {|key, value| ... } -> self
 --- each_pair {|key, value| ... } -> self
@@ -1288,3 +1291,16 @@ key, value のペアについてブロックを評価し、真となるペアだけを含む
   h.sort {|a,b| a[1]<=>b[1]}   #=> [["c", 10], ["a", 20], ["b", 30]]
 
 @see [[m:Array#sort]]
+#@since 1.9.2
+--- keep_if {|key, value| ... } -> self
+--- select! {|key, value| ... } -> self | nil
+--- keep_if -> Enumerator
+--- select! -> Enumerator
+#@todo
+
+キーと値を引数としてブロックを評価した結果が真であ
+るような要素を環境変数に残します。
+
+@see [[m:Hash#select]]
+@see [[m:Hash#delete_if]],[[m:Hash#reject!]]
+#@end
