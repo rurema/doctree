@@ -279,6 +279,9 @@ IO.new, IO.for_fd はブロックを受け付けません。
 @param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します。[[m:File::Constants::RDONLY]] などの
             定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照
             してください。
+            mode は省略可能で、省略時のデフォルトのモードは、
+            fcntl(F_GETFL)が利用できる環境では第一引数で指定した fd のモードを引き継ぎ、
+            利用できない環境では "r" になります。
 #@else
 @param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。
             詳細は組み込み関数 [[m:Kernel.#open]] を参照してください。
