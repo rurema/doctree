@@ -90,7 +90,7 @@ irb コマンドのオプションを指定したのと同じ効果が得られます。
   IRB.conf[:IRB_RC] = nil
   IRB.conf[:MATH_MODE] = false
   IRB.conf[:PROMPT] = {....}
-  IRB.conf[:PROMPT_MODE] = :DEFALUT
+  IRB.conf[:PROMPT_MODE] = :DEFAULT
   IRB.conf[:SINGLE_IRB] = false
 #@since 1.9.1
   IRB.conf[:SAVE_HISTORY] = nil
