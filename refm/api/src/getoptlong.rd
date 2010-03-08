@@ -31,10 +31,10 @@ GNU getopt_long() は、コマンド行オプションの解析を行う C の関数です。多
  * 特殊な引数 `--' によって、オプションの解析を強制的に終了します。
 
 
-=== 順序形式 (Ordering)
+=== 順序形式 (ordering)
 
 GNU getopt_long() および getoptlong.rb には、`REQUIRE_ORDER',
-`PERMUTE', `RETURN_IN_ORDER' という、3 つの「順序形式 (ORDERING)」が用
+`PERMUTE', `RETURN_IN_ORDER' という、3 つの「順序形式」が用
 意されています。それぞれの処理形式は、非オプション引数についての扱い方
 が異なります。
 
@@ -108,7 +108,7 @@ getopts モジュールが行っているように、与えられたオプションを
        exit(1)
     end
 
-each_option メソッドは、常にオプション名を「正式名 (CANONICAL NAME)」
+each_option メソッドは、常にオプション名を「正式名 (canonical name)」
 の形で返してきます。「正式名」とは、`set_options' へ渡した個々の引数に
 おいて、一番左にあるオプション名のことです。たとえば、`--quiet' は、
 `-q' と `--silence' の正式名になります。したがって、この節の例で定義さ
@@ -119,7 +119,7 @@ each_option メソッドは、常にオプション名を「正式名 (CANONICAL NAME)」
 
 === 順序形式の設定
 
-先に記したように、順序形式 (ORDEING) のデフォルトは `PERMUTE' です。
+先に記したように、順序形式のデフォルトは `PERMUTE' です。
 順序形式を変えるには `ordering=' メソッドを用います。
 
     parser.ordering = GetoptLong::REQUIRE_ORDER
@@ -182,8 +182,8 @@ ARGV から、次のオプションの名前と、もしあればその引数の組を取
 
     optname, optarg = option_parser.get
 
-get と get_option は常にオプション名を正式名 (canonical
-name) で返します。与えられたオプションが引数を取らないときは、
+get と get_option は常にオプション名を正式名
+で返します。与えられたオプションが引数を取らないときは、
 空の文字列 ('') が optarg にセットされます。オプションが
 ARGV に残っていないときは、optname, optarg ともに nil に
 セットされます。メソッドから戻る際に、取得したオプションと引数
@@ -223,7 +223,7 @@ ARGV に残っていないときは、optname, optarg ともに nil に
 
 --- ordering=(ordering)
 #@todo
-順序形式 (ordering) を設定します。引数 ordering は、
+順序形式を設定します。引数 ordering は、
 PERMUTE, REQUIRE_ORDER, RETURN_IN_ORDER のいずれかでなく
 てはなりません。それ以外の値を代入しようとすると、例外
 ArgumentError が発生します。
