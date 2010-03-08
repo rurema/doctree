@@ -158,10 +158,10 @@ each_option メソッドは、常にオプション名を「正式名 (CANONICAL NAME)」
 
 == Class Methods
 --- new
---- new(option...)
+--- new(*arguments)
 #@todo
 
-GetoptLong のオブジェクトを生成します。option が与えられる
+GetoptLong のオブジェクトを生成します。arguments が与えられ
 たときは、それを set_options メソッドに渡します。
 
 == Instance Methods
@@ -263,10 +263,10 @@ flag を返します。
 静粛モードが有効であれば、TRUE が返ります。そうでなければ、
 FALSE が返ります。
 
---- set_options(option...)
+--- set_options(*arguments)
 #@todo
 あなたのプログラムで、認識させたいオプションをセットします。
-個々の option は、オプション名と引数のフラグからなる配列でな
+個々のオプションは、オプション名と引数のフラグからなる配列でな
 ければいけません。
 
     parser.set_options(['-d', '--debug', GetoptLong::NO_ARGUMENT],

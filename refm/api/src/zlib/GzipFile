@@ -9,7 +9,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 == Class Methods
 
---- new(args...) -> ()
+--- new(*args) -> ()
 
 直接使用しません。
 通常、具体的な読み書きをおこなうためには、
@@ -17,7 +17,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 @see [[m:Zlib::GzipReader.new]], [[m:Zlib::GzipWriter.new]] 
 
---- wrap(args...) {|gz| ... } -> ()
+--- wrap(*args) {|gz| ... } -> ()
 
 直接使用しません。
 通常、具体的な読み書きをおこなうためには、
@@ -25,7 +25,7 @@ IO クラスのインスタンス (又は IO クラスのインスタンスと同じメソッドを
 
 @see [[m:Zlib::GzipReader.wrap]],[[m:Zlib::GzipWriter.wrap]]
 
---- open(args...) {|gz| ... } -> ()
+--- open(*args) {|gz| ... } -> ()
 
 直接使用しません。
 通常、具体的な読み書きをおこなうためには、
