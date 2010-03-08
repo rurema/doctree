@@ -28,8 +28,8 @@ options ¤Ç¤Ï [[m:String#encode]] ¤Ç¤Î¥Ï¥Ã¥·¥å¥ª¥×¥·¥ç¥ó¤Ë²Ã¤¨¤Æ¡¢°Ê²¼¤ÎÄê¿ô¤¬ÍøÍ
   * Encoding::Converter::XML_ATTR_CONTENT_DECORATOR
   * Encoding::Converter::XML_ATTR_QUOTE_DECORATOR
 
---- asciicompat_encoding(string) -> encoding | nil
---- asciicompat_encoding(encoding) -> encoding | nil
+--- asciicompat_encoding(string) -> Encoding | nil
+--- asciicompat_encoding(encoding) -> Encoding | nil
 Æ±¤¸Ê¸»ú½¸¹ç¤ò»ı¤Ä ASCII ¸ß´¹¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Ş¤¹¡£
 
 @param string ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°Ì¾
@@ -288,7 +288,7 @@ primitive_errinfo ¤Ï¤â¤Ã¤Ñ¤é [[m:Encoding::Converter#primitive_convert]] ¤ÈÁÈ¤ß¹
 --- putback(max_numbytes) -> String
 ¸å¤ÎÊÑ´¹ÍÑ¤ËÊÑ´¹´ïÆâÉô¤ÇÊİ»ı¤·¤Æ¤¤¤ë¥Ğ¥¤¥ÈÎó¤ò¤Ï¤­½Ğ¤·¤Ş¤¹¡£
 
-@param max_numbytes 
+@param max_numbytes
 
 @return ³ÊÇ¼¤µ¤ì¤Æ¤¤¤¿¥Ğ¥¤¥ÈÎó
 
