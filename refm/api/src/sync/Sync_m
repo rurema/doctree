@@ -127,7 +127,7 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 
 = class Sync_m::UnknownLocker < Sync_m::Err
 
-スレッドがロックされているべきタイミングでロックさ庭内場合に発生する例外です。
+スレッドがロックされているべきタイミングでロックさせない場合に発生する例外です。
 
 == Singleton Methods
 
