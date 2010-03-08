@@ -333,7 +333,7 @@ of included directories that are sent to the compiler (via the -I switch).
 ヘッダファイル header が存在すれば
 グローバル変数 [[m:$defs]] に "-DHAVE_header" を追加して true を返します。
 ヘッダファイル header が存在しないときは $defs は変更せず false を返します。
-なお、-DAHVE_header の header には、
+なお、-DHAVE_header の header には、
 実際には header.upcase.tr('-.', '_') が使われます。
 
 --- have_struct_member(type, member, headers = nil, &b)
