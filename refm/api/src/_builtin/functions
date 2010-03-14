@@ -1707,21 +1707,21 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
   
   puts "end on #{try(400)}" #=> end on ???
 
---- sleep(sec = 0) -> Integer
+--- sleep([sec]) -> Integer
 
 sec 秒だけプログラムの実行を停止します。
 
-sec が省略されたり 0 を指定した場合、他スレッドからの [[m:Thread#run]]
+sec が省略された場合、他スレッドからの [[m:Thread#run]]
 などで明示的に起こさない限り永久にスリープします。Thread#runを呼ぶとその時点で
 sleepの実行が中断されます。
 
 @param sec 停止する秒数を非負の数値で指定します。浮動小数点数も指定できます。 
-           0 を指定した場合、永久にスリープします。
+           省略された場合、永久にスリープします。
 
 @return 実際に停止していた秒数 (整数に丸められた値) です。
 
   it = Thread.new do
-    sleep 999
+    sleep
     puts 'it_end'
   end
   
