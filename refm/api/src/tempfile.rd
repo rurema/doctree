@@ -2,6 +2,9 @@ require tmpdir
 
 テンポラリファイルを操作するためのクラスです
 
+=== 参考
+標準添付ライブラリ紹介 【第 15 回】 tmpdir, tempfile  [[url:http://jp.rubyist.net/magazine/?0029-BundledLibraries]]
+
 = class Tempfile < File
 #@#= class Tempfile < DelegateClass(File)
 
