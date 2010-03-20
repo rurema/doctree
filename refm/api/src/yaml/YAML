@@ -19,7 +19,7 @@ YAML (YAML Ain't Markup Language) を扱うモジュールです。
   * プログラマーのための YAML 入門 (検証編)[[url:http://jp.rubyist.net/magazine/?0012-YAML]]
   * プログラマーのための YAML 入門 (探索編)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
 
-== Module Functions
+== Singleton Methods
 
 --- add_builtin_type(type_re){|type, val| ...}
 #@#--- add_builtin_type(type_re){|obj| ...}
