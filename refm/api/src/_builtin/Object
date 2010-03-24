@@ -1845,3 +1845,21 @@ undef により未定義にされた時にインタプリタから呼び出されます。
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:Object#instance_eval]]
 
 #@end
+#@since 1.9.2
+--- singleton_class -> Class
+#@todo
+
+レシーバの特異クラスを返します。
+まだ特異クラスがなければ、新しく作成します。
+
+レシーバが nil か true か false なら、それぞれ NilClass, TrueClass,
+FalseClass を返します。
+
+@raise TypeError レシーバが Fixnum か Symbol の場合に発生します。
+
+   Object.new.singleton_class  #=> #<Class:#<Object:0xb7ce1e24>>
+   String.singleton_class      #=> #<Class:String>
+   nil.singleton_class         #=> NilClass
+
+@see [[m:Object#class]]
+#@end
