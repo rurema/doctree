@@ -1666,3 +1666,33 @@ srand()が有効です。
 
 #@end
 
+#@since 1.9.2
+--- rotate(cnt=1) -> Array
+#@todo
+
+Returns new array by rotating _self_, whose first element is the
+element at +cnt+ in _self_.  If +cnt+ is negative then it rotates
+in counter direction.
+
+   a = [ "a", "b", "c", "d" ]
+   a.rotate         #=> ["b", "c", "d", "a"]
+   a                #=> ["a", "b", "c", "d"]
+   a.rotate(2)      #=> ["c", "d", "a", "b"]
+   a.rotate(-3)     #=> ["b", "c", "d", "a"]
+
+@see [[m:Array#rotate!]]
+--- rotate!(cnt=1) -> self
+#@todo
+
+Rotates _self_ in place so that the element at +cnt+ comes first,
+and returns _self_.  If +cnt+ is negative then it rotates in
+counter direction.
+
+   a = [ "a", "b", "c", "d" ]
+   a.rotate!        #=> ["b", "c", "d", "a"]
+   a                #=> ["b", "c", "d", "a"]
+   a.rotate!(2)     #=> ["d", "a", "b", "c"]
+   a.rotate!(-3)    #=> ["a", "b", "c", "d"]
+
+@see [[m:Array#rotate]]
+#@end
