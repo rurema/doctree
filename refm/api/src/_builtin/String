@@ -1202,8 +1202,8 @@ rs に空文字列 "" を指定すると「パラグラフモード」になり、
     p s.lines("bb").to_a #=> ["aa\nbb", "\ncc\n"]  
 #@end
 
---- each_byte {|byte| ... } -> ()
---- bytes {|byte| ... } -> ()
+--- each_byte {|byte| ... } -> self
+--- bytes {|byte| ... } -> self
 #@since 1.8.7
 #@since 1.8.8
 --- each_byte -> Enumerator
