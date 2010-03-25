@@ -1560,8 +1560,7 @@ self は読み込み用にオープンされていなければなりません。
 
 #@end
 
-#@since 1.9.1
-
+#@since 1.8.8
 --- ungetbyte(c) -> nil
 #@todo
 
@@ -1580,6 +1579,8 @@ back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
    f.ungetbyte(b)             #=> nil
    f.getbyte                  #=> 0x38
 
+#@end
+#@since 1.9.1
 --- binmode? -> bool
 
 自身がバイナリモードなら true を返します。そうでない場合、false を返します。
