@@ -156,6 +156,71 @@ URI 文字列をデコードした文字列を返します。
 
 @param str URI を文字列として与えます。
 
+#@since 1.9.2
+--- decode_www_form(str, enc=Encoding::UTF_8) -> [[String, String]]
+#@todo
+
+文字列から URL-encoded form data をデコードします。
+
+This decodes application/x-www-form-urlencoded data
+and returns array of key-value array.
+This internally uses URI.decode_www_form_component.
+
+_charset_ hack is not supported now because the mapping from given charset
+to Ruby's encoding is not clear yet.
+see also http://www.w3.org/TR/html5/syntax.html#character-encodings-0
+
+This refers http://www.w3.org/TR/html5/forms.html#url-encoded-form-data
+
+  ary = URI.decode_www_form("a=1&a=2&b=3")
+  p ary                  #=> [['a', '1'], ['a', '2'], ['b', '3']]
+  p ary.assoc('a').last  #=> '1'
+  p ary.assoc('b').last  #=> '3'
+  p ary.rassoc('a').last #=> '2'
+  p Hash[ary]            # => {"a"=>"2", "b"=>"3"}
+
+@see [[m:URI.decode_www_form_component]], [[m:URI.encode_www_form]]
+--- decode_www_form_component(str, enc=Encoding::UTF_8) -> String
+#@todo
+
+URL-encoded form data の文字列をデコードした文字列を返します。
+
+This decods + to SP.
+
+@see [[m:URI.encode_www_form_component]], [[m:URI.decode_www_form]]
+--- encode_www_form(enum) -> String
+#@todo
+
+enum から URL-encoded form data を生成します。
+
+This generates application/x-www-form-urlencoded data defined in HTML5
+from given an Enumerable object.
+
+This internally uses URI.encode_www_form_component(str).
+
+This doesn't convert encodings of give items, so convert them before call
+this method if you want to send data as other than original encoding or
+mixed encoding data. (strings which is encoded in HTML5 ASCII incompatible
+encoding is converted to UTF-8)
+
+This doesn't treat files. When you send a file, use multipart/form-data.
+
+This refers http://www.w3.org/TR/html5/forms.html#url-encoded-form-data
+
+@see [[m:URI.encode_www_form_component]], [[m:URI.decode_www_form]]
+
+--- encode_www_form_component(str) -> String
+#@todo
+
+文字列を URL-encoded form data にエンコードした文字列を返します。
+
+This doesn't convert *, -, ., 0-9, A-Z, _, a-z,
+does convert SP to +, and convert others to %XX.
+
+This refers http://www.w3.org/TR/html5/forms.html#url-encoded-form-data
+
+@see [[m:URI.decode_www_form_component]], [[m:URI.encode_www_form]]
+#@end
 == Constants
 
 --- UNSAFE
