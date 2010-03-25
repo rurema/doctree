@@ -1639,7 +1639,40 @@ IO のエンコーディングを設定します。
     io.set_encoding("ASCII-8BIT", "EUC-JP")
 
 #@end
+#@since 1.9.2
+--- autoclose=(bool)
+#@todo
 
+auto-close フラグを設定します。
+
+   f = open("/dev/null")
+   IO.for_fd(f.fileno)
+   # ...
+   f.gets # may cause IOError
+
+   f = open("/dev/null")
+   IO.for_fd(f.fileno).autoclose = true
+   # ...
+   f.gets # won't cause IOError
+--- autoclose? -> bool
+#@todo
+
+Returns +true+ if the underlying file descriptor of _ios_ will be
+closed automatically at its finalization, otherwise +false+.
+--- each_codepoint{|c| ... }     -> self
+--- codepoints{|c| ... }         -> self
+--- each_codepoint               -> Enumerator
+--- codepoints                   -> Enumerator
+#@todo
+
+IO の各コードポイントに対して繰り返します。
+--- fdatasync -> 0 | nil
+#@todo
+
+IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
+
+@raise NotImplementedError [[man:fdatasync(2)]] がサポートされていない OS で発生します。
+#@end
 == Constants
 
 --- SEEK_CUR -> Fixnum
@@ -1654,12 +1687,14 @@ IO のエンコーディングを設定します。
 
 [[m:IO#seek]] を参照してください。
 
-#@since 1.9.1
+#@since 1.9.2
 
 --- WaitReadable
 #@todo
 
+@see [[m:IO#read_nonblock]]
 --- WaitWritable
 #@todo
 
+@see [[m:IO#write_nonblock]]
 #@end
