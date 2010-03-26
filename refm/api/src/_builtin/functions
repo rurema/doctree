@@ -888,6 +888,7 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 @see [[m:Kernel.#load]],[[m:Kernel.#autoload]]
 #@end
 
+#@since 1.9.1
 --- require_relative(relative_feature) -> bool
 現在のファイルからの相対パスで require します。
 
@@ -897,6 +898,7 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 @param feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
 @see [[m:Kernel.#require]]
+#@end
 
 ==== require と load のスコープ
 
