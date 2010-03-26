@@ -369,7 +369,11 @@ self を返します。
   
   #転載：Rubyレシピブック No.120
 #@end
+#@since 1.8.8
 @see [[m:Hash#key]]
+#@else
+@see [[m:Hash#index]]
+#@end
 
 --- fetch(key, default = nil) {|key| ... } -> object
 
