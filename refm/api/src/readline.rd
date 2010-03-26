@@ -151,14 +151,14 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 == Singleton Methods
 
 #@since 1.9.1
---- input=(input) -> File
+--- input=(input)
 
 readline メソッドで使用する入力用の [[c:File]] オブジェクト input を指定します。
 戻り値は指定した [[c:File]] オブジェクト input です。
 
 @param input [[c:File]] オブジェクトを指定します。
 
---- output=(output) -> File
+--- output=(output)
     
 readline メソッドで使用する出力用の [[c:File]] オブジェクト output を指定します。
 戻り値は指定した [[c:File]] オブジェクト output です。
@@ -517,7 +517,7 @@ index で指定したインデックスが int 型よりも大きな値の場合、
 
   Readline::HISTORY[2 ** 64 + 1] #=> 例外 RangeError が発生します。
 
---- []=(index, string) -> String
+--- []=(index, string)
 
 ヒストリの index で指定したインデックスの内容を string で指定した文字列で書き換えます。
 例えば index に 0 を指定すると最初の入力内容が書き換えます。

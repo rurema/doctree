@@ -542,8 +542,8 @@ StringScannerオブジェクトを表す文字列を返します。
       s.scan(/\s+/) # => " "
       s.pos         # => 5
 
---- pointer=(n) -> Fixnum
---- pos=(n) -> Fixnum
+--- pointer=(n)
+--- pos=(n)
 スキャンポインタのインデックスを n にセットします。
 
 @param n 整数で、バイト単位で指定します。
@@ -849,7 +849,7 @@ regexp が一致するまで文字列をスキャンします。
       s.scan(/\w+/)     # => "0123" (将来は "test" が返る可能性あり)
       str               # => "0123" (将来は "test string" が返る可能性あり)
 
---- string=(str) -> String
+--- string=(str)
 スキャン対象の文字列を str に変更して、マッチ記録を捨てます。
 
 @param str スキャン対象の文字列を str に変更して、マッチ記録を捨てます。

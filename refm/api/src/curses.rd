@@ -1198,7 +1198,7 @@ ESC の入力を破棄する時間(ミリ秒単位)を取得します。
 
 サポートしていない環境では、例外 NotImplementedError が発生します。
 
---- ESCDELAY=(val) -> Integer
+--- ESCDELAY=(val)
 
 ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 設定した値を返します。
@@ -1213,7 +1213,7 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 サポートしていない環境では、例外 NotImplementedError が発生します。
 
---- TABSIZE=(val) -> Integer
+--- TABSIZE=(val)
 
 タブ幅を val に設定します。設定した値を返します。
 

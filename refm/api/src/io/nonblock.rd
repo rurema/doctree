@@ -8,7 +8,7 @@ IOのノンブロックモードを扱うライブラリです。
 self がノンブロックモードならばtrueを、
 ブロックモードならfalseを返します。
 
---- nonblock=(bool) -> Integer
+--- nonblock=(bool)
 bool が真なら self をノンブロックモードに、偽ならブロックモー
 ドにします。
 

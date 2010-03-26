@@ -1198,7 +1198,7 @@ Content-Type のパラメータを {"charset" => "iso-2022-jp"}
 Content-Type: ヘッダフィールドが存在しない場合には
 空のハッシュを返します。
 
---- form_data=(params) -> ()
+--- form_data=(params)
 --- set_form_data(params, sep = '&') -> ()
 HTMLのフォームのデータ params から
 ヘッダフィールドとボディを設定します。

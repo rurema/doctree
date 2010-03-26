@@ -8,7 +8,7 @@
 == Class Methods
 
 --- do_not_reverse_lookup -> bool
---- do_not_reverse_lookup=(bool) -> bool
+--- do_not_reverse_lookup=(bool)
 
 この値が真ならアドレスからホスト名への逆引きを行わなくなります。
 デフォルトは false です。この設定は大域的に作用します。

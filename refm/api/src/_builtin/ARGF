@@ -152,7 +152,7 @@ $stdinがIOオブジェクトでない場合は$stdinを返します。
   #=> [12, "   age: 7\n"]
   #...
 
---- lineno=(number) -> nil
+--- lineno=(number)
 全引数ファイルを一つのファイルとみなしたときの現在の行番号をnumberに書き換えます
 
 @param number 更新後の行番号を指定する

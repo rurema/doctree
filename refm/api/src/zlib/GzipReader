@@ -403,7 +403,7 @@ gzip ファイルのフッターには圧縮前データのチェックサムが
 
 @see [[m:IO#lineno]]
 
---- lineno=(num) -> Integer
+--- lineno=(num)
 IO クラスの同名メソッド[[m:IO#lineno=]]と同じです。
 
 但し、gzip ファイル中に

@@ -100,7 +100,7 @@ Cookie の名前を文字列で返します。
 @param value パス名を文字列で指定します。
 
 --- secure         -> bool
---- secure=(value) -> bool
+--- secure=(value)
 
 クッキーのSecure属性を真偽値で表すアクセサです。
 

@@ -106,7 +106,7 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
     p obj[-1]       # => "BAR"    # Array のように負のインデックスも指定できます。
     p obj[2]        # => in `[]': offset 2 too large for struct(size:2) (IndexError)
 
---- []=(member, value) -> object
+--- []=(member, value)
 (このメソッドは Struct の下位クラスにのみ定義されています)
 構造体の member で指定されたメンバの値を value にして value を返します。
 

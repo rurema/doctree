@@ -127,7 +127,7 @@ key をキーとする項目を削除します。
 
 データベースが空の時、真を返します。
 
---- fastmode=(bool) -> bool
+--- fastmode=(bool)
 
 オープンしている GDBM オブジェクトのモードを変更します。
 
@@ -142,7 +142,7 @@ key をキーとする項目を削除します。
 
 @see [[m:GDBM::FAST]], [[m:GDBM#syncmode=]]
 
---- syncmode=(bool) -> bool
+--- syncmode=(bool)
 
 オープンしている GDBM オブジェクトのモードを変更します。
 

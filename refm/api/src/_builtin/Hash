@@ -433,7 +433,7 @@ fetch¤Ï¥Ï¥Ã¥·¥å¼«¿È¤Ë¥Ç¥Õ¥©¥ë¥ÈÃÍ¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Æ¤âÃ±¤ËÌµ»ë¤·¤Ş¤¹¡ÊµóÆ°¤ËÊÑ²½¤¬¤
 
 @see [[m:Hash#has_key?]]
 
---- []=(key, value)   -> object
+--- []=(key, value)
 --- store(key, value) -> object
 
 key ¤ËÂĞ¤·¤Æ value ¤ò´ØÏ¢¤Å¤±¤Ş¤¹¡£value ¤òÊÖ¤·

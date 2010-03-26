@@ -84,13 +84,13 @@ default_external は必ず設定されます。[[m:Encoding.locale_charmap]] が nil を返す
 
 @see [[man:locale(1)]], [[m:Encoding.locale_charmap]]
 
---- default_external=(encoding) -> Encoding
+--- default_external=(encoding)
 規定の外部エンコーディングを設定します。
 
 --- default_internal -> Encoding | nil
 規定の内部エンコーディングを返します。
 
---- default_internal=(encoding) -> Encoding
+--- default_internal=(encoding)
 規定の内部エンコーディングを設定します。
 
 --- locale_charmap -> String | nil

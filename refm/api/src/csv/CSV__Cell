@@ -39,7 +39,7 @@ CSV::Cellオブジェクト間の比較を行い、真偽値を返します。
 
 #@if (version <= '1.8.1')
 
---- data=(new_data) -> nil
+--- data=(new_data)
 自分自身のCellデータを書き換えます。
 
 @param new_data 書き換えるデータ
@@ -55,7 +55,7 @@ CSV::Cellオブジェクト間の比較を行い、真偽値を返します。
 
 このメソッドはバージョン1.8.2で廃止されました。
 
---- is_null=(new_data) -> nil
+--- is_null=(new_data)
 自分自身のis_nullフラグを書き換えます。
 
 @param new_data 書き換えるデータ

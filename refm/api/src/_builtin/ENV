@@ -36,7 +36,7 @@ key に対応する環境変数の値を返します。該当する環境変数が存在
 
 @param key  環境変数名を指定します。 to_str で文字列化されます。
 
---- []=(key, value)   -> String
+--- []=(key, value)
 --- store(key, value) -> String
 
 key に対応する環境変数の値を value にします。

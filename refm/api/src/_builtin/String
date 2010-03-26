@@ -605,7 +605,7 @@ range.first が 0 より小さいか文字列の長さより大きいとき、
     'abcd'[-4 ... 2] # => "ab"
     'abcd'[-5 ... 2] # => nil
 
---- []=(nth, val) -> val
+--- []=(nth, val)
 
 nth 番目のバイトを文字列 val で置き換えます。
 val が 0 から 255 の範囲の整数である場合、
@@ -622,7 +622,7 @@ val を返します。
     buf[1] = "!!"
     p buf   # => "s!!ring"
 
---- []=(nth, len, val) -> val
+--- []=(nth, len, val)
 
 nth バイト番目から長さ len バイトの部分文字列を文字列 val で置き換えます。
 nth が負の場合は文字列の末尾から数えます。
@@ -639,7 +639,7 @@ val を返します。
     buf[1, 4] = "!!"
     p buf   # => "s!!g"
 
---- []=(substr, val) -> val
+--- []=(substr, val)
 
 文字列中の substr に一致する最初の部分文字列を文字列 val で置き換えます。
 
@@ -662,7 +662,7 @@ val を返します。
      buf["nosuchstring"] = "!!"   # IndexError
 
 #@since 1.8.0
---- []=(regexp, nth = 0, val) -> ()
+--- []=(regexp, nth = 0, val)
 
 正規表現 regexp の nth 番目の括弧にマッチする
 最初の部分文字列を文字列 val で置き換えます。
@@ -671,7 +671,7 @@ nth を省略したときや nth が 0 の場合は、
 
 正規表現がマッチしなければ例外 [[c:IndexError]] が発生します。
 #@else
---- []=(regexp, val) -> ()
+--- []=(regexp, val)
 
 正規表現 regexp にマッチする最初の部分文字列を文字列 val で置き換えます。
 
@@ -698,7 +698,7 @@ val を返します。
     p buf    # => "def preprocess(cmd)"
 #@end
 
---- []=(range, val) -> val
+--- []=(range, val)
 
 rangeで指定したインデックスの範囲に含まれる部分文字列を文字列 val で置き換えます。
 

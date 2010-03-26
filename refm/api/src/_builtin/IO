@@ -1585,7 +1585,7 @@ back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
 
 自身がバイナリモードなら true を返します。そうでない場合、false を返します。
 
---- close_on_exec=(bool)    -> bool
+--- close_on_exec=(bool)
 #@todo
 
 自身に close-on-exec フラグを設定します。

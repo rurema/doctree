@@ -76,7 +76,7 @@ YAML形式のファイルを読み込ませたい場合は、最初の引数にファイル名を文字列で指定し
     p db.fetch("fuga", "ugougo") #=> "ugougo"
   }
 
---- []=(name, value) -> object
+--- []=(name, value)
 ルート name に対応する値 value を代入します。
 
 @param name 探索するルートの名前を指定します。
