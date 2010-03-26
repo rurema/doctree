@@ -100,9 +100,6 @@
 --- autorun -> ()
 #@todo
 
---- disable_autorun -> ()
-#@todo
-
 --- output=(stream)
 
 出力先をセットします。
