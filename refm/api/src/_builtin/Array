@@ -1428,6 +1428,10 @@ self をそのまま返します
 
 --- uniq     -> Array
 --- uniq!    -> self | nil
+#@since 1.9.2
+--- uniq {|item| ... } -> Array
+--- uniq! {|item| ... } -> self | nil
+#@end
 
 uniq は配列から重複した要素を取り除いた新しい配列を返します。
 取り除かれた要素の部分は前に詰められます。uniq! は削除を破壊
