@@ -910,7 +910,7 @@ self を返します。
 
 @see [[m:Hash#each_pair]],[[m:Hash#each_key]]
 
-#@if (version < "1.9.1")
+#@if (version < "1.8.8")
 --- index(val) -> object
 #@else
 --- key(val) -> object
