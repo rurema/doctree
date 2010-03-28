@@ -551,7 +551,7 @@ n は数値でなければなりません。
 
 #@since 1.9.0
 1.9.0 以降では、ブロックが与えられない場合、
-[[c:Enumerable::Enumerator]] オブジェクトを返します。
+[[c:Enumerator]] オブジェクトを返します。
 #@end
 
 [[m:Date#step]] を参照してください。
@@ -722,7 +722,7 @@ limit は日付オブジェクトでなければなりません、
 
 #@since 1.9.0
 1.9.0 以降では、ブロックが与えられない場合、
-[[c:Enumerable::Enumerator]] オブジェクトを返します。
+[[c:Enumerator]] オブジェクトを返します。
 #@end
 
 @param limit 日付オブジェクト
@@ -785,7 +785,7 @@ limit は日付オブジェクトでなければなりません、
 
 #@since 1.9.0
 1.9.0 以降では、ブロックが与えられない場合、
-[[c:Enumerable::Enumerator]] オブジェクトを返します。
+[[c:Enumerator]] オブジェクトを返します。
 #@end
 
 [[m:Date#step]] を参照してください。
