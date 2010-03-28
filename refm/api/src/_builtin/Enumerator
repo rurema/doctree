@@ -270,7 +270,7 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
 each_with_index は受け取りません (引数はイテレータメソッドにそのまま渡されます)。
 #@end
 
-#@since 1.9.1
+#@since 1.8.8
 --- with_object(obj) -> Enumerator
 --- with_object(obj) {|(*args), memo_obj| ... } -> object
 #@todo
