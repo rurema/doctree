@@ -57,7 +57,7 @@ obj が範囲内に含まれている時に真を返します。
 
 [[m:Range#===]] は主に case 文での比較に用いられます。
 
-#@since 1.9.1
+#@since 1.8.8
 #@todo
 
 <=> メソッドによる演算により範囲内かどうかを判定するには [[m:Range#cover?]] を使用してください。
@@ -85,11 +85,15 @@ include? が、[[m:Enumerable#include?]],[[m:Enumerable#member?]]
   p ("a" .. "c").member?("ba")  # => false
 
 @see [[ref:d:spec/control#case]]
-#@since 1.9.1
+#@since 1.8.8
 @see [[m:Range#cover?]]
 
 --- cover?(obj) -> bool
 #@todo
+
+obj が範囲内に含まれている時に真を返します。
+
+[[m:Range#include?]] と異なり <=> メソッドによる演算により範囲内かどうかを判定します。
 
 @see [[m:Range#include?]]
 #@end
