@@ -993,11 +993,7 @@ join した文字列を連結します。
 
   [1, 2, 3].join('-') #=> "1-2-3"
 
-#@since 1.9.2
-@see [[m:Enumerable#join]], [[m:Array#*]], [[m:$,]]
-#@else
 @see [[m:Array#*]], [[m:$,]]
-#@end
 
 --- last    -> object | nil
 
