@@ -78,7 +78,7 @@ falseならばエラー(403 Forbidden)となる。
 : :FileCallback
 : :HandlerCallback
 : :HandlerTable
-: :NonDisclosureName
+: :NondisclosureName
 インデックスに表示したくないファイルの指定。値は文字列の配列。
 表示したくないファイルをワイルドカードで指定する。
 
