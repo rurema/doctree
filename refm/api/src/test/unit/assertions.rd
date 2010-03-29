@@ -12,7 +12,11 @@ Test::Unit::TestCase に include されて使われます。
 [[lib:test/unit]] の他のクラスとは独立して、提供されている assert メソッドだけを使うこともできます。
 [[m:Test::Unit::Assertions#assert_block]] を使うことにより、新しい assert メソッドを加えることもできます。
 
+#@since 1.9.1
+assert が失敗した時は、例外 [[c:MiniTest::Assertion]] を投げます。
+#@else
 assert が失敗した時は、例外 [[c:Test::Unit::AssertionFailedError]] を投げます。
+#@end
 各 assert メソッドの最後の引数 message はテストが失敗したときに表示される
 メッセージです。
 
