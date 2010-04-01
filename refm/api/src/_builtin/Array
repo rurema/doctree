@@ -984,14 +984,26 @@ join した文字列を連結します。
 ただし、配列要素が自身を含むような無限にネストした配列に対しては、以下
 のような結果になります。
 
+#@since 1.9.2
+    ary = [1,2,3]
+    ary.push ary
+    p ary           # => [1, 2, 3, [...]]
+    p ary.join      # => ArgumentError
+#@else
     ary = [1,2,3]
     ary.push ary
     p ary           # => [1, 2, 3, [...]]
     p ary.join      # => "123123[...]"
+#@end
 
 @param sep 間に挟む文字列を指定します。nil のときは空文字列を使います。
 
   [1, 2, 3].join('-') #=> "1-2-3"
+
+#@since 1.9.2
+@raise ArgumentError 配列要素が自身を含むような無限にネストした配列に対
+                     して join を呼んだ場合に発生します。
+#@end
 
 @see [[m:Array#*]], [[m:$,]]
 
