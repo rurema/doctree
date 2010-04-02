@@ -127,12 +127,12 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 --- spec_dirs -> [String]
 #@todo
 
-[[m:Gem::SourceIndex#reflesh!]] ¤Ç¼«¿È¤ò¹¹¿·¤¹¤ë»þ¤Ë»ÈÍÑ¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤ò¼èÆÀ¤·¤Þ¤¹¡£
+[[m:Gem::SourceIndex#refresh!]] ¤Ç¼«¿È¤ò¹¹¿·¤¹¤ë»þ¤Ë»ÈÍÑ¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
 --- spec_dirs=(dirs)
 #@todo
 
-[[m:Gem::SourceIndex#reflesh!]] ¤Ç¼«¿È¤ò¹¹¿·¤¹¤ë»þ¤Ë»ÈÍÑ¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤òÀßÄê¤·¤Þ¤¹¡£
+[[m:Gem::SourceIndex#refresh!]] ¤Ç¼«¿È¤ò¹¹¿·¤¹¤ë»þ¤Ë»ÈÍÑ¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤òÀßÄê¤·¤Þ¤¹¡£
 
 --- specification(full_name) -> Gem::Specification | nil
 #@todo
