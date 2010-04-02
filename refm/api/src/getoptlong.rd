@@ -286,7 +286,7 @@ each_option メソッドを呼び出す前だけです。これらのメソッドを
 エラーが起きずにオプションの処理が終了しているときは真が
 返ります。それ以外のときは、偽が返ります。
 
-== Porotected Instance Methods
+== Protected Instance Methods
 
 --- set_error(type, message) -> ()
 
