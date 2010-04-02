@@ -1,21 +1,9 @@
 getoptlong は、GNU の getopt_long() とまったく同じ方式でコマンド
 行オプションの解析を行う Ruby のライブラリです。
 
-Author: 笠原 基之 (m-kasahr@sra.co.jp)
-
-Copyright 1998, 1999  Motoyuki Kasahara
-
-You may redistribute it and/or modify it under the same license
-terms as Ruby.
-
-#@#はじめに
-#@#========
-#@#Ruby と同一の条項に従って本プログラムを再頒布または変更することができます。
-#@#
-#@#このプログラムは有用とは思いますが、頒布にあたっては、市場性及び特定目
-#@#的適合性についての暗黙の保証を含めて、いかなる保証も行ないません。詳細
-#@#については GNU General Public License をお読みください。
-
+#@# Author: 笠原 基之 (m-kasahr@sra.co.jp)
+#@# 
+#@# Copyright 1998, 1999  Motoyuki Kasahara
 
 === GNU getopt_long() とは?
 
@@ -130,11 +118,11 @@ each_option メソッドは、常にオプション名を「正式名 (canonical name)」
 オプションの処理中は、次のような理由でエラーが発生します。
 
  * 与えれたオプションは名前の後方が省略されていると思われるが、一意に決
-   まらない。
- * 知らないオプションが与えられた。
- * 与えられたオプションには引数が欠けている。
+   まらない
+ * 知らないオプションが与えられた
+ * 与えられたオプションには引数が欠けている
  * 与えられたオプションには引数が伴っているが、そのオプションは引数をと
-   らない。
+   らない
 
 エラーが発生した場合、「静粛 (quiet)」フラグが設定されていなければ、標
 準エラー出力にエラーメッセージが出力され、例外が発生します。例外には、
@@ -151,36 +139,37 @@ each_option メソッドは、常にオプション名を「正式名 (canonical name)」
 力されます。「静粛 (quiet)」フラグを設定すると、エラーメッセージの出力
 は抑制されます。
 
-    parser.quiet = TRUE
+    parser.quiet = true
 
 
 = class GetoptLong < Object
 
-== Class Methods
---- new
---- new(*arguments)
-#@todo
+GNU getopt_long() を Ruby で模したクラスです。
 
-GetoptLong のオブジェクトを生成します。arguments が与えられ
-たときは、それを set_options メソッドに渡します。
+== Class Methods
+--- new(*arguments)
+
+GetoptLong のオブジェクトを生成します。引数が与えられ
+たときは、それを [[m:GetoptLong#set_options]] メソッドに渡します。
+
+@params arguments オプションを定義するための配列の配列を指定します。
+
+@see [[m:GetoptLong#set_options]]
 
 == Instance Methods
 
 --- each {|optname, optarg|...}
 --- each_option {|optname, optarg|...}
-#@todo
 get メソッドのイテレータ版です。オプションとその引数の取得を
-繰り返し行います。詳しくは get の説明を参照して下さい。
+繰り返し行います。
 
---- get
---- get_option
-#@todo
+@see [[m:GetoptLong#get]]
+
+--- get        -> [String, String]
+--- get_option -> [String, String]
 ARGV から、次のオプションの名前と、もしあればその引数の組を取
 得します。メソッドは 2 つの値を返し、1 つ目の値がオプション名
-(例: --max-size) で、2 つ目がオプションの引数 (例: 20K) で
-す。get の通常の呼び出し方は次の通りです。
-
-    optname, optarg = option_parser.get
+(例: --max-size) で、2 つ目がオプションの引数 (例: 20K) です。
 
 get と get_option は常にオプション名を正式名
 で返します。与えられたオプションが引数を取らないときは、
@@ -193,91 +182,90 @@ ARGV に残っていないときは、optname, optarg ともに nil に
 に合わない場合は、エラーとなって、以下のいずれかの例外が発生し
 ます。
 
-: GetoptLong::AmbigousOption
-    与えられたオプションは名前の後方が省略されていると思われる
-    が、一意に決まらない。
-
-: GetoptLong::InvalidOption
-    知らないオプションが与えられた。
-
-: GetoptLong::MissingArgument
-    与えられたオプションには引数が欠けている。
-
-: GetoptLong::NeedlessArgument
-    与えられたオプションは引数を伴っているが、そのオプションは
-    引数をとらない。
+ * [[c:GetoptLong::AmbiguousOption]]
+ * [[c:GetoptLong::InvalidOption]]
+ * [[c:GetoptLong::MissingArgument]]
+ * [[c:GetoptLong::NeedlessArgument]]
 
 加えて、静粛 (quiet) フラグが有効になっていない限り、エラーメッ
 セージを標準エラー出力に出力します。
 
---- error
---- error?
-#@todo
+例:
+    optname, optarg = option_parser.get
+
+--- error  -> Class | nil
+--- error? -> Class | nil
+
 現在のエラーの型を返します。エラーが発生していなければ、nil
 を返します。
 
---- error_message
-#@todo
+--- error_message -> String | nil
+
 現在のエラーのエラーメッセージを返します。エラーが発生していな
 ければ、nil を返します。
 
 --- ordering=(ordering)
-#@todo
-順序形式を設定します。引数 ordering は、
-PERMUTE, REQUIRE_ORDER, RETURN_IN_ORDER のいずれかでなく
-てはなりません。それ以外の値を代入しようとすると、例外
-ArgumentError が発生します。
-
-順序形式を設定できるのは、get, get_option, each,
-each_option メソッドを呼び出す前だけです。これらのメソッドを
-呼び出した後で順序形式を設定しようとすると、RuntimeError 例
-外が発生します。
+順序形式を設定します。
 
 環境変数 POSIXLY_CORRECT が定義されていると、引数に 
-PERMUTE を与えてこのメソッドを呼び出しても、実際のところの順
-序形式は REQUIRE_ORDER に設定されます。
+[[m:GetoptLong::PERMUTE]] を与えてこのメソッドを呼び出しても、実際のところの順
+序形式は [[m:GetoptLong::REQUIRE_ORDER]] に設定されます。
 
-環境変数 POSIXLY_CORRECT が定義されていない限り、PERMUTE 
-が初期値です。定義されていれば、REQUIRE_ORDER が初期値になり
+環境変数 POSIXLY_CORRECT が定義されていない限り、[[m:GetoptLong::PERMUTE]]
+が初期値です。定義されていれば、[[m:GetoptLong::REQUIRE_ORDER]] が初期値になり
 ます。
 
-ordering を返します。
+@params ordering [[m:GetoptLong::REQUIRE_ORDER]], [[m:GetoptLong::PERMUTE]],
+                 [[m:GetoptLong::RETURN_IN_ORDER]] のいずれかを指定します。
 
---- ordering
-#@todo
+@raise ArgumentError [[m:GetoptLong::REQUIRE_ORDER]], [[m:GetoptLong::PERMUTE]],
+                 [[m:GetoptLong::RETURN_IN_ORDER]] 以外の値を指定した場合に発生します。
+
+@raise RuntimeError [[m:GetoptLong#get]], [[m:GetoptLong#get_option]],
+                    [[m:Get_Option#each]], [[m:Get_Option#each_option]] メソッドを
+                    呼び出した後にこのメソッドを呼び出した場合に発生します。
+
+--- ordering -> Fixnum
 現在の順序形式を返します。
 
 --- quiet=(flag)
-#@todo
-flag が TRUE なら、静粛 (quiet) モードが有効になります。
+flag が真なら、静粛 (quiet) モードが有効になります。
+
 静粛モードが有効になっていると、レシーバのオブジェクトは、
-get, get_option, each, each_option メソッドでエラーが
-発生しても、エラーメッセージを出力しません。初期値は、FALSE
-になっています。
+[[m:GetoptLong#get]], [[m:GetoptLong#get_option]],
+[[m:GetoptLong#each]], [[m:GetoptLong#each_option]] メソッドでエラーが
+発生しても、エラーメッセージを出力しません。初期値は、偽になっています。
 
-flag を返します。
+@params flag 真または偽を指定します。
 
---- quiet
---- quiet?
-#@todo
-静粛モードが有効であれば、TRUE が返ります。そうでなければ、
-FALSE が返ります。
+--- quiet  -> true | false
+--- quiet? -> true | false
+静粛モードが有効であれば、真を返します。そうでなければ、偽を返します。
 
---- set_options(*arguments)
-#@todo
+--- set_options(*arguments) -> self
 あなたのプログラムで、認識させたいオプションをセットします。
 個々のオプションは、オプション名と引数のフラグからなる配列でな
 ければいけません。
 
-    parser.set_options(['-d', '--debug', GetoptLong::NO_ARGUMENT],
-                       ['--version',     GetoptLong::NO_ARGUMENT],
-                       ['--help',        GetoptLong::NO_ARGUMENT])
-
 配列中のオプション名は、一文字オプション (例: -d) か長いオプ
 ション (例: --debug) を表した文字列のいずれかでなければなり
 ません。配列の中の一番左端のオプション名が、オプションの正式名
-になります。配列中の引数のフラグは、NO_ARGUMENT, REQUIRE_ARGUMENT,
-OPTIONAL_ARGUMENT のいずれかでなくてはなりません。
+になります。配列中の引数のフラグは、[[m:GetoptLong::NO_ARGUMENT]],
+[[m:GetoptLong::REQUIRE_ARGUMENT]], [[m:GetoptLong::OPTIONAL_ARGUMENT]]
+のいずれかでなくてはなりません。
+
+オプションを設定できるのは、get, get_option, each,
+each_option メソッドを呼び出す前だけです。これらのメソッドを
+呼び出した後でオプションを設定しようとすると、RuntimeError
+例外が発生します。
+
+@params arguments オプションを表す配列を指定します。
+
+@raise ArgumentError 不正な引数が与えられるた場合、発生します。
+
+    parser.set_options(['-d', '--debug', GetoptLong::NO_ARGUMENT],
+                       ['--version',     GetoptLong::NO_ARGUMENT],
+                       ['--help',        GetoptLong::NO_ARGUMENT])
 
 オプション名と引数のフラグの順番に決まりはないので、次のような
 形式でも構いません。
@@ -286,60 +274,103 @@ OPTIONAL_ARGUMENT のいずれかでなくてはなりません。
                        [GetoptLong::NO_ARGUMENT, '--version'],
                        [GetoptLong::NO_ARGUMENT, '--help'])
 
-不正な引数が set_options メソッドに与えられると、例外
-ArgumentError が発生します。
-
-オプションを設定できるのは、get, get_option, each,
-each_option メソッドを呼び出す前だけです。これらのメソッドを
-呼び出した後でオプションを設定しようとすると、RuntimeError
-例外が発生します。
-
-メソッドのレシーバであるオブジェクトを返します。
-
---- terminate
-#@todo
+--- terminate -> self
 オプションの処理を、強制的に終了させます。ただし、エラーが起き
-ている状態でこのメソッドを起動しても、終了させることはできませ
-ん。エラーが起きている状態でこのメソッドを起動すると、
-RuntimeError 例外が発生します。すでにオプションの処理が終了
-しているときは、このメソッドは何も行いません。
+ている状態でこのメソッドを起動しても、終了させることはできません。
 
-メソッドのレシーバであるオブジェクトを返します。
+すでにオプションの処理が終了しているときは、このメソッドは何も行いません。
 
---- terminated?
-#@todo
-エラーが起きずにオプションの処理が終了しているときは TRUE が
-返ります。それ以外のときは、FALSE が返ります。
+@raise RuntimeError エラーが起きている状態でこのメソッドを起動すると、発生します
+
+--- terminated? -> true | false
+エラーが起きずにオプションの処理が終了しているときは真が
+返ります。それ以外のときは、偽が返ります。
+
+== Porotected Instance Methods
+
+--- set_error(type, message) -> ()
+
+引数で与えられた例外を発生させます。
+
+その際、静粛モードでなければ標準エラー出力に与えられたメッセージを出力します。
+
+@params type 例外クラスを指定します。
+
+@params message 例外にセットするメッセージを指定します。
 
 == Constants
---- PERMUTE
---- REQUIRE_ORDER
---- RETURN_IN_ORDER
-#@todo
-順序形式を表しています。
 
---- NO_ARGUMENT
---- REQUIRED_ARGUMENT
---- OPTIONAL_ARGUMENT
-#@todo
-オプションへの引数のフラグです。
+--- ORDERINGS -> Array
+
+内部で使用する定数です。
+
+[[m:GetoptLong::REQUIRE_ORDER]], [[m:GetoptLong::PERMUTE]],
+[[m:GetoptLong::RETURN_IN_ORDER]] がセットされています。
+
+--- REQUIRE_ORDER -> 0
+非オプション引数の後に来たオプションは、オプションとして認識しません。
+最初に非オプション引数が現れた時点で、オプションの解析処理を中止します。
+
+--- PERMUTE -> 1
+コマンド行引数の内容を、走査した順に入れ替え、最終的にはすべての非オプ
+ションを末尾に寄せます。この方式では、オプションはどの順序で書いても良
+いことになります。これは、たとえプログラム側でそうなることを期待しなく
+ても、そうなります。この方式がデフォルトです。
+
+--- RETURN_IN_ORDER -> 2
+オプションと他の非オプション引数はどんな順序で並んでも良いが、お互いの
+順序は保持したままにしたいというプログラムのための形式です。
+
+--- ARGUMENT_FLAGS -> Array
+
+内部で使用する定数です。
+
+[[m:GetoptLong::NO_ARGUMENT]], [[m:GetoptLong::REQUIRE_ARGUMENT]],
+[[m:GetoptLong::OPTIONAL_ARGUMENT]] がセットされています。
+
+--- NO_ARGUMENT -> 0
+
+オプションに引数が無いことを表す定数です。
+
+--- REQUIRED_ARGUMENT -> 1
+
+オプションに必須引数があることを表す定数です。
+
+--- OPTIONAL_ARGUMENT -> 2
+
+オプションにはオプショナル引数があることを表す定数です。
+
+--- STATUS_YET        -> 0
+
+内部状態を管理するための定数です。ユーザが使用することはありません。
+
+--- STATUS_STARTED    -> 1
+
+内部状態を管理するための定数です。ユーザが使用することはありません。
+
+--- STATUS_TERMINATED -> 2
+
+内部状態を管理するための定数です。ユーザが使用することはありません。
+
 
 = class GetoptLong::Error < StandardError
+
+このライブラリで発生する例外の基底クラスです。
 
 #@until 1.9.1
 = class GetoptLong::AmbigousOption < GetoptLong::Error
 #@else
 = class GetoptLong::AmbiguousOption < GetoptLong::Error
 #@end
-与えられたオプションは名前の後方が省略されていると思われる
-が、一意に決まらない。
+与えられたオプションは名前の後方が省略されていると思われるが、一意に決まらない
+場合に発生する例外です。
 
 = class GetoptLong::InvalidOption < GetoptLong::Error
-知らないオプションが与えられた。
+知らないオプションが与えられた場合に発生する例外です。
 
 = class GetoptLong::MissingArgument < GetoptLong::Error
-与えられたオプションには引数が欠けている。
+与えられたオプションに引数が欠けている場合に発生する例外です。
 
 = class GetoptLong::NeedlessArgument < GetoptLong::Error
-与えられたオプションは引数を伴っているが、そのオプションは
-引数をとらない。
+与えられたオプションは引数を伴っているが、そのオプションが
+引数をとらない場合に発生する例外です。

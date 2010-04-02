@@ -156,7 +156,7 @@ ftools                          okkez           done
 #---------------------------------------------------------
 gdbm                            okkez           done
 generator                       okkez           done
-getoptlong                      okkez
+getoptlong                      okkez           done
 getopts                                         done
 gserver
 iconv                           bornite
