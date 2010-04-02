@@ -10,7 +10,11 @@ include MiniTest::Assertions
 
 == Public Instance Methods
 
+#@since 1.9.2
+--- __name__ -> String
+#@else
 --- name -> String
+#@end
 
 自身の名前を返します。
 
@@ -72,3 +76,14 @@ include MiniTest::Assertions
 --- test_suites -> Array
 
 テストクラス名のリストを返します。
+
+
+== Constants
+
+--- PASSTHROUGH_EXCEPTIONS -> [Class]
+
+システム関連の例外のリストです。
+
+--- SUPPORTS_INFO_SIGNAL -> Fixnum | nil
+#@todo
+
