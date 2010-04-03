@@ -9,7 +9,7 @@
 --- measure(label = "") { ... }  -> Benchmark::Tms
 #@todo
 
-与えられたブロックを実行して、経過した時間を [[m:Process.times]] で計り、
+与えられたブロックを実行して、経過した時間を [[m:Process.#times]] で計り、
 [[c:Benchmark::Tms]] オブジェクトを生成して返します。
 
 Benchmark::Tms オブジェクトには to_s が定義されているので、
