@@ -445,6 +445,12 @@ selfのj列目を列ベクトルとして返します。
     x + 100
   } #=> Matrix[[101, 102, 103], [110, 115, 120], [99, 98, 101.5]]
 
+#@since 1.9.2
+--- real? -> bool
+#@todo
+
+Returns +true+ if all entries of the matrix are real.
+#@end
 --- regular? -> bool
 
 正則(regular)なら真(true)を返します。
@@ -560,6 +566,54 @@ selfのj列目を列ベクトルとして返します。
 #@# and is of no use to general users.
 #@# bc-methods -r matrix Matrix で見つからなかった。okkez
 
+#@since 1.9.2
+--- conjugate -> Matrix
+--- conj -> Matrix
+#@todo
+
+Returns the conjugate of the matrix.
+
+  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+    => 1+2i   i  0
+          1   2  3
+  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].conjugate
+    => 1-2i  -i  0
+          1   2  3
+
+--- imaginary -> Matrix
+--- imag -> Matrix
+#@todo
+
+Returns the imaginary part of the matrix.
+
+  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+    => 1+2i  i  0
+          1  2  3
+  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].imaginary
+    =>   2i  i  0
+          0  0  0
+--- real -> Matrix
+#@todo
+
+Returns the real part of the matrix.
+
+  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]]
+    => 1+2i  i  0
+          1  2  3
+  Matrix[[Complex(1,2), Complex(0,1), 0], [1, 2, 3]].real
+    =>    1  0  0
+          1  2  3
+
+--- rectangular -> [Matrix, Matrix]
+--- rect -> [Matrix, Matrix]
+#@todo
+
+Returns an array containing matrices corresponding to the real and imaginary
+parts of the matrix
+
+  m.rect == [m.real, m.imag]  # ==> true for all matrices m
+
+#@end
 --- coerce(other) -> Array
 他の数値オブジェクトとの変換を行います。
 
