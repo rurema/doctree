@@ -1,0 +1,27 @@
+#@since 1.9.2
+= class Random < Object
+#@todo
+== Class Methods
+--- new -> Random
+--- new(seed) -> Random
+#@todo
+--- new_seed
+#@todo
+--- rand
+#@todo
+--- srand
+#@todo
+== Instance Methods
+--- ==
+#@todo
+--- bytes
+#@todo
+--- marshal_dump
+#@todo
+--- marshal_load
+#@todo
+--- rand
+#@todo
+--- seed
+#@todo
+#@end

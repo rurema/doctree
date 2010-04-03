@@ -86,6 +86,9 @@ require を書かなくても使うことができます。
 #@include(_builtin/Process__Status)
 #@include(_builtin/Process__Sys)
 #@include(_builtin/Process__UID)
+#@since 1.9.2
+#@include(_builtin/Random)
+#@end
 #@include(_builtin/Range)
 #@include(_builtin/RangeError)
 #@since 1.9.1
