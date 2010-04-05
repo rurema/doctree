@@ -152,7 +152,7 @@ GNU getopt_long() を Ruby で模したクラスです。
 GetoptLong のオブジェクトを生成します。引数が与えられ
 たときは、それを [[m:GetoptLong#set_options]] メソッドに渡します。
 
-@params arguments オプションを定義するための配列の配列を指定します。
+@param arguments オプションを定義するための配列の配列を指定します。
 
 @see [[m:GetoptLong#set_options]]
 
@@ -182,7 +182,11 @@ ARGV に残っていないときは、optname, optarg ともに nil に
 に合わない場合は、エラーとなって、以下のいずれかの例外が発生し
 ます。
 
+#@since 1.9.1
  * [[c:GetoptLong::AmbiguousOption]]
+#@else
+ * [[c:GetoptLong::AmbigousOption]]
+#@end
  * [[c:GetoptLong::InvalidOption]]
  * [[c:GetoptLong::MissingArgument]]
  * [[c:GetoptLong::NeedlessArgument]]
@@ -215,8 +219,8 @@ ARGV に残っていないときは、optname, optarg ともに nil に
 が初期値です。定義されていれば、[[m:GetoptLong::REQUIRE_ORDER]] が初期値になり
 ます。
 
-@params ordering [[m:GetoptLong::REQUIRE_ORDER]], [[m:GetoptLong::PERMUTE]],
-                 [[m:GetoptLong::RETURN_IN_ORDER]] のいずれかを指定します。
+@param ordering [[m:GetoptLong::REQUIRE_ORDER]], [[m:GetoptLong::PERMUTE]],
+                [[m:GetoptLong::RETURN_IN_ORDER]] のいずれかを指定します。
 
 @raise ArgumentError [[m:GetoptLong::REQUIRE_ORDER]], [[m:GetoptLong::PERMUTE]],
                  [[m:GetoptLong::RETURN_IN_ORDER]] 以外の値を指定した場合に発生します。
@@ -236,7 +240,7 @@ flag が真なら、静粛 (quiet) モードが有効になります。
 [[m:GetoptLong#each]], [[m:GetoptLong#each_option]] メソッドでエラーが
 発生しても、エラーメッセージを出力しません。初期値は、偽になっています。
 
-@params flag 真または偽を指定します。
+@param flag 真または偽を指定します。
 
 --- quiet  -> true | false
 --- quiet? -> true | false
@@ -259,7 +263,7 @@ each_option メソッドを呼び出す前だけです。これらのメソッドを
 呼び出した後でオプションを設定しようとすると、RuntimeError
 例外が発生します。
 
-@params arguments オプションを表す配列を指定します。
+@param arguments オプションを表す配列を指定します。
 
 @raise ArgumentError 不正な引数が与えられるた場合、発生します。
 
@@ -294,9 +298,9 @@ each_option メソッドを呼び出す前だけです。これらのメソッドを
 
 その際、静粛モードでなければ標準エラー出力に与えられたメッセージを出力します。
 
-@params type 例外クラスを指定します。
+@param type 例外クラスを指定します。
 
-@params message 例外にセットするメッセージを指定します。
+@param message 例外にセットするメッセージを指定します。
 
 == Constants
 
