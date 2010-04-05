@@ -149,9 +149,13 @@ cleanpath は、実際にファイルシステムを参照することなく、文字列操作
        #<Pathname:bar/foo/../bar>
 
 --- realpath -> Pathname
-#@until 1.9.2
+#@since 1.9.2
+--- realpath(basedir=nil) -> Pathname
+#@end
+#@until 1.8.5
 --- realpath(force_absolute = true) -> Pathname
 #@end
+#@todo
 余計な "."、".." や "/" を取り除いた新しい Pathname オブジェクトを返します。
 
 また、ファイルシステムをアクセスし、実際に存在するパスを返します。
@@ -159,7 +163,7 @@ cleanpath は、実際にファイルシステムを参照することなく、文字列操作
 
 self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
 
-#@until 1.9.2
+#@until 1.8.5
 @param force_absolute 真の場合、絶対パスを返します。 self が相対パスであれば、カレントディレクトリからの相対パスとして解釈されます。
                       古い挙動は obsolete です。引数は省略すべきです。
 #@end
@@ -178,20 +182,20 @@ self が指すパスが存在しない場合は例外 [[c:Errno::ENOENT]] が発生します。
     Dir.chdir("/tmp")
 
     p path.realpath
-#@until 1.9.2
+#@until 1.8.5
     p path.realpath(false)
 #@end
 
     => ruby 1.8.0 (2003-10-10) [i586-linux]
        #<Pathname:/tmp/bar>
-#@until 1.9.2
+#@until 1.8.5
        #<Pathname:bar>
 #@end
 
 #@since 1.9.2
 @see [[m:Pathname#realdirpath]]
 
---- realdirpath -> Pathname
+--- realdirpath(basedir=nil) -> Pathname
 #@todo
 
 [[m:Pathname#realpath]] とほぼ同じで、最後のコンポーネントは実際に
