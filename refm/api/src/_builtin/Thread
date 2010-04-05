@@ -254,7 +254,7 @@ val を name に対応するスレッド固有のデータとして格納します。
 
 @see [[m:Thread#exit!]], [[m:Kernel.#exit]], [[m:Kernel.#exit!]]
 
-#@since 1.8.6
+#@if("1.8.6" <= version and version < "1.9.1")
 --- exit!         -> self
 --- kill!         -> self
 --- terminate!    -> self
