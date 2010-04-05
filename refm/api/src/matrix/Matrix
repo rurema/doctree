@@ -1,4 +1,7 @@
 = class Matrix < Object
+#@since 1.9.2
+include Enumerable
+#@end
 #@#[2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 数[[c:Numeric]]を要素とする行列を扱うクラスです。
@@ -217,6 +220,31 @@ n次の零行列を生成します。
 
 列の大きさを返します。
 
+#@since 1.9.2
+--- each {|e| ... } -> self
+#@todo
+
+Yields all elements of the matrix, starting with those of the first row,
+or returns an Enumerator is no block given
+
+   Matrix[ [1,2], [3,4] ].each { |e| puts e }
+    # => prints the numbers 1 to 4
+
+--- each_with_index {|e, row, col| ... }  -> self
+#@todo
+
+Yields all elements of the matrix, starting with those of the first row,
+along with the row index and column index,
+or returns an Enumerator is no block given
+
+  Matrix[ [1,2], [3,4] ].each_with_index do |e, row, col|
+    puts "#{e} at #{row}, #{col}"
+  end
+    # => 1 at 0, 0
+    # => 2 at 0, 1
+    # => 3 at 1, 0
+    # => 4 at 1, 1
+#@end
 --- minor(from_row, row_size, from_col, col_size) -> Matrix
 --- minor(from_row..to_row, from_col..to_col) -> Matrix
 
