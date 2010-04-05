@@ -1321,7 +1321,14 @@ include_private が真のときは private メソッドに対しても真を返します。
   #   Guten Tag
 
 @see [[m:Module#method_defined?]]
+#@since 1.9.2
+--- respond_to_missing?(symbol, include_private) -> bool
+#@todo
 
+Hook method to return whether the _obj_ can respond to _id_ method or not.
+
+@see [[m:Object#respond_to?]]
+#@end
 --- method_missing(name, *args) -> object
 
 呼びだされたメソッドが定義されていなかった時、Rubyインタプリタがこのメソッド

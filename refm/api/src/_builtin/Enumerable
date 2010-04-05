@@ -826,6 +826,15 @@ produces:
 
    1 -- [1, 2] --
 
+--- flat_map       {| obj | block }  -> Array
+--- collect_concat {| obj | block }  -> Array
+#@todo
+
+Returns a new array with the concatenated results of running
+<em>block</em> once for every element in <i>enum</i>.
+
+   [[1,2],[3,4]].flat_map {|i| i }   #=> [1, 2, 3, 4]
+
 --- slice_before(pattern) -> Enumerator
 --- slice_before {|elt| bool } -> Enumerator
 --- slice_before(initial_state) {|elt, state| bool } -> Enumerator

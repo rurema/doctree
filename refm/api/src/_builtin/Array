@@ -1694,6 +1694,25 @@ srand()が有効です。
 #@end
 
 #@since 1.9.2
+--- keep_if {|item| block } -> Array
+#@todo
+
+Deletes every element of <i>self</i> for which <i>block</i> evaluates
+to <code>false</code>.
+
+   a = %w{ a b c d e f }
+   a.keep_if {|v| v =~ /[aeiou]/}   #=> ["a", "e"]
+
+@see [[m:Array#select!]]
+--- select! {|item| block } -> Array
+#@todo
+
+Invokes the block passing in successive elements from
+<i>array</i>, deleting elements for which the block returns a
+false value.  but returns <code>nil</code> if no changes were
+made.  Also see <code>Array#keep_if</code>
+
+@see [[m:Array#keep_if]]
 --- rotate(cnt=1) -> Array
 #@todo
 
