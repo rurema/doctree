@@ -1,10 +1,4 @@
-#@if (version >= "1.8.0")
 サーバを実装するためのライブラリです。
-
-= class GServer < Object
-
-サーバを実装するためのクラスです。GServer を継承した新しいクラスを定義して使います。
-fork ではなくスレッドを使っています。
 
 例:
 
@@ -36,153 +30,173 @@ fork ではなくスレッドを使っています。
   GServer.stop(10001)
   # もちろん server.stop でも可能です。
 
-=== 参照
-[[url:http://www.ruby-doc.org/stdlib/libdoc/gserver/rdoc/]]
+= class GServer < Object
+
+サーバを実装するためのクラスです。[[c:GServer]] を継承した新しいクラスを定義して使います。
+fork ではなくスレッドを使っています。
 
 == Constants
 
---- DEFAULT_HOST
-#@todo
+--- DEFAULT_HOST -> String
 
 "127.0.0.1" です。
 
 == Class Methods
 
---- new(port, host = DEFAULT_HOST, maxConnections = 4, stdlog = $stderr, audit = false, debug = false)
-#@todo
+--- new(port, host = GServer::DEFAULT_HOST, maxConnections = 4, stdlog = $stderr, audit = false, debug = false)
 
 GServer オブジェクトを生成します。
 
---- in_service?(port, host = DEFAULT_HOST)
-#@todo
+@param port サーバがリッスンするポートを指定します。
+
+@param host ホストを指定します。
+
+@param maxConnextions 最大接続数を指定します。デフォルトは 4 です。
+
+@param stdlog ログの出力先を指定します。デフォルトは標準エラー出力です。
+
+@param audit 真を指定するとサーバの起動時、接続時、切断時、停止時にログを出力します。
+
+@param debug 真を指定するとデバッグログを出力します。
+
+--- in_service?(port, host = GServer::DEFAULT_HOST) -> bool
 
 与えられた host と port で GServer オブジェクトが同じプロセス内で
 サービス中なら真を返します。
 
---- stop(port, host = DEFAULT_HOST)
-#@todo
+@param port ポート番号を指定します。
+
+@param host ホストを指定します。
+
+--- stop(port, host = DEFAULT_HOST) -> ()
 
 与えられた host と port に対応する GServer オブジェクトを停止します。
 
+@param port ポート番号を指定します。
+
+@param host ホストを指定します。
+
 == Instance Methods
 
---- audit
-#@todo
+--- audit -> bool
+真であれば、サーバの起動時、接続時、切断時、停止時にログを出力します。
 
-メソッド starting, connecting, disconnecting, stopping をそれぞれ定められた時に呼ぶなら true、そうでないなら false を返します。
+@see [[m:GServer#starting]], [[m:GServer#connecting]], [[m:GServer#disconnecting]], [[m:GServer#stopping]]
 
 --- audit=(bool)
-#@todo
 
-true なら GServer はログを取るためのメソッド
-starting, connecting, disconnecting, stoppingを
-それぞれ定められた時に呼びます。
+真を指定すると、サーバの起動時、接続時、切断時、停止時にログを出力します。
 
---- connecting(client)
-#@todo
+@param bool 真偽値を指定します。
 
-audit が true に設定されているなら、クライアント接続時に呼ばれます。
-client はクライアントと接続している [[c:TCPSocket]] です。
+@see [[m:GServer#starting]], [[m:GServer#connecting]], [[m:GServer#disconnecting]], [[m:GServer#stopping]]
+
+--- connecting(client) -> true
+
+[[m:GServer#audit]] が真ならば、クライアント接続時に呼ばれます。
+
 サブクラスでオーバーライドします。
 
---- connections()
-#@todo
+@param client クライアントと接続している [[c:TCPSocket]] です。
+
+
+--- connections() -> Fixnum
 
 現在接続しているクライアントの数を返します。
 
---- disconnecting(clientPort)
-#@todo
+--- disconnecting(clientPort) -> ()
 
-audit が true に設定されているなら、クライアントとの接続終了時に呼ばれます。
-clientPort は接続していたクライアントのポートです。
+[[m:GServer#audit]] が真ならば、クライアントとの接続終了時に呼ばれます。
+
 サブクラスでオーバーライドします。
 
---- debug
-#@todo
+@param clientPort 接続していたクライアントのポートです。
 
-デバッグモードなら true、そうでないなら false を返します。
+--- debug -> bool
+
+デバッグモードなら真、そうでないなら偽を返します。
 
 --- debug=(bool)
-#@todo
 
-デバッグモードにするかどうかを設定します。
+真を指定するとデバッグモードが有効になります。
+偽を指定するとデバッグモードが無効になります。
 
---- error(detail)
-#@todo
+@param bool 真偽値を指定します。
 
-debug が true に設定されている時、例外が発生すると呼ばれます。
-detail は例外オブジェクトです。protected メソッドです。
-
---- host
-#@todo
+--- host -> String
 
 ホストを文字列で返します。
 
 --- join
-#@todo
 
-サーバのサービスを実行しているスレッドを join します。
+サーバのサービスを実行しているスレッドを [[m:Thread#join]] します。
 
---- log(msg)
-#@todo
+@see [[m:Thread#join]]
 
-文字列 msg をログに記録します。protected メソッドです。
-
---- maxConnections
-#@todo
+--- maxConnections -> Fixnum
 
 受け付ける最大接続数を返します。
 
---- port
-#@todo
+--- port -> Fixnum
 
 ポートを数で返します。
 
---- serve(io)
-#@todo
+--- serve(io) -> nil
 
 何もしません。サブクラスでオーバーライドします。
 
---- shutdown
-#@todo
+@param io クライアントと接続している [[c:TCPSocket]] を指定します。
 
-GServer を停止します。
+--- shutdown -> true
 
---- start(maxConnections = -1)
-#@todo
+自身を停止します。
 
-GServer を起動します。 0 より大きい maxConnections を与えたなら、
-最大接続数として設定されます。
+--- start(maxConnections = -1) -> self
 
---- starting
-#@todo
+自身を起動します。
 
-audit が true に設定されているなら、サーバ起動時に呼ばれます。
+@param maxConnections 0 より大きい数値を指定すると、最大接続数として設定されます。
+
+--- starting -> ()
+
+[[m:GServer#audit]] が真ならば、サーバ起動時に呼ばれます。
 サブクラスでオーバーライドします。
 
---- stdlog
-#@todo
+--- stdlog -> IO
 
-ログを出力する先の [[c:IO]] オブジェクトを返します。デフォルトは $stderr です。
+ログを出力する先の [[c:IO]] オブジェクトを返します。デフォルトは [[m:$stderr]] です。
 
 --- stdlog=(io)
+
+ログを出力する先の [[c:IO]] オブジェクトを設定します。
+
+@param io ログを出力する先の [[c:IO]] オブジェクトを設定します。
+
+--- stop -> ()
+
+自身をすぐに停止します。
+
+--- stopping -> ()
 #@todo
 
-ログを出力する先の [[c:IO]] オブジェクトを設定します。デフォルトは $stderr です。
-
---- stop
-#@todo
-
-GServer をすぐに停止します。
-
---- stopping
-#@todo
-
-audit が true に設定されているなら、サーバ停止時に呼ばれます。
+[[m:GServer#audit]] が真ならば、サーバ停止時に呼ばれます。
 サブクラスでオーバーライドします。
 
---- stopped?
-#@todo
+--- stopped? -> bool
 
-GServer が停止しているなら真を返します。
-#@end
+自身が停止しているなら真を返します。
+
+== Protected Instance Methods
+
+--- error(detail) -> ()
+
+[[m:GServer#debug]] が真の場合、例外が発生すると呼ばれます。
+
+@param detail 例外オブジェクトです。
+
+--- log(msg) -> ()
+
+与えられた文字列をログに記録します。
+
+@param msg ログとして記録する文字列を指定します。
+

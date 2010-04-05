@@ -159,7 +159,7 @@ gdbm                            okkez           done
 generator                       okkez           done
 getoptlong                      okkez           done
 getopts                                         done
-gserver                         okkez
+gserver                         okkez           done
 iconv                           bornite
 importenv                       mukai           done
 io/nonblock                     ohai
