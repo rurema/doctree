@@ -438,15 +438,13 @@ safe_level は、[[m:$SAFE]] と同じです。
 @raise ThreadError 死んでいるスレッドに対して実行すると発生します。
 
 
-#@since 1.9.1
+#@since 1.9.2
 --- add_trace_func
 #@todo
 
 --- set_trace_func
 #@todo
-#@end
 
-#@since 1.9.2
 --- backtrace    -> [String] | nil
 #@todo
 
