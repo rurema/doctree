@@ -474,6 +474,11 @@ selfのj列目を列ベクトルとして返します。
   } #=> Matrix[[101, 102, 103], [110, 115, 120], [99, 98, 101.5]]
 
 #@since 1.9.2
+--- empty? -> bool
+#@todo
+
+Returns +true+ if this is an empty matrix, i.e. if the number of rows
+or the number of columns is 0.
 --- real? -> bool
 #@todo
 
