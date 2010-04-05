@@ -34,14 +34,18 @@ Process がプロセスを表現するクラスではなく、プロセスに対する操作
 ただし noclose に真を指定したときにはこの動作は抑制され、
 リダイレクトは行なわれません。
 
+#@if (version == "1.9.1")
+[[man:daemon(2)]] がなくて [[man:fork(2)]] がある環境では失敗した場合に
+Errno::EXXX が発生せず -1 が返ってきます。
+#@end
+
 @param nochdir true を指定した場合、カレントディレクトリを移動しません。
 
 @param noclose true を指定した場合、標準入力・標準出力・標準エラー出力を変更しません。
 
 @raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
-
+@raise Errno::EXXX 失敗した場合に発生します。
 #@end
-
 #@since 1.8.0
 --- detach(pid)    -> Thread
 
