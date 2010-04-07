@@ -100,7 +100,7 @@
 
 [[lib:optparse]] を使ってコマンドライン引数を解析した結果を返します。
 
-@params args コマンドライン引数を指定します。
+@param args コマンドライン引数を指定します。
 
 @see [[lib:optparse]]
 
@@ -112,13 +112,13 @@
 
 テストの実行開始時刻をセットします。
 
-@params time [[c:Time]] オブジェクトを指定します。
+@param time [[c:Time]] オブジェクトを指定します。
 
 ---status(io = @@out) -> ()
 
 テスト結果を与えられた IO に書き込みます。
 
-@params io テスト結果の出力先を指定します。
+@param io テスト結果の出力先を指定します。
 
 
 #@end
