@@ -61,7 +61,7 @@ _builtin/Process__GID                           done
 _builtin/Process__Status                        done
 _builtin/Process__Sys                           done
 _builtin/Process__UID                           done
-_builtin/Random                 kouya
+_builtin/Random                 kouya           done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
 _builtin/Rational		mrkn		
