@@ -201,3 +201,13 @@ STDIN.scanf と同じです。
               詳細は、[[ref:m:String#scanf#format]] を参照してください。
 
 @see [[m:IO#scanf]], [[m:Stdin#scanf]]
+
+= module Scanf
+
+scanf ライブラリで使用する名前空間です。
+
+@see [[m:Kernel.#scanf]], [[m:String#scanf]], [[m:IO#scanf]], [[m:Stdin#scanf]]
+
+#@include(scanf/Scanf__FormatString)
+#@include(scanf/Scanf__FormatSpecifier)
+
