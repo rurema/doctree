@@ -425,6 +425,30 @@ $_ が文字列でなければ nil を返します。
 --- [](nth) -> Integer
 --- slice(nth) -> Integer
 
+#@since 1.9.0
+nth 番目の文字を返します。
+nth が負の場合は文字列の末尾から数えます。
+つまり、 self.size + nth 番目の文字を返します。
+
+nth が範囲外を指す場合は nil を返します。
+
+@param nth 文字の位置を表す整数
+@return 文字コードを表す整数
+
+例:
+
+  p 'bar'[2] # => "r"
+  p 'bar'[2] == ?r # => true
+  p 'bar'[-1] # => "r"
+  p 'bar'[3] # => nil
+  p 'bar'[-4] # => nil
+
+
+このメソッドの仕様は 1.8.x 以前から大きく変更されていますので注意が必要
+です．
+
+
+#@else
 nth 番目のバイトを整数 (文字コード) で返します。
 nth が負の場合は文字列の末尾から数えます。
 つまり、 self.size + nth 番目のバイトを返します。
@@ -445,6 +469,7 @@ nth が範囲外を指す場合は nil を返します。
 
 このメソッドの逆に文字コードから文字列を得るには
 [[m:Integer#chr]] を使ってください。
+#@end
 
 --- [](nth, len) -> String | nil
 --- slice(nth, len) -> String | nil
