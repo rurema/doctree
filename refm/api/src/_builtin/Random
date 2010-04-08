@@ -110,11 +110,51 @@ number が0もしくは省略された場合は、
 
 [[m:Random#marshal_dump]] で得られた配列を基に、Randomオブジェクトを復元します。
 
-@param array 
+@param array 三要素以下からなる配列を指定します。
+             何を指定するかは[[m:Random#marshal_dump]]を参考にしてください。
 
-#@todo
---- rand
-#@todo
---- seed
-#@todo
+@raise ArgumentError array が3より大きい場合に発生します。
+
+動作例；
+  r1 = Random.new(1)
+  a1 = r1.marshal_dump
+  r2 = Random.new(3)
+  r3 = r2.marshal_load(a1)
+
+  p r1 == r2 # => true
+  p r1 == r3 # => true
+
+@see [[m:Random#marshal_dump]]
+
+--- rand -> Float
+浮動小数点数を返します。
+
+動作例;
+p Random.new(3).rand # => 0.5507979025745755
+
+--- rand(arg) -> Integer 
+arg が IntegerもしくはBignumの場合は、arg 未満の整数を返します。
+Rangeオブジェクトの場合はrange.member?(number) == trueになるような数値を返します。
+
+@param arg 整数もしくはRangeオブジェクトを指定します。
+
+動作例;
+ prng = Random.new(1234)
+#[5, 6, 7, 8, 9]のどれか
+ p prng.rand(5..9)  # => 8
+#[5, 6, 7, 8]のどれか
+ p prng.rand(5...9) # => 7
+#5.0 からの9.0 の間の数値9.0, 9.0を含む。
+ p prng.rand(5.0..9.0)  # => 8.271353771386416
+#5.0 からの9.0 の間の数値9.0, 9.0を含まない。
+ p prng.rand(5.0...9.0) # => 7.448447578709083
+
+@raise ArgumentError 引数の数が0または1では無い時、引数に負の数値を与えた時に発生する。
+
+--- seed -> Integer
+現在の乱数の種を返します。
+
+動作例;
+  p Random.new(3).seed # => 3
+
 #@end
