@@ -1,20 +1,20 @@
 #@since 1.9.2
 = class Random < Object
 
-MT19937$B$K4p$E$/$K5?;wMp?t@8@.4o$rDs6!$9$k%/%i%9$G$9!#(B
+MT19937¤Ë´ğ¤Å¤¯¤Ëµ¿»÷Íğ¿ôÀ¸À®´ï¤òÄó¶¡¤¹¤ë¥¯¥é¥¹¤Ç¤¹¡£
 
-=== $B;29M(B
-$B%*%j%8%J%kHG(B [[url:http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html]]
+=== »²¹Í
+¥ª¥ê¥¸¥Ê¥ëÈÇ [[url:http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html]]
 
 == Class Methods
 --- new(seed = Random.new_seed) -> Random
-$B%a%k%;%s%L!&%D%$%9%?$K4p$E$/5?;wMp?tH/@8AuCV%*%V%8%'%/%H$r:n$j$^$9!#(B
-$B0z?t$,>JN,$5$l$?>l9g$O!"(B[[m:Random.new_seed]]$B$NCM$r;HMQ$7$^$9!#(B
+¥á¥ë¥»¥ó¥Ì¡¦¥Ä¥¤¥¹¥¿¤Ë´ğ¤Å¤¯µ¿»÷Íğ¿ôÈ¯À¸ÁõÃÖ¥ª¥Ö¥¸¥§¥¯¥È¤òºî¤ê¤Ş¤¹¡£
+°ú¿ô¤¬¾ÊÎ¬¤µ¤ì¤¿¾ì¹ç¤Ï¡¢[[m:Random.new_seed]]¤ÎÃÍ¤ò»ÈÍÑ¤·¤Ş¤¹¡£
 
 
-@param seed $B5?;wMp?t@8@.4o$N<o$r@0?t$G;XDj$7$^$9!#(B
+@param seed µ¿»÷Íğ¿ôÀ¸À®´ï¤Î¼ï¤òÀ°¿ô¤Ç»ØÄê¤·¤Ş¤¹¡£
 
-$BF0:nNc!'(B $B<o$,F1$8$J$iF1$8Mp?tNs$rH/@8$9$k$3$H$,$G$-$k!#(B
+Æ°ºîÎã¡§ ¼ï¤¬Æ±¤¸¤Ê¤éÆ±¤¸Íğ¿ôÎó¤òÈ¯À¸¤¹¤ë¤³¤È¤¬¤Ç¤­¤ë¡£
 
   prng = Random.new(1234)                                
   [ prng.rand, prng.rand ]   #=> [0.191519450378892, 0.622108771039832]
@@ -23,44 +23,44 @@ MT19937$B$K4p$E$/$K5?;wMp?t@8@.4o$rDs6!$9$k%/%i%9$G$9!#(B
   [ prng.rand, prng.rand ]   #=> [0.191519450378892, 0.622108771039832]
 
 --- new_seed -> Integer
-$BE,@Z$JMp?t$N<o$rJV$7$^$9!#(B
+Å¬ÀÚ¤ÊÍğ¿ô¤Î¼ï¤òÊÖ¤·¤Ş¤¹¡£
 
-$B;HMQNc!((B
+»ÈÍÑÎã¡¨
  p Random.new_seed # => 184271600931914695177248627591520900872
 
 --- rand(max=0) -> Float
 
-$B5?;wMp?t$rH/@8$5$;$^$9!#(B
+µ¿»÷Íğ¿ô¤òÈ¯À¸¤µ¤»¤Ş¤¹¡£
 
-$B0z?t$,>JN,$5$l$?;~!"$b$7$/$O@0?t$N(B"0"$B!"$^$?$O(B nil$B$,;XDj$5$l$F>l9g$O(B0$B0J>e(B1$BL$K~$N<B?t$rJV$7$^$9!#(B
-$B0z?t$,;XDj$5$l$?>l9g$O!"(Bmax$B$r@5$N@0?t$KJQ49$7!"(B0$B0J>eJQ498e$N@0?tL$K~$N@0?t$rJV$7$^$9!#(B
+°ú¿ô¤¬¾ÊÎ¬¤µ¤ì¤¿»ş¡¢¤â¤·¤¯¤ÏÀ°¿ô¤Î"0"¡¢¤Ş¤¿¤Ï nil¤¬»ØÄê¤µ¤ì¤Æ¾ì¹ç¤Ï0°Ê¾å1Ì¤Ëş¤Î¼Â¿ô¤òÊÖ¤·¤Ş¤¹¡£
+°ú¿ô¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤Ï¡¢max¤òÀµ¤ÎÀ°¿ô¤ËÊÑ´¹¤·¡¢0°Ê¾åÊÑ´¹¸å¤ÎÀ°¿ôÌ¤Ëş¤ÎÀ°¿ô¤òÊÖ¤·¤Ş¤¹¡£
 
-@param max $B5?;wMp?t@8@.4o$N:GBgCM$r;XDj$7$^$9!#(B
+@param max µ¿»÷Íğ¿ôÀ¸À®´ï¤ÎºÇÂçÃÍ¤ò»ØÄê¤·¤Ş¤¹¡£
 
-@return max $B$rD6$($J$$Mp?t$rJV$7$^$9!#(B
+@return max ¤òÄ¶¤¨¤Ê¤¤Íğ¿ô¤òÊÖ¤·¤Ş¤¹¡£
 
-$B;HMQNc(B
-  srand 1234 # $BMp?t$N<o$r@_Dj$9$k!#(B 
+»ÈÍÑÎã
+  srand 1234 # Íğ¿ô¤Î¼ï¤òÀßÄê¤¹¤ë¡£ 
   p [ Random.rand,  Random.rand ]            #=> [0.191519450163469, 0.49766366626136]
   p Random.rand(1000)  # => 204
 
   0.upto(10){
-    # 3 $B$rD6$($J$$@0?t$rJV$7$^$9!#(B
+    # 3 ¤òÄ¶¤¨¤Ê¤¤À°¿ô¤òÊÖ¤·¤Ş¤¹¡£
     p Random.rand(-3.14)
   }
 
 --- srand(number=0) -> Integer
 
-$B5?;wMp?t@8@.4o$N<o$r@_Dj$7$^$9!#(B
+µ¿»÷Íğ¿ôÀ¸À®´ï¤Î¼ï¤òÀßÄê¤·¤Ş¤¹¡£
 
-number $B$,(B0$B$b$7$/$O>JN,$5$l$?>l9g$O!"(B
-$B%W%m%;%9(BID$B!"8=:_;~4VEy$rAH$_9g$o$;$?E,@Z$JCM$,<o$H$7$F;HMQ$5$l$^$9!#(B
+number ¤¬0¤â¤·¤¯¤Ï¾ÊÎ¬¤µ¤ì¤¿¾ì¹ç¤Ï¡¢
+¥×¥í¥»¥¹ID¡¢¸½ºß»ş´ÖÅù¤òÁÈ¤ß¹ç¤ï¤»¤¿Å¬ÀÚ¤ÊÃÍ¤¬¼ï¤È¤·¤Æ»ÈÍÑ¤µ¤ì¤Ş¤¹¡£
 
-@param $B5?;wMp?tH/@84o$N<o$r@0?t$G;XDj$7$^$9!#(B
+@param µ¿»÷Íğ¿ôÈ¯À¸´ï¤Î¼ï¤òÀ°¿ô¤Ç»ØÄê¤·¤Ş¤¹¡£
 
-@return $B@_Dj$5$l$kA0$N<o$rJV$7$^$9!#(B
+@return ÀßÄê¤µ¤ì¤ëÁ°¤Î¼ï¤òÊÖ¤·¤Ş¤¹¡£
 
-$BF0:nNc!((B
+Æ°ºîÎã¡¨
   p Random.srand 1
   p Random.srand 1234   # => 1
   p [ Random.rand,  Random.rand ]            #=> [0.191519450163469, 0.49766366626136]
@@ -68,12 +68,12 @@ number $B$,(B0$B$b$7$/$O>JN,$5$l$?>l9g$O!"(B
 == Instance Methods
 --- ==(other) -> bool
 
-$BMp?t@8@.4o$,Ey$7$$>uBV$G$"$k$J$i$P(Btrue $B$rJV$7$^$9!#(B
+Íğ¿ôÀ¸À®´ï¤¬Åù¤·¤¤¾õÂÖ¤Ç¤¢¤ë¤Ê¤é¤Ğtrue ¤òÊÖ¤·¤Ş¤¹¡£
 
-@param other $BHf3SBP>]$NMp?t@8@.4o(B
+@param other Èæ³ÓÂĞ¾İ¤ÎÍğ¿ôÀ¸À®´ï
 
 
-$BF0:nNc!((B
+Æ°ºîÎã¡¨
   r1 = Random.new(1)
   r2 = Random.new(1)
 
@@ -85,18 +85,18 @@ number $B$,(B0$B$b$7$/$O>JN,$5$l$?>l9g$O!"(B
 
 --- bytes(size) -> String
 
-$B%i%s%@%`$J%P%$%J%j!<J8;zNs$rJV$7$^$9!#7k2L$NJ8;zNs$N%5%$%:$r;XDj$G$-$^$9!#(B
+¥é¥ó¥À¥à¤Ê¥Ğ¥¤¥Ê¥ê¡¼Ê¸»úÎó¤òÊÖ¤·¤Ş¤¹¡£·ë²Ì¤ÎÊ¸»úÎó¤Î¥µ¥¤¥º¤ò»ØÄê¤Ç¤­¤Ş¤¹¡£
 
-@param size $B7k2L$NJ8;zNs$N%5%$%:$r;XDj$7$^$9!#(B
+@param size ·ë²Ì¤ÎÊ¸»úÎó¤Î¥µ¥¤¥º¤ò»ØÄê¤·¤Ş¤¹¡£
 
-$BF0:nNc!((B
+Æ°ºîÎã¡¨
   r2 = Random.new(1)
   p r2.bytes(10) # => "%\xF4\xC1j\xEB\x80G\xFF\x8C/"
 
 --- marshal_dump -> Array
-[[m:Random#marshal_load]] $B$GI|852DG=$JG[Ns$rJV$7$^$9!#(B
+[[m:Random#marshal_load]] ¤ÇÉü¸µ²ÄÇ½¤ÊÇÛÎó¤òÊÖ¤·¤Ş¤¹¡£
 
-$BF0:nNc(B;
+Æ°ºîÎã;
   r1 = Random.new(1)
   a1 = r1.marshal_dump
   r2 = Random.new(3)
@@ -108,14 +108,14 @@ number $B$,(B0$B$b$7$/$O>JN,$5$l$?>l9g$O!"(B
 
 --- marshal_load(array) -> Random
 
-[[m:Random#marshal_dump]] $B$GF@$i$l$?G[Ns$r4p$K!"(BRandom$B%*%V%8%'%/%H$rI|85$7$^$9!#(B
+[[m:Random#marshal_dump]] ¤ÇÆÀ¤é¤ì¤¿ÇÛÎó¤ò´ğ¤Ë¡¢Random¥ª¥Ö¥¸¥§¥¯¥È¤òÉü¸µ¤·¤Ş¤¹¡£
 
-@param array $B;0MWAG0J2<$+$i$J$kG[Ns$r;XDj$7$^$9!#(B
-             $B2?$r;XDj$9$k$+$O(B[[m:Random#marshal_dump]]$B$r;29M$K$7$F$/$@$5$$!#(B
+@param array »°Í×ÁÇ°Ê²¼¤«¤é¤Ê¤ëÇÛÎó¤ò»ØÄê¤·¤Ş¤¹¡£
+             ²¿¤ò»ØÄê¤¹¤ë¤«¤Ï[[m:Random#marshal_dump]]¤ò»²¹Í¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-@raise ArgumentError array $B$,(B3$B$h$jBg$-$$>l9g$KH/@8$7$^$9!#(B
+@raise ArgumentError array ¤¬3¤è¤êÂç¤­¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Ş¤¹¡£
 
-$BF0:nNc!((B
+Æ°ºîÎã¡¨
   r1 = Random.new(1)
   a1 = r1.marshal_dump
   r2 = Random.new(3)
@@ -127,34 +127,34 @@ number $B$,(B0$B$b$7$/$O>JN,$5$l$?>l9g$O!"(B
 @see [[m:Random#marshal_dump]]
 
 --- rand -> Float
-$BIbF0>.?tE@?t$rJV$7$^$9!#(B
+ÉâÆ°¾®¿ôÅÀ¿ô¤òÊÖ¤·¤Ş¤¹¡£
 
-$BF0:nNc(B;
+Æ°ºîÎã;
 p Random.new(3).rand # => 0.5507979025745755
 
 --- rand(arg) -> Integer 
-arg $B$,(B Integer$B$b$7$/$O(BBignum$B$N>l9g$O!"(Barg $BL$K~$N@0?t$rJV$7$^$9!#(B
-Range$B%*%V%8%'%/%H$N>l9g$O(Brange.member?(number) == true$B$K$J$k$h$&$J?tCM$rJV$7$^$9!#(B
+arg ¤¬ Integer¤â¤·¤¯¤ÏBignum¤Î¾ì¹ç¤Ï¡¢arg Ì¤Ëş¤ÎÀ°¿ô¤òÊÖ¤·¤Ş¤¹¡£
+Range¥ª¥Ö¥¸¥§¥¯¥È¤Î¾ì¹ç¤Ïrange.member?(number) == true¤Ë¤Ê¤ë¤è¤¦¤Ê¿ôÃÍ¤òÊÖ¤·¤Ş¤¹¡£
 
-@param arg $B@0?t$b$7$/$O(BRange$B%*%V%8%'%/%H$r;XDj$7$^$9!#(B
+@param arg À°¿ô¤â¤·¤¯¤ÏRange¥ª¥Ö¥¸¥§¥¯¥È¤ò»ØÄê¤·¤Ş¤¹¡£
 
-$BF0:nNc(B;
+Æ°ºîÎã;
  prng = Random.new(1234)
-#[5, 6, 7, 8, 9]$B$N$I$l$+(B
+#[5, 6, 7, 8, 9]¤Î¤É¤ì¤«
  p prng.rand(5..9)  # => 8
-#[5, 6, 7, 8]$B$N$I$l$+(B
+#[5, 6, 7, 8]¤Î¤É¤ì¤«
  p prng.rand(5...9) # => 7
-#5.0 $B$+$i$N(B9.0 $B$N4V$N?tCM(B9.0, 9.0$B$r4^$`!#(B
+#5.0 ¤«¤é¤Î9.0 ¤Î´Ö¤Î¿ôÃÍ9.0, 9.0¤ò´Ş¤à¡£
  p prng.rand(5.0..9.0)  # => 8.271353771386416
-#5.0 $B$+$i$N(B9.0 $B$N4V$N?tCM(B9.0, 9.0$B$r4^$^$J$$!#(B
+#5.0 ¤«¤é¤Î9.0 ¤Î´Ö¤Î¿ôÃÍ9.0, 9.0¤ò´Ş¤Ş¤Ê¤¤¡£
  p prng.rand(5.0...9.0) # => 7.448447578709083
 
-@raise ArgumentError $B0z?t$N?t$,(B0$B$^$?$O(B1$B$G$OL5$$;~!"0z?t$KIi$N?tCM$rM?$($?;~$KH/@8$9$k!#(B
+@raise ArgumentError °ú¿ô¤Î¿ô¤¬0¤Ş¤¿¤Ï1¤Ç¤ÏÌµ¤¤»ş¡¢°ú¿ô¤ËÉé¤Î¿ôÃÍ¤òÍ¿¤¨¤¿»ş¤ËÈ¯À¸¤¹¤ë¡£
 
 --- seed -> Integer
-$B8=:_$NMp?t$N<o$rJV$7$^$9!#(B
+¸½ºß¤ÎÍğ¿ô¤Î¼ï¤òÊÖ¤·¤Ş¤¹¡£
 
-$BF0:nNc(B;
+Æ°ºîÎã;
   p Random.new(3).seed # => 3
 
 #@end
