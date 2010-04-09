@@ -1,6 +1,6 @@
 = class Scanf::FormatSpecifier < Object
 
-== Instance Mthods
+== Instance Methods
 
 --- conversion
 #@todo
