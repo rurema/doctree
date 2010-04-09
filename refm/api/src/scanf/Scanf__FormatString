@@ -1,0 +1,56 @@
+= class Scanf::FormatString < Object
+
+== Singleton Methods
+
+--- new(str)
+#@todo
+
+
+== Instance Methods
+
+--- last_match_tried
+#@todo
+
+--- last_spec
+#@todo
+
+
+
+--- last_spec_tried
+#@todo
+
+--- match(str)
+#@todo
+
+
+
+--- matched_count
+#@todo
+
+--- prune(n=matched_count)
+#@todo
+
+
+
+--- space
+#@todo
+
+--- spec_count
+#@todo
+
+
+
+--- string_left
+#@todo
+
+--- to_s
+#@todo
+
+== Constants
+
+--- REGEX
+#@todo
+
+--- SPECIFIERS
+#@todo
+

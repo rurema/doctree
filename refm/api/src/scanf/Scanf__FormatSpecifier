@@ -1,0 +1,51 @@
+= class Scanf::FormatSpecifier < Object
+
+== Instance Mthods
+
+--- conversion
+#@todo
+
+--- count_space?
+#@todo
+
+
+
+--- letter
+#@todo
+
+
+
+--- match(str)
+#@todo
+
+
+
+--- matched
+#@todo
+
+--- matched_string
+#@todo
+
+--- mid_match?
+#@todo
+
+
+
+--- re_string
+#@todo
+
+--- to_re
+#@todo
+
+
+
+--- to_s
+#@todo
+
+
+
+--- width
+#@todo
+
+
+
