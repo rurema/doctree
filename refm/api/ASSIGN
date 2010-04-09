@@ -162,8 +162,8 @@ getopts                                         done
 gserver                         okkez           done
 iconv                           bornite
 importenv                       mukai           done
-io/nonblock                     ohai
-io/wait                         ohai
+io/nonblock                     ohai            done
+io/wait                         ohai            done
 ipaddr                          okkez           done
 irb                             snoozer05
 jcode                           ohai            done
