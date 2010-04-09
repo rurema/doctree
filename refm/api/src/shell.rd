@@ -1,3 +1,7 @@
+require shell/error
+require shell/command-processor
+require shell/process-controller
+
 Ruby 上で sh/csh のようにコマンドの実行及びフィルタリングを手軽に行うためのライブラリです。
 #@# Author: Keiju ISHITSUKA
 
@@ -54,142 +58,21 @@ sh/csh の制御文は Ruby の機能を用いて実現します。
 
 
 
-= class Shell::Filter < Object
-
-include Enumerable
-
-コマンドの実行結果はすべてShell::Filterとしてかえります. 
-
-== Class Methods
-
---- new -> Shell::Filter
-
-執筆者募集。
-Shell::Filter クラス のインスタンスを返します。
-通常このnewを直接使う機会はすくないでしょう。
-
-== Instance Methods
-
---- each(rs = nil) -> ()
-
-フィルタの一行ずつをblockに渡します。
-
-@param rs レコードセパレーターを表す文字列を指定します。
-          nil ならば、[[m:Shell.record_separator]]の値が使用されます。
-
-使用例
-  sh = Shell.new
-  sh.cat("/etc/passwd").each { |line|
-    puts line
-  }
-
---- <(src) -> self
-
-srcをフィルタの入力とする. srcが, 文字列ならばファイルを, IOオブジェクトであれ
-ばそれをそのまま入力とする.
-
-@param src フィルタの入力を, 文字列もしくは,IO オブジェクトで指定します.
-
-使用例
-  Shell.def_system_command("head")
-  sh = Shell.new
-  sh.transact {
-    (sh.head("-n 30") < "/etc/passwd") > "ugo.txt"
-  }
-
---- >(to) -> self
-
-toをフィルタの出力とする. toが, 文字列ならばファイルに, IOオブジェクトであれ
-ばそれをそのまま出力とする.
-
-@param to 出力先を指定します.文字列ならばファイルに,IOオブジェクトならばそれに出力します.
-
-使用例
-  Shell.def_system_command("tail")
-  sh = Shell.new
-  sh.transact {
-    (sh.tail("-n 3") < "/etc/passwd") > File.open("tail.out", "w")
-    #(sh.tail("-n 3") < "/etc/passwd") > "tail.out" # と同じ.
-  }
-
---- >>(to) -> self
-
-toをフィルタに追加する. toが, 文字列ならばファイルに, IOオブジェクトであれば
-それをそのまま出力とする.
-
-@param to 出力先を指定します。文字列ならばファイルに、IOオブジェクトならばそれに出力します。
-
-使用例
-  Shell.def_system_command("tail")
-  sh = Shell.new
-  sh.transact {
-    (sh.tail("-n 3") < "/etc/passwd") >> "tail.out" 
-    #(sh.tail("-n 3") < "/etc/passwd") >> File.open("tail.out", "w") # でも同じ.
-  }
-
---- |(filter) -> object
-
-パイプ結合を filter に対して行います。
-
-@param filter Shell::Filter オブジェクトを指定します.
-
-@return filter を返します.
-
-使用例
-  Shell.def_system_command("tail")
-  Shell.def_system_command("head")
-  Shell.def_system_command("wc")
-  sh = Shell.new
-  sh.transact {
-    i = 1
-    while i <= (cat("/etc/passwd") | wc("-l")).to_s.chomp.to_i
-      puts (cat("/etc/passwd") | head("-n #{i}") | tail("-n 1")).to_s
-      i += 1
-    end
-  }
-
---- +(filter)
-執筆者募集
-
-filter1 + filter2 は filter1の出力の後, filter2の出力を行う.
-
---- to_a -> Array
---- to_s -> String
-
-実行結果を文字列、それぞれ文字列の配列で返します。
-
-使用例
-  Shell.def_system_command("wc")
-  sh = Shell.new
-  puts sh.cat("/etc/passwd").to_a
-
-  sh.transact {
-    puts (cat("/etc/passwd") | wc("-l")).to_s
-  }
-
---- input
---- input=
-執筆者募集
-
-フィルターを設定します。
-
 = class Shell < Object
+extend Exception2MessageMapper
+include Shell::Error
 
-Shellオブジェクトはカレントディレクトリを持ち, 
+Shell オブジェクトはカレントディレクトリを持ち, 
 コマンド実行はそこからの相対パスになります.
 
 == Class Methods
 
-#@#=== コマンド定義
-#@#OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
-#@#注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
-
 --- def_system_command(command, path = command) -> nil
 
-Shellのメソッドとしてcommandを登録します.
+Shell のメソッドとして command を登録します.
 
 OS上のコマンドを実行するにはまず, Shellのメソッドとして定義します.
-注) コマンドを定義しなくとも直接実行できるShell#systemコマンドもあります.
+注) コマンドを定義しなくとも直接実行できる [[m:Shell#system]] コマンドもあります.
 
 @param command Shell のメソッドとして定義するコマンドを文字列で指定します。
 
@@ -355,9 +238,13 @@ pathをカレントディレクトリとするShellオブジェクトを生成します.
 
 --- debug -> bool | Integer
 --- debug? -> bool | Integer
+#@todo
+
+デバッグ用フラグを参照します。
+
 --- debug=(val) 
 
-デバッグ用のフラグの設定および、参照を行います。
+デバッグ用のフラグを設定します。
 
 @param val bool 値や整数値を指定します。詳細は下記を参照してください。
 
@@ -394,11 +281,57 @@ Shellでもちいられるコマンドを検索する対象のパスを設定および、参照します。
 
 --- verbose -> bool  
 --- verbose? -> bool
+#@todo
+
 --- verbose=(flag)
 
 true ならば冗長な出力の設定を行います。
 
 @param flag true ならば冗長な出力の設定を行います。
+
+
+--- cascade -> bool
+#@todo
+
+--- cascade=(flag)
+#@todo
+
+--- notify(*opts){|message| ... } -> String
+#@todo
+
+#@since 1.9.1
+
+--- debug_output_exclusive_unlock{ ... } -> Mutex | nil
+#@todo
+
+@see [[m:Mutex#exclusive_unlock]]
+
+--- debug_output_lock -> Mutex
+#@todo
+
+@see [[m:Mutex#lock]]
+
+--- debug_output_locked? -> bool
+#@todo
+
+@see [[m:Mutex#locked?]]
+
+--- debug_output_synchronize
+#@todo
+
+@see [[m:Mutex#synchronize]]
+
+--- debug_output_try_lock -> bool
+#@todo
+
+@see [[m:Mutex#try_lock]]
+
+--- debug_output_unlock -> Mutex | nil
+#@todo
+
+@see [[m:Mutex#unlock]]
+
+#@end
 
 == Instance Methods
 #@#=== プロセス管理
@@ -432,16 +365,25 @@ true ならば冗長な出力の設定を行います。
   p sh.system_path #=> ["./"]
 
 --- umask -> object
+#@todo
 
 umaskを返します。
 
+--- umask=(umask)
+#@todo
+
 --- jobs -> Array
 
-執筆者募集. スケジューリングされているjobの一覧を返す.
+スケジューリングされているjobの一覧を返します。
 
---- kill(sig, job)
+--- kill(signal, job) -> Integer
+#@todo
 
-執筆者募集. jobにシグナルsigを送る.
+ジョブにシグナルを送ります。
+
+@param signal
+
+@param job
 
 #@#=== カレントディレクトリ操作
 
@@ -508,652 +450,46 @@ umaskを返します。
   sh.popd
   p sh.cwd #=> "/tmp"
 
-#@#=== ファイル/ディレクトリ操作
---- foreach(path = nil, &block) -> ()
 
-pathがファイルなら, File#foreach
-pathがディレクトリなら, Dir#foreach
-の動作をします。
+#@# 組込みコマンド
+#@include(shell/builtincommands)
 
-@param path ファイルもしくはディレクトリのパスを文字列で指定します。
-
-使用例
-  require 'shell'
-  Shell.verbose = false
-  sh = Shell.new
-  sh.foreach("/tmp"){|f|
-    puts f
-  }
-
---- open(path, mode) -> object
-
-pathがファイルなら, File#open
-pathがディレクトリなら, Dir#open
-の動作をします。
-
-@param path くわしくは、[[m:File.open]], [[m:Dir.open]]を参照してください。
-
-@param mode くわしくは、[[m:File.open]], [[m:Dir.open]]を参照してください。
-
---- unlink(path) -> self
-
-pathがファイルなら, File#unlink
-pathがディレクトリなら, Dir#unlink
-の動作をします。
-
-@param path くわしくは、[[m:File.unlink]], [[m:Dir.unlink]]を参照してください。
-
---- test(command, file1, file2 = nil) -> bool
---- [](command, file1, file2 = nil) -> bool
-
-執筆者募集。 ファイルテスト関数testと同じです。
-
-@param command ファイルテスト関数testと同じです。
-
-@param file1 文字列でファイルへのパスを指定します。
-             ファイルテスト関数testに渡される第一引数となります。
-
-@param file2 文字列でファイルへのパスを指定します。
-             ファイルテスト関数testに渡される第二引数となります。省略可。
-
-
-例:
-
-  require 'shell'
-  Shell.verbose = false
-  sh = Shell.new
-  begin
-    sh.mkdir("foo")
-  rescue
-  end
-  p sh[?e, "foo"]         #=> true
-  p sh[:e, "foo"]         #=> true
-  p sh["e", "foo"]        #=> true
-  p sh[:exists?, "foo"]   #=> true
-  p sh["exists?", "foo"]  #=> true
-
---- mkdir(*path) -> Array
-
-Dir.mkdirと同じです。 (複数可)
-
-@param path 作成するディレクトリ名を文字列で指定します。
-
-@return 作成するディレクトリの一覧の配列を返します。
-
-使用例
-  require 'shell'
-  Shell.verbose = false
-  sh = Shell.new
-  begin
-    p sh.mkdir("foo") #=> ["foo"]
-  rescue => err
-    puts err
-  end
-
-
---- rmdir(*path) -> ()
-
-Dir.rmdirと同じです。 (複数可)
-
-@param path 削除するディレクトリ名を文字列で指定します。
-
---- system(command, *opts) -> Shell::Filter
-
-commandを実行する.
-
-@param command 実行するコマンドのパスを文字列で指定します。
-
-@param opts command のオプションを文字列で指定します。複数可。
-
-使用例:
-
-  require 'shell'
-  Shell.verbose = false
-  sh = Shell.new
-
-  print sh.system("ls", "-l")
-  Shell.def_system_command("head")
-  sh.system("ls", "-l") | sh.head("-n 3") > STDOUT
-
---- rehash -> Hash
-執筆者募集。
-リハッシュする。通常使う事はありません。
-
---- transact { ... } -> object
-
-ブロック中で shell を self として実行します。
-
-例:
-
-  require 'shell'
-  Shell.def_system_command("head")
-  sh = Shell.new
-  sh.transact{
-    system("ls", "-l") | head > STDOUT
-    # transact の中では、
-    # sh.system("ls", "-l") | sh.head > STDOUT と同じとなる。
-  }
-
---- out(dev = STDOUT, &block) -> ()
-
-[[m:Shell#transact]] を呼び出しその結果を dev に出力します。
-
-@param dev  出力先をIO オブジェクトなどで指定します。
-
-@param block transact 内部で実行するシェルを指定します。
-
-
-使用例:
-  require 'shell'
-  Shell.def_system_command("head")
-  sh = Shell.new
-  File.open("out.txt", "w"){ |fp|
-    sh.out(fp) {
-      system("ls", "-l") | head("-n 3")
-    }
-  }
-
-
-#@#=== 内部コマンド
-
---- echo(*strings) -> Shell::Filter
-実行すると, それらを内容とする Filter オブジェクトを返します.
-
-@param strings シェルコマンド echo に与える引数を文字列で指定します。
-
-動作例
-  require 'shell'
-  Shell.def_system_command("head")
-  sh = Shell.new
-  sh.transact {
-    glob("*.txt").to_a.each { |file|
-      file.chomp!
-      cat(file).each { |l|
-        echo(l) | tee(file + ".tee") >> "all.tee"
-      }
-    }
-  }
-
-
---- cat(*files) -> Shell::Filter
-実行すると, それらを内容とする Filter オブジェクトを返します.
-
-@param files シェルコマンド cat に与えるファイル名を文字列で指定します。
-
-動作例
-  require 'shell'
-  Shell.def_system_command("head")
-  sh = Shell.new
-  sh.transact {
-    glob("*.txt").to_a.each { |file|
-      file.chomp!
-      cat(file).each { |l|
-        echo(l) | tee(file + ".tee") >> "all.tee"
-      }
-    }
-  }
-
-
---- glob(patten) -> Shell::Filter
-実行すると, それらを内容とする Filter オブジェクトを返します.
-
-@param patten シェルコマンド glob に与えるパターンを指定します。
-              パターンの書式については、[[m:Dir.[] ]]を参照してください。
-
-動作例
-  require 'shell'
-  Shell.def_system_command("head")
-  sh = Shell.new
-  sh.transact {
-    glob("*.txt").to_a.each { |file|
-      file.chomp!
-      cat(file).each { |l|
-        echo(l) | tee(file + ".tee") >> "all.tee"
-      }
-    }
-  }
-
-@see [[m:Dir.[] ]]
-
-
---- tee(file) -> Shell::Filter
-
-実行すると, それらを内容とする Filter オブジェクトを返します.
-
-@param file シェルコマンドtee に与えるファイル名を文字列で指定します。
-
-動作例
-  require 'shell'
-  Shell.def_system_command("head")
-  sh = Shell.new
-  sh.transact {
-    glob("*.txt").to_a.each { |file|
-      file.chomp!
-      cat(file).each { |l|
-        echo(l) | tee(file + ".tee") >> "all.tee"
-      }
-    }
-  }
-
-#@#=== 組込みコマンド
-
---- atime(filename) -> Time
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:File.atime]]
-
---- basename(filename, suffix = "")     -> String
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@param suffix サフィックスを文字列で与えます。'.*' という文字列を与えた場合、'*' はワイルドカードとして働き
-              '.' を含まない任意の文字列にマッチします。
-
-@see [[m:File.basename]]
-
-
---- chmod(mode, *filename)    -> Integer
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@param mode [[man:chmod(2)]] と同様に整数で指定します。
-
-@see [[m:File.chmod]]
-
---- chown(owner, group, *filename)    -> Integer
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param owner [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、オーナーを現在の>ままにすることができます。
-
-@param group [[man:chown(2)]] と同様に数値で指定します。nil または -1 を指定することで、グループを現在の>ままにすることができます。
-
-@param filename ファイル名を表す文字列を指定します。
-
-@see [[m:File.chown]]
-
---- ctime(filename)    -> Time
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:File.ctime]]
-
---- delete(*filename)    -> Integer
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@see [[m:File.delete]]
-
---- dirname(filename)    -> String
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@see [[m:File.dirname]]
-
---- ftype(filename)    -> String
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@see [[m:File.ftype]]
-
---- join(*item)    -> String
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param item 連結したいディレクトリ名やファイル名を文字列で与えます。
-
-@see [[m:File.join]]
-
---- link(old, new)    -> 0
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param old ファイル名を表す文字列を指定します。
-
-@param new ファイル名を表す文字列を指定します。
-
-@see [[m:File.link]]
-
-
---- lstat(filename)   -> File::Stat
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@see [[m:File.lstat]]
-
---- mtime(filename)    -> Time
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:File.mtime]]
-
---- readlink(path)    -> String
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param path シンボリックリンクを表す文字列を指定します。
-
-@see [[m:File.readlink]]
-
---- rename(from, to)    -> 0
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param from ファイルの名前を文字列で与えます。
-
-@param to 新しいファイル名を文字列で与えます。
-
-@see [[m:File.rename]]
-
---- split(pathname)    -> [String]
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param pathname パス名を表す文字列を指定します。
-
-@see [[m:File.split]]
-
---- stat(filename)    -> File::Stat
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@see [[m:File.stat]]
-
-
---- symlink(old, new)    -> 0
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param old ファイル名を表す文字列を指定します。
-
-@param new シンボリックリンクを表す文字列を指定します。
-
-@see [[m:File.symlink]]
-
-
---- truncate(path, length)    -> 0
-
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param path パスを表す文字列を指定します。
-
-@param length 変更したいサイズを整数で与えます。
-
-@see [[m:File.truncate]]
-
---- utime(atime, mtime, *filename)    -> Integer
-Fileクラスにある同名のクラスメソッドと同じです.
-
-@param filename ファイル名を表す文字列を指定します。
-
-@param atime 最終アクセス時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
-
-@param utime 更新時刻を [[c:Time]] か、起算時からの経過秒数を数値で指定します。
-
-@see [[m:File.utime]]
-
---- blockdev?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#blockdev?]]
-
---- chardev?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#chardev?]]
-
---- directory?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#directory?]]
-
---- executable?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#executable?]]
-
---- executable_real?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#executable_real?]]
-
---- exist?(file) -> bool
---- exists?(file) -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#exist?]] [[m:FileTest.#exists?]]
-
---- file?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#file?]]
-
---- grpowned?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#grpowned?]]
-
---- owned?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#owned?]]
-
---- pipe?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列か IO オブジェクトを指定します。
-
-@see [[m:FileTest.#pipe?]]
-
---- readable?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#readable?]]
-
---- readable_real?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#readable_real?]]
-
---- setgid?(file) -> bool
-
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#setgid?]]
-
---- setuid?(file)    -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#setuid?]]
-
---- size(file) -> Integer
---- size?(file) -> Integer | nil
-
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#size]] [[m:FileTest.#size?]]
-
---- socket?(file) -> bool
-
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#socket?]]
-
-
---- sticky?(file) -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#sticky?]]
-
---- symlink?(file) -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#symlink?]]
-
---- writable?(file) -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#writable?]]
-
---- writable_real?(file) -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#writable_real?]]
-
---- zero?(file) -> bool
-FileTestクラスにある同名のクラスメソッドと同じです.
-
-@param file ファイル名を表す文字列を指定します。
-
-@see [[m:FileTest.#zero?]]
-
-#@until 1.9.1
---- syscopy(from, to) -> bool
-
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param from ファイルの名前を文字列で与えます。
-
-@param to 新しいファイル名を文字列で与えます。
-
-@see [[m:File.syscopy]]
-
---- copy(from, to) -> bool
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param from ファイルの名前を文字列で与えます。
-
-@param to 新しいファイル名を文字列で与えます。
-
-@see [[m:File.copy]]
-
---- move(from, to) -> bool
-
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param from ファイルの名前を文字列で与えます。
-
-@param to 新しいファイル名を文字列で与えます。
-
-@see [[m:File.move]]
-
---- compare(file1, file2) -> bool
-
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param file1 ファイルの名前を文字列で与えます。
-
-@param file2 新しいファイル名を文字列で与えます。
-
-@see [[m:File.compare]]
-
---- safe_unlink(*filenames) -> Array
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param filenames 削除するファイルを指定します。
-
-@see [[m:File.safe_unlink]]
-
---- makedirs(*dirs) -> Array
-
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param dirs 作成するディレクトリを指定します。
-
-@see [[m:File.makedirs]]
-
---- install(from, to, mode = nil, verbose = false) -> () 
-
-FileToolsクラスにある同名のクラスメソッドと同じです.
-
-@param from コピー元のファイル。
-
-@param to コピー先のファイル。
-
-@param mode ファイルのアクセスモード。8進数で指定します。
-
-@param verbose 真を指定すると詳細を表示します。
-
-@see [[m:File.install]]
-
---- cmp
-
-[[m:Shell#compare]] と同じです。
-
---- mv
-
-[[m:Shell#move]] と同じです。
-
---- cp
-
-[[m:Shell#copy]] と同じです。
-
---- rm_f
-
-[[m:Shell#safe_unlink]] と同じです。
-
---- mkpath
-
-[[m:Shell#makedirs]] と同じです。
-
-#@end
-
---- expand_path(path)
+--- expand_path(path) -> String
 
 Fileクラスにある同名のクラスメソッドと同じです.
 
 @param path ファイル名を表す文字列を指定します。
 
 @see [[m:File.expand_path]]
+
+--- verbose -> bool  
+--- verbose? -> bool
+#@todo
+
+--- verbose=(flag)
+#@todo
+
+--- debug -> bool | Integer
+--- debug? -> bool | Integer
+#@todo
+
+--- debug=(flag)
+#@todo
+
+--- dirs -> [String]
+--- dir_stack -> [String]
+#@todo
+
+--- command_processor -> Shell::CommandProcessor
+#@todo
+
+--- process_controller -> Shell::ProcessController
+#@todo
+
+--- record_separator -> String
+#@todo
+
+--- record_separator=(rs)
+#@todo
 
 

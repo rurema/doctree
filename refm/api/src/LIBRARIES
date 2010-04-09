@@ -362,6 +362,12 @@ sha1
 #@end
 #@end
 shell
+shell/error
+shell/command-processor
+shell/process-controller
+shell/filter
+shell/system-command
+shell/builtin-command
 shellwords
 singleton
 #@if("1.8.1" <= version and version < "1.9.1")
