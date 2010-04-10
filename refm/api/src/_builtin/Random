@@ -157,4 +157,18 @@ Rangeオブジェクトの場合はrange.member?(number) == trueになるような数値を返します
 動作例;
   p Random.new(3).seed # => 3
 
+== Private Instance Methods
+--- state -> Integer
+  C言語レベルで定義されている構造体MTをの状態を参照します。詳しくはrandom.c を参照してください。
+
+--- left -> Integer
+  C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
+
+== Private Singleton Methods
+
+--- state -> Integer
+  C言語レベルで定義されている構造体MTの静的変数default_randの状態を参照します。詳しくはrandom.c を参照してください。
+
+--- left -> Integer
+  C言語レベルで定義されている構造体MTの静的変数default_randの変数leftを参照します。詳しくはrandom.c を参照してください。
 #@end
