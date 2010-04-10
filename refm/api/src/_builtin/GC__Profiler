@@ -102,4 +102,10 @@ GC のプロファイル情報をフォーマットし、文字列として返します。
 
 @see [[m:GC::Profiler.result]]
 
+#@since 1.9.2
+--- total_time -> Float
+#@todo
+
+return total time that GC used. (msec)
+#@end
 #@end
