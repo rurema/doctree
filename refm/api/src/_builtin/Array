@@ -1694,17 +1694,18 @@ srand()が有効です。
 #@end
 
 #@since 1.9.2
---- keep_if {|item| block } -> Array
+--- keep_if {|item| block } -> self
+--- keep_if -> Enumerator
 #@todo
 
-Deletes every element of <i>self</i> for which <i>block</i> evaluates
-to <code>false</code>.
+ブロックが false を返した要素を削除します。
 
    a = %w{ a b c d e f }
    a.keep_if {|v| v =~ /[aeiou]/}   #=> ["a", "e"]
 
 @see [[m:Array#select!]]
---- select! {|item| block } -> Array
+--- select! {|item| block } -> self | nil
+--- select! -> Enumerator
 #@todo
 
 Invokes the block passing in successive elements from
