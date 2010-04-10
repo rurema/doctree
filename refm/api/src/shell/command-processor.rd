@@ -28,13 +28,13 @@ require shell/builtin-command
 
 @param command コマンド名を指定します。
 
-@params opts コマンドに与えるオプションを指定します。
+@param opts コマンドに与えるオプションを指定します。
 
 @raise SyntaxError コマンドのエイリアス作成に失敗した時に発生します。
 
 --- alias_map -> Hash
 
-[[m:Shell::CommandProcessor#alias_command]] で定義したエイリアスの一覧を返します。
+[[m:Shell::CommandProcessor.alias_command]] で定義したエイリアスの一覧を返します。
 
 --- def_builtin_commands(delegation_class, commands_specs) -> ()
 #@todo
