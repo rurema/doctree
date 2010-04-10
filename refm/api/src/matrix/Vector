@@ -1,5 +1,7 @@
 = class Vector < Object
-
+#@since 1.9.2
+include Enumerable
+#@end
 #@# [2002-04-03]  by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
 
 数 [[c:Numeric]] を要素とするベクトルを扱うクラスです。
