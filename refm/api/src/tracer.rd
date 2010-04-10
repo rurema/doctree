@@ -2,8 +2,8 @@
 
 使い方は大きく分けて2通り。
 
-ひとつは以下のようにコマンドラインからrequireする方法です。
-hoge.rbの実行をすべてトレース出力します。
+ひとつは以下のようにコマンドラインから [[m:Kernel.#require]] する方法です。
+hoge.rb の実行をすべてトレース出力します。
 
   ruby -rtracer hoge.rb
 
@@ -54,6 +54,10 @@ hoge.rbの実行をすべてトレース出力します。
 実行トレース出力をとる機能を提供するクラスです。
 
 == Class Methods
+
+--- new
+
+自身を初期化します。
 
 --- on -> nil
 --- on {...}
@@ -175,9 +179,12 @@ ruby 1.8 ではブロックを与えると警告がでます。
 
 --- verbose -> bool
 --- verbose? -> bool
+
+真ならばトレース出力の開始や終了を知らせます。
+
 --- verbose=(flag)
 
-トレース出力の開始や終了を知らせる文字列("Trace on"または"Trace off")が必要ならtrueを設定します。
+トレース出力の開始や終了を知らせる文字列("Trace on"または"Trace off")が必要なら真を設定します。
 
 @param flag トレース出力の開始や終了を知らせる文字列が必要ならtrueを設定します。
 
@@ -200,12 +207,15 @@ ruby 1.8 ではブロックを与えると警告がでます。
   #0:t5.rb:7:Kernel:<:   puts "Hello"
   Trace off
 
---- stdout -> Object
+--- stdout -> object
+
+トレース出力先を参照します。
+
 --- stdout=(fp)
 
-トレース出力先をIOオブジェクトなどに変更したり、参照することができます。
+トレース出力先を変更します。
 
-@param fp トレース出力をfp に変更します。
+@param fp 新しいトレース出力先を指定します。
 
   require 'tracer'
 
@@ -216,7 +226,97 @@ ruby 1.8 ではブロックを与えると警告がでます。
   }
   fp.close
 
+
+#@since 1.9.2
+--- display_c_call -> bool
+--- display_c_call? -> bool
+
+真ならば、ビルトインメソッドの呼び出しを表示します。
+デフォルトは偽です。
+
+--- display_c_call=(flag)
+
+ビルトインメソッドの呼び出しを表示するかどうかを設定します。
+
+@param flag ビルトインメソッドの呼び出しを表示するならば、真を指定します。
+
+--- display_process_id -> bool
+--- display_process_id? -> bool
+
+真ならば、プロセス ID を表示します。
+デフォルトは、偽です。
+
+--- display_process_id=(flag)
+
+プロセス ID を表示するかどうかを設定します。
+
+@param flag プロセス ID を表示するならば、真を指定します。
+
+--- display_thread_id -> bool
+--- display_thread_id? -> bool
+
+真ならば、スレッド ID を表示します。
+デフォルトは、真です。
+
+--- display_thread_id=(flag)
+
+スレッド ID を表示するかどうかを設定します。
+
+@param flag スレッド ID を表示するならば、真を指定します。
+
+--- stdout_mutex -> Mutex
+#@todo
+
+#@end
+
+== Instance Methods
+
+--- add_filter(p = proc)
+#@todo
+
+フィルターを追加します。
+
+@param p [[c:Proc]] オブジェクトを指定します。
+
+--- get_line(file, line) -> String
+#@todo
+
+@param file
+
+@param line
+
+--- get_thread_no -> Integer
+#@todo
+
+--- off -> ()
+
+トレース出力を中断します。
+
+--- on -> ()
+--- on{ ... } -> ()
+
+トレース出力を再開します。
+
+ブロックを与えるとブロックの実行中のみトレースを出力します。
+
+--- set_get_line_procs(file, p = proc)
+#@todo
+
+--- stdout -> IO
+
+@see [[m:Tracer.stdout]]
+
+--- trace_func(event, file, line, id, binding, klass, *) -> object | nil
+#@todo
+
+
 == Constants
+
+#@until 1.8.4
+--- MY_FILE_NAME
+#@todo
+
+#@end
 
 --- EVENT_SYMBOL
   
@@ -234,3 +334,8 @@ ruby 1.8 ではブロックを与えると警告がでます。
   }
 
 @see [[m:Tracer.add_filter]]
+
+
+--- Single -> Tracer
+#@todo
+
