@@ -117,11 +117,15 @@ Change the mode of each FILE to OCTAL-MODE.
 @see [[man:rm(1)]]
 
 --- rmdir -> ()
+#@todo
 
 空のディレクトリを削除します。
 
   ruby -run -e rmdir -- [OPTION] DIR
 
+#@since 1.8.8
+  -p          remove DIRECTORY and its ancestors.
+#@end
   -v          詳細表示
 
 @see [[man:rmdir(1)]]
