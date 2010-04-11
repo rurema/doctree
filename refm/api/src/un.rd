@@ -18,6 +18,11 @@ unがワイルドカード展開([[m:Dir.glob]]参照)します(Unix ではシェ
    ruby -run -e install -- [-pv -m mode] SOURCE DEST
    ruby -run -e chmod -- [-v] OCTAL-MODE FILE
    ruby -run -e touch -- [-v] FILE
+#@since 1.8.8
+   ruby -run -e wait_writable -- [OPTION] FILE
+   ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
+   ruby -run -e httpd -- [OPTION] DocumentRoot
+#@end
    ruby -run -e help [COMMAND]
 
 = reopen Kernel
@@ -134,3 +139,46 @@ Change the mode of each FILE to OCTAL-MODE.
 
 #@# 内部的に使用するだけ
 #@# --- setup(options = "", * long_options) -> ()
+#@since 1.8.8
+--- wait_writable -> ()
+#@todo
+
+Wait until the file becomes writable.
+
+  ruby -run -e wait_writable -- [OPTION] FILE
+
+  -n RETRY	count to retry
+  -w SEC	each wait time in seconds
+  -v		verbose
+--- mkmf -> ()
+#@todo
+
+Create makefile using mkmf.
+
+  ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
+
+  -d ARGS	run dir_config
+  -h ARGS	run have_header
+  -l ARGS	run have_library
+  -f ARGS	run have_func
+  -v ARGS	run have_var
+  -t ARGS	run have_type
+  -m ARGS	run have_macro
+  -c ARGS	run have_const
+  --vendor	install to vendor_ruby
+--- httpd -> ()
+#@todo
+
+Run WEBrick HTTP server.
+
+  ruby -run -e httpd -- [OPTION] DocumentRoot
+
+  --bind-address=ADDR         address to bind
+  --port=NUM                  listening port number
+  --max-clients=MAX           max number of simultaneous clients
+  --temp-dir=DIR              temporary directory
+  --do-not-reverse-lookup     disable reverse lookup
+  --request-timeout=SECOND    request timeout in seconds
+  --http-version=VERSION      HTTP version
+  -v                          verbose
+#@end
