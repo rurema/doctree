@@ -133,6 +133,19 @@ schemes を与えた場合は、そのスキームの URI にのみマッチする
 
 URI 文字列をエンコードした文字列を返します。
 
+#@since 1.9.2
+このメソッドは obsolete です。
+
+代わりに
+[[m:ERB::Util.url_encode]],
+[[m:CGI.escape]],
+[[m:URI.encode_www_form_component]],
+[[m:WEBrick::HTTPUtils.escape_form]],
+[[m:WEBrick::HTTPUtils.escape]]
+などの使用を検討してください。
+詳細は [[ruby-core:29293]] からのスレッドを参照してください。
+#@end
+
 例:
   require 'uri'
   p URI.escape('http://images.google.co.jp/images?q=モナリザ&ie=EUC-JP') 
@@ -147,6 +160,10 @@ URI 文字列をエンコードした文字列を返します。
 --- decode(str)      -> String
 
 URI 文字列をデコードした文字列を返します。
+
+#@since 1.9.2
+このメソッドは obsolete です。
+#@end
 
 例:
   require 'uri'
