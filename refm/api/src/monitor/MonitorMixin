@@ -2,12 +2,16 @@
 
 スレッドの同期機構としてのモニター機能を提供するモジュールです。
 
-=== 例
+クラスに [[m:Module#include]] したり、オブジェクトに
+[[m:Object#extend]] したりすることでそのクラス/オブジェクトに
+モニタ機能を追加します。
 
+=== 例
+消費者、生産者問題の例
   require 'monitor'
-  
+    
   buf = []
-  buf.extend(MonitorMixin)
+  buf.extend(MonitorMixin) # 配列にモニタ機能を追加
   empty_cond = buf.new_cond
   
   # consumer
@@ -68,11 +72,15 @@ super ではなく super() を呼ぶ必要があります。
 
 == Instance Methods
 
---- mon_enter
-#@todo
+--- mon_enter -> ()
 
-モニターをロックします。一度に一つのスレッドだけがモニターをロックできます。
-[[m:Mutex#lock]] に相当します。返り値は不定です。
+モニターをロックします。
+
+一度に一つのスレッドだけがモニターをロックできます。
+既にモニターがロックされている場合は、ロックが開放されるまで
+そのスレッドは待ちます。
+
+[[m:Mutex#lock]] に相当します。
 Mutex#lock と違うのは現在のモニターの所有者が現在実行されているスレッドである場合、
 何度でもロックできる点です。ロックした回数だけ mon_exit を呼ばなければモニターは
 解放されません。
@@ -94,61 +102,32 @@ Mutex#lock ではデッドロックが起きます。
   m.lock
   m.lock # => deadlock; recursive locking (ThreadError)
 
---- mon_exit
-#@todo
+--- mon_exit -> ()
 
-モニターのロックを解放します。mon_enter でロックした回数だけ mon_exit を
-呼ばなければモニターは解放されません。返り値は不定です。
+モニターのロックを解放します。
 
-モニターが解放されればモニターのロック待ちになっていたスレッドの実行は
-再開されます。
+mon_enter でロックした回数だけ mon_exit を
+呼ばなければモニターは解放されません。
 
---- mon_synchronize { ... }
---- synchronize     { ... }
-#@todo
+モニターが解放されればモニターのロック待ちになっていた
+スレッドが一つ実行を再開します。
+
+--- mon_synchronize { ... } -> object
+--- synchronize     { ... } -> object
 
 モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
 
-#@since 1.8.1
---- mon_try_enter
-#@end
---- try_mon_enter
-#@todo
+ブロックの評価値を返り値として返します。
 
-モニターを開始しようとして成功した場合、true を返します。
-つまりモニターしているスレッドがいないか、モニターしているのがスレッドが
-現在のスレッドの場合に true を返します。
+--- mon_try_enter -> bool
+--- try_mon_enter -> bool
 
---- new_cond
-#@todo
+モニターのロックを取得しようと試みます。
+ロックに成功した(ロックが開放状態だった、もしくは
+ロックを取得していたスレッドが自分自身であった)場合には
+真を返します。
 
-新しい [[c:MonitorMixin::ConditionVariable]] を生成して返します。
+--- new_cond -> MonitorMixin::ConditionVariable
+モニタに関連付けられた、新しい 
+[[c:MonitorMixin::ConditionVariable]] を生成して返します。
 
-#@if (version <= "1.8.0")
-= module MonitorMixin::Accesible
-
-== Protected Instance Methods
-
---- mon_owner
---- mon_owner=(owner)
-#@todo
-
---- mon_count
---- mon_count=(count)
-#@todo
-
---- mon_entering_queue
-#@todo
-
---- mon_waiting_queue
-#@todo
-#@end
-
-#@if (version <= "1.8.0")
-= module MonitorMixin::Initializable
-
-== Protected Instance Methods
-
---- mon_initialize
-#@todo
-#@end
