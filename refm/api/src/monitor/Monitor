@@ -5,6 +5,7 @@ include MonitorMixin
 スレッドの同期機構としてのモニター機能を提供するクラスです。
 また同じスレッドから何度も lock できる Mutex としての機能も提供します。
 
+
 === 例
 
   require 'monitor'
@@ -16,7 +17,7 @@ include MonitorMixin
   # consumer
   Thread.start do
     loop do
-      buf.synchronize do
+      mon.synchronize do
         empty_cond.wait_while { buf.empty? }
         print buf.shift
       end
@@ -25,7 +26,7 @@ include MonitorMixin
   
   # producer
   while line = ARGF.gets
-    buf.synchronize do
+    mon.synchronize do
       buf.push(line)
       empty_cond.signal
     end
@@ -54,40 +55,45 @@ include MonitorMixin
 
 == Class Methods
 
---- new
-#@todo
-
-Monitor オブジェクトを生成します。
+--- new -> Monitor
+新しい Monitor オブジェクトを生成します。
 
 == Instance Methods
 
---- mon_enter
---- enter
-#@todo
+--- enter -> ()
 
-モニターをロックします。[[m:MonitorMixin#mon_enter]] を
-参照して下さい。
+モニターをロックします。
 
---- mon_exit
---- exit
-#@todo
+@see [[m:MonitorMixin#mon_enter]]
 
-モニターを解放します。[[m:MonitorMixin#mon_exit]] を
-参照して下さい。
+--- mon_exit -> ()
+--- exit -> ()
 
---- mon_synchronize { ... }
---- synchronize     { ... }
-#@todo
+モニターのロックを解放します。
 
-[[m:MonitorMixin#mon_synchronize]] を参照して下さい。
+@see [[m:MonitorMixin#mon_exit]]
 
---- mon_try_enter
---- try_enter
-#@todo
+--- mon_synchronize { ... } -> object
+--- synchronize     { ... } -> object
 
-[[m:MonitorMixin#mon_try_enter]] を参照して下さい。
+モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
 
---- new_cond
-#@todo
+ブロックの評価値を返り値として返します。
 
-[[m:MonitorMixin#new_cond]] を参照して下さい。
+@see [[m:MonitorMixin#mon_synchronize]]
+
+--- mon_try_enter -> bool
+--- try_enter -> bool
+
+モニターのロックを取得しようと試みます。
+ロックに成功した(ロックが開放状態だった、もしくは
+ロックを取得していたスレッドが自分自身であった)場合には
+真を返します。
+
+@see [[m:MonitorMixin#mon_try_enter]]
+
+--- new_cond -> MonitorMixin::ConditionVariable
+モニタに関連付けられた、新しい 
+[[c:MonitorMixin::ConditionVariable]] を生成して返します。
+
+@see [[m:MonitorMixin#new_cond]]

@@ -112,12 +112,16 @@ mon_enter でロックした回数だけ mon_exit を
 モニターが解放されればモニターのロック待ちになっていた
 スレッドが一つ実行を再開します。
 
+@raise ThreadError ロックを持っていないスレッドが呼びだした場合に発生します
+
 --- mon_synchronize { ... } -> object
 --- synchronize     { ... } -> object
 
 モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
 
 ブロックの評価値を返り値として返します。
+
+@see [[m:MonitorMixin::mon_enter]]
 
 --- mon_try_enter -> bool
 --- try_mon_enter -> bool
@@ -126,6 +130,9 @@ mon_enter でロックした回数だけ mon_exit を
 ロックに成功した(ロックが開放状態だった、もしくは
 ロックを取得していたスレッドが自分自身であった)場合には
 真を返します。
+
+ロックができなかった場合は偽を返し、実行を継続します。この場合には
+スレッドはブロックしません。
 
 --- new_cond -> MonitorMixin::ConditionVariable
 モニタに関連付けられた、新しい 

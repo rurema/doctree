@@ -48,6 +48,8 @@ timeout を与えた場合は最大 timeout 秒まで停止した後にスレッドを
 true を返します。timeout が与えられていて待ち時間が timeout を
 越えた場合は false を返します。
 
+@param timeout タイムアウトまでの秒数。指定しなかった場合はタイムアウトしません。
+
 @raise ThreadError ロックを持っていないスレッドがこのメソッドを呼びだした場合に発生します
 #@if (version == "1.9.1")
 @raise NotImplementedError タイムアウトは 1.9.1 では実装されていません
@@ -71,6 +73,12 @@ true を返します。timeout が与えられていて待ち時間が timeout を
 --- wait_until { ... } -> ()
 モニタのロックを開放し、現在のスレッドを
 ブロックで指定した条件を満たすまで停止します。
+
+[[m:MonitorMixin::ConditionVariable#signal]] や
+[[m:MonitorMixin::ConditionVariable#broadcast]] で
+スレッドが起こされると、ロックを取得し、ブロックを評価し
+その結果によってこのメソッドから抜け処理を継続するか
+再びロックを開放しスレッドを停止するかを決めます。
 
 @see [[m:MonitorMixin::ConditionVariable#wait]]
 
