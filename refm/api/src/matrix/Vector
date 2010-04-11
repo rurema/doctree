@@ -235,8 +235,24 @@ i 番目の要素を返します。インデックスは 0 から開始します。
 
 --- r -> Float
 
-ベクトルの絶対値を返します。
-ベクトルの絶対値は、各要素の２乗の和の正の平方根を返します。
+自身の大きさ（ノルム）を返します。
+ 
+ただし、要素の自乗和の平方根（Math.sqrt）を計算しているので、
+要素が複素数の場合は一般に正しい値（要素の絶対値自乗の和の平方根）
+を返しません。
+
+ Vector[3, 4].r # => 5.0
+ Vector[Complex(0, 1), 0].r # => Complex(0.0, 1.0)   正しくは 1.0
+
+要素が複素数の場合にも対応したメソッドは以下のように定義できます。
+
+  class Vector
+    def norm
+      Math.sqrt @elements.inject(0){|sum, z| sum+(z*z).abs}
+    end
+  end
+  
+  Vector[Complex(0, 1), 0].norm # => 1.0
 
 --- collect {|x| ... } -> Vector
 --- map {|x| ... } -> Vector
