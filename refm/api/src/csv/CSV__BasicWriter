@@ -5,7 +5,7 @@ CSVデータ書き込み時に用いられるクラス
 
 == Class Methods
 
---- new(str_or_writable[, fs = ','[, rs = nil]]) -> CSV::BasicWriter
+--- new(str_or_writable, fs = ',', rs = nil) -> CSV::BasicWriter
 引数str_or_writableを出力先として[[c:CSV::BasicWriter]]オブジェクトを生成します。
 
 @param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<メソッドが定義されている必要があります。

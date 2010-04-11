@@ -4,7 +4,7 @@ CSVの読み込み処理を行うクラス
 
 == Class Methods
 
---- new(io[, fs = ','[, rs = nil]]) -> CSV::IOReader
+--- new(io, fs = ',', rs = nil) -> CSV::IOReader
 引数に従い、[[c:CSV::IOReader]]クラスのオブジェクトを生成します。
 
 @param io 読み込み先の指定。

@@ -6,7 +6,7 @@ CSV形式データのカラム（Cell）を操作するためのクラス。
 
 == Class Methods
 
---- new([data = '', is_null = false]) -> CSV::Cell
+--- new(data = '', is_null = false) -> CSV::Cell
 引数dataを値として持つ[[c:CSV::Cell]]クラスのオブジェクトを生成します。
 
 @param data Cellデータの初期値
