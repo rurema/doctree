@@ -434,7 +434,7 @@ path ¤¬¥Õ¥¡¥¤¥ë¤Ê¤é¡¢ [[m:File.open]] path ¤¬¥Ç¥£¥ì¥¯¥È¥ê¤Ê¤é¡¢ [[m:Dir.open]] ¤
 
 --- unlink(path) -> self
 
-path ¤¬¥Õ¥¡¥¤¥ë¤Ê¤é¡¢ [[m:File.unlink path]] ¤¬¥Ç¥£¥ì¥¯¥È¥ê¤Ê¤é¡¢ [[m:Dir.unlink]] ¤ÎÆ°ºî¤ò¤·¤Þ¤¹¡£
+path ¤¬¥Õ¥¡¥¤¥ë¤Ê¤é [[m:File.unlink]]¡¢path ¤¬¥Ç¥£¥ì¥¯¥È¥ê¤Ê¤é [[m:Dir.unlink]] ¤ÎÆ°ºî¤ò¤·¤Þ¤¹¡£
 
 @param path ºï½ü¤·¤¿¤¤¥Ñ¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
 
