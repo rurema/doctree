@@ -2924,9 +2924,9 @@ false を返します。
 文字列の内容が、現在のエンコーディングに照らしあわせて妥当であれば
 true を返します。さもなくば false を返します。
 
---- encode(encoding[, options]) -> String
---- encode(encoding, from_encoding[, options]) -> String
---- encode([options]) -> String
+--- encode(encoding, options = nil) -> String
+--- encode(encoding, from_encoding, options = nil) -> String
+--- encode(options = nil) -> String
 
 self を指定したエンコーディングに変換した文字列を作成して返します。引数
 を2つ与えた場合、第二引数は変換元のエンコーディングを意味します。さもな
@@ -2972,8 +2972,8 @@ self を指定したエンコーディングに変換した文字列を作成して返します。引数
 
 @see [[m:String#encode!]]
 
---- encode!(encoding[, options])                -> self
---- encode!(encoding, from_encoding[, options]) -> self
+--- encode!(encoding, options = nil)                -> self
+--- encode!(encoding, from_encoding, options = nil) -> self
 
 self を指定したエンコーディングに変換し、自身を置き換えます。引数を2つ
 与えた場合、第二引数は変換元のエンコーディングを意味します。さもなくば
