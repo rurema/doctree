@@ -5,6 +5,7 @@ include MonitorMixin
 スレッドの同期機構としてのモニター機能を提供するクラスです。
 また同じスレッドから何度も lock できる Mutex としての機能も提供します。
 
+[[c:MonitorMixin]] を include し、いくつかの別名を定義したクラスです。
 
 === 例
 
@@ -61,39 +62,10 @@ include MonitorMixin
 == Instance Methods
 
 --- enter -> ()
+[[m:MonitorMixin#mon_enter]] の別名です。
 
-モニターをロックします。
-
-@see [[m:MonitorMixin#mon_enter]]
-
---- mon_exit -> ()
 --- exit -> ()
+[[m:MonitorMixin#mon_exit]] の別名です。
 
-モニターのロックを解放します。
-
-@see [[m:MonitorMixin#mon_exit]]
-
---- mon_synchronize { ... } -> object
---- synchronize     { ... } -> object
-
-モニターをロックし、ブロックを実行します。実行後に必ずモニターのロックを解放します。
-
-ブロックの評価値を返り値として返します。
-
-@see [[m:MonitorMixin#mon_synchronize]]
-
---- mon_try_enter -> bool
 --- try_enter -> bool
-
-モニターのロックを取得しようと試みます。
-ロックに成功した(ロックが開放状態だった、もしくは
-ロックを取得していたスレッドが自分自身であった)場合には
-真を返します。
-
-@see [[m:MonitorMixin#mon_try_enter]]
-
---- new_cond -> MonitorMixin::ConditionVariable
-モニタに関連付けられた、新しい 
-[[c:MonitorMixin::ConditionVariable]] を生成して返します。
-
-@see [[m:MonitorMixin#new_cond]]
+[[m:MonitorMixin#mon_try_enter]] の別名です。

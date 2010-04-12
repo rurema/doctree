@@ -121,7 +121,7 @@ mon_enter でロックした回数だけ mon_exit を
 
 ブロックの評価値を返り値として返します。
 
-@see [[m:MonitorMixin::mon_enter]]
+@see [[m:MonitorMixin#mon_enter]]
 
 --- mon_try_enter -> bool
 --- try_mon_enter -> bool
