@@ -12,24 +12,24 @@
     
   buf = []
   buf.extend(MonitorMixin) # 配列にモニタ機能を追加
-  empty_cond = buf.new_cond
+  empty_cond = buf.new_cond # 配列が空であるかないかを通知する条件変数
   
   # consumer
   Thread.start do
     loop do
-      buf.synchronize do
-        empty_cond.wait_while { buf.empty? }
-        print buf.shift
-      end
+      buf.synchronize do # ロックする
+        empty_cond.wait_while { buf.empty? } # 配列が空である間はロックを開放して待つ
+        print buf.shift # 配列が空でなくなった後ロックを取得してこの行を実行
+      end # ロックを開放
     end
   end
   
   # producer
   while line = ARGF.gets
-    buf.synchronize do
-      buf.push(line)
-      empty_cond.signal
-    end
+    buf.synchronize do # ロックする
+      buf.push(line) # 配列を変更(追加)
+      empty_cond.signal # 配列に要素が追加されたことを条件変数を通して通知
+    end # ここでロックを開放
   end
 
 === 初期化
