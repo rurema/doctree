@@ -78,6 +78,6 @@ self をロックしようとして、成功した場合、真を返し、ロックを得ます。
 #@until 1.9.1
 self がロックされていなければ nil を返します。そうでなければself を返します。
 #@else
-@raiseThreadError ロックされていない場合に unlock を呼ぶと発生します
+@raise ThreadError ロックされていない場合に unlock を呼ぶと発生します
 #@end
 
