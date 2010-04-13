@@ -178,8 +178,8 @@ miniunit/mock                   okkez
 miniunit/spec                   okkez
 miniunit/unit                   okkez
 mkmf                            bornite
-monitor                         ohai
-mutex_m                         ohai            
+monitor                         ohai            done
+mutex_m                         ohai            done
 net/ftp                         ohai            done
 net/ftptls
 net/http                        ohai            done
