@@ -152,6 +152,14 @@ Returns whether ASCII-compatible or not.
 Îã:
   Encoding::UTF_8.ascii_compatible?     #=> true
   Encoding::UTF_16BE.ascii_compatible?  #=> false
+
+--- replicate(name) -> Encoding
+#@todo
+
+Returns a replicated encoding of _enc whose name is _name_.
+The new encoding should have the same byte structure of _enc_.
+If _name_ is used by another encoding, raise ArgumentError.
+
 #@end
 == Constants
 
