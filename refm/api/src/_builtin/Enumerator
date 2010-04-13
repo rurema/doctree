@@ -220,10 +220,6 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
     enum.rewind
     p enum.next # => 120
 
---- to_splat -> Array
-
-この enumerator を多重代入などのための配列に変換します。
-
 #@since 1.9.2
 --- with_index(offset = 0) {|(*args), idx| ... } -> object
 --- with_index(offset = 0) -> Enumerator

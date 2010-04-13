@@ -336,42 +336,6 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
 
 @see [[m:Object#methods]],[[m:Object#extend]]
 
-#@since 1.9.1
---- to_splat -> Array
-#@#nomethod
-
-オブジェクトの [[c:Array]] への暗黙の変換が必要なときに内部で呼ばれます。
-デフォルトでは定義されていません。`*'による配列展開の実体です。
-
-説明のためここに記載してありますが、
-このメソッドは実際には Object クラスには定義されていません。
-必要に応じてサブクラスで定義すべきものです。
-
-メソッド呼び出し時の引数や、
-多重代入の右辺値に`*'をつけて配列変換を行ったときに内部で呼ばれます。
-
-  class Foo
-    def to_ary
-      [1,2,3]
-    end
-    def to_splat
-      [4,5,6]
-    end
-  end
-
-  a,b = *Foo.new
-  p [a,b] #=> [4, 5]
-  a,b = Foo.new
-  p [a,b] #=> [1, 2]
-  
-  def doi(a,*b)
-    p b
-  end
-  
-  doi(*Foo.new) #=> [5, 6]
-
-@see [[m:Object#to_ary]],[[m:Object#to_a]],[[m:Kernel.#Array]]
-#@end
 --- to_a -> Array
 #@#nomethod
 
@@ -484,11 +448,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
   it = Foo.new
   p([1,2] + it) #=> [1, 2, 3, 4]
 
-#@since 1.9.1
-@see [[m:Object#to_splat]],[[m:Object#to_a]],[[m:Kernel.#Array]]
-#@else
 @see [[m:Object#to_a]],[[m:Kernel.#Array]]
-#@end
 
 --- to_hash -> Hash
 #@#nomethod

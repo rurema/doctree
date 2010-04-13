@@ -1384,10 +1384,6 @@ sort_by の破壊的バージョンです。
 #@end
 
 --- to_a       -> Array
-#@since 1.9.1
---- to_splat   -> Array
-#@# ない？
-#@end
 
 self を返します。ただし、Array のサブクラスのインスタンスに対して呼ばれた時は、
 自身を Array に変換したものを返します。
