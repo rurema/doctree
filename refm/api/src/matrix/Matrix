@@ -184,6 +184,20 @@ n次の零行列を生成します。
 
 @param column (n,1)型の行列として生成する[[c:Vector]] [[c:Array]] オブジェクト
 
+#@since 1.9.2
+--- build(row_size, column_size) {|row, col| ... } -> Matrix
+#@todo
+
+Creates a matrix of size +row_size+ x +column_size+.
+It fills the values by calling the given block,
+passing the current row and column.
+Returns an enumerator if no block is given.
+
+  m = Matrix.build(2, 4) {|row, col| col - row }
+    => Matrix[[0, 1, 2, 3], [-1, 0, 1, 2]]
+  m = Matrix.build(3) { rand }
+    => a 3x3 matrix with random elements
+#@end
 == Instance Methods
 --- [](i, j) -> ()
 #@if (version >= "1.9.1")
