@@ -64,7 +64,7 @@ require shell/builtin-command
 
 ビルトインコマンドを定義します。
 
---- install_system_commands -> (prefix = "sys_")
+--- install_system_commands(prefix = "sys_") -> ()
 
 全てのシステムコマンドをメソッドとして定義します。
 
