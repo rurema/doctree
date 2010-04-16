@@ -22,9 +22,9 @@ CSV (Comma Separated Values) を扱うクラスです。
 
 == Class Methods
 
---- open(path, mode[, fs = nil[, rs = nil]]) {|row| ... } -> nil
---- open(path, mode[, fs = nil[, rs = nil]]) -> CSV::Reader
---- open(path, mode[, fs = nil[, rs = nil]]) -> CSV::Writer
+--- open(path, mode, fs = nil, rs = nil) {|row| ... } -> nil
+--- open(path, mode, fs = nil, rs = nil) -> CSV::Reader
+--- open(path, mode, fs = nil, rs = nil) -> CSV::Writer
 
 CSVファイルを読み込んでパースします。
 
@@ -74,7 +74,7 @@ tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外で指定
 
 #@since 1.8.2
 
---- foreach(path[, rs = nil]) {|row| ... } -> nil
+--- foreach(path, rs = nil) {|row| ... } -> nil
 
 読み込みモードでファイルを開き、各行を配列でブロックに渡します。
 
@@ -93,7 +93,7 @@ tsv(Tab Separated Values)ファイルなどのセパレータをカンマ以外で指定
     puts row.join(':')
   }
 
---- read(path[, length = nil[, offset = nil]]) -> Array
+--- read(path, length = nil, offset = nil) -> Array
 
 path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
@@ -106,7 +106,7 @@ path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 パース時に""(空文字)と値なしを区別します。
 例えば、a, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
 
---- readlines(path[, rs = nil]) -> Array
+--- readlines(path, rs = nil) -> Array
 
 path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
@@ -121,8 +121,8 @@ path で指定された CSV ファイルを読み込み、配列の配列でデータを返します。
 
 #@end
 
---- generate(path[, fs = nil[, rs = nil]]) -> CSV::BasicWriter
---- generate(path[, fs = nil[, rs = nil]]) {|writer| ... } -> nil
+--- generate(path, fs = nil, rs = nil) -> CSV::BasicWriter
+--- generate(path, fs = nil, rs = nil) {|writer| ... } -> nil
 
 path で指定されたファイルを書き込みモードで開き、ブロックに渡します。
 ブロック未指定の場合は [[c:CSV::BasicWriter]] を返します。
@@ -150,8 +150,8 @@ path で指定されたファイルを書き込みモードで開き、ブロックに渡します。
     }
   }
 
---- parse(str_or_readable[, fs = nil[, rs = nil]]) -> Array
---- parse(str_or_readable[, fs = nil[, rs = nil]]){|rows| ... } -> nil
+--- parse(str_or_readable, fs = nil, rs = nil) -> Array
+--- parse(str_or_readable, fs = nil, rs = nil){|rows| ... } -> nil
 
 str_or_readable で指定された文字列をパースし配列の配列に変換、ブロックに渡します。
 ブロック未指定の場合は変換された配列の配列を返します。
@@ -167,8 +167,8 @@ str_or_readable で指定された文字列をパースし配列の配列に変換、ブロックに渡します
     p rows
   }
 
---- generate_line(row[, fs = nil[, rs = nil]]) -> String
---- generate_line(row[, fs = nil[, rs = nil]]){|s| ... } -> nil
+--- generate_line(row, fs = nil, rs = nil) -> String
+--- generate_line(row, fs = nil, rs = nil){|s| ... } -> nil
 
 row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
 1行分の文字列をブロックに渡します。
@@ -180,8 +180,8 @@ row で指定された配列をパースし、fs で指定された文字をフィールドセパレータとして
 @param rs 行区切り文字の指定。nil (デフォルト) で CrLf / Lf。
           Cr を行区切りとしたい場合は ?\r を渡します。
 
---- parse_line(src[, fs = nil[, rs = nil]]) -> Array
---- parse_line(src[, fs = nil[, rs = nil]]){|row| ... } -> nil
+--- parse_line(src, fs = nil, rs = nil) -> Array
+--- parse_line(src, fs = nil, rs = nil){|row| ... } -> nil
 
 src で指定された文字列を1行分としてパースし配列に変換、ブロックに渡します。
 ブロック未指定の場合は変換された配列を返します。
@@ -193,7 +193,7 @@ src で指定された文字列を1行分としてパースし配列に変換、ブロックに渡します。
           Cr を行区切りとしたい場合は ?\r を渡します。
 
 #@if (version < "1.9.0")
---- generate_row(src, cells, out_dev[, fs = nil[, rs = nil]]) -> Fixnum
+--- generate_row(src, cells, out_dev, fs = nil, rs = nil) -> Fixnum
 
 src で指定された配列をパースして csv形式の文字列として(行区切り文字も含めて) out_dev に出力します。
 返り値として fs で区切ったフィールド(cell)の数を返します。
@@ -223,7 +223,7 @@ src で指定された配列をパースして csv形式の文字列として(行区切り文字も含めて) out
   p buf #=>"a,b\n1,2\n,A,B\n" 
 
 
---- parse_row(src, index, out_dev[, fs = nil[, rs = nil]]) -> Array
+--- parse_row(src, index, out_dev, fs = nil, rs = nil) -> Array
 
 CSV形式の文字列をパースしてCSV1行(row)分のデータを配列に変換し out_dev に出力します。
 

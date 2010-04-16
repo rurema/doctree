@@ -5,8 +5,8 @@ CSVの書き込み時のベースとなるクラス
 
 == Class Methods
 
---- generate(str_or_writable[, fs = ','[, rs = nil]]) -> CSV::BasicWriter
---- generate(str_or_writable[, fs = ','[, rs = nil]]) { |row| ... } -> nil
+--- generate(str_or_writable, fs = ',', rs = nil) -> CSV::BasicWriter
+--- generate(str_or_writable, fs = ',', rs = nil) { |row| ... } -> nil
 str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスのインスタンスを生成し、書き込み先(str_or_writable)をブロックに渡します。
 
 @param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<メソッドが定義されている必要があります。
@@ -22,7 +22,7 @@ str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスのインスタンスを
   }
   p s #=> "1,2,3,4\na,b,c\n"
 
---- create(str_or_writable[, fs = ','[, rs = nil]]) -> CSV::BasicWriter
+--- create(str_or_writable, fs = ',', rs = nil) -> CSV::BasicWriter
 str_or_writable を書き込み先とする [[c:CSV::BasicWriter]] クラスのインスタンスを生成します。
 
 @param str_or_writable CSVデータの書き込み先。このパラメータとして渡すインスタンスには<<メソッドが定義されている必要があります。

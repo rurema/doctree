@@ -22,7 +22,7 @@
 
 == Instance Methods
 
---- [](idx[, n = nil]) -> String
+--- [](idx, n = nil) -> String
 ストリームバッファから部分文字列を取り出します。
 
 @param idx 取り出す部分文字列のスタート位置

@@ -5,7 +5,7 @@ CSV形式の文字列の読み込み（パース）時に使用されるクラス
 
 == Class Methods
 
---- new(string[, fs = ','[, rs = nil]]) -> CSV::StringReader
+--- new(string, fs = ',', rs = nil) -> CSV::StringReader
 CSV形式の文字列を初期値として与えてインスタンスを生成します。
 
 @param string 初期値の文字列
