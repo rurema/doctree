@@ -281,7 +281,7 @@ case ではクラス、モジュールの所属関係をチェックすることになります。
 
 @param feature [[m:Kernel.#require]] と同様な方法で autoload する対象を指定する。
 
-@see [[m:Kernel.#autoload]] を参照。
+@see [[m:Kernel.#autoload]]
 #@end
 
 --- autoload?(const_name) -> String | nil
