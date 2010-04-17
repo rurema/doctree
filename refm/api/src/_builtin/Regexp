@@ -164,7 +164,7 @@ last_match[1] の形式では例外 [[c:NameError]] が発生します。
 #@end
 
 pattern は Regexp または String で与えます。
-String で与えた場合、それ自身と等しい文字列のみにマッチするものと解釈され、
+String で与えた場合、それ自身と等しい文字列にマッチするものと解釈され、
 エスケープされて結果の Regexp に組み込まれます。
 
   p Regexp.union("a", "?", "b") # => /a|\?|b/
