@@ -20,8 +20,8 @@
   server.start
   
   # まだサーバが動いているかを確認してみましょう。
-  GServer.in_service?(10001)           # -> true
-  server.stopped?                      # -> false
+  GServer.in_service?(10001)           # => true
+  server.stopped?                      # => false
   
   # サーバを止めます。
   server.shutdown
