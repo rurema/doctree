@@ -357,7 +357,7 @@ localfile が nil である場合には保存はしません。
 
 @param account 送りたいアカウント情報を文字列で与えます。
 
-@raise Net::FTPReplyError 応答コードが2yzでない場合にに発生します。
+@raise Net::FTPReplyError 応答コードが2yzでない場合に発生します。
 
 --- nlst(dir = nil) -> [String]
 

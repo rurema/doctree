@@ -69,7 +69,7 @@ include FileUtils
 
 --- verbose_flag -> bool
 
-この値が真の場合、詳細をを表示します。
+この値が真の場合、詳細を表示します。
 
 --- verbose_flag=(flag)
 

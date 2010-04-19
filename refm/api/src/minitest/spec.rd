@@ -190,7 +190,7 @@ BDD 風にテストを書くための [[c:MiniTest::Unit::TestCase]] に対するラッパークラス
 --- before(type = :each){ ... }
 #@todo
 
-各テストの前にに実行するブロックを登録します。
+各テストの前に実行するブロックを登録します。
 
 
 --- after(type = :each){ ... }
