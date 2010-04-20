@@ -115,8 +115,6 @@ MSDOS 環境の場合、command はサブシェル経由で実行されます。
 
 @param status 終了ステータスを boolean か整数で指定します。true の場合は成功を、false は失敗を意味します。
 
-@raise NotImplementedError メソッドが現在のプラットフォームで実装されていない場合に発生します。
-
 @see [[man:exit(3)]]
 
 #@end
