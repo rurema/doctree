@@ -49,7 +49,7 @@ String、Fload、Rational オブジェクト を BigDecimal に変換する機能を提供
 
 注意:
 
-このメソッドは [[m:BigDecimal#to_s]]("F") に置きかえられました。
+このメソッドは非推奨です。[[m:BigDecimal#to_s]]("F") を使用してください。
 
 #@until 1.9.1
 --- to_r -> Rational
