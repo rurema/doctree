@@ -1,20 +1,19 @@
 
-String、Fload、Rational オブジェクト を BigDecimal に変換する機能を提供
+String、Float、Rational オブジェクト を BigDecimal オブジェクトに変換する機能を提供
 します。
-
-ここにあるメソッドを使うには 'bigdecimal/util'を require する必要があり
-ます。
 
  * [[m:String#to_d]]
  * [[m:Float#to_d]]
  * [[m:Rational#to_d]]
 
 #@until 1.9.1
-また、BigDecimal オブジェクトからは Rational オブジェクトに変換する事も
-できるようになります。
+また、BigDecimal オブジェクトを Rational オブジェクトに変換する機能も提供します。
 
  * [[m:BigDecimal#to_r]]
 #@end
+
+これらのメソッドを使うには 'bigdecimal' と 'bigdecimal/util'を require
+する必要があります。
 
 = reopen Float
 
@@ -26,13 +25,22 @@ String、Fload、Rational オブジェクト を BigDecimal に変換する機能を提供
 
 @return [[c:BigDecimal]] に変換したオブジェクト
 
+自身を一度 [[m:Float#to_s]] で文字列に変換してから
+[[m:Kernel.#BigDecimal]] で生成するので、精度に注意してください。
+
+  1.0.to_d.to_s # => "0.1E1"
+  (1.0/0).to_d.to_s # => "Infinity"
+
+  ((1.0/3).to_d/(2.0/3).to_d).to_s # => "0.499999999999999250000000000000375E0"
+  ((1.0/3)/(2.0/3)).to_d.to_s # => "0.5E0"
+
 = reopen String
 
 == Instance Methods
 
 --- to_d -> BigDeciamal
 
-自身を [[c:BigDecimal]] に変換します。
+自身を [[c:BigDecimal]] に変換します。BigDecimal(self) と同じです。
 
 @return [[c:BigDecimal]] に変換したオブジェクト
 
