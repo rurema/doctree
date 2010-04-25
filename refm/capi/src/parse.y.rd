@@ -158,7 +158,7 @@ NODE_LISTのリストheadにNODE_LISTのノードtailを連結し、
 --- static NODE *newline_node(NODE *node)
 
 nodeがNULLでなければ現在パース中の行番号を格納した
-NODE_NEWLINEをnodeの前にに付加し、それを返す。
+NODE_NEWLINEをnodeの前に付加し、それを返す。
 
 --- static char *newtok(void)
 
