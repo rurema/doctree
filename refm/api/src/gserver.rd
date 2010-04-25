@@ -51,7 +51,7 @@ GServer オブジェクトを生成します。
 
 @param host ホストを指定します。
 
-@param maxConnextions 最大接続数を指定します。デフォルトは 4 です。
+@param maxConnections 最大接続数を指定します。デフォルトは 4 です。
 
 @param stdlog ログの出力先を指定します。デフォルトは標準エラー出力です。
 
