@@ -3,7 +3,7 @@
 有理数を扱うクラスです。
 
 「1/3」のような有理数を扱う事ができます。[[c:Integer]] や [[c:Float]]
-と同様に Rational.new ではなく、 [[m:Kernel.#Rational]]を使用して
+と同様に Rational.new ではなく、 [[m:Kernel.#Rational]] を使用して
 [[c:Rational]] オブジェクトを作成します。
 
 例:
