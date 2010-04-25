@@ -19,7 +19,7 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 
 == Instance Methods
 
---- to_d -> BigDeciamal
+--- to_d -> BigDecimal
 
 ¼«¿È¤ò [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
 
@@ -38,7 +38,7 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 
 == Instance Methods
 
---- to_d -> BigDeciamal
+--- to_d -> BigDecimal
 
 ¼«¿È¤ò [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£BigDecimal(self) ¤ÈÆ±¤¸¤Ç¤¹¡£
 
