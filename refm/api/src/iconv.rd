@@ -1,4 +1,3 @@
-#@since 1.8.0
 Iconv は UNIX 95 の iconv() 関数のラッパーで、
 さまざまな文字コード体系間で文字列の変換を行ないます。
 
@@ -143,7 +142,7 @@ iconv 関数のラッパークラスです。
 [[m:Iconv.new]], [[m:Iconv.open]] および [[m:Iconv#iconv]] の例外
 を起こします。
 
-#@since 1.9.1
+#@since 1.9.0
 --- list                       -> Array
 --- list {|*aliases| ... }     -> Array
 
@@ -160,7 +159,7 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
 
-#@since 1.9.1
+#@since 1.9.0
 --- ctlmethods -> Array
 
 #@# Returns available iconvctl() method list.
@@ -207,7 +206,7 @@ str が nil の場合、変換器をその初期シフト状態にし、
 
 @raise Iconv::OutOfRange ライブラリの内部エラーが発生した場合に発生します。
 
-#@since 1.9.1
+#@since 1.9.0
 
 --- conv(str) -> String
 
@@ -272,7 +271,6 @@ Returns trivial flag.
 例外が起こった位置からはじまる部分を返します。
 
 --- inspect    -> String
-#@todo
 
 #<type: "success", "failed"> のような形をした
 文字列を返します。
@@ -309,4 +307,3 @@ include Iconv::Failure
 include Iconv::Failure
 
 Iconv ライブラリの内部エラーです。この例外は起こらないはずです。
-#@end
