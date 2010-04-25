@@ -255,26 +255,27 @@ Returns trivial flag.
 
 == Instance Methods
 
---- success    -> String
-#@todo
+--- success    -> String | Array
 
-例外が起こるまでに変換に成功した文字列を返します。
+[[c:Iconv]] が起こす例外が発生するまで変換が成功した文字列を返します。
 
 [[m:Iconv.iconv]] でこの例外が起こったときに返される値は、
 以前の例外が起こるまでに変換に成功した文字列を要素とする配列です。
 最後の要素は変換中の文字列です。
 
---- failed    -> String
-#@todo
+--- failed    -> String | Array
 
-[[c:Iconv]] に渡された文字列のうち、
-例外が起こった位置からはじまる部分を返します。
+[[c:Iconv]] が起こす例外が発生した位置から最後までの文字列を返します。
+
+[[m:Iconv.iconv]] でこの例外が起こったときに返される値は、
+変換対象の文字列の配列のうち、変換が失敗した文字列の変換が失敗した位置から最後までの文字列と以降の文字列の配列を返します。
 
 --- inspect    -> String
+[[c:Iconv]] が起こす例外が起きた場合の情報を
 
-#<type: "success", "failed"> のような形をした
-文字列を返します。
+#<"例外の種類": "例外が発生するまでに変換した文字列", "例外が起こった位置から最後までの文字列"> 
 
+のような形式の文字列として返します。
 
 #@since 1.8.4
 = class Iconv::BrokenLibrary < RuntimeError
@@ -307,3 +308,4 @@ include Iconv::Failure
 include Iconv::Failure
 
 Iconv ライブラリの内部エラーです。この例外は起こらないはずです。
+
