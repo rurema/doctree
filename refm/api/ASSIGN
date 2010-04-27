@@ -10,7 +10,7 @@ _builtin/Bignum                 ujihisa         done
 _builtin/Binding                                done
 _builtin/Class                                  done
 _builtin/Comparable                             done
-_builtin/Complex
+_builtin/Complex                bornite
 _builtin/Continuation                           done
 _builtin/Data                                   done
 _builtin/Dir                                    done
