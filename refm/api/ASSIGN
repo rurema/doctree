@@ -186,8 +186,8 @@ net/http                        ohai            done
 net/https
 net/imap
 net/pop
-net/smtp
-net/telnet
+net/smtp                        ohai
+net/telnet                      ohai
 net/telnets
 nkf                             ohai            done
 objspace
