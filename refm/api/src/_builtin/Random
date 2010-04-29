@@ -33,7 +33,7 @@ MT19937に基づく疑似乱数生成器を提供するクラスです。
 疑似乱数を発生させます。
 
 引数が省略された時、もしくは整数の"0"、または nilが指定された場合は0以上1未満の実数を返します。
-引数が指定された場合は、maxを正の整数に変換し、0以上変換後の整数未満の整数を返します。
+負の引数が指定された場合は、maxを正の整数に変換し、0以上変換後の整数未満の整数を返します。
 
 @param max 疑似乱数生成器の最大値を指定します。
 
@@ -130,7 +130,7 @@ number が0もしくは省略された場合は、
 浮動小数点数を返します。
 
 動作例:
-p Random.new(3).rand # => 0.5507979025745755
+  p Random.new(3).rand # => 0.5507979025745755
 
 --- rand(arg) -> Integer 
 arg が IntegerもしくはBignumの場合は、arg 未満の整数を返します。
@@ -159,16 +159,16 @@ Rangeオブジェクトの場合はrange.member?(number) == trueになるような数値を返します
 
 == Private Instance Methods
 --- state -> Integer
-  C言語レベルで定義されている構造体MTの状態を参照します。詳しくはrandom.c を参照してください。
+C言語レベルで定義されている構造体MTの状態を参照します。詳しくはrandom.c を参照してください。
 
 --- left -> Integer
-  C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
+C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
 
 == Private Singleton Methods
 
 --- state -> Integer
-  C言語レベルで定義されている構造体MTの静的変数default_randの状態を参照します。詳しくはrandom.c を参照してください。
+C言語レベルで定義されている構造体MTの静的変数default_randの状態を参照します。詳しくはrandom.c を参照してください。
 
 --- left -> Integer
-  C言語レベルで定義されている構造体MTの静的変数default_randの変数leftを参照します。詳しくはrandom.c を参照してください。
+C言語レベルで定義されている構造体MTの静的変数default_randの変数leftを参照します。詳しくはrandom.c を参照してください。
 #@end
