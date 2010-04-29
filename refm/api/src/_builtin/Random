@@ -25,7 +25,7 @@ MT19937に基づくに疑似乱数生成器を提供するクラスです。
 --- new_seed -> Integer
 適切な乱数の種を返します。
 
-使用例；
+使用例:
  p Random.new_seed # => 184271600931914695177248627591520900872
 
 --- rand(max=0) -> Float
@@ -39,7 +39,7 @@ MT19937に基づくに疑似乱数生成器を提供するクラスです。
 
 @return max を超えない乱数を返します。
 
-使用例
+使用例:
   srand 1234 # 乱数の種を設定する。 
   p [ Random.rand,  Random.rand ]            #=> [0.191519450163469, 0.49766366626136]
   p Random.rand(1000)  # => 204
@@ -60,7 +60,7 @@ number が0もしくは省略された場合は、
 
 @return 設定される前の種を返します。
 
-動作例；
+動作例:
   p Random.srand 1
   p Random.srand 1234   # => 1
   p [ Random.rand,  Random.rand ]            #=> [0.191519450163469, 0.49766366626136]
@@ -73,7 +73,7 @@ number が0もしくは省略された場合は、
 @param other 比較対象の乱数生成器
 
 
-動作例；
+動作例:
   r1 = Random.new(1)
   r2 = Random.new(1)
 
@@ -89,14 +89,14 @@ number が0もしくは省略された場合は、
 
 @param size 結果の文字列のサイズを指定します。
 
-動作例；
+動作例:
   r2 = Random.new(1)
   p r2.bytes(10) # => "%\xF4\xC1j\xEB\x80G\xFF\x8C/"
 
 --- marshal_dump -> Array
 [[m:Random#marshal_load]] で復元可能な配列を返します。
 
-動作例;
+動作例:
   r1 = Random.new(1)
   a1 = r1.marshal_dump
   r2 = Random.new(3)
@@ -115,7 +115,7 @@ number が0もしくは省略された場合は、
 
 @raise ArgumentError array が3より大きい場合に発生します。
 
-動作例；
+動作例:
   r1 = Random.new(1)
   a1 = r1.marshal_dump
   r2 = Random.new(3)
@@ -129,7 +129,7 @@ number が0もしくは省略された場合は、
 --- rand -> Float
 浮動小数点数を返します。
 
-動作例;
+動作例:
 p Random.new(3).rand # => 0.5507979025745755
 
 --- rand(arg) -> Integer 
@@ -138,7 +138,7 @@ Rangeオブジェクトの場合はrange.member?(number) == trueになるような数値を返します
 
 @param arg 整数もしくはRangeオブジェクトを指定します。
 
-動作例;
+動作例:
  prng = Random.new(1234)
 #[5, 6, 7, 8, 9]のどれか
  p prng.rand(5..9)  # => 8
@@ -154,7 +154,7 @@ Rangeオブジェクトの場合はrange.member?(number) == trueになるような数値を返します
 --- seed -> Integer
 現在の乱数の種を返します。
 
-動作例;
+動作例:
   p Random.new(3).seed # => 3
 
 == Private Instance Methods
