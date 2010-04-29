@@ -1,7 +1,7 @@
 #@since 1.9.2
 = class Random < Object
 
-MT19937に基づくに疑似乱数生成器を提供するクラスです。
+MT19937に基づく疑似乱数生成器を提供するクラスです。
 
 === 参考
 オリジナル版 [[url:http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/mt.html]]
@@ -159,7 +159,7 @@ Rangeオブジェクトの場合はrange.member?(number) == trueになるような数値を返します
 
 == Private Instance Methods
 --- state -> Integer
-  C言語レベルで定義されている構造体MTをの状態を参照します。詳しくはrandom.c を参照してください。
+  C言語レベルで定義されている構造体MTの状態を参照します。詳しくはrandom.c を参照してください。
 
 --- left -> Integer
   C言語レベルで定義されている構造体MTの変数leftを参照します。詳しくはrandom.c を参照してください。
