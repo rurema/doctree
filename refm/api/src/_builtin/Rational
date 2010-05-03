@@ -187,9 +187,9 @@ self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
 
 
 #@since 1.9.2
---- ceil(precision = 0) -> Fixnum | Rational
+--- ceil(precision = 0) -> Integer | Rational
 #@else
---- ceil                -> Fixnum
+--- ceil                -> Integer
 #@end
 
 自身と等しいかより大きな整数のうち最小のものを返します。
@@ -230,9 +230,9 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
   Rational(1).coerce(2)   # => [(2/1), (1/1)]
   Rational(1).coerce(2.2) # => [2.2, 1.0]
 
---- denominator -> Fixnum
+--- denominator -> Integer
 
-分母を [[c:Fixnum]] として返します。常に正の整数を返します。
+分母を返します。常に正の整数を返します。
 
 @return 分母を返します。
 
@@ -246,7 +246,7 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 @see [[m:Rational#numerator]]
 
 #@until 1.9.2
---- div(other) -> Fixnum
+--- div(other) -> Integer
 
 self を other で割った整数の商を返します。
 
@@ -256,7 +256,7 @@ self を other で割った整数の商を返します。
 
   Rational(1, 2).div(Rational(2, 3)) # => 0
 
---- divmod(other) -> [Fixnum, Float | Rational]
+--- divmod(other) -> [Integer, Float | Rational]
 
 self を other で割った、商と余りの配列を返します。
 
@@ -283,9 +283,9 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
   Rational(2).fdiv(3)      # => 0.6666666666666666
 
 #@since 1.9.2
---- floor(precision = 0) -> Fixnum | Rational
+--- floor(precision = 0) -> Integer | Rational
 #@else
---- floor -> Fixnum
+--- floor -> Integer
 #@end
 
 自身と等しいかより小さな整数のうち最大のものを返します。
@@ -326,7 +326,7 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 
 @see [[m:Rational#ceil]], [[m:Rational#round]], [[m:Rational#truncate]]
 
---- hash -> Fixnum
+--- hash -> Integer
 
 自身のハッシュ値を返します。
 
@@ -362,9 +362,9 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 
 @see [[m:Rational#marshal_dump]]
 
---- numerator -> Fixnum
+--- numerator -> Integer
 
-分子を [[c:Fixnum]] として返します。
+分子を返します。
 
 @return 分子を返します。
 
@@ -412,9 +412,9 @@ eps を省略した場合は self を返します。
 #@end
 
 #@since 1.9.2
---- round(precision = 0) -> Fixnum | Rational
+--- round(precision = 0) -> Integer | Rational
 #@else
---- round -> Fixnum
+--- round -> Integer
 #@end
 
 自身ともっとも近い整数を返します。
@@ -461,11 +461,11 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
   Rational(-3, 4).to_f  # => -0.75
   Rational(20, 3).to_f  # => 6.666666666666667
 
---- to_i -> Fixnum
+--- to_i -> Integer
 #@since 1.9.2
---- truncate(precision = 0) -> Rational | Fixnum
+--- truncate(precision = 0) -> Rational | Integer
 #@else
---- truncate                -> Fixnum
+--- truncate                -> Integer
 #@end
 
 自身と 0 との間にある整数で、自身にもっとも近い整数を返します。
