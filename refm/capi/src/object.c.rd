@@ -239,7 +239,7 @@ strl を C の文字列に変換します。第二引数も与えると
 
 --- VALUE rb_String(VALUE val)
 
-[[m:Kernel#String]] の実体。
+[[m:Kernel.#String]] の実体。
 val を文字列に変換します。
 
 --- VALUE rb_to_id(VALUE name)

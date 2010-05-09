@@ -679,7 +679,7 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 @return 分子を返します。
 
-@see [[m:Numrric#denominator]]
+@see [[m:Numeric#denominator]]
 
 #@end
 #@since 1.9.2
