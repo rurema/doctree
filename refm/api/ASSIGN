@@ -64,7 +64,7 @@ _builtin/Process__UID                           done
 _builtin/Random                 kouya           done
 _builtin/Range                  okkez           done
 _builtin/RangeError             snoozer05       done
-_builtin/Rational               sho-h           
+_builtin/Rational               sho-h           done
 _builtin/Regexp                 kouya           done
 _builtin/RegexpError            snoozer05       done
 _builtin/RuntimeError           snoozer05       done
