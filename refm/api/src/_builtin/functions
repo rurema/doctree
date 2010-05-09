@@ -2424,3 +2424,71 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
   foo #=> :foo
 
 #@end
+
+#@since 1.9.1
+--- Rational(x, y = 1) -> Rational
+
+引数を有理数([[c:Rational]])に変換した結果を返します。
+
+@param x 変換対象のオブジェクトです。
+
+@param y 変換対象のオブジェクトです。省略した場合は x だけを用いて
+         [[c:Rational]] オブジェクトを作成します。
+
+@raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
+
+引数 x、y の両方を指定した場合、x/y した [[c:Rational]] オブジェクトを
+返します。
+
+  Rational("1/3")           # => (1/3)
+  Rational(1, 3)            # => (1/3)
+  Rational("0.1", "0.3")    # => (1/3)
+  Rational(Complex(1,2), 2) # => ((1/2)+(1/1)*i)
+
+ただし、1.8系とは異なり、[[c:Rational]] オブジェクトは常に既約(それ以上
+約分できない状態)である事に注意してください。
+
+  Rational(2, 6)         # => (1/3)
+  Rational(1, 3) * 3     # => (1/1)
+
+引数に文字列を指定する場合、以下のいずれかの形式で指定します。
+
+ * "1/3" のような分数の形式
+ * "0.3" のような10進数の形式
+ * "0.3E0" のような x.xEn の形式
+ * 数字をアンダースコアで繋いだ形式
+
+"1.2/3" のように、分子を実数にする事も可能ですが、分母には指定できませ
+ん。また、[[m:Kernel.#Integer]] とは違い "0x10" のような進数を表す接頭
+辞を含めた指定は行えません。
+
+例:
+
+  Rational("1/3")        # => (1/3)
+  Rational("0.3")        # => (3/10)
+  Rational('0.3E0')      # => (3/10)
+  Rational('0.1E1/3')    # => (1/3)
+  Rational('1.2/3')      # => (2/5)
+  Rational('1/3.1')      # => ArgumentError
+  Rational('3.0', '3.0') # => (1/1)
+  Rational('3/3', '3/3') # => (1/1)
+  Rational('1_234_567')  # => (1234567/1)
+  Rational(" \n10\t ")   # => (10/1) # 空白類は無視される
+  Rational("0x10")       # => ArgumentError
+
+引数に変換できないオブジェクトを指定した場合には [[c:ArgumentError]] が
+発生します。
+
+  Rational(Object.new)   # => ArgumentError
+  Rational("")           # => ArgumentError
+  Rational(nil)          # => ArgumentError
+
+また、Rational('0.3') と Rational(0.3) は異なるオブジェクトを返す事に注
+意してください。前者は正確に 3/10 ですが、後者はそうではありません。
+
+  Rational('0.3')        # => (3/10)
+  Rational(0.3)          # => (5404319552844595/18014398509481984)
+
+@see [[c:Rational]]
+
+#@end

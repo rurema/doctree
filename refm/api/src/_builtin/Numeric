@@ -665,6 +665,22 @@ true を返します。そうでない場合に false を返します。
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
+--- denominator -> Integer
+
+自身を [[c:Rational]] に変換した時の分母を返します。
+
+@return 分母を返します。
+
+@see [[m:Numeric#numerator]]
+
+--- numerator -> Integer
+
+自身を [[c:Rational]] に変換した時の分子を返します。
+
+@return 分子を返します。
+
+@see [[m:Numrric#denominator]]
+
 #@end
 #@since 1.9.2
 --- i    -> Complex

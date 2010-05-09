@@ -365,6 +365,57 @@ self を other で割った商 q と余り r を、
   p 0.zero?               #=> true
   p 0.0.zero?             #=> true
 
+#@since 1.9.1
+--- denominator -> Integer
+
+自身を [[c:Rational]] に変換した時の分母を返します。
+
+@return 分母を返します。
+
+  2.0.denominator         # => 1
+  0.5.denominator         # => 2
+
+@see [[m:Float#numerator]]
+
+--- numerator -> Integer
+
+自身を [[c:Rational]] に変換した時の分子を返します。
+
+@return 分子を返します。
+
+  2.0.numerator           # => 2
+  0.5.numerator           # => 1
+
+@see [[m:Float#denominator]]
+
+--- to_r -> Rational
+
+自身を [[c:Rational]] に変換します。
+
+例:
+
+  0.5.to_r      # => (1/2)
+#@end
+
+#@since 1.9.2
+--- rationalize      -> Rational
+--- rationalize(eps) -> Rational
+
+自身から eps で指定した許容誤差の範囲に収まるような [[c:Rational]] を返
+します。
+
+eps を省略した場合は誤差が最も小さくなるような [[c:Rational]] を返しま
+す。
+
+@param eps 許容する誤差
+
+例:
+
+  0.3.rationalize          #=> (3/10)
+  1.333.rationalize        #=> (1333/1000)
+  1.333.rationalize(0.01)  #=> (4/3)
+
+#@end
 
 #@if (version >= "1.8.0")
 

@@ -344,3 +344,99 @@ self から -1 した値を返します。
    (-1).pred   #=> -2
 
 #@end
+
+#@since 1.9.1
+--- denominator -> Integer
+
+分母(常に1)を返します。
+
+@return 分母を返します。
+
+@see [[m:Integer#numerator]]
+
+--- gcd(n) -> Integer
+
+自身と n の最大公約数を Fixnum として返します。
+自身や n が負の数だった場合は、正の数に変換してから計算します。
+
+例:
+
+  2.gcd(2)                    # => 2
+  3.gcd(7)                    # => 1
+  3.gcd(-7)                   # => 1
+  ((1<<31)-1).gcd((1<<61)-1)  # => 1
+
+また、self や n が 0 だった場合は、0 ではない方の整数の絶対値を返します。
+
+  3.gcd(0)                    # => 3
+  0.gcd(-7)                   # => 7
+
+@see [[m:Integer#lcm]], [[m:Integer#gcdlcm]]
+
+--- gcdlcm(n) -> [Integer]
+
+自身と n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)] を返
+します。
+
+例:
+
+  2.gcdlcm(2)                    # => [2, 2]
+  3.gcdlcm(-7)                   # => [1, 21]
+  ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
+
+@see [[m:Integer#gcd]], [[m:Integer#lcm]]
+
+--- lcm(n) -> Integer
+
+自身と n の最小公倍数を返します。
+自身や n が負の数だった場合は、正の数に変換してから計算します。
+
+例:
+
+  2.lcm(2)                    # => 2
+  3.lcm(-7)                   # => 21
+  ((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
+
+また、self や n が 0 だった場合は、0 を返します。
+
+  3.lcm(0)                    # => 0
+  0.lcm(-7)                   # => 0
+
+@see [[m:Integer#gcd]], [[m:Integer#gcdlcm]]
+
+--- numerator -> Integer
+
+分子(常に自身)を返します。
+
+@return 分子を返します。
+
+@see [[m:Integer#denominator]]
+
+--- to_r -> Rational
+
+自身を [[c:Rational]] に変換します。
+
+例:
+
+  1.to_r        # => (1/1)
+  (1<<64).to_r  # => (18446744073709551616/1)
+
+#@end
+
+#@since 1.9.2
+--- rationalize      -> Rational
+--- rationalize(eps) -> Rational
+
+自身を [[c:Rational]] に変換します。
+
+@param eps 許容する誤差
+
+引数 eps は常に無視されます。
+
+例:
+
+  2.rationalize      # => (2/1)
+  2.rationalize(100) # => (2/1)
+  2.rationalize(0.1) # => (2/1)
+
+#@end

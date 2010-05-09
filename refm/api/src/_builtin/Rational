@@ -13,6 +13,12 @@
   Rational('0.33')     # => (33/100)
   Rational.new(1, 3)   # => NoMethodError
 
+ただし、1.8系とは異なり、[[c:Rational]] オブジェクトは常に既約(それ以上
+約分できない状態)である事に注意してください。
+
+  Rational(2, 6)       # => (1/3)
+  Rational(1, 3) * 3   # => (1/1)
+
 == Public Instance Methods
 
 #@until 1.9.2
@@ -520,3 +526,15 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
   Rational(0.5).to_s   # => "1/2"
 
 @see [[m:Rational#inspect]]
+
+== private instance methods
+
+--- convert(*arg) -> Rational
+
+引数を有理数([[c:Rational]])に変換した結果を返します。
+
+@param arg 変換対象のオブジェクトです。
+
+[[m:Kernel.#Rational]] の本体です。
+
+@see [[m:Kernel.#Rational]]
