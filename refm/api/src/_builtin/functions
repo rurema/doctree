@@ -2414,14 +2414,19 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
 #@end
 
 #@since 1.8.7
---- __method__ -> Symbol
+--- __method__ -> Symbol | nil
+#@since 1.9.1
+--- __callee__ -> Symbol | nil
+#@end
 
 現在のメソッド名を返します。
+メソッドの外で呼ばれると nil を返します。
 
   def foo
     p __method__
   end
   foo #=> :foo
+  p __method__ #=> nil
 
 #@end
 
