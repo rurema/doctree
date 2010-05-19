@@ -130,6 +130,11 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
     UTF-16BE-BOM
     UTF-16LE
     UTF-16LE-BOM
+    UTF-32 UTF-32BEと同じ
+    UTF-32BE
+    UTF-32BE-BOM
+    UTF-32LE
+    UTF-32LE-BOM
     UTF-8-MAC これは入力側にしか指定できません
   --fb-{skip, html, xml, perl, java, subchar} 変換できなかった文字をどう取り扱うかを
     指定します。デフォルトは --fb-skip です。
@@ -142,9 +147,11 @@ Ruby 1.8.2 以降では nkf の 2.0 以降が取り込まれています。
   --cap-input --url-input :、%でエスケープされた文字を元の文字に変換します
   --numchar-input "&#..;" 形式の Unicode文字参照を変換します
   --no-best-fit-chars
-     Unicode からの変換の際に、wrap aroundしない文字の変換を行いません。
-     これを -x を併用することで、 Unicode 関連のエンコーディング間での変換
+     Unicode からの変換の際に、round trip safeでない文字の変換を行いません。
+     これを -x を併用することで、 Unicode がらみのエンコーディング間での変換
      (UTF-8 から UTF-16LE など)を正しく変換することができます。
+     すなわち、これらのオプションを指定しないとそのような変換を正しく行うことはできません。
+     
   -- 以降のオプションを無視します。
 
 #@else
