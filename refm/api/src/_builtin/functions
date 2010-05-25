@@ -1147,6 +1147,7 @@ level_num 段上の呼び出し元の情報を [[m:$@]]
       p caller(1)
       p caller(2)
       p caller(3)
+      p caller(4)
     end
 
     def bar
@@ -1155,10 +1156,19 @@ level_num 段上の呼び出し元の情報を [[m:$@]]
 
     bar
 
-    #=> ["-:2:in `foo'", "-:9:in `bar'", "-:12"]
-    #   ["-:9:in `bar'", "-:12"]
-    #   ["-:12"]
+#@since 1.8.0
+    #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13"]
+    #   ["-:10:in `bar'", "-:13"]
+    #   ["-:13"]
     #   []
+    #   nil
+#@else
+    #=> ["-:2:in `foo'", "-:10:in `bar'", "-:13:in `<main>'"]
+    #   ["-:10:in `bar'", "-:13:in `<main>'"]
+    #   ["-:13:in `<main>'"]
+    #   []
+    #   nil
+#@end
 
 以下の関数は、caller の要素から [ファイル名, 行番号, メソッド名]
 を取り出して返します。
@@ -1184,9 +1194,15 @@ level_num 段上の呼び出し元の情報を [[m:$@]]
     bar
     p parse_caller(caller.first)
 
+#@since 1.8.0
     #=> ["-", 15, "bar"]
     #   ["-", 19, nil]
     #   nil
+#@else
+    #=> ["-", 15, "bar"]
+    #   ["-", 19, "<main>"]
+    #   nil
+#@end
 
 以下は、[[m:$DEBUG]] が真の場合に役に立つ debug 関数
 のサンプルです。
@@ -1199,7 +1215,11 @@ level_num 段上の呼び出し元の情報を [[m:$@]]
 
     debug "debug information"
 
-    #=> ["-:5", "debug information"]
+#@since 1.8.0
+    #=> ["-:7", "debug information"]
+#@else
+    #=> ["-:7:in `<main>'", "debug information"]
+#@end
 
 --- gets(rs = $/) -> String | nil
 
