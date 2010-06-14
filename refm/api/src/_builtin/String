@@ -2838,11 +2838,14 @@ self がセパレータを含まないときは、
 #@end
 
 文字列の各文字に対して繰り返します。
+#@if (version < "1.9.0")
+[[m:$KCODE]] が適切に設定されていれば、マルチバイト文字も正しく扱われます。
+#@end
 
 たとえば、
-   "hello".each_char {|c| print c, ' ' }
+  "hello世界".each_char {|c| print c, ' ' }
 は次のように出力されます。
-   h e l l o
+  h e l l o 世 界
 
 #@since 1.9.1
 --- each_codepoint {|codepoint| block } -> self
