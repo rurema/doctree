@@ -1,10 +1,20 @@
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 
+#@since 1.9.1
+= module Config
+[[c:RbConfig]] の別名です。
+
+= module RbConfig
+[[unknown:執筆者募集]]
+
+Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
+RbConfig モジュールを定義します。
+
+#@else
 = module RbConfig
 [[c:Config]] の別名です。
 
 = module Config
-
 [[unknown:執筆者募集]]
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
@@ -14,6 +24,7 @@ Config モジュールを定義します。
 RbConfig モジュールを Config と同じものとして定義します。
 #@end
 
+#@end
 #@#=== 使いかた
 
 #@#  require 'rbconfig'
@@ -24,7 +35,11 @@ RbConfig モジュールを Config と同じものとして定義します。
 --- expand(val)
 #@todo
 
-[[m:Config::MAKEFILE_CONFIG]] 参照
+#@since 1.9.1
+@see [[m:RbConfig::MAKEFILE_CONFIG]]
+#@else
+@see [[m:Config::MAKEFILE_CONFIG]]
+#@end
 #@end
 #@since 1.9.2
 --- ruby
