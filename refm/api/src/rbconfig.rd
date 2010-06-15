@@ -230,7 +230,12 @@ returns the absolute pathname of the ruby command.
 --- MAKEFILE_CONFIG
 #@todo
 
-[[m:Config::CONFIG]] と同じですが、その値は以下のような形
+#@since 1.9.1
+[[m:RbConfig::CONFIG]]
+#@else
+[[m:Config::CONFIG]]
+#@end
+と同じですが、その値は以下のような形
 で他の変数への参照を含みます。
   MAKEFILE_CONFIG["bindir"] = "$(exec_prefix)/bin"
 これは、Makefile の変数参照の形式で MAKEFILE_CONFIG は、
@@ -248,10 +253,20 @@ Makefile 作成の際に利用されることを想定しています。
      exec_prefix = $(prefix)
      bindir = $(exec_prefix)/bin
 
-[[m:Config.expand]] は、このような参照を解決する
+#@since 1.9.1
+[[m:RbConfig.expand]]
+#@else
+[[m:Config.expand]]
+#@end
+は、このような参照を解決する
 メソッドとして rbconfig 内部で利用されています。
 (CONFIG 変数は、MAKEFILE_CONFIG の内容から
-[[m:Config.expand]] を使って生成されています)
+#@since 1.9.1
+[[m:RbConfig.expand]]
+#@else
+[[m:Config.expand]]
+#@end
+を使って生成されています)
 
   require 'rbconfig'
   p Config.expand(Config::MAKEFILE_CONFIG["bindir"])
