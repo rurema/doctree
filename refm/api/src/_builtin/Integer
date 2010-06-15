@@ -222,7 +222,7 @@ self < min であれば何もしません。
 @param min   数値
 @return      self を返します。
 
-@see [[m:Integer#upto]], [[m:Integer#step]], [[m:Integer#times]]
+@see [[m:Integer#upto]], [[m:Numeric#step]], [[m:Integer#times]]
 
 --- next -> Fixnum | Bignum
 --- succ -> Fixnum | Bignum
@@ -247,7 +247,7 @@ self が正の整数でない場合は何もしません。
   0.times { puts "Hello, World!" }  # 何も表示されない。
   5.times {|n| print n }            # 01234 と表示される。
 
-@see [[m:Integer#upto]], [[m:Integer#downto]], [[m:Integer#step]]
+@see [[m:Integer#upto]], [[m:Integer#downto]], [[m:Numeric#step]]
 
 --- to_i   -> self
 --- to_int -> self
@@ -308,7 +308,7 @@ self > max であれば何もしません。
 @param max   数値
 @return      self を返します。
 
-@see [[m:Integer#downto]], [[m:Integer#step]], [[m:Integer#times]]
+@see [[m:Integer#downto]], [[m:Numeric#step]], [[m:Integer#times]]
 
 --- integer? -> true
 
