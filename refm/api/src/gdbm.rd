@@ -3,7 +3,7 @@ GDBM(GNU ¥Ç¡¼¥¿¥Ù¡¼¥¹¡¦¥Þ¥Í¡¼¥¸¥ã) ¤ò Ruby ¥¹¥¯¥ê¥×¥È¤«¤é°·¤¦¤¿¤á¤Î¥é¥¤¥Ö¥é¥ê¤Ç¤
 GDBM ¤Ï dbm ¤ª¤è¤Ó ndbm ¸ß´¹µ¡Ç½¤ò´Þ¤ó¤Ç¤¤¤Þ¤¹¡£
 °·¤¨¤ë¥­¡¼¤äÃÍ¤Î¥µ¥¤¥º¤ËÀ©¸Â¤Ï¤¢¤ê¤Þ¤»¤ó¡£
 
-@see [[lib:dbm]], [[lib:sdbm]], [[man:gdbm]]
+@see [[lib:dbm]], [[lib:sdbm]], [[man:gdbm(3)]]
 
 = class GDBM < Object
 
@@ -18,37 +18,53 @@ GDBM ¥Õ¥¡¥¤¥ë¤ò¥¢¥¯¥»¥¹¤¹¤ë¥¯¥é¥¹¡£
 == Class Methods
 
 --- new(dbname, mode = 0666, flags = 0) -> GDBM
---- open(dbname, mode = 0666, flags = 0) -> GDBM
---- open(dbname, mode = 0666, flags = 0) {|db| ... } -> ()
 
 dbname ¤Ç»ØÄê¤·¤¿¥Ç¡¼¥¿¥Ù¡¼¥¹¤ò¥â¡¼¥É¤ò mode ¤ËÀßÄê¤·¤Æ¥ª¡¼¥×¥ó¤·¤Þ¤¹¡£
 
-mode ¤Î¾ÊÎ¬ÃÍ¤Ï 0666 ¤Ç¤¹¡£mode ¤È¤·¤Æ nil ¤ò»ØÄê
-¤¹¤ë¤È¥Ç¡¼¥¿¥Ù¡¼¥¹¤¬Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï¿·¤¿¤Ê¥Ç¡¼¥¿¥Ù¡¼¥¹¤òºî¤é¤º
-nil ¤òÊÖ¤·¤Þ¤¹¡£
+@param dbname ¥Ç¡¼¥¿¥Ù¡¼¥¹¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
 
-flags ¤Ë¤Ï¡¢[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
-¤ÎÏÀÍýÏÂ¤ò»ØÄê¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï»ØÄê¤Ê¤·(¤Ä¤Þ¤ê0)¤Ç¤¹¡£
+@param mode ¾ÊÎ¬ÃÍ¤Ï 0666 ¤Ç¤¹¡£mode ¤È¤·¤Æ nil ¤ò»ØÄê¤¹¤ë¤È¥Ç¡¼¥¿¥Ù¡¼¥¹¤¬
+            Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï¿·¤¿¤Ê¥Ç¡¼¥¿¥Ù¡¼¥¹¤òºî¤é¤º nil ¤òÊÖ¤·¤Þ¤¹¡£
 
+@param flags flags ¤Ë¤Ï¡¢[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
+             ¤ÎÏÀÍýÏÂ¤ò»ØÄê¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï»ØÄê¤Ê¤·(¤Ä¤Þ¤ê0)¤Ç¤¹¡£
 #@if (version >= "1.8.2")
-flags ¤Ë
-[[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
-¤Î¤É¤ì¤«¤òÍ¿¤¨¤ÆÆÉ¤ß½ñ¤­¤Î¥â¡¼¥É¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
-¤³¤ì¤é¤ò¤É¤ì¤â»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¤Ï¡¢
-[[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] ¤Î½ç¤Ç»î¤·¤Þ¤¹¡£
+             flags ¤Ë [[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
+             ¤Î¤¤¤º¤ì¤«¤òÍ¿¤¨¤ÆÆÉ¤ß½ñ¤­¤Î¥â¡¼¥É¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+             ¤³¤ì¤é¤ò¤É¤ì¤â»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¤Ï¡¢
+             [[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] ¤Î½ç¤Ç»î¤·¤Þ¤¹¡£
 #@end
+
+--- open(dbname, mode = 0666, flags = 0) -> GDBM
+--- open(dbname, mode = 0666, flags = 0) {|db| ... } -> object
+
+dbname ¤Ç»ØÄê¤·¤¿¥Ç¡¼¥¿¥Ù¡¼¥¹¤ò¥â¡¼¥É¤ò mode ¤ËÀßÄê¤·¤Æ¥ª¡¼¥×¥ó¤·¤Þ¤¹¡£
 
 ¥Ö¥í¥Ã¥¯¤ò»ØÄê¤·¤¿¾ì¹ç¡¢¥ª¡¼¥×¥ó¤·¤¿ GDBM ¥ª¥Ö¥¸¥§¥¯¥È¤ò
 °ú¿ô¤Ë¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Þ¤¹¡£¼Â¹Ô¸å GDBM ¥ª¥Ö¥¸¥§¥¯¥È¤ò¥¯¥í¡¼¥º
-¤·¡¢open ¥á¥½¥Ã¥É¤Ï¥Ö¥í¥Ã¥¯¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£¤³¤ì¤Ï¤Á¤ç¤¦¤É
-°Ê²¼¤ÈÆ±¤¸¤Ç¤¹¡£
+¤·¡¢open ¥á¥½¥Ã¥É¤Ï¥Ö¥í¥Ã¥¯¤Î·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
 
-  dbm = GDBM.open(file)
-  begin
-    yield dbm
-  ensure
-    dbm.close
-  end
+@param dbname ¥Ç¡¼¥¿¥Ù¡¼¥¹¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param mode ¾ÊÎ¬ÃÍ¤Ï 0666 ¤Ç¤¹¡£mode ¤È¤·¤Æ nil ¤ò»ØÄê¤¹¤ë¤È¥Ç¡¼¥¿¥Ù¡¼¥¹¤¬
+            Â¸ºß¤·¤Ê¤¤»þ¤Ë¤Ï¿·¤¿¤Ê¥Ç¡¼¥¿¥Ù¡¼¥¹¤òºî¤é¤º nil ¤òÊÖ¤·¤Þ¤¹¡£
+
+@param flags flags ¤Ë¤Ï¡¢[[m:GDBM::FAST]], [[m:GDBM::SYNC]], [[m:GDBM::NOLOCK]]
+             ¤ÎÏÀÍýÏÂ¤ò»ØÄê¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï»ØÄê¤Ê¤·(¤Ä¤Þ¤ê0)¤Ç¤¹¡£
+#@if (version >= "1.8.2")
+             flags ¤Ë [[m:GDBM::READER]], [[m:GDBM::WRITER]], [[m:GDBM::WRCREAT]], [[m:GDBM::NEWDB]]
+             ¤Î¤¤¤º¤ì¤«¤òÍ¿¤¨¤ÆÆÉ¤ß½ñ¤­¤Î¥â¡¼¥É¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+             ¤³¤ì¤é¤ò¤É¤ì¤â»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¤Ï¡¢
+             [[m:GDBM::WRCREAT]], [[m:GDBM::WRITER]], [[m:GDBM::READER]] ¤Î½ç¤Ç»î¤·¤Þ¤¹¡£
+#@end
+
+   require 'gdbm'
+   GDBM.open("fruitstore.db") do |gdbm|
+     gdbm.each_pair do |key, value|
+       print "#{key}: #{value}\n"
+     end
+   end
+
 
 == Instance Methods
 
@@ -69,11 +85,11 @@ key ¤ò¥­¡¼¤È¤·¤Æ¡¢value ¤ò³ÊÇ¼¤·¤Þ¤¹¡£
 
 ÆâÉô¤Î¥­¥ã¥Ã¥·¥å¤Î¥µ¥¤¥º¤ò»ØÄê¤·¤Þ¤¹¡£
 
-¾Ü¤·¤¯¤Ï [[man:gdbm]] ¤Î GDBM_CACHESIZE ¤Î¹à¤ò»²¾È¤¯¤À¤µ¤¤¡£
+¾Ü¤·¤¯¤Ï [[man:gdbm(3)]] ¤Î GDBM_CACHESIZE ¤Î¹à¤ò»²¾È¤¯¤À¤µ¤¤¡£
 
 @param size ¿·¤·¤¤ÆâÉô¤Î¥­¥ã¥Ã¥·¥å¥µ¥¤¥º¡£
 
-@see [[man:gdbm]]
+@see [[man:gdbm(3)]]
 
 --- clear -> self
 
