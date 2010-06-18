@@ -104,20 +104,31 @@ DBM ファイルをクローズします。
 #@since 1.8.3
 --- closed? -> bool
 
-DBM ファイルが既に閉じられているかどうかを返します。
-
-既に閉じられていれば true を返します。
-そうでなければ false を返します。
+DBM ファイルが既に閉じられている場合は、真を返します。
+そうでない場合は、偽を返します。
 
 #@end
 
---- delete(key) -> nil
---- delete(key) {|key| ... } -> ()
+--- delete(key) -> object | nil
+--- delete(key) {|key| ... } -> object
 
-key をキーとする項目を削除します。
+与えられた key に対応する項目を削除します。
 
-指定したキーが存在しなければ nil を返します。
-このときブロックを指定していれば、ブロックを評価します。
+@param key キーを指定します。
+
+@return 指定したキーが存在する場合は、キーに対応する値を返します。
+        指定したキーが存在しない場合は、 nil を返します。
+        また、キーが存在しない場合にブロックを与えている場合は、ブロックを評価した結果を返します。
+
+  require 'gdbm'
+  GDBM.open("a.db") do |db|
+    db['a'] = "aaa"
+    db['d'] = "ddd"
+    db.delete("a") # => "aaa"
+    db.delete("b") # => nil
+    db.delete("c"){|k| "c is missing" } # => "c is missing"
+    db.delete("d"){|k| "d is missing" } # => "ddd"
+  end
 
 --- delete_if { |key, value|  ...  } -> self
 --- reject! { |key, value|  ...  } -> self
@@ -154,7 +165,6 @@ key をキーとする項目を削除します。
 次の操作を続けます。
 
 @param bool 新たにセットするモード。
-
 
 @see [[m:GDBM::FAST]], [[m:GDBM#syncmode=]]
 
@@ -408,12 +418,12 @@ keys に対応する値を配列に格納して返します。
 
 == Constants
 
---- VERSION
+--- VERSION -> String
 
 libgdbm のバージョン情報の文字列です。
 
 
---- FAST
+--- FAST -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -422,7 +432,7 @@ libgdbm のバージョン情報の文字列です。
 メソッドを呼びます。libgdbm version 1.8.0 以降ではこのモードがデフォルト
 です。
 
---- SYNC
+--- SYNC -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -431,7 +441,7 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 
 この定数は libgdbm version 1.8.0 以降より有効です。
 
---- NOLOCK
+--- NOLOCK -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
@@ -443,26 +453,26 @@ libgdbm version 1.8.0 以前のデフォルトモードです。
 この定数は libgdbm version 1.8.0 以降より有効です。
 
 #@since 1.8.2
---- READER
+--- READER -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 読み込みモードでオープンします。
 
---- WRITER
+--- WRITER -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 書き込みモードでオープンします。
 
---- WRCREAT
+--- WRCREAT -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
 書き込みモードで、すでにファイルが存在しなかったら作ります。
 
 
---- NEWDB
+--- NEWDB -> Fixnum
 
 [[m:GDBM.open]] の第3引数に指定します。
 
