@@ -15,6 +15,10 @@ NDBM ファイルをアクセスするクラス。
 
 == Class Methods
 
+--- new(dbname, mode = 0666, flags = nil) -> DBM
+
+dbname で指定したデータベースをモードを mode に設定してオープンします。
+
 --- open(dbname, mode = 0666, flags = nil) -> DBM
 --- open(dbname, mode = 0666, flags = nil) {|db| ... } -> ()
 
@@ -145,6 +149,17 @@ value を値とする組がデータベース中に存在する時、真を返します。
   db1[:a] = 'aaa'
   db1[:b] = 'bbbbbb'
   p db1.indexes('a', 'b') #=> ["aaa", "bbbbbb"]
+
+#@end
+
+#@since 1.9.1
+--- key(value) -> String
+
+与えられた値に対応するキーを返します。
+
+値に対応するキーが複数ある場合は最初に見つかったキーを返します。
+
+@param value キーを探したい値を指定します。
 
 #@end
 
