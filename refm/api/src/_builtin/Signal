@@ -63,13 +63,13 @@ ruby の仕組みの外でシグナルハンドラが登録された場合
 
 例:
 
-  p Signal.trap(:INT, "p true")       # => nil
-  p Signal.trap(:INT) { p false }     # => "p true"
-  p Signal.trap(:INT, proc{ p nil })  # => #<Proc:0x403951a8>
-  p Signal.trap(:INT, "SIG_IGN")      # => #<Proc:0x401b1328>
-  p Signal.trap(:INT, "DEFAULT")      # => nil
-  p Signal.trap(:INT, "EXIT")         # => nil
-  p Signal.trap(:INT, nil)            # => "EXIT"
+  Signal.trap(:INT, "p true")       # => "DEFAULT"
+  Signal.trap(:INT) { p false }     # => "p true"
+  Signal.trap(:INT, proc{ p nil })  # => #<Proc:0x8e45ae0@-:2>
+  Signal.trap(:INT, "SIG_IGN")      # => #<Proc:0x8e45914@-:3>
+  Signal.trap(:INT, "DEFAULT")      # => "IGNORE"
+  Signal.trap(:INT, "EXIT")         # => "DEFAULT"
+  Signal.trap(:INT, nil)            # => "EXIT"
 
 @see [[d:spec/terminate]]
 #@end
