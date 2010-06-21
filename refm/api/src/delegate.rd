@@ -77,11 +77,60 @@ obj のもつインスタンスメソッドのうち、
 
 #@end
 
+#@since 1.9.1
+
+#@#--- delegation_block
+#@# 見つからない
+
+#@#--- public_api
+#@todo nodoc
+
+#@end
+#@since 1.9.2
+
+#@# --- const_missing
+#@# 見つからない
+
+#@end
+
 == Instance Methods
 
-#@since 1.8.0
-#@until 1.9.1
+#@since 1.9.1
+--- ==(obj) -> bool
 
+自身が与えられたオブジェクトと等しい場合は、真を返します。
+そうでない場合は、偽を返します。
+
+@param obj 比較対象のオブジェクトを指定します。
+
+#@end
+
+#@since 1.9.2
+
+--- !=(obj) -> bool
+
+自身が与えられたオブジェクトと等しくない場合は、真を返します。
+そうでない場合は、偽を返します。
+
+@param obj 比較対象のオブジェクトを指定します。
+
+--- ! -> bool
+
+自身を否定します。
+
+#@end
+
+#@if (version == "1.9.1")
+--- clone -> object
+--- dup -> object
+
+自身の複製を返します。
+
+@see [[m:Object#clone]], [[m:Object#dup]]
+
+#@end
+
+#@since 1.8.0
 --- __getobj__ -> object
 
 委譲先のオブジェクトを返します。
@@ -92,10 +141,19 @@ obj のもつインスタンスメソッドのうち、
 @raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
 
 #@end
+
+#@since 1.9.1
+--- __setobj__(obj)
+
+委譲先のオブジェクトをセットします。
+
+@param obj 委譲先ののオブジェクトを指定します。
+
+@raise NotImplementedError サブクラスにて本メソッドが再定義されていない場合に発生します。
+
 #@end
 
 #@since 1.8.1
-#@until 1.9.1
 --- marshal_dump -> object
 
 シリアライゼーションをサポートするために[[m:Delegator#__getobj__]] が返すオブジェクトを返します。
@@ -107,10 +165,8 @@ obj のもつインスタンスメソッドのうち、
 @param obj [[m:Delegator#marshal_dump]]の戻り値のコピー
 
 #@end
-#@end
 
 #@since 1.8.3
-#@until 1.9.1
 --- method_missing(m, *args) -> object
 
 渡されたメソッド名と引数を使って、[[m:Delegator#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
@@ -131,6 +187,56 @@ obj のもつインスタンスメソッドのうち、
 
 @see [[m:Object#respond_to?]]
 
+#@end
+
+#@since 1.9.2
+--- freeze
+#@todo
+
+自身を凍結します。
+
+@see [[m:Object#freeze]]
+
+--- methods -> [Symbol]
+#@todo
+そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
+このメソッドは public メソッドおよび protected メソッドの名前を返します。
+
+@see [[m:Object#methods]]
+
+--- protected_methods(all = true) -> [Symbol]
+#@todo
+そのオブジェクトが理解できる protected メソッド名の一覧を返します。
+
+@param all 偽を指定すると __getobj__ のスーパークラスで定義されたメソッドを除きます。
+
+@see [[m:Object#protected_methods]]
+
+--- public_methods(all = true) -> [Symbol]
+#@todo
+
+そのオブジェクトが理解できる public メソッド名の一覧を返します。
+
+@param all 偽を指定すると __getobj__ のスーパークラスで定義されたメソッドを除きます。
+
+@see [[m:Object#public_methods]]
+
+--- respond_to_missing?(m, include_private) -> bool
+#@todo
+
+@param m メソッド名を指定します。
+
+@param include_private 真を指定すると private メソッドも調べます。
+
+#@end
+
+== Constants
+
+#@since 1.8.7
+#@until 1.9.1
+--- IgnoreBacktracePat -> Regexp
+
+バックトレースで無視するパターンを返します。
 #@end
 #@end
 

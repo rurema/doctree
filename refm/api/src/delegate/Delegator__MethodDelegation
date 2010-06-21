@@ -72,15 +72,13 @@
 @param obj [[m:Delegator::MethodDelegation#marshal_dump]]の戻り値のコピー
 
 
---- method_missing(m, *args, &block) -> object
+--- method_missing(m, *args) -> object
 
 渡されたメソッド名と引数を使って、[[m:Delegator::MethodDelegation#__getobj__]] が返すオブジェクトへメソッド委譲を行います。
 
 @param m メソッドの名前（シンボル）
 
 @param args メソッドに渡された引数
-
-@param block メソッドに渡されたブロック
 
 @return 委譲先のメソッドからの返り値
 
