@@ -91,26 +91,9 @@ GServer オブジェクトを生成します。
 
 @see [[m:GServer#starting]], [[m:GServer#connecting]], [[m:GServer#disconnecting]], [[m:GServer#stopping]]
 
---- connecting(client) -> true
-
-[[m:GServer#audit]] が真ならば、クライアント接続時に呼ばれます。
-
-サブクラスでオーバーライドします。
-
-@param client クライアントと接続している [[c:TCPSocket]] です。
-
-
 --- connections() -> Fixnum
 
 現在接続しているクライアントの数を返します。
-
---- disconnecting(clientPort) -> ()
-
-[[m:GServer#audit]] が真ならば、クライアントとの接続終了時に呼ばれます。
-
-サブクラスでオーバーライドします。
-
-@param clientPort 接続していたクライアントのポートです。
 
 --- debug -> bool
 
@@ -157,11 +140,6 @@ GServer オブジェクトを生成します。
 
 @param maxConnections 0 より大きい数値を指定すると、最大接続数として設定されます。
 
---- starting -> ()
-
-[[m:GServer#audit]] が真ならば、サーバ起動時に呼ばれます。
-サブクラスでオーバーライドします。
-
 --- stdlog -> IO
 
 ログを出力する先の [[c:IO]] オブジェクトを返します。デフォルトは [[m:$stderr]] です。
@@ -176,17 +154,38 @@ GServer オブジェクトを生成します。
 
 自身をすぐに停止します。
 
---- stopping -> ()
-#@todo
-
-[[m:GServer#audit]] が真ならば、サーバ停止時に呼ばれます。
-サブクラスでオーバーライドします。
-
 --- stopped? -> bool
 
 自身が停止しているなら真を返します。
 
 == Protected Instance Methods
+
+--- connecting(client) -> true
+
+[[m:GServer#audit]] が真ならば、クライアント接続時に呼ばれます。
+
+サブクラスでオーバーライドします。
+
+@param client クライアントと接続している [[c:TCPSocket]] です。
+
+--- disconnecting(clientPort) -> ()
+
+[[m:GServer#audit]] が真ならば、クライアントとの接続終了時に呼ばれます。
+
+サブクラスでオーバーライドします。
+
+@param clientPort 接続していたクライアントのポートです。
+
+--- starting -> ()
+
+[[m:GServer#audit]] が真ならば、サーバ起動時に呼ばれます。
+サブクラスでオーバーライドします。
+
+--- stopping -> ()
+#@todo
+
+[[m:GServer#audit]] が真ならば、サーバ停止時に呼ばれます。
+サブクラスでオーバーライドします。
 
 --- error(detail) -> ()
 
