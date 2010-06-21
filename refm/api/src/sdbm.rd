@@ -240,7 +240,7 @@ self の内容を other の内容で置き換えます。
   p db1.to_hash       #=> {"x"=>"xxx", "y"=>"yyy"}
 
 
---- fetch -> String
+--- fetch(key, ifnone = nil){|key| ... } -> object
 
 データベースから対応するキーを探してその要素の値を返します。
 
