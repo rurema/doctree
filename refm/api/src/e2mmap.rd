@@ -91,6 +91,19 @@ exception_name という名前の例外クラスを定義します。
 
 @return 定義した例外クラスを返します。
 
+--- e2mm_message(klass, exp) -> String | nil
+--- message(klass, exp) -> String | nil
+#@todo
+
+@param klass
+
+@param exp
+
+--- extend_object(cl) -> ()
+#@todo
+
+@param cl
+
 --- Raise(klass = E2MM, exception_class = nil, *rest) -> ()
 --- Fail(klass = E2MM, exception_class = nil, *rest)  -> ()
 
@@ -105,7 +118,7 @@ exception_name という名前の例外クラスを定義します。
 @raise Exception2MessageMapper::ErrNotRegisteredException 指定された例外クラスに対応するメッセージが存在しない場合に発生します。
 
 #@until 1.9.1
---- fail(err = nil, *rest) -> ()
+--- fail(exception_class = nil, *rest) -> ()
 
 このメソッドは後方互換性のために用意されています。
 
@@ -127,8 +140,13 @@ exception_name という名前の例外クラスを定義します。
 
 == Instance Methods
 
---- Raise(err = nil, *rest) -> ()
---- Fail(err = nil, *rest)  -> ()
+--- bind(cl) -> ()
+#@todo
+
+@param cl xxx
+
+--- Raise(exception_class = nil, *rest) -> ()
+--- Fail(exception_class = nil, *rest)  -> ()
 登録されている情報を使用して、例外を発生させます。
 
 @param exception_class 例外クラス。
@@ -154,7 +172,7 @@ exception_name という名前の例外クラスを定義します。
   Foo.Raise Foo::NewExceptionClass, 1, 3, 5  #=> in `Raise': message...1, 3 and 5 (Foo::NewExceptionClass)
                                              #   という例外が発生します。
 
---- fail(err = nil, *rest) -> ()
+--- fail(exception_class = nil, *rest) -> ()
 登録されている情報を使用して、例外を発生させます。
 
 @param exception_class 例外クラス。
