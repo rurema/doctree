@@ -263,6 +263,22 @@ self の IP アドレスとサブネットマスクで取得できる IP アドレスの範囲を
 
 #@end
 
+#@since 1.9.2
+--- eql?(other) -> bool
+
+自身が other と等しい場合は真を返します。
+そうでない場合は偽を返します。
+
+@see [[m:Object#eql?]]
+
+--- hash -> Integer
+
+ハッシュ値を返します。
+
+@see [[m:Object#hash]]
+
+#@end
+
 == Protected Instance Methods
 
 --- set(addr, *family) -> self
