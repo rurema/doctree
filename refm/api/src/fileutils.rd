@@ -36,9 +36,9 @@
 == Module Functions
 
 --- cd(dir, options = {})                   -> nil
---- cd(dir, options = {}) {|dir| .... }     -> ()
+--- cd(dir, options = {}) {|dir| .... }     -> nil
 --- chdir(dir, options = {})                -> nil
---- chdir(dir, options = {}) {|dir| .... }  -> ()
+--- chdir(dir, options = {}) {|dir| .... }  -> nil
 
 プロセスのカレントディレクトリを dir に変更します。
 
@@ -280,7 +280,7 @@ src を dest にコピーします。src がディレクトリであったら再帰的に
   FileUtils.cp_r(Dir.glob('*.rb'), '/home/taro/lib/ruby',
                  {:noop => true, :verbose => true})
 
---- install(src, dest, options = {})
+--- install(src, dest, options = {}) -> ()
 
 src と dest の内容が違うときだけ src を dest にコピーします。
 
@@ -549,7 +549,6 @@ rm_r(list, {:force => true}) と同じです。
 
 #@since 1.8.3
 --- remove_entry(path, force = false)
-#@todo
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
@@ -570,7 +569,6 @@ rm_r(list, {:force => true}) と同じです。
 
 #@since 1.8.3
 --- remove_entry_secure(path, force = false) -> ()
-#@todo
 
 ファイル path を削除します。path がディレクトリなら再帰的に削除します。
 
@@ -653,6 +651,63 @@ newer が、older_list に含まれるすべてのファイルより新しいとき真。
 例:
 
   FileUtils.uptodate?('hello.o', ['hello.c', 'hello.h']) or system('make')
+
+#@since 1.8.3
+== Singleton Methods
+--- collect_method(opt) -> Array
+
+与えられたオプションを持つメソッド名の配列を返します。
+
+@param opt オプション名をシンボルで指定します。
+
+  FileUtils.collect_method(:preserve) # => ["cp", "cp_r", "copy", "install"]
+
+--- commands -> Array
+
+何らかのオプションを持つメソッド名の配列を返します。
+
+  FileUtils.commands  # => ["chmod", "cp", "cp_r", "install", ...]
+
+--- have_option?(mid, opt) -> bool
+
+mid というメソッドが opt というオプションを持つ場合、真を返します。
+そうでない場合は、偽を返します。
+
+@param mid メソッド名を指定します。
+
+@param opt オプション名を指定します。
+
+--- options -> Array
+
+オプション名の配列を返します。
+
+  FileUtils.options  #=> ["noop", "force", "verbose", "preserve", "mode"]
+
+--- options_of(mid) -> Array
+
+与えられたメソッド名で使用可能なオプション名の配列を返します。
+
+@param mid メソッド名を指定します。
+
+  FileUtils.options(:rm)  # => ["noop", "verbose", "force"]
+
+#@# --- private_module_function(name) -> self
+#@# nodoc
+#@# name で指定されたメソッドをモジュール関数にします。
+#@# また、可視性を private にします。
+#@# 
+#@# @see [[m:Module#module_function]], [[m:Module#private_class_method]]
+
+#@end
+== Constants
+
+--- METHODS -> Array
+
+このモジュールで定義されている公開メソッドの配列を返します。
+
+--- OPT_TABLE -> Hash
+
+内部で使用します。
 
 = module FileUtils::Verbose
 include FileUtils
