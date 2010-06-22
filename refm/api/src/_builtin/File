@@ -339,6 +339,33 @@ path が整数の場合はファイルディスクリプタとして扱い、それに対応する
 
 @raise Errno::EXXX 指定された path がシンボリックリンクでない場合や、リンクの読み取りに失敗した場合に発生します。
 
+#@since 1.9.2
+--- realpath(pathname, basedir = nil) -> String
+
+与えられた pathname に対応する絶対パスを返します。
+
+pathname の全てのコンポーネントは存在しなければなりません。
+
+@param pathname ファイル名を指定します。
+
+@param basedir ベースディレクトリを指定します。省略するとカレントティレクトリを使用します。
+
+@raise Errno::ENOENT ファイルが存在しない場合に発生します。
+
+--- realdirpath(pathname, basedir = nil) -> String
+
+与えられた pathname に対応する絶対パスを返します。
+
+pathname の最後のコンポーネントは存在していなくても例外は発生しません。
+
+@param pathname ファイル名を指定します。
+
+@param basedir ベースディレクトリを指定します。省略するとカレントティレクトリを使用します。
+
+@raise Errno::ENOENT ファイルが存在しない場合に発生します。
+
+#@end
+
 --- rename(from, to)    -> 0
 
 ファイルの名前を変更します。ディレクトリが異なる場合には移動も行い
