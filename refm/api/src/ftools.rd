@@ -12,7 +12,6 @@ require 'ftools' とすると、ファイルのコピーや削除などのメソッドが追加されます。
 
 --- copy(from, to, verbose = false) -> bool
 --- cp(from, to, verbose = false)  -> bool
-#@todo
 
 ファイルをコピーします。
 
