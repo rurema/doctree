@@ -91,9 +91,6 @@ fiber
 #@since 1.8.0
 fileutils
 #@end
-#@if (version <= "1.6.8")
-final
-#@end
 #@until 1.9.1
 finalize
 #@end
