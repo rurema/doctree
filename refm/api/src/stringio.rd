@@ -491,6 +491,9 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 --- readpartial(len)          -> String
 --- readpartial(len, outbuf)  -> String
 #@end
+#@since 1.9.2
+--- read_nonblock(maxlen, outbuf = "") -> String
+#@end
 
 自身から len バイト読み込みんで返します。
 [[m:StringIO#read]] と同じです。ただし、文字列の終端に達した場合、EOFError を投げます。
@@ -505,6 +508,9 @@ obj と改行を順番に自身に出力します。引数がなければ改行のみを出力します。
 @raise EOFError 文字列の終端に達した場合に発生します。
 
 --- syswrite(obj)    -> Integer
+#@since 1.9.2
+--- write_nonblock(obj) -> Integer
+#@end
 
 自身に obj を書き込みます。[[m:StringIO#write]] と同じです。
 
