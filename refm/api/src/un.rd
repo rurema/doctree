@@ -63,7 +63,6 @@ Change the mode of each FILE to OCTAL-MODE.
   ruby -run -e install -- [OPTION] SOURCE DEST
 
   -p          ファイルのアクセス時刻と修正時刻を保持します。
-              corresponding destination files
   -m          chmod と同じようにファイルのパーミッションを設定します。
   -v          詳細表示
 
@@ -117,14 +116,13 @@ Change the mode of each FILE to OCTAL-MODE.
 @see [[man:rm(1)]]
 
 --- rmdir -> ()
-#@todo
 
 空のディレクトリを削除します。
 
   ruby -run -e rmdir -- [OPTION] DIR
 
 #@since 1.8.8
-  -p          remove DIRECTORY and its ancestors.
+  -p          DIR で指定されたディレクトリとその上位ディレクトリを削除します
 #@end
   -v          詳細表示
 
@@ -145,19 +143,16 @@ Change the mode of each FILE to OCTAL-MODE.
 #@# --- setup(options = "", * long_options) -> ()
 #@since 1.8.8
 --- wait_writable -> ()
-#@todo
-
-Wait until the file becomes writable.
+ファイルが書き込み可能になるまで待ちます。
 
   ruby -run -e wait_writable -- [OPTION] FILE
 
-  -n RETRY	count to retry
-  -w SEC	each wait time in seconds
-  -v		verbose
+  -n RETRY	リトライ数
+  -w SEC	リトライごとに待つ秒数
+  -v		詳細表示
 --- mkmf -> ()
-#@todo
 
-Create makefile using mkmf.
+[[lib:mkmf]] を使って Makefile を作成します。
 
   ruby -run -e mkmf -- [OPTION] EXTNAME [OPTION]
 
@@ -171,18 +166,17 @@ Create makefile using mkmf.
   -c ARGS	run have_const
   --vendor	install to vendor_ruby
 --- httpd -> ()
-#@todo
 
-Run WEBrick HTTP server.
+WEBrick HTTP server を起動します。
 
   ruby -run -e httpd -- [OPTION] DocumentRoot
 
-  --bind-address=ADDR         address to bind
-  --port=NUM                  listening port number
-  --max-clients=MAX           max number of simultaneous clients
-  --temp-dir=DIR              temporary directory
-  --do-not-reverse-lookup     disable reverse lookup
-  --request-timeout=SECOND    request timeout in seconds
+  --bind-address=ADDR         バインドアドレスを指定します
+  --port=NUM                  ポート番号を指定します
+  --max-clients=MAX           同時接続数の最大値
+  --temp-dir=DIR              一時ディレクトリを指定します
+  --do-not-reverse-lookup     逆引きを無効にします
+  --request-timeout=SECOND    リクエストがタイムアウトする秒数を指定します
   --http-version=VERSION      HTTP version
-  -v                          verbose
+  -v                          詳細表示
 #@end
