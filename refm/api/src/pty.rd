@@ -50,12 +50,27 @@
 
 == Singleton Methods
 #@since 1.9.2
---- check(pid, exc)
-#@todo
+--- check(pid, raise = false) -> Process::Status | nil
+
+pid で指定された子プロセスの状態をチェックし、実行中であれば nil を返します。
+
+終了しているか停止している場合、第二引数が偽であれば、
+対応する [[c:Process::Status]] オブジェクトを返します。
+
+@param pid チェックしたい子プロセスの PID を指定します。
+
+@param raise 真を指定すると、子プロセスが終了または停止している場合、
+             例外 [[c:PTY::ChildExited]] が発生します。デフォルトは偽です。
 
 --- open -> [IO, File]
 --- open{|master_io, slave_file| ... } -> object
-#@todo
+
+仮想 tty を確保し、マスター側に対応する [[c:IO]] オブジェクトとスレーブ側に
+対応する [[c:File]] オブジェクトの配列を返します。
+
+ブロック付きで呼び出された場合は、これらの要素はブロックパラメータとして渡され、ブロッ
+クから返された結果を返します。また、このマスター IO とスレーブ File は、ブロックを抜けるとき
+にクローズ済みでなければクローズされます．
 
 #@end
 #@since 1.8.0
