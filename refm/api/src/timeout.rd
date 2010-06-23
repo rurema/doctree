@@ -1,9 +1,5 @@
 タイムアウトを行うライブラリです。
 
-= class TimeoutError < Interrupt
-
-[[c:Timeout::Error]]の別名です。
-
 = reopen Kernel
 
 == Private Instance Methods
@@ -15,6 +11,7 @@
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
 [[c:Timeout::Error]] が発生します。
+
 exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 その例外が発生します。
 ブロックパラメータ i は sec がはいります。
@@ -25,7 +22,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 @param sec タイムアウトする時間を秒数で指定します.
 @param exception_class タイムアウトした時、発生させる例外を指定します.
 
-[注意]
+=== 注意
 
 timeout による割り込みは Thread によって実現されています。C 言語
 レベルで実装され、Ruby のスレッドが割り込めない処理に対して
@@ -50,6 +47,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 ブロックを sec 秒の期限付きで実行します。
 ブロックの実行時間が制限を過ぎたときは例外
 [[c:Timeout::Error]] が発生します。
+
 exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
 その例外が発生します。
 ブロックパラメータ i は sec がはいります。
@@ -100,7 +98,7 @@ exception_class を指定した場合には [[c:Timeout::Error]] の代わりに
     puts err
   end
 
-[注意]
+=== 注意
 
 timeout による割り込みは Thread によって実現されています。
 C 言語レベルで実装され、
@@ -198,11 +196,13 @@ timeout による割り込みは [[m:Kernel.#system]] によって呼び出された外部プログラム
   #止まっているか確認する。
   #system("ps au")
 
-#@#== Constants
-#@#--- Error
-#@#[[c:Timeout::Error]]
+#@# 内部用なのでコメントアウト
+#@# == Constants
+#@# --- THIS_FILE
+#@# --- CALLER_OFFSET
 
 = class Timeout::Error < Interrupt
+alias TimeoutError
 
 [[lib:timeout]] で定義される例外クラスです。
 関数 timeout がタイムアウトすると発生します。
@@ -229,3 +229,6 @@ timeout を捕捉しないようにライブラリ内で [[c:TimeoutError]] のサブクラスを
         timeout(5) {
           Foo.new.longlongtime_method
         }
+
+#@# nodoc
+#@# = class Timeout::ExitException < Exception
