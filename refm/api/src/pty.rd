@@ -2,8 +2,6 @@
 
 = module PTY
 
-#@#Author: 伊藤彰則
-
 疑似端末(Pseudo tTY)を扱うモジュールです。
 
 == Module Functions
@@ -12,7 +10,6 @@
 --- getpty(command){|read, write, pid| ... } -> nil
 --- spawn(command)                           -> [IO, IO, Integer]
 --- spawn(command){|read, write, pid| ... }  -> nil
-#@todo
 
 擬似 tty を確保し、指定されたコマンドをその擬似 tty の向こうで実行し、配列を返します。
 
@@ -41,6 +38,7 @@
 
 @see [[m:Kernel.#system]], [[m:IO.popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
 
+#@until 1.9.2
 --- protect_signal{ ... } -> self
 このメソッドは何もしません。
 このメソッドは obsolete です。
@@ -48,7 +46,18 @@
 --- reset_signal -> self
 このメソッドは何もしません。
 このメソッドは obsolete です。
+#@end
 
+== Singleton Methods
+#@since 1.9.2
+--- check(pid, exc)
+#@todo
+
+--- open -> [IO, File]
+--- open{|master_io, slave_file| ... } -> object
+#@todo
+
+#@end
 #@since 1.8.0
 = class PTY::ChildExited < RuntimeError
 
