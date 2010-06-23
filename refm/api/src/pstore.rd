@@ -26,15 +26,16 @@ transaction のブロック内である必要があります。
 
 == Class Methods
 
+#@since 1.9.1
+--- new(file, thread_safe = false) -> PStore
+#@else
 --- new(file) -> PStore
+#@end
 
 ファイル名 file に対してデータベースを読み書きする。
 
-file のあるディレクトリは書き込み可能である必要がある。
-データベースを更新するときにバックアップファイルが作成されるため。
-
-@param file データベースファイル名。
-
+データベースを更新するときにバックアップファイルが作成されるため、
+file のあるディレクトリは書き込み可能である必要があります。
 #@since 1.8.2
 データベースの更新が成功すると、バックアップファイルは削除される。バックアップファイル名は
 ファイル名に ".tmp" および ".new" を付けたもの。
@@ -42,10 +43,15 @@ file のあるディレクトリは書き込み可能である必要がある。
 バックアップファイルは削除されずに残る。バックアップファイル名はファイル名の後に "~" を付けたもの。
 #@end
 
+@param file データベースファイル名。
+
+#@since 1.9.1
+@param thread_safe 真を指定すると [[c:Mutex]] を用いてスレッドセーフになります。デフォルトは偽です。
+#@end
 == Instance Methods
 
 #@since 1.8.0
---- transaction(read_only = false) {|pstore| ... } -> ()
+--- transaction(read_only = false) {|pstore| ... } -> object
 
 トランザクションに入ります。
 このブロックの中でのみデータベースの読み書きができます。
@@ -53,6 +59,8 @@ file のあるディレクトリは書き込み可能である必要がある。
 読み込み専用のトランザクションが使用可能です。
 
 @param read_only 真を指定すると、読み込み専用のトランザクションになります。
+
+@return ブロックで最後に評価した値を返します。
 
 @raise PStore::Error read_only を真にしたときに、データベースを変更しようした場合に発生します。
 
@@ -132,7 +140,6 @@ file のあるディレクトリは書き込み可能である必要がある。
 #@end
 
 --- delete(name) -> object
-#@todo
 
 ルートnameに対応する値を削除します。
 
@@ -227,12 +234,95 @@ transaction ブロックから抜けますが、データベースの変更は反映されません。
     pstore["root"]       # => nil
   end
 
+#@since 1.8.2
+#@until 1.9.1
+--- dump(table) -> String
+#@# nodoc
+単なる [[m:Marshal.#dump]] のラッパーメソッドです。
+
+@param table ハッシュを指定します。
+
+@see [[m:Marshal.#load]]
+
+--- load(content) -> object
+#@# nodoc 動かないっぽい。
+単なる [[m:Marshal.#load]] のラッパーメソッドです。
+
+@param content データを指定します。
+
+@see [[m:Marshal.#load]]
+
+--- load_file(file) -> object
+#@# nodoc
+
+単なる [[m:Marshal.#load]] のラッパーメソッドです。
+
+@param file ファイル名か [[c:IO]] オブジェクトを指定します。
+
+@see [[m:Marshal.#load]]
+#@end
+#@end
+
+#@since 1.9.1
+--- ultra_safe -> bool
+真であれば、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
+デフォルトは偽です。
+
+このフラグの効果があるのは一部のプラットフォームだけです。
+(e.g. all POSIX platforms: Linux, MacOS X, FreeBSD, etc)
+
+--- ultra_safe=(flag)
+真をセットすると、パフォーマンスと引き換えにファイル更新の衝突を避けることができます。
+
+このフラグの効果があるのは一部のプラットフォームだけです。
+(e.g. all POSIX platforms: Linux, MacOS X, FreeBSD, etc)
+
+@param flag 真偽値を指定します。
+
+
+#@end
+
 == Private Instance Methods
 
 --- in_transaction -> ()
 
 トランザクションの中でなければ例外を発生させます。
 
+== Constants
+#@since 1.8.6
+--- RDWR_ACCESS -> Fixnum
+内部で利用する定数です。
+
+--- RD_ACCESS -> Fixnum
+内部で利用する定数です。
+
+--- WR_ACCESS -> Fixnum
+内部で利用する定数です。
+#@end
+#@since 1.9.1
+--- EMPTY_MARSHAL_CHECKSUM -> String
+内部で利用する定数です。
+
+--- EMPTY_MARSHAL_DATA -> String
+内部で利用する定数です。
+
+--- EMPTY_STRING -> String
+内部で利用する定数です。
+
+#@end
 = class PStore::Error < StandardError
 
 [[c:PStore]] の中で発生する例外です。
+
+#@since 1.9.1
+= class PStore::DummyMutex < Object
+
+ダミーのミューテックス。このクラスを使ってもスレッドセーフにはなりません。
+
+== Instance Methods
+
+--- synchronize{ ... } -> object
+
+与えられたブロックを評価するだけで何もしません。
+
+#@end
