@@ -48,7 +48,6 @@ HTTP のセッションキーなどに適しています。
 
 @see [[rfc:3548]]
 
-#@since 1.9.1
 #@since 1.9.2
 --- urlsafe_base64(n = nil, padding = false)  -> String
 
@@ -68,23 +67,6 @@ HTTP のセッションキーなどに適しています。
    p SecureRandom.urlsafe_base64(nil, true) #=> "i0XQ-7gglIsHGV2_BNPrdQ=="
    p SecureRandom.urlsafe_base64(nil, true) #=> "-M8rLhr7JEpJlqFGUMmOxg=="
 
-@see [[rfc:3548]]
-
-#@else
---- urlsafe_base64(n = nil)  -> String
-
-ランダムで URL-safe な base64 文字列を生成して返します。
-
-@param n 文字列の生成に使われるランダムネスのサイズを整数で指定します。
-         生成される文字列のサイズはn の約 4/3 倍になります。
-         nil を指定した場合 n として 16 が使われます。
-
-@raise NotImplementedError  安全な乱数発生器が使えない場合に発生します。
-
-   p SecureRandom.urlsafe_base64 #=> "b4GOKm4pOYU_-BOXcrUGDg"
-   p SecureRandom.urlsafe_base64 #=> "UZLdOkzop70Ddx-IJR0ABg"
-
-#@end
 @see [[m:SecureRandom.base64]],  [[rfc:3548]]
 #@end
 --- hex(n = nil)    -> String
@@ -140,3 +122,4 @@ version 4 の UUID は全くランダムです (バージョンを除いて)。
 @see [[rfc:4122]]
 #@end
 #@end
+
