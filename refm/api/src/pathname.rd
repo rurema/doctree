@@ -8,21 +8,38 @@
 --- Pathname(path) -> Pathname
 文字列 path を元に Pathname オブジェクトを生成します。
 
-Pathname.new(string) と同じです。
+Pathname.new(path) と同じです。
 
 #@end
 
-
-
 = class Pathname < Object
 
-パス名クラス
+パス名をオブジェクト指向らしく扱うクラスです。
+
+Pathname オブジェクトはパス名を表しており、ファイルやディレクトリそのものを表してはいません。
+当然、存在しないファイルのパス名も扱えます。
+
+絶対パスも相対パスも扱えます。
+
+Pathname オブジェクトは immutable であり、自身を破壊的に操作するメソッドはありません。
+
+Pathname のインスタンスメソッドには、ディレクトリのパスを返す [[m:Pathname#dirname]] のように、
+文字列操作だけで結果を返すものもあれば、ファイルの中身を読み出す [[m:Pathname#read]] のように
+ファイルシステムにアクセスするものもあります。
+
+Pathname オブジェクトの生成には、[[m:Pathname#new]] のほかに [[m:Kernel#Pathname]] も使えます。
+
+  Pathname.new("foo/bar") # => #<Pathname:foo/bar>
+  Pathname("foo/bar")     # => #<Pathname:foo/bar>
+
 
 == Constants
 
 #@since 1.8.5
 --- SEPARATOR_PAT
 パス名のなかのディレクトリを区切る部分にマッチする正規表現です。
+
+この値は環境依存です。
 
 --- TO_PATH
 内部的に使っている定数です。利用者が使うことはありません。
@@ -33,6 +50,10 @@ Pathname.new(string) と同じです。
 
 --- new(path) -> Pathname
 文字列 path を元に Pathname オブジェクトを生成します。
+
+@param path String オブジェクトまたは類似のオブジェクトを与えます。
+
+@raise ArgumentError path が \0 を含んでいると発生します。
 
 --- getwd -> Pathname
 --- pwd   -> Pathname
@@ -239,6 +260,11 @@ Pathname オブジェクトを生成して返します。
 other が絶対パスなら単に other と同じ内容の Pathname オブジェクトが返さ
 れます。
 
+ Pathname("foo/bar")+"baz" # => #<Pathname:foo/bar/baz>
+ Pathname("foo/bar/")+"baz" # => #<Pathname:foo/bar/baz>
+ Pathname("foo/bar")+"/baz" # => #<Pathname:/baz>
+ Pathname("foo/bar")+"../baz" # => #<Pathname:foo/baz>
+
 @param other 文字列か Pathname オブジェクトを指定します。
 
 #@since 1.8.1
@@ -312,7 +338,7 @@ IO.foreach(self.to_s, *args, &block) と同じです。
 
 @see [[m:IO.foreach]]
 #@end
---- read(*args)
+--- read(*args) -> String | nil
 IO.read(self.to_s, *args)と同じです。
 
 @see [[m:IO.read]]
