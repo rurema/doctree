@@ -17,7 +17,7 @@ RubyのオブジェクトをYAML形式の外部ファイルに格納するためのクラスです。
 使い方は [[c:PStore]] とほとんど同じです。
 インターフェースは [[c:Hash]] に似ています。 
 
-== class methods
+== Class Methods
 --- new(*options)
 
 YAML形式のファイルを読み込ませたい場合は、最初の引数にファイル名を文字列で指定します。
@@ -27,7 +27,7 @@ YAML形式のファイルを読み込ませたい場合は、最初の引数にファイル名を文字列で指定し
 
 @see [[m:YAML::DEFAULTS]]
 
-== instance methods
+== Instance Methods
 --- [](name) -> object
 ルートnameに対応する値を得ます。
 
