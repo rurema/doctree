@@ -135,7 +135,7 @@ WEBrick::HTTPRequest オブジェクトの各メソッドから得ることができます。
 
 == Class Methods
 
---- new(config={}, *options)    -> WEBrick::CGI
+--- new(config = {}, *options)    -> WEBrick::CGI
 
 WEBrick::CGI オブジェクトを生成してかえします。
 
@@ -162,6 +162,8 @@ config で有効なキーとその値は以下のとおりです。
 : :Escape8bitURI
  この値が true の場合、クライアントからのリクエスト URI に含まれる 8bit 目が立った文字をエスケープします。
  デフォルトは false です。 
+
+@param options ユーザがこのクラスを継承して作成したクラスで @options というインスタンス変数として使用できます。
 
 == Instance Methods
 
@@ -198,7 +200,7 @@ config で有効なキーとその値は以下のとおりです。
 --- do_OPTIONS(req, res)    -> ()
 
 自身の service メソッドから HTTP のリクエストに応じて
-呼ばれるメソッドです。WEBrick::CGI のサブクラスはこれらのメソッドを適切に実装し
+呼ばれるメソッドです。[[c:WEBrick::CGI]] のサブクラスはこれらのメソッドを適切に実装し
 なければいけません。返り値は特に規定されていません。
 
 クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要があります。
@@ -220,7 +222,7 @@ config で有効なキーとその値は以下のとおりです。
 指定された [[c:WEBrick::HTTPRequest]] オブジェクト req の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
 自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
 
-特に理由が無い限り WEBrick::CGI のサブクラスがこのメソッドを定義する必要はありません。
+特に理由が無い限り [[c:WEBrick::CGI]] のサブクラスがこのメソッドを定義する必要はありません。
 
 @param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
