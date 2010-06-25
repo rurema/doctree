@@ -147,7 +147,7 @@ Change the mode of each FILE to OCTAL-MODE.
 
   ruby -run -e wait_writable -- [OPTION] FILE
 
-  -n RETRY	リトライ数
+  -n RETRY	リトライ回数
   -w SEC	リトライごとに待つ秒数
   -v		詳細表示
 --- mkmf -> ()
