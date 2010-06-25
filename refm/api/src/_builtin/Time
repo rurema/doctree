@@ -233,7 +233,7 @@ Struct::Tms は以下のメンバを持つ構造体クラスです。
 
 --- +(other)    -> Time
 
-self より other 秒だけ後の時刻を返します
+self より other 秒だけ後の時刻を返します。
 
 @param other 自身からの秒数を数値で指定します。
 

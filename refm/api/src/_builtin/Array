@@ -1390,7 +1390,7 @@ self を返します。ただし、Array のサブクラスのインスタンスに対して呼ばれた時は、
 
 --- to_ary  -> self
 
-self をそのまま返します
+self をそのまま返します。
 
 #@since 1.9.1
 --- to_s    -> String

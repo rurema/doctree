@@ -449,7 +449,7 @@ path で指定されたファイルのサイズを最大 length バイト
 
 --- umask(umask)    -> Integer
 
-umask を変更します。変更前の umask の値を返します
+umask を変更します。変更前の umask の値を返します。
 
 @param umask 設定したい umask の値を整数で指定します。
 
