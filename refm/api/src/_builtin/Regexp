@@ -20,43 +20,30 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 --- compile(string, option = nil, code = nil) -> Regexp
 --- new(string, option = nil, code = nil) -> Regexp
 
-文字列 string をコンパイルして正規表現オブジェクトを生成して
-返します。
-
-第二引数が [[c:Fixnum]] であった場合、その値は
-
-  * [[m:Regexp::IGNORECASE]]
-  * [[m:Regexp::MULTILINE]]
-  * [[m:Regexp::EXTENDED]]
-
-の論理和でなければなりません。
-
-第二引数が [[c:Fixnum]] 以外であれば真偽値の指定として見なされ、真
-(nil, false 以外)であれば [[m:Regexp::IGNORECASE]]
-の指定と同じになります。
-
-第三引数が与えられた時には、[[m:$KCODE]] の値にかかわ
-らず、指定された文字コードでマッチを行います。文字コードは
-[[m:$KCODE]] への代入と同様に文字列引数の最初の一文字で決定されま
-す。
-
-第一引数が正規表現であれば内容が同じ(ただし、上記フラグの内容はク
-リアされた)正規表現を複製して返します。このとき、複製した正規表現
-に対して、第二、第三引数の指定が設定されます。
+文字列 string をコンパイルして正規表現オブジェクトを生成して返します。
 
 #@since 1.8.0
-第一引数が正規表現であれば第一引数を複製し
-て返します。第二、第三引数は警告の上無視されます。
+第一引数が正規表現であれば第一引数を複製して返します。第二、第三引数は警告の上無視されます。
 #@end
-
-正規表現のコンパイルに失敗した場合、例外 [[c:RegexpError]] が発生
-します。
 
 @param string 正規表現を文字列として与えます。
 
 @param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],  [[m:Regexp::EXTENDED]] の論理和を指定します。
+              [[c:Fixnum]] 以外であれば真偽値の指定として見なされ、真(nil, false 以外)であれば
+              [[m:Regexp::IGNORECASE]] の指定と同じになります。
 
-@param code 文字コードを[[m:$KCODE]] への代入と同様の文字列で指定します。
+#@since 1.9.1
+#@since 1.9.2
+@param code "n", "N" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
+            それ以外の指定は警告を出力します。
+#@else
+@param code "n" が与えられた時には、生成された正規表現のエンコーディングは ASCII-8BIT になります。
+            それ以外の指定は警告を出力します。
+#@end
+#@else
+@param code この引数が与えられた場合は [[m:$KCODE]] の値にかかわらず、指定された文字コードでマッチを行います。
+            文字コードは [[m:$KCODE]] への代入と同様に文字列引数の最初の一文字で決定されます。
+#@end
 
 @raise  RegexpError 正規表現のコンパイルに失敗した場合発生します。
 
@@ -78,21 +65,33 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
   puts t2.match(str)[0]  #=> ふるいけや
                          #=> かわずと
 
+#@until 1.9.1
 @see [[m:$KCODE]]
+#@end
 
+#@since 1.9.1
+--- escape(string) -> String
+--- quote(string) -> String
+#@else
 --- escape(string, kcode = $KCODE) -> String
 --- quote(string, kcode = $KCODE) -> String
+#@end
 
 string の中で正規表現において特別な意味を持つ文字の直前にエ
-スケープ文字(バックスラッシュ)を挿入した文字列を返します。省略可能
-な引数 kcode で文字列の文字コードを指定します
+スケープ文字(バックスラッシュ)を挿入した文字列を返します。
+
+#@until 1.9.1
+省略可能な引数 kcode で文字列の文字コードを指定します
 (省略時は [[m:$KCODE]] の値が使用されます)。
 
 文字コードの指定は [[m:$KCODE]] と同様に行います。
+#@end
 
 @param string 正規表現において特別な意味をもつ文字をもつ文字列を指定します。
 
+#@until 1.9.1
 @param kcode 文字コードを文字列で指定します。文字コードの指定は [[m:$KCODE]] と同様に行います。
+#@end
 
   rp = Regexp.escape("$bc^")
   puts rp #=> \$bc\^
