@@ -6,9 +6,12 @@
 == Private Instance Methods
 
 --- Pathname(path) -> Pathname
-文字列 path を元に Pathname オブジェクトを生成します。
+文字列 path を元に [[c:Pathname]] オブジェクトを生成します。
 
 Pathname.new(path) と同じです。
+
+@param path 文字列、または類似のオブジェクトを与えます。
+            実際には to_str に反応するオブジェクトなら何でも構いません。
 
 #@end
 
@@ -51,7 +54,8 @@ Pathname オブジェクトの生成には、[[m:Pathname#new]] のほかに [[m:Kernel#Pathname
 --- new(path) -> Pathname
 文字列 path を元に Pathname オブジェクトを生成します。
 
-@param path String オブジェクトまたは類似のオブジェクトを与えます。
+@param path 文字列、または類似のオブジェクトを与えます。
+            実際には to_str に反応するオブジェクトなら何でも構いません。
 
 @raise ArgumentError path が \0 を含んでいると発生します。
 
