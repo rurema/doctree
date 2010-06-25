@@ -143,8 +143,6 @@ Prime クラスはシングルトンであると考えてください。Prime クラスはデフォルトのイン
 
 @see [[c:Prime::EratosthenesGenerator]], [[c:Prime::TrialDivisionGenerator]], [[c:Prime::Generator23]]
 
-== Instance Methods
-
 = class Prime::PseudoPrimeGenerator < Object
 include Enumerable
 
