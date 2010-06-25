@@ -338,7 +338,7 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 
 @return ハッシュ値を返します。
 
---- inspect
+--- inspect -> String
 
 自身を人間が読みやすい形の文字列表現にして返します。
 
@@ -527,7 +527,7 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 
 @see [[m:Rational#inspect]]
 
-== private instance methods
+== Private Instance Methods
 
 --- convert(*arg) -> Rational
 
