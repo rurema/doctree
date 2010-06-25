@@ -300,7 +300,46 @@ unpack したソケットパス名を返します。
   p Socket.unpack_sockaddr_un(Socket.sockaddr_un("/tmp/.X11-unix/X0"))
   => "/tmp/.X11-unix/X0"
 #@end
+#@since 1.9.1
+--- getservbyport(port, protocol_name="tcp") -> String
+#@todo
+ポート番号に対応するサービスの正式名を返します。
+#@#rdoc の Obtains the port number for _port_. って変?
 
+@param port ポート番号
+@param protocol_name "tcp" や "udp" などのプロトコル名
+@return サービスの正式名
+
+   Socket.getservbyport(80)         #=> "www"
+   Socket.getservbyport(514, "tcp") #=> "shell"
+   Socket.getservbyport(514, "udp") #=> "syslog"
+#@end
+#@since 1.9.2
+--- accept_loop
+#@todo
+--- ip_address_list
+#@todo
+--- tcp
+#@todo
+--- tcp_server_loop
+#@todo
+--- tcp_server_sockets
+#@todo
+--- udp_server_loop
+#@todo
+--- udp_server_loop_on
+#@todo
+--- udp_server_recv
+#@todo
+--- udp_server_sockets
+#@todo
+--- unix
+#@todo
+--- unix_server_loop
+#@todo
+--- unix_server_socket
+#@todo
+#@end
 == Instance Methods
 
 --- accept
@@ -420,6 +459,10 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 けば [[m:Socket#accept]] と同じです。
 #@end
 
+#@since 1.9.2
+--- ipv6only!
+#@todo
+#@end
 == Constants
 
 #@include(constants)
