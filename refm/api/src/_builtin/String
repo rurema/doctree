@@ -179,14 +179,10 @@ Ruby の正規表現エンジンはマルチバイト文字列に対応しているので、
 正規表現を使って位置を指定すればマルチバイト文字を正しく処理できます。
 なお、正規表現を正しく動作させるためには、組み込み変数 [[m:$KCODE]]
 を文字列のエンコーディングにあわせて設定する必要があります。
-#@# $KCODE の影響
-#@#   * レクサ
-#@#   * upcase, downcase, swapcase, capitalize, split, gsub, scan
-#@#   * inspect ($KCODE設定されているとマルチバイト文字列をエスケープせず表示)
 
 また、[[lib:jcode]] ライブラリを利用すると
 String クラスのすべてのメソッドが文字単位で動作するようになります。
-しかし jcode ライブラリはプロセス全体に影響するため、
+しかし [[lib:jcode]] ライブラリはプロセス全体に影響するため、
 中程度以上の規模プログラムで用いることは推奨できません。
 #@end
 
@@ -742,6 +738,7 @@ val を返します。
   p "fooBAR--".capitalize   # => "Foobar--"
   p "FOOBAR--".capitalize   # => "Foobar--"
 
+#@until 1.9.1
 [[m:$KCODE]] が適切に設定されていない場合は、
 マルチバイト文字の一部をあやまって変換してしまう場合があります。
 この問題は以下のように Shift JIS エンコーディングを使う場合に発生します。
@@ -752,6 +749,7 @@ val を返します。
 
 また、$KCODE を設定しても、
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
+#@end
 
 @see [[m:String#capitalize!]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
@@ -774,6 +772,7 @@ val を返します。
   str.capitalize!
   p str   # => "Foobar"
 
+#@until 1.9.1
 [[m:$KCODE]] が適切に設定されていない場合は、
 マルチバイト文字の一部をあやまって変換してしまう場合があります。
 この問題は以下のように Shift JIS エンコーディングを使う場合に発生します。
@@ -784,6 +783,7 @@ val を返します。
 
 また、$KCODE を設定しても、
 マルチバイト文字のいわゆる全角アルファベットは処理しません。
+#@end
 
 @see [[m:String#capitalize]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
@@ -1130,6 +1130,8 @@ str の形式は [[man:tr(1)]] と同じです。
 アルファベット大文字をすべて小文字に置き換えた新しい文字列を生成し返します。
 アルファベット大文字以外の文字はすべてそのまま保存されます。
 
+このメソッドはマルチバイト文字を認識しません。
+#@until 1.9.1
 処理する文字列の文字コードが Shift JIS で、
 しかも [[m:$KCODE]] が適切に設定されていない場合、
 このメソッドはマルチバイト文字の一部も変換してしまう場合があります。
@@ -1142,7 +1144,12 @@ str の形式は [[man:tr(1)]] と同じです。
     # -*- Coding: shift_jis -*-
     $KCODE ='n'
     puts "帰".downcase   # => 蟻
-  
+
+#@else
+例:
+    p "STRing?".downcase   # => "string?"
+#@end
+
 @see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
 --- downcase! -> self | nil
@@ -1151,6 +1158,8 @@ str の形式は [[man:tr(1)]] と同じです。
 アルファベット大文字をすべて破壊的に小文字に置き換えます。
 アルファベット大文字以外の文字はすべてそのまま保存されます。
 
+このメソッドはマルチバイト文字を認識しません。
+#@until 1.9.1
 処理する文字列の文字コードが Shift JIS で、
 しかも [[m:$KCODE]] が適切に設定されていない場合、
 このメソッドはマルチバイト文字の一部も変換してしまう場合があります。
@@ -1165,7 +1174,13 @@ str の形式は [[man:tr(1)]] と同じです。
     # -*- Coding: shift_jis -*-
     $KCODE ='n'
     puts "帰".downcase   # => 蟻
-  
+#@else
+@return self を変更して返します。変更が無かった場合は nil を返します。
+
+例:
+    p "STRing?".downcase   # => "string?"
+
+#@end
 @see [[m:String#upcase]], [[m:String#swapcase]], [[m:String#capitalize]]
 
 --- dump -> String
@@ -1911,10 +1926,12 @@ sep が正規表現で、かつその正規表現に括弧が含まれている場合には、
     # 文字列全体を 1 文字ずつに分割する例
     p 'hi there'.split(//).join(':')     # => "h:i: :t:h:e:r:e"
 
+#@until 1.9.1
     # $KCODE を設定すればマルチバイト文字列を認識
     $KCODE = "EUC"
     p '文字列'.split(//).join(':')       # => "文:字:列"
 
+#@end
     # limit == 0 だと制限なく分割、配列末尾の空文字列は取り除かれる
     p "a,b,c,,,".split(/,/, 0)   # => ["a", "b", "c"]
 
@@ -2325,6 +2342,7 @@ Ruby 1.6 以前では pattern が文字列の場合、
 'a' から 'z' までのアルファベット小文字を大文字に変更した文字列を返します。
 
 このメソッドはマルチバイト文字を認識しません。
+#@until 1.9.1
 そのため、文字列が Shift JIS エンコーディングで、
 かつ [[m:$KCODE]] が適切に設定されていない場合、
 マルチバイト文字の一部も変換してしまう場合があります。
@@ -2338,7 +2356,11 @@ Ruby 1.6 以前では pattern が文字列の場合、
     # -*- Coding: shift_jis -*-
     $KCODE = 'n'
     puts "蟻".swapcase   # => 帰
-
+#@else
+例:
+    p "ABCxyz".swapcase   # => "abcXYZ"
+    p "Access".swapcase   # => "aCCESS"
+#@end
 @see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
 --- swapcase! -> self | nil
@@ -2350,6 +2372,7 @@ swapcase! は self を変更して返しますが、
 置換が起こらなかった場合は nil を返します。
 
 このメソッドはマルチバイト文字を認識しません。
+#@until 1.9.1
 そのため、文字列が Shift JIS エンコーディングで、
 かつ [[m:$KCODE]] が適切に設定されていない場合、
 マルチバイト文字の一部も変換してしまう場合があります。
@@ -2364,7 +2387,13 @@ swapcase! は self を変更して返しますが、
     # -*- Coding: shift_jis -*-
     $KCODE ='n'
     puts "蟻".swapcase   # => 帰
+#@else
 
+例:
+    str = "ABCxyz"
+    str.swapcase!
+    p str   # => "abcXYZ"
+#@end
 @see [[m:String#upcase]], [[m:String#downcase]], [[m:String#capitalize]]
 
 --- to_f -> Float
@@ -2634,6 +2663,7 @@ tr_s! は置換された部分だけを squeeze! します。
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
+#@until 1.9.1
 また、マルチバイト文字列に対応するためには
 [[m:$KCODE]] を設定する必要があります。
 文字列が Shift JIS エンコーディングで
@@ -2646,6 +2676,8 @@ tr_s! は置換された部分だけを squeeze! します。
 
   $KCODE = "NONE"
   puts "蟻".upcase   # => 帰   ($KCODE が不適切なので誤って処理された)
+
+#@end
 
 例:
     p "stRIng? STring.".upcase   # => "STRING? STRING."
@@ -2664,6 +2696,7 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
 それはあくまでも「1 文字を 1 文字として認識する」だけであって、
 いわゆる全角アルファベットの大文字小文字までは変換しません。
 
+#@until 1.9.1
 また、マルチバイト文字列に対応するためには
 [[m:$KCODE]] を設定する必要があります。
 文字列が Shift JIS エンコーディングで
@@ -2681,6 +2714,7 @@ ASCII 文字列の範囲内で 'a' から 'z' までの
   str.upcase!
   puts str   # => 帰   ($KCODE が不適切なので誤って処理された)
 
+#@end
 例:
     buf = "stRIng? STring."
     buf.upcase!
@@ -2737,9 +2771,11 @@ eql? で等しい文字列は、常にハッシュ値も等しくなります。
 現在の実装では、Ruby のリテラル形式を使って、
 文字列中の不可視文字をエスケープシーケンスに変換します。
 
+#@until 1.9.1
 $KCODE が設定されている場合は、
 そのエンコーディング内の適正なマルチバイト文字をそのまま出力します。
 それ以外の不可視文字はエスケープシーケンスを使って出力されます。
+#@end
 
 このメソッドは主にデバッグのために用意されています。
 永続化などの目的で文字列をダンプしたいときは、
