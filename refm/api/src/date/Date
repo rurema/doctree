@@ -118,7 +118,7 @@ include Comparable
 @param mon 月
 @param mday 日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@since 1.9.1
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
@@ -143,7 +143,7 @@ include Comparable
 @param cweek 週
 @param cwday 週の日 (曜日)
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 --- gregorian_leap? (year) -> bool
 --- leap? (year) -> bool
@@ -252,7 +252,7 @@ include Comparable
 @param year 年
 @param yday 年の日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@since 1.8.0
 #@since 1.9.1
@@ -291,7 +291,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@since 1.9.1
 #@# exp
@@ -352,7 +352,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param str 日付をあらわす文字列
 @param format 書式
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
-@raise ArgumentError 正しくない日付
+@raise ArgumentError 正しくない日付になる組み合わせである場合に発生します。
 
 #@end
 
@@ -481,7 +481,7 @@ self から n 日後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
 @param n 日数
-@raise TypeError 数値でない
+@raise TypeError n が数値でない場合に発生します。
 
 --- - (x) -> Rational | Date
 x が日付オブジェクトなら、ふたつの差を返します。
@@ -489,7 +489,7 @@ x が日付オブジェクトなら、ふたつの差を返します。
 x が数値ならば、self より x 日前の日付を返します。
 
 @param x 日数、あるいは日付オブジェクト
-@raise TypeError 数値でも日付オブジェクトでもない
+@raise TypeError x が数値でも日付オブジェクトでもない場合に発生します。
 
 --- << (n) -> Date
 self より n ヶ月前の日付オブジェクトを返します。
