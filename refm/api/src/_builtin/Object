@@ -695,12 +695,14 @@ hash を再定義する場合は、一様に分布する任意の整数を返すようにします。
 --- ===(other) -> bool
 
 メソッド [[m:Object#==]] の別名です。
-case 節で使用されます。このメソッドは case 節での振る舞いを考慮して、
+case 式で使用されます。このメソッドは case 式での振る舞いを考慮して、
 各クラスの性質に合わせて再定義すべきです。
 
 一般的に所属性のチェックを実現するため適宜再定義されます。
 
 when 節の式をレシーバーとして === を呼び出すことに注意してください。
+
+また [[m:Enumerable#grep]] でも使用されます。
 
 @param other 比較するオブジェクトです。
 
@@ -726,17 +728,17 @@ when 節の式をレシーバーとして === を呼び出すことに注意してください。
     when /ruby(?!\s*on\s*rails)/i
       "hit! #{arg}"
     when String 
-      "Instance of String class.But don't hit."
+      "Instance of String class. But don't hit."
     else
       "unknown"
     end
   end
   
   puts check([]) #=> unknown
-  puts check("mash-up in Ruby on Rails") #=> instance of String class.but not hit...
+  puts check("mash-up in Ruby on Rails") #=> instance of String class. But not hit...
   puts check("<Ruby's world>") #=> hit! <Ruby's world>
 
-@see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]]
+@see [[m:Object#==]], [[m:Range#===]], [[m:Module#===]], [[m:Enumerable#grep]]
 
 --- =~(other) -> false
 
