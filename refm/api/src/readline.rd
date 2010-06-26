@@ -21,7 +21,7 @@ Emacs のようなキー操作などができます。
 
 ユーザが入力した内容を履歴(以下、ヒストリ)として記録することができます。
 定数 [[c:Readline::HISTORY]] を使用して入力履歴にアクセスできます。
-例えば、Readline::HISTORY.to_a により、
+例えば、[[m:Readline::HISTORY.to_a]] により、
 全ての入力した内容を文字列の配列として取得できます。
 
 例: ヒストリを配列として取得する。
@@ -33,7 +33,7 @@ Emacs のようなキー操作などができます。
 
 == Module Functions
 
---- readline([prompt, [add_hist]]) -> String | nil
+--- readline(prompt = "", add_hist = false) -> String | nil
 
 prompt を出力し、ユーザからのキー入力を待ちます。
 エンターキーの押下などでユーザが文字列を入力し終えると、
@@ -42,18 +42,19 @@ prompt を出力し、ユーザからのキー入力を待ちます。
 何も入力していない状態で EOF(UNIX では ^D) を入力するなどで、
 ユーザからの入力がない場合は nil を返します。
 
-@param prompt カーソルの前に表示する文字列を指定します。デフォルトは""です。
-@param add_hist 真ならば、入力した文字列をヒストリに記録します。デフォルトは偽です。
-
-次の条件を全て満たす場合、例外 IOError が発生します。
-  (1) 標準入力が tty でない。
-  (2) 標準入力をクローズしている。(isatty(2) の errno が EBADF である。)
-
 本メソッドはスレッドに対応しています。
 入力待ち状態のときはスレッドコンテキストの切替えが発生します。
 
 入力時には行内編集が可能で、vi モードと Emacs モードが用意されています。
 デフォルトは Emacs モードです。
+
+@param prompt カーソルの前に表示する文字列を指定します。デフォルトは""です。
+@param add_hist 真ならば、入力した文字列をヒストリに記録します。デフォルトは偽です。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
+
+@raise IOError 標準入力が tty でない、かつ、標準入力をクローズしている
+               ([[man:isatty(2)]] の errno が EBADF である。) 場合に発生します。
 
 例: 
 
@@ -143,8 +144,6 @@ prompt を出力し、ユーザからのキー入力を待ちます。
     print "-> ", buf, "\n"
   end
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
-
 @see [[m:Readline.vi_editing_mode]]、[[m:Readline.emacs_editing_mode]]、
      [[c:Readline::HISTORY]]
 
@@ -175,8 +174,6 @@ proc は、次のものを想定しています。
   (2) 引数にユーザからの入力文字列を取る。
   (3) 候補の文字列の配列を返す。
 
-@param proc ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクトを指定します。
-
 #@since 1.8.0
 「/var/lib /v」の後で補完を行うと、
 デフォルトでは proc の引数に「/v」が渡されます。
@@ -185,7 +182,9 @@ proc は、次のものを想定しています。
 カーソルがある単語の最初の文字から現在のカーソル位置までの文字列が proc の引数に渡されます。
 #@end
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@param proc ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクトを指定します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例: foo、foobar、foobazを補完する。
 
@@ -208,7 +207,7 @@ proc は、次のものを想定しています。
 ユーザからの入力を補完する時の候補を取得する [[c:Proc]] オブジェクト
 proc を取得します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_proc]]
 
@@ -216,9 +215,10 @@ proc を取得します。
 
 ユーザの入力を補完する際、大文字と小文字を同一視する／しないを指定します。
 bool が真ならば同一視します。bool が偽ならば同一視しません。
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
 
 @param bool 大文字と小文字を同一視する(true)／しない(false)を指定します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_case_fold]]
 
@@ -233,22 +233,22 @@ bool が真ならば同一視します。bool が偽ならば同一視しません。
   Readline.completion_case_fold = "This is a String."
   p Readline.completion_case_fold # => "This is a String."
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_case_fold=]]
 
---- vi_editing_mode
+--- vi_editing_mode -> nil
 
 編集モードを vi モードにします。
 vi モードの詳細は、GNU Readline のマニュアルを参照してください。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
---- emacs_editing_mode
+--- emacs_editing_mode -> nil
 
 編集モードを Emacs モードにします。デフォルトは Emacs モードです。
 
@@ -256,15 +256,19 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 
   * [[url:http://www.gnu.org/directory/readline.html]]
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 --- completion_append_character=(string)
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字 string を指定します。
 
 @param string 1文字を指定します。
+
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 半角スペース「" "」などの単語を区切る文字を指定すれば、
 連続して入力する際に便利です。
@@ -283,19 +287,15 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
   Readline.completion_append_character = "string"
   p Readline.completion_append_character # => "s"
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
-
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
-
 @see [[m:Readline.completion_append_character]]
 
 --- completion_append_character -> String
 
 ユーザの入力の補完が完了した場合に、最後に付加する文字を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completion_append_character=]]
 
@@ -305,25 +305,25 @@ Emacs モードの詳細は、 GNU Readline のマニュアルを参照してください。
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成される文字列 string を指定します。
 
-@param string 文字列を指定します。
-
 GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
 " \t\n\"\\'`@$><=;|&{(" (スペースを含む) になっています。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@param string 文字列を指定します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_word_break_characters]]
 
---- basic_word_break_characters
+--- basic_word_break_characters -> String
 
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_word_break_characters=]]
 
@@ -334,27 +334,27 @@ GNU Readline のデフォルト値は、Bash の補完処理で使用している文字列
 [[m:Readline.basic_word_break_characters=]] との違いは、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
-@param string 文字列を指定します。
-
 GNU Readline のデフォルトの値は、 
 [[m:Readline.basic_word_break_characters]] と同じです。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@param string 文字列を指定します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_word_break_characters]]
 
---- completer_word_break_characters
+--- completer_word_break_characters -> String
 
 ユーザの入力の補完を行う際、
 単語の区切りを示す複数の文字で構成された文字列を取得します。
 [[m:Readline.basic_word_break_characters]] との違いは、
 GNU Readline の rl_complete_internal 関数で使用されることです。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_word_break_characters=]]
 
@@ -363,24 +363,24 @@ GNU Readline の rl_complete_internal 関数で使用されることです。
 スペースなどの単語の区切りをクオートするための
 複数の文字で構成される文字列 string を指定します。
 
-@param string 文字列を指定します。
-
 GNU Readline のデフォルト値は、「"'」です。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@param string 文字列を指定します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_quote_characters]]
 
---- basic_quote_characters
+--- basic_quote_characters -> String
 
 スペースなどの単語の区切りをクオートするための
 複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.basic_quote_characters=]]
 
@@ -393,20 +393,20 @@ GNU Readline のデフォルト値は、「"'」です。
 
 @param string 文字列を指定します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_quote_characters]]
 
---- completer_quote_characters
+--- completer_quote_characters -> String
 
 ユーザの入力の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.completer_quote_characters=]]
 
@@ -415,36 +415,36 @@ GNU Readline のデフォルト値は、「"'」です。
 ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列 string を指定します。
 
-@param string 文字列を指定します。
-
 GNU Readline のデフォルト値は nil(NULL) です。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@param string 文字列を指定します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
+
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.filename_quote_characters]]
 
---- filename_quote_characters
+--- filename_quote_characters -> String
 
 ユーザの入力時にファイル名の補完を行う際、スペースなどの単語の区切りを
 クオートするための複数の文字で構成される文字列を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 @see [[m:Readline.filename_quote_characters=]]
 #@end
 
 == Constants
 
---- VERSION
+--- VERSION -> String
 
 Readlineモジュールが使用している GNU Readline や libedit のバージョンを
 示す文字列です。
 
---- FILENAME_COMPLETION_PROC
+--- FILENAME_COMPLETION_PROC -> Proc
 
 GNU Readline で定義されている関数を使用してファイル名の補完を行うための
 [[c:Proc]] オブジェクトです。
@@ -452,7 +452,7 @@ GNU Readline で定義されている関数を使用してファイル名の補完を行うための
 
 @see [[m:Readline.completion_proc=]]
 
---- USERNAME_COMPLETION_PROC
+--- USERNAME_COMPLETION_PROC -> Proc
 
 GNU Readline で定義されている関数を使用してユーザ名の補完を行うための
 [[c:Proc]] オブジェクトです。
@@ -488,13 +488,11 @@ Readline::HISTORY を使用してヒストリにアクセスできます。
              インデックスは [[c:Array]] ように 0 から指定します。
              また、 -1 は最後の入力内容というように、負の数を指定することもできます。
 
-index で指定したインデックスに該当する入力内容がない場合、
-例外 IndexError が発生します。
+@raise IndexError index で指定したインデックスに該当する入力内容がない場合に発生します。
 
-index で指定したインデックスが int 型よりも大きな値の場合、
-例外 RangeError が発生します。
+@raise RangeError index で指定したインデックスが int 型よりも大きな値の場合に発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例:
 
@@ -529,17 +527,14 @@ index で指定したインデックスが int 型よりも大きな値の場合、
              インデックスは [[c:Array]] ように 0 から指定します。
              また、 -1 は最後の入力内容というように、負の数を指定することもできます。
 @param string 文字列を指定します。この文字列でヒストリを書き換えます。
-@return string で指定した文字列を返します。
 
-index で指定したインデックスに該当する入力内容がない場合、
-例外 IndexError が発生します。
+@raise IndexError index で指定したインデックスに該当する入力内容がない場合に発生します。
 
-index で指定したインデックスが int 型よりも大きな値の場合、
-例外 RangeError が発生します。
+@raise RangeError index で指定したインデックスが int 型よりも大きな値の場合に発生します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 --- <<(string) -> self
 
@@ -548,7 +543,7 @@ self を返します。
 
 @param string 文字列を指定します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例: "foo"を追加する。
 
@@ -574,7 +569,7 @@ self を返します。
 
 @param string 文字列を指定します。複数指定できます。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例: "foo"を追加する。
 
@@ -598,9 +593,9 @@ self を返します。
 ヒストリの最後の内容を取り出します。
 最後の内容は、ヒストリから取り除かれます。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例:
 
@@ -619,9 +614,9 @@ self を返します。
 ヒストリの最初の内容を取り出します。
 最初の内容は、ヒストリから取り除かれます。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例:
 
@@ -655,7 +650,7 @@ self を返します。
 #@end
 #@end
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例: ヒストリの内容を最初から順番に出力する。
 
@@ -686,7 +681,7 @@ self を返します。
 
 ヒストリに格納された内容の数を取得します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例: ヒストリの内容を最初から順番に出力する。
 
@@ -702,7 +697,7 @@ self を返します。
 ヒストリに格納された内容の数が 0 の場合は true を、
 そうでない場合は false を返します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例:
 
@@ -726,9 +721,9 @@ index が -1 の場合は [[m:Readline::HISTORY.pop]] と同様に動作します。
 
 @param index 削除対象のヒストリのインデックスを指定します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise NotImplementedError サポートしていない環境で発生します。
 
-セーフレベル ($SAFE) が 4 の場合、例外 SecurityError を発生します。
+@raise SecurityError セーフレベル ($SAFE) が 4 の場合に発生します。
 
 例:
 
