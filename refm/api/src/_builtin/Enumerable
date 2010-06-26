@@ -159,11 +159,11 @@ pattern === item が成立する要素を全て含んだ配列を返します。
 #@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> object
 #@since 1.8.7
---- inject(sym)
---- inject(init, sym)
+--- inject(sym)                                     -> object
+--- inject(init, sym)                               -> object
 --- reduce(init = self.first) {|result, item| ... } -> object
---- reduce(sym)
---- reduce(init, sym)
+--- reduce(sym)                                     -> object
+--- reduce(init, sym)                               -> object
 #@end
 
 リストのたたみこみ演算を行います。
