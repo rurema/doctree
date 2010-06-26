@@ -58,6 +58,13 @@ Logger オブジェクトの重要度を DEBUG に下げるなどという使い方をします。
     log.fatal(err)
   end
 
+[[m:Logger#formatter=]] を用いてフォーマットを変更することができます。
+
+   logger.formatter = proc { |severity, datetime, progname, msg|
+     "#{datetime}: #{msg}\n"
+   }
+   # => "Thu Sep 22 08:51:08 GMT+9:00 2005: hello world"
+
 === 参考
 
 : Rubyist Magazine
@@ -308,11 +315,22 @@ Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
 #@since 1.8.3
 --- formatter -> String
 
-ログを出力する際のフォーマット文字列を取得します。
+ログを出力する際に使用するフォーマッターを取得します。
+
+このメソッドの返り値が持つ call メソッドは 4 つの引数 (severity, time, program name, message) を受けとります。
+
 
 --- formatter=(formatter)
 
-ログを出力際のフォーマット文字列をセットします。
+ログを出力する際に使用するフォーマッターをセットします。
+
+@param formatter 4 つの引数 (severity, time, program name, message) を受け取る call メソッドを
+                 持つオブジェクトを指定します。call メソッドの返り値は文字列にしてください。
+
+  logger = Logger.new
+  logger.formatter = proc{|severity, datetime, progname, message|
+    "#{datetime}: #{message}\n"
+  }
 
 #@end
 
@@ -447,6 +465,8 @@ include Logger::Severity
 
 ロガーのフォーマット文字列を扱うクラス。
 
+[[c:Logger]] のデフォルトのフォーマッターです。
+
 == Instance Methods
 
 --- call(severity, time, progname, msg) -> String
@@ -463,15 +483,16 @@ include Logger::Severity
 
 --- datetime_format -> String
 
-ログの日付フォーマットを取得します。
+ログの日時フォーマットを取得します。
 
 @see [[m:Time#strftime]]
 
 --- datetime_format=(format)
 
-ログの日付フォーマットをセットします。
+ログの日時フォーマットをセットします。
 
-@param format 日付のフォーマット文字列。
+@param format 日時のフォーマット文字列。[[m:Time#strftime]] で使用するフォーマット文字列と
+              同じものを使用できます。
 
 @see [[m:Time#strftime]]
 
