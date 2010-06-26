@@ -120,7 +120,7 @@ include Comparable
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付
 
-#@since 1.9.0
+#@since 1.9.1
 --- commercial(cwyear = -4712, cweek = 1, cwday = 1, start = Date::ITALY) -> Date
 #@else
 #@since 1.8.0
@@ -151,7 +151,7 @@ include Comparable
 
 @param year 年
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- _httpdate(str) -> Hash
 このメソッドは [[m:Date.httpdate]] と似ていますが、日付オブジェクトを生成せずに、
@@ -171,7 +171,7 @@ include Comparable
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- _iso8601(str) -> Hash
 このメソッドは [[m:Date.iso8601]] と似ていますが、日付オブジェクトを生成せずに、
@@ -193,7 +193,7 @@ include Comparable
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- _jisx0301(str) -> Hash
 このメソッドは [[m:Date.jisx0301]] と似ていますが、日付オブジェクトを生成せずに、
@@ -255,7 +255,7 @@ include Comparable
 @raise ArgumentError 正しくない日付
 
 #@since 1.8.0
-#@since 1.9.0
+#@since 1.9.1
 --- _parse(str, complete = true) -> Hash
 #@else
 --- _parse(str, complete = false) -> Hash
@@ -268,7 +268,7 @@ include Comparable
 @param str 日付をあらわす文字列
 @param complete 年を補完するか
 
-#@since 1.9.0
+#@since 1.9.1
 --- parse(str = '-4712-01-01', complete = true, start = Date::ITALY) -> Date
 #@else
 --- parse(str = '-4712-01-01', complete = false, start = Date::ITALY) -> Date
@@ -276,7 +276,7 @@ include Comparable
 与えられた日付表現を解析し、
 その情報に基づいて日付オブジェクトを生成します。
 
-#@since 1.9.0
+#@since 1.9.1
 年が "00" から "99" の範囲であれば、
 年の下2桁表現であるとみなしこれを補います。
 この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
@@ -293,7 +293,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 @raise ArgumentError 正しくない日付
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- _rfc2822(str) -> Hash
 --- _rfc822(str) -> Hash
@@ -315,7 +315,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- _rfc3339(str) -> Hash
 このメソッドは [[m:Date.rfc3339]] と似ていますが、日付オブジェクトを生成せずに、
@@ -361,7 +361,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 --- valid_civil? (year, mon, mday, start = Date::GREGORIAN) -> bool
 --- valid_date? (year, mon, mday, start = Date::GREGORIAN) -> bool
 #@else
@@ -373,7 +373,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 --- exist3? (year, mon, mday, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
-#@since 1.9.0
+#@since 1.9.1
 正しい暦日付であれば真、そうでないなら偽を返します。
 #@else
 正しい暦日付であれば、相当するユリウス日を返します。
@@ -387,7 +387,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param mday 日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 --- valid_commercial? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
@@ -396,7 +396,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 --- existw? (cwyear, cweek, cwday, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
-#@since 1.9.0
+#@since 1.9.1
 正しい暦週日付であれば真、そうでないなら偽を返します。
 #@else
 正しい暦週日付であれば、相当するユリウス日を返します。
@@ -410,7 +410,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param cwday 週の日 (曜日)
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 --- valid_jd? (jd, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
@@ -419,7 +419,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 --- exist1? (jd, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
-#@since 1.9.0
+#@since 1.9.1
 真を返します。
 #@else
 ひとつ目の引数をそのまま返します。
@@ -432,7 +432,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param jd ユリウス日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 --- valid_ordinal? (year, yday, start = Date::GREGORIAN) -> bool
 #@else
 #@since 1.8.0
@@ -441,7 +441,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 --- exist2? (year, yday, start = Date::GREGORIAN) -> Numeric | nil
 #@end
 #@end
-#@since 1.9.0
+#@since 1.9.1
 正しい年間通算日 (年日付) であれば真、そうでないなら偽を返します。
 #@else
 正しい年間通算日 (年日付) であれば、相当するユリウス日を返します。
@@ -454,7 +454,7 @@ complete が真で、年が "00" から "99" の範囲であれば、
 @param yday 年の日
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- _xmlschema(str) -> Hash
 このメソッドは [[m:Date.xmlschema]] と似ていますが、日付オブジェクトを生成せずに、
@@ -495,7 +495,7 @@ x が数値ならば、self より x 日前の日付を返します。
 self より n ヶ月前の日付オブジェクトを返します。
 n は数値でなければなりません。
 
-#@since 1.9.0
+#@since 1.9.1
 [[m:Date#prev_month]] も参照してください。
 #@end
 
@@ -517,7 +517,7 @@ other は日付オブジェクトか、
 self から n ヶ月後の日付オブジェクトを返します。
 n は数値でなければなりません。
 
-#@since 1.9.0
+#@since 1.9.1
 [[m:Date#next_month]] も参照してください。
 #@end
 
@@ -549,8 +549,8 @@ n は数値でなければなりません。
 --- downto(min){|date| ...} -> self
 このメソッドは、step(min, -1){|date| ...} と等価です。
 
-#@since 1.9.0
-1.9.0 以降では、ブロックが与えられない場合、
+#@since 1.9.1
+1.9.1 以降では、ブロックが与えられない場合、
 [[c:Enumerator]] オブジェクトを返します。
 #@end
 
@@ -563,7 +563,7 @@ n は数値でなければなりません。
 
 [[m:Date#new_start]]、および [[m:Date::ENGLAND]] を参照してください。
 
-#@since 1.9.0
+#@since 1.9.1
 --- friday? -> bool
 金曜日なら真を返します。
 #@end
@@ -580,7 +580,7 @@ n は数値でなければなりません。
 #@end
 グレゴリオ暦なら真を返します。
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- httpdate -> String
 [[RFC:2616]] ([[RFC:1123]]) で定められた書式の文字列を返します。
@@ -601,7 +601,7 @@ n は数値でなければなりません。
 
 [[m:Date#ajd]] も参照してください。
 
-#@since 1.9.0
+#@since 1.9.1
 --- jisx0301 -> String
 [[JIS:X 0301]] 書式の文字列を返します。
 ただし、明治以前については [[ISO:8601]] 書式になります。
@@ -640,7 +640,7 @@ n は数値でなければなりません。
 --- month -> Integer
 月を返します (1-12)。
 
-#@since 1.9.0
+#@since 1.9.1
 --- monday? -> bool
 月曜日なら真を返します。
 #@end
@@ -657,7 +657,7 @@ self を複製して、その改暦日を設定しなおします。
 
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 
-#@since 1.9.0
+#@since 1.9.1
 --- next_day(n = 1) -> Date
 n 日後を返します。
 
@@ -695,13 +695,13 @@ n 年前を返します。
 
 @param n 年数
 
-#@since 1.9.0
+#@since 1.9.1
 --- rfc2822 -> String
 --- rfc822 -> String
 [[RFC:2822]] で定められた書式の文字列を返します。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 --- saturday? -> bool
 土曜日なら真を返します。
 #@end
@@ -720,15 +720,15 @@ n 年前を返します。
 limit は日付オブジェクトでなければなりません、
 また step は非零でなければなりません。
 
-#@since 1.9.0
-1.9.0 以降では、ブロックが与えられない場合、
+#@since 1.9.1
+1.9.1 以降では、ブロックが与えられない場合、
 [[c:Enumerator]] オブジェクトを返します。
 #@end
 
 @param limit 日付オブジェクト
 @param step 歩幅
 
-#@since 1.9.0
+#@since 1.9.1
 --- sunday? -> bool
 日曜日なら真を返します。
 #@end
@@ -758,7 +758,7 @@ limit は日付オブジェクトでなければなりません、
 --- next -> Date
 翌日の日付オブジェクトを返します。
 
-#@since 1.9.0
+#@since 1.9.1
 --- thursday? -> bool
 木曜日なら真を返します。
 
@@ -772,7 +772,7 @@ limit は日付オブジェクトでなければなりません、
 --- to_s -> String
 [[ISO:8601]] 書式の文字列を返します (拡大表記はつかいません)。
 
-#@since 1.9.0
+#@since 1.9.1
 --- to_time -> Time
 対応する [[c:Time]] オブジェクトを返します。
 
@@ -783,8 +783,8 @@ limit は日付オブジェクトでなければなりません、
 --- upto(max){|date| ...} -> self
 このメソッドは、step(max, 1){|date| ...} と等価です。
 
-#@since 1.9.0
-1.9.0 以降では、ブロックが与えられない場合、
+#@since 1.9.1
+1.9.1 以降では、ブロックが与えられない場合、
 [[c:Enumerator]] オブジェクトを返します。
 #@end
 
@@ -795,12 +795,12 @@ limit は日付オブジェクトでなければなりません、
 --- wday -> Integer
 曜日を返します (0-6、日曜日は零)。
 
-#@since 1.9.0
+#@since 1.9.1
 --- wednesday? -> bool
 水曜日なら真を返します。
 #@end
 
-#@since 1.9.0
+#@since 1.9.1
 #@# exp
 --- xmlschema -> String
 XML Scheme (date) による書式の文字列を返します。
@@ -812,7 +812,7 @@ XML Scheme (date) による書式の文字列を返します。
 --- year -> Integer
 年を返します。
 
-#@since 1.9.0
+#@since 1.9.1
 = reopen Time
 
 == Instance Methods
