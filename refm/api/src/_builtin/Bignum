@@ -16,3 +16,148 @@ Ruby の Bignum クラスは immutable です。
 つまり、オブジェクト自体を破壊的に変更することはできません。
 [[c:Fixnum]] も同様です。
 
+== Instance Methods
+
+--- [](nth) -> Fixnum
+
+nth 番目のビット(最下位ビット(LSB)が 0 番目)が立っている時 1
+を、そうでなければ 0 を返します。
+
+@param nth  何ビット目を指すかの数値
+@return     1 か 0
+
+self[nth]=bit (つまりビットの修正) がないのは、Numeric 関連クラスが
+immutable であるためです。
+
+--- +(other) -> Fixnum | Bignum | Float
+
+算術演算子。和を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- -(other) -> Fixnum | Bignum | Float
+
+算術演算子。差を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- *(other) -> Fixnum | Bignum | Float
+
+算術演算子。積を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- /(other) -> Fixnum | Bignum | Float
+
+算術演算子。商を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- %(other) -> Fixnum | Bignum | Float
+
+算術演算子。剰余を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+--- **(other) -> Fixnum | Bignum | Float
+
+算術演算子。冪(べき乗)を計算します。
+
+@param other 二項演算の右側の引数(対象)
+@return 計算結果
+
+  p 2 ** 3 # => 8
+  p 2 ** 0 # => 1
+  p 0 ** 0 # => 1
+
+--- <=>(other) -> Fixnum
+
+self と other を比較して、self が大きい時に正、
+等しい時に 0、小さい時に負の整数を返します。
+
+@param other 比較対象の数値
+@return      -1 か 0 か 1 のいずれか
+
+  1 <=> 2 #=> -1
+  1 <=> 1 #=> 0
+  2 <=> 1 #=> 1
+
+--- ==(other) -> bool
+
+比較演算子。数値として等しいか判定します。
+
+@param other 比較対象の数値
+@return      self と other が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+--- ~        -> Fixnum | Bignum
+ビット演算子。否定を計算します。
+
+  ~1  #=> -2
+  ~3  #=> -4
+  ~-4 #=> 3
+
+--- |(other) -> Fixnum | Bignum
+ビット二項演算子。論理和を計算します。
+
+@param other 数値
+
+  1 | 1 #=> 1
+  2 | 3 #=> 3
+
+--- &(other) -> Fixnum | Bignum
+ビット二項演算子。論理積を計算します。
+
+@param other 数値
+
+  1 & 1 #=> 1
+  2 & 3 #=> 2
+
+--- ^(other) -> Fixnum | Bignum
+ビット二項演算子。排他的論理和を計算します。
+
+@param other 数値
+
+  1 ^ 1 #=> 0
+  2 ^ 3 #=> 1
+
+--- <<(bits) -> Fixnum | Bignum
+
+シフト演算子。bits だけビットを左にシフトします。
+
+@param bits シフトさせるビット数
+
+    printf("%#b\n", 0b0101 << 1) #=> 0b1010
+    p -1 << 1 #=> -2
+
+--- >>(bits) -> Fixnum | Bignum
+シフト演算子。bits だけビットを右にシフトします。
+
+右シフトは、符号ビット(最上位ビット(MSB))が保持されます。
+bitsが実数の場合、小数点以下を切り捨てた値でシフトします。
+
+@param bits シフトさせるビット数
+
+    printf("%#b\n", 0b0101 >> 1) #=> 0b10
+    p -1 >> 1 #=> -1
+
+--- size -> Fixnum
+
+整数の実装上のサイズをバイト数で返します。
+
+現在の実装では [[c:Fixnum]] は、sizeof(long) 固定(多くの 32
+bit マシンで 4 バイト)、[[c:Bignum]]は、システム依存です。
+
+    p 1.size
+    p 0x1_0000_0000.size
+    # => 4
+         8
+
+--- to_f -> Float
+
+値を浮動小数点数([[c:Float]])に変換します。
