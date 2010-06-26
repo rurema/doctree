@@ -1294,7 +1294,7 @@ offset 位置への移動が成功すれば 0 を返します。
      f.seek(-13, IO::SEEK_END)   #=> 0
      f.readline                  #=> "And so on...\n"
 
-@see [[m:IO#lseek]]
+@see [[m:IO#sysseek]]
 
 --- stat    -> File::Stat
 
