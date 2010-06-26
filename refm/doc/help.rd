@@ -57,6 +57,10 @@ x オブジェクトと nil で成功・失敗を表す場合は「x | nil」が
  * [[url:http://redmine.ruby-lang.org/projects/show/rurema]]
 へお願いします。
 
-それ以外の意見などは
- * [[url:http://doc.loveruby.net/wiki/PublicComments.html]]
+それ以外の意見なども
+ * [[url:http://redmine.ruby-lang.org/projects/show/rurema]]
 へお願いします。
+
+Redmine の使い方は
+ * [[url:http://redmine.ruby-lang.org/wiki/rurema/HowToReport]]
+を参照してください。
