@@ -601,10 +601,6 @@ lambda{|a, b| p [a, b] }
 
  正規表現の文字クラス指定。
 
-: Range.new(first,last[, exclude_end])
-
- 説明文の中で、省略可能であることを示す表記法（Ruby言語の要素ではない）。
-
 ===[a:lbra3] (
 ===[a:rbra3] )
 
