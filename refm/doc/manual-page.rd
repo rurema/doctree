@@ -26,7 +26,7 @@ foo(1)という記述はマニュアルページの参照を示します(Unixでの話)。
   $ man socket
 として参照すれば良いでしょう。
 
-詳細は man(1) を参照してください。
+詳細は [[man:man(1)]] を参照してください。
 
 UNIX 環境を触れない人は
 * [[unknown:The Single UNIX(R) Specification V2|URL:http://www.unix-systems.org/single_unix_specification_v2/]]
