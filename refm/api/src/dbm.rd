@@ -2,7 +2,7 @@ DBM を Ruby スクリプトから扱えるようにするライブラリです。
 
 扱えるキーや値のサイズはリンクしているライブラリに依存します。
 
-@see [[lib:gdbm]], [[lib:sdbm]], [[man:dbm]]
+@see [[lib:gdbm]], [[lib:sdbm]], [[man:dbm(3)]]
 
 = class DBM < Object
 
