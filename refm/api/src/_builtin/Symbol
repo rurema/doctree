@@ -175,15 +175,17 @@ self に対応する Proc オブジェクトを返します。
 
 #@since 1.9.1
 --- ==(other)        -> true | false
-#@todo
 
-other が同じシンボルの時に true を返します。
+other が同じシンボルの時に真を返します。
+そうでない場合は偽を返します。
+
+@param other 比較対象のシンボルを指定します。
 
 --- succ -> Symbol
 --- next -> Symbol
-#@todo
 
-シンボルに対応する文字列の「次の」文字列を返します。
+シンボルに対応する文字列の「次の」文字列に対応するシンボルを返します。
+
 (self.to_s.next.intern と同じです。)
 
   :a.next   # -> :b
@@ -192,11 +194,12 @@ other が同じシンボルの時に true を返します。
 @see [[m:String#succ]]
 
 --- <=>(other) -> -1 | 0 | 1
-#@todo
 
 self と other のシンボルに対応する文字列を ASCII コード順で比較して、
 self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
 ます。
+
+@param other 比較対象のシンボルを指定します。
 
   p :aaa <=> :xxx  # => -1
   p :aaa <=> :aaa  # => 0
@@ -205,10 +208,11 @@ self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
 @see [[m:String#<=>]]
 
 --- casecmp(other) -> -1 | 0 | 1
-#@todo
 
 [[m:Symbol#<=>]] と同様にシンボルに対応する文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
+
+@param other 比較対象のシンボルを指定します。
 
   p :a <=> :A      # => 1
   p :a.casecmp(:A) # => 0
@@ -217,11 +221,14 @@ self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
 
 --- =~(other) -> Integer | nil
 --- match(other) -> Integer | nil
-#@todo
 
-正規表現 other とのマッチを行います。(self.to_s =~ other と同じです。)
+正規表現 other とのマッチを行います。
 
-マッチが成功すればマッチした位置のインデックスを、そうでなければ nil を返します。
+(self.to_s =~ other と同じです。)
+
+@param other 比較対象のシンボルを指定します。
+
+@return マッチが成功すればマッチした位置のインデックスを、そうでなければ nil を返します。
 
   p :foo =~ /foo/    # => 0
   p :foobar =~ /bar/ # => 3
@@ -231,9 +238,12 @@ self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返し
 
 --- [](nth) -> String | nil
 --- slice(nth) -> String | nil
-#@todo
 
-nth 番目の文字を返します。(self.to_s[nth] と同じです。)
+nth 番目の文字を返します。
+
+(self.to_s[nth] と同じです。)
+
+@param nth 文字の位置を表す整数を指定します。
 
   :foo[0] # => "f"
   :foo[1] # => "o"
@@ -243,7 +253,11 @@ nth 番目の文字を返します。(self.to_s[nth] と同じです。)
 --- slice(nth, len) -> String | nil
 
 nth 番目から長さ len の部分文字列を新しく作って返します。
+
 (self.to_s[nth, len] と同じです。)
+
+@param nth 文字の位置を表す整数を指定します。
+@param len 文字列の長さを指定します。
 
   :foo[1, 2] # => "oo"
 
@@ -251,15 +265,22 @@ nth 番目から長さ len の部分文字列を新しく作って返します。
 --- slice(substr) -> String | nil
 
 self が substr を含む場合、一致した文字列を新しく作って返します。
+
 (self.to_s[substr] と同じです。)
 
 --- [](regexp, nth = 0) -> String | nil
 --- slice(regexp, nth = 0) -> String | nil
 
 正規表現 regexp の nth 番目の括弧にマッチする最初の部分文字列を返します。
+
 (self.to_s[regexp, nth] と同じです。)
 
+@param regexp 正規表現を指定します。
+
+@param nth 取得したい正規表現レジスタのインデックスを指定します。
+
   :foobar[/bar/] # => "bar"
+  :foobarbaz[/(ba.)(ba.)/, 0] # => "barbaz"
   :foobarbaz[/(ba.)(ba.)/, 1] # => "bar"
   :foobarbaz[/(ba.)(ba.)/, 2] # => "baz"
 
@@ -267,7 +288,10 @@ self が substr を含む場合、一致した文字列を新しく作って返します。
 --- slice(range) -> String | nil
 
 rangeで指定したインデックスの範囲に含まれる部分文字列を返します。
+
 (self.to_s[range] と同じです。)
+
+@param range 取得したい文字列の範囲を示す [[c:Range]] オブジェクトを指定します。
 
   :foo[0..1] # => "fo"
 
@@ -275,18 +299,18 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を返します。
 
 --- length -> Integer
 --- size -> Integer
-#@todo
 
-シンボルに対応する文字列の長さを返します。(self.to_s.length と同じです。)
+シンボルに対応する文字列の長さを返します。
+
+(self.to_s.length と同じです。)
 
   :foo.length #=> 3
 
 @see [[m:String#length]], [[m:String#size]]
 
 --- empty? -> bool
-#@todo
 
-self が :"" (length が 0 のシンボル)かどうかを返します。
+自身が :"" (length が 0 のシンボル)かどうかを返します。
 
   :"".empty?  #=> true
   :foo.empty? #=> false
@@ -294,9 +318,9 @@ self が :"" (length が 0 のシンボル)かどうかを返します。
 @see [[m:String#empty?]]
 
 --- upcase -> Symbol
-#@todo
 
 小文字を大文字に変換したシンボルを返します。
+
 (self.to_s.upcase.intern と同じです。)
 
   :foo.upcase #=> :FOO
@@ -304,9 +328,9 @@ self が :"" (length が 0 のシンボル)かどうかを返します。
 @see [[m:String#upcase]]
 
 --- downcase -> Symbol
-#@todo
 
 大文字を小文字に変換したシンボルを返します。
+
 (self.to_s.downcase.intern と同じです。)
 
   :FOO.downcase #=> :foo
@@ -314,10 +338,11 @@ self が :"" (length が 0 のシンボル)かどうかを返します。
 @see [[m:String#downcase]]
 
 --- capitalize -> Symbol
-#@todo
 
 シンボルに対応する文字列の先頭の文字を大文字に、残りを小文字に変更した
-シンボルを返します。(self.to_s.capitalize.intern と同じです。)
+シンボルを返します。
+
+(self.to_s.capitalize.intern と同じです。)
 
   :foobar.capitalize     #=> :Foobar
   :fooBar.capitalize     #=> :Foobar
@@ -327,10 +352,10 @@ self が :"" (length が 0 のシンボル)かどうかを返します。
 @see [[m:String#capitalize]]
 
 --- swapcase -> Symbol
-#@todo
 
 'A' から 'Z' までのアルファベット大文字を小文字に、'a' から 'z' までの
 アルファベット小文字を大文字に変更したシンボルを返します。
+
 (self.to_s.swapcase.intern と同じです。)
 
   p :ABCxyz.swapcase   # => :abcXYZ
@@ -339,9 +364,8 @@ self が :"" (length が 0 のシンボル)かどうかを返します。
 @see [[m:String#swapcase]]
 
 --- encoding   -> Encoding
-#@todo
 
-シンボルに対応する文字列のエンコーディング情報を表現した Encoding オブ
+シンボルに対応する文字列のエンコーディング情報を表現した [[c:Encoding]] オブ
 ジェクトを返します。
 
 @see [[m:String#encoding]]
@@ -349,7 +373,6 @@ self が :"" (length が 0 のシンボル)かどうかを返します。
 #@end
 
 --- inspect    -> String
-#@todo
 
 自身を人間に読みやすい文字列にして返します。
 
