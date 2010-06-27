@@ -23,6 +23,13 @@ ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
 
   p ENV['TERM'].frozen?  # => true
 
+Windows では環境変数は大文字、小文字を区別しません。(cygwin を除く)
+
+例:
+
+  ENV['OS'] # => Windows_NT
+  ENV['os'] # => Windows_NT
+
 --- [](key) -> String
 
 key に対応する環境変数の値を返します。該当する環境変数が存在
