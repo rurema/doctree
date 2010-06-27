@@ -70,7 +70,6 @@ Integer や Float に比べ Rational は誤差無しで表現できる範囲が大きいため、
 クラス [[c:Prime]] はRuby 1.8までは [[lib:mathn]] で定義されていました。
 現在はライブラリ [[lib:prime]] に移動しています。互換性のため mathn を読み込むと自動的に prime も [[m:Kernel.#require]] されます。
 
-@see prime.rd
 #@end
 
 #@until 1.9.1
