@@ -433,11 +433,11 @@ nth が範囲外を指す場合は nil を返します。
 
 例:
 
-  p 'bar'[2] # => "r"
+  p 'bar'[2]       # => "r"
   p 'bar'[2] == ?r # => true
-  p 'bar'[-1] # => "r"
-  p 'bar'[3] # => nil
-  p 'bar'[-4] # => nil
+  p 'bar'[-1]      # => "r"
+  p 'bar'[3]       # => nil
+  p 'bar'[-4]      # => nil
 
 
 このメソッドの仕様は 1.8.x 以前から大きく変更されていますので注意が必要
@@ -469,36 +469,44 @@ nth が範囲外を指す場合は nil を返します。
 
 --- [](nth, len) -> String | nil
 --- slice(nth, len) -> String | nil
-
+#@since 1.9.1
+nth 文字目から長さ len 文字の部分文字列を新しく作って返します。
+nth が負の場合は文字列の末尾から数えます。
+#@else
 nth バイト番目から長さ len バイトの部分文字列を新しく作って返します。
 nth が負の場合は文字列の末尾から数えます。
+#@end
 
-nth が範囲外を指す場合は nil を返します。
+@param nth    取得したい文字列の開始インデックスを整数で指定します。
+@param len    取得したい文字列の長さを正の整数で指定します。
 
-@param nth    取得したい文字列の開始インデックス。整数
-@param len    取得したい文字列の長さ。正の整数
+@return nth が範囲外を指す場合は nil を返します。
 
 例:
 
   str0 = "bar"
-  p str0[2, 1]         #=> "r"
-  p str0[2, 0]         #=> ""
-  p str0[2, 100]       #=> "r"  (右側を超えても平気)
-  p str0[2, 1] == ?r   #=> false  (左辺は長さ1の文字列、右辺は整数の文字コード)
-  p str0[-1, 1]        #=> "r"
-  p str0[-1, 2]        #=> "r" (飽くまでも「右に向かって len バイト」)
+  str0[2, 1]         #=> "r"
+  str0[2, 0]         #=> ""
+  str0[2, 100]       #=> "r"  (右側を超えても平気)
+  str0[2, 1] == ?r   #=> false  (左辺は長さ1の文字列、右辺は整数の文字コード)
+  str0[-1, 1]        #=> "r"
+#@since 1.9.1  
+  str0[-1, 2]        #=> "r" (あくまでも「右に向かって len バイト」)
+#@else
+  str0[-1, 2]        #=> "r" (あくまでも「右に向かって len 文字」)
+#@end
 
-  p str0[3, 1]         #=> ""
-  p str0[4, 1]         #=> nil
-  p str0[-4, 1]        #=> nil
-  str1 = str0[0, 2]    # (str0の「一部」をstr1とする)
-  p str1               #=> "ba"
+  str0[3, 1]         #=> ""
+  str0[4, 1]         #=> nil
+  str0[-4, 1]        #=> nil
+  str1 = str0[0, 2]    # (str0 の「一部」を str1 とする)
+  str1               #=> "ba"
   str1[0] = "XYZ"
-  p str1               #=> "XYZa" (str1の内容が破壊的に変更された)
-  p str0               #=> "bar" (str0は無傷、str1はstr0と内容を共有していない)
+  str1               #=> "XYZa" (str1 の内容が破壊的に変更された)
+  str0               #=> "bar" (str0 は無傷、 str1 は str0 と内容を共有していない)
 
---- [](substr) -> String
---- slice(substr) -> String
+--- [](substr) -> String | nil
+--- slice(substr) -> String | nil
 
 self が substr を含む場合、一致した文字列を新しく作って返します。
 substr を含まなければ nil を返します。
@@ -627,15 +635,23 @@ range.first が 0 より小さいか文字列の長さより大きいとき、
     'abcd'[-5 ... 2] # => nil
 
 --- []=(nth, val)
+#@since 1.9.1
+nth 番目の文字を文字列 val で置き換えます。
 
+@param nth 置き換えたい文字の位置を指定します。
+@param val 置き換える文字列を指定します。
+
+#@else
 nth 番目のバイトを文字列 val で置き換えます。
+
 val が 0 から 255 の範囲の整数である場合、
 文字コードとみなしてその文字で置き換えます。
 
-val を返します。
-
 @param nth    置き換えたいバイトのインデックス
 @param val    指定バイトと置き換える文字列もしくはバイト
+#@end
+
+@return val を返します。
 
 例:
 
@@ -644,15 +660,19 @@ val を返します。
     p buf   # => "s!!ring"
 
 --- []=(nth, len, val)
-
+#@since 1.9.1
+nth 番目の文字から len 文字の部分文字列を文字列 val で置き換えます。
+#@else
 nth バイト番目から長さ len バイトの部分文字列を文字列 val で置き換えます。
-nth が負の場合は文字列の末尾から数えます。
+#@end
 
-val を返します。
+nth が負の場合は文字列の末尾から数えます。
 
 @param nth    置き換えたい部分文字列の開始インデックス
 @param len    置き換えたい部分文字列の長さ
 @param val    指定範囲の部分文字列と置き換える文字列
+
+@return val を返します。
 
 例:
 
@@ -664,15 +684,12 @@ val を返します。
 
 文字列中の substr に一致する最初の部分文字列を文字列 val で置き換えます。
 
-self が substr を含まない場合は
-例外 [[c:IndexError]] が発生します。
-
-val を返します。
-
 @param substr    置き換えたい部分文字列のパターンを示す文字列
 @param val       指定範囲の部分文字列と置き換える文字列
 
-@raise IndexError    self が部分文字列 substr を含まない
+@return val を返します。
+
+@raise IndexError    self が部分文字列 substr を含まない場合に発生します。
 
 例:
      buf = "string"
@@ -682,50 +699,51 @@ val を返します。
      buf = "string"
      buf["nosuchstring"] = "!!"   # IndexError
 
-#@since 1.8.0
---- []=(regexp, nth = 0, val)
+--- []=(regexp, nth, val)
 
 正規表現 regexp の nth 番目の括弧にマッチする
 最初の部分文字列を文字列 val で置き換えます。
-nth を省略したときや nth が 0 の場合は、
-マッチした部分文字列全体を val で置き換えます。
 
-正規表現がマッチしなければ例外 [[c:IndexError]] が発生します。
-#@else
---- []=(regexp, val)
-
-正規表現 regexp にマッチする最初の部分文字列を文字列 val で置き換えます。
-
-正規表現がマッチしない場合や
-nth に対応する括弧がないときは例外 [[c:IndexError]] が発生します。
-#@end
-
-val を返します。
+nth が 0 の場合は、マッチした部分文字列全体を val で置き換えます。
 
 @param regexp    置き換えたい部分文字列のパターンを示す正規表現
-#@since 1.8.0
 @param nth       置き換えたい部分文字列のパターンを示す正規表現レジスタの番号
-#@end
 @param val       指定範囲の部分文字列と置き換えたい文字列
 
-例:
-    buf = "string"
-    buf[/tr../] = "!!"
-    p buf   # => "s!!g"
+@return val を返します。
 
-#@since 1.8.0
+@raise IndexError 正規表現がマッチしなかった場合に発生します。
+
+例:
+
     buf = "def exec(cmd)"
     buf[/def\s+(\w+)/, 1] = "preprocess"
     p buf    # => "def preprocess(cmd)"
-#@end
+
+--- []=(regexp, val)
+
+正規表現 regexp にマッチした部分文字列全体を val で置き換えます。
+
+@param regexp    置き換えたい部分文字列のパターンを示す正規表現
+@param val       置き換えたい文字列
+
+@return val を返します。
+
+@raise IndexError 正規表現がマッチしなかった場合に発生します。
+
+例:
+
+    buf = "string"
+    buf[/tr../] = "!!"
+    p buf   # => "s!!g"
 
 --- []=(range, val)
 
 rangeで指定したインデックスの範囲に含まれる部分文字列を文字列 val で置き換えます。
 
-val を返します。
-
 @param range   置き換えたい範囲を示す [[c:Range]] オブジェクト
+
+@return val を返します。
 
 --- capitalize -> String
 
