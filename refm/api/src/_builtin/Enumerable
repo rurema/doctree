@@ -147,14 +147,21 @@ self を返します。
 --- grep(pattern) {|item| ... }  -> [object]
 
 pattern === item が成立する要素を全て含んだ配列を返します。
+
 ブロックとともに呼び出された時には条件の成立した要素に対して
 それぞれブロックを評価し、その結果の配列を返します。
 マッチする要素がひとつもなかった場合は空の配列を返します。
 
-@arg pattern	「===」メソッドを持つオブジェクトを指定します。
+@param pattern 「===」メソッドを持つオブジェクトを指定します。
 
 例:
-    p ['aa', 'bb', 'cc', 'dd', 'ee'].grep(/[bc]/)  # => ["bb", "cc"]
+    ['aa', 'bb', 'cc', 'dd', 'ee'].grep(/[bc]/)  # => ["bb", "cc"]
+
+#@since 1.9.1
+  Array.instance_methods.grep(/gr/) # => [:grep, :group_by]
+#@else
+  Array.instance_methods.grep(/gr/) # => ["group_by", "grep"]
+#@end
 
 #@since 1.8.0
 --- inject(init = self.first) {|result, item| ... } -> object
