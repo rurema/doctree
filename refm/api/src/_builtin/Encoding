@@ -471,4 +471,19 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 --- MACUKRAINE
 
 
+= class EncodingError < StandardError
+#@todo
+
+= class Encoding::CompatibilityError < EncodingError
+#@todo
+
+= class Encoding::UndefinedConversionError < EncodingError
+#@todo
+
+= class Encoding::InvalidByteSequenceError < EncodingError
+#@todo
+
+= class Encoding::ConverterNotFoundError < EncodingError
+#@todo
+
 #@end
