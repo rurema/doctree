@@ -17,13 +17,11 @@ ENV['PATH'] はその要素が誰でも書き込み可能なディレクトリを含ん
   p path = ENV['PATH']    # => "/usr/local/bin:/usr/bin:/bin:/usr/X11/bin"
   p path.tainted?         # => false
 
-#@since 1.8.0
 また、ENV で得られる文字列は [[m:Object#freeze]] されています。
 
 例:
 
   p ENV['TERM'].frozen?  # => true
-#@end
 
 --- [](key) -> String
 
@@ -43,11 +41,9 @@ value が nil の時、key に対応する環境変数を取り除きます。
 
 @return value を返します。
 
-#@since 1.8.0
 --- clear  -> self
 
 環境変数をすべてクリアします。self を返します。
-#@end
 
 --- delete(key) -> String | nil
 --- delete(key) {|key| ... } -> String | nil
@@ -69,7 +65,6 @@ nil を返します。
 #@end
 #@end
 --- reject {|key, value| ... } -> Hash
-#@todo
 
 環境変数のうち、ブロックを評価した値が真であるものをとり除きます。
 [[m:Enumerable#reject]] と異なり Hash を返します。また、とり除いた結果
@@ -172,28 +167,26 @@ nil を返します。
 
 @param val  値を指定します。 to_str で文字列化されます。
 
+#@until 1.9.1
 --- indexes(*key) -> [String]
 --- indices(*key) -> [String]
 
-#@since 1.8.0
 このメソッドは obsolete です。
 使用すると警告メッセージが表示されます。
 代わりに [[m:ENV.values_at]] を使用します。
-#@end
 
 引数で指定された名前の環境変数の値の配列を返します。
 
 @param key  キーの名前を指定します。 to_str で文字列化されます。
+#@end
 
 --- inspect -> String
 
 ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 
-#@since 1.8.0
 --- invert -> Hash
 
 環境変数の値をキー、名前を値とした [[c:Hash]] を生成して返します。
-#@end
 
 --- keys -> [String]
 
@@ -208,15 +201,12 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 
 何もしません。nilを返します。
 
-#@since 1.8.0
 --- replace(hash) -> ENV
 
 環境変数を hash と同じ内容に変更します。 self を返します。
 
 @param hash  キーと値の対応関係を指定します。 to_hash でハッシュに変換されます。
-#@end
 
-#@since 1.8.0
 #@since 1.8.7
 #@since 1.8.8
 --- select                      -> Enumerator
@@ -225,19 +215,15 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 #@end
 #@end
 --- select {|key, value| ... }  -> [[String, String]]
-#@todo 
 
 環境変数名と値についてブロックを評価し、真を返したものを集めた配列を返
 します。配列の各要素は配列となり、第一要素が変数名、第二要素が値になり
 ます。
-#@end
 
-#@since 1.8.0
 --- shift -> [String, String]
 
 環境変数を一つ取り除いて、それを名前と値の組の配列で返します。
 環境変数が一つも設定されていなければ nil を返します。
-#@end
 
 --- to_a -> [[String, String]]
 
@@ -251,7 +237,6 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 
 環境変数を文字列化します。 Hash#to_s と同じように動作します。
 
-#@since 1.8.0
 --- update(other) -> ENV
 
 ハッシュ other の内容を環境変数にマージします。重複するキー
@@ -260,19 +245,18 @@ ENV オブジェクトを文字列化します。 [[m:Hash#inspect]] と同じように動作します。
 self を返します。
 
 @param other  上書きするハッシュを指定します。
-#@end
 
 --- values -> [String]
 
 環境変数の全値の配列を返します。
 
-#@since 1.8.0
 --- values_at(*key) -> [String]
-#@todo
 
 引数で指定されたキー(環境変数名)に対応する値の配列を返します。存在
-しないキーに対しては nil が対応します。[[m:ENV.indexes]] と
-[[m:ENV.indices]] と同じです。
+しないキーに対しては nil が対応します。
+#@until 1.9.1
+[[m:ENV.indexes]] と [[m:ENV.indices]] と同じです。
+#@end
 
 例:
 
@@ -280,7 +264,27 @@ self を返します。
   p ENV.values_at(*%w(FOO BAR BAZ))   # => ["foo", "bar", nil]
 
 @param key 環境変数名を指定します。 to_str で文字列化されます。
+#@since 1.9.1
+--- assoc(key) -> Array | nil
+
+自身が与えられたキーに対応する要素を持つとき、見つかった要素のキーと値のペアを
+配列として返します。
+
+@param key 検索するキーを指定します。
+
+@see [[m:Hash#assoc]]
+
+--- rassoc(value) -> Array | nil
+
+自身が与えられた値に対応する要素を持つとき、見つかった要素のキーと値のペアを
+配列として返します。
+
+@param value 検索する値を指定します。
+
+@see [[m:Hash#rassoc]]
+
 #@end
+
 #@since 1.9.2
 --- keep_if {|key, value| ... } -> ENV
 --- select! {|key, value| ... } -> ENV | nil
