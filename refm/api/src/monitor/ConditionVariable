@@ -13,10 +13,13 @@ MonitorMixin::ConditionVariable.new を直接呼ぶことはありません。
 
 @see [[m:MonitorMixin::ConditionVariable#signal]]
 
-#@until 1.9.1
+#@until 1.9.2
 --- count_waiters -> Integer
-
+#@since 1.9.1
+常に例外 NotImplementedError を発生します。
+#@else
 その条件変数で待っているスレッドの数を返します。
+#@end
 #@end
 
 --- signal -> ()

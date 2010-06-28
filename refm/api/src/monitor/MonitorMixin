@@ -138,3 +138,37 @@ mon_enter でロックした回数だけ mon_exit を
 モニタに関連付けられた、新しい 
 [[c:MonitorMixin::ConditionVariable]] を生成して返します。
 
+#@if (version == "1.8.0")
+= module MonitorMixin::Accessible
+#@todo
+
+== Protected Instance Methods
+
+--- mon_owner -> Thread
+#@todo
+
+--- mon_owner=(owner)
+#@todo
+
+--- mon_count -> Integer
+#@todo
+
+--- mon_count=(count)
+#@todo
+
+--- mon_entering_queue -> Array
+#@todo
+
+--- mon_waiting_queue -> Array
+#@todo
+
+= module MonitorMixin::Initializable
+#@todo
+
+== Protected Instance Methods
+
+--- mon_initialize -> []
+
+Monitor を初期化します。
+
+#@end
