@@ -81,23 +81,25 @@
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
 
---- assert_in_epsilon(a, b, epsilon = 0.001, message = nil) -> true
-#@todo
+--- assert_in_epsilon(acual, expected, epsilon = 0.001, message = nil) -> true
+#@# 使っている用語が正しくないかもしれない。
+与えられた期待値と実際の値の計算機誤差が許容範囲内である場合、検査にパスしたことになります。
 
-#@# assert_in_delta a, b, [a, b].min * epsilon, msg
-#@# 誤差の判定？
+言い換えるとと以下の式が真である場合、検査をパスします。
 
-@param a 任意の数値を指定します。
+  [expected, actual].min * epsilon >= (extected - actual).abs
 
-@param b 任意の数値を指定します。
+@param expected 期待値を指定します。
 
-@param epsilon ???
+@param actual 実際の値を指定します。
+
+@param epsilon 許容する計算機誤差を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
-@raise MiniTest::Assertion 
+@raise MiniTest::Assertion 検査に失敗した場合に発生します。
 
 --- assert_includes(collection, object, message = nil) -> true
 
@@ -268,7 +270,7 @@
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
-@raise MiniTest::Assertion 取り出した式が偽を返す場合に発生します。
+@raise MiniTest::Assertion 与えられたタグが [[m:Kernel.#throw]] されなかった場合に発生します。
 
 @see [[m:Kernel.#throw]]
 
@@ -377,23 +379,25 @@
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分以下である場合に発生します。
 
---- refute_in_epsilon(a, b, epsilon = 0.001, message = nil) -> true
-#@todo
+--- refute_in_epsilon(acual, expected, epsilon = 0.001, message = nil) -> true
+#@# 使っている用語が正しくないかもしれない。
+与えられた期待値と実際の値の計算機誤差が許容範囲内でない場合、検査にパスしたことになります。
 
-#@# refute_in_delta a, b, [a, b].min * epsilon, msg
-#@# 誤差の判定？
+言い換えるとと以下の式が偽である場合、検査をパスします。
 
-@param a 任意の数値を指定します。
+  [expected, actual].min * epsilon >= (extected - actual).abs
 
-@param b 任意の数値を指定します。
+@param expected 期待値を指定します。
 
-@param epsilon ???
+@param actual 実際の値を指定します。
+
+@param epsilon 許容する計算機誤差を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
                結果を使用します。
 
-@raise MiniTest::Assertion 
+@raise MiniTest::Assertion 検査に失敗した場合に発生します。
 
 --- refute_includes(collection, object, message = nil) -> true
 
