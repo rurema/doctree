@@ -200,7 +200,7 @@ ostruct                         eklerni         done
 
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
-parsearg
+parsearg                        okkez           okkez
 parsedate                       tadf            almost done
 pathname                        mukai           done
 ping                            okkez           done
