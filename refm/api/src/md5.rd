@@ -6,6 +6,18 @@
 [[c:Digest::MD5]] のエイリアスです。
 
 == Class Methods
---- md5(*args)
+#@since 1.8.6
+#@until 1.9.1
+--- new(str = nil) -> String
+
+[[m:Digest::MD5.new]] の別名です。
+
+--- orig_new -> String
+
+[[m:Digest::MD5.new]] の別名です。
+#@end
+#@end
+
+--- md5(*args) -> String
 
 [[m:Digest::MD5.new]] の別名です。
