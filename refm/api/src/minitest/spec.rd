@@ -1,7 +1,7 @@
 
 BDD 風にテストを書くためのクラスやメソッドを定義するためのライブラリです。
 
-このライブラリは [[c:Object]] に BDD 用の検査メソッドが追加します。
+このライブラリは [[c:Object]] に BDD (Behavior Driven Development) 用の検査メソッドを追加します。
 追加されるメソッドは [[c:MiniTest::Assertions]] に定義されているメソッドへの
 薄いラッパーになっています。
 
@@ -49,22 +49,22 @@ BDD 風にテストを書くために使用するメソッド群を定義します。
 --- must_be_within_delta(expected, delta = 0.001) -> true
 --- must_be_close_to(expected, delta = 0.001) -> true
 
-自身と期待値の差の絶対値が与えられた差分以下である場合、検査にパスしたことになります。
+自身と期待値の差の絶対値が与えられた絶対誤差以下である場合、検査にパスしたことになります。
 
 @param expected 期待値を指定します。
 
-@param delta 許容する差分を指定します。
+@param delta 許容する絶対誤差を指定します。
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
 
 @see [[m:MiniTest::Assertions#assert_in_delta]]
 
 --- must_be_within_epsilon(actual, epsilon = 0.001) -> true
-自身と実際の値の計算機誤差が許容範囲内である場合、検査にパスしたことになります。
+自身と実際の値の相対誤差が許容範囲内である場合、検査にパスしたことになります。
 
 @param actual 実際の値を指定します。
 
-@param epsilon 許容する計算機誤差を指定します。
+@param epsilon 許容する相対誤差を指定します。
 
 @raise MiniTest::Assertion 検査に失敗した場合に発生します。
 
@@ -195,22 +195,22 @@ BDD 風にテストを書くために使用するメソッド群を定義します。
 --- wont_be_within_delta(actual, delta = 0.001) -> true
 --- wont_be_close_to(actual, delta = 0.001) -> true
 
-自身と実際の値の差の絶対値が与えられた差分より大きい場合、検査にパスしたことになります。
+自身と実際の値の差の絶対値が与えられた絶対誤差より大きい場合、検査にパスしたことになります。
 
 @param actual 実際の値を指定します。
 
-@param delta 差分を指定します。
+@param delta 絶対誤差を指定します。
 
 @raise MiniTest::Assertion 自身と実際の値の差の絶対値が与えられた差分以下である場合に発生します。
 
 @see [[m:MiniTest::Assertions#refute_in_delta]]
 
 --- wont_be_within_epsilon(actual, epsilon = 0.001) -> true
-自身と実際の値の計算機誤差が許容範囲内でない場合、検査にパスしたことになります。
+自身と実際の値の相対誤差が許容範囲内でない場合、検査にパスしたことになります。
 
 @param actual 実際の値を指定します。
 
-@param epsilon 許容する計算機誤差を指定します。
+@param epsilon 相対誤差を指定します。
 
 @raise MiniTest::Assertion 検査に失敗した場合に発生します。
 

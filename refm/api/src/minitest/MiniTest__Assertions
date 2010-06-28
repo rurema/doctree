@@ -67,13 +67,13 @@
 
 --- assert_in_delta(expected, actual, delta = 0.001, message = nil) -> true
 
-期待値と実際の値の差の絶対値が与えられた差分以下である場合、検査にパスしたことになります。
+期待値と実際の値の差の絶対値が与えられた絶対誤差以下である場合、検査にパスしたことになります。
 
 @param expected 期待値を指定します。
 
 @param actual 実際の値を指定します。
 
-@param delta 許容する差分を指定します。
+@param delta 許容する絶対誤差を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
@@ -83,7 +83,7 @@
 
 --- assert_in_epsilon(acual, expected, epsilon = 0.001, message = nil) -> true
 #@# 使っている用語が正しくないかもしれない。
-与えられた期待値と実際の値の計算機誤差が許容範囲内である場合、検査にパスしたことになります。
+与えられた期待値と実際の値の相対誤差が許容範囲内である場合、検査にパスしたことになります。
 
 言い換えるとと以下の式が真である場合、検査をパスします。
 
@@ -93,7 +93,7 @@
 
 @param actual 実際の値を指定します。
 
-@param epsilon 許容する計算機誤差を指定します。
+@param epsilon 許容する相対誤差を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
@@ -365,13 +365,13 @@
 
 --- refute_in_delta(expected, actual, delta = 0.001, message = nil) -> true
 
-期待値と実際の値の差の絶対値が与えられた差分より大きい場合、検査にパスしたことになります。
+期待値と実際の値の差の絶対値が与えられた絶対誤差より大きい場合、検査にパスしたことになります。
 
 @param expected 期待値を指定します。
 
 @param actual 実際の値を指定します。
 
-@param delta 差分を指定します。
+@param delta 絶対誤差を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
@@ -381,7 +381,7 @@
 
 --- refute_in_epsilon(acual, expected, epsilon = 0.001, message = nil) -> true
 #@# 使っている用語が正しくないかもしれない。
-与えられた期待値と実際の値の計算機誤差が許容範囲内でない場合、検査にパスしたことになります。
+与えられた期待値と実際の値の相対誤差が許容範囲内でない場合、検査にパスしたことになります。
 
 言い換えるとと以下の式が偽である場合、検査をパスします。
 
@@ -391,7 +391,7 @@
 
 @param actual 実際の値を指定します。
 
-@param epsilon 許容する計算機誤差を指定します。
+@param epsilon 相対誤差を指定します。
 
 @param message 検査に失敗した場合に表示するメッセージを指定します。
                文字列か [[c:Proc]] を指定します。[[c:Proc]] である場合は [[m:Proc#call]] した
