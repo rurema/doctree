@@ -722,7 +722,7 @@ SITE コマンドを発行します。
 == Constants
 
 #@# --- CRLF
-#@# #@todo
+#@# nodoc
 
 --- DEFAULT_BLOCKSIZE -> Integer
 get, put をするときのデフォルトのブロックサイズです。
@@ -731,8 +731,11 @@ get, put をするときのデフォルトのブロックサイズです。
 FTPのデフォルトのポート番号(21)です。
 
 #@# --- MDTM_REGEXP
-#@# #@todo
+#@# nodoc
 
+= class Net::FPT::NullSocket < Object
+
+全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
 
 = class Net::FTPError < StandardError
 net/ftp ライブラリ関連のエラー全般を表す例外クラスです。
