@@ -1,7 +1,7 @@
 このライブラリは obsolete です。[[lib:digest]] ライブラリを使ってください。
 
 #@since 1.8.6
-= MD5 < Digest::MD5
+= class MD5 < Digest::MD5
 MD5 ハッシュを生成するためのクラスです。
 [[c:Digest::MD5]] を使ってください。
 
