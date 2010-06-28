@@ -79,11 +79,14 @@ include MiniTest::Assertions
 
 
 == Constants
-
+#@since 1.9.2
 --- PASSTHROUGH_EXCEPTIONS -> [Class]
 
-システム関連の例外のリストです。
+システム関連の例外のリストです。内部で使用します。
 
 --- SUPPORTS_INFO_SIGNAL -> Fixnum | nil
-#@todo
 
+[[c:Signal]] が INFO というシグナルをサポートしているかどうかを
+調べるための定数です。内部で使用します。
+
+#@end
