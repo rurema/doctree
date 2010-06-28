@@ -96,7 +96,7 @@
 @param count 件数を指定します。
 
 #@since 1.9.2
----process_args(args = []) -> Hash
+--- process_args(args = []) -> Hash
 
 [[lib:optparse]] を使ってコマンドライン引数を解析した結果を返します。
 
@@ -104,17 +104,17 @@
 
 @see [[lib:optparse]]
 
----start_time -> Time
+--- start_time -> Time
 
 テストの実行開始時刻を返します。
 
----start_time=(time)
+--- start_time=(time)
 
 テストの実行開始時刻をセットします。
 
 @param time [[c:Time]] オブジェクトを指定します。
 
----status(io = @@out) -> ()
+--- status(io = @@out) -> ()
 
 テスト結果を与えられた IO に書き込みます。
 
@@ -125,8 +125,9 @@
 
 == Singleton Methods
 
---- autorun -> ()
-#@todo
+--- autorun -> true
+
+プロセスの終了時にテストを実行するように登録します。
 
 --- output=(stream)
 
