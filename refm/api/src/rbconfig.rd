@@ -1,21 +1,17 @@
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 
 #@since 1.9.1
-= module Config
-[[c:RbConfig]] の別名です。
-
 = module RbConfig
-[[unknown:執筆者募集]]
+alias Config
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 RbConfig モジュールを定義します。
 
 #@else
-= module RbConfig
-[[c:Config]] の別名です。
-
 = module Config
-[[unknown:執筆者募集]]
+#@since 1.8.5
+alias RbConfig
+#@end
 
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 Config モジュールを定義します。
@@ -207,14 +203,12 @@ returns the absolute pathname of the ruby command.
 : MAINLIBS
 : arch
       実行対象となるアーキテクチャ。RUBY_PLATFORMと同じ。
-#@since 1.8.0
 : sitearch
       サイトごとの拡張ライブラリインストール時にarchの代わりに利用される値。
       通常はarchと同じになるが、特定のプラットフォーム(mswin32・mingw32)では
       異なる。
       拡張ライブラリにバイナリ互換性があるarch間で、拡張ライブラリを共有する
       ために用いられる。
-#@end
 : sitedir
 : configure_args
       ビルド時のconfigureの引数。
