@@ -27,16 +27,20 @@ include Net::HTTPHeader
 --- body -> String
 サーバに送るリクエストのエンティティボディを返します。
 
+#@since 1.8.3
 @see [[m:Net::HTTPGenericRequest#body=]]
+#@end
+#@end
 
+#@since 1.8.3
 --- body=(body)
 
 サーバに送るリクエストのエンティティボディを文字列で設定します。
 
 @param body 設定するボディを文字列で与えます。
 @see [[m:Net::HTTPGenericRequest#body]]
-
 #@end
+
 
 #@since 1.9.1
 --- body_stream -> object
