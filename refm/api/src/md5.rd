@@ -7,5 +7,5 @@
 
 == Class Methods
 --- md5(*args)
-#@todo
-[[m:Digest::MD5.new]]の別名です。
+
+[[m:Digest::MD5.new]] の別名です。
