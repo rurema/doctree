@@ -139,6 +139,7 @@ Bignum#quo と同じ働きをします(有理数または整数を返します)。
 
 self のべき乗を返します。 Rational になるようであれば Rational で返します。
 
+#@until 1.9.1
 --- power2
 #@todo
 
@@ -148,7 +149,7 @@ self のべき乗を返します。 Rational になるようであれば Rational で返します。
 有理数値を人間が読みやすい形の文字列表現にして返します。
 
 現在のバージョンでは "3/5", "-17/7" のように10進数の既約分数表記を返します。
-
+#@end
 = redefine Math
 
 == Module Functions
