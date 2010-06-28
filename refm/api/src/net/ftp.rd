@@ -733,9 +733,11 @@ FTPのデフォルトのポート番号(21)です。
 #@# --- MDTM_REGEXP
 #@# nodoc
 
+#@since 1.9.2
 = class Net::FPT::NullSocket < Object
 
 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
+#@end
 
 = class Net::FTPError < StandardError
 net/ftp ライブラリ関連のエラー全般を表す例外クラスです。
