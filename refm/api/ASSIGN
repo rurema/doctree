@@ -174,9 +174,9 @@ mailread			masao		done
 mathn				yugui
 matrix                          bornite
 md5                             okkez           done
-miniunit/mock                   okkez
-miniunit/spec                   okkez
-miniunit/unit                   okkez
+miniunit/mock                   okkez           done
+miniunit/spec                   okkez           done
+miniunit/unit                   okkez           done
 mkmf                            bornite
 monitor                         ohai            done
 mutex_m                         ohai            done
