@@ -184,7 +184,7 @@ BDD 風にテストを書くために使用するメソッド群を定義します。
 @see [[m:MiniTest::Assertions#refute_empty]]
 
 --- wont_equal(actual) -> true
-自身とと実際の値が等くない場合、検査にパスしたことになります。
+自身と実際の値が等くない場合、検査にパスしたことになります。
 
 @param actual 実際の値を指定します。
 
