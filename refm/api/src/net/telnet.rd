@@ -146,7 +146,7 @@ LF は CRLF に変換され、ホストからの CRLF は LF に変換されます。
 これを真にすると、変換をしません。この変換は 
 [[m:Net::Telnet#binmode]] でも無効化できます。
 ホストへ送る文字列の変換は [[m:Net::Telnet#puts]] と
-[[m:Net::Telnet#puts]] に適用され、[[m:Net::Telnet#write] には適用され
+[[m:Net::Telnet#puts]] に適用され、[[m:Net::Telnet#write]] には適用され
 ません。改行の変換に関しては telnet の SGA と BIN オプションにも
 影響されることに注意してください。
 
