@@ -37,18 +37,23 @@ Profiler__.start_profile 実行から、Profiler__.stop_profile までの
 
 == Module Functions
 
---- start_profile
-#@todo
+--- start_profile -> object
 
 プロファイルの取得を開始します。
 
---- stop_profile
-#@todo
+--- stop_profile -> nil
 
 プロファイルの取得を停止します。
 
---- print_profile(file)
-#@todo
+--- print_profile(file) -> ()
 
 stop_profile を実行し、プロファイルの結果を file に出力します。
 file には printf メソッドが定義されていなければいけません。
+
+@param file [[c:File]] のインスタンスを指定します。
+
+== Constants
+
+--- PROFILE_PROC -> Proc
+
+内部で使用します。
