@@ -217,7 +217,7 @@ racc/parser
 rational			yugui
 rbconfig
 rdoc
-readbytes                       okkez
+readbytes                       okkez           done
 readline                        kouji           done
 resolv                          ohai            done
 resolv-replace                  ohai            done
