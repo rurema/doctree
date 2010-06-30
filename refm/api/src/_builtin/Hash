@@ -101,69 +101,32 @@ to_hash メソッドを用いて obj をハッシュに変換しようとします。
 
 以下は配列からハッシュを生成する方法の例です。
 
-#@if (version < "1.8.0")
-(1) [キー, 値, ...] の配列からハッシュへ
-
-  ary = [1,"a", 2,"b", 3,"c"]
-  p Hash[*ary]
-  
-  #=> {1=>"a", 2=>"b", 3=>"c"}
-
-(2) キーと値のペアの配列からハッシュへ
-
-  alist = [[1,"a"], [2,"b"], [3,"c"]]
-  p Hash[*alist.flatten]
-  
-  #=> {1=>"a", 2=>"b", 3=>"c"}
-
-(3) キーや値が配列だと (2) の方法は使えないので地道に代入するしかない
-
-  h = Hash.new
-  alist = [[1,["a"]], [2,["b"]], [3,["c"]]]
-  alist.each {|k,v|
-    h[k] = v
-  }
-  p h
-  
-  #=> {1=>["a"], 2=>["b"], 3=>["c"]}
-  
-(4) キーと値の配列のペアからハッシュへ（地道に代入）
-
-  keys = [1, 2, 3]
-  vals = ["a", "b", "c"]
-  h={}
-  
-  keys.each_with_index{|key,n| h[key] = vals[n]}
-  p h
-  
-  #=> {1=>"a", 2=>"b", 3=>"c"}
-
-#@end
 #@since 1.8.0
 #@until 1.9.1
 (1) [キー, 値, ...] の配列からハッシュへ
 
   ary = [1,"a", 2,"b", 3,"c"]
-  p Hash[*ary]
-  
-  #=> {1=>"a", 2=>"b", 3=>"c"}
+  p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>"c"}
 
 (2) キーと値のペアの配列からハッシュへ
 
   alist = [[1,"a"], [2,"b"], [3,"c"]]
-  p Hash[*alist.flatten]
-  
-  #=> {1=>"a", 2=>"b", 3=>"c"}
+  p Hash[*alist.flatten]  # => {1=>"a", 2=>"b", 3=>"c"}
 
 (3) キーと値の配列のペアからハッシュへ
 
   keys = [1, 2, 3]
   vals = ["a", "b", "c"]
   alist = keys.zip(vals)   # あるいは alist = [keys,vals].transpose
-  p Hash[*alist.flatten]
-  
-  #=> {1=>"a", 2=>"b", 3=>"c"}
+  p Hash[*alist.flatten]   # => {1=>"a", 2=>"b", 3=>"c"}
 
+#@since 1.8.7
+(4) キーや値が配列の場合
+
+  alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
+  hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
+
+#@else
 (4) キーや値が配列だと (2) や (3) の方法は使えないので地道に代入するしかない
 
   h = Hash.new
@@ -171,34 +134,32 @@ to_hash メソッドを用いて obj をハッシュに変換しようとします。
   alist.each {|k,v|
     h[k] = v
   }
-  p h
-  
-  #=> {1=>["a"], 2=>["b"], 3=>["c"]}
+  p h  # => {1=>["a"], 2=>["b"], 3=>["c"]}
+#@end
 #@end
 #@end
 #@since 1.9.1
 (1) [キー, 値, ...] の配列からハッシュへ
 
   ary = [1,"a", 2,"b", 3,["c"]]
-  p Hash[*ary]
-  
-  #=> {1=>"a", 2=>"b", 3=>["c"]}
+  p Hash[*ary]  # => {1=>"a", 2=>"b", 3=>["c"]}
 
 (2) キーと値のペアの配列からハッシュへ
 
   alist = [[1,"a"], [2,"b"], [3,["c"]]]
-  p Hash[*alist.flatten(1)]
-  
-  #=> {1=>"a", 2=>"b", 3=>["c"]}
+  p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
 
 (3) キーと値の配列のペアからハッシュへ
 
   keys = [1, 2, 3]
   vals = ["a", "b", ["c"]]
-  alist = keys.zip(vals)   # あるいは alist = [keys,vals].transpose
-  p Hash[*alist.flatten(1)]
-  
-  #=> {1=>"a", 2=>"b", 3=>["c"]}
+  alist = keys.zip(vals)     # あるいは alist = [keys,vals].transpose
+  p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
+
+(4) キーや値が配列の場合
+
+  alist = [[1,["a"]], [2,["b"]], [3,["c"]], [[4,5], ["a", "b"]]]
+  hash = Hash[alist] # => {1=>["a"], 2=>["b"], 3=>["c"], [4, 5]=>["a", "b"]}
 #@end
 
 --- new(ifnone = nil) -> Hash
