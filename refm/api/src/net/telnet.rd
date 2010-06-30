@@ -23,7 +23,7 @@ telnet でリモートホストにログインしてシェル経由で
 これを Net::Telnet で実現するためには、
 まず [[m:Net::Telnet.new]] に "Host" オプションを
 与えてオブジェクトを作り、 [[m:Net::Telnet#login]] で
-ユーザ名をパスワードを送ってログインし、
+ユーザ名とパスワードを送ってログインし、
 [[m:Net::Telnet#cmd]] でコマンドを
 実行、最後に IO#close で接続を閉じます。
 [[m:Net::Telnet#waitfor]], [[m:Net::Telnet#print]],
