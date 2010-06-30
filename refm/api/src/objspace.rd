@@ -7,6 +7,8 @@ MRI の実装について詳しくない一般のユーザはこのライブラリを使ってはいけません。
 
 = reopen ObjectSpace
 
+== Module Functions
+
 --- count_objects_size(result_hash = nil) -> Hash
 #@todo
 
