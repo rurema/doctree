@@ -170,6 +170,9 @@ net/telnet
 net/telnets
 #@end
 nkf
+#@since 1.9.2
+objspace
+#@end
 observer
 open-uri
 open3
