@@ -365,6 +365,22 @@ self を other で割った商 q と余り r を、
   p 0.zero?               #=> true
   p 0.0.zero?             #=> true
 
+--- to_s -> String
+
+自身を人間が読みやすい形の文字列表現にして返します。
+
+固定小数点、浮動小数点の形式か、 "Infinity"、"-Infinity"、"NaN" のいず
+れかを返します。
+
+@return 文字列を返します。
+
+例:
+
+  3.14.to_s                # => "3.14"
+  10000_00000_00000.0.to_s # => "1.0e+14"
+  (1.0/0.0).to_s           # => "Infinity"
+  (0.0/0.0).to_s           # => "NaN"
+
 #@since 1.9.1
 --- denominator -> Integer
 
