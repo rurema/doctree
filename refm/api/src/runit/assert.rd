@@ -7,6 +7,7 @@ RubyUnit との互換性を提供するためだけに提供されています。
 
 
 = module RUNIT::Assert
+include Test::Unit::Assertions
 
 RubyUnit のアサーションを集めたモジュールです。
 
@@ -15,122 +16,92 @@ RubyUnit のアサーションを集めたモジュールです。
 
 == Module Functions
 
---- assert(condition[, message])
-#@todo
+--- assert_equal_float(expected, actual, delta, message = "") -> ()
 
-condition が Ruby の真 (false または nil 以外) であることを表明します。
-condition が偽であったらこのアサーションは失敗します。
+期待値と実際の値の差の絶対値が与えられた絶対誤差以下である場合、検査にパスしたことになります。
 
-message はアサート失敗時のエラーメッセージです。
+@param expected 期待値を指定します。
 
---- assert_equal(expected, actual[, message])
---- assert_equals(expected, actual[, message])
-#@todo
+@param actual 実際の値を指定します。
 
-actual == expected であることを表明します。
-actual != expected のときにこのアサーションは失敗します。
+@param delta 許容する絶対誤差を指定します。
 
-message はアサート失敗時のエラーメッセージです。
+@param message 検査に失敗したときのメッセージを指定します。
 
---- assert_operator(obj1, op, obj2[, message])
-#@todo
+--- assert_send(object, method, *args) -> ()
 
-actual.__send__(op, expected) が真であることを表明します。
+object.__send__(method, *args) が真である場合、検査にパスしたことになります。
 
-message はアサート失敗時のエラーメッセージです。
+@param object 任意のオブジェクトを指定します。
 
---- assert_equal_float(expected, actual, e[, message])
-#@todo
+@param method 呼び出すメソッド名を指定します。
 
-浮動小数点数 actual と expected が等しいことを表明します。
-このとき、expected-e <= actual <= expected+e
-であれば「等しい」と判定されます。
+@param args メソッドに渡す引数を指定します。
 
-message はアサート失敗時のエラーメッセージです。
+#@since 1.8.1
+--- assert_not_nil(actual, message = "") -> ()
+与えられたオブジェクトが nil でない場合、検査にパスしたことになります。
 
---- assert_same(expected, actual[, message])
-#@todo
+@param actual 検査したいオブジェクトを指定します。
 
-expected.equal?(actual) が真であると表明します。
+@param message 検査に失敗したときのメッセージを指定します。
+#@end
 
-message はアサート失敗時のエラーメッセージです。
+--- assert_respond_to(method, object, message = "") -> ()
 
---- assert_send(obj, method, *args)
-#@todo
+与えられたオブジェクトが与えられたメソッドを持つ場合、検査にパスしたことになります。
 
-obj.__send__(method, *args) が真であることを表明します。
+@param method メソッド名を指定します。
 
---- assert_nil(obj[, message])
-#@todo
+@param object 任意のオブジェクトを指定します。
 
-obj が nil であると表明します。
+@param message 検査に失敗したときのメッセージを指定します。
 
-message はアサート失敗時のエラーメッセージです。
+--- assert_match(str, re, message = "") -> ()
+--- assert_matches(str, re, message = "") -> ()
 
---- assert_not_nil(obj[, message])
-#@todo
+与えられた文字列が与えられた正規表現にマッチする場合、検査にパスします。
 
-obj が nil ではないと表明します。
+@param str 文字列を指定します。
 
-message はアサート失敗時のエラーメッセージです。
+@param re 正規表現を指定します。
 
---- assert_respond_to(method, obj[, message])
-#@todo
+@param message 検査に失敗したときのメッセージを指定します。
 
-オブジェクト obj にメソッド method が定義されていると表明します。
+--- assert_not_match(str, re, message = "") -> ()
+与えられた文字列が与えられた正規表現にマッチしない場合、検査にパスします。
 
-message はアサート失敗時のエラーメッセージです。
+@param str 文字列を指定します。
 
---- assert_kind_of(c, obj[, message])
-#@todo
+@param re 正規表現を指定します。
 
-obj.kind_of?(c) が真であると表明します。
+@param message 検査に失敗したときのメッセージを指定します。
 
-message はアサート失敗時のエラーメッセージです。
+--- assert_exception(exception, message = "") { ... } -> ()
 
---- assert_instance_of(c, obj[, message])
-#@todo
+与えられたブロックを評価中に与えられた例外が発生する場合、検査にパスしたことになります。
 
-c.instance_of?(c) が真であると表明します。
+@param exception 例外クラスを指定します。
 
-message はアサート失敗時のエラーメッセージです。
+@param message 検査に失敗したときのメッセージを指定します。
 
---- assert_match(str, re[, message])
---- assert_matches(str, re[, message])
-#@todo
+--- assert_no_exception(*args) { ... }
+与えられたブロックを評価中に与えられた例外が発生しない場合、検査にパスしたことになります。
 
-re =~ str が真であると表明します。
+@param args 例外クラスを一つ以上指定します。最後の引数に文字列を指定した場合、それは検査に
+            失敗したときのメッセージになります。
 
-message はアサート失敗時のエラーメッセージです。
+--- assert_fail(message) -> ()
 
---- assert_not_match(str, re[, message])
-#@todo
+常に失敗します。
 
-re =~ str が偽であると表明します。
+@param message 検査に失敗したときのメッセージを指定します。
 
-message はアサート失敗時のエラーメッセージです。
+--- setup_assert
 
---- assert_exception(exception[, message]) { ... }
-#@todo
+何もしません。
 
-ブロックを実行中に例外 exception が発生することを表明します。
-ブロックを実行しても例外 exception が発生しなかったら
-このアサーションは失敗します。
-message はアサート失敗時のエラーメッセージです。
+--- called_internally? -> bool
 
---- assert_no_exception(exceptions, ...[, message]) { ... }
-#@todo
+内部で使用します。
 
-ブロックを実行中に例外 exceptions が発生しないことを表明します。
-ブロックを実行したときに例外 exception が発生すると
-このアサーションは失敗します。
-message はアサート失敗時のエラーメッセージです。
-
---- assert_fail(message)
-#@todo
-
-このアサーションは常に失敗します。
-message はアサート失敗時のエラーメッセージです。
-
-このアサーションは、テストをまだ書いていない場合に、
-それを明示するために使われます。

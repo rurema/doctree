@@ -7,31 +7,38 @@ require runit/error
 これからユニットテストを書くときは
 [[lib:test/unit]] ライブラリを使ってください。
 
-= module RUNIT::AssertMixin
-#@todo
-
 = class RUNIT::TestCase < Test::Unit::TestCase
-
-include RUNIT::AssertMixin
+include RUNIT::Assert
 
 == Class Methods
 
---- new(test_name, suite_name = Test::Unit::TestCase.name)
-#@todo
+--- new(test_name, suite_name = RUNIT::TestCase.name) -> RUNIT::TestCase
 
---- suite
-#@todo
+自身を初期化します。
+
+--- suite -> RUNIT::TestSuite
+
+テストスイートを作成して返します。
 
 == Instance Methods
 
---- assert_equals(expected, really, message = nil)
-#@todo
+--- assert_equals(expected, actual, message = nil)
 
-alias of assert_equal.
+[[m:Test::Unit::Asserttions#assert_equal]] の別名。
 
---- name
-#@todo
+@param expected 期待値を指定します。
 
---- run(result) { .... }
-#@todo
+@param actual 実際の値を指定します。
+
+@param message 検査に失敗した場合のメッセージを指定します。
+
+--- name -> String
+
+名前を返します。
+
+--- run(result) { .... } -> ()
+
+テストを実行します。
+
+@param result [[c:RUNIT::TestResult]] のインスタンスを指定します。
 

@@ -5,3 +5,4 @@
 
 = module RUNIT::ToPublic
 
+何もしません。

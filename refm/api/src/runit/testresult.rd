@@ -5,32 +5,48 @@
 
 = class RUNIT::TestResult < Test::Unit::TestResult
 
+テストの実行結果を格納するクラスです。
+
 == Instance Methods
 
---- errors
-#@todo
+--- errors -> Array
 
---- failures
-#@todo
+エラーが発生したテストケースの配列を返します。
 
---- succeed?
-#@todo
+--- failures -> Array
 
---- failure_size
-#@todo
+失敗したテストケースの配列を返します。
 
---- run_asserts
-#@todo
+--- succeed? -> bool
 
---- error_size
-#@todo
+成功している場合は、真を返します。
+そうでない場合は、偽を返します。
 
---- run_tests
-#@todo
+--- failure_size -> Integer
 
---- add_failure(failure)
-#@todo
+失敗した件数を返します。
 
---- add_error(error)
-#@todo
+--- run_asserts -> Integer
+
+アサーションの件数を返します。
+
+--- error_size -> Integer
+
+エラーが発生した件数を返します。
+
+--- run_tests -> Integer
+
+テストの件数を返します。
+
+--- add_failure(failure) -> ()
+
+失敗したテストを追加します。
+
+@param failure 失敗したテストを指定します。
+
+--- add_error(error) -> ()
+
+エラーが発生したテストを追加します。
+
+@param error エラーが発生したテストを指定します。
 

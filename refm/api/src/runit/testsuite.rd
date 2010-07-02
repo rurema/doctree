@@ -5,17 +5,20 @@
 
 = class RUNIT::TestSuite < Test::Unit::TestSuite
 
+テストスイートを構成するクラスです。
+
 == Instance Methods
 
---- add_tests(*args)
-#@todo
+--- add_tests(*args) -> self
+--- add(*args) -> self
 
---- add(*args)
-#@todo
+[[m:Test::Unit::TestSuite#<<]] と同じです。
 
---- counte_test_cases
-#@todo
+--- counte_test_cases -> Integer
+
+テストの件数を返します。
 
 --- run(result) { .... }
-#@todo
+
+テストスイートを実行します。
 
