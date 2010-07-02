@@ -75,7 +75,7 @@ immutable であるためです。
   p 2 ** 0 # => 1
   p 0 ** 0 # => 1
 
---- <=>(other) -> Fixnum
+--- <=>(other) -> Fixnum | nil
 
 self と other を比較して、self が大きい時に正、
 等しい時に 0、小さい時に負の整数を返します。

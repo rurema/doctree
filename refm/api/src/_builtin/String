@@ -273,7 +273,7 @@ args が配列であれば [[m:Kernel.#sprintf]](self, *args) と同じです。
 
 #@include(printf-format)
 
---- <=>(other) -> Integer
+--- <=>(other) -> Integer | nil
 
 self と other を ASCII コード順で比較して、
 self が大きい時には正の整数、等しい時には 0、小さい時には負の整数を返します。
@@ -806,7 +806,7 @@ rangeで指定したインデックスの範囲に含まれる部分文字列を文字列 val で置き換えます
 @see [[m:String#capitalize]], [[m:String#upcase]],
      [[m:String#downcase]], [[m:String#swapcase]]
 
---- casecmp(other) -> Integer
+--- casecmp(other) -> Integer | nil
 
 [[m:String#<=>]] と同様に文字列の順序を比較しますが、
 アルファベットの大文字小文字の違いを無視します。
