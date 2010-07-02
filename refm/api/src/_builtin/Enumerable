@@ -689,8 +689,8 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
    (1..6).group_by {|i| i%3}   #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
 
 
---- minmax                 -> [Number, Number]
---- minmax{|a, b| ... }    -> [Number, Number]
+--- minmax                 -> [object, object]
+--- minmax{|a, b| ... }    -> [object, object]
 
 Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
 要素とするサイズ 2 の配列を返します。
@@ -713,7 +713,7 @@ Enumerable オブジェクトの各要素のうち最小の要素と最大の要素を
 #@else
 --- minmax_by                -> Enumerable::Enumerator
 #@end
---- minmax_by {|obj| ... }   -> [Number, Number]
+--- minmax_by {|obj| ... }   -> [object, object]
 
 Enumerable オブジェクトの各要素をブロックに渡して評価し、その結果を <=> で比較して
 最小の要素と最大の要素を要素とするサイズ 2 の配列を返します。
