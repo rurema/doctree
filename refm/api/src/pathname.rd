@@ -30,7 +30,7 @@ Pathname のインスタンスメソッドには、ディレクトリのパスを返す [[m:Pathname#dirna
 文字列操作だけで結果を返すものもあれば、ファイルの中身を読み出す [[m:Pathname#read]] のように
 ファイルシステムにアクセスするものもあります。
 
-Pathname オブジェクトの生成には、[[m:Pathname#new]] のほかに [[m:Kernel#Pathname]] も使えます。
+Pathname オブジェクトの生成には、[[m:Pathname.new]] のほかに [[m:Kernel#Pathname]] も使えます。
 
   Pathname.new("foo/bar") # => #<Pathname:foo/bar>
   Pathname("foo/bar")     # => #<Pathname:foo/bar>
