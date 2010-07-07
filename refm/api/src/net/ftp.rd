@@ -60,7 +60,7 @@ FTP はファイル転送やディレクトリ情報取得のための
     ftp.chdir('pub/ruby')
     files = ftp.list('*.bz2')
     ftp.getbinaryfile('ruby-1.9.1-p243.tar.bz2', 'ruby.bz2', 1024)
-  endh
+  end
 
 = class Net::FTP < Object
 FTP を実装したクラスです。
@@ -734,7 +734,7 @@ FTPのデフォルトのポート番号(21)です。
 #@# nodoc
 
 #@since 1.9.2
-= class Net::FPT::NullSocket < Object
+= class Net::FTP::NullSocket < Object
 
 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
 #@end
