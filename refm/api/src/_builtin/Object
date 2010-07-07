@@ -900,8 +900,17 @@ extend の機能は、「特異クラスに対する [[m:Module#include]]」
 #@end
 #@end
 
---- instance_variables -> [String]
+#@since 1.9.1
+--- instance_variables -> [Symbol]
+オブジェクトのインスタンス変数名をシンボルの配列として返します。
 
+    obj = Object.new
+    obj.instance_eval { @foo, @bar = nil }
+    p obj.instance_variables
+
+    #=> [:@foo, :@bar]
+#@else
+--- instance_variables -> [String]
 オブジェクトのインスタンス変数名を文字列の配列として返します。
 
     obj = Object.new
@@ -909,6 +918,7 @@ extend の機能は、「特異クラスに対する [[m:Module#include]]」
     p obj.instance_variables
 
     #=> ["@foo", "@bar"]
+#@end
 
 @see [[m:Object#instance_variable_get]],[[m:Kernel.#local_variables]],[[m:Kernel.#global_variables]],[[m:Module.constants]],[[m:Module#constants]],[[m:Module#class_variables]]
 
