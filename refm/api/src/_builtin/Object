@@ -1088,7 +1088,7 @@ marshal_dump/marshal_load によりそれを実現する余地があるということです)。
 
 @see [[m:Kernel.#_dump]], [[m:Object#marshal_load]], [[c:Marshal]]
 
---- marshal_load(obj)
+--- marshal_load(obj) -> object
 
 [[m:Marshal.#load]] を制御するメソッドです。
 
