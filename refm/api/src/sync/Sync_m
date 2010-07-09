@@ -22,7 +22,7 @@ includeしたクラスではinitializeでsuperを呼び出しておく必要がある。
 複数のスレッドが共有ロックしている場合、
 どのスレッドもオブジェクトを排他ロックできない。
 
-== Module Functions
+== Instance Methods
 --- sync_mode -> Symbol
 現在のロック状態を返します。
 
