@@ -170,6 +170,72 @@ XML Schema による書式の日付を解析し、
 @param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
 #@end
 
+#@since 1.8.0
+#@since 1.9.1
+--- parse(str = '-4712-01-01T00:00:00+00:00', complete = true, start = Date::ITALY) -> DateTime
+#@else
+--- parse(str = '-4712-01-01T00:00:00+00:00', complete = false, start = Date::ITALY) -> DateTime
+#@end
+与えられた日時表現を解析し、
+その情報に基づいて DateTime オブジェクトを生成します。
+
+#@since 1.9.1
+年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+この振舞いを抑止したい場合は、ヒントとして、complete に false を与えます。
+#@else
+complete が真で、年が "00" から "99" の範囲であれば、
+年の下2桁表現であるとみなしこれを補います。
+なお、省略した場合は、偽とみなします。
+#@end
+
+@param str 日時をあらわす文字列
+@param complete 年を補完するか
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時になる組み合わせである場合に発生します。
+
+例:
+
+  DateTime.parse('2001-02-03T12:13:14Z').to_s
+  # => "2001-02-03T12:13:14+00:00"
+
+@see [[m:Date._parse]], [[m:Date.parse]]
+
+--- _strptime(str, format = '%FT%T%z') -> Hash
+
+与えられた雛型で日時表現を解析し、その情報に基づいてハッシュを生成します。
+
+@param str 日時をあらわす文字列
+@param format 書式
+
+例:
+
+  DateTime._strptime('2001-02-03T12:13:14Z')
+  # => {:sec=>14, :zone=>"Z", :year=>2001, :hour=>12, :mday=>3, :min=>13, :offset=>0, :mon=>2}
+
+[[m:DateTime.strptime]] の内部で使用されています。
+
+@see [[m:Date._strptime]], [[m:DateTime.strptime]]
+
+--- strptime(str = '-4712-01-01T00:00:00+00:00', format = '%FT%T%z', start = Date::ITALY) -> DateTime
+
+与えられた雛型で日時表現を解析し、
+その情報に基づいて DateTime オブジェクトを生成します。
+
+@param str 日時をあらわす文字列
+@param format 書式
+@param start グレゴリオ暦をつかい始めた日をあらわすユリウス日
+@raise ArgumentError 正しくない日時になる組み合わせである場合に発生します。
+
+例:
+
+  DateTime.strptime('2001-02-03T12:13:14Z').to_s
+  # => "2001-02-03T12:13:14+00:00"
+
+@see [[m:Date.strptime]], [[m:DateTime._strptime]], [[man:strptime(3)]], [[m:Date#strftime]]
+
+#@end
+
 == Instance Methods
 
 --- hour -> Integer
