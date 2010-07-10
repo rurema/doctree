@@ -48,7 +48,7 @@ Net::Telnet のオブジェクトは SMTP や HTTP のような telnet で
 また、[[m:Net::Telnet#puts]] や [[m:Net::Telnet#waitfor]] を
 直接使ってやりとりすることもできます。
 それでうまくいかない場合は、
-[[IO#sysread]] を直接呼ぶ必要があるかもしれません。
+[[m:IO#sysread]] を直接呼ぶ必要があるかもしれません。
 
 
 [[m:Net::Telnet.new]] には "Proxy" オプションで指定した
