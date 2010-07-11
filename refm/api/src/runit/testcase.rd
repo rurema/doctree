@@ -24,7 +24,7 @@ include RUNIT::Assert
 
 --- assert_equals(expected, actual, message = nil)
 
-[[m:Test::Unit::Asserttions#assert_equal]] の別名。
+[[m:Test::Unit::Assertions#assert_equal]] の別名。
 
 @param expected 期待値を指定します。
 
