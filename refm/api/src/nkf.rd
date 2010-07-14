@@ -249,23 +249,38 @@ NKF.nkf('-S -e', str) などとします。optは、必ず '-'
 デコード処理がデフォルトでオンになっています。この動作を無効にしたけ
 れば opt に '-m0' を含めてください。
 
-#@until 1.9.0
+#@until 1.9.1
 --- guess(str) -> Integer
 #@else
 --- guess(str) -> Encoding
 #@end
 
-文字列 str の漢字コードを判別して返します。
+文字列 str の漢字コードを推測して返します。
 
 返される値は、NKF モジュールのモジュール定数です。
-#@until 1.9.0
+#@until 1.9.1
 ruby 1.8.2 より前は現在の NKF.guess1 と同じものです。
 ruby 1.8.2 以降では NKF.guess2 と同じものです。
 #@end
 
+返される値(すなわち、推測可能なエンコーディング)は以下のいずれかです。
+  * NKF::JIS
+  * NKF::EUC
+  * NKF::SJIS
+  * NKF::UNKNOWN
+#@since 1.8.2
+  * NKF::UTF8
+  * NKF::UTF16
+#@since 1.9.1
+  * Encoding::EUCJP_MS
+  * Encoding::CP51932
+  * Encoding::WINDOWS_31J
+#@end
+#@end
+
 @param str 推測対象の文字列です。
 
-#@until 1.9.0
+#@until 1.9.1
 #@since 1.8.2
 --- guess1(str) -> Integer
 
@@ -285,14 +300,14 @@ nkf2の漢字コード自動判定ルーチンを利用したものです。
 
 == Constants
 
-#@until 1.9.0
+#@until 1.9.1
 --- JIS -> Integer
 #@else
 --- JIS -> Encoding
 #@end
 JIS コードを表します。
 
-#@until 1.9.0
+#@until 1.9.1
 --- EUC -> Integer
 #@else
 --- EUC -> Encoding
@@ -300,7 +315,7 @@ JIS コードを表します。
 
 EUC コードを表します。
 
-#@until 1.9.0
+#@until 1.9.1
 --- SJIS -> Integer
 #@else
 --- SJIS -> Encoding
@@ -308,7 +323,7 @@ EUC コードを表します。
 
 SJIS コードを表します。
 
-#@until 1.9.0
+#@until 1.9.1
 --- BINARY -> Integer
 #@else
 --- BINARY -> Encoding
@@ -316,7 +331,7 @@ SJIS コードを表します。
 
 バイナリ列を表します。
 
-#@until 1.9.0
+#@until 1.9.1
 --- UNKNOWN -> Integer
 #@else
 --- UNKNOWN -> nil
@@ -325,7 +340,7 @@ SJIS コードを表します。
 コード判定に失敗したことを表します。
 
 #@since 1.8.2
-#@until 1.9.0
+#@until 1.9.1
 --- NOCONV -> Integer
 #@else
 --- NOCONV -> nil
@@ -337,7 +352,7 @@ NKFモジュール自体からは利用しません。
 #@end
 
 #@since 1.8.2
-#@until 1.9.0
+#@until 1.9.1
 --- AUTO -> Integer
 #@else
 --- AUTO -> nil
@@ -349,7 +364,7 @@ NKFモジュール自体からは利用しません。
 #@end
 
 #@since 1.8.2
-#@until 1.9.0
+#@until 1.9.1
 --- ASCII -> Integer
 #@else
 --- ASCII -> Encoding
@@ -359,7 +374,7 @@ ASCII コードを表します。
 #@end
 
 #@since 1.8.2
-#@until 1.9.0
+#@until 1.9.1
 --- UTF8 -> Integer
 #@else
 --- UTF8 -> Encoding
@@ -369,14 +384,25 @@ UTF-8 コードを表します。
 #@end
 
 #@since 1.8.2
-#@until 1.9.0
+#@until 1.9.1
 --- UTF16 -> Integer
 #@else
 --- UTF16 -> Encoding
 #@end
 
-UTF-16 コードを表します。
+UTF-16 (BigEndian) コードを表します。
 #@end
+
+#@since 1.8.2
+#@until 1.9.1
+--- UTF32 -> Integer
+#@else
+--- UTF32 -> Encoding
+#@end
+
+UTF-32 (BigEndian) コードを表します。
+#@end
+
 
 #@since 1.8.2
 --- VERSION -> String
@@ -389,7 +415,7 @@ nkf 自体のバージョンを表す文字列です。
 --- NKF_RELEASE_DATE -> String
 nkf のリリース日を表す文字列です。
 
-#@if (version <= "1.8.4")
+#@until 1.8.5
 --- REVISION -> String
 この定数は使うべきではありません。
 
