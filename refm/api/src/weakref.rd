@@ -2,12 +2,14 @@ weak reference を実現します。
 
 = class WeakRef < Delegator
 
+weak reference を実現するクラスです。
+
 [[c:WeakRef]] オブジェクトは与えられたオブジェクトをポイントしますが、
 ポイント先のオブジェクトは GC される可能性があります。
 アクセスしようとしたときにオブジェクトが GC されていれば
-WeakRef::RefError が発生します。
+[[c:WeakRef::RefError]] が発生します。
 
-see also: [[lib:delegate]]
+[[lib:delegate]] も参照してください。
 
 === サンプルコード
 
@@ -20,25 +22,46 @@ see also: [[lib:delegate]]
 
 == Class Methods
 
---- new(obj)
-#@todo
+--- new(orig) -> WeakRef
 
-obj への weak reference を生成します。
+与えられたオブジェクトを使って自身を初期化します。
+
+@param orig 任意のオブジェクトを指定します。
 
 == Instance Methods
 
---- weakref_alive?
-#@todo
+--- weakref_alive? -> bool
 
-参照先のオブジェクトがまだ生きていれば true を返します。
-GCされていれば false を返します。
+参照先のオブジェクトがまだ生きていれば真を返します。
+GC されていれば偽を返します。
 
---- __getobj__
-#@todo
-Return the object this WeakRef references. Raises WeakRef::RefError if the object has been
-garbage collected. The object returned is the object to which method calls are 
-delegated (see [[c:Delegator]]).
+--- __getobj__ -> object
 
+自身の参照先のオブジェクトを返します。
+
+@raise WeakRef::RefError GC 済みのオブジェクトを参照した場合に発生します。
+
+@see [[lib:delegate]]
+
+#@since 1.8.6
+--- __setobj__(obj)
+
+与えられたオブジェクトを自身の参照先としてセットします。
+
+@param obj 任意のオブジェクトを指定します。
+#@end
+
+#@until 1.8.1
+== Constants
+--- ID_MAP -> Hash
+
+オブジェクトをキー、参照の配列を値としたハッシュです。
+
+--- ID_REV_MAP -> Hash
+
+参照をキー、オブジェクトを値としたハッシュです。
+
+#@end
 = class WeakRef::RefError < StandardError
 
 GC されたオブジェクトを参照しようとしたときに発生する例外です。
