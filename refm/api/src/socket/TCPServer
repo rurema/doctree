@@ -56,8 +56,8 @@ Thread を使えばもっと短くなります。
 
 == Class Methods
 
---- new([host, ]service) -> TCPServer
---- open([host, ]service) -> TCPServer
+--- new(host=nil, service) -> TCPServer
+--- open(host=nil, service) -> TCPServer
 
 新しいサーバー接続をオープンします。service は
 /etc/services (または NIS) に登録されているサービ

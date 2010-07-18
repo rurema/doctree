@@ -862,8 +862,8 @@ HTTP リクエストをサーバに送り、そのレスポンスを
 
 @see [[m:Net::HTTP#request]]
 
---- request(request [, data]) -> Net::HTTPResponse
---- request(request [, data]) {|response| .... } -> Net::HTTPResponse
+--- request(request, data = nil) -> Net::HTTPResponse
+--- request(request, data = nil) {|response| .... } -> Net::HTTPResponse
 
 [[c:Net::HTTPRequest]] オブジェクト request をサーバに送信します。
 

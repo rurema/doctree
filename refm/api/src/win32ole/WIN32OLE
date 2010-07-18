@@ -91,7 +91,7 @@ defined as CONSTANTS hash element.
    WIN32OLE.const_load('Microsoft Office 9.0 Object Library', MSO)
    puts MSO::MsoLineSingle # => 1
 
---- new(server, [host]) -> WIN32OLE object
+--- new(server, host=nil) -> WIN32OLE object
 #@todo
 
 Returns a new WIN32OLE object(OLE Automation object). The first
@@ -183,7 +183,7 @@ interface.
      cell.value = 10
    end
 
---- invoke(method, [arg1,...])  -> return value of method.
+--- invoke(method, *args)  -> return value of method.
 #@todo
 
 Runs OLE method. The first argument specifies the method name
@@ -194,7 +194,7 @@ method instead.
   excel = WIN32OLE.new('Excel.Application')
   excel.invoke('Quit')  # => same as excel.Quit
 
---- method_missing(id [,arg1, arg2, ...])
+--- method_missing(id, *args)
 #@todo
 
 Calls WIN32OLE#invoke method.

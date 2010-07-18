@@ -218,8 +218,8 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.delete("Ａ")  # => "ＢＣＤＥＦ"
   p hoge.delete("e")   # => "hoghog"
     
---- squeeze([str]) -> String
---- squeeze!([str]) -> String|nil
+--- squeeze(str = nil) -> String
+--- squeeze!(str = nil) -> String|nil
 
 [[m:String#squeeze]] の日本語対応版です。
 指定した文字を1文字にまとめます。

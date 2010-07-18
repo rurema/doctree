@@ -45,7 +45,7 @@ Stevens ¤Î¡ÖUNIX ¥Í¥Ã¥È¥ï¡¼¥¯¥×¥í¥°¥é¥ß¥ó¥°Âè2ÈÇ Vol.1¡×4.2Àá¤Ë½Ò¤Ù¤é¤ì¤Æ¤¤¤ë¤è¤
 #@# ¥Õ¥¡¥¤¥ë¥Ç¥£¥¹¥¯¥ê¥×¥¿ fd ¤ËÂÐ¤¹¤ë¿·¤·¤¤¥½¥±¥Ã¥È¤òÀ¸À®¤·¤Þ¤¹¡£
 #@# #@end
 
---- getaddrinfo(nodename, servname[, family[, socktype[, protocol[, flags]]]]) -> Array
+--- getaddrinfo(nodename, servname, family=nil, socktype=nil, protocol=nil, flags=nil) -> Array
 #@todo
 
 [[RFC:2553]]¤ÇÄêµÁ¤µ¤ì¤¿

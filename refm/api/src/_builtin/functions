@@ -1737,7 +1737,8 @@ at_exitがメソッドである点を除けば、END ブロックによる終了
   
   puts "end on #{try(400)}" #=> end on ???
 
---- sleep([sec]) -> Integer
+--- sleep -> Integer
+--- sleep(sec) -> Integer
 
 sec 秒だけプログラムの実行を停止します。
 

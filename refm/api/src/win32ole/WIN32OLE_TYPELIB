@@ -3,7 +3,7 @@ WIN32OLE_TYPELIB objects represent OLE tyblib information.
 
 == Class Methods
 
---- new(typelib [, version1, version2]) -> WIN32OLE_TYPELIB object
+--- new(typelib, version1=nil, version2=nil) -> WIN32OLE_TYPELIB object
 #@todo
 
 Returns a new WIN32OLE_TYPELIB object.

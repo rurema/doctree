@@ -23,8 +23,8 @@
 
 == Class Methods
 
---- open(host, service [, local_host, local_service]) -> TCPSocket
---- new(host, service [, local_host, local_service]) -> TCPSocket
+--- open(host, service, local_host=nil, local_service=nil) -> TCPSocket
+--- new(host, service, local_host=nil, local_service=nil) -> TCPSocket
 #@todo
 
 host で指定したホストの service で指定したポートと接続したソケッ
