@@ -100,12 +100,27 @@ returns the absolute pathname of the ruby command.
 : oldincludedir
 : infodir
 : mandir
+#@since 1.9.1
 : MAJOR
-      Ruby の major バージョン番号(1.6.5の1)
+      Ruby のライブラリ向けインタフェースのバージョン(キー ruby_version)の major (1.9.2 の 1)
+
+      処理系自体のバージョンは RUBY_VERSION を参照すること
 : MINOR
-      Ruby の minor バージョン番号(1.6.5の6)
+      Ruby のライブラリ向けインタフェースのバージョンの minor (1.9.2 の 9)
 : TEENY
-      Ruby の teeny バージョン番号(1.6.5の5)
+      Ruby のライブラリ向けインタフェースのバージョンの teeny (1.9.2 の 2)
+#@else
+: MAJOR
+      Rubyのバージョン の major (1.8.7 の 1)
+
+      Ruby 1.9 以降で処理系自体のバージョンではなくライブラリ向け
+      インタフェースのバージョンを示すことになったので、
+      処理系自体のバージョンは RUBY_VERSION を参照すること
+: MINOR
+      Ruby のバージョン の minor (1.8.7 の 8)
+: TEENY
+      Ruby のバージョン の teeny (1.8.7 の 7)
+#@end
 : host
 : host_alias
 : host_cpu
@@ -213,7 +228,13 @@ returns the absolute pathname of the ruby command.
 : configure_args
       ビルド時のconfigureの引数。
 : ruby_version
-      rubyのバージョン(例:"1.6")
+#@until 1.9.1
+      rubyのライブラリ向けインタフェースのバージョン(例:"1.6")
+#@end
+#@since 1.9.1
+      rubyのライブラリ向けインタフェースのバージョン(例:"1.9.1")
+#@end
+      処理系自体のバージョンはこちらでなく RUBY_VERSION を参照すること
 : rubylibdir
 : archdir
 : sitelibdir
