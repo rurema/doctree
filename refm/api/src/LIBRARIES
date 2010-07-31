@@ -28,6 +28,12 @@ cgi
 cgi/session
 cgi/session/pstore
 #@since 1.9.1
+cgi/core
+cgi/cookie
+cgi/html
+cgi/util
+#@end
+#@since 1.9.1
 cmath
 #@end
 #@until 1.9.1
