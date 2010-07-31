@@ -131,8 +131,8 @@ CGI クラスのメソッドで得ることもできます。
   * SERVER_SOFTWARE
 
 #content_length と #server_port
-#@if (version == "1.8.0")
-((- 1.8.1に添付のcgiには「CGI#server_portが常に0を返す」というバグがあります。 -))
+#@if (version == "1.8.1")
+(1.8.1に添付のcgiには「CGI#server_portが常に0を返す」というバグがあります)
 #@end
 は整数を、その他のメソッドは文字列を返します。
 
@@ -201,13 +201,9 @@ CGI に関連する環境変数に関しては
 
 ==== ファイルのアップロード
 
-[[unknown:執筆者募集]]
-
 [[ruby-list:25399]] を参照してください。
 
 === オフラインモード
-
-[[unknown:執筆者募集]]
 
 cgi には、コマンドラインから CGI スクリプトを動かすための仕組み（オフラインモード）があります。
 コマンドラインから以下のように実行すると、
@@ -252,10 +248,11 @@ include CGI::QueryExtension
 
 == Class Methods
 
---- escape(string) -> string
-#@todo
+--- escape(string) -> String
 
-string を URL エンコードした文字列を新しく作成し返します。
+与えられた文字列を URL エンコードした文字列を新しく作成し返します。
+
+@param string URL エンコードしたい文字列を指定します。
 
 例:
         require "cgi"
@@ -267,10 +264,11 @@ string を URL エンコードした文字列を新しく作成し返します。
         p url
         #=> "http://www.example.com/register?url=http%3A%2F%2Fwww.example.com%2Findex.rss"
 
---- unescape(string) -> string
-#@todo
+--- unescape(string) -> String
 
-string を URL デコードした文字列を新しく作成し返します。
+与えられた文字列を URL デコードした文字列を新しく作成し返します。
+
+@param string URL エンコードされている文字列を指定します。
 
         require "cgi"
 
@@ -279,10 +277,11 @@ string を URL デコードした文字列を新しく作成し返します。
         p CGI.unescape("http%3A%2F%2Fwww.example.com%2Findex.rss")
         #=> "http://www.example.com/index.rss"
 
---- escapeHTML(string) -> string
-#@todo
+--- escapeHTML(string) -> String
 
-string 中の &"<> を実体参照にエンコードした文字列を新しく作成し返します。
+与えられた文字列中の &"<> を実体参照に置換した文字列を新しく作成し返します。
+
+@param string 文字列を指定します。
 
         require "cgi"
 
@@ -293,20 +292,24 @@ string 中の &"<> を実体参照にエンコードした文字列を新しく作成し返します。
         p CGI.escapeHTML('<script type="text/javascript">alert("警告")</script>')
         #=> "&lt;script type=&quot;text/javascript&quot;&gt;alert(&quot;警告&quot;)&lt;/script&gt;"
 
---- unescapeHTML(string) -> string
-#@todo
+--- unescapeHTML(string) -> String
 
-string 中の実体参照のうち、&amp; &gt; &lt; &quot;
-と数値指定がされているもの (&#0ffff など) だけを外します。
+与えられた文字列中の実体参照のうち、&amp; &gt; &lt; &quot;
+と数値指定がされているもの (&#0ffff など) を元の文字列に置換します。
+
+@param string 文字列を指定します。
 
         require "cgi"
 
         p CGI.unescapeHTML("3 &gt; 1")   #=> "3 > 1"
 
---- escapeElement(string, *elements) -> string
-#@todo
+--- escapeElement(string, *elements) -> String
 
-elements に指定したエレメントのタグだけを実体参照に置換します。
+第二引数以降に指定したエレメントのタグだけを実体参照に置換します。
+
+@param string 文字列を指定します。
+
+@param elements HTML タグの名前を一つ以上指定します。文字列の配列で指定することも出来ます。
 
 例：
         require "cgi"
@@ -317,9 +320,13 @@ elements に指定したエレメントのタグだけを実体参照に置換します。
         p CGI.escapeElement('<BR><A HREF="url"></A>', ["A", "IMG"])
              # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 
---- unescapeElement(string, *element) -> string
-#@todo
+--- unescapeElement(string, *element) -> String
+
 特定の要素だけをHTMLエスケープから戻す。
+
+@param string 文字列を指定します。
+
+@param elements HTML タグの名前を一つ以上指定します。文字列の配列で指定することも出来ます。
 
 例：
         require "cgi"
@@ -330,10 +337,11 @@ elements に指定したエレメントのタグだけを実体参照に置換します。
         print CGI.unescapeElement('&lt;BR&gt;&lt;A HREF="url"&gt;&lt;/A&gt;', %w(A IMG))
           # => "&lt;BR&gt;<A HREF="url"></A>"
 
---- rfc1123_date(time) -> string
-#@todo
+--- rfc1123_date(time) -> String
 
-時刻 time を [[RFC:1123]] フォーマットに準拠した文字列に変換します。
+与えられた時刻を [[RFC:1123]] フォーマットに準拠した文字列に変換します。
+
+@param time [[c:Time]] のインスタンスを指定します。
 
 例：
         require "cgi"
@@ -341,10 +349,11 @@ elements に指定したエレメントのタグだけを実体参照に置換します。
         CGI.rfc1123_date(Time.now)
           # => Sat, 1 Jan 2000 00:00:00 GMT
 
---- parse(query) -> object
-#@todo
+--- parse(query) -> Hash
 
-QUERY_STRING をパースします。
+与えられたクエリ文字列をパースします。
+
+@param query クエリ文字列を指定します。
 
 例：
         require "cgi"
@@ -354,10 +363,13 @@ QUERY_STRING をパースします。
           #  "name2" => ["value1", "value2", ...], ... }
 #@# module QueryExtension どうしよ
 
---- pretty(string, shift = "  ") -> string
-#@todo
+--- pretty(string, shift = "  ") -> String
 
-HTML を人間に見やすく整形します。
+HTML を人間に見やすく整形しした文字列を返します。
+
+@param string HTML を指定します。
+
+@param shift インデントに使用する文字列を指定します。デフォルトは半角空白二つです。
 
 例：
         require "cgi"
@@ -376,34 +388,39 @@ HTML を人間に見やすく整形します。
 
 == Instance Methods
 
---- header(options = "text/html") -> string
-#@todo
+--- header(options = "text/html") -> String
 
-HTTP ヘッダを options に従って生成します。（ [[m:CGI#out]] と違い、標準出力には出力しません）
+HTTP ヘッダを options に従って生成します。 [[m:CGI#out]] と違い、標準出力には出力しません。
 [[m:CGI#out]] を使わずに自力で HTML を出力したい場合などに使います。
 このメソッドは文字列エンコーディングを変換しません。
-[[ruby-list:35911]]
 
-例：
-        header
-          # Content-Type: text/html
+ヘッダのキーとしては以下が利用可能です。
 
-        header("text/plain")
-          # Content-Type: text/plain
-
-        header({"nph"        => true,
-                "status"     => "OK",  # == "200 OK"
-                  # "status"     => "200 GOOD",
-                "server"     => ENV['SERVER_SOFTWARE'],
-                "connection" => "close",
-                "type"       => "text/html",
-                "charset"    => "iso-2022-jp",
-                  # Content-Type: text/html; charset=iso-2022-jp
-                "language"   => "ja",
-                "expires"    => Time.now + 30,
-                "cookie"     => [cookie1, cookie2],
-                "my_header1" => "my_value"
-                "my_header2" => "my_value"})
+: type
+  Content-Type ヘッダです。デフォルトは "text/html" です。
+: charset
+  ボディのキャラクタセットを Content-Type ヘッダに追加します。
+: nph
+  真偽値を指定します。真ならば、HTTP のバージョン、ステータスコード、
+  Date ヘッダをセットします。また Server と Connection の各ヘッダにもデフォルト値をセットします。
+  偽を指定する場合は、これらの値を明示的にセットしてください。
+: status
+  HTTP のステータスコードを指定します。
+  このリストの下に利用可能なステータスコードのリストがあります。
+: server
+  サーバソフトウェアの名称指定します。Server ヘッダに対応します。
+: connection
+  接続の種類を指定します。Connection ヘッダに対応します。
+: length
+  送信するコンテンツの長さを指定します。Content-Length ヘッダに対応します。
+: language
+  送信するコンテンツの言語を指定します。Content-Language ヘッダに対応します。
+: expires
+  送信するコンテンツの有効期限を [[c:Time]] のインスタンスで指定します。
+  Expires ヘッダに対応します。
+: cookie
+  クッキーとして文字列か [[c:CGI::Cookie]] のインスタンス、またはそれらの配列かハッシュを指定します。
+  一つ以上の Set-Cookie ヘッダに対応します。
 
 status パラメータには以下の文字列が使えます。
 
@@ -426,16 +443,47 @@ status パラメータには以下の文字列が使えます。
         "BAD_GATEWAY"         --> "502 Bad Gateway"
         "VARIANT_ALSO_VARIES" --> "506 Variant Also Negotiates"
 
+@param options [[c:Hash]] か文字列で HTTP ヘッダを生成するための情報を指定します。
+
+例：
+        header
+          # Content-Type: text/html
+
+        header("text/plain")
+          # Content-Type: text/plain
+
+        header({"nph"        => true,
+                "status"     => "OK",  # == "200 OK"
+                  # "status"     => "200 GOOD",
+                "server"     => ENV['SERVER_SOFTWARE'],
+                "connection" => "close",
+                "type"       => "text/html",
+                "charset"    => "iso-2022-jp",
+                  # Content-Type: text/html; charset=iso-2022-jp
+                "language"   => "ja",
+                "expires"    => Time.now + 30,
+                "cookie"     => [cookie1, cookie2],
+                "my_header1" => "my_value"
+                "my_header2" => "my_value"})
+
 例：
         cgi = CGI.new('html3')
         print cgi.header({"charset" => "shift_jis", "status" => "OK"})
         print "<html><head><title>TITLE</title></head>\r\n"
         print "<body>BODY</body></html>\r\n"
 
+@see [[ruby-list:35911]]
+
 --- out(options = "text/html") { .... }
-#@todo
 
 HTTP ヘッダと、ブロックで与えられた文字列を標準出力に出力します。
+
+HEADリクエスト (REQUEST_METHOD == "HEAD") の場合は HTTP ヘッダのみを出力します。
+
+charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
+ある場合は文字列エンコーディングを自動変換し、language を "ja"にします。
+
+@param options [[c:Hash]] か文字列で HTTP ヘッダを生成するための情報を指定します。
 
 例：
         cgi = CGI.new
@@ -464,11 +512,7 @@ HTTP ヘッダと、ブロックで与えられた文字列を標準出力に出力します。
                  "my_header1" => "my_value",
                  "my_header2" => "my_value"}){ "string" }
 
-HEADリクエスト (REQUEST_METHOD == "HEAD") の場合は HTTP ヘッダのみを出力します。
-
-charset が "iso-2022-jp"・"euc-jp"・"shift_jis" のいずれかで
-ある場合は文字列エンコーディングを自動変換し、language を "ja"にします。
-#@#[[ruby-list:35911]]
+@see [[m:CGI#header]]
 
 --- print(*strings)
 #@todo
@@ -482,138 +526,110 @@ cgi.print は $DEFAULT_OUTPUT.print と等価です。
 
 == Constants
 
---- CR
-#@todo
-
---- LF
-#@todo
-
---- EOL
-#@todo
-
---- REVISION
-#@todo
-
---- NEEDS_BINMODE
-#@todo
-
---- PATH_SEPARATOR
-#@todo
-
---- HTTP_STATUS
-#@todo
-
---- RFC822_DAYS
-#@todo
-
---- RFC822_MONTHS
-#@todo
+#@# nodoc
+#@# --- CR
+#@# 
+#@# --- LF
+#@# 
+#@# --- EOL
+#@# 
+#@# --- REVISION
+#@# 
+#@# --- NEEDS_BINMODE
+#@# 
+#@# --- PATH_SEPARATOR
+#@# 
+#@# --- HTTP_STATUS
+#@# 
+#@# --- RFC822_DAYS
+#@# 
+#@# --- RFC822_MONTHS
+#@#
 
 = module CGI::QueryExtension
 
 == Instance Methods
 
---- [](key)
-#@todo
+--- [](key) -> Array
 
 文字列 key に対応するパラメータを配列で返します。
 key に対応するパラメータが見つからなかった場合は、nil を返します。（[[m:CGI#params]]と等価です）
 
 フォームから入力された値や、URL に埋め込まれた QUERY_STRING のパース結果の取得などに使用します。
 
-#@if (version >= "1.8.0")
-((<ruby 1.8 feature>)): 挙動が 1.6 以前の cgi と大きく変化しています ((- この挙動は流動的で、1.8.0, 1.8.1, 1.8.2 の挙動はすべて異なります（1.9.0の挙動は1.8.2と同様です）。 -)) 。メソッドの返り値は配列でなく、文字列 ((- 1.8.1 までは、正確に言うと String ではありません。 -)) になり、それに伴って cgi[key][0] のような書き方は廃止されました。また key に対応するパラメータが存在しなかった場合、nil ではなく "" を返すようになっています。 ruby 1.6 と同じ挙動を望む場合は、[[m:CGI#params]]を利用してください。
+@param key キーを文字列で指定します。
 
-この結果、インターフェースがどう変わったのかについては、以下の例を参考にしてください。
+--- accept -> String
 
-      # with ruby 1.6 ---------------------------
-      cgi = CGI.new
-      cgi['developer']     # => ["Matz"] (Array)
-      cgi['developer'][0]  # => "Matz" (String)
-      cgi['']              # => nil
+ENV['HTTP_ACCEPT'] を返します。
 
-      # with ruby 1.8 ---------------------------
-      cgi = CGI.new
-      cgi['developer']     # => "Matz"
-      cgi['developer'][0]  # => obsolete（警告が出ます）
-      cgi['']              # => ""
+--- accept_charset -> String
 
-cgi['developer'].is_a?(String) # => 1.8.1まではfalse、1.8.2以降はtrue
-#@end
+ENV['HTTP_ACCEPT_CHARSET'] を返します。
 
-    [[unknown:執筆者募集]]
+--- accept_encoding -> String
 
---- accept
-#@todo
+ENV['HTTP_ACCEPT_ENCODING'] を返します。
 
-ENV['HTTP_ACCEPT']
+--- accept_language -> String
 
---- accept_charset
-#@todo
+ENV['HTTP_ACCEPT_LANGUAGE'] を返します。
 
-ENV['HTTP_ACCEPT_CHARSET']
+--- auth_type -> String
 
---- accept_encoding
-#@todo
+ENV['AUTH_TYPE'] を返します。
 
-ENV['HTTP_ACCEPT_ENCODING']
+--- cache_control -> String
 
---- accept_language
-#@todo
+ENV['HTTP_CACHE_CONTROL'] を返します。
 
-ENV['HTTP_ACCEPT_LANGUAGE']
+--- content_length -> String
 
---- auth_type
-#@todo
+ENV['CONTENT_LENGTH'] を返します。
 
-ENV['AUTH_TYPE']
+--- content_type -> String
 
---- cache_control
-#@todo
+ENV['CONTENT_TYPE'] を返します。
 
-ENV['HTTP_CACHE_CONTROL']
+--- cookies -> Hash
 
---- content_length
-#@todo
+クッキーの名前と値をペアにした要素を持つハッシュを返します。
 
-ENV['CONTENT_LENGTH']
-
---- content_type
-#@todo
-
-ENV['CONTENT_TYPE']
-
---- cookies
 --- cookies=(value)
-#@todo
 
---- from
-#@todo
+クッキーをセットします。
 
-ENV['HTTP_FROM']
+@param value クッキーの名前と値をペアにした要素を持つハッシュを指定します。
 
---- gateway_interface
-#@todo
+--- from -> String
 
-ENV['GATEWAY_INTERFACE']
+ENV['HTTP_FROM'] を返します。
 
---- has_key?(*args)
---- key?(*args)
---- include?(*args)
-#@todo
+--- gateway_interface -> String
 
---- host
-#@todo
+ENV['GATEWAY_INTERFACE'] を返します。
 
-ENV['HTTP_HOST']
+--- has_key?(*args) -> bool
+--- key?(*args) -> bool
+--- include?(*args) -> bool
 
---- keys(*args)
-#@todo
+与えられたキーがクエリに含まれている場合は、真を返します。
+そうでない場合は、偽を返します。
 
---- multipart?
-#@todo
+@param args キーを一つ以上指定します。
 
-マルチパートフォームの場合にtrueが返ります。
+--- host -> String
+
+ENV['HTTP_HOST'] を返します。
+
+--- keys(*args) -> [String]
+
+すべてのパラメータのキーを配列として返します。
+
+--- multipart? -> bool
+
+マルチパートフォームの場合は、真を返します。
+そうでない場合は、偽を返します。
 
        例：
        cgi = CGI.new
@@ -623,13 +639,11 @@ ENV['HTTP_HOST']
          field1=cgi['field1']
        end
 
---- negotiate
-#@todo
+--- negotiate -> String
 
-ENV['HTTP_NEGOTIATE']
+ENV['HTTP_NEGOTIATE'] を返します。
 
---- params
-#@todo
+--- params -> Hash
 
 パラメータを格納したハッシュを返します。
 
@@ -641,125 +655,106 @@ ENV['HTTP_NEGOTIATE']
       cgi.params['']              # => nil
 
 --- params=(hash)
-#@todo
 
---- path_info
-#@todo
+与えられたハッシュをパラメータにセットします。
 
-ENV['PATH_INFO']
+@param hash ハッシュを指定します。
 
---- path_translated
-#@todo
+--- path_info -> String
 
-ENV['PATH_TRANSLATED']
+ENV['PATH_INFO'] を返します。
 
---- pragma
-#@todo
+--- path_translated -> String
 
-ENV['HTTP_PRAGMA']
+ENV['PATH_TRANSLATED'] を返します。
 
---- query_string
-#@todo
+--- pragma -> String
 
-ENV['QUERY_STRING']
+ENV['HTTP_PRAGMA'] を返します。
 
---- raw_cookie
-#@todo
+--- query_string -> String
 
-ENV["HTTP_COOKIE"]
+ENV['QUERY_STRING'] を返します。
 
---- raw_cookie2
-#@todo
+--- raw_cookie -> String
 
-ENV["HTTP_COOKIE2"]
+ENV["HTTP_COOKIE"] を返します。
 
---- referer
-#@todo
+--- raw_cookie2 -> String
 
-ENV['HTTP_REFERER']
+ENV["HTTP_COOKIE2"] を返します。
 
---- remote_addr
-#@todo
+--- referer -> String
 
-ENV['REMOTE_ADDR']
+ENV['HTTP_REFERER'] を返します。
 
---- remote_host
-#@todo
+--- remote_addr -> String
 
-ENV['REMOTE_HOST']
+ENV['REMOTE_ADDR'] を返します。
 
---- remote_ident
-#@todo
+--- remote_host -> String
 
-ENV['REMOTE_IDENT']
+ENV['REMOTE_HOST'] を返します。
 
---- remote_user
-#@todo
+--- remote_ident -> String
 
-ENV['REMOTE_USER']
+ENV['REMOTE_IDENT'] を返します。
 
---- request_method
-#@todo
+--- remote_user -> String
 
-ENV['REQUEST_METHOD']
+ENV['REMOTE_USER'] を返します。
 
---- script_name
-#@todo
+--- request_method -> String
 
-ENV['SCRIPT_NAME']
+ENV['REQUEST_METHOD'] を返します。
 
---- server_name
-#@todo
+--- script_name -> String
 
-ENV['SERVER_NAME']
+ENV['SCRIPT_NAME'] を返します。
 
---- server_port
-#@todo
+--- server_name -> String
 
-ENV['SERVER_PORT']
+ENV['SERVER_NAME'] を返します。
 
---- server_protocol
-#@todo
+--- server_port -> String
 
-ENV['SERVER_PROTOCOL']
+ENV['SERVER_PORT'] を返します。
 
---- server_software
-#@todo
+--- server_protocol -> String
 
-ENV['SERVER_SOFTWARE']
+ENV['SERVER_PROTOCOL'] を返します。
 
---- user_agent
-#@todo
+--- server_software -> String
 
-ENV['HTTP_USER_AGENT']
+ENV['SERVER_SOFTWARE'] を返します。
+
+--- user_agent -> String
+
+ENV['HTTP_USER_AGENT'] を返します。
 
 = module CGI::QueryExtension::Value
+#@# nodoc
 
 == Instance Methods
 
 --- [](idx, *args)
 #@todo
 
---- first
---- last
+--- first -> self
+--- last  -> self
 #@todo
 
 --- set_params(params)
 #@todo
 
---- to_a
---- to_ary
+--- to_a -> Array
+--- to_ary -> Array
 #@todo
 
 #@# = class CGI::Cookie < DelegateClass(Array)
 = class CGI::Cookie < Array
 
-== Class Methods
-
---- new(name = "", *value)
-#@todo
-
-クッキーオブジェクトを作成します。
+クッキーを表すクラスです。
 
         例：
         cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
@@ -788,10 +783,65 @@ ENV['HTTP_USER_AGENT']
         cookie1.expires = Time.now + 30
         cookie1.secure  = true
 
---- parse(raw_cookie)
-#@todo
+== Class Methods
+
+--- new(name = "", *value) -> CGI::Cookie
+
+クッキーオブジェクトを作成します。
+
+第一引数にハッシュを指定する場合は、以下のキーが使用可能です。
+
+: name
+  クッキーの名前を指定します。必須。
+: value
+  クッキーの値、または値のリストを指定します。
+: path
+  このクッキーを適用するパスを指定します。デフォルトはこの CGI スクリプトのベースディレクトリです。
+: domain
+  このクッキーを適用するドメインを指定します。
+: expires
+  このクッキーの有効期限を [[c:Time]] のインスタンスで指定します。
+: secure
+  真を指定すると、このクッキーはセキュアクッキーになります。
+  デフォルトは偽です。セキュアクッキーは HTTPS の時のみ送信されます。
+
+@param name クッキーの名前を文字列で指定します。
+            クッキーの名前と値を要素とするハッシュを指定します。
+
+@param value name が文字列である場合、値のリストを一つ以上指定します。
+
+        例：
+        cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
+        cookie1 = CGI::Cookie.new({"name" => "name", "value" => "value"})
+        cookie1 = CGI::Cookie.new({'name'    => 'name',
+                                   'value'   => ['value1', 'value2', ...],
+                                   'path'    => 'path',   # optional
+                                   'domain'  => 'domain', # optional
+                                   'expires' => Time.now, # optional
+                                   'secure'  => true      # optional
+                                  })
+
+        cgi.out({"cookie" => [cookie1, cookie2]}){ "string" }
+
+        name    = cookie1.name
+        values  = cookie1.value
+        path    = cookie1.path
+        domain  = cookie1.domain
+        expires = cookie1.expires
+        secure  = cookie1.secure
+
+        cookie1.name    = 'name'
+        cookie1.value   = ['value1', 'value2', ...]
+        cookie1.path    = 'path'
+        cookie1.domain  = 'domain'
+        cookie1.expires = Time.now + 30
+        cookie1.secure  = true
+
+--- parse(raw_cookie) -> Hash
 
 クッキー文字列をパースします。
+
+@param raw_cookie 生のクッキーを表す文字列を指定します。
 
         例：
         cookies = CGI::Cookie.parse("raw_cookie_string")
@@ -799,53 +849,73 @@ ENV['HTTP_USER_AGENT']
 
 == Instance Methods
 
---- name
+--- name -> String
+
+クッキーの名前を返します。
+
 --- name=(value)
---- value
+
+クッキーの名前をセットします。
+
+@param value 名前を指定します。 
+
+--- value -> Array
+
+クッキーの値を返します。
+
 --- value=(value)
---- path
+
+クッキーの値をセットします。
+
+@param value 変更後の値を指定します。
+
+--- path -> String
+
+クッキーを適用するパスを返します。
+
 --- path=(value)
---- domain
+
+クッキーを適用するパスをセットします。
+
+@param value パスを指定します。
+
+--- domain -> String
+
+クッキーを適用するドメインを返します。
+
 --- domain=(value)
---- expires
+
+クッキーを適用するドメインをセットします。
+
+@param value ドメインを指定します。
+
+--- expires -> Time
+
+クッキーの有効期限を返します。
+
 --- expires=(value)
---- secure
+
+クッキーの有効期限をセットします。
+
+@param value 有効期限を [[c:Time]] のインスタンスで指定します。
+
+--- secure -> bool
+
+自身がセキュアクッキーである場合は、真を返します。
+そうでない場合は、偽を返します。
+
 --- secure=(val)
-#@todo
 
-Cookie オブジェクトのアトリビュートです。
+セキュアクッキーであるかどうかを変更します。
 
-        例：
-        cookie1 = CGI::Cookie.new("name", "value1", "value2", ...)
-        cookie1 = CGI::Cookie.new({"name" => "name", "value" => "value"})
-        cookie1 = CGI::Cookie.new({'name'    => 'name',
-                                   'value'   => ['value1', 'value2', ...],
-                                   'path'    => 'path',   # optional
-                                   'domain'  => 'domain', # optional
-                                   'expires' => Time.now, # optional
-                                   'secure'  => true      # optional
-                                  })
+@param val 真を指定すると自身はセキュアクッキーになります。
 
-        cgi.out({"cookie" => [cookie1, cookie2]}){ "string" }
+--- to_s -> String
 
-        name    = cookie1.name
-        values  = cookie1.value
-        path    = cookie1.path
-        domain  = cookie1.domain
-        expires = cookie1.expires
-        secure  = cookie1.secure
-
-        cookie1.name    = 'name'
-        cookie1.value   = ['value1', 'value2', ...]
-        cookie1.path    = 'path'
-        cookie1.domain  = 'domain'
-        cookie1.expires = Time.now + 30
-        cookie1.secure  = true
-
---- to_s
-#@todo
+クッキーの文字列表現を返します。
 
 = module CGI::TagMaker
+#@#nodoc
 
 == Instance Methods
 
@@ -860,209 +930,390 @@ Cookie オブジェクトのアトリビュートです。
 
 = module CGI::HtmlExtension
 
+HTML を生成するためのメソッドを提供するモジュールです。
+
+例:
+   cgi.a("http://www.example.com") { "Example" }
+     # => "<A HREF=\"http://www.example.com\">Example</A>"
+
 == Instance Methods
 
---- a(href = "")
-#@todo
+--- a(href = "") -> String
+--- a(href = ""){ ... } -> String
+
+a 要素を生成します。
+
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param href 文字列を指定します。属性をハッシュで指定することもできます。
        
-        例：
-        a("url")
-          # = a({ "HREF" => "url" })
+例:
+  a("http://www.example.com") { "Example" }
+    # => "<A HREF=\"http://www.example.com\">Example</A>"
 
---- base(href = "")
-#@todo
+  a("HREF" => "http://www.example.com", "TARGET" => "_top") { "Example" }
+    # => "<A HREF=\"http://www.example.com\" TARGET=\"_top\">Example</A>"
+
+--- base(href = "") -> String
+
+base 要素を生成します。
+
+@param href 文字列を指定します。属性をハッシュで指定することもできます。
+
+例:
+  base("http://www.example.com/cgi")
+    # => "<BASE HREF=\"http://www.example.com/cgi\">"
+
+--- blockquote(cite = nil) -> String
+--- blockquote(cite = nil){ ... } -> String
+
+blockquote 要素を生成します。
+
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param cite 引用元を指定します。属性をハッシュで指定することもできます。
        
-        例：
-        base("url")
-          # = base({ "HREF" => "url" })
+例:
+  blockquote("http://www.example.com/quotes/foo.html") { "Foo!" }
+    #=> "<BLOCKQUOTE CITE=\"http://www.example.com/quotes/foo.html\">Foo!</BLOCKQUOTE>
 
---- blockquote(cite = nil)
-#@todo
+--- caption(align = nil) -> String
+--- caption(align = nil){ ... } -> String
+
+caption 要素を生成します。
+
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param align 配置を文字列で指定します。(top, bottom, left right が指定可能です)
+             属性をハッシュで指定することもできます。
        
-        例：
-        blockquote("url"){ "string" }
-          # = blockquote({ "CITE" => "url" }){ "string" }
+例:
+  caption("left") { "Capital Cities" }
+    # => <CAPTION ALIGN=\"left\">Capital Cities</CAPTION>
 
---- caption(align = nil)
-#@todo
-       
-        例：
-        caption("align"){ "string" }
-          # = caption({ "ALIGN" => "align" }){ "string" }
+--- checkbox(name = "", value = nil, checked = nil) -> String
 
---- checkbox(name = "", value = nil, checked = nil)
-#@todo
-       
-        例：
-        checkbox("name")
-          # = checkbox({ "NAME" => "name" })
+タイプが checkbox である input 要素を生成します。
 
-        checkbox("name", "value")
-          # = checkbox({ "NAME" => "name", "VALUE" => "value" })
+@param name name 属性の値を指定します。
 
-        checkbox("name", "value", true)
-          # = checkbox({ "NAME" => "name", "VALUE" => "value", "CHECKED" => true })
+@param value value 属性の値を指定します。
 
---- checkbox_group(name = "", *values)
-#@todo
-       
-        例：
-        checkbox_group("name", "foo", "bar", "baz")
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="foo">foo
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="bar">bar
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="baz">baz
+@param checked checked 属性の値を指定します。
 
-        checkbox_group("name", ["foo"], ["bar", true], "baz")
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="foo">foo
-          # <INPUT TYPE="checkbox" SELECTED NAME="name" VALUE="bar">bar
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="baz">baz
+例:
+  checkbox("name", "value", true)
+  # => "<INPUT CHECKED NAME=\"name\" TYPE=\"checkbox\" VALUE=\"value\">"
 
-        checkbox_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="1">Foo
-          # <INPUT TYPE="checkbox" SELECTED NAME="name" VALUE="2">Bar
-          # <INPUT TYPE="checkbox" NAME="name" VALUE="Baz">Baz
+--- checkbox(attributes) -> String
 
-        checkbox_group({ "NAME" => "name",
-                         "VALUES" => ["foo", "bar", "baz"] })
+タイプが checkbox である input 要素を生成します。
 
-        checkbox_group({ "NAME" => "name",
-                         "VALUES" => [["foo"], ["bar", true], "baz"] })
+@param attributes 属性をハッシュで指定します。
 
-        checkbox_group({ "NAME" => "name",
-                         "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
+例:
+  checkbox("name" => "name", "value" => "value", "checked" => true)
+  # => "<INPUT checked name=\"name\" TYPE=\"checkbox\" value=\"value\">"
 
---- file_field(name = "", size = 20, maxlength = nil)
-#@todo
-       
-        例：
-        file_field("name")
-          # <INPUT TYPE="file" NAME="name" SIZE="20">
+--- checkbox_group(name = "", *values) -> String
 
-        file_field("name", 40)
-          # <INPUT TYPE="file" NAME="name" SIZE="40">
+タイプが checkbox である input 要素のグループを生成します。
 
-        file_field("name", 40, 100)
-          # <INPUT TYPE="file" NAME="name" SIZE="40" MAXLENGTH="100">
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
-        file_field({ "NAME" => "name", "SIZE" => 40 })
-          # <INPUT TYPE="file" NAME="name" SIZE="40">
+@param name name 属性の値を指定します。
 
---- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded")
-#@todo
-       
-        例：
-        form{ "string" }
-          # <FORM METHOD="post" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
+@param values value 属性のリストを指定します。
+              それぞれの引数が、単純な文字列の場合、value 属性の値とラベルに同じものが使用されます。
+              それぞれの引数が、二要素または三要素の配列の場合、最終要素が true であれば、
+              checked 属性をセットします。先頭の要素は value 属性の値になります。
 
-        form("get"){ "string" }
-          # <FORM METHOD="get" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
+例:
+  checkbox_group("name", "foo", "bar", "baz")
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="foo">foo
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="bar">bar
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="baz">baz
 
-        form("get", "url"){ "string" }
-          # <FORM METHOD="get" ACTION="url" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
+  checkbox_group("name", ["foo"], ["bar", true], "baz")
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="foo">foo
+    # <INPUT TYPE="checkbox" CHECKED NAME="name" VALUE="bar">bar
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="baz">baz
 
-        form({"METHOD" => "post", ENCTYPE => "enctype"}){ "string" }
-          # <FORM METHOD="post" ENCTYPE="enctype">string</FORM>
+  checkbox_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="1">Foo
+    # <INPUT TYPE="checkbox" SELECTED NAME="name" VALUE="2">Bar
+    # <INPUT TYPE="checkbox" NAME="name" VALUE="Baz">Baz
 
---- hidden(name = "", value = nil)
-#@todo
-       
-        例：
-        hidden("name")
-          # <INPUT TYPE="hidden" NAME="name">
+--- checkbox_group(attributes) -> String
 
-        hidden("name", "value")
-          # <INPUT TYPE="hidden" NAME="name" VALUE="value">
+タイプが checkbox である input 要素のグループを生成します。
 
-        hidden({ "NAME" => "name", "VALUE" => "reset", "ID" => "foo" })
-          # <INPUT TYPE="hidden" NAME="name" VALUE="value" ID="foo">
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
---- html(attributes = {})
-#@todo
-       
-        例：
+@param attributes 属性をハッシュで指定します。
 
-        html{ "string" }
-          # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML>string</HTML>
+例:
+  checkbox_group({ "NAME" => "name",
+                   "VALUES" => ["foo", "bar", "baz"] })
 
-        html({ "LANG" => "ja" }){ "string" }
-          # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML LANG="ja">string</HTML>
+  checkbox_group({ "NAME" => "name",
+                   "VALUES" => [["foo"], ["bar", true], "baz"] })
 
-        html({ "DOCTYPE" => false }){ "string" }
-          # <HTML>string</HTML>
+  checkbox_group({ "NAME" => "name",
+                   "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
-        html({ "DOCTYPE" => '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">' }){ "string" }
-          # <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"><HTML>string</HTML>
+--- file_field(name = "", size = 20, maxlength = nil) -> String
 
-        html({ "PRETTY" => "  " }){ "<BODY></BODY>" }
-          # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-          # <HTML>
-          #   <BODY>
-          #   </BODY>
-          # </HTML>
+タイプが file である input 要素を生成します。
 
-        html({ "PRETTY" => "\t" }){ "<BODY></BODY>" }
-          # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-          # <HTML>
-          #         <BODY>
-          #         </BODY>
-          # </HTML>
+@param name name 属性の値を指定します。
 
-        html("PRETTY"){ "<BODY></BODY>" }
-          # = html({ "PRETTY" => "  " }){ "<BODY></BODY>" }
+@param size size 属性の値を指定します。
 
-        html(if $VERBOSE then "PRETTY" end){ "HTML string" }
+@param maxlength maxlength 属性の値を指定します。
 
---- image_button(src = "", name = nil, alt = nil)
-#@todo
-       
-        例：
-        image_button("url")
-          # <INPUT TYPE="image" SRC="url">
+例:
+   file_field("name")
+     # <INPUT TYPE="file" NAME="name" SIZE="20">
 
-        image_button("url", "name", "string")
-          # <INPUT TYPE="image" SRC="url" NAME="name" ALT="string">
+   file_field("name", 40)
+     # <INPUT TYPE="file" NAME="name" SIZE="40">
 
-        image_button({ "SRC" => "url", "ALT" => "string" })
-          # <INPUT TYPE="image" SRC="url" ALT="string">
+   file_field("name", 40, 100)
+     # <INPUT TYPE="file" NAME="name" SIZE="40" MAXLENGTH="100">
 
---- img(src = "", alt = "", width = nil, height = nil)
-#@todo
-       
-        例：
-        img("src", "alt", 100, 50)
-          # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
+--- file_field(name = "", size = 20, maxlength = nil) -> String
 
-        img({ "SRC" => "src", "ALT" => "alt", "WIDTH" => 100, "HEIGHT" => 50 })
-          # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
+タイプが file である input 要素を生成します。
 
---- multipart_form(action = nil, enctype = "multipart/form-data")
-#@todo
-       
-        例：
-        multipart_form{ "string" }
-          # <FORM METHOD="post" ENCTYPE="multipart/form-data">string</FORM>
+@param attributes 属性をハッシュで指定します。
 
-        multipart_form("url"){ "string" }
-          # <FORM METHOD="post" ACTION="url" ENCTYPE="multipart/form-data">string</FORM>
+例:
+   file_field({ "NAME" => "name", "SIZE" => 40 })
+     # <INPUT TYPE="file" NAME="name" SIZE="40">
 
---- password_field(name = "", value = nil, size = 40, maxlength = nil)
-#@todo
-       
-        例：
-        password_field("name")
-          # <INPUT TYPE="password" NAME="name" SIZE="40">
 
-        password_field("name", "value")
-          # <INPUT TYPE="password" NAME="name" VALUE="value" SIZE="40">
+--- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded") -> String
+--- form(method = "post", action = nil, enctype = "application/x-www-form-urlencoded"){ ... } -> String
 
-        password_field("password", "value", 80, 200)
-          # <INPUT TYPE="password" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
+form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
 
-        password_field({ "NAME" => "name", "VALUE" => "value" })
-          # <INPUT TYPE="password" NAME="name" VALUE="value">
+@param method method 属性の値として "get" か "post" を指定します。
 
---- popup_menu(name = "", *values)
-#@todo
+@param action action 属性の値を指定します。デフォルトは現在の CGI スクリプト名です。
+
+@param enctype enctype 属性の値を指定します。デフォルトは "application/x-www-form-urlencoded" です。
+
+例:
+  form{ "string" }
+    # <FORM METHOD="post" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
+
+  form("get"){ "string" }
+    # <FORM METHOD="get" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
+
+  form("get", "url"){ "string" }
+    # <FORM METHOD="get" ACTION="url" ENCTYPE="application/x-www-form-urlencoded">string</FORM>
+
+
+--- form(attributes) -> String
+--- form(attributes){ ... } -> String
+
+form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  form({"METHOD" => "post", ENCTYPE => "enctype"}){ "string" }
+    # <FORM METHOD="post" ENCTYPE="enctype">string</FORM>
+
+@see [[m:CGI::HtmlExtension#multipart_form]]
+
+--- hidden(name = "", value = nil) -> String
+タイプが hidden である input 要素を生成します。
+
+@param name name 属性の値を指定します。
+
+@param value value 属性の値を指定します。
+
+例:
+  hidden("name")
+    # <INPUT TYPE="hidden" NAME="name">
+
+  hidden("name", "value")
+    # <INPUT TYPE="hidden" NAME="name" VALUE="value">
+
+--- hidden(attributes) -> String
+タイプが hidden である input 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  hidden({ "NAME" => "name", "VALUE" => "reset", "ID" => "foo" })
+    # <INPUT TYPE="hidden" NAME="name" VALUE="value" ID="foo">
+
+--- html(attributes = {}) -> String
+--- html(attributes = {}){ ... } -> String
+トップレベルの html 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param attributes 属性をハッシュで指定します。
+                  擬似属性の "PRETTY" に文字列を与えるとその文字列でインデントした HTML を生成します。
+                  擬似属性の "DOCTYPE" には DOCTYPE 宣言として使用する文字列を与えることができます。
+
+例:
+
+  html{ "string" }
+    # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML>string</HTML>
+
+  html({ "LANG" => "ja" }){ "string" }
+    # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><HTML LANG="ja">string</HTML>
+
+  html({ "DOCTYPE" => false }){ "string" }
+    # <HTML>string</HTML>
+
+  html({ "DOCTYPE" => '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">' }){ "string" }
+    # <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"><HTML>string</HTML>
+
+  html({ "PRETTY" => "  " }){ "<BODY></BODY>" }
+    # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+    # <HTML>
+    #   <BODY>
+    #   </BODY>
+    # </HTML>
+
+  html({ "PRETTY" => "\t" }){ "<BODY></BODY>" }
+    # <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+    # <HTML>
+    #         <BODY>
+    #         </BODY>
+    # </HTML>
+
+  html("PRETTY"){ "<BODY></BODY>" }
+    # = html({ "PRETTY" => "  " }){ "<BODY></BODY>" }
+
+  html(if $VERBOSE then "PRETTY" end){ "HTML string" }
+
+--- image_button(src = "", name = nil, alt = nil) -> String
+タイプが image の input 要素を生成します。
+
+@param src src 属性の値を指定します。
+
+@param name name 属性の値を指定します。
+
+@param alt alt 属性の値を指定します。
+
+例:
+  image_button("url")
+    # <INPUT TYPE="image" SRC="url">
+
+  image_button("url", "name", "string")
+    # <INPUT TYPE="image" SRC="url" NAME="name" ALT="string">
+
+--- image_button(attributes) -> String
+タイプが image の input 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  image_button({ "SRC" => "url", "ALT" => "string" })
+    # <INPUT TYPE="image" SRC="url" ALT="string">
+
+--- img(src = "", alt = "", width = nil, height = nil) -> String
+img 要素を生成します。
+
+@param src src 属性の値を指定します。
+
+@param alt alt 属性の値を指定します。
+
+@param width width 属性の値を指定します。
+
+@param height height 属性の値を指定します。
+
+例:
+  img("src", "alt", 100, 50)
+    # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
+
+--- img(attributes) -> String
+img 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  img({ "SRC" => "src", "ALT" => "alt", "WIDTH" => 100, "HEIGHT" => 50 })
+    # <IMG SRC="src" ALT="alt" WIDTH="100" HEIGHT="50">
+
+--- multipart_form(action = nil, enctype = "multipart/form-data") -> String
+--- multipart_form(action = nil, enctype = "multipart/form-data"){ ... } -> String
+
+enctype 属性に "multipart/form-data" をセットした form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param action action 属性の値を指定します。
+
+@param enctype enctype 属性の値を指定します。
+
+例:
+  multipart_form{ "string" }
+    # <FORM METHOD="post" ENCTYPE="multipart/form-data">string</FORM>
+
+--- multipart_form(attributes) -> String
+--- multipart_form(attributes){ ... } -> String
+
+enctype 属性に "multipart/form-data" をセットした form 要素を生成します。
+ブロックを与えると、ブロックを評価した結果が内容になります。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  multipart_form("url"){ "string" }
+    # <FORM METHOD="post" ACTION="url" ENCTYPE="multipart/form-data">string</FORM>
+
+--- password_field(name = "", value = nil, size = 40, maxlength = nil) -> String
+タイプが password である input 要素を生成します。
+
+@param name name 属性の値を指定します。
+
+@param value 属性の値を指定します。
+
+@param size size 属性の値を指定します。
+
+@param maxlength maxlength 属性の値を指定します。
+
+例:
+  password_field("name")
+    # <INPUT TYPE="password" NAME="name" SIZE="40">
+
+  password_field("name", "value")
+    # <INPUT TYPE="password" NAME="name" VALUE="value" SIZE="40">
+
+  password_field("password", "value", 80, 200)
+    # <INPUT TYPE="password" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
+
+--- password_field(name = "", value = nil, size = 40, maxlength = nil) -> String
+タイプが password である input 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  password_field({ "NAME" => "name", "VALUE" => "value" })
+    # <INPUT TYPE="password" NAME="name" VALUE="value">
+
+--- popup_menu(name = "", *values) -> String
+--- scrolling_list(name = "", *values) -> String
+
+select 要素を生成します。
+
+@param name name 属性の値を指定します。
+
+@param values option 要素を生成するための情報を一つ以上指定します。
+              それぞれ、文字列、一要素、二要素、三要素の配列を指定することができます。
+              文字列か一要素の配列である場合は、value 属性の値と option 要素の内容になります。
+              三要素の配列である場合は、順に value 属性の値、option 要素の内容、その option 要素が
+              選択状態かどうかを表す真偽値となります。
        
         例：
         popup_menu("name", "foo", "bar", "baz")
@@ -1086,6 +1337,14 @@ Cookie オブジェクトのアトリビュートです。
           #   <OPTION VALUE="Baz">Baz</OPTION>
           # </SELECT>
 
+--- popup_menu(attributes) -> String
+--- scrolling_list(attributes) -> String
+
+select 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
         popup_menu({"NAME" => "name", "SIZE" => 2, "MULTIPLE" => true,
                     "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
           # <SELECT NAME="name" MULTIPLE SIZE="2">
@@ -1094,119 +1353,184 @@ Cookie オブジェクトのアトリビュートです。
           #   <OPTION VALUE="Baz">Baz</OPTION>
           # </SELECT>
 
---- radio_button(name = "", value = nil, checked = nil)
-#@todo
-       
-        例：
-        radio_button("name", "value")
-          # <INPUT TYPE="radio" NAME="name" VALUE="value">
+--- radio_button(name = "", value = nil, checked = nil) -> String
 
-        radio_button("name", "value", true)
-          # <INPUT TYPE="radio" NAME="name" VALUE="value" CHECKED>
+タイプが radio である input 要素を生成します。
 
-        radio_button({ "NAME" => "name", "VALUE" => "value", "ID" => "foo" })
-          # <INPUT TYPE="radio" NAME="name" VALUE="value" ID="foo">
+@param name name 属性の値を指定します。
 
---- radio_group(name = "", *values)
-#@todo
-       
-        例：
-        radio_group("name", "foo", "bar", "baz")
-          # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
-          # <INPUT TYPE="radio" NAME="name" VALUE="bar">bar
-          # <INPUT TYPE="radio" NAME="name" VALUE="baz">baz
+@param value value 属性の値を指定します。
 
-        radio_group("name", ["foo&quot;], ["bar", true], "baz")
-          # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
-          # <INPUT TYPE=&quot;radio" CHECKED NAME="name" VALUE="bar">bar
-          # <INPUT TYPE="radio" NAME="name" VALUE="baz">baz
+@param checked 真ならば checked 属性を設定します。
 
-        radio_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
-          # <INPUT TYPE="radio" NAME="name" VALUE="1">Foo
-          # <INPUT TYPE="radio" CHECKED NAME="name" VALUE="2">Bar
-          # <INPUT TYPE="radio" NAME="name" VALUE="Baz">Baz
+例:
+  radio_button("name", "value")
+    # <INPUT TYPE="radio" NAME="name" VALUE="value">
+ 
+  radio_button("name", "value", true)
+    # <INPUT TYPE="radio" NAME="name" VALUE="value" CHECKED>
 
-        radio_group({ "NAME" => "name",
-                      "VALUES" => ["foo", "bar", "baz"] })
+--- radio_button(attributes) -> String
 
-        radio_group({ "NAME" => "name",
-                      "VALUES" => [["foo"], ["bar", true], "baz"] })
+タイプが radio である input 要素を生成します。
 
-        radio_group({ "NAME" => "name",
-                      "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
+@param attributes 属性をハッシュで指定します。
 
---- reset(value = nil, name = nil)
-#@todo
-       
-        例：
-        reset
-          # <INPUT TYPE="reset">
+例:
+  radio_button({ "NAME" => "name", "VALUE" => "value", "ID" => "foo" })
+    # <INPUT TYPE="radio" NAME="name" VALUE="value" ID="foo">
 
-        reset("reset")
-          # <INPUT TYPE="reset" VALUE="reset">
+--- radio_group(name = "", *values) -> String
+タイプが radio である input 要素のリストを生成します。
 
-        reset({ "VALUE" => "reset", "ID" => "foo" })
-          # <INPUT TYPE="reset" VALUE="reset" ID="foo">
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
---- scrolling_list(name = "", *values)
-#@todo
-       
-        例：
+@param name name 属性の値を指定します。
 
-        scrolling_list({"NAME" => "name", "SIZE" => 2, "MULTIPLE" => true,
-                        "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
-          # <SELECT NAME="name" MULTIPLE SIZE="2">
-          #   <OPTION VALUE="1">Foo</OPTION>
-          #   <OPTION SELECTED VALUE="2">Bar</OPTION>
-          #   <OPTION VALUE="Baz">Baz</OPTION>
-          # </SELECT>
+@param values value 属性のリストを指定します。
+              それぞれの引数が、単純な文字列の場合、value 属性の値とラベルに同じものが使用されます。
+              それぞれの引数が、二要素または三要素の配列の場合、最終要素が true であれば、
+              checked 属性をセットします。先頭の要素は value 属性の値になります。
 
---- submit(value = nil, name = nil)
-#@todo
-       
-        例：
-        submit
-          # <INPUT TYPE="submit">
+例:
+  radio_group("name", "foo", "bar", "baz")
+    # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
+    # <INPUT TYPE="radio" NAME="name" VALUE="bar">bar
+    # <INPUT TYPE="radio" NAME="name" VALUE="baz">baz
+  
+  radio_group("name", ["foo&quot;], ["bar", true], "baz")
+    # <INPUT TYPE="radio" NAME="name" VALUE="foo">foo
+    # <INPUT TYPE=&quot;radio" CHECKED NAME="name" VALUE="bar">bar
+    # <INPUT TYPE="radio" NAME="name" VALUE="baz">baz
+  
+  radio_group("name", ["1", "Foo"], ["2", "Bar", true], "Baz")
+    # <INPUT TYPE="radio" NAME="name" VALUE="1">Foo
+    # <INPUT TYPE="radio" CHECKED NAME="name" VALUE="2">Bar
+    # <INPUT TYPE="radio" NAME="name" VALUE="Baz">Baz
+  
+--- radio_group(name = "", *values) -> String
+タイプが radio である input 要素のリストを生成します。
 
-        submit("ok")
-          # <INPUT TYPE="submit" VALUE="ok">
+生成される input 要素の name 属性はすべて同じになり、
+それぞれの input 要素の後ろにはラベルが続きます。
 
-        submit("ok", "button1")
-          # <INPUT TYPE="submit" VALUE="ok" NAME="button1">
+@param attributes 属性をハッシュで指定します。
 
-        submit({ "VALUE" => "ok", "NAME" => "button1", "ID" => "foo" })
-          # <INPUT TYPE="submit" VALUE="ok" NAME="button1" ID="foo">
+例:
+  radio_group({ "NAME" => "name",
+                "VALUES" => ["foo", "bar", "baz"] })
+  
+  radio_group({ "NAME" => "name",
+                "VALUES" => [["foo"], ["bar", true], "baz"] })
+  
+  radio_group({ "NAME" => "name",
+                "VALUES" => [["1", "Foo"], ["2", "Bar", true], "Baz"] })
 
---- text_field(name = "", value = nil, size = 40, maxlength = nil)
-#@todo
-       
-        例：
-        text_field("name")
-          # <INPUT TYPE="text" NAME="name" SIZE="40">
+--- reset(value = nil, name = nil) -> String
+タイプが reset である input 要素を生成します。
 
-        text_field("name", "value")
-          # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="40">
+@param value value 属性の値を指定します。
 
-        text_field("name", "value", 80)
-          # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="80">
+@param name name 属性の値を指定します。
 
-        text_field("name", "value", 80, 200)
-          # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
+例:
+  reset
+    # <INPUT TYPE="reset">
+  
+  reset("reset")
+    # <INPUT TYPE="reset" VALUE="reset">
+  
+--- reset(attributes) -> String
+タイプが reset である input 要素を生成します。
 
-        text_field({ "NAME" => "name", "VALUE" => "value" })
-          # <INPUT TYPE="text" NAME="name" VALUE="value">
+@param attributes 属性をハッシュで指定します。
 
---- textarea(name = "", cols = 70, rows = 10)
-#@todo
-       
-        例：
-        textarea("name")
-          # = textarea({ "NAME" => "name", "COLS" => 70, "ROWS" => 10 })
+  reset({ "VALUE" => "reset", "ID" => "foo" })
+    # <INPUT TYPE="reset" VALUE="reset" ID="foo">
 
-        textarea("name", 40, 5)
-          # = textarea({ "NAME" => "name", "COLS" => 40, "ROWS" => 5 })
+--- submit(value = nil, name = nil) -> String
+タイプが submit である input 要素を生成します。
+
+@param value value 属性の値を指定します。
+
+@param name name 属性の値を指定します。
+
+例:
+  submit
+    # <INPUT TYPE="submit">
+  
+  submit("ok")
+    # <INPUT TYPE="submit" VALUE="ok">
+  
+  submit("ok", "button1")
+    # <INPUT TYPE="submit" VALUE="ok" NAME="button1">
+  
+--- submit(attributes) -> String
+タイプが submit である input 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+  submit({ "VALUE" => "ok", "NAME" => "button1", "ID" => "foo" })
+    # <INPUT TYPE="submit" VALUE="ok" NAME="button1" ID="foo">
+
+--- text_field(name = "", value = nil, size = 40, maxlength = nil) -> String
+タイプが text である input 要素を生成します。
+
+@param name name 属性の値を指定します。
+
+@param value 属性の値を指定します。
+
+@param size size 属性の値を指定します。
+
+@param maxlength maxlength 属性の値を指定します。
+
+例:
+  text_field("name")
+    # <INPUT TYPE="text" NAME="name" SIZE="40">
+  
+  text_field("name", "value")
+    # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="40">
+  
+  text_field("name", "value", 80)
+    # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="80">
+  
+  text_field("name", "value", 80, 200)
+    # <INPUT TYPE="text" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
+  
+--- text_field(attributes) -> String
+タイプが text である input 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+  text_field({ "NAME" => "name", "VALUE" => "value" })
+    # <INPUT TYPE="text" NAME="name" VALUE="value">
+
+--- textarea(name = "", cols = 70, rows = 10) -> String
+textarea 要素を生成します。
+
+@param name name 属性の値を指定します。
+
+@param cols cols 属性の値を指定します。
+
+@param rows rows 属性の値を指定します。
+
+例:
+   textarea("name")
+     # = textarea({ "NAME" => "name", "COLS" => 70, "ROWS" => 10 })
+
+--- textarea(attributes) -> String
+textarea 要素を生成します。
+
+@param attributes 属性をハッシュで指定します。
+
+例:
+   textarea("name", 40, 5)
+     # = textarea({ "NAME" => "name", "COLS" => 40, "ROWS" => 5 })
 
 = module CGI::Html3
+#@# nodoc
 
 == Instance Methods
 
@@ -1217,6 +1541,7 @@ Cookie オブジェクトのアトリビュートです。
 #@todo
 
 = module CGI::Html4
+#@# nodoc
 
 == Instance Methods
 
@@ -1227,6 +1552,7 @@ Cookie オブジェクトのアトリビュートです。
 #@todo
 
 = module CGI::Html4Fr
+#@# nodoc
 
 == Instance Methods
 
@@ -1237,6 +1563,7 @@ Cookie オブジェクトのアトリビュートです。
 #@todo
 
 = module CGI::Html4Tr
+#@# nodoc
 
 == Instance Methods
 
