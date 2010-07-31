@@ -30,6 +30,29 @@ do_XXX メソッドを呼び出します。このようにしてスクリプトは実行されます。
  
  MyCGI.new.start()
 
+==== do_XXX メソッド
+
+do_XXX メソッドの XXX には GET, HEAD, POST, PUT, DELETE, OPTIONS が使用できます。
+
+[[c:WEBrick::CGI]] のサブクラスで定義された do_XXX メソッドは [[m:WEBrick::CGI#service]] メソッド
+から HTTP のリクエストに応じて自動的に呼び出されます。
+なので [[c:WEBrick::CGI]] のサブクラスはこれらのメソッドを適切に実装しなければなりません。
+これらのメソッドの返り値は特に規定されていません。
+
+[[c:WEBrick::CGI]] のサブクラスでは、クライアントが使う可能性のある RFC で定義された HTTP の
+メソッドはすべて実装する必要があります。
+クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
+実装されていない HTTP メソッドであった場合、[[m:WEBrick::CGI#service]] メソッドが例外を発生させます。
+
+do_XXX メソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
+まだ行われていません。[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] などの
+メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
+ユーザはプログラミングを行うべきです。
+
+do_XXX メソッドには二つの引数があります。
+第一引数は、クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+第二引数は、クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+
 ==== フォームフィールドの値を得る
 
 フォームフィールドの値は [[m:WEBrick::HTTPRequest#query]] メソッドが返す Hash オブジェクトに
@@ -191,31 +214,6 @@ config で有効なキーとその値は以下のとおりです。
 
 デフォルトでは [[c:WEBrick::BasicLog]].new($stderr) です。
 #@end
-
---- do_GET(req, res)        -> ()
---- do_HEAD(req, res)       -> ()
---- do_POST(req, res)       -> ()
---- do_PUT(req, res)        -> ()
---- do_DELETE(req, res)     -> ()
---- do_OPTIONS(req, res)    -> ()
-
-自身の service メソッドから HTTP のリクエストに応じて
-呼ばれるメソッドです。[[c:WEBrick::CGI]] のサブクラスはこれらのメソッドを適切に実装し
-なければいけません。返り値は特に規定されていません。
-
-クライアントが使う可能性のある RFC で定義された HTTP のメソッドはすべて実装する必要があります。
-クライアントからのリクエストに使われないと分かっているメソッドは実装しなくてもかまいません。
-実装されていない HTTP メソッドであった場合、自身の service メソッドが
-例外を発生させます。
-
-このメソッドが呼ばれた時点では、クライアントからのリクエストに含まれる Entity Body の読み込みは
-まだ行われていません。[[m:WEBrick::HTTPRequest#query]], [[m:WEBrick::HTTPRequest#body]] などの
-メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
-ユーザはプログラミングを行うべきです。
-
-@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
-
-@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 --- service(req, res)     -> ()
 
