@@ -111,7 +111,7 @@ bigdecimal/ludcmp		mrkn
 bigdecimal/newton		mrkn
 bigdecimal/util                 sho-h           done
 bigdecimal/math                 sho-h           done
-cgi
+cgi                             okkez
 cgi-lib                         okkez           done
 cgi/session
 cmath
