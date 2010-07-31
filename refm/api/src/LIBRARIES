@@ -222,9 +222,7 @@ rake/tasklib
 rake/testtask
 rake/loaders/makefile
 #@end
-#@until 1.9.1
 rational
-#@end
 rbconfig
 #@until 1.9.1
 readbytes

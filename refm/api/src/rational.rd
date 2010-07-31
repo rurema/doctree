@@ -1,32 +1,63 @@
 有理数を扱うためのライブラリです。
 
-有理数のためのクラス。
-rational を require すると [[c:Integer]] のメソッドが以下のように再定義される。
+require する事で数値計算の結果を [[c:Rational]] オブジェクトで返す場合
+ができます。
 
+  1.quo(2)              # => 0.5
+  require 'rational'
+  1.quo(2)              # => Rational(1,2)
+
+#@since 1.9.1
+
+1.9系では Rational クラスは組み込みクラスになりました。
+
+#@else
 = reopen Kernel
-== Private Instance Methods
---- Rational(a, b)
-#@todo
-[[c:Rational]] オブジェクトを生成する。
+== Module Functions
+--- Rational(num, den = 1)
 
-Creates a Rational number (i.e. a fraction).  +a+ and +b+ should be Integers:
- 
-  Rational(1,3)           # -> 1/3
+[[c:Rational]] オブジェクトを生成します。
 
-Note: trying to construct a Rational with floating point or real values
-produces errors:
+@param num 分子を指定します。
 
-  Rational(1.1, 2.3)      # -> NoMethodError
+@param den 分母を指定します。省略した場合は 1 です。
 
+@raise ZeroDivisionError den に 0 を指定した場合に発生します。
+
+引数 num、den の両方を指定した場合、num/den を既約になるまで約分した
+[[c:Rational]] オブジェクトを返します。
+
+num と den には整数を指定します。den が 1 の時に限り、num に
+[[c:Rational]] オブジェクトを指定する事もできます。
+
+例:
+
+  Rational(1, 3)              # => Rational(1, 3)
+  Rational(2, 6)              # => Rational(1, 3)
+  Rational(Rational(1, 3), 1) # => Rational(1, 3)
+
+それ以外のオブジェクトを指定すると例外が発生します。
+
+  Rational(Rational(1, 3), 2) # => NoMethodError
+  Rational(1.1, 2.3)          # => NoMethodError
+  Rational("1/3")             # => NoMethodError
+  Rational(nil)               # => NoMethodError
+
+約分していない [[c:Rational]] オブジェクトを作成する場合は
+[[m:Rational.new!]] を使用します。ただし、1.9系では使用できない事に注意
+してください。
+
+@see [[m:Rational.new!]], [[m:Rational.reduce]]
 
 = redefine Integer
 
 == Instance Methods
 
---- /(other)
-#@todo
+--- /(other)   -> Rational | Float | Integer
 
-除算。
+商を計算します。
+
+計算結果は以下のようになります。
 
   * otherが有理数(Rational)ならば、有理数(Rational)を返す。
   * otherがそれ以外なら、[[m:Integer#/]]と同じ。つまり、
@@ -34,10 +65,13 @@ produces errors:
     浮動小数(Float)を返す。
     ただし、いずれも、other == 0 の時は、[[c:ZeroDivisionError]]となる。
 
---- **(other)
-#@todo
+@raise ZeroDivisionError other が 0 の時に発生します。
 
-べき乗。
+--- **(other)  -> Rational | Float | Integer
+
+冪(べき)乗を計算します。
+
+計算結果は以下のようになります。
 
   * otherが正または0の整数(Integer)ならば、整数(Integer)を返す。
   * otherが負の整数(Integer)ならば、有理数(Rational)を返す。
@@ -51,90 +85,166 @@ produces errors:
 
 == Instance Methods
 
---- power!(other)
-#@todo
+--- power!(other) -> Integer | Float
 
-[[lib:rational]]で再定義される前の[[m:Integer#**]]の別名。
-other が正または 0 の整数 (Integer) ならば、
-整数 (Integer) を、それ以外なら、浮動小数 (Float) を返す。
+冪(べき)乗を計算します。
+
+[[lib:rational]]で再定義される前の[[m:Integer#**]]の別名です。
+other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
+なら、浮動小数 (Float) を返します。
 
 --- to_r
-#@todo
-対応する有理数 (Rational) を返す。
-Rational(self, 1) と同じ。
 
---- gcd(n)
-#@todo
+自身を [[c:Rational]] に変換します。
 
-self と n の最大公約数を Fixnum として返す。
-self や n が負の場合は、正に変換してから計算する。
+例:
 
-   72.gcd 168           # -> 24
-   19.gcd 36            # -> 1
+  1.to_r        # => Rational(1, 1)
+  (1<<64).to_r  # => Rational(18446744073709551616, 1)
 
---- lcm(n)
-#@todo
+--- gcd(n) -> Integer
 
-self と n の最小公倍数を返す。
-self や n が負の場合は、正に変換してから計算する。
+自身と整数 n の最大公約数を返します。
 
-   6.lcm 7        # -> 42
-   6.lcm 9        # -> 18
+  2.gcd(2)                    # => 2
+  3.gcd(7)                    # => 1
+  3.gcd(-7)                   # => 1
+  ((1<<31)-1).gcd((1<<61)-1)  # => 1
+
+また、self や n が 0 だった場合は、0 ではない方の整数の絶対値を返します。
+
+  3.gcd(0)              # => 3
+  0.gcd(-7)             # => 7
+
+@see [[m:Integer#lcm]], [[m:Integer#gcdlcm]]
+
+--- lcm(n) -> Integer
+
+自身と整数 n の最小公倍数を返します。
+
+例:
+
+  2.lcm(2)                    # => 2
+  3.lcm(-7)                   # => 21
+  ((1<<31)-1).lcm((1<<61)-1)  # => 4951760154835678088235319297
+
+また、self や n が 0 だった場合は、0 を返します。
+
+  3.lcm(0)                    # => 0
+  0.lcm(-7)                   # => 0
+
+@see [[m:Integer#gcd]], [[m:Integer#gcdlcm]]
 
 --- gcdlcm(int)
-#@todo
 
-最大公約数と最小公倍数の配列 [self.gcd, self.lcm] を返します。
+自身と整数 n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)]
+を返します。
 
-   6.gcdlcm 9     # -> [3, 18]
+@raise ArgumentError n に整数以外のものを指定すると発生します。
 
---- numerator
-#@todo
-In an integer, the value is the numerator of its rational equivalent.
-Therefore, this method returns self.
+例:
 
---- denominator
-#@todo
-In an integer, the denominator is 1.  Therefore, this method returns 1.
+  6.gcdlcm 9                     # => [3, 18]
+  2.gcdlcm(2)                    # => [2, 2]
+  3.gcdlcm(-7)                   # => [1, 21]
+  ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
 
+@see [[m:Integer#gcd]], [[m:Integer#lcm]]
+
+--- numerator -> Integer
+
+分子(常に自身)を返します。
+
+@return 分子を返します。
+
+@see [[m:Integer#denominator]]
+
+--- denominator -> Integer
+
+分母(常に1)を返します。
+
+@return 分母を返します。
+
+@see [[m:Integer#numerator]]
+
+#@end
 
 = redefine Fixnum
 == Instance Methods
 
---- quo(other)
-#@todo
-If Rational is defined, returns a Rational number instead of a Fixnum.
+--- quo(other) -> Rational
 
---- **(other)
---- rpower (other)
-#@todo
-Returns a Rational number if the result is in fact rational (i.e. other < 0).
+商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+
+例:
+
+  1.quo(2)              # => Rational(1,2)
+
+--- **(other) -> Integer | Float | Rational
+--- rpower (other) -> Integer | Float | Rational
+
+冪(べき)乗を計算します。other が 0 以下の場合、計算結果を
+[[c:Rational]] オブジェクトで返します。
+
+  2.rpower(3)           # => 8
+  2.rpower(-3)          # => Rational(1, 8)
 
 = reopen Fixnum
 == Instance Methods
---- power!(other)
-#@todo
+--- power!(other) -> Integer | Float
+
+冪(べき)乗を計算します。
+
+[[lib:rational]]で再定義される前の[[m:Fixnum#**]]の別名です。
+other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
+なら、浮動小数 (Float) を返します。
+
+#@since 1.8.8
+#@until 1.9.1
+--- gcd
+
+自身と整数 n の最大公約数を返します。
+
+#@end
+#@end
 
 = redefine Bignum
 == Instance Methods
---- quo(other)
-#@todo
-If Rational is defined, returns a Rational number instead of a Bignum.
+--- quo(other) -> Rational
 
---- **(other)
---- rpower(other)
-#@todo
-Returns a Rational number if the result is in fact rational (i.e. +other+ < 0).
+商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+
+例:
+
+  (1<<32).quo(2)              # => Rational(2147483648, 1)
+
+--- **(other) -> Integer | Float | Rational
+--- rpower (other) -> Integer | Float | Rational
+
+冪(べき)乗を計算します。other が 0 以下の場合、計算結果を
+[[c:Rational]] オブジェクトで返します。
+
+  (1<<32).rpower(2)           # => 18446744073709551616
+  (1<<32).rpower(-2)          # => Rational(1, 18446744073709551616)
 
 = reopen  Bignum
 == Instance Methods
---- power!(other)
-#@todo
+--- power!(other) -> Integer | Float
 
+冪(べき)乗を計算します。
+
+[[lib:rational]]で再定義される前の[[m:Bignum#**]]の別名です。
+other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
+なら、浮動小数 (Float) を返します。
+
+#@until 1.9.1
 = class Rational < Numeric
 
-#@#ソースを見ても include してないようだ
-#@#include Comparable
+有理数を扱うクラスです。
+
+「1/3」のような有理数を扱う事ができます。[[c:Integer]] や [[c:Float]]
+と同様に Rational.new ではなく、 [[m:Kernel.#Rational]] を使用して
+[[c:Rational]] オブジェクトを作成します。
 
 Integer < Rational < Float の順に強いです。つまり other が Float なら、
 self を Float に変換してから演算子を適用します。other が Integer なら other を
@@ -142,69 +252,155 @@ Rational に変換してから演算子を適用します。冪乗は例外です。
 
 == Class Methods
 --- new!(num, den = 1)
-#@todo
 
-Implements the constructor. This method does not reduce to lowest
-terms or check for division by zero. Therefore #Rational() should
-be preferred in normal use.
+[[c:Rational]] オブジェクトを生成します。
 
-  puts Rational.new!(6,10) #=> 6/10
+@param num 分子を指定します。
 
---- reduce(num, den = 1)
-#@todo
+@param den 分母を指定します。省略した場合は 1 です。
 
-Reduces the given numerator and denominator to their lowest terms.
-Use Rational() instead.
+[[m:Kernel#Rational]] とは異なり、約分していない [[c:Rational]] オブジェ
+クトを返します。
+
+例:
+
+  Rational.new!(1, 3)         # => Rational(1, 3)
+  Rational.new!(2, 6)         # => Rational(2, 6)
+
+また、引数のチェックも行われません。
+
+例:
+
+  Rational.new!(1, 0)         # => Rational(1, 0)
+  Rational(1, 0)              # => ZeroDivisionError
+
+注意:
+
+Rational.new! は 1.9系 では廃止されました。[[m:Kernel.#Rational]] の方
+を使用してください。
+
+  # 1.9.1 の場合
+  Rational.new!(1, 3)  # => NoMethodError
+
+--- reduce(num, den = 1) -> Rational
+
+約分された [[c:Rational]] オブジェクトを生成します。
+
+@param num 分子を指定します。
+
+@param den 分母を指定します。省略した場合は 1 です。
+
+@raise ZeroDivisionError den に 0 を指定した場合に発生します。
+
+引数 num、den の両方を指定した場合、num/den を既約になるまで約分した
+[[c:Rational]] オブジェクトを返します。
+
+[[m:Kernel#Rational]] とは異なり、num と den には整数しか指定できません。
+
+例:
+
+  Rational.reduce(2, 6)              # => Rational(1, 3)
+  Rational.reduce(Rational(1, 3), 1) # => NoMethodError: undefined method `gcd' for Rational(1, 3):Rational
+
+注意:
+
+Rational.reduce は 1.9 系 では廃止されました。[[m:Kernel.#Rational]] の
+方を使用してください。
+
+  # 1.9.1 の場合
+  Rational.reduce(2, 6)  # => NoMethodError
 
 == Instance Methods
 
---- numerator
-#@todo
+--- numerator -> Integer
 
-分子を Fixnum として返します。
+分子を返します。
 
---- denominator
-#@todo
+@return 分子を返します。
 
-分母を Fixnum として返します。
+例:
 
---- +(other)
-#@todo
+  Rational(7).numerator       # => 7
+  Rational(7, 1).numerator    # => 7
+  Rational(9, -4).numerator   # => -9
+  Rational(-2, -10).numerator # => 1
+
+@see [[m:Rational#denominator]]
+
+--- denominator -> Integer
+
+分母を返します。常に正の整数を返します。
+
+@return 分母を返します。
+
+例:
+
+  Rational(7).denominator       # => 1
+  Rational(7, 1).denominator    # => 1
+  Rational(9, -4).denominator   # => 4
+  Rational(-2, -10).denominator # => 5
+
+@see [[m:Rational#numerator]]
+
+--- +(other) -> Rational | Float
 
 和を計算します。
+
+other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
+す。
 
   Rational(3, 4) + 2               # => Rational(11, 4)
   Rational(3, 4) + Rational(2, 1)  # => Rational(11, 4)
   Rational(3, 4) + 2.0             # => 2.75
 
---- -(other)
-#@todo
+--- -(other) -> Rational | Float
 
 差を計算します。
 
---- *(other)
-#@todo
+other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
+す。
+
+例:
+
+  r = Rational(3, 4)
+  r - 1                # => Rational(-1, 4)
+  r - 0.5              # => 0.25
+
+--- *(other) -> Rational | Float
 
 積を計算します。
 
-  r = Rational(3,4)    # -> Rational(3,4)
-  r * 2                # -> Rational(3,2)
-  r * 4                # -> Rational(3,1)
-  r * 0.5              # -> 0.375
-  r * Rational(1,2)    # -> Rational(3,8)
+other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
+す。
 
---- /(other)
-#@todo
+例:
+
+  Rational(3, 4) * 2              # => Rational(3, 2)
+  Rational(3, 4) * 4              # => Rational(3, 1)
+  Rational(3, 4) * 0.5            # => 0.375
+  Rational(3, 4) * Rational(1, 2) # => Rational(3, 8)
+
+other に 0 を指定した場合も [[c:Rational]] を返します。
+
+  Rational(3, 4) * 0              # => Rational(0, 1)
+
+--- /(other)   -> Rational | Float
 
 商を計算します。
-other が 0 の時は、例外 [[c:ZeroDivisionError]] を投げます。
+
+other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
+す。
+
+例:
 
   Rational(3, 4) / 2              # => Rational(3, 8)
   Rational(3, 4) / Rational(2, 1) # => Rational(3, 8)
   Rational(3, 4) / 2.0            # => 0.375
+  Rational(3, 4) / 0              # => ZeroDivisionError
 
---- %(other)
-#@todo
+@raise ZeroDivisionError other が 0 の時に発生します。
+
+--- %(other)      -> Rational | Float
 
 剰余を計算します。絶対値が self の絶対値を越えない、符号が self と同じ
 Numeric を返します。
@@ -213,53 +409,263 @@ Numeric を返します。
   Rational(3, 4) % Rational(2, 1)  # => Rational(3, 4)
   Rational(3, 4) % 2.0             # => 0.75
 
---- **(other)
-#@todo
+--- **(other) -> Rational | Float
 
-冪を計算します。
+冪(べき)乗を計算します。
+
+other に整数を指定した場合は、計算結果を [[c:Rational]] で返します。
+other に整数以外を指定した場合は計算結果を [[c:Float]] で返します。
+
+例:
 
   Rational(3, 4) ** 2              # => Rational(9, 16)
   Rational(3, 4) ** Rational(2, 1) # => 0.5625
   Rational(3, 4) ** 2.0            # => 0.5625
 
---- divmod(other)
-#@todo
+注意:
+
+1.9 系とは計算結果のオブジェクトが異なる場合がある事に注意してください。
+other に [[c:Rational]] を指定した場合には戻り値が [[c:Rational]] を返
+す場合があります。
+
+  # 1.9.1 の場合
+  r = Rational(3, 4)
+  r ** Rational(2, 1)  # => (9/16)
+
+#@since 1.8.7
+--- div(other) -> Integer
+
+self を other で割った整数の商を返します。
+
+@param other 自身を割る数
+
+例:
+
+  Rational(1, 2).div(Rational(2, 3)) # => 0
+
+#@end
+
+--- divmod(other) -> [Integer, Float | Rational]
 
 self を other で割った、商と余りの配列を返します。
-商は Fixnum、余りは絶対値が other の絶対値を越えず、符号が other と同じ
-Numeric です。[[m:Numeric#divmod]] も参照して下さい。
 
- Rational(3,4).divmod(Rational(2,3))  # => [1, Rational(1, 12)]
- Rational(-3,4).divmod(Rational(2,3)) # => [-2, Rational(7, 12)]
- Rational(3,4).divmod(Rational(-2,3)) # => [-2, Rational(-7, 12)]
+other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
 
- Rational(9,4).divmod(2)              # => [1, Rational(1, 4)]
- Rational(9,4).divmod(Rational(2, 1)) # => [1, Rational(1, 4)]
- Rational(9,4).divmod(2.0)            # => [1, 0.25]
+@param other 自身を割る数
 
---- abs
-#@todo
+例:
 
-self が正なら self、負なら -1 * self を返します。
+  Rational(3,4).divmod(Rational(2,3))  # => [1, Rational(1, 12)]
+  Rational(-3,4).divmod(Rational(2,3)) # => [-2, Rational(7, 12)]
+  Rational(3,4).divmod(Rational(-2,3)) # => [-2, Rational(-7, 12)]
 
---- <=>(other)
-#@todo
+  Rational(9,4).divmod(2)              # => [1, Rational(1, 4)]
+  Rational(9,4).divmod(Rational(2, 1)) # => [1, Rational(1, 4)]
+  Rational(9,4).divmod(2.0)            # => [1, 0.25]
 
-other と比べて self が大きいなら 1、同じなら 0、小さいなら -1 を返します。
+@see [[m:Numeric#divmod]]
 
---- to_i
-#@todo
+--- abs -> Rational
 
-[[c:Fixnum]] に変換します。
+自身の絶対値を返します。
 
---- to_f
-#@todo
+例:
 
-[[c:Float]] に変換します。
+  Rational(1, 2).abs.to_s  # => 1/2
+  Rational(-1, 2).abs.to_s # => 1/2
 
---- to_s
-#@todo
+--- ==(other) -> bool
 
-文字列に変換します。
+数値として等しいか判定します。
 
-  Rational(-3,4).to_s # => "-3/4"
+@param other 比較対象の数値
+
+@return      self と other が等しい場合 true を返します。
+             そうでなければ false を返します。
+
+例:
+
+  Rational(2, 3)  == Rational(2, 3)   # => true
+  Rational(5)     == 5                # => true
+  Rational(0)     == 0.0              # => true
+  Rational(1, 3)  == 0.33             # => false
+  Rational(1, 2)  == '1/2'            # => false
+
+--- <=>(other) -> -1 | 0 | 1 | nil
+
+self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
+-1 を返します。比較できない場合はnilを返します。
+
+@param other 比較対象の数値
+
+@return -1 か 0 か 1 か nil を返します。
+
+例:
+
+  Rational(2, 3)  <=> Rational(2, 3)  # => 0
+  Rational(5)     <=> 5               # => 0
+  Rational(2, 3)  <=> Rational(1,3)   # => 1
+  Rational(1, 3)  <=> 1               # => -1
+  Rational(1, 3)  <=> 0.3             # => 1
+  Rational(1, 3)  <=> nil             # => nil
+
+--- coerce(other) -> Array
+
+自身と other が同じクラスになるよう、自身か other を変換し [other, self] という
+配列にして返します。
+
+例:
+
+  Rational(1).coerce(2)   # => [Rational(2, 1), Rational(1, 1)]
+  Rational(1).coerce(2.2) # => [2.2, 1.0]
+
+#@since 1.8.7
+--- floor -> Integer
+
+自身と等しいかより小さな整数のうち最大のものを返します。
+
+例:
+
+  Rational(3).floor     # => 3
+  Rational(2, 3).floor  # => 0
+  Rational(-3, 2).floor # => -2
+
+自身にもっとも近い整数を返す [[m:Rational#to_i]] とは違う結果を返す事に
+注意してください。
+
+例:
+
+  Rational(+7, 4).to_i  # => 1
+  Rational(+7, 4).floor # => 1
+  Rational(-7, 4).to_i  # => -1
+  Rational(-7, 4).floor # => -2
+
+@see [[m:Rational#ceil]], [[m:Rational#round]], [[m:Rational#truncate]]
+
+--- ceil                -> Integer
+
+自身と等しいかより大きな整数のうち最小のものを返します。
+
+例:
+
+  Rational(3).ceil      # => 3
+  Rational(2, 3).ceil   # => 1
+  Rational(-3, 2).ceil  # => -1
+
+@see [[m:Rational#floor]], [[m:Rational#round]], [[m:Rational#truncate]]
+
+--- round -> Integer
+
+自身ともっとも近い整数を返します。
+
+中央値 0.5, -0.5 はそれぞれ 1,-1 に切り上げされます。
+
+例:
+
+  Rational(3).round     # => 3
+  Rational(2, 3).round  # => 1
+  Rational(-3, 2).round # => -2
+
+@see [[m:Rational#ceil]], [[m:Rational#floor]], [[m:Rational#truncate]]
+
+--- truncate -> Integer
+#@end
+--- to_i -> Integer
+
+0 から 自身までの整数で、自身にもっとも近い整数を返します。
+
+例:
+
+  Rational(2, 3).to_i   # => 0
+  Rational(3).to_i      # => 3
+  Rational(98, 71).to_i # => 1
+  Rational(-30, 2).to_i # => -15
+
+#@since 1.8.7
+@see [[m:Rational#ceil]], [[m:Rational#floor]]
+#@end
+
+--- to_f -> Float
+
+自身を [[c:Float]] に変換します。
+
+@return 実数を返します。
+
+例:
+
+  Rational(9, 4).to_f   # => 2.25
+  Rational(-3, 4).to_f  # => -0.75
+  Rational(20, 3).to_f  # => 6.666666666666667
+
+--- to_s -> String
+
+自身を人間が読みやすい形の文字列表現にして返します。
+
+"3/5", "-17/7" のように10進数の表記を返します。
+
+@return 有理数の表記にした文字列を返します。
+
+例:
+
+  Rational(-3, 4).to_s # => "-3/4"
+  Rational(8).to_s     # => "8"
+  Rational(-8, 6).to_s # => "-4/3"
+
+@see [[m:Rational#inspect]]
+
+--- to_r -> Rational
+
+自身を返します。
+
+@return 自身を返します。
+
+--- hash -> Integer
+
+自身のハッシュ値を返します。
+
+@return ハッシュ値を返します。
+
+--- inspect -> String
+
+自身を"Rational(分子, 分母)" 形式の文字列にして返します。
+
+@return 文字列を返します。
+
+例:
+
+  Rational(5, 8).inspect  # => "Rational(5, 8)"
+  Rational(2).inspect     # => "Rational(2, 1)"
+  Rational(-8, 6).inspect # => "Rational(-4, 3)"
+
+1.9系とは結果が異なる事に注意してください。
+
+  # 1.9.1の場合
+  Rational(5, 8).inspect  # => "(5/8)"
+  Rational(2).inspect     # => "(2/1)"
+  Rational(-8, 6).inspect # => "(-4/3)"
+
+@see [[m:Rational#to_s]]
+
+#@since 1.8.8
+--- -@ -> Rational
+
+自身の符号を反転させたものを返します。
+
+--- zero? -> bool
+
+数値として 0 と等しい場合に真を返します。
+
+例:
+
+  Rational(0, 3).zero?  # => true
+
+@see [[m:Rational#nonzero?]]
+
+--- nonzero? -> bool
+
+数値として 0 と等しくない場合に真を返します。
+
+@see [[m:Rational#zero?]]
+
+#@end
+#@end
