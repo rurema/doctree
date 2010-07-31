@@ -5,6 +5,8 @@ cgi ライブラリのコア機能を提供するライブラリです。
 = class CGI < Object
 include CGI::QueryExtension
 
+CGI スクリプトを書くために必要な機能を提供するクラスです。
+
 == Class Methods
 --- parse(query) -> Hash
 
@@ -197,6 +199,8 @@ HTTP のステータスコードを表すハッシュです。
 #@end
 
 = module CGI::QueryExtension
+
+クエリ文字列を扱うためのメソッドを定義しているモジュールです。
 
 == Instance Methods
 
