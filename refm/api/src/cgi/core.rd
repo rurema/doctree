@@ -20,11 +20,39 @@ CGI スクリプトを書くために必要な機能を提供するクラスです。
         params = CGI.parse("query_string")
           # {"name1" => ["value1", "value2", ...],
           #  "name2" => ["value1", "value2", ...], ... }
-#@# module QueryExtension どうしよ
+
+#@since 1.9.1
+--- accept_charset -> String
+
+受けとることができるキャラクタセットを文字列で返します。
+デフォルトは UTF-8 です。
+
+--- accept_charset=(charset)
+
+受けとることができるキャラクタセットを設定します。
+
+@param charset 文字列でキャラクタセットの名前を指定します。
+
+@see [[d:spec/m17n]]
+
+#@end
 #@until 1.9.1
 #@include(util.rd)
 #@end
 == Instance Methods
+
+#@since 1.9.1
+--- accept_charset -> String
+
+受けとることができるキャラクタセットを文字列で返します。
+デフォルトは UTF-8 です。
+
+@see [[m:CGI.accept_charset]], [[m:CGI.accept_charset=]]
+
+--- nph? -> bool
+#@#nodoc
+
+#@end
 
 --- header(options = "text/html") -> String
 
@@ -179,10 +207,12 @@ cgi.print は $DEFAULT_OUTPUT.print と等価です。
 #@# --- REVISION -> String
 #@# nodoc
 
+#@since 1.9.2
 --- NEEDS_BINMODE -> bool
 
 ファイルを開くときにバイナリモードが必要かどうかを表す定数です。
-プラットフォーム異存の定数です。
+プラットフォーム依存の定数です。
+#@end
 
 --- PATH_SEPARATOR -> Hash
 
@@ -193,11 +223,29 @@ cgi.print は $DEFAULT_OUTPUT.print と等価です。
 HTTP のステータスコードを表すハッシュです。
 
 #@until 1.9.1
---- RFC822_DAYS
+#@# 1.9.1 以降は cgi/util.rd を参照
+--- RFC822_DAYS -> [String]
 
---- RFC822_MONTHS
+[[rfc:822]] で定義されている曜日の略称を返します。
+
+@see [[rfc:822]]
+
+--- RFC822_MONTHS -> [String]
+
+[[rfc:822]] で定義されている月名の略称を返します。
+
+@see [[rfc:822]]
 #@end
+#@since 1.9.1
+--- MAX_MULTIPART_LENGTH -> Fixnum
 
+Maximum content length of multipart data
+
+--- MAX_MULTIPART_COUNT -> Fixnum
+
+Maximum number of request parameters when multipart
+
+#@end
 = module CGI::QueryExtension
 
 クエリ文字列を扱うためのメソッドを定義しているモジュールです。
@@ -387,6 +435,19 @@ ENV['SERVER_SOFTWARE'] を返します。
 
 ENV['HTTP_USER_AGENT'] を返します。
 
+#@since 1.9.1
+--- create_body(is_large) -> StringIO | Tempfile
+#@# nodoc
+
+--- files -> Hash
+
+アップロードされたファイルの名前とその内容を表すオブジェクトをペアとする要素を持つハッシュを返します。
+
+--- unescape_filename? -> bool
+#@# nodoc
+
+#@end
+
 = module CGI::QueryExtension::Value
 #@# nodoc
 
@@ -405,3 +466,8 @@ ENV['HTTP_USER_AGENT'] を返します。
 --- to_a -> Array
 --- to_ary -> Array
 #@todo
+
+= class CGI::InvalidEncoding < Exception
+
+不正な文字エンコーディングが現れたときに発生する例外です。
+

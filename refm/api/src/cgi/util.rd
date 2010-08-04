@@ -139,3 +139,29 @@ HTML を人間に見やすく整形しした文字列を返します。
           #         </BODY>
           # </HTML>
 
+#@since 1.9.1
+== Constants
+
+--- TABLE_FOR_ESCAPE_HTML__ -> Hash
+
+HTML 上でエスケープする文字列の変換テーブルを返します。
+
+    '&' => '&amp;',
+    '"' => '&quot;',
+    '<' => '&lt;',
+    '>' => '&gt;',
+
+--- RFC822_DAYS -> [String]
+
+[[rfc:822]] で定義されている曜日の略称を返します。
+
+@see [[rfc:822]]
+
+--- RFC822_MONTHS -> [String]
+
+[[rfc:822]] で定義されている月名の略称を返します。
+
+@see [[rfc:822]]
+
+
+#@end
