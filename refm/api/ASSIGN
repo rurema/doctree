@@ -113,7 +113,7 @@ bigdecimal/util                 sho-h           done
 bigdecimal/math                 sho-h           done
 cgi                             okkez           done
 cgi-lib                         okkez           done
-cgi/session
+cgi/session                     okkez
 cmath
 complex                         bornite
 continuation
