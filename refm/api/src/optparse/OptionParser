@@ -106,12 +106,22 @@ klass のインスタンスに変換されてから、OptionParser#on メソッドで登録したブロック
 @param klass 削除したいクラスオブジェクトを指定します。
 
 #@since 1.8.5
---- getopts(argv, *opts)
---- getopts(*opts)
-#@todo
+--- getopts(argv, *opts)   -> Hash
+--- getopts(*opts)         -> Hash
 
-self.new.getopts(*args) と同じです。
-[[m:OptionParser#getopts]] を参照して下さい。
+引数をパースした結果を、Hash として返します。(self.new.getopts と同じです)
+
+@param argv パースしたい配列を指定します。
+
+#@since 1.9.1
+@param opts 引数を文字列で指定します。
+#@else
+@param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
+#@end
+
+@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+
+@see [[m:OptionParser#getopts]]
 
 #@end
 
@@ -613,7 +623,7 @@ argv からオプションを取り除いたものを返します。
 @param filename 各行をパースしたいファイルの名前を文字列で指定します。
                 指定されないか nil である場合、~/.options/ に
                 プログラムのサフィックスを付けた '~/.options/コマンド名' というファイルをパースします。
-                
+
 --- environment(env)    -> [String]
 #@todo
 
@@ -642,6 +652,7 @@ argv からオプションを取り除いたものを返します。
 --- getopts(argv, *opts)   -> Hash
 --- getopts(*opts)         -> Hash
 #@todo
+
 #@until 1.9.1
 [[lib:getopts]] 相当の機能を提供します。
 getopts と違って、グローバル変数を定義しません。

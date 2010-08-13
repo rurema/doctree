@@ -34,7 +34,11 @@ OptionParser の例外クラスの基底クラスです。
 
 = redefine Kernel
 == Constants
---- ARGV
-#@todo
-optparse を require することにより、ARGV は 
-[[c:OptionParser::Arguable]] を extend します。
+--- ARGV -> Array
+
+Ruby スクリプトに与えられた引数を表す配列です。
+
+[[lib:optparse]] を require することにより、ARGV は
+OptionParser::Arguable を [[m:Object#extend]] します。
+
+@see [[c:OptionParser::Arguable]]
