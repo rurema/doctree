@@ -1,7 +1,7 @@
 有理数を扱うためのライブラリです。
 
-require する事で数値計算の結果を [[c:Rational]] オブジェクトで返す場合
-ができます。
+require する事で数値計算の結果を [[c:Rational]] オブジェクトで返すよう
+にできます。
 
   1.quo(2)              # => 0.5
   require 'rational'
@@ -14,7 +14,7 @@ require する事で数値計算の結果を [[c:Rational]] オブジェクトで返す場合
 #@else
 = reopen Kernel
 == Module Functions
---- Rational(num, den = 1)
+--- Rational(num, den = 1) -> Rational
 
 [[c:Rational]] オブジェクトを生成します。
 
@@ -93,7 +93,7 @@ num と den には整数を指定します。den が 1 の時に限り、num に
 other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 なら、浮動小数 (Float) を返します。
 
---- to_r
+--- to_r -> Rational
 
 自身を [[c:Rational]] に変換します。
 
@@ -135,7 +135,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 @see [[m:Integer#gcd]], [[m:Integer#gcdlcm]]
 
---- gcdlcm(int)
+--- gcdlcm(int) -> [Integer]
 
 自身と整数 n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)]
 を返します。
@@ -201,9 +201,11 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 #@since 1.8.8
 #@until 1.9.1
---- gcd
+--- gcd(other) -> Integer
 
-自身と整数 n の最大公約数を返します。
+自身と整数 other の最大公約数を返します。
+
+@see [[m:Integer#gcd]]
 
 #@end
 #@end
@@ -251,7 +253,7 @@ self を Float に変換してから演算子を適用します。other が Integer なら other を
 Rational に変換してから演算子を適用します。冪乗は例外です。
 
 == Class Methods
---- new!(num, den = 1)
+--- new!(num, den = 1) -> Rational
 
 [[c:Rational]] オブジェクトを生成します。
 
