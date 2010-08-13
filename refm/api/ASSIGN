@@ -195,7 +195,7 @@ observer                        snoozer05       done
 open-uri                                        done
 open3                           sho-h           done
 openssl                         
-optparse                        
+optparse                        sho-h
 ostruct                         eklerni         done
 
 # LIBRARY_NAME                  OWNER           STATUS
