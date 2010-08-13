@@ -1,5 +1,11 @@
 有理数を扱うためのライブラリです。
 
+#@since 1.9.1
+
+1.9系では Rational クラスは組み込みクラスになりました。
+
+#@else
+
 require する事で数値計算の結果を [[c:Rational]] オブジェクトで返すよう
 にできます。
 
@@ -7,11 +13,6 @@ require する事で数値計算の結果を [[c:Rational]] オブジェクトで返すよう
   require 'rational'
   1.quo(2)              # => Rational(1,2)
 
-#@since 1.9.1
-
-1.9系では Rational クラスは組み込みクラスになりました。
-
-#@else
 = reopen Kernel
 == Module Functions
 --- Rational(num, den = 1) -> Rational
@@ -77,9 +78,12 @@ num と den には整数を指定します。den が 1 の時に限り、num に
   * otherが負の整数(Integer)ならば、有理数(Rational)を返す。
   * otherが有理数(Rational)や浮動小数(Float)ならば、浮動小数(Float)を返す。
 
-  2 **  3          #=> 8
-  2 ** -3          #=> Rational(1, 8)
-  2 ** Rational(3) #=> 8.0
+例:
+
+  2 **  3             #=> 8
+  2 ** -3             #=> Rational(1, 8)
+  2 ** Rational(3)    #=> 8.0
+  2 ** Rational(1, 2) #=> 1.4142135623731
 
 = reopen Integer
 
@@ -144,7 +148,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 例:
 
-  6.gcdlcm 9                     # => [3, 18]
+  6.gcdlcm(9)                    # => [3, 18]
   2.gcdlcm(2)                    # => [2, 2]
   3.gcdlcm(-7)                   # => [1, 21]
   ((1<<31)-1).gcdlcm((1<<61)-1)  # => [1, 4951760154835678088235319297]
@@ -351,6 +355,8 @@ Rational.reduce は 1.9 系 では廃止されました。[[m:Kernel.#Rational]] の
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
+例:
+
   Rational(3, 4) + 2               # => Rational(11, 4)
   Rational(3, 4) + Rational(2, 1)  # => Rational(11, 4)
   Rational(3, 4) + 2.0             # => 2.75
@@ -364,9 +370,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 
 例:
 
-  r = Rational(3, 4)
-  r - 1                # => Rational(-1, 4)
-  r - 0.5              # => 0.25
+  Rational(3, 4) - 1   # => Rational(-1, 4)
+  Rational(3, 4) - 0.5 # => 0.25
 
 --- *(other) -> Rational | Float
 
@@ -407,6 +412,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 剰余を計算します。絶対値が self の絶対値を越えない、符号が self と同じ
 Numeric を返します。
 
+例:
+
   Rational(3, 4) % 2               # => Rational(3, 4)
   Rational(3, 4) % Rational(2, 1)  # => Rational(3, 4)
   Rational(3, 4) % 2.0             # => 0.75
@@ -431,8 +438,7 @@ other に [[c:Rational]] を指定した場合には戻り値が [[c:Rational]] を返
 す場合があります。
 
   # 1.9.1 の場合
-  r = Rational(3, 4)
-  r ** Rational(2, 1)  # => (9/16)
+  Rational(3, 4) ** Rational(2, 1)  # => (9/16)
 
 #@since 1.8.7
 --- div(other) -> Integer
