@@ -397,7 +397,7 @@ state が NULL でなければそれに値が代入され Qnil を返します。
 
 --- VALUE rb_eval_string_wrap(const char *str, int *state)
 
-((<rb_eval_string_protect>)) と同じですが，スクリプトの評価を
+[[f:rb_eval_string_protect]] と同じですが，スクリプトの評価を
 無名のモジュールのもとで行います。
 
 --- void rb_exc_fatal(VALUE err)
@@ -543,20 +543,20 @@ self は block_proc 呼び出し時点での self です。
 
 --- int rb_iterator_p()
 
-この関数はobsoleteです。((<rb_block_given_p>))を使用してください。
+この関数はobsoleteです。[[f:rb_block_given_p]] を使用してください。
 
 --- void rb_jump_tag(int tag)
 
-初出: [ruby-dev:4064]
+初出: [[ruby-dev:4064]]
 
-((<rb_load_protect>)),((<rb_eval_string_protect>)),((<rb_protect>))
+[[f:rb_load_protect]],[[f:rb_eval_string_protect]],[[f:rb_protect]]
 などで捕捉した大域脱出を再生成します。
 
 tagには上記関数の引数で受け取ったstateを指定します。
 
 --- void rb_load(VALUE fname, int wrap)
 
-参考: [ruby-list:21651]
+参考: [[ruby-list:21651]]
 
 ((<load|組込み関数>))の低レベルインタフェースです。Rubyスクリプ
 トが格納されたファイルfname をロードします。
@@ -651,7 +651,7 @@ VALUE val;
 
 --- VALUE rb_protect(VALUE (*proc)(), VALUE data, int *state)
 
-初出: [ruby-dev:4064]
+初出: [[ruby-dev:4064]]
 
 proc(data) を評価中のあらゆる大域脱出(例外を含む)を捕捉します。
 
@@ -682,7 +682,7 @@ require の C 版です。feature「fname」をロードします。
 --- VALUE rb_rescue(VALUE (*b_proc)(), VALUE data1, VALUE (*r_proc)(), VALUE data2)
 
 まず b_proc(data1) を実行し、その途中で例外が発生したら r_proc(data2) を実行します。
-捕捉する例外は ((<StandardError>)) のサブクラスだけです。
+捕捉する例外は [[c:StandardError]] のサブクラスだけです。
 
 --- VALUE rb_rescue2(VALUE (*b_proc)(), VALUE data1, VALUE (*r_proc)(), VALUE data2, ...)
 
