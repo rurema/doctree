@@ -3,8 +3,7 @@
 
 == Public Instance Methods
 
---- rake_extension(method){ ... }
-#@todo
+--- rake_extension(method){ ... } -> ()
 
 与えられたブロック内で既に存在するメソッドを再定義しようとした場合に
 警告を表示します。この場合、ブロックは評価されません。
@@ -34,7 +33,7 @@
 
 @param newext 新しい拡張子を指定します。
 
---- pathmap(spec = nil){ ... }
+--- pathmap(spec = nil){ ... } -> String
 
 与えられた書式指定文字列に応じてパス(自身)を変換します。
 
@@ -153,7 +152,7 @@ Rake タスクを定義します。
 
 主に [[m:Kernel.#directory]] を定義するために使用します。
 
---- directory(dir)
+--- directory(dir) -> ()
 
 与えられたディレクトリを作成するタスクを定義します。
 
@@ -186,7 +185,7 @@ Rake タスクを定義します。
 
 @see [[m:Rake::TaskManager#in_namespace]]
 
---- rule(*args){|t| ... }
+--- rule(*args){|t| ... } -> Rake::Task
 
 自動的に作成するタスクのためのルールを定義します。
 
@@ -197,7 +196,7 @@ Rake タスクを定義します。
     sh %{cc -o #{t.name} #{t.source}}
   end
 
---- desc(description)
+--- desc(description) -> String
 
 直後の Rake タスクの説明を登録します。
 
@@ -254,7 +253,7 @@ Rake タスクを定義します。
 @see [[m:Kernel.#exec]], [[m:Kernel.#system]]
 
 
---- ruby(*args){ ... }
+--- ruby(*args){|result, status| ... }
 
 与えられた引数で Ruby インタプリタを実行します。
 
@@ -263,6 +262,7 @@ Rake タスクを定義します。
 例:
    ruby %{-pe '$_.upcase!' <README}
 
+@see [[m:Kernel.#sh]]
 
 --- safe_ln(*args)
 

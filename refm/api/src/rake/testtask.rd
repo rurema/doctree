@@ -68,14 +68,12 @@ require rake/tasklib
 テストタスクの名前を返します。デフォルトは "test" です。
 
 --- name=(str)
-#@todo
 
 テストタスクの名前をセットします。
 
 @param str テストタスクの名前を指定します。
 
 --- options -> String
-#@todo
 
 テストスイートに渡すパラメータを返します。
 
@@ -83,21 +81,18 @@ require rake/tasklib
 デフォルトは何も指定されていません。
 
 --- options=(option_str)
-#@todo
 
 テストスイートに渡すパラメータをセットします。
 
 @param option_str テストスイートに渡すパラメータを指定します。
 
 --- pattern -> String
-#@todo
 
 テストファイルにマッチする glob パターンを返します。
 
 デフォルトは 'test/test*.rb' です。
 
 --- pattern=(pattern)
-#@todo
 
 テストファイルにマッチする glob パターンを指定します。
 

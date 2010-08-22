@@ -45,13 +45,13 @@ Gem Spec ファイルを元にして Gem パッケージを作成するタスクを定義するためのクラス
 
 タスクを定義します。
 
+GemPackageTask.new にブロックが与えられている場合に、自動的に呼び出されます。
+
 --- gem_file -> String
-#@todo
 
 Gem パッケージの名前を返します。
 
 --- gem_spec -> Gem::Specification
-#@todo
 
 package ターゲットで使用する gemspec を返します。
 
@@ -59,14 +59,12 @@ gemspec にはパッケージ名、バージョン、パッケージに含まれるファイルなどが定義
 されているので、それらを明示的に指定する必要はありません。
 
 --- gem_spec=(gem_spec)
-#@todo
 
 gemspec をセットします。
 
 @param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- init(gem_spec)
-#@todo
 
 自身の各属性に初期値をセットします。
 
