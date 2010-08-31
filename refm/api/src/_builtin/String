@@ -3089,3 +3089,14 @@ self のエンコーディングが使われます。変換後の self を返します。
 @see [[m:Kernel.#Rational]]
 
 #@end
+#@since 1.9.3
+--- prepend(other_str) -> String
+文字列 other_str を先頭に破壊的に追加します。
+
+@param other_str 追加したい文字列を指定します。
+
+例:
+  a = "world"
+  a.prepend("hello ") # => "hello world"
+  a                   # => "hello world"
+#@end
