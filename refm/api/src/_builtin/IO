@@ -1691,12 +1691,12 @@ IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
 
 #@since 1.9.2
 
---- WaitReadable
+--- WaitReadable -> Module
 #@todo
+[[m:IO#read_nonblock]] を参照してください。
 
-@see [[m:IO#read_nonblock]]
---- WaitWritable
+--- WaitWritable -> Module
 #@todo
+[[m:IO#write_nonblock]] を参照してください。
 
-@see [[m:IO#write_nonblock]]
 #@end
