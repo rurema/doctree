@@ -1700,3 +1700,9 @@ IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
 [[m:IO#write_nonblock]] を参照してください。
 
 #@end
+#@since 1.9.3
+--- NULL -> String
+#@todo
+NULLデバイスのファイル名です。
+
+#@end
