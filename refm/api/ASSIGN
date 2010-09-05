@@ -185,9 +185,9 @@ net/ftptls
 net/http                        ohai            done
 net/https
 net/imap
-net/pop
+net/pop                         ohai
 net/smtp                        ohai            done
-net/telnet                      ohai
+net/telnet                      ohai            done
 net/telnets
 nkf                             ohai            done
 objspace
