@@ -518,6 +518,9 @@ ready は obsolete です。
 このメソッドはセッション開始([[m:Net::SMTP#start]])後、
 メールを送る前に呼びだしてください。
 
+通常は [[m:Net::SMTP.start]] や [[m:Net::SMTP#start]] で認証を
+行うためこれを利用する必要はないはずです。
+
 @param user 認証で使うアカウント名
 @param secret 認証で使うパスワード
 @param authtype 認証の種類(:plain, :login, :cram_md5 のいずれか)
@@ -530,6 +533,9 @@ PLAIN 認証を行います。
 このメソッドはセッション開始([[m:Net::SMTP#start]])後、
 メールを送る前に呼びだしてください。
 
+通常は [[m:Net::SMTP.start]] や [[m:Net::SMTP#start]] で認証を
+行うためこれを利用する必要はないはずです。
+
 @param user 認証で使うアカウント名
 @param secret 認証で使うパスワード
 
@@ -538,6 +544,9 @@ LOGIN 認証を行います。
 
 このメソッドはセッション開始([[m:Net::SMTP#start]])後、
 メールを送る前に呼びだしてください。
+
+通常は [[m:Net::SMTP.start]] や [[m:Net::SMTP#start]] で認証を
+行うためこれを利用する必要はないはずです。
 
 @param user 認証で使うアカウント名
 @param secret 認証で使うパスワード
@@ -548,6 +557,9 @@ CRAM-MD5 認証を行います。
 
 このメソッドはセッション開始([[m:Net::SMTP#start]])後、
 メールを送る前に呼びだしてください。
+
+通常は [[m:Net::SMTP.start]] や [[m:Net::SMTP#start]] で認証を
+行うためこれを利用する必要はないはずです。
 
 @param user 認証で使うアカウント名
 @param secret 認証で使うパスワード
