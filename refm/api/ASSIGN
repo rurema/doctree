@@ -186,7 +186,7 @@ net/http                        ohai            done
 net/https
 net/imap
 net/pop
-net/smtp                        ohai
+net/smtp                        ohai            done
 net/telnet                      ohai
 net/telnets
 nkf                             ohai            done

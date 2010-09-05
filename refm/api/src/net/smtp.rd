@@ -14,7 +14,7 @@ SMTP を使ってメールを送るにはまず SMTP.start でセッションを開きます。
 のでおすすめです。
 
   require 'net/smtp'
-  Net::SMTP.start( 'smtp-server.example.com', 25 ) {|smtp|
+  Net::SMTP.start( 'smtp.example.com', 25 ) {|smtp|
     # use smtp object only in this block
   }
 
@@ -26,13 +26,13 @@ smtp-server.example.com は適切な SMTP サーバのアドレスに読みかえてください。
 
   require 'net/smtp'
   
-  Net::SMTP.start('your.smtp.server', 25) {|smtp|
-    smtp.send_message(<<-EndOfMail, 'your@mail.address', 'to@some.domain')
-  From: Your Name <your@mail.address>
-  To: Dest Address <to@some.domain>
+  Net::SMTP.start('smtp.example.com', 25) {|smtp|
+    smtp.send_message(<<-EndOfMail, 'from@example.com', 'to@example.net')
+  From: Your Name <from@example.com>
+  To: Dest Address <to@example.net>
   Subject: test mail
   Date: Sat, 23 Jun 2001 16:26:43 +0900
-  Message-Id: <unique.message.id.string@some.domain>
+  Message-Id: <unique.message.id.string@yourhost.example.com>
   
   This is a test mail.
     EndOfMail
@@ -46,8 +46,8 @@ File のように GC 時に勝手に close されることもありません。
 
   # using SMTP#finish
   require 'net/smtp'
-  smtp = Net::SMTP.start('your.smtp.server', 25)
-  smtp.send_message mail_string, 'from@address', 'to@address'
+  smtp = Net::SMTP.start('smtp.example.com', 25)
+  smtp.send_message mail_string, 'from@example.com', 'to@example.net'
   smtp.finish
 
 またブロック付きの [[m:Net::SMTP.start]], [[m:Net::SMTP#start]]
@@ -56,8 +56,8 @@ File のように GC 時に勝手に close されることもありません。
 
   # using block form of SMTP.start
   require 'net/smtp'
-  Net::SMTP.start('your.smtp.server', 25) {|smtp|
-    smtp.send_message mail_string, 'from@address', 'to@address'
+  Net::SMTP.start('smtp.example.com', 25) {|smtp|
+    smtp.send_message mail_string, 'from@example.com', 'to@example.net'
   }
 
 ==== 文字列以外からの送信
@@ -70,7 +70,7 @@ each メソッドを持ったオブジェクトからならなんでも送ることができます。
 
   Net::SMTP.start('your.smtp.server', 25) {|smtp|
     File.open('Mail/draft/1') {|f|
-      smtp.send_message f, 'from@example.ne.jp', 'to@example.ne.jp'
+      smtp.send_message f, 'from@example.com', 'to@example.net'
     }
   }
 
@@ -86,7 +86,7 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼ぶ) を要求
 ください。もちろんそれ以外の時も HELO ドメインはちゃんと渡すのが
 よいでしょう。
 
-  Net::SMTP.start('your.smtp.server.example.ne.jp', 25, 'mail.from.domain.example.jp') {|smtp|
+  Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com') {|smtp|
 
 よくあるダイヤルアップホストの場合、HELO ドメインには ISP のメール
 サーバのドメインを使っておけばたいてい通ります。
@@ -100,7 +100,7 @@ SMTP ではメールを送る側のホストの名前 (HELO ドメインと呼ぶ) を要求
 の引数に追加の引数を渡してください。
 
   # 例
-  Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.jp',
+  Net::SMTP.start('smtp.example.com', 25, 'yourdomain.example.com',
                   'your_account', 'your_password', :cram_md5)
 
 === TLSを用いたSMTP通信
@@ -180,8 +180,8 @@ Example:
 
   require 'net/smtp'
 
-  Net::SMTP.start('your.smtp.server') {|smtp|
-    smtp.send_message mail_string, 'from@example.jp', 'dest@example.jp'
+  Net::SMTP.start('smtp.example.com') {|smtp|
+    smtp.send_message mail_string, 'from@example.jp', 'to@example.jp'
   }
 
 @param address 接続するサーバをホスト名もしくはIPアドレスで指定します
@@ -448,10 +448,10 @@ to_addrs には送信先メールアドレスを文字列で渡します。
 
   require 'net/smtp'
 
-  Net::SMTP.start('your.smtp.server') {|smtp|
+  Net::SMTP.start('smtp.example.com') {|smtp|
     smtp.send_message mail_string,
-                      'from@mail.address',
-                      'dest@mail.address', 'dest2@mail.address'
+                      'from@example.com',
+                      'to1@example.net', 'to2@example.net'
   }
 
 sendmail は obsolete です。
@@ -486,9 +486,9 @@ to_addrs には送信先メールアドレスを文字列で渡します。
   require 'net/smtp'
 
   Net::SMTP.start('smtp.exmaple.com', 25) {|smtp|
-    smtp.open_message_stream('from@mail.addr', 'dest@mail.addr') {|f|
-      f.puts 'From: aamine@loveruby.net'
-      f.puts 'To: someone@somedomain.org'
+    smtp.open_message_stream('from@example.com', 'to@example.net') {|f|
+      f.puts 'From: from@example.com'
+      f.puts 'To: to@example.net'
       f.puts 'Subject: test mail'
       f.puts
       f.puts 'This is test mail.'
@@ -632,8 +632,8 @@ QUIT が送られるため利用する必要はないはずです。
 #@# --- OMASK
 #@# --- CRAM_BUFSIZE
 
-#@# --- Revision -> String
-#@# ファイルのリビジョンです。
+--- Revision -> String
+ファイルのリビジョンです。使わないでください。
 
 #@since 1.8.7
 = class Net::SMTP::Response < Object
