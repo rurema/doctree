@@ -10,7 +10,7 @@ include Gem::UserInteraction
 == Singleton Methods
 
 --- new(spec) -> Gem::Builder
-#@todo
+
 与えられた [[c:Gem::Specification]] のインスタンスによって
 [[c:Gem::Builder]] のインスタンスを生成します。
 
@@ -19,14 +19,12 @@ include Gem::UserInteraction
 == Instance Methods
 
 --- build -> String
-#@todo
 
 スペックから Gem を作成する。
 
 @return 作成したファイル名を返します。
 
 --- success -> String
-#@todo
 
 Gem の作成に成功したときに表示するメッセージを返します。
 
