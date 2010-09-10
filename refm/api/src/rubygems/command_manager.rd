@@ -32,8 +32,25 @@ require rubygems/commands/which_command
 
 gem コマンドによってサポートされているサブコマンドを管理するライブラリです。
 
+Extra commands can be provided by writing a rubygems_plugin.rb
+file in an installed gem.  You should register your command against the
+Gem::CommandManager instance, like this:
+
+  # file rubygems_plugin.rb
+  require 'rubygems/command_manager'
+
+  class Gem::Commands::EditCommand < Gem::Command
+    # ...
+  end
+
+  Gem::CommandManager.instance.register_command :edit
+
+See Gem::Command for instructions on writing gem commands.
+
 = class Gem::CommandManager
 include Gem::UserInteraction
+
+gem コマンドによってサポートされているサブコマンドを管理するクラスです。
 
 == Singleton Methods
 
@@ -45,22 +62,16 @@ include Gem::UserInteraction
 == Public Instance Methods
 
 --- [](command_name) -> Gem::Command | nil
-#@todo
 
 引数で指定されたコマンド名に対応するクラスのインスタンスを返します。
 
 @param command_name コマンド名を文字列で指定します。
 
-@return [[c:Gem::Command]] のサブクラスのインスタンスを返します。
-
-@raise NameError 登録されていないコマンドを指定した場合に発生します。
-
 --- command_names -> Array
-#@todo
+
 登録されているコマンド名の配列を返します。
 
 --- find_command(command_name) -> Gem::Command | nil
-#@todo
 
 登録されているコマンドからマッチしたものを返します。
 
@@ -68,32 +79,28 @@ include Gem::UserInteraction
 
 @return [[c:Gem::Command]] のサブクラスのインスタンスを返します。
 
-@raise StandardError マッチする可能性のあるコマンドが複数ある場合に発生します。
-                     また、マッチするコマンドが無かった場合にも発生します。
+@raise RuntimeError マッチする可能性のあるコマンドが複数ある場合に発生します。
+                    また、マッチするコマンドが無かった場合にも発生します。
 
 --- find_command_possibilities(command_name) -> Array
-#@todo
 
 登録されているコマンドでマッチする可能性のあるものを返します。
 
 @param command_name コマンド名を文字列で指定します。
 
 --- process_args(args) -> ()
-#@todo
 
 引数 args を処理して gem コマンドを実行するために必要な処理を行います。
 
 @param args コマンドラインから受け取った引数を指定します。
 
 --- register_command(command_name) -> false
-#@todo
 
 コマンドを自身に登録します。
 
-@param command_name コマンド名を指定します。
+@param command_name コマンド名をシンボルで指定します。
 
 --- run(args) -> ()
-#@todo
 
 引数 args を処理して gem コマンドを実行中のエラーを捕捉します。
 
