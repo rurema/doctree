@@ -26,7 +26,6 @@ include Gem::UserInteraction
 @see [[m:OptionParser#make_switch]]
 
 --- arguments -> String
-#@todo
 
 このメソッドはサブクラスで再定義されます。
 コマンドが取る引数の説明を表示するために使用します。
@@ -34,7 +33,6 @@ include Gem::UserInteraction
 サブクラスで実装する場合は、一つの引数につき一行で、左揃えの文字列を返すようにしてください。
 
 --- begins?(long, short) -> bool
-#@todo
 
 long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します。
 
@@ -43,24 +41,20 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @param short 短いコマンドラインオプションを指定します。
 
 --- command -> String
-#@todo
 
 コマンドの名前を返します。
 
 --- defaults -> Hash
-#@todo
 
 デフォルトのオプションを返します。
 
 --- defaults=(hash)
-#@todo
 
 コマンドで使用するデフォルトのオプションをセットします。
 
 @param hash オプションをハッシュで指定します。
 
 --- defaults_str -> String
-#@todo
 
 このメソッドはサブクラスで再定義されます。
 コマンドのオプションで使用するデフォルト値を表示するために使用する文字列を返します。
@@ -68,13 +62,11 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @see [[m:Gem::Command#arguments]]
 
 --- description -> String
-#@todo
 
 このメソッドはサブクラスで再定義されます。
 コマンドが実行することを説明する文字列を返します。
 
 --- execute -> ()
-#@todo
 
 このメソッドはサブクラスで再定義されます。
 コマンドを実行します。
@@ -82,21 +74,18 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @raise RuntimeError このメソッドがサブクラスで再定義されていない場合に発生します。
 
 --- get_all_gem_names -> Array
-#@todo
 
 コマンドラインで与えられた Gem の名前を全て取得して返します。
 
 @raise Gem::CommandLineError コマンドライン引数から Gem の名前を取得できない場合に発生します。
 
 --- get_one_gem_name -> String
-#@todo
 
 コマンドラインで与えられた Gem の名前を一つ取得して返します。
 
 @raise Gem::CommandLineError コマンドライン引数から Gem の名前を一つだけ取得できない場合に発生します。
 
 --- get_one_optional_argument -> String
-#@todo
 
 コマンドラインからオプショナルな引数を取得して返します。
 
@@ -108,11 +97,10 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @param args 引数のリストを指定します。
 
 --- handles?(args) -> bool
-#@todo
 
-与えられた引数のリストを処理することが出来れば真を返します。処理できない場合は偽を返します。
+与えられた引数リストを処理することが出来れば真を返します。処理できない場合は偽を返します。
 
-@param args
+@param args 引数リストを指定子明日。
 
 --- invoke(*args)
 #@todo
@@ -121,66 +109,71 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 
 @param args
 
---- merge_options(new_options)
-#@todo
+--- merge_options(new_options) -> Hash
 
 与えられたオプションとデフォルトのオプションをマージします。
 しかし、新しいオプションに同一のキーがあってもデフォルトのオプションは変更されません。
 
+@param new_options 新しいコマンドオプションをハッシュで指定します。
+
 --- options -> Hash
-#@todo
 
 コマンドで使用するオプションを返します。
 
 --- program_name -> String
-#@todo
 
 コマンドラインで実行するときに使用するプログラム名を返します。
 
 
 --- program_name=(name)
-#@todo
 
 コマンドラインで実行するときに使用するプログラム名をセットします。
 
 @param name プログラム名を指定します。
 
 --- remove_option(name)
-#@todo
 
 与えられた名前に一致するコマンドラインオプションを削除します。
 
---- show_help
-#@todo
+--- show_help -> ()
 
 コマンドの使用方法を表示します。
 
 --- summary -> String
-#@todo
 
 コマンドの短い説明を返します。
 
 --- summary=(description)
-#@todo
 
 コマンドの短い説明をセットします。
 
 @param description コマンドの短い説明を指定します。
 
 --- usage -> String
-#@todo
 
 このメソッドはサブクラスで再定義されます。
 個々の gem コマンドの使用方法を返します。
 
---- when_invoked
-#@todo
+--- when_invoked{ ... } -> Proc
 
 コマンドが実行されたときに評価するブロックを登録します。
 
 通常のコマンド呼び出しは、そのコマンドクラスの execute メソッドを実行するだけです。
 このメソッドでブロックを登録すると、通常の呼び出しを上書きすることができます。
 これはテストメソッドで正しくコマンドの呼び出しが実行されたことを確認するのに使用することが出来ます。
+
+#@since 1.9.2
+--- show_lookup_failure(gem_name, version, errors = nil) -> ()
+#@todo
+Gem が見つからなかった場合、メッセージを表示するために使用するメソッドです。
+
+@param gem_name Gem の名前を指定します。
+
+@param version Gem のバージョンを指定します。
+
+@param errors Gem が見つからなかった理由を表すオブジェクトを格納した配列を指定します。
+
+#@end
 
 == Singleton Methods
 
@@ -199,6 +192,19 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @param cmd コマンド名を指定します。
 
 @param args 追加の引数を配列か、空白で区切った文字列で指定します。
+
+#@since 1.9.2
+--- build_args -> Array
+#@todo
+Gem をビルドするときに使用するパラメータを返します。
+
+--- build_args=(value)
+#@todo
+Gem をビルドするときに使用するパラメータをセットします。
+
+@param value Gem をビルドするときに使用するパラメータを指定します。
+
+#@end
 
 --- common_options -> Array
 #@todo
@@ -234,6 +240,6 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 == Constants
 
 --- HELP -> String
-#@todo
+
 ヘルプメッセージを表す文字列です。
 
