@@ -25,9 +25,8 @@ include Gem::VersionOption
 == Public Instance Methods
 
 --- get_path(gemname, version_req) -> String | nil
-#@todo
 
-引数で指定された条件にマッチする Gem パッケージのキャッシュがあるパスを返します。
+引数で指定された条件にマッチする Gem パッケージを保存しているパスを返します。
 
 @param gemname Gem パッケージの名前を指定します。
 

@@ -43,14 +43,18 @@ include Gem::VersionOption
 コマンドを実行します。
 
 --- find_gems(name, source_index) -> Hash
-#@todo
 
-@param name
+与えられた Gem の名前をインデックスから検索します。
 
-@param source_index
+@param name Gem の名前を指定します。
+
+@param source_index [[c:Gem::SourceIndex]] のインスタンスを指定します。
+
+@see [[m:Gem::SourceIndex#search]]
 
 --- find_reverse_dependencies(spec) -> Array
-#@todo
+
+与えられた Gem スペックに依存する Gem のリストを返します。
 
 @param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
