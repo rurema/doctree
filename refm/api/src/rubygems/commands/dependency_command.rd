@@ -30,6 +30,18 @@ include Gem::VersionOption
 
 == Public Instance Methods
 
+--- usage -> String
+
+使用方法を表す文字列を返します。
+
+--- arguments -> String
+
+引数の説明を表す文字列を返します。
+
+--- execute -> ()
+
+コマンドを実行します。
+
 --- find_gems(name, source_index) -> Hash
 #@todo
 
@@ -40,11 +52,12 @@ include Gem::VersionOption
 --- find_reverse_dependencies(spec) -> Array
 #@todo
 
-@param spec
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- print_dependencies(spec, level = 0) -> String
-#@todo
 
-@param spec
+依存関係を表す文字列を返します。
 
-@param level
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
+
+@param level 依存関係の深さを指定します。
