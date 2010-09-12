@@ -1,24 +1,28 @@
-メールを受信するためのプロトコル
-POP3 (Post Office Protocol version 3) を扱うライブラリです。
+このライブラリは、POP3 (Post Office Protocol version 3) を
+用いてPOPサーバからメールを受信する機能を提供するライブラリです。
 
 POP3 の実装は [[RFC:1939]] に基いています。
 
+[[RFC:2449]] で定義されているPOP3拡張には対応していません。
 === 使用例
 
 ==== メールの受信
 
 以下のコードは、メールを受信してファイル 'inbox/1' 'inbox/2'... に
-書きこみ、サーバ上からメールを消します。pop3.server.address は適宜
-読みかえてください。
+書きこみ、サーバ上からメールを消します。
+
+'pop.example.com' は適当なPOP3のサーバのホスト名に、
+'YourAccount' と 'YourPassword' は適当なアカウント名とパスワード
+に適宜読みかえてください。
 
   require 'net/pop'
   
-  pop = Net::POP3.new('pop3.server.address', 110)
-  pop.start('YourAccount', 'YourPassword')          ###
+  pop = Net::POP3.new('pop.example.com', 110)
+  pop.start('YourAccount', 'YourPassword') # POPのセッションを開始
   if pop.mails.empty?
     $stderr.puts 'no mail.'
   else
-    pop.mails.each_with_index do |m, idx|
+    pop.mails.each_with_index do |m, idx|  # 各メッセージにアクセスする
       File.open("inbox/#{idx + 1}", 'w') {|f|
         f.write m.pop
       }
@@ -26,7 +30,7 @@ POP3 の実装は [[RFC:1939]] に基いています。
     end
     $stderr.puts "#{pop.mails.size} mails popped."
   end
-  pop.finish                                        ###
+  pop.finish                                        # セッションを終了する
 
 POP サーバはネットワークのむこうに存在するので、
 なにか仕事をさせるにはその前に開始手続きを、
@@ -34,9 +38,9 @@ POP サーバはネットワークのむこうに存在するので、
 それを行うのが [[m:Net::POP3#start]] と [[m:Net::POP3#finish]] で、
 POP3 オブジェクトはその二つのメソッドの間でだけ有効になります。
 
-サーバ上のメールは POPMail オブジェクトとして表現されており、この
+サーバ上のメールは [[c:Net::POPMail]] オブジェクトとして表現されており、この
 オブジェクトのメソッドを呼ぶことでメールを取ってきたり消したりする
-ことができます。[[m:Net::POP3#mails]] はこの POPMail オブジェクトの配列であり、
+ことができます。[[m:Net::POP3#mails]] はこの [[c:Net::POPMail]] オブジェクトの配列であり、
 [[m:Net::POP3#each_mail]] はさらに pop.mails.each のショートカットです。
 
 ==== 短くする
@@ -47,7 +51,7 @@ POP3.new, #start, #finish を併合できます。
 
   require 'net/pop'
   
-  Net::POP3.start('pop3.server.address', 110,
+  Net::POP3.start('pop.example.com', 110,
                   'YourAccount', 'YourPassword') {|pop|
     if pop.mails.empty?
       $stderr.puts 'no mail.'
@@ -68,7 +72,7 @@ POP3.new, #start, #finish を併合できます。
 
   require 'net/pop'
   
-  Net::POP3.start('pop3.server.address', 110,
+  Net::POP3.start('pop.example.com', 110,
                   'YourAccount', 'YourPassword') {|pop|
     if pop.mails.empty?
       $stderr.puts 'no mail.'
@@ -88,7 +92,7 @@ POP3.new, #start, #finish を併合できます。
   require 'net/pop'
   
   i = 0
-  Net::POP3.delete_all('pop3.server.address', 110,
+  Net::POP3.delete_all('pop.example.com', 110,
                        'YourAccount', 'YourPassword') do |m|
     File.open("inbox/#{i}", 'w') {|f|
       f.write m.pop
@@ -96,7 +100,7 @@ POP3.new, #start, #finish を併合できます。
     i += 1
   end
 
-==== ファイルに直接書く
+==== メモリ使用量を減らす
 
 これまでの例では [[m:Net::POPMail#pop]] を使い、
 メールをひとつの文字列としてうけとっていました。
@@ -106,12 +110,31 @@ POP3.new, #start, #finish を併合できます。
 File オブジェクトを与える手が使えます。
 
   require 'net/pop'
-
-  Net::POP3.delete_all('pop3.server.address', 110,
+  
+  i = 0
+  Net::POP3.delete_all('pop.example.com', 110,
                        'YourAccount', 'YourPassword') do |m|
-    File.open('inbox', 'w') {|f|
-        m.pop f   ####
+    File.open('inbox/#{i}', 'w') {|f|
+        m.pop f
     }
+    i += 1
+  end
+
+[[m:Net::POPMail#pop]]にブロックを渡すと、
+メールデータを細かく分割してブロックを呼びだします。
+この機能を使って同様のことができます。
+
+  require 'net/pop'
+  
+  i = 0
+  Net::POP3.delete_all('pop.example.com', 110,
+                       'YourAccount', 'YourPassword') do |m|
+    File.open('inbox/#{i}', 'w') {|f|
+      m.pop {|chunk|
+        f.write(chunk)
+      }
+    }
+    i += 1
   end
 
 ==== APOP を使う
@@ -124,7 +147,7 @@ Net::POP3 クラスのかわりに Net::APOP クラスを使うと、
   require 'net/pop'
   
   # use APOP authentication if $isapop == true
-  pop = Net::POP3.APOP($isapop).new('apop.server.address', 110)
+  pop = Net::POP3.APOP($isapop).new('apop.example.com', 110)
   pop.start(YourAccount', 'YourPassword') {|pop|
     # 残りのコードは同じ
   }
@@ -133,27 +156,79 @@ Net::POP3 クラスのかわりに Net::APOP クラスを使うと、
 delete_all、auth_only なども APOP とともに使えます。
 
 
+==== UIDL コマンドを使って特定のメールだけを取り出す
+
+利用しているPOP3サーバが UIDL 機能を提供している場合には、
+以下のようにして特定のメールだけを取り出すことができます。
+
+  def need_pop?(id)
+    # 取り出したいメールの場合に真を返す
+  end
+  
+  Net::POP3.start('pop.example.com', 110,
+                  'Your account', 'Your password') do |pop|
+    pop.mails.select { |m| need_pop?(m.unique_id) }.each do |m|
+      do_something(m.pop)
+    end
+  end
+
+[[Net::POPMail#unique_id]] はメッセージのユニークIDを文字列で返します。
+これは通常そのメッセージのハッシュ値です。
+
+==== SSL/TLS による暗号化
+このライブラリは pop3s と呼ばれる、995番ポートを使いPOP3の通信全体を
+SSLで包む方法での通信の認証および暗号化が可能です。
+この方法は標準化されていません。
+
+[[RFC:2595]] で定義されている STLS 拡張による TLS の利用はできません。
+
+[[m:Net::POP3#enable_ssl]] でそのオブジェクトが SSL を利用するように
+設定します。
+
+また、[[m:Net::POP3.enable_ssl]] で以降生成されるすべての
+[[c:Net::POP3]] オブジェクトで SSL を利用するように設定できます。
+グローバルに状態を変更するのであまり利用しないほうがよいでしょう。
+
 
 = class Net::POP3 < Object
-#@# class alias: Net::POP
-#@# class alias: Net::POPSession
+alias Net::POP
+alias Net::POPSession
+
+POP3 のセッションを表すクラスです。
 
 == Class Methods
 
---- new(address, port = 110, apop = false)
-#@todo
+--- new(address, port = nil, apop = false) -> Net::POP3
+[[c:Net::POP3]] オブジェクトを生成します。
 
-Net::POP3 オブジェクトを生成します。まだ接続はしません。
+このメソッドではサーバの接続は行いません。
 apop が真のときは APOP 認証を行うオブジェクトを生成します。
 
---- start(address, port = 110, account, password)
---- start(address, port = 110, account, password) {|pop| .... }
-#@todo
+port に nil を渡すと、適当なポート(通常は110、SSL利用時には 995)を
+使います。
 
-address の port 番ポートに接続し、アカウント account パスワード
-password で POP ログインします。第二引数 port に nil を渡すと
-POP3 のデフォルトポート(110)を使います。
-  
+@param address POP3サーバのホスト名文字列
+@param port 接続するPOP3サーバのポート番号
+@param apop 真の場合にはAPOPで認証します
+
+@see [[m:Net::POP3#start]]
+--- start(address, port = nil, account=nil, password=nil, isapop=false) -> Net::POP3
+--- start(address, port = nil, account=nil, password=nil, isapop=false) {|pop| .... } -> object
+
+[[c:Net::POP3]] オブジェクトを生成し、サーバへ接続します。
+
+ブロックを与えない場合には生成したオブジェクトを返します。
+
+ブロックを与えた場合には、生成した [[c:Net::POP3]] オブジェクトが
+ブロックに渡され、ブロックが終わったときにセッションを終了させます。
+この場合返り値はブロックの返り値となります。
+
+port に nil を渡すと、適当なポート(通常は110、SSL利用時には 995)を
+使います。
+
+以下のコードと同じ動作をします。
+  Net::POP3.new(address, port, isapop).start(account, password)
+
 使用例:
 
   require 'net/pop'
@@ -165,11 +240,21 @@ POP3 のデフォルトポート(110)を使います。
     end
   }
 
---- APOP(is_apop)
-#@todo
+@param address POP3サーバのホスト名文字列
+@param port 接続するPOP3サーバのポート番号
+@param account アカウント名文字列
+@param password パスワード文字列
+@param isapop 真でAPOPを利用します
 
-bool が真なら Net::APOP クラス、偽なら Net::POP3 クラスを返します。
-  
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPAuthenticationError 認証に失敗した、もしくはAPOPを利用しようとしたがサーバがAPOPを提供していない場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+
+@see [[m:Net::POP3#start]]
+--- APOP(is_apop) -> Class
+bool が真なら [[c:Net::APOP]] クラス、偽なら [[c:Net::POP3]] クラスを返します。
+
 使用例:
 
   require 'net/pop'
@@ -179,13 +264,20 @@ bool が真なら Net::APOP クラス、偽なら Net::POP3 クラスを返します。
     ....
   }
 
---- foreach(address, port = 110, account, password) {|mail| .... }
-#@todo
+@param is_apop 真の場合に Net::APOP を返します。
 
-POP セッションを開き、サーバ上のすべてのメールに対して繰り返します。
-以下と同じです。
+--- foreach(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+POP セッションを開始し、
+サーバ上のすべてのメールを取りだし、
+個々のメールを引数としてブロックを呼びだします。
 
-  Net::POP3.start(address, port, account, password) {|pop|
+個々のメールは [[c:Net::POPMail]] のインスタンスで渡されます。
+
+port に nil を渡すと、適当なポート(通常は110、SSL利用時には 995)を
+使います。
+
+以下のコードと同様の処理をします。
+  Net::POP3.start(address, port, account, password, isapop=false) {|pop|
     pop.each_mail do |m|
       yield m
     end
@@ -195,18 +287,33 @@ POP セッションを開き、サーバ上のすべてのメールに対して繰り返します。
 
   require 'net/pop'
 
-  Net::POP3.foreach('your.pop.server', 110,
+  Net::POP3.foreach('pop.example.com', 110,
                     'YourAccount', 'YourPassword') do |m|
     file.write m.pop
     m.delete if $DELETE
   end
 
---- delete_all(address, port = 110, account, password)
---- delete_all(address, port = 110, account, password) {|mail| .... }
-#@todo
+@param address POP3サーバのホスト名文字列
+@param port 接続するPOP3サーバのポート番号
+@param account アカウント名文字列
+@param password パスワード文字列
+@param isapop 真でAPOPを利用します
 
-POP セッションを開き、サーバ上のメールをすべて削除します。
-ブロックが与えられた時は削除する前にブロックにそのメールを渡します。
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPAuthenticationError 認証に失敗した、もしくはAPOPを利用しようとしたがサーバがAPOPを提供していない場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+@see [[m:Net::POP3.start]], [[m:Net::POP3#each_mail]]
+
+--- delete_all(address, port = nil, account, password, isapop=false) -> ()
+--- delete_all(address, port = nil, account, password, isapop=false) {|mail| .... } -> ()
+POP セッションを開始し、サーバ上のメールを全て消去します。
+
+ブロックを与えられたときは消去する前に各メールを引数としてブロックを呼びだします。
+メールは [[c:Net::POPMail]] のインスタンスとして渡されます。
+
+port に nil を渡すと、適当なポート(通常は110、SSL利用時には 995)を
+使います。
 
 使用例:
 
@@ -216,112 +323,198 @@ POP セッションを開き、サーバ上のメールをすべて削除します。
     puts m.pop
   end
 
---- auth_only(address, port = 110, account, password)
-#@todo
+@param address POP3サーバのホスト名文字列
+@param port 接続するPOP3サーバのポート番号
+@param account アカウント名文字列
+@param password パスワード文字列
+@param isapop 真でAPOPを利用します
 
-POP セッションを開き認証だけを行って接続を切ります。
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPAuthenticationError 認証に失敗した、もしくはAPOPを利用しようとしたがサーバがAPOPを提供していない場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+@see [[m:Net::POP3.start]], [[m:Net::POP3#delete_all]]
+
+--- auth_only(address, port = nil, account, password, isapop=false)
+POP セッションを開き、認証だけを行って接続を切ります。
+
 主に POP before SMTP のために用意されています。
+
 
 使用例:
 
   require 'net/pop'
 
-  Net::POP3.auth_only('your.pop3.server', nil,     # using default port (110)
+  Net::POP3.auth_only('pop.example.com', nil,     # using default port (110)
                       'YourAccount', 'YourPassword')
 
---- default_port
-#@since 1.9.1
---- default_pop3_port
-#@todo
+@param address POP3サーバのホスト名文字列
+@param port 接続するPOP3サーバのポート番号
+@param account アカウント名文字列
+@param password パスワード文字列
+@param isapop 真でAPOPを利用します
 
---- default_pop3s_port
-#@todo
+@raise Net::POPAuthenticationError 認証に失敗した、もしくはAPOPを利用しようとしたがサーバがAPOPを提供していない場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+
+--- default_port -> Integer
+#@since 1.8.7
+--- default_pop3_port -> Integer
+POP3 のデフォルトのポート番号(110)を返します。
+
+--- default_pop3s_port -> Integer
+デフォルトのPOP3Sのポート番号(995)を返します。
 
 --- certs
 #@todo
-
-will be altered by #ssl_context.
+SSL のパラメータの ca_file (なければ ca_path) を返します。
 
 --- verify
 #@todo
+SSL のパラメータの verify_mode を返します。
 
-will be altered by #ssl_context.
+--- use_ssl? -> bool
+新しく生成する [[c:Net::POP3]] オブジェクトが
+SSL による通信利用するならば真を返します。
 
---- use_ssl?
-#@todo
 
---- enable_ssl(verify, certs)
-#@todo
+--- enable_ssl(verify_or_params={}, certs=nil) -> ()
+新しく生成する [[c:Net::POP3]] オブジェクトが
+SSL による通信利用するように設定します。
 
-signature will be changed to enable_ssl(ctx).
+verify_or_params にハッシュを渡した場合には、接続時に生成される
+[[c:OpenSSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSLContext#set_params]] に渡されます。
+certs は無視されます。
 
---- disable_ssl
-#@todo
+verify_or_params がハッシュでない場合には、接続時に生成される
+[[c:OpenSSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSLContext#set_params]] に
+  { :verify_mode => verify_or_params, :ca_path => certs }
+というハッシュが渡されます。
+
+@param verify_or_params SSLの設定のハッシュ、もしくは SSL の verify_mode
+@param certs SSL の ca_path
+
+@see [[m:Net::POP3.disable_ssl]], [[m:Net::POP3.use_ssl?]]
+
+--- ssl_params -> Hash|nil
+SSL での接続を有効にしている場合には、
+SSL の設定のハッシュを返します。
+
+このハッシュは、接続時に生成される
+[[c:OpenSSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSLContext#set_params]] に渡されます。
+このハッシュを変更することで、利用されるパラメータが
+変更されます。
+
+SSL を有効にしていない場合には nil を返します。
+
+#@# internal use
+#@# --- create_ssl_params(verify_or_params = {}, certs = nil)
+#@# 
+
+--- disable_ssl -> ()
+新しく生成する [[c:Net::POP3]] オブジェクトが
+SSL を利用しないように設定します。
+
+@see [[m:Net::POP3.enable_ssl]], [[m:Net::POP3.use_ssl?]]
 
 #@end
 
---- socket_type
-#@todo
+--- socket_type -> Class
 
 このメソッドは obsolete です。
 使わないでください。
 
 == Instance Methods
 
-#@since 1.9.1
---- use_ssl?
-#@todo
+#@since 1.8.7
 
---- enable_ssl(verify, certs)
-#@todo
+--- use_ssl? -> bool
+このインスタンスが SSL を使って接続するなら真を返します。
 
---- disable_ssl
-#@todo
+@see [[m:Net::POP3#enable_ssl]], [[m:Net::POP3#disable_ssl]]
+
+--- enable_ssl(verify_or_params={}, certs=nil) -> ()
+このインスタンスが SSL による通信を利用するように設定します。
+
+verify_or_params にハッシュを渡した場合には、接続時に生成される
+[[c:OpenSSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSLContext#set_params]] に渡されます。
+certs は無視されます。
+
+verify_or_params がハッシュでない場合には、接続時に生成される
+[[c:OpenSSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSLContext#set_params]] に
+  { :verify_mode => verify_or_params, :ca_path => certs }
+というハッシュが渡されます。
+
+@param verify_or_params SSLの設定のハッシュ、もしくは SSL の設定の verify_mode
+@param certs SSL の設定の ca_path
+
+@see [[m:Net::POP3.enable_ssl]], [[m:Net::POP3#disable_ssl]], [[m:Net::POP3#use_ssl?]]
+
+
+--- disable_ssl -> ()
+このインスタンスが SSL による通信を利用しないように設定します。
+
+@see [[m:Net::POP3#enable_ssl]], [[m:Net::POP3#disable_ssl]], [[m:Net::POP3#use_ssl?]], [[m:Net::POP3.enable_ssl]]
+
 #@end
 
---- inspect
-#@todo
+#@# --- inspect
 
 #@# --- logging   # internal use only
 
---- start(account, password)
---- start(account, password) {|pop| .... }
-#@todo
+--- start(account, password) -> self
+--- start(account, password) {|pop| .... } -> object
+サーバへ接続し、POP3のセッションを開始します。
 
-リモートホストとの TCP 接続を開始し、アカウントに account、
-パスワードに password を使って POP ログインします。
+ブロックが渡された場合にはセッション開始後
+そのオブジェクト自身をを引数としてブロックが呼びだされます。
+ブロック終了時にセッションを終了させます。
 
---- started?
---- active?
-#@todo
+ブロックが渡されなかった場合にはそのオブジェクト自身を返します。
+この場合セッションを終了させるのはユーザの責任となります。
 
+
+@param account アカウント名文字列
+@param password パスワード文字列
+@raise IOError セッションが既に開始されている場合に発生します
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPAuthenticationError 認証に失敗した、もしくはAPOPを利用しようとしたがサーバがAPOPを提供していない場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+
+#@# TLS利用時にはそれに関する例外が発生する可能性があります
+
+--- started? -> bool
+--- active? -> bool
 POP3 セッションが開始されていたら真を返します。
 
-Ruby 1.8.0 以降では active? は obsolete です。
-これからは常に started? を使ってください。
+active? は obsolete です。
 
---- address
-#@todo
-
+--- address -> String
 接続するアドレスです。
 
---- port
-#@todo
-
+--- port -> Integer
 接続するポート番号です。
 
---- set_debug_output(f)
-#@todo
-#@# --- debug_output=(f)
-
+--- set_debug_output(f) -> ()
 デバッグ用の出力 f をセットします。
+
+このメソッドは深刻なセキュリティホールの原因となりえます。
+デバッグ以外の用途では使わないでください。
+
 f は << メソッドを持っているオブジェクトでなければなりません。
 
 使用例:
 
   require 'net/pop'
 
-  pop = Net::POP3.new('your.pop3.server', 110)
+  pop = Net::POP3.new('pop.example.com', 110)
   pop.set_debug_output $stderr
   pop.start('YourAccount', 'YourPassword') {
     p pop.n_bytes
@@ -329,8 +522,8 @@ f は << メソッドを持っているオブジェクトでなければなりません。
 
 実行結果:
 
-  POP session started: your.pop3.server:110 (POP)
-  -> "+OK popd <1162042773.26346.155555a1861c@your.pop3.server>\r\n"
+  POP session started: pop.example.com:110 (POP)
+  -> "+OK popd <1162042773.26346.155555a1861c@pop.example.com>\r\n"
   <- "APOP YourAccount XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\r\n"
   -> "+OK\r\n"
   <- "STAT\r\n"
@@ -339,61 +532,88 @@ f は << メソッドを持っているオブジェクトでなければなりません。
   <- "QUIT\r\n"
   -> "+OK\r\n"
 
---- open_timeout
---- open_timeout=(n)
-#@todo
+--- open_timeout -> Interger
+接続時に待つ最大秒数を返します。
 
-接続時に待つ最大秒数です。
 この秒数たってもコネクションが開かないときは
 例外 TimeoutError を発生します。
 
---- read_timeout
---- read_timeout=(n)
-#@todo
+デフォルトは30秒です。
 
-読みこみ ([[man:read(2)]] 一回) でブロックしてよい最大秒数です。
+@see [[m:Net::POP3#open_timeout=]]
+
+--- open_timeout=(n)
+接続時に待つ最大秒数を設定します。
+
+@see [[m:Net::POP3#open_timeout]]
+
+--- read_timeout -> Interger
+読み込みでブロックしてよい最大秒数を返します。
+
 この秒数たっても読みこめなければ例外 TimeoutError を発生します。
 
---- finish
-#@todo
+デフォルトは60秒です。
 
-POP3 セッションを終了します。セッション開始前にこのメソッドが
-呼ばれた場合は例外 IOError を発生します。
+@see [[m:Net::POP3#read_timeout=]]
 
---- apop?
-#@todo
+--- read_timeout=(n)
+読み込みでブロックしてよい最大秒数を設定します。
 
+@see [[m:Net::POP3#read_timeout]]
+
+--- finish -> ()
+POP3 セッションを終了し、接続を閉じます。
+
+@raise IOError セッション開始前にこのメソッドを呼ぶと発生します
+
+--- apop? -> bool
 このインスタンスが APOP を使ってサーバに接続するなら true を返します。
 
---- n_bytes
-#@todo
-
+--- n_bytes -> Integer
 サーバにあるメールの総バイト数を返します。
 
---- n_mails
-#@todo
+@see [[m:Net::POP3#n_mails]]
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPError サーバがエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
+--- n_mails -> Integer
 サーバにあるメールの数を返します。
 
---- mails
-#@todo
+@see [[m:Net::POP3#n_bytes]]
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPError サーバがエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
-[[c:Net::POPMail]] オブジェクトの配列をかえします。
-この配列はセッションを開始したときに自動的に更新されます。
+--- mails -> [Net::POPMail]
+サーバ上の全てのメールを、[[c:Net::POPMail]]オブジェクトの配列として返します。
 
---- each_mail {|popmail| .... }
---- each {|popmail| .... }
-#@todo
+この配列はメールを最初に取得しようとしたときに生成され、セッションの間
+キャッシュされます。
+
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPError サーバがエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+
+
+--- each_mail {|popmail| .... } -> [Net::POPMail]
+--- each {|popmail| .... } -> [Net::POPMail]
+サーバ上の各メールを引数としてブロックを呼びだします。
+
+メールは [[c:Net::POPMail]] のインスタンスとして渡されます。
 
 pop3.mails.each と同じです。
 
---- delete_all
---- delete_all {|popmail| .... }
-#@todo
+@raise TimeoutError 接続がタイムアウトした場合に発生します
+@raise Net::POPError サーバがエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
+--- delete_all -> ()
+--- delete_all {|popmail| .... } -> ()
 サーバ上のメールを全て消去します。
-ブロックを与えられたときは消去する前にその POPMail オブジェクトを
-ブロックに渡します。
+
+ブロックを与えられたときは消去する前に各メールを引数としてブロックを呼びだします。
+メールは [[c:Net::POPMail]] のインスタンスとして渡されます。
 
 使用例:
 
@@ -405,24 +625,30 @@ pop3.mails.each と同じです。
     n += 1
   end
 
---- auth_only(account, password)
-#@todo
+--- auth_only(account, password) -> ()
+POP セッションを開き、認証だけを行って接続を切ります。
 
-POP セッションを開き認証だけを行って接続を切ります。
 主に POP before SMTP のために用意されています。
 
 使用例:
 
   require 'net/pop'
 
-  pop = Net::POP3.new('your.pop3.server')
+  pop = Net::POP3.new('pop.example.com')
   pop.auth_only 'YourAccount', 'YourPassword'
 
---- reset
-#@todo
+@param account アカウント名文字列
+@param password パスワード文字列
+@raise IOError セッションが既に開始されている場合に発生します
+@raise Net::POPAuthenticationError 認証に失敗した、もしくはAPOPを利用しようとしたがサーバがAPOPを提供していない場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
+--- reset -> ()
 セッションをリセットします。
-具体的には [[m:Net::POPMail#delete]] で消去したメールが全て復活します。
+
+リセットによって [[m:Net::POPMail#delete]] で付けた削除マークがすべて
+取り除かれます。
 
 POP3 ではメール一個だけを復活する方法はありません。
 
@@ -430,14 +656,14 @@ POP3 ではメール一個だけを復活する方法はありません。
 
 == Constants
 
---- Revision
-#@todo
-
-net/pop3 file revision.
+--- Revision -> String
+ライブラリ(ファイル)のリビジョンです。
+使わないでください。
 
 
 
 = class Net::APOP < Net::POP3
+alias Net::APOPSession
 
 このクラスでは新しいメソッドは導入していません。
 認証方式が APOP に変わるだけです。
@@ -447,48 +673,57 @@ net/pop3 file revision.
 = class Net::POPMail < Object
 
 POP サーバー上のメール一通を表現するクラス。
+
 メールの取得や消去といった操作をカプセル化します。
+[[c:POP3]] クラスが生成するもので、ユーザが直接は生成しません。
 
 == Instance Methods
 
---- pop
---- all
---- mail
-#@todo
+--- pop -> String
+--- all -> String
+--- mail -> String
+--- pop {|str| .... } -> nil
+--- all {|str| .... } -> nil
+--- mail {|str| .... } -> nil
+--- pop(io) -> object
+--- all(io) -> object
+--- mail(io) -> object
 
-メールを受信して文字列で返します。
+メールを受信します。
+
+引数もブロックも与えられなかった場合にはメール
+の内容を文字列で返します。
+
+ブロックが渡されたときは、メールの内容を
+少しづつ読み込み、読みこんだ文字列を
+引数としてブロックを呼びだします。
+
+ブロックなしで、オブジェクトを
+引数として渡すとそのオブジェクトに
+メールの内容を << メソッドで順次書き込みます。
+通常 [[c:IO]] オブジェクトを渡します。
+この場合引数として渡したオブジェクトを返します。
 
 pop, all, mail はすべて同じ効果ですが、
 all と mail は obsolete です。
-これからは常に pop を使ってください。
+
 
 使用例:
 
   require 'net/pop'
 
-  Net::POP3.start('your.pop3.server', 110,
+  Net::POP3.start('pop.example.com', 110,
                   'YourAccount, 'YourPassword') {|pop|
     pop.mails.each do |m|
       puts m.pop
     end
   }
 
---- pop {|str| .... }
---- all {|str| .... }
---- mail {|str| .... }
-#@todo
 
-メールの文字列を少しずつ読みこみ、順次ブロックに与えます。
-
-pop, all, mail はすべて同じ効果ですが、
-all と mail は obsolete です。
-これからは常に pop を使ってください。
-
-使用例:
-
+ブロックを利用する例:
   require 'net/pop'
 
-  Net::POP3.start('localhost', 110) {|pop|
+  Net::POP3.start('pop.example.com', 110) {|pop|
     pop.each_mail do |m|
       m.pop do |str|
         print str
@@ -496,69 +731,87 @@ all と mail は obsolete です。
     end
   }
 
---- header
-#@todo
+@param io メールの内容を書きこむオブジェクト
+@raise TimeoutError 通信がタイムアウトした場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
-ヘッダだけを受信して文字列で返します。
+--- header(dest='') -> String
+メールヘッダを受信し、文字列として返します。
 
---- top(lines)
-#@todo
+destを渡すとそのオブジェクトにデータを書き込みますが、これは
+obsolete なので使わないでください。
 
-メールヘッダと lines 行ぶんの本文を取得し文字列で返します。
+@param dest ヘッダを書き込む先(obsoleteなので使わないでください)
+@raise TimeoutError 通信がタイムアウトした場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
---- delete
---- delete!
-#@todo
+--- top(lines, dest='') -> String
+メールヘッダと本文 lines 行を受信し、文字列として返します。
 
-サーバ上からメールを削除します。
+destを渡すとそのオブジェクトにデータを書き込みますが、これは
+obsolete なので使わないでください。
 
-Ruby 1.8 以降では delete と delete! は同じ効果です。
-また、delete! は obsolete なので、
-これからは常に delete を使うべきです。
+@param lines 本文を読みだす行数
+@param dest データを書き込む先(obsoleteなので使わないでください)
+@raise TimeoutError 通信がタイムアウトした場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
 
---- deleted?
-#@todo
 
-メールがサーバ上で消去されていたら true を返します。
+--- delete -> ()
+--- delete! -> ()
+メールに削除マークを付けます。
 
-いったんメールを消去したら
-[[m:Net::POP3#reset]] を使う以外に復活する方法はありません。
+削除マークを付けたメールは読み出せなくなります。
+セッション終了時に実際に削除されます。
+[[c:Net::POP3#reset]] を呼ぶと削除マークは取り消されます。
 
---- size
-#@todo
+delete! は obsolete です。
 
+@raise TimeoutError 通信がタイムアウトした場合に発生します
+@raise Net::POPError サーバが認証失敗以外のエラーを報告した場合に発生します
+@raise Net::POPBadResponse サーバからの応答がプロトコル上不正であった場合に発生します
+@see [[m:Net::POPMail#deleted?]]
+--- deleted? -> bool
+メールに削除マークが付けられている場合に真を返します。
+
+@see [[m:Net::POPMail#delete]]
+
+--- size -> Integer
+--- length -> Integer
 メールのサイズ (単位はバイト) をかえします。
 
---- number
-#@todo
+--- number -> Integer
+メールに対して振られた、そのメールボックスで一意な番号を返します。
 
-メールに対して振られた、そのメールボックスで一意な番号です。
 サーバに接続しなおすとこの番号は変化する場合があります。
 メールごとに一意な識別子が必要なときは
 [[m:Net::POPMail#uidl]] を使ってください。
 
---- uidl
---- unique_id
-#@todo
-
+--- uidl -> String
+--- unique_id -> String
 メールに対して振られた、サーバ上で一意な識別子 (UIDL) をかえします。
+
 [[m:Net::POPMail#number]] と違い、
 この UIDL は接続しなおしても変化しません。
 
-= class Net::ProtocolError < StandardError
-#@todo
-
+#@# internal use
+#@# --- uid=
 = class Net::POPError < Net::ProtocolError
 
 POP3 の、認証以外のエラーが起きたときに発生します。
+サーバからの "-ERR" 応答コードに対応します。
 
 = class Net::POPBadResponse < Net::POPError
 
 サーバから予期しないレスポンスが帰ってきたときに発生します。
 
-= class Net::ProtoAuthError < StandardError
-#@todo
-
 = class Net::POPAuthenticationError < Net::ProtoAuthError
 
 POP3 で認証に失敗したときに発生します。
+
+#@# memo:
+#@# いくつかのメソッドはaccountとpasswordを省略できるように書いているが
+#@# これを省略した場合、認証は必ず失敗する
