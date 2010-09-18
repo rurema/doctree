@@ -1,43 +1,64 @@
 = class WIN32OLE < Object
 
-WIN32OLE objects represent OLE Automation object in Ruby.
+OLEオートメーションオブジェクトをRubyで操作するためのクラスです。
 
-   WIN32OLE.new(server, [host]) -> WIN32OLE object
+Windowsの多くのアプリケーションやライブラリは、COMと呼ばれるAPI群を利用して他のプログラムから操作できます。WIN32OLEがサポートしているのは、COMのAPIのうち、特にインタープリタ用のインターフェイスであるOLEオートメーション（IDispatchインターフェイス）とそれに付随するリフレクション用のインターフェイスです。
 
-Returns a new WIN32OLE object(OLE Automation object).
-The first argument server specifies OLE Automation server.
-The first argument should be CLSID or PROGID.
-If second argument host specified, then returns OLE Automation 
-object on host. 
+これらのインターフェイスをサポートしている代表的なWindowsアプリケーションに、Office、IE、iTunes、Illustratorがあります。また、WMI、WshShellなどのライブラリを利用してWindowsの情報を操作することも可能です。
 
-    WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
-    WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
+=== サンプルコード
+
+  require 'win32ole'
+
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.Workbooks.Open('workbook.xls')
+  workbook.PrintOut
+  workbook.Close(:SaveChanges => false)
+  excel.Quit
 
 == Class Methods
 
 #@since 1.9.1
 
 --- create_guid -> String
-#@todo
 
-Creates GUID.
+GUID(グローバル一意識別子：Global Unique Identifier)を生成します。
 
-   WIN32OLE.create_guid   # => "{1CB530F1-F6B1-404D-BCE6-1959BF91F4A8}"
+GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(IID)など多数の領域でWindows上のオブジェクトの識別に利用される128ビットの値です。
 
---- locale -> Integer
-#@todo
+ WIN32OLEが生成するGUIDは以下の形式によるGUIDの文字列表現です。なお00〜FFはGUIDの先頭からのバイト位置を示します。これはレジストリのキーとして利用される形式です。
 
-Returns current locale id (lcid). The default locale is LOCALE_SYSTEM_DEFAULT.
+  {33221100-5544-7766-88-99-AABBCCDDEEFF}
+
+@return GUIDの文字列表現を返します。
+
+   WIN32OLE.create_guid   # => "{????????-????-????-????-????????????}"
+
+--- locale -> Fixnum
+
+WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を取得します。
+
+OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名と言語名を「_」で接続した文字列ではなく、32ビット整数で示します。32ビットの内訳は上位16ビットが予約領域で0、下位16ビットが言語ID(LANGID）です。LANGIDは、0〜9ビットでプライマリ言語ID、10〜15ビットがサブ言語IDを示します。
+
+ロード時の既定値は[[c:WIN32OLE::LOCALE_SYSTEM_DEFAULT]]です。
+
+@return WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を返します。
 
    lcid = WIN32OLE.locale
 
 --- locale=(lcid)
-#@todo
 
-Sets current locale id (lcid).
+WIN32OLEがオートメーション呼び出し時に設定するロケール識別子(LCID)を設定します。
+
+OLEオートメーションでは、UNIXで利用される"ja_JP"などの国名と言語名を「_」で接続した文字列ではなく、32ビット整数で示します。32ビットの内訳は上位16ビットが予約領域で0、下位16ビットが言語ID(LANGID）です。LANGIDは、0〜9ビットでプライマリ言語ID、10〜15ビットがサブ言語IDを示します。
+
+@raise WIN32OLERuntimeError
+        システムにインストールされていないロケールを指定すると発生します。
 
    WIN32OLE.locale = 1033 # set locale English(U.S)
    obj = WIN32OLE_VARIANT.new("$100,000", WIN32OLE::VARIANT::VT_CY)
+
+オブジェクトがサポートしていないロケールを設定した場合、オブジェクトのメソッド呼び出し時にDISP_E_UNKNOWNLCID(HRESULT error code:0x8002000CL)や、TYPE_E_INVDATAREAD(HRESULT error code:0x80028018)などを理由としたWIN32OLERuntimeError例外となります。ほとんどすべての場合において、既定値を変更する必要はありません。
 
 #@end
 
@@ -332,8 +353,9 @@ type library which contains the WIN32OLE object.
 #@end
 
 == Constants
---- VERSION
-#@todo
+--- VERSION  -> String
+
+Major.Minor.Patch形式のWIN32OLEのバージョン番号を示す文字列です。
 
 --- ARGV
 #@todo
@@ -346,6 +368,10 @@ type library which contains the WIN32OLE object.
 --- CP_UTF7
 --- CP_UTF8
 
---- LOCALE_SYSTEM_DEFAULT
+--- LOCALE_SYSTEM_DEFAULT  -> Fixnum
 
---- LOCALE_USER_DEFAULT
+システム既定のロケールを示すLCID(0x0800)です。WIN32OLEがオートメーションを利用する場合の既定値です。
+
+--- LOCALE_USER_DEFAULT  -> Fixnum
+
+ユーザ既定のロケールを示すLCID(0x0400)です。
