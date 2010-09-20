@@ -366,13 +366,19 @@ POP3 のデフォルトのポート番号(110)を返します。
 --- default_pop3s_port -> Integer
 デフォルトのPOP3Sのポート番号(995)を返します。
 
---- certs
-#@todo
+--- certs -> String|nil
 SSL のパラメータの ca_file (なければ ca_path) を返します。
 
---- verify
-#@todo
+どちらも設定されていない場合は nil を返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#ca_file]], [[m:OpenSSL::SSL::SSLContext#ca_path]]
+
+--- verify -> Integer|nil
 SSL のパラメータの verify_mode を返します。
+
+設定されていない場合は nil を返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#verify_mode]]
 
 --- use_ssl? -> bool
 新しく生成する [[c:Net::POP3]] オブジェクトが
@@ -766,7 +772,7 @@ obsolete なので使わないでください。
 
 削除マークを付けたメールは読み出せなくなります。
 セッション終了時に実際に削除されます。
-[[c:Net::POP3#reset]] を呼ぶと削除マークは取り消されます。
+[[m:Net::POP3#reset]] を呼ぶと削除マークは取り消されます。
 
 delete! は obsolete です。
 
