@@ -154,11 +154,10 @@ Returns whether ASCII-compatible or not.
   Encoding::UTF_16BE.ascii_compatible?  #=> false
 
 --- replicate(name) -> Encoding
-#@todo
 
-Returns a replicated encoding of _enc whose name is _name_.
-The new encoding should have the same byte structure of _enc_.
-If _name_ is used by another encoding, raise ArgumentError.
+レシーバのエンコーディングを複製(replicate)します。
+複製されたエンコーディングは元のエンコーディングと同じバイト構造を持たなければなりません。
+name という名前のエンコーディングが既に存在する場合は [[c:ArgumentError]] を発生します。
 
 #@end
 == Constants
