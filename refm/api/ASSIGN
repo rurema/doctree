@@ -146,6 +146,7 @@ etc                             okkez           done
 expect                          okkez           done
 fcntl                           okkez           done
 fiber                           okkez           done
+fiddle
 fileutils                       okkez           done
 final                           okkez           done
 finalize                        okkez           done
