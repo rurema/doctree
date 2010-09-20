@@ -365,28 +365,31 @@ OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¤Ç¤Ï¸Æ¤Ó½Ð¤·Àè¤¬°ú¿ô¤ËÂÐ¤·¤ÆÃÍ¤òÀßÄê¤Ç¤­¤Þ¤¹¡£¤·¤«¤·¡¢Ruby¤Î¥
 
 °Ê²¼¤Î¥ê¥¹¥È¤Ï¡¢VB¤Ç³«È¯¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È¤Î¥á¥½¥Ã¥É¸Æ¤Ó½Ð¤·¤òÎã¤È¤·¤Æ¤¤¤Þ¤¹¡£¤³¤Î¥á¥½¥Ã¥É¡ÊAccm¡Ë¤Ï¡¢Âè1°ú¿ô¤Ç»ØÄê¤·¤¿±é»»¤òÂè2°ú¿ô¤ÈÂè3°ú¿ô¤ËÅ¬ÍÑ¤·¡¢·ë²Ì¤òÂè2°ú¿ô¤ËÀßÄê¤·¤Þ¤¹¡£
 
+  ' VB (OLE Automation server)
   Public Sub Accm(ByVal Operator, ByRef Accumulator, ByVal Operand)
-      If Operator = "+" Then
-          Accmulator = Accmulator + Operand
-      Else If Operator = "*" Then
+      If Operator = "*" Then
           Accmulator = Accmulator * Operand
+      Else If Operator = "+" Then
+          Accmulator = Accmulator + Operand
       End If
   End Sub
  
+  # Ruby
   x = 10
   obj.Accm '*', x, 11
   p x               # -> 10 ¡Ä¡Ä ¸Æ¤Ó½Ð¤·¤Ë¤è¤Ã¤Æ±Æ¶Á¤ò¼õ¤±¤Ê¤¤
-  p WIN32OLE::ARGV  # -> ['+', 110, 11] ¡Ä¡Ä ·ë²Ì¤ÏARGV¤ÎÂÐ±þ¤¹¤ë°ú¿ô¤ËÈ¿±Ç¤µ¤ì¤ë
+  p WIN32OLE::ARGV  # -> ['*', 110, 11] ¡Ä¡Ä ·ë²Ì¤ÏARGV¤ÎÂÐ±þ¤¹¤ë°ú¿ô¤ËÈ¿±Ç¤µ¤ì¤ë
   obj.Accm '+', 10, 11
   p WIN32OLE::ARGV  # -> ['+', 21, 11]
 
 Ä¾Á°¤Î¥á¥½¥Ã¥É¸Æ¤Ó½Ð¤·¤¬Îã³°¤È¤Ê¤Ã¤¿¾ì¹ç¡¢ARGV¤ÎÀßÄêÆâÍÆ¤Ï¸Æ¤Ó½Ð¤·Á°¤Î¾õÂÖ¤¬ÊÝ¤¿¤ì¤Þ¤¹¡£¤Ä¤Þ¤ê¡¢WIN32OLE¼«¿È¤¬ARGV¤ÎÆâÍÆ¤ò¾Ãµî¤¹¤ë¤Î¤Ï¡¢¥á¥½¥Ã¥É¸Æ¤Ó½Ð¤·¤ËÀ®¸ù¤·¤¿¾ì¹ç¤Î¤ß¤Ç¤¹¡£¤³¤Î¤¿¤áºÇ¸å¤Î¥á¥½¥Ã¥É¸Æ¤Ó½Ð¤·¤¬°ú¿ô¤Ë¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤¹¥¿¥¤¥×¤Î¥á¥½¥Ã¥É¤À¤Ã¤¿¾ì¹ç¡¢GC¤Ë¥ª¥Ö¥¸¥§¥¯¥È¤ò²ó¼ý¤µ¤»¤ë¤¿¤á¤Ë¡¢¸Æ¤Ó½Ð¤·Â¦¤ÇARGV¤ò¾Ãµî¤·¤Æ¤¯¤À¤µ¤¤¡£
 
-
+  ' VB (OLE Automation server)
   Public Sub GetInterface(ByRef obj)
       Set Obj = New OleObject
   End Sub
 
+  # Ruby
   obj.GetInterface nil   # °ú¿ô¤Î¿ô¤ò¹ç¤ï¤»¤ë¤¿¤á¥À¥ß¡¼°ú¿ô¤ò»ØÄê
   WIN32OLE::ARGV.clear   # ÄÌ¾ï¤Ï¡¢¸åÂ³¤Î¥á¥½¥Ã¥É¸Æ¤Ó½Ð¤·¤Ë¤è¤Ã¤Æ¾Ãµî¤µ¤ì¤ë
 
