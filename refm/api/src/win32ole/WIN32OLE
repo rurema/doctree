@@ -16,6 +16,23 @@ Windowsд╬┬┐дпд╬еве╫еъе▒б╝е╖ечеєдфещеде╓ещеъд╧бвCOMд╚╕╞д╨дьдыAPI╖▓дЄ═°═╤д╖д╞┬╛д╬е
   workbook.Close(:SaveChanges => false)
   excel.Quit
 
+#@since 1.9.1
+
+├эб╦░╩▓╝д╬╡н╜╥д╧WIN32OLEд╬╛н═шд╬е╨б╝е╕ечеєд╬╗┼══дЄ╡м─ъд╣дыдтд╬д╟д╧двдъд▐д╗дєбг
+WIN32OLEд╧е╖еєе░еые╣еье├е╔етб╝е╔д╟COMд╚едеєе┐б╝е╒езеде╣д╖д▐д╣бгд│д╬д┐дсбвruby 1.9░╩╣▀д╬Rubyд╬Threadд╚е═еде╞еге╓е╣еье├е╔дм1┬╨1д╟┬╨▒■д╣ды╝┬╣╘┤─╢нд╟д╧е╣еье├е╔дЄд▐д┐дмды╕╞д╙╜╨д╖д╧еиещб╝д╚д╩дъд▐д╣бг
+
+  excel = WIN32OLE.new('Excel.Application')
+  Thread.start do
+    workbook = excel.Workbooks.Open('workbook.xls') #=> HRESULT error code:0x800401f0
+    workbook.PrintOut
+    workbook.Close(:SaveChanges => false)
+  end.join
+  excel.Quit
+
+╚п└╕д╣дыеиещб╝д╧Threadд╬╝┬╣╘╩¤╦бд╦дшд├д╞0x800401f0б╩CO_E_NOTINITIALIZEDб╦д▐д┐д╧0x8001010eб╩RPC_E_WRONG_THREADб╦д╟д╣бг
+
+#@end
+
 == Class Methods
 
 #@since 1.9.1
@@ -130,20 +147,25 @@ then returns OLE Automation object on host.
     WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
     WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
 
---- ole_free(aWIN32OLE) -> number
-#@todo
+--- ole_free(aWIN32OLE) -> Integer
 
-Invokes Release method of Dispatch interface of WIN32OLE object.
-You should not use this method because this method exists only
-for debugging WIN32OLE. The return value is reference counter
-of OLE object.
+░·┐Їд╟╗╪─ъд╖д┐еке╓е╕езепе╚дЄ▓Є╩№д╖д▐д╣бг
 
---- ole_reference_count(aWIN32OLE) -> number
-#@todo
+д│д╬есе╜е├е╔д╧╝чд╦WIN32OLEд╬е╟е╨е├е░дкдшд╙WIN32OLEдЄ═°═╤д╣дые▀е╔еыежезевд╬╝┬┴їд╬д┐дсд╦═╤░╒д╡дьд╞ддд▐д╣бгд│д╬д┐дсбвесе╜е├е╔д╬╞т╔Ї╞░║юд╧╔╘─ъд╟д╣бг
+COMд╬╗┼══д╚WIN32OLEд╬╞т╔Ї╜ш═¤д╦╜╧├╬д╖д╞ддд╩дд╛ь╣чд╧╗╚═╤д╖д╩ддд╟дпд└д╡ддбг
 
-Returns reference counter of Dispatch interface of WIN32OLE object.
-You should not use this method because this method exists only
-for debugging WIN32OLE.
+@param aWIN32OLE ▓Є╩№д╣дыWIN32OLEеке╓е╕езепе╚бг
+@return Releaseд╬╠сдъ├═бгCOMд╬╗┼══╛хд╧╕╜║▀д╬еке╓е╕езепе╚д╬╗▓╛╚ележеєе╚├═дЄ╝ид╖д▐д╣бг
+
+--- ole_reference_count(aWIN32OLE) -> Integer
+
+░·┐Їд╟╗╪─ъд╖д┐еке╓е╕езепе╚д╬╕╜║▀д╬╗▓╛╚ележеєе╚├═дЄ╩╓д╖д▐д╣бг
+
+д│д╬есе╜е├е╔д╧╝чд╦WIN32OLEд╬е╟е╨е├е░дкдшд╙WIN32OLEдЄ═°═╤д╣дые▀е╔еыежезевд╬╝┬┴їд╬д┐дсд╦═╤░╒д╡дьд╞ддд▐д╣бгд│д╬д┐дсбвесе╜е├е╔д╬╞т╔Ї╞░║юд╧╔╘─ъд╟д╣бг
+COMд╬╗┼══д╚WIN32OLEд╬╞т╔Ї╜ш═¤д╦╜╧├╬д╖д╞ддд╩дд╛ь╣чд╧╗╚═╤д╖д╩ддд╟дпд└д╡ддбг
+
+@param aWIN32OLE ╗▓╛╚ележеєе╚├═дЄ╡сдсдыWIN32OLEеке╓е╕езепе╚бг
+@return AddRef╕╞д╙╜╨д╖╕хд╬Releaseд╬╠сдъ├═бгCOMд╬╗┼══╛хд╧╕╜║▀д╬еке╓е╕езепе╚д╬╗▓╛╚ележеєе╚├═дЄ╝ид╖д▐д╣бг
 
 --- ole_show_help(obj, helpcontext = nil)
 #@todo
@@ -244,11 +266,37 @@ any ole_method.
    obj.method(...)
 
 --- ole_free
-#@todo
 
-invokes Release method of Dispatch interface of WIN32OLE object.
-Usually, you do not need to call this method because Release
-method called automatically when WIN32OLE object garbaged.
+selfдм╗▓╛╚д╣дыCOMеке╓е╕езепе╚дЄ▓Є╩№д╖д▐д╣бг
+
+selfдм╗▓╛╚д╣дыCOMеке╓е╕езепе╚д╬IUnknown::ReleaseдЄ╕╞д╙╜╨д╣д│д╚д╟бвCOMеке╓е╕езепе╚дЄ│л╩№д╖д▐д╣бг
+ole_freeдЄ╕╞д╙╜╨д╖д┐╕хд╧бвд│д╬еке╓е╕езепе╚д╦┬╨д╣ды┴р║юд╧╣╘дид▐д╗дєбг
+
+  excel = WIN32OLE.new('Excel.Application')
+  excel.ole_free  # еке╓е╕езепе╚д╬▓Є╩№
+  excel.Quit      #=> RuntimeError (failed to get Dispatch Interface)
+
+─╠╛яд╧═°═╤д╡дьд╩дпд╩д├д┐WIN32OLEеке╓е╕езепе╚д╧GCд╬е┐еде▀еєе░д╟╝л╞░┼кд╦▓Є╩№д╡дьдыд┐дсбв┼Ўесе╜е├е╔дЄ╕╞д╙╜╨д╣╔м═╫д╧двдъд▐д╗дєбгOfficeд╬дшджд╩│░╔Їе╫еэе╗е╣е╡б╝е╨╕╞д╙╜╨д╖╗■д╦бве╣епеъе╫е╚╜к╬╗╕хдте╡б╝е╨дм▓Є╩№д╡дьд╩дд╛ь╣чд╦╢п└й┼кд╦е╡б╝е╨дЄ╜к╬╗д╣дыд┐дсд╦┼Ўесе╜е├е╔дЄ═°═╤д╟днд▐д╣бг
+д┐д└д╖бв╕╜╝┬д╦д╧┼╙├цд╟└╕└од╡дьды╗╥еке╓е╕езепе╚длдщд╬╡╒╗▓╛╚д╩д╔дмдвдыд┐дсбвWIN32OLEдмIUnknown::ReleaseдЄ╕╞д╙╜╨д╖д╞дтеке╓е╕езепе╚дм▓Є╩№д╡дьдыд╚д╧╕┬дъд▐д╗дєбг
+
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.Workbooks.Open('excel_mitumori.xls') 
+  workbook.Close(:SaveChanges => false)
+  workbook.ole_free
+  excel.ole_free
+  # д│д╬╗■┼└д╟Excel.EXEд╧╜к╬╗д╖д╩дд
+
+╛хд╬╬уд╟д╧бвexcel.Workbooks.Openд╬╣╘д╟бвexcel.Workbooksеке╓е╕езепе╚дм└╕└од╡дьд╞ддд▐д╣бгд╖длд╖бв╕х┬│д╬╜ш═¤д╟│║┼Ўеке╓е╕езепе╚дм▓Є╩№д╡дьд╞ддд╩ддд┐дсбвWorkbooksеке╓е╕езепе╚д╦дшд├д╞╗▓╛╚д╡дьд╞дддыexcelеке╓е╕езепе╚д╧▓Є╩№д╡дьд▐д╗дєбг
+д╜дьд╦┬╨д╖д╞▓╝д╬╬уд╟д╧└╡д╖дп▓Є╩№д╡дьд▐д╣бг
+
+  excel = WIN32OLE.new('Excel.Application')
+  books = excel.Workbooks
+  workbook = books.Open('excel_mitumori.xls')
+  books.ole_free
+  workbook = excel.Workbooks.Open('excel_mitumori.xls')
+  workbook.Close(:SaveChanges => false)
+  workbook.ole_free
+  excel.ole_free
 
 --- ole_func_methods
 #@todo
@@ -400,33 +448,33 @@ OLEекб╝е╚есб╝е╖ечеєд╟д╧╕╞д╙╜╨д╖└шдм░·┐Їд╦┬╨д╖д╞├═дЄ└▀─ъд╟днд▐д╣бгд╖длд╖бвRubyд╬е
   obj.GetInterface nil   # ░·┐Їд╬┐ЇдЄ╣чдяд╗дыд┐дсе└е▀б╝░·┐ЇдЄ╗╪─ъ
   WIN32OLE::ARGV.clear   # ─╠╛яд╧бв╕х┬│д╬есе╜е├е╔╕╞д╙╜╨д╖д╦дшд├д╞╛├╡юд╡дьды
 
---- CP_ACP
+--- CP_ACP -> Fixnum
 
 Windows┤√─ъд╬ANSIе│б╝е╔е┌б╝е╕б╩0б╦дЄ╝ид╖д▐д╣бг
 
---- CP_MACCP
+--- CP_MACCP -> Fixnum
 
 Macintoshе│б╝е╔е┌б╝е╕б╩2б╦дЄ╝ид╖д▐д╣бг
 
---- CP_OEMCP
+--- CP_OEMCP -> Fixnum
 
 OEMе│б╝е╔е┌б╝е╕б╩1б╦дЄ╝ид╖д▐д╣бг
 
---- CP_SYMBOL
+--- CP_SYMBOL -> Fixnum
 
 ╩╕╗·е│б╝е╔д╬╩╤┤╣д╦е╖еєе▄еыдЄ═°═╤д╣дыд│д╚дЄ╝ид╖д▐д╣б╩42б╦бг
 
---- CP_THREAD_ACP
+--- CP_THREAD_ACP -> Fixnum
 
 ╕╜║▀╝┬╣╘├цд╬е╣еье├е╔д╬┤√─ъд╬е│б╝е╔е┌б╝е╕б╩3б╦дЄ╝ид╖д▐д╣бг
 
 Windowsд╬е│б╝е╔е┌б╝е╕д╧е╣еье├е╔╦шд╦░█д╩ды├═дЄ└▀─ъд╟днд▐д╣бг
 
---- CP_UTF7
+--- CP_UTF7 -> Fixnum
 
 ╩╕╗·е│б╝е╔д╬╩╤┤╣д╦UTF-7дЄ═°═╤д╣дыд│д╚дЄ╝ид╖д▐д╣б╩65000б╦бг
 
---- CP_UTF8
+--- CP_UTF8 -> Fixnum
 
 ╩╕╗·е│б╝е╔д╬╩╤┤╣д╦UTF-8дЄ═°═╤д╣дыд│д╚дЄ╝ид╖д▐д╣б╩65001б╦бг
 
