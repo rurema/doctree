@@ -296,7 +296,7 @@ webrick/cgi                                     done
 webrick/ssl                     
 win32/registry
 win32/resolv                    sho-h           done
-win32ole
+win32ole                        arton
 xmlrpc                          
 yaml                            kouya
 yaml/store                      kouya           done
