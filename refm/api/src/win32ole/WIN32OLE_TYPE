@@ -56,16 +56,24 @@ Returns helpcontext. If helpcontext is not found, then returns
 nil.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
-   puts tobj.helpfile # => 131185
+   puts tobj.helpcontext # => 131185
 
---- helpfile
-#@todo
+--- helpfile -> String | nil
+オブジェクトに関連付けられたヘルプファイルのフルパス名。
 
-Returns helpfile path. If helpfile is not found, then returns
-nil.
+ここで返されたヘルプファイルを表示するには、[[m:WIN32OLE#ole_show_help]]メソッドを呼び出します。
+
+オブジェクトがヘルプファイルを持たない場合はnilを返します。
+
+@return オブジェクトに関連付けられたヘルプファイルのフルパス名。
+        ヘルプファイルが未定義の場合はnil。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
    puts tobj.helpfile # => C:\...\VBAXL9.CHM
+   WIN32OLE.ole_show_help tobj.helpfile, tobj.helpcontext
+   # 注）WIN32OLE.ole_show_help(tobj) の呼び出しが望ましい
+
+当メソッドがフルパス名を返しても、ヘルプファイルがインストールされていない場合があることに注意してください。
 
 --- helpstring -> String
 #@todo

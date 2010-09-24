@@ -190,15 +190,23 @@ COMの仕様とWIN32OLEの内部処理に熟知していない場合は使用しないでください。
 @param aWIN32OLE 参照カウント値を求めるWIN32OLEオブジェクト。
 @return AddRef呼び出し後のReleaseの戻り値。COMの仕様上は現在のオブジェクトの参照カウント値を示します。
 
---- ole_show_help(obj, helpcontext = nil)
-#@todo
+--- ole_show_help(obj, helpcontext = nil) -> ()
+WIN32OLEオブジェクトのヘルプファイルを表示します。
 
-Displays helpfile. The 1st argument specifies WIN32OLE_TYPE object
-or WIN32OLE_METHOD object or helpfile.
+Windows標準のヘルプ表示コンポーネントのHHCtrl.OCXを利用して、オブジェクトに関連付けられたヘルプファイル（chmファイル）を表示します。
+
+また、chmファイルのフルパス名を指定して表示させることも可能です。
+
+@param obj [[c:WIN32OLE_TYPE]]オブジェクトまたは[[c:WIN32OLE_METHOD]オブジェクト。
+           直接ヘルプファイルのフルパス名を指定することも可能です。
+@param helpcontext obj引数に[[c:WIN32OLE_TYPE]]オブジェクトまたは[[c:WIN32OLE_METHOD]オブジェクトを指定した場合はこれらのオブジェクトの設定値を利用するため指定不要です。
+                   obj引数にヘルプファイルのフルパス名を設定した場合は0を指定してください。
 
    excel = WIN32OLE.new('Excel.Application')
-   typeobj = excel.ole_type
-   WIN32OLE.ole_show_help(typeobj)
+   typeobj = excel.ole_obj_help
+   WIN32OLE.ole_show_help(typeobj) if typeobj.helpfile
+
+オブジェクトが関連するヘルプファイルを持たない場合はRuntimeError（no helpfile of `オブジェクト名')を通知します。また、ヘルプファイルがインストールされていない場合は、RuntimeError（failed to open help file `ファイル名'）が通知されます。
 
 == Instance Methods
 
@@ -367,10 +375,13 @@ method of WIN32OLE object.
    excel = WIN32OLE.new('Excel.Application')
    methods = excel.ole_methods
 
---- ole_obj_help
-#@todo
+--- ole_obj_help -> WIN32OLE_TYPE | nil
+[[c:WIN32OLE_TYPE]]オブジェクトを返します。
 
-Returns WIN32OLE_TYPE object.
+[[c:WIN32OLE_TYPE]]オブジェクトは、WIN32OLEオブジェクトの文書情報と型情報を保持するオブジェクトです。
+
+@return オブジェクトに関連する[[c:WIN32OLE_TYPE]]オブジェクトを返します。
+        オブジェクトがドキュメント情報を持たない場合はnilを返します。
 
    excel = WIN32OLE.new('Excel.Application')
    tobj = excel.ole_obj_help
@@ -408,9 +419,10 @@ specified by iid.
     ie = WIN32OLE.new('InternetExplorer.Application')
     ie_web_app = ie.ole_query_interface('{0002DF05-0000-0000-C000-000000000046}') # => WIN32OLE object for dispinterface IWebBrowserApp
 
---- ole_type
-#@todo
-alias ole_obj_help
+--- ole_type -> WIN32OLE_TYPE | nil
+[[c:WIN32OLE_TYPE]]オブジェクトを返します。
+
+このメソッドは、[[m:WIN32OLE#ole_obj_help]]メソッドのエイリアスです。
 
 Returns WIN32OLE_TYPE object.
 
