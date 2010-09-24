@@ -101,50 +101,73 @@ WIN32OLEは、OLEオートメーション呼び出しに利用する文字列のUnicode変換にここで設定
    WIN32OLE.codepage = WIN32OLE::CP_UTF8
 
 --- connect(ole) -> WIN32OLE
-#@todo
 
-Returns running OLE Automation object or WIN32OLE object from
-moniker. 1st argument should be OLE program id or class id or
-moniker.
+現在実行中のOLEオートメーションサーバに接続します。
+
+connectメソッドは、COMのモニカを利用して、現在実行中のOLEオートメーションサーバを検索し、接続します。接続に成功した場合、該当サーバを操作可能なWIN32OLEオブジェクトが返ります。
+
+@param ole 接続対象のサーバを示すPROGID、CLSIDまたはモニカ（別名）を指定します。
+
+@return ole引数で特定されるWIN32OLEオブジェクトを返します。
 
    WIN32OLE.connect('Excel.Application') # => WIN32OLE object which represents running Excel.
 
---- const_load(ole, mod = WIN32OLE)
-#@todo
+: PROGID
+  OLEオートメーションサーバを識別するための文字列。通常「ベンダー名.アプリケーション名.インターフェイス名」の形式を取ります。レジストリのHKEY_CLASSES_ROOTの「.」で始まらないキーとして登録されます。
+: CLSID
+  OLEオートメーションサーバを含むCOMのクラスを識別するための128ビットGUID。文字列表現は、レジストリのHKEY_CLASSES_ROOT\CLSID下のキーとして登録されます。
+: モニカ
+  モニカは、URIのようにWindows上のリソースを一意に識別するためのオブジェクトのインターフェイスで、文字表現を持ちます。詳細については[[url:http://msdn.microsoft.com/en-us/library/ms691261(v=VS.85).aspx]]を参照してください。
 
-Defines the constants of OLE Automation server as mod's constants.
-The first argument is WIN32OLE object or type library name. If
-2nd argument is omitted, the default is WIN32OLE. The first letter
-of Ruby's constant variable name is upper case, so constant variable
-name of WIN32OLE object is capitalized. For example, the 'xlTop'
-constant of Excel is changed to 'XlTop' in WIN32OLE. If the first
-letter of constant variabl is not [A-Z], then the constant is
-defined as CONSTANTS hash element.
+--- const_load(ole, mod = WIN32OLE) -> ()
+
+OLEオートメーションサーバが保持する定数を読み込み、指定されたモジュールに組み込みます。
+
+OLEオートメーションサーバは、定数をクライアントへ提供できます。
+
+const_loadメソッドはこれらの定数を読み込み、指定したモジュールに組み込むことで参照可能とします。
+
+@param ole 定数を読み込む対象のWIN32OLEオブジェクトまたはタイプライブラリ名（文字列）を指定します。
+@param mod 定数を定義する対象のモジュールを指定します。省略時はWIN32OLEに組み込まれます。
+
+OLEオートメーションの定数は通常、VBのコード規約に準じて、vbConstantsのように小文字で始まります。しかし、Rubyの定数は大文字で開始する規則のため、WIN32OLEによってVbConstantsのように自動的に先頭が大文字化されます。
+
+また、先頭が英字で始まらない定数については、CONSTANTSハッシュに登録されます。この場合、元の定数名がキーとなります。
 
    module EXCEL_CONST
    end
+ 
    excel = WIN32OLE.new('Excel.Application')
    WIN32OLE.const_load(excel, EXCEL_CONST)
    puts EXCEL_CONST::XlTop # => -4160
    puts EXCEL_CONST::CONSTANTS['_xlDialogChartSourceData'] # => 541
 
+モジュール名を省略した例
+
    WIN32OLE.const_load(excel)
    puts WIN32OLE::XlTop # => -4160
 
+タイプライブラリ名を指定した例
+
    module MSO
    end
-   WIN32OLE.const_load('Microsoft Office 9.0 Object Library', MSO)
+ 
+   WIN32OLE.const_load('Microsoft Office 9.0 Object Library', MSO) 
    puts MSO::MsoLineSingle # => 1
 
---- new(server, host=nil) -> WIN32OLE object
-#@todo
+--- new(server, host=nil) -> WIN32OLE
+OLEオートメーションサーバを生成します。
 
-Returns a new WIN32OLE object(OLE Automation object). The first
-argument server specifies OLE Automation server. The first argument
-should be CLSID or PROGID. If second argument host specified,
-then returns OLE Automation object on host.
+引数で指定したCLSIDまたはPROGIDを持つOLEオートメーションサーバを生成します。生成に成功した場合、該当サーバを操作可能なWIN32OLEオブジェクトが返ります。
+
+CLSIDおよびPROGIDについては[[m:WIN32OLE#connect]]を参照してください。
+
+@param server OLEオートメーションサーバを示すPROGIDまたはCLSIDを文字列で指定します。
+@param host サーバを生成するホストのホスト名またはIPアドレスを文字列で指定します。
+            省略時は現在スクリプトを実行中のホストで生成します。
 
     WIN32OLE.new('Excel.Application') # => Excel OLE Automation WIN32OLE object.
+
     WIN32OLE.new('{00024500-0000-0000-C000-000000000046}') # => Excel OLE Automation WIN32OLE object.
 
 --- ole_free(aWIN32OLE) -> Integer
@@ -265,7 +288,7 @@ any ole_method.
    obj.ole_activex_initialize
    obj.method(...)
 
---- ole_free
+--- ole_free -> ()
 
 selfが参照するCOMオブジェクトを解放します。
 
@@ -280,7 +303,7 @@ ole_freeを呼び出した後は、このオブジェクトに対する操作は行えません。
 ただし、現実には途中で生成される子オブジェクトからの逆参照などがあるため、WIN32OLEがIUnknown::Releaseを呼び出してもオブジェクトが解放されるとは限りません。
 
   excel = WIN32OLE.new('Excel.Application')
-  workbook = excel.Workbooks.Open('excel_mitumori.xls') 
+  workbook = excel.Workbooks.Open('workbook.xls') 
   workbook.Close(:SaveChanges => false)
   workbook.ole_free
   excel.ole_free
@@ -291,9 +314,8 @@ ole_freeを呼び出した後は、このオブジェクトに対する操作は行えません。
 
   excel = WIN32OLE.new('Excel.Application')
   books = excel.Workbooks
-  workbook = books.Open('excel_mitumori.xls')
+  workbook = books.Open('workbook.xls')
   books.ole_free
-  workbook = excel.Workbooks.Open('excel_mitumori.xls')
   workbook.Close(:SaveChanges => false)
   workbook.ole_free
   excel.ole_free
@@ -412,7 +434,7 @@ type library which contains the WIN32OLE object.
 
 Major.Minor.Patch形式のWIN32OLEのバージョン番号を示す文字列です。
 
---- ARGV -> Array
+--- ARGV -> [object]
 
 直前のメソッド呼び出しの引数を格納した配列です。
 
