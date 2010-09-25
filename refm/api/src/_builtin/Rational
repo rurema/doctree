@@ -502,7 +502,7 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
   Rational('-123.456').truncate(-1)       # => -120
 #@end
 
-@see [[m:Rational#ceil]], [[m:Rational#floor]], [[m:Rational#truncate]]
+@see [[m:Rational#ceil]], [[m:Rational#floor]]
 
 --- to_r -> Rational
 
