@@ -306,7 +306,7 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
 
   Rational(3).floor     # => 3
   Rational(2, 3).floor  # => 0
-  Rational(-3, 2).floor # => -1
+  Rational(-3, 2).floor # => -2
 
 自身にもっとも近い整数を返す [[m:Rational#to_i]] とは違う結果を返す事に
 注意してください。
