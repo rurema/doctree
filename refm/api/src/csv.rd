@@ -1,4 +1,997 @@
-#@since 1.8.0
+#@since 1.9.1
+CSV (Comma Separated Values) ¤ò°·¤¦¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
+
+#@# ÀâÌÀ¤òµ­½Ò¤¹¤ë
+#@# Ã±¤Ê¤ëËÝÌõ¤Ç¤Ï¤Ê¤¤¤â¤Î¤ò½ñ¤¯
+
+¤³¤Î¥Ð¡¼¥¸¥ç¥ó¤Î CSV ¥é¥¤¥Ö¥é¥ê¤Ï FasterCSV ¤«¤é»Ï¤Þ¤ê¤Þ¤·¤¿¡£
+FasterCSV ¤Ï Ruby1.8 ¤ËÉ¸½àÅºÉÕ¤µ¤ì¤Æ¤¤¤ë CSV ¥é¥¤¥Ö¥é¥ê¤ÎÃÖ¤­´¹¤¨¤È¤·¤Æ³«È¯¤µ¤ì¤Þ¤·¤¿¡£
+¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ï¥æ¡¼¥¶¤Î´Ø¿´»ö¤ò²ò·è¤¹¤ë¤¿¤á¤Ë¥Ç¥¶¥¤¥ó¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+¼ç¤Ê¥´¡¼¥ë¤¬»°¤Ä¤¢¤ê¤Þ¤¹¡£
+
+ (1) ¥Ô¥å¥¢ Ruby ¤Î¤Þ¤Þ¤Ç¸µ¤Î CSV ¥é¥¤¥Ö¥é¥ê¤è¤ê¤â¤«¤Ê¤êÂ®¤¯¤¹¤ë¤³¤È
+ (2) ¾®¤µ¤¯¥á¥ó¥Æ¥Ê¥ó¥¹¤·¤ä¤¹¤¤¥³¡¼¥É¥Ù¡¼¥¹¤Ç¤¢¤ë¤³¤È (FasterCSV ¤Ï¤«¤Ê¤êÂç¤­¤¯
+     µ¡Ç½Ë­¤«¤Ë¤Ê¤ê¤Þ¤·¤¿¡£¹½Ê¸²òÀÏÉôÊ¬¤Î¥³¡¼¥É¤Ï¤«¤Ê¤ê¾®¤µ¤¤¤Þ¤Þ¤Ç¤¹)
+ (3) CSV ¤Î¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹¤ò²þÁ±¤¹¤ë¤³¤È
+
+ÌÀ¤é¤«¤ËºÇ¸å¤Î¤â¤Î¤Ï¼ç´ÑÅª¤Ç¤¹¡£ÊÑ¹¹¤¹¤ë¤ä¤à¤òÆÀ¤Ê¤¤ÍýÍ³¤¬Ìµ¤¤¸Â¤ê¡¢¥ª¥ê¥¸¥Ê¥ë¤Î
+¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹¤Ë½¾¤¦¤è¤¦¤Ë¤·¤¿¤Î¤Ç¡¢¤ª¤½¤é¤¯µì CSV ¥é¥¤¥Ö¥é¥ê¤È¤Ï¤¢¤Þ¤ê
+Âç¤­¤Ê°ã¤¤¤ÏÌµ¤¤¤Ç¤·¤ç¤¦¡£
+
+=== ¸Å¤¤ CSV ¥é¥¤¥Ö¥é¥ê¤È¤Î°ã¤¤
+
+Âç¤­¤Ê°ã¤¤¤Ë¤Ä¤¤¤Æ¸ÀµÚ¤·¤Þ¤¹¡£
+
+==== CSV ¹½Ê¸²òÀÏ
+
+ * ¤³¤Î¥Ñ¡¼¥µ¤Ï m17n ¤ËÂÐ±þ¤·¤Æ¤¤¤Þ¤¹¡£[[c:CSV]] ¤â»²¾È¤·¤Æ¤¯¤À¤µ¤¤
+ * ¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ï¤è¤ê¸·¤·¤¤¥Ñ¡¼¥µ¤ò»ý¤Ã¤Æ¤¤¤ë¤Î¤Ç¡¢ÌäÂê¤Î¤¢¤ë¥Ç¡¼¥¿¤ËÂÐ¤·¤Æ [[c:MalformedCSVError]] ¤òÅê¤²¤Þ¤¹
+ * µì CSV ¥é¥¤¥Ö¥é¥ê¤è¤ê¤â¹ÔËö¤Ë´Ø¤·¤Æ¤Ï´²ÍÆ¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£¤¢¤Ê¤¿¤¬ :row_sep ¤È¤·¤Æ¥»¥Ã¥È¤·¤¿ÃÍ¤¬Ë¡¤Ç¤¹¡£
+   ¤·¤«¤·¡¢¼«Æ°¸¡½Ð¤µ¤»¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹
+ * µì¥é¥¤¥Ö¥é¥ê¤Ç¤Ï¶õ¹Ô¤ËÂÐ¤·¤Æ [nil] ¤òÊÖ¤·¤Þ¤¹¤¬¡¢¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ï¶õ¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹
+ * ¤³¤Î¥é¥¤¥Ö¥é¥ê¤Ï¤«¤Ê¤êÂ®¤¤¥Ñ¡¼¥µ¤ò»ý¤Ã¤Æ¤¤¤Þ¤¹
+
+==== ¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹
+
+ * ¥ª¥×¥·¥ç¥ó¤ò¥»¥Ã¥È¤¹¤ë¤Î¤Ë¥Ï¥Ã¥·¥å·Á¼°¤Î°ú¿ô¤ò»È¤¦¤è¤¦¤Ë¤Ê¤ê¤Þ¤·¤¿
+ * CSV#generate_row, CSV#parse_row ¤Ï¤Ê¤¯¤Ê¤ê¤Þ¤·¤¿
+ * ¸Å¤¤ CSV::Reader, CSV::Writer ¥¯¥é¥¹¤Ï¤Ê¤¯¤Ê¤ê¤Þ¤·¤¿
+ * [[m:CSV.open]] ¤Ï¤è¤ê Ruby ¤é¤·¤¯¤Ê¤ê¤Þ¤·¤¿
+ * [[c:CSV]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ï [[c:IO]] ¤ÎÂ¿¤¯¤Î¥á¥½¥Ã¥É¤ò¥µ¥Ý¡¼¥È¤¹¤ë¤è¤¦¤Ë¤Ê¤ê¤Þ¤·¤¿
+ * Ê¸»úÎó¤ä IO ¤Î¤è¤¦¤Ê¥ª¥Ö¥¸¥§¥¯¥È¤òÆÉ¤ß½ñ¤­¤¹¤ë¤¿¤á¤Ë¥é¥Ã¥×¤¹¤ë [[m:CSV.new]] ¥á¥½¥Ã¥É¤¬ÄÉ²Ã¤µ¤ì¤Þ¤·¤¿
+ * [[m:CSV.generate]] ¤Ï¸Å¤¤¤â¤Î¤È¤Ï°Û¤Ê¤ê¤Þ¤¹
+ * ÉôÊ¬ÆÉ¤ß½Ð¤·¤Ï¤â¤¦¥µ¥Ý¡¼¥È¤·¤Æ¤¤¤Þ¤»¤ó¡£ÆÉ¤ß¹þ¤ß¤Ï¹ÔÃ±°Ì¤Ç¹Ô¤¤¤Þ¤¹
+ * ¥Ñ¥Õ¥©¡¼¥Þ¥ó¥¹¤Î¤¿¤á¡¢¥¤¥ó¥¹¥¿¥ó¥¹¥á¥½¥Ã¥É¤Ç¥»¥Ñ¥ì¡¼¥¿¤ò¾å½ñ¤­½ÐÍè¤Ê¤¯¤Ê¤ê¤Þ¤·¤¿¡£
+   [[m:CSV.new]] ¤Ç¥»¥Ã¥È¤¹¤ë¤è¤¦¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+=== CSV ¤È¤Ï
+
+CSV ¥é¥¤¥Ö¥é¥ê¤Ï [[RFC:4180]] ¤«¤éÄ¾ÀÜ¤È¤é¤ì¤¿¤«¤Ê¤ê¸·¤·¤¤ÄêµÁ¤ò°Ý»ý¤·¤Þ¤¹¡£
+°ì¥ö½ê¤À¤±ÄêµÁ¤ò´ËÏÂ¤¹¤ë¤³¤È¤Ç¤³¤Î¥é¥¤¥Ö¥é¥ê¤ò»È¤¤¤ä¤¹¤¯¤·¤Æ¤¤¤Þ¤¹¡£[[c:CSV]] ¤Ï
+¤¹¤Ù¤Æ¤ÎÍ­¸ú¤Ê CSV ¥Õ¥¡¥¤¥ë¤ò¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
+
+What you don't want to do is feed CSV invalid data.  Because of the way the
+CSV format works, it's common for a parser to need to read until the end of
+the file to be sure a field is invalid.  This eats a lot of time and memory.
+
+Luckily, when working with invalid CSV, Ruby's built-in methods will almost
+always be superior in every way.  For example, parsing non-quoted fields is as
+easy as:
+
+  data.split(",")
+
+= class CSV < Object
+extend Forwardable
+include Enumerable
+
+#@# ÀâÌÀ¤òµ­½Ò¤¹¤ë
+
+¤³¤Î¥¯¥é¥¹¤Ï CSV ¥Õ¥¡¥¤¥ë¤ä¥Ç¡¼¥¿¤ËÂÐ¤¹¤ë´°Á´¤Ê¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹¤òÄó¶¡¤·¤Þ¤¹¡£
+
+=== ÆÉ¤ß¹þ¤ß
+
+  # ¥Õ¥¡¥¤¥ë¤«¤é°ì¹Ô¤º¤Ä
+  CSV.foreach("path/to/file.csv") do |row|
+    # use row here...
+  end
+
+  # ¥Õ¥¡¥¤¥ë¤«¤é°ìÅÙ¤Ë
+  arr_of_arrs = CSV.read("path/to/file.csv")
+
+  # Ê¸»úÎó¤«¤é°ì¹Ô¤º¤Ä
+  CSV.parse("CSV,data,String") do |row|
+    # use row here...
+  end
+
+  # Ê¸»úÎó¤«¤é°ì¹Ô¤º¤Ä
+  arr_of_arrs = CSV.parse("CSV,data,String")
+
+=== ½ñ¤­¹þ¤ß
+
+  # ¥Õ¥¡¥¤¥ë¤Ø½ñ¤­¹þ¤ß
+  CSV.open("path/to/file.csv", "wb") do |csv|
+    csv << ["row", "of", "CSV", "data"]
+    csv << ["another", "row"]
+    # ...
+  end
+
+  # Ê¸»úÎó¤Ø½ñ¤­¹þ¤ß
+  csv_string = CSV.generate do |csv|
+    csv << ["row", "of", "CSV", "data"]
+    csv << ["another", "row"]
+    # ...
+  end
+
+=== °ì¹ÔÊÑ´¹
+
+  csv_string = ["CSV", "data"].to_csv   # => "CSV,data"
+  csv_array  = "CSV,String".parse_csv   # => ["CSV", "String"]
+
+=== ¥·¥ç¡¼¥È¥«¥Ã¥È
+
+  CSV             { |csv_out| csv_out << %w{my data here} }  # to $stdout
+  CSV(csv = "")   { |csv_str| csv_str << %w{my data here} }  # to a String
+  CSV($stderr)    { |csv_err| csv_err << %w{my data here} }  # to $stderr
+
+=== CSV ¤ÈÊ¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥° (M17n or Multilingualization)
+
+This new CSV parser is m17n savvy.  The parser works in the Encoding of the IO
+or String object being read from or written to.  Your data is never transcoded
+(unless you ask Ruby to transcode it for you) and will literally be parsed in
+the Encoding it is in.  Thus CSV will return Arrays or Rows of Strings in the
+Encoding of your data.  This is accomplished by transcoding the parser itself
+into your Encoding.
+
+Some transcoding must take place, of course, to accomplish this multiencoding
+support.  For example, <tt>:col_sep</tt>, <tt>:row_sep</tt>, and
+<tt>:quote_char</tt> must be transcoded to match your data.  Hopefully this
+makes the entire process feel transparent, since CSV's defaults should just
+magically work for you data.  However, you can set these values manually in
+the target Encoding to avoid the translation.
+
+It's also important to note that while all of CSV's core parser is now
+Encoding agnostic, some features are not.  For example, the built-in
+converters will try to transcode data to UTF-8 before making conversions.
+Again, you can provide custom converters that are aware of your Encodings to
+avoid this translation.  It's just too hard for me to support native
+conversions in all of Ruby's Encodings.
+
+Anyway, the practical side of this is simple:  make sure IO and String objects
+passed into CSV have the proper Encoding set and everything should just work.
+CSV methods that allow you to open IO objects (CSV::foreach(), CSV::open(),
+CSV::read(), and CSV::readlines()) do allow you to specify the Encoding.
+
+One minor exception comes when generating CSV into a String with an Encoding
+that is not ASCII compatible.  There's no existing data for CSV to use to
+prepare itself and thus you will probably need to manually specify the desired
+Encoding for most of those cases.  It will try to guess using the fields in a
+row of output though, when using CSV::generate_line() or Array#to_csv().
+
+I try to point out any other Encoding issues in the documentation of methods
+as they come up.
+
+This has been tested to the best of my ability with all non-"dummy" Encodings
+Ruby ships with.  However, it is brave new code and may have some bugs.
+Please feel free to {report}[mailto:james@grayproductions.net] any issues you
+find with it.
+
+== Constants
+
+--- DateMatcher -> Regexp
+
+ÆüÉÕ (Date) ·Á¼°¤Î¥Ç¡¼¥¿¤òÈ¯¸«¤·¤¿¤êÊÑ´¹¤·¤¿¤ê¤¹¤ë¤¿¤á¤ÎÀµµ¬É½¸½¤Ç¤¹¡£
+
+--- DateTimeMatcher -> Regexp
+
+Æü»þ (DateTime) ·Á¼°¤Î¥Ç¡¼¥¿¤òÈ¯¸«¤·¤¿¤êÊÑ´¹¤·¤¿¤ê¤¹¤ë¤¿¤á¤ÎÀµµ¬É½¸½¤Ç¤¹¡£
+
+--- ConverterEncoding -> Encoding
+
+¤¹¤Ù¤Æ¤ÎÊÑ´¹´ï¤Ç»ÈÍÑ¤¹¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+--- Converters -> Hash
+#@todo
+
+¤³¤Î¥Ï¥Ã¥·¥å¤ÏÌ¾Á°¤Ç¥¢¥¯¥»¥¹¤Ç¤­¤ëÁÈ¤ß¹þ¤ß¤ÎÊÑ´¹´ï¤òÊÝ»ý¤·¤Æ¤¤¤Þ¤¹¡£
+
+[[m:CSV#convert]] ¤Ç»ÈÍÑ¤¹¤ëÊÑ´¹´ï¤È¤·¤Æ»ÈÍÑ¤Ç¤­¤Þ¤¹¡£
+¤Þ¤¿ [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤È¤·¤Æ»ÈÍÑ¤¹¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
+
+: :integer
+  [[m:Kernel.#Integer]] ¤ò»ÈÍÑ¤·¤Æ¥Õ¥£¡¼¥ë¥É¤òÊÑ´¹¤·¤Þ¤¹¡£
+: :float
+  [[m:Kernel.#Float]] ¤ò»ÈÍÑ¤·¤Æ¥Õ¥£¡¼¥ë¥É¤òÊÑ´¹¤·¤Þ¤¹¡£
+: :numeric
+  :integer ¤È :float ¤ÎÁÈ¤ß¹ç¤ï¤»¤Ç¤¹¡£
+: :date
+  [[m:Date.parse]] ¤ò»ÈÍÑ¤·¤Æ¥Õ¥£¡¼¥ë¥É¤òÊÑ´¹¤·¤Þ¤¹¡£
+: :date_time
+  [[m:DateTime.parse]] ¤ò»ÈÍÑ¤·¤Æ¥Õ¥£¡¼¥ë¥É¤òÊÑ´¹¤·¤Þ¤¹¡£
+: :all
+  :date_time ¤È :numeric ¤ÎÁÈ¤ß¹ç¤ï¤»¤Ç¤¹¡£
+
+Á´¤Æ¤ÎÁÈ¤ß¹þ¤ß¤ÎÊÑ´¹´ï¤Ï¡¢¼ÂºÝ¤ËÊÑ´¹¤¹¤ëÁ°¤Ë¥Õ¥£¡¼¥ë¥É¤Î¥Ç¡¼¥¿¤Î
+Ê¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò UTF-8 ¤ËÊÑ´¹¤·¤Þ¤¹¡£¤½¤Î¥Ç¡¼¥¿¤ÎÊ¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°
+¤ò UTF-8 ¤ËÊÑ´¹½ÐÍè¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢ÊÑ´¹¤Ë¤Ï¼ºÇÔ¤·¤Þ¤¹¤¬¡¢¥Ç¡¼¥¿¤ÏÊÑ¹¹¤µ¤ì¤Þ¤»¤ó¡£
+
+¤³¤Î¥Ï¥Ã¥·¥å¤Ï [[m:Object#freeze]] ¤µ¤ì¤Æ¤¤¤Ê¤¤¤Î¤Ç¡¢¥æ¡¼¥¶¤Ï¼«Í³¤ËÃÍ¤ò
+ÄÉ²Ã¤¹¤ë¤³¤È¤¬½ÐÍè¤Þ¤¹¡£
+
+To add a combo field, the value should be an Array of names.  Combo fields
+can be nested with other combo fields.
+
+--- HeaderConverters -> Hash
+#@todo
+
+¤³¤Î¥Ï¥Ã¥·¥å¤ÏÌ¾Á°¤Ç¥¢¥¯¥»¥¹¤Ç¤­¤ëÁÈ¤ß¹þ¤ß¤Î¥Ø¥Ã¥ÀÍÑÊÑ´¹´ï¤òÊÝÂ¸¤·¤Æ¤¤¤Þ¤¹¡£
+
+[[m:CSV#header_convert]] ¤Ç»ÈÍÑ¤¹¤ëÊÑ´¹´ï¤È¤·¤Æ»ÈÍÑ¤Ç¤­¤Þ¤¹¡£
+¤Þ¤¿ [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤È¤·¤Æ»ÈÍÑ¤¹¤ë¤³¤È¤â¤Ç¤­¤Þ¤¹¡£
+
+: :downcase
+  ¥Ø¥Ã¥À¤ÎÊ¸»úÎó¤ËÂÐ¤·¤Æ [[m:String#downcase]] ¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
+: :symbol
+  ¥Ø¥Ã¥À¤ÎÊ¸»úÎó¤ò¾®Ê¸»ú¤ËÊÑ´¹¤·¤Æ¤«¤é¡¢¶õÇòÊ¸»úÎó (\s) ¤ò¥¢¥ó¥À¡¼¥¹¥³¥¢¤Ë
+  ÃÖ´¹¤·¡¢Èó±Ñ¿ô»ú (\W) ¤òºï½ü¤·¤Þ¤¹¡£ºÇ¸å¤Ë [[m:String#to_sym]] ¤ò¸Æ¤Ó½Ð¤·¤Þ¤¹¡£
+
+Á´¤Æ¤ÎÁÈ¤ß¹þ¤ß¤Î¥Ø¥Ã¥ÀÍÑÊÑ´¹´ï¤Ï¡¢¼ÂºÝ¤ËÊÑ´¹¤¹¤ëÁ°¤Ë¥Ø¥Ã¥À¤Î¥Ç¡¼¥¿¤Î
+Ê¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò UTF-8 ¤ËÊÑ´¹¤·¤Þ¤¹¡£¤½¤Î¥Ø¥Ã¥À¤ÎÊ¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°
+¤ò UTF-8 ¤ËÊÑ´¹¤Ç¤­¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï¡¢ÊÑ´¹¤Ë¤Ï¼ºÇÔ¤·¤Þ¤¹¤¬¡¢¥Ç¡¼¥¿¤ÏÊÑ¹¹¤µ¤ì¤Þ¤»¤ó¡£
+
+¤³¤Î¥Ï¥Ã¥·¥å¤Ï [[m:Object#freeze]] ¤µ¤ì¤Æ¤¤¤Ê¤¤¤Î¤Ç¡¢¥æ¡¼¥¶¤Ï¼«Í³¤ËÃÍ¤ò
+ÄÉ²Ã¤¹¤ë¤³¤È¤¬½ÐÍè¤Þ¤¹¡£
+
+To add a combo field, the value should be an Array of names.  Combo fields
+can be nested with other combo fields.
+
+--- DEFAULT_OPTIONS -> Hash
+
+¤³¤Î¥ª¥×¥·¥ç¥ó¤Ï¸Æ¤Ó½Ð¤·Â¦¤Ç¾å½ñ¤­¤·¤Ê¤«¤Ã¤¿¤È¤­¤Ë»ÈÍÑ¤¹¤ë¥ª¥×¥·¥ç¥ó¤Ç¤¹¡£
+
+: :col_sep
+  ","
+: :row_sep
+  :auto
+: :quote_char
+  '"'
+: :field_size_limit
+  nil
+: :converters
+  nil
+: :unconverted_fields
+  nil
+: :headers
+  false
+: :return_headers
+  false
+: :header_converters
+  nil
+: :skip_blanks
+  false
+: :force_quotes
+  false
+
+--- VERSION -> String
+
+¥é¥¤¥Ö¥é¥ê¤Î¥Ð¡¼¥¸¥ç¥ó¤òÉ½¤¹Ê¸»úÎó¤Ç¤¹¡£
+
+#@if (version == "1.9.1")
+2.4.5
+#@end
+#@if (version == "1.9.2")
+2.4.7
+#@end
+
+== Singleton Methods
+
+--- new(data, options = Hash.new) -> CSV
+#@todo
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï CSV ¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹þ¤ó¤À¤ê¡¢½ñ¤­½Ð¤·¤¿¤ê¤¹¤ë¤¿¤á¤Ë
+[[c:String]] ¤« [[c:IO]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò¥é¥Ã¥×¤·¤Þ¤¹¡£
+
+¥é¥Ã¥×¤µ¤ì¤¿Ê¸»úÎó¤ÎÀèÆ¬¤«¤éÆÉ¤ß¹þ¤à¤³¤È¤Ë¤Ê¤ê¤Þ¤¹¡£
+Ê¸»úÎó¤ËÄÉµ­¤·¤¿¤¤¾ì¹ç¤Ï [[m:CSV#generate]] ¤ò»ÈÍÑ¤·¤Æ¤¯¤À¤µ¤¤¡£
+Â¾¤Î°ÌÃÖ¤«¤é½èÍý¤·¤¿¤¤¾ì¹ç¤Ï¤¢¤é¤«¤¸¤á¤½¤Î¤è¤¦¤ËÀßÄê¤·¤¿ [[c:StringIO]] ¤òÅÏ¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+Note that a wrapped String will be positioned at at the beginning (for
+reading).  If you want it at the end (for writing), use CSV::generate().
+If you want any other positioning, pass a preset StringIO object instead.
+
+@param data [[c:String]] ¤« [[c:IO]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+            [[c:String]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤¿¾ì¹ç¡¢[[m:CSV#string]] ¤ò»ÈÍÑ¤·¤Æ
+            ¸å¤«¤é¥Ç¡¼¥¿¤ò¼è¤ê½Ð¤¹¤³¤È¤¬½ÐÍè¤Þ¤¹¡£
+
+@param options CSV ¤ò¥Ñ¡¼¥¹¤¹¤ë¤¿¤á¤Î¥ª¥×¥·¥ç¥ó¤ò¥Ï¥Ã¥·¥å¤Ç»ØÄê¤·¤Þ¤¹¡£
+               ¥Ñ¥Õ¥©¡¼¥Þ¥ó¥¹¾å¤ÎÍýÍ³¤Ç¥¤¥ó¥¹¥¿¥ó¥¹¥á¥½¥Ã¥É¤Ç¤Ï¥ª¥×¥·¥ç¥ó¤ò¾å½ñ¤­¤¹¤ë¤³¤È¤¬
+               ½ÐÍè¤Ê¤¤¤Î¤Ç¡¢¾å½ñ¤­¤·¤¿¤¤¾ì¹ç¤ÏÉ¬¤º¤³¤³¤Ç¾å½ñ¤­¤¹¤ë¤è¤¦¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+: :col_sep
+  ¥Õ¥£¡¼¥ë¥É¤Î¶èÀÚ¤êÊ¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£¤³¤ÎÊ¸»úÎó¤Ï¥Ñ¡¼¥¹¤¹¤ëÁ°¤Ë¥Ç¡¼¥¿¤Î
+  ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ËÊÑ´¹¤µ¤ì¤Þ¤¹¡£
+: :row_sep
+  ¹Ô¶èÀÚ¤ê¤ÎÊ¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£:auto ¤È¤¤¤¦ÆÃÊÌ¤ÊÃÍ¤ò¥»¥Ã¥È¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+  :auto ¤ò»ØÄê¤·¤¿¾ì¹ç¥Ç¡¼¥¿¤«¤é¼«Æ°Åª¤Ë¹Ô¶èÀÚ¤ê¤ÎÊ¸»úÎó¤ò¸«¤Ä¤±½Ð¤·¤Þ¤¹¡£¤³¤Î¤È¤­
+  ¥Ç¡¼¥¿¤ÎÀèÆ¬¤«¤é¼¡¤Î "\r\n", "\n", "\r" ¤ÎÊÂ¤Ó¤Þ¤Ç¤òÆÉ¤ß¤Þ¤¹¡£
+  A sequence will be selected even if it occurs in a quoted field, assuming that you
+  would have the same line endings there.  If none of those sequences is
+  found, +data+ is <tt>ARGF</tt>, <tt>STDIN</tt>, <tt>STDOUT</tt>, or
+  <tt>STDERR</tt>, or the stream is only  available for output, the default
+  <tt>$INPUT_RECORD_SEPARATOR</tt>  (<tt>$/</tt>) is used.  Obviously,
+  discovery takes a little time.  Set  manually if speed is important.  Also
+  note that IO objects should be opened  in binary mode on Windows if this
+  feature will be used as the  line-ending translation can cause
+  problems with resetting the document  position to where it was before the
+  read ahead. This String will be  transcoded into the data's Encoding  before parsing.
+: :quote_char
+  ¥Õ¥£¡¼¥ë¥É¤ò¥¯¥ª¡¼¥È¤¹¤ëÊ¸»ú¤ò»ØÄê¤·¤Þ¤¹¡£Ä¹¤µ 1 ¤ÎÊ¸»úÎó¤Ç¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+  Àµ¤·¤¤¥À¥Ö¥ë¥¯¥ª¡¼¥È¤Ç¤Ï¤Ê¤¯´Ö°ã¤Ã¤¿¥·¥ó¥°¥ë¥¯¥ª¡¼¥È¤ò»ÈÍÑ¤·¤Æ¤¤¤ë¥¢¥×¥ê¥±¡¼¥·¥ç¥ó
+  ¤ÇÊØÍø¤Ç¤¹¡£
+  CSV will always consider a double  sequence this character to be an
+  escaped quote.
+  ¤³¤ÎÊ¸»úÎó¤Ï¥Ñ¡¼¥¹¤¹¤ëÁ°¤Ë¥Ç¡¼¥¿¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ËÊÑ´¹¤µ¤ì¤Þ¤¹¡£
+: :field_size_limit
+  This is a maximum size CSV will read  ahead looking for the closing quote
+  for a field.  (In truth, it reads to  the first line ending beyond this
+  size.)  If a quote cannot be found  within the limit CSV will raise a
+  MalformedCSVError, assuming the data  is faulty.  You can use this limit to
+  prevent what are effectively DoS  attacks on the parser.  However, this
+  limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
+  by default.
+: :converters
+  An Array of names from the Converters  Hash and/or lambdas that handle custom
+  conversion.  A single converter  doesn't have to be in an Array.  All
+  built-in converters try to transcode  fields to UTF-8 before converting.
+  The conversion will fail if the data  cannot be transcoded, leaving the
+  field unchanged.
+: :unconverted_fields
+  If set to +true+, an  unconverted_fields() method will be
+  added to all returned rows (Array or  CSV::Row) that will return the fields
+  as they were before conversion.  Note  that <tt>:headers</tt> supplied by
+  Array or String were not fields of the  document and thus will have an empty
+  Array attached.
+: :headers
+  :first_row ¤È¤¤¤¦¥·¥ó¥Ü¥ë¤«¿¿¤ò»ØÄê¤¹¤ë¤È¡¢CSV ¥Õ¥¡¥¤¥ë¤Î°ì¹ÔÌÜ¤ò¥Ø¥Ã¥À¤È¤·¤Æ°·¤¤¤Þ¤¹¡£
+  ÇÛÎó¤ò»ØÄê¤¹¤ë¤È¤½¤ì¤ò¥Ø¥Ã¥À¤È¤·¤Æ°·¤¤¤Þ¤¹¡£Ê¸»úÎó¤ò»ØÄê¤¹¤ë¤È [[m:CSV.parse_line]] ¤ò
+  »ÈÍÑ¤·¤Æ¥Ñ¡¼¥¹¤·¤¿·ë²Ì¤ò¥Ø¥Ã¥À¤È¤·¤Æ°·¤¤¤Þ¤¹¡£¤³¤Î¤È¤­¡¢:col_sep, :row_sep, :quote_char
+  ¤Ï¤³¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ÈÆ±¤¸¤â¤Î¤ò»ÈÍÑ¤·¤Þ¤¹¡£
+  This  setting causes CSV#shift() to return
+  rows as CSV::Row objects instead of  Arrays and CSV#read() to return
+  CSV::Table objects instead of an Array  of Arrays.
+: :return_headers
+  When +false+, header rows are silently  swallowed.  If set to +true+, header
+  rows are returned in a CSV::Row object  with identical headers and
+  fields (save that the fields do not go  through the converters).
+: :write_headers
+  ¿¿¤ò»ØÄê¤·¤Æ :headers ¤Ë¤âÃÍ¤ò¥»¥Ã¥È¤¹¤ë¤È¡¢¥Ø¥Ã¥À¤ò½ÐÎÏ¤·¤Þ¤¹¡£
+: :header_converters
+  Identical in functionality to  <tt>:converters</tt> save that the
+  conversions are only made to header  rows.  All built-in converters try to
+  transcode headers to UTF-8 before  converting.  The conversion will fail
+  if the data cannot be transcoded,  leaving the header unchanged.
+: :skip_blanks
+  ¿¿¤ò»ØÄê¤¹¤ë¤È¡¢¶õ¹Ô¤òÆÉ¤ßÈô¤Ð¤·¤Þ¤¹¡£
+: :force_quotes
+  ¿¿¤ò»ØÄê¤¹¤ë¤È¡¢Á´¤Æ¤Î¥Õ¥£¡¼¥ë¥É¤òºîÀ®»þ¤Ë¥¯¥ª¡¼¥È¤·¤Þ¤¹¡£
+
+@raise CSV::MalformedCSVError ÉÔÀµ¤Ê CSV ¤ò¥Ñ¡¼¥¹¤·¤è¤¦¤È¤·¤¿¤È¤­¤ËÈ¯À¸¤·¤Þ¤¹¡£
+
+@see [[m:CSV::DEFAULT_OPTIONS]], [[m:CSV.open]]
+
+--- dump(ary_of_objs, io = "", options = Hash.new) -> String | nil
+#@todo
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï Ruby ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÇÛÎó¤òÊ¸»úÎó¤ä CSV ¥Õ¥¡¥¤¥ë¤Ë¥·¥ê¥¢¥é¥¤¥º¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+[[c:Marshal]] ¤ä [[lib:yaml]] ¤è¤ê¤ÏÉÔÊØ¤Ç¤¹¤¬¡¢¥¹¥×¥ì¥Ã¥É¥·¡¼¥È¤ä¥Ç¡¼¥¿¥Ù¡¼¥¹
+¤È¤Î¤ä¤ê¤È¤ê¤Ë¤ÏÌò¤ËÎ©¤Ä¤Ç¤·¤ç¤¦¡£
+
+Out of the box, this method is intended to work with simple data objects or
+Structs.  It will serialize a list of instance variables and/or
+Struct.members().
+
+If you need need more complicated serialization, you can control the process
+by adding methods to the class to be serialized.
+
+A class method csv_meta() is responsible for returning the first row of the
+document (as an Array).  This row is considered to be a Hash of the form
+key_1,value_1,key_2,value_2,...  CSV::load() expects to find a class key
+with a value of the stringified class name and CSV::dump() will create this,
+if you do not define this method.  This method is only called on the first
+object of the Array.
+
+The next method you can provide is an instance method called csv_headers().
+This method is expected to return the second line of the document (again as
+an Array), which is to be used to give each column a header.  By default,
+CSV::load() will set an instance variable if the field header starts with an
+@ character or call send() passing the header as the method name and
+the field value as an argument.  This method is only called on the first
+object of the Array.
+
+Finally, you can provide an instance method called csv_dump(), which will
+be passed the headers.  This should return an Array of fields that can be
+serialized for this object.  This method is called once for every object in
+the Array.
+
+The +io+ parameter can be used to serialize to a File, and +options+ can be
+anything CSV::new() accepts.
+
+@param ary_of_objs Ç¤°Õ¤ÎÇÛÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param io ¥Ç¡¼¥¿¤Î½ÐÎÏÀè¤ò»ØÄê¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤ÏÊ¸»úÎó¤Ç¤¹¡£
+
+@param options ¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- filter(options = Hash.new){|row| ... }
+--- filter(input, options = Hash.new){|row| ... }
+--- filter(input, output, options = Hash.new){|row| ... }
+#@todo
+#@# -> discard
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï CSV ¥Ç¡¼¥¿¤ËÂÐ¤·¤Æ Unix ¤Î¥Ä¡¼¥ë·²¤Î¤è¤¦¤Ê¥Õ¥£¥ë¥¿¤ò¹½ÃÛ¤¹¤ë¤Î¤ËÊØÍø¤Ç¤¹¡£
+
+Each row is yielded to the provided block which can alter it as needed.
+After the block returns, the row is appended to +output+ altered or not.
+
+@param input [[c:String]] ¤« [[c:IO]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+             ¥Ç¥Õ¥©¥ë¥È¤Ï [[c:ARGF]] ¤Ç¤¹¡£
+
+@param output [[c:String]] ¤« [[c:IO]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+              ¥Ç¥Õ¥©¥ë¥È¤Ï [[m:$stdout]] ¤Ç¤¹¡£
+
+@param options ":in_", ":input_" ¤Ç»Ï¤Þ¤ë¥­¡¼¤Ï input ¤Ë¤À¤±Å¬ÍÑ¤µ¤ì¤Þ¤¹¡£
+               ":out_", ":output_" ¤Ç»Ï¤Þ¤ë¥­¡¼¤Ï output ¤Ë¤À¤±Å¬ÍÑ¤µ¤ì¤Þ¤¹¡£
+               ¤½¤ì°Ê³°¤Î¥­¡¼¤ÏÎ¾Êý¤ËÅ¬ÍÑ¤µ¤ì¤Þ¤¹¡£
+               ":output_row_sep" ¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï [[m:$/]] ¤Ç¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- foreach(path, options = Hash.new){|row| ... } -> nil
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï CSV ¥Õ¥¡¥¤¥ë¤òÆÉ¤à¤¿¤á¤Î¼çÍ×¤Ê¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹¤Ç¤¹¡£
+³Æ¹Ô¤¬Í¿¤¨¤é¤ì¤¿¥Ö¥í¥Ã¥¯¤ËÅÏ¤µ¤ì¤Þ¤¹¡£
+
+Îã:
+
+  # UTF-32BE ¤Ê CSV ¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹þ¤ó¤Ç UTF-8 ¤Ê row ¤ò¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤Þ¤¹
+  CSV.foreach("a.csv", encoding: "UTF-32BE:UTF-8"){|row| p row }
+
+@param path CSV ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+               :encoding ¤È¤¤¤¦¥­¡¼¤ò»ÈÍÑ¤¹¤ë¤ÈÆþ½ÐÎÏ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+               [[m:Encoding.default_external]] ¤È°Û¤Ê¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ý¤ÄÆþÎÏ¤ò»ÈÍÑ¤¹¤ë¾ì¹ç¤Ï¡¢
+               É¬¤º¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ØÄê¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+@see [[m:CSV.new]], [[m:File.open]]
+
+--- generate(str = "", options = Hash.new){|csv| ... } -> String
+
+¤³¤Î¥á¥½¥Ã¥É¤ÏÍ¿¤¨¤é¤ì¤¿Ê¸»úÎó¤ò¥é¥Ã¥×¤·¤Æ [[c:CSV]] ¤Î¥ª¥Ö¥¸¥§¥¯¥È¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯Æâ¤Ç [[c:CSV]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ë¹Ô¤òÄÉ²Ã¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤¿·ë²Ì¤ÏÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+¤³¤Î¥á¥½¥Ã¥É¤ËÍ¿¤¨¤é¤ì¤¿Ê¸»úÎó¤ÏÊÑ¹¹¤µ¤ì¤ë¤Î¤Ç¡¢¿·¤·¤¤Ê¸»úÎó¥ª¥Ö¥¸¥§¥¯¥È¤¬É¬Í×¤Ê
+¾ì¹ç¤Ï [[m:Object#dup]] ¤ÇÊ£À½¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+@param str Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ï¶õÊ¸»úÎó¤Ç¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+               :encoding ¤È¤¤¤¦¥­¡¼¤ò»ÈÍÑ¤¹¤ë¤È½ÐÎÏ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+               ASCII ¤È¸ß´¹À­¤ÎÌµ¤¤Ê¸»ú¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ý¤ÄÊ¸»úÎó¤ò½ÐÎÏ¤¹¤ë¾ì¹ç¤Ï¡¢¤³¤Î¥Ò¥ó¥È¤ò
+               »ØÄê¤¹¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- generate_line(row, options = Hash.new) -> String
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï°ì¤Ä¤Î [[c:Array]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò CSV Ê¸»úÎó¤ËÊÑ´¹¤¹¤ë¤¿¤á¤Î¥·¥ç¡¼¥È¥«¥Ã¥È¤Ç¤¹¡£
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï²ÄÇ½¤Ç¤¢¤ì¤Ð row ¤Ë´Þ¤Þ¤ì¤ëºÇ½é¤Î nil ¤Ç¤Ê¤¤ÃÍ¤òÍÑ¤¤¤Æ½ÐÎÏ¤Î
+¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò¿äÂ¬¤·¤Þ¤¹¡£
+
+@param row Ê¸»úÎó¤ÎÇÛÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+               :encoding ¤È¤¤¤¦¥­¡¼¤ò»ÈÍÑ¤¹¤ë¤È½ÐÎÏ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+               :row_sep ¤È¤¤¤¦¥­¡¼¤ÎÃÍ¤Ë¤Ï [[m:$/]] ¤¬¥»¥Ã¥È¤µ¤ì¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- instance(data = $stdout, options = Hash.new) -> CSV
+--- instance(data = $stdout, options = Hash.new){|csv| ... } -> object
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï [[m:CSV.new]] ¤Î¤è¤¦¤Ë [[c:CSV]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÊÖ¤·¤Þ¤¹¡£
+¤·¤«¤·¡¢ÊÖ¤µ¤ì¤ëÃÍ¤Ï [[m:Object#object_id]] ¤ÈÍ¿¤¨¤é¤ì¤¿¥ª¥×¥·¥ç¥ó¤ò
+¥­¡¼¤È¤·¤Æ¥­¥ã¥Ã¥·¥å¤µ¤ì¤Þ¤¹¡£
+
+¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¡¢À¸À®¤µ¤ì¤¿¥¤¥ó¥¹¥¿¥ó¥¹¤ò¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤ÆÉ¾²Á¤·¤¿
+·ë²Ì¤òÊÖ¤·¤Þ¤¹¡£
+
+@param data [[c:String]] ¤« [[c:IO]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- load(io_or_str, options = Hash.new) -> Array
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï [[m:CSV.dump]] ¤Ç½ÐÎÏ¤µ¤ì¤¿¥Ç¡¼¥¿¤òÆÉ¤ß¹þ¤ß¤Þ¤¹¡£
+
+csv_load ¤È¤¤¤¦Ì¾Á°¤Î¥¯¥é¥¹¥á¥½¥Ã¥É¤òÄÉ²Ã¤¹¤ë¤È¡¢¥Ç¡¼¥¿¤òÆÉ¤ß¹þ¤àÊýË¡¤ò
+¥«¥¹¥¿¥Þ¥¤¥º¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£csv_load ¥á¥½¥Ã¥É¤Ï¥á¥¿¥Ç¡¼¥¿¡¢¥Ø¥Ã¥À¡¢¹Ô
+¤Î»°¤Ä¤Î¥Ñ¥é¥á¡¼¥¿¤ò¼õ¤±¤È¤ê¤Þ¤¹¡£¤½¤·¤Æ¤½¤ì¤é¤ò¸µ¤Ë¤·¤ÆÉü¸µ¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È¤ò
+ÊÖ¤·¤Þ¤¹¡£
+
+Remember that all fields will be Strings after this load.  If you need
+something else, use +options+ to setup converters or provide a custom
+csv_load() implementation.
+
+#@# ¥«¥¹¥¿¥Þ¥¤¥º¤ÎÎã¤¬É¬Í×
+
+@param io_or_str [[c:IO]] ¤« [[c:String]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+@see [[m:CSV.new]], [[m:CSV.dump]]
+
+--- open(filename, mode = "rb", options = Hash.new){|csv| ... } -> nil
+--- open(filename, mode = "rb", options = Hash.new) -> CSV
+--- open(filename, options = Hash.new){|csv| ... } -> nil
+--- open(filename, options = Hash.new) -> CSV
+#@todo
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï [[c:IO]] ¥ª¥Ö¥¸¥§¥¯¥È¤ò¥ª¡¼¥×¥ó¤·¤Æ [[c:CSV]] ¤Ç¥é¥Ã¥×¤·¤Þ¤¹¡£
+¤³¤ì¤Ï CSV ¥Õ¥¡¥¤¥ë¤ò½ñ¤¯¤¿¤á¤Î¼çÍ×¤Ê¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹¤È¤·¤Æ»È¤¦¤³¤È¤ò°Õ¿Þ¤·¤Æ¤¤¤Þ¤¹¡£
+
+You must pass a +filename+ and may optionally add a +mode+ for Ruby's
+open().  You may also pass an optional Hash containing any +options+
+CSV::new() understands as the final argument.
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï [[m:IO.open]] ¤ÈÆ±¤¸¤è¤¦¤ËÆ°¤­¤Þ¤¹¡£¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤¿¾ì¹ç¤Ï
+¥Ö¥í¥Ã¥¯¤Ë [[c:CSV]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÅÏ¤·¡¢¥Ö¥í¥Ã¥¯½ªÎ»»þ¤Ë¤½¤ì¤ò¥¯¥í¡¼¥º¤·¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤Ê¤«¤Ã¤¿¾ì¹ç¤Ï [[c:CSV]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
+¤³¤ÎµóÆ°¤Ï Ruby1.8 ¤Î CSV ¥é¥¤¥Ö¥é¥ê¤È¤Ï°ã¤¤¤Þ¤¹¡£Ruby1.8 ¤Ç¤Ï¹Ô¤ò¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤Þ¤¹¡£
+Ruby1.9 ¤Ç¤Ï [[m:CSV.foreach]] ¤ò»È¤¦¤È¥Ö¥í¥Ã¥¯¤Ë¹Ô¤òÅÏ¤·¤Þ¤¹¡£
+
+¥Ç¡¼¥¿¤¬ [[m:Encoding.default_external]] ¤È°Û¤Ê¤ë¾ì¹ç¤Ï¡¢mode ¤Ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°
+¤ò»ØÄê¤¹¤ëÊ¸»úÎó¤òËä¤á¹þ¤Þ¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+
+You must provide a +mode+ with an embedded Encoding designator unless your
+data is in Encoding::default_external().  CSV will check the Encoding of the
+underlying IO object (set by the +mode+ you pass) to deterime how to parse
+the data.   You may provide a second Encoding to have the data transcoded as
+it is read just as you can with a normal call to IO::open().  For example,
+<tt>"rb:UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file but
+transcode it to UTF-8 before CSV parses it.
+
+An opened CSV object will delegate to many IO methods for convenience.  You
+may call:
+
+* binmode()
+* binmode?()
+* close()
+* close_read()
+* close_write()
+* closed?()
+* eof()
+* eof?()
+* external_encoding()
+* fcntl()
+* fileno()
+* flock()
+* flush()
+* fsync()
+* internal_encoding()
+* ioctl()
+* isatty()
+* path()
+* pid()
+* pos()
+* pos=()
+* reopen()
+* seek()
+* stat()
+* sync()
+* sync=()
+* tell()
+* to_i()
+* to_io()
+* truncate()
+* tty?()
+
+@param filename ¥Õ¥¡¥¤¥ëÌ¾¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param mode [[m:IO.open]] ¤Ë»ØÄê¤Ç¤­¤ë¤â¤Î¤ÈÆ±¤¸¤â¤Î¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+@see [[m:CSV.new]], [[m:IO.open]]
+
+--- parse(str, options = Hash.new){|row| ... } -> nil
+--- parse(str, options = Hash.new) -> Array
+
+¤³¤Î¥á¥½¥Ã¥É¤ÏÊ¸»úÎó¤ò´ÊÃ±¤Ë¥Ñ¡¼¥¹¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢¥Ö¥í¥Ã¥¯¤Ë¤½¤ì¤¾¤ì¤Î¹Ô¤òÅÏ¤·¤Þ¤¹¡£
+¥Ö¥í¥Ã¥¯¤ò¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¡¢ÇÛÎó¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+@param str Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+--- parse_line(line, options = Hash.new) -> Array
+
+¤³¤Î¥á¥½¥Ã¥É¤Ï°ì¹Ô¤Î CSV Ê¸»úÎó¤òÇÛÎó¤ËÊÑ´¹¤¹¤ë¤¿¤á¤Î¥·¥ç¡¼¥È¥«¥Ã¥È¤Ç¤¹¡£
+
+@param line Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£Ê£¿ô¹Ô¤ÎÊ¸»úÎó¤ò»ØÄê¤·¤¿¾ìÁê¤Ï¡¢°ì¹ÔÌÜ°Ê³°¤ÏÌµ»ë¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+--- read(path, options = Hash.new) -> [Array]
+--- readlines(path, options = Hash.new) -> [Array]
+
+CSV ¥Õ¥¡¥¤¥ë¤òÇÛÎó¤ÎÇÛÎó¤Ë¤¹¤ë¤¿¤á¤Ë»È¤¤¤Þ¤¹¡£
+
+#@# Îã¤òÄÉ²Ã¤¹¤ë
+
+@param path CSV ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+               :encoding ¤È¤¤¤¦¥­¡¼¤ò»ÈÍÑ¤¹¤ë¤ÈÆþÎÏ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò»ØÄê¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+               ÆþÎÏ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤« [[m:Encoding.default_external]] ¤È°Û¤Ê¤ë¾ì¹ç¤Ï
+               É¬¤º»ØÄê¤·¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+
+@see [[m:CSV.new]]
+
+--- table(path, options = Hash.new) -> Array
+
+°Ê²¼¤ÎÎã¤ÈÆ±Åù¤Î¤³¤È¤ò¹Ô¤¦¥á¥½¥Ã¥É¤Ç¤¹¡£
+ÆüËÜ¸ì¤Î CSV ¥Õ¥¡¥¤¥ë¤ò°·¤¦¾ì¹ç¤Ï¤¢¤Þ¤ê»È¤¤¤Þ¤»¤ó¡£
+
+Îã:
+
+  CSV.read( path, { headers:           true,
+                    converters:        :numeric,
+                    header_converters: :symbol }.merge(options) )
+
+@param path ¥Õ¥¡¥¤¥ëÌ¾¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param options [[m:CSV.new]] ¤Î¥ª¥×¥·¥ç¥ó¤ÈÆ±¤¸¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤Ç¤­¤Þ¤¹¡£
+
+== Instance Methods
+
+--- <<(row)      -> self
+--- add_row(row) -> self
+--- puts(row)    -> self
+
+¼«¿È¤Ë row ¤òÄÉ²Ã¤·¤Þ¤¹¡£
+
+¥Ç¡¼¥¿¥½¡¼¥¹¤Ï½ñ¤­¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+
+@param row ÇÛÎó¤« [[c:CSV::Row]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
+           [[c:CSV::Row]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¤Ï¡¢[[m:CSV::Row#fields]] ¤ÎÃÍ
+           ¤Î¤ß¤¬ÄÉ²Ã¤µ¤ì¤Þ¤¹¡£
+
+--- binmode
+#@todo
+delegate
+
+--- binmode?
+#@todo
+delegate
+
+--- close
+#@todo
+delegate
+
+--- close_read
+#@todo
+delegate
+
+--- close_write
+#@todo
+delegate
+
+--- closed?
+#@todo
+delegate
+
+--- col_sep -> String
+
+¥«¥é¥à¶èÀÚ¤êÊ¸»úÎó¤È¤·¤Æ»ÈÍÑ¤¹¤ëÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- convert(name)
+--- convert{|field| ... }
+--- convert{|field, field_info| ... }
+#@todo
+#@# discard
+
+You can use this method to install a CSV::Converters built-in, or provide a
+block that handles a custom conversion.
+
+If you provide a block that takes one argument, it will be passed the field
+and is expected to return the converted value or the field itself.  If your
+block takes two arguments, it will also be passed a CSV::FieldInfo Struct,
+containing details about the field.  Again, the block should return a
+converted field or the field itself.
+
+@param name ÊÑ´¹´ï¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
+
+--- converters -> Array
+
+¸½ºß¤ÎÊÑ´¹´ï¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV::Converters]]
+
+--- each{|row| ... } -> nil
+
+³Æ¹Ô¤ËÂÐ¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Þ¤¹¡£
+
+¥Ç¡¼¥¿¥½¡¼¥¹¤ÏÆÉ¤ß¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+
+--- encoding -> Encoding
+
+ÆÉ¤ß½ñ¤­¤¹¤ë¤È¤­¤Ë»ÈÍÑ¤¹¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Þ¤¹¡£
+
+--- eof
+#@todo
+delegate
+
+--- eof?
+#@todo
+delegate
+
+--- external_encoding
+#@todo
+delegate
+
+--- fcntl
+#@todo
+delegate
+
+--- field_size_limit -> Fixnum
+
+¥Õ¥£¡¼¥ë¥É¥µ¥¤¥º¤ÎºÇÂçÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- fileno
+#@todo
+delegate
+
+--- flock
+#@todo
+delegate
+
+--- flush
+#@todo
+delegate
+
+--- force_quotes? -> bool
+
+½ÐÎÏ¤µ¤ì¤ë¥Õ¥£¡¼¥ë¥É¤¬¥¯¥ª¡¼¥È¤µ¤ì¤ë¾ì¹ç¤Ï¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- fsync
+#@todo
+delegate
+
+--- header_convert(name)
+--- header_convert{|field| ... }
+--- header_convert{|field, field_info| ... }
+#@todo
+
+Identical to CSV#convert(), but for header rows.
+
+Note that this method must be called before header rows are read to have any
+effect.
+
+@param name ÊÑ´¹´ï¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@see [[m:CSV#convert]]
+
+--- header_converters -> Array
+#@todo
+
+Returns the current list of converters in effect for headers.  See CSV::new
+for details.  Built-in converters will be returned by name, while others
+will be returned as is.
+
+@see [[m:CSV.new]]
+
+--- header_row? -> bool
+
+¼¡¤ËÆÉ¤ß¹þ¤Þ¤ì¤ë¹Ô¤¬¡¢¥Ø¥Ã¥À¤Ç¤¢¤ë¾ì¹ç¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
+¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï¡¢µ¶¤òÊÖ¤·¤Þ¤¹¡£
+
+--- headers -> Array | true | nil
+
+nil ¤òÊÖ¤·¤¿¾ì¹ç¤Ï¡¢¥Ø¥Ã¥À¤Ï»ÈÍÑ¤µ¤ì¤Þ¤»¤ó¡£
+¿¿¤òÊÖ¤·¤¿¾ì¹ç¤Ï¡¢¥Ø¥Ã¥À¤ò»ÈÍÑ¤¹¤ë¤¬¡¢¤Þ¤ÀÆÉ¤ß¹þ¤Þ¤ì¤Æ¤¤¤Þ¤»¤ó¡£
+ÇÛÎó¤òÊÖ¤·¤¿¾ì¹ç¤Ï¡¢¥Ø¥Ã¥À¤Ï´û¤ËÆÉ¤ß¹þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+p
+--- inspect -> String
+
+ASCII ¸ß´¹Ê¸»úÎó¤Ç¼«¿È¤Î¾ðÊó¤òÉ½¤·¤¿¤â¤Î¤òÊÖ¤·¤Þ¤¹¡£
+
+--- internal_encoding
+#@todo
+delegate
+
+--- ioctl
+#@todo
+delegate
+
+--- isatty
+#@todo
+delegate
+
+--- lineno -> Fixnum
+
+¤³¤Î¥Õ¥¡¥¤¥ë¤«¤éÆÉ¤ß¹þ¤ó¤ÀºÇ½ª¹Ô¤Î¹ÔÈÖ¹æ¤òÊÖ¤·¤Þ¤¹¡£
+¥Õ¥£¡¼¥ë¥É¤Ë´Þ¤Þ¤ì¤ë²þ¹Ô¤Ï¤³¤ÎÃÍ¤Ë¤Ï±Æ¶Á¤·¤Þ¤»¤ó¡£
+
+--- path
+#@todo
+delegate
+
+
+--- pid
+#@todo
+delegate
+
+--- pos
+#@todo
+delegate
+
+--- pos=
+#@todo
+delegate
+
+--- quote_char -> String
+
+¥Õ¥£¡¼¥ë¥É¤ò¥¯¥ª¡¼¥È¤¹¤ë¤Î¤Ë»ÈÍÑ¤¹¤ëÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- read -> [Array]
+--- readlines -> [Array]
+
+»Ä¤ê¤Î¹Ô¤òÆÉ¤ß¹þ¤ó¤ÇÇÛÎó¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¡¼¥¿¥½¡¼¥¹¤ÏÆÉ¤ß¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
+
+--- reopen
+#@todo
+delegate
+
+--- return_headers? -> bool
+
+¥Ø¥Ã¥À¤òÊÖ¤¹¾ì¹ç¤Ï¡¢¿¿¤òÊÖ¤·¤Þ¤¹¡£
+¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï¡¢µ¶¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- rewind -> 0
+#@todo
+Rewinds the underlying IO object and resets CSV's lineno() counter.
+
+--- row_sep -> String
+
+¹Ô¶èÀÚ¤êÊ¸»úÎó¤È¤·¤Æ»ÈÍÑ¤¹¤ëÊ¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- seek
+#@todo
+delegate
+
+--- shift    -> Array | CSV::Row
+--- gets     -> Array | CSV::Row
+--- readline -> Array | CSV::Row
+
+[[c:String]] ¤ä [[c:IO]] ¤ò¥é¥Ã¥×¤·¤¿¥Ç¡¼¥¿¥½¡¼¥¹¤«¤é°ì¹Ô¤À¤±ÆÉ¤ß¹þ¤ó¤Ç
+¥Õ¥£¡¼¥ë¥É¤ÎÇÛÎó¤« [[c:CSV::Row]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¡¼¥¿¥½¡¼¥¹¤ÏÆÉ¤ß¹þ¤ßÍÑ¤Ë¥ª¡¼¥×¥ó¤µ¤ì¤Æ¤¤¤ëÉ¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
+
+@return ¥Ø¥Ã¥À¤ò»ÈÍÑ¤·¤Ê¤¤¾ì¹ç¤ÏÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+        ¥Ø¥Ã¥À¤ò»ÈÍÑ¤¹¤ë¾ì¹ç¤Ï [[c:CSV::Row]] ¤òÊÖ¤·¤Þ¤¹¡£
+
+--- skip_blanks? -> bool
+
+¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢¶õ¹Ô¤òÆÉ¤ßÈô¤Ð¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+--- stat
+#@todo
+delegate
+
+--- string
+#@todo
+delegate
+
+--- sync
+#@todo
+delegate
+
+--- sync=
+#@todo
+delegate
+
+--- tell
+#@todo
+delegate
+
+--- to_i
+#@todo
+delegate
+
+--- to_io
+#@todo
+delegate
+
+--- truncate
+#@todo
+delegate
+
+--- tty?
+#@todo
+delegate
+
+--- unconverted_fields? -> bool
+
+¥Ñ¡¼¥¹¤·¤¿·ë²Ì¤¬ unconverted_fields ¤È¤¤¤¦¥á¥½¥Ã¥É¤ò»ý¤Ä¾ì¹ç¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
+¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ï¡¢µ¶¤òÊÖ¤·¤Þ¤¹¡£
+
+#@# Array, CSV::Row ¤ËÆ°Åª¤ËÄÉ²Ã¤µ¤ì¤ë
+
+@see [[m:CSV.new]]
+
+--- write_headers? -> bool
+
+¥Ø¥Ã¥À¤ò½ÐÎÏÀè¤Ë½ñ¤­¹þ¤à¾ì¹ç¤Ï¿¿¤òÊÖ¤·¤Þ¤¹¡£
+¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ïµ¶¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:CSV.new]]
+
+
+= class CSV::FieldInfo < Struct
+
+¹Ô¤¬ÆÉ¤ß¹þ¤Þ¤ì¤¿¥Ç¡¼¥¿¥½¡¼¥¹Æâ¤Ç¤Î¥Õ¥£¡¼¥ë¥É¤Î°ÌÃÖ¤Î¾ðÊó¤ò³ÊÇ¼¤¹¤ë¤¿¤á¤Î
+¹½Â¤ÂÎ¤Ç¤¹¡£
+
+[[c:CSV]] ¥¯¥é¥¹¤Ç¤Ï¤³¤Î¹½Â¤ÂÎ¤Ï¤¤¤¯¤Ä¤«¤Î¥á¥½¥Ã¥É¤Î¥Ö¥í¥Ã¥¯¤ËÅÏ¤µ¤ì¤Þ¤¹¡£
+
+@see [[m:CSV.convert_fields]]
+
+== Instance Methods
+
+--- index -> Fixnum
+
+¹ÔÆâ¤Ç²¿ÈÖÌÜ¤Î¥Õ¥£¡¼¥ë¥É¤«¤ï¤«¤ë¥¼¥í¥Ù¡¼¥¹¤Î¥¤¥ó¥Ç¥Ã¥¯¥¹¤òÊÖ¤·¤Þ¤¹¡£
+
+--- index=(val)
+
+¥¤¥ó¥Ç¥Ã¥¯¥¹¤ÎÃÍ¤ò¥»¥Ã¥È¤·¤Þ¤¹¡£
+
+@param val ¥¤¥ó¥Ç¥Ã¥¯¥¹¤ÎÃÍ¤ò»ØÄê¤·¤Þ¤¹¡£
+
+--- line -> Fixnum
+
+¹ÔÈÖ¹æ¤òÊÖ¤·¤Þ¤¹¡£
+
+--- line=(val)
+
+¹ÔÈÖ¹æ¤ò¥»¥Ã¥È¤·¤Þ¤¹¡£
+
+@param val ¹ÔÈÖ¹æ¤ò»ØÄê¤·¤Þ¤¹¡£
+
+--- header -> Array
+
+ÍøÍÑ²ÄÇ½¤Ê¾ì¹ç¤Ï¥Ø¥Ã¥À¤òÉ½¤¹ÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
+
+
+--- header=(val)
+
+¥Ø¥Ã¥À¤òÉ½¤¹ÇÛÎó¤ò¥»¥Ã¥È¤·¤Þ¤¹¡£
+
+@param val ¥Ø¥Ã¥À¤òÉ½¤¹ÇÛÎó¤ò»ØÄê¤·¤Þ¤¹¡£
+
+= class CSV::MalformedCSVError < RuntimeError
+
+ÉÔÀµ¤Ê CSV ¤ò¥Ñ¡¼¥¹¤·¤è¤¦¤È¤·¤¿¤È¤­¤ËÈ¯À¸¤¹¤ëÎã³°¤Ç¤¹¡£
+
+#@include(csv/CSV__Row)
+#@include(csv/CSV__Table)
+#@else
 CSV (Comma Separated Values) ¤ò°·¤¦¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = class CSV < Object
@@ -23,8 +1016,7 @@ CSV (Comma Separated Values) ¤ò°·¤¦¥¯¥é¥¹¤Ç¤¹¡£
 == Class Methods
 
 --- open(path, mode, fs = nil, rs = nil) {|row| ... } -> nil
---- open(path, mode, fs = nil, rs = nil) -> CSV::Reader
---- open(path, mode, fs = nil, rs = nil) -> CSV::Writer
+--- open(path, mode, fs = nil, rs = nil) -> CSV::Reader | CSV::Writer
 
 CSV¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹þ¤ó¤Ç¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
 
@@ -39,8 +1031,8 @@ CSV¥Õ¥¡¥¤¥ë¤òÆÉ¤ß¹þ¤ó¤Ç¥Ñ¡¼¥¹¤·¤Þ¤¹¡£
             - 'b' ¥Ð¥¤¥Ê¥ê¥â¡¼¥É
 @param fs ¥Õ¥£¡¼¥ë¥É¥»¥Ñ¥ì¡¼¥¿¤Î»ØÄê¡£
           nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç ',' ¤ò¥»¥Ñ¥ì¡¼¥¿¤È¤·¤Þ¤¹¡£
-@param rs ¹Ô¶èÀÚ¤êÊ¸»ú¤Î»ØÄê¡£nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç CrLf / Lf¡£
-          Cr ¤ò¹Ô¶èÀÚ¤ê¤È¤·¤¿¤¤¾ì¹ç¤Ï ?\r ¤òÅÏ¤·¤Þ¤¹¡£
+@param rs ¹Ô¶èÀÚ¤êÊ¸»ú¤Î»ØÄê¡£nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç CRLF / LF¡£
+          CR ¤ò¹Ô¶èÀÚ¤ê¤È¤·¤¿¤¤¾ì¹ç¤Ï ?\r ¤òÅÏ¤·¤Þ¤¹¡£
 
 ===== Ãí°Õ
 
@@ -192,7 +1184,7 @@ src ¤Ç»ØÄê¤µ¤ì¤¿Ê¸»úÎó¤ò1¹ÔÊ¬¤È¤·¤Æ¥Ñ¡¼¥¹¤·ÇÛÎó¤ËÊÑ´¹¡¢¥Ö¥í¥Ã¥¯¤ËÅÏ¤·¤Þ¤¹¡£
 @param rs ¹Ô¶èÀÚ¤êÊ¸»ú¤Î»ØÄê¡£nil (¥Ç¥Õ¥©¥ë¥È) ¤Ç CrLf / Lf¡£
           Cr ¤ò¹Ô¶èÀÚ¤ê¤È¤·¤¿¤¤¾ì¹ç¤Ï ?\r ¤òÅÏ¤·¤Þ¤¹¡£
 
-#@if (version < "1.9.0")
+#@until 1.9.1
 --- generate_row(src, cells, out_dev, fs = nil, rs = nil) -> Fixnum
 
 src ¤Ç»ØÄê¤µ¤ì¤¿ÇÛÎó¤ò¥Ñ¡¼¥¹¤·¤Æ csv·Á¼°¤ÎÊ¸»úÎó¤È¤·¤Æ(¹Ô¶èÀÚ¤êÊ¸»ú¤â´Þ¤á¤Æ) out_dev ¤Ë½ÐÎÏ¤·¤Þ¤¹¡£
@@ -284,5 +1276,5 @@ CSV·Á¼°¤ÎÊ¸»úÎó¤ò¥Ñ¡¼¥¹¤·¤ÆCSV1¹Ô(row)Ê¬¤Î¥Ç¡¼¥¿¤òÇÛÎó¤ËÊÑ´¹¤· out_dev ¤Ë½ÐÎÏ¤·¤
 #@include(csv/CSV__StreamBuf)
 #@include(csv/CSV__StringReader)
 #@include(csv/CSV__Writer)
-
 #@end
+

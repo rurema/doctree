@@ -1,0 +1,229 @@
+#@since 1.9.1
+= class CSV::Table < Object
+extend Forwardable
+include Enumerable
+
+[[c:CSV::Table]] は CSV ドキュメントを表す二次元のデータ構造です。
+行単位や列単位の操作を行うことが出来ます。また必要であれば CSV に
+戻すこともできます。
+
+ヘッダ行の処理が有効である場合、[[c:CSV]] から返されるテーブルは全てこのクラスから
+構築されます。
+
+以下のメソッドを [[c:Array]] に委譲します。
+
+* empty?()
+* length()
+* size()
+
+== Singleton Methods
+
+--- new(array_of_rows) -> CSV::Table
+
+自身を初期化します。
+
+全ての行が同じヘッダを持つことを仮定しています。
+
+@param array_of_rows [[c:CSV::Row]] のインスタンスの配列を指定します。
+
+== Instance Methods
+
+--- <<(row_or_array) -> self
+
+自身の最後に新しい行を追加します。
+
+@param row_or_array [[c:CSV::Row]] のインスタンスか配列を指定します。
+                    配列を指定した場合は [[c:CSV::Row]] に変換されます。
+
+@return メソッドチェーンのために自身を返します。
+
+--- ==(other) -> bool
+
+自身の全ての行が比較対象と同じである場合は真を返します。
+そうでない場合は偽を返します。
+
+@param other [[c:CSV::Table]] を指定します。
+
+--- [](index_or_header) -> object
+#@todo
+In the default mixed mode, this method returns rows for index access and
+columns for header access.  You can force the index association by first
+calling by_col!() or by_row!().
+
+Columns are returned as an Array of values.  Altering that Array has no
+effect on the table.
+
+--- []=(index_or_header, value)
+#@todo
+
+In the default mixed mode, this method assigns rows for index access and
+columns for header access.  You can force the index association by first
+calling by_col!() or by_row!().
+
+Rows may be set to an Array of values (which will inherit the table's
+headers()) or a CSV::Row.
+
+Columns may be set to a single value, which is copied to each row of the
+column, or an Array of values.  Arrays of values are assigned to rows top
+to bottom in row major order.  Excess values are ignored and if the Array
+does not have a value for each row the extra rows will receive a +nil+.
+
+Assigning to an existing column or row clobbers the data.  Assigning to
+new columns creates them at the right end of the table.
+
+--- by_col -> CSV::Table
+#@todo
+
+カラムモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
+
+元のテーブルモードを変更せずにメソッドチェーンできるので便利です。
+しかし、大きなデータセットに対しても同じだけメモリを消費するので気をつけてください。
+
+This method returns the duplicate table for chaining.  Don't chain
+destructive methods (like []=()) this way though, since you are working
+with a duplicate.
+
+--- by_col! -> self
+
+自身をカラムモードに変更します。
+
+再びモードが変更されるまで、いくつかのメソッドはカラム単位で動きます。
+
+--- by_col_or_row -> CSV::Table
+#@todo
+
+ミックスモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
+
+元のテーブルモードを変更せずにメソッドチェーンできるので便利です。
+しかし、大きなデータセットに対しても同じだけメモリを消費するので気をつけてください。
+
+This method returns the duplicate table for chaining.  Don't chain
+destructive methods (like []=()) this way though, since you are working
+with a duplicate.
+
+--- by_col_or_row! -> self
+#@todo
+
+自身をミックスモードに変更します。
+
+Switches the mode of this table to mixed mode.  All calls to indexing and
+iteration methods will use the default intelligent indexing system until
+the mode is changed again.  In mixed mode an index is assumed to be a row
+reference while anything else is assumed to be column access by headers.
+
+This method returns the table and is safe to chain.
+
+--- by_row -> CSV::Table
+#@todo
+
+Returns a duplicate table object, in row mode.  This is handy for chaining
+in a single call without changing the table mode, but be aware that this
+method can consume a fair amount of memory for bigger data sets.
+
+This method returns the duplicate table for chaining.  Don't chain
+destructive methods (like []=()) this way though, since you are working
+with a duplicate.
+
+--- by_row! -> self
+#@todo
+
+Switches the mode of this table to row mode.  All calls to indexing and
+iteration methods will work with rows until the mode is changed again.
+
+This method returns the table and is safe to chain.
+
+--- delete(index_or_header) -> Object
+#@todo
+
+Removes and returns the indicated column or row.  In the default mixed
+mode indices refer to rows and everything else is assumed to be a column
+header.  Use by_col!() or by_row!() to force the lookup.
+
+--- delete_if{ ... } -> self
+#@todo
+
+Removes any column or row for which the block returns +true+.  In the
+default mixed mode or row mode, iteration is the standard row major
+walking of rows.  In column mode, interation will +yield+ two element
+tuples containing the column name and an Array of values for that column.
+
+This method returns the table for chaining.
+
+--- each{|header, field| ... } -> self
+#@todo
+
+In the default mixed mode or row mode, iteration is the standard row major
+walking of rows.  In column mode, interation will +yield+ two element
+tuples containing the column name and an Array of values for that column.
+
+This method returns the table for chaining.
+
+--- empty? -> bool
+#@todo
+
+delegate
+
+--- headers -> Array
+#@todo
+
+Returns the headers for the first row of this table (assumed to match all
+other rows).  An empty Array is returned for empty tables.
+
+--- inspect -> String
+#@todo
+
+Shows the mode and size of this table in a US-ASCII String.
+
+
+--- length -> Fixnum
+--- size -> Fixnum
+#@todo
+delegate
+
+--- mode -> Symbol
+
+現在のアクセスモードを返します。
+
+#@# アクセスモードについてどこかに書く。
+
+--- push(*rows) -> self
+#@todo
+A shortcut for appending multiple rows.  Equivalent to:
+
+  rows.each { |row| self << row }
+
+This method returns the table for chaining.
+
+--- to_a -> Array
+#@todo
+
+Returns the table as an Array of Arrays.  Headers will be the first row,
+then all of the field rows will follow.
+
+--- to_csv -> String
+--- to_s -> String
+#@todo
+Returns the table as a complete CSV String.  Headers will be listed first,
+then all of the field rows.
+
+This method assumes you want the Table.headers(), unless you explicitly
+pass <tt>:write_headers => false</tt>.
+
+--- values_at(indices_or_headers) -> Array
+#@todo
+The mixed mode default is to treat a list of indices as row access,
+returning the rows indicated.  Anything else is considered columnar
+access.  For columnar access, the return set has an Array for each row
+with the values indicated by the headers in each Array.  You can force
+column or row mode using by_col!() or by_row!().
+
+You cannot mix column and row access.
+
+
+== Protected Instance Methods
+
+--- table -> Array
+
+同値性を比較するために内部的に使用します。
+
+#@end
