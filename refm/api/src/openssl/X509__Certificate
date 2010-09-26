@@ -1,95 +1,138 @@
-#@since 1.8.0
 = class OpenSSL::X509::Certificate < Object
 
 X509 証明書クラス
 
 == Class Methods
 
---- new
---- new(str)
---- new(io)
-#@todo
-
+--- new(obj = nil) -> OpenSSL::X509::Certificate
 証明書オブジェクトを生成します。
+
+引数を与えなかった場合には、空の証明書を返します。
+
+obj が [[c:String]] である場合には、それを証明書データの文字列であると見なして
+その内容から証明書オブジェクトを生成します。
+
+obj が [[c:IO]] である場合には、そのファイルの中身から
+証明書オブジェクトを生成します。
+
+obj が [[c:OpenSSL::X509::Certificate]] オブジェクトである場合には、
+そのオブジェクトの内容を複製します。
+
+obj が to_der メソッドを持つ場合には、そのメソッドによって
+DER 形式のバイト列に変換し、証明書オブジェクトを生成します。
+
+@param obj 証明書のデータ
+@raise [[c:OpenSSL::X509::CertificateError]] 証明書のフォーマットが不正であるなど、読み込みに失敗した場合に発生します
 
 == Instance Methods
 
---- to_der
-#@todo
+--- to_der -> String
 
-DER 形式に変換します。
+DER 形式のバイト列を返します。
 
---- to_pem
---- to_s
-#@todo
+--- to_pem -> String
+--- to_s -> String
 
-PEM 形式に変換します。
+PEM 形式の文字列を返します。
 
---- to_text
-#@todo
+--- to_text -> String
 
-人間が読める形式に変換します。
+人間が読める形式の文字列を返します。
 
---- version
---- version=(version)
-#@todo
-
+--- version -> Integer
 X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
 
---- signature_algorithm
-#@todo
+--- version=(version)
+証明書のバージョンを設定します。
 
+@param version バージョン(0以上の整数)
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
+
+--- signature_algorithm -> String
 発行者 (CA) が証明書に署名するのに使ったアルゴリズムです。
 
---- serial
+--- serial -> Integer
+発行者 (CA) が証明書に付ける識別番号を返します。
+
+@see [[m:OpenSSL::X509::Certificate#serial=]]
 --- serial=(serial)
-#@todo
+証明書の識別番号を設定します。
 
-発行者 (CA) が証明書に付ける識別番号です。
+@param serial 識別番号
+@see [[m:OpenSSL::X509::Certificate#serial]]
 
---- subject
+--- subject -> OpenSSL::X509::Name
+証明書の所有者の名前を返します。
+
+
 --- subject=(name)
-#@todo
+証明書の所有者の名前を設定します。
 
-証明書の所有者の名前 [[c:OpenSSL::X509::Name]] オブジェクトです。
-http://www.ipa.go.jp/security/pki/033.html#_Toc3020767
+@param name 所有者の名前の [[c:OpenSSL::X509::Name]] オブジェクト
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
---- issuer
+--- issuer -> OpenSSL::X509::Name
+証明書の発行者の名前を返します。
+
 --- issuer=(name)
-#@todo
+証明書の発行者の名前を設定します。
 
-証明書の発行者 (CA) の名前 [[c:OpenSSL::X509::Name]] オブジェクトです。
+@param name 発行者の名前の [[c:OpenSSL::X509::Name]] オブジェクト
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
---- not_before
+--- not_before -> Time
+証明書が有効になる時刻を返します。
+
 --- not_before=(time)
-#@todo
+証明書が有効になる時刻を設定します。
 
-証明書が有効になる時刻 [[c:Time]] オブジェクトです。
+@param time 証明書の開始時刻
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
---- not_after
+--- not_after -> Time
+証明書が無効になる時刻を返します。
+
 --- not_after=(time)
-#@todo
+証明書が無効になる時刻を設定します。
 
-証明書が無効になる時刻 [[c:Time]] オブジェクトです。
+@param time 証明書の終了時刻
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
---- extensions
+--- extensions -> [OpenSSL::X509::Extension]
+証明書の拡張領域の内容を返します。
+
 --- extensions=(extensions)
-#@todo
+証明書の拡張領域の内容を設定します。
 
-証明書の拡張領域 [[c:OpenSSL::X509::Extension]] オブジェクトの [[c:Array]] です。
+@param extensions 設定する拡張([[c:OpenSSL::X509::Extension]] オブジェクト)の配列
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
---- add_extension(ext)
-#@todo
+--- add_extension(ext) -> OpenSSL::X509::Extension
+拡張領域に拡張を追加します。
 
-拡張領域に値を加えます。ext は [[c:OpenSSL::X509::Extension]] オブジェクトです。
+@return 追加した拡張を返します
+@param ext 追加する拡張([[c:OpenSSL::X509::Extension]] オブジェクト)
+@raise OpenSSL::X509::CertificateError 設定に失敗した場合に発生します
 
---- public_key
---- public_key=(pkeu)
-#@todo
+--- public_key -> OpenSSL::PKey::PKey
+証明書に記載された公開鍵を返します。
 
-証明書に記載された公開鍵 [[c:OpenSSL::PKey::RSA]] オブジェクトです。
+鍵の種類によって以下のいずれかのクラスのインスタンスを返します。
+  * [[c:OpenSSL::PKey::RSA]]
+  * [[c:OpenSSL::PKey::DSA]]
+  * [[c:OpenSSL::PKey::DH]]
+  * [[c:OpenSSL::PKey::EC]]
 
---- sign(pkey, digest)
+@raise [[c:OpenSSL::X509::CertificateError]] 鍵の取得に失敗した場合に発生します
+@raise [[c:OpenSSL::PKey::PKeyError]] サポートしていない種類の鍵である場合に発生します
+
+--- public_key=(pkey)
+証明書に公開鍵を設定します。
+
+@param pkey 公開鍵([[c:OpenSSL::PKey::PKey]]のサブクラスのインスタンス)
+@raise [[c:OpenSSL::X509::CertificateError]] 鍵の設定に失敗した場合に発生します
+
+--- sign(pkey, digest) -> self
 #@todo
 
 証明書に署名します。pkey は発行者の秘密鍵です。digest は
@@ -98,16 +141,21 @@ http://www.ipa.go.jp/security/pki/033.html#_Toc3020767
 オブジェクトでなければなりません。逆も同じです。OpenSSL::Digest::DSS1 は
 OpenSSL::PKey::DSA 以外のダイジェストとして使えません。
 
---- verify(key)
-#@todo
+--- verify(key) -> bool
+証明書の発行者の公開鍵で署名を検証します。
 
-key は証明書の発行者の公開鍵です。 key で証明書の署名を検証します。
+検証に成功した、すなわち self が key で署名されたことが
+確認された場合に真を返します。
 
---- check_private_key(pkey)
-#@todo
+@param key 検証に利用する発行者の公開鍵
 
+--- check_private_key(private_key) -> bool
 与えられた秘密鍵が証明書に記載されている subject の公開鍵と対応するものかを確かめます。
+
+確認に成功した場合に真を返します。
+@param private_key 確認用の秘密鍵
 
 = class OpenSSL::X509::CertificateError < OpenSSL::OpenSSLError
 
-#@end
+X509 証明書関連のエラーを表す例外くクラスです。
+

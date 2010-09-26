@@ -1,4 +1,3 @@
-#@if (version >= "1.8.0")
 = module OpenSSL::X509
 
   * [[c:OpenSSL::X509::Certificate]]
@@ -158,4 +157,4 @@ SSL のサーバサイドの証明書として使えるか。
 --- V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE
 #@todo
 
-#@end
+

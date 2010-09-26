@@ -1,13 +1,13 @@
-#@since 1.8.0
 = class OpenSSL::X509::Extension < Object
 
-X.509 v3 証明書の拡張領域のためのクラスです。[[c:OpenSSL::X509::Certificate]] オブジェクトは
+X.509 v3 証明書の拡張領域のためのクラスです。
+[[c:OpenSSL::X509::Certificate]] オブジェクトは
 その拡張領域を Extension オブジェクトの配列として保持しています。
 
   * [[c:OpenSSL::X509::ExtensionFactory]]
 
 === 例
-
+#@todo
   require 'openssl'
   require 'open-uri'
   
@@ -25,7 +25,9 @@ X.509 v3 証明書の拡張領域のためのクラスです。[[c:OpenSSL::X509::Certificate]] オ
 
 == Class Methods
 
---- new(oid, value, critical)
+--- new(der) -> [[c:OpenSSL::X509::Extension]]
+--- new(oid, value, critical=false) -> [[c:OpenSSL::X509::Extension]]
+[[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
 #@todo
 Extension オブジェクトを生成します。oid には拡張領域の OID をあらわす
 [[c:OpenSSL::ASN1::ObjectId]] オブジェクト、あるいは OID の short name か
@@ -43,44 +45,60 @@ long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
 
 == Instance Methods
 
-#@since 1.8.1
+---critical? -> bool
+その拡張領域の重要度(critical)を返します。
+
+@see [[c:OpenSSL::X509::Extension#critical=]]
 ---critical=(bool)
-#@end
----critical?
-#@todo
+その拡張領域の重要度(critical)を真偽値で設定します。
 
-クリティカルかどうかを設定します。
+@param bool 設定する重要度の真偽値
+@see [[c:OpenSSL::X509::Extension#critical?]]
 
----oid
-#@since 1.8.1
+---oid -> String
+拡張領域の識別子(extnID)をOIDの文字列で返します。
+
+@see [[c:OpenSSL::X509::Extension#oid=]]
+
 ---oid=(oid)
-#@todo
-#@end
 
-OID を文字列で設定します。
+拡張領域の識別子(extnID)をOIDの文字列で設定します。
 
----to_der
-#@todo
+@param oid OIDの文字列
+@raise OpenSSL::X509::Extension 識別子の設定に失敗した場合に発生します
+@see [[c:OpenSSL::X509::Extension#oid]]
 
-DER 形式に変換します。
+---to_der -> String
 
----value
-#@since 1.8.1
+DER 形式のバイト列に変換して返します。
+
+@raise OpenSSL::X509::Extension 変換に失敗した場合に発生します
+
+---value -> String
+
+拡張領域の値(extnValue)を返します。
+
+@see [[c:OpenSSL::X509::Extension#value=]]
+
 ---value=(value)
-#@todo
-#@end
 
-値を設定します。
+拡張領域の値(extnValue)を設定します。
 
---- to_a
-#@todo
+@param value 設定する値の文字列
+@raise OpenSSL::X509::Extension 値の設定に失敗した場合に発生します
+@see [[c:OpenSSL::X509::Extension#value]]
+--- to_a -> [String, String, bool]
 
---- to_h
-#@todo
+拡張領域の内容を、[識別子(extnID), 値(extnValue), 重要度(critical)] という
+形で返します。
 
---- to_s
-#@todo
+--- to_h -> Hash
+拡張領域の内容を、
+  { "oid" => 識別子(extnID), "value" => 値(extnValue), "critical" => 重要度(critical) }
+というハッシュで返します。
+
+--- to_s -> String
+拡張領域の内容を、文字列表現で返します。
 
 = class OpenSSL::X509::ExtensionError < OpenSSL::OpenSSLError
-
-#@end
+[[c:OpenSSL::X509::Extension]] 関連のエラーが起きたときに発生します。

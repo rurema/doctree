@@ -1,4 +1,3 @@
-#@since 1.8.0
 = class OpenSSL::X509::Store < Object
 
 証明書のストレージクラス。
@@ -80,4 +79,4 @@ verify を呼び出した時のエラー内容を述べた文字列です。エラーでない場合は、"ok" が
 #@end
 
 = class OpenSSL::X509::Store < OpenSSL::OpenSSLError
-#@end
+
