@@ -20,7 +20,17 @@ argv を返します。
 
 --- set_option(opt, eq) -> self
 
-#@todo
+エラーのあったオプションを指定します。
+
+eq が真の場合、self が管理するエラーのあったオプションの一覧の先頭を
+opt で置き換えます。そうでない場合は先頭に opt を追加します。
+
+@param opt エラーのあったオプションを指定します。
+
+@param eq self が管理するエラーのあったオプションの一覧の先頭を置き換え
+          るかどうかを指定します。
+
+@return self を返します。
 
 --- args -> Array
 
@@ -38,7 +48,7 @@ argv を返します。
 
 エラーの内容を指定します。
 
-@param reason 文字列
+@param reason 文字列を指定します。
 
 --- inspect -> String
 
@@ -54,17 +64,26 @@ argv を返します。
 @return 文字列を返します。
 
 #@since 1.8.8
---- set_backtrace(array)
+--- set_backtrace(array) -> [String]
 
-#@todo
+自身に array で指定したバックトレースを設定します。
 
-@see [[m:OptionParser::ParseError.filter_backtrace]]
+@param array バックトレースを文字列の配列で指定します。
+
+@return array を返します。
 
 == Class Methods
 
---- filter_backtrace(array)
+--- filter_backtrace(array) -> [String]
 
-#@todo
+array で指定されたバックトレースから optparse ライブラリに関する行を除
+外します。
+
+デバッグモード([[m:$DEBUG]]が真)の場合は何もしません。
+
+@param array バックトレースを文字列の配列で指定します。
+
+@return array を返します。
 
 #@end
 
