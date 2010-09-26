@@ -8,6 +8,66 @@
 
 OptionParser の例外クラスの基底クラスです。
 
+== Instance Methods
+
+--- recover(argv) -> Array
+
+argv の先頭に self.args を戻します。
+
+argv を返します。
+
+@return argv を返します。
+
+--- set_option(opt, eq) -> self
+
+#@todo
+
+--- args -> Array
+
+エラーのあったオプションの一覧を配列で返します。
+
+@return エラーのあったオプションの一覧。
+
+--- reason -> String
+
+エラーの内容を文字列で返します。
+
+@return 文字列を返します。
+
+--- reason=(reason)
+
+エラーの内容を指定します。
+
+@param reason 文字列
+
+--- inspect -> String
+
+自身を人間が読みやすい形の文字列表現にして返します。
+
+@return 文字列を返します。
+
+--- message -> String
+--- to_s    -> String
+
+標準エラーに出力するメッセージを返します。
+
+@return 文字列を返します。
+
+#@since 1.8.8
+--- set_backtrace(array)
+
+#@todo
+
+@see [[m:OptionParser::ParseError.filter_backtrace]]
+
+== Class Methods
+
+--- filter_backtrace(array)
+
+#@todo
+
+#@end
+
 = class OptionParser::AmbiguousOption < OptionParser::ParseError
 
 補完が曖昧にしかできないオプションがあった場合に投げられます。
