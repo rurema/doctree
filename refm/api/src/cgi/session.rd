@@ -249,7 +249,7 @@ umask 値が 0022 ならば
 
 : tmpdir
     [[c:CGI::Session::FileStore]] がセッションデータを作成するディレクトリの名前を指定します。
-    デフォルトはは [[m:Dir.tmpdir]] です。
+    デフォルトは [[m:Dir.tmpdir]] です。
 
 : prefix
     [[c:CGI::Session::FileStore]] がセッションデータのファイル名に与えるプレフィックス。
