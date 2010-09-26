@@ -172,7 +172,7 @@ delete_all、auth_only なども APOP とともに使えます。
     end
   end
 
-[[Net::POPMail#unique_id]] はメッセージのユニークIDを文字列で返します。
+[[m:Net::POPMail#unique_id]] はメッセージのユニークIDを文字列で返します。
 これは通常そのメッセージのハッシュ値です。
 
 ==== SSL/TLS による暗号化

@@ -389,7 +389,7 @@ SMTP セッションが開始されていたら真を返します。
 @see [[m:Net::SMTP#start]], [[m:Net::SMTP#finish]]
 
 --- inspect -> String
-@see [[Object#inspect]]
+@see [[m:Object#inspect]]
 
 --- address -> String
 
