@@ -622,7 +622,7 @@ DATA コマンドを送ります。
 通常は [[m:Net::SMTP#send_message]], [[m:Net::SMTP#open_message_stream]] で
 DATA が送られるため利用する必要はないはずです。
 
-@param メールの本文
+@param message メールの本文
 
 --- quit -> Net::SMTP::Response
 QUIT コマンドを送ります。
