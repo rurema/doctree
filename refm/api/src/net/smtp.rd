@@ -368,7 +368,6 @@ authtype は使用する認証のタイプで、
 この場合終了時に [[m:Net::SMTP#close]] を呼ぶのは利用者の責任と
 なります。
 
-[[m:Net::SMTP#enable_tls]] や [[m:Net::SMTP#
 @param helo_domain HELO で名乗るドメイン名です
 @param account 認証で使うアカウント名
 @param password 認証で使うパスワード
