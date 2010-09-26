@@ -215,14 +215,15 @@ Windows╔╕╜рд╬е╪еые╫╔╜╝ие│еєе▌б╝е═еєе╚д╬HHCtrl.OCXдЄ═°═╤д╖д╞бвеке╓е╕езепе╚д╦┤╪╧в╔
 
 #@if (version < "1.9.0")
 
---- [](name [, param...]) -> object
+--- [](name) -> object
+--- [](name, param...) -> object
 еке╓е╕езепе╚д╬е╫еэе╤е╞егдЄ╗▓╛╚д╖д▐д╣бг
 
-├э░╒бз д│д╬есе╜е├е╔д╧Ruby-1.9░╩╣▀д╟╞░║юдм╩╤дядъд▐д╣бг
+├э░╒бз д│д╬есе╜е├е╔д╧Ruby-1.9░╩╣▀д╟╞░║юдм╩╤дядъд▐д╣бгRuby-1.9д╟д╧е╫еэе╤е╞ег╠╛дЄесе╜е├е╔╠╛д╚д╖д┐есе╜е├е╔╕╞д╙╜╨д╖╖┴╝░д╟╡н╜╥д╖д╞дпд└д╡ддбг
 
 []д╬├цд╦WIN32OLEеке╓е╕езепе╚д╬е╫еэе╤е╞ег╠╛дЄ╗╪─ъд╣дыд│д╚д╟бвеке╓е╕езепе╚дЄHashд╬дшджд╦░╖д├д╞е╫еэе╤е╞ег├═дЄ╗▓╛╚д╖д▐д╣бг
 
-е╤ещесб╝е┐╔╒дне╫еэе╤е╞егд╬╛ь╣чд╧бве╫еэе╤е╞ег╠╛д╦┬│д▒д╞б╓,б╫д╟╢ш└┌д├д╞░·┐ЇдЄ╬є╡нд╖д▐д╣бг
+е╤ещесб╝е┐╔╒дне╫еэе╤е╞егд╬╛ь╣чд╧бве╫еэе╤е╞ег╠╛д╦┬│д▒д╞░·┐ЇдЄб╓,б╫д╟╢ш└┌д├д╞╬є╡нд╖д▐д╣бг
 
 @param name е╫еэе╤е╞ег╠╛дЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
 @param param е╫еэе╤е╞егдм░·┐ЇдЄ╝шды╛ь╣чд╦╗╪─ъд╖д▐д╣бг
@@ -237,14 +238,15 @@ Windows╔╕╜рд╬е╪еые╫╔╜╝ие│еєе▌б╝е═еєе╚д╬HHCtrl.OCXдЄ═°═╤д╖д╞бвеке╓е╕езепе╚д╦┤╪╧в╔
    excel = WIN32OLE.new('Excel.Application')
    visible = excel.visible  #=> false
 
---- []=(name, [param, ...] value) -> ()
+--- []=(name, value) -> ()
+--- []=(name, param..., value) -> ()
 еке╓е╕езепе╚д╬е╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
 
-├э░╒бз д│д╬есе╜е├е╔д╧Ruby-1.9░╩╣▀д╟╞░║юдм╩╤дядъд▐д╣бг
+├э░╒бз д│д╬есе╜е├е╔д╧Ruby-1.9░╩╣▀д╟╞░║юдм╩╤дядъд▐д╣бгRuby-1.9д╟д╧[[c:WIN32OLE#setproperty]]дЄ═°═╤д╖д╞дпд└д╡ддбг
 
 []д╟е╫еэе╤е╞ег╠╛дЄ╗╪─ъд╖д┐е╫еэе╤е╞егд╦├═дЄ└▀─ъд╖д▐д╣бг
 
-е╤ещесб╝е┐╔╒дне╫еэе╤е╞егд╬╛ь╣чд╧бве╫еэе╤е╞ег╠╛д╦┬│д▒д╞б╓,б╫д╟╢ш└┌д├д╞░·┐ЇдЄ╬є╡нд╖д▐д╣бг
+е╤ещесб╝е┐╔╒дне╫еэе╤е╞егд╬╛ь╣чд╧бве╫еэе╤е╞ег╠╛д╦┬│д▒д╞░·┐ЇдЄб╓,б╫д╟╢ш└┌д├д╞╬є╡нд╖д▐д╣бг
 
 @param name е╫еэе╤е╞ег╠╛дЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
 @param param е╫еэе╤е╞егдм░·┐ЇдЄ╝шды╛ь╣чд╦╗╪─ъд╖д▐д╣бг
@@ -252,13 +254,13 @@ Windows╔╕╜рд╬е╪еые╫╔╜╝ие│еєе▌б╝е═еєе╚д╬HHCtrl.OCXдЄ═°═╤д╖д╞бвеке╓е╕езепе╚д╦┤╪╧в╔
 
 OLEекб╝е╚есб╝е╖ечеєд╬е╫еэе╤е╞егд╧Rubyд╬┬░└нд╚░█д╩дъбве╤ещесб╝е┐дЄ╝шдыд│д╚дмд╟днд▐д╣бг
 
-д┐д╚дид╨Excelд╬Rangeеке╓е╕езепе╚д╬Cellsе╫еэе╤е╞егд╧╖х░╠├╓д╚╣╘╚╓╣цд╬2д─д╬е╤ещесб╝е┐дЄ╝шдъд▐д╣бг
+д┐д╚дид╨Excelд╬Worksheetеке╓е╕езепе╚д╬Cellsе╫еэе╤е╞егд╧╖х░╠├╓д╚╣╘╚╓╣цд╬2д─д╬е╤ещесб╝е┐дЄ╝шдъд▐д╣бг
 
 д│дьд╧VBд╟д╧╝бд╬дшджд╦╡н╜╥д╟днд▐д╣бг
 
-  Range.Cells(1, 1) = Range.Cells(1, 2) ' е╗еыB1д╬╞т═╞дЄе╗еыA1д╪
+  sheet.Cells(1, 1) = sheet.Cells(1, 2) ' е╗еыB1д╬╞т═╞дЄе╗еыA1д╪
 
-Rubyд╟д╧╛х╡нд╬е│б╝е╔д╬▒ж╩╒д╦д─ддд╞д╧VBд╚╞▒д╕дшджд╦╡н╜╥д╟днд▐д╣дмбв║╕╩╒д╦д─ддд╞д╧╡н╜╥д╟днд▐д╗дєбг
+Rubyд╟д╧╛х╡нд╬е│б╝е╔д╬▒ж╩╒дЄVBд╚╞▒д╕дпб╓sheet.Cells(1, 2)б╫д╬дшджд╦╡н╜╥д╟днд▐д╣дмбв║╕╩╒д╬╡н╜╥д╧д╟днд▐д╗дєбг
 
 д╜д╬д┐дсбв╝бд╬╬уд╬дшджд╦[]=есе╜е├е╔дЄ═°═╤д╖д╞бве╤ещесб╝е┐╔╒дне╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
 
@@ -266,36 +268,36 @@ Rubyд╟д╧╛х╡нд╬е│б╝е╔д╬▒ж╩╒д╦д─ддд╞д╧VBд╚╞▒д╕дшджд╦╡н╜╥д╟днд▐д╣дмбв║╕╩╒д╦д─ддд╞д╧
    excel.visible = true
    sheet = excel.Workbooks.Add.Worksheets(1)
    sheet['Cells', 1, 2] = 321
-   sheet['Cells', 1, 1] = sheet['Cells', 1, 2]
+   sheet['Cells', 1, 1] = sheet['Cells', 1, 2] #== sheet['Cells', 1, 1] = sheet.Cells(1, 2)
 
 #@else
 
---- [](key1...) -> object
+--- [](key...) -> object
 еке╓е╕езепе╚д╬е╟е╒ейеые╚е╫еэе╤е╞егдЄ╗▓╛╚д╖д▐д╣бг
 
 OLEекб╝е╚есб╝е╖ечеєд╦д╧е╟е╒ейеые╚е╫еэе╤е╞егд╚дддже╫еэе╤е╞ег╠╛дЄ╗╪─ъд╗д║д╦евепе╗е╣д╟дндые╫еэе╤е╞егдмдвдъд▐д╣бг
 
-WIN32OLEдлдще╟е╒ейеые╚е╫еэе╤е╞егд╦евепе╗е╣д╣дыд╦д╧бв[]╞тд╦╔м═╫д╩енб╝дЄ╩╕╗·╬єдле╖еєе▄еыд╟б╓,б╫д╟╢ш└┌д├д╞╡н╜╥д╖д▐д╣бг
+WIN32OLEдлдще╟е╒ейеые╚е╫еэе╤е╞егд╦евепе╗е╣д╣дыд╦д╧бв[]╞тд╦╔м═╫д╩енб╝дЄб╓,б╫д╟╢ш└┌д├д╞╡н╜╥д╖д▐д╣бге╖еєе▄еыд╧╩╕╗·╬єд╚д╖д╞░╖ддд▐д╣бг
 
 д╩дке╟е╒ейеые╚е╫еэе╤е╞егд╧╡н╜╥дм╛╩╬мд╟дндые╫еэе╤е╞ег╠╛д╦░╒╠гдмд╩ддд┐дсбвOLEекб╝е╚есб╝е╖ечеє╡м╠єд╟д╧Itemд╚╠┐╠╛д╣дыд│д╚дм╖шдсдщдьд╞ддд▐д╣бг
 
-@param key1 ╩╕╗·╬єдле╖еєе▄еыд╟╛Ё╩єдЄ╞├─ъд╣дые╤ещесб╝е┐дЄ║╟─у1д─╗╪─ъд╖д▐д╣бг╩г┐Їд╬е╤ещесб╝е┐дм╔м═╫д╩╛ь╣чд╧б╓,б╫д╟╢ш└┌д├д╞╬є╡нд╖д▐д╣бг
+@param key е╫еэе╤е╞егд╟евепе╗е╣д╣ды╛Ё╩єдЄ╞├─ъд╣дыенб╝дЄ╗╪─ъд╖д▐д╣бге╫еэе╤е╞егд╬╞├─ъд╦╩г┐Їд╬енб╝дм╔м═╫д╩╛ь╣чд╧б╓,б╫д╟╢ш└┌д├д╞╬є╡нд╖д▐д╣бг
 
 @return е╫еэе╤е╞ег├═дЄ╩╓д╖д▐д╣бг
 
   fsys = WIN32OLE.new('Scripting.FileSystemObject')
   fsys.Drives[:c].FreeSpace #=> Cе╔ещеде╓д╬╢їдн═╞╬╠
 
---- []=(key1, [key2, ...,] value) -> ()
+--- []=(key..., value) -> ()
 еке╓е╕езепе╚д╬е╟е╒ейеые╚е╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
 
 OLEекб╝е╚есб╝е╖ечеєд╦д╧е╟е╒ейеые╚е╫еэе╤е╞егд╚дддже╫еэе╤е╞ег╠╛дЄ╗╪─ъд╗д║д╦евепе╗е╣д╟дндые╫еэе╤е╞егдмдвдъд▐д╣бг
 
-WIN32OLEдлдще╟е╒ейеые╚е╫еэе╤е╞егд╦евепе╗е╣д╣дыд╦д╧бв[]╞тд╦╔м═╫д╩енб╝дЄ╩╕╗·╬єдле╖еєе▄еыд╟б╓,б╫д╟╢ш└┌д├д╞╡н╜╥д╖д▐д╣бг
+WIN32OLEдлдще╟е╒ейеые╚е╫еэе╤е╞егд╦евепе╗е╣д╣дыд╦д╧бв[]╞тд╦╔м═╫д╩енб╝дЄ╡н╜╥д╖д▐д╣бг
 
-д╩дке╟е╒ейеые╚е╫еэе╤е╞егд╧╡н╜╥дм╛╩╬мд╟дндые╫еэе╤е╞ег╠╛д╦░╒╠гдмд╩ддд┐дсбвOLEекб╝е╚есб╝е╖ечеє╡м╠єд╟д╧Itemд╚╠┐╠╛д╣дыд│д╚дм╖шдсдщдьд╞ддд▐д╣бг
+д╩дке╟е╒ейеые╚е╫еэе╤е╞егд╧╡н╜╥дм╛╩╬мд╟дндые╫еэе╤е╞ег╠╛д╦д╧░╒╠гдмдвдъд▐д╗дєбгд│д╬д┐дсOLEекб╝е╚есб╝е╖ечеє╡м╠єд╟д╧░ь╬зд╦Itemд╚╠┐╠╛д╣дыд│д╚дм╖шдсдщдьд╞ддд▐д╣бг
 
-@param key1 ╩╕╗·╬єдле╖еєе▄еыд╟╛Ё╩єдЄ╞├─ъд╣дые╤ещесб╝е┐дЄ║╟─у1д─╗╪─ъд╖д▐д╣бг╩г┐Їд╬е╤ещесб╝е┐дм╔м═╫д╩╛ь╣чд╧б╓,б╫д╟╢ш└┌д├д╞╬є╡нд╖д▐д╣бг
+@param key е╫еэе╤е╞егд╟евепе╗е╣д╣ды╛Ё╩єдЄ╞├─ъд╣дыенб╝дЄ╗╪─ъд╖д▐д╣бге╫еэе╤е╞егд╬╞├─ъд╦╩г┐Їд╬енб╝дм╔м═╫д╩╛ь╣чд╧б╓,б╫д╟╢ш└┌д├д╞╬є╡нд╖д▐д╣бг
 @param value е╫еэе╤е╞егд╦└▀─ъд╣ды├═дЄ╗╪─ъд╖д▐д╣бг
 
   dict = WIN32OLE.new('Scripting.Dictionary')
@@ -307,16 +309,35 @@ WIN32OLEдлдще╟е╒ейеые╚е╫еэе╤е╞егд╦евепе╗е╣д╣дыд╦д╧бв[]╞тд╦╔м═╫д╩енб╝дЄ╩╕╗·╬єдле╖
 #@end
 
 
---- _getproperty(dispid, args, types)
-#@todo
+--- _getproperty(dispid, args, types) -> object
+DISPIDд╚е╤ещесб╝е┐д╬╖┐дЄ╗╪─ъд╖д╞еке╓е╕езепе╚д╬е╫еэе╤е╞егдЄ╗▓╛╚д╖д▐д╣бг
 
-Runs the early binding method to get property. The 1st argument
-specifies dispatch ID, the 2nd argument specifies the array of
-arguments, the 3rd argument specifies the array of the type of
-arguments.
+евепе╗е╣д╣дые╫еэе╤е╞егд╬едеєе┐б╝е╒езеде╣дЄ╗Ў┴░д╦├╬д├д╞ддды╛ь╣чд╦бвDISPIDд╚е╤ещесб╝е┐д╬╖┐дЄ╗╪─ъд╖д╞е╫еэе╤е╞егдЄ╗▓╛╚д╖д▐д╣бг
 
+@param dispid е╫еэе╤е╞егд╬DISPIDб╩есе╜е├е╔дЄ░ь░╒д╦╞├─ъд╣ды┐Ї├═б╦дЄ╗╪─ъд╖д▐д╣бг
+@param args е╫еэе╤е╞егдм░·┐ЇдЄ╝шды╛ь╣чд╦╟█╬єд╟╗╪─ъд╖д▐д╣бг░·┐Їд╬╜ч╜°д╧║╟║╕├╝д╬░·┐Їд╬едеєе╟е├епе╣дЄ0д╚д╖д▐д╣бг░·┐Їдм╔╘═╫д╩╛ь╣чд╧╢ї╟█╬єдЄ╗╪─ъд╖д▐д╣бг
+@param types е╫еэе╤е╞егдм░·┐ЇдЄ╝шды╛ь╣чд╦╟█╬єд╟░·┐Їд╬╖┐дЄ╗╪─ъд╖д▐д╣бг░·┐Їд╬╜ч╜°д╧║╟║╕├╝д╬░·┐Їд╬едеєе╟е├епе╣дЄ0д╚д╖д▐д╣бг╖┐д╬╗╪─ъд╦д╧бв[[c:WIN32OLE::VARIANT]]д╬─ъ┐ЇдЄ═°═╤д╖д▐д╣бг░·┐Їдм╔╘═╫д╩╛ь╣чд╧╢ї╟█╬єдЄ╗╪─ъд╖д▐д╣бг
+
+д│д╬есе╜е├е╔д╧COMевб╝еъб╝е╨едеєе╟егеєе░дЄ═°═╤д╣дыд│д╚д╟│░╔Їе╫еэе╗е╣е╡б╝е╨д╚д╬ещежеєе╔е╚еъе├е╫дЄ╣╘ддбв╜ш═¤┬о┼┘д╬╕■╛хдЄ╠▄┼кд╚д╖д┐дтд╬д╟д╣бгд│д╬д┐дсбвDLLд╬╖┴╝░д╟╖┐╛Ё╩єб╩TYPELIBб╦дЄ─є╢бд╖д╞дддые╡б╝е╨д╦┬╨д╖д╞д╧двд▐дъ░╒╠гдЄ╗¤д┴д▐д╗дєбг
+
+@return е╫еэе╤е╞ег├═дЄ╩╓д╖д▐д╣бг
+
+   DISPID_CELLS = 238
+   include WIN32OLE::VARIANT
    excel = WIN32OLE.new('Excel.Application')
-   puts excel._getproperty(558, [], []) # same effect as puts excel.visible
+   puts excel._getproperty(558, [], []) # Visibleе╫еэе╤е╞егд╬DISPIDд╧558
+   workbook = excel.Workbooks.Add
+#@if (version < "1.9.0")
+   sheet = workbook.Worksheets(1)
+#@else
+   sheet = workbook.Worksheets[1]
+#@end
+   sheet._setproperty(DISPID_CELLS, [1, 2, 'hello'], [VT_I2, VT_I2, VT_BSTR])
+   puts sheet._getproperty(DISPID_CELLS, [1, 2], [VT_I2, VT_I2]).value  #=> 'hello'
+   workbook.Close(:SaveChanges => false)
+   excel.Quit
+
+DISPIDд╧[[m:WIN32OLE_METHOD#dispid]]длдщ╝ш╞└д╟днд▐д╣бг
 
 --- _invoke(dispid, args, types)
 #@todo
@@ -328,16 +349,34 @@ argument specifies the array of the type of arguments.
    excel = WIN32OLE.new('Excel.Application')
    excel._invoke(302, [], []) #  same effect as excel.Quit
 
---- _setproperty(dispid, args, types)
-#@todo
+--- _setproperty(dispid, args, types) -> ()
+DISPIDд╚е╤ещесб╝е┐д╬╖┐дЄ╗╪─ъд╖д╞еке╓е╕езепе╚д╬е╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
 
-Runs the early binding method to set property. The 1st argument
-specifies dispatch ID, the 2nd argument specifies the array of
-arguments, the 3rd argument specifies the array of the type of
-arguments.
+евепе╗е╣д╣дые╫еэе╤е╞егд╬едеєе┐б╝е╒езеде╣дЄ╗Ў┴░д╦├╬д├д╞ддды╛ь╣чд╦бвDISPIDд╚е╤ещесб╝е┐д╬╖┐дЄ╗╪─ъд╖д╞е╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
 
+д│д╬есе╜е├е╔д╧COMевб╝еъб╝е╨едеєе╟егеєе░дЄ═°═╤д╣дыд│д╚д╟│░╔Їе╫еэе╗е╣е╡б╝е╨д╚д╬ещежеєе╔е╚еъе├е╫дЄ╣╘ддбв╜ш═¤┬о┼┘д╬╕■╛хдЄ╠▄┼кд╚д╖д┐дтд╬д╟д╣бгд│д╬д┐дсбвDLLд╬╖┴╝░д╟╖┐╛Ё╩єб╩TYPELIBб╦дЄ─є╢бд╖д╞дддые╡б╝е╨д╦┬╨д╖д╞д╧двд▐дъ░╒╠гдЄ╗¤д┴д▐д╗дєбг
+
+@param dispid е╫еэе╤е╞егд╬DISPIDб╩есе╜е├е╔дЄ░ь░╒д╦╞├─ъд╣ды┐Ї├═б╦дЄ╗╪─ъд╖д▐д╣бг
+@param args ░·┐ЇдЄ╟█╬єд╟╗╪─ъд╖д▐д╣бг░·┐Їд╬╜ч╜°д╧║╟║╕├╝д╬░·┐Їд╬едеєе╟е├епе╣дЄ0д╚д╖д▐д╣бге╫еэе╤е╞егд╦┬╨д╣ды└▀─ъ├═д╧║╟▒ж├╝д╬═╫┴╟д╟д╣бг
+@param types е╫еэе╤е╞егд╬░·┐Їд╬╖┐дЄ╟█╬єд╟╗╪─ъд╖д▐д╣бг░·┐Їд╬╜ч╜°д╧║╟║╕├╝д╬░·┐Їд╬едеєе╟е├епе╣дЄ0д╚д╖д▐д╣бг╖┐д╬╗╪─ъд╦д╧бв[[c:WIN32OLE::VARIANT]]д╬─ъ┐ЇдЄ═°═╤д╖д▐д╣бг
+
+   DISPID_CELLS = 238
+   include WIN32OLE::VARIANT
    excel = WIN32OLE.new('Excel.Application')
-   excel._setproperty(558, [true], [WIN32OLE::VARIANT::VT_BOOL]) # same effect as excel.visible = true
+   puts excel._setproperty(558,      # Visibleе╫еэе╤е╞егд╬DISPIDд╧558
+                          [true], [VT_BOOL])
+   workbook = excel.Workbooks.Add
+#@if (version < "1.9.0")
+   sheet = workbook.Worksheets(1)
+#@else
+   sheet = workbook.Worksheets[1]
+#@end
+   sheet._setproperty(DISPID_CELLS, [1, 2, 'hello'], [VT_I2, VT_I2, VT_BSTR])
+   puts sheet._getproperty(DISPID_CELLS, [1, 2], [VT_I2, VT_I2]).value  #=> 'hello'
+   workbook.Close(:SaveChanges => false)
+   excel.Quit
+
+DISPIDд╧[[m:WIN32OLE_METHOD#dispid]]длдщ╝ш╞└д╟днд▐д╣бг
 
 --- each {|i|...}
 #@todo
@@ -435,19 +474,10 @@ the array is property (gettable) of WIN32OLE object.
    excel = WIN32OLE.new('Excel.Application')
    properties = excel.ole_get_methods
 
+--- ole_method(method)
 --- ole_method_help(method)
 #@todo
-alias ole_method_help
 
-Returns WIN32OLE_METHOD object corresponding with method specified
-by 1st argument.
-
-   excel = WIN32OLE.new('Excel.Application')
-   method = excel.ole_method_help('Quit')
-
---- ole_method_help(method)
-#@todo
-alias ole_method_help
 
 Returns WIN32OLE_METHOD object corresponding with method specified
 by 1st argument.
@@ -465,6 +495,7 @@ method of WIN32OLE object.
    methods = excel.ole_methods
 
 --- ole_obj_help -> WIN32OLE_TYPE | nil
+--- ole_type -> WIN32OLE_TYPE | nil
 [[c:WIN32OLE_TYPE]]еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
 
 [[c:WIN32OLE_TYPE]]еке╓е╕езепе╚д╧бвWIN32OLEеке╓е╕езепе╚д╬╩╕╜ё╛Ё╩єд╚╖┐╛Ё╩єдЄ╩▌╗¤д╣дыеке╓е╕езепе╚д╟д╣бг
@@ -485,17 +516,48 @@ the array is property (settable) of WIN32OLE object.
    properties = excel.ole_put_methods
 
 
---- setproperty('property', [arg1, arg2,...] val)
-#@todo
+--- setproperty(name, val) -> ()
+--- setproperty(name, args..., val) -> ()
 
-Sets property of OLE object. When you want to set property with
-argument, you can use this method.
+еке╓е╕езепе╚д╬е╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
+
+#@if (version < "1.9.0")
+@param name е╫еэе╤е╞ег╠╛дЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
+#@else
+@param name е╫еэе╤е╞ег╠╛дЄ╩╕╗·╬єд▐д┐д╧е╖еєе▄еыд╟╗╪─ъд╖д▐д╣бг
+#@end
+@param val е╫еэе╤е╞егд╦└▀─ъд╣ды├═дЄ╗╪─ъд╖д▐д╣бг
+@param args ╜╕╣ч┼кд╩е╫еэе╤е╞егд╦┬╨д╣ды└▀─ъ╣р╠▄дЄ╞├─ъд╣дыд┐дсд╬░·┐ЇдЄ╗╪─ъд╖д▐д╣бг
+
+OLEекб╝е╚есб╝е╖ечеєд╬е╫еэе╤е╞егд╧Rubyд╬┬░└нд╚░█д╩дъбве╤ещесб╝е┐дЄ╝шдыд│д╚дмд╟днд▐д╣бг
+
+д┐д╚дид╨Excelд╬Worksheetеке╓е╕езепе╚д╬Cellsе╫еэе╤е╞егд╧╖х░╠├╓д╚╣╘╚╓╣цд╬2д─д╬е╤ещесб╝е┐дЄ╝шдъд▐д╣бг
+
+д│дьд╧VBд╟д╧╝бд╬дшджд╦╡н╜╥д╟днд▐д╣бг
+
+  sheet.Cells(1, 1) = sheet.Cells(1, 2) ' е╗еыB1д╬╞т═╞дЄе╗еыA1д╪
+
+Rubyд╟д╧╛х╡нд╬е│б╝е╔д╬▒ж╩╒дЄVBд╚╞▒д╕дпб╓sheet.Cells(1, 2)б╫д╬дшджд╦╡н╜╥д╟днд▐д╣дмбв║╕╩╒д╬╡н╜╥д╧д╟днд▐д╗дєбг
+
+д╜д╬д┐дсбв╝бд╬╬уд╬дшджд╦setpropertyесе╜е├е╔дЄ═°═╤д╖д╞бве╤ещесб╝е┐╔╒дне╫еэе╤е╞егдЄ└▀─ъд╖д▐д╣бг
+
+#@if (version < "1.9.0")
 
    excel = WIN32OLE.new('Excel.Application')
-   excel['Visible'] = true
-   book = excel.workbooks.add
-   sheet = book.worksheets(1)
-   sheet.setproperty('Cells', 1, 2, 10) # => The B1 cell value is 10.
+   excel.visible = true
+   sheet = excel.Workbooks.Add.Worksheets(1)
+   sheet.setproperty('Cells', 1, 2, 32)
+   sheet.setproperty('Cells', 1, 1, sheet.Cells(1, 2))
+
+#@else
+
+   excel = WIN32OLE.new('Excel.Application')
+   excel.visible = true
+   sheet = excel.Workbooks.Add.Worksheets[1]
+   sheet.setproperty(:Cells, 1, 2, 32)
+   sheet.setproperty(:Cells, 1, 1, sheet.Cells(1, 2))
+
+#@end
 
 #@since 1.9.1
 
@@ -507,17 +569,6 @@ specified by iid.
 
     ie = WIN32OLE.new('InternetExplorer.Application')
     ie_web_app = ie.ole_query_interface('{0002DF05-0000-0000-C000-000000000046}') # => WIN32OLE object for dispinterface IWebBrowserApp
-
---- ole_type -> WIN32OLE_TYPE | nil
-[[c:WIN32OLE_TYPE]]еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
-
-д│д╬есе╜е├е╔д╧бв[[m:WIN32OLE#ole_obj_help]]есе╜е├е╔д╬еиедеъеве╣д╟д╣бг
-
-@return еке╓е╕езепе╚д╦┤╪╧вд╣ды[[c:WIN32OLE_TYPE]]еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
-        еке╓е╕езепе╚дме╔енехесеєе╚╛Ё╩єдЄ╗¤д┐д╩дд╛ь╣чд╧nilдЄ╩╓д╖д▐д╣бг
-
-   excel = WIN32OLE.new('Excel.Application')
-   tobj = excel.ole_type
 
 --- ole_typelib -> The WIN32OLE_TYPELIB object 
 #@todo
