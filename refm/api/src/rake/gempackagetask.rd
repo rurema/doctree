@@ -41,11 +41,11 @@ Gem Spec ファイルを元にして Gem パッケージを作成するタスクを定義するためのクラス
 == Public Instance Methods
 
 --- define
-#@todo
+#@# discard
 
 タスクを定義します。
 
-GemPackageTask.new にブロックが与えられている場合に、自動的に呼び出されます。
+[[m:GemPackageTask.new]] にブロックが与えられている場合に、自動的に呼び出されます。
 
 --- gem_file -> String
 
@@ -65,12 +65,13 @@ gemspec をセットします。
 @param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- init(gem_spec)
+#@# discard
 
 自身の各属性に初期値をセットします。
 
 == Singleton Methods
 
---- new(gem_spec){|t| ... }
+--- new(gem_spec){|t| ... } -> Rake::GemPackageTask
 
 自身を初期化してタスクを定義します。
 
