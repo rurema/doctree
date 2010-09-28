@@ -25,29 +25,24 @@ require rake/tasklib
 == Public Instance Methods
 
 --- define -> self
-#@todo
 
 タスクを定義します。
 
 --- libs -> Array
-#@todo
 
 テスト実行前に [[m:$LOAD_PATH]] に追加するパスを返します。
 
 --- libs=(libs)
-#@todo
 
 テスト実行前に [[m:$LOAD_PATH]] に追加するパスをセットします。
 
 @param libs [[m:$LOAD_PATH]] に追加するパスを配列で指定します。
 
 --- loader -> Symbol
-#@todo
 
 テストをロードする方法を返します。
 
 --- loader=(style)
-#@todo
 
 テストをロードする方法を指定します。
 
@@ -63,7 +58,6 @@ require rake/tasklib
 @param style シンボルでテストをロードする方法を指定します。
 
 --- name -> String
-#@todo
 
 テストタスクの名前を返します。デフォルトは "test" です。
 
@@ -96,23 +90,20 @@ require rake/tasklib
 
 テストファイルにマッチする glob パターンを指定します。
 
---- rake_loader
-#@todo
+#@# --- rake_loader
+#@# nodoc
 
 --- ruby_opts -> Array
-#@todo
 
 テスト実行時に Ruby コマンドに渡されるオプションを返します。
 
 --- ruby_opts=(options)
-#@todo
 
 テスト実行時に Ruby コマンドに渡されるオプションをセットします。
 
 @param options 配列でオプションを指定します。
 
 --- test_files=(list)
-#@todo
 
 明示的にテスト対象のファイルを指定します。
 
@@ -122,24 +113,20 @@ require rake/tasklib
 @param list 配列か [[c:Rake::FileList]] のインスタンスを指定します。
 
 --- verbose -> bool
-#@todo
 
 この値が真である場合、テストの実行結果を詳細に表示します。
 
 --- verbose=(flag)
-#@todo
 
 テストの実行結果を詳細に表示するかどうかをセットします。
 
 @param flag 真または偽を指定します。
 
 --- warning -> bool
-#@todo
 
 この値が真である場合、テスト実行時に ruby -w を実行したのと同じ効果が生じます。
 
 --- warning=(flag)
-#@todo
 
 テスト実行時に警告を表示させるかどうかをセットします。
 
@@ -147,7 +134,7 @@ require rake/tasklib
 
 == Singleton Methods
 
---- new(name = :test){|t| ... }
+--- new(name = :test){|t| ... } -> Rake::TestTask
 
 自身を初期化します。
 
