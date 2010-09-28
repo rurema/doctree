@@ -33,121 +33,101 @@ require rake/tasklib
 == Public Instance Methods
 
 --- define -> self
-#@todo
 
 タスクを定義します。
 
 --- external -> bool
-#@todo
 
 この値が真の場合は外部のシェル経由で rdoc コマンドを実行します。
 デフォルトは偽です。
 
 --- external=(flag)
-#@todo
 
 外部のシェル経由で rdoc コマンドを実行するかどうかセットします。
 
 @param flag 真または偽を指定します。
 
 --- main -> String
-#@todo
 
 メインとして使用されるファイル名を返します。
 
 --- main=(filename)
-#@todo
 
 メインとして使用されるファイル名をセットします。
 
 --- name -> String
-#@todo
 
 タスクの名前を返します。デフォルトは rdoc です。
 
 --- name=(name)
-#@todo
 
 タスクの名前をセットします。
 
 @param name タスクの名前を指定します。
 
 --- option_list -> Array
-#@todo
 
 rdoc コマンドに渡すオプションのリストを返します。
 
 --- option_string -> String
-#@todo
 
-rdoc コマンドに渡すオプションを返します。
+rdoc コマンドに渡すオプションを文字列として返します。
 
 --- options -> Array
-#@todo
 
 rdoc コマンドに渡すオプションのリストを返します。
 
 指定できるオプションは -o, --main, --title, -T 以外です。
 
 --- options=(options)
-#@todo
 
 rdoc コマンドに渡すオプションのリストをセットします。
 
 @param options rdoc コマンドに渡されるオプションを指定します。
 
 --- quote(str) -> String
-#@todo
 
 [[m:Rake::RDocTask#external]] が真の場合は与えられた文字列をクオートします。
 
 @param str クオートする文字列を指定します。
 
 --- rdoc_dir -> String
-#@todo
 
 作成した HTML ファイルを保存するディレクトリ名を返します。
 デフォルトは html です。
 
 --- rdoc_dir=(dir)
-#@todo
 
 作成した HTML ファイルを保存するディレクトリ名をセットします。
 
 --- rdoc_files -> Rake::FileList
-#@todo
 
 RDoc の生成に使用するファイルリストを返します。
 デフォルトは空です。
 
 --- rdoc_files=(filelist)
-#@todo
 
 RDoc の生成に使用するファイルリストをセットします。
 
 @param filelist ファイルリストを指定します。
 
 --- template -> String
-#@todo
 
 使用するテンプレートを返します。
 デフォルトは RDoc のデフォルトです。
 
 --- template=(template)
-#@todo
 
 使用するテンプレートをセットします。
 
 @param template 使用するテンプレートを指定します。
 
 --- title -> String
-#@todo
 
 RDoc のタイトルを返します。
 デフォルト値はありません。
 
 --- title=(title)
-#@todo
 
 RDoc のタイトルをセットします。
 
@@ -155,7 +135,7 @@ RDoc のタイトルをセットします。
 
 == Singleton Methods
 
---- new(name = :rdoc){|pkg| ... }
+--- new(name = :rdoc){|pkg| ... } -> Rake::RDocTask
 
 自身を初期化して RDoc タスクを定義します。
 
