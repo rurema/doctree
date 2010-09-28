@@ -33,7 +33,6 @@ require rake/tasklib
 == Public Instance Methods
 
 --- define -> self
-#@todo
 
 タスクを定義します。
 
@@ -41,7 +40,7 @@ require rake/tasklib
                     初期化時に :noversion が指定されている場合は発生しません。
 
 --- init(name, version)
-#@todo
+#@# discard
 
 自身の各属性にデフォルト値をセットします。
 
@@ -50,167 +49,141 @@ require rake/tasklib
 @param version パッケージのバージョンを指定します。
 
 --- name -> String
-#@todo
 
 バージョン情報を含まないパッケージの名前を返します。
 
 --- name=(name)
-#@todo
 
 バージョン情報を含まないパッケージの名前をセットします。
 
 @param name パッケージの名前を指定します。
 
 --- need_tar -> bool
-#@todo
 
 この値が真である場合は gzip した tar ファイル (tgz) を作成します。
 デフォルトは偽です。
 
 --- need_tar=(flag)
-#@todo
 
 gzip した tar ファイル (tgz) を作成するかどうかを設定します。
 
 @param flag 真または偽を指定します。
 
 --- need_tar_bz2 -> bool
-#@todo
 
 この値が真である場合は bzip2 した tar ファイル (tar.bz2) を作成します。
 デフォルトは偽です。
 
 --- need_tar_bz2=(flag)
-#@todo
 
 bzip2 した tar ファイル (tar.bz2) を作成するかどうかを設定します。
 
 @param flag 真または偽を指定します。
 
 --- need_tar_gz -> bool
-#@todo
 
 この値が真である場合は gzip した tar ファイル (tar.gz) を作成します。
 デフォルトは偽です。
 
 --- need_tar_gz=(flag)
-#@todo
 
 gzip した tar ファイル (tar.gz) を作成するかどうかを設定します。
 
 @param flag 真または偽を指定します。
 
 --- need_zip -> bool
-#@todo
 
 この値が真である場合は zip ファイルを作成します。
 デフォルトは偽です。
 
 --- need_zip=(flag)
-#@todo
 
 zip ファイル (tgz) を作成するかどうかを設定します。
 
 @param flag 真または偽を指定します。
 
 --- package_dir -> String
-#@todo
 
 パッケージに入れるファイルを保存するディレクトリ名を返します。
 
 --- package_dir=(dirname)
-#@todo
 
 パッケージに入れるファイルを保存するディレクトリ名をセットします。
 
 @param dirname パッケージに入れるファイルを保存するディレクトリ名を指定します。
 
 --- package_dir_path -> String
-#@todo
 
 パッケージに含むファイルを配置するディレクトリを返します。
 
 --- package_files -> Rake::FileList
-#@todo
 
 パッケージに含むファイルリストを返します。
 
 --- package_files=(file_list)
-#@todo
 
 パッケージに含むファイルリストを設定します。
 
 @param file_list ファイルリストを指定します。
 
 --- package_name -> String
-#@todo
 
 バージョン情報を含むパッケージ名を返します。
 
 --- tar_bz2_file -> String
-#@todo
 
 tar.bz2 用のファイル名を返します。
 
 --- tar_command -> String
-#@todo
 
 tar コマンドとして使用するコマンドを返します。
 
 デフォルトは 'tar' です。
 
 --- tar_command=(command)
-#@todo
 
 tar コマンドとして使用するコマンドを設定します。
 
 @param command コマンドを文字列で指定します。
 
 --- tar_gz_file -> String
-#@todo
 
 tar.gz 用のファイル名を返します。
 
 --- tgz_file -> String
-#@todo
 
 tgz 用のファイル名を返します。
 
 --- version -> String
-#@todo
 
 作成するパッケージのバージョンを表す文字列を返します。
 
 --- version=(str)
-#@todo
 
 作成するパッケージのバージョンをセットします。
 
 @param str バージョンを表す文字列を指定します。
 
 --- zip_command -> String
-#@todo
 
 zip コマンドとして使用するコマンドを返します。
 
 デフォルトは 'zip' です。
 
 --- zip_command=(command)
-#@todo
 
 zip コマンドとして使用するコマンドを設定します。
 
 @param command コマンドを文字列で指定します。
 
 --- zip_file -> String
-#@todo
 
 zip ファイル用のファイル名を返します。
 
 
 == Singleton Methods
 
---- new(name = nil, version = nil){|t| ... }
+--- new(name = nil, version = nil){|t| ... } -> Rake::PackageTask
 
 自身を初期化してタスクを定義します。
 
