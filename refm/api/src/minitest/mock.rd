@@ -14,7 +14,6 @@
 == Public Instance Methods
 
 --- expect(name, retval, args = []) -> self
-#@todo
 
 モックを構築するメソッドです。
 
@@ -25,7 +24,6 @@
 @param args 引数として期待する値を配列で指定します。
 
 --- verify -> true
-#@todo 
 
 モックの検証を行います。
 
