@@ -6,10 +6,19 @@ Windowsд╬┬┐дпд╬еве╫еъе▒б╝е╖ечеєдфещеде╓ещеъд╧бвCOMд╚╕╞д╨дьдыAPI╖▓дЄ═°═╤д╖д╞┬╛д╬е
 
 д│дьдщд╬едеєе┐б╝е╒езеде╣дЄе╡е▌б╝е╚д╖д╞ддды┬х╔╜┼кд╩Windowsеве╫еъе▒б╝е╖ечеєд╦бвOfficeбвIEбвiTunesбвIllustratorдмдвдъд▐д╣бгд▐д┐бвWMIбвWshShellд╩д╔д╬ещеде╓ещеъдЄ═°═╤д╖д╞Windowsд╬╛Ё╩єдЄ┴р║юд╣дыд│д╚дт▓─╟╜д╟д╣бгд│дьдщд╬е╫еэе░ещердЄOLEекб╝е╚есб╝е╖ечеєе╡б╝е╨д╚╕╞д╙д▐д╣бг
 
-WIN32OLEеке╓е╕езепе╚д╧бвOLEекб╝е╚есб╝е╖ечеєе╡б╝е╨дм─є╢бд╣дыесе╜е├е╔дфе╫еэе╤е╞егб╩Rubyд╬┬░└нд╦┬╨▒■б╦дЄе╣епеъе╫е╚длдщ╕╞д╙╜╨д╣╝ъ├╩дЄ─є╢бд╖д▐д╣бг╕╞д╙╜╨д╖д╦д╧бвRubyд╬еке╓е╕езепе╚д╚╞▒══д╦еке╓е╕езепе╚д╦┬│д▒д╞б╓.б╫д╚есе╜е├е╔╠╛бв╔м═╫д╟двдьд╨░·┐Їд╬еъе╣е╚дЄ╡н╜╥д╖д▐д╣бг
+WIN32OLEеке╓е╕езепе╚д╧бвOLEекб╝е╚есб╝е╖ечеєе╡б╝е╨дм─є╢бд╣дыесе╜е├е╔дфе╫еэе╤е╞егб╩Rubyд╬┬░└нд╦┬╨▒■б╦дЄе╣епеъе╫е╚длдщ╕╞д╙╜╨д╣╝ъ├╩дЄ─є╢бд╖д▐д╣бг╕╞д╙╜╨д╖д╦д╧бвRubyд╬еке╓е╕езепе╚д╚╞▒══д╦еке╓е╕езепе╚д╦┬│д▒д╞б╓.б╫д╚есе╜е├е╔╠╛бв╔м═╫д╟двдьд╨░·┐Їд╬еъе╣е╚дЄ╡н╜╥д╖д▐д╣бг║╟╕хд╬░·┐Їд╦HashдЄ╗╪─ъд╖д┐╛ь╣чд╧бв╠╛┴░╔╒дн░·┐Їд╚д╖д╞енб╝д╦е╤ещесб╝е┐╠╛бв├═д╦░·┐ЇдЄ╗╪─ъд╟днд▐д╣бг
 
 === е╡еєе╫еые│б╝е╔
 
+#@if (version < "1.9.0")
+  require 'win32ole'
+
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.Workbooks.Open('workbook.xls')
+  workbook.PrintOut
+  workbook.Close('SaveChanges' => false)
+  excel.Quit
+#@else
   require 'win32ole'
 
   excel = WIN32OLE.new('Excel.Application')
@@ -17,9 +26,19 @@ WIN32OLEеке╓е╕езепе╚д╧бвOLEекб╝е╚есб╝е╖ечеєе╡б╝е╨дм─є╢бд╣дыесе╜е├е╔дфе╫еэе╤е╞егб
   workbook.PrintOut
   workbook.Close(:SaveChanges => false)
   excel.Quit
+#@end
 
-д╩дкбвOLEекб╝е╚есб╝е╖ечеєд╬╗┼══д╟д╧есе╜е├е╔╠╛д╧┬ч╩╕╗·д╚╛о╩╕╗·дЄ╢ш╩╠д╖д▐д╗дєбгд╜д╬д┐дсбв░╩▓╝д╬дшджд╦╡н╜╥д╖д╞дт╣╜ддд▐д╗дєбг
+д╩дкбвOLEекб╝е╚есб╝е╖ечеєд╬╗┼══д╟д╧есе╜е├е╔╠╛д╧┬ч╩╕╗·д╚╛о╩╕╗·дЄ╢ш╩╠д╖д▐д╗дєбгд╜д╬д┐дсбв░╩▓╝д╬дшджд╦OLEекб╝е╚есб╝е╖ечеєе╡б╝е╨д╬есе╜е├е╔╠╛д╧╛о╩╕╗·д╟╡н╜╥д╖д╞дт╣╜ддд▐д╗дєбг
 
+#@if (version < "1.9.0")
+  require 'win32ole'
+
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.workbooks.open('workbook.xls')
+  workbook.printout
+  workbook.close('SaveChanges' => false)
+  excel.quit
+#@else
   require 'win32ole'
 
   excel = WIN32OLE.new('Excel.Application')
@@ -27,6 +46,7 @@ WIN32OLEеке╓е╕езепе╚д╧бвOLEекб╝е╚есб╝е╖ечеєе╡б╝е╨дм─є╢бд╣дыесе╜е├е╔дфе╫еэе╤е╞егб
   workbook.printout
   workbook.close(:SaveChanges => false)
   excel.quit
+#@end
 
 #@since 1.9.1
 
@@ -471,22 +491,48 @@ OLEекб╝е╚есб╝е╖ечеєе╡б╝е╨д╬есе╜е├е╔дЄ╞░┼кд╦╕╞д╙╜╨д╖д┐дд╛ь╣чд╦═°═╤д╖д▐д╣бг
 
 #@if (version < "1.9.0")
 @param name есе╜е├е╔╠╛дЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
+@param args есе╜е├е╔д╬░·┐ЇдЄ╗╪─ъд╖д▐д╣бгд▐д┐бв║╟╕хд╬░·┐Їд╦[[c:Hash]]дЄ═┐дидыд│д╚д╟бв╠╛┴░╔╒дн░·┐ЇдЄ╗╪─ъд╟днд▐д╣бгд│д╬╛ь╣чбвенб╝д╦╩╕╗·╬єд╟е╤ещесб╝е┐╠╛бв├═д╦░·┐ЇдЄ╗╪─ъд╖д▐д╣бг
 #@else
 @param name есе╜е├е╔╠╛дЄ╩╕╗·╬єд▐д┐д╧е╖еєе▄еыд╟╗╪─ъд╖д▐д╣бг
+@param args есе╜е├е╔д╬░·┐ЇдЄ╗╪─ъд╖д▐д╣бгд▐д┐бв║╟╕хд╬░·┐Їд╦[[c:Hash]]дЄ═┐дидыд│д╚д╟бв╠╛┴░╔╒дн░·┐ЇдЄ╗╪─ъд╟днд▐д╣бгд│д╬╛ь╣чбвенб╝д╦╩╕╗·╬єд▐д┐д╧е╖еєе▄еыд╟е╤ещесб╝е┐╠╛бв├═д╦░·┐ЇдЄ╗╪─ъд╖д▐д╣бг
 #@end
-@param args есе╜е├е╔д╬░·┐ЇдЄ╗╪─ъд╖д▐д╣бг
 @return есе╜е├е╔д╬╩╓дъ├═бгд┐д└д╖╩╓дъ├═дЄ╗¤д┐д╩ддесе╜е├е╔д╬╛ь╣чд╧nilбг
 @raise WIN32OLERuntimeError екб╝е╚есб╝е╖ечеєе╡б╝е╨д╬╕╞д╙╜╨д╖д╦╝║╟╘д╖д▐д╖д┐бг
                             ═¤═│д╧есе├е╗б╝е╕д╬HRESULTдЄ─┤д┘д╞дпд└д╡ддбг
-
-
+#@if (version < "1.9.0")
   excel = WIN32OLE.new('Excel.Application')
-  excel.invoke('Quit')  # => excel.Quitд╦┼∙д╖дд
+  workbook = excel.workbooks.invoke('Open', 'FileName' => 'c:\\users\\public\\test.xml',
+                                            'ReadOnly' => true,
+                                            'Password' => 'secret')
+  excel.invoke('Quit')
+#@else
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.workbooks.invoke(:Open, :FileName => 'c:\\users\\public\\test.xml',
+                                           :ReadOnly => true,
+                                           :Password => 'secret')
+  excel.invoke(:Quit)
+#@end
+
+д│д╬еъе╣е╚д╧бв░╩▓╝д╬╡н╜╥д╚╞▒┼∙д╟д╣бг
+
+#@if (version < "1.9.0")
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.workbooks.Open('FileName' => 'c:\\users\\public\\test.xml',
+                                  'ReadOnly' => true,
+                                  'Password' => 'secret')
+  excel.Quit
+#@else
+  excel = WIN32OLE.new('Excel.Application')
+  workbook = excel.workbooks.Open(:FileName => 'c:\\users\\public\\test.xml',
+                                  :ReadOnly => true,
+                                  :Password => 'secret')
+  excel.Quit
+#@end
 
 --- method_missing(id, *args) -> object | nil
 [[m:WIN32OLE#invoke]]есе╜е├е╔дЄ╝┬╣╘д╖д▐д╣бг
 
-┼Ўесе╜е├е╔д╧─╛└▄╕╞д╙╜╨д╡д╩ддд╟дпд└д╡ддбг
+WIN32OLEд╬едеєе╣е┐еєе╣д╦┬╨д╖д╞бвд│д╬еъе╒ебеьеєе╣д╦╠└╡нд╡дьд╞ддд╩ддесе╜е├е╔дЄ╕╞д╙╜╨д╖д┐╛ь╣чбвOLEекб╝е╚есб╝е╖ечеєе╡б╝е╨д╬есе╜е├е╔б╩е╫еэе╤е╞егб╦╕╞д╙╜╨д╖д╚▓Є╝сд╖д▐д╣бг
 
 @param id есе╜е├е╔╠╛дЄе╖еєе▄еыд╟╗╪─ъд╖д▐д╣бг
 @param args есе╜е├е╔д╬░·┐ЇдЄ╗╪─ъд╖д▐д╣бг
