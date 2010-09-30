@@ -16,7 +16,7 @@ alias RbConfig
 Ruby インタプリタ作成時に設定された情報を格納したライブラリです。
 Config モジュールを定義します。
 
-#@if (version >= "1.8.5")
+#@since 1.8.5
 RbConfig モジュールを Config と同じものとして定義します。
 #@end
 
@@ -27,7 +27,7 @@ RbConfig モジュールを Config と同じものとして定義します。
 
 == Singleton Methods
 
-#@if (version >= "1.8.5")
+#@since 1.8.5
 --- expand(val)
 #@todo
 
@@ -38,10 +38,9 @@ RbConfig モジュールを Config と同じものとして定義します。
 #@end
 #@end
 #@since 1.9.2
---- ruby
-#@todo
+--- ruby -> String
 
-returns the absolute pathname of the ruby command.
+ruby コマンドのフルパスを返します。
 #@end
 
 == Constants
