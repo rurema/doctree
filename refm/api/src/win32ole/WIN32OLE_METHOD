@@ -40,7 +40,7 @@ OLEオートメーションサーバの型情報とメソッド名からWIN32OLE_METHODのインスタンスを
 @return methodパラメータに対応するWIN32OLE_METHODのインスタンス。
 @raise WIN32OLERuntimeError methodパラメータで指定したメソッドが見つかりません。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
 
 == Instance Methods
@@ -52,7 +52,7 @@ OLEオートメーションサーバの型情報とメソッド名からWIN32OLE_METHODのインスタンスを
 
 @return メソッドのDISPIDを返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.dispid # => 181
 
@@ -67,69 +67,114 @@ OLEオートメーションサーバの型情報とメソッド名からWIN32OLE_METHODのインスタンスを
 
 @return メソッドがイベントであれば真。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
    puts method.event? # => true
 
 @see [[c:WIN32OLE_EVENT]]
 
---- event_interface
-#@todo
+--- event_interface -> String | nil
+メソッドがイベントの場合、イベントのインターフェイス名を取得します。
 
-Returns event interface name if the method is event.
+@return メソッドがイベントであれば、イベントのインターフェイス名を返します。イベントでなければnilを返します。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
   method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
   puts method.event_interface # =>  WorkbookEvents
 
---- helpcontext
-#@todo
+--- helpcontext -> Integer | nil
+メソッドのヘルプコンテキストを取得します。
 
-Returns help context.
+ヘルプコンテキストは、関連するヘルプファイル上のトピック位置を示す整数値です。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+@return ヘルプコンテキストを返します。未定義の場合はnilを返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.helpcontext # => 65717
 
---- helpfile
-#@todo
+WIN32OLE_METHODオブジェクトを引数として、[[m:WIN32OLE.#ole_show_help]]でヘルプファイルを表示する場合には、WIN32OLEが内部で当メソッドを呼び出します。
 
-Returns help file. If help file is not found, then the method
-returns nil.
+@see [[m:WIN32OLE.#ole_show_help]]
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+--- helpfile -> String | nil
+ヘルプファイルのパス名を取得します。
+
+メソッドにヘルプファイルが関連付けられている場合、該当ヘルプファイルのパス名を返します。
+
+@return ヘルプファイルのパス名を文字列で返します。ヘルプファイルが未定義ならばnilを返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.helpfile # => C:\...\VBAXL9.CHM
 
---- helpstring
-#@todo
+メソッドにヘルプファイルが関連付けられている場合、[[m:WIN32OLE.#ole_show_help]]にWIN32OLE_METHODオブジェクトを与えてヘルプファイルを表示できます。
 
-Returns help string of OLE method. If the help string is not
+@see [[m:WIN32OLE.#ole_show_help]]
+
+--- helpstring -> String | nil
+メソッドのヘルプ文字列を取得します。
+
+helpstringは、IDEがメソッドのバルーンヘルプを表示するような場合に利用可能な1行程度でメソッドを説明する文字列です。
+
+@return ヘルプ文字列を返します。未定義ならばnilを返します。
 found, then the method returns nil.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
    method = WIN32OLE_METHOD.new(tobj, 'Navigate')
    puts method.helpstring # => Navigates to a URL or file.
 
---- invkind
-#@todo
+--- invkind -> Integer
+メソッドの種類を示すINVOKEKIND列挙値を取得します。
 
-Returns the method invoke kind.
+ここで言うメソッドの種類というのは、OLEオートメーションクライアントの記述言語がどのような形式でサーバ呼び出しを記述すべきかを指定した属性値です。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+@return メソッドのINVOKEKINDを返します。
+
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
   method = WIN32OLE_METHOD.new(tobj, 'Add')
   puts method.invkind # => 1
 
---- invoke_kind
-#@todo
+INVOKEKIND列挙値は以下の通りです。メソッドの種類は以下の値の論理和で示されます。
 
-Returns the method kind string. The string is "UNKNOWN" or "PROPERTY"
-or "PROPERTY" or "PROPERTYGET" or "PROPERTYPUT" or "PROPERTYPPUTREF"
-or "FUNC".
+: INVOKE_FUNC(1)
+  関数呼び出し形式で記述するメソッドです。
+: INVOKE_PROPERTYGET(2)
+  プロパティ参照形式で記述するメソッドです。
+: INVOKE_PROPERTYPUT(4)
+  プロパティに値を設定する形式で記述するメソッドです。
+: INVOKE_PROPERTYPUTREF(8)
+  プロパティに参照を設定する形式で記述するメソッドです。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+なおINVOKE_PROPERTYPUTREFとINVOKE_PROPERTYPUTは、プロパティ設定形式が2種類ある言語用の区分です。Rubyでの記述時はどちらも「prop=(arg)」の形式で記述します。
+
+--- invoke_kind -> String
+メソッドの種類を文字列で取得します。
+
+ここで言うメソッドの種類というのは、OLEオートメーションクライアントの記述言語がどのような形式でサーバ呼び出しを記述すべきかを指定した属性値です。
+
+@return メソッドの種類を示す文字列を返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.invoke_kind # => "FUNC"
+
+返送値は以下のいずれかとなります。値の意味は[[m:WIN32OLE_METHOD#invkind]]の説明を参照してください。
+
+: PORPERTY
+  INVOKE_PROPETYGETとINVOKE_PROPETYPUTの両方が設定されています。
+: PROPERTYGET
+  INVOKE_PROPETYGETが設定されています。
+: PROPERTYPUT
+  INVOKE_PROPERTYPUTが設定されています。
+: PROPERTYPUTREF
+  INVOKE_PROPERTYPUTREFが設定されています。
+: FUNC
+  INVOKE_FUNCが設定されています。
+: UNKNOWN
+  上記のいずれにも当てはまりません。
+
+@see [[m:WIN32OLE_METHOD#invkind]]
 
 --- name -> String
 --- to_s -> String
@@ -137,7 +182,7 @@ or "FUNC".
 
 @return メソッド名を文字列で返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    puts method.name # => SaveAs
 
@@ -148,7 +193,7 @@ VTBLはC++やCでメソッドを呼び出すために利用する関数ポインタのテーブルです。
 
 @return メソッドのVTBL上のオフセットを返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.offset_vtbl # => 40
 
@@ -159,58 +204,75 @@ VTBLはC++やCでメソッドを呼び出すために利用する関数ポインタのテーブルです。
 
 @return [[c:WIN32OLE_PARAM]]の配列。無引数のメソッドであれば要素数0の配列を返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    p method.params # => [Filename, FileFormat, Password, WriteResPassword,
                          ReadOnlyRecommended, CreateBackup, AccessMode,
                          ConflictResolution, AddToMru, TextCodepage,
                          TextVisualLayout]
 
---- return_type
-#@todo
+--- return_type -> String
+メソッドの返り値の型名を取得します。
 
-Returns string of return value type of method.
+@return 返り値の型名を示す文字列を返します。
+@raise WIN32OLERuntimeError メソッドの型情報を取得できなかった場合に通知します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
-   method = WIN32OLE_METHOD.new(tobj, 'Add')
-   puts method.return_type # => Workbook
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+   method = WIN32OLE_METHOD.new(tobj, 'Visible')
+   puts method.return_type # => BOOL
 
---- return_type_detail
-#@todo
+OLEオートメーションの型名は、対応する[[c:WIN32OLE::VARIANT]]の定数の先頭の「VT_」を削除した名称を持ちます。
 
-Returns detail information of return value type of method. The
-information is array.
+たとえば、32ビット符号付き整数であれば「I4」となります。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
-   method = WIN32OLE_METHOD.new(tobj, 'Add')
-   p method.return_type_detail # => ["PTR", "USERDEFINED", "Workbook"]
+@see [[c:WIN32OLE::VARIANT]]
 
---- return_vtype
-#@todo
 
-Returns number of return value type of method.
+--- return_type_detail -> [String]
+返り値の型と属性を取得します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
-   method = WIN32OLE_METHOD.new(tobj, 'Add')
-   puts method.return_vtype # => 26
+@return 返り値の型と属性を文字列配列で返します。
 
---- size_opt_params
-#@todo
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+   method = WIN32OLE_METHOD.new(tobj, 'Workbooks')
+   p method.return_type_detail # => ["PTR", "USERDEFINED", "Workbooks"]
 
-Returns the size of optional parameters.
+属性が付加されていない場合は、[[m:WIN32OLE_METHOD#return_type]]を要素とした配列が返ります。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+返り値の取り得る属性値はCOMのIDL（インターフェイス定義言語）によって規定されています。
+
+@see [[url:http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx]]
+
+--- return_vtype -> Integer
+メソッドの返り値の型を示す数値を取得します。
+
+@return 返り値の型を示す数値（VARENUM）を返します。
+@raise WIN32OLERuntimeError メソッドの型情報を取得できなかった場合に通知します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+   method = WIN32OLE_METHOD.new(tobj, 'Visible')
+   puts method.return_vtype # => 11
+
+VARENUMの定義は、Platform SDKのwtypes.hにあります。
+
+--- size_opt_params -> Integer | nil
+オプションパラメータ数を取得します。
+
+@return オプションパラメータ数を整数で返します。メソッドの詳細情報を取得できない場合はnilを返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
-   puts method.size_opt_params # => 4
+   puts method.size_opt_params # => 5
 
---- size_params
-#@todo
+--- size_params -> Integer | nil
+パラメータ数を取得します。
 
-Returns the size of arguments of the method.
+@return パラメータ数を整数で返します。メソッドの詳細情報を取得できない場合はnilを返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
-   puts method.size_params # => 11
+   puts method.size_params # => 12
 
 
 --- visible? -> bool
@@ -218,7 +280,7 @@ Returns the size of arguments of the method.
 
 @return メソッドが公開されていれば真。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.visible? # => true
 
