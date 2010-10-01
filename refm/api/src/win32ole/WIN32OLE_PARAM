@@ -1,10 +1,10 @@
 = class WIN32OLE_PARAM < Object
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“ƒT[ƒo‚ªŽ‚Âƒƒ\ƒbƒh‚Ìƒpƒ‰ƒ[ƒ^î•ñ‚ð’ñ‹Ÿ‚µ‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¥µ¡¼¥Ð¤¬»ý¤Ä¥á¥½¥Ã¥É¤Î¥Ñ¥é¥á¡¼¥¿¾ðÊó¤òÄó¶¡¤·¤Þ¤¹¡£
 
-WIN32OLE_PARAM‚ÍA[[c:WIN32OLE_METHOD]]‚Ìƒpƒ‰ƒ[ƒ^‚Ìƒƒ^ƒf[ƒ^‚ð•ÛŽ‚µ‚Ü‚·B
+WIN32OLE_PARAM¤Ï¡¢[[c:WIN32OLE_METHOD]]¤Î¥Ñ¥é¥á¡¼¥¿¤Î¥á¥¿¥Ç¡¼¥¿¤òÊÝ»ý¤·¤Þ¤¹¡£
 
-=== ƒTƒ“ƒvƒ‹ƒR[ƒh
+=== ¥µ¥ó¥×¥ë¥³¡¼¥É
 
      tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
      method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -16,16 +16,16 @@ WIN32OLE_PARAM‚ÍA[[c:WIN32OLE_METHOD]]‚Ìƒpƒ‰ƒ[ƒ^‚Ìƒƒ^ƒf[ƒ^‚ð•ÛŽ‚µ‚Ü‚·B
 == Class Methods
 
 --- new(ole_method,  index) -> WIN32OLE_PARAM
-ƒƒ\ƒbƒh‚Æƒpƒ‰ƒ[ƒ^ˆÊ’u‚ðŽw’è‚µ‚ÄWIN32OLE_PARAM‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ðì¬‚µ‚Ü‚·B
+¥á¥½¥Ã¥É¤È¥Ñ¥é¥á¡¼¥¿°ÌÃÖ¤ò»ØÄê¤·¤ÆWIN32OLE_PARAM¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òºîÀ®¤·¤Þ¤¹¡£
 
-ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒvƒƒOƒ‰ƒ€‚Å‚ÍAWIN32OLE_PARAMƒIƒuƒWƒFƒNƒg‚ðnewƒƒ\ƒbƒh‚Å¶¬‚·‚é‚æ‚è‚àA[[m:WIN32OLE_METHOD#params]]‚ðŽQÆ‚·‚é‚Ù‚¤‚ªŠÈ’P‚Å‚·B
+¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¥×¥í¥°¥é¥à¤Ç¤Ï¡¢WIN32OLE_PARAM¥ª¥Ö¥¸¥§¥¯¥È¤ònew¥á¥½¥Ã¥É¤ÇÀ¸À®¤¹¤ë¤è¤ê¤â¡¢[[m:WIN32OLE_METHOD#params]]¤ò»²¾È¤¹¤ë¤Û¤¦¤¬´ÊÃ±¤Ç¤¹¡£
 
-@ole_method ƒpƒ‰ƒ[ƒ^‚ðŽæ“¾‚·‚é[[c:WIN32OLE_METHOD]]‚ÌƒCƒ“ƒXƒ^ƒ“ƒXB
-@index ƒpƒ‰ƒ[ƒ^‚ÌˆÊ’uBÅ¶’[‚ð1‚Æ‚µ‚Ü‚·B
-@return ƒƒ\ƒbƒh‚ÌŽw’èˆÊ’u‚Ìƒpƒ‰ƒ[ƒ^‚Ìî•ñ‚ðŽ‚ÂƒIƒuƒWƒFƒNƒg‚ð•Ô‚µ‚Ü‚·B
-@raise TypeError ole_methodƒpƒ‰ƒ[ƒ^‚ª[[c:WIN32OLE_METHOD]]‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Å‚Í‚ ‚è‚Ü‚¹‚ñB
-@raise IndexError indexƒpƒ‰ƒ[ƒ^‚ª1‚©‚çƒpƒ‰ƒ[ƒ^‚Ì”‚Ì”ÍˆÍ‚É‚ ‚è‚Ü‚¹‚ñB
-@raise RuntimeError ŠY“–ƒƒ\ƒbƒh‚Ìƒƒ^ƒf[ƒ^‚ªŽæ“¾‚Å‚«‚Ü‚¹‚ñB
+@ole_method ¥Ñ¥é¥á¡¼¥¿¤ò¼èÆÀ¤¹¤ë[[c:WIN32OLE_METHOD]]¤Î¥¤¥ó¥¹¥¿¥ó¥¹¡£
+@index ¥Ñ¥é¥á¡¼¥¿¤Î°ÌÃÖ¡£ºÇº¸Ã¼¤ò1¤È¤·¤Þ¤¹¡£
+@return ¥á¥½¥Ã¥É¤Î»ØÄê°ÌÃÖ¤Î¥Ñ¥é¥á¡¼¥¿¤Î¾ðÊó¤ò»ý¤Ä¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
+@raise TypeError ole_method¥Ñ¥é¥á¡¼¥¿¤¬[[c:WIN32OLE_METHOD]]¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£
+@raise IndexError index¥Ñ¥é¥á¡¼¥¿¤¬1¤«¤é¥Ñ¥é¥á¡¼¥¿¤Î¿ô¤ÎÈÏ°Ï¤Ë¤¢¤ê¤Þ¤»¤ó¡£
+@raise RuntimeError ³ºÅö¥á¥½¥Ã¥É¤Î¥á¥¿¥Ç¡¼¥¿¤¬¼èÆÀ¤Ç¤­¤Þ¤»¤ó¡£
 
 
    excel = WIN32OLE.new('Excel.Application')
@@ -36,11 +36,11 @@ WIN32OLE_PARAM‚ÍA[[c:WIN32OLE_METHOD]]‚Ìƒpƒ‰ƒ[ƒ^‚Ìƒƒ^ƒf[ƒ^‚ð•ÛŽ‚µ‚Ü‚·B
 == Instance Methods
 
 --- default -> object | nil
-ƒpƒ‰ƒ[ƒ^‚ðŽw’è‚µ‚È‚©‚Á‚½ê‡‚ÌŠù’è’l‚ðŽæ“¾‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤ò»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Î´ûÄêÃÍ¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-“–ƒpƒ‰ƒ[ƒ^‚ª•K{ƒpƒ‰ƒ[ƒ^‚Ìê‡‚Ínil‚ð•Ô‚µ‚Ü‚·B
+Åö¥Ñ¥é¥á¡¼¥¿¤¬É¬¿Ü¥Ñ¥é¥á¡¼¥¿¤Î¾ì¹ç¤Ïnil¤òÊÖ¤·¤Þ¤¹¡£
 
-@return ƒpƒ‰ƒ[ƒ^‚ðŽw’è‚µ‚È‚©‚Á‚½ê‡‚ÌŠù’è’lB•K{ƒpƒ‰ƒ[ƒ^‚È‚ç‚Înil‚ð•Ô‚µ‚Ü‚·B
+@return ¥Ñ¥é¥á¡¼¥¿¤ò»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Î´ûÄêÃÍ¡£É¬¿Ü¥Ñ¥é¥á¡¼¥¿¤Ê¤é¤Ðnil¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -54,13 +54,13 @@ WIN32OLE_PARAM‚ÍA[[c:WIN32OLE_METHOD]]‚Ìƒpƒ‰ƒ[ƒ^‚Ìƒƒ^ƒf[ƒ^‚ð•ÛŽ‚µ‚Ü‚·B
 
 
 --- input? -> bool
-ƒpƒ‰ƒ[ƒ^‚ªƒNƒ‰ƒCƒAƒ“ƒg‚©‚çƒT[ƒo‚Ö—^‚¦‚é‚à‚Ì‚©‚ð”»’è‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤¬¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥µ¡¼¥Ð¤ØÍ¿¤¨¤ë¤â¤Î¤«¤òÈ½Äê¤·¤Þ¤¹¡£
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“‚Ìƒpƒ‰ƒ[ƒ^‚ÍAin(ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çƒT[ƒo‚Ö—^‚¦‚éB[[m:WIN32OLE_PARAM#input?]]‚ª^)AoutiƒT[ƒo‚ªƒNƒ‰ƒCƒAƒ“ƒg‚Ö—^‚¦‚éB[[m:WIN32OLE_PARAM#output?]]‚ª^)‚¨‚æ‚ÑAinoutiƒNƒ‰ƒCƒAƒ“ƒg‚©‚çƒT[ƒo‚Ö—^‚¦AƒT[ƒo‚ªƒNƒ‰ƒCƒAƒ“ƒg‚Ö—^‚¦‚éj‚Ì3Ží—Þ‚Ì•ûŒü‘®«‚Ì‚¢‚¸‚ê‚©‚ðŽ‚¿‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¤Î¥Ñ¥é¥á¡¼¥¿¤Ï¡¢in(¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥µ¡¼¥Ð¤ØÍ¿¤¨¤ë¡£[[m:WIN32OLE_PARAM#input?]]¤¬¿¿)¡¢out¡Ê¥µ¡¼¥Ð¤¬¥¯¥é¥¤¥¢¥ó¥È¤ØÍ¿¤¨¤ë¡£[[m:WIN32OLE_PARAM#output?]]¤¬¿¿)¤ª¤è¤Ó¡¢inout¡Ê¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥µ¡¼¥Ð¤ØÍ¿¤¨¡¢¥µ¡¼¥Ð¤¬¥¯¥é¥¤¥¢¥ó¥È¤ØÍ¿¤¨¤ë¡Ë¤Î3¼ïÎà¤ÎÊý¸þÂ°À­¤Î¤¤¤º¤ì¤«¤ò»ý¤Á¤Þ¤¹¡£
 
-input?ƒƒ\ƒbƒh‚Íin‘®«‚Ü‚½‚Íinout‘®«‚È‚ç^‚ð•Ô‚µ‚Ü‚·B
+input?¥á¥½¥Ã¥É¤ÏinÂ°À­¤Þ¤¿¤ÏinoutÂ°À­¤Ê¤é¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
-@return ƒƒ\ƒbƒh‚Ì•ûŒü‘®«‚ªin‚Ü‚½‚Íinout‚È‚ç‚Î^‚ð•Ô‚µ‚Ü‚·B
+@return ¥á¥½¥Ã¥É¤ÎÊý¸þÂ°À­¤¬in¤Þ¤¿¤Ïinout¤Ê¤é¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -71,9 +71,9 @@ input?ƒƒ\ƒbƒh‚Íin‘®«‚Ü‚½‚Íinout‘®«‚È‚ç^‚ð•Ô‚µ‚Ü‚·B
 
 --- name -> String
 --- to_s -> String
-ƒpƒ‰ƒ[ƒ^–¼‚ðŽæ“¾‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿Ì¾¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-@return ƒpƒ‰ƒ[ƒ^–¼‚ð•Ô‚µ‚Ü‚·B–¼‘O•t‚«ˆø”Œ`Ž®‚Åƒƒ\ƒbƒh‚ðŒÄ‚Ño‚·‚Æ‚«‚ÉŽw’è‚µ‚Ü‚·B
+@return ¥Ñ¥é¥á¡¼¥¿Ì¾¤òÊÖ¤·¤Þ¤¹¡£Ì¾Á°ÉÕ¤­°ú¿ô·Á¼°¤Ç¥á¥½¥Ã¥É¤ò¸Æ¤Ó½Ð¤¹¤È¤­¤Ë»ØÄê¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -81,40 +81,40 @@ input?ƒƒ\ƒbƒh‚Íin‘®«‚Ü‚½‚Íinout‘®«‚È‚ç^‚ð•Ô‚µ‚Ü‚·B
    puts param1.name # => Filename
 
 --- ole_type -> String
-ƒpƒ‰ƒ[ƒ^‚ÌŒ^–¼‚ðŽæ“¾‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤Î·¿Ì¾¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-@return ƒpƒ‰ƒ[ƒ^‚ÌŒ^–¼‚ðŽ¦‚·•¶Žš—ñ‚ð•Ô‚µ‚Ü‚·B
-        ƒpƒ‰ƒ[ƒ^‚ÌŒ^î•ñ‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍA"unknown type"‚ð•Ô‚µ‚Ü‚·B
+@return ¥Ñ¥é¥á¡¼¥¿¤Î·¿Ì¾¤ò¼¨¤¹Ê¸»úÎó¤òÊÖ¤·¤Þ¤¹¡£
+        ¥Ñ¥é¥á¡¼¥¿¤Î·¿¾ðÊó¤¬¸«¤Ä¤«¤é¤Ê¤¤¾ì¹ç¤Ï¡¢"unknown type"¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    param1 = method.params[0]
    puts param1.ole_type # => VARIANT
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“‚ÌŒ^–¼‚ÍA‘Î‰ž‚·‚é[[c:WIN32OLE::VARIANT]]‚Ì’è”‚Ìæ“ª‚ÌuVT_v‚ðíœ‚µ‚½–¼Ì‚ðŽ‚¿‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¤Î·¿Ì¾¤Ï¡¢ÂÐ±þ¤¹¤ë[[c:WIN32OLE::VARIANT]]¤ÎÄê¿ô¤ÎÀèÆ¬¤Î¡ÖVT_¡×¤òºï½ü¤·¤¿Ì¾¾Î¤ò»ý¤Á¤Þ¤¹¡£
 
-‚½‚Æ‚¦‚ÎA32ƒrƒbƒg•„†•t‚«®”‚Å‚ ‚ê‚ÎuI4v‚Æ‚È‚è‚Ü‚·B
+¤¿¤È¤¨¤Ð¡¢32¥Ó¥Ã¥ÈÉä¹æÉÕ¤­À°¿ô¤Ç¤¢¤ì¤Ð¡ÖI4¡×¤È¤Ê¤ê¤Þ¤¹¡£
 
 @see [[c:WIN32OLE::VARIANT]]
 
 --- ole_type_detail -> [String]
-ƒpƒ‰ƒ[ƒ^‚Ì‘®«‚ðŽæ“¾‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤ÎÂ°À­¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-@return Œ^‚Ì‘®«‚ð•¶Žš—ñ”z—ñ‚Å•Ô‚µ‚Ü‚·B
+@return ·¿¤ÎÂ°À­¤òÊ¸»úÎóÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'IWorksheetFunction')
    method = WIN32OLE_METHOD.new(tobj, 'SumIf')
    param1 = method.params[0]
    p param1.ole_type_detail # => ["PTR", "USERDEFINED", "Range"]
 
-ƒpƒ‰ƒ[ƒ^‚ÌŽæ‚è“¾‚é‘®«’l‚ÍCOM‚ÌIDLiƒCƒ“ƒ^[ƒtƒFƒCƒX’è‹`Œ¾Œêj‚É‚æ‚Á‚Ä‹K’è‚³‚ê‚Ä‚¢‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤Î¼è¤êÆÀ¤ëÂ°À­ÃÍ¤ÏCOM¤ÎIDL¡Ê¥¤¥ó¥¿¡¼¥Õ¥§¥¤¥¹ÄêµÁ¸À¸ì¡Ë¤Ë¤è¤Ã¤Æµ¬Äê¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
 
 @see [[url:http://msdn.microsoft.com/en-us/library/aa367042(VS.85).aspx]]
 
 --- optional? -> bool
-ƒpƒ‰ƒ[ƒ^‚ªƒIƒvƒVƒ‡ƒ“‚©‚Ç‚¤‚©‚ðŽæ“¾‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤¬¥ª¥×¥·¥ç¥ó¤«¤É¤¦¤«¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-@return ƒpƒ‰ƒ[ƒ^‚ªƒIƒvƒVƒ‡ƒ“iÈ—ª‰Â”\j‚Å‚ ‚ê‚Î^‚ð•Ô‚µ‚Ü‚·B
+@return ¥Ñ¥é¥á¡¼¥¿¤¬¥ª¥×¥·¥ç¥ó¡Ê¾ÊÎ¬²ÄÇ½¡Ë¤Ç¤¢¤ì¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -122,13 +122,13 @@ OLEƒI[ƒgƒ[ƒVƒ‡ƒ“‚ÌŒ^–¼‚ÍA‘Î‰ž‚·‚é[[c:WIN32OLE::VARIANT]]‚Ì’è”‚Ìæ“ª‚ÌuVT_
    puts "#{param1.name} #{param1.optional?}" # => Filename true
 
 --- output? -> bool
-ƒpƒ‰ƒ[ƒ^‚ªƒNƒ‰ƒCƒAƒ“ƒg‚©‚ç‚ÌŒ‹‰Ê‚ðŽó‚¯Žæ‚é‚½‚ß‚Ì‚à‚Ì‚©‚ð”»’è‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤¬¥¯¥é¥¤¥¢¥ó¥È¤«¤é¤Î·ë²Ì¤ò¼õ¤±¼è¤ë¤¿¤á¤Î¤â¤Î¤«¤òÈ½Äê¤·¤Þ¤¹¡£
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“‚Ìƒpƒ‰ƒ[ƒ^‚ÍAin(ƒNƒ‰ƒCƒAƒ“ƒg‚©‚çƒT[ƒo‚Ö—^‚¦‚éB[[m:WIN32OLE_PARAM#input?]]‚ª^)AoutiƒT[ƒo‚ªƒNƒ‰ƒCƒAƒ“ƒg‚Ö—^‚¦‚éB[[m:WIN32OLE_PARAM#output?]]‚ª^)‚¨‚æ‚ÑAinoutiƒNƒ‰ƒCƒAƒ“ƒg‚©‚çƒT[ƒo‚Ö—^‚¦AƒT[ƒo‚ªƒNƒ‰ƒCƒAƒ“ƒg‚Ö—^‚¦‚éj‚Ì3Ží—Þ‚Ì•ûŒü‘®«‚Ì‚¢‚¸‚ê‚©‚ðŽ‚¿‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¤Î¥Ñ¥é¥á¡¼¥¿¤Ï¡¢in(¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥µ¡¼¥Ð¤ØÍ¿¤¨¤ë¡£[[m:WIN32OLE_PARAM#input?]]¤¬¿¿)¡¢out¡Ê¥µ¡¼¥Ð¤¬¥¯¥é¥¤¥¢¥ó¥È¤ØÍ¿¤¨¤ë¡£[[m:WIN32OLE_PARAM#output?]]¤¬¿¿)¤ª¤è¤Ó¡¢inout¡Ê¥¯¥é¥¤¥¢¥ó¥È¤«¤é¥µ¡¼¥Ð¤ØÍ¿¤¨¡¢¥µ¡¼¥Ð¤¬¥¯¥é¥¤¥¢¥ó¥È¤ØÍ¿¤¨¤ë¡Ë¤Î3¼ïÎà¤ÎÊý¸þÂ°À­¤Î¤¤¤º¤ì¤«¤ò»ý¤Á¤Þ¤¹¡£
 
-output?ƒƒ\ƒbƒh‚Íout‘®«‚Ü‚½‚Íinout‘®«‚È‚ç^‚ð•Ô‚µ‚Ü‚·B
+output?¥á¥½¥Ã¥É¤ÏoutÂ°À­¤Þ¤¿¤ÏinoutÂ°À­¤Ê¤é¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
-@return ƒƒ\ƒbƒh‚Ì•ûŒü‘®«‚ªout‚Ü‚½‚Íinout‚È‚ç‚Î^‚ð•Ô‚µ‚Ü‚·B
+@return ¥á¥½¥Ã¥É¤ÎÊý¸þÂ°À­¤¬out¤Þ¤¿¤Ïinout¤Ê¤é¤Ð¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'DWebBrowserEvents')
    method = WIN32OLE_METHOD.new(tobj, 'NewWindow')
@@ -147,13 +147,13 @@ output?ƒƒ\ƒbƒh‚Íout‘®«‚Ü‚½‚Íinout‘®«‚È‚ç^‚ð•Ô‚µ‚Ü‚·B
 @see [[url:http://msdn.microsoft.com/en-us/library/aa367136(v=VS.85).aspx]]
 
 --- retval? -> bool
-ƒpƒ‰ƒ[ƒ^‚ª–ß‚è’l‚©‚Ç‚¤‚©‚ð”»’è‚µ‚Ü‚·B
+¥Ñ¥é¥á¡¼¥¿¤¬Ìá¤êÃÍ¤«¤É¤¦¤«¤òÈ½Äê¤·¤Þ¤¹¡£
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“‚Ì‹K’è‚Å‚ÍAƒƒ\ƒbƒh‚Ì–ß‚è’l‚Íˆø”ƒŠƒXƒg‚ÌÅ‰E’[‚Ìƒpƒ‰ƒ[ƒ^‚ðout‘®«i[[m:WIN32OLE_PARAM#output?]]‚ª^j‚Æ‚·‚é‚±‚Æ‚ÅŽÀŒ»‚µ‚Ü‚·B‚½‚¾‚µA‚»‚Ìƒpƒ‰ƒ[ƒ^‚ðOLEƒI[ƒgƒ[ƒVƒ‡ƒ“ŒÄ‚Ño‚µ‚ð‹Lq‚·‚éŒ¾Œê‚ª–ß‚è’l‚Ì‚æ‚¤‚Éˆµ‚¤‚©A‚»‚ê‚Æ‚àˆø”ƒŠƒXƒg‚É•À‚×‚é‚©‚Íretval‘®«‚É‚æ‚Á‚ÄŒˆ’è‚³‚ê‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¤Îµ¬Äê¤Ç¤Ï¡¢¥á¥½¥Ã¥É¤ÎÌá¤êÃÍ¤Ï°ú¿ô¥ê¥¹¥È¤ÎºÇ±¦Ã¼¤Î¥Ñ¥é¥á¡¼¥¿¤òoutÂ°À­¡Ê[[m:WIN32OLE_PARAM#output?]]¤¬¿¿¡Ë¤È¤¹¤ë¤³¤È¤Ç¼Â¸½¤·¤Þ¤¹¡£¤¿¤À¤·¡¢¤½¤Î¥Ñ¥é¥á¡¼¥¿¤òOLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¸Æ¤Ó½Ð¤·¤òµ­½Ò¤¹¤ë¸À¸ì¤¬Ìá¤êÃÍ¤Î¤è¤¦¤Ë°·¤¦¤«¡¢¤½¤ì¤È¤â°ú¿ô¥ê¥¹¥È¤ËÊÂ¤Ù¤ë¤«¤ÏretvalÂ°À­¤Ë¤è¤Ã¤Æ·èÄê¤µ¤ì¤Þ¤¹¡£
 
-retval?ƒƒ\ƒbƒh‚ÍA–ß‚è’l‚Æ‚µ‚Ä‹Lq‚·‚éê‡‚É^‚Æ‚È‚è‚Ü‚·B
+retval?¥á¥½¥Ã¥É¤Ï¡¢Ìá¤êÃÍ¤È¤·¤Æµ­½Ò¤¹¤ë¾ì¹ç¤Ë¿¿¤È¤Ê¤ê¤Þ¤¹¡£
 
-@return ƒpƒ‰ƒ[ƒ^‚ª–ß‚è’l‚Æ‚µ‚Äˆµ‚í‚ê‚éê‡‚É^‚ð•Ô‚µ‚Ü‚·B
+@return ¥Ñ¥é¥á¡¼¥¿¤¬Ìá¤êÃÍ¤È¤·¤Æ°·¤ï¤ì¤ë¾ì¹ç¤Ë¿¿¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('DirectX 7 for Visual Basic Type Library',
                             'DirectPlayLobbyConnection')

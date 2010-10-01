@@ -1,10 +1,10 @@
 = class WIN32OLE_METHOD < Object
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“ƒT[ƒo‚ªŽ‚Âƒƒ\ƒbƒh‚Ìî•ñ‚ð’ñ‹Ÿ‚µ‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¥µ¡¼¥Ð¤¬»ý¤Ä¥á¥½¥Ã¥É¤Î¾ðÊó¤òÄó¶¡¤·¤Þ¤¹¡£
 
-WIN32OLE_METHOD‚ÍA[[m:WIN32OLE#ole_methods]]‚È‚Ç‚ÌŒÄ‚Ño‚µ‚É‚æ‚Á‚Ä•Ô‚³‚ê‚éƒIƒuƒWƒFƒNƒg‚ÅAOLEƒI[ƒgƒ[ƒVƒ‡ƒ“ƒT[ƒo‚Ìƒƒ\ƒbƒh‚Ìî•ñiƒƒ^ƒf[ƒ^j‚ð•ÛŽ‚µ‚Ü‚·B
+WIN32OLE_METHOD¤Ï¡¢[[m:WIN32OLE#ole_methods]]¤Ê¤É¤Î¸Æ¤Ó½Ð¤·¤Ë¤è¤Ã¤ÆÊÖ¤µ¤ì¤ë¥ª¥Ö¥¸¥§¥¯¥È¤Ç¡¢OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¥µ¡¼¥Ð¤Î¥á¥½¥Ã¥É¤Î¾ðÊó¡Ê¥á¥¿¥Ç¡¼¥¿¡Ë¤òÊÝ»ý¤·¤Þ¤¹¡£
 
-=== ƒTƒ“ƒvƒ‹ƒR[ƒh
+=== ¥µ¥ó¥×¥ë¥³¡¼¥É
 
    excel = WIN32OLE.new('Excel.Application')
    excel.ole_methods.each do |method|
@@ -29,16 +29,16 @@ WIN32OLE_METHOD‚ÍA[[m:WIN32OLE#ole_methods]]‚È‚Ç‚ÌŒÄ‚Ño‚µ‚É‚æ‚Á‚Ä•Ô‚³‚ê‚éƒIƒuƒ
 == Class Methods
 
 --- new(ole_type,  method) -> WIN32OLE_METHOD
-[[c:WIN32OLE_TYPE]]‚Æƒƒ\ƒbƒh–¼‚ðŽw’è‚µ‚ÄWIN32OLE_METHOD‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬‚µ‚Ü‚·B
+[[c:WIN32OLE_TYPE]]¤È¥á¥½¥Ã¥ÉÌ¾¤ò»ØÄê¤·¤ÆWIN32OLE_METHOD¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÀ¸À®¤·¤Þ¤¹¡£
 
-OLEƒI[ƒgƒ[ƒVƒ‡ƒ“ƒT[ƒo‚ÌŒ^î•ñ‚Æƒƒ\ƒbƒh–¼‚©‚çWIN32OLE_METHOD‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð¶¬‚µ‚Ü‚·B
+OLE¥ª¡¼¥È¥á¡¼¥·¥ç¥ó¥µ¡¼¥Ð¤Î·¿¾ðÊó¤È¥á¥½¥Ã¥ÉÌ¾¤«¤éWIN32OLE_METHOD¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÀ¸À®¤·¤Þ¤¹¡£
 
-ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒvƒƒOƒ‰ƒ€‚Å‚ÍAWIN32OLE_METHODƒIƒuƒWƒFƒNƒg‚ðnewƒƒ\ƒbƒh‚Å¶¬‚·‚é‚æ‚è‚àA[[m:WIN32OLE#ole_method]]‚È‚Ç‚Ìƒƒ\ƒbƒh‚ðŽQÆ‚·‚é‚Ù‚¤‚ªŠÈ’P‚Å‚·B
+¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¥×¥í¥°¥é¥à¤Ç¤Ï¡¢WIN32OLE_METHOD¥ª¥Ö¥¸¥§¥¯¥È¤ònew¥á¥½¥Ã¥É¤ÇÀ¸À®¤¹¤ë¤è¤ê¤â¡¢[[m:WIN32OLE#ole_method]]¤Ê¤É¤Î¥á¥½¥Ã¥É¤ò»²¾È¤¹¤ë¤Û¤¦¤¬´ÊÃ±¤Ç¤¹¡£
 
-@param ole_type [[c:WIN32OLE_TYPE]]‚ÌƒCƒ“ƒXƒ^ƒ“ƒXB
-@param method ƒƒ\ƒbƒh–¼‚ð•¶Žš—ñ‚ÅŽw’è‚µ‚Ü‚·B
-@return methodƒpƒ‰ƒ[ƒ^‚É‘Î‰ž‚·‚éWIN32OLE_METHOD‚ÌƒCƒ“ƒXƒ^ƒ“ƒXB
-@raise WIN32OLERuntimeError methodƒpƒ‰ƒ[ƒ^‚ÅŽw’è‚µ‚½ƒƒ\ƒbƒh‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñB
+@param ole_type [[c:WIN32OLE_TYPE]]¤Î¥¤¥ó¥¹¥¿¥ó¥¹¡£
+@param method ¥á¥½¥Ã¥ÉÌ¾¤òÊ¸»úÎó¤Ç»ØÄê¤·¤Þ¤¹¡£
+@return method¥Ñ¥é¥á¡¼¥¿¤ËÂÐ±þ¤¹¤ëWIN32OLE_METHOD¤Î¥¤¥ó¥¹¥¿¥ó¥¹¡£
+@raise WIN32OLERuntimeError method¥Ñ¥é¥á¡¼¥¿¤Ç»ØÄê¤·¤¿¥á¥½¥Ã¥É¤¬¸«¤Ä¤«¤ê¤Þ¤»¤ó¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -46,11 +46,11 @@ OLEƒI[ƒgƒ[ƒVƒ‡ƒ“ƒT[ƒo‚ÌŒ^î•ñ‚Æƒƒ\ƒbƒh–¼‚©‚çWIN32OLE_METHOD‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð
 == Instance Methods
 
 --- dispid -> Integer
-ƒƒ\ƒbƒh‚ÌƒfƒBƒXƒpƒbƒ`IDiDISPIDj‚ðŽæ“¾‚µ‚Ü‚·B
+¥á¥½¥Ã¥É¤Î¥Ç¥£¥¹¥Ñ¥Ã¥ÁID¡ÊDISPID¡Ë¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-ƒfƒBƒXƒpƒbƒ`ID‚Íƒƒ\ƒbƒh‚ÌˆêˆÓŽ¯•ÊŽq‚Å‚·BWIN32OLE‚Å‚ÍA[[m:WIN32OLE#_invoke]]‚È‚Ç‚Ìƒƒ\ƒbƒh‚ÅAŒÄ‚Ño‚·ƒT[ƒo‚Ìƒƒ\ƒbƒh‚ðŽw’è‚·‚é‚Ì‚É—˜—p‚µ‚Ü‚·B
+¥Ç¥£¥¹¥Ñ¥Ã¥ÁID¤Ï¥á¥½¥Ã¥É¤Î°ì°Õ¼±ÊÌ»Ò¤Ç¤¹¡£WIN32OLE¤Ç¤Ï¡¢[[m:WIN32OLE#_invoke]]¤Ê¤É¤Î¥á¥½¥Ã¥É¤Ç¡¢¸Æ¤Ó½Ð¤¹¥µ¡¼¥Ð¤Î¥á¥½¥Ã¥É¤ò»ØÄê¤¹¤ë¤Î¤ËÍøÍÑ¤·¤Þ¤¹¡£
 
-@return ƒƒ\ƒbƒh‚ÌDISPID‚ð•Ô‚µ‚Ü‚·B
+@return ¥á¥½¥Ã¥É¤ÎDISPID¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
@@ -61,11 +61,11 @@ OLEƒI[ƒgƒ[ƒVƒ‡ƒ“ƒT[ƒo‚ÌŒ^î•ñ‚Æƒƒ\ƒbƒh–¼‚©‚çWIN32OLE_METHOD‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ð
 @see [[m:WIN32OLE#_setproperty]]
 
 --- event? -> bool
-ƒƒ\ƒbƒh‚ªƒCƒxƒ“ƒg‚©‚Ç‚¤‚©‚ðŽæ“¾‚µ‚Ü‚·B
+¥á¥½¥Ã¥É¤¬¥¤¥Ù¥ó¥È¤«¤É¤¦¤«¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-ƒCƒxƒ“ƒg‚Æ‚Í‚±‚ÌƒT[ƒo‚ªŽÀ‘•‚µ‚Ä‚¢‚éƒƒ\ƒbƒh‚Å‚Í‚È‚­AƒNƒ‰ƒCƒAƒ“ƒg‘¤‚ªƒT[ƒo‘¤‚Ì’Ê’m‚ðŽó‚¯‚é‚½‚ß‚ÉŽÀ‘•‚·‚éƒƒ\ƒbƒh‚Å‚·B
+¥¤¥Ù¥ó¥È¤È¤Ï¤³¤Î¥µ¡¼¥Ð¤¬¼ÂÁõ¤·¤Æ¤¤¤ë¥á¥½¥Ã¥É¤Ç¤Ï¤Ê¤¯¡¢¥¯¥é¥¤¥¢¥ó¥ÈÂ¦¤¬¥µ¡¼¥ÐÂ¦¤ÎÄÌÃÎ¤ò¼õ¤±¤ë¤¿¤á¤Ë¼ÂÁõ¤¹¤ë¥á¥½¥Ã¥É¤Ç¤¹¡£
 
-@return ƒƒ\ƒbƒh‚ªƒCƒxƒ“ƒg‚Å‚ ‚ê‚Î^B
+@return ¥á¥½¥Ã¥É¤¬¥¤¥Ù¥ó¥È¤Ç¤¢¤ì¤Ð¿¿¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
@@ -133,31 +133,31 @@ or "FUNC".
 
 --- name -> String
 --- to_s -> String
-ƒƒ\ƒbƒh–¼‚ðŽæ“¾‚µ‚Ü‚·B
+¥á¥½¥Ã¥ÉÌ¾¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-@return ƒƒ\ƒbƒh–¼‚ð•¶Žš—ñ‚Å•Ô‚µ‚Ü‚·B
+@return ¥á¥½¥Ã¥ÉÌ¾¤òÊ¸»úÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    puts method.name # => SaveAs
 
 --- offset_vtbl -> Integer
-‚±‚Ìƒƒ\ƒbƒh‚ÌVTBL‚ÌƒIƒtƒZƒbƒg‚ðŽæ“¾‚µ‚Ü‚·B
+¤³¤Î¥á¥½¥Ã¥É¤ÎVTBL¤Î¥ª¥Õ¥»¥Ã¥È¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-VTBL‚ÍC++‚âC‚Åƒƒ\ƒbƒh‚ðŒÄ‚Ño‚·‚½‚ß‚É—˜—p‚·‚éŠÖ”ƒ|ƒCƒ“ƒ^‚Ìƒe[ƒuƒ‹‚Å‚·B
+VTBL¤ÏC++¤äC¤Ç¥á¥½¥Ã¥É¤ò¸Æ¤Ó½Ð¤¹¤¿¤á¤ËÍøÍÑ¤¹¤ë´Ø¿ô¥Ý¥¤¥ó¥¿¤Î¥Æ¡¼¥Ö¥ë¤Ç¤¹¡£
 
-@return ƒƒ\ƒbƒh‚ÌVTBLã‚ÌƒIƒtƒZƒbƒg‚ð•Ô‚µ‚Ü‚·B
+@return ¥á¥½¥Ã¥É¤ÎVTBL¾å¤Î¥ª¥Õ¥»¥Ã¥È¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.offset_vtbl # => 40
 
 --- params -> [WIN32OLE_PARAM]
-ƒƒ\ƒbƒh‚Ìƒpƒ‰ƒ[ƒ^î•ñ‚ðŽæ“¾‚µ‚Ü‚·B
+¥á¥½¥Ã¥É¤Î¥Ñ¥é¥á¡¼¥¿¾ðÊó¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
-‚±‚Ìƒƒ\ƒbƒh‚Ìƒpƒ‰ƒ[ƒ^‚ð[[c:WIN32OLE_PARAM]]‚Ì”z—ñ‚Æ‚µ‚Ä•Ô‚µ‚Ü‚·B”z—ñ‚ÌÅ‰‚Ì—v‘f‚ªÅ¶’[‚Ìƒpƒ‰ƒ[ƒ^‚É‘Î‰ž‚µ‚Ü‚·B
+¤³¤Î¥á¥½¥Ã¥É¤Î¥Ñ¥é¥á¡¼¥¿¤ò[[c:WIN32OLE_PARAM]]¤ÎÇÛÎó¤È¤·¤ÆÊÖ¤·¤Þ¤¹¡£ÇÛÎó¤ÎºÇ½é¤ÎÍ×ÁÇ¤¬ºÇº¸Ã¼¤Î¥Ñ¥é¥á¡¼¥¿¤ËÂÐ±þ¤·¤Þ¤¹¡£
 
-@return [[c:WIN32OLE_PARAM]]‚Ì”z—ñB–³ˆø”‚Ìƒƒ\ƒbƒh‚Å‚ ‚ê‚Î—v‘f”0‚Ì”z—ñ‚ð•Ô‚µ‚Ü‚·B
+@return [[c:WIN32OLE_PARAM]]¤ÎÇÛÎó¡£Ìµ°ú¿ô¤Î¥á¥½¥Ã¥É¤Ç¤¢¤ì¤ÐÍ×ÁÇ¿ô0¤ÎÇÛÎó¤òÊÖ¤·¤Þ¤¹¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -214,9 +214,9 @@ Returns the size of arguments of the method.
 
 
 --- visible? -> bool
-‚±‚Ìƒƒ\ƒbƒh‚ªƒNƒ‰ƒCƒAƒ“ƒg‚É‘Î‚µ‚ÄŒöŠJ‚³‚ê‚Ä‚¢‚é‚©i‰ÂŽ‹«‚ðŽ‚Â‚©j‚Ç‚¤‚©‚ð•Ô‚µ‚Ü‚·B
+¤³¤Î¥á¥½¥Ã¥É¤¬¥¯¥é¥¤¥¢¥ó¥È¤ËÂÐ¤·¤Æ¸ø³«¤µ¤ì¤Æ¤¤¤ë¤«¡Ê²Ä»ëÀ­¤ò»ý¤Ä¤«¡Ë¤É¤¦¤«¤òÊÖ¤·¤Þ¤¹¡£
 
-@return ƒƒ\ƒbƒh‚ªŒöŠJ‚³‚ê‚Ä‚¢‚ê‚Î^B
+@return ¥á¥½¥Ã¥É¤¬¸ø³«¤µ¤ì¤Æ¤¤¤ì¤Ð¿¿¡£
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
