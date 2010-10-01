@@ -1,38 +1,77 @@
 = class WIN32OLE_METHOD < Object
-WIN32OLE_METHOD objects represent OLE method information.
+
+OLEオートメーションサーバが持つメソッドの情報を提供します。
+
+WIN32OLE_METHODは、[[m:WIN32OLE#ole_methods]]などの呼び出しによって返されるオブジェクトで、OLEオートメーションサーバのメソッドの情報（メタデータ）を保持します。
+
+=== サンプルコード
+
+   excel = WIN32OLE.new('Excel.Application')
+   excel.ole_methods.each do |method|
+     if method.visible?
+       puts <<SIGNATURE
+ #{method.return_type} #{method.name}(#{
+     method.params.map {|p| "#{p.ole_type} #{p.name}"}.join(', ')
+ }) : #{method.helpstring}
+ SIGNATURE
+     end
+   end
+
+
+@see [[m:WIN32OLE#ole_methods]]
+@see [[m:WIN32OLE#ole_function_methods]]
+@see [[m:WIN32OLE#ole_get_methods]]
+@see [[m:WIN32OLE#ole_put_methods]]
+@see [[m:WIN32OLE#ole_method]]
+@see [[m:WIN32OLE#ole_method_help]]
+@see [[c:WIN32OLE_PARAM]]
 
 == Class Methods
 
---- new(ole_type,  method) -> WIN32OLE_METHOD object
-#@todo
+--- new(ole_type,  method) -> WIN32OLE_METHOD
+[[c:WIN32OLE_TYPE]]とメソッド名を指定してWIN32OLE_METHODのインスタンスを生成します。
 
-Returns a new WIN32OLE_METHOD object which represents the information
-about OLE method. The first argument ole_type specifies WIN32OLE_TYPE
-object. The second argument method specifies OLE method name
-defined OLE class which represents WIN32OLE_TYPE object.
+OLEオートメーションサーバの型情報とメソッド名からWIN32OLE_METHODのインスタンスを生成します。
+
+アプリケーションプログラムでは、WIN32OLE_METHODオブジェクトをnewメソッドで生成するよりも、[[m:WIN32OLE#ole_method]]などのメソッドを参照するほうが簡単です。
+
+@param ole_type [[c:WIN32OLE_TYPE]]のインスタンス。
+@param method メソッド名を文字列で指定します。
+@return methodパラメータに対応するWIN32OLE_METHODのインスタンス。
+@raise WIN32OLERuntimeError methodパラメータで指定したメソッドが見つかりません。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
 
 == Instance Methods
 
---- dispid
-#@todo
+--- dispid -> Integer
+メソッドのディスパッチID（DISPID）を取得します。
 
-Returns dispatch ID.
+ディスパッチIDはメソッドの一意識別子です。WIN32OLEでは、[[m:WIN32OLE#_invoke]]などのメソッドで、呼び出すサーバのメソッドを指定するのに利用します。
+
+@return メソッドのDISPIDを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.dispid # => 181
 
---- event?
-#@todo
+@see [[m:WIN32OLE#_invoke]]
+@see [[m:WIN32OLE#_getproperty]]
+@see [[m:WIN32OLE#_setproperty]]
 
-Returns true if the method is event.
+--- event? -> bool
+メソッドがイベントかどうかを取得します。
+
+イベントとはこのサーバが実装しているメソッドではなく、クライアント側がサーバ側の通知を受けるために実装するメソッドです。
+
+@return メソッドがイベントであれば真。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SheetActivate')
    puts method.event? # => true
+
+@see [[c:WIN32OLE_EVENT]]
 
 --- event_interface
 #@todo
@@ -92,33 +131,33 @@ or "FUNC".
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.invoke_kind # => "FUNC"
 
---- name
-alias to_s
+--- name -> String
+--- to_s -> String
+メソッド名を取得します。
 
-call-seq
-
-   WIN32OLE_METHOD#name
-
-Returns the name of the method.
+@return メソッド名を文字列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    puts method.name # => SaveAs
 
---- offset_vtbl
-#@todo
+--- offset_vtbl -> Integer
+このメソッドのVTBLのオフセットを取得します。
 
-Returns the offset ov VTBL.
+VTBLはC++やCでメソッドを呼び出すために利用する関数ポインタのテーブルです。
+
+@return メソッドのVTBL上のオフセットを返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.offset_vtbl # => 40
 
---- params
-#@todo
+--- params -> [WIN32OLE_PARAM]
+メソッドのパラメータ情報を取得します。
 
-returns array of WIN32OLE_PARAM object corresponding with method
-parameters.
+このメソッドのパラメータを[[c:WIN32OLE_PARAM]]の配列として返します。配列の最初の要素が最左端のパラメータに対応します。
+
+@return [[c:WIN32OLE_PARAM]]の配列。無引数のメソッドであれば要素数0の配列を返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
@@ -173,23 +212,11 @@ Returns the size of arguments of the method.
    method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
    puts method.size_params # => 11
 
---- name
-alias to_s
 
-call-seq
+--- visible? -> bool
+このメソッドがクライアントに対して公開されているか（可視性を持つか）どうかを返します。
 
-   WIN32OLE_METHOD#name
-
-Returns the name of the method.
-
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbook')
-   method = WIN32OLE_METHOD.new(tobj, 'SaveAs')
-   puts method.name # => SaveAs
-
---- visible?
-#@todo
-
-Returns true if the method is public.
+@return メソッドが公開されていれば真。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Workbooks')
    method = WIN32OLE_METHOD.new(tobj, 'Add')
