@@ -42,10 +42,10 @@ safe が真であれば、「安全な」素数((p-1)/2が素数である素数p)を
 返します。
 
 add に整数を渡すと、 p % add == rem であるような
-素数のみを返します。rem が nil の場合は rem=1と見なします。
+素数pのみを返します。rem が nil の場合は rem=1と見なします。
 
 @param bits 生成するランダム素数のビット数
-@param safe trueで安全な素数のみを生成する
+@param safe true で安全な素数のみを生成する
 @param add 生成する素数の剰余の条件
 @param rem 生成する素数の剰余の条件
 @raise OpenSSL::BNError 素数の生成に失敗した場合に発生します
@@ -112,13 +112,13 @@ odd が真なら、生成される整数は奇数のみとなります。
 == Instance Methods
 
 --- %(other) -> OpenSSL::BN
-自身をotherで割り算した余りを返します。
+自身を other で割り算した余りを返します。
 
 @param other 除数
 @raise OpenSSL::BNError 計算時エラー
 
 --- *(other) -> OpenSSL::BN
-自身とotherの積を返します。
+自身と other の積を返します。
 
 @param other かける数
 @raise OpenSSL::BNError 計算時エラー
@@ -135,19 +135,19 @@ odd が真なら、生成される整数は奇数のみとなります。
 @raise OpenSSL::BNError 計算時エラー
 
 --- -(other) -> OpenSSL::BN
-自身からotherを引いた値を返します。
+自身から other を引いた値を返します。
 
 @param other 引く整数
 @raise OpenSSL::BNError 計算時エラー
 
 --- /(other) -> [OpenSSL::BN, OpenSSL::BN]
-自身をotherで割った商と余りを配列で返します。
+自身を other で割った商と余りを配列で返します。
 
 @param other 除数
 @raise OpenSSL::BNError 計算時エラー
 
 --- <<(other) -> OpenSSL::BN
-自身をotherビット左シフトした値を返します。
+自身を other ビット左シフトした値を返します。
 
 @param other シフトするビット数
 @raise OpenSSL::BNError 計算時エラー
@@ -167,7 +167,7 @@ odd が真なら、生成される整数は奇数のみとなります。
 @param other 比較する数
 
 --- >>(other) -> OpenSSL::BN
-自身をotherビット右シフトした値を返します。
+自身を other ビット右シフトした値を返します。
 
 @param other シフトするビット数
 @raise OpenSSL::BNError 計算時エラー
@@ -210,20 +210,21 @@ odd が真なら、生成される整数は奇数のみとなります。
 
 基本的に other が整数のときに、自身を Integer のオブジェクトに
 変換して [other, 変換後オブジェクト] にして返します。
-それ以外の場合は例外 ArgumentError を返します。
+それ以外の場合は例外 TypeError を発生させます。
 
-@param other 変換
+@param other 変換の基準となるオブジェクト
+@raise TypeError 変換に失敗した場合に発生します
 
 --- copy(other) -> self
 other の内容を自身にコピーします。
 
-@param other コピーする OpenSSL::BN のオブジェクト
+@param other コピーする [[c:OpenSSL::BN]] のオブジェクト
 @raise OpenSSL::BNError コピーに失敗
 
 --- gcd(other) -> OpenSSL::BN
 GCD(最大公約数)を返します。
 
-@param other 自身とのGCDを計算する数
+@param other 自身との GCD を計算する数
 @raise OpenSSL::BNError 計算時エラー
 
 --- mask_bits!(n) -> self
@@ -314,25 +315,25 @@ n が自身のビット数より大きい場合は例外 [[OpenSSL::BNError]]
 --- prime?(checks) -> bool
 自身が素数であるなら真を返します。
 
-Miller-Rabin法により確率的に判定します。
+Miller-Rabin 法により確率的に判定します。
 checkで指定した回数だけ繰り返します。
 引数を省略した場合は OpenSSL が適切な
 回数を判断します。
 
-@param check Miller-Robin法の繰り返しの回数
+@param check Miller-Robin 法の繰り返しの回数
 @raise OpenSSL::BNError 判定時にエラーが発生
 @see [[m:OpenSSL::BN#prime_fasttest?]]
 
 --- prime_fasttest?(checks=nil, vtrivdiv=true) -> bool
 自身が素数であるなら真を返します。
 
-vtrivdiv が真である場合には、Miller-Rabin法での
+vtrivdiv が真である場合には、 Miller-Rabin 法での
 判定の前に小さな素数で割ることで素数か否かを
 調べます。自身が小さな素数である場合にはこの手順
 により素数ではないと誤った返り値を返します。
 #@# 本当は vtrivdiv が false でない
 
-Miller-Rabin法により確率的に判定します。
+Miller-Rabin 法により確率的に判定します。
 checksで指定した回数だけ繰り返します。
 checksがnilである場合は OpenSSL が適切な
 回数を判断します。
@@ -375,17 +376,17 @@ checksがnilである場合は OpenSSL が適切な
 --- to_s(base=10) -> String
 自身を表す文字列を返します。
 
-baseで基数を指定します。10,16を指定できます。
+base で基数を指定します。10,16を指定できます。
 2を指定すると自身の絶対値を big-endian の符号無し整数のバイナリ列に
 変換します。
-0を指定した場合には MPI 形式の文字列に変換します。
+0を指定した場合には MPI 形式の文字列(バイト列)に変換します。
 
 @param base 文字列変換の基数
 @raise OpenSSL::BNError 変換に失敗した場合に発生します
 @see [[m:OpenSSL::BN.new]]
 
 --- ucmp(other) -> -1 | 0 | 1
-自身と other の絶対値を比較し、otherの絶対値のほうが
+自身と other の絶対値を比較し、other の絶対値のほうが
 自身の絶対値より小さければ-1、
 大きければ+1、2つの絶対値が等しければ 0 を返します。
 
@@ -396,3 +397,10 @@ baseで基数を指定します。10,16を指定できます。
 = class OpenSSL::BNError < OpenSSL::OpenSSLError
 [[c:OpenSSL::BN]] 関連のエラーを表す例外です。
 
+= reopen Integer
+== Instance Methods
+--- to_bn -> OpenSSL::BN
+Integer を同じ数を表す [[c:OpenSSL::BN]] のオブジェクトに
+変換します。
+
+現在のバージョンでは正しく実装されていません。
