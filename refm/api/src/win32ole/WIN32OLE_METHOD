@@ -93,9 +93,9 @@ OLEオートメーションサーバの型情報とメソッド名からWIN32OLE_METHODのインスタンスを
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.helpcontext # => 65717
 
-WIN32OLE_METHODオブジェクトを引数として、[[m:WIN32OLE.#ole_show_help]]でヘルプファイルを表示する場合には、WIN32OLEが内部で当メソッドを呼び出します。
+WIN32OLE_METHODオブジェクトを引数として、[[m:WIN32OLE.ole_show_help]]でヘルプファイルを表示する場合には、WIN32OLEが内部で当メソッドを呼び出します。
 
-@see [[m:WIN32OLE.#ole_show_help]]
+@see [[m:WIN32OLE.ole_show_help]]
 
 --- helpfile -> String | nil
 ヘルプファイルのパス名を取得します。
@@ -108,17 +108,16 @@ WIN32OLE_METHODオブジェクトを引数として、[[m:WIN32OLE.#ole_show_help]]でヘルプフ
    method = WIN32OLE_METHOD.new(tobj, 'Add')
    puts method.helpfile # => C:\...\VBAXL9.CHM
 
-メソッドにヘルプファイルが関連付けられている場合、[[m:WIN32OLE.#ole_show_help]]にWIN32OLE_METHODオブジェクトを与えてヘルプファイルを表示できます。
+メソッドにヘルプファイルが関連付けられている場合、[[m:WIN32OLE.ole_show_help]]にWIN32OLE_METHODオブジェクトを与えてヘルプファイルを表示できます。
 
-@see [[m:WIN32OLE.#ole_show_help]]
+@see [[m:WIN32OLE.ole_show_help]]
 
 --- helpstring -> String | nil
 メソッドのヘルプ文字列を取得します。
 
-helpstringは、IDEがメソッドのバルーンヘルプを表示するような場合に利用可能な1行程度でメソッドを説明する文字列です。
+helpstringは、IDEがメソッドのバルーンヘルプを表示するような場合に利用可能な、1行程度でメソッドを説明する文字列です。
 
 @return ヘルプ文字列を返します。未定義ならばnilを返します。
-found, then the method returns nil.
 
    tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
    method = WIN32OLE_METHOD.new(tobj, 'Navigate')
