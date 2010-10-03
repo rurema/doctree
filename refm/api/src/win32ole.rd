@@ -45,23 +45,23 @@ WIN32OLE::VARIANTは、[[c:WIN32OLE_VARIANT]]オブジェクトの作成時や、[[m:WIN32OLE#
 == Constants
 
 --- VT_ARRAY -> Integer
-配列（SafeArray）を示します。
+配列（SafeArray）を示します（0x2000）。
 
 --- VT_BOOL -> Integer
-真偽値を示します。
+真偽値を示します（11）。
 
 --- VT_BSTR -> Integer
-文字列（BSTR）を示します。
+文字列（BSTR）を示します（8）。
 
 OLEオートメーションのBSTRはUnicodeで表現された長さ付き文字列です。RubyのStringとBSTRの相互変換は、WIN32OLEが[[m:WIN32OLE#codepage]]に基づいて自動的に行います。
 
 --- VT_BYREF -> Integer
-参照を示します。
+参照を示します（0x4000）。
 
 VT_BYREFは型ではなく、参照を示す型属性です。OLEオートメーションサーバが結果を引数に戻す場合、参照先の型を示す値と論理和を取るために利用します。
 
 --- VT_CY -> Integer
-通貨型（CURRENCY）を示します。
+通貨型（CURRENCY）を示します（6）。
 
 OLEオートメーションのCURRENCY型は、符号付き64ビット整数を10進表記した時の下4桁を小数点以下とすることで、加減算について誤差を生じさせない小数点数を表現します。
 
@@ -70,76 +70,87 @@ CURRENCY型の有効範囲は-922337203685477.5808から922337203685477.5807です。
 WIN32OLEはオートメーション呼び出しの返り値がCURRENCY型の場合、文字列に変換します。
 
 --- VT_DATE -> Integer
-日付型（DATE）を示します。
+日付型（DATE）を示します（7）。
 
 OLEオートメーションのDATE型は、1899年12月30日0時00分からの日時を示す64ビット浮動小数点数型です。
 
 WIN32OLEは、RubyのTime型と自動的に変換します。
 
 --- VT_DISPATCH -> Integer
-OLEオートメーションオブジェクトを示します。
+OLEオートメーションオブジェクトを示します（9）。
 
 RubyのオブジェクトをOLEオートメーションサーバへ与える場合に利用します。
 
 --- VT_ERROR -> Integer
-HRESULTを示します。
+HRESULTを示します（10）。
 
 HRESULTは、COMを含むWindowsのサービスがアプリケーションへ通知する統一的なエラーコードです。
 
 HRESULT: [[url:http://msdn.microsoft.com/en-us/library/cc704587(v=PROT.10).aspx]]
 
 --- VT_I1 -> Integer
-符号付き8ビット整数（char）を示します。
+符号付き8ビット整数（char）を示します（16）。
 
 OLEオートメーションの仕様上は利用できません。
 
 --- VT_I2 -> Integer
-符号付き16ビット整数（short）を示します。
+符号付き16ビット整数（short）を示します（2）。
 
 --- VT_I4 -> Integer
-符号付き32ビット整数（int）を示します。
+符号付き32ビット整数（int）を示します（3）。
 
 --- VT_INT -> Integer
-符号付き32ビット整数（int）を示します。
+符号付き整数（int）を示します（22）。
 
 --- VT_PTR -> Integer
-ポインタ型を示します。
+ポインタ型を示します（26）。
 
 VT_PTRは、VOID*に相当するため、OLEオートメーションでは利用できません。
 
 --- VT_R4 -> Integer
-単精度浮動小数点数を示します。
+単精度浮動小数点数を示します（4）。
 
 --- VT_R8 -> Integer
-倍精度浮動小数点数を示します。
+倍精度浮動小数点数を示します（5）。
 
 --- VT_UI1 -> Integer
-符号なし8ビット整数（unsigned char）を示します。
+符号なし8ビット整数（unsigned char）を示します（17）。
 
 --- VT_UI2 -> Integer
-符号なし16ビット整数（unsigned short）を示します。
+符号なし16ビット整数（unsigned short）を示します（18）。
 
 OLEオートメーションでは利用できません。代わりにVT_I2を利用してください。
 
 --- VT_UI4 -> Integer
-符号なし32ビット整数（unsigned int）を示します。
+符号なし32ビット整数（unsigned int）を示します（19）。
 
 OLEオートメーションでは利用できません。代わりにVT_I4を利用してください。
 
 --- VT_UINT -> Integer
-符号なし32ビット整数（unsigned int）を示します。
+符号なし整数（unsigned int）を示します（23）。
 
 OLEオートメーションでは利用できません。代わりにVT_I4を利用してください。
 
 --- VT_UNKNOWN -> Integer
-COMインターフェイスを示します。
+COMインターフェイスを示します（13）。
 
 --- VT_USERDEFINED -> Integer
-ユーザ定義型を示します。
+ユーザ定義型を示します（29）。
 
 OLEオートメーションでは利用できません。代わりにVT_I4を利用してください。
 
 --- VT_VARIANT -> Integer
-VARIANT型を示します。
+VARIANT型を示します（12）。
+
+#@since 1.9.1
+--- VT_EMPTY -> Integer
+空（初期化状態）のオブジェクトを示します（0）。
+
+--- VT_NULL -> Integer
+NULL型の値を示します（1）。
+
+[[m:WIN32OLE::VARIANT.VT_EMPTY]]と異なり、NULLという値（たとえばSQLパラメータでNULLを指定する場合など）を示します。
+
+#@end
 
 #@end
