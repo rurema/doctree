@@ -1,51 +1,90 @@
+#@since 1.9.1
+
 = class WIN32OLE_VARIANT < Object
+
+OLEオートメーションの標準型のVARIANTオブジェクトをRubyで利用するためのクラスです。
+
+VARIANT型とは、型情報と値のペアから構成されるデータ型で、元はVBの形無し変数のための構造体です。OLEオートメーションのメソッド呼び出しには汎用型として引数にはVARIANT型を利用します。
+
+ * 型情報は、[[m:WIN32OLE_VARIANT#vartype]]で取得できます。
+ * 値は、[[m:WIN32OLE_VARIANT#value]]で取得できます。
+
+WIN32OLEのオートメーションメソッド呼び出しは、VARIANT型の参照を配列として実装しています。ほとんどのOLEオートメーションサーバは、WIN32OLEの呼び出し方法で正しく処理します。
+
+しかし、一部のOLEオートメーションサーバは、VARIANT型の値そのものを引数に与える必要があります。
+
+WIN32OLE_VARIANTオブジェクトを利用すると、このようなOLEオートメーションサーバのメソッド呼び出しに、VARIANT型の値を引数として与えることをWIN32OLEへ指示できます。
+
+なお、WIN32OLE_VARIANTを利用する必要の有無は、呼び出し対象のOLEオートメーションサーバの仕様または実装に依存します。
+
+=== サンプルコード
+
+   shell = WIN32OLE.new('Shell.Application')
+   folder = shell.NameSpace('C:\\Users\\Public\\Documents')
+   item = folder.ParseName('test.txt')
+   v = WIN32OLE_VARIANT.new('Delete')
+   item.invokeVerb(v)     # => ゴミ箱への移動ダイアログを表示
+
+上記サンプルの最後の行を
+
+   item.invokeVerb('Delete')
+
+とすると、FolderItemオブジェクトは引数を認識できず、既定の動作としてOpenを実行します。
 
 == Class Methods
 
---- array(ary, vt)
-#@todo
+--- array(ary, vt) -> WIN32OLE_VARIANT
+配列用のVARIANTオブジェクトを生成します。
 
-Returns Ruby object wrapping OLE variant whose variant type is
-VT_ARRAY. The first argument should be Array object which specifies
-dimensions and each size of dimensions of OLE array. The second
-argument specifies variant type of the element of OLE array.
+オートメーションメソッド呼び出し用の配列を生成します。なお、OLEオートメーションの配列の次元と添え字の関係はVB型だという点に注意してください。これはCと逆順の並びです。
 
-The following create 2 dimensions OLE array. The first dimensions
-size is 3, and the second is 4.
+@param dims 各次元の要素数を示す配列を与えます。たとえば4要素のベクターであれば[4]、各3要素の2次元配列であれば[3, 3]とします。
+@param vt 配列要素の型を[[c:WIN32OLE::VARIANT]]の定数で指定します。
+@retun 指定された次元/要素数を持つWIN32OLE_VARIANTオブジェクト。
 
-   ole_ary = WIN32OLE_VARIANT.array([3,4], VT_I4)
+次の例は、最初の次元が3要素、次の次元が4要素の2次元配列を生成する例です。
+
+   ole_ary = WIN32OLE_VARIANT.array([3,4], WIN32OLE::VARIANT::VT_I4)
    ruby_ary = ole_ary.value # => [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 
---- new(val, vartype) -> WIN32OLE_VARIANT
-#@todo
+@see [[m:WIN32OLE_VARIANT#value]]
+@see [[c:WIN32OLE::VARIANT]]
 
-Returns Ruby object wrapping OLE variant. The first argument
-specifies Ruby object to convert OLE variant variable. The second
-argument specifies VARIANT type. In some situation, you need
-the WIN32OLE_VARIANT object to pass OLE method
+--- new(val, vartype = nil) -> WIN32OLE_VARIANT
+指定したオブジェクトを値とするWIN32OLE_VARIANTオブジェクトを生成します。
 
-   shell = WIN32OLE.new("Shell.Application")
-   folder = shell.NameSpace("C:\Windows")
-   item = folder.ParseName("tmp.txt")
-   # You can't use Ruby String object to call FolderItem.InvokeVerb.
-   # Instead, you have to use WIN32OLE_VARIANT object to call the method.
-   shortcut = WIN32OLE_VARIANT.new("Create Shortcut(\&S)")
-   item.invokeVerb(shortcut)
+@param val ラップするRubyオブジェクトを指定します。
+@param vartype 省略時はWIN32OLEが自動型変換を行います。指定する場合は[[c:WIN32OLE::VARIANT]]の定数を指定してください。
+@return val引数を値として持つWIN32OLE_VARIANTオブジェクトを返します。
+@raise TypeError val引数の型がArray、String、Integer、Float、Time、WIN32OLE、WIN32OLE_VARIANT、TrueClass、FalseClass、NilClassのいずれでもありません。
+
+   shell = WIN32OLE.new('Shell.Application')
+   folder = shell.NameSpace('C:\\Users\\Public\\Documents')
+   item = folder.ParseName('test.txt')
+   v = WIN32OLE_VARIANT.new('Delete')
+   item.invokeVerb(v)     # => ゴミ箱への移動ダイアログを表示
+
+バイト配列を生成するには、以下のようにvartype引数にVT_UI1 | VT_ARRAYを設定します。バイト配列の値のRuby表現はエンコーディングをASCII-8BITに設定した文字列となります。
+
+   include WIN32OLE::VARIANT
+   bytes = WIN32OLE_VARIANT.new([1,2,3,4,5], VT_UI1 | VT_ARRAY)
+   bytes.value          #=> "\x01\x02\x03\x04\x05"
+   bytes.value.encoding #=> #<Encoding:ASCII-8BIT>
+
+@see [[c:WIN32OLE::VARIANT]]
 
 == Instance Methods
 
---- [](i,j,...) -> WIN32OLE_VARIANT
-#@todo
+--- [](i...) -> object
+配列型のWIN32OLE_VARIANTの要素を取得します。
 
-Returns the element of WIN32OLE_VARIANT object (OLE array).  This
-method is available only when the variant type of WIN32OLE_VARIANT
-object is VT_ARRAY.
+selfは、[[m:WIN32OLE_VARIANT.array]]または引数に配列を指定して[[m:WIN32OLE_VARIANT.new]]で作成したインスタンスの必要があります。
 
-REMARK:
-
-   The all indicies should be 0 or natural number and
-   lower than or equal to max indicies.
-   (This point is different with Ruby Array indicies.)
+@param i 各次元の0からのインデックスを「,」で区切って次元数分指定します。
+         インデックスは0から要素数-1までのIntegerで指定してください。
+@return 引数で指定したインデックスの要素を返します。
+@raise ArgError 引数の数が次元数と一致していません。
+@raise WIN32OLERuntimeError selfが配列型のWIN32OLE_VARIANTではありません。あるいはインデックスが0未満または要素数以上を指定しています。
 
    obj = WIN32OLE_VARIANT.new([[1,2,3],[4,5,6]])
    p obj[0,0] # => 1
@@ -53,18 +92,17 @@ REMARK:
    p obj[2,0] # => WIN32OLERuntimeError
    p obj[0, -1] # => WIN32OLERuntimeError
 
---- []=(i,j,...,val)
-#@todo
+--- []=(i..., val) -> object
+配列型のWIN32OLE_VARIANTの要素を設定します。
 
-Set the element of WIN32OLE_VARIANT object (OLE array) to val.
-This method is available only when the variant type of WIN32OLE_VARIANT
-object is VT_ARRAY.
+selfは、[[m:WIN32OLE_VARIANT.array]]または引数に配列を指定して[[m:WIN32OLE_VARIANT.new]]で作成したインスタンスの必要があります。
 
-REMARK:
-
-   The all indicies should be 0 or natural number and
-   lower than or equal to max indicies.
-   (This point is different with Ruby Array indicies.)
+@param i 各次元の0からのインデックスを「,」で区切って次元数分指定します。
+         インデックスは0から要素数-1までのIntegerで指定してください。
+@param val 設定値を指定します。Array、String、Integer、Float、TrueClass、FalseClass、NilClass以外のオブジェクトはオートメーションオブジェクト（WIN32OLEオブジェクト）に変換します。
+@return 引数で指定したインデックスの要素を返します。
+@raise ArgError 引数の数が次元数と一致していません。
+@raise WIN32OLERuntimeError selfが配列型のWIN32OLE_VARIANTではありません。あるいはインデックスが0未満または要素数以上を指定しています。
 
    obj = WIN32OLE_VARIANT.new([[1,2,3],[4,5,6]])
    obj[0,0] = 7
@@ -73,40 +111,57 @@ REMARK:
    obj[2,0] = 9 # => WIN32OLERuntimeError
    obj[0, -1] = 9 # => WIN32OLERuntimeError
 
---- value -> Object
-#@todo
+--- value -> object
+値に対応するRubyオブジェクトを取得します。
 
-Returns Ruby object value from OLE variant.
+@return 値に対応するRubyのオブジェクトを返します。
 
    obj = WIN32OLE_VARIANT.new(1, WIN32OLE::VARIANT::VT_BSTR)
-   obj.value # => "1" (not Fixnum object, but String object "1")
+   obj.value # => "1" (VT_BSTRを指定して生成したので、Stringオブジェクトとなる)
 
---- value=(val)
-#@todo
+--- value=(val) -> ()
+WIN32OLE_VARIANTの値を再設定します。
 
-Sets variant value to val. If the val type does not match variant
-value type(vartype), then val is changed to match variant value
-type(vartype) before setting val. Thie method is not available
-when vartype is VT_ARRAY(except VT_UI1|VT_ARRAY). If the vartype
-is VT_UI1|VT_ARRAY, the val should be String object.
+指定した値でselfを再設定します。指定値が元のVARIANT型に合わない場合は元のVARIANT型に合うように引数を変換します。変換は、引数を一度VARIANT型に変換してからCOMのVARIANT型変換関数（VariantChangeTypeEx）を呼び出すことで実現します。
 
-   obj = WIN32OLE_VARIANT.new(1) # obj.vartype is WIN32OLE::VARIANT::VT_I4
-   obj.value = 3.2 # 3.2 is changed to 3 when setting value.
-   p obj.value # => 3
+@param val 設定値を指定します。
+@raise WIN32OLERuntimeError selfが配列型です。あるいは、型変換に失敗しました。
 
---- vartype -> Class
-#@todo
+   obj = WIN32OLE_VARIANT.new(1) # VARIANT型にWIN32OLE::VARIANT::VT_I4を設定
+   obj.value = 3.2      # 3.2から新たなVARIANT型を作成し、それをVT_I4に変換
+   p obj.value # => 3   # VT_I4に変換した結果が設定される
 
-Returns OLE variant type.
+selfが配列型のWIN32OLE_VARIANTの場合、バイト配列かつ引数が文字列の場合を除いて[[c:WIN32OLERuntimeError]]を通知します。配列型の場合は、[[m:WIN32OLE_VARIANT#[]=]]を利用してください。
+
+--- vartype -> Integer
+selfの型情報を取得します。
+
+型情報は、[[c:WIN32OLE::VARIANT]]の定数値の組み合わせです。
 
    obj = WIN32OLE_VARIANT.new("string")
-   obj.vartype   # => WIN32OLE::VARIANT::VT_BSTR
+   obj.vartype   # => 8 (WIN32OLE::VARIANT::VT_BSTR)
+   bytes = WIN32OLE_VARIANT.new([1,2,3,4,5], VT_UI1 | VT_ARRAY)
+   bytes.vartype # => 8209 (WIN32OLE::VARIANT::VT_ARRAY | VT_UI1)
 
 == Constants
 
---- Empty 
+--- Empty -> WIN32OLE_VARIANT
+EMPTY型のWIN32OLE_VARIANTオブジェクトです。
 
---- Null
+このオブジェクトは、VOID型の戻り値や、値が空なことを明示しなければならない特殊な引数に利用します。
 
---- Nothing
+@see [[m:WIN32OLE::VARIANT.VT_EMPTY]]
 
+--- Null -> WIN32OLE_VARIANT
+NULL型のWIN32OLE_VARIANTオブジェクトです。
+
+このオブジェクトは、ADOなどのデータベースインターフェイスでNULLを指定するのに利用可能です。
+
+@see [[m:WIN32OLE::VARIANT.VT_NULL]]
+
+--- Nothing -> WIN32OLE_VARIANT
+DISPATCH型の空のオブジェクトです。
+
+@see [[m:WIN32OLE::VARIANT.VT_DISPATCH]]
+
+#@end
