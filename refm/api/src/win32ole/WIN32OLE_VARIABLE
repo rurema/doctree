@@ -1,162 +1,153 @@
 = class WIN32OLE_VARIABLE < Object
 
-WIN32OLE_VARIABLE objects represent OLE variable information.
+OLEオートメーションの変数情報をRubyで参照するためのクラスです。
 
-     WIN32OLE_VARIABLE#name
- 
-Returns the name of variable.
+OLEオートメーションサーバは、定数（[[m:WIN32OLE.const_load]]）、メソッド/プロパティ（[[c:WIN32OLE_METHOD]]）、イベント（[[c:WIN32OLE_EVENT]]）のほかに変数をクライアントへ提供できます。WIN32OLE_VARIABLEクラスは、サーバが提供する変数の情報をオブジェクト化します。変数情報にはCOMで決められた構造体やユーザ定義型のフィールド情報などがありますが、最も良く利用されるのはenum（列挙型）のメンバ情報です。enumのメンバは定数として利用できます。
 
-     tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
-     variables = tobj.variables
-     variables.each do |variable|
-       puts "#{variable.name}"
-     end
+WIN32OLE_VARIABLEのオブジェクトは、[[m:WIN32OLE_TYPE#variables]]メソッドを利用して取得します。
 
-     The result of above script is following:
-       xlChart
-       xlDialogSheet
-       xlExcel4IntlMacroSheet
-       xlExcel4MacroSheet
-       xlWorksheet
-== Instance Methods
+=== サンプルコード
 
---- name
-#@todo
-alias to_s
+   require 'win32ole'
 
-Returns the name of variable.
-
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
    variables = tobj.variables
    variables.each do |variable|
-     puts "#{variable.name}"
+     puts "#{variable.name}=#{variable.value}"
    end
 
-   The result of above script is following:
-     xlChart
-     xlDialogSheet
-     xlExcel4IntlMacroSheet
-     xlExcel4MacroSheet
-     xlWorksheet
+実行結果は以下となります。
 
---- ole_type
-#@todo
+ xlChart=-4109
+ xlDialogSheet=-4116
+ xlExcel4IntlMacroSheet=4
+ xlExcel4MacroSheet=3
+ xlWorksheet=-4167
 
-Returns OLE type string.
+@see [[m:WIN32OLE_TYPE#variables]]
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
+== Instance Methods
+
+--- name -> String
+--- to_s -> String
+
+変数名を取得します。
+
+@return 変数名を文字列で返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
+   variables = tobj.variables
+   variables.each do |variable|
+     puts "#{variable.name}"   # => xlChart, xlDialogSheet, ...
+   end
+
+--- ole_type -> String
+
+変数の型を取得します。
+
+@return 変数の型名を文字列で返します。型名を文字列に変換できない場合は、「Unknown Type nn」（nnはバリアント型を示す数値）の形式の文字列を返します。
+
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
   variables = tobj.variables
   variables.each do |variable|
     puts "#{variable.ole_type} #{variable.name}"
   end
 
-  The result of above script is following:
-    INT xlChart
-    INT xlDialogSheet
-    INT xlExcel4IntlMacroSheet
-    INT xlExcel4MacroSheet
-    INT xlWorksheet
+OLEオートメーションの型名は、対応する[[c:WIN32OLE::VARIANT]]の定数の先頭の「VT_」を削除した名称を持ちます。
 
---- ole_type_detail
-#@todo
+--- ole_type_detail -> [String]
 
-Returns detail information of type. The information is array
-of type.
+変数の型と属性を取得します。
 
-   tobj = WIN32OLE_TYPE.new('DirectX 7 for Visual Basic Type Library', 'D3DCLIPSTATUS')
-   variable = tobj.variables.find {|variable| variable.name == 'lFlags'}
-   tdetail  = variable.ole_type_detail
-   p tdetail # => ["USERDEFINED", "CONST_D3DCLIPSTATUSFLAGS"]
+@return 変数の型と属性を文字列配列で返します。
 
---- name
-#@todo
-alias to_s
-
-Returns the name of variable.
-
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
-   variables = tobj.variables
-   variables.each do |variable|
-     puts "#{variable.name}"
+   tobj = WIN32OLE_TYPE.new('Microsoft XML, v5.0', 'tagSTATSTG')
+   tobj.variables.each do |v|
+     puts "#{v.ole_type} [#{v.ole_type_detail.join(', ')}] #{v.name}"
    end
 
-   The result of above script is following:
-     xlChart
-     xlDialogSheet
-     xlExcel4IntlMacroSheet
-     xlExcel4MacroSheet
-     xlWorksheet
+出力結果
 
---- value
-#@todo
+ Unknown Type 31 [] pwcsName   #=> VT_LPWSTR はWIN32OLE::VARIANTで未定義なので変換できない
+ UI4 [UI4] type
+ _ULARGE_INTEGER [USERDEFINED, _ULARGE_INTEGER] cbSize
+ _FILETIME [USERDEFINED, _FILETIME] mtime
+ _FILETIME [USERDEFINED, _FILETIME] ctime
+ _FILETIME [USERDEFINED, _FILETIME] atime
+ UI4 [UI4] grfMode
+ UI4 [UI4] grfLocksSupported
+ GUID [USERDEFINED, GUID] clsid
+ UI4 [UI4] grfStateBits
+ UI4 [UI4] reserved
 
-Returns value if value is exists. If the value does not exist,
-this method returns nil.
+上例のように、WIN32OLE_VARIABLEで取得できる変数あるいはその元となる構造体は、必ずしもOLEオートメーション互換データというわけではありません。このようなデータはWIN32OLEからは利用できません。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
+
+--- value -> object | nil
+変数の値を取得します。
+
+変数情報によってはenum値のように定数値を持つものがあります。valueメソッドはこのような定数値を返します。
+
+@return この変数が持つ定数値。値を持たない場合はnilを返します。
+
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
    variables = tobj.variables
    variables.each do |variable|
-     puts "#{variable.name} = #{variable.value}"
+     puts "#{variable.name}=#{variable.value}"
    end
 
-   The result of above script is following:
-     xlChart = -4109
-     xlDialogSheet = -4116
-     xlExcel4IntlMacroSheet = 4
-     xlExcel4MacroSheet = 3
-     xlWorksheet = -4167
+実行結果は以下となります。
 
---- variable_kind
-#@todo
+ xlChart=-4109
+ xlDialogSheet=-4116
+ xlExcel4IntlMacroSheet=4
+ xlExcel4MacroSheet=3
+ xlWorksheet=-4167
 
-Returns variable kind string.
+--- variable_kind -> String
+変数の種類（VARKIND）を取得します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
-   variables = tobj.variables
-   variables.each do |variable|
-     puts "#{variable.name} #{variable.variable_kind}"
-   end
+この変数の種類を示す文字列を返します。
 
-   The result of above script is following:
-     xlChart CONSTANT
-     xlDialogSheet CONSTANT
-     xlExcel4IntlMacroSheet CONSTANT
-     xlExcel4MacroSheet CONSTANT
-     xlWorksheet CONSTANT
+@return VARKINDに対応する文字列を返します。
 
---- varkind
-#@todo
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
+   puts tobj.variables.map {|v| v.variable_kind}.uniq # => CONSTANT
 
-Returns the number which represents variable kind.
+VARKINDは以下のいずれかとなります。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
-  variables = tobj.variables
-  variables.each do |variable|
-    puts "#{variable.name} #{variable.varkind}"
-  end
+: PERINSTANCE(0)
+  インスタンス毎の変数。構造体やユーザ定義体のフィールド。
+: STATIC(1)
+  クラスの静的変数。
+: CONST(2)
+  定数。enumやモジュールのメンバ。
+: DISPATCH(3)
+  変数アクセスにオートメーションを利用。旧型式のプロパティ。
 
-  The result of above script is following:
-     xlChart 2
-     xlDialogSheet 2
-     xlExcel4IntlMacroSheet 2
-     xlExcel4MacroSheet 2
-     xlWorksheet 2
+@see [[m:WIN32OLE_VARIABLE#varkind]]
 
---- visible?
-#@todo
+--- varkind -> Integer
+変数の種類（VARKIND）を取得します。
 
-Returns true if the variable is public.
+この変数の種類を示す数値を返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
-   variables = tobj.variables
-   variables.each do |variable|
-     puts "#{variable.name} #{variable.visible?}"
-   end
+@return VARKINDに対応する数値を返します。
 
-   The result of above script is following:
-     xlChart true
-     xlDialogSheet true
-     xlExcel4IntlMacroSheet true
-     xlExcel4MacroSheet true
-     xlWorksheet true
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
+   puts tobj.variables.map {|v| v.varkind}.uniq # => 2
+
+数値の意味については、[[m:WIN32OLE_VARIABLE#variable_kind]]の説明を参照してください。
+
+--- visible? -> bool
+
+変数の可視性を取得します。
+
+@return publicアクセス可能であれば真を返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
+   puts tobj.variables.map {|v| v.visible?}.uniq # => true
+
+
 
