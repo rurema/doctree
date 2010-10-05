@@ -1,67 +1,67 @@
-#@since 1.8.1
 = class OpenSSL::ASN1::ASN1Data < Object
 
-ASN.1データ型のスーパークラス
+ASN.1 データ型を表すクラス。
 
-継承の関係
+UNIVERSAL なタグを持つ ASN.1 値はこのクラスの2つのサブクラス、
+[[c:OpenSSL::ASN1::Primitive]] もしくは [[c:OpenSSL::ASN1::Constructive]]
+のインスタンスとして表現されます。
 
-     OpenSSL::ASN1::ASN1Data
-       +-> OpenSSL::ASN1::Primitive
-       |     +-> OpenSSL::ASN1::Boolean
-       |     +-> OpenSSL::ASN1::Integer
-       |     +-> OpenSSL::ASN1::Enumerated
-       |     +-> OpenSSL::ASN1::BitString
-       |     +-> OpenSSL::ASN1::OctetString
-       |     +-> OpenSSL::ASN1::UTF8String
-       |     +-> OpenSSL::ASN1::NumericString
-       |     +-> OpenSSL::ASN1::PrintableString
-       |     +-> OpenSSL::ASN1::T61String
-       |     +-> OpenSSL::ASN1::VideotexString
-       |     +-> OpenSSL::ASN1::IA5String
-       |     +-> OpenSSL::ASN1::GraphicString
-       |     +-> OpenSSL::ASN1::ISO64String
-       |     +-> OpenSSL::ASN1::GeneralString
-       |     +-> OpenSSL::ASN1::UniversalString
-       |     +-> OpenSSL::ASN1::BMPString
-       |     +-> OpenSSL::ASN1::Null
-       |     +-> OpenSSL::ASN1::ObjectId
-       |     +-> OpenSSL::ASN1::UTCTime
-       |     `-> OpenSSL::ASN1::GeneralizedTime
-       `-> OpenSSL::ASN1::Constructive
-             +-> OpenSSL::ASN1::Set
-             `-> OpenSSL::ASN1::Sequence
+それ以外の値はこのクラスのインスタンスとして表現されます。
 
 == Class Methods
---- new(value, tag, tag_class)
-#@todo
+--- new(value, tag, tag_class) -> OpenSSL::ASN1::ASN1Data
+ASN.1 値を表現する [[c:OpenSSL::ASN1::ASN1Data]] オブジェクトを
+生成します。
 
-ASN1Data オブジェクトを生成します。
+通常 UNIVERSAL なタグクラスを持つ ASN.1 値はこのクラスのサブクラスで
+表現されるため、tag_class はそれ以外(:CONTEXT_SPECIFIC、:APPLICATION、
+:PRIVATE のいずれか)を指定します。
 
+value としては、通常は文字列(IMPLICIT tagging 相当)
+もしくは OpenSSL::ASN1::ASN1Data の配列(IMPLICIT tagging相当)
+を指定します。
+
+@param value そのオブジェクトが表現する値
+@param tag タグ
+@param tag_class タグクラス
 == Instance Methods
 
---- value
+--- value -> object
+ASN.1 値に対応するRubyのオブジェクトを返します。
+
+@see [[m:OpenSSL::ASN1::ASN1Data#value=]]
+
 --- value=(value)
-#@todo
+ASN.1 値に対応するRubyのオブジェクトを変更します。
 
-ASN.1 データの表現する値です。
+@param value 設定するオブジェクト
+@see [[m:OpenSSL::ASN1::ASN1Data#value]]
+--- tag -> Integer
+タグ番号を返します。
 
---- tag
+タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 
+のいずれかの値をとります。
+
+@see [[m:OpenSSL::ASN1::ASN1Data#tag=]]
 --- tag=(tag)
-#@todo
+タグ番号を設定します。
 
-タグ番号です。Universal 型の場合は BOOLEAN = 1 から BMPSTRING = 30 のいずれかの値をとります。
-あらかじめ定義されているタグ番号の定数に関しては [[c:OpenSSL::ASN1]] の
-定数の項を参照してください。
+@param tag 設定するタグ番号
+@see [[m:OpenSSL::ASN1::ASN1Data#tag]]
 
---- tag_class
+--- tag_class -> Symbol
+タグクラスを返します。
+
+:UNIVERSAL、:CONTEXT_SPECIFIC、:APPLICATION, :PRIVATE のいずれかを返します。
+
+@see [[m:OpenSSL::ASN1::ASN1Data#tag_class=]]
 --- tag_class=(tag_class)
-#@todo
+タグクラスを設定します。
 
-[[c:Symbol]] オブジェクト :UNIVERSAL、:ONTEXT_SPECIFIC、:APPLICATION
-のいずれかをとります。
+@param tag_class 設定するタグクラス。:UNIVERSAL、:ONTEXT_SPECIFIC、:APPLICATION、:PRIVATE のいずれか
+@see [[m:OpenSSL::ASN1::ASN1Data#tag_class]]
 
---- to_der
-#@todo
+--- to_der -> String
+ASN.1 値の DER 表現を返します。
 
-ASN.1 データの DER 表現を返します。
-#@end
+@see [[m:OpenSSL::ASN1.decode]]

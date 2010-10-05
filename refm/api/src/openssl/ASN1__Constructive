@@ -1,22 +1,67 @@
-#@since 1.8.1
 = class OpenSSL::ASN1::Constructive < OpenSSL::ASN1::ASN1Data
-
 include Enumerable
 
-== Class Methods
---- new(value, tag, tagging, tag_class)
-#@todo
+ASN.1 の構造型を表すクラスです。
 
-Constructive オブジェクトを生成します。
-
+通常はこのクラス自身は用いず、各サブクラスを利用します。
 == Instance Methods
 
---- tagging
---- tagging=(tag)
-#@todo
+--- tagging -> Symbol | nil
+タグ付けの方式を返します。
 
-[[c:Symbol]] オブジェクト :IMPLICIT または :EXPLICIT のいずれかをとります。
+:IMPLICIT、:EXPLICIT、nil のいずれかを返します。
+
+タグ([[m:OpenSSL::ASN1::ASN1Data#tag]])が :UNIVERSAL ならば
+この値は無視されます。
+
+nil は :IMPLICIT と同義です。
+
+@see [[m:OpenSSL::ASN1::Constructive#tagging=]]
+
+--- tagging=(tag)
+タグ付けの方式を設定します。
+
+@param tagging タグ付けの方式(:IMPLICIT または :EXPLICIT)
+@see [[m:OpenSSL::ASN1::Constructive#tagging=]]
+
+--- each {|item| ... } -> self
+構造型のデータに含まれる各要素に対してブロックを
+評価します。
 
 = class OpenSSL::ASN1::Set < OpenSSL::ASN1::Constructive
+ASN.1 の Set 型(Universal タグのタグ番号17)を表すクラスです。
+
+== Class method
+--- new(value) ->  OpenSSL::ASN1::Set
+--- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Set
+ASN.1 の Set 型の値を表現する OpenSSL::ASN1::Set オブジェクトを
+生成します。
+
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
+タグ は [[m:OpenSSL::ASN1::SET]] となります。
+
+@param value ASN.1値を表すRubyのオブジェクト([[c:OpenSSL::ASN1::ASN1Data]]の配列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
+
+
 = class OpenSSL::ASN1::Sequence < OpenSSL::ASN1::Constructive
-#@end
+
+ASN.1 の Sequence 型(Universal タグのタグ番号16)を表すクラスです。
+
+== Class method
+--- new(value) ->  OpenSSL::ASN1::Sequence
+--- new(value, tag, tagging, tag_class) -> OpenSSL::ASN1::Sequence
+ASN.1 の Sequence 型の値を表現する OpenSSL::ASN1::Sequence オブジェクトを
+生成します。
+
+value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
+タグ は [[m:OpenSSL::ASN1::SEQUENCE]] となります。
+
+@param value ASN.1値を表すRubyのオブジェクト([[c:OpenSSL::ASN1::ASN1Data]]の配列)
+@param tag タグ番号
+@param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
+@param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
+
+
