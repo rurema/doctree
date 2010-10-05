@@ -123,9 +123,11 @@ TypeLibのドキュメント文字列を取得します。
 --- ole_types -> [WIN32OLE_TYPE]
 --- ole_classes -> [WIN32OLE_TYPE]
 
-TypeLibに格納されているすべてのクラス（CoClass――コンポーネントクラス）を取得します。
+TypeLibに格納されているすべての型を取得します。
 
-@return TypeLibに格納されているすべてのクラス（CoClass――コンポーネントクラス）を[[c:WIN32OLE_TYPE]]オブジェクトの配列として返します。
+TypeLibに格納されている型には、クラス（CoClass――コンポーネントクラス）やEnum（列挙子）、構造体などがあります。
+
+@return TypeLibに格納されているすべての型を[[c:WIN32OLE_TYPE]]オブジェクトの配列として返します。
 
    tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
    classes = tlib.ole_types.map{|k| k.name} # -> ["Adjustments", "CalloutFormat", ...]
