@@ -1,3 +1,5 @@
+HTTP の Basic 認証のためのライブラリです。
+
 require webrick/config
 require webrick/httpstatus
 require webrick/httpauth/authenticator
