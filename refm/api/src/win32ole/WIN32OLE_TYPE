@@ -1,61 +1,107 @@
 = class WIN32OLE_TYPE < Object
 
-WIN32OLE_TYPE objects represent OLE type libarary information.
+WIN32OLE_TYPEオブジェクトは、型情報ライブラリ（TypeLib）内に定義された1つの型情報を保持します。
 
-     WIN32OLE_TYPE.new(typelib, ole_class) -> WIN32OLE_TYPE object
+=== サンプルコード
 
-Returns a new WIN32OLE_TYPE object.
-The first argument <i>typelib</i> specifies OLE type library name.
-The second argument specifies OLE class name.
+  require 'win32ole'
 
-      WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application') 
-          # => WIN32OLE_TYPE object of Application class of Excel. 
+  excel_app_type = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+  puts excel_app_type.progid # => "Excel.Application.14"
+
+
+#@since 1.9.1
+
+Ruby-1.9.1以降、[[c:WIN32OLE_TYPELIB]]オブジェクトの[[m:WIN32OLE_TYPELIB#ole_types]]メソッドを利用して、型情報ライブラリ内に定義されているすべての型情報をWIN32OLE_TYPEオブジェクトの配列として取得できます。
+
+@see [[c:WIN32OLE_TYPELIB]]
+#@end
 
 == Class Methods
 
---- new(typelib, ole_class) -> WIN32OLE_TYPE object
-#@todo
+--- new(libname, ole_class) -> WIN32OLE_TYPE
+WIN32OLE_TYPEオブジェクトを生成します。
 
-Returns a new WIN32OLE_TYPE object. The first argument typelib
-specifies OLE type library name. The second argument specifies
-OLE class name.
+@param libname 生成するTypeLibのレジストリ上のドキュメント文字列（[[m:WIN32OLE_TYPELIB#name]]）またはGUID（[[m:WIN32OLE_TYPELIB#guid]]）またはTLBファイル名を文字列で指定します。
+@param ole_class 型情報を取り出す型の名前を指定します。
+@return 指定されたTypeLIbに定義された型の情報を格納したWIN32OLE_TYPEオブジェクトを返します。
+@raise WIN32OLERuntimeError TypeLibが見つかりません。またはole_classで指定した型が未定義です。
 
-    WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-        # => WIN32OLE_TYPE object of Application class of Excel.
+  excel_app_type = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+  puts excel_app_type.progid # => "Excel.Application.14"
 
---- ole_classes(typelib)
-#@todo
+#@if (version < "1.9.0")
+TypeLibに定義されているすべての型を取得するには、[[m:WIN32OLE_TYPE.ole_classes]]を利用します。
+#@else
+TypeLibに定義されているすべての型を取得するには、[[c:WIN32OLE_TYPELIB]]オブジェクトの[[m:WIN32OLE_TYPELIB#ole_types]]メソッドを利用します。
+#@end
 
-Returns array of WIN32OLE_TYPE objects defined by the typelib
-type library.
+--- ole_classes(typelib) -> [WIN32OLE_TYPE]
+TypeLibで定義されているすべての型情報を取得します。
 
---- progids
-#@todo
+@param libname 生成するTypeLibのレジストリ上のドキュメント文字列（[[m:WIN32OLE_TYPELIB#name]]）またはGUID（[[m:WIN32OLE_TYPELIB#guid]]）またはTLBファイル名を文字列で指定します。
+@return TypeLibに格納されているすべての型を[[c:WIN32OLE_TYPE]]オブジェクトの配列として返します。
+@raise WIN32OLERuntimeError 引数で指定したTypeLibが見つかりません。
 
-Returns array of ProgID.
+   types = WIN32OLE_TYPE.ole_classes('Microsoft Excel 14.0 Object Library')
+   classes = types.map{|k| k.name} # -> ["Adjustments", "CalloutFormat", ...]
 
---- typelibs
-#@todo
+#@since 1.9.1
+Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得するには、[[c:WIN32OLE_TYPELIB]]オブジェクトの[[m:WIN32OLE_TYPELIB#ole_types]]メソッドを利用してください。
+#@end
 
-Returns array of type libraries.
+--- progids -> [String]
+システムに登録されているすべてのコンポーネントクラスのPROGIDを取得します。
+
+@return システムに登録されているすべてのコンポーネントクラスのPROGIDを文字列配列で返します。
+
+  excel = nil
+  WIN32OLE_TYPE.progids.each do |pg|
+    if pg =~ /excel\.application/i   # ExcelのPROGIDをバージョン無視で取り出す
+      excel = WIN32OLE.new(pg)
+      break
+    end
+  end
+  unless excel
+    $stderr.puts "Excel isn't installed"
+    exit(1)
+  end
+  excel.visible = true
+  # ...
+  excel.Quit
+
+PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネントクラス）が持つレジストリ登録名です。[[m:WIN32OLE.new]]の引数に指定してWIN32OLEオブジェクトを生成できます。
+
+--- typelibs -> [String]
+システムに登録されているすべてのTypeLibのドキュメント文字列を取得します。
+
+@return システムに登録されているすべてのTypeLibのドキュメント文字列の配列を返します。
+
+#@since 1.9.1
+Ruby-1.9.1からは、すべてのTypeLibのドキュメント文字列を取得するには、[[c:WIN32OLE_TYPELIB]]オブジェクトを利用して、以下のように記述してください。
+
+ WIN32OLE_TYPELIB.typelibs.map {|t| t.name}
+
+#@end
 
 == Instance Methods
 
---- guid -> GUID
-#@todo
+--- guid -> String | nil
+この型のGUID（グローバル一意識別子）を取得します。
 
-Returns GUID.
+@return GUIDを文字列で返します。GUIDを持たない型の場合はnilを返します。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
   puts tobj.guid  # => {00024500-0000-0000-C000-000000000046}
 
---- helpcontext
-#@todo
+GUIDは、COMのクラス識別子(CLSID)、インターフェイス識別子(IID)など多数の領域でWindows上のオブジェクトの識別に利用される128ビットの値です。
 
-Returns helpcontext. If helpcontext is not found, then returns
-nil.
+--- helpcontext -> Integer | nil
+この型に関連するヘルプファイルのトピックID（ヘルプコンテキスト）を取得します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
+@return 型に関連するヘルプコンテキストを整数で返します。ヘルプコンテキストが登録されていない場合はnilを返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    puts tobj.helpcontext # => 131185
 
 --- helpfile -> String | nil
@@ -65,154 +111,230 @@ nil.
 
 オブジェクトがヘルプファイルを持たない場合はnilを返します。
 
-@return オブジェクトに関連付けられたヘルプファイルのフルパス名。
-        ヘルプファイルが未定義の場合はnil。
+@return オブジェクトに関連付けられたヘルプファイルのフルパス名を文字列で返します。
+        ヘルプファイルが未定義の場合はnilを返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
    puts tobj.helpfile # => C:\...\VBAXL9.CHM
    WIN32OLE.ole_show_help tobj.helpfile, tobj.helpcontext
    # 注）WIN32OLE.ole_show_help(tobj) の呼び出しが望ましい
 
 当メソッドがフルパス名を返しても、ヘルプファイルがインストールされていない場合があることに注意してください。
 
---- helpstring -> String
-#@todo
+また、返送値はOLEサーバの登録値をそのまま利用するため、Rubyのパス名形式（ディレクトリ区切りは「/」）ではなく、Windowsのパス名形式（ディレクトリ区切りは「\」）です。
 
-Returns help string.
+--- helpstring -> String | nil
+型のドキュメント文字列を取得します。
+
+@return ドキュメント文字列を返します。未定義の場合はnilを返します。
 
   tobj = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'IWebBrowser')
   p tobj.helpstring   # => "Web Browser interface"
 
---- major_version
-#@todo
+ドキュメント文字列は、コンテキストヘルプなどに利用可能な型の簡単な説明文です。
 
-Returns major version.
+--- major_version -> Integer
+型のメジャーバージョン番号を取得します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Word 10.0 Object Library', 'Documents')
+@return 型のメジャーバージョン番号を整数で返します。
+@raise WIN32OLERuntimeError 型属性の読み取りに失敗すると通知します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Word 14.0 Object Library', 'Documents')
    p tobj.major_version   # => 8
 
 --- minor_version -> Integer
-#@todo
+型のマイナーバージョン番号を取得します。
 
-Returns minor version.
+@return 型のマイナーバージョン番号を整数で返します。
+@raise WIN32OLERuntimeError 型属性の読み取りに失敗すると通知します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Word 10.0 Object Library', 'Documents')
-   p tobj.minor_version   # => 2
+   tobj = WIN32OLE_TYPE.new('Microsoft Word 14.0 Object Library', 'Documents')
+   p tobj.minor_version   # => 5
 
 --- name -> String
-#@todo
-alias to_s
+--- to_s
+型名を取得します。
 
-Returns OLE type name.
+@return 型名を文字列で返します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
    p tobj.name  # => "Application"
 
 --- ole_methods -> [WIN32OLE_METHOD]
-#@todo
+型が持つメソッドのメタデータを取得します。
 
-Returns array of WIN32OLE_METHOD objects which represent OLE
-method defined in OLE type library.
+@return 型が持つメソッドのメタデータを[[c:WIN32OLE_METHOD]]の配列として返します。
+        メソッドを持たない場合は空配列を返します。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
-  methods = tobj.ole_methods.collect{|m|
-    m.name
-  }
-  # => ['Activate', 'Copy', 'Delete',....]
 
---- ole_type -> Class
-#@todo
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+  methods = tobj.ole_methods.map {|m| m.name }
+                       # => ['QueryInterface', 'AddRef', 'Release',....]
 
-returns type of OLE class.
+@see [[c:WIN32OLE_METHOD]]
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
+--- ole_type -> String | nil
+selfの型の種類（TYPEKIND）を取得します。
+
+@return selfの型の種類を文字列で返します。情報が取得できない場合はnilを返します。
+
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
   p tobj.ole_type  # => Class
 
---- progid -> String
-#@todo
+ole_typeには以下があります。
 
-Returns ProgID if it exists. If not found, then returns nil.
+: Enum
+  列挙子（0）
+: Record
+  ユーザ定義型（メソッドを持たない構造体）（1）
+: Module
+  モジュール（静的関数やデータだけを保持）（2）
+: Interface
+  COMのインターフェイス（メソッド定義の集合）（3）
+: Dispatch
+  OLEオートメーションサーバ（4）
+: Class
+  コンポーネントクラス（InterfaceやDispatchの実装）（5）
+: Alias
+  他の型の別名（6）
+: Union
+  共用体（7）
+: Max
+  型の種類を示す列挙体の終端マーカ（8）
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-   p tobj.progid   # => "Excel.Application.9"
+MaxはTYPEKINDの終端マーカなので意味を持ちません。
 
---- src_type -> Class
-#@todo
+@see [[m:WIN32OLE_TYPE#typekind]]
 
-Returns source class when the OLE class is 'Alias'.
+--- progid -> String | nil
+selfのPROGIDを取得します。
 
-   tobj =  WIN32OLE_TYPE.new('Microsoft Office 9.0 Object Library', 'MsoRGBType')
-   p tobj.src_type   # => I4
+PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネントクラス）が持つレジストリ登録名です。[[m:WIN32OLE.new]]の引数に指定してWIN32OLEオブジェクトを生成できます。
+
+@return selfのPROGIDを文字列で返します。selfがPROGIDを持たない、またはCoClassでない場合はnilを返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+   p tobj.progid   # => "Excel.Application.14"
+
+この例は、ExcleのApplicationクラスが「Excel.Application.14」というPROGIDを持つことを示します。
+
+--- src_type -> String | nil
+selfが他の型の別名ならば、元の型名を取得します。
+
+@return selfが別名ならば元の型名を文字列で返します。別名でなければnilを返します。
+
+   tobj =  WIN32OLE_TYPE.new('Microsoft Office 14.0 Object Library', 'MsoRGBType')
+   p tobj.src_type   # => "I4"
+
+この例は、OfficeのMsoRGBType型は符号付き32ビット整数（I4）の別名だということを示します。
 
 --- name -> String
-#@todo
-alias to_s
+--- to_s -> String
+selfの型名を取得します。
 
-Returns OLE type name.
+@return selfの型名を文字列で返します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    p tobj.name   # => "Application"
 
+@see [[m:WIN32OLE.new]]
+
 --- typekind -> Integer
-#@todo
+selfの種類を示す値を取得します。
 
-Returns number which represents type.
+値の意味については、[[m:WIN32OLE_TYPE#ole_type]]を参照してください。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Word 10.0 Object Library', 'Documents')
+@return 型の種類を示す数値を返します。
+@raise WIN32OLERuntimeError 型の種類（TYPEKIND）を取得できない場合に通知します。
+
+  tobj = WIN32OLE_TYPE.new('Microsoft Word 14.0 Object Library', 'Documents')
   p tobj.typekind   # => 4
 
---- variables
-#@todo
+@see [[m:WIN32OLE_TYPE#ole_type]]
 
-Returns array of WIN32OLE_VARIABLE objects which represent variables
-defined in OLE class.
+--- variables -> [WIN32OLE_VARIABLE]
+型が持つ変数を取得します。
 
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'XlSheetType')
+型がEnum（列挙型）やユーザ定義型の場合、メンバ変数の情報を[[c:WIN32OLE_VARIABLE]]オブジェクトの配列として返します。
+
+@return 型が持つ変数情報を[[c:WIN32OLE_VARIABLE]]の配列として返します。変数を持たない場合は空配列を返します。
+@raise WIN32OLERuntimeError 型属性が取得できない場合に通知します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'XlSheetType')
    vars = tobj.variables
    vars.each do |v|
      puts "#{v.name} = #{v.value}"
    end
 
-   The result of above sample script is follows:
+上記を実行すると以下の出力が得られます。
+
      xlChart = -4109
      xlDialogSheet = -4116
      xlExcel4IntlMacroSheet = 4
      xlExcel4MacroSheet = 3
      xlWorksheet = -4167
 
---- visible -> bool
-#@todo
-
-Returns true if the OLE class is public.
-
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-  puts tobj.visible  # => true
-
-#@since 1.9.1
---- implemented_ole_types
-#@todo
-
-Returns the array of WIN32OLE_TYPE object which is implemented
-by the WIN32OLE_TYPE object.
-
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
-   p tobj.implemented_ole_types # => [_Worksheet, DocEvents]
-
---- ole_typelib
-#@todo
-
-Returns the WIN32OLE_TYPELIB object which is including the WIN32OLE_TYPE
-object. If it is not found, then returns nil.
-
-   tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Worksheet')
-   puts tobj.ole_typelib # => 'Microsoft Excel 9.0 Object Library'
+@see [[c:WIN32OLE_VARIABLE]]
 
 --- visible? -> bool
-#@todo
+この型が公開されているかどうかを照会します。
 
-Returns true if the OLE class is public.
+@return 公開されていれば真を返します。
 
-  tobj = WIN32OLE_TYPE.new('Microsoft Excel 9.0 Object Library', 'Application')
-  puts tobj.visible  # => true
+  tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
+  p tobj.visible?  # => true
 
+#@since 1.9.1
+--- ole_typelib -> WIN32OLE_TYPELIB | nil
+この型を登録してある型情報ライブラリ（TypeLib）を取得します。
+
+@return この型を登録しているTypeLibを[[c:WIN32OLE_TYPELIB]]オブジェクトとして返します。見つからない場合はnilを返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+   puts tobj.ole_typelib.name  # => 'Microsoft Excel 14.0 Object Library'
+
+--- implemented_ole_types -> [WIN32OLE_TYPE]
+この型が実装するインターフェイスを取得します。
+
+このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているすべてのインターフェイスを取得するために利用します。
+
+@return クラスが実装するすべてのインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。この型がインターフェイスを実装しない場合は、空配列を返します。
+@raise WIN32OLERuntimeError 型属性が取得できない場合に通知します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+   tobj.implemented_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
+
+--- source_ole_types -> [WIN32OLE_TYPE]
+型が持つソースインターフェイスを取得します。
+
+このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするすべてのソースインターフェイス（イベントの通知元となるインターフェイス）を取得するために利用します。
+
+ActiveXコントロールのようにイベント（[[c:WIN32OLE_EVENT]]）をサポートしているコンポーネントクラスの場合は、このメソッドの呼び出しによりイベントインターフェイスを調べることが可能です。
+
+@return ソースインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。ソースインターフェイスを持たない場合は空配列を返します。
+
+--- default_event_sources -> [WIN32OLE_TYPE]
+型が持つソースインターフェイスを取得します。
+
+このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イベントの通知元となるインターフェイス）を取得するために利用します。
+
+@return デフォルトのソースインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。返すのは配列ですが、デフォルトのソースインターフェイスは最大でも1インターフェイスです。ソースインターフェイスを持たない場合は空配列を返します。
+
+[[m:WIN32OLE_EVENT.new]]でインターフェイス名を指定しない場合は、ここで返されたインターフェイスが選択されます。
+--- default_ole_types -> [WIN32OLE_TYPE]
+型が持つデフォルトのインターフェイスを取得します。
+
+このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているデフォルトのインターフェイスと、サポートしていればデフォルトのソースインターフェイスを取得するために利用します。
+
+@return デフォルトインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。デフォルトインターフェイスは、最大でも、クラス操作用のインターフェイス（OLEオートメーション用）と、イベント用のソースインターフェイスの2要素です。デフォルトインターフェイスを持たない場合は空配列を返します。
+
+--- inspect -> String
+
+@return "#<WIN32OLE_TYPE"と[[m:WIN32OLE_TYPE#to_s]]の結果を「:」で結合し、「>」で閉じた文字列を返します。
+
+   x = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+   puts x.inspect #=> #<WIN32OLE_TYPE:Worksheet>
+
+@see [[m:WIN32OLE_TYPE#to_s]]
 #@end
+
