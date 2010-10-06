@@ -3,6 +3,8 @@ require webrick/htmlutils
 require webrick/httputils
 require webrick/httpstatus
 
+HTTP のレスポンスを表すためのクラスを提供するライブラリです。
+
 = class WEBrick::HTTPResponse < Object
 
 HTTP のレスポンスを表すためのクラスです。
@@ -12,8 +14,8 @@ HTTP のレスポンスを表すためのクラスです。
 
 == Class Methods
 
---- new(config)
-#@todo
+--- new(config) -> WEBrick::HTTPResponse
+
 HTTPResponse オブジェクトを生成して返します。
 
 @param config 設定を保存したハッシュを指定します。:HTTPVersion は必須です。
@@ -23,7 +25,7 @@ HTTPResponse オブジェクトを生成して返します。
 == Instance Methods
 
 --- [](field)    -> String
-#@todo
+
 レスポンスのヘッダの該当する内容を文字列で返します。
 
 @param field ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
@@ -31,8 +33,8 @@ HTTPResponse オブジェクトを生成して返します。
   p res['date']   #=> "Sat, 27 Oct 2007 08:53:03 GMT"
 
 --- []=(field, val)
-#@todo
-レスポンスの該当するヘッダに val を設定する。val は文字列。
+
+レスポンスの該当するヘッダに val を設定する。
 
 @param field ヘッダ名を文字列で指定します。大文字と小文字を区別しません。
 
@@ -45,9 +47,13 @@ HTTPResponse オブジェクトを生成して返します。
      [[m:WEBrick::HTTPResponse#content_type]]
 
 --- body        -> String | IO
+クライアントに返す内容(エンティティボディ)を返します。
+
+自身が chunked であっても body の値はチャンク形式ではありません。
+
 --- body=(val)
 
-クライアントに返す内容(エンティティボディ)を表すアクセサです。
+クライアントに返す内容(エンティティボディ)をセットします。
 
 自身が chunked であっても body の値はチャンク形式ではありません。
 
@@ -71,9 +77,11 @@ HTTPResponse オブジェクトを生成して返します。
   hoge
 
 --- chunked?     -> bool
+真であればクライアントに返す内容(エンティティボディ)を chunk に分けます。
+
 --- chunked=(flag)
 
-クライアントに返す内容(エンティティボディ)を chunk に分けるかどうかを真偽で表すアクセサです。
+真に設定するとクライアントに返す内容(エンティティボディ)を chunk に分けるようになります。
 
 自身の [[m:WEBrick::HTTPResponse#request_http_version]] が 1.0 以下である場合、この値は無視されます。
 
@@ -105,7 +113,7 @@ HTTPResponse オブジェクトを生成して返します。
 #@since 1.8.2
 --- content_length         -> Integer | nil
 --- content_length=(len)
-#@todo
+
 
 Content-Length ヘッダの値を整数で表すアクセサです。デフォルトは nil です。
 
@@ -117,7 +125,7 @@ Content-Length ヘッダの値を整数で表すアクセサです。デフォルトは nil です。
   でそれをエンティティボディとします。nil でないとき IO から content_length バイトだけ読み込みそれを
   エンティティボディとします。
 
-また RFC2616 4.4 で定められた Content-Length ヘッダを送ってはいけない場合に当てはまる時には
+また [[RFC:2616]] 4.4 で定められた Content-Length ヘッダを送ってはいけない場合に当てはまる時には
 content_length の値は無視され Content-Length ヘッダはレスポンスに含まれません。
 
 @param len ヘッダの値を整数で指定します。nil を指定することは出来ません。
@@ -140,9 +148,11 @@ content_length の値は無視され Content-Length ヘッダはレスポンスに含まれません。
   ho
 
 --- content_type         -> String | nil
+Content-Type ヘッダの値を返します。
+
 --- content_type=(val)
-#@todo
-Content-Type ヘッダの値を文字列で表すアクセサです。
+
+Content-Type ヘッダの値をセットします。
 
 @param val Content-Type ヘッダの値を文字列で指定します。
 
@@ -163,9 +173,13 @@ Content-Type ヘッダの値を文字列で表すアクセサです。
 レスポンスのヘッダ名を key、内容を val としてブロックを評価します。
 
 --- filename            -> String | nil
+
+自身の内容があるファイルのそれである場合に、そのファイル名を返します。
+デフォルトは nil です。
+
 --- filename=(file)
 
-自身の内容があるファイルのそれである場合に、そのファイル名を文字列で表すアクセサです。
+自身の内容があるファイルのそれである場合に、そのファイル名をセットします。
 デフォルトは nil です。
 
 @param file ファイル名を表す文字列です。
@@ -185,17 +199,26 @@ Content-Type ヘッダの値を文字列で表すアクセサです。
 
 --- keep_alive?        -> bool
 --- keep_alive         -> bool
+
+レスポンスの keep_alive が有効である場合は、真を返します。
+そうでない場合は偽を返します。
+デフォルトは真です。
+
 --- keep_alive=(flag)
 
-レスポンスの keep_alive が有効であるかを真偽で表すアクセサです。
-デフォルトは true です。
+真をセットするとレスポンスの keep_alive が有効になります。
+デフォルトは真です。
 
-@param flag true を指定すると Keep-Alive を有効にします。
+@param flag 真を指定すると Keep-Alive を有効にします。
 
 --- reason_phrase         -> String | nil
+HTTP のレスポンスの最初の行の reason phrase を返します。
+この値が nil の場合 reason phrase は status から生成されます。
+デフォルトは nil です。
+
 --- reason_phrase=(val)
-#@todo
-HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
+
+HTTP のレスポンスの最初の行の reason phrase をセットします。
 この値が nil の場合 reason phrase は status から生成されます。
 デフォルトは nil です。
 
@@ -208,25 +231,31 @@ HTTP のレスポンスの最初の行の reason phrase を文字列で表すアクセサです。
   p res.reason_phrase    #=> "Not Found"
 
 --- request_http_version           -> WEBrick::HTTPVersion
+リクエストの HTTP バージョンを返します。
+デフォルトでは自身の [[m:WEBrick::HTTPResponse#http_version]] が使われます。
+
 --- request_http_version=(ver)
 
-リクエストの HTTP バージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで表すアクセサです。
-デフォルトでは自身の [[m:WEBrick::HTTPResponse#http_version]] が使われます。
+リクエストの HTTP バージョンをセットします。
 
 @param ver リクエストの HTTP バージョンを [[c:WEBrick::HTTPVersion]] オブジェクトで指定します。
 
 --- request_method          -> String | nil
+リクエストの HTTP メソッドを返します。
+
 --- request_method=(method)
 
-リクエストの HTTP メソッドを文字列で表すアクセサです。
+リクエストの HTTP メソッドをセットします。
 デフォルトは nil です。
 
 @param method リクエストの HTTP メソッドを文字列で指定します。
 
 --- request_uri        -> URI | nil
+リクエストの URI を返します。
+
 --- request_uri=(uri)
 
-リクエストの URI を [[c:URI]] オブジェクトで表すアクセサです。
+リクエストの URI をセットします。
 デフォルトは nil です。
 
 @param method リクエストの URI を [[c:URI]] オブジェクトで指定します。
