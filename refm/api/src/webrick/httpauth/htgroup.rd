@@ -1,24 +1,44 @@
-#@#require tempfile
+Apache で証認に使用するユーザグループの一覧が格納されているテキストファイルを
+読み書きする機能を提供するライブラリです。
+
+ * [[url:http://httpd.apache.org/docs/2.2/mod/mod_authz_groupfile.html#authgroupfile]]
 
 = class WEBrick::HTTPAuth::Htgroup < Object
 
-[[unknown:執筆者募集]]
+Apache で証認に使用するユーザグループの一覧が格納されているテキストファイルを読み書きするためのクラスです。
 
 == Class Methods
 
---- new(path)
-#@todo
+--- new(path) -> WEBrick::HTTPAuth::Htgroup
+
+自身を初期化します。
+
+@param path ファイル名を指定します。
 
 == Instance Methods
 
 --- reload
-#@todo
+#@# -> discard
+ファイルから再度読み込みます。
 
---- flush(output = nil)
-#@todo
+--- flush(path = nil) -> ()
 
---- members(group)
-#@todo
+ファイルに書き込みます。
+
+@param path ファイル名を指定します。
+
+--- members(group) -> [String]
+
+[[m:WEBrick::HTTPAuth::Htgroup#reload]] を呼んでから与えられたグループに所属するメンバのリストを返します。
+
+@param group グループ名を指定します。
 
 --- add(group, members)
-#@todo
+#@# -> discard
+
+与えられたグループにメンバを追加します。
+
+@param group メンバを追加するグループを指定します。
+
+@param members 追加するメンバを配列で指定します。
+

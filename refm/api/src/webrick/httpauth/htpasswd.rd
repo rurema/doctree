@@ -1,6 +1,7 @@
 require webrick/httpauth/userdb
 require webrick/httpauth/basicauth
-#@#require tempfile
+
+Apache ¤Î htpasswd ¸ß´¹¤Î¥¯¥é¥¹¤òÄó¶¡¤¹¤ë¥é¥¤¥Ö¥é¥ê¤Ç¤¹¡£
 
 = class WEBrick::HTTPAuth::Htpasswd < Object
 include WEBrick::HTTPAuth::UserDB
@@ -22,33 +23,53 @@ htpasswd -m (MD5) ¤ä -s (SHA) ¤ÇºîÀ®¤µ¤ì¤¿ .htpasswd ¥Õ¥¡¥¤¥ë¤Ë¤ÏÂÐ±þ¤·¤Æ¤¤¤Þ¤»¤
 
 == Class Methods
 
---- new(path)
-#@todo
-Htpasswd ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¡£.htpasswd ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤ò path ¤ÇÍ¿¤¨¤ë¡£
+--- new(path) -> WEBrick::HTTPAuth::Htpasswd
+
+Htpasswd ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¡£
+
+@param path ¥Ñ¥¹¥ï¡¼¥É¤òÊÝÂ¸¤¹¤ë¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤òÍ¿¤¨¤ë¡£
 
 == Instance Methods
 
---- delete_passwd(realm, user)
-#@todo
+--- delete_passwd(realm, user) -> String
+
 ¥æ¡¼¥¶¤Î¥Ñ¥¹¥ï¡¼¥É¤òºï½ü¤¹¤ë¡£realm ¤ÏÌµ»ë¤µ¤ì¤ë¡£
 
---- each{|user, pass| ...}
-#@todo
-³Æ¥æ¡¼¥¶¤È¥Ñ¥¹¥ï¡¼¥É¤Ë´Ø¤·¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤¹¤ë¡£
+@param realm ¥ì¥ë¥à¤ÏÌµ»ë¤µ¤ì¤Þ¤¹¡£
 
---- get_passwd(realm, user, reload_db)
-#@todo
-¥æ¡¼¥¶¤Î¥Ñ¥¹¥ï¡¼¥É¤Î crypt ¤µ¤ì¤¿Ê¸»úÎó¤ò¼èÆÀ¤¹¤ë¡£reload_db ¤¬ true ¤Î¾ì¹ç¡¢
-reload ¤ò¸Æ¤ó¤Ç¤«¤é¥Ñ¥¹¥ï¡¼¥É¤ò¼èÆÀ¤¹¤ë¡£realm ¤ÏÌµ»ë¤µ¤ì¤ë¡£
+@param user ¥æ¡¼¥¶Ì¾¤ò»ØÄê¤·¤Þ¤¹¡£
 
---- flush(path=nil)
-#@todo
-¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹þ¤à¡£¥Õ¥¡¥¤¥ëÌ¾ path ¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢path ¤Ë½ñ¤­¹þ¤à¡£
+--- each{|user, pass| ...} -> Hash
+
+¥æ¡¼¥¶Ì¾¤È¥Ñ¥¹¥ï¡¼¥É¤ò¥Ö¥í¥Ã¥¯¤ËÍ¿¤¨¤ÆÉ¾²Á¤·¤Þ¤¹¡£
+
+--- get_passwd(realm, user, reload_db) -> String
+
+¥æ¡¼¥¶¤Î¥Ñ¥¹¥ï¡¼¥É¤Î crypt ¤µ¤ì¤¿Ê¸»úÎó¤ò¼èÆÀ¤¹¤ë¡£
+
+@param realm ¥ì¥ë¥à¤ÏÌµ»ë¤µ¤ì¤Þ¤¹¡£
+
+@param user ¥æ¡¼¥¶Ì¾¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param reload_db ¿¿¤ò»ØÄê¤¹¤ë¤È [[m:WEBrick::HTTPAuth::Htpasswd#reload]] ¤ò¸Æ¤ó¤Ç¤«¤éÃÍ¤òÊÖ¤·¤Þ¤¹¡£
+
+
+--- flush(path = nil)
+#@# -> discard
+¥Õ¥¡¥¤¥ë¤Ë½ñ¤­¹þ¤ß¤Þ¤¹¡£¥Õ¥¡¥¤¥ëÌ¾¤òÍ¿¤¨¤¿¾ì¹ç¤Ï¡¢¤½¤³¤Ë½ñ¤­¹þ¤ß¤Þ¤¹¡£
+
+@param path ¥Õ¥¡¥¤¥ëÌ¾¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- reload
-#@todo
-¥Õ¥¡¥¤¥ë¤«¤éºÆÅÙÆÉ¤ß¹þ¤à¡£
+#@# -> discard
+¥Õ¥¡¥¤¥ë¤«¤éºÆÅÙÆÉ¤ß¹þ¤ß¤Þ¤¹¡£
 
 --- set_passwd(realm, user, pass)
-#@todo
-¥æ¡¼¥¶¤È¥Ñ¥¹¥ï¡¼¥É¤òÊÝÂ¸¤¹¤ë¡£realm ¤ÏÌµ»ë¤µ¤ì¤ë¡£
+#@# -> discard
+Í¿¤¨¤é¤ì¤¿¾ðÊó¤ò¤â¤È¤Ë¡¢¥Ñ¥¹¥ï¡¼¥É¤ò¥Ï¥Ã¥·¥å²½¤·¤ÆÊÝÂ¸¤·¤Þ¤¹¡£
+
+@param realm ¥ì¥ë¥à¤ÏÌµ»ë¤µ¤ì¤Þ¤¹¡£
+
+@param user ¥æ¡¼¥¶Ì¾¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param pass ¥Ñ¥¹¥ï¡¼¥É¤ò»ØÄê¤·¤Þ¤¹¡£
