@@ -2,14 +2,14 @@
 
 == Constants
 
---- RequestField
+--- RequestField -> String
 #@todo
 
---- ResponseField
+--- ResponseField -> String
 #@todo
 
---- InfoField
+--- InfoField -> String
 #@todo
 
---- AuthException
+--- AuthException -> Class
 #@todo

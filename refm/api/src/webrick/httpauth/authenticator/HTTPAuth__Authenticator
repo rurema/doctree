@@ -2,28 +2,35 @@
 
 == Instance Methods
 
---- logger
-#@todo
+--- logger -> object
 
---- realm
-#@todo
+ロガーオブジェクトを返します。
+
+--- realm -> String
+
+レルムを返します。
 
 --- userdb
 #@todo
 
 == Constants
 
---- RequestField
+--- RequestField -> String
+
+リクエストフィールド
+
+--- ResponseField -> String
+
+レスポンスフィールド
+
+--- ResponseInfoField -> String
 #@todo
 
---- ResponseField
+--- AuthException -> Class
+
+認証失敗時に発生する例外クラスです。
+
+--- AuthScheme -> nil
 #@todo
 
---- ResponseInfoField
-#@todo
-
---- AuthException
-#@todo
-
---- AuthScheme
-#@todo
+派生クラスで上書きしなければなりません。
