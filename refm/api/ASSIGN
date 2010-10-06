@@ -291,9 +291,9 @@ ubygems                         okkez           done
 un                              okkez           done
 uri                                             done
 weakref                         bornite         done
-webrick                         
-webrick/cgi                                     done
-webrick/ssl                     
+webrick                         okkez 
+webrick/cgi                     okkez           done
+webrick/ssl                     okkez
 win32/registry
 win32/resolv                    sho-h           done
 win32ole                        arton
