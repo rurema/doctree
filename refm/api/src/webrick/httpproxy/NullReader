@@ -1,7 +1,7 @@
 #@since 1.8.3
 = object WEBrick::NullReader < Object
 
---- read(*args)
---- gets(*args)
+--- read(*args) -> nil
+--- gets(*args) -> nil
 #@todo
 #@end
