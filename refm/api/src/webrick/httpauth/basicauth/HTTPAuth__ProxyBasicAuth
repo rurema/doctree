@@ -1,2 +1,5 @@
 = class WEBrick::HTTPAuth::ProxyBasicAuth < WEBrick::HTTPAuth::BasicAuth
 include WEBrick::HTTPAuth::ProxyAuthenticator
+
+プロクシの Basic 認証のためのクラスです。
+
