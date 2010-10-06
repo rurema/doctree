@@ -1,3 +1,5 @@
+HTML のためのユーティリティ関数を提供します。
+
 = module WEBrick::HTMLUtils
 
 HTML のためのユーティリティ関数を提供します。
