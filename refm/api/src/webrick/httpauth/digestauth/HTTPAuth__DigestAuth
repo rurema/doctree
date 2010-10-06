@@ -1,45 +1,59 @@
 = class WEBrick::HTTPAuth::DigestAuth < Object
 include WEBrick::HTTPAuth::Authenticator
 
-[[unknown:執筆者募集]]
-
-Digest 認証のためのクラス。
+HTTP の Digest 認証のためのクラスです。
 
 == Class Methods
 
---- make_passwd(realm, user, pass)
-#@todo
+--- make_passwd(realm, user, pass) -> String
 
---- new(config, default=Config::DigestAuth)
-#@todo
-執筆者募集
+与えられた情報を使用してハッシュ化したパスワードを生成します。
+
+@param realm レルムを指定します。
+
+@param user ユーザ名を指定します。
+
+@param pass パスワードを指定します。
+
+--- new(config, default = WEBrick::Config::DigestAuth) -> WEBrick::HTTPAuth::DigestAuth
+#@todo config で利用可能なキーを列挙する
+
+自身を初期化します。
+
+@param config 設定を保持しているハッシュを指定します。
+
+@param default デフォルトは [[m:WEBrick::Config::DigestAuth]] です。
 
 == Instance Methods
 
---- algorithm
-#@todo
-執筆者募集
+--- algorithm -> String
 
---- authenticate(req, res)
-#@todo
-執筆者募集
+アルゴリズムを表す文字列を返します。
 
---- challenge(req, res, stale=false)
-#@todo
-執筆者募集
+--- authenticate(request, response) -> true
 
---- logger
-#@todo
-執筆者募集
+クライアントから送られてきたユーザ名とパスワードを認証します。
+認証に失敗した場合は challenge を呼びます。
 
---- qop
-#@todo
-執筆者募集
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
 
---- realm
-#@todo
-執筆者募集
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
---- userdb
-#@todo
-執筆者募集
+@raise WEBrick::HTTPStatus::Unauthorized 認証に失敗した場合に発生します。
+
+--- challenge(request, response, stale = false)
+
+クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
+設定し、例外 WEBrick::HTTPStatus::Unauthorized を発生させます。
+
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
+
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
+
+@raise WEBrick::HTTPStatus::Unauthorized このメソッドを呼ぶと必ず発生します。
+
+--- qop -> String
+
+Qop キーの値を返します。
+
+

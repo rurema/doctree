@@ -1,7 +1,9 @@
 = class WEBrick::HTTPAuth::ProxyDigestAuth < WEBrick::HTTPAuth::DigestAuth
 include WEBrick::HTTPAuth::ProxyAuthenticator
 
+プロクシの Digest 認証のためのクラスです。
+
 == Instance Methods
 
---- check_uri(req, auth_req)
-#@todo
+--- check_uri(req, auth_req) -> true
+#@todo private であるべき
