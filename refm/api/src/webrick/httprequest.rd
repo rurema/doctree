@@ -3,6 +3,8 @@ require webrick/httpstatus
 require webrick/httputils
 require webrick/cookie
 
+HTTP リクエストのためのクラスを提供するライブラリです。
+
 = class WEBrick::HTTPRequest < Object
 
 HTTP リクエストのためのクラスです。
@@ -12,8 +14,8 @@ HTTP リクエストのためのクラスです。
 
 == Class Methods
 
---- new(config)
-#@todo
+--- new(config) -> WEBrick::HTTPRequest
+
 WEBrick::HTTPRequest を生成して返します。
 
 @param config 設定を保持したハッシュを指定します。
@@ -54,7 +56,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 クライアントと接続されているソケットの [[m:IPSocket#addr]] を返します。
 
 --- attributes    -> Hash
-#@todo
+#@todo ???
 
 --- body                 -> String | nil
 --- body {|chunk| ... }  -> String | nil
@@ -77,6 +79,13 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 
 リクエストの Content-Type ヘッダを文字列で返す。
 
+#@end
+
+#@since 1.9.3
+--- continue
+#@todo
+Generate HTTP/1.1 100 continue response if the client expects it,
+otherwise does nothing.
 #@end
 
 --- cookies    -> [WEBrick::Cookie]
@@ -128,18 +137,21 @@ of ``The WWW Common Gateway Interface Version 1.1''.
 リクエスト URI のパスを表す文字列を返します。
 
 --- path_info          -> String
---- path_info=(value)
-#@todo
-リクエスト URI のパスを文字列で表すアクセサです。デフォルトは path と同じです。
 
-@param value 
+リクエスト URI のパスを文字列で返します。デフォルトは path と同じです。
+
+--- path_info=(value)
+
+リクエスト URI のパスをセットします。
+
+@param value リクエスト URI のパスを指定します。
 
 --- peeraddr    -> Array
 
 クライアントと接続されているソケットの [[m:IPSocket#peeraddr]] を返します。
 
 --- port    -> String
-#@todo
+
 サーバのポートを文字列で返します。
 
 --- query    -> Hash
@@ -165,6 +177,10 @@ multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデ
   p h['upfile']                  #=>  "hoge hoge hoge"
 
 --- query_string          -> String
+
+リクエスト URI のクエリーを文字列で表すアクセサです。
+デフォルトは request_uri.query です。
+
 #@since 1.8.4
 --- query_string=(value)
 #@end
@@ -174,32 +190,47 @@ multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデ
 
 @param value クエリーを表す文字列を指定します。
 
---- raw_header
-#@todo
+--- raw_header -> String
+生のヘッダを返します。
 
---- request_line
-#@todo
-クライアントのリクエストの最初の行(GET / HTTP/1.1)を文字列で返す。
+--- request_line -> String
+
+クライアントのリクエストの最初の行(GET / HTTP/1.1)を文字列で返します。
 
 --- request_method     -> String
-#@todo
-クライアントのリクエストの HTTP メソッド(GET, POST,...)を文字列で返す。
+
+クライアントのリクエストの HTTP メソッド(GET, POST,...)を文字列で返します。
 
 --- request_time    -> Time
-#@todo
-リクエストされた時刻を [[c:Time]] オブジェクトで返す。
 
---- request_uri
-#@todo
+リクエストされた時刻を [[c:Time]] オブジェクトで返します。
+
+--- request_uri -> URI
+
 リクエスト URI を表す [[c:URI]] オブジェクトを返します。
 
 --- script_name          -> String
+#@todo
+CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
+
 --- script_name=(value)
 #@todo
 
 CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
 @param value
+
+#@since 1.9.1
+--- server_name -> String
+
+サーバの名前を返します。
+
+--- ssl? -> bool
+
+リクエスト URI のスキームが https であれば真を返します。
+そうでない場合は偽を返します。
+
+#@end
 
 --- to_s    -> String
 
@@ -210,9 +241,13 @@ CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 リクエストの URI を文字列で返します。
 
 --- user          -> String
---- user=(value)
 
-REMOTE_USER を文字列で表すアクセサです。
+REMOTE_USER を文字列として返します。
+
+--- user=(value)
+#@todo
+
+REMOTE_USER を文字列で表したものに値をセットします。
 
 @param value ユーザ名を文字列で指定します。
 
