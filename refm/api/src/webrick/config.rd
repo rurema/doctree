@@ -9,7 +9,7 @@ require webrick/log
 
 == Constants
 
---- General
+--- General -> Hash
 
 [[c:WEBrick::GenericServer]] の設定のデフォルト値を保持したハッシュです。
 
@@ -30,11 +30,11 @@ require webrick/log
     :DoNotReverseLookup => nil,
   }
 
---- HTTP
+--- HTTP -> Hash
 
 [[c:WEBrick::HTTPServer]] の設定のデフォルト値を保持したハッシュです。
 
-  HTTP = {
+  WEBrick::Config::HTTP = {
     :ServerName     => Utils.getservername,
     :BindAddress    => nil,   # "0.0.0.0" or "::" or nil
     :Port           => 80,
@@ -66,14 +66,48 @@ require webrick/log
     :Escape8bitURI  => false
   }
 
---- FileHandler
-#@todo
+--- FileHandler -> Hash
 
---- BasicAuth
-#@todo
+[[c:WEBrick::HTTPServlet::FileHandler]] の設定のデフォルト値を保持したハッシュです。
 
---- DigestAuth
-#@todo
+    WEBrick::Config::FileHandler = {
+      :NondisclosureName => [".ht*", "*~"],
+      :FancyIndexing     => false,
+      :HandlerTable      => {},
+      :HandlerCallback   => nil,
+      :DirectoryCallback => nil,
+      :FileCallback      => nil,
+      :UserDir           => nil,  # e.g. "public_html"
+      :AcceptableLanguages => []  # ["en", "ja", ... ]
+    }
 
---- LIBDIR
+
+--- BasicAuth -> Hash
+
+[[c:WEBrick::HTTPAuth::BasicAuth]] の設定のデフォルト値を保持したハッシュです。
+
+    WEBrick::Config::BasicAuth = {
+      :AutoReloadUserDB     => true,
+    }
+
+--- DigestAuth -> Hash
+
+[[c:WEBrick::HTTPAuth::DigestAuth]] の設定のデフォルト値を保持したハッシュです。
+
+    WEBrick::Config::DigestAuth = {
+      :Algorithm            => 'MD5-sess', # or 'MD5'
+      :Domain               => nil,        # an array includes domain names.
+      :Qop                  => [ 'auth' ], # 'auth' or 'auth-int' or both.
+      :UseOpaque            => true,
+      :UseNextNonce         => false,
+      :CheckNc              => false,
+      :UseAuthenticationInfoHeader => true,
+      :AutoReloadUserDB     => true,
+      :NonceExpirePeriod    => 30*60,
+      :NonceExpireDelta     => 60,
+      :InternetExplorerHack => true,
+      :OperaHack            => true,
+    }
+
+--- LIBDIR -> String
 #@todo
