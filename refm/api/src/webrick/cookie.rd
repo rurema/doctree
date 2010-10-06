@@ -11,7 +11,7 @@ RFC2109 は [[rfc:2965]] により破棄されましたが、WEBrick::Cookie クラスは RFC2965
 == Class Methods
 
 --- new(name, value)    -> WEBrick::Cookie
-#@todo
+
 新しい [[c:WEBrick::Cookie]] オブジェクトを生成して返します。
 name にクッキーの名前を、value にクッキーで保持する値を与える。
 
@@ -38,7 +38,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与える。
 
 #@since 1.8.4
 --- parse_set_cookie(str)    -> WEBrick::Cookie
-#@todo
+
 サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
 新しく [[c:WEBrick::Cookie]] オブジェクトを生成し返します。
 
@@ -53,8 +53,16 @@ name にクッキーの名前を、value にクッキーで保持する値を与える。
   "Shipping"
   "FedEx"
 
+#@end
+
+#@since 1.8.6
+
 --- parse_set_cookies(str)    -> [WEBrick::Cookie]
-#@todo
+#@todo 要確認
+サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
+新しく [[c:WEBrick::Cookie]] オブジェクトの配列を生成し返します。
+
+@param str Set-Cookie ヘッダの値を文字列で指定します。
 
 #@end
 
