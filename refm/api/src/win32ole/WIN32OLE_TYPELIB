@@ -37,8 +37,6 @@ WIN32OLE_TYPELIBепеще╣д╧бвTypeLibдЄ┴р║юд╖д╞│╞╝я╛Ё╩єдЄ╗▓╛╚д╣дыд┐дсд╬еке╓е╕езепе╚д
 --- new(libname, mjv = nil, miv = nil) -> WIN32OLE_TYPELIB
 WIN32OLE_TYPELIBеке╓е╕езепе╚дЄ└╕└од╖д▐д╣бг
 
-Returns a new WIN32OLE_TYPELIB object.
-
 @param libname └╕└од╣дыTypeLibд╬еье╕е╣е╚еъ╛хд╬е╔енехесеєе╚╩╕╗·╬єб╩[[m:WIN32OLE_TYPELIB#name]]б╦д▐д┐д╧GUIDб╩[[m:WIN32OLE_TYPELIB#guid]]б╦д▐д┐д╧TLBе╒ебедеы╠╛дЄ╩╕╗·╬єд╟╗╪─ъд╖д▐д╣бг
 @param mjv ║ю└од╣дыTypeLibд╬есе╕еуб╝е╨б╝е╕ечеє╚╓╣цдЄIntegerд╟╗╪─ъд╖д▐д╣бгд▐д┐д╧└░┐Ї╔Їд╦есе╕еуб╝е╨б╝е╕ечеєбв╛о┐Ї┼└┐Ї╔Їд╦е▐еде╩б╝е╨б╝е╕ечеєдЄ╗╪─ъд╖д┐Floatд╟╗╪─ъд╖д▐д╣бгlibnameд╦╠╛┴░дЄ╗╪─ъд╖д┐╛ь╣чд╧╠╡╗ыд╖д▐д╣бг
 @param miv ║ю└од╣дыTypeLibд╬е▐еде╩б╝е╨б╝е╕ечеє╚╓╣цдЄ└░┐Їд╟╗╪─ъд╖д▐д╣бгmjvд╦FloatдЄ═┐дид┐╛ь╣чдкдшд╙libnameд╦╠╛┴░дЄ╗╪─ъд╖д┐╛ь╣чд╧╠╡╗ыд╖д▐д╣бг
@@ -103,8 +101,6 @@ TypeLibд╬е▐еде╩б╝е╨б╝е╕ечеє╚╓╣цдЄ╝ш╞└д╖д▐д╣бг
 @return TypeLibд╬е▐еде╩б╝е╨б╝е╕ечеє╚╓╣цдЄ└░┐Їд╟╩╓д╖д▐д╣бг
 @raise WIN32OLERuntimeError TypeLibд╬┬░└ндм╞╔д▀╝шдьд╩дд╛ь╣чд╦─╠├╬д╖д▐д╣бг
 
-Returns the type library minor version.
-
    tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
    puts tlib.minor_version # -> 7
 
@@ -141,7 +137,7 @@ TypeLibд╬е╤е╣╠╛дЄ╝ш╞└д╖д▐д╣бг
    tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
    puts tlib.path # => 'C:\...\EXCEL.EXE'
 
-TypeLibд╧│╚─е╗╥TLBб╩д▐дьд╦OLBб╦д╚дддж╞╚╬йд╖д┐е╒ебедеыд╬╛ь╣чд╚бве╡б╝е╨д╬DLLдфEXE╞тд╬еъе╜б╝е╣д╚д╖д╞┴╚д▀╣■д▐дьд╞ддды╛ь╣чд╚дмдвдъд▐д╣бг
+TypeLibд╧│╚─е╗╥TLBб╩д▐дьд╦OLBб╦д╚дддж╞╚╬йд╖д┐е╒ебедеыд╬╛ь╣чд╚бве╡б╝е╨д╬DLLдфEXE╞тд╦еъе╜б╝е╣д╚д╖д╞┴╚д▀╣■д▐дьд╞ддды╛ь╣чд╚дмдвдъд▐д╣бг
 
 --- version -> Float
 TypeLibд╬е╨б╝е╕ечеє╚╓╣цдЄ╝ш╞└д╖д▐д╣бг
@@ -155,7 +151,7 @@ TypeLibд╬е╨б╝е╕ечеє╚╓╣цдЄ╝ш╞└д╖д▐д╣бг
 --- visible? -> bool
 TypeLibд╬╛Ё╩єдм╕°│л╛Ё╩єдлд╔дждлдЄ╛╚▓ёд╖д▐д╣бг
 
-д│д╬есе╜е├е╔д╧бвTypeLibд╬┬░└нб╩TLIBATTRб╦д╬е╒еще░├═дм0бв└й╕┬(LIBFLAG_FRESTRICTED)бве│еєе╚еэб╝еы╞т╔Ї╗╚═╤(FHIDDEN)д╬ддд║дьдлд╟двдьд╨╚є╕°│лTypeLibд╚д▀д╩д╖д╞╡╢дЄ╩╓д╖д▐д╣бг
+д│д╬есе╜е├е╔д╧бвTypeLibд╬┬░└нб╩TLIBATTRб╦д╬е╒еще░├═дм0бв└й╕┬(LIBFLAG_FRESTRICTED)бве│еєе╚еэб╝еы╞т╔Ї╗╚═╤(LIBFLAG_FHIDDEN)д╬ддд║дьдлд╟двдьд╨╚є╕°│лTypeLibд╚д▀д╩д╖д╞╡╢дЄ╩╓д╖д▐д╣бг
 
 @return TypeLibдм╕°│л▓─╟╜д╟двдьд╨┐┐дЄ╩╓д╖д▐д╣бг
 @raise WIN32OLERuntimeError TypeLibд╬┬░└ндм╞╔д▀╝шдьд╩дд╛ь╣чд╦─╠├╬д╖д▐д╣бг
