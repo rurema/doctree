@@ -296,7 +296,7 @@ selfの種類を示す値を取得します。
 --- implemented_ole_types -> [WIN32OLE_TYPE]
 この型が実装するインターフェイスを取得します。
 
-このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているすべてのインターフェイスを取得するために利用します。
+implemented_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているすべてのインターフェイスを返します。
 
 @return クラスが実装するすべてのインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。この型がインターフェイスを実装しない場合は、空配列を返します。
 @raise WIN32OLERuntimeError 型属性が取得できない場合に通知します。
@@ -307,26 +307,118 @@ selfの種類を示す値を取得します。
 --- source_ole_types -> [WIN32OLE_TYPE]
 型が持つソースインターフェイスを取得します。
 
-このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするすべてのソースインターフェイス（イベントの通知元となるインターフェイス）を取得するために利用します。
+source_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするすべてのソースインターフェイス（イベントの通知元となるインターフェイス）を返します。
 
 ActiveXコントロールのようにイベント（[[c:WIN32OLE_EVENT]]）をサポートしているコンポーネントクラスの場合は、このメソッドの呼び出しによりイベントインターフェイスを調べることが可能です。
 
 @return ソースインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。ソースインターフェイスを持たない場合は空配列を返します。
 
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+   tobj.source_ole_types.map {|intf| intf.name} #=> ["DocEvents"]
+
 --- default_event_sources -> [WIN32OLE_TYPE]
 型が持つソースインターフェイスを取得します。
 
-このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イベントの通知元となるインターフェイス）を取得するために利用します。
+default_event_sourcesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスがサポートするデフォルトのソースインターフェイス（イベントの通知元となるインターフェイス）を返します。
 
 @return デフォルトのソースインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。返すのは配列ですが、デフォルトのソースインターフェイスは最大でも1インターフェイスです。ソースインターフェイスを持たない場合は空配列を返します。
 
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+   tobj.default_event_sources.map {|intf| intf.name} #=> ["DocEvents"]
+
 [[m:WIN32OLE_EVENT.new]]でインターフェイス名を指定しない場合は、ここで返されたインターフェイスが選択されます。
+
+次のサンプルは、IEのnaviaget2メソッドによってどのようなイベントが通知されるかを、実際にメソッド呼び出し（=イベント通知）をトレースして調べるプログラムです。イベントを受け付けるために、[[m:WIN32OLE_EVENT.message_loop]]の呼び出しが必要な点に注意してください。ここでは最終イベントのStatusTextChangeイベントのメッセージについては既知としています。
+
+ # coding : cp932
+ require 'win32ole'
+ 
+ type = WIN32OLE_TYPE.new('Microsoft Internet Controls', 'InternetExplorer')
+ ctl = WIN32OLE.new(type.progid)
+ source = type.default_event_sources[0]
+ class WebEvent
+   def initialize
+     @completed = false
+   end
+   attr_reader :completed
+ end
+ source.ole_methods.each do |m|
+   WebEvent.module_eval do
+     define_method("on#{m.name}") do |*arg|
+       if arg[0] == "ページが表示されました"
+         @completed = true
+       end
+       puts "#{Time.now}: #{m.name} was called"
+       p arg
+     end
+   end
+ end
+ evt = WIN32OLE_EVENT.new(ctl)
+ evt.handler = WebEvent.new
+ ctl.navigate2 'http://www.ruby-lang.org/'
+ loop do
+   break if evt.handler.completed
+   WIN32OLE_EVENT.message_loop
+ end
+ ctl.Quit
+
+このプログラムを実行するとWindows7のIE8環境では以下のような出力を得られます。
+
+ 2010-10-06 22:33:54 +0900: PropertyChange was called
+ ["{265b75c1-4158-11d0-90f6-00c04fd497ea}"]
+ 2010-10-06 22:33:54 +0900: BeforeNavigate2 was called
+ [#<WIN32OLE:0x9d08f0>, "http://www.ruby-lang.org/", 0, "", nil, "", false]
+ 2010-10-06 22:33:54 +0900: DownloadBegin was called
+ []
+ 2010-10-06 22:33:54 +0900: PropertyChange was called
+ ["{D0FCA420-D3F5-11CF-B211-00AA004AE837}"]
+ 2010-10-06 22:33:54 +0900: CommandStateChange was called
+ [2, false]
+ 2010-10-06 22:33:54 +0900: CommandStateChange was called
+ [1, false]
+ 2010-10-06 22:33:54 +0900: StatusTextChange was called
+ ["www.ruby-lang.org を検索しています"]
+ 2010-10-06 22:33:54 +0900: ProgressChange was called
+ [100, 10000]
+ 2010-10-06 22:33:54 +0900: StatusTextChange was called
+ ["サイト 221.186.184.68 に接続しています"]
+ 2010-10-06 22:33:54 +0900: StatusTextChange was called
+ ["Web サイトが見つかりました。応答を待っています..."]
+ ……
+ 2010-10-06 22:33:54 +0900: TitleChange was called
+ ["オブジェクト指向スクリプト言語 Ruby"]
+ 2010-10-06 22:33:54 +0900: StatusTextChange was called
+ ["待機中: http://www.ruby-lang.org/ja/ ..."]
+ 2010-10-06 22:33:54 +0900: ProgressChange was called
+ [10000, 10000]
+ 2010-10-06 22:33:54 +0900: ProgressChange was called
+ [-1, 10000]
+ 2010-10-06 22:33:54 +0900: DownloadComplete was called
+ []
+ 2010-10-06 22:33:54 +0900: ProgressChange was called
+ [10000, 10000]
+ 2010-10-06 22:33:54 +0900: DocumentComplete was called
+ [#<WIN32OLE:0x438a2f8>, "http://www.ruby-lang.org/ja/"]
+ 2010-10-06 22:33:54 +0900: StatusTextChange was called
+ ["ページが表示されました"]
+
+@see [[m:WIN32OLE_TYPE.new]]
+@see [[m:WIN32OLE_TYPE#progid]]
+@see [[m:WIN32OLE_TYPE#ole_methods]]
+@see [[m:WIN32OLE_METHOD#name]]
+@see [[m:WIN32OLE_EVENT.new]]
+@see [[m:WIN32OLE_EVENT#handler=]]
+@see [[m:WIN32OLE_EVENT.event_loop]]
+
 --- default_ole_types -> [WIN32OLE_TYPE]
 型が持つデフォルトのインターフェイスを取得します。
 
-このメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているデフォルトのインターフェイスと、サポートしていればデフォルトのソースインターフェイスを取得するために利用します。
+default_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのクラスが実装しているデフォルトのインターフェイスと、サポートしていればデフォルトのソースインターフェイスを返します。
 
 @return デフォルトインターフェイスを[[c:WIN32OLE_TYPE]]の配列として返します。デフォルトインターフェイスは、最大でも、クラス操作用のインターフェイス（OLEオートメーション用）と、イベント用のソースインターフェイスの2要素です。デフォルトインターフェイスを持たない場合は空配列を返します。
+
+   tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Worksheet')
+   tobj.default_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
 
 --- inspect -> String
 
