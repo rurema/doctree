@@ -59,6 +59,8 @@ reload_db に渡す引数を与えます。
 
 @param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
+@raise WEBrick::HTTPStatus::Unauthorized 認証に失敗した場合に発生します。
+
 --- challenge(request, response) -> ()
 
 クライアントにパスワードを要求するためにレスポンスに WWW-Authenticate ヘッダを
