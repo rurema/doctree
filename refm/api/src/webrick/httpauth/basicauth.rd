@@ -1,4 +1,4 @@
-HTTP уБо Basic шкНши╝уБоуБЯуВБуБоуГйуВдуГЦуГйуГкуБзуБЩуАВ
+HTTP д╬ Basic ╟з╛┌д╬д┐дсд╬ещеде╓ещеъд╟д╣бг
 
 require webrick/config
 require webrick/httpstatus
