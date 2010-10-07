@@ -218,6 +218,8 @@ PROGIDは、生成可能なOLEオートメーションサーバのCoClass（コンポーネントクラス）が
 
 この例は、ExcleのApplicationクラスが「Excel.Application.14」というPROGIDを持つことを示します。
 
+@see [[m:WIN32OLE.new]]
+
 --- src_type -> String | nil
 selfが他の型の別名ならば、元の型名を取得します。
 
@@ -236,8 +238,6 @@ selfの型名を取得します。
 
    tobj = WIN32OLE_TYPE.new('Microsoft Excel 14.0 Object Library', 'Application')
    p tobj.name   # => "Application"
-
-@see [[m:WIN32OLE.new]]
 
 --- typekind -> Integer
 selfの種類を示す値を取得します。
@@ -421,6 +421,7 @@ default_ole_typesメソッドは、selfがCoClass（コンポーネントクラス）の場合、そのク
    tobj.default_ole_types.map {|intf| intf.name} #=> ["_Worksheet", "DocEvents"]
 
 --- inspect -> String
+selfを説明的な文字列で表現します。
 
 @return "#<WIN32OLE_TYPE"と[[m:WIN32OLE_TYPE#to_s]]の結果を「:」で結合し、「>」で閉じた文字列を返します。
 
