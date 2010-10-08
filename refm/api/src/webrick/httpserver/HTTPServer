@@ -9,6 +9,7 @@ HTTP サーバの機能を提供するクラスです。
                                 :BindAddress => '127.0.0.1',
                                 :Port => 10080})
  srv.mount('/hoge.pl', WEBrick::HTTPServlet::CGIHandler, 'really_executed_script.rb')
+ Signal.trap(:INT){ srv.shutdown }
  srv.start
 
 == Class Methods
