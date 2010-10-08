@@ -2,39 +2,49 @@
 require webrick/ssl
 
 [[c:WEBrick::HTTPServer]] を SSL/TLS に対応させるための実装。
-このファイルを require すると WEBrick::HTTPServer が SSL/TLS 対応になります。
+このファイルを [[m:Kernel.#require]] すると [[c:WEBrick::HTTPServer]] が SSL/TLS 対応になります。
 
 = redefine WEBrick::Config
 
 == Constants
 
---- HTTP
-#@todo
-[[m:WEBrick::Config::SSL]] の内容がマージされます。
+--- HTTP -> Hash
+
+[[m:WEBrick::Config::SSL]] の内容がマージされています。
 
 = reopen WEBrick::HTTPRequest
 
 == Instance Methods
 
---- cipher
+--- cipher -> Array
 #@todo
 
---- server_cert
+--- server_cert -> OpenSSL::X509::Certificate
 #@todo
 
---- client_cert
+サーバ証明書
+
+--- client_cert -> OpenSSL::X509::Certificate
 #@todo
+
+クライアント証明書
 
 = redefine WEBrick::HTTPRequest
 
 == Instance Methods
 
---- parse(socket = nil)
-#@todo
+--- parse(socket = nil) -> ()
+
+指定された socket からクライアントのリクエストを読み込み、
+自身のアクセサなどを適切に設定します。
+
+@param socket クライアントに接続された IO オブジェクトを指定します。
 
 --- parse_uri(str, scheme = "http")
+#@todo should be private
+
+--- meta_vars -> Hash
 #@todo
 
---- meta_vars
-#@todo
+
 #@end

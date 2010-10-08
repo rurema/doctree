@@ -1,20 +1,41 @@
 = class WEBrick::HTTPServer::MountTable
 
+サーバ上のパスとサーブレットの対応関係を管理するためのクラスです。
+
 == Class Methods
 
---- new
-#@todo
+--- new -> WEBrick::HTTPServer::MountTable
+
+自身を初期化します。
 
 == Instance Methods
 
---- [](dir)
-#@todo
+--- [](dir) -> WEBrick::HTTPServlet::AbstractServlet
 
---- [](dir, val)
-#@todo
+与えられたディレクトリに対応するサーブレットを返します。
 
---- delete(dir)
-#@todo
+@param dir ディレクトリを指定します。
 
---- scan(path)
-#@todo
+@return [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインタンスを返します。
+
+--- []=(dir, val)
+
+与えられたディレクトリに対応するサーブレットを登録します。
+
+@param dir ディレクトリを指定します。
+
+@param val サーブレットを指定します。
+
+--- delete(dir) -> WEBrick::HTTPServlet::AbstractServlet
+
+ディレクトリとサーブレットの対応を削除してサーブレットを返します。
+
+@param dir ディレクトリを指定します。
+
+@return [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインタンスを返します。
+
+--- scan(path) -> Array
+#@todo どう書こう？
+
+
+@param path パスを指定します。

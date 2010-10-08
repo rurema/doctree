@@ -6,7 +6,9 @@ require webrick/httpresponse
 require webrick/httpservlet
 require webrick/accesslog
 
+HTTP サーバの機能を提供するライブラリです。
+
 = class WEBrick::HTTPServerError < WEBrick::ServerError
 
 #@include(httpserver/HTTPServer)
-#@#include(httpserver/HTTPServer__MountTable)
+#@include(httpserver/HTTPServer__MountTable)
