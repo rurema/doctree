@@ -1,4 +1,4 @@
-#@if (version >= "1.8.0")
+#@until 1.8.7
 = class OpenSSL::Digest::Digest < Object
 
 ハッシュ関数のための抽象的なインターフェースを提供するクラスです。
@@ -14,8 +14,7 @@
   * OpenSSL::Digest::RIPEMD160
   * OpenSSL::Digest::SHA
 
-#@if (version >= "1.8.3")
-((<ruby 1.8.3 feature>)):
+#@since 1.8.3
 システムにインストールされている openssl が 0.9.8 以降ならば以下のアルゴリズムも利用できます。
   * OpenSSL::Digest::SHA224
   * OpenSSL::Digest::SHA256
@@ -82,21 +81,20 @@ name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を
 
 digest で返す文字列のバイト長。
 
-= class OpenSSL::Digest::DSS < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::DSS1 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::MD2 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::MD4 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::MD5 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::MDC2 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::RIPEMD160 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::SHA < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::SHA1 < OpenSSL::Digest::Digest
-#@since 1.8.3
-= class OpenSSL::Digest::SHA224 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::SHA256 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::SHA384 < OpenSSL::Digest::Digest
-= class OpenSSL::Digest::SHA512 < OpenSSL::Digest::Digest
-#@end
 
-= class OpenSSL::Digest::DigestError < OpenSSL::OpenSSLError
+#@else
+= class OpenSSL::Digest::Digest < OpenSSL::Digest
+このクラスは互換性のために存在します。
+
+[[c:OpenSSL::Digest]] を代わりに利用してください。
+
+== Class Methods
+--- new(*args) -> OpenSSL::Digest::Digest
+互換性のためのメソッドです。
+
+[[m:OpenSSL::Digest.new]] で返されるオブジェクトと同じ働きをする
+オブジェクトを返します。
+
+@param args [[m:OpenSSL::Digest.new]] に渡すものと同じ引数を渡します
+
 #@end

@@ -1,0 +1,52 @@
+#@until 1.8.7
+= module OpenSSL::Digest
+
+ハッシュ関数関連を集めたモジュールです。
+
+#@else
+= class OpenSSL::Digest < Digest::Class
+
+ハッシュ関数のための抽象的なインターフェースを提供するクラスです。
+[[lib:digest]] も参照してください。
+
+== Class Method
+--- new
+#@todo
+
+--- digest
+#@todo
+
+== Instance Method
+--- reset
+#@todo
+--- update
+#@todo
+--- <<
+#@todo
+
+--- digest_length
+#@todo
+--- block_length
+#@todo
+--- name
+#@todo
+
+#@end
+
+= class OpenSSL::Digest::DSS < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::DSS1 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MD2 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MD4 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MD5 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::MDC2 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::RIPEMD160 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA1 < OpenSSL::Digest::Digest
+#@since 1.8.3
+= class OpenSSL::Digest::SHA224 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA256 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA384 < OpenSSL::Digest::Digest
+= class OpenSSL::Digest::SHA512 < OpenSSL::Digest::Digest
+#@end
+
+= class OpenSSL::Digest::DigestError < OpenSSL::OpenSSLError

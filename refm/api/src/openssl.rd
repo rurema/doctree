@@ -1,11 +1,27 @@
-#@if (version >= "1.8.0")
 OpenSSL を Ruby から扱うためのライブラリです。
+
+このドキュメントでは SSL/TLS の一般的事項については
+解説をしません。利用者は、SSL/TLSの各概念、例えば
+以下の事項について理解している必要があります。
+  * 暗号と認証に関する一般的概念
+  * セキュリティに対する攻撃法
+  * 公開鍵暗号と秘密鍵暗号
+  * 署名の役割、署名の方法とその検証
+  * 公開鍵基盤(PKI, Public Key Infrastructure)
+  * X.509 証明書
+  * 暗号と乱数について
+#@# 要追加
+SSLのようなセキュリティ技術は、その利用者に無条件に安全性を
+提供することはできません。利用者、とくにSSLでソフトウェアを実装する
+プログラマは、 SSL/TLS の技術、それが基づいている概念を理解し、
+ライブラリを適切に利用する必要があります。
+
 #@# = openssl
 
-[[url:http://www.openssl.org]] support library for Ruby.
-動作や使える暗号方式は
+#@# [[url:http://www.openssl.org]] support library for Ruby.
+#@# 動作や使える暗号方式は
 
-[[unknown:執筆者募集]]
+#@# [[unknown:執筆者募集]]
 
 === Components
 
@@ -108,6 +124,16 @@ OpenSSL を Ruby から扱うためのライブラリです。
   cer.sign(key, digest) # <= 署名するのに使う秘密鍵とハッシュ関数
   print cer.to_text
 
+=== 参考
+  * [[RFC:5246]]
+  * Eric Rescorla. SSL and TLS : Designing and Building Secure Systems.
+    邦訳, Eric Rescorla 著 齋藤孝道・鬼頭利之・古森貞監訳.
+    マスタリングTCP/IP SSL/TLS編
+  * John Viega, Matt Messier and Pravir Chandra. Network Security with OpenSSL:
+    Cryptography for Secure Communications. 
+    邦訳, John Viega, Matt Messier and Pravir Chandra 著 齋藤孝道監訳.
+    OpenSSL -暗号・PKI・SSL/TLSライブラリの詳細-
+
 = module OpenSSL
 
 このページは定数と例外のみを説明しています。
@@ -130,7 +156,6 @@ Ruby/OpenSSL のバージョンです。
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
 [[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
 も参照してください。
-#@end
 
 = module OpenSSL::SSL::SocketForwarder
 = class OpenSSL::OpenSSLError < StandardError
@@ -142,6 +167,7 @@ Ruby/OpenSSL のバージョンです。
 #@include(openssl/ASN1__Primitive)
 #@include(openssl/BN)
 #@include(openssl/Cipher__Cipher)
+#@include(openssl/Digest)
 #@include(openssl/Digest__Digest)
 #@include(openssl/Engine) 
 #@include(openssl/HMAC)
