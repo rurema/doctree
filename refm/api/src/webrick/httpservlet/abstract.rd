@@ -3,7 +3,7 @@ require webrick/httputils
 require webrick/httpstatus
 
 = class WEBrick::HTTPServlet::HTTPServletError < StandardError
-#@todo
+#@todo 使われていない？
 
 = class WEBrick::HTTPServlet::AbstractServlet < Object
 
@@ -57,31 +57,31 @@ new(server, *options) を呼び出してサーブレットを生成して返します。
 
 == Instance Methods
 
---- service(req, res)    -> ()
+--- service(request, response)    -> ()
 
-指定された [[c:WEBrick::HTTPRequest]] オブジェクト req の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
-自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを req と res を引数として呼びます。
+指定された [[c:WEBrick::HTTPRequest]] オブジェクト request の [[m:WEBrick::HTTPRequest#request_method]] に応じて、
+自身の do_GET, do_HEAD, do_POST, do_OPTIONS... いずれかのメソッドを request と response を引数として呼びます。
 
 [[c:WEBrick::HTTPServer]] オブジェクトはクライアントからのリクエストがあるたびに
 サーブレットオブジェクトを生成し service メソッドを呼びます。
 
 特に理由が無い限り AbstractServlet のサブクラスがこのメソッドを定義する必要はありません。
 
-@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 @raise WEBrick::HTTPStatus::MethodNotAllowed 
        指定された [[c:WEBrick::HTTPRequest]] オブジェクト  req が自身に定義されていない 
        HTTP のメソッドであった場合発生します。
 
 
---- do_GET(req, res)        -> ()
---- do_HEAD(req, res)       -> ()
---- do_POST(req, res)       -> ()
---- do_PUT(req, res)        -> ()
---- do_DELETE(req, res)     -> ()
---- do_OPTIONS(req, res)    -> ()
+--- do_GET(request, response)        -> ()
+--- do_HEAD(request, response)       -> ()
+--- do_POST(request, response)       -> ()
+--- do_PUT(request, response)        -> ()
+--- do_DELETE(request, response)     -> ()
+--- do_OPTIONS(request, response)    -> ()
 
 自身の service メソッドから HTTP のリクエストに応じて
 呼ばれるメソッドです。AbstractServlet のサブクラスはこれらのメソッドを適切に実装し
@@ -97,9 +97,9 @@ new(server, *options) を呼び出してサーブレットを生成して返します。
 メソッドが読ばれた時点で読み込みが行われます。クライアントから巨大なデータが送られてくることを考慮して
 ユーザはプログラミングを行うべきです。
 
-@param req クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
-@param res クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
 
 例:
 

@@ -1,28 +1,40 @@
-#@#require rbconfig
-#@#require tempfile
 require webrick/config
 require webrick/httpservlet/abstract
 
+CGI を扱うためのサーブレットを提供するライブラリです。
+
 = class WEBrick::HTTPServlet::CGIHandler < WEBrick::HTTPServlet::AbstractServlet
 
-CGI を扱うためのサーブレット。
+CGI を扱うためのサーブレットです。
 
 == Class Methods
 
---- new(server, name)
-#@todo
-name は実行したいローカルの CGI ファイルを文字列で与える。
+--- new(server, name) -> WEBrick::HTTPServlet::CGIHandler
+
+自身を初期化します。
+
+@param server
+
+@param name 実行したい CGI のファイルを文字列で与えます。
+
 
 == Instance Methods
 
---- do_GET(req, res)
---- do_POST(req, res)
-#@todo
+--- do_GET(request, response) -> ()
+--- do_POST(request, response) -> ()
+
+GET, POST リクエストを処理します。
+
+@param request [[c:WEBrick::HTTPRequest]] のインスタンスを指定します。
+
+@param response [[c:WEBrick::HTTPResponse]] のインスタンスを指定します。
 
 == Constants
 
---- Ruby
-#@todo
+--- Ruby -> String
 
---- CGIRunner
-#@todo
+Ruby のパスを返します。
+
+--- CGIRunner -> String
+
+CGI を実行するためのコマンドを返します。

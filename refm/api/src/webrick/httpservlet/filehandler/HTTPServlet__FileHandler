@@ -5,89 +5,77 @@
 == Class Methods
 
 --- add_handler(suffix, handler)
-#@todo
+#@# -> discard
+与えられた拡張子のファイルを処理するためのサーブレットを登録します。
 
---- remove_handler(suffix)
-#@todo
+@param suffix 拡張子を指定します。
 
---- new(server, root, options={}, default=Config::FileHandler)
-#@todo
-FileHandler サーブレットを生成する。root はサーブレットにルートディレクトリ
-として認識させる、ローカルのファイルシステムのディレクトリを文字列で与える。
+@param handler サーブレットを指定します。
 
-configは設定を保存したハッシュ、
-defaultにはデフォルトの設定を保存したハッシュを与える。
-デフォルト値はそれぞれ{}と[[m:WEBrick::Config::FileHandler]]。
+--- remove_handler(suffix) -> Class
+
+与えられた拡張子に対応するサーブレットを削除します。
+
+@param suffix 拡張子を指定します。
+
+--- new(server, root, options = {}, default = WEBrick::Config::FileHandler)
+#@todo
+FileHandler サーブレットを生成する。
+
+@param server
+
+@param root サーブレットにルートディレクトリとして認識させる、
+            ローカルのファイルシステムのディレクトリを文字列で与える。
+
+@param config 設定を保存したハッシュ、
+
+@param default デフォルトの設定を保存したハッシュを与える。
 
 == Instance Methods
 
---- service(req, res)
-#@todo
+--- service(request, response) -> ()
 
---- do_GET(req, res)
-#@todo
+リクエストメソッドに応じて自身の do_* メソッドを呼び出します。
 
---- do_POST(req, res)
-#@todo
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
 
---- do_OPTIONS(req, res)
-#@todo
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+
+@raise WEBrick::HTTPStatus::NotFound 対象となるパスが見つからなかった場合に発生します。
+
+--- do_GET(request, response) -> ()
+
+GET リクエストを処理します。
+
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+
+@raise WEBrick::HTTPStatus::NotFound 対象となるパスが見つからなかった場合に発生します。
+
+--- do_POST(request, response) -> ()
+
+POST リクエストを処理します。
+
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+
+@raise WEBrick::HTTPStatus::NotFound 対象となるパスが見つからなかった場合に発生します。
+
+--- do_OPTIONS(request, response) -> ()
+
+OPTIONS リクエストを処理します。
+
+@param request クライアントからのリクエストを表す [[c:WEBrick::HTTPRequest]] オブジェクトです。
+
+@param response クライアントへのレスポンスを表す [[c:WEBrick::HTTPResponse]] オブジェクトです。
+
+@raise WEBrick::HTTPStatus::NotFound 対象となるパスが見つからなかった場合に発生します。
 
 == Constants
 
---- HandlerTable
-#@todo
+--- HandlerTable -> Hash
 
-= reopen WEBrick::Config
-== Constants
---- FileHandler
-#@todo
-WEBrick::HTTPServlet::FileHandler.newに与えるオプションの初期値。
+拡張子に対応するサーブレットを登録するためのハッシュです。
 
-  FileHandler = {
-    :NondisclosureName => [".ht*", "*~"],
-    :FancyIndexing     => false,
-    :HandlerTable      => {},
-    :HandlerCallback   => nil,
-    :DirectoryCallback => nil,
-    :FileCallback      => nil,
-    :UserDir           => "public_html",
-    :AcceptableLanguages => []  # ["en", "ja", ... ]
-  }
-
-: :AcceptableLanguages
-
-コンテンツの言語を選択するオプション。設定値は文字列の配列。
-
-クライアントからのリクエストに含まれるAccept-Languageの内容がfrで、
-かつ:AcceptableLanguagesには['ja', 'en']が設定されている場合、
-WEBrick::HTTPServlet::FileHandlerは以下の順番でファイルを探す。
-(1) index.html
-(2) index.html.fr
-(3) index.html.ja
-(4) index.html.en
-
-: :FancyIndexing
-クライアントがディレクトリをリクエストしたが表示するファイルが無い場合の挙動を決める。
-値は真偽値。
-
-trueならば、代わりにファイル一覧を表示する。
-falseならばエラー(403 Forbidden)となる。
-
-: :DirectoryCallback
-: :FileCallback
-: :HandlerCallback
-: :HandlerTable
-: :NondisclosureName
-インデックスに表示したくないファイルの指定。値は文字列の配列。
-表示したくないファイルをワイルドカードで指定する。
-
-: :UserDir
-ユーザ毎のドキュメントルートのディレクトリ名。値は文字列。
-
-ユーザfooのホームディレクトリが/home/fooで、:UserDirにpublic_htmlを設定した場合、
-クライアントから/~foo/index.htmlがリクエストされると/home/foo/public_html/index.htmlの内容を表示される。
-
-この設定を有効にするには以下の条件が必要。
-  * [[lib:etc]]ライブラリが使える状態である。
-  * 環境変数SCRIPT_NAMEが空(空文字列)である。
