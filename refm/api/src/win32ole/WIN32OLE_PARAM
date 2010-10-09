@@ -20,8 +20,8 @@ WIN32OLE_PARAMは、[[c:WIN32OLE_METHOD]]のパラメータのメタデータを保持します。
 
 アプリケーションプログラムでは、WIN32OLE_PARAMオブジェクトをnewメソッドで生成するよりも、[[m:WIN32OLE_METHOD#params]]を参照するほうが簡単です。
 
-@ole_method パラメータを取得する[[c:WIN32OLE_METHOD]]のインスタンス。
-@index パラメータの位置。最左端を1とします。
+@param ole_method パラメータを取得する[[c:WIN32OLE_METHOD]]のインスタンス。
+@param index パラメータの位置。最左端を1とします。
 @return メソッドの指定位置のパラメータの情報を持つオブジェクトを返します。
 @raise TypeError ole_methodパラメータが[[c:WIN32OLE_METHOD]]のインスタンスではありません。
 @raise IndexError indexパラメータが1からパラメータの数の範囲にありません。
