@@ -36,7 +36,7 @@ TypeLibに定義されているすべての型を取得するには、[[m:WIN32OLE_TYPE.ole_classes]]
 TypeLibに定義されているすべての型を取得するには、[[c:WIN32OLE_TYPELIB]]オブジェクトの[[m:WIN32OLE_TYPELIB#ole_types]]メソッドを利用します。
 #@end
 
---- ole_classes(typelib) -> [WIN32OLE_TYPE]
+--- ole_classes(libname) -> [WIN32OLE_TYPE]
 TypeLibで定義されているすべての型情報を取得します。
 
 @param libname 生成するTypeLibのレジストリ上のドキュメント文字列（[[m:WIN32OLE_TYPELIB#name]]）またはGUID（[[m:WIN32OLE_TYPELIB#guid]]）またはTLBファイル名を文字列で指定します。
