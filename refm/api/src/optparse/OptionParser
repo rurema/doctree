@@ -612,8 +612,6 @@ argv からオプションを取り除いたものを返します。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
-@param args パースしたい引数を順に文字列として与えます。
-
 @raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
                                 サブクラスが投げられます。
 
