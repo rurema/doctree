@@ -1,7 +1,6 @@
-#@if (version >= "1.8.0")
 = class OpenSSL::PKey::DH < OpenSSL::PKey::PKey
 
-Diffie-Hellman 暗号クラス
+Diffie-Hellman 公開鍵暗号クラス
 
 == Class Methods
 
@@ -106,4 +105,4 @@ Diffie-Hellman 暗号の性質から、呼び出しても全て PKeyError になります。
 #@end
 
 = class OpenSSL::PKey::DHError < OpenSSL::PKey::PKeyError
-#@end
+

@@ -25,61 +25,64 @@
 
 == Class Methods
 
---- digest(name, str)
-#@todo
+--- new(name, data=nil) -> OpenSSL::Digest::Digest
+ダイジェストオブジェクトを生成します。
 
-name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を文字列で返します。
+name でハッシュ関数の種類を選びます。
 
---- hexdigest(name, str)
-#@todo
+data に文字列を渡すと、その文字列でオブジェクトの内部状態を更新します。
 
-name で与えられたハッシュアルゴリズムで与えられた文字列 str に対するハッシュ値を、ASCIIコードを使って 16進数の列を示す文字列にエンコードして返します。
+@param name ハッシュ関数の種類を文字列("md5", "sha256" など)で指定
+@param data 入力文字列
+@raise RuntimeError サポートされていないアルゴリズムを指定した場合に発生します
 
---- new(name)
-#@todo
+--- digest(name, data) -> String
+data のダイジェストを計算します。
 
-オブジェクトを生成します。name でハッシュアルゴリズムを指定します。
+name でハッシュ関数を指定します。
+
+@param name ハッシュ関数の種類を文字列("md5", "sha256" など)で指定
+@param data ダイジェストを計算する文字列
+
+
+--- hexdigest(name, str) -> String
+data のダイジェストを計算し、ASCII の16進文字列で返します。
+
+name でハッシュ関数を指定します。
+
+@param name ハッシュ関数の種類を文字列("md5", "sha256" など)で指定
+@param data ダイジェストを計算する文字列
 
 
 == Instance Methods
 
---- reset
-#@todo
+--- reset -> self
+ダイジェストオブジェクトの内部状態をリセットします。
 
-いままで入力された文字列をリセットします。
+--- update(data) -> self
+--- <<(data) -> self
+data でダイジェストオブジェクトの内部状態を更新します。
 
---- digest
-#@todo
+@param data 入力文字列
 
-ハッシュ値を計算して文字列を返します。
+--- size -> Integer
+ハッシュ値の長さ(バイト数)を返します。
 
---- hexdigest
---- inspect
---- to_s
-#@todo
+--- name -> String
+ハッシュ関数の名前を返します。
 
-文字列に対するハッシュ値を、ASCII コードを使って 16 進数の列を示す文字列にエンコードして返します。
+--- digest -> String
+内部状態に対応するハッシュ値を返します。
 
---- update(str)
---- <<(str)
-#@todo
+--- hexdigest -> String
+--- inspect -> String
+--- to_s -> String
+内部状態に対応するハッシュ値を ASCII 16進文字列で返します。
 
-文字列を追加します。複数回 update を呼ぶことは文字列を連結して update を呼ぶことと同じです。
+--- ==(digest) -> bool
+自身と digest が(内部状態も含めて)等しいならば真を返します。
 
---- ==(digest)
-#@todo
-
-与えられた Digest オブジェクトと等しいかどうか。
-
---- name
-#@todo
-
-ハッシュアルゴリズムを返す。
-
---- size
-#@todo
-
-digest で返す文字列のバイト長。
+@param digest 比較するオブジェクト
 
 
 #@else
