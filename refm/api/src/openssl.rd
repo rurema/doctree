@@ -166,7 +166,7 @@ Ruby/OpenSSL のバージョンです。
 #@include(openssl/ASN1__ObjectId)
 #@include(openssl/ASN1__Primitive)
 #@include(openssl/BN)
-#@include(openssl/Cipher__Cipher)
+#@include(openssl/Cipher)
 #@include(openssl/Digest)
 #@include(openssl/Digest__Digest)
 #@include(openssl/Engine) 
