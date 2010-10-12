@@ -1,5 +1,17 @@
-#@if (version >= "1.8.0")
+#@until 1.8.7
+= module OpenSSL::Cipher
+共通鍵暗号に関する機能を集めたモジュール
+
+#@since 1.8.7
+--- ciphers
+#@todo
+#@end
+
 = class OpenSSL::Cipher::Cipher < Object
+#@else
+
+= class OpenSSL::Cipher
+#@end
 
 対称鍵暗号のために抽象化されたインターフェースを提供するクラスです。
 
@@ -15,7 +27,7 @@
 
 AES も OpenSSL::Cipher::Cipher.new('aes256') などとすれば利用可能です。
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 #@end
 
@@ -103,6 +115,11 @@ ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
   s2 = c2.decrypt.update(s1) + c2.final
   p(data == s2) #=> true
 
+#@since 1.8.7
+--- ciphers
+#@todo
+#@end
+
 == Instance Methods
 --- reset
 #@todo
@@ -124,9 +141,15 @@ pkcs5_keyivgen を使用してください。
 pkcs5_keyivgen を使用してください。
 
 --- update(data)
+#@until 1.8.7
+--- <<
+#@end
+
 #@todo
 
 与えられた文字列を暗号化あるいは復号化して文字列として返します。直前に呼ばれた encrypt あるいは decrypt により暗号化か復号化かが決まります。
+
+#@# << は deprecated
 
 --- final
 #@todo
@@ -175,31 +198,102 @@ salt は 8-octet string でないといけません。nil を返します。
 --- random_key
 #@todo
 
+--- name
+#@todo
+
+#@since 1.8.7
+= class OpenSSL::Cipher::Cipher < OpenSSL::Cipher
+このクラスは互換性のために存在します。
+
+[[c:OpenSSL::Cipher]] をかわりに利用してください。
+
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::AES < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::AES < OpenSSL::Cipher
+#@end
+
 #@since 1.8.5
+#@until 1.8.7
 = class OpenSSL::Cipher::AES128 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::AES128 < OpenSSL::Cipher
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::AES192 < OpenSSL::Cipher
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::AES256 < OpenSSL::Cipher
 #@end
+
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::BF < OpenSSL::Cipher::Cipher
-#@since 1.8.3
-= class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::BF < OpenSSL::Cipher
 #@end
-#@if (version < "1.8.3")
+
+#@until 1.8.3
 = class OpenSSL::Cipher::Cast5 < OpenSSL::Cipher::Cipher
+#@else
+#@until 1.8.7
+= class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher
 #@end
+
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::DES < OpenSSL::Cipher::Cipher
-#@since 1.8.3
-= class OpenSSL::Cipher::IDEA < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::DES < OpenSSL::Cipher
 #@end
-#@if (version < "1.8.3")
+
+
+#@until 1.8.3
 = class OpenSSL::Cipher::Idea < OpenSSL::Cipher::Cipher
+#@else
+#@until 1.8.7
+= class OpenSSL::Cipher::IDEA < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::IDEA < OpenSSL::Cipher
 #@end
+
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::RC2 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::RC2 < OpenSSL::Cipher
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::RC4 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::RC4 < OpenSSL::Cipher
+#@end
+
+#@until 1.8.7
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher::Cipher
+#@else
+= class OpenSSL::Cipher::RC5 < OpenSSL::Cipher
+#@end
+
 
 #@# == エラー
 
+#@until 1.8.7
 = class OpenSSL::CipherError < OpenSSL::OpenSSLError
+#@else
+= class OpenSSL::Cipher::CipherError < OpenSSL::OpenSSLError
 #@end
