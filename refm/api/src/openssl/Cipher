@@ -2,37 +2,59 @@
 = module OpenSSL::Cipher
 共通鍵暗号に関する機能を集めたモジュール
 
-#@since 1.8.7
---- ciphers
-#@todo
-#@end
+== Module functions
+--- ciphers -> [String]
+利用可能な暗号方式名を文字列の配列で返します。
 
 = class OpenSSL::Cipher::Cipher < Object
 #@else
 
-= class OpenSSL::Cipher
+= class OpenSSL::Cipher < Object
 #@end
 
-対称鍵暗号のために抽象化されたインターフェースを提供するクラスです。
+共通鍵暗号のために抽象化されたインターフェースを提供するクラスです。
 
-以下のクラスが実装されています。
+基本的にこのクラスを直接使ってデータを暗号化することは
+避けてください。通常はより高水準なインターフェースが利用可能な
+はずです。必要なのは暗号アルゴリズムを指定するため 
+[[m:OpenSSL::Cipher.new]] で暗号オブジェクトを生成することだけでしょう。
 
-  * OpenSSL::Cipher::BF
-  * OpenSSL::Cipher::CAST5
-  * OpenSSL::Cipher::DES
-  * OpenSSL::Cipher::IDEA
-  * OpenSSL::Cipher::RC2
-  * OpenSSL::Cipher::RC4
-  * OpenSSL::Cipher::RC5
+もし、このクラスを直接利用して暗号化する場合は、暗号の鍵や
+IV(Initialization Vector)の取り扱いについて正しく理解してからに
+してください。
 
-AES も OpenSSL::Cipher::Cipher.new('aes256') などとすれば利用可能です。
+#@since 1.8.7
+以下の手順で利用します。
+  * [[m:OpenSSL::Cipher.new]] や [[m:OpenSSL::Cipher::AES256.new]] 
+    などで暗号オブジェクトを生成する
+  * [[m:OpenSSL::Cipher#encrypt]], [[m:OpenSSL::Cipher#decrypt]] で
+    暗号、復号のいずれをするかを設定する
+  * [[m:OpenSSL::Cipher#pkcs5_keyivgen]] もしくは
+    [[m:OpenSSL::Cipher#key=]], [[m:OpenSSL::iv=]], 
+    [[m:OpenSSL::Cipher#random_key]], [[m:OpenSSL::random_iv=]] などで
+    鍵と IV(initialization vector) を設定する
+  * [[m:OpenSSL::Cipher#update]], [[m:OpenSSL::Cipher#final]] で
+    暗号化/復号化をする
+#@end
+
+#@# 以下のクラスが実装されています。
+#@# 
+#@#   * OpenSSL::Cipher::BF
+#@#   * OpenSSL::Cipher::CAST5
+#@#   * OpenSSL::Cipher::DES
+#@#   * OpenSSL::Cipher::IDEA
+#@#   * OpenSSL::Cipher::RC2
+#@#   * OpenSSL::Cipher::RC4
+#@#   * OpenSSL::Cipher::RC5
+#@# 
+#@# AES も OpenSSL::Cipher::Cipher.new('aes256') などとすれば利用可能です。
 
 #@since 1.8.3
 ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 #@end
 
 === 使用例
-
+#@todo
   require 'openssl'
   
   p a123 = "0123456789"
@@ -52,154 +74,197 @@ ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
   p a + b #=> "0123456789"
 
 == Class Methods
---- new(name)
---- new
-#@todo
+#@until 1.8.7
+--- new(name) -> OpenSSL::Cipher::Cipher
+#@else
+--- new(name) -> OpenSSL::Cipher
+#@end
 
-対称鍵暗号アルゴリズムの名前 name を与えると暗号オブジェクトを生成します。
+共通鍵暗号のアルゴリズム名を渡し、対応する暗号オブジェクトを生成します。
+
 利用できるアルゴリズムはシステムにインストールされている openssl に依存します。
+[[m:OpenSSL::Cipher.ciphers]] で利用可能な暗号のアルゴリズム名が得られます。
 
-  $ openssl
-  OpenSSL> version
-  OpenSSL 0.9.7d 17 Mar 2004
-  OpenSSL> enc help
-  （略）
-  Cipher Types
-  -aes-128-cbc               -aes-128-cfb               -aes-128-ecb
-  -aes-128-ofb               -aes-192-cbc               -aes-192-cfb
-  -aes-192-ecb               -aes-192-ofb               -aes-256-cbc
-  -aes-256-cfb               -aes-256-ecb               -aes-256-ofb
-  -aes128                    -aes192                    -aes256
-  -bf                        -bf-cbc                    -bf-cfb
-  -bf-ecb                    -bf-ofb                    -blowfish
-  -cast                      -cast-cbc                  -cast5-cbc
-  -cast5-cfb                 -cast5-ecb                 -cast5-ofb
-  -des                       -des-cbc                   -des-cfb
-  -des-ecb                   -des-ede                   -des-ede-cbc
-  -des-ede-cfb               -des-ede-ofb               -des-ede3
-  -des-ede3-cbc              -des-ede3-cfb              -des-ede3-ofb
-  -des-ofb                   -des3                      -desx
-  -desx-cbc                  -idea                      -idea-cbc
-  -idea-cfb                  -idea-ecb                  -idea-ofb
-  -rc2                       -rc2-40-cbc                -rc2-64-cbc
-  -rc2-cbc                   -rc2-cfb                   -rc2-ecb
-  -rc2-ofb                   -rc4                       -rc4-40
-  -rc5                       -rc5-cbc                   -rc5-cfb
-  -rc5-ecb                   -rc5-ofb
+さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc) 
+を用いるのが安心でしょう。
 
-さまざまな方式がありますが、2006年現在 aes256 (aes-256-cbc) を用いるのが安心でしょう。
+#@# 参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
+#@#  require 'openssl'
+#@#  include OpenSSL::Cipher
+#@#
+#@#  # Triple DES
+#@#  c1 = Cipher.new("DES-EDE3-CBC")
+#@#  c2 = DES.new(:EDE3, "CBC")
+#@#  pass = "open sesame!"
+#@#  data = "Hello world!"
+#@#  c1.pkcs5_keyivgen(pass)
+#@#  s1 = c1.encrypt.update(data) + c1.final
+#@#  c2.pkcs5_keyivgen(pass)
+#@#  s2 = c2.decrypt.update(s1) + c2.final
+#@#  p(data == s2) #=> true
+#@#
+#@#  c1 = Cipher.new("AES256")
+#@#  c2 = Cipher.new("AES-256-CBC")
+#@#  pass = "open sesame!"
+#@#  data = "Hello world!"
+#@#  c1.pkcs5_keyivgen(pass)
+#@#  s1 = c1.encrypt.update(data) + c1.final
+#@#  c2.pkcs5_keyivgen(pass)
+#@#  s2 = c2.decrypt.update(s1) + c2.final
+#@#  p(data == s2) #=> true
 
-参考: [[unknown:UNIXの部屋 検索結果: openssl|URL:http://x68000.q-e-d.net/~68user/unix/pickup?openssl]]
-
-  require 'openssl'
-  include OpenSSL::Cipher
-
-  # Triple DES
-  c1 = Cipher.new("DES-EDE3-CBC")
-  c2 = DES.new(:EDE3, "CBC")
-  pass = "open sesame!"
-  data = "Hello world!"
-  c1.pkcs5_keyivgen(pass)
-  s1 = c1.encrypt.update(data) + c1.final
-  c2.pkcs5_keyivgen(pass)
-  s2 = c2.decrypt.update(s1) + c2.final
-  p(data == s2) #=> true
-
-  c1 = Cipher.new("AES256")
-  c2 = Cipher.new("AES-256-CBC")
-  pass = "open sesame!"
-  data = "Hello world!"
-  c1.pkcs5_keyivgen(pass)
-  s1 = c1.encrypt.update(data) + c1.final
-  c2.pkcs5_keyivgen(pass)
-  s2 = c2.decrypt.update(s1) + c2.final
-  p(data == s2) #=> true
+@param name 暗号化方式の名前
+@raise RuntimeError 利用可能でない暗号化方式名を指定した場合に発生します
+@raise OpenSSL::Cipher::CipherError 初期化に失敗した場合に発生します
 
 #@since 1.8.7
---- ciphers
-#@todo
+--- ciphers -> [String]
+利用可能な暗号方式名を文字列の配列で返します。
+
+  OpenSSL::Ciphers.ciphers 
+  # => ["AES-128-CBC", "AES-128-CFB", "AES-128-CFB1", "AES-128-CFB8", "AES-128-ECB", "AES-128-OFB", "AES-192-CBC", ... ]
 #@end
 
 == Instance Methods
---- reset
-#@todo
+--- reset -> self
+内部状態をリセットします。
 
-暗号、暗号鍵、暗号化復号化フラグを共にリセットします。
+鍵、IV、暗号化/復号化待ちデータなどがクリアされます。
 
---- encrypt(key, iv)
-#@todo
+--- encrypt -> self
+--- encrypt(pass, iv = nil) -> self
 
-暗号化の準備をします。iv は initialization vector のことで、必要なら使用されます。
-この API に引数を渡すことは推奨されません。パスワードから鍵を生成する場合は、
-pkcs5_keyivgen を使用してください。
+暗号化の準備をします。
 
---- decrypt(key, iv)
-#@todo
+暗号オブジェクトの内部状態を暗号化のために初期化します。
 
-復号化の準備をします。iv は initialization vector のことで、必要なら使用されます。
-この API に引数を渡すことは推奨されません。パスワードから鍵を生成する場合は、
-pkcs5_keyivgen を使用してください。
+pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
+鍵と IV を設定します。このやりかたは非標準的であるため利用すべきではありません。
 
---- update(data)
+@param pass パスワード文字列
+@param iv IV文字列
+@raise OpenSSL::Cipher::CipherError 準備に失敗した場合に発生します
+
+--- decrypt(pass, iv = nil) -> self
+復号化の準備をします。
+
+暗号オブジェクトの内部状態を復号化のために初期化します。
+
+pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
+鍵と IV を設定します。このやりかたは非標準的であるため利用すべきではありません。
+
+@param pass パスワード文字列
+@param iv IV文字列
+@raise OpenSSL::Cipher::CipherError 準備に失敗した場合に発生します
+
+--- update(data) -> String
 #@until 1.8.7
---- <<
+--- <<(data) -> String
 #@end
 
-#@todo
+渡された文字列を暗号化もしくは復号化して文字列として返します。
 
-与えられた文字列を暗号化あるいは復号化して文字列として返します。直前に呼ばれた encrypt あるいは decrypt により暗号化か復号化かが決まります。
+どちらがなされるかは直前に [[m:OpenSSL::Cipher#encrypt]] もしくは 
+[[m:OpenSSL::Cipher#decrypt]] のいずれが呼びだされたかに
+よって決まります。
 
-#@# << は deprecated
+ブロック暗号を利用する場合は、暗号化/復号化はブロックサイズで規定された
+バイト数ごとに行われます。そのため余ったデータは暗号オブジェクト内部に
+保存され、次の文字列が渡されたときに使われます。
 
---- final
-#@todo
+暗号化/復号化すべきデータを渡し終えた後は、
+[[m:OpenSSL::Cipher#final]] 
+を呼びだして暗号オブジェクト内部に残されたデータを暗号化/復号化
+する必要があります。
 
-ブロックに残っているデータを暗号化あるいは復号化します。final を呼んだあとでは update を呼んではいけません。
+#@until 1.8.7
+<< は deprecated です。使わないでください。
+#@end
 
---- key=(key)
-#@todo
+@param data 暗号化/復号化する文字列
 
+--- final -> String
+暗号オブジェクト内部に残されたデータを暗号化/復号化し、文字列で
+返します。
+
+パディング([[m:OpenSSL::Cipher#padding=]])を有効にしている場合は、
+残されたデータにパディングを付加した上で暗号化します。
+
+--- key=(key) 
 暗号鍵を設定します。
-なお、ここでいう「暗号鍵」は AES のアルゴリズムに渡される鍵であって、「パスワード」ではありません。
 
---- key_len
+なお、ここでいう「暗号鍵」は各暗号アルゴリズムに渡される鍵であって、
+「パスワード」ではありません。
+
+--- key_len -> Integer
+暗号鍵の長さをバイト数で返します。
+
 --- key_len=(length)
-#@todo
+暗号鍵の長さを変更します。
 
-暗号鍵の長さ。
+@param length 新しく設定する長さ(バイト数)
+@rase OpenSSL::Cipher::CipherError 指定した長さが不適切である(暗号方式の規格上許されていない値である)場合に発生します
 
---- iv=(iv)
-#@todo
+--- iv=(iv) 
+IV(Initialization Vector) を設定します。
 
-初期ベクトル (initialization vector)。
+@param iv IV文字列
 
---- iv_len
-#@todo
+--- iv_len -> Integer
+必要な IV(Initialization Vector) の長さをバイト数で返します。
 
-初期ベクトルの長さ。
-
---- block_size
-#@todo
-
-ブロックのサイズを返します。
+--- block_size -> Integer
+暗号化のブロックのサイズをバイト数で返します。
 
 --- padding=(padding)
-#@todo
-
 パディングを設定します。
 
---- pkcs5_keyivgen(pass, salt=nil, num=2048, digest=OpenSSL::Digest::MD5.new())
-#@todo
+1 でバディングを有効に、0で無効にします。
 
-pass から key と iv を生成し key= と iv= に設定します。
-salt は 8-octet string でないといけません。nil を返します。
+パディングを無効化した場合には、暗号化するデータのサイズはブロックサイズの
+倍数でなければなりません。
 
---- random_iv
---- random_key
-#@todo
+暗号化する側と復号化する側でパディングの設定を一致させておかなければなりません。
 
---- name
-#@todo
+@param padding 1でパディングを有効、0で無効
+@raise OpenSSL::Cipher::CipherError 設定に失敗した場合に発生します
+
+--- pkcs5_keyivgen(pass, salt=nil, num=2048, digest="md5") -> nil
+pass と salt から鍵と IV を生成し、暗号オブジェクトに設定します。
+
+このメソッドは PKCS#5 v1.5 で定義されている方法に
+従って鍵と IV を生成します。PKCS#5 v1.5 と正しく互換するには
+digest は md5 か sha1 を使い、暗号アルゴリズムは
+RC2, RC4-40, DES のいずれかを使わなければなりません。
+
+このメソッドの利用は推奨されません。これではなく
+PKCS#5 v2.0 に定義されている方法で鍵と IV を生成すべきです。
+
+salt が nil である場合には salt なしと見なします。
+
+num は必要なデータの生成でハッシュ関数を何回繰り返し適用するかを
+指定します。最低でも1000を使うべきです。
+
+@param pass パスワード文字列
+@param salt 鍵と IV を生成するための salt 文字列、長さは 8 byte でなければならない
+@param num ハッシュ関数の適用回数
+@param digest ハッシュアルゴリズムを指定する文字列もしくは [[c:OpenSSL::Digest]] のオブジェクト
+@raise OpenSSL::Cipher::CipherError saltが8 byte でない場合や、鍵と IV の設定に失敗した場合に発生します
+
+--- random_iv -> String
+IV を乱数で生成し、暗号オブジェクトに設定します。
+
+生成した IV を文字列で返します。
+
+--- random_key -> String
+鍵を乱数で生成し、暗号オブジェクトに設定します。
+
+生成した鍵を文字列で返します。
+
+
+--- name -> String
+暗号化アルゴリズムの名前を文字列で返します。
+
 
 #@since 1.8.7
 = class OpenSSL::Cipher::Cipher < OpenSSL::Cipher
