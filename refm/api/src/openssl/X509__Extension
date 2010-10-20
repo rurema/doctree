@@ -2,37 +2,30 @@
 
 X.509 v3 証明書の拡張領域のためのクラスです。
 [[c:OpenSSL::X509::Certificate]] オブジェクトは
-その拡張領域を Extension オブジェクトの配列として保持しています。
+その拡張領域を Extension オブジェクトの配列として保持し、
+[[c:OpenSSL::X509::Certificate#extensions]] でその配列が得られます。
 
-  * [[c:OpenSSL::X509::ExtensionFactory]]
-
-=== 例
-#@todo
-  require 'openssl'
-  require 'open-uri'
-  
-  der = open('http://csrc.nist.gov/pki/pkixtools/cert1.der').read
-  cert = OpenSSL::X509::Certificate.new(der)
-  p cert.extensions.class # => Array
-  p cert.extensions
-  # => [subjectKeyIdentifier = 86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56,
-        basicConstraints = critical, CA:TRUE]
-  p cert.extensions[0].class # => OpenSSL::X509::Extension
+このクラスのインスタンス生成は [[c:OpenSSL::ASN1::ASN1Data]] を
+取り扱う必要があり面倒です。
+[[c:OpenSSL::X509::ExtensionFactory]] を用いることで
+インスタンスの生成を簡便に行うことができます。
 
 === 参照
-
-  *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
+  * [[RFC:3280]]
+#@# *[RFC 3280] [[unknown:Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile|URL:http://www.ipa.go.jp/security/rfc/RFC3280-04EN.html#42]]
 
 == Class Methods
 
 --- new(der) -> [[c:OpenSSL::X509::Extension]]
 --- new(oid, value, critical=false) -> [[c:OpenSSL::X509::Extension]]
 [[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
-#@todo
-Extension オブジェクトを生成します。oid には拡張領域の OID をあらわす
-[[c:OpenSSL::ASN1::ObjectId]] オブジェクト、あるいは OID の short name か
-long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
-[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスのインスタンスを与えます。
+
+引数が1つの場合は DER 形式の文字列を渡します。
+
+引数が2つ以上の場合は、oid には拡張領域の OID の ドット区切り表記、
+short name、long name のいずれかである文字列を与えます。
+value にはその値を表す DER 形式の文字列、もしくは 
+[[c:OpenSSL::ASN1::ASN1Data]] のサブクラスを与えます。
 
 例;
 
@@ -42,6 +35,15 @@ long name である文字列を与えます。value にはその値を表す DER 形式の文字列か
   val = "\004\024\206\312\245\"\201b\357\255\n\211\274\255rA,)I\364\206V"
   ex = X509::Extension.new(oid, val)
   p ex.value # => "86:CA:A5:22:81:62:EF:AD:0A:89:BC:AD:72:41:2C:29:49:F4:86:56"
+  ex2 = X509::Extension.new("2.5.29.19", "0\x03\x01\x01\xFF")
+  p ex2.oid # => "basicConstrains"
+  ex3 = X509::Extension.new("basicConstraints", ASN1.Sequence([ASN1::Boolean(false)]))
+  p ex3 # => basicConstraints = CA:FALSE
+
+@param der DER形式の文字列
+@param oid OIDを表す文字列(ドット区切り、short name, long nameのいずれか)
+@param value 拡張領域の値を表す DER 形式文字列
+@param critical 拡張領域の重要度 
 
 == Instance Methods
 

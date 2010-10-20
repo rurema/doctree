@@ -1,10 +1,10 @@
-#@since 1.8.1
 
 = class OpenSSL::X509::Attribute < Object
 
 == Class Methods
 
---- new
+--- new(der) -> OpenSSL::X509::Attribute
+--- new(oid, value) -> OpenSSL::X509::Attribute
 #@todo
 
 == Instance Methods
@@ -21,4 +21,4 @@
 #@todo
 
 = class OpenSSL::X509::AttributeError < OpenSSL::OpenSSLError
-#@end
+

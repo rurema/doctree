@@ -29,9 +29,8 @@ IV(Initialization Vector)の取り扱いについて正しく理解してからに
     などで暗号オブジェクトを生成する
   * [[m:OpenSSL::Cipher#encrypt]], [[m:OpenSSL::Cipher#decrypt]] で
     暗号、復号のいずれをするかを設定する
-  * [[m:OpenSSL::Cipher#pkcs5_keyivgen]] もしくは
-    [[m:OpenSSL::Cipher#key=]], [[m:OpenSSL::iv=]], 
-    [[m:OpenSSL::Cipher#random_key]], [[m:OpenSSL::random_iv=]] などで
+  * [[m:OpenSSL::Cipher#key=]], [[m:OpenSSL::Cipher#iv=]], 
+    [[m:OpenSSL::Cipher#random_key]], [[m:OpenSSL::Cipher#random_iv]] などで
     鍵と IV(initialization vector) を設定する
   * [[m:OpenSSL::Cipher#update]], [[m:OpenSSL::Cipher#final]] で
     暗号化/復号化をする
@@ -279,6 +278,10 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::AES < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::AES
+#@todo
+
 
 #@since 1.8.5
 #@until 1.8.7
@@ -286,18 +289,30 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::AES128 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::AES128
+#@todo
+
 
 #@until 1.8.7
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::AES192
+#@todo
+
 
 #@until 1.8.7
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::AES256
+#@todo
+
 
 #@end
 
@@ -306,6 +321,10 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::BF < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::BF
+#@todo
+
 
 #@until 1.8.3
 = class OpenSSL::Cipher::Cast5 < OpenSSL::Cipher::Cipher
@@ -315,6 +334,10 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::CAST5
+#@todo
+
 
 #@end
 
@@ -323,6 +346,10 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::DES < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::DES
+#@todo
+
 
 
 #@until 1.8.3
@@ -333,6 +360,10 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::IDEA < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::IDEA
+#@todo
+
 
 #@end
 
@@ -341,24 +372,35 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::RC2 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::RC2
+#@todo
+
 
 #@until 1.8.7
 = class OpenSSL::Cipher::RC4 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::RC4 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::RC4
+#@todo
+
 
 #@until 1.8.7
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher
 #@end
+== Class Methods
+--- new() -> OpenSSL::Cipher::RC5
+#@todo
 
 
-#@# == エラー
 
 #@until 1.8.7
 = class OpenSSL::CipherError < OpenSSL::OpenSSLError
 #@else
 = class OpenSSL::Cipher::CipherError < OpenSSL::OpenSSLError
 #@end
+共通鍵暗号関連のエラーで発生する例外のクラス。

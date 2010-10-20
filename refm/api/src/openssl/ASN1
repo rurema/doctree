@@ -74,9 +74,9 @@ IMPLICIT or EXPLICIT なタグ付けを実現することもできます。
 IMPLICITなタグ付けをされたデータを適切に取り扱うことは面倒でしょう。
 
 DER形式の文字列をデコードしてRubyのオブジェクトに変換するには
-[[c:OpenSSL::ASN1.decode]] もしくは [[c:OpenSSL::ASN1.decode_all]] を用います。
-逆に、[[c:OpenSSL::ASN1::ASNData]] のオブジェクトを DER 形式の文字列に
-変換するには、[[c:OpenSSL::ASN1::ASN1Data#to_der]]を用います。
+[[m:OpenSSL::ASN1.#decode]] もしくは [[m:OpenSSL::ASN1.#decode_all]] を用います。
+逆に、[[c:OpenSSL::ASN1::ASN1Data]] のオブジェクトを DER 形式の文字列に
+変換するには、[[m:OpenSSL::ASN1::ASN1Data#to_der]]を用います。
 
 クラス階層
      OpenSSL::ASN1::ASN1Data
@@ -169,13 +169,13 @@ DER 表現の文字列を解析し、そこにエンコードされている ASN.1 の値を全て
 
 @param der DER形式の文字列
 @raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
-@see [[m:OpenSSl::ASN1.decode]]
+@see [[m:OpenSSl::ASN1.#decode]]
 
 --- traverse(der) {|depth, off, hlen, len, constructed, tag_class, tag| ...} -> Qnil
 DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 のプロパティを引数として与えられたブロックを呼びだします。
 
-[[m:OpenSSL::ASN1.decode_all]] のように、文字列に含まれる
+[[m:OpenSSL::ASN1.#decode_all]] のように、文字列に含まれる
 全ての ASN.1 オブジェクトのインスタンスを解析します。
 
 ブロックに渡される引数は以下の通りです。
@@ -190,14 +190,14 @@ DER形式の文字列を解析し、そこに含まれる ASN.1 の値
 
 @param der DER形式の文字列
 @raise OpenSSL::ASN1Error 解析に失敗した場合に発生します
-@see [[m:OpenSSl::ASN1.decode]]
+@see [[m:OpenSSl::ASN1.#decode]]
 
 --- Boolean(value) -> OpenSSL::ASN1::Boolean
 --- Boolean(value , tag , tagging , tag_class) -> OpenSSL::ASN1::Boolean
 ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN::Boolean.new]] と同じです。
+[[m:OpenSSL::ASN::Boolean.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(true もしくは false)
 @param tag タグ番号
@@ -209,7 +209,7 @@ ASN.1 の Boolean 型の値を表現する OpenSSL::ASN1::Boolean オブジェクトを
 ASN.1 の Integer 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::Integer.new]] と同じです。
+[[m:OpenSSL::ASN1::Integer.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト([[c:OpenSSL::BN]]のインスタンス)
 @param tag タグ番号
@@ -221,7 +221,7 @@ ASN.1 の Integer 型の値を表現する Ruby のオブジェクトを
 ASN.1 の Enumerated 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::Enumerated.new]] と同じです。
+[[m:OpenSSL::ASN1::Enumerated.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(0以上の整数)
 @param tag タグ番号
@@ -233,7 +233,7 @@ ASN.1 の Enumerated 型の値を表現する Ruby のオブジェクトを
 ASN.1 の BitString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::BitString.new]] と同じです。
+[[m:OpenSSL::ASN1::BitString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -245,7 +245,7 @@ ASN.1 の BitString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の OctetString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::OctetString.new]] と同じです。
+[[m:OpenSSL::ASN1::OctetString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -257,7 +257,7 @@ ASN.1 の OctetString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の UTF8String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::UTF8String.new]] と同じです。
+[[m:OpenSSL::ASN1::UTF8String.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -269,7 +269,7 @@ ASN.1 の UTF8String 型の値を表現する Ruby のオブジェクトを
 ASN.1 の NumericString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::NumericString.new]] と同じです。
+[[m:OpenSSL::ASN1::NumericString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -281,7 +281,7 @@ ASN.1 の NumericString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の PrintableString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::PrintableString.new]] と同じです。
+[[m:OpenSSL::ASN1::PrintableString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -293,7 +293,7 @@ ASN.1 の PrintableString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の T61String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::T61String.new]] と同じです。
+[[m:OpenSSL::ASN1::T61String.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -305,7 +305,7 @@ ASN.1 の T61String 型の値を表現する Ruby のオブジェクトを
 ASN.1 の VideotexString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::VideotexString.new]] と同じです。
+[[m:OpenSSL::ASN1::VideotexString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -317,7 +317,7 @@ ASN.1 の VideotexString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の IA5String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::IA5String.new]] と同じです。
+[[m:OpenSSL::ASN1::IA5String.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -329,7 +329,7 @@ ASN.1 の IA5String 型の値を表現する Ruby のオブジェクトを
 ASN.1 の GraphicString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::GraphicString.new]] と同じです。
+[[m:OpenSSL::ASN1::GraphicString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -341,7 +341,7 @@ ASN.1 の GraphicString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の ISO64String 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::ISO64String.new]] と同じです。
+[[m:OpenSSL::ASN1::ISO64String.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -353,7 +353,7 @@ ASN.1 の ISO64String 型の値を表現する Ruby のオブジェクトを
 ASN.1 の GeneralString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::GeneralString.new]] と同じです。
+[[m:OpenSSL::ASN1::GeneralString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -365,7 +365,7 @@ ASN.1 の GeneralString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の UniversalString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::UniversalString.new]] と同じです。
+[[m:OpenSSL::ASN1::UniversalString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -377,7 +377,7 @@ ASN.1 の UniversalString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の BMPString 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::BMPString.new]] と同じです。
+[[m:OpenSSL::ASN1::BMPString.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(文字列)
 @param tag タグ番号
@@ -389,7 +389,7 @@ ASN.1 の BMPString 型の値を表現する Ruby のオブジェクトを
 ASN.1 の Null 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::Null.new]] と同じです。
+[[m:OpenSSL::ASN1::Null.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(nilのみ)
 @param tag タグ番号
@@ -401,7 +401,7 @@ ASN.1 の Null 型の値を表現する Ruby のオブジェクトを
 ASN.1 の ObjectId 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::ObjectId.new]] と同じです。
+[[m:OpenSSL::ASN1::ObjectId.new]] と同じです。
 
 @param value ASN.1 オブジェクト識別子を表す文字列
 @param tag タグ番号
@@ -413,7 +413,7 @@ ASN.1 の ObjectId 型の値を表現する Ruby のオブジェクトを
 ASN.1 の UTCTime 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::UTCTime.new]] と同じです。
+[[m:OpenSSL::ASN1::UTCTime.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(Timeのオブジェクト)
 @param tag タグ番号
@@ -425,7 +425,7 @@ ASN.1 の UTCTime 型の値を表現する Ruby のオブジェクトを
 ASN.1 の GeneralizedTime 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::GeneralizedTime.new]] と同じです。
+[[m:OpenSSL::ASN1::GeneralizedTime.new]] と同じです。
 
 @param value ASN.1 値を表す Ruby のオブジェクト(Timeのオブジェクト)
 @param tag タグ番号
@@ -437,7 +437,7 @@ ASN.1 の GeneralizedTime 型の値を表現する Ruby のオブジェクトを
 ASN.1 の Sequence 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::Sequence.new]] と同じです。
+[[m:OpenSSL::ASN1::Sequence.new]] と同じです。
 
 @param value ASN.1値を表すRubyのオブジェクト([[c:OpenSSL::ASN1::ASN1Data]]の配列)
 @param tag タグ番号
@@ -449,7 +449,7 @@ ASN.1 の Sequence 型の値を表現する Ruby のオブジェクトを
 ASN.1 の Set 型の値を表現する Ruby のオブジェクトを
 生成します。
 
-[[c:OpenSSL::ASN1::Set.new]] と同じです。
+[[m:OpenSSL::ASN1::Set.new]] と同じです。
 
 @param value ASN.1値を表すRubyのオブジェクト([[c:OpenSSL::ASN1::ASN1Data]]の配列)
 @param tag タグ番号

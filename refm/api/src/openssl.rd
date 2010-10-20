@@ -1,4 +1,5 @@
-OpenSSL を Ruby から扱うためのライブラリです。
+OpenSSL([[url:http://www.openssl.org]])
+を Ruby から扱うためのライブラリです。
 
 このドキュメントでは SSL/TLS の一般的事項については
 解説をしません。利用者は、SSL/TLSの各概念、例えば
@@ -16,15 +17,16 @@ SSLのようなセキュリティ技術は、その利用者に無条件に安全性を
 プログラマは、 SSL/TLS の技術、それが基づいている概念を理解し、
 ライブラリを適切に利用する必要があります。
 
-#@# = openssl
-
-#@# [[url:http://www.openssl.org]] support library for Ruby.
-#@# 動作や使える暗号方式は
-
-#@# [[unknown:執筆者募集]]
-
 === Components
 
+OpenSSL は SSL/TLS による通信を提供する高水準なインターフェースと
+より基本的な機能を提供する低水準なインターフェースがあります。
+基本的には高水準なインターフェースのみを利用すべきです。
+
+低水準なインターフェースを利用する場合には、利用したい機能に
+関する十分な知識と注意深さが必要となります。
+#@# どれが高水準インターフェースでどれが低水準かの
+#@# リストが必要
   * [[c:OpenSSL]]
   * OpenSSL::Cipher
     * [[c:OpenSSL::Cipher::Cipher]]
@@ -167,12 +169,14 @@ Ruby/OpenSSL のバージョンです。
 #@include(openssl/ASN1__Primitive)
 #@include(openssl/BN)
 #@include(openssl/Cipher)
+#@include(openssl/Config)
 #@include(openssl/Digest)
 #@include(openssl/Digest__Digest)
 #@include(openssl/Engine) 
 #@include(openssl/HMAC)
 #@include(openssl/Netscape__SPKI)
 #@include(openssl/OCSP)
+#@include(openssl/PKCS5)
 #@include(openssl/PKCS12)
 #@include(openssl/PKCS7)
 #@include(openssl/PKCS7__PKCS7)
