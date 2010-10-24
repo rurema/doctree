@@ -6,12 +6,14 @@ X509 証明書クラス
 
 == Class Methods
 
---- new(obj = nil) -> OpenSSL::X509::Certificate
+--- new -> OpenSSL::X509::Certificate
+--- new(obj) -> OpenSSL::X509::Certificate
 証明書オブジェクトを生成します。
 
 引数を与えなかった場合には、空の証明書を返します。
 
-obj が [[c:String]] である場合には、それを証明書データの文字列であると見なして
+obj が [[c:String]] である場合には、それを
+PEM 形式もしくは DER 形式の証明書データの文字列であると見なして
 その内容から証明書オブジェクトを生成します。
 
 obj が [[c:IO]] である場合には、そのファイルの中身から

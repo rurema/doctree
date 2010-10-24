@@ -1,37 +1,59 @@
-#@if (version >= "1.8.0")
 = class OpenSSL::X509::Revoked < Object
 
-失効した証明書のクラス。[[c:OpenSSL::X509::CRL]] クラスから使われます。
+失効した証明書のクラス。
+
+[[m:OpenSSL::X509::CRL#revoked]] で返される
+失効証明書リストがこのクラスの配列です。
 
 == Class Methods
 
---- new
-#@todo
+--- new -> OpenSSL::X509::Revoked
+空の Revoked オブジェクトを生成し、返します。
 
 == Instance Methods
 
---- serial
+--- serial -> OpenSSL::BN
+失効した証明書のシリアルを返します。
+
 --- serial=(serial)
-#@todo
+失効した証明書のシリアルを設定します。
 
-失効した証明書のシリアルです。
+シリアルは [[c:OpenSSL::BN]] のインスタンスで指定します。
 
---- time
+@param serial 失効した証明書のシリアル
+@see [[m:OpenSSL::X509::Revoked#serial]]
+
+--- time -> Time
+失効した日時を返します。
+
 --- time=(time)
-#@todo
+失効した日時を Time オブジェクトで設定します。
 
-失効した日時です。[[c:Time]] オブジェクトです。
+@param time 失効日時
+@see [[m:OpenSSL::X509::Revoked#time]]
 
---- extensions
+--- extensions -> [OpenSSL::X509::Extension]
+拡張領域のデータを配列で返します。
+
 --- extensions=(extensions)
-#@todo
+拡張領域を extensions で更新します。
 
-拡張領域です。[[c:OpenSSL::X509::Extension]] の配列です。
+extensions には [[c:OpenSSL::X509::Extension]] の配列を渡します。
 
---- add_extension(ex)
-#@todo
+更新前の拡張領域のデータは破棄されます。
 
-拡張領域に値を加えます。
+@param extensions 拡張領域のデータ
+@raise OpenSSL::X509::RevokedError 更新に失敗した場合に発生します
+
+--- add_extension(ex) -> OpenSSL::X509::Extension
+拡張領域に ex を追加します。
+
+追加するデータは [[c:OpenSSL::X509::Extension]] のオブジェクトを渡します。
+
+ex を返します。
+
+@param ex 追加するデータ
+@raise OpenSSL::X509::RevokedError 追加に失敗した場合に発生します
 
 = class OpenSSL::X509::RevokedError < OpenSSL::OpenSSLError
-#@end
+[[c:OpenSSL::X509::Revoked]] 関連のエラーが生じたときに発生します。
