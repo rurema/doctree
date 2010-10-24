@@ -103,6 +103,9 @@ section は obsolete です。[] を使ってください。
 オブジェクトに含まれる全ての設定情報を順にブロックに渡し
 呼び出します。
 
+渡される値は、セクションを表す文字列、キーを表す文字列、キーに
+割り当てられた値の文字列、の3つです。
+
   require 'openssl'
   conf = OpenSSL::Config.load(OpenSSL::Config::DEFAULT_CONFIG_FILE)
   conf.each{|section, key, value| p [section, key, value]}

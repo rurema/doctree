@@ -2,6 +2,8 @@
 
 X509 証明書クラス
 
+* [[RFC:5280]]
+
 == Class Methods
 
 --- new(obj = nil) -> OpenSSL::X509::Certificate
@@ -133,13 +135,12 @@ X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
 @raise [[c:OpenSSL::X509::CertificateError]] 鍵の設定に失敗した場合に発生します
 
 --- sign(pkey, digest) -> self
-#@todo
+証明書に署名します。
 
-証明書に署名します。pkey は発行者の秘密鍵です。digest は
-[[c:OpenSSL::Digest::Digest]] オブジェクトです。秘密鍵オブジェクトが
-[[c:OpenSSL::PKey::DSA]] のインスタンスである場合、 digest は OpenSSL::Digest::DSS1
-オブジェクトでなければなりません。逆も同じです。OpenSSL::Digest::DSS1 は
-OpenSSL::PKey::DSA 以外のダイジェストとして使えません。
+DSA で署名する場合は digest は "dss1" でなければなりません。
+
+@param pkey 発行者(issuer)の秘密鍵
+@param digest ハッシュ関数を表す文字列
 
 --- verify(key) -> bool
 証明書の発行者の公開鍵で署名を検証します。
