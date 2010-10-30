@@ -155,9 +155,9 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 --- charset_map -> Hash
 
-#@# Returns the map from canonical name to system dependent name.
-
 文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
+
+#@# Returns the map from canonical name to system dependent name.
 
 #@since 1.9.1
 --- ctlmethods -> Array
