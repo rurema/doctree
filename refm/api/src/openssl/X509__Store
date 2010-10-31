@@ -1,82 +1,250 @@
 = class OpenSSL::X509::Store < Object
 
-証明書のストレージクラス。
+証明書ストアクラス。
+
+証明書ストアとは証明書および CRL の集合です。証明書を検証する際、
+自身が所持している証明書から検証に必要な証明書を探し出す機能を
+提供しています。
 
 == Class Methods
 
---- new
-#@todo
+--- new -> OpenSSL::X509::Store
+空の Store オブジェクトを生成します。
+
+@raise OpenSSL::X509::StoreError オブジェクトの生成に失敗した場合に発生します
 
 == Instance Methods
 
---- verify_callback
+--- verify_callback -> Proc | nil
+オブジェクトに設定されている検証をフィルタするコールバックを
+返します。
+
+デフォルトのコールバックが設定されている場合には nil を返します。
+
+@see [[m:OpenSSL::X509::Store#verify_callback=]]
+
 --- verify_callback=(proc)
-#@todo
+検証をフィルタするコールバックを設定します。
 
---- error_string
-#@todo
+コールバックには [[c:Proc]] や [[c:Method]] を渡します。
 
-verify を呼び出した時のエラー内容を述べた文字列です。エラーでない場合は、"ok" がセットされます。verify を一度も呼び出していない時は nil です。
+渡されたコールバックオブジェクトは証明書チェインの検証時に
+チェインに含まれる各証明書の署名を検証するたびに呼びだされます。
+そのときに渡される引数は2つで、1つめは検証が成功したかの真偽値、
+2つめは検証後の状態を保存した
+[[c:OpenSSL::X509::StoreContext]] オブジェクトです。
+このコールバックには2つの役割があります。1つ目はコンテキストオブジェクト
+を調べることで詳細なエラー情報を得ることです。2つ目は検証をカスタマイズ
+することです。このコールバックが true を返すと、たとえ
+OpenSSL が検証失敗と判定しても、検証が成功したものと判断し証明書チェイン
+の検証を続けます。逆に false を返すと、検証が失敗したものとみなされ
+検証を停止し、検証メソッドは検証失敗を返します。詳細なエラー情報を
+得たいだけの場合はコールバックは第一引数をそのまま返すようにしてください。
 
---- error
-#@todo
+nil を設定するとデフォルトのコールバック(単に第一引数をそのまま返すだけ)
+が使われます。
 
-[[c:OpenSSL::X509]] を参照してください。
+初期状態は nil です。
+
+@param proc 設定する [[c:Proc]] オブジェクト
+@see [[m:OpenSSL::X509::Store#verify_callback]],
+     [[m:OpenSSL::X509::Store#verify]],
+     [[m:OpenSSL::X509::StoreContext#verify]]
+
+--- error_string -> String | nil
+最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
+検証したときのエラー文字列を返します。
+
+検証に成功した場合は "ok" を返します。
+
+verify を一度も呼びだしていない場合は nil を返します。
+
+返り値は verify を呼ぶごとに更新されます。
+
+--- error -> Integer | nil
+最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
+検証したときのエラーコードを返します。
+
+エラーコードの整数値は [[c:OpenSSL::X509]] に以下の定数が定義されています。
+検証に成功した場合は [[c:OpenSSL::X509::V_OK]] を返します。
+  * [[m:OpenSSL::X509::V_OK]]
+  * [[m:OpenSSL::X509::V_ERR_AKID_SKID_MISMATCH]]
+  * [[m:OpenSSL::X509::V_ERR_APPLICATION_VERIFICATION]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_CHAIN_TOO_LONG]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_HAS_EXPIRED]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_NOT_YET_VALID]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_REJECTED]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_REVOKED]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_SIGNATURE_FAILURE]]
+  * [[m:OpenSSL::X509::V_ERR_CERT_UNTRUSTED]]
+  * [[m:OpenSSL::X509::V_ERR_CRL_HAS_EXPIRED]]
+  * [[m:OpenSSL::X509::V_ERR_CRL_NOT_YET_VALID]]
+  * [[m:OpenSSL::X509::V_ERR_CRL_SIGNATURE_FAILURE]]
+  * [[m:OpenSSL::X509::V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT]]
+  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CERT_NOT_AFTER_FIELD]]
+  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CERT_NOT_BEFORE_FIELD]]
+  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CRL_LAST_UPDATE_FIELD]]
+  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CRL_NEXT_UPDATE_FIELD]]
+  * [[m:OpenSSL::X509::V_ERR_INVALID_CA]]
+  * [[m:OpenSSL::X509::V_ERR_INVALID_PURPOSE]]
+  * [[m:OpenSSL::X509::V_ERR_KEYUSAGE_NO_CERTSIGN]]
+  * [[m:OpenSSL::X509::V_ERR_OUT_OF_MEM]]
+  * [[m:OpenSSL::X509::V_ERR_PATH_LENGTH_EXCEEDED]]
+  * [[m:OpenSSL::X509::V_ERR_SELF_SIGNED_CERT_IN_CHAIN]]
+  * [[m:OpenSSL::X509::V_ERR_SUBJECT_ISSUER_MISMATCH]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_GET_CRL]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_GET_ISSUER_CERT]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY]]
+  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE]]
+
+verify を一度も呼びだしていない場合は nil を返します。
+
+返り値は verify を呼ぶごとに更新されます。
 
 --- flags=(flags)
-#@todo
+CRL に関するフラグを設定します。
 
---- chain
-#@todo
+以下の定数から必要なものを選んで OR 取り、渡します。
+  * [[m:OpenSSL::X509::V_FLAG_CRL_CHECK]]
+  * [[m:OpenSSL::X509::V_FLAG_CRL_CHECK_ALL]]
 
-最後に verify(cert) した証明書を出発点とするルート CA 証明書までの証明書のチェーンです。OpenSSL::X509::Certificate オブジェクトの配列です。verify を一度も呼び出していない時は nil を返します。証明書の順序は以下の通りです。
+このフラグは [[m:OpenSSL::X509::Store#verify]] で検証する場合に利用されます。
+[[m:OpenSSL::X509::StoreContext.new]] で証明書ストアコンテキストを
+生成する場合にはそのコンテキストにフラグがコピーされます。
+
+デフォルトではフラグは設定されていません。
+
+@param flags 設定するフラグ(整数値)
+@see [[m:OpenSSL::X509::StoreContext#flags=]]
+--- chain -> [OpenSSL::X509::Certificate] | nil
+最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
+検証したときのルート CA までの証明書のチェインを返します。
+
+証明書の順序は以下の通りです。
 
   [証明書, 下位 CA 証明書, 中間 CA 証明書, ... , ルート CA 証明書]
 
---- purpose=(purpose)
-#@todo
+verify を一度も呼びだしていない場合は nil を返します。
 
-証明書の使用目的を設定します。verify では検証対象の証明書がこの目的に使えるかどうかも検証します。[[c:OpenSSL::X509]] の定数を参照してください。
+返り値は verify を呼ぶごとに更新されます。
+
+--- purpose=(purpose)
+証明書の使用目的を設定します。
+
+以下の定数値のうちいずれか1つを渡します。
+  * [[m:OpenSSL::X509::PURPOSE_ANY]]
+  * [[m:OpenSSL::X509::PURPOSE_CRL_SIGN]]
+  * [[m:OpenSSL::X509::PURPOSE_NS_SSL_SERVER]]
+  * [[m:OpenSSL::X509::PURPOSE_SMIME_ENCRYPT]]
+  * [[m:OpenSSL::X509::PURPOSE_SMIME_SIGN]]
+  * [[m:OpenSSL::X509::PURPOSE_SSL_CLIENT]]
+  * [[m:OpenSSL::X509::PURPOSE_SSL_SERVER]]
+  * [[m:OpenSSL::X509::PURPOSE_OSCP_HELPER]]
+
+この値は [[m:OpenSSL::X509::Store#verify]] で検証する場合に利用されます。
+証明書に記載されている使用目的が適合していない場合には検証が失敗します。
+[[m:OpenSSL::X509::StoreContext.new]] で証明書ストアコンテキストを
+生成する場合にはそのコンテキストにこの値がコピーされます。
+
+@param purpose 証明書の使用目的を表す整数値
+
+#@# memo: 
+#@# purpose は
+#@# どうやら X509v3 拡張領域のkeyUsage拡張領域
+#@# やextKeyKeyUsage拡張領域をチェックするらしい。
+#@# 検証している証明書や、それに証明している中間CAなどが
+#@# 目的外使用していないかどうかを判定するらしい。
+#@# SMIME_SIGN ならば、「証明書が S/MIME として使えるか」& 
+#@# 「CA 証明書が S/MIME CA として使えるか」の2つを判定しているようである。
+#@# 「Network Security with OpenSSL:Cryptography for Secure Communications」
+#@# によると、この拡張領域は
+#@# 「利用法の定義が明確でない」「既存ソフトウェアでは概ね無視される」
+#@# 「実装方法はベンダーによってまちまち」「殆ど役に立たない」とか
 
 --- trust=(trust)
 #@todo
+以下のいずれかの定数の値を指定します。
 
-[[c:OpenSSL::X509]] の定数を参照してください。
+ * [[m:OpenSSL::X509::TRUST_COMPAT]]
+ * [[m:OpenSSL::X509::TRUST_EMAIL]]
+ * [[m:OpenSSL::X509::TRUST_OBJECT_SIGN]]
+ * [[m:OpenSSL::X509::TRUST_SSL_CLIENT]]
+ * [[m:OpenSSL::X509::TRUST_SSL_SERVER]]
+ * [[m:OpenSSL::X509::TRUST_OCSP_REQUEST]]
+ * [[m:OpenSSL::X509::TRUST_OCSP_SIGN]]
+@param trust 整数値
+@see [[m:OpenSSL::X509::StoreContext#trust=]]
 
---- add_path(path)
-#@todo
+#@# TRUST_COMPAT を指定すると root ca が self signed されているかを
+#@# 判定する
+#@# それ以外は 0.9.8o のコード上では結局何もしていない(OCSP以外は
+#@# COMPATと同じ)ように見える
 
-パスに含まれる証明書を信頼する証明書としてストレージに加えます。
+--- add_path(path) -> self
+path が指し示すディレクトリに含まれる証明書ファイルを
+信頼する証明書として加えます。
 
---- add_file(file)
-#@todo
+@param path 証明書が含まれるディレクトリのパス
+@param OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
-ファイルに含まれる証明書を信頼する証明書としてストレージに加えます。
+--- add_file(file) -> self
+ファイルに含まれる CA 証明書を信頼する証明書として証明書ストアに加えます。
 
---- add_cert(cert)
-#@todo
+@param file ファイル名文字列
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
-証明書を信頼する証明書としてストレージに加えます。
+--- add_cert(cert) -> self
+CA 証明書を信頼する証明書として証明書ストアに加えます。
 
---- add_crl(crl)
-#@todo
+@param cert 追加する CA 証明書の [[c:OpenSSL::X509::Certificate]] オブジェクト
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
-信頼する CRL(証明書失効リスト) [[c:OpenSSL::X509::CRL]] オブジェクトをストレージに加えます。
+--- add_crl(crl) -> self
+信頼する CRL(証明書失効リスト)
+を証明書ストアに加えます。
 
---- verify(cert, chain = nil)
-#@todo
+@param crl 追加する CRL の [[c:OpenSSL::X509::CRL]] オブジェクト
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
-証明書 cert をストレージに存在する CA 証明書で検証します。
+--- verify(cert, chain = nil) -> bool
+--- verify(cert, chain = nil){|ok, ctx| ... } -> bool
+証明書を証明書ストアに存在する CA 証明書で検証します。
+
+chain には検証したい証明書の証明書チェイン全体を 
+[[c:OpenSSL::X509::Certificate]] の配列で渡します。
+
+検証に成功した場合は true を、失敗した場合は false を返します。
+
+このメソッドをブロック付きで呼び出すと、そのブロックが
+検証をフィルタするコールバックと見做されます。このコールバックについては
+[[m:OpenSSL::X509::Store#verify_callback=]] を参照してください。
+
+内部では [[m:OpenSSL::X509::StoreContext.new]] と
+[[m:OpenSSL::X509::StoreContext#verify]] を呼びだすことによって検証しています。
+
+@param cert 検証したい証明書の [[c:OpenSSL::X509::Certificate]]
+@param chain 検証したい証明書の証明書チェイン全体の配列
+@raise OpenSSL::X509::StoreError 検証時にエラーが生じたときに発生します
 
 #@since 1.8.2
---- time=
-#@todo
+--- time=(time)
+証明書の有効期限の検証に使う日時を設定します。
+
+デフォルトでは現在時刻が使われます。
+
+@param time 検証に使う日時の [[c:Time]] オブジェクト
+@see [[m:OpenSSL::X509::StoreContext#time=]]
 #@end
 
 #@since 1.8.3
---- set_default_paths
-#@todo
+--- set_default_paths -> nil
+システムに組込まれている証明書を読み込みます。
+
+@raise OpenSSL::X509::StoreError 読み込みに失敗した場合に発生します
 #@end
 
-= class OpenSSL::X509::Store < OpenSSL::OpenSSLError
+= class OpenSSL::X509::StoreError < OpenSSL::OpenSSLError
 

@@ -1,9 +1,8 @@
 = module OpenSSL::X509
+OpenSSL の X509 証明書、CRL(証明書失効リスト)、
+CSR(証明書署名要求)、証明書ストアなどに関するモジュールです。
 
-  * [[c:OpenSSL::X509::Certificate]]
-  * [[c:OpenSSL::X509::Store]]
-
-以下は OpenSSL::X509::Store#purpose にセットされる値です。
+#@# 以下は OpenSSL::X509::Store#purpose にセットされる値です。
 
 == Constants
 
@@ -42,10 +41,13 @@ SSL のクライアントサイドの証明書として使えるか。
 
 SSL のサーバサイドの証明書として使えるか。
 
-以下は OpenSSL::X509::Store#trust にセットされる値です。
-
---- TRUST_COMPAT
+--- PURPOSE_OCSP_HELPER
 #@todo
+
+#@# 以下は OpenSSL::X509::Store#trust にセットされる値です。
+
+--- TRUST_COMPAT -> Integer
+ルート CA 証明書が自分自身の秘密鍵で署名されている。
 
 --- TRUST_EMAIL
 #@todo
@@ -57,6 +59,12 @@ SSL のサーバサイドの証明書として使えるか。
 #@todo
 
 --- TRUST_SSL_SERVER
+#@todo
+
+--- TRUST_OCSP_REQUEST
+#@todo
+
+--- TRUST_OCSP_SIGN
 #@todo
 
 以下は OpenSSL::X509::Store#error にセットされる値です。
@@ -157,4 +165,44 @@ SSL のサーバサイドの証明書として使えるか。
 --- V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE
 #@todo
 
+--- V_ERR_AKID_ISSUER_SERIAL_MISMATCH
+#@todo
+
+--- V_FLAG_CRL_CHECK -> Integer
+証明書の検証時に CRL をチェックすることを意味します。
+
+このフラグのみを指定すると検証する証明書のみ CRL をチェックし、
+CA の証明書チェーンには CRL のチェックがなされません。
+
+証明チェーン全体をチェックしたい場合は V_FLAG_CRL_CHECK と
+[[m:OpenSSL::X509::V_FLAG_CRL_CHECK_ALL]] の両方を指定する
+必要があります。
+
+[[m:OpenSSL::X509::Store#flags=]] で使います。
+
+--- V_FLAG_CRL_CHECK_ALL -> Integer
+証明書チェーンすべてに CRL をチェックすることを意味します。
+
+このフラグは [[m:OpenSSL::X509::V_FLAG_CRL_CHECK]] と共に
+指定する場合にのみ意味を持ちます。
+
+[[m:OpenSSL::X509::Store#flags=]] で使います。
+
+--- DEFAULT_CERT_AREA
+#@todo
+
+--- DEFAULT_CERT_DIR
+#@todo
+
+--- DEFAULT_CERT_DIR_ENV
+#@todo
+
+--- DEFAULT_CERT_FILE
+#@todo
+
+--- DEFAULT_CERT_FILE_ENV
+#@todo
+
+--- DEFAULT_PRIVATE_DIR
+#@todo
 
