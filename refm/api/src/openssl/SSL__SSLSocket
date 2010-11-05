@@ -1,9 +1,172 @@
-#@if (version >= "1.8.0")
+= module OpenSSL::SSL::SocketForwarder 
+to_io で返されるソケットオブジェクトにメソッドを
+フォワードするモジュールです。
+
+[[c:OpenSSL::SSL::SSLSocket]] や [[c:OpenSSL::SSL::SSLServer]] と
+いったソケットの SSL ラッパクラスにソケット関連のメソッドを定義するため
+に使われます。
+
+== Instance Methods
+--- addr -> Array
+ラップされているソケットの接続情報を返します。
+
+[[m:IPSocket#addr]] と同様です。
+
+--- peeraddr -> Array
+ラップされているソケットの接続先相手の情報を返します。
+
+[[m:IPSocket#peeraddr]] と同様です。
+
+--- setsockopt(level, optname, optval) -> 0
+ラップされているソケットのオプションを設定します。
+
+[[m:BasicSocket#setsockopt]] と同様です。
+
+@param level    [[man:setsockopt(2)]] の level に相当する整数を指定します
+@param optname  [[man:setsockopt(2)]] の option_name に相当する整数を指定します
+@param optval  設定される値を文字列で指定します。
+
+@raise Errno::EXXX  オプションの設定に失敗した場合発生します。
+
+--- getsockopt(level, optname) -> String
+ラップされているソケットのオプションを設定します。
+
+[[m:BasicSocket#getsockopt]] と同様です。
+
+@param level    [[man:getsockopt(2)]] の 第二引数のlevel に相当する整数を指定します
+@param optname  [[man:getsockopt(2)]] の 第三引数のoption_name に相当する整数を指定します
+
+
+--- fcntl(cmd, arg=0) -> Integer
+ラップされているソケットに対してシステムコール fcntl を実行します。
+
+[[m:IO#fcntl]] と同様です。
+
+@param cmd IO に対するコマンドを、添付ライブラリ [[lib:fcntl]] が提供している定数で指定します。
+@param arg cmd に対する引数を整数、文字列、booleanのいずれかで指定します。
+@raise Errno::EXXX fcntl の実行に失敗した場合に発生します。
+@raise IOError 既に close されている場合に発生します。
+
+--- closed? -> bool
+ラップされているソケットが
+close していたら true を返します。
+
+--- do_not_reverse_lookup=(bool)
+真を渡すとアドレスからホスト名への逆引きを行わなくなります。
+
+[[m:BasicSocket#do_not_reverse_lookup]] と同様です。
+
+@param bool 真で逆引きを抑制します
+
+= module OpenSSL::Buffering
+
+== Instance Methods
+--- <<
+#@todo
+
+[[m:IO#<<]] と同様です。
+
+--- close
+#@todo
+
+接続を閉じます。flush を呼んでから閉じます。
+
+--- each
+#@todo
+
+[[m:IO#each]] と同様です。
+
+--- each_byte
+#@todo
+
+[[m:IO#each_byte]] と同様です。
+
+--- eof?
+--- eof
+#@todo
+
+[[m:IO#eof?]] と同様です。
+
+--- flush
+#@todo
+
+[[m:IO#flush]] と同様です。
+
+--- getc
+#@todo
+
+[[m:IO#getc]] と同様です。
+
+--- gets([rs])
+#@todo
+
+[[m:IO#gets]] と同様です。
+
+--- print([arg[, ...]])
+#@todo
+
+[[m:IO#print]] と同様です。
+
+--- printf(format[, arg[, ...]])
+#@todo
+
+[[m:IO#printf]] と同様です。
+
+--- puts([obj[, ...]])
+#@todo
+
+[[m:IO#puts]] と同様です。
+
+--- read([length[, buf]])
+#@todo
+
+[[m:IO#read]] と同様です。
+
+--- readchar
+#@todo
+
+[[m:IO#readchar]] と同様です。
+
+--- readlines([rs])
+#@todo
+
+[[m:IO#readlines]] と同様です。
+
+--- ungetc(char)
+#@todo
+
+[[m:IO#ungetc]] と同様です。
+
+--- write(str)
+#@todo
+
+[[m:IO#write]] と同様です。
+
+--- readline
+#@todo
+--- each_line
+#@todo
+--- read_nonblock
+#@todo
+--- write_nonblock
+#@todo
+--- readpartial
+#@todo
+--- sync
+#@todo
+--- sync=
+#@todo
+
+== Constants
+
+--- BLOCK_SIZE
+#@todo
+
 = class OpenSSL::SSL::SSLSocket < Object
 include Enumerable
 include OpenSSL::SSL::SocketForwarder 
-#@todo
-#@# IO と同じメソッドはこのモジュールで定義されているので、下のいくつかのエントリーはこちらにまわす
+
+ソケットをラップして SSL での認証と暗号通信を実現するためのクラスです。
 
 SSLSocket クラス
 
@@ -51,6 +214,9 @@ SSLSocket オブジェクトを生成する時に渡されたコンテクストを返します。
 
 SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 
+--- cert
+#@todo
+
 --- peer_cert
 #@todo
 
@@ -86,135 +252,20 @@ SSLSocket を close するときに TCPSocket も close するかどうかを設定します。
 読み取り可能なバイト数を返します。
 #@end
 
---- <<
-#@todo
-
-[[m:IO#<<]] と同様です。
-
 --- accept
 #@todo
 
 TLS/SSL クライアントから接続を受け付け、 TLS/SSL ハンドシェイクを実行し、自分自身を返します。
 
-#@if (version < "1.8.1")
---- addr
-#@todo
-
-[[m:IPSocket#addr]] と同様です。
-#@end
-
---- close
-#@todo
-
-接続を閉じます。flush を呼んでから閉じます。
-
-#@if (version < "1.8.1")
---- closed?
-#@todo
-
-close していたら true を返します。
-#@end
 
 --- connect
 #@todo
 
 接続相手との TLS/SSL ハンドシェイクを実行します。
 
---- do_not_reverse_lookup=(bool)
-#@todo
-
-[[m:BasicSocket#do_not_reverse_lookup]] と同様です。
-
---- each
-#@todo
-
-[[m:IO#each]] と同様です。
-
---- each_byte
-#@todo
-
-[[m:IO#each_byte]] と同様です。
-
---- eof?
-#@todo
-
-[[m:IO#eof?]] と同様です。
-
---- fcntl(cmd[, arg])
-#@todo
-
-[[m:IO#fcntl]] と同様です。
-
---- flush
-#@todo
-
-[[m:IO#flush]] と同様です。
-
---- getc
-#@todo
-
-[[m:IO#getc]] と同様です。
-
---- gets([rs])
-#@todo
-
-[[m:IO#gets]] と同様です。
-
---- getsockopt(level, optname)
-#@todo
-
-[[m:BasicSocket#getsockopt]] と同様です。
-
-#@if (version < "1.8.1")
---- peeraddr
-#@todo
-
-[[m:IPSocket#peeraddr]] と同様です。
-#@end
 
 #@since 1.8.3
 --- post_connection_check
-#@todo
-#@end
-
---- print([arg[, ...]])
-#@todo
-
-[[m:IO#print]] と同様です。
-
---- printf(format[, arg[, ...]])
-#@todo
-
-[[m:IO#printf]] と同様です。
-
---- puts([obj[, ...]])
-#@todo
-
-[[m:IO#puts]] と同様です。
-
---- read([length[, buf]])
-#@todo
-
-[[m:IO#read]] と同様です。
-
---- readchar
-#@todo
-
-[[m:IO#readchar]] と同様です。
-
---- readlines([rs])
-#@todo
-
-[[m:IO#readlines]] と同様です。
-
---- setsockopt(level, optname, optval)
-#@todo
-
-[[m:BasicSocket#setsockopt]] と同様です。
-
-#@since 1.8.1
---- sync_close
---- sync_close=
 #@todo
 #@end
 
@@ -233,19 +284,27 @@ close していたら true を返します。
 
 [[m:IO#syswrite]] と同様です。
 
---- ungetc(char)
+--- accept_nonblock
 #@todo
 
-[[m:IO#ungetc]] と同様です。
-
---- write(str)
+--- connect_nonblock
 #@todo
 
-[[m:IO#write]] と同様です。
-
-== Constants
-
---- BLOCK_SIZE
+--- hostname
 #@todo
 
-#@end
+--- hostname=
+#@todo
+
+--- session
+#@todo
+
+--- session=
+#@todo
+
+--- session_reused?
+#@todo
+
+--- verify_result
+#@todo
+

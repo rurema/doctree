@@ -1,7 +1,19 @@
-#@if (version >= "1.8.0")
 = class OpenSSL::SSL::SSLContext < Object
 
-SSL ¥³¥ó¥Æ¥¯¥¹¥È¥¯¥é¥¹
+SSL ¥³¥ó¥Æ¥­¥¹¥È¥¯¥é¥¹¡£
+
+SSL ¥³¥Í¥¯¥·¥ç¥ó([[c:OpenSSL::SSL::SSLSocket]] ¤ä [[c:OpenSSL::SSL::SSLSocket]])
+¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤¹¤ë¤¿¤á¤Î¥Õ¥¡¥¯¥È¥ê¥¯¥é¥¹¤Ç¤¹¡£
+¥³¥Í¥¯¥·¥ç¥ó¤òÀ¸À®¤¹¤ë¤¿¤á¤ËÉ¬Í×¤Ê¥Ñ¥é¥á¡¼¥¿(¥×¥í¥È¥³¥ë¤Î¥Ð¡¼¥¸¥ç¥ó¡¢
+¾ÚÌÀ½ñ¤Î¾ðÊó¡¢Ç§¾Ú¤ÎÍ×·ï¤Ê¤É)¤òÊÝ»ý¤·¤Þ¤¹¡£
+
+¥³¥Í¥¯¥·¥ç¥ó¤ò1ÅÙÀ¸À®¤·¤Æ°Ê¹ß¤Ï¡¢¥³¥ó¥Æ¥­¥¹¥È¤¬ÊÝ»ý¤·¤Æ¤¤¤ë¥Ñ¥é¥á¡¼¥¿¤ò
+ÊÑ¹¹¤¹¤Ù¤­¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£¥³¥Í¥¯¥·¥ç¥ó¥ª¥Ö¥¸¥§¥¯¥È¤Ï
+¥³¥ó¥Æ¥­¥¹¥È¤¬»ý¤Ä¥Ñ¥é¥á¡¼¥¿¤Î°ìÉô¤ò»²¾È¤Ë¤è¤Ã¤ÆÊÝ»ý¤¹¤ë¤¿¤á¡¢
+¥³¥ó¥Æ¥­¥¹¥ÈÂ¦¤Î¥Ñ¥é¥á¡¼¥¿¤ÎÊÑ¹¹¤¬¥³¥Í¥¯¥·¥ç¥óÂ¦¤Ë°ÅÌÛ¤ËÅÁ¤ï¤ë²ÄÇ½À­¤¬
+¤¢¤ë¤¿¤á¤Ç¤¹¡£¤³¤ì¤Ï¥³¥Í¥¯¥·¥ç¥ó¤Î¾õÂÖ¤Î°ì´ÓÀ­¤òÂ»¤¦²ÄÇ½À­¤¬¤¢¤ê¤Þ¤¹¡£
+³Æ¥³¥Í¥¯¥·¥ç¥ó¤´¤È¤ËÊÑ¹¹¤·¤¿¤¤¥Ñ¥é¥á¡¼¥¿¤Ï¤³¤Î¥¯¥é¥¹¤Î¥á¥½¥Ã¥É¤Ç¤Ï¤Ê¤¯¡¢
+[[c:OpenSSL::SSL::SSLContext]] ¤Î¥á¥½¥Ã¥É¤ÇÊÑ¹¹¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 
 === Constants
@@ -9,36 +21,77 @@ verify_mode= ¤È options= ¤Ç»ØÄê¤Ç¤­¤ëÄê¿ô¤Ë´Ø¤·¤Æ¤Ï [[c:OpenSSL::SSL]] ¤ò»²¾È¤·¤
 
 == Class Methods
 
---- new(ssl_method)
---- new
-#@todo
+--- new(ssl_method) -> OpenSSL::SSL::SSLContext
+--- new -> OpenSSL::SSL::SSLContext
+SSL ¥³¥ó¥Æ¥­¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
 
-SSLContext ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£ssl_method ¤Ç TLS/SSL method ¤ò»ØÄê¤·¤Þ¤¹¡£ssl_method ¤ÏÊ¸»úÎó¤«¥·¥ó¥Ü¥ë¤òÍ¿¤¨¤Þ¤¹¡£»ØÄê¤Ç¤­¤ë¤Î¤Ï°Ê²¼¤Î¤¤¤º¤ì¤«¤Ç¤¹¡£SSL_CTX_new ¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+ssl_method ¤ÇÍøÍÑ¤¹¤ë¥×¥í¥È¥³¥ë¤Î¼ïÎà¤òÊ¸»úÎó¤â¤·¤¯¤Ï
+¥·¥ó¥Ü¥ë¤Ç»ØÄê¤·¤Þ¤¹¡£°Ê²¼¤Î¤¤¤º¤ì¤«¤¬ÍøÍÑ²ÄÇ½¤Ç¤¹¡£
+  * 'TLSv1'         TLSv1¥µ¡¼¥Ð¥¯¥é¥¤¥¢¥ó¥ÈÎ¾ÍÑ
+  * 'TLSv1_server'  TLSv1¥µ¡¼¥ÐÍÑ
+  * 'TLSv1_client'  TLSv1¥¯¥é¥¤¥¢¥ó¥ÈÍÑ
+  * 'SSLv2'         SSLv2¥µ¡¼¥Ð¥¯¥é¥¤¥¢¥ó¥ÈÎ¾ÍÑ
+  * 'SSLv2_server'  SSLv2¥µ¡¼¥ÐÍÑ
+  * 'SSLv2_client'  SSLv2¥¯¥é¥¤¥¢¥ó¥ÈÍÑ
+  * 'SSLv3'         SSLv3¥µ¡¼¥Ð¥¯¥é¥¤¥¢¥ó¥ÈÎ¾ÍÑ
+  * 'SSLv3_server'  SSLv3¥µ¡¼¥ÐÍÑ
+  * 'SSLv3_client'  SSLv3¥¯¥é¥¤¥¢¥ó¥ÈÍÑ
+  * 'SSLv23'        SSLv2,3/TLSv1¥µ¡¼¥Ð¥¯¥é¥¤¥¢¥ó¥ÈÎ¾ÍÑ
+  * 'SSLv23_server' SSLv2,3/TLSv1¥µ¡¼¥ÐÍÑ
+  * 'SSLv23_client' SSLv2,3/TLSv1¥¯¥é¥¤¥¢¥ó¥ÈÍÑ
 
-  'TLSv1', 'TLSv1_server', 'TLSv1_client', 'SSLv2', 'SSLv2_server', 'SSLv2_client',
-  'SSLv3', 'SSLv3_server', 'SSLv3_client', 'SSLv23', 'SSLv23_server', 'SSLv23_client'
+SSLv2 ¤Ï¥×¥í¥È¥³¥ë¾å¤ÎÀÈ¼åÀ­¤¬ÌÀ¤é¤«¤Ë¤µ¤ì¤Æ¤¤¤ë¤¿¤á»È¤¦¤Ù¤­¤Ç¤Ï¤¢¤ê¤Þ¤»¤ó¡£
+
+SSLv2 ¤ÏÌµ¸ú²½¤·¤Æ SSLv3 ¤È TLSv1 ¤ÎÎ¾Êý¤òÍ­¸ú²½¤¹¤ë¤¿¤á¤Ë¤Ï
+'SSLv23' ¤ò»ØÄê¤·¡¢[[m:OpenSSL::SSL::SSLContext#options=]] ¤Ç
+[[m:OpenSSL::SSL::OP_NO_SSLv2]] ¤ò»ØÄê¤·¤Þ¤¹¡£
+
+@param ssl_method ¥×¥í¥È¥³¥ë¤òÉ½¤¹Ê¸»úÎó¤â¤·¤¯¤Ï¥·¥ó¥Ü¥ë
+@see [[m:OpenSSL::SSL::SSLContext#ssl_version=]]
 
 == Instance Methods
 
---- ciphers
+--- ciphers -> Array
+ÍøÍÑ²ÄÇ½¤Ê¶¦ÄÌ¸°°Å¹æ¤Î¼ïÎà¤òÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+
+ÇÛÎó¤Î³ÆÍ×ÁÇ¤Ï°Ê²¼¤Î¤è¤¦¤ÊÇÛÎó¤Ç¤¹
+  [°Å¹æÊý¼°¤ÎÌ¾Á°¤ÎÊ¸»úÎó, ÍøÍÑ²ÄÇ½¤ÊSSL/TLS¤Î¥Ð¡¼¥¸¥ç¥óÊ¸»úÎó, ¸°Ä¹(¥Ó¥Ã¥È¿ô), ¥¢¥ë¥´¥ê¥º¥à¤Î¥Ó¥Ã¥ÈÄ¹]
+Îã:
+  require 'openssl'
+  ctx = OpenSSL::SSL::SSLContext.new('TLSv1')
+  ctx.ciphers
+  # => [["DHE-RSA-AES256-SHA", "TLSv1/SSLv3", 256, 256], 
+  #     ["DHE-DSS-AES256-SHA", "TLSv1/SSLv3", 256, 256], ... ]
+
 --- ciphers=(ciphers)
-#@todo
+ÍøÍÑ²ÄÇ½¤Ê¶¦ÄÌ¸°°Å¹æ¤òÀßÄê¤·¤Þ¤¹¡£
 
-»ÈÍÑ²ÄÇ½¤Ê°Å¹æ¤ÎÇÛÎó¤Ç¤¹¡£°Ê²¼¤Î¤è¤¦¤Ê·Á¼°¤Ç¤¹¡£
+¤³¤ì¤Ë¤è¤Ã¤Æ¡¢SSL ¥³¥Í¥¯¥·¥ç¥ó¤Ë¤ª¤¤¤Æ
+ÆÃÄê¤Î¶¦ÄÌ¸°°Å¹æ¤À¤±¤òÍøÍÑ²ÄÇ½¤Ë¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
-  [["EDH-RSA-DES-CBC3-SHA", "TLSv1/SSLv3", 168, 168], ...]
+»ØÄê¤ÎÊýË¡¤Ï2¼ïÎà¤¢¤ê¤Þ¤¹¡£1¤Ä¤Ï
+  "ALL:!ADH:!LOW:!EXP:!MD5:@STRENGTH"
+¤Î¤è¤¦¤ÊÊ¸»úÎó¤Ç»ØÄê¤¹¤ëÊýË¡¤Ç¡¢¤â¤¦°ì¤Ä¤ÏÇÛÎó¤Ç
+  ["ALL", "!ADH", "!LOW", "!EXP", "!MD5", "@STRENGHT"]
+¤È¤¤¤¦ÇÛÎó¤Ç»ØÄê¤¹¤ëÊýË¡¤Ç¤¹¡£¾å¤Î2¤Ä¤ÎÎã¤ÏÆ±¤¸
+ÆâÍÆ¤ò°ÕÌ£¤·¤Æ¤¤¤Þ¤¹¡£
+¾Ü¤·¤¯¤Ï OpenSSL ¤Î¥Þ¥Ë¥å¥¢¥ë¤Î
+SSL_CTX_set_cipher_list ¤Î¹à¤ò¸«¤Æ¤¯¤À¤µ¤¤¡£
 
---- ca_file
+@param ciphers ÍøÍÑ²ÄÇ½¤Ë¤¹¤ë¶¦ÄÌ¸°°Å¹æ¤Î¼ïÎà
+@raise OpenSSL::SSL::SSLError ÀßÄê¤Ë¼ºÇÔ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹
+
+--- ca_file -> String | nil
+ÀÜÂ³Áê¼ê¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤òÊÖ¤·¤Þ¤¹¡£
+
+ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#ca_file=]]
 --- ca_file=(ca)
-#@todo
+ÀÜÂ³Áê¼ê¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤ò
+ÀßÄê¤·¤Þ¤¹¡£
 
-ÀÜÂ³Áê¼ê¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹¤Ç¤¹¡£°Ê²¼¤Î¤è¤¦¤ËÊ£¿ô¤Î¾ÚÌÀ½ñ¤ò´Þ¤ó¤Ç¤¤¤Æ¤â¹½¤¤¤Þ¤»¤ó¡£
-
-  (¤³¤³¤Ë¾ÚÌÀ½ñ¤ÎÀâÌÀ)
-
-  -----BEGIN CERTIFICATE-----
-  ... (CA certificate in base64 encoding) ...
-  -----END CERTIFICATE-----
+¥Õ¥¡¥¤¥ë¤Ï°Ê²¼¤Î¤è¤¦¤ËÊ£¿ô¤Î¾ÚÌÀ½ñ¤ò´Þ¤ó¤Ç¤¤¤Æ¤â¹½¤¤¤Þ¤»¤ó¡£
 
   (¤³¤³¤Ë¾ÚÌÀ½ñ¤ÎÀâÌÀ)
 
@@ -46,86 +99,286 @@ SSLContext ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£ssl_method ¤Ç TLS/SSL method ¤ò»ØÄê¤·¤Þ¤¹¡£
   ... (CA certificate in base64 encoding) ...
   -----END CERTIFICATE-----
 
---- ca_path
+  (¤³¤³¤Ë¾ÚÌÀ½ñ¤ÎÀâÌÀ)
+
+  -----BEGIN CERTIFICATE-----
+  ... (CA certificate in base64 encoding) ...
+  -----END CERTIFICATE-----
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¤¹¡£
+
+@param ca CA¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤Î¥Ñ¥¹Ê¸»úÎó
+@see [[m:OpenSSL::SSL::SSLContext#ca_file=]]
+
+--- ca_path -> String | nil
+¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤ò´Þ¤à¥Ç¥£¥ì¥¯¥È¥ê¤òÊÖ¤·¤Þ¤¹¡£
+
+ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#ca_path=]]
+
 --- ca_path=(ca)
-#@todo
+ÀÜÂ³Áê¼ê¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢
+¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤ò´Þ¤à¥Ç¥£¥ì¥¯¥È¥ê¤òÀßÄê¤·¤Þ¤¹¡£
 
-ÀÜÂ³Áê¼ê¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤ò´Þ¤à¥Ç¥£¥ì¥¯¥È¥ê¤Ç¤¹¡£
+@param ca CA ¾ÚÌÀ½ñ¥Õ¥¡¥¤¥ë¤ò´Þ¤à¥Ç¥£¥ì¥¯¥È¥êÌ¾Ê¸»úÎó
+@see [[m:OpenSSL::SSL::SSLContext#ca_path]]
 
---- cert
+--- cert -> OpenSSL::X509::Certificate
+¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¤¿¤á¤Î¾ÚÌÀ½ñ¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil (¾ÚÌÀ½ñ¤Ê¤·)¤Ç¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#cert]]
+
 --- cert=(certificate)
-#@todo
+¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¤¿¤á¤Î¾ÚÌÀ½ñ¤òÀßÄê¤·¤Þ¤¹¡£
 
-½êÍ­¤·¤Æ¤¤¤ë¾ÚÌÀ½ñ¤Ç¤¹¡£ [[c:OpenSSL::X509::Certificate]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
+¥Ç¥Õ¥©¥ë¥È¤Ï nil (¾ÚÌÀ½ñ¤Ê¤·)¤Ç¤¹¡£
 
---- cert_store
---- cert_store=(store)
-#@todo
+@param certificate ÀßÄê¤¹¤ë¾ÚÌÀ½ñ([[c:OpenSSL::X509::Certificate]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹)
+@see [[m:OpenSSL::SSL::SSLContext#cert=]]
 
-ÀÜÂ³Áê¼ê¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¤Î¥¹¥È¥ì¡¼¥¸¤Ç¤¹¡£ [[c:OpenSSL::X509::Store]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£ÄÌ¾ï¤Ï ca_path=(path) ¤ä ca_file=(path) ¤ò»È¤¤¤Þ¤¹¡£
+--- cert_store -> OpenSSL::X509::Store
+ÀÜÂ³Áê¼ê¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¤ò
+´Þ¤à¾ÚÌÀ½ñ¥¹¥È¥¢¤òÊÖ¤·¤Þ¤¹¡£
 
---- client_ca
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#cert_store=]]
+
+--- cert_store=(store) 
+ÀÜÂ³Áê¼ê¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤Î¤¿¤á¤Ë»È¤¦¡¢¿®Íê¤·¤Æ¤¤¤ë CA ¾ÚÌÀ½ñ¤ò
+´Þ¤à¾ÚÌÀ½ñ¥¹¥È¥¢¤òÀßÄê¤·¤Þ¤¹¡£
+
+ÄÌ¾ï¤Ï [[m:OpenSSL::SSL::SSLContext#ca_path=]] ¤ä
+[[m:OpenSSL::SSL::SSLContext#ca_file=]] ¤Ç¾ÚÌÀ½ñ¤òÀßÄê¤·¤Þ¤¹¤¬¡¢
+CRL ¤ò»È¤¤¤¿¤¤¤Ê¤É¡¢¤è¤ê¾ÜºÙ¤ÊÀßÄê¤ò¤·¤¿¤¤¾ì¹ç¤Ë¤Ï¤³¤ì¤ò»È¤¤¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil (¾ÚÌÀ½ñ¥¹¥È¥¢¤ò»ØÄê¤·¤Ê¤¤)¤Ç¤¹¡£
+
+@param store ÀßÄê¤¹¤ë¾ÚÌÀ½ñ¥¹¥È¥¢([[c:OpenSSL::X509::Store]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹)
+@see [[m:OpenSSL::SSL::SSLContext#cert_store]]
+
+--- client_ca -> [OpenSSL::X509::Certificate] | OpenSSL::X509::Certificate | nil
+¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤òÍ×µá¤¹¤ë»þ¤Ë¥¯¥é¥¤¥¢¥ó¥È¤ËÁ÷¤ë CA ¤Î¥ê¥¹¥È
+¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#client_ca=]]
+
 --- client_ca=(ca)
-#@todo
+¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤òÍ×µá¤¹¤ë»þ¤Ë¥¯¥é¥¤¥¢¥ó¥È¤ËÁ÷¤ë CA ¾ÚÌÀ½ñ¤Î¥ê¥¹¥È
+¤òÀßÄê¤·¤Þ¤¹¡£
 
-¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤òÍ×µá¤¹¤ë»þ¤Ë¥¯¥é¥¤¥¢¥ó¥È¤ËÁ÷¤ë CA ¤Î¥ê¥¹¥È¤Ç¤¹¡£CA ¤Î Certificate ¥ª¥Ö¥¸¥§¥¯¥È¤ÎÇÛÎó¤Ç¤¹¡£¤³¤Î¥ê¥¹¥È¤Ë´Þ¤Þ¤ì¤ë CA ¡½¤¢¤ë¤Ï¤½¤Î²¼°Ì¤Î CA¡½¤Ë½ðÌ¾¤µ¤ì¤¿¾ÚÌÀ½ñ¤ò¥¯¥é¥¤¥¢¥ó¥È¤ÏÁ÷¤êÊÖ¤¹¤³¤È¤Ë¤Ê¤Ã¤Æ¤¤¤Þ¤¹¡£
+¥¯¥é¥¤¥¢¥ó¥È¤ÏÄó¼¨¤·¤¿ CA ¤«¤éÍøÍÑ²ÄÇ½(½ðÌ¾¤µ¤ì¤Æ¤¤¤ë)¤Ê¾ÚÌÀ½ñ¤ò
+Á÷¤êÊÖ¤·¤Þ¤¹¡£
+
+[[c:OpenSSL::X509::Certificate]] ¤ÎÇÛÎó¤òÅÏ¤·¤Þ¤¹¡£1¤Ä¤Î¾ì¹ç¤Ï
+[[c:OpenSSL::X509::Certificate]] ¥ª¥Ö¥¸¥§¥¯¥È¼«ÂÎ¤òÅÏ¤·¤Æ¤â¤«¤Þ¤¤¤Þ¤»¤ó¡£
+
+@param ca ¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤òÍ×µá¤¹¤ë¤È¤­¤ËÄó¼¨¤¹¤ë¾ÚÌÀ½ñ¤ÎÇÛÎó
+@see [[m:OpenSSL::SSL::SSLContext#client_ca]]
 
 #@since 1.8.3
 --- client_cert_cb
---- client_cert_cb=
-#@todo
+[[m:OpenSSL::SSL::SSLContext#cert=]] ¤Ç¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤ò
+¥»¥Ã¥È¤·¤Æ¤¤¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¥µ¡¼¥Ð¤«¤é¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤ÎÍ×µá¤¬Íè¤¿¤È¤­¤Ë
+¸Æ¤Ó¤À¤µ¤ì¤ë¥³¡¼¥ë¥Ð¥Ã¥¯¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil (¥³¡¼¥ë¥Ð¥Ã¥¯¤Ê¤·)¤Ç¤¹¡£
+@see [[m:OpenSSL::SSL::SSLContext#client_cert_cb=]]
+
+--- client_cert_cb=(cb)
+[[m:OpenSSL::SSL::SSLContext#cert=]] ¤Ç¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤ò
+¥»¥Ã¥È¤·¤Æ¤¤¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë¥µ¡¼¥Ð¤«¤é¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ¤ÎÍ×µá¤¬Íè¤¿¤È¤­¤Ë
+¸Æ¤Ó¤À¤µ¤ì¤ë¥³¡¼¥ë¥Ð¥Ã¥¯¥ª¥Ö¥¸¥§¥¯¥È¤òÀßÄê¤·¤Þ¤¹¡£
+
+¥³¡¼¥ë¥Ð¥Ã¥¯¤ËÅÏ¤µ¤ì¤ë°ú¿ô¤Ï1¤Ä¤Ç¡¢ÍøÍÑ¤·¤Æ¤¤¤ë [[c:OpenSSL::SSL::SSLSocket]]
+¥ª¥Ö¥¸¥§¥¯¥È¤¬ÅÏ¤µ¤ì¤Þ¤¹¡£¤½¤Î¥ª¥Ö¥¸¥§¥¯¥È¤«¤éÉ¬Í×¤Ê¾ÚÌÀ½ñ¤ò¸«¤Ä¤±¤ë¤Î¤Ë
+É¬Í×¤Ê¾ðÊó¤ò¼èÆÀ¤·¤Þ¤¹¡£
+¥³¡¼¥ë¥Ð¥Ã¥¯¤Ï¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ([[c:OpenSSL::X509::Certificate]])
+¤È¤½¤ÎÈëÌ©¸°([[c:OpenSSL::PKey::PKey]])¤Î¥Ú¥¢¤ÎÇÛÎó¤òÊÖ¤µ¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+
+¾ÚÌÀ½ñ¤È¸°¤¬¸«ÉÕ¤«¤é¤Ê¤¤¾ì¹ç¤Ï nil ¤òÊÖ¤·¤Æ¤¯¤À¤µ¤¤¡£
+¤Þ¤¿¡¢¤³¤Î¥³¡¼¥ë¥Ð¥Ã¥¯Æâ¤ÇÎã³°¤¬È¯À¸¤¹¤ë¤È¡¢Å¬Åö¤Ê¾ÚÌÀ½ñ¤¬¸«ÉÕ¤«¤é¤Ê¤«¤Ã¤¿¤È
+È½ÃÇ¤µ¤ì¤Þ¤¹¡£¤³¤Î¤È¤­Îã³°¤Ï OpenSSL ¤Î¥é¥¤¥Ö¥é¥ê¤Ë¤è¤Ã¤Æ°®¤êÄÙ¤µ¤ì¤Æ
+¤·¤Þ¤¤¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¡¢¥³¡¼¥ë¥Ð¥Ã¥¯¤Ê¤·¤ò°ÕÌ£¤·¤Þ¤¹¡£¤³¤Î¾ì¹ç
+
+Îã
+  ctx = OpenSSL::SSL::SSLContext.new(ssl_method)
+  ctx.client_cert_cb = proc{|sslsocket|
+    # sslsocket ¤«¤é¥³¥Í¥¯¥·¥ç¥ó¤Î¾ðÊó¤ò¼è¤ê½Ð¤·¡¢
+    # ¥¯¥é¥¤¥¢¥ó¥È¾ÚÌÀ½ñ(cert)¤È¤½¤ÎÈëÌ©¸°(privkey)¤òÃµ¤·¤À¤¹
+    [cert, privkey]
+  }
+
+@param cb ¥³¡¼¥ë¥Ð¥Ã¥¯¥ª¥Ö¥¸¥§¥¯¥È([[c:Proc]]¡¢[[c:Method]] ¤Ê¤É)
+@see [[m:OpenSSL::SSL::SSLContext#client_cert_cb]]
 #@end
 
 #@since 1.8.1
---- extra_chain_cert
+--- extra_chain_cert -> [OpenSSL::X509::Certificate] | nil
+¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¾ÚÌÀ½ñ¤«¤é¥ë¡¼¥È CA ¤Þ¤Ç¤Î¾ÚÌÀ½ñ¤Î¥ê¥¹¥È¤Ç¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#extra_chain_cert=]]
+
 --- extra_chain_cert=(certificates)
-#@todo
+¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¾ÚÌÀ½ñ¤«¤é¥ë¡¼¥È CA ¤Þ¤Ç¤Î¾ÚÌÀ½ñ¤Î¥ê¥¹¥È¤òÇÛÎó¤ÇÀßÄê¤·¤Þ¤¹¡£
 
-¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤Ç¤¹¡£½êÍ­¤·¤Æ¤¤¤ë¾ÚÌÀ½ñ¤«¤é¥ë¡¼¥È CA ¤Þ¤Ç¤Î¾ÚÌÀ½ñ¤Î¥ê¥¹¥È¤Ç¤¹¡£¤³¤ì¤ò»ØÄê¤·¤Ê¤¤¾ì¹ç¡¢ca_file ¤ä ca_path ¤Ç»ØÄê¤·¤¿¿®Íê¤µ¤ì¤Æ¤¤¤ë¾ÚÌÀ½ñ¤Î¥¹¥È¥ì¡¼¥¸¤«¤é¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò¹½À®¤·¤è¤¦¤È¤·¤Þ¤¹¡£ ½ç½ø¤Ï°Ê²¼¤ÎÄÌ¤ê¤Ç¤¹¡£
+[[m:OpenSSL::SSL::SSLContext#cert]] ¤ÇÀßÄê¤·¤¿¾ÚÌÀ½ñ¤«¤éÁê¼ê¤¬»ý¤Ã¤Æ¤¤¤ë¤È
+´üÂÔ¤µ¤ì¤ë¥ë¡¼¥È CA ¾ÚÌÀ½ñ¤Þ¤Ç¤Î¥ê¥¹¥È¤òÅÏ¤·¤Þ¤¹¡£
 
-  [½êÍ­¤·¤Æ¤¤¤ë¾ÚÌÀ½ñ, ²¼°Ì CA ¾ÚÌÀ½ñ, ... Ãæ´Ö CA ¾ÚÌÀ½ñ]
+¤³¤ì¤Ë¤è¤Ã¤ÆÀÜÂ³Áê¼ê¤Ï¥Á¥§¥¤¥ó¤òÃ©¤ë¤³¤È¤Ç¤½¤ÎÁê¼ê¤¬¿®Íê¤·¤Æ¤¤¤Ê¤¤¾ÚÌÀ½ñ¤Î
+¿®ÍêÀ­¤ò½ç¤Ë³ÎÇ§¤·¡¢¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¾ÚÌÀ½ñ¤Î¿®ÍêÀ­¤ò³ÎÇ§¤·¤Þ¤¹¡£
+
+#@# ¤³¤ì¤ò»ØÄê¤·¤Ê¤¤¾ì¹ç¡¢ca_file ¤ä ca_path ¤Ç»ØÄê¤·¤¿¿®Íê¤µ¤ì¤Æ¤¤¤ë
+#@# ¾ÚÌÀ½ñ¤Î¥¹¥È¥ì¡¼¥¸¤«¤é¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò¹½À®¤·¤è¤¦¤È¤·¤Þ¤¹¡£ ½ç½ø¤Ï°Ê²¼¤ÎÄÌ¤ê¤Ç¤¹¡£
+#@#   [½êÍ­¤·¤Æ¤¤¤ë¾ÚÌÀ½ñ, ²¼°Ì CA ¾ÚÌÀ½ñ, ... Ãæ´Ö CA ¾ÚÌÀ½ñ]
+@param certificates ÀßÄê¤¹¤ë¾ÚÌÀ½ñ¥Á¥§¥¤¥ó([[c:OpenSSL::X509::Certificate]] ¤Î
+       ÇÛÎó)
+@see [[m:OpenSSL::SSL::SSLContext#extra_chain_cert]]
+
 #@end
 
---- key
+--- key -> OpenSSL::PKey::PKey | nil
+[[m:OpenSSL::SSL::SSLContext#cert]] ¤ÇÆÀ¤é¤ì¤ë¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¤¿¤á¤Î
+¾ÚÌÀ½ñ¤Î¸ø³«¸°¤ËÂÐ±þ¤¹¤ëÈëÌ©¸°¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#key=]]
+
 --- key=(key)
-#@todo
+[[m:OpenSSL::SSL::SSLContext#cert=]] ¤ÇÀßÄê¤µ¤ì¤¿¼«Ê¬¼«¿È¤ò¾ÚÌÀ¤¹¤ë¤¿¤á¤Î
+¾ÚÌÀ½ñ¤Î¸ø³«¸°¤ËÂÐ±þ¤¹¤ëÈëÌ©¸°¤òÀßÄê¤·¤Þ¤¹¡£
 
-½êÍ­¤·¤Æ¤¤¤ë¾ÚÌÀ½ñ¤Ëµ­ºÜ¤µ¤ì¤Æ¤¤¤ë¸ø³«¸°¤ËÂÐ±þ¤¹¤ëÈëÌ©¸°¤Ç¤¹¡£
+¥Ç¥Õ¥©¥ë¥È¤Ê nil ¤Ç¤¹¡£
 
---- options
+@param key ÀßÄê¤¹¤ëÈëÌ©¸°([[c:OpenSSL::PKey::PKey]] ¤Î¥µ¥Ö¥¯¥é¥¹¤Î¥¤¥ó¥¹¥¿¥ó¥¹)
+@see [[m:OpenSSL::SSL::SSLContext#key]]
+
+--- options -> Integer | nil
+ÀßÄê¤µ¤ì¤Æ¤¤¤ë¥ª¥×¥·¥ç¥ó¥Õ¥é¥°¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#options=]]
+
 --- options=(options)
-#@todo
+¥ª¥×¥·¥ç¥ó¤òÀßÄê¤·¤Þ¤¹¡£
 
-¥ª¥×¥·¥ç¥ó¡£Äê¿ô OP_* ¤Î¥Ó¥Ã¥È¥Þ¥¹¥¯¤Ç»ØÄê¤·¤Þ¤¹¡£
+°Ê²¼¤ÎÃÍ¤Î OR ¤Ç»ØÄê¤·¤Þ¤¹¡£
+  * [[m:OpenSSL::SSL::OP_ALL]]
+  * [[m:OpenSSL::SSL::OP_CIPHER_SERVER_PREFERENCE]]
+  * [[m:OpenSSL::SSL::OP_EPHEMERAL_RSA]]
+  * [[m:OpenSSL::SSL::OP_NETSCAPE_CA_DN_BUG]]
+  * [[m:OpenSSL::SSL::OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG]]
+  * [[m:OpenSSL::SSL::OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION ]]
+  * [[m:OpenSSL::SSL::OP_NO_SSLv2]]
+  * [[m:OpenSSL::SSL::OP_NO_SSLv3]]
+  * [[m:OpenSSL::SSL::OP_NO_TLSv1]]
+  * [[m:OpenSSL::SSL::OP_NO_TICKET]]
+  * [[m:OpenSSL::SSL::OP_PKCS1_CHECK_1]]
+  * [[m:OpenSSL::SSL::OP_PKCS1_CHECK_2]]
+  * [[m:OpenSSL::SSL::OP_SINGLE_DH_USE]]
+  * [[m:OpenSSL::SSL::OP_SINGLE_ECDH_USE]]
+  * [[m:OpenSSL::SSL::OP_TLS_ROLLBACK_BUG]]
 
---- timeout
+@param options ÀßÄê¤¹¤ë¥ª¥×¥·¥ç¥ó¥Õ¥é¥°(À°¿ôÃÍ)
+@see [[m:OpenSSL::SSL::SSLContext#options]]
+
+--- timeout -> Integer | nil
+--- ssl_timeout -> Integer | nil
+
+¤³¤Î¥³¥ó¥Æ¥­¥¹¥È¤«¤éÀ¸À®¤¹¤ë¥»¥Ã¥·¥ç¥ó¤Î¥¿¥¤¥à¥¢¥¦¥ÈÉÃ¿ô¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥ÈÃÍ¤Ï nil ¤Ç¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#timeout=]]
+
 --- timeout=(seconds)
-#@todo
+--- ssl_timeout=(seconds)
 
-¥¿¥¤¥à¥¢¥¦¥È¤¹¤ë¤Þ¤Ç¤Î»þ´Ö¤Ç¤¹¡£Ã±°Ì¤ÏÉÃ¤Ç¤¹¡£
+¤³¤Î¥³¥ó¥Æ¥­¥¹¥È¤«¤éÀ¸À®¤¹¤ë¥»¥Ã¥·¥ç¥ó¤Î¥¿¥¤¥à¥¢¥¦¥ÈÉÃ¿ô¤òÀßÄê¤·¤Þ¤¹¡£
 
---- verify_callback
+nil ¤ò»ØÄê¤¹¤ë¤È¥Ç¥Õ¥©¥ë¥È¤Î¥¿¥¤¥à¥¢¥¦¥ÈÉÃ¿ô¤òÍÑ¤¤¤Þ¤¹¡£
+
+@param seconds ¥¿¥¤¥à¥¢¥¦¥ÈÉÃ¿ô(À°¿ô)
+@see [[m:OpenSSL::SSL::SSLContext#timeout]]
+
+
+--- verify_callback -> Proc | nil
+¥ª¥Ö¥¸¥§¥¯¥È¤ËÀßÄê¤µ¤ì¤Æ¤¤¤ë¸¡¾Ú¤ò¥Õ¥£¥ë¥¿¤¹¤ë¥³¡¼¥ë¥Ð¥Ã¥¯¤ò
+ÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Î¥³¡¼¥ë¥Ð¥Ã¥¯¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤ë¾ì¹ç¤Ë¤Ï nil ¤òÊÖ¤·¤Þ¤¹¡£
+
+@see [[m:OpenSSL::X509::Store#verify_callback]],
+     [[m:OpenSSL::SSL::SSLContext#verify_callback=]]
+
 --- verify_callback=(proc)
-#@todo
+¸¡¾Ú¤ò¥Õ¥£¥ë¥¿¤¹¤ë¥³¡¼¥ë¥Ð¥Ã¥¯¤òÀßÄê¤·¤Þ¤¹¡£
 
-ÄÌ¾ï¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤Ë²Ã¤¨¤Æ¤µ¤é¤ËÅ¬ÍÑ¤µ¤ì¤ë [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£¤³¤Î Proc ¥ª¥Ö¥¸¥§¥¯¥È¤Ï preverify_ok ¤È ctx Æó¤Ä¤Î°ú¿ô¤ò¤È¤ê¤Þ¤¹¡£preverify_ok ¤Ï true ¤« false ¤ÎÃÍ¤ò¤È¤ê¡¢verify_mode ¤ÇÀßÄê¤·¤¿ÄÌ¾ï¤Î¾ÚÌÀ½ñ¤Î¸¡¾Ú¤¬À®¸ù¤·¤¿¤«¤É¤¦¤«¤Ç·è¤Þ¤ê¤Þ¤¹¡£ctx ¤Ï SSLContext ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£¤³¤Î Proc ¥ª¥Ö¥¸¥§¥¯¥È¤Ï true ¤« false ¤òÊÖ¤¹É¬Í×¤¬¤¢¤ê¤Þ¤¹¡£
+[[m:OpenSSL::X509::Store#verify_callback=]] ¤ÈÆ±¤¸Æ¯¤­¤ò¤·¤Þ¤¹¡£
 
-  lambda{|preverify_ok, ctx|
-    return true # or false
-  }
+¥³¡¼¥ë¥Ð¥Ã¥¯¤Ë¤Ï [[c:Proc]] ¤ä [[c:Method]] ¤òÅÏ¤·¤Þ¤¹¡£
 
---- verify_depth
+ÅÏ¤µ¤ì¤¿¥³¡¼¥ë¥Ð¥Ã¥¯¥ª¥Ö¥¸¥§¥¯¥È¤Ï¾ÚÌÀ½ñ¥Á¥§¥¤¥ó¤Î¸¡¾Ú»þ¤Ë
+¥Á¥§¥¤¥ó¤Ë´Þ¤Þ¤ì¤ë³Æ¾ÚÌÀ½ñ¤Î½ðÌ¾¤ò¸¡¾Ú¤¹¤ë¤¿¤Ó¤Ë¸Æ¤Ó¤À¤µ¤ì¤Þ¤¹¡£
+¤½¤Î¤È¤­¤ËÅÏ¤µ¤ì¤ë°ú¿ô¤Ï2¤Ä¤Ç¡¢1¤Ä¤á¤Ï¸¡¾Ú¤¬À®¸ù¤·¤¿¤«¤Î¿¿µ¶ÃÍ¡¢
+2¤Ä¤á¤Ï¸¡¾Ú¸å¤Î¾õÂÖ¤òÊÝÂ¸¤·¤¿
+[[c:OpenSSL::X509::StoreContext]] ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤¹¡£
+¤³¤Î¥³¡¼¥ë¥Ð¥Ã¥¯¤Ë¤Ï2¤Ä¤ÎÌò³ä¤¬¤¢¤ê¤Þ¤¹¡£1¤ÄÌÜ¤Ï¥³¥ó¥Æ¥­¥¹¥È¥ª¥Ö¥¸¥§¥¯¥È
+¤òÄ´¤Ù¤ë¤³¤È¤Ç¾ÜºÙ¤Ê¥¨¥é¡¼¾ðÊó¤òÆÀ¤ë¤³¤È¤Ç¤¹¡£2¤ÄÌÜ¤Ï¸¡¾Ú¤ò¥«¥¹¥¿¥Þ¥¤¥º
+¤¹¤ë¤³¤È¤Ç¤¹¡£¤³¤Î¥³¡¼¥ë¥Ð¥Ã¥¯¤¬ true ¤òÊÖ¤¹¤È¡¢¤¿¤È¤¨
+OpenSSL ¤¬¸¡¾Ú¼ºÇÔ¤ÈÈ½Äê¤·¤Æ¤â¡¢¸¡¾Ú¤¬À®¸ù¤·¤¿¤â¤Î¤ÈÈ½ÃÇ¤·¾ÚÌÀ½ñ¥Á¥§¥¤¥ó
+¤Î¸¡¾Ú¤òÂ³¤±¤Þ¤¹¡£µÕ¤Ë false ¤òÊÖ¤¹¤È¡¢¸¡¾Ú¤¬¼ºÇÔ¤·¤¿¤â¤Î¤È¤ß¤Ê¤µ¤ì
+¸¡¾Ú¤òÄä»ß¤·¡¢¸¡¾Ú¥á¥½¥Ã¥É¤Ï¸¡¾Ú¼ºÇÔ¤òÊÖ¤·¤Þ¤¹¡£¾ÜºÙ¤Ê¥¨¥é¡¼¾ðÊó¤ò
+ÆÀ¤¿¤¤¤À¤±¤Î¾ì¹ç¤Ï¥³¡¼¥ë¥Ð¥Ã¥¯¤ÏÂè°ì°ú¿ô¤ò¤½¤Î¤Þ¤ÞÊÖ¤¹¤è¤¦¤Ë¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+nil ¤òÀßÄê¤¹¤ë¤È¥Ç¥Õ¥©¥ë¥È¤Î¥³¡¼¥ë¥Ð¥Ã¥¯(Ã±¤ËÂè°ì°ú¿ô¤ò¤½¤Î¤Þ¤ÞÊÖ¤¹¤À¤±)
+¤¬»È¤ï¤ì¤Þ¤¹¡£
+
+½é´ü¾õÂÖ¤Ï nil ¤Ç¤¹¡£
+
+@param proc ÀßÄê¤¹¤ë [[c:Proc]] ¥ª¥Ö¥¸¥§¥¯¥È
+@see [[m:OpenSSL::SSL::SSLContext#verify_callback]],
+     [[m:OpenSSL::X509::Store#verify_callback=]]
+
+--- verify_depth -> Integer | nil
+¾ÚÌÀ½ñ¥Á¥§¥¤¥ó¾å¤Î¸¡¾Ú¤¹¤ëºÇÂç¤Î¿¼¤µ¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#verify_depth=]]
+
 --- verify_depth=(depth)
-#@todo
+¾ÚÌÀ½ñ¥Á¥§¥¤¥ó¾å¤Î¸¡¾Ú¤¹¤ëºÇÂç¤Î¿¼¤µ¤òÀßÄê¤·¤Þ¤¹¡£
 
-¾ÚÌÀ½ñ¤ò¸¡¾Ú¤¹¤ë¿¼¤µ¤Ç¤¹¡£
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¡¢¤³¤Î¾ì¹ç OpenSSL ¤Î¥Ç¥Õ¥©¥ë¥ÈÃÍ(9)¤¬»È¤ï¤ì¤Þ¤¹¡£
 
---- verify_mode
+@param depth ºÇÂç¿¼¤µ¤òÉ½¤¹À°¿ô
+@see [[m:OpenSSL::SSL::SSLContext#verify_depth=]]
+
+--- verify_mode -> Integer | nil
+¸¡¾Ú¥â¡¼¥É¤òÊÖ¤·¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¤¹¡£
+
+@see [[m:OpenSSL::SSL::SSLContext#verify_mode=]]
 --- verify_mode=(mode)
-#@todo
+¸¡¾Ú¥â¡¼¥É¤òÀßÄê¤·¤Þ¤¹¡£
 
-¸¡¾Ú¥â¡¼¥É¤Ç¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ï nil¡¢¤Ä¤Þ¤ê¸¡¾Ú¤·¤Þ¤»¤ó¡£Äê¿ô¤Î¹à¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£Äê¿ô VERIFY_* ¤Î¥Ó¥Ã¥È¥Þ¥¹¥¯¤Ç»ØÄê¤·¤Þ¤¹¡£
-#@end
+°Ê²¼¤ÎÄê¿ô¤Î OR ¤ò¼è¤Ã¤Æ»ØÄê¤·¤Þ¤¹¡£
+  * [[m:OpenSSL::SSL::VERIFY_NONE]]
+  * [[m:OpenSSL::SSL::VERIFY_PEER]]
+  * [[m:OpenSSL::SSL::VERIFY_CLIENT_ONCE]]
+  * [[m:OpenSSL::SSL::VERIFY_FAIL_IF_NO_PEER_CERT]]
+¤³¤ì¤é¤ÎÄê¿ô¤Î°ÕÌ£¤Ï¥¯¥é¥¤¥¢¥ó¥È¥â¡¼¥É¤È¥µ¡¼¥Ð¥â¡¼¥É¤Ç¤Ï°Û¤Ê¤ë
+°ÕÌ£¤ò»ý¤Á¤Þ¤¹¡£
+
+¥Ç¥Õ¥©¥ë¥È¤Ï nil ¤Ç¡¢VERIFY_NONE ¤ò°ÕÌ£¤·¤Þ¤¹¡£
+
+@param mode ÀßÄê¤¹¤ë¥â¡¼¥É(À°¿ôÃÍ)
+@see [[m:OpenSSL::SSL::SSLContext#verify_mode=]]
 
 #@since 1.8.3
 --- tmp_dh_callback
@@ -138,3 +391,97 @@ SSLContext ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£ssl_method ¤Ç TLS/SSL method ¤ò»ØÄê¤·¤Þ¤¹¡£
 --- session_id_context=
 #@todo
 #@end
+
+--- set_params(params) -> Hash
+¥Ñ¥é¥á¡¼¥¿¤ò¥Ï¥Ã¥·¥å¤ÇÀßÄê¤·¤Þ¤¹¡£
+
+ÅÏ¤¹¥Ï¥Ã¥·¥å¥Æ¡¼¥Ö¥ë¤Ï { ¥Ñ¥é¥á¡¼¥¿Ì¾¤Î¥·¥ó¥Ü¥ë => ¥Ñ¥é¥á¡¼¥¿¤ÎÃÍ } ¤È¤¤¤¦
+·Á¤ò¤·¤Æ¤¤¤Ê¤±¤ì¤Ð¤Ê¤ê¤Þ¤»¤ó¡£
+
+°Ê²¼¤Î¥Ñ¥é¥á¡¼¥¿¤òÀßÄê¤Ç¤­¤Þ¤¹¡£
+  * :cert ([[m:OpenSSL::SSL::SSLContext#cert=]])
+  * :key ([[m:OpenSSL::SSL::SSLContext#key=]])
+  * :client_ca ([[m:OpenSSL::SSL::SSLContext#client_ca=]])
+  * :ca_file ([[m:OpenSSL::SSL::SSLContext#ca_file=]])
+  * :ca_path ([[m:OpenSSL::SSL::SSLContext#ca_path=]])
+  * :timeout ([[m:OpenSSL::SSL::SSLContext#timeout=]])
+  * :verify_mode ([[m:OpenSSL::SSL::SSLContext#verify_mode=]])
+  * :verify_depth ([[m:OpenSSL::SSL::SSLContext#verify_depth=]])
+  * :verify_callback ([[m:OpenSSL::SSL::SSLContext#verify_callback=]])
+  * :options ([[m:OpenSSL::SSL::SSLContext#options=]])
+  * :cert_store ([[m:OpenSSL::SSL::SSLContext#cert_store=]])
+  * :extra_chain_cert ([[m:OpenSSL::SSL::SSLContext#extra_chain_cert=]])
+  * :client_cert_cb ([[m:OpenSSL::SSL::SSLContext#client_cert_cb=]])
+  * :tmp_dh_callback ([[m:OpenSSL::SSL::SSLContext#tmp_dh_callback=]])
+  * :session_id_context ([[m:OpenSSL::SSL::SSLContext#session_id_context=]])
+  * :session_get_cb ([[m:OpenSSL::SSL::SSLContext#session_get_cb=]])
+  * :session_new_cb ([[m:OpenSSL::SSL::SSLContext#session_new_cb=]])
+  * :session_remove_cb ([[m:OpenSSL::SSL::SSLContext#session_remove_cb=]])
+  * :servername_cb ([[m:OpenSSL::SSL::SSLContext#servername_cb=]])
+»ØÄê¤µ¤ì¤Ê¤«¤Ã¤¿¥Ñ¥é¥á¡¼¥¿¤Ï [[m:OpenSSL::SSL::SSLContext::DEFAULT_PARAMS]] 
+¤ÎÃÍ¤Ç½é´ü²½¤µ¤ì¤Þ¤¹¡£
+
+--- ssl_version=(ver)
+ÍøÍÑ¤¹¤ë¥×¥í¥È¥³¥ë¤Î¼ïÎà¤òÊ¸»úÎó¤â¤·¤¯¤Ï
+¥·¥ó¥Ü¥ë¤Ç»ØÄê¤·¤Þ¤¹¡£
+
+[[m:OpenSSL::SSL::SSLContext.new]] ¤Ç»ØÄê¤Ç¤­¤ë¤â¤Î¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@param ver ÍøÍÑ¤¹¤ë¥×¥í¥È¥³¥ë¤Î¼ïÎà
+
+--- servername_cb
+--- servername_cb=
+--- session_add
+--- session_cache_mode
+--- session_cache_mode=
+--- session_cache_size
+--- session_cache_size=
+--- session_cache_stats
+--- session_get_cb
+--- session_get_cb=
+--- session_new_cb
+--- session_new_cb=
+--- session_remove
+--- session_remove_cb
+--- session_remove_cb=
+#@# --- setup -> true
+#@# ÆâÉôÅª¤ËÍøÍÑ¤µ¤ì¤ë¥á¥½¥Ã¥É
+--- flush_sessions
+#@todo
+
+== Constants
+--- DEFAULT_CERT_STORE -> OpenSSL::X509::Store
+[[m:OpenSSL::SSL::SSLContext#set_params]] ¤Ç¿®Íê¤¹¤ë CA ¾ÚÌÀ½ñ
+(ca_file, ca_path, cert_store) ¤ò°ìÀÚ»ØÄê¤·¤Ê¤«¤Ã¤¿¾ì¹ç¤Ë
+¥Ç¥Õ¥©¥ë¥È¤Ç»È¤ï¤ì¤ë¾ÚÌÀ½ñ¥¹¥È¥¢¤Ç¤¹¡£
+
+[[m:OpenSSL::X509::Store.set_default_paths]] ¤Ç¥·¥¹¥Æ¥à¤¬Äó¶¡¤¹¤ë
+¾ÚÌÀ½ñ¤òÍøÍÑ¤¹¤ë¤è¤¦¤ËÀßÄê¤µ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+--- DEFAULT_PARAMS -> { Symbol -> object }
+[[m:OpenSSL::SSL::SSLContext#set_param]] ¤Ç¥Ç¥Õ¥©¥ë¥ÈÃÍ¤È¤·¤Æ»È¤ï¤ì¤ë
+¥Ñ¥é¥á¡¼¥¿¤Ç¤¹¡£
+
+--- METHODS -> [Symbol]
+ÍøÍÑ²ÄÇ½¤Ê¥á¥½¥Ã¥É(¥×¥í¥È¥³¥ë)¤ò [[c:Symbol]] ¤ÎÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
+
+  require 'openssl'
+  OpenSSL::SSL::SSLContext::METHODS
+  # => [:TLSv1, :TLSv1_server, :TLSv1_client, :SSLv2, :SSLv2_server, ...]
+
+--- SESSION_CACHE_OFF
+#@todo
+--- SESSION_CACHE_CLIENT
+#@todo
+--- SESSION_CACHE_SERVER
+#@todo
+--- SESSION_CACHE_BOTH
+#@todo
+--- SESSION_CACHE_NO_AUTO_CLEAR
+#@todo
+--- SESSION_CACHE_NO_INTERNAL
+#@todo
+--- SESSION_CACHE_NO_INTERNAL_LOOKUP
+#@todo
+--- SESSION_CACHE_NO_INTERNAL_STORE
+#@todo

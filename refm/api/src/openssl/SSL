@@ -1,4 +1,3 @@
-#@if (version >= "1.8.0")
 = module OpenSSL::SSL
 
   * [[c:OpenSSL::SSL::SSLContext]]
@@ -7,24 +6,30 @@
 
 == Constants
 
---- OP_ALL
---- OP_CIPHER_SERVER_PREFERENCE
---- OP_EPHEMERAL_RSA
---- OP_NETSCAPE_CA_DN_BUG
---- OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG
---- OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION 
---- OP_NO_SSLv2
---- OP_NO_SSLv3
---- OP_NO_TLSv1
---- OP_PKCS1_CHECK_1
---- OP_PKCS1_CHECK_2
---- OP_SINGLE_DH_USE
---- OP_TLS_ROLLBACK_BUG
+--- OP_ALL -> Integer
+SSL 通信で各種のバグ回避コードを有効にするフラグです。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_CIPHER_SERVER_PREFERENCE -> Integer
+--- OP_EPHEMERAL_RSA -> Integer
+--- OP_NETSCAPE_CA_DN_BUG -> Integer
+--- OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG -> Integer
+--- OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION -> Integer
+--- OP_NO_SSLv2 -> Integer
+--- OP_NO_SSLv3 -> Integer
+--- OP_NO_TLSv1 -> Integer
+--- OP_NO_TICKET -> Integer
+--- OP_PKCS1_CHECK_1 -> Integer
+--- OP_PKCS1_CHECK_2 -> Integer
+--- OP_SINGLE_DH_USE -> Integer
+--- OP_SINGLE_ECDH_USE -> Integer
+--- OP_TLS_ROLLBACK_BUG -> Integer
 #@todo
 
 [[m:OpenSSL::SSL::SSLContext#options=]] に指定できるもの。
 
---- VERIFY_CLIENT_ONCE
+--- VERIFY_CLIENT_ONCE -> Integer
 #@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
@@ -33,7 +38,7 @@
 
 クライアントモード: 無視されます。
 
---- VERIFY_FAIL_IF_NO_PEER_CERT
+--- VERIFY_FAIL_IF_NO_PEER_CERT -> Integer
 #@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
@@ -42,7 +47,7 @@
 
 クライアントモード: 無視されます。
 
---- VERIFY_NONE
+--- VERIFY_NONE -> Integer
 #@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
@@ -51,7 +56,7 @@
 
 クライアントモード: anonymous cipher を用いない場合にサーバーは証明書を送ってきます。TLS/SSL ハンドシェイクの結果は SSL_get_verify_result を使ってチェックできます。証明書の検証の結果によらずハンドシェイクは継続します。
 
---- VERIFY_PEER
+--- VERIFY_PEER -> Integer
 #@todo
 
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] に指定できるもの。サーバーモードであるかクライアントモードであるかによって意味がことなります。
@@ -61,5 +66,5 @@
 クライアントモード: サーバーの証明書を検証します。検証が失敗した場合、TLS/SSL ハンドシェイクを即座に終了させます。サーバーが証明書を返さずに、anonymous cipher を用いる場合、VERIFY_PEER は無視されます。
 
 = class OpenSSL::SSL::SSLError < OpenSSL::OpenSSLError
+[[m:OpenSSL::SSL]] 関連のエラーが生じたときに発生する例外です。
 
-#@end

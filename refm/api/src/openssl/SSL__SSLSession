@@ -1,0 +1,32 @@
+= class OpenSSL::SSL::Session
+
+== Class Methods
+--- new
+#@todo
+
+== Instance Methods
+--- time
+#@todo
+
+--- time=
+#@todo
+
+--- timeout
+#@todo
+
+--- timeout=
+#@todo
+
+--- id
+#@todo
+
+--- to_der
+#@todo
+
+--- to_pem
+#@todo
+
+--- to_text
+#@todo
+
+= class OpenSSL::SSL::Session::SessionError < OpenSSL::OpenSSLError
