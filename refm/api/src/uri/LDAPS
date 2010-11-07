@@ -1,5 +1,7 @@
 = class URI::LDAPS < URI::LDAP
 
+LDAPS URI を表すクラスです。
+
 == Constants
 
 --- DEFAULT_PORT -> Integer
