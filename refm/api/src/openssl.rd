@@ -189,7 +189,7 @@ Ruby/OpenSSL のバージョンです。
 #@include(openssl/SSL__SSLContext)
 #@include(openssl/SSL__SSLServer)
 #@include(openssl/SSL__SSLSocket)
-#@include(openssl/SSL__SSLSession)
+#@include(openssl/SSL__Session)
 #@include(openssl/X509)
 #@include(openssl/X509__Attribute)
 #@include(openssl/X509__CRL)
