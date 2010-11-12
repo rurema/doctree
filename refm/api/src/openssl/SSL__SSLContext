@@ -8,12 +8,8 @@ SSL コネクション([[c:OpenSSL::SSL::SSLSocket]] や [[c:OpenSSL::SSL::SSLSocket]])
 証明書の情報、認証の要件など)を保持します。
 
 コネクションを1度生成して以降は、コンテキストが保持しているパラメータを
-変更すべきではありません。コネクションオブジェクトは
-コンテキストが持つパラメータの一部を参照によって保持するため、
-コンテキスト側のパラメータの変更がコネクション側に暗黙に伝わる可能性が
-あるためです。これはコネクションの状態の一貫性を損う可能性があります。
-各コネクションごとに変更したいパラメータはこのクラスのメソッドではなく、
-[[c:OpenSSL::SSL::SSLContext]] のメソッドで変更してください。
+変更できません。一部のパラメータが共有されるため、安全性のため
+[[m:Object#freeze]] によってオブジェクトを変更不可能にします。
 
 
 === Constants
@@ -139,7 +135,7 @@ SSL_CTX_set_cipher_list の項を見てください。
 @param certificate 設定する証明書([[c:OpenSSL::X509::Certificate]] のインスタンス)
 @see [[m:OpenSSL::SSL::SSLContext#cert=]]
 
---- cert_store -> OpenSSL::X509::Store
+--- cert_store -> OpenSSL::X509::Store | nil
 接続相手の証明書の検証のために使う、信頼している CA 証明書を
 含む証明書ストアを返します。
 
@@ -180,7 +176,7 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれを使います。
 @see [[m:OpenSSL::SSL::SSLContext#client_ca]]
 
 #@since 1.8.3
---- client_cert_cb
+--- client_cert_cb -> Proc | nil
 [[m:OpenSSL::SSL::SSLContext#cert=]] でクライアント証明書を
 セットしていなかった場合にサーバからクライアント証明書の要求が来たときに
 呼びだされるコールバックオブジェクトを返します。
@@ -193,7 +189,9 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれを使います。
 セットしていなかった場合にサーバからクライアント証明書の要求が来たときに
 呼びだされるコールバックオブジェクトを設定します。
 
-コールバックに渡される引数は1つで、利用している [[c:OpenSSL::SSL::SSLSocket]]
+コールバックに渡される引数は以下のように
+  proc{|sslsocket| ... }
+1つで、利用している [[c:OpenSSL::SSL::SSLSocket]]
 オブジェクトが渡されます。そのオブジェクトから必要な証明書を見つけるのに
 必要な情報を取得します。
 コールバックはクライアント証明書([[c:OpenSSL::X509::Certificate]])
@@ -356,7 +354,7 @@ nil を設定するとデフォルトのコールバック(単に第一引数をそのまま返すだけ)
 デフォルトは nil で、この場合 OpenSSL のデフォルト値(9)が使われます。
 
 @param depth 最大深さを表す整数
-@see [[m:OpenSSL::SSL::SSLContext#verify_depth=]]
+@see [[m:OpenSSL::SSL::SSLContext#verify_depth]]
 
 --- verify_mode -> Integer | nil
 検証モードを返します。
@@ -429,8 +427,40 @@ nil を設定するとデフォルトのコールバック(単に第一引数をそのまま返すだけ)
 
 @param ver 利用するプロトコルの種類
 
---- servername_cb
---- servername_cb=
+--- servername_cb -> Proc | nil
+TLS の Server Name Indication(SNI) 拡張で
+クライアント側からホスト名が伝えられてきた場合に
+呼びだされるコールバックを返します。
+
+詳しくは [[m:OpenSSL::SSL::SSLContext#servername_cb=]] を見てください。
+
+--- servername_cb=(pr)
+TLS の Server Name Indication(SNI) 拡張で
+クライアント側からホスト名が伝えられてきた場合に
+呼びだされるコールバックを設定します。
+
+このコールバックはハンドシェイク時に
+クライアント側がサーバのホスト名を伝えてきた場合に
+サーバ側で呼びだされます。このコールバック内でサーバ側に提示する証明書を
+調整したりします。
+
+[[c:Proc]] や [[c:Method]] をコールバックオブジェクトとして
+渡します。コールバックに渡される引数は以下のように
+  proc{|sslsocket, hostname| ... }
+2つで、1つ目は認証および暗号化通信に使われる [[c:OpenSSL::SSL::SSLSocket]]
+オブジェクトで、2つ目がクライアント側から伝えられてきたホスト名です。
+
+コールバックの返り値には認証と暗号化の設定を含んだ 
+[[c:OpenSSL::SSL::SSLContext]] オブジェクト、もしくは
+nil を返さなければなりません。
+これで得られたコンテキストオブジェクトが sslsocket に設定され、
+コンテキストが持っている証明書などの各情報を用いてハンドシェイクを継続します。
+コールバックが nil を返した場合には sslsocket が用いるコンテキストは
+変更されません。
+
+@param pr コールバックオブジェクト
+@see [[m:OpenSSL::SSL::SSLContext#servername_cb]]
+
 --- session_add
 --- session_cache_mode
 --- session_cache_mode=
@@ -459,7 +489,7 @@ nil を設定するとデフォルトのコールバック(単に第一引数をそのまま返すだけ)
 証明書を利用するように設定されています。
 
 --- DEFAULT_PARAMS -> { Symbol -> object }
-[[m:OpenSSL::SSL::SSLContext#set_param]] でデフォルト値として使われる
+[[m:OpenSSL::SSL::SSLContext#set_params]] でデフォルト値として使われる
 パラメータです。
 
 --- METHODS -> [Symbol]

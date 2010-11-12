@@ -2,9 +2,16 @@
 = class OpenSSL::SSL::SSLServer < Object
 include OpenSSL::SSL::SocketForwarder 
 
-SSL サーバーのためのクラス。[[c:TCPServer]] に対応します。
+SSL サーバーのためのクラス。
 
-以下はクライアントからの入力を出力するだけの echo サーバーの例です。
+[[c:TCPServer]] をラップするクラスで、TCPServer で接続した
+ソケットを [[c:OpenSSL::SSL::SSLSocket]] でラップする機能を持ちます。
+おおよそ TCPServer と同様のメソッドを持ちます。
+
+基本的には SSL サーバを簡単に実装するためのクラスであり、
+これを利用せずとも SSL サーバを実装することは可能です。
+
+以下はクライアントからの入力を標準出力に出力するだけのサーバです。
 
   require 'socket'
   require 'openssl'
@@ -25,39 +32,75 @@ SSL サーバーのためのクラス。[[c:TCPServer]] に対応します。
 
 == Class Methods
 
---- new(svr, ctx)
-#@todo
+--- new(svr, ctx) -> OpenSSL::SSL::SSLServer
+[[c:TCPServer]] オブジェクトをラップする SSLServer オブジェクトを生成します。
 
-svr には [[c:TCPServer]] オブジェクトを、ctx には [[c:OpenSSL::SSL::SSLContext]] オブジェクトを取ります。
+svr にはラップする[[c:TCPServer]] オブジェクトを、
+ctx には SSL サーバが用いる  [[c:OpenSSL::SSL::SSLContext]]
+オブジェクトを生成します。
+
+[[m:OpenSSL::SSL::SSLServer#listen]] や [[m:OpenSSL::SSL::SSLServer#accept]]
+は内部で svr で渡されたオブジェクトの
+[[m:TCPServer#listen]] や [[m:TCPServer#accept]] を呼び出します。
+
+@param 利用する [[c:TCPServer]] オブジェクト
+@param SSL サーバとして用いる [[c:OpenSSL::SSL::SSLContext]] オブジェクト
+
+#@# ctx に session_id_context が設定されていない場合は $0 から
+#@# 設定する
 
 == Instance Methods
 
---- to_io
-#@todo
+--- to_io -> TCPServer
+ラップしている [[c:TCPServer]] オブジェクトを返します。
 
-[[c:TCPServer]] オブジェクトを返します。
+--- accept -> OpenSSL::SSL::SSLSocket
+クライアントからの接続を受け付け、接続した
+SSLSocket オブジェクトを返します。
 
---- accept
-#@todo
+[[m:OpenSSL::SSL::SSLServer#start_immediately]] が真ならば、
+SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから
+SSLSocket オブジェクトを返します。
 
-TLS/SSL クライアントから接続を受け付け、[[c:OpenSSL::SSL::SSLSocket]] オブジェクトを返します。start_immediately が真なら SSLSocket#accept を呼び TLS/SSL ハンドシェイクを実行してから SSLSocket オブジェクトを返します。
+--- close -> nil
+内部のサーバソケットを閉じます。
 
---- close
-#@todo
+--- listen(backlog=5) -> 0
+ラップしている [[c:TCPServer]] の [[m:TCPServer#listen]] 
+を呼びだします。
 
-接続を閉じます。
+通常は TCPServer の初期化時に listen が呼びだされるため
+呼ぶ必要はないはずです。
 
---- listen
-#@todo
+@param backlog クライアントからの接続要求を保留できる数
+@raise Errno::EXXX [[man:listen(2)]] が失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
 
-[[m:TCPServer#listen]] と同様です。
+--- start_immediately -> bool
+[[m:OpenSSL::SSL::SSLServer#accept]] で
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを返します。
 
---- start_immediately
+@see [[m:OpenSSL::SSL::SSLServer#start_immediately=]]
+
 --- start_immediately=(bool)
-#@todo
+[[m:OpenSSL::SSL::SSLServer#accept]] で
+accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。
 
-accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。デフォルトでは true です。
+これを真に設定した場合は、[[m:OpenSSL::SSL::SSLServer#accept]] で
+接続したソケットに対し [[m:OpenSSL::SSL::SSLSocket#accept]] を
+呼び、ハンドシェイクを実行します。
+
+デフォルトでは true です。
+
+@param 設定する真偽値。
+@see [[m:OpenSSL::SSL::SSLServer#start_immediately]]
+
+--- shutdown(how=Socket::SHUT_RDWR) -> 0
+ソケットの以降の接続を終了させます。
+
+詳しくは [[m:BasicSocket#shutdown]] を参照してください。
+
+@param how 接続の終了の仕方を Socket::SHUT_RD, Socket::SHUT_WR, 
+           Socket::SHUT_RDWR などで指定します。
+
 #@end
 
---- shutdown
-#@todo
