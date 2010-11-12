@@ -71,6 +71,10 @@ StoreContext オブジェクトが渡されますが、このメソッドを呼ぶと
 [[m:OpenSSL::X509::StoreContext#verify]] を呼び出したあと、
 このメソッドを呼ぶと検証の最終的な検証結果のエラーコードを返します。
 
+エラーコードの整数値は [[c:OpenSSL::X509]] に定数が定義されています。
+詳しくは [[ref:c:OpenSSL::X509#verify_error]] を見てください。
+検証に成功した場合は [[m:OpenSSL::X509::V_OK]] を返します。
+
 @see [[m:OpenSSL::X509::Store#error]]
 
 --- error=(error)

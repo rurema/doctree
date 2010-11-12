@@ -30,7 +30,9 @@
 
 渡されたコールバックオブジェクトは証明書チェインの検証時に
 チェインに含まれる各証明書の署名を検証するたびに呼びだされます。
-そのときに渡される引数は2つで、1つめは検証が成功したかの真偽値、
+そのときに渡される引数は以下のように
+  proc{|ok, ctx| ... }
+2つで、1つめは検証が成功したかの真偽値、
 2つめは検証後の状態を保存した
 [[c:OpenSSL::X509::StoreContext]] オブジェクトです。
 このコールバックには2つの役割があります。1つ目はコンテキストオブジェクト
@@ -65,40 +67,9 @@ verify を一度も呼びだしていない場合は nil を返します。
 最後に [[m:OpenSSL::X509::Store#verify]] を呼び、
 検証したときのエラーコードを返します。
 
-エラーコードの整数値は [[c:OpenSSL::X509]] に以下の定数が定義されています。
-検証に成功した場合は [[c:OpenSSL::X509::V_OK]] を返します。
-  * [[m:OpenSSL::X509::V_OK]]
-  * [[m:OpenSSL::X509::V_ERR_AKID_SKID_MISMATCH]]
-  * [[m:OpenSSL::X509::V_ERR_APPLICATION_VERIFICATION]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_CHAIN_TOO_LONG]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_HAS_EXPIRED]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_NOT_YET_VALID]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_REJECTED]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_REVOKED]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_SIGNATURE_FAILURE]]
-  * [[m:OpenSSL::X509::V_ERR_CERT_UNTRUSTED]]
-  * [[m:OpenSSL::X509::V_ERR_CRL_HAS_EXPIRED]]
-  * [[m:OpenSSL::X509::V_ERR_CRL_NOT_YET_VALID]]
-  * [[m:OpenSSL::X509::V_ERR_CRL_SIGNATURE_FAILURE]]
-  * [[m:OpenSSL::X509::V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT]]
-  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CERT_NOT_AFTER_FIELD]]
-  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CERT_NOT_BEFORE_FIELD]]
-  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CRL_LAST_UPDATE_FIELD]]
-  * [[m:OpenSSL::X509::V_ERR_ERROR_IN_CRL_NEXT_UPDATE_FIELD]]
-  * [[m:OpenSSL::X509::V_ERR_INVALID_CA]]
-  * [[m:OpenSSL::X509::V_ERR_INVALID_PURPOSE]]
-  * [[m:OpenSSL::X509::V_ERR_KEYUSAGE_NO_CERTSIGN]]
-  * [[m:OpenSSL::X509::V_ERR_OUT_OF_MEM]]
-  * [[m:OpenSSL::X509::V_ERR_PATH_LENGTH_EXCEEDED]]
-  * [[m:OpenSSL::X509::V_ERR_SELF_SIGNED_CERT_IN_CHAIN]]
-  * [[m:OpenSSL::X509::V_ERR_SUBJECT_ISSUER_MISMATCH]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_GET_CRL]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_GET_ISSUER_CERT]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY]]
-  * [[m:OpenSSL::X509::V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE]]
+エラーコードの整数値は [[c:OpenSSL::X509]] に定数が定義されています。
+詳しくは [[ref:c:OpenSSL::X509#verify_error]] を見てください。
+検証に成功した場合は [[m:OpenSSL::X509::V_OK]] を返します。
 
 verify を一度も呼びだしていない場合は nil を返します。
 

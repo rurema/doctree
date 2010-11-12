@@ -1,6 +1,7 @@
 = class OpenSSL::X509::Extension < Object
 
 X.509 v3 証明書の拡張領域のためのクラスです。
+
 [[c:OpenSSL::X509::Certificate]] オブジェクトは
 その拡張領域を Extension オブジェクトの配列として保持し、
 [[c:OpenSSL::X509::Certificate#extensions]] でその配列が得られます。
