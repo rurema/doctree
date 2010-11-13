@@ -36,21 +36,24 @@ IV(Initialization Vector)の取り扱いについて正しく理解してからに
     暗号化/復号化をする
 #@end
 
-#@# 以下のクラスが実装されています。
-#@# 
-#@#   * OpenSSL::Cipher::BF
-#@#   * OpenSSL::Cipher::CAST5
-#@#   * OpenSSL::Cipher::DES
-#@#   * OpenSSL::Cipher::IDEA
-#@#   * OpenSSL::Cipher::RC2
-#@#   * OpenSSL::Cipher::RC4
-#@#   * OpenSSL::Cipher::RC5
-#@# 
-#@# AES も OpenSSL::Cipher::Cipher.new('aes256') などとすれば利用可能です。
 
 #@since 1.8.3
 ruby 1.8.3 から Cast5 と Idea が CAST5 と IDEA に改名されました。
 #@end
+
+=== ブロック暗号モード
+AES のようなブロック暗号では暗号方式を選択する際に
+モードを指定する必要があります。このライブラリでは
+以下のような文字列でモードを指定できます。
+  * "CBC"
+  * "CFB"
+  * "ECB"
+  * "OFB"
+これらの文字列の意味は
+[[ref:lib:openssl#references]] などで調べてください。
+AES を用いる場合、通常は CBC を用いれば良いでしょう。
+選択肢によっては安全性に問題があるので気をつけてください。
+
 
 === 使用例
 #@todo
@@ -278,10 +281,21 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::AES < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::AES
-#@todo
 
+AES 暗号を表すクラス
+
+== Class Methods
+--- new(bit, mode) -> OpenSSL::Cipher::AES
+AES 共通鍵暗号オブジェクトを生成し、返します。
+
+AES の鍵長を整数もしくは文字列(256 or "256") bit で、
+モードを文字列 mode で指定します。
+
+指定可能な鍵数とモードは [[m:OpenSSL::Cipher.ciphers]] で
+取得できます。
+
+@param bit 鍵長整数/文字列
+@param mode モード文字列
 
 #@since 1.8.5
 #@until 1.8.7
@@ -289,30 +303,53 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::AES128 < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::AES128
-#@todo
 
+鍵長 128 ビットの AES 暗号を表すクラス
+
+== Class Methods
+--- new(mode) -> OpenSSL::Cipher::AES128
+鍵長 128 ビット AES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
+
+@param mode モード文字列
 
 #@until 1.8.7
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::AES192 < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::AES192
-#@todo
 
+鍵長 192 ビットの AES 暗号を表すクラス
+
+== Class Methods
+--- new(mode) -> OpenSSL::Cipher::AES192
+鍵長 192 ビット AES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
+
+@param mode モード文字列
 
 #@until 1.8.7
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::AES256 < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::AES256
-#@todo
+鍵長 256 ビットの AES 暗号を表すクラス
 
+== Class Methods
+--- new(mode) -> OpenSSL::Cipher::AES256
+鍵長 256 ビット AES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
+
+@param mode モード文字列
 
 #@end
 
@@ -321,10 +358,17 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::BF < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::BF
-#@todo
+BF(BlowFish)暗号を表すクラス
 
+== Class Methods
+--- new(mode) -> OpenSSL::Cipher::BF
+BF(BlowFish)暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
+
+@param mode モード文字列
 
 #@until 1.8.3
 = class OpenSSL::Cipher::Cast5 < OpenSSL::Cipher::Cipher
@@ -334,22 +378,37 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::CAST5 < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::CAST5
-#@todo
-
-
 #@end
+
+CAST5 暗号を表すクラス
+
+== Class Methods
+--- new(mode) -> OpenSSL::Cipher::CAST5
+CAST5 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
+
+@param mode モード文字列
+
 
 #@until 1.8.7
 = class OpenSSL::Cipher::DES < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::DES < OpenSSL::Cipher
 #@end
-== Class Methods
---- new() -> OpenSSL::Cipher::DES
-#@todo
+DES 暗号を表すクラス
 
+== Class Methods
+--- new(mode) -> OpenSSL::Cipher::DES
+DES 暗号オブジェクトを生成し、返します。
+
+モードを文字列 mode で指定します。
+
+指定可能なモードは [[m:OpenSSL::Cipher.ciphers]] で取得できます。
+
+@param mode モード文字列
 
 
 #@until 1.8.3
@@ -360,10 +419,12 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::IDEA < OpenSSL::Cipher
 #@end
+IDEA 暗号を表すクラス
+
 == Class Methods
 --- new() -> OpenSSL::Cipher::IDEA
 #@todo
-
+IDEA 暗号オブジェクトを生成します。
 
 #@end
 
@@ -372,9 +433,24 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::RC2 < OpenSSL::Cipher
 #@end
+RC2 暗号を表すクラス
+
 == Class Methods
---- new() -> OpenSSL::Cipher::RC2
-#@todo
+--- new(bit, mode) -> OpenSSL::Cipher::RC2
+--- new(mode) -> OpenSSL::Cipher::RC2
+
+RC2 暗号オブジェクトを生成します。
+
+鍵長を整数もしくは文字列(40 or "40") bit で、
+モードを文字列 mode で指定します。
+
+鍵長は省略可能です。
+
+指定可能な鍵数とモードは [[m:OpenSSL::Cipher.ciphers]] で
+取得できます。
+
+@param bit 鍵長整数/文字列
+@param mode モード文字列
 
 
 #@until 1.8.7
@@ -382,21 +458,35 @@ IV を乱数で生成し、暗号オブジェクトに設定します。
 #@else
 = class OpenSSL::Cipher::RC4 < OpenSSL::Cipher
 #@end
+
+RC4 暗号を表すクラス
+
 == Class Methods
 --- new() -> OpenSSL::Cipher::RC4
-#@todo
+--- new(bit) -> OpenSSL::Cipher::RC4
+RC4 暗号オブジェクトを生成し、返します。
 
+bit で鍵長を指定できます。
+
+指定可能な鍵数は [[m:OpenSSL::Cipher.ciphers]] で
+取得できます。
+
+鍵長は省略可能です。
+
+@param bit 鍵長のビット数(整数もしくは文字列)
 
 #@until 1.8.7
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher::Cipher
 #@else
 = class OpenSSL::Cipher::RC5 < OpenSSL::Cipher
 #@end
+
+RC5 暗号を表すクラス
+
 == Class Methods
 --- new() -> OpenSSL::Cipher::RC5
 #@todo
-
-
+RC5 暗号オブジェクトを生成し、返します。
 
 #@until 1.8.7
 = class OpenSSL::CipherError < OpenSSL::OpenSSLError
