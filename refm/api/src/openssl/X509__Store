@@ -121,6 +121,7 @@ verify を一度も呼びだしていない場合は nil を返します。
 生成する場合にはそのコンテキストにこの値がコピーされます。
 
 @param purpose 証明書の使用目的を表す整数値
+@see [[m:OpenSSL::X509::StoreContext#purpose=]]
 
 #@# memo: 
 #@# purpose は
