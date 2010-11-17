@@ -2,8 +2,8 @@
 OpenSSL の X509 証明書、CRL(証明書失効リスト)、
 CSR(証明書署名要求)、証明書ストアなどに関するモジュールです。
 
-#@# 以下は OpenSSL::X509::Store#purpose にセットされる値です。
-
+#@# エラー定数の参考文献
+#@# http://www.openssl.org/docs/apps/verify.htm
 ===[a:verify_error] 検証時エラー定数
 
 以下の定数は [[m:OpenSSL::X509::Store#error]],
@@ -126,8 +126,6 @@ OCSP関連でOpenSSLの内部的に利用されます。
 [[m:OpenSSL::X509::StoreContext#verify]] で
 確認します。
 
-#@# 以下は OpenSSL::X509::Store#trust にセットされる値です。
-
 --- TRUST_COMPAT -> Integer
 ルート CA 証明書が自分自身の秘密鍵で署名されている。
 
@@ -149,7 +147,6 @@ OCSP関連でOpenSSLの内部的に利用されます。
 --- TRUST_OCSP_SIGN -> Integer
 #@todo
 
-#@# 以下は OpenSSL::X509::Store#error にセットされる値です。
 
 --- V_OK -> Integer
 エラーが発生していないことを意味します。
@@ -158,103 +155,304 @@ OCSP関連でOpenSSLの内部的に利用されます。
 [[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
 使われます。
 
-#@todo
-
 --- V_ERR_AKID_SKID_MISMATCH -> Integer
-#@todo
+証明書の authorityKeyIdentifier 拡張領域の内容が
+issuer(発行者)の証明書の subjectKeyIdentifier の内容と
+食い違っていることを意味します。
+
 
 --- V_ERR_APPLICATION_VERIFICATION -> Integer
-#@todo
+アプリケーションが利用するエラーコードです。
+
+OpenSSL のライブラリでは使われないので、
+アプリケーションプログラマが自由に利用することが可能です。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Store#verify_callback=]],
+     [[m:OpenSSL::X509::StoreContext#error=]]
 
 --- V_ERR_CERT_CHAIN_TOO_LONG -> Integer
-#@todo
+証明書チェインが長すぎることを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::SSL::SSLContext#verify_depth=]]
 
 --- V_ERR_CERT_HAS_EXPIRED -> Integer
-#@todo
+証明書が期限切れであることを意味します。
+
+期限は証明書チェイン全体に対し確認されます。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Certificate#not_after=]],
+     [[m:OpenSSL::X509::Store#time=]]
+
 
 --- V_ERR_CERT_NOT_YET_VALID -> Integer
-#@todo
+証明書の開始時刻以前であることを意味します。
+
+開始時刻は証明書チェイン全体に対し確認されます。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Certificate#not_before=]],
+     [[m:OpenSSL::X509::Store#time=]]
 
 --- V_ERR_CERT_REJECTED -> Integer
-#@todo
+ルート CA 証明書に指定した目標に使ってはならないと
+されていることを意味します。
+
+#@# marked to reject the specified purpose
 
 --- V_ERR_CERT_REVOKED -> Integer
-#@todo
+証明書が CRL によって失効されられていることを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[c:OpenSSL::X509::CRL]]
 
 --- V_ERR_CERT_SIGNATURE_FAILURE -> Integer
-#@todo
+証明書になされた署名の検証に失敗したことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_CERT_UNTRUSTED -> Integer
-#@todo
+ルート CA 証明書が指定した目的では信頼できないことを意味します。
+
+@see [[m:OpenSSL::X509::Store#trust=]],
+     [[m:OpenSSL::X509::StoreContext#trust=]]
+
+#@# いまいちよくわからない
+
+@see [[m:OpenSSL::X509::Store#trust=]]
 
 --- V_ERR_CRL_HAS_EXPIRED -> Integer
-#@todo
+CRL が期限切れであることを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_CRL_NOT_YET_VALID -> Integer
-#@todo
+CRL の開始時刻がまだ来ていないことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
 
 --- V_ERR_CRL_SIGNATURE_FAILURE -> Integer
-#@todo
+CRL になされた署名の検証に失敗したことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_DEPTH_ZERO_SELF_SIGNED_CERT -> Integer
-#@todo
+検証している証明書がルート CA (自己署名証明書)であり、
+それが信頼されている証明書でないことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Store#add_file]],
+     [[m:OpenSSL::X509::Store#add_path]],
+     [[m:OpenSSL::X509::Store#add_cert]],
+     [[[m:OpenSSL::X509::Store#set_default_paths]]
+
+
 
 --- V_ERR_ERROR_IN_CERT_NOT_AFTER_FIELD -> Integer
-#@todo
+証明書の notAfter フィールドの値が不正である
+ことを意味します。
+
+これは notAfter フィールド(証明書の期限を表すデータ)
+が不正なフォーマットであることを意味し
+(そもそも時刻を表現していない場合や、1月32日であるなど)、
+証明書が期限切れであることを意味しません。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+
 
 --- V_ERR_ERROR_IN_CERT_NOT_BEFORE_FIELD -> Integer
-#@todo
+証明書の notBefore フィールドの値が不正である
+ことを意味します。
+
+これは notBefore フィールド(証明書の開始時刻を表すデータ)
+が不正なフォーマットであることを意味し
+(そもそも時刻を表現していない場合や、1月32日であるなど)、
+証明書の開始時刻にまだ到達していないことを意味しません。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_ERROR_IN_CRL_LAST_UPDATE_FIELD -> Integer
-#@todo
+CRL の lastUpdate フィールドの値が不正である
+ことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_ERROR_IN_CRL_NEXT_UPDATE_FIELD -> Integer
-#@todo
+CRL の nextUpdate フィールドの値が不正である
+ことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
 
 --- V_ERR_INVALID_CA -> Integer
-#@todo
+CA 証明書が不正であることを意味します。
+
+証明書が実は CA 用ではない場合は証明書の拡張がおかしい場合に
+このエラーが発生します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+#@# X509_V_FLAG_X509_STRICTを立てておかないと生じないようである
 
 --- V_ERR_INVALID_PURPOSE -> Integer
-#@todo
+証明書が指定した目的で使えないことを意味します。
+
+@see [[m:OpenSSL::X509::Store#purpose=]]
 
 --- V_ERR_KEYUSAGE_NO_CERTSIGN -> Integer
-#@todo
+署名できない証明書で署名しようしとたことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_OUT_OF_MEM -> Integer
-#@todo
+メモリが不足したことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_PATH_LENGTH_EXCEEDED -> Integer
-#@todo
+CA 証明書の basicConstraints 拡張領域の pathlen を
+越えている場合に発生します。
+
+#@# pathLen は間に入ってもよい中間 CA の数の上限を意味している
+#@# はず、なんだがこのエラーを発生させるのはうまくいかない
 
 --- V_ERR_SELF_SIGNED_CERT_IN_CHAIN -> Integer
-#@todo
+証明書チェインのルート CA (自己署名証明書)が
+信頼されている証明書でないことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Store#add_file]],
+     [[m:OpenSSL::X509::Store#add_path]],
+     [[m:OpenSSL::X509::Store#add_cert]],
+     [[m:OpenSSL::X509::Store#set_default_paths]]
 
 --- V_ERR_SUBJECT_ISSUER_MISMATCH -> Integer
-#@todo
+証明書の issuer(発行者)名と上位の証明書のsubject(所有者)名が
+異なっていることを意味します。
+
 
 --- V_ERR_UNABLE_TO_DECODE_ISSUER_PUBLIC_KEY -> Integer
-#@todo
+証明書の SubjectPublicKeyInfo フィールドが読めなかった
+ことを意味します。
 
 --- V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE -> Integer
-#@todo
+証明書の署名が復号できないことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+#@# OpenSSL 0.9.8o/1.0.0aでは使われない
 
 --- V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE -> Integer
-#@todo
+CRL の署名が復号できないことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+#@# OpenSSL 0.9.8o/1.0.0aでは使われない
 
 --- V_ERR_UNABLE_TO_GET_CRL -> Integer
-#@todo
+CRL が見付からないことを意味します。
+
+[[m:OpenSSL::X509::Store#flags=]] で CRL をチェックすることを
+指定したにもかかわらず、適切な CRL を
+[[m:OpenSSL::X509::Store#add_crl]] で追加しなかった場合に
+このエラーが生じます。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
 
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT -> Integer
-#@todo
+issuer(発行者)の証明書が
+信頼している証明書群の中から見付からない
+ような証明書を、信頼している証明書群に含んでいることを意味します。
+
+つまり、信頼している証明書群に issuer を親とする木構造を考えた場合、
+その root(根) となるノードが自己署名されていないことを意味します。
+
+これは、通常信頼している証明書のリストが不完全であることを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Store#add_file]],
+     [[m:OpenSSL::X509::Store#add_path]],
+     [[m:OpenSSL::X509::Store#add_cert]],
+     [[[m:OpenSSL::X509::Store#set_default_paths]]
 
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY -> Integer
-#@todo
+証明書チェイン末尾の証明書の issuer(発行者)の証明書が
+信頼している証明書群の中から見付からないことを意味します。
+
+[[m:OpenSSL::X509::Store#error]] や
+[[m:OpenSSL::X509::StoreContext#error]] のエラーコードとして
+使われます。
+
+@see [[m:OpenSSL::X509::Store#add_file]],
+     [[m:OpenSSL::X509::Store#add_path]],
+     [[m:OpenSSL::X509::Store#add_cert]],
+     [[[m:OpenSSL::X509::Store#set_default_paths]]
 
 --- V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE -> Integer
-#@todo
+証明書チェインにある証明書がただ一つでその証明書が
+自己署名証明書でないことを意味します。
+
+#@# 実際にどのような場合にこれが起きるのかはわからない
 
 --- V_ERR_AKID_ISSUER_SERIAL_MISMATCH -> Integer
-#@todo
+証明書の拡張領域の Authority Key Identifier のシリアルと
+issuer の証明書のシリアルが一致しないことを意味します。
 
 --- V_FLAG_CRL_CHECK -> Integer
 証明書の検証時に CRL をチェックすることを意味します。
@@ -303,8 +501,6 @@ CA 証明書ディレクトリ名を指定する環境変数名。
 ハッシュ名でなければなりません。
 
 @see [[m:OpenSSL::X509::DEFAULT_CERT_DIR]]
-
-#@todo
 
 --- DEFAULT_CERT_FILE -> String
 デフォルトの CA 証明書ファイル名。

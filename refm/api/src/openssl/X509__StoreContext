@@ -92,9 +92,11 @@ StoreContext オブジェクトが渡されますが、このメソッドでエラーコードを
   store = OpenSSL::X509::Store.new
   store.set_default_paths
   cert = OpenSSL::X509::Certificate.new(...)
-  store.verify(cert, chain){|ok,ctx| ctx.error = 1; false}  # => false
-  p store.error # => 1
-  p store.error_string # => "error number 1"
+  store.verify(cert, chain){|ok,ctx| 
+    ctx.error = OpenSSL::X509::V_ERR_APPLICATION_VERIFICATION; 
+  false}  # => false
+  p store.error # => OpenSSL::X509::V_ERR_APPLICATION_VERIFICATION
+  p store.error_string # => "application verification failure"
   
 @param error エラーコードの整数値
 @see [[m:OpenSSL::X509::StoreContext#error]]
