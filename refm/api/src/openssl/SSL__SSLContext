@@ -2,7 +2,7 @@
 
 SSL コンテキストクラス。
 
-SSL コネクション([[c:OpenSSL::SSL::SSLSocket]] や [[c:OpenSSL::SSL::SSLSocket]])
+SSL コネクション([[c:OpenSSL::SSL::SSLSocket]] や [[c:OpenSSL::SSL::SSLServer]])
 オブジェクトを生成するためのファクトリクラスです。
 コネクションを生成するために必要なパラメータ(プロトコルのバージョン、
 証明書の情報、認証の要件など)を保持します。
@@ -47,7 +47,7 @@ SSLv2 は無効化して SSLv3 と TLSv1 の両方を有効化するためには
 
 == Instance Methods
 
---- ciphers -> Array
+--- ciphers -> [[String, String, Integer, Integer]]
 利用可能な共通鍵暗号の種類を配列で返します。
 
 配列の各要素は以下のような配列です
@@ -83,6 +83,7 @@ SSL_CTX_set_cipher_list の項を見てください。
 設定されていない場合は nil を返します。
 
 @see [[m:OpenSSL::SSL::SSLContext#ca_file=]]
+
 --- ca_file=(ca)
 接続相手の検証のために使う、信頼している CA 証明書ファイルのパスを
 設定します。
@@ -300,7 +301,7 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれを使います。
 nil を指定するとデフォルトのタイムアウト秒数を用います。
 
 @param seconds タイムアウト秒数(整数)
-@see [[m:OpenSSL::SSL::SSLContext#timeout]]
+@see [[m:OpenSSL::SSL::Session#timeout]]
 
 
 --- verify_callback -> Proc | nil
@@ -379,15 +380,73 @@ nil を設定するとデフォルトのコールバック(単に第一引数をそのまま返すだけ)
 @see [[m:OpenSSL::SSL::SSLContext#verify_mode=]]
 
 #@since 1.8.3
---- tmp_dh_callback
---- tmp_dh_callback=
-#@todo
+--- tmp_dh_callback -> Proc | nil
+一時的 DH 鍵を生成するためのコールバックを返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#tmp_dh_callback=]]
+
+--- tmp_dh_callback=(cb)
+一時的 DH 鍵を生成するためのコールバックを設定します。
+
+コールバックには [[c:Proc]] や [[c:Method]] を渡します。
+
+暗号で一時的な DH 鍵を利用する場合にはこのコールバックが
+呼びだされ、呼びだされたブロックは適切な鍵パラメータを返さなければ
+なりません。これで設定するブロックは
+  proc{|sslsocket, is_export, keylen| ... }
+という引数を取るようにします。それぞれの引数の意味は
+  * sslsocket 通信に使われる [[c:OpenSSL::SSL::SSLSocket]] オブジェクト
+  * is_export 輸出規制のある暗号を利用するかどうかを0か0以外かで指定
+  * keylen 鍵長
+となります。ブロックの返り値には適切な鍵パラメータを含む 
+[[c:OpenSSL::PKey::DH]] オブジェクトを返します。鍵パラメータは
+keylen で指定された鍵長に対応したものでなければなりません。
+
+[[c:OpenSSL::PKey::DH]] は DH パラメータと DH 鍵対を
+保持していますが、これで返されるオブジェクトはパラメータしか
+用いられません。
+
+cb に nil を指定するとデフォルトのパラメータが利用されます。
+
+デフォルト値は nil です。
+
+@param cb 設定するコールバック
+@see [[m:OpenSSL::SSL::SSLContext#tmp_dh_callback]]
 #@end
 
 #@since 1.8.3
---- session_id_context 
---- session_id_context=
-#@todo
+--- session_id_context -> String | nil
+セッション ID コンテキスト文字列を返します。
+
+セッションキャッシュが有効でない場合は nil を返します。
+
+@see [[c:OpenSSL::SSL::Session]],
+     [[m:OpenSSL::SSL::SSLContext#session_id_context=]]
+
+--- session_id_context=(id_context)
+セッション ID コンテキストを文字列で設定します。
+
+これを設定することでサーバ側のセッションキャッシュが有効になります。
+クライアント側では意味を持ちません。
+
+セッション ID コンテキストは、セッションをグループ化するための
+識別子で、セッション ID コンテキストとセッション ID の両方が
+一致する場合に同一のセッションであると判別されます。
+この [[c:OpenSSL::SSL::SSLContext]] オブジェクトで
+生成されたコネクション([[c:OpenSSL::SSL::SSLSocket]])に
+関連付けられたセッションはセッション ID コンテキスト
+を共有します。
+
+セッション ID コンテキストはセッションのグループを
+識別するための識別子であり、一方セッション ID は各セッションを
+識別するための識別子であり、この2つは異なる概念で
+あることに注意してください。
+
+@param id_context セッション ID コンテキスト文字列(最大32バイト)
+@see [[c:OpenSSL::SSL::Session]],
+     [[m:OpenSSL::SSL::SSLContext#session_id_context]],
+     [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]]
+
 #@end
 
 --- set_params(params) -> Hash
@@ -462,22 +521,75 @@ nil を返さなければなりません。
 @see [[m:OpenSSL::SSL::SSLContext#servername_cb]]
 
 --- session_add
---- session_cache_mode
---- session_cache_mode=
---- session_cache_size
---- session_cache_size=
+#@todo
+--- session_cache_mode -> Integer
+セッションキャッシュのモードを返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]]
+
+--- session_cache_mode=(mode)
+セッションキャッシュのモードを指定します。
+
+以下の定数のORを引数として渡します。
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_OFF]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_CLIENT]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_SERVER]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_BOTH]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_AUTO_CLEAR]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL_LOOKUP]]
+  * [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL_STORE]]
+
+デフォルト値は OpenSSL::SSL::SSLContext::SESSION_CACHE_SERVER です。
+
+@param mode 設定するモード(整数値)
+@see [[m:OpenSSL::SSL::SSLContext#session_cache_mode]]
+
+--- session_cache_size -> Integer
+自身が保持可能なセッションキャッシュのサイズを返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#session_cache_size=]]
+
+--- session_cache_size=(size)
+自身が保持可能なセッションキャッシュのサイズを指定します。
+
+size に 0 を渡すと制限なしを意味します。
+
+デフォルトは 1024*20 で、20000 セッションまでキャッシュを保持できます。
+
+@param size セッションキャッシュのサイズ(整数値)
+@see [[m:OpenSSL::SSL::SSLContext#session_cache_size]]
+
+#@todo
 --- session_cache_stats
+#@todo
 --- session_get_cb
+#@todo
 --- session_get_cb=
+#@todo
 --- session_new_cb
+#@todo
 --- session_new_cb=
+#@todo
 --- session_remove
+#@todo
 --- session_remove_cb
+#@todo
 --- session_remove_cb=
+#@todo
+--- flush_sessions(time=nil) -> self
+自身が保持しているセッションキャッシュを破棄します。
+
+time に nil を渡すとすべてのキャッシュを破棄します。
+
+time に [[c:Time]] オブジェクトを渡すと、その
+時刻で時間切れになるキャッシュを破棄します。
+
+@param time キャッシュ破棄の基準時刻
+@see [[c:OpenSSL::SSL::SSLContext#session_cache_mode=]]
+
 #@# --- setup -> true
 #@# 内部的に利用されるメソッド
---- flush_sessions
-#@todo
 
 == Constants
 --- DEFAULT_CERT_STORE -> OpenSSL::X509::Store
@@ -499,19 +611,59 @@ nil を返さなければなりません。
   OpenSSL::SSL::SSLContext::METHODS
   # => [:TLSv1, :TLSv1_server, :TLSv1_client, :SSLv2, :SSLv2_server, ...]
 
---- SESSION_CACHE_OFF
+--- SESSION_CACHE_OFF -> Integer
+セッションをキャッシュしないことを意味します。
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_CLIENT -> Integer
+クライアント側セッションをキャッシュに追加することを意味します。
+
+クライアントがサーバとのハンドシェイクに成功した時点で
+[[c:OpenSSL::SSL::SSLContext]] が持っているセッションキャッシュ領域に
+セッションを追加します。
+
 #@todo
---- SESSION_CACHE_CLIENT
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_SERVER -> Integer
+サーバ側でセッションをキャッシュすることを意味します。
+
 #@todo
---- SESSION_CACHE_SERVER
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_BOTH -> Integer
 #@todo
---- SESSION_CACHE_BOTH
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_NO_AUTO_CLEAR -> Integer
 #@todo
---- SESSION_CACHE_NO_AUTO_CLEAR
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_NO_INTERNAL -> Integer
 #@todo
---- SESSION_CACHE_NO_INTERNAL
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_NO_INTERNAL_LOOKUP -> Integer
 #@todo
---- SESSION_CACHE_NO_INTERNAL_LOOKUP
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+
+--- SESSION_CACHE_NO_INTERNAL_STORE -> Integer
 #@todo
---- SESSION_CACHE_NO_INTERNAL_STORE
-#@todo
+
+[[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
+渡すフラグとして用います。
+

@@ -654,14 +654,38 @@ hostname に nil を渡すと SNI 拡張を利用しません。
      [[m:OpenSSL::SSL::SSLContext#servername_cb=]],
 
 
---- session
-#@todo
+--- session -> OpenSSL::SSL::Session
+利用している SSL セッションを [[c:OpenSSL::SSL::Session]]
+オブジェクトで返します。
 
---- session=
-#@todo
+@see [[m:OpenSSL::SSL::SSLSocket#session=]],
+     [[m:OpenSSL::SSL::SSLSocket#session_reused?]]
 
---- session_reused?
-#@todo
+--- session=(sess)
+ハンドシェイクで再利用する SSL セッションを
+設定します。
+
+このメソッドはクライアント側でのみ有用です。
+セッションを再利用する場合は、
+[[m:OpenSSL::SSL::SSLSocket#connect]] を呼ぶ前に
+このメソッドでセッションオブジェクト
+([[c:OpenSSL::SSL::Session]] のインスタンス)
+を設定します。
+
+サーバ側の場合 [[c:OpenSSL::SSL::SSLContext]] がキャッシュの保持と
+管理を行います。
+
+@param sess 設定するセッション
+@see [[m:OpenSSL::SSL::SSLSocket#session]],
+     [[m:OpenSSL::SSL::SSLSocket#session_reused?]]
+
+--- session_reused? -> bool
+利用している SSL セッションが再利用されたものである
+場合に真を返します。
+
+@see [[c:OpenSSL::SSL::Session]],
+     [[m:OpenSSL::SSL::SSLSocket#session]],
+     [[m:OpenSSL::SSL::SSLSocket#session=]]
 
 --- verify_result -> Integer
 検証結果のエラーコードを整数値で返します。
