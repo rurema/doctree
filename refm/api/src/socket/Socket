@@ -114,8 +114,7 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
   #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 2, 17],
   #    ["AF_INET", 0, "helium.ruby-lang.org", "210.251.121.214", 2, 3, 0]]
 
---- getnameinfo(sa[, flags]) -> Array
-#@todo
+--- getnameinfo(sa, flags = 0) -> Array
 
 [[RFC:2553]] で定義された getnameinfo() の機能を提供するク
 ラスメソッド。 gethostbyaddr() や getservbyport() の代
@@ -253,7 +252,6 @@ service, protoに対応するポート番号を返
 #@if (version >= "1.8.0")
 --- sockaddr_in(port, host) -> String
 --- pack_sockaddr_in(port, host) -> String
-#@todo
 
 指定したアドレスを[[ref:lib:socket#pack_string]]
 で返します。port は、ポート番号を表す [[c:Fixnum]] あるいは、ポート
@@ -275,12 +273,14 @@ service, protoに対応するポート番号を返
 #@end
 
 #@if (version >= "1.8.0")
---- sockaddr_un(path)
---- pack_sockaddr_un(path)
+--- sockaddr_un(path) -> String
+--- pack_sockaddr_un(path) -> String
 #@todo
 
 指定したアドレスを[[ref:lib:socket#pack_string]]
 で返します。
+
+@param path パスを文字列で指定します。
 
 例:
 
