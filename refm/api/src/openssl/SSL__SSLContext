@@ -10,7 +10,9 @@ SSL コネクション([[c:OpenSSL::SSL::SSLSocket]] や [[c:OpenSSL::SSL::SSLServer]])
 コネクションを1度生成して以降は、コンテキストが保持しているパラメータを
 変更できません。一部のパラメータが共有されるため、安全性のため
 [[m:Object#freeze]] によってオブジェクトを変更不可能にします。
-
+ただしこの凍結は完全ではなく、
+この後もセッション管理機能によってオブジェクトのキャッシュ領域に
+セッションを追加したり削除したりできます。
 
 === Constants
 verify_mode= と options= で指定できる定数に関しては [[c:OpenSSL::SSL]] を参照してください。
@@ -418,16 +420,13 @@ cb に nil を指定するとデフォルトのパラメータが利用されます。
 --- session_id_context -> String | nil
 セッション ID コンテキスト文字列を返します。
 
-セッションキャッシュが有効でない場合は nil を返します。
+設定されていない場合は nil を返します。
 
 @see [[c:OpenSSL::SSL::Session]],
      [[m:OpenSSL::SSL::SSLContext#session_id_context=]]
 
 --- session_id_context=(id_context)
 セッション ID コンテキストを文字列で設定します。
-
-これを設定することでサーバ側のセッションキャッシュが有効になります。
-クライアント側では意味を持ちません。
 
 セッション ID コンテキストは、セッションをグループ化するための
 識別子で、セッション ID コンテキストとセッション ID の両方が
@@ -441,6 +440,8 @@ cb に nil を指定するとデフォルトのパラメータが利用されます。
 識別するための識別子であり、一方セッション ID は各セッションを
 識別するための識別子であり、この2つは異なる概念で
 あることに注意してください。
+
+クライアント側では意味を持ちません。
 
 @param id_context セッション ID コンテキスト文字列(最大32バイト)
 @see [[c:OpenSSL::SSL::Session]],
@@ -520,8 +521,15 @@ nil を返さなければなりません。
 @param pr コールバックオブジェクト
 @see [[m:OpenSSL::SSL::SSLContext#servername_cb]]
 
---- session_add
-#@todo
+--- session_add(sess) -> bool
+セッションを [[c:OpenSSL::SSL::SSLContext]] 内部のキャッシュ領域に
+追加します。
+
+成功時には真を返します。すでにキャッシュ領域にあるセッションを
+追加しようとした場合は追加されずに偽を返します。
+
+@param sess 追加するセッション([[c:OpenSSL::SSL::Session]])
+
 --- session_cache_mode -> Integer
 セッションキャッシュのモードを返します。
 
@@ -560,27 +568,54 @@ size に 0 を渡すと制限なしを意味します。
 @param size セッションキャッシュのサイズ(整数値)
 @see [[m:OpenSSL::SSL::SSLContext#session_cache_size]]
 
-#@todo
---- session_cache_stats
-#@todo
+--- session_cache_stats -> {Symbol -> Integer}
+セッションキャッシュの内部統計情報をハッシュテーブルで返します。
+
+ハッシュテーブルの各キーとその意味は以下の通りです。
+  * :cache_num  内部キャッシュに保持されているセッションの数
+  * :connect クライアント側でハンドシェイクした回数
+  * :connect_good クライアント側でハンドシェイクが成功した回数
+  * :connect_renegotiate クライアント側で再ネゴシエイトした回数
+  * :accept サーバ側でハンドシェイクした回数
+  * :accept_good サーバ側でハンドシェイクが成功した回数
+  * :accept_renegotiate サーバ側で再ネゴシエイトした回数
+  * :cache_hits サーバ側で内部キャッシュにヒットした数
+  * :cb_hits サーバ側で外部キャッシュにヒットした数
+  * :cache_full キャッシュが満杯で破棄したセッションの数
+  * :timeouts ヒットしたキャッシュがタイムアウトしてしまっていた回数
+
 --- session_get_cb
 #@todo
+
 --- session_get_cb=
 #@todo
+
 --- session_new_cb
 #@todo
+
 --- session_new_cb=
 #@todo
---- session_remove
-#@todo
+
+--- session_remove(sess) -> bool
+セッションを [[c:OpenSSL::SSL::SSLContext]] 内部のキャッシュ領域から
+取り除きます。
+
+成功時には真を返します。キャッシュ領域に存在しないセッションを
+削除しようとした場合は偽を返します。
+
+@param sess 削除するセッション([[c:OpenSSL::SSL::Session]])
+
 --- session_remove_cb
 #@todo
+
 --- session_remove_cb=
 #@todo
+
 --- flush_sessions(time=nil) -> self
 自身が保持しているセッションキャッシュを破棄します。
 
-time に nil を渡すとすべてのキャッシュを破棄します。
+time に nil を渡すと現在時刻で期限切れになっている
+キャッシュを破棄します。
 
 time に [[c:Time]] オブジェクトを渡すと、その
 時刻で時間切れになるキャッシュを破棄します。
@@ -620,50 +655,81 @@ time に [[c:Time]] オブジェクトを渡すと、その
 --- SESSION_CACHE_CLIENT -> Integer
 クライアント側セッションをキャッシュに追加することを意味します。
 
-クライアントがサーバとのハンドシェイクに成功した時点で
-[[c:OpenSSL::SSL::SSLContext]] が持っているセッションキャッシュ領域に
-セッションを追加します。
-
-#@todo
-
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
+
+クライアント側においては、OpenSSL ライブラリがどのセッションを
+再利用するべきか確実に判定する方法はないので、再利用する場合は
+[[m:OpenSSL::SSL::SSLSocket#session=]] によって明示的に
+セッションを指定しなければなりません。
 
 --- SESSION_CACHE_SERVER -> Integer
 サーバ側でセッションをキャッシュすることを意味します。
 
-#@todo
-
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
+
+このフラグが立っているとサーバ側の [[c:OpenSSL::SSL::SSLContext]] 
+でセッションキャッシュの保持と管理、再利用が
+行われます。
+
+このフラグはデフォルトで有効になっています。
 
 --- SESSION_CACHE_BOTH -> Integer
-#@todo
+サーバ側、クライアント側両方でセッションをキャッシュすることを意味します。
 
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
 
+実際には
+[[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_SERVER]] と
+[[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_CLIENT]] のビット論理和
+を取った値です。
+
+
 --- SESSION_CACHE_NO_AUTO_CLEAR -> Integer
-#@todo
+[[c:OpenSSL::SSL::SSLContext]] 内部の
+セッションキャッシュ領域を自動的にクリアしないことを意味します。
+
+通常では255コネクションごとにキャッシュを破棄しますが、この
+フラグを有効にするとそれをしなくなります。
+代わりに適当なタイミングで
+[[m:OpenSSL::SSL::SSLContext#flush_sessions]] を呼び
+キャッシュを破棄しなければなりません。
 
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
 
 --- SESSION_CACHE_NO_INTERNAL -> Integer
-#@todo
+[[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL_STORE]]
+と
+[[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_NO_INTERNAL_LOOKUP]]
+の両方を有効にすることを意味します。
 
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
 
 --- SESSION_CACHE_NO_INTERNAL_LOOKUP -> Integer
-#@todo
+サーバ側でセッションキャッシュが必要になった場合
+[[c:OpenSSL::SSL::SSLContext]] が保持するキャッシュ領域
+を探索しないことを意味します。
 
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
+
+このフラグを ON にすると、キャッシュの探索が必要になった
+場合必ずコールバック([[c:OpenSSL::SSL::SSLContext#session_get_cb=]]
+で設定したもの)を呼ぶようになります。
 
 --- SESSION_CACHE_NO_INTERNAL_STORE -> Integer
-#@todo
+セッションキャッシュを [[c:OpenSSL::SSL::SSLContext]] 内部の
+キャッシュ領域に保持しないことを意味します。
 
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] に
 渡すフラグとして用います。
 
+ハンドシェイクによってセッションが開始された場合には
+そのセッションを [[c:OpenSSL::SSL::SSLContext]] 内部に
+キャッシュとして保持しますが、
+このフラグを有効にすると自動的にキャッシュされることは
+なくなります。
