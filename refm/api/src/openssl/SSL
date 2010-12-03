@@ -12,22 +12,86 @@ SSL 通信で各種のバグ回避コードを有効にするフラグです。
 [[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
 
 --- OP_CIPHER_SERVER_PREFERENCE -> Integer
---- OP_EPHEMERAL_RSA -> Integer
---- OP_NETSCAPE_CA_DN_BUG -> Integer
---- OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG -> Integer
---- OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION -> Integer
---- OP_NO_SSLv2 -> Integer
---- OP_NO_SSLv3 -> Integer
---- OP_NO_TLSv1 -> Integer
---- OP_NO_TICKET -> Integer
---- OP_PKCS1_CHECK_1 -> Integer
---- OP_PKCS1_CHECK_2 -> Integer
---- OP_SINGLE_DH_USE -> Integer
---- OP_SINGLE_ECDH_USE -> Integer
---- OP_TLS_ROLLBACK_BUG -> Integer
-#@todo
+暗号スイートの選択においてサーバ側の優先順位を優先するフラグです。
 
-[[m:OpenSSL::SSL::SSLContext#options=]] に指定できるもの。
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+このフラグを立てていない場合はクライアント側の優先順位を優先します。
+
+--- OP_EPHEMERAL_RSA -> Integer
+RSA を使う場合に常に一時的 RSA 鍵を使うことを意味するフラグです。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NETSCAPE_CA_DN_BUG -> Integer
+Netscape の CA の DN のエンコーディングバグを
+回避するコードを有効にします。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG -> Integer
+#@todo
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION -> Integer
+セッション再ネゴシエーションをした場合にサーバ側で
+常に新しいセッションを生成するフラグです。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NO_SSLv2 -> Integer
+SSL v2 の使用を禁止するフラグです。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NO_SSLv3 -> Integer
+SSL v3 の使用を禁止するフラグです。
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NO_TLSv1 -> Integer
+TLS v1 の使用を禁止するフラグです。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_NO_TICKET -> Integer
+RFC4507bis チケットによる stateless session resumption を
+無効化します。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_PKCS1_CHECK_1 -> Integer
+#@todo
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_PKCS1_CHECK_2 -> Integer
+#@todo
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_SINGLE_DH_USE -> Integer
+一時的 DH 鍵を使うとき毎回鍵を生成するフラグです。
+
+このオプションは「安全でない」素数を使って DH パラメータを
+生成したときに「small subgroup attack」を防ぐために必要です。
+「安全な」素数を使った場合は必ずしも必要なオプションでは
+ありませんが、このオプションを使うことは推奨されています。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_SINGLE_ECDH_USE -> Integer
+#@todo
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+--- OP_TLS_ROLLBACK_BUG -> Integer
+バージョンロールバック攻撃の検出を無効にします。
+
+[[m:OpenSSL::SSL::SSLContext#options=]] で利用します。
+
+通常は使わないでください。
+
+鍵交換時に、クライアントとサーバで利用可能なプロトコルのバージョンを
+やりとりします。クライアントによってはサーバが送った
+バージョンを無視します。そのようなクライアントと通信する必要が
+ある場合このオプションを有効にします。
 
 --- VERIFY_CLIENT_ONCE -> Integer
 [[m:OpenSSL::SSL::SSLContext#verify_mode=]] で指定できるフラグです。
