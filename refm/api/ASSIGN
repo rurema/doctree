@@ -184,9 +184,9 @@ mutex_m                         ohai            done
 net/ftp                         ohai            done
 net/ftptls
 net/http                        ohai            done
-net/https
+net/https                       ohai
 net/imap
-net/pop                         ohai
+net/pop                         ohai            done
 net/smtp                        ohai            done
 net/telnet                      ohai            done
 net/telnets

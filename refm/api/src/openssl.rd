@@ -126,7 +126,7 @@ OpenSSL は SSL/TLS による通信を提供する高水準なインターフェースと
   cer.sign(key, digest) # <= 署名するのに使う秘密鍵とハッシュ関数
   print cer.to_text
 
-=== 参考
+===[a:references] 参考文献
   * [[RFC:5246]]
   * Eric Rescorla. SSL and TLS : Designing and Building Secure Systems.
     邦訳, Eric Rescorla 著 齋藤孝道・鬼頭利之・古森貞監訳.
