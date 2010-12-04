@@ -361,8 +361,10 @@ POP セッションを開き、認証だけを行って接続を切ります。
 --- default_port -> Integer
 #@since 1.8.7
 --- default_pop3_port -> Integer
+#@end
 POP3 のデフォルトのポート番号(110)を返します。
 
+#@since 1.8.7
 --- default_pop3s_port -> Integer
 デフォルトのPOP3Sのポート番号(995)を返します。
 
