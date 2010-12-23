@@ -13,4 +13,4 @@ require optparse
  }
  opts.parse!
  
- # ruby command -u http://www.example.com 
+ # ruby command -u http://www.example.com

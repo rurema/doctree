@@ -26,7 +26,7 @@ undef します。
 
 ブロックを与えた場合は、[[c:OptionParser]] を引数としてブロックを実行します。
 ブロックの実行結果を返します。
-ブロックの実行途中で [[c:OptionParser::ParseError]] 
+ブロックの実行途中で [[c:OptionParser::ParseError]]
 が発生した場合は、全て rescue し、エラーメッセージを出力し、
 nil を返します。
 
@@ -104,7 +104,7 @@ nil を返します。
                  2つの場合は "fx" の様に指定します。ここでオプションがないときは空文字列を指定します。
                  オプションが引数をとる場合は直後に ":" を付けます。
 
-@param long_opt ロングネームのオプション(--version や --bufsize=512)を文字列で指定をします。                
+@param long_opt ロングネームのオプション(--version や --bufsize=512)を文字列で指定をします。
                 オプションが引数をとる場合は後ろに ":" を付けます。
                 オプションの引数のデフォルト値を ":" の直後に指定することができます。
                 例えば、"bufsize:1024" となります。
@@ -113,14 +113,14 @@ nil を返します。
                                 サブクラスが投げられます。
 
 例:
- 
+
  # t.rb の内容
  require 'optparse'
  params = ARGV.getopts("ab:", "foo", "bar:", "bufsize:1024")
  p params
 
  # 実行結果
- $ ruby t.rb -b 1 --foo  --bar xxx -- -a 
+ $ ruby t.rb -b 1 --foo  --bar xxx -- -a
  {"bufsize"=>"1024", "a"=>false, "b"=>"1", "foo"=>true, "bar"=>"xxx"}  # "a"=>false であることに注意。
 
 #@end

@@ -213,7 +213,7 @@ GNUの慣習にあわせて
 
         ruby sample.rb --fo
 
-この例では、--fo は、--foo を指定したのと同じになります。この例なら --f 
+この例では、--fo は、--foo を指定したのと同じになります。この例なら --f
 まで省略できます。
 
 ====[a:help] ヘルプ
@@ -250,7 +250,7 @@ on の引数にそのオプションの説明を加えると --help の出力に反映されます。
         p ARGV
         
         ruby ./sample.rb --help
-        # => Usage: sample [options]        
+        # => Usage: sample [options]
                 -a                               description of -a
                 -b                               description of -b
 
@@ -280,7 +280,7 @@ on の引数にそのオプションの説明を加えると --help の出力に反映されます。
 
 ====[a:subcmd] サブコマンド
 以下は cvs や svn のようにサブコマンドを解釈する例です。
-  
+
     #! /usr/bin/ruby
     # contributed by Minero Aoki.
     

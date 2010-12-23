@@ -227,7 +227,7 @@ to にサマリが加えられることはありません。
 
 例:
        require 'optparse'
-       opts = OptionParser.new 
+       opts = OptionParser.new
        opts.banner = "Usage: example.rb [options]"
        
        opts.separator ""
@@ -244,7 +244,6 @@ to にサマリが加えられることはありません。
          puts opts
          exit
        end
-       
 
 --- on(short, desc = "") {|v| ... }        -> self
 --- on(long, desc = "") {|v| ... }         -> self
