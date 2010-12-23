@@ -43,9 +43,8 @@ verify_mode に指定する定数に関しては [[c:OpenSSL::SSL]] を参照してください。
 
 以下は HTTPS プロクシ経由でアクセスする例です。
 プロクシ経由でも通信路は暗号化されます。
-詳しくは以下を参照してください。
-
- * WWWプロキシにおけるSSLトンネリング: [[url:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]
+#@#詳しくは以下を参照してください。
+#@# * WWWプロキシにおけるSSLトンネリング: [[url:http://www21.ocn.ne.jp/~k-west/SSLandTLS/draft-luotonen-ssl-tunneling-03-Ja.txt]]
 
   require 'net/https'
   proxy_addr = 'proxy.example.com'
@@ -195,7 +194,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
 
 デフォルトは nil で、VERIFY_NONE を意味します。
 
---- verify_callback
+--- verify_callback -> Proc
 自身に設定されている検証をフィルタするコールバックを
 返します。
 
@@ -216,7 +215,7 @@ SSL/TLS が有効でなかったり、接続前である場合には nil
      [[m:OpenSSL::X509::Store#verify_callback=]],
      [[m:OpenSSL::SSL::SSLContext#verify_callback=]]
 
---- verify_depth
+--- verify_depth -> Integer
 証明書チェイン上の検証する最大の深さを返します。
 
 @see [[m:Net::HTTP#verify_depth=]], [[m:OpenSSL::SSL::SSLContext#verify_depth]]
