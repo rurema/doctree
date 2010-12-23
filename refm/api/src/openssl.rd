@@ -179,7 +179,6 @@ Ruby/OpenSSL のバージョンです。
 #@include(openssl/PKCS5)
 #@include(openssl/PKCS12)
 #@include(openssl/PKCS7)
-#@include(openssl/PKCS7__PKCS7)
 #@include(openssl/PKey__DH)
 #@include(openssl/PKey__DSA)
 #@include(openssl/PKey__PKey)

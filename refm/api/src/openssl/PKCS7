@@ -1,11 +1,20 @@
-#@if (version >= "1.8.0")
-= module OpenSSL::PKCS7
 
-PKCS #7 モジュール
+= class OpenSSL::PKCS7 < Object
 
-[[c:OpenSSL::PKCS7::PKCS7]] も参照してください。
+PKCS #7 クラス
 
-== Module Functions
+PKCS #7 は暗号技術とともに用いられるデータのフォーマットの仕様です。
+データやそれに対する署名、証明した日時など任意の属性を含むことができ、S/MIME などに使用されています。
+[[rfc:2315]]
+
+== Class Methods
+
+--- new
+--- new(str)
+--- new(io)
+#@todo
+
+PKCS7 オブジェクトを生成します。
 
 --- read_smime(str)
 --- read_smime(io)
@@ -37,6 +46,108 @@ data に証明書 cert を付けて key で署名します。
 #@todo
 
 S/MIME 形式の文字列をメッセージの受け取り手の公開鍵 rcpt を使って暗号化します。
+
+== Instance Methods
+
+--- type
+--- type=(type)
+#@todo
+
+タイプを [[c:Symbol]] オブジェクトで返します。次のうちのいずれかの値をとります。
+
+:signed, :encrypted, :enveloped, :signedAndEnveloped, :data
+
+--- detached
+--- detached=(bool)
+#@todo
+
+平文に署名を付ける形式(multipart/signed)かどうかを表します。 type では :signed にあたります。
+
+--- detached?
+#@todo
+
+実際に署名されていてかつ平文に署名を付ける形式(multipart/signed)かどうかを返します。
+
+--- cipher=(cipher)
+#@todo
+
+使用する暗号アルゴリズムを指定します。
+
+--- add_signer(singer)
+#@todo
+
+署名者を加えます。
+
+--- signers
+#@todo
+
+メッセージの署名者 OpenSSL::PKCS7::Signer オブジェクトの配列を返します。
+
+--- add_recipient
+#@todo
+
+--- add_certificate
+#@todo
+
+--- certificates
+--- certificates=(certificates)
+#@todo
+
+署名に付ける証明書を指定します。
+
+--- add_crl(s)
+#@todo
+
+CRL に加えます。
+
+--- crls
+--- crls=(s)
+#@todo
+
+CRL を返します。
+
+--- add_data(data)
+#@todo
+
+署名の対象となるデータに data を加えます。
+
+--- data
+--- data=(data)
+#@todo
+
+署名の対象となるデータを返します。
+
+--- verify(certs, store, indata = nil, flags = 0)
+#@todo
+
+署名を検証します。
+
+--- decrypt(pkey, cert, flags = 0)
+#@todo
+
+復号化します。
+
+--- to_pem
+--- to_s
+#@todo
+
+PEM 形式に変換します。
+
+#@since 1.8.1
+--- to_der
+#@todo
+
+DER 形式に変換します。
+#@end
+
+--- error_string
+--- error_string=
+#@todo
+
+#@since 1.8.3
+--- recipients
+#@todo
+#@end
 
 == Constants
 
@@ -82,8 +193,14 @@ MIME canonical format への変換を行いません。
 --- NOVERIFY
 #@todo
 
+= class OpenSSL::PKCS7::PKCS7 < OpenSSL::PKCS7
+このクラスは 1.8.6 以前との互換性のために存在します。
+
+
 #@since 1.8.3
 = class OpenSSL::PKCS7::RecipientInfo < Object
+== Class Methods
+--- new
 
 == Instance Methods
 
@@ -97,31 +214,21 @@ MIME canonical format への変換を行いません。
 #@todo
 #@end
 
+#@until 1.8.3
 = class OpenSSL::PKCS7::Signer < Object
-
-== Instance Methods
-
-#@since 1.8.3
---- issuer
-#@todo
-#@end
-
---- name
-#@todo
-
---- serial
-#@todo
-
---- signed_time
-#@todo
-
-#@since 1.8.3
+#@else
 = class OpenSSL::PKCS7::SignerInfo < Object
+#@end
+
+== Class Methods
+--- new
 
 == Instance Methods
 
+#@since 1.8.3
 --- issuer
 #@todo
+#@end
 
 --- name
 #@todo
@@ -131,6 +238,7 @@ MIME canonical format への変換を行いません。
 
 --- signed_time
 #@todo
-#@end
 
-#@end
+= class OpenSSL::PKCS7::PKCS7Error < OpenSSL::OpenSSLError
+
+
