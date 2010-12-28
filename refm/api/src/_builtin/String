@@ -549,9 +549,6 @@ self が regexp にマッチしない場合は nil を返します。
    p "foobar"[/bar/]  # => "bar"
    p $~.begin(0)      # => 3
 
-   p "foobar"[/bar/]   # => "bar"
-   p $~.begin(0)       # => 3
-
 #@since 1.8.0
    p "def getcnt(line)"[ /def\s+(\w+)/, 1 ]   # => "getcnt"
 #@end
