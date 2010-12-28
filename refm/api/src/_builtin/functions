@@ -892,7 +892,7 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
 --- require_relative(relative_feature) -> bool
 現在のファイルからの相対パスで require します。
 
-  require File.expand_path(File.join(File.dirname(__FILE__), relative_feature))
+  require File.expand_path(relative_feature, File.dirname(__FILE__))
 とほぼ同じです。
 
 @param feature ファイル名の文字列です。
