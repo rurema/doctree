@@ -1192,6 +1192,7 @@ stdscr のカーソル位置から 1 バイト読みとって返します。
 --- ungetmouse(mevent)
 #@todo
 
+#@since 1.9.2
 --- ESCDELAY -> Integer
 
 ESC の入力を破棄する時間(ミリ秒単位)を取得します。
@@ -1229,6 +1230,7 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 詳細は man ページの default_colors(3X) を参照ください。
 
 サポートしていない環境では、例外 NotImplementedError が発生します。
+#@end
 
 #@include(curses/Curses__Key)
 #@include(curses/Curses__MouseEvent)
