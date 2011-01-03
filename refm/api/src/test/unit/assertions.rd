@@ -5,6 +5,9 @@
 
 = module Test::Unit::Assertions
 
+#@since 1.9.1
+include MiniTest::Assertions
+#@end
 
 各種の assert メソッドを提供するモジュールです。
 
@@ -236,3 +239,13 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
   end
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+#@since 1.9.1
+--- mu_pp(obj)     -> String
+
+obj を人間が読みやすい形の文字列表現にして返します。
+
+@param obj 任意のオブジェクト
+
+@return obj を人間が読みやすい形式にした文字列
+#@end

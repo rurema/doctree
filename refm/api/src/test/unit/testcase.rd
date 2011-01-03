@@ -5,11 +5,12 @@ require test/unit/testsuite
 
 #@since 1.9.1
 = class Test::Unit::TestCase < MiniTest::Unit::TestCase
+include MiniTest::Assertions
 #@else
 = class Test::Unit::TestCase < Object
-#@end
 include Test::Unit::Assertions
 #@#include Test::Unit::Util::BacktraceFilter
+#@end
 
 テストの基本単位(あるいは「テスト本体」)を表すクラスです。
 テストを行うメソッド(テストメソッド)は TestCase のサブクラスのインスタンスメソッド
@@ -44,8 +45,9 @@ include Test::Unit::Assertions
 
 各 TestCase オブジェクトは、ひとつのテストメソッドに対応しています。テストが実行される時には、
 テストメソッドの数だけ TestCase オブジェクトが生成されます。
-
-Ties everything together. If you subclass and add your own test methods, it takes care of making them into tests and wrapping those tests into a suite. It also does the nitty-gritty of actually running an individual test and collecting its results into a [[c:Test::Unit::TestResult]] object.
+#@until 1.9.1
+テストの実行時にはそれぞれの結果が[[c:Test::Unit::TestResult]]に集計されます。
+#@end
 
 == Class Methods
 
