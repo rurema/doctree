@@ -84,7 +84,7 @@ TestCase オブジェクトを生成し、[[c:Test::Unit::TestSuite]] オブジェクト
 
 自身に対応しているテストメソッドの名前を文字列で返します。
 
-[[m:Test::Unit::TestCase#setup]] や [[m:Test::Unit::TestCase#teardown]] 
+[[m:Test::Unit::TestCase#setup]] や [[m:Test::Unit::TestCase#teardown]]
 において、実行する(あるいは、実行した)テストメソッドの名前を知るのに
 使うことができます。
 

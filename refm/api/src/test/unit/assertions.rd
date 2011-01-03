@@ -175,7 +175,7 @@ head は template の前に追加されます。template に指定した文字列に '?' が
 ブロックを実行して例外が起きなければパスします。
 
 ブロックを実行して発生した例外が klass1, klass2, ..., のいずれかのクラスの
-インスタンスである場合は、assert は失敗扱いとなり、Test::Unit::AssertionFailedError 
+インスタンスである場合は、assert は失敗扱いとなり、Test::Unit::AssertionFailedError
 を投げます。そうでない場合は、エラー扱いとなり発生した例外を再び投げます。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
@@ -206,7 +206,7 @@ head は template の前に追加されます。template に指定した文字列に '?' が
 --- assert_in_delta(expected_float, actual_float, delta, message="")    -> ()
 #@todo
 
-(expected_float.to_f - actual_float.to_f).abs <= delta.to_f 
+(expected_float.to_f - actual_float.to_f).abs <= delta.to_f
 が真ならパスします。
 
 delta は正の数でなければならない。
