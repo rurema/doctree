@@ -65,14 +65,14 @@ CRC チェックサムの計算に用いるテーブルを配列で返します。
 
 string を圧縮します。
 
-@see [[Zlib::Deflate.deflate]]
+@see [[m:Zlib::Deflate.deflate]]
 
 --- Inflate(string) -> String
 #@todo
 
 string を展開します。
 
-@see [[Zlib::Inflate.inflate]]
+@see [[m:Zlib::Inflate.inflate]]
 #@end
 
 == Constants
