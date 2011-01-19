@@ -114,7 +114,6 @@ HTTPResponse オブジェクトを生成して返します。
 --- content_length         -> Integer | nil
 --- content_length=(len)
 
-
 Content-Length ヘッダの値を整数で表すアクセサです。デフォルトは nil です。
 
 : body が String オブジェクトである場合

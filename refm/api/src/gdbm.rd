@@ -292,7 +292,6 @@ value を値とする要素がデータベース中に存在する時、真を返します。
 
 --- reject {|key, value| ... } -> Hash
 
-
 ブロックを評価した値が真であれば該当する要素を削除します。
 
   self.to_hash.reject{|key, value| ... }
