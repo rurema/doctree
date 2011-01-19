@@ -68,7 +68,7 @@ POP3.new, #start, #finish を併合できます。
 
 [[m:Net::POP3#delete_all]] を使うと
 さらに [[m:Net::POP3#each_mail]] と
-[[m:Net::POP3#delete]] を併合できます。
+[[m:Net::POPMail#delete]] を併合できます。
 
   require 'net/pop'
   
