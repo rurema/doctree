@@ -93,6 +93,16 @@ Proc オブジェクトが受け付ける引数の数を返します。
 
 例:
 
+#@since 1.9.1
+ lambda{           }.arity   # => 0
+ lambda{||         }.arity   # =>  0
+ lambda{|x|        }.arity   # =>  1
+ lambda{|*x|       }.arity   # => -1
+ lambda{|x, y|     }.arity   # =>  2
+ lambda{|x, *y|    }.arity   # => -2
+ lambda{|(x, y)|   }.arity   # =>  1
+ lambda{|(x, y), z|}.arity   # =>  2
+#@else
  lambda{           }.arity   # => -1
  lambda{||         }.arity   # =>  0
  lambda{|x|        }.arity   # =>  1
@@ -101,6 +111,7 @@ Proc オブジェクトが受け付ける引数の数を返します。
  lambda{|x, *y|    }.arity   # => -2
  lambda{|(x, y)|   }.arity   # =>  2
  lambda{|(x, y), z|}.arity   # =>  2
+#@end
 
 --- binding -> Binding
 
