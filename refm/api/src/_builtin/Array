@@ -1056,7 +1056,6 @@ join した文字列を連結します。
 --- nitems{|obj| ... } -> Integer
 #@end
 
-
 nil でない要素の数を返します。
 
 #@since 1.8.7
