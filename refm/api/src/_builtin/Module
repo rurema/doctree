@@ -534,11 +534,7 @@ self のインスタンスメソッドをオブジェクト化した [[c:UnboundMethod]] を返します。
 
 @see [[m:Object#method]]
 
-#@since 1.9.1
---- method_defined?(name, inherit = true) -> bool
-#@else
 --- method_defined?(name) -> bool
-#@end
 
 モジュールにインスタンスメソッド name が定義されているとき
 true を返します。
