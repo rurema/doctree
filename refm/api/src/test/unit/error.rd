@@ -1,39 +1,47 @@
 = class Test::Unit::Error < Object
 
-== Class Methods
-#@# bc-rdoc: detected missing name: new
---- new(test_name, exception)
-#@todo
+テスト時のエラーを表現するクラスです。テスト中に例外が発生した時に
+[[c:Test::Unit::TestCase]] から作られます。
 
-Creates a new Error with the given test_name and exception.
+== Class Methods
+
+--- new(test_name, exception) -> Test::Unit::Error
+
+Test::Unit::Error オブジェクトのインスタンスを生成します。
+
+@param test_name 対応するテストメソッドの名前を指定します。
+
+@param exception 対応する例外オブジェクトを指定します。
 
 == Instance Methods
-#@# bc-rdoc: detected missing name: long_display
---- long_display
-#@todo
 
-Returns a verbose version of the error description.
+--- exception -> Exception
 
-#@# bc-rdoc: detected missing name: message
---- message
-#@todo
+自身に対応する例外オブジェクトを返します。
 
-Returns the message associated with the error.
+--- long_display -> String
+--- to_s -> String
 
-#@# bc-rdoc: detected missing name: short_display
---- short_display
-#@todo
+エラーの詳細な説明を文字列で返します。
 
-Returns a brief version of the error description.
+--- message -> String
 
-#@# bc-rdoc: detected missing name: single_character_display
---- single_character_display
-#@todo
+発生した例外に関連するエラーメッセージを文字列で返します。
 
-Returns a single character representation of an error.
+[[m:Test::Unit::Error#short_display]] や
+[[m:Test::Unit::Error#long_display]] で使われます。
 
-#@# bc-rdoc: detected missing name: to_s
---- to_s
-#@todo
+@see [[m:Test::Unit::Error#short_display]],
+     [[m:Test::Unit::Error#long_display]]
 
-Overridden to return long_display.
+--- short_display -> String
+
+エラーの簡単な説明を文字列で返します。
+
+--- single_character_display -> String
+
+テストメソッド実行中に例外が発生した時に表示する 'E' を返します。
+
+--- test_name -> String
+
+自身に対応するテストメソッドの名前を返します。
