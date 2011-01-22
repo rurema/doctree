@@ -1,3 +1,5 @@
+各種の assert メソッドを提供します。
+
 #@until 1.9.1
 = class Test::Unit::AssertionFailedError < StandardError
 アサーションに失敗した時に [[c:Test::Unit::Assertions]] から raise されます。

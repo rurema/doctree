@@ -13,7 +13,8 @@ include Test::Unit::Util::Observable
 各種 TestRunner を実装するためのクラスです。
 
 == Class Methods
---- initialize(suite)
+
+--- new(suite) -> Test::Unit::UI::TestRunnerMediator
 
 新しく TestRunnerMediator オブジェクトを生成して返します。
 
@@ -22,15 +23,15 @@ include Test::Unit::Util::Observable
 
 == Instance Methods
 
---- run_suite
+--- run_suite -> Test::Unit::TestResult
+
 生成時に与えられた Test::Unit::TestSuite が保持しているテストを実行します。
 実行結果を表す Test::Unit::TestResult オブジェクトを返します。
 
 == Private Instance Methods
 
---- create_result
-#@todo
+--- create_result -> Test::Unit::TestResult
 
-A factory method to create the result the mediator
-should run with. Can be overridden by subclasses if
-one wants to use a different result.
+自身が結果オブジェクトを生成するためのファクトリメソッドです。
+
+異なる結果オブジェクトが必要な場合は再定義して使います。

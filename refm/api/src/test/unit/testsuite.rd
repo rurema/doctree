@@ -1,3 +1,4 @@
+複数のテストをひとつにまとめるためのライブラリです。
 
 = class Test::Unit::TestSuite < Object
 
@@ -25,9 +26,8 @@ TestSuite のインスタンスを生成して返します。
 
 #@since 1.8.1
 --- ==(other)    -> bool
-#@todo
 
-It's handy to be able to compare TestSuite instances.
+自身が other と等しい場合に真を返します。
 
 --- delete(test)    -> ()
 
@@ -39,6 +39,7 @@ test と等しいものがなければ nil を返します
 #@end
 
 --- empty?    -> bool
+
 実行すべきテストが空なら true を返します。そうでないなら false を返します。
 
 --- run(result) {|STARTED, name| ...}    -> ()
@@ -60,12 +61,11 @@ test と等しいものがなければ nil を返します
 持っているテストを再帰的に合計した数を返します。
 
 --- to_s    -> String
-#@todo
-
-Overridden to return the name given the suite at creation.
-
 --- name    -> String
-#@todo
+
+自身の名前を返します。
 
 --- tests    -> [ Test::Unit::TestSuite | Test::Unit::TestCase ]
-#@todo
+
+自身が持っているテストを [[c:Test::Unit::TestSuite]] か
+[[c:Test::Unit::TestCase]] の配列で返します。

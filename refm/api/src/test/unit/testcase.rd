@@ -3,6 +3,10 @@ require test/unit/assertions
 require test/unit/testsuite
 #@end
 
+テストケースを記述するときに使います。
+
+test/unit の require 時に同時にrequireされます。
+
 #@since 1.9.1
 = class Test::Unit::TestCase < MiniTest::Unit::TestCase
 include MiniTest::Assertions
