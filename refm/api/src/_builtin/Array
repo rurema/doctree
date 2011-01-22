@@ -1490,18 +1490,25 @@ nil を返します。
 @see [[m:Array#push]], [[m:Array#pop]], [[m:Array#shift]]
 
 #@since 1.8.0
---- values_at(*index)    -> Array | nil
+--- values_at(*selectors)    -> Array | nil
 
 引数で指定されたインデックスに対応する要素を配列で返します。インデッ
 クスに対応する値がなければ nil が要素になります。
 
-@param index インデックスを整数で指定します。
+@param selectors インデックスを整数もしくは整数の [[c:Range]] で指定します。
+       [[c:Range]] の場合は、[[m:Range#begin]] が配列のサイズを越える場合は無視され、
+       [[m:Range#end]] が配列のサイズを越えるまで対応する要素が選択されます。
+       ちょうど配列のサイズを指す場合は、nil で埋められます。
 
     ary = %w( a b c d e )
     p ary.values_at( 0, 2, 4 )          #=> ["a", "c", "e"]
     p ary.values_at( 3, 4, 5, 6, 35 )   #=> ["d", "e", nil, nil, nil]
     p ary.values_at( 0, -1, -2 )        #=> ["a", "e", "d"]
     p ary.values_at( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
+    p ary.values_at( 1..2 )             #=> ["b", "c"]
+    p ary.values_at( 3..10 )            #=> ["d", "e", nil]
+    p ary.values_at( 6..7 )             #=> []
+    p ary.values_at( 0, 3..5 )          #=> ["a", "d", "e", nil]
 
 #@# ([[m:Array#indexes]], [[m:Array#indices]] と同じです)
 
