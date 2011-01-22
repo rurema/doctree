@@ -29,7 +29,7 @@ TestSuite のインスタンスを生成して返します。
 
 自身が other と等しい場合に真を返します。
 
-@other 自身と比較する TestSuite オブジェクトを指定します。
+@param other 自身と比較する TestSuite オブジェクトを指定します。
 
 --- delete(test)    -> ()
 

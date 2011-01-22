@@ -1,5 +1,7 @@
 require test/unit/util/observable
 
+テストの結果を処理するときに使われます。
+
 = class Test::Unit::TestResult < Object
 include Test::Unit::Util::Observable
 
