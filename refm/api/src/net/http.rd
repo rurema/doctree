@@ -308,11 +308,11 @@ TCP コネクション、 HTTP セッションを開始します。
 [[c:URI]] で指定した対象に フォームのデータを HTTP で 
 POST します。
 
-送るデータは param に文字列から文字列への [[c:Hash]] として
+送るデータは params に文字列から文字列への [[c:Hash]] として
 渡します。
 
 @param uri POST する対象を [[c:URI]] で指定します。
-@param param POST するデータです。
+@param params POST するデータです。
 
 #@end
 
@@ -1173,7 +1173,7 @@ Content-Type: ヘッダフィールドが存在しない場合には nil を返します。
 
 --- content_type=(type)
 --- set_content_type(type, params = {})
-type と param から Content-Type: ヘッダフィールドの
+type と params から Content-Type: ヘッダフィールドの
 値を設定します。
 
 @param type メディアタイプを文字列で指定します。
