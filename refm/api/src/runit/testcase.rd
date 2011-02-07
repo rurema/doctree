@@ -10,6 +10,11 @@ require runit/error
 = class RUNIT::TestCase < Test::Unit::TestCase
 include RUNIT::Assert
 
+テストの基本単位(あるいは「テスト本体」)を構成するクラスです。
+
+このモジュールは RubyUnit との互換性のためにのみ提供されています。
+これからユニットテストを書くときは [[lib:test/unit]] を使ってください。
+
 == Class Methods
 
 --- new(test_name, suite_name = RUNIT::TestCase.name) -> RUNIT::TestCase

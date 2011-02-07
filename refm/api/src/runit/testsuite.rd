@@ -9,12 +9,12 @@
 
 == Instance Methods
 
---- add_tests(*args) -> self
+--- add_test(*args) -> self
 --- add(*args) -> self
 
 [[m:Test::Unit::TestSuite#<<]] と同じです。
 
---- counte_test_cases -> Integer
+--- count_test_cases -> Integer
 
 テストの件数を返します。
 

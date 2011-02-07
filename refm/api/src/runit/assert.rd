@@ -14,7 +14,7 @@ RubyUnit のアサーションを集めたモジュールです。
 このモジュールは RubyUnit との互換性のためにのみ提供されています。
 これからユニットテストを書くときは [[lib:test/unit]] を使ってください。
 
-== Module Functions
+== Instance Methods
 
 --- assert_equal_float(expected, actual, delta, message = "") -> ()
 
