@@ -1,8 +1,8 @@
-スレッド間キューや状態変数(condition variable)を提供するライブラリです。
+スレッド間キューや状態変数 (condition variable) を提供するライブラリです。
 
-このライブラリは[[c:Thread]]を拡張します．rubyインタプリタを
-デバッグオプション付き([[m:$DEBUG]]を真)で実行したときには，
-[[m:Thread.abort_on_exception]]をtrueにします
+このライブラリは [[c:Thread]] を拡張します。rubyインタプリタを
+デバッグオプション付き([[m:$DEBUG]]を真)で実行したときには、
+[[m:Thread.abort_on_exception]] を true にします。
 
 #@#((-あらい: 2001-02-11
 #@#$DEBUGが真の場合、rubyインタプリタの方で abort_on_exception を true にした
@@ -12,8 +12,8 @@
 = reopen Thread
 == Class Methods
 #@until 1.9.1
---- Thread.exclusive { ... }
-#@todo
+--- exclusive { ... } -> object
+
 #@# 1.9.1 以降は prelude.rb で定義されているので _builtin/Thread に移動しました。
 ブロック実行中、Threadの切り替えを行いません。
 

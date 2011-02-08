@@ -1,12 +1,11 @@
 = class Mutex < Object
 
 Mutex(Mutal Exclusion = 相互排他ロック)は共有データを並行アクセスから保護する
-ためにあります。Mutex の典型的な使い方は(mを
-Mutexオブジェクトとします):
+ためにあります。Mutex の典型的な使い方は(m を Mutex オブジェクトとします):
 
   m.lock
   begin
-    # mによって保護されたクリティカルセクション
+    # m によって保護されたクリティカルセクション
   ensure
     m.unlock
   end
@@ -14,59 +13,48 @@ Mutexオブジェクトとします):
 または、より簡単に
 
   m.synchronize {
-    # mによって保護されたクリティカルセクション
+    # m によって保護されたクリティカルセクション
   }
 
 == Class Methods
 
---- Mutex.new
-#@todo
+--- new -> Mutex
 新しい mutex を生成して返します。
 
 == Instance Methods
 
 #@until 1.9.1
---- exclusive_unlock { ... }
-#@todo
+--- exclusive_unlock { ... } -> self | nil
 ロックを解放し、ロック待ちになっているスレッドを実行可能状態に
 した後、ブロックを実行します。
 
 ブロックの実行が終了するまで、スレッドは切り替わりません。
 
-self がロックされていなければ nil を返します。そうでな
-ければself を返します。
+@return self がロックされていなければ nil を返します。そうでなければself を返します。
 #@end
 
---- lock
-#@todo
+--- lock -> self
 mutex オブジェクトをロックします。一度に一つのス
 レッドだけが mutex をロックできます。既にロックされている mutex
 に対してロックを行おうとしたスレッドは mutex のロックが解放さ
 れるまで、実行が停止されます。
 
-self を返します。
 
---- locked?
-#@todo
+--- locked? -> bool
 mutex がロックされている時、真を返します。
 
---- synchronize { ... }
-#@todo
-mutex をロックし、ブロックを実行します。実行後に必ず mutex のロッ
-クを解放します。
+--- synchronize { ... } -> self
 
---- try_lock
-#@todo
-mutex をロックしようとして、ロックが成功した場合、真を返しま
-す。ロックできなかった場合にはブロックせず偽を返します。
+mutex をロックし、ブロックを実行します。実行後に必ず mutex のロックを解放します。
+
+--- try_lock -> bool
+mutex をロックしようとして、ロックが成功した場合、真を返します。
+ロックできなかった場合にはブロックせず偽を返します。
 
 --- unlock     -> self | nil
+mutex のロックを解放します。mutex のロック待ちになっていたスレッドの実行は再開されます。
 
-mutex のロックを解放します。mutex のロック待ちになっていたスレッ
-ドの実行は再開されます。
-
-self がロックされていなければ nil を返します。そうでな
-ければself を返します。
+@return self がロックされていなければ nil を返します。そうでなければself を返します。
 
 例:
 
@@ -93,9 +81,10 @@ Mutex はロックしたスレッド以外からロックを開放することは出来ません。
 
 #@since 1.9.1
 --- sleep(timeout = nil)    -> self
-#@todo
 
-Releases the lock and sleeps timeout seconds if it is given and
-non-nil or forever. Raises ThreadError if mutex wasn't locked
-by the current thread.
+与えられた秒数の間スリープしてからロックを解放します。
+
+@param timeout スリープする秒数を指定します。省略するとスリープし続けます。
+
+@raise ThreadError 自身がカレントスレッドによってロックされていない場合に発生します。
 #@end

@@ -4,7 +4,7 @@
 
 === 例
 
-[[ruby-list:283]]より。q をサイズ 1 の SizedQueue オブジェクトに
+[[ruby-list:283]] より。q をサイズ 1 の SizedQueue オブジェクトに
 することによって、入力される行と出力される行が同じ順序になります。
 q = [] にすると入力と違った順序で行が出力されます。
 
@@ -27,31 +27,42 @@ q = [] にすると入力と違った順序で行が出力されます。
 
 == Class Methods
 
---- new(max)
-#@todo
+--- new(max) -> SizedQueue
 SizedQueue オブジェクトを生成します。
-max は queue のサイズの最大値です。
+
+@param max キューのサイズの最大値です。
 
 == Instance Methods
 
---- max
+--- max -> Fixnum
+キューの最大サイズを返します。
+
 --- max=(n)
-#@todo
-queue の最大サイズを設定します。
+キューの最大サイズを設定します。
 
---- push(obj)
-#@todo
-queue に obj を追加します。
+@param n キューの最大サイズを指定します。
 
-queue のサイズが max に達している場合は、
-queue のサイズが max より小さくなるまで他のスレッドに実行を譲ります。その後、
-queue に obj を追加します。
+--- push(obj) -> ()
+--- <<(obj)   -> ()
+--- enq(obj)  -> ()
 
-あとは [[m:Queue#push]] と同じです。
+キューに与えられたオブジェクトを追加します。
 
---- pop
-#@todo
-queue からひとつ値を取り出します。
-queue に push しようと待っているスレッドがあれば、実行を再開させます。
+キューのサイズが [[m:SizedQueue#max]] に達している場合は、
+キューのサイズが [[m:SizedQueue#max]] より小さくなるまで他のスレッドに実行を譲ります。
+その後、キューに与えられたオブジェクトを追加します。
 
-あとは [[m:Queue#pop]] と同じです。
+@param obj キューに追加したいオブジェクトを指定します。
+
+@see  [[m:Queue#push]]
+
+--- pop(non_block = false)   -> object
+--- shift(non_block = false) -> object
+--- deq(non_block = false)   -> object
+
+キューからひとつ値を取り出します。
+キューに push しようと待っているスレッドがあれば、実行を再開させます。
+
+@param non_block true を与えると、キューが空の時に例外 [[c:ThreadError]] が発生します。
+
+@see [[m:Queue#pop]]
