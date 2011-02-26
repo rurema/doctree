@@ -1,38 +1,46 @@
+
+イベントに対して通知を行うメソッドを提供するためのライブラリです。
+
 = module Test::Unit::Util::Observable
-This is a utility class that allows anything mixing
-it in to notify a set of listeners about interesting
-events.
+
+イベントに対して通知を行うメソッドを提供するモジュールです。
 
 == Instance Methods
 
---- add_listener(channel_name, listener_key=NOTHING, &listener)
-#@todo
+--- add_listener(channel_name, listener_key=NOTHING, &listener) -> String
 
-Adds the passed proc as a listener on the
-channel indicated by channel_name. listener_key
-is used to remove the listener later; if none is
-specified, the proc itself is used.
+channel_name で指定したチャンネルに listener を登録します。
 
-Whatever is used as the listener_key is
-returned, making it very easy to use the proc
-itself as the listener_key:
+listener_key を省略した場合は listener 自身を listener を削除する時のキー
+として登録します。
 
- listener = add_listener("Channel") { ... }
- remove_listener("Channel", listener)
+@param channel_name チャンネルの名前を文字列で指定します。
 
---- remove_listener(channel_name, listener_key)
-#@todo
+@param listener_key listener を削除する時のキーを文字列で指定します。
 
-Removes the listener indicated by listener_key
-from the channel indicated by
-channel_name. Returns the registered proc, or
-nil if none was found.
+@return listener_key を返します。
 
---- notify_listeners(channel_name, *arguments)
-#@todo
+--- remove_listener(channel_name, listener_key) -> Proc | nil
 
-Calls all the procs registered on the channel
-indicated by channel_name. If value is
-specified, it is passed in to the procs,
-otherwise they are called with no arguments.
+listener_key で指定したキーで登録された listener を channel_name で指定
+したチャンネルから削除します。
 
+@param channel_name チャンネルの名前を文字列で指定します。
+
+@param listener_key listener を削除する時のキーを指定します。
+
+@return 削除に成功した場合は登録されていた Proc オブジェクトを返します。
+        そうでない場合は nil を返します。
+
+--- notify_listeners(channel_name, *arguments) -> Integer
+
+channel_name で指定したチャンネルにある全ての Proc を実行します。
+
+arguments が指定されていた場合は Proc を call する時の引数に arguments
+を渡します。
+
+@param channel_name チャンネルの名前を文字列で指定します。
+
+@param arguments Proc に渡す引数を指定します。
+
+@return Proc を実行した数を返します。
