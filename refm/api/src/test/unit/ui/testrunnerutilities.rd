@@ -9,17 +9,29 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
 == Constants
 
 #@since 1.8.1
---- SILENT
---- PROGRESS_ONLY
---- NORMAL
---- VERBOSE
-#@todo
+--- SILENT        -> Integer
+
+テスト結果の出力レベルを表す定数です。何も出力しません。
+
+--- PROGRESS_ONLY -> Integer
+
+テスト結果の出力レベルを表す定数です。テストの進捗を表す「.」だけが出力されます。
+
+--- NORMAL        -> Integer
+
+テスト結果の出力レベルを表す定数です。一般的な出力を行います。
+
+--- VERBOSE       -> Integer
+
+テスト結果の出力レベルを表す定数です。詳細な出力を行います。
 #@end
 
 = module Test::Unit::UI::TestRunnerUtilities
+
+各種 TestRunner を実装するためのモジュールです。
+
 == Instance Methods
 --- run(suite, output_level=NORMAL)    -> Test::Unit::TestResult
-#@todo
 
 新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
 
@@ -27,13 +39,14 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
              TestCase オブジェクトを与えます。
 
 @param output_level 出力レベルを指定します。指定できるのは以下の4つです。
- * Test::Unit::UI::SILENT 
+ * Test::Unit::UI::SILENT
  * Test::Unit::UI::PROGRESS_ONLY
  * Test::Unit::UI::NORMAL
  * Test::Unit::UI::VERBOSE
 
 --- start_command_line_test    -> Test::Unit::TestResult
-#@todo
-Takes care of the ARGV parsing and suite
-determination necessary for running one of the
-TestRunners from the command line.
+
+[[m:Kernel::ARGV]] を解析して、ARGV[0] で与えられたTestRunner を新しく
+生成して、テストを実行します。
+
+ARGV が空だった場合、メッセージを出力してプログラムを終了します。
