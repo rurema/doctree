@@ -135,11 +135,15 @@ Logger オブジェクトを生成する。
 
 ログ出力に使用していた IO オブジェクトを閉じます。
 
---- datetime_format -> String
+--- datetime_format -> String | nil
 
 ログに記録する時の日付のフォーマットです。
 
-デフォルトでは "%Y-%m-%dT%H:%M:%S.%06d "です。
+デフォルトでは nil ですが、この値が nil の場合は日付のフォーマットとして
+"%Y-%m-%dT%H:%M:%S.%06d " を使用します。
+
+なお、"%06d" には [[m:Time#strftime]] ではなく、単に [[m:Time#usec]] の
+値を [[m:String#%]] でフォーマットしたものが入ります。
 
 @see [[m:Time#strftime]], [[m:Logger#datetime_format=]]
 
