@@ -3,9 +3,7 @@
 
 === 使い方
 
-5段階の重要度に分けてログを記録します。
-#@# 重要度 -> ログレベル にするべきか？
-
+5段階のログレベルに分けてログを記録します。
 
 : FATAL
   プログラムをクラッシュさせるような制御不可能なエラー
@@ -14,16 +12,16 @@
 : WARN
   警告
 : INFO
-   一般的な情報
+  一般的な情報
 : DEBUG
   低レベルの情報
 
-全てのメッセージは必ず重要度を持ちます。また Logger オブジェクトも同じように
-重要度を持ちます。メッセージの重要度が Logger オブジェクトの重要度よりも
+全てのメッセージは必ずログレベルを持ちます。また Logger オブジェクトも同じように
+ログレベルを持ちます。メッセージのログレベルが Logger オブジェクトのログレベルよりも
 低い場合メッセージは記録されません。
 
 普段は INFO しか記録していないが、デバッグ情報が必要になった時には、
-Logger オブジェクトの重要度を DEBUG に下げるなどという使い方をします。
+Logger オブジェクトのログレベルを DEBUG に下げるなどという使い方をします。
 
 例:
 
@@ -121,7 +119,7 @@ Logger オブジェクトを生成する。
 ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
 ユーザがこのメソッドを直接使うことはあまりありません。
 
-@param severity 重要度。[[c:Logger]] クラスで定義されている定数を指定します。
+@param severity ログレベル。[[c:Logger]] クラスで定義されている定数を指定します。
                 この値がレシーバーに設定されているレベルよりも低い場合、
                 メッセージは記録されません。
 
@@ -156,35 +154,35 @@ Logger オブジェクトを生成する。
 
 --- debug? -> bool
 
-現在の Logger オブジェクトが DEBUG 以上の重要度のメッセージを記録するなら
+現在の Logger オブジェクトが DEBUG 以上のログレベルのメッセージを記録するなら
 真を返します。
 
 --- info? -> bool
 
-現在の Logger オブジェクトが INFO 以上の重要度のメッセージを記録するなら
+現在の Logger オブジェクトが INFO 以上のログレベルのメッセージを記録するなら
 真を返します。
 
 --- warn? -> bool
 
-現在の Logger オブジェクトが WARN 以上の重要度のメッセージを記録するなら
+現在の Logger オブジェクトが WARN 以上のログレベルのメッセージを記録するなら
 真を返します。
 
 --- error? -> bool
 
-現在の Logger オブジェクトが ERROR 以上の重要度のメッセージを記録するなら
+現在の Logger オブジェクトが ERROR 以上のログレベルのメッセージを記録するなら
 真を返します。
 
 --- fatal? -> bool
 
-現在の Logger オブジェクトが FATAL 以上の重要度のメッセージを記録するなら
+現在の Logger オブジェクトが FATAL 以上のログレベルのメッセージを記録するなら
 真を返します。
 
 --- debug(progname = nil) -> true
 --- debug(progname = nil){ ... } -> true
 
-重要度が DEBUG のメッセージを出力します。
+ログレベルが DEBUG のメッセージを出力します。
 
-現在の Logger の重要度が DEBUG よりも高い場合、メッセージは出力されません。
+現在の Logger のログレベルが DEBUG よりも高い場合、メッセージは出力されません。
 
 ブロックを与えなかった場合は、progname をメッセージとしてログを出力します。
 
@@ -303,10 +301,10 @@ UNKNOWN 情報を出力します。
 --- level=(level)
 --- sev_threshold=(level)
 
-Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
+Logger オブジェクトのログレベルを設定します。ログレベルがこれより低いメッセージは
 出力されません。
 
-@param level 重要度を指定します。
+@param level ログレベルを指定します。
 
 --- progname -> String
 
@@ -358,7 +356,7 @@ Logger オブジェクトの重要度を設定します。重要度がこれより低いメッセージは
 
 --- SEV_LABEL -> Array
 
-重要度のラベルを格納した配列。
+ログレベルのラベルを格納した配列。
 
 = class Logger::Application < Object
 include Logger::Severity
@@ -406,9 +404,9 @@ include Logger::Severity
 
 --- level=(level)
 
-ログの重要度をセットします。
+ログのログレベルをセットします。
 
-@param level ログの重要度。
+@param level ログのログレベル。
 
 @see [[c:Logger::Severity]]
 
@@ -419,7 +417,7 @@ include Logger::Severity
 
 ブロックを与えた場合はブロックを評価した返り値をメッセージとしてログに記録します。
 
-@param severity 重要度。[[c:Logger::Severity]] クラスで定義されている定数を指定します。
+@param severity ログレベル。[[c:Logger::Severity]] クラスで定義されている定数を指定します。
                 この値がレシーバーに設定されているレベルよりも低い場合、
                 メッセージは記録されません。
 
@@ -454,7 +452,7 @@ include Logger::Severity
 @param shift_size shift_age を整数で指定した場合のみ有効です。
                   このサイズでログファイルを切り替えます。
 
-@return ログの重要度を返します。
+@return ログのログレベルを返します。
 
 --- start -> ()
 
@@ -477,7 +475,7 @@ include Logger::Severity
 
 ログ情報をフォーマットして返します。
 
-@param severity 重要度。
+@param severity ログレベル。
 
 @param time 時間。[[c:Time]] クラスのオブジェクト。
 
@@ -568,26 +566,26 @@ include MonitorMixin
 
 = module Logger::Severity
 
-[[lib:logger]] で使用する重要度を定義したモジュール。
+[[lib:logger]] で使用するログレベルを定義したモジュール。
 
 == Constants
 --- DEBUG -> Integer
-重要度:デバッグを表す定数です。
+ログレベル:デバッグを表す定数です。
 
 --- INFO  -> Integer
-重要度:情報を表す定数です。
+ログレベル:情報を表す定数です。
 
 --- WARN  -> Integer
-重要度:警告を表す定数です。
+ログレベル:警告を表す定数です。
 
 --- ERROR -> Integer
-重要度:エラーを表す定数です。
+ログレベル:エラーを表す定数です。
 
 --- FATAL -> Integer
-重要度:致命的なエラーを表す定数です。
+ログレベル:致命的なエラーを表す定数です。
 
 --- UNKNOWN -> Integer
-重要度:不明なエラーを表す定数です。
+ログレベル:不明なエラーを表す定数です。
 
 = class Logger::Error < RuntimeError
 
