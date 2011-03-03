@@ -194,7 +194,9 @@ PKCS7 オブジェクトのタイプを [[c:Symbol]] オブジェクトで設定します。
 メッセージの署名者を表す [[c:OpenSSL::PKCS7::SignerInfo]] オブジェクトの
 配列を返します。
 
---- add_recipient(recipient)
+これはメッセージを署名した場合にのみ意味があります。
+
+--- add_recipient(recipient) -> self
 送信者を追加します。
 
 このメソッドは使わないでください。
@@ -247,7 +249,7 @@ PKCS7 オブジェクトに元々つけられていた証明書はクリアされます。
 署名対象のデータを文字列で返します。
 
 --- data=(data)
---- add_data(data)
+--- add_data(data) -> data
 
 署名対象のデータを設定します。
 
@@ -430,6 +432,10 @@ PKCS#7 autenticatedAttributes(署名した時間などの情報)
 
 #@since 1.8.3
 = class OpenSSL::PKCS7::RecipientInfo < Object
+PKCS7 の送信先を表すクラスです。
+
+S/MIME 暗号化する場合に指定した送信先を意味します。
+
 == Class Methods
 --- new(cert) -> RecipientInfo
 送信先オブジェクトを証明書から生成します。
@@ -495,5 +501,5 @@ PKCS#7 autenticatedAttributes(署名した時間などの情報)
 その署名者が署名した時刻を返します。
 
 = class OpenSSL::PKCS7::PKCS7Error < OpenSSL::OpenSSLError
-
+PKCS7 関連のエラーが生じた場合に発生する例外です。
 
