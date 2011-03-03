@@ -1,0 +1,115 @@
+= class OpenSSL::PKey::EC
+
+EC(Ellicptic Curve,ÂÊ±ß¶ÊÀþ)°Å¹æ¸°¤Î¥¯¥é¥¹¤Ç¤¹¡£
+
+== Class methods
+--- builtin_curves
+#@todo
+--- new
+#@todo
+
+== Instance methods
+--- group
+#@todo
+--- group=
+#@todo
+--- private_key
+#@todo
+--- private_key=
+#@todo
+--- public_key
+#@todo
+--- public_key=
+#@todo
+--- private_key?
+#@todo
+--- public_key?
+#@todo
+--- generate_key
+#@todo
+--- check_key
+#@todo
+--- dh_compute_key
+#@todo
+--- dsa_sign_asn1
+#@todo
+--- dsa_verify_asn1
+#@todo
+--- to_pem
+#@todo
+--- to_der
+#@todo
+--- to_text
+#@todo
+
+== Constants
+--- NAMED_CURVE
+
+= class OpenSSL::PKey::ECError < OpenSSL::PKey::PKeyError
+
+= class OpenSSL::PKey::EC::Group
+== Class methods
+--- new
+#@todo
+
+== Instance methods
+--- generator
+#@todo
+--- set_generator
+#@todo
+--- order
+#@todo
+--- cofactor
+#@todo
+--- curve_name
+#@todo
+--- asn1_flag
+#@todo
+--- asn1_flag=
+#@todo
+--- point_conversion_form
+#@todo
+--- point_conversion_form=
+#@todo
+--- seed
+#@todo
+--- seed=
+#@todo
+--- degree
+#@todo
+--- to_pem
+#@todo
+--- to_der
+#@todo
+--- to_text
+#@todo
+--- ==
+--- eql?
+#@todo
+
+= class OpenSSL::PKey::EC::Point
+== Class methods
+--- new
+#@todo
+
+== Instance methods
+--- group
+#@todo
+--- eql?
+--- ==
+#@todo
+--- infinity?
+#@todo
+--- on_curve?
+#@todo
+--- make_affine!
+#@todo
+--- invert!
+#@todo
+--- set_to_infinity!
+#@todo
+--- to_bn
+#@todo
+
+= class OpenSSL::EC::PKey::Group::Error < OpenSSL::OpenSSLError
+= class OpenSSL::EC::PKey::Point::Error < OpenSSL::OpenSSLError
