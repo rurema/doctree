@@ -243,6 +243,36 @@ x の平方根を返します。
 
 @raise Errno::EDOM  引数が負の値である場合に発生します。
 
+#@since 1.9.1
+--- cbrt(x) -> Float
+
+x の立方根を返します。
+
+@param x 実数
+
+--- gamma(x) -> Float
+
+x のガンマ関数の値を返します。
+
+@param x 実数
+
+@raise Math::DomainError x に負の整数、もしくは -∞ を渡した場合に発生します
+
+
+--- lgamma(x) -> [Float, Integer]
+
+log(|gamma(x)|) と、gamma(x) の符号を返します。
+
+符号は +1 もしくは -1 で返されます。
+
+@param x 実数
+
+@raise Math::DomainError x に -∞ を渡した場合に発生します
+
+@see [[m:Math.#gamma]]
+
+#@end
+
 == Constants
 
 --- E -> Float
@@ -258,3 +288,11 @@ x の平方根を返します。
 
     p Math::PI
     # => 3.141592654
+
+#@since 1.9.1
+= class Math::DomainError < StandardError
+
+数学関数(module Math のモジュール関数)で与えた引数が定義域
+に含まれていない場合に発生します。
+
+#@end
