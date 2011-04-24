@@ -57,9 +57,13 @@ Rubyのソースコードにドキュメントを埋め込む事ができます。文が
           BEGIN    class    ensure   nil      self     when
           END      def      false    not      super    while
           alias    defined? for      or       then     yield
-          and      do       if       redo     true
-          begin    else     in       rescue   undef
+          and      do       if       redo     true     __LINE__
+          begin    else     in       rescue   undef    __FILE__
+#@since 1.9.1
+          break    elsif    module   retry    unless   __ENCODING__
+#@else
           break    elsif    module   retry    unless
+#@end
           case     end      next     return   until
 
 予約語はクラス名、変数名などに用いることはできません。ただし
