@@ -36,6 +36,7 @@ DOM スタイルと SAX スタイルの両方をカバーしています。
 #@include(rexml/child.rd)
 #@include(rexml/comment.rd)
 #@include(rexml/doctype.rd)
+#@include(rexml/document.rd)
 #@include(rexml/dtd/attlistdecl.rd)
 #@include(rexml/dtd/dtd.rd)
 #@include(rexml/dtd/elementdecl.rd)
