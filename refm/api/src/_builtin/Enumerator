@@ -253,9 +253,9 @@ next メソッドによる外部列挙の状態を最初まで巻き戻します。 self を返します。
     
     require "stringio"
     StringIO.new("foo|bar|baz").each("|").with_index(1) {|s, i| p [s, i] }
-        # => ["foo|", 0]
-        #    ["bar|", 1]
-        #    ["baz", 2]
+        # => ["foo|", 1]
+        #    ["bar|", 2]
+        #    ["baz", 3]
 #@end
 
 
