@@ -95,7 +95,7 @@ yydebugの構文解析器の追跡機能が有効か無効かを指定します。
 
 自身の持つ Ruby プログラムの文字エンコーディングを返します。
 
-Ruby プログラムの解析前は US-ASCII に対応するエンコーディングを返します。
+Ruby プログラムの解析前は [[m:Encoding::US_ASCII]] を返します。
 
 == Private Instance Methods
 
