@@ -1,7 +1,7 @@
 require rubygems/command
 
 指定された特定のバージョンの Gem パッケージに依存する Gem を使用するために
-必要な [[Kernel.#gem]] メソッドの呼び出し方法を文字列で出力します。
+必要な [[m:Kernel.#gem]] メソッドの呼び出し方法を文字列で出力します。
 
   Usage: gem lock GEMNAME-VERSION [GEMNAME-VERSION ...] [options]
     Options:
@@ -49,7 +49,7 @@ require rubygems/command
 = class Gem::Commands::LockCommand < Gem::Command
 
 指定された特定のバージョンの Gem パッケージに依存する Gem を使用するために
-必要な [[Kernel.#gem]] メソッドの呼び出し方法を文字列で出力します。
+必要な [[m:Kernel.#gem]] メソッドの呼び出し方法を文字列で出力します。
 
 == Public Instance Methods
 
