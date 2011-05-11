@@ -523,7 +523,6 @@ csv_load() implementation.
 --- open(filename, mode = "rb", options = Hash.new) -> CSV
 --- open(filename, options = Hash.new){|csv| ... } -> nil
 --- open(filename, options = Hash.new) -> CSV
-#@todo
 
 このメソッドは [[c:IO]] オブジェクトをオープンして [[c:CSV]] でラップします。
 これは CSV ファイルを書くための主要なインターフェイスとして使うことを意図しています。
@@ -540,7 +539,7 @@ Ruby1.9 では [[m:CSV.foreach]] を使うとブロックに行を渡します。
 コーディングをチェックします。"rb:UTF-32BE:UTF-8" のように mode を指定
 すると UTF-32BE のデータを読み込んでUTF-8 に変換してから解析します。
 
-CSV オブジェクトは多くのメソッドを [[c:IO]] に委譲します。
+CSV オブジェクトは多くのメソッドを [[c:IO]] や [[c:File]] に委譲します。
 
   * [[m:IO#binmode]]
   * [[m:IO#binmode?]]
@@ -553,25 +552,26 @@ CSV オブジェクトは多くのメソッドを [[c:IO]] に委譲します。
   * [[m:IO#external_encoding]]
   * [[m:IO#fcntl]]
   * [[m:IO#fileno]]
-  * [[m:IO#flock]]
+  * [[m:File#flock]]
   * [[m:IO#flush]]
   * [[m:IO#fsync]]
   * [[m:IO#internal_encoding]]
   * [[m:IO#ioctl]]
   * [[m:IO#isatty]]
-  * [[m:IO#path]]
+  * [[m:File#path]]
   * [[m:IO#pid]]
   * [[m:IO#pos]]
   * [[m:IO#pos=]]
   * [[m:IO#reopen]]
   * [[m:IO#seek]]
   * [[m:IO#stat]]
+  * [[m:StringIO#string]]
   * [[m:IO#sync]]
   * [[m:IO#sync=]]
   * [[m:IO#tell]]
   * [[m:IO#to_i]]
   * [[m:IO#to_io]]
-  * [[m:IO#truncate]]
+  * [[m:File#truncate]]
   * [[m:IO#tty?]]
 
 @param filename ファイル名を指定します。
@@ -646,29 +646,29 @@ CSV ファイルを配列の配列にするために使います。
            [[c:CSV::Row]] のインスタンスが指定された場合は、[[m:CSV::Row#fields]] の値
            のみが追加されます。
 
---- binmode
-#@todo
-delegate
+--- binmode -> self
 
---- binmode?
-#@todo
-delegate
+[[m:IO#binmode]] に委譲します。
 
---- close
-#@todo
-delegate
+--- binmode? -> bool?
 
---- close_read
-#@todo
-delegate
+[[m:IO#binmode?]] に委譲します。
 
---- close_write
-#@todo
-delegate
+--- close -> nil
 
---- closed?
-#@todo
-delegate
+[[m:IO#close]] に委譲します。
+
+--- close_read -> nil
+
+[[m:IO#close_read]] に委譲します。
+
+--- close_write -> nil
+
+[[m:IO#close_write]] に委譲します。
+
+--- closed? -> bool
+
+[[m:IO#closed?]] に委譲します。
 
 --- col_sep -> String
 
@@ -709,21 +709,18 @@ converted field or the field itself.
 
 読み書きするときに使用するエンコーディングを返します。
 
---- eof
-#@todo
-delegate
+--- eof -> bool
+--- eof? -> bool
 
---- eof?
-#@todo
-delegate
+[[m:IO#eof]], [[m:IO#eof?]] に委譲します。
 
---- external_encoding
-#@todo
-delegate
+--- external_encoding -> Encoding | nil
 
---- fcntl
-#@todo
-delegate
+[[m:IO#external_encoding]] に委譲します。
+
+--- fcntl(cmd, arg = 0)    -> Integer
+
+[[m:IO#fcntl]] に委譲します。
 
 --- field_size_limit -> Fixnum
 
@@ -732,8 +729,9 @@ delegate
 @see [[m:CSV.new]]
 
 --- fileno -> Integer
+--- to_i   -> Integer
 
-[[m:IO#fileno]] に委譲します。
+[[m:IO#fileno]], [[m:IO#to_i]] に委譲します。
 
 --- flock(operation)    -> 0 | false
 
@@ -839,9 +837,9 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 データソースは読み込み用にオープンされている必要があります。
 
---- reopen
-#@todo
-delegate
+--- reopen(io) -> self
+
+[[m:IO#reopen]] に委譲します。
 
 --- return_headers? -> bool
 
@@ -860,9 +858,9 @@ Rewinds the underlying IO object and resets CSV's lineno() counter.
 
 @see [[m:CSV.new]]
 
---- seek
-#@todo
-delegate
+--- seek(offset, whence = IO::SEEK_SET)    -> 0
+
+[[m:IO#seek]] に委譲します。
 
 --- shift    -> Array | CSV::Row
 --- gets     -> Array | CSV::Row
@@ -882,33 +880,29 @@ delegate
 
 @see [[m:CSV.new]]
 
---- stat
-#@todo
-delegate
+--- stat    -> File::Stat
 
---- string
-#@todo
-delegate
+[[m:IO#stat]] に委譲します。
 
---- sync
-#@todo
-delegate
+--- string -> String
 
---- sync=
-#@todo
-delegate
+[[m:StringIO#string]] に委譲します。
 
---- to_i
-#@todo
-delegate
+--- sync -> bool
 
---- to_io
-#@todo
-delegate
+[[m:IO#sync]] に委譲します。
 
---- truncate
-#@todo
-delegate
+--- sync=(newstate)
+
+[[m:IO#sync=]] に委譲します。
+
+--- to_io -> self
+
+[[m:IO#to_io]] に委譲します。
+
+--- truncate(path, length)    -> 0
+
+[[m:File#truncate]] に委譲します。
 
 --- unconverted_fields? -> bool
 
