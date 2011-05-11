@@ -45,23 +45,31 @@ include Enumerable
 @param other [[c:CSV::Table]] を指定します。
 
 --- [](index_or_header) -> object
-#@todo
-In the default mixed mode, this method returns rows for index access and
-columns for header access.  You can force the index association by first
-calling by_col!() or by_row!().
 
-Columns are returned as an Array of values.  Altering that Array has no
-effect on the table.
+ミックスモードでは、このメソッドは引数に行番号を指定すれば行単位で動作
+し、ヘッダの名前を指定すれば列単位で動作します。
+
+このメソッドを呼び出す前に [[m:CSV::Table#by_col!]] を呼び出すとカラム
+モードになります。また [[m:CSV::Table#by_row!]] を呼び出すとロウモード
+になります。
+
+@param index_or_header 行番号かヘッダの名前を指定します。
+
+@return 値の配列を返します。この配列を変更しても元のデータには何の影響
+        もありません。
 
 --- []=(index_or_header, value)
 #@todo
 
-In the default mixed mode, this method assigns rows for index access and
-columns for header access.  You can force the index association by first
-calling by_col!() or by_row!().
+ミックスモードでは、このメソッドは引数に行番号を指定すれば行単位で動作
+し、ヘッダの名前を指定すれば列単位で動作します。
+
+このメソッドを呼び出す前に [[m:CSV::Table#by_col!]] を呼び出すとカラム
+モードになります。また [[m:CSV::Table#by_row!]] を呼び出すとロウモード
+になります。
 
 Rows may be set to an Array of values (which will inherit the table's
-headers()) or a CSV::Row.
+headers()) or a [[c:CSV::Row]].
 
 Columns may be set to a single value, which is copied to each row of the
 column, or an Array of values.  Arrays of values are assigned to rows top
@@ -71,17 +79,20 @@ does not have a value for each row the extra rows will receive a +nil+.
 Assigning to an existing column or row clobbers the data.  Assigning to
 new columns creates them at the right end of the table.
 
+@param index_or_header 行番号かヘッダの名前を指定します。
+
+@param value 値を指定します。
+
 --- by_col -> CSV::Table
-#@todo
 
 カラムモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
 
-元のテーブルモードを変更せずにメソッドチェーンできるので便利です。
-しかし、大きなデータセットに対しても同じだけメモリを消費するので気をつけてください。
+元のテーブルモードを変更せずにメソッドチェーンできるので便利です。しか
+し、大きなデータセットに対しても同じだけメモリを消費するので気をつけて
+ください。
 
-This method returns the duplicate table for chaining.  Don't chain
-destructive methods (like []=()) this way though, since you are working
-with a duplicate.
+このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
+チェーンに組込まないようにしてください。
 
 --- by_col! -> self
 
@@ -89,17 +100,18 @@ with a duplicate.
 
 再びモードが変更されるまで、いくつかのメソッドはカラム単位で動きます。
 
+@return 必ず自身を返すので安全にメソッドチェーンできます。
+
 --- by_col_or_row -> CSV::Table
-#@todo
 
 ミックスモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
 
-元のテーブルモードを変更せずにメソッドチェーンできるので便利です。
-しかし、大きなデータセットに対しても同じだけメモリを消費するので気をつけてください。
+元のテーブルモードを変更せずにメソッドチェーンできるので便利です。しか
+し、大きなデータセットに対しても同じだけメモリを消費するので気をつけて
+ください。
 
-This method returns the duplicate table for chaining.  Don't chain
-destructive methods (like []=()) this way though, since you are working
-with a duplicate.
+このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
+チェーンに組込まないようにしてください。
 
 --- by_col_or_row! -> self
 #@todo
@@ -111,26 +123,27 @@ iteration methods will use the default intelligent indexing system until
 the mode is changed again.  In mixed mode an index is assumed to be a row
 reference while anything else is assumed to be column access by headers.
 
-This method returns the table and is safe to chain.
+@return 必ず自身を返すので安全にメソッドチェーンできます。
 
 --- by_row -> CSV::Table
-#@todo
 
-Returns a duplicate table object, in row mode.  This is handy for chaining
-in a single call without changing the table mode, but be aware that this
-method can consume a fair amount of memory for bigger data sets.
+ロウモードになっている新しい [[c:CSV::Table]] オブジェクトを返します。
 
-This method returns the duplicate table for chaining.  Don't chain
-destructive methods (like []=()) this way though, since you are working
-with a duplicate.
+元のテーブルモードを変更せずにメソッドチェーンできるので便利です。しか
+し、大きなデータセットに対しても同じだけメモリを消費するので気をつけて
+ください。
+
+このメソッドは複製したテーブルを返すので、破壊的なメソッドはメソッド
+チェーンに組込まないようにしてください。
 
 --- by_row! -> self
 #@todo
 
-Switches the mode of this table to row mode.  All calls to indexing and
-iteration methods will work with rows until the mode is changed again.
+自身をロウモードに変更します。
 
-This method returns the table and is safe to chain.
+再びモードが変更されるまで、いくつかのメソッドは行単位で動きます。
+
+@return 必ず自身を返すので安全にメソッドチェーンできます。
 
 --- delete(index_or_header) -> Object
 #@todo
