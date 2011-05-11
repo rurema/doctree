@@ -12,9 +12,9 @@ include Enumerable
 
 以下のメソッドを [[c:Array]] に委譲します。
 
-* empty?()
-* length()
-* size()
+  * [[m:Array#empty?]]
+  * [[m:Array#length]]
+  * [[m:Array#size]]
 
 == Singleton Methods
 
@@ -159,9 +159,8 @@ tuples containing the column name and an Array of values for that column.
 This method returns the table for chaining.
 
 --- empty? -> bool
-#@todo
 
-delegate
+[[m:Array#empty?]] に委譲します。
 
 --- headers -> Array
 #@todo
@@ -177,8 +176,8 @@ Shows the mode and size of this table in a US-ASCII String.
 
 --- length -> Fixnum
 --- size -> Fixnum
-#@todo
-delegate
+
+[[m:Array#length]], [[m:Array#size]] に委譲します。
 
 --- mode -> Symbol
 
