@@ -50,6 +50,8 @@ CSV ライブラリは [[RFC:4180]] から直接とられたかなり厳しい定義を維持します。
 一ヶ所だけ定義を緩和することでこのライブラリを使いやすくしています。[[c:CSV]] は
 すべての有効な CSV ファイルをパースします。
 
+不正な CSV データを与えたくない。
+
 What you don't want to do is feed CSV invalid data.  Because of the way the
 CSV format works, it's common for a parser to need to read until the end of
 the file to be sure a field is invalid.  This eats a lot of time and memory.
@@ -170,7 +172,6 @@ find with it.
 すべての変換器で使用するエンコーディングです。
 
 --- Converters -> Hash
-#@todo
 
 このハッシュは名前でアクセスできる組み込みの変換器を保持しています。
 
@@ -197,11 +198,11 @@ find with it.
 このハッシュは [[m:Object#freeze]] されていないので、ユーザは自由に値を
 追加することが出来ます。
 
-To add a combo field, the value should be an Array of names.  Combo fields
-can be nested with other combo fields.
+複数の変換器を持つ要素を追加するときは、値に名前の配列を指定する必要が
+あります。この要素の値には他の複数の変換器を持つ要素の名前を指定するこ
+ともできます。
 
 --- HeaderConverters -> Hash
-#@todo
 
 このハッシュは名前でアクセスできる組み込みのヘッダ用変換器を保存しています。
 
@@ -221,8 +222,9 @@ can be nested with other combo fields.
 このハッシュは [[m:Object#freeze]] されていないので、ユーザは自由に値を
 追加することが出来ます。
 
-To add a combo field, the value should be an Array of names.  Combo fields
-can be nested with other combo fields.
+複数の変換器を持つ要素を追加するときは、値に名前の配列を指定する必要が
+あります。この要素の値には他の複数の変換器を持つ要素の名前を指定するこ
+ともできます。
 
 --- DEFAULT_OPTIONS -> Hash
 
@@ -361,9 +363,9 @@ If you want any other positioning, pass a preset StringIO object instead.
 --- dump(ary_of_objs, io = "", options = Hash.new) -> String | nil
 #@todo
 
-このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアライズすることができます。
-[[c:Marshal]] や [[lib:yaml]] よりは不便ですが、スプレッドシートやデータベース
-とのやりとりには役に立つでしょう。
+このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアラ
+イズすることができます。[[c:Marshal]] や [[lib:yaml]] よりは不便ですが、
+スプレッドシートやデータベースとのやりとりには役に立つでしょう。
 
 Out of the box, this method is intended to work with simple data objects or
 Structs.  It will serialize a list of instance variables and/or
@@ -409,7 +411,8 @@ anything CSV::new() accepts.
 #@todo
 #@# -> discard
 
-このメソッドは CSV データに対して Unix のツール群のようなフィルタを構築するのに便利です。
+このメソッドは CSV データに対して Unix のツール群のようなフィルタを構築
+するのに便利です。
 
 Each row is yielded to the provided block which can alter it as needed.
 After the block returns, the row is appended to +output+ altered or not.
@@ -525,61 +528,51 @@ csv_load() implementation.
 このメソッドは [[c:IO]] オブジェクトをオープンして [[c:CSV]] でラップします。
 これは CSV ファイルを書くための主要なインターフェイスとして使うことを意図しています。
 
-You must pass a +filename+ and may optionally add a +mode+ for Ruby's
-open().  You may also pass an optional Hash containing any +options+
-CSV::new() understands as the final argument.
-
 このメソッドは [[m:IO.open]] と同じように動きます。ブロックが与えられた場合は
 ブロックに [[c:CSV]] オブジェクトを渡し、ブロック終了時にそれをクローズします。
 ブロックが与えられなかった場合は [[c:CSV]] オブジェクトを返します。
 この挙動は Ruby1.8 の CSV ライブラリとは違います。Ruby1.8 では行をブロックに渡します。
 Ruby1.9 では [[m:CSV.foreach]] を使うとブロックに行を渡します。
 
-データが [[m:Encoding.default_external]] と異なる場合は、mode にエンコーディング
-を指定する文字列を埋め込まなければなりません。
+データが [[m:Encoding.default_external]] と異なる場合は、mode にエンコー
+ディングを指定する文字列を埋め込まなければなりません。データをどのよう
+に解析するか決定するために CSV ライブラリはユーザが mode に指定したエン
+コーディングをチェックします。"rb:UTF-32BE:UTF-8" のように mode を指定
+すると UTF-32BE のデータを読み込んでUTF-8 に変換してから解析します。
 
-You must provide a +mode+ with an embedded Encoding designator unless your
-data is in Encoding::default_external().  CSV will check the Encoding of the
-underlying IO object (set by the +mode+ you pass) to deterime how to parse
-the data.   You may provide a second Encoding to have the data transcoded as
-it is read just as you can with a normal call to IO::open().  For example,
-<tt>"rb:UTF-32BE:UTF-8"</tt> would read UTF-32BE data from the file but
-transcode it to UTF-8 before CSV parses it.
+CSV オブジェクトは多くのメソッドを [[c:IO]] に委譲します。
 
-An opened CSV object will delegate to many IO methods for convenience.  You
-may call:
-
-* binmode()
-* binmode?()
-* close()
-* close_read()
-* close_write()
-* closed?()
-* eof()
-* eof?()
-* external_encoding()
-* fcntl()
-* fileno()
-* flock()
-* flush()
-* fsync()
-* internal_encoding()
-* ioctl()
-* isatty()
-* path()
-* pid()
-* pos()
-* pos=()
-* reopen()
-* seek()
-* stat()
-* sync()
-* sync=()
-* tell()
-* to_i()
-* to_io()
-* truncate()
-* tty?()
+  * [[m:IO#binmode]]
+  * [[m:IO#binmode?]]
+  * [[m:IO#close]]
+  * [[m:IO#close_read]]
+  * [[m:IO#close_write]]
+  * [[m:IO#closed?]]
+  * [[m:IO#eof]]
+  * [[m:IO#eof?]]
+  * [[m:IO#external_encoding]]
+  * [[m:IO#fcntl]]
+  * [[m:IO#fileno]]
+  * [[m:IO#flock]]
+  * [[m:IO#flush]]
+  * [[m:IO#fsync]]
+  * [[m:IO#internal_encoding]]
+  * [[m:IO#ioctl]]
+  * [[m:IO#isatty]]
+  * [[m:IO#path]]
+  * [[m:IO#pid]]
+  * [[m:IO#pos]]
+  * [[m:IO#pos=]]
+  * [[m:IO#reopen]]
+  * [[m:IO#seek]]
+  * [[m:IO#stat]]
+  * [[m:IO#sync]]
+  * [[m:IO#sync=]]
+  * [[m:IO#tell]]
+  * [[m:IO#to_i]]
+  * [[m:IO#to_io]]
+  * [[m:IO#truncate]]
+  * [[m:IO#tty?]]
 
 @param filename ファイル名を指定します。
 
@@ -738,17 +731,17 @@ delegate
 
 @see [[m:CSV.new]]
 
---- fileno
-#@todo
-delegate
+--- fileno -> Integer
 
---- flock
-#@todo
-delegate
+[[m:IO#fileno]] に委譲します。
 
---- flush
-#@todo
-delegate
+--- flock(operation)    -> 0 | false
+
+[[m:File#flock]] に委譲します。
+
+--- flush    -> self
+
+[[m:IO#flush]] に委譲します。
 
 --- force_quotes? -> bool
 
@@ -756,19 +749,17 @@ delegate
 
 @see [[m:CSV.new]]
 
---- fsync
-#@todo
-delegate
+--- fsync -> 0 | nil
+
+[[m:IO#fsync]] に委譲します。
 
 --- header_convert(name)
 --- header_convert{|field| ... }
 --- header_convert{|field, field_info| ... }
-#@todo
 
-Identical to CSV#convert(), but for header rows.
+[[m:CSV#convert]] に似ていますが、ヘッダ行用のメソッドです。
 
-Note that this method must be called before header rows are read to have any
-effect.
+このメソッドはヘッダ行を読み込む前に呼び出さなければなりません。
 
 @param name 変換器の名前を指定します。
 
@@ -795,44 +786,45 @@ nil を返した場合は、ヘッダは使用されません。
 配列を返した場合は、ヘッダは既に読み込まれています。
 
 @see [[m:CSV.new]]
-p
+
 --- inspect -> String
 
 ASCII 互換文字列で自身の情報を表したものを返します。
 
---- internal_encoding
-#@todo
-delegate
+--- internal_encoding   -> Encoding | nil
 
---- ioctl
-#@todo
-delegate
+[[m:IO#internal_encoding]] に委譲します。
 
---- isatty
-#@todo
-delegate
+--- ioctl(cmd, arg = 0)    -> Integer
+
+[[m:IO#ioctl]] に委譲します。
+
+--- isatty    -> bool
+--- tty?      -> bool
+
+[[m:IO#isatty]], [[m:IO#tty?]] に委譲します。
 
 --- lineno -> Fixnum
 
 このファイルから読み込んだ最終行の行番号を返します。
 フィールドに含まれる改行はこの値には影響しません。
 
---- path
-#@todo
-delegate
+--- path    -> String
 
+[[m:IO#path]] に委譲します。
 
---- pid
-#@todo
-delegate
+--- pid    -> Integer | nil
 
---- pos
-#@todo
-delegate
+[[m:IO#pid]] に委譲します。
 
---- pos=
-#@todo
-delegate
+--- pos    -> Integer
+--- tell   -> Integer
+
+[[m:IO#pos]], [[m:IO#tell]] に委譲します。
+
+--- pos=(n)
+
+[[m:IO#pos=]] に委譲します。
 
 --- quote_char -> String
 
@@ -906,10 +898,6 @@ delegate
 #@todo
 delegate
 
---- tell
-#@todo
-delegate
-
 --- to_i
 #@todo
 delegate
@@ -919,10 +907,6 @@ delegate
 delegate
 
 --- truncate
-#@todo
-delegate
-
---- tty?
 #@todo
 delegate
 
