@@ -6,9 +6,9 @@ Encoding::Converter дЄ═╤ддд╞╩╤┤╣дЄ╣╘дж╛ь╣чд╧бв[[m:Encoding::Converter#convert]] 
 еиеєе│б╝е╟егеєе░дЄ╩╤┤╣д╣дыесе╜е├е╔д╧д│д╬┬╛д╦ [[m:String#encode]], [[m:NKF.#nkf]], [[m:Iconv#conv]] д╩д╔дмдвдъд▐д╣бг
 
 == Class Methods
---- new(source_encoding, destination_encoding)
---- new(source_encoding, destination_encoding, options)
---- new(convpath)
+--- new(source_encoding, destination_encoding) -> Encoding::Converter
+--- new(source_encoding, destination_encoding, options) -> Encoding::Converter
+--- new(convpath) -> Encoding::Converter
 Encoding::Converter еке╓е╕езепе╚дЄ║ю└од╖д▐д╣бг
 
 @param source_encoding ╩╤┤╣╕╡д╬еиеєе│б╝е╟егеєе░
@@ -126,10 +126,11 @@ Encoding::Converter еке╓е╕езепе╚д╬╛Ё╩єдЄ┤╩├▒д╦╔╜╝ид╖д▐д╣бг
 
 --- finish -> String
 ╩╤┤╣╜ш═¤дЄ╜к╬╗д╖бв╖ы▓╠╩╕╗·╬єд╬╦Ў╚°дЄ╩╓д╖д▐д╣бг
-╩╤┤╣╕╡д╬╩╕╗·╬єд╬╦Ў╚°дме╨еде╚╬єд╬┼╙├цд╟╜кдяд├д╞ддд┐╛ь╣чбв
+╩╤┤╣╕╡д╬╩╕╗·╬єд╬╦Ў╚°дме╨еде╚╬єд╬┼╙├цд╟╜кдяд├д╞ддд┐╛ь╣чбв╩▌╗¤д╖д╞дддые╨еде╚╬є┴┤д╞дЄ╩╓д╖д▐д╣бг
 
 @return ╩╤┤╣╖ы▓╠д╬╦Ў╚°
-@raise Encoding::InvalidByteSequenceError
+@raise Encoding::InvalidByteSequenceError ╩╤┤╣╕╡д╬еиеєе│б╝е╟егеєе░д╦дк
+       ддд╞╔╘└╡д╩е╨еде╚╬єдмдвд├д┐╛ь╣чд╦╚п└╕д╖д▐д╣бг
 
   ec = Encoding::Converter.new("utf-8", "iso-2022-jp")
   p ec.convert("\u3042")     #=> "\e$B$\""
@@ -149,7 +150,7 @@ Encoding::Converter еке╓е╕езепе╚д╬╛Ё╩єдЄ┤╩├▒д╦╔╜╝ид╖д▐д╣бг
 @param destination_byteoffset ╩╤┤╣└ше╨е├е╒ебд╟д╬еке╒е╗е├е╚
 @param destination_bytesize ╩╤┤╣└ше╨е├е╒ебд╬═╞╬╠
 @param options ╩╤┤╣д╬╛▄║┘дЄ╗╪─ъд╣ды─ъ┐Їдфе╧е├е╖ех
-@return ╩╤┤╣╖ы▓╠┴─╔╜д╣ Symbol
+@return ╩╤┤╣╖ы▓╠дЄ╔╜д╣ Symbol
 
 options д╦д╧░╩▓╝дм╗╪─ъд╟днд▐д╣бг
 
@@ -255,7 +256,7 @@ primitive_errinfo д╧дтд├д╤дщ [[m:Encoding::Converter#primitive_convert]] д╚┴╚д▀╣
   p src
   #=> ""
 
---- insert_output(string)
+--- insert_output(string) -> nil
 ╩╤┤╣┤я╞тд╬е╨е├е╒ебд╦╩╕╗·╬єдЄ┴▐╞■д╖д▐д╣бг
 е╨е├е╒ебд╦╩▌╗¤д╡дьд┐╩╕╗·╬єд╧бв╝бд╬╩╤┤╣╗■д╬╩╤┤╣╖ы▓╠д╚░ь╜яд╦╩╓д╡дьд▐д╣бг
 
@@ -286,9 +287,11 @@ primitive_errinfo д╧дтд├д╤дщ [[m:Encoding::Converter#primitive_convert]] д╚┴╚д▀╣
 
 --- putback -> String
 --- putback(max_numbytes) -> String
-╕хд╬╩╤┤╣═╤д╦╩╤┤╣┤я╞т╔Їд╟╩▌╗¤д╖д╞дддые╨еде╚╬єдЄд╧дн╜╨д╖д▐д╣бг
+╕хд╬╩╤┤╣═╤д╦╩╤┤╣┤я╞т╔Їд╟╩▌╗¤д╖д╞дддые╨еде╚╬єдЄ max_numbytes д╟╗╪─ъд╖д┐
+е╨еде╚┐Їд└д▒╩╓д╖д▐д╣бгmax_numbytes дЄ╗╪─ъд╖д╩длд├д┐╛ь╣чд╧╩▌╗¤д╖д╞дддые╨
+еде╚╬єд╬┴┤д╞дЄ╩╓д╖д▐д╣бг
 
-@param max_numbytes
+@param max_numbytes ╝ш╞└д╣дые╨еде╚╬єд╬║╟┬ч├═
 
 @return │╩╟╝д╡дьд╞ддд┐е╨еде╚╬є
 
