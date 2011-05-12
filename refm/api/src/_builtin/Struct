@@ -175,16 +175,13 @@ args[0] が [[c:Symbol]] の場合、生成した構造体クラスは名前の無い
 (このメソッドは Struct の下位クラスにのみ定義されています)
 引数で指定されたメンバの値の配列を返します。
 
-@param members [[c:Fixnum]] でメンバのインデックスを指定します。
-               [[c:Symbol]], [[c:String]] でメンバの名前を指定します。
+@param members [[c:Fixnum]] か [[c:Range]] でメンバのインデックスを指定します。
 
 @raise IndexError member が整数で存在しないメンバを指定した場合に発生します。
 
-@raise NameError member が [[c:String]], [[c:Symbol]] で存在しないメンバを指定した場合に発生します。
-
     Foo = Struct.new(:foo, :bar, :baz)
     obj = Foo.new('FOO', 'BAR', 'BAZ')
-    p obj.values_at(0, :bar, 'baz')    # => ["FOO", "BAR", "BAZ"]
+    p obj.values_at(0, 1, 2)    # => ["FOO", "BAR", "BAZ"]
 
 #@end
 
