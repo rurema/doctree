@@ -52,8 +52,8 @@
 --- read(size) -> []
 NotImplementedError例外を発生させます。
 
-[[c:CSV::StreamBuf]]クラスを継承した場合は必ず、readメソッドをオーバーライドして下さい。
-その際の注意点として読み込み時にEnfOfStreamを検出した場合にはnilを返却してください。
+[[c:CSV::StreamBuf]] クラスを継承した場合は必ず、readメソッドをオーバーライドして下さい。
+その際の注意点として読み込み時に EndOfStream を検出した場合には nil を返却してください。
 
 == Private Instance Methods
 
