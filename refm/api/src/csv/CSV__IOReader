@@ -15,8 +15,11 @@ CSVの読み込み処理を行うクラス
 
 == Instance Methods
 
---- close_on_terminate -> True
-本メソッドを呼び出すことで終了(terminateメソッド実行)時に[[c:CSV::IOReader]]オブジェクトがnewメソッドで指定した読み込み先のIOクローズ処理を行います。
+--- close_on_terminate -> true
+
+本メソッドを呼び出すことで終了([[m:CSV::IOReader#terminate]] メソッド実
+行)時に [[c:CSV::IOReader]] オブジェクトが new メソッドで指定した読み込
+み先のIOクローズ処理を行います。
 
 == Private Instance Methods
 
