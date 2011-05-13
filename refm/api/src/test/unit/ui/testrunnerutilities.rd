@@ -38,7 +38,11 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
 @param suite 実行したいテストを保持している TestSuite オブジェクトか
              TestCase オブジェクトを与えます。
 
-@param output_level 出力レベルを指定します。指定できるのは以下の4つです。
+@param output_level 出力レベルを指定します。
+
+引数 output_level には以下の 4 つのいずれかを指定します。詳しくは
+[[c:Test::Unit::UI]] をご覧ください。
+
  * Test::Unit::UI::SILENT
  * Test::Unit::UI::PROGRESS_ONLY
  * Test::Unit::UI::NORMAL
