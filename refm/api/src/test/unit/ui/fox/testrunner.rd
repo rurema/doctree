@@ -35,4 +35,4 @@ TestRunner オブジェクトを生成して返します。
 
 テストを実行します。
 
-テスト結果を保持した Test::Unit::TestResult オブジェクトを返します。
+テスト結果を保持した [[c:Test::Unit::TestResult]] オブジェクトを返します。

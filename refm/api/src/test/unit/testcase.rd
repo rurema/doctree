@@ -75,8 +75,9 @@ test_method_name に対応した TestCase オブジェクトを生成して返します。
 TestCase オブジェクトを生成し、[[c:Test::Unit::TestSuite]] オブジェクト
 としてまとめたものを返します。
 
-「test」ではじまるインスタンスメソッドがない場合は、[[m:Test::Unit::TestCase#default_test]]
-に対応づけされた TestCase オブジェクトのみを持つ、TestSuite オブジェクトを返します。
+「test」ではじまるインスタンスメソッドがない場合は、
+[[m:Test::Unit::TestCase#default_test]] に対応づけされた TestCase オブ
+ジェクトのみを持つ、TestSuite オブジェクトを返します。
 
 == Instance Methods
 
