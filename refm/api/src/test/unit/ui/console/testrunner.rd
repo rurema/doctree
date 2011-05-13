@@ -12,7 +12,7 @@ extend Test::Unit::UI::TestRunnerUtilities
 
 == Class Methods
 
---- new(suite, output_level=NORMAL, io=STDOUT) -> Test::Unit::UI::Console::TestRunner
+--- new(suite, output_level = NORMAL, io = STDOUT) -> Test::Unit::UI::Console::TestRunner
 
 TestRunner オブジェクトを生成して返します。
 

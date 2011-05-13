@@ -7,7 +7,7 @@
 
 == Instance Methods
 
---- add_listener(channel_name, listener_key=NOTHING, &listener) -> String
+--- add_listener(channel_name, listener_key = NOTHING, &listener) -> String
 
 channel_name で指定したチャンネルに listener を登録します。
 

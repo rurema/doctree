@@ -40,13 +40,13 @@ assert が失敗した時は、例外 [[c:Test::Unit::AssertionFailedError]] を投げます。
 == Instance Methods
 
 #@until 1.9.1
---- assert(boolean, message=nil)    -> ()
+--- assert(boolean, message = nil)    -> ()
 
 boolean が真ならパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_instance_of(klass, object, message="")    -> ()
+--- assert_instance_of(klass, object, message = "")    -> ()
 
 object が klass の直接のインスタンスであるなら、パスします。
 [[m:Object#instance_of?]]も参照して下さい。
@@ -55,13 +55,13 @@ object が klass の直接のインスタンスであるなら、パスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_nil(object, message="")    -> ()
+--- assert_nil(object, message = "")    -> ()
 
 object が nil ならばパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_kind_of(klass, object, message="")    -> ()
+--- assert_kind_of(klass, object, message = "")    -> ()
 
 object.kind_of?(klass) が真ならパスします。
 
@@ -75,21 +75,21 @@ object.kind_of?(klass) が真ならパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_respond_to(object, method, message="")    -> ()
+--- assert_respond_to(object, method, message = "")    -> ()
 #@todo
 
 object.respond_to?(method) が真ならパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_match(pattern, string, message="")    -> ()
+--- assert_match(pattern, string, message = "")    -> ()
 #@todo
 
 string =~ pattern が真ならばパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_same(expected, actual, message="")    -> ()
+--- assert_same(expected, actual, message = "")    -> ()
 #@todo
 
 actual.equal?(expected) が真ならパスします。
@@ -99,7 +99,7 @@ actual.equal?(expected) が真ならパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_operator(object1, operator, object2, message="")    -> ()
+--- assert_operator(object1, operator, object2, message = "")    -> ()
 #@todo
 
 object1.send(operator, object2) が真ならパスします。
@@ -112,7 +112,7 @@ object1.send(operator, object2) が真ならパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- flunk(message="Flunked")    -> ()
+--- flunk(message = "Flunked")    -> ()
 #@todo
 
 常に失敗します。
@@ -121,14 +121,14 @@ object1.send(operator, object2) が真ならパスします。
 
 @raise Test::Unit::AssertionFailedError 常に発生します。
 
---- assert_throws(expected_symbol, message="") { ... }    -> ()
+--- assert_throws(expected_symbol, message = "") { ... }    -> ()
 #@todo
 
 ブロックを実行して :expected_symbol が throw されたらパスします。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_in_delta(expected_float, actual_float, delta, message="")    -> ()
+--- assert_in_delta(expected_float, actual_float, delta, message = "")    -> ()
 #@todo
 
 (expected_float.to_f - actual_float.to_f).abs <= delta.to_f
@@ -138,7 +138,7 @@ delta は正の数でなければならない。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_send(send_array, message="")    -> ()
+--- assert_send(send_array, message = "")    -> ()
 #@todo
 
 send_array[0].__send__(send_array[1], *send_array[2..-1])
@@ -146,7 +146,7 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
---- assert_block(message="assert_block failed.") { ... }    -> ()
+--- assert_block(message = "assert_block failed.") { ... }    -> ()
 #@todo
 
 ブロックを実行し、その結果が真ならパスします。
@@ -163,7 +163,7 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
---- assert_equal(expected, actual, message=nil)    -> ()
+--- assert_equal(expected, actual, message = nil)    -> ()
 
 expected == actual ならばパスします。
 
@@ -176,7 +176,7 @@ expected == actual ならばパスします。
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
---- assert_not_equal(expected, actual, message="")    -> ()
+--- assert_not_equal(expected, actual, message = "")    -> ()
 
 expected != actual ならばパスします。
 
@@ -186,7 +186,7 @@ expected != actual ならばパスします。
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
---- assert_not_nil(object, message="")    -> ()
+--- assert_not_nil(object, message = "")    -> ()
 
 object が nil でないならばパスします。
 
@@ -196,7 +196,7 @@ object が nil でないならばパスします。
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
---- assert_no_match(regexp, string, message="")    -> ()
+--- assert_no_match(regexp, string, message = "")    -> ()
 #@todo
 
 regexp !~ string が真ならばパスします。
@@ -207,7 +207,7 @@ regexp !~ string が真ならばパスします。
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
---- assert_not_same(expected, actual, message="")    -> ()
+--- assert_not_same(expected, actual, message = "")    -> ()
 #@todo
 
 !actual.equal?(expected) が真ならパスします。
@@ -235,7 +235,7 @@ assert にパスした時は、実際に投げられた例外を返します。
 
 #@end
 
---- build_message(head, template=nil, *arguments)
+--- build_message(head, template = nil, *arguments)
 
 テストが失敗したときに表示されるメッセージを作成します。
 
@@ -267,7 +267,7 @@ head は template の前に追加されます。template に指定した文字列に '?' が
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
---- assert_nothing_thrown(message="") { ... }    -> ()
+--- assert_nothing_thrown(message = "") { ... }    -> ()
 #@todo
 
 ブロックを実行して throw が起こらなければパスします。

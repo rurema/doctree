@@ -31,7 +31,7 @@ Unit テストを行いたいだけのユーザが、このライブラリを require する
 各種 TestRunner を実装するためのモジュールです。
 
 == Instance Methods
---- run(suite, output_level=NORMAL)    -> Test::Unit::TestResult
+--- run(suite, output_level = NORMAL)    -> Test::Unit::TestResult
 
 新しく TestRunner を生成して、与えられた TestSuite のテストを実行します。
 
