@@ -19,8 +19,6 @@ Runner にテストを実行させているクラスです。
 なファイル(runner.rb)を用意して実行します。テストは test_*.rb というファ
 イル名である必要があります。
 
-#@# ruby 1.8.3 以降では AutoRunner.run の第一引数の意味が変わり、今までと真偽が逆になりました。
-
 #@if (version <= "1.8.2")
 第一引数に false を与えると、./somedir 以下にある全てのテストを実行します。
   require 'test/unit'
@@ -61,7 +59,6 @@ Runner にテストを実行させているクラスです。
 false を返します。
 
 #@if (version >= "1.8.3")
-#@#ruby 1.8.3 以降では force_standalone の意味が変わり、今までと真偽が逆になりました。        
 @param force_standalone true を与えると、dir 以下にある全てのテストを実
                         行します。false を与えた場合は既に読み込まれた
                         ファイルの中からテストを探して実行します。テス
@@ -71,7 +68,6 @@ false を返します。
 #@end
 
 #@if (version <= "1.8.2")
-#@#ruby 1.8.2 まで: 
 @param force_standalone $0 か false を与えます。$0 を与えた場合は既に読
                         み込まれたファイルの中からテストを探して実行し
                         ます。false を与えた場合は、dir の中からテスト
