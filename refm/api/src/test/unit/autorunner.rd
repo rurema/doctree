@@ -19,16 +19,14 @@ Runner にテストを実行させているクラスです。
 なファイル(runner.rb)を用意して実行します。テストは test_*.rb というファ
 イル名である必要があります。
 
-#@if (version <= "1.8.2")
-第一引数に false を与えると、./somedir 以下にある全てのテストを実行します。
-  require 'test/unit'
-  Test::Unit::AutoRunner.run(false, './somedir')
-#@end
-
-#@if (version >= "1.8.3")
+#@since 1.8.3
 第一引数に true を与えると、./somedir 以下にある全てのテストを実行します。
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir')
+#@else
+第一引数に false を与えると、./somedir 以下にある全てのテストを実行します。
+  require 'test/unit'
+  Test::Unit::AutoRunner.run(false, './somedir')
 #@end
 
 単に実行します。
@@ -42,32 +40,47 @@ Runner にテストを実行させているクラスです。
 
 同じことは、runner.rb に直接オプションを書いても実現できます。
 
+#@since 1.8.3
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir', ['--exclude=somefile'])
+#@else
+  require 'test/unit'
+  Test::Unit::AutoRunner.run(false, './somedir', ['--exclude=somefile'])
+#@end
 
 上のやり方では拡張子が .rb のファイルしか集めません。拡張子が .rbx のファイルも
 テストとして集めたい場合は次のようにします。
 
+#@since 1.8.3
   require 'test/unit'
   Test::Unit::AutoRunner.run(true, './somedir', ['--pattern=/test_.*\.rbx\Z/'])
+#@else
+  require 'test/unit'
+  Test::Unit::AutoRunner.run(false, './somedir', ['--pattern=/test_.*\.rbx\Z/'])
+#@end
 
 == Class Methods
 
+#@since 1.8.3
 --- run(force_standalone = false, dir = '.', argv = ARGV)    -> bool
-#@todo
+#@else
+--- run(force_standalone = nil, dir = '.', argv = ARGV)    -> bool
+#@end
+
 テストを実行します。全てのテストが成功した場合、true を返します。そうでない場合は、
 false を返します。
 
-#@if (version >= "1.8.3")
+#@since 1.8.3
 @param force_standalone true を与えると、dir 以下にある全てのテストを実
                         行します。false を与えた場合は既に読み込まれた
                         ファイルの中からテストを探して実行します。テス
                         トが読み込まれておらず、スクリプトを -e から実
                         行している場合は、dir 以下にある全てのテストを
                         実行します。デフォルトは false です。
-#@end
 
-#@if (version <= "1.8.2")
+@param dir force_standalone に true を与えた時に再帰的に探査するディレクトリ名を
+           与えます。デフォルトではカレントディレクトリを再帰的に探査します。
+#@else
 @param force_standalone $0 か false を与えます。$0 を与えた場合は既に読
                         み込まれたファイルの中からテストを探して実行し
                         ます。false を与えた場合は、dir の中からテスト
@@ -76,10 +89,10 @@ false を返します。
                         トしか探査しません。false を与えた場合でも、既
                         に読み込まれたファイルは実行するテストに含まれ
                         ます。
-#@end
 
-@param dir force_standalone に true を与えた時に再帰的に探査するディレクトリ名を
+@param dir force_standalone に false を与えた時に再帰的に探査するディレクトリ名を
            与えます。デフォルトではカレントディレクトリを再帰的に探査します。
+#@end
 
 @param argv オプションを配列として与えます。解釈するオプションは先に
             出てきたものと同じです。
@@ -100,7 +113,7 @@ false を返します。
                                        remaining options will be passed to the
                                        test.
       -h, --help                       Display this help.
-#@if (version <= "1.8.2")
+#@since 1.8.2
 force_standalone に false を与えた時には次のオプションが追加されます。
 #@else
 force_standalone に true を与えた時には次のオプションが追加されます。
