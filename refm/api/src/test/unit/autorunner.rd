@@ -33,7 +33,7 @@ Runner にテストを実行させているクラスです。
 
 単に実行します。
 
-  $ ruby runner.rb 
+  $ ruby runner.rb
 
 ディレクトリ ./somedir 以下にあるテストをファイル somefile を除いて実行
 したい場合は次のように runner.rb にオプションを与えます。
@@ -117,7 +117,7 @@ force_standalone に true を与えた時には次のオプションが追加されます。
       require 'test/unit'
       Test::Unit::AutoRunner.run(true, './', ['--runner=tk', '-v',
                                               '--exclude=/test_hoge.*\.rb\Z/i'])
-    
+
 argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
 指定できます。
 
@@ -125,7 +125,7 @@ argv にデフォルトのまま ARGV を渡しておけばコマンドラインからオプションを
       Test::Unit::AutoRunner.run(true, './')
 
 と、runner.rb に書いておいて、コマンドラインから以下のように実行。
-   
+
       $ ruby runner.rb --runner=tk -v --exclude=/test_hoge.\*\\.rb\\Z/i
 
 #@end
