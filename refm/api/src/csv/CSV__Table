@@ -16,6 +16,18 @@ include Enumerable
   * [[m:Array#length]]
   * [[m:Array#size]]
 
+=== アクセスモード
+
+以下の三種類のモードがあります。
+
+: :col_or_row
+  デフォルトはこのモードです。このマニュアル内ではミックスモードと呼んでいます。
+  行単位でアクセスするか列単位でアクセスするか自動的に判断します。
+: :row
+  ロウモード。テーブルに行単位でアクセスします。
+: column
+  カラムモード。テーブルに列単位でアクセスします。
+
 == Singleton Methods
 
 --- new(array_of_rows) -> CSV::Table
@@ -59,7 +71,6 @@ include Enumerable
         もありません。
 
 --- []=(index_or_header, value)
-#@todo
 
 ミックスモードでは、このメソッドは引数に行番号を指定すれば行単位で動作
 し、ヘッダの名前を指定すれば列単位で動作します。
@@ -68,16 +79,14 @@ include Enumerable
 モードになります。また [[m:CSV::Table#by_row!]] を呼び出すとロウモード
 になります。
 
-Rows may be set to an Array of values (which will inherit the table's
-headers()) or a [[c:CSV::Row]].
+行には配列か [[c:CSV::Row]] のインスタンスを指定します。
 
-Columns may be set to a single value, which is copied to each row of the
-column, or an Array of values.  Arrays of values are assigned to rows top
-to bottom in row major order.  Excess values are ignored and if the Array
-does not have a value for each row the extra rows will receive a +nil+.
+列に値を一つだけ指定した場合は、全ての行にその値をコピーします。配列を
+指定した場合は、上から順に値を割り当てます。余分な値は無視します。また、
+値が不足している場合は nil を割り当てます。
 
-Assigning to an existing column or row clobbers the data.  Assigning to
-new columns creates them at the right end of the table.
+既存の行または列のデータを上書きします。
+新しい列を追加する場合は、右端に列を追加します。
 
 @param index_or_header 行番号かヘッダの名前を指定します。
 
@@ -114,14 +123,14 @@ new columns creates them at the right end of the table.
 チェーンに組込まないようにしてください。
 
 --- by_col_or_row! -> self
-#@todo
 
 自身をミックスモードに変更します。
 
-Switches the mode of this table to mixed mode.  All calls to indexing and
-iteration methods will use the default intelligent indexing system until
-the mode is changed again.  In mixed mode an index is assumed to be a row
-reference while anything else is assumed to be column access by headers.
+再びモードが変更されるまで、いくつかのメソッドはミックスモードで動きます。
+
+デフォルトのミックスモードではインデックスによるアクセスは行単位での参
+照であると見なします。しかし、他の方法ではヘッダによる列単位での参照で
+あると見なします。
 
 @return 必ず自身を返すので安全にメソッドチェーンできます。
 
@@ -137,7 +146,6 @@ reference while anything else is assumed to be column access by headers.
 チェーンに組込まないようにしてください。
 
 --- by_row! -> self
-#@todo
 
 自身をロウモードに変更します。
 
@@ -145,46 +153,54 @@ reference while anything else is assumed to be column access by headers.
 
 @return 必ず自身を返すので安全にメソッドチェーンできます。
 
---- delete(index_or_header) -> Object
-#@todo
+--- delete(index_or_header) -> object
 
-Removes and returns the indicated column or row.  In the default mixed
-mode indices refer to rows and everything else is assumed to be a column
-header.  Use by_col!() or by_row!() to force the lookup.
+指定された行か列を削除して返します。
 
---- delete_if{ ... } -> self
-#@todo
+デフォルトのミックスモードではインデックスによるアクセスは行単位での参
+照であると見なします。しかし、他の方法ではヘッダによる列単位での参照で
+あると見なします。
 
-Removes any column or row for which the block returns +true+.  In the
-default mixed mode or row mode, iteration is the standard row major
-walking of rows.  In column mode, interation will +yield+ two element
-tuples containing the column name and an Array of values for that column.
+探索方法を変更したい場合は [[m:CSV::Table#by_col!]],
+[[m:CSV::Table#by_row!]] を使用してください。
 
-This method returns the table for chaining.
+@see [[m:CSV::Table#by_col!]], [[m:CSV::Table#by_row!]]
+
+--- delete_if{|row| ... } -> self
+--- delete_if{|column_name, values| ... } -> self
+
+ブロックを評価した結果が真である行か列を削除します。
+
+デフォルトのミックスモードかロウモードでは、行単位で繰り返します。カラ
+ムモードでは、ブロックに列名と対応する値の配列を与え、列単位で繰り返し
+ます。
 
 --- each{|header, field| ... } -> self
-#@todo
+--- each{|column_name, values| ... } -> self
 
-In the default mixed mode or row mode, iteration is the standard row major
-walking of rows.  In column mode, interation will +yield+ two element
-tuples containing the column name and an Array of values for that column.
-
-This method returns the table for chaining.
+デフォルトのミックスモードかロウモードでは、行単位で繰り返します。カラ
+ムモードでは、ブロックに列名と対応する値の配列を与え、列単位で繰り返し
+ます。
 
 --- empty? -> bool
 
 [[m:Array#empty?]] に委譲します。
 
 --- headers -> Array
-#@todo
 
-Returns the headers for the first row of this table (assumed to match all
-other rows).  An empty Array is returned for empty tables.
+自身のヘッダ行を返します。
+
+テーブルが空である場合は空の配列を返します。
 
 --- inspect -> String
-#@todo
 
-Shows the mode and size of this table in a US-ASCII String.
+モードとサイズを US-ASCII な文字列で返します。
+
+例:
+  require 'csv'
+  csv = CSV.new("a,b,c\n1,2,3", headers: true)
+  table = csv.read
+  table.inspect # => "#<CSV::Table mode:col_or_row row_count:2>"
 
 
 --- length -> Fixnum
@@ -196,41 +212,51 @@ Shows the mode and size of this table in a US-ASCII String.
 
 現在のアクセスモードを返します。
 
-#@# アクセスモードについてどこかに書く。
-
 --- push(*rows) -> self
-#@todo
-A shortcut for appending multiple rows.  Equivalent to:
 
-  rows.each { |row| self << row }
+複数の行を追加するためのショートカットです。
 
-This method returns the table for chaining.
+以下と同じです。
 
---- to_a -> Array
-#@todo
+  csv = CSV.new("a,b,c\n,1,2,3", headers: true)
+  table = csv.read
+  rows = [[4, 5, 6], [7, 8, 9]]
+  rows.each{|row| table << row }
 
-Returns the table as an Array of Arrays.  Headers will be the first row,
-then all of the field rows will follow.
+--- to_a -> [Array]
 
---- to_csv -> String
---- to_s -> String
-#@todo
-Returns the table as a complete CSV String.  Headers will be listed first,
-then all of the field rows.
+配列の配列を返します。
 
-This method assumes you want the Table.headers(), unless you explicitly
-pass <tt>:write_headers => false</tt>.
+一番目の要素はヘッダで、残りの要素はデータを表わします。
+
+--- to_csv(options = Hash.new) -> String
+--- to_s(options = Hash.new) -> String
+
+CSV の文字列に変換して返します。
+
+ヘッダを一行目に出力します。その後に残りのデータを出力します。
+
+デフォルトでは、ヘッダを出力します。オプションに :write_headers =>
+false を指定するとヘッダを出力しません。
+
+例:
+  csv = CSV.new("a,b,c\n,1,2,3", headers: true)
+  table = csv.read
+  table.to_csv                       # => "a,b,c\n1,2,3\n"
+  table.to_csv(write_headers: false) # => "1,2,3\n"
 
 --- values_at(indices_or_headers) -> Array
-#@todo
-The mixed mode default is to treat a list of indices as row access,
-returning the rows indicated.  Anything else is considered columnar
-access.  For columnar access, the return set has an Array for each row
-with the values indicated by the headers in each Array.  You can force
-column or row mode using by_col!() or by_row!().
 
-You cannot mix column and row access.
+デフォルトのミックスモードでは、インデックスのリストを与えると行単位の
+参照を行い、行の配列を返します。他の方法は列単位の参照と見なします。行
+単位の参照では、返り値は行ごとの配列を要素に持つ配列です。
 
+探索方法を変更したい場合は [[m:CSV::Table#by_col!]],
+[[m:CSV::Table#by_row!]] を使用してください。
+
+アクセスモードを混在させることはできません。
+
+@see [[m:CSV::Table#by_col!]], [[m:CSV::Table#by_row!]]
 
 == Protected Instance Methods
 
