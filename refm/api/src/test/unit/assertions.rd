@@ -44,12 +44,24 @@ assert が失敗した時は、例外 [[c:Test::Unit::AssertionFailedError]] を投げます。
 
 boolean が真ならパスします。
 
+@param boolean 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
 --- assert_instance_of(klass, object, message = "")    -> ()
 
 object が klass の直接のインスタンスであるなら、パスします。
 [[m:Object#instance_of?]]も参照して下さい。
+
+@param klass 期待するクラスを指定します。
+
+@param object 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 [[m:Test::Unit::Assertions#assert_kind_of]] との違いに注意して下さい。
 
@@ -59,7 +71,14 @@ object が klass の直接のインスタンスであるなら、パスします。
 
 object が nil ならばパスします。
 
+@param object 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Test::Unit::Assertions#assert_not_nil]]
 
 --- assert_kind_of(klass, object, message = "")    -> ()
 
@@ -67,38 +86,82 @@ object.kind_of?(klass) が真ならパスします。
 
 正確には、object が klass かそのサブクラスのインスタンスであるならパスします。
 また、klass がモジュールである場合は、object が klass をインクルードしたクラスかそのサブクラスの
-インスタンスであるならパスします。[[m:Object#kind_of?]] を参照して下さい。
+インスタンスであるならパスします。
 
 [[m:Test::Unit::Assertions#assert_instance_of]] との違いに注意して下さい。
 
-@param klass クラスかモジュールを与えます。
+@param klass 期待するクラスかモジュールを与えます。
+
+@param object 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Object#kind_of?]]
 
 --- assert_respond_to(object, method, message = "")    -> ()
 
 object.respond_to?(method) が真ならパスします。
 
+@param object 検証するオブジェクトを指定します。
+
+@param method 検証するメソッドを [[c:Symbol]] か文字列で指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Object#respond_to?]]
 
 --- assert_match(pattern, string, message = "")    -> ()
 
 string =~ pattern が真ならばパスします。
 
+@param pattern 期待するパターンを文字列か正規表現で指定します。文字列を
+               指定した場合は内部で正規表現に変換されます。
+
+@param string 検証する文字列を指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Test::Unit::Assertions#assert_no_match]]
 
 --- assert_same(expected, actual, message = "")    -> ()
 
 actual.equal?(expected) が真ならパスします。
 
 [[m:Test::Unit::Assertions#assert_equal]] との違いに注意して下さい。
-[[m:Object#equal?]] も参照して下さい。
+
+@param expected 期待するオブジェクトを指定します。
+
+@param actual 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Object#equal?]], [[m:Test::Unit::Assertions#assert_not_same]]
 
 --- assert_operator(object1, operator, object2, message = "")    -> ()
 
 object1.send(operator, object2) が真ならパスします。
+
+@param object1 検証するオブジェクトを指定します。
+
+@param operator 検証のための演算子(メソッド)を [[c:Symbol]] か
+                to_str メソッドが使用できるオブジェクトで指定します。
+
+@param object2 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
@@ -106,7 +169,11 @@ object1.send(operator, object2) が真ならパスします。
 
 [[m:Test::Unit::Assertions#assert_raise]] のエイリアスです。
 
+@param args [[m:Test::Unit::Assertions#assert_raise]] にそのまま渡します。
+
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Test::Unit::Assertions#assert_raise]]
 
 --- flunk(message = "Flunked")    -> ()
 
@@ -114,11 +181,19 @@ object1.send(operator, object2) が真ならパスします。
 
 ちゃんとしたテストを書くまでの間、テストを失敗させておきたい場合などに使います。
 
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 @raise Test::Unit::AssertionFailedError 常に発生します。
 
 --- assert_throws(expected_symbol, message = "") { ... }    -> ()
 
 ブロックを実行して :expected_symbol が throw されたらパスします。
+
+@param expected_symbol throw されると期待するシンボルを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
@@ -127,7 +202,14 @@ object1.send(operator, object2) が真ならパスします。
 (expected_float.to_f - actual_float.to_f).abs <= delta.to_f
 が真ならパスします。
 
-delta は正の数でなければならない。
+@param expected_float 期待する実数値を指定します。
+
+@param actual_float 検証する実数値を指定します。
+
+@param delta 許容できる誤差を正の数で指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
@@ -135,6 +217,12 @@ delta は正の数でなければならない。
 
 send_array[0].__send__(send_array[1], *send_array[2..-1])
 が真ならパスします。
+
+@param send_array 検証するオブジェクトを [レシーバ、メソッド、メソッドの引数]
+                  で指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 
@@ -151,6 +239,9 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
     end
   end
 
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
@@ -158,63 +249,123 @@ send_array[0].__send__(send_array[1], *send_array[2..-1])
 
 expected == actual ならばパスします。
 
+#@since 1.9.1
+[[m:MiniTest::Assertions#assert_same]]との違いに注意して下さい。
+#@else
 [[m:Test::Unit::Assertions#assert_same]]との違いに注意して下さい。
-[[m:Object#==]] も参照して下さい。
+#@end
+
+@param expected 期待するオブジェクトを指定します。
+
+@param actual 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
 #@else
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
+
+@see [[m:Test::Unit::Assertions#assert_not_equal]], [[m:Object#==]]
 
 --- assert_not_equal(expected, actual, message = "")    -> ()
 
 expected != actual ならばパスします。
 
+@param expected 同じものではないと期待するオブジェクトを指定します。
+
+@param actual 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
 #@else
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
 #@end
 
+@see [[m:Test::Unit::Assertions#assert_equal]]
+
 --- assert_not_nil(object, message = "")    -> ()
 
 object が nil でないならばパスします。
 
+@param object 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
+
+@see [[m:MiniTest::Assertions#assert_nil]]
 #@else
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Test::Unit::Assertions#assert_nil]]
 #@end
 
 --- assert_no_match(regexp, string, message = "")    -> ()
 
 regexp !~ string が真ならばパスします。
 
+@param regexp マッチしないと期待するパターンを正規表現で指定します。
+
+@param string 検証する文字列を指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
+
+[[m:MiniTest::Assertions#assert_match]] とは異なり regexp には正規表現
+以外は指定できません。
 #@else
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+[[m:Test::Unit::Assertions#assert_match]] とは異なり regexp には正規表
+現以外は指定できません。
 #@end
 
 --- assert_not_same(expected, actual, message = "")    -> ()
 
 !actual.equal?(expected) が真ならパスします。
 
+@param expected 期待するオブジェクトを指定します。
+
+@param actual 検証するオブジェクトを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
+
+@see [[m:Object#equal?]], [[m:MiniTest::Assertions#assert_same]]
 #@else
 @raise Test::Unit::AssertionFailedError assert が失敗した時に発生します。
+
+@see [[m:Object#equal?]], [[m:Test::Unit::Assertions#assert_same]]
 #@end
 
 #@since 1.8.1
 
+--- assert_raise(message = "") { ... }    -> object
 --- assert_raise(klass1, klass2, ..., message = "") { ... }    -> object
 
 ブロックを実行して例外が発生し、その例外が
 klass1, klass2,... のいずれかのクラスのインスタンスならばパスします。
 
 assert にパスした時は、実際に投げられた例外を返します。
+
+@param klassX 例外クラスを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
@@ -250,6 +401,11 @@ head は template の前に追加されます。template に指定した文字列に '?' が
 インスタンスである場合は、assert は失敗扱いとなり、Test::Unit::AssertionFailedError
 を投げます。そうでない場合は、エラー扱いとなり発生した例外を再び投げます。
 
+@param klassX 例外クラスを指定します。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
+
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
 #@else
@@ -259,6 +415,9 @@ head は template の前に追加されます。template に指定した文字列に '?' が
 --- assert_nothing_thrown(message = "") { ... }    -> ()
 
 ブロックを実行して throw が起こらなければパスします。
+
+@param message assert が失敗した時に表示するメッセージを文字列で指定し
+               ます。指定しなかった場合は表示しません。
 
 #@since 1.9.1
 @raise MiniTest::Assertion assert が失敗した時に発生します。
