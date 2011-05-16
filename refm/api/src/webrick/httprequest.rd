@@ -123,7 +123,8 @@ false となります。
 #@todo
 This method provides the metavariables defined by the revision 3
 of ``The WWW Common Gateway Interface Version 1.1''.
-[[url:http://Web.Golux.Com/coar/cgi/]].
+
+@see [[url:http://Web.Golux.Com/coar/cgi/]]
 
 --- parse(socket = nil)    -> ()
 
@@ -210,15 +211,14 @@ multipart/form-data なフォームデータであってもサイズの制限なく、通常のフォームデ
 リクエスト URI を表す [[c:URI]] オブジェクトを返します。
 
 --- script_name          -> String
-#@todo
+
 CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
 --- script_name=(value)
-#@todo
 
 CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 
-@param value
+@param value SCRIPT_NAME を文字列で指定します。
 
 #@since 1.9.1
 --- server_name -> String
@@ -245,7 +245,6 @@ CGI での環境変数 SCRIPT_NAME を文字列で表すアクセサです。
 REMOTE_USER を文字列として返します。
 
 --- user=(value)
-#@todo
 
 REMOTE_USER を文字列で表したものに値をセットします。
 

@@ -58,7 +58,7 @@ name にクッキーの名前を、value にクッキーで保持する値を与える。
 #@since 1.8.6
 
 --- parse_set_cookies(str)    -> [WEBrick::Cookie]
-#@todo 要確認
+
 サーバから送られてくる Set-Cookie ヘッダの値 str をパースし、
 新しく [[c:WEBrick::Cookie]] オブジェクトの配列を生成し返します。
 

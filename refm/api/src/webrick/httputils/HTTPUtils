@@ -29,34 +29,63 @@ Apache の mime.types ファイル形式の file を読み込み
   p mime_type('index.html.ja', DefaultMimeTypes)  #=> "text/html"
   p mime_type('index.hoge', DefaultMimeTypes)     #=> "application/octet-stream"
 
---- parse_header(raw)
-#@todo
+--- parse_header(raw) -> Hash
 
---- split_header_value(str)
-#@todo
+HTTP ヘッダをパースして結果をハッシュに格納して返します。
+
+@param raw 生のヘッダを表す文字列を指定します。
+
+--- split_header_value(str) -> Array
+
+HTTP ヘッダの値を分割して返します。
+
+@param str HTTP ヘッダの値を返します。
 
 --- parse_range_header(ranges_specifier)
-#@todo
+#@todo ???
 
---- dequote(str)
-#@todo
+@param ranges_specifier 
 
---- quote(str)
-#@todo
+--- dequote(str) -> String
 
---- escape(str)
-#@todo
+与えられた文字列からダブルクオートとバックスラッシュを削除して返します。
 
---- unescape(str)
-#@todo
+@param str 文字列を指定します。
+
+--- quote(str) -> String
+
+与えられた文字列をダブルクオートでクオートします。
+
+与えられた文字列に含まれているダブルクオートはバックスラッシュでエスケー
+プします。
+
+@param str 文字列を指定します。
+
+--- escape(str) -> String
+
+与えられた文字列を数値参照文字列に変換します。
+
+@param str 文字列を指定します。
+
+--- unescape(str) -> String
+
+与えられた文字列を数値参照文字列から元の文字列に変換します。
+
+@param str 文字列を指定します。
 
 #@since 1.8.3
---- escape_path(str)
+--- escape_path(str) -> String
 #@todo
+
+@param str 文字列を指定します。
+
 #@end
 
---- escape8bit(str)
-#@todo
+--- escape8bit(str) -> String
+
+与えられた文字列を数値参照文字列に変換します。
+
+@param str 文字列を指定します。
 
 #@#--- normalize_path(path)
 #@#todo
@@ -94,5 +123,6 @@ Apache の mime.types ファイル形式の file を読み込み
 
 == Constants
 
---- DefaultMimeTypes
-#@todo
+--- DefaultMimeTypes -> Hash
+
+ファイルの拡張子をキー、 MIME Type を値とする要素を持つハッシュです。

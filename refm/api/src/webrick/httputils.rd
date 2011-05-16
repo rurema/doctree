@@ -2,14 +2,17 @@
 
 == Constants
 
---- CR
-#@todo
+--- CR -> "\x0d"
 
---- CRLF
-#@todo
+内部で利用する定数です。
 
---- LF
-#@todo
+--- CRLF -> "\x0d\x0a"
+
+内部で利用する定数です。
+
+--- LF -> "\x0a"
+
+内部で利用する定数です。
 
 #@include(httputils/HTTPUtils)
 #@include(httputils/HTTPUtils__FormData)

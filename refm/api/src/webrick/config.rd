@@ -146,4 +146,6 @@ falseならばエラー(403 Forbidden)となる。
     }
 
 --- LIBDIR -> String
-#@todo
+
+このファイルのあるディレクトリのパスを返します。
+
