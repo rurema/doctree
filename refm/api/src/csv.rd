@@ -408,14 +408,14 @@ anything CSV::new() accepts.
 --- filter(options = Hash.new){|row| ... }
 --- filter(input, options = Hash.new){|row| ... }
 --- filter(input, output, options = Hash.new){|row| ... }
-#@todo
 #@# -> discard
 
 このメソッドは CSV データに対して Unix のツール群のようなフィルタを構築
 するのに便利です。
 
-Each row is yielded to the provided block which can alter it as needed.
-After the block returns, the row is appended to +output+ altered or not.
+与えられたブロックに一行ずつ渡されます。ブロックに渡された行は必要であ
+れば変更することができます。ブロックの評価後に行を全て output に書き込
+みます。
 
 @param input [[c:String]] か [[c:IO]] のインスタンスを指定します。
              デフォルトは [[c:ARGF]] です。
@@ -679,17 +679,16 @@ CSV ファイルを配列の配列にするために使います。
 --- convert(name)
 --- convert{|field| ... }
 --- convert{|field, field_info| ... }
-#@todo
 #@# discard
 
-You can use this method to install a CSV::Converters built-in, or provide a
-block that handles a custom conversion.
+組み込みの [[m:CSV::Converters]] を変換器として利用するために使います。
+また、独自の変換器を追加することもできます。
 
-If you provide a block that takes one argument, it will be passed the field
-and is expected to return the converted value or the field itself.  If your
-block takes two arguments, it will also be passed a CSV::FieldInfo Struct,
-containing details about the field.  Again, the block should return a
-converted field or the field itself.
+ブロックパラメータを一つ受け取るブロックを与えた場合は、そのブロックは
+フィールドを受け取ります。ブロックパラメータを二つ受け取るブロックを与
+えた場合は、そのブロックは、フィールドと [[c:CSV::FieldInfo]] のインス
+タンスを受け取ります。ブロックは変換後の値かフィールドそのものを返さな
+ければなりません。
 
 @param name 変換器の名前を指定します。
 
@@ -764,11 +763,10 @@ converted field or the field itself.
 @see [[m:CSV#convert]]
 
 --- header_converters -> Array
-#@todo
 
-Returns the current list of converters in effect for headers.  See CSV::new
-for details.  Built-in converters will be returned by name, while others
-will be returned as is.
+現在有効なヘッダ用変換器のリストを返します。
+
+組込みの変換器は名前を返します。それ以外は、オブジェクトを返します。
 
 @see [[m:CSV.new]]
 
@@ -849,8 +847,10 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 @see [[m:CSV.new]]
 
 --- rewind -> 0
-#@todo
-Rewinds the underlying IO object and resets CSV's lineno() counter.
+
+[[m:IO#rewind]] に似ています。[[m:CSV#lineno]] を 0 にします。
+
+@see [[m:IO#rewind]]
 
 --- row_sep -> String
 
