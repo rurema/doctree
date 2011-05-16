@@ -297,9 +297,9 @@ If you want any other positioning, pass a preset StringIO object instead.
   データの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
   A sequence will be selected even if it occurs in a quoted field, assuming that you
   would have the same line endings there.  If none of those sequences is
-  found, +data+ is <tt>ARGF</tt>, <tt>STDIN</tt>, <tt>STDOUT</tt>, or
-  <tt>STDERR</tt>, or the stream is only  available for output, the default
-  <tt>$INPUT_RECORD_SEPARATOR</tt>  (<tt>$/</tt>) is used.  Obviously,
+  found, +data+ is [[m:ARGF]], [[m:STDIN]], [[m:STDOUT]], or
+  [[m:STDERR]], or the stream is only  available for output, the default
+  [[m:$INPUT_RECORD_SEPARATOR]]  ([[m:$/]]) is used.  Obviously,
   discovery takes a little time.  Set  manually if speed is important.  Also
   note that IO objects should be opened  in binary mode on Windows if this
   feature will be used as the  line-ending translation can cause
@@ -321,36 +321,36 @@ If you want any other positioning, pass a preset StringIO object instead.
   limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
   by default.
 : :converters
-  An Array of names from the Converters  Hash and/or lambdas that handle custom
-  conversion.  A single converter  doesn't have to be in an Array.  All
-  built-in converters try to transcode  fields to UTF-8 before converting.
-  The conversion will fail if the data  cannot be transcoded, leaving the
-  field unchanged.
+  [[c:CSV::Converters]] から取り出した名前の配列です。変換器が一つだけ
+  の場合は配列に格納する必要はありません。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
+  換を試みます。エンコーディング変換に失敗した場合はフィールドは変換さ
+  れません。
 : :unconverted_fields
-  If set to +true+, an  unconverted_fields() method will be
-  added to all returned rows (Array or  CSV::Row) that will return the fields
-  as they were before conversion.  Note  that <tt>:headers</tt> supplied by
-  Array or String were not fields of the  document and thus will have an empty
-  Array attached.
+  真をセットすると [[m:CSV::Row#unconverted_fields]] という変換前のフィー
+  ルドを返すメソッドを全ての行に追加します。headers オプションによって
+  追加したヘッダはフィールドではないので
+  [[m:CSV::Row#unconverted_fields]] は空の配列を返します。
 : :headers
   :first_row というシンボルか真を指定すると、CSV ファイルの一行目をヘッダとして扱います。
   配列を指定するとそれをヘッダとして扱います。文字列を指定すると [[m:CSV.parse_line]] を
   使用してパースした結果をヘッダとして扱います。このとき、:col_sep, :row_sep, :quote_char
-  はこのインスタンスと同じものを使用します。
-  This  setting causes CSV#shift() to return
-  rows as CSV::Row objects instead of  Arrays and CSV#read() to return
-  CSV::Table objects instead of an Array  of Arrays.
+  はこのインスタンスと同じものを使用します。この設定は [[m:CSV#shift]]
+  の返り値を配列のかわりに [[c:CSV::Row]] のインスタンスに変更します。
+  [[m:CSV#read]] の返り値を配列の配列のかわりに [[c:CSV::Table]] のイン
+  スタンスに変更します。
 : :return_headers
-  When +false+, header rows are silently  swallowed.  If set to +true+, header
+  偽を指定すると、ヘッダ行を無視します。
+  If set to +true+, header
   rows are returned in a CSV::Row object  with identical headers and
   fields (save that the fields do not go  through the converters).
 : :write_headers
   真を指定して :headers にも値をセットすると、ヘッダを出力します。
 : :header_converters
-  Identical in functionality to  <tt>:converters</tt> save that the
-  conversions are only made to header  rows.  All built-in converters try to
-  transcode headers to UTF-8 before  converting.  The conversion will fail
-  if the data cannot be transcoded,  leaving the header unchanged.
+  :converters オプションに似ていますが、ヘッダ専用の変換器を定義します。
+  全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
+  換を試みます。エンコーディング変換に失敗した場合はヘッダは変換されま
+  せん。
 : :skip_blanks
   真を指定すると、空行を読み飛ばします。
 : :force_quotes
@@ -366,6 +366,11 @@ If you want any other positioning, pass a preset StringIO object instead.
 このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアラ
 イズすることができます。[[c:Marshal]] や [[lib:yaml]] よりは不便ですが、
 スプレッドシートやデータベースとのやりとりには役に立つでしょう。
+
+このメソッドは単純なオブジェクトや構造体を扱う場合はうまく動くことを意
+図しています。[[m:Struct#members]] を使ってインスタンス変数をシリアライ
+ズします。
+
 
 Out of the box, this method is intended to work with simple data objects or
 Structs.  It will serialize a list of instance variables and/or
