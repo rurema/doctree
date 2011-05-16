@@ -12,9 +12,9 @@ include Enumerable
 
 以下のメソッドを [[c:Array]] に委譲します。
 
-* empty?()
-* length()
-* size()
+  * empty?()
+  * length()
+  * size()
 
 == Singleton Methods
 
@@ -64,14 +64,11 @@ include Enumerable
                      重複しているヘッダがある場合に便利です。
 
 --- []=(header_or_index, value)
---- []=(header, offset, value)
-#@todo
 
 ヘッダの名前かインデックスでフィールドを探し、値をセットします。
 
-Assigning past the end of the row with an index will set all pairs between
-to <tt>[nil, nil]</tt>.  Assigning to an unused header appends the new
-pair.
+末尾より後ろのインデックスを指定すると、ヘッダの名前は nil になります。
+存在しないヘッダを指定すると、新しい要素を末尾に追加します。
 
 @param header_or_index ヘッダの名前かインデックスを指定します。
 
@@ -135,18 +132,23 @@ pair.
 
 --- fields(*headers_and_or_indices) -> Array
 --- values_at(*headers_and_or_indices) -> Array
-#@todo
 
-This method accepts any number of arguments which can be headers, indices,
-Ranges of either, or two-element Arrays containing a header and offset.
-Each argument will be replaced with a field lookup as described in
-CSV::Row.field().
+与えられた引数に対応する値の配列を返します。
 
-If called with no arguments, all fields are returned.
+要素の探索に [[m:CSV::Row.field]] を使用しています。
 
-#@# 例が必要
+@param headers_and_or_indices ヘッダの名前かインデックスか [[c:Range]]
+                              のインスタンスか第 1 要素がヘッダの名前で
+                              第 2 要素がオフセットになっている 2 要素
+                              の配列をいくつでも指定します。混在するこ
+                              とができます。
 
-@param headers_and_or_indices
+@return 引数を与えなかった場合は全ての要素を返します。
+
+  csv = CSV.new("a,b,c\n1,2,3", headers: true)
+  table = csv.read
+  row = table.first
+  row.values_at("a", 1, 2..3) # => ["1", "2", "3", nil]
 
 --- header?(name) -> bool
 --- include?(name) -> bool
@@ -177,7 +179,8 @@ ASCII 互換であるエンコーディングの文字列で自身の情報を返します。
 
 --- length -> Fixnum
 --- size -> Fixnum
-delegate
+
+[[m:Array#length]], [[m:Array#size]] に委譲します。
 
 --- push(*args) -> self
 複数のフィールドを追加するためのショートカットです。
