@@ -50,15 +50,13 @@ CSV ライブラリは [[RFC:4180]] から直接とられたかなり厳しい定義を維持します。
 一ヶ所だけ定義を緩和することでこのライブラリを使いやすくしています。[[c:CSV]] は
 すべての有効な CSV ファイルをパースします。
 
-不正な CSV データを与えたくない。
+不正な CSV データを与えたくない。あるフィールドが不正であることが確定す
+るのはファイルを全て読み込んだ後です。これは多くの時間やメモリを消費し
+ます。
 
-What you don't want to do is feed CSV invalid data.  Because of the way the
-CSV format works, it's common for a parser to need to read until the end of
-the file to be sure a field is invalid.  This eats a lot of time and memory.
-
-Luckily, when working with invalid CSV, Ruby's built-in methods will almost
-always be superior in every way.  For example, parsing non-quoted fields is as
-easy as:
+Ruby の組込みメソッドはほとんど全ての点でより優れています。運が良ければ
+不正な CSV データを与えても動きます。例えば、クオートされていないフィー
+ルドだけを持つ CSV データは次のように簡単にパースできます。
 
   data.split(",")
 
@@ -267,7 +265,6 @@ find with it.
 == Singleton Methods
 
 --- new(data, options = Hash.new) -> CSV
-#@todo
 
 このメソッドは CSV ファイルを読み込んだり、書き出したりするために
 [[c:String]] か [[c:IO]] のインスタンスをラップします。
@@ -275,10 +272,6 @@ find with it.
 ラップされた文字列の先頭から読み込むことになります。
 文字列に追記したい場合は [[m:CSV#generate]] を使用してください。
 他の位置から処理したい場合はあらかじめそのように設定した [[c:StringIO]] を渡してください。
-
-Note that a wrapped String will be positioned at at the beginning (for
-reading).  If you want it at the end (for writing), use CSV::generate().
-If you want any other positioning, pass a preset StringIO object instead.
 
 @param data [[c:String]] か [[c:IO]] のインスタンスを指定します。
             [[c:String]] のインスタンスを指定した場合、[[m:CSV#string]] を使用して
@@ -340,10 +333,8 @@ If you want any other positioning, pass a preset StringIO object instead.
   [[m:CSV#read]] の返り値を配列の配列のかわりに [[c:CSV::Table]] のイン
   スタンスに変更します。
 : :return_headers
-  偽を指定すると、ヘッダ行を無視します。
-  If set to +true+, header
-  rows are returned in a CSV::Row object  with identical headers and
-  fields (save that the fields do not go  through the converters).
+  偽を指定すると、ヘッダ行を無視します。真を指定すると、ヘッダ行を
+  ヘッダと値が同一の [[c:CSV::Row]] のインスタンスとして返します。
 : :write_headers
   真を指定して :headers にも値をセットすると、ヘッダを出力します。
 : :header_converters
@@ -361,7 +352,6 @@ If you want any other positioning, pass a preset StringIO object instead.
 @see [[m:CSV::DEFAULT_OPTIONS]], [[m:CSV.open]]
 
 --- dump(ary_of_objs, io = "", options = Hash.new) -> String | nil
-#@todo
 
 このメソッドは Ruby オブジェクトの配列を文字列や CSV ファイルにシリアラ
 イズすることができます。[[c:Marshal]] や [[lib:yaml]] よりは不便ですが、
@@ -371,42 +361,37 @@ If you want any other positioning, pass a preset StringIO object instead.
 図しています。[[m:Struct#members]] を使ってインスタンス変数をシリアライ
 ズします。
 
+もっと複雑なシリアライゼーションが必要な場合は、ダンプしたいクラスにメ
+ソッドを追加すると制御することができます。
 
-Out of the box, this method is intended to work with simple data objects or
-Structs.  It will serialize a list of instance variables and/or
-Struct.members().
+#@# ユーザが定義しないかぎり存在しないメソッドなのでリンクにはしない
 
-If you need need more complicated serialization, you can control the process
-by adding methods to the class to be serialized.
+Object.csv_meta を定義すると、ダンプするデータの一行目を変更することが
+できます。この行は次の形式のハッシュのようなものです。
 
-A class method csv_meta() is responsible for returning the first row of the
-document (as an Array).  This row is considered to be a Hash of the form
-key_1,value_1,key_2,value_2,...  CSV::load() expects to find a class key
-with a value of the stringified class name and CSV::dump() will create this,
-if you do not define this method.  This method is only called on the first
-object of the Array.
+  key_1,value_1,key_2,value_2,...
 
-The next method you can provide is an instance method called csv_headers().
-This method is expected to return the second line of the document (again as
-an Array), which is to be used to give each column a header.  By default,
-CSV::load() will set an instance variable if the field header starts with an
-@ character or call send() passing the header as the method name and
-the field value as an argument.  This method is only called on the first
-object of the Array.
+[[m:CSV.load]] は "class" というキーと文字列化したクラス名を期待してい
+ます。Object.csv_meta を定義しなければ [[m:CSV.dump]] はそれを生成しま
+す。ary_of_objs の最初の要素の Object.csv_meta だけが呼ばれます。
 
-Finally, you can provide an instance method called csv_dump(), which will
-be passed the headers.  This should return an Array of fields that can be
-serialized for this object.  This method is called once for every object in
-the Array.
+次に Object#csv_headers を定義することができます。このメソッドはダンプ
+するデータの二行目を出力します。二行目はそれぞれの列のヘッダを与えるた
+めに使います。デフォルトでは、[[m:CSV.load]] はヘッダが "@" で始まって
+いればインスタンス変数に値をセットし、そうでなければヘッダの名前をメソッ
+ド名、フィールドの値を引数として [[m:Object#send]] を呼び出します。
+ary_of_objs の最初の要素の Object#csv_headers だけが呼ばれます。
 
-The +io+ parameter can be used to serialize to a File, and +options+ can be
-anything CSV::new() accepts.
+最後に、Object#csv_dump を定義することができます。Object#csv_dump の引
+数はヘッダで返り値はフィールドの配列です。このメソッドは ary_of_objs の
+全ての要素に対して一度ずつ呼ばれます。
 
 @param ary_of_objs 任意の配列を指定します。
 
-@param io データの出力先を指定します。デフォルトは文字列です。
+@param io データの出力先を指定します。デフォルトは文字列です。ファイル
+          に出力することもできます。
 
-@param options オプションを指定します。
+@param options オプションを指定します。[[m:CSV.new]] と同じです。
 
 @see [[m:CSV.new]]
 
