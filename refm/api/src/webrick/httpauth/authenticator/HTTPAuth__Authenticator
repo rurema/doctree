@@ -10,27 +10,30 @@
 
 レルムを返します。
 
---- userdb
-#@todo
+--- userdb -> WEBrick::HTTPAuth::Htpasswd | WEBrick::HTTPAuth::Htdigest
+
+認証のためのユーザデータベースを返します。
+
+@see [[c:WEBrick::HTTPAuth::BasicAuth]], [[c:WEBrick::HTTPAuth::Htdigest]]
 
 == Constants
 
 --- RequestField -> String
 
-リクエストフィールド
+リクエストフィールドのキーの名前です。
 
 --- ResponseField -> String
 
-レスポンスフィールド
+レスポンスフィールドのキーの名前です。
 
 --- ResponseInfoField -> String
-#@todo
+
+レスポンスインフォフィールドのキーの名前です。
 
 --- AuthException -> Class
 
-認証失敗時に発生する例外クラスです。
+認証失敗時に発生する例外のクラスです。
 
 --- AuthScheme -> nil
-#@todo
 
-派生クラスで上書きしなければなりません。
+認証方法を表わします。派生クラスで上書きしなければなりません。
