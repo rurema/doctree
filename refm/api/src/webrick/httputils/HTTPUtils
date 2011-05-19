@@ -65,6 +65,15 @@ HTTP ヘッダの値を分割して返します。
 
 与えられた文字列を数値参照文字列に変換します。
 
+以下の正規表現を使用して変換します。
+
+  control  = (0x0..0x1f).collect{|c| c.chr }.join + "\x7f"
+  space    = " "
+  delims   = '<>#%"'
+  unwise   = '{}|\\^[]`'
+  nonascii = (0x80..0xff).collect{|c| c.chr }.join
+  /[#{Regexp.escape(control + space + delims + unwise + nonascii)}]/n
+
 @param str 文字列を指定します。
 
 --- unescape(str) -> String
@@ -75,7 +84,17 @@ HTTP ヘッダの値を分割して返します。
 
 #@since 1.8.3
 --- escape_path(str) -> String
-#@todo
+
+与えられた文字列を数値参照文字列に変換します。
+
+以下の正規表現を使用して変換します。
+
+  num      = '0123456789'
+  lowalpha = 'abcdefghijklmnopqrstuvwxyz'
+  upalpha  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  mark     = '-_.!~*\'()'
+  unreserved = num + lowalpha + upalpha + mark
+  /[^#{Regexp.escape(unreserved + ":@&=+$,")}]/n
 
 @param str 文字列を指定します。
 

@@ -52,7 +52,6 @@ config で有効な項目が増えます。以下は増える項目とそのデフォルト値です。
 == Constants
 
 --- SSL -> Hash
-#@todo
 
 以下のほとんどの項目はサーバが保持する [[c:OpenSSL::SSL::SSLContext]] オブジェクト
 を設定するためのものです。詳しくは [[c:OpenSSL::SSL::SSLContext]] を参照して下さい。
@@ -77,23 +76,32 @@ config で有効な項目が増えます。以下は増える項目とそのデフォルト値です。
   証明書チェーンです。所有している証明書からルート CA までの証明書のリストです。
   [[m:OpenSSL::SSL::SSLContext#extra_chain_cert]] を参照してください。
 : :SSLCACertificateFile
-
+  接続相手の検証のために使う、信頼している CA 証明書ファイルのパスです。
+  [[m:OpenSSL::SSL::SSLContext#ca_file]] を参照してください。
 : :SSLCACertificatePath
-
+  信頼している CA 証明書ファイルを含むディレクトリのパスです。
+  [[m:OpenSSL::SSL::SSLContext#ca_path]] を参照してください。
 : :SSLCertificateStore
-
+  接続相手の証明書の検証のために使う、信頼している CA 証明書を
+  含む証明書ストアです。
+  [[m:OpenSSL::SSL::SSLContext#cert_store]] を参照してください。
 : :SSLVerifyClient
-
+  検証モードです。
+  [[m:OpenSSL::SSL::SSLContext#verify_mode]] を参照してください。
 : :SSLVerifyDepth
-
+  証明書チェイン上の検証する最大の深さです。
+  [[m:OpenSSL::SSL::SSLContext#verify_depth]] を参照してください。
 : :SSLVerifyCallback
-
+  オブジェクトに設定されている検証をフィルタするコールバックです。
+  [[m:OpenSSL::SSL::SSLContext#verify_callback]] を参照してください。
 : :SSLTimeout
-
+  セッションのタイムアウト秒数です。
+  [[m:OpenSSL::SSL::SSLContext#timeout]] を参照してください。
 : :SSLOptions
-
+  オプションフラグです。
+  [[m:OpenSSL::SSL::SSLContext#options]] を参照してください。
 : :SSLStartImmediately
-
+#@# よくわからない
 : :SSLCertName
   自己署名証明書を作成する場合の証明書の CN を文字列で設定する。
 : :SSLCertComment
