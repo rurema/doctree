@@ -281,7 +281,7 @@ CRL を使いたいなど、より詳細な設定をしたい場合にはこれを使います。
   * [[m:OpenSSL::SSL::OP_EPHEMERAL_RSA]]
   * [[m:OpenSSL::SSL::OP_NETSCAPE_CA_DN_BUG]]
   * [[m:OpenSSL::SSL::OP_NETSCAPE_DEMO_CIPHER_CHANGE_BUG]]
-  * [[m:OpenSSL::SSL::OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION ]]
+  * [[m:OpenSSL::SSL::OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION]]
   * [[m:OpenSSL::SSL::OP_NO_SSLv2]]
   * [[m:OpenSSL::SSL::OP_NO_SSLv3]]
   * [[m:OpenSSL::SSL::OP_NO_TLSv1]]
