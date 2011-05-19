@@ -83,7 +83,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 
 #@since 1.9.3
 --- continue
-#@todo
+#@todo 1.9.3
 Generate HTTP/1.1 100 continue response if the client expects it,
 otherwise does nothing.
 #@end
@@ -120,9 +120,11 @@ http_version が 1.1 より小さい場合は Keep-Alive を要求していても無視して
 false となります。
 
 --- meta_vars    -> Hash
-#@todo
-This method provides the metavariables defined by the revision 3
-of ``The WWW Common Gateway Interface Version 1.1''.
+
+メタ変数を返します。
+
+メタ変数は「The WWW Common Gateway Interface Version 1.1」のバージョン
+3 で定義されています。
 
 @see [[url:http://Web.Golux.Com/coar/cgi/]]
 

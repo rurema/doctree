@@ -272,10 +272,16 @@ HTTP のレスポンスの最初の行の reason phrase をセットします。
 @param backtrace true を指定した場合バックトレースをエラーページに出力します。
 
 --- set_redirect(status, url)    -> ()
-#@todo
 
-指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を設定し例外 status を
-発生させます。
+指定された url にリダイレクトするためのヘッダと内容(エンティティボディ)を
+設定し例外 status を発生させます。
+
+@param status [[c:WEBrick::HTTPStatus::Redirect]] を指定します。
+
+@param url URL を指定します。
+
+例:
+  res.set_redirect WEBrick::HTTPStatus::TemporaryRedirect
 
 --- status           -> Integer
 

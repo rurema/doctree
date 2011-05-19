@@ -19,8 +19,14 @@
 
 @see [[man:fcntl(2)]]
 
---- su(user)
-#@todo
+--- su(user) -> ()
+
+指定されたユーザに [[m:Process::Sys.setuid]],
+[[m:Process::Sys.setgid]] します。
+
+setuid できないプラットフォームでは警告を表示し、何もしません。
+
+@param user ユーザを指定します。
 
 --- getservername    -> String
 
@@ -37,4 +43,4 @@ A-Z, a-z, 0-9 からなる長さ len のランダムな文字列を返します。
  p WEBrick::Utils.random_string(10)   #=> "xF0jwU4RJd"
 
 #@#--- create_listeners(address, port, logger = nil)
-#@##@todo
+#@#@todo

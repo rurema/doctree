@@ -1,15 +1,23 @@
 = module WEBrick::HTTPAuth::ProxyAuthenticator
 
+このモジュールはプロキシのためにダイジェスト認証とベーシック認証の両方
+の一般的なサポートを提供します。
+
 == Constants
 
---- RequestField -> String
-#@todo
+--- RequestField -> "Proxy-Authorization"
 
---- ResponseField -> String
-#@todo
+リクエストフィールドのキーの名前です。
 
---- InfoField -> String
-#@todo
+--- ResponseField -> "Proxy-Authenticate"
+
+レスポンスフィールドのキーの名前です。
+
+--- InfoField -> "Proxy-Authentication-Info"
+
+キーの名前です。
 
 --- AuthException -> Class
-#@todo
+
+[[c:HTTPStatus::ProxyAuthenticationRequired]] です。
+

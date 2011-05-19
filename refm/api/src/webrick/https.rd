@@ -44,7 +44,7 @@ require webrick/ssl
 #@todo should be private
 
 --- meta_vars -> Hash
-#@todo
 
+メタ変数を返します。
 
 #@end

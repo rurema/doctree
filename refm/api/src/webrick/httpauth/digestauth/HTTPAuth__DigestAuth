@@ -3,6 +3,25 @@ include WEBrick::HTTPAuth::Authenticator
 
 HTTP の Digest 認証のためのクラスです。
 
+[[RFC:2617]] も参照してください。
+
+例:
+  config = { :Realm => 'DigestAuth example realm' }
+
+  htdigest = WEBrick::HTTPAuth::Htdigest.new 'my_password_file'
+  htdigest.set_passwd config[:Realm], 'username', 'password'
+  htdigest.flush
+
+  config[:UserDB] = htdigest
+
+  digest_auth = WEBrick::HTTPAuth::DigestAuth.new config
+
+サーブレットの initialize メソッドの中でこのクラスのインスタンスを作成
+しないようにしてください。デフォルトでは WEBrick はリクエストのたびにサー
+ブレットのインスタンスを生成しますが、
+[[c:WEBrick::HTTPAuth::DigestAuth]] のオブジェクトはリクエストをまたい
+で利用しなければならないためです。
+
 == Class Methods
 
 --- make_passwd(realm, user, pass) -> String
@@ -16,13 +35,18 @@ HTTP の Digest 認証のためのクラスです。
 @param pass パスワードを指定します。
 
 --- new(config, default = WEBrick::Config::DigestAuth) -> WEBrick::HTTPAuth::DigestAuth
-#@todo config で利用可能なキーを列挙する
 
 自身を初期化します。
 
+認証を実行するために、リクエスト間で状態を保存し、複数のリクエストに対
+して同一のインスタンスを使用してください。
+
 @param config 設定を保持しているハッシュを指定します。
+              :Realm と :UserDB は必ず指定しなければなりません。
 
 @param default デフォルトは [[m:WEBrick::Config::DigestAuth]] です。
+
+@see [[m:WEBrick::Config::DigestAuth]]
 
 == Instance Methods
 

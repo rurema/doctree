@@ -1,7 +1,11 @@
 #@since 1.8.3
 = object WEBrick::NullReader < Object
 
+空のソケットのふりをするオブジェクトです。
+
 --- read(*args) -> nil
 --- gets(*args) -> nil
-#@todo
+
+常に nil を返します。
+
 #@end

@@ -2,7 +2,7 @@ WEBrick::HTTPServer のアクセスログの形式を処理するために内部で使われるライブラリ
 
 = module WEBrick::AccessLog
 
-WEBrick::HTTPServer のアクセスログの形式を処理するために内部で使われるモジュールです。
+[[c:WEBrick::HTTPServer]] のアクセスログの形式を処理するために内部で使われるモジュールです。
 
 アクセスログの形式は Apache の mod_log_config の形式に準拠しますが、HTTP ステータスコードを
 指定することは出来ません。最後のステータスを表す %>s は %s と同じように解釈されます。
