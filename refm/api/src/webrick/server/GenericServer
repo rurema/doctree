@@ -5,11 +5,12 @@
 
 == Class Methods
 
---- new(config={}, default=WEBrick::Config::General)
-#@todo
+--- new(config = {}, default = WEBrick::Config::General) -> WEBrick::GenericServer
+
 GenericServer オブジェクトを生成して返します。
 
-@param config サーバの設定を保存したハッシュを指定します。有効なキーと値は以下のとおりです。
+@param config サーバの設定を保存したハッシュを指定します。有効なキーと
+              値は以下のとおりです。
 
 : :ServerName
   サーバのホスト名を表す文字列を指定します。デフォルトの Utils.getservername は /etc/hostname
@@ -17,7 +18,7 @@ GenericServer オブジェクトを生成して返します。
 : :BindAddress
   サーバのアドレスを指定します。デフォルトの nil や "0.0.0.0", "::" などを指定した
   場合は使用可能なすべてのネットワークインターフェースに対して listen を開始します。
-  [[ref:lib:socket#host_format]]を参照して下さい。
+  [[ref:lib:socket#host_format]] を参照して下さい。
 : :Port
   サーバのポートを指定します。[[ref:lib:socket#service_format]]を参照を参照して下さい。
 : :MaxClients
@@ -56,31 +57,32 @@ GenericServer オブジェクトを生成して返します。
 == Instance Methods
 
 --- [](key)    -> object
-#@todo
-self.config[key] と同値。
+
+self.config[key] と同じです。。
 
 --- config     -> Hash
-#@todo
-サーバの設定を保存したハッシュを返す。
+
+サーバの設定を保存したハッシュを返します。
 
 --- listen(address, port) -> [TCPServer]
 
-与えられたアドレスとポートで [[c:TCPServer]] オブジェクトを生成し listeners に加えます。
-[[m:WEBrick::GenericServer#listeners]] を返します。
+与えられたアドレスとポートで [[c:TCPServer]] オブジェクトを生成し
+listener として管理します。
 
 @param address アドレスを文字列で指定します。
 
 @param port listen するポートを整数で指定します。
 
-@see [[m:TCPServer#listen]]
+@see [[m:WEBrick::GenericServer#listeners]], [[m:TCPServer#listen]]
 
 --- listeners    -> [TCPServer]
-#@todo
+
 listen している [[c:TCPServer]] オブジェクトの配列を返します。
 
 --- logger    -> WEBrick::Log
 
-生成する時に指定された、自身をロギングする [[c:WEBrick::Log]] のインスタンスを返します。
+生成する時に指定された、自身をロギングする [[c:WEBrick::Log]] のインス
+タンスを返します。
 
 --- shutdown     -> ()
 
@@ -101,15 +103,17 @@ listen している [[c:TCPServer]] オブジェクトの配列を返します。
 値は :Running(活動中), :Shutdown(終了処理中), :Stop(完全に停止) のいずれかです。
 
 --- stop    -> ()
-#@todo
+
 サーバを停止します。
 
-実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止するとは限りません。
+実際にはサーバの状態を :Shutdown にするだけで、サーバがすぐに停止すると
+は限りません。
 
 --- tokens    -> SizedQueue
 
-MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返します。
-[[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるクライアントの数です。
+MaxClient の設定のために使われる [[c:SizedQueue]] オブジェクトを返しま
+す。[[c:SizedQueue]] オブジェクトのサイズは現在受け付けることのできるク
+ライアントの数です。
 
 MaxClient を知りたい場合は self.tokens.max です。
 self.tokens.max - self.tokens.length が現在のクライアントの接続数です。

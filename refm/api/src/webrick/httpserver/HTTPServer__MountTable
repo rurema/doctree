@@ -35,7 +35,7 @@
 @return [[c:WEBrick::HTTPServlet::AbstractServlet]] のサブクラスのインタンスを返します。
 
 --- scan(path) -> Array
-#@todo どう書こう？
-
+#@# 自信ない
+与えられたパスをスクリプトの名前と PATH_INFO に分割します。
 
 @param path パスを指定します。

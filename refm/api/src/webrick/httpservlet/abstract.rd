@@ -3,7 +3,10 @@ require webrick/httputils
 require webrick/httpstatus
 
 = class WEBrick::HTTPServlet::HTTPServletError < StandardError
-#@todo 使われていない？
+
+ユーザが作成したサーブレット内で例外を発生させるときに使うと便利かもし
+れません。
+
 
 = class WEBrick::HTTPServlet::AbstractServlet < Object
 

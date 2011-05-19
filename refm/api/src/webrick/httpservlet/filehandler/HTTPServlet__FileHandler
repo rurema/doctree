@@ -19,10 +19,12 @@
 @param suffix 拡張子を指定します。
 
 --- new(server, root, options = {}, default = WEBrick::Config::FileHandler)
-#@todo
-FileHandler サーブレットを生成する。
 
-@param server
+FileHandler サーブレットを生成します。ユーザが直接使うことはあまりあり
+ません。
+
+@param server [[c:WEBrick::GenericServer]] のサブクラスのインスタンスを
+              指定します。
 
 @param root サーブレットにルートディレクトリとして認識させる、
             ローカルのファイルシステムのディレクトリを文字列で与える。

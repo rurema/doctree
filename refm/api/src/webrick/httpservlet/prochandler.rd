@@ -22,8 +22,15 @@ require webrick/httpservlet/abstract
 
 == Instance Methods
 
---- get_instance(server, *options)
-#@todo 不要？
+--- get_instance(server, *options) -> self
+
+何もせずに自身を返します。
+
+@param server [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
+
+@param options [[m:WEBrick::HTTPServer#mount]] 第3引数以降に指定された値がそのまま与えられます。
+
+@see [[m:WEBrick::HTTPServlet::AbstractServlet.get_instance]]
 
 --- do_GET(request, response) -> ()
 --- do_POST(request, response) -> ()
