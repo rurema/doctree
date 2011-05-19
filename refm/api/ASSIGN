@@ -5,7 +5,7 @@
 _builtin/ARGF                   kouya           done
 _builtin/ArgumentError          snoozer05       done
 _builtin/Array                                  done
-_builtin/BasicObject            yugui		done
+_builtin/BasicObject            yugui           done
 _builtin/Bignum                 ujihisa         done
 _builtin/Binding                                done
 _builtin/Class                                  done
@@ -78,7 +78,7 @@ _builtin/Struct                 okkez           done
 _builtin/Struct__Tms            okkez           done
 _builtin/Symbol                 eklerni         done
 _builtin/SyntaxError            snoozer05       done
-_builtin/SystemCallError	yugui           done
+_builtin/SystemCallError        yugui           done
 _builtin/SystemExit             snoozer05       done
 _builtin/SystemStackError       snoozer05       done
 _builtin/Thread                                 done
@@ -105,10 +105,10 @@ Win32API
 abbrev                          okkez           done
 base64                          mukai           done
 benchmark                       okkez           done
-bigdecimal			mrkn
-bigdecimal/jacobian		mrkn
-bigdecimal/ludcmp		mrkn
-bigdecimal/newton		mrkn
+bigdecimal                      mrkn
+bigdecimal/jacobian             mrkn
+bigdecimal/ludcmp               mrkn
+bigdecimal/newton               mrkn
 bigdecimal/util                 sho-h           done
 bigdecimal/math                 sho-h           done
 cgi                             okkez           done
@@ -171,8 +171,8 @@ jcode                           ohai            done
 json                            okkez           done
 kconv                           ohai            done
 logger                          okkez           done
-mailread			masao		done
-mathn				yugui
+mailread                        masao           done
+mathn                           yugui
 matrix                          bornite
 md5                             okkez           done
 miniunit/mock                   okkez           done
