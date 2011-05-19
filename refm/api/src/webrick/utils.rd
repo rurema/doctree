@@ -42,5 +42,17 @@ A-Z, a-z, 0-9 からなる長さ len のランダムな文字列を返します。
 
  p WEBrick::Utils.random_string(10)   #=> "xF0jwU4RJd"
 
-#@#--- create_listeners(address, port, logger = nil)
-#@#@todo
+--- create_listeners(address, port, logger = nil) -> [TCPServer]
+
+与えられたアドレスとポートで [[c:TCPServer]] オブジェクトを生成し
+ます。
+
+@param address アドレスを指定します。
+
+@param port ポート番号を指定します。
+
+@param logger ロガーオブジェクトを指定します。
+
+@raise ArgumentError port を指定しなかった場合に発生します。
+
+@see [[m:Socket.getaddrinfo]], [[c:TCPServer]]

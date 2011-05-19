@@ -17,17 +17,22 @@ require webrick/ssl
 == Instance Methods
 
 --- cipher -> Array
-#@todo
+
+現在実際に使われている暗号の情報を配列で返します。 
+
+@see [[m:OpenSSL::SSL::SSLSocket#cipher]]
 
 --- server_cert -> OpenSSL::X509::Certificate
-#@todo
 
-サーバ証明書
+サーバ証明書を表すオブジェクトを返します。
+
+@see [[c:OpenSSL::X509::Certificate]]
 
 --- client_cert -> OpenSSL::X509::Certificate
-#@todo
 
-クライアント証明書
+クライアント証明書を表すオブジェクトを返します。
+
+@see [[m:OpenSSL::X509::Certificate]]
 
 = redefine WEBrick::HTTPRequest
 
@@ -40,8 +45,8 @@ require webrick/ssl
 
 @param socket クライアントに接続された IO オブジェクトを指定します。
 
---- parse_uri(str, scheme = "http")
-#@todo should be private
+#@#--- parse_uri(str, scheme = "https")
+#@#todo should be private
 
 --- meta_vars -> Hash
 
