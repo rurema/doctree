@@ -50,7 +50,11 @@ Errno::EXXX が発生せず -1 が返ってきます。
 --- detach(pid)    -> Thread
 
 子プロセス pid の終了を監視するスレッドを生成して返します。
+#@since "1.8.5"
+生成したスレッドは子プロセスが終了した後に終了ステータス ([[c:Process::Status]]) を返します。
+#@else
 生成したスレッドは子プロセスが終了した後に nil で終了します。
+#@end
 指定した子プロセスが存在しなければ即座に nil で終了します。
 
 @param pid 子スレッドのプロセス ID を整数で指定します。
@@ -62,10 +66,16 @@ Errno::EXXX が発生せず -1 が返ってきます。
       sleep 3
     }
 
+#@since "1.8.5"
+    p pid # => 7762
+#@end
     th = Process.detach(pid)
     p th.value
-
+#@since "1.8.5"
+    # => #<Process::Status: pid 7762 exit 0>
+#@else
     # => nil
+#@end
 
 #@end
 
