@@ -149,7 +149,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 @see [[m:Integer#gcd]], [[m:Integer#gcdlcm]]
 
---- gcdlcm(int) -> [Integer]
+--- gcdlcm(n) -> [Integer]
 
 自身と整数 n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)]
 を返します。
