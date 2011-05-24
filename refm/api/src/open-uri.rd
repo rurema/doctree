@@ -1,7 +1,7 @@
 #@# = open-uri
 
 http/ftp に簡単にアクセスするためのクラスです。
-Kernel のモジュール関数(組み込み関数) open を再定義します。
+[[m:Kernel.#open]] を再定義します。
 
 === 使用例
 
@@ -12,8 +12,9 @@ http/ftp の URL を、普通のファイルのように開けます。
     f.each_line {|line| p line}
   }
 
-開いたファイルオブジェクトは StringIO もしくは Tempfile ですが [[c:OpenURI::Meta]] モジュールで拡張されていて、
-メタ情報を獲得するメソッドが使えます。
+開いたファイルオブジェクトは [[c:StringIO]] もしくは [[c:Tempfile]] で
+すが [[c:OpenURI::Meta]] モジュールで拡張されていて、メタ情報を獲得する
+メソッドが使えます。
   open("http://www.ruby-lang.org/en") {|f|
     f.each_line {|line| p line}
     p f.base_uri         # <URI::HTTP:0x40e6ef2 URL:http://www.ruby-lang.org/en/>
@@ -108,7 +109,7 @@ http/ftp に簡単にアクセスするためのモジュールです。
 == Singleton Methods
 
 --- open_uri(name, mode = 'r', perm = nil, options = {})                  -> StringIO
---- open_uri(name, mode = 'r', perm = nil, options = {}) {|sio| ... }     -> nil
+--- open_uri(name, mode = 'r', perm = nil, options = {}){|sio| ... }     -> nil
 
 URI である文字列 name のリソースを取得して [[c:StringIO]] オブジェクト
 として返します。
@@ -186,8 +187,8 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 
 == Instance Methods
 
---- open(mode = 'r', perm = nil, options = {}))                 -> StringIO
---- open(mode = 'r', perm = nil, options = {})){|sio| ... }     -> nil
+--- open(mode = 'r', perm = nil, options = {})                 -> StringIO
+--- open(mode = 'r', perm = nil, options = {}){|sio| ... }     -> nil
 
 自身が表すリソースを取得して [[c:StringIO]] オブジェクトとして返します。
 [[m:OpenURI.open_uri]](self, *rest, &block) と同じです。
@@ -212,7 +213,7 @@ options には [[c:Hash]] を与えます。理解するハッシュの
 
 @see [[m:OpenURI.open_uri]]
 
---- read(options={})     -> String
+--- read(options = {})     -> String
 
 自身が表す内容を読み込んで文字列として返します。
 self.open(options={}).read と同じです。
@@ -254,14 +255,14 @@ Content-Type ヘッダがない場合は、"application/octet-stream" を返します。
   p open('http://www.ruby-lang.org/').content_type  #=> "text/html"
 
 --- charset       -> String | nil
---- charset{...}  -> String
+--- charset{ ... }  -> String
 
 対象となるリソースの文字コードを文字列で返します。Content-Type ヘッダの文字コード情報が使われます。
 文字列は小文字へと変換されています。
 
 Content-Type ヘッダがない場合は、nil を返します。ただし、ブロックが与えられている場合は、
 その結果を返します。また対象となる URI のスキームが HTTP であり、自身のタイプが text である場合は、
-RFC2616 3.7.1 で定められているとおり、文字列 "iso-8859-1" を返します。
+[[RFC:2616]] 3.7.1 で定められているとおり、文字列 "iso-8859-1" を返します。
 
 例:
 
