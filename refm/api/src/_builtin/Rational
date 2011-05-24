@@ -27,6 +27,8 @@
 
 剰余を計算します。
 
+@param other 自身を割る数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -45,6 +47,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 
 積を計算します。
 
+@param other 自身に掛ける数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -59,6 +63,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 --- **(other) -> Rational | Float
 
 冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
 
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。other が有理数であっても、計算結果が無理数だった場合は [[c:Float]]
@@ -86,6 +92,8 @@ other に [[c:Rational]] を指定した場合には戻り値は必ず [[c:Float]] を返
 
 和を計算します。
 
+@param other 自身に足す数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -100,6 +108,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 
 差を計算します。
 
+@param other 自身から引く数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -113,6 +123,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 --- quo(other) -> Rational | Float
 
 商を計算します。
+
+@param other 自身を割る数
 
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
@@ -139,7 +151,7 @@ self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
 比較できない場合はnilを返します。
 #@end
 
-@param other 比較対象の数値
+@param other 自身と比較する数値
 
 #@since 1.9.2
 @return      -1 か 0 か 1 か nil を返します。
@@ -166,7 +178,7 @@ self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
 
 数値として等しいか判定します。
 
-@param other 比較対象の数値
+@param other 自身と比較する数値
 
 @return      self と other が等しい場合 true を返します。
              そうでなければ false を返します。
@@ -230,6 +242,8 @@ precision を指定した場合は指定した桁数の数値と、上述の性質に最も近い整
 
 自身と other が同じクラスになるよう、自身か other を変換し [other, self] という
 配列にして返します。
+
+@param other 比較または変換するオブジェクト
 
 例:
 
