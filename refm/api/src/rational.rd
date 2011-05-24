@@ -58,6 +58,8 @@ num と den には整数を指定します。den が 1 の時に限り、num に
 
 商を計算します。
 
+@param other 自身を割る数
+
 計算結果は以下のようになります。
 
   * otherが有理数(Rational)ならば、有理数(Rational)を返す。
@@ -71,6 +73,8 @@ num と den には整数を指定します。den が 1 の時に限り、num に
 --- **(other)  -> Rational | Float | Integer
 
 冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
 
 計算結果は以下のようになります。
 
@@ -93,6 +97,8 @@ num と den には整数を指定します。den が 1 の時に限り、num に
 
 冪(べき)乗を計算します。
 
+@param other 自身を other 乗する数
+
 [[lib:rational]]で再定義される前の[[m:Integer#**]]の別名です。
 other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 なら、浮動小数 (Float) を返します。
@@ -110,6 +116,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 自身と整数 n の最大公約数を返します。
 
+@param n 自身と最大公約数を計算する数
+
   2.gcd(2)                    # => 2
   3.gcd(7)                    # => 1
   3.gcd(-7)                   # => 1
@@ -125,6 +133,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 --- lcm(n) -> Integer
 
 自身と整数 n の最小公倍数を返します。
+
+@param n 自身と最小公倍数を計算する数
 
 例:
 
@@ -143,6 +153,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 自身と整数 n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)]
 を返します。
+
+@param n 自身と最大公約数と最小公倍数を計算する数
 
 @raise ArgumentError n に整数以外のものを指定すると発生します。
 
@@ -180,6 +192,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
 
+@param other 自身を割る数
+
 例:
 
   1.quo(2)              # => Rational(1,2)
@@ -190,6 +204,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 冪(べき)乗を計算します。other が 0 以下の場合、計算結果を
 [[c:Rational]] オブジェクトで返します。
 
+@param other 自身を other 乗する数
+
   2.rpower(3)           # => 8
   2.rpower(-3)          # => Rational(1, 8)
 
@@ -198,6 +214,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 --- power!(other) -> Integer | Float
 
 冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
 
 [[lib:rational]]で再定義される前の[[m:Fixnum#**]]の別名です。
 other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
@@ -209,6 +227,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 自身と整数 other の最大公約数を返します。
 
+@param other 自身と最大公約数を計算する数
+
 @see [[m:Integer#gcd]]
 
 #@end
@@ -219,6 +239,8 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 --- quo(other) -> Rational
 
 商を計算して計算結果を [[c:Rational]] オブジェクトで返します。
+
+@param other 自身を割る数
 
 例:
 
@@ -233,11 +255,15 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
   (1<<32).rpower(2)           # => 18446744073709551616
   (1<<32).rpower(-2)          # => Rational(1, 18446744073709551616)
 
+@param other 自身を other 乗する数
+
 = reopen  Bignum
 == Instance Methods
 --- power!(other) -> Integer | Float
 
 冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
 
 [[lib:rational]]で再定義される前の[[m:Bignum#**]]の別名です。
 other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
@@ -352,6 +378,8 @@ Rational.reduce は 1.9 系 では廃止されました。[[m:Kernel.#Rational]] の
 
 和を計算します。
 
+@param other 自身に足す数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -365,6 +393,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 
 差を計算します。
 
+@param other 自身から引く数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -376,6 +406,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 --- *(other) -> Rational | Float
 
 積を計算します。
+
+@param other 自身に掛ける数
 
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
@@ -395,6 +427,8 @@ other に 0 を指定した場合も [[c:Rational]] を返します。
 
 商を計算します。
 
+@param other 自身を割る数
+
 other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 す。
 
@@ -412,6 +446,8 @@ other に [[c:Float]] を指定した場合は、計算結果を [[c:Float]] で返しま
 剰余を計算します。絶対値が self の絶対値を越えない、符号が self と同じ
 Numeric を返します。
 
+@param other 自身を割る数
+
 例:
 
   Rational(3, 4) % 2               # => Rational(3, 4)
@@ -421,6 +457,8 @@ Numeric を返します。
 --- **(other) -> Rational | Float
 
 冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
 
 other に整数を指定した場合は、計算結果を [[c:Rational]] で返します。
 other に整数以外を指定した場合は計算結果を [[c:Float]] で返します。
@@ -486,7 +524,7 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
 
 数値として等しいか判定します。
 
-@param other 比較対象の数値
+@param other 自身と比較する数値
 
 @return      self と other が等しい場合 true を返します。
              そうでなければ false を返します。
@@ -504,7 +542,7 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
 self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
 -1 を返します。比較できない場合はnilを返します。
 
-@param other 比較対象の数値
+@param other 自身と比較する数値
 
 @return -1 か 0 か 1 か nil を返します。
 
@@ -521,6 +559,8 @@ self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
 
 自身と other が同じクラスになるよう、自身か other を変換し [other, self] という
 配列にして返します。
+
+@param other 比較または変換するオブジェクト
 
 例:
 
