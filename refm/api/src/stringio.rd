@@ -592,7 +592,6 @@ nil を返します。
 --- each_char           -> Enumerable::Enumerator
 --- chars               -> Enumerable::Enumerator
 #@end
-#@todo
 自身に含まれる文字を一文字ずつブロックに渡して評価します。
 
 自身は読み込み用にオープンされていなければなりません。
@@ -607,23 +606,27 @@ nil を返します。
 
 #@end
 #@since 1.9.1
---- ungetbyte(num) -> nil
-#@todo
+--- ungetbyte(char) -> nil
+
+指定された char を読み戻します。
+
+2バイト以上の読み戻しは保証されません。
+
+@param char 読み戻したい1文字かそのコードポイントを指定します。
 
 @see [[m:IO#ungetbyte]]
 
 --- set_encoding(encoding) -> self
-#@todo
 
 自身のエンコーディングを指定されたエンコーディングに設定します。
 
+@param encoding エンコーディングを指定します。
+
 --- external_encoding -> Encoding
-#@todo
 
 現在の外部エンコーディングを返します。
 
 --- internal_encoding -> Encoding
-#@todo
 
 現在の内部エンコーディングを返します。
 
@@ -632,7 +635,8 @@ nil を返します。
 --- codepoints -> Enumerator
 --- each_codepoint{|codepoint| ... } -> self
 --- each_codepoint -> Enumerator
-#@todo
+
+自身の各コードポイントに対して繰り返します。
 
 @see [[m:IO#each_codepoint]]
 
