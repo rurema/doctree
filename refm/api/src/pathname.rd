@@ -291,7 +291,6 @@ self 配下にあるパス名(Pathnameオブジェクト)の配列を返します。
 
 --- each_child(with_directory = true)                  -> Enumerator
 --- each_child(with_directory = true) {|pathname| ...} -> [Pathname]
-#@todo
 
 self.children(with_directory).each と同じです。
 
@@ -325,14 +324,19 @@ base_directory も絶対パスでなければなりません。
 
 #@since 1.8.1
 
---- each_line(*args, &block)
+--- each_line(*args){|line| ... } -> nil
+#@since 1.8.8
+--- each_line(*args) -> Enumerator
+#@else
+--- each_line(*args) -> Enumerable::Enumerator
+#@end
 IO.foreach(self.to_s, *args, &block) と同じです。
 
 @see [[m:IO.foreach]]
 #@end
 
 #@until 1.9.2
---- foreachline(*args, &block)
+--- foreachline(*args){|line| ... } -> nil
 IO.foreach(self.to_s, *args, &block) と同じです。
 
 #@since 1.8.1
@@ -348,29 +352,29 @@ IO.read(self.to_s, *args)と同じです。
 @see [[m:IO.read]]
 
 #@since 1.9.2
---- binread(*args)
+--- binread(*args) -> String | nil
 IO.binread(self.to_s, *args)と同じです。
 
 @see [[m:IO.binread]]
 
 #@end
---- readlines(*args)
+--- readlines(*args) -> [String]
 IO.readlines(self.to_s, *args)と同じです。
 
 @see [[m:IO.readlines]]
 
---- sysopen(*args)
+--- sysopen(*args) -> Integer
 IO.sysopen(self.to_s, *args)と同じです。
 
 @see [[m:IO.sysopen]]
 
 #@since 1.8.1
---- make_link(old)
+--- make_link(old) -> 0
 File.link(old, self.to_s) と同じです。
 
 @see [[m:File.link]]
 
---- make_symlink(old)
+--- make_symlink(old) -> 0
 File.symlink(old, self.to_s) と同じです。
 
 @see [[m:File.symlink]]
@@ -680,7 +684,7 @@ FileTest.zero?(self.to_s) と同じです。
 @see [[m:FileTest.#zero?]]
 
 #@until 1.9.2
---- chdir(&block)
+--- chdir{|path| ... } -> object
 #@since 1.8.1
 このメソッドは obsolete です。
 代わりに [[m:Dir.chdir]] を使ってください。
@@ -690,7 +694,7 @@ Dir.chdir(self.to_s, &block) と同じです。
 
 @see [[m:Dir.chdir]]
 
---- chroot
+--- chroot -> 0
 #@since 1.8.1
 このメソッドは obsolete です。
 代わりに [[m:Dir.chroot]] を使ってください。
@@ -701,19 +705,19 @@ Dir.chroot(self.to_s) と同じです。
 @see [[m:Dir.chroot]]
 
 #@end
---- rmdir
+--- rmdir -> 0
 Dir.rmdir(self.to_s) と同じです。
 
 @see [[m:Dir.rmdir]]
 
---- entries
+--- entries -> [String]
 Dir.entries(self.to_s) と同じです。
 
 @see [[m:Dir.entries]]
 
 #@since 1.8.1
 
---- each_entry {|pathname| ... }
+--- each_entry {|pathname| ... } -> nil
 Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 
 @see [[m:Dir.foreach]]
@@ -721,7 +725,7 @@ Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 #@end
 
 #@until 1.9.2
---- dir_foreach {|pathname| ... }
+--- dir_foreach {|pathname| ... } -> nil
 #@since 1.8.1
 このメソッドは obsolete です。
 代わりに [[m:Pathname#each_entry]] メソッドを使ってください。
@@ -732,17 +736,18 @@ Dir.foreach(self.to_s) {|f| yield Pathname.new(f) } と同じです。
 @see [[m:Dir.foreach]]
 
 #@end
---- mkdir(*args)
+--- mkdir(*args) -> 0
 Dir.mkdir(self.to_s, *args) と同じです。
 
 @see [[m:Dir.mkdir]]
 
---- opendir(&block)
+--- opendir -> Dir
+--- opendir{|dir| ... } -> nil
 Dir.open(self.to_s, &block) と同じです。
 
 @see [[m:Dir.open]]
 
---- find {|pathname| ...}
+--- find {|pathname| ...} -> nil
 self 配下のすべてのファイルやディレクトリを
 一つずつ引数 pathname に渡してブロックを実行します。
 
@@ -753,23 +758,23 @@ self 配下のすべてのファイルやディレクトリを
 
 @see [[m:Find.#find]]
 
---- mkpath
+--- mkpath -> nil
 FileUtils.mkpath(self.to_s) と同じです。
 
 @see [[m:FileUtils.#mkpath]]
 
---- rmtree
+--- rmtree -> nil
 FileUtils.rm_r(self.to_s) と同じです。
 
 @see [[m:FileUtils.#rm_r]]
 
---- unlink
---- delete
+--- unlink -> 0
+--- delete -> 0
 self が指すディレクトリあるいはファイルを削除します。
 
 #@since 1.8.5
 
---- ascend { |pathname| ... }
+--- ascend {|pathname| ... } -> nil
 self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
 ブジェクトとして生成し、ブロックへの引数として渡して実行します。
 
@@ -791,7 +796,7 @@ self のパス名から親方向に辿っていったときの各パス名を新しい Pathname オ
 #@end
 
 #@since 1.8.5
---- descend { |pathname| ... }
+--- descend {|pathname| ... } -> nil
 self のパス名の親から子供へと辿っていったときの各パス名を新しい
 Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
 す。
@@ -813,17 +818,21 @@ Pathname オブジェクトとして生成し、ブロックへの引数として渡して実行しま
 
 #@end
 
-#@if(version <= "1.8.1")
+#@until 1.8.2
 
---- cleanpath_aggressive
-cleanpath(false) と同じです。 1.8.2 以降より private メソッドとなり、利用できなくなりました。 cleanpath を利用してください。
+--- cleanpath_aggressive -> Pathname
 
---- cleanpath_conservative
-cleanpath(true) と同じです。 1.8.2 以降より private メソッドとなり、利用できなくなりました。 cleanpath を利用してください。
+[[m:Pathname#cleanpath]](false) と同じです。 1.8.2 以降より private メソッドとなり、利
+用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
+
+--- cleanpath_conservative -> Pathname
+
+[[m:Pathname#cleanpath]](true) と同じです。 1.8.2 以降より private メソッドとなり、利
+用できなくなりました。 [[m:Pathname#cleanpath]] を利用してください。
 
 #@end
 
---- foreach(*args, &block)
+--- foreach(*args){|path| ... } -> nil
 #@since 1.8.1
 このメソッドは obsolete です。 each_line か each_entry を使ってください。
 #@end
@@ -832,22 +841,25 @@ self の指し示すパスがディレクトリなら
 Dir.foreach(self.to_s, *args, &block) と、さもなければ
 IO.foreach(self.to_s, *args, &block) と同じです。
 
-
-
 #@if(version <= "1.8.0")
 --- realpath_rec
-realpath メソッドの実質的な処理を行っているメソッドです。利用するべきで
-はありません。
+[[m:Pathname#realpath]] メソッドの実質的な処理を行っているメソッドです。
+利用するべきではありません。
 
 #@end
-
 
 #@since 1.8.5
 --- sub(pattern, replace)  -> Pathname
 --- sub(pattern) {|matched| ... } -> Pathname
 
 self を表現するパス文字列に対して sub メソッドを呼び出し、その結果を内
-容とする新しい Pathname オブジェクトを生成し、返します。 cf. [[m:String#sub]]
+容とする新しい Pathname オブジェクトを生成し、返します。
+
+@param pattern 置き換える文字列のパターンを指定します。
+
+@param replace pattern で指定した文字列と置き換える文字列を指定します。
+
+@see [[m:String#sub]]
 
 #@end
 
