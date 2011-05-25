@@ -116,7 +116,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 自身と整数 n の最大公約数を返します。
 
-@param n 自身と最大公約数を計算する数
+@param n 自身との最大公約数を計算する数
 
   2.gcd(2)                    # => 2
   3.gcd(7)                    # => 1
@@ -134,7 +134,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 自身と整数 n の最小公倍数を返します。
 
-@param n 自身と最小公倍数を計算する数
+@param n 自身との最小公倍数を計算する数
 
 例:
 
@@ -154,7 +154,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 自身と整数 n の最大公約数と最小公倍数の配列 [self.gcd(n), self.lcm(n)]
 を返します。
 
-@param n 自身と最大公約数と最小公倍数を計算する数
+@param n 自身との最大公約数と最小公倍数を計算する数
 
 @raise ArgumentError n に整数以外のものを指定すると発生します。
 
@@ -227,7 +227,7 @@ other が正または 0 の整数 (Integer) ならば、整数 (Integer) を、それ以外
 
 自身と整数 other の最大公約数を返します。
 
-@param other 自身と最大公約数を計算する数
+@param other 自身との最大公約数を計算する数
 
 @see [[m:Integer#gcd]]
 
