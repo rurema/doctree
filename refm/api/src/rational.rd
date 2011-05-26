@@ -537,6 +537,16 @@ other に [[c:Float]] を指定した場合は、余りを [[c:Float]] で返します。
   Rational(1, 3)  == 0.33             # => false
   Rational(1, 2)  == '1/2'            # => false
 
+注意:
+
+[[m:Rational.new!]] で作成したオブジェクトと比較した場合、同じ数値を表
+すオブジェクトでも true を返さない事があります。
+
+  Rational(1,2) == Rational(4,8)          # => true
+  Rational(1,2) == Rational.new!(4,8)     # => false
+
+詳しくは [[m:Rational.new!]] を確認してください。
+
 --- <=>(other) -> -1 | 0 | 1 | nil
 
 self と other を比較して、self が大きい時に 1、等しい時に 0、小さい時に
