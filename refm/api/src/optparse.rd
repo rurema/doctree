@@ -58,6 +58,8 @@ opt で置き換えます。そうでない場合は先頭に opt を追加します。
 
 @return 文字列を返します。
 
+@see [[m:Object#inspect]]
+
 --- message -> String
 --- to_s    -> String
 
