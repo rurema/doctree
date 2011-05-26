@@ -6,9 +6,9 @@
 [[m:OptionParser#on]] メソッドで登録していきます。
 つまり、OptionParser を使う場合、基本的には
 
- * (1) OptionParser オブジェクト opt を生成する。
- * (2) オプションを取り扱うブロックを opt に登録する。
- * (3) opt.parse(ARGV) でコマンドラインを実際に parse する。
+  (1) OptionParser オブジェクト opt を生成する。
+  (2) オプションを取り扱うブロックを opt に登録する。
+  (3) opt.parse(ARGV) でコマンドラインを実際に parse する。
 
 というような流れになります。
 
@@ -432,8 +432,9 @@ OptionParser.accept や OptionParser#accept によって、受け付け
 オプションを取り扱うためのブロックを自身に登録します。
 ブロックはコマンドラインのパース時に、オプションが指定されていれば呼ばれます。
 
-コマンドに与えられた引数が配列やハッシュに含まれない場合、
-例外 OptionParser::InvalidArgument が parse 実行時に投げられます。
+コマンドに与えられた引数が配列やハッシュに含まれない場合、例外
+[[c:OptionParser::InvalidArgument]] が [[m:OptionParser#parse]] 実行時
+に発生します。
 
 @param short ショートオプションを表す文字列を指定します。
 
