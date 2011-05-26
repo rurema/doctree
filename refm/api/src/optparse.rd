@@ -16,6 +16,8 @@ argv の先頭に self.args を戻します。
 
 argv を返します。
 
+@param argv [[m:OptionParser#parse]] に渡したオブジェクトなどの配列を指定します。
+
 @return argv を返します。
 
 --- set_option(opt, eq) -> self
