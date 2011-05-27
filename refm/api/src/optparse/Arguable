@@ -12,10 +12,9 @@ OptionParser::Arguable を [[m:Object#extend]] します。
 
 自身をパースするための [[c:OptionParser]] オブジェクトをセットします。
 
-opt が nil か false である場合、自身の options= メソッドと options メソッドを
-undef します。
-
 @param opt 自身をパースする [[c:OptionParser]] 、あるいは nil か false を指定します。
+           nil か false である場合、自身の options= メソッドと options メソッドを
+           undef します。
 
 --- options                -> OptionParser
 --- options{|opt| ... }    -> object | nil
@@ -47,8 +46,9 @@ nil を返します。
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
 [[m:OptionParser#order!]] を参照して下さい。
 
-@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
 例:
 
@@ -64,8 +64,9 @@ nil を返します。
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
 [[m:OptionParser#permute!]] を参照して下さい。
 
-@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
 例:
 
@@ -81,8 +82,9 @@ nil を返します。
 自身を破壊的にパースし、パースされずに残った引数を文字列の配列として返します。
 [[m:OptionParser#parse!]] を参照して下さい。
 
-@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
 例:
 
@@ -109,8 +111,9 @@ nil を返します。
                 オプションの引数のデフォルト値を ":" の直後に指定することができます。
                 例えば、"bufsize:1024" となります。
 
-@raise OptionParser::ParseError 自身のパースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError 自身のパースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスの例外になります。
 
 例:
 

@@ -119,7 +119,9 @@ klass のインスタンスに変換されてから、OptionParser#on メソッドで登録したブロック
 @param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
 #@end
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 @see [[m:OptionParser#getopts]]
 
@@ -498,8 +500,9 @@ argv からオプションを取り除いたものを返します。
 
 @param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 例:
   $ cat opt.rb
@@ -532,8 +535,9 @@ argv を返します。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 例:
   $ cat opt.rb
@@ -564,8 +568,9 @@ argv からオプションを取り除いたものを返します。
 
 @param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 例:
 
@@ -595,8 +600,9 @@ argv を返します。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 例:
 
@@ -629,8 +635,9 @@ argv からオプションを取り除いたものを返します。
 
 @param args パースしたい引数を順に文字列として与えます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 --- parse!(argv = self.default_argv)   -> [String]
 
@@ -642,8 +649,9 @@ argv からオプションを取り除いたものを返します。
 
 @param argv パースしたい引数を文字列の配列で指定します。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError の
-                                サブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 --- load(filename = nil)     -> bool
 
@@ -664,7 +672,9 @@ argv からオプションを取り除いたものを返します。
 
 @param env 環境変数名を文字列で与えます。
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 #@since 1.8.3
 --- default_argv    -> [String]
@@ -712,6 +722,8 @@ default_argv をパースします。
 @param opts 引数を文字列で指定します。[[m:Kernel#getopts]] を参照して下さい。
 #@end
 
-@raise OptionParser::ParseError パースに失敗した場合、例外 OptionParser::ParseError のサブクラスが投げられます。
+@raise OptionParser::ParseError パースに失敗した場合、発生します。
+                                実際は OptionParser::ParseError のサブク
+                                ラスになります。
 
 #@end
