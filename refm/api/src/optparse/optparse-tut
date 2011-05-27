@@ -34,13 +34,18 @@ optparse を使う場合、基本的には
              true
              ["foo", "bar", "baz"]
 
-on() メソッドの引数でオプションを定義し、引数が指定された時の処理を
-ブロックで記述します。ブロックの引数にはオプションが指定されたことを
-示す true が渡されます([[ref:optionarg]]の項も参照)。
+[[m:OptionParser#on]] メソッドの引数でオプションを定義し、引数が指定さ
+れた時の処理をブロックで記述します。ブロックの引数にはオプションが指定
+されたことを示す true が渡されます([[ref:optionarg]]の項も参照)。
 
-Enumerable#each などと違い、on() メソッドが呼ばれた時点ではブロックは実行されません。
-あくまで登録されるだけです。
-parse が呼ばれた時に、コマンドラインにオプションが指定されていれば実行されます。
+#@since 1.8.8
+[[m:Enumerator#each]] などと違い、[[m:OptionParser#on]]
+#@else
+[[m:Enumerable::Enumerator#each]] などと違い、[[m:OptionParser#on]]
+#@end
+メソッドが呼ばれた時点ではブロックは実行されません。あくまで登録される
+だけです。[[m:OptionParser#parse]] が呼ばれた時に、コマンドラインにオプ
+ションが指定されていれば実行されます。
 
 オプションの指定はコマンドの直後である必要はありません(上の例で、-b はオプションと
 して認識されている)。ただし、環境変数 POSIXLY_CORRECT が定義してあると
@@ -50,9 +55,9 @@ parse が呼ばれた時に、コマンドラインにオプションが指定されていれば実行されます。
         # => true                               # -a はオプションと解釈
              ["foo", "bar", "-b", "baz"]        # -b は非オプションと解釈
 
-parse! により、コマンドライン(ARGV)の解析を行います。
-parse! では、ARGV からオプションが取り除かれます。
-これを避けるには parse を使います。
+[[m:OptionParser#parse!]] により、コマンドライン(ARGV)の解析を行います。
+[[m:OptionParser#parse!]] では、ARGV からオプションが取り除かれます。
+これを避けるには [[m:OptionParser#parse]] を使います。
 
         require 'optparse'
         opt = OptionParser.new
@@ -66,8 +71,8 @@ parse! では、ARGV からオプションが取り除かれます。
 
         p argv
 
-定義していないオプションを指定すると例外 [[c:OptionParser::InvalidOption]] が
-発生します。
+定義していないオプションを指定すると例外
+[[c:OptionParser::InvalidOption]] が発生します。
 
         ruby ./sample.rb -c
         /usr/local/lib/ruby/1.9/optparse.rb:1428:in `complete': invalid option: -c (OptionParser::InvalidOption)
@@ -81,7 +86,7 @@ parse! では、ARGV からオプションが取り除かれます。
                 from /usr/local/lib/ruby/1.9/optparse.rb:1356:in `parse'
                 from ./sample.rb:9
 
-OptionParser 自体は、どのオプションが指定されたかを記憶しません。
+[[c:OptionParser]] 自体は、どのオプションが指定されたかを記憶しません。
 後の処理の方で、オプションによる条件判断を加えるには、
 他のコンテナに格納します。
 
@@ -103,8 +108,8 @@ OptionParser 自体は、どのオプションが指定されたかを記憶しません。
 
 ====[a:optionarg] オプションの引数
 
-on() メソッドのオプション定義で末尾に何かを書くと、そのオプション
-は引数を受け付けることの指定となります。
+[[m:OptionParser#on]] メソッドのオプション定義で末尾に何かを書くと、そ
+のオプションは引数を受け付けることの指定となります。
 
         require 'optparse'
         opt = OptionParser.new
@@ -158,7 +163,7 @@ on() メソッドのオプション定義で末尾に何かを書くと、そのオプション
 
 ====[a:longoption] ロングオプション
 
-ロングオプションは on() の引数に '--'で始まるオプションを指定します。
+ロングオプションは [[m:OptionParser#on]] の引数に '--'で始まるオプションを指定します。
 
         require 'optparse'
         opt = OptionParser.new
@@ -238,7 +243,8 @@ GNUの慣習にあわせて
         ruby ./sample.rb --version
         # => sample 1.2.3
 
-on の引数にそのオプションの説明を加えると --help の出力に反映されます。
+[[m:OptionParser#on]] の引数にそのオプションの説明を加えると --help の
+出力に反映されます。
 
         require 'optparse'
         opt = OptionParser.new
@@ -358,4 +364,5 @@ OptionParser.new にブロックを渡した場合に比べて、
       $ ruby sample.rb -- -file
 
 "-file" がオプションではない引数として解釈されます。
-これは POSIX.2 の getopt(3) に由来します。"--" 以降はすべてオプションではない引数として解釈されます。
+これは POSIX.2 の [[man:getopt(3)]] に由来します。"--" 以降はすべてオプ
+ションではない引数として解釈されます。
