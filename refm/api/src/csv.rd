@@ -147,14 +147,6 @@ prepare itself and thus you will probably need to manually specify the desired
 Encoding for most of those cases.  It will try to guess using the fields in a
 row of output though, when using CSV::generate_line() or Array#to_csv().
 
-I try to point out any other Encoding issues in the documentation of methods
-as they come up.
-
-This has been tested to the best of my ability with all non-"dummy" Encodings
-Ruby ships with.  However, it is brave new code and may have some bugs.
-Please feel free to {report}[mailto:james@grayproductions.net] any issues you
-find with it.
-
 == Constants
 
 --- DateMatcher -> Regexp
@@ -270,7 +262,7 @@ find with it.
 [[c:String]] か [[c:IO]] のインスタンスをラップします。
 
 ラップされた文字列の先頭から読み込むことになります。
-文字列に追記したい場合は [[m:CSV#generate]] を使用してください。
+文字列に追記したい場合は [[m:CSV.generate]] を使用してください。
 他の位置から処理したい場合はあらかじめそのように設定した [[c:StringIO]] を渡してください。
 
 @param data [[c:String]] か [[c:IO]] のインスタンスを指定します。
@@ -290,8 +282,8 @@ find with it.
   データの先頭から次の "\r\n", "\n", "\r" の並びまでを読みます。
   A sequence will be selected even if it occurs in a quoted field, assuming that you
   would have the same line endings there.  If none of those sequences is
-  found, +data+ is [[m:ARGF]], [[m:STDIN]], [[m:STDOUT]], or
-  [[m:STDERR]], or the stream is only  available for output, the default
+  found, +data+ is [[c:ARGF]], [[m:Kernel::STDIN]], [[m:Kernel::STDOUT]], or
+  [[m:Kernel::STDERR]], or the stream is only  available for output, the default
   [[m:$INPUT_RECORD_SEPARATOR]]  ([[m:$/]]) is used.  Obviously,
   discovery takes a little time.  Set  manually if speed is important.  Also
   note that IO objects should be opened  in binary mode on Windows if this
@@ -314,7 +306,7 @@ find with it.
   limit can cause a legitimate parse to  fail and thus is set to +nil+, or off,
   by default.
 : :converters
-  [[c:CSV::Converters]] から取り出した名前の配列です。変換器が一つだけ
+  [[m:CSV::Converters]] から取り出した名前の配列です。変換器が一つだけ
   の場合は配列に格納する必要はありません。
   全ての組み込みの変換器は、値を変換する前に UTF-8 にエンコーディング変
   換を試みます。エンコーディング変換に失敗した場合はフィールドは変換さ
@@ -640,7 +632,7 @@ CSV ファイルを配列の配列にするために使います。
 
 [[m:IO#binmode]] に委譲します。
 
---- binmode? -> bool?
+--- binmode? -> bool
 
 [[m:IO#binmode?]] に委譲します。
 
@@ -918,8 +910,6 @@ ASCII 互換文字列で自身の情報を表したものを返します。
 
 [[c:CSV]] クラスではこの構造体はいくつかのメソッドのブロックに渡されます。
 
-@see [[m:CSV.convert_fields]]
-
 == Instance Methods
 
 --- index -> Fixnum
@@ -1006,7 +996,7 @@ CSVファイルを読み込んでパースします。
 
 パース時に""(空文字)と値なし(nil)を区別します。
 例えば、読み込みモード時にa, "", , b の行をパースした場合には ["a", "", nil, "b"] の配列を返します。
- 
+
 例:
 
   CSV.open("/temp/test.csv", 'r') do |row|
@@ -1180,7 +1170,7 @@ src で指定された配列をパースして csv形式の文字列として(行区切り文字も含めて) out
   src.each do |row|
     parsed_cells = CSV.generate_row(row, 2, buf)
   end
-  p buf #=>"a,b\n1,2\n,A,B\n" 
+  p buf #=>"a,b\n1,2\n,A,B\n"
 
 
 --- parse_row(src, index, out_dev, fs = nil, rs = nil) -> Array
