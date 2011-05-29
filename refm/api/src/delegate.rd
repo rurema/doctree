@@ -190,22 +190,21 @@ obj のもつインスタンスメソッドのうち、
 #@end
 
 #@since 1.9.2
---- freeze
-#@todo
+--- freeze -> self
 
 自身を凍結します。
 
 @see [[m:Object#freeze]]
 
 --- methods -> [Symbol]
-#@todo
+
 そのオブジェクトに対して呼び出せるメソッド名の一覧を返します。
 このメソッドは public メソッドおよび protected メソッドの名前を返します。
 
 @see [[m:Object#methods]]
 
 --- protected_methods(all = true) -> [Symbol]
-#@todo
+
 そのオブジェクトが理解できる protected メソッド名の一覧を返します。
 
 @param all 偽を指定すると __getobj__ のスーパークラスで定義されたメソッドを除きます。
@@ -213,7 +212,6 @@ obj のもつインスタンスメソッドのうち、
 @see [[m:Object#protected_methods]]
 
 --- public_methods(all = true) -> [Symbol]
-#@todo
 
 そのオブジェクトが理解できる public メソッド名の一覧を返します。
 
@@ -222,7 +220,6 @@ obj のもつインスタンスメソッドのうち、
 @see [[m:Object#public_methods]]
 
 --- respond_to_missing?(m, include_private) -> bool
-#@todo
 
 @param m メソッド名を指定します。
 
