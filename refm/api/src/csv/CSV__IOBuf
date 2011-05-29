@@ -2,12 +2,14 @@
 = class CSV::IOBuf < CSV::StreamBuf
 IOのバッファリングを実現するクラス
 
-== Instance Methods
+== Class Methods
 
 --- new(s) -> self
 インスタンスを生成します。
 
 @param s バッファリングするIOのオブジェクト
+
+== Instance Methods
 
 --- close -> nil
 オブジェクト終了（破棄）処理を行います。
