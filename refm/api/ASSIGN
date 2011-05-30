@@ -114,7 +114,7 @@ bigdecimal/math                 sho-h           done
 cgi                             okkez           done
 cgi-lib                         okkez           done
 cgi/session                     okkez           done
-cmath
+cmath                           sho-h
 complex                         bornite
 continuation
 coverage                        sho-h           done
