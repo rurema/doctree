@@ -20,7 +20,7 @@ require rubygems/package/tar_writer
 
 == Singleton Methods
 
---- new(logger = nil)
+--- new(logger = nil) -> Gem::FileOperations
 
 このクラスを初期化します。
 
@@ -32,7 +32,7 @@ require rubygems/package/tar_writer
 == Singleton Methods
 
 --- open(io, mode = 'r', signer = nil){|tar_io| ... }
-#@todo
+#@todo ???
 
 io を開いて与えられたブロックに渡してブロックを評価します。
 
