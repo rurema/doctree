@@ -12,12 +12,11 @@ require rubygems/security
 == Public Instance Methods
 
 --- add_install_update_options
-#@todo
+#@# -> discard
 
 インストールとアップデートに関するオプションを追加します。
 
 --- install_update_defaults_str -> String
-#@todo
 
 Gem コマンドの install サブコマンドに渡されるデフォルトのオプションを返します。
 
