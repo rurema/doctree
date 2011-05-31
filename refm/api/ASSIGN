@@ -182,14 +182,14 @@ mkmf                            bornite
 monitor                         ohai            done
 mutex_m                         ohai            done
 net/ftp                         ohai            done
-net/ftptls
+net/ftptls                      ohai
 net/http                        ohai            done
 net/https                       ohai            done
 net/imap
 net/pop                         ohai            done
 net/smtp                        ohai            done
 net/telnet                      ohai            done
-net/telnets
+net/telnets                     ohai
 nkf                             ohai            done
 objspace
 observer                        snoozer05       done
