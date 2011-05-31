@@ -13,22 +13,19 @@ Gem のインデックスを構築するための抽象クラスです。
 == Public Instance Methods
 
 --- build{ ... }
-#@todo
-
+#@# -> discard
 Gem のインデックスを作成します。
 
 実際のインデックスを作成する処理の詳細は与えられたブロックに記述されています。
 基本的な処理をカスタマイズするために、適切なタイミングで
 begin_index, end_index, cleanup が呼び出されるようになっています。
 
---- cleanup
-#@todo
+--- cleanup -> nil
 
 インデックスファイルを閉じたあとに呼び出されます。
 
 --- compress(filename, ext = 'rz')
-#@todo
-
+#@# -> discard
 与えられたファイルを圧縮します。
 
 @param filename 圧縮するファイルの名前を指定します。
@@ -36,34 +33,28 @@ begin_index, end_index, cleanup が呼び出されるようになっています。
 @param ext 圧縮後のファイルの拡張子を指定します。
 
 --- directory -> String
-#@todo
 
 インデックスファイルに入れるファイルを配置しているディレクトリ名を返します。
 
---- end_index
-#@todo
+--- end_index -> nil
 
 [[m:Gem::Indexer::AbstractIndexBuilder#build]] 内でブロックが実行された後に呼び出されます。
 インデックスファイルは有効で、@file も参照可能です。
 
 --- filename -> String
-#@todo
 
 作成するインデックスファイルの名前を返します。
 
 --- files -> [String]
-#@todo
 
 作成するインデックスファイルに含まれるファイルのリストを返します。
 
---- start_index
-#@todo
+--- start_index -> nil
 
 [[m:Gem::Indexer::AbstractIndexBuilder#build]] 内でブロックが実行される前に呼び出されます。
 インデックスファイルは有効で、@file も参照可能です。
 
 --- unzip(string) -> String
-#@todo
 
 与えられた圧縮済み文字列を展開して返します。
 
@@ -72,18 +63,16 @@ begin_index, end_index, cleanup が呼び出されるようになっています。
 @see [[m:Zlib::Inflate.inflate]]
 
 --- zip(string) -> String
-#@todo
 
 与えられた文字列を圧縮して返します。
 
 @param string 圧縮するデータを指定します。
 
-
 @see [[m:Zlib::Deflate.deflate]]
 
 == Singleton Methods
 
---- new(filename, directory)
+--- new(filename, directory) -> Gem::Indexer::AbstractIndexBuilder
 
 自身を初期化します。
 

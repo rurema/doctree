@@ -9,7 +9,8 @@ require rubygems/indexer
 == Public Instance Methods
 
 --- end_index
-#@todo
+#@# -> discard
+取得したインデックスをファイルに書き込みます。
 
 @see [[m:Gem::Indexer::AbstractIndexBuilder#end_index]]
 
