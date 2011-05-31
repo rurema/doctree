@@ -13,19 +13,16 @@ Gem のアンインストールを行うためのクラスです。
 == Public Instance Methods
 
 --- ask_if_ok(spec) -> bool
-#@todo
 
 アンインストール指定された Gem を削除すると依存関係を満たせなくなる場合に呼び出されます。
 
 @param spec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
 --- bin_dir -> String
-#@todo
 
 Gem でインストールされたコマンドのあるディレクトリを返します。
 
 --- dependencies_ok?(spec) -> bool
-#@todo
 
 アンインストール指定された Gem を削除しても依存関係を満たすことができるか
 どうかチェックします。
@@ -33,12 +30,10 @@ Gem でインストールされたコマンドのあるディレクトリを返します。
 @param spec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
 --- gem_home -> String
-#@todo
 
 Gem がインストールされているディレクトリを返します。
 
 --- path_ok?(spec) -> bool
-#@todo
 
 アンインストール指定されている Gem がインストールされているパスをチェックします。
 
@@ -46,7 +41,7 @@ Gem がインストールされているディレクトリを返します。
 
 
 --- remove(spec, list)
-#@todo
+#@# -> discard
 
 指定された Gem を削除します。
 
@@ -62,33 +57,32 @@ Gem がインストールされているディレクトリを返します。
                                   ディレクトリにそんないしない場合に発生します。
 
 --- remove_all(list)
-#@todo
+#@# -> discard
 
 list で与えられた Gem を全てアンインストールします。
 
 @param list アンインストールする Gem のリストを指定します。
 
 --- remove_executables(gemspec)
-#@todo
+#@# -> discard
 
 与えられた [[c:Gem::Specification]] に対応する実行ファイルを削除します。
 
 @param gemspec アンインストール指定されている Gem の [[c:Gem::Specification]] を指定します。
 
 --- spec -> Gem::Specification
-#@todo
 
 [[m:Gem::Uninstaller#uninstall_gem]] の実行中のみセットされます。
 
 --- uninstall
-#@todo
+#@# -> discard
 
 Gem をアンインストールします。
 
 スペックファイルやキャッシュも削除します。
 
 --- uninstall_gem(spec, specs)
-#@todo
+#@# -> discard
 
 与えられた spec に対応する Gem をアンインストールします。
 
