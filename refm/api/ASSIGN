@@ -126,11 +126,11 @@ dbm                             okkez           done
 debug                           snoozer05
 delegate                        snoozer05       done
 digest                          kouji
-digest/bubblebabble
-digest/md5
-digest/rmd160
-digest/sha1
-digest/sha2
+digest/bubblebabble             okkez
+digest/md5                      okkez
+digest/rmd160                   okkez
+digest/sha1                     okkez
+digest/sha2                     okkez
 dl                                                          
 dl/Symbol                       
 dl/import                       
