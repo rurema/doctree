@@ -13,19 +13,16 @@ Gem の必要条件を扱うクラスです。
 == Constants
 
 --- OPS -> Hash
-#@todo
 
 比較演算子と対応する処理を格納したハッシュです。
 
 --- OP_RE
-#@todo
 
 比較演算子のいずれかにマッチする正規表現です。
 
 == Singleton Methods
 
 --- create -> Gem::Requirement
-#@todo
 
 [[c:Gem::Requirement]] のインスタンスを作成するためのファクトリメソッドです。
 
@@ -37,7 +34,6 @@ Gem の必要条件を扱うクラスです。
 @see [[m:Gem::Requirement.new]], [[m:Gem::Requirement.default]]
 
 --- default -> Gem::Requirement
-#@todo
 
 ゼロ以上 ( '>= 0' ) を指定して作成された [[c:Gem::Requirement]] のインスタンスを返します。
 
@@ -52,31 +48,26 @@ Gem の必要条件を扱うクラスです。
 
 == Public Instance Methods
 
---- <=>(other) -> Integer
-#@todo
+#@#--- <=>(other) -> Integer
+#@# nodoc
 
---- as_list -> [String]
-#@todo
+#@#--- as_list -> [String]
+#@# nodoc
+#@#必要条件を文字列の配列で返します。
 
-必要条件を文字列の配列で返します。
+#@#--- marshal_dump -> Array
+#@# nodoc
+#@#必要条件のみを [[m:Marshal.#dump]] で使用するために返します。
 
---- marshal_dump -> Array
-#@todo
-
-必要条件のみを [[m:Marshal.#dump]] で使用するために返します。
-
---- marshal_load(array) -> Gem::Requirement
-#@todo
-
-必要条件をロードします。
+#@#--- marshal_load(array) -> Gem::Requirement
+#@# nodoc
+#@#必要条件をロードします。
 
 --- normalize -> nil
-#@todo
 
 self を正規化します。
 
 --- parse(obj) -> Array
-#@todo
 
 バージョンの必要上件をパースして比較演算子とバージョンを要素とする二要素の配列を返します。
 
@@ -86,15 +77,15 @@ self を正規化します。
 
 @raise ArgumentError obj に不正なオブジェクトを指定すると発生します。
 
---- requirements -> Array
-#@todo
-自身に含まれる必要条件の配列を返します。
-
-配列に含まれる各要素は、比較演算子と [[c:Gem::Version]] のインスタンスを要素とする二要素の配列です。
+#@#--- requirements -> Array
+#@# nodoc
+#@#自身に含まれる必要条件の配列を返します。
+#@#
+#@#配列に含まれる各要素は、比較演算子と [[c:Gem::Version]] のインスタンスを要素とする二要素の配列です。
 
 
 --- satisfied_by?(version) -> bool
-#@todo
+
 引数 version が自身に含まれる全ての必要条件を満たす場合に真を返します。
 そうでなければ偽を返します。
 
@@ -103,7 +94,7 @@ self を正規化します。
 @see [[m:Gem::Requirement#satisfy?]]
 
 --- satisfy?(op, version, required_version) -> bool
-#@todo
+
 version op required_version を満たす場合に真を返します。
 そうでなければ偽を返します。
 
@@ -115,7 +106,7 @@ version op required_version を満たす場合に真を返します。
 
 @see [[m:Gem::Requirement#satisfied_by?]]
 
---- to_s
-#@todo
+#@#--- to_s -> String
+#@# nodoc
 
 

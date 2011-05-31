@@ -10,14 +10,12 @@ include Gem::UserInteraction
 == Singleton Methods
 
 --- fetcher -> Gem::RemoteFetcher
-#@todo
 
 このクラスの唯一のインスタンスを返します。
 
 == Instance Methods
 
 --- download(spec, source_uri, install_dir = Gem.dir) -> String
-#@todo
 
 source_uri から取得した Gem パッケージをキャッシュディレクトリに配置します。
 
@@ -35,7 +33,6 @@ source_uri から取得した Gem パッケージをキャッシュディレクトリに配置します。
 @raise Gem::RemoteFetcher::FetchError 
 
 --- fetch_path(uri, mtime = nil, head = false) -> String | Hash
-#@todo
 
 与えられた URI からダウンロードしたデータを文字列として返します。
 
@@ -48,28 +45,28 @@ source_uri から取得した Gem パッケージをキャッシュディレクトリに配置します。
 @param head 真を指定するとヘッダ情報のみ取得します。
 
 --- fetch_size(uri) -> Integer
-#@todo
 
 与えられた URI からダウンロードするデータのサイズを返します。
 
 @param uri データ取得先の URI を指定します。
 
 --- escape(str) -> String
-#@todo
 
 URI 文字列をエンコードした文字列を返します。
+
+@param str 文字列を指定します。
 
 @see [[m:URI.#escape]]
 
 --- unescape(str) -> String
-#@todo
 
 URI 文字列をデコードした文字列を返します。
+
+@param str 文字列を指定します。
 
 @see [[m:URI.#unescape]]
 
 --- get_proxy_from_env -> URI | nil
-#@todo
 
 環境変数にセットされている HTTP proxy の情報を取得して返します。
 
@@ -83,14 +80,12 @@ URI 文字列をデコードした文字列を返します。
  * HTTP_PROXY_PASS
 
 --- normalize_uri(uri) -> String
-#@todo
 
 URI のスキーム部分が欠けている場合に "http://" を補って返します。
 
 @param uri URI 文字列を指定します。
 
 --- connection_for(uri) -> Net::HTTP
-#@todo
 
 HTTP コネクションを生成して返します。
 
@@ -99,8 +94,7 @@ HTTP コネクションを生成して返します。
 
 @param uri 接続先の URI を指定します。
 
---- open_uri_or_path(uri, last_modified = nil, head = false, depth = 0)
-#@todo
+--- open_uri_or_path(uri, last_modified = nil, head = false, depth = 0) -> StringIO | File
 
 @param uri URI を指定します。
 
@@ -115,7 +109,6 @@ HTTP コネクションを生成して返します。
        また HTTP のレスポンスが想定外のものの場合にも発生します。
 
 --- request(uri, request_class, last_modified = nil) -> Net::HTTPResponse
-#@todo
 
 与えられた URI に対してリクエストを実行し、[[c:Net::HTTPResponse]] を返します。
 
@@ -128,7 +121,6 @@ HTTP コネクションを生成して返します。
 @see [[c:Net::HTTP]], [[c:Net::HTTP::Head]], [[c:Net::HTTP::Get]]
 
 --- reset(connection) -> Net::HTTP
-#@todo
 
 与えられたコネクションをリセットします。
 
@@ -136,7 +128,6 @@ HTTP コネクションを生成して返します。
 
 
 --- file_uri?(uri) -> bool
-#@todo
 
 "file://" で始まる文字列である場合は真を返します。そうでない場合は偽を返します。
 
@@ -169,6 +160,6 @@ HTTP コネクションを生成して返します。
 
 問題が発生した URI を返します。
 
---- to_s -> String
-
-例外の情報を文字列として返します。
+#@#--- to_s -> String
+#@# nodoc
+#@#例外の情報を文字列として返します。

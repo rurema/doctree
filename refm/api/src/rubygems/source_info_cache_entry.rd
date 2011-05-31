@@ -11,7 +11,6 @@ require rubygems/remote_fetcher
 == Public Instance Methods
 
 --- refresh(source_uri, all) -> Gem::SourceIndex
-#@todo
 
 ソースインデックスを更新します。
 
@@ -20,20 +19,18 @@ require rubygems/remote_fetcher
 @param all 全てのインデックスを更新するかどうかを指定します。
 
 --- size -> Fixnum
-#@todo
 
 ソースエントリのサイズです。
 
 ソースインデックスが変化したことを検出するために使用します。
 
 --- source_index -> Gem::SourceIndex
-#@todo
 
 このキャッシュエントリに対するソースインデックスです。
 
 == Singleton Methods
 
---- new(si, size)
+--- new(si, size) -> Gem::SourceInfoCacheEntry
 
 キャッシュのエントリを作成します。
 
