@@ -10,7 +10,7 @@ require rubygems
 == Public Instance Methods
 
 --- add_platform_option(task = command, *wrap)
-#@todo
+#@# -> discard
 
 option parser に対して --platform オプションを追加します。
 
@@ -19,7 +19,7 @@ option parser に対して --platform オプションを追加します。
 @param wrap [[m:Gem::Command#add_option]] に渡すその他のオプションを指定します。
 
 --- add_version_option(task = command, *wrap)
-#@todo
+#@# -> discard
 
 option parser に対して --version オプションを追加します。
 

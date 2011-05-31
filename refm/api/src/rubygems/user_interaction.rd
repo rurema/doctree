@@ -8,12 +8,10 @@
 == Singleton Methods
 
 --- ui -> Gem::ConsoleUI
-#@todo
 
 デフォルトの UI を返します。
 
 --- ui=(new_ui)
-#@todo
 
 デフォルトの UI を新しくセットします。
 
@@ -23,7 +21,7 @@
 @param new_ui 新しい UI を指定します。
 
 --- use_ui(new_ui){ ... }
-#@todo
+#@# -> discard
 
 与えられたブロックを評価している間だけ UI として new_ui を使用します。
 
@@ -32,14 +30,12 @@
 == Public Instance Methods
 
 --- ui -> Gem::ConsoleUI
-#@todo
 
 デフォルトの UI を返します。
 
 @see [[m:Gem::DefaultUserInteraction.#ui]]
 
 --- ui=(new_ui)
-#@todo
 
 デフォルトの UI を新しくセットします。
 
@@ -48,7 +44,7 @@
 @see [[m:Gem::DefaultUserInteraction.#ui=]]
 
 --- use_ui(new_ui){ ... }
-#@todo
+#@# -> discard
 
 与えられたブロックを評価している間だけ UI として new_ui を使用します。
 
@@ -68,35 +64,30 @@ include Gem::DefaultUserInteraction
 == Public Instance Methods
 
 --- alert(*args) -> ()
-#@todo
 
 INFO レベルのアラートを出力します。
 
 @param args 委譲先のメソッドに与える引数です。
 
 --- alert_error(*args) -> ()
-#@todo
 
 ERROR レベルのアラートを出力します。
 
 @param args 委譲先のメソッドに与える引数です。
 
 --- alert_warning(*args) -> ()
-#@todo
 
 WARNING レベルのアラートを出力します。
 
 @param args 委譲先のメソッドに与える引数です。
 
 --- ask(*args) -> String
-#@todo
 
 質問をして、ユーザの入力を待ち受けて回答を返します。
 
 @param args 委譲先のメソッドに与える引数です。
 
 --- ask_yes_no(*args) -> bool
-#@todo
 
 イエス、ノーで答える質問をします。
 
@@ -105,7 +96,6 @@ WARNING レベルのアラートを出力します。
 @return ユーザの回答がイエスの場合は真を、ノーの場合は偽を返します。
 
 --- choose_from_list(*args) -> Array
-#@todo
 
 リストから回答を選択する質問をします。
 
@@ -114,14 +104,12 @@ WARNING レベルのアラートを出力します。
 @return 選択肢の名称と選択肢のインデックスを要素とする配列を返します。
 
 --- say(*args) -> ()
-#@todo
 
 与えられた文字列を表示します。
 
 @param args 委譲先のメソッドに与える引数です。
 
 --- terminate_interaction(*args) -> ()
-#@todo
 
 アプリケーションを終了します。
 
@@ -146,7 +134,6 @@ WARNING レベルのアラートを出力します。
 == Public Instance Methods
 
 --- alert(statement, question  = nil) -> String | nil
-#@todo
 
 INFO レベルのアラートを表示します。
 
@@ -160,7 +147,7 @@ INFO レベルのアラートを表示します。
 @see [[m:Gem::StreamUI#ask]]
 
 --- alert_error(statement, question  = nil) -> String | nil
-#@todo
+
 ERROR レベルのアラートを表示します。
 
 @param statement 表示する文字列を指定します。
@@ -173,7 +160,7 @@ ERROR レベルのアラートを表示します。
 @see [[m:Gem::StreamUI#ask]]
 
 --- alert_warning(statement, question  = nil) -> String | nil
-#@todo
+
 WARNING レベルのアラートを表示します。
 
 @param statement 表示する文字列を指定します。
@@ -186,7 +173,6 @@ WARNING レベルのアラートを表示します。
 @see [[m:Gem::StreamUI#ask]]
 
 --- ask(question) -> String | nil
-#@todo
 
 質問をします。
 
@@ -196,7 +182,7 @@ WARNING レベルのアラートを表示します。
         そうでない場合は nil を返します。
 
 --- ask_yes_no(question) -> bool
-#@todo
+
 イエス、ノーで答える質問をします。
 
 @param question 質問を指定します。
@@ -204,7 +190,6 @@ WARNING レベルのアラートを表示します。
 @return ユーザの回答がイエスの場合は真を、ノーの場合は偽を返します。
 
 --- choose_from_list(question, list) -> Array
-#@todo
 
 リストから回答を選択する質問をします。
 
@@ -217,22 +202,18 @@ WARNING レベルのアラートを表示します。
 @return 選択肢の名称と選択肢のインデックスを要素とする配列を返します。
 
 --- errs -> IO
-#@todo
 
 この UI にセットされているエラー出力ストリームを返します。
 
 --- ins -> IO
-#@todo
 
 この UI にセットされている入力ストリームを返します。
 
 --- outs -> IO
-#@todo
 
 この UI にセットされてきる出力ストリームを返します。
 
 --- progress_reporter(*args) -> SilentProgressReporter | SimpleProgressReporter | VerboseProgressReporter
-#@todo
 
 処理の進捗を報告するためのオブジェクトを返します。
 
@@ -243,14 +224,12 @@ WARNING レベルのアラートを表示します。
 @see [[c:Gem::StreamUI::SilentProgressReporter]], [[c:Gem::StreamUI::SimpleProgressReporter]], [[c:Gem::StreamUI::VerboseProgressReporter]]
 
 --- say(statement = '') -> ()
-#@todo
 
 与えられた文字列を表示します。
 
 @param statement 表示する文字列を指定します。
 
 --- terminate_interaction(status = 0) -> ()
-#@todo
 
 アプリケーションを終了します。
 
@@ -279,16 +258,15 @@ WARNING レベルのアラートを表示します。
 == Public Instance Methods
 
 --- count -> nil
-#@todo
 
 何もしません。
 
 --- done -> nil
-#@todo
+
 何もしません。
 
 --- updated(message) -> nil
-#@todo
+
 何もしません。
 
 @param message 指定しても意味がありません。
@@ -314,17 +292,14 @@ WARNING レベルのアラートを表示します。
 == Public Instance Methods
 
 --- count -> Integer
-#@todo
 
 [[m:Gem::StreamUI::SimpleProgressReporter#updated]] が呼び出された回数を返します。
 
 --- done -> nil
-#@todo
 
 終了メッセージを表示します。
 
 --- updated(message) -> nil
-#@todo
 
 ドットを表示します。
 
@@ -351,17 +326,14 @@ WARNING レベルのアラートを表示します。
 == Public Instance Methods
 
 --- count -> Integer
-#@todo
 
 [[m:Gem::StreamUI::VerboseProgressReporter#updated]] が呼び出された回数を返します。
 
 --- done -> nil
-#@todo
 
 終了メッセージを表示します。
 
 --- updated(message) -> nil
-#@todo
 
 現在の [[m:Gem::StreamUI::VerboseProgressReporter#count]] と全体の数とメッセージを表示します。
 

@@ -6,14 +6,13 @@ include Comparable
 == Singleton Methods
 
 --- correct?(version) -> bool
-#@todo
 
 version が正しいバージョンであれば真を返します。そうでなければ偽を返します。
 
 @param version バージョンを文字列か数値で指定します。
 
 --- create(input) -> Gem::Version | nil
-#@todo
+
 [[c:Gem::Version]] のインスタンスを作成するためのファクトリメソッドです。
 
 例:
@@ -31,14 +30,13 @@ version が正しいバージョンであれば真を返します。そうでなければ偽を返します。
 == Public Instance Methods
 
 --- <=>(other) -> Integer | nil
-#@todo
+
 self と other を比較して、self が大きい時に 1 
 等しい時に 0、小さい時に -1 の整数を返します。
 
 @param other 比較対象の [[c:Gem::Version]] のインスタンスを指定します。
 
 --- bump -> Gem::Version
-#@todo
 
 最後の一桁を切り上げた新しい [[c:Gem::Version]] のインスタンスを返します。
 
@@ -48,7 +46,6 @@ self と other を比較して、self が大きい時に 1
   ver2 = ver1.bump                    # => #<Gem::Version "5.4">
 
 --- eql?(other) -> bool
-#@todo
 
 self と other の [[m:Gem::Version#version]] が等しいとき真を返します。
 そうでなければ偽を返します。
@@ -62,36 +59,31 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返します。
   ver1.eql?(ver3)                     # => false
 
 --- ints -> [Integer]
-#@todo
+
 バージョンを数値の配列で返します。
 
 @see [[m:Gem::Version#build_array_from_version_string]]
 
 
 --- marshal_dump -> Array
-#@todo
 
 完全なオブジェクトではなく、バージョン文字列のみダンプします。
 
 --- marshal_load(array) -> String
-#@todo
 
 ダンプされた情報をロードします。
 
 @param array バージョン情報を含む配列を指定します。
 
 --- normalize -> ()
-#@todo
 
 内部で保持しているバージョン情報から末尾のゼロを削除します。
 
 --- to_ints -> [Integer]
-#@todo
 
 バージョン情報を数値の配列にして返します。
 
 --- to_s -> String
-#@todo
 
 バージョン情報を文字列として返します。
 
@@ -99,12 +91,10 @@ self と other の [[m:Gem::Version#version]] が等しいとき真を返します。
 #@todo
 
 --- version -> String
-#@todo
 
 バージョン情報を文字列として返します。
 
 --- version=(version)
-#@todo
 
 self のバージョン情報を書き換えます。
 

@@ -11,7 +11,6 @@ require rubygems/installer
 == Public Instance Methods
 
 --- alien -> [Gem::Validator.ErrorData]
-#@todo
 
 Gem ディレクトリ内に存在するかもしれない以下のような問題を検証します。
 
@@ -24,20 +23,17 @@ Gem ディレクトリ内に存在するかもしれない以下のような問題を検証します。
 
 
 --- remove_leading_dot_dir(path) -> String
-#@todo
 #@# should be private ?
 
 与えられたパスの先頭のドットを取り除いた文字列を返します。
 
 --- unit_test(gem_spec)
-#@todo
 
 与えられた Gem スペックにしたがってユニットテストを実行します。
 
 @param gem_spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 --- verify_gem(gem_data) -> ()
-#@todo
 
 与えられた Gem ファイルの内容の MD5 チェックサムを検証します。
 
@@ -49,7 +45,6 @@ Gem ディレクトリ内に存在するかもしれない以下のような問題を検証します。
 
 
 --- verify_gem_file(gem_path) -> ()
-#@todo
 
 与えられた Gem ファイルのパスを使用して MD5 チェックサムを検証します。
 
