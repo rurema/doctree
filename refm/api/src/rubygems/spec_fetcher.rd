@@ -12,7 +12,6 @@ include Gem::UserInteraction
 == Singleton Methods
 
 --- fetcher -> Gem::SpecFetcher
-#@todo
 
 このクラスの唯一のインスタンスを返します。
 
@@ -24,19 +23,16 @@ include Gem::UserInteraction
 == Instance Methods
 
 --- cache_dir(uri) -> String
-#@todo
 
 uri の内容を書き込むローカルのディレクトリ名を返します。
 
 @param uri 
 
 --- dir -> String
-#@todo
 
 このクラスが使用するキャッシュ用ディレクトリの名前を返します。
 
 --- fetch(dependency, all = false, matching_platform = true) -> Array
-#@todo
 
 依存関係を満たす gemspec の配列を返します。
 
@@ -53,7 +49,6 @@ uri の内容を書き込むローカルのディレクトリ名を返します。
 @param source_uri
 
 --- find_matching(dependency, all = false, matching_platform = true) -> Array
-#@todo
 
 依存関係を満たす gemspec の名前の配列を返します。
 
@@ -64,24 +59,20 @@ uri の内容を書き込むローカルのディレクトリ名を返します。
 @see [[c:Gem::Dependency]]
 
 --- latest_specs -> Hash
-#@todo
 
 キャッシュされている最新の gemspec を返します。
 
 --- legacy_repos -> Array
-#@todo
 
 RubyGems 1.2 未満で作成されたリポジトリの配列を返します。
 
 --- list(all = false) -> Array
-#@todo
 
 [[m:Gem::sources]] に格納されている各ソースから利用可能な Gem のリストを取得して返します。
 
 @param list 真を指定すると全てのバージョンの情報を返します。
 
 --- load_specs(source_uri, file) -> object
-#@todo
 
 指定された source_uri, file から gemspec をロードします。
 
@@ -92,13 +83,11 @@ RubyGems 1.2 未満で作成されたリポジトリの配列を返します。
 @param file gemspec のファイル名を指定します。
 
 --- specs -> Hash
-#@todo
 
 キャッシュされている全ての gemspec を返します。
 
 
 --- warn_legacy(exception){ ... } -> bool
-#@todo
 
 [[m:Gem::SpecFetcher#fetch]] で例外が発生した場合に呼び出されます。
 

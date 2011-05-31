@@ -24,12 +24,10 @@ include Gem::UserInteraction
 == Public Instance Methods
 
 --- cache_data -> Hash
-#@todo
 
 最新のキャッシュデータを返します。
 
 --- cache_file -> String
-#@todo
 
 使用可能なキャッシュファイル名を返します。
 
@@ -37,17 +35,14 @@ include Gem::UserInteraction
 そうでない場合はユーザーキャッシュのファイル名を返します。
 
 --- flush -> false
-#@todo
 
 キャッシュをローカルファイルに書き込みます。
 
 --- latest_cache_data -> Hash
-#@todo
 
 最新のキャッシュデータを返します。
 
 --- latest_cache_file -> String
-#@todo
 
 使用可能な最新のキャッシュファイル名を返します。
 
@@ -57,22 +52,18 @@ include Gem::UserInteraction
 @see [[m:Gem::SourceInfoCache#cache_file]]
 
 --- latest_system_cache_file -> String
-#@todo
 
 最新のシステムキャッシュのファイル名を返します。
 
 --- latest_user_cache_file -> String
-#@todo
 
 最新のユーザーキャッシュのファイル名を返します。
 
 --- read_all_cache_data -> ()
-#@todo
 
 自身に完全なキャッシュファイルの内容をマージします。
 
 --- read_cache_data(file) -> Hash
-#@todo
 
 与えられたファイル名からデータを読み込んでキャッシュデータを返します。
 
@@ -81,7 +72,6 @@ include Gem::UserInteraction
 @return 内部で例外が発生した場合は、空のハッシュを返します。
 
 --- refresh(all) -> false
-#@todo
 
 取得元ごとにキャッシュデータを更新します。
 
@@ -89,19 +79,16 @@ include Gem::UserInteraction
            最新の Gem パッケージの情報のみ更新します。
 
 --- reset_cache_data -> true
-#@todo
 
 キャッシュデータをリセットします。
 
 --- reset_cache_file -> nil
-#@todo
 
 強制的にキャッシュファイル名をリセットします。
 
 RubyGems ライブラリの結合テストをするのに便利です。
 
 --- reset_cache_for(url, cache_data) -> Hash
-#@todo
 
 指定された URL に対応するキャッシュデータを更新します。
 
@@ -110,7 +97,6 @@ RubyGems ライブラリの結合テストをするのに便利です。
 @param cache_data キャッシュデータを指定します。　
 
 --- search(pattern, platform_only = false, all = false) -> [Gem::Specification]
-#@todo
 
 与えられた条件を満たす [[c:Gem::Specification]] のリストを返します。
 
@@ -123,7 +109,6 @@ RubyGems ライブラリの結合テストをするのに便利です。
 @see [[m:Gem::SourceIndex#search]]
 
 --- search_with_source(pattern, only_platform = false, all = false) -> Array
-#@todo
 
 与えられた条件を満たす [[c:Gem::Specification]] と URL のリストを返します。
 
@@ -137,7 +122,6 @@ RubyGems ライブラリの結合テストをするのに便利です。
 
 
 --- set_cache_data(hash) -> true
-#@todo
 
 直接キャッシュデータをセットします。
 
@@ -146,12 +130,10 @@ RubyGems ライブラリの結合テストをするのに便利です。
 @param hash キャッシュデータとして使用するハッシュを指定します。
 
 --- system_cache_file -> String
-#@todo
 
 システムキャッシュファイルの名前を返します。
 
 --- try_file(path) -> String | nil
-#@todo
 
 与えられたパスがキャッシュファイルとして利用可能な場合、そのパスを返します。
 そうでない場合は nil を返します。
@@ -159,51 +141,42 @@ RubyGems ライブラリの結合テストをするのに便利です。
 @param path キャッシュファイルの候補となるパスを指定します。
 
 --- update -> true
-#@todo
 
 キャッシュが更新されたことをマークします。更新自体は行いません。
 
 --- user_cache_file -> String
-#@todo
 
 ユーザーキャッシュのファイル名を返します。
 
 --- write_cache -> nil
-#@todo
 
 適切なキャッシュファイルにキャッシュデータを書き込みます。
 
 == Singleton Methods
 
 --- cache(all = false) -> Gem::SourceInfoCache
-#@todo
 
 自身のインスタンスを生成するためのメソッドです。
 
 @param all 真を指定すると、インスタンス生成時に全てのキャッシュを再作成します。
 
 --- cache_data -> Hash
-#@todo
 
 キャッシュしているデータを返します。
 
 --- latest_system_cache_file -> String
-#@todo
 
 最新のシステムキャッシュのファイル名を返します。
 
 --- latest_user_cache_file -> String
-#@todo
 
 最新のユーザーキャッシュのファイル名を返します。
 
 --- reset -> nil
-#@todo
 
 自身の内容をクリアします。
 
 --- search(*args) -> [Gem::Specification]
-#@todo
 
 与えられた条件を満たす [[c:Gem::Specification]] のリストを返します。
 
@@ -212,7 +185,6 @@ RubyGems ライブラリの結合テストをするのに便利です。
 @see [[m:Gem::SourceInfoCache#search]]
 
 --- search_with_source(*args) -> Array
-#@todo
 
 与えられた条件を満たす [[c:Gem::Specification]] と URL のリストを返します。
 
@@ -221,11 +193,9 @@ RubyGems ライブラリの結合テストをするのに便利です。
 @see [[m:Gem::SourceInfoCache#search_with_source]]
 
 --- system_cache_file -> String
-#@todo
 
 システムキャッシュのファイル名を返します。
 
 --- user_cache_file -> String
-#@todo
 
 ユーザーキャッシュのファイル名を返します。

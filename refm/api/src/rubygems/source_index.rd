@@ -21,21 +21,18 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 == Instance Methods
 
 --- add_spec(gem_spec) -> Gem::Specification
-#@todo
 
 ¼«¿È¤Ë°ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿ [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÄÉ²Ã¤·¤Þ¤¹¡£
 
 @param gem_spec [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- add_specs(*gem_specs) -> Hash
-#@todo
 
 ¼«¿È¤Ë°ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿ [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÁ´¤ÆÄÉ²Ã¤·¤Þ¤¹¡£
 
 @param gem_specs Ê£¿ô¤Î [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- dump -> ()
-#@todo
 
 ¼«¿È¤ò [[m:Marshal.#dump]] ¤·¤Þ¤¹¡£
 
@@ -47,13 +44,11 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 --- each -> Enumerable::Enumerator
 #@end
 #@end
-#@todo
 
 ¼«¿È¤ËÅÐÏ¿¤µ¤ì¤Æ¤¤¤ë¤½¤ì¤¾¤ì¤Î Gem ¤Ë¤Ä¤¤¤Æ¥Ö¥í¥Ã¥¯¤òÉ¾²Á¤·¤Þ¤¹¡£
 
 
 --- find_name(gem_name, version_requirement = Gem::Requirement.default) -> Gem::Specification
-#@todo
 
 Ã»¤¤Ì¾Á°¤ÇÀµ³Î¤Ë¥Þ¥Ã¥Á¤¹¤ë Gem ¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -64,54 +59,47 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 @see [[c:Gem::Requirement]]
 
 --- gem_signature(gem_full_name) -> String
-#@todo
 
 Í¿¤¨¤é¤ì¤¿Ì¾Á°¤ò»ý¤Ä Gem ¤Î SHA256 ¥À¥¤¥¸¥§¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
+@param gem_full_name Gem ¤ÎÌ¾Á°¤ò»ØÄê¤·¤Þ¤¹¡£
+
 --- index_signature -> String
-#@todo
 
 ¥½¡¼¥¹¥¤¥ó¥Ç¥Ã¥¯¥¹¤Î SHA256 ¥À¥¤¥¸¥§¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 ¤³¤ÎÃÍ¤Ï¥¤¥ó¥Ç¥Ã¥¯¥¹¤¬ÊÑ¹¹¤µ¤ì¤ë¤ÈÊÑ²½¤·¤Þ¤¹¡£
 
 --- latest_specs -> Array
-#@todo
 
 ¼«¿È¤Ë´Þ¤Þ¤ì¤ëºÇ¿·¤Î [[c:Gem::Specification]] ¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 --- size   -> Integer
 --- length -> Integer
-#@todo
 
 ¼«¿È¤Ë´Þ¤Þ¤ì¤ë Gem ¤Î¸Ä¿ô¤òÊÖ¤·¤Þ¤¹¡£
 
 --- load_gems_in(*spec_dirs) -> self
-#@todo
 
 °ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿¥Ç¥£¥ì¥¯¥È¥ê¤Ë´Þ¤Þ¤ì¤ë gemspec ¤«¤é¼«¿È¤òºÆ¹½ÃÛ¤·¤ÆÊÖ¤·¤Þ¤¹¡£
 
 @param spec_dirs gemspec ¤Î´Þ¤Þ¤ì¤Æ¤¤¤ë¥Ç¥£¥ì¥¯¥È¥ê¤òÊ£¿ô»ØÄê¤·¤Þ¤¹¡£
 
 --- outdated -> Array
-#@todo
 
 ¹¹¿·¤µ¤ì¤Æ¤¤¤Ê¤¤ [[c:Gem::Specification]] ¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 --- refresh! -> self
-#@todo
 
 ¼«¿È¤òºÆºîÀ®¤·¤Þ¤¹¡£
 
 @raise StandardError ¼«¿È¤¬¥Ç¥£¥¹¥¯¤«¤éÆÉ¤ß¹þ¤ó¤ÇºîÀ®¤µ¤ì¤Æ¤¤¤Ê¤¤¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
 
 --- remove_spec(full_name) -> Gem::Specification
-#@todo
 
 °ú¿ô¤Ç»ØÄê¤µ¤ì¤¿Ì¾Á°¤ò»ý¤Ä Gem ¤ò¥¤¥ó¥Ç¥Ã¥¯¥¹¤«¤éºï½ü¤·¤Þ¤¹¡£
 
 --- search(gem_pattern, platform_only = false) -> [Gem::Specification]
-#@todo
 
 °ú¿ô¤Ç»ØÄê¤µ¤ì¤¿¾ò·ï¤òËþ¤¿¤¹ Gem ¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -120,29 +108,24 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 @param platform_only ¿¿¤ò»ØÄê¤¹¤ë¤È¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤¬°ìÃ×¤¹¤ë¤â¤Î¤Î¤ß¤òÊÖ¤·¤Þ¤¹¡£¥Ç¥Õ¥©¥ë¥È¤Ïµ¶¤Ç¤¹¡£
 
 --- size -> Integer
-#@todo
 
 ¼«¿È¤Î¥µ¥¤¥º¤òÊÖ¤·¤Þ¤¹¡£
 
 --- spec_dirs -> [String]
-#@todo
 
 [[m:Gem::SourceIndex#refresh!]] ¤Ç¼«¿È¤ò¹¹¿·¤¹¤ë»þ¤Ë»ÈÍÑ¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤ò¼èÆÀ¤·¤Þ¤¹¡£
 
 --- spec_dirs=(dirs)
-#@todo
 
 [[m:Gem::SourceIndex#refresh!]] ¤Ç¼«¿È¤ò¹¹¿·¤¹¤ë»þ¤Ë»ÈÍÑ¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤òÀßÄê¤·¤Þ¤¹¡£
 
 --- specification(full_name) -> Gem::Specification | nil
-#@todo
 
 »ØÄê¤µ¤ì¤¿Ì¾Á°¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 @param full_name Gem ¤Î¥Õ¥ë¥Í¡¼¥à¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- update(source_uri, all) -> bool
-#@todo
 
 Âè°ì°ú¿ô¤Ç»ØÄê¤µ¤ì¤¿ URI ¤ò»ÈÍÑ¤·¤Æ¼«¿È¤ò¹¹¿·¤·¤Þ¤¹¡£
 
@@ -153,14 +136,12 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 == Singleton Methods
 
 --- new(specifications = {}) -> Gem::SourceIndex
-#@todo
 
 Í¿¤¨¤é¤ì¤¿¥Ï¥Ã¥·¥å¤ò¸µ¤Ë¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
 
 @param specifications ¥­¡¼¤ò Gem ¤ÎÌ¾Á°¡¢ÃÍ¤ò [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤È¤¹¤ë¥Ï¥Ã¥·¥å¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- from_gems_in(*spec_dirs) -> Gem::SourceIndex
-#@todo
 
 °ú¿ô¤ÇÍ¿¤¨¤é¤ì¤¿¥Ç¥£¥ì¥¯¥È¥ê¤ËÃÖ¤«¤ì¤Æ¤¤¤ë Ruby ¥¹¥¯¥ê¥×¥È·Á¼°¤Î gemspec ¥Õ¥¡¥¤¥ë¤ò»ÈÍÑ¤·¤Æ
 ¿·¤·¤¤¥¤¥ó¥¹¥¿¥ó¥¹¤òºîÀ®¤·¤Þ¤¹¡£
@@ -168,7 +149,6 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 @param spec_dirs gemspec ¥Õ¥¡¥¤¥ë¤¬ÃÖ¤«¤ì¤Æ¤¤¤ë¥Ç¥£¥ì¥¯¥È¥ê¤ò°ì¤Ä°Ê¾å»ØÄê¤·¤Þ¤¹¡£
 
 --- from_installed_gems(*deprecated) -> Gem::SourceIndex
-#@todo
 
 Í¿¤¨¤é¤ì¤¿¥Ñ¥¹¤ò¤â¤È¤Ë¡¢¥¤¥ó¥¹¥¿¥ó¥¹¤òºîÀ®¤¹¤ë¥Õ¥¡¥¯¥È¥ê¥á¥½¥Ã¥É¤Ç¤¹¡£
 
@@ -177,14 +157,12 @@ Gem ¥Ñ¥Ã¥±¡¼¥¸¤Î¥Õ¥ë¥Í¡¼¥à¤È ¤½¤ì¤¾¤ì¤Î [[c:Gem::Specification]] ¥ª¥Ö¥¸¥§¥¯¥È¤òÂ
 @see [[m:Gem::SourceIndex.from_gems_in]]
 
 --- installed_spec_directories -> [String]
-#@todo
 
 gemspec ¥Õ¥¡¥¤¥ë¤¬¥¤¥ó¥¹¥È¡¼¥ë¤µ¤ì¤Æ¤¤¤ë¥Ç¥£¥ì¥¯¥È¥ê¤Î¥ê¥¹¥È¤òÊÖ¤·¤Þ¤¹¡£
 
 @see [[m:Gem.#path]]
 
 --- load_specification(file_name) -> Gem::Specification | nil
-#@todo
 
 Í¿¤¨¤é¤ì¤¿¥Õ¥¡¥¤¥ëÌ¾¤«¤é Ruby ¥¹¥¯¥ê¥×¥È·Á¼°¤Î gemspec ¤ò¥í¡¼¥É¤·¤Æ
 [[c:Gem::Specification]] ¤Î¥¤¥ó¥¹¥¿¥ó¥¹¤òÊÖ¤·¤Þ¤¹¡£
