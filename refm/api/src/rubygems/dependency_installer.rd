@@ -13,8 +13,7 @@ include Gem::UserInteraction
 
 == Public Instance Methods
 
---- find_gems_with_sources(dep)
-#@todo
+--- find_gems_with_sources(dep) -> Array
 
 与えられた条件にマッチする [[c:Gem::Specification]] のインスタンスと URI のペアのリストを
 返します。
@@ -25,7 +24,6 @@ Gem はローカル (Dir.pwd) とリモート (Gem.sources) の両方から検索します。
 @param dep [[c:Gem::Dependency]] のインスタンスを指定します。
 
 --- find_spec_by_name_and_version(gem_name, version = Gem::Requirement.default) -> Array
-#@todo
 
 与えられた Gem の名前とバージョンに関する条件にマッチする [[c:Gem::Specification]] と
 それの存在する URI を含む配列を返します。
@@ -35,18 +33,15 @@ Gem はローカル (Dir.pwd) とリモート (Gem.sources) の両方から検索します。
 @param version Gem が満たすバージョンに関する条件を指定します。
 
 --- gather_dependencies -> Array
-#@todo
 
 依存関係を無視するように指定されていない限り、インストールするように指定された
 Gem が依存している Gem の情報を集めて返します。
 
 --- gems_to_install -> Array
-#@todo
 
 依存関係によりインストールされる予定の Gem のリストを返します。
 
 --- install(dep_or_name, version = Gem::Requirement.default) -> Array
-#@todo
 
 指定された Gem とその依存する Gem を全てインストールします。
 
@@ -57,14 +52,12 @@ Gem が依存している Gem の情報を集めて返します。
 @return このメソッドでインストールした Gem のリストを返します。
 
 --- installed_gems -> Array
-#@todo
 
 [[m:Gem::DependencyInstaller#install]] でインストールされた Gem のリストを返します。
 
-
 == Singleton Methods
 
---- new(options = {})
+--- new(options = {}) -> Gem::DependencyInstaller
 
 自身を初期化します。
 
@@ -102,11 +95,8 @@ Gem が依存している Gem の情報を集めて返します。
 == Constants
 
 --- DEFAULT_OPTIONS -> Hash
-#@todo
 
 自身を初期化する際に使用するデフォルトのオプションです。
-
-以下の内容です。
 
     :env_shebang         => false,
     :domain              => :both, # HACK dup
