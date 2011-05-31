@@ -1,7 +1,7 @@
 = module OpenSSL::Random
 OpenSSL が利用する疑似乱数生成器関連のモジュールです。
 
-* [[RFC:4086]]
+  * [[RFC:4086]]
 
 === 暗号と乱数
 OpenSSL では、鍵を生成するためなどに乱数を用いています。例えば RSA では
@@ -28,9 +28,9 @@ OpenSSL にはそのような疑似乱数生成器が実装されています。
 
 疑似乱数生成器は適切なシードを与えられなければ正しく動作しません。
 OpenSSL にはそのための API 
-  * [[m:OpenSSL::Random.random_add]]
-  * [[m:OpenSSL::Random.seed]]
-  * [[m:OpenSSL::Random.load_random_file]]
+  * [[m:OpenSSL::Random.#random_add]]
+  * [[m:OpenSSL::Random.#seed]]
+  * [[m:OpenSSL::Random.#load_random_file]]
 が存在します。これらの API を模式的に説明すると、以下のようになります。
   * シードの各ビットは統計的な乱雑さ、予測不可能性を持ち、ビット列の
     乱雑さはエントロピーという量(単位は bit, 8bit = 1byte)
@@ -41,7 +41,7 @@ OpenSSL にはそのための API
     エントロピーは 0 である。
   * 疑似乱数生成器にエントロピーを追加することによって
     乱数生成器から得られる乱数がより予測不可能になる。
-  * 
+
 エントロピー源には良いものと悪いものがあります。例えば現在時刻(Unix time)は
 エントロピー源としては悪いです。なぜなら予測不可能なのは
 せいぜい秒の部分のみであり、上位のビットは予測可能だからです。
@@ -132,7 +132,7 @@ entropy には str が持っているエントロピーの予測値(の下限)を
 OpenSSL::Random.random_add(str, str.size) と同じです。
 
 @param str 予測不可能な内容の文字列
-@see [[m:OpenSSL::Random#random_add]]
+@see [[m:OpenSSL::Random.#random_add]]
 
 --- write_random_file(filename) -> true
 乱数生成器で生成された 1024 バイトのランダムなバイト列を

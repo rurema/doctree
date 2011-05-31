@@ -38,7 +38,7 @@ mac_iter がデフォルトで1なのは古いソフトウェアとの互換性のためです。
 @param pkey 秘密鍵([[c:OpenSSL::PKey::PKey]] のサブクラスのオブジェクト)
 @param cert 証明書([[c:OpenSSL::X509::Certificate]] のオブジェクト)
 @param ca CA証明書群([[c:OpenSSL::X509::Certificate]] の配列)
-@param nid_key 秘密鍵の暗号化方式を表す文字列
+@param key_nid 秘密鍵の暗号化方式を表す文字列
 @param cert_nid 証明書の暗号化方式を表す文字列
 @param key_iter 暗号化アルゴリズムにイテレーション回数
 @param mac_iter MAC のイテレーション回数

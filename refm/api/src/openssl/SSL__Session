@@ -42,7 +42,7 @@ SSL/TLS セッションを表すクラスです。
 
 [[m:OpenSSL::SSL::SSLContext#session_cache_mode=]] で
 キャッシュの挙動を設定します。
-デフォルトで [[m:OpenSSL::SSL::SSLContext#SESSION_CACHE_SERVER]]
+デフォルトで [[m:OpenSSL::SSL::SSLContext::SESSION_CACHE_SERVER]]
 フラグが立っているため、サーバ側のセッションキャッシュ機構は
 デフォルトで有効になっています。
 

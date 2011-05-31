@@ -17,8 +17,8 @@ X.509 v3 証明書の拡張領域のためのクラスです。
 
 == Class Methods
 
---- new(der) -> [[c:OpenSSL::X509::Extension]]
---- new(oid, value, critical=false) -> [[c:OpenSSL::X509::Extension]]
+--- new(der) -> OpenSSL::X509::Extension
+--- new(oid, value, critical=false) -> OpenSSL::X509::Extension
 [[c:OpenSSL::X509::Extension]] オブジェクトを生成します。
 
 引数が1つの場合は DER 形式の文字列を渡します。

@@ -19,7 +19,7 @@ eql? と hash が定義されているため、[[c:Hash]] のキーとして
   OpenSSL::X509::Name.parse('/C=JP/ST=Kanagawa/L=Yokohama/O=Example Company/OU=Lab3/CN=foobar/emailAddress=foobar@lab3.example.co.jp')
 
 @param str パースする文字列
-@param tempalte 属性型に対応するデータ型を表わすハッシュ
+@param template 属性型に対応するデータ型を表わすハッシュ
 
 #@since 1.8.2
 --- parse_rfc2253(str, template=OBJECT_TYPE_TEMPLATE) -> OpenSSL::X509::Name
@@ -27,7 +27,7 @@ RFC2253形式の文字列を
 パースして [[c:OpenSSL::X509::Name]] オブジェクトを返します。
 
 @param str パースする文字列
-@param tempalte 属性型に対応するデータ型を表わすハッシュ
+@param template 属性型に対応するデータ型を表わすハッシュ
 
 #@end
 
@@ -54,7 +54,7 @@ obj が [[c:OpenSSL::X509::Name]] である場合には内容を複製した
 
 @param ary 属性型と属性値のペアの配列
 @param obj 識別子オブジェクトを生成するための情報
-@param tempalte objに配列を与えた場合には属性型に対応するデータ型を表わすハッシュ
+@param template objに配列を与えた場合には属性型に対応するデータ型を表わすハッシュ
 @raise OpenSSL::X509::NameError 与えたデータが不正である場合など、オブジェクトが生成できなかった場合に発生します
 == Instance Methods
 

@@ -156,5 +156,5 @@ anonymous cipher が有効であるかどうかは
 [[m:OpenSSL::SSLContext#cipher=]] で設定できます。
 
 = class OpenSSL::SSL::SSLError < OpenSSL::OpenSSLError
-[[m:OpenSSL::SSL]] 関連のエラーが生じたときに発生する例外です。
+[[c:OpenSSL::SSL]] 関連のエラーが生じたときに発生する例外です。
 

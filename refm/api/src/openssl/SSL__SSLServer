@@ -43,8 +43,8 @@ ctx には SSL サーバが用いる  [[c:OpenSSL::SSL::SSLContext]]
 は内部で svr で渡されたオブジェクトの
 [[m:TCPServer#listen]] や [[m:TCPServer#accept]] を呼び出します。
 
-@param 利用する [[c:TCPServer]] オブジェクト
-@param SSL サーバとして用いる [[c:OpenSSL::SSL::SSLContext]] オブジェクト
+@param svr 利用する [[c:TCPServer]] オブジェクト
+@param ctx SSL サーバとして用いる [[c:OpenSSL::SSL::SSLContext]] オブジェクト
 
 #@# ctx に session_id_context が設定されていない場合は $0 から
 #@# 設定する
@@ -91,7 +91,7 @@ accept したらすぐに TLS/SSL ハンドシェイクを実行するかどうかを設定します。
 
 デフォルトでは true です。
 
-@param 設定する真偽値。
+@param bool 設定する真偽値。
 @see [[m:OpenSSL::SSL::SSLServer#start_immediately]]
 
 --- shutdown(how=Socket::SHUT_RDWR) -> 0

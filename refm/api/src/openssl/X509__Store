@@ -160,7 +160,7 @@ path が指し示すディレクトリに含まれる証明書ファイルを
 信頼する証明書として加えます。
 
 @param path 証明書が含まれるディレクトリのパス
-@param OpenSSL::X509::StoreError 追加に失敗した場合に発生します
+@raise OpenSSL::X509::StoreError 追加に失敗した場合に発生します
 
 --- add_file(file) -> self
 ファイルに含まれる CA 証明書を信頼する証明書として証明書ストアに加えます。

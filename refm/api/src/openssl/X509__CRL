@@ -10,7 +10,7 @@ CRL とは、危殆化した等なんらかの理由で失効した証明書のリストです。
 通常 CRL の信頼性を確認するためには CRL になされた
 署名を検証する必要があります。
 
-* [[RFC:5280]]
+  * [[RFC:5280]]
 
 == Class Methods
 
@@ -118,7 +118,7 @@ CRL に秘密鍵で署名します。
 
 @param pkey 秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
 @param digest ハッシュアルゴリズム
-@param raise OpenSSL::X509::CRLError 署名に失敗した場合に発生します
+@raise OpenSSL::X509::CRLError 署名に失敗した場合に発生します
 
 --- verify(key) -> bool
 発行者の公開鍵で CRL に記載されている署名を検証します。
@@ -126,7 +126,7 @@ CRL に秘密鍵で署名します。
 検証に成功した場合は true を返します。
 
 @param key 公開鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
-@param raise OpenSSL::X509::CRLError 検証時にエラーが生じた場合に発生します
+@raise OpenSSL::X509::CRLError 検証時にエラーが生じた場合に発生します
 
 --- to_der -> String
 DER 形式に変換します。

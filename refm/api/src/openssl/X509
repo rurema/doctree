@@ -273,7 +273,7 @@ CRL になされた署名の検証に失敗したことを意味します。
 @see [[m:OpenSSL::X509::Store#add_file]],
      [[m:OpenSSL::X509::Store#add_path]],
      [[m:OpenSSL::X509::Store#add_cert]],
-     [[[m:OpenSSL::X509::Store#set_default_paths]]
+     [[m:OpenSSL::X509::Store#set_default_paths]]
 
 
 
@@ -429,7 +429,7 @@ issuer(発行者)の証明書が
 @see [[m:OpenSSL::X509::Store#add_file]],
      [[m:OpenSSL::X509::Store#add_path]],
      [[m:OpenSSL::X509::Store#add_cert]],
-     [[[m:OpenSSL::X509::Store#set_default_paths]]
+     [[m:OpenSSL::X509::Store#set_default_paths]]
 
 --- V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY -> Integer
 証明書チェイン末尾の証明書の issuer(発行者)の証明書が
@@ -442,7 +442,7 @@ issuer(発行者)の証明書が
 @see [[m:OpenSSL::X509::Store#add_file]],
      [[m:OpenSSL::X509::Store#add_path]],
      [[m:OpenSSL::X509::Store#add_cert]],
-     [[[m:OpenSSL::X509::Store#set_default_paths]]
+     [[m:OpenSSL::X509::Store#set_default_paths]]
 
 --- V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE -> Integer
 証明書チェインにある証明書がただ一つでその証明書が

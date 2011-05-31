@@ -205,7 +205,7 @@ pass と iv が渡された場合、これらを用いて鍵を生成し、暗号オブジェクトに
 暗号鍵の長さを変更します。
 
 @param length 新しく設定する長さ(バイト数)
-@rase OpenSSL::Cipher::CipherError 指定した長さが不適切である(暗号方式の規格上許されていない値である)場合に発生します
+@raise OpenSSL::Cipher::CipherError 指定した長さが不適切である(暗号方式の規格上許されていない値である)場合に発生します
 
 --- iv=(iv) 
 IV(Initialization Vector) を設定します。

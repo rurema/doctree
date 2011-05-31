@@ -71,7 +71,7 @@ ExtensionFactory オブジェクトを生成します。
 
 @param oid 拡張領域の識別子を表す文字列
 @param value 拡張領域の値を表す文字列
-@param critlcal 重要度(真偽値)
+@param critical 重要度(真偽値)
 
 --- create_extension(obj)  -> OpenSSL::X509::Extension
 --- create_extension(oid, value, critical=false)  -> OpenSSL::X509::Extension
@@ -91,7 +91,7 @@ ExtensionFactory オブジェクトを生成します。
 @param obj 拡張領域のデータ。配列、ハッシュ、文字列のいずれか
 @param oid 拡張領域の識別子を表す文字列
 @param value 拡張領域の値を表す文字列
-@param critlcal 重要度(真偽値)
+@param critical 重要度(真偽値)
 
 #@since 1.8.1
 --- issuer_certificate -> OpenSSL::X509::Certificate | nil
@@ -141,7 +141,7 @@ ExtensionFactory オブジェクトを生成します。
 --- crl=(crl)
 自身に証明書失効リストオブジェクトを設定します。
 
-@param  req 設定する証明書失効リスト([[c:OpenSSL::X509::CRL]])オブジェクト
+@param crl 設定する証明書失効リスト([[c:OpenSSL::X509::CRL]])オブジェクト
 @see [[m:OpenSSL::X509::ExtensionFactory.new]]
 
 #@since 1.8.1

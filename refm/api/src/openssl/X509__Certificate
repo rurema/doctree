@@ -2,7 +2,7 @@
 
 X509 証明書クラス
 
-* [[RFC:5280]]
+  * [[RFC:5280]]
 
 == Class Methods
 
@@ -26,7 +26,7 @@ obj が to_der メソッドを持つ場合には、そのメソッドによって
 DER 形式のバイト列に変換し、証明書オブジェクトを生成します。
 
 @param obj 証明書のデータ
-@raise [[c:OpenSSL::X509::CertificateError]] 証明書のフォーマットが不正であるなど、読み込みに失敗した場合に発生します
+@raise OpenSSL::X509::CertificateError 証明書のフォーマットが不正であるなど、読み込みに失敗した場合に発生します
 
 == Instance Methods
 
@@ -127,14 +127,14 @@ X509 証明書の version です。 v1の場合は 0 、v3 の場合は 2 となります。
   * [[c:OpenSSL::PKey::DH]]
   * [[c:OpenSSL::PKey::EC]]
 
-@raise [[c:OpenSSL::X509::CertificateError]] 鍵の取得に失敗した場合に発生します
-@raise [[c:OpenSSL::PKey::PKeyError]] サポートしていない種類の鍵である場合に発生します
+@raise OpenSSL::X509::CertificateError 鍵の取得に失敗した場合に発生します
+@raise OpenSSL::PKey::PKeyError サポートしていない種類の鍵である場合に発生します
 
 --- public_key=(pkey)
 証明書に公開鍵を設定します。
 
 @param pkey 公開鍵([[c:OpenSSL::PKey::PKey]]のサブクラスのインスタンス)
-@raise [[c:OpenSSL::X509::CertificateError]] 鍵の設定に失敗した場合に発生します
+@raise OpenSSL::X509::CertificateError 鍵の設定に失敗した場合に発生します
 
 --- sign(pkey, digest) -> self
 証明書に署名します。

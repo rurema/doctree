@@ -641,7 +641,7 @@ time に [[c:Time]] オブジェクトを渡すと、その
 (ca_file, ca_path, cert_store) を一切指定しなかった場合に
 デフォルトで使われる証明書ストアです。
 
-[[m:OpenSSL::X509::Store.set_default_paths]] でシステムが提供する
+[[m:OpenSSL::X509::Store#set_default_paths]] でシステムが提供する
 証明書を利用するように設定されています。
 
 --- DEFAULT_PARAMS -> { Symbol -> object }
