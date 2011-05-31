@@ -306,11 +306,13 @@ rubygems/gem_openssl
 rubygems/gem_path_searcher
 rubygems/gem_runner
 rubygems/indexer
+#@until 1.9.2
 rubygems/indexer/abstract_index_builder
 rubygems/indexer/latest_index_builder
 rubygems/indexer/marshal_index_builder
 rubygems/indexer/master_index_builder
 rubygems/indexer/quick_index_builder
+#@end
 rubygems/install_update_options
 rubygems/installer
 rubygems/local_remote_options
