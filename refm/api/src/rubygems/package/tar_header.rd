@@ -1,101 +1,117 @@
+tar ファイルのヘッダを表すクラスを提供するライブラリです。
 
 = class Gem::Package::TarHeader
 
-  struct tarfile_entry_posix {
-    char name[100];     # ASCII + (Z unless filled)
-    char mode[8];       # 0 padded, octal, null
-    char uid[8];        # ditto
-    char gid[8];        # ditto
-    char size[12];      # 0 padded, octal, null
-    char mtime[12];     # 0 padded, octal, null
-    char checksum[8];   # 0 padded, octal, null, space
-    char typeflag[1];   # file: "0"  dir: "5"
-    char linkname[100]; # ASCII + (Z unless filled)
-    char magic[6];      # "ustar\0"
-    char version[2];    # "00"
-    char uname[32];     # ASCIIZ
-    char gname[32];     # ASCIIZ
-    char devmajor[8];   # 0 padded, octal, null
-    char devminor[8];   # o padded, octal, null
-    char prefix[155];   # ASCII + (Z unless filled)
-  };
+tar ファイルのヘッダを表すクラスです。
 
+  * [[man:tar(5)]]
 
 == Public Instance Methods
 
---- ==
-#@todo
+--- ==(other) -> bool
 
---- checksum
-#@todo
+自身と other が等しければ真を返します。
+そうでない場合は偽を返します。
 
---- devmajor
-#@todo
+@param other 比較対象のオブジェクトを指定します。
 
---- devminor
-#@todo
+--- checksum -> Integer
 
---- empty?
-#@todo
+tar のヘッダに含まれるチェックサムを返します。
 
---- gid
-#@todo
+--- devmajor -> Integer
 
---- gname
-#@todo
+tar のヘッダに含まれる devmajor を返します。
 
---- linkname
-#@todo
+--- devminor -> Integer
 
---- magic
-#@todo
+tar のヘッダに含まれる devminor を返します。
 
---- mode
-#@todo
+--- empty? -> bool
 
---- mtime
-#@todo
+ヘッダが "\0" で埋められている場合、真を返します。
+そうでない場合は、偽を返します。
 
---- name
-#@todo
+--- gid -> Integer
 
---- prefix
-#@todo
+tar のヘッダに含まれる gid を返します。
 
---- size
-#@todo
+--- gname -> String
 
---- to_s
-#@todo
+tar のヘッダに含まれるグループ名を返します。
 
---- typeflag
-#@todo
+--- linkname -> String
 
---- uid
-#@todo
+tar のヘッダに含まれる linkname を返します。
 
---- uname
-#@todo
+--- magic -> String
+
+tar のヘッダに含まれる magic を返します。
+
+--- mode -> Integer
+
+tar のヘッダに含まれる mode を返します。
+
+--- mtime -> Integer
+
+tar のヘッダに含まれる mtime を返します。
+
+--- name -> String
+
+tar のヘッダに含まれる name を返します。
+
+--- prefix -> String
+
+tar のヘッダに含まれる prefix を返します。
+
+--- size -> Integer
+
+tar のヘッダに含まれる size を返します。
+
+--- to_s -> String
+
+ヘッダの情報を文字列として返します。
+
+--- typeflag -> String
+
+tar のヘッダに含まれる typeflag を返します。
+
+--- uid -> Integer
+
+tar のヘッダに含まれる uid を返します。
+
+--- uname -> String
+
+tar のヘッダに含まれるユーザ名を返します。
 
 --- update_checksum
-#@todo
+#@# -> discard
+チェックサムを更新します。
 
---- version
-#@todo
+--- version -> Integer
+
+tar のヘッダに含まれる version を返します。
 
 == Singleton Methods
 
---- from
-#@todo
+--- from(stream) -> Gem::Package::TarHeader
+
+stream から先頭 512 バイトを読み込んで [[c:Gem::Package::TarHeader]] の
+インスタンスを作成して返します。
+
+@param stream IO のように read メソッドを持つオブジェクトを指定します。
 
 == Constants
 
 --- FIELDS -> Array
-#@todo
+
+内部で使用します。
 
 --- PACK_FORMAT -> String
-#@todo
+
+内部で使用します。
 
 --- UNPACK_FORMAT -> String
-#@todo
+
+内部で使用します。
 
