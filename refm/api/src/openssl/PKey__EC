@@ -1,93 +1,270 @@
-= class OpenSSL::PKey::EC
+= class OpenSSL::PKey::EC < OpenSSL::PKey::PKey
 
 EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 
+現在、楕円曲線暗号は SSL/TLS ではあまり一般的には用いられていません。
+
 == Class methods
---- builtin_curves
-#@todo
---- new
-#@todo
+--- builtin_curves -> [[String, String]]
+
+組み込みの曲線の名前と、それに対する説明を文字列の配列ペアの配列で返します。
+
+例:
+  OpenSSL::PKey::EC.builtin_curves
+  # => [["secp112r1", "SECG/WTLS curve over a 112 bit prime field"],
+  #     ["secp112r2", "SECG curve over a 112 bit prime field"], 
+  #     ["secp128r1", "SECG curve over a 128 bit prime field"], 
+  #     ["secp128r2", "SECG curve over a 128 bit prime field"],
+  #     ... ]
+
+--- new -> OpenSSL::PKey::EC
+--- new(obj) -> OpenSSL::PKey::EC
+
+OpenSSL::PKey::EC オブジェクトを生成します。
+
+引数の種類や内容によって異なる挙動をします。
+
+引数なしの場合は、空の EC オブジェクトを生成します。
+これにはパラメータ(曲線から定義される群)も鍵対も含まれていません。
+
+引数が OpenSSL::PKey::EC オブジェクトである場合には、
+そのオブジェクトのコピーを返します。
+
+引数が [[c:OpenSSL::PKey::EC::Group]] のオブジェクトである場合には、
+それを群として設定されます。鍵対は含まれません。
+
+引数が DER 形式もしくは PEM 形式の文字列である場合は、その内容を
+読み込んで EC オブジェクトを出力します。その内容によって
+鍵対の両方、もしくは公開鍵のみ含まれています。
+
+引数が曲線の名前の文字列である場合には、その曲線で定義される
+群がパラメータとして設定されます。鍵対は含まれません。
+
+@param obj ECオブジェクトの生成元(EC オブジェクト or EC::Group オブジェクト
+           or 文字列)
+@raise OpenSSL::PKey::EC::ECError オブジェクトの生成に失敗した場合に発生します
 
 == Instance methods
---- group
-#@todo
---- group=
-#@todo
---- private_key
-#@todo
---- private_key=
-#@todo
---- public_key
-#@todo
---- public_key=
-#@todo
---- private_key?
-#@todo
---- public_key?
-#@todo
---- generate_key
-#@todo
---- check_key
-#@todo
---- dh_compute_key
-#@todo
---- dsa_sign_asn1
-#@todo
---- dsa_verify_asn1
-#@todo
---- to_pem
-#@todo
---- to_der
-#@todo
---- to_text
-#@todo
+--- group -> OpenSSL::PKey::EC::Group
+鍵パラメータとなる群を表すオブジェクトを返します。
+
+@see [[m:OpenSSL::PKey::EC#group=]]
+
+--- group=(gr)
+鍵パラメータとなる群を表すオブジェクトを設定します。
+
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
+
+@see [[m:OpenSSL::PKey::EC#group]]
+
+--- private_key -> OpenSSL::BN|nil
+秘密鍵となる整数を返します。
+
+鍵が設定されていない場合は nil を返します。
+
+@see [[m:OpenSSL::PKey::EC#private_key=]]
+
+--- private_key=(privkey)
+秘密鍵となる整数を設定します。
+
+nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に変更できます。
+
+@see [[m:OpenSSL::PKey::EC#private_key]]
+
+--- public_key -> OpenSSL::PKey::EC::Point|nil
+公開鍵となる楕円曲線上の点を表すオブジェクトを返します。
+
+鍵が設定されていない場合は nil を返します。
+
+@see [[m:OpenSSL::PKey::EC#public_key=]]
+
+--- public_key=(pubkey)
+公開鍵となる楕円曲線上の点を表すオブジェクトを設定します。
+
+通常このメソッドで値を変更することはありません。
+よく考えて必要な場合のみ利用してください。
+
+@param pubkey 公開鍵となる [[c:OpenSSL::PKey::EC::Point]] オブジェクト
+
+@see [[m:OpenSSL::PKey::EC#public_key]]
+
+--- private_key? -> bool
+EC オブジェクトが秘密鍵を保持していれば真を返します。
+
+--- public_key? -> bool
+EC オブジェクトが公開鍵を保持していれば真を返します。
+
+[[c:OpenSSL::PKey::RSA]] や [[c:OpenSSL::PKey::DSA]] と
+異なり、EC オブジェクトが公開鍵を含まない場合が存在します。
+例えば、[[m:OpenSSL::PKey::EC.new]] でパラメータとなる群のみを
+指定して EC オブジェクトを作った場合は、公開鍵も秘密鍵も
+保持していません。この場合 [[m:OpenSSL::PKey::EC#generate_key]] で
+鍵を生成するまで、その状態のままです。
+
+このメソッドを呼ぶ前に [[c:OpenSSL::Random]] の各モジュール関数に
+よって乱数が適切に初期化されている必要があります。
+
+--- generate_key -> self
+鍵ペアを乱数で生成します。
+
+@raise OpenSSL::PKey::ECError 鍵ペアの生成に失敗した場合に発生します
+
+--- check_key -> true
+
+パラメータと鍵対をチェックします。
+
+なんらかの意味で鍵対に問題がある場合には例外 ECError を発生します。
+
+@raise OpenSSL::PKey::ECError 鍵に問題がある場合に発生します
+
+--- dh_compute_key(pubkey) -> String
+自分の秘密鍵と相手の公開鍵から ECDH によって鍵文字列を計算し、返します。
+
+相手の公開鍵は [[c:OpenSSL::PKey::EC::Point]] オブジェクトである必要があります。
+
+@param pubkey 相手の公開鍵
+
+--- dsa_sign_asn1(data) -> String
+秘密鍵を用い、data に ECDSA で署名します。
+
+結果は文字列として返します。
+
+data のダイジェストを取る処理はこのメソッドに含まれていません。
+自身で適当なダイジェストを取る必要があります。
+
+@param data 署名対象のデータ(文字列)
+@raise OpenSSL::PKey::ECError EC オブジェクトが秘密鍵を保持していない場合、
+                              もしくは署名に失敗した場合に発生します
+@see [[m:OpenSSL::PKey::EC#dsa_verify_asn1]]
+
+--- dsa_verify_asn1(data, sig) -> bool
+公開鍵を用い、署名を ECDSA で検証します。
+
+data のダイジェストを取る処理はこのメソッドに含まれていません。
+自身で適当なダイジェストを取る必要があります。
+
+検証に成功した場合は true を返します。
+
+@param data 署名対象のデータ(文字列)
+@param sig 署名データ(文字列)
+@raise OpenSSL::PKey::ECError 署名の検証時にエラーが生じた場合に発生します
+@see [[m:OpenSSL::PKey::EC#dsa_sign_asn1]]
+
+--- to_pem -> String
+鍵を PEM 形式の文字列に変換します。
+
+現在の仕様では [[m:OpenSSL::PKey::RSA#to_pem]] のように
+出力をパスフレーズで暗号化することはできません。
+
+--- to_der -> String
+鍵を DER 形式の文字列に変換します。
+
+--- to_text -> String
+鍵を人間が読める形式に変換します。
+
 
 == Constants
---- NAMED_CURVE
+--- NAMED_CURVE -> Integer
+#@todo
 
 = class OpenSSL::PKey::ECError < OpenSSL::PKey::PKeyError
+楕円曲線暗号関連のエラーが生じた場合に発生する例外です。
 
 = class OpenSSL::PKey::EC::Group
+楕円曲線から定義される群を表すクラスです。
+
+楕円曲線暗号のパラメータとしての役割をはたします。
+
 == Class methods
---- new
-#@todo
+--- new(obj) -> OpenSSL::PKey::EC::Group
+--- new(sym, p, a, b) -> OpenSSL::PKey::EC::Group
+
+楕円曲線から定義される群を表すオブジェクトを生成します。
+
+引数の種類と個数によって挙動が異なります。
+
+引数が1つの場合は、シンボル、[[c:OpenSSL::PKey::EC::Group]] オブジェクト、
+文字列のいずれかを渡すことができます。
+
+引数にシンボルを渡した場合は対応する群を返します。以下の4つを
+指定できます。
+  * :GFp_simple
+  * :GFp_mont
+  * :GFp_nist
+  * :GF2m_simple
+この方法で生成された Group オブジェクトは不完全です。
+
+[[c:OpenSSL::PKey::EC::Group]] オブジェクト
+を渡した場合はそれを複製したオブジェクトを返します。
+
+文字列を渡した場合は、PEM もしくは DER 形式のデータとみなして
+データを読み込み、オブジェクトを生成します。
+
+曲線名文字列を渡した場合は、その曲線で定義される
+群を表すオブジェクトを返します。
+
+引数が4つの場合は sym で :GFp_simple もしくは :GF2m_simple を指定し、
+それと p, a, b という 3 つの整数で定義される群を返します。
+
+@param obj Groupオブジェクト生成のためのデータ(シンボル、Group, 文字列のいずれか)
+@param sym Group を定義するためのシンボル
+@param p 整数([[c:OpenSSL::BN]])
+@param a 整数([[c:OpenSSL::BN]])
+@param b 整数([[c:OpenSSL::BN]])
 
 == Instance methods
 --- generator
 #@todo
+
 --- set_generator
 #@todo
+
 --- order
 #@todo
+
 --- cofactor
 #@todo
+
 --- curve_name
 #@todo
+
 --- asn1_flag
 #@todo
+
 --- asn1_flag=
 #@todo
+
 --- point_conversion_form
 #@todo
+
 --- point_conversion_form=
 #@todo
+
 --- seed
 #@todo
+
 --- seed=
 #@todo
+
 --- degree
 #@todo
+
 --- to_pem
 #@todo
+
 --- to_der
 #@todo
+
 --- to_text
 #@todo
+
 --- ==
 --- eql?
 #@todo
 
 = class OpenSSL::PKey::EC::Point
+
 == Class methods
 --- new
 #@todo
@@ -95,21 +272,28 @@ EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 == Instance methods
 --- group
 #@todo
+
 --- eql?
 --- ==
 #@todo
+
 --- infinity?
 #@todo
+
 --- on_curve?
 #@todo
+
 --- make_affine!
 #@todo
+
 --- invert!
 #@todo
+
 --- set_to_infinity!
 #@todo
+
 --- to_bn
 #@todo
 
-= class OpenSSL::EC::PKey::Group::Error < OpenSSL::OpenSSLError
-= class OpenSSL::EC::PKey::Point::Error < OpenSSL::OpenSSLError
+= class OpenSSL::PKey::EC::Group::Error < OpenSSL::OpenSSLError
+= class OpenSSL::PKey::EC::Point::Error < OpenSSL::OpenSSLError
