@@ -373,36 +373,44 @@ Gem をロードできなかった場合に発生するエラーです。
 
 
 = module Gem::QuickLoader
-#@todo
+
+prelude.c で定義されている内部用のモジュールです。
 
 == Public Instance Methods
 
 --- calculate_integers_for_gem_version
-#@todo
+
+prelude.c で定義されている内部用のメソッドです。
 
 --- const_missing
-#@todo
+
+prelude.c で定義されている内部用のメソッドです。
 
 --- method_missing
-#@todo
+
+prelude.c で定義されている内部用のメソッドです。
 
 --- push_all_highest_version_gems_on_load_path
-#@todo
+
+prelude.c で定義されている内部用のメソッドです。
 
 --- push_gem_version_on_load_path
-#@todo
+
+prelude.c で定義されている内部用のメソッドです。
 
 == Singleton Methods
 
 --- load_full_rubygems_library
+prelude.c で定義されている内部用のメソッドです。
 
 == Constants
 
---- GemPaths
-#@todo
+--- GemPaths -> Hash
 
---- GemVersions
-#@todo
+prelude.c で定義されている内部用の定数です。
 
+--- GemVersions -> Hash
+
+prelude.c で定義されている内部用の定数です。
 
 #@end
