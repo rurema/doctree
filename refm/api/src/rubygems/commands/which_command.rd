@@ -22,17 +22,23 @@ require rubygems/gem_path_searcher
 
 == Public Instance Methods
 --- find_paths(package_name, dirs) -> Array
-#@todo
 
-@param package_name Gem パッケージの名前を指定します。
+dirs から package_name という名前を持つファイルを探索します。
+
+以下の拡張子を持つファイルが対象です。
+
+  %w[.rb .rbw .so .dll .bundle]
+
+@param package_name ファイルの名前を指定します。
 
 @param dirs 探索するディレクトリを文字列の配列で指定します。
 
 --- gem_paths(spec) -> Array
-#@todo
 
+与えられた [[c:Gem::Specification]] のインスタンスからその Gem が
+require するファイルのあるディレクトリをまとめて返します。
 
-@param spec
+@param spec [[c:Gem::Specification]] のインスタンスを指定します。
 
 == Constants
 
@@ -40,3 +46,4 @@ require rubygems/gem_path_searcher
 
 拡張子を表す配列です。
 
+  %w[.rb .rbw .so .dll .bundle]
