@@ -21,7 +21,7 @@ require rubygems/gem_openssl
 ¥¹¥Æ¥Ã¥×¥Ð¥¤¥¹¥Æ¥Ã¥×¤Ç²òÀâ¤·¤Æ¤¤¤Þ¤¹¡£
 
 ===== ²òÀâ
-#@todo
+#@todo ¥á¥½¥Ã¥É¤Ç¤Ï¤Ê¤¤
 
 ¤¢¤Ê¤¿¤¬¼«Ê¬¤Î Gem ¤Ë½ðÌ¾¤¹¤ë¤¿¤á¤Ë¤Ï¡¢ÈëÌ©¸°¤È¼«¸Ê½ðÌ¾¤·¤¿¾ÚÌÀ½ñ¤¬É¬Í×¤Ç¤¹¡£
 °Ê²¼¤Î¥³¥Þ¥ó¥É¤ò¼Â¹Ô¤¹¤ë¤È¤½¤ì¤é¤òºîÀ®¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
@@ -267,22 +267,11 @@ gem cert --build, gem cert --sign ¤ò»ÈÍÑ¤·¤ÆºîÀ®¤Ç¤­¤ë *.pem ¥Õ¥¡¥¤¥ë¤Ï
   ¸°¤ò¿Í´Ö¤ËÆÉ¤ß¤ä¤¹¤¤¥Õ¥©¡¼¥Þ¥Ã¥È¤Ç½ÐÎÏ¤·¤Þ¤¹ :
   $ openssl rsa -in input_key.pem -noout -text
 
-
-===== Bugs / TODO
-#@todo
-
-
-===== ºî¼Ô¤Ë¤Ä¤¤¤Æ
-
- * Paul Duncan <pabs@pablotron.org>
- * http://pablotron.org/
-
 = module Gem::Security
 
 == Singleton Methods
 
 --- add_trusted_cert(cert, options = {}) -> nil
-#@todo
 
 ¿®ÍêºÑ¤ß¾ÚÌÀ½ñ¥ê¥¹¥È¤ËÍ¿¤¨¤é¤ì¤¿¾ÚÌÀ½ñ¤òÄÉ²Ã¤·¤Þ¤¹¡£
 
@@ -293,7 +282,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 @param options ¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- build_cert(name, key, options = {}) -> OpenSSL::X509::Certificate
-#@todo
 
 Í¿¤¨¤é¤ì¤¿ DN ¤ÈÈëÌ©¸°¤ò»ÈÍÑ¤·¤Æ¾ÚÌÀ½ñ¤òºîÀ®¤·¤Þ¤¹¡£
 
@@ -304,7 +292,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 @param options ¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- build_self_signed_cert(email_addr, options = {}) -> Hash
-#@todo
 
 Í¿¤¨¤é¤ì¤¿¥á¡¼¥ë¥¢¥É¥ì¥¹¤ò¸µ¤Ë¤·¤Æ¼«¸Ê½ðÌ¾¾ÚÌÀ½ñ¤òºîÀ®¤·¤Þ¤¹¡£
 
@@ -315,7 +302,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 @return ¸°¤È¾ÚÌÀ½ñ¤È¤½¤ì¤é¤òÊÝÂ¸¤·¤¿¥Ñ¥¹¤òÉ½¤¹¥Ï¥Ã¥·¥å¤òÊÖ¤·¤Þ¤¹¡£
 
 --- sign_cert(cert, signing_key, signing_cert, options = {}) -> OpenSSL::X509::Certificate
-#@todo
 
 Í¿¤¨¤é¤ì¤¿½ðÌ¾ÍÑ¤Î¸°¤È¾ÚÌÀ½ñ¤òÍÑ¤¤¤Æ¾ÚÌÀ½ñ¤Ë½ðÌ¾¤·¤Þ¤¹¡£
 
@@ -330,8 +316,7 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 @return ½ðÌ¾¤µ¤ì¤¿¾ÚÌÀ½ñ¤òÊÖ¤·¤Þ¤¹¡£
 
 --- verify_trust_dir(path, perms)
-#@todo
-
+#@# -> discard
 ¿®Íê¤¹¤ë¥Ç¥£¥ì¥¯¥È¥ê¤¬Â¸ºß¤¹¤ë¤³¤È¤ò³ÎÇ§¤·¤Þ¤¹¡£
 
 Í¿¤¨¤é¤ì¤¿¥Ñ¥¹¤¬Â¸ºß¤¹¤ë¾ì¹ç¡¢¥Ç¥£¥ì¥¯¥È¥ê¤Ç¤¢¤ë¤³¤È¤ò³ÎÇ§¤·¤Þ¤¹¡£
@@ -346,7 +331,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 == Constants
 
 --- AlmostNoSecurity -> Gem::Security::Policy
-#@todo
 
 ¤Û¤È¤ó¤É¤Î¸¡¾Ú¤ò¹Ô¤ï¤Ê¤¤¥Ý¥ê¥·¡¼¤Ç¤¹¡£
 
@@ -363,7 +347,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
     :only_signed      => false
 
 --- HighSecurity -> Gem::Security::Policy
-#@todo
 
 ¹â¥ì¥Ù¥ë¤Î¥»¥­¥å¥ê¥Æ¥£¥Ý¥ê¥·¡¼¤Ç¤¹¡£
 
@@ -382,7 +365,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
     :only_signed      => true
 
 --- LowSecurity -> Gem::Security::Policy
-#@todo
 
 Äã¥ì¥Ù¥ë¤Î¥»¥­¥å¥ê¥Æ¥£¤Î¥Ý¥ê¥·¡¼¤Ç¤¹¡£
 
@@ -400,7 +382,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
     :only_signed      => false
 
 --- MediumSecurity -> Gem::Security::Policy
-#@todo
 
 Ãæ¥ì¥Ù¥ë¤Î¥»¥­¥å¥ê¥Æ¥£¥Ý¥ê¥·¡¼¤Ç¤¹¡£
 
@@ -418,7 +399,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
     :only_signed      => false
 
 --- NoSecurity -> Gem::Security::Policy
-#@todo
 
 ¥»¥­¥å¥ê¥Æ¥£¤Ê¤·¤Î¥Ý¥ê¥·¡¼¤Ç¤¹¡£
 
@@ -432,12 +412,10 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
     :only_signed      => false
 
 --- OPT -> Hash
-#@todo
 
 ¤Û¤È¤ó¤É¤Î¥á¥½¥Ã¥É¤Ç»ÈÍÑ¤¹¤ë¥Ç¥Õ¥©¥ë¥È¤Î¥ª¥×¥·¥ç¥ó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- Policies -> Hash
-#@todo
 
 »ÈÍÑ²ÄÇ½¤Ê¥Ý¥ê¥·¡¼¤Î°ìÍ÷¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -448,7 +426,6 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
  * [[m:Gem::Security::HighSecurity]]
 
 = class Gem::Security::Policy
-#@todo
 
 ½ðÌ¾ÉÕ¤­¤Î Gem ¥Ñ¥Ã¥±¡¼¥¸¤ò¸¡¾Ú¤¹¤ë¤¿¤á¤ÎÀßÄê¤ò¥«¥×¥»¥ë²½¤·¤Æ¤¤¤ë¥¯¥é¥¹¤Ç¤¹¡£
 
@@ -458,58 +435,48 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 == Public Instance Methods
 
 --- only_signed -> bool
-#@todo
 
 ¤³¤ÎÃÍ¤¬¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢½ðÌ¾ÉÕ¤­¤Î Gem ¤Î¤ß¥¤¥ó¥¹¥È¡¼¥ë¤·¤Þ¤¹¡£
 
 --- only_signed=(flag)
-#@todo
 
 ½ðÌ¾ÉÕ¤­¤Î Gem ¤Î¤ß¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤«¤É¤¦¤«¤òÀßÄê¤·¤Þ¤¹¡£
 
 @param flag ¿¿¡¢¤Þ¤¿¤Ïµ¶¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- only_trusted -> bool
-#@todo
 
 ¤³¤ÎÃÍ¤¬¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢¸¡¾ÚºÑ¤ß¤Î Gem ¤Î¤ß¥¤¥ó¥¹¥È¡¼¥ë¤·¤Þ¤¹¡£
 
 --- only_trusted=(flag)
-#@todo
 
 ¸¡¾ÚºÑ¤ß¤Î Gem ¤Î¤ß¥¤¥ó¥¹¥È¡¼¥ë¤¹¤ë¤«¤É¤¦¤«¤òÀßÄê¤·¤Þ¤¹¡£
 
 @param flag ¿¿¡¢¤Þ¤¿¤Ïµ¶¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- verify_chain -> bool
-#@todo
 
 ¤³¤ÎÃÍ¤¬¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò¸¡¾Ú¤·¤Þ¤¹¡£
 
 --- verify_chain=(flag)
-#@todo
 
 ¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò¸¡¾Ú¤¹¤ë¤«¤É¤¦¤«¤òÀßÄê¤·¤Þ¤¹¡£
 
 @param flag ¿¿¡¢¤Þ¤¿¤Ïµ¶¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- verify_data -> bool
-#@todo
 
 ¤³¤ÎÃÍ¤¬¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢¥Ç¡¼¥¿¤ò¸¡¾Ú¤·¤Þ¤¹¡£
 
 --- verify_data=(flag)
-#@todo
 
 ¥Ç¡¼¥¿¤ò¸¡¾Ú¤¹¤ë¤«¤É¤¦¤«¤òÀßÄê¤·¤Þ¤¹¡£
 
 @param flag ¿¿¡¢¤Þ¤¿¤Ïµ¶¤ò»ØÄê¤·¤Þ¤¹¡£
 
---- verify_gem(signature, data, chain, time = Time.now)
-#@todo
+--- verify_gem(signature, data, chain, time = Time.now) -> Array
 
 Í¿¤¨¤é¤ì¤¿¥Ç¡¼¥¿¤òÍ¿¤¨¤é¤ì¤¿½ðÌ¾¤È¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤Ç¸¡¾Ú¤·¤Þ¤¹¡£
-
 
 @param signature ½ðÌ¾¤ò»ØÄê¤·¤Þ¤¹¡£
 
@@ -523,24 +490,20 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 
 
 --- verify_root -> bool
-#@todo
 
 ¤³¤ÎÃÍ¤¬¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤Î¥ë¡¼¥È¤ò¸¡¾Ú¤·¤Þ¤¹¡£
 
 --- verify_root=(flag)
-#@todo
 
 ¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤Î¥ë¡¼¥È¤ò¸¡¾Ú¤¹¤ë¤«¤É¤¦¤«¤òÀßÄê¤·¤Þ¤¹¡£
 
 @param flag ¿¿¡¢¤Þ¤¿¤Ïµ¶¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- verify_signer -> bool
-#@todo
 
 ¤³¤ÎÃÍ¤¬¿¿¤Ç¤¢¤ë¾ì¹ç¤Ï¡¢½ðÌ¾¼Ô¤ò¸¡¾Ú¤·¤Þ¤¹¡£
 
 --- verify_signer=(flag)
-#@todo
 
 ½ðÌ¾¼Ô¤ò¸¡¾Ú¤¹¤ë¤«¤É¤¦¤«¤òÀßÄê¤·¤Þ¤¹¡£
 
@@ -548,14 +511,13 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 
 == Singleton Methods
 
---- new(policy = {}, options = {})
+--- new(policy = {}, options = {}) -> Gem::Security::Policy
 
 @param policy ¥â¡¼¥É¤ò»ØÄê¤·¤Þ¤¹¡£
 
 @param options ¤½¤ÎÂ¾¤Î¥ª¥×¥·¥ç¥ó¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- trusted_cert_path(cert, options) -> String
-#@todo
 
 Í¿¤¨¤é¤ì¤¿¾ÚÌÀ½ñ¤Ø¤Î¥Ñ¥¹¤òÊÖ¤·¤Þ¤¹¡£
 
@@ -565,44 +527,38 @@ Note: ¤·¤Ð¤é¤¯¤Î´Ö OPT[:trust_dir] ¤ËÊÝÂ¸¤µ¤ì¤Þ¤¹¤¬¡¢º£¸åÊÑ¹¹¤µ¤ì¤ë²ÄÇ½À­¤¬¤¢¤ê¤
 
 
 = class Gem::Security::Signer
-#@todo
 
 OpenSSL ¤Î½ðÌ¾¼Ô¤ò°·¤¦¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
 
 == Public Instance Methods
 
 --- key -> OpenSSL::PKey::PKey
-#@todo
 
 ¸°¤òÊÖ¤·¤Þ¤¹¡£
 
 --- key=(key)
-#@todo
 
 ¸°¤ò¥»¥Ã¥È¤·¤Þ¤¹¡£
 
 --- cert_chain -> Array
-#@todo
 
 ¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤òÊÖ¤·¤Þ¤¹¡£
 
 --- cert_chain=(cert_chain)
-#@todo
 
 ¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò¥»¥Ã¥È¤·¤Þ¤¹¡£
 
 @param cert_chain ¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò»ØÄê¤·¤Þ¤¹¡£
 
 --- sign(data)
-
+#@# -> discard
 ¼«¿È¤ËÀßÄêºÑ¤ß¤Î¥À¥¤¥¸¥§¥¹¥È¥¢¥ë¥´¥ê¥º¥à¤òÍÑ¤¤¤ÆÍ¿¤¨¤é¤ì¤¿¥Ç¡¼¥¿¤Ë½ðÌ¾¤·¤Þ¤¹¡£
 
 @param data ½ðÌ¾ÂÐ¾Ý¤Î¥Ç¡¼¥¿¤ò»ØÄê¤·¤Þ¤¹¡£
 
 == Singleton Methods
 
---- new(key, cert_chain)
-#@todo
+--- new(key, cert_chain) -> Gem::Security::Signer
 
 Í¿¤¨¤é¤ì¤¿¸°¤È¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤òÍÑ¤¤¤Æ¼«¿È¤ò½é´ü²½¤·¤Þ¤¹¡£
 
@@ -611,6 +567,5 @@ OpenSSL ¤Î½ðÌ¾¼Ô¤ò°·¤¦¤¿¤á¤Î¥¯¥é¥¹¤Ç¤¹¡£
 @param cert_chain ¾ÚÌÀ½ñ¥Á¥§¡¼¥ó¤ò»ØÄê¤·¤Þ¤¹¡£
 
 = class Gem::Security::Exception < Gem::Exception
-#@todo
 
 ¥»¥­¥å¥ê¥Æ¥£´ØÏ¢¤Î¥¨¥é¡¼¤òÉ½¤·¤Þ¤¹¡£
