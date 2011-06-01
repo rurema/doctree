@@ -10,16 +10,18 @@ include Gem::UserInteraction
 == Public Instance Methods
 
 --- add_extra_args(args) -> Array
-#@todo
 
-???
+$HOME/.gemrc から読み込んだ引数を追加します。
 
 @param args 追加する引数を配列で指定します。
 
 --- add_option(*opts){|value, options| ... }
-#@todo ???
+#@# -> discard
 
 コマンドに対するコマンドラインオプションとハンドラを追加します。
+
+ブロックには、コマンドライン引数の値とそのオプションが渡されます。
+オプションはハッシュになっています。
 
 @param opts オプションを指定します。
 
@@ -92,7 +94,8 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @return 一つ以上、指定した場合は最初の値を返します。一つも指定していない場合は nil を返します。
 
 --- handle_options(args)
-#@todo
+#@# -> discard
+与えられた引数のリストをパースして結果を記録します。
 
 @param args 引数のリストを指定します。
 
@@ -103,11 +106,10 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 @param args 引数リストを指定子明日。
 
 --- invoke(*args)
-#@todo
-
+#@# -> discard
 与えられた引数を使用してコマンドを呼び出します。
 
-@param args
+@param args 引数のリストです。
 
 --- merge_options(new_options) -> Hash
 
@@ -124,7 +126,6 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 
 コマンドラインで実行するときに使用するプログラム名を返します。
 
-
 --- program_name=(name)
 
 コマンドラインで実行するときに使用するプログラム名をセットします。
@@ -134,6 +135,8 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 --- remove_option(name)
 
 与えられた名前に一致するコマンドラインオプションを削除します。
+
+@param name 削除したいコマンドラインオプションの名前を指定します。
 
 --- show_help -> ()
 
@@ -164,7 +167,7 @@ long が short で始まる文字列である場合真を返します。そうでない場合は偽を返します
 
 #@since 1.9.2
 --- show_lookup_failure(gem_name, version, errors = nil) -> ()
-#@todo
+
 Gem が見つからなかった場合、メッセージを表示するために使用するメソッドです。
 
 @param gem_name Gem の名前を指定します。
@@ -178,14 +181,14 @@ Gem が見つからなかった場合、メッセージを表示するために使用するメソッドです。
 == Singleton Methods
 
 --- add_common_option(*args){|value, options| ... }
-#@todo
+#@# -> discard
 
 全てのコマンドに共通するオプションを登録するためのメソッドです。
 
-@param args
+@param args 追加するオプションの情報を指定します。
 
 --- add_specific_extra_args(cmd, args)
-#@todo
+#@# -> discard
 
 与えられたコマンドに対応する追加の引数を追加します。
 
@@ -195,11 +198,11 @@ Gem が見つからなかった場合、メッセージを表示するために使用するメソッドです。
 
 #@since 1.9.2
 --- build_args -> Array
-#@todo
+
 Gem をビルドするときに使用するパラメータを返します。
 
 --- build_args=(value)
-#@todo
+
 Gem をビルドするときに使用するパラメータをセットします。
 
 @param value Gem をビルドするときに使用するパラメータを指定します。
@@ -207,24 +210,20 @@ Gem をビルドするときに使用するパラメータをセットします。
 #@end
 
 --- common_options -> Array
-#@todo
 
 共通の引数を返します。
 
 --- extra_args -> Array
-#@todo
 
 追加の引数を返します。
 
 --- extra_args=(value)
-#@todo
 
 追加の引数をセットします。
 
 @param value 配列を指定します。
 
 --- specific_extra_args(cmd) -> Array
-#@todo
 
 与えられたコマンドに対応する追加の引数を返します。
 
@@ -233,7 +232,6 @@ Gem をビルドするときに使用するパラメータをセットします。
 @param cmd コマンド名を指定します。
 
 --- specific_extra_args_hash -> Hash
-#@todo
 
 特別な追加引数へのアクセスを提供します。
 
