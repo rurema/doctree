@@ -17,25 +17,21 @@ include Gem::RequirePathsBuilder
 == Public Instance Methods
 
 --- app_script_text -> String
-#@todo
 
 アプリケーションのための実行ファイルの雛形のテキストを返します。
 
 --- bin_dir -> String
-#@todo
 
 実行ファイルをインストールするディレクトリを返します。
 
 --- build_extensions
-#@todo ちゃんと調査して修正する
-
+#@# -> discard
 拡張ライブラリをビルドします。
 
 拡張ライブラリをビルドするためのファイルタイプとして有効であるのは、
 extconf.rb, configure script, Rakefile, mkmf_files です。
 
 --- ensure_dependency -> true
-#@todo
 
 インストールしようとしている Gem が依存関係を満たしている事を確認します。
 
@@ -48,38 +44,33 @@ extconf.rb, configure script, Rakefile, mkmf_files です。
 @raise Gem::InstallError 依存関係を満たしていない場合に発生します。
 
 --- extract_files
-#@todo
-
+#@# -> discard
 ファイルのインデックスを読み取って、それぞれのファイルを Gem のディレクトリに展開します。
 
 また、ファイルを Gem ディレクトリにインストールしないようにします。
 
-@raise ArgumentError xxx
+@raise ArgumentError 自身に [[c:Gem::Format]] がセットされていない場合に発生します。
 
 @raise Gem::InstallError インストール先のパスが不正な場合に発生します。
 
 --- formatted_program_filename(filename) -> String
-#@todo
 
 Ruby のコマンドと同じプレフィックスとサフィックスを付けたファイル名を返します。
 
 @param filename 実行ファイルのファイル名を指定します。
 
 --- gem_home -> String
-#@todo
 
 Gem のインストール先を返します。
 
 --- generate_bin
-#@todo
-
+#@# -> discard
 Gem でインストールされる実行ファイルを作成します。
 
 @raise Gem::FilePermissionError インストール先に書込み出来ない場合に発生します。
 
 --- generate_bin_script(filename, bindir)
-#@todo
-
+#@# -> discard
 Gem に入っているアプリケーションを実行するためのスクリプトを作成します。
 
 @param filename ファイル名を指定します。
@@ -87,8 +78,7 @@ Gem に入っているアプリケーションを実行するためのスクリプトを作成します。
 @param bindir 実行ファイルを配置するディレクトリを指定します。
 
 --- generate_bin_symlink(filename, bindir)
-#@todo
-
+#@# -> discard
 Gem に入っているアプリケーションを実行するためのシンボリックリンクを作成します。
 
 現在インストールされている Gem よりも新しい Gem をインストールするときは、
@@ -98,10 +88,12 @@ Gem に入っているアプリケーションを実行するためのシンボリックリンクを作成します。
 
 @param bindir 実行ファイルを配置するディレクトリを指定します。
 
-
+#@since 1.9.2
+--- generate_windows_script(filename, bindir)
+#@else
 --- generate_windows_script(bindir, filename)
-#@todo 引数の順番を修正してもらう
-
+#@end
+#@# -> discard
 コマンドの実行を容易にするために Windows 向けのバッチファイルを作成します。
 
 @param bindir 実行ファイルを配置するディレクトリを指定します。
@@ -109,7 +101,6 @@ Gem に入っているアプリケーションを実行するためのシンボリックリンクを作成します。
 @param filename ファイル名を指定します。
 
 --- install -> Gem::Specification
-#@todo
 
 Gem をインストールします。
 
@@ -129,7 +120,6 @@ Gem をインストールします。
 @raise Gem::InstallError [[c:Zlib::GzipFile::Error]] が発生した場合に発生します。
 
 --- installation_satisfies_dependency?(dependency) -> bool
-#@todo 表現を見直す
 
 登録されているソースインデックスが与えられた依存関係を
 満たすことができる場合は、真を返します。そうでない場合は偽を返します。
@@ -137,36 +127,33 @@ Gem をインストールします。
 @param dependency [[c:Gem::Dependency]] のインスタンスを指定します。
 
 --- shebang(bin_file_name) -> String
-#@todo
 
 実行ファイル内で使用する shebang line (#! line) を表す文字列を返します。
 
+@param bin_file_name 実行ファイルの名前を指定します。
+
 --- spec -> Gem::Specification
-#@todo
 
 インストールしようとしている Gem に対応する [[c:Gem::Specification]] のインスタンスを返します。
 
 --- unpack(directory)
-#@todo
-
+#@# -> discard
 与えられたディレクトリに Gem を展開します。
 
 @param directory Gem を展開するディレクトリを指定します。
 
 --- windows_stub_script -> String
-#@todo
 
 コマンドを起動するために使用する Windows 用のバッチファイルの内容を
 文字列として返します。
 
 --- write_spec
-#@todo
-
+#@# -> discard
 Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 == Singleton Methods
 
---- new(gem, options = {})
+--- new(gem, options = {}) -> Gem::Installer
 #@todo 書いてないオプションがいっぱいある
 
 与えられた引数で自身を初期化します。
@@ -198,47 +185,42 @@ Ruby スクリプト形式で .gemspec ファイルを作成します。
 
 @raise Gem::InstallError Gem のフォーマットが不正である場合に発生します。
 
-@raise Gem::FilePermissionError 
+@raise Gem::FilePermissionError 書き込み先のディレクトリに書き込み権限がない場合に発生します。
 
 --- exec_format -> String
-#@todo
 
 実行ファイル名のフォーマットを返します。
 
 指定しない場合は ruby コマンドと同じフォーマットを使用します。
 
 --- exec_format=(format)
-#@todo
 
 実行ファイル名のフォーマットをセットします。
 
 @param format 実行ファイル名のフォーマットを指定します。
 
 --- home_install_warning -> bool
-#@todo
 
 この値が真の場合、ホームディレクトリに Gem をインストールしようとすると警告を表示します。
 
 --- home_install_warning=(flag)
-#@todo
 
 ホームディレクトリに Gem をインストールしようとすると警告を表示するかどうかセットします。
 
-@param flag
+@param flag 真を指定するとホームディレクトリに Gem をインストールしよう
+            とすると警告を表示するようになります。
 
 --- path_warning -> bool
-#@todo
 
 この値が 真の場合は Gem.bindir が PATH に含まれていない場合に警告を表示します。
 
 --- path_warning=(flag)
-#@todo
 
 Gem.bindir が PATH に含まれていない場合に警告を表示するかどうかセットします。
 
-@param flag
+@param flag 真を指定すると、Gem.bindir が PATH に含まれていない場合に警
+            告を表示するようになります。
 
 = class Gem::Installer::ExtensionBuildError < Gem::InstallError
-#@todo
 
 拡張ライブラリをビルド中にエラーが発生した場合に発生します。
