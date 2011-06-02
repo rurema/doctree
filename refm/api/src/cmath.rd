@@ -90,9 +90,11 @@ z の対数を返します。
 
 #@todo 底を与えたときの例を追加。
 
-#@todo 冗長な記述を削減する。
 #@since 1.9.2
 --- log2!(x) -> Float
+#@else
+--- log2(x) -> Float
+#@end
 
 2 を底とする x の対数 (binary logarithm) を返します。[[m:Math.#log2]]
 のエイリアスです。
@@ -105,26 +107,12 @@ z の対数を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
+#@since 1.9.2
 --- log2(z) -> Float | Complex
 
 2 を底とする z の対数 (binary logarithm) を返します。
 
 @param z 真数を指定します。
-
-#@else
---- log2(x) -> Float
-
-2 を底とする x の対数 (binary logarithm) を返します。[[m:Math.#log2]]
-のエイリアスです。
-
-@param x 真数を正の実数で指定します。
-
-@raise Math::DomainError x が負の数である場合に発生します。
-
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
-
-@raise RangeError x に実数以外の数値を指定した場合に発生します。
-
 #@end
 
 --- log10!(x) -> Float
@@ -145,6 +133,9 @@ x の常用対数を返します。
 
 #@since 1.9.2
 --- cbrt!(x) -> Float
+#@else
+--- cbrt(x) -> Float
+#@end
 
 実数 x の立方根を返します。[[m:Math.#cbrt]] のエイリアスです。
 
@@ -158,25 +149,10 @@ x の常用対数を返します。
   CMath.cbrt!(8.0)  # => 2.0
   CMath.cbrt!(-8.0) # => -2.0
 
+#@since 1.9.2
 --- cbrt(z) -> Float | Complex
 
 z の立方根を返します。
-
-#@else
-
---- cbrt(x) -> Float
-
-実数 x の立方根を返します。[[m:Math.#cbrt]] のエイリアスです。
-
-@raise TypeError x に数値以外を指定した場合に発生します。
-
-@raise RangeError x に実数以外の数値を指定した場合に発生します。
-
-例:
-
-  require "cmath"
-  CMath.cbrt!(8.0)  # => 2.0
-  CMath.cbrt!(-8.0) # => -2.0
 
 #@end
 
