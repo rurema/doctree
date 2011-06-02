@@ -1,30 +1,10 @@
 require digest
 
+Hans Dobbertin, Antoon Bosselaers, Bart Preneel によって設計された
+RIPEMD-160 ハッシュ関数を実装するクラスを提供するライブラリです。
+
 = class Digest::RMD160 < Digest::Base
 
 Hans Dobbertin, Antoon Bosselaers, Bart Preneel によって設計された
-RIPEMD-160 ハッシュ関数を実装するクラス。
+RIPEMD-160 ハッシュ関数を実装するクラスです。
 
-== Class Methods
-
---- new([str])
---- digest(str)
---- hexdigest(str)
-#@todo
-
-[[c:Digest::Base]] のページを参照のこと。
-
-== Instance Methods
-
---- dup
---- clone
---- digest
---- hexdigest
---- to_s
---- update(str)
---- <<(str)
---- ==(md)
---- ==(str)
-#@todo
-
-[[c:Digest::Base]] のページを参照のこと。
