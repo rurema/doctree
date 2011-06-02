@@ -2460,6 +2460,35 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
 #@end
 
 #@since 1.9.1
+--- Complex(r, i = 0) -> Complex
+--- Complex(s)        -> Complex
+
+実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
+
+@param r 生成する複素数の実部。
+
+@param i 生成する複素数の虚部。省略した場合は 0 です。
+
+@param s 生成する複素数を表す文字列。
+
+@raise ArgumentError 変換できないオブジェクトを指定した場合に発生します。
+
+例:
+
+  Complex(1)       # => (1+0i)
+  Complex(1, 2)    # => (1+2i)
+  Complex('1+1i')  # => (1+1i)
+  Complex('1+1j')  # => (1+1i)
+  # Complex.polar(10, 10) と同一。
+  Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
+  Complex('_')     # => ArgumentError
+
+#@todo Complex('1+1j', '2+3j') のような 2 つ文字列を取る場合に対応する。
+
+@see [[m:Complex.rect]]、[[m:Complex.rectangular]]
+
+[注意] Complex.new、Complex.new! は 1.9 系では廃止されました。
+
 --- Rational(x, y = 1) -> Rational
 
 引数を有理数([[c:Rational]])に変換した結果を返します。
