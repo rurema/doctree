@@ -131,7 +131,7 @@ digest/hmac                     okkez           done
 digest/md5                      okkez
 digest/rmd160                   okkez
 digest/sha1                     okkez
-digest/sha2                     okkez
+digest/sha2                     okkez           done
 dl                                                          
 dl/Symbol                       
 dl/import                       
