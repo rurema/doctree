@@ -46,6 +46,14 @@ other が真なら true を, 偽なら false を返します。
 空文字列 "" を返します。
 
 #@since 1.9.1
+--- to_c -> Complex
+
+0+0i を返します。
+
+例:
+
+  nil.to_c # => (0+0i)
+
 --- to_r -> Rational
 
 0/1 を返します。

@@ -382,6 +382,19 @@ self を other で割った商 q と余り r を、
   (0.0/0.0).to_s           # => "NaN"
 
 #@since 1.9.1
+--- arg   -> 0 | Float
+--- angle -> 0 | Float
+--- phase -> 0 | Float
+
+自身の偏角(正の数なら 0、負の数なら [[m:Math::PI]])を返します。
+
+例:
+
+  1.arg  # => 0
+  -1.arg # => 3.141592653589793
+
+ただし、自身が NaN(Not a number) であった場合は、NaN を返します。
+
 --- denominator -> Integer
 
 自身を [[c:Rational]] に変換した時の分母を返します。

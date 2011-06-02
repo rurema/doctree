@@ -2,162 +2,365 @@
 
 複素数を扱うクラスです。
 
+[[c:Complex]] オブジェクトを作成するには、[[m:Kernel.#Complex]]、
+[[m:Complex.rect]]、[[m:Complex.polar]]、[[m:Numeric#to_c]]、
+[[m:String#to_c]] のいずれかを使用します。
+
+  Complex(1)           # => (1+0i)
+  Complex(2, 3)        # => (2+3i)
+  Complex.polar(2, 3)  # => (-1.9799849932008908+0.2822400161197344i)
+  3.to_c               # => (3+0i)
+  Complex(0.3)         #=> (0.3+0i)
+  Complex('0.3-0.5i')  #=> (0.3-0.5i)
+  Complex('2/3+3/4i')  #=> ((2/3)+(3/4)*i)
+  Complex('1@2')       #=> (-0.4161468365471424+0.9092974268256817i)
+
+  0.3.to_c             #=> (0.3+0i)
+  '0.3-0.5i'.to_c      #=> (0.3-0.5i)
+  '2/3+3/4i'.to_c      #=> ((2/3)+(3/4)*i)
+  '1@2'.to_c           #=> (-0.4161468365471424+0.9092974268256817i)
+
+[[c:Complex]] オブジェクトは有理数の形式も実数の形式も扱う事ができます。
+
+  Complex(1, 1) / 2    #=> ((1/2)+(1/2)*i)
+  Complex(1, 1) / 2.0  #=> (0.5+0.5i)
+
 == Instance Methods
 
---- *(other)
-#@todo
-Multiplication with real or complex number.
+--- *(other) -> Complex
 
---- **(other)
-#@todo
+積を計算します。
 
-Raise this complex number to the given (real or complex) power.
+@param other 自身に掛ける数
+
+例:
+
+  Complex(1, 2) * 2              # => (2+4i)
+  Complex(1, 2) * Complex(2, 3)  # => (-4+4i)
+  Complex(1, 2) * Rational(1, 2) # => ((1/2)+(1/1)*i)
+
+--- **(other) -> Complex
+
+冪(べき)乗を計算します。
+
+@param other 自身を other 乗する数
+
+例:
+
+  Complex('i') ** 2             # => (-1+0i)
 
 --- +(other)
-#@todo
 
-Addition with real or complex number.
+和を計算します。
 
---- -(other)
-#@todo
+@param other 自身に足す数
 
-Subtraction with real or complex number.
+例:
 
---- -@
-#@todo
+  Complex(1, 2) + Complex(2, 3) # => (3+5i)
 
---- /(other)
-#@todo
+--- -(other) -> Complex
 
-Division by real or complex number.
+差を計算します。
 
---- ==(other)
-#@todo
+@param other 自身から引く数
 
-Test for numerical equality (a == a + 0i).
+例:
 
---- abs
-#@todo
+  Complex(1, 2) - Complex(2, 3) # => (-1-1i)
 
-Absolute value (aka modulus): distance from the zero point on
-the complex plane.
+--- -@ -> Complex
 
---- abs2
-#@todo
+自身の符号を反転させたものを返します。
 
-Square of the absolute value.
+例:
 
+  -Complex(1)     # => (-1+0i)
+  -Complex(-1, 1) # => (1-1i)
 
---- angle
---- arg
-#@todo
+--- /(other)   -> Complex
+--- quo(other) -> Complex
 
-Argument (angle from (1,0) on the complex plane).
+商を計算します。
 
---- coerce(other)
-#@todo
+@param other 自身を割る数
 
-Attempts to coerce other to a Complex number.
+例:
 
---- conjugate
---- conj
+  Complex(10.0) / 3  # => (3.3333333333333335+(0/1)*i)
+  Complex(10)   / 3  # => ((10/3)+(0/1)*i)
 
-Complex conjugate (z + z.conjugate = 2 * z.real).
+--- ==(other) -> bool
 
---- denominator
-#@todo
+数値として等しいか判定します。
 
-FIXME
+@param other 自身と比較する数値
 
---- eql?
-#@todo
+例:
 
---- fdiv
-#@todo
+  Complex(2, 1) == Complex(1) # => false
+  Complex(1, 0) == Complex(1) # => true
 
---- hash
-#@todo
+--- abs       -> Float
+--- magnitude -> Float
 
-Returns a hash code for the complex number.
+自身の絶対値を返します。
 
---- imag
-#@todo
+以下の計算の結果を [[c:Float]] オブジェクトで返します。
 
---- imaginary
-#@todo
+  sqrt(self.real ** 2 + self.imag **2)
 
---- inspect
-#@todo
+例:
 
-Returns "Complex(real, image)".
+  Complex(1, 2).abs         # => 2.23606797749979
+  Complex(3, 4).abs         # => 5.0
+  Complex('1/2', '1/2').abs # => 0.7071067811865476
 
---- magnitude
-#@todo
+@see [[m:Complex#abs2]]
 
---- marshal_dump
-#@todo
+--- abs2 -> Numeric
 
---- marshal_load
-#@todo
+自身の絶対値の 2 乗を返します。
 
---- numerator
-#@todo
+以下の計算の結果を返します。
 
-FIXME
+  self.real ** 2 + self.imag **2
 
---- phase
-#@todo
+例:
 
---- polar
-#@todo
+  Complex(1, 1).abs2         # => 2
+  Complex(1.0, 1.0).abs2     # => 2.0
+  Complex('1/2', '1/2').abs2 # => (1/2)
 
-Returns the absolute value and the argument.
+@see [[m:Complex#abs]]
 
---- quo(other)
-#@todo
+--- arg   -> Float
+--- angle -> Float
+--- phase -> Float
 
+自身の偏角を返します。
 
---- real
-#@todo
+例:
 
---- real?
-#@todo
+  Complex.polar(3, Math::PI/2).arg #=> 1.5707963267948966
 
---- rect
-#@todo
+--- coerce(other) -> [Complex, Complex]
 
---- rectangular
-#@todo
+other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
 
---- to_f
-#@todo
+@raise TypeError 変換できないオブジェクトを指定した場合に発生します。
 
---- to_i
-#@todo
+例:
 
---- to_r
-#@todo
+  Complex(1).coerce(2) # => [(2+0i), (1+0i)]
 
---- to_s
-#@todo
+--- conjugate -> Complex
+--- conj      -> Complex
 
-Standard string representation of the complex number.
+自身の共役複素数を返します。
+
+例:
+
+  Complex(1, 2).conj # => (1-2i)
+
+--- denominator -> Integer
+
+分母を返します。
+
+以下のように、実部と虚部の分母の最小公倍数を整数で返します。
+
+  1   2       3+4i  <-  numerator(分子)
+  - + -i  ->  ----
+  2   3        6    <-  denominator(分母)
+
+例:
+
+  Complex('1/2+2/3i').denominator # => 6
+  Complex(3).numerator            # => 1
+
+@see [[c:Complex#numerator]]
+
+--- eql?(other) -> bool
+
+自身と other の実部と虚部のクラスが等しく、それぞれが数値として等しい場
+合に true を返します。そうでない場合に false を返します。
+
+@param other 自身と比較する数値
+
+--- fdiv(other) -> Complex
+
+自身の実部と虚部をそれぞれ実数として other で割った商を返します。
+
+@param other 自身を割る数
+
+例:
+
+  Complex(11, 22).fdiv(3) # => (3.6666666666666665+7.333333333333333i)
+  Complex(11, 22).quo(3)  # => ((11/3)+(22/3)*i)
+
+@see [[m:Complex#quo]]
+
+--- hash -> Integer
+
+自身のハッシュ値を返します。
+
+--- imag      -> Numeric
+--- imaginary -> Numeric
+
+自身の虚部を返します。
+
+例:
+
+  Complex(3, 2).imag # => 2
+
+--- inspect -> String
+
+自身を人間が読みやすい形の文字列表現にして返します。
+
+"(1+1i)", "(1-1i)" のような文字列を返します。
+
+--- marshal_dump -> Array
+
+[[m:Complex#marshal_load]] で復元可能な配列を返します。
+
+@see [[m:Complex#marshal_load]]
+
+--- marshal_load -> Complex
+
+[[m:Complex#marshal_dump]] で得られた配列を基に、[[c:Complex]] オブジェ
+クトを復元します。
+
+@see [[m:Complex#marshal_dump]]
+
+--- numerator -> Complex
+
+分子を返します。
+
+例:
+
+  Complex('1/2+2/3i').numerator # => (3+4i)
+  Complex(3).numerator          # => (3+0i)
+
+@see [[c:Complex#denominator]]
+
+--- polar -> [Numeric, Numeric]
+
+自身の絶対値と偏角を配列にして返します。
+
+例:
+
+  Complex.polar(1, 2).polar # => [1, 2]
+
+--- real -> Numeric
+
+自身の実部を返します。
+
+例:
+
+  Complex(3, 2).real # => 3
+
+--- real? -> false
+
+常に false を返します。
+
+@see [[m:Numeric#real?]]
+
+--- rect        -> [Numeric, Numeric]
+--- rectangular -> [Numeric, Numeric]
+
+実部と虚部を配列にして返します。
+
+例:
+
+  Complex(3).rect    # => [3, 0]
+  Complex(3.5).rect  # => [3.5, 0]
+  Complex(3, 2).rect # => [3, 2]
+
+--- to_f -> Float
+
+自身を [[c:Float]] に変換します。
+
+@raise RangeError 虚部が 0 ではない場合に発生します。
+
+例:
+
+  Complex(3).to_f    # => 3.0
+  Complex(3.5).to_f  # => 3.5
+  Complex(3, 2).to_f # => RangeError
+
+--- to_i -> Integer
+
+自身を整数に変換します。
+
+@raise RangeError 虚部が 0 ではない場合に発生します。
+
+例:
+
+  Complex(3).to_i    # => 3
+  Complex(3).to_i    # => 3
+  Complex(3.5).to_i  # => 3
+  Complex(3, 2).to_i # => RangeError
+
+--- to_r             -> Rational
+#@since 1.9.2
+--- rationalize(eps) -> Rational
+#@end
+
+自身を [[c:Rational]] に変換します。
+
+#@since 1.9.2
+@param eps 許容する誤差。常に無視されます。
+#@end
+
+@raise RangeError 虚部が 0 ではない場合に発生します。
+
+例:
+
+  Complex(3).to_r    # => (3/1)
+  Complex(3, 2).to_r # => RangeError
+
+#@# rationalize メソッドの引数 eps は常に無視されるため、to_r メソッド
+#@# と同じエントリとしました(sho-h)。
+
+--- to_s -> String
+
+自身を "実部 + 虚部i" 形式の文字列にして返します。
 
 == Class Methods
 
---- polar(r, theta)
-#@todo
+--- rect(r, i = 0)        -> Complex
+--- rectangular(r, i = 0) -> Complex
 
-Creates a Complex number in terms of r (radius) and theta (angle).
+実部が r、虚部が i である [[c:Complex]] クラスのオブジェクトを生成します。
 
---- rect
-#@todo
+@param r 生成する複素数の実部。
 
---- rectangular
-#@todo
+@param i 生成する複素数の虚部。省略した場合は 0 です。
+
+例:
+
+  Complex.rect(1)           # => (1+0i)
+  Complex.rect(1, 2)        # => (1+2i)
+  Complex.rectangular(1, 2) # => (1+2i)
+
+@see [[m:Kernel.#Complex]]
+
+--- polar(r, theta = 0) -> Complex
+
+絶対値が r、偏角が theta である [[c:Complex]] クラスのオブジェクトを生成します。
+
+@param r 生成する複素数の絶対値。
+
+@param theta 生成する複素数の偏角。単位はラジアンです。省略した場合は 0 です。
+
+例:
+
+  Complex.polar(2.0)            # => (2.0+0.0i)
+  Complex.polar(2.0, 0)         # => (2.0+0.0i)
+  Complex.polar(2.0, Math::PI)  # => (-2.0+2.4492127076447545e-16i)
 
 == Constants
 
---- I
-#@todo
+--- I -> Complex
 
+虚数単位です。(0+1i) を返します。

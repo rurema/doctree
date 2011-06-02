@@ -657,13 +657,40 @@ hash メソッドを適切に定義する必要があります。
 #@end
 
 #@since 1.9.1
+--- abs2 -> Numeric
 
---- real?    -> bool
+自身の絶対値の 2 乗を返します。
 
-自身が [[c:Complex]] かそのサブクラスのインスタンスでない場合に
-true を返します。そうでない場合に false を返します。
+例:
+
+  2.abs2    # => 4
+  -2.abs2   # => 4
+  2.0.abs2  # => 4
+  -2.0.abs2 # => 4
 
 Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+--- arg   -> 0 | Math::PI
+--- angle -> 0 | Math::PI
+--- phase -> 0 | Math::PI
+
+自身の偏角(正の数なら 0、負の数なら [[m:Math::PI]])を返します。
+
+例:
+
+  1.arg  # => 0
+  -1.arg # => 3.141592653589793
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+--- conj      -> Numeric
+--- conjugate -> Numeric
+
+自身を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+@see [[m:Complex#conj]]
 
 --- denominator -> Integer
 
@@ -673,6 +700,15 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 @see [[m:Numeric#numerator]]
 
+--- imag      -> 0
+--- imaginary -> 0
+
+常に 0 を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+@see [[m:Numeric#real]]、[[m:Complex#imag]]
+
 --- numerator -> Integer
 
 自身を [[c:Rational]] に変換した時の分子を返します。
@@ -681,13 +717,75 @@ Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
 
 @see [[m:Numeric#denominator]]
 
+--- polar -> [Numeric, Numeric]
+
+自身の絶対値と偏角を配列にして返します。正の数なら [self, 0]、負の数な
+ら [-self, [[m:Math::PI]]] を返します。
+
+例:
+
+  1.0.polar  # => [1.0, 0]
+  2.0.polar  # => [2.0, 0]
+  -1.0.polar # => [1.0, 3.141592653589793]
+  -2.0.polar # => [2.0, 3.141592653589793]
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+--- real     -> Numeric
+
+自身を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+@see [[m:Numeric#imag]]、[[m:Complex#real]]
+
+--- real?    -> bool
+
+自身が [[c:Complex]] かそのサブクラスのインスタンスでない場合に
+true を返します。そうでない場合に false を返します。
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+--- rect        -> [Numeric, Numeric]
+--- rectangular -> [Numeric, Numeric]
+
+[self, 0] を返します。
+
+例:
+
+  1.rect    # => [1, 0]
+  -1.rect   # => [-1, 0]
+  1.0.rect  # => [1.0, 0]
+  -1.0.rect # => [-1.0, 0]
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
+--- to_c -> Complex
+
+自身を複素数 ([[c:Complex]]) に変換します。Complex(self, 0) を返します。
+
+例:
+
+  1.to_c              # => (1+0i)
+  -1.to_c             # => (-1+0i)
+  1.0.to_c            # => (1.0+0i)
+  Rational(1, 2).to_c # => ((1/2)+0i)
+
+Numeric のサブクラスは、このメソッドを適切に再定義しなければなりません。
+
 #@end
 #@since 1.9.2
 --- i    -> Complex
-#@todo
-Complex(0, num) を返す。
 
-Returns the corresponding imaginary number.
-Not available for complex numbers.
+Complex(0, self) を返します。
+
+ただし、[[c:Complex]] オブジェクトでは利用できません。
+
+例:
+
+  10.i             # => (0+10i)
+  -10.i            # => (0-10i)
+  (0.1).i          # => (0+0.1i)
+  Rational(1, 2).i # => (0+(1/2)*i)
 
 #@end
