@@ -128,9 +128,9 @@ delegate                        snoozer05       done
 digest                          kouji
 digest/bubblebabble             okkez
 digest/hmac                     okkez           done
-digest/md5                      okkez
-digest/rmd160                   okkez
-digest/sha1                     okkez
+digest/md5                      okkez           done
+digest/rmd160                   okkez           done
+digest/sha1                     okkez           done
 digest/sha2                     okkez           done
 dl                                                          
 dl/Symbol                       
