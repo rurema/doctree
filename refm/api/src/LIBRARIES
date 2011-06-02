@@ -36,9 +36,7 @@ cgi/util
 #@since 1.9.1
 cmath
 #@end
-#@until 1.9.1
 complex
-#@end
 #@since 1.9.1
 continuation
 coverage

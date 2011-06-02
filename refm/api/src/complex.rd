@@ -1,4 +1,53 @@
+#@since 1.9.1
+require cmath
+#@end
+
 複素数を扱うためのライブラリです。
+
+#@since 1.9.1
+
+1.9系では [[c:Complex]] クラスは組み込みクラスになりました。
+
+= reopen Numeric
+
+== Instance Methods
+
+--- im -> Complex
+
+実数に対し、純虚数化した [[c:Complex]] クラスのオブジェクトを返します。
+
+例:
+
+  require "complex"
+  n = 100
+  n.im   #=> (0+100i)
+
+= reopen Complex
+
+== Class Methods
+
+--- generic?(other) -> bool
+
+other が [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクト
+かどうか判定します。
+
+@param other 判定対象のオブジェクト
+
+@return [[c:Integer]] [[c:Float]] [[c:Rational]] クラスのオブジェクトの
+        時 trueそれ以外の場合には false を返します。
+
+== Instance Methods
+
+--- image -> Numeric
+
+自身の虚部を返します。[[m:Complex#imag]] のエイリアスです。
+
+例:
+
+  require 'complex'
+  Complex(3, 2).image # => 2
+
+#@else
 
 #@#=== ChangeLog
 #@# *[2002-04-03] 初版 by [[unknown:すす|URL:mailto:sugawah@attglobal.net]]
@@ -650,3 +699,4 @@ atanh関数は以下で定義されます。
 
 #@end
 
+#@end
