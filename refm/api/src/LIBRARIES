@@ -58,6 +58,9 @@ digest
 #@since 1.8.6
 digest/bubblebabble
 #@end
+#@since 1.9.1
+digest/hmac
+#@end
 digest/md5
 digest/rmd160
 digest/sha1
