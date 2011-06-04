@@ -2281,11 +2281,11 @@ error_type として例外ではないクラスやオブジェクトを指定した場合、
   #例1
   begin
     raise NameError,"!!error!!"
-  rescue ArgumentError => rer
-  rescue NameError => rer
-  rescue TypeError => rer
+  rescue ArgumentError => err
+  rescue NameError => err
+  rescue TypeError => err
   ensure
-    p rer #=> #<NameError: !!error!!>
+    p err #=> #<NameError: !!error!!>
   end
   
   #例2
