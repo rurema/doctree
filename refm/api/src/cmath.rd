@@ -6,19 +6,23 @@
 
 include Math
 
-複素数演算をサポートするモジュールです。[[c:Math]] モジュールの複素数版です。
+複素数演算をサポートするモジュールです。
+
+[[c:Math]] モジュールの複素数版です。同名のメソッドを複素数対応します。
+従来の計算結果が必要な場合は、「メソッド名!」の形式で呼び出します。
 
 例:
 
   require "cmath"
   CMath.sqrt(-9)  # => (0+3.0i)
+  CMath.sqrt!(4)  # => 2.0
 
 == Module Functions
 
 --- exp!(x) -> Float
 
-x の指数関数([[m:Math::E]] の x 乗)の値を返します。[[m:Math.#exp]] のエ
-イリアスです。
+実数 x の指数関数([[m:Math::E]] の x 乗)の値を返します。
+[[m:Math.#exp]] のエイリアスです。
 
 @param x [[m:Math::E]] を x 乗する数を実数で指定します。
 
@@ -50,7 +54,7 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 --- log!(x) -> Float
 --- log!(x, b) -> Float
 
-x の対数を返します。[[m:Math.#log]] のエイリアスです。
+実数 x の対数を返します。[[m:Math.#log]] のエイリアスです。
 
 @param x 真数を正の実数で指定します。
 
@@ -96,8 +100,8 @@ z の対数を返します。
 --- log2(x) -> Float
 #@end
 
-2 を底とする x の対数 (binary logarithm) を返します。[[m:Math.#log2]]
-のエイリアスです。
+2 を底とする実数 x の対数 (binary logarithm) を返します。
+[[m:Math.#log2]]のエイリアスです。
 
 @param x 真数を正の実数で指定します。
 
@@ -117,7 +121,7 @@ z の対数を返します。
 
 --- log10!(x) -> Float
 
-x の常用対数を返します。[[m:Math.#log10]] のエイリアスです。
+実数 x の常用対数を返します。[[m:Math.#log10]] のエイリアスです。
 
 @param x 真数を正の実数で指定します。
 
@@ -156,117 +160,249 @@ z の立方根を返します。
 
 #@end
 
---- sqrt!
+--- sqrt!(x) -> Float
 
-#@todo
+実数 x の平方根を返します。[[m:Math.#sqrt]] のエイリアスです。
 
---- sqrt
+@raise Math::DomainError x が負の数である場合に発生します。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- sin!
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+例:
 
---- sin
+  require "cmath"
+  CMath.sqrt!(4.0) # => 2.0
+  CMath.sqrt!(9.0) # => 3.0
 
-#@todo
+--- sqrt(z) -> Float | Complex
 
---- cos!
+z の平方根を返します。
 
-#@todo
+例:
 
---- cos
+  require "cmath"
+  CMath.sqrt(-1)               # => (0+1.0i)
+  CMath.sqrt(1)                # => 1.0
+  CMath.sqrt(Complex(0, 8))    # => (2.0+2.0i)
 
-#@todo
+--- sin!(x) -> Float
 
---- tan!
+実数 x の正弦関数の値をラジアンで返します。[[m:Math.#sin]] のエイリアス
+です。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- tan
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+例:
 
---- sinh!
+  require "cmath"
+  CMath.sin!(0 * Math::PI / 4) # => 0.0
+  CMath.sin!(1 * Math::PI / 4) # => 0.7071067811865475
+  CMath.sin!(2 * Math::PI / 4) # => 1.0
 
-#@todo
+--- sin(z) -> Float | Complex
 
---- sinh
+z の正弦関数の値をラジアンで返します。
 
-#@todo
+--- cos!(x) -> Float
 
---- cosh!
+実数 x の余弦関数の値をラジアンで返します。[[m:Math.#cos]] のエイリアス
+です。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- cosh
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+例:
 
---- tanh!
+  require "cmath"
+  CMath.cos!(0 * Math::PI / 4) # => 1.0
+  CMath.cos!(1 * Math::PI / 4) # => 0.7071067811865476
+  CMath.cos!(4 * Math::PI / 4) # => -1.0
 
-#@todo
+--- cos(z) -> Float | Complex
 
---- tanh
+z の余弦関数の値をラジアンで返します。
 
-#@todo
+--- tan!(x) -> Float
 
---- asin!
+実数 x の正接関数の値をラジアンで返します。[[m:Math.#tan]] のエイリアス
+です。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- asin
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+例:
 
---- acos!
+  require "cmath"
+  CMath.tan!(0 * Math::PI / 4) # => 0.0
+  CMath.tan!(1 * Math::PI / 4) # => 1.0
+  CMath.tan!(4 * Math::PI / 4) # => 0.0
 
-#@todo
+--- tan(z) -> Float | Complex
 
---- acos
+z の正接関数の値をラジアンで返します。
 
-#@todo
+--- sinh!(x) -> Float
 
---- atan!
+実数 x の双曲線正弦関数の値を返します。[[m:Math.#sinh]] のエイリアスで
+す。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- atan
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+--- sinh(z) -> Float | Complex
 
---- atan2!
+z の双曲線正弦関数の値を返します。
 
-#@todo
+--- cosh!(x) -> Float
 
---- atan2
+実数 x の双曲線余弦関数の値を返します。[[m:Math.#cosh]] のエイリアスで
+す。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- asinh!
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+--- cosh(z) -> Float | Complex
 
---- asinh
+z の双曲線余弦関数の値を返します。
 
-#@todo
+--- tanh!(x) -> Float
 
---- acosh!
+実数 x の双曲線正接関数の値を返します。[[m:Math.#tanh]] のエイリアスで
+す。
 
-#@todo
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
---- acosh
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
 
-#@todo
+--- tanh(z) -> Float | Complex
 
---- atanh!
+z の双曲線正接関数の値を返します。
 
-#@todo
+--- asin!(x) -> Float
 
---- atanh
+実数 x の逆正弦関数の値をラジアンで返します。[[m:Math.#asin]] のエイリ
+アスです。
 
-#@todo
+@param x -1.0 <= x <= 1 の範囲内の実数。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- asin(z) -> Float | Complex
+
+z の逆正弦関数の値をラジアンで返します。
+
+--- acos!(x) -> Float
+
+実数 x の逆余弦関数の値をラジアンで返します。[[m:Math.#acos]] のエイリ
+アスです。
+
+@param x -1.0 <= x <= 1 の範囲内の実数
+
+@return 返される値の範囲は [0, +π] です。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- acos(z) -> Float | Complex
+
+z の逆余弦関数の値をラジアンで返します。
+
+--- atan!(x) -> Float
+
+実数 x の逆正接関数の値をラジアンで返します。[[m:Math.#atan]] のエイリ
+アスです。
+
+@param x 実数。
+
+@return 返される値の範囲は [-π/2, +π/2] です。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- atan(z) -> Float | Complex
+
+z の逆正接関数の値をラジアンで返します。
+
+--- atan2!(x, y) -> Float
+
+実数 x / y の逆正接関数の値を返します。[[m:Math.#atan2]] のエイリアスで
+す。
+
+@param x 実数。
+
+@param y 実数。
+
+@return 返される値の範囲は [-π/2, π/2] です。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- atan2(x, y) -> Float | Complex
+
+x / y の逆正接関数の値を返します。
+
+--- asinh!(x) -> Float
+
+実数 x の逆双曲線正弦関数の値を返します。[[m:Math.#asinh]] のエイリアスです。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- asinh(z) -> Float | Complex
+
+z の逆双曲線正弦関数の値を返します。
+
+--- acosh!(x) -> Float
+
+実数 x の逆双曲線余弦関数の値を返します。[[m:Math.#acosh]] のエイリアスです。
+
+@param x x >= 1 の範囲の実数。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- acosh(z) -> Float | Complex
+
+z の逆双曲線余弦関数の値を返します。
+
+--- atanh!(x) -> Float
+
+実数 x の逆双曲線正接関数の値を返します。[[m:Math.#atanh]] のエイリアスです。
+
+@param x -1 < x < 1 の実数。
+
+@return 実数。
+
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+
+@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+
+@raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+--- atanh(z) -> Float | Complex
+
+z の逆双曲線正接関数の値を返します。
 
 --- frexp
 
