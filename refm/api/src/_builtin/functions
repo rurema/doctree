@@ -2483,7 +2483,12 @@ bind によらずに特定のオブジェクトのコンテキストで expr を評価したい
   Complex('10@10') # => (-8.390715290764524-5.440211108893697i)
   Complex('_')     # => ArgumentError
 
-#@todo Complex('1+1j', '2+3j') のような 2 つ文字列を取る場合に対応する。
+r にも i にも複素数と解釈されるオブジェクトを指定した場合には、
+Complex(a, b) を a+bi として計算した [[c:Complex]] オブジェクトを返しま
+す。
+
+  Complex('1+1i', '2+3i')                          # => (-2+3i)
+  Complex('1+1i') + Complex('2+3i') * Complex('i') # => (-2+3i)
 
 @see [[m:Complex.rect]]、[[m:Complex.rectangular]]
 
