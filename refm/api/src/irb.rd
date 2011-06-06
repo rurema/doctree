@@ -429,7 +429,7 @@ n は以下のいずれかの値で指定します。
   * スレッド ID
   * 各インタプリタの self (「irb(obj)」で起動した時の obj)
 
---- souce(path)
+--- source(path)
 --- irb_source(path)
 #@todo
 
