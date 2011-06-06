@@ -278,7 +278,7 @@ sync                            kouya           done
 syslog                          kouya           done
 tempfile                        kouya           done
 test/unit                       sho-h           done
-thread                          m-kawato
+thread                          m-kawato        done
 thwait                          kouya           done
 time                            kouya           done
 timeout                         kouya           done
