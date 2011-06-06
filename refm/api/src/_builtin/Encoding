@@ -146,8 +146,10 @@ Ruby ¤Ï¥µ¥İ¡¼¥È¤·¤Æ¤¤¤Ê¤¤¤¬³ÈÄ¥¥é¥¤¥Ö¥é¥ê¤¬¥µ¥İ¡¼¥È¤·¤Æ¤¤¤ë¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò°·¤
 
 #@since 1.9.2
 --- ascii_compatible? -> bool
-#@todo
-Returns whether ASCII-compatible or not.
+
+¼«¿È¤¬ ASCII ¸ß´¹¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¢¤ë¾ì¹ç¿¿ÊÖ¤·¤Ş¤¹¡£
+¤½¤¦¤Ç¤Ê¤¤¾ì¹ç¤Ïµ¶¤òÊÖ¤·¤Ş¤¹¡£
+
 
 Îã:
   Encoding::UTF_8.ascii_compatible?     #=> true
