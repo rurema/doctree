@@ -302,6 +302,7 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
 
 --- to_r             -> Rational
 #@since 1.9.2
+--- rationalize      -> Rational
 --- rationalize(eps) -> Rational
 #@end
 

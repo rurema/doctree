@@ -6,7 +6,8 @@ require cmath
 
 #@since 1.9.1
 
-1.9系では [[c:Complex]] クラスは組み込みクラスになりました。
+1.9系では [[c:Complex]] クラスは組み込みクラスになりました。complex ラ
+イブラリは互換性のために残されています。
 
 = reopen Numeric
 
