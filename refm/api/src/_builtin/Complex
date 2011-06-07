@@ -155,6 +155,11 @@
   Complex(-0.0, 0).arg            #=>  3.141592653589793
   Complex(-0.0, -0.0).arg         #=> -3.141592653589793
 
+#@until 1.9.3
+[注意] 1.9.2 以下では 0+0i に対して呼び出すと例外
+([[c:Math::DomainError]])が発生するバグがあります。
+#@end
+
 --- coerce(other) -> [Complex, Complex]
 
 other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
