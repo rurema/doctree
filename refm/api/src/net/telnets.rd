@@ -6,7 +6,11 @@ telnet の STATT-TLS option を実装しています。
 これが偽である場合にはサーバが STATT-TLS option を実装していない
 など、SSLが利用できないことを意味します。
 
+SSLの証明書などのパラメータを渡す方法は存在しません。
+
 このライブラリは 1.9.1 以降廃止されます。
+このライブラリの利用は推奨されません。sshなど、他の手段を使用してください。
+
 = reopen Net::Telnet
 
 == Instance Methods
