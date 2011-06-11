@@ -392,13 +392,13 @@ SSL による通信利用するならば真を返します。
 SSL による通信利用するように設定します。
 
 verify_or_params にハッシュを渡した場合には、接続時に生成される
-[[c:OpenSSL::SSLContext]] オブジェクトの
-[[m:OpenSSL::SSLContext#set_params]] に渡されます。
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSL::SSLContext#set_params]] に渡されます。
 certs は無視されます。
 
 verify_or_params がハッシュでない場合には、接続時に生成される
-[[c:OpenSSL::SSLContext]] オブジェクトの
-[[m:OpenSSL::SSLContext#set_params]] に
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSL::SSLContext#set_params]] に
   { :verify_mode => verify_or_params, :ca_path => certs }
 というハッシュが渡されます。
 
@@ -412,8 +412,8 @@ SSL での接続を有効にしている場合には、
 SSL の設定のハッシュを返します。
 
 このハッシュは、接続時に生成される
-[[c:OpenSSL::SSLContext]] オブジェクトの
-[[m:OpenSSL::SSLContext#set_params]] に渡されます。
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSL::SSLContext#set_params]] に渡されます。
 このハッシュを変更することで、利用されるパラメータが
 変更されます。
 
@@ -449,13 +449,13 @@ SSL を利用しないように設定します。
 このインスタンスが SSL による通信を利用するように設定します。
 
 verify_or_params にハッシュを渡した場合には、接続時に生成される
-[[c:OpenSSL::SSLContext]] オブジェクトの
-[[m:OpenSSL::SSLContext#set_params]] に渡されます。
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSL::SSLContext#set_params]] に渡されます。
 certs は無視されます。
 
 verify_or_params がハッシュでない場合には、接続時に生成される
-[[c:OpenSSL::SSLContext]] オブジェクトの
-[[m:OpenSSL::SSLContext#set_params]] に
+[[c:OpenSSL::SSL::SSLContext]] オブジェクトの
+[[m:OpenSSL::SSL::SSLContext#set_params]] に
   { :verify_mode => verify_or_params, :ca_path => certs }
 というハッシュが渡されます。
 
