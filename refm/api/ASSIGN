@@ -186,7 +186,7 @@ net/ftp                         ohai            done
 net/ftptls                      ohai
 net/http                        ohai            done
 net/https                       ohai            done
-net/imap
+net/imap                        ohai
 net/pop                         ohai            done
 net/smtp                        ohai            done
 net/telnet                      ohai            done
