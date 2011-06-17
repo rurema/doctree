@@ -45,7 +45,7 @@ Ruby起動時の初期値は nil です。
  if %r[<a href="(.*?)">(.*?)</a>] =~ str
    p $& 
  end
- #=> "<p><a href=\"http://example.com\">example.com</a></p>"
+ #=> "<a href=\"http://example.com\">example.com</a>"
 
 
 --- $~ -> MatchData | nil
