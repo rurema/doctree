@@ -3,6 +3,9 @@ include URI
 
 すべての URI クラスの基底クラスです。
 
+hash と eql? が再定義されているため、[[c:Hash]] のキーとして
+利用することができます。
+
 == Class Methods
 
 --- default_port    -> Integer | nil
@@ -411,7 +414,6 @@ URI オブジェクトを正規化して返します。ホスト名を小文字にし、パスと
   p u.normalize.to_s                  #=> "http://example.com/"
 
 --- to_s      -> String
---- to_str    -> String
 
 自身が表す URI を文字列として返します。
 

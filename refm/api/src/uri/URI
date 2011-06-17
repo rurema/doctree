@@ -42,7 +42,7 @@ URI を要素に分割した文字列の配列を返します。
 与えられた URI から該当する [[c:URI::Generic]] のサブクラスのインスタンスを生成して
 返します。scheme が指定されていない場合は、[[c:URI::Generic]] オブジェクトを返します。
 
-@param url パースしたい URI を文字列として与えます。
+@param uri_str パースしたい URI を文字列として与えます。
 
 @raise URI::InvalidURIError パースに失敗した場合に発生します。
 
@@ -67,6 +67,8 @@ URI オブジェクトを返します。
 
   URI.parse(uri_str) + path + ...
 
+@param uri_str URI 文字列
+@param path 後ろに連結する文字列
 @raise URI::InvalidURIError パースに失敗した場合に発生します。
 
 例:

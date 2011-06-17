@@ -35,7 +35,7 @@ URI (Uniform Resource Identifier) のためのライブラリです。
 与えられた URI から該当する [[c:URI::Generic]] のサブクラスのインスタンスを生成して
 返します。scheme が指定されていない場合は、[[c:URI::Generic]] オブジェクトを返します。
 
-@param url パースしたい URI を文字列として与えます。
+@param uri_str パースしたい URI を文字列として与えます。
 
 @raise URI::InvalidURIError パースに失敗した場合に発生します。
 
