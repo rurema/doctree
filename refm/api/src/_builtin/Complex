@@ -99,6 +99,7 @@
 
   Complex(2, 1) == Complex(1) # => false
   Complex(1, 0) == Complex(1) # => true
+  Complex(1, 0) == 1          # => true
 
 --- abs       -> Float
 --- magnitude -> Float
