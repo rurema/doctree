@@ -55,7 +55,7 @@ config.charset ¤Î¥é¥¤¥»¥ó¥¹¤Ï LGPL ¤Ê¤Î¤Ç¡¢À¸À®¤µ¤ì¤¿ iconv.rb ¤Ë¤â LGPL ¤¬Å¬ÍÑ¤
 (3) (2) ¤ÎÃ»½Ì·Ï
       Iconv.iconv(to, from, *input.to_a)
 
-=== ´Ä¶­°ÍÂ¸¤Îµ¡Ç½
+===[a:gnu_options] ´Ä¶­°ÍÂ¸¤Îµ¡Ç½
 
 GNU libiconv ¤Ç iconv ¥é¥¤¥Ö¥é¥ê¤¬¥Ó¥ë¥É¤·¤Æ¤¢¤ë¾ì¹ç¡¢
 [[m:Iconv#iconv]]¡¢[[m:Iconv.open]]¡¢[[m:Iconv.iconv]] ¤ÎÂè°ì°ú¿ô to ¤Ë
@@ -93,7 +93,11 @@ iconv ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
 
 == Class Methods
 
+#@since 1.9.1
 --- new(to, from)    -> Iconv
+#@else
+--- new(to, from, options = nil)    -> Iconv
+#@end
 
 Ê¸»ú¥³¡¼¥É from ¤«¤é to ¤ØÊÑ´¹¤¹¤ëIconv¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¤Þ¤¹¡£
 
@@ -101,11 +105,24 @@ iconv ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
 
 @param from ÊÑ´¹Á°¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
 
+#@since 1.9.1
+@param options ¥Ï¥Ã¥·¥å·Á¼°¤Ç transliterate¡¢discard_ilseq ¤Ë¿¿¤«µ¶¤«¤ò
+               Í¿¤¨¤Æ[[ref:lib:iconv#gnu_options]] ¤ÈÆ±¤¸Áàºî¤ò¹Ô¤¤¤Þ¤¹¡£
+#@end
+
 @raise TypeError to ¤ä from ¤¬ String ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
 
 @raise Iconv::InvalidEncoding to ¤ä from ¤Ç»ØÄê¤µ¤ì¤¿Ê¸»ú¥³¡¼¥ÉÂÎ·Ï¤¬¸«¤Ä¤«¤é¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
 
 @raise SystemCallError [[man:iconv_open(3)]] ¤¬¼ºÇÔ¤·¤¿¤È¤­È¯À¸¤·¤Þ¤¹¡£
+
+#@since 1.9.1
+@raise ArgumentError options ¤Ë transliterate¡¢discard_ilseq °Ê³°¤ò»ØÄê
+                     ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+
+@raise NotImplementedError ¼Â¹Ô¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ç¥µ¥Ý¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤¤¥ª
+                           ¥×¥·¥ç¥ó¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+#@end
 
 Îã:
   require 'iconv'
@@ -114,8 +131,13 @@ iconv ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
 
 @see [[m:Iconv.open]]
 
+#@since 1.9.1
 --- open(to, from)               -> Iconv
 --- open(to, from) {|cd| ...}    -> object
+#@else
+--- open(to, from, options = nil)               -> Iconv
+--- open(to, from, options = nil) {|cd| ...}    -> object
+#@end
 
 ¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤Ê¤¤¾ì¹ç¤Ï [[m:Iconv.new]] ¤ÈÅù²Á¤Ç¤¹¡£
 ¥Ö¥í¥Ã¥¯¤¬Í¿¤¨¤é¤ì¤ë¤È¡¢Iconv ¥ª¥Ö¥¸¥§¥¯¥È¤òÀ¸À®¤·¡¢¤½¤ì¤ò°ú¿ô¤È¤·¤Æ¥Ö¥í¥Ã¥¯¤ò¼Â¹Ô¤·¤Þ¤¹¡£
@@ -126,9 +148,22 @@ iconv ´Ø¿ô¤Î¥é¥Ã¥Ñ¡¼¥¯¥é¥¹¤Ç¤¹¡£
 
 @param from ÊÑ´¹Á°¤ÎÊ¸»ú¥³¡¼¥ÉÂÎ·Ï¤òÉ½¤¹Ê¸»úÎó¤ò»ØÄê¤·¤Þ¤¹¡£
 
+#@since 1.9.1
+@param options ¥Ï¥Ã¥·¥å·Á¼°¤Ç transliterate¡¢discard_ilseq ¤Ë¿¿¤«µ¶¤«¤ò
+               Í¿¤¨¤Æ[[ref:lib:iconv#gnu_options]] ¤ÈÆ±¤¸Áàºî¤ò¹Ô¤¤¤Þ¤¹¡£
+#@end
+
 @raise TypeError to ¤ä from ¤¬ String ¥ª¥Ö¥¸¥§¥¯¥È¤Ç¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
 
 @raise Iconv::InvalidEncoding to ¤ä from ¤Ç»ØÄê¤µ¤ì¤¿Ê¸»ú¥³¡¼¥ÉÂÎ·Ï¤¬¸«¤Ä¤«¤é¤Ê¤¤¤È¤­È¯À¸¤·¤Þ¤¹¡£
+
+#@since 1.9.1
+@raise ArgumentError options ¤Ë transliterate¡¢discard_ilseq °Ê³°¤ò»ØÄê
+                     ¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+
+@raise NotImplementedError ¼Â¹Ô¥×¥é¥Ã¥È¥Õ¥©¡¼¥à¤Ç¥µ¥Ý¡¼¥È¤µ¤ì¤Æ¤¤¤Ê¤¤¥ª
+                           ¥×¥·¥ç¥ó¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+#@end
 
 Îã:
   euc = ["a4a2a4a4a4a6a4a8a4aa"].pack("H*") # ¤¢¤¤¤¦¤¨¤ª¤ÎEUC-JP¥³¡¼¥É
