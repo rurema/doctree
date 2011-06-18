@@ -217,7 +217,7 @@ pty                             okkez           done
 rake                            okkez           done
 racc/parser
 rational                        sho-h           done
-rbconfig
+rbconfig                        okkez
 rdoc                            sho-h
 readbytes                       okkez           done
 readline                        kouji           done
