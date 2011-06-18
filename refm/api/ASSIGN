@@ -162,7 +162,7 @@ generator                       okkez           done
 getoptlong                      okkez           done
 getopts                                         done
 gserver                         okkez           done
-iconv                           sho-h
+iconv                           sho-h           done
 importenv                       mukai           done
 io/nonblock                     ohai            done
 io/wait                         ohai            done
