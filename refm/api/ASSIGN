@@ -218,7 +218,7 @@ rake                            okkez           done
 racc/parser
 rational                        sho-h           done
 rbconfig
-rdoc
+rdoc                            sho-h
 readbytes                       okkez           done
 readline                        kouji           done
 resolv                          ohai            done
