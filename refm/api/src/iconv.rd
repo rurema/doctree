@@ -94,9 +94,9 @@ iconv 関数のラッパークラスです。
 == Class Methods
 
 #@since 1.9.1
---- new(to, from)    -> Iconv
-#@else
 --- new(to, from, options = nil)    -> Iconv
+#@else
+--- new(to, from)    -> Iconv
 #@end
 
 文字コード from から to へ変換するIconvオブジェクトを生成します。
@@ -132,11 +132,11 @@ iconv 関数のラッパークラスです。
 @see [[m:Iconv.open]]
 
 #@since 1.9.1
---- open(to, from)               -> Iconv
---- open(to, from) {|cd| ...}    -> object
-#@else
 --- open(to, from, options = nil)               -> Iconv
 --- open(to, from, options = nil) {|cd| ...}    -> object
+#@else
+--- open(to, from)               -> Iconv
+--- open(to, from) {|cd| ...}    -> object
 #@end
 
 ブロックが与えられない場合は [[m:Iconv.new]] と等価です。
