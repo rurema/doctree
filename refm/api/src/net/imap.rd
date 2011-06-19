@@ -1,9 +1,76 @@
-IMAP プロトコルを扱うライブラリです。
+Net::IMAP は Internet Message Access Protocol (IMAP) の
+クライアントライブラリです。[[RFC:2060]] を元に
+実装されています。
 
-Net::IMAP implements Internet Message Access Protocol (IMAP) clients.
-The IMAP protocol is described in [[RFC:2060]].
+=== IMAP の概要
 
-Net::IMAP supports multiple commands. For example,
+IMAPを利用するには、まずサーバに接続し、
+[[m:Net::IMAP#authenticate]] もしくは
+[[m:Net::IMAP#login]] で認証します。
+IMAP ではメールボックスという概念が重要です。
+メールボックスは階層的な名前を持ちます。
+各メールボックスはメールを保持することができます。
+メールボックスの実装はサーバソフトウェアによって異なります。
+Unixシステムでは、ディレクトリ階層上の
+ファイルを個々のメールボックスとみなして実装されることが多いです。
+
+メールボックス内のメッセージ(メール)を処理する場合、
+まず [[m:Net::IMAP#select]] もしくは
+[[m:Net::IMAP#examine]] で処理対象のメールボックスを
+指定する必要があります。これらの操作が成功したならば、
+「selected」状態に移行し、対象のメールボックスが「currentな」
+メールボックスとなります。このようにしてメールボックスを
+選択してから、selected状態を終える(別のメールボックスを選択したり、
+接続を終了したり)までをセッションと呼びます。
+
+メッセージには2種類の識別子が存在します。message sequence number と
+UID です。
+
+message sequence number はメールボックス内の各メッセージに1から順に
+振られた番号です。セッション中にcurrentなメールボックスに
+新たなメッセージが追加された場合、そのメッセージの
+message sequence number は
+最後のメッセージの message sequence number+1となります。
+メッセージをメールボックスから消した場合には、連番の穴を埋めるように
+message sequence number が付け替えられます。
+
+一方、UID はセッションを越えて恒久的に保持されます。
+あるメールボックス内の異なる2つのメッセージが同じ  UID 
+を持つことはありません。
+これは、メッセージがメールボックスから削除された後でも成立します。
+
+しかし、UID はメールボックス内で昇順であることが
+規格上要請されているので、
+IMAP を使わないメールアプリケーションがメールの順番を
+変えてしまった場合は、UID が振り直されます。
+
+=== 例
+
+デフォルトのメールボックス(INBOX)の送り元とサブジェクトを表示する。
+  imap = Net::IMAP.new('mail.example.com')
+  imap.authenticate('LOGIN', 'joe_user', 'joes_password')
+  imap.examine('INBOX')
+  imap.search(["RECENT"]).each do |message_id|
+    envelope = imap.fetch(message_id, "ENVELOPE")[0].attr["ENVELOPE"]
+    puts "#{envelope.from[0].name}: \t#{envelope.subject}"
+  end
+
+2003年4月のメールをすべて Mail/sent-mail から "Mail/sent-apr03" へ移動させる
+
+  imap = Net::IMAP.new('mail.example.com')
+  imap.authenticate('LOGIN', 'joe_user', 'joes_password')
+  imap.select('Mail/sent-mail')
+  if not imap.list('Mail/', 'sent-apr03')
+    imap.create('Mail/sent-apr03')
+  end
+  imap.search(["BEFORE", "30-Apr-2003", "SINCE", "1-Apr-2003"]).each do |message_id|
+    imap.copy(message_id, "Mail/sent-apr03")
+    imap.store(message_id, "+FLAGS", [:Deleted])
+  end
+  imap.expunge
+
+=== スレッド安全性
+Net::IMAP は並列実行をサポートしています。例として、
 
   imap = Net::IMAP.new("imap.foo.net", "imap2")
   imap.authenticate("cram-md5", "bar", "password")
@@ -13,7 +80,54 @@ Net::IMAP supports multiple commands. For example,
   fetch_result = fetch_thread.value
   imap.disconnect
 
-This script invokes the FETCH command and the SEARCH command concurrently.
+とすると FETCH コマンドと SEARCH コマンドを並列に実行します。
+
+=== エラーについて
+IMAP サーバは以下の3種類のエラーを送ります。
+
+: NO
+  コマンドが正常に完了しなかったことを意味します。
+  例えば、ログインでのユーザ名/パスワードが間違っていた、
+  選択したメールボックスが存在しない、などです。
+
+: BAD
+  クライアントからのリクエストをサーバが理解できなかった
+  ことを意味します。
+  クライアントの現在の状態では使えないコマンドを使おうとした
+  場合にも発生します。例えば、
+  selected状態(SELECT/EXAMINEでこの状態に移行する)にならずに
+  SEARCH コマンドを使おうとした場合に発生します。
+  サーバの内部エラー(ディスクが壊れたなど)の場合も
+  このエラーが発生します。
+
+: BYE
+  サーバが接続を切ろうとしていることを意味します。
+  これは通常のログアウト処理で発生します。
+  また、ログイン時にサーバが(なんらかの理由で)接続
+  したくない場合にも発生します。
+  それ以外では、サーバがシャットダウンする場合か
+  サーバがタイムアウトする場合に発生します。
+
+これらのエラーはそれぞれ
+  * [[c:Net::IMAP::NoResponseError]]
+  * [[c:Net::IMAP::BadResponseError]]
+  * [[c:Net::IMAP::ByeResponseError]]
+という例外クラスに対応しています。
+原理的には、これらの例外はサーバにコマンドを送った場合には
+常に発生する可能性があります。しかし、このドキュメントでは
+よくあるエラーのみ解説します。
+
+IMAP は Socket で通信をするため、IMAPクラスのメソッドは
+Socket 関連のエラーが発生するかもしれません。例えば、
+通信中に接続が切れると [[c:Errno::EPIPE]] 例外が
+発生します。詳しくは [[c:Socket]] などを見てください。
+
+[[c:Net::IMAP::DataFormatError]]、
+[[c:Net::IMAP::ResponseParseError]] という例外クラスも
+存在します。前者はデータのフォーマットが正しくない場合に、
+後者はサーバからのレスポンスがパースできない場合に発生します。
+これらのエラーはこのライブラリもしくはサーバに深刻な問題が
+あることを意味します。
 
 === References
 
@@ -88,6 +202,15 @@ Adds an authenticator for Net::IMAP#authenticate.
 #@todo
 
 --- encode_utf7
+#@todo
+
+--- format_date
+#@todo
+--- format_datetime
+#@todo
+--- max_flag_count
+#@todo
+--- max_flag_count=
 #@todo
 
 == Methods
@@ -442,7 +565,9 @@ message sequence numbers.
 
 The thread to receive exceptions.
 
-
+--- idle
+--- idle_done
+#@todo
 
 = class Net::IMAP::ContinuationRequest < Struct
 
@@ -1230,34 +1355,41 @@ See [[m:Net::IMAP#authenticate]].
 
 = class Net::IMAP::Error < StandardError
 
-Superclass of all IMAP errors.
+すべての IMAP 例外クラスのスーパークラス。
 
 = class Net::IMAP::DataFormatError < Net::IMAP::Error
 
-Error raised when data is in the incorrect format.
+データフォーマットが正しくない場合に発生する例外のクラスです。
 
 = class Net::IMAP::ResponseParseError < Net::IMAP::Error
 
-Error raised when a response from the server is non-parseable.
+サーバからのレスポンスが正しくパースできない場合に発生する
+例外のクラスです。
 
 = class Net::IMAP::ResponseError < Net::IMAP::Error
 
-Superclass of all errors used to encapsulate "fail" responses
-from the server.
+サーバからのレスポンスがエラーを示している場合に発生する例外
+のクラスです。
+
+実際にはこれを継承した
+  * [[c:Net::IMAP::NoResponseError]]
+  * [[c:Net::IMAP::BadResponseError]]
+  * [[c:Net::IMAP::ByeResponseError]]
+これらのクラスの例外が発生します。
 
 = class Net::IMAP::NoResponseError < Net::IMAP::ResponseError
 
-Error raised upon a "NO" response from the server, indicating
-that the client command could not be completed successfully.
+サーバから "NO" レスポンスが来た場合に発生する例外のクラスです。
+コマンドが正常に完了しなかった場合に発生します。
 
 = class Net::IMAP::BadResponseError < Net::IMAP::ResponseError
 
-Error raised upon a "BAD" response from the server, indicating
-that the client command violated the IMAP protocol, or an internal
-server failure has occurred.
+サーバから "BAD" レスポンスが来た場合に発生する例外のクラスです。
+クライアントからのコマンドが IMAP の規格から外れている場合や
+サーバ内部エラーの場合に発生します。
 
 = class Net::IMAP::ByeResponseError < Net::IMAP::ResponseError
 
-Error raised upon a "BYE" response from the server, indicating 
-that the client is not being allowed to login, or has been timed
-out due to inactivity.
+サーバから "BYE" レスポンスが来た場合に発生する例外のクラスです。
+ログインが拒否された場合や、クライアントが無反応で
+タイムアウトした場合に発生します。
