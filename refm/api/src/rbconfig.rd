@@ -31,6 +31,10 @@ RbConfig モジュールを Config と同じものとして定義します。
 
   RbConfig.expand("$(bindir)") # => /home/foobar/all-ruby/ruby19x/bin
 
+@param val 展開したい変数名を Makefile に書く形式で指定します。
+
+@param config 変数展開に使用する設定を [[c:Hash]] で指定します。
+  
 #@since 1.9.1
 @see [[m:RbConfig::MAKEFILE_CONFIG]]
 #@else
