@@ -13,7 +13,7 @@ RFCではデータコネクションを TLS で暗号化する機能が定義されていますが、
 = class Net::FTPTLS < Net::FTP
 FTP over SSL/TLS を実装したクラスです。
 
-[[m:Net::FTP]] を継承しているため、FTP クラスのメソッドが利用できます。
+[[c:Net::FTP]] を継承しているため、FTP クラスのメソッドが利用できます。
 
 == Instance Methods
 

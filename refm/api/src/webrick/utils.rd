@@ -21,8 +21,8 @@
 
 --- su(user) -> ()
 
-指定されたユーザに [[m:Process::Sys.setuid]],
-[[m:Process::Sys.setgid]] します。
+指定されたユーザに [[m:Process::Sys.#setuid]],
+[[m:Process::Sys.#setgid]] します。
 
 setuid できないプラットフォームでは警告を表示し、何もしません。
 

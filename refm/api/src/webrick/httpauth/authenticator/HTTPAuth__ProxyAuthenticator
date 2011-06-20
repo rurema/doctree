@@ -19,5 +19,5 @@
 
 --- AuthException -> Class
 
-[[c:HTTPStatus::ProxyAuthenticationRequired]] です。
+[[c:WEBrick::HTTPStatus::ProxyAuthenticationRequired]] です。
 
