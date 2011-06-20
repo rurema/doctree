@@ -1,4 +1,4 @@
-Net::IMAP は Internet Message Access Protocol (IMAP) の
+このライブラリは Internet Message Access Protocol (IMAP) の
 クライアントライブラリです。[[RFC:2060]] を元に
 実装されています。
 
@@ -168,50 +168,136 @@ Socket 関連のエラーが発生するかもしれません。例えば、
 
 = class Net::IMAP < Object
 
-IMAP access class.
+IMAP 接続を表現するクラスです。
 
 == Class Methods
 
---- new(host, port = 143, usessl = false, certs = nil, verify = false)
-#@todo
+--- new(host, port = 143, usessl = false, certs = nil, verify = false) -> Net::IMAP
+--- new(host, options) -> Net::IMAP
 
-Creates a new Net::IMAP object and connects it to the specified
-port on the named host.  If usessl is true, then an attempt will
-be made to use SSL (now TLS) to connect to the server.  For this
-to work OpenSSL[OSSL] and the Ruby OpenSSL ([[lib:openssl]])
-extension need to be installed.  The certs parameter indicates
-the path or file containing the CA cert of the server, and the
-verify parameter is for the OpenSSL verification callback.
+新たな Net::IMAP オブジェクトを生成し、指定したホストの
+指定したポートに接続し、接続語の IMAP オブジェクトを返します。
 
---- debug
-#@todo
+usessl が真ならば、サーバに繋ぐのに SSL/TLS を用います。
+SSL/TLS での接続には OpenSSL と [[lib:openssl]] が使える必要があります。
+certs は利用する証明書のファイル名もしくは証明書があるディレクトリ名を
+文字列で渡します。
+certs に nil を渡すと、OpenSSL のデフォルトの証明書を使います。
+verify は接続先を検証するかを真偽値で設定します。
+真が [[m:OpenSSL::SSL::VERIFY_PEER]] に、
+偽が [[m:OpenSSL::SSL::VERIFY_NONE]] に対応します。
 
-Returns the debug mode.
+パラメータは Hash で渡すこともできます。以下のキーを使うことができます。
+  * :port ポート番号
+    省略時は SSL/TLS 使用時→993 不使用時→143 となります。
+  * :ssl OpenSSL に渡すパラメータをハッシュで指定します。
+    省略時は SSL/TLS を使わず接続します。
+    これで渡せるパラメータは
+    [[m:OpenSSL::SSL::SSLContext#set_params]] と同じです。
+これの :ssl パラメータを使うことで、OpenSSL のパラメータを詳細に
+調整できます。
+
+
+例
+  imap = Net::IMAP.new('imap.example.com', :port => 993,
+                   :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
+                             :timeout => 600 } )
+
+@param host 接続するホスト名の文字列
+@param port 接続するポート番号
+@param usessl 真でSSL/TLSを使う
+@param certs 証明書のファイル名/ディレクトリ名の文字列
+@param verify 真で接続先を検証する
+@param options 各種接続パラメータのハッシュ
+
+--- debug -> bool
+
+デバッグモードが on になっていれば真を返します。
+
+@see [[m:Net::IMAP#debug=]]
 
 --- debug=(val)
-#@todo
+デバッグモードの on/off をします。
 
-Sets the debug mode.
+真を渡すと on になります。
 
---- add_authenticator(auth_type, authenticator)
-#@todo
+@param val 設定するデバッグモードの on/off の真偽値
+@see [[m:Net::IMAP#debug]]
 
-Adds an authenticator for Net::IMAP#authenticate.
+--- add_authenticator(auth_type, authenticator) -> ()
+[[m:Net::IMAP#authenticate]] で使う 
+認証用クラスを設定します。
 
---- decode_utf7
-#@todo
+imap ライブラリに新たな認証方式を追加するために用います。
 
---- encode_utf7
-#@todo
+通常は使う必要はないでしょう。もしこれを用いて
+認証方式を追加する場合は net/imap.rb の
+Net::IMAP::LoginAuthenticator などを参考にしてください。
 
---- format_date
-#@todo
---- format_datetime
-#@todo
---- max_flag_count
-#@todo
---- max_flag_count=
-#@todo
+@param auth_type 認証の種類(文字列)
+@param authenticator 認証クラス(Class オブジェクト)
+
+--- decode_utf7(str) -> String
+modified UTF-7 の文字列を UTF-8 の文字列に変換します。
+
+modified UTF-7 は IMAP のメールボックス名に使われるエンコーディングで、
+UTF-7 を修正したものです。
+
+詳しくは [[RFC:2060]] の 5.1.3 を参照してください。
+
+Net::IMAP ではメールボックス名のエンコードを自動的変換「しない」
+ことに注意してください。必要があればユーザが変換すべきです。
+
+@param str 変換対象の modified UTF-7 でエンコードされた文字列
+@see [[m:Net::IMAP.encode_utf7]]
+--- encode_utf7(str) -> String
+UTF-8 の文字列を modified UTF-7 の文字列に変換します。
+
+modified UTF-7 は IMAP のメールボックス名に使われるエンコーディングで、
+UTF-7 を修正したものです。
+
+詳しくは [[m:Net::IMAP.encode_utf7]] を見てください。
+
+@param str 変換対象の UTF-8 でエンコードされた文字列
+@see [[m:Net::IMAP.decode_utf7]]
+
+#@since 1.9.1
+
+--- format_date(time) -> String
+時刻オブジェクトを IMAP の日付フォーマットでの文字列に変換します。
+
+  Net::IMAP.format_date(Time.new(2011, 6, 20))
+  # => "20-Jun-2011"
+
+@param time 変換する時刻オブジェクト
+
+--- format_datetime(time) -> String
+時刻オブジェクトを IMAP の日付時刻フォーマットでの文字列に変換します
+
+  Net::IMAP.format_datetime(Time.new(2011, 6, 20, 13, 20, 1))
+  # => "20-Jun-2011 13:20 +0900"
+
+@param time 変換する時刻オブジェクト
+
+--- max_flag_count -> Integer
+サーバからのレスポンスに含まれる flag の上限を返します。
+
+これを越えた flag がレスポンスに含まれている場合は、
+[[c:Net::IMAP::FlagCountError]] 例外が発生します。
+
+@see [[m:Net::IMAP#max_flag_count=]]
+
+--- max_flag_count=(count)
+サーバからのレスポンスに含まれる flag の上限を設定します。
+
+これを越えた flag がレスポンスに含まれている場合は、
+[[c:Net::IMAP::FlagCountError]] 例外が発生します。
+
+デフォルトは 10000 です。通常は変える必要はないでしょう。
+
+@param 設定する最大値を
+@see [[m:Net::IMAP#max_flag_count=]]
+#@end
 
 == Methods
 
@@ -1393,3 +1479,12 @@ See [[m:Net::IMAP#authenticate]].
 サーバから "BYE" レスポンスが来た場合に発生する例外のクラスです。
 ログインが拒否された場合や、クライアントが無反応で
 タイムアウトした場合に発生します。
+
+#@since 1.9.1
+= class Net::IMAP::FlagCountError < Net::IMAP::Error
+
+サーバからのレスポンスに含まれるフラグが多すぎるときに発生する例外です。
+
+この上限は [[m:Net::IMAP#max_flag_count=]] で設定します。
+
+#@end
