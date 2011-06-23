@@ -7,6 +7,11 @@ extconf.rb の書きかたについては、
 Ruby のアーカイブに含まれる README.EXT (日本語版は README.EXT.ja)
 も参照してください。
 
+このライブラリでは extconf.rb を記述するのに有用なメソッドを定義しています。
+ヘッダファイルの存在チェック、ライブラリの存在チェックなど、
+システム間の差異を調べシステムに適した Makefile を生成するために
+これらのメソッドが必要となります。
+
 === 使い方
 
 架空の拡張ライブラリ foo.so を作成することを考えます。
@@ -39,15 +44,16 @@ foo.so の extconf.rb では dir_config('bar') を実行しているので、
   $ ruby extconf.rb --with-bar-dir=/usr/local
 
 dir_config 関数の詳細については
-[[m:Kernel#dir_config]] を参照してください。
+[[m:Kernel.#dir_config]] を参照してください。
 
 === configure オプション
 
 configure オプションとは Ruby インタプリタのコンパイル時に指定された
 configure スクリプトのオプション、
 または extconf.rb 実行時のオプションのことです。
+
 extconf.rb の作成者は任意のオプションを定義できます。
-[[m:Kernel#arg_config]] も参照してください。
+[[m:Kernel.#arg_config]] も参照してください。
 
 また、以下のオプションがデフォルトで利用可能です。
 
@@ -144,42 +150,166 @@ extconf.rb が生成する Makefile には以下のターゲットが定義されています。
     その配下の ruby スクリプト (*.rb ファイル) を、
     ディレクトリ階層を保ったまま $sitelibdir にインストールします。
 
-
-
 = reopen Kernel
 
 == Private Instance Methods
-#@# 以下は、extconf.rb を記述するのに有用な関数です。
-#@# ヘッダファイルの存在チェック、ライブラリの存在チェックなど、
-#@# システム間の差異を調べシステムに適した Makefile を生成するために
-#@# これらの関数が必要となります。
 
-#@# --- rm_f(files...)
-#@#     ファイル ((|files|)) を削除します。((|files|)) には 
-#@#     ((<Dir.glob|Dir>)) のワイルドカードを指定することができ
-#@#     ます。
-#@# 
-#@# --- xsystem(command)
-#@#     ruby の組み込み関数 ((<system|組み込み関数>))() と同じです
-#@#     が、コマンドの出力は(標準出力、標準エラー出力ともに)ログ
-#@#     ファイルに出力されます。ログファイル名は mkmf.log です。
-#@# 
-#@#     ruby をデバッグオプション((({-d})))付きで実行した場合は、コマンド
-#@#     を表示した後に((<system|組み込み関数>))(((|command|))) を実行します。
-#@# 
+#@since 1.9.3
+--- xsystem(command, opts = nil) -> ()
+#@else
+--- xsystem(command) -> ()
+#@end
+
+[[m:Kernel.#system]] と同じですが、コマンドの出力は(標準出力、標準エラー
+出力ともに)ログファイルに出力します。ログファイル名は mkmf.log です。
+
+@param command コマンドを指定します。
+#@since 1.9.3
+@param opts オプションを [[c:Hash]] で指定します。
+            :werror というキーに真を指定すると
+#@end
+
+@see [[m:Kernel.#system]]
+
+--- xpopen(command, *mode) -> IO
+--- xpopen(command, *mode){ ... } -> opbject
+
+command を表示してから [[m:IO.popen]] の実行します。
+
+@param command コマンド名を指定します。
+
+@param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
+
+@see [[m:IO.popen]]
+
+--- log_src(src) -> ()
+
+与えられた C プログラムのソースコードをログ出力します。
+
+@param src C プログラムのソースコードを指定します。
+
+--- create_tmpsrc(src) -> String
+
+与えられた C プログラムのソースコードを一時ファイルに出力して与えられたソースコードを返します。
+
+@param src C プログラムのソースコードを指定します。
+
 #@# --- try_link0(src[, opt])
-#@#     ((<mkmf/try_link>)) の実体です。
+#@# nodoc
 
---- try_link(src[, opt])
-#@todo
+--- have_devel? -> bool
+
+開発環境がインストールされているかどうか検査するために何もしない実行ファ
+イルを作成しようと試みます。成功した場合は、真を返します。失敗した場合
+は、偽を返します。
+
+--- try_do(src, command, *opts) ->()
+--- try_do(src, command, *opts){ ... } -> ()
+
+@param src C プログラムのソースコードを指定します。
+
+@param command コマンドを指定します。
+
+@param opts オプションを [[c:Hash]] で指定します。
+
+@raise RuntimeError 開発環境がインストールされていない場合に発生します。
+
+@see [[m:Kernel.#xsystem]]
+
+--- link_command(ldflags, opt = "", libpath = $DEFLIBPATH|$LIBPATH) -> String
+
+実際にリンクする際に使用するコマンドを返します。
+
+@param ldflags LDFLAGS に追加する値を指定します。
+
+@param opt LIBS に追加する値を指定します。
+
+@param libpath LIBPATH に指定する値を指定します。
+
+@see [[m:RbConfig.expand]]
+
+--- cc_command(opt = "") -> String
+
+実際にコンパイルする際に使用するコマンドを返します。
+
+@param opt コンパイラに与える追加のコマンドライン引数を指定します。
+
+@see [[m:RbConfig.expand]]
+
+--- cpp_command(outfile, opt = "") -> String
+
+実際にプリプロセッサを実行する際に使用するコマンドを返します。
+
+@param outfile 出力ファイルの名前を指定します。
+
+@param opt プリプロセッサに与える追加のコマンドライン引数を指定します。
+
+@see [[m:RbConfig.expand]]
+
+--- libpathflag(libpath = $DEFLIBPATH|$LIBPATH) -> String
+
+与えられた libpath を -L 付きの文字列に変換して返します。
+
+@param libpath LIBPATH に指定する値を指定します。
+
+--- with_werror(opt, opts = nil){|opt| ... } -> object
+--- with_werror(opt, opts = nil){|opt, opts| ... } -> object
+#@todo 内部用？
+
+???
+
+@param opt ????
+
+@param opts ????
+
+@return ブロックを評価した結果を返します。
+
+--- rm_f(*files) -> ()
+
+[[m:FileUtils.#rm_f]] のラッパーメソッドです。
+
+@param files ファイルのリストか、[[m:Dri.glob]]で利用できる glob パターンを指定します。
+             最後の要素が [[c:Hash]] の場合は [[m:FileUtils.#rm_f]] の第二引数になります。
+
+@see [[m:FileUtils.#rm_f]], [[m:Dri.glob]]
+
+--- rm_rf(*files) -> ()
+
+[[m:FileUtils.#rm_rf]] のラッパーメソッドです。
+
+@param files ファイルのリストか、[[m:Dri.glob]]で利用できる glob パターンを指定します。
+             最後の要素が [[c:Hash]] の場合は [[m:FileUtils.#rm_f]] の第二引数になります。
+
+@see [[m:FileUtils.#rm_rf]], [[m:Dri.glob]]
+
+--- modified?(target, times) -> Time | nil
+
+target が times の全ての要素よりも新しい場合は target の更新時刻を返します。
+そうでない場合は nil を返します。target が存在しない場合も nil を返します。
+
+@param target 対象のファイル名を指定します。
+
+@param times [[c:Time]] の配列か [[c:Time]] を一つ指定します。
+
+--- merge_libs(*libs) -> [String]
+#@todo 使われてない
+
+@param libs ???
+
+--- try_link(src, opt = "", *options) -> bool
+--- try_link(src, opt = "", *options){ ... } -> bool
 
 C プログラムのソースコード src をコンパイル、リンクします。
+
+このメソッドは [[m:$CFLAGS]] と [[m:$LDFLAGS]] の値もコンパイラまたはリ
+ンカに渡します。
+
 問題なくリンクできたら true を返します。
 コンパイルとリンクに失敗したら false を返します。
 
-第 2 引数 opt が指定されたときは、リンカにコマンド引数として渡します。
-また、このメソッドは [[m:$CFLAGS]] と [[m:$LDFLAGS]] の値も
-コンパイラまたはリンカに渡します。
+@param src C プログラムのソースコードを指定します。
+
+@param opt リンカにコマンド引数として渡す値を指定します。
 
 例：
 
@@ -187,19 +317,22 @@ C プログラムのソースコード src をコンパイル、リンクします。
     $stderr.puts "sin() exists"
   end
 
---- try_cpp(src[, opt])
-#@todo
+--- try_cpp(src, opt = "", *opts) -> bool
+--- try_cpp(src, opt = "", *opts){ ... } -> bool
 
 C プログラムのソースコード src をプリプロセスします。
-問題なくプリプロセスできたら true を返します。
-プリプロセスに失敗したら false を返します。
 
-第 1 引数 src は文字列で渡します。
-
-第 2 引数 opt と [[m:$CFLAGS]] の値を
-プリプロセッサにコマンドライン引数として渡します。
+[[m:$CPPFLAGS]], [[m:$CFLAGS]] の値もプリプロセッサにコマンドライン引数
+として渡します。
 
 このメソッドはヘッダファイルの存在チェックなどに使用します。
+
+@param src C プログラムのソースコードを指定します。
+
+@param opt プリプロセッサにコマンドライン引数として渡す値を指定します。
+
+@return 問題なくプリプロセスできたら true を返します。
+        プリプロセスに失敗したら false を返します。
 
 例：
 
@@ -207,93 +340,108 @@ C プログラムのソースコード src をプリプロセスします。
     $stderr.puts "stdio.h exists"
   end
 
---- egrep_cpp(pat, src[, opt])
-#@todo
+--- egrep_cpp(pattern, src, opt = "") -> bool
+--- egrep_cpp(pattern, src, opt = ""){ ... } -> bool
 
 C プログラムのソースコード src をプリプロセスし、
-その結果が正規表現 pat にマッチするかどうかを判定します。
+その結果が正規表現 pattern にマッチするかどうかを判定します。
 
   CPP $CFLAGS opt | egrep pat
 
 を実行し、その結果が正常かどうかを true または false で返します。
 
-第 1 引数 pat には「egrep の」正規表現を文字列で指定します。
-Ruby の正規表現ではありません。
-
-第 2 引数 src には C 言語のソースコードを文字列で記述します。
-
 このメソッドはヘッダファイルに関数などの宣言があるかどうか
 検査するために使用します。
 
---- try_run(src[, opt])
-#@todo
+@param pattern 「egrep の」正規表現を文字列で指定します。
+                Ruby の正規表現ではありません。
+
+@param src C 言語のソースコードを文字列で記述します。
+
+@see [[man:egrep(1)]]
+
+--- try_run(src, opt = "") -> bool
+--- try_run(src, opt = ""){ ... } -> bool
 
 C プログラムのソースコード src をコンパイルし、
-生成された実行ファイルを実行します。
-正常に実行できれば true を返します。
+生成した実行ファイルを実行します。
+
+生成した実行ファイルが正常に実行できれば true を返します。
 実行が失敗した場合は false を返します。
 
-第 1 引数 src には C 言語のソースコードを文字列で記述します。
+@param src C 言語のソースコードを文字列で記述します。
 
-第 2 引数 opt には C コンパイラのオプションを指定します。
+@param opt C コンパイラのオプションを指定します。
 
---- install_rb(mfile, dest, srcdir = '.')
-#@todo
-#@# このメソッドは create_makefile が使用します
+--- install_rb(mfile, dest, srcdir = nil) -> Array
+
+このメソッドは create_makefile が使用します。
+内部用のメソッドです。
 
 ディレクトリ srcdir/lib 配下の Ruby スクリプト (*.rb ファイル)
 を dest にインストールするための Makefile 規則を mfile に出力します。
-mfile は [[c:IO]] クラスのインスタンスです。
 
 srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 
---- append_library(libs, lib)
-#@todo
+@param mfile Makefile を表す [[c:File]] のインスタンスです。
 
-ライブラリのリスト libs の先頭にライブラリ lib を追加し、
-その結果を返します。
+@param dest インストールする先のディレクトリを指定します。
 
-引数 libs とこのメソッドの戻り値は
-リンカに渡す引数形式の文字列です。
-すなわち、UNIX 系 OS では
+@param srcdir ソースディレクトリを指定します。
 
-  "-lfoo -lbar"
+#@# --- append_library(libs, lib)
+#@#  nodoc
+#@# 
+#@# ライブラリのリスト libs の先頭にライブラリ lib を追加し、
+#@# その結果を返します。
+#@# 
+#@# 引数 libs とこのメソッドの戻り値は
+#@# リンカに渡す引数形式の文字列です。
+#@# すなわち、UNIX 系 OS では
+#@# 
+#@#   "-lfoo -lbar"
+#@# 
+#@# であり、MS Windows などでは
+#@# 
+#@#   "foo.lib bar.lib"
+#@# 
+#@# です。
+#@# 第 2 引数 lib は、この例での "foo" や "bar" にあたります。
 
-であり、MS Windows などでは
+--- have_macro(macro, headers = nil, opt = "") -> bool
+--- have_macro(macro, headers = nil, opt = ""){ ... } -> bool
 
-  "foo.lib bar.lib"
+与えられた macro が共通のヘッダファイルか headers に定義されている場合は真を返します。
+そうでない場合は偽を返します。
 
-です。
-第 2 引数 lib は、この例での "foo" や "bar" にあたります。
+@param macro マクロの名前を指定します。
 
---- have_macro(macro, headers = nil, opt = "", &b)
-#@todo
-Returns whether or not +macro+ is defined either in the common header
-files or within any +headers+ you provide.
+@param headers 追加のヘッダファイルを指定します。
 
-Any options you pass to +opt+ are passed along to the compiler.
+@param opt C コンパイラに渡すコマンドライン引数を指定します。
 
---- have_library(lib[, func])
-#@todo
+--- have_library(lib, func = nil, headers = nil) -> bool
+--- have_library(lib, func = nil, headers = nil){ ... } -> bool
 
-ライブラリ lib がシステムに存在し、
-関数 func が定義されているかどうかをチェックします。
+ライブラリ lib がシステムに存在し、関数 func が定義されているかどうかをチェックします。
 チェックが成功すれば [[m:$libs]] に lib を追加し true を返します。
 チェックが失敗したら false を返します。
 
-第 2 引数 func を省略した場合、関数の存在までは検査せず、
-ライブラリが存在するかどうかだけをチェックします。
+@param lib ライブラリの名前を指定します。
 
-第 2 引数 func が nil または空文字列 ("") のときは、
-何も検査をせず、無条件で lib を追加します。
+@param func 検査する関数名を指定します。
+            nil または空文字列のときは、"main" になります。
 
---- find_library(lib, func, *pathes)
-#@todo
+@param headers 追加のヘッダファイルを指定します。
+
+--- find_library(lib, func, *paths) -> bool
+--- find_library(lib, func, *paths){ ... } -> bool
 
 関数 func が定義されたライブラリ lib を探します。
+
 最初はパスを指定せずに探し、
-それに失敗したら pathes[0] を指定して探し、
-それにも失敗したら pathes[1] を指定して探し……
+それに失敗したら paths[0] を指定して探し、
+それにも失敗したら paths[1] を指定して探し……
 というように、リンク可能なライブラリを探索します。
 
 上記の探索でライブラリ lib を発見できた場合は lib を [[m:$libs]] に追加し、
@@ -301,132 +449,312 @@ Any options you pass to +opt+ are passed along to the compiler.
 指定されたすべてのパスを検査してもライブラリ lib が見つからないときは、
 変数を変更せず false を返します。
 
-pathes を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
+paths を指定しないときは [[m:Kernel.#have_library]] と同じ動作です。
 
---- find_header(header, *paths)
-#@todo
-Instructs mkmf to search for the given +header+ in any of the +paths+
-provided, and returns whether or not it was found in those paths.
+@param lib ライブラリ名を指定します。
 
-If the header is found then the path it was found on is added to the list
-of included directories that are sent to the compiler (via the -I switch).
+@param func 関数名を指定します。
+            nil または空文字列を指定した場合は "main" になります。
 
---- have_func(func[, header])
-#@todo
+@param paths ライブラリを検索するパスを文字列の配列で指定します。
+
+--- find_header(header, *paths) -> bool
+
+与えられた paths から header を検索し、見つかった場合は真を返します。
+そうでない場合は偽を返します。
+
+ヘッダが見つかったディレクトリをコンパイラに渡すコマンドラインオプショ
+ンに追加します(-I オプションを経由します)。
+
+@param header ヘッダを指定します。
+
+@param paths ヘッダを検索するパスを指定します。
+
+--- have_func(func, headers = nil) -> bool
+--- have_func(func, headers = nil){ ... } -> bool
 
 関数 func がシステムに存在するかどうかを検査します。
 
-関数 func が存在すれば [[m:$defs]] に
-"-DHAVE_func" (func は大文字に変換されます) を追加して true を返します。
-関数 func が見つからないときはグローバル変数を変更せず false を返します。
+関数 func が存在すれば [[m:$defs]] に "-DHAVE_func" (func は大文字に変
+換されます) を追加して true を返します。関数 func が見つからないときは
+グローバル変数を変更せず false を返します。
 
-第 2 引数 header には、
-関数 func を使用するのに必要なヘッダファイル名を指定します。
-これは関数の型をチェックするためではなく、
-関数が実際にはマクロで定義されている場合などのために使用します。
+@param func 関数名を指定します。
 
---- have_header(header)
-#@todo
+@param headers 関数 func を使用するのに必要なヘッダファイル名を指定しま
+               す。これは関数の型をチェックするためではなく、関数が実際
+               にはマクロで定義されている場合などのために使用します。
 
-ヘッダファイル header がシステムに存在するかどうか調べます。
+#@since 1.9.2
+--- have_header(header, preheaders = nil) -> bool
+--- have_header(header, preheaders = nil){ ... } -> bool
+#@else
+--- have_header(header, preheaders = nil) -> bool
+--- have_header(header, preheaders = nil){ ... } -> bool
+#@end
 
-ヘッダファイル header が存在すれば
-グローバル変数 [[m:$defs]] に "-DHAVE_header" を追加して true を返します。
-ヘッダファイル header が存在しないときは $defs は変更せず false を返します。
-なお、-DHAVE_header の header には、
-実際には header.upcase.tr('-.', '_') が使われます。
+ヘッダファイル header がシステムに存在するかどうか検査します。
 
---- have_struct_member(type, member, headers = nil, &b)
-#@todo
+ヘッダファイル header が存在する場合は、グローバル変数 [[m:$defs]] に
+"-DHAVE_header" を追加して true を返します。ヘッダファイル header が存
+在しない場合は $defs は変更せず false を返します。
 
-Returns whether or not the struct of type +type+ contains +member+.  If
-it does not, or the struct type can't be found, then false is returned.  You
-may optionally specify additional +headers+ in which to look for the struct
-(in addition to the common header files).
+@param header 検査したいヘッダファイルを指定します。
 
-If found, a macro is passed as a preprocessor constant to the compiler using
-the member name, in uppercase, prepended with 'HAVE_ST_'.
+#@since 1.9.2
+@param preheaders ヘッダファイルを検査する前に読み込んでおくヘッダファイルを指定します。
+#@end
 
-For example, if have_struct_member('foo', 'bar') returned true, then the
-HAVE_ST_BAR preprocessor macro would be passed to the compiler.
+--- have_struct_member(type, member, headers = nil) -> bool
+--- have_struct_member(type, member, headers = nil){ ... } -> bool
+
+member というメンバを持つ構造体 type がシステムに存在するかどうか検査します。
+
+member というメンバを持つ構造体 type がシステムに存在する場合は、
+グローバル変数 [[m:$defs]] に "-DHAVE_type_member" を追加し、真を返します。
+member というメンバを持つ構造体 type が存在しない場合は、偽を返します。
+
+例えば
+
+  have_struct_member('struct foo', 'bar') # => true
+
+#@since 1.9.1
+である場合、HAVE_STRUCT_FOO_BAR というプリプロセッサマクロをコンパイラに渡します。
+また、後方互換性のために HAVE_ST_BAR というプリプロセッサマクロも定義します。
+#@else
+である場合、HAVE_ST_BAR というプリプロセッサマクロをコンパイラに渡します。
+#@end
+
+@param type 検査したい構造体の名前を指定します。
+
+@param member 検査したい構造体のメンバの名前を指定します。
+
+@param headers 追加のヘッダファイルを指定します。
+
+--- have_type(type, headers = nil, opt = "") -> bool
+--- have_type(type, headers = nil, opt = ""){ ... } -> bool
+
+静的な型 type がシステムに存在するかどうか検査します。
+
+型 type がシステムに存在する場合は、グローバル変数 [[m:$defs]] に
+"-DHAVE_type" を追加し、真を返します。型 type がシステムに存在しない場
+合は、偽を返します。
+
+例えば、
+
+  have_type('foo') # => true
+
+である場合、HAVE_TYPE_FOO をというプリプロセッサマクロをコンパイラに渡します。
+
+@param type 検査したい型の名前を指定します。
+
+@param headers 追加のヘッダを指定します。
+
+@param opt コンパイラに渡す追加のオプションを指定します。
+
+--- find_type(type, opt, *headers) -> Array
+--- find_type(type, opt, *headers){ ... } -> Array
+
+静的な型 type がシステムに存在するかどうか検査します。
+
+@param type 検査したい型の名前を指定します。
+
+@param opt コンパイラに渡す追加のオプションを指定します。
+
+@param headers 追加のヘッダを指定します。
+
+@see [[m:Kernel.#have_type]] 
+
+--- have_var(var, headers = nil) -> bool
+--- have_var(var, headers = nil){ ... } -> bool
+
+変数 var がシステムに存在するかどうか検査します。
+
+変数 var がシステムに存在する場合は、グローバル変数 [[m:$defs]] に
+"-DHAVE_var" を追加し、真を返します。変数 var がシステムに存在しない場
+合は、偽を返します。
+
+例えば、
+
+  have_var('foo') # => true
+
+である場合、HAVE_FOO というプリプロセッサマクロをコンパイラに渡します。
+
+@param var 検査したい変数名を指定します。
+
+@param headers 追加のヘッダを指定します。
+
+#@since 1.9.3
+--- have_framework(framework) -> bool
+--- have_framework(framework){ ... } -> bool
+
+フレームワーク framework がシステムに存在するかどうか検査します。
+
+フレームワーク framework がシステムに存在する場合は、グローバル変数
+[[m:$defs]] に "-DHAVE_FRAMEWORK_framework" を追加し、真を返します。ま
+た、グローバル変数 [[m:$LDFLAGS]] に "-framework #{framework}" を追加し
+ます。 フレームワーク framework がシステムに存在しない場合は、偽を返し
+ます。
+
+例えば、
+
+  have_framework('Ruby') # => true
+
+である場合、HAVE_FRAMEWORK_RUBY というプリプロセッサマクロをコンパイラに渡します。
+
+@param framework フレームワークの名前を指定します。
+
+#@end
+
+--- check_sizeof(type, headers = nil) -> Integer | nil
+--- check_sizeof(type, headers = nil){ ... } -> Integer | nil
+
+与えられた型のサイズを返します。
+
+型 type がシステムに存在する場合は、グローバル変数 [[m:$defs]] に
+"-DSIZEOF_type=X" を追加し、型のサイズを返します。型 type がシステムに
+存在しない場合は、nil を返します。
+
+例えば、
+
+  check_sizeof('mystruct') # => 12
+
+である場合、SIZEOF_MYSTRUCT=12 というプリプロセッサマクロをコンパイラに渡します。
+
+@param type 検査したい型を指定します。
+
+@param headers 追加のヘッダファイルを指定します。
+
+#@since 1.9.3
+--- check_signedness(type, headers = nil, opts = nil) -> "signed" | "unsigned" | nil
+--- check_signedness(type, headers = nil, opts = nil){ ... } -> "signed" | "unsigned" | nil
+
+ Returns the signedness of the given +type+.  You may optionally
+ specify additional +headers+ to search in for the +type+.
  
+ If the +type+ is found and is a numeric type, a macro is passed as a
+ preprocessor constant to the compiler using the +type+ name, in
+ uppercase, prepended with 'SIGNEDNESS_OF_', followed by the +type+
+ name, followed by '=X' where 'X' is positive integer if the +type+ is
+ unsigned, or negative integer if the +type+ is signed.
+ 
+ For example, if size_t is defined as unsigned, then
+ check_signedness('size_t') would returned +1 and the
+ SIGNEDNESS_OF_SIZE_T=+1 preprocessor macro would be passed to the
+ compiler, and SIGNEDNESS_OF_INT=-1 if check_signedness('int') is
+ done.
 
---- have_type(type, headers = nil, opt = "", &b)
-#@todo
-Returns whether or not the static type +type+ is defined.  You may
-optionally pass additional +headers+ to check against in addition to the
-common header files.
+#@end
+#@since 1.9.2
+--- convertible_int(type, headers = nil, opts = nil)
+--- convertible_int(type, headers = nil, opts = nil){ ... }
 
-You may also pass additional flags to +opt+ which are then passed along to
-the compiler.
+ Returns the convertible integer type of the given +type+.  You may
+ optionally specify additional +headers+ to search in for the +type+.
+ _Convertible_ means actually same type, or typedefed from same type.
+ 
+ If the +type+ is a integer type and _convertible_ type is found,
+ following macros are passed as preprocessor constants to the
+ compiler using the +type+ name, in uppercase.
+ 
+ * 'TYPEOF_', followed by the +type+ name, followed by '=X' where 'X'
+   is the found _convertible_ type name.  * 'TYP2NUM' and 'NUM2TYP,
+   where 'TYP' is the +type+ name in uppercase with replacing '_t'
+   suffix with 'T', followed by '=X' where 'X' is the macro name to
+   convert +type+ to +Integer+ object, and vice versa.
+ 
+ For example, if foobar_t is defined as unsigned long, then
+ convertible_int("foobar_t") would return "unsigned long", and define
+ macros:
+ 
+   #define TYPEOF_FOOBAR_T unsigned long
+   #define FOOBART2NUM ULONG2NUM
+   #define NUM2FOOBART NUM2ULONG
 
-If found, a macro is passed as a preprocessor constant to the compiler using
-the type name, in uppercase, prepended with 'HAVE_TYPE_'.
+#@end
 
-For example, if have_type('foo') returned true, then the HAVE_TYPE_FOO
-preprocessor macro would be passed to the compiler.
+#@# --- arg_config(config, default){ ... }
+#@# nodoc
+#@# 
+#@# configure オプション --config の値を返します。
+#@# オプションが指定されていないときは第 2 引数 default を返します。
+#@# 
+#@# 例えば extconf.rb で arg_config メソッドを使う場合、
+#@# 
+#@#   $ ruby extconf.rb --foo --bar=baz
+#@# 
+#@# と実行したとき、arg_config("--foo") の値は true、
+#@# arg_config("--bar") の値は "baz" です。
 
---- have_var(var, headers = nil, &b)
-#@todo
-Returns whether or not the variable +var+ can be found in the common
-header files, or within any +headers+ that you provide.  If found, a
-macro is passed as a preprocessor constant to the compiler using the
-variable name, in uppercase, prepended with 'HAVE_'.
+--- with_config(config, default = nil) -> bool | String
+--- with_config(config, default = nil){|config, default| ... } -> bool | String
 
-For example, if have_var('foo') returned true, then the HAVE_FOO
-preprocessor macro would be passed to the compiler.
+configure のオプションを検査します。
 
---- check_sizeof(type, headers = nil, &b)
-#@todo
-Returns the size of the given +type+.  You may optionally specify additional
-+headers+ to search in for the +type+.
+configure のオプションに --with-<config> が指定された場合は真を返しま
+す。--without-<config> が指定された場合は偽を返します。どちらでもない場
+合は default を返します。
 
-If found, a macro is passed as a preprocessor constant to the compiler using
-the type name, in uppercase, prepended with 'SIZEOF_', followed by the type
-name, followed by '=X' where 'X' is the actual size.
+これはデバッグ情報などのカスタム定義を、追加するのに役立ちます。
 
-For example, if check_sizeof('mystruct') returned 12, then the
-SIZEOF_MYSTRUCT=12 preprocessor macro would be passed to the compiler.
+@param config configure のオプションの名前を指定します。
 
---- arg_config(config[, default])
-#@todo
+@param default デフォルト値を返します。
 
-configure オプション --config の値を返します。
-オプションが指定されていないときは第 2 引数 default を返します。
+例
+  if with_config("debug")
+     $defs.push("-DOSSL_DEBUG") unless $defs.include? "-DOSSL_DEBUG"
+  end
 
-例えば extconf.rb で arg_config メソッドを使う場合、
+--- enable_config(config, default) -> bool | String
+--- enable_config(config, default){|config, default| ... } -> bool | String
 
-  $ ruby extconf.rb --foo --bar=baz
+configure のオプションを検査します。
 
-と実行したとき、arg_config("--foo") の値は true、
-arg_config("--bar") の値は "baz" です。
+configure のオプションに --enable-<config> が指定された場合は、真を返し
+ます。--disable-<config> が指定された場合は。偽を返します。どちらでもな
+い場合は default を返します。
 
---- with_config(config[, default])
-#@todo
+これはデバッグ情報などのカスタム定義を、追加するのに役立ちます。
 
-[[m:Kernel#arg_config]] と同じですが、
---with-config オプションの値だけを参照します。
+@param config configure のオプションの名前を指定します。
 
---- enable_config(config[, default])
-#@todo
+@param default デフォルト値を返します。
 
-[[m:Kernel#arg_config]] と同じですが、
---enable-config オプション、
-または--disable-config オプションの値だけを参照します。
+例
+  if enable_config("debug")
+     $defs.push("-DOSSL_DEBUG") unless $defs.include? "-DOSSL_DEBUG"
+  end
 
---- create_header
-#@todo
+--- create_header(header = "extconf.h") -> String
 
-[[m:Kernel#have_func]] などの検査結果を元に、
+[[m:Kernel.#have_func]], [[m:Kernel.#have_header]] などの検査結果を元に、
+ヘッダファイルを生成します。
 
-  #define HAVE_FUNC 1
-  #define HAVE_HEADER_H 1
+このメソッドは extconf.rb の最後で呼び出すようにしてください。
 
-のように定数を定義した extconf.h ファイルを生成します。
+@param header ヘッダファイルの名前を指定します。
 
---- dir_config(target[, default])
---- dir_config(target[, idefault, ldefault])
-#@todo
+@return ヘッダファイルの名前を返します。
+
+例
+
+  # extconf.rb
+  require 'mkmf'
+  have_func('realpath')
+  have_header('sys/utime.h')
+  create_header
+  create_makefile('foo')
+
+上の extconf.rb は以下の extconf.h を生成します。
+
+  #ifndef EXTCONF_H
+  #define EXTCONF_H
+  #define HAVE_REALPATH 1
+  #define HAVE_SYS_UTIME_H 1
+  #endif
+
+--- dir_config(target, idefault = nil, ldefault = nil) -> [String, String]
 
 configure オプション
 --with-TARGET-dir,
@@ -452,117 +780,334 @@ configure オプション
 ユーザが extconf.rb に --with-TARGET-lib=PATH を指定したときは
 [[m:$CFLAGS]] に PATH を追加します。
 
-以上 3 つの configure オプションがいずれも指定されていないときは、
-デフォルト値として引数 default、idefault、ldefault の値が使われます。
-第 2 引数のみ与えた場合は "-Idefault/include" と "-Ldefault/lib" をそれぞれ追加し、
-第 3 引数も与えた場合は "-Iidefault" と "-Lldefault" をそれぞれ追加します。
+@param target ターゲットの名前を指定します。
 
---- create_makefile(target[, srcdir])
+@param idefault システム標準ではないヘッダファイルのディレクトリのデフォルト値を指定します。
+
+@param ldefault システム標準ではないライブラリのディレクトリのデフォルト値を指定します。
+
+例
+  # xml2 の configure オプションを指定できるようにします。
+  xml2_dirs = dir_config('xml2', '/opt/local/include/libxml2', '/opt/local/lib')
+
+--- create_makefile(target, srcprefix = nil) -> true
 #@todo
 
-[[m:Kernel#have_library]] などの各種検査の結果を元に、
-拡張ライブラリ TARGET.so をビルドするための Makefile を生成します。
-
-第 2 引数 srcdir は make 変数 srcdir の値を指定します。
-この変数には、ソースコードがあるディレクトリ名を指定します。
-この引数を省略した場合は、extconf.rb があるディレクトリが使われます。
+[[m:Kernel.#have_library]] などの各種検査の結果を元に、拡張ライブラリを
+ビルドするための Makefile を生成します。
 
 extconf.rb は普通このメソッドの呼び出しで終ります。
 
---- pkg_config(pkg)
-#@todo
+@param target ターゲットとなる拡張ライブラリの名前を指定します。
+              例えば、拡張ライブラリで "Init_foo" という関数を定義して
+              いる場合は、"foo" を指定します。
+              '/' を含む場合は、最後のスラッシュ以降のみをターゲット名
+              として使用します。残りはトップレベルのディレクトリ名と見
+              なされ、生成された Makefile はそのディレクトリ構造に従い
+              ます。
+              例えば、'test/foo' を指定した場合、拡張ライブラリは
+              'test' ディレクトリにインストールされます。この拡張ライブ
+              ラリを Ruby スクリプトから使用するときは
+              "require 'test/foo'" とする必要があります。
 
---- what_type?
-#@todo
+@param srcprefix ソースコードがあるディレクトリ名を指定します。
+                 省略した場合は extconf.rb があるディレクトリを使用します。
+                 
+以下のようなディレクトリ構成の場合:
 
---- create_header
-#@todo
+   ext/
+      extconf.rb
+      test/
+         foo.c
 
---- checking_for
-#@todo
+このようにします。
 
---- try_run
-#@todo
+   create_makefile('test/foo', 'test')
 
---- try_compile
-#@todo
+このようにして作った Makefile で 'make install' すると拡張ライブラリは、
+以下のパスにインストールされます。
 
---- try_static_assert
-#@todo
+  /path/to/ruby/sitearchdir/test/foo.so
+
+--- find_executable(bin, path = nil) -> String | nil
+
+パス path から実行ファイル bin を探します。
+
+実行ファイルが見つかった場合は、そのフルパスを返します。
+実行ファイルが見つからなかった場合は、nilを返します。
+
+このメソッドは Makefile を変更しません。
+
+@param bin 実行ファイルの名前を指定します。
+
+@param path パスを指定します。デフォルトは環境変数 PATH です。
+            環境変数 PATH が定義されていない場合は /usr/local/bin,
+            /usr/ucb, /usr/bin, /bin を使います。
+
+--- dummy_makefile(srcdir) -> String
+
+ダミーの Makefile を作成します。
+
+@param srcdir ソースディレクトリを指定します。
+
+#@since 1.9.1
+--- depend_rules(depend) -> Array
+
+ファイルの依存関係の書かれた depend ファイルの内容を処理します。
+
+@param depend depend ファイルの内容を指定します。
+
+@return 見つかった依存関係を Makefile 形式で返します。
+#@end
+
+#@# --- init_mkmf(config = CONFIG, rbconfig = RbConfig::CONFIG)
+#@# nodoc
+#@# --- mkmf_failed(path
+#@# nodoc
+#@# --- pkg_config(pkg)
+#@# nodoc
+#@# --- with_destdir
+#@# nodoc
+#@# --- winsep
+#@# nodoc
+#@# --- mkintpath
+#@# nodoc
+#@# --- configuration(srcdir)
+#@# nodoc
+#@# --- scalar_ptr_type?(type, member = nil, headers = nil)
+#@# --- scalar_ptr_type?(type, member = nil, headers = nil){ ... }
+#@# nodoc
+#@# --- scalar_type?(type, member = nil, headers = nil)
+#@# --- scalar_type?(type, member = nil, headers = nil){ ... }
+#@# nodoc
+#@# --- have_typeof?
+#@# nodoc
+#@# --- what_type?(type, member = nil, headers = nil)
+#@# --- what_type?(type, member = nil, headers = nil){ ... }
+#@# nodoc
+#@# --- find_executable0(bin, path = nil)
+#@# nodoc
+
+#@# --- checking_for(message, format = nil){ ... } -> object
+#@# 内部用
+#@# have_*, find_* 系メソッドの実行結果を標準出力に出力するためのメソッドです。
+#@# 
+#@# @param message メッセージを指定します。
+#@# 
+#@# @param format フォーマット文字列を指定します。
+
+#@# #@since 1.8.6
+#@# --- checking_message(target, place = nil, opt = nil) -> String
+#@# 内部用
+#@# #@end
+
+--- try_run(src, opt = "") -> bool | nil
+--- try_run(src, opt = ""){ ... } -> bool | nil
+
+与えられたソースコードが、コンパイルやリンクできるかどうか検査します。
+
+以下の全ての検査に成功した場合は、真を返します。そうでない場合は偽を返します。
+
+  * src が C のソースとしてコンパイルできるか
+  * 生成されたオブジェクトが依存しているライブラリとリンクできるか
+  * リンクしたファイルが実行可能かどうか
+  * 実行ファイルがきちんと存在しているかどうか
+
+ブロックを与えた場合、そのブロックはコンパイル前に評価されます。
+ブロック内でソースコードを変更することができます。
+
+@param src C のソースコードを指定します。
+
+@param opt リンカに渡すオプションを指定します。
+           $CFLAGS, $LDFLAGS もリンカには渡されます。
+
+@return 実行ファイルが存在する場合は true を返します。そうでない場合は
+        false を返します。プリプロセス、コンパイル、リンクのいずれかの
+        段階で失敗した場合は nil を返します。
+
+--- try_compile(src, opt = "", *opts) -> bool
+--- try_compile(src, opt = "", *opts){ ... } -> bool
+
+与えられた C のソースコードがコンパイルできた場合は真を返します。
+コンパイルできなかった場合は偽を返します。
+
+ブロックを与えた場合、そのブロックはコンパイル前に評価されます。
+ブロック内でソースコードを変更することができます。
+
+@param src C のソースコードを指定します。
+
+@param opt コンパイラに渡すオプションを指定します。
+           $CFLAGS もコンパイラには渡されます。
+
+--- try_static_assert(expr, headers = nil, opt = "") -> bool
+--- try_static_assert(expr, headers = nil, opt = ""){ ... } -> bool
+#@todo ???
+
+...
+
+@param expr C 言語の式を指定します。
+
+@param headers 追加のヘッダファイルを指定します。
+
+@param opt コンパイラに渡すオプションを指定します。
+           $CFLAGS もコンパイラには渡されます。
+
+--- try_constant(const, headers = nil, opt = "") -> Integer | nil
+--- try_constant(const, headers = nil, opt = ""){ ... } Integer | nil
+
+定数 const がシステムに存在するかどうか検査します。
+[[m:Kernel.#have_const]] を使ってください。
+
+@param const C 言語の定数名を指定します。
+
+@param headers 追加のヘッダファイルを指定します。
+
+@param opt コンパイラに渡すオプションを指定します。
+           $CFLAGS もコンパイラには渡されます。
+
+@return 定数 const がシステムに存在する場合はその値を返します。
+        定数 const がシステムに存在しない場合は nil を返します。
+
+--- try_func(func, libs, headers = nil) -> bool
+--- try_func(func, libs, headers = nil){ ... } -> bool
+
+関数 func がシステムに存在するかどうか検査します。
+[[m:Kernel.#have_func]] を使ってください。
+
+@param func 関数名を指定します。
+
+@param libs ライブラリの名前を指定します。
+
+@param headers 関数 func を使用するのに必要なヘッダファイル名を指定しま
+               す。これは関数の型をチェックするためではなく、関数が実際
+               にはマクロで定義されている場合などのために使用します。
+
+--- try_var(var, headers = nil) -> bool
+--- try_var(var, headers = nil){ ... } -> bool
+
+[[m:Kernel.#have_var]] を使ってください。
+
+@param var 検査したい変数名を指定します。
+
+@param headers 追加のヘッダを指定します。
+
+--- try_type(type, headers = nil, opt = "") -> bool
+--- try_type(type, headers = nil, opt = ""){ ... } -> bool
+
+[[m:Kernel.#have_type]] を使ってください。
+
+@param type 検査したい型の名前を指定します。
+
+@param headers 追加のヘッダを指定します。
+
+@param opt コンパイラに渡す追加のオプションを指定します。
+
+--- install_files(mfile, ifiles, map = nil, srcprefix = nil) -> []
+
+このメソッドは create_makefile, install_rb が使用します。
+内部用のメソッドです。
+
+@param mfile Makefile を表す [[c:File]] のインスタンスです。
+
+@param ifiles インストールするファイルのリストを指定します。
+
+@param map ???
+
+@param srcprefix ソースディレクトリを指定します。
+
+--- message(format, *arg) -> nil
+
+[[m:Kernel.#printf]] と同じように標準出力にメッセージを出力します。
+メッセージ出力後すぐに [[m:IO#flush]] します。
+
+$VERBOSE が真のときは何もしません。
+
+@param format フォーマット文字列です。
+
+@param arg フォーマットされる引数です。
+
+@see [[m:Kernel.#printf]]
+
+#@# --- typedef_expr(type, headers)
+#@# nodoc
+#@# --- try_signedness(tyep, member, headers = nil, opts = nil)
+#@# --- try_signedness(tyep, member, headers = nil, opts = nil){ ... }
+#@# nodoc
+
+#@# --- macro_defined?(macro, src, opt = "") -> bool
+#@# --- macro_defined?(macro, src, opt = ""){ ... } -> bool
+#@# internal use Only
+#@# --- config_string
+#@# nodoc
+#@# --- dir_re
+#@# nodoc
+#@# --- relative_from
+#@# nodoc
+#@# --- install_dirs
+#@# nodoc
+#@# --- map_dir
+#@# nodoc
 
 == Constants
 
---- CONFIG
-#@todo
-
+--- CONFIG -> Hash
+#@since 1.8.5
+[[m:RbConfig::MAKEFILE_CONFIG]] と同じです。
+#@else
 [[m:Config::MAKEFILE_CONFIG]] と同じです。
+#@end
 
---- CFLAGS
-#@todo
-
-C コンパイラに渡されるコマンドラインオプションです。
-この値は Makefile にも反映されます。
-
---- LINK
-#@todo
-
-リンカを起動するときのコマンドラインのフォーマットです。
-[[m:Kernel#try_link]] などが使用します。
-
---- CPP
-#@todo
-
-プリプロセッサを起動するときのコマンドラインのフォーマットです。
-[[m:Kernel#try_cpp]] などが使用します。
+#@# --- INSTALL_DIRS
+#@# nodoc
+#@# --- OUTFLAG
+#@# nodoc
+#@# --- COUTFLAG
+#@# nodoc
+#@# --- CPPOUTFILE
+#@# nodoc
+#@# --- CONFTEST_C
+#@# nodoc
+#@# --- STRING_OR_FAILED_FORMAT
+#@# internal use only
 
 == Special Variables
 
-#@# --- $config_cache
-#@#     この変数は obsolete です。現在使用されていません。
---- $srcdir
-#@todo
+--- $srcdir -> String
 
 Ruby インタプリタを make したときのソースディレクトリです。
 
---- $libdir
-#@todo
+--- $libdir -> String
 
 Ruby のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/バージョン" です。
 
---- $archdir
-#@todo
+--- $archdir -> String
 
 マシン固有のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/バージョン/arch" です。
 
---- $sitelibdir
-#@todo
+--- $sitelibdir -> String
 
 サイト固有のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/site_ruby/バージョン" です。
 
---- $sitearchdir
-#@todo
+--- $sitearchdir -> String
 
 サイト固有でかつマシン固有のライブラリを置くディレクトリです。
 通常は "/usr/local/lib/ruby/site_ruby/バージョン/arch" です。
 
---- $hdrdir
-#@todo
+--- $hdrdir -> String
 
 Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
---- $topdir
-#@todo
+--- $topdir -> String
 
 拡張ライブラリを make するためのヘッダファイル、
 ライブラリ等が存在するディレクトリです。
 通常は [[m:$archdir]] と同じで、"/usr/local/lib/ruby/バージョン/arch" です。
 
---- $defs
-#@todo
+--- $defs -> [String]
 
 拡張ライブラリをコンパイルするときのマクロ定義を指定する配列です。
 
@@ -572,14 +1117,13 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 
 のような形式の配列です。
 
-[[m:Kernel#have_func]] または [[m:Kernel#have_header]]
+[[m:Kernel.#have_func]] または [[m:Kernel.#have_header]]
 を呼び出すと、その検査結果が $defs に追加されます。
 
-[[m:Kernel#create_header]]
+[[m:Kernel.#create_header]]
 はこの変数の値を参照してヘッダファイルを生成します。
 
---- $libs
-#@todo
+--- $libs -> String
 
 拡張ライブラリをリンクするときに
 一緒にリンクされるライブラリを指定する文字列です。
@@ -590,26 +1134,24 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 
 のような形式の文字列です。
 
-[[m:Kernel#have_library]] または [[m:Kernel#find_library]]
+[[m:Kernel.#have_library]] または [[m:Kernel.#find_library]]
 を呼び出すと、その検査結果が
 間に空白をはさみつつ $libs に連結されます。
 
---- $CFLAGS
-#@todo
+--- $CFLAGS -> String
 
 拡張ライブラリをコンパイルするときの C コンパイラのオプションや、
 ヘッダファイルのディレクトリを指定する文字列です。
 
-[[m:Kernel#dir_config]] の検査が成功すると、
+[[m:Kernel.#dir_config]] の検査が成功すると、
 この変数の値に " -Idir" が追加されます。
 
---- $LDFLAGS
-#@todo
+--- $LDFLAGS -> String
 
 拡張ライブラリをリンクするときのリンカのオプション、
 ライブラリファイルのディレクトリを指定する文字列です。
 
-[[m:Kernel#find_library]] または [[m:Kernel#dir_config]]
+[[m:Kernel.#find_library]] または [[m:Kernel.#dir_config]]
 の検査が成功すると、$LDFLAGS の値に "-Ldir" を追加します。
 
 #@# おそらくユーザに解放されていない変数
@@ -618,3 +1160,27 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 #@# 
 #@# --- $local_flags
 #@#     リンカオプションを指定する文字列です。
+
+#@# = reopen String
+#@# 内部用
+#@# == Instance Methods
+#@# 
+#@# --- quote -> String
+#@# 
+#@# スペースを含む文字列をクオートして返します。
+#@# 
+#@# --- tr_cpp -> String
+#@# 
+#@# C プリプロセッサに使用できる名前を生成して返します。
+#@# 
+#@# = reopen Array
+#@# 内部用
+#@# == Instance Methods
+#@# 
+#@# --- quote -> Array
+#@# 
+#@# 全ての要素を [[m:String#quote]] して返します。
+#@# 
+#@# = module Logging
+#@# 内部利用のみ
+
