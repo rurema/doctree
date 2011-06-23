@@ -312,32 +312,21 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 
 例: Digest::MD、Digest::SHA1、Digest::SHA512のブロック長を順番に調べる。
 
-  for a in ["MD5", "SHA1", "SHA512"]
-    digest = Digest(a).new
-    p digest.block_length # => 64, 128, 128
-  end
+  ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().block_length } # => [64, 128, 128]
 
 --- digest_length -> Integer
 --- length -> Integer
 --- size -> Integer
-#@todo
 
 ダイジェストのハッシュ値のバイト長を取得する。
 例えば、Digest::MD5であれば16、Digest::SHA1であれば20です。
-
-If not, digest_obj.digest().length() is returned. 
-(この動作が分かりません。
-私の手元の1.8.6ではdigest.length == digest_lengthでした。)
 
 本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
 それぞれの実装に適したものにオーバーライドされます。
 
 例: Digest::MD、Digest::SHA1、Digest::SHA512のハッシュ値のバイト長を順番に調べる。
 
-  for a in ["MD5", "SHA1", "SHA512"]
-    digest = Digest(a).new
-    p digest.digest_length # => 16, 20, 64
-  end
+  ["MD5", "SHA1", "SHA512"].map{|a| Digest(a).new().digest_length } # => [16, 20, 64]
 
 #@end
 
