@@ -91,8 +91,8 @@ include Digest::Instance
 
 == Class Methods
 
-#@if(version < "1.8.6")
---- new([str])
+#@until 1.8.6
+--- new(str = nil)
 
 新しいダイジェストオブジェクトを生成する。文字列引数が与えられると
 それを追加する([[m:Digest::Base#update]] 参照)。
@@ -101,12 +101,12 @@ include Digest::Instance
 新しいダイジェストオブジェクトを生成する。
 #@end
 
---- digest(str)
+--- digest(str) -> String
 
 与えられた文字列に対するハッシュ値を文字列で返す。
 new(str).digest と等価。
 
---- hexdigest(str)
+--- hexdigest(str) -> String
 
 与えられた文字列に対するハッシュ値を、ASCIIコードを使って
 16進数の列を示す文字列にエンコードして返す。
