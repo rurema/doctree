@@ -203,7 +203,7 @@ command を表示してから [[m:IO.popen]] の実行します。
 イルを作成しようと試みます。成功した場合は、真を返します。失敗した場合
 は、偽を返します。
 
---- try_do(src, command, *opts) ->()
+--- try_do(src, command, *opts) -> ()
 --- try_do(src, command, *opts){ ... } -> ()
 
 @param src C プログラムのソースコードを指定します。
@@ -953,7 +953,7 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
            $CFLAGS もコンパイラには渡されます。
 
 --- try_constant(const, headers = nil, opt = "") -> Integer | nil
---- try_constant(const, headers = nil, opt = ""){ ... } Integer | nil
+--- try_constant(const, headers = nil, opt = ""){ ... } -> Integer | nil
 
 定数 const がシステムに存在するかどうか検査します。
 [[m:Kernel.#have_const]] を使ってください。
