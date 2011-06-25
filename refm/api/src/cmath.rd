@@ -578,32 +578,4 @@ z の逆双曲線正接関数の値を返します。
 @raise TypeError z に数値以外を指定した場合に発生します。
 #@end
 
---- frexp
-
-#@todo
-
---- ldexp
-
-#@todo
-
---- hypot
-
-#@todo
-
---- erf
-
-#@todo
-
---- erfc
-
-#@todo
-
---- gamma
-
-#@todo
-
---- lgamma
-
-#@todo
-
 #@end
