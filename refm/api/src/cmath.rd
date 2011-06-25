@@ -38,11 +38,17 @@ include Math
   CMath.exp!(1)   # => Math::E
   CMath.exp!(2)   # => Math::E ** 2
 
+@see [[m:Math.#exp]]
+
 --- exp(z) -> Float | Complex
 
 z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 
 @param z [[m:Math::E]] を z 乗する数を指定します。
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 例:
 
@@ -74,6 +80,8 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
   CMath.log!(100, 10) # => 2.0
   CMath.log!(-1.0)     # => Math::DomainError
 
+@see [[m:Math.#log]]
+
 #@# r4625 現在、Math.#log のドキュメントは引数が 1 つしかないが、1.9 系
 #@# では 2 つ指定する事もできる。
 
@@ -82,9 +90,16 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 
 z の対数を返します。
 
-@param x 真数を指定します。
+@param z 真数を指定します。
 
 @param b 底を指定します。省略した場合は自然対数を計算します。
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+
+#@# TODO: #3137 は b も TypeError にする意図だと思うけど、漏れていると
+#@# 思われる。確認して必要であれば修正する。
+#@end
 
 例:
 
@@ -107,9 +122,11 @@ z の対数を返します。
 
 @raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#log2]]
 
 #@since 1.9.2
 --- log2(z) -> Float | Complex
@@ -117,6 +134,10 @@ z の対数を返します。
 2 を底とする z の対数 (binary logarithm) を返します。
 
 @param z 真数を指定します。
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 #@end
 
 --- log10!(x) -> Float
@@ -127,13 +148,19 @@ z の対数を返します。
 
 @raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#log10]]
 
 --- log10(z) -> Float | Complex
 
 x の常用対数を返します。
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 #@since 1.9.2
 --- cbrt!(x) -> Float
@@ -142,6 +169,8 @@ x の常用対数を返します。
 #@end
 
 実数 x の立方根を返します。[[m:Math.#cbrt]] のエイリアスです。
+
+@param x 実数
 
 @raise TypeError x に数値以外を指定した場合に発生します。
 
@@ -153,10 +182,27 @@ x の常用対数を返します。
   CMath.cbrt!(8.0)  # => 2.0
   CMath.cbrt!(-8.0) # => -2.0
 
+@see [[m:Math.#cbrt]]
+
 #@since 1.9.2
 --- cbrt(z) -> Float | Complex
 
-z の立方根を返します。
+z の立方根の内、主値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
+
+  require "cmath"
+  CMath.cbrt(-8)    # => (1.0000000000000002+1.7320508075688772i)
+
+#@until 1.9.3
+[注意] 1.9.2 以下では負の数を引数に与えると、主値を返さないバグがあります。
+#@end
+
+@see [[m:Complex#**]]
 
 #@end
 
@@ -164,9 +210,11 @@ z の立方根を返します。
 
 実数 x の平方根を返します。[[m:Math.#sqrt]] のエイリアスです。
 
+@param x 正の実数
+
 @raise Math::DomainError x が負の数である場合に発生します。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
@@ -176,9 +224,17 @@ z の立方根を返します。
   CMath.sqrt!(4.0) # => 2.0
   CMath.sqrt!(9.0) # => 3.0
 
+@see [[m:Math.#sqrt]]
+
 --- sqrt(z) -> Float | Complex
 
 z の平方根を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 例:
 
@@ -192,7 +248,9 @@ z の平方根を返します。
 実数 x の正弦関数の値をラジアンで返します。[[m:Math.#sin]] のエイリアス
 です。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@param x 実数
+
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
@@ -203,16 +261,26 @@ z の平方根を返します。
   CMath.sin!(1 * Math::PI / 4) # => 0.7071067811865475
   CMath.sin!(2 * Math::PI / 4) # => 1.0
 
+@see [[m:Math.#sin]]
+
 --- sin(z) -> Float | Complex
 
 z の正弦関数の値をラジアンで返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- cos!(x) -> Float
 
 実数 x の余弦関数の値をラジアンで返します。[[m:Math.#cos]] のエイリアス
 です。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@param x 実数
+
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
@@ -223,16 +291,26 @@ z の正弦関数の値をラジアンで返します。
   CMath.cos!(1 * Math::PI / 4) # => 0.7071067811865476
   CMath.cos!(4 * Math::PI / 4) # => -1.0
 
+@see [[m:Math.#cos]]
+
 --- cos(z) -> Float | Complex
 
 z の余弦関数の値をラジアンで返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- tan!(x) -> Float
 
 実数 x の正接関数の値をラジアンで返します。[[m:Math.#tan]] のエイリアス
 です。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@param x 実数
+
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
@@ -243,48 +321,86 @@ z の余弦関数の値をラジアンで返します。
   CMath.tan!(1 * Math::PI / 4) # => 1.0
   CMath.tan!(4 * Math::PI / 4) # => 0.0
 
+@see [[m:Math.#tan]]
+
 --- tan(z) -> Float | Complex
 
 z の正接関数の値をラジアンで返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- sinh!(x) -> Float
 
 実数 x の双曲線正弦関数の値を返します。[[m:Math.#sinh]] のエイリアスで
 す。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@param x 実数
+
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#sinh]]
 
 --- sinh(z) -> Float | Complex
 
 z の双曲線正弦関数の値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- cosh!(x) -> Float
 
 実数 x の双曲線余弦関数の値を返します。[[m:Math.#cosh]] のエイリアスで
 す。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@param x 実数
+
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#cosh]]
 
 --- cosh(z) -> Float | Complex
 
 z の双曲線余弦関数の値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- tanh!(x) -> Float
 
 実数 x の双曲線正接関数の値を返します。[[m:Math.#tanh]] のエイリアスで
 す。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@param x 実数
+
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#tanh]]
 
 --- tanh(z) -> Float | Complex
 
 z の双曲線正接関数の値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- asin!(x) -> Float
 
@@ -293,15 +409,23 @@ z の双曲線正接関数の値を返します。
 
 @param x -1.0 <= x <= 1 の範囲内の実数。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#asin]]
 
 --- asin(z) -> Float | Complex
 
 z の逆正弦関数の値をラジアンで返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- acos!(x) -> Float
 
@@ -312,15 +436,23 @@ z の逆正弦関数の値をラジアンで返します。
 
 @return 返される値の範囲は [0, +π] です。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#acos]]
 
 --- acos(z) -> Float | Complex
 
 z の逆余弦関数の値をラジアンで返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- atan!(x) -> Float
 
@@ -331,13 +463,21 @@ z の逆余弦関数の値をラジアンで返します。
 
 @return 返される値の範囲は [-π/2, +π/2] です。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#atan]]
 
 --- atan(z) -> Float | Complex
 
 z の逆正接関数の値をラジアンで返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- atan2!(x, y) -> Float
 
@@ -354,21 +494,39 @@ z の逆正接関数の値をラジアンで返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 
+@see [[m:Math.#atan2]]
+
 --- atan2(x, y) -> Float | Complex
 
 x / y の逆正接関数の値を返します。
+
+@param x 数値
+
+@param y 数値
+
+#@since 1.9.3
+@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+#@end
 
 --- asinh!(x) -> Float
 
 実数 x の逆双曲線正弦関数の値を返します。[[m:Math.#asinh]] のエイリアスです。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#asinh]]
 
 --- asinh(z) -> Float | Complex
 
 z の逆双曲線正弦関数の値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- acosh!(x) -> Float
 
@@ -376,15 +534,23 @@ z の逆双曲線正弦関数の値を返します。
 
 @param x x >= 1 の範囲の実数。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#acosh]]
 
 --- acosh(z) -> Float | Complex
 
 z の逆双曲線余弦関数の値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- atanh!(x) -> Float
 
@@ -394,15 +560,23 @@ z の逆双曲線余弦関数の値を返します。
 
 @return 実数。
 
-@raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
+@raise TypeError x に数値以外を指定した場合に発生します。
 
-@raise Math::DomainError 引数に範囲外の実数を指定した場合に発生します。
+@raise Math::DomainError x に範囲外の実数を指定した場合に発生します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
+
+@see [[m:Math.#atanh]]
 
 --- atanh(z) -> Float | Complex
 
 z の逆双曲線正接関数の値を返します。
+
+@param z 数値
+
+#@since 1.9.3
+@raise TypeError z に数値以外を指定した場合に発生します。
+#@end
 
 --- frexp
 
