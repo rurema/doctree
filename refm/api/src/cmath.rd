@@ -158,6 +158,8 @@ z の対数を返します。
 
 x の常用対数を返します。
 
+@param x 数値
+
 #@since 1.9.3
 @raise TypeError z に数値以外を指定した場合に発生します。
 #@end
@@ -280,6 +282,8 @@ z の正弦関数の値をラジアンで返します。
 です。
 
 @param x 実数
+
+@return [-1, 1] の実数
 
 @raise TypeError x に数値以外を指定した場合に発生します。
 
@@ -512,6 +516,8 @@ x / y の逆正接関数の値を返します。
 --- asinh!(x) -> Float
 
 実数 x の逆双曲線正弦関数の値を返します。[[m:Math.#asinh]] のエイリアスです。
+
+@param x 実数
 
 @raise TypeError x に数値以外を指定した場合に発生します。
 
