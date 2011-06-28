@@ -4,471 +4,627 @@
 
 == Constants
 
---- A1
-#@todo
+--- A1 -> Integer
 
---- A3
-#@todo
+キーパッドの左上を表す定数です。
 
---- B2
-#@todo
+--- A3 -> Integer
 
---- BACKSPACE
-#@todo
+キーパッドの右上を表す定数です。
 
---- BEG
-#@todo
+--- B2 -> Integer
 
---- BREAK
-#@todo
+キーパッドの中心を表す定数です。
 
---- BTAB
-#@todo
+--- BACKSPACE -> Integer
 
---- C1
-#@todo
+バックスペースキーを表す定数です。
 
---- C3
-#@todo
+--- BEG -> Integer
+#@todo ???
+BEG キーを表す定数です。
 
---- CANCEL
-#@todo
+--- BREAK -> Integer
 
---- CATAB
-#@todo
+BREAK キーを表す定数です。
 
---- CLEAR
-#@todo
+--- BTAB -> Integer
 
---- CLOSE
-#@todo
+Back TAB キーを表す定数です。
 
---- COMMAND
-#@todo
+--- C1 -> Integer
 
---- COPY
-#@todo
+キーパッドの左下を表す定数です。
 
---- CREATE
-#@todo
+--- C3 -> Integer
 
---- CTAB
-#@todo
+キーパッドの右下を表す定数です。
 
---- DC
-#@todo
+--- CANCEL -> Integer
 
---- DL
-#@todo
+Cancel キーを表す定数です。
 
---- DOWN
-#@todo
+--- CATAB -> Integer
 
---- EIC
-#@todo
+Clear all tabs
 
---- END
-#@todo
+--- CLEAR -> Integer
 
---- ENTER
-#@todo
+スクリーンのクリアを表す定数です。
 
---- EOL
-#@todo
+--- CLOSE -> Integer
 
---- EOS
-#@todo
+Close キーを表す定数です。
 
---- EXIT
-#@todo
+--- COMMAND -> Integer
 
---- F0
-#@todo
+Command キーを表す定数です。
 
---- F1
-#@todo
+--- COPY -> Integer
 
---- F10
-#@todo
+Copy キーを表す定数です。
 
---- F11
-#@todo
+--- CREATE -> Integer
 
---- F12
-#@todo
+Create キーを表す定数です。
 
---- F13
-#@todo
+--- CTAB -> Integer
 
---- F14
-#@todo
+Clear tab
 
---- F15
-#@todo
+--- DC -> Integer
+#@todo ???
+Delete キーを表す定数です。
 
---- F16
-#@todo
+--- DL -> Integer
 
---- F17
-#@todo
+行を削除するキーを表す定数です。
 
---- F18
-#@todo
+--- DOWN -> Integer
 
---- F19
-#@todo
+下矢印キーを表す定数です。
 
---- F2
-#@todo
+--- EIC -> Integer
 
---- F20
-#@todo
+挿入モードに入るキーを表す定数です。
 
---- F21
-#@todo
+--- END -> Integer
 
---- F22
-#@todo
+End キーを表す定数です。
 
---- F23
-#@todo
+--- ENTER -> Integer
 
---- F24
-#@todo
+Enter キーを表す定数です。
 
---- F25
-#@todo
+--- EOL -> Integer
 
---- F26
-#@todo
+行末までクリアするキーを表す定数です。
 
---- F27
-#@todo
+--- EOS -> Integer
 
---- F28
-#@todo
+スクリーンの末尾までクリアするキーを表す定数です。
 
---- F29
-#@todo
+--- EXIT -> Integer
 
---- F3
-#@todo
+Exit キーを表す定数です。
 
---- F30
-#@todo
+--- F0 -> Integer
 
---- F31
-#@todo
+F0 キーを表す定数です。
 
---- F32
-#@todo
+--- F1 -> Integer
 
---- F33
-#@todo
+F1 キーを表す定数です。
 
---- F34
-#@todo
+--- F10 -> Integer
 
---- F35
-#@todo
+F10 キーを表す定数です。
 
---- F36
-#@todo
+--- F11 -> Integer
 
---- F37
-#@todo
+F11 キーを表す定数です。
 
---- F38
-#@todo
+--- F12 -> Integer
 
---- F39
-#@todo
+F12 キーを表す定数です。
 
---- F4
-#@todo
+--- F13 -> Integer
 
---- F40
-#@todo
+F13 キーを表す定数です。
 
---- F41
-#@todo
+--- F14 -> Integer
 
---- F42
-#@todo
+F14 キーを表す定数です。
 
---- F43
-#@todo
+--- F15 -> Integer
 
---- F44
-#@todo
+F15 キーを表す定数です。
 
---- F45
-#@todo
+--- F16 -> Integer
 
---- F46
-#@todo
+F16 キーを表す定数です。
 
---- F47
-#@todo
+--- F17 -> Integer
 
---- F48
-#@todo
+F17 キーを表す定数です。
 
---- F49
-#@todo
+--- F18 -> Integer
 
---- F5
-#@todo
+F18 キーを表す定数です。
 
---- F50
-#@todo
+--- F19 -> Integer
 
---- F51
-#@todo
+F19 キーを表す定数です。
 
---- F52
-#@todo
+--- F2 -> Integer
 
---- F53
-#@todo
+F2 キーを表す定数です。
 
---- F54
-#@todo
+--- F20 -> Integer
 
---- F55
-#@todo
+F20 キーを表す定数です。
 
---- F56
-#@todo
+--- F21 -> Integer
 
---- F57
-#@todo
+F21 キーを表す定数です。
 
---- F58
-#@todo
+--- F22 -> Integer
 
---- F59
-#@todo
+F22 キーを表す定数です。
 
---- F6
-#@todo
+--- F23 -> Integer
 
---- F60
-#@todo
+F23 キーを表す定数です。
 
---- F61
-#@todo
+--- F24 -> Integer
 
---- F62
-#@todo
+F24 キーを表す定数です。
 
---- F63
-#@todo
+--- F25 -> Integer
 
---- F7
-#@todo
+F25 キーを表す定数です。
 
---- F8
-#@todo
+--- F26 -> Integer
 
---- F9
-#@todo
+F26 キーを表す定数です。
 
---- FIND
-#@todo
+--- F27 -> Integer
 
---- HELP
-#@todo
+F27 キーを表す定数です。
 
---- HOME
-#@todo
+--- F28 -> Integer
 
---- IC
-#@todo
+F28 キーを表す定数です。
 
---- IL
-#@todo
+--- F29 -> Integer
 
---- LEFT
-#@todo
+F29 キーを表す定数です。
 
---- LL
-#@todo
+--- F3 -> Integer
 
---- MARK
-#@todo
+F3 キーを表す定数です。
 
---- MAX
-#@todo
+--- F30 -> Integer
 
---- MESSAGE
-#@todo
+F30 キーを表す定数です。
 
---- MIN
-#@todo
+--- F31 -> Integer
 
---- MOUSE
-#@todo
+F31 キーを表す定数です。
 
---- MOVE
-#@todo
+--- F32 -> Integer
 
---- NEXT
-#@todo
+F32 キーを表す定数です。
 
---- NPAGE
-#@todo
+--- F33 -> Integer
 
---- OPEN
-#@todo
+F33 キーを表す定数です。
 
---- OPTIONS
-#@todo
+--- F34 -> Integer
 
---- PPAGE
-#@todo
+F34 キーを表す定数です。
 
---- PREVIOUS
-#@todo
+--- F35 -> Integer
 
---- PRINT
-#@todo
+F35 キーを表す定数です。
 
---- REDO
-#@todo
+--- F36 -> Integer
 
---- REFERENCE
-#@todo
+F36 キーを表す定数です。
 
---- REFRESH
-#@todo
+--- F37 -> Integer
 
---- REPLACE
-#@todo
+F37 キーを表す定数です。
 
---- RESET
-#@todo
+--- F38 -> Integer
 
---- RESIZE
-#@todo
+F38 キーを表す定数です。
 
---- RESTART
-#@todo
+--- F39 -> Integer
 
---- RESUME
-#@todo
+F39 キーを表す定数です。
 
---- RIGHT
-#@todo
+--- F4 -> Integer
 
---- SAVE
-#@todo
+F4 キーを表す定数です。
 
---- SBEG
-#@todo
+--- F40 -> Integer
 
---- SCANCEL
-#@todo
+F40 キーを表す定数です。
 
---- SCOMMAND
-#@todo
+--- F41 -> Integer
 
---- SCOPY
-#@todo
+F41 キーを表す定数です。
 
---- SCREATE
-#@todo
+--- F42 -> Integer
 
---- SDC
-#@todo
+F42 キーを表す定数です。
 
---- SDL
-#@todo
+--- F43 -> Integer
 
---- SELECT
-#@todo
+F43 キーを表す定数です。
 
---- SEND
-#@todo
+--- F44 -> Integer
 
---- SEOL
-#@todo
+F44 キーを表す定数です。
 
---- SEXIT
-#@todo
+--- F45 -> Integer
 
---- SF
-#@todo
+F45 キーを表す定数です。
 
---- SFIND
-#@todo
+--- F46 -> Integer
 
---- SHELP
-#@todo
+F46 キーを表す定数です。
 
---- SHOME
-#@todo
+--- F47 -> Integer
 
---- SIC
-#@todo
+F47 キーを表す定数です。
 
---- SLEFT
-#@todo
+--- F48 -> Integer
 
---- SMESSAGE
-#@todo
+F48 キーを表す定数です。
 
---- SMOVE
-#@todo
+--- F49 -> Integer
 
---- SNEXT
-#@todo
+F49 キーを表す定数です。
 
---- SOPTIONS
-#@todo
+--- F5 -> Integer
 
---- SPREVIOUS
-#@todo
+F5 キーを表す定数です。
 
---- SPRINT
-#@todo
+--- F50 -> Integer
 
---- SR
-#@todo
+F50 キーを表す定数です。
 
---- SREDO
-#@todo
+--- F51 -> Integer
 
---- SREPLACE
-#@todo
+F51 キーを表す定数です。
 
---- SRESET
-#@todo
+--- F52 -> Integer
 
---- SRIGHT
-#@todo
+F52 キーを表す定数です。
 
---- SRSUME
-#@todo
+--- F53 -> Integer
 
---- SSAVE
-#@todo
+F53 キーを表す定数です。
 
---- SSUSPEND
-#@todo
+--- F54 -> Integer
 
---- STAB
-#@todo
+F54 キーを表す定数です。
 
---- SUNDO
-#@todo
+--- F55 -> Integer
 
---- SUSPEND
-#@todo
+F55 キーを表す定数です。
+
+--- F56 -> Integer
+
+F56 キーを表す定数です。
+
+--- F57 -> Integer
+
+F57 キーを表す定数です。
+
+--- F58 -> Integer
+
+F58 キーを表す定数です。
+
+--- F59 -> Integer
+
+F59 キーを表す定数です。
+
+--- F6 -> Integer
+
+F6 キーを表す定数です。
+
+--- F60 -> Integer
+
+F60 キーを表す定数です。
+
+--- F61 -> Integer
+
+F61 キーを表す定数です。
+
+--- F62 -> Integer
+
+F62 キーを表す定数です。
+
+--- F63 -> Integer
+
+F63 キーを表す定数です。
+
+--- F7 -> Integer
+
+F7 キーを表す定数です。
+
+--- F8 -> Integer
+
+F8 キーを表す定数です。
+
+--- F9 -> Integer
+
+F9 キーを表す定数です。
+
+--- FIND -> Integer
+
+Find キーを表す定数です。
+
+--- HELP -> Integer
+
+Help キーを表す定数です。
+
+--- HOME -> Integer
+
+Home キーを表す定数です。
+
+--- IC -> Integer
+
+文字を挿入するか挿入モードに入るキーを表す定数です。
+
+--- IL -> Integer
+
+行を挿入するキーを表す定数です。
+
+--- LEFT -> Integer
+
+左矢印キーを表す定数です。
 
---- UNDO
+--- LL -> Integer
 #@todo
+Home down or bottom (lower left)
 
---- UP
+--- MARK -> Integer
+
+Mark キーを表す定数です。
+
+--- MAX -> Integer
+
+curses で利用可能なキーを表す定数の最大値です。
+
+--- MESSAGE -> Integer
+
+Message キーを表す定数です。
+
+--- MIN -> Integer
+
+curses で利用可能なキーを表す定数の最小値です。
+
+--- MOUSE -> Integer
 #@todo
+Mouse event read
+
+--- MOVE -> Integer
+
+Move キーを表す定数です。
+
+--- NEXT -> Integer
+
+Next object キーを表す定数です。
+
+--- NPAGE -> Integer
+
+Next Page キーを表す定数です。
+
+--- OPEN -> Integer
+
+Open キーを表す定数です。
+
+--- OPTIONS -> Integer
+
+Opetions キーを表す定数です。
+
+--- PPAGE -> Integer
+
+Previous Page キーを表す定数です。
+
+--- PREVIOUS -> Integer
+
+Previous object キーを表す定数です。
+
+--- PRINT -> Integer
+
+Print キーを表す定数です。
+
+--- REDO -> Integer
+
+Redo キーを表す定数です。
+
+--- REFERENCE -> Integer
+
+Reference キーを表す定数です。
+
+--- REFRESH -> Integer
+
+Refresh キーを表す定数です。
+
+--- REPLACE -> Integer
+
+Replace キーを表す定数です。
+
+--- RESET -> Integer
+
+Reset キーを表す定数です。
+
+--- RESIZE -> Integer
+
+スクリーンがリサイズされたことを表す定数です。
+
+--- RESTART -> Integer
+
+Restart キーを表す定数です。
+
+--- RESUME -> Integer
+
+Resume キーを表す定数です。
+
+--- RIGHT -> Integer
+
+右矢印キーを表す定数です。
+
+--- SAVE -> Integer
+
+Save キーを表す定数です。
+
+--- SBEG -> Integer
+
+Shifted beginning key
+
+--- SCANCEL -> Integer
+
+Shift + Cancel キーを表す定数です。
+
+--- SCOMMAND -> Integer
+
+Shift + Command キーを表す定数です。
+
+--- SCOPY -> Integer
+
+Shift + Copy キーを表す定数です。
+
+--- SCREATE -> Integer
+
+Shift + Create キーを表す定数です。
+
+--- SDC -> Integer
+#@todo ???
+Shift + Delete キーを表す定数です。
+
+--- SDL -> Integer
+
+Shift + 行を削除するキーを表す定数です。
+
+--- SELECT -> Integer
+
+Select キーを表す定数です。
+
+--- SEND -> Integer
+
+Shift + End キーを表す定数です。
+
+--- SEOL -> Integer
+
+Shift + 行末までクリアするキーを表す定数です。
+
+--- SEXIT -> Integer
+
+Shift + Exit キーを表す定数です。
+
+--- SF -> Integer
+
+前に一行スクロールすることを表す定数です。
+
+--- SFIND -> Integer
+
+Shift + Find キーを表す定数です。
+
+--- SHELP -> Integer
+
+Shift + Help キーを表す定数です。
+
+--- SHOME -> Integer
+
+Shift + Home キーを表す定数です。
+
+--- SIC -> Integer
+#@todo ???
+Shift + ... キーを表す定数です。
+
+--- SLEFT -> Integer
+
+Shift + 左矢印キーを表す定数です。
+
+--- SMESSAGE -> Integer
+
+Shift + Message キーを表す定数です。
+
+--- SMOVE -> Integer
+
+Shift + Move キーを表す定数です。
+
+--- SNEXT -> Integer
+
+Shift + Next キーを表す定数です。
+
+--- SOPTIONS -> Integer
+
+Shift + Options キーを表す定数です。
+
+--- SPREVIOUS -> Integer
+
+Shift + Previous キーを表す定数です。
+
+--- SPRINT -> Integer
+
+Shift + Print キーを表す定数です。
+
+--- SR -> Integer
+
+後に一行スクロールすることを表す定数です。
+
+--- SREDO -> Integer
+
+Shift + Redo キーを表す定数です。
+
+--- SREPLACE -> Integer
+
+Shift + Replace キーを表す定数です。
+
+--- SRESET -> Integer
+
+Shift + Reset キーを表す定数です。
+
+--- SRIGHT -> Integer
+
+Shift + 右矢印キーを表す定数です。
+
+--- SRSUME -> Integer
+
+Shift + Resume キーを表す定数です。
+
+--- SSAVE -> Integer
+
+Shift + Save キーを表す定数です。
+
+--- SSUSPEND -> Integer
+
+Shift + Suspend キーを表す定数です。
+
+--- STAB -> Integer
+
+Shift + TAB キーを表す定数です。
+
+--- SUNDO -> Integer
+
+Shift + Undo キーを表す定数です。
+
+--- SUSPEND -> Integer
+
+Suspend キーを表す定数です。
+
+--- UNDO -> Integer
+
+Undo キーを表す定数です。
+
+--- UP -> Integer
+
+上矢印キーを表す定数です。
 
