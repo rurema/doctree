@@ -16,11 +16,11 @@ Ruby curses を使ってテキストユーザインタフェース(以下、TUI)を
 
   (1) [[m:Curses.#init_screen]] で初期化を行います。
   (2) [[c:Curses]] のモジュール関数を使い、
-  入力のエコーを無効にするなどの Ruby curses の設定を行います。
+      入力のエコーを無効にするなどの Ruby curses の設定を行います。
   (3) [[m:Curses.#stdscr]] やそのサブウインドウを操作し、TUI を構築します。
   (4) [[m:Curses.#getch]] や [[m:Curses.#getstr]] により、
-  ユーザからの入力を取得します。入力した情報に従って処理を行い、
-  そして、入力を待つということを繰り返します。
+      ユーザからの入力を取得します。入力した情報に従って処理を行い、
+      そして、入力を待つということを繰り返します。
   (5) 最後に [[m:Curses.#close_screen]] で終了処理を行います。
 
 例: 画面中央に「Hello World!」と表示し、何か入力があると終了する。
@@ -122,25 +122,25 @@ C のプログラムから端末のディスプレイ画面を制御するためのライブラリのことで、
 == Constants
 
 --- REPORT_MOUSE_POSITION -> Integer
-#@todo
+
 マウスの位置を取得するために使用するマスク用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- ALL_MOUSE_EVENTS -> Integer
-#@todo
+
 全てのボタンの状態の変化を取得するために使用するマスク用の定数です。
 
 @see [[m:Curses.getmouse]]
 
 --- A_ALTCHARSET -> Integer
-#@todo
+
 代替文字セットを表す属性のマスク用定数です。
 
 @see [[m:Curses.attrset]]
 
 --- A_ATTRIBUTES -> Integer
-#@todo
+
 属性を展開するために使用する文字列の属性マスク用定数です。
 
 @see [[m:Curses.inch]], [[m:Curses::Window.inch]]
@@ -1295,7 +1295,18 @@ LF (Ctrl-j) を返すようにします。
 
 詳しくは、 man ページの curs_outopts(3X) の nl 関数を参照ください。
 
---- nonl
+ Enable the underlying display device to translate
+ the return key into newline on input, and whether it
+ translates newline into return and line-feed on output
+ (in either case, the call Curses.addch('\n') does the
+ equivalent of return and line feed on the virtual screen).
+ 
+ Initially, these translations do occur. If you disable
+ them using Curses.nonl, curses will be able to make better use
+ of the line-feed capability, resulting in faster cursor
+ motion. Also, curses will then be able to detect the return key.
+
+--- nonl -> nil
 #@todo
 
 cooked モードのとき、return キーの入力に対して
@@ -1303,26 +1314,29 @@ CR (Ctrl-m) を返すようにします。
 
 詳しくは、 man ページの curs_outopts(3X) の nonl 関数を参照ください。
 
---- beep
-#@todo
+ Disable the underlying display device to translate
+ the return key into newline on input
+
+@see [[m:Curses.#nl]]
+
+--- beep -> nil
 
 音を出します。
 この機能がないところでは単に無視されます。
 
---- flash
-#@todo
+--- flash -> nil
 
 画面を一瞬点滅させます。
 この機能がないところでは単に無視されます。
 
---- getch
-#@todo
+--- getch -> Integer
 
 標準入力から 1 バイト読み込みます。
 戻り値は ASCII コードを表す整数です。
 
---- getstr
-#@todo
+@see [[c:Curses::Key]]
+
+--- getstr -> String
 
 標準入力から一行読み込みます。
 戻り値は文字列です。
@@ -1331,195 +1345,374 @@ CR (Ctrl-m) を返すようにします。
 プラットホームではバッファオーバーフローをおこす恐れが
 あります。
 
---- ungetch(ch)
-#@todo
+@see [[m:Curses::Window#getstr]]
+
+--- ungetch(ch) -> nil
 
 文字 ch (ASCII コードを示す整数) をストリームに戻します。
 
---- setpos(y, x)
-#@todo
+全てのウインドウで一つだけキューがあります。
+
+@param ch 文字を一つ ASCII コードで指定します。
+
+
+--- setpos(y, x) -> nil
 
 stdscr のカーソルを座標 (x,y) に移動します。
 座標はともに 0 が始点です。
 
 文字がない場所に setpos した場合の挙動は OS に依存します。
 
---- standout
-#@todo
+@param y Y 座標の値を指定します。
+
+@param x X 座標の値を指定します。
+
+--- standout ->nil
 
 以降書き込む文字を強調します。
+
 「強調」は反転であることが多いようですが、
 そう決められているわけではありません。
 
---- standend
-#@todo
+以下のコードと同じです。
+
+  Curses:Window.attron(A_STANDOUT)
+
+@see [[m:Curses::Window.attrset]]
+
+--- standend -> nil
 
 強調する文字の書き込みを終えます。
 
---- addch(ch)
-#@todo
+以下のコードと同じです。
+
+  Curses.attron(A_NORMAL)
+
+@see [[m:Curses::Window.attrset]]
+
+--- addch(ch) -> nil
 
 stdscr のカーソルの位置に ch (1 バイト) を上書きします。
 
---- insch(ch)
-#@todo
+@param ch 文字を指定します。
+
+@see [[man:curs_addch(3)]]
+
+--- insch(ch) -> nil
 
 stdscr のカーソルの位置に ch (1 バイト) を挿入します。
 
---- addstr(str)
-#@todo
+@param ch 文字を指定します。
+
+--- addstr(str) -> nil
 
 stdscr のカーソルの位置に文字列 str を挿入します。
 
---- delch
-#@todo
+@param str 文字列を指定します。
+
+--- delch -> nil
 
 stdscr のカーソルの位置から 1 バイト削除します。
 
---- deleteln
-#@todo
+--- deleteln -> nil
 
 stdscr のカーソルがある行を削除し、後の行を上に詰めます。
 
---- lines
-#@todo
+--- lines -> Integer
 
 画面に表示可能な行数を返します。
 
---- cols
-#@todo
+--- cols -> Integer
 
 画面に表示可能な桁数(バイト)を返します。
+
 ただし実際にはもう 1 バイト少なくしか表示できないライブラリが
 あるようです。
 
---- inch
-#@todo
+--- inch -> Integer
 
 stdscr のカーソル位置から 1 バイト読みとって返します。
 
 #@since 1.8.3
 
---- clrtoeol
-#@todo
+--- clrtoeol -> nil
 
---- insertln
-#@todo
+現在のカーソル位置からウィンドウの最後までをクリアします。
 
-#@end
+--- insertln -> nil
+
+現在のカーソル位置に一行挿入します。
+
+#@endp
 
 #@since 1.8.1
 
---- def_prog_mode
+--- def_prog_mode -> bool
 #@todo
+Save the current terminal modes as the "program"
+state for use by the Curses.reset_prog_mode
 
---- reset_prog_mode
-#@todo
+This is done automatically by Curses.init_screen
 
---- timeout=
+--- reset_prog_mode -> bool
 #@todo
+Reset the current terminal modes to the saved state
+by the Curses.def_prog_mode
+
+This is done automatically by Curses.close_screen
+
+--- timeout=(delay)
+#@todo
+Sets block and non-blocking reads for the window.
+- If delay is negative, blocking read is used (i.e., waits indefinitely for input).
+- If delay is zero, then non-blocking read is used (i.e., read returns ERR if no input is waiting).
+- If delay is positive, then read blocks for delay milliseconds, and returns ERR if there is still no input.
 
 #@end
 
---- attroff(attrs)
+--- attroff(attrs) -> Integer
+#@todo
+Turns on the named attributes +attrs+ without affecting any others.
+
+@see [[m:Curses::Window.attrset]]
+
+--- attron(attron) -> Integer
+#@todo
+Turns off the named attributes +attrs+
+without turning any other attributes on or off.
+
+@see [[m:Curses::Window.attrset]]
+
+--- attrset(attrs) -> Integer
+#@todo
+Sets the current attributes of the given window to +attrs+.
+
+@see [[m:Curses::Window.attrset]]
+
+--- bkgd(ch) -> bool
 #@todo
 
---- attron(attron)
-#@todo
+Window background manipulation routines.
 
---- attrset(attrs)
-#@todo
+Set the background property of the current
+and then apply the character Integer +ch+ setting
+to every character position in that window.
 
---- bkgd(ch)
-#@todo
+@see [[man:curs_bkgd(3)]]
 
---- bkgdset(ch)
-#@todo
+--- bkgdset(ch) -> nil
 
---- can_change_color?
-#@todo
+Manipulate the background of the named window
+with character Integer +ch+
+
+The background becomes a property of the character
+and moves with the character through any scrolling
+and insert/delete line/character operations.
+
+@see [[man:curs_bkgd(3)]]
+
+--- can_change_color? -> bool
+
+端末が色を変更できる場合は真を返します。
+そうでない場合は偽を返します。
 
 #@since 1.9.2
 --- colors -> Integer
-#@todo
+#@todo ???
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+色の数を返します。
 
-@raise NotImplementedError
+@raise NotImplementedError サポートしていない環境で発生します。
 
 #@end
---- color_content(color)
+--- color_content(color) -> Array
+
+与えられた色の RGB 値を三要素の配列として返します。
+
+@param color 色を Curses::COLOR_RED などで指定します。
+
+--- color_pair(attrs) -> Integer
 #@todo
 
---- color_pair(attr)
-#@todo
+Sets the color pair attributes to +attrs+.
+
+以下のコードと同じです。
+
+  Curses.attrset(COLOR_PAIR(+attrs+))
+
+@param attr 
 
 #@since 1.9.2
 --- color_pairs -> Integer
 #@todo
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+Returns the COLOR_PAIRS available, if the curses library supports it.
 
-@raise NotImplementedError
+@raise NotImplementedError サポートしていない環境で発生します。
 
 #@end
---- curs_set(visibility)
+--- curs_set(visibility) -> Integer | nil
 #@todo
 
---- delch
+Sets Cursor Visibility.
+
+ * 0: invisible
+ * 1: visible
+ * 2: very visible
+
+@param visibility カーソルの可視性を指定します。
+
+--- delch -> nil
+
+カーソルの下の文字を削除します。
+
+--- getmouse -> Integer | nil
 #@todo
 
---- getmouse
+Returns coordinates of the mouse.
+
+This will read and pop the mouse event data off the queue
+
+@see [[m:Curses::ALL_MOUSE_EVENTS]], [[m:Curses::REPORT_MOUSE_POSITION]]
+
+--- has_colors? -> bool
+
+端末がカラー表示に対応している場合は真を返します。
+そうでない場合は偽を返します。
+
+--- init_color(color, r, g, b) -> bool
 #@todo
 
---- has_colors?
+Changes the definition of a color. It takes four arguments:
+ * the number of the color to be changed, +color+
+ * the amount of red, +r+
+ * the amount of green, +g+
+ * the amount of blue, +b+
+
+The value of the first argument must be between 0 and  COLORS.
+(See the section Colors for the default color index.)  Each
+of the last three arguments must be a value between 0 and 1000.
+When Curses.init_color is used, all occurrences of that color
+on the screen immediately change to the new definition.
+
+@param color ???
+
+@param r レッドの量を指定します。
+@param g グリーンの量を指定します。
+@param b ブルーの量を指定します。
+
+--- init_pair(pair, f, b) -> bool
 #@todo
 
---- init_color(color, r, g, b)
+Changes the definition of a color-pair.
+
+It takes three arguments: the number of the color-pair to be changed +pair+,
+the foreground color number +f+, and the background color number +b+.
+
+If the color-pair was previously initialized, the screen is
+refreshed and all occurrences of that color-pair are changed
+to the new definition.
+
+
+--- keyname(c) -> String | nil
 #@todo
 
---- init_pair(pair, f, b)
-#@todo
+キー c に対応する文字列を返します。
 
---- keyname(c)
-#@todo
+@param c キーの名前を指定します。
 
---- mouseinterval(interval)
+--- mouseinterval(interval) -> bool
 #@todo
+The Curses.mouseinterval function sets the maximum time
+(in thousands of a second) that can elapse between press
+and release events for them to be recognized as a click.
 
---- mousemask(mask)
+Use Curses.mouseinterval(0) to disable click resolution.
+This function returns the previous interval value.
+
+Use Curses.mouseinterval(-1) to obtain the interval without
+altering it.
+
+The default is one sixth of a second.
+
+@param interval
+
+--- mousemask(mask) -> Integer
+
+与えられた mask から報告可能なイベントを取り出して返します。
+
+@param mask マスク値を指定します。
+
+--- pair_content(pair) -> Array
 #@todo
+与えられた pair に含まれる文字色と背景色を要素とする二要素の配列を返します。
 
---- pair_content(pair)
+@param pair 
+
+--- pair_number(attrs) -> Integer
 #@todo
+Returns the Fixnum color pair number of attributes +attrs+.
+@param attrs 
 
---- pair_number(attrs)
+--- resizeterm(lines, cols) -> bool | nil
+--- resize(lines, cols) -> bool | nil
+
+現在の端末サイズを変更します。
+
+@param lines 変更後の行数を指定します。
+
+@param cols 変更後のカラム数を指定します。
+
+@return サイズの変更に成功した場合は、真を返します。失敗した場合は偽を返します。
+        機能をサポートしていない場合は nil を返します。
+
+--- scrl(num) -> bool
 #@todo
+Scrolls the current window Fixnum +num+ lines.
+The current cursor position is not changed.
 
---- resize(lin, col)
---- resizeterm(lin, col)
+For positive +num+, it scrolls up.
+
+For negative +num+, it scrolls down.
+
+@param num スクロールする行数を指定します。
+
+--- setscrreg(top, bottom) -> bool
 #@todo
+Set a software scrolling region in a window.
++top+ and +bottom+ are lines numbers of the margin.
 
-#@# 実体は resizeterm
+If this option and Curses.scrollok are enabled, an attempt to move off
+the bottom margin line causes all lines in the scrolling region
+to scroll one line in the direction of the first line.
+Only the text of the window is scrolled.
 
---- scrl(n)
+@param top 上方向のマージン行数を指定します。
+
+@param bottom 下方向のマージン行数を指定します。
+
+--- start_color -> bool
 #@todo
+Initializes the color attributes, for terminals that support it.
 
---- setscrreg(top, bottom)
-#@todo
+This must be called, in order to use color attributes.
+It is good practice to call it just after Curses.init_screen
 
---- start_color
+--- ungetmouse(mevent) -> bool
 #@todo
+It pushes a KEY_MOUSE event onto the input queue, and associates with that
+event the given state data and screen-relative character-cell coordinates.
 
---- ungetmouse(mevent)
-#@todo
+The Curses.ungetmouse function behaves analogously to Curses.ungetch.
+
+@param mevent 入力キューに戻すマウスイベントを指定します。
 
 #@since 1.9.2
 --- ESCDELAY -> Integer
 
 ESC の入力を破棄する時間(ミリ秒単位)を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- ESCDELAY=(val)
 
@@ -1528,13 +1721,13 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 @param val ESC の入力を破棄する時間(ミリ秒単位)を指定します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- TABSIZE -> Integer
 
 タブ幅を取得します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- TABSIZE=(val)
 
@@ -1542,16 +1735,16 @@ ESC の入力を破棄する時間(ミリ秒単位)を val に設定します。
 
 @param val タブ幅を指定します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
-
+@raise  NotImplementedError サポートしていない環境で発生します。
 
 --- use_default_colors -> nil
 
 前景色と背景色を端末のデフォルト値 (-1) に設定します。
 
-詳細は man ページの default_colors(3X) を参照ください。
+@raise  NotImplementedError サポートしていない環境で発生します。
 
-サポートしていない環境では、例外 NotImplementedError が発生します。
+@see [[man:default_colors(3X)]]
+
 #@end
 
 #@include(curses/Curses__Key)
