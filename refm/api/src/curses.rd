@@ -121,708 +121,1030 @@ C のプログラムから端末のディスプレイ画面を制御するためのライブラリのことで、
 
 == Constants
 
---- REPORT_MOUSE_POSITION
+--- REPORT_MOUSE_POSITION -> Integer
 #@todo
+マウスの位置を取得するために使用するマスク用の定数です。
 
---- ALL_MOUSE_EVENTS
-#@todo
+@see [[m:Curses.getmouse]]
 
---- A_ALTCHARSET
+--- ALL_MOUSE_EVENTS -> Integer
 #@todo
+全てのボタンの状態の変化を取得するために使用するマスク用の定数です。
 
---- A_ATTRIBUTES
-#@todo
+@see [[m:Curses.getmouse]]
 
---- A_BLINK
+--- A_ALTCHARSET -> Integer
 #@todo
+代替文字セットを表す属性のマスク用定数です。
 
---- A_BOLD
-#@todo
+@see [[m:Curses.attrset]]
 
---- A_CHARTEXT
+--- A_ATTRIBUTES -> Integer
 #@todo
+属性を展開するために使用する文字列の属性マスク用定数です。
 
---- A_COLOR
-#@todo
+@see [[m:Curses.inch]], [[m:Curses::Window.inch]]
 
---- A_DIM
-#@todo
+--- A_BLINK -> Integer
 
---- A_HORIZONTAL
-#@todo
+文字列の点滅を表す属性のマスク用の定数です。
 
---- A_INVIS
-#@todo
+@see [[m:Curses.attrset]]
 
---- A_LEFT
-#@todo
+--- A_BOLD -> Integer
 
---- A_LOW
-#@todo
+文字列を明るくするか太字にするための属性マスク用の定数です。
 
---- A_NORMAL
-#@todo
+@see [[m:Curses.attrset]]
 
---- A_PROTECT
-#@todo
+--- A_CHARTEXT -> Integer
 
---- A_REVERSE
-#@todo
+文字を抽出するための属性マスク用定数です。
 
---- A_RIGHT
-#@todo
+@see [[m:Curses.attrset]]
 
---- A_STANDOUT
-#@todo
+--- A_COLOR -> Integer
 
---- A_TOP
-#@todo
+色ペアのフィールド情報を抽出するための文字列の属性マスク用の定数です。
 
---- A_UNDERLINE
-#@todo
+@see [[m:Curses.inch]], [[m:Curses::Window.inch]]
 
---- A_VERTICAL
-#@todo
+--- A_DIM -> Integer
 
---- BUTTON1_CLICKED
-#@todo
+文字列を半分明るくするための属性マスク用の定数です。
 
---- BUTTON1_DOUBLE_CLICKED
-#@todo
+@see [[m:Curses.attrset]]
 
---- BUTTON1_PRESSED
-#@todo
+--- A_HORIZONTAL -> Integer
 
---- BUTTON1_RELEASED
-#@todo
+水平方向のハイライトを表す属性マスク用の定数です。
 
---- BUTTON1_TRIPLE_CLICKED
-#@todo
+@see [[man:curs_attr(3x)]]
 
---- BUTTON2_CLICKED
-#@todo
+--- A_INVIS -> Integer
 
---- BUTTON2_DOUBLE_CLICKED
-#@todo
+インビジブルかブランクを表す属性マスク用の定数です。
 
---- BUTTON2_PRESSED
-#@todo
+@see [[m:Curses.attrset]]
 
---- BUTTON2_RELEASED
-#@todo
+--- A_LEFT -> Integer
 
---- BUTTON2_TRIPLE_CLICKED
-#@todo
 
---- BUTTON3_CLICKED
-#@todo
+???を表す属性マスク用の定数です。
 
---- BUTTON3_DOUBLE_CLICKED
-#@todo
+@see [[man:curs_attr(3x)]]
 
---- BUTTON3_PRESSED
-#@todo
+--- A_LOW -> Integer
+#@todo ???
 
---- BUTTON3_RELEASED
-#@todo
+???を表す属性マスク用の定数です。
 
---- BUTTON3_TRIPLE_CLICKED
-#@todo
+@see [[man:curs_attr(3x)]]
 
---- BUTTON4_CLICKED
+--- A_NORMAL -> Integer
 #@todo
 
---- BUTTON4_DOUBLE_CLICKED
-#@todo
+???を表す属性マスク用の定数です。
 
---- BUTTON4_PRESSED
-#@todo
+@see [[m:Curses.attrset]]
 
---- BUTTON4_RELEASED
+--- A_PROTECT -> Integer
 #@todo
+プロテクトモードを表す属性マスク用の定数です。
 
---- BUTTON4_TRIPLE_CLICKED
-#@todo
+@see [[m:Curses.attrset]]
 
---- BUTTON_ALT
-#@todo
+--- A_REVERSE -> Integer
 
---- BUTTON_CTRL
-#@todo
+文字列を反転を表す属性マスク用の定数です。
 
---- BUTTON_SHIFT
-#@todo
+@see [[m:Curses.attrset]]
 
---- COLOR_BLACK
+--- A_RIGHT -> Integer
 #@todo
+???を表す属性マスク用の定数です。
 
---- COLOR_BLUE
-#@todo
+@see [[man:curs_attr(3x)]]
 
---- COLOR_CYAN
+--- A_STANDOUT -> Integer
 #@todo
+ターミナルで使用できる最も強調するモードを表す属性マスク用の定数です。
 
---- COLOR_GREEN
-#@todo
+@see [[m:Curses.attrset]]
 
---- COLOR_MAGENTA
+--- A_TOP -> Integer
 #@todo
+top highlight
+@see [[man:curs_attr(3x)]]
 
---- COLOR_RED
-#@todo
+--- A_UNDERLINE -> Integer
 
---- COLOR_WHITE
-#@todo
+文字列に下線を引くことを表す属性マスク用の定数です。
 
---- COLOR_YELLOW
-#@todo
+@see [[m:Curses.attrset]]
 
---- KEY_A1
+--- A_VERTICAL -> Integer
 #@todo
+vertical highlight
+@see [[man:curs_attr(3x)]]
 
---- KEY_A3
-#@todo
+--- BUTTON1_CLICKED -> Integer
 
---- KEY_B2
-#@todo
+マウスボタン 1 をクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_BACKSPACE
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_BEG
-#@todo
+--- BUTTON1_DOUBLE_CLICKED -> Integer
 
---- KEY_BREAK
-#@todo
+マウスボタン 1 をダブルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_BTAB
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_C1
-#@todo
+--- BUTTON1_PRESSED -> Integer
 
---- KEY_C3
-#@todo
+マウスボタン 1 を押したことを表すマウスイベント用の定数です。
 
---- KEY_CANCEL
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CATAB
-#@todo
+--- BUTTON1_RELEASED -> Integer
 
---- KEY_CLEAR
-#@todo
+マウスボタン 1 を離したことを表すマウスイベント用の定数です。
 
---- KEY_CLOSE
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_COMMAND
-#@todo
+--- BUTTON1_TRIPLE_CLICKED -> Integer
 
---- KEY_COPY
-#@todo
+マウスボタン 1 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_CREATE
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTAB
-#@todo
+--- BUTTON2_CLICKED -> Integer
 
---- KEY_CTRL_A
-#@todo
+マウスボタン 2 をクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_B
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_C
-#@todo
+--- BUTTON2_DOUBLE_CLICKED -> Integer
 
---- KEY_CTRL_D
-#@todo
+マウスボタン 2 をダブルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_E
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_F
-#@todo
+--- BUTTON2_PRESSED -> Integer
 
---- KEY_CTRL_G
-#@todo
+マウスボタン 2 を押したことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_H
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_I
-#@todo
+--- BUTTON2_RELEASED -> Integer
 
---- KEY_CTRL_J
-#@todo
+マウスボタン 2 を離したことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_K
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_L
-#@todo
+--- BUTTON2_TRIPLE_CLICKED -> Integer
 
---- KEY_CTRL_M
-#@todo
+マウスボタン 2 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_N
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_O
-#@todo
+--- BUTTON3_CLICKED -> Integer
 
---- KEY_CTRL_P
-#@todo
+マウスボタン 3 をクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_Q
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_R
-#@todo
+--- BUTTON3_DOUBLE_CLICKED -> Integer
 
---- KEY_CTRL_S
-#@todo
+マウスボタン 3 をダブルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_T
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_U
-#@todo
+--- BUTTON3_PRESSED -> Integer
 
---- KEY_CTRL_V
-#@todo
+マウスボタン 3 を押したことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_W
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_CTRL_X
-#@todo
+--- BUTTON3_RELEASED -> Integer
 
---- KEY_CTRL_Y
-#@todo
+マウスボタン 3 を離したことを表すマウスイベント用の定数です。
 
---- KEY_CTRL_Z
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_DC
-#@todo
+--- BUTTON3_TRIPLE_CLICKED -> Integer
 
---- KEY_DL
-#@todo
+マウスボタン 3 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_DOWN
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_EIC
-#@todo
+--- BUTTON4_CLICKED -> Integer
 
---- KEY_END
-#@todo
+マウスボタン 4 をクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_ENTER
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_EOL
-#@todo
+--- BUTTON4_DOUBLE_CLICKED -> Integer
 
---- KEY_EOS
-#@todo
+マウスボタン 4 をダブルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_EXIT
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F0
-#@todo
+--- BUTTON4_PRESSED -> Integer
 
---- KEY_F1
-#@todo
+マウスボタン 4 を押したことを表すマウスイベント用の定数です。
 
---- KEY_F10
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F11
-#@todo
+--- BUTTON4_RELEASED -> Integer
 
---- KEY_F12
-#@todo
+マウスボタン 4 を離したことを表すマウスイベント用の定数です。
 
---- KEY_F13
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F14
-#@todo
+--- BUTTON4_TRIPLE_CLICKED -> Integer
 
---- KEY_F15
-#@todo
+マウスボタン 3 をトリプルクリックしたことを表すマウスイベント用の定数です。
 
---- KEY_F16
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F17
-#@todo
+--- BUTTON_ALT -> Integer
 
---- KEY_F18
-#@todo
+マウス操作中に ALT キーを押下していることを表すマウスイベント用の定数です。
 
---- KEY_F19
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F2
-#@todo
+--- BUTTON_CTRL -> Integer
 
---- KEY_F20
-#@todo
+マウス操作中に CTRL キーを押下していることを表すマウスイベント用の定数です。
 
---- KEY_F21
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F22
-#@todo
+--- BUTTON_SHIFT -> Integer
 
---- KEY_F23
-#@todo
+マウス操作中に SHIFT キーを押下していることを表すマウスイベント用の定数です。
 
---- KEY_F24
-#@todo
+@see [[m:Curses.getmouse]]
 
---- KEY_F25
-#@todo
+--- COLOR_BLACK -> Integer
 
---- KEY_F26
-#@todo
+黒を表す定数です。
 
---- KEY_F27
-#@todo
+--- COLOR_BLUE -> Integer
 
---- KEY_F28
-#@todo
+青を表す定数です。
 
---- KEY_F29
-#@todo
+--- COLOR_CYAN -> Integer
 
---- KEY_F3
-#@todo
+シアンを表す定数です。
 
---- KEY_F30
-#@todo
+--- COLOR_GREEN -> Integer
 
---- KEY_F31
-#@todo
+緑を表す定数です。
 
---- KEY_F32
-#@todo
+--- COLOR_MAGENTA -> Integer
 
---- KEY_F33
-#@todo
+マゼンタを表す定数です。
 
---- KEY_F34
-#@todo
+--- COLOR_RED -> Integer
 
---- KEY_F35
-#@todo
+赤を表す定数です。
 
---- KEY_F36
-#@todo
+--- COLOR_WHITE -> Integer
 
---- KEY_F37
-#@todo
+白を表す定数です。
 
---- KEY_F38
-#@todo
+--- COLOR_YELLOW -> Integer
 
---- KEY_F39
-#@todo
+黄色を表す定数です。
 
---- KEY_F4
-#@todo
+--- KEY_A1 -> Integer
 
---- KEY_F40
-#@todo
+キーパッドの左上を表す定数です。
 
---- KEY_F41
-#@todo
+--- KEY_A3 -> Integer
 
---- KEY_F42
-#@todo
+キーパッドの右上を表す定数です。
 
---- KEY_F43
-#@todo
+--- KEY_B2 -> Integer
 
---- KEY_F44
-#@todo
+キーパッドの中心を表す定数です。
 
---- KEY_F45
-#@todo
+--- KEY_BACKSPACE -> Integer
 
---- KEY_F46
-#@todo
+バックスペースキーを表す定数です。
 
---- KEY_F47
-#@todo
+--- KEY_BEG -> Integer
+#@todo ???
+BEG キーを表す定数です。
 
---- KEY_F48
-#@todo
+--- KEY_BREAK -> Integer
 
---- KEY_F49
-#@todo
+BREAK キーを表す定数です。
 
---- KEY_F5
-#@todo
+--- KEY_BTAB -> Integer
 
---- KEY_F50
-#@todo
+Back TAB キーを表す定数です。
 
---- KEY_F51
-#@todo
+--- KEY_C1 -> Integer
 
---- KEY_F52
-#@todo
+キーパッドの左下を表す定数です。
 
---- KEY_F53
-#@todo
+--- KEY_C3 -> Integer
 
---- KEY_F54
-#@todo
+キーパッドの右下を表す定数です。
 
---- KEY_F55
-#@todo
+--- KEY_CANCEL -> Integer
 
---- KEY_F56
-#@todo
+Cancel キーを表す定数です。
 
---- KEY_F57
+--- KEY_CATAB -> Integer
 #@todo
+Clear all tabs
 
---- KEY_F58
-#@todo
+--- KEY_CLEAR -> Integer
 
---- KEY_F59
-#@todo
+スクリーンのクリアを表す定数です。
 
---- KEY_F6
-#@todo
+--- KEY_CLOSE -> Integer
 
---- KEY_F60
-#@todo
+Close キーを表す定数です。
 
---- KEY_F61
-#@todo
+--- KEY_COMMAND -> Integer
 
---- KEY_F62
-#@todo
+Command キーを表す定数です。
 
---- KEY_F63
-#@todo
+--- KEY_COPY -> Integer
 
---- KEY_F7
-#@todo
+Copy キーを表す定数です。
 
---- KEY_F8
-#@todo
+--- KEY_CREATE -> Integer
 
---- KEY_F9
-#@todo
+Create キーを表す定数です。
 
---- KEY_FIND
+--- KEY_CTAB -> Integer
 #@todo
+Clear tab
 
---- KEY_HELP
-#@todo
+--- KEY_CTRL_A -> Integer
 
---- KEY_HOME
-#@todo
+Ctrl + A を表す定数です。
 
---- KEY_IC
-#@todo
+--- KEY_CTRL_B -> Integer
 
---- KEY_IL
-#@todo
+Ctrl + B を表す定数です。
 
---- KEY_LEFT
-#@todo
+--- KEY_CTRL_C -> Integer
 
---- KEY_LL
-#@todo
+Ctrl + C を表す定数です。
 
---- KEY_MARK
-#@todo
+--- KEY_CTRL_D -> Integer
 
---- KEY_MAX
-#@todo
+Ctrl + D を表す定数です。
 
---- KEY_MESSAGE
-#@todo
+--- KEY_CTRL_E -> Integer
 
---- KEY_MIN
-#@todo
+Ctrl + E を表す定数です。
 
---- KEY_MOUSE
-#@todo
+--- KEY_CTRL_F -> Integer
 
---- KEY_MOVE
-#@todo
+Ctrl + F を表す定数です。
 
---- KEY_NEXT
-#@todo
+--- KEY_CTRL_G -> Integer
 
---- KEY_NPAGE
-#@todo
+Ctrl + G を表す定数です。
 
---- KEY_OPEN
-#@todo
+--- KEY_CTRL_H -> Integer
 
---- KEY_OPTIONS
-#@todo
+Ctrl + H を表す定数です。
 
---- KEY_PPAGE
-#@todo
+--- KEY_CTRL_I -> Integer
 
---- KEY_PREVIOUS
-#@todo
+Ctrl + I を表す定数です。
 
---- KEY_PRINT
-#@todo
+--- KEY_CTRL_J -> Integer
 
---- KEY_REDO
-#@todo
+Ctrl + J を表す定数です。
 
---- KEY_REFERENCE
-#@todo
+--- KEY_CTRL_K -> Integer
 
---- KEY_REFRESH
-#@todo
+Ctrl + K を表す定数です。
 
---- KEY_REPLACE
-#@todo
+--- KEY_CTRL_L -> Integer
 
---- KEY_RESET
-#@todo
+Ctrl + L を表す定数です。
 
---- KEY_RESIZE
-#@todo
+--- KEY_CTRL_M -> Integer
 
---- KEY_RESTART
-#@todo
+Ctrl + M を表す定数です。
 
---- KEY_RESUME
-#@todo
+--- KEY_CTRL_N -> Integer
 
---- KEY_RIGHT
-#@todo
+Ctrl + N を表す定数です。
 
---- KEY_SAVE
-#@todo
+--- KEY_CTRL_O -> Integer
 
---- KEY_SBEG
-#@todo
+Ctrl + O を表す定数です。
 
---- KEY_SCANCEL
-#@todo
+--- KEY_CTRL_P -> Integer
 
---- KEY_SCOMMAND
-#@todo
+Ctrl + P を表す定数です。
 
---- KEY_SCOPY
-#@todo
+--- KEY_CTRL_Q -> Integer
 
---- KEY_SCREATE
-#@todo
+Ctrl + Q を表す定数です。
 
---- KEY_SDC
-#@todo
+--- KEY_CTRL_R -> Integer
 
---- KEY_SDL
-#@todo
+Ctrl + R を表す定数です。
 
---- KEY_SELECT
-#@todo
+--- KEY_CTRL_S -> Integer
 
---- KEY_SEND
-#@todo
+Ctrl + S を表す定数です。
 
---- KEY_SEOL
-#@todo
+--- KEY_CTRL_T -> Integer
 
---- KEY_SEXIT
-#@todo
+Ctrl + T を表す定数です。
 
---- KEY_SF
-#@todo
+--- KEY_CTRL_U -> Integer
 
---- KEY_SFIND
-#@todo
+Ctrl + U を表す定数です。
 
---- KEY_SHELP
-#@todo
+--- KEY_CTRL_V -> Integer
 
---- KEY_SHOME
-#@todo
+Ctrl + V を表す定数です。
 
---- KEY_SIC
-#@todo
+--- KEY_CTRL_W -> Integer
 
---- KEY_SLEFT
-#@todo
+Ctrl + W を表す定数です。
 
---- KEY_SMESSAGE
-#@todo
+--- KEY_CTRL_X -> Integer
 
---- KEY_SMOVE
-#@todo
+Ctrl + X を表す定数です。
 
---- KEY_SNEXT
-#@todo
+--- KEY_CTRL_Y -> Integer
 
---- KEY_SOPTIONS
-#@todo
+Ctrl + Y を表す定数です。
 
---- KEY_SPREVIOUS
-#@todo
+--- KEY_CTRL_Z -> Integer
 
---- KEY_SPRINT
-#@todo
+Ctrl + Z を表す定数です。
 
---- KEY_SR
-#@todo
+--- KEY_DC -> Integer
+#@todo ???
+Delete キーを表す定数です。
 
---- KEY_SREDO
-#@todo
+--- KEY_DL -> Integer
 
---- KEY_SREPLACE
-#@todo
+行を削除するキーを表す定数です。
 
---- KEY_SRESET
-#@todo
+--- KEY_DOWN -> Integer
 
---- KEY_SRIGHT
-#@todo
+下矢印キーを表す定数です。
 
---- KEY_SRSUME
-#@todo
+--- KEY_EIC -> Integer
 
---- KEY_SSAVE
-#@todo
+挿入モードに入るキーを表す定数です。
 
---- KEY_SSUSPEND
-#@todo
+--- KEY_END -> Integer
 
---- KEY_STAB
-#@todo
+End キーを表す定数です。
+
+--- KEY_ENTER -> Integer
+
+Enter キーを表す定数です。
+
+--- KEY_EOL -> Integer
+
+行末までクリアするキーを表す定数です。
+
+--- KEY_EOS -> Integer
+
+スクリーンの末尾までクリアするキーを表す定数です。
+
+--- KEY_EXIT -> Integer
+
+Exit キーを表す定数です。
+
+--- KEY_F0 -> Integer
+
+F0 キーを表す定数です。
+
+--- KEY_F1 -> Integer
+
+F1 キーを表す定数です。
+
+--- KEY_F10 -> Integer
+
+F10 キーを表す定数です。
+
+--- KEY_F11 -> Integer
+
+F11 キーを表す定数です。
+
+--- KEY_F12 -> Integer
+
+F12 キーを表す定数です。
+
+--- KEY_F13 -> Integer
 
---- KEY_SUNDO
+F13 キーを表す定数です。
+
+--- KEY_F14 -> Integer
+
+F14 キーを表す定数です。
+
+--- KEY_F15 -> Integer
+
+F15 キーを表す定数です。
+
+--- KEY_F16 -> Integer
+
+F16 キーを表す定数です。
+
+--- KEY_F17 -> Integer
+
+F17 キーを表す定数です。
+
+--- KEY_F18 -> Integer
+
+F18 キーを表す定数です。
+
+--- KEY_F19 -> Integer
+
+F19 キーを表す定数です。
+
+--- KEY_F2 -> Integer
+
+F2 キーを表す定数です。
+
+--- KEY_F20 -> Integer
+
+F20 キーを表す定数です。
+
+--- KEY_F21 -> Integer
+
+F21 キーを表す定数です。
+
+--- KEY_F22 -> Integer
+
+F22 キーを表す定数です。
+
+--- KEY_F23 -> Integer
+
+F23 キーを表す定数です。
+
+--- KEY_F24 -> Integer
+
+F24 キーを表す定数です。
+
+--- KEY_F25 -> Integer
+
+F25 キーを表す定数です。
+
+--- KEY_F26 -> Integer
+
+F26 キーを表す定数です。
+
+--- KEY_F27 -> Integer
+
+F27 キーを表す定数です。
+
+--- KEY_F28 -> Integer
+
+F28 キーを表す定数です。
+
+--- KEY_F29 -> Integer
+
+F29 キーを表す定数です。
+
+--- KEY_F3 -> Integer
+
+F3 キーを表す定数です。
+
+--- KEY_F30 -> Integer
+
+F30 キーを表す定数です。
+
+--- KEY_F31 -> Integer
+
+F31 キーを表す定数です。
+
+--- KEY_F32 -> Integer
+
+F32 キーを表す定数です。
+
+--- KEY_F33 -> Integer
+
+F33 キーを表す定数です。
+
+--- KEY_F34 -> Integer
+
+F34 キーを表す定数です。
+
+--- KEY_F35 -> Integer
+
+F35 キーを表す定数です。
+
+--- KEY_F36 -> Integer
+
+F36 キーを表す定数です。
+
+--- KEY_F37 -> Integer
+
+F37 キーを表す定数です。
+
+--- KEY_F38 -> Integer
+
+F38 キーを表す定数です。
+
+--- KEY_F39 -> Integer
+
+F39 キーを表す定数です。
+
+--- KEY_F4 -> Integer
+
+F4 キーを表す定数です。
+
+--- KEY_F40 -> Integer
+
+F40 キーを表す定数です。
+
+--- KEY_F41 -> Integer
+
+F41 キーを表す定数です。
+
+--- KEY_F42 -> Integer
+
+F42 キーを表す定数です。
+
+--- KEY_F43 -> Integer
+
+F43 キーを表す定数です。
+
+--- KEY_F44 -> Integer
+
+F44 キーを表す定数です。
+
+--- KEY_F45 -> Integer
+
+F45 キーを表す定数です。
+
+--- KEY_F46 -> Integer
+
+F46 キーを表す定数です。
+
+--- KEY_F47 -> Integer
+
+F47 キーを表す定数です。
+
+--- KEY_F48 -> Integer
+
+F48 キーを表す定数です。
+
+--- KEY_F49 -> Integer
+
+F49 キーを表す定数です。
+
+--- KEY_F5 -> Integer
+
+F5 キーを表す定数です。
+
+--- KEY_F50 -> Integer
+
+F50 キーを表す定数です。
+
+--- KEY_F51 -> Integer
+
+F51 キーを表す定数です。
+
+--- KEY_F52 -> Integer
+
+F52 キーを表す定数です。
+
+--- KEY_F53 -> Integer
+
+F53 キーを表す定数です。
+
+--- KEY_F54 -> Integer
+
+F54 キーを表す定数です。
+
+--- KEY_F55 -> Integer
+
+F55 キーを表す定数です。
+
+--- KEY_F56 -> Integer
+
+F56 キーを表す定数です。
+
+--- KEY_F57 -> Integer
+
+F57 キーを表す定数です。
+
+--- KEY_F58 -> Integer
+
+F58 キーを表す定数です。
+
+--- KEY_F59 -> Integer
+
+F59 キーを表す定数です。
+
+--- KEY_F6 -> Integer
+
+F6 キーを表す定数です。
+
+--- KEY_F60 -> Integer
+
+F60 キーを表す定数です。
+
+--- KEY_F61 -> Integer
+
+F61 キーを表す定数です。
+
+--- KEY_F62 -> Integer
+
+F62 キーを表す定数です。
+
+--- KEY_F63 -> Integer
+
+F63 キーを表す定数です。
+
+--- KEY_F7 -> Integer
+
+F7 キーを表す定数です。
+
+--- KEY_F8 -> Integer
+
+F8 キーを表す定数です。
+
+--- KEY_F9 -> Integer
+
+F9 キーを表す定数です。
+
+--- KEY_FIND -> Integer
+
+Find キーを表す定数です。
+
+--- KEY_HELP -> Integer
+
+Help キーを表す定数です。
+
+--- KEY_HOME -> Integer
+
+Home キーを表す定数です。
+
+--- KEY_IC -> Integer
+
+文字を挿入するか挿入モードに入るキーを表す定数です。
+
+--- KEY_IL -> Integer
+
+行を挿入するキーを表す定数です。
+
+--- KEY_LEFT -> Integer
+
+左矢印キーを表す定数です。
+
+--- KEY_LL -> Integer
 #@todo
+Home down or bottom (lower left)
+
+--- KEY_MARK -> Integer
+
+Mark キーを表す定数です。
+
+--- KEY_MAX -> Integer
+
+curses で利用可能なキーを表す定数の最大値です。
 
---- KEY_SUSPEND
+--- KEY_MESSAGE -> Integer
+
+Message キーを表す定数です。
+
+--- KEY_MIN -> Integer
+
+curses で利用可能なキーを表す定数の最小値です。
+
+--- KEY_MOUSE -> Integer
 #@todo
+Mouse event read
 
---- KEY_UNDO
+--- KEY_MOVE -> Integer
 #@todo
+Move キーを表す定数です。
+
+--- KEY_NEXT -> Integer
+
+Next object キーを表す定数です。
+
+--- KEY_NPAGE -> Integer
+
+Next Page キーを表す定数です。
+
+--- KEY_OPEN -> Integer
+
+Open キーを表す定数です。
+
+--- KEY_OPTIONS -> Integer
+
+Opetions キーを表す定数です。
+
+--- KEY_PPAGE -> Integer
+
+Previous Page キーを表す定数です。
+
+--- KEY_PREVIOUS -> Integer
 
---- KEY_UP
+Previous object キーを表す定数です。
+
+--- KEY_PRINT -> Integer
+
+Print キーを表す定数です。
+
+--- KEY_REDO -> Integer
+
+Redo キーを表す定数です。
+
+--- KEY_REFERENCE -> Integer
+
+Reference キーを表す定数です。
+
+--- KEY_REFRESH -> Integer
+
+Refresh キーを表す定数です。
+
+--- KEY_REPLACE -> Integer
+
+Replace キーを表す定数です。
+
+--- KEY_RESET -> Integer
+
+Reset キーを表す定数です。
+
+--- KEY_RESIZE -> Integer
+
+スクリーンがリサイズされたことを表す定数です。
+
+--- KEY_RESTART -> Integer
+
+Restart キーを表す定数です。
+
+--- KEY_RESUME -> Integer
+
+Resume キーを表す定数です。
+
+--- KEY_RIGHT -> Integer
+
+右矢印キーを表す定数です。
+
+--- KEY_SAVE -> Integer
+
+Save キーを表す定数です。
+
+--- KEY_SBEG -> Integer
 #@todo
+Shifted beginning key
+
+--- KEY_SCANCEL -> Integer
+
+Shift + Cancel キーを表す定数です。
+
+--- KEY_SCOMMAND -> Integer
+
+Shift + Command キーを表す定数です。
+
+--- KEY_SCOPY -> Integer
+
+Shift + Copy キーを表す定数です。
+
+--- KEY_SCREATE -> Integer
+
+Shift + Create キーを表す定数です。
+
+--- KEY_SDC -> Integer
+#@todo ???
+Shift + Delete キーを表す定数です。
+
+--- KEY_SDL -> Integer
+
+Shift + 行を削除するキーを表す定数です。
+
+--- KEY_SELECT -> Integer
+
+Select キーを表す定数です。
+
+--- KEY_SEND -> Integer
+
+Shift + End キーを表す定数です。
+
+--- KEY_SEOL -> Integer
+
+Shift + 行末までクリアするキーを表す定数です。
+
+--- KEY_SEXIT -> Integer
+
+Shift + Exit キーを表す定数です。
+
+--- KEY_SF -> Integer
+
+前に一行スクロールすることを表す定数です。
+
+--- KEY_SFIND -> Integer
+
+Shift + Find キーを表す定数です。
+
+--- KEY_SHELP -> Integer
+
+Shift + Help キーを表す定数です。
+
+--- KEY_SHOME -> Integer
+
+Shift + Home キーを表す定数です。
+
+--- KEY_SIC -> Integer
+#@todo ???
+Shift + ... キーを表す定数です。
+
+--- KEY_SLEFT -> Integer
+
+Shift + 左矢印キーを表す定数です。
+
+--- KEY_SMESSAGE -> Integer
+
+Shift + Message キーを表す定数です。
+
+--- KEY_SMOVE -> Integer
+
+Shift + Move キーを表す定数です。
+
+--- KEY_SNEXT -> Integer
+
+Shift + Next キーを表す定数です。
+
+--- KEY_SOPTIONS -> Integer
+
+Shift + Options キーを表す定数です。
+
+--- KEY_SPREVIOUS -> Integer
+
+Shift + Previous キーを表す定数です。
+
+--- KEY_SPRINT -> Integer
+
+Shift + Print キーを表す定数です。
+
+--- KEY_SR -> Integer
+
+後に一行スクロールすることを表す定数です。
+
+--- KEY_SREDO -> Integer
+
+Shift + Redo キーを表す定数です。
+
+--- KEY_SREPLACE -> Integer
+
+Shift + Replace キーを表す定数です。
+
+--- KEY_SRESET -> Integer
+
+Shift + Reset キーを表す定数です。
+
+--- KEY_SRIGHT -> Integer
+
+Shift + 右矢印キーを表す定数です。
+
+--- KEY_SRSUME -> Integer
+
+Shift + Resume キーを表す定数です。
+
+--- KEY_SSAVE -> Integer
+
+Shift + Save キーを表す定数です。
+
+--- KEY_SSUSPEND -> Integer
+
+Shift + Suspend キーを表す定数です。
+
+--- KEY_STAB -> Integer
+
+Shift + TAB キーを表す定数です。
+
+--- KEY_SUNDO -> Integer
+
+Shift + Undo キーを表す定数です。
+
+--- KEY_SUSPEND -> Integer
+
+Suspend キーを表す定数です。
+
+--- KEY_UNDO -> Integer
+
+Undo キーを表す定数です。
+
+--- KEY_UP -> Integer
 
+上矢印キーを表す定数です。
 
 == Module Functions
 
@@ -854,7 +1176,7 @@ curses の終了処理を行います。
 
 詳しくは、 man ページの curs_initscr(3X) の endwin 関数を参照ください。
 
-@see [[m:Curses.#init_screen]]、[[m:Curses.#stdscr]]
+@see [[m:Curses.#init_screen]]、[[m:Curses.#stdscr]], [[man:curs_initscr(3X)]]
 
 --- closed? -> bool
 
