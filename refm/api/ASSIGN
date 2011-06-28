@@ -101,14 +101,9 @@ _builtin/printf-format                          done
 #---------------------------------------------------------
 English                         kouya           done
 Env                             mukai           done
-Win32API
 abbrev                          okkez           done
 base64                          mukai           done
 benchmark                       okkez           done
-bigdecimal                      mrkn
-bigdecimal/jacobian             mrkn
-bigdecimal/ludcmp               mrkn
-bigdecimal/newton               mrkn
 bigdecimal/util                 sho-h           done
 bigdecimal/math                 sho-h           done
 cgi                             okkez           done
@@ -132,14 +127,6 @@ digest/md5                      okkez           done
 digest/rmd160                   okkez           done
 digest/sha1                     okkez           done
 digest/sha2                     okkez           done
-dl                                                          
-dl/Symbol                       
-dl/import                       
-dl/struct                       
-dl/types                        
-dl/win32
-dl/dl2                          sheepman
-drb                             
 e2mmap                          okkez           done
 erb                             snoozer05       done
 eregex                          okkez           done
@@ -147,7 +134,6 @@ etc                             okkez           done
 expect                          okkez           done
 fcntl                           okkez           done
 fiber                           okkez           done
-fiddle
 fileutils                       okkez           done
 final                           okkez           done
 finalize                        okkez           done
@@ -173,8 +159,6 @@ json                            okkez           done
 kconv                           ohai            done
 logger                          okkez           done
 mailread                        masao           done
-mathn                           yugui
-matrix                          bornite
 md5                             okkez           done
 miniunit/mock                   okkez           done
 miniunit/spec                   okkez           done
@@ -212,7 +196,6 @@ prime                           yugui           done
 profile                         okkez           done
 profiler                        okkez           done
 pstore                          okkez           done
-psych
 pty                             okkez           done
 rake                            okkez           done
 racc/parser
@@ -223,43 +206,7 @@ readbytes                       okkez           done
 readline                        kouji           done
 resolv                          ohai            done
 resolv-replace                  ohai            done
-rexml/attlistdecl
-rexml/attribute
-rexml/cdata
-rexml/child
-rexml/comment
-rexml/doctype
-rexml/document
-rexml/dtd
-rexml/element
-rexml/encoding
-rexml/encodings
-rexml/entity
-rexml/functions
-rexml/instruction
-rexml/light
-rexml/namespace
-rexml/node
-rexml/output
-rexml/parent
-rexml/parseexception
-rexml/parsers
-rexml/quickpath
-rexml/rexml
-rexml/sax2listener
-rexml/source
-rexml/streamlistener
-rexml/syncenumerator
-rexml/text
-rexml/validation
-rexml/xmldecl
-rexml/xmltokens
-rexml/xpath
-rexml/xpath_parser
-rinda/rinda                     
-rinda/tuplespace                
 ripper                          sho-h           done
-rss
 rubygems                        okkez           done
 rubyunit                        okkez           done
 scanf                           kouya           done
@@ -273,7 +220,6 @@ singleton                       snoozer05       done
 socket                          kouya
 stringio                                        done
 strscan                         kouya           done
-syck
 sync                            kouya           done
 syslog                          kouya           done
 tempfile                        kouya           done
@@ -295,10 +241,8 @@ weakref                         bornite         done
 webrick                         okkez           done
 webrick/cgi                     okkez           done
 webrick/ssl                     okkez           done
-win32/registry
 win32/resolv                    sho-h           done
 win32ole                        arton           done
-xmlrpc                          
 yaml                            kouya
 yaml/store                      kouya           done
 zlib                            kouya           done

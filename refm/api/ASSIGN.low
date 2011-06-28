@@ -1,5 +1,64 @@
 # LIBRARY_NAME                  OWNER           STATUS
 #---------------------------------------------------------
+Win32API
+bigdecimal                      mrkn
+bigdecimal/jacobian             mrkn
+bigdecimal/ludcmp               mrkn
+bigdecimal/newton               mrkn
+dl                                                          
+dl/Symbol                       
+dl/import                       
+dl/struct                       
+dl/types                        
+dl/win32
+dl/dl2                          sheepman
+drb                             
+fiddle
+mathn                           yugui
+matrix                          bornite
+psych
+rexml/attlistdecl
+rexml/attribute
+rexml/cdata
+rexml/child
+rexml/comment
+rexml/doctype
+rexml/document
+rexml/dtd
+rexml/element
+rexml/encoding
+rexml/encodings
+rexml/entity
+rexml/functions
+rexml/instruction
+rexml/light
+rexml/namespace
+rexml/node
+rexml/output
+rexml/parent
+rexml/parseexception
+rexml/parsers
+rexml/quickpath
+rexml/rexml
+rexml/sax2listener
+rexml/source
+rexml/streamlistener
+rexml/syncenumerator
+rexml/text
+rexml/validation
+rexml/xmldecl
+rexml/xmltokens
+rexml/xpath
+rexml/xpath_parser
+rinda/rinda                     
+rinda/tuplespace                
+rss
+syck
+win32/registry
+xmlrpc                          
+
+# LIBRARY_NAME                  OWNER           STATUS
+#---------------------------------------------------------
 soap
 wsdl
 xsd
