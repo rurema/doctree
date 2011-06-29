@@ -194,7 +194,7 @@ Socket::AF_INET)を指定します。
 
 @param type アドレスタイプ(デフォルトはSocket::AF_INET)を指定します。
 
-@raise SocketError [[man(3):gethostbyaddr]] の呼び出しにエラーがあった場合に発生します。
+@raise SocketError [[man:gethostbyaddr(3)]] の呼び出しにエラーがあった場合に発生します。
 
 --- gethostbyname(host) -> Array
 
