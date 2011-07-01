@@ -104,6 +104,11 @@ z の対数を返します。
   CMath.log(Complex(0, 0)) # => -Infinity+0.0i
   CMath.log(0)             # => -Infinity
 
+#@until 1.9.3
+[注意] 1.9.2 以下では z に 0+0i を与えると [[c:Math::DomainError]] が発
+生するバグがあります。
+#@end
+
 #@since 1.9.2
 --- log2!(x) -> Float
 #@else
