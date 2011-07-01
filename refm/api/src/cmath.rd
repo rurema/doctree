@@ -104,8 +104,6 @@ z の対数を返します。
   CMath.log(Complex(0, 0)) # => -Infinity+0.0i
   CMath.log(0)             # => -Infinity
 
-#@todo 底を与えたときの例を追加。
-
 #@since 1.9.2
 --- log2!(x) -> Float
 #@else
