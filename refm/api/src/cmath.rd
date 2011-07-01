@@ -78,7 +78,7 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
   CMath.log!(Math::E) # => 1.0
   CMath.log!(1)       # => 0.0
   CMath.log!(100, 10) # => 2.0
-  CMath.log!(-1.0)     # => Math::DomainError
+  CMath.log!(-1.0)    # => Math::DomainError
 
 @see [[m:Math.#log]]
 
