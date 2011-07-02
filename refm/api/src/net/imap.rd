@@ -18,7 +18,7 @@ Unixシステムでは、ディレクトリ階層上の
 まず [[m:Net::IMAP#select]] もしくは
 [[m:Net::IMAP#examine]] で処理対象のメールボックスを
 指定する必要があります。これらの操作が成功したならば、
-「selected」状態に移行し、対象のメールボックスが「currentな」
+「selected」状態に移行し、そのメールボックスが「処理対象の」
 メールボックスとなります。このようにしてメールボックスを
 選択してから、selected状態を終える(別のメールボックスを選択したり、
 接続を終了したり)までをセッションと呼びます。
@@ -27,7 +27,7 @@ Unixシステムでは、ディレクトリ階層上の
 UID です。
 
 message sequence number はメールボックス内の各メッセージに1から順に
-振られた番号です。セッション中にcurrentなメールボックスに
+振られた番号です。セッション中に処理対象のメールボックスに
 新たなメッセージが追加された場合、そのメッセージの
 message sequence number は
 最後のメッセージの message sequence number+1となります。
@@ -295,18 +295,17 @@ UTF-7 を修正したものです。
 
 デフォルトは 10000 です。通常は変える必要はないでしょう。
 
-@param 設定する最大値を
+@param count 設定する最大値の整数
 @see [[m:Net::IMAP#max_flag_count=]]
 #@end
 
 == Methods
 
---- greeting
-#@todo
+--- greeting -> Net::IMAP::UntaggedResponse
+サーバから最初に送られてくるメッセージ(greeting message)
+を返します。
 
-Returns an initial greeting response from the server.
-
---- responses
+--- responses -> { String => [object] }
 #@todo
 
 Returns recorded untagged responses.
@@ -314,32 +313,33 @@ Returns recorded untagged responses.
 ex).
 
   imap.select("inbox")
-  p imap.responses["EXISTS"][-1]
+  p imap.responses["EXISTS"].last
   #=> 2
-  p imap.responses["UIDVALIDITY"][-1]
+  p imap.responses["UIDVALIDITY"].last
   #=> 968263756
 
---- disconnect
-#@todo
+--- disconnect -> nil
+サーバとの接続を切断します。
 
-Disconnects from the server.
+@see [[m:Net::IMAP#disconnected?]]
 
---- capability
-#@todo
+--- capability -> [String]
+CAPABILITY コマンドを送ってサーバがサポートしている
+機能(capabilities)のリストを文字列の配列として返します。
 
-Sends a CAPABILITY command, and returns a listing of
-capabilities that the server supports.
+capability は IMAP に関連する RFC などで定義されています。
 
---- noop
-#@todo
+  imap.capability
+  # => ["IMAP4REV1", "UNSELECT", "IDLE", "NAMESPACE", "QUOTA", ... ]
 
-Sends a NOOP command to the server. It does nothing.
+--- noop -> Net::IMAP::TaggedResponse
+NOOP コマンドを送ります。
 
---- logout
-#@todo
+このコマンドは何もしません。
 
-Sends a LOGOUT command to inform the server that the client is
-done with the connection.
+--- logout -> Net::IMAP::TaggedResponse
+LOGOUT コマンドを送り、コネクションを切断することを
+サーバに伝えます。
 
 --- authenticate(auth_type, arg...)
 #@todo
@@ -353,34 +353,71 @@ ex).
 
   imap.authenticate('LOGIN', user, password)
 
---- login(user, password)
-#@todo
+auth_type としては以下がサポートされています。
+  * "LOGIN"
+  * "PLAIN"
+  * "CRAM-MD5"
+  * "DIGEST-MD5"
 
-Sends a LOGIN command to identify the client and carries
-the plaintext password authenticating this user.
+--- login(user, password) -> Net::IMAP::TaggedResponse
+LOGIN コマンドを送り、平文でパスワードを送りクライアント
+ユーザを認証します。
 
---- select(mailbox)
-#@todo
+[[m:Net::IMAP#authenticate]] で "LOGIN" を使うのとは異なる
+ことに注意してください。authenticate では AUTHENTICATE コマンドを
+送ります。
 
-Sends a SELECT command to select a mailbox so that messages
-in the mailbox can be accessed.
+認証成功時には
+認証成功レスポンスを返り値として返します。
 
---- examine(mailbox)
-#@todo
+認証失敗時には例外が発生します。
 
-Sends a EXAMINE command to select a mailbox so that messages
-in the mailbox can be accessed. However, the selected mailbox
-is identified as read-only.
+@param user ユーザ名文字列
+@param password パスワード文字列
+@raise Net::IMAP::NoResponseError 認証に失敗した場合に発生します
 
---- create(mailbox)
-#@todo
+--- select(mailbox) -> Net::IMAP::TaggedResponse
+SELECT コマンドを送り、指定したメールボックスを処理対象の
+メールボックスにします。
 
-Sends a CREATE command to create a new mailbox.
+このコマンドが成功すると、クライアントの状態が「selected」になります。
 
---- delete(mailbox)
-#@todo
+このコマンドを実行した直後に [[m:Net::IMAP#responses]]["EXISTS"].last
+を調べると、メールボックス内のメールの数がわかります。
+また、[[m:Net::IMAP#responses]]["RECENT"].lastで、
+最新のメールの数がわかります。
+これらの値はセッション中に変わりうることに注意してください。
+[[m:Net::IMAP#add_response_handler]] を使うとそのような更新情報を
+即座に取得できます。
 
-Sends a DELETE command to remove the mailbox.
+@param mailbox 処理対象としたいメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError mailboxが存在しない等の理由でコマンドの実行に失敗
+       した場合に発生します。
+
+--- examine(mailbox) -> Net::IMAP::TaggedResponse
+EXAMINE コマンドを送り、指定したメールボックスを処理対象の
+メールボックスにします。
+
+[[m:Net::IMAP#select]] と異なりセッション中はメールボックスが
+読み取り専用となります。それ以外は select と同じです。
+
+@param mailbox 処理対象としたいメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError mailboxが存在しない等の理由でコマンドの実行に失敗
+       した場合に発生します。
+
+--- create(mailbox) -> Net::IMAP::TaggedResponse
+CREATE  コマンドを送り、新しいメールボックスを作ります。
+
+@param mailbox 新しいメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスが作れなかった場合に発生します
+
+--- delete(mailbox) -> Net::IMAP::TaggedResponse
+DELETE コマンドを送り、指定したメールボックスを削除します。
+
+@param mailbox 削除するメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを削除した場合
+       に発生します。指定した名前のメールボックスが存在しない場合や、
+       ユーザにメールボックスを削除する権限がない場合に発生します。
 
 --- rename(mailbox, newname)
 #@todo
@@ -450,20 +487,25 @@ ex).
   hello world
   EOF
 
---- check
-#@todo
+--- check -> Net::IMAP::TaggedResponse
+CHECK コマンドを送り、現在処理しているメールボッススの
+チェックポイントを要求します。
 
-Sends a CHECK command to request a checkpoint of the currently
-selected mailbox.
+チェックポイントの要求とは、サーバ内部で保留状態になっている
+操作を完了させることを意味します。例えばメモリ上にあるメールの
+データをディスクに書き込むため、fsyncを呼んだりすることです。
+実際に何が行なわれるかはサーバの実装によりますし、何も行なわれない
+場合もあります。
 
---- close
-#@todo
 
-Sends a CLOSE command to close the currently selected mailbox.
-The CLOSE command permanently removes from the mailbox all
-messages that have the \Deleted flag set.
+--- close -> Net::IMAP::TaggedResponse
+CLOSE コマンドを送り、処理中のメールボックスを閉じます。
 
---- expunge
+このコマンドによって、どのメールボックスも選択されていない
+状態に移行します。
+そして \Deleted フラグが付けられたメールがすべて削除されます。
+
+--- expunge 
 #@todo
 
 Sends a EXPUNGE command to permanently remove from the currently
@@ -616,10 +658,12 @@ Sends a STARTTLS command to start TLS session.
 #@end
 
 #@since 1.8.2
---- disconnected?
-#@todo
+--- disconnected? -> bool
 
-Returns true if disconnected from the server.
+サーバとの接続が切断されていれば真を返します。
+
+@see [[m:Net::IMAP#disconnect]]
+
 #@end
 
 --- thread(algorithm, search_keys, charset)
@@ -682,72 +726,86 @@ Returns the raw data string.
 
 = class Net::IMAP::UntaggedResponse < Struct
 
-Net::IMAP::UntaggedResponse represents untagged responses.
+IMAP のタグ付きレスポンスを表すクラスです。
 
-Data transmitted by the server to the client and status responses
-that do not indicate command completion are prefixed with the token
-"*", and are called untagged responses.
+IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
+タグなしのものはクライアントからのコマンド完了応答ではない
+レスポンスです。
 
-  response_data   ::= "*" SPACE (resp_cond_state / resp_cond_bye /
-                      mailbox_data / message_data / capability_data)
+@see [[c:Net::IMAP::TaggedResponse]]
 
 == Instance Methods
 
---- name
-#@todo
+--- name -> String
 
-Returns the name such as "FLAGS", "LIST", "FETCH"....
+レスポンスの名前(種類)を返します。
 
---- data
-#@todo
+例えば以下のような値を返します。これらの具体的な意味は
+[[RFC:2060]] を参考にしてください。
+  * "OK"
+  * "NO"
+  * "BAD"
+  * "BYE"
+  * "PREAUTH"
+  * "CAPABILITY"
+  * "LIST"
+  * "FLAGS"
+  *  etc
 
+--- data -> object
+
+レスポンスを解析した結果のオブジェクトを返します。
+
+レスポンスによって異なるオブジェクトを返します。
+[[c:Net::IMAP::MailboxList]] であったりフラグを表わす
+シンボルの配列であったりします。
 Returns the data such as an array of flag symbols,
 a [[c:Net::IMAP::MailboxList]] object....
 
---- raw_data
-#@todo
+--- raw_data -> String
 
-Returns the raw data string.
+レスポンス文字列を返します。
 
-
-
+@see [[m:Net::IMAP::UntaggedResponse#data]]
 = class Net::IMAP::TaggedResponse < Struct
 
-Net::IMAP::TaggedResponse represents tagged responses.
+IMAP のタグ付きレスポンスを表すクラスです。
 
-The server completion result response indicates the success or
-failure of the operation.  It is tagged with the same tag as the
-client command which began the operation.
+IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
+タグ付きのレスポンスはクライアントが発行したコマンドによる
+操作が成功するか失敗するかのどちらかで
+完了したことを意味します。タグによって
+どのコマンドが完了したのかを示します。
 
-  response_tagged ::= tag SPACE resp_cond_state CRLF
-  
-  tag             ::= 1*<any ATOM_CHAR except "+">
-  
-  resp_cond_state ::= ("OK" / "NO" / "BAD") SPACE resp_text
+@see [[c:Net::IMAP::UntaggedResponse]]
 
 == Instance Methods
 
---- tag
-#@todo
+--- tag -> String
 
-Returns the tag.
+レスポンスに対応付けられたタグを返します。
 
---- name
-#@todo
+--- name -> String
 
-Returns the name. the name is one of "OK", "NO", "BAD".
+レスポンスの名前(種類)を返します。
 
---- data
-#@todo
+例えば以下のような値を返します。これらの具体的な意味は
+[[RFC:2060]] を参考にしてください。
+  * "OK"
+  * "NO"
+  * "BAD"
 
-Returns the data. See [[c:Net::IMAP::ResponseText]].
+--- data -> Net::IMAP::ResponseText 
 
---- raw_data
-#@todo
+レスポンスを解析したオブジェクトを返します。
 
-Returns the raw data string.
+@see [[c:Net::IMAP::ResponseText]]
 
+--- raw_data -> String
 
+レスポンス文字列を返します。
+
+@see [[m:Net::IMAP::TaggedResponse#data]]
 
 = class Net::IMAP::ResponseText < Struct
 
@@ -1368,74 +1426,74 @@ Returns true.
 #@# = class Net::IMAP::RawData
 
 
-
-= class Net::IMAP::LoginAuthenticator
-
-Authenticator for the "LOGIN" authentication type.
-See [[m:Net::IMAP#authenticate]].
-
-== Class Methods
-
---- new(user, password)
-#@todo
-
-== Instance Methods
-
---- process(data)
-#@todo
-
-
-
-= class Net::IMAP::CramMD5Authenticator
-
-Authenticator for the "CRAM-MD5" authentication type.
-See [[m:Net::IMAP#authenticate]].
-
-== Class Methods
-
---- new(user, password)
-#@todo
-
-== Instance Methods
-
---- process(challenge)
-#@todo
-
-
-
-#@since 1.9.1
-= class Net::IMAP::PlainAuthenticator
-
-Authenticator for the "PLAIN" authentication type.
-See [[m:Net::IMAP#authenticate]].
-
-== Class Methods
-
---- new(user, password)
-#@todo
-
-== Instance Methods
-
---- process(data)
-#@todo
-
-
-
-= class Net::IMAP::DigestMD5Authenticator
-
-Authenticator for the "DIGEST-MD5" authentication type.
-See [[m:Net::IMAP#authenticate]].
-
-== Class Methods
-
---- new(user, password, authname = nil)
-#@todo
-
-== Instance Methods
-
---- process(challenge)
-#@todo
-#@end
+#@# internal classes for authentication
+#@# = class Net::IMAP::LoginAuthenticator
+#@# 
+#@# Authenticator for the "LOGIN" authentication type.
+#@# See [[m:Net::IMAP#authenticate]].
+#@# 
+#@# == Class Methods
+#@# 
+#@# --- new(user, password)
+#@# #@todo
+#@# 
+#@# == Instance Methods
+#@# 
+#@# --- process(data)
+#@# #@todo
+#@# 
+#@# 
+#@# 
+#@# = class Net::IMAP::CramMD5Authenticator
+#@# 
+#@# Authenticator for the "CRAM-MD5" authentication type.
+#@# See [[m:Net::IMAP#authenticate]].
+#@# 
+#@# == Class Methods
+#@# 
+#@# --- new(user, password)
+#@# #@todo
+#@# 
+#@# == Instance Methods
+#@# 
+#@# --- process(challenge)
+#@# #@todo
+#@# 
+#@# 
+#@# 
+#@# #@since 1.9.1
+#@# = class Net::IMAP::PlainAuthenticator
+#@# 
+#@# Authenticator for the "PLAIN" authentication type.
+#@# See [[m:Net::IMAP#authenticate]].
+#@# 
+#@# == Class Methods
+#@# 
+#@# --- new(user, password)
+#@# #@todo
+#@# 
+#@# == Instance Methods
+#@# 
+#@# --- process(data)
+#@# #@todo
+#@# 
+#@# 
+#@# 
+#@# = class Net::IMAP::DigestMD5Authenticator
+#@# 
+#@# Authenticator for the "DIGEST-MD5" authentication type.
+#@# See [[m:Net::IMAP#authenticate]].
+#@# 
+#@# == Class Methods
+#@# 
+#@# --- new(user, password, authname = nil)
+#@# #@todo
+#@# 
+#@# == Instance Methods
+#@# 
+#@# --- process(challenge)
+#@# #@todo
+#@# #@end
 
 
 
