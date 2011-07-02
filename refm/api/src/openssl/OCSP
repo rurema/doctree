@@ -1,182 +1,563 @@
 = module OpenSSL::OCSP
 
+OCSP(Online Certificate Status Protocol)を取り扱うための
+モジュールです。OCSP は [[RFC:2560]] で定義されています。
+
+このモジュールは OCSP のリクエストとレスポンスを取り扱う
+機能を持っています。
+
+OCSP レスポンダと通信する機能はありません。ユーザが例えば
+OCSP over http などを実装する必要があります。
+
+=== 例
+OCSP レスポンダにリクエストを送ってその返答を表示する
+  require 'openssl'
+  require 'net/http'
+  # ...
+  cert # 検証対象の証明書(Certificate オブジェクト)
+  ca_cert # cert の CA の証明書(Certificate オブジェクト)
+  store # 信頼している証明書ストア
+  cid = OpenSSL::OCSP::CertificateId(cert, ca_cert)
+  req = OpenSSL::OCSP::Response.new(cid)
+  req.add_nonce
+  
+  http = Net::HTTP.new('http://ocsp.example.com', 80)
+  httpres = http.post("/", req.to_der, 'content-type' => 'application/ocsp-request')
+  raise "HTTP error" if !httpres.kind_of?(Net::HTTPOK)
+  res = OpenSSL::OCSP::Response.new(httpres.body)
+  
+  puts "Response status: #{res.status_string}"
+  exit if res.status != OpenSSL::OCSP::STATUS_SUCCESSFUL
+
+  basic_resp = res.basic
+  raise "nonce error" if req.check_nonce(basic_resp)
+  unless basic_resp.verify([], store)
+    puts "verify response fail"
+  end
+  rescid, status, reason, revtime, thisupd, nextupd, exts = basic_resp.status.first
+  STATUS2MESSAGE = { 
+    OpenSSL::OCSP::V_CERTSTATUS_GOOD => "OK", 
+    OpenSSL::OCSP::V_CERTSTATUS_REVOKED => "REVOKED", 
+    OpenSSL::OCSP::V_CERTSTATUS_UNKNOWN => "UNKNOWN", 
+  }
+  puts "status: #{STATUS2MESSAGE[status]}"
+  puts "reason: #{reason}" if status == OpenSSL::OCSP::V_CERTSTATUS_REVOKED
+  puts "revoked time: #{revtime}" if status == OpenSSL::OCSP::V_CERTSTATUS_REVOKED
+  puts "crl update: #{thisupd}"
+  puts "crl next update: #{nextupd}"
+  puts "extensions:"
+  exts.each{|ext| p ext}
+
 == Constants
 
---- NOCASIGN
-#@todo
+--- NOCASIGN -> Integer
+このフラグ定数は使われていません。
 
---- NOCERTS
-#@todo
+#@# 意味は
+#@# don't allow an OCSP response to be signed by the issuing
+#@# CA certificate. 
+#@# とのこと
 
---- NOCHAIN
-#@todo
+--- NOCERTS -> Integer
+署名時に署名データに証明書を含めないことを意味します。
 
---- NOCHECKS
-#@todo
+--- NOCHAIN -> Integer
+証明書チェインを使わないことを意味します。
 
---- NODELEGATED
-#@todo
+--- NOCHECKS -> Integer
+署名の検証における追加的なチェックを省略することを意味します。
 
---- NOEXPLICIT
-#@todo
+--- NODELEGATED -> Integer
+delegated trust を許可しないことを意味します。
 
---- NOINTERN
-#@todo
+このフラグ定数は使われていません。
 
---- NOSIGS
-#@todo
+--- NOEXPLICIT -> Integer
+証明書ストア内の Root CA を信用しないことを意味します。
 
---- NOTIME
-#@todo
+--- NOINTERN -> Integer
+Request/Response の署名データに含まれている証明書から
+署名者の証明書を「探さない」ことを意味します。
 
---- NOVERIFY
-#@todo
+--- NOSIGS -> Integer
+署名の検証を行わないことを意味します。
 
---- RESPID_KEY
-#@todo
+--- NOTIME -> Integer
+OCSP 応答の生成時刻を正しく調整しないことを意味します。
 
---- RESPONSE_STATUS_INTERNALERROR
-#@todo
+--- NOVERIFY -> Integer
+署名に使った鍵の証明書の検証を行わないことを意味します。
 
---- RESPONSE_STATUS_MALFORMEDREQUEST
-#@todo
+--- RESPID_KEY -> Integer
+OCSP レスポンダ の ID として公開鍵のハッシュ値を用いること
+を意味します。
 
---- RESPONSE_STATUS_SIGREQUIRED
-#@todo
+詳しくは [[RFC:2560]] および X.509 を確認してください。
 
---- RESPONSE_STATUS_SUCCESSFUL
-#@todo
+--- RESPONSE_STATUS_INTERNALERROR -> Integer
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+OCSP レスポンダの内部エラーにより妥当な応答を返せないことを意味します。
 
---- RESPONSE_STATUS_TRYLATER
-#@todo
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
---- RESPONSE_STATUS_UNAUTHORIZED
-#@todo
 
---- REVOKED_STATUS_AFFILIATIONCHANGED
-#@todo
+--- RESPONSE_STATUS_MALFORMEDREQUEST -> Integer
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+リクエストの構文が正しくないことを意味します。
 
---- REVOKED_STATUS_CACOMPROMISE
-#@todo
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
---- REVOKED_STATUS_CERTIFICATEHOLD
-#@todo
 
---- REVOKED_STATUS_CESSATIONOFOPERATION
-#@todo
+--- RESPONSE_STATUS_SIGREQUIRED -> Integer
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+サーバがクライアントにリクエストへの署名を要求していることを意味します。
 
---- REVOKED_STATUS_KEYCOMPROMISE
-#@todo
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
---- REVOKED_STATUS_NOSTATUS
-#@todo
 
---- REVOKED_STATUS_REMOVEFROMCRL
-#@todo
+--- RESPONSE_STATUS_SUCCESSFUL -> Integer
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+正しく応答したことを意味します。
 
---- REVOKED_STATUS_SUPERSEDED
-#@todo
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
---- REVOKED_STATUS_UNSPECIFIED
-#@todo
+--- RESPONSE_STATUS_TRYLATER -> Integer
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+レスポンダが一時的に応答できないことを意味します。
 
---- TRUSTOTHER
-#@todo
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
---- V_CERTSTATUS_GOOD
-#@todo
+--- RESPONSE_STATUS_UNAUTHORIZED -> Integer
+[[m:OpenSSL::OCSP::Response#status]] のステータスコードで 、
+クライアントからサーバへの応答が認可されていないことを意味します。
 
---- V_CERTSTATUS_REVOKED
-#@todo
+詳しくは [[RFC:2560]] 2.3 を見てください。
 
---- V_CERTSTATUS_UNKNOWN
-#@todo
+--- REVOKED_STATUS_AFFILIATIONCHANGED -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+証明書の記載内容が変更されたことを意味します。
 
---- V_RESPID_KEY
-#@todo
+詳しくは [[RFC:3280]] や X.509 を参照してください。
 
---- V_RESPID_NAME
-#@todo
+--- REVOKED_STATUS_CACOMPROMISE -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+CA が危殆化したことを意味します。
 
-= class OpenSSL::OCSP::OCSPError < Object
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+--- REVOKED_STATUS_CERTIFICATEHOLD -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+一時的な保留を意味します。
+
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+--- REVOKED_STATUS_CESSATIONOFOPERATION -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+証明書の運用を止めたことを意味します。
+
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+--- REVOKED_STATUS_KEYCOMPROMISE -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+鍵が危殆化したことを意味します。
+
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+
+--- REVOKED_STATUS_NOSTATUS -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+BasicResponse にコードが含まれていないことを意味します。
+
+
+--- REVOKED_STATUS_REMOVEFROMCRL -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+CRL からの削除を意味します。
+
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+
+--- REVOKED_STATUS_SUPERSEDED -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+証明書が破棄されたことを意味します。
+
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+--- REVOKED_STATUS_UNSPECIFIED -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] の失効理由コードで、
+未指定を意味します。
+
+詳しくは [[RFC:3280]] や X.509 を参照してください。
+
+--- TRUSTOTHER -> Integer
+明示的に渡した証明書を検証なしで信用することを意味します。
+
+--- V_CERTSTATUS_GOOD -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] 
+のステータスコードで証明書が有効であることを意味します。
+
+--- V_CERTSTATUS_REVOKED -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] 
+のステータスコードで証明書が失効していることを意味します。
+
+--- V_CERTSTATUS_UNKNOWN -> Integer
+[[m:OpenSSL::OCSP::BasicResponse#status]] 
+のステータスコードで証明書の有効性が不明であることを意味します。
+
+#@# 以下の2つの定数はおそらく使い道がない
+#@# --- V_RESPID_KEY -> Integer
+#@# #@todo
+#@# --- V_RESPID_NAME -> Integer
+#@# #@todo 
+
+= class OpenSSL::OCSP::OCSPError < OpenSSL::OpenSSLError
+OCSP 関連のエラーが生じた場合に発生する例外です。
 
 = class OpenSSL::OCSP::BasicResponse < Object
+OCSP の Basic OCSP Response を表すクラスです。
+
+レスポンスの実質的な内容(証明書が失効しているかどうか)
+はこのクラスのオブジェクトが保持します。
+
+OCSP レスポンダからのレスポンス自体は
+[[c:OpenSSL::OCSP::Response]] のオブジェクトが表現していて、
+このオブジェクトの [[m:OpenSSL::OCSP::Request#basic]] によって
+BasicResponse のオブジェクトを得ます。
+
+== Class Methods
+--- new -> OpenSSL::OCSP::BasicResponse
+空の BasicResponse オブジェクトを生成します。
+
+@see [[m:OpenSSL::OCSP::Response.create]]
 
 == Instance Methods
 
---- add_nonce
-#@todo
+--- add_nonce(val=nil) -> self
+BasicResponse に nonce を追加します。
 
---- add_status
-#@todo
+引数を省略すると、ランダムな nonce を生成し利用します。
 
---- copy_nonce
-#@todo
+通常はこのメソッドを使わず [[c:OpenSSL::OCSP::BasicResponse#copy_nonce]] を
+用います。
 
---- sign
-#@todo
+@param val 追加する nonce の値(文字列)
 
---- status
-#@todo
+--- add_status(cid, status, reason, revtime, thisupd, nextupd, exts) -> self
+証明書の状態の問い合わせの結果をオブジェクトに追加します。
 
---- verify
-#@todo
+詳しくは [[m:OpenSSL::OCSP::BasicResponse#status]] を見てください。
+
+@param cid 問い合わせの([[c:OpenSSL::OCSP::CertificateId]] オブジェクト)
+@param status ステータスコード(整数)
+@param reason 失効理由コード(整数)
+@param revtime 失効時刻([[c:Time]] オブジェクトもしくは nil)
+@param thisupd 最終更新時刻([[c:Time]] オブジェクト)
+@param nextupd 次回更新時刻([[c:Time]] オブジェクト)
+@param exts  拡張領域([[c:OpenSSL::X509::Extension]] オブジェクトの配列)
+
+
+--- copy_nonce(request) -> Integer
+request から nonce の値をコピーします。
+
+@param request コピー元のnonceを保持している Request ([[c:OpenSSL::OCSP::Request]] オブジェクト)
+
+--- sign(signer_cert, signer_key, certs = [], flags=0) -> self
+Response に署名します。
+
+OCSP レスポンダ(もしくは CA)はレスポンスに署名をすることで、
+レスポンスの内容を保証します。
+
+flags には以下の値の OR を渡すことができます。
+  * [[m:OpenSSL::OCSP::NOTIME]]
+  * [[m:OpenSSL::OCSP::RESPID_KEY]]
+  * [[m:OpenSSL::OCSP::NOCERTS]]
+
+certs に証明書の配列を渡すことで、この署名を検証するために
+必要となる別の証明書を付加することができます。
+
+@param signer_cert 署名者の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param signer_key 証明に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param certs 添付する証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param flags フラグ(整数)
+
+
+--- status -> [[OpenSSL::OCSP::CertificateId, Integer, Integer, Time|nil, Time, Time|nil, [OpenSSL::X509::Extension]]]
+証明書の状態の問い合わせの結果を返します。
+
+この返り値には複数の問い合わせ結果が含まれています。
+個々の結果は以下の内容の配列です。
+  [ 問い合わせの CertificateId オブジェクト,
+    ステータスコード,
+    失効理由コード,
+    失効時刻,
+    最終更新時刻,
+    次回更新時刻,
+    拡張領域 ]
+
+ステータスコードはいかのいずれかの値を取ります
+  * [[m:OpenSSL::OCSP::V_CERTSTATUS_GOOD]] 正常
+  * [[m:OpenSSL::OCSP::V_CERTSTATUS_REVOKED]] 失効
+  * [[m:OpenSSL::OCSP::V_CERTSTATUS_UNKNOWN]] 不明
+
+失効理由コードは以下のいずれかを返します。
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_NOSTATUS]] 
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_UNSPECIFIED]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_KEYCOMPROMISE]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_CACOMPROMISE]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_AFFILIATIONCHANGED]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_SUPERSEDED]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_CESSATIONOFOPERATION]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_CERTIFICATEHOLD]]
+  * [[m:OpenSSL::OCSP::REVOKED_STATUS_REMOVEFROMCRL]]
+
+失効時刻は証明書が失効した時刻を表します。失効していない場合は nil を
+返します。
+
+最終更新時刻は失効情報が更新された時刻を表します。この時刻が現在時刻より
+先である場合には、この Response の内容は信用できません。
+
+次回更新時刻は、失効情報の更新予定時刻です。
+この時刻が現在時刻より
+後である場合には、この Response の内容は信用できません。
+次回更新時刻が指定されていない場合には nil を返します。
+
+拡張領域には、[[c:OpenSSL::X509::Extension]] の配列が渡されます。
+
+結果をどのように解釈すべきか、より詳しくは [[RFC:2560]] や X.509 を見てください。
+
+例:
+  res.basic.status  
+  # => [
+  #      [#<OpenSSL::OCSP::CertificateId:0x00000000e3c290>, # certificate ID
+  #       0,                                                # status code
+  #       0,                                                # reason code
+  #       nil,                                              # revoked time
+  #       2011-06-29 05:24:43 UTC,                          # update time
+  #       2011-07-06 05:24:43 UTC,                          # next update time
+  #       []]                                               # extensions
+  #    ]
+
+@raise OpenSSL::OCSP::OCSPError ステータスの読み出しに失敗した場合に発生します
+
+--- verify(certs, store, flags=0) -> bool
+署名を検証します。
+
+flagsには以下の値の OR を取ったものを渡します。
+  * [[m:OpenSSL::OCSP::TRUSTOTHER]]
+  * [[m:OpenSSL::OCSP::NOSIGS]]
+  * [[m:OpenSSL::OCSP::NOVERIFY]]
+  * [[m:OpenSSL::OCSP::NOINTERN]]
+
+TRUSTOTHER を有効にすると certs で指定した証明書を検証せずに信頼します。
+
+@param certs 検証に用いる追加的な証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param store 検証に用いる証明書ストア([[c:OpenSSL::X509::Store]] オブジェクト)
+@param flags フラグ(整数)
 
 = class OpenSSL::OCSP::CertificateId < Object
+失効状態を問い合わせたい個々の証明書を表すクラスです。
+
+証明書にissuerの情報+αを付加したオブジェクトです。
+
+CertificateId オブジェクトを複数 [[c:OpenSSL::OCSP::Request]] に含め、
+同時に問い合わせることができます。
+
+== Class Methods
+#@until 1.9.2
+--- new(subject, issuer) -> OpenSSL::OCSP::CertificateId
+#@else
+--- new(subject, issuer, digest=nil) -> OpenSSL::OCSP::CertificateId
+#@end
+CertificateId オブジェクトを生成します。
+
+subject には問合せ対象の証明書を、issuerにはsubjectのissuer(発行者)
+の証明書を渡します。
+
+@param subject 問合せ対象の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param issuer subjectのissuer(発行者)の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+#@since 1.9.3
+@param digest issuerの名前のハッシュ値を取るためのハッシュアルゴリズム。nilでデフォルトのアルゴリズムが使われます
+#@end
+
+@raise OpenSSL::OCSP::OCSPError オブジェクトの生成に失敗した際に発生します
 
 == Instance Methods
 
---- cmp
-#@todo
+--- cmp(other) -> bool
+2つの CertificateId オブジェクトを比較し、
+同じものであれば真を返します。
 
---- cmp_issuer
-#@todo
+@param other 比較する [[c:OpenSSL::OCSP::CertificateId]] オブジェクト
+@see [[m:OpenSSL::OCSP::CertificateId#cmp_issuer]]
 
---- serial
-#@todo
+--- cmp_issuer(other) -> bool
+2つの CertificateId オブジェクトの issuer(証明書発行者)を比較し、
+同じ issuer であれば真を返します。
+
+@param other 比較する [[c:OpenSSL::OCSP::CertificateId]] オブジェクト
+@see [[m:OpenSSL::OCSP::CertificateId#cmp]]
+
+--- serial -> OpenSSL::BN
+証明書の識別番号を返します。
+
+@see [[m:OpenSSL::X509::Certificate#serial]]
 
 = class OpenSSL::OCSP::Request < Object
+OCSP リクエストを表すクラスです。
+
+問合せたい証明書を [[c:OpenSSL::OCSP::CertificateId]] オブジェクトの
+形で複数持つことができます。
+
+== Class Methods
+--- new -> OpenSSL::OCSP::Request
+--- new(der) -> OpenSSL::OCSP::Request
+
+Request オブジェクトを生成します。
+引数なしの場合は、中身が空のオブジェクトを生成します。
+文字列を渡した場合は der 形式であると見なして読み込みます。
+
+@param der リクエストの情報をエンコードしたder形式の文字列
+@raise OpenSSL::OCSP::OCSPError 文字列のデコードに失敗した場合に発生します
 
 == Instance Methods
 
---- add_certid
-#@todo
+--- add_certid(cid) -> self
+Request オブジェクトに問い合わせ対象の証明書情報を追加します。
 
---- add_nonce
-#@todo
+証明書情報は [[c:OpenSSL::OCSP::CertificateId]] の形で渡す必要があります。
 
---- certid 
-#@todo
+@param cid 問い合わせ対象の証明書情報([[c:OpenSSL::OCSP::CertificateId]] オブジェクト)
+@raise OpenSSL::OCSP::OCSPError 追加に失敗した場合に発生します。
+@see [[m:OpenSSL::OCSP::Request#certid]]
 
---- check_nonce
-#@todo
+--- add_nonce(nonce = nil) -> self
+Request オブジェクトに nonce を追加します。
 
---- sign
-#@todo
+nonce とは、リプレイ攻撃を防止するために設定する乱数です。
 
---- to_der
-#@todo
+@param nonce 設定するnonce文字列。nilの場合は適当な乱数を自動で設定します
 
---- verify
-#@todo
+--- certid -> [OpenSSL::OCSP::CertificateId]
+Request オブジェクトが保持している問い合わせ対象の証明書の情報を
+配列で返します。
+
+@see [[m:OpenSSL::OCSP::Request#add_certid]]
+
+--- check_nonce(basic_resp) -> Integer
+自身の nonce とレスポンスの nonce が整合しているか
+チェックします。
+
+-1 から 3 までの整数を返します。それぞれの意味は以下の通りです。
+* -1 自身にしか nonce が設定されていない
+* 0 nonce が自身とレスポンスの両方にあるが等しくない
+* 1 nonce が自身とレスポンスの両方にあり等しい
+* 2 nonce が自身とレスポンスのどちらにもない
+* 3 nonce がレスポンスにしか設定されていない
+
+0 は明らかに不正なので、これは必ずチェックする必要があります。
+1 は nonce が正しいということを意味します。
+それ以外は、場合(サーバの実装など)
+によって不正であったりそうでなかったりしますので、適切にチェック
+する必要があります。
+
+@param 比較するレスポンス([[c:OpenSSL::OCSP::BasicResponse]] オブジェクト)
+
+--- sign(signer_cert, signer_key, certs=nil, flags=nil) -> self
+Request オブジェクトに署名をします。
+
+この署名はリクエスタが自分自身を証明するために署名します。
+OSCP レスポンダはこの署名を確認します。
+Request に対する署名は必須ではありません。
+
+certs に証明書の配列を渡すことで、この署名を検証するために
+必要となる別の証明書を付加することができます。
+
+@param signer_cert 署名者の証明書([[c:OpenSSL::X509::Certificate]] オブジェクト)
+@param signer_key 証明に用いる秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param certs 添付する証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param flags フラグ(整数)
+
+@raise OpenSSL::OCSP::OCSPError 署名に失敗した場合に発生します
+
+
+--- to_der -> String
+Request オブジェクトを DER 形式の文字列に変換します。
+
+--- verify(certs, store, flags=0) -> bool
+Request オブジェクトの署名を検証します。
+
+検証に成功した場合は真を返します。
+
+flags には以下の値の OR を取ったものを渡します。
+  * [[m:OpenSSL::OCSP::TRUSTOTHER]]
+  * [[m:OpenSSL::OCSP::NOSIGS]]
+  * [[m:OpenSSL::OCSP::NOVERIFY]]
+  * [[m:OpenSSL::OCSP::NOINTERN]]
+
+TRUSTOTHER を有効にすると certs で指定した証明書を検証せずに信頼します。
+
+@param certs 検証に用いる追加的な証明書([[c:OpenSSL::X509::Certificate]] オブジェクトの配列)
+@param store 検証に用いる証明書ストア([[c:OpenSSL::X509::Store]] オブジェクト)
+@param flags フラグ(整数)
 
 = class OpenSSL::OCSP::Response < Object
+OCSP レスポンダからのレスポンスを表わすオブジェクトです。
+
+レスポンスの実質的な内容(証明書が失効しているか否か)
+は [[m:OpenSSL::OCSP::Response#basic]] 
+で得られる [[c:OpenSSL::OCSP::BasicResponse]] オブジェクトが
+保持しています。このオブジェクト自体はレスポンスのステータスコード
+などを保持しています。
+
 
 == Class Methods
 
---- create
-#@todo
+--- new -> OpenSSL::OCSP::Response
+--- new(der) -> OpenSSL::OCSP::Response
+Response オブジェクトを生成します。
+
+DER 形式の文字列を渡した場合はその内容を
+ロードします。引数なしの場合は空のオブジェクトを返します。
+
+@param der DER 形式の文字列
+@see [[m:OpenSSL::OCSP::Response.create]]
+
+--- create(status, basic_resp) -> OpenSSL::OCSP::Response
+Response オブジェクトを [[c:OpenSSL::OCSP::BasicResponse]] オブジェクト
+から生成します。
+
+
+@param status ステータスコード(整数)
+@param basic_resp [[c:OpenSSL::OCSP::BasicResponse]] オブジェクト
+@see [[m:OpenSSL::OCSP::Response.new]]
 
 == Instance Methods
 
---- basic
-#@todo
+--- basic -> OpenSSL::OCSP::BasicResponse | nil
+Response オブジェクトが保持している BasicResponse オブジェクトを
+返します。
 
---- status 
-#@todo
+@see [[c:OpenSSL::OCSP::BasicResponse]]
 
---- status_string
-#@todo
+--- status  -> Integer
+ステータスコードを整数で返します。
 
---- to_der
-#@todo
+以下のいずれかを返します。
+  * [[m:OpenSSL::OCSP::RESPONSE_STATUS_SUCCESSFUL]]
+  * [[m:OpenSSL::OCSP::RESPONSE_STATUS_MALFORMEDREQUEST]]
+  * [[m:OpenSSL::OCSP::RESPONSE_STATUS_INTERNALERROR]]
+  * [[m:OpenSSL::OCSP::RESPONSE_STATUS_TRYLATER]]
+  * [[m:OpenSSL::OCSP::RESPONSE_STATUS_SIGREQUIRED]]
+  * [[m:OpenSSL::OCSP::RESPONSE_STATUS_UNAUTHORIZED]]
+
+@see [[m:OpenSSL::OCSP::Response#status_string]]
+
+
+--- status_string -> String
+レスポンスステータスを human-readable な文字列で返します。
+
+@see [[m:OpenSSL::OCSP::Response#status]]
+
+--- to_der -> String
+Response オブジェクトを DER 形式の文字列に変換します。
+
+
