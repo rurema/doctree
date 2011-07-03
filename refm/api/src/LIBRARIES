@@ -231,6 +231,18 @@ rake/loaders/makefile
 #@end
 rational
 rbconfig
+#@since 1.8.1
+rdoc
+#@since 1.9.1
+#@todo
+#@else
+rdoc/usage
+rdoc/markup/simple_markup
+rdoc/markup/simple_markup/to_flow
+rdoc/markup/simple_markup/to_html
+rdoc/markup/simple_markup/to_latex
+#@end
+#@end
 #@until 1.9.1
 readbytes
 #@end
