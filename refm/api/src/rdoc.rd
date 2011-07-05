@@ -67,6 +67,7 @@ RDocはコマンドラインから以下のようにして起動します。
 
 options は以下が指定できます。
 
+#@until 1.9.2
 : --accessor name
 
   name で指定したメソッドを attr_xxx と同様なものとして取り扱います。例え
@@ -79,6 +80,7 @@ options は以下が指定できます。
 
   それぞれの name には "=flagtext" というオプションを付けることができま
   す。例えば、"=rw" とすると attr_accessor と同じように取り扱われます。
+#@end
 
 : --all
 
@@ -89,9 +91,33 @@ options は以下が指定できます。
 
   生成する HTML の charset を指定します。
 
+#@since 1.9.3
+  可能であれば --encoding を使用してください。
+#@end
+
+#@since 1.9.3
+: --coverage-report level, --dcov level
+
+  ドキュメントが記述されていない要素に関するレポートを出力します。0 以
+  下を指定した場合はレポートを出力しません。0 を指定した場合は、クラス、
+  モジュール、定数、属性、メソッドに関するレポートを出力します。0 以上を
+  指定した場合には、0 を指定した場合に加えて、メソッドの引数に関するレポー
+  トを出力します。level を省略した場合は 0 を指定したと見なされます。
+
+: --no-coverage-report, --no-dcov
+
+  ドキュメントが記述されていない要素に関するレポートを出力しません。
+#@end
+
 : --debug
 
-  displays lots on internal stuff
+  実行時に内部情報を出力します。
+
+#@since 1.9.2
+: --no-debug
+
+  実行時に内部情報を出力しません。
+#@end
 
 : --diagram
 
@@ -99,6 +125,25 @@ options は以下が指定できます。
   験的なもので、すべての出力テンプレートに対応しているわけではありません。
   dot V1.8.6 かそれ以降がなければ "--diagram" オプションは正しい出力が
   できません(www.research.att.com/sw/tools/graphviz/)。
+
+#@since 1.9.3
+: --dry-run
+
+  ファイルの出力を行わず、表示だけを行います。
+
+: --no-dry-run
+
+  ファイルの出力を行います。
+#@end
+
+#@since 1.9.3
+: --encoding encoding
+
+  出力ファイルの文字エンコーディングを encoding に指定します。rdoc が読
+  み込んだ全てのファイルはこの文字エンコーディングに変換されま
+  す。--charset オプションもありますが --encoding オプションを使用して
+  ください。
+#@end
 
 : --exclude pattern
 
@@ -120,7 +165,16 @@ options は以下が指定できます。
 #@since 1.8.6
 : --force-update
 
-  forces to scan all sources even if newer than the flag file.
+  出力済みのファイルの方が新しい場合でも全てのファイルを更新します。
+  1.9.2 以下では指定しなかった場合は有効になりません。1.9.2 以降は指定
+  しなかった場合でも有効になります。
+
+#@since 1.9.2
+: --no-force-update
+
+  出力済みのファイルの方が新しい場合のみファイルを更新します。
+#@end
+
 #@end
 
 : --fmt fmt
@@ -131,9 +185,24 @@ options は以下が指定できます。
 
   使いかたの概要を表示します。
 
+#@until 1.9.1
 : --help-output
 
   出力に関するオプションを解説します。
+#@end
+
+#@since 1.9.2
+: --ignore-invalid
+
+  無効なオプションを指定した場合に、そのオプションを無視して処理を続行
+  します。また、標準エラーに無視されるがオプションが出力されます。標準
+  で有効になっています。
+
+: --no-ignore-invalid
+
+  無効なオプションを指定した場合に、標準エラーに情報を出力して終了ステー
+  タス 1 でプログラムを終了します。
+#@end
 
 : --image-format gif/png/jpg/jpeg
 
@@ -170,13 +239,24 @@ options は以下が指定できます。
 
   すべての出力を一つのファイルに書きだします。
 
+#@since 1.9.2
+: --output dir, --op dir
+#@else
 : --op dir
+#@end
 
   出力先のディレクトリを dir に設定します(デフォルトは "doc" です)。
 
 : --opname name
 
   出力の名前をnameにします(HTMLを出力する場合には何の効果もありません)
+
+#@since 1.9.2
+: --pipe
+
+  標準入力を読み込んで HTML に変換し、標準出力に出力します。ファイルへ
+  の出力は行わないため、--op などのオプションは無視されます。
+#@end
 
 : --promiscuous
 
@@ -231,6 +311,19 @@ options は以下が指定できます。
 : --title text
 
   出力のタイトルを text に指定します。
+
+#@since 1.9.3
+: --visibility visibility
+
+  出力するメソッドの可視性を public、protected、private のいずれかから指定します。
+  指定しなかった場合は protected です。
+#@end
+
+#@since 1.9.1
+: --verbose
+
+  プログラムの解析時に詳細な情報を表示します。
+#@end
 
 : --version
 
