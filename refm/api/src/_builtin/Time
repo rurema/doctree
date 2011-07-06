@@ -723,17 +723,4 @@ The lowest digit of to_f and subsec is different because
 IEEE 754 double is not accurate enough to represent
 the rational.
 The accurate value is returned by subsec.
-
---- to_r -> Rational
-#@todo
-
-Returns the value of <i>time</i> as a rational number of seconds
-since the Epoch.
-
-   t = Time.now
-   p t.to_r            #=> (8807170717088293/8388608)
-
-This methods is intended to be used to get an accurate value
-representing nanoseconds from the Epoch.  You can use this
-to convert time to another Epoch.
 #@end
