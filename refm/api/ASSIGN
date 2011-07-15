@@ -176,7 +176,7 @@ net/smtp                        ohai            done
 net/telnet                      ohai            done
 net/telnets                     ohai            done
 nkf                             ohai            done
-objspace
+objspace                        sho-h
 observer                        snoozer05       done
 open-uri                                        done
 open3                           sho-h           done
