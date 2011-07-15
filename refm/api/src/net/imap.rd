@@ -129,6 +129,24 @@ Socket 関連のエラーが発生するかもしれません。例えば、
 これらのエラーはこのライブラリもしくはサーバに深刻な問題が
 あることを意味します。
 
+=== tagged response と untagged response
+IMAP プロトコルにおいてサーバからの応答には tagged なものと
+untagged なものの2通り存在します。
+tagged な応答は、クライアントからのコマンドが
+成功もしくは失敗のいずれかで完了したことを表すものです。
+一方 untagged な応答はそれ以外の情報を渡すためのものです。
+untagged な応答はクライアントからのコマンドの結果の情報を
+渡すためにも用いられますし、そうでない(サーバのシャットダウンなど)
+自発的応答にも用いられます。
+
+これはそれぞれ
+[[c:Net::IMAP::TaggedResponse]] と [[c:Net::IMAP::UntaggedResponse]]
+に対応します。
+
+untagged な応答はコマンドの送信とは非同期的にサーバから送られるため、
+[[c:Net::IMAP]] オブジェクトはユーザのためこれを
+[[m:Net::IMAP#responses]] に記録しておきます。
+
 === References
 
   * [IMAP]
@@ -200,8 +218,8 @@ verify は接続先を検証するかを真偽値で設定します。
 
 例
   imap = Net::IMAP.new('imap.example.com', :port => 993,
-                   :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
-                             :timeout => 600 } )
+                       :ssl => { :verify_mode => OpenSSL::SSL::VERIFY_PEER,
+                                 :timeout => 600 } )
 
 @param host 接続するホスト名の文字列
 @param port 接続するポート番号
@@ -306,12 +324,16 @@ UTF-7 を修正したものです。
 を返します。
 
 --- responses -> { String => [object] }
-#@todo
+サーバから送られてきた untagged な応答の記録を返します。
 
-Returns recorded untagged responses.
+untagged な応答は種類ごとに記録されます。
+応答の種類には "FLAGS", "OK", "UIDVALIDITY", "EXISTS" などがあり、
+この文字列がハッシュテーブルのキーとなります。
+そして各種類ごとに配列が用意され、untagged な応答を受信するたびに
+その配列の末尾にその内容が記録されます。
 
-ex).
 
+例:
   imap.select("inbox")
   p imap.responses["EXISTS"].last
   #=> 2
@@ -341,16 +363,14 @@ NOOP コマンドを送ります。
 LOGOUT コマンドを送り、コネクションを切断することを
 サーバに伝えます。
 
---- authenticate(auth_type, arg...)
-#@todo
+--- authenticate(auth_type, user, password) -> Net::IMAP::TaggedResponse
 
-Sends an AUTEHNTICATE command to authenticate the client.
-The auth_type parameter is a string that represents
-the authentication mechanism to be used. Currently Net::IMAP
-supports "LOGIN" and "CRAM-MD5" for the auth_type.
+AUTHENTICATE コマンドを送り、クライアントを認証します。
 
-ex).
+auth_type で利用する認証方式を文字列で指定します。
 
+
+例:
   imap.authenticate('LOGIN', user, password)
 
 auth_type としては以下がサポートされています。
@@ -358,6 +378,11 @@ auth_type としては以下がサポートされています。
   * "PLAIN"
   * "CRAM-MD5"
   * "DIGEST-MD5"
+
+@param auth_type 認証方式を表す文字列
+@param user ユーザ名文字列
+@param password パスワード文字列
+@see [[m:Net::IMAP#login]]
 
 --- login(user, password) -> Net::IMAP::TaggedResponse
 LOGIN コマンドを送り、平文でパスワードを送りクライアント
@@ -375,6 +400,7 @@ LOGIN コマンドを送り、平文でパスワードを送りクライアント
 @param user ユーザ名文字列
 @param password パスワード文字列
 @raise Net::IMAP::NoResponseError 認証に失敗した場合に発生します
+@see [[m:Net::IMAP#authenticate]]
 
 --- select(mailbox) -> Net::IMAP::TaggedResponse
 SELECT コマンドを送り、指定したメールボックスを処理対象の
@@ -415,77 +441,120 @@ CREATE  コマンドを送り、新しいメールボックスを作ります。
 DELETE コマンドを送り、指定したメールボックスを削除します。
 
 @param mailbox 削除するメールボックスの名前(文字列)
-@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを削除した場合
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを削除できなかった場合
        に発生します。指定した名前のメールボックスが存在しない場合や、
        ユーザにメールボックスを削除する権限がない場合に発生します。
 
---- rename(mailbox, newname)
-#@todo
+--- rename(mailbox, newname) -> Net::IMAP::TaggedResponse
+RENAME コマンドを送り、指定したメールボックスをリネームします。
 
-Sends a RENAME command to change the name of the mailbox to
-the newname.
+@param mailbox リネームするメールボックス(文字列)
+@param newname リネーム後の名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを
+       リネームできなかった場合に発生します。
+       指定した名前のメールボックスが存在しない場合や、
+       リネーム後の名前を持つメールボックスが既に存在する
+       場合に発生します。
 
---- subscribe(mailbox)
-#@todo
 
-Sends a SUBSCRIBE command to add the specified mailbox name to
-the server's set of "active" or "subscribed" mailboxes.
+--- subscribe(mailbox) -> Net::IMAP::TaggedResponse
+SUBSCRIBE コマンドを送り、指定したメールボックスを
+"active" もしくは "subscribe" なメールボックスの集合に
+追加します。
 
---- unsubscribe(mailbox)
-#@todo
+@param mailbox 追加するメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを
+       追加できなかった場合に発生します。
+       指定した名前のメールボックスが存在しない場合などに
+       生じます。
 
-Sends a UNSUBSCRIBE command to remove the specified mailbox name
-from the server's set of "active" or "subscribed" mailboxes.
+--- unsubscribe(mailbox) -> Net::IMAP::TaggedResponse
+UNSUBSCRIBE コマンドを送り、指定したメールボックスを
+"active" もしくは "subscribe" なメールボックスの集合から
+削除します。
 
---- list(refname, mailbox)
-#@todo
+@param mailbox 削除するするメールボックスの名前(文字列)
+@raise Net::IMAP::NoResponseError 指定した名前のメールボックスを
+       削除できなかった場合に発生します。
+       指定した名前のメールボックスが active/subscribe でなかった
+       場合などに発生します。
 
-Sends a LIST command, and returns a subset of names from
-the complete set of all names available to the client.
-The return value is an array of [[c:Net::IMAP::MailboxList]].
+--- list(refname, mailbox) -> [Net::IMAP::MailboxList] | nil
 
-ex).
+LIST コマンドを送り、クライアントから利用可能なメールボックス名の集合から
+引数にマッチするものすべてを返します。
 
+詳しくは  [[RFC:2060]] の 6.3.8 を参照してください。
+
+返り値は [[c:Net::IMAP::MailboxList]] の配列で返します。
+返り値が空集合である場合は空の配列でなく nil を返します。
+
+@param refname 参照名(文字列)
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもよい。
+
+例:
   imap.create("foo/bar")
   imap.create("foo/baz")
   p imap.list("", "foo/%")
   #=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 
---- lsub(refname, mailbox)
+
+#@since 1.9.3
+--- xlist
 #@todo
+#@end
 
-Sends a LSUB command, and returns a subset of names from the set
-of names that the user has declared as being "active" or
-"subscribed".
-The return value is an array of [[c:Net::IMAP::MailboxList]].
+--- lsub(refname, mailbox) -> [Net::IMAP::MailboxList]
 
---- status(mailbox, attr)
-#@todo
+LIST コマンドを送り、active/subscribed なメールボックス名の集合から
+引数にマッチするものすべてを返します。
 
-Sends a STATUS command, and returns the status of the indicated
-mailbox.
-return value is a hash of attributes.
+詳しくは  [[RFC:2060]] の 6.3.8 を参照してください。
 
-ex).
+返り値は [[c:Net::IMAP::MailboxList]] の配列で返します。
+返り値が空集合である場合は空の配列でなく nil を返します。
 
+@param refname 参照名(文字列)
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもよい。
+
+--- status(mailbox, attr) -> {String => Integer}
+STATUS コマンドを送り、mailbox のステータスを得ます。
+
+問い合わせたいステータスは attr に文字列の配列で渡します。
+
+返り値は アトリビュート文字列をキーとするハッシュです。
+
+詳しくは [[RFC:2060]] の 6.3.10 を参考にしてください。
+
+例:
   p imap.status("inbox", ["MESSAGES", "RECENT"])
   #=> {"RECENT"=>0, "MESSAGES"=>44}
 
---- append(mailbox, message, flags = nil, date_time = nil)
-#@todo
+@param mailbox 問い合わせ対象のメールボックス(文字列)
+@param attr 問合せたいアトリビュート名(文字列)の配列
+@raise Net::IMAP::NoResponseError メールボックスが存在しない場合や、
+       アトリビュート名が存在しない場合に発生します
 
-Sends a APPEND command to append the message to the end of
-the mailbox.
+--- append(mailbox, message, flags = nil, date_time = nil) -> Net::IMAP::TaggedResponse
 
-ex).
+APPEND コマンドを送ってメッセージをメールボックスの末尾に追加します。
 
+
+例:
   imap.append("inbox", <<EOF.gsub(/\n/, "\r\n"), [:Seen], Time.now)
   Subject: hello
-  From: shugo@ruby-lang.org
-  To: shugo@ruby-lang.org
+  From: someone@example.com
+  To: somebody@example.com
   
   hello world
   EOF
+
+@param mailbox メッセージを追加するメールボックス名(文字列)
+@param message メッセージ文字列
+@param flags メッセージに付加するフラグ([[c:Symbol]] の配列)
+@param date_time メッセージの時刻([[c:Time]] オブジェクト)。省略時は現在時刻が使われる
+@raise Net::IMAP::NoResponseError メールボックスが存在しない場合に発生します
+
 
 --- check -> Net::IMAP::TaggedResponse
 CHECK コマンドを送り、現在処理しているメールボッススの
@@ -505,38 +574,79 @@ CLOSE コマンドを送り、処理中のメールボックスを閉じます。
 状態に移行します。
 そして \Deleted フラグが付けられたメールがすべて削除されます。
 
---- expunge 
-#@todo
+--- expunge -> [Integer] | nil
+EXPUNGEコマンドを送り、:Deletedフラグをセットしたメッセージを
+すべて処理中のメールボックスから削除します。
 
-Sends a EXPUNGE command to permanently remove from the currently
-selected mailbox all messages that have the \Deleted flag set.
+削除したメッセージの message sequence number を配列で返します。
 
---- search(keys, charset = nil)
---- uid_search(keys, charset = nil)
-#@todo
+@raise Net::IMAP::NoResponseError メールボックスが read-only である場合に発生します
 
-Sends a SEARCH command to search the mailbox for messages that
-match the given searching criteria, and returns message sequence
-numbers (search) or unique identifiers (uid_search).
+--- search(keys, charset = nil) -> [Integer]
+SEARCH コマンドを送り、条件に合うメッセージの message sequence number
+を配列で返します。
 
-ex).
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを検索対象とします。
 
+検索の条件は key に文字列の1次元配列もしくは文字列で渡します。
+
+検索条件は "SUBJECT", "FROM" などを用いることができます。
+詳しくは [[RFC:2060]] の 6.4.4 を見てください。
+
+例:
   p imap.search(["SUBJECT", "hello"])
   #=> [1, 6, 7, 8]
+  p imap.search(["SUBJECT", "hello", "FROM", "foo@example.com"])
+  #=> [6, 7]
   p imap.search('SUBJECT "hello"')
   #=> [1, 6, 7, 8]
 
---- fetch(set, attr)
---- uid_fetch(set, attr)
-#@todo
+@param key 検索キー(文字列の配列もしくは文字列)
+@param charset 検索に用いるcharset
+@see [[m:Net::IMAP#search]]
 
-Sends a FETCH command to retrieve data associated with a message
-in the mailbox. the set parameter is a number or an array of
-numbers or a Range object. the number is a message sequence
-number (fetch) or a unique identifier (uid_fetch).
-The return value is an array of [[c:Net::IMAP::FetchData]].
+--- uid_search(keys, charset = nil) -> [Integer]
 
-ex).
+UID SEARCH コマンドを送り、条件に合うメッセージの UID
+を配列で返します。
+
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを検索対象とします。
+
+検索の条件は key に文字列の1次元配列もしくは文字列で渡します。
+
+検索条件は "SUBJECT", "FROM" などを用いることができます。
+詳しくは [[RFC:2060]] の 6.4.4 を見てください。
+
+例:
+  p imap.uid_search(["SUBJECT", "hello"])
+  #=> [1, 6, 7, 8]
+  p imap.uid_search(["SUBJECT", "hello", "FROM", "foo@example.com"])
+  #=> [6, 7]
+  p imap.uid_search('SUBJECT "hello"')
+  #=> [1, 6, 7, 8]
+
+@param key 検索キー(文字列の配列もしくは文字列)
+@param charset 検索に用いるcharset
+@see [[m:Net::IMAP#uid_search]]
+
+--- fetch(set, attr) -> [Net::IMAP::FetchData]
+
+FETCH コマンドを送り、メールボックス内のメッセージに
+関するデータを取得します。
+
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを対象とします。
+
+set で対象とするメッセージを指定します。
+これには sequence number、sequence number の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
+attr には取得するアトリビュートを文字列の配列で渡してください。
+指定可能なアトリビュートについては [[m:Net::IMAP::FetchData#attr]] 
+を見てください。
+
+例:
 
   p imap.fetch(6..8, "UID")
   #=> [#<Net::IMAP::FetchData seqno=6, attr={"UID"=>98}>, #<Net::IMAP::FetchData seqno=7, attr={"UID"=>99}>, #<Net::IMAP::FetchData seqno=8, attr={"UID"=>100}>]
@@ -552,67 +662,192 @@ ex).
   p data.attr["UID"]
   #=> 98
 
---- store(set, attr, flags)
---- uid_store(set, attr, flags)
-#@todo
+@param set 処理対象のメッセージの sequence number
+@param attr アトリビュート(文字列配列)
+@see [[m:Net::IMAP#uid_fetch]]
 
-Sends a STORE command to alter data associated with a message
-in the mailbox. the set parameter is a number or an array of
-numbers or a Range object. the number is a message sequence
-number (store) or a unique identifier (uid_store).
-The return value is an array of [[c:Net::IMAP::FetchData]].
+--- uid_fetch(set, attr) -> [Net::IMAP::FetchData]
 
-ex).
+UID FETCH コマンドを送り、メールボックス内のメッセージに
+関するデータを取得します。
+
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したメールボックスを対象とします。
+
+set で対象とするメッセージを指定します。
+これには sequence number、sequence number の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
+attr には取得するアトリビュートを文字列の配列で渡してください。
+指定可能なアトリビュートについては [[m:Net::IMAP::FetchData#attr]] 
+を見てください。
+
+@param set 処理対象のメッセージの sequence number
+@param attr アトリビュート(文字列配列)
+@see [[m:Net::IMAP#fetch]]
+
+--- store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
+STORE コマンドを送り、メールボックス内のメッセージを
+更新します。
+
+set で更新するメッセージを指定します。
+これには sequence number、sequence number の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
+
+[[m:Net::IMAP#select]] で指定したメールボックスを対象とします。
+
+attr で何をどのように変化させるかを指定します。
+以下を指定することができます。
+  * "FLAGS"
+  * "+FLAGS"
+  * "-FLAGS"
+それぞれメッセージのフラグの置き換え、追加、削除を意味します。
+詳しくは [[RFC:2060]] の 6.4.6 を参考にしてください。
+
+flags には シンボルの配列で置き換え、追加もしくは削除される
+フラグを指定します。
+
+返り値は更新された内容を [[c:Net::IMAP::FetchData]] オブジェクトの
+配列で返します。
+
+例:
 
   p imap.store(6..8, "+FLAGS", [:Deleted])
   #=> [#<Net::IMAP::FetchData seqno=6, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=7, attr={"FLAGS"=>[:Seen, :Deleted]}>, #<Net::IMAP::FetchData seqno=8, attr={"FLAGS"=>[:Seen, :Deleted]}>]
 
---- copy(set, mailbox)
---- uid_copy(set, mailbox)
-#@todo
+@param set 更新するメッセージのsequence number
+@param attr 更新方式(文字列)
+@param flags 更新内容([[c:Symbol]] の配列)
+@see [[m:Net::IMAP#uid_store]], [[m:Net::IMAP#fetch]]
 
-Sends a COPY command to copy the specified message(s) to the end
-of the specified destination mailbox. the set parameter is
-a number or an array of numbers or a Range object. the number is
-a message sequence number (copy) or a unique identifier (uid_copy).
+--- uid_store(set, attr, flags) -> [Net::IMAP::FetchData] | nil
 
---- sort(sort_keys, search_keys, charset)
---- uid_sort(sort_keys, search_keys, charset)
-#@todo
+UID STORE コマンドを送り、メールボックス内のメッセージを
+更新します。
 
-Sends a SORT command to sort messages in the mailbox.
+set で更新するメッセージを指定します。
+これには UID、UID の配列、もしくは
+[[c:Range]] オブジェクトを渡します。
 
-ex).
+[[m:Net::IMAP#select]] で指定したメールボックスを対象とします。
 
+attr で何をどのように変化させるかを指定します。
+以下を指定することができます。
+  * "FLAGS"
+  * "+FLAGS"
+  * "-FLAGS"
+それぞれメッセージのフラグの置き換え、追加、削除を意味します。
+詳しくは [[RFC:2060]] の 6.4.6 を参考にしてください。
+
+返り値は更新された内容を [[c:Net::IMAP::FetchData]] オブジェクトの
+配列で返します。
+
+@param set 更新するメッセージの UID
+@param attr 更新方式(文字列)
+@param flags 更新内容([[c:Symbol]] の配列)
+
+@see [[m:Net::IMAP#store]], [[m:Net::IMAP#uid_fetch]]
+
+--- copy(set, mailbox) -> Net::IMAP::TaggedResponse
+COPY コマンドを送り、指定したメッセージを
+指定したメールボックスの末尾に追加します。
+
+set でコピーするメッセージを指定します。
+message sequence number(整数)、
+message sequence numberの配列、もしくは [[c:Range]] で
+指定します。コピー元のメールボックスは
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したものを用います。
+mailbox はコピー先のメールボックスです。
+
+@param set コピーするメッセージの message sequence number
+@param mailbox コピー先のメールボックス(文字列)
+@see [[m:Net::IMAP#uid_copy]]
+
+--- uid_copy(set, mailbox) -> Net::IMAP::TaggedResponse
+UID COPY コマンドを送り、指定したメッセージを
+指定したメールボックスの末尾に追加します。
+
+set でコピーするメッセージを指定します。
+message sequence number(整数)、
+message sequence numberの配列、もしくは [[c:Range]] で
+指定します。コピー元のメールボックスは
+[[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
+指定したものを用います。
+mailbox はコピー先のメールボックスです。
+
+@param set コピーするメッセージの message sequence number
+@param mailbox コピー先のメールボックス(文字列)
+@see [[m:Net::IMAP#copy]]
+
+--- sort(sort_keys, search_keys, charset) -> [Integer]
+--- uid_sort(sort_keys, search_keys, charset) -> [Integer]
+SORT コマンド送り、メールボックス内の
+メッセージをソートします。
+
+SORT コマンドは [[RFC:5265]] で定義されています。
+詳しくはそちらを参照してください。
+
+sort_keys にはソート順を決めるキーを文字列の配列で指定します。
+"ARRIVAL", "CC", "FROM", "TO", "SUBJECT" などが指定できます。
+詳しくは [[RFC:5265]] の BASE.6.4.SORT の所を見てください。
+
+search_key には検索条件を渡します。[[m:Net::IMAP#search]] と
+ほぼ同じです。この条件にマッチするメッセージのみがソートされます。
+
+[[m:Net::IMAP#examine]] もしくは
+[[m:Net::IMAP#select]] で指定したメールボックスを対象とします。
+
+返り値は message sequence number の配列を返します。
+
+例:
   p imap.sort(["FROM"], ["ALL"], "US-ASCII")
   #=> [1, 2, 3, 5, 6, 7, 8, 4, 9]
   p imap.sort(["DATE"], ["SUBJECT", "hello"], "US-ASCII")
   #=> [6, 7, 8, 1]
+@param sort_key ソート順のキー(文字列配列)
+@param search_key 検索条件(文字列配列)
+@param charset 検索条件の解釈に用いるCHARSET名(文字列)
 
---- setquota(mailbox, quota)
-#@todo
+--- setquota(mailbox, quota) -> Net::IMAP::TaggedResponse
+SETQUOTA コマンドを送り、指定したメールボッススに
+quota を設定します。
 
-Sends a SETQUOTA command along with the specified mailbox and
-quota.  If quota is nil, then quota will be unset for that
-mailbox.  Typically one needs to be logged in as server admin
-for this to work.  The IMAP quota commands are described in
-[[RFC:2087]].
+quota が nil ならば、mailbox の quota を破棄します。
+quota が整数なら STORAGE をその値に変更します。
 
---- getquota(mailbox)
-#@todo
+詳しくは [[RFC:2087]] を見てください。
 
-Sends the GETQUOTA command along with specified mailbox.
-If this mailbox exists, then an array containing a
-[[c:Net::IMAP::MailboxQuota]] object is returned.  This
-command generally is only available to server admin.
+@param mailbox quota を設定するメールボックス名(文字列)
+@param quota quotaの値(ストレージのサイズ、もしくは nil)
+@raise Net::IMAP::NoResponseError 指定したメールボックスが quota root 
+       でない場合、もしくは権限が存在しない場合に発生します。
 
---- getquotaroot(mailbox)
-#@todo
+--- getquota(mailbox) -> [Net::IMAP::MailboxQuota]
+GETQUOTA コマンドを送って
+指定したメールボッススの quota の情報を返します。
 
-Sends the GETQUOTAROOT command along with specified mailbox.
-This command is generally available to both admin and user.
-If mailbox exists, returns an array containing objects of
-[[c:Net::IMAP::MailboxQuotaRoot]] and [[c:Net::IMAP::MailboxQuota]].
+quota の情報は [[c:Net::IMAP::MailboxQuota]] オブジェクトの配列で
+得られます。
+
+詳しくは [[RFC:2087]] を見てください。
+
+@param mailbox quota 情報を得たいメールボックス名
+@raise Net::IMAP::NoResponseError 指定したメールボックスが quota root でない場合に発生します
+
+--- getquotaroot(mailbox) -> [Net::IMAP::MailboxQuotaRoot | Net::IMAP::MailboxQuota]
+GETQUOTAROOT コマンドを送って
+指定したメールボックスの quota root の一覧と、
+関連する quota の情報を返します。
+
+quota root の情報は [[c:Net::IMAP::MailboxQuotaRoot]] のオブジェクトで、
+返り値の配列の中に唯一含まれています。
+quota の情報はメールボックスに関連付けられた quota root ごとに
+[[c:Net::IMAP::MailboxQuota]] オブジェクトで得られます。
+
+詳しくは [[RFC:2087]] を見てください。
+
+@param mailbox quota root を得たいメールボックス名(文字列)
+@raise Net::IMAP::NoResponseError 指定したメールボックスが存在しない場合に発生します
 
 --- setacl(mailbox, user, rights)
 #@todo
@@ -759,8 +994,6 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
 レスポンスによって異なるオブジェクトを返します。
 [[c:Net::IMAP::MailboxList]] であったりフラグを表わす
 シンボルの配列であったりします。
-Returns the data such as an array of flag symbols,
-a [[c:Net::IMAP::MailboxList]] object....
 
 --- raw_data -> String
 
@@ -809,133 +1042,106 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
 
 = class Net::IMAP::ResponseText < Struct
 
-Net::IMAP::ResponseText represents texts of responses.
-The text may be prefixed by the response code.
-
-  resp_text       ::= ["[" resp_text_code "]" SPACE] (text_mime2 / text)
-                      ;; text SHOULD NOT begin with "[" or "="
+応答のテキストを表すクラスです。
 
 == Instance Methods
 
---- code
-#@todo
+--- code -> Net::IMAP::ResponseCode | nil
+レスポンスコードを返します。
 
-Returns the response code. See [[c:Net::IMAP::ResponseCode]].
+応答がレスポンスコードを含んでいない場合は nil を返します。
 
---- text
-#@todo
+@see [[c:Net::IMAP::ResponseCode]]
 
-Returns the text.
-
-
+--- text -> String
+応答のテキストを文字列で返します。
 
 = class Net::IMAP::ResponseCode < Struct
 
-Net::IMAP::ResponseCode represents response codes.
+応答のレスポンスコードを表すクラスです。
 
-  resp_text_code  ::= "ALERT" / "PARSE" /
-                      "PERMANENTFLAGS" SPACE "(" #(flag / "\*") ")" /
-                      "READ-ONLY" / "READ-WRITE" / "TRYCREATE" /
-                      "UIDVALIDITY" SPACE nz_number /
-                      "UNSEEN" SPACE nz_number /
-                      atom [SPACE 1*<any TEXT_CHAR except "]">]
+レスポンスコードについては [[RFC:2060]] の 7.1 を参照してください。
 
 == Instance Methods
 
---- name
-#@todo
+--- name -> String
+レスポンスコードを表す文字列を返します。
+ 
+"ALERT"、"PERMANENTFLAGS"、"UIDVALIDITY" などを返します。
 
-Returns the name such as "ALERT", "PERMANENTFLAGS", "UIDVALIDITY"....
+--- data -> object | nil
+レスポンスコードのデータを返します。
 
---- data
-#@todo
-
-Returns the data if it exists.
-
-
+レスポンスコードの種類によって返すオブジェクトは異なります。
+ない場合は nil を返します。
 
 = class Net::IMAP::MailboxList < Struct
 
-Net::IMAP::MailboxList represents contents of the LIST response.
-
-  mailbox_list    ::= "(" #("\Marked" / "\Noinferiors" /
-                      "\Noselect" / "\Unmarked" / flag_extension) ")"
-                      SPACE (<"> QUOTED_CHAR <"> / nil) SPACE mailbox
-
+[[m:Net::IMAP#list]]、[[m:Net::IMAP#xlist]]、[[m:Net::IMAP#lsub]]
+で返されるメールボックスのデータを表します。
 
 == Instance Methods
 
---- attr
-#@todo
+--- attr -> [Symbol]
+メールボックスの属性をシンボルの配列で返します。
 
-Returns the name attributes. Each name attribute is a symbol
-capitalized by String#capitalize, such as :Noselect (not :NoSelect).
+これで得られるシンボルは [[m:String#capitalize]] でキャピタライズ
+されています。
 
---- delim
-#@todo
+この配列には例えば以下のような値を含んでいます。
+詳しくは [[RFC:2060]] 7.2.2 などを参照してください。
+以下のもの以外で、IMAP 関連 RFC で拡張された値を含んでいる
+場合もあります
+  * :Noselect
+  * :Noinferiors
+  * :Marked
+  * :Unmarked
 
-Returns the hierarchy delimiter
+--- delim -> String|nil
+階層区切り文字列を返します。
 
---- name
-#@todo
+まったく階層が存在しない場合は nil を返します。
 
-Returns the mailbox name.
-
+--- name -> String
+メールボックスの名前を文字列で返します。
 
 
 = class Net::IMAP::MailboxQuota < Struct
 
-Net::IMAP::MailboxQuota represents contents of GETQUOTA response.
-This object can also be a response to GETQUOTAROOT.  In the syntax
-specification below, the delimiter used with the "#" construct is a
-single space (SPACE).
+[[m:Net::IMAP#getquota]] や [[m:Net::IMAP#getquotaroot]] で得られる
+quota の情報を表すオブジェクトです。
 
-   quota_list      ::= "(" #quota_resource ")"
-   
-   quota_resource  ::= atom SPACE number SPACE number
-   
-   quota_response  ::= "QUOTA" SPACE astring SPACE quota_list
+詳しくは [[RFC:2087]] を参照してください。
+
 
 == Instance Methods
 
---- mailbox
-#@todo
+--- mailbox -> String
+quota が設定されているメールボックスの名前を返します。
 
-The mailbox with the associated quota.
+--- usage -> Integer
+現在のメールボックス内の使用量を返します。
 
---- usage
-#@todo
-
-Current storage usage of mailbox.
-
---- quota
-#@todo
-
-Quota limit imposed on mailbox.
-
+--- quota -> Integer
+メールボックスに指定されている上限値を返します。
 
 
 = class Net::IMAP::MailboxQuotaRoot < Struct
 
-Net::IMAP::MailboxQuotaRoot represents part of the GETQUOTAROOT
-response. (GETQUOTAROOT can also return Net::IMAP::MailboxQuota.)
+[[m:Net::IMAP#getquotaroot]] の結果として得られる
+quota root 情報を表わすオブジェクトです。
 
-  quotaroot_response
-                  ::= "QUOTAROOT" SPACE astring *(SPACE astring)
+詳しくは [[RFC:2087]] を参照してください。
 
 == Instance Methods
 
---- mailbox
-#@todo
+--- mailbox -> String
+問い合わせしたメールボックスの名前を返します。
 
-The mailbox with the associated quota.
+--- quotaroots -> [String]
+問い合わせしたメールボックスの quota root 名を配列で返します。
 
---- quotaroots
-#@todo
-
-Zero or more quotaroots that effect the quota on the
-specified mailbox.
-
+空の場合もありえます。
 
 
 = class Net::IMAP::MailboxACLItem < Struct
@@ -986,160 +1192,199 @@ Returns a hash. Each key is one of "MESSAGES", "RECENT", "UIDNEXT",
 
 = class Net::IMAP::FetchData < Object
 
-Net::IMAP::FetchData represents contents of the FETCH response.
+FETCH コマンドの応答を表すクラスです。
+
+[[m:Net::IMAP#fetch]]、[[m:Net::IMAP#uid_fetch]]、
+[[m:Net::IMAP#store]]、[[m:Net::IMAP#uid_store]] の
+返り値として利用されます。
 
 == Instance Methods
 
---- seqno
-#@todo
+--- seqno -> Integer
 
-Returns the message sequence number.
-(Note: not the unique identifier, even for the UID command response.)
+メッセージの sequence number を返します。
 
---- attr
-#@todo
+[[m:Net::IMAP#uid_fetch]]、[[m:Net::IMAP#uid_store]]であっても
+UID ではなく、sequence numberを返します。
 
-Returns a hash. Each key is a data item name, and each value is
-its value.
+--- attr -> { String => object }
 
-The current data items are:
+各メッセージのアトリビュートの値をハッシュテーブルで返します。
+
+キーはアトリビュート名の文字列、値はアトリビュートの値となります。
+値のクラスはアトリビュートによって異なります。
+
+利用可能なアトリビュートは以下の通りです。
 
 : BODY
-      A form of BODYSTRUCTURE without extension data.
-: BODY[<section>]<<origin_octet>>
-      A string expressing the body contents of the specified section.
+    BODYSTRUCTURE の拡張データなしの形式。
+    [[c:Net::IMAP::BodyTypeBasic]], [[c:Net::IMAP::BodyTypeText]],
+    [[c:Net::IMAP::BodyTypeMessage]], [[c:Net::IMAP::BodyTypeMultipart]]
+    のいずれか。
+: BODY[<section>]<<partial>>
+    section で指定されたセクションのボディの内容。文字列。
+: BODY.PEEK[<section>]<<partial>>
+    section で指定されたセクションのメッセージボディの内容。文字列。
+    ただしこれで内容を見ても :Seen フラグを設定しない点が
+    BODY[<section>]と同様
 : BODYSTRUCTURE
-      An object that describes the [MIME-IMB] body structure of a message.
-      See [[c:Net::IMAP::BodyTypeBasic]], [[c:Net::IMAP::BodyTypeText]],
-      [[c:Net::IMAP::BodyTypeMessage]], [[c:Net::IMAP::BodyTypeMultipart]].
+    MIME-IMB でのメッセージボディ。
+    [[c:Net::IMAP::BodyTypeBasic]], [[c:Net::IMAP::BodyTypeText]],
+    [[c:Net::IMAP::BodyTypeMessage]], [[c:Net::IMAP::BodyTypeMultipart]]
+    のいずれか。
 : ENVELOPE
-      A [[c:Net::IMAP::Envelope]] object that describes the envelope
-      structure of a message.
+    メッセージのエンベロープ。
+    [[c:Net::IMAP::Envelope]] オブジェクト。
 : FLAGS
-      A array of flag symbols that are set for this message. flag symbols
-      are capitalized by String#capitalize.
+    メッセージにセットされたフラグ。
+    [[c:Symbol]] の配列。[[m:String#capitalize]] でキャピタライズ
+    されている。
 : INTERNALDATE
-      A string representing the internal date of the message.
+    メッセージの内部日付。文字列。
 : RFC822
-      Equivalent to BODY[].
+    BODY[] と同じ。文字列。
 : RFC822.HEADER
-      Equivalent to BODY.PEEK[HEADER].
+    BODY.PEEK[HEADER] と同じ。文字列。
 : RFC822.SIZE
-      A number expressing the [[RFC:822]] size of the message.
+    メッセージの [[RFC:822]] サイズ。整数。
 : RFC822.TEXT
-      Equivalent to BODY[TEXT].
+    BODY[TEXT] と同じ。文字列。
 : UID
-      A number expressing the unique identifier of the message.
+    UID。整数。
 
+詳しくは [[RFC:2060]] の FETCH command の節を見てください。
 
+@see [[m:Net::IMAP#fetch]], [[m:Net::IMAP#uid_fetch]]
 
 = class Net::IMAP::Envelope < Struct
 
-Net::IMAP::Envelope represents envelope structures of messages.
+メッセージのエンベロープを表すクラスです。
+
+[[m:Net::IMAP::FetchData#attr]] の要素として用いられます。
 
 == Instance Methods
 
---- date
-#@todo
+--- date -> String | nil
+日付の文字列を返します。
 
-Retunns a string that represents the date.
+エンベロープに存在しないときは nil を返します。
 
---- subject
-#@todo
+--- subject -> String | nil
+メッセージのサブジェクトを返します。
 
-Retunns a string that represents the subject.
-
---- from
-#@todo
-
-Retunns an array of [[c:Net::IMAP::Address]] that represents the from.
-
---- sender
-#@todo
-
-Retunns an array of [[c:Net::IMAP::Address]] that represents the sender.
-
---- reply_to
-#@todo
-
-Retunns an array of [[c:Net::IMAP::Address]] that represents the reply-to.
-
---- to
-#@todo
-
-Retunns an array of [[c:Net::IMAP::Address]] that represents the to.
-
---- cc
-#@todo
-
-Retunns an array of [[c:Net::IMAP::Address]] that represents the cc.
-
---- bcc
-#@todo
-
-Retunns an array of [[c:Net::IMAP::Address]] that represents the bcc.
-
---- in_reply_to
-#@todo
-
-Retunns a string that represents the in-reply-to.
-
---- message_id
-#@todo
-
-Retunns a string that represents the message-id.
+エンベロープに存在しないときは nil を返します。
 
 
+--- from -> [Net::IMAP::Address] | nil
+From を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+
+--- sender -> [Net::IMAP::Address] | nil
+Sender を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+
+--- reply_to -> [Net::IMAP::Address] | nil
+Reply-To を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+
+--- to -> [Net::IMAP::Address] | nil
+To を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+
+--- cc -> [Net::IMAP::Address] | nil
+Cc を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+
+--- bcc -> [Net::IMAP::Address] | nil
+Bcc を [[c:Net::IMAP::Address]] オブジェクトの配列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+
+--- in_reply_to -> String | nil
+In-reply-to の内容を文字列で返します。
+
+エンベロープに存在しないときは nil を返します。
+
+--- message_id -> String | nil
+message_id を文字列で返します。
+
+エンベロープに存在しないときは nil を返します。
 
 = class Net::IMAP::Address < Struct
 
-Net::IMAP::Address represents electronic mail addresses.
+メールアドレスを表すクラスです。
 
 == Instance Methods
 
---- name
-#@todo
+--- name -> String | nil
+メールアドレスの [[RFC:822]] の個人名(personal name)を返します。
 
-Returns the phrase from [[RFC:822]] mailbox.
+個人名が存在しない場合は nil を返します。
 
---- route
-#@todo
+通常は nil を返します。
 
-Returns the route from [[RFC:822]] route-addr.
+--- route -> String | nil
+メールアドレスの SMTP at-domain-list を返します。
 
---- mailbox
-#@todo
+存在しない場合は nil を返します。
 
-nil indicates end of [[RFC:822]] group.
-If non-nil and host is nil, returns [[RFC:822]] group name.
-Otherwise, returns [[RFC:822]] local-part
+通常は nil を返します。
 
---- host
-#@todo
+--- mailbox -> String | nil
+メールアドレスのメールボックス名を返します。
 
-nil indicates [[RFC:822]] group syntax.
-Otherwise, returns [[RFC:822]] domain name.
+これが nil ならばそれは [[RFC:822]] group の終わりを意味します。
+これが nil でなく、[[m:Net::IMAP::Address#mailbox]] が nil ならば、
+[[RFC:822]] のグループ名を表します。
+どれでもなければ、[[RFC:822]] の local-part を表します。
 
+通常は、メールアドレスの「@」の手前を返します。
 
+--- host -> String | nil
+メールアドレスのホスト名を返します。
+
+nil は [[RFC:822]] のグループ文法に対応します。
+これについては [[m:Net::IMAP::Address#mailbox]] も参照してください。
+そうでない場合は [[RFC:822]] のドメイン名を表します。
+
+通常は、メールアドレスの「@」の後ろのドメイン名を返します。
 
 = class Net::IMAP::ContentDisposition < Struct
 
-Net::IMAP::ContentDisposition represents Content-Disposition fields.
+[[RFC:1806]], [[RFC:2183]] で定義されている MIME の
+Content-Disposition フィールドを表すクラスです。
 
 == Instance Methods
 
---- dsp_type
-#@todo
+--- dsp_type -> String
+Content-Disposition フィールドのタイプを文字列で返します。
 
-Returns the disposition type.
+"INLINE", "ATTACHMENT" などの文字列を返します。
 
---- param
-#@todo
+詳しくは [[RFC:2183]] などを見てください。
 
-Returns a hash that represents parameters of the Content-Disposition
-field.
+--- param -> { String => String } | nil
+Content-Disposition フィールドのパラメータをハッシュテーブルで
+返します。
 
-
+ハッシュテーブルのキーは以下のような値を取ります。詳しくは
+[[RFC:2183]] などを見てください。
+  * "FILENAME"
+  * "CREATION-DATE"
+  * "MODIFICATION-DATE"
+  * "READ-DAT"
+  * "SIZE"
 
 = class Net::IMAP::ThreadMember < Struct
 
@@ -1163,259 +1408,278 @@ items that are children of this in the thread.
 
 = class Net::IMAP::BodyTypeBasic < Struct
 
-Net::IMAP::BodyTypeBasic represents basic body structures of messages.
+text 型([[c:Net::IMAP::BodyTypeText]])、
+multipart 型([[c:Net::IMAP::BodyTypeMultipart]])、
+message 型([[c:Net::IMAP::BodyTypeMessage]])、
+のいずれでもないようなメッセージボディ構造を表すクラスです。
 
 == Instance Methods
 
---- media_type
-#@todo
+--- media_type -> String
+MIME のメディアタイプを返します。
 
-Returns the content media type name as defined in [MIME-IMB].
+@see [[m:Net::IMAP::BodyTypeBasic#subtype]]
 
---- subtype
-#@todo
+--- subtype -> String
+--- media_subtype -> String
+MIME のメディアタイプのサブタイプを返します。
+ 
+media_subtype は obsolete です。
 
-Returns the content subtype name as defined in [MIME-IMB].
+@see [[m:Net::IMAP::BodyTypeBasic#media_type]]
 
---- media_subtype
-#@todo
+--- param -> { String => String } | nil
+MIME のボディパラメータをハッシュテーブルで返します。
 
-media_subtype is obsolete.  Use #subtype instead.
+ハッシュテーブルのキーがパラメータ名となります。
 
---- param
-#@todo
+@see [[RFC:2045]]
 
-Returns a hash that represents parameters as defined in [MIME-IMB].
+--- content_id -> String | nil
+Content-ID の値を文字列で返します。
 
---- content_id
-#@todo
+@see [[RFC:2045]]
+--- description -> String | nil
+Content-Description の値を文字列で返します。
 
-Returns a string giving the content id as defined in [MIME-IMB].
+@see [[RFC:2045]]
 
---- description
-#@todo
+--- encoding -> String
+Content-Transfer-Encoding の値を文字列で返します。
 
-Returns a string giving the content description as defined in [MIME-IMB].
+@see [[RFC:2045]]
 
---- encoding
-#@todo
+--- size -> Integer
+ボディのサイズのオクテット数を返します。
 
-Returns a string giving the content transfer encoding as defined in [MIME-IMB].
+--- md5 -> String | nil
+ボディの MD5 値を文字列で返します。
 
---- size
-#@todo
+--- disposition -> Net::IMAP::ContentDisposition | nil
+Content-Dispotition の値を返します。
 
-Returns a number giving the size of the body in octets.
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
---- md5
-#@todo
+@see [[RFC:1806]], [[RFC:2183]]
 
-Returns a string giving the body MD5 value as defined in [MD5].
+--- language -> String | [String] | nil
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
---- disposition
-#@todo
+--- extension -> Array | nil
+メッセージの拡張データを返します。
 
-Returns a [[c:Net::IMAP::ContentDisposition]] object giving
-the content disposition.
-
---- language
-#@todo
-
-Returns a string or an array of strings giving the body
-language value as defined in [LANGUAGE-TAGS].
-
---- extension
-#@todo
-
-Returns extension data.
-
---- multipart?
-#@todo
-
-Returns false.
-
-
+--- multipart? -> bool
+マルチパートかどうかを返します。
+false を返します。
 
 = class Net::IMAP::BodyTypeText < Struct
 
-Net::IMAP::BodyTypeText represents TEXT body structures of messages.
+Content-Type が text であるメッセージを表すクラスです。
+
+詳しくは MIME のRFC([[RFC:2045]])を参照してください。
 
 == Instance Methods
 
---- media_type
-#@todo
+--- media_type -> String
+MIME のメディアタイプを返します。
 
---- subtype
-#@todo
+これは "TEXT" を返します。
 
---- media_subtype
-#@todo
+@see [[m:Net::IMAP::BodyTypeText#subtype]]
 
-obsolete. use #subtype instead.
+--- subtype -> String
+--- media_subtype -> String
+MIME のメディアタイプのサブタイプを返します。
+ 
+media_subtype は obsolete です。
 
---- param
-#@todo
+@see [[m:Net::IMAP::BodyTypeText#media_type]]
 
---- content_id
-#@todo
+--- param -> { String => String } | nil
+MIME のボディパラメータをハッシュテーブルで返します。
 
---- description
-#@todo
+ハッシュテーブルのキーがパラメータ名となります。
 
---- encoding
-#@todo
+@see [[RFC:2045]]
 
---- size
-#@todo
+--- content_id -> String | nil
+Content-ID の値を文字列で返します。
 
---- lines
-#@todo
+@see [[RFC:2045]]
 
-Returns the size of the body in text lines.
+--- description -> String | nil
+Content-Description の値を文字列で返します。
 
-And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
+@see [[RFC:2045]]
 
---- md5
-#@todo
+--- encoding -> String
+Content-Transfer-Encoding の値を文字列で返します。
 
---- disposition
-#@todo
+@see [[RFC:2045]]
 
---- language
-#@todo
+--- size -> Integer
+ボディのサイズのオクテット数を返します。
 
---- extension
-#@todo
+--- lines -> Integer
+ボディの行数を返します。
 
---- multipart?
-#@todo
+--- md5 -> String | nil
+ボディの MD5 値を文字列で返します。
 
-Returns false.
+--- disposition -> Net::IMAP::ContentDisposition | nil
+Content-Dispotition の値を返します。
+
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
+
+@see [[RFC:1806]], [[RFC:2183]]
+
+--- language -> String | [String] | nil
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
 
+--- extension -> Array | nil
+メッセージの拡張データを返します。
+
+--- multipart? -> bool
+マルチパートかどうかを返します。
+false を返します。
 
 = class Net::IMAP::BodyTypeMessage < Struct
 
-Net::IMAP::BodyTypeMessage represents MESSAGE/RFC822 body
- structures of messages.
+Content-Type が "message" であるメッセージを表すクラスです。
+
+詳しくは [[RFC:2045]], [[RFC:822]] を参照してください。
 
 == Instance Methods
 
---- media_type
-#@todo
+--- media_type -> String
+MIME のメディアタイプを返します。
 
---- subtype
-#@todo
+これは "MESSAGE" を返します。
 
---- media_subtype
-#@todo
+@see [[m:Net::IMAP::BodyTypeMessage#subtype]]
 
-obsolete. use #subtype instead.
+--- subtype -> String
+--- media_subtype -> String
 
---- param
-#@todo
+MIME のメディアタイプのサブタイプを返します。
+ 
+media_subtype は obsolete です。
 
---- content_id
-#@todo
+@see [[m:Net::IMAP::BodyTypeMessage#media_type]]
 
---- description
-#@todo
+--- param -> { String => String } | nil
+MIME のボディパラメータをハッシュテーブルで返します。
 
---- encoding
-#@todo
+ハッシュテーブルのキーがパラメータ名となります。
 
---- size
-#@todo
+@see [[RFC:2045]]
 
---- envelope
-#@todo
+--- content_id -> String | nil
+Content-ID の値を文字列で返します。
 
-Returns a [[c:Net::IMAP::Envelope]] giving the envelope structure.
+@see [[RFC:2045]]
 
---- body
+--- description -> String | nil
+Content-Description の値を文字列で返します。
+
+@see [[RFC:2045]]
+
+--- encoding -> String
+Content-Transfer-Encoding の値を文字列で返します。
+
+@see [[RFC:2045]]
+
+--- size -> Integer
+ボディのサイズのオクテット数を返します。
+
+--- envelope -> Net::IMAP::Envelpe | nil
+メッセージのエンベロープを返します。
+
+--- body -> Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMultipart
 #@todo
 
 Returns an object giving the body structure.
 
-And Net::IMAP::BodyTypeMessage has all methods of [[c:Net::IMAP::BodyTypeText]].
+--- lines -> Integer
+ボディのテキストの行数を返します。
 
---- lines
-#@todo
+--- md5 -> String | nil
+ボディの MD5 値を文字列で返します。
 
-Returns the size of the body in text lines.
+--- disposition -> Net::IMAP::ContentDisposition | nil
+Content-Dispotition の値を返します。
 
-And Net::IMAP::BodyTypeText has all methods of [[c:Net::IMAP::BodyTypeBasic]].
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
---- md5
-#@todo
+@see [[RFC:1806]], [[RFC:2183]]
 
---- disposition
-#@todo
+--- language -> String | [String] | nil
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
---- language
-#@todo
+--- extension  -> Array | nil
+メッセージの拡張データを返します。
 
---- extension
-#@todo
-
---- multipart?
-#@todo
-
-Returns false.
-
+--- multipart?  -> bool
+マルチパートかどうかを返します。
+false を返します。
 
 
 = class Net::IMAP::BodyTypeMultipart < Struct
 
+マルチパートなメッセージを表すクラスです。
+
+詳しくは MIME のRFC([[RFC:2045]])を参照してください。
+
 == Instance Methods
 
---- media_type
-#@todo
+--- media_type -> String
+MIME のメディアタイプを返します。
 
-Returns the content media type name as defined in [MIME-IMB].
+"MULTIPART" を返します。
 
---- subtype
-#@todo
+@see [[m:Net::IMAP::BodyTypeMultipart#subtype]]
 
-Returns the content subtype name as defined in [MIME-IMB].
+--- subtype -> String
+--- media_subtype -> String
+MIME のメディアタイプのサブタイプを返します。
+ 
+media_subtype は obsolete です。
 
---- media_subtype
-#@todo
+@see [[RFC:2045]], [[m:Net::IMAP::BodyTypeText#media_type]]
 
-obsolete. use #subtype instead.
+--- parts -> [Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeMultipart]
 
---- parts
-#@todo
+マルチパートの各部分を返します。
 
-Returns multiple parts.
+--- param -> { String => String }
+MIME のボディパラメータをハッシュテーブルで返します。
 
---- param
-#@todo
+ハッシュテーブルのキーがパラメータ名となります。
 
-Returns a hash that represents parameters as defined in
-[MIME-IMB].
+@see [[RFC:2045]]
 
---- disposition
-#@todo
+--- disposition -> Net::IMAP::ContentDisposition | nil
+Content-Dispotition の値を返します。
 
-Returns a [[c:Net::IMAP::ContentDisposition]] object giving
-the content disposition.
+[[c:Net::IMAP::ContentDisposition]] オブジェクトを返します。
 
---- language
-#@todo
+@see [[RFC:1806]], [[RFC:2183]]
 
-Returns a string or an array of strings giving the body
-language value as defined in [LANGUAGE-TAGS].
+--- language -> String | [String] | nil
+[[RFC:1766]] で定義されているボディ言語を表わす
+文字列もしくは文字列の配列を返します。
 
---- extension
-#@todo
+--- extension -> Array | nil
+メッセージの拡張データを返します。
 
-Returns extension data.
+--- multipart? -> bool
+マルチパートかどうかを返します。
+true を返します。
 
---- multipart?
-#@todo
-
-Returns true.
 
 
 #@# internal classes:
