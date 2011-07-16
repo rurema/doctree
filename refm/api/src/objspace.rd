@@ -109,22 +109,17 @@ T_DATA の種類ごとにオブジェクトの数を格納したハッシュを返します。
 例:
 
   ObjectSpace.count_tdata_objects
-#@since 1.9.3
   # => {RubyVM::InstructionSequence=>504, :parser=>5, :barrier=>6,
         :mutex=>6, Proc=>60, RubyVM::Env=>57, Mutex=>1, Encoding=>99,
         ThreadGroup=>1, Binding=>1, Thread=>1, RubyVM=>1, :iseq=>1,
         Random=>1, ARGF.class=>1, Data=>1, :autoload=>3, Time=>2}
 
-In this version, keys are Class object or Symbol object.
-If object is kind of normal (accessible) object, the key is Class object.
-If object is not a kind of normal (internal) object, the key is symbol
-name, registered by rb_data_type_struct.
+現在のバージョンでは、戻り値のキーはクラスオブジェクトかシンボルのオブ
+ジェクトです。
 
-#@else
-  # => {:NODE_METHOD=>2027, :NODE_FBODY=>1927, :NODE_CFUNC=>1798, ...}
-#@end
-
-#@todo 1.9.2 以前についての動作を確認する。
+普通の参照可能なオブジェクトの場合、キーはクラスオブジェクトです。それ
+以外の内部的なオブジェクトの場合、キーはシンボルです。シンボルの値は
+rb_data_type_struct に格納された名前が使用されます。
 
 戻り値のハッシュは処理系に依存します。これは将来変更になるかもしれません。
 
