@@ -498,11 +498,12 @@ LIST コマンドを送り、クライアントから利用可能なメールボックス名の集合から
   p imap.list("", "foo/%")
   #=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 
-
-#@since 1.9.3
---- xlist
-#@todo
-#@end
+#@# not released yet
+#@# #@since 1.9.3
+#@# --- xlist
+#@# [[URL:http://code.google.com/apis/gmail/imap/]]
+#@# #@todo
+#@# #@end
 
 --- lsub(refname, mailbox) -> [Net::IMAP::MailboxList]
 
@@ -782,10 +783,12 @@ mailbox はコピー先のメールボックスです。
 --- sort(sort_keys, search_keys, charset) -> [Integer]
 --- uid_sort(sort_keys, search_keys, charset) -> [Integer]
 SORT コマンド送り、メールボックス内の
-メッセージをソートします。
+メッセージをソートした結果を返します。
 
-SORT コマンドは [[RFC:5265]] で定義されています。
+SORT コマンドは [[RFC:5256]] で定義されています。
 詳しくはそちらを参照してください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
 sort_keys にはソート順を決めるキーを文字列の配列で指定します。
 "ARRIVAL", "CC", "FROM", "TO", "SUBJECT" などが指定できます。
@@ -816,6 +819,8 @@ quota が nil ならば、mailbox の quota を破棄します。
 quota が整数なら STORAGE をその値に変更します。
 
 詳しくは [[RFC:2087]] を見てください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
 @param mailbox quota を設定するメールボックス名(文字列)
 @param quota quotaの値(ストレージのサイズ、もしくは nil)
@@ -830,6 +835,8 @@ quota の情報は [[c:Net::IMAP::MailboxQuota]] オブジェクトの配列で
 得られます。
 
 詳しくは [[RFC:2087]] を見てください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
 @param mailbox quota 情報を得たいメールボックス名
 @raise Net::IMAP::NoResponseError 指定したメールボックスが quota root でない場合に発生します
@@ -845,51 +852,98 @@ quota の情報はメールボックスに関連付けられた quota root ごとに
 [[c:Net::IMAP::MailboxQuota]] オブジェクトで得られます。
 
 詳しくは [[RFC:2087]] を見てください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
 @param mailbox quota root を得たいメールボックス名(文字列)
 @raise Net::IMAP::NoResponseError 指定したメールボックスが存在しない場合に発生します
 
 --- setacl(mailbox, user, rights)
-#@todo
 
-Sends the SETACL command along with mailbox, user and the
-rights that user is to have on that mailbox.  If rights is nil,
-then that user will be stripped of any rights to that mailbox.
-The IMAP ACL commands are described in [[RFC:2086]].
+SETACL コマンドを送り、指定したメールボックスに
+指定したユーザに関する権限を設定します。
 
---- getacl(mailbox)
-#@todo
+rights には設定する権限を表す文字列を指定します。
+どのような文字列を指定すべきかは [[RFC:2086]] を参照してください。
+rights に nil を渡すと、空文字列を指定したのと同様、つまり
+すべての権限を削除します。
 
-Send the GETACL command along with specified mailbox.
-If this mailbox exists, an array containing objects of
-[[c:Net::IMAP::MailboxACLItem]] will be returned.
+@param mailbox 権限を設定するメールボックスの名前(文字列)
+@param user 権限を設定するユーザの名前(文字列)
+@param rights 権限を表す文字列
 
---- add_response_handler(handler = Proc.new)
-#@todo
+--- getacl(mailbox) -> [Net::IMAP::MailboxACLItem]
+GETACL コマンドを送り、メールボックスの 
+ACL(Access Control List) を取得します。
 
-Adds a response handler.
+[[m:Net::IMAP#getacl]] で指定したメールボックスに
+対し何らかの権限を持つ各ユーザに対して
+[[c:Net::IMAP::MailboxACLItem]] オブジェクトが
+作られ、その配列が返されます。
 
-ex).
+GETACL コマンドは [[RFC:2086]] で定義されています。
+詳しくはそちらを参照してください。
+
+@param mailbox メールボックス名(文字列)
+@see [[c:Net::IMAP::MailboxACLItem]]
+
+--- add_response_handler(handler) -> ()
+--- add_response_handler(handler){|resp| ...} -> ()
+レスポンスハンドラを追加します。
+
+レスポンスハンドラはサーバから応答を受け取るごとに
+呼びだされます。ハンドラには
+[[c:Net::IMAP::TaggedResponse]] もしくは
+[[c:Net::IMAP::UntaggedResponse]] オブジェクトが
+渡されます。
+
+主にサーバからの非同期的なイベントを受け取るため
+に用います。例えば EXISTS 応答を受け取る
+(メールボックスに新たなメールが追加されたタイミングで発生します)
+ためなどに用いられます。
+
+レスポンスハンドラはメインのスレッドとは別のスレッドで
+呼びだされることに注意してください。
+
+例:
 
   imap.add_response_handler do |resp|
     p resp
   end
 
---- remove_response_handler(handler)
-#@todo
+@param handler 追加するハンドラ([[c:Proc]] や [[c:Method]] オブジェクト)
+@see [[m:Net::IMAP#remove_response_handler]]
 
-Removes the response handler.
+--- remove_response_handler(handler) -> ()
+レスポンスハンドラを削除します。
 
---- response_handlers
-#@todo
+@param handler 削除するハンドラ
+@see [[m:Net::IMAP#add_response_handler]]
 
-Returns all response handlers.
+--- response_handlers -> Array
+設定されているレスポンスハンドラ全てを
+配列で返します。
+
+@see [[m:Net::IMAP#add_response_handler]]
 
 #@since 1.9.1
---- starttls(cxt = nil)
-#@todo
+--- starttls(options) -> Net::IMAP::TaggedResponse
+--- starttls(certs, verify) -> Net::IMAP::TaggedResponse
 
-Sends a STARTTLS command to start TLS session.
+STARTTLS コマンドを送って TLS のセッションを開始します。
+
+options で [[lib:openssl]] に渡すオプションを指定します。
+[[m:OpenSSL::SSL::SSLContext#set_params]] の引数と同じ意味です。
+
+互換性のため、certs で証明書or証明書ディレクトリのファイル名(文字列)、
+verify で検証するかどうか([[m:Net::IMAP::VERIFY_PEER]]、
+[[m:Net::IMAP::VERIFY_NONE]]に対応します)を
+指定することができます。
+
+@param options SSL/TLS のオプション([[c:Hash]] オブジェクト)
+@param certs 証明書ファイル名、もしくは証明書ディレクトリ名(文字列)
+@param verify 真なら SSL/TLS 接続時に証明書を検証します
+
 #@end
 
 #@since 1.8.2
@@ -901,63 +955,103 @@ Sends a STARTTLS command to start TLS session.
 
 #@end
 
---- thread(algorithm, search_keys, charset)
-#@todo
+--- thread(algorithm, search_keys, charset) -> [Net::IMAP::ThreadMember]
+THREADコマンドを送り、メールボックスを検索した結果を
+スレッド形式の木構造で返します。
 
-As for #search(), but returns message sequence numbers in threaded
-format, as a Net::IMAP::ThreadMember tree.  The supported algorithms
-are:
+THREAD コマンドは [[RFC:5256]] で定義されています。
+詳しくはそちらを参照してください。
+このコマンドは [[m:Net::IMAP#capability]] の返り値を見ることで
+利用可能かどうか判断できます。
 
-ORDEREDSUBJECT:: split into single-level threads according to subject,
-                 ordered by date.
-REFERENCES:: split into threads by parent/child relationships determined
-              by which message is a reply to which.
+algorithm は木構造を決定するためのアルゴリズムを指定します。
+以下の2つが利用可能です。
+  * "ORDEREDSUBJECT" subjectを使って平坦に区切るだけ
+  * "REFERENCES" どのメッセージに返事をしているかを見て木構造を作る
+詳しくは [[RFC:5256]] を見てください。
 
-Unlike #search(), +charset+ is a required argument.  US-ASCII
-and UTF-8 are sample values.
+search_key には検索条件を渡します。
+[[m:Net::IMAP#search]] と同等です。
 
-See [SORT-THREAD-EXT] for more details.
 
---- uid_thread(algorithm, search_keys, charset)
-#@todo
+@param algorithm スレッド構造構築アルゴリズム名(文字列)
+@param search_key 検索条件(文字列配列)
+@param charset 検索条件の解釈に用いるCHARSET名(文字列)
+@see [[c:Net::IMAP::ThreadMember]], [[m:Net::IMAP#uid_thread]]
 
-As for #thread(), but returns unique identifiers instead of 
-message sequence numbers.
+--- uid_thread(algorithm, search_keys, charset)  -> [Net::IMAP::ThreadMember]
+THREADコマンドを送り、メールボックスを検索した結果を
+スレッド形式の木構造で返します。
 
---- client_thread
+ほぼ [[m:Net::IMAP#thread]] と同じですが、返ってくるオブジェクトの
+[[m:Net::IMAP#ThreadMember#seqno]] の内容が message sequence number
+ではなく UID となります。
+
+@param algorithm スレッド構造構築アルゴリズム名(文字列)
+@param search_key 検索条件(文字列配列)
+@param charset 検索条件の解釈に用いるCHARSET名(文字列)
+@see [[c:Net::IMAP::ThreadMember]], [[m:Net::IMAP#thread]]
+
+
+--- client_thread -> Thread
+#@until 1.9.1
+例外が送出されるスレッドを返します。
+
+#@else
+このメソッドは obsolete です。使わないでください。
+#@end
+
 --- client_thread=(th)
-#@todo
+#@until 1.9.1
+例外が送出されるスレッドを設定します。
 
-The thread to receive exceptions.
+@param th 設定するスレッド
+#@else
+このメソッドは obsolete です。使わないでください。
+#@end
 
---- idle
---- idle_done
-#@todo
+#@since 1.9.2
+--- idle {|resp| ...} -> Net::IMAP::TaggedResponse
+IDLE 命令を送り、メールボックスの非同期的変化を待ち受けます。
+
+このメソッドに渡したブロックは
+[[m:Net::IMAP#add_response_handler]] によって
+レスポンスハンドラとして用いられます。
+また、このメソッドが終了する時点で
+[[m:Net::IMAP#remove_response_handler]] で
+ハンドラが削除されます。
+
+レスポンスハンドラについては
+[[m:Net::IMAP#add_response_handler]] を参照してください。
+
+別のスレッドが [[m:Net::IMAP#idle_done]] を呼びだすまで
+このメソッドを呼びだしたスレッドは停止します。
+
+この命令は [[RFC:2177]] で定義されています。詳しくはそちらを
+参照してください。
+
+--- idle_done -> ()
+[[m:Net::IMAP#idle]] で
+停止しているスレッドを1つ起こします。
+#@end
 
 = class Net::IMAP::ContinuationRequest < Struct
 
-Net::IMAP::ContinuationRequest represents command continuation requests.
+IMAP の continuation request (命令継続要求) を表すクラスです。
 
-The command continuation request response is indicated by a "+" token
-instead of a tag.  This form of response indicates that the server is
-ready to accept the continuation of a command from the client.  The
-remainder of this response is a line of text.
+通常このクラスを直接扱うことはありません。
+レスポンスハンドラ([[c:Net::IMAP#add_response_handler]])
+に渡されます。
 
-  continue_req    ::= "+" SPACE (resp_text / base64)
+詳しくは [[RFC:2060]] の 7.5 を参照してください。
 
 == Instance Methods
 
---- data
-#@todo
+--- data -> Net::IMAP::ResponseText
+レスポンスのデータを返します。
 
-Returns the data ([[c:Net::IMAP::ResponseText]]).
-
---- raw_data
-#@todo
-
-Returns the raw data string.
-
-
+--- raw_data -> String
+レスポンス文字列を返します。
 
 = class Net::IMAP::UntaggedResponse < Struct
 
@@ -1146,49 +1240,45 @@ quota root 情報を表わすオブジェクトです。
 
 = class Net::IMAP::MailboxACLItem < Struct
 
-Net::IMAP::MailboxACLItem represents response from GETACL.
+GETACL の応答の各要素を表すクラスです。
 
-  acl_data        ::= "ACL" SPACE mailbox *(SPACE identifier SPACE
-                       rights)
-  
-  identifier      ::= astring
-  
-  rights          ::= astring
+[[m:Net::IMAP#getacl]] の返り値として用いられます。
+
+詳しくは [[RFC:2086]] を参照してください。
 
 == Instance Methods
 
---- user
-#@todo
+--- user -> String
+ユーザ名を返します。
 
-Login name that has certain rights to the mailbox
-that was specified with the getacl command.
+このユーザは
+[[m:Net::IMAP#getacl]] で指定したメールボックスに
+対し何らかの権限を持っています。
 
---- rights
-#@todo
+--- rights -> String
+アクセス権限を文字列で返します。
 
-The access rights the indicated user has to the
-mailbox.
+[[m:Net::IMAP::MailboxACLItem#user]] で得られるユーザが
+持っている権限が返されます。
 
+この文字列の意味については [[RFC:2086]] を参照してください。
 
-
-= class Net::IMAP::StatusData < Object
-
-Net::IMAP::StatusData represents contents of the STATUS response.
+= class Net::IMAP::StatusData < Struct
+STATUS 応答を表わすクラスです。
 
 == Instance Methods
 
---- mailbox
-#@todo
+--- mailbox -> String
+メールボックス名を返します。
 
-Returns the mailbox name.
+--- attr -> { String => Integer }
+STATUS 応答の内容をハッシュで返します。
 
---- attr
-#@todo
+ハッシュのキーは
+"MESSAGES", "RECENT", "UIDNEXT", "UIDVALIDITY", "UNSEEN"
+などが使われます。
 
-Returns a hash. Each key is one of "MESSAGES", "RECENT", "UIDNEXT",
-"UIDVALIDITY", "UNSEEN". Each value is a number.
-
-
+詳しくは [[RFC:2060]] の 6.3.10、7.2.4 を見てください。
 
 = class Net::IMAP::FetchData < Object
 
@@ -1387,23 +1477,20 @@ Content-Disposition フィールドのパラメータをハッシュテーブルで
   * "SIZE"
 
 = class Net::IMAP::ThreadMember < Struct
-
-Net::IMAP::ThreadMember represents a thread-node returned 
-by [[m:Net::IMAP#thread]]
+nn
+[[m:Net::IMAP#thread]]、 [[m:Net::IMAP#uid_thread]] から
+得られるスレッドの木構造のノードを表すクラスです。
 
 == Instance Methods
 
---- seqno
-#@todo
+--- seqno -> Integer | nil
+メッセージの sequence number もしくは UID を返します。
 
-The sequence number of this message.
+root となるメッセージが存在しない場合しない木の場合は
+nil を返します。
 
---- children
-#@todo
-
-an array of [[c:Net::IMAP::ThreadMember]] objects for mail
-items that are children of this in the thread.
-
+--- children -> [Net::IMAP::ThreadMember]
+スレッドの木構造における自身の下位の部分を返します。
 
 
 = class Net::IMAP::BodyTypeBasic < Struct
@@ -1412,6 +1499,9 @@ text 型([[c:Net::IMAP::BodyTypeText]])、
 multipart 型([[c:Net::IMAP::BodyTypeMultipart]])、
 message 型([[c:Net::IMAP::BodyTypeMessage]])、
 のいずれでもないようなメッセージボディ構造を表すクラスです。
+
+添付ファイルなどを表します。
+詳しくは MIME のRFC([[RFC:2045]])を参照してください。
 
 == Instance Methods
 
@@ -1477,6 +1567,7 @@ false を返します。
 
 Content-Type が text であるメッセージを表すクラスです。
 
+平文のメールを表します。
 詳しくは MIME のRFC([[RFC:2045]])を参照してください。
 
 == Instance Methods
@@ -1550,7 +1641,9 @@ false を返します。
 
 Content-Type が "message" であるメッセージを表すクラスです。
 
+メールをメールに添付した場合などに使われます。
 詳しくは [[RFC:2045]], [[RFC:822]] を参照してください。
+
 
 == Instance Methods
 
@@ -1599,9 +1692,8 @@ Content-Transfer-Encoding の値を文字列で返します。
 メッセージのエンベロープを返します。
 
 --- body -> Net::IMAP::BodyTypeBasic | Net::IMAP::BodyTypeMessage | Net::IMAP::BodyTypeText | Net::IMAP::BodyTypeMultipart
-#@todo
 
-Returns an object giving the body structure.
+ボディを返します。
 
 --- lines -> Integer
 ボディのテキストの行数を返します。
@@ -1810,3 +1902,4 @@ true を返します。
 この上限は [[m:Net::IMAP#max_flag_count=]] で設定します。
 
 #@end
+
