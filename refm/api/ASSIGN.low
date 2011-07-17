@@ -5,6 +5,7 @@ bigdecimal                      mrkn
 bigdecimal/jacobian             mrkn
 bigdecimal/ludcmp               mrkn
 bigdecimal/newton               mrkn
+complex                         bornite
 curses                          kouji
 dl                                                          
 dl/Symbol                       
