@@ -5,6 +5,7 @@ bigdecimal                      mrkn
 bigdecimal/jacobian             mrkn
 bigdecimal/ludcmp               mrkn
 bigdecimal/newton               mrkn
+curses                          kouji
 dl                                                          
 dl/Symbol                       
 dl/import                       
