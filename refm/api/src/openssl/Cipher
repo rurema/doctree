@@ -56,24 +56,47 @@ AES を用いる場合、通常は CBC を用いれば良いでしょう。
 
 
 === 使用例
-#@todo
   require 'openssl'
   
-  p a123 = "0123456789"
-  pass = "hogehoge"
-  enc = OpenSSL::Cipher::DES.new
-  enc.encrypt
-  enc.pkcs5_keyivgen(pass)
-  p a = enc.update(a123)
-  p b = enc.final
-  s = a + b
+  # 暗号化するデータ
+  data = "*secret data*"
+  # パスワード
+  pass = "**secret password**"
+  # salt
+  salt = OpenSSL::Random.random_bytes(8)
   
-  dec = OpenSSL::Cipher::DES.new
+  # 暗号化器を作成する
+  enc = OpenSSL::Cipher.new("AES-256-CBC")
+  enc.encrypt
+  # 鍵とIV(Initialize Vector)を PKCS#5 に従ってパスワードと salt から生成する
+  key_iv = OpenSSL::PKCS5.pbkdf2_hmac_sha1(pass, salt, 2000, enc.key_len + enc.iv_len)
+  key = key_iv[0, enc.key_len]
+  iv = key_iv[enc.key_len, enc.iv_len]
+  # 鍵とIVを設定する
+  enc.key = key
+  enc.iv = iv
+  
+  # 暗号化する
+  encrypted_data = ""
+  encrypted_data << enc.update(data)
+  encrypted_data << enc.final
+  
+  p encrypted_data
+  
+  # 復号化器を作成する
+  dec = OpenSSL::Cipher.new("AES-256-CBC")
   dec.decrypt
-  dec.pkcs5_keyivgen(pass)
-  p a = dec.update(s)
-  p b = dec.final
-  p a + b #=> "0123456789"
+  
+  # 鍵とIVを設定する
+  dec.key = key
+  dec.iv = iv
+  
+  # 復号化する
+  decrypted_data = ""
+  decrypted_data << dec.update(encrypted_data)
+  decrypted_data << dec.final
+  
+  p decrypted_data
 
 == Class Methods
 #@until 1.8.7
@@ -252,6 +275,7 @@ num は必要なデータの生成でハッシュ関数を何回繰り返し適用するかを
 @param num ハッシュ関数の適用回数
 @param digest ハッシュアルゴリズムを指定する文字列もしくは [[c:OpenSSL::Digest]] のオブジェクト
 @raise OpenSSL::Cipher::CipherError saltが8 byte でない場合や、鍵と IV の設定に失敗した場合に発生します
+@see [[c:OpenSSL::PKCS5]]
 
 --- random_iv -> String
 IV を乱数で生成し、暗号オブジェクトに設定します。
@@ -422,10 +446,10 @@ DES 暗号オブジェクトを生成し、返します。
 IDEA 暗号を表すクラス
 
 == Class Methods
---- new() -> OpenSSL::Cipher::IDEA
-#@todo
+--- new(*args) -> OpenSSL::Cipher::IDEA
 IDEA 暗号オブジェクトを生成します。
 
+@param args 暗号のパラメータ
 #@end
 
 #@until 1.8.7
@@ -484,10 +508,10 @@ bit で鍵長を指定できます。
 RC5 暗号を表すクラス
 
 == Class Methods
---- new() -> OpenSSL::Cipher::RC5
-#@todo
+--- new(*args) -> OpenSSL::Cipher::RC5
 RC5 暗号オブジェクトを生成し、返します。
 
+@param args 暗号のパラメータ
 #@until 1.8.7
 = class OpenSSL::CipherError < OpenSSL::OpenSSLError
 #@else
