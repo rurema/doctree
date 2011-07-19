@@ -182,7 +182,9 @@ untagged な応答はコマンドの送信とは非同期的にサーバから送られるため、
   * [RSSL]
     http://savannah.gnu.org/projects/rubypki
 
-
+以上のうち、いくつかの RFC は obsolete になって置き換えられています。
+[[RFC:2060]] は [[RFC:3501]] に、[[RFC:822]] は [[RFC:2822]] に、
+置き換えられています。
 
 = class Net::IMAP < Object
 
@@ -1035,6 +1037,117 @@ IDLE 命令を送り、メールボックスの非同期的変化を待ち受けます。
 停止しているスレッドを1つ起こします。
 #@end
 
+== Constants
+--- SEEN -> Symbol
+「:Seen」というシンボルを返します。
+
+そのメッセージが既に読まれていることを意味します。
+
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- ANSWERED -> Symbol
+「:Answered」というシンボルを返します。
+
+そのメッセージに返答したことを意味します。
+
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- FLAGGED -> Symbol
+「:Flagged」というシンボルを返します。
+
+そのメッセージに特別なフラグを立てていることを意味します。
+
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- DELETED -> Symbol
+「:Deleted」というシンボルを返します。
+
+メッセージが削除されていることを意味します。
+EXPUNGE で完全に除去されます。
+
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- DRAFT -> Symbol
+「:Draft」というシンボルを返します。
+
+メッセージが草稿であることを意味します。
+
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- RECENT -> Symbol
+「:Recent」というシンボルを返します。
+
+メッセージが「最近」メールボックスに到着したことを意味します。
+
+フラグメッセージ属性として用いられます
+([[m:Net::IMAP::FetchData#attr]])。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- NOINFERIORS -> Symbol
+「:Noinferiors」というシンボルを返します。
+
+このメールボックスの
+下に子レベルの階層が存在不可能であることを意味します。
+
+LIST応答の属性
+ ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+
+--- NOSELECT -> Symbol
+「:Noselect」というシンボルを返します。
+
+メールボックスが選択可能でないことを意味します。
+
+LIST応答の属性
+ ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
+
+詳しくは [[RFC:2060]] を参照してください。
+--- MARKED -> Symbol
+「:Marked」というシンボルを返します。
+
+メールボックスが「interesting」であるとサーバによって
+印付けられていることを意味します。通常メールボックスに
+新しいメールが届いていることを意味します。
+
+LIST応答の属性
+ ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
+
+詳しくは [[RFC:2060]] を参照してください。
+
+--- UNMARKED -> Symbol
+「:Unmarked」というシンボルを返します。
+
+メールボックスが
+印付けられていないことを意味します。
+メールボックスに新しいメールが届いていないことを意味します。
+
+LIST応答の属性
+ ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+として用いられます。
+
+詳しくは [[RFC:2060]] を参照してください。
+
 = class Net::IMAP::ContinuationRequest < Struct
 
 IMAP の continuation request (命令継続要求) を表すクラスです。
@@ -1876,6 +1989,15 @@ true を返します。
   * [[c:Net::IMAP::BadResponseError]]
   * [[c:Net::IMAP::ByeResponseError]]
 これらのクラスの例外が発生します。
+
+== Instance Methods
+--- response -> Net::IMAP::TaggedResponse | Net::IMAP::UntaggedResponse
+エラーとなったレスポンスを表すオブジェクトを返します。
+
+--- response=(resp)
+エラーとなったレスポンスを表すオブジェクトを設定します。
+
+@param resp 設定するレスポンスオブジェクト
 
 = class Net::IMAP::NoResponseError < Net::IMAP::ResponseError
 
