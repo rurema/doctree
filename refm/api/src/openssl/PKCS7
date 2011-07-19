@@ -6,17 +6,20 @@ PKCS #7 クラス
 PKCS #7 は暗号技術とともに用いられるデータのフォーマットの仕様です。
 データやそれに対する署名、証明した日時など任意の属性を含むことができ、
 S/MIME などに使用されています。
-[[rfc:2315]]
+
+[[RFC:2315]] を参照してください。
 
 #@# CRL 関連をどう使えばよいのかわからない
 
 === S/MIME メッセージの種類
 S/MIME には以下の種類のメッセージがあります
-  * enveloped-only フォーマット 
-  * signed-only フォーマット
+  * enveloped-only 
+  * signed-only 
     * signedData フォーマット
     * multipart/signed フォーマット
-  * 
+  * Certificate-only
+
+  
 == Class Methods
 
 --- new -> OpenSSL::PKCS7
@@ -445,7 +448,12 @@ S/MIME 暗号化する場合に指定した送信先を意味します。
 == Instance Methods
 
 --- enc_key -> String
-#@todo
+送信先の公開鍵で暗号化された共通鍵を返します。
+
+詳しくは [[RFC:2315]] の 10.2、10.3 を参照してください。
+
+通常は [[m:OpenSSL::PKCS7#decrypt]] で復号化するので
+あまり使わないでしょう。
 
 --- issuer -> OpenSSL::X509::Name
 送信先の証明書の発行者の名前(DN)を返します。
