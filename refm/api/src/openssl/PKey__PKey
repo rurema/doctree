@@ -12,12 +12,14 @@
   * [[c:OpenSSL::PKey::EC]]
 
 例:
-#@todo
+
   require "openssl"
+  # 署名用の鍵を新規作成
   dsa512 = OpenSSL::PKey::DSA.new(512)
-  dss1 = OpenSSL::Digest::DSS1.new
   data = 'hoge'
-  sign = dsa512.sign(dss1, data)
+  # 署名
+  sign = dsa512.sign("dss1", data)
+  # 署名の検証
   p dsa512.verify(dss1, sign, data)
 
 == Instance Methods
