@@ -1,30 +1,80 @@
-#@since 1.8.0
 
 = class OpenSSL::Netscape::SPKI < Object
 
+Netscape SPKI、もしくは SPKAC(Signed Public Key And Challenge) と呼ばれる
+データフォーマットを扱うためのクラスです。
+
+== Class Methods
+--- new() -> OpenSSL::Netscape::SPKI
+--- new(buf) -> OpenSSL::Netscape::SPKI
+
+SPKI オブジェクトを生成します。
+
+文字列を渡すと、PEM 形式、もしくは DER 形式のデータとみなし、
+その内容を読み込みます。
+
+@param buf SPKI オブジェクトを生成するための文字列データ
+@raise OpenSSL::Netscape::SPKIError オブジェクトの生成に失敗した場合に発生します
+
 == Instance Methods
 
---- challenge
---- challenge=
-#@todo
+--- challenge -> String
+SPKI オブジェクトに設定されたチャレンジ文字列を返します。
 
---- public_key
---- public_key=
-#@todo
+@raise OpenSSL::Netscape::SPKIError 文字列が設定されていない場合に発生します
+@see [[m:OpenSSL::Netscape::SPKI#challenge=]]
 
---- sign
-#@todo
+--- challenge=(chg)
+SPKI オブジェクトにチャレンジ文字列を設定します。
 
---- to_der
---- to_pem
-#@todo
+@param chg 設定する文字列
+@raise OpenSSL::Netscape::SPKIError 文字列の設定に失敗した場合に発生します
+@see [[m:OpenSSL::Netscape::SPKI#challenge]]
 
---- to_s
---- to_text
-#@todo
+--- public_key -> OpenSSL::PKey::PKey
+SPKI オブジェクトに設定された公開鍵を返します。
 
---- verify
-#@todo
+@raise OpenSSL::Netscape::SPKIError 公開鍵が設定されていない場合に発生します
+@see [[m:OpenSSL::Netscape::SPKI#public_key=]]
+
+--- public_key=(pubkey)
+SPKI オブジェクトに公開鍵を設定します。
+
+@param pubkey 設定する公開鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@raise OpenSSL::Netscape::SPKIError 公開鍵の設定に失敗した場合に発生します
+@see [[m:OpenSSL::Netscape::SPKI#public_key]]
+
+--- sign(key, digest) -> self
+SPKI オブジェクトに署名をします。
+
+@param key 署名に使う秘密鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@param digest 署名に使うダイジェスト関数(文字列もしくは [[c:OpenSSL::Digest]] オブジェクト)
+@raise OpenSSL::Netscape::SPKIError 署名に失敗した場合に発生します
+@see [[m:OpenSSL::Netscape::SPKI#verify]]
+
+--- to_der -> String
+SPKI オブジェクトを DER 形式の文字列に変換します。
+
+
+--- to_pem -> String
+--- to_s -> String
+SPKI オブジェクトを PEM 形式の文字列に変換します。
+
+@raise OpenSSL::Netscape::SPKIError 変換に失敗した場合に発生します
+
+
+--- to_text -> String
+SPKI オブジェクトを人間が読める形式の文字列に変換します。
+
+--- verify(key) -> bool
+署名を検証します。
+
+検証に成功した場合は true を返し、失敗した場合は false を返します。
+
+@param key 署名に使う公開鍵([[c:OpenSSL::PKey::PKey]] オブジェクト)
+@raise OpenSSL::Netscape::SPKIError 検証時にエラーが起きた場合に発生します
+@see [[m:OpenSSL::Netscape::SPKI#sign]]
 
 = class OpenSSL::Netscape::SPKIError < OpenSSL::OpenSSLError
-#@end
+Netscape SPKI 関連のエラーが生じた場合に発生する例外です。
+
