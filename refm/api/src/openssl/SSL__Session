@@ -34,7 +34,7 @@ SSL/TLS セッションを表すクラスです。
 設定してやることでセッションを再利用します。
 
 #@# ここにコード例を書く
-#@todo
+
 
 === サーバ側のセッションキャッシュ
 サーバ側では [[c:OpenSSL::SSL::SSLContext]] により
@@ -65,7 +65,7 @@ SSL/TLS ハンドシェイク終了時に [[c:OpenSSL::SSL::SSLContext]] 内の
 変更できます。
 
 #@# ここにコード例を書く
-#@todo
+
 
 == Class Methods
 --- new(obj) -> OpenSSL::SSL::Session

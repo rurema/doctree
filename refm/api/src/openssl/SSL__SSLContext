@@ -593,17 +593,51 @@ size に 0 を渡すと制限なしを意味します。
   * :cache_full キャッシュが満杯で破棄したセッションの数
   * :timeouts ヒットしたキャッシュがタイムアウトしてしまっていた回数
 
---- session_get_cb
-#@todo
+--- session_get_cb -> Proc | nil
+セッションキャッシュを探索し、内部のキャッシュテーブルには
+見付からなかった場合に呼び出されるコールバックを返します。
 
---- session_get_cb=
-#@todo
+設定されていないときは nil を返します。
 
---- session_new_cb
-#@todo
+@see [[m:OpenSSL::SSL::SSLContext#session_get_cb=]]
 
---- session_new_cb=
-#@todo
+--- session_get_cb=(cb)
+セッションキャッシュを探索し、内部のキャッシュテーブルには
+見付からなかった場合に呼び出されるコールバックを設定します。
+
+コールバックオブジェクトを call するときの引数は
+  [ 接続オブジェクト(OpenSSL::SSL::SSLSocket), セッションID(文字列) ]
+という配列です。このコールバックの返り値が
+[[c:OpenSSL::SSL::Session]] オブジェクトならば、
+それをキャッシュ値として利用します。それ以外を返したならば、
+キャッシュは見つからなかったものとして取り扱われます。
+
+セッションキャッシュについて詳しくは [[c:OpenSSL::SSL::Session]] を
+見てください。
+
+@param cb コールバックオブジェクト([[c:Proc]] もしくは [[c:Method]])
+@see [[m:OpenSSL::SSL::SSLContext#session_get_cb]]
+
+--- session_new_cb -> Proc | nil
+セッションが生成されたときに呼び出されるコールバックを返します。
+
+設定されていないときは nil を返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#session_new_cb=]]
+
+--- session_new_cb=(cb)
+新たなセッションが作られたときに呼び出されるコールバックを
+指定します。
+
+コールバックオブジェクトを call するときの引数は
+  [ 接続オブジェクト(OpenSSL::SSL::SSLSocket), 新たなセッション(OpenSSL::SSL::Session)]
+という配列です。
+
+セッションキャッシュについて詳しくは [[c:OpenSSL::SSL::Session]] を
+見てください。
+
+@param cb コールバックオブジェクト([[c:Proc]] もしくは [[c:Method]])
+@see [[m:OpenSSL::SSL::SSLContext#session_new_cb]]
 
 --- session_remove(sess) -> bool
 セッションを [[c:OpenSSL::SSL::SSLContext]] 内部のキャッシュ領域から
@@ -614,11 +648,31 @@ size に 0 を渡すと制限なしを意味します。
 
 @param sess 削除するセッション([[c:OpenSSL::SSL::Session]])
 
---- session_remove_cb
-#@todo
+--- session_remove_cb -> Proc | nil
+セッションが内部キャッシュから破棄されたときに呼び出される
+コールバックを返します。
 
---- session_remove_cb=
-#@todo
+設定されていないときは nil を返します。
+
+@see [[m:OpenSSL::SSL::SSLContext#session_remove_cb=]]
+
+
+--- session_remove_cb=(cb)
+セッションが内部キャッシュから破棄されたときに呼び出される
+コールバックを設定します。
+
+コールバックオブジェクトを call するときの引数は
+  [ SSLContextオブジェクト(OpenSSL::SSL::SSLContext), 
+    破棄されるセッション(OpenSSL::SSL::Session)]
+という配列です。
+
+セッションキャッシュについて詳しくは [[c:OpenSSL::SSL::Session]] を
+見てください。
+
+
+@param cb コールバックオブジェクト([[c:Proc]] もしくは [[c:Method]])
+@see [[m:OpenSSL::SSL::SSLContext#session_remove_cb]]
+
 
 --- flush_sessions(time=nil) -> self
 自身が保持しているセッションキャッシュを破棄します。
