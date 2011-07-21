@@ -88,8 +88,7 @@ test_bar ¤À¤±¥Æ¥¹¥È¤·¤¿¤¤¾ì¹ç¤Ï°Ê²¼¤Î¤è¤¦¤Ê¥ª¥×¥·¥ç¥ó¤òÍ¿¤¨¤Ş¤¹¡£
 
         1 tests, 1 assertions, 1 failures, 0 errors, 0 skips
 
---name=test_bar¤Î¤è¤¦¤Ê»ØÄê¤Ï¹Ô¤¨¤Ş¤»¤ó¡£¤½¤ÎÂ¾¤Î»ÈÍÑ²ÄÇ½¤Ê¥ª¥×¥·¥ç¥ó¤Ë¤Ä
-¤¤¤Æ¤Ï¡¢[[lib:minitest/unit]]¤ÈÆ±ÍÍ¤Ç¤¹¡£
+--name=test_bar¤Î¤è¤¦¤Ê»ØÄê¤Ï¹Ô¤¨¤Ş¤»¤ó¡£
 
 #@else
 
@@ -135,7 +134,32 @@ console ¤ò»È¤¦ (default)
 
         $ ruby test_foo.rb --runner=console --name=test_bar
 
+#@end
+
 °Ê²¼¤Î¤è¤¦¤Ë¤¹¤ë¤È help ¤âÉ½¼¨¤µ¤ì¤Ş¤¹¡£
+
+#@since 1.9.1
+
+  $ ruby test_foo.rb --help
+  Usage: test_foo [options]
+  minitest options:
+      -h, --help                       Display this help.
+      -s, --seed SEED                  Sets random seed
+      -v, --verbose                    Verbose. Show progress processing files.
+      -n, --name PATTERN               Filter test names on pattern.
+#@since 1.9.3
+          --jobs-status [TYPE]         Show status of jobs every file; Disabled when --jobs isn't specified.
+      -j, --jobs N                     Allow run tests with N jobs at once
+          --no-retry                   Don't retry running testcase when --jobs specified
+          --ruby VAL                   Path to ruby; It'll have used at -j option
+      -q, --hide-skip                  Hide skipped tests
+      -b, --basedir=DIR                Base directory of test suites.
+      -x, --exclude PATTERN            Exclude test files on pattern.
+      -Idirectory                      Add library load path
+          --[no-]gc-stress             Set GC.stress as true
+#@end
+
+#@else
 
   $ ruby test_foo.rb --help
 
@@ -194,6 +218,17 @@ testrb ¥³¥Ş¥ó¥É¤ä [[c:Test::Unit::AutoRunner]] ¡¢³Æ¼ï TestRunner ¥¯¥é¥¹¤ò»È¤¦¤³¤
 
 : Failure
   ¥¢¥µ¡¼¥·¥ç¥ó¤Ë¼ºÇÔ¤·¤¿¡£
+
+#@since 1.9.3
+=== ÊÂÎó¼Â¹Ô
+
+1.9.3 Ã±ÂÎ¥Æ¥¹¥È¤Î¹âÂ®²½¤Î¤¿¤á¤Ë¡¢ÊÂÎó¼Â¹Ô¤¬¥µ¥İ¡¼¥È¤µ¤ì¤Ş¤·¤¿¡£
+
+ÊÂÎó²½¤Î»ÅÁÈ¤ß¤Ë¤Ä¤¤¤Æ¤Ï°Ê²¼¤Îµ­»ö¤ò¤´Í÷¤¯¤À¤µ¤¤¡£
+
+ * Rubyist Magazine 0033 ¹æ ¾Ü²ò! test-all ÊÂÎó²½: [[url:http://jp.rubyist.net/magazine/?0033-ParallelizeTestAll]]
+
+#@end
 
 = module Test::Unit
 
@@ -257,6 +292,43 @@ original_argv¤Ç»ØÄê¤µ¤ì¤¿¥ª¥×¥·¥ç¥ó¤ò²òÀÏ¤·¤Æ¡¢¥Æ¥¹¥ÈÂĞ¾İ¤Ë¤Ê¤ë¥Õ¥¡¥¤¥ë
 
 : -x
   »ØÄê¤µ¤ì¤¿¥Õ¥¡¥¤¥ë¤ò½ü³°¤·¤Ş¤¹¡£¥Õ¥¡¥¤¥ë¤Î»ØÄê¤ËÀµµ¬É½¸½¤â»È¤¨¤Ş¤¹¡£
+
+: -s, --seed
+  [[m:Kernel.#rand]] ¤ÎÍğ¿ô¤Î¼ï¤ò»ØÄê¤·¤¿ÃÍ¤ËÀßÄê¤·¤Ş¤¹¡£
+
+#@since 1.9.3
+: --jobs-status
+
+  ¥Æ¥¹¥È¤¹¤ë¥Õ¥¡¥¤¥ë¤Î¾õÂÖ¤òÉ½¼¨¤·¤Ş¤¹¡£--jobs ¤¬»ØÄê¤µ¤ì¤Ê¤«¤Ã¤¿¾ì¹ç¤ÏÍ­¸ú¤Ë¤Ê¤ê¤Ş¤»¤ó¡£
+
+: -j, --jobs
+
+  ÊÂÎó¼Â¹Ô¤¹¤ë¿ô¤ò»ØÄê¤·¤Ş¤¹¡£
+
+: --no-retry
+
+  --jobs ¥ª¥×¥·¥ç¥ó¤â»ØÄê¤µ¤ì¤¿¾ì¹ç¤Ë¡¢¥ê¥È¥é¥¤µ¡Ç½¤òÌµ¸ú²½¤·¤Ş¤¹¡£
+
+: --ruby
+
+  ruby ¥³¥Ş¥ó¥É¤Î¥Ñ¥¹¤ò»ØÄê¤·¤Ş¤¹¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï¡¢[[m:RbConfig.ruby]] ¤ÎÃÍ¤ò»ÈÍÑ¤·¤Ş¤¹¡£
+
+: -q, --hide-skip
+
+  ¥¹¥­¥Ã¥×¤·¤¿¥Æ¥¹¥È¤òÉ½¼¨¤·¤Ş¤»¤ó¡£
+
+: -I
+
+  ¥é¥¤¥Ö¥é¥ê¤Î¥í¡¼¥É¥Ñ¥¹¤Ë»ØÄê¤·¤¿ÃÍ¤òÄÉ²Ã¤·¤Ş¤¹¡£
+
+: --gc-stress
+
+  [[m:GC.stress]] ¤Ë true ¤òÀßÄê¤·¤Ş¤¹¡£
+
+: --no-gc-stress
+
+  [[m:GC.stress]] ¤Ë false ¤òÀßÄê¤·¤Ş¤¹¡£
+#@end
 
 ===== Ãí°Õ
 
