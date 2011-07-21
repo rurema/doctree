@@ -5,8 +5,6 @@ require test/unit/autorunner
 
 ユニットテストを行うためのライブラリです。
 
-#@#[[url:http://www.ruby-doc.org/stdlib/libdoc/test/unit/rdoc/index.html]]
-
 #@since 1.9.1
 test/unit は [[lib:minitest/unit]] を使って再実装されましたが、完全な互
 換性がある訳ではありません。1.9 系で test/unit を使いたい場合は、以下の
