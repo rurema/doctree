@@ -2,7 +2,8 @@
 
 EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
 
-現在、楕円曲線暗号は SSL/TLS ではあまり一般的には用いられていません。
+このクラスのメソッドについてより詳しく知りたい場合は openssl のドキュメント
+の対応する関数の項を見てください。
 
 == Class methods
 --- builtin_curves -> [[String, String]]
@@ -56,6 +57,7 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 通常このメソッドで値を変更することはありません。
 よく考えて必要な場合のみ利用してください。
 
+@param gr 設定する [[c:OpenSSL::PKey::EC::Group]] オブジェクト
 @see [[m:OpenSSL::PKey::EC#group]]
 
 --- private_key -> OpenSSL::BN|nil
@@ -166,7 +168,9 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
 
 == Constants
 --- NAMED_CURVE -> Integer
-#@todo
+その群が名前を持つ曲線から定義されていることを意味するフラグです。
+
+[[m:OpenSSL::PKey::EC::Group#asn1_flag=]] で利用されます。
 
 = class OpenSSL::PKey::ECError < OpenSSL::PKey::PKeyError
 楕円曲線暗号関連のエラーが生じた場合に発生する例外です。
@@ -205,7 +209,8 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
 群を表すオブジェクトを返します。
 
 引数が4つの場合は sym で :GFp_simple もしくは :GF2m_simple を指定し、
-それと p, a, b という 3 つの整数で定義される群を返します。
+それと p, a, b という 3 つの整数で定義される
+楕円曲線から定義される群を返します。
 
 @param obj Groupオブジェクト生成のためのデータ(シンボル、Group, 文字列のいずれか)
 @param sym Group を定義するためのシンボル
@@ -214,86 +219,152 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
 @param b 整数([[c:OpenSSL::BN]])
 
 == Instance methods
---- generator
-#@todo
+--- generator -> OpenSSL::PKey::EC::Point
+群の生成元を返します。
 
---- set_generator
-#@todo
+--- set_generator(generator, order, cofactor) -> self
+群のパラメータを設定します。
 
---- order
-#@todo
+@param generator 生成元([[c:OpenSSL::PKey::EC::Point]] オブジェクト)
+@param order 生成元の位数([[c:OpenSSL::BN]] オブジェクト)
+@param cofactor 余因子[[c:OpenSSL::BN]] オブジェクト
 
---- cofactor
-#@todo
 
---- curve_name
-#@todo
+--- order -> OpenSSL::BN
+生成元の位数を返します。
 
---- asn1_flag
-#@todo
+--- cofactor -> OpenSSL::BN
+余因子を返します。
 
---- asn1_flag=
-#@todo
+--- curve_name -> String
+曲線の名前を文字列で返します。
 
---- point_conversion_form
-#@todo
+--- asn1_flag -> Integer
+自身に設定された ASN1 フラグを返します。
 
---- point_conversion_form=
-#@todo
+@see [[m:OpenSSL::PKey::EC::Group#asn1_flag=]]
 
---- seed
-#@todo
+--- asn1_flag=(flags)
+自身に ASN1 フラグを設定します。
 
---- seed=
-#@todo
+現在利用可能なフラグは以下の通りです。
+  * [[m:OpenSSL::PKey::EC::NAMED_CURVE]]
 
---- degree
-#@todo
+@see [[m:OpenSSL::PKey::EC::Group#asn1_flag]]
+--- point_conversion_form -> Symbol
+点のエンコーディング方式を返します。
 
---- to_pem
-#@todo
+以下のいずれかを返します。
+  * :compressed
+  * :uncompressed
+  * :hybrid
+詳しくは  X9.62 (ECDSA) などを参照してください。
 
---- to_der
-#@todo
+@see [[m:OpenSSL::PKey::EC::Group#point_conversion_form=]]
+--- point_conversion_form=(sym)
+点のエンコーディング方式を設定します。
 
---- to_text
-#@todo
+以下のいずれかを設定します。
+  * :compressed
+  * :uncompressed
+  * :hybrid
+詳しくは  X9.62 (ECDSA) などを参照してください。
 
---- ==
---- eql?
-#@todo
+@param sym 設定する方式([[c:Symbol]])
+@see [[m:OpenSSL::PKey::EC::Group#point_conversion_form]]
+
+--- seed -> String | nil
+seed を返します。
+
+seed が設定されていない場合は nil を返します。
+
+@see [[m:OpenSSL::PKey::EC::Group#seed]]
+--- seed=(s)
+seed を設定します。
+
+@param s seed(文字列)
+@see [[m:OpenSSL::PKey::EC::Group#seed]]
+--- degree -> Integer
+群の定義の元となっている体の要素を
+表現するのに必要なビット数を返します。
+
+--- to_pem -> String
+自身を PEM 形式の文字列に変換します。
+
+--- to_der -> String
+自身を DER 形式の文字列に変換します。
+
+--- to_text -> String
+自身を人間に可読な形式の文字列に変換します。
+
+--- ==(other) -> bool
+--- eql?(other) -> bool
+自身が other と等しいときは true を返します。
+
+@param other 比較対象の [[c:OpenSSL::PKey::EC::Group]] オブジェクト
 
 = class OpenSSL::PKey::EC::Point
+楕円曲線暗号の公開鍵となる曲線上の点を表します。
 
 == Class methods
---- new
-#@todo
+--- new(point) -> OpenSSL::PKey::EC::Point
+--- new(group) -> OpenSSL::PKey::EC::Point
+--- new(group, bn) -> OpenSSL::PKey::EC::Point
+
+Point オブジェクトを生成します。
+
+引数に OpenSSL::PKey::EC::Point オブジェクトを渡した場合は
+それを複製します。
+
+引数に OpenSSL::PKey::EC::Group オブジェクトを渡した場合は
+それに関連付けられたオブジェクトを返します。
+
+引数に OpenSSL::PKey::EC::Group オブジェクトと
+整数を渡した場合は、整数で定義される点を返します。
+
+@param point 複製する [[c:OpenSSL::PKey::EC::Point]] オブジェクト
+@param group 関連付ける群([[c:OpenSSL::PKey::EC::Group]] オブジェクト)
+@param bn 点を表す整数([[c:OpenSSL::BN]] オブジェクト)
+
 
 == Instance methods
---- group
-#@todo
+--- group -> OpenSSL::PKey::EC::Group
 
---- eql?
---- ==
-#@todo
+自身と関連付けられた群を返します。
 
---- infinity?
-#@todo
+--- eql?(other) -> bool
+--- ==(other) -> bool
+自身が other と等しいならば true を返します。
 
---- on_curve?
-#@todo
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+--- infinity? -> bool
+自身が無限遠点であるならば true を返します。
 
---- make_affine!
-#@todo
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+@see [[m:OpenSSL::PKey::EC::Point#set_to_infinity!]]
 
---- invert!
-#@todo
+--- on_curve? -> bool
+点が曲線上にあるならば真を返します。
 
---- set_to_infinity!
-#@todo
+[[m:OpenSSL::PKey::EC::Group]] で得られる群と関連付けられた
+曲線を考えます。
 
---- to_bn
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+
+--- make_affine! -> self
 #@todo
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+--- invert! -> self
+自身をその逆元に設定します。
+
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+--- set_to_infinity! -> self
+自身を無限遠点に設定します。
+
+@raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+@see [[m:OpenSSL::PKey::EC::Point#infinity!]]
+--- to_bn -> OpenSSL::BN
+点を整数に変換します。
 
 = class OpenSSL::PKey::EC::Group::Error < OpenSSL::OpenSSLError
 = class OpenSSL::PKey::EC::Point::Error < OpenSSL::OpenSSLError
