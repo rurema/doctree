@@ -176,7 +176,7 @@ iconv 関数のラッパークラスです。
 
 @see [[m:Iconv.new]]
 
---- iconv(to, from, *strs)    -> Array
+--- iconv(to, from, *strs)    -> [String]
 
 与えられた文字コードにしたがって strs を変換し、結果を文字列の配列として返します。
 
@@ -211,8 +211,8 @@ iconv 関数のラッパークラスです。
 を起こします。
 
 #@since 1.9.1
---- list                       -> Array
---- list {|*aliases| ... }     -> Array
+--- list                       -> [String]
+--- list {|*aliases| ... }     -> nil
 
 各エイリアスセットごとに繰り返すイテレータです。
 ブロックが指定されていなければ、その利用可能な文字コード体系の名前を文字列の配列として返します。
@@ -221,17 +221,17 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 @raise NotImplementedError 実行プラットフォームでサポートされていない場合に発生します。
 #@end
 
---- charset_map -> Hash
+--- charset_map -> {String => String}
 
 文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
 
 #@# Returns the map from canonical name to system dependent name.
 
 #@since 1.9.1
---- ctlmethods -> Array
+--- ctlmethods -> [Symbol]
 
 #@# Returns available iconvctl() method list.
-システム上のlibiconvのiconvctl()関数で使用可能なフラグのリストを [[c:Array]] として返します。
+システム上のlibiconvのiconvctl()関数で使用可能なフラグのリストを [[c:Symbol]] の配列として返します。
 
 #@end
 
