@@ -225,12 +225,9 @@ Iconv 標準の機能ではないのでサポートされるかはプラットフォームに依存します。
 
 文字コードセット名からシステム依存の文字コードセット名への [[c:Hash]] を返します。
 
-#@# Returns the map from canonical name to system dependent name.
-
 #@since 1.9.1
 --- ctlmethods -> [Symbol]
 
-#@# Returns available iconvctl() method list.
 システム上のlibiconvのiconvctl()関数で使用可能なフラグのリストを [[c:Symbol]] の配列として返します。
 
 #@end
