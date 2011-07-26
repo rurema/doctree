@@ -169,4 +169,5 @@ PKCS#10 v1.7([[RFC:2986]])では0を返します。
 @see [[m:OpenSSL::X509::Request#version]]
 
 = class OpenSSL::X509::RequestError < OpenSSL::OpenSSLError
+[[c:OpenSSL::X509::Request]] 関連のエラーを表す例外クラスです。
 

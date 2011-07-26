@@ -17,7 +17,10 @@ SSLのようなセキュリティ技術は、その利用者に無条件に安全性を
 プログラマは、 SSL/TLS の技術、それが基づいている概念を理解し、
 ライブラリを適切に利用する必要があります。
 
-=== Components
+この文章の内容は無保証です。この文章は内容を検証して書かれて
+いますが、間違っている可能性もあります。このライブラリを
+セキュリティ的に重大な用途に用いるのであれば、
+自分自身でこのドキュメントの内容を検証してください。
 
 OpenSSL は SSL/TLS による通信を提供する高水準なインターフェースと
 より基本的な機能を提供する低水準なインターフェースがあります。
@@ -27,79 +30,6 @@ OpenSSL は SSL/TLS による通信を提供する高水準なインターフェースと
 関する十分な知識と注意深さが必要となります。
 #@# どれが高水準インターフェースでどれが低水準かの
 #@# リストが必要
-  * [[c:OpenSSL]]
-  * OpenSSL::Cipher
-    * [[c:OpenSSL::Cipher::Cipher]]
-    * 以下のクラスは Cipher を継承している。使い方は Cipher を参照。
-    * OpenSSL::Cipher::AES
-    * OpenSSL::Cipher::BF
-    * OpenSSL::Cipher::CAST5
-    * OpenSSL::Cipher::DES
-    * OpenSSL::Cipher::IDEA
-    * OpenSSL::Cipher::RC2
-    * OpenSSL::Cipher::RC4
-    * OpenSSL::Cipher::RC5
-  * OpenSSL::Digest
-    * [[c:OpenSSL::Digest::Digest]]
-    * 以下のクラスは Digest を継承している。使い方は Digest を参照。
-    * OpenSSL::Digest::DSS1
-    * OpenSSL::Digest::MD2
-    * OpenSSL::Digest::MD4
-    * OpenSSL::Digest::MD5
-    * OpenSSL::Digest::MDC2
-    * OpenSSL::Digest::RIPEMD160
-    * OpenSSL::Digest::SHA
-    * OpenSSL::Digest::SHA1
-    * OpenSSL::Digest::SHA224
-    * OpenSSL::Digest::SHA256
-    * OpenSSL::Digest::SHA384
-    * OpenSSL::Digest::SHA512
-  * OpenSSL::X509
-    * [[c:OpenSSL::X509::Certificate]]
-    * [[c:OpenSSL::X509::CRL]]
-    * [[c:OpenSSL::X509::Extension]]
-    * [[c:OpenSSL::X509::Name]]
-    * [[c:OpenSSL::X509::Store]]
-    * [[c:OpenSSL::X509::StoreContext]]
-  * [[c:OpenSSL::SSL]]
-    * [[c:OpenSSL::SSL::SSLContext]]
-    * [[c:OpenSSL::SSL::SSLServer]]
-    * [[c:OpenSSL::SSL::SSLSocket]]
-  * [[c:OpenSSL::PKCS7]]
-    * [[c:OpenSSL::PKCS7::PKCS7]]
-  * OpenSSL::PKey
-    * [[c:OpenSSL::PKey::PKey]]
-    * [[c:OpenSSL::PKey::RSA]]
-    * [[c:OpenSSL::PKey::DSA]]
-    * [[c:OpenSSL::PKey::DH]]
-  * OpenSSL::Config
-  * OpenSSL::Engine
-  * [[c:OpenSSL::ASN1]]
-    * [[c:OpenSSL::ASN1::ASN1Data]]
-      * [[c:OpenSSL::ASN1::Primitive]]
-        * OpenSSL::ASN1::Boolean
-        * OpenSSL::ASN1::Integer
-        * OpenSSL::ASN1::Enumerated
-        * OpenSSL::ASN1::BitString
-        * OpenSSL::ASN1::OctetString
-        * OpenSSL::ASN1::UTF8String
-        * OpenSSL::ASN1::NumericString
-        * OpenSSL::ASN1::PrintableString
-        * OpenSSL::ASN1::T61String
-        * OpenSSL::ASN1::VideotexString
-        * OpenSSL::ASN1::IA5String
-        * OpenSSL::ASN1::GraphicString
-        * OpenSSL::ASN1::ISO64String
-        * OpenSSL::ASN1::GeneralString
-        * OpenSSL::ASN1::UniversalString
-        * OpenSSL::ASN1::BMPString
-        * OpenSSL::ASN1::Null
-        * [[c:OpenSSL::ASN1::ObjectId]]
-        * OpenSSL::ASN1::UTCTime
-        * OpenSSL::ASN1::GeneralizedTime
-      * [[c:OpenSSL::ASN1::Constructive]]
-        * OpenSSL::ASN1::Sequence
-        * OpenSSL::ASN1::Set
 
 === 例
 
@@ -137,30 +67,46 @@ OpenSSL は SSL/TLS による通信を提供する高水準なインターフェースと
     OpenSSL -暗号・PKI・SSL/TLSライブラリの詳細-
 
 = module OpenSSL
+OpenSSL のすべてのクラス、モジュール、メソッド、定数を
+保持しているモジュールです。
 
-このページは定数と例外のみを説明しています。
+== Module functions
+--- debug -> bool
+デバッグモードが on ならば true を返します。
+
+@see [[m:OpenSSL.#debug=]]
+
+--- debug=(b)
+デバッグモードを on/off します。
+
+@see [[m:OpenSSL.#debug]]
+
+--- errors -> [String]
+OpenSSL のエラーキューに残っているエラー文字列を返します。
+
+通常、エラーキューはこのライブラリが空にするため、
+これは空の配列を返します。もしそうでないならば
+このライブラリのバグです。
 
 == Constants
 
---- VERSION
-#@todo
+--- VERSION -> String
 
 Ruby/OpenSSL のバージョンです。
 
---- OPENSSL_VERSION
-#@todo
+--- OPENSSL_VERSION -> String
 
 システムにインストールされている OpenSSL 本体のバージョンを表した文字列です。
 
---- OPENSSL_VERSION_NUMBER
-#@todo
+--- OPENSSL_VERSION_NUMBER -> Integer
 
 システムにインストールされている OpenSSL 本体のバージョンを表した数です。
 [[url:http://www.openssl.org/docs/crypto/OPENSSL_VERSION_NUMBER.html]]
 も参照してください。
 
-= module OpenSSL::SSL::SocketForwarder
+#@# = module OpenSSL::SSL::SocketForwarder
 = class OpenSSL::OpenSSLError < StandardError
+すべての OpenSSL 関連の例外クラスのベースとなる例外クラスです。
 
 #@include(openssl/ASN1)
 #@include(openssl/ASN1__ASN1Data)

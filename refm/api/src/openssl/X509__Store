@@ -219,4 +219,4 @@ chain には検証したい証明書の証明書チェイン全体を
 #@end
 
 = class OpenSSL::X509::StoreError < OpenSSL::OpenSSLError
-
+[[c:OpenSSL::X509::Store]] 関連のエラーを表す例外クラスです。

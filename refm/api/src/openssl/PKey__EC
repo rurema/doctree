@@ -18,6 +18,8 @@ EC(Ellicptic Curve,楕円曲線)暗号鍵のクラスです。
   #     ["secp128r2", "SECG curve over a 128 bit prime field"],
   #     ... ]
 
+@see [[m:OpenSSL::PKey::EC::Group.new]]
+
 --- new -> OpenSSL::PKey::EC
 --- new(obj) -> OpenSSL::PKey::EC
 
@@ -58,6 +60,7 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 よく考えて必要な場合のみ利用してください。
 
 @param gr 設定する [[c:OpenSSL::PKey::EC::Group]] オブジェクト
+@raise OpenSSL::PKey::ECError Group オブジェクトの設定に失敗した場合に発生します
 @see [[m:OpenSSL::PKey::EC#group]]
 
 --- private_key -> OpenSSL::BN|nil
@@ -72,6 +75,8 @@ OpenSSL::PKey::EC オブジェクトを生成します。
 
 nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に変更できます。
 
+@param privkey 設定する秘密鍵([[c:OpenSSL::BN]] オブジェクト)
+@raise OpenSSL::PKey::ECError 秘密鍵の設定に失敗した場合に発生します
 @see [[m:OpenSSL::PKey::EC#private_key]]
 
 --- public_key -> OpenSSL::PKey::EC::Point|nil
@@ -79,6 +84,7 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に変更できます。
 
 鍵が設定されていない場合は nil を返します。
 
+@raise OpenSSL::PKey::ECError 公開鍵の取得時にエラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC#public_key=]]
 
 --- public_key=(pubkey)
@@ -88,7 +94,7 @@ nil を渡すことで EC オブジェクトが公開鍵のみを持つ状態に変更できます。
 よく考えて必要な場合のみ利用してください。
 
 @param pubkey 公開鍵となる [[c:OpenSSL::PKey::EC::Point]] オブジェクト
-
+@raise OpenSSL::PKey::ECError 公開鍵の設定時にエラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC#public_key]]
 
 --- private_key? -> bool
@@ -126,6 +132,7 @@ EC オブジェクトが公開鍵を保持していれば真を返します。
 相手の公開鍵は [[c:OpenSSL::PKey::EC::Point]] オブジェクトである必要があります。
 
 @param pubkey 相手の公開鍵
+@raise OpenSSL::PKey::ECError 鍵交換に失敗した場合に発生します
 
 --- dsa_sign_asn1(data) -> String
 秘密鍵を用い、data に ECDSA で署名します。
@@ -159,12 +166,20 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
 現在の仕様では [[m:OpenSSL::PKey::RSA#to_pem]] のように
 出力をパスフレーズで暗号化することはできません。
 
+@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+       公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
+
 --- to_der -> String
 鍵を DER 形式の文字列に変換します。
+
+@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+       公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 --- to_text -> String
 鍵を人間が読める形式に変換します。
 
+@param OpenSSL::PKey::ECError 文字列への変換に失敗した場合に発生します。
+       公開鍵が含まれていない場合や、鍵が妥当でない場合などに失敗します。
 
 == Constants
 --- NAMED_CURVE -> Integer
@@ -217,6 +232,8 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
 @param p 整数([[c:OpenSSL::BN]])
 @param a 整数([[c:OpenSSL::BN]])
 @param b 整数([[c:OpenSSL::BN]])
+@raise OpenSSL::PKey::EC::Group::Error オブジェクトの生成に失敗した場合に発生します。
+       曲線名が不正である場合などに発生します。
 
 == Instance methods
 --- generator -> OpenSSL::PKey::EC::Point
@@ -228,16 +245,22 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
 @param generator 生成元([[c:OpenSSL::PKey::EC::Point]] オブジェクト)
 @param order 生成元の位数([[c:OpenSSL::BN]] オブジェクト)
 @param cofactor 余因子[[c:OpenSSL::BN]] オブジェクト
-
+@raise OpenSSL::PKey::EC::Group::Error 設定に失敗した場合に発生します
 
 --- order -> OpenSSL::BN
 生成元の位数を返します。
 
+@raise OpenSSL::PKey::EC::Group::Error 位数の取得に失敗した場合に発生します
+
 --- cofactor -> OpenSSL::BN
 余因子を返します。
 
---- curve_name -> String
+@raise OpenSSL::PKey::EC::Group::Error 余因子の取得に失敗した場合に発生します
+
+--- curve_name -> String | nil
 曲線の名前を文字列で返します。
+
+名前がない場合は nil を返します。
 
 --- asn1_flag -> Integer
 自身に設定された ASN1 フラグを返します。
@@ -260,7 +283,10 @@ data のダイジェストを取る処理はこのメソッドに含まれていません。
   * :hybrid
 詳しくは  X9.62 (ECDSA) などを参照してください。
 
+@raise OpenSSL::PKey::EC::Group::Error 得られたエンコーディングが未知の値であった
+       場合に発生します。
 @see [[m:OpenSSL::PKey::EC::Group#point_conversion_form=]]
+
 --- point_conversion_form=(sym)
 点のエンコーディング方式を設定します。
 
@@ -283,7 +309,9 @@ seed が設定されていない場合は nil を返します。
 seed を設定します。
 
 @param s seed(文字列)
+@raise OpenSSL::PKey::EC::Group::Error seedの設定に失敗した場合に発生します。
 @see [[m:OpenSSL::PKey::EC::Group#seed]]
+
 --- degree -> Integer
 群の定義の元となっている体の要素を
 表現するのに必要なビット数を返します。
@@ -291,12 +319,15 @@ seed を設定します。
 --- to_pem -> String
 自身を PEM 形式の文字列に変換します。
 
+@raise OpenSSL::PKey::EC::Group::Error 変換に失敗した場合に発生します。
 --- to_der -> String
 自身を DER 形式の文字列に変換します。
 
+@raise OpenSSL::PKey::EC::Group::Error 変換に失敗した場合に発生します。
 --- to_text -> String
 自身を人間に可読な形式の文字列に変換します。
 
+@raise OpenSSL::PKey::EC::Group::Error 変換に失敗した場合に発生します。
 --- ==(other) -> bool
 --- eql?(other) -> bool
 自身が other と等しいときは true を返します。
@@ -325,7 +356,8 @@ Point オブジェクトを生成します。
 @param point 複製する [[c:OpenSSL::PKey::EC::Point]] オブジェクト
 @param group 関連付ける群([[c:OpenSSL::PKey::EC::Group]] オブジェクト)
 @param bn 点を表す整数([[c:OpenSSL::BN]] オブジェクト)
-
+@raise OpenSSL::PKey::EC::Point::Error オブジェクトの生成に失敗した場合
+       に発生します。
 
 == Instance methods
 --- group -> OpenSSL::PKey::EC::Group
@@ -354,17 +386,25 @@ Point オブジェクトを生成します。
 --- make_affine! -> self
 #@todo
 @raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+
 --- invert! -> self
 自身をその逆元に設定します。
 
 @raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
+
 --- set_to_infinity! -> self
 自身を無限遠点に設定します。
 
 @raise OpenSSL::PKey::EC::Point::Error エラーが生じた場合に発生します
 @see [[m:OpenSSL::PKey::EC::Point#infinity!]]
+
 --- to_bn -> OpenSSL::BN
 点を整数に変換します。
 
+@raise OpenSSL::PKey::EC::Point::Error 変換に失敗した場合に発生します
+
 = class OpenSSL::PKey::EC::Group::Error < OpenSSL::OpenSSLError
+[[c:OpenSSL::PKey::EC::Group]] 関連のエラーを表す例外クラスです。
+
 = class OpenSSL::PKey::EC::Point::Error < OpenSSL::OpenSSLError
+[[c:OpenSSL::PKey::EC::Point]] 関連のエラーを表す例外クラスです。
