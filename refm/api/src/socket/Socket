@@ -275,7 +275,6 @@ service, protoに対応するポート番号を返
 #@if (version >= "1.8.0")
 --- sockaddr_un(path) -> String
 --- pack_sockaddr_un(path) -> String
-#@todo
 
 指定したアドレスを[[ref:lib:socket#pack_string]]
 で返します。
@@ -289,20 +288,28 @@ service, protoに対応するポート番号を返
   => "\001\000/tmp/.X11-unix/X0\000...."
 #@end
 
---- pair(domain, type, protocol)
---- socketpair(domain, type, protocol)
-#@todo
+--- pair(domain, type, protocol) -> Array
+--- socketpair(domain, type, protocol) -> Array
 
 相互に結合されたソケットのペアを含む2要素の配列を返します。
-引数の指定は Socket.open と同じです。
+引数の指定は [[m:Socket.open]] と同じです。
+
+@param domain [[m:Socket.open]] を参照してください。
+
+@param type   [[m:Socket.open]] を参照してください。
+
+@param protocol [[m:Socket.open]] を参照してください。
+
+@see [[m:Socket.open]]
 
 #@if (version >= "1.8.0")
---- unpack_sockaddr_in(sockaddr)
-#@todo
+--- unpack_sockaddr_in(sockaddr) -> Array
 
 [[ref:lib:socket#pack_string]]を
 unpack したアドレスを返します。返される値は [port, ipaddr]
 の配列です。
+
+@param sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
 
 例:
 
@@ -314,11 +321,12 @@ unpack したアドレスを返します。返される値は [port, ipaddr]
 #@end
 
 #@if (version >= "1.8.0")
---- unpack_sockaddr_un(sockaddr)
-#@todo
+--- unpack_sockaddr_un(sockaddr) -> String
 
 [[ref:lib:socket#pack_string]]を
 unpack したソケットパス名を返します。
+
+@param sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
 
 例:
 
@@ -385,8 +393,7 @@ local_host や local_port を指定した場合、ソケットをそこにバインドします。
 #@end
 == Instance Methods
 
---- accept
-#@todo
+--- accept -> Array
 
 新しい接続を受け付けて、新しい接続に対するソケットとアドレスの
 ペアを返します。[[man:accept(2)]] を参照。
@@ -402,8 +409,7 @@ local_host や local_port を指定した場合、ソケットをそこにバインドします。
   sock = serv.accept
 
 #@if (version >= "1.8.5")
---- accept_nonblock
-#@todo
+--- accept_nonblock -> Array
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:accept(2)]] を呼び出します。
@@ -414,7 +420,7 @@ local_host や local_port を指定した場合、ソケットをそこにバインドします。
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
---- bind(my_sockaddr)
+--- bind(my_sockaddr) -> 0
 #@todo
 
 ソケットを my_sockaddr に結合します。[[man:bind(2)]]
@@ -424,7 +430,11 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
 0 を返します。
 
---- connect(server_sockaddr)
+@param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+
+@return 0 を返します。
+
+--- connect(server_sockaddr) -> 0
 #@todo
 
 [[man:connect(2)]] と同じ働きをします。server_sockaddr は、
@@ -432,6 +442,11 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 です。
 
 0 を返します。
+
+@param server_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+
+@return 0を返します。
+
 
 たとえば IPv4 の TCP ソケットを生成し、connect で www.ruby-lang.org:80 に接続するには以下のようにします。
 
@@ -444,8 +459,7 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
   print s.read
 
 #@if (version >= "1.8.5")
---- connect_nonblock(server_sockaddr)
-#@todo
+--- connect_nonblock(server_sockaddr) -> Fixnum
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:connect(2)]] を呼び出します。
@@ -454,21 +468,34 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 
 connect(2)がエラーになった場合、
 EINPROGRESS を含め例外 [[c:Errno::EXXX]] が発生します。
+
+@param server_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+
+@raise Errno::EXXX connect(2)がエラーになった場合、 EINPROGRESS を含め例外 [[c:Errno::EXXX]] が発生します。
+
+@return [[m:Socket#connect]] と同じです。
+
 #@end
 
---- listen(backlog)
-#@todo
+--- listen(backlog) -> 0
 
 [[man:listen(2)]] と同じ働きをします。
 
 0 を返します。
 
---- recvfrom(maxlen[, flags])
-#@todo
+@param the maximum length of the queue for pending connections.
+
+@return 0 を返します。
+
+--- recvfrom(maxlen[, flags]) -> Array
 
 recv と同様にソケットからデータを受け取りますが、
 戻り値は文字列と相手ソケットのアドレスのペアです。引数につい
 ては recv と同様です。
+
+@param maxlen  the number of bytes to receive from the socket
+
+@param flags   zero or more of the +MSG_+ options 
 
 例:
 
@@ -492,11 +519,15 @@ recv と同様にソケットからデータを受け取りますが、
 
 [[man:recvfrom(2)]] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
+
+@param maxlen [[m:Socket#recvfrom]] と同じです。
+
+@param flags [[m:Socket#recvfrom]]と同じです。
+
 #@end
 
 #@if (version >= "1.8.0")
---- sysaccept
-#@todo
+--- sysaccept -> Array
 
 接続したクライアントのファイル記述子とアドレスのペアを返すことを除
 けば [[m:Socket#accept]] と同じです。
