@@ -199,6 +199,7 @@ US-ASCII、いわゆる ASCII のことで、ISO 646 IRV と一致します。
 7bit の範囲のみを含み、8bit 目の立っている文字 (たとえば \x80 など) が含まれる場合は正しいエンコーディングであるとみなしません。
 
 --- UTF_16BE
+--- UCS_2BE
 UTF-16BE (ビッグエンディアン) です。
 
 BOM を含みません。
@@ -209,16 +210,19 @@ UTF-16LE (リトルエンディアン) です。
 BOM を含みません。
 
 --- UTF_32BE
+--- UCS_4BE
 UTF-32BE (ビッグエンディアン) です。
 
 BOM を含みません。
 
 --- UTF_32LE
+--- UCS_4LE
 UTF-32LE (リトルエンディアン) です。
 
 BOM を含みません。
 
 --- UTF_8
+--- CP65001
 UTF-8、Unicode や ISO 10646 を ASCII 互換な形で符号化するための方式です。
 
 [[url:http://tools.ietf.org/html/rfc3629]]
@@ -226,14 +230,31 @@ UTF-8、Unicode や ISO 10646 を ASCII 互換な形で符号化するための方式です。
 BOM を含みません。
 
 --- UTF8_MAC
+--- UTF_8_MAC
+#@since 1.9.2
+--- UTF_8_HFS
+#@end
 UTF8-MAC、アップルによって修正された Normalization Form D（分解済み）という形式のUTF-8です。
 
 [[url:http://developer.apple.com/jp/technotes/tn1150.html]]
 [[url:http://developer.apple.com/jp/technotes/tn2078.html]]
 
+--- UTF_7
+--- CP65000
+
 --- Big5
 --- BIG5
 --- CP950
+
+#@since 1.9.2
+--- Big5_HKSCS
+--- BIG5_HKSCS
+
+--- CP951
+
+--- BIG5_UAO
+--- Big5_UAO
+#@end
 
 --- CP51932
 Windows で用いられる、日本語 EUC 亜種です。
@@ -242,6 +263,8 @@ G0 が US-ASCII、G1 が JIS X 0201 片仮名図形文字集合、G2 が JIS X 0208 + Windows 
 [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp51932]]
 
 #@since 1.9.2
+--- CP50220
+
 --- CP50221
 Windows で用いられる、ISO-2022-JP 亜種です。
 
@@ -260,6 +283,7 @@ ISO-2022-JP に加え、ESC ( I でいわゆる半角カナを許し、Windows の機種依存文字を扱
 
 --- CP949
 
+--- EUC_CN
 --- EUCCN
 --- EucCN
 
@@ -276,8 +300,10 @@ ISO-2022-JP に加え、ESC ( I でいわゆる半角カナを許し、Windows の機種依存文字を扱
 --- GB1988
 
 --- GBK
---- WINDOWS_936
---- Windows_936
+#@# --- WINDOWS_936
+#@# --- Windows_936
+
+--- GB12345
 
 --- IBM437
 --- CP437
@@ -370,6 +396,7 @@ ISO-8859-1 エンコーディングです。
 --- ISO8859_9
 
 --- KOI8_R
+--- CP878
 
 --- KOI8_U
 
@@ -377,6 +404,34 @@ ISO-8859-1 エンコーディングです。
 --- MACJAPAN
 --- MACJAPANESE
 --- MacJapan
+
+#@since 1.9.2
+--- SJIS_DOCOMO
+--- SJIS_DoCoMo
+
+--- SJIS_KDDI
+
+--- SJIS_SOFTBANK
+--- SJIS_SoftBank
+
+--- UTF8_DOCOMO
+--- UTF8_DoCoMo
+
+--- UTF8_KDDI
+
+--- UTF8_SOFTBANK
+--- UTF8_SoftBank
+#@end
+
+--- STATELESS_ISO_2022_JP
+--- Stateless_ISO_2022_JP
+
+#@since 1.9.2
+--- ISO_2022_JP_KDDI
+
+--- STATELESS_ISO_2022_JP_KDDI
+--- Stateless_ISO_2022_JP_KDDI
+#@end
 
 --- TIS_620
 
@@ -471,6 +526,8 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 --- MacUkraine
 --- MACUKRAINE
 
+--- EMACS_MULE
+--- Emacs_Mule
 
 = class EncodingError < StandardError
 #@todo
