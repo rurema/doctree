@@ -44,6 +44,6 @@ iter は鍵生成時のハッシュ関数の繰り返し回数で、大きな値を指定するほど
 @param keylen 結果の文字列のバイト数
 @raise OpenSSL::PKCS5::PKCS5Error 鍵、IV の生成に失敗した場合に発生します
 
-= class OpenSSL::PKCS5::PKCS5Error
+= class OpenSSL::PKCS5::PKCS5Error < OpenSSL::OpenSSLError
 OpenSSL PKCS#5 関連のエラーが起きた場合に発生する例外
 #@end

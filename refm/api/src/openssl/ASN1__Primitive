@@ -90,6 +90,17 @@ value 以外の引数を省略した場合はタグクラスは :UNIVERSAL、
 @param tagging タグ付けの方法(:IMPLICIT もしくは :EXPLICIT)
 @param tag_class タグクラス(:UNIVERSAL, :CONTEXT_SPECIFIC, :APPLICATION, :PRIVATE のいずれか)
 
+--- unused_bits -> Integer | nil
+Bit Stringに設定されたフラグを返します。
+
+@see [[m:OpenSSL::ASN1::BitString#unused_bits=]]
+#@# フラグの意味を追加する
+--- unused_bits=(b)
+Bit Stringにフラグを設定します。
+
+@param b フラグ(整数)
+@see [[m:OpenSSL::ASN1::BitString#unused_bits]]
+
 = class OpenSSL::ASN1::OctetString < OpenSSL::ASN1::Primitive
 ASN.1 の Octet String 型(Universal タグのタグ番号4)を表すクラスです。
 

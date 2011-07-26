@@ -4,6 +4,10 @@
   * [[c:OpenSSL::SSL::SSLServer]]
   * [[c:OpenSSL::SSL::SSLSocket]]
 
+#@# internal 
+#@# == Module functions
+#@# --- verify_certificate_identity(cert, hostname)
+
 == Constants
 
 --- OP_ALL -> Integer
@@ -158,3 +162,5 @@ anonymous cipher が有効であるかどうかは
 = class OpenSSL::SSL::SSLError < OpenSSL::OpenSSLError
 [[c:OpenSSL::SSL]] 関連のエラーが生じたときに発生する例外です。
 
+#@# internal 
+#@# = class OpenSSL::SSL::Nonblock
