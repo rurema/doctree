@@ -268,19 +268,19 @@ command を表示してから [[m:IO.popen]] の実行します。
 
 [[m:FileUtils.#rm_f]] のラッパーメソッドです。
 
-@param files ファイルのリストか、[[m:Dri.glob]]で利用できる glob パターンを指定します。
+@param files ファイルのリストか、[[m:Dir.glob]]で利用できる glob パターンを指定します。
              最後の要素が [[c:Hash]] の場合は [[m:FileUtils.#rm_f]] の第二引数になります。
 
-@see [[m:FileUtils.#rm_f]], [[m:Dri.glob]]
+@see [[m:FileUtils.#rm_f]], [[m:Dir.glob]]
 
 --- rm_rf(*files) -> ()
 
 [[m:FileUtils.#rm_rf]] のラッパーメソッドです。
 
-@param files ファイルのリストか、[[m:Dri.glob]]で利用できる glob パターンを指定します。
+@param files ファイルのリストか、[[m:Dir.glob]]で利用できる glob パターンを指定します。
              最後の要素が [[c:Hash]] の場合は [[m:FileUtils.#rm_f]] の第二引数になります。
 
-@see [[m:FileUtils.#rm_rf]], [[m:Dri.glob]]
+@see [[m:FileUtils.#rm_rf]], [[m:Dir.glob]]
 
 --- modified?(target, times) -> Time | nil
 
