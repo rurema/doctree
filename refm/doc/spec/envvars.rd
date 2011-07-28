@@ -6,18 +6,22 @@ Rubyインタプリタは以下の環境変数を参照します。
 : RUBYOPT
  Rubyインタプリタにデフォルトで渡すオプションを指定します。
 
-//emlist{
- * sh系
+ sh系
 
+//emlist{
       RUBYOPT='-Ke -rkconv'
       export RUBYOPT
+//}
 
-  * csh系
+ csh系
 
+//emlist{
       setenv RUBYOPT '-Ke -rkconv'
+//}
 
-  * MS-DOS系
+ MS-DOS系
 
+//emlist{
       set RUBYOPT=-Ke -rkconv
 //}
 
@@ -28,18 +32,22 @@ Rubyインタプリタは以下の環境変数を参照します。
   探索対象になります。(PATH の値よりも優先します)。
   起動オプションの詳細に関しては[[d:spec/rubycmd]] を参照してください。
 
-//emlist{
-  * sh系
+  sh系
 
+//emlist{
       RUBYPATH=$HOME/ruby:/opt/ruby
       export RUBYPATH
+//}
 
-  * csh系
+  csh系
 
+//emlist{
       setenv RUBYPATH $HOME/ruby:/opt/ruby
+//}
 
-  * MS-DOS系
+  MS-DOS系
 
+//emlist{
       set RUBYPATH=%HOME%\ruby:\opt\ruby
 //}
 
@@ -48,18 +56,22 @@ Rubyインタプリタは以下の環境変数を参照します。
   Rubyライブラリの探索パス[[m:$:]]のデフォル
   ト値の前にこの環境変数の値を付け足します。
 
-//emlist{
-  * sh系
+  sh系
 
+//emlist{
       RUBYLIB=$HOME/ruby/lib:/opt/ruby/lib
       export RUBYLIB
+//}
 
-  * csh系
+  csh系
 
+//emlist{
       setenv RUBYLIB $HOME/ruby/lib:/opt/ruby/lib
+//}
 
-  * MS-DOS系
+  MS-DOS系
 
+//emlist{
       set RUBYLIB=%HOME%\ruby\lib:\opt\ruby\lib
 //}
 
@@ -74,9 +86,9 @@ Rubyインタプリタは以下の環境変数を参照します。
   ((-現在の実装ではライブラリのパスの prefix を ruby.exe や ruby.dll のある位置から
   相対的に求めるのでこの環境変数の必要性はなくなっています-))
 
-//emlist{
-  * MS-DOS系
+  MS-DOS系
 
+//emlist{
       set RUBYLIB_PREFIX=/usr/local/lib/ruby;d:/ruby
 //}
 
