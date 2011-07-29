@@ -986,7 +986,7 @@ THREADコマンドを送り、メールボックスを検索した結果を
 スレッド形式の木構造で返します。
 
 ほぼ [[m:Net::IMAP#thread]] と同じですが、返ってくるオブジェクトの
-[[m:Net::IMAP#ThreadMember#seqno]] の内容が message sequence number
+[[m:Net::IMAP::ThreadMember#seqno]] の内容が message sequence number
 ではなく UID となります。
 
 @param algorithm スレッド構造構築アルゴリズム名(文字列)
