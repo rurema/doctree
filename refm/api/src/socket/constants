@@ -50,72 +50,339 @@
 --- AF_UNSPEC
 #@todo
 
-アドレスファミリー:
 [[m:Socket.open]] の第一引数 domain に使用します。
 
+@see [[m:Socket.open]]
+
 --- SOCK_DGRAM
+#@todo
+
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]]
+
 --- SOCK_PACKET
+#@todo
+
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]]
+
 --- SOCK_RAW
+#@todo
+
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]]
+
 --- SOCK_RDM
+#@todo
+
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]]
+
 --- SOCK_SEQPACKET
+#@todo
+
+[[m:Socket.open]] の第二引数 type に使用します。
+
+@see [[m:Socket.open]]
+
 --- SOCK_STREAM
 #@todo
 
-ソケットタイプ:
 [[m:Socket.open]] の第二引数 type に使用します。
 
+@see [[m:Socket.open]]
+
 --- PF_APPLETALK
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@since 1.8.3
 --- PF_ATM
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@end
 --- PF_AX25
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@since 1.8.3
 --- PF_CCITT
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_CHAOS
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_CNT
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_COIP
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_DATAKIT
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_DEC
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_DLI
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_ECMA
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_HYLINK
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@end
 --- PF_IMPLINK
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_INET
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_INET6
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_IPX
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@since 1.8.3
 --- PF_ISDN
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_ISO
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_KEY
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_LAT
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_LINK
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_LOCAL
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_MAX
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_NATM
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_NDRV
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_NETBIOS
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_NETGRAPH
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_NS
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_OSI
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_PIP
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_PPP
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_PUP
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_ROUTE
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_RTIP
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_SIP
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_SNA
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_SYSTEM
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@end
 --- PF_UNIX
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 --- PF_UNSPEC
+#@todo
+
+[[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
+
 #@since 1.8.3
 --- PF_XTP
 #@end
 #@todo
 
-プロトコルファミリー:
 [[m:Socket.open]] の第三引数 protocol に使用します。
+
+@see [[m:Socket.open]]
 
 --- IPPORT_RESERVED
 --- IPPORT_USERRESERVED

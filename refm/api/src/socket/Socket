@@ -48,11 +48,11 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 
 @param servname サービス名を指定します。 必須引数です。 ([[ref:lib:socket#service_format]]を参照)
 
-@param family アドレスファミリー。Socket::AF_INET など、[[m:Socket::Constants#アドレスファミリー]]にある定数を指定します。
+@param family アドレスファミリー。[[m:Socket::Constants::AF_INET]] など、AF_ で始まる定数を指定します。
 
-@param socktype ソケットタイプ。 Socket::SOCK_STREAM など、 [[m:Socket::Constants#ソケットタイプ]]にある定数を指定します。
+@param socktype ソケットタイプ。 [[m:Socket::Constants::SOCK_STREAM]] など、 SOCK_ で始まる定数を指定します。
 
-@param protocol プロトコル。Socket::IPPROTO_IP など、 [[m:Socket::Constants#プロトコル]]にある定数を指定します。
+@param protocol プロトコル。[[m:Socket::Constants::IPPROTO_IP]] など、IPPROTO_ で始まる定数を指定します。
 
 @param flags [[man:getaddrinfo(3)]] の第3引数に指定する addrinfo 構造体の ai_flags メンバに相当する Fixnum。 Socket::AI_PASSIVEなど。
 
@@ -81,14 +81,13 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 残りの引数は省略可能です。
 
   * family - アドレスファミリー。
-    Socket::AF_INET など、
-    [[m:Socket::Constants#アドレスファミリー]]にある定数を指定します。
+    [[m:Socket::Constants::AF_INET]] など、AF_ で始まる定数を指定します。
   * socktype - ソケットタイプ。
-    Socket::SOCK_STREAM など、
-    [[m:Socket::Constants#ソケットタイプ]]にある定数を指定します。
+    [[m:Socket::Constants::SOCK_STREAM]] など、SOCK_ で始まる定数を指定
+    します。
   * protocol - プロトコル。
-    Socket::IPPROTO_IP など、
-    [[m:Socket::Constants#プロトコル]]にある定数を指定します。
+    [[m:Socket::Constants::IPPROTO_IP]] など、IPPROTO_ で始まる定数を指
+    定します。
   * flags - [[man:getaddrinfo(3)]] の第3引数に指定する addrinfo 構造体の
     ai_flags メンバに相当する Fixnum。
     Socket::AI_PASSIVE、
