@@ -305,7 +305,7 @@ UTF-7 を修正したものです。
 これを越えた flag がレスポンスに含まれている場合は、
 [[c:Net::IMAP::FlagCountError]] 例外が発生します。
 
-@see [[m:Net::IMAP#max_flag_count=]]
+@see [[m:Net::IMAP.max_flag_count=]]
 
 --- max_flag_count=(count)
 サーバからのレスポンスに含まれる flag の上限を設定します。
@@ -316,7 +316,7 @@ UTF-7 を修正したものです。
 デフォルトは 10000 です。通常は変える必要はないでしょう。
 
 @param count 設定する最大値の整数
-@see [[m:Net::IMAP#max_flag_count=]]
+@see [[m:Net::IMAP.max_flag_count]]
 #@end
 
 == Methods
@@ -1106,7 +1106,7 @@ EXPUNGE で完全に除去されます。
 下に子レベルの階層が存在不可能であることを意味します。
 
 LIST応答の属性
- ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
 として用いられます。
 
 詳しくは [[RFC:2060]] を参照してください。
@@ -1118,7 +1118,7 @@ LIST応答の属性
 メールボックスが選択可能でないことを意味します。
 
 LIST応答の属性
- ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
 として用いられます。
 
 詳しくは [[RFC:2060]] を参照してください。
@@ -1130,7 +1130,7 @@ LIST応答の属性
 新しいメールが届いていることを意味します。
 
 LIST応答の属性
- ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
 として用いられます。
 
 詳しくは [[RFC:2060]] を参照してください。
@@ -1143,7 +1143,7 @@ LIST応答の属性
 メールボックスに新しいメールが届いていないことを意味します。
 
 LIST応答の属性
- ([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
+([[m:Net::IMAP#list]]、[[m:Net::IMAP::MailboxList#attr]])
 として用いられます。
 
 詳しくは [[RFC:2060]] を参照してください。
@@ -1284,7 +1284,11 @@ IMAP のレスポンスにはタグ付きのものとタグなしのものがあり、
 
 = class Net::IMAP::MailboxList < Struct
 
+#@since 1.9.3
 [[m:Net::IMAP#list]]、[[m:Net::IMAP#xlist]]、[[m:Net::IMAP#lsub]]
+#@else
+[[m:Net::IMAP#list]]、[[m:Net::IMAP#lsub]]
+#@end
 で返されるメールボックスのデータを表します。
 
 == Instance Methods
@@ -1991,6 +1995,7 @@ true を返します。
 これらのクラスの例外が発生します。
 
 == Instance Methods
+#@since 1.9.2
 --- response -> Net::IMAP::TaggedResponse | Net::IMAP::UntaggedResponse
 エラーとなったレスポンスを表すオブジェクトを返します。
 
@@ -1998,6 +2003,7 @@ true を返します。
 エラーとなったレスポンスを表すオブジェクトを設定します。
 
 @param resp 設定するレスポンスオブジェクト
+#@end
 
 = class Net::IMAP::NoResponseError < Net::IMAP::ResponseError
 
@@ -2021,7 +2027,7 @@ true を返します。
 
 サーバからのレスポンスに含まれるフラグが多すぎるときに発生する例外です。
 
-この上限は [[m:Net::IMAP#max_flag_count=]] で設定します。
+この上限は [[m:Net::IMAP.max_flag_count=]] で設定します。
 
 #@end
 
