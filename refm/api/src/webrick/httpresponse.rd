@@ -257,7 +257,7 @@ HTTP のレスポンスの最初の行の reason phrase をセットします。
 リクエストの URI をセットします。
 デフォルトは nil です。
 
-@param method リクエストの URI を [[c:URI]] オブジェクトで指定します。
+@param uri リクエストの URI を [[c:URI]] オブジェクトで指定します。
 
 --- sent_size    -> Integer
 
