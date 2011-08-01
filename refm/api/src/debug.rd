@@ -114,10 +114,11 @@ rubydb3x.el は Emacs 19.3x 以降用です。
 
     このコマンドの省略形は fin です。
 
-: trace [(on|off)]
+: trace [(on|off)] [all]
     トレースモードの設定を変更します。トレースモードをonにすると、以後
     の実行においてメソッドの呼び出し関係が表示されます。引数を省略した
-    場合現在のモードを表示します。
+    場合現在のモードを表示します。all を指定した場合、全てのスレッドに
+    対してモードの設定を変更します。
 
     このコマンドの省略形は tr です。
 
@@ -155,16 +156,39 @@ rubydb3x.el は Emacs 19.3x 以降用です。
     実行するスレッドを <nnn> に切替えます。
 
 : thread stop <nnn>
-: thread c[ur[rent]] <nnn>
     スレッド <nnn> を停止します。
 
 : thread resume <nnn>
     スレッド <nnn> を再開します。
 
+: pp <expression>
+    ruby の式 <expression> の結果を見やすく表示します。
+
 : p <expression>
     ruby の式 <expression> の結果を表示します。
+
+: restart
+    プログラムを最初からやり直します。
+
+    このコマンドの省略形は r です。
 
 : help
     デバッグコマンドの一覧を表示します。
 
     このコマンドの省略形は h です。
+
+=== 注意
+
+このライブラリは [[m:$SAFE]] が 0 より大きい場合には使用できません。
+
+= reopen Tracer
+
+== class Methods
+
+--- trace_func(*vars) -> object | nil
+
+[[lib:debug]] ライブラリの内部で使用します。
+
+= class DEBUGGER__
+
+ライブラリの内部で使用します。
