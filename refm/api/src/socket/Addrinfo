@@ -1,0 +1,52 @@
+= class Addrinfo
+#@todo
+
+== Class methods
+--- new
+--- ip
+--- tcp
+--- udp
+--- unix
+--- foreach
+--- getaddrinfo
+
+== Instance methods
+--- afamily
+--- pfamily
+--- socktype
+--- protocol
+--- canonname
+--- ipv4?
+--- ipv6?
+--- unix?
+--- ip?
+--- ip_unpack
+--- ip_address
+--- ip_port
+--- ipv4_private?
+--- ipv4_loopback?
+--- ipv4_multicast?
+--- ipv6_unspecified?
+--- ipv6_multicast?
+--- ipv6_linklocal?
+--- ipv6_sitelocal?
+--- ipv6_v4mapped?
+--- ipv6_v4compat?
+--- ipv6_loopback?
+--- ipv6_mc_nodelocal?
+--- ipv6_mc_linklocal?
+--- ipv6_mc_sitelocal?
+--- ipv6_mc_orglocal?
+--- ipv6_mc_global?
+--- ipv6_to_ipv4
+--- unix_path
+--- to_sockaddr
+--- getnameinfo
+
+--- family_addrinfo
+--- connect_from
+--- connect
+--- connect_to
+--- bind
+--- listen(backlog=5)
+--- inspect_sockaddr
