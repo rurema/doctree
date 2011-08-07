@@ -175,7 +175,12 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 #@end
 
+#@until 1.9.1
 --- system(command) -> bool
+#@else
+--- system(command, options={}) -> bool | nil
+--- system(env, command, options={}) -> bool | nil
+#@end
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
@@ -208,14 +213,22 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 そうでなければインタプリタから直接実行されます。
 
 @param command command コマンドを文字列で指定します。
-
+#@since 1.9.1
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
+#@end
 #@since 1.9.1
 @see [[m:Kernel.#`]],[[m:Kernel.#spawn]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@else
 @see [[m:Kernel.#`]],[[m:Kernel.#exec]],[[man:system(3)]]
 #@end
 
+#@until 1.9.1
 --- system(program, *args) -> bool
+#@else
+--- system(program, *args, options={}) -> bool | nil
+--- system(env, program, *args, options={}) -> bool | nil
+#@end
 
 引数を外部コマンドとして実行して、成功した時に真を返します。
 
@@ -238,6 +251,17 @@ command を外部コマンドとして実行し、その標準出力を文字列として
 $? を参照することで判別可能です。
 #@end
 
+#@since 1.9.1
+Hash を options として渡すことで、起動される子プロセスの
+  * プロセスグループ
+  * resource limit
+  * カレントディレクトリ
+  * umask
+  * 子プロセスでのリダイレクト
+などを変更できます。環境変数のクリアなども指定できます。
+詳しくは [[m:Kernel.#spawn]] を参照してください。
+#@end
+
 ==== 引数の解釈
 
 この形式で呼び出した場合、空白や shell のメタキャラクタも
@@ -251,6 +275,10 @@ $? を参照することで判別可能です。
 
 @param program 文字列か2要素の配列です。
 @param args program に渡す引数を 0 個以上指定する
+#@since 1.9.1
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
+#@end
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 #@#例...
 #@since 1.9.1
@@ -260,12 +288,12 @@ $? を参照することで判別可能です。
 #@end
 
 #@since 1.9.1
---- spawn(command) -> Integer
---- spawn(env, command) -> Integer
-#@todo
+--- spawn(command, options={}) -> Integer
+--- spawn(env, command, options={}) -> Integer
 
 引数を外部コマンドとして実行しますが、生成した
 子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
+
 
 ==== 引数の解釈
 
@@ -276,31 +304,33 @@ $? を参照することで判別可能です。
 を含む場合、shell 経由で実行されます。
 そうでなければインタプリタから直接実行されます。
 
+
 @param command コマンドを文字列で指定します。
-
-@param env If a hash is given as env, the environment is updated by env before exec(2) 
-           in the child process. If a pair in env has nil as the value, the variable is deleted.
-    name => val : set the environment variable
-    name => nil : unset the environment variable
-
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
 @raise Errno::EXXX コマンドが実行できなかった場合に発生します。
 
-If a hash is given as env, the environment is updated by env before exec(2) in the child process. If a pair in env has nil as the value, the variable is deleted.
-
-  # set FOO as BAR and unset BAZ.
-  pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
 
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 
 --- spawn(program, *arg) -> Integer
---- spawn(env, program, *arg) -> Integer
---- spawn(env, program, *arg, option) -> Integer
-#@todo
+--- spawn(env, program, *arg, options={}) -> Integer
 
 引数を外部コマンドとして実行しますが、生成した
 子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。
+
+env に Hash を渡すことで、[[man:exec(2)]] で子プロセス内で
+ファイルを実行する前に環境変数を変更することができます。
+Hash のキーは環境変数名文字列、Hash の値に設定する値とします。
+nil とすることで環境変数が削除([[man:unsetenv(3)]])されます。
+  # FOO を BAR にして BAZ を削除する
+  pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
+
+親プロセスは [[m:Process.wait]] で子プロセスの終了を待ち合わせるか
+もしくは [[m:Process.detach]] で子プロセスを切り離すかしてください。
+そうでないとゾンビプロセスが残る場合があります。
 
 ==== 引数の解釈
 
@@ -311,190 +341,216 @@ If a hash is given as env, the environment is updated by env before exec(2) in t
 グラム名になります。
 また、第1要素はフルパスで指定しなくても環境変数 PATH から探します。
 
+==== option引数の概要
+Hash を options として渡すことで、起動される子プロセスの
+  * プロセスグループ
+  * resource limit
+  * カレントディレクトリ
+  * umask
+  * 子プロセスでのリダイレクト
+などを変更できます。環境変数のクリアなども指定できます。
+
+以下のオプションが指定できます。
+
+: :unsetenv_others 
+  これを true にすると、envで指定した環境変数以外をすべてクリアします。
+  false だとクリアしません。false がデフォルトです。
+
+: :pgroup
+  引数に true or 0 を渡すと新しいプロセスグループを作成し、そこで動きます。
+  整数を渡すと、指定したプロセスグループに属します
+  nil を渡すとプロセスグループを変更しません。デフォルトは nil です。
+
+: :rlimit_core, :rlimit_cpu, etc
+  resource limit を設定します。詳しくは [[m:Process.#setrlimit]] を見て
+  ください。引数には整数、もしくは整数2つの配列を渡します。
+
+: :chdir
+  指定した文字列をカレントディレクトリにします。
+
+: :umask
+  指定した整数を umask に設定します。
+
+: リダイレクト関連
+
+  Hash のキーに子プロセス側のファイルデスクリプタを、
+  対応する値に親プロセス側のファイルデスクリプタや
+  ファイル名を指定することでリダイレクトを実現できます。
+
+: :close_others
+  これを true に設定すると
+  リダイレクトされていない、0(stdin), 1(stdout), 2(stderr) 以外の
+  ファイルデスクリプタをすべて閉じます。
+  true がデフォルトです。
+
+==== option引数によるリダイレクトの概要
+Hash のキー(子プロセス側)には以下のいずれかが指定できます。
+  * 単一のファイルデスクリプタ
+  * ファイルデスクリプタの配列
+配列を渡すことで複数のファイルデスクリプタを同時にリダイレクトできます。
+
+Hash の値(親プロセス側)には以下のいずれかが指定できます。
+  * 単一のファイルデスクリプタ
+  * リダイレクト先のファイル名文字列
+  * [リダイレクト先のファイル名文字列]、配列の要素にすることで
+    [[m:File::RDONLY]] でファイルを開いてリダイレクトします。
+  * [リダイレクト先のファイル名文字列, モード文字列]
+    open(ファイル名, モード, 0644) でファイルを開いてリダイレクト
+    します。
+  * [リダイレクト先のファイル名文字列, モード文字列, パーミション(整数)]
+    open(ファイル名, モード, パーミッション) でファイルを
+    開いてリダイレクトします。
+  * [:child, ファイルデスクリプタ]
+    子プロセス側のファイルデスクリプタを指定できます。
+  * :close キーで指定したファイルデスクリプタを子プロセス側で閉じます
+
+ファイルデスクリプタを表すためには、以下が利用できます。
+  * :in  標準入力, ファイルデスクリプタ0
+  * :out 標準出力, ファイルデスクリプタ1
+  * :err 標準エラー出力, ファイルデスクリプタ2
+  * 整数 指定した整数が表すファイルデスクリプタ
+  * [[c:IO]] [[m:IO#fileno]] で表されるファイルデスクリプタ
+
+==== option引数の詳細および例
+
+「:unsetenv_others」を使うと、envで指定したもの以外の環境変数を
+クリアします。
+  # すべての環境変数をクリア
+  pid = spawn(command, :unsetenv_others=>true)
+  # FOO だけ
+  pid = spawn({"FOO"=>"BAR"}, command, :unsetenv_others=>true)
+
+「:pgroup」でプロセスグループを指定できます。
+  # true, 0 で新しいプロセスグループを作りそのリーダーになります。
+  pid = spawn(command, :pgroup => true)
+  # 整数を渡すとそのグループに所属します。
+  pid = spawn(command, :pgroup => 10)
+
+「:rlimit_core」「:rlimit_cpu」などで、resource limit を指定します。
+詳しくは [[m:Process.#setrlimit]] を見てください。
+このオプションには 整数 or 整数2つの配列、を渡すことができます。
+それぞれ [[m:Process.#setrlimit]] の引数が2個、3個の場合に対応します。
+  # 現プロセスの core の resource limit を取得
+  cur, max = Process.getrlimit(:CORE)
+  # 一時的に子プロセスの core dump を止める
+  pid = spawn(command, :rlimit_core=>[0,max]) # disable core temporary.
+  # 子プロセスで core dump を出せるようにする
+  pid = spawn(command, :rlimit_core=>max) # enable core dump
+  # 子プロセスで core dump を出せなくする
+  pid = spawn(command, :rlimit_core=>0) # never dump core.
+
+「:chdir」で子プロセスのカレントディレクトリを変更できます。
+  pid = spawn(command, :chdir=>"/var/tmp")
+
+「:umask」で子プロセスの umask を指定できます。
+   pid = spawn(command, :umask=>077)
+
+リダイレクトは様々なやりかたが使えます。
+Hash のキーが子プロセス側、値が親プロセス側です。
+  # 以下の例はすべて stderr を stdout にリダイレクトします
+  pid = spawn(command, :err=>:out)
+  pid = spawn(command, 2=>1)
+  pid = spawn(command, STDERR=>:out)
+  pid = spawn(command, STDERR=>STDOUT)
+この例では子プロセス側の stdout には触れていないので、
+親プロセスから引き継がれます。
+
+Hash の値にはファイル名も指定できます。
+  pid = spawn(command, :in=>"/dev/null") # read mode
+  pid = spawn(command, :out=>"/dev/null") # write mode
+  pid = spawn(command, :err=>"log") # write mode
+  pid = spawn(command, 3=>"/dev/null") # read mode
+stdout と stderr をリダイレクトした場合は、
+ファイルは write mode で open されます。それ以外の場合は
+read mode で open されます。
+
+ファイルのフラグ(write/read mode)やパーミッションを明示したい
+場合は、配列を用います。
+  # なにも指定がなければデフォルトで read mode が使われる。
+  pid = spawn(command, :in=>["file"]) 
+  # read mode で file を open し、リダイレクトする。
+  pid = spawn(command, :in=>["file", "r"])
+  # write mode で file を open し、リダイレクトする。
+  # パーミッションはデフォルトで 644。
+  pid = spawn(command, :out=>["log", "w"]) # 0644 assumed
+  # write mode、パーミッション 0600 でファイルをオープンし、リダイレクトする。
+  pid = spawn(command, :out=>["log", "w", 0600])
+  # flagを文字列でなくビットで指定する
+  pid = spawn(command, :out=>["log", File::WRONLY|File::EXCL|File::CREAT, 0600])
+
+配列で複数のファイルデスクリプタを同時にリダイレクトできます。
+  # stdout と stderr を "log" ファイルにリダイレクト
+  pid = spawn(command, [:out, :err]=>["log", "w"])
+
+複数のファイルデスクリプタを合わせてリダイレクトするには、
+[ :child, FileDescriptor ] を使うこともできます。
+これは子プロセス側で FileDescriptor にリダイレクトすることを意味します。
+これはファイルデスクリプタを直接指定するのと異なるということに
+注意してください。
+例えば、
+  :err => :out 
+とすると、子プロセスの stderr を親プロセスの stdout にリダイレクトします。
+  :err => [:child, :out]
+とすると、子プロセスの stderr を子プロセスの stdout にリダイレクトします。
+これを用いて、[[m:IO.popen]] で、子プロセスの
+stderr と stdout を混ぜる例を以下に示します。
+  io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
+  p io.read #=> "out\nerr\n
+
+spawn と IO.popen では
+デフォルトでは非標準的なファイルデスクリプタ(3以降)をすべて閉じます。
+「:close_others」オプションでこの挙動を制御できます。
+標準的ファイルデスクリプタ(0,1,2)は :close で明示的に閉じない
+限り、このオプションの影響を受けません。
+  pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
+  pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
+
+これを利用して spawn を [[m:IO.popen]] のように使うことができます。
+  # similar to r = IO.popen(command)
+  r, w = IO.pipe
+  pid = spawn(command, :out=>w)   # r は子プロセスで閉じられる
+  w.close
+
+「:close」を使ってファイルデスクリプタを明示的に閉じることもできます。
+  f = open(foo)
+  # f は継承されない
+  # system は :close_others=>false がデフォルトなのでそれ以外は継承される
+  system(command, f=>:close)        # don't inherit f.
+
+spawn で特定のファイルデスクリプタだけを継承したい場合は、
+io => io という形のオプションを指定します。
+  # valgrind は --log-fd というオプションでログの出力先を指定できます。
+  # これで指定したファイルデスクリプタは親プロセスから
+  # 子プロセスに継承されなければならないため、 log_w=>log_w とします。
+  log_r, log_w = IO.pipe
+  pid = spawn("valgrind", "--log-fd=#{log_w.fileno}", "echo", "a", log_w=>log_w)
+  log_w.close
+  p log_r.read
+
+ファイルデスクリプタを入れ替えることもできます。
+  # stdout と stderr を入れ替えリダイレクト
+  pid = spawn(command, :out=>:err, :err=>:out)
+このような相互参照を解決するため、spawnの内部で新しい
+ファイルデスクリプタを作り、利用します。
+
+@param env 更新する環境変数を表す Hash
 @param program 文字列か2要素の配列を指定します。
-
 @param args 渡される引数です。0 個以上の文字列を指定します。
-
-
-@param env If a hash is given as env, the environment is updated by env before exec(2) 
-           in the child process. If a pair in env has nil as the value, the variable is deleted.
-    name => val : set the environment variable
-    name => nil : unset the environment variable
-
-@param option If a hash is given as options, it specifies process group, resource limit, current directory, umask and redirects for the child process. Also, it can be specified to clear environment variables.
+@param options オプションパラメータ Hash
 
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 
 @raise Errno::EXXX コマンドが実行できなかった場合に発生します。
 
-  options: hash
-    clearing environment variables:
-      :unsetenv_others => true   : clear environment variables except specified by env
-      :unsetenv_others => false  : don't clear (default)
-    process group:
-      :pgroup => true or 0 : make a new process group
-      :pgroup => pgid      : join to specified process group
-    resource limit: resourcename is core, cpu, data, etc.  See Process.setrlimit.
-      :rlimit_resourcename => limit
-      :rlimit_resourcename => [cur_limit, max_limit]
-    current directory:
-      :chdir => str
-    umask:
-      :umask => int
-    redirection:
-      key:
-        FD              : single file descriptor in child process
-        [FD, FD, ...]   : multiple file descriptor in child process
-      value:
-        FD                        : redirect to the file descriptor in parent process
-        string                    : redirect to file with open(string, "r" or "w")
-        [string]                  : redirect to file with open(string, File::RDONLY)
-        [string, open_mode]       : redirect to file with open(string, open_mode, 0644)
-        [string, open_mode, perm] : redirect to file with open(string, open_mode, perm)
-        [:child, FD]              : redirect to the redirected file descriptor
-        :close                    : close the file descriptor in child process
-      FD is one of follows
-        :in     : the file descriptor 0
-        :out    : the file descriptor 1
-        :err    : the file descriptor 2
-        integer : the file descriptor of specified the integer
-        io      : the file descriptor specified as io.fileno
-    file descriptor inheritance: close non-redirected non-standard fds (3, 4, 5, ...) or not
-      :close_others => false : inherit fds (default for system and exec)
-      :close_others => true  : don't inherit (default for spawn and IO.popen)
-
-If a hash is given as env, the environment is updated by env before exec(2) in the child process. If a pair in env has nil as the value, the variable is deleted.
-
-  # set FOO as BAR and unset BAZ.
-  pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
-
-=== option で有効なキーと値
-
-If a hash is given as options, it specifies process group, resource limit, current directory, umask and redirects for the child process. Also, it can be specified to clear environment variables.
-
-: :unsetenv_others
- The :unsetenv_others key in options specifies to clear environment variables, other than specified by env.
-//emlist{
-  pid = spawn(command, :unsetenv_others=>true) # no environment variable
-  pid = spawn({"FOO"=>"BAR"}, command, :unsetenv_others=>true) # FOO only
-//}
-
-: :pgroup
- The :pgroup key in options specifies a process group. The corresponding value should be true, zero or positive integer. true and zero means the process should be a process leader of a new process group. Other values specifies a process group to be belongs.
-//emlist{
-  pid = spawn(command, :pgroup=>true) # process leader
-  pid = spawn(command, :pgroup=>10) # belongs to the process group 10
-//}
-: :rlimit_XXX
- The :rlimit_foo key specifies a resource limit. foo should be one of resource types such as core. The corresponding value should be an integer or an array which have one or two integers: same as cur_limit and max_limit arguments for Process.setrlimit.
-//emlist{
-  pid = spawn(command, :rlimit_core=>0) # never dump core.
-  cur, max = Process.getrlimit(:CORE)
-  pid = spawn(command, :rlimit_core=>[0,max]) # disable core temporary.
-  pid = spawn(command, :rlimit_core=>max) # enable core dump
-//}
-: :chdir
- The :chdir key in options specifies the current directory.
-//emlist{
-  pid = spawn(command, :chdir=>"/var/tmp")
-//}
-: :umask
- The :umask key in options specifies the umask.
-//emlist{
-  pid = spawn(command, :umask=>077)
-//}
-: :in, :out, :err
- The :in, :out, :err, a fixnum, an IO and an array key specifies a redirection. The redirection maps a file descriptor in the child process.
-
- For example, stderr can be merged into stdout as follows:
-//emlist{
-  pid = spawn(command, :err=>:out)
-  pid = spawn(command, 2=>1)
-  pid = spawn(command, STDERR=>:out)
-  pid = spawn(command, STDERR=>STDOUT)
-//}
- The hash keys specifies a file descriptor in the child process started by spawn. :err, 2 and STDERR specifies the standard error stream (stderr).
-
- The hash values specifies a file descriptor in the parent process which invokes spawn. :out, 1 and STDOUT specifies the standard output stream (stdout).
-
- In the above example, the standard output in the child process is not specified. So it is inherited from the parent process.
-
- The standard input stream (stdin) can be specified by :in, 0 and STDIN.
-
- A filename can be specified as a hash value.
-//emlist{
-  pid = spawn(command, :in=>"/dev/null") # read mode
-  pid = spawn(command, :out=>"/dev/null") # write mode
-  pid = spawn(command, :err=>"log") # write mode
-  pid = spawn(command, 3=>"/dev/null") # read mode
-//}
- For stdout and stderr, it is opened in write mode. Otherwise read mode is used.
-
- For specifying flags and permission of file creation explicitly, an array is used instead.
-//emlist{
-  pid = spawn(command, :in=>["file"]) # read mode is assumed
-  pid = spawn(command, :in=>["file", "r"])
-  pid = spawn(command, :out=>["log", "w"]) # 0644 assumed
-  pid = spawn(command, :out=>["log", "w", 0600])
-  pid = spawn(command, :out=>["log", File::WRONLY|File::EXCL|File::CREAT, 0600])
-//}
- The array specifies a filename, flags and permission. The flags can be a string or an integer. If the flags is omitted or nil, File::RDONLY is assumed. The permission should be an integer. If the permission is omitted or nil, 0644 is assumed.
-
- If an array of IOs and integers are specified as a hash key, all the elements are redirected.
-//emlist{
-  # stdout and stderr is redirected to log file.
-  # The file "log" is opened just once.
-  pid = spawn(command, [:out, :err]=>["log", "w"])
-//}
- Another way to merge multiple file descriptors is [:child, fd]. [:child, fd] means the file descriptor in the child process. This is different from fd. For example, :err=>:out means redirecting child stderr to parent stdout. But :err=>[:child, :out] means redirecting child stderr to child stdout. They differs if stdout is redirected in the child process as follows.
-//emlist{
-  # stdout and stderr is redirected to log file.
-  # The file "log" is opened just once.
-  pid = spawn(command, :out=>["log", "w"], :err=>[:child, :out])
-//}
- [:child, :out] can be used to merge stderr into stdout in IO.popen. In this case, IO.popen redirects stdout to a pipe in the child process and [:child, :out] refers the redirected stdout.
-//emlist{
-  io = IO.popen(["sh", "-c", "echo out; echo err >&2", :err=>[:child, :out]])
-  p io.read #=> "out\nerr\n"
-//}
- spawn closes all non-standard unspecified descriptors by default. The "standard" descriptors are 0, 1 and 2. This behavior is specified by :close_others option. :close_others doesn‘t affect the standard descriptors which are closed only if :close is specified explicitly.
-//emlist{
-  pid = spawn(command, :close_others=>true)  # close 3,4,5,... (default)
-  pid = spawn(command, :close_others=>false) # don't close 3,4,5,...
-//}
- The option :close_others is true by default for spawn and IO.popen.
-
- So IO.pipe and spawn can be used as IO.popen.
-//emlist{
-  # similar to r = IO.popen(command)
-  r, w = IO.pipe
-  pid = spawn(command, :out=>w)   # r, w is closed in the child process.
-  w.close
-//}
- The symbol :close is specified as a hash value to close a fd individually.
-//emlist{
-  f = open(foo)
-  system(command, f=>:close)        # don't inherit f.
-//}
- If a file descriptor need to be inherited, io=>io can be used.
-//emlist{
-  # valgrind has --log-fd option for log destination.
-  # log_w=>log_w indicates log_w.fileno inherits to child process.
-  log_r, log_w = IO.pipe
-  pid = spawn("valgrind", "--log-fd=#{log_w.fileno}", "echo", "a", log_w=>log_w)
-  log_w.close
-  p log_r.read
-//}
- It is also possible to exchange file descriptors.
-//emlist{
-  pid = spawn(command, :out=>:err, :err=>:out)
-//}
- The hash keys specify file descriptors in the child process. The hash values specifies file descriptors in the parent process. So the above specifies exchanging stdout and stderr. Internally, spawn uses an extra file descriptor to resolve such cyclic file descriptor mapping. 
-
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 #@end
 
+#@until 1.9.1
 --- exec(command) -> ()
+#@else 
+--- exec(command, options={}) -> ()
+--- exec(env, command, options={}) -> ()
+#@end
 
 引数で指定されたコマンドを実行します。
 
@@ -511,6 +567,10 @@ If a hash is given as options, it specifies process group, resource limit, curre
 そうでなければインタプリタから直接実行されます。
 
 @param command コマンドを文字列で指定します。
+#@since 1.9.1
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
+#@end
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
   # a.rb
@@ -525,7 +585,12 @@ If a hash is given as options, it specifies process group, resource limit, curre
   実行中
   # '実行後' は表示されない
 
+#@until 1.9.1
 --- exec(program, *args) -> ()
+#@else
+--- exec(program, *args, options={}) -> ()
+--- exec(evn, program, *args, options={}) -> ()
+#@end
 
 引数で指定されたコマンドを実行します。
 
@@ -533,6 +598,13 @@ If a hash is given as options, it specifies process group, resource limit, curre
 起動に成功した場合、このメソッドからは戻りません。
 
 この形式では、常に shell を経由せずに実行されます。
+
+#@since 1.9.1
+[[man:exec(3)]] でコマンドを実行すると、
+元々のプログラムの環境をある程度(ファイルデスクリプタなど)引き継ぎます。
+Hash を options として渡すことで、この挙動を変更できます。
+詳しくは [[m:Kernel.#spawn]] を参照してください。
+#@end
 
 ==== 引数の解釈
 
@@ -547,6 +619,10 @@ If a hash is given as options, it specifies process group, resource limit, curre
 
 @param program 文字列か2要素の配列を指定します。
 @param args 渡される引数です。0 個以上の文字列を指定します。
+#@since 1.9.1
+@param env 更新する環境変数を表す Hash
+@param options オプションパラメータ Hash
+#@end
 @raise ArgumentError 第一引数が配列かつ要素数が 2 でない場合に発生します。
 @raise Errno::EXXX 起動に失敗し、ruby インタプリタに制御が戻った場合に発生します。
 
