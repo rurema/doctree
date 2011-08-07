@@ -113,4 +113,5 @@ AF_INET なソケットにおいてホストを指定するには以下のいずれか
 #@include(socket/UNIXSocket)
 #@since 1.9.1
 #@include(socket/Addrinfo)
+#@include(socket/Socket__UDPSource)
 #@end

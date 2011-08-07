@@ -1,0 +1,14 @@
+= class Socket::UDPSource
+#@todo
+
+== Class methods
+--- new
+
+== Instance Methods
+--- remote_address
+
+--- local_address
+
+--- reply
+
+
