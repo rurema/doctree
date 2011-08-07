@@ -3,50 +3,137 @@
 
 == Class methods
 --- new
+#@todo
+
 --- ip
+#@todo
+
 --- tcp
+#@todo
+
 --- udp
+#@todo
+
 --- unix
+#@todo
+
 --- foreach
+#@todo
+
 --- getaddrinfo
+#@todo
 
 == Instance methods
 --- afamily
+#@todo
+
 --- pfamily
+#@todo
+
 --- socktype
+#@todo
+
 --- protocol
+#@todo
+
 --- canonname
+#@todo
+
 --- ipv4?
+#@todo
+
 --- ipv6?
+#@todo
+
 --- unix?
+#@todo
+
 --- ip?
+#@todo
+
 --- ip_unpack
+#@todo
+
 --- ip_address
+#@todo
+
 --- ip_port
+#@todo
+
 --- ipv4_private?
+#@todo
+
 --- ipv4_loopback?
+#@todo
+
 --- ipv4_multicast?
+#@todo
+
 --- ipv6_unspecified?
+#@todo
+
 --- ipv6_multicast?
+#@todo
+
 --- ipv6_linklocal?
+#@todo
+
 --- ipv6_sitelocal?
+#@todo
+
 --- ipv6_v4mapped?
+#@todo
+
 --- ipv6_v4compat?
+#@todo
+
 --- ipv6_loopback?
+#@todo
+
 --- ipv6_mc_nodelocal?
+#@todo
+
 --- ipv6_mc_linklocal?
+#@todo
+
 --- ipv6_mc_sitelocal?
+#@todo
+
 --- ipv6_mc_orglocal?
+#@todo
+
 --- ipv6_mc_global?
+#@todo
+
 --- ipv6_to_ipv4
+#@todo
+
 --- unix_path
+#@todo
+
 --- to_sockaddr
+#@todo
+
 --- getnameinfo
+#@todo
 
 --- family_addrinfo
+#@todo
+
 --- connect_from
+#@todo
+
 --- connect
+#@todo
+
 --- connect_to
+#@todo
+
 --- bind
+#@todo
+
 --- listen(backlog=5)
+#@todo
+
 --- inspect_sockaddr
+#@todo
