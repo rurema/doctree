@@ -284,6 +284,158 @@ irb のいろいろな使用例を以下に示します。
   irb(main):010:0> exit                       # 終了
   $
 
+=== irb で使用可能なコマンド一覧
+
+この一覧に記述されているメソッドは、irb のプロンプトでレシーバなしで使
+うことができます。
+
+irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前との両方が定義さ
+れています。これは、簡単な名前がオーバーライドされた場合にもirb のコマ
+ンドが実行できるようにするためです。
+
+: exit(ret = 0)
+: irb_exit(ret = 0)
+: quit(ret = 0)
+: irb_quit(ret = 0)
+#@todo
+
+irb を終了します。
+サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
+
+: conf
+: context
+: irb_context
+#@todo
+
+irb の現在の設定です。[[c:IRB::Context]] オブジェクトです。
+このメソッドで得た IRB::Context オブジェクトに対してメソッドを
+呼び出すことで、現在稼働中の irb インタプリタの設定を表示・変更できます。
+
+: cws([obj])
+: chws([obj])
+: irb_cws([obj])
+: irb_chws([obj])
+: irb_change_workspace([obj])
+#@todo
+
+irb の self を obj に変更します。
+obj が省略されたときは、
+irb を起動したときの main オブジェクトを self にします。
+
+: pushws([obj])
+: irb_pushws([obj])
+: irb_push_workspace([obj])
+#@todo
+
+UNIX シェルコマンドの pushd と同じです。
+
+: popws
+: irb_popws
+: irb_pop_workspace
+#@todo
+
+UNIX シェルコマンドの popd と同じです。
+
+: irb([obj])
+#@todo
+
+新しいサブ irb インタプリタを起動します。
+オブジェクト obj が指定された時はその obj を self にします。
+
+: jobs
+: irb_jobs
+#@todo
+
+サブ irb のリストを返します。
+
+: fg(n)
+: irb_fg(n)
+#@todo
+
+n で指定したサブ irb に移動します。
+n は以下のいずれかの値で指定します。
+
+  * irb インタプリタ番号
+  * irb オブジェクト
+  * スレッド ID
+  * 各インタプリタの self (「irb(obj)」で起動した時の obj)
+
+: kill(n)
+: irb_kill(n)
+#@todo
+
+n で指定したサブ irb を停止します。
+n は以下のいずれかの値で指定します。
+
+  * irb インタプリタ番号
+  * irb オブジェクト
+  * スレッド ID
+  * 各インタプリタの self (「irb(obj)」で起動した時の obj)
+
+: source(path)
+: irb_source(path)
+#@todo
+
+現在の irb インタプリタ上で、
+Ruby スクリプト path を評価します。
+
+source という名前は UNIX シェルの source コマンドに由来します。
+
+: irb_load(path, prev)
+#@todo
+
+ファイル path を Ruby スクリプトとみなし、
+現在の irb インタプリタ上で実行します。
+Ruby の load の irb 版です。
+
+: _  
+#@todo
+
+直前の式の実行結果です。
+
+例：
+
+  $ irb
+  irb(main):001:0> 10
+  => 10
+  irb(main):002:0> 2**32
+  => 4294967296
+  irb(main):003:0> _
+  => 4294967296
+  irb(main):004:0> _ - 2**31
+  => 2147483648
+  irb(main):005:0> 
+
+: __ 
+#@todo
+
+実行結果の履歴です。
+__[lineno] で、lineno 行で実行した結果を得られます。
+lineno が負の時は、最新の結果から -lineno 行だけ前の
+結果を得られます。
+
+この変数はデフォルトでは使えません。
+この変数を使用するには、あらかじめ .irbrc などで
+conf.eval_history の値を指定しておかなければいけません。
+
+例：
+
+  $ irb
+  irb(main):001:0> conf.eval_history = 100
+  => 100
+  irb(main):002:0> 1 + 2
+  => 3
+  irb(main):003:0> 'hoge' + 'foo'
+  => "hogefoo"
+  irb(main):004:0> __[2]
+  => 3
+  irb(main):005:0> __[3]
+  => "hogefoo"
+  irb(main):006:0> __[-1]
+  => "hogefoo"
+  irb(main):007:0> 
+
+
 === 使用上の制限
 
 irbは, 評価できる時点(式が閉じた時点)での逐次実行を行ないます. 
@@ -336,162 +488,6 @@ irb では以下のように式を begin 〜 end でくくって入力してください。
 irb はシンボルであるかどうかの判断を間違えることがあります。
 具体的には、式が完了しているのに継続行と見なすことがあります。
 
-
-
-= class IrbCommands
-
-このクラスは irb のコマンドをまとめるためのプレースホルダです。
-実際には IrbCommands というクラスは定義されていません。
-このクラスのドキュメントに記述されているメソッドは、
-irb のプロンプトでレシーバなしで使うことができます。
-
-irb のコマンドは、
-簡単な名前と頭に「irb_」をつけた名前との両方が定義されています。
-これは、簡単な名前がオーバーライドされた場合にも
-irb のコマンドが実行できるようにするためです。
-
-== Methods
-
---- exit
---- quit
---- irb_exit        
-#@todo
-
-irb を終了します。
-サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
-
---- conf
---- irb_context
-#@todo
-
-irb の現在の設定です。[[c:IRB::Context]] オブジェクトです。
-このメソッドで得た IRB::Context オブジェクトに対してメソッドを
-呼び出すことで、現在稼働中の irb インタプリタの設定を表示・変更できます。
-
---- cws([obj])
---- chws([obj])
---- irb_cws([obj])
---- irb_chws([obj])
---- irb_change_workspace([obj])
-#@todo
-
-irb の self を obj に変更します。
-obj が省略されたときは、
-irb を起動したときの main オブジェクトを self にします。
-
---- pushws([obj])
---- irb_pushws([obj])
---- irb_push_workspace([obj])
-#@todo
-
-UNIX シェルコマンドの pushd と同じです。
-
---- popws
---- irb_popws
---- irb_pop_workspace
-#@todo
-
-UNIX シェルコマンドの popd と同じです。
-
---- irb([obj])
-#@todo
-
-新しいサブ irb インタプリタを起動します。
-オブジェクト obj が指定された時はその obj を self にします。
-
---- jobs
---- irb_jobs
-#@todo
-
-サブ irb のリストを返します。
-
---- fg(n)
---- irb_fg(n)
-#@todo
-
-n で指定したサブ irb に移動します。
-n は以下のいずれかの値で指定します。
-
-  * irb インタプリタ番号
-  * irb オブジェクト
-  * スレッド ID
-  * 各インタプリタの self (「irb(obj)」で起動した時の obj)
-
---- kill(n)
---- irb_kill(n)
-#@todo
-
-n で指定したサブ irb を停止します。
-n は以下のいずれかの値で指定します。
-
-  * irb インタプリタ番号
-  * irb オブジェクト
-  * スレッド ID
-  * 各インタプリタの self (「irb(obj)」で起動した時の obj)
-
---- source(path)
---- irb_source(path)
-#@todo
-
-現在の irb インタプリタ上で、
-Ruby スクリプト path を評価します。
-
-source という名前は UNIX シェルの source コマンドに由来します。
-
---- irb_load(path, prev)
-#@todo
-
-ファイル path を Ruby スクリプトとみなし、
-現在の irb インタプリタ上で実行します。
-Ruby の load の irb 版です。
-
---- _  
-#@todo
-
-直前の式の実行結果です。
-
-例：
-
-  $ irb
-  irb(main):001:0> 10
-  => 10
-  irb(main):002:0> 2**32
-  => 4294967296
-  irb(main):003:0> _
-  => 4294967296
-  irb(main):004:0> _ - 2**31
-  => 2147483648
-  irb(main):005:0> 
-
---- __ 
-#@todo
-
-実行結果の履歴です。
-__[lineno] で、lineno 行で実行した結果を得られます。
-lineno が負の時は、最新の結果から -lineno 行だけ前の
-結果を得られます。
-
-この変数はデフォルトでは使えません。
-この変数を使用するには、あらかじめ .irbrc などで
-conf.eval_history の値を指定しておかなければいけません。
-
-例：
-
-  $ irb
-  irb(main):001:0> conf.eval_history = 100
-  => 100
-  irb(main):002:0> 1 + 2
-  => 3
-  irb(main):003:0> 'hoge' + 'foo'
-  => "hogefoo"
-  irb(main):004:0> __[2]
-  => 3
-  irb(main):005:0> __[3]
-  => "hogefoo"
-  irb(main):006:0> __[-1]
-  => "hogefoo"
-  irb(main):007:0> 
-
 #@since 1.9.1
 #@# 1.8.2 に入っていない理由は ((<ruby-dev:25595>)) を参照してください
 === 履歴の保存
@@ -505,8 +501,6 @@ conf.save_history の値を指定しておくと、
 履歴ファイルの名前はデフォルトでは ~/.irb_history です。
 履歴ファイルの名前は IRB.conf[:HISTORY_FILE] で指定できます。
 #@end
-
-
 
 = class IRB::Context
 
