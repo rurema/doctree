@@ -1,6 +1,6 @@
 #@# Author: Keiju ISHITSUKA
 
-irb の completion 機能を提供するものです. 
+irb の completion 機能を提供するライブラリです。
 
 === 使い方
 
@@ -43,3 +43,9 @@ irb 実行中に [Tab] を押すとコンプレーションします.
   foo.equal?              foo.methods             foo.untaint
   foo.extend              foo.nil?                
   foo.freeze              foo.private_methods     
+
+= module IRB::Completor
+
+irb の completion 機能を提供するモジュールです。
+ユーザがこのモジュールを直接使用することはありません。
+
