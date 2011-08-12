@@ -81,7 +81,7 @@
 
 @raise MiniTest::Assertion 与えられた期待値と実際の値の差の絶対値が与えられた差分を越える場合に発生します。
 
---- assert_in_epsilon(acual, expected, epsilon = 0.001, message = nil) -> true
+--- assert_in_epsilon(actual, expected, epsilon = 0.001, message = nil) -> true
 #@# 使っている用語が正しくないかもしれない。
 与えられた期待値と実際の値の相対誤差が許容範囲内である場合、検査にパスしたことになります。
 

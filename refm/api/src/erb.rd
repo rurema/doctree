@@ -186,13 +186,13 @@ fname はスクリプトを定義する際のファイル名です。主にエラー時に活躍します。
 
 @param methodname メソッド名
 
---- def_class(suplerklass=Object, methodname='erb') -> Class
+--- def_class(superklass=Object, methodname='erb') -> Class
 
 変換した Ruby スクリプトをメソッドとして定義した無名のクラスを返します。
 
 #@# 使い途がなさそうだ…。
  
-@param suplerklass 無名クラスのスーパークラス
+@param superklass 無名クラスのスーパークラス
 
 @param methodname メソッド名
 

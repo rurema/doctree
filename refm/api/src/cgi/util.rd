@@ -84,9 +84,9 @@ CGI で利用するユーティリティメソッドを定義したライブラリです。
         p CGI.escapeElement('<BR><A HREF="url"></A>', ["A", "IMG"])
              # => "<BR>&lt;A HREF="url"&gt;&lt;/A&gt"
 
---- unescapeElement(string, *element) -> String
+--- unescapeElement(string, *elements) -> String
 #@since 1.9.1
---- unescape_element(string, *element) -> String
+--- unescape_element(string, *elements) -> String
 #@end
 
 特定の要素だけをHTMLエスケープから戻す。
