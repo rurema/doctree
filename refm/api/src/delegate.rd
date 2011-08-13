@@ -83,7 +83,7 @@ obj のもつインスタンスメソッドのうち、
 #@# 見つからない
 
 #@#--- public_api
-#@todo nodoc
+#@# nodoc
 
 #@end
 #@since 1.9.2

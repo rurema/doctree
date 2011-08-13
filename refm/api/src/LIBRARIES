@@ -234,7 +234,7 @@ rbconfig
 #@since 1.8.1
 rdoc
 #@since 1.9.1
-#@todo
+#@#todo
 #@else
 rdoc/usage
 rdoc/markup/simple_markup
