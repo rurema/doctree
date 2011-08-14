@@ -1,6 +1,5 @@
-rdoc ╖┴╝░д╬е╔енехесеєе╚дЄ ri е│е▐еєе╔д╬╜╨╬╧д╬дшджд╦└░╖┴д╣дыд┐дсд╬е╡е╓ещеде╓ещеъд╟д╣бг
-
-#@todo: дтдж╛пд╖│╬╟зд╣дыбг
+rdoc ╖┴╝░д╬е╔енехесеєе╚дЄ╔╜╝ид╣ды░ь├╩│м┴░д╬╣╜┬д▓╜д╡дьд┐╛ї┬╓д╦д╣дыд┐дсд╬
+е╡е╓ещеде╓ещеъд╟д╣бг
 
 [[m:SM::SimpleMarkup#convert]] д╬░·┐Їд╦ [[c:SM::ToFlow]] д╬едеєе╣е┐еєе╣
 дЄ┼╧д╖д╞╗╚═╤д╖д▐д╣бг
@@ -10,19 +9,29 @@ rdoc ╖┴╝░д╬е╔енехесеєе╚дЄ ri е│е▐еєе╔д╬╜╨╬╧д╬дшджд╦└░╖┴д╣дыд┐дсд╬е╡е╓ещеде╓ещеъд
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_flow'
 
-  p = SM::SimpleMarkup.new
+  m = SM::SimpleMarkup.new
   h = SM::ToFlow.new
-  flow = p.convert(input_string, h)
+  flow = m.convert(input_string, h)
   options = RI::Options.instance
   formatter = options.formatter.new(options, "")
   formatter.display_flow(flow)
 
+╩╤┤╣д╖д┐╖ы▓╠д╧╣╜┬д┬╬д╬╟█╬єд╟╝ш╞└д╟днд▐д╣бг[[c:SM::ToHtml]] д╩д╔д╚д╧░█д╩
+дъ [[m:SM::SimpleMarkup#convert]] дм╩╕╗·╬єдЄ╩╓д╡д╩ддд┐дсбв╛х╡нд╬дшджд╦
+е╒ейб╝е▐е├е┐д╦╩╤┤╣д╖д┐╖ы▓╠дЄ┼╧д╣╔м═╫дмдвдъд▐д╣бг
+
 = class SM::ToFlow
+
+rdoc ╖┴╝░д╬е╔енехесеєе╚дЄ╔╜╝ид╣ды░ь├╩│м┴░д╬╣╜┬д▓╜д╡дьд┐╛ї┬╓д╦д╣дыд┐дсд╬
+епеще╣д╟д╣бг
 
 == Class Methods
 
 --- new -> SM::ToFlow
 
 ╝л┐╚дЄ╜щ┤№▓╜д╖д▐д╣бг
+
+╝┬║▌д╦╩╕╗·╬єдЄ╩╤┤╣д╣ды║▌д╦д╧бв[[m:SM::SimpleMarkup#convert]] д╬░·┐Їд╦╝л
+┐╚дЄ┼╧д╖д▐д╣бг
 
 @see [[m:SM::SimpleMarkup#convert]]

@@ -6,17 +6,15 @@ rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
 
-  p = SM::SimpleMarkup.new
+  m = SM::SimpleMarkup.new
   h = SM::ToHtml.new
-  puts p.convert(input_string, h)
+  puts m.convert(input_string, h)
+
+変換した結果は文字列で取得できます。
 
 = class SM::ToHtml
 
 rdoc 形式のドキュメントを HTML に整形するクラスです。
-
-[[c:SM::SimpleMarkup]] に処理を移譲します。
-
-#@todo 委譲の件はもう少し確認する。
 
 == Class Methods
 
@@ -24,6 +22,7 @@ rdoc 形式のドキュメントを HTML に整形するクラスです。
 
 自身を初期化します。
 
-@see [[m:SM::SimpleMarkup#convert]]
+実際に文字列を変換する際には、[[m:SM::SimpleMarkup#convert]] の引数に自
+身を渡します。
 
-#@todo: SM::ToHtml を継承した整形も考えられるため、継承に必要なメソッドの追加、説明を加える。SimpleMarkup に。
+@see [[m:SM::SimpleMarkup#convert]]

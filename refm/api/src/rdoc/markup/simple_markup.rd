@@ -121,10 +121,10 @@ SimpleMarkup object to convert multiple input strings.
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
 
-  p = SM::SimpleMarkup.new
+  m = SM::SimpleMarkup.new
   h = SM::ToHtml.new
 
-  puts p.convert(input_string, h)
+  puts m.convert(input_string, h)
 
 You can extend the SimpleMarkup parser to recognise new markup
 sequences, and to add special processing for text that matches a
@@ -189,7 +189,7 @@ event handler as we identify significant chunks.
 
 == Instance Methods
 
---- add_word_pair(start, stop, name)
+--- add_word_pair(start, stop, name) -> ()
 
 Add to the sequences used to add formatting to an individual word
 (such as *bold*). Matching entries will generate attibutes
@@ -209,17 +209,32 @@ WikiWords using something like:
 Each wiki word will be presented to the output formatter
 via the accept_special method
 
---- convert(str, op)
+--- convert(str, formatter) -> object | ""
 
-We take a string, split it into lines, work out the type of
-each line, and from there deduce groups of lines (for example
-all lines in a paragraph). We then invoke the output formatter
-using a Visitor to display the result
+str で指定された文字列を formatter に変換させます。
 
---- content
+@param str 変換する文字列を指定します。
 
-for debugging, we allow access to our line contents as text
+@param formatter [[c:SM::ToHtml]]、[[c:SM::ToLaTeX]] などのインスタンス
+                 を指定します。
 
---- get_line_types
+--- content -> String
 
-for debugging, return the list of line types
+変換する文字列を返します。
+
+rdoc ライブラリのデバッグ用途に使用します。
+[[m:SM::SimpleMarkup#convert]] の後に実行します。
+
+変換のために加工したオブジェクトを改行で連結したものを返すため、変換前
+の文字列と結果が異なる事があります。
+
+@see [[m:SM::SimpleMarkup#convert]]
+
+--- get_line_types -> [Symbol]
+
+変換する文字列の各行のタイプを [[c:Symbol]] の配列で返します。
+
+rdoc ライブラリのデバッグ用途に使用します。
+[[m:SM::SimpleMarkup#convert]] の後に実行します。
+
+@see [[m:SM::SimpleMarkup#convert]]
