@@ -315,8 +315,8 @@ Hash を options として渡すことで、起動される子プロセスの
 
 @see [[m:Kernel.#system]],[[m:Kernel.#exec]]
 
---- spawn(program, *arg) -> Integer
---- spawn(env, program, *arg, options={}) -> Integer
+--- spawn(program, *args) -> Integer
+--- spawn(env, program, *args, options={}) -> Integer
 
 引数を外部コマンドとして実行しますが、生成した
 子プロセスの終了を待ち合わせません。生成した子プロセスのプロセスIDを返します。

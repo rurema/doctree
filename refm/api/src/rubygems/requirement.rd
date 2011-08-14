@@ -22,7 +22,7 @@ Gem の必要条件を扱うクラスです。
 
 == Singleton Methods
 
---- create -> Gem::Requirement
+--- create(input) -> Gem::Requirement
 
 [[c:Gem::Requirement]] のインスタンスを作成するためのファクトリメソッドです。
 

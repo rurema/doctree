@@ -43,7 +43,7 @@ Gem パッケージに含まれているファイルのうちロード可能なものを検索するためのクラス
 
 @param path 探索対象のパスを指定します。
 
---- matching_files -> [String]
+--- matching_files(spec, path) -> [String]
 
 与えられた spec に path が含まれている場合、その path のリストを返します。
 

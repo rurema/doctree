@@ -173,7 +173,7 @@ caption 要素を生成します。
    file_field("name", 40, 100)
      # <INPUT TYPE="file" NAME="name" SIZE="40" MAXLENGTH="100">
 
---- file_field(name = "", size = 20, maxlength = nil) -> String
+--- file_field(attributes) -> String
 
 タイプが file である input 要素を生成します。
 
@@ -382,7 +382,7 @@ enctype 属性に "multipart/form-data" をセットした form 要素を生成します。
   password_field("password", "value", 80, 200)
     # <INPUT TYPE="password" NAME="name" VALUE="value" SIZE="80" MAXLENGTH="200">
 
---- password_field(name = "", value = nil, size = 40, maxlength = nil) -> String
+--- password_field(attributes) -> String
 タイプが password である input 要素を生成します。
 
 @param attributes 属性をハッシュで指定します。
@@ -498,7 +498,7 @@ select 要素を生成します。
     # <INPUT TYPE="radio" CHECKED NAME="name" VALUE="2">Bar
     # <INPUT TYPE="radio" NAME="name" VALUE="Baz">Baz
   
---- radio_group(name = "", *values) -> String
+--- radio_group(attributes) -> String
 タイプが radio である input 要素のリストを生成します。
 
 生成される input 要素の name 属性はすべて同じになり、

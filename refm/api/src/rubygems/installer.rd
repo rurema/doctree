@@ -31,7 +31,7 @@ include Gem::RequirePathsBuilder
 拡張ライブラリをビルドするためのファイルタイプとして有効であるのは、
 extconf.rb, configure script, Rakefile, mkmf_files です。
 
---- ensure_dependency -> true
+--- ensure_dependency(spec, dependency) -> true
 
 インストールしようとしている Gem が依存関係を満たしている事を確認します。
 
