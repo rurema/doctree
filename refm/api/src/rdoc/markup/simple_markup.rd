@@ -106,17 +106,11 @@ style comment blocks, Wiki entries, and online FAQs.
    respectively.
 //}
 
-=== SimpleMarkup の利用
-
-テキスト部をHTMLに変換する部分をライブラリとして使いたければ、
-[[c:SM::SimpleMarkup]] を参照してください。
-
 = class SM::SimpleMarkup
 
-This code converts <tt>input_string</tt>, which is in the format
-described in markup/simple_markup.rb, to HTML. The conversion
-takes place in the +convert+ method, so you can use the same
-SimpleMarkup object to convert multiple input strings.
+rdoc 形式のドキュメントを目的の形式に変換するためのクラスです。
+
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -126,12 +120,142 @@ SimpleMarkup object to convert multiple input strings.
 
   puts m.convert(input_string, h)
 
-You can extend the SimpleMarkup parser to recognise new markup
-sequences, and to add special processing for text that matches a
-regular epxression. Here we make WikiWords significant to the parser,
-and also make the sequences {word} and \<no>text...</no> signify
-strike-through text. When then subclass the HTML output class to deal
-with these:
+独自のフォーマットを行うようにパーサを拡張する事もできます。
+
+例:
+
+  require 'rdoc/markup/simple_markup'
+  require 'rdoc/markup/simple_markup/to_html'
+
+  class WikiHtml < SM::ToHtml
+    # WikiWord のフォントを赤く表示。
+    def handle_special_WIKIWORD(special)
+      "<font color=red>" + special.text + "</font>"
+    end
+  end
+
+  m = SM::SimpleMarkup.new
+  # { 〜 } までを :STRIKE でフォーマットする。
+  m.add_word_pair("{", "}", :STRIKE)
+  # <no> 〜 </no> までを :STRIKE でフォーマットする。
+  m.add_html("no", :STRIKE)
+
+  # WikiWord を追加。
+  m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+
+  h = WikiHtml.new
+  # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
+  h.add_tag(:STRIKE, "<strike>", "</strike>")
+
+  puts "<body>" + p.convert(ARGF.read, h) + "</body>"
+
+変換する形式を変更する場合、フォーマッタ(例. [[c:SM::ToHtml]]) を変更、
+拡張する必要があります。
+
+=== 出力可能な形式
+
+変換する形式として以下のいずれかを選択できます。
+
+ * HTML 形式: [[c:SM::ToHtml]]
+ * LaTex 形式: [[c:SM::ToLatex]]
+
+また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
+に、以下のサブライブラリを使用できます。(ri コマンドで使われています)
+
+ * [[c:SM::ToFlow]]
+
+== Constants
+
+--- SPACE -> ?\s
+
+空白文字です。?\s を返します。ライブラリの内部で使用します。
+
+--- SIMPLE_LIST_RE -> Regexp
+
+リストにマッチする正規表現です。ライブラリの内部で使用します。
+
+ラベルの有無を問わずマッチします。
+
+--- LABEL_LIST_RE -> Regexp
+
+ラベル付きリストにマッチする正規表現です。ライブラリの内部で使用します。
+
+== Class Methods
+
+--- new -> SM:SimpleMarkup
+
+自身を初期化します。
+
+== Instance Methods
+
+--- add_word_pair(start, stop, name) -> ()
+
+start と stop ではさまれる文字列(例. *bold*)をフォーマットの対象にしま
+す。
+
+@param start 開始となる文字列を指定します。
+
+@param stop 終了となる文字列を指定します。start と同じ文字列にする事も
+            可能です。
+
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
+
+@raise RuntimeError start に "<" で始まる文字列を指定した場合に発生します。
+
+例:
+
+  require 'rdoc/markup/simple_markup'
+  require 'rdoc/markup/simple_markup/to_html'
+  m = SM::SimpleMarkup.new
+  m.add_word_pair("{", "}", :STRIKE)
+
+  h = SM::ToHtml.new
+  h.add_tag(:STRIKE, "<strike>", "</strike>")
+  puts m.convert(input_string, h)
+
+変換時に実際にフォーマットを行うには [[m:SM::ToHtml#add_tag]] のように、
+フォーマッタ側でも操作を行う必要があります。
+
+--- add_html(tag, name) -> ()
+
+tag で指定したタグをフォーマットの対象にします。
+
+@param tag 追加するタグ名を文字列で指定します。大文字、小文字のど
+           ちらを指定しても同一のものとして扱われます。
+
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
+
+例:
+
+  require 'rdoc/markup/simple_markup'
+  require 'rdoc/markup/simple_markup/to_html'
+  m = SM::SimpleMarkup.new
+  m.add_html("no", :STRIKE)
+
+  h = SM::ToHtml.new
+  h.add_tag(:STRIKE, "<strike>", "</strike>")
+  puts m.convert(input_string, h)
+
+変換時に実際にフォーマットを行うには [[m:SM::ToHtml#add_tag]] のように、
+フォーマッタ側でも操作を行う必要があります。
+
+--- add_special(pattern, name) -> ()
+
+pattern で指定した正規表現にマッチする文字列をフォーマットの対象にしま
+す。
+
+例えば WikiWord のような、[[m:SM::SimpleMarkup#add_word_pair]]、
+[[m:SM::SimpleMarkup#add_html]] でフォーマットできないものに対して使用
+します。
+
+@param pattern 正規表現を指定します。
+
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
+
+例:
 
   require 'rdoc/markup/simple_markup'
   require 'rdoc/markup/simple_markup/to_html'
@@ -142,72 +266,14 @@ with these:
     end
   end
 
-  p = SM::SimpleMarkup.new
-  p.add_word_pair("{", "}", :STRIKE)
-  p.add_html("no", :STRIKE)
-
-  p.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+  m = SM::SimpleMarkup.new
+  m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
 
   h = WikiHtml.new
-  h.add_tag(:STRIKE, "<strike>", "</strike>")
+  puts m.convert(input_string, h)
 
-  puts "<body>" + p.convert(ARGF.read, h) + "</body>"
-
-=== Output Formatters
-
-_missing_
-
-== Constants
-
---- SPACE -> ?\s
-
-#@todo
-
---- SIMPLE_LIST_RE -> Regexp
-
-List entries look like:
-
-  *       text
-  1.      text
-  [label] text
-  label:: text
-
-Flag it as a list entry, and
-work out the indent for subsequent lines
-
---- LABEL_LIST_RE -> Regexp
-
-#@todo
-
-== Class Methods
-
---- new -> SM:SimpleMarkup
-
-take a block of text and use various heuristics to determine
-it's structure (paragraphs, lists, and so on). Invoke an
-event handler as we identify significant chunks.
-
-== Instance Methods
-
---- add_word_pair(start, stop, name) -> ()
-
-Add to the sequences used to add formatting to an individual word
-(such as *bold*). Matching entries will generate attibutes
-that the output formatters can recognize by their +name+
-
---- add_html(tag, name)
-
-Add to the sequences recognized as general markup
-
---- add_special(pattern, name)
-
-Add to other inline sequences. For example, we could add
-WikiWords using something like:
-
-   parser.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
-
-Each wiki word will be presented to the output formatter
-via the accept_special method
+変換時に実際にフォーマットを行うには SM::ToHtml#accept_special_<name で指定した名前>
+のように、フォーマッタ側でも操作を行う必要があります。
 
 --- convert(str, formatter) -> object | ""
 
@@ -217,6 +283,8 @@ str で指定された文字列を formatter に変換させます。
 
 @param formatter [[c:SM::ToHtml]]、[[c:SM::ToLaTeX]] などのインスタンス
                  を指定します。
+
+変換結果は formatter によって文字列や配列を返します。
 
 --- content -> String
 
