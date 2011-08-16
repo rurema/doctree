@@ -241,6 +241,11 @@ rdoc/markup/simple_markup
 rdoc/markup/simple_markup/to_flow
 rdoc/markup/simple_markup/to_html
 rdoc/markup/simple_markup/to_latex
+rdoc/parsers/parse_c
+rdoc/parsers/parse_f95
+rdoc/parsers/parse_rb
+rdoc/parsers/parse_simple
+rdoc/parsers/parserfactory
 #@end
 #@end
 #@until 1.9.1

@@ -1,110 +1,33 @@
-SimpleMarkup parses plain text documents and attempts to decompose
-them into their constituent parts. Some of these parts are high-level:
-paragraphs, chunks of verbatim text, list entries and the like. Other
-parts happen at the character level: a piece of bold text, a word in
-code font. This markup is similar in spirit to that used on WikiWiki
-webs, where folks create web pages using a simple set of formatting
-rules.
+RDoc 形式に整形されたプレインテキストを変換するためのサブライブラリです。
 
-SimpleMarkup itself does no output formatting: this is left to a
-different set of classes.
+[[c:SM::SimpleMarkup]] は RDoc 形式のドキュメント、Wiki エントリ、Web
+上の FAQ などを想定したプレインテキストから様々なフォーマットへの変換を
+行うツール群の基礎として作られています。[[c:SM::SimpleMarkup]] 自身は何
+の出力も行いません。それらは [[ref:output_format]] で後述するクラス群に
+委ねられています。
 
-SimpleMarkup is extendable at runtime: you can add new markup
-elements to be recognised in the documents that SimpleMarkup parses.
+=== Markup
 
-SimpleMarkup is intended to be the basis for a family of tools which
-share the common requirement that simple, plain-text should be
-rendered in a variety of different output formats and media. It is
-envisaged that SimpleMarkup could be the basis for formating RDoc
-style comment blocks, Wiki entries, and online FAQs.
+基本的には、[[ref:lib:rdoc#markup]] と同じです。ただし、rdoc コマンドと
+は異なり、Ruby のソースコードのコメント部分ではなく、プレインテキストが
+変換対象になります。そのため、以下のみがフォーマットされます。
 
-=== Basic Formatting
+ * [[ref:lib:rdoc#list]]
+ * [[ref:lib:rdoc#labeled_list]]
+ * [[ref:lib:rdoc#headline]]
+ * [[ref:lib:rdoc#ruled_line]]
+ * [[ref:lib:rdoc#italic_bold_typewriter]]
+ * [[ref:lib:rdoc#escape]]
 
-#@todo: 整形を考える。
-//emlist{
- * SimpleMarkup looks for a document's natural left margin. This
-   isused as the initial margin for the document.
+===[a:output_format] 出力可能な形式
 
- * Consecutive lines starting at this margin are considered to be a
-   paragraph.
+変換する形式として以下のいずれかを選択できます。
 
- * If a paragraph starts with a "*", "-", or with "<digit>.", then it is
-   taken to be the start of a list. The margin in increased to be the
-   first non-space following the list start flag. Subsequent lines
-   should be indented to this new margin until the list ends. For
-   example:
+ * HTML 形式: [[c:SM::ToHtml]]
+ * LaTex 形式: [[c:SM::ToLatex]]
 
-     * this is a list with three paragraphs in
-       the first item. This is the first paragraph.
-
-       And this is the second paragraph.
-
-       1. This is an indented, numbered list.
-       2. This is the second item in that list
-
-       This is the third conventional paragraph in the
-       first list item.
-
-     * This is the second item in the original list
-
- * You can also construct labeled lists, sometimes called description
-   or definition lists. Do this by putting the label in square brackets
-   and indenting the list body:
-
-      [cat]  a small furry mammal
-             that seems to sleep a lot
-
-      [ant]  a little insect that is known
-             to enjoy picnics
-
-   A minor variation on labeled lists uses two colons to separate the
-   label from the list body:
-
-      cat::  a small furry mammal
-             that seems to sleep a lot
-
-      ant::  a little insect that is known
-             to enjoy picnics
-
-   This latter style guarantees that the list bodies' left margins are
-   aligned: think of them as a two column table.
-
- * Any line that starts to the right of the current margin is treated
-   as verbatim text. This is useful for code listings. The example of a
-   list above is also verbatim text.
-
- * A line starting with an equals sign (=) is treated as a
-   heading. Level one headings have one equals sign, level two headings
-   have two,and so on.
-
- * A line starting with three or more hyphens (at the current indent)
-   generates a horizontal rule. THe more hyphens, the thicker the rule
-   (within reason, and if supported by the output device)
-
- * You can use markup within text (except verbatim) to change the
-   appearance of parts of that text. Out of the box, SimpleMarkup
-   supports word-based and general markup.
-
-   Word-based markup uses flag characters around individual words:
-
-    [\*word*]  displays word in a *bold* font
-    [\_word_]  displays word in an _emphasized_ font
-    [\+word+]  displays word in a +code+ font
-
-   General markup affects text between a start delimiter and and end
-   delimiter. Not surprisingly, these delimiters look like HTML markup.
-
-    [\<b>text...</b>]    displays word in a *bold* font
-    [\<em>text...</em>]  displays word in an _emphasized_ font
-    [\<i>text...</i>]    displays word in an _emphasized_ font
-    [\<tt>text...</tt>]  displays word in a +code+ font
-
-   Unlike conventional Wiki markup, general markup can cross line
-   boundaries. You can turn off the interpretation of markup by
-   preceding the first character with a backslash, so \\\<b>bold
-   text</b> and \\\*bold* produce \<b>bold text</b> and \*bold
-   respectively.
-//}
+また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
+に、[[c:SM::ToFlow]] を使用できます。(ri コマンドで使われています)
 
 = class SM::SimpleMarkup
 
@@ -151,18 +74,6 @@ rdoc 形式のドキュメントを目的の形式に変換するためのクラスです。
 
 変換する形式を変更する場合、フォーマッタ(例. [[c:SM::ToHtml]]) を変更、
 拡張する必要があります。
-
-=== 出力可能な形式
-
-変換する形式として以下のいずれかを選択できます。
-
- * HTML 形式: [[c:SM::ToHtml]]
- * LaTex 形式: [[c:SM::ToLatex]]
-
-また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
-に、以下のサブライブラリを使用できます。(ri コマンドで使われています)
-
- * [[c:SM::ToFlow]]
 
 == Constants
 
