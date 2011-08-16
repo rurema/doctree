@@ -1,30 +1,40 @@
-A parser is simple a class that implements
+require rdoc/parsers/parse_simple
 
-  #initialize(file_name, body, options)
+rdoc で解析できるファイルの種類を追加するためのサブライブラリです。
 
-and
+以下のメソッドを定義したクラスを作成する事で、新しいパーサクラスを作成
+する事ができます。
 
-  #scan
+ * #initialize(top_level, file_name, body, options, stats)
+ * #scan
 
-The initialize method takes a file name to be used, the body of the
-file, and an RDoc::Options object. The scan method is then called
-to return an appropriately parsed TopLevel code object.
+initialize メソッドは以下の引数を受け取ります。
 
-The ParseFactory is used to redirect to the correct parser given a filename
-extension. This magic works because individual parsers have to register 
-themselves with us as they are loaded in. The do this using the following
-incantation
+ * top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
+ * file_name: file_name ファイル名を文字列で指定します。
+ * body: ソースコードの内容を文字列で指定します。
+ * options: [[c:Options]] オブジェクトを指定します。
+ * stats: [[c:RDoc::Stats]] オブジェクトを指定します。
 
+scan メソッドは引数を受け取りません。処理の後は必ず
+[[c:RDoc::TopLevel]] オブジェクトを返す必要があります。
+
+また、[[c:RDoc::ParserFactory]] はファイル名からパーサクラスを取得する
+のにも使われます。このために、新しく作成するパーサクラスでは
+[[c:RDoc::ParserFactory]] を extend し、parse_files_matching メソッドで
+自身が解析できるファイル名のパターンを登録しておく必要があります。
+
+例:
 
    require "rdoc/parsers/parsefactory"
    
    module RDoc
 
      class XyzParser
-       extend ParseFactory                  <<<<
+       extend ParserFactory                 <<<<
        parse_files_matching /\.xyz$/        <<<<
 
-       def initialize(file_name, body, options)
+       def initialize(file_name, body, options, stats)
          ...
        end
 
@@ -34,32 +44,64 @@ incantation
      end
    end
 
-Just to make life interesting, if we suspect a plain text file, we
-also look for a shebang line just in case it's a potential
-shell script
-
 = module RDoc::ParserFactory
+
+ソースコードを解析するパーサを生成するためのファクトリクラスです。
+
+新しいパーサを作成する場合にも extend する事で使用します。
 
 == class Methods
 
---- can_parse(file_name)
+--- can_parse(file_name) -> RDoc::C_Parser | RDoc::RubyParser | RDoc::Fortran95parser | nil
 
-Return a parser that can handle a particular extension
+file_name を解析できるパーサクラスを返します。見つからなかった場合は
+nil を返します。
 
---- alias_extension(old_ext, new_ext)
+@param file_name 解析するファイルの名前を指定します。
 
-Alias an extension to another extension. After this call,
-files ending "new_ext" will be parsed using the same parser
-as "old_ext"
+--- alias_extension(old_ext, new_ext) -> bool
 
---- parser_for(top_level, file_name, body, options, stats)
+old_ext に登録されたパーサを new_ext でも解析できるようにエイリアスを登
+録します。
 
-Find the correct parser for a particular file name. Return a
-SimpleParser for ones that we don't know
+@param old_ext 拡張子を文字列で指定します。
+
+@param new_ext 拡張子を文字列で指定します。
+
+@return エイリアスが登録された場合は true を返します。old_ext にパーサ
+        が登録されていない場合、エイリアスが登録されずに false を返しま
+        す。
+
+--- parser_for(top_level, file_name, body, options, stats) -> RDoc::C_Parser | RDoc::RubyParser | RDoc::Fortran95parser | RDoc::SimpleParser
+
+file_name を解析できるパーサのインスタンスを返します。見つからなかった
+場合は [[c:RDoc::SimpleParser]] のインスタンスを返します。
+
+@param top_level [[c:RDoc::TopLevel]] オブジェクトを指定します。
+
+@param file_name ファイル名を文字列で指定します。
+
+@param body ソースコードの内容を文字列で指定します。
+
+@param options [[c:Options]] オブジェクトを指定します。
+
+@param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 
 == Instance Methods
 
---- parse_files_matching(regexp)
+--- parse_files_matching(regexp) -> ()
 
-Record the fact that a particular class parses files that match a
-given extension
+regexp で指定した正規表現にマッチするファイルを解析できるパーサとして、
+自身を登録します。
+
+@param regexp 正規表現を指定します。
+
+新しいパーサを作成する時に使用します。
+
+例:
+
+  class XyzParser
+    extend ParserFactory
+    parse_files_matching /\.xyz$/
+    ...
+  end

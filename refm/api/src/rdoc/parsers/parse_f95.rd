@@ -1,3 +1,5 @@
+#@# require rdoc/code_objects
+
 Fortran95 のソースコードを解析するためのサブライブラリです。
 
 拡張子が f90、F90、f95、F95 のファイルを解析する事ができます。解析のた
@@ -172,7 +174,7 @@ extend RDoc::ParserFactory
 
 @param body ソースコードの内容を文字列で指定します。
 
-@param options [[c:RDoc::Options]] オブジェクトを指定します。
+@param options [[c:Options]] オブジェクトを指定します。
 
 @param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 

@@ -1,3 +1,8 @@
+#@# require rdoc/code_objects
+require rdoc/parsers/parserfactory
+require rdoc/options
+require rdoc/rdoc
+
 C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 トを解析するためのサブライブラリです。
 
@@ -118,7 +123,7 @@ in its Init_xxx method. We could document them using
 
 @param body ソースコードの内容を文字列で指定します。
 
-@param options [[c:RDoc::Options]] オブジェクトを指定します。
+@param options [[c:Options]] オブジェクトを指定します。
 
 @param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 

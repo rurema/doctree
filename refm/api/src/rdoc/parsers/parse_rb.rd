@@ -1,3 +1,10 @@
+require e2mmap
+require irb/slex
+#@# require rdoc/code_objects
+require rdoc/tokenstream
+#@# require rdoc/markup/simple_markup/preprocess
+require rdoc/parsers/parserfactory
+
 Ruby のソースコードを解析するためのサブライブラリです。
 
 = module RubyToken
@@ -36,7 +43,7 @@ Ruby のソースコードを解析するためのサブライブラリです。
 
 extend RDoc::ParserFactory
 include RubyToken
-#@# include TokenStream
+include TokenStream
 
 Extract code elements from a source file, returning a TopLevel
 object containing the constituent file elements.
@@ -55,7 +62,7 @@ This file is based on rtags
 
 @param body ソースコードの内容を文字列で指定します。
 
-@param options [[c:RDoc::Options]] オブジェクトを指定します。
+@param options [[c:Options]] オブジェクトを指定します。
 
 @param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 

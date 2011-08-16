@@ -1,3 +1,5 @@
+require cgi
+
 rdoc 形式のドキュメントを LaTeX に整形するためのサブライブラリです。
 
 [[m:SM::SimpleMarkup#convert]] の引数に [[c:SM::ToLaTeX]] のインスタンス

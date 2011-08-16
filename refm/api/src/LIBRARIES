@@ -236,7 +236,9 @@ rdoc
 #@since 1.9.1
 #@#todo
 #@else
+rdoc/options
 rdoc/usage
+rdoc/tokenstream
 rdoc/markup/simple_markup
 rdoc/markup/simple_markup/to_flow
 rdoc/markup/simple_markup/to_html

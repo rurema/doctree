@@ -1,3 +1,6 @@
+#@# require rdoc/code_objects
+#@# require rdoc/markup/simple_markup/preprocess
+
 Parse a non-source file. We basically take the whole thing
 as one big comment. If the first character in the file
 is '#', we strip leading pound signs.
@@ -16,7 +19,7 @@ is '#', we strip leading pound signs.
 
 @param body 内容を文字列で指定します。
 
-@param options [[c:RDoc::Options]] オブジェクトを指定します。
+@param options [[c:Options]] オブジェクトを指定します。
 
 @param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 

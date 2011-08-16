@@ -1,3 +1,5 @@
+require cgi
+
 rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
 [[m:SM::SimpleMarkup#convert]] の引数に [[c:SM::ToHtml]] のインスタンス
