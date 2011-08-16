@@ -45,10 +45,7 @@ extend RDoc::ParserFactory
 include RubyToken
 include TokenStream
 
-Extract code elements from a source file, returning a TopLevel
-object containing the constituent file elements.
-
-This file is based on rtags
+Ruby のソースコードを解析するためのクラスです。
 
 == Class Methods
 
@@ -72,4 +69,4 @@ This file is based on rtags
 
 Rubyのソースコードからクラス/モジュールのドキュメントを解析します。
 
-@return RDoc::TopLevel オブジェクトを返します。
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。

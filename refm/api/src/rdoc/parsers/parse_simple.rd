@@ -1,11 +1,14 @@
 #@# require rdoc/code_objects
 #@# require rdoc/markup/simple_markup/preprocess
 
-Parse a non-source file. We basically take the whole thing
-as one big comment. If the first character in the file
-is '#', we strip leading pound signs.
+ソースコード以外のファイルを解析するためのサブライブラリです。
+
+ファイルの内容すべてを 1 つの大きなコメントとして処理します。ただし、ファ
+イルの先頭が # で始まっていた場合、先頭行は削除されます。
 
 = class RDoc::SimpleParser
+
+ソースコード以外のファイルを解析するためのクラスです。
 
 == Class Methods
 
@@ -27,11 +30,16 @@ is '#', we strip leading pound signs.
 
 --- scan -> RDoc::TopLevel
 
-Extract the file contents and attach them to the toplevel as a
-comment
+自身の持つ [[c:RDoc::TopLevel]] のコメントとしてファイルの内容を解析し
+ます。
 
-@return RDoc::TopLevel オブジェクトを返します。
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。
 
---- remove_private_comments(comment) -> ()
+--- remove_private_comments(comment) -> String
 
-#@todo
+行頭の "--" から "++" で囲まれたコメントを comment から削除した結果を返
+します。
+
+@param comment 対象の文字列を指定します。
+
+@return コメントが削除された文字列を返します。

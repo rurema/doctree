@@ -6,32 +6,11 @@ require rdoc/rdoc
 C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 トを解析するためのサブライブラリです。
 
-= reopen RDoc
+C 言語で記述された拡張ライブラリなどを解析するのに使用します。
+[[f:rb_define_class]] や [[f:rb_define_method]] などで定義されたものに
+対応する C 言語の関数のコメントを解析します。
 
-== Constants
-
---- KNOWN_CLASSES -> {String => String}
-
-Ruby の組み込みクラスの内部的な変数名がキー、クラス名が値のハッシュです。
-
-  RDoc::KNOWN_CLASSES["rb_cObject"] # => "Object"
-
-ライブラリの内部で使用します。
-
-= class RDoc::C_Parser
-
-extend RDoc::ParserFactory
-
-We attempt to parse C extension files. Basically we look for
-the standard patterns that you find in extensions: <tt>rb_define_class,
-rb_define_method</tt> and so on. We also try to find the corresponding
-C source for the methods and extract comments, but if we fail
-we don't worry too much.
-
-The comments associated with a Ruby method are extracted from the C
-comment block associated with the routine that _implements_ that
-method, that is to say the method whose name is given in the
-<tt>rb_define_method</tt> call. For example, you might write:
+例: Array#flatten の場合。rb_ary_flatten のコメントが解析されます。
 
   /*
    * Returns a new array that is a one-dimensional flattening of this
@@ -60,37 +39,36 @@ method, that is to say the method whose name is given in the
      ...
      rb_define_method(rb_cArray, "flatten", rb_ary_flatten, 0);
 
-Here RDoc will determine from the rb_define_method line that there's a
-method called "flatten" in class Array, and will look for the implementation
-in the method rb_ary_flatten. It will then use the comment from that
-method in the HTML output. This method must be in the same source file
-as the rb_define_method.
+上記の例の場合、rb_ary_flatten 関数と Init_Array 関数は同じファイルに記
+述されている必要があります。
 
-C classes can be diagrammed (see /tc/dl/ruby/ruby/error.c), and RDoc
-integrates C and Ruby source into one tree
+また、Ruby のソースコードとは別にコメントには特別な命令を指定する事がで
+きます。
 
-The comment blocks may include special directives:
+: Document-class: name
 
-  [Document-class: <i>name</i>]
-    This comment block is documentation for the given class. Use this
-    when the <tt>Init_xxx</tt> method is not named after the class.
-  
-  [Document-method: <i>name</i>]
-    This comment documents the named method. Use when RDoc cannot
-    automatically find the method from it's declaration
-  
-  [call-seq:  <i>text up to an empty line</i>]
-    Because C source doesn't give descriptive names to Ruby-level parameters,
-    you need to document the calling sequence explicitly
+  記述する内容を name で指定した Ruby のクラスのものに指定します。同じ
+  .c ファイルに複数のクラス定義がある場合などのように、Init_xxx 関数の
+  xxx の部分がクラス名と同一ではない場合に使用します。
 
-In addition, RDoc assumes by default that the C method implementing a
-Ruby function is in the same source file as the rb_define_method call.
-If this isn't the case, add the comment
+  This comment block is documentation for the given class. Use this
+  when the <tt>Init_xxx</tt> method is not named after the class.
 
-  rb_define_method(....);  // in filename
+: Document-method: name
 
-As an example, we might have an extension that defines multiple classes
-in its Init_xxx method. We could document them using
+  記述する内容を name で指定した Ruby のメソッドのものに指定します。
+  RDoc が対応するメソッドを見つけられなかった場合に使用します。
+
+: call-seq:
+
+  指定した次の行から次の空行までをメソッド呼び出し列と解釈します。
+
+また、RDoc は rb_define_method などの定義と C 言語の関数の実装が同じファ
+イルにある事を前提としています。そうでない場合は以下のような指定を行います。
+
+  rb_define_method(....);  // in ファイル名
+
+例:
 
   /*
    * Document-class:  MyClass
@@ -110,6 +88,25 @@ in its Init_xxx method. We could document them using
    * In the second form, if the key isn't found, invoke the
    * block and return its value.
    */
+
+= reopen RDoc
+
+== Constants
+
+--- KNOWN_CLASSES -> {String => String}
+
+Ruby の組み込みクラスの内部的な変数名がキー、クラス名が値のハッシュです。
+
+  RDoc::KNOWN_CLASSES["rb_cObject"] # => "Object"
+
+ライブラリの内部で使用します。
+
+= class RDoc::C_Parser
+
+extend RDoc::ParserFactory
+
+C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
+トを解析するためのクラスです。
 
 == Class Methods
 
@@ -138,11 +135,11 @@ in its Init_xxx method. We could document them using
 進捗を出力する [[c:IO]] を指定します。
 
 @param val 進捗を出力する [[c:IO]] を指定します。指定しなかった場合は
-           [[m:$stderr]] を返します。
+           [[m:$stderr]] が使われます。
 
 --- scan -> RDoc::TopLevel
 
 C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 トを解析します。
 
-@return RDoc::TopLevel オブジェクトを返します。
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。

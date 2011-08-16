@@ -26,15 +26,15 @@ scan メソッドは引数を受け取りません。処理の後は必ず
 
 例:
 
-   require "rdoc/parsers/parsefactory"
+   require "rdoc/parsers/parserfactory"
    
    module RDoc
 
      class XyzParser
-       extend ParserFactory                 <<<<
-       parse_files_matching /\.xyz$/        <<<<
+       extend ParserFactory
+       parse_files_matching /\.xyz$/
 
-       def initialize(file_name, body, options, stats)
+       def initialize(top_level, file_name, body, options, stats)
          ...
        end
 

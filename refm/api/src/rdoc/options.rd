@@ -7,3 +7,5 @@ rdoc コマンドのオプションを解析するためのサブライブラリです。
 = class Options
 
 include Singleton
+
+rdoc コマンドのオプションを解析するためのクラスです。

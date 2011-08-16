@@ -5,16 +5,20 @@ Fortran95 のソースコードを解析するためのサブライブラリです。
 拡張子が f90、F90、f95、F95 のファイルを解析する事ができます。解析のた
 めには、Fortran95 の仕様に適合している必要があります。
 
-=== Rules
+=== Fortran95 プログラムとの対応
 
-Fundamental rules are same as that of the Ruby parser.
-But comment markers are '!' not '#'.
+[[lib:rdoc/parsers/parse_f95]] は以下を解析する事ができます。
 
-==== Correspondence between RDoc documentation and Fortran95 programs
+ * main program
+ * module
+ * subroutine
+ * function
+ * 派生型
+ * public 変数
+ * public 定数
+ * defined operators
+ * defined assignments
 
-"parse_f95.rb" parses main programs, modules, subroutines, functions,
-derived-types, public variables, public constants,
-defined operators and defined assignments.
 These components are described in items of RDoc documentation, as follows.
 
 Files :: Files (same as Ruby)
@@ -37,7 +41,7 @@ defined assignments) are generated.
 With "--all" option, documentation on all components
 are generated (almost same as the Ruby parser).
 
-==== Information parsed automatically
+=== Information parsed automatically
 
 The following information is automatically parsed.
 
@@ -51,25 +55,25 @@ Aliases by interface statement are described in the item of 'Methods'.
 Components which are imported from other modules and published again
 are described in the item of 'Methods'.
 
-==== Format of comment blocks
+=== コメントのフォーマット
 
-Comment blocks should be written as follows.
-Comment blocks are considered to be ended when the line without '!'
-appears.
-The indentation is not necessary.
+基本的な規則は Ruby のソースコード中にドキュメントを記述する場合と同じ
+です。ただし、Fortran95 では、コメントを記述するためには「#」ではなく、
+「!」を行頭に記述しなければなりません。
+
+字下げは任意の位置に行う事ができます。
 
      ! (Top of file)
      !
-     ! Comment blocks for the files.
+     ! このファイルに対するコメントを記述します。
      !
      !--
-     ! The comment described in the part enclosed by
-     ! "!--" and "!++" is ignored.
+     ! "!--" から "!++" で囲まれたコメントは無視されます。
      !++
      !
      module hogehoge
        !
-       ! Comment blocks for the modules (or the programs).
+       ! この module(もしくは、program) に対するコメントを記述します。
        !
 
        private
@@ -84,7 +88,7 @@ The indentation is not necessary.
 
        type MULTI_ARRAY
          !
-         ! Comment blocks for the derived-types.
+         ! 派生型に対するコメントを記述します。
          !
          real, pointer :: var(:) =>null() ! Comments block for the variables.
          integer       :: num = 0
@@ -148,6 +152,8 @@ The indentation is not necessary.
 
 extend RDoc::ParserFactory
 
+Fortran95 のソースコードを解析するためのクラスです。
+
 == Constants
 
 --- COMMENTS_ARE_UPPER -> false
@@ -182,6 +188,6 @@ extend RDoc::ParserFactory
 
 --- scan -> RDoc::TopLevel
 
-define code constructs
+ソースコード中のドキュメントを解析します。
 
-@return RDoc::TopLevel オブジェクトを返します。
+@return [[c:RDoc::TopLevel]] オブジェクトを返します。
