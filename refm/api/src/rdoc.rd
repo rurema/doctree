@@ -303,10 +303,9 @@ options は以下が指定できます。
 
 : --template name
 
-  出力生成時に使うテンプレートを指定する(デフォルトは 'standard')。実
-  際にはこれで [[m:$:]] の中のディレクトリの
-  rdoc/generators/xxxx_template が使われる。 (xxxx はフォーマッタによっ
-  て異なる)。
+  出力生成時に使うテンプレートを指定する(デフォルトは 'html')。実際には
+  これで [[m:$:]] の中のディレクトリの rdoc/generators/xxxx_template が
+  使われる。 (xxxx はフォーマッタによって異なる)。
 
 : --title text
 
