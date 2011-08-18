@@ -232,7 +232,7 @@ attr_accessor に対応します。
 でプログラムを終了します。
 
  * --extension オプションに拡張子を 2 つ指定しなかった場合
- * --extension new=old オプションを指定した時に old を扱えるフォーマッ
+ * --extension オプションに new=old を指定した時に old を扱えるフォーマッ
    タがない場合
  * --fmt オプションに扱えない出力を指定した場合
 #@until 1.9.1

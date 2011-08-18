@@ -1,7 +1,7 @@
 require rdoc/markup/simple_markup
 require rdoc/markup/simple_markup/to_flow
-require rdoc/ri/ri_formatter
-require rdoc/ri/ri_options
+#@# require rdoc/ri/ri_formatter
+#@# require rdoc/ri/ri_options
 
 プログラムの使い方(RDoc.usage を呼び出したソースファイルの先頭に記述さ
 れたコメント)を表示するためのサブライブラリです。

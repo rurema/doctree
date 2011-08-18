@@ -234,11 +234,11 @@ rbconfig
 #@since 1.8.1
 rdoc
 rdoc/options
+rdoc/rdoc
 #@since 1.9.1
-#@#todo
+rdoc/stats
 #@else
 rdoc/usage
-rdoc/tokenstream
 rdoc/markup/simple_markup
 rdoc/markup/simple_markup/to_flow
 rdoc/markup/simple_markup/to_html
@@ -248,6 +248,11 @@ rdoc/parsers/parse_f95
 rdoc/parsers/parse_rb
 rdoc/parsers/parse_simple
 rdoc/parsers/parserfactory
+#@end
+#@since 1.9.3
+rdoc/token_stream
+#@else
+rdoc/tokenstream
 #@end
 #@end
 #@until 1.9.1
