@@ -1,7 +1,13 @@
+#@since 1.9.1
+require rdoc/parser
+require rdoc/parser/ruby
+require rdoc/known_classes
+#@else
 #@# require rdoc/code_objects
 require rdoc/parsers/parserfactory
 require rdoc/options
 require rdoc/rdoc
+#@end
 
 C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 トを解析するためのサブライブラリです。
@@ -89,28 +95,26 @@ C 言語で記述された拡張ライブラリなどを解析するのに使用します。
    * block and return its value.
    */
 
-= reopen RDoc
-
-== Constants
-
---- KNOWN_CLASSES -> {String => String}
-
-Ruby の組み込みクラスの内部的な変数名がキー、クラス名が値のハッシュです。
-
-  RDoc::KNOWN_CLASSES["rb_cObject"] # => "Object"
-
-ライブラリの内部で使用します。
+#@since 1.9.1
+= class RDoc::Parser::C < RDoc::Parser
+#@else
+#@include(../RDoc__KNOWN_CLASSES)
 
 = class RDoc::C_Parser
 
 extend RDoc::ParserFactory
+#@end
 
 C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 トを解析するためのクラスです。
 
 == Class Methods
 
+#@since 1.9.1
+--- new(top_level, file_name, body, options, stats) -> RDoc::Parser::C
+#@else
 --- new(top_level, file_name, body, options, stats) -> RDoc::C_Parser
+#@end
 
 自身を初期化します。
 
@@ -120,7 +124,11 @@ C 言語で記述されたソースコードから組み込みクラス/モジュールのドキュメン
 
 @param body ソースコードの内容を文字列で指定します。
 
+#@since 1.9.1
+@param options [[c:RDoc::Options]] オブジェクトを指定します。
+#@else
 @param options [[c:Options]] オブジェクトを指定します。
+#@end
 
 @param stats [[c:RDoc::Stats]] オブジェクトを指定します。
 

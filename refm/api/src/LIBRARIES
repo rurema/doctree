@@ -236,6 +236,20 @@ rdoc
 rdoc/options
 rdoc/rdoc
 #@since 1.9.1
+rdoc/known_classes
+rdoc/parser
+rdoc/parser/c
+#@until 1.9.2
+rdoc/parser/f95
+#@end
+rdoc/parser/ruby
+rdoc/parser/simple
+#@since 1.9.2
+#@until 1.9.3
+rdoc/parser/perl
+#@end
+rdoc/parser/ruby_tools
+#@end
 rdoc/stats
 #@else
 rdoc/usage

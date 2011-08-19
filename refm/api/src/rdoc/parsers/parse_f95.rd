@@ -1,13 +1,30 @@
+#@since 1.9.1
+require rdoc/parser
+#@else
 #@# require rdoc/code_objects
+#@end
 
 Fortran95 のソースコードを解析するためのサブライブラリです。
 
-拡張子が f90、F90、f95、F95 のファイルを解析する事ができます。解析のた
-めには、Fortran95 の仕様に適合している必要があります。
+拡張子が .f90、.F90、.f95、.F95 のファイルを解析する事ができます。解析
+のためには、Fortran95 の仕様に適合している必要があります。
+
+[注意] rdoc 2.4.0 から rdoc-f95 に分かれたため、1.9.2 から
+#@since 1.9.1
+[[lib:rdoc/parser/f95]] は標準添付ライブラリに含まれなくなりました。
+#@else
+[[lib:rdoc/parsers/parse_f95]] は標準添付ライブラリに含まれなくなりました。
+#@end
+1.9.2 以降でも使用したい場合は rdoc-f95 を RubyGems でインストールして
+ください。
 
 === Fortran95 プログラムとの対応
 
+#@since 1.9.1
+[[lib:rdoc/parser/f95]] は以下を解析する事ができます。
+#@else
 [[lib:rdoc/parsers/parse_f95]] は以下を解析する事ができます。
+#@end
 
  * main program
  * module
@@ -148,9 +165,13 @@ are described in the item of 'Methods'.
 
      end module hogehoge
 
+#@since 1.9.1
+= class RDoc::Parser::F95 < RDoc::Parser
+#@else
 = class RDoc::Fortran95parser
 
 extend RDoc::ParserFactory
+#@end
 
 Fortran95 のソースコードを解析するためのクラスです。
 
@@ -168,6 +189,7 @@ Fortran95 のソースコードを解析するためのクラスです。
 
 ライブラリの内部で使用します。
 
+#@until 1.9.1
 == Class Methods
 
 --- new(top_level, file_name, body, options, stats) -> RDoc::Fortran95parser
@@ -183,6 +205,7 @@ Fortran95 のソースコードを解析するためのクラスです。
 @param options [[c:Options]] オブジェクトを指定します。
 
 @param stats [[c:RDoc::Stats]] オブジェクトを指定します。
+#@end
 
 == Instance Methods
 
