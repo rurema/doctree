@@ -237,13 +237,21 @@ rdoc/options
 rdoc/rdoc
 #@since 1.9.1
 rdoc/known_classes
+rdoc/markup
 rdoc/markup/formatter
 rdoc/markup/to_flow
 rdoc/markup/to_html
 rdoc/markup/to_html_crossref
+#@until 1.9.2
 rdoc/markup/to_latex
 rdoc/markup/to_test
 rdoc/markup/to_texinfo
+#@end
+#@since 1.9.2
+rdoc/markup/to_ansi
+rdoc/markup/to_bs
+rdoc/markup/to_rdoc
+#@end
 rdoc/parser
 rdoc/parser/c
 #@until 1.9.2

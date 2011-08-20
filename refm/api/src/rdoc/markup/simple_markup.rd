@@ -1,10 +1,17 @@
 RDoc 形式に整形されたプレインテキストを変換するためのサブライブラリです。
 
+#@since 1.9.1
+[[c:RDoc::Markup]] は RDoc 形式のドキュメント、Wiki エントリ、Web上の
+FAQ などを想定したプレインテキストから様々なフォーマットへの変換を行う
+ツール群の基礎として作られています。[[c:RDoc::Markup]] 自身は何の出力も
+行いません。
+#@else
 [[c:SM::SimpleMarkup]] は RDoc 形式のドキュメント、Wiki エントリ、Web
 上の FAQ などを想定したプレインテキストから様々なフォーマットへの変換を
 行うツール群の基礎として作られています。[[c:SM::SimpleMarkup]] 自身は何
-の出力も行いません。それらは [[ref:output_format]] で後述するクラス群に
-委ねられています。
+の出力も行いません。
+#@end
+それらは [[ref:output_format]] で後述するクラス群に委ねられています。
 
 === Markup
 
@@ -19,20 +26,84 @@ RDoc 形式に整形されたプレインテキストを変換するためのサブライブラリです。
  * [[ref:lib:rdoc#italic_bold_typewriter]]
  * [[ref:lib:rdoc#escape]]
 
+#@# TODO: 1.9.3 では =begin rdoc ... なども使用できる事を追記する。
+
 ===[a:output_format] 出力可能な形式
 
 変換する形式として以下のいずれかを選択できます。
 
+#@since 1.9.1
+ * HTML 形式: [[c:RDoc::Markup::ToHtml]]
+ * HTML 形式: [[c:RDoc::Markup::ToHtmlCrossref]]
+ * LaTex 形式: [[c:RDoc::Markup::ToLaTex]]
+ * TexInfo 形式: [[c:RDoc::Markup::ToTexInfo]]
+
+また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
+に、[[c:RDoc::Markup::ToFlow]] を使用できます。(ri コマンドで使われてい
+ます)
+#@else
  * HTML 形式: [[c:SM::ToHtml]]
  * LaTex 形式: [[c:SM::ToLatex]]
 
 また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
 に、[[c:SM::ToFlow]] を使用できます。(ri コマンドで使われています)
+#@end
 
+#@since 1.9.1
+= class RDoc::Markup
+#@else
 = class SM::SimpleMarkup
+#@end
 
 rdoc 形式のドキュメントを目的の形式に変換するためのクラスです。
 
+#@since 1.9.1
+例:
+
+  require 'rdoc/markup/to_html'
+
+  h = RDoc::Markup::ToHtml.new
+  puts h.convert(input_string)
+
+独自のフォーマットを行うようにパーサを拡張する事もできます。
+
+#@until 1.9.3
+[注意] 1.9.3 以前の 1.9 系の rdoc では [[c:RDoc::Markup::Formatter]] に
+バグがあるため、下記の例のような拡張が行えません。1.9.3 以下でこのよう
+な拡張を行いたい場合は rdoc 3.7 以降を RubyGems でインストールしてくだ
+さい。
+#@end
+
+例:
+
+  require 'rdoc/markup'
+  require 'rdoc/markup/to_html'
+
+  class WikiHtml < RDoc::Markup::ToHtml
+    # WikiWord のフォントを赤く表示。
+    def handle_special_WIKIWORD(special)
+      "<font color=red>" + special.text + "</font>"
+    end
+  end
+
+  m = RDoc::Markup.new
+  # { 〜 } までを :STRIKE でフォーマットする。
+  m.add_word_pair("{", "}", :STRIKE)
+  # <no> 〜 </no> までを :STRIKE でフォーマットする。
+  m.add_html("no", :STRIKE)
+
+  # WikiWord を追加。
+  m.add_special(/\b([A-Z][a-z]+[A-Z]\w+)/, :WIKIWORD)
+
+  wh = WikiHtml.new(m)
+  # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
+  wh.add_tag(:STRIKE, "<strike>", "</strike>")
+
+  puts "<body>#{wh.convert ARGF.read}</body>"
+
+変換する形式を変更する場合、フォーマッタ(例. [[c:RDoc::Markup::ToHtml]])
+を変更、拡張する必要があります。
+#@else
 例:
 
   require 'rdoc/markup/simple_markup'
@@ -70,10 +141,11 @@ rdoc 形式のドキュメントを目的の形式に変換するためのクラスです。
   # :STRIKE のフォーマットを <strike> 〜 </strike> に指定。
   h.add_tag(:STRIKE, "<strike>", "</strike>")
 
-  puts "<body>" + p.convert(ARGF.read, h) + "</body>"
+  puts "<body>" + m.convert(ARGF.read, h) + "</body>"
 
 変換する形式を変更する場合、フォーマッタ(例. [[c:SM::ToHtml]]) を変更、
 拡張する必要があります。
+#@end
 
 == Constants
 
@@ -93,9 +165,22 @@ rdoc 形式のドキュメントを目的の形式に変換するためのクラスです。
 
 == Class Methods
 
+#@since 1.9.1
+#@since 1.9.3
+--- new(attribute_manager = nil) -> RDoc::Markup
+#@else
+--- new -> RDoc::Markup
+#@end
+#@else
 --- new -> SM:SimpleMarkup
+#@end
 
 自身を初期化します。
+
+#@since 1.9.3
+@param attribute_manager [[c:Rdoc::AttributeManager]] オブジェクトを指
+                         定します。
+#@end
 
 == Instance Methods
 
@@ -217,3 +302,9 @@ rdoc ライブラリのデバッグ用途に使用します。
 [[m:SM::SimpleMarkup#convert]] の後に実行します。
 
 @see [[m:SM::SimpleMarkup#convert]]
+
+#@since 1.9.3
+--- attribute_manager -> RDoc::AttributeManager
+
+自身の [[c:RDoc::AttributeManager]] オブジェクトを返します。
+#@end
