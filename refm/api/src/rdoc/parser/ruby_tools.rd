@@ -1,10 +1,14 @@
-Collection of methods for writing parsers against RDoc::RubyLex and
+[[c:RDoc::RubyLex]] と [[c:RDoc::RubyToken]] を使って Ruby のソースコー
+ドのパーサを記述するためのモジュールを定義するサブライブラリです。
 
 = module RDoc::Parser::RubyTools
 
 include RDoc::RubyToken
 
-ライブラリの内部で使用します。
+[[c:RDoc::RubyLex]] と [[c:RDoc::RubyToken]] を使って Ruby のソースコー
+ドのパーサを記述するためのメソッドを定義するモジュールです。
 
 [[c:RDoc::Parser]] を継承していないため、パーサクラスとしては利用できま
 せん。
+
+ライブラリの内部で使用します。

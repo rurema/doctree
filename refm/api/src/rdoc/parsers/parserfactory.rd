@@ -151,7 +151,7 @@ file_name を解析できるパーサのインスタンスを返します。
 #@since 1.9.1
 --- parsers -> [[Regexp, RDoc::Parser]]
 
-[[m:RDoc::Parser.parse_files_matching]] で登録した正規表現とパーサクラ
+[[m:RDoc::Parser#parse_files_matching]] で登録した正規表現とパーサクラ
 スの配列の配列を返します。
 #@end
 

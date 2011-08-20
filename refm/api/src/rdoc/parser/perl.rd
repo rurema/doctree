@@ -38,18 +38,6 @@ Perl のソースコードを解析するためのクラスです。
 Perl ソースコード中に記述された POD (Plain old Documentation) 形式のコ
 メントを解析します。
 
-Extract the Pod(-like) comments from the code.
-At its most basic there will ne no need to distinguish
-between the different types of header, etc.
-
-This uses a simple finite state machine, in a very
-procedural pattern. I could "replace case with polymorphism"
-but I think it would obscure the intent, scatter the
-code all over tha place.  This machine is necessary
-because POD requires that directives be preceded by
-blank lines, so reading line by line is necessary,
-and preserving state about what is seen is necesary.
-
 @return [[c:RDoc::TopLevel]] オブジェクトを返します。
 
 --- filter(comment) -> String

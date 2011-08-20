@@ -57,9 +57,6 @@ C 言語で記述された拡張ライブラリなどを解析するのに使用します。
   .c ファイルに複数のクラス定義がある場合などのように、Init_xxx 関数の
   xxx の部分がクラス名と同一ではない場合に使用します。
 
-  This comment block is documentation for the given class. Use this
-  when the <tt>Init_xxx</tt> method is not named after the class.
-
 : Document-method: name
 
   記述する内容を name で指定した Ruby のメソッドのものに指定します。
