@@ -1,7 +1,7 @@
 require rdoc/markup/formatter
 require cgi
 
-rdoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
+RDoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
 サブライブラリです。
 
   require 'stringio'
@@ -22,7 +22,7 @@ rdoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
 
 = class RDoc::Markup::ToFlow < RDoc::Markup::Formatter
 
-rdoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
+RDoc 形式のドキュメントを表示する一段階前の構造化された状態にするための
 クラスです。
 
 == Class Methods

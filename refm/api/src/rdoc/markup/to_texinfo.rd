@@ -1,7 +1,7 @@
 require rdoc/markup
 require rdoc/markup/formatter
 
-rdoc 形式のドキュメントを TexInfo に整形するためのサブライブラリです。
+RDoc 形式のドキュメントを TexInfo に整形するためのサブライブラリです。
 
   require 'rdoc/markup/to_texinfo'
 
@@ -10,9 +10,13 @@ rdoc 形式のドキュメントを TexInfo に整形するためのサブライブラリです。
 
 変換した結果は文字列で取得できます。
 
+[注意] rdoc 2.5 で廃止されたため、1.9.2 から
+[[lib:rdoc/markup/to_texinfo]] は標準添付ライブラリに含まれなくなりまし
+た。
+
 = class RDoc::Markup::ToTexInfo < RDoc::Markup::Formatter
 
-rdoc 形式のドキュメントを TexInfo に整形するためのクラスです。
+RDoc 形式のドキュメントを TexInfo に整形するためのクラスです。
 
 == Class Methods
 

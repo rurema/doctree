@@ -1,11 +1,11 @@
 require rdoc/markup
 require rdoc/markup/formatter
 
-rdoc 形式のドキュメントの整形をテストするためのサブライブラリです。
+RDoc 形式のドキュメントの整形をテストするためのサブライブラリです。
 
 = class RDoc::Markup::ToTest < RDoc::Markup::Formatter
 
-rdoc 形式のドキュメントの整形をテストするためのクラスです。
+RDoc 形式のドキュメントの整形をテストするためのクラスです。
 
 == Class Methods
 

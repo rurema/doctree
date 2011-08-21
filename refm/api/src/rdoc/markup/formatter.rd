@@ -1,10 +1,10 @@
 require rdoc/markup
 
-rdoc 形式のドキュメントを整形するためのサブライブラリです。
+RDoc 形式のドキュメントを整形するためのサブライブラリです。
 
 = class RDoc::Markup::Formatter
 
-rdoc 形式のドキュメントを整形するための基本クラスです。
+RDoc 形式のドキュメントを整形するための基本クラスです。
 
 実際にドキュメントを整形するには、[[c:RDoc::Markup::ToHtml]] のような、
 継承したクラスで convert メソッドを実行してください。

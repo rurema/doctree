@@ -1,6 +1,6 @@
 require rdoc/markup/formatter
 
-rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
+RDoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
   require 'rdoc/markup/to_html'
 
@@ -11,7 +11,7 @@ rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
 = class RDoc::Markup::ToHtml < RDoc::Markup::Formatter
 
-rdoc 形式のドキュメントを HTML に整形するクラスです。
+RDoc 形式のドキュメントを HTML に整形するクラスです。
 
 == Class Methods
 

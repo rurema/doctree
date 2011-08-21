@@ -1,6 +1,6 @@
 require rdoc/markup/to_html
 
-rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
+RDoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
 Subclass of the RDoc::Markup::ToHtml class that supports looking up words in
 the AllReferences list. Those that are found (like AllReferences in this
@@ -15,7 +15,7 @@ comment) will be hyperlinked
 
 = class RDoc::Markup::ToHtmlCrossref < RDoc::Markup::ToHtml
 
-rdoc 形式のドキュメントを HTML に整形するクラスです。
+RDoc 形式のドキュメントを HTML に整形するクラスです。
 
 == Class Methods
 

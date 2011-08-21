@@ -1,6 +1,9 @@
+#@# 1.9 系の to_latex.rb については、../to_latex.rd をご覧ください。
+#@# 分岐しても共有できるドキュメントが少なかったため、ファイルを分けました。
+
 require cgi
 
-rdoc 形式のドキュメントを LaTeX に整形するためのサブライブラリです。
+RDoc 形式のドキュメントを LaTeX に整形するためのサブライブラリです。
 
 [[m:SM::SimpleMarkup#convert]] の引数に [[c:SM::ToLaTeX]] のインスタンス
 を渡して使用します。
@@ -16,7 +19,12 @@ rdoc 形式のドキュメントを LaTeX に整形するためのサブライブラリです。
 
 = class SM::ToLaTeX
 
-rdoc 形式のドキュメントを LaTeX 形式に整形するクラスです。
+RDoc 形式のドキュメントを LaTeX 形式に整形するクラスです。
+
+[注意] 1.9 系では、require 先やクラス名が以下のように変更になりました。
+
+ * require 先: rdoc/markup/to_latex
+ * クラス名: RDoc::Markup::ToLaTeX
 
 == Class Methods
 
@@ -28,3 +36,17 @@ rdoc 形式のドキュメントを LaTeX 形式に整形するクラスです。
 身を渡します。
 
 @see [[m:SM::SimpleMarkup#convert]]
+
+== Instance Methods
+
+--- add_tag(name, start, stop) -> ()
+
+name で登録された規則で取得された文字列を start と stop で囲むように指
+定します。
+
+@param name [[c:SM::ToLaTeX]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
+
+@param start 開始の記号を文字列で指定します。
+
+@param stop 終了の記号を文字列で指定します。

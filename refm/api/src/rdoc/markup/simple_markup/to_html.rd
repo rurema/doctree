@@ -1,6 +1,9 @@
+#@# 1.9 系の to_html.rb については、../to_html.rd をご覧ください。
+#@# 分岐しても共有できるドキュメントが少なかったため、ファイルを分けました。
+
 require cgi
 
-rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
+RDoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
 [[m:SM::SimpleMarkup#convert]] の引数に [[c:SM::ToHtml]] のインスタンス
 を渡して使用します。
@@ -16,7 +19,12 @@ rdoc 形式のドキュメントを HTML に整形するためのサブライブラリです。
 
 = class SM::ToHtml
 
-rdoc 形式のドキュメントを HTML に整形するクラスです。
+RDoc 形式のドキュメントを HTML に整形するクラスです。
+
+[注意] 1.9 系では、require 先やクラス名が以下のように変更になりました。
+
+ * require 先: rdoc/markup/to_html
+ * クラス名: RDoc::Markup::ToHtml
 
 == Class Methods
 
@@ -36,8 +44,8 @@ rdoc 形式のドキュメントを HTML に整形するクラスです。
 name で登録された規則で取得された文字列を start と stop で囲むように指
 定します。
 
-@param name [[c:RDoc::Markup::ToHtml]] などのフォーマッタに識別させる時
-            の名前を [[c:Symbol]] で指定します。
+@param name [[c:SM::ToHtml]] などのフォーマッタに識別させる時の名前を
+            [[c:Symbol]] で指定します。
 
 @param start 開始の記号を文字列で指定します。
 

@@ -1,4 +1,4 @@
-rdoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするサブライ
+RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするサブライ
 ブラリです。
 
 #@until 1.9.3
@@ -13,7 +13,7 @@ rdoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするサブライ
 
 = class RDoc::Markup::ToAnsi < RDoc::Markup::ToRdoc
 
-rdoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするクラスで
+RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするクラスで
 す。
 
 == Class Methods
