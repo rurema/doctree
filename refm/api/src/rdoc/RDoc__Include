@@ -1,0 +1,5 @@
+= class RDoc::Include < RDoc::CodeObject
+
+include されるファイルを表現します。
+
+ライブラリの内部で使用します。

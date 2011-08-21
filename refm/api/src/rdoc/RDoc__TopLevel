@@ -1,0 +1,80 @@
+= class RDoc::TopLevel < RDoc::Context
+
+A TopLevel context is a source file
+
+== Class Methods
+
+--- all_classes_and_modules
+
+#@todo
+
+--- find_class_named(name)
+
+#@todo
+
+--- new(file_name)
+
+#@todo
+
+--- reset
+
+#@todo
+
+== Instance Methods
+
+--- add_class_or_module(collection, class_type, name, superclass)
+
+Adding a class or module to a TopLevel is special, as we only
+want one copy of a particular top-level class. For example, if
+both file A and file B implement class C, we only want one ClassModule
+object for C. This code arranges to share classes and modules
+between files.
+
+--- find_class_or_module_named(symbol)
+
+#@todo
+
+--- find_local_symbol(symbol)
+
+#@todo
+
+--- find_module_named(name)
+
+Find a named module
+
+--- full_name
+
+#@todo
+
+--- file_stat
+
+#@todo
+
+--- file_stat=(val)
+
+#@todo
+
+--- file_relative_name
+
+#@todo
+
+--- file_relative_name=(val)
+
+#@todo
+
+--- file_absolute_name
+
+#@todo
+
+--- file_absolute_name=(val)
+
+#@todo
+
+--- diagram
+
+#@todo
+
+--- diagram=(val)
+
+#@todo
+

@@ -1,0 +1,115 @@
+= class RDoc::CodeObject
+
+RDoc のコードツリーを表現するクラスの基本クラスです。
+
+ライブラリの内部で使用します。
+
+We contain the common stuff for contexts (which are containers) and other
+elements (methods, attributes and so on)
+
+Here's the tree of the CodeObject subclasses:
+
+//emlist{
+ * RDoc::Context
+   * RDoc::TopLevel
+   * RDoc::ClassModule
+     * RDoc::AnonClass
+     * RDoc::NormalClass
+     * RDoc::NormalModule
+     * RDoc::SingleClass
+ * RDoc::AnyMethod
+   * RDoc::GhostMethod
+   * RDoc::MetaMethod
+ * RDoc::Alias
+ * RDoc::Attr
+ * RDoc::Constant
+ * RDoc::Require
+ * RDoc::Include
+//}
+
+== Class Methods
+
+--- attr_overridable(name, *aliases)
+
+There's a wee trick we pull. Comment blocks can have directives
+that override the stuff we extract during the parse. So, we have
+a special class method, attr_overridable, that lets code objects
+list those directives. Wehn a comment is assigned, we then extract
+out any matching directives and update our object
+
+--- new -> RDoc::CodeObject
+
+#@todo
+
+== Instance Methods
+
+--- comment=(comment)
+
+Update the comment, but don't overwrite a real comment with an
+empty one
+
+--- document_children=(val)
+
+#@todo
+
+--- document_self
+
+do we document ourselves?
+
+--- document_self=(val)
+
+#@todo
+
+--- remove_classes_and_modules
+
+Default callbacks to nothing, but this is overridden for classes
+and modules
+
+--- remove_methods_etc
+
+#@todo
+
+--- start_doc
+
+set and cleared by :startdoc: and :enddoc:, this is used to toggle
+the capturing of documentation
+
+--- stop_doc
+
+#@todo
+
+--- parent
+
+#@todo
+
+--- parent=(val)
+
+#@todo
+
+--- viewer
+
+We are the model of the code, but we know that at some point
+we will be worked on by viewers. By implementing the Viewable
+protocol, viewers can associated themselves with these objects.
+
+--- viewer=(val)
+
+We are the model of the code, but we know that at some point
+we will be worked on by viewers. By implementing the Viewable
+protocol, viewers can associated themselves with these objects.
+
+--- done_documenting
+
+are we done documenting (ie, did we come across a :enddoc:)?
+
+--- done_documenting=(val)
+
+are we done documenting (ie, did we come across a :enddoc:)?
+
+--- section
+
+Which section are we in
+
+--- section=(val)
+
+Which section are we in
