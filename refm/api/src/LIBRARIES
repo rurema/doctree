@@ -233,6 +233,10 @@ rational
 rbconfig
 #@since 1.8.1
 rdoc
+rdoc/code_objects
+#@since 1.9.2
+rdoc/code_object
+#@end
 rdoc/options
 rdoc/rdoc
 #@since 1.9.1
