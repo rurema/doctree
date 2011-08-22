@@ -42,7 +42,7 @@ scan メソッドは引数を受け取りません。処理の後は必ず
   require "rdoc/parser"
   
   class RDoc::Parser::Xyz < RDoc::Parser
-    parse_files_matching /\.xyz$/ # <<<<
+    parse_files_matching /\.xyz$/
   
     def initialize(file_name, body, options)
       ...
@@ -93,6 +93,11 @@ scan メソッドは引数を受け取りません。処理の後は必ず
 ソースコードを解析するパーサを生成するためのファクトリクラスです。
 
 新しいパーサを作成する場合には extend して使用します。
+
+[注意] 1.9 系では、require 先やクラス名が以下のように変更になりました。
+
+ * require 先: rdoc/parser
+ * クラス名: RDoc::Parser
 #@end
 
 == class Methods
