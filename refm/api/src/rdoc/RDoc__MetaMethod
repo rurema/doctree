@@ -1,5 +1,5 @@
 = class RDoc::MetaMethod < RDoc::AnyMethod
 
-MetaMethod represents a meta-programmed method
+動的に定義されたメソッドを表現するクラスです。
 
 ライブラリの内部で使用します。

@@ -235,7 +235,22 @@ rbconfig
 rdoc
 rdoc/code_objects
 #@since 1.9.2
+rdoc/alias
+rdoc/anon_class
+rdoc/any_method
+rdoc/attr
+rdoc/class_module
 rdoc/code_object
+rdoc/constant
+rdoc/context
+rdoc/ghost_method
+rdoc/include
+rdoc/meta_method
+rdoc/normal_class
+rdoc/normal_module
+rdoc/require
+rdoc/single_class
+rdoc/top_level
 #@end
 rdoc/options
 rdoc/rdoc

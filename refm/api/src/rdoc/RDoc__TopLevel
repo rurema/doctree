@@ -1,24 +1,27 @@
 = class RDoc::TopLevel < RDoc::Context
 
-A TopLevel context is a source file
+最上位のコンテキスト(ソースファイル)を表現するクラスです。
 
 == Class Methods
 
 --- all_classes_and_modules
 
-#@todo
+Returns all classes and modules discovered by RDoc
 
 --- find_class_named(name)
 
-#@todo
+Finds the class with +name+ in all discovered classes
 
---- new(file_name)
+--- new(file_name) -> RDoc::TopLevel
 
-#@todo
+自身を初期化します。
 
---- reset
+@param file_name ファイル名を文字列で指定します。
 
-#@todo
+--- reset -> ()
+
+RDoc が収集した [[c:RDoc::TopLevel]] の情報(クラス、モジュール、ファイ
+ル)をクリアします。
 
 == Instance Methods
 
@@ -36,27 +39,36 @@ between files.
 
 --- find_local_symbol(symbol)
 
-#@todo
+Finds a class or module named +symbol+
 
 --- find_module_named(name)
 
-Find a named module
+Finds a module or class with +name+
 
---- full_name
+#@since 1.9.2
+--- full_name -> String
 
-#@todo
+自身が管理するファイルの名前を返します。
+#@else
+--- full_name -> nil
 
---- file_stat
+常に nil を返します。
+#@end
 
-#@todo
+--- file_stat -> File::Stat
+
+自身が管理するファイルに関する [[c:File::Stat]] オブジェクトを返します。
 
 --- file_stat=(val)
 
-#@todo
+自身が管理するファイルに関する [[c:File::Stat]] オブジェクトを設定しま
+す。
+
+@param val [[c:File::Stat]] オブジェクトを指定します。
 
 --- file_relative_name
 
-#@todo
+Relative name of this file
 
 --- file_relative_name=(val)
 
@@ -64,17 +76,8 @@ Find a named module
 
 --- file_absolute_name
 
-#@todo
+Absolute name of this file
 
 --- file_absolute_name=(val)
 
 #@todo
-
---- diagram
-
-#@todo
-
---- diagram=(val)
-
-#@todo
-

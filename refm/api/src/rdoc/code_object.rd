@@ -1,3 +1,3 @@
-RDoc のコードツリーを表現するクラスの基本クラスを定義するサブライブラリです。
+[[c:RDoc::CodeObject]] を定義するサブライブラリです。
 
 #@include(RDoc__CodeObject)
