@@ -1,5 +1,7 @@
-= class RDoc::ClassModule < RDoc::Context
+= class RDoc::NormalClass < RDoc::ClassModule
 
-クラスを表現するための基本クラスです。
+クラスを表現するためのクラスです。
+
+特異クラスや匿名クラスは含まれません。
 
 ライブラリの内部で使用します。

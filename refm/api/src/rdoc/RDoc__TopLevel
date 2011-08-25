@@ -4,13 +4,16 @@
 
 == Class Methods
 
---- all_classes_and_modules
+--- all_classes_and_modules -> [RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule]
 
-Returns all classes and modules discovered by RDoc
+RDoc が収集したクラス、モジュールをを配列で返します。
 
---- find_class_named(name)
+--- find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
 
-Finds the class with +name+ in all discovered classes
+RDoc が収集したクラスの内、name で指定した名前のクラスを返します。見つ
+からなかった場合は nil を返します。
+
+@param name クラス名を文字列で指定します。
 
 --- new(file_name) -> RDoc::TopLevel
 
@@ -25,25 +28,45 @@ RDoc が収集した [[c:RDoc::TopLevel]] の情報(クラス、モジュール、ファイ
 
 == Instance Methods
 
---- add_class_or_module(collection, class_type, name, superclass)
+--- add_class_or_module(collection, class_type, name, superclass) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
 
-Adding a class or module to a TopLevel is special, as we only
-want one copy of a particular top-level class. For example, if
-both file A and file B implement class C, we only want one ClassModule
-object for C. This code arranges to share classes and modules
-between files.
+collection に name で指定したクラス、モジュールを追加します。
 
---- find_class_or_module_named(symbol)
+@param collection クラス、モジュールを追加する先を [[c:Hash]] オブジェ
+                  クトで指定します。
 
-#@todo
+@param class_type 追加するクラス、モジュールを [[c:RDoc::NormalClass]]、
+                  [[c:RDoc::SingleClass]]、[[c:RDoc::NormalModule]] オ
+                  ブジェクトのいずれかで指定します。
 
---- find_local_symbol(symbol)
+@param name クラス名を文字列で指定します。
 
-Finds a class or module named +symbol+
+@param superclass 追加するクラスの親クラスを [[c:RDoc::NormalClass]] オ
+                  ブジェクトで指定します。
 
---- find_module_named(name)
+既に登録済みであった場合は、引数で指定した情報で内容を更新します。ただ
+し、[[m:RDoc::CodeObject#done_documenting]] が true を返す場合、何も行
+われません。
 
-Finds a module or class with +name+
+#@until 1.9.2
+--- find_class_or_module_named(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule
+
+RDoc が収集したクラス、モジュールの内、name で指定した名前のものを返し
+ます。見つからなかった場合は nil を返します。
+
+@param name クラス名かモジュール名を文字列で指定します。
+#@end
+
+--- find_local_symbol(name) -> RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule | RDoc::AnyMethod | RDoc::Alias | RDoc::Attr | RDoc::Constant
+
+クラス、モジュール、メソッド、定数、属性、alias、ファイルから name で指定したものを返します。見つからなかった場合は nil を返します。
+
+--- find_module_named(name) -> RDoc::NormalModule
+
+RDoc が収集したクラスの内、name で指定した名前のモジュールを返します。
+見つからなかった場合は nil を返します。
+
+@param name モジュール名を文字列で指定します。
 
 #@since 1.9.2
 --- full_name -> String
@@ -66,18 +89,24 @@ Finds a module or class with +name+
 
 @param val [[c:File::Stat]] オブジェクトを指定します。
 
---- file_relative_name
+--- file_relative_name -> String
 
-Relative name of this file
+自身が管理するファイルに関する相対パスを文字列で返します。
 
 --- file_relative_name=(val)
 
-#@todo
+自身が管理するファイルに関する相対パスを文字列で設定します。
 
---- file_absolute_name
+@param val パスを文字列で指定します。
 
-Absolute name of this file
+--- file_absolute_name -> String
+
+自身が管理するファイルに関する絶対パスを文字列で返します。
 
 --- file_absolute_name=(val)
+
+自身が管理するファイルに関する絶対パスを文字列で設定します。
+
+@param val パスを文字列で指定します。
 
 #@todo
