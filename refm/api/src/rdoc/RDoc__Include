@@ -1,5 +1,8 @@
 = class RDoc::Include < RDoc::CodeObject
 
-include されるファイルを表現します。
+includeされるファイルを表現します。
+
+#@# 「include される」のように間にスペースを入れると include 命令に該当して
+#@# しまうので故意にスペースを削除しています。
 
 ライブラリの内部で使用します。

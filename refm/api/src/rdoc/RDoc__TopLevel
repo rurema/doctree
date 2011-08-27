@@ -6,7 +6,7 @@
 
 --- all_classes_and_modules -> [RDoc::NormalClass | RDoc::SingleClass | RDoc::NormalModule]
 
-RDoc が収集したクラス、モジュールをを配列で返します。
+RDoc が収集したクラス、モジュールを配列で返します。
 
 --- find_class_named(name) -> RDoc::NormalClass | RDoc::SingleClass | nil
 
