@@ -1701,13 +1701,20 @@ arg に to_ary, to_a のいずれのメソッドもない場合は
 @raise TypeError メソッド to_i を持たないオブジェクトを引数に指定したか、
                  to_i が整数を返さなかった場合に発生します。
 #@end
+#@since 1.9.1
+@raise TypeError 引数に nil を指定した場合に発生します。
+#@end
 
 #@since 1.8.0
     p Integer(4)          #=> 4
     p Integer(4_000)      #=> 4000
     p Integer(9.88)       #=> 9
     
+#@since 1.9.1
+    p Integer(nil)        # can't convert nil into Integer (TypeError)
+#@else
     p Integer(nil)        #=> 0
+#@end
     p Integer(Object.new) # cannot convert Object into Integer (TypeError)
     
     p Integer("10")       #=> 10
