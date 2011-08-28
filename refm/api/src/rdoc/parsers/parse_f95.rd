@@ -26,57 +26,59 @@ Fortran95 のソースコードを解析するためのサブライブラリです。
 [[lib:rdoc/parsers/parse_f95]] は以下を解析する事ができます。
 #@end
 
- * main program
+ * main プログラム
  * module
  * subroutine
  * function
  * 派生型
  * public 変数
  * public 定数
- * defined operators
- * defined assignments
+ * ユーザ定義単項演算子
+ * ユーザー定義代入
 
-These components are described in items of RDoc documentation, as follows.
+Ruby と比べてみると以下のようになります。
 
-Files :: Files (same as Ruby)
-Classes :: Modules
-Methods :: Subroutines, functions, variables, constants, derived-types, defined operators, defined assignments
-Required files :: Files in which imported modules, external subroutines and external functions are defined.
-Included Modules :: List of imported modules
-Attributes :: List of derived-types, List of imported modules all of whose components are published again
+: ファイル
 
-Components listed in 'Methods' (subroutines, functions, ...)
-defined in modules are described in the item of 'Classes'.
-On the other hand, components defined in main programs or
-as external procedures are described in the item of 'Files'.
+  ファイル(Ruby と同じ)
 
-=== Components parsed by default
+: クラス
 
-By default, documentation on public components (subroutines, functions,
-variables, constants, derived-types, defined operators,
-defined assignments) are generated.
-With "--all" option, documentation on all components
-are generated (almost same as the Ruby parser).
+  module
 
-=== Information parsed automatically
+: メソッド
 
-The following information is automatically parsed.
+  subroutine, function, 変数, 定数, 派生型, ユーザ定義単項演算子, ユーザー定義代入
 
- * Types of arguments
- * Types of variables and constants
- * Types of variables in the derived types, and initial values
- * NAMELISTs and types of variables in them, and initial values
+: require されたファイル
 
-Aliases by interface statement are described in the item of 'Methods'.
+  use 文で読み込まれた module, external 宣言された subroutine、function
 
-Components which are imported from other modules and published again
-are described in the item of 'Methods'.
+: include されたモジュール
+
+  use 文で読み込まれた module
+
+: 属性
+
+  派生型や use 文で読み込まれた module
+
+=== 解析可能な情報
+
+以下の情報は自動的に解析されます。
+
+ * 引数の型
+ * 変数、定数の型
+ * 派生型の型や初期値
+ * NAMELIST 中の変数の型や初期値
+
+interface 文の中で定義した alias は上記の「メソッド」と同様に処理されます。
 
 === コメントのフォーマット
 
 基本的な規則は Ruby のソースコード中にドキュメントを記述する場合と同じ
 です。ただし、Fortran95 では、コメントを記述するためには「#」ではなく、
-「!」を行頭に記述しなければなりません。
+「!」を行頭に記述しなければなりません。コメントは文の後(もしくは下)に記
+述します。
 
 字下げは任意の位置に行う事ができます。
 
@@ -95,9 +97,9 @@ are described in the item of 'Methods'.
 
        private
 
-       logical            :: a     ! a private variable
-       real, public       :: b     ! a public variable
-       integer, parameter :: c = 0 ! a public constant
+       logical            :: a     ! private 変数
+       real, public       :: b     ! public 変数
+       integer, parameter :: c = 0 ! public 定数
 
        public :: c
        public :: MULTI_ARRAY
@@ -107,29 +109,27 @@ are described in the item of 'Methods'.
          !
          ! 派生型に対するコメントを記述します。
          !
-         real, pointer :: var(:) =>null() ! Comments block for the variables.
+         real, pointer :: var(:) =>null() ! 変数に対するコメント
          integer       :: num = 0
        end type MULTI_ARRAY
 
      contains
 
-       subroutine hoge( in,   &   ! Comment blocks between continuation lines are ignored.
+       subroutine hoge( in,   &   ! 継続する行に対するコメントは無視されます。
            &            out )
          !
-         ! Comment blocks for the subroutines or functions
+         ! subroutine や function に対するコメントを記述します。
          !
-         character(*),intent(in):: in ! Comment blocks for the arguments.
+         character(*),intent(in):: in ! 引数に対するコメントを記述します。
          character(*),intent(out),allocatable,target  :: in
-                                      ! Comment blocks can be
-                                      ! written under Fortran statements.
 
-         character(32) :: file ! This comment parsed as a variable in below NAMELIST.
+         character(32) :: file ! 下記の NAMELIST 中の変数に対するコメントとして処理されます。
          integer       :: id
 
          namelist /varinfo_nml/ file, id
                  !
-                 ! Comment blocks for the NAMELISTs.
-                 ! Information about variables are described above.
+                 ! NAMELIST に対するコメントを記述します。
+                 ! 上記の変数に対するコメントを記述できます。
                  !
 
        ....
@@ -138,26 +138,21 @@ are described in the item of 'Methods'.
 
        integer function foo( in )
          !
-         ! This part is considered as comment block.
+         ! この行は処理されますが、
 
-         ! Comment blocks under blank lines are ignored.
+         ! この行のような、空行の下に記述したコメントは無視されます。
          !
-         integer, intent(in):: inA ! This part is considered as comment block.
+         integer, intent(in):: inA ! この行は処理されますが、
 
-                                   ! This part is ignored.
+                                   ! この行は無視されます。
 
        end function foo
 
        subroutine hide( in,   &
          &              out )      !:nodoc:
          !
-         ! If "!:nodoc:" is described at end-of-line in subroutine
-         ! statement as above, the subroutine is ignored.
-         ! This assignment can be used to modules, subroutines,
-         ! functions, variables, constants, derived-types,
-         ! defined operators, defined assignments,
-         ! list of imported modules ("use" statement).
-         !
+         ! 上記のように subroutine の最後の行に "!:nodoc:" を記述した場
+         ! 合は処理されません。
 
        ....
 
