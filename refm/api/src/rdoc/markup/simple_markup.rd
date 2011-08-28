@@ -35,12 +35,14 @@ FAQ などを想定したプレインテキストから様々なフォーマットへの変換を行う
 #@since 1.9.1
  * HTML 形式: [[c:RDoc::Markup::ToHtml]]
  * HTML 形式: [[c:RDoc::Markup::ToHtmlCrossref]]
+#@until 1.9.2
  * LaTex 形式: [[c:RDoc::Markup::ToLaTeX]]
  * TexInfo 形式: [[c:RDoc::Markup::ToTexInfo]]
 
 また、それ以外にコマンドライン表示などで特別なフォーマットにしたい場合
 に、[[c:RDoc::Markup::ToFlow]] を使用できます。(ri コマンドで使われてい
 ます)
+#@end
 #@else
  * HTML 形式: [[c:SM::ToHtml]]
  * LaTex 形式: [[c:SM::ToLaTeX]]

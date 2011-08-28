@@ -259,10 +259,10 @@ rdoc/rdoc
 rdoc/known_classes
 rdoc/markup
 rdoc/markup/formatter
-rdoc/markup/to_flow
 rdoc/markup/to_html
 rdoc/markup/to_html_crossref
 #@until 1.9.2
+rdoc/markup/to_flow
 rdoc/markup/to_latex
 rdoc/markup/to_test
 rdoc/markup/to_texinfo
