@@ -1461,10 +1461,17 @@ nil を返します。
 
 要素の重複判定は、[[m:Object#eql?]] により行われます。
 
-    p [1, 1, 1].uniq         #=> [1]
-    p [1, 4, 1].uniq         #=> [1, 4]
-    p [1, 3, 2, 2, 3].uniq   #=> [1, 3, 2]
+    p [1, 1, 1].uniq         # => [1]
+    p [1, 4, 1].uniq         # => [1, 4]
+    p [1, 3, 2, 2, 3].uniq   # => [1, 3, 2]
 
+#@since 1.9.2
+ブロックが指定された場合、ブロックが返した値が重複した要素を取り除いた
+配列を返します。
+
+    p [1, 3, 2, "2", "3"].uniq                # => [1, 3, 2, "2", "3"]
+    p [1, 3, 2, "2", "3"].uniq { |n| n.to_s } # => [1, 3, 2]
+#@end
 
 #@since 1.8.0
 --- unshift(*obj)        -> self
@@ -1654,6 +1661,10 @@ srand()が有効です。
     a.combination(0).to_a  #=> [[]]: one combination of length 0
     a.combination(5).to_a  #=> []  : no combinations of length 5
 
+#@since 1.9.2
+@see [[m:Array#combination]]
+#@end
+
 --- permutation(n) { |p| block }       -> Array
 #@since 1.8.8
 --- permutation(n)                     -> Enumerator
@@ -1683,6 +1694,9 @@ srand()が有効です。
 
 
 --- product(*lists)    -> Array
+#@since 1.9.2
+--- product(*lists) { |e| ... }   -> self
+#@end
 
 レシーバの配列と引数で与えられた配列（複数可）のそれぞれから要素を1
 個ずつとって配列とし，それらのすべての配列を要素とする配列を返します。
@@ -1702,22 +1716,30 @@ srand()が有効です。
    [1,2].product()            # => [[1],[2]]
    [1,2].product([])          # => []
 
+#@since 1.9.2
+ブロックが指定された場合、作成した配列の各要素を引数としてブロックを実
+行して self を返します。
+
+   a = []
+   [1,2,3].product([4,5]) {|e| a << e} # => [1,2,3]
+   a # => [[1,4],[1,5],[2,4],[2,5],[3,4],[3,5]]
+#@end
+
 #@end
 
 #@since 1.9.2
---- repeated_combination(n) { |c| block } -> Array
---- repeated_combination(n)               -> Enumerator
-#@todo
+--- repeated_combination(n) { |c| ... } -> Array
+--- repeated_combination(n)             -> Enumerator
 
-When invoked with a block, yields all repeated combinations of
-length <i>n</i> of elements from <i>ary</i> and then returns
-<i>ary</i> itself.
-The implementation makes no guarantees about the order in which
-the repeated combinations are yielded.
+サイズ n の重複組み合わせをすべて生成し、それを引数としてブロックを実行
+します。
 
-When invoked without a block, returns an enumerator object instead.
+得られる組み合わせの順序は保証されません。ブロックなしで呼び出されると、
+組み合わせを生成する Enumerator オブジェクトを返します。
 
-Examples:
+@param n 生成される配列のサイズ。
+
+例:
 
     a = [1, 2, 3]
     a.repeated_combination(1).to_a  #=> [[1], [2], [3]]
@@ -1730,18 +1752,17 @@ Examples:
     a.repeated_combination(0).to_a  #=> [[]] # one combination of length 0
 
 @see [[m:Array#repeated_permutation]], [[m:Array#combination]]
---- repeated_permutation(n) { |p| block } -> Array
---- repeated_permutation(n)               -> Enumerator
-#@todo
+--- repeated_permutation(n) { |p| ... } -> Array
+--- repeated_permutation(n)             -> Enumerator
 
-When invoked with a block, yield all repeated permutations of length
-<i>n</i> of the elements of <i>ary</i>, then return the array itself.
-The implementation makes no guarantees about the order in which
-the repeated permutations are yielded.
+サイズ n の重複順列をすべて生成し，それを引数としてブロックを実行します。
 
-When invoked without a block, return an enumerator object instead.
+得られる順列の順序は保証されません。ブロックなしで呼び出されると， 順列
+を生成する Enumerator オブジェクトを返します。
 
-Examples:
+@param n 生成する配列のサイズ。
+
+例:
 
     a = [1, 2]
     a.repeated_permutation(1).to_a  #=> [[1], [2]]
@@ -1751,46 +1772,70 @@ Examples:
     a.repeated_permutation(0).to_a  #=> [[]] # one permutation of length 0
 
 @see [[m:Array#repeated_combination]], [[m:Array#permutation]]
---- keep_if {|item| block } -> self
+--- keep_if {|item| ... } -> self
 --- keep_if -> Enumerator
-#@todo
 
 ブロックが false を返した要素を削除します。
 
    a = %w{ a b c d e f }
-   a.keep_if {|v| v =~ /[aeiou]/}   #=> ["a", "e"]
+   a.keep_if {|v| v =~ /[aeiou]/}   # => ["a", "e"]
+   a # => ["a", "e"]
+
+[[m:Array#select!]] と同様に自身を上書きしますが、削除する要素がなかっ
+た場合には修正を行いません。
+
+   a = %w{ a b c d e f }
+   a.keep_if {|v| v =~ /[a-z]/ }   # => ["a", "b", "c", "d", "e", "f"]
+   a # => ["a", "b", "c", "d", "e", "f"]
+
+ブロックが与えられなかった場合は、自身と keep_if から生成した
+[[c:Enumerator]] オブジェクトを返します。
 
 @see [[m:Array#select!]]
 --- select! {|item| block } -> self | nil
 --- select! -> Enumerator
 #@todo
 
-Invokes the block passing in successive elements from
-<i>array</i>, deleting elements for which the block returns a
-false value.  but returns <code>nil</code> if no changes were
-made.  Also see <code>Array#keep_if</code>
+ブロックが false を返した要素を自身から削除します。変更がなかった場合に
+は nil を返します。
+
+   a = %w{ a b c d e f }
+   a.select! {|v| v =~ /[a-z]/ }   # => nil
+   a # => ["a", "b", "c", "d", "e", "f"]
+
+ブロックが与えられなかった場合は、自身と select! から生成した
+[[c:Enumerator]] オブジェクトを返します。
 
 @see [[m:Array#keep_if]]
---- rotate(cnt=1) -> Array
-#@todo
+--- rotate(cnt = 1) -> Array
 
-Returns new array by rotating _self_, whose first element is the
-element at +cnt+ in _self_.  If +cnt+ is negative then it rotates
-in counter direction.
+cnt で指定したインデックスの要素が先頭になる配列を新しく作成します。
+cnt より前の要素は末尾に移動します。cnt に負の数を指定した場合、逆の操
+作を行います。
+
+@param cnt 先頭にする要素のインデックスを指定します。指定しなかった場合
+           は 1 になります。
+
+例:
 
    a = [ "a", "b", "c", "d" ]
-   a.rotate         #=> ["b", "c", "d", "a"]
-   a                #=> ["a", "b", "c", "d"]
-   a.rotate(2)      #=> ["c", "d", "a", "b"]
-   a.rotate(-3)     #=> ["b", "c", "d", "a"]
+   a.rotate         # => ["b", "c", "d", "a"]
+   a                # => ["a", "b", "c", "d"]
+   a.rotate(2)      # => ["c", "d", "a", "b"]
+   a.rotate(-1)     # => ["d", "a", "b", "c"]
+   a.rotate(-3)     # => ["b", "c", "d", "a"]
 
 @see [[m:Array#rotate!]]
---- rotate!(cnt=1) -> self
-#@todo
+--- rotate!(cnt = 1) -> self
 
-Rotates _self_ in place so that the element at +cnt+ comes first,
-and returns _self_.  If +cnt+ is negative then it rotates in
-counter direction.
+cnt で指定したインデックスの要素が先頭になるように自身の順番を変更しま
+す。cnt より前の要素は末尾に移動します。cnt に負の数を指定した場合、逆
+の操作を行います。
+
+@param cnt 先頭にする要素のインデックスを指定します。指定しなかった場合
+           は 1 になります。
+
+例:
 
    a = [ "a", "b", "c", "d" ]
    a.rotate!        #=> ["b", "c", "d", "a"]
