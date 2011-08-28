@@ -1237,13 +1237,24 @@ key, value のペアについてブロックを評価し、真となるペアだけを含む
 
 #@end
 
+#@since 1.9.1
 --- to_s     -> String
+#@end
 --- inspect  -> String
 
-ハッシュの内容を inspect によって文字列化して返します。
+ハッシュの内容を人間に読みやすい文字列にして返します。
 
     h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
-    h.to_s   #=> "{\"a\"=>100, \"c\"=>300, \"d\"=>400}"
+    h.inspect   # => "{\"a\"=>100, \"c\"=>300, \"d\"=>400}"
+
+#@until 1.9.1
+--- to_s     -> String
+
+ハッシュの内容を self.to_a.to_s で文字列化して返します。
+
+    h = { "c" => 300, "a" => 100, "d" => 400, "c" => 300  }
+    h.to_s   # => "a100c300d400"
+#@end
 
 --- sort              -> Array
 --- sort{|a, b| ... } -> Array
@@ -1261,11 +1272,12 @@ key, value のペアについてブロックを評価し、真となるペアだけを含む
 --- select! {|key, value| ... } -> self | nil
 --- keep_if -> Enumerator
 --- select! -> Enumerator
-#@todo
 
-キーと値を引数としてブロックを評価した結果が真であ
-るような要素を self に残します。
+キーと値を引数としてブロックを評価した結果が真であるような要素を self
+に残します。変更がなかった場合には nil を返します。
 
-@see [[m:Hash#select]]
-@see [[m:Hash#delete_if]],[[m:Hash#reject!]]
+ブロックが与えられなかった場合は、自身と keep_if から生成した
+[[c:Enumerator]] オブジェクトを返します。
+
+@see [[m:Hash#select]], [[m:Hash#delete_if]],[[m:Hash#reject!]]
 #@end
