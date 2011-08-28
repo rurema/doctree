@@ -553,6 +553,29 @@ self が regexp にマッチしない場合は nil を返します。
    p "def getcnt(line)"[ /def\s+(\w+)/, 1 ]   # => "getcnt"
 #@end
 
+#@since 1.9.2
+--- [](regexp, name) -> String
+--- slice(regexp, name) -> String
+
+正規表現 regexp の name で指定した名前付きキャプチャにマッチする最初の
+部分文字列を返します。正規表現が self にマッチしなかった場合は nil を返
+します。
+
+@param regexp 正規表現を指定します。
+@param name 取得したい部分文字列のパターンを示す正規表現レジスタを示す名前
+
+@raise IndexError name に対応する括弧がない場合に発生します。
+
+例:
+
+  s = "FooBar"
+  s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/]        # => "FooBar"
+  s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "foo"] # => "Foo"
+  s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "bar"] # => "Bar"
+  s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "baz"] # => IndexError
+
+#@end
+
 --- [](range) -> String
 --- slice(range) -> String
 
@@ -736,6 +759,29 @@ nth が 0 の場合は、マッチした部分文字列全体を val で置き換えます。
     buf = "def exec(cmd)"
     buf[/def\s+(\w+)/, 1] = "preprocess"
     p buf    # => "def preprocess(cmd)"
+
+#@since 1.9.2
+--- []=(regexp, name, val)
+
+正規表現 regexp の name で指定した名前付きキャプチャにマッチする最初の
+部分文字列を文字列 val で置き換えます。
+
+@param regexp    置き換えたい部分文字列のパターンを示す正規表現
+@param name      置き換えたい部分文字列のパターンを示す正規表現レジスタを示す名前
+@param val       指定範囲の部分文字列と置き換えたい文字列
+
+@return val を返します。
+
+@raise IndexError name で指定した名前付きキャプチャが存在しない場合に発
+                  生します。
+
+例:
+
+  s = "FooBar"
+  s[/(?<foo>[A-Z]..)(?<bar>[A-Z]..)/, "foo"] = "Baz"
+  p s # => "BazBar"
+
+#@end
 
 --- []=(regexp, val)
 
