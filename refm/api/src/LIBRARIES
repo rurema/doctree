@@ -250,6 +250,7 @@ rdoc/normal_class
 rdoc/normal_module
 rdoc/require
 rdoc/single_class
+rdoc/text
 rdoc/top_level
 #@end
 rdoc/options
