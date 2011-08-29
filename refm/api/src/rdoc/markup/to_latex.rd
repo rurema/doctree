@@ -16,27 +16,5 @@ RDoc 形式のドキュメントを LaTeX 形式に整形するクラスです。
 
 自身を初期化します。
 
-[注意] 1.9.1 では [[m:RDoc::Markup::ToLaTeX#initialize]] に不具合がある
-ため、正しく変換が行えません。
-
-#@# 要望がある場合、以下を追記する。
-#@#
-#@# どうしても使用したい場合、以下のように
-#@# [[m:RDoc::Markup::ToLaTeX#initialize]] を自己責任で上書きしてくださ
-#@# い。
-#@#
-#@#   require 'rdoc/markup/to_latex'
-#@#
-#@#   class RDoc::Markup::ToLaTeX < RDoc::Markup::Formatter
-#@#     def initialize
-#@#       super
-#@#       init_tags
-#@#       @list_depth = 0
-#@#       @prev_list_types = []
-#@#     end
-#@#   end
-#@#
-#@#   h = RDoc::Markup::ToLaTeX.new
-#@#   puts h.convert(input_string)
-#@#
-#@# 変換した結果は文字列で取得できます。
+[注意] 1.9.1 では [[m:RDoc::Markup::ToLaTeX.new]] に不具合があるため、
+正しく変換が行えません。
