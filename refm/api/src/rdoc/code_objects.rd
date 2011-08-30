@@ -25,6 +25,7 @@ Ruby のソースコード中にあるクラス、モジュール、メソッドなどの構成要素を
 #@until 1.9.2
 #@include(RDoc__CodeObject)
 #@include(RDoc__Context)
+#@include(RDoc__Context__Section)
 #@include(RDoc__TopLevel)
 #@include(RDoc__ClassModule)
 #@include(RDoc__AnonClass)
