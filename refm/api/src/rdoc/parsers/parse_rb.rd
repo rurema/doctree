@@ -33,29 +33,13 @@ Ruby のソースコードを解析するためのサブライブラリです。
 
 ライブラリの内部で使用します。
 
+#@until 1.9.1
 = reopen RDoc
 
 == Constants
 
---- GENERAL_MODIFIERS  -> [String]
-
-ライブラリの内部で使用します。
-
---- CLASS_MODIFIERS    -> [String]
-
-ライブラリの内部で使用します。
-
---- ATTR_MODIFIERS     -> [String]
-
-ライブラリの内部で使用します。
-
---- CONSTANT_MODIFIERS -> [String]
-
-ライブラリの内部で使用します。
-
---- METHOD_MODIFIERS   -> [String]
-
-ライブラリの内部で使用します。
+#@include(../RDoc__constants)
+#@end
 
 #@since 1.9.1
 = class RDoc::Parser::Ruby < RDoc::Parser

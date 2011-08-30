@@ -1,0 +1,19 @@
+--- GENERAL_MODIFIERS  -> [String]
+
+ライブラリの内部で使用します。
+
+--- CLASS_MODIFIERS    -> [String]
+
+ライブラリの内部で使用します。
+
+--- ATTR_MODIFIERS     -> [String]
+
+ライブラリの内部で使用します。
+
+--- CONSTANT_MODIFIERS -> [String]
+
+ライブラリの内部で使用します。
+
+--- METHOD_MODIFIERS   -> [String]
+
+ライブラリの内部で使用します。

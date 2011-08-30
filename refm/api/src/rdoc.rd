@@ -674,52 +674,7 @@ label[url] の形式でもハイパーリンクが張れます。この場合は label が表示
 
 #@# Further directives can be found in RDoc::Parser::Ruby and RDoc::Parser::C.
 
-= module RDoc
-
-rdoc ドキュメントを扱うためのモジュールです。
-
-= class RDoc::RDoc
-
-rdoc ドキュメントの作成を行うクラスです。
-
-以下のようにして、rdoc コマンドを実行するのと同様に実行します。
-
-   require 'rdoc/rdoc'
-   rdoc = RDoc::RDoc.new
-   rdoc.document(args)
-
-args には rdoc コマンドに渡すのと同様の引数を文字列の配列で指定します。
-
-rdoc コマンドと同様に変換結果はファイルに出力されるため、テキストを
-HTML に変換する部分をライブラリとして使用したい場合、
-[[lib:rdoc/markup/simple_markup]] を参照してください。
-
-#@todo 1.9 で分岐する。
-
-== Instance Methods
-
---- document(argv) -> nil
-
-argv で与えられた引数を元にドキュメントをフォーマットして指定されたディ
-レクトリに出力します。
-
-@param argv コマンドラインで rdoc コマンドに指定するのと同じ引数を文字
-            列の配列で指定します。
-
 #@since 1.9.1
-@raise RDoc::Error ドキュメントの処理中にエラーがあった場合に発生します。
-#@else
-@raise RDoc::RDocError ドキュメントの処理中にエラーがあった場合に発生します。
+#@include(rdoc/RDoc)
+#@include(rdoc/RDoc__Error)
 #@end
-
-指定できるオプションについては、[[ref:lib:rdoc#usage]] を参照してくださ
-い。出力ディレクトリが指定されなかった場合はカレントディレクトリ の
-doc 以下に出力します。
-
-#@since 1.9.1
-= class RDoc::Error < Exception
-#@else
-= class RDoc::RDocError < Exception
-#@end
-
-ドキュメントの処理中にエラーがあった場合に発生します。

@@ -26,14 +26,8 @@ require rdoc/diagram
 require find
 require time
 
-= reopen RDoc
-
-== Constants
-
---- DOT_DOC_FILENAME -> ".document"
-
-rdoc コマンドが処理するファイル名の一覧が書かれたファイルの名前を返します。
-
+#@include(RDoc__RDoc)
 #@until 1.9.1
 #@include(RDoc__Stats)
+#@include(RDoc)
 #@end
