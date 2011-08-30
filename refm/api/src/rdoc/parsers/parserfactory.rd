@@ -1,6 +1,6 @@
 #@since 1.9.1
 require rdoc
-#@# require rdoc/code_objects
+require rdoc/code_objects
 #@# require rdoc/markup/preprocess
 require rdoc/stats
 require rdoc/parser/simple

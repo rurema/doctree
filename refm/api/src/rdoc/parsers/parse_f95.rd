@@ -1,7 +1,7 @@
 #@since 1.9.1
 require rdoc/parser
 #@else
-#@# require rdoc/code_objects
+require rdoc/code_objects
 #@end
 
 Fortran95 のソースコードを解析するためのサブライブラリです。

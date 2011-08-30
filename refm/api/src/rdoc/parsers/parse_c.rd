@@ -3,7 +3,7 @@ require rdoc/parser
 require rdoc/parser/ruby
 require rdoc/known_classes
 #@else
-#@# require rdoc/code_objects
+require rdoc/code_objects
 require rdoc/parsers/parserfactory
 require rdoc/options
 require rdoc/rdoc

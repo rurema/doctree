@@ -1,13 +1,12 @@
 = class RDoc::CodeObject
 
+#@since 1.9.2
+include RDoc::Text
+#@end
+
 RDoc のコードツリーを表現するクラスの基本クラスです。
 
-ライブラリの内部で使用します。
-
-We contain the common stuff for contexts (which are containers) and other
-elements (methods, attributes and so on)
-
-Here's the tree of the CodeObject subclasses:
+以下は [[c:RDoc::CodeObject]] のサブクラスのツリーです。
 
 //emlist{
  * RDoc::Context
@@ -29,87 +28,133 @@ Here's the tree of the CodeObject subclasses:
 
 == Class Methods
 
---- attr_overridable(name, *aliases)
-
-There's a wee trick we pull. Comment blocks can have directives
-that override the stuff we extract during the parse. So, we have
-a special class method, attr_overridable, that lets code objects
-list those directives. Wehn a comment is assigned, we then extract
-out any matching directives and update our object
-
 --- new -> RDoc::CodeObject
 
-#@todo
+自身を初期化します。
 
 == Instance Methods
 
+--- comment -> String
+
+自身のコメントを返します。
+
 --- comment=(comment)
 
-Update the comment, but don't overwrite a real comment with an
-empty one
+自身のコメントを comment に設定します。
+
+ただし、comment が空文字列だった場合は何もしません。
+
+@param comment コメントを文字列で指定します。
+
+--- document_children -> bool
+
+自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるか
+どうかを返します。
+
+@see [[m:RDoc::CodeObject#document_self]]
 
 --- document_children=(val)
 
-#@todo
+自身に含まれるメソッド、エイリアス、定数や属性をドキュメントに含めるか
+どうかを設定します。
 
---- document_self
+:nodoc:、:stopdoc: を指定した時に false が設定されます。
 
-do we document ourselves?
+@param val true を指定した場合、上記をドキュメントに含めます。
+
+@see [[m:RDoc::CodeObject#document_self=]],
+     [[m:RDoc::CodeObject#remove_classes_and_modules]]
+
+--- document_self -> bool
+
+自身をドキュメントに含めるかどうかを返します。
+
+@see [[m:RDoc::CodeObject#document_children]]
 
 --- document_self=(val)
 
-#@todo
+自身をドキュメントに含めるかどうかを設定します。
 
---- remove_classes_and_modules
+:doc: を指定した時に true が設定されます。
+:nodoc:、:stopdoc: を指定した時に false が設定されます。
 
-Default callbacks to nothing, but this is overridden for classes
-and modules
+@param val true を指定した場合、自身をドキュメントに含めます。
 
---- remove_methods_etc
+@see [[m:RDoc::CodeObject#document_children=]],
+     [[m:RDoc::CodeObject#remove_methods_etc]]
 
-#@todo
+--- remove_classes_and_modules -> ()
 
---- start_doc
+何もしません。[[m:RDoc::CodeObject#document_children=]] に false を指定
+した時のコールバックとして呼び出されます。オーバーライドして使用します。
 
-set and cleared by :startdoc: and :enddoc:, this is used to toggle
-the capturing of documentation
+--- remove_methods_etc -> ()
 
---- stop_doc
+何もしません。[[m:RDoc::CodeObject#document_self=]] に false を指定した
+時のコールバックとして呼び出されます。オーバーライドして使用します。
 
-#@todo
+--- start_doc -> ()
 
---- parent
+以降に解析したコメントを [[m:RDoc::CodeObject#stop_doc]] を呼び出すまで
+の間、ドキュメントに含めます。
 
-#@todo
+:startdoc: を見つけた時に呼び出されます。
+[[m:RDoc::CodeObject#document_self]] と
+[[m:RDoc::CodeObject#document_children]] を true に設定します。
+
+@see [[m:RDoc::CodeObject#end_doc]]
+
+--- stop_doc -> ()
+
+以降に解析したコメントを [[m:RDoc::CodeObject#start_doc]] を呼び出すま
+での間、ドキュメントに含めません。
+
+:stopdoc: を見つけた時に呼び出されます。
+[[m:RDoc::CodeObject#document_self]] と
+[[m:RDoc::CodeObject#document_children]] を false に設定します。
+
+@see [[m:RDoc::CodeObject#start_doc]]
+
+--- parent -> RDoc::CodeObject
+
+自身を所有する(変数や定数などの形で保持する)オブジェクトを返します。
 
 --- parent=(val)
 
-#@todo
+自身を所有する(変数や定数などの形で保持する)オブジェクトを設定します。
 
---- viewer
+@param val [[c:RDoc::CodeObject]] のサブクラスのオブジェクトを指定しま
+           す。
 
-We are the model of the code, but we know that at some point
-we will be worked on by viewers. By implementing the Viewable
-protocol, viewers can associated themselves with these objects.
+--- section -> RDoc::Context::Section
 
---- viewer=(val)
-
-We are the model of the code, but we know that at some point
-we will be worked on by viewers. By implementing the Viewable
-protocol, viewers can associated themselves with these objects.
-
---- done_documenting
-
-are we done documenting (ie, did we come across a :enddoc:)?
-
---- done_documenting=(val)
-
-are we done documenting (ie, did we come across a :enddoc:)?
-
---- section
-
-Which section are we in
+所属している section を返します。
 
 --- section=(val)
 
-Which section are we in
+所属する section を設定します。
+
+@param val [[c:RDoc::Context::Section]] オブジェクトを指定します。
+
+#@since 1.9.1
+--- parent_file_name -> String
+
+self.parent のファイル名を返します。
+
+@see [[m:RDoc::CodeObject#parent]]
+
+--- parent_name -> String
+
+self.parent の名前を返します。
+
+@see [[m:RDoc::CodeObject#parent]]
+#@end
+#@since 1.9.2
+--- documented? -> bool
+
+出力すべきドキュメントがあるかどうかを返します。
+
+--- metadata -> Hash
+
+自身が持つメタデータ(他から任意の値を設定してもよい)を返します。
+#@end

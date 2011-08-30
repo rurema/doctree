@@ -1,6 +1,6 @@
 require e2mmap
 require irb/slex
-#@# require rdoc/code_objects
+require rdoc/code_objects
 #@# require rdoc/markup/simple_markup/preprocess
 #@since 1.9.1
 require rdoc/parser
