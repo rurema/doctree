@@ -20,7 +20,9 @@ require rdoc/parsers/parse_f95
 require ftools
 #@end
 require rdoc/options
-#@# require rdoc/diagram
+#@until 1.9.2
+require rdoc/diagram
+#@end
 require find
 require time
 

@@ -234,6 +234,14 @@ rbconfig
 #@since 1.8.1
 rdoc
 rdoc/code_objects
+#@until 1.9.2
+#@since 1.9.1
+rdoc/dot
+#@else
+rdoc/dot/dot
+#@end
+rdoc/diagram
+#@end
 #@since 1.9.2
 rdoc/alias
 rdoc/anon_class
