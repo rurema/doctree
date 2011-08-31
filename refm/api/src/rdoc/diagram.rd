@@ -11,7 +11,7 @@ require rdoc/options
 ([[url:http://www.research.att.com/sw/tools/graphviz/]] 参照)のバージョ
 ン 1.8.6 以降に PATH が通っている必要があります。
 
-[注意] 1.9.2 で廃止されました。
+[注意] rdoc/diagram ライブラリは 1.9.2 で廃止されました。
 
 = class RDoc::Diagram
 

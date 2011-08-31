@@ -1,4 +1,5 @@
 #@since 1.9.1
+require rdoc
 require rdoc/parser/simple
 require rdoc/parser/ruby
 require rdoc/parser/c
@@ -25,6 +26,12 @@ require rdoc/diagram
 #@end
 require find
 require time
+
+#@since 1.9.1
+rdoc コマンドのためのサブライブラリです。
+#@else
+rdoc コマンドのためのライブラリです。
+#@end
 
 #@include(RDoc__RDoc)
 #@until 1.9.1
