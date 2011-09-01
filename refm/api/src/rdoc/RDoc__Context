@@ -189,9 +189,9 @@ array に thing を追加します。
 
 Return true if at least part of this thing was defined in file
 
---- each_attribute {|a| ... } -> [RDoc::Attribute]
+--- each_attribute {|a| ... } -> [RDoc::Attr]
 
-追加された [[c:RDoc::Attribute]] に対してブロックを評価します。
+追加された [[c:RDoc::Attr]] に対してブロックを評価します。
 
 --- each_classmodule {|m| ... } -> [RDoc::SingleClass | RDoc::NormalClass | RDoc::NormalModule]
 
