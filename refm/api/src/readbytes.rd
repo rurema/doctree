@@ -9,9 +9,9 @@ EOFに到達した時に例外 [[c:EOFError]] を発生させます。
 
 @param size 読み込む長さを整数で指定します。nil を指定した場合は EOF まで読み込みます。
 
-@param EOFError EOF に到達した場合に発生します。
+@raise EOFError EOF に到達した場合に発生します。
 
-@param TruncatedDataError size バイト未満しか読み込めなかった場合に発生します。
+@raise TruncatedDataError size バイト未満しか読み込めなかった場合に発生します。
 
 = class TruncatedDataError < IOError
 
