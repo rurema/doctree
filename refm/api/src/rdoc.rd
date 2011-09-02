@@ -134,10 +134,14 @@ options は以下が指定できます。
 
 : --diagram
 
+#@since 1.9.2
+  何もしません。--diagram オプションは廃止されました。
+#@else
   モジュールやクラスを表示するのに図を使うようになります。この機能は実
   験的なもので、すべての出力テンプレートに対応しているわけではありません。
   dot V1.8.6 かそれ以降がなければ "--diagram" オプションは正しい出力が
   できません(www.research.att.com/sw/tools/graphviz/)。
+#@end
 
 #@since 1.9.3
 : --dry-run
