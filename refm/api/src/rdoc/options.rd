@@ -322,94 +322,140 @@ val に true を指定した場合、コマンドライン引数の --pipe オプションと同
 #@end
 
 #@since 1.9.3
---- dry_run
+--- dry_run -> bool
 
-#@todo
+コマンドライン引数の --dry-run オプションを指定していた場合、true を返
+します。--no-dry-run オプションを指定していた場合、false を返します。
+
+どちらも指定しなかった場合は false を返します。
 
 --- dry_run=(val)
 
-#@todo
+val に true を指定した場合、コマンドライン引数の --dry-run オプションと
+同様の指定を行います。
 
---- encoding
+@param val --dry-run オプションと同じ指定を行う場合は true、そうでない
+           場合は false を指定します。
 
-#@todo
+--- encoding -> Encoding
+
+コマンドライン引数の --encoding オプションを指定していた場合、指定した
+エンコーディングにに対応する [[c:Encoding]] オブジェクトを返します。
+
+指定しなかった場合は [[m:Encoding.default_external]] の値を返します。
 
 --- encoding=(val)
 
-#@todo
+コマンドライン引数の --encoding オプションと同様の指定を行います。
 
---- force_output
+@param val 設定する [[c:Encoding]] オブジェクトを指定します。
 
-#@todo
+--- force_output -> bool
+
+コマンドライン引数の --force_output オプションを指定していた場合、true
+を返します。--no-force_output オプションを指定していた場合、false を返
+します。
+
+どちらも指定しなかった場合は true を返します。
 
 --- force_output=(val)
 
-#@todo
+val に true を指定した場合、コマンドライン引数の --force_output オプショ
+ンと同様の指定を行います。
 
---- generator_options
+@param val --force_output オプションと同じ指定を行う場合は true、そうで
+           ない場合は false を指定します。
 
-#@todo
+#@# 特に使用していないようなので、記述しない。
+#@#
+#@#--- generator_options
+#@#
+#@#--- generator_options=(val)
+#@#
 
---- generator_options=(val)
+--- hyperlink_all -> bool
 
-#@todo
+コマンドライン引数の --hyperlink-all オプションを指定していた場合、
+true を返します。
 
---- hyperlink_all
-
-#@todo
+指定しなかった場合は false を返します。
 
 --- hyperlink_all=(val)
 
-#@todo
+val に true を指定した場合、コマンドライン引数の --hyperlink-all オプショ
+ンと同様の指定を行います。
 
---- line_numbers
+@param val --hyperlink-all オプションと同じ指定を行う場合は true、そう
+           でない場合は false を指定します。
 
-#@todo
+--- line_numbers -> bool
+
+コマンドライン引数の --line-numbers オプションを指定していた場合、true
+を返します。--no-line-numbers オプションを指定していた場合、false を返
+します。
+
+どちらも指定しなかった場合は false を返します。
 
 --- line_numbers=(val)
 
-#@todo
+val に true を指定した場合、コマンドライン引数の --line-numbers オプショ
+ンと同様の指定を行います。
 
---- coverage_report
+@param val --line-numbers オプションと同じ指定を行う場合は true、そうで
+           ない場合は false を指定します。
 
-#@todo
+--- coverage_report -> Integer | false
+
+コマンドライン引数の --coverage-report オプションを指定していた場合、指
+定した数値を返します。
+
+指定しなかった場合は false を返します。
 
 --- coverage_report=(val)
 
-#@todo
+コマンドライン引数の --coverage-report オプションと同様の指定を行います。
 
---- option_parser
+@param val 数値オブジェクトか false を指定します。
 
-#@todo
+#@# 特に使用していないようなので、記述しない。
+#@#
+#@#--- option_parser
+#@#
+#@#--- option_parser=(val)
+#@#
 
---- option_parser=(val)
+--- template_dir -> String | nil
 
-#@todo
+コマンドライン引数の --template オプションで指定したテンプレートに対応
+するディレクトリを返します。
 
---- template_dir
-
-#@todo
+オプションの解析前は nil を返します。
 
 --- template_dir=(val)
 
-#@todo
+コマンドライン引数の --template オプションで指定したテンプレートに対応
+するディレクトリを設定します。
 
---- update_output_dir
+@param val パスを文字列で指定します。
 
-#@todo
+#@# initialize 時に true が指定してあるのみで、他に影響しないため、記述
+#@# しない。
+#@#
+#@#--- update_output_dir -> bool
+#@#
+#@#--- update_output_dir=(val)
+#@#
 
---- update_output_dir=(val)
+--- visibility -> :public | :protected | :private
 
-#@todo
-
---- visibility
-
-#@todo
+コマンドライン引数の --visibility で指定したオプションを [[c:Symbol]]
+で返します。
 
 --- visibility=(val)
 
-#@todo
+コマンドライン引数の --visibility オプションと同様の指定を行います。
 
+@param val :public、:protected、:private のいずれかを指定します。
 #@end
 
 #@# 1.8 系の Options::OptionList については、内部だけで使用しているため、
