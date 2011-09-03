@@ -634,42 +634,6 @@ label[url] の形式でもハイパーリンクが張れます。この場合は label が表示
 
   コマンドラインの --main パラメータと同じ働きをします。
 
-#@since 1.9.1
-: :category: section
-
-  Adds this item to the named +section+ overriding the current section.  Use
-  this to group methods by section in RDoc output while maintaining a
-  sensible ordering (like alphabetical).
-
-//emlist{
-    # :category: Utility Methods
-    #
-    # CGI escapes +text+
-
-    def convert_string text
-      CGI.escapeHTML text
-    end
-//}
-
-  An empty category will place the item in the default category:
-
-//emlist{
-  # :category:
-  #
-  # This method is in the default category
-
-  def some_method
-    # ...
-  end
-//}
-
-  Unlike the :section: directive, :category: is not sticky.  The category
-  only applies to the item immediately following the comment.
-
-  Use the :section: directive to provide introductory text for a section of
-  documentation.
-#@end
-
 : :section: title
 
   新しいセクションを開始します。:section: の後ろに置いたタイトルはその
@@ -682,10 +646,43 @@ label[url] の形式でもハイパーリンクが張れます。この場合は label が表示
 
 //emlist{
     # ----------------------------------------
+    # :section: My Section
     # This is the section that I wrote.
     # See it glisten in the noon-day sun.
     # ----------------------------------------
 //}
+
+#@since 1.9.3
+: :category: title
+
+  記述した要素の :section: を title で指定したものに上書きします。
+
+//emlist{
+    # :category: Utility Methods
+    #
+    # CGI escapes +text+
+
+    def convert_string text
+      CGI.escapeHTML text
+    end
+//}
+
+  title を省略した場合は、:section: を指定しなかった場合と同じように扱
+  われます。
+
+//emlist{
+  # :category:
+  #
+  # This method is in the default category
+
+  def some_method
+    # ...
+  end
+//}
+
+  :section: とは異なり、以降のドキュメントには影響しません。直後の要素
+  のみに影響します。
+#@end
 
 : :call-seq:
 
