@@ -82,9 +82,6 @@ z の指数関数([[m:Math::E]] の z 乗)の値を返します。
 
 @see [[m:Math.#log]]
 
-#@# r4625 現在、Math.#log のドキュメントは引数が 1 つしかないが、1.9 系
-#@# では 2 つ指定する事もできる。
-
 --- log(z) -> Float | Complex
 --- log(z, b) -> Float | Complex
 
