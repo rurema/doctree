@@ -1,6 +1,10 @@
 
-String、Float、Rational オブジェクト を BigDecimal オブジェクトに変換する機能を提供
-します。
+#@since 1.9.3
+String、Integer、Float、Rational オブジェクトを
+#@else
+String、Float、Rational オブジェクトを
+#@end
+BigDecimal オブジェクトに変換する機能を提供します。
 
  * [[m:String#to_d]]
 #@since 1.9.3
