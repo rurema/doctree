@@ -3,6 +3,9 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 ¤·¤Þ¤¹¡£
 
  * [[m:String#to_d]]
+#@since 1.9.3
+ * [[m:Integer#to_d]]
+#@end
  * [[m:Float#to_d]]
  * [[m:Rational#to_d]]
 
@@ -20,8 +23,15 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 == Instance Methods
 
 --- to_d -> BigDecimal
+#@since 1.9.3
+--- to_d(prec) -> BigDecimal
+#@end
 
 ¼«¿È¤ò [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
+
+#@since 1.9.3
+@param prec ·×»»·ë²Ì¤ÎÀºÅÙ¡£¾ÊÎ¬¤·¤¿¾ì¹ç¤Ï [[m:Float::DIG]] + 1 ¤Ç¤¹¡£
+#@end
 
 @return [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È
 
@@ -33,6 +43,10 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 
   ((1.0/3).to_d/(2.0/3).to_d).to_s # => "0.499999999999999250000000000000375E0"
   ((1.0/3)/(2.0/3)).to_d.to_s # => "0.5E0"
+
+#@since 1.9.3
+@raise ArgumentError prec ¤ËÉé¤Î¿ô¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+#@end
 
 = reopen String
 
@@ -67,6 +81,14 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 @return [[c:Rational]] ¤ËÊÑ´¹¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È
 #@end
 
+#@since 1.9.3
+--- to_d -> BigDecimal
+
+¼«¿È¤òÊÖ¤·¤Þ¤¹¡£
+
+@return [[c:BigDecimal]] ¥ª¥Ö¥¸¥§¥¯¥È
+#@end
+
 = reopen Rational
 
 == Instance Methods
@@ -75,12 +97,21 @@ String¡¢Float¡¢Rational ¥ª¥Ö¥¸¥§¥¯¥È ¤ò BigDecimal ¥ª¥Ö¥¸¥§¥¯¥È¤ËÊÑ´¹¤¹¤ëµ¡Ç½¤òÄ
 
 ¼«¿È¤ò [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£
 
-nFig ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¡¢nFig ·å¤Þ¤Ç·×»»¤ò¹Ô¤¤¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¤ê 0 °Ê²¼¤ò»Ø
-Äê¤·¤¿¾ì¹ç¤Ï [[m:BigDecimal.double_fig]] * 2 + 1 ·å¤Þ¤Ç·×»»¤ò¹Ô¤¤¤Þ¤¹¡£
+nFig ·å¤Þ¤Ç·×»»¤ò¹Ô¤¤¤Þ¤¹¡£
+#@since 1.9.3
+°ú¿ô¤ò¾ÊÎ¬¤·¤¿¤ê 0 ¤ò»ØÄê¤¹¤ë»È¤¤Êý¤ÏÈó¿ä¾©¤Ç¤¹¡£¾­Íèºï½ü¤µ¤ì¤Þ¤¹¡£
+#@else
+°ú¿ô¤ò¾ÊÎ¬¤·¤¿¤ê 0 °Ê²¼¤ò»ØÄê¤·¤¿¾ì¹ç¤Ï [[m:BigDecimal.double_fig]] *
+2 + 1 ·å¤Þ¤Ç·×»»¤ò¹Ô¤¤¤Þ¤¹¡£
+#@end
 
 @param nFig ·×»»¤ò¹Ô¤¦·å¿ô
 
 @return [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È
+
+#@since 1.9.3
+@raise ArgumentError nFig ¤ËÉé¤Î¿ô¤ò»ØÄê¤·¤¿¾ì¹ç¤ËÈ¯À¸¤·¤Þ¤¹¡£
+#@end
 
 Îã:
 
@@ -89,3 +120,15 @@ nFig ¤¬»ØÄê¤µ¤ì¤¿¾ì¹ç¡¢nFig ·å¤Þ¤Ç·×»»¤ò¹Ô¤¤¤Þ¤¹¡£¾ÊÎ¬¤·¤¿¤ê 0 °Ê²¼¤ò»Ø
   require "bigdecimal/util"
   Rational(1, 3).to_d(3).to_s  # => "0.333E0"
   Rational(1, 3).to_d(10).to_s # => "0.3333333333E0"
+
+#@since 1.9.3
+= reopen Integer
+
+== Instance Methods
+
+--- to_d -> BigDecimal
+
+¼«¿È¤ò [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤Þ¤¹¡£BigDecimal(self) ¤ÈÆ±¤¸¤Ç¤¹¡£
+
+@return [[c:BigDecimal]] ¤ËÊÑ´¹¤·¤¿¥ª¥Ö¥¸¥§¥¯¥È
+#@end
