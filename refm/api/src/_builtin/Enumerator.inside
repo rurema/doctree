@@ -78,6 +78,9 @@ Enumerator еке╓е╕езепе╚дЄ└╕└од╖д╞╩╓д╖д▐д╣бг═┐дидщдьд┐е╓еэе├епд╧ Enumerator::Yiel
 ╝┬╣╘д╖бвYielder еке╓е╕езепе╚д╦┬╨д╖д╞ << есе╜е├е╔дм╕╞д╨дьдыд┐д╙д╦бв
 each д╦┼╧д╡дьд┐е╓еэе├епдм╖лдъ╩╓д╡дьд▐д╣бг
 
+new д╦┼╧д╡дьд┐е╓еэе├епдм╜к╬╗д╖д┐╗■┼└д╟ each д╬╖лдъ╩╓д╖дм╜кдядъд▐д╣бг
+д│д╬д╚днд╬е╓еэе├епд╬╩╓дъ├═дм each д╬╩╓дъ├═д╚д╩дъд▐д╣бг
+
 ╬у:
 
   enum = Enumerator.new{|y|
@@ -134,8 +137,15 @@ each д╦┼╧д╡дьд┐е╓еэе├епдм╖лдъ╩╓д╡дьд▐д╣бг
 б╓╝бб╫д╬еке╓е╕езепе╚дЄ╩╓д╖д▐д╣бг
 
 ╕╜║▀д▐д╟д╬╬є╡є╛ї┬╓д╦▒■д╕д╞б╓╝бб╫д╬еке╓е╕езепе╚дЄ╩╓д╖бв╬є╡є╛ї┬╓дЄ1д─╩м┐╩дсд▐д╣бг
-╬є╡єдм┤√д╦║╟╕хд╪┼■├гд╖д╞ддды╛ь╣чд╧бв╬є╡є╛ї┬╓дЄ║╟╜щд▐д╟┤мдн╠сд╣д╚д╚дтд╦
+#@until 1.9.1
+╬є╡єдм┤√д╦║╟╕хд╪┼■├гд╖д╞ддды╛ь╣чд╧бв
+╬є╡є╛ї┬╓дЄ║╟╜щд▐д╟┤мдн╠сд╣д╚д╚дтд╦
 [[c:StopIteration]] ╬у│░дЄ╚п└╕д╖д▐д╣бг
+#@else
+╬є╡єдм┤√д╦║╟╕хд╪┼■├гд╖д╞ддды╛ь╣чд╧бв
+[[c:StopIteration]] ╬у│░дЄ╚п└╕д╖д▐д╣бгд│д╬д╚дн╬є╡є╛ї┬╓д╧╩╤▓╜д╖д▐д╗дєбг
+д─д▐дъдтдж░ь┼┘ next дЄ╕╞д╓д╚║╞д╙╬у│░дм╚п└╕д╖д▐д╣бг
+#@end
 
 next есе╜е├е╔д╦дшды│░╔Ї╬є╡єд╬╛ї┬╓д╧┬╛д╬еде╞еьб╝е┐есе╜е├е╔д╦дшды
 ╞т╔Ї╬є╡єд╦д╧▒╞╢┴дЄ═┐дид▐д╗дєбг
@@ -186,6 +196,148 @@ next есе╜е├е╔д╦дшды│░╔Ї╬є╡єд╬╛ї┬╓д╧┬╛д╬еде╞еьб╝е┐есе╜е├е╔д╦дшды
         #    121
         #    122
 
+#@since 1.9.2
+--- feed(obj) -> nil
+
+Enumerator ╞т╔Їд╬ yield дм╩╓д╣├═дЄ└▀─ъд╖д▐д╣бг
+
+д│дьд╟├═дЄ└▀─ъд╖д╩длд├д┐╛ь╣чд╧ yield д╧ nil дЄ╩╓д╖д▐д╣бг
+
+д│д╬├═д╧╞т╔Їд╟ yield д╡дьд┐╗■┼└д╟епеъевд╡дьд▐д╣бг
+
+  # ╬у
+  # (1), (2), ... (10) д╬╜чд╦╝┬╣╘д╡дьды
+  o = Object.new
+  def o.each
+    x = yield         # (2) blocks
+    p x               # (5) => "foo"
+    x = yield         # (6) blocks
+    p x               # (8) => nil
+    x = yield         # (9) blocks
+    p x               # not reached w/o another e.next
+  end
+  
+  e = o.to_enum
+  e.next              # (1)
+  e.feed "foo"        # (3)
+  e.next              # (4)
+  e.next              # (7)
+                      # (10)
+@param obj Enumerator ╞т╔Їд╬ yield дм╩╓д╣├═
+@raise TypeError д╣д╟д╦├═дЄд│д╬есе╜е├е╔д╟е╗е├е╚д╖д╞ддды╛ь╣чд╦╚п└╕д╖д▐д╣
+
+
+--- next_values -> Array
+
+б╓╝бб╫д╬еке╓е╕езепе╚дЄ╟█╬єд╟╩╓д╖д▐д╣бг
+
+[[m:Enumerator#next]] д╚д█д▄╞▒══д╬╡є╞░дЄд╖д▐д╣бг╜к├╝д▐д╟┼■├гд╖д┐╛ь╣чд╧
+[[c:StopIteration]] ╬у│░дЄ╚п└╕д╡д╗д▐д╣бг
+
+д│д╬есе╜е├е╔д╧бв
+  yield
+д╚
+  yield nil
+дЄ╢ш╩╠д╣дыд┐дсд╦╗╚дид▐д╣бг
+
+next есе╜е├е╔д╦дшды│░╔Ї╬є╡єд╬╛ї┬╓д╧┬╛д╬еде╞еьб╝е┐есе╜е├е╔д╦дшды
+╞т╔Ї╬є╡єд╦д╧▒╞╢┴дЄ═┐дид▐д╗дєбг
+д┐д└д╖бв [[m:IO#each_line]] д╬дшджд╦дкдкдтд╚д╬╬є╡єеселе╦е║ердм╔√║ю═╤дЄ
+╚╝д├д╞ддды╛ь╣чд╦д╧▒╞╢┴дмдвдъ╞└д▐д╣бг
+
+  # ╬убв next д╚ next_values д╬░удддЄ
+  o = Object.new
+  def o.each
+    yield
+    yield 1
+    yield 1, 2
+    yield nil
+    yield [1, 2]
+  end
+  e = o.to_enum
+  p e.next_values
+  p e.next_values
+  p e.next_values
+  p e.next_values
+  p e.next_values
+  e = o.to_enum
+  p e.next
+  p e.next
+  p e.next
+  p e.next
+  p e.next
+  
+  ## yield args       next_values      next
+  #  yield            []               nil
+  #  yield 1          [1]              1
+  #  yield 1, 2       [1, 2]           [1, 2]
+  #  yield nil        [nil]            nil
+  #  yield [1, 2]     [[1, 2]]         [1, 2]
+
+@raise StopIteration ╬є╡є╛ї┬╓дм┤√д╦║╟╕хд╪┼■├гд╖д╞дддыд╚дн
+@see [[m:Enumerator#next]], [[m:Enumerator#peek]], [[m:Enumerator#peek_values]]
+
+--- peek -> object
+б╓╝бб╫д╬еке╓е╕езепе╚дЄ╩╓д╖д▐д╣дмбв╬є╡є╛ї┬╓дЄ╩╤▓╜д╡д╗д▐д╗дєбг
+
+[[m:Enumerator#next]] д╬дшджд╦
+╕╜║▀д▐д╟д╬╬є╡є╛ї┬╓д╦▒■д╕д╞б╓╝бб╫д╬еке╓е╕езепе╚дЄ╩╓д╖д▐д╣дмбв
+next д╚░█д╩дъ╬є╡є╛ї┬╓дЄ╩╤╣╣д╖д▐д╗дєбг
+
+╬є╡єдм┤√д╦║╟╕хд╪┼■├гд╖д╞ддды╛ь╣чд╧бв[[c:StopIteration]] ╬у│░дЄ╚п└╕д╖д▐д╣бг
+
+  # ╬у
+  a = [1,2,3]
+  e = a.to_enum
+  p e.next   #=> 1
+  p e.peek   #=> 2
+  p e.peek   #=> 2
+  p e.peek   #=> 2
+  p e.next   #=> 2
+  p e.next   #=> 3
+  p e.next   #raises StopIteration
+
+@raise StopIteration ╬є╡є╛ї┬╓дм┤√д╦║╟╕хд╪┼■├гд╖д╞дддыд╚дн
+@see [[m:Enumerator#next]], [[m:Enumerator#next_values]], [[m:Enumerator#peek_values]]
+--- peek_values -> Array
+
+[m:Enumerator#next_values]] д╬дшджд╦б╓╝бб╫д╬еке╓е╕езепе╚дЄ
+╟█╬єд╟╩╓д╖д▐д╣дмбв╬є╡є╛ї┬╓дЄ╩╤▓╜д╡д╗д▐д╗дєбг
+
+[[m:Enumerator#next]], [[m:Enumerator#next_values]] д╬дшджд╦
+╕╜║▀д▐д╟д╬╬є╡є╛ї┬╓д╦▒■д╕д╞б╓╝бб╫д╬еке╓е╕езепе╚дЄ╩╓д╖д▐д╣дмбв
+next д╚░█д╩дъ╬є╡є╛ї┬╓дЄ╩╤╣╣д╖д▐д╗дєбг
+
+╬є╡єдм┤√д╦║╟╕хд╪┼■├гд╖д╞ддды╛ь╣чд╧бв[[c:StopIteration]] ╬у│░дЄ╚п└╕д╖д▐д╣бг
+
+д│д╬есе╜е├е╔д╧ [[m:Enumerator#next_values]] д╚╞▒══
+  yield
+д╚
+  yield nil
+дЄ╢ш╩╠д╣дыд┐дсд╦╗╚дид▐д╣бг
+  
+  # ╬у
+  o = Object.new
+  def o.each
+    yield
+    yield 1
+    yield 1, 2
+  end
+  e = o.to_enum
+  p e.peek_values    #=> []
+  e.next
+  p e.peek_values    #=> [1]
+  p e.peek_values    #=> [1]
+  e.next
+  p e.peek_values    #=> [1, 2]
+  e.next
+  p e.peek_values    # raises StopIteration
+
+@raise StopIteration ╬є╡є╛ї┬╓дм┤√д╦║╟╕хд╪┼■├гд╖д╞дддыд╚дн
+@see [[m:Enumerator#next]], [[m:Enumerator#next_values]], [[m:Enumerator#peek_values]]
+
+
+#@end
 --- rewind -> self
 ╬є╡є╛ї┬╓дЄ┤мдн╠сд╖д▐д╣бг
 
@@ -260,9 +412,37 @@ each_with_index д╧╝їд▒╝шдъд▐д╗дє (░·┐Їд╧еде╞еьб╝е┐есе╜е├е╔д╦д╜д╬д▐д▐┼╧д╡дьд▐д╣)б
 #@since 1.8.8
 --- with_object(obj) -> Enumerator
 --- with_object(obj) {|(*args), memo_obj| ... } -> object
-#@todo
 
+╖лдъ╩╓д╖д╬│╞═╫┴╟д╦ obj дЄ┼║дид╞е╓еэе├епдЄ╖лдъ╩╓д╖бвobj дЄ╩╓дъ├═д╚д╖д╞╩╓д╖д▐д╣бг
+
+obj д╦д╧╟д░╒д╬еке╓е╕езепе╚дЄ┼╧д╣д│д╚дмд╟днд▐д╣бг
+
+е╓еэе├епдм┼╧д╡дьд╩длд├д┐╛ь╣чд╧бв╛хд╟└т╠└д╖д┐╖лдъ╩╓д╖дЄ╝┬╣╘д╖бв
+║╟╕хд╦ obj дЄ╩╓д╣ [[c:Enumerator]] дЄ╩╓д╖д▐д╣бг
+
+==== ╬у
+  # 0,1,2 д╚╕╞д╙д└д╣ enumeratorдЄ║юды
+  to_three = Enumerator.new do |y|
+    3.times do |x|
+      y << x
+    end
+  end
+  
+  to_three_with_string = to_three.with_object("foo")
+  to_three_with_string.each do |x,string|
+    puts "#{string}: #{x}"
+  end
+  # => foo:0
+  # => foo:1
+  # => foo:2
+
+@param obj ╖лдъ╩╓д╖д╬│╞═╫┴╟д╦┼║дид╞┼╧д╡дьдыеке╓е╕езепе╚
 @see [[m:Enumerable#each_with_object]]
 
 #@end
 #@end
+
+#@# ░╩▓╝д╬епеще╣д╧ецб╝е╢дм─╛└▄┐идьдыд┘днд╟д╧д╩ддд╬д╟е╔енехесеєе╚д╧
+#@# ╜ёдлд╩дд
+#@# = class Enumerator::Generator
+#@# = class Enumerator::Yielder

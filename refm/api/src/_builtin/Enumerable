@@ -45,7 +45,6 @@
 #@end
 --- collect {|item| ... } -> [object]
 --- map {|item| ... }     -> [object]
-#@todo
 
 各要素に対してブロックを評価した結果を全て含む配列を返します。
 
@@ -53,6 +52,9 @@
 ブロックを省略した場合、
 obj.collect {|item| item } を実行します。
 これは [[m:Enumerable#to_a]] と同じです。
+#@else
+ブロックを省略した場合、上で説明した繰り返しを実行し、その結果として
+得られる配列を返すような [[c:Enumerator]] オブジェクトを返します。
 #@end
 
 例:
@@ -75,6 +77,12 @@ obj.collect {|item| item } を実行します。
 要素とそのインデックスをブロックに渡して繰り返します。
 
 self を返します。
+
+#@since 1.9.1
+ブロックを省略した場合は、
+要素とそのインデックスを繰り返すような
+[[c:Enumerator]] を返します。
+#@end
 
 例:
     [5, 10, 15].each_with_index do |n, idx|
@@ -101,12 +109,16 @@ self を返します。
 #@end
 --- find(ifnone = nil) {|item| ... }   -> object
 --- detect(ifnone = nil) {|item| ... } -> object
-#@todo
 
 要素に対してブロックを評価した値が真になった最初の要素を返します。
 
 真になる要素が見つからず、ifnone も指定されていないときは nil を返します。
 真になる要素が見つからず、ifnone が指定されているときは ifnone を call した結果を返します。
+
+#@since 1.9.1
+ブロックを省略した場合は、各要素に対しブロックを真になるまで評価し、最初に
+真になった値を返すような [[m:Enumerator]] を返します。
+#@end
 
 #@since 1.8.0
 @arg ifnone  call メソッドを持つオブジェクト (例えば [[c:Proc]]) を指定します。
@@ -138,10 +150,14 @@ self を返します。
 #@end
 --- find_all {|item| ... } -> [object]
 --- select {|item| ... }   -> [object]
-#@todo
 
 各要素に対してブロックを評価した値が真であった要素を全て含む配列を
 返します。真になる要素がひとつもなかった場合は空の配列を返します。
+
+#@since 1.9.1
+ブロックを省略した場合は、各要素に対しブロックを評価し
+真になった値の配列を返すような [[m:Enumerator]] を返します。
+#@end
 
 --- grep(pattern)                -> [object]
 --- grep(pattern) {|item| ... }  -> [object]
@@ -258,6 +274,12 @@ a == b のとき 0、a < b のとき負の整数を、期待しています。
 [[m:Enumerable#max]] と [[m:Enumerable#max_by]] の
 違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
 
+#@since 1.9.1
+ブロックを省略した場合は、各要素を順番にブロックに渡して評価し、
+その結果が最小となる値に対応する要素を返す [[c:Enumerator]] を
+返します。
+#@end
+
 @see [[m:Enumerable#sort_by]]
 
 #@end
@@ -289,15 +311,20 @@ a < b のとき負の整数を、期待しています。
 --- min_by               -> Enumerable::Enumerator
 #@end
 --- min_by {|item| ... } -> object
-#@todo
 
 各要素を順番にブロックに渡して評価し、
 その評価結果を <=> で比較して、
-最大であった値に対応する元の要素を返します。
+最小であった値に対応する元の要素を返します。
 
 要素が存在しないときは nil を返します。
 
 該当する要素が複数存在する場合、どの要素を返すかは不定です。
+
+#@since 1.9.1
+ブロックを省略した場合は、各要素を順番にブロックに渡して評価し、
+その結果が最小となる値に対応する要素を返す [[c:Enumerator]] を
+返します。
+#@end
 
 [[m:Enumerable#min]] と [[m:Enumerable#min_by]] の
 違いは [[m:Enumerable#sort]] と [[m:Enumerable#sort_by]] の違いと同じです。
@@ -314,11 +341,17 @@ a < b のとき負の整数を、期待しています。
 #@end
 #@end
 --- partition {|item| ... } -> [[object], [object]]
-#@todo
 
 各要素を、ブロックの条件を満たす要素と満たさない要素に分割します。
 各要素に対してブロックを評価して、その値が真であった要素の配列と、
 偽であった要素の配列の 2 つを配列に入れて返します。
+
+#@since 1.9.1
+ブロックを省略した場合は、各要素に対しブロックを評価し、
+上のようにがその値が真であった要素の配列と、
+偽であった要素の配列のペアを返すような [[c:Enumerator]] を
+返します。
+#@end
 
 例:
 
@@ -337,6 +370,11 @@ a < b のとき負の整数を、期待しています。
 各要素に対してブロックを評価し、
 その値が偽であった要素を集めた新しい配列を返します。
 条件を反転させた select です。
+
+#@since 1.9.1
+ブロックを省略した場合は、各要素に対しブロックを評価し
+偽になった値の配列を返すような [[m:Enumerator]] を返します。
+#@end
 
 例:
 
@@ -431,6 +469,12 @@ Enumerable#sort_by は安定ではありません (unstable sort)。
 ※ 比較結果が同じ要素は元の順序通りに並ぶソートを
 「安定なソート (stable sort)」と言います。
 
+#@since 1.9.1
+ブロックを省略した場合は、各要素をブロックで評価した値でソートした
+配列を返すような [[c:Enumerator]] を返します。
+
+#@end
+
 @see [[m:Enumerable#sort]]
 #@end
 
@@ -495,7 +539,6 @@ self と引数に渡した配列の各要素を順番にブロックに渡します。
 #@until 1.9.1
 --- enum_slice(n) {|list| ... } -> nil
 #@end
-#@todo
 
 n 要素ずつブロックに渡して繰り返します。
 
@@ -504,6 +547,11 @@ n 要素ずつブロックに渡して繰り返します。
 #@until 1.9.1
 enum_slice は 1.9.1 以降ではなくなっています。
 代わりに each_slice を使ってください。
+#@end
+
+#@since 1.9.1
+ブロックを省略した場合は
+n 要素づつ繰り返す [[c:Enumerator]] を返します。
 #@end
 
 @arg n   区切る要素数を示す整数です。
@@ -538,6 +586,11 @@ enum_slice は 1.9.1 以降ではなくなっています。
 #@until 1.9.1
 enum_cons は 1.9.1 以降ではなくなっています。
 代わりに each_cons を使ってください。
+#@end
+
+#@since 1.9.1
+ブロックを省略した場合は重複ありで
+n 要素づつ繰り返す [[c:Enumerator]] を返します。
 #@end
 
 @param n ブロックに渡す要素の数です。正の整数を与えます。
@@ -588,19 +641,29 @@ enum_cons は 1.9.1 以降ではなくなっています。
 
 
 #@since 1.8.8
---- cycle              -> Enumerator
+--- cycle(n=nil)       -> Enumerator
 #@else
---- cycle              -> Enumerable::Enumerator
+--- cycle(n=nil)       -> Enumerable::Enumerator
 #@end
---- cycle {|obj| ... } -> object | nil
-#@todo
+--- cycle(n=nil) {|obj| ... } -> object | nil
+Enumerable オブジェクトの各要素を n 回 or 無限回(n=nil)繰り返し
+ブロックを呼びだします。
 
-Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
+n に 0 もしくは負の値を渡した場合は何もしません。
+繰り返しが最後まで終了した場合(つまりbreakなどで中断しなかった場合)
+は nil を返します。
+このメソッドは内部の配列に各要素を保存しておくため、
+一度 Enumerable の終端に到達した後に自分自身を変更しても
+このメソッドの動作に影響を与えません。
 
-Calls block for each element of enum repeatedly forever. Returns
-nil if and only if the collection is empty. Enumerable#cycle
-saves elements in an internal array so changes to enum after
-the first pass have no effect.
+  a = ["a", "b", "c"]
+  a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
+  a.cycle(2) {|x| puts x }  # print, a, b, c, a, b, c.
+
+#@since 1.9.1
+ブロックを省略した場合は、n 回 or 無限回 enum の各要素を
+繰り返す [[c:Enumerator]] を返します。
+#@end
 
 #@since 1.8.8
 @return ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
@@ -609,10 +672,6 @@ the first pass have no effect.
 @return ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
         レシーバが空の場合は nil を返します。
 #@end
-
-   a = ["a", "b", "c"]
-   a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
-
 
 --- drop(n)               -> Array
 
@@ -630,7 +689,6 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
 --- drop_while                    -> Enumerable::Enumerator
 #@end
 --- drop_while {|element| ... }   -> Array
-#@todo
 
 ブロックを評価して最初に偽となった要素の手前の要素まで捨て、
 残りの要素を配列として返します。
@@ -658,6 +716,11 @@ Enumerable オブジェクトの先頭の n 要素を捨てて、
    (1..10).find_index  {|i| i % 5 == 0 and i % 7 == 0 }   #=> nil
    (1..100).find_index {|i| i % 5 == 0 and i % 7 == 0 }   #=> 34
 
+#@since 1.8.8
+ブロックを指定しなかった場合は、[[c:Enumerator]] を返します。
+#@else
+ブロックを指定しなかった場合は、[[c:Enumerable::Enumerator]] を返します。
+#@end
 
 --- first      -> object | nil
 --- first(n)   -> Array
@@ -688,6 +751,10 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
 
    (1..6).group_by {|i| i%3}   #=> {0=>[3, 6], 1=>[1, 4], 2=>[2, 5]}
 
+#@since 1.9.1
+ブロックを省略した場合は、最後に Hash を返す
+[[c:Enumerator]] オブジェクトを返します。
+#@end
 
 --- minmax                 -> [object, object]
 --- minmax{|a, b| ... }    -> [object, object]
@@ -728,6 +795,11 @@ Enumerable オブジェクトの各要素をブロックに渡して評価し、その結果を <=> で比較し
    a.minmax_by {|x| x.length }   #=> ["dog", "albatross"]
 
    [].minmax_by{} # => [nil, nil]
+
+#@since 1.9.1
+ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
+返します。
+#@end
 
 @see [[m:Enumerable#sort_by]]
 
@@ -785,23 +857,36 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
    a = [1, 2, 3, 4, 5, 0]
    a.take_while {|i| i < 3 }   # => [1, 2]
 
+#@since 1.9.1
+ブロックを省略した場合は、[[c:Enumerator]] オブジェクトを
+返します。
+#@end
+
 #@since 1.8.8
 --- reverse_each -> Enumerator
 #@else
 --- reverse_each -> Enumerable::Enumerator
 #@end
 --- reverse_each {|element| ... } -> self
-#@todo
 
 逆順に各要素に対してブロックを評価します。
+
+内部で各要素を保持した配列を作ります。
+
+#@since 1.9.1
+ブロックを省略した場合は、各要素を逆順に辿る
+[[c:Enumerator]] を返します。
+#@end
 
 #@end
 #@since 1.8.8
 --- each_with_object(obj) -> Enumerator
 --- each_with_object(obj) {|(*args), memo_obj| ... } -> object
-#@todo
 
 与えられた任意のオブジェクトと要素をブロックに渡し繰り返し、最初に与えられたオブジェクトを返します。
+
+ブロックを省略した場合は、上の繰り返しをして、最初に与えたオブジェクトを
+最後に返す [[c:Enumerator]] を返します。
 
 @param obj 任意のオブジェクトを指定します。
 
@@ -816,27 +901,126 @@ Enumerable オブジェクトの要素を順に偽になるまでブロックで評価します。
 --- collect_concat -> Enumerator
 --- flat_map       {| obj | block }  -> Array
 --- collect_concat {| obj | block }  -> Array
-#@todo
+各要素をブロックに渡し、その返り値を連結した配列を返します。
 
-Returns a new array with the concatenated results of running
-<em>block</em> once for every element in <i>enum</i>.
+ブロックの返り値は基本的に配列を返すべきです。
 
-    [[1,2],[3,4]].flat_map {|i| i }   #=> [1, 2, 3, 4]
+ブロックを省略した場合は、ブロックを受けとり
+上で説明した評価をし、その結果の配列を返す
+[[c:Enumerator]] オブジェクトを返します。
+
+  [[1,2], [3,4]].flat_map{|i| i.map{|j| j*2}} # => [2,4,6,8]
 
 --- chunk {|elt| ... } -> Enumerator
 --- chunk(initial_state) {|elt, state| ... } -> Enumerator
-#@todo
 
-Creates an enumerator for each chunked elements.
-The consecutive elements which have same block value are chunked.
+要素を前から順にブロックで評価し、その結果によって
+要素をチャンクに分けた(グループ化した)要素を持つ
+[[c:Enumerator]] を返します。
+
+ブロックの評価値が同じ値が続くものを一つのチャンクとして
+取り扱います。すなわち、ブロックの評価値が一つ前と
+異なる所でチャンクが区切られます。
+
+返り値の [[c:Enumerator]] は各チャンクのブロック評価値と
+各チャンクの要素を持つ配列のペアを各要素とします。
+そのため、eachだと以下のようになります。
+
+  enum.chunk {|elt| key }.each {|key, ary| ... }
+  enum.chunk(initial_state) {|elt, state| key }.each {|key, ary| ... }
+
+例として、整数列を連続する奇数/偶数に分ける例を見てみます。
+「n.even?」が変換するところで区切られているのがわかるでしょう。
+  [3,1,4,1,5,9,2,6,5,3,5].chunk {|n|
+    n.even?
+  }.each {|even, ary|
+    p [even, ary]
+  }
+  #=> [false, [3, 1]]
+  #   [true, [4]]
+  #   [false, [1, 5, 9]]
+  #   [true, [2, 6]]
+  #   [false, [5, 3, 5]]
+
+このメソッドは各要素が既にソートされている場合に便利です。
+以下の例では、テキスト辞書ファイル(中身がソートされている)
+に含まれる単語を先頭の文字ごとに数えています。
+  # line.ord は先頭の文字のコードポイントを返す
+  open("/usr/share/dict/words", "r:iso-8859-1") {|f|
+    f.chunk {|line| line.ord }.each {|ch, lines| p [ch.chr, lines.length] }
+  }
+  #=> ["\n", 1]
+  #   ["A", 1327]
+  #   ["B", 1372]
+  #   ["C", 1507]
+  #   ["D", 791]
+  #   ...
+
+さらにこのメソッドは以下の値を特別扱いします。
+  * ブロックの評価値が nil もしくは :_separator であった場合、
+    その要素を捨てます。チャンクはこの前後で区切られます。
+  * ブロックの評価値 :_alone であった場合はその要素は
+    単独のチャンクをなすものと解釈されます。
+アンダースコアで始まるシンボルはこのメソッドでは予約されています。
+ブロックの返り値としては用いないでください。
+
+nil、 :_separator はある要素を無視したい場合に用います。
+例として svn log の出力のハイフンの所で区切りたい場合を考えます。
+  sep = "-"*72 + "\n" # ハイフンが72個の行
+  IO.popen("svn log README") {|f|
+    f.chunk {|line|
+      line != sep || nil
+    }.each {|_, lines|
+      pp lines
+    }
+  }
+  #=> ["r20018 | knu | 2008-10-29 13:20:42 +0900 (Wed, 29 Oct 2008) | 2 lines\n",
+  #    "\n",
+  #    "* README, README.ja: Update the portability section.\n",
+  #    "\n"]
+  #   ["r16725 | knu | 2008-05-31 23:34:23 +0900 (Sat, 31 May 2008) | 2 lines\n",
+  #    "\n",
+  #    "* README, README.ja: Add a note about default C flags.\n",
+  #    "\n"]
+  #   ...
+
+テキストを空行で区切られた段落に分けたい場合にも nil が使えます。
+  File.foreach("README").chunk {|line|
+    /\A\s*\z/ !~ line || nil
+  }.each {|_, lines|
+    pp lines
+  }
+
+「:_alone」は要素を素通ししたい場合に用います。
+以下の例では「Foo#bar」という形式の行が連続している場合のみ
+チャンク化し、それ以外は素通しします。
+
+  pat = /\A[A-Z][A-Za-z0-9_]+\#/
+  open(filename) {|f|
+    f.chunk {|line| pat =~ line ? $& : :_alone }.each {|key, lines|
+      if key != :_alone
+        print lines.sort.join('')
+      else
+        print lines.join('')
+      end
+    }
+  }
+
+チャンク化に状態遷移が必要な場合は、
+オプション引数 initial_state に状態を保持するオブジェクトを渡します。
+この場合、ブロックの第2引数にはこのオブジェクトが dup で複製
+されて渡されます。
+#@# 例を追加したい
+
+@param initial_state 状態を保持するオブジェクト
+@raise RuntimeError 予約されている値を用いた場合に発生します
 
 --- each_entry -> Enumerator
 --- each_entry {|obj| block} -> self
-#@todo
 
-Calls <i>block</i> once for each element in <i>self</i>, passing that
-element as a parameter, converting multiple values from yield to an
-array.
+ブロックを各要素に一度づつ適用します。
+
+一要素として複数の値が渡された場合はブロックには配列として渡されます。
 
    class Foo
      include Enumerable
@@ -846,15 +1030,142 @@ array.
      end
    end
    Foo.new.each_entry{|o| print o, " -- "}
+   # => 1 -- [1, 2] --
 
-produces:
+ブロックを省略した場合は [[c:Enumerator]] が返されます。
 
-   1 -- [1, 2] --
+@see [[m:Enumerable#slice_before]]
 
 --- slice_before(pattern) -> Enumerator
 --- slice_before {|elt| bool } -> Enumerator
 --- slice_before(initial_state) {|elt, state| bool } -> Enumerator
-#@todo
 
-Creates an enumerator for each chunked elements.
+パターンがマッチした要素、もしくはブロックが真を返した要素から
+次にマッチする手前までを
+チャンク化(グループ化)したものを繰り返す [[c:Enumerator]] を
+返します。
+
+パターンを渡した場合は各要素に対し === が呼び出され、
+それが真になったところをチャンクの先頭と見なします。
+ブロックを渡した場合は、各要素に対しブロックを適用し
+返り値が真であった要素をチャンクの先頭と見なします。
+
+より厳密にいうと、「先頭要素」の手前で分割していきます。
+最初の要素の評価は無視されます。
+
+各チャンクは配列として表現されます。
+
+[[m:Enumerable#map]] のようなメソッドを使うこともできます。
+  
+  # 偶数要素をチャンクの先頭と見なす 
+  [0,2,4,1,2,4,5,3,1,4,2].slice_before(&:even?).to_a
+  # => [[0], [2], [4, 1], [2], [4, 5, 3, 1], [4], [2]]
+  
+  # 奇数要素をチャンクの先頭と見なす 
+  [0,2,4,1,2,4,5,3,1,4,2].slice_before(&:odd?).to_a
+  # => [[0, 2, 4], [1, 2, 4], [5], [3], [1, 4, 2]]
+
+  # ChangeLog のエントリーを順に取る
+  open("ChangeLog") {|f|
+    f.slice_before(/\A\S/).each {|e| pp e}
+  }
+
+  # 上と同じだが、パターンでなくブロックを使う
+  open("ChangeLog") {|f|
+    f.slice_before {|line| /\A\S/ === line }.each {|e| pp e}
+  }
+  
+  # "svn proplist -R" の結果を分割する
+  # これは一要素が複数行にまたがっている
+
+  IO.popen([{"LC_ALL"=>"C"}, "svn", "proplist", "-R"]) {|f|
+    f.lines.slice_before(/\AProp/).each {|lines| p lines }
+  }
+  #=> ["Properties on '.':\n", "  svn:ignore\n", "  svk:merge\n"]
+  #   ["Properties on 'goruby.c':\n", "  svn:eol-style\n"]
+  #   ["Properties on 'complex.c':\n", "  svn:mime-type\n", "  svn:eol-style\n"]
+  #   ["Properties on 'regparse.c':\n", "  svn:eol-style\n"]
+  #   ...
+
+複数要素にわたる状態遷移が必要な場合は、ローカル変数でこれを実現する
+ことができます。例えば、連続に増える数値が3つ以上ある場合、これを
+まとめる処理をするためには以下のようにします。
+  a = [0,2,3,4,6,7,9]
+  prev = a[0]
+  p a.slice_before {|e|
+    prev, prev2 = e, prev
+    prev2 + 1 != e
+  }.map {|es|
+    es.length <= 2 ? es.join(",") : "#{es.first}-#{es.last}"
+  }.join(",")
+  #=> "0,2-4,6,7,9"
+
+しかし、ローカル変数を使うのが不適切な場合もあります。
+その場合、引数 initial_state に状態を保持するオブジェクトを
+渡すと、そのオブジェクトを [[m:object#dup]] したオブジェクトを
+各要素ごとのブロック呼び出しの第2引数として渡します。
+  # word wrapping.
+  # this assumes all characters have same width.
+  def wordwrap(words, maxwidth)
+    # if cols is a local variable, 2nd "each" may start with non-zero cols.
+    words.slice_before(cols: 0) {|w, h|
+      h[:cols] += 1 if h[:cols] != 0
+      h[:cols] += w.length
+      if maxwidth < h[:cols]
+        h[:cols] = w.length
+        true
+      else
+        false
+      end
+    }
+  end
+  text = (1..20).to_a.join(" ")
+  enum = wordwrap(text.split(/\s+/), 10)
+  puts "-"*10
+  enum.each {|ws| puts ws.join(" ") }
+  puts "-"*10
+  #=> ----------
+  #   1 2 3 4 5
+  #   6 7 8 9 10
+  #   11 12 13
+  #   14 15 16
+  #   17 18 19
+  #   20
+  #   ----------
+
+以下は mbox を分割する例です。mbox 内の各メールは Unix From line 
+で始まっています。そこで slice_before を用います。
+
+  # parse mbox
+  open("mbox") {|f|
+    f.slice_before {|line|
+      line.start_with? "From "
+    }.each {|mail|
+      unix_from = mail.shift
+      i = mail.index("\n")
+      header = mail[0...i]
+      body = mail[(i+1)..-1]
+      body.pop if body.last == "\n"
+      fields = header.slice_before {|line| !" \t".include?(line[0]) }.to_a
+      p unix_from
+      pp fields
+      pp body
+    }
+  }
+  
+  # split mails in mbox (slice before Unix From line after an empty line)
+  open("mbox") {|f|
+    f.slice_before(emp: true) {|line,h|
+      prevemp = h[:emp]
+      h[:emp] = line == "\n"
+      prevemp && line.start_with?("From ")
+    }.each {|mail|
+      mail.pop if mail.last == "\n"
+      pp mail
+    }
+  }
+
+@param initial_state 状態を保持するオブジェクト
+@see [[m:Enumerable#chunk]]
+
 #@end
