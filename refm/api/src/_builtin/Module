@@ -117,10 +117,6 @@ nil を返します。
   p Baz <=> Bar     # => -1
   p Baz <=> Foo     # => -1
 #@since 1.8.0
-  p Baz <=> Qux     # => -1
-  p Qux <=> Baz     # => -1
-#@end
-#@since 1.8.0
   p Baz <=> Qux     # => nil
   p Qux <=> Baz     # => nil
 #@else
