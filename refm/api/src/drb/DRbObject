@@ -1,6 +1,5 @@
 = class DRb::DRbObject < Object
-
-alias DRb::DRbObject < Object
+alias DRbObject
 
 Object wrapping a reference to a remote drb object.
 
