@@ -340,7 +340,7 @@ val に true を指定した場合、コマンドライン引数の --dry-run オプションと
 --- encoding -> Encoding
 
 コマンドライン引数の --encoding オプションを指定していた場合、指定した
-エンコーディングにに対応する [[c:Encoding]] オブジェクトを返します。
+エンコーディングに対応する [[c:Encoding]] オブジェクトを返します。
 
 指定しなかった場合は [[m:Encoding.default_external]] の値を返します。
 
