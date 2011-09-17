@@ -1102,7 +1102,7 @@ nil、 :_separator はある要素を無視したい場合に用います。
 
 しかし、ローカル変数を使うのが不適切な場合もあります。
 その場合、引数 initial_state に状態を保持するオブジェクトを
-渡すと、そのオブジェクトを [[m:object#dup]] したオブジェクトを
+渡すと、そのオブジェクトを [[m:Object#dup]] したオブジェクトを
 各要素ごとのブロック呼び出しの第2引数として渡します。
   # word wrapping.
   # this assumes all characters have same width.

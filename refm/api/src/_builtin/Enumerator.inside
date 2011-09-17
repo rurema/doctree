@@ -301,7 +301,7 @@ next と異なり列挙状態を変更しません。
 @see [[m:Enumerator#next]], [[m:Enumerator#next_values]], [[m:Enumerator#peek_values]]
 --- peek_values -> Array
 
-[m:Enumerator#next_values]] のように「次」のオブジェクトを
+[[m:Enumerator#next_values]] のように「次」のオブジェクトを
 配列で返しますが、列挙状態を変化させません。
 
 [[m:Enumerator#next]], [[m:Enumerator#next_values]] のように
