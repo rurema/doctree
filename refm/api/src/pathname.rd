@@ -710,8 +710,10 @@ Dir.rmdir(self.to_s) と同じです。
 
 @see [[m:Dir.rmdir]]
 
---- entries -> [String]
-Dir.entries(self.to_s) と同じです。
+--- entries -> [Pathname]
+self に含まれるファイルエントリ名を元にした [[c:Pathname]] オブジェクトの配列を返します。
+
+@raise Errno::EXXX self が存在しないパスであったりディレクトリでなければ例外が発生します。
 
 @see [[m:Dir.entries]]
 
