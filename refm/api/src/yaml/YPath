@@ -30,17 +30,20 @@ YAML ドキュメントから特定のデータを検索する機能を提供するYPathのクラスです。
 
 === 参考
 
-* Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
-  * プログラマーのための YAML 入門 (探索編)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
+Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
+ * プログラマーのための YAML 入門 (探索編): [[url:http://jp.rubyist.net/magazine/?0013-YAML]]
 
 == class methods
+
 --- new(str) -> YAML::YPath
-YAML::YPath オブジェクトを返します。
+
+自身を初期化します。
 
 @param str YPath でパース可能なパスを文字列で指定します。
 
-動作例
+例:
+
   require 'yaml'
 
   str = "/ugo[:hoge]/0/name"
@@ -49,19 +52,52 @@ YAML::YPath オブジェクトを返します。
   #=> #<YAML::YPath:0x3238cc @predicates=[":hoge", nil, nil], @segments=["ugo", "0", "name"], @flags=nil>
 
 
---- each_path(str) {|YPath.new(path)| ...} -> object
-#@todo
+--- each_path(str) {|ypath| ...} -> Array
+
+引数 str を [[c:YAML::YPath]] が検索できる複数のパスに再構築して、その
+各パスに対してブロックを評価します。
+
+各パスに対してブロックを評価した結果の配列を返します。
+
+例1: YAML::YPath.each_path を使用する場合
+
+  path = "/*/((one|three)/name|place)|//place"
+  YAML::YPath.each_path(path) { |ypath|
+    ...
+  }
+
+例2: YAML::YPath.each_path を使用しない場合
+
+  ["/*/one/name", "/*/three/name", "/*/place", "//place"].each do |path|
+    ypath = YAML::YPath.new(path)
+    ...
+  end
 
 == instance methods
---- segments -> String
+--- segments -> [String]
+
+検索するパスを / で区切った文字列の配列を返します。
+
 --- segments=(val)
-執筆者募集。 クラス変数にsegments に対する参照、代入をおこなうためのメソッドです。
 
---- predicates -> String
+検索するパスを文字列の配列で設定します。
+
+@param val 文字列の配列を指定します。
+
+--- predicates -> [String]
+
+self.segments の同じ位置に対応する検索条件を文字列の配列で返します。
+
 --- predicates=(val)
-執筆者募集。 クラス変数にpredicates に対する参照、代入をおこなうためのメソッドです。
 
---- flags -> bool
+self.segments の同じ位置に対応する検索条件を文字列の配列で設定します。
+
+@param val 検索条件を文字列の配列で指定します。
+
+--- flags -> nil
+
+使用されていません。常に nil を返します。
+
 --- flags=(val)
-執筆者募集。 クラス変数にflags に対する参照、代入をおこなうためのメソッドです。
 
+使用されていません。

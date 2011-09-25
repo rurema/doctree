@@ -2,23 +2,6 @@
 
 YAML (YAML Ain't Markup Language) を扱うモジュールです。
 
-=== 参考
-
-* YAML Specification
-  * [[url:http://www.yaml.org/spec/]]
-  * [[url:http://www.yaml.org/type/]]
-* YAML4R
-  * [[url:http://yaml4r.sourceforge.net/]]
-  * [[url:http://yaml4r.sourceforge.net/cookbook/]]
-  * [[url:http://yaml4r.sourceforge.net/doc/]]
-* Ruby with YAML[[url:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
-* Rubyist Magazine[[url:http://jp.rubyist.net/magazine/]]
-  * プログラマーのための YAML 入門 (初級編)[[url:http://jp.rubyist.net/magazine/?0009-YAML]]
-  * プログラマーのための YAML 入門 (中級編)[[url:http://jp.rubyist.net/magazine/?0010-YAML]]
-  * プログラマーのための YAML 入門 (実践編)[[url:http://jp.rubyist.net/magazine/?0011-YAML]]
-  * プログラマーのための YAML 入門 (検証編)[[url:http://jp.rubyist.net/magazine/?0012-YAML]]
-  * プログラマーのための YAML 入門 (探索編)[[url:http://jp.rubyist.net/magazine/?0013-YAML]]
-
 == Singleton Methods
 
 --- add_builtin_type(type_re){|type, val| ...}
@@ -30,8 +13,6 @@ yaml.org,2002ドメインに属しているクラスをYAMLに追加し
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
-#@# Rational はrequire しなくてもつかえるようだ。
-#@# rationalはbuiltin(組み込み)クラス?
   require 'yaml'
   
   str1=<<EOT
@@ -192,11 +173,11 @@ rubyタイプのクラスをYAMLに追加し、
   #=> YAML::DomainType
   #=> false
 
---- detect_implicit(val)
-#@# よくわかりません。
-文字列のタイプを検知する
+--- detect_implicit(val) -> String
 
-@param val 判定されるオブジェクト
+タグを省略した値の型を判定します。
+
+@param val 判定される文字列を指定します。
 
   require 'yaml'
   
@@ -204,17 +185,18 @@ rubyタイプのクラスをYAMLに追加し、
   #=> "null"
   p YAML.detect_implicit("Cat")
   #=> "str"
-  p YAML.detect_implicit(10)
-  #=> ""
-  p YAML.detect_implicit([3, "5"])
-  #=> ""
-  p YAML.detect_implicit(nil)
-  #=> ""
+  p YAML.detect_implicit("true")
+  # => "bool#yes"
+  p YAML.detect_implicit("10")
+  #=> "int"
+  p YAML.detect_implicit("0x10")
+  #=> "int#hex"
 
---- dump(obj, io = nil)
+--- dump(obj, io = nil) -> String | IO
 
-与えられた obj を YAML フォーマットに変換し、io に書き込みます。
-io が与えられていない場合は、YAML フォーマットの文字列を返します。
+与えられた obj を YAML フォーマットに変換し、io に書き込みます。io を返
+します。io が与えられていない場合は、YAML フォーマットの文字列を返しま
+す。
 
 @param obj YAMLフォーマットに変換されるオブジェクト
 @param io 出力先のIOオブジェクト
@@ -223,7 +205,7 @@ io が与えられていない場合は、YAML フォーマットの文字列を返します。
              File.open('sample.yml', 'w')    )
 
 #@since 1.8.2
---- dump_stream(*objs)
+--- dump_stream(*objs) -> String
 
 与えられた objs を順に YAML フォーマットに変換していき、一つの文字列にまとめたものを返します。
 
@@ -293,8 +275,8 @@ Ruby のオブジェクトに変換し、
   #=> {"food"=>["apple", "banana", "carrot"]}
   #=> {"foo"=>"bar"}
 
---- load(io)
---- load(str)
+--- load(io)  -> object
+--- load(str) -> object
 
 YAML フォーマットの文書を読み込み Ruby のオブジェクトを生成して返します。
 引数として IO オブジェクトと文字列を受け付けます。
@@ -317,7 +299,7 @@ Ruby のオブジェクトに変換しません。
   ["apple", "banana", "carrot"]
 
 #@since 1.8.2
---- load_file(file)
+--- load_file(file) -> object
 
 与えられた名前のファイルから YAML フォーマットの文書を読み込み
 Ruby のオブジェクトを生成して返します。
@@ -352,7 +334,7 @@ Ruby のオブジェクトを生成して返します。
 
 #@end
 
---- load_stream(io)
+--- load_stream(io) -> object
 
 与えられた io から YAML フォーマットの文書を
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
@@ -525,21 +507,95 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
 #@end
 
 --- quick_emit(oid, opts={}) {|obj| ...}
-#@todo
+
+ライブラリ内部で使用します。
 
 --- read_type_class(type, obj_class)
-#@todo
+
+ライブラリ内部で使用します。
 
 #@since 1.8.3
---- tagurize(val)
-#@todo
+--- tagurize(val) -> String
+
+val で指定したタグを元にタグ URI を作成します。
+
+@param val タグを文字列で指定します。
+
+例:
+
+  require 'yaml'
+  YAML.tagurize("str")      # => "tag:yaml.org,2002:str"
+  YAML.tagurize("ruby/sym") # => "tag:ruby.yaml.org,2002:sym"
+  YAML.tagurize("tag:ruby.yaml.org,2002:sym")
+  # => "tag:ruby.yaml.org,2002:sym"
+
 #@end
 
 --- transfer
-#@todo
+
+ライブラリ内部で使用します。
 
 --- try_implicit(obj)
-#@todo
+
+ライブラリ内部で使用します。
+
+--- emitter -> YAML::Syck::Emitter
+
+YAML を出力するためのオブジェクトを返します。
+
+--- generic_parser -> YAML::Syck::Parser
+
+YAML パーサを返します。ただし、[[m:YAML.parser]] とは異なり、リゾルバに
+[[c:YAML::Syck::GenericResolver]] が指定されています。
+
+@see [[m:YAML.parser]]
+
+--- make_stream(io) -> StringIO | IO
+
+引数を元にストリームオブジェクトを作成します。
+
+@param io [[c:IO]]、[[c:String]] オブジェクトかそのサブクラスを指定します。
+
+@raise YAML::Error 引数が [[c:IO]]、[[c:String]] オブジェクトのサブクラ
+                   スではなかった場合に発生します。
+
+--- parser -> YAML::Syck::Parser
+
+YAML パーサを返します。
+
+@see [[m:YAML.generic_parser]]
+
+#@# YAML.parser は 1.9.2 からなくなるため、戻り値は YAML::Syck::Parser
+#@# のみとした。YAML.resolver も同様。
+
+--- resolver -> YAML::Syck::DefaultResolver
+
+タグ URI との関連付けを解決するリゾルバを返します。
+
+--- tag_class(tag, cls) -> ()
+
+tag で指定したタグ URI に　cls で指定したクラスを関連付けます。
+
+@param tag タグ URI を文字列で指定します。
+
+@param cls 関連付けるクラスオブジェクトを指定します。
+
+@see [[m:YAML.tagged_classes]]
+
+--- tagged_classes -> {String => Class}
+
+タグ URI と、それが対応するクラスの一覧を返します。
+
+例:
+
+ require "pp"
+ require "yaml"
+ pp YAML.tagged_classes
+ # => {"tag:ruby.yaml.org,2002:struct"=>Struct,
+ "tag:yaml.org,2002:set"=>YAML::Set,
+ "tag:ruby.yaml.org,2002:sym"=>Symbol,
+ "tag:yaml.org,2002:omap"=>YAML::Omap,
+ ...}
 
 == Constants
 
@@ -566,13 +622,13 @@ Ruby 1.8.3 以降では変更できません。
   :UseBlock=>false
  }
 
-
+#@# TODO: 以下、後で別のファイルに移動する。
 = reopen Kernel
 == private instance methods
---- y(obj)
+--- y(obj) -> object
 オブジェクトをYAMLフォーマットで表示します。
 
-@param obj YAML フォーマットで表示したいオブジェクト
+@param obj YAML フォーマットで表示したいオブジェクトを指定します。
 
   require 'yaml'
   
@@ -591,7 +647,7 @@ Ruby 1.8.3 以降では変更できません。
   
 = reopen Class
 == instance methods
---- to_yaml(opts = {})
+--- to_yaml(opts = {}) -> String
 例外を発生する。
 
 @param opts YAMLドキュメント出力の際のオプションを指定するが使われない。
@@ -642,11 +698,12 @@ Ruby 1.8.3 以降では変更できません。
   #=> name: Pochi
 
 --- to_yaml_style -> nil
-#@# 昔は違うかも
-#@since 1.8.5
+
 nilを返します。
 
 @return nilを返します。
+
+例:
 
   require 'yaml'
   
@@ -655,8 +712,6 @@ nilを返します。
   a = []
   p a.to_yaml_style
   #=> nil
-
-#@end
 
 --- to_yaml_properties -> [String]
 [[m:Object#instance_variables]].sortの結果を返します。
@@ -685,9 +740,10 @@ nilを返します。
 = reopen Struct
 == class methods
 --- yaml_tag_class_name -> String
-Struct::をのぞいたクラス名を返す
 
-@return Struct::をのぞいたクラス名
+自身のクラス名から Struct::をのぞいた文字列を返します。
+
+@return 自身のクラス名から Struct::をのぞいた文字列
 
   require 'yaml'
   
@@ -696,7 +752,10 @@ Struct::をのぞいたクラス名を返す
   #=> "YStruct"
 
 --- yaml_tag_read_class(name) -> String
-引数nameにStruct::を加えた文字列を返す
+
+引数 name に Struct:: を加えた文字列を返します。
+
+@param name 構造体の名前を指定します。
 
 @return 引数nameにStruct::を加えた文字列
 
@@ -708,8 +767,27 @@ Struct::をのぞいたクラス名を返す
 
 = reopen String
 == instance methods
---- is_complex_yaml?
-#@todo
+--- is_complex_yaml? -> Integer | nil
 
---- is_binary_data?
-#@todo
+自身が複数行になるキーを含むような YAML である場合に真になる値を返しま
+す。
+
+例: ["Detroit Tigers", "Chicago cubs"] をキーとする場合
+
+  require 'yaml'
+  s = <<EOS
+  ? 
+    - Detroit Tigers
+    - Chicago cubs
+  : 
+    - 2001-07-23
+  EOS
+  p s.is_complex_yaml? # => 2
+  p YAML.load(s) # => {["Detroit Tigers", "Chicago cubs"]=>[#<Date: 4904227/2,0,2299161>]}
+
+--- is_binary_data? -> true | nil
+
+自身が ASCII 文字以外の文字列を含む場合に true を返します。
+
+この値が true になる場合、self.to_yaml した結果、"!binary ..." というよ
+うな文字列を返します。

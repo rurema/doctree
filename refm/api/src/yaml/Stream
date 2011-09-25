@@ -4,17 +4,25 @@ YAMLドキュメントを複数保持することができるストリームクラスです。
 
 === 参考
 
-* ((<Rubyist Magazine|URL:http://jp.rubyist.net/magazine/>))
-  * ((<プログラマーのための YAML 入門 (中級編)|URL:http://jp.rubyist.net/magazine/?0010-YAML>))
+Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
+ * プログラマーのための YAML 入門 (中級編): [[url:http://jp.rubyist.net/magazine/?0010-YAML]]
 
 == class methods
---- new(opts = {})
+
+--- new(opts = {}) -> YAML::Stream
+
 ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
 
-#@todo
+@param opts オプションを指定します。設定可能なオプションは
+            [[m:YAML::DEFAULTS]] を参照してください。
+
+@see [[m:YAML::Stream#options]], [[m:YAML::Stream#options=]]
+
 == instance methods
---- [](i)
+
+--- [](i) -> object
+
 i番目のドキュメントを参照します。
 
 @param i 参照したいドキュメントの番号を指定します。
@@ -40,7 +48,8 @@ i番目のドキュメントを参照します。
   p ys[0]
   #=> #<Dog:0x2b07b04 @name="pochi">
 
---- add(doc)
+--- add(doc) -> ()
+
 オブジェクトをドキュメントに追加します。
 
 @param doc 適切なオブジェクトを指定します。
@@ -66,7 +75,8 @@ i番目のドキュメントを参照します。
   p ys.documents
   #=> [#<YAML::DomainType:0x2b07af0 @value={"name"=>"pochi"}, @type_id="Dog", @domain="ruby.yaml.org,2002">, #<Dog:0x2b079b0 @name="tama">]
 
---- edit(doc_num, doc)
+--- edit(doc_num, doc) -> ()
+
 doc_num番目のドキュメントをdocに変更します。
 もし、doc_numが現在のドキュメント数より大きい場合は間にはnilが挿入されます。
 
@@ -89,11 +99,12 @@ doc_num番目のドキュメントをdocに変更します。
   p ys.documents
   #=> [#<Dog:0x2b07c44 @name="tama">, #<Dog:0x2b07c1c @name="pochi">, nil, nil, nil, #<Dog:0x2b07bf4 @name="jack">]
 
---- emit(io = nil)
-ストリームに含まれる各ドキュメントをIOにYAML形式で書き込みます。
-io がnilの場合は文字列を返します。
+--- emit(io = nil) -> IO | String
 
-@param io 書き込み先のIOオブジェクト
+ストリームに含まれる各ドキュメントを引数 io に YAML 形式で書き込みます。
+io が nil の場合は文字列を返します。
+
+@param io 書き込み先の IO オブジェクト
 
   require 'yaml'
   
@@ -122,8 +133,9 @@ io がnilの場合は文字列を返します。
   - Chiba
   - Saitama
 
---- documents
-現在のドキュメントを配列で返します。
+--- documents -> Array
+
+自身のドキュメントを配列で返します。
 
   require 'yaml'
   
@@ -143,7 +155,19 @@ io がnilの場合は文字列を返します。
   p ys.documents.pop
   #=> nil
 
---- options
-#@todo
+--- documents=(val)
 
+現在のドキュメントを配列で設定します。
 
+@param val YAML に変換できる任意のオブジェクトを配列で指定します。
+
+--- options -> {Symbol => object}
+
+オプションの一覧を返します。
+
+--- options=(val)
+
+オプションの一覧を設定します。
+
+@param val 設定を [[c:Hash]] オブジェクトで指定します。設定可能なオプショ
+           ンは [[m:YAML::DEFAULTS]] を参照してください。
