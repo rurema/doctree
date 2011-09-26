@@ -504,6 +504,7 @@ stringio
 #@since 1.8.0
 strscan
 #@end
+syck
 sync
 syslog
 tempfile
