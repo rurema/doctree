@@ -1,5 +1,14 @@
+#@since 1.9.2
+require syck/basenode
+
+= class Syck::YamlNode
+include Syck::BaseNode
+#@else
+require yaml/basenode
+
 = class YAML::YamlNode
 include YAML::BaseNode
+#@end
 
 == class methods
 --- new(type, val)

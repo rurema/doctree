@@ -1,5 +1,15 @@
+#@since 1.9.2
+require syck/ypath
+
+= module Syck::BaseNode
+#@else
+require yaml/ypath
+
 = module YAML::BaseNode
+#@end
+
 == instance methods
+
 --- [](*key)
 #@todo
 
@@ -29,4 +39,3 @@
 
 --- select!(ypath_str)
 #@todo
-

@@ -505,6 +505,17 @@ stringio
 strscan
 #@end
 syck
+#@since 1.9.2
+syck/basenode
+syck/constants
+syck/error
+syck/rubytypes
+syck/stream
+syck/stringio
+syck/tag
+syck/yamlnode
+syck/ypath
+#@end
 sync
 syslog
 tempfile
@@ -800,5 +811,16 @@ xsd/xmlparser
 yaml
 yaml/dbm
 yaml/store
+#@until 1.9.2
+yaml/basenode
+yaml/constants
+yaml/error
+yaml/rubytypes
+yaml/stream
+yaml/stringio
+yaml/tag
+yaml/yamlnode
+yaml/ypath
+#@end
 zlib
 #@end

@@ -1,6 +1,13 @@
-= class YAML::YPath
+YAML ドキュメントから特定のデータを検索する機能を提供するサブライブラリ
+です。
 
-YAML ドキュメントから特定のデータを検索する機能を提供するYPathのクラスです。
+#@since 1.9.2
+= class Syck::YPath
+#@else
+= class YAML::YPath
+#@end
+
+YAML ドキュメントから特定のデータを検索する機能を提供するクラスです。
 
 使用例；"name" を含むセグメントを表示する。
   require 'yaml'
@@ -36,7 +43,11 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
 == class methods
 
+#@since 1.9.2
+--- new(str) -> Syck::YPath
+#@else
 --- new(str) -> YAML::YPath
+#@end
 
 自身を初期化します。
 

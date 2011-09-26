@@ -1,14 +1,14 @@
 #@since 1.8.0
+
+#@until 1.9.2
 require stringio
+require yaml/error
+require yaml/tag
+require yaml/stream
+require yaml/constants
 
-#@# TODO: 以下について、.rb 向けのファイルを作成したら有効にする。
-#@# require yaml/error
-#@# require yaml/syck
-#@# require yaml/tag
-#@# require yaml/stream
-#@# require yaml/constants
-
-#@# yaml/encoding は内部でしか使用しないため、省略
+#@# yaml/encoding は内部でしか使用しないため省略。
+#@end
 
 構造化されたデータを表現するフォーマットであるYAML (YAML Ain't Markup Language) を扱うためのライブラリです。
 
@@ -256,15 +256,31 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
  * Ruby with YAML: [[url:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
 
-#@# TODO: sych ライブラリや psych ライブラリの記述後に 1.9.2 から sych
-#@# に移動した事を記述する。今のまま移動するとただ消えてしまうため、後
-#@# で作業する。
-
 #@include(yaml/YAML)
-#@include(yaml/Stream)
-#@include(yaml/Error)
-#@include(yaml/YPath)
-#@include(yaml/BaseNode)
-#@include(yaml/YamlNode)
+
+= reopen Kernel
+
+== Private Instance Methods
+
+--- y(obj) -> object
+
+オブジェクトをYAMLフォーマットで表示します。
+
+@param obj YAML フォーマットで表示したいオブジェクトを指定します。
+
+  require 'yaml'
+  
+  class MyDog
+    attr_accessor :name, :age
+  end
+  
+  mydog = MyDog.new
+  mydog.age = 17
+  
+  p mydog
+  #=> #<MyDog:0x2b080b8 @age=17>
+  y mydog
+  #=> --- !ruby/object:MyDog
+  #=> age: 17
 
 #@end

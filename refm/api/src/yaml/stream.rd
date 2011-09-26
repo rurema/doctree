@@ -1,6 +1,12 @@
-= class YAML::Stream < Object
+複数の YAML ドキュメントを一度に扱うためのサブライブラリです。
 
-YAMLドキュメントを複数保持することができるストリームクラスです。
+#@since 1.9.2
+= class Syck::Stream < Object
+#@else
+= class YAML::Stream < Object
+#@end
+
+YAML ドキュメントを複数保持することができるストリームクラスです。
 
 === 参考
 

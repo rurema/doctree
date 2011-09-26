@@ -4,7 +4,11 @@
 このライブラリは obsolete です。[[lib:psych]] を使用してください。
 #@end
 
+#@since 1.9.2
+= module Syck
+#@else
 = module YAML::Syck
+#@end
 
 [[lib:yaml]] のバックエンドのためのモジュールです。
 
@@ -29,7 +33,11 @@
 
 Convert YAML to bytecode
 
+#@since 1.9.2
+= class Syck::Resolver
+#@else
 = class YAML::Syck::Resolver
+#@end
 
 == Class Methods
 
@@ -64,7 +72,11 @@ Convert YAML to bytecode
 --- tagurize(val) -> String
 #@todo
 
+#@since 1.9.2
+= class Syck::Parser
+#@else
 = class YAML::Syck::Parser
+#@end
 
 == Class Methods
 
@@ -109,7 +121,11 @@ Convert YAML to bytecode
 --- set_resolver(resolver)
 #@todo
 
+#@since 1.9.2
 = class YAML::Syck::Node
+#@else
+= class Syck::Node
+#@end
 
 == Instance Methods
 
@@ -156,7 +172,11 @@ Cloning method for all node types
 --- transform
 #@todo
 
+#@since 1.9.2
+= class Syck::Scalar
+#@else
 = class YAML::Syck::Scalar
+#@end
 
 == Class Methods
 
@@ -173,7 +193,11 @@ Cloning method for all node types
 --- style=(val)
 #@todo
 
+#@since 1.9.2
+= class Syck::Seq
+#@else
 = class YAML::Syck::Seq
+#@end
 
 == Class Methods
 
@@ -193,7 +217,11 @@ Cloning method for all node types
 --- style=(val)
 #@todo
 
+#@since 1.9.2
+= class Syck::Map
+#@else
 = class YAML::Syck::Map
+#@end
 
 == Class Methods
 
@@ -213,7 +241,11 @@ Cloning method for all node types
 --- style=(val)
 #@todo
 
+#@since 1.9.2
+= class Syck::PrivateType
+#@else
 = class YAML::PrivateType
+#@end
 
 == Class Methods
 
@@ -236,7 +268,11 @@ Cloning method for all node types
 --- value=(val)
 #@todo
 
+#@since 1.9.2
+= class Syck::DomainType
+#@else
 = class YAML::DomainType
+#@end
 
 == Class Methods
 
@@ -265,7 +301,11 @@ Cloning method for all node types
 --- value=(val)
 #@todo
 
+#@since 1.9.2
+= class Syck::Object
+#@else
 = class YAML::Object
+#@end
 
 == Class Methods
 
@@ -291,7 +331,11 @@ Cloning method for all node types
 --- yaml_initialize(klass, ivars) -> YAML::Object
 #@todo
 
+#@since 1.9.2
+= class Syck::BadAlias
+#@else
 = class YAML::Syck::BadAlias
+#@end
 
 include Comparable
 
@@ -316,11 +360,19 @@ include Comparable
 
 @see [[m:String#<=>]]
 
+#@since 1.9.2
+= class Syck::MergeKey
+
+= class Syck::DefaultKey
+
+= class Syck::Out
+#@else
 = class YAML::Syck::MergeKey
 
 = class YAML::Syck::DefaultKey
 
 = class YAML::Syck::Out
+#@end
 
 == Class Methods
 
@@ -346,7 +398,11 @@ include Comparable
 --- scalar(type_id, str, style = nil)
 #@todo
 
+#@since 1.9.2
+= class Syck::Emitter
+#@else
 = class YAML::Syck::Emitter
+#@end
 
 == Class Methods
 
