@@ -16,14 +16,26 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
 == class methods
 
+#@since 1.9.2
+--- new(opts = {}) -> Syck::Stream
+#@else
 --- new(opts = {}) -> YAML::Stream
+#@end
 
 ストリームを返します。ストリームはYAMLドキュメントを複数保持することができます。
 
 @param opts オプションを指定します。設定可能なオプションは
+#@since 1.9.2
+            [[m:Syck::DEFAULTS]] を参照してください。
+#@else
             [[m:YAML::DEFAULTS]] を参照してください。
+#@end
 
+#@since 1.9.2
+@see [[m:Syck::Stream#options]], [[m:Syck::Stream#options=]]
+#@else
 @see [[m:YAML::Stream#options]], [[m:YAML::Stream#options=]]
+#@end
 
 == instance methods
 
@@ -176,4 +188,8 @@ io が nil の場合は文字列を返します。
 オプションの一覧を設定します。
 
 @param val 設定を [[c:Hash]] オブジェクトで指定します。設定可能なオプショ
+#@since 1.9.2
+           ンは [[m:Syck::DEFAULTS]] を参照してください。
+#@else
            ンは [[m:YAML::DEFAULTS]] を参照してください。
+#@end
