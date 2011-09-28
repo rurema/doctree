@@ -49,7 +49,7 @@ i番目のドキュメントを参照します。
   
   class Dog
     attr_accessor :name
-    def initialize(name) 
+    def initialize(name)
       @name = name
     end
   end
@@ -62,7 +62,7 @@ i番目のドキュメントを参照します。
     #=> #<NoMethodError: undefined method `[]=' for #<YAML::Stream:0x2b07d48 @documents=[], @options={}>>
   end
   
-  ys.add Dog.new("pochi") 
+  ys.add Dog.new("pochi")
   p ys[0]
   #=> #<Dog:0x2b07b04 @name="pochi">
 
@@ -76,7 +76,7 @@ i番目のドキュメントを参照します。
   
   class Dog
     attr_accessor :name
-    def initialize(name) 
+    def initialize(name)
       @name = name
     end
   end
@@ -98,14 +98,14 @@ i番目のドキュメントを参照します。
 doc_num番目のドキュメントをdocに変更します。
 もし、doc_numが現在のドキュメント数より大きい場合は間にはnilが挿入されます。
 
-@param doc_num 変更されるドキュメントの番号 
+@param doc_num 変更されるドキュメントの番号
 @param doc 適切なオブジェクト
 
   require 'yaml'
   
   class Dog
     attr_accessor :name
-    def initialize(name) 
+    def initialize(name)
       @name = name
     end
   end
@@ -128,7 +128,7 @@ io が nil の場合は文字列を返します。
   
   class Dog
     attr_accessor :name
-    def initialize(name) 
+    def initialize(name)
       @name = name
     end
   end

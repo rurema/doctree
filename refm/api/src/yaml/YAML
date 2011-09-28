@@ -3,7 +3,7 @@
 YAML (YAML Ain't Markup Language) を扱うモジュールです。
 
 #@since 1.9.2
-YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]]オブジェ
+YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
 クトのどちらかです。その他のオブジェクトも同様に実体は別のオブジェクト
 です。もし確認したいメソッドの記述が見つからない場合は、それぞれのライ
 ブラリを確認してください。
@@ -88,9 +88,9 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   YAML.each_document(str){|obj|
     p obj
   }
-  #=> #<YAML::DomainType:0x2b07974 @type_id="Person", @domain="Qjitsu.com,2007-05-04", @value={"name"=>"eiji", "age"=>33}> 
+  #=> #<YAML::DomainType:0x2b07974 @type_id="Person", @domain="Qjitsu.com,2007-05-04", @value={"name"=>"eiji", "age"=>33}>
   #
-  YAML.add_domain_type( "Qjitsu.com,2007-05-04", "Person" ) { |type, val|  
+  YAML.add_domain_type( "Qjitsu.com,2007-05-04", "Person" ) { |type, val|
     YAML.object_maker( Person, val )
   }
   YAML.each_document(str){|obj|
@@ -162,7 +162,7 @@ rubyタイプのクラスをYAMLに追加し、
   
   class Dog
     attr_accessor :name
-    def initialize(name) 
+    def initialize(name)
       @name = name
     end
   end
@@ -365,7 +365,7 @@ Ruby のオブジェクトを生成して返します。
   
   class Dog
     attr_accessor :name
-    def initialize(name) 
+    def initialize(name)
       @name = name
     end
   end
@@ -491,7 +491,7 @@ obj_classクラスのインスタンスを生成して返します。
       age: 1
   # end of sample
 
-  #=> "-->" 
+  #=> "-->"
   #=> "/dog/shiba/0/name"
   #=> "/dog/shiba/1/name"
   #=> "-->"
