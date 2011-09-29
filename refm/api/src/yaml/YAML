@@ -271,7 +271,11 @@ Ruby のオブジェクトに変換し、
 --- each_node(io) {|obj| ...}
 
 与えられた io から YAML フォーマットの文書をすべて順に読み込み
-[[c:YAML::Syck::Map]]オブジェクトに変換し、
+#@since 1.9.2
+[[c:Syck::Map]] オブジェクトに変換し、
+#@else
+[[c:YAML::Syck::Map]] オブジェクトに変換し、
+#@end
 生成したオブジェクトを引数としてブロックを評価していきます。
 
 @param io YAML フォーマットの文書の IO オブジェクト
@@ -357,7 +361,11 @@ Ruby のオブジェクトを生成して返します。
 
 与えられた io から YAML フォーマットの文書を
 すべて順に読み込んで Ruby のオブジェクトに変換していき、
+#@since 1.9.2
+それらオブジェクトを含んだ [[c:Syck::Stream]] を返します。
+#@else
 それらオブジェクトを含んだ [[c:YAML::Stream]] を返します。
+#@end
 
 @param io YAML フォーマットの文書のIOオブジェクトもしくは文字列
 
@@ -565,7 +573,11 @@ YAML を出力するためのオブジェクトを返します。
 --- generic_parser -> YAML::Syck::Parser
 
 YAML パーサを返します。ただし、[[m:YAML.parser]] とは異なり、リゾルバに
-[[c:YAML::Syck::GenericResolver]] が指定されています。
+#@since 1.9.2
+[[m:Syck::GenericResolver]] が指定されています。
+#@else
+[[m:YAML::Syck::GenericResolver]] が指定されています。
+#@end
 
 @see [[m:YAML.parser]]
 
