@@ -122,9 +122,9 @@ Convert YAML to bytecode
 #@todo
 
 #@since 1.9.2
-= class YAML::Syck::Node
-#@else
 = class Syck::Node
+#@else
+= class YAML::Syck::Node
 #@end
 
 == Instance Methods
