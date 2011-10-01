@@ -1,0 +1,2 @@
+
+= class Psych::Set < Hash

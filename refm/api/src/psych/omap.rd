@@ -1,0 +1,2 @@
+
+= class Psych::Omap < Hash
