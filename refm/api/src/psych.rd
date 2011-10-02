@@ -260,7 +260,7 @@ the handler set on the parser instance.
 @see [[m:Psych::Parser]], [[m:Psych::Parser#handler]]
 
 --- mark -> Psych::Parser::Mark
-@todo
+#@todo
 
 Returns a Psych::Parser::Mark object that contains line, column, and index
 information.
