@@ -31,3 +31,6 @@ This class walks a YAML AST, converting each node to ruby
 
 --- visit_Psych_Nodes_Alias(o)
 #@todo
+
+#@# psych.so にある build_exception、path2class メソッドは private メソッ
+#@# ドのため省略。

@@ -1,5 +1,3 @@
-= class Psych::Handler
-
 Psych::Handler is an abstract base class that defines the events used
 when dealing with Psych::Parser.  Clients who want to use Psych::Parser
 should implement a class that inherits from Psych::Handler and define
@@ -9,6 +7,8 @@ Psych::Handler defines all events that Psych::Parser can possibly send to
 event handlers.
 
 See Psych::Parser for more details
+
+= reopen Psych::Handler
 
 == Instance Methods
 

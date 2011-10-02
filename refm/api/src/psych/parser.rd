@@ -1,6 +1,3 @@
-
-= class Psych::Parser
-
 YAML event parser class.  This class parses a YAML document and calls
 events on the handler that is passed to the constructor.  The events can
 be used for things such as constructing a YAML AST or deserializing YAML
@@ -30,6 +27,8 @@ YAML document is read from STDIN and written back out to STDERR:
 
 Psych uses Psych::Parser in combination with Psych::TreeBuilder to
 construct an AST of the parsed YAML document.
+
+= reopen Psych::Parser
 
 == Class Methods
 
