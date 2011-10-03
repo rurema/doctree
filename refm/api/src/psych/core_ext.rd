@@ -12,8 +12,6 @@
 --- yaml_tag(url)
 #@todo
 
-@see [[m:Psych.add_tag]]
-
 --- to_yaml(options = {}) -> String
 --- psych_to_yaml(options = {}) -> String
 #@todo
