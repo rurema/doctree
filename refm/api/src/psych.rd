@@ -257,7 +257,7 @@ UTF-16-BE Encoding with BOM
 Parse the YAML document contained in yaml.  Events will be called on
 the handler set on the parser instance.
 
-@see [[m:Psych::Parser]], [[m:Psych::Parser#handler]]
+@see [[c:Psych::Parser]], [[m:Psych::Parser#handler]]
 
 --- mark -> Psych::Parser::Mark
 #@todo
