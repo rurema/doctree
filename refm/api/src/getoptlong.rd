@@ -226,7 +226,7 @@ ARGV に残っていないときは、optname, optarg ともに nil に
                  [[m:GetoptLong::RETURN_IN_ORDER]] 以外の値を指定した場合に発生します。
 
 @raise RuntimeError [[m:GetoptLong#get]], [[m:GetoptLong#get_option]],
-                    [[m:Get_Option#each]], [[m:Get_Option#each_option]] メソッドを
+                    [[m:GetoptLong#each]], [[m:GetoptLong#each_option]] メソッドを
                     呼び出した後にこのメソッドを呼び出した場合に発生します。
 
 --- ordering -> Fixnum
