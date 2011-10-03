@@ -72,8 +72,12 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
 --- each_path(str) {|ypath| ...} -> Array
 
-引数 str を [[c:YAML::YPath]] が検索できる複数のパスに再構築して、その
-各パスに対してブロックを評価します。
+#@since 1.9.2
+引数 str を [[c:Syck::YPath]] が
+#@else
+引数 str を [[c:YAML::YPath]] が
+#@end
+検索できる複数のパスに再構築して、その各パスに対してブロックを評価します。
 
 各パスに対してブロックを評価した結果の配列を返します。
 
