@@ -78,7 +78,7 @@
 
 @param command コマンドを指定します。
 
-@see [[m:Porocess.kill]]
+@see [[m:Process.#kill]]
 
 --- sfork(command){ ... } -> [Integer, IO, IO]
 

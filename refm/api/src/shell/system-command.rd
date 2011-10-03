@@ -42,7 +42,7 @@
               負の値を持つシグナル(あるいはシグナル名の前に-)を指定すると、
               プロセスではなくプロセスグループにシグナルを送ります。 
 
-@see [[m:Porocess.kill]]
+@see [[m:Process.#kill]]
 
 --- notify(*opts) -> String
 --- notify(*opts){|message| ... } -> String
