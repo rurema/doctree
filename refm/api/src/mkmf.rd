@@ -44,7 +44,7 @@ foo.so の extconf.rb では dir_config('bar') を実行しているので、
   $ ruby extconf.rb --with-bar-dir=/usr/local
 
 dir_config 関数の詳細については
-[[m:Kernel.#dir_config]] を参照してください。
+[[m:Kernel#dir_config]] を参照してください。
 
 === configure オプション
 
@@ -53,7 +53,7 @@ configure スクリプトのオプション、
 または extconf.rb 実行時のオプションのことです。
 
 extconf.rb の作成者は任意のオプションを定義できます。
-[[m:Kernel.#arg_config]] も参照してください。
+[[m:Kernel#arg_config]] も参照してください。
 
 また、以下のオプションがデフォルトで利用可能です。
 
@@ -214,7 +214,7 @@ command を表示してから [[m:IO.popen]] の実行します。
 
 @raise RuntimeError 開発環境がインストールされていない場合に発生します。
 
-@see [[m:Kernel.#xsystem]]
+@see [[m:Kernel#xsystem]]
 
 --- link_command(ldflags, opt = "", libpath = $DEFLIBPATH|$LIBPATH) -> String
 
@@ -449,7 +449,7 @@ srcdir/lib のディレクトリ構造はそのまま dest 配下に反映されます。
 指定されたすべてのパスを検査してもライブラリ lib が見つからないときは、
 変数を変更せず false を返します。
 
-paths を指定しないときは [[m:Kernel.#have_library]] と同じ動作です。
+paths を指定しないときは [[m:Kernel#have_library]] と同じ動作です。
 
 @param lib ライブラリ名を指定します。
 
@@ -563,7 +563,7 @@ member というメンバを持つ構造体 type が存在しない場合は、偽を返します。
 
 @param headers 追加のヘッダを指定します。
 
-@see [[m:Kernel.#have_type]] 
+@see [[m:Kernel#have_type]] 
 
 --- have_var(var, headers = nil) -> bool
 --- have_var(var, headers = nil){ ... } -> bool
@@ -728,7 +728,7 @@ configure のオプションに --enable-<config> が指定された場合は、真を返し
 
 --- create_header(header = "extconf.h") -> String
 
-[[m:Kernel.#have_func]], [[m:Kernel.#have_header]] などの検査結果を元に、
+[[m:Kernel#have_func]], [[m:Kernel#have_header]] などの検査結果を元に、
 ヘッダファイルを生成します。
 
 このメソッドは extconf.rb の最後で呼び出すようにしてください。
@@ -793,7 +793,7 @@ configure オプション
 --- create_makefile(target, srcprefix = nil) -> true
 #@todo
 
-[[m:Kernel.#have_library]] などの各種検査の結果を元に、拡張ライブラリを
+[[m:Kernel#have_library]] などの各種検査の結果を元に、拡張ライブラリを
 ビルドするための Makefile を生成します。
 
 extconf.rb は普通このメソッドの呼び出しで終ります。
@@ -956,7 +956,7 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
 --- try_constant(const, headers = nil, opt = ""){ ... } -> Integer | nil
 
 定数 const がシステムに存在するかどうか検査します。
-[[m:Kernel.#have_const]] を使ってください。
+[[m:Kernel#have_const]] を使ってください。
 
 @param const C 言語の定数名を指定します。
 
@@ -972,7 +972,7 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
 --- try_func(func, libs, headers = nil){ ... } -> bool
 
 関数 func がシステムに存在するかどうか検査します。
-[[m:Kernel.#have_func]] を使ってください。
+[[m:Kernel#have_func]] を使ってください。
 
 @param func 関数名を指定します。
 
@@ -985,7 +985,7 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
 --- try_var(var, headers = nil) -> bool
 --- try_var(var, headers = nil){ ... } -> bool
 
-[[m:Kernel.#have_var]] を使ってください。
+[[m:Kernel#have_var]] を使ってください。
 
 @param var 検査したい変数名を指定します。
 
@@ -994,7 +994,7 @@ extconf.rb は普通このメソッドの呼び出しで終ります。
 --- try_type(type, headers = nil, opt = "") -> bool
 --- try_type(type, headers = nil, opt = ""){ ... } -> bool
 
-[[m:Kernel.#have_type]] を使ってください。
+[[m:Kernel#have_type]] を使ってください。
 
 @param type 検査したい型の名前を指定します。
 
@@ -1117,10 +1117,10 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 
 のような形式の配列です。
 
-[[m:Kernel.#have_func]] または [[m:Kernel.#have_header]]
+[[m:Kernel#have_func]] または [[m:Kernel#have_header]]
 を呼び出すと、その検査結果が $defs に追加されます。
 
-[[m:Kernel.#create_header]]
+[[m:Kernel#create_header]]
 はこの変数の値を参照してヘッダファイルを生成します。
 
 --- $libs -> String
@@ -1134,7 +1134,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 
 のような形式の文字列です。
 
-[[m:Kernel.#have_library]] または [[m:Kernel.#find_library]]
+[[m:Kernel#have_library]] または [[m:Kernel#find_library]]
 を呼び出すと、その検査結果が
 間に空白をはさみつつ $libs に連結されます。
 
@@ -1143,7 +1143,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 拡張ライブラリをコンパイルするときの C コンパイラのオプションや、
 ヘッダファイルのディレクトリを指定する文字列です。
 
-[[m:Kernel.#dir_config]] の検査が成功すると、
+[[m:Kernel#dir_config]] の検査が成功すると、
 この変数の値に " -Idir" が追加されます。
 
 --- $LDFLAGS -> String
@@ -1151,7 +1151,7 @@ Ruby のヘッダファイル ruby.h が存在するディレクトリです。
 拡張ライブラリをリンクするときのリンカのオプション、
 ライブラリファイルのディレクトリを指定する文字列です。
 
-[[m:Kernel.#find_library]] または [[m:Kernel.#dir_config]]
+[[m:Kernel#find_library]] または [[m:Kernel#dir_config]]
 の検査が成功すると、$LDFLAGS の値に "-Ldir" を追加します。
 
 #@# おそらくユーザに解放されていない変数
