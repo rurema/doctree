@@ -277,6 +277,68 @@ YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
   YAML::ENGINE.yamler = "syck"
   p YAML         # => Syck
   p YAML::Stream # => Syck::Stream
+
+== Constants
+
+--- ENGINE -> YAML::EngineManager
+
+[[c:YAML::EngineManager]] を返します。
+
+@see [[m:YAML::EngineManager#yamler]], [[m:YAML::EngineManager#yamler=]]
+
+= class YAML::EngineManager
+
+[[lib:yaml]] のバックエンドを管理するクラスです。
+
+== Class Methods
+
+--- new -> YAML::EngineManager
+
+自身を初期化します。
+
+== Instance Methods
+
+--- yamler -> String
+
+使用中のバックエンドを文字列で返します。
+
+例:
+
+  require "psych"
+  require "yaml"
+  p YAML::ENGINE.yamler # => "psych"
+
+--- yamler=(engine)
+
+使用するバックエンドを設定します。
+
+また、engine がまだ require されていなかった場合は require します。
+
+@param engine バックエンドを文字列で指定します。
+
+@raise ArgumentError 未対応のバックエンドを指定した場合に発生します。
+
+例:
+
+  require "psych"
+  require "yaml"
+  p YAML # => Psych
+
+  YAML::ENGINE.yamler = "syck"
+  p YAML # => Syck
+
+--- syck? -> bool
+
+[[lib:syck]] ライブラリを使用中の場合に true を返します。それ以外の場合
+は false を返します。
+
+  require "psych"
+  require "yaml"
+  p YAML::ENGINE.syck? # => false
+
+  YAML::ENGINE.yamler = "syck"
+  p YAML::ENGINE.syck? # => true
+
 #@else
 #@include(yaml/YAML.inside)
 #@include(yaml/Kernel)
