@@ -1,25 +1,3 @@
-= module YAML
-
-YAML (YAML Ain't Markup Language) を扱うモジュールです。
-
-#@since 1.9.2
-YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
-クトのどちらかです。その他のオブジェクトも同様に実体は別のオブジェクト
-です。もし確認したいメソッドの記述が見つからない場合は、それぞれのライ
-ブラリを確認してください。
-
-  require "psych"
-  require "syck"
-  require "yaml"
-
-  YAML::ENGINE.yamler = "psych"
-  p YAML         # => Psych
-  p YAML::Stream # => Psych::Stream
-
-  YAML::ENGINE.yamler = "syck"
-  p YAML         # => Syck
-  p YAML::Stream # => Syck::Stream
-#@end
 
 == Singleton Methods
 

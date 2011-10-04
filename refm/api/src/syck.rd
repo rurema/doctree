@@ -12,6 +12,10 @@
 
 [[lib:yaml]] のバックエンドのためのモジュールです。
 
+#@since 1.9.2
+#@include(yaml/YAML.inside)
+#@end
+
 == Constants
 
 #@until 1.9.2
@@ -430,3 +434,7 @@ include Comparable
 
 --- node_export(node)
 #@todo
+
+#@since 1.9.2
+#@include(yaml/Kernel)
+#@end

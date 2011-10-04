@@ -256,31 +256,29 @@ Rubyist Magazine: [[url:http://jp.rubyist.net/magazine/]]
 
  * Ruby with YAML: [[url:http://www.namikilab.tuat.ac.jp/~sasada/prog/yaml.html]]
 
-#@include(yaml/YAML)
+= module YAML
 
-= reopen Kernel
+YAML (YAML Ain't Markup Language) を扱うモジュールです。
 
-== Private Instance Methods
+#@since 1.9.2
+YAML オブジェクトは実際は [[c:Psych]] オブジェクト、[[c:Syck]] オブジェ
+クトのどちらかです。その他のオブジェクトも同様に実体は別のオブジェクト
+です。もし確認したいメソッドの記述が見つからない場合は、それぞれのライ
+ブラリを確認してください。
 
---- y(obj) -> object
+  require "psych"
+  require "syck"
+  require "yaml"
 
-オブジェクトをYAMLフォーマットで表示します。
+  YAML::ENGINE.yamler = "psych"
+  p YAML         # => Psych
+  p YAML::Stream # => Psych::Stream
 
-@param obj YAML フォーマットで表示したいオブジェクトを指定します。
-
-  require 'yaml'
-  
-  class MyDog
-    attr_accessor :name, :age
-  end
-  
-  mydog = MyDog.new
-  mydog.age = 17
-  
-  p mydog
-  #=> #<MyDog:0x2b080b8 @age=17>
-  y mydog
-  #=> --- !ruby/object:MyDog
-  #=> age: 17
-
+  YAML::ENGINE.yamler = "syck"
+  p YAML         # => Syck
+  p YAML::Stream # => Syck::Stream
+#@else
+#@include(yaml/YAML.inside)
+#@include(yaml/Kernel)
+#@end
 #@end
