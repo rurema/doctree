@@ -1,7 +1,7 @@
 
 == Singleton Methods
 
---- add_builtin_type(type_re){|type, val| ...}
+--- add_builtin_type(type_re){|type, val| ...} -> nil
 #@#--- add_builtin_type(type_re){|obj| ...}
 yaml.org,2002ドメインに属しているクラスをYAMLに追加し
 そのクラスを見つけたときの操作を指定します。
@@ -38,7 +38,7 @@ yaml.org,2002ドメインに属しているクラスをYAMLに追加し
   p rt + 0.25
   #=> 1.0
 
---- add_domain_type(domain, type_re){|type, val| ...}
+--- add_domain_type(domain, type_re){|type, val| ...} -> nil
 #@#--- add_domain_type(domain, type_re){|obj| ...}
 #@# ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
 #@# ではブロックパラメータの数が違う。
@@ -76,7 +76,7 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   }
   #=> #<Person:0x2b0762c @age=33, @name="eiji">
 
---- add_private_type(type_re){|type, val| ...}
+--- add_private_type(type_re){|type, val| ...} -> nil
 #@#--- add_private_type(type_re){|obj| ...}
 
 プライベートタイプのクラスをYAMLに追加し、
@@ -126,7 +126,7 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   #=> #<Person:0x2b06eac @country="Japan", @capital="Tokyo", @name="ichiro">
 
 
---- add_ruby_type(type_re){|type, val| ...}
+--- add_ruby_type(type_re){|type, val| ...} -> nil
 #@#--- add_ruby_type(type){|obj| ...}
 
 rubyタイプのクラスをYAMLに追加し、
@@ -220,8 +220,8 @@ rubyタイプのクラスをYAMLに追加し、
   foo: bar
 #@end
 
---- each_document(io) {|obj| ...}
---- load_documents(io) {|obj| ...}
+--- each_document(io) {|obj| ...} -> nil
+--- load_documents(io) {|obj| ...} -> nil
 
 与えられた io から YAML フォーマットの文書をすべて順に読み込み
 Ruby のオブジェクトに変換し、
@@ -246,7 +246,11 @@ Ruby のオブジェクトに変換し、
   #=>   ["apple", "banana", "carrot"]
   #=>   {"foo"=>"bar"}
 
---- each_node(io) {|obj| ...}
+#@# 以下、@raise にはしなかった。故意ではないと思われるため。
+
+[注意] ブロックを指定しないと NoMethodError が発生する事に注意してください。
+
+--- each_node(io) {|obj| ...} -> nil
 
 与えられた io から YAML フォーマットの文書をすべて順に読み込み
 #@since 1.9.2
@@ -375,16 +379,21 @@ Ruby のオブジェクトを生成して返します。
   #=> [#<Dog:0x2b079b0 @name="pochi">, #<Dog:0x2b0762c @name="tama">]
 
 
---- object_maker(obj_class, val)
-#@# --- object_maker(obj_class, val, is_attr = false)
-#@# is_attrはもうないのかもしれない。
-#@# ruby 1.8.5 (2006-08-25) [i386-linux]
+#@since 1.9.2
+--- object_maker(obj_class, val) -> object
+#@else
+--- object_maker(obj_class, val, is_attr = false) -> object
+#@end
 
 与えられたobj_class クラスに、valハッシュをインスタンス変数として追加し
 obj_classクラスのインスタンスを生成して返します。
 
-@param obj_class クラスを指定する
-@param val ハッシュを指定する。obj_classのインスタンス変数作成に使用される
+@param obj_class クラスを指定します。
+
+@param val [[c:Hash]] を指定します。obj_classのインスタンス変数作成に使
+           用されます。
+
+@raise YAML::Error val に [[c:Hash]] を指定しなかった場合に発生します。
 
   require 'yaml'
 
@@ -410,10 +419,10 @@ obj_classクラスのインスタンスを生成して返します。
   #=> #<Cat:0xb7ccafa8 @name="jiro", @age=23>
   #=> #<Cat:0xb7ccaad0 @name="saburo", @age=8>
 
---- parse(io)
+--- parse(io) -> YAML::Syck::Node
 
 与えられた io から YAML フォーマットの文書をパースし
-[[c:YAML::Syck::Node]]オブジェクトに変換します。
+[[c:YAML::Syck::Node]] かそのサブクラスのオブジェクトに変換します。
 複数のドキュメントを読み込む場合は、[[m:YAML.parse_documents]] を使用します。
 
 @param io YAMLフォーマットのIOオブジェクトもしくは文字列
@@ -445,7 +454,7 @@ obj_classクラスのインスタンスを生成して返します。
   #=> "/cat/1/name"
   # dog は読み込まない
 
---- parse_documents(io) {|obj| ...}
+--- parse_documents(io) {|obj| ...} -> nil
 
 与えられた io から YAML フォーマットの文書をパースし
 [[c:YAML::Syck::Node]]オブジェクトに変換し、
@@ -482,6 +491,8 @@ obj_classクラスのインスタンスを生成して返します。
   #=> "/dog/shiba/1/name"
   #=> "-->"
 
+[注意] ブロックを指定しないと NoMethodError が発生する事に注意してください。
+
 #@since 1.8.2
 --- parse_file(file_path)
 file_pathのファイルから一つのYAMLドキュメントをパースし、
@@ -511,11 +522,11 @@ file_pathのファイルから一つのYAMLドキュメントをパースし、
   #=> {"cat"=>[{"name"=>"taro", "age"=>7}, {"name"=>"jiro", "age"=>23}]}
 #@end
 
---- quick_emit(oid, opts={}) {|obj| ...}
+--- quick_emit(oid, opts={}) {|obj| ...} -> String
 
 ライブラリ内部で使用します。
 
---- read_type_class(type, obj_class)
+--- read_type_class(type, obj_class) -> [String, Class]
 
 ライブラリ内部で使用します。
 
@@ -536,11 +547,11 @@ val で指定したタグを元にタグ URI を作成します。
 
 #@end
 
---- transfer
+--- transfer(type_id, obj) -> object
 
 ライブラリ内部で使用します。
 
---- try_implicit(obj)
+--- try_implicit(obj) -> object
 
 ライブラリ内部で使用します。
 
@@ -564,9 +575,6 @@ YAML パーサを返します。ただし、[[m:YAML.parser]] とは異なり、リゾルバに
 YAML パーサを返します。
 
 @see [[m:YAML.generic_parser]]
-
-#@# YAML.parser は 1.9.2 からなくなるため、戻り値は YAML::Syck::Parser
-#@# のみとした。YAML.resolver も同様。
 
 --- resolver -> YAML::Syck::DefaultResolver
 
