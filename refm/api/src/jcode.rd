@@ -36,7 +36,7 @@ Ruby の文字列のエンコーディングの取り扱いに関しては、
 
 == Methods
 
-#@if (version <= "1.8.6")
+#@until 1.8.7
 --- each_char -> [String]
 --- each_char {|char| ... } -> String
 文字列中の各文字に対してブロックを呼びだします。
@@ -173,7 +173,6 @@ self に多バイト文字が最初に現れる位置を返します。
 #@end
 
 --- chop -> String
---- chop! -> String|nil
 
 [[m:String#chop]] の日本語対応版です。
 
@@ -192,8 +191,11 @@ self に多バイト文字が最初に現れる位置を返します。
   p zstr.chop       # => "ＡＢＣＤＥ"
   p hoge.chop       # => "hogehog"
 
+--- chop! -> self | nil
+
+[[m:String#chop!]] の日本語対応版です。
+
 --- delete(str) -> String
---- delete!(str) -> String|nil
 
 [[m:String#delete]] の日本語対応版です。
 指定したパターンの文字列を取り除きます。
@@ -217,12 +219,21 @@ self に多バイト文字が最初に現れる位置を返します。
   require 'jcode'
   p zstr.delete("Ａ")  # => "ＢＣＤＥＦ"
   p hoge.delete("e")   # => "hoghog"
-    
+
+--- delete!(str) -> self|nil
+
+[[m:String#delete!]] の日本語対応版です。
+指定したパターンの文字列を破壊的に取り除きます。
+
+ただしこのメソッドは置き換え前の物とは異なり
+複数の引数を取れません。
+
+@param str 取り除く文字のパターン。
+
 --- squeeze(str = nil) -> String
---- squeeze!(str = nil) -> String|nil
 
 [[m:String#squeeze]] の日本語対応版です。
-指定した文字を1文字にまとめます。
+指定した文字を1文字にまとめた文字列を返します。
 
 ただしこのメソッドは置き換え前の物とは異なり、
 2つ以上の引数を取ることはできません。
@@ -243,9 +254,18 @@ self に多バイト文字が最初に現れる位置を返します。
   require 'jcode'
   p zstr.squeeze   # => "ＡＢＣ"
   p hoge.squeeze   # => "hoge"
+
+--- squeeze!(str = nil) -> self | nil
+
+[[m:String#squeeze!]] の日本語対応版です。
+指定した文字を1文字にまとめた文字列に自身を置き換えます。
+
+ただしこのメソッドは置き換え前の物とは異なり、
+2つ以上の引数を取ることはできません。
+
+@param str 1文字にまとめる文字のパターン。
     
 --- succ -> String
---- succ! -> String|nil
 
 [[m:String#succ]] の日本語対応版です。
 「次の」文字列を返します。
@@ -270,12 +290,16 @@ EUC-JP の場合はこうはなりません)を返します。
 関する繰り上げを行わないということです。
 #@# CozoH: このあたり、もっと正確で分かりやすい説明が欲しいです。私自身、よく分かっていないので。
 
+--- succ! -> self | nil
+
+[[m:String#succ!]] の日本語対応版です。
+自身を「次の」文字列に置き換えます。
+
 --- tr(search, replace) -> String
---- tr!(search, replace) -> String|nil
 
 [[m:String#tr]] の日本語対応版です。
 search に含まれる文字を検索し、 replace の対応する文字に
-置き換えます。
+置き換えた文字列を返します。
 
 @param search    置き換える文字のパターン
 @param replace    pattern で指定した文字を置き換える文字
@@ -297,14 +321,22 @@ search に含まれる文字を検索し、 replace の対応する文字に
 
 @see [[m:String#tr_s]]
 
+--- tr!(search, replace) -> self | nil
+
+[[m:String#tr!]] の日本語対応版です。
+search に含まれる文字を検索し、 replace の対応する文字に
+破壊的に置き換えます。
+
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
+
 --- tr_s(search, replace) -> String
---- tr_s!(search, replace) -> String|nil
 
 [[m:String#tr_s]] の日本語対応版です。
 文字列の中に search 文字列に含まれる文字が存在したら、
-replace 文字列の対応する文字に置き換えます。さらに、
+replace 文字列の対応する文字に置き換え、
 置換した部分内に同一の文字の並びがあったらそれを 
-1 文字に圧縮します。
+1 文字に圧縮した文字列を返します。
 
 @param search    置き換える文字のパターン
 @param replace    pattern で指定した文字を置き換える文字
@@ -319,7 +351,17 @@ replace 文字列の対応する文字に置き換えます。さらに、
   p "foo".tr_s("o", "f")        # => "ff"
   p "ｆｏｏ".tr_s("ｏ", "ｆ")   # => "ｆｆ"
 
+--- tr_s!(search, replace) -> self | nil
+
+[[m:String#tr_s!]] の日本語対応版です。
+文字列の中に search 文字列に含まれる文字が存在したら、
+replace 文字列の対応する文字に置き換えます。さらに、
+置換した部分内に同一の文字の並びがあったらそれを 
+1 文字に圧縮します。
+
+@param search    置き換える文字のパターン
+@param replace    pattern で指定した文字を置き換える文字
+
 #@end
 
-@see [[m:String#tr]]
 
