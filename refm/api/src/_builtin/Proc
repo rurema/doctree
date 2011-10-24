@@ -66,21 +66,23 @@ Proc.new は、Proc#initialize が定義されていれば
 
 --- [](*arg) -> ()
 --- call(*arg) -> ()
+#@since 1.8.8
+--- ===(*arg) -> ()
+#@end
 
 手続きオブジェクトを実行してその結果を返します。
 
 引数はブロックパラメータにそのまま(多重代入のルールに従い)代入されます。
 
+#@since 1.8.8
+「===」は when の所に手続きを渡せるようにするためのものです。
+#@end
+
 @param arg 手続きオブジェクトに与える引数を指定します。
 
 @raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
 
-#@since 1.8.8
---- ===(obj) -> ()
-#@todo
 
-@see [[m:Proc#call]]
-#@end
 --- arity -> Fixnum
 
 Proc オブジェクトが受け付ける引数の数を返します。
@@ -201,17 +203,76 @@ Procをカリー化します
   p b.curry[]                  #=> :foo
 
 --- lambda? -> bool
-#@todo
+手続きオブジェクトの引数の取扱が厳密であるならば true を返します。
+
+
+引数の取扱の厳密さの意味は以下の例を参考にしてください。
+例:
+  # lambda で生成した Proc オブジェクトでは true 
+  lambda{}.lambda? # => true
+  # proc で生成した Proc オブジェクトでは false
+  proc{}.lambda?   # => false
+  # Proc.new で生成した Proc オブジェクトでは false
+  Proc.new{}.lambda? # => false
+  
+  # 以下、lambda?が偽である場合
+  # 余分な引数を無視する
+  proc{|a,b| [a,b]}.call(1,2,3) # => [1,2]
+  # 足りない引数には nil が渡される
+  proc{|a,b| [a,b]}.call(1) # => [1, nil]
+  # 配列1つだと展開される
+  proc{|a,b| [a,b]}.call([1,2]) => [1,2]
+  # lambdaの場合これらはすべて ArgumentError となる
+   
+  # &が付いた仮引数で生成される Proc は lambda? が偽となる
+  def n(&b) b.lambda? end
+  n {} # => false
+  
+  # &が付いた実引数によるものは、lambda?が元の Procオブジェクトから
+  # 引き継がれる
+  lambda(&lambda {}).lambda?   #=> true
+  proc(&lambda {}).lambda?     #=> true
+  Proc.new(&lambda {}).lambda? #=> true
+  
+  lambda(&proc {}).lambda?     #=> false
+  proc(&proc {}).lambda?       #=> false
+  Proc.new(&proc {}).lambda?   #=> false
+  
+  n(&lambda {})                #=> true
+  n(&proc {})                  #=> false
+  n(&Proc.new {})              #=> false
+  
+  # Method#to_proc によるものは lambda?が真となる
+  def m() end
+  method(:m).to_proc.lambda? #=> false
+  
+  # Module#define_method は特別扱いで、
+  # これで定義されたメソッドの引数は常に厳密に取り扱われる
+  class C
+    define_method(:d) {}
+  end
+  C.new.d(1,2)       #=> ArgumentError
+  C.new.method(:d).to_proc.lambda?   #=> true
+
+  class C
+    define_method(:e, &proc {})
+  end
+  C.new.e(1,2)       #=> ArgumentError
+  C.new.method(:e).to_proc.lambda?   #=> true
 
 --- source_location -> [String, Fixnum] | nil
-#@todo
+ソースコードのファイル名と行番号を配列で返します。
 
-returns the ruby source filename and line number containing this proc
-or nil if this proc was not defined in ruby (i.e. native)
+その手続オブジェクトが ruby で定義されていない(つまりネイティブ
+である)場合は nil を返します。
+
 #@end
 #@since 1.9.2
 --- parameters -> [object]
-#@todo
-
 Proc オブジェクトの引数の情報を返します。
+
+例:
+  prc = lambda{|x, y=42, *other|}
+  prc.parameters  #=> [[:req, :x], [:opt, :y], [:rest, :other]]
+
 #@end
