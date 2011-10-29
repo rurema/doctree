@@ -1,12 +1,12 @@
 
 == Singleton Methods
 
---- add_builtin_type(type_re){|type, val| ...} -> nil
-#@#--- add_builtin_type(type_re){|obj| ...}
+--- add_builtin_type(type_tag){|type, val| ...} -> nil
+
 yaml.org,2002ドメインに属しているクラスをYAMLに追加し
 そのクラスを見つけたときの操作を指定します。
 
-@param type_re 加えるクラスを指定する。
+@param type_tag 加えるクラスを指定する。
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
@@ -35,19 +35,18 @@ yaml.org,2002ドメインに属しているクラスをYAMLに追加し
   ## 前回と変化なし
   
   rt = YAML.load(str2)
-  p rt + 0.25
-  #=> 1.0
+  p rt        # => Rational(3, 4)
+  p rt + 0.25 # => 1.0
 
---- add_domain_type(domain, type_re){|type, val| ...} -> nil
-#@#--- add_domain_type(domain, type_re){|obj| ...}
-#@# ruby 1.8.6 (2007-03-13 patchlevel 0) [i386-mswin32]
-#@# ではブロックパラメータの数が違う。
+#@# require "yaml" した時に間接的に require "rational" される。
+
+--- add_domain_type(domain, type_tag){|type, val| ...} -> nil
 
 YAMLドメインに属しているクラスをYAMLに追加し、
 そのクラスを見つけたときの操作を指定します。
 
 @param domain YAMLのドメインを文字列で指定する。
-@param type_re 加えるクラスを指定する。
+@param type_tag 加えるクラスを指定する。
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
@@ -77,7 +76,6 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   #=> #<Person:0x2b0762c @age=33, @name="eiji">
 
 --- add_private_type(type_re){|type, val| ...} -> nil
-#@#--- add_private_type(type_re){|obj| ...}
 
 プライベートタイプのクラスをYAMLに追加し、
 そのクラスを見つけたときの操作を指定します。
@@ -125,14 +123,12 @@ YAMLドメインに属しているクラスをYAMLに追加し、
   #=> #<YAML::DomainType:0x2b071a4 @type_id="Person", @domain="Qjitsu.com,2007-05-04", @value={"name"=>"eiji", "age"=>33}>
   #=> #<Person:0x2b06eac @country="Japan", @capital="Tokyo", @name="ichiro">
 
-
---- add_ruby_type(type_re){|type, val| ...} -> nil
-#@#--- add_ruby_type(type){|obj| ...}
+--- add_ruby_type(type_tag){|type, val| ...} -> nil
 
 rubyタイプのクラスをYAMLに追加し、
 そのクラスを見つけたときの操作を指定します。
 
-@param type_re rubyタイプのクラスを文字列で指定します。
+@param type_tag rubyタイプのクラスを文字列で指定します。
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
@@ -179,15 +175,15 @@ rubyタイプのクラスをYAMLに追加し、
   require 'yaml'
   
   p YAML.detect_implicit("")
-  #=> "null"
+  # => "null"
   p YAML.detect_implicit("Cat")
-  #=> "str"
+  # => "str"
   p YAML.detect_implicit("true")
   # => "bool#yes"
   p YAML.detect_implicit("10")
-  #=> "int"
+  # => "int"
   p YAML.detect_implicit("0x10")
-  #=> "int#hex"
+  # => "int#hex"
 
 --- dump(obj, io = nil) -> String | IO
 
