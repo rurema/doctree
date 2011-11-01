@@ -97,12 +97,6 @@ StringIO オブジェクトは [[c:OpenURI::Meta]] モジュールで extend されています。
 
 @see [[m:OpenURI.open_uri]]
 
-= reopen URI::HTTP
-include OpenURI::OpenRead
-
-= reopen URI::FTP
-include OpenURI::OpenRead
-
 = module OpenURI
 http/ftp に簡単にアクセスするためのモジュールです。
 
@@ -227,6 +221,12 @@ self.open(options={}).read と同じです。
   str = uri.read
   p str.is_a?(OpenURI::Meta) # => true
   p str.content_type
+
+= reopen URI::HTTP
+include OpenURI::OpenRead
+
+= reopen URI::FTP
+include OpenURI::OpenRead
 
 = module OpenURI::Meta
 サーバから取得したデータの属性を扱うために使われるモジュールです。

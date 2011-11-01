@@ -85,8 +85,6 @@ Rake は以下のような特徴を持っています。
 #@include(rake/glossary.rd)
 
 
-#@include(rake/core_ext)
-
 #@include(rake/Rake)
 #@include(rake/Rake__Application)
 #@include(rake/Rake__Cloneable)
@@ -103,3 +101,7 @@ Rake は以下のような特徴を持っています。
 #@include(rake/Rake__TaskManager)
 
 #@include(rake/RakeFileUtils)
+
+#@include(rake/core_ext)
+
+
