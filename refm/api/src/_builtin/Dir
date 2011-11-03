@@ -289,7 +289,6 @@ file_name で与えられたディレクトリが存在する場合に真を返します。
 #@since 1.9.2
 --- home          -> String | nil
 --- home(user)    -> String | nil
-#@todo
 
 現在のユーザまたは指定されたユーザのホームディレクトリを返します。
 
