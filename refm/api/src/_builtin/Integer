@@ -149,13 +149,17 @@ self > max であれば何もしません。
 
 
 --- ord    -> Integer
-#@todo
-
 自身を返します。
 
    10.ord    #=> 10
+#@since 1.9.1
+   # String#ord
+#@end
    ?a.ord    #=> 97
 
+#@since 1.9.1
+@see [[m:String#ord]
+#@end
 
 --- pred    -> Integer
 
