@@ -496,16 +496,14 @@ Float が取り得る最小値
 
 #@since 1.9.2
 --- INFINITY -> Float
-#@todo
 
-正の無限大 Infinity
+浮動小数点数における正の無限大
 
 @see [[m:Numeric#finite?]], [[m:Numeric#infinite?]]
 
 --- NAN -> Float
-#@todo
+浮動小数点数における NaN(Not a number)
 
-NaN(Not a number)
 
 @see [[m:Numeric#nan?]]
 
