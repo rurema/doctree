@@ -158,7 +158,7 @@ self > max であれば何もしません。
    ?a.ord    #=> 97
 
 #@since 1.9.1
-@see [[m:String#ord]
+@see [[m:String#ord]]
 #@end
 
 --- pred    -> Integer
