@@ -16,7 +16,7 @@ _builtin/Data                                   done
 _builtin/Dir                                    done
 _builtin/ENV                    mukai           done
 _builtin/EOFError               snoozer05       done
-_builtin/Encoding
+_builtin/Encoding               ohai
 _builtin/Enumerable                             done
 _builtin/Enumerator             yugui           done
 _builtin/Exception                              done
