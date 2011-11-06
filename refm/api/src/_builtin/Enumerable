@@ -733,11 +733,11 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
 @param n 取得する要素数。
 
   h = {:a => 1, :b => 2, :c => 3}
-  p(h.first)     #=> [:b, 2]
-  p(h.first(2))  #=> [[:b, 2], [:c, 3]]
-  p({}.first)    #=> nil
-  p({}.first(2)) #=> []
-
+  h.first     #=> [:b, 2]
+  h.first(2)  #=> [[:b, 2], [:c, 3]]
+  e = "abcd".each_byte 
+  e.first #=> 97 
+  e.first(2) #=> [97,98] 
 
 #@since 1.8.8
 --- group_by               -> Enumerator
