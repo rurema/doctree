@@ -622,12 +622,8 @@ rescue 節が存在する時には rescue 節の本体が実行されます。
         # => #<RuntimeError: error message>
              #<RuntimeError: error message>
 
-例外の一致判定は例外のクラスが rescue 節で指定したクラスと同じか
-またはサブクラスであるかどうか [[m:Object#kind_of?]] を用いて判
-定されます。
-#@since 1.8.0
-例外の一致判定は [[m:Module#===]] を用いて行われます。
-#@end
+例外の一致判定は，発生した例外が rescue 節で指定した
+クラスのインスタンスであるかどうかで行われます。 
 
 error_type が省略された時は [[c:StandardError]] のサブクラスであ
 る全ての例外を捕捉します。Rubyの組み込み例外は([[c:SystemExit]] や
