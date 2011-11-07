@@ -179,331 +179,404 @@ name という名前のエンコーディングが既に存在する場合は [[c:ArgumentError]] を発生
 #@end
 == Constants
 
---- ASCII_8BIT
---- BINARY
+--- ASCII_8BIT -> Encoding
+--- BINARY -> Encoding
 ASCII-8BIT、ASCII互換オクテット列用のエンコーディングです。
 
 もっぱら文字エンコーディングを持たないデータ、文字を符号化したのではない単なるバイトの列を表現するために用いますが、このエンコーディングは ASCII 互換であることがポイントです。
 
---- EUC_JP
---- EucJP
---- EUCJP
+--- EUC_JP -> Encoding
+--- EucJP -> Encoding
+--- EUCJP -> Encoding
 IANA Character Sets にある EUC-JP のことです。
 
 日本語 EUC 亜種で、G0 が US-ASCII、G1 が JIS X 0201 片仮名図形文字集合、G2 が JIS X 0208、G3 が JIS X 0212 となっています。
 EUC-JP を指定する場合は、それが実際には CP51932 のことである可能性を考えなければなりません。
 
---- ISO_2022_JP
---- ISO2022_JP
+--- ISO_2022_JP -> Encoding
+--- ISO2022_JP -> Encoding
 ISO-2022-JP エンコーディングです。
 [[url:http://tools.ietf.org/html/rfc1468]]
 
---- Shift_JIS
---- SHIFT_JIS
---- SJIS
+--- Shift_JIS -> Encoding
+--- SHIFT_JIS -> Encoding
+--- SJIS -> Encoding
 IANA Character Sets にある Shift_JIS のことです。
 
 基本的にはJIS X 0208:1997の付属書1にある「シフト符号化表現」のことですが、
 Ruby M17N では 7bit 部分が US-ASCII になっています。
 
---- US_ASCII
---- ASCII
---- ANSI_X3_4_1968
+--- US_ASCII -> Encoding
+--- ASCII -> Encoding
+--- ANSI_X3_4_1968 -> Encoding
 US-ASCII、いわゆる ASCII のことで、ISO 646 IRV と一致します。
 
 7bit の範囲のみを含み、8bit 目の立っている文字 (たとえば \x80 など) が含まれる場合は正しいエンコーディングであるとみなしません。
 
---- UTF_16BE
---- UCS_2BE
+--- UTF_16BE -> Encoding
+--- UCS_2BE -> Encoding
 UTF-16BE (ビッグエンディアン) です。
 
 BOM を含みません。
 
---- UTF_16LE
+--- UTF_16LE -> Encoding
 UTF-16LE (リトルエンディアン) です。
 
 BOM を含みません。
 
---- UTF_32BE
---- UCS_4BE
+--- UTF_32BE -> Encoding
+--- UCS_4BE -> Encoding
 UTF-32BE (ビッグエンディアン) です。
 
 BOM を含みません。
 
---- UTF_32LE
---- UCS_4LE
+--- UTF_32LE -> Encoding
+--- UCS_4LE -> Encoding
 UTF-32LE (リトルエンディアン) です。
 
 BOM を含みません。
 
---- UTF_8
---- CP65001
+--- UTF_8 -> Encoding
+--- CP65001 -> Encoding
 UTF-8、Unicode や ISO 10646 を ASCII 互換な形で符号化するための方式です。
 
 [[url:http://tools.ietf.org/html/rfc3629]]
 
 BOM を含みません。
 
---- UTF8_MAC
---- UTF_8_MAC
+--- UTF8_MAC -> Encoding
+--- UTF_8_MAC -> Encoding
 #@since 1.9.2
---- UTF_8_HFS
+--- UTF_8_HFS -> Encoding
 #@end
 UTF8-MAC、アップルによって修正された Normalization Form D（分解済み）という形式のUTF-8です。
 
 [[url:http://developer.apple.com/jp/technotes/tn1150.html]]
 [[url:http://developer.apple.com/jp/technotes/tn2078.html]]
 
---- UTF_7
---- CP65000
+--- UTF_7 -> Encoding
+--- CP65000 -> Encoding
+#@todo
 
---- Big5
---- BIG5
---- CP950
+--- Big5 -> Encoding
+--- BIG5 -> Encoding
+--- CP950 -> Encoding
+#@todo
 
 #@since 1.9.2
---- Big5_HKSCS
---- BIG5_HKSCS
+--- Big5_HKSCS -> Encoding
+--- BIG5_HKSCS -> Encoding
+#@todo
 
---- CP951
+--- CP951 -> Encoding
+#@todo
 
---- BIG5_UAO
---- Big5_UAO
+--- BIG5_UAO -> Encoding
+--- Big5_UAO -> Encoding
+#@todo
 #@end
 
---- CP51932
+--- CP51932 -> Encoding
 Windows で用いられる、日本語 EUC 亜種です。
 
 G0 が US-ASCII、G1 が JIS X 0201 片仮名図形文字集合、G2 が JIS X 0208 + Windows の機種依存文字となっており、G3 は未割り当てになっています。
 [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp51932]]
 
 #@since 1.9.2
---- CP50220
+--- CP50220 -> Encoding
+#@todo
 
---- CP50221
+--- CP50221 -> Encoding
 Windows で用いられる、ISO-2022-JP 亜種です。
 
 ISO-2022-JP に加え、ESC ( I でいわゆる半角カナを許し、Windows の機種依存文字を扱うことができます。
 [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50221]]
 #@end
 
---- CP850
---- IBM850
+--- CP850 -> Encoding
+--- IBM850 -> Encoding
+#@todo
 
---- CP852
+--- CP852 -> Encoding
+#@todo
 
---- CP855
+--- CP855 -> Encoding
+#@todo
 
---- CP936
+--- CP936 -> Encoding
+#@todo
 
---- CP949
+--- CP949 -> Encoding
+#@todo
 
---- EUC_CN
---- EUCCN
---- EucCN
+--- EUC_CN -> Encoding
+--- EUCCN -> Encoding
+--- EucCN -> Encoding
+#@todo
 
---- EUC_KR
---- EUCKR
---- EucKR
+--- EUC_KR -> Encoding
+--- EUCKR -> Encoding
+--- EucKR -> Encoding
+#@todo
 
---- EUC_TW
---- EUCTW
---- EucTW
+--- EUC_TW -> Encoding
+--- EUCTW -> Encoding
+--- EucTW -> Encoding
+#@todo
 
---- GB18030
+--- GB18030 -> Encoding
+#@todo
 
---- GB1988
+--- GB1988 -> Encoding
+#@todo
 
---- GBK
+--- GBK -> Encoding
+#@todo
 #@# --- WINDOWS_936
 #@# --- Windows_936
 
---- GB12345
+--- GB12345 -> Encoding
+#@todo
 
---- IBM437
---- CP437
+--- IBM437 -> Encoding
+--- CP437 -> Encoding
+#@todo
 
---- IBM737
---- CP737
+--- IBM737 -> Encoding
+--- CP737 -> Encoding
+#@todo
 
---- IBM775
---- CP775
+--- IBM775 -> Encoding
+--- CP775 -> Encoding
+#@todo
 
---- IBM852
+--- IBM852 -> Encoding
+#@todo
 
---- IBM855
+--- IBM855 -> Encoding
+#@todo
 
---- IBM857
---- CP857
+--- IBM857 -> Encoding
+--- CP857 -> Encoding
+#@todo
 
---- IBM860
---- CP860
+--- IBM860 -> Encoding
+--- CP860 -> Encoding
+#@todo
 
---- IBM861
---- CP861
+--- IBM861 -> Encoding
+--- CP861 -> Encoding
+#@todo
 
---- IBM862
---- CP862
+--- IBM862 -> Encoding
+--- CP862 -> Encoding
+#@todo
 
---- IBM863
---- CP863
+--- IBM863 -> Encoding
+--- CP863 -> Encoding
+#@todo
 
---- IBM864
---- CP864
+--- IBM864 -> Encoding
+--- CP864 -> Encoding
+#@todo
 
---- IBM865
---- CP865
+--- IBM865 -> Encoding
+--- CP865 -> Encoding
+#@todo
 
---- IBM866
---- CP866
+--- IBM866 -> Encoding
+--- CP866 -> Encoding
+#@todo
 
---- IBM869
---- CP869
+--- IBM869 -> Encoding
+--- CP869 -> Encoding
+#@todo
 
---- ISO_2022_JP_2
---- ISO2022_JP2
+--- ISO_2022_JP_2 -> Encoding
+--- ISO2022_JP2 -> Encoding
+#@todo
 
---- ISO_8859_1
---- ISO8859_1
+--- ISO_8859_1 -> Encoding
+--- ISO8859_1 -> Encoding
+#@todo
 
 ISO-8859-1 エンコーディングです。
 
---- ISO_8859_10
---- ISO8859_10
+--- ISO_8859_10 -> Encoding
+--- ISO8859_10 -> Encoding
+#@todo
 
---- ISO_8859_11
---- ISO8859_11
+--- ISO_8859_11 -> Encoding
+--- ISO8859_11 -> Encoding
+#@todo
 
---- ISO_8859_13
---- ISO8859_13
+--- ISO_8859_13 -> Encoding
+--- ISO8859_13 -> Encoding
+#@todo
 
---- ISO_8859_14
---- ISO8859_14
+--- ISO_8859_14 -> Encoding
+--- ISO8859_14 -> Encoding
+#@todo
 
---- ISO_8859_15
---- ISO8859_15
+--- ISO_8859_15 -> Encoding
+--- ISO8859_15 -> Encoding
+#@todo
 
---- ISO_8859_16
---- ISO8859_16
+--- ISO_8859_16 -> Encoding
+--- ISO8859_16 -> Encoding
+#@todo
 
---- ISO_8859_2
---- ISO8859_2
+--- ISO_8859_2 -> Encoding
+--- ISO8859_2 -> Encoding
+#@todo
 
---- ISO_8859_3
---- ISO8859_3
+--- ISO_8859_3 -> Encoding
+--- ISO8859_3 -> Encoding
+#@todo
 
---- ISO_8859_4
---- ISO8859_4
+--- ISO_8859_4 -> Encoding
+--- ISO8859_4 -> Encoding
+#@todo
 
---- ISO_8859_5
---- ISO8859_5
+--- ISO_8859_5 -> Encoding
+--- ISO8859_5 -> Encoding
+#@todo
 
---- ISO_8859_6
---- ISO8859_6
+--- ISO_8859_6 -> Encoding
+--- ISO8859_6 -> Encoding
+#@todo
 
---- ISO_8859_7
---- ISO8859_7
+--- ISO_8859_7 -> Encoding
+--- ISO8859_7 -> Encoding
+#@todo
 
---- ISO_8859_8
---- ISO8859_8
+--- ISO_8859_8 -> Encoding
+--- ISO8859_8 -> Encoding
+#@todo
 
---- ISO_8859_9
---- ISO8859_9
+--- ISO_8859_9 -> Encoding
+--- ISO8859_9 -> Encoding
+#@todo
 
---- KOI8_R
---- CP878
+--- KOI8_R -> Encoding
+--- CP878 -> Encoding
+#@todo
 
---- KOI8_U
+--- KOI8_U -> Encoding
+#@todo
 
---- MacJapanese
---- MACJAPAN
---- MACJAPANESE
---- MacJapan
-
-#@since 1.9.2
---- SJIS_DOCOMO
---- SJIS_DoCoMo
-
---- SJIS_KDDI
-
---- SJIS_SOFTBANK
---- SJIS_SoftBank
-
---- UTF8_DOCOMO
---- UTF8_DoCoMo
-
---- UTF8_KDDI
-
---- UTF8_SOFTBANK
---- UTF8_SoftBank
-#@end
-
---- STATELESS_ISO_2022_JP
---- Stateless_ISO_2022_JP
+--- MacJapanese -> Encoding
+--- MACJAPAN -> Encoding
+--- MACJAPANESE -> Encoding
+--- MacJapan -> Encoding
+#@todo
 
 #@since 1.9.2
---- ISO_2022_JP_KDDI
+--- SJIS_DOCOMO -> Encoding
+--- SJIS_DoCoMo -> Encoding
+#@todo
 
---- STATELESS_ISO_2022_JP_KDDI
---- Stateless_ISO_2022_JP_KDDI
+--- SJIS_KDDI -> Encoding
+#@todo
+
+--- SJIS_SOFTBANK -> Encoding
+--- SJIS_SoftBank -> Encoding
+#@todo
+
+--- UTF8_DOCOMO -> Encoding
+--- UTF8_DoCoMo -> Encoding
+#@todo
+
+--- UTF8_KDDI -> Encoding
+#@todo -> Encoding
+
+--- UTF8_SOFTBANK -> Encoding
+--- UTF8_SoftBank -> Encoding
+#@todo
+
 #@end
 
---- TIS_620
+--- STATELESS_ISO_2022_JP -> Encoding
+--- Stateless_ISO_2022_JP -> Encoding
+#@todo
 
---- Windows_1250
---- CP1250
---- WINDOWS_1250
+#@since 1.9.2
+--- ISO_2022_JP_KDDI -> Encoding
+#@todo
 
---- Windows_1251
---- CP1251
---- WINDOWS_1251
+--- STATELESS_ISO_2022_JP_KDDI -> Encoding
+--- Stateless_ISO_2022_JP_KDDI -> Encoding
+#@todo
 
---- Windows_1252
---- CP1252
---- WINDOWS_1252
+#@end
 
---- Windows_1253
---- CP1253
---- WINDOWS_1253
+--- TIS_620 -> Encoding
+#@todo
 
---- Windows_1254
---- CP1254
---- WINDOWS_1254
+--- Windows_1250 -> Encoding
+--- CP1250 -> Encoding
+--- WINDOWS_1250 -> Encoding
+#@todo
 
---- Windows_1255
---- CP1255
---- WINDOWS_1255
+--- Windows_1251 -> Encoding
+--- CP1251 -> Encoding
+--- WINDOWS_1251 -> Encoding
+#@todo
 
---- Windows_1256
---- CP1256
---- WINDOWS_1256
+--- Windows_1252 -> Encoding
+--- CP1252 -> Encoding
+--- WINDOWS_1252 -> Encoding
+#@todo
 
---- Windows_1257
---- CP1257
---- WINDOWS_1257
+--- Windows_1253 -> Encoding
+--- CP1253 -> Encoding
+--- WINDOWS_1253 -> Encoding
+#@todo
 
---- Windows_1258
---- CP1258
---- WINDOWS_1258
+--- Windows_1254 -> Encoding
+--- CP1254 -> Encoding
+--- WINDOWS_1254 -> Encoding
+#@todo
 
---- Windows_31J
---- CP932
---- CSWINDOWS31J
---- CsWindows31J
---- WINDOWS_31J
+--- Windows_1255 -> Encoding
+--- CP1255 -> Encoding
+--- WINDOWS_1255 -> Encoding
+#@todo
+
+--- Windows_1256 -> Encoding
+--- CP1256 -> Encoding
+--- WINDOWS_1256 -> Encoding
+#@todo
+
+--- Windows_1257 -> Encoding
+--- CP1257 -> Encoding
+--- WINDOWS_1257 -> Encoding
+#@todo
+
+--- Windows_1258 -> Encoding
+--- CP1258 -> Encoding
+--- WINDOWS_1258 -> Encoding
+#@todo
+
+--- Windows_31J -> Encoding
+--- CP932 -> Encoding
+--- CSWINDOWS31J -> Encoding
+--- CsWindows31J -> Encoding
+--- WINDOWS_31J -> Encoding
 Windows-31J、Windows で用いられる、シフトJIS亜種で、CP932とも言います。
 
 7bit 部分が論理的には US-ASCIIであり、また Windows の機種依存文字を扱うことができます。
 [[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/index.html]]
 [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp932]]
 
---- Windows_874
---- CP874
---- WINDOWS_874
+--- Windows_874 -> Encoding
+--- CP874 -> Encoding
+--- WINDOWS_874 -> Encoding
+#@todo
 
---- EUCJP_MS
---- EucJP_ms
---- EUC_JP_MS
+--- EUCJP_MS -> Encoding
+--- EucJP_ms -> Encoding
+--- EUC_JP_MS -> Encoding
 eucJP-ms、Unix 系で用いられる、日本語 EUC 亜種です。
 
 EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
@@ -511,38 +584,49 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?eucJP-ms]]
 [[url:http://blog.livedoor.jp/numa2666/archives/50980727.html]]
 
---- MacCentEuro
---- MACCENTEURO
+--- MacCentEuro -> Encoding
+--- MACCENTEURO -> Encoding
+#@todo
 
---- MacCroatian
---- MACCROATIAN
+--- MacCroatian -> Encoding
+--- MACCROATIAN -> Encoding
+#@todo
 
---- MacCyrillic
---- MACCYRILLIC
+--- MacCyrillic -> Encoding
+--- MACCYRILLIC -> Encoding
+#@todo
 
---- MacGreek
---- MACGREEK
+--- MacGreek -> Encoding
+--- MACGREEK -> Encoding
+#@todo
 
---- MacIceland
---- MACICELAND
+--- MacIceland -> Encoding
+--- MACICELAND -> Encoding
+#@todo
 
---- MacRoman
---- MACROMAN
+--- MacRoman -> Encoding
+--- MACROMAN -> Encoding
+#@todo
 
---- MacRomania
---- MACROMANIA
+--- MacRomania -> Encoding
+--- MACROMANIA -> Encoding
+#@todo
 
---- MacThai
---- MACTHAI
+--- MacThai -> Encoding
+--- MACTHAI -> Encoding
+#@todo
 
---- MacTurkish
---- MACTURKISH
+--- MacTurkish -> Encoding
+--- MACTURKISH -> Encoding
+#@todo
 
---- MacUkraine
---- MACUKRAINE
+--- MacUkraine -> Encoding
+--- MACUKRAINE -> Encoding
+#@todo
 
---- EMACS_MULE
---- Emacs_Mule
+--- EMACS_MULE -> Encoding
+--- Emacs_Mule -> Encoding
+#@todo
 
 = class EncodingError < StandardError
 エンコーディング関連の例外の基底クラス。
