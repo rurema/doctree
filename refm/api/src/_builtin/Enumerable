@@ -735,6 +735,9 @@ Enumerable オブジェクトが空の場合、引数を指定しない形式では nil を返します。
   e = "abcd".each_byte 
   e.first #=> 97 
   e.first(2) #=> [97,98] 
+  e = "".each_byte
+  e.first #=> nil
+  e.first(2) #=> []
 
 #@since 1.8.8
 --- group_by               -> Enumerator
