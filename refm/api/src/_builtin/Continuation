@@ -24,7 +24,7 @@ callcc() は、ブロックの戻り値を返しますが、Continuation#call(args)
   
   def LOOP
     c = nil
-    yield callcc {|c| true}
+    yield callcc {|cnt| c = cnt; true }
     c.call(false)
   end
   
