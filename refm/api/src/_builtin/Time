@@ -689,11 +689,14 @@ IEEE 754 浮動小数点数で表現できる精度が違うため、[[m:Time#to_f]]の最小
 #@end
 #@since 1.9.2
 --- round(ndigits=0) -> Time
-#@todo
 
-Rounds sub seconds to a given precision in decimal digits (0 digits by default).
-It returns a new time object.
-_ndigits_ should be zero or positive integer.
+十進小数点数で指定した桁数の精度で丸めをし、
+その [[c:Time]] オブジェクト返します。
+(デフォルトは0、つまり小数点の所で丸めます)。
+
+ndigits には 0 以上の整数を渡します。
+
+@param ndigits 十進での精度(桁数)
 
     require 'time'
 
@@ -708,19 +711,18 @@ _ndigits_ should be zero or positive integer.
     t = Time.utc(1999,12,31, 23,59,59)
     p (t + 0.123456789).round(4).iso8601(6)  #=> "1999-12-31T23:59:59.123500Z"
 
---- subsec -> number
-#@todo
+--- subsec -> Integer | Rational
 
-Returns just the fraction for <i>time</i>.
+時刻を表す分数を返します。
 
-The result is possibly rational.
+[[c:Rational]] を返す場合があります。
 
    t = Time.now        #=> 2009-03-26 22:33:12 +0900
    "%10.9f" % t.to_f   #=> "1238074392.940563917"
    t.subsec            #=> (94056401/100000000)
 
-The lowest digit of to_f and subsec is different because
-IEEE 754 double is not accurate enough to represent
-the rational.
-The accurate value is returned by subsec.
+to_f の値と subsec の値の下のほうの桁の値は異なる場合があります。
+というのは IEEE 754 double はそれを表すのに十分な精度を
+持たないからです。subsec で得られる値が正確です。
+
 #@end
