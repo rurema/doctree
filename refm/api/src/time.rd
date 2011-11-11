@@ -152,6 +152,38 @@ date がISO 8601で定義されている形式に準拠していない、
     puts err #=> invalid date: "2008-08-31A12:34:56+09:00"
   end
 
+#@since 1.9.1
+--- strptime(date, format) -> Time
+--- strptime(date, format){|y| ... } -> Time
+文字列を [[m:Date._strptime]] を用いて [[c:Time]] オブジェクト
+に変換します。
+
+  Time.strptime('2001-02-03T04:05:06+09:00', '%Y-%m-%dT%H:%M:%S%z')
+  #=> 2001-02-03 06:05:06 +0900
+
+ブロックを渡すと年の部分をブロックによって変換できます。
+  Time.strptime('91/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
+    if y > 100 then y
+    elsif y >= 69 then y + 1900
+    else y + 2000
+    end
+  }
+  #=> 1991-05-18 04:13:00 +0900
+  
+  Time.strptime('01/5/18 4:13:00', '%Y/%m/%d %T'){|y| 
+    if y > 100 then y
+    elsif y >= 69 then y + 1900
+    else y + 2000
+    end
+  }
+  #=>  2001-05-18 04:13:00 +0900
+
+詳しくは [[m:DateTime.strptime]], [[m:Date.strptime]] を見てください。
+
+@param date 時刻を表す文字列
+@param format 書式文字列
+#@end
+
 == Instance Methods
 
 --- rfc2822 -> String
