@@ -104,8 +104,6 @@ GC のプロファイル情報をフォーマットし、文字列として返します。
 
 #@since 1.9.2
 --- total_time -> Float
-#@todo
-
-return total time that GC used. (msec)
+GC のプロファイル情報から GC の総計時間を計算し、msec 単位で返します。
 #@end
 #@end
