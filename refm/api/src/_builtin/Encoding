@@ -80,14 +80,12 @@
 --- name_list    -> [String]
 ÍøÍÑ²ÄÇ½¤Ê¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ÎÌ¾Á°¤òÊ¸»úÎó¤ÎÇÛÎó¤ÇÊÖ¤·¤Þ¤¹¡£
 
-¤³¤Î¥ê¥¹¥È¤Ë¤Ï¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ï´Þ¤ß¤Þ¤»¤ó¡£
-
 Îã:
   p Encoding.name_list
   #=> ["US-ASCII", "ASCII-8BIT", "UTF-8",
        "ISO-8859-1", "Shift_JIS", "EUC-JP",
        "Windows-31J",
-       "BINARY", "CP932", "eucJP"]
+       "BINARY", "CP932", "eucJP", ...]
 
 --- default_external -> Encoding
 µ¬Äê¤Î³°Éô¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤òÊÖ¤·¤Þ¤¹¡£
@@ -213,6 +211,18 @@ US-ASCII¡¢¤¤¤ï¤æ¤ë ASCII ¤Î¤³¤È¤Ç¡¢ISO 646 IRV ¤È°ìÃ×¤·¤Þ¤¹¡£
 
 7bit ¤ÎÈÏ°Ï¤Î¤ß¤ò´Þ¤ß¡¢8bit ÌÜ¤ÎÎ©¤Ã¤Æ¤¤¤ëÊ¸»ú (¤¿¤È¤¨¤Ð \x80 ¤Ê¤É) ¤¬´Þ¤Þ¤ì¤ë¾ì¹ç¤ÏÀµ¤·¤¤¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¢¤ë¤È¤ß¤Ê¤·¤Þ¤»¤ó¡£
 
+#@since 1.9.3
+--- UTF_16
+UTF-16 (BOM¤ò´Þ¤à) ¤Ç¤¹¡£
+
+¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+--- UTF_32
+UTF-32 (BOM¤ò´Þ¤à) ¤Ç¤¹¡£
+
+¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+#@end
+
 --- UTF_16BE -> Encoding
 --- UCS_2BE -> Encoding
 UTF-16BE (¥Ó¥Ã¥°¥¨¥ó¥Ç¥£¥¢¥ó) ¤Ç¤¹¡£
@@ -256,25 +266,68 @@ UTF8-MAC¡¢¥¢¥Ã¥×¥ë¤Ë¤è¤Ã¤Æ½¤Àµ¤µ¤ì¤¿ Normalization Form D¡ÊÊ¬²òºÑ¤ß¡Ë¤È¤¤¤¦·Á¼°¤
 
 --- UTF_7 -> Encoding
 --- CP65000 -> Encoding
-#@todo
+
+UTF-7 ¤Ç¤¹¡£
+
+7¥Ó¥Ã¥È¤ÎÈÏ°ÏÆâ¤ÇÉ½¸½¤µ¤ì¤ë¡¢Unicode ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Î°ì¼ï¤Ç¤¹¡£
+¥À¥ß¡¼¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
 
 --- Big5 -> Encoding
 --- BIG5 -> Encoding
+
+Big5 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+ÂæÏÑ¤Ç»È¤ï¤ì¤Æ¤¤¤ëÈËÂÎ»úÃæ¹ñ¸ì¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
 --- CP950 -> Encoding
-#@todo
+
+CP950 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Windows ¤Ç»È¤ï¤ì¤ë Big5 ¤Î°¡¼ï¤Ç¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://msdn.microsoft.com/en-us/goglobal/cc305155.aspx]]
+¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 #@since 1.9.2
 --- Big5_HKSCS -> Encoding
 --- BIG5_HKSCS -> Encoding
-#@todo
+#@since 1.9.3
+--- BIG5_HKSCS_2008 -> Encoding
+--- Big5_HKSCS_2008 -> Encoding
+#@end
+
+Big5-HKSCS ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+¹á¹Á¤Ç»È¤ï¤ì¤Æ¤¤¤ë Big5 ¤Î°¡¼ï¤Ç¤¹¡£
+¾Ü¤·¤¯¤Ï
+[[url:http://www.iana.org/assignments/charset-reg/Big5-HKSCS]],
+[[url:http://www.ogcio.gov.hk/ccli/eng/hkscs/mapping_table_2008.html]]
+¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 --- CP951 -> Encoding
-#@todo
+CP951 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Windows ¤Ç»È¤ï¤ì¤ë Big5-HKSCS ¤Î°¡¼ï¤Ç¤¹¡£
+¾Ü¤·¤¯¤Ï
+[[url:http://www.microsoft.com/hk/hkscs/default.aspx]],
+[[url:http://www.microsoft.com/downloads/en/details.aspx?FamilyID=0e6f5ac8-7baa-4571-b8e8-78b3b776afd7&DisplayLang=en]],
+[[url:http://blogs.msdn.com/b/shawnste/archive/2007/03/12/cp-951-hkscs.aspx]]
+¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 
 --- BIG5_UAO -> Encoding
 --- Big5_UAO -> Encoding
-#@todo
+Big5_UAO ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Big5 ¤Î°¡¼ï(Èó¸ø¼°Åª³ÈÄ¥)¤Ç¤¹¡£
+
+Unicode¤È¤ÎÂÐ±þÉ½¤¬
+[[url:http://moztw.org/docs/big5/table/big5_2003-b2u.txt]]
+¤Ë¤¢¤ê¤Þ¤¹¡£
 #@end
+
 
 --- CP51932 -> Encoding
 Windows ¤ÇÍÑ¤¤¤é¤ì¤ë¡¢ÆüËÜ¸ì EUC °¡¼ï¤Ç¤¹¡£
@@ -284,7 +337,14 @@ G0 ¤¬ US-ASCII¡¢G1 ¤¬ JIS X 0201 ÊÒ²¾Ì¾¿Þ·ÁÊ¸»ú½¸¹ç¡¢G2 ¤¬ JIS X 0208 + Windows 
 
 #@since 1.9.2
 --- CP50220 -> Encoding
-#@todo
+CP50220 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¡¢
+Windows ¤ÇÍÑ¤¤¤é¤ì¤ë ISO-2022-JP °¡¼ï¤Ç¤¹¡£
+
+CP50221 ¤È¤Û¤ÜÆ±ÍÍ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¤¬¡¢
+Â¾¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ø¤ÎÊÑ´¹¥Æ¡¼¥Ö¥ë¤¬¾¯¤·°Û¤Ê¤ê¤Þ¤¹¡£
+
+[[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50220]]
+
 
 --- CP50221 -> Encoding
 Windows ¤ÇÍÑ¤¤¤é¤ì¤ë¡¢ISO-2022-JP °¡¼ï¤Ç¤¹¡£
@@ -312,17 +372,26 @@ ISO-2022-JP ¤Ë²Ã¤¨¡¢ESC ( I ¤Ç¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê¤òµö¤·¡¢Windows ¤Îµ¡¼ï°ÍÂ¸Ê¸»ú¤ò°·
 --- EUC_CN -> Encoding
 --- EUCCN -> Encoding
 --- EucCN -> Encoding
-#@todo
+ENC-CN ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Ãæ¹ñ¤ÇÍÑ¤¤¤é¤ì¤ë´ÊÂÎ»úÃæ¹ñ¸ì EUC¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+GB2312 ¤È¸Æ¤Ð¤ì¤ë¤³¤È¤âÂ¿¤¤¤Ç¤¹¡£
 
 --- EUC_KR -> Encoding
 --- EUCKR -> Encoding
 --- EucKR -> Encoding
-#@todo
+
+EUC-KR ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+´Ú¹ñ¸ì EUC ¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- EUC_TW -> Encoding
 --- EUCTW -> Encoding
 --- EucTW -> Encoding
-#@todo
+
+EUC-TW ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+ÂæÏÑ¤ÇÍÑ¤¤¤é¤ì¤ëÈËÂÎ»úÃæ¹ñ¸ì EUC¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
 --- GB18030 -> Encoding
 #@todo
@@ -402,6 +471,11 @@ ISO-2022-JP ¤Ë²Ã¤¨¡¢ESC ( I ¤Ç¤¤¤ï¤æ¤ëÈ¾³Ñ¥«¥Ê¤òµö¤·¡¢Windows ¤Îµ¡¼ï°ÍÂ¸Ê¸»ú¤ò°·
 
 ISO-8859-1 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 
+±Ñ¸ì°Ê³°¤Î¤¤¤¯¤Ä¤«¤ÎÀ¾ÍÎ¤Î¸À¸ì¤òÉ½¸½¤¹¤ë¤¿¤á¤Î
+8bit¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Latin1 ¤È¤â¸Æ¤Ð¤ì¤Þ¤¹¡£
+
 --- ISO_8859_10 -> Encoding
 --- ISO8859_10 -> Encoding
 #@todo
@@ -474,39 +548,114 @@ ISO-8859-1 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 #@since 1.9.2
 --- SJIS_DOCOMO -> Encoding
 --- SJIS_DoCoMo -> Encoding
-#@todo
+
+SJIS-DoCoMo ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Shift_JIS, CP932 ¤Î°¡¼ï¤Ç¤¹¡£
+DoCoMo ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
+[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 --- SJIS_KDDI -> Encoding
+
+SJIS-KDDI ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Shift_JIS, CP932 ¤Î°¡¼ï¤Ç¤¹¡£
+KDDI ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 #@todo
 
 --- SJIS_SOFTBANK -> Encoding
 --- SJIS_SoftBank -> Encoding
+SJIS-SoftBank ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Shift_JIS, CP932 ¤Î°¡¼ï¤Ç¤¹¡£
+SoftBank ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://creation.mb.softbank.jp/web/web_pic_about.html]]
+[[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 #@todo
 
 --- UTF8_DOCOMO -> Encoding
 --- UTF8_DoCoMo -> Encoding
+UTF8-DoCoMo ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+UTF-8 ¤Î°¡¼ï¤Ç¤¹¡£
+DoCoMo ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
+[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 #@todo
 
 --- UTF8_KDDI -> Encoding
-#@todo -> Encoding
+
+UTF8-KDDI ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+UTF8 ¤Î°¡¼ï¤Ç¤¹¡£
+KDDI ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
+#@todo
 
 --- UTF8_SOFTBANK -> Encoding
 --- UTF8_SoftBank -> Encoding
-#@todo
+UTF8-SoftBank ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+UTF-8 ¤Î°¡¼ï¤Ç¤¹¡£
+SoftBank ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://creation.mb.softbank.jp/web/web_pic_about.html]],
+[[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 #@end
 
 --- STATELESS_ISO_2022_JP -> Encoding
 --- Stateless_ISO_2022_JP -> Encoding
-#@todo
+stateless-ISO-2022-JP ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+ISO-2022-JP¤ò¥¹¥Æ¡¼¥È¥ì¥¹¤Ë°·¤¦¤¿¤á¤ÎÊý¼°¤Ç¤¹¡£
+Emacs-Mule ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤ò¸µ¤Ë¤·¤Æ¤¤¤Þ¤¹¡£
 
 #@since 1.9.2
 --- ISO_2022_JP_KDDI -> Encoding
-#@todo
+ISO-2022-JP-KDDI ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+ISO-2022-JP ¤Î°¡¼ï¤Ç¤¹¡£
+KDDI ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 
 --- STATELESS_ISO_2022_JP_KDDI -> Encoding
 --- Stateless_ISO_2022_JP_KDDI -> Encoding
-#@todo
+stateless-ISO-2022-JP-KDDI ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+stateless-ISO-2022-JP ¤Î°¡¼ï¤Ç¤¹¡£
+KDDI ¤Î·ÈÂÓÅÅÏÃ¤Ç»È¤ï¤ì¤ë³¨Ê¸»ú¤¬´Þ¤Þ¤ì¤Æ¤¤¤Þ¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+¤Ê¤É¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 #@end
 
@@ -526,7 +675,18 @@ ISO-8859-1 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
 --- Windows_1252 -> Encoding
 --- CP1252 -> Encoding
 --- WINDOWS_1252 -> Encoding
+
 #@todo
+
+Windows-1252 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+ISO-8859-1 ¤Î°¡¼ï¤Ç¤¹¡£
+¾Ü¤·¤¯¤Ï
+[[url:http://www.iana.org/assignments/character-sets]],
+[[url:http://www.microsoft.com/globaldev/reference/sbcs/1252.mspx]],
+[[url:http://en.wikipedia.org/wiki/Windows-1252]]
+¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
+
 
 --- Windows_1253 -> Encoding
 --- CP1253 -> Encoding
@@ -626,7 +786,14 @@ EUC-JP¤Ë²Ã¤¨¡¢Windows¤Îµ¡¼ï°ÍÂ¸Ê¸»ú¤È¥æ¡¼¥¶ÄêµÁÊ¸»ú¤ò°·¤¦¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
 --- EMACS_MULE -> Encoding
 --- Emacs_Mule -> Encoding
-#@todo
+
+Emacs-Mule ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+Emacs¤ÎÂ¿¸À¸ì²½(Mule)¤Ç»È¤ï¤ì¤Æ¤¤¤ë¥¹¥Æ¡¼¥È¥ì¥¹¤Î¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°¤Ç¤¹¡£
+
+¾Ü¤·¤¯¤Ï
+http://www.m17n.org/mule/pricai96/mule.en.html
+¤ò»²¾È¤·¤Æ¤¯¤À¤µ¤¤¡£
 
 = class EncodingError < StandardError
 ¥¨¥ó¥³¡¼¥Ç¥£¥ó¥°´ØÏ¢¤ÎÎã³°¤Î´ðÄì¥¯¥é¥¹¡£
