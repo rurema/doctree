@@ -678,13 +678,13 @@ UID FETCH コマンドを送り、メールボックス内のメッセージに
 指定したメールボックスを対象とします。
 
 set で対象とするメッセージを指定します。
-これには sequence number、sequence number の配列、もしくは
+これには UID、UID の配列、もしくは
 [[c:Range]] オブジェクトを渡します。
 attr には取得するアトリビュートを文字列の配列で渡してください。
 指定可能なアトリビュートについては [[m:Net::IMAP::FetchData#attr]] 
 を見てください。
 
-@param set 処理対象のメッセージの sequence number
+@param set 処理対象のメッセージの UID
 @param attr アトリビュート(文字列配列)
 @see [[m:Net::IMAP#fetch]]
 
@@ -771,14 +771,14 @@ UID COPY コマンドを送り、指定したメッセージを
 指定したメールボックスの末尾に追加します。
 
 set でコピーするメッセージを指定します。
-message sequence number(整数)、
-message sequence numberの配列、もしくは [[c:Range]] で
+UID (整数)、
+UID の配列、もしくは [[c:Range]] で
 指定します。コピー元のメールボックスは
 [[m:Net::IMAP#examine]] もしくは [[m:Net::IMAP#select]] で
 指定したものを用います。
 mailbox はコピー先のメールボックスです。
 
-@param set コピーするメッセージの message sequence number
+@param set コピーするメッセージの UID
 @param mailbox コピー先のメールボックス(文字列)
 @see [[m:Net::IMAP#copy]]
 
