@@ -178,13 +178,12 @@ new メソッドと違い initialize メソッドを呼びません。
 
 #@since 1.9.1
 --- exclusive { ... }  -> object
-#@todo
 #@# 1.8 以前は ../thread.rb にあります。
 VM グローバルの Mutex をロックし、ブロックを実行します。
 
 このクラスメソッドの挙動は 1.8 以前とは違います。
 Thread.exclusive は VM グローバルの [[m:Thread::MUTEX_FOR_THREAD_EXCLUSIVE]] の
-synchronize をしているだけで、Thread.exclusive していないスレッドは動きます。
+synchronize を呼び出しているだけで、Thread.exclusive していないスレッドは動きます。
 [[c:Mutex]] や [[c:Monitor]] などの他の排他制御の方法を検討してください。
 
 #@end
@@ -443,21 +442,36 @@ safe_level は、[[m:$SAFE]] と同じです。
 
 
 #@since 1.9.2
---- add_trace_func
-#@todo
+--- add_trace_func(pr) -> Proc
 
---- set_trace_func
-#@todo
+スレッドにトレース用ハンドラを追加します。
+
+追加したハンドラを返します。
+
+@param pr トレースハンドラ([[c:Proc]] オブジェクト)
+@see [[m:Thread#set_trace_func]] [[m:Kernel#.set_trace_func]]
+
+--- set_trace_func(pr) -> Proc | nil
+
+スレッドにトレース用ハンドラを設定します。
+
+nil を渡すとトレースを解除します。
+
+設定したハンドラを返します。
+
+@param pr トレースハンドラ([[c:Proc]] オブジェクト) もしくは nil
+@see [[m:Thread#add_trace_func]] [[m:Kernel#.set_trace_func]]
 
 --- backtrace    -> [String] | nil
-#@todo
+スレッドの現在のバックトレースを返します。
+
+スレッドがすでに終了している場合は nil を返します。
 
 #@end
 == Constants
 
 #@since 1.9.1
 --- MUTEX_FOR_THREAD_EXCLUSIVE
-#@todo
 
-[[m:Thread.exclusive]]用の[[c:Mutex]]です。
+[[m:Thread.exclusive]]用の[[c:Mutex]]オブジェクトです。
 #@end
