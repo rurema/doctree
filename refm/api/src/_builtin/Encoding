@@ -430,7 +430,7 @@ CP437 エンコーディング。
 
 CP437 エンコーディング。
 
-ギリシア語を取り扱う 8bit single-byteエンコーディングです。
+ギリシャ語を取り扱う 8bit single-byteエンコーディングです。
 
 @see [[url:http://en.wikipedia.org/wiki/Code_page_737]]
 
@@ -445,56 +445,114 @@ CP775 エンコーディング。
 
 --- CP850 -> Encoding
 --- IBM850 -> Encoding
-#@todo
 
+CP850 エンコーディング。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_850]]
 
 --- IBM852 -> Encoding
 --- CP852 -> Encoding
-#@todo
+
+CP852 エンコーディング。
+
+ラテンアルファベットを用いる中欧の言語のための
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_852]]
 
 --- IBM855 -> Encoding
 --- CP855 -> Encoding
 
-#@todo
+CP855 エンコーディング。
+
+キリル文字を用いる言語のための
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_855]]
 
 --- IBM857 -> Encoding
 --- CP857 -> Encoding
-#@todo
+
+CP857 エンコーディング。
+
+トルコ語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_857]]
 
 --- IBM860 -> Encoding
 --- CP860 -> Encoding
-#@todo
+
+CP860 エンコーディング。
+
+ポルトガル語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_860]]
+
 
 --- IBM861 -> Encoding
 --- CP861 -> Encoding
-#@todo
+CP861 エンコーディング。
+
+アイスランド語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_861]]
+
 
 --- IBM862 -> Encoding
 --- CP862 -> Encoding
-#@todo
+CP862 エンコーディング。
+
+ヘブライ語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_861]]
 
 --- IBM863 -> Encoding
 --- CP863 -> Encoding
-#@todo
+CP863 エンコーディング。
+
+フランス語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_863]]
 
 --- IBM864 -> Encoding
 --- CP864 -> Encoding
-#@todo
+CP864 エンコーディング。
+
+アラビア語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_864]]
+
 
 --- IBM865 -> Encoding
 --- CP865 -> Encoding
-#@todo
+CP865 エンコーディング。
+
+北欧の諸言語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_865]]
 
 --- IBM866 -> Encoding
 --- CP866 -> Encoding
-#@todo
+CP866 エンコーディング。
+
+キリル文字を使う諸言語に用いられる、
+8bit single-byte エンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_866]]
 
 --- IBM869 -> Encoding
 --- CP869 -> Encoding
 
 CP869 エンコーディング。
 
-ギリシア語を取り扱う 8bit single-byteエンコーディングです。
+ギリシャ語を取り扱う 8bit single-byteエンコーディングです。
 
 @see [[url:http://en.wikipedia.org/wiki/Code_page_869]],
      [[m:Encoding::CP737]]
@@ -977,20 +1035,33 @@ Mac OSで使われる
 
 --- MacCroatian -> Encoding
 --- MACCROATIAN -> Encoding
-#@todo
+MacCroatian エンコーディング。
+
+Mac OS で使われる
+8bit single-byteエンコーディングで、
+クロアチア語、スベロニア語を取り扱うものです。
+
+@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/CROATIAN.TXT]]
 
 --- MacCyrillic -> Encoding
 --- MACCYRILLIC -> Encoding
 
 MacCyrillic エンコーディング。
 
-Mac OS で使われる、キリル文字を取り扱うエンコーディング。
+Mac OS で使われる 8bit single-byte エンコーディングで、
+キリル文字を取り扱うものです。
 
 @see [[url:http://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding]]
 
 --- MacGreek -> Encoding
 --- MACGREEK -> Encoding
-#@todo
+MacGreek エンコーディング。
+
+Mac OSで使われる
+8bit single-byte エンコーディングで、
+ギリシャ語のために使われます。
+
+@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/GREEK.TXT]]
 
 --- MacIceland -> Encoding
 --- MACICELAND -> Encoding
@@ -998,17 +1069,17 @@ Mac OS で使われる、キリル文字を取り扱うエンコーディング。
 MacIceland エンコーディング。
 
 Mac OSで使われる
-8bit single-byteエンコーディングで、
-Iceland 語を取り扱うためのものです。
+8bit single-byte エンコーディングで、
+アイスランド語のために使われます
 
-MacRoman の亜種です。
+@see [[url:http://en.wikipedia.org/wiki/Mac_Icelandic_encoding]]
 
 --- MacRoman -> Encoding
 --- MACROMAN -> Encoding
 MacRoman エンコーディング。
 
 Mac OSで使われる
-8bit single-byteエンコーディングで、
+8bit single-byte エンコーディングで、
 西欧を中心としたラテン文字を用いる諸語を取り扱うためのものです。
 
 IANA character-sets で "macintosh" で表現されるものです。
@@ -1017,7 +1088,13 @@ IANA character-sets で "macintosh" で表現されるものです。
 
 --- MacRomania -> Encoding
 --- MACROMANIA -> Encoding
-#@todo
+MacRoman エンコーディング。
+
+Mac OSで使われる
+8bit single-byte エンコーディングで、
+ルーマニア語のために使われます。
+
+@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/ROMANIAN.TXT]]
 
 --- MacThai -> Encoding
 --- MACTHAI -> Encoding
@@ -1029,7 +1106,13 @@ MacThai エンコーディング。
 
 --- MacTurkish -> Encoding
 --- MACTURKISH -> Encoding
-#@todo
+MacTurkish エンコーディング。
+
+Mac OSで使われる
+8bit single-byte エンコーディングで、
+トルコ語のために使われます。
+
+@see [[url:http://www.unicode.org/Public/MAPPINGS/VENDORS/APPLE/TURKISH.TXT]]
 
 --- MacUkraine -> Encoding
 --- MACUKRAINE -> Encoding
@@ -1039,8 +1122,6 @@ Mac OS で使われる、ウクライナ語キリル文字を取り扱うエンコーディング。
 MacCyrillic の亜種です。
 
 @see [[url:http://en.wikipedia.org/wiki/Macintosh_Ukrainian_encoding]]
-
-#@todo
 
 --- EMACS_MULE -> Encoding
 --- Emacs_Mule -> Encoding
