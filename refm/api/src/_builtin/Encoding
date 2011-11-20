@@ -193,8 +193,9 @@ EUC-JP を指定する場合は、それが実際には CP51932 のことである可能性を考えなければ
 
 --- ISO_2022_JP -> Encoding
 --- ISO2022_JP -> Encoding
-ISO-2022-JP エンコーディングです。
-[[url:http://tools.ietf.org/html/rfc1468]]
+ISO 2022-JP エンコーディングです。
+
+@see [[url:http://tools.ietf.org/html/rfc1468]]
 
 --- Shift_JIS -> Encoding
 --- SHIFT_JIS -> Encoding
@@ -250,9 +251,10 @@ BOM を含みません。
 --- CP65001 -> Encoding
 UTF-8、Unicode や ISO 10646 を ASCII 互換な形で符号化するための方式です。
 
-[[url:http://tools.ietf.org/html/rfc3629]]
-
 BOM を含みません。
+
+@see [[url:http://tools.ietf.org/html/rfc3629]]
+
 
 --- UTF8_MAC -> Encoding
 --- UTF_8_MAC -> Encoding
@@ -261,8 +263,8 @@ BOM を含みません。
 #@end
 UTF8-MAC、アップルによって修正された Normalization Form D（分解済み）という形式のUTF-8です。
 
-[[url:http://developer.apple.com/jp/technotes/tn1150.html]]
-[[url:http://developer.apple.com/jp/technotes/tn2078.html]]
+@see [[url:http://developer.apple.com/jp/technotes/tn1150.html]],
+     [[url:http://developer.apple.com/jp/technotes/tn2078.html]]
 
 --- UTF_7 -> Encoding
 --- CP65000 -> Encoding
@@ -280,15 +282,15 @@ Big5 エンコーディングです。
 
 台湾で使われている繁体字中国語のエンコーディングです。
 
+@see [[url:http://en.wikipedia.org/wiki/Big5]]
+
 --- CP950 -> Encoding
 
 CP950 エンコーディングです。
 
 Windows で使われる Big5 の亜種です。
 
-詳しくは
-[[url:http://msdn.microsoft.com/en-us/goglobal/cc305155.aspx]]
-を参照してください。
+@see [[url:http://msdn.microsoft.com/en-us/goglobal/cc305155.aspx]]
 
 #@since 1.9.2
 --- Big5_HKSCS -> Encoding
@@ -301,20 +303,19 @@ Windows で使われる Big5 の亜種です。
 Big5-HKSCS エンコーディングです。
 
 香港で使われている Big5 の亜種です。
-詳しくは
-[[url:http://www.iana.org/assignments/charset-reg/Big5-HKSCS]],
-[[url:http://www.ogcio.gov.hk/ccli/eng/hkscs/mapping_table_2008.html]]
-を参照してください。
+
+@see [[url:http://www.iana.org/assignments/charset-reg/Big5-HKSCS]],
+     [[url:http://www.ogcio.gov.hk/ccli/eng/hkscs/mapping_table_2008.html]]
+
 
 --- CP951 -> Encoding
 CP951 エンコーディングです。
 
 Windows で使われる Big5-HKSCS の亜種です。
-詳しくは
-[[url:http://www.microsoft.com/hk/hkscs/default.aspx]],
-[[url:http://www.microsoft.com/downloads/en/details.aspx?FamilyID=0e6f5ac8-7baa-4571-b8e8-78b3b776afd7&DisplayLang=en]],
-[[url:http://blogs.msdn.com/b/shawnste/archive/2007/03/12/cp-951-hkscs.aspx]]
-を参照してください。
+
+@see [[url:http://www.microsoft.com/hk/hkscs/default.aspx]],
+     [[url:http://www.microsoft.com/downloads/en/details.aspx?FamilyID=0e6f5ac8-7baa-4571-b8e8-78b3b776afd7&DisplayLang=en]],
+     [[url:http://blogs.msdn.com/b/shawnste/archive/2007/03/12/cp-951-hkscs.aspx]]
 
 
 --- BIG5_UAO -> Encoding
@@ -333,7 +334,8 @@ Unicodeとの対応表が
 Windows で用いられる、日本語 EUC 亜種です。
 
 G0 が US-ASCII、G1 が JIS X 0201 片仮名図形文字集合、G2 が JIS X 0208 + Windows の機種依存文字となっており、G3 は未割り当てになっています。
-[[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp51932]]
+
+@see [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp51932]]
 
 #@since 1.9.2
 --- CP50220 -> Encoding
@@ -343,31 +345,17 @@ Windows で用いられる ISO-2022-JP 亜種です。
 CP50221 とほぼ同様のエンコーディングですが、
 他のエンコーディングへの変換テーブルが少し異なります。
 
-[[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50220]]
+@see [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50220]]
 
 
 --- CP50221 -> Encoding
 Windows で用いられる、ISO-2022-JP 亜種です。
 
 ISO-2022-JP に加え、ESC ( I でいわゆる半角カナを許し、Windows の機種依存文字を扱うことができます。
-[[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50221]]
+
+@see [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp50221]]
 #@end
 
---- CP850 -> Encoding
---- IBM850 -> Encoding
-#@todo
-
---- CP852 -> Encoding
-#@todo
-
---- CP855 -> Encoding
-#@todo
-
---- CP936 -> Encoding
-#@todo
-
---- CP949 -> Encoding
-#@todo
 
 --- EUC_CN -> Encoding
 --- EUCCN -> Encoding
@@ -394,35 +382,79 @@ EUC-TW エンコーディングです。
 台湾で用いられる繁体字中国語 EUCのエンコーディングです。
 
 --- GB18030 -> Encoding
-#@todo
+GBK エンコーディング
+
+中国で用いられる中国語のエンコーディングです。
+
+@see [[url:http://www.iana.org/assignments/charset-reg/GB18030]]
 
 --- GB1988 -> Encoding
-#@todo
+
+CB1988 エンコーディング。
+
+ISO/IEC 646 の中国版です。
 
 --- GBK -> Encoding
-#@todo
+--- CP936 -> Encoding
+
+GBK エンコーディング
+
+中国で用いられる簡体字中国語のエンコーディングです。
+
+@see [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.iana.org/assignments/charset-reg/GBK]],
+     [[url:http://www.microsoft.com/globaldev/reference/dbcs/936.mspx]]
+
+
 #@# --- WINDOWS_936
 #@# --- Windows_936
 
 --- GB12345 -> Encoding
-#@todo
+
+GB 12345 エンコーディング。
+
+GB 2312 から派生したもので、繁体字中国語を取り扱うエンコーディングです。
+
 
 --- IBM437 -> Encoding
 --- CP437 -> Encoding
-#@todo
+
+CP437 エンコーディング。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_437]],
+     [[m:Encoding::CP869]]
+
 
 --- IBM737 -> Encoding
 --- CP737 -> Encoding
-#@todo
+
+CP437 エンコーディング。
+
+ギリシア語を取り扱う 8bit single-byteエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_737]]
+
 
 --- IBM775 -> Encoding
 --- CP775 -> Encoding
+CP775 エンコーディング。
+
+バルト語派の言語を扱うための 8bit single-byteエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_775]]
+
+--- CP850 -> Encoding
+--- IBM850 -> Encoding
 #@todo
 
+
 --- IBM852 -> Encoding
+--- CP852 -> Encoding
 #@todo
 
 --- IBM855 -> Encoding
+--- CP855 -> Encoding
+
 #@todo
 
 --- IBM857 -> Encoding
@@ -459,11 +491,32 @@ EUC-TW エンコーディングです。
 
 --- IBM869 -> Encoding
 --- CP869 -> Encoding
-#@todo
+
+CP869 エンコーディング。
+
+ギリシア語を取り扱う 8bit single-byteエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Code_page_869]],
+     [[m:Encoding::CP737]]
+
+--- CP949 -> Encoding
+
+CP949 エンコーディング。
+
+EUC-KR に近い、韓国語を取り扱う multi-byte エンコーディングです。
+
+@see [[m:Encoding::EUC_KR]],
+     [[url:http://www.microsoft.com/globaldev/reference/dbcs/949.mspx]],
+     [[url:http://en.wikipedia.org/wiki/EUC-KR#EUC-KR]],
 
 --- ISO_2022_JP_2 -> Encoding
 --- ISO2022_JP2 -> Encoding
-#@todo
+
+ISO-2022-JP-2 エンコーディングです。
+
+ISO-2022-JP の拡張版です。
+
+@see [[m:Encoding::ISO_2022_JP]]
 
 --- ISO_8859_1 -> Encoding
 --- ISO8859_1 -> Encoding
@@ -475,74 +528,177 @@ ISO-8859-1 エンコーディングです。
 
 Latin-1 とも呼ばれます。
 
---- ISO_8859_10 -> Encoding
---- ISO8859_10 -> Encoding
-#@todo
 
---- ISO_8859_11 -> Encoding
---- ISO8859_11 -> Encoding
-#@todo
-
---- ISO_8859_13 -> Encoding
---- ISO8859_13 -> Encoding
-#@todo
-
---- ISO_8859_14 -> Encoding
---- ISO8859_14 -> Encoding
-#@todo
-
---- ISO_8859_15 -> Encoding
---- ISO8859_15 -> Encoding
-#@todo
-
---- ISO_8859_16 -> Encoding
---- ISO8859_16 -> Encoding
-#@todo
 
 --- ISO_8859_2 -> Encoding
 --- ISO8859_2 -> Encoding
-#@todo
+
+ISO8859-2 エンコーディング。
+
+中東欧の言語を扱う 8bit single-byte エンコーディングです。
+
+
 
 --- ISO_8859_3 -> Encoding
 --- ISO8859_3 -> Encoding
-#@todo
+ISO8859-3 エンコーディング。
+
+トルコ語、マルタ語、エスペラントを扱う 8bit single-byte エンコーディングです。
+
+
 
 --- ISO_8859_4 -> Encoding
 --- ISO8859_4 -> Encoding
-#@todo
+
+ISO 8859-4 エンコーディング。
+
+北欧の言語を扱う 8bit single-byte エンコーディングです。
+
+
 
 --- ISO_8859_5 -> Encoding
 --- ISO8859_5 -> Encoding
-#@todo
+
+ISO 8859-5 エンコーディング。
+
+キリル文字を用いる言語を扱う 8bit single-byte エンコーディングです。
+
+
 
 --- ISO_8859_6 -> Encoding
 --- ISO8859_6 -> Encoding
-#@todo
+
+ISO8859-6 エンコーディング。
+
+アラビア文字を扱う 8bit single-byte エンコーディングです。
+
+@see [[m:Encoding::Windows_1256]]
+
+
 
 --- ISO_8859_7 -> Encoding
 --- ISO8859_7 -> Encoding
-#@todo
+
+ISO8859-7 エンコーディング。
+
+ギリシャ語を扱う 8bit single-byte エンコーディングです。
+
+@ses [[m:Encoding::Windows_1253]]
+
+
 
 --- ISO_8859_8 -> Encoding
 --- ISO8859_8 -> Encoding
-#@todo
+ISO8859-8 エンコーディング。
+
+ヘブライ語を扱う 8bit single-byte エンコーディングです。
+
+@see [[m:Encoding::Windows_1255]]
+
+
 
 --- ISO_8859_9 -> Encoding
 --- ISO8859_9 -> Encoding
-#@todo
+
+ISO8859-9 エンコーディング。
+
+ISO8859-1 に近い、
+トルコ語を扱うことができる8bit single-byteエンコーディングです。
+
+@see [[m:Encoding::Windows_1254]]
+
+
+
+--- ISO_8859_10 -> Encoding
+--- ISO8859_10 -> Encoding
+
+ISO 8859-10 エンコーディング。
+
+北欧の言語を扱う 8bit single-byte エンコーディングです。
+
+
+
+--- ISO_8859_11 -> Encoding
+--- ISO8859_11 -> Encoding
+
+ISO8859-11 エンコーディング。
+
+タイ語を扱う 8bit single-byte エンコーディングです。
+
+@see [[m:Encoding::TIS_620]]
+
+
+
+--- ISO_8859_13 -> Encoding
+--- ISO8859_13 -> Encoding
+
+ISO8859-13 エンコーディング。
+
+バルト語派の言語を扱う8bit single-byteエンコーディングです。
+
+@see [[m:Encoding::Windows_1257]]
+
+
+
+--- ISO_8859_14 -> Encoding
+--- ISO8859_14 -> Encoding
+
+ISO8859-14 エンコーディング。
+
+ケルト語派の言語を扱う8bit single-byteエンコーディングです。
+
+@see [[m:Encoding::Windows_1257]]
+
+
+
+--- ISO_8859_15 -> Encoding
+--- ISO8859_15 -> Encoding
+
+ISO 8859-15 エンコーディング。
+
+ISO 8859-1 の改訂版です。
+
+
+--- ISO_8859_16 -> Encoding
+--- ISO8859_16 -> Encoding
+
+ISO 8859-16 エンコーディング。
+
+東欧を中心とした地域の諸語を扱う 8bit single-byte エンコーディングです。
 
 --- KOI8_R -> Encoding
 --- CP878 -> Encoding
-#@todo
+
+KOI8-R エンコーディング。
+
+ロシア語のキリル文字で使われる8bit single-byteエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/KOI8-R]]
+
+
 
 --- KOI8_U -> Encoding
-#@todo
+
+KOI8-U エンコーディング。
+
+ウクライナ語のキリル文字で使われる8bit single-byteエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/KOI8-U]]
+
+
 
 --- MacJapanese -> Encoding
 --- MACJAPAN -> Encoding
 --- MACJAPANESE -> Encoding
 --- MacJapan -> Encoding
-#@todo
+
+MacJapanese エンコーディング。
+
+Mac OS の 9.x までで用いられていた Shift_JIS 亜種です。
+
+@see [[url:http://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
+     [[url: http://ja.wikipedia.org/wiki/MacJapanese]]
+
 
 #@since 1.9.2
 --- SJIS_DOCOMO -> Encoding
@@ -553,10 +709,9 @@ SJIS-DoCoMo エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 DoCoMo の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
-[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
-などを参照してください。
+@see [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
+     [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
+
 
 --- SJIS_KDDI -> Encoding
 
@@ -565,11 +720,9 @@ SJIS-KDDI エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
-などを参照してください。
+@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
 
-#@todo
+
 
 --- SJIS_SOFTBANK -> Encoding
 --- SJIS_SoftBank -> Encoding
@@ -578,12 +731,9 @@ SJIS-SoftBank エンコーディングです。
 Shift_JIS, CP932 の亜種です。
 SoftBank の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://creation.mb.softbank.jp/web/web_pic_about.html]]
-[[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
-などを参照してください。
+@see [[url:http://creation.mb.softbank.jp/web/web_pic_about.html]],
+     [[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
 
-#@todo
 
 --- UTF8_DOCOMO -> Encoding
 --- UTF8_DoCoMo -> Encoding
@@ -592,12 +742,10 @@ UTF8-DoCoMo エンコーディングです。
 UTF-8 の亜種です。
 DoCoMo の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
-[[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
-などを参照してください。
 
-#@todo
+@see [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/basic/index.html]],
+     [[url:http://www.nttdocomo.co.jp/english/service/imode/make/content/pictograph/extention/index.html]],
+
 
 --- UTF8_KDDI -> Encoding
 
@@ -606,11 +754,8 @@ UTF8-KDDI エンコーディングです。
 UTF8 の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
-などを参照してください。
 
-#@todo
+@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
 
 --- UTF8_SOFTBANK -> Encoding
 --- UTF8_SoftBank -> Encoding
@@ -619,10 +764,10 @@ UTF8-SoftBank エンコーディングです。
 UTF-8 の亜種です。
 SoftBank の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://creation.mb.softbank.jp/web/web_pic_about.html]],
-[[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
-などを参照してください。
+
+@see [[url:http://creation.mb.softbank.jp/web/web_pic_about.html]],
+     [[url:http://www2.developers.softbankmobile.co.jp/dp/tool_dl/download.php?docid=120&companyid=]]
+
 
 #@end
 
@@ -640,9 +785,9 @@ ISO-2022-JP-KDDI エンコーディングです。
 ISO-2022-JP の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
-などを参照してください。
+
+@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+
 
 
 --- STATELESS_ISO_2022_JP_KDDI -> Encoding
@@ -652,86 +797,163 @@ stateless-ISO-2022-JP-KDDI エンコーディングです。
 stateless-ISO-2022-JP の亜種です。
 KDDI の携帯電話で使われる絵文字が含まれています。
 
-詳しくは
-[[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
-などを参照してください。
+
+@see [[url:http://www.au.kddi.com/ezfactory/tec/spec/img/typeD.pdf]]
+
 
 #@end
 
 --- TIS_620 -> Encoding
-#@todo
+TIS-620 エンコーディング。
+
+タイ語を扱うためのエンコーディングで、 ISO8859-11 とほぼ
+同一のエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Thai_Industrial_Standard_620-2533]]
+
+
 
 --- Windows_1250 -> Encoding
 --- CP1250 -> Encoding
 --- WINDOWS_1250 -> Encoding
-#@todo
+
+Windows-1250 エンコーディング。
+
+ISO8859-2 の亜種です。
+
+@see [[url:http://www.microsoft.com/globaldev/reference/sbcs/1250.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1250]]
 
 --- Windows_1251 -> Encoding
 --- CP1251 -> Encoding
 --- WINDOWS_1251 -> Encoding
-#@todo
+
+Windows-1251 エンコーディング。
+
+キリル文字を用いる言語を取り扱う8bit single-byteエンコーディングです。
+
+@see [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1251.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1251]]
 
 --- Windows_1252 -> Encoding
 --- CP1252 -> Encoding
 --- WINDOWS_1252 -> Encoding
 
-#@todo
-
 Windows-1252 エンコーディングです。
 
-ISO-8859-1 の亜種です。
-詳しくは
-[[url:http://www.iana.org/assignments/character-sets]],
-[[url:http://www.microsoft.com/globaldev/reference/sbcs/1252.mspx]],
-[[url:http://en.wikipedia.org/wiki/Windows-1252]]
-を参照してください。
+ISO8859-1 の亜種です。
+
+@see [[m:Encoding::ISO_8859_1]]
+     [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1252.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1252]]
 
 
 --- Windows_1253 -> Encoding
 --- CP1253 -> Encoding
 --- WINDOWS_1253 -> Encoding
-#@todo
+
+Windows-1253 エンコーディング。
+
+ISO8859-7 の亜種です。
+
+@see [[m:Encoding::ISO_8859_7]],
+     [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1253.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1253]]
 
 --- Windows_1254 -> Encoding
 --- CP1254 -> Encoding
 --- WINDOWS_1254 -> Encoding
-#@todo
+
+Windows-1254 エンコーディング。
+
+ISO8859-9 の亜種です。
+
+@see [[m:Encoding::ISO_8859_9]],
+     [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1254.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1254]]
 
 --- Windows_1255 -> Encoding
 --- CP1255 -> Encoding
 --- WINDOWS_1255 -> Encoding
-#@todo
+
+Windows-1255 エンコーディング。
+
+ISO8859-8 の亜種です。
+
+@see [[m:Encoding::ISO_8859_8]],
+     [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1255.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1255]],
+ 
 
 --- Windows_1256 -> Encoding
 --- CP1256 -> Encoding
 --- WINDOWS_1256 -> Encoding
-#@todo
+Windows-1256 エンコーディング。
+
+Windowsで用いられる、アラビア文字を扱う 8bit single-byte エンコーディングです。
+
+@see [[m:Encoding::ISO_8859_6]],
+     [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1256.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1256]]
+
 
 --- Windows_1257 -> Encoding
 --- CP1257 -> Encoding
 --- WINDOWS_1257 -> Encoding
-#@todo
+Windows-1257 エンコーディング。
+
+ISO8859-13 の亜種です。
+
+@see [[m:Encoding::ISO8859_13]],
+     [[url:http://www.iana.org/assignments/character-sets]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/1257.mspx]],
+     [[url:http://en.wikipedia.org/wiki/Windows-1257]],
+
 
 --- Windows_1258 -> Encoding
 --- CP1258 -> Encoding
 --- WINDOWS_1258 -> Encoding
-#@todo
+
+WINDOWS-1258 エンコーディング。
+
+ベトナム語を扱う 8bit single-byteエンコーディングです。
+
+@see [[url:http://en.wikipedia.org/wiki/Windows-1258]]
 
 --- Windows_31J -> Encoding
 --- CP932 -> Encoding
 --- CSWINDOWS31J -> Encoding
 --- CsWindows31J -> Encoding
 --- WINDOWS_31J -> Encoding
+#@since 1.9.3
+--- PCK -> Encoding
+#@end
+
 Windows-31J、Windows で用いられる、シフトJIS亜種で、CP932とも言います。
 
 7bit 部分が論理的には US-ASCIIであり、また Windows の機種依存文字を扱うことができます。
-[[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/index.html]]
-[[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp932]]
+
+@see [[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/index.html]],
+     [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?cp932]]
 
 --- Windows_874 -> Encoding
 --- CP874 -> Encoding
 --- WINDOWS_874 -> Encoding
-#@todo
+
+Windows-874 エンコーディング。
+
+タイ語を扱うエンコーディングで、ISO8859-11の亜種です。
+
+
+@see [[m:TIS_620]], [[m:ISO_8859_11]],
+     [[url:http://www.microsoft.com/globaldev/reference/sbcs/874.mspx]]
+
 
 --- EUCJP_MS -> Encoding
 --- EucJP_ms -> Encoding
@@ -739,13 +961,19 @@ Windows-31J、Windows で用いられる、シフトJIS亜種で、CP932とも言います。
 eucJP-ms、Unix 系で用いられる、日本語 EUC 亜種です。
 
 EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
-[[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/eucJP-ms.html]]
-[[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?eucJP-ms]]
-[[url:http://blog.livedoor.jp/numa2666/archives/50980727.html]]
+@see [[url:http://www2d.biglobe.ne.jp/~msyk/charcode/cp932/eucJP-ms.html]],
+     [[url:http://legacy-encoding.sourceforge.jp/wiki/index.php?eucJP-ms]],
+     [[url:http://blog.livedoor.jp/numa2666/archives/50980727.html]]
 
 --- MacCentEuro -> Encoding
 --- MACCENTEURO -> Encoding
-#@todo
+MacCentEuro エンコーディング。
+
+Mac OSで使われる
+8bit single-byteエンコーディングで、
+中欧および南東欧の言語を取り扱うものです。
+
+@see [[url:http://en.wikipedia.org/wiki/Macintosh_Central_European_encoding]]
 
 --- MacCroatian -> Encoding
 --- MACCROATIAN -> Encoding
@@ -753,7 +981,12 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 
 --- MacCyrillic -> Encoding
 --- MACCYRILLIC -> Encoding
-#@todo
+
+MacCyrillic エンコーディング。
+
+Mac OS で使われる、キリル文字を取り扱うエンコーディング。
+
+@see [[url:http://en.wikipedia.org/wiki/Macintosh_Cyrillic_encoding]]
 
 --- MacGreek -> Encoding
 --- MACGREEK -> Encoding
@@ -761,11 +994,26 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 
 --- MacIceland -> Encoding
 --- MACICELAND -> Encoding
-#@todo
+
+MacIceland エンコーディング。
+
+Mac OSで使われる
+8bit single-byteエンコーディングで、
+Iceland 語を取り扱うためのものです。
+
+MacRoman の亜種です。
 
 --- MacRoman -> Encoding
 --- MACROMAN -> Encoding
-#@todo
+MacRoman エンコーディング。
+
+Mac OSで使われる
+8bit single-byteエンコーディングで、
+西欧を中心としたラテン文字を用いる諸語を取り扱うためのものです。
+
+IANA character-sets で "macintosh" で表現されるものです。
+
+@see [[url:http://en.wikipedia.org/wiki/Mac_OS_Roman]]
 
 --- MacRomania -> Encoding
 --- MACROMANIA -> Encoding
@@ -773,7 +1021,11 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 
 --- MacThai -> Encoding
 --- MACTHAI -> Encoding
-#@todo
+MacThai エンコーディング。
+
+タイ語を扱うエンコーディングで、ISO8859-11の亜種です。
+
+@see [[m:TIS_620]], [[m:ISO_8859_11]]
 
 --- MacTurkish -> Encoding
 --- MACTURKISH -> Encoding
@@ -781,6 +1033,13 @@ EUC-JPに加え、Windowsの機種依存文字とユーザ定義文字を扱うことができます。
 
 --- MacUkraine -> Encoding
 --- MACUKRAINE -> Encoding
+MacUkraine エンコーディング。
+
+Mac OS で使われる、ウクライナ語キリル文字を取り扱うエンコーディング。
+MacCyrillic の亜種です。
+
+@see [[url:http://en.wikipedia.org/wiki/Macintosh_Ukrainian_encoding]]
+
 #@todo
 
 --- EMACS_MULE -> Encoding
@@ -790,9 +1049,8 @@ Emacs-Mule エンコーディングです。
 
 Emacsの多言語化(Mule)で使われているステートレスのエンコーディングです。
 
-詳しくは
-http://www.m17n.org/mule/pricai96/mule.en.html
-を参照してください。
+@see [[url:http://www.m17n.org/mule/pricai96/mule.en.html]]
+
 
 = class EncodingError < StandardError
 エンコーディング関連の例外の基底クラス。
