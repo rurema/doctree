@@ -940,14 +940,13 @@ lv が指定された場合、lv の深さまで再帰的に平滑化します。
 
 @see [[m:Array#rindex]]
 
+#@until 1.9.1
 --- indexes(*index)     
 --- indices(*index)     
 
-#@since 1.8.0
 このメソッド obsolete です。
 代わりに [[m:Array#values_at]] を使用します。
 使用すると警告メッセージが表示されます。
-#@end
 
 各引数の値をインデックスとする要素の配列を返します。範囲外の
 インデックス指定に対しては nil が対応します。
@@ -958,6 +957,7 @@ lv が指定された場合、lv の深さまで再帰的に平滑化します。
     p ary.indexes( 0, -1, -2 )        #=> ["a", "e", "d"]
     p ary.indexes( -4, -5, -6, -35 )  #=> ["b", "a", nil, nil]
 
+#@end
 
 #@since 1.8.0
 --- insert(nth, *val)    -> self
