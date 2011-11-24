@@ -1395,8 +1395,10 @@ sort! は self を破壊的に変更し、self を返します。ただし、要素の数が 2 より小さい
 #@since 1.9.2
 --- sort_by!               -> Enumerator
 --- sort_by! {|item| ... } -> self
-#@todo
 sort_by の破壊的バージョンです。
+
+ブロックを省略した場合は返り値によって配列を破壊的に
+ソートする [[c:Enumerator]] を返します。
 
 @see [[m:Enumerable#sort_by]]
 #@end
@@ -1404,7 +1406,7 @@ sort_by の破壊的バージョンです。
 --- to_a       -> Array
 
 self を返します。ただし、Array のサブクラスのインスタンスに対して呼ばれた時は、
-自身を Array に変換したものを返します。
+自身を Array に変換したものを返します。nn
 
 --- to_ary  -> self
 
@@ -1628,26 +1630,49 @@ Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
    a.cycle {|x| puts x }  # print, a, b, c, a, b, c,.. forever.
 
 --- shuffle -> Array
+#@since 1.9.3
+--- shuffle(random: rng) -> Array
+#@end
 
-配列の要素をシャッフルして，その結果を配列として返します。
+配列の要素をランダムシャッフルして，その結果を配列として返します。
 
-srand()が有効です。
+#@since 1.9.3
+引数に [[c:Random]] オブジェクトを渡すことでそのオブジェクトが
+生成する疑似乱数列を用いることができます。
+#@end
 
 例:
 
    a = [ 1, 2, 3 ]           #=> [1, 2, 3]
    a.shuffle                 #=> [2, 3, 1]
+#@since 1.9.3
+   rng = Random.new
+   rng2 = rng.dup # RNGを複製
+   # 以下の2つは同じ結果を返す
+   [1,2,3].shuffle(random: rng)
+   [1,2,3].shuffle(random: rng2)
+#@end
 
+@see [[m:Array#shuffle!]]
 --- shuffle!        -> self
-#@todo
+#@since 1.9.3
+--- shuffle!(random: rng) -> self
+#@end
 
-配列を破壊的にシャッフルします。
+配列を破壊的にランダムシャッフルします。
+
+#@since 1.9.3
+引数に [[c:Random]] オブジェクトを渡すことでそのオブジェクトが
+生成する疑似乱数列を用いることができます。
+#@end
 
 例:
 
    a = [ 1, 2, 3 ]           #=> [1, 2, 3]
    a.shuffle!                #=> [2, 3, 1]
    a                         #=> [2, 3, 1]
+
+@see [[m:Array#shuffle]]
 
 --- combination(n) {|c| block }    -> Array
 #@since 1.8.8
@@ -1810,10 +1835,10 @@ srand()が有効です。
 @see [[m:Array#select!]]
 --- select! {|item| block } -> self | nil
 --- select! -> Enumerator
-#@todo
 
-ブロックが false を返した要素を自身から削除します。変更がなかった場合に
-は nil を返します。
+ブロックが false を返した要素を自身から削除します。
+変更があった場合は self を、
+変更がなかった場合には nil を返します。
 
    a = %w{ a b c d e f }
    a.select! {|v| v =~ /[a-z]/ }   # => nil
