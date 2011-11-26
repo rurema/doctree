@@ -1,6 +1,8 @@
 #@since 1.9.2
 require syck/basenode
 
+YAML のノードを表現するためのサブライブラリです。
+
 = class Syck::YamlNode
 include Syck::BaseNode
 #@else
@@ -10,28 +12,64 @@ require yaml/basenode
 include YAML::BaseNode
 #@end
 
+YAML のノードを表現するためのクラスです。
+
 == class methods
---- new(type, val)
-#@todo
+
+#@since 1.9.2
+--- new(type, val) -> Syck::YamlNode
+#@else
+--- new(type, val) -> YAML::YamlNode
+#@end
+
+自身を初期化します。
+
+@param type タグを文字列で指定します。
+
+@param val 値を文字列で指定します。
 
 == instance methods
---- anchor
+
+--- anchor -> object
+
+使用されていません。
+
 --- anchor=(val)
-#@todo
 
---- kind
+使用されていません。
+
+--- kind -> "map" | "seq" | "scalar"
+
+ノードの種別を文字列で返します。
+
 --- kind=(val)
-#@todo
 
---- transform
---- transform=(val)
-#@todo
+ノードの種別を文字列で指定します。
 
---- type_id
+ユーザが直接使用する事はありません。
+
+--- transform -> object
+
+自身が表現するオブジェクトを Ruby のオブジェクトにして返します。
+
+[注意] 動作しません。
+
+--- type_id -> String
+
+自身のタグを文字列で返します。
+
 --- type_id=(val)
-#@todo
 
---- value
+自身のタグを文字列で指定します。
+
+ユーザが直接使用する事はありません。
+
+--- value -> String | Array | Hash
+
+値を返します。
+
 --- value=(val)
-#@todo
 
+自身の値に val を設定します。
+
+ユーザが直接使用する事はありません。
