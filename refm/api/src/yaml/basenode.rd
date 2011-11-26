@@ -44,15 +44,13 @@ YAML のノードを検索するのためのモジュールです。
 
 自身を YAML 形式の文字列にして返します。
 
---- match_path(ypath_str)
-#@todo
+--- match_path(ypath_str) -> Array
 
-YPath search returning a complete depth array
+ライブラリの内部で使用します。
 
---- match_segment(ypath, depth)
-#@todo
+--- match_segment(ypath, depth) -> Array
 
-Search a node for a single YPath segment
+ライブラリの内部で使用します。
 
 --- search(ypath_str) -> [String]
 
@@ -60,6 +58,9 @@ Search a node for a single YPath segment
 
 @param ypath_str 検索するパスを文字列で指定します。
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   node = YAML.parse(DATA)
@@ -81,6 +82,9 @@ Search a node for a single YPath segment
 
 @param ypath_str 検索するパスを文字列で指定します。
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   node = YAML.parse(DATA)
@@ -104,11 +108,18 @@ Search a node for a single YPath segment
 --- select!(ypath_str) -> [object]
 
 引数で指定したパスのノードを検索します。見つかったノードをそれぞれ
+#@since 1.9.2
+[[m:Syck::Node#transform]] で Ruby のオブジェクトにした配列を返し
+#@else
 [[m:YAML::Syck::Node#transform]] で Ruby のオブジェクトにした配列を返し
+#@end
 ます。
 
 @param ypath_str 検索するパスを文字列で指定します。
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   node = YAML.parse(DATA)
@@ -127,4 +138,8 @@ Search a node for a single YPath segment
      - name: jiro
        age: 23
 
+#@since 1.9.2
+@see [[m:Syck::Node#transform]]
+#@else
 @see [[m:YAML::Syck::Node#transform]]
+#@end
