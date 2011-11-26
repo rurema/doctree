@@ -316,8 +316,13 @@ Ruby には整数の大きさに上限がないので、%b, %o, %x
  ます。
 
 #@since 1.9.2
-#@todo
- a, A については [[ruby-dev:40650]] を参照してください。
+ a, A は指数表現の16進数("-h.hhh±pd") で数値を出力します。ただし、[[m:Float::INFINITY]]、[[m:Float::NAN]] はそれぞれ 'Inf'、'NaN' になります。詳しくは [[ruby-dev:40650]] を参照してください。
+
+//emlist{
+  p sprintf("%a", -0.0)            # => "-0x0p+0"
+  p sprintf("%a", 729.0/10)        # => "0x1.239999999999ap+6"
+  p sprintf("%a", Float::INFINITY) # => "Inf"
+//}
 #@end
 
 
