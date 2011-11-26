@@ -1,13 +1,15 @@
 #@since 1.9.2
 require syck/basenode
+#@else
+require yaml/basenode
+#@end
 
 YAML のノードを表現するためのサブライブラリです。
 
+#@since 1.9.2
 = class Syck::YamlNode
 include Syck::BaseNode
 #@else
-require yaml/basenode
-
 = class YAML::YamlNode
 include YAML::BaseNode
 #@end
