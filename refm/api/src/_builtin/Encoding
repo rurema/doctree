@@ -1009,7 +1009,7 @@ Windows-874 エンコーディング。
 タイ語を扱うエンコーディングで、ISO8859-11の亜種です。
 
 
-@see [[m:TIS_620]], [[m:ISO_8859_11]],
+@see [[m:Encoding::TIS_620]], [[m:Encoding::ISO_8859_11]],
      [[url:http://www.microsoft.com/globaldev/reference/sbcs/874.mspx]]
 
 
@@ -1102,7 +1102,7 @@ MacThai エンコーディング。
 
 タイ語を扱うエンコーディングで、ISO8859-11の亜種です。
 
-@see [[m:TIS_620]], [[m:ISO_8859_11]]
+@see [[m:Encoding::TIS_620]], [[m:Encoding::ISO_8859_11]]
 
 --- MacTurkish -> Encoding
 --- MACTURKISH -> Encoding
