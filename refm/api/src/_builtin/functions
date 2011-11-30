@@ -328,8 +328,8 @@ nil とすることで環境変数が削除([[man:unsetenv(3)]])されます。
   # FOO を BAR にして BAZ を削除する
   pid = spawn({"FOO"=>"BAR", "BAZ"=>nil}, command)
 
-親プロセスは [[m:Process.wait]] で子プロセスの終了を待ち合わせるか
-もしくは [[m:Process.detach]] で子プロセスを切り離すかしてください。
+親プロセスは [[m:Process.#waitpid]] で子プロセスの終了を待ち合わせるか
+もしくは [[m:Process.#detach]] で子プロセスを切り離すかしてください。
 そうでないとゾンビプロセスが残る場合があります。
 
 ==== 引数の解釈
