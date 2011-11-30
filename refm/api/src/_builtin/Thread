@@ -449,7 +449,7 @@ safe_level は、[[m:$SAFE]] と同じです。
 追加したハンドラを返します。
 
 @param pr トレースハンドラ([[c:Proc]] オブジェクト)
-@see [[m:Thread#set_trace_func]] [[m:Kernel#.set_trace_func]]
+@see [[m:Thread#set_trace_func]] [[m:Kernel.#set_trace_func]]
 
 --- set_trace_func(pr) -> Proc | nil
 
@@ -460,7 +460,7 @@ nil を渡すとトレースを解除します。
 設定したハンドラを返します。
 
 @param pr トレースハンドラ([[c:Proc]] オブジェクト) もしくは nil
-@see [[m:Thread#add_trace_func]] [[m:Kernel#.set_trace_func]]
+@see [[m:Thread#add_trace_func]] [[m:Kernel.#set_trace_func]]
 
 --- backtrace    -> [String] | nil
 スレッドの現在のバックトレースを返します。
