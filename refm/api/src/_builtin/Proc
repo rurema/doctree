@@ -266,13 +266,28 @@ Procをカリー化します
 その手続オブジェクトが ruby で定義されていない(つまりネイティブ
 である)場合は nil を返します。
 
+@see [[m:Method#source_location]]
+
 #@end
 #@since 1.9.2
 --- parameters -> [object]
 Proc オブジェクトの引数の情報を返します。
 
-例:
-  prc = lambda{|x, y=42, *other|}
-  prc.parameters  #=> [[:req, :x], [:opt, :y], [:rest, :other]]
+Proc オブジェクトが引数を取らなければ空の配列を返します。引数を取る場合は、配列の配列を返し、
+各配列の要素は引数の種類に対応した以下のような Symbol と、引数名を表す Symbol の 2 要素です。
 
+: :req
+ 必須の引数
+: :opt
+ デフォルト値が指定されたオプショナルな引数
+: :rest
+ * で指定された残りすべての引数
+: :block
+ & で指定されたブロック引数
+
+例:
+  prc = lambda{|x, y=42, *other, &b|}
+  prc.parameters #=> [[:req, :x], [:opt, :y], [:rest, :other], [:block, :b]]
+
+@see [[m:Method#parameters]]
 #@end
