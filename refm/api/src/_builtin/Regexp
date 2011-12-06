@@ -28,8 +28,11 @@ Regexp.new(string) を使って正規表現オブジェクトを動的に生成する
 
 @param string 正規表現を文字列として与えます。
 
-@param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],  [[m:Regexp::EXTENDED]] の論理和を指定します。
-              [[c:Fixnum]] 以外であれば真偽値の指定として見なされ、真(nil, false 以外)であれば
+@param option [[m:Regexp::IGNORECASE]], [[m:Regexp::MULTILINE]],  
+              [[m:Regexp::EXTENDED]] 
+              の論理和を指定します。
+              [[c:Fixnum]] 以外であれば真偽値の指定として見なされ
+              、真(nil, false 以外)であれば
               [[m:Regexp::IGNORECASE]] の指定と同じになります。
 
 #@since 1.9.1
@@ -212,11 +215,12 @@ String で与えた場合、それ自身と等しい文字列にマッチするものと解釈され、
 #@end
 
 #@since 1.9.1
---- try_convert(obj) -> re | nil
-#@todo
+--- try_convert(obj) -> Regexp | nil
 
-Try to convert obj into a Regexp, using to_regexp method. Returns
-converted regexp or nil if obj cannot be converted for any reason.
+obj を to_regexp メソッドで Regexp オブジェクトに変換しようと
+試みます。
+
+変換に成功した場合はそれを返し、失敗時には nil を返します。
 
    Regexp.try_convert(/re/)      # => /re/
    Regexp.try_convert("re")      # => nil
@@ -420,19 +424,20 @@ nil.captures を呼び出そうとして例外 [[c:NoMethodError]] が発生して
 
 正規表現の生成時に指定されたオプションを返します。戻り値は、
 [[m:Regexp::EXTENDED]], [[m:Regexp::IGNORECASE]],
+[[m:Regexp::MULTILINE]],
 #@since 1.9.2
-[[m:Regexp::MULTILINE]], [[m:Regexp::FIXEDENCODING]] の論理和です。
-#@else
-[[m:Regexp::MULTILINE]] の論理和です。
+[[m:Regexp::FIXEDENCODING]],
+#@since 1.9.3
+[[m:Regexp::NOENCODING]],
 #@end
+#@end
+の論理和です。
 
 #@since 1.9.1
-#@todo
-
-Note that additional bits
-may be set in the returned options: these are used internally by the regular
-expression code. These extra bits are ignored if the options are passed to
-Regexp::new.
+これで得られるオプションには生成時に指定したもの以外の
+オプションを含んでいる場合があります。これらのビットは
+内部的に用いられているもので、[[m:Regexp.new]] にこれらを
+渡しても無視されます。
 #@end
 
   p Regexp::IGNORECASE # => 1
@@ -506,9 +511,38 @@ otherが同じパターン、オプション、文字コードの正規表現であったらtrueを返します。
 
 #@since 1.9.1
 --- encoding   -> Encoding
-#@todo
+正規表現オブジェクトのエンコーディングを表す [[c:Encoding]] オブジェクト
+を返します。
 
-Returns the Encoding object that represents the encoding of obj.
+--- named_captures -> { String => [Integer] }
+正規表現に含まれる名前付きキャプチャ(named capture)の情報を
+[[c:Hash]] で返します。
+
+Hash のキーは名前付きキャプチャの名前で、値は
+その名前に関連付けられたキャプチャの index のリストを返します。
+
+  /(?<foo>.)(?<bar>.)/.named_captures
+  #=> {"foo"=>[1], "bar"=>[2]}
+  
+  /(?<foo>.)(?<foo>.)/.named_captures
+  #=> {"foo"=>[1, 2]}
+
+  # 名前付きキャプチャを持たないときは空の Hash を返します。
+  /(.)(.)/.named_captures
+  #=> {}
+
+--- names -> [String]
+正規表現に含まれる名前付きキャプチャ(named capture)の名前を
+文字列の配列で返します。
+
+  /(?<foo>.)(?<bar>.)(?<baz>.)/.names
+  
+  #=> ["foo", "bar", "baz"]
+     /(?<foo>.)(?<foo>.)/.names
+  #=> ["foo"]
+  
+  /(.)(.)/.names
+  #=> []
 
 #@end
 
@@ -533,9 +567,21 @@ Returns the Encoding object that represents the encoding of obj.
 
 #@since 1.9.2
 
---- FIXEDENCODING
-#@todo
+--- FIXEDENCODING -> Fixnum
+
+正規表現が特定のエンコーディングの文字列にしかマッチしないことを意味します。
 
 @see [[m:Regexp#fixed_encoding?]]
+
+#@since 1.9.3
+
+--- NOENCODING -> Fixnum
+
+正規表現のマッチ時に文字列のエンコーディングを無視し、
+バイト列としてマッチすることを意味します。
+
+正規表現リテラルの n オプションに対応します。
+
+#@end
 
 #@end

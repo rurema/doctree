@@ -207,10 +207,11 @@ self.to_a.select { ... } と同じです。
 
 #@end
 #@since 1.9.1
---- names -> Array
-#@todo
-Returns a list of names of captures as an array of strings.
-It is same as mtch.regexp.names.
+--- names -> [Array]
+
+名前付きキャプチャの名前を文字列配列で返します。
+
+self.regexp.names と同じです。
 
     /(?<foo>.)(?<bar>.)(?<baz>.)/.match("hoge").names
     #=> ["foo", "bar", "baz"]
