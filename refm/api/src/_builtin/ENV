@@ -297,10 +297,15 @@ self を返します。
 --- select! {|key, value| ... } -> ENV | nil
 --- keep_if -> Enumerator
 --- select! -> Enumerator
-#@todo
 
 キーと値を引数としてブロックを評価した結果が真であ
 るような要素を環境変数に残します。
 
-@see [[m:ENV.delete_if]],[[m:ENV.reject!]]
+keey_if は常に self を返します。
+select! はオブジェクトが変更された場合に self を、
+されていない場合に nil を返します。
+
+ブロックが省略された場合には [[c:Enumerator]] を返します。
+
+@see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [m:Hash#select!]],
 #@end
