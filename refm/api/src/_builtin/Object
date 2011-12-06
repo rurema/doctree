@@ -1295,9 +1295,20 @@ include_private が真のときは private メソッドに対しても真を返します。
 @see [[m:Module#method_defined?]]
 #@since 1.9.2
 --- respond_to_missing?(symbol, include_private) -> bool
-#@todo
 
-Hook method to return whether the _obj_ can respond to _id_ method or not.
+自身が symbol で表されるメソッドに対し [[m:Object#method_missing]] で
+反応するつもりならば真を返します。
+
+[[m:Object#respond_to?]] はメソッドが定義されていない場合、
+デフォルトでこのメソッドを呼びだし問合せます。
+
+[[m:Object#method_missing]] を override した場合に
+このメソッドも override されるべきです。
+
+false を返します。
+
+@param symbol メソッド名シンボル
+@param include_private private method も含めたい場合に true が渡されます
 
 @see [[m:Object#respond_to?]]
 #@end
@@ -1805,7 +1816,6 @@ undef により未定義にされた時にインタプリタから呼び出されます。
 
 #@since 1.8.7
 --- instance_exec(*args) {|*vars| ... } -> object
-#@todo
 
 与えられたブロックをレシーバのコンテキストで実行します。
 
@@ -1820,6 +1830,7 @@ undef により未定義にされた時にインタプリタから呼び出されます。
      end
    end
    k = KlassWithSecret.new
+   # 以下で x には 5 が渡される
    k.instance_exec(5) {|x| @secret + x }   #=> 104
 
 @see [[m:Module#class_exec]], [[m:Module#module_exec]], [[m:Object#instance_eval]]
@@ -1827,7 +1838,6 @@ undef により未定義にされた時にインタプリタから呼び出されます。
 #@end
 #@since 1.9.2
 --- singleton_class -> Class
-#@todo
 
 レシーバの特異クラスを返します。
 まだ特異クラスがなければ、新しく作成します。
