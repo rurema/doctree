@@ -182,7 +182,7 @@ CGIやサーバの実装者に対し `&' の代わりに
 [[lib:cgi]] ライブラリを使って CGI スクリプトを書く場合はこれらの違いを気にする
 必要はありません。
 
-
+#@until 1.9.3
 === 新しい仕様への変更と移行措置について
 
 net/http 1.1 (Ruby 1.6に含まれています)の挙動を使いたい場合には
@@ -205,6 +205,7 @@ net/http 1.1 (Ruby 1.6に含まれています)の挙動を使いたい場合には
 アプリケーション全体でどちらかのバージョンに固定する必要があります。
 
 通常この機能は使わないはずです。1.2固定で利用してください。
+#@end
 
 = class Net::HTTP < Object
 alias HTTPSession
@@ -396,32 +397,57 @@ HTTPS のデフォルトポート (443) を返します。
 
 #@end
 
+#@until 1.9.3
 --- version_1_1 -> ()
 ライブラリの動作をバージョン1.1互換にします。
 
 @see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
      [[m:Net::HTTP.version_1_2?]]
+#@end
 
+#@since 1.9.3
+--- version_1_1? -> false
+--- is_version_1_1? -> false
+何もしません。互換性のために残されており、常に false を返します。
+
+@see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_2?]]
+#@else
 --- version_1_1? -> bool
 --- is_version_1_1? -> bool 
 ライブラリの動作がバージョン1.1互換である場合に真を返します。
 
 @see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
      [[m:Net::HTTP.version_1_2?]]
+#@end
 
+#@since 1.9.3
+--- version_1_2 -> true
+何もしません。互換性のために残されており、常に true を返します。
+
+@see [[m:Net::HTTP.version_1_1?]], [[m:Net::HTTP.version_1_2?]]
+#@else
 --- version_1_2 -> ()
 ライブラリの動作をバージョン1.2互換、つまり
 通常の動作にします。
 
 @see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_1?]]
      [[m:Net::HTTP.version_1_2?]]
+#@end
 
+#@since 1.9.3
+--- version_1_2? -> true
+--- is_version_1_2? -> true
+何もしません。互換性のために残されており、常に true を返します。
+
+@see [[m:Net::HTTP.version_1_2]], [[m:Net::HTTP.version_1_1?]]
+#@else
 --- version_1_2? -> bool
 --- is_version_1_2? -> bool 
 ライブラリの動作がバージョン1.2互換である場合に真を返します。
 
 @see [[m:Net::HTTP.version_1_1]], [[m:Net::HTTP.version_1_2]]
      [[m:Net::HTTP.version_1_1?]]
+#@end
 
 == Instance Methods
 
