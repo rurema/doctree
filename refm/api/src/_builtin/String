@@ -306,6 +306,9 @@ other.to_str と other.<=> が定義されていれば
     p "stringAA" <=> "string"  # => 1
 
 --- ==(other) -> bool
+#@since 1.9.1
+--- ===(other) -> bool
+#@end
 
 文字列の内容が文字列 other の内容と等しいときに true を返します。
 等しくなければ false を返します。
@@ -1354,6 +1357,31 @@ Ruby 1.9 以降は String#bytes.to_a を使ってください。
 --- empty? -> bool
 
 文字列が空 (つまり長さ 0) の時、真を返します。
+
+#@since 1.9.1
+--- getbyte(index) -> Integer | nil
+
+index バイト目のバイトを整数で返します。
+
+index に負を指定すると末尾から数えた位置のバイト
+を取り出します。
+範囲外を指定した場合は nil を返します。
+
+@param index バイトを取り出す位置
+
+--- setbyte(index, k) -> Integer
+
+index バイト目のバイトを変更します。
+
+index に負を指定すると末尾から数えた位置を変更します。
+
+セットした値を返します。
+
+@param index バイトをセットする位置
+@param b セットするバイト(0 から 255 までの整数)
+@raise IndexError 範囲外に値をセットしようとした場合に発生します。
+
+#@end
 
 --- gsub(pattern, replace) -> String
 
