@@ -50,6 +50,9 @@ YAMLドメインに属しているクラスをYAMLに追加し、
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   class Person
@@ -84,6 +87,9 @@ YAMLドメインに属しているクラスをYAMLに追加し、
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   class Person ; end
@@ -132,6 +138,9 @@ rubyタイプのクラスをYAMLに追加し、
 @param type YAMLドメインとクラスの文字列
 @param val YAMLデータ構造
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   class Dog
@@ -266,6 +275,9 @@ Ruby のオブジェクトに変換し、
   foo: bar
   # end of test.yml
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
 
   File.open( 'test.yml' ) do |io|
@@ -347,6 +359,9 @@ Ruby のオブジェクトを生成して返します。
 
 @param io YAML フォーマットの文書のIOオブジェクトもしくは文字列
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   class Dog
@@ -415,16 +430,29 @@ obj_classクラスのインスタンスを生成して返します。
   #=> #<Cat:0xb7ccafa8 @name="jiro", @age=23>
   #=> #<Cat:0xb7ccaad0 @name="saburo", @age=8>
 
+#@since 1.9.2
+--- parse(io) -> Syck::Node
+#@else
 --- parse(io) -> YAML::Syck::Node
+#@end
 
 与えられた io から YAML フォーマットの文書をパースし
+#@since 1.9.2
+[[c:Syck::Node]] かそのサブクラスのオブジェクトに変換します。
+複数のドキュメントを読み込む場合は、YAML.parse_documents(実体は
+[[m:Syck.parse_documents]]) を使用します。
+#@else
 [[c:YAML::Syck::Node]] かそのサブクラスのオブジェクトに変換します。
 複数のドキュメントを読み込む場合は、[[m:YAML.parse_documents]] を使用します。
+#@end
 
 @param io YAMLフォーマットのIOオブジェクトもしくは文字列
 
   #!/usr/bin/env ruby
   
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
   
   doc = YAML.parse(DATA)
@@ -453,11 +481,18 @@ obj_classクラスのインスタンスを生成して返します。
 --- parse_documents(io) {|obj| ...} -> nil
 
 与えられた io から YAML フォーマットの文書をパースし
+#@since 1.9.2
+[[c:Syck::Node]]オブジェクトに変換し、
+#@else
 [[c:YAML::Syck::Node]]オブジェクトに変換し、
+#@end
 生成したオブジェクトを引数としてブロックを評価していきます。
 
 @param io YAML フォーマットの文書の IO オブジェクトもしくは文字列
 
+#@since 1.9.3
+  require 'syck'
+#@end
   require 'yaml'
 
   YAML.parse_documents(DATA){|doc|
@@ -492,7 +527,11 @@ obj_classクラスのインスタンスを生成して返します。
 #@since 1.8.2
 --- parse_file(file_path)
 file_pathのファイルから一つのYAMLドキュメントをパースし、
+#@since 1.9.2
+[[c:Syck::Node]]オブジェクトを返します。
+#@else
 [[c:YAML::Syck::Node]]オブジェクトを返します。
+#@end
 
 @param file_path YAMLドキュメントが書かれたファイルへのパスを文字列で指定する
 
@@ -551,11 +590,19 @@ val で指定したタグを元にタグ URI を作成します。
 
 ライブラリ内部で使用します。
 
+#@since 1.9.2
+--- emitter -> Syck::Emitter
+#@else
 --- emitter -> YAML::Syck::Emitter
+#@end
 
 YAML を出力するためのオブジェクトを返します。
 
+#@since 1.9.2
+--- generic_parser -> Syck::Parser
+#@else
 --- generic_parser -> YAML::Syck::Parser
+#@end
 
 YAML パーサを返します。ただし、[[m:YAML.parser]] とは異なり、リゾルバに
 #@since 1.9.2
@@ -566,12 +613,20 @@ YAML パーサを返します。ただし、[[m:YAML.parser]] とは異なり、リゾルバに
 
 @see [[m:YAML.parser]]
 
+#@since 1.9.2
+--- parser -> Syck::Parser
+#@else
 --- parser -> YAML::Syck::Parser
+#@end
 
 YAML パーサを返します。
 
 @see [[m:YAML.generic_parser]]
 
+#@since 1.9.2
+--- resolver -> Syck::DefaultResolver
+#@else
 --- resolver -> YAML::Syck::DefaultResolver
+#@end
 
 タグ URI との関連付けを解決するリゾルバを返します。
