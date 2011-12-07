@@ -1369,9 +1369,9 @@ index に負を指定すると末尾から数えた位置のバイト
 
 @param index バイトを取り出す位置
 
---- setbyte(index, k) -> Integer
+--- setbyte(index, b) -> Integer
 
-index バイト目のバイトを変更します。
+index バイト目のバイトを b に変更します。 
 
 index に負を指定すると末尾から数えた位置を変更します。
 
