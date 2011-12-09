@@ -307,5 +307,5 @@ select! はオブジェクトが変更された場合に self を、
 
 ブロックが省略された場合には [[c:Enumerator]] を返します。
 
-@see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [m:Hash#select!]],
+@see [[m:ENV.delete_if]],[[m:ENV.reject!]], [[m:Hash#keep_if]], [[m:Hash#select!]],
 #@end
