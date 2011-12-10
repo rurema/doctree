@@ -892,10 +892,17 @@ super の実行が可能なら真(文字列 "super")を返します。
 
 "assignment" を返します。実際に代入は行いませんがローカル変数は定義されます。
 
-   /(.)/ =~ "foo"
-   p defined? $&  # => "$&"
-   p defined? $1  # => "$1"
-   p defined? $2  # => nil
+#@since 1.9.1
+  /(.)/ =~ "foo"
+  defined? $&  # => "global-variable"
+  defined? $1  # => "global-variable"
+  defined? $2  # => nil
+#@else
+  /(.)/ =~ "foo"
+  defined? $&  # => "$&"
+  defined? $1  # => "$1"
+  defined? $2  # => nil
+#@end
 
 $&, $1, $2, などは直前のマッチの結果値が設定された場合だけ真を返します。
 
@@ -925,5 +932,7 @@ $&, $1, $2, などは直前のマッチの結果値が設定された場合だけ真を返します。
  * "instance-variable"
  * "constant"
  * "class variable"
+#@until 1.9.1
  * "$&", "$`", "$1", "$2", ...
+#@end
  * "expression"
