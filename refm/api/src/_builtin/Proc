@@ -144,7 +144,7 @@ self の文字列表現を返します。
   pr = Proc.new {|a,b,c| p [a,b,c]}
   pr.yield(1)        #=> [1, nil, nil]
   pr.yield(1,2,3,4)  #=> [1, 2, 3]
-  pr.call(1)         #=> wrong # of arguments (4 for 3) (ArgumentError)
+  pr.call(1)
 
 これは yield と同じ動作です。
 
