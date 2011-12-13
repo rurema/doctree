@@ -1594,7 +1594,7 @@ Content-Disposition フィールドのパラメータをハッシュテーブルで
   * "SIZE"
 
 = class Net::IMAP::ThreadMember < Struct
-nn
+
 [[m:Net::IMAP#thread]]、 [[m:Net::IMAP#uid_thread]] から
 得られるスレッドの木構造のノードを表すクラスです。
 
