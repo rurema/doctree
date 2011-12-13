@@ -494,9 +494,9 @@ nth が負の場合は文字列の末尾から数えます。
   str0[2, 1] == ?r   #=> false  (左辺は長さ1の文字列、右辺は整数の文字コード)
   str0[-1, 1]        #=> "r"
 #@since 1.9.1  
-  str0[-1, 2]        #=> "r" (あくまでも「右に向かって len バイト」)
-#@else
   str0[-1, 2]        #=> "r" (あくまでも「右に向かって len 文字」)
+#@else
+  str0[-1, 2]        #=> "r" (あくまでも「右に向かって len バイト」)
 #@end
 
   str0[3, 1]         #=> ""
@@ -1861,7 +1861,11 @@ self の内容を other の内容で置き換えます。
 
 --- reverse -> String
 
+#@since 1.9.1
+文字列を文字単位で左右逆転した文字列を返します。
+#@else
 文字列をバイト単位で左右逆転した文字列を返します。
+#@end
 
 例:
     p "foobar".reverse   # => "raboof"
@@ -1869,7 +1873,11 @@ self の内容を other の内容で置き換えます。
 
 --- reverse! -> ()
 
+#@since 1.9.1
+文字列を文字単位で左右逆転します。
+#@else
 文字列をバイト単位で左右逆転します。
+#@end
 
 例:
     str = "foobar"
@@ -1896,11 +1904,19 @@ rindex と [[m:String#index]] とでは、探索方向だけが逆になります。
       #  ing
       #   ing          # 右にずらしていってここで見つかる
 
+#@since 1.9.1
+    # String#rindex の場合
+    p "stringstring".rindex("ing", -1)  # => 9
+      #           ing    # インデックス -1 の文字から探索を始める
+      #          ing
+      #         ing      # 左にずらしていってここで見つかる
+#@else
     # String#rindex の場合
     p "stringstring".rindex("ing", -1)  # => 9
       #           ing    # インデックス -1 のバイトから探索を始める
       #          ing
       #         ing      # 左にずらしていってここで見つかる
+#@end
 
 @param pattern   探索する部分文字列。
                  文字列、正規表現、文字コードを示す 0 から 255 の整数のいずれか
