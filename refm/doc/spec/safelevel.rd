@@ -100,7 +100,7 @@ CGI等でユーザからの入力を処理するのに適しています。
                   from -e:1
 //}
       * ファイルテスト演算子の使用、ファイルの更新時刻比較
-      * 外部コマンド実行 ([[m:Kernel.#system]], [[m:Kernel.#exec]], [[m:Kernel.#`]] など)
+      * 外部コマンド実行 ([[m:Kernel.#system]], [[m:Kernel.#exec]], [[m:Kernel.#`]], [[m:Kernel.#spawn]] など)
       * [[m:Kernel.#eval]] ([[ref:level4]]の説明も参照)
       * トップレベルへの [[m:Kernel.#load]] (第二引数を指定してラップすれば実行可能)
       * [[m:Kernel.#require]]
