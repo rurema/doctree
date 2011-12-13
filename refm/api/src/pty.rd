@@ -51,11 +51,10 @@
 停止したりした場合に発生します。
 #@end
 
-#@until 1.9.2
-@see [[m:Kernel.#system]], [[m:IO.popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
-#@end
 #@since 1.9.2
-@see [[m:Kernel.#system]], [[m:IO.popen]], [[man:signal(2)]]
+@see [[m:Kernel.#spawn]], [[m:Kernel.#system]], [[m:IO.popen]], [[man:signal(2)]]
+#@else
+@see [[m:Kernel.#system]], [[m:IO.popen]], [[m:PTY.#protect_signal]], [[man:signal(2)]]
 #@end
 
 #@until 1.9.2
