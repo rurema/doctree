@@ -1,6 +1,6 @@
 net/ftp に TLS 拡張を実装するライブラリです。
 
-[RFC:4217] で定義されている FTP over SSL/TLS (FTPS) を実装しています。
+[[RFC:4217]] で定義されている FTP over SSL/TLS (FTPS) を実装しています。
 コントロールコネクションを SSL/TLS で暗号化します。
 
 RFCではデータコネクションを TLS で暗号化する機能が定義されていますが、
