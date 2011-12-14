@@ -1,9 +1,7 @@
 Ruby デバッガです。Ruby スクリプトのソースコードデバッグに使用します。
 
-また、Emacs を使用したインタフェース rubydb[23]x.el が
+また、Emacs を使用したインタフェース rubydb3x.el が
 Ruby のアーカイブの misc/ にあるので、活用してください。
-rubydb2x.el は Emacs 19.2x 以前用、
-rubydb3x.el は Emacs 19.3x 以降用です。
 
 === 使い方
 
