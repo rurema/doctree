@@ -159,6 +159,8 @@ path が相対パスであれば default_dir を基準にします。
 先頭の ~ はホームディレクトリ(環境変数 HOME が使われます)に、
 ~USER はそのユーザのホームディレクトリに展開されます。
 
+  p Dir.getwd                      #=> "/home/matz/work/foo"
+  p ENV["HOME"]                    #=> "/home/matz"
   p File.expand_path("..")         #=> "/home/matz/work"
   p File.expand_path("..", "/tmp") #=> "/"
   p File.expand_path("~")          #=> "/home/matz"
@@ -167,6 +169,28 @@ path が相対パスであれば default_dir を基準にします。
 @param path パスを表す文字列を指定します。
 
 @param default_dir path が相対パスであれば default_dir を基準に展開されます。
+
+#@since 1.9.2
+--- absolute_path(file_name, dir_string=nil)
+
+file_name を絶対パスに変換した文字列を返します。
+
+相対パスの場合はカレントディレクトリを基準とします。
+dir_string を渡した場合はそのディレクトリを基準とします。
+
+[[m:File.expand_path]] と異なり、 file_name 先頭が "~" である場合
+それは展開されません。普通のディレクトリ名として処理されます。
+
+  p Dir.getwd                      #=> "/home/matz/work/bar"
+  p ENV["HOME"]                    #=> "/home/matz"
+  p File.absolute_path("..")         #=> "/home/matz/work"
+  p File.absolute_path("..", "/tmp") #=> "/"
+  p File.absolute_path("~")          #=> "/home/matz/work/bar/~"
+  p File.absolute_path("~foo")       #=> "/home/matz/work/bar/~foo"
+
+@see [[m:File.expand_path]]
+
+#@end
 
 --- extname(filename)    -> String
 

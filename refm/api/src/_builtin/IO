@@ -248,43 +248,65 @@ src のオフセット(src.pos)は変更されません。
 @param src_offset  コピーを始めるオフセットを数値で指定します。
 
 --- try_convert(obj) -> IO | nil
-#@todo
-Try to convert obj into an IO, using to_io method. Returns converted
-IO or nil if obj cannot be converted for any reason.
+
+obj を to_io メソッドによって [[c:IO]] オブジェクトに変換します。
+変換できなかった場合は nil を返します。
 
    IO.try_convert(STDOUT)     # => STDOUT
    IO.try_convert("STDOUT")   # => nil
 
 #@end
 
+#@until 1.9.1
 --- new(fd, mode = "r")                -> IO
-#@if (version >="1.8.0")
 --- for_fd(fd, mode = "r")             -> IO
 --- open(fd, mode = "r")               -> IO
 --- open(fd, mode = "r") {|io| ... }   -> object
+#@else
+--- new(fd, mode = "r", opt={})                -> IO
+--- for_fd(fd, mode = "r", opt={})             -> IO
+--- open(fd, mode = "r", opt={})               -> IO
+--- open(fd, mode = "r" opt={}) {|io| ... }   -> object
 #@end
 
 オープン済みのファイルディスクリプタ fd に対する新しい
 IO オブジェクトを生成して返します。
 
-#@since 1.8.0
 IO.open にブロックが与えられた場合、IO オブジェクトを生成しそれを引数としてブロックを
 実行します。ブロックの終了とともに fd はクローズされます。ブロックの結果を返します。
 IO.new, IO.for_fd はブロックを受け付けません。
+
+#@since 1.9.1
+=== オプション引数
+このメソッドは以下のオプションを利用できます。
+  * :mode mode引数と同じ意味です
+  * :external_encoding 外部エンコーディング。"-" はデフォルト外部エンコーディングの
+    別名です。
+  * :internal_encoding 内部エンコーディング。"-" はデフォルト内部エンコーディングの
+    別名です。nilなら変換しません。
+  * :encoding "extenc:intenc" の形で外部/内部エンコーディングを指定します。
+  * :textmode 真を渡すと mode の "t" と同じ意味になります。
+  * :binmode 真を渡すと mode の "b" と同じ意味になります。
+#@since 1.9.2
+  * :autoclose 偽を渡すと close時/GCでのファイナライザ呼出時に fd を close しません。
+#@end
+また、[[m:String#encode]] で説明されている :invalid => :replace などの
+変換オプションも指定することができます。外部エンコーディングから
+内部エンコーディングへの変換をするときに用いられます。
+
 #@end
 
 @param fd ファイルディスクリプタである整数を指定します。
 
-#@since 1.8.0
 @param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します。[[m:File::Constants::RDONLY]] などの
             定数(数値)でモードを指定できます。詳細は組み込み関数 [[m:Kernel.#open]] を参照
             してください。
             mode は省略可能で、省略時のデフォルトのモードは、
             [[man:fcntl(2)]] で F_GETFL フラグが利用できる環境では第一引数で指定した fd のモードを引き継ぎ、
             利用できない環境では "r" になります。
-#@else
-@param mode [[m:Kernel.#open]] と同じ形式で IO のモードを指定します(ただし、文字列形式のみ)。
-            詳細は組み込み関数 [[m:Kernel.#open]] を参照してください。
+
+#@since 1.9.1
+@param opt オプション引数
 #@end
 
 @raise Errno::EXXX IO オブジェクトの生成に失敗した場合に発生します。
@@ -327,18 +349,32 @@ path が空ファイルの場合、何もせずに nil を返します。
 
 --- pipe                    -> [IO]
 #@since 1.9.1
---- pipe(enc_str)           -> [IO]
 --- pipe(ext_enc)           -> [IO]
---- pipe(ext_enc, int_enc)  -> [IO]
+--- pipe(enc_str, opts={})           -> [IO]
+--- pipe(ext_enc, int_enc, opts={})  -> [IO]
+#@since 1.9.2
+--- pipe{|read_iom write_io| ... } -> object
+--- pipe(ext_enc){|read_iom write_io| ... } -> object
+--- pipe(enc_str, opt={}){|read_iom write_io| ... }           -> object
+--- pipe(ext_enc, int_enc, opt={}){|read_iom write_io| ... }  -> object
 #@end
-#@todo
+#@end
 
 [[man:pipe(2)]] を実行して、相互につながった2つの
 [[c:IO]] オブジェクトを要素とする配列を返します。
 
 戻り値の配列は最初の要素が読み込み側で、次の要素が書き込み側です。
 
+#@since 1.9.2
+ブロックが渡された場合は、そのブロックに2つの IO オブジェクトが渡され、
+ブロックの返り値がこのメソッドの返り値となります。
+ブロック終了時に IO オブジェクトがもし close されていないならば
+close します(close されていてるオブジェクトはそのままです)。
+#@end
+
 #@since 1.9.1
+得られる2つの IO オブジェクトのエンコーディングを引数で指定することが
+できます。
 
 @param enc_str 読み込み側の外部エンコーディングを文字列で指定します。
                文字列がコロンを挟んだ二つのエンコーディング名 "A:B" である場合
@@ -347,7 +383,7 @@ path が空ファイルの場合、何もせずに nil を返します。
 @param ext_enc 読み込み側の外部エンコーディングを Encoding オブジェクトで指定します。
 
 @param int_enc 読み込み側の内部エンコーディングを Encoding オブジェクトで指定します。
-
+@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
 #@end
 
 @raise Errno::EXXX IO オブジェクトの作成に失敗した場合に発生します。
@@ -360,8 +396,13 @@ path が空ファイルの場合、何もせずに nil を返します。
   end
   p r.gets           # => "foo\n"
 
+#@until 1.9.1
 --- popen(command, mode = "r")                -> IO
 --- popen(command, mode = "r") {|io| ... }    -> object
+#@else
+--- popen(command, mode = "r", opt={})                -> IO
+--- popen(command, mode = "r", opt={}) {|io| ... }    -> object
+#@end
 
 #@since 1.9.1
 command をサブプロセスとして実行し、そのプロセスの標準入出力
@@ -399,11 +440,19 @@ command をサブプロセスとして実行し、そのプロセスの標準入出力
 #@end
 
 @param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
+#@since 1.9.1
+@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
+#@end
 
 @raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
+#@until 1.9.1
 --- popen("-", mode = "r")                -> IO
 --- popen("-", mode = "r") {|io| ... }    -> object
+#@else
+--- popen("-", mode = "r", opt={})                -> IO
+--- popen("-", mode = "r", opt={}) {|io| ... }    -> object
+#@end
 
 第一引数に文字列 "-" が指定された時、[[man:fork(2)]] を
 行い子プロセスの標準入出力との間にパイプラインを確立します。
@@ -438,6 +487,9 @@ nil を返します。
   # => "child output: foo\n"
 
 @param mode オープンする IO ポートのモードを指定します。mode の詳細は [[m:Kernel.#open]] 参照して下さい。
+#@since 1.9.1
+@param opt エンコーディングなどを設定するオプション引数(see [[m:IO.new]])
+#@end
 
 @raise Errno::EXXX パイプ、あるいは子プロセスの生成に失敗した場合に発生します。
 
@@ -481,18 +533,21 @@ length バイト分読み込んで返します。
 キーはいずれも Symbol オブジェクトです。
 
 : :encoding
-
-  specifies encoding of the read string.  encoding will be ignored
-  if length is specified.
+  
+  読み込んだ文字列のエンコーディングを指定します。
+  読み込む長さを指定した場合はこれは無視されます。
 
 : :mode
-
-  specifies mode argument for open().  it should start with "r"
-  otherwise it would cause error.
+  
+  [[m:IO.open]] のモードを指定します。
+  "r" で始まる文字列である必要があります。
 
 : :open_args
+  
+  [[m:IO.open]] に渡される引数を配列で指定します。
 
-  specifies arguments for open() as an array.
+これらの他、 :external_encoding など
+[[m:IO.open]] のオプション引数が指定できます。
 
 @see [[m:IO.binread]]
 
@@ -510,7 +565,12 @@ length バイト分読み込んで返します。
 
 #@since 1.9.1
 --- binread(path, length = nil, offset = 0)     -> String | nil
-#@todo
+path で指定したファイルを open し、offset の所まで seek し、
+length バイト読み込みます。
+
+length を省略するとファイルの末尾まで読み込みます。
+
+ファイルを開くときの mode は "rb:ASCII-8BIT" です。
 
 @see [[m:IO.read]]
 #@end
@@ -594,6 +654,44 @@ path で指定されるファイルをオープンし、ファイル記述子を返しま
 
 #@end
 
+#@since 1.9.3
+--- write(path, string, offset=nil, opt={}) -> Integer
+path で指定されるファイルを開き、string を書き込み、
+閉じます。
+
+offset を指定するとその位置までシークします。
+
+offset を指定しないと、書き込みの末尾でファイルを
+切り捨てます。
+
+引数最後のハッシュはファイルを開くときに使われます。
+エンコーディングなどを指定することができます。
+詳しくは [[m:IO.open]] を見てください。
+
+@param path ファイル名文字列
+@param string 書き込む文字列
+@param offset 書き込み開始位置
+@param opt ファイルを開くときのオプション引数
+
+@see [[m:IO.binwrite]]
+
+--- binwrite(path, string, offset=nil) -> Integer
+path で指定されるファイルを開き、string を書き込み、
+閉じます。
+
+offset を指定するとその位置までシークします。
+
+offset を指定しないと、書き込みの末尾でファイルを
+切り捨てます。
+
+@param path ファイル名文字列
+@param string 書き込む文字列
+@param offset 書き込み開始位置
+
+@see [[m:IO.write]]
+
+#@end
+
 == Instance Methods
 
 --- <<(object)    -> self
@@ -666,15 +764,40 @@ self がパイプでプロセスにつながっていれば、そのプロセスの終
 ポートがクローズされている時に真を返します。
 
 --- each(rs = $/) {|line| ... }         -> self
---- each_line(rs = $/) {|line| ... }    -> self
-#@since 1.8.7
-#@since 1.8.8
---- each(rs = $/)                       -> Enumerator
---- each_line(rs = $/)                  -> Enumerator
-#@else
---- each(rs = $/)                       -> Enumerable::Enumerator
---- each_line(rs = $/)                  -> Enumerable::Enumerator
+#@since 1.9.1
+--- each(limit) {|line| ... }           -> self
+--- each(rs, limit) {|line| ... }       -> self
 #@end
+#@since 1.8.7
+#@until 1.9.1
+--- each(rs = $/)                       -> Enumerable::Enumerator
+#@else
+--- each(rs = $/)                       -> Enumerator
+--- each(limit)                         -> Enumerator
+--- each(rs, limit)                     -> Enumerator
+#@end
+#@end
+--- each_line(rs = $/) {|line| ... }    -> self
+#@since 1.9.1
+--- each_line(limit) {|line| ... }      -> self
+--- each_line(rs, limit) {|line| ... }  -> self
+#@end
+#@since 1.8.7
+#@until 1.9.1
+--- each_line(rs = $/)                  -> Enumerable::Enumerator
+#@else
+--- each_line(rs = $/)                  -> Enumerator
+--- each_line(limit)                    -> Enumerator
+--- each_line(rs, limit)                -> Enumerator
+#@end
+#@end
+#@since 1.9.1
+--- lines(rs = $/) {|line| ... }        -> self
+--- lines(limit) {|line| ... }          -> self
+--- lines(rs, limit) {|line| ... }      -> self
+--- lines(rs = $/)                      -> Enumerator
+--- lines(limit)                        -> Enumerator
+--- lines(rs, limit)                    -> Enumerator
 #@end
 
 IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
@@ -695,10 +818,13 @@ IO の現在位置から 1 行ずつ文字列として読み込み、それを引数として
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+#@since 1.9.1
+@param limit 最大の読み込みバイト数
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@see [[m:$/]]
+@see [[m:$/]], [[m:IO#gets]]
 
 --- each_byte {|ch| ... }    -> self
 #@since 1.8.7
@@ -803,7 +929,6 @@ IO ポートの内部バッファをフラッシュします。
 
 #@since 1.9.1
 --- getc    -> String | nil
-#@todo
 
 IO ポートから外部エンコーディングに従い 1 文字読み込んで返します。
 EOF に到達した時には nil を返します。
@@ -851,8 +976,18 @@ EOF に到達した時には nil を返します。
 読み込んだ文字列を変数 [[m:$_]] にセットします。
 [[m:IO#readline]] との違いは EOF での振る舞いのみです。
 
+#@since 1.9.1
+limit で最大の読み込みバイト数を指定します。ただし
+ファイルのエンコーディングがマルチバイトエンコーディングである場合には
+読み込んだ文字列がマルチバイト文字の途中で切れないように
+数バイト余分に読み込む場合があります。
+#@end
+
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+#@since 1.9.1
+@param limit 最大の読み込みバイト数
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
@@ -1123,6 +1258,10 @@ EOF に到達した時には EOFError が発生します。
 @see [[m:$/]], [[m:IO#gets]]
 
 --- readlines(rs = $/)    -> [String]
+#@since 1.9.1
+--- readlines(limit)    -> [String]
+--- readlines(rs = $/, limit)    -> [String]
+#@end
 
 データを全て読み込んで、その各行を要素としてもつ配列を返します。
 既に EOF に達していれば空配列 [] を返します。
@@ -1133,10 +1272,13 @@ EOF に到達した時には EOFError が発生します。
 
 @param rs 行の区切りを文字列で指定します。rs に nil を指定すると行区切りなしとみなします。
           空文字列 "" を指定すると連続する改行を行の区切りとみなします(パラグラフモード)。
+#@since 1.9.1
+@param limit 最大の読み込みバイト数
+#@end
 
 @raise IOError 自身が読み込み用にオープンされていなければ発生します。
 
-@see [[m:$/]]
+@see [[m:$/]], [[m:IO#gets]]
 
 #@since 1.8.5
 --- read_nonblock(maxlen, outbuf = "")    -> String
@@ -1146,7 +1288,16 @@ IO をノンブロッキングモードに設定し、
 長さ maxlen を上限として読み込み、文字列として返します。
 EAGAIN, EINTR などは [[c:Errno::EXXX]] 例外として呼出元に報告されます。
 
+#@since 1.9.2
+発生した例外 がErrno::EAGAIN、 Errno::EWOULDBLOCK である場合は、
+その例外オブジェクトに [[c:IO::WaitReadable]] が [[m:Object#extend]]
+されます。
+#@end
+
 なお、バッファが空でない場合は、read_nonblock はバッファから読み込みます。この場合、read(2) システムコールは呼ばれません。
+
+このメソッドはノンブロッキングモードにする点を除いて [[m:IO#readpartial]] と
+同じであることに注意してください。
 
 #@since 1.9.1
 バイナリ読み込みメソッドとして動作します。
@@ -1423,7 +1574,6 @@ stdio を経由しないので他の出力メソッドと混用すると思わぬ動作
 self を返します。
 
 --- ungetc(char)     -> nil
-#@todo
 
 指定された char を読み戻します。
 #@until 1.9.1
@@ -1472,8 +1622,21 @@ IOポートに対して str を出力します。str が文字列でなけ
 --- write_nonblock(string)    -> Integer
 
 IO をノンブロッキングモードに設定し、string を [[man:write(2)]] システムコールで書き出します。
+
 write(2) が成功した場合、書き込んだ長さを返します。
 EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
+#@since 1.8.7
+書き込んだバイト数(つまり返り値)は [[c:String#bytesize]] の
+値より小さい可能性があります。
+#@end
+
+#@since 1.9.2
+発生した例外 がErrno::EAGAIN、 Errno::EWOULDBLOCK である場合は、
+その例外オブジェクトに [[c:IO::WaitWritable]] が [[m:Object#extend]]
+されます。よって IO::WaitWritable を write_nonblock のリトライが必要
+かの判定に用いることができます。
+#@end
+
 
 @param string 自身に書き込みたい文字列を指定します。
 
@@ -1497,18 +1660,11 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 
    "hello".bytes.to_a        #=> [104, 101, 108, 108, 111]
 
-#@since 1.8.8
---- lines(rs = $/)    -> Enumerator
-#@else
+#@until 1.9.1
 --- lines(rs = $/)    -> Enumerable::Enumerator
-#@end
 
 自身を 1 行ずつイテレートするような
-#@since 1.8.8
-[[c:Enumerator]] オブジェクトを生成して返します。
-#@else
 [[c:Enumerable::Enumerator]] オブジェクトを生成して返します。
-#@end
 
 テキスト読み込みメソッドとして動作します。
 
@@ -1519,6 +1675,8 @@ EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
    "foo\nb ar".lines.sort    #=> ["b ar", "foo\n"]
 
 @see [[m:$/]]
+
+#@end
 
 --- getbyte   -> Integer | nil
 
@@ -1545,7 +1703,6 @@ IO から1バイトを読み込み整数として返します。
 --- each_char               -> Enumerable::Enumerator
 --- chars                   -> Enumerable::Enumerator
 #@end
-#@todo
 
 self に含まれる文字を一文字つつブロックに渡して評価します。
 
@@ -1553,6 +1710,13 @@ self は読み込み用にオープンされていなければなりません。
 
 #@until 1.9.1
 また、マルチバイト文字列を使用する場合は [[m:$KCODE]] を適切に設定してください。
+#@end
+
+#@until 1.9.1
+ブロックを省略した場合は各文字について繰り返す [[c:Enumerable::Enumerator]] 
+を返します。
+#@else
+ブロックを省略した場合は各文字について繰り返す [[c:Enumerator]] を返します。
 #@end
 
 @raise IOError self が読み込み用にオープンされていない場合に発生します。
@@ -1564,15 +1728,15 @@ self は読み込み用にオープンされていなければなりません。
 
 #@since 1.8.8
 --- ungetbyte(c) -> nil
-#@todo
 
-Pushes back bytes (passed as a parameter) onto <em>ios</em>,
-such that a subsequent buffered read will return it. Only one byte
-may be pushed back before a subsequent read operation (that is,
-you will be able to read only the last of several bytes that have been pushed
-back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
+指定したバイト列を書き戻します。
 
-@param c 
+2バイト以上の書き戻しは仕様として保証しません。
+
+このメソッドはバッファを経由しない読み出し([[m:IO#sysread]] など)
+には影響しません。
+
+@param c バイト列(文字列)、もしくは0から255までの整数
 
 例:
 
@@ -1588,10 +1752,12 @@ back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
 自身がバイナリモードなら true を返します。そうでない場合、false を返します。
 
 --- close_on_exec=(bool)
-#@todo
-
 自身に close-on-exec フラグを設定します。
 
+このフラグをセットすると [[man:exec(2)]] 時にそのファイルデスクリプタを
+close します。
+
+@see [[man:fcntl(2)]]
 @param bool 自身の close-on-exec フラグを true か false で指定します。
 
    f = open("/dev/null")
@@ -1599,9 +1765,9 @@ back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
    system("cat", "/proc/self/fd/#{f.fileno}") # cat: /proc/self/fd/3: No such file or directory
    f.closed?                #=> false
 
---- close_on_exec?   -> bool
-#@todo
+@see [[m:IO#close_on_exec?]]
 
+--- close_on_exec?   -> bool
 自身に close-on-exec フラグが設定されていた場合 true を返します。
 そうでない場合に false を返します。
 
@@ -1611,6 +1777,8 @@ back). Has no effect with unbuffered reads (such as <code>IO#sysread</code>).
    f.close_on_exec?                 #=> true
    f.close_on_exec = false
    f.close_on_exec?                 #=> false
+
+@see [[m:IO#close_on_exec=]]
 
 --- external_encoding   -> Encoding | nil
 
@@ -1622,11 +1790,24 @@ IO の外部エンコーディングを返します。
 IO の内部エンコーディングを返します。
 内部エンコーディングが指定されていない場合は nil を返します。
 
---- set_encoding(enc_str)           -> self
+--- set_encoding(enc_str, opt={})           -> self
 --- set_encoding(ext_enc)           -> self
---- set_encoding(ext_enc, int_enc)  -> self
+--- set_encoding(ext_enc, int_enc, opt={})  -> self
 
 IO のエンコーディングを設定します。
+
+引数が "A:B" のようにコロンで区切られた文字列の場合は、
+A を外部エンコーディング、 B を内部エンコーディングに指定します。
+
+引数が一つで、上のような形式でない場合には、
+それが外部エンコーディングと見なされます。
+
+引数が2つの場合はそのそれぞれを外部エンコーディング、内部エンコーディング
+に設定します。
+
+opt のハッシュで外部エンコーディングを内部エンコーディングに変換する際の
+オプションを指定します。
+詳しくは [[m:String#encode]] を参照してください。
 
 @param enc_str エンコーディングを表す文字列を指定します。"A:B" のようにコロンで区切られた
                文字列を指定した場合 A が外部エンコーディング、B が内部エンコーディングを
@@ -1635,7 +1816,7 @@ IO のエンコーディングを設定します。
 @param ext_enc 外部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
 
 @param int_enc 内部エンコーディングを表す文字列か [[c:Encoding]] オブジェクトを指定します。
-
+@param opt エンコーディング変換のオプション
 例:
     io = File.open(file)
     io.set_encoding("ASCII-8BIT", "EUC-JP")
@@ -1643,9 +1824,15 @@ IO のエンコーディングを設定します。
 #@end
 #@since 1.9.2
 --- autoclose=(bool)
-#@todo
 
 auto-close フラグを設定します。
+
+フラグが設定されているオブジェクトは
+close時/GCでのファイナライザ呼出時にファイルデスクリプタを close します。
+設定されていない場合は close しません。
+
+@param bool 真偽値でフラグを設定します
+@see [[m:IO#autoclose?]]
 
    f = open("/dev/null")
    IO.for_fd(f.fileno)
@@ -1657,24 +1844,71 @@ auto-close フラグを設定します。
    # ...
    f.gets # won't cause IOError
 --- autoclose? -> bool
-#@todo
 
-Returns +true+ if the underlying file descriptor of _ios_ will be
-closed automatically at its finalization, otherwise +false+.
+auto-close フラグを返します。
+
+@see [[m:IO#autoclose=]]
+
 --- each_codepoint{|c| ... }     -> self
 --- codepoints{|c| ... }         -> self
 --- each_codepoint               -> Enumerator
 --- codepoints                   -> Enumerator
-#@todo
 
-IO の各コードポイントに対して繰り返します。
+IO の各コードポイントに対して繰り返しブロックを呼びだします。
+
+ブロックの引数にはコードポイントを表す整数が渡されます。
+
+ブロックを省略した場合には、[[c:Enumerator]] を返します。
+
 --- fdatasync -> 0 | nil
-#@todo
 
 IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
 
-@raise NotImplementedError [[man:fdatasync(2)]] がサポートされていない OS で発生します。
+[[man:fdatasync(2)]] をサポートしていない OS 上では代わりに
+[[m:IO#fsync]] を呼びだします。
+
+[[m:IO#fsync]] との違いは [[man:fdatasync(2)]] を参照してください。
+
+@raise NotImplementedError [[man:fdatasync(2)]] も [[man:fsync(2)]] も
+       サポートされていない OS で発生します。
 #@end
+
+#@since 1.9.3
+--- advise(advice, offset=0, len=0) -> nil
+
+[[man:posix_fadvise(2)]] を呼びだし、
+ファイルへのアクセスパターンをOSに知らせます。
+
+advice には以下のいずれかのシンボルを指定します。
+  * :normal - デフォルト
+  * :sequential - データは前から順にアクセスされる
+  * :random - データはランダムアクセスされる
+  * :willneed - データはこの直後にアクセスされる
+  * :dontneed - データは直後にはアクセスしない
+  * :noreuse - データは一度しかアクセスされない
+これらの advice が具体的に何をするのかはプラットフォーム依存です。
+
+ここでいう「データ」は offset と len で特定することができます。
+len が 0 ならば、offset からファイル末尾までを指定したことになります。
+デフォルトでは offset と len がともに 0 なので、
+ファイル全体を指定したことになります。
+
+posix_fadvise をサポートしていないプラットフォーム上では
+何もしません。
+
+@param advice アクセスパターンを表すシンボル
+@param offset パターンを指定するデータの先頭位置
+@param len パターンを指定するデータの長さ
+
+@raise IOError ストリームが既に閉じられているときに発生する例外
+@raise Errno::EBADF ファイルデスクリプタが不正であるときに発生する例外
+@raise Errno::EINVAL advice が不正
+@raise Errno::ESPIPE ファイルデスクリプタが FIFO か pipe を指している
+       場合に発生する例外(Linux はこの場合には Errno::EINVAL を発生する)
+@raise RangeError offset,lenが有効範囲から出ている場合に発生する例外
+
+#@end
+
 == Constants
 
 --- SEEK_CUR -> Fixnum
@@ -1692,17 +1926,15 @@ IO のすべてのバッファされているデータを直ちにディスクに書き込みます。
 #@since 1.9.2
 
 --- WaitReadable -> Module
-#@todo
+例外が読み込み待ちで発生したことを意味します。
+
+例外オブジェクトに extend されます。詳しくは
 [[m:IO#read_nonblock]] を参照してください。
 
 --- WaitWritable -> Module
-#@todo
-[[m:IO#write_nonblock]] を参照してください。
+例外が書き込み待ちで発生したことを意味します。
 
-#@end
-#@since 1.9.3
---- NULL -> String
-#@todo
-NULLデバイスのファイル名です。
+例外オブジェクトに extend されます。詳しくは
+[[m:IO#write_nonblock]] を参照してください。
 
 #@end

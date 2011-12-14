@@ -16,111 +16,152 @@ Ruby 1.8 以降では、[[c:File]] ではなく、[[c:IO]] でインクルード
 
 #@# [[m:File#flock]] で使われる定数 ----------------------------------
 
---- LOCK_SH
+--- LOCK_SH -> Integer
 共有ロック。複数のプロセスが同時にロックを共有できます。
 [[m:File#flock]] で使用します。
 
---- LOCK_EX
+--- LOCK_EX -> Integer
 排他ロック。同時にはただひとつのプロセスだけがロックを保持できます。
 [[m:File#flock]] で使用します。
 
---- LOCK_UN
+--- LOCK_UN -> Integer
 アンロック。[[m:File#flock]] で使用します。
 
---- LOCK_NB
+--- LOCK_NB -> Integer
 ロックの際にブロックしない。他の指定と or することで指定します。
 [[m:File#flock]] で使用します。
 
 #@# [[m:File.open]] で使われる定数 -----------------------------------
 
---- RDONLY
+--- RDONLY -> Integer
 読み込みのみのモードでファイルを開くときに指定します。
 [[m:File.open]]で使用します。
 
---- WRONLY
+--- WRONLY -> Integer
 書き込みのみのモードでファイルを開くときに指定します。
 [[m:File.open]]で使用します。
 
---- RDWR
+--- RDWR -> Integer
 読み書き両方のモードでファイルを開くときに指定します。
 [[m:File.open]]で使用します。
 
---- APPEND
+--- APPEND -> Integer
 追記モードでファイルを開くときに指定します。
 [[m:File.open]]で使用します。
 
---- CREAT
+--- CREAT -> Integer
 ファイルがなければ作成するよう指定します。
 [[m:File.open]]で使用します。
 
---- EXCL
+--- EXCL -> Integer
 CREATと併用し、もしファイルが既にある場合には失敗します。
 [[m:File.open]]で使用します。
 
---- NONBLOCK
+--- NONBLOCK -> Integer
 ファイルが利用可能じゃなくてもブロックしません。
 #@# IO.open で使用、かも...
 [[m:File.open]]で使用します。
 
---- TRUNC
+--- TRUNC -> Integer
 もしファイルが存在するなら、中身を抹消してサイズをゼロにします。
 [[m:File.open]]で使用します。
 
---- NOCTTY
+--- NOCTTY -> Integer
 自身がTTY制御しないようにTTYを開きます。
 [[m:File.open]]で使用します。
 
---- BINARY
+#@since 1.9.1
+--- BINARY -> Integer
 ファイルをバイナリとして開きます。
 open(2) で O_BINARYが指定できる場合に使えます。
 [[m:File.open]]で使用します。
+#@end
 
---- SYNC
+--- SYNC -> Integer
 ファイルを同期モードで開きます。
 open(2) で O_SYNCが指定できる場合に使えます。
 [[m:File.open]]で使用します。
 
---- DIRECT
-このファイルに対する I/O のキャッシュの効果を最小化しようとする。 この
-フラグを使うと、一般的に性能が低下する。 しかしアプリケーションが独自に
+#@since 1.9.1
+--- DSYNC -> Integer
+ファイルをデータ同期モードで開きます。
+open(2) で O_DSYNC が指定できる場合に使えます。
+[[m:File.open]]で使用します。
+
+--- NOFOLLOW -> Integer
+ファイルがシンボリックリンクであった場合に
+例外を発生させます。
+open(2) で O_NOFOLLOW が指定できる場合に使えます。
+[[m:File.open]]で使用します。
+
+--- RSYNC -> Integer
+ファイルを読み込み時同期モードで開きます。
+open(2) で O_RSYNC が指定できる場合に使えます。
+[[m:File.open]]で使用します。
+
+#@end
+
+#@since 1.9.2
+--- NOATIME -> Integer
+ファイル読み込み時に atime を更新しません。
+open(2) で O_ATIME が指定できる場合に使えます。
+[[m:File.open]]で使用します。
+
+atime が更新されないのは確実ではないということに注意してください。
+これは性能のためのオプションです。
+#@end
+
+#@since 1.9.3
+--- DIRECT -> Integer
+このファイルに対する I/O のキャッシュの効果を最小化しようとする。 
+
+このフラグを使うと、一般的に性能が低下する。 しかしアプリケーションが独自に
 キャッシングを行っているような 特別な場合には役に立つ。 ファイルの I/O
 はユーザー空間バッファに対して直接行われる。 [[c:File::DIRECT]] フラグ自身はデー
 タを同期で転送しようとはするが、 [[c:File::SYNC]] のようにデータと必要なメタデー
 タの転送が保証されるわけではない。 同期 I/O を保証するためには、
 [[c:File::DIRECT]] に加えて [[c:File::SYNC]] を使用しなければならない。
 
-@see [[man:open(2)]]
+[[m:File.open]]で使用します。
+
+#@end
 
 #@# [[m:File.fnmatch]], [[m:Dir.glob で使われる定数 ------------------
 
---- FNM_NOESCAPE
+--- FNM_NOESCAPE -> Integer
 エスケープ文字 `\' を普通の文字とみなします。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
---- FNM_PATHNAME
+--- FNM_PATHNAME -> Integer
 ワイルドカード `*', `?', `[]' が `/' にマッチしなくなります。
 シェルのパターンマッチにはこのフラグが使用されています。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
 #@if (version >= "1.8.0")
---- FNM_DOTMATCH
+--- FNM_DOTMATCH -> Integer
 ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
 1.8.0以前では、FNM_DOTMATCHという名前でした。
 #@else
---- FNM_PERIOD
+--- FNM_PERIOD -> Integer
 ワイルドカード `*', `?', `[]' が先頭の `.' にマッチするようになります。
 1.8.0以降では、FNM_DOTMATCH に置き換えられました。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 #@end
 
---- FNM_CASEFOLD
+--- FNM_CASEFOLD -> Integer
 アルファベットの大小文字を区別せずにパターンマッチを行います。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
 
 #@since 1.8.5
---- FNM_SYSCASE
+--- FNM_SYSCASE -> Integer
 case hold なファイルシステムの場合、FNM_CASEFOLD の値になり、そうでなければゼロの値になります。
 [[m:File.fnmatch]], [[m:Dir.glob]]で使用します。
+#@end
+
+#@since 1.9.3
+--- NULL -> String
+NULLデバイスのファイル名です。
+
 #@end
