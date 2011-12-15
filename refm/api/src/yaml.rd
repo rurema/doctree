@@ -86,7 +86,6 @@ require yaml/constants
  * [[lib:syck]] ライブラリ: YAML バージョン 1.0 を扱う事ができます。
 #@since 1.9.2
  * [[lib:psych]] ライブラリ: YAML バージョン 1.1 を扱う事ができます。
-#@end
 
 require "yaml" した場合、特に何もしなければ
 #@since 1.9.3
@@ -95,7 +94,6 @@ require "yaml" した場合、特に何もしなければ
 [[lib:syck]] ライブラリを使用します。
 #@end
 
-#@since 1.9.2
 デフォルト以外のバックエンドを使用したい場合、[[lib:yaml]] ライブラリを
 require する前に [[lib:psych]] か [[lib:syck]] を require してください。
 
@@ -122,7 +120,7 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してください。
 
 #@end
 
-=== タグ
+=== タグの指定
 
 !ruby/sym :foo などのようにタグを指定することで、読み込み時に記述した値
 の型を指定できます。
@@ -162,6 +160,18 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してください。
   EOS
   # => {"regexp"=>/foo|bar/, "hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3], "range"=>1..10}
 
+これらは tag:ruby.yaml.org,2002:array のように指定する事もできます。
+
+例:
+
+  require 'yaml'
+  p YAML.load(<<EOS)
+  ---
+  array: !tag:ruby.yaml.org,2002:array [1, 2, 3]
+  hash: !tag:ruby.yaml.org,2002:hash {foo: 1, bar: 2}
+  EOS
+  # => {"hash"=>{"foo"=>1, "bar"=>2}, "array"=>[1, 2, 3]}
+
 自分で定義したクラスなどは !ruby/object:<クラス名> を指定します。なお、
 読み込む場合には既にそのクラスが定義済みでないと読み込めません。
 
@@ -199,13 +209,17 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してください。
   EOS
   # => #<Foo::Bar:0xf73907b8>
 
-#@until 1.9.3
 また、YAML 形式に変換する際のタグを変更したい場合、to_yaml_type メソッ
-ドをオーバライドしてください。(ただし、[[lib:psych]] ライブラリではサポー
-トされません)
+ドをオーバライドしてください。
+#@since 1.9.2
+([[lib:syck]] のみ)
+#@end
 
 例:
 
+#@since 1.9.3
+  require "syck"
+#@end
   require "yaml"
   class Foo
     def to_yaml_type
@@ -213,7 +227,6 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してください。
     end
   end
   p Foo.new.to_yaml # => "--- !example.com,2002/foo {}\n\n"
-#@end
 
 === 注意
 
@@ -229,7 +242,9 @@ Ruby 独自の拡張、制限があります。標準添付ライブラリ以外で yaml を扱うラ
  * ":foo" のような文字列はそのまま [[c:Symbol]] として扱える
  * "y" や "n" は真偽値として扱われない
  * !!str のような短縮系のグローバルタグは扱われない
-   ([[lib:syck]] のバグ。[[lib:psych]] では扱えます)
+#@since 1.9.2
+   ([[lib:syck]] のみ)
+#@end
 
 === 参考
 
