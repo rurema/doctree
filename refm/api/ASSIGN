@@ -241,7 +241,7 @@ webrick/cgi                     okkez           done
 webrick/ssl                     okkez           done
 win32/resolv                    sho-h           done
 win32ole                        arton           done
-yaml                            sho-h
+yaml                            sho-h           done
 yaml/dbm                        sho-h           done
 yaml/store                      kouya           done
 zlib                            kouya           done
