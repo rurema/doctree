@@ -733,8 +733,9 @@ rescue の優先度が変更され、この心配はなくなっています。
 イルのどの文が実行されるより前に実行されます。複数のBEGINが指定
 された場合には指定された順に実行されます。
 
-BEGINブロックはコンパイル時に登録されます。即ち一つの記述につき
-ただ一回だけ登録が行われます。
+BEGINブロックはコンパイル時に登録されます。
+#@until 1.9.1
+即ち一つの記述につきただ一回だけ登録が行われます。
 
         if false
           BEGIN { p "begin" }
@@ -742,6 +743,7 @@ BEGINブロックはコンパイル時に登録されます。即ち一つの記述につき
 
         # => "begin"
 
+#@end
 BEGINブロックは独立したローカル変数のスコープを導入するため、ロー
 カル変数を外部と共有できません。ブロックの外と情報を伝達するには定数や
 グローバル変数などを介する必要があります。
@@ -750,12 +752,32 @@ BEGINブロックは独立したローカル変数のスコープを導入するため、ロー
         p $foo  # => true
         p foo   # undefined local variable or method `foo' for main:Object (NameError)
 
+#@since 1.9.1
+BEGINはトップレベル以外では書けません。全て [[c:SyntaxError]]になります。
+
+        def foo
+          BEGIN { p "begin" }
+        end
+        # => -e:2: syntax error, unexpected keyword_BEGIN
+
+        class Foo
+          BEGIN { p "begin" }
+        end
+        # => -e:2: syntax error, unexpected keyword_BEGIN
+
+        loop do
+          BEGIN { p "begin" }
+        end
+        # => -e:2: syntax error, unexpected keyword_BEGIN
+
+#@else
 BEGINはメソッド定義式中には書けません。parse error になります。
 
         def foo
           BEGIN { p "begin" }
         end
         # => -:2: BEGIN in method
+#@end
 
 ====[a:END] END
 
