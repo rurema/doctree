@@ -12,7 +12,7 @@ CSVの読み込み時のベースとなるクラス
 --- parse(str_or_readable, fs = ',', rs = nil) {|row| ... } -> nil
 
 CSVデータを解析して、[[c:CSV::StringReader]]を返します。
-ブロックに渡された場合はパースした結果を1列づつArrayとして渡します。
+ブロックに渡された場合はパースした結果を1列ずつArrayとして渡します。
 
 @param str_or_readable パースする対象の文字列
 @param fs フィールドセパレータの指定。
