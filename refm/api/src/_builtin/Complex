@@ -195,7 +195,7 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
   Complex('1/2+2/3i').denominator # => 6
   Complex(3).numerator            # => 1
 
-@see [[c:Complex#numerator]]
+@see [[m:Complex#numerator]]
 
 --- eql?(other) -> bool
 
@@ -258,7 +258,7 @@ other を [[c:Complex]] に変換して [self, 変換後の other] の配列を返します。
   Complex('1/2+2/3i').numerator # => (3+4i)
   Complex(3).numerator          # => (3+0i)
 
-@see [[c:Complex#denominator]]
+@see [[m:Complex#denominator]]
 
 --- polar -> [Numeric, Numeric]
 
