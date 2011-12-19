@@ -391,7 +391,7 @@ typeclass に Resolv::DNS::Resource::IN::ANY 以外を指定した場合には
 --- each_resource(name, typeclass) {|resource| ...} -> ()
 
 nameに対応するDNSリソースレコードを取得します。
-見つかったリソースをひとつづつブロックに渡します。
+見つかったリソースをひとつずつブロックに渡します。
 
 typeclass は以下のいずれかです。
   * [[c:Resolv::DNS::Resource::IN::ANY]]
