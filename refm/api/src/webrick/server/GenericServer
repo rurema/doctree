@@ -58,7 +58,7 @@ GenericServer オブジェクトを生成して返します。
 
 --- [](key)    -> object
 
-self.config[key] と同じです。。
+self.config[key] と同じです。
 
 --- config     -> Hash
 
