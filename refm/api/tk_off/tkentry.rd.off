@@ -91,7 +91,7 @@
 
 --- TkEntry#selection_clear
 #@todo
-    選択領域を非選択にする。
+    選択領域を非選択にします。
 
 --- TkEntry#selection_from(index)
 #@todo
