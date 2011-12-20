@@ -26,11 +26,11 @@ syslog の詳細については [[man:syslog(3)]] を参照してください。
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) -> self
 --- open(ident=$0, options=Syslog::LOG_PID|Syslog::LOG_CONS, facility=Syslog::LOG_USER) { |syslog| ... } -> self
 
-与えられた引数でsyslogを開く。以降、他の Syslog モジュール関数が使
-用可能となる。
+与えられた引数でsyslogを開きます。以降、他の Syslog モジュール関数が使
+用可能となります。
 
 ブロック付きで呼ばれた場合は、self を引数としてブロックを実行し、
-最後に [[m:Syslog.#close]] を行う。
+最後に [[m:Syslog.#close]] を行います。
 
 syslog の詳細については [[man:syslog(3)]] を参照してください。
 
@@ -47,7 +47,7 @@ syslog の詳細については [[man:syslog(3)]] を参照してください。
                 [[man:syslog.conf(5)]], 
                 [[c:Syslog::Constants]] を参照してください。
 
-@raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生する。
+@raise RuntimeError syslogを既に開いていた場合は[[c:RuntimeError]]が発生します。
 
 @return self を返します。
 
@@ -108,7 +108,7 @@ options と facility に指定できる値については
 
 --- opened? -> bool
 
-syslog をオープンしていれば真を返す。
+syslog をオープンしていれば真を返します。
 
 使用例
   require 'syslog'
@@ -137,15 +137,15 @@ syslog をオープンしていれば真を返す。
 
 syslogにメッセージを書き込みます。
 
-priority は優先度を示す定数([[c:Syslog::Constants]]参照)。
+priority は優先度を示す定数([[c:Syslog::Constants]]参照)です。
 また、facility([[c:Syslog::Constants]]参照)を論理和で指定す
-ることで open で指定した facility を切替えることもできる。
+ることで open で指定した facility を切替えることもできます。
 
-format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定する。
+format 以降は [[m:Kernel.#sprintf]] と同じ形式の引数を指定します。
 
 但し、[[man:syslog(3)]] のように format に %m は使用できません。
 
-メッセージに改行を含める必要はない。
+メッセージに改行を含める必要はありません。
 
 @param priority priority は優先度を示す定数を指定します。
                 詳しくは、[[c:Syslog::Constants]]を参照してください。
@@ -193,10 +193,10 @@ Syslog#log()のショートカットメソッド。
 --- mask -> Fixnum | nil
 --- mask=(mask)
 
-ログの優先度のマスクを取得または設定する。
+ログの優先度のマスクを取得または設定します。
 マスクは永続的であり、
 Syslog.openやSyslog.close
-ではリセットされない。
+ではリセットされません。
 
 @param mask ログの優先度のマスクを設定します。
 
@@ -236,11 +236,11 @@ syslogを閉じます。
 
 --- instance -> self
 
-selfを返す。(旧版との互換性のため)
+selfを返します。(旧版との互換性のため)
 
 --- LOG_MASK(priority) -> Fixnum
 
-1つの優先度に対するマスクを作成する。
+1つの優先度に対するマスクを作成します。
 
 @param priority priority は優先度を示す定数を指定します。
                 詳しくは、[[c:Syslog::Constants]]を参照してください。
@@ -250,7 +250,7 @@ selfを返す。(旧版との互換性のため)
 
 --- LOG_UPTO(priority) -> Fixnum
 
-priorityまでのすべての優先度のマスクを作成する。
+priorityまでのすべての優先度のマスクを作成します。
 
 @param priority priority は優先度を示す定数を指定します。
                 詳しくは、[[c:Syslog::Constants]]を参照してください。
@@ -261,7 +261,7 @@ priorityまでのすべての優先度のマスクを作成する。
 = module Syslog::Constants
 
 
-このモジュールにはシステムで使用可能なLOG_*定数が定義されている。
+このモジュールにはシステムで使用可能なLOG_*定数が定義されています。
 
   例:
     require 'syslog'
@@ -277,7 +277,7 @@ priorityまでのすべての優先度のマスクを作成する。
 --- LOG_PERROR
 
 オプション(options)を示す定数。
-定数 の詳細については [[man:syslog(3)]] を参照してください。
+定数の詳細については [[man:syslog(3)]] を参照してください。
 
 --- LOG_AUTH
 --- LOG_AUTHPRIV
