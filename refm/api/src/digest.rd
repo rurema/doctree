@@ -5,7 +5,7 @@ require digest/sha1
 require digest/sha2
 #@end
 
-メッセージダイジェストライブラリ。
+メッセージダイジェストライブラリです。
 
 [[c:Digest::MD5]] や [[c:Digest::SHA1]] などの
 全てのメッセージダイジェストの実装クラスは、
@@ -50,9 +50,9 @@ include Digest::Instance
 
 #@end
 
-すべての Digest::XXX クラスの基底クラス。
+すべての Digest::XXX クラスの基底クラスです。
 
-例えば、MD5 値を得るには以下のようにする。
+例えば、MD5 値を得るには以下のようにします。
 #@if(version >= "1.8.6")
   require 'digest/md5'
 
@@ -87,30 +87,30 @@ include Digest::Instance
         # => "3fbb02294a8ca33d4684055adba5ed6f"
 #@end
 
-すべての Digest::XXX クラスは以下の共通インタフェースを持つ。
+すべての Digest::XXX クラスは以下の共通インタフェースを持ちます。
 
 == Class Methods
 
 #@until 1.8.6
 --- new(str = nil)
 
-新しいダイジェストオブジェクトを生成する。文字列引数が与えられると
-それを追加する([[m:Digest::Base#update]] 参照)。
+新しいダイジェストオブジェクトを生成します。文字列引数が与えられると
+それを追加します([[m:Digest::Base#update]] 参照)。
 #@else
 --- new
-新しいダイジェストオブジェクトを生成する。
+新しいダイジェストオブジェクトを生成します。
 #@end
 
 --- digest(str) -> String
 
-与えられた文字列に対するハッシュ値を文字列で返す。
-new(str).digest と等価。
+与えられた文字列に対するハッシュ値を文字列で返します。
+new(str).digest と等価です。
 
 --- hexdigest(str) -> String
 
 与えられた文字列に対するハッシュ値を、ASCIIコードを使って
-16進数の列を示す文字列にエンコードして返す。
-new(str).hexdigest と等価。
+16進数の列を示す文字列にエンコードして返します。
+new(str).hexdigest と等価です。
 
 #@since 1.8.6
 --- file(path) -> object
@@ -134,7 +134,7 @@ new(str).hexdigest と等価。
 --- dup
 --- clone
 
-ダイジェストオブジェクトの複製を作る。
+ダイジェストオブジェクトの複製を作ります。
 
 --- digest -> String
 
@@ -181,7 +181,7 @@ SHA256では32バイト長、SHA384では48バイト長、SHA512では64バイト長です。
 --- to_s -> String
 
 updateや<<によって追加した文字列に対するハッシュ値を、
-ASCIIコードを使って16進数の列を示す文字列にエンコードして返す。
+ASCIIコードを使って16進数の列を示す文字列にエンコードして返します。
 
 返す文字列は、
 MD5では32バイト長、SHA1およびRMD160では40バイト長、SHA256では64バイト長、
@@ -228,11 +228,11 @@ ASCIIコードを使って16進数の列を示す文字列にエンコードして返します。
 --- update(str)
 --- <<(str)
 
-文字列を追加する。self を返す。
-複数回updateを呼ぶことは文字列を連結してupdateを呼ぶことと等しい。
+文字列を追加します。self を返します。
+複数回updateを呼ぶことは文字列を連結してupdateを呼ぶことと同じです。
 すなわち m.update(a); m.update(b) は
 m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
-である。
+です。
 
 @param str 追加する文字列
 
@@ -254,7 +254,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 
 --- ==(md)
 
-与えられたダイジェストオブジェクトと比較する。
+与えられたダイジェストオブジェクトと比較します。
 
 @param md 比較対象のダイジェストオブジェクト
 
@@ -270,15 +270,15 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 --- ==(str)
 
 #@if(version >= "1.8.6")
-与えられた文字列を hexdigest 値と見て、自身の hexdigest 値と比較する。
+与えられた文字列を hexdigest 値と見て、自身の hexdigest 値と比較します。
 
 @param str 比較対象の hexdigest 文字列
 #@else
-与えられた文字列を digest 値、もしくは hexdigest 値と比較する。
+与えられた文字列を digest 値、もしくは hexdigest 値と比較します。
 いずれの値と見るかは与えられた文字列の長さによって自動判別
-される。
+されます。
 
-@param str 比較対象の(ダイジェストの)文字列
+@param str 比較対象の(ダイジェストの)文字列です。
 #@end
 
         require 'digest/md5'
@@ -318,7 +318,7 @@ m.update(a + b) と、 m << a << b は m << a + b とそれぞれ等価
 --- length -> Integer
 --- size -> Integer
 
-ダイジェストのハッシュ値のバイト長を取得する。
+ダイジェストのハッシュ値のバイト長を取得します。
 例えば、Digest::MD5であれば16、Digest::SHA1であれば20です。
 
 本メソッドは、Digest::MD5などのダイジェストのサブクラスにより、
