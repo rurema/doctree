@@ -6,7 +6,8 @@ Apache д╬ htpasswd ╕▀┤╣д╬епеще╣дЄ─є╢бд╣дыещеде╓ещеъд╟д╣бг
 = class WEBrick::HTTPAuth::Htpasswd < Object
 include WEBrick::HTTPAuth::UserDB
 
-Apache д╬ htpasswd ╕▀┤╣д╬епеще╣бг.htpasswd е╒ебедеыдЄ┐╖д╖дп║ю└од╣дыд│д╚дт╜╨═шдыбг
+Apache д╬ htpasswd ╕▀┤╣д╬епеще╣д╟д╣бг
+.htpasswd е╒ебедеыдЄ┐╖д╖дп║ю└од╣дыд│д╚дт╜╨═шд▐д╣бг
 htpasswd -m (MD5) дф -s (SHA) д╟║ю└од╡дьд┐ .htpasswd е╒ебедеыд╦д╧┬╨▒■д╖д╞ддд▐д╗дєбг
 
 
@@ -25,15 +26,15 @@ htpasswd -m (MD5) дф -s (SHA) д╟║ю└од╡дьд┐ .htpasswd е╒ебедеыд╦д╧┬╨▒■д╖д╞ддд▐д╗д
 
 --- new(path) -> WEBrick::HTTPAuth::Htpasswd
 
-Htpasswd еке╓е╕езепе╚дЄ└╕└од╣дыбг
+Htpasswd еке╓е╕езепе╚дЄ└╕└од╖д▐д╣бг
 
-@param path е╤е╣еяб╝е╔дЄ╩▌┬╕д╣дые╒ебедеыд╬е╤е╣дЄ═┐дидыбг
+@param path е╤е╣еяб╝е╔дЄ╩▌┬╕д╣дые╒ебедеыд╬е╤е╣дЄ═┐дид▐д╣бг
 
 == Instance Methods
 
 --- delete_passwd(realm, user) -> String
 
-ецб╝е╢д╬е╤е╣еяб╝е╔дЄ║я╜№д╣дыбгrealm д╧╠╡╗ыд╡дьдыбг
+ецб╝е╢д╬е╤е╣еяб╝е╔дЄ║я╜№д╖д▐д╣бгrealm д╧╠╡╗ыд╡дьд▐д╣бг
 
 @param realm еьеыерд╧╠╡╗ыд╡дьд▐д╣бг
 
@@ -45,7 +46,7 @@ Htpasswd еке╓е╕езепе╚дЄ└╕└од╣дыбг
 
 --- get_passwd(realm, user, reload_db) -> String
 
-ецб╝е╢д╬е╤е╣еяб╝е╔д╬ crypt д╡дьд┐╩╕╗·╬єдЄ╝ш╞└д╣дыбг
+ецб╝е╢д╬е╤е╣еяб╝е╔д╬ crypt д╡дьд┐╩╕╗·╬єдЄ╝ш╞└д╖д▐д╣бг
 
 @param realm еьеыерд╧╠╡╗ыд╡дьд▐д╣бг
 

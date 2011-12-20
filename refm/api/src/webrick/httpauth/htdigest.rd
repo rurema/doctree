@@ -23,13 +23,13 @@ Apache の htdigest 互換のクラス。
 --- new(path) -> WEBrick::HTTPAuth::Htdigest
 Htdigest オブジェクトを生成します。
 
-@param path パスワードを保存するファイルのパスを与える。
+@param path パスワードを保存するファイルのパスを与えます。
 
 == Instance Methods
 
 --- delete_passwd(realm, user)
 #@# -> discard
-realm に属するユーザ user のパスワードを削除する。
+realm に属するユーザ user のパスワードを削除します。
 
 @param realm レルムを指定します。
 
