@@ -16,20 +16,20 @@ m * n 個の数a(i,j)を
   [                                             ]
   [ a(m-1,0)                         a(m-1,n-1) ]
 
-のように、縦横の表にあらわしたものを(m,n)型の行列という。
-m=nの行列をm次の正方行列(square matrix)という。
+のように、縦横の表にあらわしたものを(m,n)型の行列といいます。
+m=nの行列をm次の正方行列(square matrix)といいます。
 
 上からi番目の横の数の並びを第i行(the i-th row)、
-左からj番目の縦の数の並びを第j列(the j-th column)という。
+左からj番目の縦の数の並びを第j列(the j-th column)といいます。
 
 (m,n)型行列は、
-大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできるし、
-大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできる。
+大きさnの行(横)ベクトルをm個縦に並べたものとみなすこともできますし、
+大きさmの列(縦)ベクトルをn個横に並べたものとみなすこともできます。
 
-第i行、第j列にある数a(i,j)を(i,j)要素(the (i,j)-th element)という。
+第i行、第j列にある数a(i,j)を(i,j)要素(the (i,j)-th element)といいます。
 
 i=jの要素a(i,j)を対角要素(diagonal element)、
-それ以外の要素を非対角要素(nondiagonal element)という。
+それ以外の要素を非対角要素(nondiagonal element)といいます。
 
 
 #@#使い方 Usage
@@ -41,10 +41,10 @@ i=jの要素a(i,j)を対角要素(diagonal element)、
 === Complex クラスとの併用
 
 require 'complex'することによって、
-Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張される。
-多くのメソッドは、この拡張されたMatrixクラスでも、期待通りに動作する。
+Matrixオブジェクトの要素は[[c:Complex]]クラスに拡張されます。
+多くのメソッドは、この拡張されたMatrixクラスでも、期待通りに動作します。
 
-次の例は、各要素を共役複素数に置換するメソッド Matrix#conjugate である。
+次の例は、各要素を共役複素数に置換するメソッド Matrix#conjugate です。
 
   require 'matrix'
   require 'complex'
