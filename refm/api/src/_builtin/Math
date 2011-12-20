@@ -29,7 +29,7 @@ x の逆余弦関数の値をラジアンで返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@else
-@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します
+@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します。
 #@end
 
 --- asin(x) -> Float
@@ -47,7 +47,7 @@ x の逆正弦関数の値をラジアンで返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@else
-@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します
+@raise Errno::EDOM 引数に範囲外の値を指定した場合に発生します。
 #@end
 
 --- atan(x) -> Float
@@ -101,7 +101,7 @@ x の逆双曲線余弦関数の値を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@else
-@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します
+@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します。
 #@end
 
 --- asinh(x) -> Float
@@ -139,7 +139,7 @@ x の逆双曲線正接関数の値を返します。
 
 @raise RangeError x に実数以外の数値を指定した場合に発生します。
 #@else
-@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します
+@raise Errno::EDOM 範囲外の値を引数に指定した場合に発生します。
 #@end
 
 #@end
@@ -344,14 +344,14 @@ x の自然対数を返します。
 
 @param x 正の実数
 
-@raise Errno::EDOM 引数が負の値である場合に発生します
-@raise Errno::ERANGE 引数が 0 の場合に発生します
+@raise Errno::EDOM 引数が負の値である場合に発生します。
+@raise Errno::ERANGE 引数が 0 の場合に発生します。
 #@end
 
 #@since 1.9.1
 --- log2(x) -> Float
 
-2 を底とする x の対数 (binary logarithm) を返す。
+2 を底とする x の対数 (binary logarithm) を返します。
 #@# Returns the base 2 logarithm of numeric.
 
 @param x 正の実数
@@ -377,8 +377,8 @@ x の常用対数を返します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 #@else
-@raise Errno::EDOM 引数が負の値である場合に発生します
-@raise Errno::ERANGE 引数が 0 の場合に発生します
+@raise Errno::EDOM 引数が負の値である場合に発生します。
+@raise Errno::ERANGE 引数が 0 の場合に発生します。
 #@end
 
 --- sqrt(x) -> Float
@@ -418,7 +418,7 @@ x のガンマ関数の値を返します。
 
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
-@raise Math::DomainError x に負の整数、もしくは -∞ を渡した場合に発生します
+@raise Math::DomainError x に負の整数、もしくは -∞ を渡した場合に発生します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 
@@ -432,7 +432,7 @@ log(|gamma(x)|) と、gamma(x) の符号を返します。
 
 @raise TypeError 引数のどちらかに数値以外を指定した場合に発生します。
 
-@raise Math::DomainError x に -∞ を渡した場合に発生します
+@raise Math::DomainError x に -∞ を渡した場合に発生します。
 
 @raise RangeError 引数のどちらかに実数以外の数値を指定した場合に発生します。
 
