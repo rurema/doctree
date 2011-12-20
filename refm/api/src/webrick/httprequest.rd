@@ -77,7 +77,7 @@ Accept-Language  ヘッダの内容を自然言語を表す文字列の配列で返します。
 
 --- content_type    -> String | nil
 
-リクエストの Content-Type ヘッダを文字列で返す。
+リクエストの Content-Type ヘッダを文字列で返します。
 
 #@end
 
@@ -106,7 +106,7 @@ otherwise does nothing.
 
 --- host    -> String
 
-リクエスト URI の host を文字列で返す。
+リクエスト URI の host を文字列で返します。
 
 --- http_version     -> WEBrick::HTTPVersion
 

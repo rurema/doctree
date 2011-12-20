@@ -7,7 +7,7 @@ HTTP のバージョンのための小さなクラスです。
 == Class Methods
 --- new(version)    -> WEBrick::HTTPVersion
 
-HTTPVersion オブジェクトを生成する。version は文字列か HTTPVersion オブジェクト。
+HTTPVersion オブジェクトを生成します。version は文字列か HTTPVersion オブジェクトです。
 
 @param version HTTP のバージョンを WEBrick::HTTPVersion オブジェクトか文字列で指定します。
 
