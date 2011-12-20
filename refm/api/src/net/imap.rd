@@ -177,10 +177,10 @@ untagged な応答はコマンドの送信とは非同期的にサーバから送られるため、
     Myers, J., "IMAP4 ACL extension", RFC 2086, January 1997.
 
   * [OSSL]
-    http://www.openssl.org
+    [[url:http://www.openssl.org]]
 
   * [RSSL]
-    http://savannah.gnu.org/projects/rubypki
+    [[url:http://savannah.gnu.org/projects/rubypki]]
 
 以上のうち、いくつかの RFC は obsolete になって置き換えられています。
 [[RFC:2060]] は [[RFC:3501]] に、[[RFC:822]] は [[RFC:2822]] に、
@@ -492,7 +492,7 @@ LIST コマンドを送り、クライアントから利用可能なメールボックス名の集合から
 返り値が空集合である場合は空の配列でなく nil を返します。
 
 @param refname 参照名(文字列)
-@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもよい。
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもかまいません。
 
 例:
   imap.create("foo/bar")
@@ -518,7 +518,7 @@ LIST コマンドを送り、active/subscribed なメールボックス名の集合から
 返り値が空集合である場合は空の配列でなく nil を返します。
 
 @param refname 参照名(文字列)
-@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもよい。
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもかまいません。
 
 --- status(mailbox, attr) -> {String => Integer}
 STATUS コマンドを送り、mailbox のステータスを得ます。
