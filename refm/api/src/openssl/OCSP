@@ -459,7 +459,7 @@ Request オブジェクトが保持している問い合わせ対象の証明書の情報を
 によって不正であったりそうでなかったりしますので、適切にチェック
 する必要があります。
 
-@param 比較するレスポンス([[c:OpenSSL::OCSP::BasicResponse]] オブジェクト)
+@param basic_resp 比較するレスポンス([[c:OpenSSL::OCSP::BasicResponse]] オブジェクト)
 
 --- sign(signer_cert, signer_key, certs=nil, flags=nil) -> self
 Request オブジェクトに署名をします。
