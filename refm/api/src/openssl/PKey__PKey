@@ -1,11 +1,11 @@
 = module OpenSSL::PKey
-公開鍵暗号関連を集めたモジュール
+公開鍵暗号関連を集めたモジュールです。
 
 = class OpenSSL::PKey::PKey < Object
 
-公開鍵暗号のための抽象クラス
+公開鍵暗号のための抽象クラスです。
 
-以下のサブクラスを持つ。
+以下のサブクラスを持ちます。
   * [[c:OpenSSL::PKey::RSA]]
   * [[c:OpenSSL::PKey::DSA]]
   * [[c:OpenSSL::PKey::DH]]

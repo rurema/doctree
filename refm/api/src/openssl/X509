@@ -127,7 +127,7 @@ OCSP関連でOpenSSLの内部的に利用されます。
 確認します。
 
 --- TRUST_COMPAT -> Integer
-ルート CA 証明書が自分自身の秘密鍵で署名されている。
+ルート CA 証明書が自分自身の秘密鍵で署名されています。
 
 --- TRUST_EMAIL -> Integer
 #@todo
@@ -479,7 +479,7 @@ CA の証明書チェーンには CRL のチェックがなされません。
 置いてあるディレクトリの名前を返します。
 
 --- DEFAULT_CERT_DIR -> String
-デフォルトの CA 証明書ディレクトリ名。
+デフォルトの CA 証明書ディレクトリ名です。
 
 [[m:OpenSSL::X509::Store#set_default_paths]] で読み込まれます。
 
@@ -490,7 +490,7 @@ CA の証明書チェーンには CRL のチェックがなされません。
 ハッシュ名でなければなりません。
 
 --- DEFAULT_CERT_DIR_ENV -> String
-CA 証明書ディレクトリ名を指定する環境変数名。
+CA 証明書ディレクトリ名を指定する環境変数名です。
 
 通常、"SSL_CERT_DIR" という文字列です。
 この環境変数を設定しておくことによって
@@ -503,7 +503,7 @@ CA 証明書ディレクトリ名を指定する環境変数名。
 @see [[m:OpenSSL::X509::DEFAULT_CERT_DIR]]
 
 --- DEFAULT_CERT_FILE -> String
-デフォルトの CA 証明書ファイル名。
+デフォルトの CA 証明書ファイル名です。
 
 [[m:OpenSSL::X509::Store#set_default_paths]] で読み込まれます。
 
@@ -512,7 +512,7 @@ CA 証明書ディレクトリ名を指定する環境変数名。
 
 
 --- DEFAULT_CERT_FILE_ENV -> String
-CA 証明書ファイル名を指定する環境変数名。
+CA 証明書ファイル名を指定する環境変数名です。
 
 通常、"SSL_CERT_FILE" という文字列です。
 この環境変数を設定しておくことによって
@@ -523,6 +523,6 @@ CA 証明書ファイル名を指定する環境変数名。
 
 
 --- DEFAULT_PRIVATE_DIR -> String
-デフォルトの秘密鍵ディレクトリ名。
+デフォルトの秘密鍵ディレクトリ名です。
 
 
