@@ -61,8 +61,8 @@ msg の終端が "\n" でない場合には "\n" を追加します。
 @param msg 記録したい文字列を指定します。文字列でない場合は to_s メソッドで文字列に変換します。
 
   require 'webrick'
-  loger = WEBrick::BasicLog.new()
-  loger.fatal('out of money')       #=> FATAL out of money   (標準エラー出力に出力)
+  logger = WEBrick::BasicLog.new()
+  logger.fatal('out of money')       #=> FATAL out of money   (標準エラー出力に出力)
 
 --- error(msg)    -> ()
 
