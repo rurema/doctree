@@ -78,7 +78,7 @@ C のコールバック関数に変換し、[[c:DL::Symbol]] として返します。
 --- typealias(newtype, oldtype)    -> ()
 #@todo
 
-newtype 型を oldtype 型のエイリアスとして定義する。
+newtype 型を oldtype 型のエイリアスとして定義します。
 newtype で与えた型は extern や callback メソッド
 のプロトタイプを与えるときに利用します。
 

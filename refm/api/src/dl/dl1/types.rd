@@ -2,7 +2,7 @@ improt dl
 
 = class DL::Types < Object
 
-型の定義を保持するオブジェクトのクラス。
+型の定義を保持するオブジェクトのクラスです。
 
 === 型を定義する
 
@@ -19,14 +19,14 @@ improt dl
 --- typealias(alias, type, enc, dec, struct_enc, struct_dec)
 #@todo
 
-型定義の追加を行う。
+型定義の追加を行います。
 
 インスタンス変数 @TYDEFS の先頭に
 
   [alias, type,
    enc, dec, struct_end, struct_dec]
 
-の組を追加する。
+の組を追加します。
 
 --- encode_type(alias)
 #@todo
@@ -34,7 +34,7 @@ improt dl
 DL モジュールで用いる型定義と Ruby のオブジェクトを
 DL モジュールで用いるデータへのエンコード用 Proc オブジェクトと、
 DL モジュールのデータから Ruby オブジェクトへのデコード用の
-Proc オブジェクトの組を次の通りの Array として返す。
+Proc オブジェクトの組を次の通りの Array として返します。
 
   [ty,enc,dec,senc,sdec]
   ty : DLでの型指定子

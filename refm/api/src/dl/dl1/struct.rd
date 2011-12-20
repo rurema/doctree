@@ -13,7 +13,7 @@ DL::Importable を extend したモジュールに構造体/共用体を定義する機能を与えます。
 #@todo
 
 構造体を定義します。
-contentsについては [[m:DL::Importable::Struct.new]] を参照せよ。
+contentsについては [[m:DL::Importable::Struct.new]] を参照してください。
 
 --- define_union(contents)
 --- union(contents)
@@ -38,7 +38,7 @@ Memoryクラスのインスタンスが生成できます。
 #@todo
 
 DL::PtrData オブジェクト ptr の各メンバへアクセスするためのメソッドを
-動的に定義する。Struct, Union のインスタンスがこれらの情報を保持する。
+動的に定義します。Struct, Union のインスタンスがこれらの情報を保持します。
 
 == Instance Method
 
@@ -62,12 +62,12 @@ DL::PtrData#size を呼びます。
 #@todo
 
 types には DL::Types のインスタンス、contents には構造体の定義を
-以下のようにして与える。
+以下のようにして与えます。
 
   ["int size",
    "char *str"]
   
-このようにして生成されたStructオブジェクトは、以下の構造体のように振舞う。
+このようにして生成されたStructオブジェクトは、以下の構造体のように振舞います。
 
   struct {
     int size;
