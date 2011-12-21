@@ -109,7 +109,7 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してください。
   require "yaml"
   YAML.load(...)
 
-また、[[lib:yaml]] を require した後でも、[[m:YAML::ENGINE.yamler]] に
+また、[[lib:yaml]] を require した後でも、YAML::ENGINE.yamler に
 "psych" を代入する事で [[lib:psych]] を使用できます。([[lib:syck]] の場
 合も同様です)
 
@@ -232,8 +232,8 @@ require する前に [[lib:psych]] か [[lib:syck]] を require してください。
 
 無名クラスを YAML 形式に変換すると [[c:TypeError]] が発生します。また、
 [[c:IO]] や [[c:Thread]] オブジェクトなどはインスタンス変数がオブジェク
-トの状態を保持していないため、変換はできますが、[[m:YAML.load]] した時
-に完全に復元できない事に注意してください。
+トの状態を保持していないため、変換はできますが、YAML.load した時に完全
+に復元できない事に注意してください。
 
 標準添付の yaml 関連ライブラリには 1.8 系、1.9 系ともに以下のような
 Ruby 独自の拡張、制限があります。標準添付ライブラリ以外で yaml を扱うラ
