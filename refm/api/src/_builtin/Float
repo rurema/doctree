@@ -499,13 +499,13 @@ Float が取り得る最小値
 
 浮動小数点数における正の無限大
 
-@see [[m:Numeric#finite?]], [[m:Numeric#infinite?]]
+@see [[m:Float#finite?]], [[m:Float#infinite?]]
 
 --- NAN -> Float
 浮動小数点数における NaN(Not a number)
 
 
-@see [[m:Numeric#nan?]]
+@see [[m:Float#nan?]]
 
 #@end
 #@end
