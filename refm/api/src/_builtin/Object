@@ -363,7 +363,7 @@ singleton_methods(false) は、[[m:Object#methods]](false) と同じです。
     p ['array'].to_a    # ["array"]
     p nil.to_a          # []
 
-@see [[m:Object#to_ary]],[[m:Object#to_splat]],[[m:Kernel.#Array]]
+@see [[m:Object#to_ary]],[[m:Kernel.#Array]]
 #@else
     p( {'a'=>1}.to_a )  # [["a", 1]]
     p ['array'].to_a    # ["array"]
