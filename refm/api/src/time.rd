@@ -6,11 +6,7 @@
  * date-time は [[RFC:2822]] で定義されています。
  * HTTP-date は [[RFC:2616]] で定義されています。
  * dateTime は XML Schema Part 2: Datatypes (ISO 8601) で定義されています。
-#@since 1.9.1
  * 文字列から [[c:Time]] オブジェクトへの変換では [[m:Date._parse]] により様々な形式を扱えます。
-#@else
- * 文字列から [[c:Time]] オブジェクトへの変換では [[lib:parsedate]] により様々な形式を扱えます。
-#@end
 
 = reopen Time
 
@@ -19,13 +15,9 @@
 --- parse(date, now = Time.now) -> Time
 --- parse(date, now = Time.now) {|year| year } -> Time
 
-#@since 1.9.1
+
 date を [[m:Date._parse]] によって
 パースして [[c:Time]]オブジェクトに変換します。
-#@else
-date を [[m:ParseDate.#parsedate]] によって
-パースして [[c:Time]]オブジェクトに変換します。
-#@end
 
 ブロック付きで呼ばれた場合、dateの年はブロックによって変換されます。
 
@@ -45,11 +37,7 @@ date を [[m:ParseDate.#parsedate]] によって
   Time.parse("7/23")      #=> Mon Jul 23 00:00:00 GMT 2001
   Time.parse("2002/1")    #=> Tue Jan 01 00:00:00 GMT 2002
 
-#@since 1.9.1
 [[m:Date._parse]]がdateから情報を取り出せないとき、
-#@else
-[[lib:parsedate]]がdateから情報を取り出せないとき、
-#@end
 または [[c:Time]] クラスが指定された日時を表現できないときに
 [[c:ArgumentError]] が発生します。
 
