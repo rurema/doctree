@@ -1086,7 +1086,7 @@ marshal_dump/marshal_load はより高度な制御を行いたい場合や
 (特異メソッドの情報が自動的に dump されるようになるわけではなく、
 marshal_dump/marshal_load によりそれを実現する余地があるということです)。
 
-@see [[m:Kernel.#_dump]], [[m:Object#marshal_load]], [[c:Marshal]]
+@see [[m:Object#marshal_load]], [[c:Marshal]]
 
 --- marshal_load(obj) -> object
 
@@ -1105,7 +1105,7 @@ marshal_dump/marshal_load を使うべきです。
 
 @return   返り値は無視されます。
 
-@see [[m:Kernel.#_load]], [[m:Object#marshal_dump]], [[c:Marshal]]
+@see [[m:Object#marshal_dump]], [[c:Marshal]]
 
 #@end
 
