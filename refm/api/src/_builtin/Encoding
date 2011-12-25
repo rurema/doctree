@@ -755,7 +755,7 @@ MacJapanese エンコーディング。
 Mac OS の 9.x までで用いられていた Shift_JIS 亜種です。
 
 @see [[url:http://unicode.org/Public/MAPPINGS/VENDORS/APPLE/JAPANESE.TXT]],
-     [[url: http://ja.wikipedia.org/wiki/MacJapanese]]
+     [[url:http://ja.wikipedia.org/wiki/MacJapanese]]
 
 
 #@since 1.9.2
