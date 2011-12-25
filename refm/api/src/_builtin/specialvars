@@ -223,7 +223,7 @@ Ruby起動時の初期値は 0 です。
 値は常に false です。代入しても無視されます。
 
 #@else
-非推奨([[unknown:obsolete]]): この変数は将来のバージョンで削除される予定です。
+非推奨(obsolete): この変数は将来のバージョンで削除される予定です。
 
 パターンマッチや文字列の比較でアルファベットの大文字小文字を
 区別するかどうかのフラグです。
@@ -514,7 +514,7 @@ $stdin はグローバルスコープです。
 
 #@until 1.9.1
 $stdout には $defout という別名がありますが、
-$defout は非推奨([[unknown:obsolete]])になったので、
+$defout は非推奨(obsolete)になったので、
 新しいコードでは常に $stdout を使ってください。
 #@end
 
@@ -560,7 +560,7 @@ Ruby インタプリタが出力するエラーメッセージや
 
 #@until 1.9.1
 $stderr には $deferr という別名がありますが、
-$deferr は非推奨([[unknown:obsolete]])になったので、
+$deferr は非推奨(obsolete)になったので、
 新しいコードでは常に $stderr を使ってください。
 #@end
 
