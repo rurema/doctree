@@ -29,7 +29,7 @@ Return the value of the specified date/time component.
 
 --- mon
 
-Alias for [[unknown:XMLRPC::DateTime#month]].
+Alias for [[m:XMLRPC::DateTime#month]].
 
 --- year=()
 --- month=()
@@ -44,7 +44,7 @@ of XMLRPC::DateTime#year= if value is not of type Integer.
 
 --- mon=()
 
-Alias for [[unknown:XMLRPC::DateTime#month=]].
+Alias for [[m:XMLRPC::DateTime#month=]].
 
 --- to_time
 

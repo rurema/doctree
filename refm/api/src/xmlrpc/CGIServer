@@ -29,7 +29,7 @@ Implements a CGI-based XML-RPC server.
 
 --- new( *a )
 Creates a new XMLRPC::CGIServer instance. All parameters given
-are by-passed to [[unknown:XMLRPC::BasicServer.new]]. You can only create
+are by-passed to [[m:XMLRPC::BasicServer.new]]. You can only create
 ((*one*)) XMLRPC::CGIServer instance, because more than one makes
 no sense.
 

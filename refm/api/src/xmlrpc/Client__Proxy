@@ -5,7 +5,7 @@ Class XMLRPC::Client::Proxy makes XML-RPC calls look nicer!
 
 You can call any method onto objects of that class - the object handles
 method_missing and will forward the method call to a XML-RPC server.
-Don't use this class directly, but use instead method [[unknown:XMLRPC::Client#proxy]] or
+Don't use this class directly, but use instead method [[m:XMLRPC::Client#proxy]] or
 [[m:XMLRPC::Client#proxy2]].
 
 Every method call is forwarded to the XML-RPC server defined in [[m:XMLRPC::Client::Proxy.new]].

@@ -6,7 +6,7 @@
 
 Class XMLRPC::Client provides remote procedure calls to a XML-RPC server.
 
-After setting the connection-parameters with [[unknown:XMLRPC::Client.new]] which
+After setting the connection-parameters with [[m:XMLRPC::Client.new]] which
 creates a new XMLRPC::Client instance, you can execute a remote procedure
 by sending the [[m:XMLRPC::Client#call]] or [[m:XMLRPC::Client#call2]]
 message to this new instance. The given parameters indicate which method to
@@ -148,20 +148,20 @@ Example:
   # => [7, -1]
 
 --- multicall2( *methods )
-Same as [[unknown:XMLRPC::Client#multicall]], but returns like [[unknown:XMLRPC::Client#call2]] two parameters
+Same as [[m:XMLRPC::Client#multicall]], but returns like [[m:XMLRPC::Client#call2]] two parameters
 instead of raising an XMLRPC::FaultException.
 
 --- proxy( prefix, *args )
 
 Returns an object of class XMLRPC::Client::Proxy, initialized with
 prefix and args. A proxy object returned by this method behaves
-like [[unknown:XMLRPC::Client#call]], i.e. a call on that object will raise a
+like [[m:XMLRPC::Client#call]], i.e. a call on that object will raise a
 XMLRPC::FaultException when a fault-structure is returned by that call.
 
 --- proxy2( prefix, *args )
 
 Almost the same like [[m:XMLRPC::Client#proxy]] only that a call on the returned
-XMLRPC::Client::Proxy object behaves like [[unknown:XMLRPC::Client#call2]], i.e.
+XMLRPC::Client::Proxy object behaves like [[m:XMLRPC::Client#call2]], i.e.
 a call on that object will return two parameters.
 
 --- call_async(...)
@@ -224,7 +224,7 @@ Set extra HTTP headers that are included in the request.
 
 --- http_header_extra
 
-Access the via [[unknown:XMLRPC::Client#http_header_extra=]] assigned header.
+Access the via [[m:XMLRPC::Client#http_header_extra=]] assigned header.
 
 --- http_last_response
 
