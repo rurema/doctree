@@ -313,11 +313,11 @@ private exponent を設定します。
 @param new_dmq1 設定する整数
 
 --- params -> {String => OpenSSL::BN}
-鍵のパラメータ([[OpenSSL::PKey::RSA#e]],[[OpenSSL::PKey::RSA#n]],
-[[OpenSSL::PKey::RSA#d]]など)を{パラメータ名文字列 => パラメータ値}
+鍵のパラメータ([[m:OpenSSL::PKey::RSA#e]],[[m:OpenSSL::PKey::RSA#n]],
+[[m:OpenSSL::PKey::RSA#d]]など)を{パラメータ名文字列 => パラメータ値}
 というハッシュで返します。
 
-鍵が公開鍵の場合、[[OpenSSL::PKey::RSA#d]] 
+鍵が公開鍵の場合、[[m:OpenSSL::PKey::RSA#d]] 
 のように公開鍵が持っていない値は 0 になります。
 
 #@since 1.8.2

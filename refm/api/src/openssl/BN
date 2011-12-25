@@ -230,7 +230,7 @@ GCD(最大公約数)を返します。
 --- mask_bits!(n) -> self
 自身を下位 n ビットでマスクします。
 
-n が自身のビット数より大きい場合は例外 [[OpenSSL::BNError]]
+n が自身のビット数より大きい場合は例外 [[c:OpenSSL::BNError]]
 が発生します。
 
 @param n マスクするビット数
