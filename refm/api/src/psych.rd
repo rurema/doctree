@@ -137,7 +137,7 @@ Example:
 
   Psych.parse("---\n - a\n - b") # => #<Psych::Nodes::Sequence:0x00>
 
-@see Psych::Nodes for more information about YAML AST.
+[[c:Psych::Nodes]] for more information about YAML AST.
 
 --- parse_file(filename) -> object
 #@todo
@@ -344,7 +344,7 @@ start and end, along with +style+.
 
 自身を返します。
 
-@see Psych::Handler#start_sequence
+@see [[m:Psych::Handler#start_sequence]]
 
 --- end_sequence -> Psych::Emitter
 #@todo
@@ -363,7 +363,7 @@ and end, and +style+.
 
 自身を返します。
 
-@see Psych::Handler#start_mapping
+@see [[m:Psych::Handler#start_mapping]]
 
 --- end_mapping -> Psych::Emitter
 #@todo
