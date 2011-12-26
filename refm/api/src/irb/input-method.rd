@@ -2,10 +2,10 @@
 
 = class IRB::InputMethod < Object
 
-= class StdioInputMethod < InputMethod
+= class IRB::StdioInputMethod < IRB::InputMethod
 
-= class FileInputMethod < InputMethod
+= class IRB::FileInputMethod < IRB::InputMethod
 
-= class ReadlineInputMethod < InputMethod
+= class IRB::ReadlineInputMethod < IRB::InputMethod
 
 
