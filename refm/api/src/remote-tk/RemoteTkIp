@@ -3,7 +3,11 @@
 
 == Class Methods
 
+#@since 1.9.2
+--- do_one_event(flag = nil)
+#@else
 --- do_one_evant(flag = nil)
+#@end
 #@todo
 
 --- get_eventloop_tick
@@ -159,7 +163,11 @@
 --- deleted?
 #@todo
 
+#@since 1.9.2
+--- do_one_event(flag = nil)
+#@else
 --- do_one_evant(flag = nil)
+#@end
 #@todo
 
 --- get_eventloop_tick
