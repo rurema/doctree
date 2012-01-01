@@ -1703,7 +1703,9 @@ Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
     a.combination(5).to_a  #=> []  : no combinations of length 5
 
 #@since 1.9.2
-@see [[m:Array#combination]]
+@see [[m:Array#permutation]], [[m:Array#repeated_combination]]
+#@else
+@see [[m:Array#permutation]]
 #@end
 
 --- permutation(n) { |p| block }       -> Array
@@ -1733,6 +1735,11 @@ Enumerable オブジェクトの要素を、繰り返し無限に生成し続けます。
     a.permutation(0).to_a  #=> [[]]: one permutation of length 0
     a.permutation(4).to_a  #=> []  : no permutations of length 4
 
+#@since 1.9.2
+@see [[m:Array#combination]], [[m:Array#repeated_permutation]]
+#@else
+@see [[m:Array#combination]]
+#@end
 
 --- product(*lists)    -> Array
 #@since 1.9.2
