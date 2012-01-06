@@ -1,0 +1,54 @@
+= class Socket::AncillaryData
+
+== Class Methods
+--- new
+#@todo
+
+--- int
+#@todo
+
+--- unix_rights
+#@todo
+
+--- ip_pktinfo
+#@todo
+
+--- ipv6_pktinfo
+#@todo
+
+== Instance Methods
+--- family
+#@todo
+
+--- level 
+#@todo
+
+--- type
+#@todo
+
+--- data
+#@todo
+
+--- cmsg_is?
+#@todo
+
+--- int
+#@todo
+
+--- unix_rights
+#@todo
+
+--- timestamp
+#@todo
+
+--- ip_pktinfo
+#@todo
+
+--- ipv6_pktinfo
+#@todo
+
+--- ipv6_pktinfo_addr
+#@todo
+
+--- ipv6_pktinfo_ifindex
+#@todo
