@@ -130,7 +130,19 @@ ipaddr
 #@end
 irb
 irb/completion
+irb/extend-command
 irb/frame
+irb/help
+irb/init
+irb/input-method
+#@since 1.9.2
+irb/inspector
+#@end
+irb/locale
+#@since 1.9.1
+irb/magic-file
+#@end
+irb/notifier
 irb/xmp
 #@until 1.9.1
 jcode
