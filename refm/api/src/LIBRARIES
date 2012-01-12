@@ -130,6 +130,7 @@ ipaddr
 #@end
 irb
 irb/completion
+irb/context
 irb/extend-command
 irb/frame
 irb/help
