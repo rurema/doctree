@@ -201,7 +201,11 @@ timeout による割り込みは [[m:Kernel.#system]] によって呼び出された外部プログラム
 #@# --- THIS_FILE
 #@# --- CALLER_OFFSET
 
+#@since 1.9.1
+= class Timeout::Error < RuntimeError
+#@else
 = class Timeout::Error < Interrupt
+#@end
 alias TimeoutError
 
 [[lib:timeout]] で定義される例外クラスです。
