@@ -7,6 +7,8 @@
 
 = class IRB::Inspector
 
+== Instance Methods
+
 --- init
 #@todo
 
