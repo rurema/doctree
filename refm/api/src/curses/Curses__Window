@@ -301,7 +301,7 @@ For negative +num+, it scrolls down.
 
 --- scroll -> bool
 
-現在のウィンンドウを一行スクロールします。
+現在のウィンドウを一行スクロールします。
 
 --- scrollok(bf) -> nil
 #@todo

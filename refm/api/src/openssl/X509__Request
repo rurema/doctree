@@ -100,7 +100,7 @@ CSR の attribute をクリアして新しい attribute を設定します。
 --- public_key=(pkey)
 申請者の公開鍵を設定します。
 
-@param pkey 設定する公開鍵を [[c:OpenSSL::PKey::PKey]] のサブクラスのインンスタンスで渡します
+@param pkey 設定する公開鍵を [[c:OpenSSL::PKey::PKey]] のサブクラスのインスタンスで渡します
 @raise OpenSSL::X509::RequestError 公開鍵の設定に失敗した場合に発生します
 
 --- sign(key, digest) -> self

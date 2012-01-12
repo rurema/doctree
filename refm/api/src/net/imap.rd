@@ -560,7 +560,7 @@ APPEND コマンドを送ってメッセージをメールボックスの末尾に追加します。
 
 
 --- check -> Net::IMAP::TaggedResponse
-CHECK コマンドを送り、現在処理しているメールボッススの
+CHECK コマンドを送り、現在処理しているメールボックスの
 チェックポイントを要求します。
 
 チェックポイントの要求とは、サーバ内部で保留状態になっている
@@ -814,7 +814,7 @@ search_key には検索条件を渡します。[[m:Net::IMAP#search]] と
 @param charset 検索条件の解釈に用いるCHARSET名(文字列)
 
 --- setquota(mailbox, quota) -> Net::IMAP::TaggedResponse
-SETQUOTA コマンドを送り、指定したメールボッススに
+SETQUOTA コマンドを送り、指定したメールボックスに
 quota を設定します。
 
 quota が nil ならば、mailbox の quota を破棄します。
@@ -831,7 +831,7 @@ quota が整数なら STORAGE をその値に変更します。
 
 --- getquota(mailbox) -> [Net::IMAP::MailboxQuota]
 GETQUOTA コマンドを送って
-指定したメールボッススの quota の情報を返します。
+指定したメールボックスの quota の情報を返します。
 
 quota の情報は [[c:Net::IMAP::MailboxQuota]] オブジェクトの配列で
 得られます。
