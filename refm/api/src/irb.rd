@@ -1,5 +1,14 @@
 #@# Author: Keiju ISHITSUKA
 
+require e2mmap
+require irb/init
+require irb/context
+require irb/extend-command
+#@# TODO: 追加する。
+#@# require irb/ruby-lex
+require irb/input-method
+require irb/locale
+
 irb は Interactive Ruby の略です。
 irb を使うと、Ruby の式を標準入力から簡単に入力・実行することができます。
 
@@ -501,3 +510,68 @@ conf.save_history の値を指定しておくと、
 履歴ファイルの名前はデフォルトでは ~/.irb_history です。
 履歴ファイルの名前は IRB.conf[:HISTORY_FILE] で指定できます。
 #@end
+
+= module IRB
+
+irb のメインモジュールです。
+
+== Class Methods
+
+--- conf -> Hash
+
+irb の設定をハッシュで返します。
+
+--- version -> String
+
+IRB のバージョンを文字列で返します。
+
+--- CurrentContext -> IRB::Context
+
+現在の irb に関する [[c:IRB::Context]] を返します。
+
+ユーザが直接使用するものではありません。
+
+--- start(ap_path = nil) -> ()
+
+[[c:IRB]] を初期化して、トップレベルの irb を開始します。
+
+@param ap_path irb コマンドのパスを指定します。
+
+ユーザが直接使用するものではありません。
+
+--- irb_at_exit -> ()
+
+at_exit で登録された処理を実行します。
+
+ユーザが直接使用するものではありません。
+
+--- irb_exit(irb, ret) -> object
+
+irb を終了します。ret で指定したオブジェクトを返します。
+
+@param irb 現在の [[c:IRB::Irb]] オブジェクトを指定します。
+
+@param ret 戻り値を指定します。
+
+ユーザが直接使用するものではありません。
+
+--- irb_abort(irb, exception = Abort)
+
+実行中の処理を中断します。必ず例外が発生するため、何も返しません。
+
+@param irb 現在の [[c:IRB::Irb]] オブジェクトを指定します。
+
+@param exception 発生させる例外を指定します。指定しなかった場合は
+                 [[c:IRB::Abort]] が発生します。
+
+ユーザが直接使用するものではありません。
+
+= class IRB::Irb
+
+irb インタプリタのメインルーチンです。
+
+ユーザが直接使用するものではありません。
+
+= class IRB::Abort < Exception
+
+実行中の処理を中断する時に発生させる例外クラスです。
