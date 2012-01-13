@@ -511,6 +511,48 @@ conf.save_history の値を指定しておくと、
 履歴ファイルの名前は IRB.conf[:HISTORY_FILE] で指定できます。
 #@end
 
+#@since 1.9.2
+===[a:inspect_mode] 実行結果の出力方式
+
+irb のプロンプト中では conf.inspect_mode で、.irbrc 中では
+IRB.conf[:INSPECT_MODE] に以下のいずれかの値を設定する事で、結果出力の
+方式を変更する事ができます。
+
+: false, :to_s, :raw
+
+  出力結果を to_s したものを表示します。
+
+: true, :p, :inspect
+
+  出力結果を inspect したものを表示します。
+
+: :pp, :pretty_inspect
+
+  出力結果を pretty_inspect したものを表示します。
+
+: :yaml, :YAML
+
+  出力結果を YAML 形式にしたものを表示します。
+
+: :marshal, :Marshal, :MARSHAL, [[c:Marshal]]
+
+  出力結果を [[m:Marshal.#dump]] したものを表示します。
+
+例:
+
+  $ irb
+  irb(main):001:0> conf.inspect_mode = :yaml
+  irb(main):002:0> :foo # => --- :foo
+
+また、irb の起動時に --inspect オプションを指定する事でも同様の設定を行
+えます。
+
+  $ irb --inspect [raw|p|pp|yaml|marshal|...]
+
+上記以外にも独自の出力方式を追加する事ができます。詳しくは
+[[m:IRB::INSPECTORS.def_inspector]] を参照してください。
+#@end
+
 = module IRB
 
 irb のメインモジュールです。
