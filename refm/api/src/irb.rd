@@ -89,9 +89,7 @@ irb コマンドのオプションを指定したのと同じ効果が得られます。
   IRB.conf[:DEBUG_LEVEL] = 1
   IRB.conf[:ECHO] = nil
   IRB.conf[:EVAL_HISTORY] = nil
-#@since 1.9.1
   IRB.conf[:HISTORY_FILE] = nil
-#@end
   IRB.conf[:IGNORE_EOF] = true
   IRB.conf[:IGNORE_SIGINT] = true
   IRB.conf[:INSPECT_MODE] = nil
@@ -101,9 +99,7 @@ irb コマンドのオプションを指定したのと同じ効果が得られます。
   IRB.conf[:PROMPT] = {....}
   IRB.conf[:PROMPT_MODE] = :DEFAULT
   IRB.conf[:SINGLE_IRB] = false
-#@since 1.9.1
   IRB.conf[:SAVE_HISTORY] = nil
-#@end
   IRB.conf[:USE_LOADER] = true
   IRB.conf[:USE_READLINE] = nil
   IRB.conf[:USE_TRACER] = true
@@ -497,8 +493,6 @@ irb では以下のように式を begin 〜 end でくくって入力してください。
 irb はシンボルであるかどうかの判断を間違えることがあります。
 具体的には、式が完了しているのに継続行と見なすことがあります。
 
-#@since 1.9.1
-#@# 1.8.2 に入っていない理由は ((<ruby-dev:25595>)) を参照してください
 === 履歴の保存
 
 さらに、.irbrc で以下のように
@@ -509,7 +503,6 @@ conf.save_history の値を指定しておくと、
 
 履歴ファイルの名前はデフォルトでは ~/.irb_history です。
 履歴ファイルの名前は IRB.conf[:HISTORY_FILE] で指定できます。
-#@end
 
 #@since 1.9.2
 ===[a:inspect_mode] 実行結果の出力方式
