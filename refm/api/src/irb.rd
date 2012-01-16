@@ -291,115 +291,214 @@ irb のいろいろな使用例を以下に示します。
 
 === irb で使用可能なコマンド一覧
 
-この一覧に記述されているメソッドは、irb のプロンプトでレシーバなしで使
+この一覧に記述されているコマンドは、irb のプロンプトでレシーバなしで使
 うことができます。
 
 irb のコマンドは、簡単な名前と頭に「irb_」をつけた名前との両方が定義さ
 れています。これは、簡単な名前がオーバーライドされた場合にもirb のコマ
 ンドが実行できるようにするためです。
 
-: exit(ret = 0)
-: irb_exit(ret = 0)
-: quit(ret = 0)
-: irb_quit(ret = 0)
-#@todo
+: exit
+: irb_exit
+: quit
+: irb_quit
 
-irb を終了します。
-サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
+  irb を終了します。
+  サブ irb で呼び出した場合は、そのサブ irb だけを終了します。
+
+#@# ret は使用されていないようなので、削除しました。
 
 : conf
 : context
 : irb_context
-#@todo
 
-irb の現在の設定です。[[c:IRB::Context]] オブジェクトです。
-このメソッドで得た IRB::Context オブジェクトに対してメソッドを
-呼び出すことで、現在稼働中の irb インタプリタの設定を表示・変更できます。
+  irb の現在の設定です。[[c:IRB::Context]] オブジェクトです。
+  このメソッドで得た IRB::Context オブジェクトに対してメソッドを
+  呼び出すことで、現在稼働中の irb インタプリタの設定を表示・変更できます。
 
-: cws([obj])
-: chws([obj])
-: irb_cws([obj])
-: irb_chws([obj])
-: irb_change_workspace([obj])
-#@todo
+: cwws
+: pwws
+: irb_cwws
+: irb_pwws
+: irb_print_working_workspace
+: irb_current_working_binding
+: irb_print_working_binding
+: irb_cwb
+: irb_pwb
 
-irb の self を obj に変更します。
-obj が省略されたときは、
-irb を起動したときの main オブジェクトを self にします。
+  irb の self を返します。
 
-: pushws([obj])
-: irb_pushws([obj])
-: irb_push_workspace([obj])
-#@todo
+: cws(*obj)
+: chws(*obj)
+: irb_cws(*obj)
+: irb_chws(*obj)
+: irb_change_workspace(*obj)
+: cb(*obj)
+: irb_cb(*obj)
+: irb_change_binding(*obj)
 
-UNIX シェルコマンドの pushd と同じです。
+  irb の self を obj に変更します。
+  obj が省略されたときは、
+  irb を起動したときの main オブジェクトを self にします。
+
+: workspaces
+: irb_workspaces
+: irb_bindings
+: bindings
+
+  現在のワークスペースの一覧を返します。
+
+: pushws(*obj)
+: irb_pushws(*obj)
+: irb_push_workspace(*obj)
+: irb_push_binding(*obj)
+: irb_pushb(*obj)
+: pushb(*obj)
+
+  UNIX シェルコマンドの pushd と同じです。
 
 : popws
 : irb_popws
 : irb_pop_workspace
-#@todo
+: irb_pop_binding
+: irb_popb
+: popb
 
-UNIX シェルコマンドの popd と同じです。
+  UNIX シェルコマンドの popd と同じです。
 
-: irb([obj])
-#@todo
+: irb
+: irb(obj)
 
-新しいサブ irb インタプリタを起動します。
-オブジェクト obj が指定された時はその obj を self にします。
+  新しいサブ irb インタプリタを起動します。
+  オブジェクト obj が指定された時はその obj を self にします。
 
 : jobs
 : irb_jobs
-#@todo
 
-サブ irb のリストを返します。
+  サブ irb のリストを返します。
 
 : fg(n)
 : irb_fg(n)
-#@todo
 
-n で指定したサブ irb に移動します。
-n は以下のいずれかの値で指定します。
+  n で指定したサブ irb に移動します。
+  n は以下のいずれかの値で指定します。
 
+//emlist{
   * irb インタプリタ番号
   * irb オブジェクト
   * スレッド ID
   * 各インタプリタの self (「irb(obj)」で起動した時の obj)
+//}
 
 : kill(n)
 : irb_kill(n)
-#@todo
 
-n で指定したサブ irb を停止します。
-n は以下のいずれかの値で指定します。
+  n で指定したサブ irb を停止します。
+  n は以下のいずれかの値で指定します。
 
+//emlist{
   * irb インタプリタ番号
   * irb オブジェクト
   * スレッド ID
   * 各インタプリタの self (「irb(obj)」で起動した時の obj)
+//}
 
 : source(path)
 : irb_source(path)
-#@todo
 
-現在の irb インタプリタ上で、
-Ruby スクリプト path を評価します。
+  現在の irb インタプリタ上で、
+  Ruby スクリプト path を評価します。
 
-source という名前は UNIX シェルの source コマンドに由来します。
+  path の内容を irb で一行ずつタイプしたかのように、irb 上で一行ずつ評
+  価されます。[[m:$"]] は更新されず、何度でも実行し直す事ができます。
 
+  source という名前は UNIX シェルの source コマンドに由来します。
+
+#@since 1.9.1
+: irb_load(path, prev = nil)
+#@else
 : irb_load(path, prev)
-#@todo
+#@end
 
-ファイル path を Ruby スクリプトとみなし、
-現在の irb インタプリタ上で実行します。
-Ruby の load の irb 版です。
+  Ruby の load の irb 版です。
+  ファイル path を Ruby スクリプトとみなし、
+  現在の irb インタプリタ上で実行します。
+  ただし、prev に true を指定した場合は実行は内部的に生成される無名モジュー
+  ル上で行われ、グローバルな名前空間を汚染しません。
 
-: _  
-#@todo
+  [[m:Kernel.#load]] と異なり、path の内容を irb で一行ずつタイプしたか
+  のように、irb 上で一行ずつ評価されます。
 
-直前の式の実行結果です。
+: irb_require(path)
 
-例：
+  Ruby の require の irb 版です。
+  ファイル path を現在の irb インタプリタ上で実行します。
 
+  path に Ruby スクリプトを指定した場合は、[[m:Kernel.#kernel]] と異な
+  り、path の内容を irb で一行ずつタイプしたかのように、irb 上で一行ず
+  つ評価されます。require に成功した場合は true を、そうでない場合は
+  false を返します。
+
+  拡張ライブラリ(*.so,*.o,*.dll など)を指定した場合は単純に require さ
+  れます。
+
+: help(*names)
+: irb_help(*names)
+
+  RI から Ruby のドキュメントを参照します。
+
+//emlist{
+  irb(main):001:0> help String#match
+  ...
+//}
+
+#@since 1.9.2
+  names を指定しなかった場合は、RI を対話的なモードで起動します。メソッ
+  ド名などを入力する事でドキュメントの検索が行えます。入力のタブ補完を
+  する事ができます。また、空行を入力する事で irb のプロンプトに戻る事が
+  できます。
+
+//emlist{
+  irb(main):001:0> help
+
+  Enter the method name you want to look up.
+  You can use tab to autocomplete.
+  Enter a blank line to exit.
+
+  >> String#match
+  String#match
+  
+  (from ruby core)
+  ------------------------------------------------------------------------------
+    str.match(pattern)        -> matchdata or nil
+    str.match(pattern, pos)   -> matchdata or nil
+  ...
+//}
+#@end
+
+#@until 1.9.1
+==== コマンド実行時の注意
+
+以下のコマンドは引数を指定せずに実行した場合にはエラーが発生します。
+
+ * cwws
+ * cws
+ * workspaces
+ * irb
+ * irb_load
+
+また、help コマンドは 1.8 系では動作しないバグがあります。
+#@end
+
+=== システム変数
+
+: _
+
+  直前の式の実行結果です。
+
+  例：
+
+//emlist{
   $ irb
   irb(main):001:0> 10
   => 10
@@ -410,21 +509,22 @@ Ruby の load の irb 版です。
   irb(main):004:0> _ - 2**31
   => 2147483648
   irb(main):005:0>
+//}
 
 : __
-#@todo
 
-実行結果の履歴です。
-__[lineno] で、lineno 行で実行した結果を得られます。
-lineno が負の時は、最新の結果から -lineno 行だけ前の
-結果を得られます。
+  実行結果の履歴です。
+  __[lineno] で、lineno 行で実行した結果を得られます。
+  lineno が負の時は、最新の結果から -lineno 行だけ前の
+  結果を得られます。
 
-この変数はデフォルトでは使えません。
-この変数を使用するには、あらかじめ .irbrc などで
-conf.eval_history の値を指定しておかなければいけません。
+  この変数はデフォルトでは使えません。
+  この変数を使用するには、あらかじめ .irbrc などで
+  conf.eval_history の値を指定しておかなければいけません。
 
-例：
+  例：
 
+//emlist{
   $ irb
   irb(main):001:0> conf.eval_history = 100
   => 100
@@ -439,6 +539,7 @@ conf.eval_history の値を指定しておかなければいけません。
   irb(main):006:0> __[-1]
   => "hogefoo"
   irb(main):007:0>
+//}
 
 === 使用上の制限
 
