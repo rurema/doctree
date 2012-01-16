@@ -30,7 +30,7 @@ irb コマンドを実行すると、以下のようなプロンプトが表れます。
   irb(main):005:2>   end
   irb(main):006:1> end
   nil
-  irb(main):007:0> 
+  irb(main):007:0>
 
 また irb コマンドは [[lib:readline]] ライブラリにも対応しています。
 readline ライブラリがインストールされている時には
@@ -165,7 +165,7 @@ PROMPT_I, PROMPT_S, PROMPT_C にはフォーマット文字列を指定します。
     :PROMPT_S => "%N(%m):%03n:%i%l ",
     :PROMPT_C => "%N(%m):%03n:%i* ",
     :RETURN => "%s\n"
-  } 
+  }
 
 プロンプトモードは :DEFAULT
 の他に :NULL, :CLASSIC, :SIMPLE, :XMP が定義されています。
@@ -225,7 +225,7 @@ IRB::Context オブジェクトを渡して実行します。
   irb(main):001:0> IRB.conf[:IRB_RC] = lambda {|conf| conf.prompt_i = "> " }
   => #<Proc:0x00002a95fa3fd8@(irb):2>
   irb(main):002:0> irb
-  > 
+  >
 
 === irb の使用例
 
@@ -265,7 +265,7 @@ irb のいろいろな使用例を以下に示します。
   nil
   irb#2(Foo):010:0>  Foo.instance_methods
   ["bar", "foo"]
-  irb#2(Foo):011:0> fg 0                      
+  irb#2(Foo):011:0> fg 0
   nil
   irb(main):007:0> f = Foo.new
   #<Foo:0x4010af3c>
@@ -409,9 +409,9 @@ Ruby の load の irb 版です。
   => 4294967296
   irb(main):004:0> _ - 2**31
   => 2147483648
-  irb(main):005:0> 
+  irb(main):005:0>
 
-: __ 
+: __
 #@todo
 
 実行結果の履歴です。
@@ -438,12 +438,11 @@ conf.eval_history の値を指定しておかなければいけません。
   => "hogefoo"
   irb(main):006:0> __[-1]
   => "hogefoo"
-  irb(main):007:0> 
-
+  irb(main):007:0>
 
 === 使用上の制限
 
-irbは, 評価できる時点(式が閉じた時点)での逐次実行を行ないます. 
+irbは, 評価できる時点(式が閉じた時点)での逐次実行を行ないます.
 したがって, rubyを直接使った時と若干異なる動作を行なう場合があります.
 
 現在明らかになっている問題点を説明します.
@@ -467,7 +466,7 @@ Ruby は最初にスクリプト全体をコンパイルしてローカル変数を決定します。
 それに対し、irb は式が完結して実行可能になった時点で順番にコンパイルします。
 上記の例では、
 
-  eval "foo = 0" 
+  eval "foo = 0"
 
 が入力された時点でまずその式をコンパイル・実行します。
 この時点で変数 foo が定義されるため、
