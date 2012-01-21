@@ -1,3 +1,5 @@
+require irb/workspace
+
 = class IRB::Context
 
 == Instance Methods

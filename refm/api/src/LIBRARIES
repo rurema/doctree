@@ -144,6 +144,7 @@ irb/locale
 irb/magic-file
 #@end
 irb/notifier
+irb/output-method
 irb/xmp
 #@until 1.9.1
 jcode
