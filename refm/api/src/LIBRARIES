@@ -129,6 +129,12 @@ io/wait
 ipaddr
 #@end
 irb
+irb/cmd/chws
+irb/cmd/help
+irb/cmd/load
+irb/cmd/nop
+irb/cmd/pushws
+irb/cmd/subirb
 irb/completion
 irb/context
 irb/extend-command
