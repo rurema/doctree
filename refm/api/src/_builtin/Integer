@@ -36,13 +36,21 @@ include している [[c:Precision]] モジュールの [[m:Precision.induced_from]] を
 
 例えば65.chr は "A" を返します。
 
+#@until 1.9.1
 逆に文字列から文字コードを得るには "A"[0] とします
+#@else
+逆に1文字の文字列から文字コードを得るには "A".ord とします。
+#@end
 
 @return     1バイト文字列
 
 @raise RangeError self が 0 から 255 の範囲外の場合に発生します。
 
+#@until 1.9.1
 @see [[m:String#[] ]]
+#@else
+@see [[m:String#ord]]
+#@end
 
 --- downto(min) {|n| ... } -> self
 #@since 1.8.7
