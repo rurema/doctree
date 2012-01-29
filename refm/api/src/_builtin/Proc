@@ -66,17 +66,34 @@ Proc.new は、Proc#initialize が定義されていれば
 
 --- [](*arg) -> ()
 --- call(*arg) -> ()
-#@since 1.8.8
+#@since 1.9.1
 --- ===(*arg) -> ()
+--- yield(*arg) -> ()
 #@end
 
 手続きオブジェクトを実行してその結果を返します。
 
+#@until 1.9.1
 引数はブロックパラメータにそのまま(多重代入のルールに従い)代入されます。
+#@else
+引数の渡され方はオブジェクトの生成方法によって異なります。
+詳しくは [[m:Proc#lambda?]] を参照してください。
 
-#@since 1.8.8
 「===」は when の所に手続きを渡せるようにするためのものです。
+
+  def sign(n)
+    case n
+    when lambda{|n| n > 0} then 1
+    when lambda{|n| n < 0} then -1
+    else 0
+    end
+  end
+  
+  p sign(-4) #=> -1
+  p sign(0)  #=> 0
+  p sign(7)  #=> 1
 #@end
+
 
 @param arg 手続きオブジェクトに与える引数を指定します。
 
@@ -135,31 +152,6 @@ self の文字列表現を返します。
   }.to_s
 
   => "#<Proc:0x0x401a880c@-:3>"
-
-#@since 1.9.1
---- yield(*arg) -> ()
-
-[[m:Proc#call]] と同じですが、引数の数のチェックを行いません。
-
-  pr = Proc.new {|a,b,c| p [a,b,c]}
-  pr.yield(1)        #=> [1, nil, nil]
-  pr.yield(1,2,3,4)  #=> [1, 2, 3]
-  pr.call(1)
-
-これは yield と同じ動作です。
-
-  def foo
-    yield(1)
-  end
-  foo {|a,b,c| p [a,b,c]}
-
-@param arg 手続きオブジェクトに与える引数を指定します。
-
-@raise LocalJumpError Procを生成したメソッドからリターンしてしまった場合に発生します。
-
-@see [[ref:d:spec/call#yield]]
-
-#@end
 
 #@since 1.9.1
 --- curry         -> Proc
