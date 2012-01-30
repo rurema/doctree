@@ -148,6 +148,7 @@ irb/inspector
 irb/locale
 #@since 1.9.1
 irb/magic-file
+irb/src_encoding
 #@end
 irb/notifier
 irb/output-method
