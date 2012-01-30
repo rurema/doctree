@@ -4,6 +4,9 @@ require irb/ext/change-ws
 irb 中の irb_current_working_workspace、irb_change_workspace コマンドの
 ための拡張を定義したサブライブラリです。
 
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
+
 = class IRB::ExtendCommand::CurrentWorkingWorkspace < IRB::ExtendCommand::Nop
 
 irb 中の irb_current_working_workspace コマンドのための拡張を定義したク

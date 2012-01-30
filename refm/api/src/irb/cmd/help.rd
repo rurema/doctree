@@ -4,6 +4,9 @@ require irb/cmd/nop
 
 irb 中の help コマンドのための拡張を定義したサブライブラリです。
 
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
+
 = class IRB::ExtendCommand::Help < IRB::ExtendCommand::Nop
 
 irb 中の help コマンドのための拡張を定義したクラスです。

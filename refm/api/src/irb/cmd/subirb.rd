@@ -4,6 +4,9 @@ require irb/ext/multi-irb
 irb 中の irb、irb_jobs、irb_fg、irb_kill コマンドのための拡張を定義した
 サブライブラリです。
 
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
+
 = class IRB::ExtendCommand::IrbCommand < IRB::ExtendCommand::Nop
 
 irb 中の irb コマンドのための拡張を定義したクラスです。

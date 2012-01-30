@@ -4,6 +4,9 @@ require irb/ext/workspaces
 irb 中の irb_workspaces、irb_push_workspace、irb_pop_workspace コマンド
 のための拡張を定義したサブライブラリです。
 
+このライブラリで定義されているメソッドはユーザが直接使用するものではあ
+りません。
+
 = class IRB::ExtendCommand::Workspaces < IRB::ExtendCommand::Nop
 
 irb 中の irb_workspaces コマンドのための拡張を定義したクラスです。
