@@ -1,5 +1,7 @@
+#@since 1.9.1
 require irb/src_encoding
 require irb/magic-file
+#@end
 require readline
 
 irb が入力を扱うためのサブライブラリです。
