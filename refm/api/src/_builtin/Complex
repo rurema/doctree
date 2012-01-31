@@ -48,7 +48,7 @@
 
   Complex('i') ** 2             # => (-1+0i)
 
---- +(other)
+--- +(other) -> Complex
 
 和を計算します。
 
