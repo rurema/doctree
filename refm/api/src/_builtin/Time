@@ -128,12 +128,12 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
             ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。
             69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
 
-@param isdst 指定した日時が夏時間(Daylight Saving Time)なら true を指定します。
-             そうでないなら、false を指定します。
-
 @param wday 無視されます。
 
 @param yday 無視されます。
+
+@param isdst 指定した日時が夏時間(Daylight Saving Time)なら true を指定します。
+             そうでないなら、false を指定します。
 
 @param zone 無視されます。
 
@@ -191,12 +191,12 @@ time + (usec/1000000) の時刻を表す Time オブジェクトを返します。
             ただし、0 以上 38 以下の整数が与えられた場合は、2000年代の下2桁だと解釈します。
             69 以上 138 以下の整数が与えられた場合は、1900 にその数を足した年だと解釈されます。
 
-@param isdst 指定した日時が夏時間(Daylight Saving Time)なら true を指定します。
-             そうでないなら、false を指定します。
-
 @param wday 無視されます。
 
 @param yday 無視されます。
+
+@param isdst 指定した日時が夏時間(Daylight Saving Time)なら true を指定します。
+             そうでないなら、false を指定します。
 
 @param zone 無視されます。
 
