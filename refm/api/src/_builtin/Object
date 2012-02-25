@@ -987,6 +987,26 @@ send, __send__ は、メソッドの呼び出し制限
 
 @see [[m:Object#method]], [[m:Kernel.#eval]], [[c:Proc]], [[c:Method]]
 
+#@since 1.9.1
+--- public_send(name, *args) -> object
+
+オブジェクトの public メソッド name を args を引数にして呼び出し、メソッ
+ドの実行結果を返します。
+
+  1.public_send(:+, 2)  # => 3
+
+@param name 文字列か[[c:Symbol]] で指定するメソッド名です。
+
+@param args 呼び出すメソッドに渡す引数です。
+
+@raise NoMethodError protected メソッドや private メソッドに対して実行
+                     した場合に発生します。
+
+  1.public_send(:puts, "hello")  # => NoMethodError
+
+@see [[m:Object#send]]
+#@end
+
 --- _dump(limit) -> String
 
 [[m:Marshal.#dump]] において出力するオブジェクトがメソッド _dump 
