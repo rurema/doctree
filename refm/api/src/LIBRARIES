@@ -138,6 +138,8 @@ irb/cmd/subirb
 irb/completion
 irb/context
 irb/extend-command
+irb/ext/math-mode
+irb/ext/save-history
 irb/frame
 irb/help
 irb/init
