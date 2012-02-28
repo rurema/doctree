@@ -999,6 +999,8 @@ send, __send__ は、メソッドの呼び出し制限
 
 @param args 呼び出すメソッドに渡す引数です。
 
+@raise ArgumentError name を指定しなかった場合に発生します。
+
 @raise NoMethodError protected メソッドや private メソッドに対して実行
                      した場合に発生します。
 
