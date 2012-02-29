@@ -1477,3 +1477,36 @@ Ruby 1.8.0 以降は複数のメソッド名を指定して一度に削除できます。
 @see [[m:Module#module_eval]], [[m:Module#class_eval]]
 
 #@end
+
+#@since 1.9.3
+--- private_constant(*name) -> Module
+
+name で指定した定数の可視性を private に変更します。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+       untrust なオブジェクトではない場合に発生します。
+
+@return 自身を返します。
+
+@see [[m:Module#public_constant]], [[m:Object#untrusted?]]
+
+--- public_constant(*name) -> Module
+
+name で指定した定数の可視性を public に変更します。
+
+@param name 0 個以上の [[c:String]] か [[c:Symbol]] を指定します。
+
+@raise NameError 存在しない定数を指定した場合に発生します。
+
+@raise SecurityError セーフレベル([[m:$SAFE]])が 4 以上で自身が
+       untrust なオブジェクトではない場合に発生します。
+
+@return 自身を返します。
+
+@see [[m:Module#private_constant]], [[m:Object#untrusted?]]
+
+#@end
