@@ -263,3 +263,6 @@ c が必要とするメモリー領域は大きくなることに注意して下さい。
 
 
 #@include(bigdecimal/BigDecimal)
+#@since 1.9.3
+#@include(bigdecimal/BigMath)
+#@end

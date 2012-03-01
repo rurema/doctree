@@ -8,8 +8,10 @@ BigDecimalを使った数学的な機能を提供します。
  * sin (x, prec)
  * cos (x, prec)
  * atan(x, prec)
+#@until 1.9.3
  * exp (x, prec)
  * log (x, prec)
+#@end
  * PI  (prec)
  * E   (prec)
 
@@ -33,9 +35,11 @@ BigDecimalを使った数学的な機能を提供します。
   a = BigDecimal((PI(100)/2).to_s)
   puts sin(a,100) #=> 0.10000000000000000000......E1
 
-= module BigMath
-
-BigDecimalを使った数学的な機能を提供するモジュールです。
+#@since 1.9.3
+= reopen BigMath
+#@else
+#@include(BigMath)
+#@end
 
 #@since 1.9.2
 == Module Functions
@@ -166,68 +170,6 @@ x に無限大や NaN を指定した場合には NaN を返します。
 
 x の絶対値を 0.9999 のような 1 に近すぎる値にすると計算結果が収束しない
 可能性があります。
-
---- exp(x, prec) -> BigDecimal
-
-x の指数関数を prec で指定した精度で計算します。
-#@since 1.9.2
-x に無限大や NaN を指定した場合には NaN を返します。
-#@else
-x に無限大や NaN を指定した場合には x を返します。
-#@end
-
-@param x 計算対象の BigDecimal オブジェクト。
-
-@param prec 計算結果の精度。
-
-@raise ArgumentError prec に 0 以下が指定された場合に発生します。
-
-例:
-
-#@since 1.9.2
-
-  require "bigdecimal/math"
-
-  puts BigMath::exp(BigDecimal.new('1'), 10) #=> 0.2718281828E1
-
-#@else
-
-  require "bigdecimal"
-  require "bigdecimal/math"
-
-  include BigMath
-  puts exp(BigDecimal.new('1'), 10) #=> 0.271828182845904523536028752390026306410273E1
-
-#@end
-
---- log(x, prec) -> BigDecimal
-
-x の自然対数を prec で指定した精度で計算します。x に無限大や NaN を指定
-した場合には x を返します。
-
-@param x 計算対象の BigDecimal オブジェクト。
-
-@param prec 計算結果の精度。
-
-@raise ArgumentError prec に 0 以下が指定された場合に発生します。
-
-例:
-
-#@since 1.9.2
-
-  require "bigdecimal/math"
-
-  puts BigMath::log(BigDecimal.new('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
-
-#@else
-
-  require "bigdecimal"
-  require "bigdecimal/math"
-
-  include BigMath
-  puts log(BigDecimal.new('2'), 10) #=> 0.693147180559945309417232112588603776354688E0
-
-#@end
 
 --- PI(prec) -> BigDecimal
 
