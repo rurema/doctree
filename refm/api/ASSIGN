@@ -148,6 +148,7 @@ getopts                                         done
 gserver                         okkez           done
 iconv                           sho-h           done
 importenv                       mukai           done
+io/console                      sho-h
 io/nonblock                     ohai            done
 io/wait                         ohai            done
 ipaddr                          okkez           done
