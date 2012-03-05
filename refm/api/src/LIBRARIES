@@ -123,6 +123,10 @@ iconv
 #@until 1.9.1
 importenv
 #@end
+#@since 1.9.3
+io/console
+io/console/size
+#@end
 #@since 1.8.0
 io/nonblock
 io/wait
