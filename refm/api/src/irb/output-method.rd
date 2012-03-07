@@ -51,7 +51,7 @@ irb が出力を扱うためのサブライブラリです。
 #@# 使用されていない事、1.9.1 で削除されている事から省略しました。
 #@# --- foo(format)
 
-= class IRB::StdioOutputMethod < OutputMethod
+= class IRB::StdioOutputMethod < IRB::OutputMethod
 
 標準出力を表すクラスです。ライブラリ内部で使用します。
 
