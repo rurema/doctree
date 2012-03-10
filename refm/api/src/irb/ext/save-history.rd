@@ -1,6 +1,6 @@
 require readline
 
-[[m:IRB::Context]] にヒストリの読み込み、保存の機能を提供するサブライブ
+[[c:IRB::Context]] にヒストリの読み込み、保存の機能を提供するサブライブ
 ラリです。
 
 conf.save_history か IRB.conf[:SAVE_HISTORY] にヒストリの保存件数を設定
