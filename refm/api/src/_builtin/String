@@ -711,6 +711,7 @@ nth 番目の文字から len 文字の部分文字列を文字列 val で置き換えます。
 nth バイト番目から長さ len バイトの部分文字列を文字列 val で置き換えます。
 #@end
 
+len が0 の場合は、単にnthの位置から文字列の追加が行われます。
 nth が負の場合は文字列の末尾から数えます。
 
 @param nth    置き換えたい部分文字列の開始インデックス
@@ -724,6 +725,10 @@ nth が負の場合は文字列の末尾から数えます。
     buf = "string"
     buf[1, 4] = "!!"
     p buf   # => "s!!g"
+
+    buf = "string"
+    buf[1, 0] = "!!"
+    p buf   # => "s!!tring"
 
 --- []=(substr, val)
 
@@ -1650,7 +1655,7 @@ pos が負の場合、文字列の末尾から数えた位置から探索します。
 #@since 1.8.0
 --- insert(pos, other) -> ()
 
-nth 番目の文字の直前に文字列 other を挿入します。
+pos 番目の文字の直前に文字列 other を挿入します。
 self[pos, 0] = other と同じ操作です。
 
 @param pos      文字列を挿入するインデックス
@@ -1660,6 +1665,9 @@ self[pos, 0] = other と同じ操作です。
     str = "foobaz"
     str.insert(3, "bar")
     p str   # => "foobarbaz"
+
+@see [[m:String#[]=]]
+
 #@end
 
 --- intern -> Symbol
