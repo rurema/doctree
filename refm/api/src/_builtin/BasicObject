@@ -162,4 +162,15 @@ Object クラスに定義済みのメソッドはプロクシできないという問題が発生します。
 @param args メソッドに渡す任意個の引数
 @see [[m:Object#__send__]]
 
+#@since 1.9.3
+--- __id__ -> Integer
+
+各オブジェクトに対して一意な整数を返します。あるオブジェクトに対し
+てどのような整数が割り当てられるかは不定です。
+
+[[m:Object#object_id]] と同じですが、#object_id は [[c:BasicObject]] に
+はない事に注意してください。
+
+@see [[m:Object#object_id]], [[ruby-dev:42840]]
+#@end
 #@end

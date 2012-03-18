@@ -614,7 +614,9 @@ self を引数としてブロックを評価し、self を返します。
 
 #@end
 
+#@until 1.9.3
 --- __id__ -> Integer
+#@end
 --- object_id -> Integer
 #@if (version < "1.9.1")
 --- id -> Integer
