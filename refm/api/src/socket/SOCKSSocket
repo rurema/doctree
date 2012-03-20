@@ -1,6 +1,6 @@
 = class SOCKSSocket < TCPSocket
 
-[[c:TCPSocket]] を [[unknown:SOCKS|URL:http://www.sw.nec.co.jp/middle/socks/]] 対応したクラスです。
+[[c:TCPSocket]] を SOCKS([[url:http://www.sw.nec.co.jp/middle/socks/]]) 対応したクラスです。
 
 == Class Methods
 
