@@ -513,7 +513,7 @@ lambda{|a, b| p [a, b] }
 
 : $_ や $! など ・・$<1文字の数字、記号>
 
- [[unknown:特殊変数(組み込み変数)|URL:http://www.ruby-lang.org/ja/man/?cmd=view;name=%C1%C8%A4%DF%B9%FE%A4%DF%CA%D1%BF%F4]]
+ 特殊変数(組み込み変数)。[[ref:d:spec/variables#builtin]] を参照。
 
 : /xx$/
 
