@@ -367,7 +367,7 @@ self を返します。
     str << "YYY"
     p str    # => "stringXXXYYY"
 
-    str << 56  # 文字AのASCIIコード
+    str << 65  # 文字AのASCIIコード
     p str    # => "stringXXXYYYA"
 
 
