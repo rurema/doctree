@@ -131,7 +131,7 @@
 : FAQ
 : Frequently Asked Questions
   よくある質問とその答え集。
-  [[unknown:Ruby FAQ]]はまだまだ発展途上である。質問と答えは随時募集中。
+#@#   [[unknown:Ruby FAQ]]はまだまだ発展途上である。質問と答えは随時募集中。
 
 
 === G
