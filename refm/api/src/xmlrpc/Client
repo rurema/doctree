@@ -126,12 +126,12 @@ faultCode and faultString of type Integer and String.
 
 --- call2( method, *args )
 
-The difference between this method and [[unknown:call|XMLRPC::Client#call]] is, that
+The difference between this method and [[m:XMLRPC::Client#call]] is, that
 this method do ((*not*)) raise a XMLRPC::FaultException exception.
 The method returns an array of two values. The first value indicates if
 the second value is a return-value (true) or an object of type
 XMLRPC::FaultException.
-Both are explained in [[unknown:call|XMLRPC::Client#call]].
+Both are explained in [[m:XMLRPC::Client#call]].
 
 Simple to remember: The "2" in "call2" denotes the number of values it returns.
 

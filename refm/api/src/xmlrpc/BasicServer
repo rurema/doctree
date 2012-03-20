@@ -53,17 +53,17 @@ XMLRPC::FaultException that has a faultCode and faultString
 field.
 
 --- add_handler( prefix, obj )
-This is the second form of [[unknown:add_handler|XMLRPC::BasicServer#add_handler]].
+This is the second form of [[m:XMLRPC::BasicServer#add_handler]].
 To add an object write:
     server.add_handler("michael", MyHandlerClass.new)
 All public methods of MyHandlerClass are accessible to
 the XML-RPC clients by (('michael."name of method"')). This is
-where the class_delim in [[unknown:new|XMLRPC::BasicServer.new]]
+where the class_delim in [[m:XMLRPC::BasicServer.new]]
 has it's role, a XML-RPC method-name is defined by
 prefix + class_delim + (('"name of method"')).
 
 --- add_handler( interface, obj )
-This is the third form of [[unknown:add_handler|XMLRPC::BasicServer#add_handler]].
+This is the third form of [[m:XMLRPC::BasicServer#add_handler]].
 
 Use XMLRPC::interface to generate an ServiceInterface object, which
 represents an interface (with signature and help text) for a handler class.
