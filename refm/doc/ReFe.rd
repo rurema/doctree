@@ -1,7 +1,7 @@
 = ReFe
 
 ReFeについては
-[[unknown:ReFe|URL:http://i.loveruby.net/ja/prog/refe.html]]
+[[url:http://i.loveruby.net/ja/prog/refe.html]]
 をご覧ください。
 
 === Gems版
@@ -14,7 +14,7 @@ Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
 最新 Ruby リファレンスマニュアル用に ReFe のデータを構築するには以下の
 手順で行います。(詳細は ReFe の README を参照してください)
 
-(1) [[URL:http://i.loveruby.net/ja/prog/refe.html]] から ReFe の基本セット
+(1) [[url:http://i.loveruby.net/ja/prog/refe.html]] から ReFe の基本セット
     を取って来てインストールします。
 
         tar xvzf refe-x.x.x.tar.gz
@@ -24,7 +24,7 @@ Gemsをお使いの方は、「((%gem install refe%))」でインストールできます。
         (必要に応じて root になってください)
         ruby setup.rb install
 
-(2) [[URL:http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz]]
+(2) [[url:http://www.ruby-lang.org/ja/man/man-rd-ja.tar.gz]]
     にあるのが最新のリファレンスマニュアルの tarball です。
     これを取得します。
 
