@@ -1090,7 +1090,7 @@ OLEオートメーションでは型情報ライブラリの提供方法を問わずに統一したイン
 
    excel = WIN32OLE.new('Excel.Application')
    tlib = excel.ole_typelib
-   puts tlib.name  # -> 'Microsoft Excel 9.0 Object Library'
+   puts tlib.name  # => 'Microsoft Excel 9.0 Object Library'
 
 #@end
 
@@ -1124,10 +1124,10 @@ Rubyのメソッド引数は値のみを取るため、そのままでは呼び出し先が設定した
   # Ruby
   x = 10
   obj.Accm '*', x, 11
-  p x               # -> 10 …… 呼び出しによって影響を受けない
-  p WIN32OLE::ARGV  # -> ['*', 110, 11] …… 結果はARGVの対応する引数に反映される
+  p x               # => 10 …… 呼び出しによって影響を受けない
+  p WIN32OLE::ARGV  # => ['*', 110, 11] …… 結果はARGVの対応する引数に反映される
   obj.Accm '+', 10, 11
-  p WIN32OLE::ARGV  # -> ['+', 21, 11]
+  p WIN32OLE::ARGV  # => ['+', 21, 11]
 
 直前のメソッド呼び出しが例外となった場合、ARGVの設定内容は呼び出し前の
 状態が保たれます。つまり、WIN32OLE自身がARGVの内容を消去するのは、メソッ

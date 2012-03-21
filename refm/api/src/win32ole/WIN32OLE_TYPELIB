@@ -112,7 +112,7 @@ TypeLibのメジャーバージョン番号を取得します。
 @raise WIN32OLERuntimeError TypeLibの属性が読み取れない場合に通知します。
 
    tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
-   puts tlib.major_version # -> 1
+   puts tlib.major_version # => 1
 
 --- minor_version -> Integer
 TypeLibのマイナーバージョン番号を取得します。
@@ -121,7 +121,7 @@ TypeLibのマイナーバージョン番号を取得します。
 @raise WIN32OLERuntimeError TypeLibの属性が読み取れない場合に通知します。
 
    tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
-   puts tlib.minor_version # -> 7
+   puts tlib.minor_version # => 7
 
 --- name -> String
 --- to_s -> String
@@ -148,7 +148,7 @@ TypeLibに格納されている型には、クラス（CoClass――コンポーネントクラス）
         クトの配列として返します。
 
    tlib = WIN32OLE_TYPELIB.new('Microsoft Excel 14.0 Object Library')
-   classes = tlib.ole_types.map{|k| k.name} # -> ["Adjustments", "CalloutFormat", ...]
+   classes = tlib.ole_types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", ...]
 
 --- path -> String
 TypeLibのパス名を取得します。

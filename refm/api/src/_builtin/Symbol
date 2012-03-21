@@ -188,8 +188,8 @@ other が同じシンボルの時に真を返します。
 
 (self.to_s.next.intern と同じです。)
 
-  :a.next   # -> :b
-  :foo.next # -> :fop
+  :a.next   # => :b
+  :foo.next # => :fop
 
 @see [[m:String#succ]]
 

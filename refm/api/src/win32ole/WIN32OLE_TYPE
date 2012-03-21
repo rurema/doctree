@@ -57,7 +57,7 @@ TypeLibで定義されているすべての型情報を取得します。
 @raise WIN32OLERuntimeError 引数で指定したTypeLibが見つかりません。
 
    types = WIN32OLE_TYPE.ole_classes('Microsoft Excel 14.0 Object Library')
-   classes = types.map{|k| k.name} # -> ["Adjustments", "CalloutFormat", ...]
+   classes = types.map{|k| k.name} # => ["Adjustments", "CalloutFormat", ...]
 
 #@since 1.9.1
 Ruby-1.9.1からは、TypeLibに定義されているすべての型を取得するには、
