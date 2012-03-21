@@ -33,7 +33,7 @@ DNSの名前解決に時間がかかった場合割り込めません
 ([[lib:resolv-replace]] を使用する必要があります)。
 その処理を Ruby で実装しなおすか C 側で Ruby
 のスレッドを意識してあげる必要があります。
-[[unknown:timeoutの落し穴|trap::timeout]]も参照
+#@# [[unknown:timeoutの落し穴|trap::timeout]]も参照
 #@end
 
 = module Timeout
