@@ -236,7 +236,7 @@ Procをカリー化します
   
   # Method#to_proc によるものは lambda?が真となる
   def m() end
-  method(:m).to_proc.lambda? #=> false
+  method(:m).to_proc.lambda? #=> true
   
   # Module#define_method は特別扱いで、
   # これで定義されたメソッドの引数は常に厳密に取り扱われる
