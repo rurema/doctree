@@ -31,24 +31,39 @@ include している [[c:Precision]] モジュールの [[m:Precision.induced_from]] を
 
 == Instance Methods
 
+#@until 1.9.1
 --- chr -> String
+
 文字コードに対応する 1 バイトの文字列を返します。
 
 例えば65.chr は "A" を返します。
 
-#@until 1.9.1
 逆に文字列から文字コードを得るには "A"[0] とします
-#@else
-逆に1文字の文字列から文字コードを得るには "A".ord とします。
-#@end
 
 @return     1バイト文字列
-
 @raise RangeError self が 0 から 255 の範囲外の場合に発生します。
-
-#@until 1.9.1
 @see [[m:String#[] ]]
 #@else
+--- chr -> String
+--- chr(encoding) -> String
+
+与えられたエンコーディング encoding において self を文字コードと見た時、それに対応する一文字からなる文字列を返します。
+引数無しで呼ばれた場合は self を US-ASCII、ASCII-8BIT、デフォルト内部エンコーディングの順で優先的に解釈します。
+
+  p 65.chr # => "A"
+  p 0x79.chr.encoding # => #<Encoding:US_ASCII>
+  p 0x80.chr.encoding # => #<Encoding:ASCII_8BIT>
+  p 12354.chr Encoding::UTF_8 # => "あ"
+  p 12354.chr Encoding::EUC_JP
+  # => RangeError: invalid codepoint 0x3042 in EUC-JP
+  p 12354.chr Encoding::ASCII_8BIT
+  # => RangeError: 12354 out of char range
+  p (2**32).chr
+  # => RangeError: bignum out of char range
+
+@param encoding エンコーディングを表すオブジェクト。Encoding::UTF_8、'shift_jis' など。
+@return     一文字からなる文字列
+@raise RangeError self を与えられたエンコーディングで正しく解釈できない場合に発生します。
 @see [[m:String#ord]]
 #@end
 
