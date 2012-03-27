@@ -139,6 +139,7 @@ obj を返します。
 
 @param obj ファイナライザを解除したいオブジェクトを指定します。
 
+#@until 1.9.1
 --- add_finalizer(proc)    -> Proc
 
 このメソッドは obsolete です。代わりに
@@ -179,3 +180,4 @@ proc を返します。
 
 @param proc 取り除きたいファイナライザである Proc オブジェクトを指定します。
 
+#@end
