@@ -151,6 +151,8 @@ obj を返します。
 
 @raise TypeError 引数に [[c:Hash]] 以外を与えた場合、発生します。
 
+  ObjectSpace.count_objects # => {:TOTAL=>10000, :FREE=>3011, :T_OBJECT=>6, :T_CLASS=>404, ...}
+
 #@end
 #@until 1.9.1
 --- add_finalizer(proc)    -> Proc
