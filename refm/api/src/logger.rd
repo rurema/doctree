@@ -97,7 +97,7 @@ Logger オブジェクトを生成する。
   logger = Logger.new(STDOUT)
   logger = Logger.new('logfile.log')
   
-  file = File.open('foo.log', File::WRONLY | File::APPEND)
+  file = File.open('foo.log', File::WRONLY | File::APPEND | File::CREAT)
   logger = Logger.new(file, 'daily')
 
 
