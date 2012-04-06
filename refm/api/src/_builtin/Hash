@@ -154,7 +154,7 @@ to_hash メソッドを用いて obj をハッシュに変換しようとします。
   keys = [1, 2, 3]
   vals = ["a", "b", ["c"]]
   alist = keys.zip(vals)     # あるいは alist = [keys,vals].transpose
-  p Hash[*alist.flatten(1)]  # => {1=>"a", 2=>"b", 3=>["c"]}
+  p Hash[alist]  # => {1=>"a", 2=>"b", 3=>["c"]}
 
 (4) キーや値が配列の場合
 
