@@ -120,6 +120,11 @@ host で指定されたホストに接続します。
 環境変数 SOCK_SERVER が指定されている場合、SOCKS プロクシを
 経由して接続します。
 
+#@since 1.9.2
+これを呼びだす前に通信をしようとすると、
+[[c:Net::FTPConnectionError]] 例外が発生します。
+#@end
+
 @param host 接続するホスト名です。
 @param port 接続するポート番号です。
 
@@ -733,11 +738,12 @@ FTPのデフォルトのポート番号(21)です。
 #@# --- MDTM_REGEXP
 #@# nodoc
 
-#@since 1.9.2
-= class Net::FTP::NullSocket < Object
-
-全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
-#@end
+#@# #@since 1.9.2
+#@# = class Net::FTP::NullSocket < Object
+#@# 
+#@# 全てのメソッド呼び出しに対して [[c:Net::FTPConnectionError]] を発生させます。
+#@# 
+#@# #@end
 
 = class Net::FTPError < StandardError
 net/ftp ライブラリ関連のエラー全般を表す例外クラスです。
@@ -768,3 +774,10 @@ FTP の応答コード 5yz
 = class Net::FTPProtoError < Net::FTPError
 サーバの応答が FTP のプロトコルに沿っていない場合に
 発生する例外のクラスです。
+
+#@since 1.9.2
+= class Net::FTPConnectionError
+コネクションを確立する前に通信しようとした場合に
+発生する例外のクラスです。
+
+#@end
