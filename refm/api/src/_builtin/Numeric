@@ -494,7 +494,7 @@ self を other で割った余り r を返します。
 
 をみたす数です。
 余り r は、other と同じ符号になります。
-商  q は、[[m:Numeric#div]] (あるいは [[m:Integer#/]])で求められます。
+商  q は、[[m:Numeric#div]] (あるいは 「/」)で求められます。
 modulo はメソッド % の呼び出しとして定義されています。
 
 @param other 自身を割る数を指定します。
