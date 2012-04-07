@@ -500,12 +500,31 @@ LIST コマンドを送り、クライアントから利用可能なメールボックス名の集合から
   p imap.list("", "foo/%")
   #=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
 
-#@# not released yet
-#@# #@since 1.9.3
-#@# --- xlist
-#@# [[URL:http://code.google.com/apis/gmail/imap/]]
-#@# #@todo
-#@# #@end
+#@since 1.9.3
+--- xlist(refname, mailbox) -> [Net::IMAP::MailboxList]
+
+XLISTコマンドを送り、クライアントから利用可能なメールボックス名の集合から
+引数にマッチするものすべてを返します。
+
+[[m:Net::IMAP#list]] とほぼ同様ですが、
+「:Sent」などの拡張されたフラグを含むことが異なります。
+
+詳しくは
+[[URL:http://code.google.com/apis/gmail/imap/]]
+を参照してください。
+
+@param refname 参照名(文字列)
+@param mailbox 調べるメールボックスの名前(文字列)。ワイルドカードを含んでいてもかまいません。
+
+例:
+  imap.create("foo/bar")
+  imap.create("foo/baz")
+  p imap.xlist("", "foo/%")
+  #=> [#<Net::IMAP::MailboxList attr=[:Noselect], delim="/", name="foo/">, \\
+  #    #<Net::IMAP::MailboxList attr=[:Noinferiors, :Marked], delim="/", name="foo/bar">, \\
+  #    #<Net::IMAP::MailboxList attr=[:Noinferiors], delim="/", name="foo/baz">]
+
+#@end
 
 --- lsub(refname, mailbox) -> [Net::IMAP::MailboxList]
 
