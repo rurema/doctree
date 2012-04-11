@@ -1627,7 +1627,7 @@ IO をノンブロッキングモードに設定し、string を [[man:write(2)]] システムコールで
 write(2) が成功した場合、書き込んだ長さを返します。
 EAGAIN, EINTR などは例外 [[c:Errno::EXXX]] として呼出元に報告されます。
 #@since 1.8.7
-書き込んだバイト数(つまり返り値)は [[c:String#bytesize]] の
+書き込んだバイト数(つまり返り値)は [[m:String#bytesize]] の
 値より小さい可能性があります。
 #@end
 
