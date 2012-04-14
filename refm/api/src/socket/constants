@@ -1,10 +1,7 @@
 
 --- AF_APPLETALK
-#@since 1.8.3
 --- AF_ATM
-#@end
 --- AF_AX25
-#@since 1.8.3
 --- AF_CCITT
 --- AF_CHAOS
 --- AF_CNT
@@ -15,37 +12,31 @@
 --- AF_E164
 --- AF_ECMA
 --- AF_HYLINK
-#@end
 --- AF_IMPLINK
 --- AF_INET
 --- AF_INET6
 --- AF_IPX
-#@since 1.8.3
 --- AF_ISDN
-#@end
 --- AF_ISO
-#@since 1.8.3
 --- AF_LAT
 --- AF_LINK
-#@end
 --- AF_LOCAL
-#@since 1.8.3
 --- AF_MAX
 --- AF_NATM
 --- AF_NDRV
 --- AF_NETBIOS
 --- AF_NETGRAPH
-#@end
 --- AF_NS
-#@since 1.8.3
 --- AF_OSI
+#@since 1.9.1
+--- AF_PACKET
+#@end
 --- AF_PPP
 --- AF_PUP
 --- AF_ROUTE
 --- AF_SIP
 --- AF_SNA
 --- AF_SYSTEM
-#@end
 --- AF_UNIX
 --- AF_UNSPEC
 #@todo
@@ -304,6 +295,11 @@
 
 @see [[m:Socket.open]]
 
+#@since 1.9.2
+--- PF_PACKET
+#@todo
+#@end
+
 --- PF_PIP
 #@todo
 
@@ -388,6 +384,17 @@
 --- IPPORT_USERRESERVED
 #@todo
 
+#@since 1.9.1
+--- IPPROTO_AH
+--- IPPROTO_DSTOPTS
+--- IPPROTO_ESP
+--- IPPROTO_FRAGMENT
+--- IPPROTO_HOPOPTS
+--- IPPROTO_ICMPV6
+--- IPPROTO_IPV6
+--- IPPROTO_NONE
+--- IPPROTO_ROUTING
+#@end
 --- IPPROTO_BIP
 --- IPPROTO_EGP
 --- IPPROTO_EON
@@ -426,6 +433,9 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- AI_DEFAULT
 --- AI_MASK
 --- AI_NUMERICHOST
+#@since 1.9.1
+--- AI_NUMERICSERV
+#@end
 --- AI_PASSIVE
 --- AI_V4MAPPED
 --- AI_V4MAPPED_CFG
@@ -445,6 +455,9 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- EAI_MEMORY
 --- EAI_NODATA
 --- EAI_NONAME
+#@since 1.9.1
+--- EAI_OVERFLOW
+#@end
 --- EAI_PROTOCOL
 --- EAI_SERVICE
 --- EAI_SOCKTYPE
@@ -463,6 +476,16 @@ AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 --- INADDR_UNSPEC_GROUP
 #@todo
 
+#@since 1.9.1
+--- INET6_ADDRSTRLEN
+--- INET_ADDRSTRLEN
+#@end
+#@since 1.9.2
+--- IFNAMSIZ
+#@end
+#@since 1.9.3
+--- IF_NAMESIZE
+#@end
 
 --- NI_DGRAM
 --- NI_MAXHOST
@@ -492,8 +515,71 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 --- IP_RETOPTS
 --- IP_TOS
 --- IP_TTL
+#@since 1.9.2
+--- IP_ADD_SOURCE_MEMBERSHIP
+--- IP_BLOCK_SOURCE
+--- IP_DONTFRAG
+--- IP_DROP_SOURCE_MEMBERSHIP
+--- IP_FREEBIND
+--- IP_IPSEC_POLICY
+--- IP_MINTTL
+--- IP_MSFILTER
+--- IP_MTU
+--- IP_MTU_DISCOVER
+--- IP_ONESBCAST
+--- IP_PASSSEC
+--- IP_PKTINFO
+--- IP_PKTOPTIONS
+--- IP_PMTUDISC_DO
+--- IP_PMTUDISC_DONT
+--- IP_PMTUDISC_WANT
+--- IP_PORTRANGE
+--- IP_RECVERR
+--- IP_RECVIF
+--- IP_RECVSLLA
+--- IP_RECVTOS
+--- IP_RECVTTL
+--- IP_ROUTER_ALERT
+--- IP_SENDSRCADDR
+--- IP_UNBLOCK_SOURCE
+--- IP_XFRM_POLICY
+#@end
 #@todo
 
+#@since 1.9.1
+--- IPV6_CHECKSUM
+--- IPV6_DONTFRAG
+--- IPV6_DSTOPTS
+--- IPV6_HOPLIMIT
+--- IPV6_HOPOPTS
+--- IPV6_JOIN_GROUP
+--- IPV6_LEAVE_GROUP
+--- IPV6_MULTICAST_HOPS
+--- IPV6_MULTICAST_IF
+--- IPV6_MULTICAST_LOOP
+--- IPV6_NEXTHOP
+--- IPV6_PATHMTU
+--- IPV6_PKTINFO
+--- IPV6_RECVDSTOPTS
+--- IPV6_RECVHOPLIMIT
+--- IPV6_RECVHOPOPTS
+--- IPV6_RECVPATHMTU
+--- IPV6_RECVPKTINFO
+--- IPV6_RECVRTHDR
+--- IPV6_RECVTCLASS
+--- IPV6_RTHDR
+--- IPV6_RTHDRDSTOPTS
+--- IPV6_RTHDR_TYPE_0
+--- IPV6_TCLASS
+--- IPV6_UNICAST_HOPS
+--- IPV6_USE_MIN_MTU
+--- IPV6_V6ONLY
+#@todo
+#@end
+
+#@since 1.9.1
+--- IPX_TYPE
+#@end
 
 #@since 1.8.3
 --- MSG_COMPAT
@@ -518,8 +604,48 @@ Socket.getnameinfoの第2引数 flags に与える定数です。
 #@end
 --- MSG_TRUNC
 --- MSG_WAITALL
+#@since 1.9.2
+--- MSG_CONFIRM
+--- MSG_ERRQUEUE
+--- MSG_FIN
+--- MSG_MORE
+--- MSG_NOSIGNAL
+--- MSG_PROXY
+--- MSG_RST
+--- MSG_SYN
+#@end
 #@todo
 
+#@since 1.9.2
+--- MCAST_BLOCK_SOURCE
+--- MCAST_EXCLUDE
+--- MCAST_INCLUDE
+--- MCAST_JOIN_GROUP
+--- MCAST_JOIN_SOURCE_GROUP
+--- MCAST_LEAVE_GROUP
+--- MCAST_LEAVE_SOURCE_GROUP
+--- MCAST_MSFILTER
+--- MCAST_UNBLOCK_SOURCE
+#@todo
+#@end
+
+#@since 1.9.2
+--- LOCAL_CONNWAIT
+--- LOCAL_CREDS
+--- LOCAL_PEERCRED
+#@todo
+#@end
+
+#@since 1.9.2
+--- SCM_BINTIME
+--- SCM_CREDENTIALS
+--- SCM_CREDS
+--- SCM_RIGHTS
+--- SCM_TIMESTAMP
+--- SCM_TIMESTAMPNS
+--- SCM_UCRED
+#@todo
+#@end
 
 --- SHUT_RD
 --- SHUT_RDWR
@@ -577,9 +703,20 @@ shutdown の how:
 --- SO_USELOOPBACK
 --- SO_WANTMORE
 --- SO_WANTOOBFLAG
+#@end
+#@since 1.9.2
+--- SO_ALLZONES
+--- SO_BINTIME
+--- SO_MAC_EXEMPT
+--- SO_RECVUCRED
+--- SO_TIMESTAMPNS
+#@end
+#@todo
+
+#@since 1.9.2
+--- SOMAXCONN
 #@todo
 #@end
-
 
 --- SOL_ATALK
 --- SOL_AX25
@@ -597,4 +734,21 @@ shutdown の how:
 
 --- TCP_MAXSEG
 --- TCP_NODELAY
+#@since 1.9.2
+--- TCP_CORK
+--- TCP_DEFER_ACCEPT
+--- TCP_INFO
+--- TCP_KEEPCNT
+--- TCP_KEEPIDLE
+--- TCP_KEEPINTVL
+--- TCP_LINGER2
+--- TCP_MD5SIG
+--- TCP_NOOPT
+--- TCP_NOPUSH
+--- TCP_QUICKACK
+--- TCP_SYNCNT
+--- TCP_WINDOW_CLAMP
+--- UDP_CORK
+#@end
 #@todo
+
