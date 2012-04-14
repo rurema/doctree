@@ -19,11 +19,16 @@ conf.math_mode か IRB.conf[:MATH_MODE] に true を設定する事で使用できま
 
 math_mode が有効かどうかを返します。
 
+IRB.conf[:MATH_MODE] を参照する事でも同様の事が行えます。
+
 @see [[m:IRB::Context#inspect?]]
 
 --- math_mode=(opt)
 
 math_mode を有効にするかどうかを指定します。
+
+.irbrc ファイル中で IRB.conf[:MATH_MODE] を設定する事でも同様の事が行え
+ます。
 
 @param opt math_mode を有効にする場合に true を指定します。
 

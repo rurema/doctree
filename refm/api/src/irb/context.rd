@@ -4,14 +4,6 @@ require irb/workspace
 
 == Instance Methods
 
---- eval_history=(n)
-#@todo
-
-実行結果のヒストリ機能の設定.
-n は整数か nil で n > 0 であればその数だけヒストリにためる。
-n = 0の時は無制限に記憶する.
-n = nil だとヒストリ機能はやめる (デフォルト).
-
 --- back_trace_limit
 #@todo
 
@@ -64,21 +56,6 @@ inf-ruby-mode 用のプロンプト表示を行なうかどうかを表します。
 : nil
     irb が通常モードであれば inspect mode、
     math モードなら non inspect mode
-
---- math_mode
-#@todo
-
-分数と行列の計算ができる bc モードかどうかを表します。
-
---- use_loader
---- use_loader=(bool)
-#@todo
-
-load または require 時に
-irb のファイル読み込み機能を使うかどうかを示します。
-デフォルト値は false です。
-
-use_loader の値は irb 全体に反映されます。
 
 --- prompt_c
 #@todo

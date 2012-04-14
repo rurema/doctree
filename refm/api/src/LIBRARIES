@@ -142,8 +142,12 @@ irb/cmd/subirb
 irb/completion
 irb/context
 irb/extend-command
+irb/ext/history
+irb/ext/loader
 irb/ext/math-mode
+irb/ext/multi-irb
 irb/ext/save-history
+irb/ext/use-loader
 irb/frame
 irb/help
 irb/init

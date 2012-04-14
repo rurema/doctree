@@ -25,27 +25,46 @@ conf.save_history か IRB.conf[:SAVE_HISTORY] にヒストリの保存件数を設定
 
 --- save_history -> Integer | nil
 
-IRB.conf[:SAVE_HISTORY] に設定された履歴の最大保存件数を返します。
+履歴の最大保存件数を [[c:Integer]] か nil で返します。
+
+IRB.conf[:SAVE_HISTORY] を参照する事でも同様の事が行えます。
+
+@return 履歴の最大保存件数を [[c:Integer]] か nil で返します。0 以下や
+        nil を返した場合は追加の保存は行いません。
 
 @see [[ref:lib:irb#history]]
 
 --- save_history=(val)
 
-IRB.conf[:SAVE_HISTORY] に val を設定します。
+履歴の最大保存件数を val に設定します。
 
-@param val 履歴の最大保存件数を [[c:Integer]] で指定します。
+.irbrc ファイル中で IRB.conf[:SAVE_HISTORY] を設定する事でも同様の事が
+行えます。
+
+@param val 履歴の最大保存件数を [[c:Integer]] で指定します。0 以下や
+           nil を返した場合は追加の保存は行いません。現在の件数より小さ
+           い値を設定した場合は、最新の履歴から指定した件数分のみが保存
+           されます。
 
 @see [[ref:lib:irb#history]]
 
 --- history_file -> String | nil
 
-IRB.conf[:HISTORY_FILE] に設定されたファイル名を返します。
+履歴ファイルのパスを返します。
+
+IRB.conf[:HISTORY_FILE] を参照する事でも同様の事が行えます。
+
+@return 履歴ファイルのパスを [[c:String]] か nil で返します。nil を返し
+        た場合は、~/.irb_history に履歴が保存されます。
 
 @see [[ref:lib:irb#history]]
 
 --- history_file=(hist)
 
-IRB.conf[:HISTORY_FILE] に val を設定します。
+履歴ファイルのパスを val に設定します。
+
+.irbrc ファイル中で IRB.conf[:HISTORY_FILE] を設定する事でも同様の事が
+行えます。
 
 @param hist 履歴ファイルのパスを文字列で指定します。
 
