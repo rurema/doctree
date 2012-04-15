@@ -155,7 +155,7 @@ self の内容を other の内容で置き換えます。
 
 @see [[m:YAML::DBM#values_at]]
 
---- update(other) -> YAML::DBM
+--- update(other) -> self
 
 自身と other の内容をマージ(統合)します。
 
@@ -164,8 +164,6 @@ self の内容を other の内容で置き換えます。
 @param other [[c:Hash]]、[[c:DBM]] オブジェクトを指定します。
 
 @raise DBMError 更新に失敗した場合に発生します。
-
-自身を返します。
 
 --- to_a -> [[String, object]]
 
