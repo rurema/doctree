@@ -1,6 +1,33 @@
 require irb/workspace
 
+irb の設定を扱うためのサブライブラリです。
+
 = class IRB::Context
+
+irb の設定を扱うためのクラスです。
+
+irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
+を変更します。irb の起動後は IRB.conf の内容を更新しても変更の内容は反
+映されない事に注意してください。
+
+== Class Methods
+
+--- new(irb, workspace = nil, input_method = nil, output_method = nil) -> IRB::Context
+
+自身を初期化します。
+
+@param irb [[c:IRB::Irb]] オブジェクトを指定します。
+
+@param workspace [[c:IRB::WorkSpace]] オブジェクトを指定します。省略し
+                 た場合は新しく作成されます。
+
+@param input_method [[c:String]]、[[c:IRB::InputMethod]] のサブクラスの
+                    オブジェクト、nil のいずれかを指定します。
+
+@param output_method [[c:IRB::OutputMethod]] のサブクラスのオブジェクト
+                     を指定します。省略した場合は
+                     [[c:IRB::StdioOutputMethod]] オブジェクトが新しく
+                     作成されます。
 
 == Instance Methods
 
@@ -106,3 +133,16 @@ val の値によって、このメソッドの効果は以下のように分かれます。
 #@#
 #@#irbからいろいろなメッセージを出力するか
 #@#
+== Constants
+
+--- NOPRINTING_IVARS -> [String]
+
+ライブラリ内部で使用します。
+
+--- NO_INSPECTING_IVARS -> [String]
+
+ライブラリ内部で使用します。
+
+--- IDNAME_IVARS -> [String]
+
+ライブラリ内部で使用します。

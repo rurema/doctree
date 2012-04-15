@@ -16,8 +16,6 @@ conf.eval_history か IRB.conf[:EVAL_HISTORY] に [[c:Integer]] を設定す
 
 実行結果の履歴の最大保存件数を [[c:Integer]] か nil で返します。
 
-IRB.conf[:EVAL_HISTORY] を参照する事でも同様の事が行えます。
-
 @return 履歴の最大保存件数を [[c:Integer]] か nil で返します。0 を返し
         た場合は無制限に保存します。nil を返した場合は追加の保存は行いません。
 

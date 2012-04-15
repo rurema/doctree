@@ -15,8 +15,6 @@ conf.use_tracer か IRB.conf[:USE_TRACER] に true を設定する事で使用でき
 
 irb への入力を評価する時に [[lib:tracer]] が有効かどうかを返します。
 
-IRB.conf[:USE_TRACER] を参照する事でも同様の事が行えます。
-
 @see [[lib:tracer]], [[m:IRB::Context#use_tracer=]]
 
 --- use_tracer=(val)

@@ -27,8 +27,6 @@ conf.save_history か IRB.conf[:SAVE_HISTORY] にヒストリの保存件数を設定
 
 履歴の最大保存件数を [[c:Integer]] か nil で返します。
 
-IRB.conf[:SAVE_HISTORY] を参照する事でも同様の事が行えます。
-
 @return 履歴の最大保存件数を [[c:Integer]] か nil で返します。0 以下や
         nil を返した場合は追加の保存は行いません。
 
@@ -51,8 +49,6 @@ IRB.conf[:SAVE_HISTORY] を参照する事でも同様の事が行えます。
 --- history_file -> String | nil
 
 履歴ファイルのパスを返します。
-
-IRB.conf[:HISTORY_FILE] を参照する事でも同様の事が行えます。
 
 @return 履歴ファイルのパスを [[c:String]] か nil で返します。nil を返し
         た場合は、~/.irb_history に履歴が保存されます。
