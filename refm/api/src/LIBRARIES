@@ -142,12 +142,15 @@ irb/cmd/subirb
 irb/completion
 irb/context
 irb/extend-command
+irb/ext/change-ws
 irb/ext/history
 irb/ext/loader
 irb/ext/math-mode
 irb/ext/multi-irb
 irb/ext/save-history
+irb/ext/tracer
 irb/ext/use-loader
+irb/ext/workspaces
 irb/frame
 irb/help
 irb/init

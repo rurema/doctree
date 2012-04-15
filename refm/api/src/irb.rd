@@ -105,6 +105,8 @@ irb コマンドのオプションを指定したのと同じ効果が得られます。
   IRB.conf[:USE_TRACER] = true
   IRB.conf[:VERBOSE] = true
 
+それぞれの設定値の詳細については、[[c:IRB::Context]] を参照してください。
+
 ==== プロンプトのカスタマイズ
 
 irb のプロンプトをカスタマイズしたい時は、
