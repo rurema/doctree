@@ -6,15 +6,32 @@
 された文字列で指定します
 ([[ref:lib:socket#pack_string]]を参照)。
 
+#@until 1.9.1
 一般的なソケットプログラミングはより高レベルの
 [[c:TCPSocket]] クラスや
 [[c:TCPServer]] クラスを用い
 て行われることが多く、このクラスはあまり用いられません。
+#@else
+ソケットオブジェクトを生成する汎用的な方法として
+[[m:Socket.new]] がありますが、以下のようなより便利な
+メソッドがあります。
+  * TCP のクライアントソケット [[m:Socket.tcp]] [[m:TCPSocket.open]]
+  * TCP のサーバソケット [[m:Socket.tcp_server_loop]],
+    [[m:Socket.tcp_server_sockets]], [[m:TCPServer.open]]
+  * UNIX socket のクライアントソケット [[m:Socket.unix]] [[m:UNIXSocket.open]]
+  * UNIX socket のサーバソケット [[m:Socket.unix_server_loop]], 
+    [[m:Socket.unix_server_socket]], [[m:UNIXServer.open]]
+#@end
 
 == Class Methods
 
+#@until 1.9.1
 --- open(domain, type, protocol) -> Socket
 --- new(domain, type, protocol) -> Socket
+#@else
+--- open(domain, type, protocol=0) -> Socket
+--- new(domain, type, protocol=0) -> Socket
+#@end
 
 新しいソケットを生成します。domain、type、
 protocol はインクルードファイルにある定数で指定しま
@@ -120,7 +137,7 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 わりとして用意されています。IPのバージョンに依存しないプログラムを
 書くための標準的なAPIです。
 
-@param sa 文字列か配列を与えます。
+h@param sa 文字列か配列を与えます。
 
 @param flags 省略可能な第2引数 flags には [[man:getnameinfo(3)]] の第7番目の引数に指定する flags に相当する [[c:Fixnum]] を与えます。
 
@@ -335,7 +352,7 @@ unpack したソケットパス名を返します。
 #@end
 #@since 1.9.1
 --- getservbyport(port, protocol_name="tcp") -> String
-#@todo
+
 ポート番号に対応するサービスの正式名を返します。
 #@#rdoc の Obtains the port number for _port_. って変?
 
@@ -348,16 +365,35 @@ unpack したソケットパス名を返します。
    Socket.getservbyport(514, "udp") #=> "syslog"
 #@end
 #@since 1.9.2
---- accept_loop
-#@todo
---- ip_address_list
-#@todo
+--- accept_loop(sockets) {|sock, client_addrinfo| ...} -> ()
+sockets でサーバソケットを受け取り、接続を待ち受け、
+クライアントとの接続が確立するたびにブロックにその接続
+ソケットを渡し呼び出します。
+
+ブロックの引数はクライアントと接続したソケットオブジェクトと
+[[c:Addrinfo]] オブジェクトです。
+
+[[m:Socket.tcp_server_loop]] と同様、ブロックは
+逐次的に呼び出されます。つまりブロックか終了するまで
+次の接続は accept されません。
+並列に通信したい場合は
+スレッドのような並列実行機構を使う必要があります。
+
+@param sockets 待ち受けたいサーバソケットの配列
+
+@see [[m:Socket.tcp_server_loop]], [[m:Socket.unix_server_loop]],
+
+--- ip_address_list -> [Addrinfo]
+ローカルの IP アドレスを配列で返します。
+
 --- tcp(host, port, local_host=nil, local_port=nil) -> Socket
 --- tcp(host, port, local_host=nil, local_port=nil) {|socket| ... } -> object
-#@todo
 TCP/IP で host:port に接続するソケットオブジェクトを作成します。
 
 local_host や local_port を指定した場合、ソケットをそこにバインドします。
+
+ブロックを渡すと、生成したソケットをそのブロックに渡し呼び出します。
+ブロック終了時にソケットオブジェクトを閉じます。
 
 @param host 接続先のホスト名
 @param port 接続先のポート番号
@@ -371,24 +407,238 @@ local_host や local_port を指定した場合、ソケットをそこにバインドします。
     sock.close_write
     puts sock.read
   }
---- tcp_server_loop
-#@todo
---- tcp_server_sockets
-#@todo
---- udp_server_loop
-#@todo
---- udp_server_loop_on
-#@todo
---- udp_server_recv
-#@todo
---- udp_server_sockets
-#@todo
---- unix
-#@todo
---- unix_server_loop
-#@todo
---- unix_server_socket
-#@todo
+--- tcp_server_loop(port){|sock,addr| ...} -> ()
+--- tcp_server_loop(host, port){|sock,addr| ...} -> ()
+TCP/IP で host:port で待ち受けるサーバ側のソケットを作成し、
+新しい接続を受け入れるごとにブロックを呼び出します。
+
+ブロックには新しい接続を表すソケットオブジェクトと、
+クライアントアドレスを表す [[c:Addrinfo]] オブジェクトが渡されます。
+
+ブロックの実行が終わってもソケットは close されません。
+アプリケーション側が明示的に close する必要があります。
+
+このメソッドはブロックを逐次的に呼び出します。
+つまりブロックからリターンするまで次のコネクションを受け入れません。
+そのため、同時に複数のクライアントと通信したい場合は
+スレッドのような並列機構を使う必要があります。
+
+サーバのソケットアドレスを決めるために
+[[m:Addrinfo.getaddrinfo]] が用いられることに注意してください。
+[[m:Addrinfo.getaddrinfo]] は複数のアドレスを返す(IPv4 と IPv6 など)
+場合があり、その場合その全てが用いられます。つまり IPv4 と IPv6 の
+両方を待ち受けます。getaddrinfo が 0 個のアドレスを返す場合はエラー
+になります。1つ以上を返した場合にそれが用いられます。
+
+  # 逐次的な echo サーバ
+  # 一度に一つのクライアントした取り扱えない
+  Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
+    begin
+      IO.copy_stream(sock, sock)
+    ensure
+      sock.close
+    end
+  }
+  
+  # スレッドを使った echo サーバ
+  # 同時に複数のクライアントを取り扱える
+  # 以下の例だと接続制限がない(つまり接続過剰になりえる)ことに注意
+  Socket.tcp_server_loop(16807) {|sock, client_addrinfo|
+    Thread.new {
+      begin
+        IO.copy_stream(sock, sock)
+      ensure
+        sock.close
+      end
+    }
+  }
+
+内部的には [[m:Socket.tcp_server_sockets]] で
+生成したソケットを [[m:Socket.accept_loop]] で処理しています。
+
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
+@see [[m:Socket.tcp_server_sockets]], [[m:Socket.accept_loop]]
+
+--- tcp_server_sockets(port) -> [Socket]
+--- tcp_server_sockets(host, port) -> [Socket]
+--- tcp_server_sockets(port){|sockets| ...}  -> object
+--- tcp_server_sockets(host, port){|sockets| ...}  -> object
+
+TCP/IP で host:port で待ち受けるサーバ側のソケットを
+作成します。
+
+ブロックなしの場合は、ソケットオブジェクトの配列を返します。
+
+ブロック付きの場合は、ソケットオブジェクトをそのブロックに
+渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
+返り値はブロックの評価値となります。
+
+port が 0 の場合は、実際のポート番号は動的に選ばれます。
+ただし返り値のソケットはすべて同じ番号を持ちます。
+
+z  # tcp_server_sockets returns は2つのソケットを返す
+  sockets = Socket.tcp_server_sockets(1296)
+  p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
+  
+  # それぞれは IPv4 と IPv6 のソケット
+  sockets.each {|s| p s.local_address }
+  #=> #<Addrinfo: [::]:1296 TCP>
+  #   #<Addrinfo: 0.0.0.0:1296 TCP>
+  
+  # ポート番号を動的に選んでも IPv6 と IPv4 で同じポート番号を持つ
+  sockets = Socket.tcp_server_sockets(0)
+  sockets.each {|s| p s.local_address }
+  #=> #<Addrinfo: [::]:53114 TCP>
+  #   #<Addrinfo: 0.0.0.0:53114 TCP>
+  
+  # ブロックにソケットの配列が渡される
+  Socket.tcp_server_sockets(0) {|sockets|
+    p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
+  }
+
+
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
+@see [[m:Socket.tcp_server_loop]]
+
+--- udp_server_loop(port) {|msg, msg_src| ... } -> ()
+--- udp_server_loop(host, port) {|msg, msg_src| ... } -> ()
+UDP のサーバを起動して、メッセージが来るごとに
+ブロックを呼び出します。
+
+ブロックに渡される引数は msg と msg_src の 2 つで、
+msg は受け取ったメッセージ文字列で、 msg_src は 
+通信相手の [[c:Socket::UDPSource]] オブジェクトです。
+
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
+@see [[m:Socket.udp_server_sockets]], [[m:Socket.udp_server_loop_on]]
+
+--- udp_server_loop_on(sockets) {|msg, msg_src| ... } -> ()
+
+sockets (UDP のソケット)に対し、通信を待ち受けます。
+
+[[m:Socket.udp_server_sockets]] の返り値がこれの引数に適切です。
+
+ソケットからメッセージを受け取るたびにブロックを呼び出します。
+ブロックに渡される引数は msg と msg_src の 2 つで、
+msg は受け取ったメッセージ文字列で、 msg_src は 
+通信相手の [[c:Socket::UDPSource]] オブジェクトです。
+
+無限ループ構造になっています。
+
+@see sockets 通信を待ち受けるソケットの配列
+@see [[m:Socket.udp_server_recv]], [[m:Socket.udp_server_loop]]
+
+--- udp_server_recv(sockets){|msg, msg_src| ... } -> ()
+socketsで与えられた各 UDP ソケットからデータを読み取ります。
+
+各ソケットからメッセージを読み取るごとにブロックを呼び出します。
+ブロックに渡される引数は msg と msg_src の 2 つで、
+msg は受け取ったメッセージ文字列で、 msg_src は 
+通信相手の [[c:Socket::UDPSource]] オブジェクトです。
+
+[[m:Socket.udp_server_loop]] はこのメソッドの用いて以下のようにして
+実装できます。
+
+  udp_server_sockets(host, port) {|sockets|
+    loop {
+      readable, _, _ = IO.select(sockets)
+      udp_server_recv(readable) {|msg, msg_src| ... }
+    }
+  }
+
+@see sockets 読み込むソケットの配列
+
+--- udp_server_sockets(port) -> [Sockets]
+--- udp_server_sockets(host, port) -> [Sockets]
+--- udp_server_sockets(port) {|sockets| ... } -> object
+--- udp_server_sockets(host, port) {|sockets| ... } -> object
+
+UDP で host:port を待ち受けるサーバ側のソケットを作成します。
+
+ブロックなしの場合は、ソケットオブジェクトの配列を返します。
+
+ブロック付きの場合は、ソケットオブジェクトをそのブロックに
+渡して呼び出します。ブロック終了時にそれらのソケットを閉じます。
+
+port が 0 の場合は、実際のポート番号は動的に選ばれます。
+ただし返り値のソケットはすべて同じ番号を持ちます。
+
+  # UDP/IP echo server
+  Socket.udp_server_sockets(0) {|sockets|
+    p sockets.first.local_address.ip_port     #=> 32963
+    Socket.udp_server_loop_on(sockets) {|msg, msg_src|
+      msg_src.reply msg
+    }
+  }
+
+@param host 割り当てるホスト名
+@param port 割り当てるポート番号
+
+--- unix(path) -> Socket
+--- unix(path){|sock| ... } -> object
+Unix クライアントソケットを生成します。
+
+ブロックが省略されたときは、生成されたソケットが返されます。
+
+ブロックが渡されたときは、生成されたソケットを
+引数としてブロックを呼び出します。メソッドの返り値は
+ブロックの評価値となります。また、ブロックの終了後に
+ソケットを [[m:IO#close]] します。
+
+  # /tmp/sock と通信する
+  Socket.unix("/tmp/sock") {|sock|
+    t = Thread.new { IO.copy_stream(sock, STDOUT) }
+    IO.copy_stream(STDIN, sock)
+    t.join
+  }
+
+@param path 接続対象のパス(文字列)
+
+--- unix_server_loop(path) {|socket, client_addrinfo| ... } -> ()
+Unix サーバソケットを生成し、
+新しい接続を受け入れるごとにブロックを呼び出します。
+
+ブロックには新しい接続を表すソケットオブジェクトと、
+クライアントアドレスを表す [[c:Addrinfo]] オブジェクトが渡されます。
+
+ブロックの実行が終わってもソケットは close されません。
+アプリケーション側が明示的に close する必要があります。
+
+path という名前のファイルが既に存在するときは、
+そのファイルのオーナである場合は先にそのファイルを削除してしまいます。
+これは path が悪意あるユーザによって変更されない場合に限りは安全です。
+つまり、 /tmp/malicious-users-directory/socket という名前のパスは
+使うべきではありません。
+/tmp にスティッキービットが立っている場合、/tmp/socket や
+/tmp/your-private-directory/socket というパス名は安全と考えて良いでしょう。
+
+@param path 接続を待ち受けるパス(文字列)
+
+--- unix_server_socket(path) -> Socket
+--- unix_server_socket(path){|sock| ... } -> object
+Unix サーバソケットを生成します。
+
+ブロックが省略されたときは、生成されたソケットが返されます。
+
+ブロックが渡されたときは、生成されたソケットを
+引数としてブロックを呼び出します。メソッドの返り値は
+ブロックの評価値となります。また、ブロックの終了後に
+ソケットを [[m:IO#close]] します。
+
+  socket = Socket.unix_server_socket("/tmp/s")
+  p socket                  #=> #<Socket:fd 3>
+  p socket.local_address    #=> #<Addrinfo: /tmp/s SOCK_STREAM>
+  
+  Socket.unix_server_socket("/tmp/sock") {|s|
+    p s                     #=> #<Socket:fd 3>
+    p s.local_address       #=> # #<Addrinfo: /tmp/sock SOCK_STREAM>
+  }
+
+@param path 接続を待ち受けるパス(文字列)
+
 #@end
 == Instance Methods
 
@@ -420,31 +670,33 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
 --- bind(my_sockaddr) -> 0
-#@todo
 
 ソケットを my_sockaddr に結合します。[[man:bind(2)]]
-と同じ働きをします。my_sockaddr は
-[[ref:lib:socket#pack_string]]
-です。
+と同じ働きをします。
 
-0 を返します。
-
+#@until 1.9.1
 @param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
-
+#@else
+@param my_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]もしくは[[c:Addrinfo]]オブジェクトを指定します。
+#@end
 @return 0 を返します。
 
 --- connect(server_sockaddr) -> 0
-#@todo
 
-[[man:connect(2)]] と同じ働きをします。server_sockaddr は、
+[[man:connect(2)]] でソケットを接続します。
+
+server_sockaddr は、
 [[ref:lib:socket#pack_string]]
+#@since 1.9.1
+もしくは [[c:Addrinfo]] オブジェクト
+#@end
 です。
 
 0 を返します。
 
-@param server_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
-
-@return 0を返します。
+@param server_sockaddr 接続先アドレス
+@raise Errno::EXXX [[man:connect(2)]] がエラーを報告した場合に発生します。詳しくは
+       man を参照してください。
 
 
 たとえば IPv4 の TCP ソケットを生成し、connect で www.ruby-lang.org:80 に接続するには以下のようにします。
@@ -458,21 +710,41 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
   print s.read
 
 #@if (version >= "1.8.5")
---- connect_nonblock(server_sockaddr) -> Fixnum
+--- connect_nonblock(server_sockaddr) -> 0
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:connect(2)]] を呼び出します。
 
 引数、返り値は [[m:Socket#connect]] と同じです。
 
-connect(2)がエラーになった場合、
-EINPROGRESS を含め例外 [[c:Errno::EXXX]] が発生します。
+#@since 1.9.1
+connect が EINPROGRESS エラーを報告した場合、その例外(Errno::EINPROGRESS)
+には [[c:IO::WaitWritable]] が [[m:Object#extend]] されます。
+これを connect_nonblock をリトライするために使うことができます。
 
-@param server_sockaddr ソケットアドレス構造体を pack した文字列[[ref:lib:socket#pack_string]]を指定します。
+  # Pull down Google's web page
+  require 'socket'
+  include Socket::Constants
+  socket = Socket.new(AF_INET, SOCK_STREAM, 0)
+  sockaddr = Socket.sockaddr_in(80, 'www.google.com')
+  begin # emulate blocking connect
+    socket.connect_nonblock(sockaddr)
+  rescue IO::WaitWritable
+    IO.select(nil, [socket]) # wait 3-way handshake completion
+    begin
+      socket.connect_nonblock(sockaddr) # check connection failure
+    rescue Errno::EISCONN
+    end
+  end
+  socket.write("GET / HTTP/1.0\r\n\r\n")
+  results = socket.read
 
-@raise Errno::EXXX connect(2)がエラーになった場合、 EINPROGRESS を含め例外 [[c:Errno::EXXX]] が発生します。
+#@end
 
-@return [[m:Socket#connect]] と同じです。
+
+@param server_sockaddr 接続先アドレス
+@raise Errno::EXXX [[man:connect(2)]] がエラーを報告した場合に発生します。詳しくは
+       man を参照してください。
 
 #@end
 
@@ -482,20 +754,29 @@ EINPROGRESS を含め例外 [[c:Errno::EXXX]] が発生します。
 
 0 を返します。
 
-@param the maximum length of the queue for pending connections.
+@param backlog 接続を保留できる最大数
 
 @return 0 を返します。
 
---- recvfrom(maxlen[, flags]) -> Array
 
-recv と同様にソケットからデータを受け取りますが、
-戻り値は文字列と相手ソケットのアドレスのペアです。引数につい
-ては recv と同様です。
+#@until 1.9.1
+--- recvfrom(maxlen, flags=0) -> [String, String]
+#@else
+--- recvfrom(maxlen, flags=0) -> [String, Addrinfo]
+#@end
 
-@param maxlen  the number of bytes to receive from the socket
+ソケットからデータを受け取ります。
 
-@param flags   zero or more of the +MSG_+ options 
+[[m:Socket#recv]] と同様ですが、返り値として
+データ文字列と相手ソケットのアドレスのペアが返されます。
 
+flags には Socket::MSG_* という定数の bitwise OR を渡します。
+詳しくは [[man:recvfrom(2)]] を参照してください。
+
+@param maxlen ソケットから受けとるデータの最大値
+@param flags フラグ
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーを報告した場合に発生します。詳しくは
+       Errno と man を見てください。
 例:
 
   s1 = Socket.new(Socket::AF_INET, Socket::SOCK_DGRAM, 0)
@@ -508,8 +789,11 @@ recv と同様にソケットからデータを受け取りますが、
   p Socket.unpack_sockaddr_in(sockaddr)     #=> [32882, "127.0.0.1"]
 
 #@if (version >= "1.8.5")
---- recvfrom_nonblock(maxlen[, flags])
-#@todo
+#@until 1.9.1
+--- recvfrom_nonblock(maxlen, flags=0) -> [String, String]
+#@else
+--- recvfrom_nonblock(maxlen, flags=0) -> [String, Addrinfo]
+#@end
 
 ソケットをノンブロッキングモードに設定した後、
 [[man:recvfrom(2)]] を呼び出します。
@@ -518,10 +802,16 @@ recv と同様にソケットからデータを受け取りますが、
 
 [[man:recvfrom(2)]] がエラーになった場合、
 EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
+#@since 1.9.1
+Errno::EWOULDBLOCK、Errno::EAGAIN のような待ってからリトライすることが
+可能であることを意味する例外には、[[c:IO::WaitReadable]] が extend
+されています。
+#@end
 
-@param maxlen [[m:Socket#recvfrom]] と同じです。
-
-@param flags [[m:Socket#recvfrom]]と同じです。
+@param maxlen ソケットから受けとるデータの最大値
+@param flags フラグ
+@raise Errno::EXXX [[man:recvfrom(2)]] がエラーを報告した場合に発生します。詳しくは
+       man を参照してください
 
 #@end
 
@@ -533,8 +823,10 @@ EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
 #@end
 
 #@since 1.9.2
---- ipv6only!
-#@todo
+--- ipv6only! -> ()
+ソケットの IPV6_V6ONLY オプションを有効にします。
+
+IPV6_V6ONLY オプションが使えない場合はこのメソッドは何もしません。
 #@end
 == Constants
 

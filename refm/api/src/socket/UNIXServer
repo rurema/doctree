@@ -4,19 +4,27 @@ UNIXストリーム型接続のサーバ側のソケットのクラス。
 
 == Class Methods
 
---- open(path)
---- new(path)
-#@todo
+--- open(path) -> UNIXServer
+--- new(path) -> UNIXServer
+--- open(path){|sock| ...} -> object
+--- new(path){|sock| ...} -> object
 
-path で指定したパス名を用いて接続を受け付けるソケットを返
-します。
+path で指定したパス名を用いて接続を受け付けるソケット
+を作成します。
+
+ブロックを省略すると作成したサーバソケットを返します。
+
+ブロックを渡した場合は、作成したソケットを引数としてそのブロックを呼びだし、
+ブロック終了時にソケットを閉じます。この場合には
+ブロックの評価値を返り値として返します。
+
+@param path 接続を受け付けるパス名文字列
 
 == Instance Methods
 
---- accept
-#@todo
+--- accept -> UnixSocket
 
-クライアントからの接続要求を受け付け、接続した
+クライアントからの接続要求を [[man:accept(2)]]で待ち受け、接続した
 [[c:UNIXSocket]] のインスタンスを返します。
 
 例:
@@ -31,21 +39,38 @@ path で指定したパス名を用いて接続を受け付けるソケットを返
   }
 
 #@if (version >= "1.8.5")
---- accept_nonblock
-#@todo
-
+--- accept_nonblock -> UnixSocket
 ソケットをノンブロッキングモードに設定した後、
 [[man:accept(2)]] を呼び出します。
 
-引数、返り値は [[m:UNIXServer#accept]] と同じです。
+接続した
+[[c:UNIXSocket]] のインスタンスを返します。
 
-[[man:accept(2)]] がエラーになった場合、
-EAGAIN, EINTR を含め例外 [[c:Errno::EXXX]] が発生します。
+[[man:accept(2)]] がエラーになった場合、[[m:Socket#accept]] と同じ例外が
+発生します。
+
+#@since 1.9.1
+[[m:Errno::EWOULDBLOCK]], [[m:Errno::AGAIN]], 
+[[m:Errno::ECONNABORTED]], [[Errno::EPROTO]] のいずれかの例外が
+発生した場合は、その例外には [[c:IO::WaitReadable]] が extend
+されます。それを利用してリトライ可能な例外を掴まえることができます。
+
+  require 'socket'
+  serv = UNIXServer.new("/tmp/sock")
+  begin # emulate blocking accept
+    sock = serv.accept_nonblock
+  rescue IO::WaitReadable, Errno::EINTR
+    IO.select([serv])
+    retry
+  end
+  # sock is an accepted socket.
 #@end
 
-#@if (version >= "1.8.0")
---- listen(backlog)
-#@todo
+@see [[m:UNIXServer#accept]]
+
+#@end
+
+--- listen(backlog) -> 0
 
 [[man:listen(2)]] を実行します。
 ([[m:Socket#listen]]と同じ)
@@ -55,12 +80,10 @@ UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
 
 [[man:listen(2)]] が成功すれば 0 を返します。
 失敗すれば 例外 [[c:Errno::EXXX]] が発生します。
-#@end
 
-#@if (version >= "1.8.0")
---- sysaccept
-#@todo
+@param backlog バックログの最大数(接続要求を保留できる数)
 
+--- sysaccept -> Integer
 接続したクライアントのソケットをファイル記述子で返すことを除けば
 [[m:UNIXServer#accept]] と同じです。
 
@@ -70,4 +93,3 @@ UNIXServer のインスタンスは最初は backlog の値は 5 で生成されます。
     c = UNIXSocket.open("/tmp/s")
     p serv.sysaccept        #=> 6
   }
-#@end

@@ -8,16 +8,23 @@
 == Class Methods
 
 --- do_not_reverse_lookup -> bool
---- do_not_reverse_lookup=(bool)
 
+#@until 1.9.1
 この値が真ならアドレスからホスト名への逆引きを行わなくなります。
+#@else
+[[m:Socket#do_not_reverse_lookup]] の Socket オブジェクト生成時の
+デフォルト値を返します。
+#@end
+
+この設定は大域的に作用します。
+
 #@since 1.9.2
 デフォルトは true です。
 #@else
 デフォルトは false です。
 #@end
-この設定は大域的に作用します。
 
+#@until 1.9.1
 以下のメソッドの動作に影響します。
 
   * [[m:BasicSocket#recv]]
@@ -27,6 +34,11 @@
   * [[m:IPSocket#addr]]
   * [[m:IPSocket#peeraddr]]
   * [[m:Socket.getaddrinfo]]
+#@end
+
+--- do_not_reverse_lookup=(bool)
+
+[[m:BasicSocket#do_not_reverse_lookup]] の値を変更します。
 
 @param bool この値が真ならアドレスからホスト名への逆引きを行わなくなります。
 
@@ -58,13 +70,22 @@
 == Instance Methods
 
 #@since 1.9.1
---- do_not_reverse_lookup
---- do_not_reverse_lookup=(bool)
-#@todo
+--- do_not_reverse_lookup -> bool
 
-アドレスからホスト名への逆引きの設定をソケットごとに設定します。
+ソケットごとのアドレスからホスト名への逆引きの設定を返します。
+
+真ならアドレスからホスト名への逆引きを行いません。
+
 初期値はソケットを生成したときの
-BasicSocket.do_not_reverse_lookup になります。
+[[m:BasicSocket.do_not_reverse_lookup]] の値になります。
+
+@see [[m:BasicSocket#do_not_reverse_lookup=]]
+
+--- do_not_reverse_lookup=(bool)
+アドレスからホスト名への逆引きの設定をソケットごとに設定します。
+
+@param bool この値が真ならアドレスからホスト名への逆引きを行わなくなります。
+@see [[m:BasicSocket#do_not_reverse_lookup]]
 #@end
 
 --- getpeername -> String
@@ -220,3 +241,194 @@ how を省略すると Socket::SHUT_RDWR を指定したことになります。
 @raise ArgumentError how に範囲外の整数を入力した場合に発生します。
 @raise SecurityError セーフレベルが 4 以上で、ソケットに汚染マークがついていない場合発生します。
 
+#@since 1.9.2
+--- connect_address -> Addrinfo
+
+ローカルマシン内で接続するのに適当なアドレスを [[c:Addrinfo]]
+オブジェクトで返します。
+
+[[m:BasicSocket#local_address]] の返り値
+以下の点を除いては同じものを返します。
+  * IPv4 の不定アドレス(0.0.0.0) は IPv4 のループバックアドレス(127.0.0.1)
+    に置換される
+  * IPv6 の不定アドレス(::) は IPv6 のループバックアドレス(::1)
+    に置換される
+
+BasicSocket#local_address が接続先として不適なアドレスを返す場合は
+例外 [[c:SocketError]] が発生します。
+
+  Addrinfo.tcp("0.0.0.0", 0).listen {|serv|
+    p serv.connect_address #=> #<Addrinfo: 127.0.0.1:53660 TCP>
+    serv.connect_address.connect {|c|
+      s, _ = serv.accept
+      p [c, s] #=> [#<Socket:fd 4>, #<Socket:fd 6>]
+    }
+  }
+
+
+@raise SocketError アドレスが接続に不適な場合に返します
+@see [[m:BasicSocket#local_address]]
+
+--- getpeereid -> [Integer, Integer]
+Unix ドメインソケットにおいて接続相手の euid と egid を
+返します。
+
+配列の最初の要素が euid, 2番目の要素が egid です。
+
+ソケットが Unix ドメインソケットでない場合の返り値は
+不定です。
+  Socket.unix_server_loop("/tmp/sock") {|s|
+    begin
+      euid, egid = s.getpeereid
+      
+      # Check the connected client is myself or not.
+      next if euid != Process.uid
+      
+      # do something about my resource.
+    ensure
+      s.close
+    end
+  }
+  
+
+--- local_address -> Addrinfo
+[[man:getsockname(2)]] で得られたローカルアドレス情報を
+[[c:Addrinfo]] オブジェクトとして返します。
+
+返されたオブジェクトの [[m:Addrinfo#protocol]] は 0 を
+返すことに注意してください。
+
+  TCPSocket.open("www.ruby-lang.org", 80) {|s|
+    p s.local_address #=> #<Addrinfo: 192.168.0.129:36873 TCP>
+  }
+  
+  TCPServer.open("127.0.0.1", 1512) {|serv|
+    p serv.local_address #=> #<Addrinfo: 127.0.0.1:1512 TCP>
+  }
+
+@see [[m:BasicSocket#getsockname]]
+
+--- recvmsg(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
+
+[[man:recvmsg(2)]] を用いてメッセージを受け取ります。
+
+このメソッドはブロックします。ノンブロッキング方式で通信したい
+場合は [[m:BasicSocket#recvmsg_nonblock]] を用います。
+
+maxmesglen, maxcontrollen で受け取るメッセージおよび補助データ
+([[c:Socket::AncillaryData]])の最大長をバイト単位で指定します。
+省略した場合は必要なだけ内部バッファを拡大して
+データが切れないようにします。
+
+flags では Socket::MSG_* という名前の定数の biwsise OR を取った
+ものを渡します。
+
+opts にはその他のオプションを渡します。今のところ :scm_right => bool
+というオプションのみ利用できます。このオプションに
+真を渡すと、 SCM_RIGHTS 制御メッセージを受け取ったときに、メッセージに含まれる
+IO オブジェクトを生成します。詳しくは [[m:Socket::AncillaryData#unix_rights]]
+を参照してください。
+
+返り値は配列で得られます。
+
+返り値の配列の最初の要素は受け取ったメッセージを表す文字列です。
+
+2番目の要素は connection-less socket の場合には送り元の
+アドレスが [[c:Addrinfo]] オブジェクトとして含まれています。
+TCP のような connection-oriented socket の場合は
+何が含まれているかはプラットフォーム依存です。
+
+3番目の要素は受け取ったメッセージに付加されているフラグで、
+Socket::MSG_* 定数の bitwise OR で表現されています。
+
+残りの要素は補助データ([[c:AncillaryData]] オブジェクト)です。
+
+  # UnixSocket#recv_io を recvmsg で実装する例
+  mesg, sender_sockaddr, rflags, *controls = sock.recvmsg(:scm_rights=>true)
+  controls.each {|ancdata|
+    if ancdata.cmsg_is?(:SOCKET, :RIGHTS)
+      return ancdata.unix_rights[0]
+    end
+  }
+
+@param maxmesglen 受け取るメッセージの最大長
+@param flags フラグ
+@param maxcontrollen 受け取る補助データの最大長
+@param opts ハッシュオプション
+
+--- recvmsg_nonblock(maxmesglen=nil, flags=0, maxcontrollen=nil, opts={}) -> [String, Addrinfo, Integer, *Socket::AncillaryData]
+
+[[man:recvmsg(2)]] を用いてノンブロッキング方式でメッセージを受け取ります。
+
+ブロッキングの有無以外は [[m:BasicSocket#recvmsg]] と同じです。
+詳しくはそちらを参照してください。
+
+@param maxmesglen 受け取るメッセージの最大長
+@param flags フラグ
+@param maxcontrollen 受け取る補助データの最大長
+@param opts ハッシュオプション
+
+--- remote_address
+[[man:getpeername(2)]] で得られたリモートアドレス情報を
+[[c:Addrinfo]] オブジェクトとして返します。
+
+返されたオブジェクトの [[m:Addrinfo#protocol]] は 0 を
+返すことに注意してください。
+
+  TCPSocket.open("www.ruby-lang.org", 80) {|s|
+    p s.remote_address #=> #<Addrinfo: 221.186.184.68:80 TCP>
+  }
+  
+  TCPServer.open("127.0.0.1", 1728) {|serv|
+    c = TCPSocket.new("127.0.0.1", 1728)
+    s = serv.accept
+    p s.remote_address #=> #<Addrinfo: 127.0.0.1:36504 TCP>
+  }
+
+@see [[m:BasicSocket#getpeername]]
+
+--- sendmsg(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
+[[man:sendmsg(2)]] を用いてメッセージを送ります。
+
+このメソッドはブロックします。ノンブロッキング方式で通信したい
+場合は [[m:BasicSocket#sendmsg_nonblock]] を用います。
+
+ソケットが connection-less の場合は dest_sockaddr で
+通信先のアドレスを指定しなければなりません。[[m:Socket.sockaddr_in]]
+の返り値や [[c:Addrinfo]] オブジェクトを引数として渡すことができます。
+
+controls には 補助データ(ancillary data)を渡します。
+[[c:Socket::AncillaryData]] のインスタンスや
+3要素(cmsg_level, cmsg_type, cmsg_data) の配列を用いることができます。
+
+送ったバイト数を返します。
+
+  # UnixSocket#send_io の実装例
+  # use Socket::AncillaryData.
+  ancdata = Socket::AncillaryData.int(:UNIX, :SOCKET, :RIGHTS, io.fileno)
+  sock.sendmsg("a", 0, nil, ancdata)
+  
+  # use 3-element array.
+  ancdata = [:SOCKET, :RIGHTS, [io.fileno].pack("i!")]
+  sock.sendmsg("\0", 0, nil, ancdata)
+
+
+@param mesg メッセージ文字列
+@param flags フラグ(Socket::MSG_* という定数の bitwise OR を取ったもの)
+@param dest_sockaddr 通信先のアドレス
+@param controls 補助データの配列
+@see [[m:BasicSocket#sendmsg_nonblock]]
+--- sendmsg_nonblock(mesg, flags=0, dest_sockaddr=nil, *controls) -> Integer
+
+[[man:sendmsg(2)]] を用いてノンブロッキング方式でメッセージを送ります。
+
+詳しくは [[m:BasicSocket#sendmsg]] を見てください。
+
+@return 送ったバイト数
+@param mesg メッセージ文字列
+@param flags フラグ(Socket::MSG_* という定数の bitwise OR を取ったもの)
+@param dest_sockaddr 通信先のアドレス
+@param controls 補助データの配列
+@see [[m:BasicSocket#sendmsg]]
+
+#@end
