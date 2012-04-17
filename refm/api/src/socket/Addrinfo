@@ -1,139 +1,479 @@
 = class Addrinfo
-#@todo
+ソケットのアドレス情報を保持するクラスです。
+
+ホスト/ポート番号/プロトコルなどを同定するために用いられます。
+IPv4/IPv6/Unix domain socketなどのアドレス情報を保持することができます。
+
+struct addrinfo に対応します。
+
 
 == Class methods
---- new
-#@todo
+--- new(sockaddr, family=Socket::PF_UNSPEC, socktype=0, protocol=0) -> Addrinfo
 
---- ip
-#@todo
+新たな Addrinfo オブジェクトを返します。
 
---- tcp
-#@todo
+sockaddr は [[man:connect(2)]] などで使われるパラメータで、
+struct sockaddr に対応します。faimily, socktype, protocol
+は [[man:socket(2)]] のパラメータに対応します。
 
---- udp
-#@todo
+sockaddr には文字列もしくは配列を指定します。
+配列の場合は [[m:IPSocket#addr]] や [[m:UNIXSocket#addr]] の
+値と互換でなければなりません。
+文字列の場合は [[m:Socket.sockaddr_in]] や
+[[m:Socket.unpack_sockaddr_un]] で得られるようなものでなければ
+なりません。
 
---- unix
-#@todo
+実際には sockaddr には以下のようなものが使えます。
+  * ["AF_INET", 46102, "localhost.localdomain", "127,0,0,1"]
+  * ["AF_INET6", 42304, "ip6-localhost", "::1"]
+  * ["AF_UNIX", "/tmp/sock"]
+  * Socket.sockaddr_in("smtp", "2001:DB8::1")
+  * Socket.sockaddr_in(80, "172.18.22.42")
+  * Socket.sockaddr_in(80, "www.ruby-lang.org")
+  * Socket.sockaddr_un("/tmp/sock")
 
---- foreach
-#@todo
+配列で AF_INET/AF_INET6 を指定した場合、配列の4番目の要素
+が実際のIPアドレスとして使われます。配列の3番目の要素は
+ホスト名ですが [[m:Addrinfo#inspect]] 
+での表示にしか用いられません。
 
---- getaddrinfo
-#@todo
+family は [[m:Socket::PF_INET]] のようなプロコルファミリーを指定します。
+文字列やシンボル名を指定することができます(PF_ というプレフィクスは
+省略することもできます)。例えば :INET, :INET6, :UNIX, "PF_INET" などです。
+
+socktype は [[m:Socket::SOCK_STREAM]] のようなソケットタイプを指定します。
+文字列やシンボル名を指定することができます(SOCK_ というプレフィクスは
+省略することもできます)。例えば :STREAM, :DGRAM, :RAW, "SOCK_STREAM" などです。
+
+protocol は [[m:Socket::IPPROTO_TCP]] のようなプロトコルを指定します。
+family や socktype と異なり、整数でなければなりません。
+デフォルト値(0) は raw socket 以外では適切な値です。
+
+@param sockaddr ソケットのアドレス(配列もしくは文字列)
+@param family プロトコルファミリー(整数、文字列、シンボル)
+@param socktype ソケットタイプ(整数、文字列、シンボル)
+@param protocol プロトコル(整数)
+@raise SocketError 不適なファミリーやソケットタイプなどを渡した場合に発生します
+
+--- ip(host) -> Addrinfo
+
+IP アドレスに対する Addrinfo オブジェクトを返します。
+
+port, socktype, protocol は 0 で初期化されます。
+つまりこの返り値はソケットを生成するには不適です。
+
+  Addrinfo.ip("localhost") #=> #<Addrinfo: 127.0.0.1 (localhost)>
+
+@param host ホスト(IP アドレスもしくはホスト名)
+@see [[m:Addrinfo.new]]
+
+--- tcp(host, port) -> Addrinfo
+
+TCP アドレスに対する Addrinfo オブジェクトを返します。
+  Addrinfo.tcp("localhost", "smtp") 
+  #=> #<Addrinfo: 127.0.0.1:25 TCP (localhost:smtp)>
+
+@param host ホスト(IP アドレスもしくはホスト名)
+@param port ポート番号(整数)もしくはサービス名(文字列)
+
+--- udp(host, port) -> Addrinfo
+
+UDP アドレスに対する Addrinfo オブジェクトを返します。
+  Addrinfo.udp("localhost", "daytime") 
+  #=> #<Addrinfo: 127.0.0.1:13 UDP (localhost:daytime)>
+
+@param host ホスト(IP アドレスもしくはホスト名)
+@param port ポート番号(整数)もしくはサービス名(文字列)
+
+--- unix(path, socktype=Socket::SOCK_STREAM) -> Addrinfo
+
+Unix ソケットアドレスに対応する Addrinfo オブジェクトを返します。
+
+socktype でソケットタイプを指定します。
+
+  Addrinfo.unix("/tmp/sock")         #=> #<Addrinfo: /tmp/sock SOCK_STREAM>
+  Addrinfo.unix("/tmp/sock", :DGRAM) #=> #<Addrinfo: /tmp/sock SOCK_DGRAM>
+
+@param path Unix ソケットのアドレス文字列
+@param socktype ソケットタイプ(整数、文字列、シンボル)
+
+@see [[m:Addrinfo.new]]
+
+--- foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> Enumerator
+--- foreach(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0){|addrinfo| ... } -> [Addrinfo]
+
+[[m:Addrinfo.getaddrinfo]] で得られる配列の各要素を繰り返します。
+
+ブロックを省略した場合は繰り返しをする [[c:Enumerator]] オブジェクト
+を返します。
+
+@param nodename ノード名文字列(ホスト名もしくは IP アドレス)
+@param service サービス名(文字列もしくはポート番号の整数)
+@param family プロトコルファミリー(整数、文字列、シンボル、もしくは nil)
+@param socktype ソケットタイプ(整数、文字列、シンボル、もしくは nil)
+@param protocol プロトコル(整数、もしくは nil)
+@param flags フラグ(整数)
+
+--- getaddrinfo(nodename, service, family=nil, socktype=nil, protocol=nil, flags=0) -> [Addrinfo]
+パラメータから複数の Addrinfo オブジェクトを生成し、その配列を返します。
+
+nodename (ホスト名) と service (ポート番号) を Addrinfo に変換します。
+変換先は一意ではないため、複数のオブジェクトを返します。
+
+nodename と service のどちらか一方は nil を渡すことができます
+(その部分は変換されません)。
+
+family, socktype, protocol には希望する方式のヒントを与えます。
+例えば、SOCK_STREAM なソケットが必要な場合には socktype に指定します。
+nil を指定した場合には制限しないことを意味します。
+IPv6 に制限したい場合には family に PF_INET6 を指定します。
+
+flags には Socket::AI_??? という定数のビット OR を取ります。
+
+アドレスの使い方がわかっている場合には socktype を明示すべきです。
+socktype を省略して service を整数で指定した場合にエラーが
+生じるプラットフォームが存在します。512 のようなポート番号は
+socktype なしでは曖昧な指定となるためです。
+
+例:
+  Addrinfo.getaddrinfo("www.kame.net", 80, nil, :STREAM)
+  #=> [#<Addrinfo: 203.178.141.194:80 TCP (www.kame.net:80)>,
+  #    #<Addrinfo: [2001:200:0:8002:203:47ff:fea5:3085]:80 TCP (www.kame.net:80)>]
+
+@param nodename ノード名文字列(ホスト名もしくは IP アドレス)
+@param service サービス名(文字列もしくはポート番号の整数)
+@param family プロトコルファミリー(整数、文字列、シンボル、もしくは nil)
+@param socktype ソケットタイプ(整数、文字列、シンボル、もしくは nil)
+@param protocol プロトコル(整数、もしくは nil)
+@param flags フラグ(整数)
+
+@see [[m:Addrinfo.foreach]]
 
 == Instance methods
---- afamily
-#@todo
+--- afamily -> Integer
+アドレスファミリーを整数で返します。
 
---- pfamily
-#@todo
+  Addrinfo.tcp("localhost", 80).afamily == Socket::AF_INET #=> true
 
---- socktype
-#@todo
 
---- protocol
-#@todo
+--- pfamily -> Integer
+プロトコルファミリーを整数で返します。
 
---- canonname
-#@todo
+  Addrinfo.tcp("localhost", 80).pfamily == Socket::PF_INET #=> true
 
---- ipv4?
-#@todo
+--- socktype -> Integer
 
---- ipv6?
-#@todo
+ソケットタイプを整数で返します。
 
---- unix?
-#@todo
+  Addrinfo.tcp("localhost", 80).socktype == Socket::SOCK_STREAM #=> true
 
---- ip?
-#@todo
+--- protocol -> Integer
 
---- ip_unpack
-#@todo
+ソケットプロトコルを整数で返します。
 
---- ip_address
-#@todo
+  Addrinfo.tcp("localhost", 80).protocol == Socket::IPPROTO_TCP #=> true
 
---- ip_port
-#@todo
+--- canonname -> String|nil
+カノニカル名を文字列で返します。
 
---- ipv4_private?
-#@todo
+カノニカル名が存在しない場合には nil を返します。
 
---- ipv4_loopback?
-#@todo
+カノニカル名は [[m:Addrinfo.getaddrinfo]] に [[m:Socket::AI_CANONINAME]]
+を指定した場合にセットされます。
 
---- ipv4_multicast?
-#@todo
+  list = Addrinfo.getaddrinfo("www.ruby-lang.org", 80, :INET, :STREAM, nil, Socket::
+AI_CANONNAME)
+  p list[0] #=> #<Addrinfo: 221.186.184.68:80 TCP carbon.ruby-lang.org (www.ruby-lan
+g.org:80)>
+  p list[0].canonname #=> "carbon.ruby-lang.org"
 
---- ipv6_unspecified?
-#@todo
+--- ipv4? -> bool
+アドレスが IPv4 のものならば true を返します。
 
---- ipv6_multicast?
-#@todo
+@see [[m:Addrinfo#ip?]], [[m:Addrinfo#ipv6?]]
 
---- ipv6_linklocal?
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).ipv4? #=> true
+  Addrinfo.tcp("::1", 80).ipv4?       #=> false
+  Addrinfo.unix("/tmp/sock").ipv4?    #=> false
 
---- ipv6_sitelocal?
-#@todo
+--- ipv6? -> bool
+アドレスが IPv6 のものならば true を返します。
 
---- ipv6_v4mapped?
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).ipv6? #=> false
+  Addrinfo.tcp("::1", 80).ipv6?       #=> true
+  Addrinfo.unix("/tmp/sock").ipv6?    #=> false
 
---- ipv6_v4compat?
-#@todo
+@see [[m:Addrinfo#ipv4?]], [[m:Addrinfo#ip?]]
 
---- ipv6_loopback?
-#@todo
+--- unix? -> bool
+アドレスが Unix domain socket のものならば true を返します。
 
---- ipv6_mc_nodelocal?
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).unix? #=> false
+  Addrinfo.tcp("::1", 80).unix?       #=> false
+  Addrinfo.unix("/tmp/sock").unix?    #=> true
 
---- ipv6_mc_linklocal?
-#@todo
+@see [[m:Addrinfo#ip?]]
 
---- ipv6_mc_sitelocal?
-#@todo
+--- ip? -> bool
+アドレスが IP (v4/v6) のものならば true を返します。
 
---- ipv6_mc_orglocal?
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).ip? #=> true
+  Addrinfo.tcp("::1", 80).ip?       #=> true
+  Addrinfo.unix("/tmp/sock").ip?    #=> false
 
---- ipv6_mc_global?
-#@todo
+@see [[m:Addrinfo#ipv4?]], [[m:Addrinfo#ipv6?]], [[m:Addrinfo#unix?]]
 
---- ipv6_to_ipv4
-#@todo
+--- ip_unpack -> [String, Integer]
+IP アドレスとポート番号を 2 要素の配列で返します。
 
---- unix_path
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).ip_unpack    #=> ["127.0.0.1", 80]
+  Addrinfo.tcp("::1", 80).ip_unpack          #=> ["::1", 80]
 
---- to_sockaddr
-#@todo
+@see [[m:Addrinfo#ip_address]], [[m:Addrinfo#ip_port]]
 
---- getnameinfo
-#@todo
+--- ip_address -> String
+IP アドレスを文字列で返します。
 
---- family_addrinfo
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).ip_address    #=> "127.0.0.1"
+  Addrinfo.tcp("::1", 80).ip_address          #=> "::1"
 
---- connect_from
-#@todo
+@see [[m:Addrinfo#ip_port]], [[m:Addrinfo#ip_unpack]]
 
---- connect
-#@todo
+--- ip_port -> Integer
+ポート番号を整数で返します。
 
---- connect_to
-#@todo
+  Addrinfo.tcp("127.0.0.1", 80).ip_port    #=> 80
+  Addrinfo.tcp("::1", 80).ip_port          #=> 80
 
---- bind
-#@todo
+@see [[m:Addrinfo#ip_address]], [[m:Addrinfo#ip_unpack]]
 
---- listen(backlog=5)
-#@todo
+--- ipv4_private? -> bool
 
---- inspect_sockaddr
-#@todo
+IPv4 のプライベートアドレス(10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)
+であれば真を返します。
+
+
+--- ipv4_loopback? -> bool
+
+IPv4 のループバックアドレス(127.0.0.0/8) であれば真を返します。
+
+@see [[m:Addrinfo#ipv6_loopback?]]
+
+--- ipv4_multicast? -> bool
+
+IPv4 のマルチキャストアドレス(224.0.0.0/4)であれば真を返します。
+
+--- ipv6_unspecified? -> bool
+
+IPv6 の不特定アドレス(unspecified address)(::)であれば真を返します。
+
+--- ipv6_multicast? -> bool
+IPv6 のマルチキャストアドレス(ff00::/8)であれば真を返します。
+
+
+--- ipv6_linklocal? -> bool
+IPv6 のリンクローカルアドレス(ff80::/10)であれば真を返します。
+
+
+--- ipv6_sitelocal? -> bool
+IPv6 のサイトローカルアドレス(ffc0::/10)であれば真を返します。
+
+
+--- ipv6_v4mapped? -> bool
+IPv6 の v4にマップされたアドレス(::ffff:0:0/80)であれば真を返します。
+
+
+--- ipv6_v4compat? -> bool
+IPv6 の v4互換アドレス(::/80)であれば真を返します。
+
+
+--- ipv6_loopback? -> bool
+IPv6 のループバックアドレス(::1)であれば真を返します。
+
+@see [[m:Addrinfo#ipv4_loopback?]]
+
+
+--- ipv6_mc_nodelocal? -> bool
+IPv6 のマルチキャスト(ノードローカルスコープ)アドレスであれば真を返します。
+
+
+--- ipv6_mc_linklocal? -> bool
+IPv6 のマルチキャスト(リンクローカルスコープ)アドレスであれば真を返します。
+
+
+--- ipv6_mc_sitelocal? -> bool
+IPv6 のマルチキャスト(サイトローカルスコープ)アドレスであれば真を返します。
+
+
+--- ipv6_mc_orglocal? -> bool
+IPv6 のマルチキャスト(組織(organization)ローカルスコープ)
+アドレスであれば真を返します。
+
+
+--- ipv6_mc_global? -> bool
+IPv6 のマルチキャスト(グローバルスコープ)
+アドレスであれば真を返します。
+
+
+--- ipv6_to_ipv4 -> Addrinfo|nil
+IPv6 の v4 マップド/互換アドレスを v4 のアドレスに変換します。
+
+それ以外のアドレスの場合 nil を返します。
+  Addrinfo.ip("::192.0.2.3").ipv6_to_ipv4      #=> #<Addrinfo: 192.0.2.3>
+  Addrinfo.ip("::ffff:192.0.2.3").ipv6_to_ipv4 #=> #<Addrinfo: 192.0.2.3>
+  Addrinfo.ip("::1").ipv6_to_ipv4              #=> nil
+  Addrinfo.ip("192.0.2.3").ipv6_to_ipv4        #=> nil
+  Addrinfo.unix("/tmp/sock").ipv6_to_ipv4      #=> nil
+
+--- unix_path -> String
+Unix domain socket の path を文字列で返します。
+
+  Addrinfo.unix("/tmp/sock").unix_path       #=> "/tmp/sock" 
+
+@raise SocketError アドレスが Unix domain socket のものでない場合に発生します
+
+--- to_sockaddr -> String
+--- to_s -> String
+
+struct sockaddr をパックした形式の文字列に変換します。
+
+  Addrinfo.tcp("localhost", 80).to_sockaddr
+  #=> "\x02\x00\x00P\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
+ 
+
+--- getnameinfo(flags=0) -> [String, String]
+ノード名とサービスを文字列の配列で返します。
+
+flags には Socket::NI_??? という名前の定数のビット OR を渡します。
+
+  Addrinfo.tcp("127.0.0.1", 80).getnameinfo 
+  #=> ["localhost", "www"]
+  Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
+  #=> ["localhost", "80"]
+
+@param flags フラグ
+
+--- family_addrinfo(host, port) -> Addrinfo
+--- family_addrinfo(path) -> Addrinfo
+
+引数から自身に「似た」Addrinfo オブジェクトを生成します。
+
+「似た」の意味はプロトコルファミリ、ソケットタイプ、プロトコルが
+同じことを意味します。
+  Addrinfo.tcp("0.0.0.0", 4649).family_addrinfo("www.ruby-lang.org", 80)
+  #=> #<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:80)>
+  
+  Addrinfo.unix("/tmp/sock").family_addrinfo("/tmp/sock2")
+  #=> #<Addrinfo: /tmp/sock2 SOCK_STREAM>
+
+@param host ホスト(IP アドレスもしくはホスト名)
+@param port ポート番号(整数)もしくはサービス名(文字列)
+@param path Unix domain socket のパス
+
+#@# --- connect_from() -> Socket
+--- connect_from(host, port) -> Socket
+#@# --- connect_from(addrinfo) -> Socket
+#@# --- connect_from(){|sock| ... } -> object
+--- connect_from(host, port){|sock| ... } -> object
+#@# --- connect_from(addrinfo){|sock| ... } -> object
+
+引数(addrinfo もしくは host, port のペア)で指定されたアドレスから
+自身のアドレスへソケットを接続します。
+
+接続元のアドレスは [[m:Addrinfo#family_addrinfo]] により生成された
+ものが用いられます。
+
+ブロックが渡されたときにはそのブロックに接続済み [[c:Socket]]
+オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
+ブロックを省略した場合は、接続済み[[c:Socket]]
+オブジェクトが返されます。
+
+引数で指定したアドレスはソケット接続のローカル側のアドレスになります。
+
+  Addrinfo.tcp("www.ruby-lang.org", 80).connect_from("0.0.0.0", 4649) {|s|
+    s.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
+    puts s.read
+  }
+#@#  # Addrinfo object can be taken for the argument.
+#@#  Addrinfo.tcp("www.ruby-lang.org", 80).connect_from(Addrinfo.tcp("0.0.0.0", 4649)){|s|
+#@#    s.print "GET / HTTP/1.0\r\nHost: www.ruby-lang.org\r\n\r\n"
+#@#    puts s.read
+#@#  }
+
+@param host ホスト(IP アドレスもしくはホスト名)
+@param port ポート番号(整数)もしくはサービス名(文字列)
+
+#@# 2.0.0 では :timeout オプションが追加される
+
+--- connect -> Socket
+--- connect{|sock| ... } -> object
+
+自身のアドレスへソケットを接続します。
+
+ブロックが渡されたときにはそのブロックに接続済み [[c:Socket]]
+オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
+ブロックを省略した場合は、接続済み [[c:Socket]]
+オブジェクトが返されます。
+
+#@# 2.0.0 では :timeout オプションが追加される
+
+--- connect_to(host, port) -> Socket
+#@# --- connect_to(addrinfo) -> Socket
+--- connect_to(host, port){|sock| ... } -> object
+#@# --- connect_to(addrinfo){|sock| ... } -> object
+
+自身のアドレスから指定したホストへソケット接続します。
+
+接続元のアドレスは [[m:Addrinfo#family_addrinfo]] により生成された
+ものが用いられます。
+
+ブロックが渡されたときにはそのブロックに接続済み [[c:Socket]]
+オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
+ブロックを省略した場合は、接続済み [[c:Socket]]
+オブジェクトが返されます。
+
+@param host ホスト(IP アドレスもしくはホスト名)
+@param port ポート番号(整数)もしくはサービス名(文字列)
+
+#@# 2.0.0 では :timeout オプションが追加される
+
+--- bind -> Socket
+--- bind{|sock| ... } -> object
+
+自身のアドレスにバインドされたソケットを作成します。
+
+ブロックが渡されたときにはそのブロックに生成された [[c:Socket]]
+オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
+ブロックを省略した場合は、生成された [[c:Socket]]
+オブジェクトが返されます。
+
+  Addrinfo.udp("0.0.0.0", 9981).bind {|s|
+    s.local_address.connect {|s| s.send "hello", 0 }
+    p s.recv(10) #=> "hello"
+  }
+
+--- listen(backlog=5) -> Socket
+--- listen(backlog=5){|sock| ... } -> object
+自身のアドレスにバインドされたソケットを作成し、
+[[man:listen(2)]] を実行します。
+
+
+ブロックが渡されたときにはそのブロックに生成された [[c:Socket]]
+オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
+ブロックを省略した場合は、生成された [[c:Socket]]
+オブジェクトが返されます。
+
+  Addrinfo.udp("0.0.0.0", 9981).bind {|s|
+    s.local_address.connect {|s| s.send "hello", 0 }
+    p s.recv(10) #=> "hello"
+  }
+
+@param backlog バックログの最大数
+
+--- inspect_sockaddr -> String
+アドレスやポート番号などの情報を人間に読める形の文字列で返します。
+
+  Addrinfo.tcp("localhost", 80).inspect_sockaddr     #=> "127.0.0.1:80"
+  Addrinfo.tcp("ip6-localhost", 80).inspect_sockaddr #=> "[::1]:80"
+  Addrinfo.unix("/tmp/sock").inspect_sockaddr        #=> "/tmp/sock"
+ 
