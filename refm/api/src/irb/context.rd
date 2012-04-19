@@ -76,6 +76,8 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
 @param val true を指定した場合、自動で字下げを行います。false を指定し
            た場合は自動で字下げを行いません。
 
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
+
 @see [[m:IRB::Context#auto_indent_mode]]
 
 --- back_trace_limit -> Integer
@@ -228,52 +230,218 @@ Ctrl-C が入力された時に irb を終了するかどうかを val に設定します。
 
 自身を人間に読みやすい文字列にして返します。
 
---- inspect_mode=(val)
-#@todo
+--- inspect? -> bool
 
-インスペクトモードを設定する.
+[[c:IRB::Context#inspect_mode]] が有効かどうかを返します。
 
-: true
-    inspect の結果を表示する
+#@since 1.9.2
+@return 出力結果に to_s したものを表示する場合は false を返します。それ
+        以外の場合は true を返します。
+#@else
+@return 出力結果に inspect したものを表示する場合は true を返します。
+        to_s したものを表示する場合は false を返します。
+#@end
+
+@see [[c:IRB::Context#inspect_mode]], [[c:IRB::Context#inspect_mode=]]
+
+#@since 1.9.2
+--- inspect_mode -> object | nil
+#@else
+--- inspect_mode -> bool | nil
+#@end
+
+実行結果の出力方式を返します。
+
+@see [[m:IRB::Context#inspect_mode=]]
+
+--- inspect_mode=(opt)
+
+実行結果の出力方式を opt に設定します。
+
+@param opt 以下のいずれかを指定します。
+#@since 1.9.2
+: false, :to_s, :raw
+  出力結果を to_s したものを表示します。
+: true, :p, :inspect
+  出力結果を inspect したものを表示します。
+: :pp, :pretty_inspect
+  出力結果を pretty_inspect したものを表示します。
+: :yaml, :YAML
+  出力結果を YAML 形式にしたものを表示します。
+: :marshal, :Marshal, :MARSHAL, [[c:Marshal]]
+  出力結果を [[m:Marshal.#dump]] したものを表示します。
+
+@see [[ref:lib:irb#inspect_mode]]
+#@else
+: true, nil
+  出力結果を inspect したものを表示します。
 : false
-    to_s の結果を表示する
-: nil
-    irb が通常モードであれば inspect mode、
-    math モードなら non inspect mode
+  出力結果を to_s したものを表示します。
+#@end
 
---- prompt_c
+--- io -> IRB::InputMethod
+
+ライブラリ内部で使用します。
+
+--- io=(val)
+
+ライブラリ内部で使用します。
+
+--- irb -> IRB::Irb
+
+ライブラリ内部で使用します。
+
+--- irb=(val)
+
+ライブラリ内部で使用します。
+
+--- irb_name -> String
 #@todo
 
-if の直後など, 行が継続している時のプロンプトを
-表現するフォーマット文字列を返します。
-
---- prompt_i
+--- irb_name=(val)
 #@todo
+
+--- irb_path -> String
+#@todo
+
+--- irb_path=(val)
+#@todo
+
+--- last_value -> object
+
+irb 中での最後の実行結果を返します。
+
+--- load_modules -> [String]
+
+irb の起動時に -r オプション指定で読み込まれたライブラリ、~/.irbrc など
+の設定ファイル内で IRB.conf[:LOAD_MODULES] 指定で読み込まれたライブラリ
+の名前の配列を返します。
+
+#@# 変更しても影響がないため省略しました。
+#@#--- load_modules=
+
+--- main -> object
+
+self に設定されたオブジェクトを返します。
+
+@see cwws コマンド
+
+--- prompt_c -> String
+
+if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
+列を返します。
+
+--- prompt_c=(val)
+
+if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
+列を val に設定します。
+
+@param val フォーマットを文字列で指定します。指定できる内容については、
+           [[ref:lib:irb#customize_prompt]] を参照してください。
+
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
+
+--- prompt_i -> String
 
 通常のプロンプトを表現するフォーマット文字列を返します。
 
---- prompt_s
-#@todo
+--- prompt_i=(val)
+
+通常のプロンプトを表現するフォーマット文字列を val に設定します。
+
+@param val フォーマットを文字列で指定します。指定できる内容については、
+           [[ref:lib:irb#customize_prompt]] を参照してください。
+
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
+
+--- prompt_mode -> Symbol
+
+現在のプロンプトモードを [[c:Symbol]] で返します。
+
+オリジナルのプロンプトモードを定義していた場合はそのモードを返します。
+そうでない場合は、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、:XMP、:NULL
+のいずれかを返します。
+
+定義済みのプロンプトモードの内容については、IRB.conf[:PROMPT][mode] を
+参照してください。
+
+@see [[m:IRB::Context#prompt_mode=]], [[ref:lib:irb#customize_prompt]]
+
+--- prompt_mode=(mode)
+
+プロンプトモードを mode に設定します。
+
+@param mode プロンプトモードを [[c:Symbol]] で指定します。オリジナルの
+            プロンプトモードか、:DEFAULT、:CLASSIC、:SIMPLE、:INF_RUBY、
+            :XMP、:NULL のいずれを指定してください。
+
+@see [[m:IRB::Context#prompt_mode]], [[ref:lib:irb#customize_prompt]]
+
+#@#使用されていない?ため省略しました。
+#@#--- prompt_n -> String
+#@##@todo
+#@#
+#@#--- prompt_n=(val)
+#@##@todo
+
+--- prompt_s -> String
 
 文字列中のプロンプトを表現するフォーマット文字列を返します。
 
---- rc
-#@todo
+--- prompt_s=(val)
 
-~/.irbrc を読み込んでいたら true を返します。
-読み込んでいなければ false を返します。
+文字列中のプロンプトを表現するフォーマット文字列を val に設定します。
 
---- use_prompt
---- use_prompt=(bool)
-#@todo
+@param val フォーマットを文字列で指定します。指定できる内容については、
+           [[ref:lib:irb#customize_prompt]] を参照してください。
 
-プロンプトを表示するかどうかを指定します。
-use_prompt の値が true ならプロンプトを表示し、
-false ならプロンプトを表示しません。
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
-デフォルト値は true です。
+--- prompting? -> bool
 
---- use_readline=(val)
+ライブラリ内部で使用します。
+
+--- rc  -> bool
+--- rc? -> bool
+
+~/.irbrc などの設定ファイルがあれば読み込みを行うかどうかを返します。
+
+@return 設定ファイルの読み込みを行う場合は true を返します。行わない場
+        合(irb の起動時に -f オプションを指定した場合)は false を返しま
+        す。
+
+#@# 上記は .irbrc が存在しない場合も true を返す事から、「.irbrc を読み
+#@# 込んでいたら true を返す」という記述を止めました。
+#@#
+#@# 変更しても影響がないため省略しました。
+#@# --- rc=(val)
+
+--- return_format -> String
+
+irb のプロンプトでの評価結果を表示する際のフォーマットを文字列で返します。
+
+@see [[m:IRB::Context#return_format=]], [[d:print_format]]
+
+--- return_format=(val)
+
+irb のプロンプトでの評価結果を表示する際のフォーマットに val を設定します。
+
+@see [[m:IRB::Context#return_format]], [[d:print_format]]
+
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
+
+--- set_last_value(value) -> object
+
+ライブラリ内部で使用します。
+
+--- thread -> Thread
+
+現在のスレッドを返します。
+
+@see [[m:Thread.current]]
+
+--- use_readline  -> bool | nil
+--- use_readline? -> bool | nil
 #@todo
 
 [[lib:readline]] を使うかどうかを指定します。
@@ -286,10 +454,29 @@ val の値によって、このメソッドの効果は以下のように分かれます。
 : nil
     inf-ruby-mode 以外で readline ライブラリを利用しようとする (デフォルト)
 
-#@#--- verbose=(bool)
-#@#
-#@#irbからいろいろなメッセージを出力するか
-#@#
+--- use_readline=(opt)
+#@todo
+
+--- verbose
+--- verbose?
+#@todo
+
+irbからいろいろなメッセージを出力するか
+
+--- verbose=
+#@todo
+
+--- workspace -> IRB::WorkSpace
+
+ライブラリ内部で使用します。
+
+--- workspace=(val)
+
+ライブラリ内部で使用します。
+
+#@# 使用されていないため省略しました。
+#@# --- workspace_home -> nil
+
 == Constants
 
 --- NOPRINTING_IVARS -> [String]
