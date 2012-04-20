@@ -1,5 +1,5 @@
 #@since 1.8.0
-= module Process::Status
+= class Process::Status
 
 プロセスの終了ステータスを表すクラスです。
 メソッド [[m:Process.#wait2]] などの返り値として使われます。
