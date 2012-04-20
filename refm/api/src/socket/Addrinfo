@@ -181,10 +181,8 @@ socktype なしでは曖昧な指定となるためです。
 カノニカル名は [[m:Addrinfo.getaddrinfo]] に [[m:Socket::AI_CANONINAME]]
 を指定した場合にセットされます。
 
-  list = Addrinfo.getaddrinfo("www.ruby-lang.org", 80, :INET, :STREAM, nil, Socket::
-AI_CANONNAME)
-  p list[0] #=> #<Addrinfo: 221.186.184.68:80 TCP carbon.ruby-lang.org (www.ruby-lan
-g.org:80)>
+  list = Addrinfo.getaddrinfo("www.ruby-lang.org", 80, :INET, :STREAM, nil, Socket::AI_CANONNAME)
+  p list[0] #=> #<Addrinfo: 221.186.184.68:80 TCP carbon.ruby-lang.org (www.ruby-lang.org:80)>
   p list[0].canonname #=> "carbon.ruby-lang.org"
 
 --- ipv4? -> bool
@@ -328,7 +326,7 @@ IPv6 の v4 マップド/互換アドレスを v4 のアドレスに変換します。
 --- unix_path -> String
 Unix domain socket の path を文字列で返します。
 
-  Addrinfo.unix("/tmp/sock").unix_path       #=> "/tmp/sock" 
+  Addrinfo.unix("/tmp/sock").unix_path       #=> "/tmp/sock"
 
 @raise SocketError アドレスが Unix domain socket のものでない場合に発生します
 
@@ -339,14 +337,13 @@ struct sockaddr をパックした形式の文字列に変換します。
 
   Addrinfo.tcp("localhost", 80).to_sockaddr
   #=> "\x02\x00\x00P\x7F\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00"
- 
 
 --- getnameinfo(flags=0) -> [String, String]
 ノード名とサービスを文字列の配列で返します。
 
 flags には Socket::NI_??? という名前の定数のビット OR を渡します。
 
-  Addrinfo.tcp("127.0.0.1", 80).getnameinfo 
+  Addrinfo.tcp("127.0.0.1", 80).getnameinfo
   #=> ["localhost", "www"]
   Addrinfo.tcp("127.0.0.1", 80).getnameinfo(Socket::NI_NUMERICSERV)
   #=> ["localhost", "80"]
@@ -457,7 +454,6 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡します。
 自身のアドレスにバインドされたソケットを作成し、
 [[man:listen(2)]] を実行します。
 
-
 ブロックが渡されたときにはそのブロックに生成された [[c:Socket]]
 オブジェクトが渡されます。ブロックの返り値がメソッドの返り値となります。
 ブロックを省略した場合は、生成された [[c:Socket]]
@@ -476,4 +472,3 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡します。
   Addrinfo.tcp("localhost", 80).inspect_sockaddr     #=> "127.0.0.1:80"
   Addrinfo.tcp("ip6-localhost", 80).inspect_sockaddr #=> "[::1]:80"
   Addrinfo.unix("/tmp/sock").inspect_sockaddr        #=> "/tmp/sock"
- 
