@@ -141,7 +141,7 @@ PROMPT_I, PROMPT_S, PROMPT_C にはフォーマット文字列を指定します。
 フォーマット文字列で使用可能な記法は以下の通りです。
 
 : %N
-    起動しているコマンド名
+    起動しているコマンド名([[m:IRB::Context#irb_name]])
 : %m
     main オブジェクト (self) を to_s した文字列
 : %M

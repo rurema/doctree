@@ -328,22 +328,28 @@ self に設定されたオブジェクトを返します。
 
 --- prompt_c -> String
 
-if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
-列を返します。
+式が継続している時のプロンプトを表現するフォーマット文字列を返します。
+
+@see [[m:IRB::Context#prompt_c=]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_c=(val)
 
-if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
-列を val に設定します。
+式が継続している時のプロンプトを表現するフォーマット文字列を val に設定
+します。
 
 @param val フォーマットを文字列で指定します。指定できる内容については、
            [[ref:lib:irb#customize_prompt]] を参照してください。
 
 [[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
+@see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
+     [[m:IRB::Context#prompt_c]], [[ref:lib:irb#customize_prompt]]
+
 --- prompt_i -> String
 
 通常のプロンプトを表現するフォーマット文字列を返します。
+
+@see [[m:IRB::Context#prompt_i=]],[[ref:lib:irb#customize_prompt]]
 
 --- prompt_i=(val)
 
@@ -353,6 +359,9 @@ if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
            [[ref:lib:irb#customize_prompt]] を参照してください。
 
 [[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
+
+@see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
+     [[m:IRB::Context#prompt_i]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_mode -> Symbol
 
@@ -381,15 +390,22 @@ if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
 
 継続行のプロンプトを表現するフォーマット文字列を返します。
 
+@see [[m:IRB::Context#prompt_n=]], [[ref:lib:irb#customize_prompt]]
+
 --- prompt_n=(val)
 
 継続行のプロンプトを表現するフォーマット文字列を val に設定します。
 
 [[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
+@see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
+     [[m:IRB::Context#prompt_n]], [[ref:lib:irb#customize_prompt]]
+
 --- prompt_s -> String
 
 文字列中のプロンプトを表現するフォーマット文字列を返します。
+
+@see [[m:IRB::Context#prompt_s=]], [[ref:lib:irb#customize_prompt]]
 
 --- prompt_s=(val)
 
@@ -399,6 +415,9 @@ if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
            [[ref:lib:irb#customize_prompt]] を参照してください。
 
 [[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
+
+@see [[m:IRB::Context#prompt_mode]], [[m:IRB::Context#prompt_mode=]],
+     [[m:IRB::Context#prompt_s]], [[ref:lib:irb#customize_prompt]]
 
 --- prompting? -> bool
 
