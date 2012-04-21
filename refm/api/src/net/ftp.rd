@@ -776,7 +776,7 @@ FTP の応答コード 5yz
 発生する例外のクラスです。
 
 #@since 1.9.2
-= class Net::FTPConnectionError
+= class Net::FTPConnectionError < Net::FTPError
 コネクションを確立する前に通信しようとした場合に
 発生する例外のクラスです。
 
