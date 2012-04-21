@@ -377,12 +377,15 @@ if の直後など, 行が継続している時のプロンプトを表現するフォーマット文字
 
 @see [[m:IRB::Context#prompt_mode]], [[ref:lib:irb#customize_prompt]]
 
-#@#使用されていない?ため省略しました。
-#@#--- prompt_n -> String
-#@##@todo
-#@#
-#@#--- prompt_n=(val)
-#@##@todo
+--- prompt_n -> String
+
+継続行のプロンプトを表現するフォーマット文字列を返します。
+
+--- prompt_n=(val)
+
+継続行のプロンプトを表現するフォーマット文字列を val に設定します。
+
+[[m:IRB::Context#prompt_mode]] の変更に影響を受ける事に注意してください。
 
 --- prompt_s -> String
 

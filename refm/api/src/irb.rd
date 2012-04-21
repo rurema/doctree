@@ -119,6 +119,7 @@ irb のプロンプトをカスタマイズしたい時は、
   # 新しいプロンプトモード MY_PROMPT を作成する
   IRB.conf[:PROMPT][:MY_PROMPT] = {
     :PROMPT_I => nil,          # 通常時のプロンプト
+    :PROMPT_N => nil,          # 継続行のプロンプト
     :PROMPT_S => nil,          # 文字列などの継続行のプロンプト
     :PROMPT_C => nil,          # 式が継続している時のプロンプト
     :RETURN => "    ==>%s\n"   # メソッドから戻る時のプロンプト
