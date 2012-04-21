@@ -296,16 +296,28 @@ Ctrl-C が入力された時に irb を終了するかどうかを val に設定します。
 ライブラリ内部で使用します。
 
 --- irb_name -> String
-#@todo
+
+起動しているコマンド名を文字列で返します。
+
+#@# TODO: サブ irb の時の動作を記述
+
+@see [[m:IRB::Context#irb_name=]]
 
 --- irb_name=(val)
-#@todo
+
+起動しているコマンド名を val に設定します。
+
+@param val コマンド名を [[c:String]] で指定します。
+
+@see [[m:IRB::Context#irb_name]]
 
 --- irb_path -> String
-#@todo
+
+ライブラリ内部で使用します。
 
 --- irb_path=(val)
-#@todo
+
+ライブラリ内部で使用します。
 
 --- last_value -> object
 
@@ -464,10 +476,10 @@ irb のプロンプトでの評価結果を表示する際のフォーマットに val を設定します。
 
 --- use_readline  -> bool | nil
 --- use_readline? -> bool | nil
-#@todo
 
-[[lib:readline]] を使うかどうかを指定します。
-val の値によって、このメソッドの効果は以下のように分かれます。
+[[lib:readline]] を使うかどうかを返します。
+
+@return 戻り値よって以下のように動作します。
 
 : true
     readline ライブラリを使う
@@ -476,17 +488,57 @@ val の値によって、このメソッドの効果は以下のように分かれます。
 : nil
     inf-ruby-mode 以外で readline ライブラリを利用しようとする (デフォルト)
 
---- use_readline=(opt)
-#@todo
+動作を変更するためには .irbrc ファイル中で IRB.conf[:USE_READLINE] の設
+定や irb 起動時に --readline オプション、--noreadline オプションの指定
+を行います。
 
---- verbose
---- verbose?
-#@todo
+#@# 変更しても影響がないため省略しました。
+#@#--- use_readline=(opt)
 
-irbからいろいろなメッセージを出力するか
+--- verbose -> bool | nil
 
---- verbose=
-#@todo
+標準出力に詳細なメッセージを出力するように設定されているかどうかを返し
+ます。
+
+[[m:IRB::Context#verbose?]] とは別のメソッドである事に注意してください。
+
+@return 詳細なメッセージを出力するように設定されている場合は true を返
+        します。そうでない場合は false か nil を返します。
+
+@see [[m:IRB::Context#verbose?]], [[m:IRB::Context#verbose=]]
+
+--- verbose? -> bool | nil
+
+標準出力に詳細なメッセージを出力するかどうかを返します。
+
+@return 詳細なメッセージを出力する場合は true を返します。そうでない場
+        合は false か nil を返します。
+
+設定を行っていた場合([[m:IRB::Context#verbose]] が true か false を返す
+場合)は設定した通りに動作します。設定を行っていない場合は、ファイルを指
+定して irb を実行した場合などに true を返します。
+
+#@until 1.9.2
+[注意] 1.9.2 以下では nil 以外を [[m:IRB::Context#verbose=]] に指定する
+と常に nil を返す不具合がある事に注意してください。
+#@end
+
+@see [[m:IRB::Context#verbose]], [[m:IRB::Context#verbose=]]
+
+--- verbose=(val)
+
+標準出力に詳細なメッセージを出力するかどうかを val に設定します。
+
+.irbrc ファイル中で IRB.conf[:VERBOSE] を設定する事でも同様の操作が行え
+ます。
+
+false や nil を指定した場合でも、[[m:IRB::Context#verbose?]] が true を
+返す場合は詳細なメッセージを出力する事に注意してください。
+
+@param val true を指定した場合、詳細なメッセージを出力します。false や
+           nil を指定した場合、詳細なメッセージを出力しません。
+
+@see [[m:IRB::Context#verbose]], [[m:IRB::Context#verbose?]]
 
 --- workspace -> IRB::WorkSpace
 
