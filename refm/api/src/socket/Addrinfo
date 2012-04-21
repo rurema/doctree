@@ -367,14 +367,12 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡します。
 @param port ポート番号(整数)もしくはサービス名(文字列)
 @param path Unix domain socket のパス
 
-#@# --- connect_from() -> Socket
 --- connect_from(host, port) -> Socket
 #@# --- connect_from(addrinfo) -> Socket
-#@# --- connect_from(){|sock| ... } -> object
 --- connect_from(host, port){|sock| ... } -> object
 #@# --- connect_from(addrinfo){|sock| ... } -> object
 
-引数(addrinfo もしくは host, port のペア)で指定されたアドレスから
+引数で指定されたアドレスから
 自身のアドレスへソケットを接続します。
 
 接続元のアドレスは [[m:Addrinfo#family_addrinfo]] により生成された
@@ -397,10 +395,12 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡します。
 #@#    puts s.read
 #@#  }
 
+#@# @param addrinfo 接続のアドレス情報([[c:Addrinfo]] オブジェクト)
 @param host ホスト(IP アドレスもしくはホスト名)
 @param port ポート番号(整数)もしくはサービス名(文字列)
 
-#@# 2.0.0 では :timeout オプションが追加される
+#@# 2.0.1 では(bugfixのため) addrinfo を引数にとった場合に妥当な動作をする
+#@# 2.0.1 では :timeout オプションが追加される
 
 --- connect -> Socket
 --- connect{|sock| ... } -> object
