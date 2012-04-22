@@ -10,6 +10,52 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
 を変更します。irb の起動後は IRB.conf の内容を更新しても変更の内容は反
 映されない事に注意してください。
 
+なお、.irbrc 中に記述できる以下の設定値については、[[c:IRB::Context]]
+オブジェクトのメソッドとして操作できません。
+
+: IRB.conf[:AT_EXIT]
+
+  irb の終了時(サブ irb を含みません)に本項目に設定された [[c:Proc]] オ
+  ブジェクトを実行します。ブロック引数には何も渡されません。
+
+  デフォルト値は [] です。
+
+: IRB.conf[:IRB_LIB_PATH]
+
+  ライブラリ内部で使用します。
+
+: IRB.conf[:IRB_RC]
+
+  irb の起動時(サブ irb を含みます)に本項目に設定された [[c:Proc]] オブ
+  ジェクトを実行します。ブロック引数には [[c:IRB::Context]] が渡されます。
+  そのため、サブ irb の設定をまとめて実行するのに使用します。
+
+  デフォルト値は nil です。
+
+  [[ref:lib:irb#configure_sub_irb]] も併せて参照してください。
+
+: IRB.conf[:LC_MESSAGES]
+
+  ライブラリ内部で使用します。
+
+: IRB.conf[:SCRIPT]
+
+  ファイル名を指定して irb を実行した場合のパスを文字列で返します。
+
+  デフォルト値は nil です。
+
+#@# 変更しても影響がないため省略しました。ある程度は記述したため、必要
+#@# になった際にコメントインします。
+#@#: IRB.conf[:RC_NAME_GENERATOR]
+#@#  設定ファイルを指定するための [[c:Proc]] オブジェクトを指定します。
+#@#
+#@##@since 1.9.1
+#@#: IRB.conf[:ENCODINGS]
+#@#  デフォルトの外部/内部エンコーディングの情報を返します。起動時の -U
+#@#  や 、-E(--encoding) オプションの結果を反映しています。変更しても影
+#@#  響はありません。
+#@##@end
+
 == Class Methods
 
 --- new(irb, workspace = nil, input_method = nil, output_method = nil) -> IRB::Context
