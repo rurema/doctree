@@ -89,7 +89,7 @@ AF_INET なソケットにおいてホストを指定するには以下のいずれか
 #@#* Socket.gethostbyaddr(host[, type])
 #@#* [[m:Socket.getnameinfo]]([Socket::AF_INET, "http", "210.163.138.100"]) => ["beryllium.ruby-lang.org", "www"]
   * [[m:Socket.getnameinfo]]([nil, nil, nil, "210.163.138.100"]) => ["beryllium.ruby-lang.org", 0]
-  * [[m:Addrinfo#getnameinfo]] Addrinfo.tcp("127.0.0.1", 80).getnameinfo => ["localhost", "www"]
+  * [[m:Addrinfo#getnameinfo]] Addrinfo.ip("127.0.0.1").getnameinfo => ["localhost", "0"]
 
 
 また、[[lib:resolv]] ライブラリも使用できます。

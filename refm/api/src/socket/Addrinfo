@@ -147,7 +147,7 @@ socktype なしでは曖昧な指定となるためです。
 @param protocol プロトコル(整数、もしくは nil)
 @param flags フラグ(整数)
 
-@see [[m:Addrinfo.foreach]]
+@see [[m:Addrinfo.foreach]], [[m:Socket.getaddrinfo]]
 
 == Instance methods
 --- afamily -> Integer
@@ -349,6 +349,7 @@ flags には Socket::NI_??? という名前の定数のビット OR を渡します。
   #=> ["localhost", "80"]
 
 @param flags フラグ
+@see [[m:Socket.getnameinfo]]
 
 --- family_addrinfo(host, port) -> Addrinfo
 --- family_addrinfo(path) -> Addrinfo
