@@ -1,20 +1,5 @@
 socket はプロセス外部との通信 (プロセス間通信、ホスト間通信) を実現します。
 
-=== クラス
-
- * [[c:BasicSocket]]: ソケットを表す抽象クラス
- * [[c:IPSocket]]: インターネットドメインソケットの抽象クラス
- * [[c:TCPSocket]]: インターネットドメインのストリーム型ソケットのクラス
- * [[c:TCPServer]]: TCP/IPストリーム型接続のサーバ側のソケットのクラス
- * [[c:SOCKSSocket]]: TCPSocket を SOCKS 対応したクラス
- * [[c:UDPSocket]]: インターネットドメインのデータグラム型ソケットのクラス
- * [[c:UNIXSocket]]: Unixドメインのストリーム型ソケットのクラス
- * [[c:UNIXServer]]: Unixストリーム型接続のサーバ側のソケットのクラス
- * [[c:Socket]]: 低レベルソケットインターフェース
-
-=== モジュール
-
- * [[c:Socket::Constants]]
 
 === ソケットアドレス
 
@@ -27,6 +12,10 @@ socket はプロセス外部との通信 (プロセス間通信、ホスト間通信) を実現します。
 ソケットアドレスはソケットの種類によって中身が異なります。
 たとえば TCP では IP アドレスとポート番号ですし、
 Unix ドメインソケットではソケットファイルを指すパス名です。
+
+#@since 1.9.1
+ソケットアドレスを取り扱うための便利で高水準なクラスとして [[c:Addrinfo]] があります。
+#@end
 
 [[c:IPSocket]] および [[c:UNIXSocket]] 以下のクラス階層では、
 わざわざソケットアドレスという形式にまとめなくてもよいよう、
@@ -86,6 +75,9 @@ AF_INET なソケットにおいてホストを指定するには以下のいずれか
 
 ホスト名から IP アドレスへの変換 (正引き) を行うメソッドは以下のものが用意されています。
 
+#@since 1.9.1
+  * [[m:Addrinfo.getaddrinfo]]("www.ruby-lang.org", "http") =>  [#<Addrinfo: 221.186.184.68:80 TCP (www.ruby-lang.org:http)>]
+#@end
   * [[m:IPSocket.getaddress]]("www.ruby-lang.org") => "210.163.138.100"
   * [[m:TCPSocket.gethostbyname]]("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "210.163.138.100"]
   * [[m:Socket.gethostbyname]]("www.ruby-lang.org") => ["beryllium.ruby-lang.org", [], 2, "\322\243\212d"]
@@ -97,6 +89,7 @@ AF_INET なソケットにおいてホストを指定するには以下のいずれか
 #@#* Socket.gethostbyaddr(host[, type])
 #@#* [[m:Socket.getnameinfo]]([Socket::AF_INET, "http", "210.163.138.100"]) => ["beryllium.ruby-lang.org", "www"]
   * [[m:Socket.getnameinfo]]([nil, nil, nil, "210.163.138.100"]) => ["beryllium.ruby-lang.org", 0]
+  * [[m:Addrinfo#getnameinfo]] Addrinfo.tcp("127.0.0.1", 80).getnameinfo => ["localhost", "www"]
 
 
 また、[[lib:resolv]] ライブラリも使用できます。

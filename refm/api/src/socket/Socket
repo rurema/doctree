@@ -1,17 +1,24 @@
 = class Socket < BasicSocket
 
+#@until 1.9.1
 ソケットそのものに対するシステムコールレベルのアクセスを提供
-するクラス。Perl のソケットに対するアクセスと同レベルの機能を
+するクラス。
+
+Perl のソケットに対するアクセスと同レベルの機能を
 提供しています。このクラスではソケットアドレスは [[m:Array#pack]]
 された文字列で指定します
 ([[ref:lib:socket#pack_string]]を参照)。
 
-#@until 1.9.1
 一般的なソケットプログラミングはより高レベルの
 [[c:TCPSocket]] クラスや
 [[c:TCPServer]] クラスを用い
 て行われることが多く、このクラスはあまり用いられません。
 #@else
+
+汎用ソケットクラス。
+
+システムコールレベルから高水準の機能までを提供します。
+
 ソケットオブジェクトを生成する汎用的な方法として
 [[m:Socket.new]] がありますが、以下のようなより便利な
 メソッドがあります。
@@ -21,6 +28,10 @@
   * UNIX socket のクライアントソケット [[m:Socket.unix]] [[m:UNIXSocket.open]]
   * UNIX socket のサーバソケット [[m:Socket.unix_server_loop]], 
     [[m:Socket.unix_server_socket]], [[m:UNIXServer.open]]
+また、クライアントソケットは [[c:Addrinfo#connect]] で、
+サーバソケットを [[c:Addrinfo#bind]] や [[c:Addrinfo#listen]] で
+作ることもできます。
+
 #@end
 
 == Class Methods
@@ -137,11 +148,15 @@ IP のバージョンに依存しないプログラムを書くための標準的な API です。
 わりとして用意されています。IPのバージョンに依存しないプログラムを
 書くための標準的なAPIです。
 
-h@param sa 文字列か配列を与えます。
+@param sa 文字列か配列を与えます。
 
 @param flags 省略可能な第2引数 flags には [[man:getnameinfo(3)]] の第7番目の引数に指定する flags に相当する [[c:Fixnum]] を与えます。
 
 @return 配列を返し、その要素はアドレスとポートを表す文字列です。
+
+#@since 1.9.1
+@see [[m:Addrinfo#getnameinfo]]
+#@end
 
 === 引数 sa について
 引数 sa には文字列か配列を与えます。文字列の場合は sockaddr 構造体
@@ -477,7 +492,7 @@ TCP/IP で host:port で待ち受けるサーバ側のソケットを
 port が 0 の場合は、実際のポート番号は動的に選ばれます。
 ただし返り値のソケットはすべて同じ番号を持ちます。
 
-z  # tcp_server_sockets returns は2つのソケットを返す
+  # tcp_server_sockets returns は2つのソケットを返す
   sockets = Socket.tcp_server_sockets(1296)
   p sockets #=> [#<Socket:fd 3>, #<Socket:fd 4>]
   
