@@ -117,22 +117,52 @@
   c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
   s = serv.accept
 
+#@until 1.9.2
 --- getsockopt(level, optname) -> String
+#@else
+--- getsockopt(level, optname) -> Socket::Option
+#@end
 
 ソケットのオプションを取得します。[[man:getsockopt(2)]]
-を参照してください。取得したオプションのデータをパックした文字列を
+を参照してください。
+#@until 1.9.2
+取得したオプションのデータをパックした文字列を
 返します。
+#@else
+取得したオプションのデータを [[c:Socket::Option]] で返します。
+#@end
 
-@param level    [[man:getsockopt(2)]] の 第二引数のlevel に相当する整数を指定します。
-@param optname  [[man:getsockopt(2)]] の 第三引数のoption_name に相当する整数を指定します。
+#@since 1.9.2
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
+シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+#@end
+
+@param level    [[man:getsockopt(2)]] の 第二引数のlevel 
+@param optname  [[man:getsockopt(2)]] の 第三引数のoption_name 
+@see [[m:BasicSocket#setsockopt]]
 
 例:
 
+#@until 1.9.2
   serv = TCPServer.open("", 0)
   c = TCPSocket.open(*Socket.unpack_sockaddr_in(serv.getsockname).reverse)
   s = serv.accept
-  p c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)  #=> "\000\000\000\000"
-  p opt.unpack("i")[0]                                      #=> 0   (Nagle アルゴリズム有効)
+  opt = c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)
+  p opt #=> "\000\000\000\000"
+  p opt.unpack("i")[0] #=> 0   (Nagle アルゴリズム有効)
+#@else
+  serv = Socket.tcp_server_sockets("", 0)[0]
+  c = serv.local_address.connect
+  s = serv.accept
+  opt = c.getsockopt(Socket::IPPROTO_TCP, Socket::TCP_NODELAY)
+  # c.getsockopt("TCP", "NODELAY"),  なども可能
+  p opt #=> #<Socket::Option: INET TCP NODELAY 0>
+  p opt.bool #=> false (Nagle アルゴリズム有効)
+  p opt.unpack("i")[0] #=> 0 (Socket::Option#unpack が互換性のために存在する)
+  # 整数値の場合は Socket::Option#int を用いる
+  p c.getsockopt(:IP, :TTL).int #=> 64
+#@end
 
 --- recv(maxlen, flags = 0) -> String
 
@@ -212,15 +242,53 @@ dest_sockaddr には「ソケットアドレス構造体を pack した文字列」
   s.send("The king has donkey ears!", 0, sockaddr)
 
 --- setsockopt(level, optname, optval) -> 0
+#@since 1.9.2
+--- setsockopt(socketoption) -> 0
+#@end
 
 ソケットのオプションを設定します。[[man:setsockopt(2)]]
 を参照してください。
 
+#@since 1.9.2
+level, optname には Socket::SOL_SOCKET や Socket::SO_REUSEADDR 
+といった整数値の他、文字列("SOL_SOCKET", prefixなしの "SOCKET")や
+シンボル(:SO_REUSEADDR, :REUSEADDR)を用いることができます。
+
+optval には文字列、整数、真偽値(true or false)を渡すことができます。
+文字列の場合には [[man:setsockopt(2)]] にはその文字列と
+長さが渡されます。整数の場合はintへのポインタが渡されます。
+true/falseの場合は0/1という整数と解釈され、そのメモリ領域の
+intポインタを渡します。
+
+引数が1つの場合は [[c:Socket::Option]] で設定値を表現します。
+
+  # 真偽値の場合
+  #setsockopt could be called like this:
+  sock.setsockopt(:SOCKET, :REUSEADDR, true)
+  sock.setsockopt(Socket::SOL_SOCKET,Socket::SO_REUSEADDR, true)
+  sock.setsockopt(Socket::Option.bool(:INET, :SOCKET, :REUSEADDR, true))
+
+  # 整数値の場合
+  #setsockopt could be called like this:
+  sock.setsockopt(:IP, :TTL, 255)
+  sock.setsockopt(Socket::IPPROTO_IP, Socket::IP_TTL, 255)
+  sock.setsockopt(Socket::Option.int(:INET, :IP, :TTL, 255))
+
+  # より複雑な場合
+  optval = IPAddr.new("224.0.0.251").hton +
+           IPAddr.new(Socket::INADDR_ANY, Socket::AF_INET).hton
+  sock.setsockopt(Socket::IPPROTO_IP, Socket::IP_ADD_MEMBERSHIP, optval)
+#@end
+
 @param level    [[man:setsockopt(2)]] の level を参照してください。
 @param optname  [[man:setsockopt(2)]] の option_name を参照してください。
-@param optval  設定される値を文字列で指定します。
+@param optval   設定値
+#@since 1.9.2
+@param socketoption 設定値を表す [[c:Socket::Option]] オブジェクト
+#@end
 
 @raise Errno::EXXX  オプションの設定に失敗した場合発生します。
+@see [[m:BasicSocket#getsockopt]]
 
 #@# より高レベルなものとして[[c:RAA:Sockopt]]があります
 
