@@ -1,0 +1,46 @@
+= class Socket::Option
+
+== Class Methods
+--- new
+#@todo
+
+--- int
+#@todo
+
+--- bool
+#@todo
+
+--- linger
+#@todo
+
+== Instance Methods
+--- family
+#@todo
+
+--- level
+#@todo
+
+--- optname
+#@todo
+
+--- data
+#@todo
+
+--- to_s
+#@todo
+
+--- inspect
+#@todo
+
+--- int
+#@todo
+
+--- bool
+#@todo
+
+--- linger
+#@todo
+
+--- unpack
+#@todo
+
