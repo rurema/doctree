@@ -1,93 +1,93 @@
 
---- AF_APPLETALK
---- AF_ATM
---- AF_AX25
---- AF_CCITT
---- AF_CHAOS
---- AF_CNT
---- AF_COIP
---- AF_DATAKIT
---- AF_DEC
---- AF_DLI
---- AF_E164
---- AF_ECMA
---- AF_HYLINK
---- AF_IMPLINK
---- AF_INET
---- AF_INET6
---- AF_IPX
---- AF_ISDN
---- AF_ISO
---- AF_LAT
---- AF_LINK
---- AF_LOCAL
---- AF_MAX
---- AF_NATM
---- AF_NDRV
---- AF_NETBIOS
---- AF_NETGRAPH
---- AF_NS
---- AF_OSI
+--- AF_APPLETALK -> Integer
+--- AF_ATM -> Integer
+--- AF_AX25 -> Integer
+--- AF_CCITT -> Integer
+--- AF_CHAOS -> Integer
+--- AF_CNT -> Integer
+--- AF_COIP -> Integer
+--- AF_DATAKIT -> Integer
+--- AF_DEC -> Integer
+--- AF_DLI -> Integer
+--- AF_E164 -> Integer
+--- AF_ECMA -> Integer
+--- AF_HYLINK -> Integer
+--- AF_IMPLINK -> Integer
+--- AF_INET -> Integer
+--- AF_INET6 -> Integer
+--- AF_IPX -> Integer
+--- AF_ISDN -> Integer
+--- AF_ISO -> Integer
+--- AF_LAT -> Integer
+--- AF_LINK -> Integer
+--- AF_LOCAL -> Integer
+--- AF_MAX -> Integer
+--- AF_NATM -> Integer
+--- AF_NDRV -> Integer
+--- AF_NETBIOS -> Integer
+--- AF_NETGRAPH -> Integer
+--- AF_NS -> Integer
+--- AF_OSI -> Integer
 #@since 1.9.1
---- AF_PACKET
+--- AF_PACKET -> Integer
 #@end
---- AF_PPP
---- AF_PUP
---- AF_ROUTE
---- AF_SIP
---- AF_SNA
---- AF_SYSTEM
---- AF_UNIX
---- AF_UNSPEC
+--- AF_PPP -> Integer
+--- AF_PUP -> Integer
+--- AF_ROUTE -> Integer
+--- AF_SIP -> Integer
+--- AF_SNA -> Integer
+--- AF_SYSTEM -> Integer
+--- AF_UNIX -> Integer
+--- AF_UNSPEC -> Integer
 #@todo
 
 [[m:Socket.open]] の第一引数 domain に使用します。
 
 @see [[m:Socket.open]]
 
---- SOCK_DGRAM
+--- SOCK_DGRAM -> Integer
+
+[[m:Socket.open]] の第二引数 type に使用します。
+詳しくは [[man:socket(2)]] を見てください。
+
+@see [[m:Socket.open]]
+
+--- SOCK_PACKET -> Integer
 #@todo
 
 [[m:Socket.open]] の第二引数 type に使用します。
 
 @see [[m:Socket.open]]
 
---- SOCK_PACKET
+--- SOCK_RAW -> Integer
 #@todo
 
 [[m:Socket.open]] の第二引数 type に使用します。
 
 @see [[m:Socket.open]]
 
---- SOCK_RAW
+--- SOCK_RDM -> Integer
 #@todo
 
 [[m:Socket.open]] の第二引数 type に使用します。
 
 @see [[m:Socket.open]]
 
---- SOCK_RDM
-#@todo
+--- SOCK_SEQPACKET -> Integer
 
 [[m:Socket.open]] の第二引数 type に使用します。
+詳しくは [[man:socket(2)]] を見てください。
 
 @see [[m:Socket.open]]
 
---- SOCK_SEQPACKET
-#@todo
+--- SOCK_STREAM -> Integer
 
 [[m:Socket.open]] の第二引数 type に使用します。
+詳しくは [[man:socket(2)]] を見てください。
 
 @see [[m:Socket.open]]
 
---- SOCK_STREAM
-#@todo
-
-[[m:Socket.open]] の第二引数 type に使用します。
-
-@see [[m:Socket.open]]
-
---- PF_APPLETALK
+--- PF_APPLETALK -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -95,7 +95,7 @@
 @see [[m:Socket.open]]
 
 #@since 1.8.3
---- PF_ATM
+--- PF_ATM -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -103,7 +103,7 @@
 @see [[m:Socket.open]]
 
 #@end
---- PF_AX25
+--- PF_AX25 -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -111,63 +111,63 @@
 @see [[m:Socket.open]]
 
 #@since 1.8.3
---- PF_CCITT
+--- PF_CCITT -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_CHAOS
+--- PF_CHAOS -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_CNT
+--- PF_CNT -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_COIP
+--- PF_COIP -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_DATAKIT
+--- PF_DATAKIT -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_DEC
+--- PF_DEC -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_DLI
+--- PF_DLI -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_ECMA
+--- PF_ECMA -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_HYLINK
+--- PF_HYLINK -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -175,28 +175,28 @@
 @see [[m:Socket.open]]
 
 #@end
---- PF_IMPLINK
+--- PF_IMPLINK -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_INET
+--- PF_INET -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_INET6
+--- PF_INET6 -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_IPX
+--- PF_IPX -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -204,91 +204,91 @@
 @see [[m:Socket.open]]
 
 #@since 1.8.3
---- PF_ISDN
+--- PF_ISDN -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_ISO
+--- PF_ISO -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_KEY
+--- PF_KEY -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_LAT
+--- PF_LAT -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_LINK
+--- PF_LINK -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_LOCAL
+--- PF_LOCAL -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_MAX
+--- PF_MAX -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_NATM
+--- PF_NATM -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_NDRV
+--- PF_NDRV -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_NETBIOS
+--- PF_NETBIOS -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_NETGRAPH
+--- PF_NETGRAPH -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_NS
+--- PF_NS -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_OSI
+--- PF_OSI -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -296,60 +296,60 @@
 @see [[m:Socket.open]]
 
 #@since 1.9.2
---- PF_PACKET
+--- PF_PACKET -> Integer
 #@todo
 #@end
 
---- PF_PIP
+--- PF_PIP -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_PPP
+--- PF_PPP -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_PUP
+--- PF_PUP -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_ROUTE
+--- PF_ROUTE -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_RTIP
+--- PF_RTIP -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_SIP
+--- PF_SIP -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_SNA
+--- PF_SNA -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_SYSTEM
+--- PF_SYSTEM -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -357,14 +357,14 @@
 @see [[m:Socket.open]]
 
 #@end
---- PF_UNIX
+--- PF_UNIX -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
 
 @see [[m:Socket.open]]
 
---- PF_UNSPEC
+--- PF_UNSPEC -> Integer
 #@todo
 
 [[m:Socket.open]] の第三引数 protocol に使用します。
@@ -372,7 +372,7 @@
 @see [[m:Socket.open]]
 
 #@since 1.8.3
---- PF_XTP
+--- PF_XTP -> Integer
 #@end
 #@todo
 
@@ -380,38 +380,38 @@
 
 @see [[m:Socket.open]]
 
---- IPPORT_RESERVED
---- IPPORT_USERRESERVED
+--- IPPORT_RESERVED -> Integer
+--- IPPORT_USERRESERVED -> Integer
 #@todo
 
 #@since 1.9.1
---- IPPROTO_AH
---- IPPROTO_DSTOPTS
---- IPPROTO_ESP
---- IPPROTO_FRAGMENT
---- IPPROTO_HOPOPTS
---- IPPROTO_ICMPV6
---- IPPROTO_IPV6
---- IPPROTO_NONE
---- IPPROTO_ROUTING
+--- IPPROTO_AH -> Integer
+--- IPPROTO_DSTOPTS -> Integer
+--- IPPROTO_ESP -> Integer
+--- IPPROTO_FRAGMENT -> Integer
+--- IPPROTO_HOPOPTS -> Integer
+--- IPPROTO_ICMPV6 -> Integer
+--- IPPROTO_IPV6 -> Integer
+--- IPPROTO_NONE -> Integer
+--- IPPROTO_ROUTING -> Integer
 #@end
---- IPPROTO_BIP
---- IPPROTO_EGP
---- IPPROTO_EON
---- IPPROTO_GGP
---- IPPROTO_HELLO
---- IPPROTO_ICMP
---- IPPROTO_IDP
---- IPPROTO_IGMP
---- IPPROTO_IP
---- IPPROTO_MAX
---- IPPROTO_ND
---- IPPROTO_PUP
---- IPPROTO_RAW
---- IPPROTO_TCP
---- IPPROTO_TP
---- IPPROTO_UDP
---- IPPROTO_XTP
+--- IPPROTO_BIP -> Integer
+--- IPPROTO_EGP -> Integer
+--- IPPROTO_EON -> Integer
+--- IPPROTO_GGP -> Integer
+--- IPPROTO_HELLO -> Integer
+--- IPPROTO_ICMP -> Integer
+--- IPPROTO_IDP -> Integer
+--- IPPROTO_IGMP -> Integer
+--- IPPROTO_IP -> Integer
+--- IPPROTO_MAX -> Integer
+--- IPPROTO_ND -> Integer
+--- IPPROTO_PUP -> Integer
+--- IPPROTO_RAW -> Integer
+--- IPPROTO_TCP -> Integer
+--- IPPROTO_TP -> Integer
+--- IPPROTO_UDP -> Integer
+--- IPPROTO_XTP -> Integer
 #@todo
 
 IPプロトコル:
@@ -427,328 +427,329 @@ IPプロトコル:
 その場合は 0 を指定しても同じ結果を得られますので通常は使用されません。
 AF_INET で SOCK_DGRAM の場合の IPPROTO_UDP も同様です。
 
---- AI_ADDRCONFIG
---- AI_ALL
---- AI_CANONNAME
---- AI_DEFAULT
---- AI_MASK
---- AI_NUMERICHOST
+--- AI_ADDRCONFIG -> Integer
+--- AI_ALL -> Integer
+--- AI_CANONNAME -> Integer
+--- AI_DEFAULT -> Integer
+--- AI_MASK -> Integer
+--- AI_NUMERICHOST -> Integer
 #@since 1.9.1
---- AI_NUMERICSERV
+--- AI_NUMERICSERV -> Integer
 #@end
---- AI_PASSIVE
---- AI_V4MAPPED
---- AI_V4MAPPED_CFG
+--- AI_PASSIVE -> Integer
+--- AI_V4MAPPED -> Integer
+--- AI_V4MAPPED_CFG -> Integer
 #@todo
 
 フラグ:
 [[m:Socket.getaddrinfo]] の flags 引数に使用します。
 [[man:getaddrinfo(3)]]も参照して下さい。
 
---- EAI_ADDRFAMILY
---- EAI_AGAIN
---- EAI_BADFLAGS
---- EAI_BADHINTS
---- EAI_FAIL
---- EAI_FAMILY
---- EAI_MAX
---- EAI_MEMORY
---- EAI_NODATA
---- EAI_NONAME
+--- EAI_ADDRFAMILY -> Integer
+--- EAI_AGAIN -> Integer
+--- EAI_BADFLAGS -> Integer
+--- EAI_BADHINTS -> Integer
+--- EAI_FAIL -> Integer
+--- EAI_FAMILY -> Integer
+--- EAI_MAX -> Integer
+--- EAI_MEMORY -> Integer
+--- EAI_NODATA -> Integer
+--- EAI_NONAME -> Integer
 #@since 1.9.1
---- EAI_OVERFLOW
+--- EAI_OVERFLOW -> Integer
 #@end
---- EAI_PROTOCOL
---- EAI_SERVICE
---- EAI_SOCKTYPE
---- EAI_SYSTEM
+--- EAI_PROTOCOL -> Integer
+--- EAI_SERVICE -> Integer
+--- EAI_SOCKTYPE -> Integer
+--- EAI_SYSTEM -> Integer
 #@todo
 
 [[m:Socket.getaddrinfo]]が失敗したときに返すエラーコードです。
 [[man:getaddrinfo(3)]]も参照して下さい。
 
---- INADDR_ALLHOSTS_GROUP
---- INADDR_ANY
---- INADDR_BROADCAST
---- INADDR_LOOPBACK
---- INADDR_MAX_LOCAL_GROUP
---- INADDR_NONE
---- INADDR_UNSPEC_GROUP
+--- INADDR_ALLHOSTS_GROUP -> Integer
+--- INADDR_ANY -> Integer
+--- INADDR_BROADCAST -> Integer
+--- INADDR_LOOPBACK -> Integer
+--- INADDR_MAX_LOCAL_GROUP -> Integer
+--- INADDR_NONE -> Integer
+--- INADDR_UNSPEC_GROUP -> Integer
 #@todo
 
 #@since 1.9.1
---- INET6_ADDRSTRLEN
---- INET_ADDRSTRLEN
+--- INET6_ADDRSTRLEN -> Integer
+--- INET_ADDRSTRLEN -> Integer
 #@end
 #@since 1.9.2
---- IFNAMSIZ
+--- IFNAMSIZ -> Integer
 #@end
 #@since 1.9.3
---- IF_NAMESIZE
+--- IF_NAMESIZE -> Integer
 #@end
 
---- NI_DGRAM
---- NI_MAXHOST
---- NI_MAXSERV
---- NI_NAMEREQD
---- NI_NOFQDN
---- NI_NUMERICHOST
---- NI_NUMERICSERV
+--- NI_DGRAM -> Integer
+--- NI_MAXHOST -> Integer
+--- NI_MAXSERV -> Integer
+--- NI_NAMEREQD -> Integer
+--- NI_NOFQDN -> Integer
+--- NI_NUMERICHOST -> Integer
+--- NI_NUMERICSERV -> Integer
 #@todo
 
 Socket.getnameinfoの第2引数 flags に与える定数です。
 [[man:getnameinfo(3)]]も参照して下さい。
 
---- IP_ADD_MEMBERSHIP
---- IP_DEFAULT_MULTICAST_LOOP
---- IP_DEFAULT_MULTICAST_TTL
---- IP_DROP_MEMBERSHIP
---- IP_HDRINCL
---- IP_MAX_MEMBERSHIPS
---- IP_MULTICAST_IF
---- IP_MULTICAST_LOOP
---- IP_MULTICAST_TTL
---- IP_OPTIONS
---- IP_RECVDSTADDR
---- IP_RECVOPTS
---- IP_RECVRETOPTS
---- IP_RETOPTS
---- IP_TOS
---- IP_TTL
+--- IP_ADD_MEMBERSHIP -> Integer
+--- IP_DEFAULT_MULTICAST_LOOP -> Integer
+--- IP_DEFAULT_MULTICAST_TTL -> Integer
+--- IP_DROP_MEMBERSHIP -> Integer
+--- IP_HDRINCL -> Integer
+--- IP_MAX_MEMBERSHIPS -> Integer
+--- IP_MULTICAST_IF -> Integer
+--- IP_MULTICAST_LOOP -> Integer
+--- IP_MULTICAST_TTL -> Integer
+--- IP_OPTIONS -> Integer
+--- IP_RECVDSTADDR -> Integer
+--- IP_RECVOPTS -> Integer
+--- IP_RECVRETOPTS -> Integer
+--- IP_RETOPTS -> Integer
+--- IP_TOS -> Integer
+--- IP_TTL -> Integer
 #@since 1.9.2
---- IP_ADD_SOURCE_MEMBERSHIP
---- IP_BLOCK_SOURCE
---- IP_DONTFRAG
---- IP_DROP_SOURCE_MEMBERSHIP
---- IP_FREEBIND
---- IP_IPSEC_POLICY
---- IP_MINTTL
---- IP_MSFILTER
---- IP_MTU
---- IP_MTU_DISCOVER
---- IP_ONESBCAST
---- IP_PASSSEC
---- IP_PKTINFO
---- IP_PKTOPTIONS
---- IP_PMTUDISC_DO
---- IP_PMTUDISC_DONT
---- IP_PMTUDISC_WANT
---- IP_PORTRANGE
---- IP_RECVERR
---- IP_RECVIF
---- IP_RECVSLLA
---- IP_RECVTOS
---- IP_RECVTTL
---- IP_ROUTER_ALERT
---- IP_SENDSRCADDR
---- IP_UNBLOCK_SOURCE
---- IP_XFRM_POLICY
+--- IP_ADD_SOURCE_MEMBERSHIP -> Integer
+--- IP_BLOCK_SOURCE -> Integer
+--- IP_DONTFRAG -> Integer
+--- IP_DROP_SOURCE_MEMBERSHIP -> Integer
+--- IP_FREEBIND -> Integer
+--- IP_IPSEC_POLICY -> Integer
+--- IP_MINTTL -> Integer
+--- IP_MSFILTER -> Integer
+--- IP_MTU -> Integer
+--- IP_MTU_DISCOVER -> Integer
+--- IP_ONESBCAST -> Integer
+--- IP_PASSSEC -> Integer
+--- IP_PKTINFO -> Integer
+--- IP_PKTOPTIONS -> Integer
+--- IP_PMTUDISC_DO -> Integer
+--- IP_PMTUDISC_DONT -> Integer
+--- IP_PMTUDISC_WANT -> Integer
+--- IP_PORTRANGE -> Integer
+--- IP_RECVERR -> Integer
+--- IP_RECVIF -> Integer
+--- IP_RECVSLLA -> Integer
+--- IP_RECVTOS -> Integer
+--- IP_RECVTTL -> Integer
+--- IP_ROUTER_ALERT -> Integer
+--- IP_SENDSRCADDR -> Integer
+--- IP_UNBLOCK_SOURCE -> Integer
+--- IP_XFRM_POLICY -> Integer
 #@end
 #@todo
 
 #@since 1.9.1
---- IPV6_CHECKSUM
---- IPV6_DONTFRAG
---- IPV6_DSTOPTS
---- IPV6_HOPLIMIT
---- IPV6_HOPOPTS
---- IPV6_JOIN_GROUP
---- IPV6_LEAVE_GROUP
---- IPV6_MULTICAST_HOPS
---- IPV6_MULTICAST_IF
---- IPV6_MULTICAST_LOOP
---- IPV6_NEXTHOP
---- IPV6_PATHMTU
---- IPV6_PKTINFO
---- IPV6_RECVDSTOPTS
---- IPV6_RECVHOPLIMIT
---- IPV6_RECVHOPOPTS
---- IPV6_RECVPATHMTU
---- IPV6_RECVPKTINFO
---- IPV6_RECVRTHDR
---- IPV6_RECVTCLASS
---- IPV6_RTHDR
---- IPV6_RTHDRDSTOPTS
---- IPV6_RTHDR_TYPE_0
---- IPV6_TCLASS
---- IPV6_UNICAST_HOPS
---- IPV6_USE_MIN_MTU
---- IPV6_V6ONLY
+--- IPV6_CHECKSUM -> Integer
+--- IPV6_DONTFRAG -> Integer
+--- IPV6_DSTOPTS -> Integer
+--- IPV6_HOPLIMIT -> Integer
+--- IPV6_HOPOPTS -> Integer
+--- IPV6_JOIN_GROUP -> Integer
+--- IPV6_LEAVE_GROUP -> Integer
+--- IPV6_MULTICAST_HOPS -> Integer
+--- IPV6_MULTICAST_IF -> Integer
+--- IPV6_MULTICAST_LOOP -> Integer
+--- IPV6_NEXTHOP -> Integer
+--- IPV6_PATHMTU -> Integer
+--- IPV6_PKTINFO -> Integer
+--- IPV6_RECVDSTOPTS -> Integer
+--- IPV6_RECVHOPLIMIT -> Integer
+--- IPV6_RECVHOPOPTS -> Integer
+--- IPV6_RECVPATHMTU -> Integer
+--- IPV6_RECVPKTINFO -> Integer
+--- IPV6_RECVRTHDR -> Integer
+--- IPV6_RECVTCLASS -> Integer
+--- IPV6_RTHDR -> Integer
+--- IPV6_RTHDRDSTOPTS -> Integer
+--- IPV6_RTHDR_TYPE_0 -> Integer
+--- IPV6_TCLASS -> Integer
+--- IPV6_UNICAST_HOPS -> Integer
+--- IPV6_USE_MIN_MTU -> Integer
+--- IPV6_V6ONLY -> Integer
 #@todo
 #@end
 
 #@since 1.9.1
---- IPX_TYPE
+--- IPX_TYPE -> Integer
 #@end
 
 #@since 1.8.3
---- MSG_COMPAT
+--- MSG_COMPAT -> Integer
 #@end
---- MSG_CTRUNC
---- MSG_DONTROUTE
---- MSG_DONTWAIT
+--- MSG_CTRUNC -> Integer
+--- MSG_DONTROUTE -> Integer
+--- MSG_DONTWAIT -> Integer
 #@since 1.8.3
---- MSG_EOF
+--- MSG_EOF -> Integer
 #@end
---- MSG_EOR
+--- MSG_EOR -> Integer
 #@since 1.8.3
---- MSG_FLUSH
---- MSG_HAVEMORE
---- MSG_HOLD
+--- MSG_FLUSH -> Integer
+--- MSG_HAVEMORE -> Integer
+--- MSG_HOLD -> Integer
 #@end
---- MSG_OOB
---- MSG_PEEK
+--- MSG_OOB -> Integer
+--- MSG_PEEK -> Integer
 #@since 1.8.3
---- MSG_RCVMORE
---- MSG_SEND
+--- MSG_RCVMORE -> Integer
+--- MSG_SEND -> Integer
 #@end
---- MSG_TRUNC
---- MSG_WAITALL
+--- MSG_TRUNC -> Integer
+--- MSG_WAITALL -> Integer
 #@since 1.9.2
---- MSG_CONFIRM
---- MSG_ERRQUEUE
---- MSG_FIN
---- MSG_MORE
---- MSG_NOSIGNAL
---- MSG_PROXY
---- MSG_RST
---- MSG_SYN
+--- MSG_CONFIRM -> Integer
+--- MSG_ERRQUEUE -> Integer
+--- MSG_FIN -> Integer
+--- MSG_MORE -> Integer
+--- MSG_NOSIGNAL -> Integer
+--- MSG_PROXY -> Integer
+--- MSG_RST -> Integer
+--- MSG_SYN -> Integer
 #@end
 #@todo
 
 #@since 1.9.2
---- MCAST_BLOCK_SOURCE
---- MCAST_EXCLUDE
---- MCAST_INCLUDE
---- MCAST_JOIN_GROUP
---- MCAST_JOIN_SOURCE_GROUP
---- MCAST_LEAVE_GROUP
---- MCAST_LEAVE_SOURCE_GROUP
---- MCAST_MSFILTER
---- MCAST_UNBLOCK_SOURCE
-#@todo
-#@end
-
-#@since 1.9.2
---- LOCAL_CONNWAIT
---- LOCAL_CREDS
---- LOCAL_PEERCRED
+--- MCAST_BLOCK_SOURCE -> Integer
+--- MCAST_EXCLUDE -> Integer
+--- MCAST_INCLUDE -> Integer
+--- MCAST_JOIN_GROUP -> Integer
+--- MCAST_JOIN_SOURCE_GROUP -> Integer
+--- MCAST_LEAVE_GROUP -> Integer
+--- MCAST_LEAVE_SOURCE_GROUP -> Integer
+--- MCAST_MSFILTER -> Integer
+--- MCAST_UNBLOCK_SOURCE -> Integer
 #@todo
 #@end
 
 #@since 1.9.2
---- SCM_BINTIME
---- SCM_CREDENTIALS
---- SCM_CREDS
---- SCM_RIGHTS
---- SCM_TIMESTAMP
---- SCM_TIMESTAMPNS
---- SCM_UCRED
+--- LOCAL_CONNWAIT -> Integer
+--- LOCAL_CREDS -> Integer
+--- LOCAL_PEERCRED -> Integer
 #@todo
 #@end
 
---- SHUT_RD
---- SHUT_RDWR
---- SHUT_WR
+#@since 1.9.2
+--- SCM_BINTIME -> Integer
+--- SCM_CREDENTIALS -> Integer
+--- SCM_CREDS -> Integer
+--- SCM_RIGHTS -> Integer
+--- SCM_TIMESTAMP -> Integer
+--- SCM_TIMESTAMPNS -> Integer
+--- SCM_UCRED -> Integer
 #@todo
+#@end
 
-shutdown の how:
+--- SHUT_RD -> Integer
+[[m:BasicSocket#shutdown]] の how 引数に使用します。
+
+--- SHUT_RDWR -> Integer
+[[m:BasicSocket#shutdown]] の how 引数に使用します。
+
+--- SHUT_WR -> Integer
 [[m:BasicSocket#shutdown]] の how 引数に使用します。
 
 #@since 1.8.3
---- SO_ACCEPTCONN
---- SO_ACCEPTFILTER
+--- SO_ACCEPTCONN -> Integer
+--- SO_ACCEPTFILTER -> Integer
 #@end
---- SO_ATTACH_FILTER
---- SO_BINDTODEVICE
---- SO_BROADCAST
---- SO_DEBUG
---- SO_DETACH_FILTER
---- SO_DONTROUTE
+--- SO_ATTACH_FILTER -> Integer
+--- SO_BINDTODEVICE -> Integer
+--- SO_BROADCAST -> Integer
+--- SO_DEBUG -> Integer
+--- SO_DETACH_FILTER -> Integer
+--- SO_DONTROUTE -> Integer
 #@since 1.8.3
---- SO_DONTTRUNC
+--- SO_DONTTRUNC -> Integer
 #@end
---- SO_ERROR
---- SO_KEEPALIVE
---- SO_LINGER
+--- SO_ERROR -> Integer
+--- SO_KEEPALIVE -> Integer
+--- SO_LINGER -> Integer
 #@since 1.8.3
---- SO_NKE
---- SO_NOSIGPIPE
+--- SO_NKE -> Integer
+--- SO_NOSIGPIPE -> Integer
 #@end
---- SO_NO_CHECK
+--- SO_NO_CHECK -> Integer
 #@since 1.8.3
---- SO_NREAD
+--- SO_NREAD -> Integer
 #@end
---- SO_OOBINLINE
---- SO_PASSCRED
---- SO_PEERCRED
---- SO_PEERNAME
---- SO_PRIORITY
---- SO_RCVBUF
---- SO_RCVLOWAT
---- SO_RCVTIMEO
---- SO_REUSEADDR
+--- SO_OOBINLINE -> Integer
+--- SO_PASSCRED -> Integer
+--- SO_PEERCRED -> Integer
+--- SO_PEERNAME -> Integer
+--- SO_PRIORITY -> Integer
+--- SO_RCVBUF -> Integer
+--- SO_RCVLOWAT -> Integer
+--- SO_RCVTIMEO -> Integer
+--- SO_REUSEADDR -> Integer
 #@since 1.8.3
---- SO_REUSEPORT
+--- SO_REUSEPORT -> Integer
 #@end
---- SO_SECURITY_AUTHENTICATION
---- SO_SECURITY_ENCRYPTION_NETWORK
---- SO_SECURITY_ENCRYPTION_TRANSPORT
---- SO_SNDBUF
---- SO_SNDLOWAT
---- SO_SNDTIMEO
---- SO_TIMESTAMP
---- SO_TYPE
+--- SO_SECURITY_AUTHENTICATION -> Integer
+--- SO_SECURITY_ENCRYPTION_NETWORK -> Integer
+--- SO_SECURITY_ENCRYPTION_TRANSPORT -> Integer
+--- SO_SNDBUF -> Integer
+--- SO_SNDLOWAT -> Integer
+--- SO_SNDTIMEO -> Integer
+--- SO_TIMESTAMP -> Integer
+--- SO_TYPE -> Integer
 #@since 1.8.3
---- SO_USELOOPBACK
---- SO_WANTMORE
---- SO_WANTOOBFLAG
+--- SO_USELOOPBACK -> Integer
+--- SO_WANTMORE -> Integer
+--- SO_WANTOOBFLAG -> Integer
 #@end
 #@since 1.9.2
---- SO_ALLZONES
---- SO_BINTIME
---- SO_MAC_EXEMPT
---- SO_RECVUCRED
---- SO_TIMESTAMPNS
+--- SO_ALLZONES -> Integer
+--- SO_BINTIME -> Integer
+--- SO_MAC_EXEMPT -> Integer
+--- SO_RECVUCRED -> Integer
+--- SO_TIMESTAMPNS -> Integer
 #@end
 #@todo
 
 #@since 1.9.2
---- SOMAXCONN
+--- SOMAXCONN -> Integer
 #@todo
 #@end
 
---- SOL_ATALK
---- SOL_AX25
---- SOL_IP
---- SOL_IPX
---- SOL_SOCKET
---- SOL_TCP
---- SOL_UDP
+--- SOL_ATALK -> Integer
+--- SOL_AX25 -> Integer
+--- SOL_IP -> Integer
+--- SOL_IPX -> Integer
+--- SOL_SOCKET -> Integer
+--- SOL_TCP -> Integer
+--- SOL_UDP -> Integer
 #@todo
 
---- SOPRI_BACKGROUND
---- SOPRI_INTERACTIVE
---- SOPRI_NORMAL
+--- SOPRI_BACKGROUND -> Integer
+--- SOPRI_INTERACTIVE -> Integer
+--- SOPRI_NORMAL -> Integer
 #@todo
 
---- TCP_MAXSEG
---- TCP_NODELAY
+--- TCP_MAXSEG -> Integer
+--- TCP_NODELAY -> Integer
 #@since 1.9.2
---- TCP_CORK
---- TCP_DEFER_ACCEPT
---- TCP_INFO
---- TCP_KEEPCNT
---- TCP_KEEPIDLE
---- TCP_KEEPINTVL
---- TCP_LINGER2
---- TCP_MD5SIG
---- TCP_NOOPT
---- TCP_NOPUSH
---- TCP_QUICKACK
---- TCP_SYNCNT
---- TCP_WINDOW_CLAMP
---- UDP_CORK
+--- TCP_CORK -> Integer
+--- TCP_DEFER_ACCEPT -> Integer
+--- TCP_INFO -> Integer
+--- TCP_KEEPCNT -> Integer
+--- TCP_KEEPIDLE -> Integer
+--- TCP_KEEPINTVL -> Integer
+--- TCP_LINGER2 -> Integer
+--- TCP_MD5SIG -> Integer
+--- TCP_NOOPT -> Integer
+--- TCP_NOPUSH -> Integer
+--- TCP_QUICKACK -> Integer
+--- TCP_SYNCNT -> Integer
+--- TCP_WINDOW_CLAMP -> Integer
+--- UDP_CORK -> Integer
 #@end
 #@todo
 
