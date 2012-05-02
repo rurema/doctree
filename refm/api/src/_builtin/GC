@@ -43,6 +43,13 @@ GC.stress が真に設定されている間は、GC を行えるすべての機会に GC を行います。
 @param value 任意のオブジェクト。真偽値として解釈されます。
 #@end
 
+#@since 1.9.1
+--- count -> Integer
+
+プロセス開始からガーベージコレクトを実行した回数を [[c:Integer]] で返し
+ます。
+#@end
+
 == Instance Methods
 
 --- garbage_collect -> nil
