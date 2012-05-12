@@ -1,3 +1,3 @@
 = class TypeError < StandardError
 
-不正な型の値を評価したときに発生します。
+不正な型の値を評価したとき、期待される振る舞いを持たないオブジェクトが渡された時に発生します（cf. [[c:ArgumentError]] ）。
