@@ -1166,7 +1166,7 @@ salt には、以下の様になるべくランダムな文字列を選ぶべきです。
 
     def valid_login?(user, password)
       ent = Etc.getpwnam(user)
-      passwd.crypt(ent.passwd) == ent.passwd
+      password.crypt(ent.passwd) == ent.passwd
     end
 
     p valid_login?("taro", "password")   # => 真偽値が得られる
