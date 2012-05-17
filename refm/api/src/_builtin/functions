@@ -971,7 +971,7 @@ Ruby ライブラリとは Ruby スクリプト (*.rb) か拡張ライブラリ
   require File.expand_path(relative_feature, File.dirname(__FILE__))
 とほぼ同じです。
 
-@param feature ファイル名の文字列です。
+@param relative_feature ファイル名の文字列です。
 @raise LoadError ロードに失敗した場合に発生します。
 @see [[m:Kernel.#require]]
 #@end
