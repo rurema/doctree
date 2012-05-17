@@ -19,7 +19,7 @@ RDoc 形式のドキュメントを ANSI エスケープシーケンスで色付けするクラスで
 == Class Methods
 
 #@since 1.9.3
---- new(makup = nil) -> RDoc::Markup::ToAnsi
+--- new(markup = nil) -> RDoc::Markup::ToAnsi
 #@else
 --- new -> RDoc::Markup::ToAnsi
 #@end
