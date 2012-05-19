@@ -20,6 +20,23 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
 
   デフォルト値は [] です。
 
+: IRB.conf[:CONTEXT_MODE]
+
+  新しいワークスペースを作成した時(サブ irb の起動や pushws した時)に、
+  ワークスペースに関連する [[c:Binding]] オブジェクトの作成方法を
+  [[c:Integer]] で設定します。
+
+  0 を指定した場合、[[c:Kernel::TOPLEVEL_BINDING]] の [[c:Proc]] 内の
+  [[c:Binding]] を使用します。1 を指定した場合、[[c:Tempfile]] 中の
+  [[c:Binding]] を使用します。2 を指定した場合、[[c:Thread]] 内で読み込
+  んだファイル中の [[c:Binding]] を使用します。3 を指定した場合、
+  [[c:Kernel::TOPLEVEL_BINDING]] の関数中の [[c:Binding]] を使用します。
+
+  ただし、IRB.conf[:SINGLE_IRB] に true を設定していた場合は、現在のワー
+  クスペースをそのまま使用します。
+
+  デフォルト値は 3 です。
+
 : IRB.conf[:IRB_LIB_PATH]
 
   ライブラリ内部で使用します。
@@ -43,6 +60,13 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
   ファイル名を指定して irb を実行した場合のパスを文字列で返します。
 
   デフォルト値は nil です。
+
+: IRB.conf[:SINGLE_IRB]
+
+  irb 中で self を実行して得られるオブジェクトをサブ irb と共有するかど
+  うかを設定します。true を設定した場合に共有されます。
+
+  デフォルト値は false です。
 
 #@# 変更しても影響がないため省略しました。ある程度は記述したため、必要
 #@# になった際にコメントインします。
