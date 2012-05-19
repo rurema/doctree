@@ -8,6 +8,8 @@ require irb/extend-command
 #@# require irb/ruby-lex
 require irb/input-method
 require irb/locale
+#@# IRB.conf[:VERSION] を設定していない場合のみ。
+require irb/version
 
 irb は Interactive Ruby の略です。
 irb を使うと、Ruby の式を標準入力から簡単に入力・実行することができます。
