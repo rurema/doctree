@@ -55,6 +55,10 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
 
   ライブラリ内部で使用します。
 
+: IRB.conf[:MAIN_CONTEXT]
+
+  ライブラリ内部で使用します。
+
 : IRB.conf[:SCRIPT]
 
   ファイル名を指定して irb を実行した場合のパスを文字列で返します。
@@ -68,6 +72,13 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
 
   デフォルト値は false です。
 
+: IRB.conf[:VERSION]
+
+  [[m:IRB.version]] を実行した時に返すバージョンを [[c:String]] で指定
+  します。
+
+  デフォルト値は nil です。
+
 #@# 変更しても影響がないため省略しました。ある程度は記述したため、必要
 #@# になった際にコメントインします。
 #@#: IRB.conf[:RC_NAME_GENERATOR]
@@ -79,6 +90,10 @@ irb 中で conf コマンドの戻り値や .irbrc で IRB.conf を操作する事で設定
 #@#  や 、-E(--encoding) オプションの結果を反映しています。変更しても影
 #@#  響はありません。
 #@##@end
+
+: IRB.conf[:__MAIN__]
+
+  ライブラリ内部で使用します。
 
 == Class Methods
 
