@@ -4,8 +4,7 @@ require e2mmap
 require irb/init
 require irb/context
 require irb/extend-command
-#@# TODO: 追加する。
-#@# require irb/ruby-lex
+require irb/ruby-lex
 require irb/input-method
 require irb/locale
 #@# IRB.conf[:VERSION] を設定していない場合のみ。

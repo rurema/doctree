@@ -165,6 +165,9 @@ irb/src_encoding
 #@end
 irb/notifier
 irb/output-method
+irb/ruby-lex
+irb/ruby-token
+irb/slex
 irb/version
 irb/workspace
 irb/ws-for-case-2
