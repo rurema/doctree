@@ -165,7 +165,9 @@ irb/src_encoding
 #@end
 irb/notifier
 irb/output-method
+irb/version
 irb/workspace
+irb/ws-for-case-2
 irb/xmp
 #@until 1.9.1
 jcode
