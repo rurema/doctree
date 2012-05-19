@@ -37,9 +37,9 @@ math_mode を有効にするかどうかを指定します。
 
 --- inspect? -> bool
 
-math_mode が有効かどうかを返します。
+[[c:IRB::Context#inspect_mode]] が有効かどうかを返します。
 
-ただし、inspect_mode が優先されるため、inspect_mode が有効な場合には
-false を返します。
+ただし、[[c:IRB::Context#inspect_mode]] が未設定で math_mode が有効な場
+合には false を返します。
 
 @see [[m:IRB::Context#math?]]
