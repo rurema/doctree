@@ -44,10 +44,20 @@ readline ライブラリがインストールされている時には
   -f                ~/.irbrc を読み込まない
   -m                bc モード (分数と行列の計算ができる)
   -d                $DEBUG を true にする (ruby -d と同じ)
+#@since 1.9.2
+  -w                ruby -w と同じ
+  -W[level=2]       ruby -W と同じ
+#@end
+#@until 1.9.1
   -Kc               ruby -Kc と同じ
+#@end
   -r library        ruby -r と同じ
 #@since 1.8.2
   -I                ruby -I と同じ
+#@end
+#@since 1.9.1
+  -U                ruby -U と同じ
+  -E enc            ruby -E と同じ
 #@end
   --verbose         これから実行する行を表示する (デフォルト)
   --noverbose       これから実行する行を表示しない
@@ -64,6 +74,7 @@ readline ライブラリがインストールされている時には
                     ロンプトモードは、default/simple/xmp/inf-ruby。
   --inf-ruby-mode   emacsのinf-ruby-mode 用のプロンプト表示を行なう。
                     特に指定がない限り readline ライブラリは使わなくなる。
+  --sample-book-mode
   --simple-prompt
                     非常にシンプルなプロンプトを用いるモード。
   --noprompt        プロンプトを表示しない。
@@ -71,9 +82,17 @@ readline ライブラリがインストールされている時には
   --back-trace-limit n
                     バックトレース表示をバックトレースの頭から n、
                     うしろから n だけ行なう。デフォルト値は 16。
+  --context-mode    新しいワークスペースを作成した時に関連する Binding
+                    オブジェクトの作成方法をで設定する。(IRB::Context 参照)
+  --single-irb      irb 中で self を実行して得られるオブジェクトをサブ irb と共
+                    有する
   --irb_debug n     irb のデバッグレベルを n に設定する
                     (ユーザは利用すべきではない)
   -v, --version     irb のバージョンを表示する
+  -h, --help        irb のヘルプを表示する
+#@since 1.9.1
+  --                以降のコマンドライン引数をオプションとして扱わない
+#@end
 
 === irb のカスタマイズ
 
