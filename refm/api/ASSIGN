@@ -152,7 +152,7 @@ io/console                      sho-h           done
 io/nonblock                     ohai            done
 io/wait                         ohai            done
 ipaddr                          okkez           done
-irb                             sho-h
+irb                             sho-h           done
 jcode                           ohai            done
 json                            okkez           done
 kconv                           ohai            done
