@@ -471,7 +471,9 @@ next により抜けた yield 式は nil を返します。
 
           retry
 
-#@until 1.9.0
+#@since 1.9.1
+retry は、rescue 節で begin 式をはじめからもう一度実行するのに使用します。
+#@else
 イテレータ、ブロックまたはfor文の中で使われた場合には、そのイテレータ
 を起動しなおします。イテレータの引数も再評価されます。
 
@@ -485,11 +487,12 @@ next により抜けた yield 式は nil を返します。
             yield
             retry
           end
-#@end
 
 retry は、ループ以外に後述の rescue 節でも使えます。この場
-合は、begin 式を始めからもう一度実行します。retry を使うこ
-とである処理が成功するまで処理を繰り返すようなループを作ることができます。
+合は、begin 式を始めからもう一度実行します。
+#@end
+retry を使うことである処理が成功するまで処理を繰り返すようなループを作
+ることができます。
 
           begin
             do_something # exception raised
@@ -498,10 +501,15 @@ retry は、ループ以外に後述の rescue 節でも使えます。この場
             retry  # restart from beginning
           end
 
-rescue 節やイテレータブロック、for 文以外で retry が用い
-られた場合には例外 [[c:LocalJumpError]] が発生します。
+#@since 1.9.1
+rescue 節以外で retry が用いられた場合には例外 [[c:SyntaxError]] が発生
+します。
+#@else
+rescue 節やイテレータブロック、for 文以外で retry が用いられた場合には
+例外 [[c:LocalJumpError]] が発生します。
 ((-あるいは、突然エラーになってインタプリタが終了します。
 retry #=> -:1: retry outside of rescue clause-))
+#@end
 
 イテレータ呼び出しにおける break, next, redo,
 retry をまとめると以下のようになります。
