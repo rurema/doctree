@@ -510,7 +510,7 @@ XLISTコマンドを送り、クライアントから利用可能なメールボックス名の集合から
 「:Sent」などの拡張されたフラグを含むことが異なります。
 
 詳しくは
-[[URL:http://code.google.com/apis/gmail/imap/]]
+[[url:http://code.google.com/apis/gmail/imap/]]
 を参照してください。
 
 @param refname 参照名(文字列)
