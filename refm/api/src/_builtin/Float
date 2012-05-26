@@ -357,8 +357,8 @@ self を other で割った商 q と余り r を、
        ndigitsが0以上ならば、実数を返します。
        ndigitsが0以下ならば、整数を返します。
 
-@raise TypeError
-       ndigitsで指定されたオブジェクトが整数に変換できない場合発生します。
+@raise TypeError ndigits で指定されたオブジェクトが整数に変換できない場
+                 合発生します。
 
   p 1.0.round      #=> 1
   p 1.2.round      #=> 1
